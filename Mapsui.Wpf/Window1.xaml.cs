@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Media.Animation;
 using BruTile.Web;
 using BruTile.Web.TmsService;
@@ -23,7 +25,9 @@ namespace Mapsui.Wpf
         {
             InitializeComponent();
             mapControl.ErrorMessageChanged += MapErrorMessageChanged;
-            
+
+            fps.SetBinding(TextBlock.TextProperty, new Binding("Fps"));
+            fps.DataContext = mapControl.FpsCounter;
             OsmClick(this, null);
         }
 

@@ -8,7 +8,7 @@
     d:DesignWidth="200" d:DesignHeight="200"
     Title="Mapsui.Wpf" >
     <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" >
-        <mapsui:MapControl x:Name="mapControl" ShowStatistics="True" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+        <mapsui:MapControl x:Name="mapControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
         <Border  BorderBrush="White" Opacity="0.75" Margin="10" Background="White" BorderThickness="6" CornerRadius="2" VerticalAlignment="Top" HorizontalAlignment="Left">
             <StackPanel Width="Auto">
                 <RadioButton IsChecked="True" FontSize="16" Content="OSM " Margin="4,4,4,4" Click="OsmClick"/>
@@ -24,6 +24,14 @@
         </Border>
         <Border BorderBrush="White" Opacity="0.75" Margin="10" Background="White" BorderThickness="6" CornerRadius="2" VerticalAlignment="Top" HorizontalAlignment="Right">
             <StackPanel Width="Auto">
+            </StackPanel>
+        </Border>
+        <Border x:Name="statistics" BorderBrush="White" Opacity="0.75" Margin="10" Background="White" BorderThickness="6" CornerRadius="2" HorizontalAlignment="Center" VerticalAlignment="Top">
+            <StackPanel  Orientation="Vertical" HorizontalAlignment="Center"  >
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Fps:  "/>
+                    <TextBlock x:Name="fps"/>
+                </StackPanel>
             </StackPanel>
         </Border>
         <Border x:Name="errorBorder" BorderBrush="White" Opacity="0" Margin="10" Background="White" BorderThickness="6" CornerRadius="2" VerticalAlignment="Bottom" HorizontalAlignment="Right">

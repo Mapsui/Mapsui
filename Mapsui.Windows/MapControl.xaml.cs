@@ -117,14 +117,6 @@ namespace Mapsui.Windows
             }
         }
 
-        public bool ShowStatistics
-        {
-            set 
-            {
-                statistics.Visibility = value ? Visibility.Visible : Visibility.Collapsed;
-            }
-        }
-
         #endregion
 
         #region Dependency Properties
@@ -142,7 +134,6 @@ namespace Mapsui.Windows
         {
             InitializeComponent();
             Map = new Map();
-            ShowStatistics = false;
             MouseInfoOverLayers = new List<ILayer>();
             MouseInfoDownLayers = new List<ILayer>();
             Loaded += MapControlLoaded;
@@ -164,8 +155,6 @@ namespace Mapsui.Windows
             canvas.ManipulationCompleted += OnManipulationCompleted;
             canvas.ManipulationInertiaStarting += OnManipulationInertiaStarting;
 #endif
-            fps.SetBinding(TextBlock.TextProperty, new Binding("Fps"));
-            fps.DataContext = FpsCounter;
         }
 
         #endregion
