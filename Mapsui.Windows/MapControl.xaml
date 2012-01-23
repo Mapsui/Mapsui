@@ -1,0 +1,16 @@
+﻿<UserControl x:Class="Mapsui.Windows.MapControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid>
+        <Canvas x:Name="canvas" VerticalAlignment="Stretch"  HorizontalAlignment="Stretch" Background="Transparent"/>
+        <Rectangle Fill="Red" Stroke="Black" StrokeThickness="3" RadiusX="0.5" RadiusY="0.5" StrokeDashArray="3" Opacity="0.3" x:Name="bboxRect" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,0,0,0" Visibility="Visible"/>
+        <Border x:Name="statistics" BorderBrush="White" Opacity="0.75" Margin="10" Background="White" BorderThickness="6" CornerRadius="2" HorizontalAlignment="Center" VerticalAlignment="Top">
+            <StackPanel  Orientation="Vertical" HorizontalAlignment="Center"  >
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Fps:  "/>
+                    <TextBlock x:Name="fps"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>

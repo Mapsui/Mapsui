@@ -1,0 +1,173 @@
+﻿// Copyright 2008 - Paul den Dulk (Geodan)
+// 
+// This file is part of SharpMap.
+// SharpMap is free software; you can redistribute it and/or modify
+// it under the terms of the GNU Lesser General Public License as published by
+// the Free Software Foundation; either version 2 of the License, or
+// (at your option) any later version.
+// 
+// SharpMap is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU Lesser General Public License for more details.
+
+// You should have received a copy of the GNU Lesser General Public License
+// along with SharpMap; if not, write to the Free Software
+// Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
+
+using BruTile;
+using BruTile.Cache;
+using SharpMap.Fetcher;
+using SharpMap.Geometries;
+using System.IO;
+using System.Collections.Generic;
+using SharpMap.Providers;
+using SharpMap.Styles;
+
+namespace SharpMap.Layers
+{
+    public interface ITileLayer
+    {
+        ITileSchema Schema { get; }
+        MemoryCache<MemoryStream> MemoryCache { get; }
+    }
+
+    //todo: derive from baselayer
+    public class TileLayer : ITileLayer, ILayer, IAsyncDataFetcher
+    {
+        #region Fields
+
+        ITileSource tileSource;
+        TileFetcher tileFetcher;
+#if PocketPC
+        MemoryCache<MemoryStream> memoryCache = new MemoryCache<MemoryStream>(40, 60);
+#else
+        MemoryCache<MemoryStream> memoryCache = new MemoryCache<MemoryStream>(200, 300);
+#endif
+        const int maxRetries = 3;
+
+        #endregion
+
+        #region EventHandlers
+
+        public event DataChangedEventHandler DataChanged;
+        public event FeedbackEventHandler Feedback;
+
+        #endregion
+
+        #region Properties
+
+        public ITileSchema Schema
+        {
+            //TODO: investigate whether we can do without this public Schema. 
+            //Its primary use is in the Renderer which recursively searches for
+            //available tiles. Perhaps this recursive search can be done within
+            //this class. I would be nice though if there was some flexibility into
+            //the specific search strategy. Perhaps it is possible to pass a search 
+            //to some GetTiles method.
+            get { return tileSource.Schema; }
+        }
+
+        public MemoryCache<MemoryStream> MemoryCache
+        {
+            get { return memoryCache; }
+        }
+
+        public bool Exclusive { get; set; }
+
+        #endregion
+
+        #region Constructors
+
+        public TileLayer(ITileSource source)
+        {
+            Enabled = true; //default enabled
+            MinVisible = double.MinValue;
+            MaxVisible = double.MaxValue;
+
+            tileSource = source;
+            tileFetcher = new TileFetcher(source, memoryCache);
+            tileFetcher.DataChanged += tileFetcher_DataChanged;
+        }
+
+        #endregion
+
+        #region Public Methods
+
+        public void ViewChanged(bool changeEnd, BoundingBox extent, double resolution)
+        {
+            if (Enabled && extent.GetArea() > 0)
+            {
+                tileFetcher.ViewChanged(extent, resolution);
+            }
+        }
+
+        /// <summary>
+        /// Aborts the fetch of data that is currently in progress.
+        /// With new ViewChanged calls the fetch will start again. 
+        /// Call this method to speed up garbage collection
+        /// </summary>
+        public void AbortFetch()
+        {
+            if (tileFetcher != null)
+            {
+                tileFetcher.AbortFetch();
+            }
+        }
+
+        public void ClearCache()
+        {
+            memoryCache.Clear();
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private void tileFetcher_DataChanged(object sender, DataChangedEventArgs e)
+        {
+            OnDataChanged(e);
+        }
+
+        private void OnDataChanged(DataChangedEventArgs e)
+        {
+            if (DataChanged != null)
+                DataChanged(this, e);
+        }
+
+        #endregion
+
+        #region ILayer Members
+
+        public double MinVisible { get; set; }
+        public double MaxVisible { get; set; }
+        public bool Enabled { get; set; }
+        public string LayerName { get; set; }
+        public BoundingBox Envelope 
+        {
+            get 
+            { 
+                if (Schema == null) return null;
+                return Schema.Extent.ToBoundingBox();
+            }
+        }
+        public int SRID { get; set; }
+        public IList<IStyle> Styles { get; set; }
+        public virtual IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
+        {
+            var tilesInView = this.Schema.GetTilesInView(box.ToExtent(), BruTile.Utilities.GetNearestLevel(Schema.Resolutions, resolution));
+            var result = new Features();
+            foreach (var info in tilesInView)
+            {
+                var tile = this.memoryCache.Find(info.Index);
+                var feature = result.New();
+                feature.Geometry = new Raster(BruTile.Utilities.ReadFully(tile),
+                                              new BoundingBox(info.Extent.MinX, info.Extent.MinY, info.Extent.MaxX,
+                                                              info.Extent.MaxY));
+                if (tile != null) result.Add(feature);
+            }
+            return result;
+        }
+        #endregion
+    }
+}

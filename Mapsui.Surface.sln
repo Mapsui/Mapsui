@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpMapProvider", "SharpMapProvider\SharpMapProvider.csproj", "{55A31E36-4EA3-42EE-BCAC-2735AA082457}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Windows", "Mapsui.Windows\Mapsui.Windows.csproj", "{9142A5C9-38F9-42DF-8E9A-79E5A919151F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Surface", "Mapsui.Surface\Mapsui.Surface.csproj", "{05C7A3DD-C5E8-499F-89CA-33EB704895C7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpMap", "SharpMapCore\SharpMap.csproj", "{65A23C7B-E21D-40D7-A8AF-2E72A01E9A5B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SilverlightRendering", "SilverlightRendering\SilverlightRendering.csproj", "{612450F3-5EF0-4648-9542-2B3578583243}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Addins debug|Any CPU = Addins debug|Any CPU
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{55A31E36-4EA3-42EE-BCAC-2735AA082457}.Addins debug|Any CPU.ActiveCfg = Release|Any CPU
+		{55A31E36-4EA3-42EE-BCAC-2735AA082457}.Addins debug|Any CPU.Build.0 = Release|Any CPU
+		{55A31E36-4EA3-42EE-BCAC-2735AA082457}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55A31E36-4EA3-42EE-BCAC-2735AA082457}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55A31E36-4EA3-42EE-BCAC-2735AA082457}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55A31E36-4EA3-42EE-BCAC-2735AA082457}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9142A5C9-38F9-42DF-8E9A-79E5A919151F}.Addins debug|Any CPU.ActiveCfg = Release|Any CPU
+		{9142A5C9-38F9-42DF-8E9A-79E5A919151F}.Addins debug|Any CPU.Build.0 = Release|Any CPU
+		{9142A5C9-38F9-42DF-8E9A-79E5A919151F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9142A5C9-38F9-42DF-8E9A-79E5A919151F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9142A5C9-38F9-42DF-8E9A-79E5A919151F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9142A5C9-38F9-42DF-8E9A-79E5A919151F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05C7A3DD-C5E8-499F-89CA-33EB704895C7}.Addins debug|Any CPU.ActiveCfg = Release|Any CPU
+		{05C7A3DD-C5E8-499F-89CA-33EB704895C7}.Addins debug|Any CPU.Build.0 = Release|Any CPU
+		{05C7A3DD-C5E8-499F-89CA-33EB704895C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05C7A3DD-C5E8-499F-89CA-33EB704895C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05C7A3DD-C5E8-499F-89CA-33EB704895C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05C7A3DD-C5E8-499F-89CA-33EB704895C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65A23C7B-E21D-40D7-A8AF-2E72A01E9A5B}.Addins debug|Any CPU.ActiveCfg = Release|Any CPU
+		{65A23C7B-E21D-40D7-A8AF-2E72A01E9A5B}.Addins debug|Any CPU.Build.0 = Release|Any CPU
+		{65A23C7B-E21D-40D7-A8AF-2E72A01E9A5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65A23C7B-E21D-40D7-A8AF-2E72A01E9A5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65A23C7B-E21D-40D7-A8AF-2E72A01E9A5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65A23C7B-E21D-40D7-A8AF-2E72A01E9A5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{612450F3-5EF0-4648-9542-2B3578583243}.Addins debug|Any CPU.ActiveCfg = Release|Any CPU
+		{612450F3-5EF0-4648-9542-2B3578583243}.Addins debug|Any CPU.Build.0 = Release|Any CPU
+		{612450F3-5EF0-4648-9542-2B3578583243}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{612450F3-5EF0-4648-9542-2B3578583243}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{612450F3-5EF0-4648-9542-2B3578583243}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{612450F3-5EF0-4648-9542-2B3578583243}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

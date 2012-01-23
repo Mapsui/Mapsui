@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<!--
+This file contains the information needed to install your application
+with the Surface Shell. Please refer to the documentation for deployment
+instructions.
+-->
+<ss:ApplicationInfo
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns:ss="http://schemas.microsoft.com/Surface/2007/ApplicationMetadata">
+  <Application>
+    <Title>BruTileSurface</Title>
+    <Description>BruTileSurface</Description>
+    <ExecutableFile>BruTileSurface.exe</ExecutableFile>
+    <Arguments></Arguments>
+    <IconImageFile>Resources\icon.png</IconImageFile>
+    <Preview>
+      <PreviewImageFile>Resources\iconPreview.png</PreviewImageFile>
+    </Preview>
+  </Application>
+
+  <!--
+  Uncomment this section and comment out the Application element above
+  if you are creating an Attract Mode Application.
+  -->
+  <!--
+  <AttractApplication>
+    <ExecutableFile>BruTileSurface.exe</ExecutableFile>
+    <Arguments></Arguments>
+  </AttractApplication>
+  -->
+</ss:ApplicationInfo>
