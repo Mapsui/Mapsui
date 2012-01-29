@@ -41,8 +41,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BruTile">
-      <HintPath>..\libs\WP\BruTile.dll</HintPath>
+    <Reference Include="BruTile, Version=0.5.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\libs\SL\BruTile.dll</HintPath>
     </Reference>
     <Reference Include="ProjNet.Silverlight">
       <HintPath>..\libs\SL\ProjNet.Silverlight.dll</HintPath>
@@ -130,6 +131,7 @@
     <Compile Include="Styles\Thematics\ThemeStyle.cs" />
     <Compile Include="Styles\VectorStyle.cs" />
     <Compile Include="Utilities\Algorithms.cs" />
+    <Compile Include="Utilities\CGAlgoritm.cs" />
     <Compile Include="Utilities\EditableImage.cs" />
     <Compile Include="Utilities\Extensions.cs" />
     <Compile Include="Utilities\LeastSquaresTransform.cs" />
