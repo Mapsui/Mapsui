@@ -3,6 +3,6 @@
     public interface IRaster : IGeometry
     {
         byte[] Data { get; }
-        BoundingBox GetBoundingBox();
+        new BoundingBox GetBoundingBox();
     }
 }

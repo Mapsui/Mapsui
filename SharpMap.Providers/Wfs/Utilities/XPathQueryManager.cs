@@ -743,7 +743,7 @@ namespace SharpMap.Utilities.Wfs
             /// <summary>
             /// The name to use when embedding the function in an XPath expression.
             /// </summary>
-            public static readonly string FunctionName = "_PARAMCOMPWITHTARGETNS_";
+            public new static readonly string FunctionName = "_PARAMCOMPWITHTARGETNS_";
 
             #endregion
 

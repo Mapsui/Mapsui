@@ -22,7 +22,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Web;
-using SharpMap.Converters.WellKnownText;
 using SharpMap.Geometries;
 using SharpMap.Providers;
 using SharpMap.Utilities.SpatialIndexing;
@@ -163,9 +162,7 @@ namespace SharpMap.Data.Providers
         public delegate bool FilterMethod(IFeature dr);
 
         #endregion
-
-        private bool _CoordsysReadFromFile = false;
-
+        
         private BoundingBox _Envelope;
         private int _FeatureCount;
         private bool _FileBasedIndex;
@@ -512,8 +509,7 @@ namespace SharpMap.Data.Providers
         public BoundingBox GetExtents()
         {
             if (tree == null)
-                throw new ApplicationException(
-                    "File hasn't been spatially indexed. Try opening the datasource before retriving extents");
+                return _Envelope;
             return tree.Box;
         }
 
@@ -595,7 +591,6 @@ namespace SharpMap.Data.Providers
                 {
                     string wkt = File.ReadAllText(projfile);
                     //TODO: Automatically parse coordinate system: CoordinateSystemWktReader.Parse(wkt);
-                    _CoordsysReadFromFile = true;
                 }
                 catch (Exception ex)
                 {

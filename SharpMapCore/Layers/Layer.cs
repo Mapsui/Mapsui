@@ -64,7 +64,7 @@ namespace SharpMap.Layers
         /// <summary>
         /// Gets or sets the SRID of this VectorLayer's data source
         /// </summary>
-        public int SRID
+        public new int SRID
         {
             get
             {
@@ -80,7 +80,7 @@ namespace SharpMap.Layers
             }
         }
 
-        public ICoordinateTransformation CoordinateTransformation { get; set; }
+        public new ICoordinateTransformation CoordinateTransformation { get; set; }
 
         /// <summary>
         /// Returns the extent of the layer

@@ -38,7 +38,6 @@ namespace SharpMap.Styles.Thematics
 
         #region Properties
 
-        public bool Enabled { get; set; }
         /// <summary>
         /// Gets or sets the column name from where to get the attribute value
         /// </summary>
