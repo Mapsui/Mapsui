@@ -11,14 +11,9 @@ using DemoConfig;
 using SharpMap;
 using SharpMap.Layers;
 using SharpMap.Samples;
-using System.Windows.Input;
-using Mapsui.Windows;
 
 namespace Mapsui.Wpf
 {
-    /// <summary>
-    /// Interaction logic for Window1.xaml
-    /// </summary>
     public partial class Window1 : Window
     {
         public Window1()
@@ -32,15 +27,17 @@ namespace Mapsui.Wpf
         }
 
         #region Switching layers
-
+        
         private void OsmClick(object sender, RoutedEventArgs e)
         {
             mapControl.Map = CreateMap(new TileLayer(new OsmTileSource()) { LayerName = "OSM" });
+            layerList.Initialize(mapControl.Map.Layers);
         }
 
         private void GeodanWmsClick(object sender, RoutedEventArgs e)
         {
             mapControl.Map = CreateMap(new TileLayer(new GeodanWorldWmsTileSource()));
+            layerList.Initialize(mapControl.Map.Layers);
         }
 
         private void GeodanTmsClick(object sender, RoutedEventArgs e)
@@ -53,26 +50,31 @@ namespace Mapsui.Wpf
         private void BingMapsClick(object sender, RoutedEventArgs e)
         {
             mapControl.Map = CreateMap(new TileLayer(new BingTileSource(BingRequest.UrlBingStaging, String.Empty, BingMapType.Aerial)));
+            layerList.Initialize(mapControl.Map.Layers);
         }
 
         private void GeodanWmscClick(object sender, RoutedEventArgs e)
         {
             mapControl.Map = CreateMap(new TileLayer(new GeodanWorldWmsCTileSource()));
+            layerList.Initialize(mapControl.Map.Layers);
         }
 
         private void GroupTileLayerClick(object sender, RoutedEventArgs e)
         {
             mapControl.Map = CreateMap(CreateGroupLayer());
+            layerList.Initialize(mapControl.Map.Layers);
         }
 
         private void SharpMapClick(object sender, RoutedEventArgs e)
         {
             mapControl.Map = CreateMap(ShapefileSample.CreateCountryLayer());
+            layerList.Initialize(mapControl.Map.Layers);
         }
 
         private void MapTilerClick(object sender, RoutedEventArgs e)
         {
             mapControl.Map = CreateMap(new TileLayer(new MapTilerTileSource()));
+            layerList.Initialize(mapControl.Map.Layers);
         }
 
         #endregion
@@ -89,7 +91,11 @@ namespace Mapsui.Wpf
         {
             if (e.Cancelled) MessageBox.Show("Request was cancelled");
             else if (e.Error != null) MessageBox.Show("An error occurred: " + e.Error.Message);
-            else mapControl.Map = CreateMap(new TileLayer(TileMapParser.CreateTileSource(e.Result)));
+            else
+            {
+                mapControl.Map = CreateMap(new TileLayer(TileMapParser.CreateTileSource(e.Result)));
+                layerList.Initialize(mapControl.Map.Layers);
+            }
         }
 
         private static Map CreateMap(ILayer layer)
@@ -98,7 +104,7 @@ namespace Mapsui.Wpf
             map.Layers.Add(layer);
             return map;
         }
-        
+
         private void MapErrorMessageChanged(object sender, EventArgs e)
         {
             Error.Text = mapControl.ErrorMessage;
@@ -124,6 +130,7 @@ namespace Mapsui.Wpf
         private void WmsClick(object sender, RoutedEventArgs e)
         {
             mapControl.Map = WmsSample.InitializeMap();
+            layerList.Initialize(mapControl.Map.Layers);
         }    
     }
 }

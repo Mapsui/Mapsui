@@ -472,6 +472,8 @@ namespace SharpMap.Data
         /// </summary>
         public IGeometry Geometry { get; set; }
 
+        public IStyle Style { get; set; }
+
         /// <summary>
         /// Returns true of the geometry is null
         /// </summary>

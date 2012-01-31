@@ -3,13 +3,13 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mapsui="clr-namespace:Mapsui.Windows;assembly=Mapsui.Windows"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-    mc:Ignorable="d"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:Wpf="clr-namespace:Mapsui.Wpf"
+        mc:Ignorable="d"
     d:DesignWidth="200" d:DesignHeight="200"
     Title="Mapsui.Wpf" >
     <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" >
         <mapsui:MapControl x:Name="mapControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
-        <Border  BorderBrush="White" Opacity="0.75" Margin="10" Background="White" BorderThickness="6" CornerRadius="2" VerticalAlignment="Top" HorizontalAlignment="Left">
+        <Border BorderBrush="White" Opacity="0.75" Margin="10" Background="White" BorderThickness="6" CornerRadius="2" VerticalAlignment="Top" HorizontalAlignment="Left">
             <StackPanel Width="Auto">
                 <RadioButton IsChecked="True" FontSize="16" Content="OSM " Margin="4,4,4,4" Click="OsmClick"/>
                 <RadioButton FontSize="16" Content="Bing Maps" Margin="4,4,4,4" Click="BingMapsClick"/>
@@ -23,8 +23,7 @@
             </StackPanel>
         </Border>
         <Border BorderBrush="White" Opacity="0.75" Margin="10" Background="White" BorderThickness="6" CornerRadius="2" VerticalAlignment="Top" HorizontalAlignment="Right">
-            <StackPanel Width="Auto">
-            </StackPanel>
+            <Wpf:LayerList x:Name="layerList"></Wpf:LayerList>
         </Border>
         <Border x:Name="statistics" BorderBrush="White" Opacity="0.75" Margin="10" Background="White" BorderThickness="6" CornerRadius="2" HorizontalAlignment="Center" VerticalAlignment="Top">
             <StackPanel  Orientation="Vertical" HorizontalAlignment="Center"  >

@@ -81,22 +81,35 @@ namespace SilverlightRendering
                     if (layerStyle is IThemeStyle) style = (layerStyle as IThemeStyle).GetStyle(feature);
                     if ((style == null) || (style.Enabled == false) || (style.MinVisible > view.Resolution) || (style.MaxVisible < view.Resolution)) continue;
 
-                    if (feature.Geometry is Point)
-                        canvas.Children.Add(GeometryRenderer.RenderPoint(feature.Geometry as Point, style, view));
-                    else if (feature.Geometry is MultiPoint)
-                        canvas.Children.Add(GeometryRenderer.RenderMultiPoint(feature.Geometry as MultiPoint, style, view));
-                    else if (feature.Geometry is LineString)
-                        canvas.Children.Add(GeometryRenderer.RenderLineString(feature.Geometry as LineString, style, view));
-                    else if (feature.Geometry is MultiLineString)
-                        canvas.Children.Add(GeometryRenderer.RenderMultiLineString(feature.Geometry as MultiLineString, style, view));
-                    else if (feature.Geometry is Polygon)
-                        canvas.Children.Add(GeometryRenderer.RenderPolygon(feature.Geometry as Polygon, style, view));
-                    else if (feature.Geometry is MultiPolygon)
-                        canvas.Children.Add(GeometryRenderer.RenderMultiPolygon(feature.Geometry as MultiPolygon, style, view));
-                    else if (feature.Geometry is IRaster)
-                        canvas.Children.Add(GeometryRenderer.RenderRaster(feature.Geometry as IRaster, style, view));
+                    RenderGeometry(canvas, view, style, feature);
                 }
             }
+
+            foreach (var feature in features)
+            {
+                if (feature.Style != null)
+                {
+                    RenderGeometry(canvas, view, feature.Style, feature);
+                }
+            }
+        }
+
+        private static void RenderGeometry(Canvas canvas, IView view, SharpMap.Styles.IStyle style, SharpMap.Providers.IFeature feature)
+        {
+            if (feature.Geometry is Point)
+                canvas.Children.Add(GeometryRenderer.RenderPoint(feature.Geometry as Point, style, view));
+            else if (feature.Geometry is MultiPoint)
+                canvas.Children.Add(GeometryRenderer.RenderMultiPoint(feature.Geometry as MultiPoint, style, view));
+            else if (feature.Geometry is LineString)
+                canvas.Children.Add(GeometryRenderer.RenderLineString(feature.Geometry as LineString, style, view));
+            else if (feature.Geometry is MultiLineString)
+                canvas.Children.Add(GeometryRenderer.RenderMultiLineString(feature.Geometry as MultiLineString, style, view));
+            else if (feature.Geometry is Polygon)
+                canvas.Children.Add(GeometryRenderer.RenderPolygon(feature.Geometry as Polygon, style, view));
+            else if (feature.Geometry is MultiPolygon)
+                canvas.Children.Add(GeometryRenderer.RenderMultiPolygon(feature.Geometry as MultiPolygon, style, view));
+            else if (feature.Geometry is IRaster)
+                canvas.Children.Add(GeometryRenderer.RenderRaster(feature.Geometry as IRaster, style, view));
         }
 
         public Stream ToBitmapStream(double width, double height)

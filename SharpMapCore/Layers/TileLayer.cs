@@ -84,6 +84,7 @@ namespace SharpMap.Layers
             Enabled = true; //default enabled
             MinVisible = double.MinValue;
             MaxVisible = double.MaxValue;
+            LayerName = "Layer";
 
             tileSource = source;
             tileFetcher = new TileFetcher(source, memoryCache);

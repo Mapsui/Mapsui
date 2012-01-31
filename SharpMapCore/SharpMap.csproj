@@ -143,7 +143,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Providers\Feature.cs" />
     <Compile Include="Providers\Features.cs" />
+    <Compile Include="Providers\IFeature.cs" />
+    <Compile Include="Providers\IFeatures.cs" />
     <Compile Include="Providers\IProvider.cs" />
     <Compile Include="Providers\MemoryProvider.cs" />
     <Compile Include="Providers\TileProvider.cs" />

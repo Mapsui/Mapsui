@@ -19,26 +19,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using SharpMap.Geometries;
 
 namespace SharpMap.Providers
 {
-    public interface IFeature
-    {
-        IGeometry Geometry { get; set; }
-        object this[string key] { get; set; }
-        IEnumerable<string> Fields { get; }
-    }
-
-    public interface IFeatures : IEnumerable<IFeature>
-    {
-        string PrimaryKey { get; }
-        void Add(IFeature feature);
-        IFeature New();
-        void Delete(object id);
-        void Clear();
-    }
-
     public class Features : IFeatures
     {
         private readonly List<IFeature> features = new List<IFeature>();
@@ -97,29 +80,6 @@ namespace SharpMap.Providers
         public void Clear()
         {
             features.Clear();
-        }
-
-        public class Feature : IFeature
-        {
-            private readonly Dictionary<string, object> dictionary;
-
-            public Feature()
-            {
-                dictionary = new Dictionary<string, object>();
-            }
-
-            public IGeometry Geometry { get; set; }
-            
-            public virtual object this[string key]
-            {
-                get { return dictionary.ContainsKey(key) ? dictionary[key] : null; }
-                set { dictionary[key] = value; }
-            }
-
-            public IEnumerable<string> Fields
-            {
-                get { foreach (var key in dictionary.Keys) yield return key; }
-            }
         }
     }        
 }
