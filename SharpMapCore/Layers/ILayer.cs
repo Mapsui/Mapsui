@@ -30,6 +30,7 @@ namespace SharpMap.Layers
     {
         event FeedbackEventHandler Feedback;
 
+        int Id { get; }
         /// <summary>
         /// Minimum visible zoom level
         /// </summary>
@@ -67,6 +68,8 @@ namespace SharpMap.Layers
         /// This can be used for radiobuttons.
         /// </summary>
         bool Exclusive { get; set; }
+
+        double Opacity { get; set; }
 
         IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution);
     }

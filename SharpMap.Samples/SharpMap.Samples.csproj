@@ -57,6 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddPolygonInCode.cs" />
     <Compile Include="GradiantThemeSample.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TileLayerSample.cs" />

@@ -8,6 +8,9 @@ namespace SharpMap.Layers
 {
     public abstract class BaseLayer : ILayer
     {
+        private static int instanceCounter;
+
+        public int Id { get; private set; }
         /// <summary>
         /// Minimum visibility zoom, including this value
         /// </summary>
@@ -48,19 +51,24 @@ namespace SharpMap.Layers
 
         public bool Exclusive { get; set; }
 
+        public double Opacity { get; set; }
+
         public event FeedbackEventHandler Feedback;
 
-        public BaseLayer(string layerName) : this()
-        {
-            LayerName = layerName;
-        }
-
-        public BaseLayer()
+        protected BaseLayer()
         {
             Styles = new List<IStyle>();
             Enabled = true;
             MinVisible = 0;
             MaxVisible = double.MaxValue;
+            Opacity = 0.5;
+            Id = instanceCounter++;
+        }
+
+        protected BaseLayer(string layerName)
+            : this()
+        {
+            LayerName = layerName;
         }
 
         public abstract IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution);

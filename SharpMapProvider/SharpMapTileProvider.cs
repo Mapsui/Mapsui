@@ -50,7 +50,7 @@ namespace SharpMapProvider
                     renderer.Render(view, map);
                     var stream = renderer.ToBitmapStream(256, 256);
                     stream.Position = 0;
-                    bytes = BruTile.Utilities.ReadFully(stream);         
+                    bytes = Utilities.ReadFully(stream);         
                     if (bytes != null)
                         fileCache.Add(tileInfo.Index, bytes);
                 }

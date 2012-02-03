@@ -21,7 +21,8 @@ namespace Mapsui.Wpf
             {
                 var item = new LayerListItem {LayerName = layer.LayerName};
                 item.Enabled = layer.Enabled;
-                //!!!item.Transparency = layer.
+                item.LayerOpacity = layer.Opacity;
+                item.Layer = layer;
                 items.Children.Add(item);
             }
         }

@@ -1,17 +1,21 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
+using System.Windows.Controls;
+using SharpMap.Layers;
 
 namespace Mapsui.Wpf
 {
     public partial class LayerListItem : UserControl
     {
+        public ILayer Layer { get; set; }
+
         public string LayerName
         {
             set { textBlock.Text = value; }
         }
 
-        public double Transparency
+        public double LayerOpacity
         {
-            set { transparencySlider.Value = value; }
+            set { opacitySlider.Value = value; }
         }
 
         public bool? Enabled
@@ -22,6 +26,16 @@ namespace Mapsui.Wpf
         public LayerListItem()
         {
             InitializeComponent();
+        }
+
+        private void OpacitySliderValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            var tempLayer = Layer;
+
+            if (tempLayer != null)
+            {
+                tempLayer.Opacity = e.NewValue;
+            }
         }
     }
 }

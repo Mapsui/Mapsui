@@ -32,7 +32,7 @@ namespace SharpMap.Data.Providers
     /// <summary>
     /// Shapefile geometry type.
     /// </summary>
-    public enum ShapeType : int
+    public enum ShapeType
     {
         /// <summary>
         /// Null shape with no geometric data
@@ -486,11 +486,11 @@ namespace SharpMap.Data.Providers
             {
                 IFeature fdr = GetFeature(oid);
                 if (fdr != null)
-                    return (Geometry)fdr.Geometry;
-                else
-                    return null;
+                    return fdr.Geometry;
+                return null;
             }
-            else return ReadGeometry(oid);
+            
+            return ReadGeometry(oid);
         }
 
         /// <summary>

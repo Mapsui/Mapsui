@@ -22,7 +22,6 @@ using SharpMap.Geometries;
 using System.IO;
 using System.Collections.Generic;
 using SharpMap.Providers;
-using SharpMap.Styles;
 
 namespace SharpMap.Layers
 {
@@ -32,52 +31,16 @@ namespace SharpMap.Layers
         MemoryCache<MemoryStream> MemoryCache { get; }
     }
 
-    //todo: derive from baselayer
-    public class TileLayer : ITileLayer, ILayer, IAsyncDataFetcher
+    public class TileLayer : BaseLayer, ITileLayer, IAsyncDataFetcher
     {
-        #region Fields
+        readonly TileFetcher tileFetcher;
+        readonly ITileSource tileSource;
 
-        ITileSource tileSource;
-        TileFetcher tileFetcher;
 #if PocketPC
-        MemoryCache<MemoryStream> memoryCache = new MemoryCache<MemoryStream>(40, 60);
+        readonly MemoryCache<MemoryStream> memoryCache = new MemoryCache<MemoryStream>(40, 60);
 #else
-        MemoryCache<MemoryStream> memoryCache = new MemoryCache<MemoryStream>(200, 300);
+        readonly MemoryCache<MemoryStream> memoryCache = new MemoryCache<MemoryStream>(200, 300);
 #endif
-        const int maxRetries = 3;
-
-        #endregion
-
-        #region EventHandlers
-
-        public event DataChangedEventHandler DataChanged;
-        public event FeedbackEventHandler Feedback;
-
-        #endregion
-
-        #region Properties
-
-        public ITileSchema Schema
-        {
-            //TODO: investigate whether we can do without this public Schema. 
-            //Its primary use is in the Renderer which recursively searches for
-            //available tiles. Perhaps this recursive search can be done within
-            //this class. I would be nice though if there was some flexibility into
-            //the specific search strategy. Perhaps it is possible to pass a search 
-            //to some GetTiles method.
-            get { return tileSource.Schema; }
-        }
-
-        public MemoryCache<MemoryStream> MemoryCache
-        {
-            get { return memoryCache; }
-        }
-
-        public bool Exclusive { get; set; }
-
-        #endregion
-
-        #region Constructors
 
         public TileLayer(ITileSource source)
         {
@@ -85,15 +48,25 @@ namespace SharpMap.Layers
             MinVisible = double.MinValue;
             MaxVisible = double.MaxValue;
             LayerName = "Layer";
+            Opacity = 0.5;
 
             tileSource = source;
             tileFetcher = new TileFetcher(source, memoryCache);
-            tileFetcher.DataChanged += tileFetcher_DataChanged;
+            tileFetcher.DataChanged += TileFetcherDataChanged;
         }
 
-        #endregion
+        public override BoundingBox Envelope 
+        {
+            get 
+            { 
+                if (Schema == null) return null;
+                return Schema.Extent.ToBoundingBox();
+            }
+        }
 
-        #region Public Methods
+        #region IAsyncDataFetcher Members
+
+        public event DataChangedEventHandler DataChanged;
 
         public void ViewChanged(bool changeEnd, BoundingBox extent, double resolution)
         {
@@ -123,44 +96,44 @@ namespace SharpMap.Layers
 
         #endregion
 
-        #region Private Methods
+        #region ITileLayer Members
 
-        private void tileFetcher_DataChanged(object sender, DataChangedEventArgs e)
+        public ITileSchema Schema
+        {
+            // TODO: 
+            // investigate whether we can do without this public Schema. 
+            // Its primary use is in the Renderer which recursively searches for
+            // available tiles. Perhaps this recursive search can be done within
+            // this class. I would be nice though if there was some flexibility into
+            // the specific search strategy. Perhaps it is possible to pass a search 
+            // to some GetTiles method.
+            get { return tileSource.Schema; }
+        }
+
+        public MemoryCache<MemoryStream> MemoryCache
+        {
+            get { return memoryCache; }
+        }
+
+        #endregion
+
+        private void TileFetcherDataChanged(object sender, DataChangedEventArgs e)
         {
             OnDataChanged(e);
         }
 
         private void OnDataChanged(DataChangedEventArgs e)
         {
-            if (DataChanged != null)
-                DataChanged(this, e);
+            if (DataChanged != null) DataChanged(this, e);
         }
 
-        #endregion
-
-        #region ILayer Members
-
-        public double MinVisible { get; set; }
-        public double MaxVisible { get; set; }
-        public bool Enabled { get; set; }
-        public string LayerName { get; set; }
-        public BoundingBox Envelope 
+        public override IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
         {
-            get 
-            { 
-                if (Schema == null) return null;
-                return Schema.Extent.ToBoundingBox();
-            }
-        }
-        public int SRID { get; set; }
-        public IList<IStyle> Styles { get; set; }
-        public virtual IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
-        {
-            var tilesInView = this.Schema.GetTilesInView(box.ToExtent(), BruTile.Utilities.GetNearestLevel(Schema.Resolutions, resolution));
+            var tilesInView = Schema.GetTilesInView(box.ToExtent(), BruTile.Utilities.GetNearestLevel(Schema.Resolutions, resolution));
             var result = new Features();
             foreach (var info in tilesInView)
             {
-                var tile = this.memoryCache.Find(info.Index);
+                var tile = memoryCache.Find(info.Index);
                 var feature = result.New();
                 feature.Geometry = new Raster(BruTile.Utilities.ReadFully(tile),
                                               new BoundingBox(info.Extent.MinX, info.Extent.MinY, info.Extent.MaxX,
@@ -169,6 +142,5 @@ namespace SharpMap.Layers
             }
             return result;
         }
-        #endregion
     }
 }
