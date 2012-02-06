@@ -135,9 +135,8 @@ namespace SharpMap.Layers
             {
                 var tile = memoryCache.Find(info.Index);
                 var feature = result.New();
-                feature.Geometry = new Raster(BruTile.Utilities.ReadFully(tile),
-                                              new BoundingBox(info.Extent.MinX, info.Extent.MinY, info.Extent.MaxX,
-                                                              info.Extent.MaxY));
+                var boundingBox = new BoundingBox(info.Extent.MinX, info.Extent.MinY, info.Extent.MaxX, info.Extent.MaxY);
+                feature.Geometry = new Raster(BruTile.Utilities.ReadFully(tile), boundingBox);
                 if (tile != null) result.Add(feature);
             }
             return result;

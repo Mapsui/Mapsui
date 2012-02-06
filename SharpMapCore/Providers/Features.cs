@@ -40,8 +40,8 @@ namespace SharpMap.Providers
 
         public Features()
         {
-            //Perhaps this constructor should get a dictionary parameter
-            //to specify the name and type of the columns
+            // Perhaps this constructor should get a dictionary parameter
+            // to specify the name and type of the columns
         }
 
         public Features(string primaryKey)
@@ -51,8 +51,8 @@ namespace SharpMap.Providers
 
         public IFeature New()
         {
-            //At this point it is possible to initialize an improved version of
-            //Feature with a specifed set of columns.
+            // At this point it is possible to initialize an improved version of
+            // Feature with a specifed set of columns.
             return new Feature();
         }
 
@@ -74,7 +74,7 @@ namespace SharpMap.Providers
         public void Delete(object id)
         {
             if (string.IsNullOrEmpty(PrimaryKey)) throw new Exception("Primary key of Features was not set");
-            features.First(f => f[PrimaryKey] == id);
+            features.Remove(features.First(f => f[PrimaryKey] == id));
         }
 
         public void Clear()

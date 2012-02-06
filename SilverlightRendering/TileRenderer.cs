@@ -40,7 +40,7 @@ namespace SilverlightRendering
         {
             if (schema == null) return;
             CollapseAll(canvas);
-            int level = BruTile.Utilities.GetNearestLevel(schema.Resolutions, view.Resolution);
+            int level = Utilities.GetNearestLevel(schema.Resolutions, view.Resolution);
             DrawRecursive(canvas, schema, view, cache, view.Extent.ToExtent(), level);
             RemoveCollapsed(canvas);
         }
@@ -110,7 +110,7 @@ namespace SilverlightRendering
                     brush.Stretch = Stretch.Fill;
                     rectangle.Fill = brush;
                     images.Add(tile.Index, rectangle);
-                    Canvas.SetZIndex(rectangle, int.Parse(tile.Index.LevelId));
+                    Panel.SetZIndex(rectangle, int.Parse(tile.Index.LevelId));
 
 //!!!#if !SILVERLIGHT
                     //Note: animation of opacity of tiles used to be a nice feature but
@@ -139,7 +139,7 @@ namespace SilverlightRendering
             }
             catch (Exception ex)
             {
-                //todo report error
+                // todo report error
                 Console.WriteLine(ex.Message);
                 memoryCache.Remove(tile.Index);
                 return 0; // tile was not added and should thus be treated as invisible
