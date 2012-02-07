@@ -74,7 +74,7 @@ namespace SharpMap.Providers
         public void Delete(object id)
         {
             if (string.IsNullOrEmpty(PrimaryKey)) throw new Exception("Primary key of Features was not set");
-            features.Remove(features.First(f => f[PrimaryKey] == id));
+            features.Remove(features.First(f => f[PrimaryKey].Equals(id)));
         }
 
         public void Clear()
