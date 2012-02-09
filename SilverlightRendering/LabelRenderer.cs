@@ -16,8 +16,11 @@ namespace SilverlightRendering
 {
     public class LabelRenderer
     {
-        public static void RenderStackedLabelLayer(Canvas canvas, IView view, LabelLayer layer)
+        public static Canvas RenderStackedLabelLayer(IView view, LabelLayer layer)
         {
+            var canvas = new Canvas();
+            canvas.Opacity = layer.Opacity;
+
             //todo: take into account the priority 
             var features = layer.GetFeaturesInView(view.Extent, view.Resolution);
             var margin = view.Resolution * 50;
@@ -55,6 +58,8 @@ namespace SilverlightRendering
                     }
                 }
             }
+
+            return canvas;
         }
 
         private static UIElement RenderBox(BoundingBox box, IView view)
@@ -77,8 +82,11 @@ namespace SilverlightRendering
             return rectangle;
         }
 
-        public static void RenderLabelLayer(Canvas canvas, IView view, LabelLayer layer)
+        public static Canvas RenderLabelLayer(IView view, LabelLayer layer)
         {
+            var canvas = new Canvas();
+            canvas.Opacity = layer.Opacity;
+
             //todo: take into account the priority 
             var features = layer.GetFeaturesInView(view.Extent, view.Resolution);
             var stackOffset = new Offset();
@@ -99,6 +107,8 @@ namespace SilverlightRendering
                         stackOffset, labelStyle, view, labelText));
                 }
             }
+
+            return canvas;
         }
 
         private static void ClusterFeatures(

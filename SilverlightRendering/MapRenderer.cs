@@ -47,29 +47,37 @@ namespace SilverlightRendering
         
         private void RenderLayer(IView view, ILayer layer)
         {
-            // Ideally I would like a solution where all rendering can be done through a single interface 
-            // without the type check below.
+            if (layer.Enabled == false) return;
+
             if (layer is LabelLayer)
             {
+
                 var labelLayer = layer as LabelLayer;
                 if (labelLayer.UseLabelStacking)
-                    LabelRenderer.RenderStackedLabelLayer(Canvas, view, labelLayer);
+                {
+                    Canvas.Children.Add(LabelRenderer.RenderStackedLabelLayer(view, labelLayer));
+                }
                 else
-                    LabelRenderer.RenderLabelLayer(Canvas, view, labelLayer);
+                {
+                    Canvas.Children.Add(LabelRenderer.RenderLabelLayer(view, labelLayer));
+                }
             }
             else if (layer is ITileLayer)
             {
                 var tileLayer = (ITileLayer)layer;
-                tileRenderer.Render(tileCanvas, tileLayer.Schema, view, tileLayer.MemoryCache);
+                tileRenderer.Render(tileCanvas, tileLayer.Schema, view, tileLayer.MemoryCache, layer.Opacity);
             }
             else
             {
-                RenderVectorLayer(Canvas, view, layer);
+                Canvas.Children.Add(RenderVectorLayer(view, layer));
             }
         }
 
-        private static void RenderVectorLayer(Canvas canvas, IView view, ILayer layer)
+        private static Canvas RenderVectorLayer(IView view, ILayer layer)
         {
+            var canvas = new Canvas();
+            canvas.Opacity = layer.Opacity;
+
             var features = layer.GetFeaturesInView(view.Extent, view.Resolution).ToList();
 
             foreach (var layerStyle in layer.Styles)
@@ -92,6 +100,8 @@ namespace SilverlightRendering
                     RenderGeometry(canvas, view, feature.Style, feature);
                 }
             }
+
+            return canvas;
         }
 
         private static void RenderGeometry(Canvas canvas, IView view, SharpMap.Styles.IStyle style, SharpMap.Providers.IFeature feature)

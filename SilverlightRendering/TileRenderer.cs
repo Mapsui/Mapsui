@@ -36,12 +36,13 @@ namespace SilverlightRendering
     {
         readonly ITileCache<Rectangle> images = new MemoryCache<Rectangle>(200, 300);
 
-        public void Render(Canvas canvas, ITileSchema schema, IView view, MemoryCache<MemoryStream> cache)
+        public void Render(Canvas canvas, ITileSchema schema, IView view, MemoryCache<MemoryStream> memoryCache, double opacity)
         {
+            canvas.Opacity = opacity;
             if (schema == null) return;
             CollapseAll(canvas);
             int level = Utilities.GetNearestLevel(schema.Resolutions, view.Resolution);
-            DrawRecursive(canvas, schema, view, cache, view.Extent.ToExtent(), level);
+            DrawRecursive(canvas, schema, view, memoryCache, view.Extent.ToExtent(), level);
             RemoveCollapsed(canvas);
         }
 

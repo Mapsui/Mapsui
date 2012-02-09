@@ -31,10 +31,18 @@ namespace Mapsui.Wpf
         private void OpacitySliderValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             var tempLayer = Layer;
-
             if (tempLayer != null)
             {
                 tempLayer.Opacity = e.NewValue;
+            }
+        }
+
+        private void EnabledCheckBoxClick(object sender, RoutedEventArgs e)
+        {
+            var tempLayer = Layer;
+            if (tempLayer != null)
+            {
+                tempLayer.Enabled = ((CheckBox)e.Source).IsChecked != false;
             }
         }
     }
