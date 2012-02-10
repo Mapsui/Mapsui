@@ -112,7 +112,7 @@ namespace WbxRendering
             img.BeginInit();
             img.StreamSource = memoryStream;
             img.EndInit();
-            return new WriteableBitmap(img);
+            return BitmapFactory.New(img);
         }
 
         public static Rect RoundToPixel(Rect dest)
@@ -126,6 +126,24 @@ namespace WbxRendering
                 (Math.Round(dest.Right) - Math.Round(dest.Left)),
                 (Math.Round(dest.Bottom) - Math.Round(dest.Top)));
             return dest;
+        }
+    }
+
+    public static class BitmapFactory
+    {
+        public static WriteableBitmap New(BitmapSource source)
+        {
+#if SILVERLIGHT
+          return new WriteableBitmap(source);
+#else
+          FormatConvertedBitmap formatedBitmapSource = new FormatConvertedBitmap();
+          formatedBitmapSource.BeginInit();
+          formatedBitmapSource.Source = source;
+          formatedBitmapSource.DestinationFormat = PixelFormats.Bgra32;
+          formatedBitmapSource.EndInit();
+
+          return new WriteableBitmap(formatedBitmapSource);
+#endif
         }
     }
 }
