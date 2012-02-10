@@ -26,31 +26,33 @@ using BruTile.Cache;
 using SharpMap;
 using SharpMap.Geometries;
 using Point = SharpMap.Geometries.Point;
+using SharpMap.Providers;
 
 namespace GdiRendering
 {
     public static class GdiTileRenderer
     {
         public static void Render(Graphics graphics, ITileSchema schema,
-          IView transform, MemoryCache<MemoryStream> cache)
+          IView transform, MemoryCache<Feature> cache)
         {
             int level = Utilities.GetNearestLevel(schema.Resolutions, transform.Resolution);
             DrawRecursive(graphics, schema, transform, cache, schema.GetExtentOfTilesInView(transform.Extent.ToExtent(), level), level);
         }
 
-        private static void DrawRecursive(Graphics graphics, ITileSchema schema, IView transform, MemoryCache<MemoryStream> cache, Extent extent, int level)
+        private static void DrawRecursive(Graphics graphics, ITileSchema schema, IView transform, MemoryCache<Feature> cache, Extent extent, int level)
         {
             IList<TileInfo> infos = schema.GetTilesInView(extent, level);
 
             foreach (TileInfo info in infos)
             {
-                MemoryStream image = cache.Find(info.Index);
-                if (image == null)
+                var feature = cache.Find(info.Index);
+                if (feature == null)
                 {
                     if (level > 0) DrawRecursive(graphics, schema, transform, cache, info.Extent.Intersect(extent), level - 1);
                 }
                 else
                 {
+                    var image = ((Tile)feature.Geometry).Data;
                     RectangleF dest = WorldToMap(info.Extent, transform);
                     dest = RoundToPixel(dest);
                     RectangleF clip = WorldToMap(extent, transform);

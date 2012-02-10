@@ -10,6 +10,7 @@ using BruTile.Cache;
 using SharpMap;
 using SharpMap.Geometries;
 using SharpMap.Layers;
+using SharpMap.Providers;
 
 namespace WbxRendering
 {
@@ -47,25 +48,26 @@ namespace WbxRendering
             }
         }
 
-        private static void RenderTileLayer(WriteableBitmap targetBitmap, ITileSchema schema, IView view, MemoryCache<MemoryStream> memoryCache, double opacity)
+        private static void RenderTileLayer(WriteableBitmap targetBitmap, ITileSchema schema, IView view, MemoryCache<Feature> memoryCache, double opacity)
         {
             int level = Utilities.GetNearestLevel(schema.Resolutions, view.Resolution);
             DrawRecursive(targetBitmap, schema, view, memoryCache, view.Extent.ToExtent(), level, opacity);
         }
 
-        private static void DrawRecursive(WriteableBitmap targetBitmap, ITileSchema schema, IView view, MemoryCache<MemoryStream> memoryCache, Extent extent, int level, double opacity)
+        private static void DrawRecursive(WriteableBitmap targetBitmap, ITileSchema schema, IView view, MemoryCache<Feature> memoryCache, Extent extent, int level, double opacity)
         {
             IList<TileInfo> tiles = schema.GetTilesInView(extent, level);
 
             foreach (TileInfo tile in tiles)
             {
-                MemoryStream image = memoryCache.Find(tile.Index);
-                if (image == null)
+                var feature = memoryCache.Find(tile.Index);
+                if (feature == null)
                 {
                     if (level > 0) DrawRecursive(targetBitmap, schema, view, memoryCache, tile.Extent.Intersect(extent), level - 1, opacity);
                 }
                 else
                 {
+                    var image = ((Tile)feature.Geometry).Data;
                     Rect dest = WorldToMap(tile.Extent, view);
                     DrawImage(targetBitmap, image, dest, tile, memoryCache, opacity);
                 }
@@ -79,7 +81,7 @@ namespace WbxRendering
             return new Rect(min.X, max.Y, max.X - min.X, min.Y - max.Y);
         }
 
-        private static void DrawImage(WriteableBitmap targetBitmap, MemoryStream memoryStream, Rect dest, TileInfo tile, MemoryCache<MemoryStream> memoryCache, double opacity)
+        private static void DrawImage(WriteableBitmap targetBitmap, MemoryStream memoryStream, Rect dest, TileInfo tile, MemoryCache<Feature> memoryCache, double opacity)
         {
             try
             {

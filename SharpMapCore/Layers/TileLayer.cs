@@ -28,7 +28,7 @@ namespace SharpMap.Layers
     public interface ITileLayer
     {
         ITileSchema Schema { get; }
-        MemoryCache<MemoryStream> MemoryCache { get; }
+        MemoryCache<Feature> MemoryCache { get; }
     }
 
     public class TileLayer : BaseLayer, ITileLayer, IAsyncDataFetcher
@@ -37,9 +37,9 @@ namespace SharpMap.Layers
         readonly ITileSource tileSource;
 
 #if PocketPC
-        readonly MemoryCache<MemoryStream> memoryCache = new MemoryCache<MemoryStream>(40, 60);
+        readonly MemoryCache<Feature> memoryCache = new MemoryCache<Feature>(40, 60);
 #else
-        readonly MemoryCache<MemoryStream> memoryCache = new MemoryCache<MemoryStream>(200, 300);
+        readonly MemoryCache<Feature> memoryCache = new MemoryCache<Feature>(200, 300);
 #endif
 
         public TileLayer(ITileSource source)
@@ -110,7 +110,7 @@ namespace SharpMap.Layers
             get { return tileSource.Schema; }
         }
 
-        public MemoryCache<MemoryStream> MemoryCache
+        public MemoryCache<Feature> MemoryCache
         {
             get { return memoryCache; }
         }
@@ -136,7 +136,7 @@ namespace SharpMap.Layers
                 var tile = memoryCache.Find(info.Index);
                 var feature = result.New();
                 var boundingBox = new BoundingBox(info.Extent.MinX, info.Extent.MinY, info.Extent.MaxX, info.Extent.MaxY);
-                feature.Geometry = new Raster(BruTile.Utilities.ReadFully(tile), boundingBox);
+                feature.Geometry = new Raster(BruTile.Utilities.ReadFully(((Tile)tile.Geometry).Data), boundingBox);
                 if (tile != null) result.Add(feature);
             }
             return result;

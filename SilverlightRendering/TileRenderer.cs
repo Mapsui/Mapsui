@@ -29,6 +29,7 @@ using BruTile.Cache;
 using SharpMap;
 using SharpMap.Geometries;
 using Path = System.Windows.Shapes.Path;
+using SharpMap.Providers;
 
 namespace SilverlightRendering
 {
@@ -36,8 +37,16 @@ namespace SilverlightRendering
     {
         readonly ITileCache<Rectangle> images = new MemoryCache<Rectangle>(200, 300);
 
-        public void Render(Canvas canvas, ITileSchema schema, IView view, MemoryCache<MemoryStream> memoryCache, double opacity)
+        public void Render(Canvas canvas, ITileSchema schema, IView view, MemoryCache<Feature> memoryCache, double opacity)
         {
+            // TODO:
+            // Rewrite the way tiles are fetched. Currently drawing and fetching is combined. 
+            // Instead all tiles needed for drawing should be fetched with ILayer.GetFeatureInView. 
+            // A complication is that higher level tiles (that replace missing
+            // tiles at lower levels) need a clip extent. Perhaps the clip can be determine while
+            // rendering.
+            // Step one would be to split DrawRecursive in a GetRecurcive and DrawTiles
+
             canvas.Opacity = opacity;
             if (schema == null) return;
             CollapseAll(canvas);
@@ -55,19 +64,20 @@ namespace SilverlightRendering
             }
         }
 
-        private void DrawRecursive(Canvas canvas, ITileSchema schema, IView view, MemoryCache<MemoryStream> memoryCache, Extent extent, int level)
+        private void DrawRecursive(Canvas canvas, ITileSchema schema, IView view, MemoryCache<Feature> memoryCache, Extent extent, int level)
         {
             IList<TileInfo> tiles = schema.GetTilesInView(extent, level);
 
             foreach (TileInfo tile in tiles)
             {
-                MemoryStream image = memoryCache.Find(tile.Index);
-                if (image == null)
+                var feature = memoryCache.Find(tile.Index);
+                if (feature == null)
                 {
                     if (level > 0) DrawRecursive(canvas, schema, view, memoryCache, tile.Extent.Intersect(extent), level - 1);
                 }
                 else
                 {
+                    var image = ((Tile)feature.Geometry).Data;
                     Rect dest = WorldToMap(tile.Extent, view);
                     double opacity = DrawImage(canvas, image, dest, tile, memoryCache);
                     if ((opacity < 1) && (level > 0)) DrawRecursive(canvas, schema, view, memoryCache, tile.Extent.Intersect(extent), level - 1);
@@ -82,7 +92,7 @@ namespace SilverlightRendering
             return new Rect(min.X, max.Y, max.X - min.X, min.Y - max.Y);
         }
 
-        private double DrawImage(Canvas canvas, MemoryStream memoryStream, Rect dest, TileInfo tile, MemoryCache<MemoryStream> memoryCache)
+        private double DrawImage(Canvas canvas, MemoryStream memoryStream, Rect dest, TileInfo tile, MemoryCache<Feature> memoryCache)
         {
             try
             {
@@ -173,7 +183,5 @@ namespace SilverlightRendering
                 }
             }
         }
-
-
     }
 }

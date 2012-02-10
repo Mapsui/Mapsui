@@ -105,6 +105,7 @@
     <Compile Include="Geometries\IGeometryCollection.cs" />
     <Compile Include="Geometries\IRaster.cs" />
     <Compile Include="Geometries\ISpatialReference.cs" />
+    <Compile Include="Geometries\Tile.cs" />
     <Compile Include="Geometries\LinearRing.cs" />
     <Compile Include="Geometries\LineString.cs" />
     <Compile Include="Geometries\MultiCurve.cs" />

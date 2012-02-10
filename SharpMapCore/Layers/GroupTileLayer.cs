@@ -13,7 +13,7 @@ namespace SharpMap.Layers
     public class GroupTileLayer : BaseLayer, ITileLayer, IAsyncDataFetcher
     {
         private IList<TileLayer> layers = new List<TileLayer>();
-        private MemoryCache<MemoryStream> memoryCache = new MemoryCache<MemoryStream>(100, 200);
+        private MemoryCache<Feature> memoryCache = new MemoryCache<Feature>(100, 200);
         
         public GroupTileLayer(IEnumerable<TileLayer> tileLayers) : base()
         {
@@ -40,7 +40,7 @@ namespace SharpMap.Layers
                 if (!tileLayer.Enabled) continue;
                
                 var tile = tileLayer.MemoryCache.Find(e.TileInfo.Index);
-                if (tile != null) tiles.Add(tile);
+                if (tile != null) tiles.Add(((Tile)tile.Geometry).Data);
             }
 
 #if SILVERLIGHT
@@ -48,7 +48,7 @@ namespace SharpMap.Layers
                 {
 #endif
                      var bitmap = CombineBitmaps(tiles, Schema.Width, Schema.Height);
-                     if (bitmap != null) MemoryCache.Add(e.TileInfo.Index, bitmap);
+                     if (bitmap != null) MemoryCache.Add(e.TileInfo.Index, new Feature { Geometry = new Tile { Data = bitmap } });
                      if (DataChanged != null) DataChanged(sender, e);
 #if SILVERLIGHT
                 });
@@ -188,7 +188,7 @@ namespace SharpMap.Layers
             }
         }
         
-        public MemoryCache<MemoryStream> MemoryCache
+        public MemoryCache<Feature> MemoryCache
         {
             get { return memoryCache; }
         }

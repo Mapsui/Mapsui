@@ -22,6 +22,7 @@ using System.Threading;
 using BruTile;
 using BruTile.Cache;
 using SharpMap.Geometries;
+using SharpMap.Providers;
 
 namespace SharpMap.Fetcher
 {
@@ -29,7 +30,7 @@ namespace SharpMap.Fetcher
     {
         #region Fields
 
-        private readonly MemoryCache<MemoryStream> memoryCache;
+        private readonly MemoryCache<Feature> memoryCache;
         private readonly ITileSource tileSource;
         private BoundingBox extent;
         private double resolution;
@@ -55,7 +56,7 @@ namespace SharpMap.Fetcher
 
         #region Constructors Destructors
 
-        public TileFetcher(ITileSource tileSource, MemoryCache<MemoryStream> memoryCache)
+        public TileFetcher(ITileSource tileSource, MemoryCache<Feature> memoryCache)
         {
             if (tileSource == null) throw new ArgumentException("TileProvider can not be null");
             this.tileSource = tileSource;
@@ -132,7 +133,7 @@ namespace SharpMap.Fetcher
             }
         }
 
-        private static IList<TileInfo> GetTilesMissing(IEnumerable<TileInfo> infosIn, MemoryCache<MemoryStream> memoryCache, IDictionary<TileIndex, int> retries)
+        private static IList<TileInfo> GetTilesMissing(IEnumerable<TileInfo> infosIn, MemoryCache<Feature> memoryCache, IDictionary<TileIndex, int> retries)
         {
             IList<TileInfo> tilesOut = new List<TileInfo>();
             foreach (TileInfo info in infosIn)
@@ -188,7 +189,7 @@ namespace SharpMap.Fetcher
             try
             {
                 if (e.Error == null && e.Cancelled == false && isThreadRunning && e.Image != null)
-                    memoryCache.Add(e.TileInfo.Index, new MemoryStream(e.Image));
+                    memoryCache.Add(e.TileInfo.Index, new Feature() { Geometry = new Tile() { Data = new MemoryStream(e.Image) } });
             }
             catch (Exception ex)
             {
