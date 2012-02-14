@@ -99,7 +99,7 @@ namespace SharpMap.Providers
             {
                 bitmap.Add(tileInfo.Index, tileProvider.GetTile(tileInfo));
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //todo: log and use other ways to report to user.
             }

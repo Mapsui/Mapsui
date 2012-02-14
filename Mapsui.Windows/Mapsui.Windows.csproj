@@ -77,7 +77,7 @@
     </Reference>
     <Reference Include="WriteableBitmapEx.Wpf, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\libs\WriteableBitmapEx.Wpf</HintPath>
+      <HintPath>..\libs\WriteableBitmapEx.Wpf.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
