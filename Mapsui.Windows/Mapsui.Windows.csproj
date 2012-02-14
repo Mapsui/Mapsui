@@ -79,10 +79,10 @@
     <Reference Include="WindowsBase">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
-    <Reference Include="WriteableBitmapEx.Wpf, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" >
+    <Reference Include="WriteableBitmapEx.Wpf, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\libs\WriteableBitmapEx.Wpf.dll</HintPath>	
-	</Reference>
+      <HintPath>..\libs\WriteableBitmapEx.Wpf.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FpsCounter.cs" />
