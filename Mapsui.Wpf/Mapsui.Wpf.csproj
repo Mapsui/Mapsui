@@ -113,7 +113,6 @@
     <Compile Include="LayerListItem.xaml.cs">
       <DependentUpon>LayerListItem.xaml</DependentUpon>
     </Compile>
-    <Compile Include="RenderedCanvas.cs" />
     <Compile Include="Window1.xaml.cs">
       <DependentUpon>Window1.xaml</DependentUpon>
       <SubType>Code</SubType>

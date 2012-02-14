@@ -22,7 +22,7 @@ namespace WbxRendering
 
         public WbxMapRenderer(Canvas target)
         { 
-            //!!! targetBitmap = BitmapFactory.New((int) ActualWidth, (int) ActualHeight);
+            //!!!targetBitmap = BitmapFactory.New((int) ActualWidth, (int) ActualHeight);
             var image = new Image();
             image.Source = targetBitmap;
             target.Children.Add(image);
