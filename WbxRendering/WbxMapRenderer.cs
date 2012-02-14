@@ -21,8 +21,8 @@ namespace WbxRendering
         WriteableBitmap targetBitmap;
 
         public WbxMapRenderer(Canvas target)
-        { 
-            //!!!targetBitmap = BitmapFactory.New((int) ActualWidth, (int) ActualHeight);
+        {
+            targetBitmap = BitmapFactory.New((int)target.ActualWidth, (int)target.ActualHeight);
             var image = new Image();
             image.Source = targetBitmap;
             target.Children.Add(image);
@@ -138,7 +138,7 @@ namespace WbxRendering
             img.BeginInit();
             img.StreamSource = memoryStream;
             img.EndInit();
-            return BitmapFactory.New(img);
+            return LocalBitmapFactory.New(img);
         }
 
         public static Rect RoundToPixel(Rect dest)
@@ -155,20 +155,20 @@ namespace WbxRendering
         }
     }
 
-    public static class BitmapFactory
+    public static class LocalBitmapFactory
     {
         public static WriteableBitmap New(BitmapSource source)
         {
 #if SILVERLIGHT
           return new WriteableBitmap(source);
 #else
-          FormatConvertedBitmap formatedBitmapSource = new FormatConvertedBitmap();
-          formatedBitmapSource.BeginInit();
-          formatedBitmapSource.Source = source;
-          formatedBitmapSource.DestinationFormat = PixelFormats.Bgra32;
-          formatedBitmapSource.EndInit();
+            FormatConvertedBitmap formatedBitmapSource = new FormatConvertedBitmap();
+            formatedBitmapSource.BeginInit();
+            formatedBitmapSource.Source = source;
+            formatedBitmapSource.DestinationFormat = PixelFormats.Bgra32;
+            formatedBitmapSource.EndInit();
 
-          return new WriteableBitmap(formatedBitmapSource);
+            return new WriteableBitmap(formatedBitmapSource);
 #endif
         }
     }

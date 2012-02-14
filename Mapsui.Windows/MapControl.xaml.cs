@@ -147,8 +147,8 @@ namespace Mapsui.Windows
             SizeChanged += MapControl_SizeChanged;
             CompositionTarget.Rendering += CompositionTarget_Rendering;
             canvas.Children.Add(renderCanvas);
-            //renderer = new MapRenderer(renderCanvas);
-            renderer = new WbxMapRenderer(renderCanvas);
+            renderer = new MapRenderer(renderCanvas);
+            //renderer = new WbxMapRenderer(renderCanvas);
 
 #if !SILVERLIGHT
             Dispatcher.ShutdownStarted += Dispatcher_ShutdownStarted;
