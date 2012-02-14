@@ -188,8 +188,13 @@ namespace SharpMap.Fetcher
             //todo remove object sender
             try
             {
+                var feature = new Feature()
+                {
+                    Geometry = new Raster(new MemoryStream(e.Image), e.TileInfo.Extent.ToBoundingBox())
+                        //!!! TickFetched = DateTime.Now.Ticks
+                };
                 if (e.Error == null && e.Cancelled == false && isThreadRunning && e.Image != null)
-                    memoryCache.Add(e.TileInfo.Index, new Feature() { Geometry = new Tile() { Data = new MemoryStream(e.Image) } });
+                    memoryCache.Add(e.TileInfo.Index, feature);
             }
             catch (Exception ex)
             {

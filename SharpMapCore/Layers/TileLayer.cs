@@ -22,6 +22,9 @@ using SharpMap.Geometries;
 using System.IO;
 using System.Collections.Generic;
 using SharpMap.Providers;
+using SharpMap.Styles;
+using System;
+using System.Linq;
 
 namespace SharpMap.Layers
 {
@@ -49,6 +52,7 @@ namespace SharpMap.Layers
             MaxVisible = double.MaxValue;
             LayerName = "Layer";
             Opacity = 0.5;
+            Styles.Add(new VectorStyle()); //TODO: Create a style which could be a default for all layers
 
             tileSource = source;
             tileFetcher = new TileFetcher(source, memoryCache);
@@ -129,17 +133,42 @@ namespace SharpMap.Layers
 
         public override IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
         {
-            var tilesInView = Schema.GetTilesInView(box.ToExtent(), BruTile.Utilities.GetNearestLevel(Schema.Resolutions, resolution));
-            var result = new Features();
-            foreach (var info in tilesInView)
+            var dictionary = new Dictionary<TileIndex, IFeature>();
+            GetRecursive(dictionary, Schema, memoryCache, box.ToExtent(), BruTile.Utilities.GetNearestLevel(Schema.Resolutions, resolution));
+            var sortedDictionary = (from entry in dictionary orderby entry.Key ascending select entry).ToDictionary(pair => pair.Key, pair => pair.Value);
+            return sortedDictionary.Values;
+        }
+
+        private void GetRecursive(IDictionary<TileIndex, IFeature> resultTiles, ITileSchema schema, MemoryCache<Feature> memoryCache, Extent extent, int level)
+        {
+            if (level < 0) return;
+
+            var tiles = schema.GetTilesInView(extent, level);
+            
+            foreach (TileInfo tileInfo in tiles)
             {
-                var tile = memoryCache.Find(info.Index);
-                var feature = result.New();
-                var boundingBox = new BoundingBox(info.Extent.MinX, info.Extent.MinY, info.Extent.MaxX, info.Extent.MaxY);
-                feature.Geometry = new Raster(BruTile.Utilities.ReadFully(((Tile)tile.Geometry).Data), boundingBox);
-                if (tile != null) result.Add(feature);
+                var feature = memoryCache.Find(tileInfo.Index);
+                if (feature == null)
+                {
+                    GetRecursive(resultTiles, schema, memoryCache, tileInfo.Extent.Intersect(extent), level - 1);
+                }
+                else
+                {
+                    resultTiles[tileInfo.Index] = feature;
+                    if (!IsFullyShown(feature))
+                    {
+                        GetRecursive(resultTiles, schema, memoryCache, tileInfo.Extent.Intersect(extent), level - 1);
+                    }
+                }
             }
-            return result;
+        }
+
+        private bool IsFullyShown(Feature feature)
+        {
+            var currentTile = DateTime.Now.Ticks;
+            var tile = ((IRaster)feature.Geometry);
+            long second = 10000000;
+            return ((currentTile - tile.TickFetched) > second);
         }
     }
 }

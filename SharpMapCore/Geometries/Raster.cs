@@ -1,21 +1,19 @@
 ﻿using System;
+using System.IO;
 
 namespace SharpMap.Geometries
 {
     public class Raster : IRaster
     {
         BoundingBox _boundingBox;
+        public MemoryStream Data { get; private set; }
+        public long TickFetched { get; private set; }
 
-        public byte[] Data
-        {
-            get;
-            private set;
-        }
-
-        public Raster(byte[] data, BoundingBox boundingBox)
+        public Raster(MemoryStream data, BoundingBox box)
         {
             Data = data;
-            _boundingBox = boundingBox;
+            _boundingBox = box;
+            TickFetched = DateTime.Now.Ticks;
         }
 
         public BoundingBox GetBoundingBox()

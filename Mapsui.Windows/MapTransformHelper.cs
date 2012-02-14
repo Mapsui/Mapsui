@@ -32,13 +32,6 @@ namespace Mapsui.Windows
             view.Center = new SharpMap.Geometries.Point(view.CenterX + diffX, view.CenterY + diffY);
         }
 
-        public static Rect WorldToMap(Extent extent, IView view)
-        {
-            SharpMap.Geometries.Point min = view.WorldToView(extent.MinX, extent.MinY);
-            SharpMap.Geometries.Point max = view.WorldToView(extent.MaxX, extent.MaxY);
-            return new Rect(min.X, max.Y, max.X - min.X, min.Y - max.Y);
-        }
-
         public static SharpMap.Geometries.BoundingBox MapToWorld(SharpMap.Geometries.BoundingBox box, IView view)
         {
             SharpMap.Geometries.Point lowerLeft = view.ViewToWorld(box.BottomLeft);

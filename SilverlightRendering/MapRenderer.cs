@@ -1,7 +1,10 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using SharpMap;
 using SharpMap.Geometries;
@@ -13,39 +16,39 @@ namespace SilverlightRendering
 {
     public class MapRenderer : IRenderer
     {
-        private readonly Canvas tileCanvas = new Canvas();
-        private readonly TileRenderer tileRenderer = new TileRenderer();
-
-        public Canvas Canvas { get; private set; }
+        private Canvas target;
 
         public MapRenderer()
         {
-            Canvas = new Canvas();
+            this.target = new Canvas();
         }
-        
+
+        public MapRenderer(Canvas target)
+        {
+            this.target = target;
+        }
+
         public void Render(IView view, Map map)
         {
-            // The general approach to rendering witing the SilverlightRedering dll 
-            // is to create a new canvas on every render iteration. 
-            // This is very inefficient and should be rewritten one day.
-            // For tileLayer we now use a workaround bu keeping the tiles
-            // in a separate tileLayer canvas. 
-            Canvas.Children.Clear();
-            Canvas = new Canvas();
-            Canvas.Children.Add(tileCanvas);
+            foreach (var child in target.Children)
+            {
+                if (child is Canvas) (child as Canvas).Children.Clear();
+            }
+            target.Children.Clear();
+                        
             foreach (var layer in map.Layers)
             {
                 if (layer.Enabled &&
                     layer.MinVisible <= view.Resolution &&
                     layer.MaxVisible >= view.Resolution)
                 {
-                    RenderLayer(view, layer);
+                    RenderLayer(target, view, layer);
                 }
             }
-            Canvas.Arrange(new System.Windows.Rect(0, 0, view.Width, view.Height));
+            target.Arrange(new System.Windows.Rect(0, 0, view.Width, view.Height));
         }
-        
-        private void RenderLayer(IView view, ILayer layer)
+
+        private static void RenderLayer(Canvas target, IView view, ILayer layer)
         {
             if (layer.Enabled == false) return;
 
@@ -55,21 +58,16 @@ namespace SilverlightRendering
                 var labelLayer = layer as LabelLayer;
                 if (labelLayer.UseLabelStacking)
                 {
-                    Canvas.Children.Add(LabelRenderer.RenderStackedLabelLayer(view, labelLayer));
+                    target.Children.Add(LabelRenderer.RenderStackedLabelLayer(view, labelLayer));
                 }
                 else
                 {
-                    Canvas.Children.Add(LabelRenderer.RenderLabelLayer(view, labelLayer));
+                    target.Children.Add(LabelRenderer.RenderLabelLayer(view, labelLayer));
                 }
-            }
-            else if (layer is ITileLayer)
-            {
-                var tileLayer = (ITileLayer)layer;
-                tileRenderer.Render(tileCanvas, tileLayer.Schema, view, tileLayer.MemoryCache, layer.Opacity);
             }
             else
             {
-                Canvas.Children.Add(RenderVectorLayer(view, layer));
+                target.Children.Add(RenderVectorLayer(view, layer));
             }
         }
 
@@ -106,8 +104,8 @@ namespace SilverlightRendering
 
         private static void RenderGeometry(Canvas canvas, IView view, SharpMap.Styles.IStyle style, SharpMap.Providers.IFeature feature)
         {
-            if (feature.Geometry is Point)
-                canvas.Children.Add(GeometryRenderer.RenderPoint(feature.Geometry as Point, style, view));
+            if (feature.Geometry is SharpMap.Geometries.Point)
+                canvas.Children.Add(GeometryRenderer.RenderPoint(feature.Geometry as SharpMap.Geometries.Point, style, view));
             else if (feature.Geometry is MultiPoint)
                 canvas.Children.Add(GeometryRenderer.RenderMultiPoint(feature.Geometry as MultiPoint, style, view));
             else if (feature.Geometry is LineString)
@@ -119,30 +117,52 @@ namespace SilverlightRendering
             else if (feature.Geometry is MultiPolygon)
                 canvas.Children.Add(GeometryRenderer.RenderMultiPolygon(feature.Geometry as MultiPolygon, style, view));
             else if (feature.Geometry is IRaster)
-                canvas.Children.Add(GeometryRenderer.RenderRaster(feature.Geometry as IRaster, style, view));
+            {
+                var renderedGeometry = feature.RenderedGeometry as System.Windows.UIElement;
+                if (renderedGeometry == null) // create
+                {
+                    renderedGeometry = GeometryRenderer.RenderRaster(feature.Geometry as IRaster, style, view);
+                    Animate(renderedGeometry, "Opacity", 0, 1, 600, (s, e) => { });
+                    feature.RenderedGeometry = renderedGeometry;
+                }
+                else // position
+                {
+                    GeometryRenderer.PositionRaster(renderedGeometry, feature.Geometry.GetBoundingBox(), view);
+                }
+                canvas.Children.Add(renderedGeometry);
+            }
+        }
+
+        public static void Animate(DependencyObject target, string property, double from, double to, int duration, EventHandler completed)
+        {
+            var animation = new DoubleAnimation();
+            animation.From = from;
+            animation.To = to;
+            animation.Duration = new TimeSpan(0, 0, 0, 0, duration);
+            Storyboard.SetTarget(animation, target);
+            Storyboard.SetTargetProperty(animation, new PropertyPath(property));
+
+            var storyBoard = new Storyboard();
+            storyBoard.Children.Add(animation);
+            storyBoard.Completed += completed;
+            storyBoard.Begin();
         }
 
         public Stream ToBitmapStream(double width, double height)
-        {            
-            Canvas.Arrange(new System.Windows.Rect(0, 0, width, height));
-
-            #if !SILVERLIGHT
-        
+        {
+            target.Arrange(new System.Windows.Rect(0, 0, width, height));
+#if !SILVERLIGHT
             var renderTargetBitmap = new RenderTargetBitmap((int)width, (int)height, 96, 96, new PixelFormat());
-            renderTargetBitmap.Render(Canvas);
+            renderTargetBitmap.Render(target);
             var bitmap = new PngBitmapEncoder();
             bitmap.Frames.Add(BitmapFrame.Create(renderTargetBitmap));
             var bitmapStream = new MemoryStream();
             bitmap.Save(bitmapStream);
-            
-            #else
-
+#else
             var writeableBitmap = new WriteableBitmap((int)width, (int)height);
             writeableBitmap.Render(Canvas, null);
             var bitmapStream = Utilities.ConverToBitmapStream(writeableBitmap);
-
-            #endif
-            
+#endif
             return bitmapStream;
         }
     }

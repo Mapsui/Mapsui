@@ -472,6 +472,8 @@ namespace SharpMap.Data
         /// </summary>
         public IGeometry Geometry { get; set; }
 
+        public object RenderedGeometry { get; set; }
+
         public IStyle Style { get; set; }
 
         /// <summary>

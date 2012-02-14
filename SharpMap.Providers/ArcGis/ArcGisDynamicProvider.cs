@@ -5,6 +5,7 @@ using System.Net;
 using SharpMap.Geometries;
 using System.Diagnostics;
 using System.Globalization;
+using System.IO;
 
 namespace SharpMap.Providers.ArcGis
 {
@@ -124,7 +125,7 @@ namespace SharpMap.Providers.ArcGis
                 if (myWebResponse.ContentType.StartsWith("image"))
                 {
                     var bytes = BruTile.Utilities.ReadFully(myWebResponse.GetResponseStream());
-                    raster = new Raster(bytes, view.Extent);
+                    raster = new Raster(new MemoryStream(bytes), view.Extent);
                 }
                 if (dataStream != null) dataStream.Close();
 

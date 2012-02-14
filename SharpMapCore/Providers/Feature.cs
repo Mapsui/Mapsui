@@ -15,6 +15,8 @@ namespace SharpMap.Providers
 
         public IGeometry Geometry { get; set; }
 
+        public object RenderedGeometry { get; set; }
+
         public IStyle Style { get; set; }
 
         public virtual object this[string key]

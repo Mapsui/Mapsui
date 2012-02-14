@@ -40,7 +40,7 @@ namespace SharpMap.Layers
                 if (!tileLayer.Enabled) continue;
                
                 var tile = tileLayer.MemoryCache.Find(e.TileInfo.Index);
-                if (tile != null) tiles.Add(((Tile)tile.Geometry).Data);
+                if (tile != null) tiles.Add(((IRaster)tile.Geometry).Data);
             }
 
 #if SILVERLIGHT
@@ -48,7 +48,7 @@ namespace SharpMap.Layers
                 {
 #endif
                      var bitmap = CombineBitmaps(tiles, Schema.Width, Schema.Height);
-                     if (bitmap != null) MemoryCache.Add(e.TileInfo.Index, new Feature { Geometry = new Tile { Data = bitmap } });
+                     if (bitmap != null) MemoryCache.Add(e.TileInfo.Index, new Feature { Geometry = new Raster(bitmap, e.TileInfo.Extent.ToBoundingBox()) });
                      if (DataChanged != null) DataChanged(sender, e);
 #if SILVERLIGHT
                 });

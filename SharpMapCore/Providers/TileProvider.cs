@@ -21,6 +21,7 @@ using System.Threading;
 using BruTile;
 using BruTile.Cache;
 using SharpMap.Geometries;
+using System.IO;
 
 namespace SharpMap.Providers
 {
@@ -77,7 +78,7 @@ namespace SharpMap.Providers
             {
                 byte[] bitmap = bitmaps.Find(info.Index);
                 if (bitmap == null) continue;
-                IRaster raster = new Raster(bitmap, new BoundingBox(info.Extent.MinX, info.Extent.MinY, info.Extent.MaxX, info.Extent.MaxY));
+                IRaster raster = new Raster(new MemoryStream(bitmap), new BoundingBox(info.Extent.MinX, info.Extent.MinY, info.Extent.MaxX, info.Extent.MaxY));
                 IFeature feature = features.New();
                 feature.Geometry = raster;
                 features.Add(feature);

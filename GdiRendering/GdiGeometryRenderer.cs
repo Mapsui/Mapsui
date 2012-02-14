@@ -229,7 +229,7 @@ namespace GdiRendering
         {
             var imageAttributes = new ImageAttributes();
 
-            var bitmap = new Bitmap((new MemoryStream(raster.Data)));
+            var bitmap = new Bitmap(raster.Data);
 
             Point min = transform.WorldToView(new Point(raster.GetBoundingBox().MinX, raster.GetBoundingBox().MinY));
             Point max = transform.WorldToView(new Point(raster.GetBoundingBox().MaxX, raster.GetBoundingBox().MaxY));

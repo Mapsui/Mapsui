@@ -1,8 +1,10 @@
-﻿namespace SharpMap.Geometries
+﻿using System.IO;
+namespace SharpMap.Geometries
 {
     public interface IRaster : IGeometry
     {
-        byte[] Data { get; }
+        MemoryStream Data { get; }
         new BoundingBox GetBoundingBox();
+        long TickFetched { get; }
     }
 }

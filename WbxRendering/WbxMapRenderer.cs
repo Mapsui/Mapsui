@@ -11,13 +11,27 @@ using SharpMap;
 using SharpMap.Geometries;
 using SharpMap.Layers;
 using SharpMap.Providers;
+using SharpMap.Rendering;
+using System.Windows.Controls;
 
 namespace WbxRendering
 {
-    public static class WbxMapRenderer 
+    public class WbxMapRenderer : IRenderer
     {
-        public static void Render(WriteableBitmap targetBitmap, IView view, Map map)
+        WriteableBitmap targetBitmap;
+
+        public WbxMapRenderer(Canvas target)
+        { 
+            //!!! targetBitmap = BitmapFactory.New((int) ActualWidth, (int) ActualHeight);
+            var image = new Image();
+            image.Source = targetBitmap;
+            target.Children.Add(image);
+        }
+
+        public void Render(IView view, Map map)
         {
+            targetBitmap.Clear(Colors.White);
+
             foreach (var layer in map.Layers)
             {
                 if (layer.Enabled &&
@@ -67,9 +81,21 @@ namespace WbxRendering
                 }
                 else
                 {
-                    var image = ((Tile)feature.Geometry).Data;
-                    Rect dest = WorldToMap(tile.Extent, view);
-                    DrawImage(targetBitmap, image, dest, tile, memoryCache, opacity);
+                    var renderedGeometry = feature.RenderedGeometry as WriteableBitmap;
+                    if (renderedGeometry == null) // create
+                    {
+                        var image = ((IRaster)feature.Geometry).Data;
+                        var bitmap = LoadBitmap(image);
+                        Rect dest = WorldToMap(tile.Extent, view);
+                        DrawImage(targetBitmap, bitmap, dest, tile, memoryCache, opacity);
+                        feature.RenderedGeometry = bitmap;
+                    }
+                    else // position
+                    {
+                        var bitmap = (WriteableBitmap)feature.RenderedGeometry;
+                        Rect dest = WorldToMap(tile.Extent, view);
+                        DrawImage(targetBitmap, bitmap, dest, tile, memoryCache, opacity);
+                    }
                 }
             }
         }
@@ -81,14 +107,12 @@ namespace WbxRendering
             return new Rect(min.X, max.Y, max.X - min.X, min.Y - max.Y);
         }
 
-        private static void DrawImage(WriteableBitmap targetBitmap, MemoryStream memoryStream, Rect dest, TileInfo tile, MemoryCache<Feature> memoryCache, double opacity)
+        private static void DrawImage(WriteableBitmap targetBitmap, WriteableBitmap bitmap, Rect dest, TileInfo tile, MemoryCache<Feature> memoryCache, double opacity)
         {
             try
             {
                 //todo: look at GDI rendering to deal with clipping
-                
-                var bitmap = LoadBitmap(memoryStream);
-                var destRounded = RoundToPixel(dest);
+                                var destRounded = RoundToPixel(dest);
                 var sourceRect = new Rect(0, 0, 256, 256);
 
                 opacity = 1; // hack, opacity not supported 

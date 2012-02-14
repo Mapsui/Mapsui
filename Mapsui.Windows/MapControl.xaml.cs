@@ -24,13 +24,14 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
-using BruTile.Web;
 using SharpMap;
 using SharpMap.Fetcher;
 using SharpMap.Layers;
 using SharpMap.Providers;
 using SharpMap.Utilities;
 using SilverlightRendering;
+using WbxRendering;
+using SharpMap.Rendering;
 
 namespace Mapsui.Windows
 {
@@ -48,14 +49,12 @@ namespace Mapsui.Windows
         private readonly Storyboard zoomStoryBoard = new Storyboard();
         private double toResolution;
         private bool mouseDown;
-        private MapRenderer renderer;
+        private IRenderer renderer;
         private bool IsInBoxZoomMode { get; set; }
         private bool viewInitialized;
-        private Canvas renderCanvas;
+        private Canvas renderCanvas = new Canvas();
         private bool invalid;
-        private WriteableBitmap bitmap;
-        private const bool wbxRendering = false;
-
+        
         #endregion
 
         #region EventHandlers
@@ -84,7 +83,6 @@ namespace Mapsui.Windows
             }
             set
             {
-                renderer = new MapRenderer(); //todo reset instead of new.
                 if (map != null)
                 {
                     var temp = map;
@@ -148,7 +146,9 @@ namespace Mapsui.Windows
             MouseWheel += MapControlMouseWheel;
             SizeChanged += MapControl_SizeChanged;
             CompositionTarget.Rendering += CompositionTarget_Rendering;
-            renderer = new MapRenderer();
+            canvas.Children.Add(renderCanvas);
+            //renderer = new MapRenderer(renderCanvas);
+            renderer = new WbxMapRenderer(renderCanvas);
 
 #if !SILVERLIGHT
             Dispatcher.ShutdownStarted += Dispatcher_ShutdownStarted;
@@ -377,11 +377,11 @@ namespace Mapsui.Windows
                     errorMessage = "Cancelled";
                     OnErrorMessageChanged(EventArgs.Empty);
                 }
-                else if (e.Error is WebResponseFormatException)
-                {
-                    errorMessage = "UnexpectedTileFormat: " + e.Error.Message;
-                    OnErrorMessageChanged(EventArgs.Empty);
-                }
+                //else if (e.Error is WebResponseFormatException)
+                //{
+                //    errorMessage = "UnexpectedTileFormat: " + e.Error.Message;
+                //    OnErrorMessageChanged(EventArgs.Empty);
+                //}
                 else if (e.Error is System.Net.WebException)
                 {
                     errorMessage = "WebException: " + e.Error.Message;
@@ -527,25 +527,7 @@ namespace Mapsui.Windows
 
             if ((renderer != null) && (map != null))
             {
-                if (wbxRendering)
-                {
-                    if (bitmap == null)
-                    {
-                        bitmap = BitmapFactory.New((int) ActualWidth, (int) ActualHeight);
-                        var image = new Image();
-                        image.Source = bitmap;
-                        canvas.Children.Add(image);
-                    }
-                    bitmap.Clear(Colors.White);
-                    WbxRendering.WbxMapRenderer.Render(bitmap, view, map);
-                }
-                else
-                {
-                    renderer.Render(view, map);
-                    if (renderCanvas != null) canvas.Children.Remove(renderCanvas);
-                    renderCanvas = renderer.Canvas;
-                    canvas.Children.Add(renderCanvas);
-                }
+                renderer.Render(view, map);
                 invalid = false;
             }
         }
@@ -644,7 +626,6 @@ namespace Mapsui.Windows
             view.Resolution = Width / Map.GetExtents().Width;
             view.Center = Map.GetExtents().GetCentroid();
         }
-
 
         #region WPF4 Touch Support
 

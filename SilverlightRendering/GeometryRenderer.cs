@@ -399,14 +399,15 @@ namespace SilverlightRendering
             return group;
         }
 
-        public static Path RenderRaster(IRaster raster, IStyle style, IView view)
+        public static Path RenderRaster(IRaster raster, IStyle style, IView view) 
         {
-            Path path = CreateRasterPath(style, raster);
+            Path path = CreateRasterPath(style, raster.Data);
             path.Data = ConvertRaster(raster.GetBoundingBox(), view);
+
             return path;
         }
 
-        private static Path CreateRasterPath(IStyle style, IRaster raster)
+        private static Path CreateRasterPath(IStyle style, MemoryStream stream)
         {
             //todo: use this:
             //style.Symbol.Convert();
@@ -416,8 +417,9 @@ namespace SilverlightRendering
 
             var bitmapImage = new BitmapImage();
 #if !SILVERLIGHT
+            stream.Position = 0;
             bitmapImage.BeginInit();
-            bitmapImage.StreamSource = new MemoryStream(raster.Data);
+            bitmapImage.StreamSource = stream;
             bitmapImage.EndInit();
 #else
             bitmapImage.SetSource(new System.IO.MemoryStream(raster.Data));
@@ -462,6 +464,15 @@ namespace SilverlightRendering
             //caching still needs more work
             if (StyleCache.Count > 100) return;
             StyleCache[style] = path;
+        }
+
+        public static void PositionRaster(UIElement renderedGeometry, BoundingBox boundingBox, IView view)
+        {
+            ((RectangleGeometry)((System.Windows.Shapes.Path)renderedGeometry).Data).Rect =
+                                     RoundToPixel(new Rect(
+                                        ConvertPoint(view.WorldToView(boundingBox.Min)),
+                                        ConvertPoint(view.WorldToView(boundingBox.Max))));
+
         }
     }
 }

@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using BruTile;
 
 namespace SharpMap.Geometries
 {
     public class Tile : IGeometry
     {
         public MemoryStream Data { get; set; }
+        public TileInfo TileInfo { get; set; }
+        public long TickFetched { get; set; }
 
         public int Dimension
         {

@@ -52,7 +52,7 @@ namespace GdiRendering
                 }
                 else
                 {
-                    var image = ((Tile)feature.Geometry).Data;
+                    var image = ((IRaster)feature.Geometry).Data;
                     RectangleF dest = WorldToMap(info.Extent, transform);
                     dest = RoundToPixel(dest);
                     RectangleF clip = WorldToMap(extent, transform);

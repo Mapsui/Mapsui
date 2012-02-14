@@ -387,7 +387,7 @@ namespace SharpMap.Layers
                     if (!webResponse.ContentType.StartsWith("image")) return false;
 
                     byte[] bytes = BruTile.Utilities.ReadFully(dataStream);
-                    raster = new Raster(bytes, view.Extent);
+                    raster = new Raster(new MemoryStream(bytes), view.Extent);
                 }
                 return true;
             }
