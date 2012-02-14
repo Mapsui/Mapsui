@@ -202,10 +202,6 @@
       <Project>{65A23C7B-E21D-40D7-A8AF-2E72A01E9A5B}</Project>
       <Name>SharpMap</Name>
     </ProjectReference>
-    <ProjectReference Include="..\WbxRendering\WbxRendering.csproj">
-      <Project>{585D8355-0D05-4738-B8AF-AA4B5DFC40A0}</Project>
-      <Name>WbxRendering</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

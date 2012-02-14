@@ -19,17 +19,35 @@ namespace WbxRendering
     public class WbxMapRenderer : IRenderer
     {
         WriteableBitmap targetBitmap;
+        Canvas target;
 
         public WbxMapRenderer(Canvas target)
         {
-            targetBitmap = BitmapFactory.New((int)target.ActualWidth, (int)target.ActualHeight);
+            this.target = target;
+            if (target.ActualWidth == 0 || target.ActualHeight == 0) return;
+            target.Children.Add(InitializeBitmap((int)target.ActualWidth, (int)target.ActualHeight));
+        }
+
+        private Image InitializeBitmap(int width, int height)
+        {
+            targetBitmap = BitmapFactory.New(width, height);
             var image = new Image();
             image.Source = targetBitmap;
-            target.Children.Add(image);
+            return image;
         }
 
         public void Render(IView view, Map map)
         {
+            if (target.ActualWidth == 0 || target.ActualHeight == 0) return;
+
+            if (targetBitmap == null ||
+                targetBitmap.PixelWidth != (int)target.ActualWidth ||
+                targetBitmap.PixelHeight != (int)target.ActualHeight)
+            {
+                target.Children.Clear();
+                target.Children.Add(InitializeBitmap((int)target.ActualWidth, (int)target.ActualHeight));
+            }
+
             targetBitmap.Clear(Colors.White);
 
             foreach (var layer in map.Layers)

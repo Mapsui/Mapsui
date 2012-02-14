@@ -30,7 +30,6 @@ using SharpMap.Layers;
 using SharpMap.Providers;
 using SharpMap.Utilities;
 using SilverlightRendering;
-using WbxRendering;
 using SharpMap.Rendering;
 
 namespace Mapsui.Windows
@@ -148,7 +147,6 @@ namespace Mapsui.Windows
             CompositionTarget.Rendering += CompositionTarget_Rendering;
             canvas.Children.Add(renderCanvas);
             renderer = new MapRenderer(renderCanvas);
-            //renderer = new WbxMapRenderer(renderCanvas);
 
 #if !SILVERLIGHT
             Dispatcher.ShutdownStarted += Dispatcher_ShutdownStarted;
