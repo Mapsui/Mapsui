@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using BruTile;
 using System.Net;
 using System.Runtime.Serialization.Json;
@@ -78,11 +79,29 @@ namespace SharpMap.Providers.ArcGis
             try
             {
                 var response = (HttpWebResponse)_webRequest.GetResponse();
-                var dataStream = response.GetResponseStream();
-
+                var dataStream = CopyAndClose(response.GetResponseStream());
+                
                 var serializer = new DataContractJsonSerializer(typeof(Capabilities));
-                if (dataStream != null) _capabilities = (Capabilities)serializer.ReadObject(dataStream);
+                if (dataStream != null)
+                {
+                    _capabilities = (Capabilities)serializer.ReadObject(dataStream);
+                    dataStream.Position = 0;
+                }
                 _capabilities.ServiceUrl = _url;
+
+                //Hack because ArcGIS Server doesn't return a normal StatusCode
+                if (dataStream != null)
+                {
+                    using (var reader = new StreamReader(dataStream))
+                    {
+                        var contentString = reader.ReadToEnd();
+                        if (contentString.Contains("{\"error\":{\""))
+                        {
+                            OnFailed(EventArgs.Empty);
+                            return;
+                        }
+                    }
+                }
 
                 if (dataStream != null) dataStream.Close();
                 response.Close();
@@ -94,6 +113,23 @@ namespace SharpMap.Providers.ArcGis
             {
                 OnFailed(EventArgs.Empty);
             }
+        }
+
+        private static Stream CopyAndClose(Stream inputStream)
+        {
+            const int readSize = 256;
+            var buffer = new byte[readSize];
+            var ms = new MemoryStream();
+
+            var count = inputStream.Read(buffer, 0, readSize);
+            while (count > 0)
+            {
+                ms.Write(buffer, 0, count);
+                count = inputStream.Read(buffer, 0, readSize);
+            }
+            ms.Position = 0;
+            inputStream.Close();
+            return ms;
         }
 
         protected virtual void OnFinished(EventArgs e)
