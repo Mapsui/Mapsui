@@ -48,10 +48,10 @@ namespace Mapsui.Windows
         private readonly Storyboard zoomStoryBoard = new Storyboard();
         private double toResolution;
         private bool mouseDown;
-        private IRenderer renderer;
         private bool IsInBoxZoomMode { get; set; }
         private bool viewInitialized;
         private Canvas renderCanvas = new Canvas();
+        private IRenderer renderer;
         private bool invalid;
         
         #endregion
@@ -74,6 +74,7 @@ namespace Mapsui.Windows
         public bool ZoomToBoxMode { get; set; }
         public View View { get { return view; } }
 
+        
         public Map Map
         {
             get
@@ -147,7 +148,6 @@ namespace Mapsui.Windows
             CompositionTarget.Rendering += CompositionTarget_Rendering;
             canvas.Children.Add(renderCanvas);
             renderer = new MapRenderer(renderCanvas);
-
 #if !SILVERLIGHT
             Dispatcher.ShutdownStarted += Dispatcher_ShutdownStarted;
             canvas.IsManipulationEnabled = true;
@@ -325,7 +325,6 @@ namespace Mapsui.Windows
             zoomAnimation.To = end;
             zoomAnimation.Completed += zoomAnimationCompleted;
             zoomStoryBoard.Begin();
-
         }
 
         void zoomAnimationCompleted(object sender, EventArgs e)
@@ -375,11 +374,6 @@ namespace Mapsui.Windows
                     errorMessage = "Cancelled";
                     OnErrorMessageChanged(EventArgs.Empty);
                 }
-                //else if (e.Error is WebResponseFormatException)
-                //{
-                //    errorMessage = "UnexpectedTileFormat: " + e.Error.Message;
-                //    OnErrorMessageChanged(EventArgs.Empty);
-                //}
                 else if (e.Error is System.Net.WebException)
                 {
                     errorMessage = "WebException: " + e.Error.Message;
@@ -500,13 +494,16 @@ namespace Mapsui.Windows
 
         private void InitializeView()
         {
-            if (double.IsNaN(ActualWidth) || ActualWidth == 0) return;
-            if (map == null || map.GetExtents() == null || double.IsNaN(map.GetExtents().Width) || map.GetExtents().Width == 0) return;
+            if (ActualWidth.IsNanOrZero()) return;
+            if (map == null) return;
+            if (map.GetExtents() == null) return;
+            if (map.GetExtents().Width.IsNanOrZero()) return;
+            if (map.GetExtents().Height.IsNanOrZero()) return;
             if (map.GetExtents().GetCentroid() == null) return;
 
             if ((view.CenterX > 0) && (view.CenterY > 0) && (view.Resolution > 0))
             {
-                viewInitialized = true; //view was already initialized by external code
+                viewInitialized = true; //view was already initialized
                 return;
             }
 
@@ -518,14 +515,13 @@ namespace Mapsui.Windows
         private void CompositionTarget_Rendering(object sender, EventArgs e)
         {
             if (!viewInitialized) InitializeView();
-            if (!viewInitialized) return; //initialize if the line above failed. 
+            if (!viewInitialized) return; //stop if the line above failed. 
             if (!invalid) return;
-
-            fpsCounter.FramePlusOne();
-
+                        
             if ((renderer != null) && (map != null))
             {
                 renderer.Render(view, map);
+                fpsCounter.FramePlusOne();
                 invalid = false;
             }
         }

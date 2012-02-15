@@ -75,12 +75,9 @@
     <Reference Include="WindowsBase">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
-    <Reference Include="WriteableBitmapEx.Wpf, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\libs\WriteableBitmapEx.Wpf.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions.cs" />
     <Compile Include="FpsCounter.cs" />
     <Compile Include="MapControl.xaml.cs">
       <DependentUpon>MapControl.xaml</DependentUpon>
@@ -104,10 +101,6 @@
     <ProjectReference Include="..\SilverlightRendering\SilverlightRendering.csproj">
       <Project>{612450F3-5EF0-4648-9542-2B3578583243}</Project>
       <Name>SilverlightRendering</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\WbxRendering\WbxRendering.csproj">
-      <Project>{585D8355-0D05-4738-B8AF-AA4B5DFC40A0}</Project>
-      <Name>WbxRendering</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

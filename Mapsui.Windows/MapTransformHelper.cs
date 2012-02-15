@@ -31,12 +31,5 @@ namespace Mapsui.Windows
             double diffY = previous.Y - current.Y;
             view.Center = new SharpMap.Geometries.Point(view.CenterX + diffX, view.CenterY + diffY);
         }
-
-        public static SharpMap.Geometries.BoundingBox MapToWorld(SharpMap.Geometries.BoundingBox box, IView view)
-        {
-            SharpMap.Geometries.Point lowerLeft = view.ViewToWorld(box.BottomLeft);
-            SharpMap.Geometries.Point upperRight = view.ViewToWorld(box.TopRight);
-            return new SharpMap.Geometries.BoundingBox(lowerLeft, upperRight);
-        }
     }
 }

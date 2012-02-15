@@ -24,6 +24,7 @@ namespace WbxRendering
         public WbxMapRenderer(Canvas target)
         {
             this.target = target;
+
             if (target.ActualWidth == 0 || target.ActualHeight == 0) return;
             target.Children.Add(InitializeBitmap((int)target.ActualWidth, (int)target.ActualHeight));
         }
@@ -38,12 +39,12 @@ namespace WbxRendering
 
         public void Render(IView view, Map map)
         {
-            if (target.ActualWidth == 0 || target.ActualHeight == 0) return;
-
             if (targetBitmap == null ||
                 targetBitmap.PixelWidth != (int)target.ActualWidth ||
                 targetBitmap.PixelHeight != (int)target.ActualHeight)
             {
+                target.Arrange(new System.Windows.Rect(0, 0, view.Width, view.Height));
+                if (target.ActualWidth == 0 || target.ActualHeight == 0) return; 
                 target.Children.Clear();
                 target.Children.Add(InitializeBitmap((int)target.ActualWidth, (int)target.ActualHeight));
             }
@@ -59,6 +60,8 @@ namespace WbxRendering
                     RenderLayer(targetBitmap, view, layer);
                 }
             }
+
+            target.Arrange(new System.Windows.Rect(0, 0, view.Width, view.Height));
         }
 
         private static void RenderLayer(WriteableBitmap targetBitmap, IView view, ILayer layer)
