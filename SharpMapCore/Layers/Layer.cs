@@ -130,8 +130,8 @@ namespace SharpMap.Layers
 
         public void ViewChanged(bool changeEnd, BoundingBox extent, double resolution)
         {
+            if (!Enabled) return;
             if (DataSource == null) return;
-
             if (!changeEnd) return;
             
             this.extent = extent;
