@@ -31,6 +31,12 @@ namespace SharpMap.Layers
         event FeedbackEventHandler Feedback;
 
         int Id { get; }
+
+        /// <summary>
+        /// Gets or sets an arbitrary object value that can be used to store custom information about this element
+        /// </summary>
+        object Tag { get; set; }
+
         /// <summary>
         /// Minimum visible zoom level
         /// </summary>
