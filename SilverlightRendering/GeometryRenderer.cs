@@ -422,7 +422,7 @@ namespace SilverlightRendering
             bitmapImage.StreamSource = stream;
             bitmapImage.EndInit();
 #else
-            bitmapImage.SetSource(new System.IO.MemoryStream(raster.Data));
+            bitmapImage.SetSource(stream);
 #endif
             var path = new Path();
             path.Fill = new ImageBrush { ImageSource = bitmapImage };

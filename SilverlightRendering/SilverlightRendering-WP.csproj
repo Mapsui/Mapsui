@@ -41,10 +41,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BruTile, Version=0.5.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\libs\SL\BruTile.dll</HintPath>
-    </Reference>
     <Reference Include="System.Windows" />
     <Reference Include="system" />
     <Reference Include="System.Core" />
@@ -59,7 +55,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SilverlightStyle.cs" />
     <Compile Include="SphericalMercator.cs" />
-    <Compile Include="TileRenderer.cs" />
     <Compile Include="Utilities.cs" />
   </ItemGroup>
   <ItemGroup>

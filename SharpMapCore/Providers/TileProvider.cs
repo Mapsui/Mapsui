@@ -55,7 +55,7 @@ namespace SharpMap.Providers
         {
             var extent = new Extent(boundingBox.Min.X, boundingBox.Min.Y, boundingBox.Max.X, boundingBox.Max.Y);
             int level = BruTile.Utilities.GetNearestLevel(source.Schema.Resolutions, resolution);
-            IList<TileInfo> tiles = source.Schema.GetTilesInView(extent, level);
+            var tiles = source.Schema.GetTilesInView(extent, level);
 
             ICollection<WaitHandle> waitHandles = new List<WaitHandle>();
                         

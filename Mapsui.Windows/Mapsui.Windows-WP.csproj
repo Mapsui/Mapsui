@@ -41,10 +41,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BruTile, Version=0.5.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\libs\SL\BruTile.dll</HintPath>
-    </Reference>
     <Reference Include="System.Windows" />
     <Reference Include="system" />
     <Reference Include="System.Core" />
@@ -52,6 +48,7 @@
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions.cs" />
     <Compile Include="FpsCounter.cs" />
     <Compile Include="MapControl.xaml.cs">
       <DependentUpon>MapControl.xaml</DependentUpon>

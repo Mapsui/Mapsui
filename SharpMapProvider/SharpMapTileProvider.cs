@@ -4,6 +4,7 @@ using BruTile.Cache;
 using SharpMap;
 using SharpMap.Geometries;
 using SilverlightRendering;
+using Utilities = BruTile.Utilities;
 
 namespace SharpMapProvider
 {

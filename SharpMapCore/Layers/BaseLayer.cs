@@ -57,11 +57,12 @@ namespace SharpMap.Layers
 
         protected BaseLayer()
         {
+            LayerName = "Layer";
             Styles = new List<IStyle>();
             Enabled = true;
             MinVisible = 0;
             MaxVisible = double.MaxValue;
-            Opacity = 0.5;
+            Opacity = 1;
             Id = instanceCounter++;
         }
 

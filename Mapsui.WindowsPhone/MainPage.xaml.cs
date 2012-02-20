@@ -20,7 +20,7 @@ namespace Mapsui.WindowsPhone
         public MainPage()
         {
             InitializeComponent();
-            this.map.Map.Layers.Add(new TileLayer(new OsmTileSource()));
+            map.Map.Layers.Add(new TileLayer(new OsmTileSource()));
             
             App.Current.Host.Content.Resized += Content_Resized;
         }

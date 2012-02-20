@@ -91,9 +91,9 @@ namespace WbxRendering
 
         private static void DrawRecursive(WriteableBitmap targetBitmap, ITileSchema schema, IView view, MemoryCache<Feature> memoryCache, Extent extent, int level, double opacity)
         {
-            IList<TileInfo> tiles = schema.GetTilesInView(extent, level);
+            var tileInfos = schema.GetTilesInView(extent, level);
 
-            foreach (TileInfo tile in tiles)
+            foreach (TileInfo tile in tileInfos)
             {
                 var feature = memoryCache.Find(tile.Index);
                 if (feature == null)

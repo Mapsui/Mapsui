@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoConfig", "DemoConfig\DemoConfig.csproj", "{4F8F6A4A-8381-40D8-8AC5-FCF3BA96A866}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpMapProvider", "SharpMapProvider\SharpMapProvider.csproj", "{55A31E36-4EA3-42EE-BCAC-2735AA082457}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Forms", "Mapsui.Forms\Mapsui.Forms.csproj", "{4E40E824-96B8-4F98-A0F8-2DBDF9D3DCE5}"
@@ -35,6 +33,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{96F20E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WbxRendering", "WbxRendering\WbxRendering.csproj", "{585D8355-0D05-4738-B8AF-AA4B5DFC40A0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoConfig", "DemoConfig\DemoConfig.csproj", "{8FB95293-E18B-4B99-9FEB-A24DD3FCBBC5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Addins debug|Any CPU = Addins debug|Any CPU
@@ -42,12 +42,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{4F8F6A4A-8381-40D8-8AC5-FCF3BA96A866}.Addins debug|Any CPU.ActiveCfg = Release|Any CPU
-		{4F8F6A4A-8381-40D8-8AC5-FCF3BA96A866}.Addins debug|Any CPU.Build.0 = Release|Any CPU
-		{4F8F6A4A-8381-40D8-8AC5-FCF3BA96A866}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4F8F6A4A-8381-40D8-8AC5-FCF3BA96A866}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4F8F6A4A-8381-40D8-8AC5-FCF3BA96A866}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4F8F6A4A-8381-40D8-8AC5-FCF3BA96A866}.Release|Any CPU.Build.0 = Release|Any CPU
 		{55A31E36-4EA3-42EE-BCAC-2735AA082457}.Addins debug|Any CPU.ActiveCfg = Release|Any CPU
 		{55A31E36-4EA3-42EE-BCAC-2735AA082457}.Addins debug|Any CPU.Build.0 = Release|Any CPU
 		{55A31E36-4EA3-42EE-BCAC-2735AA082457}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -126,6 +120,12 @@ Global
 		{585D8355-0D05-4738-B8AF-AA4B5DFC40A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{585D8355-0D05-4738-B8AF-AA4B5DFC40A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{585D8355-0D05-4738-B8AF-AA4B5DFC40A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FB95293-E18B-4B99-9FEB-A24DD3FCBBC5}.Addins debug|Any CPU.ActiveCfg = Release|Any CPU
+		{8FB95293-E18B-4B99-9FEB-A24DD3FCBBC5}.Addins debug|Any CPU.Build.0 = Release|Any CPU
+		{8FB95293-E18B-4B99-9FEB-A24DD3FCBBC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FB95293-E18B-4B99-9FEB-A24DD3FCBBC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FB95293-E18B-4B99-9FEB-A24DD3FCBBC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FB95293-E18B-4B99-9FEB-A24DD3FCBBC5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

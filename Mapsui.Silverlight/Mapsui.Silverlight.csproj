@@ -125,10 +125,6 @@
       <Project>{DC9F828B-9873-4C4C-949C-70358EE06AA4}</Project>
       <Name>Mapsui.Windows-SL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DemoConfig\DemoConfig-SL.csproj">
-      <Project>{8C3CFBF5-A0B3-496F-B287-2BBD988D2373}</Project>
-      <Name>DemoConfig-SL</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SharpMapCore\SharpMap-SL.csproj">
       <Project>{0DE2EA55-4454-4F6D-96B8-CB2549695353}</Project>
       <Name>SharpMap-SL</Name>

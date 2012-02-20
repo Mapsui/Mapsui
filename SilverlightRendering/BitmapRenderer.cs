@@ -8,6 +8,7 @@ using BruTile.Cache;
 using SharpMap;
 using SharpMap.Geometries;
 using SharpMap.Layers;
+using SharpMap.Providers;
 
 namespace SilverlightRendering
 {
@@ -37,10 +38,10 @@ namespace SilverlightRendering
             }
         }
 
-        private static void RenderTile(WriteableBitmap bitmap, ITileSchema schema, IView view, MemoryCache<MemoryStream> memoryCache)
+        private static void RenderTile(WriteableBitmap bitmap, ITileSchema schema, IView view, MemoryCache<Feature> memoryCache)
         {
             int level = BruTile.Utilities.GetNearestLevel(schema.Resolutions, view.Resolution);
-            IList<TileInfo> tiles = schema.GetTilesInView(view.Extent.ToExtent(), level);
+            var tiles = schema.GetTilesInView(view.Extent.ToExtent(), level);
 
             foreach (TileInfo tile in tiles)
             {
@@ -51,7 +52,7 @@ namespace SilverlightRendering
                     continue;
                 }
 
-                MemoryStream image = memoryCache.Find(tile.Index);
+                var image = memoryCache.Find(tile.Index);
 
                 if (image != null)
                 {
@@ -62,7 +63,7 @@ namespace SilverlightRendering
                     var path = new System.Windows.Shapes.Path();
                     path.Data = new RectangleGeometry() { Rect = dest };
                     var bitmapImage = new BitmapImage();
-                    bitmapImage.SetSource(image);
+                    bitmapImage.SetSource(((IRaster)image.Geometry).Data);
                     path.Fill = new ImageBrush() { ImageSource = bitmapImage };
                     path.CacheMode = new BitmapCache();
                     bitmap.Render(path, null);

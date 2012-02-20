@@ -186,13 +186,13 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DemoConfig\DemoConfig.csproj">
+      <Project>{8FB95293-E18B-4B99-9FEB-A24DD3FCBBC5}</Project>
+      <Name>DemoConfig</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Mapsui.Windows\Mapsui.Windows.csproj">
       <Project>{9142A5C9-38F9-42DF-8E9A-79E5A919151F}</Project>
       <Name>Mapsui.Windows</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DemoConfig\DemoConfig.csproj">
-      <Project>{4F8F6A4A-8381-40D8-8AC5-FCF3BA96A866}</Project>
-      <Name>DemoConfig</Name>
     </ProjectReference>
     <ProjectReference Include="..\SharpMap.Samples\SharpMap.Samples.csproj">
       <Project>{036B6E0A-C34C-4EE6-A359-C467D7E9D1EF}</Project>

@@ -47,13 +47,11 @@ namespace SharpMap.Layers
 
         public TileLayer(ITileSource source)
         {
-            Enabled = true; //default enabled
-            MinVisible = double.MinValue;
-            MaxVisible = double.MaxValue;
-            LayerName = "Layer";
-            Opacity = 0.5;
-            Styles.Add(new VectorStyle()); //TODO: Create a style which could be a default for all layers
-
+            // We need to add a style on the layer or else all features will
+            // be ignored altogher. Perhaps the style on the individual Features
+            // should be used instead. Perhaps the Feature.Style could contain 
+            // the tile data iso the Feature.Geometry
+            Styles.Add(new VectorStyle()); 
             tileSource = source;
             tileFetcher = new TileFetcher(source, memoryCache);
             tileFetcher.DataChanged += TileFetcherDataChanged;

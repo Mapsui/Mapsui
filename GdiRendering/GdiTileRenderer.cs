@@ -41,9 +41,9 @@ namespace GdiRendering
 
         private static void DrawRecursive(Graphics graphics, ITileSchema schema, IView transform, MemoryCache<Feature> cache, Extent extent, int level)
         {
-            IList<TileInfo> infos = schema.GetTilesInView(extent, level);
+            var tileInfos = schema.GetTilesInView(extent, level);
 
-            foreach (TileInfo info in infos)
+            foreach (TileInfo info in tileInfos)
             {
                 var feature = cache.Find(info.Index);
                 if (feature == null)

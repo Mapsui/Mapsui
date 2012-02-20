@@ -160,7 +160,7 @@ namespace SilverlightRendering
             bitmap.Save(bitmapStream);
 #else
             var writeableBitmap = new WriteableBitmap((int)width, (int)height);
-            writeableBitmap.Render(Canvas, null);
+            writeableBitmap.Render(target, null);
             var bitmapStream = Utilities.ConverToBitmapStream(writeableBitmap);
 #endif
             return bitmapStream;

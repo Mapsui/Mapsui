@@ -50,7 +50,7 @@ namespace SharpMap.Fetcher
             while (level >= 0)
             {
                 ////////if (!preFetchLayers.Contains(level)) continue;
-                IList<TileInfo> infosOfLevel = schema.GetTilesInView(extent, level);
+                var infosOfLevel = schema.GetTilesInView(extent, level);
                 infosOfLevel = PrioritizeTiles(infosOfLevel, extent.CenterX, extent.CenterY, sorter);
 
                 foreach (TileInfo info in infosOfLevel)
