@@ -24,9 +24,7 @@ namespace SharpMap.Providers.ArcGis
 
         public string[] GetSupportedImageFormatTypes()
         {
-            if (supportedImageFormatTypes == null) return null;
-
-            return supportedImageFormatTypes.Split(',');
+            return supportedImageFormatTypes == null ? null : supportedImageFormatTypes.Split(',');
         }
     }
 }

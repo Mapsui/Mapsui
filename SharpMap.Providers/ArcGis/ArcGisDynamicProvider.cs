@@ -14,7 +14,7 @@ namespace SharpMap.Providers.ArcGis
         private string _url { get; set; }
         private int _timeOut { get; set; }
         public Capabilities Capabilities { get; private set; }
-        public ICredentials Credentials { get; set; }
+        public ICredentials Credentials { get; set; }        
 
         /// <summary>
         /// Create ArcGisDynamicProvider based on a given capabilities file
@@ -43,13 +43,19 @@ namespace SharpMap.Providers.ArcGis
             };
 
             var capabilitiesHelper = new CapabilitiesHelper();
-            capabilitiesHelper.CapabilitiesReceived += capabilitiesHelper_CapabilitiesReceived;
+            capabilitiesHelper.CapabilitiesReceived += CapabilitiesHelperCapabilitiesReceived;
+            capabilitiesHelper.CapabilitiesFailed += CapabilitiesHelperCapabilitiesFailed;
             capabilitiesHelper.GetCapabilities(url);
 
             _timeOut = 10000;
         }
+
+        private void CapabilitiesHelperCapabilitiesFailed(object sender, EventArgs e)
+        {
+            Trace.Write("Error getting ArcGIS Capabilities");
+        }
         
-        private void capabilitiesHelper_CapabilitiesReceived(object sender, EventArgs e)
+        private void CapabilitiesHelperCapabilitiesReceived(object sender, EventArgs e)
         {
             var capabilities = sender as Capabilities;
             if (capabilities == null)
@@ -113,9 +119,6 @@ namespace SharpMap.Providers.ArcGis
                 request.Credentials = Credentials;
             else
                 request.Credentials = CredentialCache.DefaultCredentials;
-
-            //if (_Proxy != null)
-            //    request.Proxy = _Proxy;
 
             try
             {
@@ -189,15 +192,18 @@ namespace SharpMap.Providers.ArcGis
         private static string GetFormat(Capabilities capabilities)
         {
             //png | png8 | png24 | jpg | pdf | bmp | gif | svg | png32 (png32 only supported from 9.3.1 and up)
-            if(capabilities.supportedImageFormatTypes == null)//Not all services return supported types, use png
+            if (capabilities.supportedImageFormatTypes == null)//Not all services return supported types, use png
                 return "png";
-            if (capabilities.supportedImageFormatTypes.Contains("png32"))
+
+            var supportedTypes = capabilities.supportedImageFormatTypes.ToLower();
+
+            if (supportedTypes.Contains("png32"))
                 return "png32";
-            if (capabilities.supportedImageFormatTypes.Contains("png24"))
+            if (supportedTypes.Contains("png24"))
                 return "png24";
-            if (capabilities.supportedImageFormatTypes.Contains("png8"))
+            if (supportedTypes.Contains("png8"))
                 return "png8";
-            if (capabilities.supportedImageFormatTypes.Contains("png"))
+            if (supportedTypes.Contains("png"))
                 return "png";
 
             return "jpg";

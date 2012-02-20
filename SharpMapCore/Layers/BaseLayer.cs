@@ -11,6 +11,12 @@ namespace SharpMap.Layers
         private static int instanceCounter;
 
         public int Id { get; private set; }
+
+        /// <summary>
+        /// Gets or sets an arbitrary object value that can be used to store custom information about this element
+        /// </summary>
+        public object Tag { get; set; }
+
         /// <summary>
         /// Minimum visibility zoom, including this value
         /// </summary>
