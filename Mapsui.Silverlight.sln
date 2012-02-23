@@ -15,8 +15,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SilverlightRendering-SL", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpMap.Samples-SL", "SharpMap.Samples\SharpMap.Samples-SL.csproj", "{FA011EC5-2C8A-412B-8791-9BB966012099}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoConfig", "DemoConfig\DemoConfig.csproj", "{8FB95293-E18B-4B99-9FEB-A24DD3FCBBC5}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,10 +49,6 @@ Global
 		{FA011EC5-2C8A-412B-8791-9BB966012099}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FA011EC5-2C8A-412B-8791-9BB966012099}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FA011EC5-2C8A-412B-8791-9BB966012099}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8FB95293-E18B-4B99-9FEB-A24DD3FCBBC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8FB95293-E18B-4B99-9FEB-A24DD3FCBBC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8FB95293-E18B-4B99-9FEB-A24DD3FCBBC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8FB95293-E18B-4B99-9FEB-A24DD3FCBBC5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
