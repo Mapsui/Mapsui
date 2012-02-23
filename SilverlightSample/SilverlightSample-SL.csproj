@@ -33,7 +33,6 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <IntermediateOutputPath>\obj\Debug\SL</IntermediateOutputPath>
     <OutputPath>..\Bin\Debug\SL</OutputPath>
     <DefineConstants>DEBUG;TRACE;SILVERLIGHT</DefineConstants>
     <NoStdLib>true</NoStdLib>
@@ -44,7 +43,6 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <IntermediateOutputPath>\obj\Release\SL</IntermediateOutputPath>
     <OutputPath>..\Bin\Release\SL</OutputPath>
     <DefineConstants>TRACE;SILVERLIGHT</DefineConstants>
     <NoStdLib>true</NoStdLib>
