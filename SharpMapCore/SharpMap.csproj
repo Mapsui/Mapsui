@@ -117,7 +117,6 @@
     <Compile Include="Geometries\SpatialRelations.cs" />
     <Compile Include="Geometries\Surface.cs" />
     <Compile Include="Layers\BaseLayer.cs" />
-    <Compile Include="Layers\CustomLayer.cs" />
     <Compile Include="Layers\GroupTileLayer.cs">
       <SubType>Code</SubType>
     </Compile>
