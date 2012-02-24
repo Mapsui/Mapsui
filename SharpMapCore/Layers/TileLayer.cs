@@ -36,8 +36,8 @@ namespace SharpMap.Layers
 
     public class TileLayer : BaseLayer, ITileLayer, IAsyncDataFetcher
     {
-        readonly TileFetcher tileFetcher;
-        readonly ITileSource tileSource;
+        private TileFetcher tileFetcher;
+        private ITileSource tileSource;
 
 #if PocketPC
         readonly MemoryCache<Feature> memoryCache = new MemoryCache<Feature>(40, 60);
@@ -45,16 +45,25 @@ namespace SharpMap.Layers
         readonly MemoryCache<Feature> memoryCache = new MemoryCache<Feature>(200, 300);
 #endif
 
-        public TileLayer(ITileSource source)
+        public TileLayer(ITileSource source) : this()
+        {
+            SetTileSource(source);
+        }
+        
+        protected void SetTileSource(ITileSource source)
+        {
+            tileSource = source;
+            tileFetcher = new TileFetcher(source, memoryCache);
+            tileFetcher.DataChanged += TileFetcherDataChanged;
+        }
+
+        public TileLayer()
         {
             // We need to add a style on the layer or else all features will
             // be ignored altogher. Perhaps the style on the individual Features
             // should be used instead. Perhaps the Feature.Style could contain 
             // the tile data iso the Feature.Geometry
-            Styles.Add(new VectorStyle()); 
-            tileSource = source;
-            tileFetcher = new TileFetcher(source, memoryCache);
-            tileFetcher.DataChanged += TileFetcherDataChanged;
+            Styles.Add(new VectorStyle());
         }
 
         public override BoundingBox Envelope 
