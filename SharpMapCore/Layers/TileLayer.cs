@@ -81,7 +81,7 @@ namespace SharpMap.Layers
 
         public void ViewChanged(bool changeEnd, BoundingBox extent, double resolution)
         {
-            if (Enabled && extent.GetArea() > 0)
+            if (Enabled && extent.GetArea() > 0 && tileFetcher != null)
             {
                 tileFetcher.ViewChanged(extent, resolution);
             }
@@ -118,7 +118,7 @@ namespace SharpMap.Layers
             // this class. I would be nice though if there was some flexibility into
             // the specific search strategy. Perhaps it is possible to pass a search 
             // to some GetTiles method.
-            get { return tileSource.Schema; }
+            get { return tileSource != null ? tileSource.Schema : null; }
         }
 
         public MemoryCache<Feature> MemoryCache
@@ -141,6 +141,10 @@ namespace SharpMap.Layers
         public override IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
         {
             var dictionary = new Dictionary<TileIndex, IFeature>();
+
+            if(Schema == null)
+                return dictionary.Values;
+            
             GetRecursive(dictionary, Schema, memoryCache, box.ToExtent(), BruTile.Utilities.GetNearestLevel(Schema.Resolutions, resolution));
             var sortedDictionary = (from entry in dictionary orderby entry.Key ascending select entry).ToDictionary(pair => pair.Key, pair => pair.Value);
             return sortedDictionary.Values;

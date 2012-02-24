@@ -133,10 +133,10 @@ namespace SharpMap.Layers
                     HttpContext.Current.Cache.Insert("SharpMap_WmsClient_" + url, wmsClient, null,
                                                      Cache.NoAbsoluteExpiration, cachetime);
             }
-            //Set default mimetype - We prefer compressed formats
-            if (OutputFormats.Contains("image/jpeg")) _MimeType = "image/jpeg";
-            else if (OutputFormats.Contains("image/png")) _MimeType = "image/png";
+
+            if (OutputFormats.Contains("image/png")) _MimeType = "image/png";
             else if (OutputFormats.Contains("image/gif")) _MimeType = "image/gif";
+            else if (OutputFormats.Contains("image/jpeg")) _MimeType = "image/jpeg";
             else //None of the default formats supported - Look for the first supported output format
             {
                 throw new ArgumentException(
@@ -445,6 +445,7 @@ namespace SharpMap.Layers
             else
                 strReq.AppendFormat("&SRS={0}", _SpatialReferenceSystem);
             strReq.AppendFormat("&VERSION={0}", wmsClient.WmsVersion);
+            strReq.Append("&TRANSPARENT=true");
             strReq.Append("&Styles=");
             if (_StylesList != null && _StylesList.Count > 0)
             {
