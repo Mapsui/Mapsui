@@ -19,7 +19,6 @@ using BruTile;
 using BruTile.Cache;
 using SharpMap.Fetcher;
 using SharpMap.Geometries;
-using System.IO;
 using System.Collections.Generic;
 using SharpMap.Providers;
 using SharpMap.Styles;
