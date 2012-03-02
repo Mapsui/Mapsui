@@ -28,7 +28,7 @@ namespace DemoConfig
             var countries = new Layer("Countries");
             countries.DataSource = new ShapeFile(GetAppDir() + "\\Resources\\GeoData\\countries.shp", true);
             countries.DataSource.SRID = 3785;
-            var style = new VectorStyle()
+            var style = new VectorStyle
             {
                 Fill = new Brush { Color = Color.Green },
                 Outline = new Pen { Color = Color.Black }
@@ -96,7 +96,6 @@ namespace DemoConfig
             cityLabelStyle.Halo = new Pen { Color = Color.Yellow, Width = 2 };
             cityLabelStyle.CollisionDetection = true;
             cityLabel.Styles.Add(cityLabelStyle);
-            
             cityLabel.LabelFilter = LabelCollisionDetection.ThoroughCollisionDetection;
             map.Layers.Add(cityLabel);
 

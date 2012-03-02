@@ -20,6 +20,11 @@ namespace SilverlightRendering
                 
         public static UIElement RenderPoint(Point point, IStyle style, IView view)
         {
+            if (style is LabelStyle)
+            {
+                return LabelRenderer.RenderLabel(point, new Offset(), style as LabelStyle, view);
+            }
+
             if (!(style is SymbolStyle)) throw new ArgumentException("Style is not of type SymbolStyle");
             var symbolStyle = style as SymbolStyle;
 
@@ -57,15 +62,12 @@ namespace SilverlightRendering
             MatrixHelper.Translate(ref matrix, 
                 point.X + symbolStyle.SymbolOffset.X - width * 0.5,
                 point.Y + symbolStyle.SymbolOffset.Y - height * 0.5);
-            //for point symbols we want the size to be independend from the resolution. We do this by counter scaling first.
+            //for point symbols we want the size to be independent from the resolution. We do this by counter scaling first.
             if (symbolStyle.UnitType != UnitType.WorldUnit)
                 MatrixHelper.ScaleAt(ref matrix, view.Resolution, view.Resolution, point.X, point.Y);
             MatrixHelper.RotateAt(ref matrix, 180 - symbolStyle.SymbolRotation, point.X, point.Y);
             MatrixHelper.ApplyViewTransform(ref matrix, view);
             path.RenderTransform = new MatrixTransform { Matrix = matrix };
-
-            //!!!path.Effect = CreateDropShadow(180 - symbolStyle.SymbolRotation);
-
             path.Opacity = symbolStyle.Opacity;
             return path;
         }

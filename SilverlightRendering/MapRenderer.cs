@@ -16,11 +16,11 @@ namespace SilverlightRendering
 {
     public class MapRenderer : IRenderer
     {
-        private Canvas target;
+        private readonly Canvas target;
 
         public MapRenderer()
         {
-            this.target = new Canvas();
+            target = new Canvas();
         }
 
         public MapRenderer(Canvas target)
@@ -45,7 +45,7 @@ namespace SilverlightRendering
                     RenderLayer(target, view, layer);
                 }
             }
-            target.Arrange(new System.Windows.Rect(0, 0, view.Width, view.Height));
+            target.Arrange(new Rect(0, 0, view.Width, view.Height));
         }
 
         private static void RenderLayer(Canvas target, IView view, ILayer layer)
@@ -54,7 +54,6 @@ namespace SilverlightRendering
 
             if (layer is LabelLayer)
             {
-
                 var labelLayer = layer as LabelLayer;
                 if (labelLayer.UseLabelStacking)
                 {
@@ -118,7 +117,7 @@ namespace SilverlightRendering
                 canvas.Children.Add(GeometryRenderer.RenderMultiPolygon(feature.Geometry as MultiPolygon, style, view));
             else if (feature.Geometry is IRaster)
             {
-                var renderedGeometry = feature.RenderedGeometry as System.Windows.UIElement;
+                var renderedGeometry = feature.RenderedGeometry as UIElement;
                 if (renderedGeometry == null) // create
                 {
                     renderedGeometry = GeometryRenderer.RenderRaster(feature.Geometry as IRaster, style, view);
@@ -150,7 +149,7 @@ namespace SilverlightRendering
 
         public Stream ToBitmapStream(double width, double height)
         {
-            target.Arrange(new System.Windows.Rect(0, 0, width, height));
+            target.Arrange(new Rect(0, 0, width, height));
 #if !SILVERLIGHT
             var renderTargetBitmap = new RenderTargetBitmap((int)width, (int)height, 96, 96, new PixelFormat());
             renderTargetBitmap.Render(target);

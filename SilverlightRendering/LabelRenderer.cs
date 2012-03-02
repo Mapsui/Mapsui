@@ -150,6 +150,11 @@ namespace SilverlightRendering
             }
         }
 
+        public static UIElement RenderLabel(SharpMap.Geometries.Point point, Offset stackOffset, LabelStyle style, IView view)
+        {
+            return RenderLabel(point, stackOffset, style, view, style.Text);
+        }
+
         public static UIElement RenderLabel(SharpMap.Geometries.Point point, Offset stackOffset, LabelStyle style, IView view, string text)
         {
             SharpMap.Geometries.Point p = view.WorldToView(point);

@@ -72,6 +72,7 @@ namespace SharpMap.Styles
             CollisionDetection = false;
             CollisionBuffer = new Size { Width = 0, Height = 0 };
             ForeColor = Color.Black;
+            BackColor = new Brush { Color = Color.White };
             HorizontalAlignment = HorizontalAlignmentEnum.Center;
             VerticalAlignment = VerticalAlignmentEnum.Center;
         }
@@ -121,5 +122,10 @@ namespace SharpMap.Styles
         /// The horisontal alignment of the text in relation to the labelpoint
         /// </summary>
         public VerticalAlignmentEnum VerticalAlignment { get; set; }
+
+        /// <summary>
+        /// The text used for this specific label. 
+        /// </summary>
+        public string Text { get; set; }
     }
 }
