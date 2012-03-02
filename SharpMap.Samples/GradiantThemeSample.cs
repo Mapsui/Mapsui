@@ -29,31 +29,31 @@ namespace SharpMap.Samples
             var countryLayer = new Layer("Countries");
             //Set the datasource to a shapefile in the App_data folder
             countryLayer.DataSource = new ShapeFile("GeoData/World/countries.shp", true);
-
+            countryLayer.DataSource.SRID = 4326;
+            
             var style = new VectorStyle
             {
                 Fill = new Brush { Color = Color.Green },
                 Outline = new Pen { Color = Color.Black }
             };
             countryLayer.Styles.Add(style);
-            countryLayer.SRID = 4326;
             map.Layers.Add(countryLayer);
 
             //set up cities layer
             var cityLayer = new Layer("Cities");
             //Set the datasource to a shapefile in the App_data folder
             cityLayer.DataSource = new ShapeFile("GeoData/World/cities.shp", true);
+            cityLayer.DataSource.SRID = 4326;
             cityLayer.MaxVisible = 0.09;
-            cityLayer.SRID = 4326;
             map.Layers.Add(cityLayer);
 
             //Set up a country label layer
             var countryLabelLayer = new LabelLayer("Country labels");
             countryLabelLayer.DataSource = countryLayer.DataSource;
+            countryLabelLayer.DataSource.SRID = 4326;
             countryLabelLayer.Enabled = true;
             countryLabelLayer.MaxVisible = 0.18;
             countryLabelLayer.MinVisible = 0.054;
-            countryLabelLayer.SRID = 4326;
             countryLabelLayer.LabelColumn = "NAME";
             var labelStyle = new LabelStyle();
             labelStyle.ForeColor = Color.Black;
@@ -67,13 +67,12 @@ namespace SharpMap.Samples
             //Set up a city label layer
             var cityLabelLayer = new LabelLayer("City labels");
             cityLabelLayer.DataSource = cityLayer.DataSource;
+            cityLabelLayer.DataSource.SRID = 4326;
             cityLabelLayer.Enabled = true;
             cityLabelLayer.LabelColumn = "NAME";
             cityLabelLayer.MaxVisible = countryLabelLayer.MinVisible;
             cityLabelLayer.MinVisible = 0;
-            cityLabelLayer.SRID = 4326;
             cityLabelLayer.LabelFilter = LabelCollisionDetection.ThoroughCollisionDetection;
-
             var cityLabelStyle = new LabelStyle();
             cityLabelStyle.ForeColor = Color.Black;
             cityLabelStyle.Font = new Font { FontFamily = "GenericSerif", Size = 11 };

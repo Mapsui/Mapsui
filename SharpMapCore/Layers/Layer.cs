@@ -54,13 +54,13 @@ namespace SharpMap.Layers
         private bool needsUpdate = true;
         private double resolution;
         private BoundingBox extent;
+        private MemoryProvider cache;
 
         #region Properties
 
         public IProvider DataSource { get; set; }
 
-        private IProvider Cache { get; set; }
-
+        
         /// <summary>
         /// Gets or sets the SRID of this VectorLayer's data source
         /// </summary>
@@ -71,12 +71,6 @@ namespace SharpMap.Layers
                 if (DataSource == null)
                     throw (new Exception("DataSource property not set on layer '" + LayerName + "'"));
                 return DataSource.SRID;
-            }
-            set
-            {
-                if (DataSource == null)
-                    throw (new Exception("DataSource property not set on layer '" + LayerName + "'"));
-                DataSource.SRID = value;
             }
         }
 
@@ -114,14 +108,14 @@ namespace SharpMap.Layers
         public Layer(string layername) 
         {
             LayerName = layername;
-            Cache = new MemoryProvider();
+            cache = new MemoryProvider();
         }
 
         #endregion
 
         public override IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
         {
-            return Cache.GetFeaturesInView(box, resolution);
+            return cache.GetFeaturesInView(box, resolution);
         }
 
         public void AbortFetch()
@@ -165,7 +159,7 @@ namespace SharpMap.Layers
                 foreach (var feature in features)
                     ProjectionHelper.Transform(feature.Geometry, CoordinateTransformation);
             
-            Cache = new MemoryProvider(features);
+            cache = new MemoryProvider(features);
 
             isFetching = false;
             OnDataChanged();
@@ -217,7 +211,7 @@ namespace SharpMap.Layers
 
         public void ClearCache()
         {
-
+            cache.Clear();
         }
     }
 }

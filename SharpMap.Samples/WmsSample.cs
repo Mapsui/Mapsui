@@ -19,7 +19,7 @@ namespace SharpMap.Samples
             var layer = new Layer("WmsLayer");
             layer.Styles.Add(new VectorStyle()); // To get it to render I have to add some default style which is not used by WMS. This is ugly.
             layer.DataSource = provider;
-            layer.SRID = 900913;
+            layer.DataSource.SRID = 900913;
 
             var map = new Map();
             map.Layers.Add(layer);

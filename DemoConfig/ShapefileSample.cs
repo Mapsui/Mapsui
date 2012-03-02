@@ -27,13 +27,13 @@ namespace DemoConfig
         {
             var countries = new Layer("Countries");
             countries.DataSource = new ShapeFile(GetAppDir() + "\\Resources\\GeoData\\countries.shp", true);
+            countries.DataSource.SRID = 3785;
             var style = new VectorStyle()
             {
                 Fill = new Brush { Color = Color.Green },
                 Outline = new Pen { Color = Color.Black }
             };
             countries.Styles.Add(style);
-            countries.SRID = 3785;
             return countries;
         }
 
@@ -43,9 +43,9 @@ namespace DemoConfig
             var layCities = new Layer("Cities");
             //Set the datasource to a shapefile in the App_data folder
             layCities.DataSource = new ShapeFile(GetAppDir() + "\\Resources\\GeoData\\cities.shp", true);
+            layCities.DataSource.SRID = 3785;
             layCities.Styles.Add(CreateCityTheme());
             layCities.MaxVisible = 10000000.0;
-            layCities.SRID = 3785;
             return layCities;
         }
 
@@ -65,40 +65,38 @@ namespace DemoConfig
             //Set up a country label layer
             var countryLabels = new LabelLayer("Country labels");
             countryLabels.DataSource = countries.DataSource;
+            countryLabels.DataSource.SRID = 3785;
             countryLabels.Enabled = true;
-            countryLabels.LabelColumn = "Name";
-
+            countryLabels.LabelColumn = "NAME";
             var labelStyle = new LabelStyle();
             labelStyle.ForeColor = Color.White;
             labelStyle.Font = new Font { FontFamily = "GenericSerif", Size = 12 };
             labelStyle.BackColor = new Brush { Color = new Color { A = 128, R = 255, G = 0, B = 0 } };
             labelStyle.HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center;
             countryLabels.Styles.Add(labelStyle);
-
             countryLabels.MaxVisible = double.MaxValue;
             countryLabels.MinVisible = double.MinValue;
-            countryLabels.SRID = 3785;
             countryLabels.MultipartGeometryBehaviour = LabelLayer.MultipartGeometryBehaviourEnum.Largest;
             //!!!map.Layers.Add(layLabel);
 
             //Set up a city label layer
             var cityLabel = new LabelLayer("City labels");
             cityLabel.DataSource = cities.DataSource;
+            cityLabel.DataSource.SRID = 3785;
             cityLabel.Enabled = true;
-            cityLabel.LabelColumn = "Name";
+            cityLabel.LabelColumn = "NAME";
 
             var cityLabelStyle = new LabelStyle();
             cityLabelStyle.ForeColor = Color.Black;
+            cityLabelStyle.BackColor = new Brush() { Color = Color.Orange };
             cityLabelStyle.Font = new Font { FontFamily = "GenericSerif", Size = 11 };
-            cityLabelStyle.HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Left;
-            cityLabelStyle.VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Bottom;
-            cityLabelStyle.Offset = new Offset { X = 3, Y = 3 };
+            cityLabelStyle.HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center;
+            cityLabelStyle.VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Center;
+            cityLabelStyle.Offset = new Offset { X = 0, Y = 0 };
             cityLabelStyle.Halo = new Pen { Color = Color.Yellow, Width = 2 };
             cityLabelStyle.CollisionDetection = true;
             cityLabel.Styles.Add(cityLabelStyle);
-
-            cityLabel.MaxVisible = countryLabels.MinVisible;
-            cityLabel.SRID = 3785;
+            
             cityLabel.LabelFilter = LabelCollisionDetection.ThoroughCollisionDetection;
             map.Layers.Add(cityLabel);
 

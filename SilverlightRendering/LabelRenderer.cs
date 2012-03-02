@@ -11,6 +11,7 @@ using SharpMap.Layers;
 using SharpMap.Providers;
 using SharpMap.Styles;
 using SharpMap.Styles.Thematics;
+using System.Globalization;
 
 namespace SilverlightRendering
 {
@@ -174,16 +175,37 @@ namespace SilverlightRendering
             textblock.Margin = new Thickness(witdhMargin, heightMargin, witdhMargin, heightMargin);
             border.CornerRadius = new CornerRadius(4);
             border.Child = textblock;
-
             //Offset
-            border.SetValue(Canvas.LeftProperty, windowsPoint.X + style.Offset.X + stackOffset.X - (textblock.ActualWidth + 2 * witdhMargin) * (short)style.HorizontalAlignment * 0.5f);
-            border.SetValue(Canvas.TopProperty, windowsPoint.Y + style.Offset.Y + stackOffset.Y - (textblock.ActualHeight + 2 * heightMargin) * (short)style.VerticalAlignment * 0.5f);
 
-            //!!!grid.Effect = GeometryRenderer.CreateDropShadow(-90);
-
+            var textWidth = textblock.ActualWidth;
+            var textHeight = textblock.ActualHeight;
+#if !SILVERLIGHT
+            // in WPF the width and height is not calculated at this point. So we use FormattedText
+            getTextWidthAndHeight(ref textWidth, ref textHeight, style, text);
+#endif
+            border.SetValue(Canvas.LeftProperty, windowsPoint.X + style.Offset.X + stackOffset.X - (textWidth + 2 * witdhMargin) * (short)style.HorizontalAlignment * 0.5f);
+            border.SetValue(Canvas.TopProperty, windowsPoint.Y + style.Offset.Y + stackOffset.Y - (textHeight + 2 * heightMargin) * (short)style.VerticalAlignment * 0.5f);
+                
             return border;
         }
 
+#if !SILVERLIGHT 
+        private static void getTextWidthAndHeight(ref double width, ref double height, LabelStyle style, string text)
+        {
+            var formattedText = new FormattedText(
+                text,
+                CultureInfo.InvariantCulture,
+                FlowDirection.LeftToRight,
+                new Typeface(style.Font.FontFamily),
+                style.Font.Size,
+                new SolidColorBrush(style.ForeColor.Convert()));
+
+            width = formattedText.Width;
+            height = formattedText.Height;
+        }
+
+#endif
+        
         private class Cluster
         {
             public BoundingBox Box { get; set; }

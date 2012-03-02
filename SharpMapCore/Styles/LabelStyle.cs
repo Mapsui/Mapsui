@@ -59,7 +59,7 @@ namespace SharpMap.Styles
             /// <summary>
             /// Centered
             /// </summary>
-            Middle = 1
+            Center = 1
         }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace SharpMap.Styles
             CollisionBuffer = new Size { Width = 0, Height = 0 };
             ForeColor = Color.Black;
             HorizontalAlignment = HorizontalAlignmentEnum.Center;
-            VerticalAlignment = VerticalAlignmentEnum.Middle;
+            VerticalAlignment = VerticalAlignmentEnum.Center;
         }
 
         /// <summary>

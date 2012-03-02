@@ -44,7 +44,7 @@ namespace SharpMap.Layers
     /// layLabel.Style.HorizontalAlignment = SharpMap.Styles.LabelStyle.HorizontalAlignmentEnum.Center;
     /// </code>
     /// </example>
-    public class LabelLayer : BaseLayer, IDisposable
+    public class LabelLayer : Layer
     {
         #region Delegates
 
@@ -220,8 +220,6 @@ namespace SharpMap.Layers
             set { _PriorityColumn = value; }
         }
 
-        public IProvider DataSource { get; set; }
-
         #endregion
 
         #region Constructors and Public members
@@ -230,7 +228,7 @@ namespace SharpMap.Layers
         /// Creates a new instance of a LabelLayer
         /// </summary>
         public LabelLayer(string LayerName)
-            : base()
+            : base(LayerName)
         {
             this.LayerName = LayerName;
             _Style = new LabelStyle();
@@ -242,7 +240,7 @@ namespace SharpMap.Layers
         {
             string label = String.Empty;
 
-            if(this.LabelStringDelegate != null)
+            if (this.LabelStringDelegate != null)
             {
                 label = this.LabelStringDelegate(feature);
             }
@@ -252,23 +250,6 @@ namespace SharpMap.Layers
             }
 
             return label;
-        }
-
-        #endregion
-
-        #region IDisposable Members
-
-        /// <summary>
-        /// Disposes the object
-        /// </summary>
-        public void Dispose()
-        {
-            DataSource.Dispose();
-        }
-
-        public override IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
-        {
-            return DataSource.GetFeaturesInView(box, resolution);
         }
 
         #endregion
