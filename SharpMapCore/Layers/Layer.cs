@@ -182,10 +182,10 @@ namespace SharpMap.Layers
 
         private class Fetcher
         {
-            private BoundingBox extent;
-            private double resolution;
-            private DataArrivedDelegate dataArrived;
-            private IProvider provider;
+            private readonly BoundingBox extent;
+            private readonly double resolution;
+            private readonly DataArrivedDelegate dataArrived;
+            private readonly IProvider provider;
 
             public Fetcher(BoundingBox extent, double resolution, IProvider provider, DataArrivedDelegate dataArrived)
             {

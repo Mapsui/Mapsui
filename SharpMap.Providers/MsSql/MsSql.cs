@@ -359,7 +359,7 @@ namespace SharpMap.Data.Providers
                     using (SqlDataReader dr = command.ExecuteReader())
                         if (dr.Read())
                         {
-                            box = new BoundingBox((float) dr[0], (float) dr[1], (float) dr[2], (float) dr[3]);
+                            box = new BoundingBox((double)dr[0], (double)dr[1], (double)dr[2], (double)dr[3]);
                         }
                     conn.Close();
                 }

@@ -60,6 +60,7 @@
     <Compile Include="EsriStreetMapWorld.cs" />
     <Compile Include="GeodanWorldTmsTileSource.cs" />
     <Compile Include="GeodanWorldWmsTileSource.cs" />
+    <Compile Include="PointLayerWithWorldUnitsForSymbolsSample.cs" />
     <Compile Include="ShapefileSample.cs" />
     <Compile Include="GeodanWorldWmsCTileSource.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -80,6 +81,11 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Images\arrow.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\netherlands.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>

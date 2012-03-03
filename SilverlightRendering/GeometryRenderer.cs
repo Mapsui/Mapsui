@@ -34,8 +34,8 @@ namespace SilverlightRendering
             if (symbolStyle.UnitType == UnitType.WorldUnit)
             {
                 path = ToSymbolPath(symbolStyle);
-                width = symbolStyle.Width;
-                height = symbolStyle.Height;                     
+                width = symbolStyle.Width * symbolStyle.SymbolScale;
+                height = symbolStyle.Height * symbolStyle.SymbolScale;                     
             }
             else
             {
@@ -50,22 +50,28 @@ namespace SilverlightRendering
 
                 var rect = new System.Windows.Shapes.Rectangle();
                 rect.Fill = new ImageBrush { ImageSource = bitmap };
-                rect.Width = bitmap.PixelWidth;
-                rect.Height = bitmap.PixelHeight;
+                rect.Width = bitmap.PixelWidth * symbolStyle.SymbolScale;
+                rect.Height = bitmap.PixelHeight * symbolStyle.SymbolScale;
                 path = rect;
 
-                width = bitmap.PixelWidth;
-                height = bitmap.PixelHeight;
+                width = bitmap.PixelWidth * symbolStyle.SymbolScale;
+                height = bitmap.PixelHeight * symbolStyle.SymbolScale;
             }
-            
+
             var matrix = new Matrix();
+            // flip the image top to bottom:
+            MatrixHelper.Translate(ref matrix, - width * 0.5, - height * 0.5);
+            MatrixHelper.Invert(ref matrix);
+            MatrixHelper.Translate(ref matrix, width * 0.5, height * 0.5);
+
             MatrixHelper.Translate(ref matrix, 
                 point.X + symbolStyle.SymbolOffset.X - width * 0.5,
                 point.Y + symbolStyle.SymbolOffset.Y - height * 0.5);
             //for point symbols we want the size to be independent from the resolution. We do this by counter scaling first.
             if (symbolStyle.UnitType != UnitType.WorldUnit)
                 MatrixHelper.ScaleAt(ref matrix, view.Resolution, view.Resolution, point.X, point.Y);
-            MatrixHelper.RotateAt(ref matrix, 180 - symbolStyle.SymbolRotation, point.X, point.Y);
+            
+            MatrixHelper.RotateAt(ref matrix, -symbolStyle.SymbolRotation, point.X, point.Y);
             MatrixHelper.ApplyViewTransform(ref matrix, view);
             path.RenderTransform = new MatrixTransform { Matrix = matrix };
             path.Opacity = symbolStyle.Opacity;
@@ -315,7 +321,7 @@ namespace SilverlightRendering
 
         private static System.Windows.Point ConvertPoint(Point point)
         {
-            return new System.Windows.Point((float)point.X, (float)point.Y);
+            return new System.Windows.Point(point.X, point.Y);
         }
 
         public static Path RenderMultiLineString(MultiLineString multiLineString, IStyle style, IView view)

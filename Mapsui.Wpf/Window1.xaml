@@ -11,7 +11,8 @@
         <mapsui:MapControl x:Name="mapControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
         <Border BorderBrush="White" Opacity="0.75" Margin="10" Background="White" BorderThickness="6" CornerRadius="2" VerticalAlignment="Top" HorizontalAlignment="Left">
             <StackPanel Width="Auto">
-                <RadioButton IsChecked="True" FontSize="16" Content="OSM " Margin="4,4,4,4" Click="OsmClick"/>
+                <RadioButton IsChecked="True" FontSize="16" Content="OSM" Margin="4,4,4,4" Click="OsmClick"/>
+                <RadioButton FontSize="16" Content="PointSymbols" Margin="4,4,4,4" Click="PointSymbolsClick"/>
                 <RadioButton FontSize="16" Content="Bing Maps" Margin="4,4,4,4" Click="BingMapsClick"/>
                 <RadioButton FontSize="16" Content="WMS - tiled requests" Margin="4,4,4,4" Click="GeodanWmsClick"/>
                 <RadioButton FontSize="16" Content="TMS" Margin="4,4,4,4" Click="GeodanTmsClick"/>

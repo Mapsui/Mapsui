@@ -533,7 +533,7 @@ namespace SharpMap.Layers
         {
             IFeatures features = new Features();
             IRaster raster = null;
-            IView view = new View() { Resolution = resolution, Center = box.GetCentroid(), Width = (float)(box.Width / resolution), Height = (float)(box.Height / resolution) };
+            IView view = new View() { Resolution = resolution, Center = box.GetCentroid(), Width = (box.Width / resolution), Height = (box.Height / resolution) };
             if (TryGetMap(view, ref raster))
             {
                 IFeature feature = features.New();

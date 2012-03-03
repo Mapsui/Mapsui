@@ -131,6 +131,16 @@ namespace Mapsui.Wpf
         {
             mapControl.Map = WmsSample.InitializeMap();
             layerList.Initialize(mapControl.Map.Layers);
+        }
+
+        private void PointSymbolsClick(object sender, RoutedEventArgs e)
+        {
+            mapControl.Map.Layers.Clear();
+            mapControl.Map.Layers.Add(new TileLayer(new OsmTileSource()) {LayerName = "OSM"});
+            mapControl.Map.Layers.Add(PointLayerSample.Create());
+            mapControl.Map.Layers.Add(PointLayerWithWorldUnitsForSymbolsSample.Create());
+            layerList.Initialize(mapControl.Map.Layers);
+            mapControl.Refresh();
         }    
     }
 }

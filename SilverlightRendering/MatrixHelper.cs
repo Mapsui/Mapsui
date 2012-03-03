@@ -13,8 +13,15 @@ namespace SilverlightRendering
             
             Translate(ref matrix, mapCenterX - view.CenterX, mapCenterY - view.CenterY);
             ScaleAt(ref matrix, 1 / view.Resolution, 1 / view.Resolution, mapCenterX, mapCenterY);
+            //append invert the Y, but also the whole image
             Append(ref matrix, new Matrix(1, 0, 0, -1, 0, 0));
+            
             Translate(ref matrix, 0, view.Height);
+        }
+
+        public static void Invert(ref Matrix matrix)
+        {
+            Append(ref matrix, new Matrix(1, 0, 0, -1, 0, 0));
         }
 
         public static void Append(ref Matrix matrix, Matrix matrixOther)
