@@ -37,7 +37,7 @@ namespace WbxRendering
             return image;
         }
 
-        public void Render(IView view, LayerCollection layers)
+        public void Render(IView view, IEnumerable<ILayer> layers)
         {
             if (targetBitmap == null ||
                 targetBitmap.PixelWidth != (int)target.ActualWidth ||

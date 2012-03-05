@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows;
@@ -28,7 +29,7 @@ namespace SilverlightRendering
             this.target = target;
         }
 
-        public void Render(IView view, LayerCollection layers)
+        public void Render(IView view, IEnumerable<ILayer> layers)
         {
             foreach (var child in target.Children)
             {
