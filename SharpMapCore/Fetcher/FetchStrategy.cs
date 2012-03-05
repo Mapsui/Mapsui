@@ -63,7 +63,7 @@ namespace SharpMap.Fetcher
             return infos;
         }
 
-        private static List<TileInfo> PrioritizeTiles(IEnumerable<TileInfo> tiles, double centerX, double centerY, Sorter sorter)
+        private static IEnumerable<TileInfo> PrioritizeTiles(IEnumerable<TileInfo> tiles, double centerX, double centerY, Sorter sorter)
         {
             var infos = new List<TileInfo>(tiles);
 

@@ -28,7 +28,7 @@ namespace SilverlightRendering
             this.target = target;
         }
 
-        public void Render(IView view, Map map)
+        public void Render(IView view, LayerCollection layers)
         {
             foreach (var child in target.Children)
             {
@@ -36,7 +36,7 @@ namespace SilverlightRendering
             }
             target.Children.Clear();
                         
-            foreach (var layer in map.Layers)
+            foreach (var layer in layers)
             {
                 if (layer.Enabled &&
                     layer.MinVisible <= view.Resolution &&

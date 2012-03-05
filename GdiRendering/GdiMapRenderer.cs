@@ -32,6 +32,7 @@ namespace GdiRendering
 {
     public class GdiMapRenderer
     {
+        // TODO: derive from IRenderer
         public delegate bool AbortRenderDelegate();
 
         public static void Render(Graphics graphics, IView view, Map map, AbortRenderDelegate abortRender)

@@ -37,21 +37,21 @@ namespace WbxRendering
             return image;
         }
 
-        public void Render(IView view, Map map)
+        public void Render(IView view, LayerCollection layers)
         {
             if (targetBitmap == null ||
                 targetBitmap.PixelWidth != (int)target.ActualWidth ||
                 targetBitmap.PixelHeight != (int)target.ActualHeight)
             {
-                target.Arrange(new System.Windows.Rect(0, 0, view.Width, view.Height));
-                if (target.ActualWidth == 0 || target.ActualHeight == 0) return; 
+                target.Arrange(new Rect(0, 0, view.Width, view.Height));
+                if (target.ActualWidth <= 0 || target.ActualHeight <= 0) return; 
                 target.Children.Clear();
                 target.Children.Add(InitializeBitmap((int)target.ActualWidth, (int)target.ActualHeight));
             }
 
             targetBitmap.Clear(Colors.White);
 
-            foreach (var layer in map.Layers)
+            foreach (var layer in layers)
             {
                 if (layer.Enabled &&
                     layer.MinVisible <= view.Resolution &&
@@ -61,7 +61,7 @@ namespace WbxRendering
                 }
             }
 
-            target.Arrange(new System.Windows.Rect(0, 0, view.Width, view.Height));
+            target.Arrange(new Rect(0, 0, view.Width, view.Height));
         }
 
         private static void RenderLayer(WriteableBitmap targetBitmap, IView view, ILayer layer)

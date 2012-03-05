@@ -18,9 +18,6 @@
 using System;
 using SharpMap.Providers;
 using SharpMap.Rendering;
-using SharpMap.Styles;
-using System.Collections.Generic;
-using SharpMap.Geometries;
 
 namespace SharpMap.Layers
 {
@@ -96,19 +93,6 @@ namespace SharpMap.Layers
 
         #region Fields
 
-        private GetLabelMethod _getLabelMethod;
-        private GetPriorityMethod _getPriorityMethod;
-        private string _LabelColumn;
-        private LabelCollisionDetection.LabelFilterMethod _LabelFilter;
-        private MultipartGeometryBehaviourEnum _MultipartGeometryBehaviour;
-        private int _Priority;
-        /// <summary>
-        /// A value indication the priority of the label in cases of label-collision detection
-        /// </summary>
-        private string _PriorityColumn = "";
-        private string _RotationColumn;
-        private LabelStyle _Style;
-
         #endregion
 
         #region Properties
@@ -119,11 +103,7 @@ namespace SharpMap.Layers
         /// Gets or sets labelling behavior on multipart geometries
         /// </summary>
         /// <remarks>Default value is <see cref="MultipartGeometryBehaviourEnum.All"/></remarks>
-        public MultipartGeometryBehaviourEnum MultipartGeometryBehaviour
-        {
-            get { return _MultipartGeometryBehaviour; }
-            set { _MultipartGeometryBehaviour = value; }
-        }
+        public MultipartGeometryBehaviourEnum MultipartGeometryBehaviour { get; set; }
 
         /// <summary>
         /// Filtermethod delegate for performing filtering
@@ -131,11 +111,7 @@ namespace SharpMap.Layers
         /// <remarks>
         /// Default method is <see cref="SharpMap.Rendering.LabelCollisionDetection.SimpleCollisionDetection"/>
         /// </remarks>
-        public LabelCollisionDetection.LabelFilterMethod LabelFilter
-        {
-            get { return _LabelFilter; }
-            set { _LabelFilter = value; }
-        }
+        public LabelCollisionDetection.LabelFilterMethod LabelFilter { get; set; }
 
         /// <summary>
         /// Data column or expression where label text is extracted from.
@@ -143,18 +119,14 @@ namespace SharpMap.Layers
         /// <remarks>
         /// This property is overriden by the <see cref="LabelStringDelegate"/>.
         /// </remarks>
-        public string LabelColumn
-        {
-            get { return _LabelColumn; }
-            set { _LabelColumn = value; }
-        }
+        public string LabelColumn { get; set; }
 
         /// <summary>
         /// Gets or sets the method for creating a custom label string based on a feature.
         /// </summary>
         /// <remarks>
         /// <para>If this method is not null, it will override the <see cref="LabelColumn"/> value.</para>
-        /// <para>The label delegate must take a <see cref="SharpMap.Data.FeatureDataRow"/> and return a string.</para>
+        /// <para>The label delegate must take a <see cref="SharpMap.Providers.IFeature"/> and return a string.</para>
         /// <example>
         /// Creating a label-text by combining attributes "ROADNAME" and "STATE" into one string, using
         /// an anonymous delegate:
@@ -164,18 +136,14 @@ namespace SharpMap.Layers
         /// </code>
         /// </example>
         /// </remarks>
-        public GetLabelMethod LabelStringDelegate
-        {
-            get { return _getLabelMethod; }
-            set { _getLabelMethod = value; }
-        }
+        public GetLabelMethod LabelStringDelegate { get; set; }
 
         /// <summary>
         /// Gets or sets the method for calculating the render priority of a label based on a feature.
         /// </summary>
         /// <remarks>
         /// <para>If this method is not null, it will override the <see cref="PriorityColumn"/> value.</para>
-        /// <para>The label delegate must take a <see cref="SharpMap.Data.FeatureDataRow"/> and return an Int32.</para>
+        /// <para>The label delegate must take a <see cref="SharpMap.Providers.IFeature"/> and return an Int32.</para>
         /// <example>
         /// Creating a priority by combining attributes "capital" and "population" into one value, using
         /// an anonymous delegate:
@@ -188,37 +156,21 @@ namespace SharpMap.Layers
         /// </code>
         /// </example>
         /// </remarks>
-        public GetPriorityMethod PriorityDelegate
-        {
-            get { return _getPriorityMethod; }
-            set { _getPriorityMethod = value; }
-        }
+        public GetPriorityMethod PriorityDelegate { get; set; }
 
         /// <summary>
         /// Data column from where the label rotation is derived.
         /// If this is empty, rotation will be zero, or aligned to a linestring.
         /// Rotation are in degrees (positive = clockwise).
         /// </summary>
-        public string RotationColumn
-        {
-            get { return _RotationColumn; }
-            set { _RotationColumn = value; }
-        }
+        public string RotationColumn { get; set; }
 
         /// <summary>
         /// A value indication the priority of the label in cases of label-collision detection
         /// </summary>
-        public int Priority
-        {
-            get { return _Priority; }
-            set { _Priority = value; }
-        }
+        public int Priority { get; set; }
 
-        public string PriorityColumn
-        {
-            get { return _PriorityColumn; }
-            set { _PriorityColumn = value; }
-        }
+        public string PriorityColumn { get; set; }
 
         #endregion
 
@@ -227,29 +179,22 @@ namespace SharpMap.Layers
         /// <summary>
         /// Creates a new instance of a LabelLayer
         /// </summary>
-        public LabelLayer(string LayerName)
-            : base(LayerName)
+        public LabelLayer(string layerName)
+            : base(layerName)
         {
-            this.LayerName = LayerName;
-            _Style = new LabelStyle();
-            _MultipartGeometryBehaviour = MultipartGeometryBehaviourEnum.All;
-            _LabelFilter = LabelCollisionDetection.SimpleCollisionDetection;
+            PriorityColumn = "";
+            LayerName = layerName;
+            MultipartGeometryBehaviour = MultipartGeometryBehaviourEnum.All;
+            LabelFilter = LabelCollisionDetection.SimpleCollisionDetection;
         }
 
         public string GetLabel(IFeature feature)
         {
-            string label = String.Empty;
-
-            if (this.LabelStringDelegate != null)
+            if (LabelStringDelegate != null)
             {
-                label = this.LabelStringDelegate(feature);
+                return LabelStringDelegate(feature);
             }
-            else
-            {
-                label = feature[this.LabelColumn].ToString();
-            }
-
-            return label;
+            return feature[LabelColumn].ToString();
         }
 
         #endregion

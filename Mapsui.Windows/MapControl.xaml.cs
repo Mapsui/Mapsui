@@ -520,7 +520,7 @@ namespace Mapsui.Windows
                         
             if ((renderer != null) && (map != null))
             {
-                renderer.Render(view, map);
+                renderer.Render(view, map.Layers);
                 fpsCounter.FramePlusOne();
                 invalid = false;
             }

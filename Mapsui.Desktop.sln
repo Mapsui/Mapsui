@@ -21,8 +21,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpMap.Providers", "Sharp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpMap.Samples", "SharpMap.Samples\SharpMap.Samples.csproj", "{036B6E0A-C34C-4EE6-A359-C467D7E9D1EF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpMap.WmsServer", "SharpMap.WmsServer\SharpMap.WmsServer.csproj", "{4F0D111C-87B6-4F86-B160-35E0E321D728}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpMapTests", "SharpMapTests\SharpMapTests.csproj", "{D6BE6ADA-CE9F-45FF-AB64-AAD128EDF9AA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{96F20EF6-F145-47CE-960D-C8899049DFB0}"
@@ -102,12 +100,6 @@ Global
 		{036B6E0A-C34C-4EE6-A359-C467D7E9D1EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{036B6E0A-C34C-4EE6-A359-C467D7E9D1EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{036B6E0A-C34C-4EE6-A359-C467D7E9D1EF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4F0D111C-87B6-4F86-B160-35E0E321D728}.Addins debug|Any CPU.ActiveCfg = Release|Any CPU
-		{4F0D111C-87B6-4F86-B160-35E0E321D728}.Addins debug|Any CPU.Build.0 = Release|Any CPU
-		{4F0D111C-87B6-4F86-B160-35E0E321D728}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4F0D111C-87B6-4F86-B160-35E0E321D728}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4F0D111C-87B6-4F86-B160-35E0E321D728}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4F0D111C-87B6-4F86-B160-35E0E321D728}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D6BE6ADA-CE9F-45FF-AB64-AAD128EDF9AA}.Addins debug|Any CPU.ActiveCfg = Release|Any CPU
 		{D6BE6ADA-CE9F-45FF-AB64-AAD128EDF9AA}.Addins debug|Any CPU.Build.0 = Release|Any CPU
 		{D6BE6ADA-CE9F-45FF-AB64-AAD128EDF9AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU

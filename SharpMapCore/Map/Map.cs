@@ -62,9 +62,9 @@ namespace SharpMap
     /// </example>
     public class Map : IDisposable
     {
-        private double _minimumZoom;
-        private double _maximumZoom;
-        private readonly LayerCollection _layers = new LayerCollection();
+        private double minimumZoom;
+        private double maximumZoom;
+        private readonly LayerCollection layers = new LayerCollection();
         public event DataChangedEventHandler DataChanged;
         public event FeedbackEventHandler Feedback;
 
@@ -74,11 +74,11 @@ namespace SharpMap
         public Map()
         {
             BackColor = Color.White;
-            _maximumZoom = double.MaxValue;
-            _minimumZoom = 0;
-            _layers = new LayerCollection();
-            _layers.LayerAdded += LayersLayerAdded;
-            _layers.LayerRemoved += LayersLayerRemoved;
+            maximumZoom = double.MaxValue;
+            minimumZoom = 0;
+            layers = new LayerCollection();
+            layers.LayerAdded += LayersLayerAdded;
+            layers.LayerRemoved += LayersLayerRemoved;
             Resolutions = new List<double>();
         }
 
@@ -133,7 +133,7 @@ namespace SharpMap
 
         public void AbortFetch()
         {
-            foreach (var layer in _layers.ToList())
+            foreach (var layer in layers.ToList())
             {
                 if (layer is IAsyncDataFetcher)
                 {
@@ -145,7 +145,7 @@ namespace SharpMap
 
         public void ViewChanged(bool changeEnd, BoundingBox extent, double resolution)
         {
-            foreach (var layer in _layers.ToList())
+            foreach (var layer in layers.ToList())
             {
                 if (layer is IAsyncDataFetcher)
                 {
@@ -161,7 +161,7 @@ namespace SharpMap
         public void Dispose()
         {
             AbortFetch();
-            _layers.Clear();
+            layers.Clear();
         }
 
         #region Properties
@@ -171,7 +171,7 @@ namespace SharpMap
         /// </summary>
         public LayerCollection Layers
         {
-            get { return _layers; }
+            get { return layers; }
         }
 
         /// <summary>
@@ -185,10 +185,10 @@ namespace SharpMap
         /// <returns>Full map extents</returns>
         public BoundingBox GetExtents()
         {
-            if (_layers.Count == 0)
+            if (layers.Count == 0)
                 return null; //it think we should allow Extent to be null
             BoundingBox bbox = null;
-            foreach (ILayer t in _layers)
+            foreach (ILayer t in layers)
             {
                 bbox = bbox == null ? t.Envelope : bbox.Join(t.Envelope);
             }
@@ -200,11 +200,11 @@ namespace SharpMap
         /// </summary>
         public double MinimumZoom
         {
-            get { return _minimumZoom; }
+            get { return minimumZoom; }
             set {
                 if (value < 0)
                     throw (new Exception("Minimum zoom must be 0 or more"));
-                _minimumZoom = value; 
+                minimumZoom = value; 
             }
         }
 
@@ -215,11 +215,11 @@ namespace SharpMap
         /// </summary>
         public double MaximumZoom
         {
-            get { return _maximumZoom; }
+            get { return maximumZoom; }
             set {
                 if (value <= 0)
                     throw (new Exception("Maximum zoom must larger than 0"));
-                _maximumZoom = value; 
+                maximumZoom = value; 
             }
         }
 
@@ -227,7 +227,7 @@ namespace SharpMap
 
         public void ClearCache()
         {
-            foreach (var layer in _layers)
+            foreach (var layer in layers)
             {
                 //todo: create generic interface
                 if (layer is IAsyncDataFetcher)
@@ -235,7 +235,6 @@ namespace SharpMap
                     (layer as IAsyncDataFetcher).ClearCache();
                 }
             }
-
         }
     }
 }

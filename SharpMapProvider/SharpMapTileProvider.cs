@@ -48,7 +48,7 @@ namespace SharpMapProvider
                 {
                     var renderer = new MapRenderer();
                     IView view = new View { Width = 256, Height = 256, Resolution = (tileInfo.Extent.Width / 256), Center = new Point(tileInfo.Extent.CenterX, tileInfo.Extent.CenterY) };
-                    renderer.Render(view, map);
+                    renderer.Render(view, map.Layers);
                     var stream = renderer.ToBitmapStream(256, 256);
                     stream.Position = 0;
                     bytes = Utilities.ReadFully(stream);
