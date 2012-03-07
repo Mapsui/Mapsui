@@ -58,11 +58,6 @@ namespace SharpMap.Providers
     /// </remarks>
     public class MemoryProvider : IProvider
     {
-        #region Fields
-
-        private int _SRID = -1;
-        #endregion
-
         #region Properties
 
         /// <summary>
@@ -81,11 +76,7 @@ namespace SharpMap.Providers
         /// <summary>
         /// The spatial reference ID (CRS)
         /// </summary>
-        public int SRID
-        {
-            get { return _SRID; }
-            set { _SRID = value; }
-        }
+        public int SRID { get; set; }
 
         #endregion
         
@@ -93,6 +84,7 @@ namespace SharpMap.Providers
 
         public MemoryProvider()
         {
+            SRID = -1;
             Features = new Features();
         }
 
@@ -102,6 +94,7 @@ namespace SharpMap.Providers
         /// <param name="geometries">Set of geometries that this datasource should contain</param>
         public MemoryProvider(IEnumerable<IGeometry> geometries)
         {
+            SRID = -1;
             Features = new Features();
             foreach (IGeometry geometry in geometries)
             {
@@ -117,6 +110,7 @@ namespace SharpMap.Providers
         /// <param name="feature">Feature to be in this datasource</param>
         public MemoryProvider(IFeature feature)
         {
+            SRID = -1;
             Features = new Features();
             Features.Add(feature);
         }
@@ -136,6 +130,7 @@ namespace SharpMap.Providers
         /// <param name="features">Features to be included in this datasource</param>
         public MemoryProvider(IEnumerable<IFeature> features)
         {
+            SRID = -1;
             Features = new Features();
             foreach (var feature in features) Features.Add(feature);
         }
@@ -146,6 +141,7 @@ namespace SharpMap.Providers
         /// <param name="features">Features to be included in this datasource</param>
         public MemoryProvider(IFeatures features)
         {
+            SRID = -1;
             Features = features;
         }
 
@@ -155,6 +151,7 @@ namespace SharpMap.Providers
         /// <param name="geometry">Geometry to be in this datasource</param>
         public MemoryProvider(Geometry geometry)
         {
+            SRID = -1;
             Features = new Features();
             IFeature feature = Features.New();
             feature.Geometry = geometry;

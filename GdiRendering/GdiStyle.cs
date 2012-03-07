@@ -39,7 +39,7 @@ namespace GdiRendering
         public static System.Drawing.Bitmap Convert(this Bitmap bitmap)
         {
             if (bitmap == null) return null;
-            return new System.Drawing.Bitmap(bitmap.data);
+            return new System.Drawing.Bitmap(bitmap.Data);
         }
 
         public static System.Drawing.PointF Convert(this Offset offset)

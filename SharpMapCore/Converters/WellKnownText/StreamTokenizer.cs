@@ -39,7 +39,6 @@
 
 using System;
 using System.IO;
-using System.Text;
 using System.Globalization;
 
 #endregion
@@ -50,7 +49,7 @@ using System.Globalization;
 // a C# StringTokenizer
 //  http://sourceforge.net/snippet/detail.php?type=snippet&id=101171
 
-namespace SharpMap.Converters.WellKnownText.IO
+namespace SharpMap.Converters.WellKnownText
 {
     ///<summary>
     ///The StreamTokenizer class takes an input stream and parses it into "tokens", allowing the tokens to be read one at a time. The parsing process is controlled by a table and a number of flags that can be set to various states. The stream tokenizer can recognize identifiers, numbers, quoted strings, and various comment style
@@ -60,12 +59,10 @@ namespace SharpMap.Converters.WellKnownText.IO
     ///</remarks>
     internal class StreamTokenizer
     {
-        private int _colNumber = 1;
-        private string _currentToken;
-        private TokenType _currentTokenType;
-        private bool _ignoreWhitespace = false;
-        private int _lineNumber = 1;
-        private TextReader _reader;
+        private string currentToken;
+        private TokenType currentTokenType;
+        private readonly bool ignoreWhitespace;
+        private readonly TextReader reader;
 
         #region Constructors
 
@@ -76,12 +73,14 @@ namespace SharpMap.Converters.WellKnownText.IO
         /// <param name="ignoreWhitespace">Flag indicating whether whitespace should be ignored.</param>
         public StreamTokenizer(TextReader reader, bool ignoreWhitespace)
         {
+            Column = 1;
+            LineNumber = 1;
             if (reader == null)
             {
                 throw new ArgumentNullException("reader");
             }
-            _reader = reader;
-            _ignoreWhitespace = ignoreWhitespace;
+            this.reader = reader;
+            this.ignoreWhitespace = ignoreWhitespace;
         }
 
         #endregion
@@ -91,18 +90,12 @@ namespace SharpMap.Converters.WellKnownText.IO
         /// <summary>
         /// The current line number of the stream being read.
         /// </summary>
-        public int LineNumber
-        {
-            get { return _lineNumber; }
-        }
+        public int LineNumber { get; private set; }
 
         /// <summary>
         /// The current column number of the stream being read.
         /// </summary>
-        public int Column
-        {
-            get { return _colNumber; }
-        }
+        public int Column { get; private set; }
 
         #endregion
 
@@ -125,7 +118,7 @@ namespace SharpMap.Converters.WellKnownText.IO
             throw new Exception(String.Format(CultureInfo.InvariantCulture,
                                               "The token '{0}' is not a number at line {1} column {2}.", number,
                                               LineNumber, Column));
-            ;
+            
         }
 
         /// <summary>
@@ -133,7 +126,7 @@ namespace SharpMap.Converters.WellKnownText.IO
         /// </summary>
         public string GetStringValue()
         {
-            return _currentToken;
+            return currentToken;
         }
 
         /// <summary>
@@ -142,18 +135,18 @@ namespace SharpMap.Converters.WellKnownText.IO
         /// <returns></returns>
         public TokenType GetTokenType()
         {
-            return _currentTokenType;
+            return currentTokenType;
         }
 
         /// <summary>
         /// Returns the next token.
         /// </summary>
-        /// <param name="ignoreWhitespace">Determines is whitespace is ignored. True if whitespace is to be ignored.</param>
+        /// <param name="ignoreWhitespaceAsToken">Determines is whitespace is ignored. True if whitespace is to be ignored.</param>
         /// <returns>The TokenType of the next token.</returns>
-        public TokenType NextToken(bool ignoreWhitespace)
+        public TokenType NextToken(bool ignoreWhitespaceAsToken)
         {
             TokenType nextTokenType;
-            if (ignoreWhitespace)
+            if (ignoreWhitespaceAsToken)
             {
                 nextTokenType = NextNonWhitespaceToken();
             }
@@ -170,53 +163,48 @@ namespace SharpMap.Converters.WellKnownText.IO
         /// <returns>The TokenType of the next token.</returns>
         public TokenType NextToken()
         {
-            return NextToken(_ignoreWhitespace);
+            return NextToken(ignoreWhitespace);
         }
 
         private TokenType NextTokenAny()
         {
-            TokenType nextTokenType = TokenType.Eof;
-            char[] chars = new char[1];
-            _currentToken = "";
-            _currentTokenType = TokenType.Eof;
-            int finished = _reader.Read(chars, 0, 1);
+            var chars = new char[1];
+            currentToken = "";
+            currentTokenType = TokenType.Eof;
+            int finished = reader.Read(chars, 0, 1);
 
             bool isNumber = false;
             bool isWord = false;
-            char ba;
 
-            char[] ascii = null;
-            Char currentCharacter;
-            Char nextCharacter;
             while (finished != 0)
             {
                 // convert int to char
-                ba = (char)this._reader.Peek();
-                ascii = new[] { ba };
+                var ba = (char)reader.Peek();
+                var ascii = new[] { ba };
 
-                currentCharacter = chars[0];
-                nextCharacter = ascii[0];
-                _currentTokenType = GetType(currentCharacter);
-                nextTokenType = GetType(nextCharacter);
+                Char currentCharacter = chars[0];
+                Char nextCharacter = ascii[0];
+                currentTokenType = GetType(currentCharacter);
+                TokenType nextTokenType = GetType(nextCharacter);
 
                 // handling of words with _
                 if (isWord && currentCharacter == '_')
                 {
-                    _currentTokenType = TokenType.Word;
+                    currentTokenType = TokenType.Word;
                 }
                 // handing of words ending in numbers
-                if (isWord && _currentTokenType == TokenType.Number)
+                if (isWord && currentTokenType == TokenType.Number)
                 {
-                    _currentTokenType = TokenType.Word;
+                    currentTokenType = TokenType.Word;
                 }
 
-                if (_currentTokenType == TokenType.Word && nextCharacter == '_')
+                if (currentTokenType == TokenType.Word && nextCharacter == '_')
                 {
                     //enable words with _ inbetween
                     nextTokenType = TokenType.Word;
                     isWord = true;
                 }
-                if (_currentTokenType == TokenType.Word && nextTokenType == TokenType.Number)
+                if (currentTokenType == TokenType.Word && nextTokenType == TokenType.Number)
                 {
                     //enable words ending with numbers
                     nextTokenType = TokenType.Word;
@@ -226,7 +214,7 @@ namespace SharpMap.Converters.WellKnownText.IO
                 // handle negative numbers
                 if (currentCharacter == '-' && nextTokenType == TokenType.Number) // && isNumber == false)
                 {
-                    _currentTokenType = TokenType.Number;
+                    currentTokenType = TokenType.Number;
                     nextTokenType = TokenType.Number;
                     //isNumber = true;
                 }
@@ -239,7 +227,7 @@ namespace SharpMap.Converters.WellKnownText.IO
 
                 if (isNumber && (currentCharacter.Equals('E') || currentCharacter.Equals('e')) && (nextTokenType == TokenType.Number || nextTokenType == TokenType.Symbol))
                 {
-                    _currentTokenType = TokenType.Number;
+                    currentTokenType = TokenType.Number;
                     nextTokenType = TokenType.Number;
                 }
 
@@ -247,42 +235,42 @@ namespace SharpMap.Converters.WellKnownText.IO
                 // this handles numbers with a decimal point
                 if (isNumber && nextTokenType == TokenType.Number && currentCharacter == '.')
                 {
-                    _currentTokenType = TokenType.Number;
+                    currentTokenType = TokenType.Number;
                 }
-                if (_currentTokenType == TokenType.Number && nextCharacter == '.' && isNumber == false)
+                if (currentTokenType == TokenType.Number && nextCharacter == '.' && isNumber == false)
                 {
                     nextTokenType = TokenType.Number;
                     isNumber = true;
                 }
 
 
-                _colNumber++;
-                if (_currentTokenType == TokenType.Eol)
+                Column++;
+                if (currentTokenType == TokenType.Eol)
                 {
-                    _lineNumber++;
-                    _colNumber = 1;
+                    LineNumber++;
+                    Column = 1;
                 }
 
-                _currentToken = _currentToken + currentCharacter;
+                currentToken = currentToken + currentCharacter;
                 //if (_currentTokenType==TokenType.Word && nextCharacter=='_')
                 //{
                 // enable words with _ inbetween
                 //	finished = _reader.Read(chars,0,1);
                 //}
-                if (_currentTokenType != nextTokenType)
+                if (currentTokenType != nextTokenType)
                 {
                     finished = 0;
                 }
-                else if (_currentTokenType == TokenType.Symbol && currentCharacter != '-')
+                else if (currentTokenType == TokenType.Symbol && currentCharacter != '-')
                 {
                     finished = 0;
                 }
                 else
                 {
-                    finished = _reader.Read(chars, 0, 1);
+                    finished = reader.Read(chars, 0, 1);
                 }
             }
-            return _currentTokenType;
+            return currentTokenType;
         }
 
         /// <summary>
@@ -296,22 +284,19 @@ namespace SharpMap.Converters.WellKnownText.IO
             {
                 return TokenType.Number;
             }
-            else if (Char.IsLetter(character))
+            if (Char.IsLetter(character))
             {
                 return TokenType.Word;
             }
-            else if (character == '\n')
+            if (character == '\n')
             {
                 return TokenType.Eol;
             }
-            else if (Char.IsWhiteSpace(character) || Char.IsControl(character))
+            if (Char.IsWhiteSpace(character) || Char.IsControl(character))
             {
                 return TokenType.Whitespace;
             }
-            else //(Char.IsSymbol(character))
-            {
-                return TokenType.Symbol;
-            }
+            return TokenType.Symbol;
         }
 
         /// <summary>

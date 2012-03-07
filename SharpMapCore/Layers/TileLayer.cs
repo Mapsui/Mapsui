@@ -149,7 +149,7 @@ namespace SharpMap.Layers
             return sortedDictionary.Values;
         }
 
-        private void GetRecursive(IDictionary<TileIndex, IFeature> resultTiles, ITileSchema schema, MemoryCache<Feature> memoryCache, Extent extent, int level)
+        private void GetRecursive(IDictionary<TileIndex, IFeature> resultTiles, ITileSchema schema, MemoryCache<Feature> cache, Extent extent, int level)
         {
             if (level < 0) return;
 
@@ -157,17 +157,17 @@ namespace SharpMap.Layers
             
             foreach (TileInfo tileInfo in tiles)
             {
-                var feature = memoryCache.Find(tileInfo.Index);
+                var feature = cache.Find(tileInfo.Index);
                 if (feature == null)
                 {
-                    GetRecursive(resultTiles, schema, memoryCache, tileInfo.Extent.Intersect(extent), level - 1);
+                    GetRecursive(resultTiles, schema, cache, tileInfo.Extent.Intersect(extent), level - 1);
                 }
                 else
                 {
                     resultTiles[tileInfo.Index] = feature;
                     if (!IsFullyShown(feature))
                     {
-                        GetRecursive(resultTiles, schema, memoryCache, tileInfo.Extent.Intersect(extent), level - 1);
+                        GetRecursive(resultTiles, schema, cache, tileInfo.Extent.Intersect(extent), level - 1);
                     }
                 }
             }
@@ -177,7 +177,7 @@ namespace SharpMap.Layers
         {
             var currentTile = DateTime.Now.Ticks;
             var tile = ((IRaster)feature.Geometry);
-            long second = 10000000;
+            const long second = 10000000;
             return ((currentTile - tile.TickFetched) > second);
         }
     }

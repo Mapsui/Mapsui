@@ -42,12 +42,12 @@ namespace SharpMap.Converters.WellKnownBinary
     /// </summary>
     internal enum WKBGeometryType : uint
     {
-        wkbPoint = 1,
-        wkbLineString = 2,
-        wkbPolygon = 3,
-        wkbMultiPoint = 4,
-        wkbMultiLineString = 5,
-        wkbMultiPolygon = 6,
-        wkbGeometryCollection = 7
+        WKBPoint = 1,
+        WKBLineString = 2,
+        WKBPolygon = 3,
+        WKBMultiPoint = 4,
+        WKBMultiLineString = 5,
+        WKBMultiPolygon = 6,
+        WKBGeometryCollection = 7
     }
 }

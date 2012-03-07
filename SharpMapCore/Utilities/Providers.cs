@@ -30,39 +30,28 @@ namespace SharpMap.Utilities
         /// </summary>
         public static Collection<Type> GetProviders()
         {
-            Collection<Type> ProviderList = new Collection<Type>();
+            var providerList = new Collection<Type>();
             System.Reflection.Assembly asm = System.Reflection.Assembly.GetExecutingAssembly();
             foreach (Type t in asm.GetTypes())
             {
-                Type[] Interfaces = t.GetInterfaces();
+                Type[] interfaces = t.GetInterfaces();
 
-                bool FoundOne = false;
+                bool foundOne = false;
                 //Do the filtering manually.
-                foreach (Type i in Interfaces)
+                foreach (Type i in interfaces)
                 {
                     if (i.Name == "SharpMap.Providers.IProvider")
                     {
-                        FoundOne = true;
+                        foundOne = true;
                     }
                 }
 
-                if (FoundOne == true)
-                    ProviderList.Add(t);
+                if (foundOne)
+                    providerList.Add(t);
 
 
             }
-            return ProviderList;
-        }
-
-        /// <summary>
-        /// Filter method used for searching for objects in an assembly
-        /// </summary>
-        /// <param name="typeObj"></param>
-        /// <param name="criteriaObj"></param>
-        /// <returns></returns>
-        private static bool MyInterfaceFilter(Type typeObj, Object criteriaObj)
-        {
-            return (typeObj.ToString() == criteriaObj.ToString());
+            return providerList;
         }
     }
 }

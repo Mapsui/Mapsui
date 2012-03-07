@@ -16,54 +16,34 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
 using System;
-using System.Collections.Generic;
-using System.Text;
-using SharpMap.Styles;
 
 namespace SharpMap.Styles.Thematics
 {
 	/// <summary>
 	/// Defines arrays of colors and positions used for interpolating color blending in a multicolor gradient.
 	/// </summary>
-	/// <seealso cref="SharpMap.Rendering.Thematics.GradientTheme"/>
 	public class ColorBlend
 	{
-		private Color[] _Colors;
+	    /// <summary>
+	    /// Gets or sets an array of colors that represents the colors to use at corresponding positions along a gradient.
+	    /// </summary>
+	    public Color[] Colors { get; set; }
 
-		/// <summary>
-		/// Gets or sets an array of colors that represents the colors to use at corresponding positions along a gradient.
-		/// </summary>
-		/// <value>An array of <see cref="System.Drawing.Color"/> structures that represents the colors to use at corresponding positions along a gradient.</value>
-		/// <remarks>
-		/// This property is an array of <see cref="System.Drawing.Color"/> structures that represents the colors to use at corresponding positions
-		/// along a gradient. Along with the Positions property, this property defines a multicolor gradient.
-		/// </remarks>
-		public Color[] Colors
-		{
-			get { return _Colors; }
-			set { _Colors = value; }
-		}
+	    /// <summary>
+	    /// Gets or sets the positions along a gradient line.
+	    /// </summary>
+	    /// <value>An array of values that specify percentages of distance along the gradient line.</value>
+	    /// <remarks>
+	    /// <para>The elements of this array specify percentages of distance along the gradient line.
+	    /// For example, an element value of 0.2f specifies that this point is 20 percent of the total
+	    /// distance from the starting point. The elements in this array are represented by float
+	    /// values between 0.0f and 1.0f, and the first element of the array must be 0.0f and the
+	    /// last element must be 1.0f.</para>
+	    /// <pre>Along with the Colors property, this property defines a multicolor gradient.</pre>
+	    /// </remarks>
+	    public float[] Positions { get; set; }
 
-		private float[] _Positions;
-
-		/// <summary>
-		/// Gets or sets the positions along a gradient line.
-		/// </summary>
-		/// <value>An array of values that specify percentages of distance along the gradient line.</value>
-		/// <remarks>
-		/// <para>The elements of this array specify percentages of distance along the gradient line.
-		/// For example, an element value of 0.2f specifies that this point is 20 percent of the total
-		/// distance from the starting point. The elements in this array are represented by float
-		/// values between 0.0f and 1.0f, and the first element of the array must be 0.0f and the
-		/// last element must be 1.0f.</para>
-		/// <pre>Along with the Colors property, this property defines a multicolor gradient.</pre>
-		/// </remarks>
-		public float[] Positions
-		{
-			get { return _Positions; }
-			set { _Positions = value; }
-		}
-		internal ColorBlend() { }
+	    internal ColorBlend() { }
 
 		/// <summary>
 		/// Initializes a new instance of the ColorBlend class.
@@ -72,8 +52,8 @@ namespace SharpMap.Styles.Thematics
 		/// <param name="positions">An array of values that specify percentages of distance along the gradient line.</param>
 		public ColorBlend(Color[] colors, float[] positions)
 		{
-			_Colors = colors;
-			_Positions = positions;
+			Colors = colors;
+			Positions = positions;
 		}
 
 		/// <summary>
@@ -85,25 +65,25 @@ namespace SharpMap.Styles.Thematics
 		/// <returns>Color on scale</returns>
 		public Color GetColor(float pos)
 		{
-			if (_Colors.Length != _Positions.Length)
+			if (Colors.Length != Positions.Length)
 				throw (new ArgumentException("Colors and Positions arrays must be of equal length"));
-			if (_Colors.Length < 2)
+			if (Colors.Length < 2)
 				throw (new ArgumentException("At least two colors must be defined in the ColorBlend"));
-			if (_Positions[0] != 0f)
+			if (Positions[0] != 0f)
 				throw (new ArgumentException("First position value must be 0.0f"));
-			if (_Positions[_Positions.Length - 1] != 1f)
+			if (Positions[Positions.Length - 1] != 1f)
 				throw (new ArgumentException("Last position value must be 1.0f"));
 			if (pos > 1 || pos < 0) pos -= (float)Math.Floor(pos);
 			int i = 1;
-			while (i < _Positions.Length && _Positions[i] < pos)
+			while (i < Positions.Length && Positions[i] < pos)
 				i++;
-			float frac = (pos - _Positions[i - 1]) / (_Positions[i] - _Positions[i - 1]);
-			int R = (int)Math.Round((_Colors[i - 1].R * (1 - frac) + _Colors[i].R * frac));
-			int G = (int)Math.Round((_Colors[i - 1].G * (1 - frac) + _Colors[i].G * frac));
-			int B = (int)Math.Round((_Colors[i - 1].B * (1 - frac) + _Colors[i].B * frac));
-			int A = (int)Math.Round((_Colors[i - 1].A * (1 - frac) + _Colors[i].A * frac));
+			float frac = (pos - Positions[i - 1]) / (Positions[i] - Positions[i - 1]);
+			var red = (int)Math.Round((Colors[i - 1].R * (1 - frac) + Colors[i].R * frac));
+			var green = (int)Math.Round((Colors[i - 1].G * (1 - frac) + Colors[i].G * frac));
+			var blue = (int)Math.Round((Colors[i - 1].B * (1 - frac) + Colors[i].B * frac));
+			var alpha = (int)Math.Round((Colors[i - 1].A * (1 - frac) + Colors[i].A * frac));
 
-            return new Color() { A = A, R = R, G = G, B = B }; //Not sure how to assign in case of equal naming
+            return new Color { A = alpha, R = red, G = green, B = blue }; //Not sure how to assign in case of equal naming
 
         }
 
@@ -138,12 +118,12 @@ namespace SharpMap.Styles.Thematics
         {
             get
             {
-                ColorBlend cb = new ColorBlend();
-                cb._Positions = new float[7];
+                var cb = new ColorBlend();
+                cb.Positions = new float[7];
                 int i = 0;
                 for (float f = 0; f <= 1; f += 1.0f / 6)
                     cb.Positions[i++] = f;
-                cb.Colors = new Color[] { 
+                cb.Colors = new[] { 
                     Color.Red, Color.Orange, Color.Yellow, Color.Green, Color.Blue, Color.Indigo, Color.Violet};
                 return cb;
             }
@@ -161,8 +141,8 @@ namespace SharpMap.Styles.Thematics
             get
             {
                 return new ColorBlend(
-                    new Color[] { Color.Red, Color.Yellow, Color.Green, Color.Cyan, Color.Blue },
-                    new float[] { 0f, 0.25f, 0.5f, 0.75f, 1f });
+                    new[] { Color.Red, Color.Yellow, Color.Green, Color.Cyan, Color.Blue },
+                    new[] { 0f, 0.25f, 0.5f, 0.75f, 1f });
             }
         }
 
@@ -173,7 +153,7 @@ namespace SharpMap.Styles.Thematics
 		{
 			get
 			{
-                return new ColorBlend(new Color[] { Color.Black, Color.White}, new float[] { 0f, 1f });
+                return new ColorBlend(new[] { Color.Black, Color.White}, new[] { 0f, 1f });
 			}
 		}
 
@@ -184,7 +164,7 @@ namespace SharpMap.Styles.Thematics
 		{
 			get
 			{
-				return new ColorBlend(new Color[] { Color.White, Color.Black }, new float[] { 0f, 1f });
+				return new ColorBlend(new[] { Color.White, Color.Black }, new[] { 0f, 1f });
 			}
 		}
 
@@ -195,7 +175,7 @@ namespace SharpMap.Styles.Thematics
 		{
 			get
 			{
-				return new ColorBlend(new Color[] { Color.Red, Color.Green }, new float[] { 0f, 1f });
+				return new ColorBlend(new[] { Color.Red, Color.Green }, new[] { 0f, 1f });
 			}
 		}
 
@@ -206,7 +186,7 @@ namespace SharpMap.Styles.Thematics
 		{
 			get
 			{
-				return new ColorBlend(new Color[] { Color.Green, Color.Red }, new float[] { 0f, 1f });
+				return new ColorBlend(new[] { Color.Green, Color.Red }, new[] { 0f, 1f });
 			}
 		}
 
@@ -217,7 +197,7 @@ namespace SharpMap.Styles.Thematics
 		{
 			get
 			{
-				return new ColorBlend(new Color[] { Color.Blue, Color.Green }, new float[] { 0f, 1f });
+				return new ColorBlend(new[] { Color.Blue, Color.Green }, new[] { 0f, 1f });
 			}
 		}
 
@@ -228,7 +208,7 @@ namespace SharpMap.Styles.Thematics
 		{
 			get
 			{
-				return new ColorBlend(new Color[] { Color.Green, Color.Blue }, new float[] { 0f, 1f });
+				return new ColorBlend(new[] { Color.Green, Color.Blue }, new[] { 0f, 1f });
 			}
 		}
 
@@ -239,7 +219,7 @@ namespace SharpMap.Styles.Thematics
 		{
 			get
 			{
-				return new ColorBlend(new Color[] { Color.Red, Color.Blue }, new float[] { 0f, 1f });
+				return new ColorBlend(new[] { Color.Red, Color.Blue }, new[] { 0f, 1f });
 			}
 		}
 
@@ -250,7 +230,7 @@ namespace SharpMap.Styles.Thematics
 		{
 			get
 			{
-				return new ColorBlend(new Color[] { Color.Blue, Color.Red }, new float[] { 0f, 1f });
+				return new ColorBlend(new[] { Color.Blue, Color.Red }, new[] { 0f, 1f });
 			}
 		}
 
@@ -266,7 +246,7 @@ namespace SharpMap.Styles.Thematics
 		/// <returns></returns>
 		public static ColorBlend TwoColors(Color fromColor, Color toColor)
 		{
-			return new ColorBlend(new Color[] { fromColor, toColor }, new float[] { 0f, 1f });
+			return new ColorBlend(new[] { fromColor, toColor }, new[] { 0f, 1f });
 		}
 
 		/// <summary>
@@ -274,7 +254,7 @@ namespace SharpMap.Styles.Thematics
 		/// </summary>
 		public static ColorBlend ThreeColors(Color fromColor, Color middleColor, Color toColor)
 		{
-			return new ColorBlend(new Color[] { fromColor, middleColor, toColor }, new float[] { 0f, 0.5f, 1f });
+			return new ColorBlend(new[] { fromColor, middleColor, toColor }, new[] { 0f, 0.5f, 1f });
 		}
 
 		#endregion

@@ -16,6 +16,7 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
 using System;
+using System.Linq;
 using ProjNet.CoordinateSystems.Transformations;
 using SharpMap.Fetcher;
 using SharpMap.Geometries;
@@ -52,8 +53,8 @@ namespace SharpMap.Layers
     {
         private bool isFetching;
         private bool needsUpdate = true;
-        private double resolution;
-        private BoundingBox extent;
+        private double newResolution;
+        private BoundingBox newExtent;
         private MemoryProvider cache;
 
         #region Properties
@@ -128,8 +129,8 @@ namespace SharpMap.Layers
             if (DataSource == null) return;
             if (!changeEnd) return;
             
-            this.extent = extent;
-            this.resolution = resolution;
+            newExtent = extent;
+            newResolution = resolution;
 
             if (isFetching)
             {
@@ -154,7 +155,9 @@ namespace SharpMap.Layers
         private void DataArrived(IEnumerable<IFeature> features)
         {
             //the data in the cache is stored in the map projection so it projected only once.
+            if (features == null) throw new ArgumentException("argument features may not be null");
 
+            features = features.ToList();
             if (CoordinateTransformation != null)
                 foreach (var feature in features)
                     ProjectionHelper.Transform(feature.Geometry, CoordinateTransformation);
@@ -166,7 +169,7 @@ namespace SharpMap.Layers
 
             if (needsUpdate)
             {
-                StartNewFetch(extent, resolution);
+                StartNewFetch(newExtent, newResolution);
             }
         }
 

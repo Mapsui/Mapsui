@@ -17,7 +17,7 @@ namespace DemoConfig
             const string resource = "DemoConfig.Images.netherlands.jpg";
             netherlands.Style = new SymbolStyle
             {
-                Symbol = new Bitmap { data = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream(resource) },
+                Symbol = new Bitmap { Data = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream(resource) },
                 SymbolType = SymbolType.Rectangle,
                 UnitType = UnitType.WorldUnit,
                 SymbolRotation = 5f,

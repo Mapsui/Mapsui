@@ -13,9 +13,9 @@ namespace SharpMap.Layers
     public class GroupTileLayer : BaseLayer, ITileLayer, IAsyncDataFetcher
     {
         private IList<TileLayer> layers = new List<TileLayer>();
-        private MemoryCache<Feature> memoryCache = new MemoryCache<Feature>(100, 200);
+        private readonly MemoryCache<Feature> memoryCache = new MemoryCache<Feature>(100, 200);
         
-        public GroupTileLayer(IEnumerable<TileLayer> tileLayers) : base()
+        public GroupTileLayer(IEnumerable<TileLayer> tileLayers)
         {
             foreach (var tileLayer in tileLayers)
             {
@@ -26,10 +26,10 @@ namespace SharpMap.Layers
         public void AddTileLayer(TileLayer layer)
         {
             Layers.Add(layer);
-            layer.DataChanged += tileLayer_DataChanged;
+            layer.DataChanged += TileLayerDataChanged;
         }
 
-        private void tileLayer_DataChanged(object sender, DataChangedEventArgs e)
+        private void TileLayerDataChanged(object sender, DataChangedEventArgs e)
         {
             if (Schema == null) return;
 
@@ -152,7 +152,7 @@ namespace SharpMap.Layers
             {
                 if (memoryCache.Find(tileInfo.Index) == null)
                 {
-                    tileLayer_DataChanged(this, new DataChangedEventArgs(null, false, tileInfo, this.LayerName));
+                    TileLayerDataChanged(this, new DataChangedEventArgs(null, false, tileInfo, LayerName));
                 }
             }
         }
@@ -161,9 +161,10 @@ namespace SharpMap.Layers
 
         public ITileSchema Schema
         {
-            get { 
+            get
+            {
                 if (Layers.Count > 0) return Layers[0].Schema;
-                else return null;
+                return null;
             }
         }
         

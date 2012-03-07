@@ -8,7 +8,7 @@ namespace SharpMap
 {
     public class LayerCollection : IEnumerable<ILayer>
     {
-        private readonly IList<ILayer> _layers = new List<ILayer>();
+        private readonly IList<ILayer> layers = new List<ILayer>();
         
         public delegate void LayerRemovedEventHandler(ILayer layer);
         public delegate void LayerAddedEventHandler(ILayer layer);
@@ -18,22 +18,22 @@ namespace SharpMap
 
         public int Count
         {
-            get { return _layers.Count(); }
+            get { return layers.Count(); }
         }
 
         public IEnumerator<ILayer> GetEnumerator()
         {
-            return _layers.GetEnumerator();
+            return layers.GetEnumerator();
         }
         
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return _layers.GetEnumerator();
+            return layers.GetEnumerator();
         }
 
         public void Clear()
         {
-            foreach (var layer in _layers)
+            foreach (var layer in layers)
             {
                 if (layer is IAsyncDataFetcher)
                 {
@@ -41,29 +41,29 @@ namespace SharpMap
                 }
                 OnLayerRemoved(layer);
             }
-            _layers.Clear();
+            layers.Clear();
         }
 
         public ILayer this[int index]
         {
-            get { return _layers[index]; }
+            get { return layers[index]; }
         }
 
         public void Add(ILayer layer)
         {
-            _layers.Add(layer);
+            layers.Add(layer);
             OnLayerAdded(layer);
         }
 
         public void Insert(int index, ILayer layer)
         {
-            _layers.Insert(index, layer);
+            layers.Insert(index, layer);
             OnLayerAdded(layer);
         }
 
         public void Remove(ILayer layer)
         {
-            _layers.Remove(layer);
+            layers.Remove(layer);
             if (layer is IAsyncDataFetcher)
             {
                 (layer as IAsyncDataFetcher).AbortFetch();
@@ -84,7 +84,7 @@ namespace SharpMap
 
         public IEnumerable<ILayer> FindLayer(string layername)
         {
-            return _layers.Where(layer => layer.LayerName.Contains(layername));
+            return layers.Where(layer => layer.LayerName.Contains(layername));
         }
     }
 }

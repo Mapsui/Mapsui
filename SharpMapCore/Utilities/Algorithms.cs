@@ -20,7 +20,7 @@ using SharpMap.Geometries;
 
 namespace SharpMap.Utilities
 {
-    internal class Algorithms
+    internal static class Algorithms
     {
 
         /// <summary>
@@ -63,9 +63,6 @@ namespace SharpMap.Utilities
         /// <returns>Returns true if ring is oriented counter-clockwise.</returns>
         public static bool IsCCW(LinearRing ring)
         {
-            Point PrevPoint, NextPoint;
-            Point p;
-
             // Check if the ring has enough vertices to be a ring
             if (ring.Vertices.Count < 3) throw (new ArgumentException("Invalid LinearRing"));
 
@@ -74,7 +71,7 @@ namespace SharpMap.Utilities
             int hii = 0;
             for (int i = 1; i < ring.Vertices.Count; i++)
             {
-                p = ring.Vertices[i];
+                Point p = ring.Vertices[i];
                 if (p.Y > hip.Y)
                 {
                     hip = p;
@@ -87,20 +84,20 @@ namespace SharpMap.Utilities
             // Point right to Hip
             int iNext = hii + 1;
             if (iNext >= ring.Vertices.Count) iNext = 1;
-            PrevPoint = ring.Vertices[iPrev];
-            NextPoint = ring.Vertices[iNext];
+            Point prevPoint = ring.Vertices[iPrev];
+            Point nextPoint = ring.Vertices[iNext];
 
             // translate so that hip is at the origin.
             // This will not affect the area calculation, and will avoid
             // finite-accuracy errors (i.e very small vectors with very large coordinates)
             // This also simplifies the discriminant calculation.
-            double prev2x = PrevPoint.X - hip.X;
-            double prev2y = PrevPoint.Y - hip.Y;
-            double next2x = NextPoint.X - hip.X;
-            double next2y = NextPoint.Y - hip.Y;
+            double prev2X = prevPoint.X - hip.X;
+            double prev2Y = prevPoint.Y - hip.Y;
+            double next2X = nextPoint.X - hip.X;
+            double next2Y = nextPoint.Y - hip.Y;
             // compute cross-product of vectors hip->next and hip->prev
             // (e.g. area of parallelogram they enclose)
-            double disc = next2x*prev2y - next2y*prev2x;
+            double disc = next2X*prev2Y - next2Y*prev2X;
             // If disc is exactly 0, lines are collinear.  There are two possible cases:
             //	(1) the lines lie along the x axis in opposite directions
             //	(2) the line lie on top of one another
@@ -111,13 +108,10 @@ namespace SharpMap.Utilities
             if (disc == 0.0)
             {
                 // poly is CCW if prev x is right of next x
-                return (PrevPoint.X > NextPoint.X);
+                return (prevPoint.X > nextPoint.X);
             }
-            else
-            {
-                // if area is positive, points are ordered CCW
-                return (disc > 0.0);
-            }
+            // if area is positive, points are ordered CCW
+            return (disc > 0.0);
         }
     }
 }

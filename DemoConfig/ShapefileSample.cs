@@ -151,9 +151,9 @@ namespace DemoConfig
                                   iconPath));
             }
 
-            citymin.Symbol = new Bitmap { data = new FileStream(iconPath, FileMode.Open, FileAccess.Read) };
+            citymin.Symbol = new Bitmap { Data = new FileStream(iconPath, FileMode.Open, FileAccess.Read) };
             citymin.SymbolScale = 0.5f;
-            citymax.Symbol = new Bitmap { data = new FileStream(iconPath, FileMode.Open, FileAccess.Read) };
+            citymax.Symbol = new Bitmap { Data = new FileStream(iconPath, FileMode.Open, FileAccess.Read) };
             citymax.SymbolScale = 1f;
             return new GradientTheme("Population", 1000000, 5000000, citymin, citymax);
         }

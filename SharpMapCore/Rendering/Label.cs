@@ -27,11 +27,6 @@ namespace SharpMap.Rendering
     /// </summary>
     public class LabelBox : IComparable<LabelBox>
     {
-        private double _height;
-        private double _left;
-        private double _top;
-        private double _width;
-
         /// <summary>
         /// Initializes a new LabelBox instance
         /// </summary>
@@ -41,10 +36,10 @@ namespace SharpMap.Rendering
         /// <param name="height">Height of the box</param>
         public LabelBox(double left, double top, double width, double height)
         {
-            _left = left;
-            _top = top;
-            _width = width;
-            _height = height;
+            Left = left;
+            Top = top;
+            Width = width;
+            Height = height;
         }
 
         /// <summary>
@@ -53,54 +48,38 @@ namespace SharpMap.Rendering
         /// <param name="rectangle"></param>
         public LabelBox(BoundingBox rectangle)
         {
-            _left = rectangle.MinX;
-            _top = rectangle.MinY;
-            _width = rectangle.Width;
-            _height = rectangle.Height;
+            Left = rectangle.MinX;
+            Top = rectangle.MinY;
+            Width = rectangle.Width;
+            Height = rectangle.Height;
         }
 
         /// <summary>
         /// The Left tie-point for the Label
         /// </summary>
-        public double Left
-        {
-            get { return _left; }
-            set { _left = value; }
-        }
+        public double Left { get; set; }
 
         /// <summary>
         /// The Top tie-point for the label
         /// </summary>
-        public double Top
-        {
-            get { return _top; }
-            set { _top = value; }
-        }
+        public double Top { get; set; }
 
         /// <summary>
         /// Width of the box
         /// </summary>
-        public double Width
-        {
-            get { return _width; }
-            set { _width = value; }
-        }
+        public double Width { get; set; }
 
         /// <summary>
         /// Height of the box
         /// </summary>
-        public double Height
-        {
-            get { return _height; }
-            set { _height = value; }
-        }
+        public double Height { get; set; }
 
         /// <summary>
         /// Right side of the box
         /// </summary>
         public double Right
         {
-            get { return _left + _width; }
+            get { return Left + Width; }
         }
 
         /// <summary>
@@ -108,7 +87,7 @@ namespace SharpMap.Rendering
         /// </summary>
         public double Bottom
         {
-            get { return _top - _height; }
+            get { return Top - Height; }
         }
 
         #region IComparable<LabelBox> Members
@@ -122,11 +101,9 @@ namespace SharpMap.Rendering
         {
             if (Intersects(other))
                 return 0;
-            else if (other.Left > Right ||
-                     other.Bottom > Top)
+            if (other.Left > Right || other.Bottom > Top)
                 return 1;
-            else
-                return -1;
+            return -1;
         }
 
         #endregion
@@ -150,16 +127,6 @@ namespace SharpMap.Rendering
     /// </summary>
     public class Label : IComparable<Label>, IComparer<Label>
     {
-        private LabelBox _box;
-        private Font _Font;
-        private Point _LabelPoint;
-        private int _Priority;
-        private float _Rotation;
-        private bool _show;
-        private LabelStyle _Style;
-
-        private string _Text;
-
         /// <summary>
         /// Initializes a new Label instance
         /// </summary>
@@ -172,86 +139,54 @@ namespace SharpMap.Rendering
         public Label(string text, Point labelpoint, float rotation, int priority, LabelBox collisionbox,
                      LabelStyle style)
         {
-            _Text = text;
-            _LabelPoint = labelpoint;
-            _Rotation = rotation;
-            _Priority = priority;
-            _box = collisionbox;
-            _Style = style;
-            _show = true;
+            Text = text;
+            LabelPoint = labelpoint;
+            Rotation = rotation;
+            Priority = priority;
+            Box = collisionbox;
+            Style = style;
+            Show = true;
         }
 
         /// <summary>
         /// Show this label or don't
         /// </summary>
-        public bool Show
-        {
-            get { return _show; }
-            set { _show = value; }
-        }
+        public bool Show { get; set; }
 
         /// <summary>
         /// The text of the label
         /// </summary>
-        public string Text
-        {
-            get { return _Text; }
-            set { _Text = value; }
-        }
+        public string Text { get; set; }
 
         /// <summary>
         /// Label position
         /// </summary>
-        public Point LabelPoint
-        {
-            get { return _LabelPoint; }
-            set { _LabelPoint = value; }
-        }
+        public Point LabelPoint { get; set; }
 
         /// <summary>
         /// Label font
         /// </summary>
-        public Font Font
-        {
-            get { return _Font; }
-            set { _Font = value; }
-        }
+        public Font Font { get; set; }
 
         /// <summary>
         /// Label rotation
         /// </summary>
-        public float Rotation
-        {
-            get { return _Rotation; }
-            set { _Rotation = value; }
-        }
+        public float Rotation { get; set; }
 
         /// <summary>
         /// Value indicating rendering priority
         /// </summary>
-        public int Priority
-        {
-            get { return _Priority; }
-            set { _Priority = value; }
-        }
+        public int Priority { get; set; }
 
         /// <summary>
         /// Label box
         /// </summary>
-        public LabelBox Box
-        {
-            get { return _box; }
-            set { _box = value; }
-        }
+        public LabelBox Box { get; set; }
 
         /// <summary>
         /// Gets or sets the <see cref="SharpMap.Styles.LabelStyle"/> of this label
         /// </summary>
-        public LabelStyle Style
-        {
-            get { return _Style; }
-            set { _Style = value; }
-        }
+        public LabelStyle Style { get; set; }
 
         #region IComparable<Label> Members
 
@@ -264,12 +199,11 @@ namespace SharpMap.Rendering
         {
             if (this == other)
                 return 0;
-            else if (_box == null)
+            if (Box == null)
                 return -1;
-            else if (other.Box == null)
+            if (other.Box == null)
                 return 1;
-            else
-                return _box.CompareTo(other.Box);
+            return Box.CompareTo(other.Box);
         }
 
         #endregion

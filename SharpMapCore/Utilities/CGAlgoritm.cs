@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using SharpMap.Geometries;
 
 namespace SharpMap.Utilities
@@ -44,18 +43,17 @@ namespace SharpMap.Utilities
             /// <summary> 
             /// Computes the closest point on this line segment to another point.
             /// </summary>
-            /// <param name="p">The point to find the closest point to.</param>
             /// <returns>
             /// A Coordinate which is the closest point on the line segment to the point p.
             /// </returns>
-            public static Point ClosestPoint(Point p, Point LineSegFrom, Point LineSegTo)
+            public static Point ClosestPoint(Point p, Point lineSegFrom, Point lineSegTo)
             {
-                var factor = ProjectionFactor(p, LineSegFrom, LineSegTo);
+                var factor = ProjectionFactor(p, lineSegFrom, lineSegTo);
                 if (factor > 0 && factor < 1)
-                    return Project(p, LineSegFrom, LineSegTo);
-                var dist0 = LineSegFrom.Distance(p);
-                var dist1 = LineSegTo.Distance(p);
-                return dist0 < dist1 ? LineSegFrom : LineSegTo;
+                    return Project(p, lineSegFrom, lineSegTo);
+                var dist0 = lineSegFrom.Distance(p);
+                var dist1 = lineSegTo.Distance(p);
+                return dist0 < dist1 ? lineSegFrom : lineSegTo;
             }
 
             /// <summary> 
@@ -64,15 +62,13 @@ namespace SharpMap.Utilities
             /// Note that the projected point  may lie outside the line segment.  
             /// If this is the case,  the projection factor will lie outside the range [0.0, 1.0].
             /// </summary>
-            /// <param name="p"></param>
-            /// <returns></returns>
-            public static Point Project(Point p, Point LineSegFrom, Point LineSegTo)
+            public static Point Project(Point p, Point lineSegFrom, Point lineSegTo)
             {
-                if (p.Equals(LineSegFrom) || p.Equals(LineSegTo))
+                if (p.Equals(lineSegFrom) || p.Equals(lineSegTo))
                     return new Point(p.X, p.Y);
 
-                var r = ProjectionFactor(p, LineSegFrom,  LineSegTo);
-                Point coord = new Point { X = LineSegFrom.X + r * (LineSegTo.X - LineSegFrom.X), Y = LineSegFrom.Y + r * (LineSegTo.Y - LineSegFrom.Y) };
+                var r = ProjectionFactor(p, lineSegFrom,  lineSegTo);
+                var coord = new Point { X = lineSegFrom.X + r * (lineSegTo.X - lineSegFrom.X), Y = lineSegFrom.Y + r * (lineSegTo.Y - lineSegFrom.Y) };
                 return coord;
             }
 
@@ -82,12 +78,11 @@ namespace SharpMap.Utilities
             /// by which the vector for this segment must be multiplied to
             /// equal the vector for the projection of p.
             /// </summary>
-            /// <param name="p"></param>
             /// <returns></returns>
-            public static double ProjectionFactor(Point p, Point LineSegFrom, Point LineSegTo)
+            public static double ProjectionFactor(Point p, Point lineSegFrom, Point lineSegTo)
             {
-                if (p.Equals(LineSegFrom)) return 0.0;
-                if (p.Equals(LineSegTo)) return 1.0;
+                if (p.Equals(lineSegFrom)) return 0.0;
+                if (p.Equals(lineSegTo)) return 1.0;
 
                 // Otherwise, use comp.graphics.algorithms Frequently Asked Questions method
                 /*                    AC dot AB
@@ -100,10 +95,10 @@ namespace SharpMap.Utilities
                             r>1 Point is on the forward extension of AB
                             0<r<1 Point is interior to AB
                 */
-                var dx = LineSegTo.X - LineSegFrom.X;
-                var dy = LineSegTo.Y - LineSegFrom.Y;
+                var dx = lineSegTo.X - lineSegFrom.X;
+                var dy = lineSegTo.Y - lineSegFrom.Y;
                 var len2 = dx * dx + dy * dy;
-                var r = ((p.X - LineSegFrom.X) * dx + (p.Y - LineSegFrom.Y) * dy) / len2;
+                var r = ((p.X - lineSegFrom.X) * dx + (p.Y - lineSegFrom.Y) * dy) / len2;
                 return r;
             }
 

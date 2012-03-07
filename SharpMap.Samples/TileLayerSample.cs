@@ -24,7 +24,7 @@ namespace SharpMap.Samples
         {
             var pointLayer = new Layer("Geodan");
             pointLayer.DataSource = new MemoryProvider(new Point(546919, 6862238)); // lonlat: 4.9130567, 52.3422033
-            pointLayer.Styles.Add(new SymbolStyle { Symbol = new Bitmap { data = GetImageStreamFromResource("SharpMap.Samples.Images.icon.png") } });
+            pointLayer.Styles.Add(new SymbolStyle { Symbol = new Bitmap { Data = GetImageStreamFromResource("SharpMap.Samples.Images.icon.png") } });
             return pointLayer;
         }
 

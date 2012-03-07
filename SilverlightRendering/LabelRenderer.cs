@@ -89,7 +89,7 @@ namespace SilverlightRendering
             canvas.Opacity = layer.Opacity;
 
             //todo: take into account the priority 
-            var features = layer.GetFeaturesInView(view.Extent, view.Resolution);
+            var features = layer.GetFeaturesInView(view.Extent, view.Resolution).ToList();
             var stackOffset = new Offset();
 
             foreach (var layerStyle in layer.Styles)

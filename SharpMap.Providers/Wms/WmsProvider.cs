@@ -24,16 +24,12 @@ using System.Text;
 using System.Web;
 using System.Web.Caching;
 using SharpMap.Geometries;
-using SharpMap.Providers;
-using SharpMap.Rendering.Exceptions;
+using SharpMap.Rendering;
 using SharpMap.Web.Wms;
-using SharpMap.Styles;
 using System.Globalization;
-using SharpMap.Data.Providers;
-using SharpMap.Data;
 using System.Collections.Generic;
 
-namespace SharpMap.Layers
+namespace SharpMap.Providers.Wms
 {
     /// <summary>
     /// Web Map Service layer

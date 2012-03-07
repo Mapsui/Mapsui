@@ -1,4 +1,5 @@
 ﻿using SharpMap.Layers;
+using SharpMap.Providers.Wms;
 using SharpMap.Styles;
 
 namespace SharpMap.Samples

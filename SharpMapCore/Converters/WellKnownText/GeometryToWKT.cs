@@ -66,7 +66,7 @@ namespace SharpMap.Converters.WellKnownText
     /// <description>GEOMETRYCOLLECTION(POINT(10 10), POINT(30 30), LINESTRING(15 15, 20 20))</description></item>
     /// </list>
     /// </remarks>
-    public class GeometryToWKT
+    public static class GeometryToWKT
     {
         #region Methods
 
@@ -78,7 +78,7 @@ namespace SharpMap.Converters.WellKnownText
         ///  Features Specification)</returns>
         public static string Write(IGeometry geometry)
         {
-            StringWriter sw = new StringWriter();
+            var sw = new StringWriter();
             Write(geometry, sw);
             return sw.ToString();
         }
@@ -106,10 +106,10 @@ namespace SharpMap.Converters.WellKnownText
         {
             if (geometry == null)
                 throw new NullReferenceException("Cannot write Well-Known Text: geometry was null");
-            ;
+            
             if (geometry is Point)
             {
-                Point point = geometry as Point;
+                var point = geometry as Point;
                 AppendPointTaggedText(point, writer);
             }
             else if (geometry is LineString)
@@ -289,10 +289,10 @@ namespace SharpMap.Converters.WellKnownText
             {
                 writer.Write("(");
                 AppendLineStringText(polygon.ExteriorRing, writer);
-                for (int i = 0; i < polygon.InteriorRings.Count; i++)
+                foreach (LinearRing t in polygon.InteriorRings)
                 {
                     writer.Write(", ");
-                    AppendLineStringText(polygon.InteriorRings[i], writer);
+                    AppendLineStringText(t, writer);
                 }
                 writer.Write(")");
             }

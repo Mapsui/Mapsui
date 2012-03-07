@@ -122,15 +122,15 @@ namespace SharpMap.Samples
                                   iconPath));
             }
 
-            citymin.Symbol = new Bitmap { data = new FileStream(iconPath, FileMode.Open, FileAccess.Read) };
+            citymin.Symbol = new Bitmap { Data = new FileStream(iconPath, FileMode.Open, FileAccess.Read) };
             citymin.SymbolScale = 0.5f;
-            citymax.Symbol = new Bitmap { data = new FileStream(iconPath, FileMode.Open, FileAccess.Read) };
+            citymax.Symbol = new Bitmap { Data = new FileStream(iconPath, FileMode.Open, FileAccess.Read) };
             citymax.SymbolScale = 1f;
             cityLayer.Styles.Add(new GradientTheme("Population", 1000000, 5000000, citymin, citymax));
 
             var geodanLayer = new Layer("Geodan");
             geodanLayer.DataSource = new MemoryProvider(new Point(4.9130567, 52.3422033));
-            geodanLayer.Styles.Add(new SymbolStyle { Symbol = new Bitmap { data = new FileStream(iconPath, FileMode.Open, FileAccess.Read) } });
+            geodanLayer.Styles.Add(new SymbolStyle { Symbol = new Bitmap { Data = new FileStream(iconPath, FileMode.Open, FileAccess.Read) } });
             map.Layers.Add(geodanLayer);
 
             //limit the zoom to 360 degrees width

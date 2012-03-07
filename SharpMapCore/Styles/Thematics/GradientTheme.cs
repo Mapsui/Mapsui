@@ -26,14 +26,14 @@ namespace SharpMap.Styles.Thematics
     public class GradientTheme : Style, IThemeStyle
     {
         #region Fields
-        private string _ColumnName;
-        private double _min;
-        private double _max;
-        private SharpMap.Styles.IStyle _minStyle;
-        private SharpMap.Styles.IStyle _maxStyle;
-        private ColorBlend _TextColorBlend;
-        private ColorBlend _LineColorBlend;
-        private ColorBlend _FillColorBlend;
+        private string columnName;
+        private double minVal;
+        private double maxVal;
+        private IStyle minStyle;
+        private IStyle maxStyle;
+        private ColorBlend textColorBlend;
+        private ColorBlend lineColorBlend;
+        private ColorBlend fillColorBlend;
         #endregion
 
         #region Properties
@@ -43,8 +43,8 @@ namespace SharpMap.Styles.Thematics
         /// </summary>
         public string ColumnName
         {
-            get { return _ColumnName; }
-            set { _ColumnName = value; }
+            get { return columnName; }
+            set { columnName = value; }
         }
 
         /// <summary>
@@ -52,8 +52,8 @@ namespace SharpMap.Styles.Thematics
         /// </summary>
         public double Min
         {
-            get { return _min; }
-            set { _min = value; }
+            get { return minVal; }
+            set { minVal = value; }
         }
 
         /// <summary>
@@ -61,53 +61,53 @@ namespace SharpMap.Styles.Thematics
         /// </summary>
         public double Max
         {
-            get { return _max; }
-            set { _max = value; }
+            get { return maxVal; }
+            set { maxVal = value; }
         }
 
         /// <summary>
         /// Gets or sets the <see cref="SharpMap.Styles.IStyle">style</see> for the minimum value
         /// </summary>
-        public SharpMap.Styles.IStyle MinStyle
+        public IStyle MinStyle
         {
-            get { return _minStyle; }
-            set { _minStyle = value; }
+            get { return minStyle; }
+            set { minStyle = value; }
         }
 
         /// <summary>
         /// Gets or sets the <see cref="SharpMap.Styles.IStyle">style</see> for the maximum value
         /// </summary>
-        public SharpMap.Styles.IStyle MaxStyle
+        public IStyle MaxStyle
         {
-            get { return _maxStyle; }
-            set { _maxStyle = value; }
+            get { return maxStyle; }
+            set { maxStyle = value; }
         }
 
         /// <summary>
-        /// Gets or sets the <see cref="SharpMap.Rendering.Thematics.ColorBlend"/> used on labels
+        /// Gets or sets the <see cref="SharpMap.Styles.Thematics.ColorBlend"/> used on labels
         /// </summary>
         public ColorBlend TextColorBlend
         {
-            get { return _TextColorBlend; }
-            set { _TextColorBlend = value; }
+            get { return textColorBlend; }
+            set { textColorBlend = value; }
         }
 
         /// <summary>
-        /// Gets or sets the <see cref="SharpMap.Rendering.Thematics.ColorBlend"/> used on lines
+        /// Gets or sets the <see cref="SharpMap.Styles.Thematics.ColorBlend"/> used on lines
         /// </summary>
         public ColorBlend LineColorBlend
         {
-            get { return _LineColorBlend; }
-            set { _LineColorBlend = value; }
+            get { return lineColorBlend; }
+            set { lineColorBlend = value; }
         }
 
         /// <summary>
-        /// Gets or sets the <see cref="SharpMap.Rendering.Thematics.ColorBlend"/> used as Fill
+        /// Gets or sets the <see cref="SharpMap.Styles.Thematics.ColorBlend"/> used as Fill
         /// </summary>
         public ColorBlend FillColorBlend
         {
-            get { return _FillColorBlend; }
-            set { _FillColorBlend = value; }
+            get { return fillColorBlend; }
+            set { fillColorBlend = value; }
         }
 
 #endregion
@@ -154,13 +154,13 @@ namespace SharpMap.Styles.Thematics
         /// <param name="maxValue">Maximum value</param>
         /// <param name="minStyle">Color for minimum value</param>
         /// <param name="maxStyle">Color for maximum value</param>
-        public GradientTheme(string columnName, double minValue, double maxValue, SharpMap.Styles.IStyle minStyle, SharpMap.Styles.IStyle maxStyle)
+        public GradientTheme(string columnName, double minValue, double maxValue, IStyle minStyle, IStyle maxStyle)
         {
-            _ColumnName = columnName;
-            _min = minValue;
-            _max = maxValue;
-            _maxStyle = maxStyle;
-            _minStyle = minStyle;
+            this.columnName = columnName;
+            minVal = minValue;
+            maxVal = maxValue;
+            this.maxStyle = maxStyle;
+            this.minStyle = minStyle;
         }
 
         #region ITheme Members
@@ -173,14 +173,14 @@ namespace SharpMap.Styles.Thematics
         /// <returns><see cref="SharpMap.Styles.IStyle">Style</see> calculated by a linear interpolation between the min/max styles</returns>
         public IStyle GetStyle(IFeature row)
         {
-            double attr = 0;
-            try { attr = Convert.ToDouble(row[_ColumnName.ToUpper()]); }
+            double attr;
+            try { attr = Convert.ToDouble(row[columnName.ToUpper()]); }
             catch { throw new Exception("Invalid Attribute type in Gradient Theme - Couldn't parse attribute (must be numerical)"); }
-            if (_minStyle.GetType() != _maxStyle.GetType())
+            if (minStyle.GetType() != maxStyle.GetType())
                 throw new ArgumentException("MinStyle and MaxStyle must be of the same type");
 
 
-            IStyle style = (IStyle)Activator.CreateInstance(MinStyle.GetType());
+            var style = (IStyle)Activator.CreateInstance(MinStyle.GetType());
             if (MinStyle is LabelStyle && MaxStyle is LabelStyle)
                 CalculateLabelStyle(style as LabelStyle, MinStyle as LabelStyle, MaxStyle as LabelStyle, attr);
             if (MinStyle is VectorStyle && MaxStyle is VectorStyle) 
@@ -190,30 +190,23 @@ namespace SharpMap.Styles.Thematics
             return style;
         }
 
-        private IStyle CalculateSymbolStyle(SymbolStyle min, SymbolStyle max, double value)
-        {
-            throw new NotImplementedException();
-        }
-
-        private Style CalculateVectorStyle(VectorStyle style, VectorStyle min, VectorStyle max, double value)
+        private void CalculateVectorStyle(VectorStyle style, VectorStyle min, VectorStyle max, double value)
         {
             double dFrac = Fraction(value);
             float fFrac = Convert.ToSingle(dFrac);
             style.Enabled = (dFrac > 0.5 ? min.Enabled : max.Enabled);
-            if (_FillColorBlend != null)
-                style.Fill = new Brush() { Color = _FillColorBlend.GetColor(fFrac) };
+            if (fillColorBlend != null)
+                style.Fill = new Brush { Color = fillColorBlend.GetColor(fFrac) };
             else if (min.Fill != null && max.Fill != null)
                 style.Fill = InterpolateBrush(min.Fill, max.Fill, value);
 
             if (min.Line != null && max.Line != null)
                 style.Line = InterpolatePen(min.Line, max.Line, value);
-            if (_LineColorBlend != null)
-                style.Line.Color = _LineColorBlend.GetColor(fFrac);
+            if (lineColorBlend != null)
+                style.Line.Color = lineColorBlend.GetColor(fFrac);
 
             if (min.Outline != null && max.Outline != null)
                 style.Outline = InterpolatePen(min.Outline, max.Outline, value);
-
-            return style;
         }
 
         private void CalculateSymbolStyle(SymbolStyle style, SymbolStyle min, SymbolStyle max, double value)
@@ -225,47 +218,41 @@ namespace SharpMap.Styles.Thematics
             style.SymbolScale = InterpolateFloat(min.SymbolScale, max.SymbolScale, value);
         }
 
-        private LabelStyle CalculateLabelStyle(LabelStyle style, LabelStyle min, LabelStyle max, double value)
+        private void CalculateLabelStyle(LabelStyle style, LabelStyle min, LabelStyle max, double value)
         {
             style.CollisionDetection = min.CollisionDetection;
             style.Enabled = InterpolateBool(min.Enabled, max.Enabled, value);
 
-            double FontSize = InterpolateDouble(min.Font.Size, max.Font.Size, value);
-            style.Font = new Font() { FontFamily = min.Font.FontFamily, Size = min.Font.Size };
+            double fontSize = InterpolateDouble(min.Font.Size, max.Font.Size, value);
+            style.Font = new Font { FontFamily = min.Font.FontFamily, Size = fontSize };
 
             if (min.BackColor != null && max.BackColor != null)
                 style.BackColor = InterpolateBrush(min.BackColor, max.BackColor, value);
 
-            if (_TextColorBlend != null)
-                style.ForeColor = _LineColorBlend.GetColor(Convert.ToSingle(Fraction(value)));
+            if (textColorBlend != null)
+                style.ForeColor = lineColorBlend.GetColor(Convert.ToSingle(Fraction(value)));
             else
                 style.ForeColor = InterpolateColor(min.ForeColor, max.ForeColor, value);
             if (min.Halo != null && max.Halo != null)
                 style.Halo = InterpolatePen(min.Halo, max.Halo, value);
 
-#if !CFBuild //No PointF in CF, use Point instead.
-            var X = InterpolateFloat(min.Offset.X, max.Offset.X, value);
-            var Y = InterpolateFloat(min.Offset.Y, max.Offset.Y, value);
-            style.Offset = new Offset() { X = X, Y = Y };
-#else
-            style.Offset = new Point((int)InterpolateFloat(min.Offset.X, max.Offset.X, value), (int)InterpolateFloat(min.Offset.Y, max.Offset.Y, value));
-#endif
-
-            return style;
+            var x = InterpolateFloat(min.Offset.X, max.Offset.X, value);
+            var y = InterpolateFloat(min.Offset.Y, max.Offset.Y, value);
+            style.Offset = new Offset { X = x, Y = y };
         }
 
         private double Fraction(double attr)
         {
-            if (attr < _min) return 0;
-            if (attr > _max) return 1;
-            return (attr - _min) / (_max - _min);
+            if (attr < minVal) return 0;
+            if (attr > maxVal) return 1;
+            return (attr - minVal) / (maxVal - minVal);
         }
 
         private bool InterpolateBool(bool min, bool max, double attr)
         {
             double frac = Fraction(attr);
             if (frac > 0.5) return max;
-            else return min;
+            return min;
         }
 
         private float InterpolateFloat(float min, float max, double attr)
@@ -282,22 +269,18 @@ namespace SharpMap.Styles.Thematics
         {
             if (min.GetType() != typeof(Brush) || max.GetType() != typeof(Brush))
                 throw (new ArgumentException("Only Brush brushes are supported in GradientTheme"));
-            return new Brush()
-            {
-                Color = InterpolateColor((min as Brush).Color, (max as Brush).Color, attr)
-            };
+
+            return new Brush { Color = InterpolateColor(min.Color, max.Color, attr) };
         }
 
         private Pen InterpolatePen(Pen min, Pen max, double attr)
         {
-            Pen pen = new Pen()
+            return new Pen
             {
                 Color = InterpolateColor(min.Color, max.Color, attr),
                 Width = InterpolateFloat(min.Width, max.Width, attr)
             };
-            double frac = Fraction(attr);
-            
-            return pen;
+
         }
 
         private Color InterpolateColor(Color minCol, Color maxCol, double attr)
@@ -305,21 +288,19 @@ namespace SharpMap.Styles.Thematics
             double frac = Fraction(attr);
             if (frac == 1)
                 return maxCol;
-            else if (frac == 0)
+            if (frac == 0)
                 return minCol;
-            else
-            {
-                double r = (maxCol.R - minCol.R) * frac + minCol.R;
-                double g = (maxCol.G - minCol.G) * frac + minCol.G;
-                double b = (maxCol.B - minCol.B) * frac + minCol.B;
-                double a = (maxCol.A - minCol.A) * frac + minCol.A;
-                if (r > 255) r = 255;
-                if (g > 255) g = 255;
-                if (b > 255) b = 255;
-                if (a > 255) a = 255;
 
-                return Color.FromArgb((int)a, (int)r, (int)g, (int)b);
-            }
+            double r = (maxCol.R - minCol.R) * frac + minCol.R;
+            double g = (maxCol.G - minCol.G) * frac + minCol.G;
+            double b = (maxCol.B - minCol.B) * frac + minCol.B;
+            double a = (maxCol.A - minCol.A) * frac + minCol.A;
+            if (r > 255) r = 255;
+            if (g > 255) g = 255;
+            if (b > 255) b = 255;
+            if (a > 255) a = 255;
+
+            return Color.FromArgb((int)a, (int)r, (int)g, (int)b);
         }
         #endregion
     }

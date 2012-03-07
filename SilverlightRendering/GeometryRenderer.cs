@@ -103,7 +103,7 @@ namespace SilverlightRendering
             }
             else
             {
-                BitmapImage bitmapImage = CreateBitmapImage(symbolStyle.Symbol.data);
+                BitmapImage bitmapImage = CreateBitmapImage(symbolStyle.Symbol.Data);
                 path.Fill = new ImageBrush { ImageSource = bitmapImage };
                 //retrieve width and height from bitmap if set.
                 width = bitmapImage.PixelWidth * symbolStyle.SymbolScale;
@@ -207,7 +207,7 @@ namespace SilverlightRendering
             }
             else
             {
-                BitmapImage bitmapImage = CreateBitmapImage(style.Symbol.data);
+                BitmapImage bitmapImage = CreateBitmapImage(style.Symbol.Data);
 
                 path.Fill = new ImageBrush { ImageSource = bitmapImage };
 
@@ -251,7 +251,7 @@ namespace SilverlightRendering
             var rect = new RectangleGeometry();
             if (style.Symbol != null)
             {
-                var bitmapImage = CreateBitmapImage(style.Symbol.data);
+                var bitmapImage = CreateBitmapImage(style.Symbol.Data);
                 var width = bitmapImage.PixelWidth * style.SymbolScale;
                 var height = bitmapImage.PixelHeight * style.SymbolScale;
                 rect.Rect = new Rect(p.X - width * 0.5, p.Y - height * 0.5, width, height);
