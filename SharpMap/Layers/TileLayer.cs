@@ -44,16 +44,18 @@ namespace SharpMap.Layers
         readonly MemoryCache<Feature> memoryCache = new MemoryCache<Feature>(200, 300);
 #endif
 
-        public TileLayer(ITileSource source) : this()
+        public TileLayer(ITileSource source)
+            : this()
         {
             SetTileSource(source);
         }
-        
+
         protected void SetTileSource(ITileSource source)
         {
             tileSource = source;
             tileFetcher = new TileFetcher(source, memoryCache);
             tileFetcher.DataChanged += TileFetcherDataChanged;
+
         }
 
         public TileLayer()
@@ -65,10 +67,10 @@ namespace SharpMap.Layers
             Styles.Add(new VectorStyle());
         }
 
-        public override BoundingBox Envelope 
+        public override BoundingBox Envelope
         {
-            get 
-            { 
+            get
+            {
                 if (Schema == null) return null;
                 return Schema.Extent.ToBoundingBox();
             }
@@ -141,20 +143,19 @@ namespace SharpMap.Layers
         {
             var dictionary = new Dictionary<TileIndex, IFeature>();
 
-            if(Schema == null)
-                return dictionary.Values;
-            
+            if (Schema == null) return dictionary.Values;
+
             GetRecursive(dictionary, Schema, memoryCache, box.ToExtent(), BruTile.Utilities.GetNearestLevel(Schema.Resolutions, resolution));
             var sortedDictionary = (from entry in dictionary orderby entry.Key ascending select entry).ToDictionary(pair => pair.Key, pair => pair.Value);
             return sortedDictionary.Values;
         }
 
-        private void GetRecursive(IDictionary<TileIndex, IFeature> resultTiles, ITileSchema schema, MemoryCache<Feature> cache, Extent extent, int level)
+        public static void GetRecursive(IDictionary<TileIndex, IFeature> resultTiles, ITileSchema schema, MemoryCache<Feature> cache, Extent extent, int level)
         {
             if (level < 0) return;
 
             var tiles = schema.GetTilesInView(extent, level);
-            
+
             foreach (TileInfo tileInfo in tiles)
             {
                 var feature = cache.Find(tileInfo.Index);
@@ -173,7 +174,7 @@ namespace SharpMap.Layers
             }
         }
 
-        private bool IsFullyShown(Feature feature)
+        public static bool IsFullyShown(Feature feature)
         {
             var currentTile = DateTime.Now.Ticks;
             var tile = ((IRaster)feature.Geometry);

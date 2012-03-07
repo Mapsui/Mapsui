@@ -15,7 +15,7 @@ using System.Globalization;
 
 namespace SilverlightRendering
 {
-    public class LabelRenderer
+    public static class LabelRenderer
     {
         public static Canvas RenderStackedLabelLayer(IView view, LabelLayer layer)
         {

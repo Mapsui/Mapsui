@@ -93,7 +93,8 @@ namespace Mapsui.Wpf
             else if (e.Error != null) MessageBox.Show("An error occurred: " + e.Error.Message);
             else
             {
-                mapControl.Map = CreateMap(new TileLayer(TileMapParser.CreateTileSource(e.Result)));
+                mapControl.Map = CreateMap(new TileLayer(TileMapParser.CreateTileSource(e.Result, 
+                    "http://geoserver.nl/tiles/tilecache.aspx/1.0.0/worlddark_GM")));
                 layerList.Initialize(mapControl.Map.Layers);
             }
         }

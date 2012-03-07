@@ -65,8 +65,8 @@ namespace SharpMap.Fetcher
         }
 
         public Exception Error;
-        public bool Cancelled;
-        public TileInfo TileInfo;
-        public byte[] Image;
+        public readonly bool Cancelled;
+        public readonly TileInfo TileInfo;
+        public readonly byte[] Image;
     }
 }

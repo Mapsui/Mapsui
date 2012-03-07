@@ -5,20 +5,20 @@ namespace SharpMap.Geometries
 {
     public class Raster : IRaster
     {
-        BoundingBox _boundingBox;
+        readonly BoundingBox boundingBox;
         public MemoryStream Data { get; private set; }
         public long TickFetched { get; private set; }
 
         public Raster(MemoryStream data, BoundingBox box)
         {
             Data = data;
-            _boundingBox = box;
+            boundingBox = box;
             TickFetched = DateTime.Now.Ticks;
         }
 
         public BoundingBox GetBoundingBox()
         {
-            return _boundingBox;
+            return boundingBox;
         }
 
         #region IGeometry Members

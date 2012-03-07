@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using BruTile;
@@ -7,6 +8,7 @@ using BruTile.Cache;
 using SharpMap.Fetcher;
 using SharpMap.Geometries;
 using SharpMap.Providers;
+using SharpMap.Styles;
 
 namespace SharpMap.Layers
 {
@@ -48,7 +50,7 @@ namespace SharpMap.Layers
                 {
 #endif
                      var bitmap = CombineBitmaps(tiles, Schema.Width, Schema.Height);
-                     if (bitmap != null) MemoryCache.Add(e.TileInfo.Index, new Feature { Geometry = new Raster(bitmap, e.TileInfo.Extent.ToBoundingBox()) });
+                     if (bitmap != null) MemoryCache.Add(e.TileInfo.Index, new Feature { Geometry = new Raster(bitmap, e.TileInfo.Extent.ToBoundingBox()), Style = new VectorStyle()});
                      if (DataChanged != null) DataChanged(sender, e);
 #if SILVERLIGHT
                 });
@@ -208,7 +210,13 @@ namespace SharpMap.Layers
 
         public override IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
         {
-            yield break; //treat as empty list
+            var dictionary = new Dictionary<TileIndex, IFeature>();
+
+            if (Schema == null) return dictionary.Values;
+
+            TileLayer.GetRecursive(dictionary, Schema, memoryCache, box.ToExtent(), BruTile.Utilities.GetNearestLevel(Schema.Resolutions, resolution));
+            var sortedDictionary = (from entry in dictionary orderby entry.Key ascending select entry).ToDictionary(pair => pair.Key, pair => pair.Value);
+            return sortedDictionary.Values;
         }
     }
 }
