@@ -94,7 +94,7 @@
       <Project>{A3007089-4FFE-4CC4-ACDC-A9BAAFE1904B}</Project>
       <Name>Mapsui.Windows-WP</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SharpMapCore\SharpMap-WP.csproj">
+    <ProjectReference Include="..\SharpMap\SharpMap-WP.csproj">
       <Project>{447C19D2-93B7-419F-AEF5-5E1DE6A22AC5}</Project>
       <Name>SharpMap-WP</Name>
     </ProjectReference>

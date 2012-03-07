@@ -13,8 +13,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Wpf", "Mapsui.Wpf\Ma
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GdiRendering", "GdiRendering\GdiRendering.csproj", "{B7ADBCD6-71AA-48E5-AD04-54649B73773C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpMap", "SharpMapCore\SharpMap.csproj", "{65A23C7B-E21D-40D7-A8AF-2E72A01E9A5B}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SilverlightRendering", "SilverlightRendering\SilverlightRendering.csproj", "{612450F3-5EF0-4648-9542-2B3578583243}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpMap.Providers", "SharpMap.Providers\SharpMap.Providers.csproj", "{3E99181D-B701-493F-AFAE-109D023935F7}"
@@ -32,6 +30,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WbxRendering", "WbxRendering\WbxRendering.csproj", "{585D8355-0D05-4738-B8AF-AA4B5DFC40A0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoConfig", "DemoConfig\DemoConfig.csproj", "{8FB95293-E18B-4B99-9FEB-A24DD3FCBBC5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpMap", "SharpMap\SharpMap.csproj", "{65A23C7B-E21D-40D7-A8AF-2E72A01E9A5B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -76,12 +76,6 @@ Global
 		{B7ADBCD6-71AA-48E5-AD04-54649B73773C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B7ADBCD6-71AA-48E5-AD04-54649B73773C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B7ADBCD6-71AA-48E5-AD04-54649B73773C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{65A23C7B-E21D-40D7-A8AF-2E72A01E9A5B}.Addins debug|Any CPU.ActiveCfg = Release|Any CPU
-		{65A23C7B-E21D-40D7-A8AF-2E72A01E9A5B}.Addins debug|Any CPU.Build.0 = Release|Any CPU
-		{65A23C7B-E21D-40D7-A8AF-2E72A01E9A5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{65A23C7B-E21D-40D7-A8AF-2E72A01E9A5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{65A23C7B-E21D-40D7-A8AF-2E72A01E9A5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{65A23C7B-E21D-40D7-A8AF-2E72A01E9A5B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{612450F3-5EF0-4648-9542-2B3578583243}.Addins debug|Any CPU.ActiveCfg = Release|Any CPU
 		{612450F3-5EF0-4648-9542-2B3578583243}.Addins debug|Any CPU.Build.0 = Release|Any CPU
 		{612450F3-5EF0-4648-9542-2B3578583243}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -118,6 +112,12 @@ Global
 		{8FB95293-E18B-4B99-9FEB-A24DD3FCBBC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8FB95293-E18B-4B99-9FEB-A24DD3FCBBC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8FB95293-E18B-4B99-9FEB-A24DD3FCBBC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65A23C7B-E21D-40D7-A8AF-2E72A01E9A5B}.Addins debug|Any CPU.ActiveCfg = Release|Any CPU
+		{65A23C7B-E21D-40D7-A8AF-2E72A01E9A5B}.Addins debug|Any CPU.Build.0 = Release|Any CPU
+		{65A23C7B-E21D-40D7-A8AF-2E72A01E9A5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65A23C7B-E21D-40D7-A8AF-2E72A01E9A5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65A23C7B-E21D-40D7-A8AF-2E72A01E9A5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65A23C7B-E21D-40D7-A8AF-2E72A01E9A5B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

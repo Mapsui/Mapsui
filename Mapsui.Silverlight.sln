@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Silverlight", "Mapsu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Silverlight.Web", "Mapsui.Silverlight.Web\Mapsui.Silverlight.Web.csproj", "{07D1F6C6-F490-4AA5-B000-0173DEACF572}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpMap-SL", "SharpMapCore\SharpMap-SL.csproj", "{0DE2EA55-4454-4F6D-96B8-CB2549695353}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpMap-SL", "SharpMap\SharpMap-SL.csproj", "{0DE2EA55-4454-4F6D-96B8-CB2549695353}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SilverlightRendering-SL", "SilverlightRendering\SilverlightRendering-SL.csproj", "{07774CD1-6112-440B-96B8-DFF788B79649}"
 EndProject

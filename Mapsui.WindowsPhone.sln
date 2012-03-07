@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010 Express for Windows Phone
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.WindowsPhone", "Mapsui.WindowsPhone\Mapsui.WindowsPhone.csproj", "{DFFCC582-B69B-4976-B540-599AD8ADEC2C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpMap-WP", "SharpMapCore\SharpMap-WP.csproj", "{447C19D2-93B7-419F-AEF5-5E1DE6A22AC5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpMap-WP", "SharpMap\SharpMap-WP.csproj", "{447C19D2-93B7-419F-AEF5-5E1DE6A22AC5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SilverlightRendering-WP", "SilverlightRendering\SilverlightRendering-WP.csproj", "{64D25982-92AF-48AF-9459-EA60B1ED6276}"
 EndProject

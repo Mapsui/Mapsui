@@ -58,7 +58,7 @@
     <Compile Include="Utilities.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SharpMapCore\SharpMap-WP.csproj">
+    <ProjectReference Include="..\SharpMap\SharpMap-WP.csproj">
       <Project>{447C19D2-93B7-419F-AEF5-5E1DE6A22AC5}</Project>
       <Name>SharpMap-WP</Name>
     </ProjectReference>
