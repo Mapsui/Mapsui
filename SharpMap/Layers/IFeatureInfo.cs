@@ -8,6 +8,6 @@ namespace SharpMap.Layers
 {
     public interface IFeatureInfo
     {
-        void GetFeatureInfo(BoundingBox box, double resolution, Action<IDictionary<string, IEnumerable<IFeature>>> callback);
+        void GetFeatureInfo(IView view, double x, double y, Action<IDictionary<string, IEnumerable<IFeature>>> callback);
     }
 }

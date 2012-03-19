@@ -428,7 +428,7 @@ namespace Mapsui.Windows
                 {
                     if (layer is IFeatureInfo)
                     {
-                        (layer as IFeatureInfo).GetFeatureInfo(view.Extent, view.Resolution, OnFeatureInfo);
+                        (layer as IFeatureInfo).GetFeatureInfo(view, downMousePosition.X, downMousePosition.Y, OnFeatureInfo);
                     }
                 }
             }
