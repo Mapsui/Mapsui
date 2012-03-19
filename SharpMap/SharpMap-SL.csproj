@@ -120,6 +120,7 @@
     <Compile Include="Geometries\Surface.cs" />
     <Compile Include="Layers\BaseLayer.cs" />
     <Compile Include="Layers\GroupTileLayer.cs" />
+    <Compile Include="Layers\IFeatureInfo.cs" />
     <Compile Include="Layers\ILayer.cs" />
     <Compile Include="Layers\LabelLayer.cs" />
     <Compile Include="Layers\Layer.cs" />
