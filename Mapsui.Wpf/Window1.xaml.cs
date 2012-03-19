@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Net;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Media.Animation;
 using BruTile.Web;
-using BruTile.Web.TmsService;
 using DemoConfig;
-using SharpMap;
 using SharpMap.Layers;
+using SharpMap.Providers;
 using SharpMap.Samples;
 
 namespace Mapsui.Wpf
@@ -20,118 +17,115 @@ namespace Mapsui.Wpf
         {
             InitializeComponent();
             mapControl.ErrorMessageChanged += MapErrorMessageChanged;
-
+            mapControl.FeatureInfo += MapControlFeatureInfo;
             fps.SetBinding(TextBlock.TextProperty, new Binding("Fps"));
             fps.DataContext = mapControl.FpsCounter;
+
             OsmClick(this, null);
         }
 
-        #region Switching layers
+        void MapControlFeatureInfo(object sender, Windows.FeatureInfoEventArgs e)
+        {
+            MessageBox.Show(FeaturesToString(e.FeatureInfo));
+        }
+
+        string FeaturesToString(IEnumerable<KeyValuePair<string, IEnumerable<IFeature>>> featureInfos)
+        {
+            var result = string.Empty;
+
+            foreach (var layer in featureInfos)
+            {
+                result += layer.Key + "\n";
+                foreach (var feature in layer.Value)
+                {
+                    foreach (var field in feature.Fields)
+                    {
+                        result += field + ":" + feature[field] + ".";
+                    }
+                    result += "\n";
+                }
+                result += "\n";
+            }
+            return result;
+        }
         
+        private void MapErrorMessageChanged(object sender, EventArgs e)
+        {
+            Error.Text = mapControl.ErrorMessage;
+            Utilities.AnimateOpacity(errorBorder, 0.75, 0, 8000);
+        }
+
         private void OsmClick(object sender, RoutedEventArgs e)
         {
-            mapControl.Map = CreateMap(new TileLayer(new OsmTileSource()) { LayerName = "OSM" });
+            mapControl.Map.Layers.Clear();
+            mapControl.Map.Layers.Add(new TileLayer(new OsmTileSource()) { LayerName = "OSM" });
             layerList.Initialize(mapControl.Map.Layers);
+            mapControl.Refresh();
         }
 
         private void GeodanWmsClick(object sender, RoutedEventArgs e)
         {
-            mapControl.Map = CreateMap(new TileLayer(new GeodanWorldWmsTileSource()));
+            mapControl.Map.Layers.Clear();
+            mapControl.Map.Layers.Add(new TileLayer(new GeodanWorldWmsTileSource()));
             layerList.Initialize(mapControl.Map.Layers);
+            mapControl.Refresh();
         }
 
         private void GeodanTmsClick(object sender, RoutedEventArgs e)
         {
-            var client = new WebClient();
-            client.OpenReadCompleted += LoadTmsLayer;
-            client.OpenReadAsync(new Uri("http://geoserver.nl/tiles/tilecache.aspx/1.0.0/worlddark_GM"));
+            mapControl.Map.Layers.Clear();
+            mapControl.Map.Layers.Add(new TileLayer("http://geoserver.nl/tiles/tilecache.aspx/1.0.0/worlddark_GM", true));
+            layerList.Initialize(mapControl.Map.Layers);
+            mapControl.Refresh();
+
         }
 
         private void BingMapsClick(object sender, RoutedEventArgs e)
         {
-            mapControl.Map = CreateMap(new TileLayer(new BingTileSource(BingRequest.UrlBingStaging, String.Empty, BingMapType.Aerial)));
+            mapControl.Map.Layers.Clear();
+            mapControl.Map.Layers.Add(new TileLayer(new BingTileSource(BingRequest.UrlBingStaging, String.Empty, BingMapType.Aerial)));
             layerList.Initialize(mapControl.Map.Layers);
+            mapControl.Refresh();
         }
 
         private void GeodanWmscClick(object sender, RoutedEventArgs e)
         {
-            mapControl.Map = CreateMap(new TileLayer(new GeodanWorldWmsCTileSource()));
+            mapControl.Map.Layers.Clear();
+            mapControl.Map.Layers.Add(new TileLayer(new GeodanWorldWmsCTileSource()));
             layerList.Initialize(mapControl.Map.Layers);
+            mapControl.Refresh();
         }
 
         private void GroupTileLayerClick(object sender, RoutedEventArgs e)
         {
-            mapControl.Map = CreateMap(CreateGroupLayer());
+            mapControl.Map.Layers.Clear();
+            mapControl.Map.Layers.Add(CreateGroupLayer());
             layerList.Initialize(mapControl.Map.Layers);
+            mapControl.Refresh();
         }
 
         private void SharpMapClick(object sender, RoutedEventArgs e)
         {
-            mapControl.Map = CreateMap(ShapefileSample.CreateCountryLayer());
+            mapControl.Map.Layers.Clear();
+            mapControl.Map.Layers.Add(ShapefileSample.CreateCountryLayer());
             layerList.Initialize(mapControl.Map.Layers);
+            mapControl.Refresh();
         }
 
         private void MapTilerClick(object sender, RoutedEventArgs e)
         {
-            mapControl.Map = CreateMap(new TileLayer(new MapTilerTileSource()));
+            mapControl.Map.Layers.Clear();
+            mapControl.Map.Layers.Add(new TileLayer(new MapTilerTileSource()));
             layerList.Initialize(mapControl.Map.Layers);
+            mapControl.Refresh();
         }
-
-        #endregion
 
         private static ILayer CreateGroupLayer()
         {
             var osmLayer = new TileLayer(new OsmTileSource()) { LayerName = "OSM" };
             var wmsLayer = new TileLayer(new GeodanWorldWmsTileSource()) { LayerName = "Geodan WMS" };
-            var groupLayer = new GroupTileLayer(new List<TileLayer> { osmLayer, wmsLayer });
+            var groupLayer = new GroupTileLayer(new [] { osmLayer, wmsLayer });
             return groupLayer;
-        }
-
-        private void LoadTmsLayer(object sender, OpenReadCompletedEventArgs e)
-        {
-            if (e.Cancelled) MessageBox.Show("Request was cancelled");
-            else if (e.Error != null) MessageBox.Show("An error occurred: " + e.Error.Message);
-            else
-            {
-                mapControl.Map = CreateMap(new TileLayer(TileMapParser.CreateTileSource(e.Result, 
-                    "http://geoserver.nl/tiles/tilecache.aspx/1.0.0/worlddark_GM")));
-                layerList.Initialize(mapControl.Map.Layers);
-            }
-        }
-
-        private static Map CreateMap(ILayer layer)
-        {
-            var map = new Map();
-            map.Layers.Add(layer);
-            return map;
-        }
-
-        private void MapErrorMessageChanged(object sender, EventArgs e)
-        {
-            Error.Text = mapControl.ErrorMessage;
-            AnimateOpacity(errorBorder, 0.75, 0, 8000);
-        }
-
-        public static void AnimateOpacity(UIElement target, double from, double to, int duration)
-        {
-            target.Opacity = 0;
-            var animation = new DoubleAnimation();
-            animation.From = from;
-            animation.To = to;
-            animation.Duration = new TimeSpan(0, 0, 0, 0, duration);
-
-            Storyboard.SetTarget(animation, target);
-            Storyboard.SetTargetProperty(animation, new PropertyPath("Opacity"));
-
-            var storyBoard = new Storyboard();
-            storyBoard.Children.Add(animation);
-            storyBoard.Begin();
-        }
-
-        private void WmsClick(object sender, RoutedEventArgs e)
-        {
-            mapControl.Map = WmsSample.InitializeMap();
-            layerList.Initialize(mapControl.Map.Layers);
         }
 
         private void PointSymbolsClick(object sender, RoutedEventArgs e)
@@ -142,7 +136,15 @@ namespace Mapsui.Wpf
             mapControl.Map.Layers.Add(PointLayerWithWorldUnitsForSymbolsSample.Create());
             layerList.Initialize(mapControl.Map.Layers);
             mapControl.Refresh();
-        }    
+        }
+
+        private void WmsClick(object sender, RoutedEventArgs e)
+        {
+            mapControl.Map.Layers.Clear();
+            mapControl.Map.Layers.Add(WmsSample.CreateWmsLayer());
+            layerList.Initialize(mapControl.Map.Layers);
+            mapControl.Refresh();
+        }
     }
 }
 

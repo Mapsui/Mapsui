@@ -120,6 +120,7 @@
     <Compile Include="Layers\GroupTileLayer.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Layers\IFeatureInfo.cs" />
     <Compile Include="Layers\ILayer.cs" />
     <Compile Include="Layers\LabelLayer.cs" />
     <Compile Include="Layers\Layer.cs" />

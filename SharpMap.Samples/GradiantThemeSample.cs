@@ -134,7 +134,6 @@ namespace SharpMap.Samples
             map.Layers.Add(geodanLayer);
 
             //limit the zoom to 360 degrees width
-            map.MaximumZoom = 360;
             map.BackColor = Color.White;
 
             return map;

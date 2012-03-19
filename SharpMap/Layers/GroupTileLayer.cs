@@ -12,7 +12,7 @@ using SharpMap.Styles;
 
 namespace SharpMap.Layers
 {
-    public class GroupTileLayer : BaseLayer, ITileLayer, IAsyncDataFetcher
+    public class GroupTileLayer : BaseLayer, ITileLayer
     {
         private IList<TileLayer> layers = new List<TileLayer>();
         private readonly MemoryCache<Feature> memoryCache = new MemoryCache<Feature>(100, 200);
@@ -133,7 +133,7 @@ namespace SharpMap.Layers
         }
 #endif
 
-        public void AbortFetch()
+        public override void AbortFetch()
         {
             foreach (var tileLayer in Layers)
             {
@@ -141,7 +141,7 @@ namespace SharpMap.Layers
             }
         }
 
-        public void ViewChanged(bool changeEnd, BoundingBox extent, double resolution)
+        public override void ViewChanged(bool changeEnd, BoundingBox extent, double resolution)
         {
             foreach (var tileLayer in Layers)
             {
@@ -159,7 +159,7 @@ namespace SharpMap.Layers
             }
         }
 
-        public event DataChangedEventHandler DataChanged;
+        public override event DataChangedEventHandler DataChanged;
 
         public ITileSchema Schema
         {
@@ -202,7 +202,7 @@ namespace SharpMap.Layers
             set { layers = value; }
         }
 
-        public void ClearCache()
+        public override void ClearCache()
         {
             AbortFetch();
             memoryCache.Clear();
@@ -218,5 +218,12 @@ namespace SharpMap.Layers
             var sortedDictionary = (from entry in dictionary orderby entry.Key ascending select entry).ToDictionary(pair => pair.Key, pair => pair.Value);
             return sortedDictionary.Values;
         }
+
+        public override IEnumerable<IFeature> GetFeatureInfo(BoundingBox box, double resolution)
+        {
+            //todo: think through if we really want this here. Perhaps query all child layers.
+            return Enumerable.Empty<IFeature>(); ;
+        }
+
     }
 }

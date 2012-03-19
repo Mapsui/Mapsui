@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using ProjNet.CoordinateSystems.Transformations;
+using SharpMap.Fetcher;
 using SharpMap.Geometries;
 using SharpMap.Providers;
 using SharpMap.Styles;
@@ -80,6 +81,8 @@ namespace SharpMap.Layers
 
         public abstract IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution);
 
+        public abstract IEnumerable<IFeature> GetFeatureInfo(BoundingBox box, double resolution);
+
         public override string ToString()
         {
             return LayerName;
@@ -92,5 +95,13 @@ namespace SharpMap.Layers
                 Feedback(this, new FeedbackEventArgs { Message = message });
             }
         }
+
+        public abstract void AbortFetch();
+
+        public abstract void ViewChanged(bool changeEnd, BoundingBox extent, double resolution);
+
+        public abstract event DataChangedEventHandler DataChanged;
+
+        public abstract void ClearCache();
     }
 }

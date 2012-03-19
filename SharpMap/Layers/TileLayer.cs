@@ -15,8 +15,11 @@
 // along with SharpMap; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
+using System.Net;
+using System.Windows;
 using BruTile;
 using BruTile.Cache;
+using BruTile.Web.TmsService;
 using SharpMap.Fetcher;
 using SharpMap.Geometries;
 using System.Collections.Generic;
@@ -33,10 +36,12 @@ namespace SharpMap.Layers
         MemoryCache<Feature> MemoryCache { get; }
     }
 
-    public class TileLayer : BaseLayer, ITileLayer, IAsyncDataFetcher
+    public class TileLayer : BaseLayer, ITileLayer
     {
         private TileFetcher tileFetcher;
         private ITileSource tileSource;
+        private readonly string urlToTileMapXml;
+        private readonly bool overrideTmsUrlWithUrlToTileMapXml;
 
 #if PocketPC
         readonly MemoryCache<Feature> memoryCache = new MemoryCache<Feature>(40, 60);
@@ -44,6 +49,34 @@ namespace SharpMap.Layers
         readonly MemoryCache<Feature> memoryCache = new MemoryCache<Feature>(200, 300);
 #endif
 
+        private void LoadTmsLayer(object sender, OpenReadCompletedEventArgs e)
+        {
+            if (e.Cancelled)
+            {
+                MessageBox.Show("Request was cancelled");
+            }
+            else if (e.Error != null)
+            {
+                MessageBox.Show("An error occurred: " + e.Error.Message);
+            }
+            else
+            {
+                SetTileSource(overrideTmsUrlWithUrlToTileMapXml
+                                  ? TileMapParser.CreateTileSource(e.Result, urlToTileMapXml)
+                                  : TileMapParser.CreateTileSource(e.Result));
+                Styles.Add(new VectorStyle());
+            }
+        }
+
+        public TileLayer(string urlToTileMapXml, bool overrideTmsUrlWithUrlToTileMapXml = false)
+        {
+            this.urlToTileMapXml = urlToTileMapXml;
+            this.overrideTmsUrlWithUrlToTileMapXml = overrideTmsUrlWithUrlToTileMapXml;
+            var client = new WebClient();
+            client.OpenReadCompleted += LoadTmsLayer;
+            client.OpenReadAsync(new Uri(urlToTileMapXml));
+        }
+        
         public TileLayer(ITileSource source)
             : this()
         {
@@ -55,7 +88,6 @@ namespace SharpMap.Layers
             tileSource = source;
             tileFetcher = new TileFetcher(source, memoryCache);
             tileFetcher.DataChanged += TileFetcherDataChanged;
-
         }
 
         public TileLayer()
@@ -76,11 +108,9 @@ namespace SharpMap.Layers
             }
         }
 
-        #region IAsyncDataFetcher Members
+        public override event DataChangedEventHandler DataChanged;
 
-        public event DataChangedEventHandler DataChanged;
-
-        public void ViewChanged(bool changeEnd, BoundingBox extent, double resolution)
+        public override void ViewChanged(bool changeEnd, BoundingBox extent, double resolution)
         {
             if (Enabled && extent.GetArea() > 0 && tileFetcher != null)
             {
@@ -93,7 +123,7 @@ namespace SharpMap.Layers
         /// With new ViewChanged calls the fetch will start again. 
         /// Call this method to speed up garbage collection
         /// </summary>
-        public void AbortFetch()
+        public override void AbortFetch()
         {
             if (tileFetcher != null)
             {
@@ -101,12 +131,10 @@ namespace SharpMap.Layers
             }
         }
 
-        public void ClearCache()
+        public override void ClearCache()
         {
             memoryCache.Clear();
         }
-
-        #endregion
 
         #region ITileLayer Members
 
@@ -180,6 +208,12 @@ namespace SharpMap.Layers
             var tile = ((IRaster)feature.Geometry);
             const long second = 10000000;
             return ((currentTile - tile.TickFetched) > second);
+        }
+
+        public override IEnumerable<IFeature> GetFeatureInfo(BoundingBox box, double resolution)
+        {
+            //todo: replace with option to query a WMS.
+            return Enumerable.Empty<IFeature>(); ;
         }
     }
 }

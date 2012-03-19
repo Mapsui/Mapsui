@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using SharpMap.Fetcher;
 using SharpMap.Geometries;
 using SharpMap.Providers;
 using SharpMap.Styles;
@@ -26,7 +27,7 @@ namespace SharpMap.Layers
     /// <summary>
     /// Interface for map layers
     /// </summary>
-    public interface ILayer
+    public interface ILayer : IAsyncDataFetcher
     {
         event FeedbackEventHandler Feedback;
 
@@ -67,7 +68,7 @@ namespace SharpMap.Layers
         /// </summary>
         int SRID { get; set; }
 
-        IList<IStyle> Styles { get; set; }
+        IList<IStyle> Styles { get; }
 
         /// <summary>
         /// Of all layers with Exclusive is true only one will be Enabled at a time.

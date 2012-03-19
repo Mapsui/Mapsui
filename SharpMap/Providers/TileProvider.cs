@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using BruTile;
 using BruTile.Cache;
@@ -55,11 +56,11 @@ namespace SharpMap.Providers
         {
             var extent = new Extent(boundingBox.Min.X, boundingBox.Min.Y, boundingBox.Max.X, boundingBox.Max.Y);
             int level = BruTile.Utilities.GetNearestLevel(source.Schema.Resolutions, resolution);
-            var tiles = source.Schema.GetTilesInView(extent, level);
+            var infos = source.Schema.GetTilesInView(extent, level).ToList();
 
             ICollection<WaitHandle> waitHandles = new List<WaitHandle>();
                         
-            foreach (TileInfo info in tiles)    
+            foreach (TileInfo info in infos)    
             {
                 if (bitmaps.Find(info.Index) != null) continue;
                 if (queue.Contains(info.Index)) continue;
@@ -74,7 +75,7 @@ namespace SharpMap.Providers
                 handle.WaitOne();
 
             IFeatures features = new Features();
-            foreach (TileInfo info in tiles)
+            foreach (TileInfo info in infos)
             {
                 byte[] bitmap = bitmaps.Find(info.Index);
                 if (bitmap == null) continue;

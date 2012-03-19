@@ -111,6 +111,7 @@
     <Compile Include="LayerListItem.xaml.cs">
       <DependentUpon>LayerListItem.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utilities.cs" />
     <Compile Include="Window1.xaml.cs">
       <DependentUpon>Window1.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -195,6 +196,10 @@
     <ProjectReference Include="..\SharpMap.Samples\SharpMap.Samples.csproj">
       <Project>{036B6E0A-C34C-4EE6-A359-C467D7E9D1EF}</Project>
       <Name>SharpMap.Samples</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SharpMapProvider\SharpMapProvider.csproj">
+      <Project>{55A31E36-4EA3-42EE-BCAC-2735AA082457}</Project>
+      <Name>SharpMapProvider</Name>
     </ProjectReference>
     <ProjectReference Include="..\SharpMap\SharpMap.csproj">
       <Project>{65A23C7B-E21D-40D7-A8AF-2E72A01E9A5B}</Project>

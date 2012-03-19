@@ -27,29 +27,7 @@ using System.Collections.Generic;
 
 namespace SharpMap.Layers
 {
-    /// <summary>
-    /// Class for vector layer properties
-    /// </summary>
-    /// <example>
-    /// Adding a VectorLayer to a map:
-    /// <code lang="C#">
-    /// //Initialize a new map
-    /// SharpMap.Map myMap = new SharpMap.Map(new System.Drawing.Size(300,600));
-    /// //Create a layer
-    /// SharpMap.Layers.VectorLayer myLayer = new SharpMap.Layers.VectorLayer("My layer");
-    /// //Add datasource
-    /// myLayer.DataSource = new SharpMap.Data.Providers.ShapeFile(@"C:\data\MyShapeData.shp");
-    /// //Set up styles
-    /// myLayer.Style.Outline = new Pen(Color.Magenta, 3f);
-    /// myLayer.Style.EnableOutline = true;
-    /// myMap.Layers.Add(myLayer);
-    /// //Zoom to fit the data in the view
-    /// myMap.ZoomToExtents();
-    /// //Render the map:
-    /// System.Drawing.Image mapImage = myMap.GetMap();
-    /// </code>
-    /// </example>
-    public class Layer : BaseLayer, IAsyncDataFetcher
+    public class Layer : BaseLayer
     {
         private bool isFetching;
         private bool needsUpdate = true;
@@ -57,11 +35,8 @@ namespace SharpMap.Layers
         private BoundingBox newExtent;
         private MemoryProvider cache;
 
-        #region Properties
-
         public IProvider DataSource { get; set; }
 
-        
         /// <summary>
         /// Gets or sets the SRID of this VectorLayer's data source
         /// </summary>
@@ -102,28 +77,27 @@ namespace SharpMap.Layers
             }
         }
 
-        #endregion
-
-        #region Public methods
-
         public Layer(string layername) 
         {
             LayerName = layername;
             cache = new MemoryProvider();
         }
-
-        #endregion
-
+        
         public override IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
         {
             return cache.GetFeaturesInView(box, resolution);
         }
 
-        public void AbortFetch()
+        public override IEnumerable<IFeature> GetFeatureInfo(BoundingBox box, double resolution)
+        {
+            return GetFeaturesInView(box, resolution);
+        }
+
+        public override void AbortFetch()
         {
         }
 
-        public void ViewChanged(bool changeEnd, BoundingBox extent, double resolution)
+        public override void ViewChanged(bool changeEnd, BoundingBox extent, double resolution)
         {
             if (!Enabled) return;
             if (DataSource == null) return;
@@ -210,9 +184,9 @@ namespace SharpMap.Layers
             }
         }
 
-        public event DataChangedEventHandler DataChanged;
+        public override event DataChangedEventHandler DataChanged;
 
-        public void ClearCache()
+        public override void ClearCache()
         {
             cache.Clear();
         }

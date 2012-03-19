@@ -35,10 +35,7 @@ namespace SharpMap
         {
             foreach (var layer in layers)
             {
-                if (layer is IAsyncDataFetcher)
-                {
-                    (layer as IAsyncDataFetcher).AbortFetch();
-                }
+                layer.AbortFetch();
                 OnLayerRemoved(layer);
             }
             layers.Clear();
@@ -64,11 +61,7 @@ namespace SharpMap
         public void Remove(ILayer layer)
         {
             layers.Remove(layer);
-            if (layer is IAsyncDataFetcher)
-            {
-                (layer as IAsyncDataFetcher).AbortFetch();
-            }
-
+            layer.AbortFetch();
             OnLayerRemoved(layer);
         }
 

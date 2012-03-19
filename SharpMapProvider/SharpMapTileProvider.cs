@@ -10,38 +10,27 @@ namespace SharpMapProvider
 {
     public class SharpMapTileProvider : ITileProvider
     {
-        #region fields
-
-        Map map;
-        object syncRoot = new object();
-        ITileCache<byte[]> fileCache;
-
-        #endregion
-
-        #region Public Methods
+        readonly Map map;
+        readonly object syncRoot = new object();
+        ITileCache<byte[]> tileCache;
 
         public SharpMapTileProvider(Map map)
-            : this(map, new NullCache())
-        {
-        }
-
-        public SharpMapTileProvider(Map map, ITileCache<byte[]> fileCache)
         {
             this.map = map;
+            this.map.DataChanged += MapDataChanged;
+            tileCache = new MemoryCache<byte[]>(200, 300);
 
-            if (fileCache == null) throw new ArgumentException("File can not be null");
-
-            this.fileCache = fileCache;
+            if (tileCache == null) throw new ArgumentException("File can not be null");
         }
 
-        #endregion
-
-        #region Private Methods
+        void MapDataChanged(object sender, SharpMap.Fetcher.DataChangedEventArgs e)
+        {
+            tileCache = new MemoryCache<byte[]>(200, 300); // the crude way to refreshing
+        }
 
         public byte[] GetTile(TileInfo tileInfo)
         {
-            byte[] bytes = null;
-            bytes = fileCache.Find(tileInfo.Index);
+            byte[] bytes = tileCache.Find(tileInfo.Index);
             if (bytes == null)
             {
                 lock (syncRoot)
@@ -53,38 +42,10 @@ namespace SharpMapProvider
                     stream.Position = 0;
                     bytes = Utilities.ReadFully(stream);
                     if (bytes != null)
-                        fileCache.Add(tileInfo.Index, bytes);
+                        tileCache.Add(tileInfo.Index, bytes);
                 }
             }
             return bytes;
         }
-
-        #endregion
-
-        #region Private classes
-
-        private class NullCache : ITileCache<byte[]>
-        {
-            public NullCache()
-            {
-            }
-
-            public void Add(TileIndex index, byte[] image)
-            {
-                //do nothing
-            }
-
-            public void Remove(TileIndex index)
-            {
-                throw new NotImplementedException(); //and should not
-            }
-
-            public byte[] Find(TileIndex index)
-            {
-                return null;
-            }
-        }
-
-        #endregion
     }
 }

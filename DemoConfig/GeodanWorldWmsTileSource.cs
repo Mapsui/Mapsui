@@ -29,9 +29,9 @@ namespace DemoConfig
         {
             var schema = new SphericalMercatorInvertedWorldSchema();
             schema.Srs = "EPSG:900913";
-            string url = "http://geoserver.nl/world/mapserv.cgi?map=world/world.map&VERSION=1.1.1";
+            const string url = "http://geoserver.nl/world/mapserv.cgi?map=world/world.map&VERSION=1.1.1";
             var request = new WmscRequest(new Uri(url), schema,
-              new List<string>(new string[] { "world" }), new List<string>(), new Dictionary<string, string>());
+              new List<string>(new [] { "world" }), new List<string>(), new Dictionary<string, string>());
             Provider = new WebTileProvider(request);
             Schema = new SphericalMercatorInvertedWorldSchema();
         }

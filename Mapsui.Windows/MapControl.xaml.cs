@@ -23,7 +23,6 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
 using SharpMap;
 using SharpMap.Fetcher;
 using SharpMap.Layers;
@@ -42,18 +41,19 @@ namespace Mapsui.Windows
         private readonly View view = new View();
         private Point previousMousePosition;
         private Point currentMousePosition;
+        private Point downMousePosition;
         private string errorMessage;
         private readonly FpsCounter fpsCounter = new FpsCounter();
         private readonly DoubleAnimation zoomAnimation = new DoubleAnimation();
         private readonly Storyboard zoomStoryBoard = new Storyboard();
-        private double toResolution;
+        private double toResolution = double.NaN;
         private bool mouseDown;
         private bool IsInBoxZoomMode { get; set; }
         private bool viewInitialized;
-        private Canvas renderCanvas = new Canvas();
-        private IRenderer renderer;
+        private readonly Canvas renderCanvas = new Canvas();
+        private readonly IRenderer renderer;
         private bool invalid;
-        
+
         #endregion
 
         #region EventHandlers
@@ -63,6 +63,7 @@ namespace Mapsui.Windows
         public event EventHandler<MouseInfoEventArgs> MouseInfoOver;
         public event EventHandler MouseInfoLeave;
         public event EventHandler<MouseInfoEventArgs> MouseInfoDown;
+        public event EventHandler<FeatureInfoEventArgs> FeatureInfo;
 
         #endregion
 
@@ -74,7 +75,7 @@ namespace Mapsui.Windows
         public bool ZoomToBoxMode { get; set; }
         public View View { get { return view; } }
 
-        
+
         public Map Map
         {
             get
@@ -94,10 +95,10 @@ namespace Mapsui.Windows
                 //all changes of all layers are returned through this event handler on the map
                 if (map != null)
                 {
-                    map.DataChanged += map_DataChanged;
+                    map.DataChanged += MapDataChanged;
                 }
                 OnViewChanged(true);
-                Redraw();
+                RefreshGraphics();
             }
         }
 
@@ -128,8 +129,6 @@ namespace Mapsui.Windows
 
         #endregion
 
-        #region Constructors
-
         public MapControl()
         {
             InitializeComponent();
@@ -137,27 +136,25 @@ namespace Mapsui.Windows
             MouseInfoOverLayers = new List<ILayer>();
             MouseInfoDownLayers = new List<ILayer>();
             Loaded += MapControlLoaded;
-            KeyDown += MapControl_KeyDown;
-            KeyUp += MapControl_KeyUp;
-            MouseLeftButtonDown += MapControl_MouseLeftButtonDown;
-            MouseLeftButtonUp += MapControl_MouseLeftButtonUp;
-            MouseMove += MapControl_MouseMove;
-            MouseLeave += MapControl_MouseLeave;
+            KeyDown += MapControlKeyDown;
+            KeyUp += MapControlKeyUp;
+            MouseLeftButtonDown += MapControlMouseLeftButtonDown;
+            MouseLeftButtonUp += MapControlMouseLeftButtonUp;
+            MouseMove += MapControlMouseMove;
+            MouseLeave += MapControlMouseLeave;
             MouseWheel += MapControlMouseWheel;
-            SizeChanged += MapControl_SizeChanged;
-            CompositionTarget.Rendering += CompositionTarget_Rendering;
+            SizeChanged += MapControlSizeChanged;
+            CompositionTarget.Rendering += CompositionTargetRendering;
             canvas.Children.Add(renderCanvas);
             renderer = new MapRenderer(renderCanvas);
 #if !SILVERLIGHT
-            Dispatcher.ShutdownStarted += Dispatcher_ShutdownStarted;
+            Dispatcher.ShutdownStarted += DispatcherShutdownStarted;
             canvas.IsManipulationEnabled = true;
             canvas.ManipulationDelta += OnManipulationDelta;
             canvas.ManipulationCompleted += OnManipulationCompleted;
             canvas.ManipulationInertiaStarting += OnManipulationInertiaStarting;
 #endif
         }
-
-        #endregion
 
         #region Public methods
 
@@ -183,10 +180,10 @@ namespace Mapsui.Windows
         public void Refresh()
         {
             map.ViewChanged(true, view.Extent, view.Resolution);
-            Redraw();
+            RefreshGraphics();
         }
 
-        private void Redraw() //should be private soon
+        private void RefreshGraphics() //should be private soon
         {
 #if !SILVERLIGHT
             InvalidateVisual();
@@ -201,12 +198,12 @@ namespace Mapsui.Windows
             {
                 map.ClearCache();
             }
-            Redraw();
+            RefreshGraphics();
         }
 
         public void ZoomIn()
         {
-            if (toResolution == 0)
+            if (double.IsNaN(toResolution))
                 toResolution = view.Resolution;
 
             toResolution = ZoomHelper.ZoomIn(map.Resolutions, toResolution);
@@ -215,7 +212,7 @@ namespace Mapsui.Windows
 
         public void ZoomOut()
         {
-            if (toResolution == 0)
+            if (double.IsNaN(toResolution))
                 toResolution = view.Resolution;
 
             toResolution = ZoomHelper.ZoomOut(map.Resolutions, toResolution);
@@ -226,7 +223,7 @@ namespace Mapsui.Windows
 
         #region Protected and private methods
 
-        protected virtual void OnErrorMessageChanged(EventArgs e)
+        protected void OnErrorMessageChanged(EventArgs e)
         {
             if (ErrorMessageChanged != null)
             {
@@ -258,7 +255,7 @@ namespace Mapsui.Windows
               view.Height - mousePosition.Y);
 
             OnViewChanged(true);
-            Redraw();
+            RefreshGraphics();
         }
 
         private void ZoomMiddle()
@@ -294,7 +291,7 @@ namespace Mapsui.Windows
         {
             currentMousePosition = e.GetPosition(this); //Needed for both MouseMove and MouseWheel event for mousewheel event
 
-            if (toResolution == 0)
+            if (double.IsNaN(toResolution))
             {
                 toResolution = view.Resolution;
             }
@@ -323,20 +320,21 @@ namespace Mapsui.Windows
             zoomStoryBoard.Pause(); //using Stop() here causes unexpected results while zooming very fast.
             zoomAnimation.From = begin;
             zoomAnimation.To = end;
-            zoomAnimation.Completed += zoomAnimationCompleted;
+            zoomAnimation.Completed += ZoomAnimationCompleted;
             zoomStoryBoard.Begin();
         }
 
-        void zoomAnimationCompleted(object sender, EventArgs e)
+        private void ZoomAnimationCompleted(object sender, EventArgs e)
         {
-            toResolution = 0;
+            toResolution = double.NaN;
         }
 
-        private void MapControl_SizeChanged(object sender, SizeChangedEventArgs e)
+        private void MapControlSizeChanged(object sender, SizeChangedEventArgs e)
         {
             if (!viewInitialized) InitializeView();
             UpdateSize();
             OnViewChanged(true);
+            Refresh();
         }
 
         private void UpdateSize()
@@ -351,25 +349,21 @@ namespace Mapsui.Windows
             }
         }
 
-        private void MapControl_MouseLeave(object sender, MouseEventArgs e)
+        private void MapControlMouseLeave(object sender, MouseEventArgs e)
         {
             previousMousePosition = new Point();
             ReleaseMouseCapture();
         }
 
-        public void map_DataChanged(object sender, DataChangedEventArgs e)
+        public void MapDataChanged(object sender, DataChangedEventArgs e)
         {
             if (!Dispatcher.CheckAccess())
             {
-                Dispatcher.BeginInvoke(new DataChangedEventHandler(map_DataChanged), new object[] { sender, e });
+                Dispatcher.BeginInvoke(new DataChangedEventHandler(MapDataChanged), new[] { sender, e });
             }
             else
             {
-                if (e.Error == null && e.Cancelled == false)
-                {
-                    Redraw();
-                }
-                else if (e.Cancelled)
+                if (e.Cancelled)
                 {
                     errorMessage = "Cancelled";
                     OnErrorMessageChanged(EventArgs.Empty);
@@ -379,27 +373,31 @@ namespace Mapsui.Windows
                     errorMessage = "WebException: " + e.Error.Message;
                     OnErrorMessageChanged(EventArgs.Empty);
                 }
-                else
+                else if (e.Error != null)
                 {
                     errorMessage = e.Error.GetType() + ": " + e.Error.Message;
                     OnErrorMessageChanged(EventArgs.Empty);
                 }
+                else // no problems
+                {
+                    RefreshGraphics();
+                }
+
             }
         }
 
-        private void MapControl_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void MapControlMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             var eventArgs = GetMouseInfoEventArgs(e.GetPosition(this), MouseInfoDownLayers);
-            if (eventArgs != null) OnMouseInfoDown(eventArgs);
-            else OnMouseInfoDown(new MouseInfoEventArgs());
-
+            OnMouseInfoDown(eventArgs ?? new MouseInfoEventArgs());
             previousMousePosition = e.GetPosition(this);
+            downMousePosition = e.GetPosition(this);
             mouseDown = true;
             CaptureMouse();
             Focus();
         }
 
-        private void MapControl_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        private void MapControlMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             if (IsInBoxZoomMode || ZoomToBoxMode)
             {
@@ -407,6 +405,10 @@ namespace Mapsui.Windows
                 SharpMap.Geometries.Point previous = View.ViewToWorld(previousMousePosition.X, previousMousePosition.Y);
                 SharpMap.Geometries.Point current = View.ViewToWorld(e.GetPosition(this).X, e.GetPosition(this).Y);
                 ZoomToBox(previous, current);
+            }
+            else
+            {
+                HandleFeatureInfo(e);
             }
 
             OnViewChanged(true, true);
@@ -416,7 +418,31 @@ namespace Mapsui.Windows
             ReleaseMouseCapture();
         }
 
-        private void MapControl_MouseMove(object sender, MouseEventArgs e)
+        private void HandleFeatureInfo(MouseButtonEventArgs e)
+        {
+            if (FeatureInfo == null) return; // don't fetch if you the call back is not set.
+
+            if (downMousePosition == e.GetPosition(this))
+            {
+                foreach (var layer in Map.Layers)
+                {
+                    if (layer is IFeatureInfo)
+                    {
+                        (layer as IFeatureInfo).GetFeatureInfo(view.Extent, view.Resolution, OnFeatureInfo);
+                    }
+                }
+            }
+        }
+
+        private void OnFeatureInfo(IDictionary<string, IEnumerable<IFeature>> features)
+        {
+            if (FeatureInfo != null)
+            {
+                FeatureInfo(this, new FeatureInfoEventArgs { FeatureInfo = features});
+            }
+        }
+
+        private void MapControlMouseMove(object sender, MouseEventArgs e)
         {
             if (IsInBoxZoomMode || ZoomToBoxMode)
             {
@@ -437,7 +463,7 @@ namespace Mapsui.Windows
                 MapTransformHelper.Pan(view, currentMousePosition, previousMousePosition);
                 previousMousePosition = currentMousePosition;
                 OnViewChanged(false, true);
-                Redraw();
+                RefreshGraphics();
             }
         }
 
@@ -458,7 +484,7 @@ namespace Mapsui.Windows
 
             foreach (var layer in layers)
             {
-                var feature = layer.GetFeaturesInView(Map.GetExtents(), 0).FirstOrDefault((f) =>
+                var feature = layer.GetFeaturesInView(Map.GetExtents(), 0).FirstOrDefault(f =>
                     f.Geometry.GetBoundingBox().GetCentroid().Distance(point) < margin);
                 if (feature != null)
                 {
@@ -512,12 +538,12 @@ namespace Mapsui.Windows
             viewInitialized = true;
         }
 
-        private void CompositionTarget_Rendering(object sender, EventArgs e)
+        private void CompositionTargetRendering(object sender, EventArgs e)
         {
             if (!viewInitialized) InitializeView();
             if (!viewInitialized) return; //stop if the line above failed. 
             if (!invalid) return;
-                        
+
             if ((renderer != null) && (map != null))
             {
                 renderer.Render(view, map.Layers);
@@ -527,9 +553,9 @@ namespace Mapsui.Windows
         }
 
 #if !SILVERLIGHT
-        private void Dispatcher_ShutdownStarted(object sender, EventArgs e)
+        private void DispatcherShutdownStarted(object sender, EventArgs e)
         {
-            CompositionTarget.Rendering -= CompositionTarget_Rendering;
+            CompositionTarget.Rendering -= CompositionTargetRendering;
             if (map != null)
             {
                 map.Dispose();
@@ -557,7 +583,7 @@ namespace Mapsui.Windows
             toResolution = resolution;
 
             OnViewChanged(true, true);
-            Redraw();
+            RefreshGraphics();
             ClearBBoxDrawing();
         }
 
@@ -568,7 +594,7 @@ namespace Mapsui.Windows
             bboxRect.Height = 0;
         }
 
-        private void MapControl_KeyUp(object sender, KeyEventArgs e)
+        private void MapControlKeyUp(object sender, KeyEventArgs e)
         {
             String keyName = e.Key.ToString().ToLower();
             if (keyName.Equals("ctrl") || keyName.Equals("leftctrl") || keyName.Equals("rightctrl"))
@@ -577,7 +603,7 @@ namespace Mapsui.Windows
             }
         }
 
-        private void MapControl_KeyDown(object sender, KeyEventArgs e)
+        private void MapControlKeyDown(object sender, KeyEventArgs e)
         {
             String keyName = e.Key.ToString().ToLower();
             if (keyName.Equals("ctrl") || keyName.Equals("leftctrl") || keyName.Equals("rightctrl"))
@@ -630,7 +656,7 @@ namespace Mapsui.Windows
             e.TranslationBehavior.DesiredDeceleration = 25 * 96.0 / (1000.0 * 1000.0);
         }
 
-        private int _manipulationDeltaCount;
+        private int manipulationDeltaCount;
 
         private void OnManipulationDelta(object sender, ManipulationDeltaEventArgs e)
         {
@@ -646,20 +672,20 @@ namespace Mapsui.Windows
 
             MapTransformHelper.Pan(view, currentManipulationPosition, previousManipulationPosition);
 
-            _manipulationDeltaCount++;
+            manipulationDeltaCount++;
 
             //Currently the manipulation data generates too much updates for the vectorRenderer to be smooth
             //This is a temporarily fix until the rendering method is improved
-            if (_manipulationDeltaCount % 2 != 0)
+            if (manipulationDeltaCount % 2 != 0)
                 return;
 
             OnViewChanged(false, true);
-            Redraw();
+            RefreshGraphics();
         }
 
         private void OnManipulationCompleted(object sender, ManipulationCompletedEventArgs e)
         {
-            _manipulationDeltaCount = 0;
+            manipulationDeltaCount = 0;
             Refresh();
         }
 
@@ -683,5 +709,10 @@ namespace Mapsui.Windows
 
         public string LayerName { get; set; }
         public IFeature Feature { get; set; }
+    }
+
+    public class FeatureInfoEventArgs : EventArgs
+    {
+        public IDictionary<string, IEnumerable<IFeature>> FeatureInfo { get; set; }
     }
 }
