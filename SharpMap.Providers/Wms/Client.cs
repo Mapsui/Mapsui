@@ -156,11 +156,7 @@ namespace SharpMap.Web.Wms
         #region Properties
 
         private string[] exceptionFormats;
-        private Collection<string> getMapOutputFormats;
-        private WmsOnlineResource[] getMapRequests;
-        private WmsServerLayer layer;
         private Capabilities.WmsServiceDescription serviceDescription;
-        private string wmsVersion;
 
         /// <summary>
         /// Gets the service description
@@ -173,18 +169,12 @@ namespace SharpMap.Web.Wms
         /// <summary>
         /// Gets the version of the WMS server (ex. "1.3.0")
         /// </summary>
-        public string WmsVersion
-        {
-            get { return wmsVersion; }
-        }
+        public string WmsVersion { get; private set; }
 
         /// <summary>
         /// Gets a list of available image mime type formats
         /// </summary>
-        public Collection<string> GetMapOutputFormats
-        {
-            get { return getMapOutputFormats; }
-        }
+        public Collection<string> GetMapOutputFormats { get; private set; }
 
         /// <summary>
         /// Gets a list of available exception mime type formats
@@ -197,18 +187,12 @@ namespace SharpMap.Web.Wms
         /// <summary>
         /// Gets the available GetMap request methods and Online Resource URI
         /// </summary>
-        public WmsOnlineResource[] GetMapRequests
-        {
-            get { return getMapRequests; }
-        }
+        public WmsOnlineResource[] GetMapRequests { get; private set; }
 
         /// <summary>
         /// Gets the hiarchial layer structure
         /// </summary>
-        public WmsServerLayer Layer
-        {
-            get { return layer; }
-        }
+        public WmsServerLayer Layer { get; private set; }
 
         #endregion
 
@@ -230,6 +214,12 @@ namespace SharpMap.Web.Wms
 
             XmlDocument xml = GetRemoteXml(strReq.ToString());
             ParseCapabilities(xml);
+        }
+
+        public Client(XmlDocument capabilitiesXmlDocument)
+        {
+            nsmgr = new XmlNamespaceManager(capabilitiesXmlDocument.NameTable);
+            ParseCapabilities(capabilitiesXmlDocument);
         }
 
         /// <summary>
@@ -277,12 +267,12 @@ namespace SharpMap.Web.Wms
         {
             if (doc.DocumentElement.Attributes["version"] != null)
             {
-                wmsVersion = doc.DocumentElement.Attributes["version"].Value;
-                if (wmsVersion != "1.0.0" && wmsVersion != "1.1.0" && wmsVersion != "1.1.1" && wmsVersion != "1.3.0")
-                    throw new ApplicationException("WMS Version " + wmsVersion + " not supported");
+                WmsVersion = doc.DocumentElement.Attributes["version"].Value;
+                if (WmsVersion != "1.0.0" && WmsVersion != "1.1.0" && WmsVersion != "1.1.1" && WmsVersion != "1.3.0")
+                    throw new ApplicationException("WMS Version " + WmsVersion + " not supported");
 
                 nsmgr.AddNamespace(String.Empty, "http://www.opengis.net/wms");
-                nsmgr.AddNamespace("sm", wmsVersion == "1.3.0" ? "http://www.opengis.net/wms" : "");
+                nsmgr.AddNamespace("sm", WmsVersion == "1.3.0" ? "http://www.opengis.net/wms" : "");
                 nsmgr.AddNamespace("xlink", "http://www.w3.org/1999/xlink");
                 nsmgr.AddNamespace("xsi", "http://www.w3.org/2001/XMLSchema-instance");
             }
@@ -371,7 +361,7 @@ namespace SharpMap.Web.Wms
             XmlNode xnLayer = xnCapability.SelectSingleNode("sm:Layer", nsmgr);
             if (xnLayer == null)
                 throw (new Exception("No layer tag found in Service Description"));
-            layer = ParseLayer(xnLayer);
+            Layer = ParseLayer(xnLayer);
 
             XmlNode xnException = xnCapability.SelectSingleNode("sm:Exception", nsmgr);
             if (xnException != null)
@@ -405,9 +395,23 @@ namespace SharpMap.Web.Wms
         {
             XmlNode xnGetMap = xmlRequestNode.SelectSingleNode("sm:GetMap", nsmgr);
             ParseGetMapRequest(xnGetMap);
-            //TODO:
-            //XmlNode xnGetFeatureInfo = xmlRequestNodes.SelectSingleNode("sm:GetFeatureInfo", nsmgr);
-            //XmlNode xnCapa = xmlRequestNodes.SelectSingleNode("sm:GetCapabilities", nsmgr); <-- We don't really need this do we?			
+
+            XmlNode xnGetLegendGraphic = xmlRequestNode.SelectSingleNode("sm:GetLegendGraphic", nsmgr);
+            if (xnGetLegendGraphic != null) ParseGetLegendGraphic(xnGetLegendGraphic);
+
+            XmlNode xnGetFeatureInfo = xmlRequestNode.SelectSingleNode("sm:GetFeatureInfo", nsmgr);
+            ParseGetFeatureInfo(xnGetFeatureInfo);
+        }
+
+
+        private void ParseGetLegendGraphic(XmlNode xnGetLegendGraphic)
+        {
+            
+        }
+
+        private void ParseGetFeatureInfo(XmlNode xnGetFeatureInfo)
+        {
+            //todo parse it.
         }
 
         /// <summary>
@@ -419,7 +423,7 @@ namespace SharpMap.Web.Wms
             XmlNode xnlHttp = getMapRequestNodes.SelectSingleNode("sm:DCPType/sm:HTTP", nsmgr);
             if (xnlHttp != null && xnlHttp.HasChildNodes)
             {
-                getMapRequests = new WmsOnlineResource[xnlHttp.ChildNodes.Count];
+                GetMapRequests = new WmsOnlineResource[xnlHttp.ChildNodes.Count];
                 for (int i = 0; i < xnlHttp.ChildNodes.Count; i++)
                 {
                     var wor = new WmsOnlineResource();
@@ -427,14 +431,14 @@ namespace SharpMap.Web.Wms
                     wor.OnlineResource =
                         xnlHttp.ChildNodes[i].SelectSingleNode("sm:OnlineResource", nsmgr).Attributes["xlink:href"].
                             InnerText;
-                    getMapRequests[i] = wor;
+                    GetMapRequests[i] = wor;
                 }
             }
             XmlNodeList xnlFormats = getMapRequestNodes.SelectNodes("sm:Format", nsmgr);
             //_GetMapOutputFormats = new Collection<string>(xnlFormats.Count);
-            getMapOutputFormats = new Collection<string>();
+            GetMapOutputFormats = new Collection<string>();
             for (int i = 0; i < xnlFormats.Count; i++)
-                getMapOutputFormats.Add(xnlFormats[i].InnerText);
+                GetMapOutputFormats.Add(xnlFormats[i].InnerText);
         }
 
         /// <summary>

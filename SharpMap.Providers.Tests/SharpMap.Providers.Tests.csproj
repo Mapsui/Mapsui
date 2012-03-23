@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Wms\ClientTests.cs" />
     <Compile Include="Wms\WmsProviderTests.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -55,6 +56,12 @@
       <Project>{65A23C7B-E21D-40D7-A8AF-2E72A01E9A5B}</Project>
       <Name>SharpMap</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Resources\capabilities.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
