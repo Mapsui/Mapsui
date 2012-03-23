@@ -23,6 +23,7 @@ using System.Net;
 using System.Text;
 using System.Web;
 using System.Web.Caching;
+using System.Xml;
 using SharpMap.Geometries;
 using SharpMap.Rendering;
 using SharpMap.Web.Wms;
@@ -45,13 +46,8 @@ namespace SharpMap.Providers.Wms
         private string mimeType = "";
         private readonly Client wmsClient;
 
-        /// <summary>
-        /// Initializes a new layer, and downloads and parses the service description
-        /// </summary>
-        /// <remarks>In and ASP.NET application the service description is automatically cached for 24 hours when not specified</remarks>
-        /// <param name="url">Url of WMS server</param>
-        public WmsProvider(string url)
-            : this(url, new TimeSpan(24, 0, 0))
+        public WmsProvider(XmlDocument capabilities)
+            : this(new Client(capabilities))
         {
         }
 
@@ -59,22 +55,16 @@ namespace SharpMap.Providers.Wms
         /// Initializes a new layer, and downloads and parses the service description
         /// </summary>
         /// <param name="url">Url of WMS server</param>
-        /// <param name="cachetime">Time for caching Service Description (ASP.NET only)</param>
-        public WmsProvider(string url, TimeSpan cachetime)
+        public WmsProvider(string url)
+            : this(new Client(url))
         {
+        }
+
+        private WmsProvider(Client wmsClient)
+        {
+            this.wmsClient = wmsClient;
             TimeOut = 10000;
             ContinueOnError = true;
-            if (HttpContext.Current != null && HttpContext.Current.Cache["SharpMap_WmsClient_" + url] != null)
-            {
-                wmsClient = (Client) HttpContext.Current.Cache["SharpMap_WmsClient_" + url];
-            }
-            else
-            {
-                wmsClient = new Client(url);
-                if (HttpContext.Current != null)
-                    HttpContext.Current.Cache.Insert("SharpMap_WmsClient_" + url, wmsClient, null,
-                                                     Cache.NoAbsoluteExpiration, cachetime);
-            }
 
             if (OutputFormats.Contains("image/png")) mimeType = "image/png";
             else if (OutputFormats.Contains("image/gif")) mimeType = "image/gif";
@@ -87,8 +77,6 @@ namespace SharpMap.Providers.Wms
             LayerList = new Collection<string>();
             StylesList = new Collection<string>();
         }
-
-
         /// <summary>
         /// Gets the list of enabled layers
         /// </summary>
@@ -179,6 +167,23 @@ namespace SharpMap.Providers.Wms
                 if (LayerExists(childlayer, name)) return true;
             return false;
         }
+
+        private bool FindLayer(Client.WmsServerLayer layer, string name, out Client.WmsServerLayer result)
+        {
+            result = layer;
+            if (name == layer.Name)
+            {
+                return true;
+            }
+
+            foreach (Client.WmsServerLayer childlayer in layer.ChildLayers)
+            {
+                if (FindLayer(childlayer, name, out result))
+                    return true;
+            }
+            return false;
+        }
+
 
         /// <summary>
         /// Removes a layer from the layer list
@@ -356,12 +361,29 @@ namespace SharpMap.Providers.Wms
         }
 
         /// <summary>
-        /// Returns the type of the layer
+        /// Gets the URL for a map request base on current settings, the image size and boundingbox
         /// </summary>
-        //public override SharpMap.Layers.Layertype LayerType
-        //{
-        //    get { return SharpMap.Layers.Layertype.Wms; }
-        //}
+        /// <returns>URL for WMS request</returns>
+        public IEnumerable<string> GetLegendRequestUrls()
+        {
+            var legendUrls = new List<string>();
+            if (LayerList != null && LayerList.Count > 0)
+            {
+                foreach (string layer in LayerList)
+                {
+                    Client.WmsServerLayer result;
+                    if (FindLayer(wmsClient.Layer, layer, out result))
+                    {
+                        foreach (var style in result.Style)
+                        {
+                            legendUrls.Add(style.LegendUrl.OnlineResource.OnlineResource);
+                            break; // just add first style. TODO: think about how to cope with style
+                        }
+                    }
+                }
+            }
+            return legendUrls;
+        }
 
         private Client.WmsOnlineResource GetPreferredMethod()
         {
@@ -392,7 +414,7 @@ namespace SharpMap.Providers.Wms
 
         public BoundingBox GetExtents()
         {
-            return wmsClient.Layer.LatLonBoundingBox;   
+            return wmsClient.Layer.LatLonBoundingBox;
         }
 
         public void Open()

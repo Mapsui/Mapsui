@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Xml;
 using NUnit.Framework;
 using SharpMap.Providers.Wms;
 
@@ -9,16 +10,24 @@ namespace SharpMap.Providers.Tests.Wms
     class WmsProviderTests
     {
         [Test]
-        public void WmsGetLegend_WhenExists_ShouldReturnProperly()
+        public void GetLegendRequestUrls_WhenInitialized_ShouldReturnListOfUrls()
         {
-            const string wmsUrl = "http://geoserver.nl/world/mapserv.cgi?map=world/world.map&VERSION=1.1.1";
-
-            var provider = new WmsProvider(wmsUrl);
+            // arrange
+            var capabilties = new XmlDocument();
+            capabilties.XmlResolver = null;
+            capabilties.Load(".\\Resources\\capabilities_1_3_0.xml");
+            var provider = new WmsProvider(capabilties);
             provider.SpatialReferenceSystem = "EPSG:900913";
-            provider.AddLayer("World");
+            provider.AddLayer("Maasluis complex - top");
+            provider.AddLayer("Kreftenheye z2 - top");
             provider.SetImageFormat(provider.OutputFormats[0]);
             provider.ContinueOnError = true;
-            provider.TimeOut = 20000; //Set timeout to 20 seconds
+
+            // act
+            var legendUrls = provider.GetLegendRequestUrls();
+
+            // assert
+            Assert.True(legendUrls.Count() == 2);
         }
     }
 }

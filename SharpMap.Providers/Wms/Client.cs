@@ -406,12 +406,12 @@ namespace SharpMap.Web.Wms
 
         private void ParseGetLegendGraphic(XmlNode xnGetLegendGraphic)
         {
-            
+            //todo: parse
         }
 
         private void ParseGetFeatureInfo(XmlNode xnGetFeatureInfo)
         {
-            //todo parse it.
+            //todo: parse.
         }
 
         /// <summary>
@@ -484,7 +484,8 @@ namespace SharpMap.Web.Wms
                     wmsServerLayer.Style[i].Title = (node != null ? node.InnerText : null);
                     node = xnlStyle[i].SelectSingleNode("sm:Abstract", nsmgr);
                     wmsServerLayer.Style[i].Abstract = (node != null ? node.InnerText : null);
-                    node = xnlStyle[i].SelectSingleNode("sm:LegendUrl", nsmgr);
+                    node = xnlStyle[i].SelectSingleNode("sm:LegendURL", nsmgr) ??
+                           xnlStyle[i].SelectSingleNode("sm:LegendUrl", nsmgr);
                     if (node != null)
                     {
                         wmsServerLayer.Style[i].LegendUrl = new WmsStyleLegend();
