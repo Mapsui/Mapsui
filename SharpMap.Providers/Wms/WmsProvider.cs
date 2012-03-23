@@ -58,23 +58,10 @@ namespace SharpMap.Providers.Wms
         /// <summary>
         /// Initializes a new layer, and downloads and parses the service description
         /// </summary>
-        /// <remarks>In and ASP.NET application the service description is automatically cached for 24 hours when not specified</remarks>
-        /// <param name="url">Url of WMS server</param>
-        /// <param name="proxy">Proxy</param>
-        public WmsProvider(string url, WebProxy proxy)
-            : this(url, new TimeSpan(24, 0, 0), proxy)
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new layer, and downloads and parses the service description
-        /// </summary>
         /// <param name="url">Url of WMS server</param>
         /// <param name="cachetime">Time for caching Service Description (ASP.NET only)</param>
-        /// <param name="proxy">Proxy</param>
-        public WmsProvider(string url, TimeSpan cachetime, WebProxy proxy = null)
+        public WmsProvider(string url, TimeSpan cachetime)
         {
-            Proxy = proxy;
             TimeOut = 10000;
             ContinueOnError = true;
             if (HttpContext.Current != null && HttpContext.Current.Cache["SharpMap_WmsClient_" + url] != null)
@@ -83,7 +70,7 @@ namespace SharpMap.Providers.Wms
             }
             else
             {
-                wmsClient = new Client(url, Proxy);
+                wmsClient = new Client(url);
                 if (HttpContext.Current != null)
                     HttpContext.Current.Cache.Insert("SharpMap_WmsClient_" + url, wmsClient, null,
                                                      Cache.NoAbsoluteExpiration, cachetime);
@@ -159,11 +146,6 @@ namespace SharpMap.Providers.Wms
         /// Provides the base authentication interface for retrieving credentials for Web client authentication.
         /// </summary>
         public ICredentials Credentials { get; set; }
-
-        /// <summary>
-        /// Gets or sets the proxy used for requesting a webresource
-        /// </summary>
-        public WebProxy Proxy { get; set; }
 
         /// <summary>
         /// Timeout of webrequest in milliseconds. Defaults to 10 seconds
@@ -302,9 +284,6 @@ namespace SharpMap.Providers.Wms
             webRequest.Timeout = TimeOut;
             webRequest.Credentials = Credentials ?? CredentialCache.DefaultCredentials;
 
-            if (Proxy != null)
-                webRequest.Proxy = Proxy;
-
             try
             {
                 using (var webResponse = (HttpWebResponse)webRequest.GetResponse())
@@ -437,8 +416,6 @@ namespace SharpMap.Providers.Wms
 
         #endregion
 
-        #region IProvider Members
-
         public IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
         {
             var features = new Features();
@@ -452,7 +429,5 @@ namespace SharpMap.Providers.Wms
             }
             return features;
         }
-
-        #endregion
     }
 }
