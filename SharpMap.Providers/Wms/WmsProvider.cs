@@ -21,8 +21,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Text;
-using System.Web;
-using System.Web.Caching;
 using System.Xml;
 using SharpMap.Geometries;
 using SharpMap.Rendering;
@@ -107,8 +105,7 @@ namespace SharpMap.Providers.Wms
         /// Gets or sets the spatial reference used for the WMS server request
         /// </summary>
         public string SpatialReferenceSystem { get; set; }
-
-
+        
         /// <summary>
         /// Gets the service description from this server
         /// </summary>
@@ -377,12 +374,25 @@ namespace SharpMap.Providers.Wms
                         foreach (var style in result.Style)
                         {
                             legendUrls.Add(style.LegendUrl.OnlineResource.OnlineResource);
-                            break; // just add first style. TODO: think about how to cope with style
+                            break; // just add first style. TODO: think about how to select a style
                         }
                     }
                 }
             }
             return legendUrls;
+        }
+
+        public IEnumerable<MemoryStream> GetLegends()
+        {
+            var urls = GetLegendRequestUrls();
+            var images = new List<MemoryStream>();
+
+            foreach (var url in urls)
+            {
+                var imageAsByteArray = BruTile.Web.RequestHelper.FetchImage(new Uri(url));
+                images.Add(new MemoryStream(imageAsByteArray));
+            }
+            return images;
         }
 
         private Client.WmsOnlineResource GetPreferredMethod()
