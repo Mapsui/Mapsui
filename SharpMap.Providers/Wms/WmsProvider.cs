@@ -102,6 +102,14 @@ namespace SharpMap.Providers.Wms
         }
 
         /// <summary>
+        /// Gets the list of available FeatureInfo Output Format
+        /// </summary>
+        public Collection<string> GetFeatureInfoFormats
+        {
+            get { return wmsClient.GetFeatureInfoOutputFormats; }
+        }
+
+        /// <summary>
         /// Gets or sets the spatial reference used for the WMS server request
         /// </summary>
         public string SpatialReferenceSystem { get; set; }

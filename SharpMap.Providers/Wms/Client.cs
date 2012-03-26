@@ -177,6 +177,11 @@ namespace SharpMap.Web.Wms
         public Collection<string> GetMapOutputFormats { get; private set; }
 
         /// <summary>
+        /// Gets a list of available feature info mime type formats
+        /// </summary>
+        public Collection<string> GetFeatureInfoOutputFormats { get; private set; }
+
+        /// <summary>
         /// Gets a list of available exception mime type formats
         /// </summary>
         public string[] ExceptionFormats
@@ -188,6 +193,11 @@ namespace SharpMap.Web.Wms
         /// Gets the available GetMap request methods and Online Resource URI
         /// </summary>
         public WmsOnlineResource[] GetMapRequests { get; private set; }
+
+        /// <summary>
+        /// Gets the available GetMap request methods and Online Resource URI
+        /// </summary>
+        public WmsOnlineResource[] GetFeatureInfoRequests { get; private set; }
 
         /// <summary>
         /// Gets the hiarchial layer structure
@@ -409,9 +419,26 @@ namespace SharpMap.Web.Wms
             //todo: parse
         }
 
-        private void ParseGetFeatureInfo(XmlNode xnGetFeatureInfo)
+        private void ParseGetFeatureInfo(XmlNode GetFeatureInfoRequestNodes)
         {
-            //todo: parse.
+            XmlNode xnlHttp = GetFeatureInfoRequestNodes.SelectSingleNode("sm:DCPType/sm:HTTP", nsmgr);
+            if (xnlHttp != null && xnlHttp.HasChildNodes)
+            {
+                GetFeatureInfoRequests = new WmsOnlineResource[xnlHttp.ChildNodes.Count];
+                for (int i = 0; i < xnlHttp.ChildNodes.Count; i++)
+                {
+                    WmsOnlineResource wor = new WmsOnlineResource();
+                    wor.Type = xnlHttp.ChildNodes[i].Name;
+                    wor.OnlineResource =
+                        xnlHttp.ChildNodes[i].SelectSingleNode("sm:OnlineResource", nsmgr).Attributes["xlink:href"].
+                            InnerText;
+                    GetFeatureInfoRequests[i] = wor;
+                }
+            }
+            XmlNodeList xnlFormats = GetFeatureInfoRequestNodes.SelectNodes("sm:Format", nsmgr);
+            GetFeatureInfoOutputFormats = new Collection<string>();
+            for (int i = 0; i < xnlFormats.Count; i++)
+                GetFeatureInfoOutputFormats.Add(xnlFormats[i].InnerText);
         }
 
         /// <summary>
