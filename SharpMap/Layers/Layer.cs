@@ -52,6 +52,8 @@ namespace SharpMap.Layers
 
         public new ICoordinateTransformation CoordinateTransformation { get; set; }
 
+        public ITransformation Transformation { get; set; }
+
         /// <summary>
         /// Returns the extent of the layer
         /// </summary>
@@ -70,8 +72,11 @@ namespace SharpMap.Layers
                     BoundingBox box = DataSource.GetExtents();
                     if (!wasOpen) //Restore state
                         DataSource.Close();
-                    if (CoordinateTransformation != null)
-                        return ProjectionHelper.Transform(box, CoordinateTransformation);
+                    /*if (CoordinateTransformation != null)
+                        return ProjectionHelper.Transform(box, CoordinateTransformation);*/
+                    if(Transformation != null)
+                        return Transformation.Transform(SRID, box);
+
                     return box;
                 }
             }
