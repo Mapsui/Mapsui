@@ -11,7 +11,7 @@ namespace Mapsui.Wpf
         {
             target.Opacity = 0;
             var animation = new DoubleAnimation();
-            animation.From = @from;
+            animation.From = from;
             animation.To = to;
             animation.Duration = new TimeSpan(0, 0, 0, 0, duration);
 
