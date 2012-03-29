@@ -67,19 +67,9 @@
     <Compile Include="FpsCounter.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MapControl.xaml.cs">
-      <DependentUpon>MapControl.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="MapControl.cs" />
     <Compile Include="MapTransformHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Page Include="MapControl.xaml">
-      <Generator>MSBuild:MarkupCompilePass1</Generator>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SharpMap\SharpMap-SL.csproj">

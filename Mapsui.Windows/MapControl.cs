@@ -23,6 +23,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using System.Windows.Shapes;
 using SharpMap;
 using SharpMap.Fetcher;
 using SharpMap.Layers;
@@ -33,7 +34,7 @@ using SharpMap.Rendering;
 
 namespace Mapsui.Windows
 {
-    public partial class MapControl : Control
+    public class MapControl : Grid
     {
         #region Fields
 
@@ -53,6 +54,8 @@ namespace Mapsui.Windows
         private readonly Canvas renderCanvas = new Canvas();
         private readonly IRenderer renderer;
         private bool invalid;
+        private readonly Rectangle bboxRect;
+        private readonly Canvas canvas;
 
         #endregion
 
@@ -131,7 +134,29 @@ namespace Mapsui.Windows
 
         public MapControl()
         {
-            InitializeComponent();
+            canvas = new Canvas
+            {
+                VerticalAlignment = VerticalAlignment.Stretch,
+                HorizontalAlignment = HorizontalAlignment.Stretch,
+                Background = new SolidColorBrush(Colors.Transparent)
+            };
+            Children.Add(canvas);
+
+            bboxRect = new Rectangle
+                {
+                    Fill = new SolidColorBrush(Colors.Red),
+                    Stroke = new SolidColorBrush(Colors.Black),
+                    StrokeThickness = 3,
+                    RadiusX = 0.5,
+                    RadiusY = 0.5,
+                    StrokeDashArray = new DoubleCollection { 3.0 },
+                    Opacity = 0.3,
+                    VerticalAlignment = VerticalAlignment.Top,
+                    HorizontalAlignment = HorizontalAlignment.Left,
+                    Visibility = Visibility.Collapsed
+                };
+            Children.Add(bboxRect);
+            
             Map = new Map();
             MouseInfoOverLayers = new List<ILayer>();
             MouseInfoDownLayers = new List<ILayer>();
@@ -273,9 +298,9 @@ namespace Mapsui.Windows
 #if !SILVERLIGHT
             Focusable = true;
 #else
-            IsTabStop = true;
+            //!!!IsTabStop = true;
 #endif
-            Focus();
+            //!!!Focus();
         }
 
         private void InitAnimation()
@@ -394,7 +419,7 @@ namespace Mapsui.Windows
             downMousePosition = e.GetPosition(this);
             mouseDown = true;
             CaptureMouse();
-            Focus();
+            //!!!Focus();
         }
 
         private void MapControlMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -438,7 +463,7 @@ namespace Mapsui.Windows
         {
             if (FeatureInfo != null)
             {
-                FeatureInfo(this, new FeatureInfoEventArgs { FeatureInfo = features});
+                FeatureInfo(this, new FeatureInfoEventArgs { FeatureInfo = features });
             }
         }
 
