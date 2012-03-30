@@ -93,11 +93,6 @@ namespace SharpMap.Layers
             return cache.GetFeaturesInView(box, resolution);
         }
 
-        public override IEnumerable<IFeature> GetFeatureInfo(BoundingBox box, double resolution)
-        {
-            return GetFeaturesInView(box, resolution);
-        }
-
         public override void AbortFetch()
         {
         }

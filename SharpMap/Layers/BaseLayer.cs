@@ -81,8 +81,6 @@ namespace SharpMap.Layers
 
         public abstract IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution);
 
-        public abstract IEnumerable<IFeature> GetFeatureInfo(BoundingBox box, double resolution);
-
         public override string ToString()
         {
             return LayerName;

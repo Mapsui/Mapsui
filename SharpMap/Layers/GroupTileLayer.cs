@@ -218,12 +218,5 @@ namespace SharpMap.Layers
             var sortedDictionary = (from entry in dictionary orderby entry.Key ascending select entry).ToDictionary(pair => pair.Key, pair => pair.Value);
             return sortedDictionary.Values;
         }
-
-        public override IEnumerable<IFeature> GetFeatureInfo(BoundingBox box, double resolution)
-        {
-            //todo: think through if we really want this here. Perhaps query all child layers.
-            return Enumerable.Empty<IFeature>(); ;
-        }
-
     }
 }

@@ -135,11 +135,11 @@ namespace Mapsui.Windows
         public MapControl()
         {
             canvas = new Canvas
-            {
-                VerticalAlignment = VerticalAlignment.Stretch,
-                HorizontalAlignment = HorizontalAlignment.Stretch,
-                Background = new SolidColorBrush(Colors.Transparent)
-            };
+                {
+                    VerticalAlignment = VerticalAlignment.Stretch,
+                    HorizontalAlignment = HorizontalAlignment.Stretch,
+                    Background = new SolidColorBrush(Colors.Transparent)
+                };
             Children.Add(canvas);
 
             bboxRect = new Rectangle
@@ -297,10 +297,7 @@ namespace Mapsui.Windows
 
 #if !SILVERLIGHT
             Focusable = true;
-#else
-            //!!!IsTabStop = true;
 #endif
-            //!!!Focus();
         }
 
         private void InitAnimation()
@@ -419,7 +416,6 @@ namespace Mapsui.Windows
             downMousePosition = e.GetPosition(this);
             mouseDown = true;
             CaptureMouse();
-            //!!!Focus();
         }
 
         private void MapControlMouseLeftButtonUp(object sender, MouseButtonEventArgs e)

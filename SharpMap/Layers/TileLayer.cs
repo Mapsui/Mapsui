@@ -209,11 +209,5 @@ namespace SharpMap.Layers
             const long second = 10000000;
             return ((currentTile - tile.TickFetched) > second);
         }
-
-        public override IEnumerable<IFeature> GetFeatureInfo(BoundingBox box, double resolution)
-        {
-            //todo: replace with option to query a WMS.
-            return Enumerable.Empty<IFeature>(); ;
-        }
     }
 }
