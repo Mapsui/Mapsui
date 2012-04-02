@@ -58,17 +58,10 @@ namespace Mapsui.Wpf
 
         private void OsmClick(object sender, RoutedEventArgs e)
         {
-            const string location = @"C:\Users\paul\Desktop\phoenix\voorbeeldgeotiff\voorbeeld3.tif";
-            IProvider geoTiffProvider = new GeoTiffProvider(location);
-            mapControl.Map.Layers.Add(new Layer("tif") { DataSource = geoTiffProvider });
+            mapControl.Map.Layers.Clear();
+            mapControl.Map.Layers.Add(new TileLayer(new OsmTileSource()) { LayerName = "OSM" });
             layerList.Initialize(mapControl.Map.Layers);
-            mapControl.ZoomToExtent();
             mapControl.Refresh();
-
-            //mapControl.Map.Layers.Clear();
-            //mapControl.Map.Layers.Add(new TileLayer(new OsmTileSource()) { LayerName = "OSM" });
-            //layerList.Initialize(mapControl.Map.Layers);
-            //mapControl.Refresh();
         }
 
         private void GeodanWmsClick(object sender, RoutedEventArgs e)
