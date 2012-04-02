@@ -54,6 +54,7 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.Web" />
@@ -78,6 +79,7 @@
     <Compile Include="FeatureDataSet.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="GeoTiff\GeoTiffProvider.cs" />
     <Compile Include="MsSqlSpatial\MsSqlSpatial.cs" />
     <Compile Include="MsSql\MsSql.cs" />
     <Compile Include="OleDbPoint\OleDbPoint.cs" />

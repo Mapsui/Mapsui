@@ -7,6 +7,7 @@ using BruTile.Web;
 using DemoConfig;
 using SharpMap.Layers;
 using SharpMap.Providers;
+using SharpMap.Providers.GeoTiff;
 using SharpMap.Samples;
 
 namespace Mapsui.Wpf
@@ -57,10 +58,17 @@ namespace Mapsui.Wpf
 
         private void OsmClick(object sender, RoutedEventArgs e)
         {
-            mapControl.Map.Layers.Clear();
-            mapControl.Map.Layers.Add(new TileLayer(new OsmTileSource()) { LayerName = "OSM" });
+            const string location = @"C:\Users\paul\Desktop\phoenix\voorbeeldgeotiff\voorbeeld3.tif";
+            IProvider geoTiffProvider = new GeoTiffProvider(location);
+            mapControl.Map.Layers.Add(new Layer("tif") { DataSource = geoTiffProvider });
             layerList.Initialize(mapControl.Map.Layers);
+            mapControl.ZoomToExtent();
             mapControl.Refresh();
+
+            //mapControl.Map.Layers.Clear();
+            //mapControl.Map.Layers.Add(new TileLayer(new OsmTileSource()) { LayerName = "OSM" });
+            //layerList.Initialize(mapControl.Map.Layers);
+            //mapControl.Refresh();
         }
 
         private void GeodanWmsClick(object sender, RoutedEventArgs e)

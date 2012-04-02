@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GeoTiff\GeoTiffProviderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Wms\ClientTests.cs" />
     <Compile Include="Wms\WmsProviderTests.cs" />
