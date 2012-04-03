@@ -29,11 +29,11 @@ namespace SharpMap.Layers
 {
     public class Layer : BaseLayer
     {
-        private bool isFetching;
-        private bool needsUpdate = true;
-        private double newResolution;
-        private BoundingBox newExtent;
-        private MemoryProvider cache;
+        protected bool isFetching;
+        protected bool needsUpdate = true;
+        protected double newResolution;
+        protected BoundingBox newExtent;
+        protected MemoryProvider cache;
 
         public IProvider DataSource { get; set; }
 
@@ -114,7 +114,7 @@ namespace SharpMap.Layers
             StartNewFetch(extent, resolution);
         }
 
-        private void StartNewFetch(BoundingBox extent, double resolution)
+        protected void StartNewFetch(BoundingBox extent, double resolution)
         {
             isFetching = true;
             needsUpdate = false;
@@ -126,7 +126,7 @@ namespace SharpMap.Layers
             new Thread(fetcher.FetchOnThread).Start();
         }
 
-        private void DataArrived(IEnumerable<IFeature> features)
+        protected virtual void DataArrived(IEnumerable<IFeature> features)
         {
             //the data in the cache is stored in the map projection so it projected only once.
             if (features == null) throw new ArgumentException("argument features may not be null");
@@ -135,7 +135,7 @@ namespace SharpMap.Layers
             if (CoordinateTransformation != null)
                 foreach (var feature in features)
                     ProjectionHelper.Transform(feature.Geometry, CoordinateTransformation);
-            
+
             cache = new MemoryProvider(features);
 
             isFetching = false;
