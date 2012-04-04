@@ -111,14 +111,25 @@ namespace SharpMap.Providers.ArcGis
         /// </summary>
         public bool TryGetMap(IView view, ref IRaster raster)
         {
-            var uri = new Uri(GetRequestUrl(view.Extent, view.Width, view.Height));
+            int width;
+            int height;
+
+            try
+            {
+                width = Convert.ToInt32(view.Width);
+                height = Convert.ToInt32(view.Height);
+            }
+            catch (OverflowException)
+            {
+                Trace.Write("Could not conver double to int (ExportMap size)");
+                return false;
+            }
+           
+            var uri = new Uri(GetRequestUrl(view.Extent, width, height));
             var request = WebRequest.Create(uri);
             request.Method = "GET";
             request.Timeout = _timeOut;
-            if (Credentials != null)
-                request.Credentials = Credentials;
-            else
-                request.Credentials = CredentialCache.DefaultCredentials;
+            request.Credentials = Credentials ?? CredentialCache.DefaultCredentials;
 
             try
             {
@@ -151,15 +162,18 @@ namespace SharpMap.Providers.ArcGis
         /// Gets the URL for a map export request base on current settings, the image size and boundingbox
         /// </summary>
         /// <param name="box">Area the request should cover</param>
-        /// <param name="size">Size of image</param>
+        /// <param name="width"> </param>
+        /// <param name="height"> </param>
         /// <returns>URL for ArcGIS Dynamic request</returns>
-        public string GetRequestUrl(BoundingBox box, double width, double height)
+        public string GetRequestUrl(BoundingBox box, int width, int height)
         {
             //ArcGIS Export description see: http://resources.esri.com/help/9.3/arcgisserver/apis/rest/index.html?export.html
 
             var strReq = new StringBuilder(_url);
             strReq.Append("/export?");
             strReq.AppendFormat(CultureInfo.InvariantCulture, "bbox={0},{1},{2},{3}", box.Min.X, box.Min.Y, box.Max.X, box.Max.Y);
+            strReq.AppendFormat("&bboxSR={0}", SRID);
+            strReq.AppendFormat("&imageSR={0}", SRID);
             strReq.AppendFormat("&size={0},{1}", width, height);
             strReq.Append("&layers=show:");
 
