@@ -68,7 +68,7 @@ namespace SharpMap.Layers
                     BoundingBox box = DataSource.GetExtents();
                     if (!wasOpen) //Restore state
                         DataSource.Close();
-                    if(Transformation != null)
+                    if(Transformation != null && Transformation.MapSRID != -1 && SRID != -1)
                         return Transformation.Transfrom(SRID, Transformation.MapSRID, box);
 
                     return box;
@@ -113,7 +113,7 @@ namespace SharpMap.Layers
             isFetching = true;
             needsUpdate = false;
 
-            if(Transformation != null)
+            if(Transformation != null && Transformation.MapSRID != -1 && SRID != -1)
                 extent = Transformation.Transfrom(Transformation.MapSRID, SRID, extent);
 
             var fetcher = new Fetcher(extent, resolution, DataSource, DataArrived);
@@ -126,7 +126,7 @@ namespace SharpMap.Layers
             if (features == null) throw new ArgumentException("argument features may not be null");
 
             features = features.ToList();
-            if(Transformation != null)
+            if(Transformation != null && Transformation.MapSRID != -1 && SRID != -1)
                 foreach (var feature in features)
                     feature.Geometry = Transformation.Transform(SRID, Transformation.MapSRID, (Geometry) feature.Geometry);
 
