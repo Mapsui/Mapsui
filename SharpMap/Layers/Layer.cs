@@ -50,10 +50,6 @@ namespace SharpMap.Layers
             }
         }
 
-        public new ICoordinateTransformation CoordinateTransformation { get; set; }
-
-        public ITransformation Transformation { get; set; }
-
         /// <summary>
         /// Returns the extent of the layer
         /// </summary>
@@ -72,10 +68,8 @@ namespace SharpMap.Layers
                     BoundingBox box = DataSource.GetExtents();
                     if (!wasOpen) //Restore state
                         DataSource.Close();
-                    /*if (CoordinateTransformation != null)
-                        return ProjectionHelper.Transform(box, CoordinateTransformation);*/
                     if(Transformation != null)
-                        return Transformation.Transform(SRID, box);
+                        return Transformation.Transfrom(SRID, Transformation.MapSRID, box);
 
                     return box;
                 }
@@ -118,9 +112,9 @@ namespace SharpMap.Layers
         {
             isFetching = true;
             needsUpdate = false;
-            
-            if (CoordinateTransformation != null)
-                extent = ProjectionHelper.InverseTransform(extent, CoordinateTransformation);
+
+            if(Transformation != null)
+                extent = Transformation.Transfrom(Transformation.MapSRID, SRID, extent);
 
             var fetcher = new Fetcher(extent, resolution, DataSource, DataArrived);
             new Thread(fetcher.FetchOnThread).Start();
@@ -132,9 +126,9 @@ namespace SharpMap.Layers
             if (features == null) throw new ArgumentException("argument features may not be null");
 
             features = features.ToList();
-            if (CoordinateTransformation != null)
+            if(Transformation != null)
                 foreach (var feature in features)
-                    ProjectionHelper.Transform(feature.Geometry, CoordinateTransformation);
+                    feature.Geometry = Transformation.Transform(SRID, Transformation.MapSRID, (Geometry) feature.Geometry);
 
             cache = new MemoryProvider(features);
 

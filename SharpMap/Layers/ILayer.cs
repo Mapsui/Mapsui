@@ -21,6 +21,7 @@ using SharpMap.Fetcher;
 using SharpMap.Geometries;
 using SharpMap.Providers;
 using SharpMap.Styles;
+using SharpMap.Projection;
 
 namespace SharpMap.Layers
 {
@@ -67,6 +68,11 @@ namespace SharpMap.Layers
         /// The spatial reference ID (CRS)
         /// </summary>
         int SRID { get; set; }
+
+        /// <summary>
+        /// The coordinate transformation
+        /// </summary>
+        ITransformation Transformation { get; set; }
 
         IList<IStyle> Styles { get; }
 
