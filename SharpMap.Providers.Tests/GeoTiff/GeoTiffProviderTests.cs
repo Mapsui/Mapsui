@@ -11,8 +11,11 @@ namespace SharpMap.Providers.Tests.GeoTiff
         [Test]
         public void GeoTiffProviderConstructor_WhenInitialized_ShouldReturnFeatures()
         {
-            const string location = @"C:\Users\paul\Desktop\phoenix\voorbeeldgeotiff\voorbeeld3.tif";
+            const string location = @".\Resources\example.tif";
             var geoTiffProvider = new GeoTiffProvider(location);
+            var test = geoTiffProvider.GetExtents().Left.ToString();
+            Console.WriteLine(test);
+                
         }
     }
 }

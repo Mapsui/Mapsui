@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using SharpMap.Geometries;
@@ -100,12 +101,12 @@ namespace SharpMap.Providers.GeoTiff
             WorldProperties worldProperties;
             using (TextReader reader = File.OpenText(location))
             {
-                worldProperties.PixelSizeX = Convert.ToDouble(reader.ReadLine());
-                worldProperties.RotationAroundYAxis = Convert.ToDouble(reader.ReadLine()); ;
-                worldProperties.RotationAroundXAxis = Convert.ToDouble(reader.ReadLine()); ;
-                worldProperties.PixelSizeY = Convert.ToDouble(reader.ReadLine()); ;
-                worldProperties.XCenterOfUpperLeftPixel = Convert.ToDouble(reader.ReadLine()); ;
-                worldProperties.YCenterOfUpperLeftPixel = Convert.ToDouble(reader.ReadLine()); ;
+                worldProperties.PixelSizeX = Convert.ToDouble(reader.ReadLine(), CultureInfo.InvariantCulture);
+                worldProperties.RotationAroundYAxis = Convert.ToDouble(reader.ReadLine(), CultureInfo.InvariantCulture);
+                worldProperties.RotationAroundXAxis = Convert.ToDouble(reader.ReadLine(), CultureInfo.InvariantCulture);
+                worldProperties.PixelSizeY = Convert.ToDouble(reader.ReadLine(), CultureInfo.InvariantCulture);
+                worldProperties.XCenterOfUpperLeftPixel = Convert.ToDouble(reader.ReadLine(), CultureInfo.InvariantCulture);
+                worldProperties.YCenterOfUpperLeftPixel = Convert.ToDouble(reader.ReadLine(), CultureInfo.InvariantCulture);
             }
             return worldProperties;
         }
