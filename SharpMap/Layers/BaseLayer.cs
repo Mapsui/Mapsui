@@ -4,6 +4,7 @@ using SharpMap.Fetcher;
 using SharpMap.Geometries;
 using SharpMap.Providers;
 using SharpMap.Styles;
+using SharpMap.Projection;
 
 namespace SharpMap.Layers
 {
@@ -48,7 +49,10 @@ namespace SharpMap.Layers
         /// </summary>
         public int SRID { get; set; }
 
-        public ICoordinateTransformation CoordinateTransformation { private get; set; }
+        /// <summary>
+        /// The coordinate transformation
+        /// </summary>
+        public ITransformation Transformation { get; set; }
 
         /// <summary>
         /// Returns the extent of the layer

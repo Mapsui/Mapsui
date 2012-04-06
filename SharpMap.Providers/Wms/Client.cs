@@ -406,17 +406,8 @@ namespace SharpMap.Web.Wms
             XmlNode xnGetMap = xmlRequestNode.SelectSingleNode("sm:GetMap", nsmgr);
             ParseGetMapRequest(xnGetMap);
 
-            XmlNode xnGetLegendGraphic = xmlRequestNode.SelectSingleNode("sm:GetLegendGraphic", nsmgr);
-            if (xnGetLegendGraphic != null) ParseGetLegendGraphic(xnGetLegendGraphic);
-
             XmlNode xnGetFeatureInfo = xmlRequestNode.SelectSingleNode("sm:GetFeatureInfo", nsmgr);
             ParseGetFeatureInfo(xnGetFeatureInfo);
-        }
-
-
-        private void ParseGetLegendGraphic(XmlNode xnGetLegendGraphic)
-        {
-            //todo: parse
         }
 
         private void ParseGetFeatureInfo(XmlNode GetFeatureInfoRequestNodes)

@@ -22,6 +22,7 @@ using SharpMap.Fetcher;
 using SharpMap.Styles;
 using SharpMap.Layers;
 using SharpMap.Geometries;
+using SharpMap.Projection;
 
 namespace SharpMap
 {
@@ -61,6 +62,7 @@ namespace SharpMap
         {
             layer.DataChanged += AsyncLayerDataChanged;
             layer.Feedback += LayerFeedback;
+            layer.Transformation = Transformation;
         }
 
         private void LayerFeedback(object sender, FeedbackEventArgs e)
@@ -114,6 +116,11 @@ namespace SharpMap
             AbortFetch();
             layers.Clear();
         }
+
+        /// <summary>
+        /// The maps coördinate system
+        /// </summary>
+        public ITransformation Transformation { get; set; }
 
         /// <summary>
         /// A collection of layers. The first layer in the list is drawn first, the last one on top.
