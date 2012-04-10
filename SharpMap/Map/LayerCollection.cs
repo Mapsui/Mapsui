@@ -12,9 +12,11 @@ namespace SharpMap
         
         public delegate void LayerRemovedEventHandler(ILayer layer);
         public delegate void LayerAddedEventHandler(ILayer layer);
+        public delegate void LayerMovedEventHandler(ILayer layer);
 
         public event LayerRemovedEventHandler LayerRemoved;
         public event LayerAddedEventHandler LayerAdded;
+        public event LayerMovedEventHandler LayerMoved;
 
         public int Count
         {
@@ -52,6 +54,13 @@ namespace SharpMap
             OnLayerAdded(layer);
         }
 
+        public void Move(int index, ILayer layer)
+        {
+            layers.Remove(layer);
+            layers.Insert(index, layer);
+            OnLayerMoved(layer);
+        }
+
         public void Insert(int index, ILayer layer)
         {
             layers.Insert(index, layer);
@@ -73,6 +82,11 @@ namespace SharpMap
         private void OnLayerAdded(ILayer layer)
         {
             if (LayerAdded != null) LayerAdded(layer);
+        }
+
+        private void OnLayerMoved(ILayer layer)
+        {
+            if (LayerMoved != null) LayerMoved(layer);
         }
 
         public IEnumerable<ILayer> FindLayer(string layername)

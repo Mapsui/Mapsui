@@ -107,10 +107,6 @@ namespace SharpMap.Providers.Wms
                 xParam, x,
                 yParam, y);
 
-            //DEBUG
-            Console.WriteLine(string.Format("REQUEST URL: {0}", requestUrl));
-            //END DEBUG
-
             return requestUrl;
         }
 
