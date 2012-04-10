@@ -30,6 +30,8 @@ namespace SharpMap.Providers.Wms
             set { _timeOut = value; }
         }
 
+        public Dictionary<string, string> ExtraParams { get; set; }
+
         /// <summary>
         /// Request FeatureInfo for a WMS Server
         /// </summary>
@@ -62,7 +64,7 @@ namespace SharpMap.Providers.Wms
             _webRequest.BeginGetResponse(FinishWebRequest, null);
         }
 
-        private static string CreateRequestUrl(string baseUrl, string wmsVersion, string infoFormat, string srs, IList<string> layers, double extendXmin, double extendYmin, double extendXmax, double extendYmax, double x, double y, double mapWidth, double mapHeight)
+        private string CreateRequestUrl(string baseUrl, string wmsVersion, string infoFormat, string srs, IList<string> layers, double extendXmin, double extendYmin, double extendXmax, double extendYmax, double x, double y, double mapWidth, double mapHeight)
         {
             //Versions
             var versionNumber = new Version(wmsVersion);
@@ -106,6 +108,12 @@ namespace SharpMap.Providers.Wms
                 infoFormat,
                 xParam, x,
                 yParam, y);
+
+            if (ExtraParams != null)
+            {
+                foreach (var extraParam in ExtraParams)
+                    requestUrl += string.Format("&{0}={1}", extraParam.Key, extraParam.Value);
+            }
 
             return requestUrl;
         }

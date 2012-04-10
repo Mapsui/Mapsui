@@ -126,9 +126,13 @@ namespace SharpMap.Layers
             if (features == null) throw new ArgumentException("argument features may not be null");
 
             features = features.ToList();
-            if(Transformation != null && Transformation.MapSRID != -1 && SRID != -1)
-                foreach (var feature in features)
-                    feature.Geometry = Transformation.Transform(SRID, Transformation.MapSRID, (Geometry) feature.Geometry);
+            if (Transformation != null && Transformation.MapSRID != -1 && SRID != -1 && SRID != Transformation.MapSRID)
+            {
+                foreach (var feature in features.Where(feature => !(feature is Raster)))
+                {
+                    feature.Geometry = Transformation.Transform(SRID, Transformation.MapSRID,(Geometry) feature.Geometry);
+                }
+            }
 
             cache = new MemoryProvider(features);
 

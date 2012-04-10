@@ -362,6 +362,13 @@ namespace SharpMap.Providers.Wms
                     strReq.AppendFormat("{0},", style);
                 strReq.Remove(strReq.Length - 1, 1);
             }
+
+            if (ExtraParams != null)
+            {
+                foreach (var extraParam in ExtraParams)
+                    strReq.AppendFormat("&{0}={1}", extraParam.Key, extraParam.Value);
+            }
+
             return strReq.ToString();
         }
 
@@ -429,6 +436,8 @@ namespace SharpMap.Providers.Wms
         }
 
         public int SRID { get; set; }
+
+        public Dictionary<string, string> ExtraParams { get; set; }
 
         public BoundingBox GetExtents()
         {
