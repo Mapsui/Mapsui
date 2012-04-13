@@ -17,7 +17,18 @@ namespace SilverlightRendering
     static class GeometryRenderer
     {
         private static readonly IDictionary<IStyle, BitmapSource> StyleCache = new Dictionary<IStyle, BitmapSource>();
-                
+
+        public static UIElement PositionPoint(UIElement renderedGeometry, Point point, IStyle style, IView view)
+        {
+            var frameworkElement = (FrameworkElement) renderedGeometry;
+            var symbolStyle = (SymbolStyle) style;
+            var width = symbolStyle.Width * symbolStyle.SymbolScale;
+            var height = symbolStyle.Height * symbolStyle.SymbolScale;  
+            var matrix = CreateTransformMatrix(point, view, symbolStyle, width, height);
+            frameworkElement.RenderTransform = new MatrixTransform { Matrix = matrix };
+            return frameworkElement;
+        }
+
         public static UIElement RenderPoint(Point point, IStyle style, IView view)
         {
             if (style is LabelStyle)
@@ -58,24 +69,30 @@ namespace SilverlightRendering
                 height = bitmap.PixelHeight * symbolStyle.SymbolScale;
             }
 
+            var matrix = CreateTransformMatrix(point, view, symbolStyle, width, height);
+            path.RenderTransform = new MatrixTransform { Matrix = matrix };
+            path.Opacity = symbolStyle.Opacity;
+            return path;
+        }
+
+        private static Matrix CreateTransformMatrix(Point point, IView view, SymbolStyle symbolStyle, double width, double height)
+        {
             var matrix = new Matrix();
             // flip the image top to bottom:
-            MatrixHelper.Translate(ref matrix, - width * 0.5, - height * 0.5);
+            MatrixHelper.Translate(ref matrix, -width * 0.5, -height * 0.5);
             MatrixHelper.Invert(ref matrix);
             MatrixHelper.Translate(ref matrix, width * 0.5, height * 0.5);
 
-            MatrixHelper.Translate(ref matrix, 
+            MatrixHelper.Translate(ref matrix,
                 point.X + symbolStyle.SymbolOffset.X - width * 0.5,
                 point.Y + symbolStyle.SymbolOffset.Y - height * 0.5);
             //for point symbols we want the size to be independent from the resolution. We do this by counter scaling first.
             if (symbolStyle.UnitType != UnitType.WorldUnit)
                 MatrixHelper.ScaleAt(ref matrix, view.Resolution, view.Resolution, point.X, point.Y);
-            
+
             MatrixHelper.RotateAt(ref matrix, -symbolStyle.SymbolRotation, point.X, point.Y);
             MatrixHelper.ApplyViewTransform(ref matrix, view);
-            path.RenderTransform = new MatrixTransform { Matrix = matrix };
-            path.Opacity = symbolStyle.Opacity;
-            return path;
+            return matrix;
         }
 
         private static Path ToSymbolPath(SymbolStyle symbolStyle)
@@ -476,7 +493,7 @@ namespace SilverlightRendering
 
         public static void PositionRaster(UIElement renderedGeometry, BoundingBox boundingBox, IView view)
         {
-            ((RectangleGeometry)((System.Windows.Shapes.Path)renderedGeometry).Data).Rect =
+            ((RectangleGeometry)((Path)renderedGeometry).Data).Rect =
                                      RoundToPixel(new Rect(
                                         ConvertPoint(view.WorldToView(boundingBox.Min)),
                                         ConvertPoint(view.WorldToView(boundingBox.Max))));

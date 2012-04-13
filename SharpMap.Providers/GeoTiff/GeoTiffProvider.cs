@@ -34,14 +34,12 @@ namespace SharpMap.Providers.GeoTiff
         private readonly WorldProperties worldProperties;
         private const string WorldExtention = ".tfw";
         private readonly string worldPath;
-        private string tiffPath;
         private readonly IFeature feature;
         private readonly BoundingBox extent;
         private readonly MemoryStream data;
 
         public GeoTiffProvider(string tiffPath)
         {
-            this.tiffPath = tiffPath;
             if (!File.Exists(tiffPath))
             {
                 throw new ArgumentException(string.Format("Tiff file expected at {0}", tiffPath));

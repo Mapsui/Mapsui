@@ -105,7 +105,19 @@ namespace SilverlightRendering
         private static void RenderGeometry(Canvas canvas, IView view, SharpMap.Styles.IStyle style, SharpMap.Providers.IFeature feature)
         {
             if (feature.Geometry is SharpMap.Geometries.Point)
-                canvas.Children.Add(GeometryRenderer.RenderPoint(feature.Geometry as SharpMap.Geometries.Point, style, view));
+            {
+                var renderedGeometry = feature.RenderedGeometry as UIElement;
+                if (renderedGeometry != null)
+                {
+                    GeometryRenderer.PositionPoint(renderedGeometry, feature.Geometry as SharpMap.Geometries.Point, style, view);
+                }
+                else
+                {
+                    renderedGeometry = GeometryRenderer.RenderPoint(feature.Geometry as SharpMap.Geometries.Point, style, view);
+                    feature.RenderedGeometry = renderedGeometry;
+                }
+                canvas.Children.Add(renderedGeometry);
+            }
             else if (feature.Geometry is MultiPoint)
                 canvas.Children.Add(GeometryRenderer.RenderMultiPoint(feature.Geometry as MultiPoint, style, view));
             else if (feature.Geometry is LineString)
@@ -119,15 +131,15 @@ namespace SilverlightRendering
             else if (feature.Geometry is IRaster)
             {
                 var renderedGeometry = feature.RenderedGeometry as UIElement;
-                if (renderedGeometry == null) // create
+                if (renderedGeometry != null) 
+                {
+                    GeometryRenderer.PositionRaster(renderedGeometry, feature.Geometry.GetBoundingBox(), view);
+                }
+                else
                 {
                     renderedGeometry = GeometryRenderer.RenderRaster(feature.Geometry as IRaster, style, view);
                     Animate(renderedGeometry, "Opacity", 0, 1, 600, (s, e) => { });
                     feature.RenderedGeometry = renderedGeometry;
-                }
-                else // position
-                {
-                    GeometryRenderer.PositionRaster(renderedGeometry, feature.Geometry.GetBoundingBox(), view);
                 }
                 canvas.Children.Add(renderedGeometry);
             }
