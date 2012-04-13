@@ -35,7 +35,7 @@ namespace SharpMap.Styles
         /// <remarks>
         /// Setting the symbolscale to '2.0' doubles the size of the symbol, where a scale of 0.5 makes the scale half the size of the original image
         /// </remarks>
-        public float SymbolScale { get; set; }
+        public double SymbolScale { get; set; }
 
         /// <summary>
         /// Gets or sets the offset in pixels of the symbol.
@@ -48,13 +48,13 @@ namespace SharpMap.Styles
         /// <summary>
         /// Gets or sets the rotation of the symbol in degrees (clockwise is positive)
         /// </summary>
-        public float SymbolRotation { get; set; }
+        public double SymbolRotation { get; set; }
 
         public UnitType UnitType { get; set; }
 
         public SymbolType SymbolType { get; set; }
 
-        public float Opacity { get; set; }
+        public double Opacity { get; set; }
 
         public double Width { get; set; }
 

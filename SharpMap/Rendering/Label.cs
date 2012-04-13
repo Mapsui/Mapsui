@@ -136,7 +136,7 @@ namespace SharpMap.Rendering
         /// <param name="priority">Label priority used for collision detection</param>
         /// <param name="collisionbox">Box around label for collision detection</param>
         /// <param name="style">The style of the label</param>
-        public Label(string text, Point labelpoint, float rotation, int priority, LabelBox collisionbox,
+        public Label(string text, Point labelpoint, double rotation, int priority, LabelBox collisionbox,
                      LabelStyle style)
         {
             Text = text;
@@ -171,7 +171,7 @@ namespace SharpMap.Rendering
         /// <summary>
         /// Label rotation
         /// </summary>
-        public float Rotation { get; set; }
+        public double Rotation { get; set; }
 
         /// <summary>
         /// Value indicating rendering priority

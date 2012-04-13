@@ -28,7 +28,7 @@ namespace GdiRendering
 
         public static System.Drawing.Pen Convert(this Pen pen)
         {
-            return new System.Drawing.Pen(pen.Color.Convert(), pen.Width);
+            return new System.Drawing.Pen(pen.Color.Convert(), (float)pen.Width);
         }
 
         public static System.Drawing.Brush Convert(this Brush brush)
@@ -44,7 +44,7 @@ namespace GdiRendering
 
         public static System.Drawing.PointF Convert(this Offset offset)
         {
-            return new System.Drawing.PointF(offset.X, offset.Y);
+            return new System.Drawing.PointF((float)offset.X, (float)offset.Y);
         }
 
         public static System.Drawing.Font Convert(this Font font)

@@ -193,7 +193,7 @@ namespace SharpMap.Styles.Thematics
         private void CalculateVectorStyle(VectorStyle style, VectorStyle min, VectorStyle max, double value)
         {
             double dFrac = Fraction(value);
-            float fFrac = Convert.ToSingle(dFrac);
+            double fFrac = Convert.ToSingle(dFrac);
             style.Enabled = (dFrac > 0.5 ? min.Enabled : max.Enabled);
             if (fillColorBlend != null)
                 style.Fill = new Brush { Color = fillColorBlend.GetColor(fFrac) };
@@ -215,7 +215,7 @@ namespace SharpMap.Styles.Thematics
             style.Symbol = (dFrac > 0.5 ? min.Symbol : max.Symbol);
             style.SymbolOffset = (dFrac > 0.5 ? min.SymbolOffset : max.SymbolOffset);
             //We don't interpolate the offset but let it follow the symbol instead
-            style.SymbolScale = InterpolateFloat(min.SymbolScale, max.SymbolScale, value);
+            style.SymbolScale = InterpolateDouble(min.SymbolScale, max.SymbolScale, value);
         }
 
         private void CalculateLabelStyle(LabelStyle style, LabelStyle min, LabelStyle max, double value)
@@ -236,8 +236,8 @@ namespace SharpMap.Styles.Thematics
             if (min.Halo != null && max.Halo != null)
                 style.Halo = InterpolatePen(min.Halo, max.Halo, value);
 
-            var x = InterpolateFloat(min.Offset.X, max.Offset.X, value);
-            var y = InterpolateFloat(min.Offset.Y, max.Offset.Y, value);
+            var x = InterpolateDouble(min.Offset.X, max.Offset.X, value);
+            var y = InterpolateDouble(min.Offset.Y, max.Offset.Y, value);
             style.Offset = new Offset { X = x, Y = y };
         }
 
@@ -255,7 +255,7 @@ namespace SharpMap.Styles.Thematics
             return min;
         }
 
-        private float InterpolateFloat(float min, float max, double attr)
+        private double InterpolateFloat(float min, float max, double attr)
         {
             return Convert.ToSingle((max - min) * Fraction(attr) + min);
         }
@@ -278,7 +278,7 @@ namespace SharpMap.Styles.Thematics
             return new Pen
             {
                 Color = InterpolateColor(min.Color, max.Color, attr),
-                Width = InterpolateFloat(min.Width, max.Width, attr)
+                Width = InterpolateDouble(min.Width, max.Width, attr)
             };
 
         }

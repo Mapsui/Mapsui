@@ -182,9 +182,9 @@ namespace GdiRendering
             var vectorStyle = (Styles.SymbolStyle)style;
             if (vectorStyle.Symbol == null) throw  new ArgumentException("No bitmap symbol set in Gdi rendering"); //todo: allow vector symbol
             Bitmap symbol= vectorStyle.Symbol.Convert();
-            float symbolscale = vectorStyle.SymbolScale;
+            var symbolscale = vectorStyle.SymbolScale;
             PointF offset = vectorStyle.SymbolOffset.Convert();
-            float rotation = vectorStyle.SymbolRotation;
+            var rotation = vectorStyle.SymbolRotation;
 
             if (point == null)
                 return;
@@ -196,15 +196,15 @@ namespace GdiRendering
             if (rotation != 0 && !double.IsNaN(rotation))
             {
                 graphics.TranslateTransform(dest.X, dest.Y);
-                graphics.RotateTransform(rotation);
+                graphics.RotateTransform((float)rotation);
                 graphics.TranslateTransform((int)(-symbol.Width / 2.0), (int)(-symbol.Height / 2.0));
                 if (symbolscale == 1f)
                     graphics.DrawImageUnscaled(symbol, (int)(dest.X - symbol.Width / 2.0 + offset.X), (int)(dest.Y - symbol.Height / 2.0 + offset.Y));
                 else
                 {
-                    float width = symbol.Width * symbolscale;
-                    float height = symbol.Height * symbolscale;
-                    graphics.DrawImage(symbol, (int)dest.X - width / 2 + offset.X * symbolscale, (int)dest.Y - height / 2 + offset.Y * symbolscale, width, height);
+                    var width = symbol.Width * symbolscale;
+                    var height = symbol.Height * symbolscale;
+                    graphics.DrawImage(symbol, (int)(dest.X - width / 2 + offset.X * symbolscale), (int)(dest.Y - height / 2 + offset.Y * symbolscale), (float)width, (float)height);
                 }
             }
             else
@@ -213,9 +213,9 @@ namespace GdiRendering
                     graphics.DrawImageUnscaled(symbol, (int)(dest.X - symbol.Width / 2.0 + offset.X), (int)(dest.Y - symbol.Height / 2.0 + offset.Y));
                 else
                 {
-                    float width = symbol.Width * symbolscale;
-                    float height = symbol.Height * symbolscale;
-                    graphics.DrawImage(symbol, (int)dest.X - width / 2 + offset.X * symbolscale, (int)dest.Y - height / 2 + offset.Y * symbolscale, width, height);
+                    var width = symbol.Width * symbolscale;
+                    var height = symbol.Height * symbolscale;
+                    graphics.DrawImage(symbol, (int)(dest.X - width / 2 + offset.X * symbolscale), (int)(dest.Y - height / 2 + offset.Y * symbolscale), (float)width, (float)height);
                 }
             }
         }

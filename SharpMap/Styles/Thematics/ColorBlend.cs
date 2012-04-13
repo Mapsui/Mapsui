@@ -41,7 +41,7 @@ namespace SharpMap.Styles.Thematics
 	    /// last element must be 1.0f.</para>
 	    /// <pre>Along with the Colors property, this property defines a multicolor gradient.</pre>
 	    /// </remarks>
-	    public float[] Positions { get; set; }
+        public double[] Positions { get; set; }
 
 	    internal ColorBlend() { }
 
@@ -50,7 +50,7 @@ namespace SharpMap.Styles.Thematics
 		/// </summary>
 		/// <param name="colors">An array of Color structures that represents the colors to use at corresponding positions along a gradient.</param>
 		/// <param name="positions">An array of values that specify percentages of distance along the gradient line.</param>
-		public ColorBlend(Color[] colors, float[] positions)
+        public ColorBlend(Color[] colors, double[] positions)
 		{
 			Colors = colors;
 			Positions = positions;
@@ -63,7 +63,7 @@ namespace SharpMap.Styles.Thematics
 		/// is used (in other words the scale restarts for each integer-part).</remarks>
 		/// <param name="pos">Position on scale between 0.0f and 1.0f</param>
 		/// <returns>Color on scale</returns>
-		public Color GetColor(float pos)
+		public Color GetColor(double pos)
 		{
 			if (Colors.Length != Positions.Length)
 				throw (new ArgumentException("Colors and Positions arrays must be of equal length"));
@@ -73,11 +73,11 @@ namespace SharpMap.Styles.Thematics
 				throw (new ArgumentException("First position value must be 0.0f"));
 			if (Positions[Positions.Length - 1] != 1f)
 				throw (new ArgumentException("Last position value must be 1.0f"));
-			if (pos > 1 || pos < 0) pos -= (float)Math.Floor(pos);
+			if (pos > 1 || pos < 0) pos -= Math.Floor(pos);
 			int i = 1;
 			while (i < Positions.Length && Positions[i] < pos)
 				i++;
-			float frac = (pos - Positions[i - 1]) / (Positions[i] - Positions[i - 1]);
+			double frac = (pos - Positions[i - 1]) / (Positions[i] - Positions[i - 1]);
 			var red = (int)Math.Round((Colors[i - 1].R * (1 - frac) + Colors[i].R * frac));
 			var green = (int)Math.Round((Colors[i - 1].G * (1 - frac) + Colors[i].G * frac));
 			var blue = (int)Math.Round((Colors[i - 1].B * (1 - frac) + Colors[i].B * frac));
@@ -94,7 +94,7 @@ namespace SharpMap.Styles.Thematics
         ///// <param name="rectangle"></param>
         ///// <param name="angle"></param>
         ///// <returns></returns>
-        //public System.Drawing.Drawing2D.LinearGradientBrush ToBrush(Rectangle rectangle, float angle)
+        //public System.Drawing.Drawing2D.LinearGradientBrush ToBrush(Rectangle rectangle, double angle)
         //{
         //    LinearGradientBrush br = new LinearGradientBrush(rectangle, Color.Black, Color.Black, angle, true);
         //    System.Drawing.Drawing2D.ColorBlend cb = new System.Drawing.Drawing2D.ColorBlend();
@@ -119,9 +119,9 @@ namespace SharpMap.Styles.Thematics
             get
             {
                 var cb = new ColorBlend();
-                cb.Positions = new float[7];
+                cb.Positions = new double[7];
                 int i = 0;
-                for (float f = 0; f <= 1; f += 1.0f / 6)
+                for (double f = 0; f <= 1; f += 1.0f / 6)
                     cb.Positions[i++] = f;
                 cb.Colors = new[] { 
                     Color.Red, Color.Orange, Color.Yellow, Color.Green, Color.Blue, Color.Indigo, Color.Violet};
@@ -142,7 +142,7 @@ namespace SharpMap.Styles.Thematics
             {
                 return new ColorBlend(
                     new[] { Color.Red, Color.Yellow, Color.Green, Color.Cyan, Color.Blue },
-                    new[] { 0f, 0.25f, 0.5f, 0.75f, 1f });
+                    new[] { 0, 0.25, 0.5, 0.75, 1 });
             }
         }
 
@@ -153,7 +153,7 @@ namespace SharpMap.Styles.Thematics
 		{
 			get
 			{
-                return new ColorBlend(new[] { Color.Black, Color.White}, new[] { 0f, 1f });
+                return new ColorBlend(new[] { Color.Black, Color.White }, new[] { 0.0, 1.0 });
 			}
 		}
 
@@ -164,7 +164,7 @@ namespace SharpMap.Styles.Thematics
 		{
 			get
 			{
-				return new ColorBlend(new[] { Color.White, Color.Black }, new[] { 0f, 1f });
+                return new ColorBlend(new[] { Color.White, Color.Black }, new[] { 0.0, 1.0 });
 			}
 		}
 
@@ -175,7 +175,7 @@ namespace SharpMap.Styles.Thematics
 		{
 			get
 			{
-				return new ColorBlend(new[] { Color.Red, Color.Green }, new[] { 0f, 1f });
+                return new ColorBlend(new[] { Color.Red, Color.Green }, new[] { 0.0, 1.0 });
 			}
 		}
 
@@ -186,7 +186,7 @@ namespace SharpMap.Styles.Thematics
 		{
 			get
 			{
-				return new ColorBlend(new[] { Color.Green, Color.Red }, new[] { 0f, 1f });
+                return new ColorBlend(new[] { Color.Green, Color.Red }, new[] { 0.0, 1.0 });
 			}
 		}
 
@@ -197,7 +197,7 @@ namespace SharpMap.Styles.Thematics
 		{
 			get
 			{
-				return new ColorBlend(new[] { Color.Blue, Color.Green }, new[] { 0f, 1f });
+                return new ColorBlend(new[] { Color.Blue, Color.Green }, new[] { 0.0, 1.0 });
 			}
 		}
 
@@ -208,7 +208,7 @@ namespace SharpMap.Styles.Thematics
 		{
 			get
 			{
-				return new ColorBlend(new[] { Color.Green, Color.Blue }, new[] { 0f, 1f });
+                return new ColorBlend(new[] { Color.Green, Color.Blue }, new[] { 0.0, 1.0 });
 			}
 		}
 
@@ -219,7 +219,7 @@ namespace SharpMap.Styles.Thematics
 		{
 			get
 			{
-				return new ColorBlend(new[] { Color.Red, Color.Blue }, new[] { 0f, 1f });
+                return new ColorBlend(new[] { Color.Red, Color.Blue }, new[] { 0.0, 1.0 });
 			}
 		}
 
@@ -230,7 +230,7 @@ namespace SharpMap.Styles.Thematics
 		{
 			get
 			{
-				return new ColorBlend(new[] { Color.Blue, Color.Red }, new[] { 0f, 1f });
+                return new ColorBlend(new[] { Color.Blue, Color.Red }, new[] { 0.0, 1.0 });
 			}
 		}
 
@@ -246,7 +246,7 @@ namespace SharpMap.Styles.Thematics
 		/// <returns></returns>
 		public static ColorBlend TwoColors(Color fromColor, Color toColor)
 		{
-			return new ColorBlend(new[] { fromColor, toColor }, new[] { 0f, 1f });
+            return new ColorBlend(new[] { fromColor, toColor }, new[] { 0.0, 1.0 });
 		}
 
 		/// <summary>
@@ -254,7 +254,7 @@ namespace SharpMap.Styles.Thematics
 		/// </summary>
 		public static ColorBlend ThreeColors(Color fromColor, Color middleColor, Color toColor)
 		{
-			return new ColorBlend(new[] { fromColor, middleColor, toColor }, new[] { 0f, 0.5f, 1f });
+			return new ColorBlend(new[] { fromColor, middleColor, toColor }, new[] { 0, 0.5, 1 });
 		}
 
 		#endregion
