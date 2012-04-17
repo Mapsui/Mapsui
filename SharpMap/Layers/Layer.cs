@@ -128,7 +128,7 @@ namespace SharpMap.Layers
             features = features.ToList();
             if (Transformation != null && Transformation.MapSRID != -1 && SRID != -1 && SRID != Transformation.MapSRID)
             {
-                foreach (var feature in features.Where(feature => !(feature is Raster)))
+                foreach (var feature in features.Where(feature => !(feature.Geometry is Raster)))
                 {
                     feature.Geometry = Transformation.Transform(SRID, Transformation.MapSRID,(Geometry) feature.Geometry);
                 }

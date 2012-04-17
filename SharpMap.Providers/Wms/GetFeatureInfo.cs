@@ -5,14 +5,14 @@ using System.Net;
 
 namespace SharpMap.Providers.Wms
 {
-    public delegate void StatusEventHandler(object sender, List<FeatureInfo> featureInfo);
+    public delegate void StatusEventHandler(object sender, FeatureInfo featureInfo);
 
     public class GetFeatureInfo
     {
         private int _timeOut { get; set; }
         private WebRequest _webRequest { get; set; }
         private string _infoFormat;
-
+        private string _layerName;
         public event StatusEventHandler IdentifyFinished;
         public event StatusEventHandler IdentifyFailed;
 
@@ -39,7 +39,7 @@ namespace SharpMap.Providers.Wms
         /// <param name="wmsVersion">WMS Version</param>
         /// <param name="infoFormat">Format of response (text/xml, text/plain, etc)</param>
         /// <param name="srs">EPSG Code of the coordinate system</param>
-        /// <param name="layers">Layers to get FeatureInfo From</param>
+        /// <param name="layer">Layer to get FeatureInfo From</param>
         /// <param name="extendXmin"></param>
         /// <param name="extendYmin"></param>
         /// <param name="extendXmax"></param>
@@ -48,15 +48,15 @@ namespace SharpMap.Providers.Wms
         /// <param name="y">Coordinate in pixels y</param>
         /// <param name="mapWidth">Width of the map</param>
         /// <param name="mapHeight">Height of the map</param>
-        public void Request(string baseUrl, string wmsVersion, string infoFormat, string srs, string[] layers, double extendXmin, double extendYmin, double extendXmax, double extendYmax, int x, int y, int mapWidth, int mapHeight)
+        public void Request(string baseUrl, string wmsVersion, string infoFormat, string srs, string layer, double extendXmin, double extendYmin, double extendXmax, double extendYmax, int x, int y, int mapWidth, int mapHeight)
         {
-            Request(baseUrl, wmsVersion, infoFormat, srs, layers, extendXmin, extendYmin, extendXmax, extendYmax, x, y, mapWidth, mapHeight, CredentialCache.DefaultCredentials);
+            Request(baseUrl, wmsVersion, infoFormat, srs, layer, extendXmin, extendYmin, extendXmax, extendYmax, x, y, mapWidth, mapHeight, CredentialCache.DefaultCredentials);
         }
 
-        public void Request(string baseUrl, string wmsVersion, string infoFormat, string srs, string[] layers, double extendXmin, double extendYmin, double extendXmax, double extendYmax, int x, int y, int mapWidth, int mapHeight, ICredentials credentials)
+        public void Request(string baseUrl, string wmsVersion, string infoFormat, string srs, string layer, double extendXmin, double extendYmin, double extendXmax, double extendYmax, int x, int y, int mapWidth, int mapHeight, ICredentials credentials)
         {
             _infoFormat = infoFormat;
-            var requestUrl = CreateRequestUrl(baseUrl, wmsVersion, infoFormat, srs, layers, extendXmin, extendYmin, extendXmax, extendYmax, x, y, mapWidth, mapHeight);
+            var requestUrl = CreateRequestUrl(baseUrl, wmsVersion, infoFormat, srs, layer, extendXmin, extendYmin, extendXmax, extendYmax, x, y, mapWidth, mapHeight);
             _webRequest = WebRequest.Create(requestUrl);
             _webRequest.Timeout = _timeOut;
             _webRequest.Credentials = credentials;
@@ -64,8 +64,10 @@ namespace SharpMap.Providers.Wms
             _webRequest.BeginGetResponse(FinishWebRequest, null);
         }
 
-        private string CreateRequestUrl(string baseUrl, string wmsVersion, string infoFormat, string srs, IList<string> layers, double extendXmin, double extendYmin, double extendXmax, double extendYmax, double x, double y, double mapWidth, double mapHeight)
+        private string CreateRequestUrl(string baseUrl, string wmsVersion, string infoFormat, string srs, string layer, double extendXmin, double extendYmin, double extendXmax, double extendYmax, double x, double y, double mapWidth, double mapHeight)
         {
+            _layerName = layer;
+
             //Versions
             var versionNumber = new Version(wmsVersion);
             var version130 = new Version("1.3.0");
@@ -76,7 +78,6 @@ namespace SharpMap.Providers.Wms
             var crsParam = versionNumber < version130 ? "SRS" : "CRS";
 
             //Create specific strings for the request
-            var layerString = CreateLayerString(layers);
             var bboxString = string.Format(CultureInfo.InvariantCulture, "{0},{1},{2},{3}", extendXmin, extendYmin, extendXmax, extendYmax);
 
             //Build requist url
@@ -98,13 +99,13 @@ namespace SharpMap.Providers.Wms
 
                 baseUrl, baseUrl.Contains("?") ? "&" : "?", //1 = Prefix
                 wmsVersion,
-                layerString,
+                layer,
                 crsParam,
                 srs,
                 bboxString,
                 mapWidth,
                 mapHeight,
-                layerString,
+                layer,
                 infoFormat,
                 xParam, x,
                 yParam, y);
@@ -116,23 +117,6 @@ namespace SharpMap.Providers.Wms
             }
 
             return requestUrl;
-        }
-
-        /// <summary>
-        /// Create a string of layers to request in a format the WMS expects
-        /// </summary>
-        private static string CreateLayerString(IList<string> layers)
-        {
-            var layerString = "";
-
-            for (var i = 0; i < layers.Count; i++)
-            {
-                layerString += layers[i];
-                if (i + 1 < layers.Count)
-                    layerString += ",";
-            }
-
-            return layerString;
         }
 
         /// <summary>
@@ -156,13 +140,13 @@ namespace SharpMap.Providers.Wms
                     return;
                 }
 
-                var featureInfo = parser.ParseWMSResult(stream);
+                var featureInfo = parser.ParseWMSResult(_layerName, stream);
 
                 response.Close();
                 _webRequest.EndGetResponse(result);
                 OnIdentifyFinished(featureInfo);
             }
-            catch (WebException)
+            catch (Exception)
             {
                 OnIdentifyFailed();
             }
@@ -188,7 +172,7 @@ namespace SharpMap.Providers.Wms
             return null;
         }
 
-        private void OnIdentifyFinished(List<FeatureInfo> featureInfo)
+        private void OnIdentifyFinished(FeatureInfo featureInfo)
         {
             var handler = IdentifyFinished;
             if (handler != null) handler(this, featureInfo);

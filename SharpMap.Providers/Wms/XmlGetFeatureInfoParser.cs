@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml;
@@ -8,10 +10,20 @@ namespace SharpMap.Providers.Wms
 {
     public class XmlGetFeatureInfoParser : IGetFeatureInfoParser
     {
-        public List<FeatureInfo> ParseWMSResult(Stream result)
+        public FeatureInfo ParseWMSResult(string layerName, Stream result)
         {
-            var featureInfos = new List<FeatureInfo>();
-            var xdoc = XDocument.Load(new XmlTextReader(result));
+            var featureInfos = new List<Dictionary<string, string>>();
+            XDocument xdoc;
+
+            try
+            {
+                xdoc = XDocument.Load(result);
+            }
+            catch (XmlException e)
+            {
+                throw new ArgumentException(e.Message);
+            }
+            
             var fields = (from XElement element in xdoc.Descendants()
                           where (element.Name.LocalName.Equals("FIELDS"))
                           select element);
@@ -21,13 +33,15 @@ namespace SharpMap.Providers.Wms
                 featureInfos.Add(ExtractFeatureFromField(field));
             }
 
-            return featureInfos;
+            var info = new FeatureInfo { LayerName = layerName, FeatureInfos = featureInfos };
+
+            return info;
         }
 
-        private static FeatureInfo ExtractFeatureFromField(XElement featureMember)
+        private static Dictionary<string, string> ExtractFeatureFromField(XElement featureMember)
         {
             //No layername is resturned from XML
-            var featureInfo = new FeatureInfo { LayerName = "" };
+            var featureInfo = new Dictionary<string, string>();
 
             if (featureMember.HasElements)
             {
@@ -39,7 +53,7 @@ namespace SharpMap.Providers.Wms
                     var value = element.Attribute("value");
 
                     if (name != null && value != null)
-                        featureInfo.Attributes.Add(name.Value, value.Value);
+                        featureInfo.Add(name.Value, value.Value);
                 }
             }
 

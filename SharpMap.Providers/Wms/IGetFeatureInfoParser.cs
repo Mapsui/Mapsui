@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 
 namespace SharpMap.Providers.Wms
 {
     public interface IGetFeatureInfoParser
     {
-        List<FeatureInfo> ParseWMSResult(Stream result);
+        FeatureInfo ParseWMSResult(string layerName, Stream result);
     }
 }

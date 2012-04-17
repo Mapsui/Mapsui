@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml;
@@ -8,41 +10,76 @@ namespace SharpMap.Providers.Wms
 {
     public class GmlGetFeatureInfoParser : IGetFeatureInfoParser
     {
-        public List<FeatureInfo> ParseWMSResult(Stream result)
+        private FeatureInfo _featureInfo;
+
+        public FeatureInfo ParseWMSResult(string layername, Stream result)
         {
-            var featureInfos = new List<FeatureInfo>();
-            var xdoc = XDocument.Load(new XmlTextReader(result));
-            var featureMembers = (from XElement element in xdoc.Descendants()
-                                  where (element.Name.LocalName.Equals("featureMember"))
-                                  select element);
-
-            foreach (var featureMember in featureMembers)
+            _featureInfo = new FeatureInfo { LayerName = layername, FeatureInfos = new List<Dictionary<string, string>>() };
+            XDocument xdoc;
+            
+            try
             {
-                featureInfos.Add(ExtractFeatureMemberFromElement(featureMember));
+                xdoc = XDocument.Load(result);
             }
+            catch (XmlException e)
+            {
+                throw new ApplicationException("Bad formatted XML response", e);
+            }            
 
-            return featureInfos;
+            ExtractFeatureInfo(xdoc.Root);
+
+            return _featureInfo;
         }
 
-        private static FeatureInfo ExtractFeatureMemberFromElement(XElement featureMember)
+        private void ExtractFeatureInfo(XElement root)
         {
-            var featureInfo = new FeatureInfo();
+            LookExtractMultipleElements(root);
 
-            if (featureMember.HasElements)
+            if (_featureInfo.FeatureInfos.Count == 0)
+                ExtractFeatures(root);
+        }
+
+        private void LookExtractMultipleElements(XElement layer)
+        {
+            if (!layer.HasElements) return;
+            var element = layer.Descendants().FirstOrDefault();
+
+            if (element != null && layer.Elements(element.Name).Count() == 1)
+                LookExtractMultipleElements(element);
+
+            if (layer.Elements(element.Name).Count() > 1)
             {
-                var featureElement = featureMember.Descendants().FirstOrDefault();
-                if (featureElement != null)
-                {
-                    featureInfo.LayerName = featureElement.Name.LocalName;
-                    var elements = from ele in featureElement.Descendants() select ele;
-                    foreach (var element in elements.Where(element => !element.Name.LocalName.Equals("geom")))
-                    {
-                        featureInfo.Attributes.Add(element.Name.LocalName, element.Value);
-                    }
-                }
+                ExtractFeatures(layer);
             }
+        }
 
-            return featureInfo;
+        private void ExtractFeatures(XContainer layer)
+        {
+            foreach (var feature in layer.Elements())
+            {
+                _featureInfo.FeatureInfos.Add(ExtractFeatureElements(feature));
+            }
+        }
+
+        private Dictionary<string, string> ExtractFeatureElements(XElement layerElement)
+        {
+            try
+            {
+                var feature = new Dictionary<string, string>();
+                var elements = layerElement.DescendantNodes().OfType<XElement>();
+
+                foreach (var element in elements)
+                {
+                    if (!element.HasElements && !element.Name.LocalName.Equals("coordinates"))
+                        feature.Add(element.Name.LocalName, element.Value);
+                }
+
+                return feature;
+            }
+            catch (Exception)
+            {
+                throw new ApplicationException("Error creating features");
+            }
         }
     }
 }
