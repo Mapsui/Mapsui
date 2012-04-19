@@ -287,8 +287,23 @@ namespace SharpMap.Providers.Wms
 
         public bool TryGetMap(IView view, ref IRaster raster)
         {
+
+            int width;
+            int height;
+
+            try
+            {
+                width = Convert.ToInt32(view.Width);
+                height = Convert.ToInt32(view.Height);
+            }
+            catch (OverflowException)
+            {
+                Trace.Write("Could not conver double to int (ExportMap size)");
+                return false;
+            }
+
             Client.WmsOnlineResource resource = GetPreferredMethod();
-            var uri = new Uri(GetRequestUrl(view.Extent, view.Width, view.Height));
+            var uri = new Uri(GetRequestUrl(view.Extent, width, height));
             WebRequest webRequest = WebRequest.Create(uri);
             webRequest.Method = resource.Type;
             webRequest.Timeout = TimeOut;
@@ -327,7 +342,7 @@ namespace SharpMap.Providers.Wms
         /// Gets the URL for a map request base on current settings, the image size and boundingbox
         /// </summary>
         /// <returns>URL for WMS request</returns>
-        public string GetRequestUrl(BoundingBox box, double width, double height)
+        public string GetRequestUrl(BoundingBox box, int width, int height)
         {
             Client.WmsOnlineResource resource = GetPreferredMethod();
             var strReq = new StringBuilder(resource.OnlineResource);
@@ -388,7 +403,7 @@ namespace SharpMap.Providers.Wms
                     {
                         foreach (var style in result.Style)
                         {
-                            legendUrls.Add(style.LegendUrl.OnlineResource.OnlineResource);
+                            legendUrls.Add(System.Web.HttpUtility.HtmlDecode(style.LegendUrl.OnlineResource.OnlineResource));
                             break; // just add first style. TODO: think about how to select a style
                         }
                     }
