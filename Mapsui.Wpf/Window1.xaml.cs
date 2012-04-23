@@ -7,7 +7,6 @@ using BruTile.Web;
 using DemoConfig;
 using SharpMap.Layers;
 using SharpMap.Providers;
-using SharpMap.Providers.GeoTiff;
 using SharpMap.Samples;
 
 namespace Mapsui.Wpf
