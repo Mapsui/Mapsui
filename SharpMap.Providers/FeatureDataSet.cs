@@ -18,6 +18,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
@@ -465,6 +466,7 @@ namespace SharpMap.Data
     {
         internal FeatureDataRow(DataRowBuilder rb) : base(rb)
         {
+            Styles = new Collection<IStyle>();
         }
 
         /// <summary>
@@ -474,7 +476,7 @@ namespace SharpMap.Data
 
         public object RenderedGeometry { get; set; }
 
-        public IStyle Style { get; set; }
+        public ICollection<IStyle> Styles { get; set; }
 
         /// <summary>
         /// Returns true of the geometry is null

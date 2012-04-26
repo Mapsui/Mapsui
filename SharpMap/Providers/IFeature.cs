@@ -8,7 +8,7 @@ namespace SharpMap.Providers
     {
         IGeometry Geometry { get; set; }
         object RenderedGeometry { get; set; }
-        IStyle Style { get; set; }
+        ICollection<IStyle> Styles { get; }
         object this[string key] { get; set; }
         IEnumerable<string> Fields { get; }
     }

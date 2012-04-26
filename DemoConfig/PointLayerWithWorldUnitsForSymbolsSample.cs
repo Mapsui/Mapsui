@@ -15,7 +15,7 @@ namespace DemoConfig
             var netherlands = new Feature { Geometry = new Point(710000, 6800000)};
             
             const string resource = "DemoConfig.Images.netherlands.jpg";
-            netherlands.Style = new SymbolStyle
+            netherlands.Styles.Add(new SymbolStyle
             {
                 Symbol = new Bitmap { Data = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream(resource) },
                 SymbolType = SymbolType.Rectangle,
@@ -24,7 +24,7 @@ namespace DemoConfig
                 SymbolScale = 1400,
                 Width = 365,
                 Height = 380
-            };
+            });
             
             layer.DataSource = new MemoryProvider(new[] { netherlands });
             return layer;

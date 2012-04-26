@@ -50,7 +50,7 @@ namespace SharpMap.Layers
                 {
 #endif
                      var bitmap = CombineBitmaps(tiles, Schema.Width, Schema.Height);
-                     if (bitmap != null) MemoryCache.Add(e.TileInfo.Index, new Feature { Geometry = new Raster(bitmap, e.TileInfo.Extent.ToBoundingBox()), Style = new VectorStyle()});
+                     if (bitmap != null) MemoryCache.Add(e.TileInfo.Index, new Feature { Geometry = new Raster(bitmap, e.TileInfo.Extent.ToBoundingBox()), Styles = new List<IStyle> { new VectorStyle()} });
                      if (DataChanged != null) DataChanged(sender, e);
 #if SILVERLIGHT
                 });

@@ -74,7 +74,7 @@ namespace SharpMap.Layers
         /// </summary>
         ITransformation Transformation { get; set; }
 
-        IList<IStyle> Styles { get; }
+        ICollection<IStyle> Styles { get; }
 
         /// <summary>
         /// Of all layers with Exclusive is true only one will be Enabled at a time.

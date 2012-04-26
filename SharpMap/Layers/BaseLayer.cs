@@ -42,7 +42,7 @@ namespace SharpMap.Layers
         /// <summary>
         /// Gets or sets the rendering style of the vector layer.
         /// </summary>
-        public IList<IStyle> Styles { get; set; }
+        public ICollection<IStyle> Styles { get; set; }
 
         /// <summary>
         /// Gets or sets the SRID of this VectorLayer's data source

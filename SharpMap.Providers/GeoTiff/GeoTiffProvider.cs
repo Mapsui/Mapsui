@@ -57,7 +57,8 @@ namespace SharpMap.Providers.GeoTiff
             extent = CalculateExtent(tiffProperties, worldProperties);
             data = ReadImageAsStream(tiffPath);
 
-            feature = new Feature {Geometry = new Raster(data, extent), Style = new VectorStyle()};
+            feature = new Feature {Geometry = new Raster(data, extent)};
+            feature.Styles.Add(new VectorStyle());
         }
 
         private static BoundingBox CalculateExtent(TiffProperties tiffProperties, WorldProperties worldProperties)

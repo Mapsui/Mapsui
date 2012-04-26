@@ -94,9 +94,13 @@ namespace SilverlightRendering
 
             foreach (var feature in features)
             {
-                if (feature.Style != null)
+                var styles = feature.Styles;
+                foreach (var style in styles)
                 {
-                    RenderGeometry(canvas, view, feature.Style, feature);
+                    if (feature.Styles != null)
+                    {
+                        RenderGeometry(canvas, view, style, feature);
+                    }
                 }
             }
 
@@ -119,7 +123,7 @@ namespace SilverlightRendering
                 else
                 {
                     renderedGeometry = GeometryRenderer.RenderPoint(feature.Geometry as SharpMap.Geometries.Point, style, view);
-                    feature.RenderedGeometry = renderedGeometry;
+                    //!!!feature.RenderedGeometry = renderedGeometry;
                 }
                 canvas.Children.Add(renderedGeometry);
             }

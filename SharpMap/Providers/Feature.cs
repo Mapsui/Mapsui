@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using SharpMap.Geometries;
 using SharpMap.Styles;
 
@@ -11,13 +12,14 @@ namespace SharpMap.Providers
         public Feature()
         {
             dictionary = new Dictionary<string, object>();
+            Styles = new Collection<IStyle>();
         }
 
         public IGeometry Geometry { get; set; }
 
         public object RenderedGeometry { get; set; }
 
-        public IStyle Style { get; set; }
+        public ICollection<IStyle> Styles { get; set; }
 
         public virtual object this[string key]
         {
