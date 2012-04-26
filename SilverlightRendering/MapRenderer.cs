@@ -11,6 +11,7 @@ using SharpMap;
 using SharpMap.Geometries;
 using SharpMap.Layers;
 using SharpMap.Rendering;
+using SharpMap.Styles;
 using SharpMap.Styles.Thematics;
 
 namespace SilverlightRendering
@@ -102,12 +103,16 @@ namespace SilverlightRendering
             return canvas;
         }
 
-        private static void RenderGeometry(Canvas canvas, IView view, SharpMap.Styles.IStyle style, SharpMap.Providers.IFeature feature)
+        private static void RenderGeometry(Canvas canvas, IView view, IStyle style, SharpMap.Providers.IFeature feature)
         {
-            if (feature.Geometry is SharpMap.Geometries.Point)
+            if (style is LabelStyle)
+            {
+                canvas.Children.Add(LabelRenderer.RenderLabel(feature.Geometry.GetBoundingBox().GetCentroid(), new Offset(), style as LabelStyle, view));
+            }
+            else if (feature.Geometry is SharpMap.Geometries.Point)
             {
                 var renderedGeometry = feature.RenderedGeometry as UIElement;
-                if (renderedGeometry != null && style is SharpMap.Styles.SymbolStyle)
+                if (renderedGeometry != null && style is SymbolStyle)
                 {
                     GeometryRenderer.PositionPoint(renderedGeometry, feature.Geometry as SharpMap.Geometries.Point, style, view);
                 }

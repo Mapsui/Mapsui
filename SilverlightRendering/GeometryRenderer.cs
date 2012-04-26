@@ -31,11 +31,6 @@ namespace SilverlightRendering
 
         public static UIElement RenderPoint(Point point, IStyle style, IView view)
         {
-            if (style is LabelStyle)
-            {
-                return LabelRenderer.RenderLabel(point, new Offset(), style as LabelStyle, view);
-            }
-
             if (!(style is SymbolStyle)) throw new ArgumentException("Style is not of type SymbolStyle");
             var symbolStyle = style as SymbolStyle;
 

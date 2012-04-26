@@ -106,8 +106,9 @@ namespace Mapsui.Wpf
 
         private void SharpMapClick(object sender, RoutedEventArgs e)
         {
-            mapControl.Map.Layers.Clear();
-            mapControl.Map.Layers.Add(ShapefileSample.CreateCountryLayer());
+            //!!!mapControl.Map.Layers.Clear();
+            //!!!mapControl.Map.Layers.Add(ShapefileSample.CreateCountryLayer());
+            mapControl.Map = ShapefileSample.CreateMap();
             layerList.Initialize(mapControl.Map.Layers);
             mapControl.Refresh();
         }
