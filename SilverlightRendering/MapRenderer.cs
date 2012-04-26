@@ -107,14 +107,14 @@ namespace SilverlightRendering
             if (feature.Geometry is SharpMap.Geometries.Point)
             {
                 var renderedGeometry = feature.RenderedGeometry as UIElement;
-                if (renderedGeometry != null)
+                if (renderedGeometry != null && style is SharpMap.Styles.SymbolStyle)
                 {
                     GeometryRenderer.PositionPoint(renderedGeometry, feature.Geometry as SharpMap.Geometries.Point, style, view);
                 }
                 else
                 {
                     renderedGeometry = GeometryRenderer.RenderPoint(feature.Geometry as SharpMap.Geometries.Point, style, view);
-                    if (style is SharpMap.Styles.SymbolStyle) feature.RenderedGeometry = renderedGeometry;
+                    feature.RenderedGeometry = renderedGeometry;
                 }
                 canvas.Children.Add(renderedGeometry);
             }
