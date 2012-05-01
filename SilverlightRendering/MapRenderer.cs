@@ -97,7 +97,7 @@ namespace SilverlightRendering
                 var styles = feature.Styles;
                 foreach (var style in styles)
                 {
-                    if (feature.Styles != null)
+                    if (feature.Styles != null && style.Enabled)
                     {
                         RenderGeometry(canvas, view, style, feature);
                     }

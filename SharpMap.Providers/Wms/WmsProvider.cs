@@ -419,8 +419,15 @@ namespace SharpMap.Providers.Wms
 
             foreach (var url in urls)
             {
-                var imageAsByteArray = BruTile.Web.RequestHelper.FetchImage(new Uri(url));
-                images.Add(new MemoryStream(imageAsByteArray));
+                try
+                {
+                    var imageAsByteArray = BruTile.Web.RequestHelper.FetchImage(new Uri(url));
+                    images.Add(new MemoryStream(imageAsByteArray));
+                }
+                catch (WebException e)
+                {
+                    throw new Exception("Error adding legend image", e);
+                }               
             }
             return images;
         }
