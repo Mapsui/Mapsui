@@ -160,6 +160,21 @@ namespace SharpMap.Providers.Wms
         }
 
         /// <summary>
+        /// Get a layer from the WMS
+        /// </summary>
+        /// <remarks>Layer names are case sensitive.</remarks>
+        /// <param name="name">Name of layer</param>
+        /// <exception cref="System.ArgumentException">Throws an exception if the layer is not found</exception>
+        public Client.WmsServerLayer GetLayer(string name)
+        {
+            Client.WmsServerLayer layer;
+            if (FindLayer(wmsClient.Layer, name, out layer))
+                return layer;
+             
+            throw new ArgumentException("Layer not found");
+        }
+
+        /// <summary>
         /// Recursive method for checking whether a layername exists
         /// </summary>
         /// <param name="layer"></param>
