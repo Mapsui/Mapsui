@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using ProjNet.CoordinateSystems.Transformations;
 using SharpMap.Fetcher;
 using SharpMap.Geometries;
@@ -11,6 +12,8 @@ namespace SharpMap.Layers
     public abstract class BaseLayer : ILayer
     {
         private static int instanceCounter;
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public int Id { get; private set; }
 
@@ -95,6 +98,15 @@ namespace SharpMap.Layers
             if (Feedback != null)
             {
                 Feedback(this, new FeedbackEventArgs { Message = message });
+            }
+        }
+
+        protected void OnPropertyChanged(string name)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(name));
             }
         }
 

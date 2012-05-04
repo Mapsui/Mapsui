@@ -88,6 +88,7 @@ namespace SharpMap.Layers
             tileSource = source;
             tileFetcher = new TileFetcher(source, memoryCache);
             tileFetcher.DataChanged += TileFetcherDataChanged;
+            OnPropertyChanged("Envelope");
         }
 
         public TileLayer()

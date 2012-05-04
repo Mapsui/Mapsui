@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using SharpMap.Fetcher;
 using SharpMap.Styles;
@@ -29,13 +30,14 @@ namespace SharpMap
     /// <summary>
     /// Map class
     /// </summary>
-    public class Map : IDisposable
+    public class Map : IDisposable, INotifyPropertyChanged
     {
         private double minimumZoom;
         private double maximumZoom;
         private readonly LayerCollection layers = new LayerCollection();
         public event DataChangedEventHandler DataChanged;
         public event FeedbackEventHandler Feedback;
+        public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
         /// Initializes a new map
@@ -56,13 +58,32 @@ namespace SharpMap
             layer.AbortFetch();
             layer.DataChanged -= AsyncLayerDataChanged;
             layer.Feedback -= LayerFeedback;
+            layer.PropertyChanged -= LayerPropertyChanged;
         }
 
         void LayersLayerAdded(ILayer layer)
         {
             layer.DataChanged += AsyncLayerDataChanged;
             layer.Feedback += LayerFeedback;
+            layer.PropertyChanged += LayerPropertyChanged;
             layer.Transformation = Transformation;
+        }
+
+        void LayerPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "Envelope")
+            {
+                OnPropertyChanged(e.PropertyName);
+            }
+        }
+
+        protected void OnPropertyChanged(string name)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(name));
+            }
         }
 
         private void LayerFeedback(object sender, FeedbackEventArgs e)
@@ -139,16 +160,19 @@ namespace SharpMap
         /// Gets the extents of the map based on the extents of all the layers in the layers collection
         /// </summary>
         /// <returns>Full map extents</returns>
-        public BoundingBox GetExtents()
+        public BoundingBox Envelope
         {
-            if (layers.Count == 0) return null; 
-
-            BoundingBox bbox = null;
-            foreach (var layer in layers)
+            get
             {
-                bbox = bbox == null ? layer.Envelope : bbox.Join(layer.Envelope);
+                if (layers.Count == 0) return null;
+
+                BoundingBox bbox = null;
+                foreach (var layer in layers)
+                {
+                    bbox = bbox == null ? layer.Envelope : bbox.Join(layer.Envelope);
+                }
+                return bbox;
             }
-            return bbox;
         }
 
         /// <summary>

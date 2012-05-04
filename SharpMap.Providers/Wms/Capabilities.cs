@@ -171,7 +171,7 @@ namespace SharpMap.Web.Wms
             LayerRootNode.AppendChild(CreateElement("Title", "SharpMap", capabilities, false, wmsNamespaceURI));
             LayerRootNode.AppendChild(CreateElement("CRS", "EPSG:" + map.Layers[0].SRID, capabilities, false,
                                                     wmsNamespaceURI)); //TODO
-            LayerRootNode.AppendChild(GenerateBoundingBoxElement(map.GetExtents(), map.Layers[0].SRID, capabilities));
+            LayerRootNode.AppendChild(GenerateBoundingBoxElement(map.Envelope, map.Layers[0].SRID, capabilities));
             //This should be changed when Transformation library is complete
             XmlElement geoBox = capabilities.CreateElement("EX_GeographicBoundingBox", wmsNamespaceURI);
             geoBox.Attributes.Append(CreateAttribute("minx", "-180", capabilities));

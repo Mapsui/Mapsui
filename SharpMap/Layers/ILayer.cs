@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using SharpMap.Fetcher;
 using SharpMap.Geometries;
 using SharpMap.Providers;
@@ -28,10 +29,10 @@ namespace SharpMap.Layers
     /// <summary>
     /// Interface for map layers
     /// </summary>
-    public interface ILayer : IAsyncDataFetcher
+    public interface ILayer : IAsyncDataFetcher, INotifyPropertyChanged 
     {
         event FeedbackEventHandler Feedback;
-
+        
         int Id { get; }
 
         /// <summary>

@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -91,6 +92,7 @@ namespace Mapsui.Windows
                 {
                     var temp = map;
                     map = null;
+                    temp.PropertyChanged -= MapPropertyChanged;
                     temp.Dispose();
                 }
 
@@ -99,9 +101,19 @@ namespace Mapsui.Windows
                 if (map != null)
                 {
                     map.DataChanged += MapDataChanged;
+                    map.PropertyChanged += MapPropertyChanged;
                 }
                 OnViewChanged(true);
                 RefreshGraphics();
+            }
+        }
+
+        void MapPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "Envelope")
+            {
+                InitializeView();
+                map.ViewChanged(true, view.Extent, view.Resolution);
             }
         }
 
@@ -138,7 +150,8 @@ namespace Mapsui.Windows
                 {
                     VerticalAlignment = VerticalAlignment.Stretch,
                     HorizontalAlignment = HorizontalAlignment.Stretch,
-                    Background = new SolidColorBrush(Colors.Transparent)
+                    Background = new SolidColorBrush(Colors.Transparent),
+                    ClipToBounds = true
                 };
             Children.Add(canvas);
 
@@ -505,7 +518,7 @@ namespace Mapsui.Windows
 
             foreach (var layer in layers)
             {
-                var feature = layer.GetFeaturesInView(Map.GetExtents(), 0).FirstOrDefault(f =>
+                var feature = layer.GetFeaturesInView(Map.Envelope, 0).FirstOrDefault(f =>
                     f.Geometry.GetBoundingBox().GetCentroid().Distance(point) < margin);
                 if (feature != null)
                 {
@@ -543,10 +556,10 @@ namespace Mapsui.Windows
         {
             if (ActualWidth.IsNanOrZero()) return;
             if (map == null) return;
-            if (map.GetExtents() == null) return;
-            if (map.GetExtents().Width.IsNanOrZero()) return;
-            if (map.GetExtents().Height.IsNanOrZero()) return;
-            if (map.GetExtents().GetCentroid() == null) return;
+            if (map.Envelope == null) return;
+            if (map.Envelope.Width.IsNanOrZero()) return;
+            if (map.Envelope.Height.IsNanOrZero()) return;
+            if (map.Envelope.GetCentroid() == null) return;
 
             if ((view.CenterX > 0) && (view.CenterY > 0) && (view.Resolution > 0))
             {
@@ -554,8 +567,8 @@ namespace Mapsui.Windows
                 return;
             }
 
-            view.Center = map.GetExtents().GetCentroid();
-            view.Resolution = map.GetExtents().Width / ActualWidth;
+            view.Center = map.Envelope.GetCentroid();
+            view.Resolution = map.Envelope.Width / ActualWidth;
             viewInitialized = true;
         }
 
@@ -662,10 +675,11 @@ namespace Mapsui.Windows
 
         #endregion
 
-        public void ZoomToExtent()
+        public void ZoomToFullEnvelope()
         {
-            view.Resolution = Width / Map.GetExtents().Width;
-            view.Center = Map.GetExtents().GetCentroid();
+            if (Map.Envelope == null) return;
+            view.Resolution = Width / Map.Envelope.Width;
+            view.Center = Map.Envelope.GetCentroid();
         }
 
         #region WPF4 Touch Support
