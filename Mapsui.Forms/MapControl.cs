@@ -282,11 +282,11 @@ namespace Mapsui.Forms
         private void InitializeView()
         {
             if (double.IsNaN(Width) || Width == 0) return;
-            if (map == null || map.GetExtents() == null || double.IsNaN(map.GetExtents().Width) || map.GetExtents().Width == 0) return;
-            if (map.GetExtents().GetCentroid() == null) return;
+            if (map == null || map.Envelope == null || double.IsNaN(map.Envelope.Width) || map.Envelope.Width == 0) return;
+            if (map.Envelope.GetCentroid() == null) return;
 
-            view.Center = map.GetExtents().GetCentroid();
-            view.Resolution = map.GetExtents().Width / Width;
+            view.Center = map.Envelope.GetCentroid();
+            view.Resolution = map.Envelope.Width / Width;
             viewInitialized = true;
             ViewChanged(true);
         }
