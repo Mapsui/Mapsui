@@ -37,9 +37,9 @@ namespace Mapsui.Silverlight
             mapControl.Map = CreateMap();
 
             FillLayerList(mapControl.Map);
-            if (mapControl.Map.GetExtents() != null)
+            if (mapControl.Map.Envelope != null)
             {
-                var center = mapControl.Map.GetExtents().GetCentroid();
+                var center = mapControl.Map.Envelope.GetCentroid();
                 mapControl.View.Center = new SharpMap.Geometries.Point(center.X, center.Y);
                 mapControl.View.Resolution = 10000;
             }
@@ -236,7 +236,7 @@ namespace Mapsui.Silverlight
 
         private void buttonMaxExtend_Click(object sender, RoutedEventArgs e)
         {
-            var extent = mapControl.Map.GetExtents();
+            var extent = mapControl.Map.Envelope;
             mapControl.ZoomToBox(new SharpMap.Geometries.Point(extent.MinX, extent.MinY), new SharpMap.Geometries.Point(extent.MaxX, extent.MaxY));
         }
 

@@ -151,7 +151,6 @@ namespace Mapsui.Windows
                     VerticalAlignment = VerticalAlignment.Stretch,
                     HorizontalAlignment = HorizontalAlignment.Stretch,
                     Background = new SolidColorBrush(Colors.Transparent),
-                    ClipToBounds = true
                 };
             Children.Add(canvas);
 
@@ -367,6 +366,7 @@ namespace Mapsui.Windows
         private void MapControlSizeChanged(object sender, SizeChangedEventArgs e)
         {
             if (!viewInitialized) InitializeView();
+            Clip = new RectangleGeometry {Rect = new Rect(0, 0, ActualWidth, ActualWidth)};
             UpdateSize();
             OnViewChanged(true);
             Refresh();
