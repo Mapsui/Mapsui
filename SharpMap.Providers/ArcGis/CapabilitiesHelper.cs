@@ -109,7 +109,7 @@ namespace SharpMap.Providers.ArcGis
                 _webRequest.EndGetResponse(result);
                 OnFinished(EventArgs.Empty);
             }
-            catch (WebException)
+            catch (Exception)
             {
                 OnFailed(EventArgs.Empty);
             }
