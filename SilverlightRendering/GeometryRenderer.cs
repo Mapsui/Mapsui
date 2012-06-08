@@ -31,8 +31,7 @@ namespace SilverlightRendering
 
         public static UIElement RenderPoint(Point point, IStyle style, IView view)
         {
-            if (!(style is SymbolStyle)) throw new ArgumentException("Style is not of type SymbolStyle");
-            var symbolStyle = style as SymbolStyle;
+            var symbolStyle = (style is SymbolStyle) ? style as SymbolStyle : new SymbolStyle();
 
             FrameworkElement path;
             double width, height;

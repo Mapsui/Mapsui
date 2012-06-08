@@ -43,6 +43,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\libs\BruTile.dll</HintPath>
     </Reference>
+    <Reference Include="BruTile.Desktop">
+      <HintPath>..\libs\BruTile.Desktop.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>

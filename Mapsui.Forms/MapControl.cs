@@ -199,11 +199,6 @@ namespace Mapsui.Forms
                 errorMessage = "Cancelled";
                 OnErrorMessageChanged();
             }
-            else if (e.Error is WebResponseFormatException)
-            {
-                errorMessage = "UnexpectedTileFormat: " + e.Error.Message;
-                OnErrorMessageChanged();
-            }
             else if (e.Error is System.Net.WebException)
             {
                 errorMessage = "WebException: " + e.Error.Message;

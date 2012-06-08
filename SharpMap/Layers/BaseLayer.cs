@@ -61,7 +61,7 @@ namespace SharpMap.Layers
         /// Returns the extent of the layer
         /// </summary>
         /// <returns>Bounding box corresponding to the extent of the features in the layer</returns>
-        public virtual BoundingBox Envelope { get; set; }
+        public virtual BoundingBox Envelope { get; protected set; }
 
         public bool Exclusive { get; set; }
 
