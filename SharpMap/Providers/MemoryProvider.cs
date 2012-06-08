@@ -172,7 +172,9 @@ namespace SharpMap.Providers
 
         public IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
         {
-            foreach (var feature in Features)
+            var features = Features.ToList();
+
+            foreach (var feature in features)
             {
                 if (feature.Geometry == null)
                     continue;
