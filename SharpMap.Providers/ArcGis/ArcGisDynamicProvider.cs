@@ -136,11 +136,8 @@ namespace SharpMap.Providers.ArcGis
                 var myWebResponse = (HttpWebResponse)request.GetResponse();
                 var dataStream = myWebResponse.GetResponseStream();
 
-                if (myWebResponse.ContentType.StartsWith("image"))
-                {
-                    var bytes = BruTile.Utilities.ReadFully(myWebResponse.GetResponseStream());
-                    raster = new Raster(new MemoryStream(bytes), view.Extent);
-                }
+                var bytes = BruTile.Utilities.ReadFully(myWebResponse.GetResponseStream());
+                raster = new Raster(new MemoryStream(bytes), view.Extent);
                 if (dataStream != null) dataStream.Close();
 
                 myWebResponse.Close();
