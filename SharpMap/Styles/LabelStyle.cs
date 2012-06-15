@@ -67,7 +67,7 @@ namespace SharpMap.Styles
         /// </summary>
         public LabelStyle()
         {
-            Font = new Font { FontFamily = "Times New Roman", Size = 12 };
+            Font = new Font { FontFamily = "Verdana", Size = 12 };
             Offset = new Offset { X = 0, Y = 0 };
             CollisionDetection = false;
             CollisionBuffer = new Size { Width = 0, Height = 0 };
