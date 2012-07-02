@@ -6,7 +6,7 @@ namespace SharpMap.Samples
 {
     public static class WmsSample
     {
-        public static Layer CreateWmsLayer()
+        public static Layer Create()
         {
             var provider = CreateWmsProvider();
             var layer = new Layer("WmsLayer");

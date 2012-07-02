@@ -142,7 +142,15 @@ namespace Mapsui.Wpf
         private void WmsClick(object sender, RoutedEventArgs e)
         {
             mapControl.Map.Layers.Clear();
-            mapControl.Map.Layers.Add(WmsSample.CreateWmsLayer());
+            mapControl.Map.Layers.Add(WmsSample.Create());
+            layerList.Initialize(mapControl.Map.Layers);
+            mapControl.Refresh();
+        }
+
+        private void ArcGISImageServiceClick(object sender, RoutedEventArgs e)
+        {
+            mapControl.Map.Layers.Clear();
+            mapControl.Map.Layers.Add(ArcGISImageServiceSample.Create());
             layerList.Initialize(mapControl.Map.Layers);
             mapControl.Refresh();
         }

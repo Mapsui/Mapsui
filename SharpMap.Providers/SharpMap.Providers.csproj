@@ -76,6 +76,8 @@
     <Compile Include="ArcGis\Table.cs" />
     <Compile Include="ArcGis\TileInfo.cs" />
     <Compile Include="ArcGis\TimeInfo.cs" />
+    <Compile Include="ArcGISImageService\ArcGISImageServiceCapabilities.cs" />
+    <Compile Include="ArcGISImageService\ArcGISImageServiceProvider.cs" />
     <Compile Include="FeatureDataSet.cs">
       <SubType>Component</SubType>
     </Compile>
