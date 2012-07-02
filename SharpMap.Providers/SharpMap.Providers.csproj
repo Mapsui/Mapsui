@@ -65,6 +65,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArcGISImageService\ArcGISImageServiceInfo.cs" />
     <Compile Include="ArcGis\ArcGisDynamicProvider.cs" />
     <Compile Include="ArcGis\ArcGisFeatureInfo.cs" />
     <Compile Include="ArcGis\ArcGisIdentify.cs" />
@@ -76,7 +77,6 @@
     <Compile Include="ArcGis\Table.cs" />
     <Compile Include="ArcGis\TileInfo.cs" />
     <Compile Include="ArcGis\TimeInfo.cs" />
-    <Compile Include="ArcGISImageService\ArcGISImageServiceCapabilities.cs" />
     <Compile Include="ArcGISImageService\ArcGISImageServiceProvider.cs" />
     <Compile Include="FeatureDataSet.cs">
       <SubType>Component</SubType>

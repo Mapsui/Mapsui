@@ -13,11 +13,11 @@ namespace SharpMap.Providers.ArcGISImageService
     public class ArcGISImageServiceProvider : IProvider
     {
         private int srid = -1;
-        private readonly ArcGISImageServiceCapabilities capabilities;
+        private readonly ArcGISImageServiceInfo info;
         
-        public ArcGISImageServiceProvider(ArcGISImageServiceCapabilities capabilities, bool continueOnError = false)
+        public ArcGISImageServiceProvider(ArcGISImageServiceInfo info, bool continueOnError = false)
         {
-            this.capabilities = capabilities;
+            this.info = info;
             ContinueOnError = continueOnError;
         }
 
@@ -107,20 +107,20 @@ namespace SharpMap.Providers.ArcGISImageService
         
         private string GetRequestUrl(BoundingBox boundingBox, int width, int height)
         {
-            var url = new StringBuilder(capabilities.Url);
+            var url = new StringBuilder(info.Url);
 
-            if (!capabilities.Url.Contains("?")) url.Append("?");
+            if (!info.Url.Contains("?")) url.Append("?");
             if (!url.ToString().EndsWith("&") && !url.ToString().EndsWith("?")) url.Append("&");
             url.AppendFormat(CultureInfo.InvariantCulture, "p&bbox={0},{1},{2},{3}",
                 boundingBox.Min.X, boundingBox.Min.Y, boundingBox.Max.X, boundingBox.Max.Y);
             url.AppendFormat("&WIDTH={0}&Height={1}", width, height);
             url.Append("&Layers=");
-            url.AppendFormat("&interpolation=RSP_{0}", capabilities.Interpolation.ToString());
-            url.AppendFormat("&format={0}", capabilities.Format);
-            url.AppendFormat("&f={0}", capabilities.F);
-            url.AppendFormat("&imageSR={0}", capabilities.ImageSR);
-            url.AppendFormat("&bboxSR={0}", capabilities.BBoxSR);
-            url.AppendFormat("&time={0}", capabilities.Time);
+            url.AppendFormat("&interpolation=RSP_{0}", info.Interpolation.ToString());
+            url.AppendFormat("&format={0}", info.Format);
+            url.AppendFormat("&f={0}", info.F);
+            url.AppendFormat("&imageSR={0}", info.ImageSR);
+            url.AppendFormat("&bboxSR={0}", info.BBoxSR);
+            url.AppendFormat("&time={0}", info.Time);
 
             return url.ToString();
         }

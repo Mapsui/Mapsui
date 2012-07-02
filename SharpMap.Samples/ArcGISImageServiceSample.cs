@@ -19,15 +19,15 @@ namespace SharpMap.Samples
 
         private static ArcGISImageServiceProvider CreateProvider()
         {
-            var capabilities = new ArcGISImageServiceCapabilities();
-            capabilities.Url = "http://imagery.arcgisonline.com/ArcGIS/rest/services/LandsatGLS/FalseColor/ImageServer/exportImage";
-            capabilities.Format = "jpgpng";
-            capabilities.Interpolation = InterpolationType.NearestNeighbor;
-            capabilities.F = "image";
-            capabilities.ImageSR = "102100";
-            capabilities.BBoxSR = "102100";
-            capabilities.Time = "268211520000,1262217600000";
-            return new ArcGISImageServiceProvider(capabilities);
+            var info = new ArcGISImageServiceInfo();
+            info.Url = "http://imagery.arcgisonline.com/ArcGIS/rest/services/LandsatGLS/FalseColor/ImageServer/exportImage";
+            info.Format = "jpgpng";
+            info.Interpolation = InterpolationType.NearestNeighbor;
+            info.F = "image";
+            info.ImageSR = "102100";
+            info.BBoxSR = "102100";
+            info.Time = "268211520000,1262217600000";
+            return new ArcGISImageServiceProvider(info);
         }
     }
 }

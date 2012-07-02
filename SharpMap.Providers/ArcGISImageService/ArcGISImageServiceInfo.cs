@@ -11,7 +11,7 @@ namespace SharpMap.Providers.ArcGISImageService
         NearestNeighbor
     }
 
-    public class ArcGISImageServiceCapabilities
+    public class ArcGISImageServiceInfo
     {
         public string Url { get; set; }
         public string Format { get; set; }
