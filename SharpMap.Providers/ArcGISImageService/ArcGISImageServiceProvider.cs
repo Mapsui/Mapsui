@@ -111,10 +111,10 @@ namespace SharpMap.Providers.ArcGISImageService
 
             if (!info.Url.Contains("?")) url.Append("?");
             if (!url.ToString().EndsWith("&") && !url.ToString().EndsWith("?")) url.Append("&");
-            url.AppendFormat(CultureInfo.InvariantCulture, "p&bbox={0},{1},{2},{3}",
+
+            url.AppendFormat(CultureInfo.InvariantCulture, "bbox={0},{1},{2},{3}",
                 boundingBox.Min.X, boundingBox.Min.Y, boundingBox.Max.X, boundingBox.Max.Y);
-            url.AppendFormat("&WIDTH={0}&Height={1}", width, height);
-            url.Append("&Layers=");
+            url.AppendFormat("&size={0},{1}", width, height);
             url.AppendFormat("&interpolation=RSP_{0}", info.Interpolation.ToString());
             url.AppendFormat("&format={0}", info.Format);
             url.AppendFormat("&f={0}", info.F);
