@@ -120,7 +120,7 @@ namespace SharpMap.Layers
             new Thread(fetcher.FetchOnThread).Start();
         }
 
-        protected virtual void DataArrived(IEnumerable<IFeature> features)
+        protected virtual void DataArrived(IEnumerable<IFeature> features, object state)
         {
             //the data in the cache is stored in the map projection so it projected only once.
             if (features == null) throw new ArgumentException("argument features may not be null");

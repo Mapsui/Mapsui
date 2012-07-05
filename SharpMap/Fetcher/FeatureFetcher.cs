@@ -12,15 +12,17 @@ namespace SharpMap.Fetcher
         private readonly double resolution;
         private readonly DataArrivedDelegate dataArrived;
         private readonly IProvider provider;
+        private readonly long timeOfRequest;
 
-        internal delegate void DataArrivedDelegate(IEnumerable<IFeature> features);
+        internal delegate void DataArrivedDelegate(IEnumerable<IFeature> features, object state = null);
 
-        public FeatureFetcher(BoundingBox extent, double resolution, IProvider provider, DataArrivedDelegate dataArrived)
+        public FeatureFetcher(BoundingBox extent, double resolution, IProvider provider, DataArrivedDelegate dataArrived, long timeOfRequest = default(long))
         {
             this.dataArrived = dataArrived;
             this.extent = extent;
             this.provider = provider;
             this.resolution = resolution;
+            this.timeOfRequest = timeOfRequest;
         }
 
         public void FetchOnThread()
@@ -30,7 +32,7 @@ namespace SharpMap.Fetcher
                 provider.Open();
                 var features = provider.GetFeaturesInView(extent, resolution);
                 provider.Close();
-                if (dataArrived != null) dataArrived(features);
+                if (dataArrived != null) dataArrived(features, timeOfRequest);
             }
         }
     }

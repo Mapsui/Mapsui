@@ -27,11 +27,17 @@ namespace SharpMap.Layers
 {
     public class ImageLayer : BaseLayer
     {
+        protected class FeatureSets
+        {
+            public long Ticks { get; set; }
+            public IEnumerable<IFeature> Features { get; set; }
+        }
+
         protected bool isFetching;
         protected bool needsUpdate = true;
         protected double newResolution;
         protected BoundingBox newExtent;
-        protected MemoryProvider cache;
+        protected List<FeatureSets> featureSets = new List<FeatureSets>();
         protected System.Timers.Timer startFetchTimer = new System.Timers.Timer(); 
 
         public IProvider DataSource { get; set; }
@@ -75,7 +81,6 @@ namespace SharpMap.Layers
         public ImageLayer(string layername)
         {
             LayerName = layername;
-            cache = new MemoryProvider();
             startFetchTimer.Interval = 500;
             startFetchTimer.Elapsed += StartFetchTimerElapsed;
         }
@@ -88,7 +93,26 @@ namespace SharpMap.Layers
 
         public override IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
         {
-            return cache.GetFeaturesInView(box, resolution);
+            var result = new List<IFeature>();
+            foreach (var featureSet in featureSets.OrderBy(c => c.Ticks))
+            {
+                result.AddRange(GetFeaturesInView(box, featureSet.Features));
+            }
+            return result;
+        }
+
+        private static IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, IEnumerable<IFeature> features)
+        {
+            foreach (var feature in features)
+            {
+                if (feature.Geometry == null)
+                    continue;
+
+                if (box.Intersects(feature.Geometry.GetBoundingBox()))
+                {
+                    yield return feature;
+                }
+            }
         }
 
         public override void AbortFetch()
@@ -121,11 +145,11 @@ namespace SharpMap.Layers
             if (Transformation != null && Transformation.MapSRID != -1 && SRID != -1)
                 extent = Transformation.Transfrom(Transformation.MapSRID, SRID, extent);
 
-            var fetcher = new FeatureFetcher(extent, resolution, DataSource, DataArrived);
+            var fetcher = new FeatureFetcher(extent, resolution, DataSource, DataArrived, DateTime.Now.Ticks);
             new Thread(fetcher.FetchOnThread).Start();
         }
 
-        protected virtual void DataArrived(IEnumerable<IFeature> features)
+        protected virtual void DataArrived(IEnumerable<IFeature> features, object state)
         {
             //the data in the cache is stored in the map projection so it projected only once.
             if (features == null) throw new ArgumentException("argument features may not be null");
@@ -139,16 +163,10 @@ namespace SharpMap.Layers
                 }
             }
 
-            // get the newest feature in the old batch
-            var newestOldFeature = cache.Features.OrderByDescending(f => ((IRaster) f.Geometry).TickFetched).FirstOrDefault();
-            // creat list from feature so that the newest old feature can be added
-            var list = features.ToList();
-            // add it
-            if (newestOldFeature != null) list.Add(newestOldFeature);
-            // sort cache by time arrived
-            cache = new MemoryProvider(list.OrderByDescending(f => ((IRaster)f.Geometry).TickFetched));
-            // note: we should not sort by time arrived but by the time it was requested. 
-            // Now it happens that some old requests that are take very long drawn on top
+            featureSets.Add(new FeatureSets { Ticks = (long)state, Features = features}); 
+            
+            //Keep only two most recent sets. The older ones will be removed
+            featureSets = featureSets.OrderByDescending(c => c.Ticks).Take(2).ToList();
             
             isFetching = false;
             OnDataChanged();
@@ -171,7 +189,10 @@ namespace SharpMap.Layers
 
         public override void ClearCache()
         {
-            cache.Clear();
+            foreach (var cache in featureSets)
+            {
+                cache.Features = new Features();
+            }
         }
     }
 }
