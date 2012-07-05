@@ -1,4 +1,4 @@
-// Copyright 2005, 2006 - Morten Nielsen (www.iter.dk)
+﻿// Copyright 2005, 2006 - Morten Nielsen (www.iter.dk)
 //
 // This file is part of SharpMap.
 // SharpMap is free software; you can redistribute it and/or modify
@@ -17,29 +17,25 @@
 
 using System;
 using System.Linq;
-using ProjNet.CoordinateSystems.Transformations;
 using SharpMap.Fetcher;
 using SharpMap.Geometries;
-using SharpMap.Projection;
 using SharpMap.Providers;
 using System.Threading;
 using System.Collections.Generic;
 
 namespace SharpMap.Layers
 {
-    public class Layer : BaseLayer
+    public class ImageLayer : BaseLayer
     {
         protected bool isFetching;
         protected bool needsUpdate = true;
         protected double newResolution;
         protected BoundingBox newExtent;
         protected MemoryProvider cache;
+        protected System.Timers.Timer startFetchTimer = new System.Timers.Timer(); 
 
         public IProvider DataSource { get; set; }
 
-        /// <summary>
-        /// Gets or sets the SRID of this VectorLayer's data source
-        /// </summary>
         public new int SRID
         {
             get
@@ -68,7 +64,7 @@ namespace SharpMap.Layers
                     BoundingBox box = DataSource.GetExtents();
                     if (!wasOpen) //Restore state
                         DataSource.Close();
-                    if(Transformation != null && Transformation.MapSRID != -1 && SRID != -1)
+                    if (Transformation != null && Transformation.MapSRID != -1 && SRID != -1)
                         return Transformation.Transfrom(SRID, Transformation.MapSRID, box);
 
                     return box;
@@ -76,12 +72,20 @@ namespace SharpMap.Layers
             }
         }
 
-        public Layer(string layername) 
+        public ImageLayer(string layername)
         {
             LayerName = layername;
             cache = new MemoryProvider();
+            startFetchTimer.Interval = 500;
+            startFetchTimer.Elapsed += StartFetchTimerElapsed;
         }
-        
+
+        void StartFetchTimerElapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            StartNewFetch(newExtent, newResolution);
+            startFetchTimer.Stop();
+        }
+
         public override IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
         {
             return cache.GetFeaturesInView(box, resolution);
@@ -96,7 +100,7 @@ namespace SharpMap.Layers
             if (!Enabled) return;
             if (DataSource == null) return;
             if (!changeEnd) return;
-            
+
             newExtent = extent;
             newResolution = resolution;
 
@@ -105,7 +109,8 @@ namespace SharpMap.Layers
                 needsUpdate = true;
                 return;
             }
-            StartNewFetch(extent, resolution);
+            startFetchTimer.Stop();
+            startFetchTimer.Start();
         }
 
         protected void StartNewFetch(BoundingBox extent, double resolution)
@@ -113,7 +118,7 @@ namespace SharpMap.Layers
             isFetching = true;
             needsUpdate = false;
 
-            if(Transformation != null && Transformation.MapSRID != -1 && SRID != -1)
+            if (Transformation != null && Transformation.MapSRID != -1 && SRID != -1)
                 extent = Transformation.Transfrom(Transformation.MapSRID, SRID, extent);
 
             var fetcher = new FeatureFetcher(extent, resolution, DataSource, DataArrived);
@@ -130,12 +135,21 @@ namespace SharpMap.Layers
             {
                 foreach (var feature in features.Where(feature => !(feature.Geometry is Raster)))
                 {
-                    feature.Geometry = Transformation.Transform(SRID, Transformation.MapSRID,(Geometry) feature.Geometry);
+                    feature.Geometry = Transformation.Transform(SRID, Transformation.MapSRID, (Geometry)feature.Geometry);
                 }
             }
 
-            cache = new MemoryProvider(features);
-
+            // get the newest feature in the old batch
+            var newestOldFeature = cache.Features.OrderByDescending(f => ((IRaster) f.Geometry).TickFetched).FirstOrDefault();
+            // creat list from feature so that the newest old feature can be added
+            var list = features.ToList();
+            // add it
+            if (newestOldFeature != null) list.Add(newestOldFeature);
+            // sort cache by time arrived
+            cache = new MemoryProvider(list.OrderByDescending(f => ((IRaster)f.Geometry).TickFetched));
+            // note: we should not sort by time arrived but by the time it was requested. 
+            // Now it happens that some old requests that are take very long drawn on top
+            
             isFetching = false;
             OnDataChanged();
 
