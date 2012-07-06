@@ -29,7 +29,7 @@ namespace SharpMap.Layers
     {
         protected class FeatureSets
         {
-            public long Ticks { get; set; }
+            public long TimeRequested { get; set; }
             public IEnumerable<IFeature> Features { get; set; }
         }
 
@@ -94,7 +94,7 @@ namespace SharpMap.Layers
         public override IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
         {
             var result = new List<IFeature>();
-            foreach (var featureSet in featureSets.OrderBy(c => c.Ticks))
+            foreach (var featureSet in featureSets.OrderBy(c => c.TimeRequested))
             {
                 result.AddRange(GetFeaturesInView(box, featureSet.Features));
             }
@@ -163,10 +163,10 @@ namespace SharpMap.Layers
                 }
             }
 
-            featureSets.Add(new FeatureSets { Ticks = (long)state, Features = features}); 
+            featureSets.Add(new FeatureSets { TimeRequested = (long)state, Features = features}); 
             
             //Keep only two most recent sets. The older ones will be removed
-            featureSets = featureSets.OrderByDescending(c => c.Ticks).Take(2).ToList();
+            featureSets = featureSets.OrderByDescending(c => c.TimeRequested).Take(2).ToList();
             
             isFetching = false;
             OnDataChanged();
