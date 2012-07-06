@@ -11,15 +11,19 @@ namespace SharpMap.Styles
             get { return _data; }
             set
             {
-                _data = new MemoryStream();
-                CopyStream(value, _data);
+                if (value == null)
+                {
+                    _data = null;
+                    return;
+                }
+                _data = CopyStreamToMemoryStream(value);
                 value.Close();
-                _data.Position = 0;
             }
         }
 
-        private static void CopyStream(Stream input, Stream output)
+        private static MemoryStream CopyStreamToMemoryStream(Stream input)
         {
+            var output = new MemoryStream();
             input.Position = 0;
             var buffer = new byte[4096];
             int read;
@@ -27,6 +31,8 @@ namespace SharpMap.Styles
             {
                 output.Write(buffer, 0, read);
             }
+            output.Position = 0;
+            return output;
         }
     }
 }

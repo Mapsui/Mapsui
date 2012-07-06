@@ -123,7 +123,7 @@ namespace SilverlightRendering
                 else
                 {
                     renderedGeometry = GeometryRenderer.RenderPoint(feature.Geometry as SharpMap.Geometries.Point, style, view);
-                    //!!!feature.RenderedGeometry = renderedGeometry;
+                    feature.RenderedGeometry = renderedGeometry;
                 }
                 canvas.Children.Add(renderedGeometry);
             }
