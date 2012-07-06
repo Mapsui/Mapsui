@@ -22,8 +22,20 @@ namespace SilverlightRendering
         {
             var frameworkElement = (FrameworkElement) renderedGeometry;
             var symbolStyle = (SymbolStyle) style;
-            var width = symbolStyle.Width * symbolStyle.SymbolScale;
-            var height = symbolStyle.Height * symbolStyle.SymbolScale;  
+
+            double width, height;
+
+            if (symbolStyle.UnitType == UnitType.WorldUnit)
+            {
+                width = symbolStyle.Width*symbolStyle.SymbolScale;
+                height = symbolStyle.Height*symbolStyle.SymbolScale;
+            }
+            else
+            {
+                width = (renderedGeometry as System.Windows.Shapes.Rectangle).Width;
+                height = (renderedGeometry as System.Windows.Shapes.Rectangle).Height;
+            }
+
             var matrix = CreateTransformMatrix(point, view, symbolStyle, width, height);
             frameworkElement.RenderTransform = new MatrixTransform { Matrix = matrix };
             return frameworkElement;

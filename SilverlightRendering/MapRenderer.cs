@@ -20,6 +20,7 @@ namespace SilverlightRendering
     {
         private readonly Canvas target;
 
+
         public MapRenderer()
         {
             target = new Canvas();
@@ -34,7 +35,11 @@ namespace SilverlightRendering
         {
             foreach (var child in target.Children)
             {
-                if (child is Canvas) (child as Canvas).Children.Clear();
+                if (child is Canvas)
+                {
+                    (child as Canvas).Children.Clear();
+                }
+
             }
             target.Children.Clear();
                         
@@ -116,7 +121,7 @@ namespace SilverlightRendering
             else if (feature.Geometry is SharpMap.Geometries.Point)
             {
                 var renderedGeometry = feature.RenderedGeometry as UIElement;
-                if (renderedGeometry != null && style is SymbolStyle)
+                if (renderedGeometry != null && style is SymbolStyle) 
                 {
                     GeometryRenderer.PositionPoint(renderedGeometry, feature.Geometry as SharpMap.Geometries.Point, style, view);
                 }
