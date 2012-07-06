@@ -91,6 +91,7 @@
     <Compile Include="Converters\WellKnownText\WKTStreamTokenizer.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Fetcher\FeatureFetcher.cs" />
     <Compile Include="Fetcher\FetchOnThread.cs" />
     <Compile Include="Fetcher\FetchStrategy.cs" />
     <Compile Include="Fetcher\IAsyncDataFetcher.cs" />
