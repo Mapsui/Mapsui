@@ -130,8 +130,6 @@ namespace DemoConfig
             lblMax.Font = new Font { FontFamily = "GenericSerif", Size = 9 };
             countryLabels.Styles.Add(new GradientTheme("PopDens", 0, 400, lblMin, lblMax));
 
-            cities.Styles.Add(CreateCityTheme());
-
             map.BackColor = Color.Blue;
 
             return map;
