@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
-using ProjNet.CoordinateSystems.Transformations;
 using SharpMap.Fetcher;
 using SharpMap.Geometries;
 using SharpMap.Providers;
@@ -66,6 +65,8 @@ namespace SharpMap.Layers
         public bool Exclusive { get; set; }
 
         public double Opacity { get; set; }
+
+        public bool Busy { get; set; }
 
         public event FeedbackEventHandler Feedback;
 

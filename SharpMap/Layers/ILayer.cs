@@ -85,6 +85,8 @@ namespace SharpMap.Layers
 
         double Opacity { get; set; }
 
+        bool Busy { get; set; }
+
         IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution);
     }
 
