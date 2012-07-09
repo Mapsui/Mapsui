@@ -83,7 +83,7 @@ namespace SharpMap.Styles
                 return false;
             }
 
-            if (SymbolScale.Equals(SymbolScale))
+            if (!SymbolScale.Equals(SymbolScale))
             {
                 return false;
             }

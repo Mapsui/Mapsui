@@ -49,7 +49,7 @@ namespace SharpMap.Styles
 
         public bool Equals(Bitmap bitmap)
         {
-            if (!CompareMemoryStreams(_data, (MemoryStream)bitmap.Data)) return false;
+            if (!CompareMemoryStreams(_data, bitmap._data)) return false;
             return true;
         }
 
