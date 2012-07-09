@@ -58,6 +58,8 @@ namespace SharpMap.Providers
     /// </remarks>
     public class MemoryProvider : IProvider
     {
+        private readonly object syncRoot = new object();
+
         #region Properties
 
         /// <summary>
@@ -172,26 +174,33 @@ namespace SharpMap.Providers
 
         public IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
         {
-            var features = Features.ToList();
-
-            foreach (var feature in features)
+            lock (syncRoot)
             {
-                if (feature.Geometry == null)
-                    continue;
+                var features = Features.ToList();
 
-                if (box.Intersects(feature.Geometry.GetBoundingBox()))
+                foreach (var feature in features)
                 {
-                    yield return feature;
+                    if (feature.Geometry == null)
+                        continue;
+
+                    if (box.Intersects(feature.Geometry.GetBoundingBox()))
+                    {
+                        yield return feature;
+                    }
                 }
-            }            
+            }
         }
 
         public IFeature Find(object value)
         {
-            if (string.IsNullOrEmpty(Features.PrimaryKey)) throw new Exception("ID Field was not set");
+            lock (syncRoot)
+            {
+                if (string.IsNullOrEmpty(Features.PrimaryKey)) throw new Exception("ID Field was not set");
 
-            return Features.FirstOrDefault(f =>
-                ((f[Features.PrimaryKey] != null) && (value != null)) && f[Features.PrimaryKey].Equals(value));
+                return Features.FirstOrDefault(f =>
+                                               ((f[Features.PrimaryKey] != null) && (value != null)) &&
+                                               f[Features.PrimaryKey].Equals(value));
+            }
         }
 
         /// <summary>
@@ -200,12 +209,17 @@ namespace SharpMap.Providers
         /// <returns>boundingbox</returns>
         public BoundingBox GetExtents()
         {
-            BoundingBox box = null;
-            foreach (IFeature feature in Features)
-                if (!feature.Geometry.IsEmpty())
-                    box = box == null ? feature.Geometry.GetBoundingBox() : box.Join(feature.Geometry.GetBoundingBox());
+            lock (syncRoot)
+            {
+                BoundingBox box = null;
+                foreach (IFeature feature in Features)
+                    if (!feature.Geometry.IsEmpty())
+                        box = box == null
+                                  ? feature.Geometry.GetBoundingBox()
+                                  : box.Join(feature.Geometry.GetBoundingBox());
 
-            return box;
+                return box;
+            }
         }
 
         /// <summary>
@@ -241,12 +255,18 @@ namespace SharpMap.Providers
         /// </summary>
         public void Dispose()
         {
-            Features = null;
+            lock (syncRoot)
+            {
+                Features = null;
+            }
         }
 
         public void Clear()
         {
-            Features.Clear();
+            lock (syncRoot)
+            {
+                Features.Clear();    
+            }
         }
 
         #endregion
