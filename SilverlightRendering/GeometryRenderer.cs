@@ -16,13 +16,14 @@ namespace SilverlightRendering
 {
     static class GeometryRenderer
     {
-        private static readonly IDictionary<IStyle, BitmapSource> StyleCache = new Dictionary<IStyle, BitmapSource>();
+        private static readonly IDictionary<IStyle, BitmapSource> BitmapCache
+            = new Dictionary<IStyle, BitmapSource>();
 
         public static UIElement PositionPoint(UIElement renderedGeometry, Point point, IStyle style, IView view)
         {
             var frameworkElement = (FrameworkElement) renderedGeometry;
-            var symbolStyle = (SymbolStyle) style;
-
+            var symbolStyle = (style is SymbolStyle) ? style as SymbolStyle : new SymbolStyle();
+            
             double width, height;
 
             if (symbolStyle.UnitType == UnitType.WorldUnit)
@@ -56,13 +57,13 @@ namespace SilverlightRendering
             }
             else
             {
-                var bitmap = GetCache(style);
+                var bitmap = GetBitmapCache(style);
 
                 if (bitmap == null)
                 {
                     var symbolPath = ToSymbolPath(symbolStyle);
                     bitmap = ToBitmap(symbolPath, symbolPath.Data.Bounds.Width, symbolPath.Data.Bounds.Height);
-                    SetCache(style, bitmap);
+                    SetBitmapCache(style, bitmap);
                 }
 
                 var rect = new System.Windows.Shapes.Rectangle();
@@ -483,18 +484,18 @@ namespace SilverlightRendering
             return dest;
         }
 
-        private static BitmapSource GetCache(IStyle style)
+        private static BitmapSource GetBitmapCache(IStyle style)
         {
-            if (StyleCache.ContainsKey(style))
-                    return StyleCache[style];
+            if (BitmapCache.ContainsKey(style))
+                    return BitmapCache[style];
             return null;
         }
 
-        private static void SetCache(IStyle style, BitmapSource path)
+        private static void SetBitmapCache(IStyle style, BitmapSource path)
         {
             //caching still needs more work
-            if (StyleCache.Count > 100) return;
-            StyleCache[style] = path;
+            if (BitmapCache.Count > 4000) return;
+            BitmapCache[style] = path;
         }
 
         public static void PositionRaster(UIElement renderedGeometry, BoundingBox boundingBox, IView view)

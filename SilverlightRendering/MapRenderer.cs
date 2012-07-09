@@ -120,7 +120,7 @@ namespace SilverlightRendering
             else if (feature.Geometry is SharpMap.Geometries.Point)
             {
                 var renderedGeometry = feature.RenderedGeometry.ContainsKey(style) ? feature.RenderedGeometry[style] as UIElement : null;
-                if (renderedGeometry != null && style is SymbolStyle) 
+                if (renderedGeometry != null) 
                 {
                     GeometryRenderer.PositionPoint(renderedGeometry, feature.Geometry as SharpMap.Geometries.Point, style, view);
                 }
