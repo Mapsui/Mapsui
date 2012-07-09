@@ -59,5 +59,90 @@ namespace SharpMap.Styles
         public double Width { get; set; }
 
         public double Height { get; set; }
+
+        #region Equals operator
+
+        public override bool Equals(object obj)
+        {
+            if (!(obj is SymbolStyle))
+            {
+                return false;
+            }
+            return Equals((SymbolStyle)obj);
+        }
+
+        public bool Equals(SymbolStyle symbolStyle)
+        {
+            if (!base.Equals(symbolStyle))
+            {
+                return false;
+            }
+
+            if (!Symbol.Equals(symbolStyle.Symbol))
+            {
+                return false;
+            }
+
+            if (SymbolScale.Equals(SymbolScale))
+            {
+                return false;
+            }
+
+            if (!SymbolOffset.Equals(symbolStyle.SymbolOffset))
+            {
+                return false;
+            }
+
+            if (SymbolRotation != symbolStyle.SymbolRotation)
+            {
+                return false;
+            }
+
+            if (UnitType != symbolStyle.UnitType)
+            {
+                return false;
+            }
+
+            if (SymbolType != symbolStyle.SymbolType)
+            {
+                return false;
+            }
+
+            if (Opacity != symbolStyle.Opacity)
+            {
+                return false;
+            }
+
+            if (Width != symbolStyle.Width)
+            {
+                return false;
+            }
+
+            if (Height != symbolStyle.Height)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public override int GetHashCode()
+        {
+            return Symbol.GetHashCode() ^ SymbolScale.GetHashCode() ^ SymbolOffset.GetHashCode() ^
+                SymbolRotation.GetHashCode() ^ UnitType.GetHashCode() ^ SymbolType.GetHashCode() ^
+                Opacity.GetHashCode() ^ Width.GetHashCode() ^ Height.GetHashCode() ^ base.GetHashCode();
+        }
+
+        public static bool operator ==(SymbolStyle symbolStyle1, SymbolStyle symbolStyle2)
+        {
+            return Equals(symbolStyle1, symbolStyle2);
+        }
+
+        public static bool operator !=(SymbolStyle symbolStyle1, SymbolStyle symbolStyle2)
+        {
+            return !Equals(symbolStyle1, symbolStyle2);
+        }
+
+        #endregion
     }
 }

@@ -1,10 +1,11 @@
 ﻿using System.IO;
+using System.Linq;
 
 namespace SharpMap.Styles
 {
     public class Bitmap
     {
-        private Stream _data { get; set; }
+        private MemoryStream _data { get; set; }
 
         public Stream Data
         {
@@ -34,5 +35,53 @@ namespace SharpMap.Styles
             output.Position = 0;
             return output;
         }
+
+        #region Equals operator
+
+        public override bool Equals(object obj)
+        {
+            if (!(obj is Bitmap))
+            {
+                return false;
+            }
+            return Equals((Bitmap)obj);
+        }
+
+        public bool Equals(Bitmap bitmap)
+        {
+            if (!CompareMemoryStreams(_data, (MemoryStream)bitmap.Data)) return false;
+            return true;
+        }
+
+        private static bool CompareMemoryStreams(MemoryStream ms1, MemoryStream ms2)
+        {
+            if (ms1.Length != ms2.Length)
+                return false;
+            ms1.Position = 0;
+            ms2.Position = 0;
+
+            var msArray1 = ms1.ToArray();
+            var msArray2 = ms2.ToArray();
+
+            return msArray1.SequenceEqual(msArray2);
+        }
+
+        public override int GetHashCode()
+        {
+            return 1; // Data.GetHashCode() reads the full stream so that is no optimization
+        }
+
+        public static bool operator ==(Bitmap bitmap1, Bitmap bitmap2)
+        {
+            return Equals(bitmap1, bitmap2);
+        }
+
+        public static bool operator !=(Bitmap bitmap1, Bitmap bitmap2)
+        {
+            return !Equals(bitmap1, bitmap2);
+        }
+
+        #endregion
+
     }
 }

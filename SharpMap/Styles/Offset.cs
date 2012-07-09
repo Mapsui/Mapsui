@@ -9,5 +9,40 @@ namespace SharpMap.Styles
     {
         public double X { get; set; }
         public double Y { get; set; }
+
+        #region Equals operator
+
+        public override bool Equals(object obj)
+        {
+            if (!(obj is Offset))
+            {
+                return false;
+            }
+            return Equals((Offset)obj);
+        }
+
+        public bool Equals(Offset offset)
+        {
+            if (X != offset.X) return false;
+            if (Y != offset.Y) return false;
+            return true;
+        }
+
+        public override int GetHashCode()
+        {
+            return X.GetHashCode() ^ Y.GetHashCode();
+        }
+
+        public static bool operator ==(Offset offset1, Offset offset2)
+        {
+            return Equals(offset1, offset2);
+        }
+
+        public static bool operator !=(Offset offset1, Offset offset2)
+        {
+            return !Equals(offset1, offset2);
+        }
+
+        #endregion
     }
 }

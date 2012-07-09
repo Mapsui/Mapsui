@@ -33,5 +33,42 @@ namespace SharpMap.Styles
         public static Color Orange { get { return new Color { A = 255, R = 255, G = 165, B = 0 }; } }
         public static Color Indigo { get { return new Color { A = 255, R = 75, G = 0, B = 130 }; } }
         public static Color Violet { get { return new Color { A = 255, R = 238, G = 130, B = 238 }; } }
+
+        #region Equals operator
+
+        public override bool Equals(object obj)
+        {
+            if (!(obj is Color))
+            {
+                return false;
+            }
+            return Equals((Color)obj);
+        }
+
+        public bool Equals(Color color)
+        {
+            if (A != color.A) return false;
+            if (R != color.R) return false;
+            if (G != color.G) return false;
+            if (B != color.B) return false; 
+            return true;
+        }
+
+        public override int GetHashCode()
+        {
+            return A.GetHashCode() ^ R.GetHashCode() ^ G.GetHashCode() ^ B.GetHashCode();
+        }
+
+        public static bool operator ==(Color color1, Color color2)
+        {
+            return Equals(color1, color2);
+        }
+
+        public static bool operator !=(Color color1, Color color2)
+        {
+            return !Equals(color1, color2);
+        }
+
+        #endregion
     }
 }

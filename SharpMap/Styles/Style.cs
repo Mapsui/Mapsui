@@ -24,28 +24,12 @@ namespace SharpMap.Styles
     /// </summary>
     public class Style : IStyle
     {
-        #region Privates
-
-        #endregion
-
-        /// <summary>
-        /// Initializes a new Style and sets the default values
-        /// </summary>
-        /// <remarks>
-        /// Default style values when initialized:<br/>
-        /// *LineStyle: 1px solid black<br/>
-        /// *FillStyle: Solid black<br/>
-        /// *Outline: No Outline
-        /// *Symbol: null-reference
-        /// </remarks>
         public Style()
         {
             MinVisible = 0;
             MaxVisible = double.MaxValue;
             Enabled = true;
         }
-
-        #region Properties
 
         /// <summary>
         /// Gets or sets the minimum zoom value where the style is applied
@@ -61,6 +45,52 @@ namespace SharpMap.Styles
         /// Gets or sets whether objects in this style is rendered or not
         /// </summary>
         public bool Enabled { get; set; }
+
+        #region Equals operator
+
+        public override bool Equals(object obj)
+        {
+            if (!(obj is Style))
+            {
+                return false;
+            }
+            return Equals((Style)obj);
+        }
+
+        public bool Equals(Style style)
+        {
+            if (MinVisible != style.MinVisible)
+            {
+                return false;
+            }
+
+            if (MaxVisible != style.MaxVisible)
+            {
+                return false;
+            }
+
+            if (Enabled != style.Enabled)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public override int GetHashCode()
+        {
+            return MinVisible.GetHashCode() ^ MaxVisible.GetHashCode() ^ Enabled.GetHashCode();
+        }
+
+        public static bool operator ==(Style style1, Style style2)
+        {
+            return Equals(style1, style2);
+        }
+
+        public static bool operator !=(Style style1, Style style2)
+        {
+            return !Equals(style1, style2);
+        }
 
         #endregion
     }

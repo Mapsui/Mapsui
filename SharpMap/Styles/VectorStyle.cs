@@ -23,5 +23,59 @@ namespace SharpMap.Styles
         /// Fillstyle for Polygon geometries
         /// </summary>
         public Brush Fill { get; set; }
+
+        #region Equals operator
+
+        public override bool Equals(object obj)
+        {
+            if (!(obj is VectorStyle))
+            {
+                return false;
+            }
+            return Equals((VectorStyle)obj);
+        }
+
+        public bool Equals(VectorStyle vectorStyle)
+        {
+            if (!base.Equals(vectorStyle))
+            {
+                return false;
+            }
+
+            if (!Line.Equals(vectorStyle.Line))
+            {
+                return false;
+            }
+
+            if (!Outline.Equals(vectorStyle.Outline))
+            {
+                return false;
+            }
+
+            if (!Fill.Equals(vectorStyle.Fill))
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public override int GetHashCode()
+        {
+            return Line.GetHashCode() ^ Outline.GetHashCode() ^ Fill.GetHashCode() ^ base.GetHashCode();
+        }
+
+        public static bool operator ==(VectorStyle vectorStyle1, VectorStyle vectorStyle2)
+        {
+            return Equals(vectorStyle1, vectorStyle2);
+        }
+
+        public static bool operator !=(VectorStyle vectorStyle1, VectorStyle vectorStyle2)
+        {
+            return !Equals(vectorStyle1, vectorStyle2);
+        }
+
+        #endregion
+
     }
 }
