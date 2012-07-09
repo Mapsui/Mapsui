@@ -20,7 +20,6 @@ namespace SilverlightRendering
     {
         private readonly Canvas target;
 
-
         public MapRenderer()
         {
             target = new Canvas();
@@ -120,7 +119,7 @@ namespace SilverlightRendering
             }
             else if (feature.Geometry is SharpMap.Geometries.Point)
             {
-                var renderedGeometry = feature.RenderedGeometry as UIElement;
+                var renderedGeometry = feature.RenderedGeometry.ContainsKey(style) ? feature.RenderedGeometry[style] as UIElement : null;
                 if (renderedGeometry != null && style is SymbolStyle) 
                 {
                     GeometryRenderer.PositionPoint(renderedGeometry, feature.Geometry as SharpMap.Geometries.Point, style, view);
@@ -128,7 +127,7 @@ namespace SilverlightRendering
                 else
                 {
                     renderedGeometry = GeometryRenderer.RenderPoint(feature.Geometry as SharpMap.Geometries.Point, style, view);
-                    feature.RenderedGeometry = renderedGeometry;
+                    feature.RenderedGeometry[style] = renderedGeometry;
                 }
                 canvas.Children.Add(renderedGeometry);
             }
@@ -144,7 +143,7 @@ namespace SilverlightRendering
                 canvas.Children.Add(GeometryRenderer.RenderMultiPolygon(feature.Geometry as MultiPolygon, style, view));
             else if (feature.Geometry is IRaster)
             {
-                var renderedGeometry = feature.RenderedGeometry as UIElement;
+                var renderedGeometry = feature.RenderedGeometry.ContainsKey(style) ? feature.RenderedGeometry[style] as UIElement : null;
                 if (renderedGeometry != null) 
                 {
                     GeometryRenderer.PositionRaster(renderedGeometry, feature.Geometry.GetBoundingBox(), view);
@@ -153,7 +152,7 @@ namespace SilverlightRendering
                 {
                     renderedGeometry = GeometryRenderer.RenderRaster(feature.Geometry as IRaster, style, view);
                     Animate(renderedGeometry, "Opacity", 0, 1, 600, (s, e) => { });
-                    feature.RenderedGeometry = renderedGeometry;
+                    feature.RenderedGeometry[style] = renderedGeometry;
                 }
                 canvas.Children.Add(renderedGeometry);
             }

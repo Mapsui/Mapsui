@@ -12,12 +12,13 @@ namespace SharpMap.Providers
         public Feature()
         {
             dictionary = new Dictionary<string, object>();
+            RenderedGeometry = new Dictionary<IStyle, object>();
             Styles = new Collection<IStyle>();
         }
 
         public IGeometry Geometry { get; set; }
 
-        public object RenderedGeometry { get; set; }
+        public IDictionary<IStyle, object> RenderedGeometry { get; private set; }
 
         public ICollection<IStyle> Styles { get; set; }
 

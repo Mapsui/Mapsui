@@ -102,18 +102,18 @@ namespace WbxRendering
                 }
                 else
                 {
-                    var renderedGeometry = feature.RenderedGeometry as WriteableBitmap;
+                    var renderedGeometry = feature.RenderedGeometry[feature.Styles.First()] as WriteableBitmap;
                     if (renderedGeometry == null) // create
                     {
                         var image = ((IRaster)feature.Geometry).Data;
                         var bitmap = LoadBitmap(image);
                         Rect dest = WorldToMap(tile.Extent, view);
                         DrawImage(targetBitmap, bitmap, dest, tile, memoryCache, opacity);
-                        feature.RenderedGeometry = bitmap;
+                        feature.RenderedGeometry[feature.Styles.First()] = bitmap;
                     }
                     else // position
                     {
-                        var bitmap = (WriteableBitmap)feature.RenderedGeometry;
+                        var bitmap = (WriteableBitmap)feature.RenderedGeometry[feature.Styles.First()];
                         Rect dest = WorldToMap(tile.Extent, view);
                         DrawImage(targetBitmap, bitmap, dest, tile, memoryCache, opacity);
                     }

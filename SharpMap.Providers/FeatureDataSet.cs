@@ -467,6 +467,7 @@ namespace SharpMap.Data
         internal FeatureDataRow(DataRowBuilder rb) : base(rb)
         {
             Styles = new Collection<IStyle>();
+            RenderedGeometry = new Dictionary<IStyle, object>();
         }
 
         /// <summary>
@@ -474,7 +475,7 @@ namespace SharpMap.Data
         /// </summary>
         public IGeometry Geometry { get; set; }
 
-        public object RenderedGeometry { get; set; }
+        public IDictionary<IStyle, object> RenderedGeometry { get; private set; }
 
         public ICollection<IStyle> Styles { get; set; }
 

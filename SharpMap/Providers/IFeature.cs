@@ -7,7 +7,7 @@ namespace SharpMap.Providers
     public interface IFeature
     {
         IGeometry Geometry { get; set; }
-        object RenderedGeometry { get; set; }
+        IDictionary<IStyle, object> RenderedGeometry { get; }
         ICollection<IStyle> Styles { get; }
         object this[string key] { get; set; }
         IEnumerable<string> Fields { get; }

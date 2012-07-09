@@ -15,11 +15,19 @@ namespace DemoConfig
             var pointWithDefaultSymbolStyle = new Feature { Geometry = new Point(1000000, 1000000)};
             pointWithDefaultSymbolStyle.Styles.Add(new SymbolStyle());
             var pointAsSmallBlackDot = new Feature { Geometry = new Point(1000000, 0)};
+
+            pointAsSmallBlackDot.Styles.Add(new SymbolStyle
+            {
+                SymbolScale = 2.0f,
+                Fill = new Brush { Color = null },
+                Outline = new Pen { Color = Color.Green}
+
+            });
+
             pointAsSmallBlackDot.Styles.Add(new SymbolStyle
             {
                 SymbolScale = 0.5f,
                 Fill = new Brush { Color = Color.Black },
-                Outline = new Pen { Color = Color.Black }
             });
 
             var pointWithlabelStyle = new Feature { Geometry = new Point(0, 1000000)};
