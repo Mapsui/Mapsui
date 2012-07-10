@@ -38,7 +38,6 @@ namespace SilverlightRendering
                 {
                     (child as Canvas).Children.Clear();
                 }
-
             }
             target.Children.Clear();
                         
@@ -92,7 +91,7 @@ namespace SilverlightRendering
                     if (layerStyle is IThemeStyle) style = (layerStyle as IThemeStyle).GetStyle(feature);
                     if ((style == null) || (style.Enabled == false) || (style.MinVisible > view.Resolution) || (style.MaxVisible < view.Resolution)) continue;
 
-                    RenderGeometry(canvas, view, style, feature);
+                    RenderFeature(canvas, view, style, feature);
                 }
             }
 
@@ -103,7 +102,7 @@ namespace SilverlightRendering
                 {
                     if (feature.Styles != null && style.Enabled)
                     {
-                        RenderGeometry(canvas, view, style, feature);
+                        RenderFeature(canvas, view, style, feature);
                     }
                 }
             }
@@ -111,51 +110,64 @@ namespace SilverlightRendering
             return canvas;
         }
 
-        private static void RenderGeometry(Canvas canvas, IView view, IStyle style, SharpMap.Providers.IFeature feature)
+        private static void RenderFeature(Canvas canvas, IView view, IStyle style, SharpMap.Providers.IFeature feature)
         {
             if (style is LabelStyle)
             {
                 canvas.Children.Add(LabelRenderer.RenderLabel(feature.Geometry.GetBoundingBox().GetCentroid(), new Offset(), style as LabelStyle, view));
             }
-            else if (feature.Geometry is SharpMap.Geometries.Point)
+            else 
             {
                 var renderedGeometry = feature.RenderedGeometry.ContainsKey(style) ? feature.RenderedGeometry[style] as UIElement : null;
-                if (renderedGeometry != null) 
+                if (renderedGeometry == null) 
                 {
-                    GeometryRenderer.PositionPoint(renderedGeometry, feature.Geometry as SharpMap.Geometries.Point, style, view);
+                    renderedGeometry = RenderGeometry(canvas, view, style, feature);
+                    if (feature.Geometry is SharpMap.Geometries.Point || feature.Geometry is IRaster) // positioning only supported for point and raster
+                        feature.RenderedGeometry[style] = renderedGeometry;
                 }
                 else
                 {
-                    renderedGeometry = GeometryRenderer.RenderPoint(feature.Geometry as SharpMap.Geometries.Point, style, view);
-                    feature.RenderedGeometry[style] = renderedGeometry;
+                    PositionGeometry(renderedGeometry, view, style, feature);
                 }
                 canvas.Children.Add(renderedGeometry);
             }
-            else if (feature.Geometry is MultiPoint)
-                canvas.Children.Add(GeometryRenderer.RenderMultiPoint(feature.Geometry as MultiPoint, style, view));
-            else if (feature.Geometry is LineString)
-                canvas.Children.Add(GeometryRenderer.RenderLineString(feature.Geometry as LineString, style, view));
-            else if (feature.Geometry is MultiLineString)
-                canvas.Children.Add(GeometryRenderer.RenderMultiLineString(feature.Geometry as MultiLineString, style, view));
-            else if (feature.Geometry is Polygon)
-                canvas.Children.Add(GeometryRenderer.RenderPolygon(feature.Geometry as Polygon, style, view));
-            else if (feature.Geometry is MultiPolygon)
-                canvas.Children.Add(GeometryRenderer.RenderMultiPolygon(feature.Geometry as MultiPolygon, style, view));
-            else if (feature.Geometry is IRaster)
-            {
-                var renderedGeometry = feature.RenderedGeometry.ContainsKey(style) ? feature.RenderedGeometry[style] as UIElement : null;
-                if (renderedGeometry != null) 
-                {
-                    GeometryRenderer.PositionRaster(renderedGeometry, feature.Geometry.GetBoundingBox(), view);
-                }
-                else
-                {
-                    renderedGeometry = GeometryRenderer.RenderRaster(feature.Geometry as IRaster, style, view);
-                    Animate(renderedGeometry, "Opacity", 0, 1, 600, (s, e) => { });
-                    feature.RenderedGeometry[style] = renderedGeometry;
-                }
-                canvas.Children.Add(renderedGeometry);
-            }
+        }
+
+        private static UIElement RenderGeometry(Canvas canvas, IView view, IStyle style, SharpMap.Providers.IFeature feature)
+        {
+            if (feature.Geometry is SharpMap.Geometries.Point)
+                return GeometryRenderer.RenderPoint(feature.Geometry as SharpMap.Geometries.Point, style, view);
+            if (feature.Geometry is MultiPoint)
+                return GeometryRenderer.RenderMultiPoint(feature.Geometry as MultiPoint, style, view);
+            if (feature.Geometry is LineString)
+                return GeometryRenderer.RenderLineString(feature.Geometry as LineString, style, view);
+            if (feature.Geometry is MultiLineString)
+                return GeometryRenderer.RenderMultiLineString(feature.Geometry as MultiLineString, style, view);
+            if (feature.Geometry is Polygon)
+                return GeometryRenderer.RenderPolygon(feature.Geometry as Polygon, style, view);
+            if (feature.Geometry is MultiPolygon)
+                return GeometryRenderer.RenderMultiPolygon(feature.Geometry as MultiPolygon, style, view);
+            if (feature.Geometry is IRaster)
+                return GeometryRenderer.RenderRaster(feature.Geometry as IRaster, style, view);
+            return null;
+        }
+
+        private static void PositionGeometry(UIElement renderedGeometry, IView view, IStyle style, SharpMap.Providers.IFeature feature)
+        {
+            if (feature.Geometry is SharpMap.Geometries.Point)
+                GeometryRenderer.PositionPoint(renderedGeometry, feature.Geometry as SharpMap.Geometries.Point, style, view);
+            if (feature.Geometry is MultiPoint)
+                return;
+            if (feature.Geometry is LineString)
+                return;
+            if (feature.Geometry is MultiLineString)
+                return;
+            if (feature.Geometry is Polygon)
+                return;
+            if (feature.Geometry is MultiPolygon)
+                return;
+            if (feature.Geometry is IRaster)
+                GeometryRenderer.PositionRaster(renderedGeometry, feature.Geometry.GetBoundingBox(), view);
         }
 
         public static void Animate(DependencyObject target, string property, double from, double to, int duration, EventHandler completed)

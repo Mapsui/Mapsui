@@ -78,7 +78,7 @@ namespace SharpMap.Styles
                 return false;
             }
 
-            if (!Symbol.Equals(symbolStyle.Symbol))
+            if (Symbol != symbolStyle.Symbol)
             {
                 return false;
             }
@@ -128,7 +128,8 @@ namespace SharpMap.Styles
 
         public override int GetHashCode()
         {
-            return Symbol.GetHashCode() ^ SymbolScale.GetHashCode() ^ SymbolOffset.GetHashCode() ^
+            return (Symbol == null ? 0 : Symbol.GetHashCode()) ^ 
+                SymbolScale.GetHashCode() ^ SymbolOffset.GetHashCode() ^
                 SymbolRotation.GetHashCode() ^ UnitType.GetHashCode() ^ SymbolType.GetHashCode() ^
                 Opacity.GetHashCode() ^ Width.GetHashCode() ^ Height.GetHashCode() ^ base.GetHashCode();
         }

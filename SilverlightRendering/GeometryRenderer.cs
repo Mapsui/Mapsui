@@ -19,7 +19,7 @@ namespace SilverlightRendering
         private static readonly IDictionary<IStyle, BitmapSource> BitmapCache
             = new Dictionary<IStyle, BitmapSource>();
 
-        public static UIElement PositionPoint(UIElement renderedGeometry, Point point, IStyle style, IView view)
+        public static void PositionPoint(UIElement renderedGeometry, Point point, IStyle style, IView view)
         {
             var frameworkElement = (FrameworkElement) renderedGeometry;
             var symbolStyle = (style is SymbolStyle) ? style as SymbolStyle : new SymbolStyle();
@@ -39,7 +39,6 @@ namespace SilverlightRendering
 
             var matrix = CreateTransformMatrix(point, view, symbolStyle, width, height);
             frameworkElement.RenderTransform = new MatrixTransform { Matrix = matrix };
-            return frameworkElement;
         }
 
         public static UIElement RenderPoint(Point point, IStyle style, IView view)
@@ -436,6 +435,8 @@ namespace SilverlightRendering
             Path path = CreateRasterPath(style, raster.Data);
             path.Data = ConvertRaster(raster.GetBoundingBox(), view);
 
+            MapRenderer.Animate(path, "Opacity", 0, 1, 600, (s, e) => { });
+
             return path;
         }
 
@@ -504,7 +505,6 @@ namespace SilverlightRendering
                                      RoundToPixel(new Rect(
                                         ConvertPoint(view.WorldToView(boundingBox.Min)),
                                         ConvertPoint(view.WorldToView(boundingBox.Max))));
-
         }
     }
 }

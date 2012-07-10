@@ -1,5 +1,4 @@
-﻿
-namespace SharpMap.Styles
+﻿namespace SharpMap.Styles
 {
     public class VectorStyle : Style
     {
