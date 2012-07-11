@@ -196,6 +196,10 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\phoenix\trunk\KmlLayer\KmlLayer.csproj">
+      <Project>{910E7577-EF83-411C-9E12-9EBCEC4A6DAE}</Project>
+      <Name>KmlLayer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DemoConfig\DemoConfig.csproj">
       <Project>{8FB95293-E18B-4B99-9FEB-A24DD3FCBBC5}</Project>
       <Name>DemoConfig</Name>

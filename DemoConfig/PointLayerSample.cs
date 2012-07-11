@@ -21,7 +21,6 @@ namespace DemoConfig
                 SymbolScale = 2.0f,
                 Fill = new Brush { Color = null },
                 Outline = new Pen { Color = Color.Green}
-
             });
 
             pointAsSmallBlackDot.Styles.Add(new SymbolStyle

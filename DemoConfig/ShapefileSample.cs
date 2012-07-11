@@ -56,7 +56,7 @@ namespace DemoConfig
 
             //Set up countries layer
             var countries = CreateCountryLayer();
-            map.Layers.Add(countries);
+            //!!!map.Layers.Add(countries);
 
             //set up cities layer
             var cities = CreateCityLayer();
@@ -97,7 +97,7 @@ namespace DemoConfig
             cityLabelStyle.CollisionDetection = true;
             cityLabel.Styles.Add(cityLabelStyle);
             cityLabel.LabelFilter = LabelCollisionDetection.ThoroughCollisionDetection;
-            map.Layers.Add(cityLabel);
+            //!!!map.Layers.Add(cityLabel);
 
             //Set a gradient theme on the countries layer, based on Population density
             //First create two styles that specify min and max styles

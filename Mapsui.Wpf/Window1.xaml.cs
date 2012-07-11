@@ -5,6 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using BruTile.Web;
 using DemoConfig;
+using SharpMap.KmlLayer;
 using SharpMap.Layers;
 using SharpMap.Providers;
 using SharpMap.Samples;
@@ -147,12 +148,25 @@ namespace Mapsui.Wpf
             mapControl.Refresh();
         }
 
+        //private void ArcGISImageServiceClick(object sender, RoutedEventArgs e)
+        //{
+        //    mapControl.Map.Layers.Clear();
+        //    mapControl.Map.Layers.Add(ArcGISImageServiceSample.Create());
+        //    layerList.Initialize(mapControl.Map.Layers);
+        //    mapControl.Refresh();
+        //}
+
         private void ArcGISImageServiceClick(object sender, RoutedEventArgs e)
         {
             mapControl.Map.Layers.Clear();
-            mapControl.Map.Layers.Add(ArcGISImageServiceSample.Create());
+            mapControl.Map.Layers.Add(CreateKmlLayer());
             layerList.Initialize(mapControl.Map.Layers);
             mapControl.Refresh();
+        }
+        
+        private ILayer CreateKmlLayer()
+        {
+            return new KmlLayer("soep", @"file://c:\temp\oplaadpalen.kml") { SRID = 4326 };
         }
     }
 }
