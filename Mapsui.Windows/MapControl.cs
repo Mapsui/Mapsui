@@ -133,6 +133,8 @@ namespace Mapsui.Windows
             }
         }
 
+        public bool ZoomLocked { get; set; }
+
         #endregion
 
         #region Dependency Properties
@@ -240,6 +242,9 @@ namespace Mapsui.Windows
 
         public void ZoomIn()
         {
+            if (ZoomLocked)
+                return;
+
             if (double.IsNaN(toResolution))
                 toResolution = view.Resolution;
 
@@ -323,6 +328,9 @@ namespace Mapsui.Windows
 
         private void MapControlMouseWheel(object sender, MouseWheelEventArgs e)
         {
+            if (ZoomLocked)
+                return;
+
             currentMousePosition = e.GetPosition(this); //Needed for both MouseMove and MouseWheel event for mousewheel event
 
             if (double.IsNaN(toResolution))
@@ -698,7 +706,7 @@ namespace Mapsui.Windows
             var currentManipulationPosition = new Point(e.ManipulationOrigin.X + e.DeltaManipulation.Translation.X, e.ManipulationOrigin.Y + e.DeltaManipulation.Translation.Y);
             var previousManipulationPosition = new Point(e.ManipulationOrigin.X, e.ManipulationOrigin.Y);
 
-            if (e.DeltaManipulation.Scale.X != 1.0) //No scale
+            if (e.DeltaManipulation.Scale.X != 1.0 && !ZoomLocked) //No scale
             {
                 view.Center = view.ViewToWorld(currentManipulationPosition.X, currentManipulationPosition.Y);
                 view.Resolution = view.Resolution / e.DeltaManipulation.Scale.X;
