@@ -35,8 +35,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpMap", "SharpMap\SharpM
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpMap.Providers.Tests", "SharpMap.Providers.Tests\SharpMap.Providers.Tests.csproj", "{1576D346-9FEA-47FB-B917-A4B34682684A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KmlLayer", "..\..\phoenix\trunk\KmlLayer\KmlLayer.csproj", "{910E7577-EF83-411C-9E12-9EBCEC4A6DAE}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Addins debug|Any CPU = Addins debug|Any CPU
@@ -128,12 +126,6 @@ Global
 		{1576D346-9FEA-47FB-B917-A4B34682684A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1576D346-9FEA-47FB-B917-A4B34682684A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1576D346-9FEA-47FB-B917-A4B34682684A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{910E7577-EF83-411C-9E12-9EBCEC4A6DAE}.Addins debug|Any CPU.ActiveCfg = Release|Any CPU
-		{910E7577-EF83-411C-9E12-9EBCEC4A6DAE}.Addins debug|Any CPU.Build.0 = Release|Any CPU
-		{910E7577-EF83-411C-9E12-9EBCEC4A6DAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{910E7577-EF83-411C-9E12-9EBCEC4A6DAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{910E7577-EF83-411C-9E12-9EBCEC4A6DAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{910E7577-EF83-411C-9E12-9EBCEC4A6DAE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
