@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpMapProvider-SL", "SharpMapProvider\SharpMapProvider-SL.csproj", "{737E586A-24F7-4948-8587-AEC00EC88075}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Windows-SL", "Mapsui.Windows\Mapsui.Windows-SL.csproj", "{DC9F828B-9873-4C4C-949C-70358EE06AA4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Silverlight", "Mapsui.Silverlight\Mapsui.Silverlight.csproj", "{066B11A1-B05D-4DD4-B372-1CCEDF929962}"
@@ -21,10 +19,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{737E586A-24F7-4948-8587-AEC00EC88075}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{737E586A-24F7-4948-8587-AEC00EC88075}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{737E586A-24F7-4948-8587-AEC00EC88075}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{737E586A-24F7-4948-8587-AEC00EC88075}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DC9F828B-9873-4C4C-949C-70358EE06AA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DC9F828B-9873-4C4C-949C-70358EE06AA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC9F828B-9873-4C4C-949C-70358EE06AA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
