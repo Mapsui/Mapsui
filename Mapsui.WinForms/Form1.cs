@@ -17,7 +17,6 @@ namespace Mapsui.WinForms
 
         void Form1_Load(object sender, EventArgs e)
         {
-            //mapControl1.Map.Layers.Add(ShapefileSample.CreateCountryLayer());
             mapControl1.Map = ShapefileSample.CreateMap();
         }
 
