@@ -50,9 +50,7 @@
   <ItemGroup>
     <Compile Include="Extensions.cs" />
     <Compile Include="FpsCounter.cs" />
-    <Compile Include="MapControl.xaml.cs">
-      <DependentUpon>MapControl.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="MapControl.cs" />
     <Compile Include="MapTransformHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -65,12 +63,6 @@
       <Project>{64D25982-92AF-48AF-9459-EA60B1ED6276}</Project>
       <Name>SilverlightRendering-WP</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Page Include="MapControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.CSharp.targets" />
