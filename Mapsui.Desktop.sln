@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpMapProvider", "SharpMapProvider\SharpMapProvider.csproj", "{55A31E36-4EA3-42EE-BCAC-2735AA082457}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Forms", "Mapsui.Forms\Mapsui.Forms.csproj", "{4E40E824-96B8-4F98-A0F8-2DBDF9D3DCE5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.WinForms", "Mapsui.WinForms\Mapsui.WinForms.csproj", "{DB2276E9-C6BB-4335-9D23-AC26A74E0F08}"
@@ -42,12 +40,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{55A31E36-4EA3-42EE-BCAC-2735AA082457}.Addins debug|Any CPU.ActiveCfg = Release|Any CPU
-		{55A31E36-4EA3-42EE-BCAC-2735AA082457}.Addins debug|Any CPU.Build.0 = Release|Any CPU
-		{55A31E36-4EA3-42EE-BCAC-2735AA082457}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{55A31E36-4EA3-42EE-BCAC-2735AA082457}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{55A31E36-4EA3-42EE-BCAC-2735AA082457}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{55A31E36-4EA3-42EE-BCAC-2735AA082457}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4E40E824-96B8-4F98-A0F8-2DBDF9D3DCE5}.Addins debug|Any CPU.ActiveCfg = Release|Any CPU
 		{4E40E824-96B8-4F98-A0F8-2DBDF9D3DCE5}.Addins debug|Any CPU.Build.0 = Release|Any CPU
 		{4E40E824-96B8-4F98-A0F8-2DBDF9D3DCE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU

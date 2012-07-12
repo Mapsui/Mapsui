@@ -76,10 +76,6 @@
       <Project>{3E99181D-B701-493F-AFAE-109D023935F7}</Project>
       <Name>SharpMap.Providers</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SharpMapProvider\SharpMapProvider.csproj">
-      <Project>{55A31E36-4EA3-42EE-BCAC-2735AA082457}</Project>
-      <Name>SharpMapProvider</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SharpMap\SharpMap.csproj">
       <Project>{65A23C7B-E21D-40D7-A8AF-2E72A01E9A5B}</Project>
       <Name>SharpMap</Name>

@@ -1,28 +1,16 @@
 ﻿using System;
 using System.IO;
-using BruTile;
-using BruTile.PreDefined;
 using SharpMap;
 using SharpMap.Data.Providers;
 using SharpMap.Layers;
 using SharpMap.Rendering;
 using SharpMap.Styles.Thematics;
 using SharpMap.Styles;
-using SharpMapProvider;
 
 namespace DemoConfig
 {
-    public class ShapefileSample : ITileSource
+    public class ShapefileSample 
     {
-        public ITileProvider Provider { get; private set; }
-        public ITileSchema Schema { get; private set; }
-
-        public ShapefileSample()
-        {
-            Provider = new SharpMapTileProvider(CreateMap());
-            Schema = new SphericalMercatorInvertedWorldSchema();
-        }
-
         public static Layer CreateCountryLayer()
         {
             var countries = new Layer("Countries");
