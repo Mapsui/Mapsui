@@ -686,7 +686,8 @@ namespace Mapsui.Windows
         public void ZoomToFullEnvelope()
         {
             if (Map.Envelope == null) return;
-            view.Resolution = Width / Map.Envelope.Width;
+            if (ActualWidth.IsNanOrZero()) return;
+            view.Resolution =  Map.Envelope.Width / ActualWidth;
             view.Center = Map.Envelope.GetCentroid();
         }
 
