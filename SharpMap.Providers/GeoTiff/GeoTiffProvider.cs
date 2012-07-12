@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Windows.Media.Imaging;
 using SharpMap.Geometries;
 using SharpMap.Styles;
 
@@ -51,12 +50,12 @@ namespace SharpMap.Providers.GeoTiff
                 throw new ArgumentException(string.Format("World file expected at {0}", worldPath));
             }
 
-            tiffProperties = LoadTiff(tiffPath);
             worldProperties = LoadWorld(worldPath);
 
-            extent = CalculateExtent(tiffProperties, worldProperties);
             data = ReadImageAsStream(tiffPath);
-
+            tiffProperties = ReadTiff(data);
+            extent = CalculateExtent(tiffProperties, worldProperties);
+            
             feature = new Feature {Geometry = new Raster(data, extent)};
             feature.Styles.Add(new VectorStyle());
         }
@@ -72,26 +71,34 @@ namespace SharpMap.Providers.GeoTiff
 
         private static MemoryStream ReadImageAsStream(string tiffPath)
         {
-            Image img = Image.FromFile(tiffPath);
-            var imageStream = new MemoryStream();
-            img.Save(imageStream, ImageFormat.Bmp);
-            return imageStream;
+            using (FileStream fileStream = File.OpenRead(tiffPath))
+            {
+                var memoryStream = new MemoryStream();
+                memoryStream.SetLength(fileStream.Length);
+                fileStream.Read(memoryStream.GetBuffer(), 0, (int)fileStream.Length);
+                if (memoryStream.Length > 100000000)
+                {
+                    throw new Exception("Image is too large");
+                }
+                return memoryStream;
+            }
         }
 
-        private static TiffProperties LoadTiff(string location)
+        private static TiffProperties ReadTiff(MemoryStream stream)
         {
             TiffProperties tiffFileProperties;
 
-            using (var stream = new FileStream(location, FileMode.Open, FileAccess.Read))
-            {
-                using (Image tif = Image.FromStream(stream, false, false))
-                {
-                    tiffFileProperties.Width = tif.PhysicalDimension.Width;
-                    tiffFileProperties.Height = tif.PhysicalDimension.Height;
-                    tiffFileProperties.HResolution = tif.HorizontalResolution;
-                    tiffFileProperties.VResolution = tif.VerticalResolution;
-                }
-            }
+            var bitmapImage = new BitmapImage();
+            
+            bitmapImage.BeginInit();
+            bitmapImage.StreamSource = stream;
+            bitmapImage.EndInit();
+
+            tiffFileProperties.Width = bitmapImage.PixelWidth;
+            tiffFileProperties.Height = bitmapImage.PixelHeight;
+            tiffFileProperties.HResolution = bitmapImage.DpiX;
+            tiffFileProperties.VResolution = bitmapImage.DpiY;
+
             return tiffFileProperties;
         }
 
@@ -133,7 +140,6 @@ namespace SharpMap.Providers.GeoTiff
                 return new[] { feature };
             }
             return new Features();
-
         }
 
         public BoundingBox GetExtents()
