@@ -73,8 +73,8 @@ namespace SharpMap.Providers.GeoTiff
             {
                 throw new ExternalException(e.Message, e.InnerException);
             }
-            
-            feature = new Feature {Geometry = new Raster(data, extent)};
+
+            feature = new Feature { Geometry = new Raster(data, extent) };
             feature.Styles.Add(new VectorStyle());
         }
 
@@ -90,7 +90,7 @@ namespace SharpMap.Providers.GeoTiff
         private static MemoryStream ReadImageAsStream(string tiffPath, List<Color> noDataColors)
         {
             var img = Image.FromFile(tiffPath);
-            {
+            var imageStream = new MemoryStream();
 
             if (noDataColors != null)
             {
@@ -98,25 +98,24 @@ namespace SharpMap.Providers.GeoTiff
             }
 
             img.Save(imageStream, ImageFormat.Png);
-            
-            }
+
+            return imageStream;
         }
 
-        private static TiffProperties ReadTiff(MemoryStream stream)
+        private static TiffProperties LoadTiff(string location)
         {
             TiffProperties tiffFileProperties;
 
-            var bitmapImage = new BitmapImage();
-            
+            using (var stream = new FileStream(location, FileMode.Open, FileAccess.Read))
+            {
                 using (var tif = Image.FromStream(stream, false, false))
-            bitmapImage.StreamSource = stream;
-            bitmapImage.EndInit();
-
-            tiffFileProperties.Width = bitmapImage.PixelWidth;
-            tiffFileProperties.Height = bitmapImage.PixelHeight;
-            tiffFileProperties.HResolution = bitmapImage.DpiX;
-            tiffFileProperties.VResolution = bitmapImage.DpiY;
-
+                {
+                    tiffFileProperties.Width = tif.PhysicalDimension.Width;
+                    tiffFileProperties.Height = tif.PhysicalDimension.Height;
+                    tiffFileProperties.HResolution = tif.HorizontalResolution;
+                    tiffFileProperties.VResolution = tif.VerticalResolution;
+                }
+            }
             return tiffFileProperties;
         }
 
@@ -188,7 +187,7 @@ namespace SharpMap.Providers.GeoTiff
             Marshal.Copy(argbValues, 0, ptr, numBytes);
             bmp.UnlockBits(bmpData);
 
-            return bmp; 
+            return bmp;
         }
 
         private static WorldProperties LoadWorld(string location)
@@ -247,10 +246,11 @@ namespace SharpMap.Providers.GeoTiff
 
         private static string GetPathWithoutExtension(string path)
         {
-            return 
+            return
                 Path.GetDirectoryName(path) +
                 Path.DirectorySeparatorChar +
                 Path.GetFileNameWithoutExtension(path);
         }
     }
 }
+
