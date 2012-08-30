@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Windows.Media.Imaging;
+using System.Runtime.InteropServices;
 using SharpMap.Geometries;
 using SharpMap.Styles;
+using Bitmap = System.Drawing.Bitmap;
+using Color = System.Drawing.Color;
 
 namespace SharpMap.Providers.GeoTiff
 {
@@ -37,7 +41,7 @@ namespace SharpMap.Providers.GeoTiff
         private readonly BoundingBox extent;
         private readonly MemoryStream data;
 
-        public GeoTiffProvider(string tiffPath)
+        public GeoTiffProvider(string tiffPath, List<Color> noDataColors = null)
         {
             if (!File.Exists(tiffPath))
             {
@@ -50,11 +54,25 @@ namespace SharpMap.Providers.GeoTiff
                 throw new ArgumentException(string.Format("World file expected at {0}", worldPath));
             }
 
+            tiffProperties = LoadTiff(tiffPath);
             worldProperties = LoadWorld(worldPath);
-
-            data = ReadImageAsStream(tiffPath);
-            tiffProperties = ReadTiff(data);
             extent = CalculateExtent(tiffProperties, worldProperties);
+
+            try
+            {
+                try
+                {
+                    data = ReadImageAsStream(tiffPath, noDataColors);
+                }
+                catch (OutOfMemoryException e)
+                {
+                    throw new OutOfMemoryException("Out of memory", e.InnerException);
+                }
+            }
+            catch (ExternalException e)
+            {
+                throw new ExternalException(e.Message, e.InnerException);
+            }
             
             feature = new Feature {Geometry = new Raster(data, extent)};
             feature.Styles.Add(new VectorStyle());
@@ -69,18 +87,18 @@ namespace SharpMap.Providers.GeoTiff
             return new BoundingBox(minX, minY, maxX, maxY);
         }
 
-        private static MemoryStream ReadImageAsStream(string tiffPath)
+        private static MemoryStream ReadImageAsStream(string tiffPath, List<Color> noDataColors)
         {
-            using (FileStream fileStream = File.OpenRead(tiffPath))
+            var img = Image.FromFile(tiffPath);
             {
-                var memoryStream = new MemoryStream();
-                memoryStream.SetLength(fileStream.Length);
-                fileStream.Read(memoryStream.GetBuffer(), 0, (int)fileStream.Length);
-                if (memoryStream.Length > 100000000)
-                {
-                    throw new Exception("Image is too large");
-                }
-                return memoryStream;
+
+            if (noDataColors != null)
+            {
+                img = ApplyColorFilter((Bitmap)img, noDataColors);
+            }
+
+            img.Save(imageStream, ImageFormat.Png);
+            
             }
         }
 
@@ -90,7 +108,7 @@ namespace SharpMap.Providers.GeoTiff
 
             var bitmapImage = new BitmapImage();
             
-            bitmapImage.BeginInit();
+                using (var tif = Image.FromStream(stream, false, false))
             bitmapImage.StreamSource = stream;
             bitmapImage.EndInit();
 
@@ -100,6 +118,77 @@ namespace SharpMap.Providers.GeoTiff
             tiffFileProperties.VResolution = bitmapImage.DpiY;
 
             return tiffFileProperties;
+        }
+
+        private static Bitmap ApplyColorFilter(Bitmap bitmapImage, ICollection<Color> colors)
+        {
+            return bitmapImage.PixelFormat == PixelFormat.Indexed ? ApplyAlphaOnIndexedBitmap(bitmapImage, colors) : ApplyAlphaOnNonIndexedBitmap(bitmapImage, colors);
+        }
+
+        private static Bitmap ApplyAlphaOnIndexedBitmap(Bitmap bitmapImage, ICollection<Color> colors)
+        {
+            var newPalette = bitmapImage.Palette;
+            for (var index = 0; index < bitmapImage.Palette.Entries.Length; ++index)
+            {
+                var entry = bitmapImage.Palette.Entries[index];
+                if (!colors.Contains(entry)) continue;
+
+                newPalette.Entries[index] = Color.FromArgb(0, entry.R, entry.G, entry.B);
+            }
+            bitmapImage.Palette = newPalette;
+
+            return bitmapImage;
+        }
+
+        private static Bitmap ApplyAlphaOnNonIndexedBitmap(Bitmap bitmapImage, IEnumerable<Color> colors)
+        {
+            const int bytesPerPixel = 4;
+
+            var bmp = (Bitmap)bitmapImage.Clone();
+            var bmpData = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.ReadWrite, PixelFormat.Format32bppArgb);
+            var numBytes = bmp.Width * bmp.Height * bytesPerPixel;
+            var argbValues = new byte[numBytes];
+            var ptr = bmpData.Scan0;
+
+            Marshal.Copy(ptr, argbValues, 0, numBytes);
+
+            var filterValues = new List<byte[]>();
+            foreach (var color in colors)
+            {
+                var bt = new byte[4];
+                bt[0] = color.A;
+                bt[1] = color.R;
+                bt[2] = color.G;
+                bt[3] = color.B;
+                filterValues.Add(bt);
+            }
+
+            for (var counter = 0; counter < argbValues.Length; counter += bytesPerPixel)
+            {
+                // If 100% transparent, skip pixel
+                if (argbValues[counter + bytesPerPixel - 1] == 0)
+                    continue;
+
+                var b = argbValues[counter];
+                var g = argbValues[counter + 1];
+                var r = argbValues[counter + 2];
+                var a = argbValues[counter + 3];
+
+                var found = false;
+
+                foreach (var filterValue in filterValues.Where(filterValue => filterValue[0] == a && filterValue[1] == r && filterValue[2] == g && filterValue[3] == b))
+                {
+                    found = true;
+                }
+
+                if (found)
+                    argbValues[counter + 3] = 0;
+            }
+
+            Marshal.Copy(argbValues, 0, ptr, numBytes);
+            bmp.UnlockBits(bmpData);
+
+            return bmp; 
         }
 
         private static WorldProperties LoadWorld(string location)
@@ -140,6 +229,7 @@ namespace SharpMap.Providers.GeoTiff
                 return new[] { feature };
             }
             return new Features();
+
         }
 
         public BoundingBox GetExtents()
