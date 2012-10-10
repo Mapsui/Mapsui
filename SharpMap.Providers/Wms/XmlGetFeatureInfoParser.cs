@@ -57,6 +57,14 @@ namespace SharpMap.Providers.Wms
                 }
             }
 
+            if(featureMember.HasAttributes)
+            {
+                foreach (var attribute in featureMember.Attributes())
+                {
+                     featureInfo.Add(attribute.Name.ToString(), attribute.Value);
+                }                
+            }
+
             return featureInfo;
         }
     }
