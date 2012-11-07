@@ -188,7 +188,7 @@ namespace Mapsui.Windows
             renderer = new MapRenderer(renderCanvas);
 #if !SILVERLIGHT
             Dispatcher.ShutdownStarted += DispatcherShutdownStarted;
-            canvas.IsManipulationEnabled = true;
+            canvas.IsManipulationEnabled = true;           
             canvas.ManipulationDelta += OnManipulationDelta;
             canvas.ManipulationCompleted += OnManipulationCompleted;
             canvas.ManipulationInertiaStarting += OnManipulationInertiaStarting;
@@ -700,36 +700,28 @@ namespace Mapsui.Windows
             e.TranslationBehavior.DesiredDeceleration = 25 * 96.0 / (1000.0 * 1000.0);
         }
 
-        private int manipulationDeltaCount;
-
         private void OnManipulationDelta(object sender, ManipulationDeltaEventArgs e)
         {
-            var currentManipulationPosition = new Point(e.ManipulationOrigin.X + e.DeltaManipulation.Translation.X, e.ManipulationOrigin.Y + e.DeltaManipulation.Translation.Y);
-            var previousManipulationPosition = new Point(e.ManipulationOrigin.X, e.ManipulationOrigin.Y);
+            var previous = view.ViewToWorld(e.ManipulationOrigin.X, e.ManipulationOrigin.Y);
+            var current = view.ViewToWorld(e.ManipulationOrigin.X + e.DeltaManipulation.Translation.X, e.ManipulationOrigin.Y + e.DeltaManipulation.Translation.Y);
+            var diffX = previous.X - current.X;
+            var diffY = previous.Y - current.Y;
 
-            if (e.DeltaManipulation.Scale.X != 1.0 && !ZoomLocked) //No scale
+            if (e.DeltaManipulation.Scale.X != 1d && !ZoomLocked) //No scale or zoom is locked
             {
-                view.Center = view.ViewToWorld(currentManipulationPosition.X, currentManipulationPosition.Y);
+                view.Center = current;
                 view.Resolution = view.Resolution / e.DeltaManipulation.Scale.X;
-                view.Center = view.ViewToWorld(view.Width - currentManipulationPosition.X, view.Height - currentManipulationPosition.Y);
+                view.Center = view.ViewToWorld(view.Width - (e.ManipulationOrigin.X + e.DeltaManipulation.Translation.X), view.Height - (e.ManipulationOrigin.Y + e.DeltaManipulation.Translation.Y));
             }
 
-            MapTransformHelper.Pan(view, currentManipulationPosition, previousManipulationPosition);
+            view.Center = new SharpMap.Geometries.Point(view.CenterX + diffX, view.CenterY + diffY);
 
-            manipulationDeltaCount++;
-
-            //Currently the manipulation data generates too much updates for the vectorRenderer to be smooth
-            //This is a temporarily fix until the rendering method is improved
-            if (manipulationDeltaCount % 2 != 0)
-                return;
-
-            OnViewChanged(false, true);
-            RefreshGraphics();
+            invalid = true;
+            OnViewChanged(false, true);            
         }
-
+       
         private void OnManipulationCompleted(object sender, ManipulationCompletedEventArgs e)
         {
-            manipulationDeltaCount = 0;
             Refresh();
         }
 

@@ -74,9 +74,13 @@
     <Compile Include="ArcGis\ArcGisFeatureInfo.cs" />
     <Compile Include="ArcGis\ArcGisIdentify.cs" />
     <Compile Include="ArcGis\ArcGisLayer.cs" />
+    <Compile Include="ArcGis\ArcGisLegendResponse.cs" />
+    <Compile Include="ArcGis\ArcGisLegendResponseLayer.cs" />
+    <Compile Include="ArcGis\ArcGisLegendResponseLegend.cs" />
     <Compile Include="ArcGis\Capabilities.cs" />
     <Compile Include="ArcGis\CapabilitiesHelper.cs" />
     <Compile Include="ArcGis\Extent.cs" />
+    <Compile Include="ArcGis\ArcGisLegend.cs" />
     <Compile Include="ArcGis\SpatialReference.cs" />
     <Compile Include="ArcGis\Table.cs" />
     <Compile Include="ArcGis\TileInfo.cs" />
