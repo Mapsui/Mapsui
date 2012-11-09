@@ -42,6 +42,13 @@ namespace SharpMap.Layers
         private ITileSource tileSource;
         private readonly string urlToTileMapXml;
         private readonly bool overrideTmsUrlWithUrlToTileMapXml;
+        private int maxRetries;
+
+        public int MaxRetries
+        {
+            set { maxRetries = value; }
+        } 
+
 
 #if PocketPC
         readonly MemoryCache<Feature> memoryCache = new MemoryCache<Feature>(40, 60);
@@ -86,7 +93,7 @@ namespace SharpMap.Layers
         protected void SetTileSource(ITileSource source)
         {
             tileSource = source;
-            tileFetcher = new TileFetcher(source, memoryCache);
+            tileFetcher = new TileFetcher(source, memoryCache, maxRetries);
             tileFetcher.DataChanged += TileFetcherDataChanged;
             OnPropertyChanged("Envelope");
         }

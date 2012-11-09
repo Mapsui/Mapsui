@@ -41,7 +41,7 @@ namespace SharpMap.Fetcher
         private int threadCount;
         private readonly AutoResetEvent waitHandle = new AutoResetEvent(true);
         private readonly IFetchStrategy strategy = new FetchStrategy();
-        private const int MaxRetries = 2;
+        private int maxRetries = 2;
         private Thread loopThread;
         private volatile bool isThreadRunning;
         private volatile bool isViewChanged;
@@ -56,13 +56,15 @@ namespace SharpMap.Fetcher
 
         #region Constructors Destructors
 
-        public TileFetcher(ITileSource tileSource, MemoryCache<Feature> memoryCache)
+        public TileFetcher(ITileSource tileSource, MemoryCache<Feature> memoryCache, int maxRetries = 2)
         {
             if (tileSource == null) throw new ArgumentException("TileProvider can not be null");
             this.tileSource = tileSource;
 
             if (memoryCache == null) throw new ArgumentException("MemoryCache can not be null");
             this.memoryCache = memoryCache;
+
+            this.maxRetries = maxRetries;
         }
 
         #endregion
@@ -118,7 +120,7 @@ namespace SharpMap.Fetcher
                         isViewChanged = false;
                     }
 
-                    missingTiles = GetTilesMissing(missingTiles, memoryCache, retries);
+                    missingTiles = GetTilesMissing(missingTiles, memoryCache, retries, maxRetries);
 
                     FetchTiles();
 
@@ -133,13 +135,13 @@ namespace SharpMap.Fetcher
             }
         }
 
-        private static IList<TileInfo> GetTilesMissing(IEnumerable<TileInfo> infosIn, MemoryCache<Feature> memoryCache, IDictionary<TileIndex, int> retries)
+        private static IList<TileInfo> GetTilesMissing(IEnumerable<TileInfo> infosIn, MemoryCache<Feature> memoryCache, IDictionary<TileIndex, int> retries, int maxRetries)
         {
             IList<TileInfo> tilesOut = new List<TileInfo>();
             foreach (TileInfo info in infosIn)
             {
                 if ((memoryCache.Find(info.Index) == null) &&
-                    (!retries.Keys.Contains(info.Index) || retries[info.Index] < MaxRetries))
+                    (!retries.Keys.Contains(info.Index) || retries[info.Index] < maxRetries))
 
                     tilesOut.Add(info);
             }
@@ -159,7 +161,7 @@ namespace SharpMap.Fetcher
         {
             //first a number of checks
             if (tilesInProgress.Contains(info.Index)) return;
-            if (retries.Keys.Contains(info.Index) && retries[info.Index] >= MaxRetries) return;
+            if (retries.Keys.Contains(info.Index) && retries[info.Index] >= maxRetries) return;
             if (memoryCache.Find(info.Index) != null) return;
 
             //now we can go for the request.
