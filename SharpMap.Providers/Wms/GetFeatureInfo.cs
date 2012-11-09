@@ -95,7 +95,7 @@ namespace SharpMap.Providers.Wms
                                            "{11}={12}&" +
                                            "{13}={14}&" +
                                            "FEATURE_COUNT=200&" +
-                                           "FORMAT=image/png",
+                                           "FORMAT=image/png&STYLES=",
 
                 baseUrl, baseUrl.Contains("?") ? "&" : "?", //1 = Prefix
                 wmsVersion,

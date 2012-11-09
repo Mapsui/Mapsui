@@ -77,37 +77,45 @@ namespace SilverlightRendering
 
         private static Canvas RenderVectorLayer(IView view, ILayer layer)
         {
-            var canvas = new Canvas();
-            canvas.Opacity = layer.Opacity;
-
-            var features = layer.GetFeaturesInView(view.Extent, view.Resolution).ToList();
-
-            foreach (var layerStyle in layer.Styles)
+            //ToDo: find solution for try catch. Sometimes this method will throw an exception
+            //when clearing and adding features to a layer while rendering
+            try
             {
-                var style = layerStyle; // This is the default that could be overridden by an IThemeStyle
+                var canvas = new Canvas();
+                canvas.Opacity = layer.Opacity;
+                var features = layer.GetFeaturesInView(view.Extent, view.Resolution).ToList();
 
-                foreach (var feature in features)
+                foreach (var layerStyle in layer.Styles)
                 {
-                    if (layerStyle is IThemeStyle) style = (layerStyle as IThemeStyle).GetStyle(feature);
-                    if ((style == null) || (style.Enabled == false) || (style.MinVisible > view.Resolution) || (style.MaxVisible < view.Resolution)) continue;
+                    var style = layerStyle; // This is the default that could be overridden by an IThemeStyle
 
-                    RenderFeature(canvas, view, style, feature);
-                }
-            }
-
-            foreach (var feature in features)
-            {
-                var styles = feature.Styles;
-                foreach (var style in styles)
-                {
-                    if (feature.Styles != null && style.Enabled)
+                    foreach (var feature in features)
                     {
+                        if (layerStyle is IThemeStyle) style = (layerStyle as IThemeStyle).GetStyle(feature);
+                        if ((style == null) || (style.Enabled == false) || (style.MinVisible > view.Resolution) || (style.MaxVisible < view.Resolution)) continue;
+
                         RenderFeature(canvas, view, style, feature);
                     }
                 }
-            }
 
-            return canvas;
+                foreach (var feature in features)
+                {
+                    var styles = feature.Styles;
+                    foreach (var style in styles)
+                    {
+                        if (feature.Styles != null && style.Enabled)
+                        {
+                            RenderFeature(canvas, view, style, feature);
+                        }
+                    }
+                }
+
+                return canvas;
+            }
+            catch (Exception)
+            {
+                return new Canvas();   
+            }                    
         }
 
         private static void RenderFeature(Canvas canvas, IView view, IStyle style, SharpMap.Providers.IFeature feature)
