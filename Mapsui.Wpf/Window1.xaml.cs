@@ -4,8 +4,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using BruTile;
-using BruTile.Demo;
-using BruTile.PreDefined;
 using BruTile.Web;
 using DemoConfig;
 using SharpMap.Layers;
@@ -51,7 +49,7 @@ namespace Mapsui.Wpf
             }
             return result;
         }
-        
+
         private void MapErrorMessageChanged(object sender, EventArgs e)
         {
             Error.Text = mapControl.ErrorMessage;
@@ -61,23 +59,7 @@ namespace Mapsui.Wpf
         private void OsmClick(object sender, RoutedEventArgs e)
         {
             mapControl.Map.Layers.Clear();
-            var url = @"http://acg-prd:9092/geowebcache/service/wmts?LAYERS=layer_7C7D1BB2_179D_BE63_2CAF_3DDDC2347DF2&" +
-                      "SERVICE=WMTS&" +
-                      "REQUEST=GetTile&" +
-                      "VERSION=1.0.0&" +
-                      "LAYER=layer_7C7D1BB2_179D_BE63_2CAF_3DDDC2347DF2&" +
-                      "STYLE=_null&" +
-                      "TILEMATRIXSET=EPSG%3A28992&" +
-                      "TILEMATRIX=EPSG%3A28992%3A{0}&" +
-                      "TILEROW={2}&" +
-                      "TILECOL={1}&" +
-                      "FORMAT=image%2Fpng8";
-            
-            var schema = new WkstNederlandSchema();
-            schema.Axis = AxisDirection.InvertedY;
-            schema.OriginY = schema.Extent.MaxY;
-            
-            mapControl.Map.Layers.Add(new TileLayer(new TileSource(new WebTileProvider(new BasicRequest(url)), schema)) { LayerName = "OSM" });
+            mapControl.Map.Layers.Add(new TileLayer(new OsmTileSource()) { LayerName = "OSM" });
             layerList.Initialize(mapControl.Map.Layers);
             mapControl.Refresh();
         }
@@ -144,14 +126,14 @@ namespace Mapsui.Wpf
         {
             var osmLayer = new TileLayer(new OsmTileSource()) { LayerName = "OSM" };
             var wmsLayer = new TileLayer(new GeodanWorldWmsTileSource()) { LayerName = "Geodan WMS" };
-            var groupLayer = new GroupTileLayer(new [] { osmLayer, wmsLayer });
+            var groupLayer = new GroupTileLayer(new[] { osmLayer, wmsLayer });
             return groupLayer;
         }
 
         private void PointSymbolsClick(object sender, RoutedEventArgs e)
         {
             mapControl.Map.Layers.Clear();
-            mapControl.Map.Layers.Add(new TileLayer(new OsmTileSource()) {LayerName = "OSM"});
+            mapControl.Map.Layers.Add(new TileLayer(new OsmTileSource()) { LayerName = "OSM" });
             mapControl.Map.Layers.Add(PointLayerSample.Create());
             mapControl.Map.Layers.Add(PointLayerWithWorldUnitsForSymbolsSample.Create());
             layerList.Initialize(mapControl.Map.Layers);
