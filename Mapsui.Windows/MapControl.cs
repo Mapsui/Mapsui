@@ -102,6 +102,7 @@ namespace Mapsui.Windows
                 {
                     map.DataChanged += MapDataChanged;
                     map.PropertyChanged += MapPropertyChanged;
+                    map.ViewChanged(true, view.Extent, view.Resolution);
                 }
                 OnViewChanged(true);
                 RefreshGraphics();
@@ -206,9 +207,6 @@ namespace Mapsui.Windows
         {
             if (map != null)
             {
-                //call down
-                map.ViewChanged(changeEnd, view.Extent, view.Resolution);
-                //call up
                 if (ViewChanged != null)
                 {
                     ViewChanged(this, new ViewChangedEventArgs { View = view, UserAction = userAction });
@@ -296,6 +294,7 @@ namespace Mapsui.Windows
               view.Width - mousePosition.X,
               view.Height - mousePosition.Y);
 
+            map.ViewChanged(true, view.Extent, view.Resolution);
             OnViewChanged(true);
             RefreshGraphics();
         }
@@ -352,6 +351,7 @@ namespace Mapsui.Windows
             //some cheating for personal gain
             view.CenterX += 0.000000001;
             view.CenterY += 0.000000001;
+            map.ViewChanged(false, view.Extent, view.Resolution);
             OnViewChanged(false, true);
 
             StartZoomAnimation(view.Resolution, toResolution);
@@ -376,6 +376,7 @@ namespace Mapsui.Windows
             if (!viewInitialized) InitializeView();
             Clip = new RectangleGeometry {Rect = new Rect(0, 0, ActualWidth, ActualWidth)};
             UpdateSize();
+            map.ViewChanged(true, view.Extent, view.Resolution);
             OnViewChanged(true);
             Refresh();
         }
@@ -453,6 +454,7 @@ namespace Mapsui.Windows
                 HandleFeatureInfo(e);
             }
 
+            map.ViewChanged(true, view.Extent, view.Resolution);
             OnViewChanged(true, true);
             mouseDown = false;
 
@@ -504,6 +506,7 @@ namespace Mapsui.Windows
                 currentMousePosition = e.GetPosition(this); //Needed for both MouseMove and MouseWheel event
                 MapTransformHelper.Pan(view, currentMousePosition, previousMousePosition);
                 previousMousePosition = currentMousePosition;
+                map.ViewChanged(false, view.Extent, view.Resolution);
                 OnViewChanged(false, true);
                 RefreshGraphics();
             }
@@ -624,6 +627,7 @@ namespace Mapsui.Windows
             view.Resolution = resolution;
             toResolution = resolution;
 
+            map.ViewChanged(true, view.Extent, view.Resolution);
             OnViewChanged(true, true);
             RefreshGraphics();
             ClearBBoxDrawing();
@@ -717,6 +721,7 @@ namespace Mapsui.Windows
             view.Center = new SharpMap.Geometries.Point(view.CenterX + diffX, view.CenterY + diffY);
 
             invalid = true;
+            // not calling map.ViewChanged(false, view.Extent, view.Resolution); for smoother panning/zooming
             OnViewChanged(false, true);            
         }
        
