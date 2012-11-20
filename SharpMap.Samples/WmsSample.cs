@@ -1,4 +1,5 @@
-﻿using SharpMap.Layers;
+﻿using System;
+using SharpMap.Layers;
 using SharpMap.Providers.Wms;
 using SharpMap.Styles;
 
@@ -9,11 +10,12 @@ namespace SharpMap.Samples
         public static ILayer Create()
         {
             var provider = CreateWmsProvider();
-            var layer = new ImageLayer("WmsLayer");
-            layer.Styles.Add(new VectorStyle()); // To get it to render I have to add some default style which is not used by WMS. This is ugly.
-            layer.DataSource = provider;
-            layer.DataSource.SRID = 900913;
-            return layer;
+            throw new NotImplementedException();
+            //var layer = new ImageLayer("WmsLayer");
+            //layer.Styles.Add(new VectorStyle()); // To get it to render I have to add some default style which is not used by WMS. This is ugly.
+            //layer.DataSource = provider;
+            //layer.DataSource.SRID = 900913;
+            //return layer;
         }
 
         private static WmsProvider CreateWmsProvider()

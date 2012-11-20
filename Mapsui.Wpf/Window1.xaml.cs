@@ -75,9 +75,10 @@ namespace Mapsui.Wpf
         private void GeodanTmsClick(object sender, RoutedEventArgs e)
         {
             mapControl.Map.Layers.Clear();
-            mapControl.Map.Layers.Add(new TileLayer("http://geoserver.nl/tiles/tilecache.aspx/1.0.0/worlddark_GM", true));
-            layerList.Initialize(mapControl.Map.Layers);
-            mapControl.Refresh();
+            throw new NotImplementedException();
+            //mapControl.Map.Layers.Add(new TileLayer("http://geoserver.nl/tiles/tilecache.aspx/1.0.0/worlddark_GM", true));
+            //layerList.Initialize(mapControl.Map.Layers);
+            //mapControl.Refresh();
 
         }
 
@@ -126,8 +127,9 @@ namespace Mapsui.Wpf
         {
             var osmLayer = new TileLayer(new OsmTileSource()) { LayerName = "OSM" };
             var wmsLayer = new TileLayer(new GeodanWorldWmsTileSource()) { LayerName = "Geodan WMS" };
-            var groupLayer = new GroupTileLayer(new[] { osmLayer, wmsLayer });
-            return groupLayer;
+            throw new NotImplementedException();
+            //var groupLayer = new GroupTileLayer(new[] { osmLayer, wmsLayer });
+            //return groupLayer;
         }
 
         private void PointSymbolsClick(object sender, RoutedEventArgs e)

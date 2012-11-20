@@ -18,7 +18,7 @@ namespace SharpMap.Styles
                     return;
                 }
                 _data = CopyStreamToMemoryStream(value);
-                value.Close();
+                //!!!value.Close();
             }
         }
 

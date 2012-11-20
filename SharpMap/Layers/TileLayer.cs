@@ -16,7 +16,7 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
 using System.Net;
-using System.Windows;
+//using System.Windows;
 using BruTile;
 using BruTile.Cache;
 using BruTile.Web.TmsService;
@@ -56,33 +56,33 @@ namespace SharpMap.Layers
         readonly MemoryCache<Feature> memoryCache = new MemoryCache<Feature>(200, 300);
 #endif
 
-        private void LoadTmsLayer(object sender, OpenReadCompletedEventArgs e)
-        {
-            if (e.Cancelled)
-            {
-                MessageBox.Show("Request was cancelled");
-            }
-            else if (e.Error != null)
-            {
-                MessageBox.Show("An error occurred: " + e.Error.Message);
-            }
-            else
-            {
-                SetTileSource(overrideTmsUrlWithUrlToTileMapXml
-                                  ? TileMapParser.CreateTileSource(e.Result, urlToTileMapXml)
-                                  : TileMapParser.CreateTileSource(e.Result));
-                Styles.Add(new VectorStyle());
-            }
-        }
+        //private void LoadTmsLayer(object sender, OpenReadCompletedEventArgs e)
+        //{
+        //    if (e.Cancelled)
+        //    {
+        //        MessageBox.Show("Request was cancelled");
+        //    }
+        //    else if (e.Error != null)
+        //    {
+        //        MessageBox.Show("An error occurred: " + e.Error.Message);
+        //    }
+        //    else
+        //    {
+        //        SetTileSource(overrideTmsUrlWithUrlToTileMapXml
+        //                          ? TileMapParser.CreateTileSource(e.Result, urlToTileMapXml)
+        //                          : TileMapParser.CreateTileSource(e.Result));
+        //        Styles.Add(new VectorStyle());
+        //    }
+        //}
 
-        public TileLayer(string urlToTileMapXml, bool overrideTmsUrlWithUrlToTileMapXml = false)
-        {
-            this.urlToTileMapXml = urlToTileMapXml;
-            this.overrideTmsUrlWithUrlToTileMapXml = overrideTmsUrlWithUrlToTileMapXml;
-            var client = new WebClient();
-            client.OpenReadCompleted += LoadTmsLayer;
-            client.OpenReadAsync(new Uri(urlToTileMapXml));
-        }
+        //public TileLayer(string urlToTileMapXml, bool overrideTmsUrlWithUrlToTileMapXml = false)
+        //{
+        //    this.urlToTileMapXml = urlToTileMapXml;
+        //    this.overrideTmsUrlWithUrlToTileMapXml = overrideTmsUrlWithUrlToTileMapXml;
+        //    var client = new WebClient();
+        //    client.OpenReadCompleted += LoadTmsLayer;
+        //    client.OpenReadAsync(new Uri(urlToTileMapXml));
+        //}
         
         public TileLayer(ITileSource source)
             : this()

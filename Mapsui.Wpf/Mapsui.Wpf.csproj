@@ -212,9 +212,9 @@
       <Project>{036B6E0A-C34C-4EE6-A359-C467D7E9D1EF}</Project>
       <Name>SharpMap.Samples</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SharpMap\SharpMap.csproj">
-      <Project>{65A23C7B-E21D-40D7-A8AF-2E72A01E9A5B}</Project>
-      <Name>SharpMap</Name>
+    <ProjectReference Include="..\SharpMap\Mapsui.csproj">
+      <Project>{d74c052a-c07e-4b37-a898-134218aca5c9}</Project>
+      <Name>Mapsui</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -17,10 +17,10 @@
 
 using System;
 using System.Linq;
-using ProjNet.CoordinateSystems.Transformations;
+//!!!using ProjNet.CoordinateSystems.Transformations;
 using SharpMap.Fetcher;
 using SharpMap.Geometries;
-using SharpMap.Projection;
+//!!!using SharpMap.Projection;
 using SharpMap.Providers;
 using System.Threading;
 using System.Collections.Generic;
@@ -110,6 +110,7 @@ namespace SharpMap.Layers
 
         protected void StartNewFetch(BoundingBox extent, double resolution)
         {
+
             isFetching = true;
             needsUpdate = false;
 
@@ -117,7 +118,8 @@ namespace SharpMap.Layers
                 extent = Transformation.Transfrom(Transformation.MapSRID, SRID, extent);
 
             var fetcher = new FeatureFetcher(extent, resolution, DataSource, DataArrived);
-            new Thread(fetcher.FetchOnThread).Start();
+            throw new NotImplementedException();
+            //!!!new Thread(fetcher.FetchOnThread).Start();
         }
 
         protected virtual void DataArrived(IEnumerable<IFeature> features, object state = null)

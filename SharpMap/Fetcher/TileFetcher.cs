@@ -83,10 +83,11 @@ namespace SharpMap.Fetcher
         private void StartThread()
         {
             isThreadRunning = true;
-            loopThread = new Thread(TileFetchLoop);
-            loopThread.IsBackground = true;
-            loopThread.Name = "LoopThread";
-            loopThread.Start();
+            throw new NotImplementedException();
+            //loopThread = new Thread(TileFetchLoop);
+            //loopThread.IsBackground = true;
+            //loopThread.Name = "LoopThread";
+            //loopThread.Start();
         }
 
         public void AbortFetch()
@@ -103,9 +104,9 @@ namespace SharpMap.Fetcher
         {
             try
             {
-#if !SILVERLIGHT //In Silverlight you can not specify a thread priority
-                Thread.CurrentThread.Priority = ThreadPriority.BelowNormal;
-#endif
+//#if !SILVERLIGHT //In Silverlight you can not specify a thread priority
+//                Thread.CurrentThread.Priority = ThreadPriority.BelowNormal;
+//#endif
                 while (isThreadRunning)
                 {
                     if (tileSource.Schema == null) waitHandle.Reset();
@@ -175,14 +176,16 @@ namespace SharpMap.Fetcher
         private void StartFetchOnThread(TileInfo info)
         {
             var fetchOnThread = new FetchOnThread(tileSource.Provider, info, LocalFetchCompleted);
-            var thread = new Thread(fetchOnThread.FetchTile);
 
-#if !SILVERLIGHT
-            //In Wpf we use Wpf's own feature rendering which can only be done on a STA thread.
-            thread.SetApartmentState(ApartmentState.STA);
-#endif
-            thread.Name = "Tile Fetcher";
-            thread.Start();
+            throw new NotImplementedException();
+//            var thread = new Thread(fetchOnThread.FetchTile);
+
+//#if !SILVERLIGHT
+//            //In Wpf we use Wpf's own feature rendering which can only be done on a STA thread.
+//            thread.SetApartmentState(ApartmentState.STA);
+//#endif
+//            thread.Name = "Tile Fetcher";
+//            thread.Start();
         }
 
         private void LocalFetchCompleted(object sender, FetchTileCompletedEventArgs e)

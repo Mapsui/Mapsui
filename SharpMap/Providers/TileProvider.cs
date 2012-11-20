@@ -67,8 +67,9 @@ namespace SharpMap.Providers
                 var waitHandle = new AutoResetEvent(false);
                 waitHandles.Add(waitHandle);
                 queue.Add(info.Index);
-                var thread = new Thread(GetTileOnThread);
-                thread.Start(new object[] { source.Provider, info, bitmaps, waitHandle });
+                throw new NotImplementedException();
+                //var thread = new Thread(GetTileOnThread);
+                //thread.Start(new object[] { source.Provider, info, bitmaps, waitHandle });
             }
 
             foreach (WaitHandle handle in waitHandles)
