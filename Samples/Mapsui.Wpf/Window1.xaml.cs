@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using BruTile;
-using BruTile.Web;
+﻿using BruTile.Web;
 using DemoConfig;
 using SharpMap.Layers;
 using SharpMap.Providers;
 using SharpMap.Samples;
+using System;
+using System.Collections.Generic;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
 
 namespace Mapsui.Wpf
 {
@@ -108,8 +107,6 @@ namespace Mapsui.Wpf
 
         private void SharpMapClick(object sender, RoutedEventArgs e)
         {
-            //!!!mapControl.Map.Layers.Clear();
-            //!!!mapControl.Map.Layers.Add(ShapefileSample.CreateCountryLayer());
             mapControl.Map = ShapefileSample.CreateMap();
             layerList.Initialize(mapControl.Map.Layers);
             mapControl.Refresh();

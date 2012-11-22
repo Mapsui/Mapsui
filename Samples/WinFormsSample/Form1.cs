@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using SharpMap;
 using SharpMap.Samples;
 using SharpMap.Forms;
 
@@ -17,13 +18,14 @@ namespace WinFormsSample
         {
             InitializeComponent();
             mapImage1.ActiveTool = MapImage.Tools.Pan;
-            mapImage1.Map = WmsSample.InitializeMap();
-            mapImage1.View.Center = mapImage1.Map.GetExtents().GetCentroid();
+            mapImage1.Map = new Map();
+            mapImage1.Map.Layers.Add(WmsSample.Create());
+            mapImage1.View.Center = mapImage1.Map.Envelope.GetCentroid();
             mapImage1.View.Resolution = 1;
-            this.Load += new EventHandler(Form1_Load);
+            Load += Form1Load;
         }
 
-        void Form1_Load(object sender, EventArgs e)
+        void Form1Load(object sender, EventArgs e)
         {
             mapImage1.Refresh();
         }

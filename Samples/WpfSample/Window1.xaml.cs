@@ -4,7 +4,7 @@ using System.Windows.Media;
 using SharpMap;
 using SharpMap.Samples;
 using SilverlightRendering;
-using SharpMap.Data;
+using SharpMap.Providers;
 using System.IO;
 using System.Windows.Controls;
 

@@ -87,6 +87,7 @@ namespace SharpMap.Layers
 
         void StartFetchTimerElapsed(object state)
         {
+            if (newExtent == null) return;
             StartNewFetch(newExtent, newResolution);
             startFetchTimer.Dispose();
         }

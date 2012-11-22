@@ -17,11 +17,13 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
-using SharpMap.Data;
+using GdiRendering;
+using SharpMap.Providers;
 using SharpMap.Geometries;
 using SharpMap.Layers;
 using Point = SharpMap.Geometries.Point;
@@ -82,7 +84,7 @@ namespace SharpMap.Forms
         private bool mousedragging = false;
         private Image mousedragImg;
         private View view = new View();
-        private GdiRenderer gdiRenderer = new GdiRenderer();
+        private GdiMapRenderer gdiRenderer = new GdiMapRenderer();
 
         public View View
         {
@@ -96,11 +98,11 @@ namespace SharpMap.Forms
         public MapImage()
         {
             _Activetool = Tools.None;
-            base.MouseMove += new System.Windows.Forms.MouseEventHandler(MapImage_MouseMove);
-            base.MouseUp += new System.Windows.Forms.MouseEventHandler(MapImage_MouseUp);
-            base.MouseDown += new System.Windows.Forms.MouseEventHandler(MapImage_MouseDown);
-            base.MouseWheel += new System.Windows.Forms.MouseEventHandler(MapImage_Wheel);
-            this.Resize += new EventHandler(MapImage_Resize);
+            base.MouseMove += MapImage_MouseMove;
+            base.MouseUp += MapImage_MouseUp;
+            base.MouseDown += MapImage_MouseDown;
+            base.MouseWheel += MapImage_Wheel;
+            Resize += new EventHandler(MapImage_Resize);
             Cursor = Cursors.Cross;
             DoubleBuffered = true;
         }
@@ -179,14 +181,14 @@ namespace SharpMap.Forms
 
         public override void Refresh()
         {
-            this.Redraw();
+            Redraw();
         }
 
         public void RefreshData()
         {
             if (_Map != null)
             {
-                this.Image = gdiRenderer.GetMapAsImage(view, _Map);
+                Image = Image.FromStream(new MemoryStream(gdiRenderer.RenderMapAsByteArray(view, _Map)));
             }
         }
 
@@ -197,9 +199,8 @@ namespace SharpMap.Forms
         {
             if (_Map != null)
             {
-                
-                this.Image = gdiRenderer.GetMapAsImage(view, _Map);
-                this.Invalidate();
+                Image = Image.FromStream(new MemoryStream(gdiRenderer.RenderMapAsByteArray(view, _Map)));
+                Invalidate();
                 base.Refresh();
             }
         }
@@ -332,7 +333,7 @@ namespace SharpMap.Forms
                         {
                             view.Center = view.ViewToWorld(new Point(e.X, e.Y));
                             if (MapCenterChanged != null)
-                                MapCenterChanged(view.Center);
+                                MapCenterChanged(new Point(view.CenterX, view.CenterY));
                         }
                         else
                         {
@@ -353,7 +354,7 @@ namespace SharpMap.Forms
                         {
                             view.Center = view.ViewToWorld(new Point(e.X, e.Y));
                             if (MapCenterChanged != null)
-                                MapCenterChanged(view.Center);
+                                MapCenterChanged(new Point(view.CenterX, view.CenterY));
                         }
                         else
                         {
@@ -375,13 +376,13 @@ namespace SharpMap.Forms
                                                                                 Height / 2 + (mousedrag.Y - e.Location.Y));
                             view.Center = view.ViewToWorld(new Point(pnt.X, pnt.Y));
                             if (MapCenterChanged != null)
-                                MapCenterChanged(view.Center);
+                                MapCenterChanged(new Point(view.CenterX, view.CenterY));
                         }
                         else
                         {
                             view.Center = view.ViewToWorld(new Point(e.X, e.Y));
                             if (MapCenterChanged != null)
-                                MapCenterChanged(view.Center);
+                                MapCenterChanged(new Point(view.CenterX, view.CenterY));
                         }
                         Refresh();
                     }
@@ -389,12 +390,12 @@ namespace SharpMap.Forms
                     {
                         if (_Map.Layers.Count > _queryLayerIndex && _queryLayerIndex > -1)
                         {
-                            if (_Map.Layers[_queryLayerIndex] is IQueryLayer)
+                            if (_Map.Layers[_queryLayerIndex] != null)
                             {
-                                IQueryLayer layer = _Map.Layers[_queryLayerIndex] as IQueryLayer;
+                                var layer = _Map.Layers[_queryLayerIndex];
                                 Point pointWorld = view.ViewToWorld(new Point(e.X, e.Y));
                                 BoundingBox bbox = pointWorld.GetBoundingBox().Grow(view.Resolution * 5);
-                                IFeatures features = layer.GetFeaturesInView(bbox, view.Resolution);
+                                var features = layer.GetFeaturesInView(bbox, view.Resolution);
                                 if (MapQueried != null) MapQueried(features);
                             }
                         }
@@ -431,7 +432,7 @@ namespace SharpMap.Forms
         /// Eventtype fired when the map is queried
         /// </summary>
         /// <param name="data"></param>
-        public delegate void MapQueryHandler(IFeatures data);
+        public delegate void MapQueryHandler(IEnumerable<IFeature> data);
 
         /// <summary>
         /// Eventtype fired when the zoom was or are being changed

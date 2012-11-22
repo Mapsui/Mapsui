@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{90014F5A-11D6-4FE5-B9CF-47E810A5AF90}</ProjectGuid>
+    <ProjectGuid>{B83B1717-4AFA-4DD8-AB3C-A713C7963271}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Mapsui.Wpf</RootNamespace>
@@ -66,13 +66,13 @@
       <HintPath>..\libs\BruTile.dll</HintPath>
     </Reference>
     <Reference Include="BruTile.MbTiles">
-      <HintPath>..\libs\BruTile.MbTiles.dll</HintPath>
+      <HintPath>..\..\libs\BruTile.MbTiles.dll</HintPath>
     </Reference>
     <Reference Include="Community.CsharpSqlite">
-      <HintPath>..\libs\Community.CsharpSqlite.dll</HintPath>
+      <HintPath>..\..\libs\Community.CsharpSqlite.dll</HintPath>
     </Reference>
     <Reference Include="Community.CsharpSqlite.SQLiteClient">
-      <HintPath>..\libs\Community.CsharpSqlite.SQLiteClient.dll</HintPath>
+      <HintPath>..\..\libs\Community.CsharpSqlite.SQLiteClient.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
@@ -201,20 +201,20 @@
       <Project>{8FB95293-E18B-4B99-9FEB-A24DD3FCBBC5}</Project>
       <Name>DemoConfig</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Mapsui.Windows\Mapsui.Windows.csproj">
+    <ProjectReference Include="..\..\Mapsui.Windows\Mapsui.Windows.csproj">
       <Project>{9142A5C9-38F9-42DF-8E9A-79E5A919151F}</Project>
       <Name>Mapsui.Windows</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Mapsui\Mapsui.csproj">
+    <ProjectReference Include="..\..\Mapsui\Mapsui.csproj">
       <Project>{d74c052a-c07e-4b37-a898-134218aca5c9}</Project>
       <Name>Mapsui</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SharpMap.Providers\SharpMap.Providers.csproj">
+    <ProjectReference Include="..\..\SharpMap.Providers\SharpMap.Providers.csproj">
       <Project>{3E99181D-B701-493F-AFAE-109D023935F7}</Project>
       <Name>SharpMap.Providers</Name>
     </ProjectReference>
     <ProjectReference Include="..\SharpMap.Samples\SharpMap.Samples.csproj">
-      <Project>{036B6E0A-C34C-4EE6-A359-C467D7E9D1EF}</Project>
+      <Project>{036b6e0a-c34c-4ee6-a359-c467d7e9d1ef}</Project>
       <Name>SharpMap.Samples</Name>
     </ProjectReference>
   </ItemGroup>

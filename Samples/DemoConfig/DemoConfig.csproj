@@ -40,12 +40,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Accessibility" />
-    <Reference Include="BruTile, Version=0.4.1.0, Culture=neutral, PublicKeyToken=00e75fd79e391f40, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\libs\BruTile.dll</HintPath>
+    <Reference Include="BruTile">
+      <HintPath>..\..\libs\BruTile.dll</HintPath>
     </Reference>
     <Reference Include="BruTile.Desktop">
-      <HintPath>..\libs\BruTile.Desktop.dll</HintPath>
+      <HintPath>..\..\libs\BruTile.Desktop.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
@@ -73,11 +72,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Mapsui\Mapsui.csproj">
+    <ProjectReference Include="..\..\Mapsui\Mapsui.csproj">
       <Project>{d74c052a-c07e-4b37-a898-134218aca5c9}</Project>
       <Name>Mapsui</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SharpMap.Providers\SharpMap.Providers.csproj">
+    <ProjectReference Include="..\..\SharpMap.Providers\SharpMap.Providers.csproj">
       <Project>{3E99181D-B701-493F-AFAE-109D023935F7}</Project>
       <Name>SharpMap.Providers</Name>
     </ProjectReference>
