@@ -205,6 +205,10 @@
       <Project>{9142A5C9-38F9-42DF-8E9A-79E5A919151F}</Project>
       <Name>Mapsui.Windows</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Mapsui\Mapsui.csproj">
+      <Project>{d74c052a-c07e-4b37-a898-134218aca5c9}</Project>
+      <Name>Mapsui</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SharpMap.Providers\SharpMap.Providers.csproj">
       <Project>{3E99181D-B701-493F-AFAE-109D023935F7}</Project>
       <Name>SharpMap.Providers</Name>
@@ -212,10 +216,6 @@
     <ProjectReference Include="..\SharpMap.Samples\SharpMap.Samples.csproj">
       <Project>{036B6E0A-C34C-4EE6-A359-C467D7E9D1EF}</Project>
       <Name>SharpMap.Samples</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SharpMap\Mapsui.csproj">
-      <Project>{d74c052a-c07e-4b37-a898-134218aca5c9}</Project>
-      <Name>Mapsui</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
