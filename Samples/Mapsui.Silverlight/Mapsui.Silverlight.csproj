@@ -63,9 +63,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BruTile, Version=0.5.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\libs\BruTile.dll</HintPath>
+    <Reference Include="BruTile">
+      <HintPath>..\..\libs\BruTile.dll</HintPath>
     </Reference>
     <Reference Include="System.Windows" />
     <Reference Include="mscorlib" />
@@ -122,13 +121,17 @@
     <None Include="Properties\AppManifest.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Mapsui.Windows\Mapsui.Windows-SL.csproj">
+    <ProjectReference Include="..\..\Mapsui.Windows\Mapsui.Windows-SL.csproj">
       <Project>{dc9f828b-9873-4c4c-949c-70358ee06aa4}</Project>
       <Name>Mapsui.Windows-SL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Mapsui\Mapsui.csproj">
+    <ProjectReference Include="..\..\Mapsui\Mapsui.csproj">
       <Project>{d74c052a-c07e-4b37-a898-134218aca5c9}</Project>
       <Name>Mapsui</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SilverlightRendering\SilverlightRendering-SL.csproj">
+      <Project>{07774cd1-6112-440b-96b8-dff788b79649}</Project>
+      <Name>SilverlightRendering-SL</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
