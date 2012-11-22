@@ -5,8 +5,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Windows-SL", "Mapsui
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SilverlightRendering-SL", "SilverlightRendering\SilverlightRendering-SL.csproj", "{07774CD1-6112-440B-96B8-DFF788B79649}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpMap.Samples-SL", "Samples\SharpMap.Samples\SharpMap.Samples-SL.csproj", "{FA011EC5-2C8A-412B-8791-9BB966012099}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui", "Mapsui\Mapsui.csproj", "{D74C052A-C07E-4B37-A898-134218ACA5C9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{9E87CC83-303E-4B1F-B1C6-7EE8B5927C96}"
@@ -14,6 +12,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Silverlight", "Samples\Mapsui.Silverlight\Mapsui.Silverlight.csproj", "{066B11A1-B05D-4DD4-B372-1CCEDF929962}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Silverlight.Web", "Samples\Mapsui.Silverlight.Web\Mapsui.Silverlight.Web.csproj", "{07D1F6C6-F490-4AA5-B000-0173DEACF572}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpMap.Samples-SL", "Samples\SharpMap.Samples\SharpMap.Samples-SL.csproj", "{FA011EC5-2C8A-412B-8791-9BB966012099}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,6 @@ Global
 		{07774CD1-6112-440B-96B8-DFF788B79649}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{07774CD1-6112-440B-96B8-DFF788B79649}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{07774CD1-6112-440B-96B8-DFF788B79649}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FA011EC5-2C8A-412B-8791-9BB966012099}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FA011EC5-2C8A-412B-8791-9BB966012099}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FA011EC5-2C8A-412B-8791-9BB966012099}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FA011EC5-2C8A-412B-8791-9BB966012099}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D74C052A-C07E-4B37-A898-134218ACA5C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D74C052A-C07E-4B37-A898-134218ACA5C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D74C052A-C07E-4B37-A898-134218ACA5C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -45,6 +41,10 @@ Global
 		{07D1F6C6-F490-4AA5-B000-0173DEACF572}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{07D1F6C6-F490-4AA5-B000-0173DEACF572}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{07D1F6C6-F490-4AA5-B000-0173DEACF572}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA011EC5-2C8A-412B-8791-9BB966012099}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA011EC5-2C8A-412B-8791-9BB966012099}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA011EC5-2C8A-412B-8791-9BB966012099}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA011EC5-2C8A-412B-8791-9BB966012099}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -52,5 +52,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{066B11A1-B05D-4DD4-B372-1CCEDF929962} = {9E87CC83-303E-4B1F-B1C6-7EE8B5927C96}
 		{07D1F6C6-F490-4AA5-B000-0173DEACF572} = {9E87CC83-303E-4B1F-B1C6-7EE8B5927C96}
+		{FA011EC5-2C8A-412B-8791-9BB966012099} = {9E87CC83-303E-4B1F-B1C6-7EE8B5927C96}
 	EndGlobalSection
 EndGlobal
