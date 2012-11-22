@@ -125,9 +125,9 @@
       <Project>{DC9F828B-9873-4C4C-949C-70358EE06AA4}</Project>
       <Name>Mapsui.Windows-SL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SharpMap\SharpMap-SL.csproj">
-      <Project>{0DE2EA55-4454-4F6D-96B8-CB2549695353}</Project>
-      <Name>SharpMap-SL</Name>
+    <ProjectReference Include="..\Mapsui\Mapsui.csproj">
+      <Project>{d74c052a-c07e-4b37-a898-134218aca5c9}</Project>
+      <Name>Mapsui</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

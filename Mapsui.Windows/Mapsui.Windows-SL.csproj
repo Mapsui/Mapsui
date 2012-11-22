@@ -67,17 +67,19 @@
     <Compile Include="FpsCounter.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Layers\GroupTileLayer.cs" />
     <Compile Include="MapControl.cs" />
     <Compile Include="MapTransformHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\EditableImage.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SharpMap\SharpMap-SL.csproj">
-      <Project>{0DE2EA55-4454-4F6D-96B8-CB2549695353}</Project>
-      <Name>SharpMap-SL</Name>
+    <ProjectReference Include="..\Mapsui\Mapsui.csproj">
+      <Project>{d74c052a-c07e-4b37-a898-134218aca5c9}</Project>
+      <Name>Mapsui</Name>
     </ProjectReference>
     <ProjectReference Include="..\SilverlightRendering\SilverlightRendering-SL.csproj">
-      <Project>{07774CD1-6112-440B-96B8-DFF788B79649}</Project>
+      <Project>{07774cd1-6112-440b-96b8-dff788b79649}</Project>
       <Name>SilverlightRendering-SL</Name>
     </ProjectReference>
   </ItemGroup>
