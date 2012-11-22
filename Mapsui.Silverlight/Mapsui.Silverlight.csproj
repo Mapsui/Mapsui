@@ -63,8 +63,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BruTile, Version=0.5.2.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="BruTile, Version=0.5.4.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\libs\BruTile.dll</HintPath>
     </Reference>
     <Reference Include="System.Windows" />
     <Reference Include="mscorlib" />
@@ -122,7 +123,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Mapsui.Windows\Mapsui.Windows-SL.csproj">
-      <Project>{DC9F828B-9873-4C4C-949C-70358EE06AA4}</Project>
+      <Project>{dc9f828b-9873-4c4c-949c-70358ee06aa4}</Project>
       <Name>Mapsui.Windows-SL</Name>
     </ProjectReference>
     <ProjectReference Include="..\Mapsui\Mapsui.csproj">

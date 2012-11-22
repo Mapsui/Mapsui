@@ -50,7 +50,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BruTile">
-      <HintPath>..\..\libs\SL\BruTile.dll</HintPath>
+      <HintPath>..\..\libs\BruTile.dll</HintPath>
     </Reference>
     <Reference Include="System.Windows" />
     <Reference Include="mscorlib" />
