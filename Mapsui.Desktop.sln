@@ -43,6 +43,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpMap.Providers.Tests", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpMap.Samples", "Samples\SharpMap.Samples\SharpMap.Samples.csproj", "{036B6E0A-C34C-4EE6-A359-C467D7E9D1EF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SilverlightRendering.Test", "Tests\SilverlightRendering.Test\SilverlightRendering.Test.csproj", "{6CC0003B-E174-4BD7-8DC6-7B80C9EB1B87}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Addins debug|Any CPU = Addins debug|Any CPU
@@ -146,6 +148,12 @@ Global
 		{036B6E0A-C34C-4EE6-A359-C467D7E9D1EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{036B6E0A-C34C-4EE6-A359-C467D7E9D1EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{036B6E0A-C34C-4EE6-A359-C467D7E9D1EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6CC0003B-E174-4BD7-8DC6-7B80C9EB1B87}.Addins debug|Any CPU.ActiveCfg = Release|Any CPU
+		{6CC0003B-E174-4BD7-8DC6-7B80C9EB1B87}.Addins debug|Any CPU.Build.0 = Release|Any CPU
+		{6CC0003B-E174-4BD7-8DC6-7B80C9EB1B87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CC0003B-E174-4BD7-8DC6-7B80C9EB1B87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CC0003B-E174-4BD7-8DC6-7B80C9EB1B87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CC0003B-E174-4BD7-8DC6-7B80C9EB1B87}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -160,5 +168,6 @@ Global
 		{036B6E0A-C34C-4EE6-A359-C467D7E9D1EF} = {969DB691-49FB-4785-98F4-2112CC1BA7C4}
 		{D6BE6ADA-CE9F-45FF-AB64-AAD128EDF9AA} = {F7130D3D-4E62-4EB3-B74C-1E819E017048}
 		{1576D346-9FEA-47FB-B917-A4B34682684A} = {F7130D3D-4E62-4EB3-B74C-1E819E017048}
+		{6CC0003B-E174-4BD7-8DC6-7B80C9EB1B87} = {F7130D3D-4E62-4EB3-B74C-1E819E017048}
 	EndGlobalSection
 EndGlobal
