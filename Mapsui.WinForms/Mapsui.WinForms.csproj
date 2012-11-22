@@ -28,6 +28,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -93,7 +94,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DemoConfig\DemoConfig.csproj">
-      <Project>{8FB95293-E18B-4B99-9FEB-A24DD3FCBBC5}</Project>
+      <Project>{8fb95293-e18b-4b99-9feb-a24dd3fcbbc5}</Project>
       <Name>DemoConfig</Name>
     </ProjectReference>
     <ProjectReference Include="..\Mapsui.Forms\Mapsui.Forms.csproj">

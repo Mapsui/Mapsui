@@ -35,7 +35,7 @@ namespace SharpMap.Fetcher
             this.fetchTileCompleted = fetchTileCompleted;
         }
 
-        public void FetchTile()
+        public void FetchTile(object state)
         {
             Exception error = null;
             byte[] image = null;

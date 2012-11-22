@@ -11,11 +11,10 @@ namespace SharpMap.Samples
         public static ILayer Create()
         {
             var provider = CreateProvider();
-            throw new NotImplementedException();
-            //var layer = new ImageLayer("ArcGISImageServiceLayer");
-            //layer.Styles.Add(new VectorStyle()); // This is ugly. I need to add a style to get it to render even though it is not used.
-            //layer.DataSource = provider;
-            //return layer;
+            var layer = new ImageLayer("ArcGISImageServiceLayer");
+            layer.Styles.Add(new VectorStyle()); // This is ugly. I need to add a style to get it to render even though it is not used.
+            layer.DataSource = provider;
+            return layer;
         }
 
         private static ArcGISImageServiceProvider CreateProvider()

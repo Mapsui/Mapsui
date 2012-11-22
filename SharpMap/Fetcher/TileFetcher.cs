@@ -77,17 +77,13 @@ namespace SharpMap.Fetcher
             resolution = newResolution;
             isViewChanged = true;
             waitHandle.Set();
-            if (!isThreadRunning) { StartThread(); }
+            if (!isThreadRunning) { StartLoopThread(); }
         }
 
-        private void StartThread()
+        private void StartLoopThread()
         {
             isThreadRunning = true;
-            throw new NotImplementedException();
-            //loopThread = new Thread(TileFetchLoop);
-            //loopThread.IsBackground = true;
-            //loopThread.Name = "LoopThread";
-            //loopThread.Start();
+            ThreadPool.QueueUserWorkItem(TileFetchLoop);
         }
 
         public void AbortFetch()
@@ -100,13 +96,10 @@ namespace SharpMap.Fetcher
 
         #region Private Methods
 
-        private void TileFetchLoop()
+        private void TileFetchLoop(object state)
         {
             try
             {
-//#if !SILVERLIGHT //In Silverlight you can not specify a thread priority
-//                Thread.CurrentThread.Priority = ThreadPriority.BelowNormal;
-//#endif
                 while (isThreadRunning)
                 {
                     if (tileSource.Schema == null) waitHandle.Reset();
@@ -176,16 +169,7 @@ namespace SharpMap.Fetcher
         private void StartFetchOnThread(TileInfo info)
         {
             var fetchOnThread = new FetchOnThread(tileSource.Provider, info, LocalFetchCompleted);
-
-            throw new NotImplementedException();
-//            var thread = new Thread(fetchOnThread.FetchTile);
-
-//#if !SILVERLIGHT
-//            //In Wpf we use Wpf's own feature rendering which can only be done on a STA thread.
-//            thread.SetApartmentState(ApartmentState.STA);
-//#endif
-//            thread.Name = "Tile Fetcher";
-//            thread.Start();
+            ThreadPool.QueueUserWorkItem(fetchOnThread.FetchTile);
         }
 
         private void LocalFetchCompleted(object sender, FetchTileCompletedEventArgs e)

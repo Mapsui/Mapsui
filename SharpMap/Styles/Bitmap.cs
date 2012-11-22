@@ -18,7 +18,7 @@ namespace SharpMap.Styles
                     return;
                 }
                 _data = CopyStreamToMemoryStream(value);
-                //!!!value.Close();
+                //value.Close(); // not possible in PCL, not sure what effect this will have
             }
         }
 

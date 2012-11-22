@@ -1,6 +1,18 @@
 ﻿using BruTile;
 using SharpMap.Geometries;
 
+namespace System.Threading.Timers
+{
+    public static class TimerExtensions
+    {
+        public static void Stop(this Timer timer)
+        {
+            timer.Change(Timeout.Infinite, Timeout.Infinite);
+        }
+    }
+}
+
+
 namespace SharpMap.Geometries
 {
     public static class ExtentExtensions

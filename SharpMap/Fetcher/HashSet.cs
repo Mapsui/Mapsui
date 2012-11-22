@@ -6,28 +6,28 @@ namespace SharpMap.Fetcher
 {
     public class HashSet<T> : ICollection<T>
     {
-        private Dictionary<T, short> MyDict;
+        private Dictionary<T, short> dictionary;
 
         public HashSet()
         {
-            MyDict = new Dictionary<T, short>();
+            dictionary = new Dictionary<T, short>();
         }
 
         // Methods
         public void Add(T item)
         {
             // We don't care for the value in dictionary, Keys matter.
-            MyDict.Add(item, 0);
+            dictionary.Add(item, 0);
         }
 
         public void Clear()
         {
-            MyDict.Clear();
+            dictionary.Clear();
         }
 
         public bool Contains(T item)
         {
-            return MyDict.ContainsKey(item);
+            return dictionary.ContainsKey(item);
         }
 
         public void CopyTo(T[] array, int arrayIndex)
@@ -37,7 +37,7 @@ namespace SharpMap.Fetcher
 
         public bool Remove(T item)
         {
-            return MyDict.Remove(item);
+            return dictionary.Remove(item);
         }
 
         public IEnumerator<T> GetEnumerator()
@@ -53,7 +53,7 @@ namespace SharpMap.Fetcher
         // Properties
         public int Count
         {
-            get { return MyDict.Keys.Count; }
+            get { return dictionary.Keys.Count; }
         }
 
         public bool IsReadOnly

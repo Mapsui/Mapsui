@@ -25,7 +25,7 @@ namespace SharpMap.Fetcher
             this.timeOfRequest = timeOfRequest;
         }
 
-        public void FetchOnThread()
+        public void FetchOnThread(object state)
         {
             lock (provider)
             {

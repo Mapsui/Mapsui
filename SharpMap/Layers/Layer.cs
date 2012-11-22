@@ -17,10 +17,8 @@
 
 using System;
 using System.Linq;
-//!!!using ProjNet.CoordinateSystems.Transformations;
 using SharpMap.Fetcher;
 using SharpMap.Geometries;
-//!!!using SharpMap.Projection;
 using SharpMap.Providers;
 using System.Threading;
 using System.Collections.Generic;
@@ -118,11 +116,10 @@ namespace SharpMap.Layers
                 extent = Transformation.Transfrom(Transformation.MapSRID, SRID, extent);
 
             var fetcher = new FeatureFetcher(extent, resolution, DataSource, DataArrived);
-            throw new NotImplementedException();
-            //!!!new Thread(fetcher.FetchOnThread).Start();
+            ThreadPool.QueueUserWorkItem(fetcher.FetchOnThread);
         }
 
-        protected virtual void DataArrived(IEnumerable<IFeature> features, object state = null)
+        protected void DataArrived(IEnumerable<IFeature> features, object state = null)
         {
             //the data in the cache is stored in the map projection so it projected only once.
             if (features == null) throw new ArgumentException("argument features may not be null");

@@ -75,10 +75,10 @@ namespace Mapsui.Wpf
         private void GeodanTmsClick(object sender, RoutedEventArgs e)
         {
             mapControl.Map.Layers.Clear();
-            throw new NotImplementedException();
-            //mapControl.Map.Layers.Add(new TileLayer("http://geoserver.nl/tiles/tilecache.aspx/1.0.0/worlddark_GM", true));
-            //layerList.Initialize(mapControl.Map.Layers);
-            //mapControl.Refresh();
+            mapControl.Map.Layers.Add(new TileLayer("http://geoserver.nl/tiles/tilecache.aspx/1.0.0/worlddark_GM", 
+                true, (ex) => MessageBox.Show(ex.Message)));
+            layerList.Initialize(mapControl.Map.Layers);
+            mapControl.Refresh();
 
         }
 

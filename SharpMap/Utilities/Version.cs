@@ -23,7 +23,7 @@ namespace SharpMap.Utilities
     /// <summary>
     /// Version information helper class
     /// </summary>
-    public class Version
+    public static class Version
     {
         /// <summary>
         /// Returns the current build version of SharpMap
@@ -31,8 +31,11 @@ namespace SharpMap.Utilities
         /// <returns></returns>
         public static System.Version GetCurrentVersion()
         {
-            throw new NotImplementedException();
-            //!!!return Assembly.GetExecutingAssembly().GetName().Version;
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            var versionExpression = new System.Text.RegularExpressions.Regex("Version=(?<version>[0-9.]*)");
+            var match = versionExpression.Match(assembly.FullName);
+            if (!match.Success) { throw new Exception("could not dertermine version"); }
+            return new System.Version(match.Groups["version"].Value);
         }
     }
 }

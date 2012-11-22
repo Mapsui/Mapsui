@@ -17,6 +17,7 @@
 
 using System;
 using System.Linq;
+using System.Threading.Timers;
 using SharpMap.Fetcher;
 using SharpMap.Geometries;
 using SharpMap.Providers;
@@ -38,7 +39,7 @@ namespace SharpMap.Layers
         protected double newResolution;
         protected BoundingBox newExtent;
         protected List<FeatureSets> featureSets = new List<FeatureSets>();
-        protected System.Timers.Timer startFetchTimer = new System.Timers.Timer(); 
+        protected Timer startFetchTimer; 
 
         public IProvider DataSource { get; set; }
 
@@ -81,14 +82,13 @@ namespace SharpMap.Layers
         public ImageLayer(string layername)
         {
             LayerName = layername;
-            startFetchTimer.Interval = 500;
-            startFetchTimer.Elapsed += StartFetchTimerElapsed;
+            startFetchTimer = new Timer(StartFetchTimerElapsed, null, 500, int.MaxValue);
         }
 
-        void StartFetchTimerElapsed(object sender, System.Timers.ElapsedEventArgs e)
+        void StartFetchTimerElapsed(object state)
         {
             StartNewFetch(newExtent, newResolution);
-            startFetchTimer.Stop();
+            startFetchTimer.Dispose();
         }
 
         public override IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
@@ -133,8 +133,8 @@ namespace SharpMap.Layers
                 needsUpdate = true;
                 return;
             }
-            startFetchTimer.Stop();
-            startFetchTimer.Start();
+            startFetchTimer.Dispose();
+            startFetchTimer = new Timer(StartFetchTimerElapsed, null, 500, int.MaxValue);
         }
 
         protected void StartNewFetch(BoundingBox extent, double resolution)
@@ -146,7 +146,7 @@ namespace SharpMap.Layers
                 extent = Transformation.Transfrom(Transformation.MapSRID, SRID, extent);
 
             var fetcher = new FeatureFetcher(extent, resolution, DataSource, DataArrived, DateTime.Now.Ticks);
-            new Thread(fetcher.FetchOnThread).Start();
+            ThreadPool.QueueUserWorkItem(fetcher.FetchOnThread);
         }
 
         protected virtual void DataArrived(IEnumerable<IFeature> features, object state)

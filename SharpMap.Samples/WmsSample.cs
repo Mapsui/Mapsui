@@ -10,12 +10,11 @@ namespace SharpMap.Samples
         public static ILayer Create()
         {
             var provider = CreateWmsProvider();
-            throw new NotImplementedException();
-            //var layer = new ImageLayer("WmsLayer");
-            //layer.Styles.Add(new VectorStyle()); // To get it to render I have to add some default style which is not used by WMS. This is ugly.
-            //layer.DataSource = provider;
-            //layer.DataSource.SRID = 900913;
-            //return layer;
+            var layer = new ImageLayer("WmsLayer");
+            layer.Styles.Add(new VectorStyle()); // To get it to render I have to add some default style which is not used by WMS. This is ugly.
+            layer.DataSource = provider;
+            layer.DataSource.SRID = 900913;
+            return layer;
         }
 
         private static WmsProvider CreateWmsProvider()
