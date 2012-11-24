@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NUnit.Framework;
-using SharpMap.Providers;
-using SharpMap.Geometries;
+﻿using NUnit.Framework;
 using SharpMap;
+using SharpMap.Geometries;
 using SharpMap.Layers;
-using SharpMap.Styles;
+using SharpMap.Providers;
 
 namespace SilverlightRendering.Test
 {
