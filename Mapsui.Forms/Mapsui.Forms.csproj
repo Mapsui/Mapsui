@@ -66,7 +66,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GdiRendering\GdiRendering.csproj">
+    <ProjectReference Include="..\Mapsui.Rendering.GdiRendering\GdiRendering.csproj">
       <Project>{B7ADBCD6-71AA-48E5-AD04-54649B73773C}</Project>
       <Name>GdiRendering</Name>
     </ProjectReference>

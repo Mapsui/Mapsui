@@ -84,13 +84,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Mapsui.Rendering.XamlRendering\SilverlightRendering.csproj">
+      <Project>{612450F3-5EF0-4648-9542-2B3578583243}</Project>
+      <Name>SilverlightRendering</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Mapsui\Mapsui.csproj">
       <Project>{d74c052a-c07e-4b37-a898-134218aca5c9}</Project>
       <Name>Mapsui</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SilverlightRendering\SilverlightRendering.csproj">
-      <Project>{612450F3-5EF0-4648-9542-2B3578583243}</Project>
-      <Name>SilverlightRendering</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
