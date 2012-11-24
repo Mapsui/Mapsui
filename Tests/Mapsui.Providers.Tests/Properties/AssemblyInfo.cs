@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("SilverlightRendering.Test")]
+[assembly: AssemblyTitle("Mapsui.Providers.Tests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Geodan")]
-[assembly: AssemblyProduct("SilverlightRendering.Test")]
-[assembly: AssemblyCopyright("Copyright © Geodan 2010")]
+[assembly: AssemblyProduct("Mapsui.Providers.Tests")]
+[assembly: AssemblyCopyright("Copyright © Geodan 2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("67e4d2fe-9adf-4f52-9ccd-bac02adac455")]
+[assembly: Guid("64005e7d-5f98-455b-8ad5-0c7be5040a0e")]
 
 // Version information for an assembly consists of the following four values:
 //
