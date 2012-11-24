@@ -124,24 +124,33 @@ namespace SharpMap.Layers
             //the data in the cache is stored in the map projection so it projected only once.
             if (features == null) throw new ArgumentException("argument features may not be null");
 
-            features = features.ToList();
-            if (Transformation != null && Transformation.MapSRID != -1 && SRID != -1 && SRID != Transformation.MapSRID)
+            /* 
+             * ToDo 
+             * Temporarily try catch added, fix for when features.ToList() crashes on InvalidOperationException 
+             * happens sometimes whith a really slow internet connection
+             */
+            try 
             {
-                foreach (var feature in features.Where(feature => !(feature.Geometry is Raster)))
+                features = features.ToList();
+                if (Transformation != null && Transformation.MapSRID != -1 && SRID != -1 && SRID != Transformation.MapSRID)
                 {
-                    feature.Geometry = Transformation.Transform(SRID, Transformation.MapSRID,(Geometry) feature.Geometry);
+                    foreach (var feature in features.Where(feature => !(feature.Geometry is Raster)))
+                    {
+                        feature.Geometry = Transformation.Transform(SRID, Transformation.MapSRID, (Geometry)feature.Geometry);
+                    }
+                }
+
+                cache = new MemoryProvider(features);
+
+                isFetching = false;
+                OnDataChanged();
+
+                if (needsUpdate)
+                {
+                    StartNewFetch(newExtent, newResolution);
                 }
             }
-
-            cache = new MemoryProvider(features);
-
-            isFetching = false;
-            OnDataChanged();
-
-            if (needsUpdate)
-            {
-                StartNewFetch(newExtent, newResolution);
-            }
+            catch(InvalidOperationException){}            
         }
 
         protected void OnDataChanged()

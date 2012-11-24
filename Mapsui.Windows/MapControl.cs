@@ -102,6 +102,7 @@ namespace Mapsui.Windows
                 {
                     map.DataChanged += MapDataChanged;
                     map.PropertyChanged += MapPropertyChanged;
+                    map.ViewChanged(true, view.Extent, view.Resolution);
                 }
                 OnViewChanged(true);
                 RefreshGraphics();
@@ -206,9 +207,6 @@ namespace Mapsui.Windows
         {
             if (map != null)
             {
-                //call down
-                map.ViewChanged(changeEnd, view.Extent, view.Resolution);
-                //call up
                 if (ViewChanged != null)
                 {
                     ViewChanged(this, new ViewChangedEventArgs { View = view, UserAction = userAction });
@@ -296,6 +294,7 @@ namespace Mapsui.Windows
               view.Width - mousePosition.X,
               view.Height - mousePosition.Y);
 
+            map.ViewChanged(true, view.Extent, view.Resolution);
             OnViewChanged(true);
             RefreshGraphics();
         }
@@ -352,6 +351,7 @@ namespace Mapsui.Windows
             //some cheating for personal gain
             view.CenterX += 0.000000001;
             view.CenterY += 0.000000001;
+            map.ViewChanged(false, view.Extent, view.Resolution);
             OnViewChanged(false, true);
 
             StartZoomAnimation(view.Resolution, toResolution);
@@ -376,6 +376,7 @@ namespace Mapsui.Windows
             if (!viewInitialized) InitializeView();
             Clip = new RectangleGeometry {Rect = new Rect(0, 0, ActualWidth, ActualWidth)};
             UpdateSize();
+            map.ViewChanged(true, view.Extent, view.Resolution);
             OnViewChanged(true);
             Refresh();
         }
@@ -453,6 +454,7 @@ namespace Mapsui.Windows
                 HandleFeatureInfo(e);
             }
 
+            map.ViewChanged(true, view.Extent, view.Resolution);
             OnViewChanged(true, true);
             mouseDown = false;
 
@@ -504,6 +506,7 @@ namespace Mapsui.Windows
                 currentMousePosition = e.GetPosition(this); //Needed for both MouseMove and MouseWheel event
                 MapTransformHelper.Pan(view, currentMousePosition, previousMousePosition);
                 previousMousePosition = currentMousePosition;
+                map.ViewChanged(false, view.Extent, view.Resolution);
                 OnViewChanged(false, true);
                 RefreshGraphics();
             }
@@ -624,6 +627,7 @@ namespace Mapsui.Windows
             view.Resolution = resolution;
             toResolution = resolution;
 
+            map.ViewChanged(true, view.Extent, view.Resolution);
             OnViewChanged(true, true);
             RefreshGraphics();
             ClearBBoxDrawing();
@@ -704,22 +708,29 @@ namespace Mapsui.Windows
         {
             var previous = view.ViewToWorld(e.ManipulationOrigin.X, e.ManipulationOrigin.Y);
             var current = view.ViewToWorld(e.ManipulationOrigin.X + e.DeltaManipulation.Translation.X, e.ManipulationOrigin.Y + e.DeltaManipulation.Translation.Y);
-            var diffX = previous.X - current.X;
-            var diffY = previous.Y - current.Y;
 
-            if (e.DeltaManipulation.Scale.X != 1d && !ZoomLocked) //No scale or zoom is locked
-            {
-                view.Center = current;
-                view.Resolution = view.Resolution / e.DeltaManipulation.Scale.X;
-                view.Center = view.ViewToWorld(view.Width - (e.ManipulationOrigin.X + e.DeltaManipulation.Translation.X), view.Height - (e.ManipulationOrigin.Y + e.DeltaManipulation.Translation.Y));
-            }
-
-            view.Center = new SharpMap.Geometries.Point(view.CenterX + diffX, view.CenterY + diffY);
+            double scale = (e.DeltaManipulation.Scale.X != 1d && !ZoomLocked) ? 
+                ((e.DeltaManipulation.Scale.X + e.DeltaManipulation.Scale.Y) / 2) : 1.0;
+            PanAndZoom(current, previous, scale);
 
             invalid = true;
+            // not calling map.ViewChanged(false, view.Extent, view.Resolution); for smoother panning/zooming
             OnViewChanged(false, true);            
         }
-       
+
+        private void PanAndZoom(SharpMap.Geometries.Point current, SharpMap.Geometries.Point previous, double deltaScale)
+        {
+            var diffX = previous.X - current.X;
+            var diffY = previous.Y - current.Y;
+            var newX = view.CenterX + diffX;
+            var newY = view.CenterY + diffY;
+            var zoomCorrectionX = (1 - deltaScale) * (current.X - view.CenterX);
+            var zoomCorrectionY = (1 - deltaScale) * (current.Y - view.CenterY);
+            view.Resolution = view.Resolution / deltaScale;
+
+            view.Center = new SharpMap.Geometries.Point(newX - zoomCorrectionX, newY - zoomCorrectionY);
+        }
+               
         private void OnManipulationCompleted(object sender, ManipulationCompletedEventArgs e)
         {
             Refresh();
