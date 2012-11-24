@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("WbxRendering")]
+[assembly: AssemblyTitle("Mapsui.Rendering.WbxRendering")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Geodan")]
-[assembly: AssemblyProduct("WbxRendering")]
+[assembly: AssemblyProduct("Mapsui.Rendering.WbxRendering")]
 [assembly: AssemblyCopyright("Copyright © Geodan 2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("867383a0-504a-42d8-a23d-20aa95b7b895")]
+[assembly: Guid("7428d8df-dd1d-40f7-b4cc-2472ff5231f4")]
 
 // Version information for an assembly consists of the following four values:
 //

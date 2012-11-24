@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("SharpMap.Providers")]
+[assembly: AssemblyTitle("Mapsui.Providers")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Geodan")]
-[assembly: AssemblyProduct("SharpMap.Providers")]
-[assembly: AssemblyCopyright("Copyright © Geodan 2010")]
+[assembly: AssemblyProduct("Mapsui.Providers")]
+[assembly: AssemblyCopyright("Copyright © Geodan 2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("1519a2c5-f078-45b2-8552-fe83d309745d")]
+[assembly: Guid("d144dc58-9279-43df-a498-d6894a005558")]
 
 // Version information for an assembly consists of the following four values:
 //

@@ -43,6 +43,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -111,9 +112,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Mapsui.Rendering.GdiRendering\GdiRendering.csproj">
-      <Project>{B7ADBCD6-71AA-48E5-AD04-54649B73773C}</Project>
-      <Name>GdiRendering</Name>
+    <ProjectReference Include="..\..\Mapsui.Rendering.GdiRendering\Mapsui.Rendering.GdiRendering.csproj">
+      <Project>{AAA56FF5-D130-461E-91F4-53100B686665}</Project>
+      <Name>Mapsui.Rendering.GdiRendering</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Mapsui\Mapsui.csproj">
       <Project>{d74c052a-c07e-4b37-a898-134218aca5c9}</Project>

@@ -66,9 +66,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Mapsui.Rendering.GdiRendering\GdiRendering.csproj">
-      <Project>{B7ADBCD6-71AA-48E5-AD04-54649B73773C}</Project>
-      <Name>GdiRendering</Name>
+    <ProjectReference Include="..\Mapsui.Rendering.GdiRendering\Mapsui.Rendering.GdiRendering.csproj">
+      <Project>{aaa56ff5-d130-461e-91f4-53100b686665}</Project>
+      <Name>Mapsui.Rendering.GdiRendering</Name>
     </ProjectReference>
     <ProjectReference Include="..\Mapsui\Mapsui.csproj">
       <Project>{d74c052a-c07e-4b37-a898-134218aca5c9}</Project>

@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("GdiRendering")]
+[assembly: AssemblyTitle("Mapsui.Rendering.GdiRendering")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Geodan")]
-[assembly: AssemblyProduct("GdiRendering")]
-[assembly: AssemblyCopyright("Copyright © Geodan 2010")]
+[assembly: AssemblyProduct("Mapsui.Rendering.GdiRendering")]
+[assembly: AssemblyCopyright("Copyright © Geodan 2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("b0e82a0f-abca-438e-b0ac-6abdd6ee57d1")]
+[assembly: Guid("fc7797fa-665d-44a5-a10b-b5de0ae79a62")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -33,6 +33,4 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
-#if !PocketPC
 [assembly: AssemblyFileVersion("1.0.0.0")]
-#endif

@@ -72,13 +72,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Mapsui.Providers\Mapsui.Providers.csproj">
+      <Project>{8bd54487-8db9-431a-9596-2dfd744887a1}</Project>
+      <Name>Mapsui.Providers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Mapsui\Mapsui.csproj">
       <Project>{d74c052a-c07e-4b37-a898-134218aca5c9}</Project>
       <Name>Mapsui</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\SharpMap.Providers\SharpMap.Providers.csproj">
-      <Project>{3E99181D-B701-493F-AFAE-109D023935F7}</Project>
-      <Name>SharpMap.Providers</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
