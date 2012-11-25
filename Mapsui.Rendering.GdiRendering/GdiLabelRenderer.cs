@@ -15,11 +15,6 @@
 // along with Mapsui; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Globalization;
 using SharpMap;
 using SharpMap.Geometries;
 using SharpMap.Layers;
@@ -27,16 +22,16 @@ using SharpMap.Providers;
 using SharpMap.Rendering;
 using SharpMap.Styles;
 using SharpMap.Styles.Thematics;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Globalization;
 
-namespace GdiRendering
+namespace Mapsui.Rendering.GdiRendering
 {
     public static class GdiLabelRenderer
     {
-        /// <summary>
-        /// Renders the layer
-        /// </summary>
-        /// <param name="g">Graphics object reference</param>
-        /// <param name="map">Map which is rendered</param>
         public static void Render(Graphics g, IView view, LabelLayer labelLayer)
         {
             foreach (var layerStyle in labelLayer.Styles)
@@ -59,9 +54,9 @@ namespace GdiRendering
                     labelLayer.DataSource.Close();
 
                     //Initialize label collection
-                    List<Label> labels = new List<Label>();
+                    var labels = new List<Label>();
 
-                    LabelStyle style = layerStyle as LabelStyle;
+                    var style = layerStyle as LabelStyle;
                         
                     //List<System.Drawing.Rectangle> LabelBoxes; //Used for collision detection
                     //Render labels
@@ -93,7 +88,7 @@ namespace GdiRendering
                         {
                             if (feature.Geometry is GeometryCollection)
                             {
-                                if (labelLayer.MultipartGeometryBehaviour == SharpMap.Layers.LabelLayer.MultipartGeometryBehaviourEnum.All)
+                                if (labelLayer.MultipartGeometryBehaviour == LabelLayer.MultipartGeometryBehaviourEnum.All)
                                 {
                                     foreach (Geometry geom in (feature.Geometry as GeometryCollection))
                                     {
@@ -102,13 +97,13 @@ namespace GdiRendering
                                             labels.Add(lbl);
                                     }
                                 }
-                                else if (labelLayer.MultipartGeometryBehaviour == SharpMap.Layers.LabelLayer.MultipartGeometryBehaviourEnum.CommonCenter)
+                                else if (labelLayer.MultipartGeometryBehaviour == LabelLayer.MultipartGeometryBehaviourEnum.CommonCenter)
                                 {
-                                    Label lbl = CreateLabel(feature.Geometry, text, (float)rotation, priority, style, view, g, labelLayer);
+                                    Label lbl = CreateLabel(feature.Geometry, text, rotation, priority, style, view, g, labelLayer);
                                     if (lbl != null)
                                         labels.Add(lbl);
                                 }
-                                else if (labelLayer.MultipartGeometryBehaviour == SharpMap.Layers.LabelLayer.MultipartGeometryBehaviourEnum.First)
+                                else if (labelLayer.MultipartGeometryBehaviour == LabelLayer.MultipartGeometryBehaviourEnum.First)
                                 {
                                     //!!!
                                     //if ((feature.Geometry as GeometryCollection).Collection.Count > 0)
@@ -119,9 +114,9 @@ namespace GdiRendering
                                     //        labels.Add(lbl);
                                     //}
                                 }
-                                else if (labelLayer.MultipartGeometryBehaviour == SharpMap.Layers.LabelLayer.MultipartGeometryBehaviourEnum.Largest)
+                                else if (labelLayer.MultipartGeometryBehaviour == LabelLayer.MultipartGeometryBehaviourEnum.Largest)
                                 {
-                                    GeometryCollection coll = (feature.Geometry as GeometryCollection);
+                                    var coll = (feature.Geometry as GeometryCollection);
                                     if (coll.NumGeometries > 0)
                                     {
                                         double largestVal = 0;
@@ -191,8 +186,8 @@ namespace GdiRendering
         private static Label CreateLabel(IGeometry feature, string text, float rotation, int priority, LabelStyle style, IView map,
                                   Graphics g, LabelLayer labelTheme)
         {
-            System.Drawing.SizeF gdiSize = g.MeasureString(text, style.Font.Convert());
-            SharpMap.Styles.Size size = new SharpMap.Styles.Size() { Width = gdiSize.Width, Height = gdiSize.Height };
+            SizeF gdiSize = g.MeasureString(text, style.Font.Convert());
+            var size = new SharpMap.Styles.Size { Width = gdiSize.Width, Height = gdiSize.Height };
 
             SharpMap.Geometries.Point position = map.WorldToView(feature.GetBoundingBox().GetCentroid());
             position.X = position.X - size.Width * (short)style.HorizontalAlignment * 0.5f;
@@ -217,7 +212,7 @@ namespace GdiRendering
                 }
                 if (feature.GetType() == typeof(LineString))
                 {
-                    LineString line = feature as LineString;
+                    var line = feature as LineString;
                     if (line.Length / map.Resolution > size.Width) //Only label feature if it is long enough
                         CalculateLabelOnLinestring(line, ref lbl, map);
                     else
@@ -231,8 +226,6 @@ namespace GdiRendering
         private static void CalculateLabelOnLinestring(LineString line, ref Label label, IView viewTransform)
         {
             double dx, dy;
-            double tmpx, tmpy;
-            double angle = 0.0;
 
             // first find the middle segment of the line
             int midPoint = (line.Vertices.Count - 1) / 2;
@@ -254,12 +247,12 @@ namespace GdiRendering
             else
             {
                 // calculate angle of line					
-                angle = -Math.Atan(dy / dx) + Math.PI * 0.5;
+                double angle = -Math.Atan(dy / dx) + Math.PI * 0.5;
                 angle *= (180d / Math.PI); // convert radians to degrees
                 label.Rotation = (float)angle - 90; // -90 text orientation
             }
-            tmpx = line.Vertices[midPoint].X + (dx * 0.5);
-            tmpy = line.Vertices[midPoint].Y + (dy * 0.5);
+            double tmpx = line.Vertices[midPoint].X + (dx * 0.5);
+            double tmpy = line.Vertices[midPoint].Y + (dy * 0.5);
             label.LabelPoint = viewTransform.WorldToView(new SharpMap.Geometries.Point(tmpx, tmpy));
         }
 

@@ -17,7 +17,7 @@
 
 using SharpMap.Styles;
 
-namespace GdiRendering
+namespace Mapsui.Rendering.GdiRendering
 {
     public static class GdiStyle
     {

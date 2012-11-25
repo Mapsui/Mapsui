@@ -16,19 +16,21 @@
 // along with Mapsui; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
-using System;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
 using SharpMap;
 using SharpMap.Geometries;
 using SharpMap.Layers;
 using SharpMap.Providers;
 using SharpMap.Styles;
 using SharpMap.Styles.Thematics;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
+using System.Linq;
 using Point = SharpMap.Geometries.Point;
 
-namespace GdiRendering
+namespace Mapsui.Rendering.GdiRendering
 {
     public class GdiMapRenderer
     {
@@ -97,7 +99,8 @@ namespace GdiRendering
 
                 //Linestring outlines is drawn by drawing the layer once with a thicker line
                 //before drawing the "inline" on top.
-                foreach (IFeature feature in features)
+                var enumerable = features as IList<IFeature> ?? features.ToList();
+                foreach (var feature in enumerable)
                 {
                     if ((counter++ % step == 0) && abortRender != null && abortRender()) return;
                     if (layerStyle is IThemeStyle) style = (layerStyle as IThemeStyle).GetStyle(feature);
@@ -108,7 +111,7 @@ namespace GdiRendering
                     }
                 }
 
-                foreach (IFeature feature in features)
+                foreach (var feature in enumerable)
                 {
                     if ((counter++ % step == 0) && abortRender != null && abortRender()) return;
                     if (layerStyle is IThemeStyle) style = (layerStyle as IThemeStyle).GetStyle(feature);

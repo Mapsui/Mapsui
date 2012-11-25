@@ -15,20 +15,18 @@
 // along with Mapsui; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Drawing.Imaging;
-using System.IO;
 using BruTile;
 using BruTile.Cache;
 using SharpMap;
 using SharpMap.Geometries;
-using Point = SharpMap.Geometries.Point;
 using SharpMap.Providers;
+using System;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
+using Point = SharpMap.Geometries.Point;
 
-namespace GdiRendering
+namespace Mapsui.Rendering.GdiRendering
 {
     public static class GdiTileRenderer
     {

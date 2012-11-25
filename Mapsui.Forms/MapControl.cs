@@ -15,14 +15,13 @@
 // along with Mapsui; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston,min MA  02111-1307  USA 
 
-using System;
-using System.Drawing;
-using System.Windows.Forms;
-using BruTile.Web;
-using GdiRendering;
+using Mapsui.Rendering.GdiRendering;
 using SharpMap;
 using SharpMap.Fetcher;
 using SharpMap.Utilities;
+using System;
+using System.Drawing;
+using System.Windows.Forms;
 using View = SharpMap.View;
 
 namespace Mapsui.Forms
@@ -171,8 +170,8 @@ namespace Mapsui.Forms
 
         private bool AbortRender()
         {
-                //When calling DoEvents we want all events to be called except 
-                //OnPaint. This is prevented by checking on isCallingDoEvents
+            // When calling DoEvents we want all events to be called except 
+            // OnPaint. This is prevented by checking on isCallingDoEvents
             isCallingDoEvents = true;
             Application.DoEvents();
             isCallingDoEvents = false;

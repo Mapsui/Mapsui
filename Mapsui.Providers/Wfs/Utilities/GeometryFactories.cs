@@ -292,11 +292,11 @@ namespace SharpMap.Utilities.Wfs
         /// <param name="httpClientUtil">A configured <see cref="HttpClientUtil"/> instance for performing web requests</param>
         private void createReader(HttpClientUtil httpClientUtil)
         {
-            XmlReaderSettings xmlReaderSettings = new XmlReaderSettings();
+            var xmlReaderSettings = new XmlReaderSettings();
             xmlReaderSettings.IgnoreComments = true;
             xmlReaderSettings.IgnoreProcessingInstructions = true;
             xmlReaderSettings.IgnoreWhitespace = true;
-            xmlReaderSettings.ProhibitDtd = true;
+            xmlReaderSettings.DtdProcessing = DtdProcessing.Prohibit;
             _XmlReader = XmlReader.Create(httpClientUtil.GetDataStream(), xmlReaderSettings);
         }
 
@@ -398,7 +398,7 @@ namespace SharpMap.Utilities.Wfs
         internal override Collection<Geometry> createGeometries()
         {
             IPathNode pointNode = new PathNode(_GMLNS, "Point", (NameTable) _XmlReader.NameTable);
-            string[] labelValue = new string[1];
+            var labelValue = new string[1];
             bool geomFound = false;
 
             try
@@ -470,7 +470,7 @@ namespace SharpMap.Utilities.Wfs
         internal override Collection<Geometry> createGeometries()
         {
             IPathNode lineStringNode = new PathNode(_GMLNS, "LineString", (NameTable) _XmlReader.NameTable);
-            string[] labelValue = new string[1];
+            var labelValue = new string[1];
             bool geomFound = false;
 
             try
@@ -492,7 +492,7 @@ namespace SharpMap.Utilities.Wfs
             catch (Exception ex)
             {
                 Trace.TraceError("An exception occured while parsing a line geometry string: " + ex.Message);
-                throw ex;
+                throw;
             }
 
             return _Geoms;
@@ -542,10 +542,6 @@ namespace SharpMap.Utilities.Wfs
         /// <returns>The created geometries</returns>
         internal override Collection<Geometry> createGeometries()
         {
-            Polygon polygon = null;
-            XmlReader outerBoundaryReader = null;
-            XmlReader innerBoundariesReader = null;
-
             IPathNode polygonNode = new PathNode(_GMLNS, "Polygon", (NameTable) _XmlReader.NameTable);
             IPathNode outerBoundaryNode = new PathNode(_GMLNS, "outerBoundaryIs", (NameTable) _XmlReader.NameTable);
             IPathNode exteriorNode = new PathNode(_GMLNS, "exterior", (NameTable) _XmlReader.NameTable);
@@ -554,7 +550,7 @@ namespace SharpMap.Utilities.Wfs
             IPathNode interiorNode = new PathNode(_GMLNS, "interior", (NameTable) _XmlReader.NameTable);
             IPathNode innerBoundaryNodeAlt = new AlternativePathNodesCollection(innerBoundaryNode, interiorNode);
             IPathNode linearRingNode = new PathNode(_GMLNS, "LinearRing", (NameTable) _XmlReader.NameTable);
-            string[] labelValue = new string[1];
+            var labelValue = new string[1];
             bool geomFound = false;
 
             try
@@ -564,14 +560,16 @@ namespace SharpMap.Utilities.Wfs
                 {
                     while ((_GeomReader = GetSubReaderOf(_FeatureReader, labelValue, polygonNode)) != null)
                     {
-                        polygon = new Polygon();
+                        var polygon = new Polygon();
 
+                        XmlReader outerBoundaryReader;
                         if (
                             (outerBoundaryReader =
                              GetSubReaderOf(_GeomReader, null, outerBoundaryNodeAlt, linearRingNode, _CoordinatesNode)) !=
                             null)
                             polygon.ExteriorRing = new LinearRing(ParseCoordinates(outerBoundaryReader));
 
+                        XmlReader innerBoundariesReader;
                         while (
                             (innerBoundariesReader =
                              GetSubReaderOf(_GeomReader, null, innerBoundaryNodeAlt, linearRingNode, _CoordinatesNode)) !=
@@ -588,7 +586,7 @@ namespace SharpMap.Utilities.Wfs
             catch (Exception ex)
             {
                 Trace.TraceError("An exception occured while parsing a polygon geometry: " + ex.Message);
-                throw ex;
+                throw;
             }
 
             return _Geoms;
@@ -636,11 +634,9 @@ namespace SharpMap.Utilities.Wfs
         /// <returns>The created geometries</returns>
         internal override Collection<Geometry> createGeometries()
         {
-            MultiPoint multiPoint = null;
-
             IPathNode multiPointNode = new PathNode(_GMLNS, "MultiPoint", (NameTable) _XmlReader.NameTable);
             IPathNode pointMemberNode = new PathNode(_GMLNS, "pointMember", (NameTable) _XmlReader.NameTable);
-            string[] labelValue = new string[1];
+            var labelValue = new string[1];
             bool geomFound = false;
 
             try
@@ -652,7 +648,7 @@ namespace SharpMap.Utilities.Wfs
                         (_GeomReader = GetSubReaderOf(_FeatureReader, labelValue, multiPointNode, pointMemberNode)) !=
                         null)
                     {
-                        multiPoint = new MultiPoint();
+                        var multiPoint = new MultiPoint();
                         GeometryFactory geomFactory = new PointFactory(_GeomReader, _FeatureTypeInfo);
                         Collection<Geometry> points = geomFactory.createGeometries();
 
@@ -669,7 +665,7 @@ namespace SharpMap.Utilities.Wfs
             catch (Exception ex)
             {
                 Trace.TraceError("An exception occured while parsing a multi-point geometry: " + ex.Message);
-                throw ex;
+                throw;
             }
 
             return _Geoms;
@@ -717,15 +713,13 @@ namespace SharpMap.Utilities.Wfs
         /// <returns>The created geometries</returns>
         internal override Collection<Geometry> createGeometries()
         {
-            MultiLineString multiLineString = null;
-
             IPathNode multiLineStringNode = new PathNode(_GMLNS, "MultiLineString", (NameTable) _XmlReader.NameTable);
             IPathNode multiCurveNode = new PathNode(_GMLNS, "MultiCurve", (NameTable) _XmlReader.NameTable);
             IPathNode multiLineStringNodeAlt = new AlternativePathNodesCollection(multiLineStringNode, multiCurveNode);
             IPathNode lineStringMemberNode = new PathNode(_GMLNS, "lineStringMember", (NameTable) _XmlReader.NameTable);
             IPathNode curveMemberNode = new PathNode(_GMLNS, "curveMember", (NameTable) _XmlReader.NameTable);
             IPathNode lineStringMemberNodeAlt = new AlternativePathNodesCollection(lineStringMemberNode, curveMemberNode);
-            string[] labelValue = new string[1];
+            var labelValue = new string[1];
             bool geomFound = false;
 
             try
@@ -738,7 +732,7 @@ namespace SharpMap.Utilities.Wfs
                          GetSubReaderOf(_FeatureReader, labelValue, multiLineStringNodeAlt, lineStringMemberNodeAlt)) !=
                         null)
                     {
-                        multiLineString = new MultiLineString();
+                        var multiLineString = new MultiLineString();
                         GeometryFactory geomFactory = new LineStringFactory(_GeomReader, _FeatureTypeInfo);
                         Collection<Geometry> lineStrings = geomFactory.createGeometries();
 
@@ -755,7 +749,7 @@ namespace SharpMap.Utilities.Wfs
             catch (Exception ex)
             {
                 Trace.TraceError("An exception occured while parsing a multi-lineString geometry: " + ex.Message);
-                throw ex;
+                throw;
             }
 
             return _Geoms;
@@ -803,8 +797,6 @@ namespace SharpMap.Utilities.Wfs
         /// <returns>The created geometries</returns>
         internal override Collection<Geometry> createGeometries()
         {
-            MultiPolygon multiPolygon = null;
-
             IPathNode multiPolygonNode = new PathNode(_GMLNS, "MultiPolygon", (NameTable) _XmlReader.NameTable);
             IPathNode multiSurfaceNode = new PathNode(_GMLNS, "MultiSurface", (NameTable) _XmlReader.NameTable);
             IPathNode multiPolygonNodeAlt = new AlternativePathNodesCollection(multiPolygonNode, multiSurfaceNode);
@@ -812,7 +804,7 @@ namespace SharpMap.Utilities.Wfs
             IPathNode surfaceMemberNode = new PathNode(_GMLNS, "surfaceMember", (NameTable) _XmlReader.NameTable);
             IPathNode polygonMemberNodeAlt = new AlternativePathNodesCollection(polygonMemberNode, surfaceMemberNode);
             IPathNode linearRingNode = new PathNode(_GMLNS, "LinearRing", (NameTable) _XmlReader.NameTable);
-            string[] labelValue = new string[1];
+            var labelValue = new string[1];
             bool geomFound = false;
 
             try
@@ -824,7 +816,7 @@ namespace SharpMap.Utilities.Wfs
                         (_GeomReader =
                          GetSubReaderOf(_FeatureReader, labelValue, multiPolygonNodeAlt, polygonMemberNodeAlt)) != null)
                     {
-                        multiPolygon = new MultiPolygon();
+                        var multiPolygon = new MultiPolygon();
                         GeometryFactory geomFactory = new PolygonFactory(_GeomReader, _FeatureTypeInfo);
                         Collection<Geometry> polygons = geomFactory.createGeometries();
 
@@ -841,7 +833,7 @@ namespace SharpMap.Utilities.Wfs
             catch (Exception ex)
             {
                 Trace.TraceError("An exception occured while parsing a multi-polygon geometry: " + ex.Message);
-                throw ex;
+                throw;
             }
 
             return _Geoms;
