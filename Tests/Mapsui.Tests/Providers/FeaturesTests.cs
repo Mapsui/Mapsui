@@ -2,9 +2,9 @@
 using SharpMap.Providers;
 using System.Linq;
 
-namespace SharpMapTests.Providers
+namespace Mapsui.Tests.Providers
 {
-    public class FeaturesTests
+    public static class FeaturesTests
     {
         [TestFixture]
         public class TheDeleteMethod

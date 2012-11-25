@@ -7,7 +7,7 @@ using SilverlightRendering;
 
 namespace Mapsui.Rendering.XamlRendering.Tests
 {
-    [TestFixture]
+    [TestFixture, RequiresSTA]
     class SilverlightRendererTest
     {
         [Test]

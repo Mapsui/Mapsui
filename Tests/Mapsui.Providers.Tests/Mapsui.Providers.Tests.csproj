@@ -49,12 +49,20 @@
     <Compile Include="Wms\WmsProviderTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\capabilities_1_1_1.xml" />
-    <Content Include="Resources\capabilities_1_3_0.xml" />
-    <Content Include="Resources\example.tif" />
+    <Content Include="Resources\capabilities_1_1_1.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\capabilities_1_3_0.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\example.tif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\example.tfw" />
+    <None Include="Resources\example.tfw">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Mapsui.Providers\Mapsui.Providers.csproj">

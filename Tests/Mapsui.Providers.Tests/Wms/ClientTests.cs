@@ -4,7 +4,7 @@ using NUnit.Framework;
 using SharpMap.Web.Wms;
 using System.Xml;
 
-namespace SharpMap.Providers.Tests.Wms
+namespace Mapsui.Providers.Tests.Wms
 {
     [TestFixture]
     public class ClientTests

@@ -1,10 +1,9 @@
-﻿using System;
+﻿using NUnit.Framework;
+using SharpMap.Providers.Wms;
 using System.Linq;
 using System.Xml;
-using NUnit.Framework;
-using SharpMap.Providers.Wms;
 
-namespace SharpMap.Providers.Tests.Wms
+namespace Mapsui.Providers.Tests.Wms
 {
     [TestFixture]
     class WmsProviderTests

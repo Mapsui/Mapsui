@@ -3,7 +3,7 @@ using System.Linq;
 using NUnit.Framework;
 using SharpMap.Providers.GeoTiff;
 
-namespace SharpMap.Providers.Tests.GeoTiff
+namespace Mapsui.Providers.Tests.GeoTiff
 {
     [TestFixture]
     public class GeoTiffProviderTests

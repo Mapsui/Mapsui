@@ -1,8 +1,7 @@
-﻿
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using SharpMap.Utilities;
 
-namespace SharpMapTests.Utilities
+namespace Mapsui.Tests.Utilities
 {
     [TestFixture]
     public class VersionTests
