@@ -25,7 +25,6 @@ namespace SharpMap.Samples
                 const string serviceUri = "http://localhost:8080/geoserver/wfs";
 
                 var map = new Map();
-                map.MinimumZoom = 0.005;
                 map.BackColor = Color.White;
 
                 var layer1 = new Layer("States");

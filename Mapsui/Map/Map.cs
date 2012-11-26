@@ -32,8 +32,6 @@ namespace SharpMap
     /// </summary>
     public class Map : IDisposable, INotifyPropertyChanged
     {
-        private double minimumZoom;
-        private double maximumZoom;
         private readonly LayerCollection layers = new LayerCollection();
         public event DataChangedEventHandler DataChanged;
         public event FeedbackEventHandler Feedback;
@@ -45,8 +43,6 @@ namespace SharpMap
         public Map()
         {
             BackColor = Color.White;
-            maximumZoom = double.MaxValue;
-            minimumZoom = 0;
             layers = new LayerCollection();
             layers.LayerAdded += LayersLayerAdded;
             layers.LayerRemoved += LayersLayerRemoved;
@@ -172,19 +168,6 @@ namespace SharpMap
                     bbox = bbox == null ? layer.Envelope : bbox.Join(layer.Envelope);
                 }
                 return bbox;
-            }
-        }
-
-        /// <summary>
-        /// Minimum zoom amount allowed
-        /// </summary>
-        public double MinimumZoom
-        {
-            get { return minimumZoom; }
-            set {
-                if (value < 0)
-                    throw (new Exception("Minimum zoom must be 0 or more"));
-                minimumZoom = value; 
             }
         }
 

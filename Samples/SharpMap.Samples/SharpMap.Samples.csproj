@@ -43,6 +43,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\libs\BruTile.dll</HintPath>
     </Reference>
+    <Reference Include="BruTile.Desktop, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\temp\mapsui\libs\BruTile.Desktop.dll</HintPath>
+    </Reference>
     <Reference Include="ProjNet.Normal">
       <HintPath>..\..\libs\ProjNet.Normal.dll</HintPath>
     </Reference>
@@ -63,7 +67,9 @@
     <Compile Include="AddPolygonInCode.cs" />
     <Compile Include="ArcGISImageServiceSample.cs" />
     <Compile Include="GradiantThemeSample.cs" />
+    <Compile Include="MapTilerTileSource.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ShapefileSample.cs" />
     <Compile Include="TileLayerSample.cs" />
     <Compile Include="WfsSample.cs" />
     <Compile Include="WmsSample.cs" />
