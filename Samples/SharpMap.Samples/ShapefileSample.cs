@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using SharpMap;
 using SharpMap.Data.Providers;
 using SharpMap.Layers;
 using SharpMap.Providers;
@@ -8,7 +7,7 @@ using SharpMap.Rendering;
 using SharpMap.Styles.Thematics;
 using SharpMap.Styles;
 
-namespace DemoConfig
+namespace SharpMap.Samples
 {
     public static class ShapefileSample 
     {

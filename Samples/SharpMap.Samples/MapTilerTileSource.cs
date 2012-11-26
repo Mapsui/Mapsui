@@ -20,7 +20,7 @@ using BruTile.FileSystem;
 using BruTile.Cache;
 using BruTile.PreDefined;
 
-namespace DemoConfig
+namespace SharpMap.Samples
 {
     public class MapTilerTileSource : ITileSource
     {

@@ -1,5 +1,5 @@
 ﻿using BruTile.Web;
-using DemoConfig;
+using Mapsui.Samples.Common;
 using SharpMap.Layers;
 using SharpMap.Providers;
 using SharpMap.Samples;

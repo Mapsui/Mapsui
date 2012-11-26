@@ -21,7 +21,7 @@ using BruTile;
 using BruTile.Web;
 using BruTile.PreDefined;
 
-namespace DemoConfig
+namespace Mapsui.Samples.Common
 {
     public class GeodanWorldWmsCTileSource : ITileSource
     {

@@ -1,7 +1,7 @@
 ﻿using BruTile;
 using BruTile.Web;
 
-namespace DemoConfig
+namespace Mapsui.Samples.Common
 {
     public class EsriStreetMapWorld : ITileSource
     {

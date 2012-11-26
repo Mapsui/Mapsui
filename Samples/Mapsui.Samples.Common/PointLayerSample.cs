@@ -1,11 +1,9 @@
-﻿using System;
-using System.Linq;
-using SharpMap.Geometries;
+﻿using SharpMap.Geometries;
 using SharpMap.Layers;
 using SharpMap.Providers;
 using SharpMap.Styles;
 
-namespace DemoConfig
+namespace Mapsui.Samples.Common
 {
     public static class PointLayerSample
     {
