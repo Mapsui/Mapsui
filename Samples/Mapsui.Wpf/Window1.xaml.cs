@@ -78,7 +78,6 @@ namespace Mapsui.Wpf
                 true, (ex) => MessageBox.Show(ex.Message)));
             layerList.Initialize(mapControl.Map.Layers);
             mapControl.Refresh();
-
         }
 
         private void BingMapsClick(object sender, RoutedEventArgs e)
@@ -124,9 +123,8 @@ namespace Mapsui.Wpf
         {
             var osmLayer = new TileLayer(new OsmTileSource()) { LayerName = "OSM" };
             var wmsLayer = new TileLayer(new GeodanWorldWmsTileSource()) { LayerName = "Geodan WMS" };
-            throw new NotImplementedException();
-            //var groupLayer = new GroupTileLayer(new[] { osmLayer, wmsLayer });
-            //return groupLayer;
+            var groupLayer = new GroupTileLayer(new[] { osmLayer, wmsLayer });
+            return groupLayer;
         }
 
         private void PointSymbolsClick(object sender, RoutedEventArgs e)

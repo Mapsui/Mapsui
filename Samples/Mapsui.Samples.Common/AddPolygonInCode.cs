@@ -2,14 +2,14 @@
 using SharpMap.Layers;
 using SharpMap.Styles;
 
-namespace SharpMap.Samples
+namespace Mapsui.Samples.Common
 {
     public static class CreatePolygonSample
     {
         public static ILayer AddLayerWithOnePolygon()
         {
             var layer = new Layer("LayerWithPolygon");
-            layer.DataSource = new Providers.MemoryProvider(CreatePolygon());
+            layer.DataSource = new SharpMap.Providers.MemoryProvider(CreatePolygon());
             layer.Styles.Add(new VectorStyle());
             return layer;
         }

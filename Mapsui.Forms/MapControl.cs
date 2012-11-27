@@ -94,7 +94,7 @@ namespace Mapsui.Forms
         void MapDataChanged(object sender, DataChangedEventArgs e)
         {
                 //ViewChanged should not be called here. This would cause a loop
-            BeginInvoke((Action)(() => DataChanged(sender, e)));
+            BeginInvoke((Action) (() => DataChanged(sender, e)));
         }
         
         #endregion
@@ -276,7 +276,7 @@ namespace Mapsui.Forms
         private void InitializeView()
         {
             if (double.IsNaN(Width) || Width == 0) return;
-            if (map == null || map.Envelope == null || double.IsNaN(map.Envelope.Width) || map.Envelope.Width == 0) return;
+            if (map == null || map.Envelope == null || double.IsNaN(map.Envelope.Width) || map.Envelope.Width <= 0) return;
             if (map.Envelope.GetCentroid() == null) return;
 
             view.Center = map.Envelope.GetCentroid();

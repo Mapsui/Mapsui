@@ -1,11 +1,11 @@
-﻿using System;
-using System.IO;
-using SharpMap.Data.Providers;
+﻿using SharpMap.Data.Providers;
 using SharpMap.Layers;
 using SharpMap.Providers;
 using SharpMap.Rendering;
-using SharpMap.Styles.Thematics;
 using SharpMap.Styles;
+using SharpMap.Styles.Thematics;
+using System;
+using System.IO;
 using ColorBlend = SharpMap.Styles.Thematics.ColorBlend;
 using Point = SharpMap.Geometries.Point;
 

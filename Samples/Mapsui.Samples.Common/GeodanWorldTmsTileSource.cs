@@ -27,7 +27,7 @@ namespace Mapsui.Samples.Common
     {
         public GeodanWorldTmsTileSource()
         {
-            string url = "http://geoserver.nl/tiles/tilecache.aspx/1.0.0/world_GM/";
+            const string url = "http://geoserver.nl/tiles/tilecache.aspx/1.0.0/world_GM/";
             var parameters = new Dictionary<string, string>();
             parameters.Add("seriveparam", "world_GM");
             parameters.Add("uid", "4c6b3b161be3a2eb513b66b09a70f18d");

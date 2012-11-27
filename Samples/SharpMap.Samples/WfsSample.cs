@@ -1,10 +1,9 @@
-﻿using System;
-using System.Net;
-using SharpMap.Data.Providers;
-using SharpMap.Layers;
+﻿using SharpMap.Layers;
 using SharpMap.Providers.Wfs;
 using SharpMap.Styles;
 using SharpMap.Utilities.Wfs;
+using System;
+using System.Net;
 
 namespace SharpMap.Samples
 {

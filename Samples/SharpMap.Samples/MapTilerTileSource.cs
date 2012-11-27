@@ -16,8 +16,8 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
 using BruTile;
-using BruTile.FileSystem;
 using BruTile.Cache;
+using BruTile.FileSystem;
 using BruTile.PreDefined;
 
 namespace SharpMap.Samples

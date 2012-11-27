@@ -1,13 +1,14 @@
-﻿using SharpMap.Data;
+﻿using System.Collections.Generic;
+using SharpMap.Data;
 using System.Data;
 
 namespace SharpMap.Providers
 {
     static class Utilities
     {
-        public static IFeatures DataSetToFeatures(FeatureDataSet dataSet)
+        public static IEnumerable<IFeature> DataSetToFeatures(FeatureDataSet dataSet)
         {
-            IFeatures features = new Features();
+            var features = new Features();
 
             foreach (FeatureDataTable table in dataSet.Tables)
             {

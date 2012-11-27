@@ -41,7 +41,7 @@ namespace SharpMap.Fetcher
         private int threadCount;
         private readonly AutoResetEvent waitHandle = new AutoResetEvent(true);
         private readonly IFetchStrategy strategy = new FetchStrategy();
-        private int maxRetries = 2;
+        private readonly int maxRetries = 2;
         private volatile bool isThreadRunning;
         private volatile bool isViewChanged;
         

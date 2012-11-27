@@ -41,10 +41,10 @@ namespace Mapsui.Samples.Common
 
         private static IRequest GetRequestBuilder(ITileSchema schema)
         {
-            string url = "http://geoserver.nl/tiles/tilecache.aspx?";
-            Dictionary<string, string> parameters = new Dictionary<string, string>();
-            WmscRequest request = new WmscRequest(new Uri(url), schema,
-              new List<string>(new string[] { "world_GM" }), new List<string>(), parameters);
+            const string url = "http://geoserver.nl/tiles/tilecache.aspx?";
+            var parameters = new Dictionary<string, string>();
+            var request = new WmscRequest(new Uri(url), schema,
+              new List<string>(new[] { "world_GM" }), new List<string>(), parameters);
             return request;
         }
     }

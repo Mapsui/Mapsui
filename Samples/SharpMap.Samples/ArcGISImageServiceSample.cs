@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using SharpMap.Layers;
+﻿using SharpMap.Layers;
 using SharpMap.Providers.ArcGISImageService;
 using SharpMap.Styles;
 
