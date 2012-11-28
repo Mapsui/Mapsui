@@ -71,20 +71,17 @@
     <Compile Include="Geometries\Raster.cs" />
     <Compile Include="Geometries\SpatialRelations.cs" />
     <Compile Include="Geometries\Surface.cs" />
+    <Compile Include="IViewport.cs" />
     <Compile Include="Layers\BaseLayer.cs" />
     <Compile Include="Layers\IFeatureInfo.cs" />
     <Compile Include="Layers\ILayer.cs" />
     <Compile Include="Layers\ImageLayer.cs" />
     <Compile Include="Layers\LabelLayer.cs" />
     <Compile Include="Layers\Layer.cs" />
+    <Compile Include="Layers\LayerCollection.cs" />
     <Compile Include="Layers\LayerGroup.cs" />
     <Compile Include="Layers\TileLayer.cs" />
-    <Compile Include="Map\IViewport.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Map\LayerCollection.cs" />
-    <Compile Include="Map\Map.cs" />
-    <Compile Include="Map\Viewport.cs" />
+    <Compile Include="Map.cs" />
     <Compile Include="Projection\GeometryIterator.cs" />
     <Compile Include="Projection\ITransformation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -124,11 +121,15 @@
     <Compile Include="Utilities\Providers.cs" />
     <Compile Include="Utilities\Version.cs" />
     <Compile Include="Utilities\ZoomHelper.cs" />
+    <Compile Include="Viewport.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="BruTile">
       <HintPath>..\libs\BruTile.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Map\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
