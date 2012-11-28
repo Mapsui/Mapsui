@@ -1,8 +1,9 @@
 ﻿using System.Windows.Media.Imaging;
 using System.IO;
-namespace SilverlightRendering
+
+namespace Mapsui.Rendering.XamlRendering
 {
-    public class Utilities
+    public static class Utilities
     {
         public static MemoryStream ConverToBitmapStream(WriteableBitmap bitmap)
         {
@@ -127,6 +128,5 @@ namespace SilverlightRendering
 
             return new MemoryStream(ms.GetBuffer());
         }
-
     }
 }

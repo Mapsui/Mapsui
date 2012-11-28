@@ -5,14 +5,12 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
-using Mapsui;
 using Mapsui.Geometries;
 using Mapsui.Styles;
 using Path = System.Windows.Shapes.Path;
 using Point = Mapsui.Geometries.Point;
-using Windows = System.Windows.Media;
 
-namespace SilverlightRendering
+namespace Mapsui.Rendering.XamlRendering
 {
     static class GeometryRenderer
     {
@@ -322,7 +320,7 @@ namespace SilverlightRendering
             return path;
         }
 
-        private static Windows.Geometry ConvertLineString(LineString lineString, IViewport viewport)
+        private static System.Windows.Media.Geometry ConvertLineString(LineString lineString, IViewport viewport)
         {
             var pathGeometry = new PathGeometry();
             pathGeometry.Figures.Add(CreatePathFigure(lineString, viewport));

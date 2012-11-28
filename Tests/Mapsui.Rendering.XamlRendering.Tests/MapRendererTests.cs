@@ -3,7 +3,6 @@ using Mapsui;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
-using SilverlightRendering;
 
 namespace Mapsui.Rendering.XamlRendering.Tests
 {

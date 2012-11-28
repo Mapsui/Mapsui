@@ -5,7 +5,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using Mapsui;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
@@ -13,7 +12,7 @@ using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 using System.Globalization;
 
-namespace SilverlightRendering
+namespace Mapsui.Rendering.XamlRendering
 {
     public static class LabelRenderer
     {

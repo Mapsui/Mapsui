@@ -1,20 +1,17 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using BruTile;
 using BruTile.Cache;
-using Mapsui;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
 
-namespace SilverlightRendering
+namespace Mapsui.Rendering.XamlRendering
 {
     public static class BitmapRenderer
     {
-        public static MemoryCache<System.Windows.Shapes.Path> nativeCache = new MemoryCache<System.Windows.Shapes.Path>(150, 200);
+        private static readonly MemoryCache<System.Windows.Shapes.Path> NativeCache = new MemoryCache<System.Windows.Shapes.Path>(150, 200);
 
         public static void Render(WriteableBitmap bitmap, IViewport viewport, Map map)
         {
@@ -45,7 +42,7 @@ namespace SilverlightRendering
 
             foreach (TileInfo tile in tiles)
             {
-                var p = nativeCache.Find(tile.Index);
+                var p = NativeCache.Find(tile.Index);
                 if (p != null)
                 {
                     bitmap.Render(p, null);
@@ -61,10 +58,10 @@ namespace SilverlightRendering
 
                     //See here the clumsy way to write a bitmap in SL/WPF
                     var path = new System.Windows.Shapes.Path();
-                    path.Data = new RectangleGeometry() { Rect = dest };
+                    path.Data = new RectangleGeometry { Rect = dest };
                     var bitmapImage = new BitmapImage();
                     bitmapImage.SetSource(((IRaster)image.Geometry).Data);
-                    path.Fill = new ImageBrush() { ImageSource = bitmapImage };
+                    path.Fill = new ImageBrush { ImageSource = bitmapImage };
                     path.CacheMode = new BitmapCache();
                     bitmap.Render(path, null);
                 }
@@ -73,8 +70,8 @@ namespace SilverlightRendering
 
         private static Rect WorldToView(Extent extent, IViewport viewport)
         {
-            Mapsui.Geometries.Point min = viewport.WorldToScreen(extent.MinX, extent.MinY);
-            Mapsui.Geometries.Point max = viewport.WorldToScreen(extent.MaxX, extent.MaxY);
+            var min = viewport.WorldToScreen(extent.MinX, extent.MinY);
+            var max = viewport.WorldToScreen(extent.MaxX, extent.MaxY);
             return new Rect(min.X, max.Y, max.X - min.X, min.Y - max.Y);
         }
     }

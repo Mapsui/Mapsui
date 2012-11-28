@@ -7,14 +7,12 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
-using Mapsui;
 using Mapsui.Geometries;
 using Mapsui.Layers;
-using Mapsui.Rendering;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 
-namespace SilverlightRendering
+namespace Mapsui.Rendering.XamlRendering
 {
     public class MapRenderer : IRenderer
     {

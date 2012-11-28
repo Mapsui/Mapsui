@@ -7,14 +7,12 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using BruTile;
 using BruTile.Cache;
-using Mapsui;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
-using Mapsui.Rendering;
 using System.Windows.Controls;
 
-namespace WbxRendering
+namespace Mapsui.Rendering.WbxRendering
 {
     public class WbxMapRenderer : IRenderer
     {
@@ -85,7 +83,7 @@ namespace WbxRendering
 
         private static void RenderTileLayer(WriteableBitmap targetBitmap, ITileSchema schema, IViewport viewport, MemoryCache<Feature> memoryCache, double opacity)
         {
-            int level = Utilities.GetNearestLevel(schema.Resolutions, viewport.Resolution);
+            int level = BruTile.Utilities.GetNearestLevel(schema.Resolutions, viewport.Resolution);
             DrawRecursive(targetBitmap, schema, viewport, memoryCache, viewport.Extent.ToExtent(), level, opacity);
         }
 

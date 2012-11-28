@@ -1,6 +1,6 @@
 ﻿using Mapsui.Styles;
 
-namespace SilverlightRendering
+namespace Mapsui.Rendering.XamlRendering
 {
     static class SilverlightStyle
     {

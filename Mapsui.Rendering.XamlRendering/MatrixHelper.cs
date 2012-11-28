@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Windows.Media;
-using Mapsui;
 
-namespace SilverlightRendering
+namespace Mapsui.Rendering.XamlRendering
 {
     public static class MatrixHelper
     {
