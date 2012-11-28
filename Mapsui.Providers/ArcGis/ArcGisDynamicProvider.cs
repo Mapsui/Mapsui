@@ -11,10 +11,8 @@ namespace Mapsui.Providers.ArcGis
 {
     public class ArcGisDynamicProvider : IProvider
     {
-        private string _url { get; set; }
-        private int _timeOut { get; set; }
-        public Capabilities Capabilities { get; private set; }
-        public ICredentials Credentials { get; set; }        
+        private int timeOut;
+        private string url;
 
         /// <summary>
         /// Create ArcGisDynamicProvider based on a given capabilities file
@@ -25,7 +23,7 @@ namespace Mapsui.Providers.ArcGis
         {
             Url = url;
             Capabilities = capabilities;
-            _timeOut = 10000;            
+            timeOut = 10000;            
         }
 
         /// <summary>
@@ -47,31 +45,20 @@ namespace Mapsui.Providers.ArcGis
             capabilitiesHelper.CapabilitiesFailed += CapabilitiesHelperCapabilitiesFailed;
             capabilitiesHelper.GetCapabilities(url);
 
-            _timeOut = 10000;
+            timeOut = 10000;
         }
 
-        private void CapabilitiesHelperCapabilitiesFailed(object sender, EventArgs e)
-        {
-            Trace.Write("Error getting ArcGIS Capabilities");
-        }
-        
-        private void CapabilitiesHelperCapabilitiesReceived(object sender, EventArgs e)
-        {
-            var capabilities = sender as Capabilities;
-            if (capabilities == null)
-                return;
-
-            Capabilities = capabilities;
-        }
+        public Capabilities Capabilities { get; private set; }
+        public ICredentials Credentials { get; set; }
 
         public string Url
         {
-            get { return _url; }
+            get { return url; }
             set
             {
-                _url = value;
+                url = value;
                 if (value[value.Length - 1].Equals('/'))
-                    _url = value.Remove(value.Length - 1);
+                    url = value.Remove(value.Length - 1);
             }
         }
 
@@ -80,9 +67,11 @@ namespace Mapsui.Providers.ArcGis
         /// </summary>
         public int TimeOut
         {
-            get { return _timeOut; }
-            set { _timeOut = value; }
+            get { return timeOut; }
+            set { timeOut = value; }
         }
+
+        #region IProvider Members
 
         public string ConnectionId
         {
@@ -104,6 +93,60 @@ namespace Mapsui.Providers.ArcGis
             {
                 Capabilities.spatialReference.wkid = value;
             }
+        }
+
+        public IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
+        {
+            //If there are no layers (probably not initialised) return nothing
+            if (Capabilities.layers == null)
+                return new Features();
+
+            IFeatures features = new Features();
+            IRaster raster = null;
+            IViewport viewport = new Viewport { Resolution = resolution, Center = box.GetCentroid(), Width = (box.Width / resolution), Height = (box.Height / resolution) };
+            if (TryGetMap(viewport, ref raster))
+            {
+                var feature = features.New();
+                feature.Geometry = raster;
+                features.Add(feature);
+            }
+            return features;
+        }
+
+        public BoundingBox GetExtents()
+        {
+            return new BoundingBox(Capabilities.initialExtent.xmin, Capabilities.initialExtent.ymin, Capabilities.initialExtent.xmax, Capabilities.initialExtent.ymax);
+        }
+
+        public void Open()
+        {
+
+        }
+
+        public void Close()
+        {
+
+        }
+
+        public void Dispose()
+        {
+
+        }
+
+        #endregion
+
+        private void CapabilitiesHelperCapabilitiesFailed(object sender, EventArgs e)
+        {
+            Trace.Write("Error getting ArcGIS Capabilities");
+        }
+        
+        private void CapabilitiesHelperCapabilitiesReceived(object sender, EventArgs e)
+        {
+            var capabilities = sender as Capabilities;
+            if (capabilities == null)
+                return;
+
+            Capabilities = capabilities;
         }
 
         /// <summary>
@@ -128,7 +171,7 @@ namespace Mapsui.Providers.ArcGis
             var uri = new Uri(GetRequestUrl(viewport.Extent, width, height));
             var request = WebRequest.Create(uri);
             request.Method = "GET";
-            request.Timeout = _timeOut;
+            request.Timeout = timeOut;
             request.Credentials = Credentials ?? CredentialCache.DefaultCredentials;
 
             try
@@ -166,7 +209,7 @@ namespace Mapsui.Providers.ArcGis
         {
             //ArcGIS Export description see: http://resources.esri.com/help/9.3/arcgisserver/apis/rest/index.html?export.html
 
-            var strReq = new StringBuilder(_url);
+            var strReq = new StringBuilder(url);
             strReq.Append("/export?");
             strReq.AppendFormat(CultureInfo.InvariantCulture, "bbox={0},{1},{2},{3}", box.Min.X, box.Min.Y, box.Max.X, box.Max.Y);
             strReq.AppendFormat("&bboxSR={0}", SRID);
@@ -218,44 +261,6 @@ namespace Mapsui.Providers.ArcGis
                 return "png";
 
             return "jpg";
-        }
-
-        public IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
-        {
-            //If there are no layers (probably not initialised) return nothing
-            if (Capabilities.layers == null)
-                return new Features();
-
-            IFeatures features = new Features();
-            IRaster raster = null;
-            IViewport viewport = new Viewport { Resolution = resolution, Center = box.GetCentroid(), Width = (box.Width / resolution), Height = (box.Height / resolution) };
-            if (TryGetMap(viewport, ref raster))
-            {
-                var feature = features.New();
-                feature.Geometry = raster;
-                features.Add(feature);
-            }
-            return features;
-        }
-
-        public BoundingBox GetExtents()
-        {
-            return new BoundingBox(Capabilities.initialExtent.xmin, Capabilities.initialExtent.ymin, Capabilities.initialExtent.xmax, Capabilities.initialExtent.ymax);
-        }
-
-        public void Open()
-        {
-
-        }
-
-        public void Close()
-        {
-
-        }
-
-        public void Dispose()
-        {
-
         }
     }
 }
