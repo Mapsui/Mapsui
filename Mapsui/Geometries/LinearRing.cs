@@ -94,7 +94,6 @@ namespace SharpMap.Geometries
         /// <returns>Returns true if ring is oriented counter-clockwise.</returns>
         public bool IsCCW()
         {
-            Point hip, p, prev, next;
             int hii, i;
             int nPts = Vertices.Count;
 
@@ -103,11 +102,11 @@ namespace SharpMap.Geometries
 
             // algorithm to check if a Ring is stored in CCW order
             // find highest point
-            hip = Vertices[0];
+            Point hip = Vertices[0];
             hii = 0;
             for (i = 1; i < nPts; i++)
             {
-                p = Vertices[i];
+                Point p = Vertices[i];
                 if (p.Y > hip.Y)
                 {
                     hip = p;
@@ -119,19 +118,19 @@ namespace SharpMap.Geometries
             if (iPrev < 0) iPrev = nPts - 2;
             int iNext = hii + 1;
             if (iNext >= nPts) iNext = 1;
-            prev = Vertices[iPrev];
-            next = Vertices[iNext];
+            Point prev = Vertices[iPrev];
+            Point next = Vertices[iNext];
             // translate so that hip is at the origin.
             // This will not affect the area calculation, and will avoid
             // finite-accuracy errors (i.e very small vectors with very large coordinates)
             // This also simplifies the discriminant calculation.
-            double prev2x = prev.X - hip.X;
-            double prev2y = prev.Y - hip.Y;
-            double next2x = next.X - hip.X;
-            double next2y = next.Y - hip.Y;
+            double prev2X = prev.X - hip.X;
+            double prev2Y = prev.Y - hip.Y;
+            double next2X = next.X - hip.X;
+            double next2Y = next.Y - hip.Y;
             // compute cross-product of vectors hip->next and hip->prev
             // (e.g. area of parallelogram they enclose)
-            double disc = next2x*prev2y - next2y*prev2x;
+            double disc = next2X*prev2Y - next2Y*prev2X;
             // If disc is exactly 0, lines are collinear.  There are two possible cases:
             //	(1) the lines lie along the x axis in opposite directions
             //	(2) the line lie on top of one another
@@ -144,11 +143,8 @@ namespace SharpMap.Geometries
                 // poly is CCW if prev x is right of next x
                 return (prev.X > next.X);
             }
-            else
-            {
-                // if area is positive, points are ordered CCW
-                return (disc > 0.0);
-            }
+            // if area is positive, points are ordered CCW
+            return (disc > 0.0);
         }
 
         /// <summary>

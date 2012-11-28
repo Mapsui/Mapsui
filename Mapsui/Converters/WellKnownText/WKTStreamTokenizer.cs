@@ -109,7 +109,7 @@ namespace SharpMap.Converters.WellKnownText
         /// </summary>
         /// <param name="authority">String to place the authority in.</param>
         /// <param name="authorityCode">String to place the authority code in.</param>
-        public void ReadAuthority(ref string authority, ref long authorityCode)
+        public void ReadAuthority(out string authority, out long authorityCode)
         {
             //AUTHORITY["EPGS","9102"]]
             if (GetStringValue() != "AUTHORITY")

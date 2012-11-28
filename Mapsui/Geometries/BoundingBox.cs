@@ -392,12 +392,11 @@ namespace SharpMap.Geometries
                 if (Min[cIndex] > r.Max[cIndex] || Max[cIndex] < r.Min[cIndex]) return 0.0;
 
             double ret = 1.0;
-            double f1, f2;
 
             for (cIndex = 0; cIndex < 2; cIndex++)
             {
-                f1 = Math.Max(Min[cIndex], r.Min[cIndex]);
-                f2 = Math.Min(Max[cIndex], r.Max[cIndex]);
+                double f1 = Math.Max(Min[cIndex], r.Min[cIndex]);
+                double f2 = Math.Min(Max[cIndex], r.Max[cIndex]);
                 ret *= f2 - f1;
             }
             return ret;

@@ -22,7 +22,7 @@ namespace SharpMap.Geometries
     /// <summary>
     /// Class defining a set of named spatial relationship operators for geometric shape objects.
     /// </summary>
-    public class SpatialRelations
+    public static class SpatialRelations
     {
         /// <summary>
         /// Returns true if otherGeometry is wholly contained within the source geometry. This is the same as
@@ -78,18 +78,17 @@ namespace SharpMap.Geometries
                 return false;
             if (g1 is Point)
                 return (g1 as Point).Equals(g2 as Point);
-            else if (g1 is LineString)
+            if (g1 is LineString)
                 return (g1 as LineString).Equals(g2 as LineString);
-            else if (g1 is Polygon)
+            if (g1 is Polygon)
                 return (g1 as Polygon).Equals(g2 as Polygon);
-            else if (g1 is MultiPoint)
+            if (g1 is MultiPoint)
                 return (g1 as MultiPoint).Equals(g2 as MultiPoint);
-            else if (g1 is MultiLineString)
+            if (g1 is MultiLineString)
                 return (g1 as MultiLineString).Equals(g2 as MultiLineString);
-            else if (g1 is MultiPolygon)
+            if (g1 is MultiPolygon)
                 return (g1 as MultiPolygon).Equals(g2 as MultiPolygon);
-            else
-                throw new ArgumentException("The method or operation is not implemented on this geometry type.");
+            throw new ArgumentException("The method or operation is not implemented on this geometry type.");
         }
 
 

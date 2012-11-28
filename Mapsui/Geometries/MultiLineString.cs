@@ -27,14 +27,14 @@ namespace SharpMap.Geometries
     /// </summary>
     public class MultiLineString : MultiCurve
     {
-        private IList<LineString> _LineStrings;
+        private IList<LineString> lineStrings;
 
         /// <summary>
         /// Initializes an instance of a MultiLineString
         /// </summary>
         public MultiLineString()
         {
-            _LineStrings = new Collection<LineString>();
+            lineStrings = new Collection<LineString>();
         }
 
         /// <summary>
@@ -42,8 +42,8 @@ namespace SharpMap.Geometries
         /// </summary>
         public IList<LineString> LineStrings
         {
-            get { return _LineStrings; }
-            set { _LineStrings = value; }
+            get { return lineStrings; }
+            set { lineStrings = value; }
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace SharpMap.Geometries
         /// <returns>Geometry at index</returns>
         public new LineString this[int index]
         {
-            get { return _LineStrings[index]; }
+            get { return lineStrings[index]; }
         }
 
         /// <summary>
@@ -63,8 +63,8 @@ namespace SharpMap.Geometries
         {
             get
             {
-                for (int i = 0; i < _LineStrings.Count; i++)
-                    if (!_LineStrings[i].IsClosed)
+                foreach (LineString lineString in lineStrings)
+                    if (!lineString.IsClosed)
                         return false;
                 return true;
             }
@@ -78,8 +78,8 @@ namespace SharpMap.Geometries
             get
             {
                 double l = 0;
-                for (int i = 0; i < _LineStrings.Count; i++)
-                    l += _LineStrings[i].Length;
+                foreach (LineString lineString in lineStrings)
+                    l += lineString.Length;
                 return l;
             }
         }
@@ -89,7 +89,7 @@ namespace SharpMap.Geometries
         /// </summary>
         public override int NumGeometries
         {
-            get { return _LineStrings.Count; }
+            get { return lineStrings.Count; }
         }
 
         /// <summary>
@@ -98,11 +98,11 @@ namespace SharpMap.Geometries
         /// <returns>Returns 'true' if this Geometry is the empty geometry</returns>
         public override bool IsEmpty()
         {
-            if (_LineStrings == null || _LineStrings.Count == 0)
+            if (lineStrings == null || lineStrings.Count == 0)
                 return true;
 
-            for (int i = 0; i < _LineStrings.Count; i++)
-                if (!_LineStrings[i].IsEmpty())
+            foreach (LineString lineString in lineStrings)
+                if (!lineString.IsEmpty())
                     return false;
 
             return true;
@@ -131,10 +131,10 @@ namespace SharpMap.Geometries
 
             if (geom is Point)
             {
-                Point coord = geom as Point;
+                var coord = geom as Point;
                 // brute force approach!
                 double minDist = double.MaxValue;
-                foreach (var ls in _LineStrings)
+                foreach (var ls in lineStrings)
                 {
                     IList<Point> coord0 = ls.Vertices;
                     for (int i = 0; i < coord0.Count - 1; i++)
@@ -148,12 +148,12 @@ namespace SharpMap.Geometries
                 }
                 return minDist;
             }
-            else if (geom is LineString)
+            if (geom is LineString)
             {
                 IList<Point> coord1 = (geom as LineString).Vertices;
                 // brute force approach!
-                double _minDistance = double.MaxValue;
-                foreach (var ls in _LineStrings)
+                double minDistance = double.MaxValue;
+                foreach (var ls in lineStrings)
                 {
                     IList<Point> coord0 = ls.Vertices;
                     for (int i = 0; i < coord0.Count - 1; i++)
@@ -161,16 +161,16 @@ namespace SharpMap.Geometries
                         for (int j = 0; j < coord1.Count - 1; j++)
                         {
                             double dist = CGAlgorithms.DistanceLineLine(
-                                                            coord0[i], coord0[i + 1],
-                                                            coord1[j], coord1[j + 1]);
-                            if (dist < _minDistance)
+                                coord0[i], coord0[i + 1],
+                                coord1[j], coord1[j + 1]);
+                            if (dist < minDistance)
                             {
-                                _minDistance = dist;
+                                minDistance = dist;
                             }
                         }
                     }
                 }
-                return _minDistance;
+                return minDistance;
             }
 
             throw new NotImplementedException();
@@ -190,11 +190,11 @@ namespace SharpMap.Geometries
         /// <summary>
         /// Returns an indexed geometry in the collection
         /// </summary>
-        /// <param name="N">Geometry index</param>
+        /// <param name="n">Geometry index</param>
         /// <returns>Geometry at index N</returns>
-        public override Geometry Geometry(int N)
+        public override Geometry Geometry(int n)
         {
-            return _LineStrings[N];
+            return lineStrings[n];
         }
 
         /// <summary>
@@ -203,11 +203,11 @@ namespace SharpMap.Geometries
         /// <returns></returns>
         public override BoundingBox GetBoundingBox()
         {
-            if (_LineStrings == null || _LineStrings.Count == 0)
+            if (lineStrings == null || lineStrings.Count == 0)
                 return null;
-            BoundingBox bbox = _LineStrings[0].GetBoundingBox();
-            for (int i = 1; i < _LineStrings.Count; i++)
-                bbox = bbox.Join(_LineStrings[i].GetBoundingBox());
+            BoundingBox bbox = lineStrings[0].GetBoundingBox();
+            for (int i = 1; i < lineStrings.Count; i++)
+                bbox = bbox.Join(lineStrings[i].GetBoundingBox());
             return bbox;
         }
 
@@ -217,9 +217,9 @@ namespace SharpMap.Geometries
         /// <returns>Copy of Geometry</returns>
         public new MultiLineString Clone()
         {
-            MultiLineString geoms = new MultiLineString();
-            for (int i = 0; i < _LineStrings.Count; i++)
-                geoms.LineStrings.Add(_LineStrings[i].Clone());
+            var geoms = new MultiLineString();
+            foreach (LineString lineString in lineStrings)
+                geoms.LineStrings.Add(lineString.Clone());
             return geoms;
         }
 
@@ -229,7 +229,7 @@ namespace SharpMap.Geometries
         /// <returns></returns>
         public override IEnumerator<Geometry> GetEnumerator()
         {
-            foreach (LineString l in _LineStrings)
+            foreach (LineString l in lineStrings)
                 yield return l;
         }
     }

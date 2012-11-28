@@ -35,13 +35,9 @@
  *
  */
 
-#region Using
-
 using System;
 using System.IO;
 using System.Globalization;
-
-#endregion
 
 // http://java.sun.com/j2se/1.4/docs/api/java/io/StreamTokenizer.html
 // a better implementation could be written. Here is a good Java implementation of StreamTokenizer.

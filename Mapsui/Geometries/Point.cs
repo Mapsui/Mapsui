@@ -25,9 +25,9 @@ namespace SharpMap.Geometries
     /// </summary>
     public class Point : Geometry, IComparable<Point>
     {
-        private bool _IsEmpty = false;
-        private double _X;
-        private double _Y;
+        private bool isEmpty;
+        private double x;
+        private double y;
 
         /// <summary>
         /// Initializes a new Point
@@ -36,8 +36,8 @@ namespace SharpMap.Geometries
         /// <param name="y">Y coordinate</param>
         public Point(double x, double y)
         {
-            _X = x;
-            _Y = y;
+            this.x = x;
+            this.y = y;
         }
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace SharpMap.Geometries
         /// </summary>
         public Point() : this(0, 0)
         {
-            _IsEmpty = true;
+            isEmpty = true;
         }
 
         /// <summary>
@@ -57,8 +57,8 @@ namespace SharpMap.Geometries
             if (point.Length != 2)
                 throw new Exception("Only 2 dimensions are supported for points");
 
-            _X = point[0];
-            _Y = point[1];
+            x = point[0];
+            y = point[1];
         }
 
         /// <summary>
@@ -66,7 +66,7 @@ namespace SharpMap.Geometries
         /// </summary>
         protected bool SetIsEmpty
         {
-            set { _IsEmpty = value; }
+            set { isEmpty = value; }
         }
 
         /// <summary>
@@ -76,14 +76,14 @@ namespace SharpMap.Geometries
         {
             get
             {
-                if (!_IsEmpty)
-                    return _X;
-                else throw new Exception("Point is empty");
+                if (!isEmpty)
+                    return x;
+                throw new Exception("Point is empty");
             }
             set
             {
-                _X = value;
-                _IsEmpty = false;
+                x = value;
+                isEmpty = false;
             }
         }
 
@@ -94,14 +94,14 @@ namespace SharpMap.Geometries
         {
             get
             {
-                if (!_IsEmpty)
-                    return _Y;
-                else throw new Exception("Point is empty");
+                if (!isEmpty)
+                    return y;
+                throw new Exception("Point is empty");
             }
             set
             {
-                _Y = value;
-                _IsEmpty = false;
+                y = value;
+                isEmpty = false;
             }
         }
 
@@ -114,7 +114,7 @@ namespace SharpMap.Geometries
         {
             get
             {
-                if (_IsEmpty)
+                if (isEmpty)
                     throw new Exception("Point is empty");
                 else if (index == 0)
                     return X;
@@ -132,7 +132,7 @@ namespace SharpMap.Geometries
                     Y = value;
                 else
                     throw (new Exception("Point index out of bounds"));
-                _IsEmpty = false;
+                isEmpty = false;
             }
         }
 
@@ -155,8 +155,10 @@ namespace SharpMap.Geometries
         {
             if (X < other.X || X == other.X && Y < other.Y)
                 return -1;
-            else if (X > other.X || X == other.X && Y > other.Y)
+
+            if (X > other.X || X == other.X && Y > other.Y)
                 return 1;
+
             else // (this.X == other.X && this.Y == other.Y)
                 return 0;
         }
@@ -169,7 +171,7 @@ namespace SharpMap.Geometries
         /// <returns></returns>
         public double[] ToDoubleArray()
         {
-            return new double[2] {_X, _Y};
+            return new[] {x, y};
         }
 
         /// <summary>
@@ -196,14 +198,9 @@ namespace SharpMap.Geometries
         /// <returns><see cref="Point"/></returns>
         public Point AsPoint()
         {
-            return new Point(_X, _Y);
+            return new Point(x, y);
         }
 
-        /// <summary>
-        /// Transforms the point to image coordinates, based on the map
-        /// </summary>
-        /// <param name="map">Map to base coordinates on</param>
-        /// <returns>point in image coordinates</returns>
         public Point WorldToMap(IView view)
         {
             return view.WorldToView(this);
@@ -271,9 +268,9 @@ namespace SharpMap.Geometries
         /// </summary>
         /// <param name="p">Point to compare to</param>
         /// <returns></returns>
-        public virtual bool Equals(Point p)
+        public bool Equals(Point p)
         {
-            return p != null && p.X == _X && p.Y == _Y && _IsEmpty == p.IsEmpty();
+            return p != null && p.X == x && p.Y == y && isEmpty == p.IsEmpty();
         }
 
         /// <summary>
@@ -283,7 +280,7 @@ namespace SharpMap.Geometries
         /// <returns>A hash code for the current <see cref="GetHashCode"/>.</returns>
         public override int GetHashCode()
         {
-            return _X.GetHashCode() ^ _Y.GetHashCode() ^ _IsEmpty.GetHashCode();
+            return x.GetHashCode() ^ y.GetHashCode() ^ isEmpty.GetHashCode();
         }
 
         /// <summary>
@@ -292,7 +289,7 @@ namespace SharpMap.Geometries
         /// <returns>Returns 'true' if this Geometry is the empty geometry</returns>
         public override bool IsEmpty()
         {
-            return _IsEmpty;
+            return isEmpty;
         }
 
         /// <summary>

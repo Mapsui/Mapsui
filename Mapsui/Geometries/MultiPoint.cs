@@ -27,14 +27,14 @@ namespace SharpMap.Geometries
     /// </summary>
     public class MultiPoint : GeometryCollection
     {
-        private IList<Point> _Points;
+        private IList<Point> points;
 
         /// <summary>
         /// Initializes a new MultiPoint collection
         /// </summary>
         public MultiPoint()
         {
-            _Points = new Collection<Point>();
+            points = new Collection<Point>();
         }
 
         /// <summary>
@@ -42,9 +42,9 @@ namespace SharpMap.Geometries
         /// </summary>		
         public MultiPoint(IEnumerable<double[]> points)
         {
-            _Points = new Collection<Point>();
+            this.points = new Collection<Point>();
             foreach (double[] point in points)
-                _Points.Add(new Point(point[0], point[1]));
+                this.points.Add(new Point(point[0], point[1]));
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace SharpMap.Geometries
         /// <returns>Point</returns>
         public new Point this[int n]
         {
-            get { return _Points[n]; }
+            get { return points[n]; }
         }
 
         /// <summary>
@@ -62,8 +62,8 @@ namespace SharpMap.Geometries
         /// </summary>
         public IList<Point> Points
         {
-            get { return _Points; }
-            set { _Points = value; }
+            get { return points; }
+            set { points = value; }
         }
 
         /// <summary>
@@ -71,7 +71,7 @@ namespace SharpMap.Geometries
         /// </summary>
         public override int NumGeometries
         {
-            get { return _Points.Count; }
+            get { return points.Count; }
         }
 
         /// <summary>
@@ -85,11 +85,11 @@ namespace SharpMap.Geometries
         /// <summary>
         /// Returns an indexed geometry in the collection
         /// </summary>
-        /// <param name="N">Geometry index</param>
+        /// <param name="n">Geometry index</param>
         /// <returns>Geometry at index N</returns>
-        public new Point Geometry(int N)
+        public new Point Geometry(int n)
         {
-            return _Points[N];
+            return points[n];
         }
 
         /// <summary>
@@ -98,7 +98,7 @@ namespace SharpMap.Geometries
         /// <returns>Returns 'true' if this Geometry is the empty geometry</returns>
         public override bool IsEmpty()
         {
-            return (_Points != null && _Points.Count == 0);
+            return (points != null && points.Count == 0);
         }
 
         /// <summary>
@@ -138,15 +138,15 @@ namespace SharpMap.Geometries
         /// <returns></returns>
         public override BoundingBox GetBoundingBox()
         {
-            if (_Points == null || _Points.Count == 0)
+            if (points == null || points.Count == 0)
                 return null;
-            BoundingBox bbox = new BoundingBox(_Points[0], _Points[0]);
-            for (int i = 1; i < _Points.Count; i++)
+            var bbox = new BoundingBox(points[0], points[0]);
+            for (int i = 1; i < points.Count; i++)
             {
-                bbox.Min.X = _Points[i].X < bbox.Min.X ? _Points[i].X : bbox.Min.X;
-                bbox.Min.Y = _Points[i].Y < bbox.Min.Y ? _Points[i].Y : bbox.Min.Y;
-                bbox.Max.X = _Points[i].X > bbox.Max.X ? _Points[i].X : bbox.Max.X;
-                bbox.Max.Y = _Points[i].Y > bbox.Max.Y ? _Points[i].Y : bbox.Max.Y;
+                bbox.Min.X = points[i].X < bbox.Min.X ? points[i].X : bbox.Min.X;
+                bbox.Min.Y = points[i].Y < bbox.Min.Y ? points[i].Y : bbox.Min.Y;
+                bbox.Max.X = points[i].X > bbox.Max.X ? points[i].X : bbox.Max.X;
+                bbox.Max.Y = points[i].Y > bbox.Max.Y ? points[i].Y : bbox.Max.Y;
             }
             return bbox;
         }
@@ -157,9 +157,9 @@ namespace SharpMap.Geometries
         /// <returns>Copy of Geometry</returns>
         public new MultiPoint Clone()
         {
-            MultiPoint geoms = new MultiPoint();
-            for (int i = 0; i < _Points.Count; i++)
-                geoms.Points.Add(_Points[i].Clone());
+            var geoms = new MultiPoint();
+            foreach (var point in points)
+                geoms.Points.Add(point.Clone());
             return geoms;
         }
 
@@ -169,7 +169,7 @@ namespace SharpMap.Geometries
         /// <returns></returns>
         public override IEnumerator<Geometry> GetEnumerator()
         {
-            foreach (Point p in _Points)
+            foreach (Point p in points)
                 yield return p;
         }
     }

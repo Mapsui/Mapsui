@@ -26,14 +26,14 @@ namespace SharpMap.Geometries
     /// </summary>
     public class MultiPolygon : MultiSurface
     {
-        private IList<Polygon> _Polygons;
+        private IList<Polygon> polygons;
 
         /// <summary>
         /// Instantiates a MultiPolygon
         /// </summary>
         public MultiPolygon()
         {
-            _Polygons = new Collection<Polygon>();
+            polygons = new Collection<Polygon>();
         }
 
         /// <summary>
@@ -41,8 +41,8 @@ namespace SharpMap.Geometries
         /// </summary>
         public IList<Polygon> Polygons
         {
-            get { return _Polygons; }
-            set { _Polygons = value; }
+            get { return polygons; }
+            set { polygons = value; }
         }
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace SharpMap.Geometries
         /// <returns>Geometry at index</returns>
         public new Polygon this[int index]
         {
-            get { return _Polygons[index]; }
+            get { return polygons[index]; }
         }
 
         /// <summary>
@@ -63,8 +63,8 @@ namespace SharpMap.Geometries
             get
             {
                 double result = 0;
-                for (int i = 0; i < _Polygons.Count; i++)
-                    result += _Polygons[i].Area;
+                for (int i = 0; i < polygons.Count; i++)
+                    result += polygons[i].Area;
                 return result;
             }
         }
@@ -91,7 +91,7 @@ namespace SharpMap.Geometries
         /// </summary>
         public override int NumGeometries
         {
-            get { return _Polygons.Count; }
+            get { return polygons.Count; }
         }
 
         /// <summary>
@@ -100,10 +100,10 @@ namespace SharpMap.Geometries
         /// <returns>Returns 'true' if this Geometry is the empty geometry</returns>
         public override bool IsEmpty()
         {
-            if (_Polygons == null || _Polygons.Count == 0)
+            if (polygons == null || polygons.Count == 0)
                 return true;
-            for (int i = 0; i < _Polygons.Count; i++)
-                if (!_Polygons[i].IsEmpty())
+            for (int i = 0; i < polygons.Count; i++)
+                if (!polygons[i].IsEmpty())
                     return false;
             return true;
         }
@@ -145,11 +145,11 @@ namespace SharpMap.Geometries
         /// <summary>
         /// Returns an indexed geometry in the collection
         /// </summary>
-        /// <param name="N">Geometry index</param>
+        /// <param name="n">Geometry index</param>
         /// <returns>Geometry at index N</returns>
-        public override Geometry Geometry(int N)
+        public override Geometry Geometry(int n)
         {
-            return _Polygons[N];
+            return polygons[n];
         }
 
         /// <summary>
@@ -158,7 +158,7 @@ namespace SharpMap.Geometries
         /// <returns>bounding box</returns>
         public override BoundingBox GetBoundingBox()
         {
-            if (_Polygons == null || _Polygons.Count == 0)
+            if (polygons == null || polygons.Count == 0)
                 return null;
             BoundingBox bbox = Polygons[0].GetBoundingBox();
             for (int i = 1; i < Polygons.Count; i++)
@@ -172,9 +172,9 @@ namespace SharpMap.Geometries
         /// <returns>Copy of Geometry</returns>
         public new MultiPolygon Clone()
         {
-            MultiPolygon geoms = new MultiPolygon();
-            for (int i = 0; i < _Polygons.Count; i++)
-                geoms.Polygons.Add(_Polygons[i].Clone());
+            var geoms = new MultiPolygon();
+            foreach (Polygon polygon in polygons)
+                geoms.Polygons.Add(polygon.Clone());
             return geoms;
         }
 
@@ -184,7 +184,7 @@ namespace SharpMap.Geometries
         /// <returns></returns>
         public override IEnumerator<Geometry> GetEnumerator()
         {
-            foreach (Polygon p in _Polygons)
+            foreach (Polygon p in polygons)
                 yield return p;
         }
     }

@@ -303,10 +303,11 @@ namespace SharpMap.Converters.WellKnownBinary
                 Array.Reverse(bytes);
                 return BitConverter.ToDouble(bytes, 0);
             }
-            else if (byteOrder == WkbByteOrder.Ndr)
+
+            if (byteOrder == WkbByteOrder.Ndr)
                 return reader.ReadDouble();
-            else
-                throw new ArgumentException("Byte order not recognized");
+
+            throw new ArgumentException("Byte order not recognized");
         }
     }
 }

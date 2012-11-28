@@ -62,22 +62,12 @@ namespace SharpMap.Converters.WellKnownBinary
         //private const byte WKBByteOrder = 0;
 
         /// <summary>
-        /// Writes a geometry to a byte array using little endian byte encoding
-        /// </summary>
-        /// <param name="g">The geometry to write</param>
-        /// <returns>WKB representation of the geometry</returns>
-        public static byte[] Write(Geometry g)
-        {
-            return Write(g, WkbByteOrder.Ndr);
-        }
-
-        /// <summary>
         /// Writes a geometry to a byte array using the specified encoding.
         /// </summary>
         /// <param name="g">The geometry to write</param>
         /// <param name="wkbByteOrder">Byte order</param>
         /// <returns>WKB representation of the geometry</returns>
-        public static byte[] Write(Geometry g, WkbByteOrder wkbByteOrder)
+        public static byte[] Write(Geometry g, WkbByteOrder wkbByteOrder = WkbByteOrder.Ndr)
         {
             var ms = new MemoryStream();
             var bw = new BinaryWriter(ms);

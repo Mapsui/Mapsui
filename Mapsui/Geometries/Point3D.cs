@@ -25,7 +25,7 @@ namespace SharpMap.Geometries
     /// </summary>
     public class Point3D : Point
     {
-        private double _Z;
+        private double z;
 
         /// <summary>
         /// Initializes a new Point
@@ -35,7 +35,7 @@ namespace SharpMap.Geometries
         /// <param name="z">Z coordinate</param>
         public Point3D(double x, double y, double z) : base(x, y)
         {
-            _Z = z;
+            this.z = z;
         }
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace SharpMap.Geometries
         public Point3D(Point p, double z)
             : base(p.X, p.Y)
         {
-            _Z = z;
+            this.z = z;
         }
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace SharpMap.Geometries
             if (point.Length != 3)
                 throw new Exception("Only 3 dimensions are supported for points");
 
-            _Z = point[2];
+            z = point[2];
         }
 
         /// <summary>
@@ -78,12 +78,12 @@ namespace SharpMap.Geometries
             get
             {
                 if (!IsEmpty())
-                    return _Z;
-                else throw new Exception("Point is empty");
+                    return z;
+                throw new Exception("Point is empty");
             }
             set
             {
-                _Z = value;
+                z = value;
                 SetIsEmpty = false;
             }
         }
@@ -103,8 +103,7 @@ namespace SharpMap.Geometries
                         throw new Exception("Point is empty");
                     return Z;
                 }
-                else
-                    return base[index];
+                return base[index];
             }
             set
             {
@@ -172,7 +171,7 @@ namespace SharpMap.Geometries
         /// <returns></returns>
         public bool Equals(Point3D p)
         {
-            return base.Equals(p) && p.Z == _Z;
+            return base.Equals(p) && p.Z == z;
         }
 
         /// <summary>
@@ -182,7 +181,7 @@ namespace SharpMap.Geometries
         /// <returns>A hash code for the current <see cref="GetHashCode"/>.</returns>
         public override int GetHashCode()
         {
-            return base.GetHashCode() ^ _Z.GetHashCode();
+            return base.GetHashCode() ^ z.GetHashCode();
         }
 
         /// <summary>
@@ -195,11 +194,10 @@ namespace SharpMap.Geometries
         {
             if (geom.GetType() == typeof (Point3D))
             {
-                Point3D p = geom as Point3D;
+                var p = geom as Point3D;
                 return Math.Sqrt(Math.Pow(X - p.X, 2) + Math.Pow(Y - p.Y, 2) + Math.Pow(Z - p.Z, 2));
             }
-            else
-                return base.Distance(geom);
+            return base.Distance(geom);
         }
 
         #endregion
@@ -210,7 +208,7 @@ namespace SharpMap.Geometries
         /// <returns></returns>
         public new double[] ToDoubleArray()
         {
-            return new double[3] {X, Y, Z};
+            return new[] {X, Y, Z};
         }
 
         /// <summary>
@@ -242,10 +240,11 @@ namespace SharpMap.Geometries
         {
             if (X < other.X || X == other.X && Y < other.Y || X == other.X && Y == other.Y && Z < other.Z)
                 return -1;
-            else if (X > other.X || X == other.X && Y > other.Y || X == other.X && Y == other.Y && Z > other.Z)
+
+            if (X > other.X || X == other.X && Y > other.Y || X == other.X && Y == other.Y && Z > other.Z)
                 return 1;
-            else // (this.X == other.X && this.Y == other.Y && this.Z == other.Z)
-                return 0;
+
+            return 0;
         }
     }
 }

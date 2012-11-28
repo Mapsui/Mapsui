@@ -48,8 +48,8 @@ namespace SharpMap.Geometries
         /// <summary>
         /// Returns an indexed geometry in the collection
         /// </summary>
-        /// <param name="N">Geometry index</param>
+        /// <param name="n">Geometry index</param>
         /// <returns>Geometry at index N</returns>
-        public new abstract Geometry Geometry(int N);
+        public new abstract Geometry Geometry(int n);
     }
 }

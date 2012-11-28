@@ -18,7 +18,6 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using SharpMap.Utilities;
 
 namespace SharpMap.Geometries
 {
@@ -28,7 +27,7 @@ namespace SharpMap.Geometries
     /// </summary>
     public class LineString : Curve
     {
-        private IList<Point> _Vertices;
+        private IList<Point> vertices;
 
         /// <summary>
         /// Initializes an instance of a LineString from a set of vertices
@@ -36,7 +35,7 @@ namespace SharpMap.Geometries
         /// <param name="vertices"></param>
         public LineString(IList<Point> vertices)
         {
-            _Vertices = vertices;
+            this.vertices = vertices;
         }
 
         /// <summary>
@@ -52,21 +51,21 @@ namespace SharpMap.Geometries
         /// <param name="points"></param>
         public LineString(IEnumerable<double[]> points)
         {
-            Collection<Point> vertices = new Collection<Point>();
+            var vertices = new Collection<Point>();
 
             foreach (double[] point in points)
                 vertices.Add(new Point(point));
 
-            _Vertices = vertices;
+            this.vertices = vertices;
         }
 
         /// <summary>
         /// Gets or sets the collection of vertices in this Geometry
         /// </summary>
-        public virtual IList<Point> Vertices
+        public IList<Point> Vertices
         {
-            get { return _Vertices; }
-            set { _Vertices = value; }
+            get { return vertices; }
+            set { vertices = value; }
         }
 
         /// <summary>
@@ -77,9 +76,9 @@ namespace SharpMap.Geometries
         {
             get
             {
-                if (_Vertices.Count == 0)
+                if (vertices.Count == 0)
                     throw new Exception("No startpoint found: LineString has no vertices.");
-                return _Vertices[0];
+                return vertices[0];
             }
         }
 
@@ -91,9 +90,9 @@ namespace SharpMap.Geometries
         {
             get
             {
-                if (_Vertices.Count == 0)
+                if (vertices.Count == 0)
                     throw new Exception("No endpoint found: LineString has no vertices.");
-                return _Vertices[_Vertices.Count - 1];
+                return vertices[vertices.Count - 1];
             }
         }
 
@@ -127,20 +126,20 @@ namespace SharpMap.Geometries
         /// The number of points in this LineString.
         /// </summary>
         /// <remarks>This method is supplied as part of the OpenGIS Simple Features Specification</remarks>
-        public virtual int NumPoints
+        public int NumPoints
         {
-            get { return _Vertices.Count; }
+            get { return vertices.Count; }
         }
 
         /// <summary>
         /// Returns the specified point N in this Linestring.
         /// </summary>
         /// <remarks>This method is supplied as part of the OpenGIS Simple Features Specification</remarks>
-        /// <param name="N"></param>
+        /// <param name="n"></param>
         /// <returns></returns>
-        public Point Point(int N)
+        public Point Point(int n)
         {
-            return _Vertices[N];
+            return vertices[n];
         }
 
         #endregion
@@ -152,9 +151,9 @@ namespace SharpMap.Geometries
         /// <returns>Linestring in image coordinates</returns>
         public IList<Point> WorldToView(IView view)
         {
-            Point[] v = new Point[_Vertices.Count];
-            for (int i = 0; i < this.Vertices.Count; i++)
-                v[i] = view.WorldToView(_Vertices[i]);
+            var v = new Point[vertices.Count];
+            for (int i = 0; i < Vertices.Count; i++)
+                v[i] = view.WorldToView(vertices[i]);
             return v;
         }	
 
@@ -176,7 +175,7 @@ namespace SharpMap.Geometries
         {
             if (Vertices == null || Vertices.Count == 0)
                 return null;
-            BoundingBox bbox = new BoundingBox(Vertices[0], Vertices[0]);
+            var bbox = new BoundingBox(Vertices[0], Vertices[0]);
             for (int i = 1; i < Vertices.Count; i++)
             {
                 bbox.Min.X = Vertices[i].X < bbox.Min.X ? Vertices[i].X : bbox.Min.X;
@@ -193,9 +192,9 @@ namespace SharpMap.Geometries
         /// <returns>Copy of Geometry</returns>
         public new LineString Clone()
         {
-            LineString l = new LineString();
-            for (int i = 0; i < _Vertices.Count; i++)
-                l.Vertices.Add(_Vertices[i].Clone());
+            var l = new LineString();
+            foreach (Point vertex in vertices)
+                l.Vertices.Add(vertex.Clone());
             return l;
         }
 
@@ -237,7 +236,7 @@ namespace SharpMap.Geometries
         /// <returns>Returns 'true' if this Geometry is the empty geometry</returns>
         public override bool IsEmpty()
         {
-            return _Vertices == null || _Vertices.Count == 0;
+            return vertices == null || vertices.Count == 0;
         }
 
         /// <summary>
@@ -251,12 +250,12 @@ namespace SharpMap.Geometries
             //Collection<Point> verts = new Collection<Point>(_Vertices.Count);
             var verts = new Collection<Point>();
 
-            for (int i = 0; i < _Vertices.Count; i++)
+            for (int i = 0; i < vertices.Count; i++)
                 //if (!verts.Exists(delegate(SharpMap.Geometries.Point p) { return p.Equals(_Vertices[i]); }))
-                if (0 != verts.IndexOf(_Vertices[i]))
-                    verts.Add(_Vertices[i]);
+                if (0 != verts.IndexOf(vertices[i]))
+                    verts.Add(vertices[i]);
 
-            return (verts.Count == _Vertices.Count - (IsClosed ? 1 : 0));
+            return (verts.Count == vertices.Count - (IsClosed ? 1 : 0));
         }
 
         /// <summary>
