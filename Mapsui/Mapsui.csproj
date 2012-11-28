@@ -83,6 +83,7 @@
     <Compile Include="Map\LayerCollection.cs" />
     <Compile Include="Map\Map.cs" />
     <Compile Include="Map\View.cs" />
+    <Compile Include="Projection\GeometryIterator.cs" />
     <Compile Include="Projection\ITransformation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\Feature.cs" />

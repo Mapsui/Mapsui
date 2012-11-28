@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using System.Collections.Generic;
-using SharpMap.Fetcher;
 using SharpMap.Layers;
 using System.Collections;
 
