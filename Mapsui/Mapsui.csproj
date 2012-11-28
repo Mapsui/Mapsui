@@ -79,10 +79,12 @@
     <Compile Include="Layers\Layer.cs" />
     <Compile Include="Layers\LayerGroup.cs" />
     <Compile Include="Layers\TileLayer.cs" />
-    <Compile Include="Map\IView.cs" />
+    <Compile Include="Map\IViewport.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Map\LayerCollection.cs" />
     <Compile Include="Map\Map.cs" />
-    <Compile Include="Map\View.cs" />
+    <Compile Include="Map\Viewport.cs" />
     <Compile Include="Projection\GeometryIterator.cs" />
     <Compile Include="Projection\ITransformation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

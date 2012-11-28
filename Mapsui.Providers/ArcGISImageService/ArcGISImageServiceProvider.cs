@@ -47,7 +47,7 @@ namespace SharpMap.Providers.ArcGISImageService
         {
             var features = new Features();
             IRaster raster = null;
-            var view = new View { Resolution = resolution, Center = box.GetCentroid(), Width = (box.Width / resolution), Height = (box.Height / resolution) };
+            var view = new Viewport { Resolution = resolution, Center = box.GetCentroid(), Width = (box.Width / resolution), Height = (box.Height / resolution) };
             if (TryGetMap(view, ref raster))
             {
                 IFeature feature = features.New();
@@ -57,15 +57,15 @@ namespace SharpMap.Providers.ArcGISImageService
             return features;
         }
 
-        public bool TryGetMap(IView view, ref IRaster raster)
+        public bool TryGetMap(IViewport viewport, ref IRaster raster)
         {
             int width;
             int height;
 
             try
             {
-                width = Convert.ToInt32(view.Width);
-                height = Convert.ToInt32(view.Height);
+                width = Convert.ToInt32(viewport.Width);
+                height = Convert.ToInt32(viewport.Height);
             }
             catch (OverflowException)
             {
@@ -73,7 +73,7 @@ namespace SharpMap.Providers.ArcGISImageService
                 return false;
             }
 
-            var uri = new Uri(GetRequestUrl(view.Extent, width, height));
+            var uri = new Uri(GetRequestUrl(viewport.Extent, width, height));
             WebRequest webRequest = WebRequest.Create(uri);
 
             try
@@ -84,7 +84,7 @@ namespace SharpMap.Providers.ArcGISImageService
                     if (!webResponse.ContentType.StartsWith("image")) return false;
 
                     byte[] bytes = BruTile.Utilities.ReadFully(dataStream);
-                    raster = new Raster(new MemoryStream(bytes), view.Extent);
+                    raster = new Raster(new MemoryStream(bytes), viewport.Extent);
                 }
                 return true;
             }

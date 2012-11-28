@@ -1,4 +1,4 @@
-﻿// Copyright 2008 - Paul den Dulk (Geodan)
+﻿// Copyright 2012 - Paul den Dulk (Geodan)
 // 
 // This file is part of Mapsui.
 // Mapsui is free software; you can redistribute it and/or modify
@@ -19,7 +19,7 @@ using SharpMap.Geometries;
 
 namespace SharpMap
 {
-    public class View : IView
+    public class Viewport : IViewport
     {
         #region Fields
 
@@ -28,7 +28,7 @@ namespace SharpMap
         private double centerY;
         private double width;
         private double height;
-        BoundingBox extent;   
+        BoundingBox extent;
 
         #endregion
 
@@ -93,42 +93,60 @@ namespace SharpMap
                 centerY = value;
             }
         }
-        
+
         public BoundingBox Extent
         {
             get { return extent ?? (extent = new BoundingBox(0, 0, 0, 0)); }
         }
 
-        public View() {}
+        public Viewport() { }
 
-        public View(View view)
+        public Viewport(Viewport viewport)
         {
-            resolution = view.resolution;
-            centerX = view.centerX;
-            centerY = view.centerY;
-            width = view.width;
-            height = view.height;
+            resolution = viewport.resolution;
+            centerX = viewport.centerX;
+            centerY = viewport.centerY;
+            width = viewport.width;
+            height = viewport.height;
             UpdateExtent();
         }
 
-        public Point WorldToView(Point point)
+        public Point WorldToScreen(Point worldPosition)
         {
-            return WorldToView(point.X, point.Y);
+            return WorldToScreen(worldPosition.X, worldPosition.Y);
         }
 
-        public Point ViewToWorld(Point point)
+        public Point ScreenToWorld(Point screenPosition)
         {
-            return ViewToWorld(point.X, point.Y);
+            return ScreenToWorld(screenPosition.X, screenPosition.Y);
         }
 
-        public Point WorldToView(double x, double y)
+        public Point WorldToScreen(double worldX, double worldY)
         {
-            return new Point((x - extent.MinX) / resolution, (extent.MaxY - y) / resolution);
+            return new Point((worldX - extent.MinX) / resolution, (extent.MaxY - worldY) / resolution);
         }
 
-        public Point ViewToWorld(double x, double y)
+        public Point ScreenToWorld(double screenX, double screenY)
         {
-            return new Point((extent.MinX + x * resolution), (extent.MaxY - (y * resolution)));
+            return new Point((extent.MinX + screenX * resolution), (extent.MaxY - (screenY * resolution)));
+        }
+
+        public void Transform(double screenX, double screenY, double previousScreenX, double previousScreenY, double deltaScale = 1)
+        {
+            var previous = ScreenToWorld(previousScreenX, previousScreenY);
+            var current = ScreenToWorld(screenX, screenY);
+
+            var newX = CenterX + previous.X - current.X;
+            var newY = CenterY + previous.Y - current.Y;
+
+            // When you pinch zoom outside the center of the map 
+            // this will also affect the new center. 
+            var scaleCorrectionX = (1 - deltaScale) * (current.X - CenterX);
+            var scaleCorrectionY = (1 - deltaScale) * (current.Y - CenterY);
+
+            Resolution = Resolution / deltaScale;
+            CenterX = newX - scaleCorrectionX;
+            CenterY = newY - scaleCorrectionY;
         }
 
         #endregion
@@ -140,8 +158,8 @@ namespace SharpMap
             double spanX = width * resolution;
             double spanY = height * resolution;
             extent = new BoundingBox(
-                CenterX - spanX * 0.5f, CenterY - spanY * 0.5f,
-                CenterX + spanX * 0.5f, CenterY + spanY * 0.5f);
+                CenterX - spanX * 0.5, CenterY - spanY * 0.5,
+                CenterX + spanX * 0.5, CenterY + spanY * 0.5);
         }
 
         #endregion

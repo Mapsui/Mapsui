@@ -16,7 +16,7 @@ namespace Mapsui.Rendering.XamlRendering.Tests
             // arrange
             var provider = new MemoryProvider();
             provider.Features.Add(new Feature { Geometry = new Point(50, 50)});
-            var view = new View { Center = new Point(50, 50), Width = 100, Height = 100 };
+            var view = new Viewport { Center = new Point(50, 50), Width = 100, Height = 100 };
 
             // act
             new MapRenderer().Render(view, new[] { new Layer("test") { DataSource = provider } });

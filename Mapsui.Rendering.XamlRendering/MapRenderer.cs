@@ -30,7 +30,7 @@ namespace SilverlightRendering
             this.target = target;
         }
 
-        public void Render(IView view, IEnumerable<ILayer> layers)
+        public void Render(IViewport viewport, IEnumerable<ILayer> layers)
         {
             foreach (var child in target.Children)
             {
@@ -44,16 +44,16 @@ namespace SilverlightRendering
             foreach (var layer in layers)
             {
                 if (layer.Enabled &&
-                    layer.MinVisible <= view.Resolution &&
-                    layer.MaxVisible >= view.Resolution)
+                    layer.MinVisible <= viewport.Resolution &&
+                    layer.MaxVisible >= viewport.Resolution)
                 {
-                    RenderLayer(target, view, layer);
+                    RenderLayer(target, viewport, layer);
                 }
             }
-            target.Arrange(new Rect(0, 0, view.Width, view.Height));
+            target.Arrange(new Rect(0, 0, viewport.Width, viewport.Height));
         }
 
-        private static void RenderLayer(Canvas target, IView view, ILayer layer)
+        private static void RenderLayer(Canvas target, IViewport viewport, ILayer layer)
         {
             if (layer.Enabled == false) return;
 
@@ -62,20 +62,20 @@ namespace SilverlightRendering
                 var labelLayer = layer as LabelLayer;
                 if (labelLayer.UseLabelStacking)
                 {
-                    target.Children.Add(LabelRenderer.RenderStackedLabelLayer(view, labelLayer));
+                    target.Children.Add(LabelRenderer.RenderStackedLabelLayer(viewport, labelLayer));
                 }
                 else
                 {
-                    target.Children.Add(LabelRenderer.RenderLabelLayer(view, labelLayer));
+                    target.Children.Add(LabelRenderer.RenderLabelLayer(viewport, labelLayer));
                 }
             }
             else
             {
-                target.Children.Add(RenderVectorLayer(view, layer));
+                target.Children.Add(RenderVectorLayer(viewport, layer));
             }
         }
 
-        private static Canvas RenderVectorLayer(IView view, ILayer layer)
+        private static Canvas RenderVectorLayer(IViewport viewport, ILayer layer)
         {
             //ToDo: find solution for try catch. Sometimes this method will throw an exception
             //when clearing and adding features to a layer while rendering
@@ -83,7 +83,7 @@ namespace SilverlightRendering
             {
                 var canvas = new Canvas();
                 canvas.Opacity = layer.Opacity;
-                var features = layer.GetFeaturesInView(view.Extent, view.Resolution).ToList();
+                var features = layer.GetFeaturesInView(viewport.Extent, viewport.Resolution).ToList();
 
                 foreach (var layerStyle in layer.Styles)
                 {
@@ -92,9 +92,9 @@ namespace SilverlightRendering
                     foreach (var feature in features)
                     {
                         if (layerStyle is IThemeStyle) style = (layerStyle as IThemeStyle).GetStyle(feature);
-                        if ((style == null) || (style.Enabled == false) || (style.MinVisible > view.Resolution) || (style.MaxVisible < view.Resolution)) continue;
+                        if ((style == null) || (style.Enabled == false) || (style.MinVisible > viewport.Resolution) || (style.MaxVisible < viewport.Resolution)) continue;
 
-                        RenderFeature(canvas, view, style, feature);
+                        RenderFeature(canvas, viewport, style, feature);
                     }
                 }
 
@@ -105,7 +105,7 @@ namespace SilverlightRendering
                     {
                         if (feature.Styles != null && style.Enabled)
                         {
-                            RenderFeature(canvas, view, style, feature);
+                            RenderFeature(canvas, viewport, style, feature);
                         }
                     }
                 }
@@ -118,52 +118,52 @@ namespace SilverlightRendering
             }                    
         }
 
-        private static void RenderFeature(Canvas canvas, IView view, IStyle style, SharpMap.Providers.IFeature feature)
+        private static void RenderFeature(Canvas canvas, IViewport viewport, IStyle style, SharpMap.Providers.IFeature feature)
         {
             if (style is LabelStyle)
             {
-                canvas.Children.Add(LabelRenderer.RenderLabel(feature.Geometry.GetBoundingBox().GetCentroid(), new Offset(), style as LabelStyle, view));
+                canvas.Children.Add(LabelRenderer.RenderLabel(feature.Geometry.GetBoundingBox().GetCentroid(), new Offset(), style as LabelStyle, viewport));
             }
             else 
             {
                 var renderedGeometry = feature.RenderedGeometry.ContainsKey(style) ? feature.RenderedGeometry[style] as UIElement : null;
                 if (renderedGeometry == null) 
                 {
-                    renderedGeometry = RenderGeometry(canvas, view, style, feature);
+                    renderedGeometry = RenderGeometry(canvas, viewport, style, feature);
                     if (feature.Geometry is SharpMap.Geometries.Point || feature.Geometry is IRaster) // positioning only supported for point and raster
                         feature.RenderedGeometry[style] = renderedGeometry;
                 }
                 else
                 {
-                    PositionGeometry(renderedGeometry, view, style, feature);
+                    PositionGeometry(renderedGeometry, viewport, style, feature);
                 }
                 canvas.Children.Add(renderedGeometry);
             }
         }
 
-        private static UIElement RenderGeometry(Canvas canvas, IView view, IStyle style, SharpMap.Providers.IFeature feature)
+        private static UIElement RenderGeometry(Canvas canvas, IViewport viewport, IStyle style, SharpMap.Providers.IFeature feature)
         {
             if (feature.Geometry is SharpMap.Geometries.Point)
-                return GeometryRenderer.RenderPoint(feature.Geometry as SharpMap.Geometries.Point, style, view);
+                return GeometryRenderer.RenderPoint(feature.Geometry as SharpMap.Geometries.Point, style, viewport);
             if (feature.Geometry is MultiPoint)
-                return GeometryRenderer.RenderMultiPoint(feature.Geometry as MultiPoint, style, view);
+                return GeometryRenderer.RenderMultiPoint(feature.Geometry as MultiPoint, style, viewport);
             if (feature.Geometry is LineString)
-                return GeometryRenderer.RenderLineString(feature.Geometry as LineString, style, view);
+                return GeometryRenderer.RenderLineString(feature.Geometry as LineString, style, viewport);
             if (feature.Geometry is MultiLineString)
-                return GeometryRenderer.RenderMultiLineString(feature.Geometry as MultiLineString, style, view);
+                return GeometryRenderer.RenderMultiLineString(feature.Geometry as MultiLineString, style, viewport);
             if (feature.Geometry is Polygon)
-                return GeometryRenderer.RenderPolygon(feature.Geometry as Polygon, style, view);
+                return GeometryRenderer.RenderPolygon(feature.Geometry as Polygon, style, viewport);
             if (feature.Geometry is MultiPolygon)
-                return GeometryRenderer.RenderMultiPolygon(feature.Geometry as MultiPolygon, style, view);
+                return GeometryRenderer.RenderMultiPolygon(feature.Geometry as MultiPolygon, style, viewport);
             if (feature.Geometry is IRaster)
-                return GeometryRenderer.RenderRaster(feature.Geometry as IRaster, style, view);
+                return GeometryRenderer.RenderRaster(feature.Geometry as IRaster, style, viewport);
             return null;
         }
 
-        private static void PositionGeometry(UIElement renderedGeometry, IView view, IStyle style, SharpMap.Providers.IFeature feature)
+        private static void PositionGeometry(UIElement renderedGeometry, IViewport viewport, IStyle style, SharpMap.Providers.IFeature feature)
         {
             if (feature.Geometry is SharpMap.Geometries.Point)
-                GeometryRenderer.PositionPoint(renderedGeometry, feature.Geometry as SharpMap.Geometries.Point, style, view);
+                GeometryRenderer.PositionPoint(renderedGeometry, feature.Geometry as SharpMap.Geometries.Point, style, viewport);
             if (feature.Geometry is MultiPoint)
                 return;
             if (feature.Geometry is LineString)
@@ -175,7 +175,7 @@ namespace SilverlightRendering
             if (feature.Geometry is MultiPolygon)
                 return;
             if (feature.Geometry is IRaster)
-                GeometryRenderer.PositionRaster(renderedGeometry, feature.Geometry.GetBoundingBox(), view);
+                GeometryRenderer.PositionRaster(renderedGeometry, feature.Geometry.GetBoundingBox(), viewport);
         }
 
         public static void Animate(DependencyObject target, string property, double from, double to, int duration, EventHandler completed)

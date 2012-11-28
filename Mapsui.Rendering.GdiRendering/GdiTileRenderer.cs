@@ -31,13 +31,13 @@ namespace Mapsui.Rendering.GdiRendering
     public static class GdiTileRenderer
     {
         public static void Render(Graphics graphics, ITileSchema schema,
-          IView transform, MemoryCache<Feature> cache)
+          IViewport viewport, MemoryCache<Feature> cache)
         {
-            int level = Utilities.GetNearestLevel(schema.Resolutions, transform.Resolution);
-            DrawRecursive(graphics, schema, transform, cache, schema.GetExtentOfTilesInView(transform.Extent.ToExtent(), level), level);
+            int level = Utilities.GetNearestLevel(schema.Resolutions, viewport.Resolution);
+            DrawRecursive(graphics, schema, viewport, cache, schema.GetExtentOfTilesInView(viewport.Extent.ToExtent(), level), level);
         }
 
-        private static void DrawRecursive(Graphics graphics, ITileSchema schema, IView transform, MemoryCache<Feature> cache, Extent extent, int level)
+        private static void DrawRecursive(Graphics graphics, ITileSchema schema, IViewport viewport, MemoryCache<Feature> cache, Extent extent, int level)
         {
             var tileInfos = schema.GetTilesInView(extent, level);
 
@@ -46,14 +46,14 @@ namespace Mapsui.Rendering.GdiRendering
                 var feature = cache.Find(info.Index);
                 if (feature == null)
                 {
-                    if (level > 0) DrawRecursive(graphics, schema, transform, cache, info.Extent.Intersect(extent), level - 1);
+                    if (level > 0) DrawRecursive(graphics, schema, viewport, cache, info.Extent.Intersect(extent), level - 1);
                 }
                 else
                 {
                     var image = ((IRaster)feature.Geometry).Data;
-                    RectangleF dest = WorldToView(info.Extent, transform);
+                    RectangleF dest = WorldToView(info.Extent, viewport);
                     dest = RoundToPixel(dest);
-                    RectangleF clip = WorldToView(extent, transform);
+                    RectangleF clip = WorldToView(extent, viewport);
                     clip = RoundToPixel(clip);
 
                     if (!Contains(clip, dest))
@@ -115,10 +115,10 @@ namespace Mapsui.Rendering.GdiRendering
             graphics.ResetClip();
         }
 
-        private static RectangleF WorldToView(Extent extent, IView transform)
+        private static RectangleF WorldToView(Extent extent, IViewport viewport)
         {
-            Point min = transform.WorldToView(new Point(extent.MinX, extent.MinY));
-            Point max = transform.WorldToView(new Point(extent.MaxX, extent.MaxY));
+            Point min = viewport.WorldToScreen(new Point(extent.MinX, extent.MinY));
+            Point max = viewport.WorldToScreen(new Point(extent.MaxX, extent.MaxY));
             return new RectangleF((float)min.X, (float)max.Y, 
                 (float)(max.X - min.X), (float)(min.Y - max.Y));
         }

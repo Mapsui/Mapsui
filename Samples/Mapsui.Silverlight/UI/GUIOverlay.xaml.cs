@@ -40,8 +40,8 @@ namespace Mapsui.Silverlight
             if (mapControl.Map.Envelope != null)
             {
                 var center = mapControl.Map.Envelope.GetCentroid();
-                mapControl.View.Center = new SharpMap.Geometries.Point(center.X, center.Y);
-                mapControl.View.Resolution = 10000;
+                mapControl.Viewport.Center = new SharpMap.Geometries.Point(center.X, center.Y);
+                mapControl.Viewport.Resolution = 10000;
             }
         }
 

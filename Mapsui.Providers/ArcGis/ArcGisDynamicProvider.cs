@@ -109,15 +109,15 @@ namespace SharpMap.Providers.ArcGis
         /// <summary>
         /// Retrieves the bitmap from ArcGIS Dynamic service
         /// </summary>
-        public bool TryGetMap(IView view, ref IRaster raster)
+        public bool TryGetMap(IViewport viewport, ref IRaster raster)
         {
             int width;
             int height;
 
             try
             {
-                width = Convert.ToInt32(view.Width);
-                height = Convert.ToInt32(view.Height);
+                width = Convert.ToInt32(viewport.Width);
+                height = Convert.ToInt32(viewport.Height);
             }
             catch (OverflowException)
             {
@@ -125,7 +125,7 @@ namespace SharpMap.Providers.ArcGis
                 return false;
             }
            
-            var uri = new Uri(GetRequestUrl(view.Extent, width, height));
+            var uri = new Uri(GetRequestUrl(viewport.Extent, width, height));
             var request = WebRequest.Create(uri);
             request.Method = "GET";
             request.Timeout = _timeOut;
@@ -137,7 +137,7 @@ namespace SharpMap.Providers.ArcGis
                 var dataStream = myWebResponse.GetResponseStream();
 
                 var bytes = BruTile.Utilities.ReadFully(myWebResponse.GetResponseStream());
-                raster = new Raster(new MemoryStream(bytes), view.Extent);
+                raster = new Raster(new MemoryStream(bytes), viewport.Extent);
                 if (dataStream != null) dataStream.Close();
 
                 myWebResponse.Close();
@@ -228,8 +228,8 @@ namespace SharpMap.Providers.ArcGis
 
             IFeatures features = new Features();
             IRaster raster = null;
-            IView view = new View { Resolution = resolution, Center = box.GetCentroid(), Width = (box.Width / resolution), Height = (box.Height / resolution) };
-            if (TryGetMap(view, ref raster))
+            IViewport viewport = new Viewport { Resolution = resolution, Center = box.GetCentroid(), Width = (box.Width / resolution), Height = (box.Height / resolution) };
+            if (TryGetMap(viewport, ref raster))
             {
                 var feature = features.New();
                 feature.Geometry = raster;

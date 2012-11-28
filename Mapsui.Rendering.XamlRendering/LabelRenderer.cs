@@ -17,14 +17,14 @@ namespace SilverlightRendering
 {
     public static class LabelRenderer
     {
-        public static Canvas RenderStackedLabelLayer(IView view, LabelLayer layer)
+        public static Canvas RenderStackedLabelLayer(IViewport viewport, LabelLayer layer)
         {
             var canvas = new Canvas();
             canvas.Opacity = layer.Opacity;
 
             //todo: take into account the priority 
-            var features = layer.GetFeaturesInView(view.Extent, view.Resolution);
-            var margin = view.Resolution * 50;
+            var features = layer.GetFeaturesInView(viewport.Extent, viewport.Resolution);
+            var margin = viewport.Resolution * 50;
 
             foreach (var layerStyle in layer.Styles)
             {
@@ -32,7 +32,7 @@ namespace SilverlightRendering
 
                 var clusters = new List<Cluster>();
                 //todo: repeat until there are no more merges
-                ClusterFeatures(clusters, features, margin, layerStyle, view.Resolution);
+                ClusterFeatures(clusters, features, margin, layerStyle, viewport.Resolution);
 
                 foreach (var cluster in clusters)
                 {
@@ -41,13 +41,13 @@ namespace SilverlightRendering
                     foreach (var feature in cluster.Features.OrderBy(f => f.Geometry.GetBoundingBox().GetCentroid().Y))
                     {
                         if (layerStyle is IThemeStyle) style = (layerStyle as IThemeStyle).GetStyle(feature);
-                        if ((style == null) || (style.Enabled == false) || (style.MinVisible > view.Resolution) || (style.MaxVisible < view.Resolution)) continue;
+                        if ((style == null) || (style.Enabled == false) || (style.MinVisible > viewport.Resolution) || (style.MaxVisible < viewport.Resolution)) continue;
 
                         if (stackOffset == null) //first time
                         {
                             stackOffset = new Offset();
                             if (cluster.Features.Count > 1)
-                                canvas.Children.Add(RenderBox(cluster.Box, view));
+                                canvas.Children.Add(RenderBox(cluster.Box, viewport));
                         }
                         else stackOffset.Y += 18; //todo: get size from text, (or just pass stack nr)
                                                 
@@ -55,7 +55,7 @@ namespace SilverlightRendering
                         var labelStyle = style as LabelStyle;
                         string labelText = layer.GetLabel(feature);
                         var position = new SharpMap.Geometries.Point(cluster.Box.GetCentroid().X, cluster.Box.Bottom);
-                        canvas.Children.Add(RenderLabel(position, stackOffset, labelStyle, view, labelText));
+                        canvas.Children.Add(RenderLabel(position, stackOffset, labelStyle, viewport, labelText));
                     }
                 }
             }
@@ -63,13 +63,13 @@ namespace SilverlightRendering
             return canvas;
         }
 
-        private static UIElement RenderBox(BoundingBox box, IView view)
+        private static UIElement RenderBox(BoundingBox box, IViewport viewport)
         {
             const int margin = 32;
             const int halfMargin = margin / 2;
 
-            var p1 = view.WorldToView(box.Min);
-            var p2 = view.WorldToView(box.Max);
+            var p1 = viewport.WorldToScreen(box.Min);
+            var p2 = viewport.WorldToScreen(box.Max);
 
             var rectangle = new Rectangle();
             rectangle.Width = p2.X - p1.X + margin;
@@ -83,13 +83,13 @@ namespace SilverlightRendering
             return rectangle;
         }
 
-        public static Canvas RenderLabelLayer(IView view, LabelLayer layer)
+        public static Canvas RenderLabelLayer(IViewport viewport, LabelLayer layer)
         {
             var canvas = new Canvas();
             canvas.Opacity = layer.Opacity;
 
             //todo: take into account the priority 
-            var features = layer.GetFeaturesInView(view.Extent, view.Resolution).ToList();
+            var features = layer.GetFeaturesInView(viewport.Extent, viewport.Resolution).ToList();
             var stackOffset = new Offset();
 
             foreach (var layerStyle in layer.Styles)
@@ -100,12 +100,12 @@ namespace SilverlightRendering
                 {
                     if (layerStyle is IThemeStyle) style = (layerStyle as IThemeStyle).GetStyle(feature);
 
-                    if ((style == null) || (style.Enabled == false) || (style.MinVisible > view.Resolution) || (style.MaxVisible < view.Resolution)) continue;
+                    if ((style == null) || (style.Enabled == false) || (style.MinVisible > viewport.Resolution) || (style.MaxVisible < viewport.Resolution)) continue;
                     if (!(style is LabelStyle)) throw new Exception("Style of label is not a LabelStyle");
                     var labelStyle = style as LabelStyle;
                     string labelText = layer.GetLabel(feature);
                     canvas.Children.Add(RenderLabel(feature.Geometry.GetBoundingBox().GetCentroid(), 
-                        stackOffset, labelStyle, view, labelText));
+                        stackOffset, labelStyle, viewport, labelText));
                 }
             }
 
@@ -150,14 +150,14 @@ namespace SilverlightRendering
             }
         }
 
-        public static UIElement RenderLabel(SharpMap.Geometries.Point point, Offset stackOffset, LabelStyle style, IView view)
+        public static UIElement RenderLabel(SharpMap.Geometries.Point point, Offset stackOffset, LabelStyle style, IViewport viewport)
         {
-            return RenderLabel(point, stackOffset, style, view, style.Text);
+            return RenderLabel(point, stackOffset, style, viewport, style.Text);
         }
 
-        public static UIElement RenderLabel(SharpMap.Geometries.Point point, Offset stackOffset, LabelStyle style, IView view, string text)
+        public static UIElement RenderLabel(SharpMap.Geometries.Point point, Offset stackOffset, LabelStyle style, IViewport viewport, string text)
         {
-            SharpMap.Geometries.Point p = view.WorldToView(point);
+            SharpMap.Geometries.Point p = viewport.WorldToScreen(point);
             var windowsPoint = new System.Windows.Point(p.X, p.Y);
 
             var border = new Border();

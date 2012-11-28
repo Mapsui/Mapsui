@@ -19,7 +19,7 @@ namespace SilverlightRendering
         private static readonly IDictionary<IStyle, BitmapSource> BitmapCache
             = new Dictionary<IStyle, BitmapSource>();
 
-        public static void PositionPoint(UIElement renderedGeometry, Point point, IStyle style, IView view)
+        public static void PositionPoint(UIElement renderedGeometry, Point point, IStyle style, IViewport viewport)
         {
             var frameworkElement = (FrameworkElement) renderedGeometry;
             var symbolStyle = (style is SymbolStyle) ? style as SymbolStyle : new SymbolStyle();
@@ -37,11 +37,11 @@ namespace SilverlightRendering
                 height = (renderedGeometry as System.Windows.Shapes.Rectangle).Height;
             }
 
-            var matrix = CreateTransformMatrix(point, view, symbolStyle, width, height);
+            var matrix = CreateTransformMatrix(point, viewport, symbolStyle, width, height);
             frameworkElement.RenderTransform = new MatrixTransform { Matrix = matrix };
         }
 
-        public static UIElement RenderPoint(Point point, IStyle style, IView view)
+        public static UIElement RenderPoint(Point point, IStyle style, IViewport viewport)
         {
             var symbolStyle = (style is SymbolStyle) ? style as SymbolStyle : new SymbolStyle();
 
@@ -75,13 +75,13 @@ namespace SilverlightRendering
                 height = bitmap.PixelHeight * symbolStyle.SymbolScale;
             }
 
-            var matrix = CreateTransformMatrix(point, view, symbolStyle, width, height);
+            var matrix = CreateTransformMatrix(point, viewport, symbolStyle, width, height);
             path.RenderTransform = new MatrixTransform { Matrix = matrix };
             path.Opacity = symbolStyle.Opacity;
             return path;
         }
 
-        private static Matrix CreateTransformMatrix(Point point, IView view, SymbolStyle symbolStyle, double width, double height)
+        private static Matrix CreateTransformMatrix(Point point, IViewport viewport, SymbolStyle symbolStyle, double width, double height)
         {
             var matrix = new Matrix();
             // flip the image top to bottom:
@@ -94,10 +94,10 @@ namespace SilverlightRendering
                 point.Y + symbolStyle.SymbolOffset.Y - height * 0.5);
             //for point symbols we want the size to be independent from the resolution. We do this by counter scaling first.
             if (symbolStyle.UnitType != UnitType.WorldUnit)
-                MatrixHelper.ScaleAt(ref matrix, view.Resolution, view.Resolution, point.X, point.Y);
+                MatrixHelper.ScaleAt(ref matrix, viewport.Resolution, viewport.Resolution, point.X, point.Y);
 
             MatrixHelper.RotateAt(ref matrix, -symbolStyle.SymbolRotation, point.X, point.Y);
-            MatrixHelper.ApplyViewTransform(ref matrix, view);
+            MatrixHelper.ApplyViewTransform(ref matrix, viewport);
             return matrix;
         }
 
@@ -267,9 +267,9 @@ namespace SilverlightRendering
             return bitmapImage;
         }
 
-        private static System.Windows.Media.Geometry ConvertSymbol(Point point, SymbolStyle style, IView view)
+        private static System.Windows.Media.Geometry ConvertSymbol(Point point, SymbolStyle style, IViewport viewport)
         {
-            Point p = view.WorldToView(point);
+            Point p = viewport.WorldToScreen(point);
 
             var rect = new RectangleGeometry();
             if (style.Symbol != null)
@@ -283,30 +283,30 @@ namespace SilverlightRendering
             return rect;
         }
 
-        public static Path RenderMultiPoint(MultiPoint multiPoint, IStyle style, IView view)
+        public static Path RenderMultiPoint(MultiPoint multiPoint, IStyle style, IViewport viewport)
         {
             if (!(style is SymbolStyle)) throw new ArgumentException("Style is not of type SymboStyle");
             var symbolStyle = style as SymbolStyle;
             Path path = CreatePointPath(symbolStyle);
-            path.Data = ConvertMultiPoint(multiPoint, symbolStyle, view);
+            path.Data = ConvertMultiPoint(multiPoint, symbolStyle, viewport);
             return path;
         }
 
-        private static GeometryGroup ConvertMultiPoint(MultiPoint multiPoint, SymbolStyle style, IView view)
+        private static GeometryGroup ConvertMultiPoint(MultiPoint multiPoint, SymbolStyle style, IViewport viewport)
         {
             var group = new GeometryGroup();
             foreach (Point point in multiPoint)
-                group.Children.Add(ConvertSymbol(point, style, view));
+                group.Children.Add(ConvertSymbol(point, style, viewport));
             return group;
         }
 
-        public static Path RenderLineString(LineString lineString, IStyle style, IView view)
+        public static Path RenderLineString(LineString lineString, IStyle style, IViewport viewport)
         {
             if (!(style is VectorStyle)) throw new ArgumentException("Style is not of type VectorStyle");
             var vectorStyle = style as VectorStyle;
 
             Path path = CreateLineStringPath(vectorStyle);
-            path.Data = ConvertLineString(lineString, view);
+            path.Data = ConvertLineString(lineString, viewport);
             return path;
         }
 
@@ -322,29 +322,29 @@ namespace SilverlightRendering
             return path;
         }
 
-        private static Windows.Geometry ConvertLineString(LineString lineString, IView view)
+        private static Windows.Geometry ConvertLineString(LineString lineString, IViewport viewport)
         {
             var pathGeometry = new PathGeometry();
-            pathGeometry.Figures.Add(CreatePathFigure(lineString, view));
+            pathGeometry.Figures.Add(CreatePathFigure(lineString, viewport));
             return pathGeometry;
         }
 
-        private static PathFigure CreatePathFigure(LineString linearRing, IView view)
+        private static PathFigure CreatePathFigure(LineString linearRing, IViewport viewport)
         {
             var pathFigure = new PathFigure();
-            pathFigure.StartPoint = ConvertPoint(WorldToView(linearRing.StartPoint, view));
+            pathFigure.StartPoint = ConvertPoint(WorldToView(linearRing.StartPoint, viewport));
 
             foreach (Point point in linearRing.Vertices)
             {
                 pathFigure.Segments.Add(
-                    new LineSegment { Point = ConvertPoint(WorldToView(point, view)) });
+                    new LineSegment { Point = ConvertPoint(WorldToView(point, viewport)) });
             }
             return pathFigure;
         }
 
-        public static Point WorldToView(Point point, IView view)
+        public static Point WorldToView(Point point, IViewport viewport)
         {
-            return view.WorldToView(point);
+            return viewport.WorldToScreen(point);
         }
 
         private static System.Windows.Point ConvertPoint(Point point)
@@ -352,30 +352,30 @@ namespace SilverlightRendering
             return new System.Windows.Point(point.X, point.Y);
         }
 
-        public static Path RenderMultiLineString(MultiLineString multiLineString, IStyle style, IView view)
+        public static Path RenderMultiLineString(MultiLineString multiLineString, IStyle style, IViewport viewport)
         {
             if (!(style is VectorStyle)) throw new ArgumentException("Style is not of type VectorStyle");
             var vectorStyle = style as VectorStyle;
             Path path = CreateLineStringPath(vectorStyle);
-            path.Data = ConvertMultiLineString(multiLineString, view);
+            path.Data = ConvertMultiLineString(multiLineString, viewport);
             return path;
         }
 
-        private static System.Windows.Media.Geometry ConvertMultiLineString(MultiLineString multiLineString, IView view)
+        private static System.Windows.Media.Geometry ConvertMultiLineString(MultiLineString multiLineString, IViewport viewport)
         {
             var group = new GeometryGroup();
             foreach (LineString lineString in multiLineString)
-                group.Children.Add(ConvertLineString(lineString, view));
+                group.Children.Add(ConvertLineString(lineString, viewport));
             return group;
         }
 
-        public static Path RenderPolygon(Polygon polygon, IStyle style, IView view)
+        public static Path RenderPolygon(Polygon polygon, IStyle style, IViewport viewport)
         {
             if (!(style is VectorStyle)) throw new ArgumentException("Style is not of type VectorStyle");
             var vectorStyle = style as VectorStyle;
 
             Path path = CreatePolygonPath(vectorStyle);
-            path.Data = ConvertPolygon(polygon, view);
+            path.Data = ConvertPolygon(polygon, viewport);
             return path;
         }
 
@@ -393,52 +393,52 @@ namespace SilverlightRendering
             return path;
         }
 
-        private static GeometryGroup ConvertPolygon(Polygon polygon, IView view)
+        private static GeometryGroup ConvertPolygon(Polygon polygon, IViewport viewport)
         {
             var group = new GeometryGroup();
             group.FillRule = FillRule.EvenOdd;
-            group.Children.Add(ConvertLinearRing(polygon.ExteriorRing, view));
-            group.Children.Add(ConvertLinearRings(polygon.InteriorRings, view));
+            group.Children.Add(ConvertLinearRing(polygon.ExteriorRing, viewport));
+            group.Children.Add(ConvertLinearRings(polygon.InteriorRings, viewport));
             return group;
         }
 
-        private static PathGeometry ConvertLinearRing(LinearRing linearRing, IView view)
+        private static PathGeometry ConvertLinearRing(LinearRing linearRing, IViewport viewport)
         {
             var pathGeometry = new PathGeometry();
-            pathGeometry.Figures.Add(CreatePathFigure(linearRing, view));
+            pathGeometry.Figures.Add(CreatePathFigure(linearRing, viewport));
             return pathGeometry;
         }
 
-        private static PathGeometry ConvertLinearRings(IEnumerable<LinearRing> linearRings, IView view)
+        private static PathGeometry ConvertLinearRings(IEnumerable<LinearRing> linearRings, IViewport viewport)
         {
             var pathGeometry = new PathGeometry();
             foreach (var linearRing in linearRings)
-                pathGeometry.Figures.Add(CreatePathFigure(linearRing, view));
+                pathGeometry.Figures.Add(CreatePathFigure(linearRing, viewport));
             return pathGeometry;
         }
 
-        public static Path RenderMultiPolygon(MultiPolygon geometry, IStyle style, IView view)
+        public static Path RenderMultiPolygon(MultiPolygon geometry, IStyle style, IViewport viewport)
         {
             if (!(style is VectorStyle)) throw new ArgumentException("Style is not of type VectorStyle");
             var vectorStyle = style as VectorStyle;
 
             Path path = CreatePolygonPath(vectorStyle);
-            path.Data = ConvertMultiPolygon(geometry, view);
+            path.Data = ConvertMultiPolygon(geometry, viewport);
             return path;
         }
 
-        private static GeometryGroup ConvertMultiPolygon(MultiPolygon geometry, IView view)
+        private static GeometryGroup ConvertMultiPolygon(MultiPolygon geometry, IViewport viewport)
         {
             var group = new GeometryGroup();
             foreach (Polygon polygon in geometry.Polygons)
-                group.Children.Add(ConvertPolygon(polygon, view));
+                group.Children.Add(ConvertPolygon(polygon, viewport));
             return group;
         }
 
-        public static Path RenderRaster(IRaster raster, IStyle style, IView view) 
+        public static Path RenderRaster(IRaster raster, IStyle style, IViewport viewport) 
         {
             Path path = CreateRasterPath(style, raster.Data);
-            path.Data = ConvertRaster(raster.GetBoundingBox(), view);
+            path.Data = ConvertRaster(raster.GetBoundingBox(), viewport);
 
             MapRenderer.Animate(path, "Opacity", 0, 1, 600, (s, e) => { });
 
@@ -467,13 +467,13 @@ namespace SilverlightRendering
             return path;
         }
 
-        private static System.Windows.Media.Geometry ConvertRaster(BoundingBox boundingBox, IView view)
+        private static System.Windows.Media.Geometry ConvertRaster(BoundingBox boundingBox, IViewport viewport)
         {
             return new RectangleGeometry
             {
                 Rect = RoundToPixel(new Rect(
-                    ConvertPoint(view.WorldToView(boundingBox.Min)),
-                    ConvertPoint(view.WorldToView(boundingBox.Max))))
+                    ConvertPoint(viewport.WorldToScreen(boundingBox.Min)),
+                    ConvertPoint(viewport.WorldToScreen(boundingBox.Max))))
             };
         }
 
@@ -504,12 +504,12 @@ namespace SilverlightRendering
             BitmapCache[style] = path;
         }
 
-        public static void PositionRaster(UIElement renderedGeometry, BoundingBox boundingBox, IView view)
+        public static void PositionRaster(UIElement renderedGeometry, BoundingBox boundingBox, IViewport viewport)
         {
             ((RectangleGeometry)((Path)renderedGeometry).Data).Rect =
                                      RoundToPixel(new Rect(
-                                        ConvertPoint(view.WorldToView(boundingBox.Min)),
-                                        ConvertPoint(view.WorldToView(boundingBox.Max))));
+                                        ConvertPoint(viewport.WorldToScreen(boundingBox.Min)),
+                                        ConvertPoint(viewport.WorldToScreen(boundingBox.Max))));
         }
     }
 }

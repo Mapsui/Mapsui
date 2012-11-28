@@ -32,11 +32,11 @@ namespace Mapsui.Rendering.GdiRendering
 {
     public static class GdiLabelRenderer
     {
-        public static void Render(Graphics g, IView view, LabelLayer labelLayer)
+        public static void Render(Graphics g, IViewport viewport, LabelLayer labelLayer)
         {
             foreach (var layerStyle in labelLayer.Styles)
             {
-                if (layerStyle.Enabled && labelLayer.MaxVisible >= view.Resolution && labelLayer.MinVisible < view.Resolution)
+                if (layerStyle.Enabled && labelLayer.MaxVisible >= viewport.Resolution && labelLayer.MinVisible < viewport.Resolution)
                 {
                     if (labelLayer.DataSource == null)
                         throw (new ApplicationException("DataSource property not set"));
@@ -50,7 +50,7 @@ namespace Mapsui.Rendering.GdiRendering
                     //!!!    envelope = GeometryTransform.TransformBox(envelope, CoordinateTransformation.MathTransform.Inverse());
 
                     labelLayer.DataSource.Open();
-                    var features = labelLayer.DataSource.GetFeaturesInView(view.Extent, view.Resolution);
+                    var features = labelLayer.DataSource.GetFeaturesInView(viewport.Extent, viewport.Resolution);
                     labelLayer.DataSource.Close();
 
                     //Initialize label collection
@@ -92,14 +92,14 @@ namespace Mapsui.Rendering.GdiRendering
                                 {
                                     foreach (Geometry geom in (feature.Geometry as GeometryCollection))
                                     {
-                                        Label lbl = CreateLabel(geom, text, rotation, priority, style, view, g, labelLayer);
+                                        Label lbl = CreateLabel(geom, text, rotation, priority, style, viewport, g, labelLayer);
                                         if (lbl != null)
                                             labels.Add(lbl);
                                     }
                                 }
                                 else if (labelLayer.MultipartGeometryBehaviour == LabelLayer.MultipartGeometryBehaviourEnum.CommonCenter)
                                 {
-                                    Label lbl = CreateLabel(feature.Geometry, text, rotation, priority, style, view, g, labelLayer);
+                                    Label lbl = CreateLabel(feature.Geometry, text, rotation, priority, style, viewport, g, labelLayer);
                                     if (lbl != null)
                                         labels.Add(lbl);
                                 }
@@ -147,7 +147,7 @@ namespace Mapsui.Rendering.GdiRendering
                                         }
 
                                         Label lbl = CreateLabel(coll.Geometry(idxOfLargest), text, rotation, priority, style,
-                                                                view, g, labelLayer);
+                                                                viewport, g, labelLayer);
                                         if (lbl != null)
                                             labels.Add(lbl);
                                     }
@@ -155,7 +155,7 @@ namespace Mapsui.Rendering.GdiRendering
                             }
                             else
                             {
-                                Label lbl = CreateLabel(feature.Geometry, text, rotation, priority, style, view, g, labelLayer);
+                                Label lbl = CreateLabel(feature.Geometry, text, rotation, priority, style, viewport, g, labelLayer);
                                 if (lbl != null)
                                     labels.Add(lbl);
                             }
@@ -171,29 +171,29 @@ namespace Mapsui.Rendering.GdiRendering
                                 GdiGeometryRenderer.DrawLabel(g, labels[i].LabelPoint, labels[i].Style.Offset,
                                                          labels[i].Style.Font, labels[i].Style.ForeColor,
                                                          labels[i].Style.BackColor, (layerStyle as LabelStyle).Halo, labels[i].Rotation,
-                                                         labels[i].Text, view);
+                                                         labels[i].Text, viewport);
                     }
                     labels = null;
                 }
             }
         }
 
-        private static Label CreateLabel(IGeometry feature, string text, float rotation, LabelStyle style, IView map, Graphics g, LabelLayer labelTheme)
+        private static Label CreateLabel(IGeometry feature, string text, float rotation, LabelStyle style, IViewport viewport, Graphics g, LabelLayer labelTheme)
         {
-            return CreateLabel(feature, text, rotation, labelTheme.Priority, style, map, g, labelTheme);
+            return CreateLabel(feature, text, rotation, labelTheme.Priority, style, viewport, g, labelTheme);
         }
 
-        private static Label CreateLabel(IGeometry feature, string text, float rotation, int priority, LabelStyle style, IView map,
+        private static Label CreateLabel(IGeometry feature, string text, float rotation, int priority, LabelStyle style, IViewport viewport,
                                   Graphics g, LabelLayer labelTheme)
         {
             SizeF gdiSize = g.MeasureString(text, style.Font.Convert());
             var size = new SharpMap.Styles.Size { Width = gdiSize.Width, Height = gdiSize.Height };
 
-            SharpMap.Geometries.Point position = map.WorldToView(feature.GetBoundingBox().GetCentroid());
+            SharpMap.Geometries.Point position = viewport.WorldToScreen(feature.GetBoundingBox().GetCentroid());
             position.X = position.X - size.Width * (short)style.HorizontalAlignment * 0.5f;
             position.Y = position.Y - size.Height * (short)style.VerticalAlignment * 0.5f;
-            if (position.X - size.Width > map.Width || position.X + size.Width < 0 ||
-                position.Y - size.Height > map.Height || position.Y + size.Height < 0)
+            if (position.X - size.Width > viewport.Width || position.X + size.Width < 0 ||
+                position.Y - size.Height > viewport.Height || position.Y + size.Height < 0)
                 return null;
             else
             {
@@ -213,8 +213,8 @@ namespace Mapsui.Rendering.GdiRendering
                 if (feature.GetType() == typeof(LineString))
                 {
                     var line = feature as LineString;
-                    if (line.Length / map.Resolution > size.Width) //Only label feature if it is long enough
-                        CalculateLabelOnLinestring(line, ref lbl, map);
+                    if (line.Length / viewport.Resolution > size.Width) //Only label feature if it is long enough
+                        CalculateLabelOnLinestring(line, ref lbl, viewport);
                     else
                         return null;
                 }
@@ -223,7 +223,7 @@ namespace Mapsui.Rendering.GdiRendering
             }
         }
 
-        private static void CalculateLabelOnLinestring(LineString line, ref Label label, IView viewTransform)
+        private static void CalculateLabelOnLinestring(LineString line, ref Label label, IViewport viewportTransform)
         {
             double dx, dy;
 
@@ -253,7 +253,7 @@ namespace Mapsui.Rendering.GdiRendering
             }
             double tmpx = line.Vertices[midPoint].X + (dx * 0.5);
             double tmpy = line.Vertices[midPoint].Y + (dy * 0.5);
-            label.LabelPoint = viewTransform.WorldToView(new SharpMap.Geometries.Point(tmpx, tmpy));
+            label.LabelPoint = viewportTransform.WorldToScreen(new SharpMap.Geometries.Point(tmpx, tmpy));
         }
 
 

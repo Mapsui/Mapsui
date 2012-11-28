@@ -40,7 +40,7 @@ namespace Mapsui.Windows
         #region Fields
 
         private Map map;
-        private readonly View view = new View();
+        private readonly Viewport viewport = new Viewport();
         private Point previousMousePosition;
         private Point currentMousePosition;
         private Point downMousePosition;
@@ -77,7 +77,7 @@ namespace Mapsui.Windows
         public IList<ILayer> MouseInfoDownLayers { get; private set; }
 
         public bool ZoomToBoxMode { get; set; }
-        public View View { get { return view; } }
+        public Viewport Viewport { get { return viewport; } }
 
 
         public Map Map
@@ -102,7 +102,7 @@ namespace Mapsui.Windows
                 {
                     map.DataChanged += MapDataChanged;
                     map.PropertyChanged += MapPropertyChanged;
-                    map.ViewChanged(true, view.Extent, view.Resolution);
+                    map.ViewChanged(true, viewport.Extent, viewport.Resolution);
                 }
                 OnViewChanged(true);
                 RefreshGraphics();
@@ -114,7 +114,7 @@ namespace Mapsui.Windows
             if (e.PropertyName == "Envelope")
             {
                 InitializeView();
-                map.ViewChanged(true, view.Extent, view.Resolution);
+                map.ViewChanged(true, viewport.Extent, viewport.Resolution);
             }
         }
 
@@ -209,14 +209,14 @@ namespace Mapsui.Windows
             {
                 if (ViewChanged != null)
                 {
-                    ViewChanged(this, new ViewChangedEventArgs { View = view, UserAction = userAction });
+                    ViewChanged(this, new ViewChangedEventArgs { Viewport = viewport, UserAction = userAction });
                 }
             }
         }
 
         public void Refresh()
         {
-            map.ViewChanged(true, view.Extent, view.Resolution);
+            map.ViewChanged(true, viewport.Extent, viewport.Resolution);
             RefreshGraphics();
         }
 
@@ -244,7 +244,7 @@ namespace Mapsui.Windows
                 return;
 
             if (double.IsNaN(toResolution))
-                toResolution = view.Resolution;
+                toResolution = viewport.Resolution;
 
             toResolution = ZoomHelper.ZoomIn(map.Resolutions, toResolution);
             ZoomMiddle();
@@ -253,7 +253,7 @@ namespace Mapsui.Windows
         public void ZoomOut()
         {
             if (double.IsNaN(toResolution))
-                toResolution = view.Resolution;
+                toResolution = viewport.Resolution;
 
             toResolution = ZoomHelper.ZoomOut(map.Resolutions, toResolution);
             ZoomMiddle();
@@ -284,17 +284,17 @@ namespace Mapsui.Windows
             // We calcultate that in 3 steps.
 
             // 1) Temporarily center on the mouse position
-            view.Center = view.ViewToWorld(mousePosition.X, mousePosition.Y);
+            viewport.Center = viewport.ScreenToWorld(mousePosition.X, mousePosition.Y);
 
             // 2) Then zoom 
-            view.Resolution = resolution;
+            viewport.Resolution = resolution;
 
             // 3) Then move the temporary center of the map back to the mouse position
-            view.Center = view.ViewToWorld(
-              view.Width - mousePosition.X,
-              view.Height - mousePosition.Y);
+            viewport.Center = viewport.ScreenToWorld(
+              viewport.Width - mousePosition.X,
+              viewport.Height - mousePosition.Y);
 
-            map.ViewChanged(true, view.Extent, view.Resolution);
+            map.ViewChanged(true, viewport.Extent, viewport.Resolution);
             OnViewChanged(true);
             RefreshGraphics();
         }
@@ -302,7 +302,7 @@ namespace Mapsui.Windows
         private void ZoomMiddle()
         {
             currentMousePosition = new Point(ActualWidth / 2, ActualHeight / 2);
-            StartZoomAnimation(view.Resolution, toResolution);
+            StartZoomAnimation(viewport.Resolution, toResolution);
         }
 
         private void MapControlLoaded(object sender, RoutedEventArgs e)
@@ -334,7 +334,7 @@ namespace Mapsui.Windows
 
             if (double.IsNaN(toResolution))
             {
-                toResolution = view.Resolution;
+                toResolution = viewport.Resolution;
             }
 
             if (e.Delta > 0)
@@ -349,12 +349,12 @@ namespace Mapsui.Windows
             e.Handled = true; //so that the scroll event is not sent to the html page.
 
             //some cheating for personal gain
-            view.CenterX += 0.000000001;
-            view.CenterY += 0.000000001;
-            map.ViewChanged(false, view.Extent, view.Resolution);
+            viewport.CenterX += 0.000000001;
+            viewport.CenterY += 0.000000001;
+            map.ViewChanged(false, viewport.Extent, viewport.Resolution);
             OnViewChanged(false, true);
 
-            StartZoomAnimation(view.Resolution, toResolution);
+            StartZoomAnimation(viewport.Resolution, toResolution);
         }
 
         private void StartZoomAnimation(double begin, double end)
@@ -376,7 +376,7 @@ namespace Mapsui.Windows
             if (!viewInitialized) InitializeView();
             Clip = new RectangleGeometry {Rect = new Rect(0, 0, ActualWidth, ActualWidth)};
             UpdateSize();
-            map.ViewChanged(true, view.Extent, view.Resolution);
+            map.ViewChanged(true, viewport.Extent, viewport.Resolution);
             OnViewChanged(true);
             Refresh();
         }
@@ -386,10 +386,10 @@ namespace Mapsui.Windows
             var rect = new RectangleGeometry();
             rect.Rect = new Rect(0f, 0f, ActualWidth, ActualHeight);
 
-            if (View != null)
+            if (Viewport != null)
             {
-                view.Width = ActualWidth;
-                view.Height = ActualHeight;
+                viewport.Width = ActualWidth;
+                viewport.Height = ActualHeight;
             }
         }
 
@@ -445,8 +445,8 @@ namespace Mapsui.Windows
             if (IsInBoxZoomMode || ZoomToBoxMode)
             {
                 ZoomToBoxMode = false;
-                SharpMap.Geometries.Point previous = View.ViewToWorld(previousMousePosition.X, previousMousePosition.Y);
-                SharpMap.Geometries.Point current = View.ViewToWorld(e.GetPosition(this).X, e.GetPosition(this).Y);
+                SharpMap.Geometries.Point previous = Viewport.ScreenToWorld(previousMousePosition.X, previousMousePosition.Y);
+                SharpMap.Geometries.Point current = Viewport.ScreenToWorld(e.GetPosition(this).X, e.GetPosition(this).Y);
                 ZoomToBox(previous, current);
             }
             else
@@ -454,7 +454,7 @@ namespace Mapsui.Windows
                 HandleFeatureInfo(e);
             }
 
-            map.ViewChanged(true, view.Extent, view.Resolution);
+            map.ViewChanged(true, viewport.Extent, viewport.Resolution);
             OnViewChanged(true, true);
             mouseDown = false;
 
@@ -472,7 +472,7 @@ namespace Mapsui.Windows
                 {
                     if (layer is IFeatureInfo)
                     {
-                        (layer as IFeatureInfo).GetFeatureInfo(view, downMousePosition.X, downMousePosition.Y, OnFeatureInfo);
+                        (layer as IFeatureInfo).GetFeatureInfo(viewport, downMousePosition.X, downMousePosition.Y, OnFeatureInfo);
                     }
                 }
             }
@@ -504,9 +504,9 @@ namespace Mapsui.Windows
                 }
 
                 currentMousePosition = e.GetPosition(this); //Needed for both MouseMove and MouseWheel event
-                MapTransformHelper.Pan(view, currentMousePosition, previousMousePosition);
+                MapTransformHelper.Pan(viewport, currentMousePosition, previousMousePosition);
                 previousMousePosition = currentMousePosition;
-                map.ViewChanged(false, view.Extent, view.Resolution);
+                map.ViewChanged(false, viewport.Extent, viewport.Resolution);
                 OnViewChanged(false, true);
                 RefreshGraphics();
             }
@@ -524,8 +524,8 @@ namespace Mapsui.Windows
 
         private MouseInfoEventArgs GetMouseInfoEventArgs(Point mousePosition, IEnumerable<ILayer> layers)
         {
-            var margin = 8 * View.Resolution;
-            var point = View.ViewToWorld(new SharpMap.Geometries.Point(mousePosition.X, mousePosition.Y));
+            var margin = 8 * Viewport.Resolution;
+            var point = Viewport.ScreenToWorld(new SharpMap.Geometries.Point(mousePosition.X, mousePosition.Y));
 
             foreach (var layer in layers)
             {
@@ -572,14 +572,14 @@ namespace Mapsui.Windows
             if (map.Envelope.Height.IsNanOrZero()) return;
             if (map.Envelope.GetCentroid() == null) return;
 
-            if ((view.CenterX > 0) && (view.CenterY > 0) && (view.Resolution > 0))
+            if ((viewport.CenterX > 0) && (viewport.CenterY > 0) && (viewport.Resolution > 0))
             {
                 viewInitialized = true; //view was already initialized
                 return;
             }
 
-            view.Center = map.Envelope.GetCentroid();
-            view.Resolution = map.Envelope.Width / ActualWidth;
+            viewport.Center = map.Envelope.GetCentroid();
+            viewport.Resolution = map.Envelope.Width / ActualWidth;
             viewInitialized = true;
         }
 
@@ -591,7 +591,7 @@ namespace Mapsui.Windows
 
             if ((renderer != null) && (map != null))
             {
-                renderer.Render(view, map.Layers);
+                renderer.Render(viewport, map.Layers);
                 fpsCounter.FramePlusOne();
                 invalid = false;
             }
@@ -623,11 +623,11 @@ namespace Mapsui.Windows
             ZoomHelper.ZoomToBoudingbox(beginPoint.X, beginPoint.Y, endPoint.X, endPoint.Y, ActualWidth, out x, out y, out resolution);
             resolution = ZoomHelper.ClipToExtremes(map.Resolutions, resolution);
 
-            view.Center = new SharpMap.Geometries.Point(x, y);
-            view.Resolution = resolution;
+            viewport.Center = new SharpMap.Geometries.Point(x, y);
+            viewport.Resolution = resolution;
             toResolution = resolution;
 
-            map.ViewChanged(true, view.Extent, view.Resolution);
+            map.ViewChanged(true, viewport.Extent, viewport.Resolution);
             OnViewChanged(true, true);
             RefreshGraphics();
             ClearBBoxDrawing();
@@ -691,8 +691,8 @@ namespace Mapsui.Windows
         {
             if (Map.Envelope == null) return;
             if (ActualWidth.IsNanOrZero()) return;
-            view.Resolution =  Map.Envelope.Width / ActualWidth;
-            view.Center = Map.Envelope.GetCentroid();
+            viewport.Resolution =  Map.Envelope.Width / ActualWidth;
+            viewport.Center = Map.Envelope.GetCentroid();
         }
 
         #region WPF4 Touch Support
@@ -706,8 +706,8 @@ namespace Mapsui.Windows
 
         private void OnManipulationDelta(object sender, ManipulationDeltaEventArgs e)
         {
-            var previous = view.ViewToWorld(e.ManipulationOrigin.X, e.ManipulationOrigin.Y);
-            var current = view.ViewToWorld(e.ManipulationOrigin.X + e.DeltaManipulation.Translation.X, e.ManipulationOrigin.Y + e.DeltaManipulation.Translation.Y);
+            var previous = viewport.ScreenToWorld(e.ManipulationOrigin.X, e.ManipulationOrigin.Y);
+            var current = viewport.ScreenToWorld(e.ManipulationOrigin.X + e.DeltaManipulation.Translation.X, e.ManipulationOrigin.Y + e.DeltaManipulation.Translation.Y);
 
             double scale = (e.DeltaManipulation.Scale.X != 1d && !ZoomLocked) ? 
                 ((e.DeltaManipulation.Scale.X + e.DeltaManipulation.Scale.Y) / 2) : 1.0;
@@ -722,13 +722,13 @@ namespace Mapsui.Windows
         {
             var diffX = previous.X - current.X;
             var diffY = previous.Y - current.Y;
-            var newX = view.CenterX + diffX;
-            var newY = view.CenterY + diffY;
-            var zoomCorrectionX = (1 - deltaScale) * (current.X - view.CenterX);
-            var zoomCorrectionY = (1 - deltaScale) * (current.Y - view.CenterY);
-            view.Resolution = view.Resolution / deltaScale;
+            var newX = viewport.CenterX + diffX;
+            var newY = viewport.CenterY + diffY;
+            var zoomCorrectionX = (1 - deltaScale) * (current.X - viewport.CenterX);
+            var zoomCorrectionY = (1 - deltaScale) * (current.Y - viewport.CenterY);
+            viewport.Resolution = viewport.Resolution / deltaScale;
 
-            view.Center = new SharpMap.Geometries.Point(newX - zoomCorrectionX, newY - zoomCorrectionY);
+            viewport.Center = new SharpMap.Geometries.Point(newX - zoomCorrectionX, newY - zoomCorrectionY);
         }
                
         private void OnManipulationCompleted(object sender, ManipulationCompletedEventArgs e)
@@ -743,7 +743,7 @@ namespace Mapsui.Windows
 
     public class ViewChangedEventArgs : EventArgs
     {
-        public View View { get; set; }
+        public Viewport Viewport { get; set; }
         public bool UserAction { get; set; }
     }
 

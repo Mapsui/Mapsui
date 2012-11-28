@@ -13,18 +13,18 @@
 
 // You should have received a copy of the GNU Lesser General Public License
 // along with Mapsui; if not, write to the Free Software
-// Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
+// Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 using SharpMap.Geometries;
 
 namespace SharpMap
 {
-    public interface IView
+    public interface IViewport
     {
-        Point WorldToView(Point point);
-        Point ViewToWorld(Point point);
-        Point WorldToView(double x, double y);
-        Point ViewToWorld(double x, double y);
+        Point WorldToScreen(Point point);
+        Point ScreenToWorld(Point point);
+        Point WorldToScreen(double x, double y);
+        Point ScreenToWorld(double x, double y);
         double CenterX { get; }
         double CenterY { get; }
         double Resolution { get; }

@@ -22,13 +22,13 @@ namespace Mapsui.Windows
 {
     public static class MapTransformHelper
     {
-        public static void Pan(View view, Point currentMap, Point previousMap)
+        public static void Pan(Viewport viewport, Point currentMap, Point previousMap)
         {
-            SharpMap.Geometries.Point current = view.ViewToWorld(currentMap.X, currentMap.Y);
-            SharpMap.Geometries.Point previous = view.ViewToWorld(previousMap.X, previousMap.Y);
+            SharpMap.Geometries.Point current = viewport.ScreenToWorld(currentMap.X, currentMap.Y);
+            SharpMap.Geometries.Point previous = viewport.ScreenToWorld(previousMap.X, previousMap.Y);
             double diffX = previous.X - current.X;
             double diffY = previous.Y - current.Y;
-            view.Center = new SharpMap.Geometries.Point(view.CenterX + diffX, view.CenterY + diffY);
+            viewport.Center = new SharpMap.Geometries.Point(viewport.CenterX + diffX, viewport.CenterY + diffY);
         }
     }
 }

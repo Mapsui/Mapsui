@@ -71,14 +71,14 @@ namespace Mapsui.Silverlight
                 if (lonLat.Length == 2)
                 {
                     if (!streetBox.Text.Equals(""))
-                        gui.mapControl.View.Resolution = 0.597164283;
+                        gui.mapControl.Viewport.Resolution = 0.597164283;
                     else if (!cityBox.Text.Equals(""))
-                        gui.mapControl.View.Resolution = 9.554628534;
+                        gui.mapControl.Viewport.Resolution = 9.554628534;
                     else if (!countryBox.Equals(""))
-                        gui.mapControl.View.Resolution = 611.496226172;
+                        gui.mapControl.Viewport.Resolution = 611.496226172;
 
                     SharpMap.Geometries.Point sphericalLocation = SphericalMercator.FromLonLat(Double.Parse(lonLat[1], CultureInfo.InvariantCulture), Double.Parse(lonLat[0], CultureInfo.InvariantCulture));
-                    gui.mapControl.View.Center = sphericalLocation;
+                    gui.mapControl.Viewport.Center = sphericalLocation;
                     //Toresolution has to be set somehow
                     gui.mapControl.OnViewChanged(true);
                     HideGoTo.Begin();

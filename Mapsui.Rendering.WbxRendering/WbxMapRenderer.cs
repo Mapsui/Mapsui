@@ -37,13 +37,13 @@ namespace WbxRendering
             return image;
         }
 
-        public void Render(IView view, IEnumerable<ILayer> layers)
+        public void Render(IViewport viewport, IEnumerable<ILayer> layers)
         {
             if (targetBitmap == null ||
                 targetBitmap.PixelWidth != (int)target.ActualWidth ||
                 targetBitmap.PixelHeight != (int)target.ActualHeight)
             {
-                target.Arrange(new Rect(0, 0, view.Width, view.Height));
+                target.Arrange(new Rect(0, 0, viewport.Width, viewport.Height));
                 if (target.ActualWidth <= 0 || target.ActualHeight <= 0) return; 
                 target.Children.Clear();
                 target.Children.Add(InitializeBitmap((int)target.ActualWidth, (int)target.ActualHeight));
@@ -54,17 +54,17 @@ namespace WbxRendering
             foreach (var layer in layers)
             {
                 if (layer.Enabled &&
-                    layer.MinVisible <= view.Resolution &&
-                    layer.MaxVisible >= view.Resolution)
+                    layer.MinVisible <= viewport.Resolution &&
+                    layer.MaxVisible >= viewport.Resolution)
                 {
-                    RenderLayer(targetBitmap, view, layer);
+                    RenderLayer(targetBitmap, viewport, layer);
                 }
             }
 
-            target.Arrange(new Rect(0, 0, view.Width, view.Height));
+            target.Arrange(new Rect(0, 0, viewport.Width, viewport.Height));
         }
 
-        private static void RenderLayer(WriteableBitmap targetBitmap, IView view, ILayer layer)
+        private static void RenderLayer(WriteableBitmap targetBitmap, IViewport viewport, ILayer layer)
         {
             if (layer.Enabled == false) return;
 
@@ -75,7 +75,7 @@ namespace WbxRendering
             else if (layer is ITileLayer)
             {
                 var tileLayer = (ITileLayer)layer;
-                RenderTileLayer(targetBitmap, tileLayer.Schema, view, tileLayer.MemoryCache, layer.Opacity);
+                RenderTileLayer(targetBitmap, tileLayer.Schema, viewport, tileLayer.MemoryCache, layer.Opacity);
             }
             else
             {
@@ -83,13 +83,13 @@ namespace WbxRendering
             }
         }
 
-        private static void RenderTileLayer(WriteableBitmap targetBitmap, ITileSchema schema, IView view, MemoryCache<Feature> memoryCache, double opacity)
+        private static void RenderTileLayer(WriteableBitmap targetBitmap, ITileSchema schema, IViewport viewport, MemoryCache<Feature> memoryCache, double opacity)
         {
-            int level = Utilities.GetNearestLevel(schema.Resolutions, view.Resolution);
-            DrawRecursive(targetBitmap, schema, view, memoryCache, view.Extent.ToExtent(), level, opacity);
+            int level = Utilities.GetNearestLevel(schema.Resolutions, viewport.Resolution);
+            DrawRecursive(targetBitmap, schema, viewport, memoryCache, viewport.Extent.ToExtent(), level, opacity);
         }
 
-        private static void DrawRecursive(WriteableBitmap targetBitmap, ITileSchema schema, IView view, MemoryCache<Feature> memoryCache, Extent extent, int level, double opacity)
+        private static void DrawRecursive(WriteableBitmap targetBitmap, ITileSchema schema, IViewport viewport, MemoryCache<Feature> memoryCache, Extent extent, int level, double opacity)
         {
             var tileInfos = schema.GetTilesInView(extent, level);
 
@@ -98,7 +98,7 @@ namespace WbxRendering
                 var feature = memoryCache.Find(tile.Index);
                 if (feature == null)
                 {
-                    if (level > 0) DrawRecursive(targetBitmap, schema, view, memoryCache, tile.Extent.Intersect(extent), level - 1, opacity);
+                    if (level > 0) DrawRecursive(targetBitmap, schema, viewport, memoryCache, tile.Extent.Intersect(extent), level - 1, opacity);
                 }
                 else
                 {
@@ -107,24 +107,24 @@ namespace WbxRendering
                     {
                         var image = ((IRaster)feature.Geometry).Data;
                         var bitmap = LoadBitmap(image);
-                        Rect dest = WorldToView(tile.Extent, view);
+                        Rect dest = WorldToView(tile.Extent, viewport);
                         DrawImage(targetBitmap, bitmap, dest, tile, memoryCache, opacity);
                         feature.RenderedGeometry[feature.Styles.First()] = bitmap;
                     }
                     else // position
                     {
                         var bitmap = (WriteableBitmap)feature.RenderedGeometry[feature.Styles.First()];
-                        Rect dest = WorldToView(tile.Extent, view);
+                        Rect dest = WorldToView(tile.Extent, viewport);
                         DrawImage(targetBitmap, bitmap, dest, tile, memoryCache, opacity);
                     }
                 }
             }
         }
 
-        private static Rect WorldToView(Extent extent, IView view)
+        private static Rect WorldToView(Extent extent, IViewport viewport)
         {
-            SharpMap.Geometries.Point min = view.WorldToView(extent.MinX, extent.MinY);
-            SharpMap.Geometries.Point max = view.WorldToView(extent.MaxX, extent.MaxY);
+            SharpMap.Geometries.Point min = viewport.WorldToScreen(extent.MinX, extent.MinY);
+            SharpMap.Geometries.Point max = viewport.WorldToScreen(extent.MaxX, extent.MaxY);
             return new Rect(min.X, max.Y, max.X - min.X, min.Y - max.Y);
         }
 

@@ -50,36 +50,36 @@ namespace Mapsui.Rendering.GdiRendering
             return bitmap;
         }
 
-        public static void RenderGeometryOutline(Graphics graphics, IView view, IGeometry geometry, Styles.VectorStyle style)
+        public static void RenderGeometryOutline(Graphics graphics, IViewport viewport, IGeometry geometry, Styles.VectorStyle style)
         {
             //Draw background of all line-outlines first
             if (geometry is LineString)
             {
-                DrawLineString(graphics, geometry as LineString, style.Outline.Convert(), view);
+                DrawLineString(graphics, geometry as LineString, style.Outline.Convert(), viewport);
             }
             else if (geometry is MultiLineString)
             {
-                DrawMultiLineString(graphics, geometry as MultiLineString, style.Outline.Convert(), view);
+                DrawMultiLineString(graphics, geometry as MultiLineString, style.Outline.Convert(), viewport);
             }
         }
 
-        public static void DrawMultiPoint(Graphics graphics, MultiPoint points, Styles.IStyle style, IView transform)
+        public static void DrawMultiPoint(Graphics graphics, MultiPoint points, Styles.IStyle style, IViewport viewport)
         {
-            foreach (Point point in points) DrawPoint(graphics, point, style, transform);
+            foreach (Point point in points) DrawPoint(graphics, point, style, viewport);
         }
 
-        public static void DrawMultiLineString(Graphics graphics, MultiLineString lines, Pen pen, IView view)
+        public static void DrawMultiLineString(Graphics graphics, MultiLineString lines, Pen pen, IViewport viewport)
         {
             foreach (LineString t in lines.LineStrings)
-                DrawLineString(graphics, t, pen, view);
+                DrawLineString(graphics, t, pen, viewport);
         }
 
-        public static void DrawLineString(Graphics graphics, LineString line, Pen pen, IView view)
+        public static void DrawLineString(Graphics graphics, LineString line, Pen pen, IViewport viewport)
         {
             if (line.Vertices.Count > 1)
             {
                 var gp = new GraphicsPath();
-                gp.AddLines(ConvertPoints(WorldToView(line, view)));
+                gp.AddLines(ConvertPoints(WorldToView(line, viewport)));
                 graphics.DrawPath(pen, gp);
             }
         }
@@ -91,21 +91,13 @@ namespace Mapsui.Rendering.GdiRendering
             return result.ToArray();
         }
 
-        public static void DrawMultiPolygon(Graphics graphics, MultiPolygon pols, Brush brush, Pen pen, IView transform)
+        public static void DrawMultiPolygon(Graphics graphics, MultiPolygon pols, Brush brush, Pen pen, IViewport viewport)
         {
             foreach (Polygon t in pols.Polygons)
-                DrawPolygon(graphics, t, brush, pen, transform);
+                DrawPolygon(graphics, t, brush, pen, viewport);
         }
 
-        /// <summary>
-        /// Renders a polygon to the map.
-        /// </summary>
-        /// <param name="graphics">Graphics reference</param>
-        /// <param name="pol">Polygon to render</param>
-        /// <param name="brush">Brush used for filling (null or transparent for no filling)</param>
-        /// <param name="pen">Outline pen style (null if no outline)</param>
-        /// <param name="view"></param>
-        public static void DrawPolygon(Graphics graphics, Polygon pol, Brush brush, Pen pen, IView view)
+        public static void DrawPolygon(Graphics graphics, Polygon pol, Brush brush, Pen pen, IViewport viewport)
         {
             if (pol.ExteriorRing == null)
                 return;
@@ -115,10 +107,10 @@ namespace Mapsui.Rendering.GdiRendering
                 var gp = new GraphicsPath();
 
                 //Add the exterior polygon
-                gp.AddPolygon(ConvertPoints(WorldToView(pol.ExteriorRing, view)));
+                gp.AddPolygon(ConvertPoints(WorldToView(pol.ExteriorRing, viewport)));
                 //Add the interior polygons (holes)
                 foreach (LinearRing linearRing in pol.InteriorRings)
-                    gp.AddPolygon(ConvertPoints(WorldToView(linearRing, view)));
+                    gp.AddPolygon(ConvertPoints(WorldToView(linearRing, viewport)));
 
                 // Only render inside of polygon if the brush isn't null or isn't transparent
                 if (brush != null && brush != Brushes.Transparent)
@@ -129,17 +121,17 @@ namespace Mapsui.Rendering.GdiRendering
             }
         }
 
-        public static IEnumerable<Point> WorldToView(LineString linearRing, IView view)
+        public static IEnumerable<Point> WorldToView(LineString linearRing, IViewport viewport)
         {
             var v = new Point[linearRing.Vertices.Count];
             for (int i = 0; i < linearRing.Vertices.Count; i++)
-                v[i] = view.WorldToView(linearRing.Vertices[i]);
+                v[i] = viewport.WorldToScreen(linearRing.Vertices[i]);
             return v;
         }
 
-        public static Point WorldToView(Point point, IView view)
+        public static Point WorldToView(Point point, IViewport viewport)
         {
-            return view.WorldToView(point);
+            return viewport.WorldToScreen(point);
         }
 
         /// <summary>
@@ -154,8 +146,8 @@ namespace Mapsui.Rendering.GdiRendering
         /// <param name="halo">Color of halo</param>
         /// <param name="rotation">Text rotation in degrees</param>
         /// <param name="text">Text to render</param>
-        /// <param name="view"></param>
-        public static void DrawLabel(Graphics graphics, Point labelPoint, Styles.Offset offset, Styles.Font font, Styles.Color forecolor, Styles.Brush backcolor, Styles.Pen halo, double rotation, string text, IView view)
+        /// <param name="viewport"></param>
+        public static void DrawLabel(Graphics graphics, Point labelPoint, Styles.Offset offset, Styles.Font font, Styles.Color forecolor, Styles.Brush backcolor, Styles.Pen halo, double rotation, string text, IViewport viewport)
         {
             SizeF fontSize = graphics.MeasureString(text, font.Convert()); //Calculate the size of the text
             labelPoint.X += offset.X; labelPoint.Y += offset.Y; //add label offset
@@ -189,7 +181,7 @@ namespace Mapsui.Rendering.GdiRendering
             }
         }
         
-        public static void DrawPoint(Graphics graphics, Point point, Styles.IStyle style, IView view)
+        public static void DrawPoint(Graphics graphics, Point point, Styles.IStyle style, IViewport viewport)
         {
             var vectorStyle = (Styles.SymbolStyle)style;
             if (vectorStyle.Symbol == null) throw  new ArgumentException("No bitmap symbol set in Gdi rendering"); //todo: allow vector symbol
@@ -203,7 +195,7 @@ namespace Mapsui.Rendering.GdiRendering
             if (symbol == null)
                 symbol = DefaultSymbol;
 
-            PointF dest = ConvertPoint(view.WorldToView(point));
+            PointF dest = ConvertPoint(viewport.WorldToScreen(point));
 
             if (rotation != 0 && !double.IsNaN(rotation))
             {
@@ -237,14 +229,14 @@ namespace Mapsui.Rendering.GdiRendering
             return new PointF((float)point.X, (float)point.Y);
         }
 
-        public static void DrawRaster(Graphics graphics, IRaster raster, IView view)
+        public static void DrawRaster(Graphics graphics, IRaster raster, IViewport viewport)
         {
             var imageAttributes = new ImageAttributes();
 
             var bitmap = new Bitmap(raster.Data);
 
-            Point min = view.WorldToView(new Point(raster.GetBoundingBox().MinX, raster.GetBoundingBox().MinY));
-            Point max = view.WorldToView(new Point(raster.GetBoundingBox().MaxX, raster.GetBoundingBox().MaxY));
+            Point min = viewport.WorldToScreen(new Point(raster.GetBoundingBox().MinX, raster.GetBoundingBox().MinY));
+            Point max = viewport.WorldToScreen(new Point(raster.GetBoundingBox().MaxX, raster.GetBoundingBox().MaxY));
 
             Rectangle destination = RoundToPixel(new RectangleF((float)min.X, (float)max.Y, (float)(max.X - min.X), (float)(min.Y - max.Y)));
             graphics.DrawImage(bitmap,

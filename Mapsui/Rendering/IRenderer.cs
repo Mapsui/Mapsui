@@ -6,6 +6,6 @@ namespace SharpMap.Rendering
 {
     public interface IRenderer
     {
-        void Render(IView view, IEnumerable<ILayer> layers);
+        void Render(IViewport viewport, IEnumerable<ILayer> layers);
     }
 }

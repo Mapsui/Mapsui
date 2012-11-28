@@ -37,13 +37,13 @@ namespace Mapsui.Rendering.GdiRendering
         // TODO: derive from IRenderer
         public delegate bool AbortRenderDelegate();
 
-        public static void Render(Graphics graphics, IView view, Map map, AbortRenderDelegate abortRender)
+        public static void Render(Graphics graphics, IViewport viewport, Map map, AbortRenderDelegate abortRender)
         {
             foreach (var layer in map.Layers)
             {
                 if (layer.Enabled &&
-                    layer.MinVisible <= view.Resolution &&
-                    layer.MaxVisible >= view.Resolution)
+                    layer.MinVisible <= viewport.Resolution &&
+                    layer.MaxVisible >= viewport.Resolution)
                 {
                     if (layer is LabelLayer)
                     {
@@ -52,11 +52,11 @@ namespace Mapsui.Rendering.GdiRendering
                     else if (layer is ITileLayer)
                     {
                         var tileLayer = (layer as ITileLayer);
-                        GdiTileRenderer.Render(graphics, tileLayer.Schema, view, tileLayer.MemoryCache);
+                        GdiTileRenderer.Render(graphics, tileLayer.Schema, viewport, tileLayer.MemoryCache);
                     }
                     else
                     {
-                        RenderLayer(graphics, view, layer, abortRender);
+                        RenderLayer(graphics, viewport, layer, abortRender);
                     }
                 }
                 
@@ -64,27 +64,27 @@ namespace Mapsui.Rendering.GdiRendering
             }
         }
 
-        public static Image RenderMapAsImage(IView view, Map map)
+        public static Image RenderMapAsImage(IViewport viewport, Map map)
         {
-            if ((view.Width <= 0) || (view.Height <= 0)) throw new Exception("The view's width or heigh is 0");
-            var image = new System.Drawing.Bitmap((int)view.Width, (int)view.Height);
+            if ((viewport.Width <= 0) || (viewport.Height <= 0)) throw new Exception("The view's width or heigh is 0");
+            var image = new System.Drawing.Bitmap((int)viewport.Width, (int)viewport.Height);
             var graphics = Graphics.FromImage(image);
 #if !PocketPC
             graphics.PageUnit = GraphicsUnit.Pixel;
 #endif
-            Render(graphics, view, map, null);
+            Render(graphics, viewport, map, null);
             return image;
         }
 
-        public byte[] RenderMapAsByteArray(IView view, Map map)
+        public byte[] RenderMapAsByteArray(IViewport viewport, Map map)
         {
-            Image image = RenderMapAsImage(view, map);
+            Image image = RenderMapAsImage(viewport, map);
             var memoryStream = new MemoryStream();
             image.Save(memoryStream, ImageFormat.Bmp);
             return memoryStream.ToArray();
         }
 
-        private static void RenderLayer(Graphics graphics, IView view, ILayer layer, AbortRenderDelegate abortRender)
+        private static void RenderLayer(Graphics graphics, IViewport viewport, ILayer layer, AbortRenderDelegate abortRender)
         {
             int counter = 0;
             const int step = 100;
@@ -95,7 +95,7 @@ namespace Mapsui.Rendering.GdiRendering
             {
                 var style = layerStyle;
 
-                var features = layer.GetFeaturesInView(view.Extent, view.Resolution);
+                var features = layer.GetFeaturesInView(viewport.Extent, viewport.Resolution);
 
                 //Linestring outlines is drawn by drawing the layer once with a thicker line
                 //before drawing the "inline" on top.
@@ -107,7 +107,7 @@ namespace Mapsui.Rendering.GdiRendering
 
                     if ((style is VectorStyle) && ((style as VectorStyle).Outline != null))
                     {
-                        GdiGeometryRenderer.RenderGeometryOutline(graphics, view, feature.Geometry, style as VectorStyle);
+                        GdiGeometryRenderer.RenderGeometryOutline(graphics, viewport, feature.Geometry, style as VectorStyle);
                     }
                 }
 
@@ -115,27 +115,27 @@ namespace Mapsui.Rendering.GdiRendering
                 {
                     if ((counter++ % step == 0) && abortRender != null && abortRender()) return;
                     if (layerStyle is IThemeStyle) style = (layerStyle as IThemeStyle).GetStyle(feature);
-                    RenderGeometry(graphics, view, feature.Geometry, style as VectorStyle);
+                    RenderGeometry(graphics, viewport, feature.Geometry, style as VectorStyle);
                 }
             }
         }
 
-        private static void RenderGeometry(Graphics graphics, IView transform, IGeometry feature, VectorStyle style)
+        private static void RenderGeometry(Graphics graphics, IViewport viewport, IGeometry feature, VectorStyle style)
         {
             if (feature is Point)
-                GdiGeometryRenderer.DrawPoint(graphics, (Point)feature, style, transform);
+                GdiGeometryRenderer.DrawPoint(graphics, (Point)feature, style, viewport);
             else if (feature is MultiPoint)
-                GdiGeometryRenderer.DrawMultiPoint(graphics, (MultiPoint) feature, style, transform);
+                GdiGeometryRenderer.DrawMultiPoint(graphics, (MultiPoint) feature, style, viewport);
             else if (feature is LineString)
-                GdiGeometryRenderer.DrawLineString(graphics, (LineString)feature, style.Line.Convert(), transform);
+                GdiGeometryRenderer.DrawLineString(graphics, (LineString)feature, style.Line.Convert(), viewport);
             else if (feature is MultiLineString)
-                GdiGeometryRenderer.DrawMultiLineString(graphics, (MultiLineString)feature, style.Line.Convert(), transform);
+                GdiGeometryRenderer.DrawMultiLineString(graphics, (MultiLineString)feature, style.Line.Convert(), viewport);
             else if (feature is Polygon)
-                GdiGeometryRenderer.DrawPolygon(graphics, (Polygon)feature, style.Fill.Convert(), style.Outline.Convert(), transform);
+                GdiGeometryRenderer.DrawPolygon(graphics, (Polygon)feature, style.Fill.Convert(), style.Outline.Convert(), viewport);
             else if (feature is MultiPolygon)
-                GdiGeometryRenderer.DrawMultiPolygon(graphics, (MultiPolygon)feature, style.Fill.Convert(), style.Outline.Convert(), transform);
+                GdiGeometryRenderer.DrawMultiPolygon(graphics, (MultiPolygon)feature, style.Fill.Convert(), style.Outline.Convert(), viewport);
             else if (feature is IRaster)
-                GdiGeometryRenderer.DrawRaster(graphics, feature as IRaster, transform);
+                GdiGeometryRenderer.DrawRaster(graphics, feature as IRaster, viewport);
         }
     }
 }

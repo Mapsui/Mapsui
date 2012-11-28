@@ -22,10 +22,10 @@ namespace Mapsui.Forms
 {
   public static class MapTransformHelpers
   {
-    public static void Pan(View transform, Point currentMap, Point previousMap)
+    public static void Pan(Viewport transform, Point currentMap, Point previousMap)
     {
-      Point current = transform.ViewToWorld(currentMap.X, currentMap.Y);
-      Point previous = transform.ViewToWorld(previousMap.X, previousMap.Y);
+      Point current = transform.ScreenToWorld(currentMap.X, currentMap.Y);
+      Point previous = transform.ScreenToWorld(previousMap.X, previousMap.Y);
       double diffX = previous.X - current.X;
       double diffY = previous.Y - current.Y;
       transform.Center = new Point(transform.CenterX + diffX, transform.CenterY + diffY);

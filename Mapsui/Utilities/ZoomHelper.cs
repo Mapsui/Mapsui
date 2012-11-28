@@ -82,7 +82,7 @@ namespace SharpMap.Utilities
             resolution = (xMax - xMin) / screenWidth;
         }
 
-        public static void ZoomToBoudingbox(View view, double xMin, double yMin, double xMax, double yMax, double screenWidth)
+        public static void ZoomToBoudingbox(Viewport viewport, double xMin, double yMin, double xMax, double yMax, double screenWidth)
         {
             if (xMin > xMax)//User dragged from right to left
             {
@@ -97,9 +97,9 @@ namespace SharpMap.Utilities
             var x = (xMax + xMin) / 2;
             var y = (yMax + yMin) / 2;
             var resolution = (xMax - xMin) / screenWidth;
-            view.CenterX = x;
-            view.CenterY = y;
-            view.Resolution = resolution;
+            viewport.CenterX = x;
+            viewport.CenterY = y;
+            viewport.Resolution = resolution;
         }
     }
 }

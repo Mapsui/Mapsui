@@ -6,17 +6,17 @@ namespace SilverlightRendering
 {
     public static class MatrixHelper
     {
-        public static void ApplyViewTransform(ref Matrix matrix, IView view)
+        public static void ApplyViewTransform(ref Matrix matrix, IViewport viewport)
         {
-            double mapCenterX = view.Width * 0.5;
-            double mapCenterY = view.Height * 0.5;
+            double mapCenterX = viewport.Width * 0.5;
+            double mapCenterY = viewport.Height * 0.5;
             
-            Translate(ref matrix, mapCenterX - view.CenterX, mapCenterY - view.CenterY);
-            ScaleAt(ref matrix, 1 / view.Resolution, 1 / view.Resolution, mapCenterX, mapCenterY);
+            Translate(ref matrix, mapCenterX - viewport.CenterX, mapCenterY - viewport.CenterY);
+            ScaleAt(ref matrix, 1 / viewport.Resolution, 1 / viewport.Resolution, mapCenterX, mapCenterY);
             //append invert the Y, but also the whole image
             Append(ref matrix, new Matrix(1, 0, 0, -1, 0, 0));
             
-            Translate(ref matrix, 0, view.Height);
+            Translate(ref matrix, 0, viewport.Height);
         }
 
         public static void Invert(ref Matrix matrix)
