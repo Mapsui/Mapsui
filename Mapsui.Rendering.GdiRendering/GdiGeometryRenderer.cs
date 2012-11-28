@@ -79,7 +79,7 @@ namespace Mapsui.Rendering.GdiRendering
             if (line.Vertices.Count > 1)
             {
                 var gp = new GraphicsPath();
-                gp.AddLines(ConvertPoints(line.WorldToView(view)));
+                gp.AddLines(ConvertPoints(WorldToView(line, view)));
                 graphics.DrawPath(pen, gp);
             }
         }
@@ -115,10 +115,10 @@ namespace Mapsui.Rendering.GdiRendering
                 var gp = new GraphicsPath();
 
                 //Add the exterior polygon
-                gp.AddPolygon(ConvertPoints(pol.ExteriorRing.WorldToView(view)));
+                gp.AddPolygon(ConvertPoints(WorldToView(pol.ExteriorRing, view)));
                 //Add the interior polygons (holes)
-                foreach (LinearRing t in pol.InteriorRings)
-                    gp.AddPolygon(ConvertPoints(t.WorldToView(view)));
+                foreach (LinearRing linearRing in pol.InteriorRings)
+                    gp.AddPolygon(ConvertPoints(WorldToView(linearRing, view)));
 
                 // Only render inside of polygon if the brush isn't null or isn't transparent
                 if (brush != null && brush != Brushes.Transparent)
@@ -127,6 +127,19 @@ namespace Mapsui.Rendering.GdiRendering
                 if (pen != null)
                     graphics.DrawPath(pen, gp);
             }
+        }
+
+        public static IEnumerable<Point> WorldToView(LineString linearRing, IView view)
+        {
+            var v = new Point[linearRing.Vertices.Count];
+            for (int i = 0; i < linearRing.Vertices.Count; i++)
+                v[i] = view.WorldToView(linearRing.Vertices[i]);
+            return v;
+        }
+
+        public static Point WorldToView(Point point, IView view)
+        {
+            return view.WorldToView(point);
         }
 
         /// <summary>
@@ -224,14 +237,14 @@ namespace Mapsui.Rendering.GdiRendering
             return new PointF((float)point.X, (float)point.Y);
         }
 
-        public static void DrawRaster(Graphics graphics, IRaster raster, IView transform)
+        public static void DrawRaster(Graphics graphics, IRaster raster, IView view)
         {
             var imageAttributes = new ImageAttributes();
 
             var bitmap = new Bitmap(raster.Data);
 
-            Point min = transform.WorldToView(new Point(raster.GetBoundingBox().MinX, raster.GetBoundingBox().MinY));
-            Point max = transform.WorldToView(new Point(raster.GetBoundingBox().MaxX, raster.GetBoundingBox().MaxY));
+            Point min = view.WorldToView(new Point(raster.GetBoundingBox().MinX, raster.GetBoundingBox().MinY));
+            Point max = view.WorldToView(new Point(raster.GetBoundingBox().MaxX, raster.GetBoundingBox().MaxY));
 
             Rectangle destination = RoundToPixel(new RectangleF((float)min.X, (float)max.Y, (float)(max.X - min.X), (float)(min.Y - max.Y)));
             graphics.DrawImage(bitmap,

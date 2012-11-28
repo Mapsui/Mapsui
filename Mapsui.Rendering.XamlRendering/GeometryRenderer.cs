@@ -332,14 +332,19 @@ namespace SilverlightRendering
         private static PathFigure CreatePathFigure(LineString linearRing, IView view)
         {
             var pathFigure = new PathFigure();
-            pathFigure.StartPoint = ConvertPoint(linearRing.StartPoint.WorldToMap(view));
+            pathFigure.StartPoint = ConvertPoint(WorldToView(linearRing.StartPoint, view));
 
             foreach (Point point in linearRing.Vertices)
             {
                 pathFigure.Segments.Add(
-                    new LineSegment { Point = ConvertPoint(point.WorldToMap(view)) });
+                    new LineSegment { Point = ConvertPoint(WorldToView(point, view)) });
             }
             return pathFigure;
+        }
+
+        public static Point WorldToView(Point point, IView view)
+        {
+            return view.WorldToView(point);
         }
 
         private static System.Windows.Point ConvertPoint(Point point)

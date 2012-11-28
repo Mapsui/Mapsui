@@ -107,21 +107,21 @@ namespace WbxRendering
                     {
                         var image = ((IRaster)feature.Geometry).Data;
                         var bitmap = LoadBitmap(image);
-                        Rect dest = WorldToMap(tile.Extent, view);
+                        Rect dest = WorldToView(tile.Extent, view);
                         DrawImage(targetBitmap, bitmap, dest, tile, memoryCache, opacity);
                         feature.RenderedGeometry[feature.Styles.First()] = bitmap;
                     }
                     else // position
                     {
                         var bitmap = (WriteableBitmap)feature.RenderedGeometry[feature.Styles.First()];
-                        Rect dest = WorldToMap(tile.Extent, view);
+                        Rect dest = WorldToView(tile.Extent, view);
                         DrawImage(targetBitmap, bitmap, dest, tile, memoryCache, opacity);
                     }
                 }
             }
         }
 
-        private static Rect WorldToMap(Extent extent, IView view)
+        private static Rect WorldToView(Extent extent, IView view)
         {
             SharpMap.Geometries.Point min = view.WorldToView(extent.MinX, extent.MinY);
             SharpMap.Geometries.Point max = view.WorldToView(extent.MaxX, extent.MaxY);

@@ -56,7 +56,7 @@ namespace SilverlightRendering
 
                 if (image != null)
                 {
-                    Rect dest = WorldToMap(tile.Extent, view);
+                    Rect dest = WorldToView(tile.Extent, view);
                     dest = GeometryRenderer.RoundToPixel(dest);
 
                     //See here the clumsy way to write a bitmap in SL/WPF
@@ -71,7 +71,7 @@ namespace SilverlightRendering
             }
         }
 
-        private static Rect WorldToMap(Extent extent, IView view)
+        private static Rect WorldToView(Extent extent, IView view)
         {
             SharpMap.Geometries.Point min = view.WorldToView(extent.MinX, extent.MinY);
             SharpMap.Geometries.Point max = view.WorldToView(extent.MaxX, extent.MaxY);

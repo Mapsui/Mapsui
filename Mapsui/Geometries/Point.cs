@@ -201,11 +201,6 @@ namespace SharpMap.Geometries
             return new Point(x, y);
         }
 
-        public Point WorldToMap(IView view)
-        {
-            return view.WorldToView(this);
-        }
-
         /// <summary>
         /// This method must be overridden using 'public new [derived_data_type] Clone()'
         /// </summary>

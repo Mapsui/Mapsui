@@ -88,20 +88,20 @@ namespace WindowsFormsSample
       get { return extent; }
     }
 
-    public PointF WorldToMap(double x, double y)
+    public PointF WorldToView(double x, double y)
     {
       return new PointF((float)(x - extent.MinX) / resolution, (float)(extent.MaxY - y) / resolution);
     }
 
-    public PointF MapToWorld(double x, double y)
+    public PointF ViewToWorld(double x, double y)
     {
       return new PointF((float)(extent.MinX + x) * resolution, (float)(extent.MaxY - y) * resolution);
     }
 
-    public RectangleF WorldToMap(double x1, double y1, double x2, double y2)
+    public RectangleF WorldToView(double x1, double y1, double x2, double y2)
     {
-      PointF point1 = WorldToMap(x1, y1);
-      PointF point2 = WorldToMap(x2, y2);
+      PointF point1 = WorldToView(x1, y1);
+      PointF point2 = WorldToView(x2, y2);
       return new RectangleF(point1.X, point2.Y, point2.X - point1.X, point1.Y - point2.Y);
     }
 

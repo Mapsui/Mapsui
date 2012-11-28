@@ -145,19 +145,6 @@ namespace SharpMap.Geometries
         #endregion
 
         /// <summary>
-        /// Transforms the linestring to image coordinates, based on the map
-        /// </summary>
-        /// <param name="map">Map to base coordinates on</param>
-        /// <returns>Linestring in image coordinates</returns>
-        public IList<Point> WorldToView(IView view)
-        {
-            var v = new Point[vertices.Count];
-            for (int i = 0; i < Vertices.Count; i++)
-                v[i] = view.WorldToView(vertices[i]);
-            return v;
-        }	
-
-        /// <summary>
         /// The position of a point on the line, parameterised by length.
         /// </summary>
         /// <param name="t">Distance down the line</param>

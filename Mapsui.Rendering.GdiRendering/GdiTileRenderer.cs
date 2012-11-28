@@ -51,9 +51,9 @@ namespace Mapsui.Rendering.GdiRendering
                 else
                 {
                     var image = ((IRaster)feature.Geometry).Data;
-                    RectangleF dest = WorldToMap(info.Extent, transform);
+                    RectangleF dest = WorldToView(info.Extent, transform);
                     dest = RoundToPixel(dest);
-                    RectangleF clip = WorldToMap(extent, transform);
+                    RectangleF clip = WorldToView(extent, transform);
                     clip = RoundToPixel(clip);
 
                     if (!Contains(clip, dest))
@@ -115,7 +115,7 @@ namespace Mapsui.Rendering.GdiRendering
             graphics.ResetClip();
         }
 
-        private static RectangleF WorldToMap(Extent extent, IView transform)
+        private static RectangleF WorldToView(Extent extent, IView transform)
         {
             Point min = transform.WorldToView(new Point(extent.MinX, extent.MinY));
             Point max = transform.WorldToView(new Point(extent.MaxX, extent.MaxY));

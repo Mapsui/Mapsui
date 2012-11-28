@@ -45,7 +45,7 @@ namespace WindowsFormsSample
                 var url = requestBuilder.GetUri(tile);
                 byte[] bytes = RequestHelper.FetchImage(url);
                 var bitmap = new Bitmap(new MemoryStream(bytes));
-                graphics.DrawImage(bitmap, transform.WorldToMap(tile.Extent.MinX, tile.Extent.MinY, tile.Extent.MaxX, tile.Extent.MaxY));
+                graphics.DrawImage(bitmap, transform.WorldToView(tile.Extent.MinX, tile.Extent.MinY, tile.Extent.MaxX, tile.Extent.MaxY));
             }
 
             Invalidate();
