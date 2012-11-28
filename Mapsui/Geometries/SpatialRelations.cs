@@ -17,7 +17,7 @@
 
 using System;
 
-namespace SharpMap.Geometries
+namespace Mapsui.Geometries
 {
     /// <summary>
     /// Class defining a set of named spatial relationship operators for geometric shape objects.

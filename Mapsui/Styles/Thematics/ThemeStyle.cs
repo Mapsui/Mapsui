@@ -1,7 +1,7 @@
-﻿using SharpMap.Providers;
+﻿using Mapsui.Providers;
 using System;
 
-namespace SharpMap.Styles.Thematics
+namespace Mapsui.Styles.Thematics
 {
     public class ThemeStyle : Style, IThemeStyle
     {

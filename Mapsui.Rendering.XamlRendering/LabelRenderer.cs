@@ -5,12 +5,12 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using SharpMap;
-using SharpMap.Geometries;
-using SharpMap.Layers;
-using SharpMap.Providers;
-using SharpMap.Styles;
-using SharpMap.Styles.Thematics;
+using Mapsui;
+using Mapsui.Geometries;
+using Mapsui.Layers;
+using Mapsui.Providers;
+using Mapsui.Styles;
+using Mapsui.Styles.Thematics;
 using System.Globalization;
 
 namespace SilverlightRendering
@@ -54,7 +54,7 @@ namespace SilverlightRendering
                         if (!(style is LabelStyle)) throw new Exception("Style of label is not a LabelStyle");
                         var labelStyle = style as LabelStyle;
                         string labelText = layer.GetLabel(feature);
-                        var position = new SharpMap.Geometries.Point(cluster.Box.GetCentroid().X, cluster.Box.Bottom);
+                        var position = new Mapsui.Geometries.Point(cluster.Box.GetCentroid().X, cluster.Box.Bottom);
                         canvas.Children.Add(RenderLabel(position, stackOffset, labelStyle, viewport, labelText));
                     }
                 }
@@ -150,14 +150,14 @@ namespace SilverlightRendering
             }
         }
 
-        public static UIElement RenderLabel(SharpMap.Geometries.Point point, Offset stackOffset, LabelStyle style, IViewport viewport)
+        public static UIElement RenderLabel(Mapsui.Geometries.Point point, Offset stackOffset, LabelStyle style, IViewport viewport)
         {
             return RenderLabel(point, stackOffset, style, viewport, style.Text);
         }
 
-        public static UIElement RenderLabel(SharpMap.Geometries.Point point, Offset stackOffset, LabelStyle style, IViewport viewport, string text)
+        public static UIElement RenderLabel(Mapsui.Geometries.Point point, Offset stackOffset, LabelStyle style, IViewport viewport, string text)
         {
-            SharpMap.Geometries.Point p = viewport.WorldToScreen(point);
+            Mapsui.Geometries.Point p = viewport.WorldToScreen(point);
             var windowsPoint = new System.Windows.Point(p.X, p.Y);
 
             var border = new Border();

@@ -16,10 +16,10 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
 using System.Collections.Generic;
-using SharpMap.Utilities;
+using Mapsui.Utilities;
 using BruTile;
 
-namespace SharpMap.Fetcher
+namespace Mapsui.Fetcher
 {
     class FetchStrategy : IFetchStrategy
     {

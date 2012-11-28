@@ -5,10 +5,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using BruTile;
 using BruTile.Cache;
-using SharpMap;
-using SharpMap.Geometries;
-using SharpMap.Layers;
-using SharpMap.Providers;
+using Mapsui;
+using Mapsui.Geometries;
+using Mapsui.Layers;
+using Mapsui.Providers;
 
 namespace SilverlightRendering
 {
@@ -73,8 +73,8 @@ namespace SilverlightRendering
 
         private static Rect WorldToView(Extent extent, IViewport viewport)
         {
-            SharpMap.Geometries.Point min = viewport.WorldToScreen(extent.MinX, extent.MinY);
-            SharpMap.Geometries.Point max = viewport.WorldToScreen(extent.MaxX, extent.MaxY);
+            Mapsui.Geometries.Point min = viewport.WorldToScreen(extent.MinX, extent.MinY);
+            Mapsui.Geometries.Point max = viewport.WorldToScreen(extent.MaxX, extent.MaxY);
             return new Rect(min.X, max.Y, max.X - min.X, min.Y - max.Y);
         }
     }

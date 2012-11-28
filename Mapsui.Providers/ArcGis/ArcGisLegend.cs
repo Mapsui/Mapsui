@@ -4,7 +4,7 @@ using System.Net;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace SharpMap.Providers.ArcGis
+namespace Mapsui.Providers.ArcGis
 {
     public delegate void ArcgisLegendEventHandler(object sender, ArcGisLegendResponse legendInfo);
 

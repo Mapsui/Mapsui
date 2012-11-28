@@ -1,5 +1,5 @@
 ﻿using NUnit.Framework;
-using SharpMap.Utilities;
+using Mapsui.Utilities;
 
 namespace Mapsui.Tests.Utilities
 {

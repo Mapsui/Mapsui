@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace SharpMap.Styles
+namespace Mapsui.Styles
 {
     public class Color
     {

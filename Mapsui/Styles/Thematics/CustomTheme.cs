@@ -15,9 +15,9 @@
 // along with Mapsui; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
-using SharpMap.Providers;
+using Mapsui.Providers;
 
-namespace SharpMap.Styles.Thematics
+namespace Mapsui.Styles.Thematics
 {
 	/// <summary>
 	/// The CustomTheme class is used for defining your own thematic rendering by using a custom get-style-delegate.

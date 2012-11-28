@@ -20,7 +20,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SharpMap.Providers
+namespace Mapsui.Providers
 {
     public class Features : IFeatures
     {

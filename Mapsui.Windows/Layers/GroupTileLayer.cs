@@ -5,12 +5,12 @@ using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using BruTile;
 using BruTile.Cache;
-using SharpMap.Fetcher;
-using SharpMap.Geometries;
-using SharpMap.Providers;
-using SharpMap.Styles;
+using Mapsui.Fetcher;
+using Mapsui.Geometries;
+using Mapsui.Providers;
+using Mapsui.Styles;
 
-namespace SharpMap.Layers
+namespace Mapsui.Layers
 {
     public class GroupTileLayer : BaseLayer, ITileLayer
     {

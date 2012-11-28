@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using SharpMap.Data;
+using Mapsui.Data;
 using System.Data;
 
-namespace SharpMap.Providers
+namespace Mapsui.Providers
 {
     static class Utilities
     {

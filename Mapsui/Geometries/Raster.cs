@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace SharpMap.Geometries
+namespace Mapsui.Geometries
 {
     public class Raster : IRaster
     {

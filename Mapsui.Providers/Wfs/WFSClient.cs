@@ -7,11 +7,11 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Net;
-using SharpMap.Data;
-using SharpMap.Geometries;
-using SharpMap.Utilities.Wfs;
+using Mapsui.Data;
+using Mapsui.Geometries;
+using Mapsui.Utilities.Wfs;
 
-namespace SharpMap.Providers.Wfs
+namespace Mapsui.Providers.Wfs
 {
     /// <summary>
     /// WFS dataprovider
@@ -32,21 +32,21 @@ namespace SharpMap.Providers.Wfs
     /// </summary>
     /// <example>
     /// <code lang="C#">
-    ///SharpMap.Map demoMap;
+    ///Mapsui.Map demoMap;
     ///
     ///const string getCapabilitiesURI = "http://localhost:8080/geoserver/wfs";
     ///const string serviceURI = "http://localhost:8080/geoserver/wfs";
     ///
-    ///demoMap = new SharpMap.Map(new Size(600, 600));
+    ///demoMap = new Mapsui.Map(new Size(600, 600));
     ///demoMap.MinimumZoom = 0.005;
     ///demoMap.BackColor = Color.White;
     ///
-    ///SharpMap.Layers.VectorLayer layer1 = new SharpMap.Layers.VectorLayer("States");
-    ///SharpMap.Layers.VectorLayer layer2 = new SharpMap.Layers.VectorLayer("SelectedStatesAndHousholds");
-    ///SharpMap.Layers.VectorLayer layer3 = new SharpMap.Layers.VectorLayer("New Jersey");
-    ///SharpMap.Layers.VectorLayer layer4 = new SharpMap.Layers.VectorLayer("Roads");
-    ///SharpMap.Layers.VectorLayer layer5 = new SharpMap.Layers.VectorLayer("Landmarks");
-    ///SharpMap.Layers.VectorLayer layer6 = new SharpMap.Layers.VectorLayer("Poi");
+    ///Mapsui.Layers.VectorLayer layer1 = new Mapsui.Layers.VectorLayer("States");
+    ///Mapsui.Layers.VectorLayer layer2 = new Mapsui.Layers.VectorLayer("SelectedStatesAndHousholds");
+    ///Mapsui.Layers.VectorLayer layer3 = new Mapsui.Layers.VectorLayer("New Jersey");
+    ///Mapsui.Layers.VectorLayer layer4 = new Mapsui.Layers.VectorLayer("Roads");
+    ///Mapsui.Layers.VectorLayer layer5 = new Mapsui.Layers.VectorLayer("Landmarks");
+    ///Mapsui.Layers.VectorLayer layer6 = new Mapsui.Layers.VectorLayer("Poi");
     ///    
     /// // Demo data from Geoserver 1.5.3 and Geoserver 1.6.0 
     ///    
@@ -55,7 +55,7 @@ namespace SharpMap.Providers.Wfs
     /// // Bypass 'GetCapabilities' and 'DescribeFeatureType', if you know all necessary metadata.
     ///WfsFeatureTypeInfo featureTypeInfo = new WfsFeatureTypeInfo(serviceURI, "topp", null, "states", "the_geom");
     /// // 'WFS.WFSVersionEnum.WFS1_1_0' supported by Geoserver 1.6.x
-    ///WFS prov2 = new SharpMap.Data.Providers.WFS(featureTypeInfo, WFS.WFSVersionEnum.WFS1_1_0);
+    ///WFS prov2 = new Mapsui.Data.Providers.WFS(featureTypeInfo, WFS.WFSVersionEnum.WFS1_1_0);
     /// // Bypass 'GetCapabilities' and 'DescribeFeatureType' again...
     /// // It's possible to specify the geometry type, if 'DescribeFeatureType' does not...(.e.g 'GeometryAssociationType')
     /// // This helps to accelerate the initialization process in case of unprecise geometry information.
@@ -103,17 +103,17 @@ namespace SharpMap.Providers.Wfs
     /// // Otherwise (when calling twice for retrieving labels) there may be an inconsistent read...
     /// // If a label property is set, the quick geometry option is automatically set to 'false'.
     ///prov3.Label = "STATE_NAME";
-    ///SharpMap.Layers.LabelLayer layLabel = new SharpMap.Layers.LabelLayer("labels");
+    ///Mapsui.Layers.LabelLayer layLabel = new Mapsui.Layers.LabelLayer("labels");
     ///layLabel.DataSource = prov3;
     ///layLabel.Enabled = true;
     ///layLabel.LabelColumn = prov3.Label;
-    ///layLabel.Style = new SharpMap.Styles.LabelStyle();
+    ///layLabel.Style = new Mapsui.Styles.LabelStyle();
     ///layLabel.Style.CollisionDetection = false;
     ///layLabel.Style.CollisionBuffer = new SizeF(5, 5);
     ///layLabel.Style.ForeColor = Color.Black;
     ///layLabel.Style.Font = new Font(FontFamily.GenericSerif, 10);
     ///layLabel.MaxVisible = 90;
-    ///layLabel.Style.HorizontalAlignment = SharpMap.Styles.LabelStyle.HorizontalAlignmentEnum.Center;
+    ///layLabel.Style.HorizontalAlignment = Mapsui.Styles.LabelStyle.HorizontalAlignmentEnum.Center;
     /// // Options 
     /// // Defaults: MultiGeometries: true, QuickGeometries: false, GetFeatureGETRequest: false
     /// // Render with validation...
@@ -145,7 +145,7 @@ namespace SharpMap.Providers.Wfs
     ///demoMap.Layers.Add(layer6);
     ///demoMap.Layers.Add(layLabel);
     ///
-    ///demoMap.Center = new SharpMap.Geometries.Point(-74.0, 40.7);
+    ///demoMap.Center = new Mapsui.Geometries.Point(-74.0, 40.7);
     ///demoMap.Zoom = 10;
     /// // Alternatively zoom closer
     /// // demoMap.Zoom = 0.2;
@@ -1003,7 +1003,7 @@ namespace SharpMap.Providers.Wfs
         #region WFSClientHTTPConfigurator
 
         /// <summary>
-        /// This class configures a <see cref="SharpMap.Utilities.Wfs.HttpClientUtil"/> class 
+        /// This class configures a <see cref="Mapsui.Utilities.Wfs.HttpClientUtil"/> class 
         /// for requests to a Web Feature Service.
         /// </summary>
         private class WFSClientHTTPConfigurator
@@ -1018,10 +1018,10 @@ namespace SharpMap.Providers.Wfs
 
             /// <summary>
             /// Initializes a new instance of the <see cref="WFS.WFSClientHTTPConfigurator"/> class.
-            /// An instance of this class can be used to configure a <see cref="SharpMap.Utilities.Wfs.HttpClientUtil"/> object.
+            /// An instance of this class can be used to configure a <see cref="Mapsui.Utilities.Wfs.HttpClientUtil"/> object.
             /// </summary>
             /// <param name="wfsTextResources">
-            /// An instance implementing <see cref="SharpMap.Utilities.Wfs.IWFS_TextResources" /> 
+            /// An instance implementing <see cref="Mapsui.Utilities.Wfs.IWFS_TextResources" /> 
             /// for getting version-specific text resources for WFS request configuration.
             ///</param>
             internal WFSClientHTTPConfigurator(IWFS_TextResources wfsTextResources)
@@ -1034,8 +1034,8 @@ namespace SharpMap.Providers.Wfs
             #region Internal Member
 
             /// <summary>
-            /// Configures for WFS 'GetCapabilities' request using an instance implementing <see cref="SharpMap.Utilities.Wfs.IWFS_TextResources"/>.
-            /// The <see cref="SharpMap.Utilities.Wfs.HttpClientUtil"/> instance is returned for immediate usage. 
+            /// Configures for WFS 'GetCapabilities' request using an instance implementing <see cref="Mapsui.Utilities.Wfs.IWFS_TextResources"/>.
+            /// The <see cref="Mapsui.Utilities.Wfs.HttpClientUtil"/> instance is returned for immediate usage. 
             /// </summary>
             internal HttpClientUtil configureForWfsGetCapabilitiesRequest(HttpClientUtil httpClientUtil,
                                                                           string targetUrl)
@@ -1046,8 +1046,8 @@ namespace SharpMap.Providers.Wfs
             }
 
             /// <summary>
-            /// Configures for WFS 'DescribeFeatureType' request using an instance implementing <see cref="SharpMap.Utilities.Wfs.IWFS_TextResources"/>.
-            /// The <see cref="SharpMap.Utilities.Wfs.HttpClientUtil"/> instance is returned for immediate usage. 
+            /// Configures for WFS 'DescribeFeatureType' request using an instance implementing <see cref="Mapsui.Utilities.Wfs.IWFS_TextResources"/>.
+            /// The <see cref="Mapsui.Utilities.Wfs.HttpClientUtil"/> instance is returned for immediate usage. 
             /// </summary>
             internal HttpClientUtil configureForWfsDescribeFeatureTypeRequest(HttpClientUtil httpClientUtil,
                                                                               string targetUrl,
@@ -1059,8 +1059,8 @@ namespace SharpMap.Providers.Wfs
             }
 
             /// <summary>
-            /// Configures for WFS 'GetFeature' request using an instance implementing <see cref="SharpMap.Utilities.Wfs.IWFS_TextResources"/>.
-            /// The <see cref="SharpMap.Utilities.Wfs.HttpClientUtil"/> instance is returned for immediate usage. 
+            /// Configures for WFS 'GetFeature' request using an instance implementing <see cref="Mapsui.Utilities.Wfs.IWFS_TextResources"/>.
+            /// The <see cref="Mapsui.Utilities.Wfs.HttpClientUtil"/> instance is returned for immediate usage. 
             /// </summary>
             internal HttpClientUtil configureForWfsGetFeatureRequest(HttpClientUtil httpClientUtil,
                                                                      WfsFeatureTypeInfo featureTypeInfo,
@@ -1097,7 +1097,7 @@ namespace SharpMap.Providers.Wfs
         {
             FeatureDataSet dataSet = new FeatureDataSet();
             ExecuteIntersectionQuery(box, dataSet);
-            return SharpMap.Providers.Utilities.DataSetToFeatures(dataSet);
+            return Mapsui.Providers.Utilities.DataSetToFeatures(dataSet);
         }
                 
         #endregion

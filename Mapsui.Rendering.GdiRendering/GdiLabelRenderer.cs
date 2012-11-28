@@ -15,13 +15,13 @@
 // along with Mapsui; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
-using SharpMap;
-using SharpMap.Geometries;
-using SharpMap.Layers;
-using SharpMap.Providers;
-using SharpMap.Rendering;
-using SharpMap.Styles;
-using SharpMap.Styles.Thematics;
+using Mapsui;
+using Mapsui.Geometries;
+using Mapsui.Layers;
+using Mapsui.Providers;
+using Mapsui.Rendering;
+using Mapsui.Styles;
+using Mapsui.Styles.Thematics;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -187,9 +187,9 @@ namespace Mapsui.Rendering.GdiRendering
                                   Graphics g, LabelLayer labelTheme)
         {
             SizeF gdiSize = g.MeasureString(text, style.Font.Convert());
-            var size = new SharpMap.Styles.Size { Width = gdiSize.Width, Height = gdiSize.Height };
+            var size = new Mapsui.Styles.Size { Width = gdiSize.Width, Height = gdiSize.Height };
 
-            SharpMap.Geometries.Point position = viewport.WorldToScreen(feature.GetBoundingBox().GetCentroid());
+            Mapsui.Geometries.Point position = viewport.WorldToScreen(feature.GetBoundingBox().GetCentroid());
             position.X = position.X - size.Width * (short)style.HorizontalAlignment * 0.5f;
             position.Y = position.Y - size.Height * (short)style.VerticalAlignment * 0.5f;
             if (position.X - size.Width > viewport.Width || position.X + size.Width < 0 ||
@@ -253,7 +253,7 @@ namespace Mapsui.Rendering.GdiRendering
             }
             double tmpx = line.Vertices[midPoint].X + (dx * 0.5);
             double tmpy = line.Vertices[midPoint].Y + (dy * 0.5);
-            label.LabelPoint = viewportTransform.WorldToScreen(new SharpMap.Geometries.Point(tmpx, tmpy));
+            label.LabelPoint = viewportTransform.WorldToScreen(new Mapsui.Geometries.Point(tmpx, tmpy));
         }
 
 

@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
-using SharpMap.Fetcher;
-using SharpMap.Geometries;
-using SharpMap.Providers;
-using SharpMap.Styles;
-using SharpMap.Projection;
+using Mapsui.Fetcher;
+using Mapsui.Geometries;
+using Mapsui.Providers;
+using Mapsui.Styles;
+using Mapsui.Projection;
 
-namespace SharpMap.Layers
+namespace Mapsui.Layers
 {
     public abstract class BaseLayer : ILayer
     {

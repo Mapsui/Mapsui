@@ -23,10 +23,10 @@ using System.Data;
 using System.Globalization;
 using System.IO;
 using System.Text;
-using SharpMap.Providers;
-using SharpMap.Utilities.Indexing;
+using Mapsui.Providers;
+using Mapsui.Utilities.Indexing;
 
-namespace SharpMap.Data.Providers
+namespace Mapsui.Data.Providers
 {
     internal class DbaseReader : IDisposable
     {
@@ -545,7 +545,7 @@ namespace SharpMap.Data.Providers
 					try 
 					{
 						return date = DateTime.ParseExact ( System.Text.Encoding.UTF7.GetString((br.ReadBytes(8))), 	
-						"yyyyMMdd", SharpMap.Map.numberFormat_EnUS, System.Globalization.DateTimeStyles.None );
+						"yyyyMMdd", Mapsui.Map.numberFormat_EnUS, System.Globalization.DateTimeStyles.None );
 					}
 					catch ( Exception e )
 					{

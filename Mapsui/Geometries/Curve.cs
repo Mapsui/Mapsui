@@ -15,7 +15,7 @@
 // along with Mapsui; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
-namespace SharpMap.Geometries
+namespace Mapsui.Geometries
 {
     /// <summary>
     /// A Curve is a one-dimensional geometric object usually stored as a sequence of points,

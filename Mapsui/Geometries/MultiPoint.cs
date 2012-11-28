@@ -19,7 +19,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace SharpMap.Geometries
+namespace Mapsui.Geometries
 {
     /// <summary>
     /// A MultiPoint is a 0 dimensional geometric collection. The elements of a MultiPoint are

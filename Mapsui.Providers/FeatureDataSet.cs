@@ -27,11 +27,11 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Xml;
 using System.Xml.Schema;
-using SharpMap.Geometries;
-using SharpMap.Providers;
-using SharpMap.Styles;
+using Mapsui.Geometries;
+using Mapsui.Providers;
+using Mapsui.Styles;
 
-namespace SharpMap.Data
+namespace Mapsui.Data
 {
     /// <summary>
     /// Represents an in-memory cache of spatial data. The FeatureDataSet is an extension of System.Data.DataSet
@@ -321,7 +321,7 @@ namespace SharpMap.Data
 
         private void InitClass()
         {
-            //this.columnFeatureGeometry = new DataColumn("FeatureGeometry", typeof(SharpMap.Geometries.Geometry), null, System.Data.MappingType.Element);
+            //this.columnFeatureGeometry = new DataColumn("FeatureGeometry", typeof(Mapsui.Geometries.Geometry), null, System.Data.MappingType.Element);
             //this.Columns.Add(this.columnFeatureGeometry);
         }
 

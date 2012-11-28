@@ -22,12 +22,12 @@ using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Web;
-using SharpMap.Geometries;
-using SharpMap.Providers;
-using SharpMap.Utilities.SpatialIndexing;
+using Mapsui.Geometries;
+using Mapsui.Providers;
+using Mapsui.Utilities.SpatialIndexing;
 using System.Web.Caching;
 
-namespace SharpMap.Data.Providers
+namespace Mapsui.Data.Providers
 {
     /// <summary>
     /// Shapefile geometry type.
@@ -40,14 +40,14 @@ namespace SharpMap.Data.Providers
         Null = 0,
         /// <summary>
         /// A point consists of a pair of double-precision coordinates.
-        /// SharpMap interpretes this as <see cref="SharpMap.Geometries.Point"/>
+        /// Mapsui interpretes this as <see cref="Mapsui.Geometries.Point"/>
         /// </summary>
         Point = 1,
         /// <summary>
         /// PolyLine is an ordered set of vertices that consists of one or more parts. A part is a
         /// connected sequence of two or more points. Parts may or may not be connected to one
         ///	another. Parts may or may not intersect one another.
-        /// SharpMap interpretes this as either <see cref="SharpMap.Geometries.LineString"/> or <see cref="SharpMap.Geometries.MultiLineString"/>
+        /// Mapsui interpretes this as either <see cref="Mapsui.Geometries.LineString"/> or <see cref="Mapsui.Geometries.MultiLineString"/>
         /// </summary>
         PolyLine = 3,
         /// <summary>
@@ -59,65 +59,65 @@ namespace SharpMap.Data.Providers
         /// holes in polygons are in a counterclockwise direction. Vertices for a single, ringed
         /// polygon are, therefore, always in clockwise order. The rings of a polygon are referred to
         /// as its parts.
-        /// SharpMap interpretes this as either <see cref="SharpMap.Geometries.Polygon"/> or <see cref="SharpMap.Geometries.MultiPolygon"/>
+        /// Mapsui interpretes this as either <see cref="Mapsui.Geometries.Polygon"/> or <see cref="Mapsui.Geometries.MultiPolygon"/>
         /// </summary>
         Polygon = 5,
         /// <summary>
         /// A MultiPoint represents a set of points.
-        /// SharpMap interpretes this as <see cref="SharpMap.Geometries.MultiPoint"/>
+        /// Mapsui interpretes this as <see cref="Mapsui.Geometries.MultiPoint"/>
         /// </summary>
         Multipoint = 8,
         /// <summary>
         /// A PointZ consists of a triplet of double-precision coordinates plus a measure.
-        /// SharpMap interpretes this as <see cref="SharpMap.Geometries.Point"/>
+        /// Mapsui interpretes this as <see cref="Mapsui.Geometries.Point"/>
         /// </summary>
         PointZ = 11,
         /// <summary>
         /// A PolyLineZ consists of one or more parts. A part is a connected sequence of two or
         /// more points. Parts may or may not be connected to one another. Parts may or may not
         /// intersect one another.
-        /// SharpMap interpretes this as <see cref="SharpMap.Geometries.LineString"/> or <see cref="SharpMap.Geometries.MultiLineString"/>
+        /// Mapsui interpretes this as <see cref="Mapsui.Geometries.LineString"/> or <see cref="Mapsui.Geometries.MultiLineString"/>
         /// </summary>
         PolyLineZ = 13,
         /// <summary>
         /// A PolygonZ consists of a number of rings. A ring is a closed, non-self-intersecting loop.
         /// A PolygonZ may contain multiple outer rings. The rings of a PolygonZ are referred to as
         /// its parts.
-        /// SharpMap interpretes this as either <see cref="SharpMap.Geometries.Polygon"/> or <see cref="SharpMap.Geometries.MultiPolygon"/>
+        /// Mapsui interpretes this as either <see cref="Mapsui.Geometries.Polygon"/> or <see cref="Mapsui.Geometries.MultiPolygon"/>
         /// </summary>
         PolygonZ = 15,
         /// <summary>
         /// A MultiPointZ represents a set of <see cref="PointZ"/>s.
-        /// SharpMap interpretes this as <see cref="SharpMap.Geometries.MultiPoint"/>
+        /// Mapsui interpretes this as <see cref="Mapsui.Geometries.MultiPoint"/>
         /// </summary>
         MultiPointZ = 18,
         /// <summary>
         /// A PointM consists of a pair of double-precision coordinates in the order X, Y, plus a measure M.
-        /// SharpMap interpretes this as <see cref="SharpMap.Geometries.Point"/>
+        /// Mapsui interpretes this as <see cref="Mapsui.Geometries.Point"/>
         /// </summary>
         PointM = 21,
         /// <summary>
         /// A shapefile PolyLineM consists of one or more parts. A part is a connected sequence of
         /// two or more points. Parts may or may not be connected to one another. Parts may or may
         /// not intersect one another.
-        /// SharpMap interpretes this as <see cref="SharpMap.Geometries.LineString"/> or <see cref="SharpMap.Geometries.MultiLineString"/>
+        /// Mapsui interpretes this as <see cref="Mapsui.Geometries.LineString"/> or <see cref="Mapsui.Geometries.MultiLineString"/>
         /// </summary>
         PolyLineM = 23,
         /// <summary>
         /// A PolygonM consists of a number of rings. A ring is a closed, non-self-intersecting loop.
-        /// SharpMap interpretes this as either <see cref="SharpMap.Geometries.Polygon"/> or <see cref="SharpMap.Geometries.MultiPolygon"/>
+        /// Mapsui interpretes this as either <see cref="Mapsui.Geometries.Polygon"/> or <see cref="Mapsui.Geometries.MultiPolygon"/>
         /// </summary>
         PolygonM = 25,
         /// <summary>
         /// A MultiPointM represents a set of <see cref="PointM"/>s.
-        /// SharpMap interpretes this as <see cref="SharpMap.Geometries.MultiPoint"/>
+        /// Mapsui interpretes this as <see cref="Mapsui.Geometries.MultiPoint"/>
         /// </summary>
         MultiPointM = 28,
         /// <summary>
         /// A MultiPatch consists of a number of surface patches. Each surface patch describes a
         /// surface. The surface patches of a MultiPatch are referred to as its parts, and the type of
         /// part controls how the order of vertices of an MultiPatch part is interpreted.
-        /// SharpMap doesn't support this feature type.
+        /// Mapsui doesn't support this feature type.
         /// </summary>
         MultiPatch = 31
     } ;
@@ -128,20 +128,20 @@ namespace SharpMap.Data.Providers
     /// <remarks>
     /// <para>The ShapeFile provider is used for accessing ESRI ShapeFiles. The ShapeFile should at least contain the
     /// [filename].shp, [filename].idx, and if feature-data is to be used, also [filename].dbf file.</para>
-    /// <para>The first time the ShapeFile is accessed, SharpMap will automatically create a spatial index
+    /// <para>The first time the ShapeFile is accessed, Mapsui will automatically create a spatial index
     /// of the shp-file, and save it as [filename].shp.sidx. If you change or update the contents of the .shp file,
-    /// delete the .sidx file to force SharpMap to rebuilt it. In web applications, the index will automatically
+    /// delete the .sidx file to force Mapsui to rebuilt it. In web applications, the index will automatically
     /// be cached to memory for faster access, so to reload the index, you will need to restart the web application
     /// as well.</para>
     /// <para>
-    /// M and Z values in a shapefile is ignored by SharpMap.
+    /// M and Z values in a shapefile is ignored by Mapsui.
     /// </para>
     /// </remarks>
     /// <example>
     /// Adding a datasource to a layer:
     /// <code lang="C#">
-    /// SharpMap.Layers.VectorLayer myLayer = new SharpMap.Layers.VectorLayer("My layer");
-    /// myLayer.DataSource = new SharpMap.Data.Providers.ShapeFile(@"C:\data\MyShapeData.shp");
+    /// Mapsui.Layers.VectorLayer myLayer = new Mapsui.Layers.VectorLayer("My layer");
+    /// myLayer.DataSource = new Mapsui.Data.Providers.ShapeFile(@"C:\data\MyShapeData.shp");
     /// </code>
     /// </example>
     public class ShapeFile : IProvider, IDisposable
@@ -157,7 +157,7 @@ namespace SharpMap.Data.Providers
         /// <para>See the <see cref="FilterDelegate"/> property for more info</para>
         /// </remarks>
         /// <seealso cref="FilterDelegate"/>
-        /// <param name="dr"><see cref="SharpMap.Data.FeatureDataRow"/> to test on</param>
+        /// <param name="dr"><see cref="Mapsui.Data.FeatureDataRow"/> to test on</param>
         /// <returns>true if this feature should be included, false if it should be filtered</returns>
         public delegate bool FilterMethod(IFeature dr);
 
@@ -219,7 +219,7 @@ namespace SharpMap.Data.Providers
         }
 
         /// <summary>
-        /// Gets the <see cref="SharpMap.Data.Providers.ShapeType">shape geometry type</see> in this shapefile.
+        /// Gets the <see cref="Mapsui.Data.Providers.ShapeType">shape geometry type</see> in this shapefile.
         /// </summary>
         /// <remarks>
         /// The property isn't set until the first time the datasource has been opened,
@@ -274,7 +274,7 @@ namespace SharpMap.Data.Providers
         /// <example>
         /// Using an anonymous method for filtering all features where the NAME column starts with S:
         /// <code lang="C#">
-        /// myShapeDataSource.FilterDelegate = new SharpMap.Data.Providers.ShapeFile.FilterMethod(delegate(SharpMap.Data.FeatureDataRow row) { return (!row["NAME"].ToString().StartsWith("S")); });
+        /// myShapeDataSource.FilterDelegate = new Mapsui.Data.Providers.ShapeFile.FilterMethod(delegate(Mapsui.Data.FeatureDataRow row) { return (!row["NAME"].ToString().StartsWith("S")); });
         /// </code>
         /// </example>
         /// <example>
@@ -282,12 +282,12 @@ namespace SharpMap.Data.Providers
         /// <code>
         /// myShapeDataSource.FilterDelegate = CountryFilter;
         /// [...]
-        /// public static bool CountryFilter(SharpMap.Data.FeatureDataRow row)
+        /// public static bool CountryFilter(Mapsui.Data.FeatureDataRow row)
         /// {
-        ///		if(row.Geometry.GetType()==typeof(SharpMap.Geometries.Polygon))
-        ///			return ((row.Geometry as SharpMap.Geometries.Polygon).Area>5);
-        ///		if (row.Geometry.GetType() == typeof(SharpMap.Geometries.MultiPolygon))
-        ///			return ((row.Geometry as SharpMap.Geometries.MultiPolygon).Area > 5);
+        ///		if(row.Geometry.GetType()==typeof(Mapsui.Geometries.Polygon))
+        ///			return ((row.Geometry as Mapsui.Geometries.Polygon).Area>5);
+        ///		if (row.Geometry.GetType() == typeof(Mapsui.Geometries.MultiPolygon))
+        ///			return ((row.Geometry as Mapsui.Geometries.MultiPolygon).Area > 5);
         ///		else return true;
         /// }
         /// </code>
@@ -412,7 +412,7 @@ namespace SharpMap.Data.Providers
             if (objectlist.Count == 0) //no features found. Return an empty set
                 return new Collection<IGeometry>();
 
-            //Collection<SharpMap.Geometries.Geometry> geometries = new Collection<SharpMap.Geometries.Geometry>(objectlist.Count);
+            //Collection<Mapsui.Geometries.Geometry> geometries = new Collection<Mapsui.Geometries.Geometry>(objectlist.Count);
             Collection<IGeometry> geometries = new Collection<IGeometry>();
 
             for (int i = 0; i < objectlist.Count; i++)

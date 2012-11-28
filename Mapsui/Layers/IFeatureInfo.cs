@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using SharpMap.Providers;
+using Mapsui.Providers;
 
-namespace SharpMap.Layers
+namespace Mapsui.Layers
 {
     public interface IFeatureInfo
     {

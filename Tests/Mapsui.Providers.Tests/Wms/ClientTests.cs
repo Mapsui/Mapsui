@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using NUnit.Framework;
-using SharpMap.Web.Wms;
+using Mapsui.Web.Wms;
 using System.Xml;
 
 namespace Mapsui.Providers.Tests.Wms

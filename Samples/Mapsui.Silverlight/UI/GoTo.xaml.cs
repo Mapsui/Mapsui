@@ -77,7 +77,7 @@ namespace Mapsui.Silverlight
                     else if (!countryBox.Equals(""))
                         gui.mapControl.Viewport.Resolution = 611.496226172;
 
-                    SharpMap.Geometries.Point sphericalLocation = SphericalMercator.FromLonLat(Double.Parse(lonLat[1], CultureInfo.InvariantCulture), Double.Parse(lonLat[0], CultureInfo.InvariantCulture));
+                    Mapsui.Geometries.Point sphericalLocation = SphericalMercator.FromLonLat(Double.Parse(lonLat[1], CultureInfo.InvariantCulture), Double.Parse(lonLat[0], CultureInfo.InvariantCulture));
                     gui.mapControl.Viewport.Center = sphericalLocation;
                     //Toresolution has to be set somehow
                     gui.mapControl.OnViewChanged(true);
@@ -97,7 +97,7 @@ namespace Mapsui.Silverlight
         private static double D2R = Math.PI / 180;
         private static double HALF_PI = Math.PI / 2;
 
-        public static SharpMap.Geometries.Point FromLonLat(double lon, double lat)
+        public static Mapsui.Geometries.Point FromLonLat(double lon, double lat)
         {
             double lonRadians = (D2R * lon);
             double latRadians = (D2R * lat);
@@ -105,10 +105,10 @@ namespace Mapsui.Silverlight
             double x = radius * lonRadians;
             double y = radius * Math.Log(Math.Tan(Math.PI * 0.25 + latRadians * 0.5));
 
-            return new SharpMap.Geometries.Point((float)x, (float)y);
+            return new Mapsui.Geometries.Point((float)x, (float)y);
         }
 
-        public static SharpMap.Geometries.Point ToLonLat(double x, double y)
+        public static Mapsui.Geometries.Point ToLonLat(double x, double y)
         {
             double ts;
             ts = Math.Exp(-y / (radius));
@@ -119,7 +119,7 @@ namespace Mapsui.Silverlight
             double lon = (lonRadians / D2R);
             double lat = (latRadians / D2R);
 
-            return new SharpMap.Geometries.Point((float)lon, (float)lat);
+            return new Mapsui.Geometries.Point((float)lon, (float)lat);
         }
     }
 }

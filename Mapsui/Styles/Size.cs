@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace SharpMap.Styles
+namespace Mapsui.Styles
 {
     //I think this class should be replaced by doubles for Width and Height. PDD
     public class Size

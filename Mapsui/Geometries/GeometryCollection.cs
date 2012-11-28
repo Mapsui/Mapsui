@@ -20,7 +20,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace SharpMap.Geometries
+namespace Mapsui.Geometries
 {
     /// <summary>
     /// A GeometryCollection is a geometry that is a collection of 1 or more geometries.

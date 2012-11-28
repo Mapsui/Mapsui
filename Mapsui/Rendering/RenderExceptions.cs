@@ -17,7 +17,7 @@
 
 using System;
 
-namespace SharpMap.Rendering
+namespace Mapsui.Rendering
 {
     /// <summary>
     /// Exception thrown when a layer rendering fails

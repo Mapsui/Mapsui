@@ -19,15 +19,15 @@ using System.Net;
 using BruTile;
 using BruTile.Cache;
 using BruTile.Web.TmsService;
-using SharpMap.Fetcher;
-using SharpMap.Geometries;
+using Mapsui.Fetcher;
+using Mapsui.Geometries;
 using System.Collections.Generic;
-using SharpMap.Providers;
-using SharpMap.Styles;
+using Mapsui.Providers;
+using Mapsui.Styles;
 using System;
 using System.Linq;
 
-namespace SharpMap.Layers
+namespace Mapsui.Layers
 {
     public interface ITileLayer
     {

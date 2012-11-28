@@ -19,7 +19,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace SharpMap.Geometries
+namespace Mapsui.Geometries
 {
     /// <summary>
     /// A LineString is a Curve with linear interpolation between points. Each consecutive pair of points defines a
@@ -234,13 +234,11 @@ namespace SharpMap.Geometries
         /// <returns>true if the geometry is simple</returns>
         public bool IsSimple()
         {
-            //Collection<Point> verts = new Collection<Point>(_Vertices.Count);
             var verts = new Collection<Point>();
 
-            for (int i = 0; i < vertices.Count; i++)
-                //if (!verts.Exists(delegate(SharpMap.Geometries.Point p) { return p.Equals(_Vertices[i]); }))
-                if (0 != verts.IndexOf(vertices[i]))
-                    verts.Add(vertices[i]);
+            foreach (Point vertex in vertices)
+                if (0 != verts.IndexOf(vertex))
+                    verts.Add(vertex);
 
             return (verts.Count == vertices.Count - (IsClosed ? 1 : 0));
         }

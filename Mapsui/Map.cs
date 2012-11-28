@@ -19,13 +19,13 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using SharpMap.Fetcher;
-using SharpMap.Styles;
-using SharpMap.Layers;
-using SharpMap.Geometries;
-using SharpMap.Projection;
+using Mapsui.Fetcher;
+using Mapsui.Styles;
+using Mapsui.Layers;
+using Mapsui.Geometries;
+using Mapsui.Projection;
 
-namespace SharpMap
+namespace Mapsui
 {
     /// <summary>
     /// Map class

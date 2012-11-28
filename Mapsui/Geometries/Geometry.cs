@@ -16,10 +16,10 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
 using System;
-using SharpMap.Converters.WellKnownBinary;
-using SharpMap.Converters.WellKnownText;
+using Mapsui.Converters.WellKnownBinary;
+using Mapsui.Converters.WellKnownText;
 
-namespace SharpMap.Geometries
+namespace Mapsui.Geometries
 {
     /// <summary>
     /// <see cref="Geometry"/> is the root class of the Geometry Object Model hierarchy.

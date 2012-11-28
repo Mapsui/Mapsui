@@ -1,13 +1,13 @@
-﻿using SharpMap.Data.Providers;
-using SharpMap.Layers;
-using SharpMap.Providers;
-using SharpMap.Rendering;
-using SharpMap.Styles;
-using SharpMap.Styles.Thematics;
+﻿using Mapsui.Data.Providers;
+using Mapsui.Layers;
+using Mapsui.Providers;
+using Mapsui.Rendering;
+using Mapsui.Styles;
+using Mapsui.Styles.Thematics;
 using System;
 using System.IO;
 
-namespace SharpMap.Samples
+namespace Mapsui.Samples
 {
     public static class ShapefileSample 
     {

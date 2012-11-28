@@ -18,7 +18,7 @@
 using System.Collections.Generic;
 using BruTile;
 
-namespace SharpMap.Fetcher
+namespace Mapsui.Fetcher
 {
     interface IFetchStrategy
     {

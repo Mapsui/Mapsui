@@ -19,7 +19,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace SharpMap.Geometries
+namespace Mapsui.Geometries
 {
     /// <summary>
     /// A Polygon is a planar Surface, defined by 1 exterior boundary and 0 or more interior boundaries. Each

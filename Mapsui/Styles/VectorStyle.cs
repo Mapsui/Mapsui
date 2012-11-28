@@ -1,4 +1,4 @@
-﻿namespace SharpMap.Styles
+﻿namespace Mapsui.Styles
 {
     public class VectorStyle : Style
     {

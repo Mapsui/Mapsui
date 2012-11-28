@@ -17,13 +17,13 @@
 
 using System;
 using System.Linq;
-using SharpMap.Fetcher;
-using SharpMap.Geometries;
-using SharpMap.Providers;
+using Mapsui.Fetcher;
+using Mapsui.Geometries;
+using Mapsui.Providers;
 using System.Threading;
 using System.Collections.Generic;
 
-namespace SharpMap.Layers
+namespace Mapsui.Layers
 {
     public class Layer : BaseLayer
     {

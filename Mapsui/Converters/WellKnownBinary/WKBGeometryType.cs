@@ -35,7 +35,7 @@
  *
  */
 
-namespace SharpMap.Converters.WellKnownBinary
+namespace Mapsui.Converters.WellKnownBinary
 {
     /// <summary>
     /// Enumeration to determine geometrytype in Well-known Binary

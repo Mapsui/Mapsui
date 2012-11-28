@@ -16,19 +16,19 @@
 // along with Mapsui; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
-using SharpMap;
-using SharpMap.Geometries;
-using SharpMap.Layers;
-using SharpMap.Providers;
-using SharpMap.Styles;
-using SharpMap.Styles.Thematics;
+using Mapsui;
+using Mapsui.Geometries;
+using Mapsui.Layers;
+using Mapsui.Providers;
+using Mapsui.Styles;
+using Mapsui.Styles.Thematics;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
-using Point = SharpMap.Geometries.Point;
+using Point = Mapsui.Geometries.Point;
 
 namespace Mapsui.Rendering.GdiRendering
 {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using NUnit.Framework;
-using SharpMap.Providers.GeoTiff;
+using Mapsui.Providers.GeoTiff;
 
 namespace Mapsui.Providers.Tests.GeoTiff
 {

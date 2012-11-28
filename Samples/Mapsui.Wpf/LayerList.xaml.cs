@@ -1,5 +1,5 @@
 ﻿using System.Windows.Controls;
-using SharpMap;
+using Mapsui;
 
 namespace Mapsui.Wpf
 {

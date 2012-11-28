@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Collections;
 
-namespace SharpMap.Fetcher
+namespace Mapsui.Fetcher
 {
     public class HashSet<T> : ICollection<T>
     {

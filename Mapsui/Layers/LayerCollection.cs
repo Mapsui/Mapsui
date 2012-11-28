@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 using System.Collections.Generic;
-using SharpMap.Layers;
+using Mapsui.Layers;
 using System.Collections;
 
-namespace SharpMap
+namespace Mapsui
 {
     public class LayerCollection : IEnumerable<ILayer>
     {

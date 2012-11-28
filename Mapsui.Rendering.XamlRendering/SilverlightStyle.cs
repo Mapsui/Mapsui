@@ -1,4 +1,4 @@
-﻿using SharpMap.Styles;
+﻿using Mapsui.Styles;
 
 namespace SilverlightRendering
 {

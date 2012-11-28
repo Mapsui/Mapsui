@@ -18,11 +18,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using SharpMap.Converters.WellKnownBinary;
-using SharpMap.Converters.WellKnownText;
-using SharpMap.Geometries;
+using Mapsui.Converters.WellKnownBinary;
+using Mapsui.Converters.WellKnownText;
+using Mapsui.Geometries;
 
-namespace SharpMap.Providers
+namespace Mapsui.Providers
 {
     /// <summary>
     /// Datasource for storing a limited set of geometries.
@@ -45,12 +45,12 @@ namespace SharpMap.Providers
     /// <example>
     /// Adding points of interest to the map. This is useful for vehicle tracking etc.
     /// <code lang="C#">
-    /// List&#60;SharpMap.Geometries.Geometry&#62; geometries = new List&#60;SharpMap.Geometries.Geometry&#62;();
+    /// List&#60;Mapsui.Geometries.Geometry&#62; geometries = new List&#60;Mapsui.Geometries.Geometry&#62;();
     /// //Add two points
-    /// geometries.Add(new SharpMap.Geometries.Point(23.345,64.325));
-    /// geometries.Add(new SharpMap.Geometries.Point(23.879,64.194));
-    /// SharpMap.Layers.VectorLayer layerVehicles = new SharpMap.Layers.VectorLayer("Vechicles");
-    /// layerVehicles.DataSource = new SharpMap.Data.Providers.MemoryProvider(geometries);
+    /// geometries.Add(new Mapsui.Geometries.Point(23.345,64.325));
+    /// geometries.Add(new Mapsui.Geometries.Point(23.879,64.194));
+    /// Mapsui.Layers.VectorLayer layerVehicles = new Mapsui.Layers.VectorLayer("Vechicles");
+    /// layerVehicles.DataSource = new Mapsui.Data.Providers.MemoryProvider(geometries);
     /// layerVehicles.Style.Symbol = Bitmap.FromFile(@"C:\data\car.gif");
     /// myMap.Layers.Add(layerVehicles);
     /// </code>
@@ -120,7 +120,7 @@ namespace SharpMap.Providers
         /// <summary>
         /// Initializes a new instance of the <see cref="MemoryProvider"/>
         /// </summary>
-        /// <param name="wellKnownTextGeometry"><see cref="SharpMap.Geometries.Geometry"/> as Well-known Text to be included in this datasource</param>
+        /// <param name="wellKnownTextGeometry"><see cref="Mapsui.Geometries.Geometry"/> as Well-known Text to be included in this datasource</param>
         public MemoryProvider(string wellKnownTextGeometry)
             : this(GeometryFromWKT.Parse(wellKnownTextGeometry))
         {
@@ -163,7 +163,7 @@ namespace SharpMap.Providers
         /// <summary>
         /// Initializes a new instance of the <see cref="MemoryProvider"/>
         /// </summary>
-        /// <param name="wellKnownBinaryGeometry"><see cref="SharpMap.Geometries.Geometry"/> as Well-known Binary to be included in this datasource</param>
+        /// <param name="wellKnownBinaryGeometry"><see cref="Mapsui.Geometries.Geometry"/> as Well-known Binary to be included in this datasource</param>
         public MemoryProvider(byte[] wellKnownBinaryGeometry) : this(GeometryFromWKB.Parse(wellKnownBinaryGeometry))
         {
         }

@@ -16,9 +16,9 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
 using System;
-using SharpMap.Providers;
+using Mapsui.Providers;
 
-namespace SharpMap.Styles.Thematics
+namespace Mapsui.Styles.Thematics
 {
     /// <summary>
     /// The GradientTheme class defines a gradient color thematic rendering of features based by a numeric attribute.
@@ -66,7 +66,7 @@ namespace SharpMap.Styles.Thematics
         }
 
         /// <summary>
-        /// Gets or sets the <see cref="SharpMap.Styles.IStyle">style</see> for the minimum value
+        /// Gets or sets the <see cref="Mapsui.Styles.IStyle">style</see> for the minimum value
         /// </summary>
         public IStyle MinStyle
         {
@@ -75,7 +75,7 @@ namespace SharpMap.Styles.Thematics
         }
 
         /// <summary>
-        /// Gets or sets the <see cref="SharpMap.Styles.IStyle">style</see> for the maximum value
+        /// Gets or sets the <see cref="Mapsui.Styles.IStyle">style</see> for the maximum value
         /// </summary>
         public IStyle MaxStyle
         {
@@ -84,7 +84,7 @@ namespace SharpMap.Styles.Thematics
         }
 
         /// <summary>
-        /// Gets or sets the <see cref="SharpMap.Styles.Thematics.ColorBlend"/> used on labels
+        /// Gets or sets the <see cref="Mapsui.Styles.Thematics.ColorBlend"/> used on labels
         /// </summary>
         public ColorBlend TextColorBlend
         {
@@ -93,7 +93,7 @@ namespace SharpMap.Styles.Thematics
         }
 
         /// <summary>
-        /// Gets or sets the <see cref="SharpMap.Styles.Thematics.ColorBlend"/> used on lines
+        /// Gets or sets the <see cref="Mapsui.Styles.Thematics.ColorBlend"/> used on lines
         /// </summary>
         public ColorBlend LineColorBlend
         {
@@ -102,7 +102,7 @@ namespace SharpMap.Styles.Thematics
         }
 
         /// <summary>
-        /// Gets or sets the <see cref="SharpMap.Styles.Thematics.ColorBlend"/> used as Fill
+        /// Gets or sets the <see cref="Mapsui.Styles.Thematics.ColorBlend"/> used as Fill
         /// </summary>
         public ColorBlend FillColorBlend
         {
@@ -128,8 +128,8 @@ namespace SharpMap.Styles.Thematics
         ///        <item><term><see cref="Color"/></term><description>Red, Green, Blue and Alpha values are linearly interpolated.</description></item>
         ///        <item><term><see cref="Pen"/></term><description>The color, width, color of pens are interpolated. MiterLimit,StartCap,EndCap,LineJoin,DashStyle,DashPattern,DashOffset,DashCap,CompoundArray, and Alignment are switched in the middle of the min/max values.</description></item>
         ///        <item><term><see cref="Brush"/></term><description>Brush color are interpolated. Other brushes are not supported.</description></item>
-        ///        <item><term><see cref="SharpMap.Styles.VectorStyle"/></term><description>MaxVisible, MinVisible, Line, Outline, Fill and SymbolScale are scaled linearly. Symbol, EnableOutline and Enabled switch in the middle of the min/max values.</description></item>
-        ///        <item><term><see cref="SharpMap.Styles.LabelStyle"/></term><description>FontSize, BackColor, ForeColor, MaxVisible, MinVisible, Offset are scaled linearly. All other properties use min-style.</description></item>
+        ///        <item><term><see cref="Mapsui.Styles.VectorStyle"/></term><description>MaxVisible, MinVisible, Line, Outline, Fill and SymbolScale are scaled linearly. Symbol, EnableOutline and Enabled switch in the middle of the min/max values.</description></item>
+        ///        <item><term><see cref="Mapsui.Styles.LabelStyle"/></term><description>FontSize, BackColor, ForeColor, MaxVisible, MinVisible, Offset are scaled linearly. All other properties use min-style.</description></item>
         /// </list>
         /// </para>
         /// <example>
@@ -137,14 +137,14 @@ namespace SharpMap.Styles.Thematics
         /// the population density of a country.
         /// <code lang="C#">
         /// //Create two vector styles to interpolate between
-        /// SharpMap.Styles.VectorStyle min = new SharpMap.Styles.VectorStyle();
-        /// SharpMap.Styles.VectorStyle max = new SharpMap.Styles.VectorStyle();
+        /// Mapsui.Styles.VectorStyle min = new Mapsui.Styles.VectorStyle();
+        /// Mapsui.Styles.VectorStyle max = new Mapsui.Styles.VectorStyle();
         /// min.Outline.Width = 1f; //Outline width of the minimum value
         /// max.Outline.Width = 3f; //Outline width of the maximum value
         /// //Create a theme interpolating population density between 0 and 400
-        /// SharpMap.Rendering.Thematics.GradientTheme popdens = new SharpMap.Rendering.Thematics.GradientTheme("PopDens", 0, 400, min, max);
+        /// Mapsui.Rendering.Thematics.GradientTheme popdens = new Mapsui.Rendering.Thematics.GradientTheme("PopDens", 0, 400, min, max);
         /// //Set the fill-style colors to be a rainbow blend from red to blue.
-        /// popdens.FillColorBlend = SharpMap.Rendering.Thematics.ColorBlend.Rainbow5;
+        /// popdens.FillColorBlend = Mapsui.Rendering.Thematics.ColorBlend.Rainbow5;
         /// myVectorLayer.Styles.Add(popdens);
         /// </code>
         /// </example>
@@ -170,7 +170,7 @@ namespace SharpMap.Styles.Thematics
         /// properties are linearly interpolated between max and min values.
         /// </summary>
         /// <param name="row">Feature</param>
-        /// <returns><see cref="SharpMap.Styles.IStyle">Style</see> calculated by a linear interpolation between the min/max styles</returns>
+        /// <returns><see cref="Mapsui.Styles.IStyle">Style</see> calculated by a linear interpolation between the min/max styles</returns>
         public IStyle GetStyle(IFeature row)
         {
             double attr;

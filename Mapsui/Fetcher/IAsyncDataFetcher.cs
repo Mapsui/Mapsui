@@ -17,9 +17,9 @@
 
 using System;
 using BruTile;
-using SharpMap.Geometries;
+using Mapsui.Geometries;
 
-namespace SharpMap.Fetcher
+namespace Mapsui.Fetcher
 {
     public interface IAsyncDataFetcher
     {

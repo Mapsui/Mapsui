@@ -6,7 +6,7 @@ using System.Net;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace SharpMap.Providers.ArcGis
+namespace Mapsui.Providers.ArcGis
 {
     //Documentation 9.3: http://resources.esri.com/help/9.3/arcgisserver/apis/rest/
     //Documentation 10.0: http://help.arcgis.com/EN/arcgisserver/10.0/apis/rest/index.html

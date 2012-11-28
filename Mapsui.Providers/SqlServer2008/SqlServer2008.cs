@@ -26,10 +26,10 @@ using System.Text;
 using System.Data.SqlClient;
 using System.Globalization;
 using System.Data;
-using SharpMap.Geometries;
-using SharpMap.Providers;
+using Mapsui.Geometries;
+using Mapsui.Providers;
 
-namespace SharpMap.Data.Providers   
+namespace Mapsui.Data.Providers   
 {   
     /// <summary>   
     /// SQL Server 2008 data provider   
@@ -185,9 +185,9 @@ namespace SharpMap.Data.Providers
        /// </summary>   
        /// <param name="bbox"></param>   
        /// <returns></returns>   
-       public Collection<Geometries.Geometry> GetGeometriesInView(SharpMap.Geometries.BoundingBox bbox)   
+       public Collection<Geometries.Geometry> GetGeometriesInView(Mapsui.Geometries.BoundingBox bbox)   
        {   
-           Collection<Geometries.Geometry> features = new Collection<SharpMap.Geometries.Geometry>();   
+           Collection<Geometries.Geometry> features = new Collection<Mapsui.Geometries.Geometry>();   
            using (SqlConnection conn = new SqlConnection(_ConnectionString))   
            {   
                //Get bounding box string   
@@ -210,7 +210,7 @@ namespace SharpMap.Data.Providers
                        {   
                            if (dr[0] != DBNull.Value)   
                            {   
-                               SharpMap.Geometries.Geometry geom = SharpMap.Converters.WellKnownBinary.GeometryFromWKB.Parse((byte[])dr[0]);   
+                               Mapsui.Geometries.Geometry geom = Mapsui.Converters.WellKnownBinary.GeometryFromWKB.Parse((byte[])dr[0]);   
                                if(geom!=null)   
                                    features.Add(geom);   
                            }   
@@ -227,9 +227,9 @@ namespace SharpMap.Data.Providers
        /// </summary>   
        /// <param name="oid">Object ID</param>   
        /// <returns>geometry</returns>   
-       public SharpMap.Geometries.Geometry GetGeometryByID(uint oid)   
+       public Mapsui.Geometries.Geometry GetGeometryByID(uint oid)   
        {   
-           SharpMap.Geometries.Geometry geom = null;   
+           Mapsui.Geometries.Geometry geom = null;   
            using (SqlConnection conn = new SqlConnection(_ConnectionString))   
            {   
                string strSQL = "SELECT g." + this.GeometryColumn + ".STAsBinary() FROM " + this.Table + " g WHERE " + this.ObjectIdColumn + "='" + oid.ToString() + "'";   
@@ -241,7 +241,7 @@ namespace SharpMap.Data.Providers
                        while (dr.Read())   
                        {   
                            if (dr[0] != DBNull.Value)   
-                               geom = SharpMap.Converters.WellKnownBinary.GeometryFromWKB.Parse((byte[])dr[0]);   
+                               geom = Mapsui.Converters.WellKnownBinary.GeometryFromWKB.Parse((byte[])dr[0]);   
                        }   
                    }   
                }   
@@ -254,7 +254,7 @@ namespace SharpMap.Data.Providers
        /// </summary>   
        /// <param name="bbox"></param>   
        /// <returns></returns>   
-       public Collection<uint> GetObjectIDsInView(SharpMap.Geometries.BoundingBox bbox)   
+       public Collection<uint> GetObjectIDsInView(Mapsui.Geometries.BoundingBox bbox)   
        {   
            Collection<uint> objectlist = new Collection<uint>();   
            using (SqlConnection conn = new SqlConnection(_ConnectionString))   
@@ -296,16 +296,16 @@ namespace SharpMap.Data.Providers
        /// </summary>   
        /// <param name="bbox"></param>   
        /// <returns></returns>   
-       private string GetBoxFilterStr(SharpMap.Geometries.BoundingBox bbox) {   
+       private string GetBoxFilterStr(Mapsui.Geometries.BoundingBox bbox) {   
            //geography::STGeomFromText('LINESTRING(47.656 -122.360, 47.656 -122.343)', 4326);   
-           SharpMap.Geometries.LinearRing lr = new SharpMap.Geometries.LinearRing();   
-           lr.Vertices.Add(new SharpMap.Geometries.Point(bbox.Left, bbox.Bottom));   
-           lr.Vertices.Add(new SharpMap.Geometries.Point(bbox.Right, bbox.Bottom));   
-           lr.Vertices.Add(new SharpMap.Geometries.Point(bbox.Right, bbox.Top));   
-           lr.Vertices.Add(new SharpMap.Geometries.Point(bbox.Left, bbox.Top));   
-           lr.Vertices.Add(new SharpMap.Geometries.Point(bbox.Left, bbox.Bottom));   
-           SharpMap.Geometries.Polygon p = new SharpMap.Geometries.Polygon(lr);   
-           string bboxText = SharpMap.Converters.WellKnownText.GeometryToWKT.Write((SharpMap.Geometries.IGeometry)p); // "";   
+           Mapsui.Geometries.LinearRing lr = new Mapsui.Geometries.LinearRing();   
+           lr.Vertices.Add(new Mapsui.Geometries.Point(bbox.Left, bbox.Bottom));   
+           lr.Vertices.Add(new Mapsui.Geometries.Point(bbox.Right, bbox.Bottom));   
+           lr.Vertices.Add(new Mapsui.Geometries.Point(bbox.Right, bbox.Top));   
+           lr.Vertices.Add(new Mapsui.Geometries.Point(bbox.Left, bbox.Top));   
+           lr.Vertices.Add(new Mapsui.Geometries.Point(bbox.Left, bbox.Bottom));   
+           Mapsui.Geometries.Polygon p = new Mapsui.Geometries.Polygon(lr);   
+           string bboxText = Mapsui.Converters.WellKnownText.GeometryToWKT.Write((Mapsui.Geometries.IGeometry)p); // "";   
            string whereClause = this.GeometryColumn + ".STIntersects(geometry::STGeomFromText('" + bboxText + "', " + this.SRID.ToString() + ")) = 1";   
            return whereClause; // strBbox;   
        }   
@@ -315,9 +315,9 @@ namespace SharpMap.Data.Providers
        /// </summary>   
        /// <param name="geom"></param>   
        /// <param name="ds">FeatureDataSet to fill data into</param>   
-       public void ExecuteIntersectionQuery(SharpMap.Geometries.Geometry geom, FeatureDataSet ds)   
+       public void ExecuteIntersectionQuery(Mapsui.Geometries.Geometry geom, FeatureDataSet ds)   
        {   
-           List<Geometries.Geometry> features = new List<SharpMap.Geometries.Geometry>();   
+           List<Geometries.Geometry> features = new List<Mapsui.Geometries.Geometry>();   
            using (SqlConnection conn = new SqlConnection(_ConnectionString))   
            {   
                //TODO: Convert to SQL Server   
@@ -350,11 +350,11 @@ namespace SharpMap.Data.Providers
                                fdt.Columns.Add(col.ColumnName, col.DataType, col.Expression);   
                        foreach (System.Data.DataRow dr in ds.Tables[0].Rows)   
                        {   
-                           SharpMap.Data.FeatureDataRow fdr = fdt.NewRow();   
+                           Mapsui.Data.FeatureDataRow fdr = fdt.NewRow();   
                            foreach (System.Data.DataColumn col in ds.Tables[0].Columns)   
                                if (col.ColumnName != this.GeometryColumn && col.ColumnName != "sharpmap_tempgeometry")   
                                    fdr[col.ColumnName] = dr[col];   
-                           fdr.Geometry = SharpMap.Converters.WellKnownBinary.GeometryFromWKB.Parse((byte[])dr["sharpmap_tempgeometry"]);   
+                           fdr.Geometry = Mapsui.Converters.WellKnownBinary.GeometryFromWKB.Parse((byte[])dr["sharpmap_tempgeometry"]);   
                            fdt.AddRow(fdr);   
                        }   
                        ds.Tables.Add(fdt);   
@@ -368,15 +368,15 @@ namespace SharpMap.Data.Providers
        /// </summary>   
        /// <param name="WKT"></param>   
        /// <returns></returns>   
-       private SharpMap.Geometries.LineString WktToLineString(string WKT)   
+       private Mapsui.Geometries.LineString WktToLineString(string WKT)   
        {   
-           SharpMap.Geometries.LineString line = new SharpMap.Geometries.LineString();   
+           Mapsui.Geometries.LineString line = new Mapsui.Geometries.LineString();   
            WKT = WKT.Substring(WKT.LastIndexOf('(') + 1).Split(')')[0];   
            string[] strPoints = WKT.Split(',');   
            foreach (string strPoint in strPoints)   
            {   
                string[] coord = strPoint.Split(' ');
-               line.Vertices.Add(new SharpMap.Geometries.Point(double.Parse(coord[0], CultureInfo.InvariantCulture), double.Parse(coord[1], CultureInfo.InvariantCulture)));   
+               line.Vertices.Add(new Mapsui.Geometries.Point(double.Parse(coord[0], CultureInfo.InvariantCulture), double.Parse(coord[1], CultureInfo.InvariantCulture)));   
            }   
            return line;   
        }   
@@ -436,7 +436,7 @@ namespace SharpMap.Data.Providers
        /// </summary>   
        /// <param name="RowID"></param>   
        /// <returns>datarow</returns>   
-       public SharpMap.Data.FeatureDataRow GetFeature(uint RowID)   
+       public Mapsui.Data.FeatureDataRow GetFeature(uint RowID)   
        {   
            using (SqlConnection conn = new SqlConnection(_ConnectionString))   
            {   
@@ -456,11 +456,11 @@ namespace SharpMap.Data.Providers
                        if(ds.Tables[0].Rows.Count>0)   
                        {   
                            System.Data.DataRow dr = ds.Tables[0].Rows[0];   
-                           SharpMap.Data.FeatureDataRow fdr = fdt.NewRow();   
+                           Mapsui.Data.FeatureDataRow fdr = fdt.NewRow();   
                            foreach (System.Data.DataColumn col in ds.Tables[0].Columns)   
                                if (col.ColumnName != this.GeometryColumn && col.ColumnName != "sharpmap_tempgeometry")   
                                    fdr[col.ColumnName] = dr[col];   
-                           fdr.Geometry = SharpMap.Converters.WellKnownBinary.GeometryFromWKB.Parse((byte[])dr["sharpmap_tempgeometry"]);   
+                           fdr.Geometry = Mapsui.Converters.WellKnownBinary.GeometryFromWKB.Parse((byte[])dr["sharpmap_tempgeometry"]);   
                            return fdr;   
                        }   
                        else  
@@ -477,7 +477,7 @@ namespace SharpMap.Data.Providers
        /// Boundingbox of dataset   
        /// </summary>   
        /// <returns>boundingbox</returns>   
-       public SharpMap.Geometries.BoundingBox GetExtents()   
+       public Mapsui.Geometries.BoundingBox GetExtents()   
        {   
            using (SqlConnection conn = new SqlConnection(_ConnectionString))   
            {   
@@ -488,13 +488,13 @@ namespace SharpMap.Data.Providers
                {   
                    conn.Open();   
                    //SharpMap.Geometries.Geometry geom = null;   
-                   SharpMap.Geometries.BoundingBox bx = null;   
+                   Mapsui.Geometries.BoundingBox bx = null;   
                    SqlDataReader dr = command.ExecuteReader();   
                    while (dr.Read())   
                    {   
                        string wkt = dr.GetString(0); //[this.GeometryColumn];   
-                       SharpMap.Geometries.Geometry g = SharpMap.Converters.WellKnownText.GeometryFromWKT.Parse(wkt);   
-                       SharpMap.Geometries.BoundingBox bb = g.GetBoundingBox();   
+                       Mapsui.Geometries.Geometry g = Mapsui.Converters.WellKnownText.GeometryFromWKT.Parse(wkt);   
+                       Mapsui.Geometries.BoundingBox bb = g.GetBoundingBox();   
                        if (bx == null)   
                        {   
                            bx = bb;   
@@ -528,9 +528,9 @@ namespace SharpMap.Data.Providers
        /// </summary>   
        /// <param name="bbox">view box</param>   
        /// <param name="ds">FeatureDataSet to fill data into</param>   
-       public void ExecuteIntersectionQuery(SharpMap.Geometries.BoundingBox bbox, SharpMap.Data.FeatureDataSet ds)   
+       public void ExecuteIntersectionQuery(Mapsui.Geometries.BoundingBox bbox, Mapsui.Data.FeatureDataSet ds)   
        {   
-           List<Geometries.Geometry> features = new List<SharpMap.Geometries.Geometry>();   
+           List<Geometries.Geometry> features = new List<Mapsui.Geometries.Geometry>();   
            using (SqlConnection conn = new SqlConnection(_ConnectionString))   
            {   
                //Get bounding box string   
@@ -558,11 +558,11 @@ namespace SharpMap.Data.Providers
                                fdt.Columns.Add(col.ColumnName,col.DataType,col.Expression);   
                        foreach (System.Data.DataRow dr in ds2.Tables[0].Rows)   
                        {   
-                           SharpMap.Data.FeatureDataRow fdr = fdt.NewRow();   
+                           Mapsui.Data.FeatureDataRow fdr = fdt.NewRow();   
                            foreach(System.Data.DataColumn col in ds2.Tables[0].Columns)   
                                if (col.ColumnName != this.GeometryColumn && col.ColumnName != "sharpmap_tempgeometry")   
                                    fdr[col.ColumnName] = dr[col];   
-                           fdr.Geometry = SharpMap.Converters.WellKnownBinary.GeometryFromWKB.Parse((byte[])dr["sharpmap_tempgeometry"]);   
+                           fdr.Geometry = Mapsui.Converters.WellKnownBinary.GeometryFromWKB.Parse((byte[])dr["sharpmap_tempgeometry"]);   
                            fdt.AddRow(fdr);   
                        }   
                        ds.Tables.Add(fdt);   
@@ -578,7 +578,7 @@ namespace SharpMap.Data.Providers
        {
            FeatureDataSet dataSet = new FeatureDataSet();
            ExecuteIntersectionQuery(box, dataSet);
-           return SharpMap.Providers.Utilities.DataSetToFeatures(dataSet);
+           return Mapsui.Providers.Utilities.DataSetToFeatures(dataSet);
        }
 
        #endregion

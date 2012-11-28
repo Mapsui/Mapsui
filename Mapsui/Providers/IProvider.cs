@@ -16,10 +16,10 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
 using System;
-using SharpMap.Geometries;
+using Mapsui.Geometries;
 using System.Collections.Generic;
 
-namespace SharpMap.Providers
+namespace Mapsui.Providers
 {
     /// <summary>
     /// Interface for data providers
@@ -49,7 +49,7 @@ namespace SharpMap.Providers
         IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution);
 
         /// <summary>
-        /// <see cref="SharpMap.Geometries.BoundingBox"/> of dataset
+        /// <see cref="Mapsui.Geometries.BoundingBox"/> of dataset
         /// </summary>
         /// <returns>boundingbox</returns>
         BoundingBox GetExtents();

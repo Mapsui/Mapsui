@@ -19,7 +19,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace SharpMap.Geometries
+namespace Mapsui.Geometries
 {
     /// <summary>
     /// A MultiPolygon is a MultiSurface whose elements are Polygons.

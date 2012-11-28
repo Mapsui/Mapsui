@@ -38,18 +38,18 @@
 
 using System;
 using System.IO;
-using SharpMap.Geometries;
+using Mapsui.Geometries;
 
-namespace SharpMap.Converters.WellKnownBinary
+namespace Mapsui.Converters.WellKnownBinary
 {
     /// <summary>
-    /// Converts a <see cref="SharpMap.Geometries.Geometry"/> instance to a Well-known Binary string representation.
+    /// Converts a <see cref="Mapsui.Geometries.Geometry"/> instance to a Well-known Binary string representation.
     /// </summary>
     /// <remarks>
-    /// <para>The Well-known Binary Representation for <see cref="SharpMap.Geometries.Geometry"/> (WKBGeometry) provides a portable 
-    /// representation of a <see cref="SharpMap.Geometries.Geometry"/> value as a contiguous stream of bytes. It permits <see cref="SharpMap.Geometries.Geometry"/> 
+    /// <para>The Well-known Binary Representation for <see cref="Mapsui.Geometries.Geometry"/> (WKBGeometry) provides a portable 
+    /// representation of a <see cref="Mapsui.Geometries.Geometry"/> value as a contiguous stream of bytes. It permits <see cref="Mapsui.Geometries.Geometry"/> 
     /// values to be exchanged between an ODBC client and an SQL database in binary form.</para>
-    /// <para>The Well-known Binary Representation for <see cref="SharpMap.Geometries.Geometry"/> is obtained by serializing a <see cref="SharpMap.Geometries.Geometry"/>
+    /// <para>The Well-known Binary Representation for <see cref="Mapsui.Geometries.Geometry"/> is obtained by serializing a <see cref="Mapsui.Geometries.Geometry"/>
     /// instance as a sequence of numeric types drawn from the set {Unsigned Integer, Double} and
     /// then serializing each numeric type as a sequence of bytes using one of two well defined,
     /// standard, binary representations for numeric types (NDR, XDR). The specific binary encoding
@@ -134,31 +134,31 @@ namespace SharpMap.Converters.WellKnownBinary
             switch (geometry.GetType().FullName)
             {
                     //Points are type 1.
-                case "SharpMap.Geometries.Point":
+                case "Mapsui.Geometries.Point":
                     WriteUInt32((uint) WKBGeometryType.WKBPoint, bWriter, byteorder);
                     break;
                     //Linestrings are type 2.
-                case "SharpMap.Geometries.LineString":
+                case "Mapsui.Geometries.LineString":
                     WriteUInt32((uint) WKBGeometryType.WKBLineString, bWriter, byteorder);
                     break;
                     //Polygons are type 3.
-                case "SharpMap.Geometries.Polygon":
+                case "Mapsui.Geometries.Polygon":
                     WriteUInt32((uint) WKBGeometryType.WKBPolygon, bWriter, byteorder);
                     break;
                     //Mulitpoints are type 4.
-                case "SharpMap.Geometries.MultiPoint":
+                case "Mapsui.Geometries.MultiPoint":
                     WriteUInt32((uint) WKBGeometryType.WKBMultiPoint, bWriter, byteorder);
                     break;
                     //Multilinestrings are type 5.
-                case "SharpMap.Geometries.MultiLineString":
+                case "Mapsui.Geometries.MultiLineString":
                     WriteUInt32((uint) WKBGeometryType.WKBMultiLineString, bWriter, byteorder);
                     break;
                     //Multipolygons are type 6.
-                case "SharpMap.Geometries.MultiPolygon":
+                case "Mapsui.Geometries.MultiPolygon":
                     WriteUInt32((uint) WKBGeometryType.WKBMultiPolygon, bWriter, byteorder);
                     break;
                     //Geometrycollections are type 7.
-                case "SharpMap.Geometries.GeometryCollection":
+                case "Mapsui.Geometries.GeometryCollection":
                     WriteUInt32((uint) WKBGeometryType.WKBGeometryCollection, bWriter, byteorder);
                     break;
                     //If the type is not of the above 7 throw an exception.
@@ -178,30 +178,30 @@ namespace SharpMap.Converters.WellKnownBinary
             switch (geometry.GetType().FullName)
             {
                     //Write the point.
-                case "SharpMap.Geometries.Point":
+                case "Mapsui.Geometries.Point":
                     WritePoint((Point) geometry, bWriter, byteorder);
                     break;
-                case "SharpMap.Geometries.LineString":
+                case "Mapsui.Geometries.LineString":
                     var ls = (LineString) geometry;
                     WriteLineString(ls, bWriter, byteorder);
                     break;
-                case "SharpMap.Geometries.Polygon":
+                case "Mapsui.Geometries.Polygon":
                     WritePolygon((Polygon) geometry, bWriter, byteorder);
                     break;
                     //Write the Multipoint.
-                case "SharpMap.Geometries.MultiPoint":
+                case "Mapsui.Geometries.MultiPoint":
                     WriteMultiPoint((MultiPoint) geometry, bWriter, byteorder);
                     break;
                     //Write the Multilinestring.
-                case "SharpMap.Geometries.MultiLineString":
+                case "Mapsui.Geometries.MultiLineString":
                     WriteMultiLineString((MultiLineString) geometry, bWriter, byteorder);
                     break;
                     //Write the Multipolygon.
-                case "SharpMap.Geometries.MultiPolygon":
+                case "Mapsui.Geometries.MultiPolygon":
                     WriteMultiPolygon((MultiPolygon) geometry, bWriter, byteorder);
                     break;
                     //Write the Geometrycollection.
-                case "SharpMap.Geometries.GeometryCollection":
+                case "Mapsui.Geometries.GeometryCollection":
                     WriteGeometryCollection((GeometryCollection) geometry, bWriter, byteorder);
                     break;
                     //If the type is not of the above 7 throw an exception.

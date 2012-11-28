@@ -10,7 +10,7 @@ using System.Xml;
 using System.Xml.XPath;
 using System.Xml.Xsl;
 
-namespace SharpMap.Utilities.Wfs
+namespace Mapsui.Utilities.Wfs
 {
     /// <summary>
     /// This class provides an easy-to-use interface for complex (parameterized) XPath queries.  

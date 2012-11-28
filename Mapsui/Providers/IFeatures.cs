@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace SharpMap.Providers
+namespace Mapsui.Providers
 {
     public interface IFeatures : IEnumerable<IFeature>
     {

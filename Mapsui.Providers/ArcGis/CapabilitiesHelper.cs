@@ -4,7 +4,7 @@ using BruTile;
 using System.Net;
 using System.Runtime.Serialization.Json;
 
-namespace SharpMap.Providers.ArcGis
+namespace Mapsui.Providers.ArcGis
 {
     public class CapabilitiesHelper
     {
@@ -148,7 +148,7 @@ namespace SharpMap.Providers.ArcGis
         /// <returns>TileSchema, returns null if service is not tiled</returns>
         public static ITileSchema GetTileSchema(Capabilities capabilities)
         {
-            //TODO: Does this belong in SharpMap.Providers?
+            //TODO: Does this belong in Mapsui.Providers?
 
             if (capabilities.tileInfo == null)
                 return null;

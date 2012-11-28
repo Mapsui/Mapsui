@@ -1,5 +1,5 @@
 ﻿
-namespace SharpMap.Styles
+namespace Mapsui.Styles
 {
     public enum SymbolType
     {

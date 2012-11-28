@@ -17,7 +17,7 @@
 
 using System;
 
-namespace SharpMap.Geometries
+namespace Mapsui.Geometries
 {
     /// <summary>
     /// A Point is a 0-dimensional geometry and represents a single location in 2D coordinate space. A Point has a x coordinate

@@ -1,11 +1,11 @@
-﻿using SharpMap.Layers;
-using SharpMap.Providers.Wfs;
-using SharpMap.Styles;
-using SharpMap.Utilities.Wfs;
+﻿using Mapsui.Layers;
+using Mapsui.Providers.Wfs;
+using Mapsui.Styles;
+using Mapsui.Utilities.Wfs;
 using System;
 using System.Net;
 
-namespace SharpMap.Samples
+namespace Mapsui.Samples
 {
     public static class WfsSample
     {

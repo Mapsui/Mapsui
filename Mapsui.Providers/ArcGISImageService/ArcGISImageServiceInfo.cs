@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace SharpMap.Providers.ArcGISImageService
+namespace Mapsui.Providers.ArcGISImageService
 {
     public enum InterpolationType
     {

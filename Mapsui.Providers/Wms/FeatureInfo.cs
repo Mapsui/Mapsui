@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace SharpMap.Providers.Wms
+namespace Mapsui.Providers.Wms
 {
     public class FeatureInfo
     {

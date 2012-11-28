@@ -38,13 +38,13 @@
 using System;
 using System.Collections.ObjectModel;
 using System.IO;
-using SharpMap.Geometries;
+using Mapsui.Geometries;
 using System.Globalization;
 
-namespace SharpMap.Converters.WellKnownText
+namespace Mapsui.Converters.WellKnownText
 {
     /// <summary>
-    ///  Converts a Well-known Text representation to a <see cref="SharpMap.Geometries.Geometry"/> instance.
+    ///  Converts a Well-known Text representation to a <see cref="Mapsui.Geometries.Geometry"/> instance.
     /// </summary>
     /// <remarks>
     /// <para>The Well-Known Text (WKT) representation of Geometry is designed to exchange geometry data in ASCII form.</para>
@@ -70,10 +70,10 @@ namespace SharpMap.Converters.WellKnownText
     public static class GeometryFromWKT
     {
         /// <summary>
-        /// Converts a Well-known text representation to a <see cref="SharpMap.Geometries.Geometry"/>.
+        /// Converts a Well-known text representation to a <see cref="Mapsui.Geometries.Geometry"/>.
         /// </summary>
-        /// <param name="wellKnownText">A <see cref="SharpMap.Geometries.Geometry"/> tagged text string ( see the OpenGIS Simple Features Specification.</param>
-        /// <returns>Returns a <see cref="SharpMap.Geometries.Geometry"/> specified by wellKnownText.  Throws an exception if there is a parsing problem.</returns>
+        /// <param name="wellKnownText">A <see cref="Mapsui.Geometries.Geometry"/> tagged text string ( see the OpenGIS Simple Features Specification.</param>
+        /// <returns>Returns a <see cref="Mapsui.Geometries.Geometry"/> specified by wellKnownText.  Throws an exception if there is a parsing problem.</returns>
         public static Geometry Parse(string wellKnownText)
         {
             // throws a parsing exception is there is a problem.
@@ -82,11 +82,11 @@ namespace SharpMap.Converters.WellKnownText
         }
 
         /// <summary>
-        /// Converts a Well-known Text representation to a <see cref="SharpMap.Geometries.Geometry"/>.
+        /// Converts a Well-known Text representation to a <see cref="Mapsui.Geometries.Geometry"/>.
         /// </summary>
         /// <param name="reader">A Reader which will return a Geometry Tagged Text
         /// string (see the OpenGIS Simple Features Specification)</param>
-        /// <returns>Returns a <see cref="SharpMap.Geometries.Geometry"/> read from StreamReader. 
+        /// <returns>Returns a <see cref="Mapsui.Geometries.Geometry"/> read from StreamReader. 
         /// An exception will be thrown if there is a parsing problem.</returns>
         public static Geometry Parse(TextReader reader)
         {

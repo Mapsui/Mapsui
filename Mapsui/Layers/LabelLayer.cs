@@ -16,31 +16,14 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
 using System;
-using SharpMap.Providers;
-using SharpMap.Rendering;
+using Mapsui.Providers;
+using Mapsui.Rendering;
 
-namespace SharpMap.Layers
+namespace Mapsui.Layers
 {
     /// <summary>
     /// Label layer class
     /// </summary>
-    /// <example>
-    /// Creates a new label layer and sets the label text to the "Name" column in the FeatureDataTable of the datasource
-    /// <code lang="C#">
-    /// //Set up a label layer
-    /// SharpMap.Layers.LabelLayer layLabel = new SharpMap.Layers.LabelLayer("Country labels");
-    /// layLabel.DataSource = layCountries.DataSource;
-    /// layLabel.Enabled = true;
-    /// layLabel.LabelColumn = "Name";
-    /// layLabel.Style = new SharpMap.Styles.LabelStyle();
-    /// layLabel.Style.CollisionDetection = true;
-    /// layLabel.Style.CollisionBuffer = new SizeF(20, 20);
-    /// layLabel.Style.ForeColor = Color.White;
-    /// layLabel.Style.Font = new Font(FontFamily.GenericSerif, 8);
-    /// layLabel.MaxVisible = 90;
-    /// layLabel.Style.HorizontalAlignment = SharpMap.Styles.LabelStyle.HorizontalAlignmentEnum.Center;
-    /// </code>
-    /// </example>
     public class LabelLayer : Layer
     {
         #region Delegates
@@ -109,7 +92,7 @@ namespace SharpMap.Layers
         /// Filtermethod delegate for performing filtering
         /// </summary>
         /// <remarks>
-        /// Default method is <see cref="SharpMap.Rendering.LabelCollisionDetection.SimpleCollisionDetection"/>
+        /// Default method is <see cref="Mapsui.Rendering.LabelCollisionDetection.SimpleCollisionDetection"/>
         /// </remarks>
         public LabelCollisionDetection.LabelFilterMethod LabelFilter { get; set; }
 
@@ -126,12 +109,12 @@ namespace SharpMap.Layers
         /// </summary>
         /// <remarks>
         /// <para>If this method is not null, it will override the <see cref="LabelColumn"/> value.</para>
-        /// <para>The label delegate must take a <see cref="SharpMap.Providers.IFeature"/> and return a string.</para>
+        /// <para>The label delegate must take a <see cref="Mapsui.Providers.IFeature"/> and return a string.</para>
         /// <example>
         /// Creating a label-text by combining attributes "ROADNAME" and "STATE" into one string, using
         /// an anonymous delegate:
         /// <code lang="C#">
-        /// myLabelLayer.LabelStringDelegate = delegate(SharpMap.Data.FeatureDataRow fdr)
+        /// myLabelLayer.LabelStringDelegate = delegate(FeatureDataRow fdr)
         ///				{ return fdr["ROADNAME"].ToString() + ", " + fdr["STATE"].ToString(); };
         /// </code>
         /// </example>
@@ -143,12 +126,12 @@ namespace SharpMap.Layers
         /// </summary>
         /// <remarks>
         /// <para>If this method is not null, it will override the <see cref="PriorityColumn"/> value.</para>
-        /// <para>The label delegate must take a <see cref="SharpMap.Providers.IFeature"/> and return an Int32.</para>
+        /// <para>The label delegate must take a <see cref="Mapsui.Providers.IFeature"/> and return an Int32.</para>
         /// <example>
         /// Creating a priority by combining attributes "capital" and "population" into one value, using
         /// an anonymous delegate:
         /// <code lang="C#">
-        /// myLabelLayer.PriorityDelegate = delegate(SharpMap.Data.FeatureDataRow fdr) 
+        /// myLabelLayer.PriorityDelegate = delegate(FeatureDataRow fdr) 
         ///     { 
         ///         Int32 retVal = 100000000 * (Int32)( (String)fdr["capital"] == "Y" ? 1 : 0 );
         ///         return  retVal + Convert.ToInt32(fdr["population"]);

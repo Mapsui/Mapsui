@@ -1,7 +1,7 @@
-﻿using SharpMap.Geometries;
-using SharpMap.Layers;
-using SharpMap.Providers;
-using SharpMap.Styles;
+﻿using Mapsui.Geometries;
+using Mapsui.Layers;
+using Mapsui.Providers;
+using Mapsui.Styles;
 
 namespace Mapsui.Samples.Common
 {

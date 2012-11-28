@@ -1,5 +1,5 @@
 ﻿using BruTile;
-using SharpMap.Geometries;
+using Mapsui.Geometries;
 
 namespace System.Threading.Timers
 {
@@ -13,7 +13,7 @@ namespace System.Threading.Timers
 }
 
 
-namespace SharpMap.Geometries
+namespace Mapsui.Geometries
 {
     public static class ExtentExtensions
     {

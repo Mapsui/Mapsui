@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using SharpMap.Geometries;
-using SharpMap.Styles;
+using Mapsui.Geometries;
+using Mapsui.Styles;
 
-namespace SharpMap.Providers
+namespace Mapsui.Providers
 {
     public interface IFeature
     {

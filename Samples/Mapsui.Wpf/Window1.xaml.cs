@@ -1,8 +1,8 @@
 ﻿using BruTile.Web;
 using Mapsui.Samples.Common;
-using SharpMap.Layers;
-using SharpMap.Providers;
-using SharpMap.Samples;
+using Mapsui.Layers;
+using Mapsui.Providers;
+using Mapsui.Samples;
 using System;
 using System.Collections.Generic;
 using System.Windows;

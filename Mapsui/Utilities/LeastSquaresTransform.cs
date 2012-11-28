@@ -17,9 +17,9 @@
 
 using System;
 using System.Collections.Generic;
-using SharpMap.Geometries;
+using Mapsui.Geometries;
 
-namespace SharpMap.Utilities
+namespace Mapsui.Utilities
 {
     /// <summary>
     /// Calculates Affine and Helmert transformation using Least-Squares Regression of input and output points

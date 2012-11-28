@@ -25,13 +25,13 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
-using SharpMap;
-using SharpMap.Fetcher;
-using SharpMap.Layers;
-using SharpMap.Providers;
-using SharpMap.Utilities;
+using Mapsui;
+using Mapsui.Fetcher;
+using Mapsui.Layers;
+using Mapsui.Providers;
+using Mapsui.Utilities;
 using SilverlightRendering;
-using SharpMap.Rendering;
+using Mapsui.Rendering;
 
 namespace Mapsui.Windows
 {
@@ -445,8 +445,8 @@ namespace Mapsui.Windows
             if (IsInBoxZoomMode || ZoomToBoxMode)
             {
                 ZoomToBoxMode = false;
-                SharpMap.Geometries.Point previous = Viewport.ScreenToWorld(previousMousePosition.X, previousMousePosition.Y);
-                SharpMap.Geometries.Point current = Viewport.ScreenToWorld(e.GetPosition(this).X, e.GetPosition(this).Y);
+                Mapsui.Geometries.Point previous = Viewport.ScreenToWorld(previousMousePosition.X, previousMousePosition.Y);
+                Mapsui.Geometries.Point current = Viewport.ScreenToWorld(e.GetPosition(this).X, e.GetPosition(this).Y);
                 ZoomToBox(previous, current);
             }
             else
@@ -525,7 +525,7 @@ namespace Mapsui.Windows
         private MouseInfoEventArgs GetMouseInfoEventArgs(Point mousePosition, IEnumerable<ILayer> layers)
         {
             var margin = 8 * Viewport.Resolution;
-            var point = Viewport.ScreenToWorld(new SharpMap.Geometries.Point(mousePosition.X, mousePosition.Y));
+            var point = Viewport.ScreenToWorld(new Mapsui.Geometries.Point(mousePosition.X, mousePosition.Y));
 
             foreach (var layer in layers)
             {
@@ -612,7 +612,7 @@ namespace Mapsui.Windows
 
         #region Bbox zoom
 
-        public void ZoomToBox(SharpMap.Geometries.Point beginPoint, SharpMap.Geometries.Point endPoint)
+        public void ZoomToBox(Mapsui.Geometries.Point beginPoint, Mapsui.Geometries.Point endPoint)
         {
             double x, y, resolution;
             var width = Math.Abs(endPoint.X - beginPoint.X);
@@ -623,7 +623,7 @@ namespace Mapsui.Windows
             ZoomHelper.ZoomToBoudingbox(beginPoint.X, beginPoint.Y, endPoint.X, endPoint.Y, ActualWidth, out x, out y, out resolution);
             resolution = ZoomHelper.ClipToExtremes(map.Resolutions, resolution);
 
-            viewport.Center = new SharpMap.Geometries.Point(x, y);
+            viewport.Center = new Mapsui.Geometries.Point(x, y);
             viewport.Resolution = resolution;
             toResolution = resolution;
 
@@ -718,7 +718,7 @@ namespace Mapsui.Windows
             OnViewChanged(false, true);            
         }
 
-        private void PanAndZoom(SharpMap.Geometries.Point current, SharpMap.Geometries.Point previous, double deltaScale)
+        private void PanAndZoom(Mapsui.Geometries.Point current, Mapsui.Geometries.Point previous, double deltaScale)
         {
             var diffX = previous.X - current.X;
             var diffY = previous.Y - current.Y;
@@ -728,7 +728,7 @@ namespace Mapsui.Windows
             var zoomCorrectionY = (1 - deltaScale) * (current.Y - viewport.CenterY);
             viewport.Resolution = viewport.Resolution / deltaScale;
 
-            viewport.Center = new SharpMap.Geometries.Point(newX - zoomCorrectionX, newY - zoomCorrectionY);
+            viewport.Center = new Mapsui.Geometries.Point(newX - zoomCorrectionX, newY - zoomCorrectionY);
         }
                
         private void OnManipulationCompleted(object sender, ManipulationCompletedEventArgs e)

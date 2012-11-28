@@ -4,7 +4,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SharpMap.Utilities.Wfs
+namespace Mapsui.Utilities.Wfs
 {
     /// <summary>
     /// Filter interface

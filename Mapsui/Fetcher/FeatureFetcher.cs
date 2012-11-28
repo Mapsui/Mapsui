@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using SharpMap.Geometries;
-using SharpMap.Providers;
+using Mapsui.Geometries;
+using Mapsui.Providers;
 
-namespace SharpMap.Fetcher
+namespace Mapsui.Fetcher
 {
     class FeatureFetcher
     {

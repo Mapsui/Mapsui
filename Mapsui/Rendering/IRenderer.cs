@@ -1,8 +1,8 @@
 ﻿
 using System.Collections.Generic;
-using SharpMap.Layers;
+using Mapsui.Layers;
 
-namespace SharpMap.Rendering
+namespace Mapsui.Rendering
 {
     public interface IRenderer
     {

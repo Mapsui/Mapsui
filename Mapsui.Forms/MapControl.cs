@@ -16,9 +16,8 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston,min MA  02111-1307  USA 
 
 using Mapsui.Rendering.GdiRendering;
-using SharpMap;
-using SharpMap.Fetcher;
-using SharpMap.Utilities;
+using Mapsui.Fetcher;
+using Mapsui.Utilities;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -35,7 +34,7 @@ namespace Mapsui.Forms
         private Bitmap buffer;
         private Graphics bufferGraphics;
         private Brush whiteBrush = new SolidBrush(Color.White);
-        private SharpMap.Geometries.Point mousePosition;
+        private Mapsui.Geometries.Point mousePosition;
             //Set if the user manipulates the map. If this happens we will limit 
             //the time it takes to render a frame by simply cutting if off. 
             //This way the control is always reponsive.
@@ -216,7 +215,7 @@ namespace Mapsui.Forms
 
         private void MapControl_MouseDown(object sender, MouseEventArgs e)
         {
-            mousePosition = new SharpMap.Geometries.Point(e.X, e.Y);
+            mousePosition = new Mapsui.Geometries.Point(e.X, e.Y);
         }
 
         private void MapControl_MouseMove(object sender, MouseEventArgs e)
@@ -224,7 +223,7 @@ namespace Mapsui.Forms
             if (e.Button == MouseButtons.Left)
             {
                 if (mousePosition == null) return;
-                var newMousePosition = new SharpMap.Geometries.Point(e.X, e.Y);
+                var newMousePosition = new Mapsui.Geometries.Point(e.X, e.Y);
                 MapTransformHelpers.Pan(viewport, newMousePosition, mousePosition);
                 mousePosition = newMousePosition;
 
@@ -238,7 +237,7 @@ namespace Mapsui.Forms
             if (e.Button == MouseButtons.Left)
             {
                 if (mousePosition == null) return;
-                var newMousePosition = new SharpMap.Geometries.Point(e.X, e.Y);
+                var newMousePosition = new Mapsui.Geometries.Point(e.X, e.Y);
                 MapTransformHelpers.Pan(viewport, newMousePosition, mousePosition);
                 mousePosition = newMousePosition;
 

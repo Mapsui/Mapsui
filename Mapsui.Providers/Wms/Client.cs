@@ -5,10 +5,10 @@ using System.IO;
 using System.Net;
 using System.Text;
 using System.Xml;
-using SharpMap.Geometries;
-using SharpMap.Styles;
+using Mapsui.Geometries;
+using Mapsui.Styles;
 
-namespace SharpMap.Web.Wms
+namespace Mapsui.Web.Wms
 {
     /// <summary>
     /// Class for requesting and parsing a WMS servers capabilities

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-using SharpMap.Samples;
+using Mapsui.Samples;
 
 namespace Mapsui.WinForms
 {

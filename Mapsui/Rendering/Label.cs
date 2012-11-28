@@ -17,10 +17,10 @@
 
 using System;
 using System.Collections.Generic;
-using SharpMap.Styles;
-using SharpMap.Geometries;
+using Mapsui.Styles;
+using Mapsui.Geometries;
 
-namespace SharpMap.Rendering
+namespace Mapsui.Rendering
 {
     /// <summary>
     /// Defines an axis-aligned box around a label, used for collision detection
@@ -184,7 +184,7 @@ namespace SharpMap.Rendering
         public LabelBox Box { get; set; }
 
         /// <summary>
-        /// Gets or sets the <see cref="SharpMap.Styles.LabelStyle"/> of this label
+        /// Gets or sets the <see cref="Mapsui.Styles.LabelStyle"/> of this label
         /// </summary>
         public LabelStyle Style { get; set; }
 

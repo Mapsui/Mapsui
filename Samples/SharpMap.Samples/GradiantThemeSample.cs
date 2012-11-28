@@ -1,15 +1,15 @@
-﻿using SharpMap.Data.Providers;
-using SharpMap.Layers;
-using SharpMap.Providers;
-using SharpMap.Rendering;
-using SharpMap.Styles;
-using SharpMap.Styles.Thematics;
+﻿using Mapsui.Data.Providers;
+using Mapsui.Layers;
+using Mapsui.Providers;
+using Mapsui.Rendering;
+using Mapsui.Styles;
+using Mapsui.Styles.Thematics;
 using System;
 using System.IO;
-using ColorBlend = SharpMap.Styles.Thematics.ColorBlend;
-using Point = SharpMap.Geometries.Point;
+using ColorBlend = Mapsui.Styles.Thematics.ColorBlend;
+using Point = Mapsui.Geometries.Point;
 
-namespace SharpMap.Samples
+namespace Mapsui.Samples
 {
     public static class GradiantThemeSample
     {

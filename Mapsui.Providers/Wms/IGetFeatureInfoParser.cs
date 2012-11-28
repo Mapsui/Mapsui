@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace SharpMap.Providers.Wms
+namespace Mapsui.Providers.Wms
 {
     public interface IGetFeatureInfoParser
     {

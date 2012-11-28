@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Linq;
 
-namespace SharpMap.Styles
+namespace Mapsui.Styles
 {
     public class Bitmap
     {

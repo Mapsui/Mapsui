@@ -18,7 +18,7 @@
 using System;
 using System.Reflection;
 
-namespace SharpMap.Utilities
+namespace Mapsui.Utilities
 {
     /// <summary>
     /// Version information helper class
@@ -26,7 +26,7 @@ namespace SharpMap.Utilities
     public static class Version
     {
         /// <summary>
-        /// Returns the current build version of SharpMap
+        /// Returns the current build version of Mapsui
         /// </summary>
         /// <returns></returns>
         public static System.Version GetCurrentVersion()

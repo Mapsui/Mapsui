@@ -18,9 +18,9 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using SharpMap.Utilities;
+using Mapsui.Utilities;
 
-namespace SharpMap.Geometries
+namespace Mapsui.Geometries
 {
     /// <summary>
     /// A MultiLineString is a MultiCurve whose elements are LineStrings.

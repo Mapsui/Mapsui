@@ -24,12 +24,12 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.SqlClient;
-using SharpMap.Converters.WellKnownBinary;
-using SharpMap.Geometries;
+using Mapsui.Converters.WellKnownBinary;
+using Mapsui.Geometries;
 using System.Globalization;
-using SharpMap.Providers;
+using Mapsui.Providers;
 
-namespace SharpMap.Data.Providers
+namespace Mapsui.Data.Providers
 {
     /// <summary>
     /// Microsoft SQL Server 2005 / MsSqlSpatial dataprovider
@@ -767,7 +767,7 @@ namespace SharpMap.Data.Providers
         {
             FeatureDataSet dataSet = new FeatureDataSet();
             ExecuteIntersectionQuery(box, dataSet);
-            return SharpMap.Providers.Utilities.DataSetToFeatures(dataSet);
+            return Mapsui.Providers.Utilities.DataSetToFeatures(dataSet);
         }
 
         #endregion

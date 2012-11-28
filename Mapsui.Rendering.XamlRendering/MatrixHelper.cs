@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Media;
-using SharpMap;
+using Mapsui;
 
 namespace SilverlightRendering
 {

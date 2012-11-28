@@ -1,4 +1,4 @@
-﻿namespace SharpMap.Providers.ArcGis
+﻿namespace Mapsui.Providers.ArcGis
 {
     public class ArcGisLegendResponseLegend
     {

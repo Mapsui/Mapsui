@@ -1,9 +1,9 @@
 ﻿using System;
-using SharpMap.Layers;
-using SharpMap.Providers.Wms;
-using SharpMap.Styles;
+using Mapsui.Layers;
+using Mapsui.Providers.Wms;
+using Mapsui.Styles;
 
-namespace SharpMap.Samples
+namespace Mapsui.Samples
 {
     public static class WmsSample
     {

@@ -17,7 +17,7 @@
 
 using System;
 
-namespace SharpMap.Styles.Thematics
+namespace Mapsui.Styles.Thematics
 {
 	/// <summary>
 	/// Defines arrays of colors and positions used for interpolating color blending in a multicolor gradient.

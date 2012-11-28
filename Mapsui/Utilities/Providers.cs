@@ -18,7 +18,7 @@
 using System;
 using System.Collections.ObjectModel;
 
-namespace SharpMap.Utilities
+namespace Mapsui.Utilities
 {
     /// <summary>
     /// Provider helper utilities
@@ -40,7 +40,7 @@ namespace SharpMap.Utilities
                 //Do the filtering manually.
                 foreach (Type i in interfaces)
                 {
-                    if (i.Name == "SharpMap.Providers.IProvider")
+                    if (i.Name == "Mapsui.Providers.IProvider")
                     {
                         foundOne = true;
                     }

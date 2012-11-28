@@ -28,8 +28,8 @@
     /// </summary>
     private void InitializeComponent()
     {
-        SharpMap.Map map2 = new SharpMap.Map();
-        SharpMap.Styles.Color color2 = new SharpMap.Styles.Color();
+        Mapsui.Map map2 = new Mapsui.Map();
+        Mapsui.Styles.Color color2 = new Mapsui.Styles.Color();
         this.button1 = new System.Windows.Forms.Button();
         this.button2 = new System.Windows.Forms.Button();
         this.mapControl1 = new Mapsui.Forms.MapControl();

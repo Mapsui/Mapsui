@@ -1,8 +1,8 @@
 ﻿using NUnit.Framework;
-using SharpMap;
-using SharpMap.Geometries;
-using SharpMap.Layers;
-using SharpMap.Providers;
+using Mapsui;
+using Mapsui.Geometries;
+using Mapsui.Layers;
+using Mapsui.Providers;
 using SilverlightRendering;
 
 namespace Mapsui.Rendering.XamlRendering.Tests

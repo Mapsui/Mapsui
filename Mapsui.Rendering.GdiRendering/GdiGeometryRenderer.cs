@@ -16,15 +16,13 @@
 // along with Mapsui; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
-using SharpMap;
-using SharpMap.Geometries;
+using Mapsui.Geometries;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
-using Point = SharpMap.Geometries.Point;
-using Styles = SharpMap.Styles;
+using Point = Mapsui.Geometries.Point;
 
 namespace Mapsui.Rendering.GdiRendering
 {

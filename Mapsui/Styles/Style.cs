@@ -17,7 +17,7 @@
 
 using System;
 
-namespace SharpMap.Styles
+namespace Mapsui.Styles
 {
     /// <summary>
     /// Defines a style used for rendering vector data

@@ -21,10 +21,10 @@ using System.Linq;
 using System.Threading;
 using BruTile;
 using BruTile.Cache;
-using SharpMap.Geometries;
+using Mapsui.Geometries;
 using System.IO;
 
-namespace SharpMap.Providers
+namespace Mapsui.Providers
 {
     public class TileProvider : IProvider
     {

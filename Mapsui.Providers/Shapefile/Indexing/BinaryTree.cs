@@ -19,7 +19,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace SharpMap.Utilities.Indexing
+namespace Mapsui.Utilities.Indexing
 {
 // Binary Tree not working yet on Mono 
 // see bug: http://bugzilla.ximian.com/show_bug.cgi?id=78502

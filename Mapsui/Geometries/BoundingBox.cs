@@ -20,7 +20,7 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Collections.Generic;
 
-namespace SharpMap.Geometries
+namespace Mapsui.Geometries
 {
     /// <summary>
     /// Bounding box type with double precision

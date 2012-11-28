@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using SharpMap.Layers;
+using Mapsui.Layers;
 
 namespace Mapsui.Wpf
 {

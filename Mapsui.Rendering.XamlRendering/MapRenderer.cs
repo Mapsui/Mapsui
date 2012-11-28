@@ -7,12 +7,12 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
-using SharpMap;
-using SharpMap.Geometries;
-using SharpMap.Layers;
-using SharpMap.Rendering;
-using SharpMap.Styles;
-using SharpMap.Styles.Thematics;
+using Mapsui;
+using Mapsui.Geometries;
+using Mapsui.Layers;
+using Mapsui.Rendering;
+using Mapsui.Styles;
+using Mapsui.Styles.Thematics;
 
 namespace SilverlightRendering
 {
@@ -118,7 +118,7 @@ namespace SilverlightRendering
             }                    
         }
 
-        private static void RenderFeature(Canvas canvas, IViewport viewport, IStyle style, SharpMap.Providers.IFeature feature)
+        private static void RenderFeature(Canvas canvas, IViewport viewport, IStyle style, Mapsui.Providers.IFeature feature)
         {
             if (style is LabelStyle)
             {
@@ -130,7 +130,7 @@ namespace SilverlightRendering
                 if (renderedGeometry == null) 
                 {
                     renderedGeometry = RenderGeometry(canvas, viewport, style, feature);
-                    if (feature.Geometry is SharpMap.Geometries.Point || feature.Geometry is IRaster) // positioning only supported for point and raster
+                    if (feature.Geometry is Mapsui.Geometries.Point || feature.Geometry is IRaster) // positioning only supported for point and raster
                         feature.RenderedGeometry[style] = renderedGeometry;
                 }
                 else
@@ -141,10 +141,10 @@ namespace SilverlightRendering
             }
         }
 
-        private static UIElement RenderGeometry(Canvas canvas, IViewport viewport, IStyle style, SharpMap.Providers.IFeature feature)
+        private static UIElement RenderGeometry(Canvas canvas, IViewport viewport, IStyle style, Mapsui.Providers.IFeature feature)
         {
-            if (feature.Geometry is SharpMap.Geometries.Point)
-                return GeometryRenderer.RenderPoint(feature.Geometry as SharpMap.Geometries.Point, style, viewport);
+            if (feature.Geometry is Mapsui.Geometries.Point)
+                return GeometryRenderer.RenderPoint(feature.Geometry as Mapsui.Geometries.Point, style, viewport);
             if (feature.Geometry is MultiPoint)
                 return GeometryRenderer.RenderMultiPoint(feature.Geometry as MultiPoint, style, viewport);
             if (feature.Geometry is LineString)
@@ -160,10 +160,10 @@ namespace SilverlightRendering
             return null;
         }
 
-        private static void PositionGeometry(UIElement renderedGeometry, IViewport viewport, IStyle style, SharpMap.Providers.IFeature feature)
+        private static void PositionGeometry(UIElement renderedGeometry, IViewport viewport, IStyle style, Mapsui.Providers.IFeature feature)
         {
-            if (feature.Geometry is SharpMap.Geometries.Point)
-                GeometryRenderer.PositionPoint(renderedGeometry, feature.Geometry as SharpMap.Geometries.Point, style, viewport);
+            if (feature.Geometry is Mapsui.Geometries.Point)
+                GeometryRenderer.PositionPoint(renderedGeometry, feature.Geometry as Mapsui.Geometries.Point, style, viewport);
             if (feature.Geometry is MultiPoint)
                 return;
             if (feature.Geometry is LineString)

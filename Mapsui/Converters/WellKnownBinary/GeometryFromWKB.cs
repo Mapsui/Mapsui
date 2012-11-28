@@ -38,18 +38,18 @@
 using System;
 using System.Diagnostics;
 using System.IO;
-using SharpMap.Geometries;
+using Mapsui.Geometries;
 
-namespace SharpMap.Converters.WellKnownBinary
+namespace Mapsui.Converters.WellKnownBinary
 {
     /// <summary>
-    ///  Converts Well-known Binary representations to a <see cref="SharpMap.Geometries.Geometry"/> instance.
+    ///  Converts Well-known Binary representations to a <see cref="Mapsui.Geometries.Geometry"/> instance.
     /// </summary>
     /// <remarks>
-    /// <para>The Well-known Binary Representation for <see cref="SharpMap.Geometries.Geometry"/> (WKBGeometry) provides a portable 
-    /// representation of a <see cref="SharpMap.Geometries.Geometry"/> value as a contiguous stream of bytes. It permits <see cref="SharpMap.Geometries.Geometry"/> 
+    /// <para>The Well-known Binary Representation for <see cref="Mapsui.Geometries.Geometry"/> (WKBGeometry) provides a portable 
+    /// representation of a <see cref="Mapsui.Geometries.Geometry"/> value as a contiguous stream of bytes. It permits <see cref="Mapsui.Geometries.Geometry"/> 
     /// values to be exchanged between an ODBC client and an SQL database in binary form.</para>
-    /// <para>The Well-known Binary Representation for <see cref="SharpMap.Geometries.Geometry"/> is obtained by serializing a <see cref="SharpMap.Geometries.Geometry"/>
+    /// <para>The Well-known Binary Representation for <see cref="Mapsui.Geometries.Geometry"/> is obtained by serializing a <see cref="Mapsui.Geometries.Geometry"/>
     /// instance as a sequence of numeric types drawn from the set {Unsigned Integer, Double} and
     /// then serializing each numeric type as a sequence of bytes using one of two well defined,
     /// standard, binary representations for numeric types (NDR, XDR). The specific binary encoding
@@ -60,10 +60,10 @@ namespace SharpMap.Converters.WellKnownBinary
     public static class GeometryFromWKB
     {
         /// <summary>
-        /// Creates a <see cref="SharpMap.Geometries.Geometry"/> from the supplied byte[] containing the Well-known Binary representation.
+        /// Creates a <see cref="Mapsui.Geometries.Geometry"/> from the supplied byte[] containing the Well-known Binary representation.
         /// </summary>
         /// <param name="bytes">byte[] containing the Well-known Binary representation.</param>
-        /// <returns>A <see cref="SharpMap.Geometries.Geometry"/> bases on the supplied Well-known Binary representation.</returns>
+        /// <returns>A <see cref="Mapsui.Geometries.Geometry"/> bases on the supplied Well-known Binary representation.</returns>
         public static Geometry Parse(byte[] bytes)
         {
             // Create a memory stream using the suppiled byte array.
@@ -79,10 +79,10 @@ namespace SharpMap.Converters.WellKnownBinary
         }
 
         /// <summary>
-        /// Creates a <see cref="SharpMap.Geometries.Geometry"/> based on the Well-known binary representation.
+        /// Creates a <see cref="Mapsui.Geometries.Geometry"/> based on the Well-known binary representation.
         /// </summary>
         /// <param name="reader">A <see cref="System.IO.BinaryReader">BinaryReader</see> used to read the Well-known binary representation.</param>
-        /// <returns>A <see cref="SharpMap.Geometries.Geometry"/> based on the Well-known binary representation.</returns>
+        /// <returns>A <see cref="Mapsui.Geometries.Geometry"/> based on the Well-known binary representation.</returns>
         public static Geometry Parse(BinaryReader reader)
         {
             // Get the first Byte in the array. This specifies if the WKB is in

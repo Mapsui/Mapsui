@@ -43,7 +43,7 @@ using System.Globalization;
 
 #endregion
 
-namespace SharpMap.Converters.WellKnownText
+namespace Mapsui.Converters.WellKnownText
 {
     /// <summary>
     /// Reads a stream of Well Known Text (wkt) string and returns a stream of tokens.

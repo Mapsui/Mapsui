@@ -17,7 +17,7 @@
 
 using System;
 
-namespace SharpMap.Geometries
+namespace Mapsui.Geometries
 {
     /// <summary>
     /// A Point3D is a 0-dimensional geometry and represents a single location in 3D coordinate space. A Point3D has a x coordinate

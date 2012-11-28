@@ -10,12 +10,12 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using Npgsql;
-using SharpMap.Converters.WellKnownBinary;
-using SharpMap.Data;
-using SharpMap.Data.Providers;
-using SharpMap.Geometries;
+using Mapsui.Converters.WellKnownBinary;
+using Mapsui.Data;
+using Mapsui.Data.Providers;
+using Mapsui.Geometries;
 
-namespace SharpMap.Providers
+namespace Mapsui.Providers
 {
 	/// <summary>
 	/// Description of PostGIS.

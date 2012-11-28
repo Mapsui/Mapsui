@@ -17,7 +17,7 @@
 
 using System.Collections.Generic;
 
-namespace SharpMap.Rendering
+namespace Mapsui.Rendering
 {
     /// <summary>
     /// Class defining delegate for label collision detection and static predefined methods

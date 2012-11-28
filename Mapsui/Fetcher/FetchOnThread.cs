@@ -18,7 +18,7 @@
 using System;
 using BruTile;
 
-namespace SharpMap.Fetcher
+namespace Mapsui.Fetcher
 {
     class FetchOnThread
         //This class is needed because in CF one can only pass arguments to a thread using a class constructor.

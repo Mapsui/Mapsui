@@ -1,8 +1,8 @@
-﻿using SharpMap.Layers;
-using SharpMap.Providers.ArcGISImageService;
-using SharpMap.Styles;
+﻿using Mapsui.Layers;
+using Mapsui.Providers.ArcGISImageService;
+using Mapsui.Styles;
 
-namespace SharpMap.Samples
+namespace Mapsui.Samples
 {
     public static class ArcGISImageServiceSample
     {

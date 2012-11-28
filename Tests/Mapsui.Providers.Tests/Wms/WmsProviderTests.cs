@@ -1,5 +1,5 @@
 ﻿using NUnit.Framework;
-using SharpMap.Providers.Wms;
+using Mapsui.Providers.Wms;
 using System.Linq;
 using System.Xml;
 

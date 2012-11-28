@@ -41,7 +41,7 @@
 
 #endregion
 
-namespace SharpMap.Converters.WellKnownText
+namespace Mapsui.Converters.WellKnownText
 {
     /// <summary>
     /// Represents the type of token created by the StreamTokenizer class.

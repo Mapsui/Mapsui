@@ -5,10 +5,10 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
-using SharpMap.Geometries;
-using SharpMap.Rendering;
+using Mapsui.Geometries;
+using Mapsui.Rendering;
 
-namespace SharpMap.Providers.ArcGISImageService
+namespace Mapsui.Providers.ArcGISImageService
 {
     public class ArcGISImageServiceProvider : IProvider
     {

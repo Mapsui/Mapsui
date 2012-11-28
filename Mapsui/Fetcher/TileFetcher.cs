@@ -21,10 +21,10 @@ using System.IO;
 using System.Threading;
 using BruTile;
 using BruTile.Cache;
-using SharpMap.Geometries;
-using SharpMap.Providers;
+using Mapsui.Geometries;
+using Mapsui.Providers;
 
-namespace SharpMap.Fetcher
+namespace Mapsui.Fetcher
 {
     class TileFetcher
     {

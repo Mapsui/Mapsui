@@ -5,11 +5,11 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
-using SharpMap;
-using SharpMap.Geometries;
-using SharpMap.Styles;
+using Mapsui;
+using Mapsui.Geometries;
+using Mapsui.Styles;
 using Path = System.Windows.Shapes.Path;
-using Point = SharpMap.Geometries.Point;
+using Point = Mapsui.Geometries.Point;
 using Windows = System.Windows.Media;
 
 namespace SilverlightRendering

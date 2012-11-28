@@ -1,5 +1,5 @@
 ﻿using System.IO;
-namespace SharpMap.Geometries
+namespace Mapsui.Geometries
 {
     public interface IRaster : IGeometry
     {

@@ -17,7 +17,7 @@
 
 using System.Collections.Generic;
 
-namespace SharpMap.Utilities
+namespace Mapsui.Utilities
 {
     //todo: This class belongs in a BruTile.UI assembly but since it is currently one fo the few 
     public static class ZoomHelper

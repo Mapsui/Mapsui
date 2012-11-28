@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Net;
 
-namespace SharpMap.Providers.Wms
+namespace Mapsui.Providers.Wms
 {
     public delegate void StatusEventHandler(object sender, FeatureInfo featureInfo);
 

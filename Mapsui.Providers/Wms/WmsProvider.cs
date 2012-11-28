@@ -22,13 +22,13 @@ using System.IO;
 using System.Net;
 using System.Text;
 using System.Xml;
-using SharpMap.Geometries;
-using SharpMap.Rendering;
-using SharpMap.Web.Wms;
+using Mapsui.Geometries;
+using Mapsui.Rendering;
+using Mapsui.Web.Wms;
 using System.Globalization;
 using System.Collections.Generic;
 
-namespace SharpMap.Providers.Wms
+namespace Mapsui.Providers.Wms
 {
     /// <summary>
     /// Web Map Service layer

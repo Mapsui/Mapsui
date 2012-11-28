@@ -6,12 +6,12 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using BruTile.Web;
-using SharpMap;
-using SharpMap.Fetcher;
-using SharpMap.Geometries;
-using SharpMap.Layers;
+using Mapsui;
+using Mapsui.Fetcher;
+using Mapsui.Geometries;
+using Mapsui.Layers;
 using MapControl = Mapsui.Windows.MapControl;
-using SharpMap.Providers;
+using Mapsui.Providers;
 
 namespace Mapsui.Silverlight
 {
@@ -40,7 +40,7 @@ namespace Mapsui.Silverlight
             if (mapControl.Map.Envelope != null)
             {
                 var center = mapControl.Map.Envelope.GetCentroid();
-                mapControl.Viewport.Center = new SharpMap.Geometries.Point(center.X, center.Y);
+                mapControl.Viewport.Center = new Mapsui.Geometries.Point(center.X, center.Y);
                 mapControl.Viewport.Resolution = 10000;
             }
         }
@@ -61,7 +61,7 @@ namespace Mapsui.Silverlight
             var result = new List<IGeometry>();
             for (int i = 0; i < 30; i++)
             {
-                result.Add(new SharpMap.Geometries.Point(random.NextDouble() * box.Width + box.Left, random.NextDouble() * box.Height - box.Top));
+                result.Add(new Mapsui.Geometries.Point(random.NextDouble() * box.Width + box.Left, random.NextDouble() * box.Height - box.Top));
             }
             return result;
         }
@@ -237,7 +237,7 @@ namespace Mapsui.Silverlight
         private void buttonMaxExtend_Click(object sender, RoutedEventArgs e)
         {
             var extent = mapControl.Map.Envelope;
-            mapControl.ZoomToBox(new SharpMap.Geometries.Point(extent.MinX, extent.MinY), new SharpMap.Geometries.Point(extent.MaxX, extent.MaxY));
+            mapControl.ZoomToBox(new Mapsui.Geometries.Point(extent.MinX, extent.MinY), new Mapsui.Geometries.Point(extent.MaxX, extent.MaxY));
         }
 
         private void btnGoto_Click(object sender, RoutedEventArgs e)

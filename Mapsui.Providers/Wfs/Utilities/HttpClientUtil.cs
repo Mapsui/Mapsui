@@ -8,7 +8,7 @@ using System.IO;
 using System.Net;
 using System.Security;
 
-namespace SharpMap.Utilities.Wfs
+namespace Mapsui.Utilities.Wfs
 {
     /// <summary>
     /// This class provides an easy to use interface for HTTP-GET and HTTP-POST requests.

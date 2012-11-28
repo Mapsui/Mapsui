@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Xml.XPath;
 
-namespace SharpMap.Utilities.Wfs
+namespace Mapsui.Utilities.Wfs
 {
     /// <summary>
     /// This class should be the base class of all decorators for classes

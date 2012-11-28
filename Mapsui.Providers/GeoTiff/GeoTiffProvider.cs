@@ -6,12 +6,12 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
-using SharpMap.Geometries;
-using SharpMap.Styles;
+using Mapsui.Geometries;
+using Mapsui.Styles;
 using Bitmap = System.Drawing.Bitmap;
 using Color = System.Drawing.Color;
 
-namespace SharpMap.Providers.GeoTiff
+namespace Mapsui.Providers.GeoTiff
 {
     public class GeoTiffProvider : IProvider
     {

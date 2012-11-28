@@ -17,7 +17,7 @@
 
 using System.Collections.Generic;
 
-namespace SharpMap.Layers
+namespace Mapsui.Layers
 {
     public class LayerGroup 
     {

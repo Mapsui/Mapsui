@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Net;
-using SharpMap.Geometries;
+using Mapsui.Geometries;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 
-namespace SharpMap.Providers.ArcGis
+namespace Mapsui.Providers.ArcGis
 {
     public class ArcGisDynamicProvider : IProvider
     {

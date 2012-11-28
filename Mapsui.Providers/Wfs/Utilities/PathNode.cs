@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Xml;
 
-namespace SharpMap.Utilities.Wfs
+namespace Mapsui.Utilities.Wfs
 {
     internal interface IPathNode
     {

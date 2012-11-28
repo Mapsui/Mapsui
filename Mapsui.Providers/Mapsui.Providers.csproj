@@ -73,15 +73,23 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="GeoTiff\GeoTiffProvider.cs" />
-    <Compile Include="MsSqlSpatial\MsSqlSpatial.cs" />
-    <Compile Include="MsSql\MsSql.cs" />
-    <Compile Include="PostGis\PostGIS.cs" />
+    <Compile Include="MsSqlSpatial\MsSqlSpatial.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MsSql\MsSql.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PostGis\PostGIS.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shapefile\DbaseReader.cs" />
     <Compile Include="Shapefile\Indexing\BinaryTree.cs" />
     <Compile Include="Shapefile\Indexing\SpatialIndexing.cs" />
     <Compile Include="Shapefile\ShapeFile.cs" />
-    <Compile Include="SqlServer2008\SqlServer2008.cs" />
+    <Compile Include="SqlServer2008\SqlServer2008.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Utilities.cs" />
     <Compile Include="Wfs\Utilities\FeatureTypeInfo.cs" />
     <Compile Include="Wfs\Utilities\GeometryFactories.cs" />

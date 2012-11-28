@@ -1,6 +1,6 @@
-﻿using SharpMap.Geometries;
+﻿using Mapsui.Geometries;
 
-namespace SharpMap.Projection
+namespace Mapsui.Projection
 {
     public interface ITransformation
     {

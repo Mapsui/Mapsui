@@ -18,7 +18,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace SharpMap.Geometries
+namespace Mapsui.Geometries
 {
     /// <summary>
     /// A LinearRing is a LineString that is both closed and simple.

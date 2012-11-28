@@ -19,9 +19,9 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
-using SharpMap.Geometries;
+using Mapsui.Geometries;
 
-namespace SharpMap.Utilities.SpatialIndexing
+namespace Mapsui.Utilities.SpatialIndexing
 {
     /// <summary>
     /// Heuristics used for tree generation
@@ -269,7 +269,7 @@ namespace SharpMap.Utilities.SpatialIndexing
         ///// <summary>
         ///// Gets/sets the list of objects in the node
         ///// </summary>
-        //public List<SharpMap.Geometries.IGeometry> ObjList
+        //public List<Mapsui.Geometries.IGeometry> ObjList
         //{
         //    get { return _objList; }
         //    set { _objList = value; }

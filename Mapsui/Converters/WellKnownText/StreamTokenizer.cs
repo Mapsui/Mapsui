@@ -45,7 +45,7 @@ using System.Globalization;
 // a C# StringTokenizer
 //  http://sourceforge.net/snippet/detail.php?type=snippet&id=101171
 
-namespace SharpMap.Converters.WellKnownText
+namespace Mapsui.Converters.WellKnownText
 {
     ///<summary>
     ///The StreamTokenizer class takes an input stream and parses it into "tokens", allowing the tokens to be read one at a time. The parsing process is controlled by a table and a number of flags that can be set to various states. The stream tokenizer can recognize identifiers, numbers, quoted strings, and various comment style

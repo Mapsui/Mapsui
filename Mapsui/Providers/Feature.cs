@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using SharpMap.Geometries;
-using SharpMap.Styles;
+using Mapsui.Geometries;
+using Mapsui.Styles;
 
-namespace SharpMap.Providers
+namespace Mapsui.Providers
 {
     public class Feature : IFeature
     {

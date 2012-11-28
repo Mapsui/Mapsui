@@ -4,11 +4,11 @@
 using System.IO;
 using System.Text;
 using System.Xml;
-using SharpMap.Data.Providers;
-using SharpMap.Geometries;
-using SharpMap.Providers.Wfs;
+using Mapsui.Data.Providers;
+using Mapsui.Geometries;
+using Mapsui.Providers.Wfs;
 
-namespace SharpMap.Utilities.Wfs
+namespace Mapsui.Utilities.Wfs
 {
     public class WFS_1_1_0_TextResources : WFS_1_1_0_XPathTextResources, IWFS_TextResources
     {

@@ -17,27 +17,27 @@
 
 using BruTile;
 using BruTile.Cache;
-using SharpMap;
-using SharpMap.Geometries;
-using SharpMap.Providers;
+using Mapsui.Geometries;
+using Mapsui.Providers;
 using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
-using Point = SharpMap.Geometries.Point;
+using Point = Mapsui.Geometries.Point;
 
 namespace Mapsui.Rendering.GdiRendering
 {
     public static class GdiTileRenderer
     {
         public static void Render(Graphics graphics, ITileSchema schema,
-          IViewport viewport, MemoryCache<Feature> cache)
+            IViewport viewport, MemoryCache<Feature> cache)
         {
-            int level = Utilities.GetNearestLevel(schema.Resolutions, viewport.Resolution);
+            int level = BruTile.Utilities.GetNearestLevel(schema.Resolutions, viewport.Resolution);
             DrawRecursive(graphics, schema, viewport, cache, schema.GetExtentOfTilesInView(viewport.Extent.ToExtent(), level), level);
         }
 
-        private static void DrawRecursive(Graphics graphics, ITileSchema schema, IViewport viewport, MemoryCache<Feature> cache, Extent extent, int level)
+        private static void DrawRecursive(Graphics graphics, ITileSchema schema, IViewport viewport, 
+            MemoryCache<Feature> cache, Extent extent, int level)
         {
             var tileInfos = schema.GetTilesInView(extent, level);
 

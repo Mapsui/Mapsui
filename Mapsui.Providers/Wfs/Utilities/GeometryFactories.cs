@@ -7,10 +7,10 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.Xml;
-using SharpMap.Data;
-using SharpMap.Geometries;
+using Mapsui.Data;
+using Mapsui.Geometries;
 
-namespace SharpMap.Utilities.Wfs
+namespace Mapsui.Utilities.Wfs
 {
     /// <summary>
     /// This class is the base class for geometry production.
@@ -94,7 +94,7 @@ namespace SharpMap.Utilities.Wfs
 
         /// <summary>
         /// Abstract method - overwritten by derived classes for producing instances
-        /// derived from <see cref="SharpMap.Geometries.Geometry"/>.
+        /// derived from <see cref="Mapsui.Geometries.Geometry"/>.
         /// </summary>
         internal abstract Collection<Geometry> createGeometries();
 
@@ -357,7 +357,7 @@ namespace SharpMap.Utilities.Wfs
     }
 
     /// <summary>
-    /// This class produces instances of type <see cref="SharpMap.Geometries.Point"/>.
+    /// This class produces instances of type <see cref="Mapsui.Geometries.Point"/>.
     /// The base class is <see cref="GeometryFactory"/>.
     /// </summary>
     internal class PointFactory : GeometryFactory
@@ -392,7 +392,7 @@ namespace SharpMap.Utilities.Wfs
         #region Internal Member
 
         /// <summary>
-        /// This method produces instances of type <see cref="SharpMap.Geometries.Point"/>.
+        /// This method produces instances of type <see cref="Mapsui.Geometries.Point"/>.
         /// </summary>
         /// <returns>The created geometries</returns>
         internal override Collection<Geometry> createGeometries()
@@ -429,7 +429,7 @@ namespace SharpMap.Utilities.Wfs
     }
 
     /// <summary>
-    /// This class produces instances of type <see cref="SharpMap.Geometries.LineString"/>.
+    /// This class produces instances of type <see cref="Mapsui.Geometries.LineString"/>.
     /// The base class is <see cref="GeometryFactory"/>.
     /// </summary>
     internal class LineStringFactory : GeometryFactory
@@ -464,7 +464,7 @@ namespace SharpMap.Utilities.Wfs
         #region Internal Member
 
         /// <summary>
-        /// This method produces instances of type <see cref="SharpMap.Geometries.LineString"/>.
+        /// This method produces instances of type <see cref="Mapsui.Geometries.LineString"/>.
         /// </summary>
         /// <returns>The created geometries</returns>
         internal override Collection<Geometry> createGeometries()
@@ -502,7 +502,7 @@ namespace SharpMap.Utilities.Wfs
     }
 
     /// <summary>
-    /// This class produces instances of type <see cref="SharpMap.Geometries.Polygon"/>.
+    /// This class produces instances of type <see cref="Mapsui.Geometries.Polygon"/>.
     /// The base class is <see cref="GeometryFactory"/>.
     /// </summary>
     internal class PolygonFactory : GeometryFactory
@@ -537,7 +537,7 @@ namespace SharpMap.Utilities.Wfs
         #region Internal Member
 
         /// <summary>
-        /// This method produces instances of type <see cref="SharpMap.Geometries.Polygon"/>.
+        /// This method produces instances of type <see cref="Mapsui.Geometries.Polygon"/>.
         /// </summary>
         /// <returns>The created geometries</returns>
         internal override Collection<Geometry> createGeometries()
@@ -596,7 +596,7 @@ namespace SharpMap.Utilities.Wfs
     }
 
     /// <summary>
-    /// This class produces instances of type <see cref="SharpMap.Geometries.MultiPoint"/>.
+    /// This class produces instances of type <see cref="Mapsui.Geometries.MultiPoint"/>.
     /// The base class is <see cref="GeometryFactory"/>.
     /// </summary>
     internal class MultiPointFactory : GeometryFactory
@@ -629,7 +629,7 @@ namespace SharpMap.Utilities.Wfs
         #region Internal Member
 
         /// <summary>
-        /// This method produces instances of type <see cref="SharpMap.Geometries.MultiPoint"/>.
+        /// This method produces instances of type <see cref="Mapsui.Geometries.MultiPoint"/>.
         /// </summary>
         /// <returns>The created geometries</returns>
         internal override Collection<Geometry> createGeometries()
@@ -675,7 +675,7 @@ namespace SharpMap.Utilities.Wfs
     }
 
     /// <summary>
-    /// This class produces objects of type <see cref="SharpMap.Geometries.MultiLineString"/>.
+    /// This class produces objects of type <see cref="Mapsui.Geometries.MultiLineString"/>.
     /// The base class is <see cref="GeometryFactory"/>.
     /// </summary>
     internal class MultiLineStringFactory : GeometryFactory
@@ -708,7 +708,7 @@ namespace SharpMap.Utilities.Wfs
         #region Internal Member
 
         /// <summary>
-        /// This method produces instances of type <see cref="SharpMap.Geometries.MultiLineString"/>.
+        /// This method produces instances of type <see cref="Mapsui.Geometries.MultiLineString"/>.
         /// </summary>
         /// <returns>The created geometries</returns>
         internal override Collection<Geometry> createGeometries()
@@ -759,7 +759,7 @@ namespace SharpMap.Utilities.Wfs
     }
 
     /// <summary>
-    /// This class produces instances of type <see cref="SharpMap.Geometries.MultiPolygon"/>.
+    /// This class produces instances of type <see cref="Mapsui.Geometries.MultiPolygon"/>.
     /// The base class is <see cref="GeometryFactory"/>.
     /// </summary>
     internal class MultiPolygonFactory : GeometryFactory
@@ -792,7 +792,7 @@ namespace SharpMap.Utilities.Wfs
         #region Internal Member
 
         /// <summary>
-        /// This method produces instances of type <see cref="SharpMap.Geometries.MultiPolygon"/>.
+        /// This method produces instances of type <see cref="Mapsui.Geometries.MultiPolygon"/>.
         /// </summary>
         /// <returns>The created geometries</returns>
         internal override Collection<Geometry> createGeometries()
