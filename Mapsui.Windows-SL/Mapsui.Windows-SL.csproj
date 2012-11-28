@@ -73,9 +73,6 @@
     <Compile Include="..\Mapsui.Windows\MapControl.cs">
       <Link>MapControl.cs</Link>
     </Compile>
-    <Compile Include="..\Mapsui.Windows\MapTransformHelper.cs">
-      <Link>MapTransformHelper.cs</Link>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\EditableImage.cs" />
   </ItemGroup>

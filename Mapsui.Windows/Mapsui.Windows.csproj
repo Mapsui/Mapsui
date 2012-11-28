@@ -85,7 +85,6 @@
     <Compile Include="FpsCounter.cs" />
     <Compile Include="Layers\GroupTileLayer.cs" />
     <Compile Include="MapControl.cs" />
-    <Compile Include="MapTransformHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

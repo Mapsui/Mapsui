@@ -504,7 +504,7 @@ namespace Mapsui.Windows
                 }
 
                 currentMousePosition = e.GetPosition(this); //Needed for both MouseMove and MouseWheel event
-                MapTransformHelper.Pan(viewport, currentMousePosition, previousMousePosition);
+                viewport.Transform(currentMousePosition.X, currentMousePosition.Y, previousMousePosition.X, previousMousePosition.Y);
                 previousMousePosition = currentMousePosition;
                 map.ViewChanged(false, viewport.Extent, viewport.Resolution);
                 OnViewChanged(false, true);

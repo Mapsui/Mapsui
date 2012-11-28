@@ -21,21 +21,23 @@ namespace SharpMap
 {
     public class Viewport : IViewport
     {
-        private double resolution;
         private double centerX;
         private double centerY;
-        private double width;
-        private double height;
         BoundingBox extent;
+        private double height;
+        private double resolution;
+        private double width;
 
-        public double Resolution
+        public Viewport() { }
+
+        public Viewport(Viewport viewport)
         {
-            get { return resolution; }
-            set
-            {
-                resolution = value;
-                UpdateExtent();
-            }
+            resolution = viewport.resolution;
+            centerX = viewport.centerX;
+            centerY = viewport.centerY;
+            width = viewport.width;
+            height = viewport.height;
+            UpdateExtent();
         }
 
         public Point Center
@@ -44,6 +46,16 @@ namespace SharpMap
             {
                 centerX = value.X;
                 centerY = value.Y;
+                UpdateExtent();
+            }
+        }
+
+        public double Resolution
+        {
+            get { return resolution; }
+            set
+            {
+                resolution = value;
                 UpdateExtent();
             }
         }
@@ -91,18 +103,6 @@ namespace SharpMap
         public BoundingBox Extent
         {
             get { return extent ?? (extent = new BoundingBox(0, 0, 0, 0)); }
-        }
-
-        public Viewport() { }
-
-        public Viewport(Viewport viewport)
-        {
-            resolution = viewport.resolution;
-            centerX = viewport.centerX;
-            centerY = viewport.centerY;
-            width = viewport.width;
-            height = viewport.height;
-            UpdateExtent();
         }
 
         public Point WorldToScreen(Point worldPosition)
