@@ -21,18 +21,12 @@ namespace SharpMap
 {
     public class Viewport : IViewport
     {
-        #region Fields
-
         private double resolution;
         private double centerX;
         private double centerY;
         private double width;
         private double height;
         BoundingBox extent;
-
-        #endregion
-
-        #region Public Methods
 
         public double Resolution
         {
@@ -149,10 +143,6 @@ namespace SharpMap
             CenterY = newY - scaleCorrectionY;
         }
 
-        #endregion
-
-        #region Private Methods
-
         private void UpdateExtent()
         {
             double spanX = width * resolution;
@@ -161,7 +151,5 @@ namespace SharpMap
                 CenterX - spanX * 0.5, CenterY - spanY * 0.5,
                 CenterX + spanX * 0.5, CenterY + spanY * 0.5);
         }
-
-        #endregion
     }
 }
