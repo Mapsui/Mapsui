@@ -46,7 +46,6 @@ namespace Mapsui
             layers = new LayerCollection();
             layers.LayerAdded += LayersLayerAdded;
             layers.LayerRemoved += LayersLayerRemoved;
-            Resolutions = new List<double>();
         }
 
         void LayersLayerRemoved(ILayer layer)
@@ -171,7 +170,15 @@ namespace Mapsui
             }
         }
 
-        public IList<double> Resolutions { get; private set; } //todo: add way to assign resolutions based on a tile layer
+        public IList<double> Resolutions 
+        {
+            get 
+            { 
+                var baseLayer = Layers.FirstOrDefault(l => l.Enabled && l is ITileLayer) as ITileLayer;
+                if (baseLayer == null) return new List<double>();
+                return baseLayer.Schema.Resolutions.Select(r => r.UnitsPerPixel).ToList();
+            }
+        }
 
         public void ClearCache()
         {
