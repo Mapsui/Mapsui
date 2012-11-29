@@ -10,6 +10,7 @@ using Mapsui;
 using Mapsui.Fetcher;
 using Mapsui.Geometries;
 using Mapsui.Layers;
+using Mapsui.Styles;
 using MapControl = Mapsui.Windows.MapControl;
 using Mapsui.Providers;
 
@@ -51,7 +52,9 @@ namespace Mapsui.Silverlight
             var osmLayer = new TileLayer(new OsmTileSource()) {LayerName = "OSM"};
             map.Layers.Add(osmLayer);
             var pointProvider = new MemoryProvider(GenerateRandomPoints(osmLayer.Envelope));
-            map.Layers.Add( new Layer("Points") { DataSource = pointProvider });
+            var pointLayer = new Layer("Points") {DataSource = pointProvider};
+            pointLayer.Styles.Add(new Mapsui.Styles.Style());
+            map.Layers.Add(pointLayer);
             return map;
         }
 
