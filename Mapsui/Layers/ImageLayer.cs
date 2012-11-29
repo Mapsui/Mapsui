@@ -15,14 +15,13 @@
 // along with Mapsui; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
-using System;
-using System.Linq;
-using System.Threading.Timers;
 using Mapsui.Fetcher;
 using Mapsui.Geometries;
 using Mapsui.Providers;
-using System.Threading;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
 
 namespace Mapsui.Layers
 {

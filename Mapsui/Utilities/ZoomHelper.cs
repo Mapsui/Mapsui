@@ -19,7 +19,6 @@ using System.Collections.Generic;
 
 namespace Mapsui.Utilities
 {
-    //todo: This class belongs in a BruTile.UI assembly but since it is currently one fo the few 
     public static class ZoomHelper
     {
         public static double ZoomIn(IList<double> resolutions, double resolution)
@@ -29,10 +28,10 @@ namespace Mapsui.Utilities
             //smaller than smallest
             if (resolutions[resolutions.Count - 1] > resolution) return resolutions[resolutions.Count - 1];
 
-            for (int i = 0; i < resolutions.Count; i++)
+            foreach (double resolutionOfLevel in resolutions)
             {
-                if (resolutions[i] < resolution)
-                    return resolutions[i];
+                if (resolutionOfLevel < resolution)
+                    return resolutionOfLevel;
             }
             return resolutions[resolutions.Count - 1];
         }
