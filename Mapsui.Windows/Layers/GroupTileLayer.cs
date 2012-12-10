@@ -9,6 +9,7 @@ using Mapsui.Fetcher;
 using Mapsui.Geometries;
 using Mapsui.Providers;
 using Mapsui.Styles;
+using BruTile;
 
 namespace Mapsui.Layers
 {

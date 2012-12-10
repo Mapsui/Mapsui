@@ -3,10 +3,19 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows;
+#if !NETFX_CORE
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
+using AnimateEventHandler = System.EventHandler;
+#else
+using Windows.UI.Xaml.Controls;
+using Windows.Foundation;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Media.Animation;
+using AnimateEventHandler = System.EventHandler<object>;
+#endif
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Styles;
@@ -176,20 +185,26 @@ namespace Mapsui.Rendering.XamlRendering
                 GeometryRenderer.PositionRaster(renderedGeometry, feature.Geometry.GetBoundingBox(), viewport);
         }
 
-        public static void Animate(DependencyObject target, string property, double from, double to, int duration, EventHandler completed)
+        public static void Animate(DependencyObject target, string property, double from, double to, int duration, AnimateEventHandler completed)
         {
             var animation = new DoubleAnimation();
             animation.From = from;
             animation.To = to;
             animation.Duration = new TimeSpan(0, 0, 0, 0, duration);
             Storyboard.SetTarget(animation, target);
+#if !NETFX_CORE
             Storyboard.SetTargetProperty(animation, new PropertyPath(property));
+#else
+            Storyboard.SetTargetProperty(animation, property);
+#endif
 
             var storyBoard = new Storyboard();
             storyBoard.Children.Add(animation);
             storyBoard.Completed += completed;
             storyBoard.Begin();
         }
+
+#if !NETFX_CORE
 
         public Stream ToBitmapStream(double width, double height)
         {
@@ -208,5 +223,6 @@ namespace Mapsui.Rendering.XamlRendering
 #endif
             return bitmapStream;
         }
+#endif
     }
 }

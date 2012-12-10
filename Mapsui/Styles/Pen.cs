@@ -5,9 +5,12 @@ namespace Mapsui.Styles
 {
     public class Pen
     {
-        public Pen()
+        public Pen() {}
+
+        public Pen(Color color, double width = 1)
         {
-            Width = 1;
+            Color = color;
+            Width = width;
         }
 
         public double Width { get; set; }

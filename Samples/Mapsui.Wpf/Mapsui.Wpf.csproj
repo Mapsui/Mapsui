@@ -61,9 +61,11 @@
     <StartupObject>Mapsui.Wpf.App</StartupObject>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BruTile, Version=0.4.1.0, Culture=neutral, PublicKeyToken=00e75fd79e391f40, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\libs\BruTile.dll</HintPath>
+    <Reference Include="BruTile">
+      <HintPath>..\..\libs\BruTile.dll</HintPath>
+    </Reference>
+    <Reference Include="BruTile.Desktop">
+      <HintPath>..\..\libs\BruTile.Desktop.dll</HintPath>
     </Reference>
     <Reference Include="BruTile.MbTiles">
       <HintPath>..\..\libs\BruTile.MbTiles.dll</HintPath>

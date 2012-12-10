@@ -5,7 +5,13 @@ namespace Mapsui.Styles
 {
     public class Brush
     {
-        //TODO: add other brush attributes 
+        public Brush() {}
+
+        public Brush(Color color)
+        {
+            Color = color;
+        }
+
         public Color Color { get; set; }
 
         #region Equals operator
@@ -26,8 +32,7 @@ namespace Mapsui.Styles
         }
 
         public override int GetHashCode()
-        {
-            
+        {            
             return (Color == null) ? 0 : Color.GetHashCode();
         }
 

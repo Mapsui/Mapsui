@@ -22,7 +22,6 @@ namespace Mapsui.Rendering.WbxRendering
         public WbxMapRenderer(Canvas target)
         {
             this.target = target;
-
             if (target.ActualWidth == 0 || target.ActualHeight == 0) return;
             target.Children.Add(InitializeBitmap((int)target.ActualWidth, (int)target.ActualHeight));
         }

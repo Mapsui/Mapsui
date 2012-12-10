@@ -2,15 +2,25 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media;
-using System.Windows.Shapes;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 using System.Globalization;
+#if !NETFX_CORE
+using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Shapes;
+using WinPoint = System.Windows.Point;
+#else
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Shapes;
+using Windows.UI.Xaml.Media;
+using Windows.UI;
+using WinPoint = Windows.Foundation.Point;
+#endif
 
 namespace Mapsui.Rendering.XamlRendering
 {
@@ -157,7 +167,7 @@ namespace Mapsui.Rendering.XamlRendering
         public static UIElement RenderLabel(Mapsui.Geometries.Point point, Offset stackOffset, LabelStyle style, IViewport viewport, string text)
         {
             Mapsui.Geometries.Point p = viewport.WorldToScreen(point);
-            var windowsPoint = new System.Windows.Point(p.X, p.Y);
+            var windowsPoint = new WinPoint(p.X, p.Y);
 
             var border = new Border();
             var textblock = new TextBlock();
@@ -183,7 +193,7 @@ namespace Mapsui.Rendering.XamlRendering
 
             var textWidth = textblock.ActualWidth;
             var textHeight = textblock.ActualHeight;
-#if !SILVERLIGHT
+#if !SILVERLIGHT && !NETFX_CORE
             // in WPF the width and height is not calculated at this point. So we use FormattedText
             getTextWidthAndHeight(ref textWidth, ref textHeight, style, text);
 #endif
@@ -193,7 +203,7 @@ namespace Mapsui.Rendering.XamlRendering
             return border;
         }
 
-#if !SILVERLIGHT 
+#if !SILVERLIGHT && !NETFX_CORE
         private static void getTextWidthAndHeight(ref double width, ref double height, LabelStyle style, string text)
         {
             var formattedText = new FormattedText(
@@ -209,7 +219,7 @@ namespace Mapsui.Rendering.XamlRendering
         }
 
 #endif
-        
+
         private class Cluster
         {
             public BoundingBox Box { get; set; }
