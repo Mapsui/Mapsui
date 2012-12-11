@@ -198,7 +198,7 @@ namespace Mapsui.Rendering.XamlRendering
             return bitmap;
 #elif SILVERLIGHT 
             element.UpdateLayout();
-            WriteableBitmap bitmap = new WriteableBitmap(element, null);
+            var bitmap = new WriteableBitmap(element, null);
             bitmap.Invalidate();
             return bitmap;
 #else

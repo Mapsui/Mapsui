@@ -41,7 +41,14 @@
                 return false;
             }
 
-            if (!Line.Equals(vectorStyle.Line))
+            Line = new Pen();
+
+            if ((Line == null) ^ (vectorStyle.Line == null))
+            {
+                return false;
+            }
+
+            if (Line != null && !Line.Equals(vectorStyle.Line))
             {
                 return false;
             }
@@ -61,17 +68,10 @@
 
         public override int GetHashCode()
         {
-            return Line.GetHashCode() ^ Outline.GetHashCode() ^ Fill.GetHashCode() ^ base.GetHashCode();
-        }
-
-        public static bool operator ==(VectorStyle vectorStyle1, VectorStyle vectorStyle2)
-        {
-            return Equals(vectorStyle1, vectorStyle2);
-        }
-
-        public static bool operator !=(VectorStyle vectorStyle1, VectorStyle vectorStyle2)
-        {
-            return !Equals(vectorStyle1, vectorStyle2);
+            return (Line == null ? 0 : Line.GetHashCode())
+                ^ (Outline == null ? 0 :  Outline.GetHashCode()) 
+                ^ (Fill ==  null ? 0 : Fill.GetHashCode())
+                ^ base.GetHashCode();
         }
 
         #endregion

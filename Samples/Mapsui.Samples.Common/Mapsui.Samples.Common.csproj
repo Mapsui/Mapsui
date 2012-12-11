@@ -34,12 +34,8 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
-    <Content Include="Images\arrow.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\netherlands.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <EmbeddedResource Include="Images\arrow.png" />
+    <EmbeddedResource Include="Images\netherlands.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddPolygonInCode.cs" />

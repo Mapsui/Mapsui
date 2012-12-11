@@ -141,6 +141,10 @@
       <Project>{d74c052a-c07e-4b37-a898-134218aca5c9}</Project>
       <Name>Mapsui</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Mapsui.Samples.Common\Mapsui.Samples.Common.csproj">
+      <Project>{508ae811-a03a-4138-8ccc-abde03c67010}</Project>
+      <Name>Mapsui.Samples.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="UI\Images\btnLayers.png" />
@@ -161,7 +165,7 @@
     <Resource Include="UI\Images\topRight.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="UI\Images\btnBbox.png" />
+    <EmbeddedResource Include="UI\Images\btnBbox.png" />
     <Resource Include="UI\Images\btnFullscreen.png" />
     <Resource Include="UI\Images\btnGoTo.png" />
     <Resource Include="UI\Images\btnHand.png" />

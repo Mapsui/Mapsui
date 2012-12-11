@@ -5,19 +5,19 @@ namespace Mapsui.Styles
 {
     public class Bitmap
     {
-        private MemoryStream _data { get; set; }
+        private MemoryStream data;
 
         public Stream Data
         {
-            get { return _data; }
+            get { return data; }
             set
             {
                 if (value == null)
                 {
-                    _data = null;
+                    data = null;
                     return;
                 }
-                _data = CopyStreamToMemoryStream(value);
+                data = CopyStreamToMemoryStream(value);
                 //value.Close(); // not possible in PCL, not sure what effect this will have
             }
         }
@@ -49,7 +49,7 @@ namespace Mapsui.Styles
 
         public bool Equals(Bitmap bitmap)
         {
-            if (!CompareMemoryStreams(_data, bitmap._data)) return false;
+            if (!CompareMemoryStreams(data, bitmap.data)) return false;
             return true;
         }
 
@@ -69,16 +69,6 @@ namespace Mapsui.Styles
         public override int GetHashCode()
         {
             return 1; // Data.GetHashCode() reads the full stream so that is no optimization
-        }
-
-        public static bool operator ==(Bitmap bitmap1, Bitmap bitmap2)
-        {
-            return Equals(bitmap1, bitmap2);
-        }
-
-        public static bool operator !=(Bitmap bitmap1, Bitmap bitmap2)
-        {
-            return !Equals(bitmap1, bitmap2);
         }
 
         #endregion

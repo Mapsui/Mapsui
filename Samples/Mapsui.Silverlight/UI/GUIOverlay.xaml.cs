@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -41,7 +42,7 @@ namespace Mapsui.Silverlight
             if (mapControl.Map.Envelope != null)
             {
                 var center = mapControl.Map.Envelope.GetCentroid();
-                mapControl.Viewport.Center = new Mapsui.Geometries.Point(center.X, center.Y);
+                mapControl.Viewport.Center = new Geometries.Point(center.X, center.Y);
                 mapControl.Viewport.Resolution = 10000;
             }
         }
@@ -53,7 +54,16 @@ namespace Mapsui.Silverlight
             map.Layers.Add(osmLayer);
             var pointProvider = new MemoryProvider(GenerateRandomPoints(osmLayer.Envelope));
             var pointLayer = new Layer("Points") {DataSource = pointProvider};
-            pointLayer.Styles.Add(new Mapsui.Styles.Style());
+            var bitmapData =
+                System.Reflection.Assembly.GetExecutingAssembly()
+                      .GetManifestResourceStream("Mapsui.Silverlight.UI.Images.btnBbox.png");
+            var bitmap = new Bitmap
+                {
+                    Data = bitmapData
+                };
+            var symbolStyle = new SymbolStyle() {Symbol = bitmap};
+            //symbolStyle.Line = null;
+            pointLayer.Styles.Add(symbolStyle);
             map.Layers.Add(pointLayer);
             return map;
         }
@@ -64,7 +74,7 @@ namespace Mapsui.Silverlight
             var result = new List<IGeometry>();
             for (int i = 0; i < 30; i++)
             {
-                result.Add(new Mapsui.Geometries.Point(random.NextDouble() * box.Width + box.Left, random.NextDouble() * box.Height - box.Top));
+                result.Add(new Geometries.Point(random.NextDouble() * box.Width + box.Left, random.NextDouble() * box.Height - box.Top));
             }
             return result;
         }
@@ -84,7 +94,7 @@ namespace Mapsui.Silverlight
                         var checkBox = new CheckBox();
                         checkBox.Margin = new Thickness(10, 0, 0, 0);
                         checkBox.Click += checkBox_Click;
-                        checkBox.Name = random.Next().ToString(); //subLayer.LayerName;
+                        checkBox.Name = random.Next().ToString(CultureInfo.InvariantCulture); //subLayer.LayerName;
                         checkBox.Content = subLayer.LayerName;
                         checkBox.Tag = subLayer;
                         checkBox.Margin = new Thickness(4);

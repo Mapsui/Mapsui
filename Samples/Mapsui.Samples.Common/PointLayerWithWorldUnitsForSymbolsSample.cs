@@ -12,7 +12,7 @@ namespace Mapsui.Samples.Common
             var layer = new Layer("PointLayer WorldUnits");
             var netherlands = new Feature { Geometry = new Point(710000, 6800000)};
             
-            const string resource = "DemoConfig.Images.netherlands.jpg";
+            const string resource = "Mapsui.Samples.Common.Images.netherlands.jpg";
             netherlands.Styles.Add(new SymbolStyle
             {
                 Symbol = new Bitmap { Data = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream(resource) },

@@ -33,16 +33,6 @@ namespace Mapsui.Styles
             return X.GetHashCode() ^ Y.GetHashCode();
         }
 
-        public static bool operator ==(Offset offset1, Offset offset2)
-        {
-            return Equals(offset1, offset2);
-        }
-
-        public static bool operator !=(Offset offset1, Offset offset2)
-        {
-            return !Equals(offset1, offset2);
-        }
-
         #endregion
     }
 }

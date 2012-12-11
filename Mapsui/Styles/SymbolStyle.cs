@@ -78,7 +78,7 @@ namespace Mapsui.Styles
                 return false;
             }
 
-            if (Symbol != symbolStyle.Symbol)
+            if (!Symbol.Equals(symbolStyle.Symbol))
             {
                 return false;
             }
@@ -132,16 +132,6 @@ namespace Mapsui.Styles
                 SymbolScale.GetHashCode() ^ SymbolOffset.GetHashCode() ^
                 SymbolRotation.GetHashCode() ^ UnitType.GetHashCode() ^ SymbolType.GetHashCode() ^
                 Opacity.GetHashCode() ^ Width.GetHashCode() ^ Height.GetHashCode() ^ base.GetHashCode();
-        }
-
-        public static bool operator ==(SymbolStyle symbolStyle1, SymbolStyle symbolStyle2)
-        {
-            return Equals(symbolStyle1, symbolStyle2);
-        }
-
-        public static bool operator !=(SymbolStyle symbolStyle1, SymbolStyle symbolStyle2)
-        {
-            return !Equals(symbolStyle1, symbolStyle2);
         }
 
         #endregion
