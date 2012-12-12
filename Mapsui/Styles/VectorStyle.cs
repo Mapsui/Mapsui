@@ -41,8 +41,6 @@
                 return false;
             }
 
-            Line = new Pen();
-
             if ((Line == null) ^ (vectorStyle.Line == null))
             {
                 return false;
@@ -53,7 +51,17 @@
                 return false;
             }
 
+            if ((Outline == null) ^ (vectorStyle.Outline == null))
+            {
+                return false;
+            }
+
             if (!Outline.Equals(vectorStyle.Outline))
+            {
+                return false;
+            }
+
+            if ((Fill == null) ^ (vectorStyle.Fill == null))
             {
                 return false;
             }
@@ -72,6 +80,16 @@
                 ^ (Outline == null ? 0 :  Outline.GetHashCode()) 
                 ^ (Fill ==  null ? 0 : Fill.GetHashCode())
                 ^ base.GetHashCode();
+        }
+
+        public static bool operator ==(VectorStyle vectorStyle1, VectorStyle vectorStyle2)
+        {
+            return Equals(vectorStyle1, vectorStyle2);
+        }
+
+        public static bool operator !=(VectorStyle vectorStyle1, VectorStyle vectorStyle2)
+        {
+            return !Equals(vectorStyle1, vectorStyle2);
         }
 
         #endregion

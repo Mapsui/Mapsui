@@ -34,10 +34,10 @@ namespace Mapsui.Styles
                 return false;
             }
 
-            //if ((Color == null) ^ (pen.Color == null)) //if one or the other is null then they are not equal, but not when they are both null
-            //{
-            //    return false;
-            //}
+            if ((Color == null) ^ (pen.Color == null)) //if one or the other is null then they are not equal, but not when they are both null
+            {
+                return false;
+            }
 
             if (Color != null && !Color.Equals(pen.Color))
             {
@@ -50,6 +50,16 @@ namespace Mapsui.Styles
         public override int GetHashCode()
         {
             return Width.GetHashCode() ^ (Color == null ? 0 : Color.GetHashCode());
+        }
+
+        public static bool operator ==(Pen pen1, Pen pen2)
+        {
+            return Equals(pen1, pen2);
+        }
+
+        public static bool operator !=(Pen pen1, Pen pen2)
+        {
+            return !Equals(pen1, pen2);
         }
 
         #endregion

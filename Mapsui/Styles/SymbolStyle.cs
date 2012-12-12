@@ -78,7 +78,12 @@ namespace Mapsui.Styles
                 return false;
             }
 
-            if (!Symbol.Equals(symbolStyle.Symbol))
+            if ((Symbol == null) ^ (symbolStyle.Symbol == null))
+            {
+                return false;
+            }
+
+            if (Symbol != null && !Symbol.Equals(symbolStyle.Symbol))
             {
                 return false;
             }
@@ -88,7 +93,12 @@ namespace Mapsui.Styles
                 return false;
             }
 
-            if (!SymbolOffset.Equals(symbolStyle.SymbolOffset))
+            if ((SymbolOffset == null) ^ (symbolStyle.SymbolOffset == null))
+            {
+                return false;
+            }
+
+            if ((SymbolOffset != null) && (!SymbolOffset.Equals(symbolStyle.SymbolOffset)))
             {
                 return false;
             }
@@ -132,6 +142,16 @@ namespace Mapsui.Styles
                 SymbolScale.GetHashCode() ^ SymbolOffset.GetHashCode() ^
                 SymbolRotation.GetHashCode() ^ UnitType.GetHashCode() ^ SymbolType.GetHashCode() ^
                 Opacity.GetHashCode() ^ Width.GetHashCode() ^ Height.GetHashCode() ^ base.GetHashCode();
+        }
+
+        public static bool operator ==(SymbolStyle symbolStyle1, SymbolStyle symbolStyle2)
+        {
+            return Equals(symbolStyle1, symbolStyle2);
+        }
+
+        public static bool operator !=(SymbolStyle symbolStyle1, SymbolStyle symbolStyle2)
+        {
+            return !Equals(symbolStyle1, symbolStyle2);
         }
 
         #endregion

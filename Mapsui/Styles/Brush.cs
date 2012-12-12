@@ -27,13 +27,31 @@ namespace Mapsui.Styles
 
         public bool Equals(Brush brush)
         {
-            if (Color != brush.Color) return false;
+            if ((Color == null) ^ (brush.Color == null))
+            {
+                return false;
+            }
+
+            if (Color != brush.Color)
+            {
+                return false;
+            }
             return true;
         }
 
         public override int GetHashCode()
         {            
             return (Color == null) ? 0 : Color.GetHashCode();
+        }
+
+        public static bool operator ==(Brush brush1, Brush brush2)
+        {
+            return Equals(brush1, brush2);
+        }
+
+        public static bool operator !=(Brush brush1, Brush brush2)
+        {
+            return !Equals(brush1, brush2);
         }
 
         #endregion

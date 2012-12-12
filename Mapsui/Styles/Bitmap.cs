@@ -68,7 +68,19 @@ namespace Mapsui.Styles
 
         public override int GetHashCode()
         {
-            return 1; // Data.GetHashCode() reads the full stream so that is no optimization
+            // Since Data.GetHashCode reads the full stream it is more efficient
+            // to return the stream length. 
+            return Data.CanSeek ? (int) Data.Length : 0;
+        }
+
+        public static bool operator ==(Bitmap bitmap1, Bitmap bitmap2)
+        {
+            return Equals(bitmap1, bitmap2);
+        }
+
+        public static bool operator !=(Bitmap bitmap1, Bitmap bitmap2)
+        {
+            return !Equals(bitmap1, bitmap2);
         }
 
         #endregion

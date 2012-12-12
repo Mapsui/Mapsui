@@ -59,6 +59,16 @@ namespace Mapsui.Styles
             return A.GetHashCode() ^ R.GetHashCode() ^ G.GetHashCode() ^ B.GetHashCode();
         }
 
+        public static bool operator ==(Color color1, Color color2)
+        {
+            return Equals(color1, color2);
+        }
+
+        public static bool operator !=(Color color1, Color color2)
+        {
+            return !Equals(color1, color2);
+        }
+
         #endregion
     }
 }

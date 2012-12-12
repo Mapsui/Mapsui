@@ -82,6 +82,16 @@ namespace Mapsui.Styles
             return MinVisible.GetHashCode() ^ MaxVisible.GetHashCode() ^ Enabled.GetHashCode();
         }
 
+        public static bool operator ==(Style style1, Style style2)
+        {
+            return Equals(style1, style2);
+        }
+
+        public static bool operator !=(Style style1, Style style2)
+        {
+            return !Equals(style1, style2);
+        }
+
         #endregion
     }
 }

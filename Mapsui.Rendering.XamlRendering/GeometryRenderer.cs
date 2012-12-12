@@ -73,32 +73,27 @@ namespace Mapsui.Rendering.XamlRendering
             }
             else
             {
-                //hack 
-                path = ToSymbolPath(symbolStyle);
-                width = 32;
-                height = 32;
+                var bitmap = GetBitmapCache(style);
 
-                //var bitmap = GetBitmapCache(style);
+                if (bitmap == null)
+                {
+                    var symbolPath = ToSymbolPath(symbolStyle);
+                    bitmap = ToBitmap(symbolPath, symbolPath.Data.Bounds.Width, symbolPath.Data.Bounds.Height);
+                    SetBitmapCache(style, bitmap);
+                }
 
-                //if (bitmap == null)
-                //{
-                //    var symbolPath = ToSymbolPath(symbolStyle);
-                //    bitmap = ToBitmap(symbolPath, symbolPath.Data.Bounds.Width, symbolPath.Data.Bounds.Height);
-                //    SetBitmapCache(style, bitmap);
-                //}
+                var rect = new Shapes.Rectangle();
+                rect.Fill = new Media.ImageBrush { ImageSource = bitmap };
+                rect.Width = bitmap.PixelWidth * symbolStyle.SymbolScale;
+                rect.Height = bitmap.PixelHeight * symbolStyle.SymbolScale;
+                path = rect;
 
-                //var rect = new Shapes.Rectangle();
-                //rect.Fill = new Media.ImageBrush { ImageSource = bitmap };
-                //rect.Width = bitmap.PixelWidth * symbolStyle.SymbolScale;
-                //rect.Height = bitmap.PixelHeight * symbolStyle.SymbolScale;
-                //path = rect;
-
-                //width = bitmap.PixelWidth * symbolStyle.SymbolScale;
-                //height = bitmap.PixelHeight * symbolStyle.SymbolScale;
+                width = bitmap.PixelWidth * symbolStyle.SymbolScale;
+                height = bitmap.PixelHeight * symbolStyle.SymbolScale;
             }
 
             var matrix = CreateTransformMatrix(point, viewport, symbolStyle, width, height);
-            //!!!path.RenderTransform = new Media.MatrixTransform { Matrix = matrix };
+            path.RenderTransform = new Media.MatrixTransform { Matrix = matrix };
             path.Opacity = symbolStyle.Opacity;
             return path;
         }

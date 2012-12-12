@@ -67,14 +67,9 @@ namespace Mapsui.Rendering.XamlRendering
             if (layer is LabelLayer)
             {
                 var labelLayer = layer as LabelLayer;
-                if (labelLayer.UseLabelStacking)
-                {
-                    target.Children.Add(LabelRenderer.RenderStackedLabelLayer(viewport, labelLayer));
-                }
-                else
-                {
-                    target.Children.Add(LabelRenderer.RenderLabelLayer(viewport, labelLayer));
-                }
+                target.Children.Add(labelLayer.UseLabelStacking
+                    ? LabelRenderer.RenderStackedLabelLayer(viewport, labelLayer)
+                    : LabelRenderer.RenderLabelLayer(viewport, labelLayer));
             }
             else
             {
@@ -84,8 +79,9 @@ namespace Mapsui.Rendering.XamlRendering
 
         private static Canvas RenderVectorLayer(IViewport viewport, ILayer layer)
         {
-            //ToDo: find solution for try catch. Sometimes this method will throw an exception
-            //when clearing and adding features to a layer while rendering
+            // todo:
+            // find solution for try catch. Sometimes this method will throw an exception
+            // when clearing and adding features to a layer while rendering
             try
             {
                 var canvas = new Canvas();
@@ -107,7 +103,7 @@ namespace Mapsui.Rendering.XamlRendering
 
                 foreach (var feature in features)
                 {
-                    var styles = feature.Styles;
+                    var styles = feature.Styles ?? Enumerable.Empty<IStyle>();
                     foreach (var style in styles)
                     {
                         if (feature.Styles != null && style.Enabled)
@@ -125,7 +121,7 @@ namespace Mapsui.Rendering.XamlRendering
             }                    
         }
 
-        private static void RenderFeature(Canvas canvas, IViewport viewport, IStyle style, Mapsui.Providers.IFeature feature)
+        private static void RenderFeature(Canvas canvas, IViewport viewport, IStyle style, Providers.IFeature feature)
         {
             if (style is LabelStyle)
             {
@@ -136,8 +132,8 @@ namespace Mapsui.Rendering.XamlRendering
                 var renderedGeometry = feature.RenderedGeometry.ContainsKey(style) ? feature.RenderedGeometry[style] as UIElement : null;
                 if (renderedGeometry == null) 
                 {
-                    renderedGeometry = RenderGeometry(canvas, viewport, style, feature);
-                    if (feature.Geometry is Mapsui.Geometries.Point || feature.Geometry is IRaster) // positioning only supported for point and raster
+                    renderedGeometry = RenderGeometry(viewport, style, feature);
+                    if (feature.Geometry is Geometries.Point || feature.Geometry is IRaster) // positioning only supported for point and raster
                         feature.RenderedGeometry[style] = renderedGeometry;
                 }
                 else
@@ -148,10 +144,10 @@ namespace Mapsui.Rendering.XamlRendering
             }
         }
 
-        private static UIElement RenderGeometry(Canvas canvas, IViewport viewport, IStyle style, Mapsui.Providers.IFeature feature)
+        private static UIElement RenderGeometry(IViewport viewport, IStyle style, Providers.IFeature feature)
         {
-            if (feature.Geometry is Mapsui.Geometries.Point)
-                return GeometryRenderer.RenderPoint(feature.Geometry as Mapsui.Geometries.Point, style, viewport);
+            if (feature.Geometry is Geometries.Point)
+                return GeometryRenderer.RenderPoint(feature.Geometry as Geometries.Point, style, viewport);
             if (feature.Geometry is MultiPoint)
                 return GeometryRenderer.RenderMultiPoint(feature.Geometry as MultiPoint, style, viewport);
             if (feature.Geometry is LineString)
@@ -167,10 +163,10 @@ namespace Mapsui.Rendering.XamlRendering
             return null;
         }
 
-        private static void PositionGeometry(UIElement renderedGeometry, IViewport viewport, IStyle style, Mapsui.Providers.IFeature feature)
+        private static void PositionGeometry(UIElement renderedGeometry, IViewport viewport, IStyle style, Providers.IFeature feature)
         {
-            if (feature.Geometry is Mapsui.Geometries.Point)
-                GeometryRenderer.PositionPoint(renderedGeometry, feature.Geometry as Mapsui.Geometries.Point, style, viewport);
+            if (feature.Geometry is Geometries.Point)
+                GeometryRenderer.PositionPoint(renderedGeometry, feature.Geometry as Geometries.Point, style, viewport);
             if (feature.Geometry is MultiPoint)
                 return;
             if (feature.Geometry is LineString)
