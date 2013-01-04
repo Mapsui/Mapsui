@@ -58,6 +58,20 @@ namespace Mapsui.Rendering.XamlRendering
             frameworkElement.RenderTransform = new Media.MatrixTransform { Matrix = matrix };
         }
 
+#if NETFX_CORE
+        public static UIElement RenderPoint(Point point, IStyle style, IViewport viewport)
+        {
+            var screenPos = viewport.WorldToScreen(point.X, point.Y);
+            return new Shapes.Path()
+            {
+                Data = new RectangleGeometry()
+                {
+                    Rect = new Rect(screenPos.X - 16, screenPos.Y - 16, 32, 32)
+                },
+                Fill = new SolidColorBrush(Colors.Red)
+            };
+        }
+#else
         public static UIElement RenderPoint(Point point, IStyle style, IViewport viewport)
         {
             var symbolStyle = (style is SymbolStyle) ? style as SymbolStyle : new SymbolStyle();
@@ -97,6 +111,7 @@ namespace Mapsui.Rendering.XamlRendering
             path.Opacity = symbolStyle.Opacity;
             return path;
         }
+#endif
 
         private static Media.Matrix CreateTransformMatrix(Point point, IViewport viewport, SymbolStyle symbolStyle, double width, double height)
         {
