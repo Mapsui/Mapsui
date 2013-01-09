@@ -16,15 +16,15 @@
     <language>en-US</language>
   </metadata>
   <files>
-    <file src="bin\Release\BruTile.dll" target="lib\portable-net40+sl4+wp7+win8\BruTile.dll" />
-    <file src="bin\Release\Mapsui.dll" target="lib\portable-net40+sl4+wp7+win8\Mapsui.dll" />
-    <file src="bin\Release\Mapsui.Rendering.XamlRendering.dll" target="lib\net40\Mapsui.Rendering.XamlRendering.dll" />
-    <file src="bin\Release\Mapsui.Windows.dll" target="lib\net40\Mapsui.Windows.dll" />
-    <file src="bin\Release\BruTile.dll" target="lib\net40\BruTile.dll" />
-    <file src="bin\Release\Mapsui.dll" target="lib\net40\Mapsui.dll" />
+    <file src="Mapsui\bin\Release\BruTile.dll" target="lib\portable-net40+sl4+wp7+win8\BruTile.dll" />
+    <file src="Mapsui\bin\Release\Mapsui.dll" target="lib\portable-net40+sl4+wp7+win8\Mapsui.dll" />
+    <file src="Mapsui.Rendering.XamlRendering\bin\Release\Mapsui.Rendering.XamlRendering.dll" target="lib\net40\Mapsui.Rendering.XamlRendering.dll" />
+    <file src="Mapsui.Windows\bin\Release\Mapsui.Windows.dll" target="lib\net40\Mapsui.Windows.dll" />
+    <file src="Mapsui\bin\Release\BruTile.dll" target="lib\net40\BruTile.dll" />
+    <file src="Mapsui\bin\Release\Mapsui.dll" target="lib\net40\Mapsui.dll" />
     <file src="Mapsui.Rendering.XamlRendering-SL\Bin\Release\Mapsui.Rendering.XamlRendering.dll" target="lib\sl5\Mapsui.Rendering.XamlRendering.dll" />
     <file src="Mapsui.Windows-SL\Bin\Release\Mapsui.Windows.dll" target="lib\sl5\Mapsui.Windows.dll" />
-    <file src="bin\Release\BruTile.dll" target="lib\sl5\BruTile.dll" />
-    <file src="bin\Release\Mapsui.dll" target="lib\sl5\Mapsui.dll" />
+    <file src="Mapsui\bin\Release\BruTile.dll" target="lib\sl5\BruTile.dll" />
+    <file src="Mapsui\bin\Release\Mapsui.dll" target="lib\sl5\Mapsui.dll" />
   </files>
 </package>
