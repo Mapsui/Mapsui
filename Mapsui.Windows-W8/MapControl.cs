@@ -181,7 +181,7 @@ namespace Mapsui.Windows
             //!!!MouseMove += MapControlMouseMove;
             //!!!MouseLeave += MapControlMouseLeave;
 
-            //!!!SizeChanged += MapControlSizeChanged;
+            SizeChanged += MapControlSizeChanged;
             CompositionTarget.Rendering += CompositionTarget_Rendering;
             canvas.Children.Add(renderCanvas);
             renderer = new MapRenderer(renderCanvas);
