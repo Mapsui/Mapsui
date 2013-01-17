@@ -1,15 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using ProjNet.CoordinateSystems.Transformations;
-using SharpMap.Geometries;
+using Mapsui.Geometries;
 
-namespace SharpMap.Projection
+namespace Mapsui.Projection
 {
     public static class ProjectionHelper
     {
         public static void Transform(IGeometry geometry, ICoordinateTransformation coordinateTransformation)
         {
-            var vertices = AllVertices(geometry);
+            var vertices = geometry.AllVertices();
             foreach (var vertex in vertices)
             {
                 double[] point = coordinateTransformation.MathTransform.Transform(new[] { vertex.X, vertex.Y });
@@ -20,7 +18,7 @@ namespace SharpMap.Projection
 
         public static void InverseTransform(IGeometry geometry, ICoordinateTransformation coordinateTransformation)
         {
-            var vertices = AllVertices(geometry);
+            var vertices = geometry.AllVertices();
             foreach (var vertex in vertices)
             {
                 coordinateTransformation.MathTransform.Inverse();
