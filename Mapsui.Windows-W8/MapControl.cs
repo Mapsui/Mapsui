@@ -181,7 +181,7 @@ namespace Mapsui.Windows
             //!!!MouseMove += MapControlMouseMove;
             //!!!MouseLeave += MapControlMouseLeave;
 
-            //!!!SizeChanged += MapControlSizeChanged;
+            SizeChanged += MapControlSizeChanged;
             CompositionTarget.Rendering += CompositionTarget_Rendering;
             canvas.Children.Add(renderCanvas);
             renderer = new MapRenderer(renderCanvas);
@@ -222,8 +222,6 @@ namespace Mapsui.Windows
             viewport.CenterY += 0.000000001;
             map.ViewChanged(false, viewport.Extent, viewport.Resolution);
             OnViewChanged(false, true);
-
-            StartZoomAnimation(viewport.Resolution, toResolution);
         }
 
         #region Public methods
@@ -277,7 +275,8 @@ namespace Mapsui.Windows
                 toResolution = viewport.Resolution;
 
             toResolution = ZoomHelper.ZoomIn(map.Resolutions, toResolution);
-            ZoomMiddle();
+            viewport.Resolution = toResolution;            
+
         }
 
         public void ZoomOut()
@@ -286,7 +285,7 @@ namespace Mapsui.Windows
                 toResolution = viewport.Resolution;
 
             toResolution = ZoomHelper.ZoomOut(map.Resolutions, toResolution);
-            ZoomMiddle();
+            viewport.Resolution = toResolution;
         }
 
         #endregion
@@ -329,11 +328,6 @@ namespace Mapsui.Windows
             RefreshGraphics();
         }
 
-        private void ZoomMiddle()
-        {
-            currentMousePosition = new Point(ActualWidth / 2, ActualHeight / 2);
-            StartZoomAnimation(viewport.Resolution, toResolution);
-        }
 
         private void MapControlLoaded(object sender, RoutedEventArgs e)
         {
@@ -349,15 +343,6 @@ namespace Mapsui.Windows
             Storyboard.SetTarget(zoomAnimation, this);
             Storyboard.SetTargetProperty(zoomAnimation, "Resolution");
             zoomStoryBoard.Children.Add(zoomAnimation);
-        }
-
-        private void StartZoomAnimation(double begin, double end)
-        {
-            zoomStoryBoard.Pause(); //using Stop() here causes unexpected results while zooming very fast.
-            zoomAnimation.From = begin;
-            zoomAnimation.To = end;
-            zoomAnimation.Completed += (s, a) => toResolution = double.NaN;
-            zoomStoryBoard.Begin();
         }
 
         private void MapControlSizeChanged(object sender, SizeChangedEventArgs e)

@@ -8,6 +8,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
     <Grid>
-        <mapsuiWindows:MapControl Background="DarkSlateGray" x:Name="mapControl" />
+        <mapsuiWindows:MapControl Background="DarkSlateGray" x:Name="mapControl" >
+            <Button Content="Zoomin" HorizontalAlignment="Left" Margin="30,392,0,0" VerticalAlignment="Top" Click="Button_Click_1" Width="96" />
+            <Button Content="Zoomout" HorizontalAlignment="Left" Margin="30,450,0,0" VerticalAlignment="Top" Click="Button_Click_2"/>
+        </mapsuiWindows:MapControl>
     </Grid>
 </Page>
