@@ -45,5 +45,17 @@ namespace Mapsui.Samples.Metro
             mapControl.ZoomToFullEnvelope();
             mapControl.Refresh();
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            mapControl.ZoomIn();
+            mapControl.Refresh();
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            mapControl.ZoomOut();
+            mapControl.Refresh();
+        }
     }
 }
