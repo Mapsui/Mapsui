@@ -9,7 +9,7 @@ namespace Mapsui.Samples.Common
 {
     public static class PointLayerSample
     {
-        private static Random random = new Random();
+        private static Random random = new Random(0);
 
         public static ILayer Create()
         {

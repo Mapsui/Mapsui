@@ -14,6 +14,7 @@ using Mapsui.Layers;
 using Mapsui.Styles;
 using MapControl = Mapsui.Windows.MapControl;
 using Mapsui.Providers;
+using Mapsui.Samples.Common;
 
 namespace Mapsui.Silverlight
 {
@@ -50,21 +51,17 @@ namespace Mapsui.Silverlight
         private Map CreateMap()
         {
             var map = new Map();
-            var osmLayer = new TileLayer(new OsmTileSource()) {LayerName = "OSM"};
+            
+            var osmLayer = new TileLayer(new OsmTileSource()) { LayerName = "OSM" };
             map.Layers.Add(osmLayer);
-            var pointProvider = new MemoryProvider(GenerateRandomPoints(osmLayer.Envelope));
-            var pointLayer = new Layer("Points") {DataSource = pointProvider};
-            var bitmapData =
-                System.Reflection.Assembly.GetExecutingAssembly()
-                      .GetManifestResourceStream("Mapsui.Silverlight.UI.Images.btnBbox.png");
-            var bitmap = new Bitmap
-                {
-                    Data = bitmapData
-                };
-            var symbolStyle = new SymbolStyle() {Symbol = bitmap};
-            //symbolStyle.Line = null;
+
+            var pointLayer = PointLayerSample.CreateRandomPointLayer(map.Envelope, 25);
+            var bitmapData = System.Reflection.Assembly.GetExecutingAssembly()
+              .GetManifestResourceStream("Mapsui.Silverlight.UI.Images.btnBbox.png");
+            var symbolStyle = new SymbolStyle() { Symbol = new Bitmap { Data = bitmapData } };
             pointLayer.Styles.Add(symbolStyle);
             map.Layers.Add(pointLayer);
+
             return map;
         }
 
@@ -82,7 +79,7 @@ namespace Mapsui.Silverlight
         void FillLayerList(Map map)
         {
             var random = new Random(DateTime.Now.Second);
-                        
+
             bool firstButton = true;
 
             foreach (ILayer layer in map.Layers)
@@ -102,7 +99,7 @@ namespace Mapsui.Silverlight
                         checkBox.IsChecked = true;
 
                         layerList.Children.Add(checkBox);
-                        
+
                         if (firstButton)
                         {
                             checkBox.IsChecked = true;
