@@ -116,11 +116,10 @@ namespace Mapsui.Rendering.XamlRendering
         private static Media.Matrix CreateTransformMatrix(Point point, IViewport viewport, SymbolStyle symbolStyle, double width, double height)
         {
             var matrix = new Media.Matrix();
-            // flip the image top to bottom:
-            MatrixHelper.Translate(ref matrix, -width * 0.5, -height * 0.5);
-            MatrixHelper.Invert(ref matrix);
-            MatrixHelper.Translate(ref matrix, width * 0.5, height * 0.5);
 
+            // flip the image top to bottom:
+            MatrixHelper.InvertY(ref matrix, height * 0.5);
+            
             MatrixHelper.Translate(ref matrix,
                 point.X + symbolStyle.SymbolOffset.X - width * 0.5,
                 point.Y + symbolStyle.SymbolOffset.Y - height * 0.5);

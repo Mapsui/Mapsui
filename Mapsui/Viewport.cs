@@ -85,8 +85,8 @@ namespace Mapsui
             get { return centerX; }
             set
             {
-                UpdateExtent();
                 centerX = value;
+                UpdateExtent();
             }
         }
 
@@ -95,8 +95,8 @@ namespace Mapsui
             get { return centerY; }
             set
             {
-                UpdateExtent();
                 centerY = value;
+                UpdateExtent();
             }
         }
 

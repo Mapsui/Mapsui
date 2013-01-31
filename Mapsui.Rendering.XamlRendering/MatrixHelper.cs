@@ -16,15 +16,23 @@ namespace Mapsui.Rendering.XamlRendering
             
             Translate(ref matrix, mapCenterX - viewport.CenterX, mapCenterY - viewport.CenterY);
             ScaleAt(ref matrix, 1 / viewport.Resolution, 1 / viewport.Resolution, mapCenterX, mapCenterY);
+
             //append invert the Y, but also the whole image
-            Append(ref matrix, new Matrix(1, 0, 0, -1, 0, 0));
-            
-            Translate(ref matrix, 0, viewport.Height);
+            InvertY(ref matrix, mapCenterY);
         }
 
-        public static void Invert(ref Matrix matrix)
+        public static void InvertY(ref Matrix matrix, double centerY = 0)
         {
+            Translate(ref matrix, 0, -centerY);
             Append(ref matrix, new Matrix(1, 0, 0, -1, 0, 0));
+            Translate(ref matrix, 0, centerY);
+        }
+
+        public static void InvertX(ref Matrix matrix, double centerX = 0)
+        {
+            Translate(ref matrix, -centerX, 0);
+            Append(ref matrix, new Matrix(-1, 0, 0, 1, 0, 0));
+            Translate(ref matrix, centerX, 0);
         }
 
         public static void Append(ref Matrix matrix, Matrix matrixOther)
