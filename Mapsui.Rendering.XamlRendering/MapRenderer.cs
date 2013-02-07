@@ -6,8 +6,7 @@ using System.Windows;
 #if !NETFX_CORE
 using System.Windows.Controls;
 using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
+using System.Windows.Media.Animation;using System.Windows.Media.Imaging;
 using AnimateEventHandler = System.EventHandler;
 #else
 using Windows.UI.Xaml.Controls;
@@ -206,7 +205,7 @@ namespace Mapsui.Rendering.XamlRendering
 
 #if !NETFX_CORE
 
-        public Stream ToBitmapStream(double width, double height)
+        public MemoryStream ToBitmapStream(double width, double height)
         {
             target.Arrange(new Rect(0, 0, width, height));
 #if !SILVERLIGHT

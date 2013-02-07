@@ -17,6 +17,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using BruTile;
+using System.Reflection;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -41,7 +42,15 @@ namespace Mapsui.Samples.Metro
         {
             mapControl.Map.Layers.Add(new TileLayer(new OsmTileSource()));
             //!!!mapControl.Map.Layers.Add(PointLayerSample.CreateRandomPolygonLayer(new OsmTileSource().Extent.ToBoundingBox()));
-            mapControl.Map.Layers.Add(PointLayerSample.CreateRandomPointLayer(mapControl.Map.Envelope, 25));
+            
+            var pointLayer = PointLayerSample.CreateRandomPointLayer(mapControl.Map.Envelope, 25);
+            Assembly assembly = typeof(MainPage).GetTypeInfo().Assembly;
+            Stream stream = assembly.GetManifestResourceStream(@"Mapsui.Samples.Metro.Resources.Images.ns.png");
+            stream.Position = 0;
+            pointLayer.Styles.Clear();
+            pointLayer.Styles.Add(new SymbolStyle() { Symbol = new Bitmap() { Data = stream }, SymbolRotation = 45.0 });
+            mapControl.Map.Layers.Add(pointLayer);
+
             mapControl.ZoomToFullEnvelope();
             mapControl.Refresh();
         }

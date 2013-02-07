@@ -102,7 +102,7 @@ namespace Mapsui.Rendering.XamlRendering
         
         public static Matrix CreateScaling(double scaleX, double scaleY, double centerX, double centerY)
         {
-            var matrix = new Matrix();
+            var matrix = new Matrix(); // need Matrix.Identity?
             SetMatrix(ref matrix, scaleX, 0.0, 0.0, scaleY, centerX - (scaleX * centerX), centerY - (scaleY * centerY));
             return matrix;
         }
@@ -139,7 +139,7 @@ namespace Mapsui.Rendering.XamlRendering
 
         internal static Matrix CreateRotationRadians(double angle, double centerX, double centerY)
         {
-            var matrix = new Matrix();
+            var matrix = new Matrix(); // need Matrix.Identity?
             double num = Math.Sin(angle);
             double num2 = Math.Cos(angle);
             double offsetX = (centerX * (1.0 - num2)) + (centerY * num);

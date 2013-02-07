@@ -55,10 +55,14 @@ namespace Mapsui.Styles
         public SymbolType SymbolType { get; set; }
 
         public double Opacity { get; set; }
-
+        
         public double Width { get; set; }
 
         public double Height { get; set; }
+
+        public const double DefaultWidth = 48;
+
+        public const double DefaultHeight = 48;
 
         #region Equals operator
 

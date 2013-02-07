@@ -28,7 +28,6 @@ using Mapsui.Geometries;
 using Mapsui.Styles;
 using Point = Mapsui.Geometries.Point;
 
-    
 namespace Mapsui.Rendering.XamlRendering
 {
     static class GeometryRenderer
@@ -38,15 +37,15 @@ namespace Mapsui.Rendering.XamlRendering
 
         public static void PositionPoint(UIElement renderedGeometry, Point point, IStyle style, IViewport viewport)
         {
-            var frameworkElement = (FrameworkElement) renderedGeometry;
+            var frameworkElement = (FrameworkElement)renderedGeometry;
             var symbolStyle = (style is SymbolStyle) ? style as SymbolStyle : new SymbolStyle();
-            
+
             double width, height;
 
             if (symbolStyle.UnitType == UnitType.WorldUnit)
             {
-                width = symbolStyle.Width*symbolStyle.SymbolScale;
-                height = symbolStyle.Height*symbolStyle.SymbolScale;
+                width = symbolStyle.Width * symbolStyle.SymbolScale;
+                height = symbolStyle.Height * symbolStyle.SymbolScale;
             }
             else
             {
@@ -59,19 +58,86 @@ namespace Mapsui.Rendering.XamlRendering
         }
 
 #if NETFX_CORE
+
         public static UIElement RenderPoint(Point point, IStyle style, IViewport viewport)
         {
-            var screenPos = viewport.WorldToScreen(point.X, point.Y);
-            return new Shapes.Path()
+            UIElement symbol;
+            var matrix = Media.Matrix.Identity;
+
+            if (style is SymbolStyle)
             {
-                Data = new RectangleGeometry()
-                {
-                    Rect = new Rect(screenPos.X - 16, screenPos.Y - 16, 32, 32)
-                },
-                Fill = new SolidColorBrush(Colors.Red)
-            };
+                var symbolStyle = style as SymbolStyle;
+
+                if (symbolStyle.Symbol == null || symbolStyle.Symbol.Data == null)
+                    symbol = CreateSymbolFromVectorStyle(symbolStyle); 
+                else 
+                    symbol = CreateSymbolFromBitmap(symbolStyle.Symbol.Data);
+                matrix = CreatePointSymbolMatrix(point, viewport.Resolution, symbolStyle);
+            }
+            else
+            {
+                symbol = CreateSymbolFromVectorStyle((style as VectorStyle) ?? new VectorStyle());
+            }
+
+            MatrixHelper.Append(ref matrix, CreateTransformMatrixW8(point, viewport));
+
+            symbol.RenderTransform = new Media.MatrixTransform { Matrix = matrix };
+
+            return symbol;
         }
+
+        private static UIElement CreateSymbolFromVectorStyle(VectorStyle style)
+        {
+            var path = new Shapes.Path();
+
+            path.StrokeThickness = 0; //The SL default is 1 and causes blurry bitmaps
+
+            if (style.Fill != null && style.Fill.Color != null)
+                path.Fill = style.Fill.Convert();
+            else
+                path.Fill = new Media.SolidColorBrush(WinColors.Transparent);
+
+            if (style.Outline != null)
+            {
+                path.Stroke = new Media.SolidColorBrush(style.Outline.Color.Convert());
+                path.StrokeThickness = style.Outline.Width;
+            }
+            path.Data = new Media.RectangleGeometry
+                {
+                    Rect = new Rect(
+                        -SymbolStyle.DefaultWidth * 0.5, -SymbolStyle.DefaultHeight * 0.5,
+                        SymbolStyle.DefaultWidth, SymbolStyle.DefaultHeight)
+                };
+            return path;
+        }
+
+        private static Media.Matrix CreatePointSymbolMatrix(Point point, double resolution, SymbolStyle symbolStyle)
+        {
+            var matrix = Media.Matrix.Identity;
+            MatrixHelper.InvertY(ref matrix);
+            var centerX = point.X + symbolStyle.SymbolOffset.X;
+            var centerY = point.Y + symbolStyle.SymbolOffset.Y;
+            var scale = symbolStyle.SymbolScale;
+            MatrixHelper.Translate(ref matrix, centerX, centerY);
+            MatrixHelper.ScaleAt(ref matrix, scale, scale, point.X, point.Y);
+
+            //for point symbols we want the size to be independent from the resolution. We do this by counter scaling first.
+            if (symbolStyle.UnitType != UnitType.WorldUnit)
+                MatrixHelper.ScaleAt(ref matrix, resolution, resolution, point.X, point.Y);
+            MatrixHelper.RotateAt(ref matrix, -symbolStyle.SymbolRotation, point.X, point.Y);
+
+            return matrix;
+        }
+
+        private static Media.Matrix CreateTransformMatrixW8(Point point, IViewport viewport)
+        {
+            var matrix = Media.Matrix.Identity;
+            MatrixHelper.ApplyViewTransform(ref matrix, viewport);
+            return matrix;
+        }
+
 #else
+
         public static UIElement RenderPoint(Point point, IStyle style, IViewport viewport)
         {
             var symbolStyle = (style is SymbolStyle) ? style as SymbolStyle : new SymbolStyle();
@@ -111,7 +177,25 @@ namespace Mapsui.Rendering.XamlRendering
             path.Opacity = symbolStyle.Opacity;
             return path;
         }
+
 #endif
+
+        private static UIElement CreateSymbolFromBitmap(System.IO.Stream data)
+        {
+            var bitmapImage = CreateBitmapImage(data);
+            var fill = new Media.ImageBrush { ImageSource = bitmapImage };
+            var width = bitmapImage.PixelWidth;
+            var height = bitmapImage.PixelHeight;
+
+            return new Shapes.Path
+            {
+                Data = new Media.RectangleGeometry()
+                {
+                    Rect = new Rect(-width * 0.5, -height * 0.5, width, height)
+                },
+                Fill = fill
+            };
+        }
 
         private static Media.Matrix CreateTransformMatrix(Point point, IViewport viewport, SymbolStyle symbolStyle, double width, double height)
         {
@@ -119,7 +203,7 @@ namespace Mapsui.Rendering.XamlRendering
 
             // flip the image top to bottom:
             MatrixHelper.InvertY(ref matrix, height * 0.5);
-            
+
             MatrixHelper.Translate(ref matrix,
                 point.X + symbolStyle.SymbolOffset.X - width * 0.5,
                 point.Y + symbolStyle.SymbolOffset.Y - height * 0.5);
@@ -138,7 +222,7 @@ namespace Mapsui.Rendering.XamlRendering
             double width, height;
 
             path.StrokeThickness = 0; //The SL default is 1 and causes blurry bitmaps
-  
+
             if (symbolStyle.Symbol == null)
             {
                 width = symbolStyle.Width;
@@ -185,7 +269,7 @@ namespace Mapsui.Rendering.XamlRendering
         private static Media.RectangleGeometry CreateRectangle(double width, double height, double strokeThickness)
         {
             var margin = strokeThickness * 0.5;
-                
+
             var data = new Media.RectangleGeometry
             {
                 Rect = new Rect(
@@ -480,7 +564,7 @@ namespace Mapsui.Rendering.XamlRendering
             return group;
         }
 
-        public static Shapes.Path RenderRaster(IRaster raster, IStyle style, IViewport viewport) 
+        public static Shapes.Path RenderRaster(IRaster raster, IStyle style, IViewport viewport)
         {
             Shapes.Path path = CreateRasterPath(style, raster.Data);
             path.Data = ConvertRaster(raster.GetBoundingBox(), viewport);
@@ -502,7 +586,7 @@ namespace Mapsui.Rendering.XamlRendering
            bitmapImage.SetSource(AsyncHelpers.RunSync<IRandomAccessStream>(() =>
                ByteArrayToRandomAccessStream(stream.ToArray())));
                
-#elif !SILVERLIGHT 
+#elif !SILVERLIGHT
             stream.Position = 0;
             bitmapImage.BeginInit();
             bitmapImage.StreamSource = stream;
@@ -555,7 +639,7 @@ namespace Mapsui.Rendering.XamlRendering
         private static BitmapSource GetBitmapCache(IStyle style)
         {
             if (BitmapCache.ContainsKey(style))
-                    return BitmapCache[style];
+                return BitmapCache[style];
             return null;
         }
 

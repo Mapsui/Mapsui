@@ -76,6 +76,7 @@
     <Compile Include="Layers\IFeatureInfo.cs" />
     <Compile Include="Layers\ILayer.cs" />
     <Compile Include="Layers\ImageLayer.cs" />
+    <Compile Include="Layers\InMemoryLayer.cs" />
     <Compile Include="Layers\LabelLayer.cs" />
     <Compile Include="Layers\Layer.cs" />
     <Compile Include="Layers\LayerCollection.cs" />
