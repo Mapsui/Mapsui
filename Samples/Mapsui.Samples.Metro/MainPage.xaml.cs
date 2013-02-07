@@ -28,9 +28,26 @@ namespace Mapsui.Samples.Metro
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        bool first = true;
+
         public MainPage()
         {
             this.InitializeComponent();
+            this.mapControl.ViewChanged += mapControl_ViewChanged;
+        }
+
+        void mapControl_ViewChanged(object sender, Windows.ViewChangedEventArgs e)
+        {
+            if (first)
+            {
+                first = false;
+
+                // sample: zoom to default area at startup
+                var beginPoint = new Mapsui.Geometries.Point(-4000000, 2000000);
+                var endPoint = new Mapsui.Geometries.Point(4000000, 11000000);
+                mapControl.ZoomToBox(beginPoint, endPoint);
+                mapControl.Refresh();
+            }
         }
 
         /// <summary>
@@ -41,9 +58,10 @@ namespace Mapsui.Samples.Metro
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             mapControl.Map.Layers.Add(new TileLayer(new OsmTileSource()));
-            //!!!mapControl.Map.Layers.Add(PointLayerSample.CreateRandomPolygonLayer(new OsmTileSource().Extent.ToBoundingBox()));
             
             var pointLayer = PointLayerSample.CreateRandomPointLayer(mapControl.Map.Envelope, 25);
+            
+            // add some sample symbols (resource images) to the map...
             Assembly assembly = typeof(MainPage).GetTypeInfo().Assembly;
             Stream stream = assembly.GetManifestResourceStream(@"Mapsui.Samples.Metro.Resources.Images.ns.png");
             stream.Position = 0;
@@ -51,18 +69,18 @@ namespace Mapsui.Samples.Metro
             pointLayer.Styles.Add(new SymbolStyle() { Symbol = new Bitmap() { Data = stream }, SymbolRotation = 45.0 });
             mapControl.Map.Layers.Add(pointLayer);
 
-            mapControl.ZoomToFullEnvelope();
-            mapControl.Refresh();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
+            // sample: zoomin...
             mapControl.ZoomIn();
             mapControl.Refresh();
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
+            // sample: zoomin...
             mapControl.ZoomOut();
             mapControl.Refresh();
         }
