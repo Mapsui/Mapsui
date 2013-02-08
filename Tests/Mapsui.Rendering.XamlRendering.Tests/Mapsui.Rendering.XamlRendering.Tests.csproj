@@ -33,6 +33,7 @@
     <Reference Include="nunit.framework">
       <HintPath>..\..\libs\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />

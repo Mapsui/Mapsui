@@ -57,7 +57,7 @@ namespace Mapsui.Rendering.XamlRendering
             frameworkElement.RenderTransform = new Media.MatrixTransform { Matrix = matrix };
         }
 
-#if NETFX_CORE
+#if !___NETFX_CORE
 
         public static UIElement RenderPoint(Point point, IStyle style, IViewport viewport)
         {

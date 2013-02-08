@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Windows.Media.Imaging;
 using Mapsui.Styles;
 using NUnit.Framework;
 using Mapsui.Geometries;
@@ -16,7 +17,7 @@ namespace Mapsui.Rendering.XamlRendering.Tests
         {
             // arrange
             var provider = new MemoryProvider();
-            provider.Features.Add(new Feature { Geometry = new Point(50, 50)});
+            provider.Features.Add(new Feature { Geometry = new Point(50, 50) });
             var view = new Viewport { Center = new Point(50, 50), Width = 100, Height = 100 };
             var layers = new[] { new Layer("test") { DataSource = provider } };
 
@@ -34,22 +35,20 @@ namespace Mapsui.Rendering.XamlRendering.Tests
             var viewport = new Viewport { Center = new Point(50, 50), Width = 200, Height = 200, Resolution = 1 };
             var layer = new InMemoryLayer();
             layer.MemoryProvider.Features.Add(new Feature { Geometry = new Point(50, 50) });
-            layer.Styles.Add(new VectorStyle { Fill = new Brush(Color.Red)});
+            layer.Styles.Add(new VectorStyle { Fill = new Brush(Color.Red) });
             var layers = new[] { layer };
             var renderer = new MapRenderer();
             const string imagePath = "vector_symbol_to_bitmap_stream.png";
 
             // act
             renderer.Render(viewport, layers);
-            using (var bitmap = renderer.ToBitmapStream(viewport.Width, viewport.Height))
-            {
-                if (Rendering.Default.WriteImageToDisk) WriteToDisk(imagePath, bitmap);
+            var bitmap = renderer.ToBitmapStream(viewport.Width, viewport.Height);
 
-                // assert
-                // The image read from file is not the same size but equal otherwise. Have to figure out why
-                //Assert.AreEqual(ReadFile(imagePath), bitmap.ToArray());
-                Assert.Pass();
-            }
+            // assert
+            //Assert.AreEqual(ReadFile(imagePath), bitmap.ToArray());
+
+            // aside
+            if (Rendering.Default.WriteImageToDisk) WriteToDisk(imagePath, bitmap);
         }
 
         [Test]
@@ -68,16 +67,13 @@ namespace Mapsui.Rendering.XamlRendering.Tests
 
             // act
             renderer.Render(viewport, layers);
-            using (var bitmap = renderer.ToBitmapStream(viewport.Width, viewport.Height))
-            {
-                if (Rendering.Default.WriteImageToDisk) WriteToDisk(imagePath, bitmap);
+            var bitmap = renderer.ToBitmapStream(viewport.Width, viewport.Height);
 
-                // assert
-                // The image read from file is not the same size but equal otherwise. Have to figure out why
-                //Assert.AreEqual(ReadFile(imagePath), bitmap.ToArray());
-                Assert.Pass();
-                bitmap.Close();
-            }
+            // assert
+            //Assert.AreEqual(ReadFile(imagePath), bitmap.ToArray());
+
+            // aside
+            if (Rendering.Default.WriteImageToDisk) WriteToDisk(imagePath, bitmap);
         }
 
         private static void WriteToDisk(string imagePath, MemoryStream bitmap)
@@ -115,11 +111,11 @@ namespace Mapsui.Rendering.XamlRendering.Tests
             const string icon = @"Mapsui.Rendering.XamlRendering.Tests.Resources.Images.iconthatneedsoffset.png";
             var iconThatNeedsOffsetStream = typeof(MapRendererTests).Assembly.GetManifestResourceStream(icon);
 
-            var feature = new Feature {Geometry = new Point(x, y)};
+            var feature = new Feature { Geometry = new Point(x, y) };
             feature.Styles.Add(new SymbolStyle
                 {
-                    Symbol = new Bitmap {Data = iconThatNeedsOffsetStream},
-                    SymbolOffset = new Offset {Y = -24},
+                    Symbol = new Bitmap { Data = iconThatNeedsOffsetStream },
+                    SymbolOffset = new Offset { Y = -24 },
                     SymbolRotation = rotation,
                 });
             return feature;
