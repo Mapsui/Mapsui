@@ -35,29 +35,16 @@ namespace Mapsui.Rendering.XamlRendering
         private static readonly IDictionary<IStyle, BitmapSource> BitmapCache
             = new Dictionary<IStyle, BitmapSource>();
 
+
+
+#if NETFX_CORE
         public static void PositionPoint(UIElement renderedGeometry, Point point, IStyle style, IViewport viewport)
         {
-            var frameworkElement = (FrameworkElement)renderedGeometry;
-            var symbolStyle = (style is SymbolStyle) ? style as SymbolStyle : new SymbolStyle();
-
-            double width, height;
-
-            if (symbolStyle.UnitType == UnitType.WorldUnit)
-            {
-                width = symbolStyle.Width * symbolStyle.SymbolScale;
-                height = symbolStyle.Height * symbolStyle.SymbolScale;
-            }
-            else
-            {
-                width = (renderedGeometry as Shapes.Rectangle).Width;
-                height = (renderedGeometry as Shapes.Rectangle).Height;
-            }
-
-            var matrix = CreateTransformMatrix(point, viewport, symbolStyle, width, height);
-            frameworkElement.RenderTransform = new Media.MatrixTransform { Matrix = matrix };
+            var matrix = Media.Matrix.Identity;
+            if (style is SymbolStyle) matrix = CreatePointSymbolMatrix(point, viewport.Resolution, style as SymbolStyle);
+            MatrixHelper.Append(ref matrix, CreateTransformMatrixW8(point, viewport));
+            renderedGeometry.RenderTransform = new Media.MatrixTransform { Matrix = matrix };
         }
-
-#if !___NETFX_CORE
 
         public static UIElement RenderPoint(Point point, IStyle style, IViewport viewport)
         {
@@ -137,6 +124,27 @@ namespace Mapsui.Rendering.XamlRendering
         }
 
 #else
+        public static void PositionPoint(UIElement renderedGeometry, Point point, IStyle style, IViewport viewport)
+        {
+            var frameworkElement = (FrameworkElement)renderedGeometry;
+            var symbolStyle = (style is SymbolStyle) ? style as SymbolStyle : new SymbolStyle();
+
+            double width, height;
+
+            if (symbolStyle.UnitType == UnitType.WorldUnit)
+            {
+                width = symbolStyle.Width * symbolStyle.SymbolScale;
+                height = symbolStyle.Height * symbolStyle.SymbolScale;
+            }
+            else
+            {
+                width = (renderedGeometry as Shapes.Rectangle).Width;
+                height = (renderedGeometry as Shapes.Rectangle).Height;
+            }
+
+            var matrix = CreateTransformMatrix(point, viewport, symbolStyle, width, height);
+            frameworkElement.RenderTransform = new Media.MatrixTransform { Matrix = matrix };
+        }
 
         public static UIElement RenderPoint(Point point, IStyle style, IViewport viewport)
         {

@@ -132,11 +132,7 @@ namespace Mapsui.Rendering.XamlRendering
                 if (renderedGeometry == null) 
                 {
                     renderedGeometry = RenderGeometry(viewport, style, feature);
-#if NETFX_CORE
-                if (feature.Geometry is IRaster) // positioning only supported for raster
-#else
-                if (feature.Geometry is Geometries.Point || feature.Geometry is IRaster) // positioning only supported for point and raster
-#endif
+                    if (feature.Geometry is Geometries.Point || feature.Geometry is IRaster) // positioning only supported for point and raster
                         feature.RenderedGeometry[style] = renderedGeometry;
                 }
                 else
