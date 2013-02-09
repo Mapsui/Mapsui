@@ -7,11 +7,11 @@ namespace Mapsui.Providers
 {
     public class Feature : IFeature
     {
-        private readonly Dictionary<string, object> dictionary;
+        private readonly Dictionary<string, object> _dictionary;
 
         public Feature()
         {
-            dictionary = new Dictionary<string, object>();
+            _dictionary = new Dictionary<string, object>();
             RenderedGeometry = new Dictionary<IStyle, object>();
             Styles = new Collection<IStyle>();
         }
@@ -24,13 +24,13 @@ namespace Mapsui.Providers
 
         public virtual object this[string key]
         {
-            get { return dictionary.ContainsKey(key) ? dictionary[key] : null; }
-            set { dictionary[key] = value; }
+            get { return _dictionary.ContainsKey(key) ? _dictionary[key] : null; }
+            set { _dictionary[key] = value; }
         }
 
         public IEnumerable<string> Fields
         {
-            get { foreach (var key in dictionary.Keys) yield return key; }
+            get { return _dictionary.Keys; }
         }
     }
 

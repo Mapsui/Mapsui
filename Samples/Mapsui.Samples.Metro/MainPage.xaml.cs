@@ -59,7 +59,7 @@ namespace Mapsui.Samples.Metro
         {
             mapControl.Map.Layers.Add(new TileLayer(new OsmTileSource()));
             
-            var pointLayer = PointLayerSample.CreateRandomPointLayer(mapControl.Map.Envelope, 25);
+            var pointLayer = PointLayerSample.CreateRandomPointLayer(mapControl.Map.Envelope, 200);
             
             // add some sample symbols (resource images) to the map...
             Assembly assembly = typeof(MainPage).GetTypeInfo().Assembly;

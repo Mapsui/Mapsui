@@ -46,7 +46,7 @@ namespace Mapsui.Rendering.XamlRendering
             matrix.OffsetY += offsetY;
         } 
 
-        public static void ScaleAt(ref Matrix matrix, double scaleX, double scaleY, double centerX, double centerY)
+        public static void ScaleAt(ref Matrix matrix, double scaleX, double scaleY, double centerX = 0, double centerY = 0)
         {
              Multiply(ref matrix, CreateScaling(scaleX, scaleY, centerX, centerY));
         }
@@ -148,7 +148,7 @@ namespace Mapsui.Rendering.XamlRendering
             return matrix;
         }
 
-        public static void RotateAt(ref Matrix matrix, double angle, double centerX, double centerY)
+        public static void RotateAt(ref Matrix matrix, double angle, double centerX = 0, double centerY = 0)
         {
             angle = angle % 360.0;
             Multiply(ref matrix, CreateRotationRadians(angle * 0.017453292519943295, centerX, centerY));

@@ -35,13 +35,11 @@ namespace Mapsui.Rendering.XamlRendering
         private static readonly IDictionary<IStyle, BitmapSource> BitmapCache
             = new Dictionary<IStyle, BitmapSource>();
 
-
-
 #if NETFX_CORE
         public static void PositionPoint(UIElement renderedGeometry, Point point, IStyle style, IViewport viewport)
         {
             var matrix = Media.Matrix.Identity;
-            if (style is SymbolStyle) matrix = CreatePointSymbolMatrix(point, viewport.Resolution, style as SymbolStyle);
+            if (style is SymbolStyle) matrix = CreatePointSymbolMatrix(viewport.Resolution, style as SymbolStyle);
             MatrixHelper.Append(ref matrix, CreateTransformMatrixW8(point, viewport));
             renderedGeometry.RenderTransform = new Media.MatrixTransform { Matrix = matrix };
         }
@@ -56,10 +54,10 @@ namespace Mapsui.Rendering.XamlRendering
                 var symbolStyle = style as SymbolStyle;
 
                 if (symbolStyle.Symbol == null || symbolStyle.Symbol.Data == null)
-                    symbol = CreateSymbolFromVectorStyle(symbolStyle); 
-                else 
+                    symbol = CreateSymbolFromVectorStyle(symbolStyle);
+                else
                     symbol = CreateSymbolFromBitmap(symbolStyle.Symbol.Data);
-                matrix = CreatePointSymbolMatrix(point, viewport.Resolution, symbolStyle);
+                matrix = CreatePointSymbolMatrix(viewport.Resolution, symbolStyle);
             }
             else
             {
@@ -75,9 +73,7 @@ namespace Mapsui.Rendering.XamlRendering
 
         private static UIElement CreateSymbolFromVectorStyle(VectorStyle style)
         {
-            var path = new Shapes.Path();
-
-            path.StrokeThickness = 0; //The SL default is 1 and causes blurry bitmaps
+            var path = new Shapes.Path { StrokeThickness = 0 };  //The SL StrokeThickness default is 1 which causes blurry bitmaps
 
             if (style.Fill != null && style.Fill.Color != null)
                 path.Fill = style.Fill.Convert();
@@ -89,29 +85,31 @@ namespace Mapsui.Rendering.XamlRendering
                 path.Stroke = new Media.SolidColorBrush(style.Outline.Color.Convert());
                 path.StrokeThickness = style.Outline.Width;
             }
-            path.Data = new Media.RectangleGeometry
+
+            path.Data = new Media.EllipseGeometry()
                 {
-                    Rect = new Rect(
-                        -SymbolStyle.DefaultWidth * 0.5, -SymbolStyle.DefaultHeight * 0.5,
-                        SymbolStyle.DefaultWidth, SymbolStyle.DefaultHeight)
+                    Center = new WinPoint(0, 0),
+                    RadiusX = SymbolStyle.DefaultWidth * 0.5,
+                    RadiusY = SymbolStyle.DefaultHeight * 0.5
                 };
             return path;
         }
 
-        private static Media.Matrix CreatePointSymbolMatrix(Point point, double resolution, SymbolStyle symbolStyle)
+        private static Media.Matrix CreatePointSymbolMatrix(double resolution, SymbolStyle symbolStyle)
         {
             var matrix = Media.Matrix.Identity;
             MatrixHelper.InvertY(ref matrix);
-            var centerX = point.X + symbolStyle.SymbolOffset.X;
-            var centerY = point.Y + symbolStyle.SymbolOffset.Y;
+            var centerX = symbolStyle.SymbolOffset.X;
+            var centerY = symbolStyle.SymbolOffset.Y;
+
             var scale = symbolStyle.SymbolScale;
             MatrixHelper.Translate(ref matrix, centerX, centerY);
-            MatrixHelper.ScaleAt(ref matrix, scale, scale, point.X, point.Y);
+            MatrixHelper.ScaleAt(ref matrix, scale, scale);
 
             //for point symbols we want the size to be independent from the resolution. We do this by counter scaling first.
             if (symbolStyle.UnitType != UnitType.WorldUnit)
-                MatrixHelper.ScaleAt(ref matrix, resolution, resolution, point.X, point.Y);
-            MatrixHelper.RotateAt(ref matrix, -symbolStyle.SymbolRotation, point.X, point.Y);
+                MatrixHelper.ScaleAt(ref matrix, resolution, resolution);
+            MatrixHelper.RotateAt(ref matrix, -symbolStyle.SymbolRotation);
 
             return matrix;
         }
@@ -119,6 +117,7 @@ namespace Mapsui.Rendering.XamlRendering
         private static Media.Matrix CreateTransformMatrixW8(Point point, IViewport viewport)
         {
             var matrix = Media.Matrix.Identity;
+            MatrixHelper.Translate(ref matrix, point.X, point.Y);
             MatrixHelper.ApplyViewTransform(ref matrix, viewport);
             return matrix;
         }
@@ -297,7 +296,7 @@ namespace Mapsui.Rendering.XamlRendering
             // and now write a path to the bitmap. I haven't figured out how.
             bitmap.Invalidate();
             return bitmap;
-#elif SILVERLIGHT 
+#elif SILVERLIGHT
             element.UpdateLayout();
             var bitmap = new WriteableBitmap(element, null);
             bitmap.Invalidate();
@@ -384,9 +383,9 @@ namespace Mapsui.Rendering.XamlRendering
         private static BitmapImage CreateBitmapImage(System.IO.Stream imageData)
         {
             var bitmapImage = new BitmapImage();
-#if SILVERLIGHT 
+#if SILVERLIGHT
             imageData.Position = 0;
-            bitmapImage.SetSource(imageData);     
+            bitmapImage.SetSource(imageData);
 #elif NETFX_CORE
             imageData.Position = 0;
             var memoryStream = new System.IO.MemoryStream();

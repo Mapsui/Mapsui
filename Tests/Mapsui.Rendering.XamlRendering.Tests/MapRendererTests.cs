@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Windows.Media.Imaging;
 using Mapsui.Styles;
@@ -12,73 +13,61 @@ namespace Mapsui.Rendering.XamlRendering.Tests
     [TestFixture, RequiresSTA]
     class MapRendererTests
     {
-        [Test]
-        public static void RenderLayer()
-        {
-            // arrange
-            var provider = new MemoryProvider();
-            provider.Features.Add(new Feature { Geometry = new Point(50, 50) });
-            var view = new Viewport { Center = new Point(50, 50), Width = 100, Height = 100 };
-            var layers = new[] { new Layer("test") { DataSource = provider } };
-
-            // act
-            new MapRenderer().Render(view, layers);
-
-            // assert
-            Assert.Pass();
-        }
+        private const string ImagesFolder = "Resources\\Images\\TestOutput";
 
         [Test]
-        public static void RenderVectorSymbolToBitmapStream()
+        public static void RenderVectorSymbol()
         {
             // arrange
-            var viewport = new Viewport { Center = new Point(50, 50), Width = 200, Height = 200, Resolution = 1 };
+            var viewport = new Viewport { Center = new Point(100, 100), Width = 200, Height = 200, Resolution = 1 };
             var layer = new InMemoryLayer();
-            layer.MemoryProvider.Features.Add(new Feature { Geometry = new Point(50, 50) });
-            layer.Styles.Add(new VectorStyle { Fill = new Brush(Color.Red) });
+            layer.MemoryProvider.Features.Add(new Feature { Geometry = new Point(50, 50), Styles = new[] { new VectorStyle { Fill = new Brush(Color.Red)} } });
+            layer.MemoryProvider.Features.Add(new Feature { Geometry = new Point(50, 100), Styles = new[] { new VectorStyle { Fill = new Brush(Color.Yellow), Outline = new Pen(Color.Black, 2) } } });
+            layer.MemoryProvider.Features.Add(new Feature { Geometry = new Point(100, 50), Styles = new[] { new VectorStyle { Fill = new Brush(Color.Blue), Outline = new Pen(Color.White, 2) } } });
+            layer.MemoryProvider.Features.Add(new Feature { Geometry = new Point(100, 100), Styles = new[] { new VectorStyle { Fill = new Brush(Color.Green), Outline = null } } });
             var layers = new[] { layer };
             var renderer = new MapRenderer();
-            const string imagePath = "vector_symbol_to_bitmap_stream.png";
+            const string imagePath = ImagesFolder + "\\vector_symbol.png";
 
             // act
             renderer.Render(viewport, layers);
             var bitmap = renderer.ToBitmapStream(viewport.Width, viewport.Height);
 
-            // assert
-            //Assert.AreEqual(ReadFile(imagePath), bitmap.ToArray());
-
             // aside
             if (Rendering.Default.WriteImageToDisk) WriteToDisk(imagePath, bitmap);
+
+            // assert
+            Assert.AreEqual(ReadFile(imagePath), bitmap.ToArray());
         }
 
         [Test]
         public static void RenderRotatedBitmapSymbolWithOffset()
         {
             // arrange
-            var viewport = new Viewport { Center = new Point(100, 100), Width = 200, Height = 200, Resolution = 1 };
+            var viewport = new Viewport { Center = new Point(80, 80), Width = 200, Height = 200, Resolution = 1 };
             var layer = new InMemoryLayer();
             layer.MemoryProvider.Features.Add(CreateFeatureWithRotatedBitmapSymbol(75, 75, 0));
             layer.MemoryProvider.Features.Add(CreateFeatureWithRotatedBitmapSymbol(75, 125, 90));
             layer.MemoryProvider.Features.Add(CreateFeatureWithRotatedBitmapSymbol(125, 125, 180));
             layer.MemoryProvider.Features.Add(CreateFeatureWithRotatedBitmapSymbol(125, 75, 270));
             var layers = new[] {layer};
-            const string imagePath = "rotated_bitmap_symbol.png";
+            const string imagePath = ImagesFolder + "\\bitmap_symbol.png";
             var renderer = new MapRenderer();
 
             // act
             renderer.Render(viewport, layers);
             var bitmap = renderer.ToBitmapStream(viewport.Width, viewport.Height);
 
-            // assert
-            //Assert.AreEqual(ReadFile(imagePath), bitmap.ToArray());
-
             // aside
             if (Rendering.Default.WriteImageToDisk) WriteToDisk(imagePath, bitmap);
+
+            // assert
+            Assert.AreEqual(ReadFile(imagePath), bitmap.ToArray());
         }
 
         private static void WriteToDisk(string imagePath, MemoryStream bitmap)
         {
-            using (var fileStream = File.OpenWrite(imagePath))
+            using (var fileStream = new FileStream(imagePath, FileMode.Create, FileAccess.Write))
             {
                 bitmap.WriteTo(fileStream);
             }
@@ -112,6 +101,7 @@ namespace Mapsui.Rendering.XamlRendering.Tests
             var iconThatNeedsOffsetStream = typeof(MapRendererTests).Assembly.GetManifestResourceStream(icon);
 
             var feature = new Feature { Geometry = new Point(x, y) };
+
             feature.Styles.Add(new SymbolStyle
                 {
                     Symbol = new Bitmap { Data = iconThatNeedsOffsetStream },
