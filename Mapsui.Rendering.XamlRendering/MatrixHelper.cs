@@ -9,19 +9,7 @@ namespace Mapsui.Rendering.XamlRendering
 {
     public static class MatrixHelper
     {
-        public static void ApplyViewTransform(ref Matrix matrix, IViewport viewport)
-        {
-            double mapCenterX = viewport.Width * 0.5;
-            double mapCenterY = viewport.Height * 0.5;
-            
-            Translate(ref matrix, mapCenterX - viewport.CenterX, mapCenterY - viewport.CenterY);
-            ScaleAt(ref matrix, 1 / viewport.Resolution, 1 / viewport.Resolution, mapCenterX, mapCenterY);
-
-            //append invert the Y, but also the whole image
-            InvertY(ref matrix, mapCenterY);
-        }
-
-        public static void InvertY(ref Matrix matrix, double centerY = 0)
+       public static void InvertY(ref Matrix matrix, double centerY = 0)
         {
             Translate(ref matrix, 0, -centerY);
             Append(ref matrix, new Matrix(1, 0, 0, -1, 0, 0));

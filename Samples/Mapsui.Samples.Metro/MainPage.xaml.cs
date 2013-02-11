@@ -1,23 +1,12 @@
 ﻿using BruTile.Web;
 using Mapsui.Layers;
-using Mapsui.Providers;
 using Mapsui.Samples.Common;
 using Mapsui.Styles;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+using System.Reflection;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using BruTile;
-using System.Reflection;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -28,23 +17,23 @@ namespace Mapsui.Samples.Metro
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        bool first = true;
+        bool _first = true;
 
         public MainPage()
         {
-            this.InitializeComponent();
-            this.mapControl.ViewChanged += mapControl_ViewChanged;
+            InitializeComponent();
+            mapControl.ViewChanged += mapControl_ViewChanged;
         }
 
         void mapControl_ViewChanged(object sender, Windows.ViewChangedEventArgs e)
         {
-            if (first)
+            if (_first)
             {
-                first = false;
+                _first = false;
 
                 // sample: zoom to default area at startup
-                var beginPoint = new Mapsui.Geometries.Point(-4000000, 2000000);
-                var endPoint = new Mapsui.Geometries.Point(4000000, 11000000);
+                var beginPoint = new Geometries.Point(-4000000, 2000000);
+                var endPoint = new Geometries.Point(4000000, 11000000);
                 mapControl.ZoomToBox(beginPoint, endPoint);
                 mapControl.Refresh();
             }
@@ -62,8 +51,8 @@ namespace Mapsui.Samples.Metro
             var pointLayer = PointLayerSample.CreateRandomPointLayer(mapControl.Map.Envelope, 200);
             
             // add some sample symbols (resource images) to the map...
-            Assembly assembly = typeof(MainPage).GetTypeInfo().Assembly;
-            Stream stream = assembly.GetManifestResourceStream(@"Mapsui.Samples.Metro.Resources.Images.ns.png");
+            var assembly = typeof(MainPage).GetTypeInfo().Assembly;
+            var stream = assembly.GetManifestResourceStream(@"Mapsui.Samples.Metro.Resources.Images.ns.png");
             stream.Position = 0;
             pointLayer.Styles.Clear();
             pointLayer.Styles.Add(new SymbolStyle() { Symbol = new Bitmap() { Data = stream }, SymbolRotation = 45.0 });

@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Windows.Media.Imaging;
-using Mapsui.Styles;
-using NUnit.Framework;
-using Mapsui.Geometries;
+﻿using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
+using Mapsui.Styles;
+using NUnit.Framework;
+using System.IO;
 
 namespace Mapsui.Rendering.XamlRendering.Tests
 {
@@ -14,6 +11,29 @@ namespace Mapsui.Rendering.XamlRendering.Tests
     class MapRendererTests
     {
         private const string ImagesFolder = "Resources\\Images\\TestOutput";
+
+        [Test]
+        public static void RenderSymbolUnitTypes()
+        {
+            // arrange
+            var viewport = new Viewport { Center = new Point(0, 0), Width = 200, Height = 100, Resolution = 0.5 };
+            var layer = new InMemoryLayer();
+            layer.MemoryProvider.Features.Add(CreateFeatureWithSymbolStyle(-20, 0, UnitType.Pixel));
+            layer.MemoryProvider.Features.Add(CreateFeatureWithSymbolStyle(20, 0, UnitType.WorldUnit));
+            var layers = new[] { layer };
+            const string imagePath = ImagesFolder + "\\bitmap_symbol_unittype.png";
+            var renderer = new MapRenderer();
+
+            // act
+            renderer.Render(viewport, layers);
+            var bitmap = renderer.ToBitmapStream(viewport.Width, viewport.Height);
+
+            // aside
+            if (Rendering.Default.WriteImageToDisk) WriteToDisk(imagePath, bitmap);
+
+            // assert
+            Assert.AreEqual(ReadFile(imagePath), bitmap.ToArray());
+        }
 
         [Test]
         public static void RenderVectorSymbol()
@@ -93,6 +113,13 @@ namespace Mapsui.Rendering.XamlRendering.Tests
                 fileStream.Close();
             }
             return buffer;
+        }
+
+        private static Feature CreateFeatureWithSymbolStyle(double x, double y, UnitType unitType)
+        {
+            var feature = new Feature { Geometry = new Point(x, y) };
+            feature.Styles.Add(new SymbolStyle{ UnitType = unitType });
+            return feature;
         }
 
         private static Feature CreateFeatureWithRotatedBitmapSymbol(double x, double y, double rotation)

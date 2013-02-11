@@ -6,7 +6,8 @@ using System.Windows;
 #if !NETFX_CORE
 using System.Windows.Controls;
 using System.Windows.Media;
-using System.Windows.Media.Animation;using System.Windows.Media.Imaging;
+using System.Windows.Media.Animation;
+using System.Windows.Media.Imaging;
 using AnimateEventHandler = System.EventHandler;
 #else
 using Windows.UI.Xaml.Controls;
@@ -38,6 +39,10 @@ namespace Mapsui.Rendering.XamlRendering
 
         public void Render(IViewport viewport, IEnumerable<ILayer> layers)
         {
+#if !SILVERLIGHT &&  !NETFX_CORE
+            target.BeginInit();
+#endif
+            target.Visibility = Visibility.Collapsed;
             foreach (var child in target.Children)
             {
                 if (child is Canvas)
@@ -46,7 +51,7 @@ namespace Mapsui.Rendering.XamlRendering
                 }
             }
             target.Children.Clear();
-                        
+
             foreach (var layer in layers)
             {
                 if (layer.Enabled &&
@@ -57,6 +62,10 @@ namespace Mapsui.Rendering.XamlRendering
                 }
             }
             target.Arrange(new Rect(0, 0, viewport.Width, viewport.Height));
+            target.Visibility = Visibility.Visible;
+#if !SILVERLIGHT &&  !NETFX_CORE
+            target.EndInit();
+#endif
         }
 
         private static void RenderLayer(Canvas target, IViewport viewport, ILayer layer)
@@ -116,8 +125,8 @@ namespace Mapsui.Rendering.XamlRendering
             }
             catch (Exception)
             {
-                return new Canvas();   
-            }                    
+                return new Canvas();
+            }
         }
 
         private static void RenderFeature(Canvas canvas, IViewport viewport, IStyle style, Providers.IFeature feature)
@@ -126,10 +135,10 @@ namespace Mapsui.Rendering.XamlRendering
             {
                 canvas.Children.Add(LabelRenderer.RenderLabel(feature.Geometry.GetBoundingBox().GetCentroid(), new Offset(), style as LabelStyle, viewport));
             }
-            else 
+            else
             {
                 var renderedGeometry = feature.RenderedGeometry.ContainsKey(style) ? feature.RenderedGeometry[style] as UIElement : null;
-                if (renderedGeometry == null) 
+                if (renderedGeometry == null)
                 {
                     renderedGeometry = RenderGeometry(viewport, style, feature);
                     if (feature.Geometry is Geometries.Point || feature.Geometry is IRaster) // positioning only supported for point and raster

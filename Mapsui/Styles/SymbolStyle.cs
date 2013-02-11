@@ -60,9 +60,9 @@ namespace Mapsui.Styles
 
         public double Height { get; set; }
 
-        public const double DefaultWidth = 48;
+        public const double DefaultWidth = 32;
 
-        public const double DefaultHeight = 48;
+        public const double DefaultHeight = 32;
 
         #region Equals operator
 

@@ -43,23 +43,23 @@ namespace Mapsui.Samples.Common
            var result = new List<IGeometry>();
             for (int i = 0; i < count; i++)
             {
-                result.Add(new Mapsui.Geometries.Point(random.NextDouble() * box.Width + box.Left, random.NextDouble() * box.Height - box.Top));
+                result.Add(new Point(random.NextDouble() * box.Width + box.Left, random.NextDouble() * box.Height - box.Top));
             }
             return result;
         }
 
         public static Point GenerateRandomPoint(BoundingBox box)
         {            
-            return new Mapsui.Geometries.Point(random.NextDouble() * box.Width + box.Left, random.NextDouble() * box.Height - box.Top);
+            return new Point(random.NextDouble() * box.Width + box.Left, random.NextDouble() * box.Height - box.Top);
         }
 
         public static ILayer CreateRandomPointLayer(BoundingBox envelope, int count = 25)
         {
             var pointLayer = new Layer("pointLayer")
                 {
-                    DataSource = new MemoryProvider(PointLayerSample.GenerateRandomPoints(envelope, count)),
+                    DataSource = new MemoryProvider(GenerateRandomPoints(envelope, count)),
                 };
-            pointLayer.Styles.Add(new VectorStyle() { Fill = new Brush(Color.Red) });
+            pointLayer.Styles.Add(new VectorStyle { Fill = new Brush(Color.White)});
             return pointLayer;
         }
 
@@ -67,7 +67,7 @@ namespace Mapsui.Samples.Common
         {
             var pointLayer = new Layer("pointLayer")
                 {
-                    DataSource = new MemoryProvider(PointLayerSample.GenerateRandomPolygons(envelope, count))
+                    DataSource = new MemoryProvider(GenerateRandomPolygons(envelope, count))
                 };
 
             pointLayer.Styles.Add(new VectorStyle()

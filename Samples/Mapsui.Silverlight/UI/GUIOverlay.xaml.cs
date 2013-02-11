@@ -55,25 +55,14 @@ namespace Mapsui.Silverlight
             var osmLayer = new TileLayer(new OsmTileSource()) { LayerName = "OSM" };
             map.Layers.Add(osmLayer);
 
-            var pointLayer = PointLayerSample.CreateRandomPointLayer(map.Envelope, 25);
+            var pointLayer = PointLayerSample.CreateRandomPointLayer(map.Envelope, 600);
             var bitmapData = System.Reflection.Assembly.GetExecutingAssembly()
               .GetManifestResourceStream("Mapsui.Silverlight.UI.Images.btnBbox.png");
-            var symbolStyle = new SymbolStyle() { Symbol = new Bitmap { Data = bitmapData } };
+            var symbolStyle = new SymbolStyle { Symbol = new Bitmap { Data = bitmapData } };
             pointLayer.Styles.Add(symbolStyle);
             map.Layers.Add(pointLayer);
 
             return map;
-        }
-
-        private static IEnumerable<IGeometry> GenerateRandomPoints(BoundingBox box)
-        {
-            var random = new Random();
-            var result = new List<IGeometry>();
-            for (int i = 0; i < 30; i++)
-            {
-                result.Add(new Geometries.Point(random.NextDouble() * box.Width + box.Left, random.NextDouble() * box.Height - box.Top));
-            }
-            return result;
         }
 
         void FillLayerList(Map map)
