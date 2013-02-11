@@ -66,6 +66,8 @@ namespace Mapsui.Rendering.XamlRendering
 
             symbol.RenderTransform = new Media.MatrixTransform { Matrix = matrix };
 
+            symbol.IsHitTestVisible = false;
+
             return symbol;
         }
 

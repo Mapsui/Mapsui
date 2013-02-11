@@ -25,13 +25,9 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Windows;
-using System.Windows.Input;
-using Windows.Devices.Input;
 using Windows.Foundation;
 using Windows.UI;
 using Windows.UI.Core;
-using Windows.UI.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
@@ -689,8 +685,6 @@ namespace Mapsui.Windows
             previousPosition = e.Position;
             
             invalid = true;
-            // not calling map.ViewChanged(false, view.Extent, view.Resolution); for smoother panning/zooming
-            OnViewChanged(false, true);            
         }
 
         public static double Distance(double x1, double y1, double x2, double y2)
