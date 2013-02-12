@@ -212,56 +212,6 @@ namespace Mapsui.Rendering.XamlRendering
             return data;
         }
 
-        private static BitmapSource ToBitmap(Shapes.Path element, double width, double height)
-        {
-#if NETFX_CORE
-            element.UpdateLayout();
-            WriteableBitmap bitmap = new WriteableBitmap((int)width, (int)height);
-            // and now write a path to the bitmap. I haven't figured out how.
-            bitmap.Invalidate();
-            return bitmap;
-#elif SILVERLIGHT
-            element.UpdateLayout();
-            var bitmap = new WriteableBitmap(element, null);
-            bitmap.Invalidate();
-            return bitmap;
-#else
-            element.Arrange(new Rect(0, 0, width, height));
-            var renderTargetBitmap = new RenderTargetBitmap((int)width, (int)height, 96, 96, new Media.PixelFormat());
-            renderTargetBitmap.Render(element);
-            return renderTargetBitmap;
-#endif
-        }
-#if !WINDOWS_PHONE && !NETFX_CORE
-        public static DropShadowEffect CreateDropShadow(double angle)
-        {
-            // Initialize a new DropShadowEffect that will be applied
-            // to the Button.
-            DropShadowEffect myDropShadowEffect = new DropShadowEffect();
-
-            // Set the color of the shadow to Black.
-            var myShadowColor = new WinColor {A = 255, B = 50, G = 50, R = 50};
-            // The Opacity property is used to control the alpha.
-
-            myDropShadowEffect.Color = myShadowColor;
-
-            // Set the direction of where the shadow is cast to 320 degrees.
-            myDropShadowEffect.Direction = 45 + angle;
-
-            // Set the depth of the shadow being cast.
-            myDropShadowEffect.ShadowDepth = 5;
-
-            // Set the shadow softness to the maximum (range of 0-1).
-            myDropShadowEffect.BlurRadius = 6;
-
-            // Set the shadow opacity to half opaque or in other words - half transparent.
-            // The range is 0-1.
-            myDropShadowEffect.Opacity = 0.5;
-
-            return myDropShadowEffect;
-        }
-#endif
-
         private static Shapes.Path CreatePointPath(SymbolStyle style)
         {
             //todo: use this:
@@ -389,20 +339,15 @@ namespace Mapsui.Rendering.XamlRendering
         {
             var pathFigure = new Media.PathFigure
                 {
-                    StartPoint = ConvertPoint(WorldToView(linearRing.StartPoint, viewport))
+                    StartPoint = ConvertPoint(viewport.WorldToScreen(linearRing.StartPoint))
                 };
 
             foreach (var point in linearRing.Vertices)
             {
                 pathFigure.Segments.Add(
-                    new Media.LineSegment { Point = ConvertPoint(WorldToView(point, viewport)) });
+                    new Media.LineSegment { Point = ConvertPoint(viewport.WorldToScreen(point)) });
             }
             return pathFigure;
-        }
-
-        public static Point WorldToView(Point point, IViewport viewport)
-        {
-            return viewport.WorldToScreen(point);
         }
 
         private static WinPoint ConvertPoint(Point point)
