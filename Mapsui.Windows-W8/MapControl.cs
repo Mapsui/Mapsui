@@ -45,13 +45,10 @@ namespace Mapsui.Windows
         private readonly Viewport viewport = new Viewport();
         private Point previousMousePosition;
         private Point currentMousePosition;
-        private Point downMousePosition;
         private string errorMessage;
         private readonly DoubleAnimation zoomAnimation = new DoubleAnimation();
         private readonly Storyboard zoomStoryBoard = new Storyboard();
-        private double toResolution = double.NaN;
         private bool mouseDown;
-        private bool IsInBoxZoomMode { get; set; }
         private bool viewInitialized;
         private readonly Canvas renderCanvas = new Canvas();
         private readonly IRenderer renderer;
@@ -170,18 +167,11 @@ namespace Mapsui.Windows
             MouseInfoOverLayers = new List<ILayer>();
             MouseInfoDownLayers = new List<ILayer>();
             Loaded += MapControlLoaded;
-            //!!!KeyDown += MapControlKeyDown;
-            //!!!KeyUp += MapControlKeyUp;
-            //!!!MouseLeftButtonDown += MapControlMouseLeftButtonDown;
-            //!!!MouseLeftButtonUp += MapControlMouseLeftButtonUp;
-            //!!!MouseMove += MapControlMouseMove;
-            //!!!MouseLeave += MapControlMouseLeave;
 
             SizeChanged += MapControlSizeChanged;
             CompositionTarget.Rendering += CompositionTarget_Rendering;
             canvas.Children.Add(renderCanvas);
             renderer = new MapRenderer(renderCanvas);
-            //!!!Dispatcher.ShutdownStarted += DispatcherShutdownStarted;
             PointerWheelChanged += MapControl_PointerWheelChanged;
             
             ManipulationMode = ManipulationModes.Scale | ManipulationModes.TranslateX | ManipulationModes.TranslateY;     
@@ -196,6 +186,8 @@ namespace Mapsui.Windows
                 return;
 
             currentMousePosition = e.GetCurrentPoint(this).RawPosition; //Needed for both MouseMove and MouseWheel event for mousewheel event
+
+            var toResolution = viewport.Resolution;
 
             if (double.IsNaN(toResolution))
             {
@@ -214,6 +206,7 @@ namespace Mapsui.Windows
             e.Handled = true; //so that the scroll event is not sent to the html page.
 
             //some cheating for personal gain
+            viewport.Resolution = toResolution;
             viewport.CenterX += 0.000000001;
             viewport.CenterY += 0.000000001;
             map.ViewChanged(false, viewport.Extent, viewport.Resolution);
@@ -267,16 +260,22 @@ namespace Mapsui.Windows
             if (ZoomLocked)
                 return;
 
+            var toResolution = viewport.Resolution;
+
             if (double.IsNaN(toResolution))
                 toResolution = viewport.Resolution;
 
             toResolution = ZoomHelper.ZoomIn(map.Resolutions, toResolution);
-            viewport.Resolution = toResolution;            
-
+            viewport.Resolution = toResolution;
         }
 
         public void ZoomOut()
         {
+            if (ZoomLocked)
+                return;
+
+            var toResolution = viewport.Resolution;
+
             if (double.IsNaN(toResolution))
                 toResolution = viewport.Resolution;
 
@@ -324,7 +323,6 @@ namespace Mapsui.Windows
             RefreshGraphics();
         }
 
-
         private void MapControlLoaded(object sender, RoutedEventArgs e)
         {
             if (!viewInitialized) InitializeView();
@@ -363,12 +361,6 @@ namespace Mapsui.Windows
             }
         }
 
-        //private void MapControlMouseLeave(object sender, MouseEventArgs e)
-        //{
-        //    previousMousePosition = new Point();
-        //    ReleaseMouseCapture();
-        //}
-
         public void MapDataChanged(object sender, DataChangedEventArgs e)
         {
             if (!Dispatcher.HasThreadAccess)
@@ -398,88 +390,6 @@ namespace Mapsui.Windows
                 }
             }
         }
-
-        //private void MapControlMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        //{
-        //    var eventArgs = GetMouseInfoEventArgs(e.GetPosition(this), MouseInfoDownLayers);
-        //    OnMouseInfoDown(eventArgs ?? new MouseInfoEventArgs());
-        //    previousMousePosition = e.GetPosition(this);
-        //    downMousePosition = e.GetPosition(this);
-        //    mouseDown = true;
-        //    CaptureMouse();
-        //}
-
-        //private void MapControlMouseLeftButtonUp(object sender, PointerButtonEventArgs e)
-        //{
-        //    if (IsInBoxZoomMode || ZoomToBoxMode)
-        //    {
-        //        ZoomToBoxMode = false;
-        //        Geometries.Point previous = Viewport.ScreenToWorld(previousMousePosition.X, previousMousePosition.Y);
-        //        Geometries.Point current = Viewport.ScreenToWorld(e.GetPosition(this).X, e.GetPosition(this).Y);
-        //        ZoomToBox(previous, current);
-        //    }
-        //    else
-        //    {
-        //        HandleFeatureInfo(e);
-        //    }
-
-        //    map.ViewChanged(true, viewport.Extent, viewport.Resolution);
-        //    OnViewChanged(true, true);
-        //    mouseDown = false;
-
-        //    previousMousePosition = new Point();
-        //    base.ReleasePointerCapture();
-        //}
-
-        //private void HandleFeatureInfo(MouseButtonEventArgs e)
-        //{
-        //    if (FeatureInfo == null) return; // don't fetch if you the call back is not set.
-
-        //    if (downMousePosition == e.GetPosition(this))
-        //    {
-        //        foreach (var layer in Map.Layers)
-        //        {
-        //            if (layer is IFeatureInfo)
-        //            {
-        //                (layer as IFeatureInfo).GetFeatureInfo(viewport, downMousePosition.X, downMousePosition.Y, OnFeatureInfo);
-        //            }
-        //        }
-        //    }
-        //}
-
-        //private void OnFeatureInfo(IDictionary<string, IEnumerable<IFeature>> features)
-        //{
-        //    if (FeatureInfo != null)
-        //    {
-        //        FeatureInfo(this, new FeatureInfoEventArgs { FeatureInfo = features });
-        //    }
-        //}
-
-        //private void MapControlMouseMove(object sender, MouseEventArgs e)
-        //{
-        //    if (IsInBoxZoomMode || ZoomToBoxMode)
-        //    {
-        //        DrawBbox(e.GetPosition(this));
-        //        return;
-        //    }
-
-        //    if (!mouseDown) RaiseMouseInfoEvents(e.GetPosition(this));
-
-        //    if (mouseDown)
-        //    {
-        //        if (previousMousePosition == new Point())
-        //        {
-        //            return; // It turns out that sometimes MouseMove+Pressed is called before MouseDown
-        //        }
-
-        //        currentMousePosition = e.GetPosition(this); //Needed for both MouseMove and MouseWheel event
-        //        viewport.Transform(currentMousePosition.X, currentMousePosition.Y, previousMousePosition.X, previousMousePosition.Y);
-        //        previousMousePosition = currentMousePosition;
-        //        map.ViewChanged(false, viewport.Extent, viewport.Resolution);
-        //        OnViewChanged(false, true);
-        //        RefreshGraphics();
-        //    }
-        //}
 
         private void RaiseMouseInfoEvents(Point mousePosition)
         {
@@ -565,15 +475,6 @@ namespace Mapsui.Windows
             }
         }
 
-        private void DispatcherShutdownStarted(object sender, EventArgs e)
-        {
-            CompositionTarget.Rendering -= CompositionTarget_Rendering;
-            if (map != null)
-            {
-                map.Dispose();
-            }
-        }
-
         #endregion
 
         #region Bbox zoom
@@ -591,7 +492,6 @@ namespace Mapsui.Windows
 
             viewport.Center = new Geometries.Point(x, y);
             viewport.Resolution = resolution;
-            toResolution = resolution;
 
             map.ViewChanged(true, viewport.Extent, viewport.Resolution);
             OnViewChanged(true, true);
@@ -604,51 +504,6 @@ namespace Mapsui.Windows
             bboxRect.Margin = new Thickness(0, 0, 0, 0);
             bboxRect.Width = 0;
             bboxRect.Height = 0;
-        }
-
-        //private void MapControlKeyUp(object sender, KeyEventArgs e)
-        //{
-        //    String keyName = e.Key.ToString().ToLower();
-        //    if (keyName.Equals("ctrl") || keyName.Equals("leftctrl") || keyName.Equals("rightctrl"))
-        //    {
-        //        IsInBoxZoomMode = false;
-        //    }
-        //}
-
-        //private void MapControlKeyDown(object sender, KeyEventArgs e)
-        //{
-        //    String keyName = e.Key.ToString().ToLower();
-        //    if (keyName.Equals("ctrl") || keyName.Equals("leftctrl") || keyName.Equals("rightctrl"))
-        //    {
-        //        IsInBoxZoomMode = true;
-        //    }
-        //}
-
-        private void DrawBbox(Point newPos)
-        {
-            if (mouseDown)
-            {
-                Point from = previousMousePosition;
-                Point to = newPos;
-
-                if (from.X > to.X)
-                {
-                    Point temp = from;
-                    from.X = to.X;
-                    to.X = temp.X;
-                }
-
-                if (from.Y > to.Y)
-                {
-                    Point temp = from;
-                    from.Y = to.Y;
-                    to.Y = temp.Y;
-                }
-
-                bboxRect.Width = to.X - from.X;
-                bboxRect.Height = to.Y - from.Y;
-                bboxRect.Margin = new Thickness(from.X, from.Y, 0, 0);
-            }
         }
 
         #endregion

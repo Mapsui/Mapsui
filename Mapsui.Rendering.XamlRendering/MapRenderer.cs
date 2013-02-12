@@ -92,8 +92,7 @@ namespace Mapsui.Rendering.XamlRendering
             // when clearing and adding features to a layer while rendering
             try
             {
-                var canvas = new Canvas();
-                canvas.Opacity = layer.Opacity;
+                var canvas = new Canvas {Opacity = layer.Opacity};
                 var features = layer.GetFeaturesInView(viewport.Extent, viewport.Resolution).ToList();
 
                 foreach (var layerStyle in layer.Styles)

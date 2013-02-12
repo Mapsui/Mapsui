@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Windows;
 #if !NETFX_CORE
+using System.Windows;
 using Media = System.Windows.Media;
 using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
@@ -182,17 +182,18 @@ namespace Mapsui.Rendering.XamlRendering
             if (symbolStyle.SymbolType == SymbolType.Rectangle)
                 path.Data = CreateRectangle(width, height, path.StrokeThickness);
             else if (symbolStyle.SymbolType == SymbolType.Ellipse)
-                path.Data = CreateEllipse(width, height, path.StrokeThickness);
+                path.Data = CreateEllipse(width, height);
             return path;
         }
 
-        private static Media.EllipseGeometry CreateEllipse(double width, double height, double strokeThickness)
+        private static Media.EllipseGeometry CreateEllipse(double width, double height)
         {
-            var margin = strokeThickness * 0.5;
-            var data = new Media.EllipseGeometry();
-            data.Center = new WinPoint(width * 0.5 + margin, height * 0.5 + margin);
-            data.RadiusX = width * 0.5;
-            data.RadiusY = height * 0.5;
+            var data = new Media.EllipseGeometry
+                {
+                    Center = new WinPoint(width*0.5, height*0.5),
+                    RadiusX = width*0.5,
+                    RadiusY = height*0.5
+                };
             return data;
         }
 
@@ -236,15 +237,11 @@ namespace Mapsui.Rendering.XamlRendering
         {
             // Initialize a new DropShadowEffect that will be applied
             // to the Button.
-            var myDropShadowEffect = new DropShadowEffect();
+            DropShadowEffect myDropShadowEffect = new DropShadowEffect();
 
             // Set the color of the shadow to Black.
-            var myShadowColor = new WinColor();
-            myShadowColor.A = 255; // Note that the alpha value is ignored by Color property. 
+            var myShadowColor = new WinColor {A = 255, B = 50, G = 50, R = 50};
             // The Opacity property is used to control the alpha.
-            myShadowColor.B = 50;
-            myShadowColor.G = 50;
-            myShadowColor.R = 50;
 
             myDropShadowEffect.Color = myShadowColor;
 
@@ -286,12 +283,13 @@ namespace Mapsui.Rendering.XamlRendering
                 path.Fill = new Media.ImageBrush { ImageSource = bitmapImage };
 
                 //Changes the rotation of the symbol
-                var rotation = new Media.RotateTransform();
-                rotation.Angle = style.SymbolRotation;
-                rotation.CenterX = bitmapImage.PixelWidth * style.SymbolScale * 0.5;
-                rotation.CenterY = bitmapImage.PixelHeight * style.SymbolScale * 0.5;
+                var rotation = new Media.RotateTransform
+                    {
+                        Angle = style.SymbolRotation,
+                        CenterX = bitmapImage.PixelWidth*style.SymbolScale*0.5,
+                        CenterY = bitmapImage.PixelHeight*style.SymbolScale*0.5
+                    };
                 path.RenderTransform = rotation;
-                //Todo: find a way to get the right values for CenterX en CenterY from the style
             }
 
             if (style.Outline != null)
@@ -389,10 +387,12 @@ namespace Mapsui.Rendering.XamlRendering
 
         private static Media.PathFigure CreatePathFigure(LineString linearRing, IViewport viewport)
         {
-            var pathFigure = new Media.PathFigure();
-            pathFigure.StartPoint = ConvertPoint(WorldToView(linearRing.StartPoint, viewport));
+            var pathFigure = new Media.PathFigure
+                {
+                    StartPoint = ConvertPoint(WorldToView(linearRing.StartPoint, viewport))
+                };
 
-            foreach (Point point in linearRing.Vertices)
+            foreach (var point in linearRing.Vertices)
             {
                 pathFigure.Segments.Add(
                     new Media.LineSegment { Point = ConvertPoint(WorldToView(point, viewport)) });
@@ -524,9 +524,11 @@ namespace Mapsui.Rendering.XamlRendering
 #else
             bitmapImage.SetSource(stream);
 #endif
-            var path = new Shapes.Path();
-            path.Fill = new Media.ImageBrush { ImageSource = bitmapImage };
-            path.IsHitTestVisible = false;
+            var path = new Shapes.Path
+                {
+                    Fill = new Media.ImageBrush {ImageSource = bitmapImage},
+                    IsHitTestVisible = false
+                };
             return path;
         }
 
