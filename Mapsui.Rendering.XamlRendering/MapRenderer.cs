@@ -93,6 +93,7 @@ namespace Mapsui.Rendering.XamlRendering
             try
             {
                 var canvas = new Canvas {Opacity = layer.Opacity};
+                canvas.IsHitTestVisible = false;
                 var features = layer.GetFeaturesInView(viewport.Extent, viewport.Resolution).ToList();
 
                 foreach (var layerStyle in layer.Styles)

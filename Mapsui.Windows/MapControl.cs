@@ -273,10 +273,10 @@ namespace Mapsui.Windows
         private static void OnResolutionChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
         {
             var newResolution = (double)e.NewValue;
-            ((MapControl)dependencyObject).ZoomIn(newResolution);
+            ((MapControl)dependencyObject).ZoomToResolution(newResolution);
         }
 
-        private void ZoomIn(double resolution)
+        private void ZoomToResolution(double resolution)
         {
             Point mousePosition = currentMousePosition;
             // When zooming we want the mouse position to stay above the same world coordinate.
