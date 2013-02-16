@@ -52,7 +52,6 @@
     <Compile Include="MatrixHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SilverlightStyle.cs" />
-    <Compile Include="SphericalMercator.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Mapsui\Mapsui.csproj">
