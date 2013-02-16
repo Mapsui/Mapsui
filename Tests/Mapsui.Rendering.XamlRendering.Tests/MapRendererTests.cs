@@ -13,7 +13,7 @@ namespace Mapsui.Rendering.XamlRendering.Tests
         private const string ImagesFolder = "Resources\\Images\\TestOutput";
 
         [Test]
-        public static void RenderSymbolVectorBuiltInSymbols()
+        public static void RenderSymbolWithSymbolType()
         {
             // arrange
             var viewport = new Viewport { Center = new Point(0, 0), Width = 200, Height = 100, Resolution = 0.5 };
@@ -24,7 +24,7 @@ namespace Mapsui.Rendering.XamlRendering.Tests
                 };
             var layers = new[] { new InMemoryLayer(new MemoryProvider(features)) };
             var renderer = new MapRenderer();
-            const string imagePath = ImagesFolder + "\\vector_symbol_unittype.png";
+            const string imagePath = ImagesFolder + "\\vector_symbol_symboltype.png";
             
             
             // act
@@ -39,7 +39,7 @@ namespace Mapsui.Rendering.XamlRendering.Tests
         }
 
         [Test]
-        public static void RenderSymbolUnitTypes()
+        public static void RenderSymbolWithUnitTypes()
         {
             // arrange
             var viewport = new Viewport { Center = new Point(0, 0), Width = 200, Height = 100, Resolution = 0.5 };
@@ -64,7 +64,7 @@ namespace Mapsui.Rendering.XamlRendering.Tests
         }
 
         [Test]
-        public static void RenderVectorSymbol()
+        public static void RenderSymbolWithVectorStyle()
         {
             // arrange
             var viewport = new Viewport { Center = new Point(100, 100), Width = 200, Height = 200, Resolution = 1 };
