@@ -1,32 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
-#if !NETFX_CORE
-using System.Windows;
-using Media = System.Windows.Media;
-using System.Windows.Media.Effects;
-using System.Windows.Media.Imaging;
-using Shapes = System.Windows.Shapes;
-using WinPoint = System.Windows.Point;
-using WinColor = System.Windows.Media.Color;
-using WinColors = System.Windows.Media.Colors;
-#else
-using Windows.Foundation;
-using Windows.UI;
-using Windows.UI.Xaml;
-using Media = Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Media.Media3D;
-using Windows.UI.Xaml.Media.Imaging;
-using Shapes = Windows.UI.Xaml.Shapes;
-using WinPoint = Windows.Foundation.Point;
-using WinColor = Windows.UI.Color;
-using WinColors = Windows.UI.Colors;
-using Windows.Storage.Streams;
-using System.Threading.Tasks;
-using Windows.UI.Xaml.Media;
-#endif
 using Mapsui.Geometries;
 using Mapsui.Styles;
 using Point = Mapsui.Geometries.Point;
+#if !NETFX_CORE
+using System.Windows;
+using Media = System.Windows.Media;
+using System.Windows.Media.Imaging;
+using Shapes = System.Windows.Shapes;
+using WinPoint = System.Windows.Point;
+using WinColors = System.Windows.Media.Colors;
+#else
+using Windows.Foundation;
+using Windows.UI.Xaml;
+using Media = Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
+using Shapes = Windows.UI.Xaml.Shapes;
+using WinPoint = Windows.Foundation.Point;
+using WinColors = Windows.UI.Colors;
+using Windows.Storage.Streams;
+using System.Threading.Tasks;
+#endif
 
 namespace Mapsui.Rendering.XamlRendering
 {
@@ -149,46 +143,6 @@ namespace Mapsui.Rendering.XamlRendering
             };
         }
 
-        private static Shapes.Path ToSymbolPath(SymbolStyle symbolStyle)
-        {
-            var path = new Shapes.Path();
-            double width, height;
-
-            path.StrokeThickness = 0; //The SL default is 1 and causes blurry bitmaps
-
-            if (symbolStyle.Symbol == null)
-            {
-                width = symbolStyle.Width;
-                height = symbolStyle.Height;
-
-                if (symbolStyle.Fill != null && symbolStyle.Fill.Color != null)
-                    path.Fill = symbolStyle.Fill.Convert();
-                else
-                    path.Fill = new Media.SolidColorBrush(WinColors.Transparent);
-
-                if (symbolStyle.Outline != null)
-                {
-                    path.Stroke = new Media.SolidColorBrush(symbolStyle.Outline.Color.Convert());
-                    path.StrokeThickness = symbolStyle.Outline.Width;
-                }
-            }
-            else
-            {
-                BitmapImage bitmapImage = CreateBitmapImage(symbolStyle.Symbol.Data);
-                path.Fill = new Media.ImageBrush { ImageSource = bitmapImage };
-                //retrieve width and height from bitmap if set.
-                width = bitmapImage.PixelWidth * symbolStyle.SymbolScale;
-                height = bitmapImage.PixelHeight * symbolStyle.SymbolScale;
-            }
-
-            //set path Data
-            if (symbolStyle.SymbolType == SymbolType.Rectangle)
-                path.Data = CreateRectangle(width, height);
-            else if (symbolStyle.SymbolType == SymbolType.Ellipse)
-                path.Data = CreateEllipse(width, height);
-            return path;
-        }
-
         private static Media.EllipseGeometry CreateEllipse(double width, double height)
         {
             var data = new Media.EllipseGeometry
@@ -257,7 +211,7 @@ namespace Mapsui.Rendering.XamlRendering
             imageData.Position = 0;
             var memoryStream = new System.IO.MemoryStream();
             imageData.CopyTo(memoryStream);
-            bitmapImage.SetSource(AsyncHelpers.RunSync<IRandomAccessStream>(() =>
+            bitmapImage.SetSource(AsyncHelpers.RunSync(() =>
                 ByteArrayToRandomAccessStream(memoryStream.ToArray())));
 #else
             imageData.Position = 0;
@@ -454,7 +408,7 @@ namespace Mapsui.Rendering.XamlRendering
             var bitmapImage = new BitmapImage();
 #if NETFX_CORE
            stream.Position = 0;
-           bitmapImage.SetSource(AsyncHelpers.RunSync<IRandomAccessStream>(() =>
+           bitmapImage.SetSource(AsyncHelpers.RunSync(() =>
                ByteArrayToRandomAccessStream(stream.ToArray())));
                
 #elif !SILVERLIGHT
@@ -478,7 +432,7 @@ namespace Mapsui.Rendering.XamlRendering
         private static async Task<IRandomAccessStream> ByteArrayToRandomAccessStream(byte[] tile)
         {
             var stream = new InMemoryRandomAccessStream();
-            DataWriter dataWriter = new DataWriter(stream);
+            var dataWriter = new DataWriter(stream);
             dataWriter.WriteBytes(tile);
             await dataWriter.StoreAsync();
             stream.Seek(0);

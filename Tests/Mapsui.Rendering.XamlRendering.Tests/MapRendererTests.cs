@@ -12,7 +12,6 @@ namespace Mapsui.Rendering.XamlRendering.Tests
     {
         private const string ImagesFolder = "Resources\\Images\\TestOutput";
 
-
         [Test]
         public static void RenderSymbolVectorBuiltInSymbols()
         {
