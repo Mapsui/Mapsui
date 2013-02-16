@@ -56,7 +56,7 @@
                 return false;
             }
 
-            if (!Outline.Equals(vectorStyle.Outline))
+            if (Outline != null && !Outline.Equals(vectorStyle.Outline))
             {
                 return false;
             }
@@ -66,7 +66,7 @@
                 return false;
             }
 
-            if (!Fill.Equals(vectorStyle.Fill))
+            if (Fill != null && !Fill.Equals(vectorStyle.Fill))
             {
                 return false;
             }
