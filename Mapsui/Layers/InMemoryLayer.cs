@@ -16,6 +16,11 @@ namespace Mapsui.Layers
             MemoryProvider = new MemoryProvider();
         }
 
+        public InMemoryLayer(MemoryProvider memoryProvider)
+        {
+            MemoryProvider = memoryProvider;
+        }
+
         public override IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
         {
             return MemoryProvider.GetFeaturesInView(box, resolution);

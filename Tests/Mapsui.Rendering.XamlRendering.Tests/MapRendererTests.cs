@@ -12,18 +12,47 @@ namespace Mapsui.Rendering.XamlRendering.Tests
     {
         private const string ImagesFolder = "Resources\\Images\\TestOutput";
 
+
+        [Test]
+        public static void RenderSymbolVectorBuiltInSymbols()
+        {
+            // arrange
+            var viewport = new Viewport { Center = new Point(0, 0), Width = 200, Height = 100, Resolution = 0.5 };
+            var features = new Features
+                {
+                    CreateFeature(-20, 0, new SymbolStyle {SymbolType = SymbolType.Ellipse}),
+                    CreateFeature(20, 0, new SymbolStyle {SymbolType = SymbolType.Rectangle})
+                };
+            var layers = new[] { new InMemoryLayer(new MemoryProvider(features)) };
+            var renderer = new MapRenderer();
+            const string imagePath = ImagesFolder + "\\vector_symbol_unittype.png";
+            
+            
+            // act
+            renderer.Render(viewport, layers);
+            var bitmap = renderer.ToBitmapStream(viewport.Width, viewport.Height);
+
+            // aside
+            if (Rendering.Default.WriteImageToDisk) WriteToDisk(imagePath, bitmap);
+
+            // assert
+            Assert.AreEqual(ReadFile(imagePath), bitmap.ToArray());
+        }
+
         [Test]
         public static void RenderSymbolUnitTypes()
         {
             // arrange
             var viewport = new Viewport { Center = new Point(0, 0), Width = 200, Height = 100, Resolution = 0.5 };
-            var layer = new InMemoryLayer();
-            layer.MemoryProvider.Features.Add(CreateFeatureWithSymbolStyle(-20, 0, UnitType.Pixel));
-            layer.MemoryProvider.Features.Add(CreateFeatureWithSymbolStyle(20, 0, UnitType.WorldUnit));
-            var layers = new[] { layer };
-            const string imagePath = ImagesFolder + "\\bitmap_symbol_unittype.png";
+            var features = new Features
+                {
+                    CreateFeature(-20, 0, new SymbolStyle {UnitType = UnitType.Pixel}),
+                    CreateFeature(20, 0, new SymbolStyle {UnitType = UnitType.WorldUnit})
+                };
+            var layers = new[] { new InMemoryLayer(new MemoryProvider(features)) };
             var renderer = new MapRenderer();
-
+            const string imagePath = ImagesFolder + "\\vector_symbol_unittype.png";
+            
             // act
             renderer.Render(viewport, layers);
             var bitmap = renderer.ToBitmapStream(viewport.Width, viewport.Height);
@@ -115,10 +144,10 @@ namespace Mapsui.Rendering.XamlRendering.Tests
             return buffer;
         }
 
-        private static Feature CreateFeatureWithSymbolStyle(double x, double y, UnitType unitType)
+        private static Feature CreateFeature(double x, double y, IStyle style)
         {
             var feature = new Feature { Geometry = new Point(x, y) };
-            feature.Styles.Add(new SymbolStyle{ UnitType = unitType });
+            feature.Styles.Add(style);
             return feature;
         }
 

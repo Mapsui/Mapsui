@@ -51,9 +51,9 @@ namespace Mapsui.Rendering.XamlRendering
                 var symbolStyle = style as SymbolStyle;
 
                 if (symbolStyle.Symbol == null || symbolStyle.Symbol.Data == null)
-                    symbol = CreateSymbolFromVectorStyle(symbolStyle);
+                    symbol = CreateSymbolFromVectorStyle(symbolStyle, symbolStyle.Opacity, symbolStyle.SymbolType);
                 else
-                    symbol = CreateSymbolFromBitmap(symbolStyle.Symbol.Data);
+                    symbol = CreateSymbolFromBitmap(symbolStyle.Symbol.Data, symbolStyle.Opacity);
                 matrix = CreatePointSymbolMatrix(viewport.Resolution, symbolStyle);
             }
             else
@@ -71,7 +71,7 @@ namespace Mapsui.Rendering.XamlRendering
             return symbol;
         }
 
-        private static UIElement CreateSymbolFromVectorStyle(VectorStyle style)
+        private static UIElement CreateSymbolFromVectorStyle(VectorStyle style, double opacity = 1, SymbolType symbolType = SymbolType.Ellipse)
         {
             var path = new Shapes.Path { StrokeThickness = 0 };  //The SL StrokeThickness default is 1 which causes blurry bitmaps
 
@@ -86,12 +86,13 @@ namespace Mapsui.Rendering.XamlRendering
                 path.StrokeThickness = style.Outline.Width;
             }
 
-            path.Data = new Media.EllipseGeometry
-                {
-                    Center = new WinPoint(0, 0),
-                    RadiusX = SymbolStyle.DefaultWidth * 0.5,
-                    RadiusY = SymbolStyle.DefaultHeight * 0.5
-                };
+            if (symbolType == SymbolType.Ellipse)
+                path.Data = CreateEllipse(SymbolStyle.DefaultWidth, SymbolStyle.DefaultHeight);
+            else
+                path.Data = CreateRectangle(SymbolStyle.DefaultWidth, SymbolStyle.DefaultHeight);
+
+            path.Opacity = opacity;
+
             return path;
         }
 
@@ -129,20 +130,22 @@ namespace Mapsui.Rendering.XamlRendering
             return matrix;
         }
 
-        private static UIElement CreateSymbolFromBitmap(System.IO.Stream data)
+        private static UIElement CreateSymbolFromBitmap(System.IO.Stream data, double opacity)
         {
             var bitmapImage = CreateBitmapImage(data);
             var fill = new Media.ImageBrush { ImageSource = bitmapImage };
             var width = bitmapImage.PixelWidth;
             var height = bitmapImage.PixelHeight;
-
+            
             return new Shapes.Path
             {
                 Data = new Media.RectangleGeometry
                 {
                     Rect = new Rect(-width * 0.5, -height * 0.5, width, height)
                 },
-                Fill = fill
+                Fill = fill,
+                Opacity = opacity
+                
             };
         }
 
@@ -180,7 +183,7 @@ namespace Mapsui.Rendering.XamlRendering
 
             //set path Data
             if (symbolStyle.SymbolType == SymbolType.Rectangle)
-                path.Data = CreateRectangle(width, height, path.StrokeThickness);
+                path.Data = CreateRectangle(width, height);
             else if (symbolStyle.SymbolType == SymbolType.Ellipse)
                 path.Data = CreateEllipse(width, height);
             return path;
@@ -190,26 +193,19 @@ namespace Mapsui.Rendering.XamlRendering
         {
             var data = new Media.EllipseGeometry
                 {
-                    Center = new WinPoint(width*0.5, height*0.5),
-                    RadiusX = width*0.5,
-                    RadiusY = height*0.5
+                    Center = new WinPoint(0, 0),
+                    RadiusX = width * 0.5,
+                    RadiusY = height * 0.5
                 };
             return data;
         }
 
-        private static Media.RectangleGeometry CreateRectangle(double width, double height, double strokeThickness)
+        private static Media.RectangleGeometry CreateRectangle(double width, double height)
         {
-            var margin = strokeThickness * 0.5;
-
-            var data = new Media.RectangleGeometry
+            return new Media.RectangleGeometry
             {
-                Rect = new Rect(
-                    0 + margin,
-                    0 + margin,
-                    width + margin,
-                    height + margin)
+                Rect = new Rect(width * -0.5, height * -0.5,  width, height)
             };
-            return data;
         }
 
         private static Shapes.Path CreatePointPath(SymbolStyle style)
