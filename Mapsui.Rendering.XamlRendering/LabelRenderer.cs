@@ -176,8 +176,8 @@ namespace Mapsui.Rendering.XamlRendering
             textblock.Text = text;
 
             //Colors
-            textblock.Foreground = new SolidColorBrush(style.ForeColor.Convert());
-            border.Background = new SolidColorBrush(style.BackColor.Color.Convert());
+            textblock.Foreground = new SolidColorBrush(style.ForeColor.ToXaml());
+            border.Background = new SolidColorBrush(style.BackColor.Color.ToXaml());
 
             //Font
             textblock.FontFamily = new FontFamily(style.Font.FontFamily);
@@ -212,7 +212,7 @@ namespace Mapsui.Rendering.XamlRendering
                 FlowDirection.LeftToRight,
                 new Typeface(style.Font.FontFamily),
                 style.Font.Size,
-                new SolidColorBrush(style.ForeColor.Convert()));
+                new SolidColorBrush(style.ForeColor.ToXaml()));
 
             width = formattedText.Width;
             height = formattedText.Height;

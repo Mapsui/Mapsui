@@ -70,13 +70,13 @@ namespace Mapsui.Rendering.XamlRendering
             var path = new Shapes.Path { StrokeThickness = 0 };  //The SL StrokeThickness default is 1 which causes blurry bitmaps
 
             if (style.Fill != null && style.Fill.Color != null)
-                path.Fill = style.Fill.Convert();
+                path.Fill = style.Fill.ToXaml();
             else
                 path.Fill = new Media.SolidColorBrush(WinColors.Transparent);
 
             if (style.Outline != null)
             {
-                path.Stroke = new Media.SolidColorBrush(style.Outline.Color.Convert());
+                path.Stroke = new Media.SolidColorBrush(style.Outline.Color.ToXaml());
                 path.StrokeThickness = style.Outline.Width;
             }
 
@@ -145,13 +145,12 @@ namespace Mapsui.Rendering.XamlRendering
 
         private static Media.EllipseGeometry CreateEllipse(double width, double height)
         {
-            var data = new Media.EllipseGeometry
+            return new Media.EllipseGeometry
                 {
                     Center = new WinPoint(0, 0),
                     RadiusX = width * 0.5,
                     RadiusY = height * 0.5
                 };
-            return data;
         }
 
         private static Media.RectangleGeometry CreateRectangle(double width, double height)
@@ -194,7 +193,7 @@ namespace Mapsui.Rendering.XamlRendering
 
             if (style.Outline != null)
             {
-                path.Stroke = new Media.SolidColorBrush(style.Outline.Color.Convert());
+                path.Stroke = new Media.SolidColorBrush(style.Outline.Color.ToXaml());
                 path.StrokeThickness = style.Outline.Width;
             }
             path.IsHitTestVisible = false;
@@ -272,7 +271,7 @@ namespace Mapsui.Rendering.XamlRendering
             {
                 //todo: render an outline around the line. 
             }
-            path.Stroke = new Media.SolidColorBrush(style.Line.Color.Convert());
+            path.Stroke = new Media.SolidColorBrush(style.Line.Color.ToXaml());
             path.StrokeThickness = style.Line.Width;
             path.IsHitTestVisible = false;
             return path;
@@ -338,11 +337,11 @@ namespace Mapsui.Rendering.XamlRendering
             if (style == null) return path; //!!!
             if (style.Outline != null)
             {
-                path.Stroke = new Media.SolidColorBrush(style.Outline.Color.Convert());
+                path.Stroke = new Media.SolidColorBrush(style.Outline.Color.ToXaml());
                 path.StrokeThickness = style.Outline.Width;
             }
 
-            path.Fill = style.Fill.Convert();
+            path.Fill = style.Fill.ToXaml();
             path.IsHitTestVisible = false;
             return path;
         }

@@ -51,7 +51,7 @@
     <Compile Include="MapRenderer.cs" />
     <Compile Include="MatrixHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SilverlightStyle.cs" />
+    <Compile Include="StyleExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Mapsui\Mapsui.csproj">
