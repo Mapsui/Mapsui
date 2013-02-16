@@ -9,8 +9,8 @@
     <ProjectGuid>{A676FF74-1EC6-4B36-96D7-F3FAA313F0FE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Mapsui.Rendering.XamlRendering_W8</RootNamespace>
-    <AssemblyName>Mapsui.Rendering.XamlRendering-W8</AssemblyName>
+    <RootNamespace>Mapsui.Rendering.XamlRendering</RootNamespace>
+    <AssemblyName>Mapsui.Rendering.XamlRendering</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{BC8A1FFA-BEE3-4634-8014-F334798102B3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
