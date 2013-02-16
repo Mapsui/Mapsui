@@ -60,6 +60,9 @@
     <Reference Include="System.Windows.Browser" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Mapsui.Rendering.XamlRendering\GeometryExtensions.cs">
+      <Link>GeometryExtensions.cs</Link>
+    </Compile>
     <Compile Include="..\Mapsui.Rendering.XamlRendering\GeometryRenderer.cs">
       <Link>GeometryRenderer.cs</Link>
     </Compile>

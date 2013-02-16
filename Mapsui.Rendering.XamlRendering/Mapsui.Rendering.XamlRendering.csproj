@@ -46,6 +46,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GeometryExtensions.cs" />
     <Compile Include="GeometryRenderer.cs" />
     <Compile Include="LabelRenderer.cs" />
     <Compile Include="MapRenderer.cs" />

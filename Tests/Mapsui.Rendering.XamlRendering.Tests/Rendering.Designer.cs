@@ -25,7 +25,7 @@ namespace Mapsui.Rendering.XamlRendering.Tests {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool WriteImageToDisk {
             get {
                 return ((bool)(this["WriteImageToDisk"]));

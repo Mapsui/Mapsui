@@ -26,7 +26,6 @@ namespace Mapsui.Rendering.XamlRendering.Tests
             var renderer = new MapRenderer();
             const string imagePath = ImagesFolder + "\\vector_symbol_symboltype.png";
             
-            
             // act
             renderer.Render(viewport, layers);
             var bitmap = renderer.ToBitmapStream(viewport.Width, viewport.Height);

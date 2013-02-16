@@ -176,6 +176,7 @@ namespace Mapsui.Rendering.XamlRendering
             if (feature.Geometry is Geometries.Point)
                 GeometryRenderer.PositionPoint(renderedGeometry, feature.Geometry as Geometries.Point, style, viewport);
             if (feature.Geometry is MultiPoint)
+
                 return;
             if (feature.Geometry is LineString)
                 return;
