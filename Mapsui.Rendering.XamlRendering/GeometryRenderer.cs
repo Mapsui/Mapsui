@@ -24,10 +24,10 @@ using System.Threading.Tasks;
 namespace Mapsui.Rendering.XamlRendering
 {
     ///<remarks>
-    /// In this class there are a lot of collistion in class names between Mapsui
-    /// and the core libaries. I resolve this by using
-    /// namespace aliases. I will use Xaml to refer to all windows related classes and 
-    /// namespaces for lack of of a better name.
+    /// In this class there are a lot of collistions in class names between Mapsui
+    /// and the .net framework libaries I use for Xaml rendering. I resolve this by using
+    /// namespace aliases. I will use 'Xaml' in namespace and method names to refer to 
+    /// all .net framework classes related to Xaml, even if they are not.
     /// </remarks>
     static class GeometryRenderer
     {
