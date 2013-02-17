@@ -1,24 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
 using Mapsui.Geometries;
 using Mapsui.Styles;
 using Point = Mapsui.Geometries.Point;
 #if !NETFX_CORE
 using System.Windows;
-using Media = System.Windows.Media;
+using XamlMedia = System.Windows.Media;
 using System.Windows.Media.Imaging;
-using Shapes = System.Windows.Shapes;
+using XamlShapes = System.Windows.Shapes;
 using XamlPoint = System.Windows.Point;
 using XamlColors = System.Windows.Media.Colors;
 #else
 using Windows.Foundation;
 using Windows.UI.Xaml;
-using Media = Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Media.Imaging;
-using Shapes = Windows.UI.Xaml.Shapes;
+using XamlMedia = Windows.UI.Xaml.Media;
+using XamlShapes = Windows.UI.Xaml.Shapes;
 using XamlPoint = Windows.Foundation.Point;
 using XamlColors = Windows.UI.Colors;
 using Windows.Storage.Streams;
+using Windows.UI.Xaml.Media.Imaging;
 using System.Threading.Tasks;
 #endif
 
@@ -35,7 +34,7 @@ namespace Mapsui.Rendering.XamlRendering
         public static UIElement RenderPoint(Point point, IStyle style, IViewport viewport)
         {
             UIElement symbol;
-            var matrix = Media.Matrix.Identity;
+            var matrix = XamlMedia.Matrix.Identity;
 
             if (style is SymbolStyle)
             {
@@ -55,7 +54,7 @@ namespace Mapsui.Rendering.XamlRendering
 
             MatrixHelper.Append(ref matrix, CreateTransformMatrix(point, viewport));
 
-            symbol.RenderTransform = new Media.MatrixTransform { Matrix = matrix };
+            symbol.RenderTransform = new XamlMedia.MatrixTransform { Matrix = matrix };
 
             symbol.IsHitTestVisible = false;
 
@@ -64,16 +63,16 @@ namespace Mapsui.Rendering.XamlRendering
 
         private static UIElement CreateSymbolFromVectorStyle(VectorStyle style, double opacity = 1, SymbolType symbolType = SymbolType.Ellipse)
         {
-            var path = new Shapes.Path { StrokeThickness = 0 };  //The SL StrokeThickness default is 1 which causes blurry bitmaps
+            var path = new XamlShapes.Path { StrokeThickness = 0 };  //The SL StrokeThickness default is 1 which causes blurry bitmaps
 
             if (style.Fill != null && style.Fill.Color != null)
                 path.Fill = style.Fill.ToXaml();
             else
-                path.Fill = new Media.SolidColorBrush(XamlColors.Transparent);
+                path.Fill = new XamlMedia.SolidColorBrush(XamlColors.Transparent);
 
             if (style.Outline != null)
             {
-                path.Stroke = new Media.SolidColorBrush(style.Outline.Color.ToXaml());
+                path.Stroke = new XamlMedia.SolidColorBrush(style.Outline.Color.ToXaml());
                 path.StrokeThickness = style.Outline.Width;
             }
 
@@ -87,9 +86,9 @@ namespace Mapsui.Rendering.XamlRendering
             return path;
         }
 
-        private static Media.Matrix CreatePointSymbolMatrix(double resolution, SymbolStyle symbolStyle)
+        private static XamlMedia.Matrix CreatePointSymbolMatrix(double resolution, SymbolStyle symbolStyle)
         {
-            var matrix = Media.Matrix.Identity;
+            var matrix = XamlMedia.Matrix.Identity;
             MatrixHelper.InvertY(ref matrix);
             var centerX = symbolStyle.SymbolOffset.X;
             var centerY = symbolStyle.SymbolOffset.Y;
@@ -106,9 +105,9 @@ namespace Mapsui.Rendering.XamlRendering
             return matrix;
         }
 
-        private static Media.Matrix CreateTransformMatrix(Point point, IViewport viewport)
+        private static XamlMedia.Matrix CreateTransformMatrix(Point point, IViewport viewport)
         {
-            var matrix = Media.Matrix.Identity;
+            var matrix = XamlMedia.Matrix.Identity;
             MatrixHelper.Translate(ref matrix, point.X, point.Y);
             var mapCenterX = viewport.Width * 0.5;
             var mapCenterY = viewport.Height * 0.5;
@@ -121,9 +120,9 @@ namespace Mapsui.Rendering.XamlRendering
             return matrix;
         }
 
-        private static Media.Matrix CreateTransformMatrix1(IViewport viewport)
+        private static XamlMedia.Matrix CreateTransformMatrix1(IViewport viewport)
         {
-            var matrix = Media.Matrix.Identity;
+            var matrix = XamlMedia.Matrix.Identity;
             var mapCenterX = viewport.Width * 0.5;
             var mapCenterY = viewport.Height * 0.5;
 
@@ -138,13 +137,13 @@ namespace Mapsui.Rendering.XamlRendering
         private static UIElement CreateSymbolFromBitmap(System.IO.Stream data, double opacity)
         {
             var bitmapImage = CreateBitmapImage(data);
-            var fill = new Media.ImageBrush { ImageSource = bitmapImage };
+            var fill = new XamlMedia.ImageBrush { ImageSource = bitmapImage };
             var width = bitmapImage.PixelWidth;
             var height = bitmapImage.PixelHeight;
 
-            return new Shapes.Path
+            return new XamlShapes.Path
                 {
-                    Data = new Media.RectangleGeometry
+                    Data = new XamlMedia.RectangleGeometry
                         {
                             Rect = new Rect(-width * 0.5, -height * 0.5, width, height)
                         },
@@ -153,9 +152,9 @@ namespace Mapsui.Rendering.XamlRendering
                 };
         }
 
-        private static Media.EllipseGeometry CreateEllipse(double width, double height)
+        private static XamlMedia.EllipseGeometry CreateEllipse(double width, double height)
         {
-            return new Media.EllipseGeometry
+            return new XamlMedia.EllipseGeometry
                 {
                     Center = new XamlPoint(0, 0),
                     RadiusX = width * 0.5,
@@ -163,15 +162,15 @@ namespace Mapsui.Rendering.XamlRendering
                 };
         }
 
-        private static Media.RectangleGeometry CreateRectangle(double width, double height)
+        private static XamlMedia.RectangleGeometry CreateRectangle(double width, double height)
         {
-            return new Media.RectangleGeometry
+            return new XamlMedia.RectangleGeometry
                 {
                     Rect = new Rect(width * -0.5, height * -0.5, width, height)
                 };
         }
 
-        private static Shapes.Path CreatePointPath(SymbolStyle style)
+        private static XamlShapes.Path CreatePointPath(SymbolStyle style)
         {
             //todo: use this:
             //style.Symbol.Convert();
@@ -179,20 +178,20 @@ namespace Mapsui.Rendering.XamlRendering
             //style.SymbolOffset.Convert();
             //style.SymbolRotation;
 
-            var path = new Shapes.Path();
+            var path = new XamlShapes.Path();
 
             if (style.Symbol == null)
             {
-                path.Fill = new Media.SolidColorBrush(XamlColors.Gray);
+                path.Fill = new XamlMedia.SolidColorBrush(XamlColors.Gray);
             }
             else
             {
                 BitmapImage bitmapImage = CreateBitmapImage(style.Symbol.Data);
 
-                path.Fill = new Media.ImageBrush { ImageSource = bitmapImage };
+                path.Fill = new XamlMedia.ImageBrush { ImageSource = bitmapImage };
 
                 //Changes the rotation of the symbol
-                var rotation = new Media.RotateTransform
+                var rotation = new XamlMedia.RotateTransform
                     {
                         Angle = style.SymbolRotation,
                         CenterX = bitmapImage.PixelWidth * style.SymbolScale * 0.5,
@@ -203,7 +202,7 @@ namespace Mapsui.Rendering.XamlRendering
 
             if (style.Outline != null)
             {
-                path.Stroke = new Media.SolidColorBrush(style.Outline.Color.ToXaml());
+                path.Stroke = new XamlMedia.SolidColorBrush(style.Outline.Color.ToXaml());
                 path.StrokeThickness = style.Outline.Width;
             }
             path.IsHitTestVisible = false;
@@ -231,11 +230,11 @@ namespace Mapsui.Rendering.XamlRendering
             return bitmapImage;
         }
 
-        private static Media.Geometry ConvertSymbol(Point point, SymbolStyle style, IViewport viewport)
+        private static XamlMedia.Geometry ConvertSymbol(Point point, SymbolStyle style, IViewport viewport)
         {
             Point p = viewport.WorldToScreen(point);
 
-            var rect = new Media.RectangleGeometry();
+            var rect = new XamlMedia.RectangleGeometry();
             if (style.Symbol != null)
             {
                 var bitmapImage = CreateBitmapImage(style.Symbol.Data);
@@ -252,15 +251,15 @@ namespace Mapsui.Rendering.XamlRendering
             // This method needs a test
             if (!(style is SymbolStyle)) throw new ArgumentException("Style is not of type SymboStyle");
             var symbolStyle = style as SymbolStyle;
-            Shapes.Path path = CreatePointPath(symbolStyle);
+            XamlShapes.Path path = CreatePointPath(symbolStyle);
             path.Data = ConvertMultiPoint(multiPoint, symbolStyle, viewport);
-            path.RenderTransform = new Media.MatrixTransform { Matrix = CreateTransformMatrix1(viewport) };
+            path.RenderTransform = new XamlMedia.MatrixTransform { Matrix = CreateTransformMatrix1(viewport) };
             return path;
         }
 
-        private static Media.GeometryGroup ConvertMultiPoint(MultiPoint multiPoint, SymbolStyle style, IViewport viewport)
+        private static XamlMedia.GeometryGroup ConvertMultiPoint(MultiPoint multiPoint, SymbolStyle style, IViewport viewport)
         {
-            var group = new Media.GeometryGroup();
+            var group = new XamlMedia.GeometryGroup();
             foreach (Point point in multiPoint)
                 group.Children.Add(ConvertSymbol(point, style, viewport));
             return group;
@@ -271,59 +270,33 @@ namespace Mapsui.Rendering.XamlRendering
             if (!(style is VectorStyle)) throw new ArgumentException("Style is not of type VectorStyle");
             var vectorStyle = style as VectorStyle;
 
-            Shapes.Path path = CreateLineStringPath(vectorStyle);
-            path.Data = ConvertLineString(lineString);
-            path.RenderTransform = new Media.MatrixTransform { Matrix = CreateTransformMatrix1(viewport) };
+            XamlShapes.Path path = CreateLineStringPath(vectorStyle);
+            path.Data = lineString.ToXaml();
+            path.RenderTransform = new XamlMedia.MatrixTransform { Matrix = CreateTransformMatrix1(viewport) };
             return path;
         }
 
-        private static Shapes.Path CreateLineStringPath(VectorStyle style)
+        private static XamlShapes.Path CreateLineStringPath(VectorStyle style)
         {
-            var path = new Shapes.Path();
+            var path = new XamlShapes.Path();
             if (style.Outline != null)
             {
                 //todo: render an outline around the line. 
             }
-            path.Stroke = new Media.SolidColorBrush(style.Line.Color.ToXaml());
+            path.Stroke = new XamlMedia.SolidColorBrush(style.Line.Color.ToXaml());
             path.StrokeThickness = style.Line.Width;
             path.IsHitTestVisible = false;
             return path;
-        }
-
-        private static Media.Geometry ConvertLineString(LineString lineString)
-        {
-            var pathGeometry = new Media.PathGeometry();
-            pathGeometry.Figures.Add(CreatePathFigure(lineString));
-            return pathGeometry;
-        }
-
-        private static Media.PathFigure CreatePathFigure(LineString linearRing)
-        {
-            var pathFigure = new Media.PathFigure();
-
-            foreach (var point in linearRing.Vertices)
-            {
-                pathFigure.Segments.Add(new Media.LineSegment { Point = point.ToXaml() });
-            }
-            return pathFigure;
         }
 
         public static UIElement RenderMultiLineString(MultiLineString multiLineString, IStyle style, IViewport viewport)
         {
             if (!(style is VectorStyle)) throw new ArgumentException("Style is not of type VectorStyle");
             var vectorStyle = style as VectorStyle;
-            Shapes.Path path = CreateLineStringPath(vectorStyle);
-            path.Data = ConvertMultiLineString(multiLineString);
-            path.RenderTransform = new Media.MatrixTransform { Matrix = CreateTransformMatrix1(viewport) };
+            XamlShapes.Path path = CreateLineStringPath(vectorStyle);
+            path.Data = multiLineString.ToXaml();
+            path.RenderTransform = new XamlMedia.MatrixTransform { Matrix = CreateTransformMatrix1(viewport) };
             return path;
-        }
-
-        private static Media.Geometry ConvertMultiLineString(MultiLineString multiLineString)
-        {
-            var group = new Media.GeometryGroup();
-            foreach (LineString lineString in multiLineString)
-                group.Children.Add(ConvertLineString(lineString));
-            return group;
         }
 
         public static UIElement RenderPolygon(Polygon polygon, IStyle style, IViewport viewport)
@@ -331,18 +304,18 @@ namespace Mapsui.Rendering.XamlRendering
             if (!(style is VectorStyle)) throw new ArgumentException("Style is not of type VectorStyle");
             var vectorStyle = style as VectorStyle;
 
-            Shapes.Path path = CreatePolygonPath(vectorStyle);
-            path.Data = ConvertPolygon(polygon);
-            path.RenderTransform = new Media.MatrixTransform { Matrix = CreateTransformMatrix1(viewport) };
+            XamlShapes.Path path = CreatePolygonPath(vectorStyle);
+            path.Data = polygon.ToXaml();
+            path.RenderTransform = new XamlMedia.MatrixTransform { Matrix = CreateTransformMatrix1(viewport) };
             return path;
         }
 
-        private static Shapes.Path CreatePolygonPath(VectorStyle style)
+        private static XamlShapes.Path CreatePolygonPath(VectorStyle style)
         {
-            var path = new Shapes.Path();
+            var path = new XamlShapes.Path();
             if (style.Outline != null)
             {
-                path.Stroke = new Media.SolidColorBrush(style.Outline.Color.ToXaml());
+                path.Stroke = new XamlMedia.SolidColorBrush(style.Outline.Color.ToXaml());
                 path.StrokeThickness = style.Outline.Width;
             }
             path.Fill = style.Fill.ToXaml();
@@ -350,57 +323,25 @@ namespace Mapsui.Rendering.XamlRendering
             return path;
         }
 
-        private static Media.GeometryGroup ConvertPolygon(Polygon polygon)
-        {
-            var group = new Media.GeometryGroup();
-            group.FillRule = Media.FillRule.EvenOdd;
-            group.Children.Add(ConvertLinearRing(polygon.ExteriorRing));
-            group.Children.Add(ConvertLinearRings(polygon.InteriorRings));
-            return group;
-        }
-
-        private static Media.PathGeometry ConvertLinearRing(LinearRing linearRing)
-        {
-            var pathGeometry = new Media.PathGeometry();
-            pathGeometry.Figures.Add(CreatePathFigure(linearRing));
-            return pathGeometry;
-        }
-
-        private static Media.PathGeometry ConvertLinearRings(IEnumerable<LinearRing> linearRings)
-        {
-            var pathGeometry = new Media.PathGeometry();
-            foreach (var linearRing in linearRings)
-                pathGeometry.Figures.Add(CreatePathFigure(linearRing));
-            return pathGeometry;
-        }
-
-        public static Shapes.Path RenderMultiPolygon(MultiPolygon geometry, IStyle style, IViewport viewport)
+        public static XamlShapes.Path RenderMultiPolygon(MultiPolygon geometry, IStyle style, IViewport viewport)
         {
             if (!(style is VectorStyle)) throw new ArgumentException("Style is not of type VectorStyle");
             var vectorStyle = style as VectorStyle;
-            Shapes.Path path = CreatePolygonPath(vectorStyle);
-            path.Data = ConvertMultiPolygon(geometry);
-            path.RenderTransform = new Media.MatrixTransform { Matrix = CreateTransformMatrix1(viewport) };
+            XamlShapes.Path path = CreatePolygonPath(vectorStyle);
+            path.Data = geometry.ToXaml();
+            path.RenderTransform = new XamlMedia.MatrixTransform { Matrix = CreateTransformMatrix1(viewport) };
             return path;
         }
 
-        private static Media.GeometryGroup ConvertMultiPolygon(MultiPolygon geometry)
+        public static XamlShapes.Path RenderRaster(IRaster raster, IStyle style, IViewport viewport)
         {
-            var group = new Media.GeometryGroup();
-            foreach (Polygon polygon in geometry.Polygons)
-                group.Children.Add(ConvertPolygon(polygon));
-            return group;
-        }
-
-        public static Shapes.Path RenderRaster(IRaster raster, IStyle style, IViewport viewport)
-        {
-            Shapes.Path path = CreateRasterPath(style, raster.Data);
+            XamlShapes.Path path = CreateRasterPath(style, raster.Data);
             path.Data = ConvertRaster(raster.GetBoundingBox(), viewport);
             MapRenderer.Animate(path, "Opacity", 0, 1, 600, (s, e) => { });
             return path;
         }
 
-        private static Shapes.Path CreateRasterPath(IStyle style, System.IO.MemoryStream stream)
+        private static XamlShapes.Path CreateRasterPath(IStyle style, System.IO.MemoryStream stream)
         {
             //todo: use this:
             //style.Symbol.Convert();
@@ -422,9 +363,9 @@ namespace Mapsui.Rendering.XamlRendering
 #else
             bitmapImage.SetSource(stream);
 #endif
-            var path = new Shapes.Path
+            var path = new XamlShapes.Path
                 {
-                    Fill = new Media.ImageBrush { ImageSource = bitmapImage },
+                    Fill = new XamlMedia.ImageBrush { ImageSource = bitmapImage },
                     IsHitTestVisible = false
                 };
             return path;
@@ -443,9 +384,9 @@ namespace Mapsui.Rendering.XamlRendering
         }
         
 #endif
-        private static Media.Geometry ConvertRaster(BoundingBox boundingBox, IViewport viewport)
+        private static XamlMedia.Geometry ConvertRaster(BoundingBox boundingBox, IViewport viewport)
         {
-            return new Media.RectangleGeometry
+            return new XamlMedia.RectangleGeometry
             {
                 Rect = RoundToPixel(new Rect(
                     viewport.WorldToScreen(boundingBox.Min).ToXaml(),
@@ -468,16 +409,16 @@ namespace Mapsui.Rendering.XamlRendering
 
         public static void PositionPoint(UIElement renderedGeometry, Point point, IStyle style, IViewport viewport)
         {
-            var matrix = Media.Matrix.Identity;
+            var matrix = XamlMedia.Matrix.Identity;
             if (style is SymbolStyle) matrix = CreatePointSymbolMatrix(viewport.Resolution, style as SymbolStyle);
             else MatrixHelper.ScaleAt(ref matrix, viewport.Resolution, viewport.Resolution);
             MatrixHelper.Append(ref matrix, CreateTransformMatrix(point, viewport));
-            renderedGeometry.RenderTransform = new Media.MatrixTransform { Matrix = matrix };
+            renderedGeometry.RenderTransform = new XamlMedia.MatrixTransform { Matrix = matrix };
         }
 
         public static void PositionRaster(UIElement renderedGeometry, BoundingBox boundingBox, IViewport viewport)
         {
-            ((Media.RectangleGeometry)((Shapes.Path)renderedGeometry).Data).Rect =
+            ((XamlMedia.RectangleGeometry)((XamlShapes.Path)renderedGeometry).Data).Rect =
                 RoundToPixel(new Rect(
                 viewport.WorldToScreen(boundingBox.Min).ToXaml(),
                 viewport.WorldToScreen(boundingBox.Max).ToXaml()));
@@ -485,7 +426,7 @@ namespace Mapsui.Rendering.XamlRendering
 
         public static void PositionGeometry(UIElement renderedGeometry, IViewport viewport)
         {
-            renderedGeometry.RenderTransform = new Media.MatrixTransform { Matrix = CreateTransformMatrix1(viewport) };
+            renderedGeometry.RenderTransform = new XamlMedia.MatrixTransform { Matrix = CreateTransformMatrix1(viewport) };
         }
     }
 }
