@@ -92,8 +92,7 @@ namespace Mapsui.Rendering.XamlRendering
             // when clearing and adding features to a layer while rendering
             try
             {
-                var canvas = new Canvas {Opacity = layer.Opacity};
-                canvas.IsHitTestVisible = false;
+                var canvas = new Canvas {Opacity = layer.Opacity, IsHitTestVisible = false};
                 var features = layer.GetFeaturesInView(viewport.Extent, viewport.Resolution).ToList();
 
                 foreach (var layerStyle in layer.Styles)
@@ -141,8 +140,7 @@ namespace Mapsui.Rendering.XamlRendering
                 if (renderedGeometry == null)
                 {
                     renderedGeometry = RenderGeometry(viewport, style, feature);
-                    if (feature.Geometry is Geometries.Point || feature.Geometry is IRaster) // positioning only supported for point and raster
-                        feature.RenderedGeometry[style] = renderedGeometry;
+                    feature.RenderedGeometry[style] = renderedGeometry;
                 }
                 else
                 {
@@ -176,16 +174,15 @@ namespace Mapsui.Rendering.XamlRendering
             if (feature.Geometry is Geometries.Point)
                 GeometryRenderer.PositionPoint(renderedGeometry, feature.Geometry as Geometries.Point, style, viewport);
             if (feature.Geometry is MultiPoint)
-
-                return;
+                GeometryRenderer.PositionGeometry(renderedGeometry, viewport);
             if (feature.Geometry is LineString)
-                return;
+                GeometryRenderer.PositionGeometry(renderedGeometry, viewport);
             if (feature.Geometry is MultiLineString)
-                return;
+                GeometryRenderer.PositionGeometry(renderedGeometry, viewport);
             if (feature.Geometry is Polygon)
-                return;
+                GeometryRenderer.PositionGeometry(renderedGeometry, viewport);
             if (feature.Geometry is MultiPolygon)
-                return;
+                GeometryRenderer.PositionGeometry(renderedGeometry, viewport);
             if (feature.Geometry is IRaster)
                 GeometryRenderer.PositionRaster(renderedGeometry, feature.Geometry.GetBoundingBox(), viewport);
         }
