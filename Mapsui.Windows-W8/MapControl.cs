@@ -80,7 +80,7 @@ namespace Mapsui.Windows
                     map.PropertyChanged += MapPropertyChanged;
                     map.ViewChanged(true, viewport.Extent, viewport.Resolution);
                 }
-                OnViewChanged(true);
+                OnViewChanged(false);
                 RefreshGraphics();
             }
         }
@@ -179,12 +179,7 @@ namespace Mapsui.Windows
             return currentResolution;
         }
 
-        public void OnViewChanged()
-        {
-            OnViewChanged(false);
-        }
-
-        private void OnViewChanged(bool userAction)
+        private void OnViewChanged(bool userAction = false)
         {
             if (map != null)
             {
@@ -225,6 +220,8 @@ namespace Mapsui.Windows
             if (!viewInitialized) return;
 
             viewport.Resolution = ZoomHelper.ZoomIn(map.Resolutions, viewport.Resolution);
+
+            OnViewChanged(false);
         }
 
         public void ZoomOut()
@@ -233,6 +230,8 @@ namespace Mapsui.Windows
             if (!viewInitialized) return;
 
             viewport.Resolution = ZoomHelper.ZoomOut(map.Resolutions, viewport.Resolution);
+
+            OnViewChanged(false);
         }
 
         protected void OnErrorMessageChanged(EventArgs e)
@@ -265,7 +264,7 @@ namespace Mapsui.Windows
             Clip = new RectangleGeometry {Rect = new Rect(0, 0, ActualWidth, ActualWidth)};
             UpdateSize();
             map.ViewChanged(true, viewport.Extent, viewport.Resolution);
-            OnViewChanged(true);
+            OnViewChanged(false);
             Refresh();
         }
 
@@ -357,7 +356,7 @@ namespace Mapsui.Windows
             viewport.Resolution = resolution;
 
             map.ViewChanged(true, viewport.Extent, viewport.Resolution);
-            OnViewChanged(true);
+            OnViewChanged(false);
             RefreshGraphics();
             ClearBBoxDrawing();
         }
@@ -375,6 +374,8 @@ namespace Mapsui.Windows
             if (ActualWidth.IsNanOrZero()) return;
             viewport.Resolution =  Map.Envelope.Width / ActualWidth;
             viewport.Center = Map.Envelope.GetCentroid();
+
+            OnViewChanged(false);
         }
 
         private static void OnManipulationInertiaStarting(object sender, ManipulationInertiaStartingRoutedEventArgs e)
@@ -409,6 +410,8 @@ namespace Mapsui.Windows
             previousPosition = e.Position;
             
             invalid = true;
+
+            OnViewChanged(true);
         }
 
         public static double Distance(double x1, double y1, double x2, double y2)
