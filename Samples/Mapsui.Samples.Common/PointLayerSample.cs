@@ -73,8 +73,7 @@ namespace Mapsui.Samples.Common
             pointLayer.Styles.Add(new VectorStyle()
                 {
                     Fill = new Brush(Color.Orange),
-                    Line = new Pen(Color.Black, 2),
-                    Outline = new Pen(Color.Red, 1)
+                    Outline = new Pen(Color.Red, 2)
                 });
             return pointLayer;
         }

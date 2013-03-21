@@ -304,19 +304,21 @@ namespace Mapsui.Rendering.XamlRendering
             if (!(style is VectorStyle)) throw new ArgumentException("Style is not of type VectorStyle");
             var vectorStyle = style as VectorStyle;
 
-            XamlShapes.Path path = CreatePolygonPath(vectorStyle);
+            XamlShapes.Path path = CreatePolygonPath(vectorStyle, viewport.Resolution);
             path.Data = polygon.ToXaml();
             path.RenderTransform = new XamlMedia.MatrixTransform { Matrix = CreateTransformMatrix1(viewport) };
+            path.UseLayoutRounding = true;
             return path;
         }
 
-        private static XamlShapes.Path CreatePolygonPath(VectorStyle style)
+        private static XamlShapes.Path CreatePolygonPath(VectorStyle style, double resolution)
         {
             var path = new XamlShapes.Path();
             if (style.Outline != null)
             {
                 path.Stroke = new XamlMedia.SolidColorBrush(style.Outline.Color.ToXaml());
-                path.StrokeThickness = style.Outline.Width;
+                path.StrokeThickness = style.Outline.Width * resolution;
+                path.Tag = new double?(style.Outline.Width); // see #outlinehack
             }
             path.Fill = style.Fill.ToXaml();
             path.IsHitTestVisible = false;
@@ -327,7 +329,7 @@ namespace Mapsui.Rendering.XamlRendering
         {
             if (!(style is VectorStyle)) throw new ArgumentException("Style is not of type VectorStyle");
             var vectorStyle = style as VectorStyle;
-            XamlShapes.Path path = CreatePolygonPath(vectorStyle);
+            XamlShapes.Path path = CreatePolygonPath(vectorStyle, viewport.Resolution);
             path.Data = geometry.ToXaml();
             path.RenderTransform = new XamlMedia.MatrixTransform { Matrix = CreateTransformMatrix1(viewport) };
             return path;
@@ -426,7 +428,23 @@ namespace Mapsui.Rendering.XamlRendering
 
         public static void PositionGeometry(UIElement renderedGeometry, IViewport viewport)
         {
+            CounterScaleOutline(renderedGeometry, viewport.Resolution);
             renderedGeometry.RenderTransform = new XamlMedia.MatrixTransform { Matrix = CreateTransformMatrix1(viewport) };
+        }
+
+        private static void CounterScaleOutline(UIElement renderedGeometry, double resolution)
+        {
+            // #outlinehack
+            // When the RenderTransform Matrix is applied the width of the outline
+            // is scaled along with the rest. We want the outline to have a fixed
+            // width independent of the scale. So here we counter scale using
+            // the orginal width stored in the Tag.
+            if (renderedGeometry is XamlShapes.Path)
+            {
+                var path = renderedGeometry as XamlShapes.Path;
+                if (path.Tag is double?)
+                    path.StrokeThickness = (path.Tag as double?).Value * resolution;
+            }
         }
     }
 }

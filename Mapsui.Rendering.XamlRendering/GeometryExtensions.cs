@@ -70,10 +70,21 @@ namespace Mapsui.Rendering.XamlRendering
         private static XamlMedia.PathFigure CreatePathFigure(LineString linearRing)
         {
             var pathFigure = new XamlMedia.PathFigure();
+            pathFigure.IsClosed = true;
+
+            bool first = true;
 
             foreach (var point in linearRing.Vertices)
             {
-                pathFigure.Segments.Add(new XamlMedia.LineSegment { Point = point.ToXaml() });
+                if (first)
+                {
+                    pathFigure.StartPoint = point.ToXaml();
+                    first = false;
+                }
+                else
+                {
+                    pathFigure.Segments.Add(new XamlMedia.LineSegment { Point = point.ToXaml() });
+                }
             }
             return pathFigure;
         }

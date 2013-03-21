@@ -56,8 +56,9 @@ namespace Mapsui.Samples.Metro
             stream.Position = 0;
             pointLayer.Styles.Clear();
             pointLayer.Styles.Add(new SymbolStyle() { Symbol = new Bitmap() { Data = stream }, SymbolRotation = 45.0 });
+            
             mapControl.Map.Layers.Add(pointLayer);
-
+            mapControl.Map.Layers.Add(PointLayerSample.CreateRandomPolygonLayer(mapControl.Map.Envelope, 1));
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)

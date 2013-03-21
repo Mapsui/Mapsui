@@ -59,6 +59,7 @@ namespace Mapsui.Wpf
         {
             mapControl.Map.Layers.Clear();
             mapControl.Map.Layers.Add(new TileLayer(new OsmTileSource()) { LayerName = "OSM" });
+           
             layerList.Initialize(mapControl.Map.Layers);
             mapControl.Refresh();
         }
