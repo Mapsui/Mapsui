@@ -23,6 +23,7 @@ using Mapsui.Utilities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using Windows.Devices.Sensors;
 using Windows.Foundation;
 using Windows.UI;
 using Windows.UI.Core;
@@ -49,7 +50,8 @@ namespace Mapsui.Windows
         private readonly Rectangle bboxRect;
         private readonly Canvas canvas;
         Point previousPosition;
-        
+        private SimpleOrientationSensor _orientationSensor;
+
         public event EventHandler ErrorMessageChanged;
         public event EventHandler<ViewChangedEventArgs> ViewChanged;
 
@@ -141,6 +143,10 @@ namespace Mapsui.Windows
             ManipulationDelta += OnManipulationDelta;
             ManipulationCompleted += OnManipulationCompleted;
             ManipulationInertiaStarting += OnManipulationInertiaStarting;
+
+            _orientationSensor = SimpleOrientationSensor.GetDefault();
+            _orientationSensor.OrientationChanged += (sender, args) =>
+            Dispatcher.RunAsync(CoreDispatcherPriority.Normal, Refresh);
         }
 
         void MapControl_PointerWheelChanged(object sender, PointerRoutedEventArgs e)
@@ -261,7 +267,7 @@ namespace Mapsui.Windows
         private void MapControlSizeChanged(object sender, SizeChangedEventArgs e)
         {
             if (!viewInitialized) InitializeView();
-            Clip = new RectangleGeometry {Rect = new Rect(0, 0, ActualWidth, ActualWidth)};
+            Clip = new RectangleGeometry {Rect = new Rect(0, 0, ActualWidth, ActualHeight)};
             UpdateSize();
             map.ViewChanged(true, viewport.Extent, viewport.Resolution);
             OnViewChanged(false);
