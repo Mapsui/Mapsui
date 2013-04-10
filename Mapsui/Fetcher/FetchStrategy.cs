@@ -16,6 +16,7 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
 using System.Collections.Generic;
+using System.Linq;
 using Mapsui.Utilities;
 using BruTile;
 
@@ -23,7 +24,6 @@ namespace Mapsui.Fetcher
 {
     class FetchStrategy : IFetchStrategy
     {
-        private readonly Sorter sorter = new Sorter();
         HashSet<int> preFetchLayers;
         public static HashSet<int> GetPreFetchLevels(int min, int max)
         {
@@ -51,7 +51,7 @@ namespace Mapsui.Fetcher
             {
                 ////////if (!preFetchLayers.Contains(level)) continue;
                 var infosOfLevel = schema.GetTilesInView(extent, level);
-                infosOfLevel = PrioritizeTiles(infosOfLevel, extent.CenterX, extent.CenterY, sorter);
+                infosOfLevel = PrioritizeTiles(infosOfLevel, extent.CenterX, extent.CenterY);
 
                 foreach (TileInfo info in infosOfLevel)
                 {
@@ -63,28 +63,9 @@ namespace Mapsui.Fetcher
             return infos;
         }
 
-        private static IEnumerable<TileInfo> PrioritizeTiles(IEnumerable<TileInfo> tiles, double centerX, double centerY, Sorter sorter)
+        private static IEnumerable<TileInfo> PrioritizeTiles(IEnumerable<TileInfo> tiles, double centerX, double centerY)
         {
-            var infos = new List<TileInfo>(tiles);
-
-            foreach (TileInfo t in infos)
-            {
-                double priority = -Algorithms.Distance(centerX, centerY, t.Extent.CenterX, t.Extent.CenterY);
-                t.Priority = priority;
-            }
-
-            infos.Sort(sorter);
-            return infos;
+            return tiles.OrderBy(t => Algorithms.Distance(centerX, centerY, t.Extent.CenterX, t.Extent.CenterY));
         }       
-
-        private class Sorter : IComparer<TileInfo>
-        {
-            public int Compare(TileInfo x, TileInfo y)
-            {
-                if (x.Priority > y.Priority) return -1;
-                if (x.Priority < y.Priority) return 1;
-                return 0;
-            }
-        }
     }
 }

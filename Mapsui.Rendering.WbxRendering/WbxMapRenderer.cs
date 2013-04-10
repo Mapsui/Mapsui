@@ -11,6 +11,8 @@ using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using System.Windows.Controls;
+using Mapsui.Styles;
+using Color = System.Windows.Media.Color;
 
 namespace Mapsui.Rendering.WbxRendering
 {
@@ -99,18 +101,17 @@ namespace Mapsui.Rendering.WbxRendering
                 }
                 else
                 {
-                    var renderedGeometry = feature.RenderedGeometry[feature.Styles.First()] as WriteableBitmap;
-                    if (renderedGeometry == null) // create
+                    if (!feature.RenderedGeometry.Keys.Contains(new VectorStyle()))
                     {
                         var image = ((IRaster)feature.Geometry).Data;
                         var bitmap = LoadBitmap(image);
                         Rect dest = WorldToView(tile.Extent, viewport);
                         DrawImage(targetBitmap, bitmap, dest, tile, memoryCache, opacity);
-                        feature.RenderedGeometry[feature.Styles.First()] = bitmap;
+                        feature.RenderedGeometry[new VectorStyle()] = bitmap;
                     }
                     else // position
                     {
-                        var bitmap = (WriteableBitmap)feature.RenderedGeometry[feature.Styles.First()];
+                        var bitmap = (WriteableBitmap)feature.RenderedGeometry[new VectorStyle()];
                         Rect dest = WorldToView(tile.Extent, viewport);
                         DrawImage(targetBitmap, bitmap, dest, tile, memoryCache, opacity);
                     }
@@ -139,7 +140,7 @@ namespace Mapsui.Rendering.WbxRendering
                 //todo: rethink opacity. There is opacity at layer level, and could be at tile level.
 
                 targetBitmap.Blit(destRounded, bitmap, sourceRect, color, WriteableBitmapExtensions.BlendMode.Alpha);
-                targetBitmap.DrawRectangle((int)destRounded.Left, (int)destRounded.Top, (int)destRounded.Right, (int)destRounded.Bottom, Colors.Red);
+                //!!!targetBitmap.DrawRectangle((int)destRounded.Left, (int)destRounded.Top, (int)destRounded.Right, (int)destRounded.Bottom, Colors.Red);
             }
             catch (Exception ex)
             {

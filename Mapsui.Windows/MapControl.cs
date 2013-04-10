@@ -52,10 +52,9 @@ namespace Mapsui.Windows
         private bool IsInBoxZoomMode { get; set; }
         private bool viewInitialized;
         private readonly Canvas renderCanvas = new Canvas();
-        private readonly IRenderer renderer;
+        public IRenderer Renderer { get; set; }
         private bool invalid;
         private readonly Rectangle bboxRect;
-        private readonly Canvas canvas;
 
         #endregion
 
@@ -77,7 +76,6 @@ namespace Mapsui.Windows
 
         public bool ZoomToBoxMode { get; set; }
         public Viewport Viewport { get { return viewport; } }
-
 
         public Map Map
         {
@@ -135,6 +133,11 @@ namespace Mapsui.Windows
 
         public bool ZoomLocked { get; set; }
 
+        public Canvas RenderCanvas
+        {
+            get { return renderCanvas; }
+        }
+
         #endregion
 
         #region Dependency Properties
@@ -148,13 +151,13 @@ namespace Mapsui.Windows
 
         public MapControl()
         {
-            canvas = new Canvas
+            renderCanvas = new Canvas
                 {
                     VerticalAlignment = VerticalAlignment.Stretch,
                     HorizontalAlignment = HorizontalAlignment.Stretch,
                     Background = new SolidColorBrush(Colors.Transparent),
                 };
-            Children.Add(canvas);
+            Children.Add(RenderCanvas);
 
             bboxRect = new Rectangle
                 {
@@ -184,14 +187,14 @@ namespace Mapsui.Windows
             MouseWheel += MapControlMouseWheel;
             SizeChanged += MapControlSizeChanged;
             CompositionTarget.Rendering += CompositionTargetRendering;
-            canvas.Children.Add(renderCanvas);
-            renderer = new MapRenderer(renderCanvas);
+            Renderer = new MapRenderer(RenderCanvas);
+
 #if !SILVERLIGHT
             Dispatcher.ShutdownStarted += DispatcherShutdownStarted;
-            canvas.IsManipulationEnabled = true;           
-            canvas.ManipulationDelta += OnManipulationDelta;
-            canvas.ManipulationCompleted += OnManipulationCompleted;
-            canvas.ManipulationInertiaStarting += OnManipulationInertiaStarting;
+            RenderCanvas.IsManipulationEnabled = true;
+            RenderCanvas.ManipulationDelta += OnManipulationDelta;
+            RenderCanvas.ManipulationCompleted += OnManipulationCompleted;
+            RenderCanvas.ManipulationInertiaStarting += OnManipulationInertiaStarting;
 #endif
         }
 
@@ -588,9 +591,9 @@ namespace Mapsui.Windows
             if (!viewInitialized) return; //stop if the line above failed. 
             if (!invalid) return;
 
-            if ((renderer != null) && (map != null))
+            if ((Renderer != null) && (map != null))
             {
-                renderer.Render(viewport, map.Layers);
+                Renderer.Render(viewport, map.Layers);
                 fpsCounter.FramePlusOne();
                 invalid = false;
             }

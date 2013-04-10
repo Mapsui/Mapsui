@@ -1,0 +1,9 @@
+﻿<Window x:Class="Mapsui.Samples.Wbx.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:windows="clr-namespace:Mapsui.Windows;assembly=Mapsui.Windows"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <windows:MapControl Background="DarkSlateGray" x:Name="mapControl" />  
+    </Grid>
+</Window>

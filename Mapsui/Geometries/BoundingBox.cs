@@ -38,6 +38,8 @@ namespace Mapsui.Geometries
         public double MaxX { get { return max.X; } }
         public double MaxY { get { return max.Y; } }
 
+        public BoundingBox() {}
+
         public BoundingBox(BoundingBox boundingBox) : this(
             boundingBox.min.X,
             boundingBox.min.Y,

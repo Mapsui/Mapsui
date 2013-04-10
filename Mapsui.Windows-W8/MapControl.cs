@@ -48,7 +48,7 @@ namespace Mapsui.Windows
         private readonly IRenderer renderer;
         private bool invalid;
         private readonly Rectangle bboxRect;
-        private readonly Canvas canvas;
+        private readonly Canvas renderTarget;
         Point previousPosition;
         private SimpleOrientationSensor _orientationSensor;
 
@@ -108,13 +108,13 @@ namespace Mapsui.Windows
 
         public MapControl()
         {
-            canvas = new Canvas
+            renderTarget = new Canvas
                 {
                     VerticalAlignment = VerticalAlignment.Stretch,
                     HorizontalAlignment = HorizontalAlignment.Stretch,
                     Background = new SolidColorBrush(Colors.Transparent),
                 };
-            Children.Add(canvas);
+            Children.Add(renderTarget);
 
             bboxRect = new Rectangle
                 {
@@ -136,7 +136,7 @@ namespace Mapsui.Windows
 
             SizeChanged += MapControlSizeChanged;
             CompositionTarget.Rendering += CompositionTarget_Rendering;
-            renderer = new MapRenderer(canvas);
+            renderer = new MapRenderer(renderTarget);
             PointerWheelChanged += MapControl_PointerWheelChanged;
             
             ManipulationMode = ManipulationModes.Scale | ManipulationModes.TranslateX | ManipulationModes.TranslateY;     
@@ -206,8 +206,8 @@ namespace Mapsui.Windows
         {
             InvalidateArrange();
             InvalidateMeasure();
-            canvas.InvalidateArrange();
-            canvas.InvalidateMeasure();
+            renderTarget.InvalidateArrange();
+            renderTarget.InvalidateMeasure();
             invalid = true;
         }
 
@@ -342,7 +342,7 @@ namespace Mapsui.Windows
             if ((renderer != null) && (map != null))
             {
                 renderer.Render(viewport, map.Layers);
-                canvas.Arrange(new Rect(0, 0, viewport.Width, viewport.Height));
+                renderTarget.Arrange(new Rect(0, 0, viewport.Width, viewport.Height));
                 invalid = false;
             }
         }
@@ -391,7 +391,7 @@ namespace Mapsui.Windows
 
         private void OnManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
-            if (previousPosition == default(Point) || double.IsNaN(previousPosition.X))
+           if (previousPosition == default(Point) || double.IsNaN(previousPosition.X))
             {
                 previousPosition = e.Position;
                 return;
