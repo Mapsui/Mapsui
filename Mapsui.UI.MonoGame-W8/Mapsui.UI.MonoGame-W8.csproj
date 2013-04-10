@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{C8FE8DA8-8BEC-4B80-9F60-DCAC9EADB593}</ProjectGuid>
-    <OutputType>AppContainerExe</OutputType>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Mapsui.UI.MonoGame_W8</RootNamespace>
     <AssemblyName>Mapsui.UI.MonoGame-W8</AssemblyName>
@@ -139,9 +139,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <AppxManifest Include="Package.appxmanifest">
-      <SubType>Designer</SubType>
-    </AppxManifest>
     <None Include="Mapsui.UI.MonoGame-W8_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
@@ -156,6 +153,9 @@
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '11.0' ">
     <VisualStudioVersion>11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
