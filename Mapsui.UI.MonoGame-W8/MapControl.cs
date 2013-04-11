@@ -1,34 +1,30 @@
-﻿using System;
+﻿using BruTile.Web;
+using Mapsui.Layers;
+using Mapsui.Rendering.MonoGame;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input.Touch;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using BruTile.Web;
-using Mapsui.Geometries;
-using Mapsui.Layers;
-using Mapsui.Rendering.MonoGame_W8;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input.Touch;
-using Point = Microsoft.Xna.Framework.Point;
 
-namespace Mapsui.UI.MonoGame_W8
+namespace Mapsui.UI.MonoGame
 {
     /// <summary>
     /// This is the main type for your game
     /// </summary>
     public class MapControl : Game
     {
-        MapRenderer _renderer;
-        private Map _map = new Map();
-        private Viewport _viewport;
-        private Vector2  _previousPosition;
-        private TouchCollection? _previousTouches;
-        private int _touchCount;
-        private double _previousDistance;
+        readonly MapRenderer renderer;
+        private readonly Map map = new Map();
+        private Viewport viewport;
+        private Vector2  previousPosition;
+        private TouchCollection? previousTouches;
+        private double previousDistance;
         
         public MapControl()
         {
-            _renderer = new MapRenderer(this);
-            _map.Layers.Add(new TileLayer(new OsmTileSource()));
+            renderer = new MapRenderer(this);
+            map.Layers.Add(new TileLayer(new OsmTileSource()));
             
         }
 
@@ -40,16 +36,15 @@ namespace Mapsui.UI.MonoGame_W8
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
             TouchPanel.EnableMouseTouchPoint = true;
             TouchPanel.EnableMouseGestures = true;
             base.Initialize();
 
-            if (_viewport == null)
-                if (CanInitializeView(_map, GraphicsDevice.Viewport))
+            if (viewport == null)
+                if (CanInitializeView(map, GraphicsDevice.Viewport))
                 {
-                    _viewport = InitializeView(_map, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
-                    _map.ViewChanged(true, _viewport.Extent, _viewport.Resolution);
+                    viewport = InitializeView(map, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
+                    map.ViewChanged(true, viewport.Extent, viewport.Resolution);
                 }
         }
 
@@ -77,40 +72,35 @@ namespace Mapsui.UI.MonoGame_W8
         protected override void Update(GameTime gameTime)
         {
             var touches = TouchPanel.GetState();
+            var center = GetCenter(touches);
+            var distance = GetDistance(touches, center);
 
-            var pos = GetCenter(touches);
-            var distance = GetScale(touches);
+            var scale = GetScale(distance, previousDistance);
 
-            var scale = (distance <= 0) ? 1.0 : ((_previousDistance <= 0) ? 1.0 : distance/_previousDistance);
-            
-            if (pos != default(Vector2) && _touchCount > 0 &&
-                _previousTouches != null &&
-                touches.Count == _previousTouches.Value.Count)
+            if (center != default(Vector2) && touches.Count > 0 &&
+                previousTouches != null &&
+                touches.Count == previousTouches.Value.Count)
             {
-                _viewport.Transform(pos.X, pos.Y, _previousPosition.X, _previousPosition.Y, scale);
-                _map.ViewChanged(true, _viewport.Extent, _viewport.Resolution);
+                viewport.Transform(center.X, center.Y, previousPosition.X, previousPosition.Y, scale);
+                map.ViewChanged(true, viewport.Extent, viewport.Resolution);
             }
-            _previousPosition = pos;
-            _previousTouches = touches;
-            _previousDistance = distance;
-            _touchCount = touches.Count;
+            previousPosition = center;
+            previousTouches = touches;
+            previousDistance = distance;
             base.Update(gameTime);
         }
 
-        private double GetScale(TouchCollection touches)
+        private static double GetScale(double distance, double previousDistance)
         {
-            if (touches.Count == 0) return 1;
-
-            var center = GetCenter(touches);
-
-            float y = 0;
-
-            float distance = touches.Sum(touch => Vector2.Distance(center, touch.Position));
-
-            return distance / touches.Count;
+            return (distance <= 0) ? 1.0 : ((previousDistance <= 0) ? 1.0 : distance/previousDistance);
         }
 
-
+        private double GetDistance(TouchCollection touches, Vector2 center)
+        {
+            if (touches.Count == 0) return 1;
+            float distance = touches.Sum(touch => Vector2.Distance(center, touch.Position));
+            return distance / touches.Count;
+        }
 
         private Vector2 GetCenter(IList<TouchLocation> touches)
         {
@@ -133,12 +123,12 @@ namespace Mapsui.UI.MonoGame_W8
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            if (_viewport == null) return;
-            _renderer.Draw(_map, _viewport, gameTime);
+            if (viewport == null) return;
+            renderer.Draw(map, viewport, gameTime);
             base.Draw(gameTime);
         }
 
-        private bool CanInitializeView(Map map, Microsoft.Xna.Framework.Graphics.Viewport xnaViewport)
+        private static bool CanInitializeView(Map map, Microsoft.Xna.Framework.Graphics.Viewport xnaViewport)
         {
             if (xnaViewport.Width == 0) return false;
             if (xnaViewport.Height == 0) return false;

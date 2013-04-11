@@ -7,8 +7,8 @@
     <ProjectGuid>{C8FE8DA8-8BEC-4B80-9F60-DCAC9EADB593}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Mapsui.UI.MonoGame_W8</RootNamespace>
-    <AssemblyName>Mapsui.UI.MonoGame-W8</AssemblyName>
+    <RootNamespace>Mapsui.UI.MonoGame</RootNamespace>
+    <AssemblyName>Mapsui.UI.MonoGame</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{BC8A1FFA-BEE3-4634-8014-F334798102B3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -134,7 +134,6 @@
     <Compile Include="..\Mapsui.Windows\Extensions.cs">
       <Link>Extensions.cs</Link>
     </Compile>
-    <Compile Include="Program.cs" />
     <Compile Include="MapControl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

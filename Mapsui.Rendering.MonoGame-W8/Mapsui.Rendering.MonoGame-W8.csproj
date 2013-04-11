@@ -7,8 +7,8 @@
     <ProjectGuid>{1D42D29E-29B5-41B8-A515-6448F5C8587C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Mapsui.Rendering.MonoGame_W8</RootNamespace>
-    <AssemblyName>Mapsui.Rendering.MonoGame-W8</AssemblyName>
+    <RootNamespace>Mapsui.Rendering.MonoGame</RootNamespace>
+    <AssemblyName>Mapsui.Rendering.MonoGame</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{BC8A1FFA-BEE3-4634-8014-F334798102B3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -131,7 +131,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
     <Compile Include="MapRenderer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

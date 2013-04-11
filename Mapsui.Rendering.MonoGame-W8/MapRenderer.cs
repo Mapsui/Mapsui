@@ -6,22 +6,21 @@ using System;
 using BoundingBox = Mapsui.Geometries.BoundingBox;
 using Color = Microsoft.Xna.Framework.Color;
 
-namespace Mapsui.Rendering.MonoGame_W8
+namespace Mapsui.Rendering.MonoGame
 {
     /// <summary>
     /// This is the main type for your game
     /// </summary>
     public class MapRenderer
     {
-        GraphicsDeviceManager _graphics;
-        SpriteBatch _spriteBatch;
-        private Game _game;
+        GraphicsDeviceManager graphics;
+        SpriteBatch spriteBatch;
+        private readonly Game game;
 
         public MapRenderer(Game game)
         {
-            _game = game;
-            _graphics = new GraphicsDeviceManager(game);
-    
+            this.game = game;
+            graphics = new GraphicsDeviceManager(game);
         }
         
         /// <summary>
@@ -29,10 +28,10 @@ namespace Mapsui.Rendering.MonoGame_W8
         /// </summary>
         public void Draw(Map map, IViewport viewport, GameTime gameTime)
         {
-            if (_spriteBatch == null) _spriteBatch = new SpriteBatch(_game.GraphicsDevice);
+            if (spriteBatch == null) spriteBatch = new SpriteBatch(game.GraphicsDevice);
 
-            _game.GraphicsDevice.Clear(Color.LightGray);
-            _spriteBatch.Begin();
+            game.GraphicsDevice.Clear(Color.LightGray);
+            spriteBatch.Begin();
             
             foreach (var layer in map.Layers)
             {
@@ -47,13 +46,13 @@ namespace Mapsui.Rendering.MonoGame_W8
                         raster.Data.Position = 0;
                         if (!feature.RenderedGeometry.Keys.Contains(new VectorStyle()))
                         {
-                            feature.RenderedGeometry[new VectorStyle()] = Texture2D.FromStream(_game.GraphicsDevice, raster.Data);
+                            feature.RenderedGeometry[new VectorStyle()] = Texture2D.FromStream(game.GraphicsDevice, raster.Data);
                         }
-                        _spriteBatch.Draw(feature.RenderedGeometry[new VectorStyle()] as Texture2D, destination, source, Color.White);
+                        spriteBatch.Draw(feature.RenderedGeometry[new VectorStyle()] as Texture2D, destination, source, Color.White);
                     }
                 }
             }
-            _spriteBatch.End();
+            spriteBatch.End();
         }
 
         private static BoundingBox WorldToScreen(IViewport viewport, BoundingBox boundingBox)

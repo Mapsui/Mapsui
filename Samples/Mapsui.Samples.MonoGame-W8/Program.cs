@@ -1,5 +1,5 @@
 ﻿using System;
-using Mapsui.UI.MonoGame_W8;
+using Mapsui.UI.MonoGame;
 
 namespace Mapsui.Samples.MonoGame_W8
 {
