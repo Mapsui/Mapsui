@@ -35,14 +35,7 @@ namespace Mapsui.Rendering.XamlRendering
             return group;
         }
 
-        public static XamlMedia.PathGeometry ToXaml(this LinearRing linearRing)
-        {
-            var pathGeometry = new XamlMedia.PathGeometry();
-            pathGeometry.Figures.Add(CreatePathFigure(linearRing));
-            return pathGeometry;
-        }
-
-        public static XamlMedia.PathGeometry ToXaml(this IEnumerable<LinearRing> linearRings)
+            public static XamlMedia.PathGeometry ToXaml(this IEnumerable<LinearRing> linearRings)
         {
             var pathGeometry = new XamlMedia.PathGeometry();
             foreach (var linearRing in linearRings)
