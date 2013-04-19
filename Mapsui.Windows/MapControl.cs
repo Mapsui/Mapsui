@@ -173,7 +173,7 @@ namespace Mapsui.Windows
                     Visibility = Visibility.Collapsed
                 };
             Children.Add(bboxRect);
-            
+
             Map = new Map();
             MouseInfoOverLayers = new List<ILayer>();
             MouseInfoDownLayers = new List<ILayer>();
@@ -376,7 +376,7 @@ namespace Mapsui.Windows
         private void MapControlSizeChanged(object sender, SizeChangedEventArgs e)
         {
             if (!viewInitialized) InitializeView();
-            Clip = new RectangleGeometry {Rect = new Rect(0, 0, ActualWidth, ActualWidth)};
+            Clip = new RectangleGeometry { Rect = new Rect(0, 0, ActualWidth, ActualHeight) };
             UpdateSize();
             map.ViewChanged(true, viewport.Extent, viewport.Resolution);
             OnViewChanged(true);
@@ -693,7 +693,7 @@ namespace Mapsui.Windows
         {
             if (Map.Envelope == null) return;
             if (ActualWidth.IsNanOrZero()) return;
-            viewport.Resolution =  Map.Envelope.Width / ActualWidth;
+            viewport.Resolution = Map.Envelope.Width / ActualWidth;
             viewport.Center = Map.Envelope.GetCentroid();
         }
 
