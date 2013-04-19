@@ -2,6 +2,7 @@
 using Mapsui.Layers;
 using Mapsui.Rendering.MonoGame;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Input.Touch;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,7 @@ namespace Mapsui.UI.MonoGame
         private Vector2  previousPosition;
         private TouchCollection? previousTouches;
         private double previousDistance;
+        private double previousScrollViewValue;
         
         public MapControl()
         {
@@ -74,8 +76,21 @@ namespace Mapsui.UI.MonoGame
             var touches = TouchPanel.GetState();
             var center = GetCenter(touches);
             var distance = GetDistance(touches, center);
+            double scale = 1;
 
-            var scale = GetScale(distance, previousDistance);
+            MouseState mouseState = Mouse.GetState();
+            
+            var scrollViewValue = mouseState.ScrollWheelValue;
+            if (scrollViewValue == previousScrollViewValue)
+            {
+
+                scale = GetScale(distance, previousDistance);
+            }
+            else
+            {
+                if (scrollViewValue > previousScrollViewValue) viewport.Resolution *= 0.5;
+                else viewport.Resolution *= 2;
+            }
 
             if (center != default(Vector2) && touches.Count > 0 &&
                 previousTouches != null &&
@@ -87,6 +102,7 @@ namespace Mapsui.UI.MonoGame
             previousPosition = center;
             previousTouches = touches;
             previousDistance = distance;
+            previousScrollViewValue = scrollViewValue;
             base.Update(gameTime);
         }
 
