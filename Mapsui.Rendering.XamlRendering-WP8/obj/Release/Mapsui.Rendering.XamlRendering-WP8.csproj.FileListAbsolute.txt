@@ -1,0 +1,8 @@
+C:\Users\harmens\Documents\Projecten\2013\BevoegdGezeg\Mapsui.Rendering.XamlRendering-WP8\obj\Release\Mapsui.Rendering.XamlRendering-WP8.csprojResolveAssemblyReference.cache
+C:\Users\harmens\Documents\Projecten\2013\BevoegdGezeg\Mapsui.Rendering.XamlRendering-WP8\Bin\Release\BruTile.dll
+C:\Users\harmens\Documents\Projecten\2013\BevoegdGezeg\Mapsui.Rendering.XamlRendering-WP8\Bin\Release\Mapsui.dll
+C:\Users\harmens\Documents\Projecten\2013\BevoegdGezeg\Mapsui.Rendering.XamlRendering-WP8\Bin\Release\Mapsui.pdb
+C:\Users\harmens\Documents\Projecten\2013\BevoegdGezeg\Mapsui.Rendering.XamlRendering-WP8\Bin\Release\Mapsui.Rendering.XamlRendering.dll
+C:\Users\harmens\Documents\Projecten\2013\BevoegdGezeg\Mapsui.Rendering.XamlRendering-WP8\Bin\Release\Mapsui.Rendering.XamlRendering.pdb
+C:\Users\harmens\Documents\Projecten\2013\BevoegdGezeg\Mapsui.Rendering.XamlRendering-WP8\obj\Release\Mapsui.Rendering.XamlRendering.dll
+C:\Users\harmens\Documents\Projecten\2013\BevoegdGezeg\Mapsui.Rendering.XamlRendering-WP8\obj\Release\Mapsui.Rendering.XamlRendering.pdb
