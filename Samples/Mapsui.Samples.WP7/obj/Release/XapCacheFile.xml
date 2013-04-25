@@ -1,14 +1,16 @@
-﻿<xapCache source="C:\Users\harmens\Documents\Projecten\2013\BevoegdGezeg\Samples\Mapsui.Samples.WP7\Bin\Release\Mapsui.Samples.WP7.xap" wasSigned="False" certificateThumbprint="" TimeStampUrl="" lastWriteTime="19-4-2013 17:27:26">
-  <file source="C:\Users\harmens\Documents\Projecten\2013\BevoegdGezeg\Samples\Mapsui.Samples.WP7\Bin\Release\WMAppManifest.xml" archivePath="WMAppManifest.xml" lastWriteTime="19-4-2013 17:14:46" />
-  <file source="C:\Users\harmens\Documents\Projecten\2013\BevoegdGezeg\Samples\Mapsui.Samples.WP7\Background.png" archivePath="Background.png" lastWriteTime="19-4-2013 17:05:22" />
-  <file source="C:\Users\harmens\Documents\Projecten\2013\BevoegdGezeg\Samples\Mapsui.Samples.WP7\ApplicationIcon.png" archivePath="ApplicationIcon.png" lastWriteTime="19-4-2013 17:05:22" />
-  <file source="C:\Users\harmens\Documents\Projecten\2013\BevoegdGezeg\Samples\Mapsui.Samples.WP7\obj\Release\Mapsui.Samples.WP7.dll" archivePath="Mapsui.Samples.WP7.dll" lastWriteTime="19-4-2013 17:27:26" />
-  <file source="C:\Users\harmens\Documents\Projecten\2013\BevoegdGezeg\Samples\Mapsui.Samples.WP7\Bin\Release\BruTile.dll" archivePath="BruTile.dll" lastWriteTime="11-4-2013 16:57:02" />
+﻿<xapCache source="c:\Users\harmens\Documents\Projecten\2013\BevoegdGezeg\Samples\Mapsui.Samples.WP7\Bin\Release\Mapsui.Samples.WP7.xap" wasSigned="False" certificateThumbprint="" TimeStampUrl="" lastWriteTime="25-4-2013 14:20:51">
+  <file source="c:\Users\harmens\Documents\Projecten\2013\BevoegdGezeg\Samples\Mapsui.Samples.WP7\Bin\Release\WMAppManifest.xml" archivePath="WMAppManifest.xml" lastWriteTime="19-4-2013 17:14:46" />
+  <file source="c:\Users\harmens\Documents\Projecten\2013\BevoegdGezeg\Samples\Mapsui.Samples.WP7\Background.png" archivePath="Background.png" lastWriteTime="19-4-2013 17:05:22" />
+  <file source="c:\Users\harmens\Documents\Projecten\2013\BevoegdGezeg\Samples\Mapsui.Samples.WP7\ApplicationIcon.png" archivePath="ApplicationIcon.png" lastWriteTime="19-4-2013 17:05:22" />
+  <file source="c:\Users\harmens\Documents\Projecten\2013\BevoegdGezeg\Samples\Mapsui.Samples.WP7\obj\Release\Mapsui.Samples.WP7.dll" archivePath="Mapsui.Samples.WP7.dll" lastWriteTime="25-4-2013 14:20:50" />
+  <file source="c:\Users\harmens\Documents\Projecten\2013\BevoegdGezeg\Samples\Mapsui.Samples.WP7\Bin\Release\BruTile.dll" archivePath="BruTile.dll" lastWriteTime="11-4-2013 16:57:02" />
   <file source="c:\Users\harmens\Documents\Projecten\2013\BevoegdGezeg\Mapsui\bin\Release\Mapsui.dll" archivePath="Mapsui.dll" lastWriteTime="19-4-2013 17:27:17" />
   <file source="c:\Users\harmens\Documents\Projecten\2013\BevoegdGezeg\Mapsui.Rendering.XamlRendering-WP7\Bin\Release\Mapsui.Rendering.XamlRendering.dll" archivePath="Mapsui.Rendering.XamlRendering.dll" lastWriteTime="19-4-2013 17:27:19" />
-  <file source="c:\Users\harmens\Documents\Projecten\2013\BevoegdGezeg\Mapsui.Windows-WP7\Bin\Release\Mapsui.Windows.dll" archivePath="Mapsui.Windows.dll" lastWriteTime="19-4-2013 17:27:20" />
-  <file source="C:\Users\harmens\Documents\Projecten\2013\BevoegdGezeg\Samples\Mapsui.Samples.WP7\SplashScreenImage.jpg" archivePath="SplashScreenImage.jpg" lastWriteTime="19-4-2013 17:05:22" />
-  <file source="C:\Users\harmens\Documents\Projecten\2013\BevoegdGezeg\Samples\Mapsui.Samples.WP7\Bin\Release\AppManifest.xaml" archivePath="AppManifest.xaml" lastWriteTime="19-4-2013 17:22:44" />
-  <file source="C:\Users\harmens\Documents\Projecten\2013\BevoegdGezeg\Samples\Mapsui.Samples.WP7\Bin\Release\ApplicationIcon.png" archivePath="ApplicationIcon.png" lastWriteTime="19-4-2013 17:05:22" />
-  <file source="C:\Users\harmens\Documents\Projecten\2013\BevoegdGezeg\Samples\Mapsui.Samples.WP7\Bin\Release\Background.png" archivePath="Background.png" lastWriteTime="19-4-2013 17:05:22" />
+  <file source="c:\Users\harmens\Documents\Projecten\2013\BevoegdGezeg\Mapsui.Windows-WP7\Bin\Release\Mapsui.Windows.dll" archivePath="Mapsui.Windows.dll" lastWriteTime="25-4-2013 14:20:50" />
+  <file source="c:\Users\harmens\Documents\Projecten\2013\BevoegdGezeg\Samples\Mapsui.Samples.WP7\Images\appbar.add.rest.png" archivePath="Images\appbar.add.rest.png" lastWriteTime="6-7-2012 02:38:12" />
+  <file source="c:\Users\harmens\Documents\Projecten\2013\BevoegdGezeg\Samples\Mapsui.Samples.WP7\Images\appbar.minus.rest.png" archivePath="Images\appbar.minus.rest.png" lastWriteTime="6-7-2012 02:38:22" />
+  <file source="c:\Users\harmens\Documents\Projecten\2013\BevoegdGezeg\Samples\Mapsui.Samples.WP7\SplashScreenImage.jpg" archivePath="SplashScreenImage.jpg" lastWriteTime="19-4-2013 17:05:22" />
+  <file source="c:\Users\harmens\Documents\Projecten\2013\BevoegdGezeg\Samples\Mapsui.Samples.WP7\Bin\Release\AppManifest.xaml" archivePath="AppManifest.xaml" lastWriteTime="19-4-2013 17:22:44" />
+  <file source="c:\Users\harmens\Documents\Projecten\2013\BevoegdGezeg\Samples\Mapsui.Samples.WP7\Bin\Release\ApplicationIcon.png" archivePath="ApplicationIcon.png" lastWriteTime="19-4-2013 17:05:22" />
+  <file source="c:\Users\harmens\Documents\Projecten\2013\BevoegdGezeg\Samples\Mapsui.Samples.WP7\Bin\Release\Background.png" archivePath="Background.png" lastWriteTime="19-4-2013 17:05:22" />
 </xapCache>

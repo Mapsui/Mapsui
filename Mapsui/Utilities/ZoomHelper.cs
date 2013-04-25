@@ -41,7 +41,7 @@ namespace Mapsui.Utilities
             if (resolutions.Count == 0) return resolution;
 
             //smaller than smallest
-            if (resolutions[resolutions.Count - 1] > resolution) return resolutions[resolutions.Count - 1];
+            if (resolutions[resolutions.Count - 1] > (resolution + 0.2 * resolution)) return resolutions[resolutions.Count - 1];
 
             //bigger than biggest
             if (resolutions[0] < resolution) return resolutions[0];
@@ -58,7 +58,7 @@ namespace Mapsui.Utilities
 
             for (int i = resolutions.Count - 1; i >= 0; i--)
             {
-                if (resolutions[i] > resolution)
+                if (resolutions[i] > (resolution + 0.2 * resolution))
                     return resolutions[i];
             }
             return resolutions[0];

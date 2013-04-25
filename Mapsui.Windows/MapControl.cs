@@ -15,6 +15,7 @@
 // along with Mapsui; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA f
 
+using System.Diagnostics;
 using Mapsui.Fetcher;
 using Mapsui.Layers;
 using Mapsui.Providers;
@@ -182,19 +183,27 @@ namespace Mapsui.Windows
             KeyUp += MapControlKeyUp;
             MouseLeftButtonDown += MapControlMouseLeftButtonDown;
             MouseLeftButtonUp += MapControlMouseLeftButtonUp;
+#if (!WINDOWS_PHONE) //turn off mouse controls
             MouseMove += MapControlMouseMove;
             MouseLeave += MapControlMouseLeave;
             MouseWheel += MapControlMouseWheel;
+#endif
             SizeChanged += MapControlSizeChanged;
             CompositionTarget.Rendering += CompositionTargetRendering;
             Renderer = new MapRenderer(RenderCanvas);
 
-#if !SILVERLIGHT
+#if (!SILVERLIGHT && !WINDOWS_PHONE)
             Dispatcher.ShutdownStarted += DispatcherShutdownStarted;
             RenderCanvas.IsManipulationEnabled = true;
             RenderCanvas.ManipulationDelta += OnManipulationDelta;
             RenderCanvas.ManipulationCompleted += OnManipulationCompleted;
             RenderCanvas.ManipulationInertiaStarting += OnManipulationInertiaStarting;
+#endif
+
+#if (WINDOWS_PHONE)
+            RenderCanvas.ManipulationDelta += WP_OnManipulationDelta;
+            RenderCanvas.ManipulationCompleted += WP_OnManipulationCompleted;
+            RenderCanvas.ManipulationStarted += WP_OnManipulationStarted;
 #endif
         }
 
@@ -224,7 +233,7 @@ namespace Mapsui.Windows
 
         private void RefreshGraphics() //should be private soon
         {
-#if !SILVERLIGHT
+#if (!SILVERLIGHT && !WINDOWS_PHONE)
             InvalidateVisual();
 #endif
             InvalidateArrange();
@@ -313,7 +322,7 @@ namespace Mapsui.Windows
             UpdateSize();
             InitAnimation();
 
-#if !SILVERLIGHT
+#if (!SILVERLIGHT && !WINDOWS_PHONE)
             Focusable = true;
 #endif
         }
@@ -490,6 +499,8 @@ namespace Mapsui.Windows
 
         private void MapControlMouseMove(object sender, MouseEventArgs e)
         {
+            Debug.WriteLine("MapControlMouseMove");
+
             if (IsInBoxZoomMode || ZoomToBoxMode)
             {
                 DrawBbox(e.GetPosition(this));
@@ -599,7 +610,7 @@ namespace Mapsui.Windows
             }
         }
 
-#if !SILVERLIGHT
+#if !SILVERLIGHT 
         private void DispatcherShutdownStarted(object sender, EventArgs e)
         {
             CompositionTarget.Rendering -= CompositionTargetRendering;
@@ -699,7 +710,7 @@ namespace Mapsui.Windows
 
         #region WPF4 Touch Support
 
-#if !SILVERLIGHT
+#if (!SILVERLIGHT && !WINDOWS_PHONE)
 
         private static void OnManipulationInertiaStarting(object sender, ManipulationInertiaStartingEventArgs e)
         {
@@ -719,7 +730,40 @@ namespace Mapsui.Windows
             // not calling map.ViewChanged(false, view.Extent, view.Resolution); for smoother panning/zooming
             OnViewChanged(false, true);            
         }
+               
+        private void OnManipulationCompleted(object sender, ManipulationCompletedEventArgs e)
+        {
+            Refresh();
+        }
 
+#endif
+
+#if (WINDOWS_PHONE)
+        private void WP_OnManipulationStarted(object sender, ManipulationStartedEventArgs manipulationStartedEventArgs)
+        {
+        }
+
+        private void WP_OnManipulationCompleted(object sender, ManipulationCompletedEventArgs manipulationCompletedEventArgs)
+        {
+            Refresh();
+        }
+
+        private void WP_OnManipulationDelta(object sender, ManipulationDeltaEventArgs e)
+        {
+            var previous = viewport.ScreenToWorld(e.ManipulationOrigin.X, e.ManipulationOrigin.Y);
+            var current = viewport.ScreenToWorld(e.ManipulationOrigin.X + e.DeltaManipulation.Translation.X, e.ManipulationOrigin.Y + e.DeltaManipulation.Translation.Y);
+
+            double scale = (e.DeltaManipulation.Scale.X != 1d && !ZoomLocked) ?
+                ((e.DeltaManipulation.Scale.X + e.DeltaManipulation.Scale.Y) / 2) : 1.0;
+            PanAndZoom(current, previous, (scale <= 0) ? 1 : scale);
+
+            invalid = true;
+            // not calling map.ViewChanged(false, view.Extent, view.Resolution); for smoother panning/zooming
+            OnViewChanged(false, true);
+        }
+#endif
+
+        //end of windows phone support
         private void PanAndZoom(Geometries.Point current, Geometries.Point previous, double deltaScale)
         {
             var diffX = previous.X - current.X;
@@ -732,13 +776,6 @@ namespace Mapsui.Windows
 
             viewport.Center = new Geometries.Point(newX - zoomCorrectionX, newY - zoomCorrectionY);
         }
-               
-        private void OnManipulationCompleted(object sender, ManipulationCompletedEventArgs e)
-        {
-            Refresh();
-        }
-
-#endif
 
         #endregion
     }

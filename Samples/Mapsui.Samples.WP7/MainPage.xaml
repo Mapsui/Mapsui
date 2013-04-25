@@ -30,7 +30,17 @@
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <mapsui:MapControl x:Name="MapControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+            
         </Grid>
     </Grid>
- 
+
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsMenuEnabled="False">
+            <shell:ApplicationBar.Buttons>
+                <shell:ApplicationBarIconButton Text="zoom out"  x:Name="BtnZoomOut" IconUri="/Images/appbar.minus.rest.png" Click="BtnZoomOutClick"></shell:ApplicationBarIconButton>
+                <shell:ApplicationBarIconButton Text="zoom in" x:Name="BtnZoomIn" IconUri="/Images/appbar.add.rest.png" Click="BtnZoomInClick" ></shell:ApplicationBarIconButton>
+            </shell:ApplicationBar.Buttons>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+
 </phone:PhoneApplicationPage>

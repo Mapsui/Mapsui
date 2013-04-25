@@ -34,6 +34,16 @@ namespace Mapsui.Samples.WP8
             MapControl.Refresh();
         }
 
+        private void BtnZoomOutClick(object sender, EventArgs e)
+        {
+            MapControl.ZoomOut();
+        }
+
+        private void BtnZoomInClick(object sender, EventArgs e)
+        {
+            MapControl.ZoomIn();
+        }
+
         // Sample code for building a localized ApplicationBar
         //private void BuildLocalizedApplicationBar()
         //{

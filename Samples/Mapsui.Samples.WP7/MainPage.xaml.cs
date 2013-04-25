@@ -33,5 +33,15 @@ namespace Mapsui.Samples.WP7
             MapControl.Map.Layers.Add(osm);
             MapControl.Refresh();
         }
+
+        private void BtnZoomOutClick(object sender, EventArgs e)
+        {
+            MapControl.ZoomOut();
+        }
+
+        private void BtnZoomInClick(object sender, EventArgs e)
+        {
+            MapControl.ZoomIn();
+        }
     }
 }
