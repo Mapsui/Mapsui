@@ -35,7 +35,7 @@ namespace Mapsui.Rendering.XamlRendering
             return group;
         }
 
-            public static XamlMedia.PathGeometry ToXaml(this IEnumerable<LinearRing> linearRings)
+        public static XamlMedia.PathGeometry ToXaml(this IEnumerable<LinearRing> linearRings)
         {
             var pathGeometry = new XamlMedia.PathGeometry();
             foreach (var linearRing in linearRings)
@@ -60,14 +60,14 @@ namespace Mapsui.Rendering.XamlRendering
             return group;
         }
 
-        private static XamlMedia.PathFigure CreatePathFigure(LineString linearRing)
+        private static XamlMedia.PathFigure CreatePathFigure(LineString lineString)
         {
             var pathFigure = new XamlMedia.PathFigure();
-            pathFigure.IsClosed = true;
+            pathFigure.IsClosed = lineString.IsClosed; //changed by report of Akrog (item 9194)
 
             bool first = true;
 
-            foreach (var point in linearRing.Vertices)
+            foreach (var point in lineString.Vertices)
             {
                 if (first)
                 {
