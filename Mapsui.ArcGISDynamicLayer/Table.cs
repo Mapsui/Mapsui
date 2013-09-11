@@ -1,4 +1,4 @@
-﻿namespace Mapsui.Providers.ArcGis
+﻿namespace Mapsui.ArcGISDynamicLayer
 {
     public class Table
     {

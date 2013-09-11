@@ -1,10 +1,11 @@
-﻿using System;
-using System.IO;
-using System.Net;
+﻿using BruTile.Extensions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System;
+using System.IO;
+using System.Net;
 
-namespace Mapsui.Providers.ArcGis
+namespace Mapsui.ArcGISDynamicLayer
 {
     public delegate void ArcgisLegendEventHandler(object sender, ArcGisLegendResponse legendInfo);
 
@@ -14,9 +15,9 @@ namespace Mapsui.Providers.ArcGis
     /// </summary>
     public class ArcGisLegend
     {
-        private int _timeOut { get; set; }
-        private WebRequest _webRequest { get; set; }
-        private ArcGisLegendResponse _legendResponse { get; set; }
+        private int _timeOut;
+        private HttpWebRequest _webRequest;
+        private ArcGisLegendResponse _legendResponse;
 
         public event ArcgisLegendEventHandler LegendReceived;
         public event ArcgisLegendEventHandler LegendFailed;
@@ -39,38 +40,30 @@ namespace Mapsui.Providers.ArcGis
         /// Get the legend for the given mapserver
         /// </summary>
         /// <param name="serviceUrl">Url to the mapserver</param>
-        public void GetLegendInfoAsync(string serviceUrl)
-        {
-            GetLegendInfoAsync(serviceUrl, CredentialCache.DefaultCredentials);
-        }
-
-        public void GetLegendInfoAsync(string serviceUrl, ICredentials credentials)
+        /// <param name="credentials">Credentials</param>
+        public void GetLegendInfoAsync(string serviceUrl, ICredentials credentials = null)
         {
             _webRequest = CreateRequest(serviceUrl, credentials);
             _webRequest.BeginGetResponse(FinishWebRequest, null);
         }
 
-        public ArcGisLegendResponse GetLegendInfo(string serviceUrl)
-        {
-            var legendInfo = GetLegendInfo(serviceUrl, CredentialCache.DefaultCredentials);
-            return legendInfo;
-        }
-
-        public ArcGisLegendResponse GetLegendInfo(string serviceUrl, ICredentials credentials)
+        public ArcGisLegendResponse GetLegendInfo(string serviceUrl, ICredentials credentials = null)
         {
             _webRequest = CreateRequest(serviceUrl, credentials);
-            var response = _webRequest.GetResponse();
+            var response = _webRequest.GetSyncResponse(_timeOut);
             _legendResponse = GetLegendResponseFromWebresponse(response);
             return _legendResponse;
         }
 
-        private WebRequest CreateRequest(string serviceUrl, ICredentials credentials)
+        private HttpWebRequest CreateRequest(string serviceUrl, ICredentials credentials)
         {
             var trailing = serviceUrl.Contains("?") ? "&" : "?";
             var requestUrl = string.Format("{0}/legend{1}f=json", serviceUrl, trailing);
-            _webRequest = WebRequest.Create(requestUrl);
-            _webRequest.Timeout = _timeOut;
-            _webRequest.Credentials = credentials;
+            _webRequest = (HttpWebRequest)WebRequest.Create(requestUrl);
+            if (credentials == null)
+                _webRequest.UseDefaultCredentials = true;
+            else
+                _webRequest.Credentials = credentials;
 
             return _webRequest;
         }
@@ -79,7 +72,7 @@ namespace Mapsui.Providers.ArcGis
         {
             try
             {
-                var response = (HttpWebResponse)_webRequest.GetResponse();
+                var response = _webRequest.GetSyncResponse(_timeOut);
                 _legendResponse = GetLegendResponseFromWebresponse(response);
                 _webRequest.EndGetResponse(result);
 
@@ -107,13 +100,13 @@ namespace Mapsui.Providers.ArcGis
                 var jToken = JObject.Parse(jsonString);
                 var legendResponse = (ArcGisLegendResponse)serializer.Deserialize(new JTokenReader(jToken), typeof(ArcGisLegendResponse));
 
-                dataStream.Close();
-                webResponse.Close();
+                dataStream.Dispose();
+                webResponse.Dispose();
 
                 return legendResponse;
             }
 
-            webResponse.Close();
+            webResponse.Dispose();
 
             return null;
         }

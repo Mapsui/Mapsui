@@ -1,18 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Net;
+﻿using BruTile.Extensions;
 using Mapsui.Geometries;
-using System.Diagnostics;
+using Mapsui.Providers;
+using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Net;
+using System.Text;
 
-namespace Mapsui.Providers.ArcGis
+namespace Mapsui.ArcGISDynamicLayer
 {
     public class ArcGisDynamicProvider : IProvider
     {
-        private int timeOut;
-        private string url;
+        private int _timeOut;
+        private string _url;
 
         /// <summary>
         /// Create ArcGisDynamicProvider based on a given capabilities file
@@ -23,7 +24,7 @@ namespace Mapsui.Providers.ArcGis
         {
             Url = url;
             Capabilities = capabilities;
-            timeOut = 10000;            
+            _timeOut = 10000;            
         }
 
         /// <summary>
@@ -45,7 +46,7 @@ namespace Mapsui.Providers.ArcGis
             capabilitiesHelper.CapabilitiesFailed += CapabilitiesHelperCapabilitiesFailed;
             capabilitiesHelper.GetCapabilities(url);
 
-            timeOut = 10000;
+            _timeOut = 10000;
         }
 
         public Capabilities Capabilities { get; private set; }
@@ -53,12 +54,12 @@ namespace Mapsui.Providers.ArcGis
 
         public string Url
         {
-            get { return url; }
+            get { return _url; }
             set
             {
-                url = value;
+                _url = value;
                 if (value[value.Length - 1].Equals('/'))
-                    url = value.Remove(value.Length - 1);
+                    _url = value.Remove(value.Length - 1);
             }
         }
 
@@ -67,8 +68,8 @@ namespace Mapsui.Providers.ArcGis
         /// </summary>
         public int TimeOut
         {
-            get { return timeOut; }
-            set { timeOut = value; }
+            get { return _timeOut; }
+            set { _timeOut = value; }
         }
 
         #region IProvider Members
@@ -137,7 +138,7 @@ namespace Mapsui.Providers.ArcGis
 
         private void CapabilitiesHelperCapabilitiesFailed(object sender, EventArgs e)
         {
-            Trace.Write("Error getting ArcGIS Capabilities");
+            //!!!Trace.Write("Error getting ArcGIS Capabilities");
         }
         
         private void CapabilitiesHelperCapabilitiesReceived(object sender, EventArgs e)
@@ -164,35 +165,36 @@ namespace Mapsui.Providers.ArcGis
             }
             catch (OverflowException)
             {
-                Trace.Write("Could not conver double to int (ExportMap size)");
+                //!!!Trace.Write("Could not conver double to int (ExportMap size)");
                 return false;
             }
            
             var uri = new Uri(GetRequestUrl(viewport.Extent, width, height));
-            var request = WebRequest.Create(uri);
-            request.Method = "GET";
-            request.Timeout = timeOut;
-            request.Credentials = Credentials ?? CredentialCache.DefaultCredentials;
+            var request = (HttpWebRequest)WebRequest.Create(uri);
+            if (Credentials == null)
+                request.UseDefaultCredentials = true;
+            else
+                request.Credentials = Credentials;
 
             try
             {
-                var myWebResponse = (HttpWebResponse)request.GetResponse();
+                var myWebResponse = request.GetSyncResponse(_timeOut);
                 var dataStream = myWebResponse.GetResponseStream();
 
                 var bytes = BruTile.Utilities.ReadFully(myWebResponse.GetResponseStream());
                 raster = new Raster(new MemoryStream(bytes), viewport.Extent);
-                if (dataStream != null) dataStream.Close();
+                if (dataStream != null) dataStream.Dispose();
 
-                myWebResponse.Close();
+                myWebResponse.Dispose();
                 return true;
             }
             catch (WebException webEx)
             {
-                Trace.Write("There was a problem connecting to the ArcGIS server: " + webEx.Message);
+                //!!!Trace.Write("There was a problem connecting to the ArcGIS server: " + webEx.Message);
             }
             catch (Exception ex)
             {
-                Trace.Write("There was a problem while attempting to request the ArcGIS layer" + ex.Message);
+                //!!!Trace.Write("There was a problem while attempting to request the ArcGIS layer" + ex.Message);
             }
 
             return false;
@@ -209,7 +211,7 @@ namespace Mapsui.Providers.ArcGis
         {
             //ArcGIS Export description see: http://resources.esri.com/help/9.3/arcgisserver/apis/rest/index.html?export.html
 
-            var strReq = new StringBuilder(url);
+            var strReq = new StringBuilder(_url);
             strReq.Append("/export?");
             strReq.AppendFormat(CultureInfo.InvariantCulture, "bbox={0},{1},{2},{3}", box.Min.X, box.Min.Y, box.Max.X, box.Max.Y);
             strReq.AppendFormat("&bboxSR={0}", SRID);

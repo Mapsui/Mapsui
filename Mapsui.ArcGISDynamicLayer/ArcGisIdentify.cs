@@ -1,12 +1,13 @@
-﻿using System;
+﻿using BruTile.Extensions;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Net;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
-namespace Mapsui.Providers.ArcGis
+namespace Mapsui.ArcGISDynamicLayer
 {
     //Documentation 9.3: http://resources.esri.com/help/9.3/arcgisserver/apis/rest/
     //Documentation 10.0: http://help.arcgis.com/EN/arcgisserver/10.0/apis/rest/index.html
@@ -15,7 +16,7 @@ namespace Mapsui.Providers.ArcGis
     public class ArcGisIdentify
     {
         private int _timeOut { get; set; }
-        private WebRequest _webRequest { get; set; }
+        private HttpWebRequest _webRequest { get; set; }
         private ArcGisFeatureInfo _featureInfo { get; set; }
 
         public event StatusEventHandler IdentifyFinished;
@@ -50,15 +51,12 @@ namespace Mapsui.Providers.ArcGis
         /// <param name="mapWidth">The screen image display width</param>
         /// <param name="mapHeight">The screen image display height</param>
         /// <param name="mapDpi">The screen image display dpi, default is: 96</param>
-        public void Request(string url, double x, double y, int tolerance, string[] layers, double extendXmin, double extendYmin, double extendXmax, double extendYmax, double mapWidth, double mapHeight, double mapDpi, bool returnGeometry)
-        {
-            Request(url, x, y, tolerance, layers, extendXmin, extendYmin, extendXmax, extendYmax, mapWidth, mapHeight, mapDpi, returnGeometry , CredentialCache.DefaultCredentials);
-        }
-
-        public void Request(string url, double x, double y, int tolerance, string[] layers, double extendXmin, double extendYmin, double extendXmax, double extendYmax, double mapWidth, double mapHeight, double mapDpi, bool returnGeometry, ICredentials credentials)
+        /// <param name="returnGeometry"></param>
+        /// <param name="credentials"></param>
+        public void Request(string url, double x, double y, int tolerance, string[] layers, double extendXmin, double extendYmin, double extendXmax, double extendYmax, double mapWidth, double mapHeight, double mapDpi, bool returnGeometry, ICredentials credentials = null)
         {
             //remove trailing slash from url
-            if (url.Length > 0 && url[url.Length - 1].Equals("/"))
+            if (url.Length > 0 && url[url.Length - 1].Equals('/'))
                 url = url.Remove(url.Length - 1, 1);
 
             var pointGeom = string.Format(CultureInfo.InvariantCulture, "{0},{1}", x, y);
@@ -67,9 +65,11 @@ namespace Mapsui.Providers.ArcGis
             var imageDisplay = string.Format(CultureInfo.InvariantCulture, "{0},{1},{2}", mapWidth, mapHeight, mapDpi);
             var requestUrl = string.Format("{0}/identify?f=pjson&geometryType=esriGeometryPoint&geometry={1}&tolerance={2}{3}&mapExtent={4}&imageDisplay={5}&returnGeometry={6}", url, pointGeom, tolerance, layersString, mapExtend, imageDisplay, returnGeometry);
 
-            _webRequest = WebRequest.Create(requestUrl);
-            _webRequest.Timeout = _timeOut;
-            _webRequest.Credentials = credentials;
+            _webRequest = (HttpWebRequest)WebRequest.Create(requestUrl);
+            if (credentials == null)
+                _webRequest.UseDefaultCredentials = true;
+            else
+                _webRequest.Credentials = credentials;
 
             _webRequest.BeginGetResponse(FinishWebRequest, null);
         }
@@ -96,7 +96,7 @@ namespace Mapsui.Providers.ArcGis
         {
             try
             {
-                var response = (HttpWebResponse)_webRequest.GetResponse();
+                var response = _webRequest.GetSyncResponse(_timeOut);
                 var dataStream = CopyAndClose(response.GetResponseStream());
 
                 if (dataStream != null)
@@ -119,10 +119,10 @@ namespace Mapsui.Providers.ArcGis
                             return;
                         }
                     }
-                    dataStream.Close();
+                    dataStream.Dispose();
                 }
 
-                response.Close();
+                response.Dispose();
                 _webRequest.EndGetResponse(result);
                 OnIdentifyFinished();
             }
@@ -145,7 +145,7 @@ namespace Mapsui.Providers.ArcGis
                 count = inputStream.Read(buffer, 0, readSize);
             }
             ms.Position = 0;
-            inputStream.Close();
+            inputStream.Dispose();
             return ms;
         }
 

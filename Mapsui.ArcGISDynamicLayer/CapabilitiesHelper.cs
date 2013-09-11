@@ -1,16 +1,17 @@
-﻿using System;
+﻿using BruTile;
+using BruTile.Extensions;
+using System;
 using System.IO;
-using BruTile;
 using System.Net;
 using System.Runtime.Serialization.Json;
 
-namespace Mapsui.Providers.ArcGis
+namespace Mapsui.ArcGISDynamicLayer
 {
     public class CapabilitiesHelper
     {
         #region fields
 
-        private WebRequest _webRequest { get; set; }
+        private HttpWebRequest _webRequest { get; set; }
         private Capabilities _capabilities { get; set; }
         private int _timeOut { get; set; }
         private string _url { get; set; }
@@ -48,18 +49,9 @@ namespace Mapsui.Providers.ArcGis
         /// <summary>
         /// Get the capabilities of an ArcGIS Map Service
         /// </summary>
-        /// <param name="url">Url of map service, example: http://url/arcgis/rest/services/test/MapServer</param>
-        public void GetCapabilities(string url)
-        {
-            GetCapabilities(url, CredentialCache.DefaultCredentials);
-        }
-
-        /// <summary>
-        /// Get the capabilities of an ArcGIS Map Service
-        /// </summary>
         /// <param name="url">Url of map service example: http://url/arcgis/rest/services/test/MapServer </param>
         /// <param name="credentials">Credentials to access the service </param>
-        public void GetCapabilities(string url, ICredentials credentials)
+        public void GetCapabilities(string url, ICredentials credentials = null)
         {
             //Check if user added a trailing slash and remove if exist, some webservers can't handle this
             _url = url;
@@ -67,18 +59,20 @@ namespace Mapsui.Providers.ArcGis
                 _url = url.Remove(url.Length - 1);
 
             var requestUri = string.Format("{0}?f=json", _url);
-            _webRequest = WebRequest.Create(requestUri);
-            _webRequest.Timeout = _timeOut;
-            _webRequest.Credentials = credentials;
+            _webRequest = (HttpWebRequest)WebRequest.Create(requestUri);
+            if (credentials == null)
+                _webRequest.UseDefaultCredentials = true;
+            else
+                _webRequest.Credentials = credentials;
 
-            _webRequest.BeginGetResponse(new AsyncCallback(FinishWebRequest), null);
+            _webRequest.BeginGetResponse(FinishWebRequest, null);
         }
 
         private void FinishWebRequest(IAsyncResult result)
         {
             try
             {
-                var response = (HttpWebResponse)_webRequest.GetResponse();
+                var response = _webRequest.GetSyncResponse(_timeOut);
                 var dataStream = CopyAndClose(response.GetResponseStream());
                 
                 var serializer = new DataContractJsonSerializer(typeof(Capabilities));
@@ -103,8 +97,8 @@ namespace Mapsui.Providers.ArcGis
                     }
                 }
 
-                if (dataStream != null) dataStream.Close();
-                response.Close();
+                if (dataStream != null) dataStream.Dispose();
+                response.Dispose();
 
                 _webRequest.EndGetResponse(result);
                 OnFinished(EventArgs.Empty);
@@ -128,7 +122,7 @@ namespace Mapsui.Providers.ArcGis
                 count = inputStream.Read(buffer, 0, readSize);
             }
             ms.Position = 0;
-            inputStream.Close();
+            inputStream.Dispose();
             return ms;
         }
 
