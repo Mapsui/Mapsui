@@ -188,6 +188,8 @@ namespace Mapsui.Rendering
         /// </summary>
         public LabelStyle Style { get; set; }
 
+        public Pen Halo { get; set; }
+
         #region IComparable<Label> Members
 
         /// <summary>

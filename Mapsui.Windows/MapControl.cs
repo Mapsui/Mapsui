@@ -102,7 +102,7 @@ namespace Mapsui.Windows
                     map.PropertyChanged += MapPropertyChanged;
                     map.ViewChanged(true, viewport.Extent, viewport.Resolution);
                 }
-                OnViewChanged(true);
+                OnViewChanged();
                 RefreshGraphics();
             }
         }
@@ -209,12 +209,12 @@ namespace Mapsui.Windows
 
         #region Public methods
 
-        public void OnViewChanged(bool changeEnd)
+        public void OnViewChanged()
         {
-            OnViewChanged(changeEnd, false);
+            OnViewChanged(false);
         }
 
-        private void OnViewChanged(bool changeEnd, bool userAction)
+        private void OnViewChanged(bool userAction)
         {
             if (map != null)
             {
@@ -306,7 +306,7 @@ namespace Mapsui.Windows
               viewport.Height - mousePosition.Y);
 
             map.ViewChanged(true, viewport.Extent, viewport.Resolution);
-            OnViewChanged(true);
+            OnViewChanged();
             RefreshGraphics();
         }
 
@@ -363,7 +363,7 @@ namespace Mapsui.Windows
             viewport.CenterX += 0.000000001;
             viewport.CenterY += 0.000000001;
             map.ViewChanged(false, viewport.Extent, viewport.Resolution);
-            OnViewChanged(false, true);
+            OnViewChanged(true);
 
             StartZoomAnimation(viewport.Resolution, toResolution);
         }
@@ -388,16 +388,13 @@ namespace Mapsui.Windows
             Clip = new RectangleGeometry { Rect = new Rect(0, 0, ActualWidth, ActualHeight) };
             UpdateSize();
             map.ViewChanged(true, viewport.Extent, viewport.Resolution);
-            OnViewChanged(true);
+            OnViewChanged();
             Refresh();
         }
 
         private void UpdateSize()
         {
-            var rect = new RectangleGeometry();
-            rect.Rect = new Rect(0f, 0f, ActualWidth, ActualHeight);
-
-            if (Viewport != null)
+            if (viewport != null)
             {
                 viewport.Width = ActualWidth;
                 viewport.Height = ActualHeight;
@@ -466,7 +463,7 @@ namespace Mapsui.Windows
             }
 
             map.ViewChanged(true, viewport.Extent, viewport.Resolution);
-            OnViewChanged(true, true);
+            OnViewChanged(true);
             mouseDown = false;
 
             previousMousePosition = new Point();
@@ -520,7 +517,7 @@ namespace Mapsui.Windows
                 viewport.Transform(currentMousePosition.X, currentMousePosition.Y, previousMousePosition.X, previousMousePosition.Y);
                 previousMousePosition = currentMousePosition;
                 map.ViewChanged(false, viewport.Extent, viewport.Resolution);
-                OnViewChanged(false, true);
+                OnViewChanged(true);
                 RefreshGraphics();
             }
         }
@@ -641,7 +638,7 @@ namespace Mapsui.Windows
             toResolution = resolution;
 
             map.ViewChanged(true, viewport.Extent, viewport.Resolution);
-            OnViewChanged(true, true);
+            OnViewChanged(true);
             RefreshGraphics();
             ClearBBoxDrawing();
         }
@@ -728,7 +725,7 @@ namespace Mapsui.Windows
 
             invalid = true;
             // not calling map.ViewChanged(false, view.Extent, view.Resolution); for smoother panning/zooming
-            OnViewChanged(false, true);            
+            OnViewChanged(true);            
         }
                
         private void OnManipulationCompleted(object sender, ManipulationCompletedEventArgs e)
@@ -759,7 +756,7 @@ namespace Mapsui.Windows
 
             invalid = true;
             // not calling map.ViewChanged(false, view.Extent, view.Resolution); for smoother panning/zooming
-            OnViewChanged(false, true);
+            OnViewChanged(true);
         }
 #endif
 

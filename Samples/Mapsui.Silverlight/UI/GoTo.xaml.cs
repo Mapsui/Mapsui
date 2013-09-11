@@ -80,7 +80,7 @@ namespace Mapsui.Silverlight
                     Mapsui.Geometries.Point sphericalLocation = SphericalMercator.FromLonLat(Double.Parse(lonLat[1], CultureInfo.InvariantCulture), Double.Parse(lonLat[0], CultureInfo.InvariantCulture));
                     gui.mapControl.Viewport.Center = sphericalLocation;
                     //Toresolution has to be set somehow
-                    gui.mapControl.OnViewChanged(true);
+                    gui.mapControl.OnViewChanged();
                     HideGoTo.Begin();
                 }
                 else

@@ -73,6 +73,12 @@
     <Compile Include="..\Mapsui.Rendering.XamlRendering\MatrixHelper.cs">
       <Link>MatrixHelper.cs</Link>
     </Compile>
+    <Compile Include="..\Mapsui.Rendering.XamlRendering\SingleLabelRenderer.cs">
+      <Link>SingleLabelRenderer.cs</Link>
+    </Compile>
+    <Compile Include="..\Mapsui.Rendering.XamlRendering\StackedLabelLayerRenderer.cs">
+      <Link>StackedLabelLayerRenderer.cs</Link>
+    </Compile>
     <Compile Include="..\Mapsui.Rendering.XamlRendering\StyleExtensions.cs">
       <Link>StyleExtensions.cs</Link>
     </Compile>

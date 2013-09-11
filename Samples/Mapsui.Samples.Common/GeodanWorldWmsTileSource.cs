@@ -19,7 +19,7 @@ using System;
 using System.Collections.Generic;
 using BruTile;
 using BruTile.Web;
-using BruTile.PreDefined;
+using BruTile.Predefined;
 
 namespace Mapsui.Samples.Common
 {

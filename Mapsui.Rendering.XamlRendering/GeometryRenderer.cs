@@ -4,8 +4,8 @@ using Mapsui.Styles;
 using Point = Mapsui.Geometries.Point;
 #if !NETFX_CORE
 using System.Windows;
-using XamlMedia = System.Windows.Media;
 using System.Windows.Media.Imaging;
+using XamlMedia = System.Windows.Media;
 using XamlShapes = System.Windows.Shapes;
 using XamlPoint = System.Windows.Point;
 using XamlColors = System.Windows.Media.Colors;
@@ -318,7 +318,7 @@ namespace Mapsui.Rendering.XamlRendering
             {
                 path.Stroke = new XamlMedia.SolidColorBrush(style.Outline.Color.ToXaml());
                 path.StrokeThickness = style.Outline.Width * resolution;
-                path.Tag = new double?(style.Outline.Width); // see #outlinehack
+                path.Tag = style.Outline.Width; // see #outlinehack
             }
             path.Fill = style.Fill.ToXaml();
             path.IsHitTestVisible = false;
@@ -329,7 +329,7 @@ namespace Mapsui.Rendering.XamlRendering
         {
             if (!(style is VectorStyle)) throw new ArgumentException("Style is not of type VectorStyle");
             var vectorStyle = style as VectorStyle;
-            XamlShapes.Path path = CreatePolygonPath(vectorStyle, viewport.Resolution);
+            var path = CreatePolygonPath(vectorStyle, viewport.Resolution);
             path.Data = geometry.ToXaml();
             path.RenderTransform = new XamlMedia.MatrixTransform { Matrix = CreateTransformMatrix1(viewport) };
             return path;
@@ -337,7 +337,7 @@ namespace Mapsui.Rendering.XamlRendering
 
         public static XamlShapes.Path RenderRaster(IRaster raster, IStyle style, IViewport viewport)
         {
-            XamlShapes.Path path = CreateRasterPath(style, raster.Data);
+            var path = CreateRasterPath(style, raster.Data);
             path.Data = ConvertRaster(raster.GetBoundingBox(), viewport);
             MapRenderer.Animate(path, "Opacity", 0, 1, 600, (s, e) => { });
             return path;

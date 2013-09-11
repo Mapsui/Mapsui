@@ -171,12 +171,13 @@ namespace Mapsui.Layers
             LabelFilter = LabelCollisionDetection.SimpleCollisionDetection;
         }
 
-        public string GetLabel(IFeature feature)
+        public string GetLabelText(IFeature feature)
         {
             if (LabelStringDelegate != null)
             {
                 return LabelStringDelegate(feature);
             }
+            if (LabelColumn == null) throw new Exception("LabelColumn was not set");
             return feature[LabelColumn].ToString();
         }
 

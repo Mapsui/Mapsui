@@ -7,10 +7,11 @@ using BruTile;
 using BruTile.Cache;
 using Mapsui.Fetcher;
 using Mapsui.Geometries;
+using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Styles;
 
-namespace Mapsui.Layers
+namespace Mapsui.Windows.Layers
 {
     public class GroupTileLayer : BaseLayer, ITileLayer
     {

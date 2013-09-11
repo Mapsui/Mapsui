@@ -10,6 +10,14 @@ namespace Mapsui.Styles
             A = 255;
         }
 
+        public Color(Color color)
+        {
+            A = color.A;
+            R = color.R;
+            G = color.G;
+            B = color.B;
+        }
+
         public static Color FromArgb(int a, int r, int g, int b)
         {
             return new Color { A = a, R = r, G = g, B = b };

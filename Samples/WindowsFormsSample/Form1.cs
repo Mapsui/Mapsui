@@ -1,4 +1,5 @@
-﻿using BruTile;
+﻿using System.Globalization;
+using BruTile;
 using System;
 using System.Drawing;
 using System.IO;
@@ -58,7 +59,7 @@ namespace WindowsFormsSample
             int i = 0;
             foreach (var resolution in resolutions)
             {
-                schema.Resolutions.Add(new Resolution {UnitsPerPixel = resolution, Id = i++.ToString()});
+                schema.Resolutions[i] = new Resolution {UnitsPerPixel = resolution, Id = i++.ToString(CultureInfo.InvariantCulture)};
             }
         
             schema.OriginX = -20037508.342789;

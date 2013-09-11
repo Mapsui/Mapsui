@@ -1,21 +1,17 @@
 ﻿using BruTile.Web;
+using Mapsui.Geometries;
 using Mapsui.Layers;
+using Mapsui.Providers;
 using Mapsui.Samples.Common;
 using Mapsui.Styles;
 using System.IO;
 using System.Reflection;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace Mapsui.Samples.Metro
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
-    public sealed partial class MainPage : Page
+    public sealed partial class MainPage
     {
         bool _first = true;
 
@@ -27,16 +23,14 @@ namespace Mapsui.Samples.Metro
 
         void mapControl_ViewChanged(object sender, Windows.ViewChangedEventArgs e)
         {
-            if (_first)
-            {
-                _first = false;
+            if (!_first) return;
+            _first = false;
 
-                // sample: zoom to default area at startup
-                var beginPoint = new Geometries.Point(-4000000, 2000000);
-                var endPoint = new Geometries.Point(4000000, 11000000);
-                mapControl.ZoomToBox(beginPoint, endPoint);
-                mapControl.Refresh();
-            }
+            // sample: zoom to default area at startup
+            var beginPoint = new Point(-4000000, 2000000);
+            var endPoint = new Point(4000000, 11000000);
+            mapControl.ZoomToBox(beginPoint, endPoint);
+            mapControl.Refresh();
         }
 
         /// <summary>
@@ -47,18 +41,42 @@ namespace Mapsui.Samples.Metro
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             mapControl.Map.Layers.Add(new TileLayer(new OsmTileSource()));
-            
-            var pointLayer = PointLayerSample.CreateRandomPointLayer(mapControl.Map.Envelope, 200);
-            
+            var provider = CreateRandomPointsProvider();
+            mapControl.Map.Layers.Add(PointLayerSample.CreateRandomPointLayerWithLabel(provider));
+            mapControl.Map.Layers.Add(PointLayerSample.CreateStackedLabelLayer(provider));
+            mapControl.Map.Layers.Add(PointLayerSample.CreateRandomPolygonLayer(mapControl.Map.Envelope, 1));
+        }
+
+        private Stream GetSymbolBitmapStream()
+        {
             // add some sample symbols (resource images) to the map...
             var assembly = typeof(MainPage).GetTypeInfo().Assembly;
             var stream = assembly.GetManifestResourceStream(@"Mapsui.Samples.Metro.Resources.Images.ns.png");
             stream.Position = 0;
-            pointLayer.Styles.Clear();
-            pointLayer.Styles.Add(new SymbolStyle { Symbol = new Bitmap { Data = stream }, SymbolRotation = 45.0 });
-            
-            mapControl.Map.Layers.Add(pointLayer);
-            mapControl.Map.Layers.Add(PointLayerSample.CreateRandomPolygonLayer(mapControl.Map.Envelope, 1));
+            return stream;
+        }
+
+        private MemoryProvider CreateRandomPointsProvider()
+        {
+            var randomPoints = PointLayerSample.GenerateRandomPoints(mapControl.Map.Envelope, 200);
+            var features = new Features();
+            var count = 0;
+            foreach (var point in randomPoints)
+            {
+                var feature = new Feature { Geometry = point };
+                feature["Label"] = count.ToString();
+                features.Add(feature);
+                count++;
+            }
+            return new MemoryProvider(features);
+        }
+
+        private ILayer CreateRandomPointLayerWithLabel(IProvider dataSource, Stream bitmapStream)
+        {
+            var pointLayer = new Layer("pointLayer") { DataSource = dataSource };
+            pointLayer.Styles.Add(new SymbolStyle { Symbol = new Bitmap { Data = bitmapStream }, SymbolRotation = 45.0 });
+            pointLayer.Styles.Add(new LabelStyle { Text = "TestLabel" });
+            return pointLayer;
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)

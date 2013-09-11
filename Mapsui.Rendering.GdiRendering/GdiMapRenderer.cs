@@ -47,7 +47,7 @@ namespace Mapsui.Rendering.GdiRendering
                 {
                     if (layer is LabelLayer)
                     {
-                        //!!!GdiLabelRenderer.Render(graphics, view, layer as LabelLayer);
+                        GdiLabelRenderer.Render(graphics, viewport, layer as LabelLayer);
                     }
                     else if (layer is ITileLayer)
                     {
@@ -69,9 +69,7 @@ namespace Mapsui.Rendering.GdiRendering
             if ((viewport.Width <= 0) || (viewport.Height <= 0)) throw new Exception("The view's width or heigh is 0");
             var image = new System.Drawing.Bitmap((int)viewport.Width, (int)viewport.Height);
             var graphics = Graphics.FromImage(image);
-#if !PocketPC
             graphics.PageUnit = GraphicsUnit.Pixel;
-#endif
             Render(graphics, viewport, map, null);
             return image;
         }
@@ -120,22 +118,22 @@ namespace Mapsui.Rendering.GdiRendering
             }
         }
 
-        private static void RenderGeometry(Graphics graphics, IViewport viewport, IGeometry feature, VectorStyle style)
+        private static void RenderGeometry(Graphics graphics, IViewport viewport, IGeometry geometry, VectorStyle style)
         {
-            if (feature is Point)
-                GdiGeometryRenderer.DrawPoint(graphics, (Point)feature, style, viewport);
-            else if (feature is MultiPoint)
-                GdiGeometryRenderer.DrawMultiPoint(graphics, (MultiPoint) feature, style, viewport);
-            else if (feature is LineString)
-                GdiGeometryRenderer.DrawLineString(graphics, (LineString)feature, style.Line.Convert(), viewport);
-            else if (feature is MultiLineString)
-                GdiGeometryRenderer.DrawMultiLineString(graphics, (MultiLineString)feature, style.Line.Convert(), viewport);
-            else if (feature is Polygon)
-                GdiGeometryRenderer.DrawPolygon(graphics, (Polygon)feature, style.Fill.Convert(), style.Outline.Convert(), viewport);
-            else if (feature is MultiPolygon)
-                GdiGeometryRenderer.DrawMultiPolygon(graphics, (MultiPolygon)feature, style.Fill.Convert(), style.Outline.Convert(), viewport);
-            else if (feature is IRaster)
-                GdiGeometryRenderer.DrawRaster(graphics, feature as IRaster, viewport);
+            if (geometry is Point)
+                GdiGeometryRenderer.DrawPoint(graphics, (Point)geometry, style, viewport);
+            else if (geometry is MultiPoint)
+                GdiGeometryRenderer.DrawMultiPoint(graphics, (MultiPoint) geometry, style, viewport);
+            else if (geometry is LineString)
+                GdiGeometryRenderer.DrawLineString(graphics, (LineString)geometry, style.Line.Convert(), viewport);
+            else if (geometry is MultiLineString)
+                GdiGeometryRenderer.DrawMultiLineString(graphics, (MultiLineString)geometry, style.Line.Convert(), viewport);
+            else if (geometry is Polygon)
+                GdiGeometryRenderer.DrawPolygon(graphics, (Polygon)geometry, style.Fill.Convert(), style.Outline.Convert(), viewport);
+            else if (geometry is MultiPolygon)
+                GdiGeometryRenderer.DrawMultiPolygon(graphics, (MultiPolygon)geometry, style.Fill.Convert(), style.Outline.Convert(), viewport);
+            else if (geometry is IRaster)
+                GdiGeometryRenderer.DrawRaster(graphics, geometry as IRaster, viewport);
         }
     }
 }

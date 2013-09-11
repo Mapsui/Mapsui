@@ -12,6 +12,11 @@ namespace Mapsui.Styles
             Color = color;
         }
 
+        public Brush(Brush brush)
+        {
+            Color = brush.Color;
+        }
+
         public Color Color { get; set; }
 
         #region Equals operator

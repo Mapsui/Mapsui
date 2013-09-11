@@ -9,7 +9,7 @@ namespace Mapsui.Samples.Common
 {
     public static class PointLayerSample
     {
-        private static Random random = new Random(0);
+        private static readonly Random Random = new Random(0);
 
         public static ILayer Create()
         {
@@ -41,16 +41,36 @@ namespace Mapsui.Samples.Common
         public static IEnumerable<IGeometry> GenerateRandomPoints(BoundingBox box, int count = 25)
         {
            var result = new List<IGeometry>();
-            for (int i = 0; i < count; i++)
+            for (var i = 0; i < count; i++)
             {
-                result.Add(new Point(random.NextDouble() * box.Width + box.Left, random.NextDouble() * box.Height - box.Top));
+                result.Add(new Point(Random.NextDouble() * box.Width + box.Left, Random.NextDouble() * box.Height - box.Top));
             }
             return result;
         }
 
+        public static ILayer CreateRandomPointLayerWithLabel(IProvider dataSource)
+        {
+            var pointLayer = new Layer("pointLayer") { DataSource = dataSource };
+            pointLayer.Styles.Add(new SymbolStyle{ SymbolScale = 1.4, Fill = new Brush(Color.Blue)});
+            pointLayer.Styles.Add(new LabelStyle { Text = "TestLabel" });
+            return pointLayer;
+        }
+
+        public static ILayer CreateStackedLabelLayer(IProvider provider)
+        {
+            var labelLayer = new LabelLayer("stacks")
+            {
+                DataSource = provider,
+                UseLabelStacking = true,
+                LabelColumn = "Label",
+            };
+            labelLayer.Styles.Add(new LabelStyle());
+            return labelLayer;
+        }
+
         public static Point GenerateRandomPoint(BoundingBox box)
         {            
-            return new Point(random.NextDouble() * box.Width + box.Left, random.NextDouble() * box.Height - box.Top);
+            return new Point(Random.NextDouble() * box.Width + box.Left, Random.NextDouble() * box.Height - box.Top);
         }
 
         public static ILayer CreateRandomPointLayer(BoundingBox envelope, int count = 25)
@@ -70,7 +90,7 @@ namespace Mapsui.Samples.Common
                     DataSource = new MemoryProvider(GenerateRandomPolygons(envelope, count))
                 };
 
-            pointLayer.Styles.Add(new VectorStyle()
+            pointLayer.Styles.Add(new VectorStyle
                 {
                     Fill = new Brush(Color.Orange),
                     Outline = new Pen(Color.Red, 2)
@@ -80,13 +100,12 @@ namespace Mapsui.Samples.Common
 
         private static IEnumerable<IGeometry> GenerateRandomPolygons(BoundingBox envelope, int count)
         {
-            var random = new Random();
             var result = new List<IGeometry>();
-            for (int i = 0; i < count; i++)
+            for (var i = 0; i < count; i++)
             {
-                result.Add(new Mapsui.Geometries.Polygon(
+                result.Add(new Polygon(
                     new LinearRing(
-                        new List<Point>()
+                        new List<Point>
                         {
                             GenerateRandomPoint(envelope),
                             GenerateRandomPoint(envelope),

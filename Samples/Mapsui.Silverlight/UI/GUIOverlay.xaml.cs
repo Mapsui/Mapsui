@@ -1,27 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using BruTile.Web;
+using Mapsui.Geometries;
+using Mapsui.Layers;
+using Mapsui.Providers;
+using Mapsui.Samples.Common;
+using Mapsui.Styles;
+using Mapsui.Windows.Layers;
+using System;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using BruTile.Web;
-using Mapsui;
-using Mapsui.Fetcher;
-using Mapsui.Geometries;
-using Mapsui.Layers;
-using Mapsui.Styles;
 using MapControl = Mapsui.Windows.MapControl;
-using Mapsui.Providers;
-using Mapsui.Samples.Common;
 
 namespace Mapsui.Silverlight
 {
     public partial class GUIOverlay : UserControl
     {
         public MapControl mapControl; //todo: remove
-        bool isMenuDown;
+        bool _isMenuDown;
 
         public GUIOverlay()
         {
@@ -62,38 +60,56 @@ namespace Mapsui.Silverlight
             pointLayer.Styles.Add(symbolStyle);
             map.Layers.Add(pointLayer);
 
+            var provider = CreateRandomPointsProvider(map.Envelope);
+            map.Layers.Add(PointLayerSample.CreateRandomPointLayerWithLabel(provider));
+            map.Layers.Add(PointLayerSample.CreateStackedLabelLayer(provider));
+
             return map;
         }
 
+        private static MemoryProvider CreateRandomPointsProvider(BoundingBox box)
+        {
+            var randomPoints = PointLayerSample.GenerateRandomPoints(box, 200);
+            var features = new Features();
+            var count = 0;
+            foreach (var point in randomPoints)
+            {
+                var feature = new Feature { Geometry = point };
+                feature["Label"] = count.ToString(CultureInfo.InvariantCulture);
+                features.Add(feature);
+                count++;
+            }
+            return new MemoryProvider(features);
+        }
         void FillLayerList(Map map)
         {
             var random = new Random(DateTime.Now.Second);
 
             bool firstButton = true;
 
-            foreach (ILayer layer in map.Layers)
+            foreach (var layer in map.Layers)
             {
                 if (layer is GroupTileLayer)
                 {
                     foreach (ILayer subLayer in (layer as GroupTileLayer).Layers)
                     {
-                        var checkBox = new CheckBox();
-                        checkBox.Margin = new Thickness(10, 0, 0, 0);
+                        var checkBox = new CheckBox
+                            {
+                                Name = random.Next().ToString(CultureInfo.InvariantCulture),
+                                Content = subLayer.LayerName,
+                                Tag = subLayer,
+                                Margin = new Thickness(4),
+                                FontSize = 12,
+                                IsChecked = true
+                            };
+
                         checkBox.Click += checkBox_Click;
-                        checkBox.Name = random.Next().ToString(CultureInfo.InvariantCulture); //subLayer.LayerName;
-                        checkBox.Content = subLayer.LayerName;
-                        checkBox.Tag = subLayer;
-                        checkBox.Margin = new Thickness(4);
-                        checkBox.FontSize = 12;
-                        checkBox.IsChecked = true;
 
                         layerList.Children.Add(checkBox);
 
-                        if (firstButton)
-                        {
-                            checkBox.IsChecked = true;
-                            firstButton = false;
-                        }
+                        if (!firstButton) continue;
+                        checkBox.IsChecked = true;
+                        firstButton = false;
                     }
                 }
             }
@@ -105,7 +121,7 @@ namespace Mapsui.Silverlight
             var layer = ((sender as FrameworkElement).Tag as ILayer);
             layer.Enabled = !layer.Enabled;
             mapControl.Clear();
-            mapControl.OnViewChanged(true);
+            mapControl.OnViewChanged();
         }
 
         void map_ErrorMessageChanged(object sender, EventArgs e)
@@ -146,7 +162,7 @@ namespace Mapsui.Silverlight
 
         void showMenu_Completed(object sender, EventArgs e)
         {
-            isMenuDown = true;
+            _isMenuDown = true;
         }
 
         private void showBtn_MouseEnter(object sender, MouseEventArgs e)
@@ -174,7 +190,7 @@ namespace Mapsui.Silverlight
         {
             menuShowHideOn.Visibility = Visibility.Visible;
             showBtn.Visibility = Visibility.Visible;
-            isMenuDown = false;
+            _isMenuDown = false;
         }
 
         private void hideBtn_MouseEnter(object sender, MouseEventArgs e)
@@ -219,7 +235,7 @@ namespace Mapsui.Silverlight
 
         private void btnLayers_Click(object sender, RoutedEventArgs e)
         {
-            if (!isMenuDown)
+            if (!_isMenuDown)
                 ShowMenuStart();
         }
 

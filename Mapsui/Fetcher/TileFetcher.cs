@@ -178,10 +178,10 @@ namespace Mapsui.Fetcher
             {
                 if (e.Error == null && e.Cancelled == false && isThreadRunning && e.Image != null)
                 {
-                    var feature = new Feature()
-                    {
-                        Geometry = new Raster(new MemoryStream(e.Image), e.TileInfo.Extent.ToBoundingBox())
-                    };
+                    var feature = new Feature
+                        {
+                            Geometry = new Raster(new MemoryStream(e.Image), e.TileInfo.Extent.ToBoundingBox())
+                        };
                     memoryCache.Add(e.TileInfo.Index, feature);
                 }
             }

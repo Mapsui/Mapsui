@@ -62,9 +62,6 @@ namespace Mapsui.Styles
             Center = 1
         }
 
-        /// <summary>
-        /// Initializes a new LabelStyle
-        /// </summary>
         public LabelStyle()
         {
             Font = new Font { FontFamily = "Verdana", Size = 12 };
@@ -73,6 +70,18 @@ namespace Mapsui.Styles
             CollisionBuffer = new Size { Width = 0, Height = 0 };
             ForeColor = Color.Black;
             BackColor = new Brush { Color = Color.White };
+            HorizontalAlignment = HorizontalAlignmentEnum.Center;
+            VerticalAlignment = VerticalAlignmentEnum.Center;
+        }
+
+        public LabelStyle(LabelStyle labelStyle)
+        {
+            Font = new Font(labelStyle.Font);
+            Offset = new Offset(labelStyle.Offset);
+            CollisionDetection = false;
+            CollisionBuffer = new Size(labelStyle.CollisionBuffer);
+            ForeColor = new Color(labelStyle.ForeColor);
+            BackColor = new Brush(labelStyle.BackColor);
             HorizontalAlignment = HorizontalAlignmentEnum.Center;
             VerticalAlignment = VerticalAlignmentEnum.Center;
         }

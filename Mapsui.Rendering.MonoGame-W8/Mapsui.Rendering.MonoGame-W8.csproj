@@ -132,6 +132,7 @@
   <ItemGroup>
     <Compile Include="MapRenderer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Mapsui.Rendering.MonoGame-W8_TemporaryKey.pfx" />

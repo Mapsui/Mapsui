@@ -82,6 +82,7 @@
     <Compile Include="Layers\LayerCollection.cs" />
     <Compile Include="Layers\LayerGroup.cs" />
     <Compile Include="Layers\TileLayer.cs" />
+    <Compile Include="Rendering\VisibleFeatureIterator.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="Projection\GeometryIterator.cs" />
     <Compile Include="Projection\ITransformation.cs" />
@@ -117,6 +118,7 @@
     <Compile Include="Styles\VectorStyle.cs" />
     <Compile Include="Utilities\Algorithms.cs" />
     <Compile Include="Utilities\CGAlgoritm.cs" />
+    <Compile Include="Utilities\Constants.cs" />
     <Compile Include="Utilities\Extensions.cs" />
     <Compile Include="Utilities\LeastSquaresTransform.cs" />
     <Compile Include="Utilities\Providers.cs" />
@@ -129,7 +131,6 @@
       <HintPath>..\libs\BruTile.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

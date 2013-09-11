@@ -47,25 +47,20 @@ namespace Mapsui.Fetcher
             IList<TileInfo> infos = new List<TileInfo>();
             // Iterating through all levels from current to zero. If lower levels are
             // not availeble the renderer can fall back on higher level tiles. 
-            while (level >= 0)
-            {
-                ////////if (!preFetchLayers.Contains(level)) continue;
-                var infosOfLevel = schema.GetTilesInView(extent, level);
-                infosOfLevel = PrioritizeTiles(infosOfLevel, extent.CenterX, extent.CenterY);
+            var levels = schema.Resolutions.Keys.Where(k => k <= level).OrderByDescending(x => x);
 
-                foreach (TileInfo info in infosOfLevel)
+            foreach (var lvl in levels)
+            {
+                var tileInfos = schema.GetTilesInView(extent, lvl).OrderBy(
+                    t => Algorithms.Distance(extent.CenterX, extent.CenterY, t.Extent.CenterX, t.Extent.CenterY));
+
+                foreach (TileInfo info in tileInfos.Where(info => (info.Index.Row >= 0) && (info.Index.Col >= 0)))
                 {
-                    if ((info.Index.Row >= 0) && (info.Index.Col >= 0)) infos.Add(info);
+                    infos.Add(info);
                 }
-                level--;
             }
 
             return infos;
         }
-
-        private static IEnumerable<TileInfo> PrioritizeTiles(IEnumerable<TileInfo> tiles, double centerX, double centerY)
-        {
-            return tiles.OrderBy(t => Algorithms.Distance(centerX, centerY, t.Extent.CenterX, t.Extent.CenterY));
-        }       
     }
 }

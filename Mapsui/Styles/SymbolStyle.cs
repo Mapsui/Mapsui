@@ -1,5 +1,4 @@
-﻿
-namespace Mapsui.Styles
+﻿namespace Mapsui.Styles
 {
     public enum SymbolType
     {
@@ -28,6 +27,16 @@ namespace Mapsui.Styles
         /// Symbol used for rendering points
         /// </summary>
         public Bitmap Symbol { get; set; }
+
+        public string BitmapLocation { get; set; }
+
+        /// <summary>
+        /// This identifies a resource (like a bitmap or svg) in a resource store. 
+        /// </summary>
+        /// <remarks>
+        /// The ResourceId will eventually replace the Symbol pointer. The problem with the pointer is that the 
+        /// rendered geometry will be generated for each style even if the styles use the same resource. </remarks>
+        public string ResourceId { get; set; }
 
         /// <summary>
         /// Scale of the symbol (defaults to 1)

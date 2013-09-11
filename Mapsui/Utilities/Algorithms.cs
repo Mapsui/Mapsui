@@ -22,7 +22,6 @@ namespace Mapsui.Utilities
 {
     internal static class Algorithms
     {
-
         /// <summary>
         /// Gets the euclidean distance between two points.
         /// </summary>

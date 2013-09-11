@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using Mapsui.Windows.Layers;
 
 namespace Mapsui.Wpf
 {
@@ -59,11 +60,28 @@ namespace Mapsui.Wpf
         {
             mapControl.Map.Layers.Clear();
             mapControl.Map.Layers.Add(new TileLayer(new OsmTileSource()) { LayerName = "OSM" });
-           
+            var provider = CreateRandomPointsProvider();
+            mapControl.Map.Layers.Add(PointLayerSample.CreateRandomPointLayerWithLabel(provider));
+            mapControl.Map.Layers.Add(PointLayerSample.CreateStackedLabelLayer(provider));
+
             layerList.Initialize(mapControl.Map.Layers);
             mapControl.Refresh();
         }
 
+        private MemoryProvider CreateRandomPointsProvider()
+        {
+            var randomPoints = PointLayerSample.GenerateRandomPoints(mapControl.Map.Envelope, 200);
+            var features = new Features();
+            var count = 0;
+            foreach (var point in randomPoints)
+            {
+                var feature = new Feature { Geometry = point };
+                feature["Label"] = count.ToString();
+                features.Add(feature);
+                count++;
+            }
+            return new MemoryProvider(features);
+        }
         private void GeodanWmsClick(object sender, RoutedEventArgs e)
         {
             mapControl.Map.Layers.Clear();
@@ -76,7 +94,7 @@ namespace Mapsui.Wpf
         {
             mapControl.Map.Layers.Clear();
             mapControl.Map.Layers.Add(new TileLayer("http://geoserver.nl/tiles/tilecache.aspx/1.0.0/worlddark_GM", 
-                true, (ex) => MessageBox.Show(ex.Message)));
+                true, ex => MessageBox.Show(ex.Message)));
             layerList.Initialize(mapControl.Map.Layers);
             mapControl.Refresh();
         }

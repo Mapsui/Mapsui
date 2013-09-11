@@ -75,6 +75,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Samples.WP7", "Sampl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Samples.WP8", "Samples\Mapsui.Samples.WP8\Mapsui.Samples.WP8.csproj", "{97F00D14-ADAD-46F0-A2BF-2B2FA287A752}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.ArcGISDynamicLayer", "Mapsui.ArcGISDynamicLayer\Mapsui.ArcGISDynamicLayer.csproj", "{FC0CCE50-6227-4F62-8315-76D9B8CB4E09}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Addins debug|Any CPU = Addins debug|Any CPU
@@ -916,6 +918,27 @@ Global
 		{97F00D14-ADAD-46F0-A2BF-2B2FA287A752}.Release|x86.ActiveCfg = Release|x86
 		{97F00D14-ADAD-46F0-A2BF-2B2FA287A752}.Release|x86.Build.0 = Release|x86
 		{97F00D14-ADAD-46F0-A2BF-2B2FA287A752}.Release|x86.Deploy.0 = Release|x86
+		{FC0CCE50-6227-4F62-8315-76D9B8CB4E09}.Addins debug|Any CPU.ActiveCfg = Release|Any CPU
+		{FC0CCE50-6227-4F62-8315-76D9B8CB4E09}.Addins debug|Any CPU.Build.0 = Release|Any CPU
+		{FC0CCE50-6227-4F62-8315-76D9B8CB4E09}.Addins debug|ARM.ActiveCfg = Release|Any CPU
+		{FC0CCE50-6227-4F62-8315-76D9B8CB4E09}.Addins debug|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{FC0CCE50-6227-4F62-8315-76D9B8CB4E09}.Addins debug|Mixed Platforms.Build.0 = Release|Any CPU
+		{FC0CCE50-6227-4F62-8315-76D9B8CB4E09}.Addins debug|x64.ActiveCfg = Release|Any CPU
+		{FC0CCE50-6227-4F62-8315-76D9B8CB4E09}.Addins debug|x86.ActiveCfg = Release|Any CPU
+		{FC0CCE50-6227-4F62-8315-76D9B8CB4E09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC0CCE50-6227-4F62-8315-76D9B8CB4E09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC0CCE50-6227-4F62-8315-76D9B8CB4E09}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{FC0CCE50-6227-4F62-8315-76D9B8CB4E09}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{FC0CCE50-6227-4F62-8315-76D9B8CB4E09}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{FC0CCE50-6227-4F62-8315-76D9B8CB4E09}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{FC0CCE50-6227-4F62-8315-76D9B8CB4E09}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FC0CCE50-6227-4F62-8315-76D9B8CB4E09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC0CCE50-6227-4F62-8315-76D9B8CB4E09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC0CCE50-6227-4F62-8315-76D9B8CB4E09}.Release|ARM.ActiveCfg = Release|Any CPU
+		{FC0CCE50-6227-4F62-8315-76D9B8CB4E09}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{FC0CCE50-6227-4F62-8315-76D9B8CB4E09}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{FC0CCE50-6227-4F62-8315-76D9B8CB4E09}.Release|x64.ActiveCfg = Release|Any CPU
+		{FC0CCE50-6227-4F62-8315-76D9B8CB4E09}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

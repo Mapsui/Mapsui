@@ -15,8 +15,8 @@ namespace Mapsui.Samples
         {
             var map = new Map { BackColor = Color.Blue};
             
-            var countrySource = new ShapeFile(GetAppDir() + "\\Resources\\GeoData\\countries.shp", true);
-            var citySource = new ShapeFile(GetAppDir() + "\\Resources\\GeoData\\cities.shp", true);
+            var countrySource = new ShapeFile(GetAppDir() + "\\GeoData\\World\\countries.shp", true);
+            var citySource = new ShapeFile(GetAppDir() + "\\GeoData\\World\\cities.shp", true);
 
             map.Layers.Add(CreateCountryLayer(countrySource));
             
@@ -80,7 +80,7 @@ namespace Mapsui.Samples
             //cities below 1.000.000 gets the smallest symbol, and cities with more than 5.000.000 the largest symbol
             var citymin = new SymbolStyle();
             var citymax = new SymbolStyle();
-            const string iconPath = "Resources\\Images\\icon.png";
+            const string iconPath = "Images\\icon.png";
             if (!File.Exists(iconPath))
             {
                 throw new Exception(
@@ -95,7 +95,7 @@ namespace Mapsui.Samples
             return new GradientTheme("Population", 1000000, 5000000, citymin, citymax);
         }
 
-        private static GradientTheme CreateCountryTheme()
+        private static IThemeStyle CreateCountryTheme()
         {
             //Set a gradient theme on the countries layer, based on Population density
             //First create two styles that specify min and max styles

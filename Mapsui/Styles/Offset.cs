@@ -10,6 +10,14 @@ namespace Mapsui.Styles
         public double X { get; set; }
         public double Y { get; set; }
 
+        public Offset(){}
+
+        public Offset(Offset offset)
+        {
+            X = offset.X;
+            Y = offset.Y;
+        }
+
         #region Equals operator
 
         public override bool Equals(object obj)

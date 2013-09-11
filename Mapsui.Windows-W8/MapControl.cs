@@ -145,8 +145,8 @@ namespace Mapsui.Windows
             ManipulationInertiaStarting += OnManipulationInertiaStarting;
 
             _orientationSensor = SimpleOrientationSensor.GetDefault();
-            _orientationSensor.OrientationChanged += (sender, args) =>
-            Dispatcher.RunAsync(CoreDispatcherPriority.Normal, Refresh);
+            _orientationSensor.OrientationChanged += (sender, args) => 
+                Dispatcher.RunAsync(CoreDispatcherPriority.Normal, Refresh);
         }
 
         void MapControl_PointerWheelChanged(object sender, PointerRoutedEventArgs e)
@@ -276,11 +276,9 @@ namespace Mapsui.Windows
 
         private void UpdateSize()
         {
-            if (Viewport != null)
-            {
-                viewport.Width = ActualWidth;
-                viewport.Height = ActualHeight;
-            }
+            if (Viewport == null) return;
+            viewport.Width = ActualWidth;
+            viewport.Height = ActualHeight;
         }
 
         public void MapDataChanged(object sender, DataChangedEventArgs e)

@@ -1,9 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Windows;
+using Mapsui.Providers;
+using Mapsui.Geometries;
+using Mapsui.Layers;
+using Mapsui.Styles;
+using Mapsui.Styles.Thematics;
 #if !NETFX_CORE
+using System.IO;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
@@ -16,41 +21,37 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media.Animation;
 using AnimateEventHandler = System.EventHandler<object>;
 #endif
-using Mapsui.Geometries;
-using Mapsui.Layers;
-using Mapsui.Styles;
-using Mapsui.Styles.Thematics;
 
 namespace Mapsui.Rendering.XamlRendering
 {
     public class MapRenderer : IRenderer
     {
-        private readonly Canvas target;
+        private readonly Canvas _target;
 
         public MapRenderer()
         {
-            target = new Canvas();
+            _target = new Canvas();
         }
 
         public MapRenderer(Canvas target)
         {
-            this.target = target;
+            _target = target;
         }
 
         public void Render(IViewport viewport, IEnumerable<ILayer> layers)
         {
 #if !SILVERLIGHT &&  !NETFX_CORE
-            target.BeginInit();
+            _target.BeginInit();
 #endif
-            target.Visibility = Visibility.Collapsed;
-            foreach (var child in target.Children)
+            _target.Visibility = Visibility.Collapsed;
+            foreach (var child in _target.Children)
             {
                 if (child is Canvas)
                 {
                     (child as Canvas).Children.Clear();
                 }
             }
-            target.Children.Clear();
+            _target.Children.Clear();
 
             foreach (var layer in layers)
             {
@@ -58,13 +59,13 @@ namespace Mapsui.Rendering.XamlRendering
                     layer.MinVisible <= viewport.Resolution &&
                     layer.MaxVisible >= viewport.Resolution)
                 {
-                    RenderLayer(target, viewport, layer);
+                    RenderLayer(_target, viewport, layer);
                 }
             }
-            target.Arrange(new Rect(0, 0, viewport.Width, viewport.Height));
-            target.Visibility = Visibility.Visible;
+            _target.Arrange(new Rect(0, 0, viewport.Width, viewport.Height));
+            _target.Visibility = Visibility.Visible;
 #if !SILVERLIGHT &&  !NETFX_CORE
-            target.EndInit();
+            _target.EndInit();
 #endif
         }
 
@@ -76,7 +77,7 @@ namespace Mapsui.Rendering.XamlRendering
             {
                 var labelLayer = layer as LabelLayer;
                 target.Children.Add(labelLayer.UseLabelStacking
-                    ? LabelRenderer.RenderStackedLabelLayer(viewport, labelLayer)
+                    ? StackedLabelLayerRenderer.Render(viewport, labelLayer)
                     : LabelRenderer.RenderLabelLayer(viewport, labelLayer));
             }
             else
@@ -128,11 +129,11 @@ namespace Mapsui.Rendering.XamlRendering
             }
         }
 
-        private static void RenderFeature(Canvas canvas, IViewport viewport, IStyle style, Providers.IFeature feature)
+        private static void RenderFeature(Canvas canvas, IViewport viewport, IStyle style, IFeature feature)
         {
             if (style is LabelStyle)
             {
-                canvas.Children.Add(LabelRenderer.RenderLabel(feature.Geometry.GetBoundingBox().GetCentroid(), new Offset(), style as LabelStyle, viewport));
+                canvas.Children.Add(SingleLabelRenderer.RenderLabel(feature.Geometry.GetBoundingBox().GetCentroid(), style as LabelStyle, viewport));
             }
             else
             {
@@ -150,7 +151,7 @@ namespace Mapsui.Rendering.XamlRendering
             }
         }
 
-        private static UIElement RenderGeometry(IViewport viewport, IStyle style, Providers.IFeature feature)
+        private static UIElement RenderGeometry(IViewport viewport, IStyle style, IFeature feature)
         {
             if (feature.Geometry is Geometries.Point)
                 return GeometryRenderer.RenderPoint(feature.Geometry as Geometries.Point, style, viewport);
@@ -169,7 +170,7 @@ namespace Mapsui.Rendering.XamlRendering
             return null;
         }
 
-        private static void PositionGeometry(UIElement renderedGeometry, IViewport viewport, IStyle style, Providers.IFeature feature)
+        private static void PositionGeometry(UIElement renderedGeometry, IViewport viewport, IStyle style, IFeature feature)
         {
             if (feature.Geometry is Geometries.Point)
                 GeometryRenderer.PositionPoint(renderedGeometry, feature.Geometry as Geometries.Point, style, viewport);
@@ -189,10 +190,7 @@ namespace Mapsui.Rendering.XamlRendering
 
         public static void Animate(DependencyObject target, string property, double from, double to, int duration, AnimateEventHandler completed)
         {
-            var animation = new DoubleAnimation();
-            animation.From = from;
-            animation.To = to;
-            animation.Duration = new TimeSpan(0, 0, 0, 0, duration);
+            var animation = new DoubleAnimation {From = from, To = to, Duration = new TimeSpan(0, 0, 0, 0, duration)};
             Storyboard.SetTarget(animation, target);
 #if !NETFX_CORE
             Storyboard.SetTargetProperty(animation, new PropertyPath(property));
@@ -210,17 +208,17 @@ namespace Mapsui.Rendering.XamlRendering
 
         public MemoryStream ToBitmapStream(double width, double height)
         {
-            target.Arrange(new Rect(0, 0, width, height));
+            _target.Arrange(new Rect(0, 0, width, height));
 #if !SILVERLIGHT
             var renderTargetBitmap = new RenderTargetBitmap((int)width, (int)height, 96, 96, new PixelFormat());
-            renderTargetBitmap.Render(target);
+            renderTargetBitmap.Render(_target);
             var bitmap = new PngBitmapEncoder();
             bitmap.Frames.Add(BitmapFrame.Create(renderTargetBitmap));
             var bitmapStream = new MemoryStream();
             bitmap.Save(bitmapStream);
 #else
             var writeableBitmap = new WriteableBitmap((int)width, (int)height);
-            writeableBitmap.Render(target, null);
+            writeableBitmap.Render(_target, null);
             var bitmapStream = Utilities.ConverToBitmapStream(writeableBitmap);
 #endif
             return bitmapStream;

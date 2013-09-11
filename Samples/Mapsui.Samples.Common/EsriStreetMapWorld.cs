@@ -45,7 +45,7 @@ namespace Mapsui.Samples.Common
             var count = 0;
             foreach (double resolution in resoltions)
             {
-                schema.Resolutions.Add(new Resolution { Id = count.ToString(), UnitsPerPixel = resolution});
+                schema.Resolutions[count] = new Resolution { Id = count.ToString(), UnitsPerPixel = resolution};
                 count++;
             }
             schema.Height = 512;

@@ -43,6 +43,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
@@ -54,21 +55,6 @@
   <ItemGroup>
     <Compile Include="ArcGISImageService\ArcGISImageServiceInfo.cs" />
     <Compile Include="ArcGISImageService\ArcGISImageServiceProvider.cs" />
-    <Compile Include="ArcGis\ArcGisDynamicProvider.cs" />
-    <Compile Include="ArcGis\ArcGisFeatureInfo.cs" />
-    <Compile Include="ArcGis\ArcGisIdentify.cs" />
-    <Compile Include="ArcGis\ArcGisLayer.cs" />
-    <Compile Include="ArcGis\ArcGisLegend.cs" />
-    <Compile Include="ArcGis\ArcGisLegendResponse.cs" />
-    <Compile Include="ArcGis\ArcGisLegendResponseLayer.cs" />
-    <Compile Include="ArcGis\ArcGisLegendResponseLegend.cs" />
-    <Compile Include="ArcGis\Capabilities.cs" />
-    <Compile Include="ArcGis\CapabilitiesHelper.cs" />
-    <Compile Include="ArcGis\Extent.cs" />
-    <Compile Include="ArcGis\SpatialReference.cs" />
-    <Compile Include="ArcGis\Table.cs" />
-    <Compile Include="ArcGis\TileInfo.cs" />
-    <Compile Include="ArcGis\TimeInfo.cs" />
     <Compile Include="FeatureDataSet.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -124,7 +110,9 @@
       <Name>Mapsui</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="ArcGis\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

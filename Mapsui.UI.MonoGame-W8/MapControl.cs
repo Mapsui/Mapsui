@@ -83,7 +83,6 @@ namespace Mapsui.UI.MonoGame
             var scrollViewValue = mouseState.ScrollWheelValue;
             if (scrollViewValue == previousScrollViewValue)
             {
-
                 scale = GetScale(distance, previousDistance);
             }
             else
@@ -140,7 +139,7 @@ namespace Mapsui.UI.MonoGame
         protected override void Draw(GameTime gameTime)
         {
             if (viewport == null) return;
-            renderer.Draw(map, viewport, gameTime);
+            renderer.Draw(map, viewport);
             base.Draw(gameTime);
         }
 
