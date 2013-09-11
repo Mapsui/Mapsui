@@ -5,7 +5,7 @@
     <CurrentDeployID>3B750D6D-6343-41bd-8FD5-18F53DF36A6F</CurrentDeployID>
   </PropertyGroup>
   <PropertyGroup>
-    <ProjectView>ProjectFiles</ProjectView>
+    <ProjectView>ShowAllFiles</ProjectView>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <CurrentDeployCmdId>256</CurrentDeployCmdId>

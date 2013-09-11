@@ -285,6 +285,7 @@ namespace Mapsui.Rendering.XamlRendering
             }
             path.Stroke = new XamlMedia.SolidColorBrush(style.Line.Color.ToXaml());
             path.StrokeThickness = style.Line.Width;
+            path.Tag = new double?(style.Line.Width); // see #outlinehack
             path.IsHitTestVisible = false;
             return path;
         }
