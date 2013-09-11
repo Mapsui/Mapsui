@@ -158,7 +158,7 @@ namespace Mapsui.Providers.ArcGis
 
             foreach (var lod in capabilities.tileInfo.lods)
             {
-                schema.Resolutions.Add(new Resolution { Id = count.ToString(), UnitsPerPixel = lod.resolution });
+                schema.Resolutions[count] = new Resolution { Id = count.ToString(), UnitsPerPixel = lod.resolution };
                 count++;
             }
 
