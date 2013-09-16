@@ -15,6 +15,9 @@
 // along with Mapsui; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
+using Mapsui.Geometries;
+using Mapsui.Providers;
+using Mapsui.Utilities.SpatialIndexing;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -22,9 +25,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Web;
-using Mapsui.Geometries;
-using Mapsui.Providers;
-using Mapsui.Utilities.SpatialIndexing;
 using System.Web.Caching;
 
 namespace Mapsui.Data.Providers
@@ -162,31 +162,31 @@ namespace Mapsui.Data.Providers
         public delegate bool FilterMethod(IFeature dr);
 
         #endregion
-        
-        private BoundingBox _Envelope;
-        private int _FeatureCount;
-        private bool _FileBasedIndex;
-        private string _Filename;
-        private FilterMethod _FilterDelegate;
-        private bool _IsOpen;
-        private ShapeType _ShapeType;
-        private int _SRID = -1;
-        private BinaryReader brShapeFile;
-        private BinaryReader brShapeIndex;
-        private DbaseReader dbaseFile;
-        private FileStream fsShapeFile;
-        private FileStream fsShapeIndex;
+
+        private BoundingBox _envelope;
+        private int _featureCount;
+        private readonly bool _fileBasedIndex;
+        private string _filename;
+        private bool _isOpen;
+        private ShapeType _shapeType;
+        private int _srid = -1;
+        private BinaryReader _brShapeFile;
+        private BinaryReader _brShapeIndex;
+        private readonly DbaseReader _dbaseFile;
+        private FileStream _fsShapeFile;
+        private FileStream _fsShapeIndex;
 
         /// <summary>
         /// Tree used for fast query of data
         /// </summary>
-        private QuadTree tree;
+        private QuadTree _tree;
 
         /// <summary>
         /// Initializes a ShapeFile DataProvider without a file-based spatial index.
         /// </summary>
         /// <param name="filename">Path to shape file</param>
-        public ShapeFile(string filename) : this(filename, false)
+        public ShapeFile(string filename)
+            : this(filename, false)
         {
         }
 
@@ -204,14 +204,14 @@ namespace Mapsui.Data.Providers
         /// <param name="fileBasedIndex">Use file-based spatial index</param>
         public ShapeFile(string filename, bool fileBasedIndex)
         {
-            _Filename = filename;
-            _FileBasedIndex = (fileBasedIndex) && File.Exists(Path.ChangeExtension(filename, ".shx"));
+            _filename = filename;
+            _fileBasedIndex = (fileBasedIndex) && File.Exists(Path.ChangeExtension(filename, ".shx"));
 
             //Initialize DBF
             //string dbffile = _Filename.Substring(0, _Filename.LastIndexOf(".")) + ".dbf";
             string dbffile = Path.ChangeExtension(filename, ".dbf");
             if (File.Exists(dbffile))
-                dbaseFile = new DbaseReader(dbffile);
+                _dbaseFile = new DbaseReader(dbffile);
             //Parse shape header
             ParseHeader();
             //Read projection file
@@ -229,7 +229,7 @@ namespace Mapsui.Data.Providers
         /// </remarks>
         public ShapeType ShapeType
         {
-            get { return _ShapeType; }
+            get { return _shapeType; }
         }
 
 
@@ -239,18 +239,18 @@ namespace Mapsui.Data.Providers
         /// <remarks>If the filename changes, indexes will be rebuilt</remarks>
         public string Filename
         {
-            get { return _Filename; }
+            get { return _filename; }
             set
             {
-                if (value != _Filename)
+                if (value != _filename)
                 {
-                    _Filename = value;
-                    if (IsOpen)
+                    _filename = value;
+                    if (_isOpen)
                         throw new ApplicationException("Cannot change filename while datasource is open");
 
                     ParseHeader();
                     ParseProjection();
-                    tree = null;
+                    _tree = null;
                 }
             }
         }
@@ -263,8 +263,8 @@ namespace Mapsui.Data.Providers
         /// </remarks>
         public Encoding Encoding
         {
-            get { return dbaseFile.Encoding; }
-            set { dbaseFile.Encoding = value; }
+            get { return _dbaseFile.Encoding; }
+            set { _dbaseFile.Encoding = value; }
         }
 
         /// <summary>
@@ -294,15 +294,11 @@ namespace Mapsui.Data.Providers
         /// </example>
         /// </remarks>
         /// <seealso cref="FilterMethod"/>
-        public FilterMethod FilterDelegate
-        {
-            get { return _FilterDelegate; }
-            set { _FilterDelegate = value; }
-        }
+        public FilterMethod FilterDelegate { get; set; }
 
         #region Disposers and finalizers
 
-        private bool disposed = false;
+        private bool _disposed;
 
         /// <summary>
         /// Disposes the object
@@ -315,15 +311,15 @@ namespace Mapsui.Data.Providers
 
         private void Dispose(bool disposing)
         {
-            if (!disposed)
+            if (!_disposed)
             {
                 if (disposing)
                 {
                     Close();
-                    _Envelope = null;
-                    tree = null;
+                    _envelope = null;
+                    _tree = null;
                 }
-                disposed = true;
+                _disposed = true;
             }
         }
 
@@ -342,56 +338,47 @@ namespace Mapsui.Data.Providers
         /// <summary>
         /// Opens the datasource
         /// </summary>
-        public void Open()
+        private void Open()
         {
             // TODO:
             // Get a Connector.  The connector returned is guaranteed to be connected and ready to go.
             // Pooling.Connector connector = Pooling.ConnectorPool.ConnectorPoolManager.RequestConnector(this,true);
 
-            if (!_IsOpen)
+            if (!_isOpen)
             {
-                fsShapeIndex = new FileStream(_Filename.Remove(_Filename.Length - 4, 4) + ".shx", FileMode.Open,
-                                              FileAccess.Read);
-                brShapeIndex = new BinaryReader(fsShapeIndex, Encoding.Unicode);
-                fsShapeFile = new FileStream(_Filename, FileMode.Open, FileAccess.Read);
-                brShapeFile = new BinaryReader(fsShapeFile);
-                InitializeShape(_Filename, _FileBasedIndex);
-                if (dbaseFile != null)
-                    dbaseFile.Open();
-                _IsOpen = true;
+                _fsShapeIndex = new FileStream(_filename.Remove(_filename.Length - 4, 4) + ".shx", FileMode.Open, FileAccess.Read);
+                _brShapeIndex = new BinaryReader(_fsShapeIndex, Encoding.Unicode);
+                _fsShapeFile = new FileStream(_filename, FileMode.Open, FileAccess.Read);
+                _brShapeFile = new BinaryReader(_fsShapeFile);
+                InitializeShape(_filename, _fileBasedIndex);
+                if (_dbaseFile != null)
+                    _dbaseFile.Open();
+                _isOpen = true;
             }
         }
 
         /// <summary>
         /// Closes the datasource
         /// </summary>
-        public void Close()
+        private void Close()
         {
-            if (!disposed)
+            if (!_disposed)
             {
                 //TODO: (ConnectionPooling)
                 /*	if (connector != null)
 					{ Pooling.ConnectorPool.ConnectorPoolManager.Release...()
 				}*/
-                if (_IsOpen)
+                if (_isOpen)
                 {
-                    brShapeFile.Close();
-                    fsShapeFile.Close();
-                    brShapeIndex.Close();
-                    fsShapeIndex.Close();
-                    if (dbaseFile != null)
-                        dbaseFile.Close();
-                    _IsOpen = false;
+                    _brShapeFile.Close();
+                    _fsShapeFile.Close();
+                    _brShapeIndex.Close();
+                    _fsShapeIndex.Close();
+                    if (_dbaseFile != null)
+                        _dbaseFile.Close();
+                    _isOpen = false;
                 }
             }
-        }
-
-        /// <summary>
-        /// Returns true if the datasource is currently open
-        /// </summary>		
-        public bool IsOpen
-        {
-            get { return _IsOpen; }
         }
 
         /// <summary>
@@ -413,54 +400,15 @@ namespace Mapsui.Data.Providers
                 return new Collection<IGeometry>();
 
             //Collection<Mapsui.Geometries.Geometry> geometries = new Collection<Mapsui.Geometries.Geometry>(objectlist.Count);
-            Collection<IGeometry> geometries = new Collection<IGeometry>();
+            var geometries = new Collection<IGeometry>();
 
             for (int i = 0; i < objectlist.Count; i++)
             {
                 IGeometry g = GetGeometry(objectlist[i]);
-                if (g != null)
-                    geometries.Add(g);
+                if (g != null) geometries.Add(g);
             }
             return geometries;
         }
-
-        /// <summary>
-        /// Returns all objects whose boundingbox intersects bbox.
-        /// </summary>
-        /// <remarks>
-        /// <para>
-        /// Please note that this method doesn't guarantee that the geometries returned actually intersect 'bbox', but only
-        /// that their boundingbox intersects 'bbox'.
-        /// </para>
-        /// </remarks>
-        /// <param name="bbox"></param>
-        /// <param name="ds"></param>
-        /// <returns></returns>
-        //public void ExecuteIntersectionQuery(BoundingBox bbox, FeatureDataSet ds)
-        //{
-        //    //Use the spatial index to get a list of features whose boundingbox intersects bbox
-        //    Collection<uint> objectlist = GetObjectIDsInView(bbox);
-        //    FeatureDataTable dt = dbaseFile.NewTable;
-
-        //    for (int i = 0; i < objectlist.Count; i++)
-        //    {
-        //        FeatureDataRow fdr = GetFeature(objectlist[i], dt);
-        //        if ( fdr != null ) dt.AddRow(fdr);
-
-        //        /*
-        //        //This is triple effort since 
-        //        //- Bounding Boxes are checked by GetObjectIdsInView,
-        //        //- FilterDelegate is evaluated in GetFeature
-        //        FeatureDataRow fdr = dbaseFile.GetFeature(objectlist[i], dt);
-        //        fdr.Geometry = ReadGeometry(objectlist[i]);
-        //        if (fdr.Geometry != null)
-        //            if (fdr.Geometry.GetBoundingBox().Intersects(bbox))
-        //                if (FilterDelegate == null || FilterDelegate(fdr))
-        //                    dt.AddRow(fdr);
-        //         */
-        //    }
-        //    ds.Tables.Add(dt);
-        //}
 
         /// <summary>
         /// Returns geometry Object IDs whose bounding box intersects 'bbox'
@@ -469,10 +417,10 @@ namespace Mapsui.Data.Providers
         /// <returns></returns>
         public Collection<uint> GetObjectIDsInView(BoundingBox bbox)
         {
-            if (!IsOpen)
+            if (!_isOpen)
                 throw (new ApplicationException("An attempt was made to read from a closed datasource"));
             //Use the spatial index to get a list of features whose boundingbox intersects bbox
-            return tree.Search(bbox);
+            return _tree.Search(bbox);
         }
 
         /// <summary>
@@ -489,7 +437,7 @@ namespace Mapsui.Data.Providers
                     return fdr.Geometry;
                 return null;
             }
-            
+
             return ReadGeometry(oid);
         }
 
@@ -499,7 +447,7 @@ namespace Mapsui.Data.Providers
         /// <returns></returns>
         public int GetFeatureCount()
         {
-            return _FeatureCount;
+            return _featureCount;
         }
 
         /// <summary>
@@ -508,20 +456,18 @@ namespace Mapsui.Data.Providers
         /// <returns></returns>
         public BoundingBox GetExtents()
         {
-            if (tree == null)
-                return _Envelope;
-            return tree.Box;
-        }
+            Open();
 
-        /// <summary>
-        /// Gets the connection ID of the datasource
-        /// </summary>
-        /// <remarks>
-        /// The connection ID of a shapefile is its filename
-        /// </remarks>
-        public string ConnectionId
-        {
-            get { return _Filename; }
+            try
+            {
+                if (_tree == null)
+                    return _envelope;
+                return _tree.Box;
+            }
+            finally
+            {
+                Close();
+            }
         }
 
         /// <summary>
@@ -529,8 +475,8 @@ namespace Mapsui.Data.Providers
         /// </summary>
         public int SRID
         {
-            get { return _SRID; }
-            set { _SRID = value; }
+            get { return _srid; }
+            set { _srid = value; }
         }
 
         #endregion
@@ -550,32 +496,32 @@ namespace Mapsui.Data.Providers
         /// </summary>
         private void ParseHeader()
         {
-            fsShapeIndex = new FileStream(Path.ChangeExtension(_Filename, ".shx"), FileMode.Open,
+            _fsShapeIndex = new FileStream(Path.ChangeExtension(_filename, ".shx"), FileMode.Open,
                                           FileAccess.Read);
-            brShapeIndex = new BinaryReader(fsShapeIndex, Encoding.Unicode);
+            _brShapeIndex = new BinaryReader(_fsShapeIndex, Encoding.Unicode);
 
-            brShapeIndex.BaseStream.Seek(0, 0);
+            _brShapeIndex.BaseStream.Seek(0, 0);
             //Check file header
-            if (brShapeIndex.ReadInt32() != 170328064)
+            if (_brShapeIndex.ReadInt32() != 170328064)
                 //File Code is actually 9994, but in Little Endian Byte Order this is '170328064'
                 throw (new ApplicationException("Invalid Shapefile Index (.shx)"));
 
-            brShapeIndex.BaseStream.Seek(24, 0); //seek to File Length
-            int IndexFileSize = SwapByteOrder(brShapeIndex.ReadInt32());
-                //Read filelength as big-endian. The length is based on 16bit words
-            _FeatureCount = (2*IndexFileSize - 100)/8;
-                //Calculate FeatureCount. Each feature takes up 8 bytes. The header is 100 bytes
+            _brShapeIndex.BaseStream.Seek(24, 0); //seek to File Length
+            int indexFileSize = SwapByteOrder(_brShapeIndex.ReadInt32());
+            //Read filelength as big-endian. The length is based on 16bit words
+            _featureCount = (2 * indexFileSize - 100) / 8;
+            //Calculate FeatureCount. Each feature takes up 8 bytes. The header is 100 bytes
 
-            brShapeIndex.BaseStream.Seek(32, 0); //seek to ShapeType
-            _ShapeType = (ShapeType) brShapeIndex.ReadInt32();
+            _brShapeIndex.BaseStream.Seek(32, 0); //seek to ShapeType
+            _shapeType = (ShapeType)_brShapeIndex.ReadInt32();
 
             //Read the spatial bounding box of the contents
-            brShapeIndex.BaseStream.Seek(36, 0); //seek to box
-            _Envelope = new BoundingBox(brShapeIndex.ReadDouble(), brShapeIndex.ReadDouble(), brShapeIndex.ReadDouble(),
-                                        brShapeIndex.ReadDouble());
+            _brShapeIndex.BaseStream.Seek(36, 0); //seek to box
+            _envelope = new BoundingBox(_brShapeIndex.ReadDouble(), _brShapeIndex.ReadDouble(), _brShapeIndex.ReadDouble(),
+                                        _brShapeIndex.ReadDouble());
 
-            brShapeIndex.Close();
-            fsShapeIndex.Close();
+            _brShapeIndex.Close();
+            _fsShapeIndex.Close();
         }
 
         /// <summary>
@@ -589,14 +535,14 @@ namespace Mapsui.Data.Providers
             {
                 try
                 {
-                    string wkt = File.ReadAllText(projfile);
+                    var wkt = File.ReadAllText(projfile);
                     //TODO: Automatically parse coordinate system: CoordinateSystemWktReader.Parse(wkt);
                 }
                 catch (Exception ex)
                 {
                     Trace.TraceWarning("Coordinate system file '" + projfile +
                                        "' found, but could not be parsed. WKT parser returned:" + ex.Message);
-                    throw (ex);
+                    throw;
                 }
             }
         }
@@ -606,15 +552,15 @@ namespace Mapsui.Data.Providers
         /// </summary>
         private int[] ReadIndex()
         {
-            int[] OffsetOfRecord = new int[_FeatureCount];
-            brShapeIndex.BaseStream.Seek(100, 0); //skip the header
+            var offsetOfRecord = new int[_featureCount];
+            _brShapeIndex.BaseStream.Seek(100, 0); //skip the header
 
-            for (int x = 0; x < _FeatureCount; ++x)
+            for (int x = 0; x < _featureCount; ++x)
             {
-                OffsetOfRecord[x] = 2*SwapByteOrder(brShapeIndex.ReadInt32()); //Read shape data position // ibuffer);
-                brShapeIndex.BaseStream.Seek(brShapeIndex.BaseStream.Position + 4, 0); //Skip content length
+                offsetOfRecord[x] = 2 * SwapByteOrder(_brShapeIndex.ReadInt32()); //Read shape data position // ibuffer);
+                _brShapeIndex.BaseStream.Seek(_brShapeIndex.BaseStream.Position + 4, 0); //Skip content length
             }
-            return OffsetOfRecord;
+            return offsetOfRecord;
         }
 
         /// <summary>
@@ -624,8 +570,8 @@ namespace Mapsui.Data.Providers
         /// <returns></returns>
         private int GetShapeIndex(uint n)
         {
-            brShapeIndex.BaseStream.Seek(100 + n*8, 0); //seek to the position of the index
-            return 2*SwapByteOrder(brShapeIndex.ReadInt32()); //Read shape data position
+            _brShapeIndex.BaseStream.Seek(100 + n * 8, 0); //seek to the position of the index
+            return 2 * SwapByteOrder(_brShapeIndex.ReadInt32()); //Read shape data position
         }
 
         ///<summary>
@@ -658,87 +604,70 @@ namespace Mapsui.Data.Providers
                     File.Delete(filename + ".sidx");
                     return CreateSpatialIndexFromFile(filename);
                 }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
             }
-            else
-            {
-                QuadTree tree = CreateSpatialIndex(_Filename);
-                tree.SaveIndex(filename + ".sidx");
-                return tree;
-            }
+
+            QuadTree tree = CreateSpatialIndex();
+            tree.SaveIndex(filename + ".sidx");
+            return tree;
         }
 
         /// <summary>
         /// Generates a spatial index for a specified shape file.
         /// </summary>
-        /// <param name="filename"></param>
-        private QuadTree CreateSpatialIndex(string filename)
+        private QuadTree CreateSpatialIndex()
         {
-            List<QuadTree.BoxObjects> objList = new List<QuadTree.BoxObjects>();
+            var objList = new List<QuadTree.BoxObjects>();
             //Convert all the geometries to boundingboxes 
             uint i = 0;
-            foreach (BoundingBox box in GetAllFeatureBoundingBoxes())
+            foreach (var box in GetAllFeatureBoundingBoxes())
             {
                 if (!double.IsNaN(box.Left) && !double.IsNaN(box.Right) && !double.IsNaN(box.Bottom) &&
                     !double.IsNaN(box.Top))
                 {
-                    QuadTree.BoxObjects g = new QuadTree.BoxObjects();
-                    g.box = box;
-                    g.ID = i;
+                    var g = new QuadTree.BoxObjects { box = box, ID = i };
                     objList.Add(g);
                     i++;
                 }
             }
 
             Heuristic heur;
-            heur.maxdepth = (int) Math.Ceiling(Math.Log(GetFeatureCount(), 2));
+            heur.maxdepth = (int)Math.Ceiling(Math.Log(GetFeatureCount(), 2));
             heur.minerror = 10;
             heur.tartricnt = 5;
             heur.mintricnt = 2;
             return new QuadTree(objList, 0, heur);
         }
 
-        private void LoadSpatialIndex()
+        private void LoadSpatialIndex(bool loadFromFile)
         {
-            LoadSpatialIndex(false, false);
+            LoadSpatialIndex(false, loadFromFile);
         }
 
-        private void LoadSpatialIndex(bool LoadFromFile)
-        {
-            LoadSpatialIndex(false, LoadFromFile);
-        }
-
-        private void LoadSpatialIndex(bool ForceRebuild, bool LoadFromFile)
+        private void LoadSpatialIndex(bool forceRebuild, bool loadFromFile)
         {
             //Only load the tree if we haven't already loaded it, or if we want to force a rebuild
-            if (tree == null || ForceRebuild)
+            if (_tree == null || forceRebuild)
             {
                 // Is this a web application? If so lets store the index in the cache so we don't
                 // need to rebuild it for each request
                 if (HttpContext.Current != null)
                 {
                     //Check if the tree exists in the cache
-                    if (HttpContext.Current.Cache[_Filename] != null)
-                        tree = (QuadTree) HttpContext.Current.Cache[_Filename];
+                    if (HttpContext.Current.Cache[_filename] != null)
+                        _tree = (QuadTree)HttpContext.Current.Cache[_filename];
                     else
                     {
-                        if (!LoadFromFile)
-                            tree = CreateSpatialIndex(_Filename);
-                        else
-                            tree = CreateSpatialIndexFromFile(_Filename);
+                        _tree = !loadFromFile ? CreateSpatialIndex() : CreateSpatialIndexFromFile(_filename);
                         //Store the tree in the web cache
                         //TODO: Remove this when connection pooling is implemented
-                        HttpContext.Current.Cache.Insert(_Filename, tree, null, Cache.NoAbsoluteExpiration,
+                        HttpContext.Current.Cache.Insert(_filename, _tree, null, Cache.NoAbsoluteExpiration,
                                                          TimeSpan.FromDays(1));
                     }
                 }
-                else if (!LoadFromFile)
-                    tree = CreateSpatialIndex(_Filename);
+                else if (!loadFromFile)
+                    _tree = CreateSpatialIndex();
                 else
-                    tree = CreateSpatialIndexFromFile(_Filename);
+                    _tree = CreateSpatialIndexFromFile(_filename);
             }
         }
 
@@ -748,17 +677,17 @@ namespace Mapsui.Data.Providers
         /// </summary>
         public void RebuildSpatialIndex()
         {
-            if (_FileBasedIndex)
+            if (_fileBasedIndex)
             {
-                if (File.Exists(_Filename + ".sidx"))
-                    File.Delete(_Filename + ".sidx");
-                tree = CreateSpatialIndexFromFile(_Filename);
+                if (File.Exists(_filename + ".sidx"))
+                    File.Delete(_filename + ".sidx");
+                _tree = CreateSpatialIndexFromFile(_filename);
             }
             else
-                tree = CreateSpatialIndex(_Filename);
+                _tree = CreateSpatialIndex();
             if (HttpContext.Current != null)
                 //TODO: Remove this when connection pooling is implemented:
-                HttpContext.Current.Cache.Insert(_Filename, tree, null, Cache.NoAbsoluteExpiration, TimeSpan.FromDays(1));
+                HttpContext.Current.Cache.Insert(_filename, _tree, null, Cache.NoAbsoluteExpiration, TimeSpan.FromDays(1));
         }
 
         /// <summary>
@@ -771,15 +700,15 @@ namespace Mapsui.Data.Providers
 
             //List<BoundingBox> boxes = new List<BoundingBox>();
 
-            if (_ShapeType == ShapeType.Point)
+            if (_shapeType == ShapeType.Point)
             {
-                for (int a = 0; a < _FeatureCount; ++a)
+                for (int a = 0; a < _featureCount; ++a)
                 {
-                    fsShapeFile.Seek(offsetOfRecord[a] + 8, 0); //skip record number and content length
-                    if ((ShapeType) brShapeFile.ReadInt32() != ShapeType.Null)
+                    _fsShapeFile.Seek(offsetOfRecord[a] + 8, 0); //skip record number and content length
+                    if ((ShapeType)_brShapeFile.ReadInt32() != ShapeType.Null)
                     {
-                        double x = brShapeFile.ReadDouble();
-                        double y = brShapeFile.ReadDouble();
+                        double x = _brShapeFile.ReadDouble();
+                        double y = _brShapeFile.ReadDouble();
                         //boxes.Add(new BoundingBox(x, y, x, y));
                         yield return new BoundingBox(x, y, x, y);
                     }
@@ -787,14 +716,14 @@ namespace Mapsui.Data.Providers
             }
             else
             {
-                for (int a = 0; a < _FeatureCount; ++a)
+                for (int a = 0; a < _featureCount; ++a)
                 {
-                    fsShapeFile.Seek(offsetOfRecord[a] + 8, 0); //skip record number and content length
-                    if ((ShapeType)brShapeFile.ReadInt32() != ShapeType.Null)
-                        yield return new BoundingBox(brShapeFile.ReadDouble(), brShapeFile.ReadDouble(),
-                                                     brShapeFile.ReadDouble(), brShapeFile.ReadDouble());
-                        //boxes.Add(new BoundingBox(brShapeFile.ReadDouble(), brShapeFile.ReadDouble(),
-                        //                          brShapeFile.ReadDouble(), brShapeFile.ReadDouble()));
+                    _fsShapeFile.Seek(offsetOfRecord[a] + 8, 0); //skip record number and content length
+                    if ((ShapeType)_brShapeFile.ReadInt32() != ShapeType.Null)
+                        yield return new BoundingBox(_brShapeFile.ReadDouble(), _brShapeFile.ReadDouble(),
+                                                     _brShapeFile.ReadDouble(), _brShapeFile.ReadDouble());
+                    //boxes.Add(new BoundingBox(brShapeFile.ReadDouble(), brShapeFile.ReadDouble(),
+                    //                          brShapeFile.ReadDouble(), brShapeFile.ReadDouble()));
                 }
             }
             //return boxes;
@@ -808,54 +737,53 @@ namespace Mapsui.Data.Providers
         /// <returns>geometry</returns>
         private Geometry ReadGeometry(uint oid)
         {
-            brShapeFile.BaseStream.Seek(GetShapeIndex(oid) + 8, 0); //Skip record number and content length
-            ShapeType type = (ShapeType) brShapeFile.ReadInt32(); //Shape type
+            _brShapeFile.BaseStream.Seek(GetShapeIndex(oid) + 8, 0); //Skip record number and content length
+            var type = (ShapeType)_brShapeFile.ReadInt32(); //Shape type
             if (type == ShapeType.Null)
                 return null;
-            if (_ShapeType == ShapeType.Point || _ShapeType == ShapeType.PointM || _ShapeType == ShapeType.PointZ)
+            if (_shapeType == ShapeType.Point || _shapeType == ShapeType.PointM || _shapeType == ShapeType.PointZ)
             {
-                Point tempFeature = new Point();
-                return new Point(brShapeFile.ReadDouble(), brShapeFile.ReadDouble());
+                return new Point(_brShapeFile.ReadDouble(), _brShapeFile.ReadDouble());
             }
-            else if (_ShapeType == ShapeType.Multipoint || _ShapeType == ShapeType.MultiPointM ||
-                     _ShapeType == ShapeType.MultiPointZ)
+            if (_shapeType == ShapeType.Multipoint || _shapeType == ShapeType.MultiPointM ||
+                _shapeType == ShapeType.MultiPointZ)
             {
-                brShapeFile.BaseStream.Seek(32 + brShapeFile.BaseStream.Position, 0); //skip min/max box
-                MultiPoint feature = new MultiPoint();
-                int nPoints = brShapeFile.ReadInt32(); // get the number of points
+                _brShapeFile.BaseStream.Seek(32 + _brShapeFile.BaseStream.Position, 0); //skip min/max box
+                var feature = new MultiPoint();
+                int nPoints = _brShapeFile.ReadInt32(); // get the number of points
                 if (nPoints == 0)
                     return null;
                 for (int i = 0; i < nPoints; i++)
-                    feature.Points.Add(new Point(brShapeFile.ReadDouble(), brShapeFile.ReadDouble()));
+                    feature.Points.Add(new Point(_brShapeFile.ReadDouble(), _brShapeFile.ReadDouble()));
 
                 return feature;
             }
-            else if (_ShapeType == ShapeType.PolyLine || _ShapeType == ShapeType.Polygon ||
-                     _ShapeType == ShapeType.PolyLineM || _ShapeType == ShapeType.PolygonM ||
-                     _ShapeType == ShapeType.PolyLineZ || _ShapeType == ShapeType.PolygonZ)
+            if (_shapeType == ShapeType.PolyLine || _shapeType == ShapeType.Polygon ||
+                _shapeType == ShapeType.PolyLineM || _shapeType == ShapeType.PolygonM ||
+                _shapeType == ShapeType.PolyLineZ || _shapeType == ShapeType.PolygonZ)
             {
-                brShapeFile.BaseStream.Seek(32 + brShapeFile.BaseStream.Position, 0); //skip min/max box
+                _brShapeFile.BaseStream.Seek(32 + _brShapeFile.BaseStream.Position, 0); //skip min/max box
 
-                int nParts = brShapeFile.ReadInt32(); // get number of parts (segments)
+                int nParts = _brShapeFile.ReadInt32(); // get number of parts (segments)
                 if (nParts == 0)
                     return null;
-                int nPoints = brShapeFile.ReadInt32(); // get number of points
+                int nPoints = _brShapeFile.ReadInt32(); // get number of points
 
-                int[] segments = new int[nParts + 1];
+                var segments = new int[nParts + 1];
                 //Read in the segment indexes
                 for (int b = 0; b < nParts; b++)
-                    segments[b] = brShapeFile.ReadInt32();
+                    segments[b] = _brShapeFile.ReadInt32();
                 //add end point
                 segments[nParts] = nPoints;
 
-                if ((int) _ShapeType%10 == 3)
+                if ((int)_shapeType % 10 == 3)
                 {
-                    MultiLineString mline = new MultiLineString();
-                    for (int LineID = 0; LineID < nParts; LineID++)
+                    var mline = new MultiLineString();
+                    for (int lineId = 0; lineId < nParts; lineId++)
                     {
-                        LineString line = new LineString();
-                        for (int i = segments[LineID]; i < segments[LineID + 1]; i++)
-                            line.Vertices.Add(new Point(brShapeFile.ReadDouble(), brShapeFile.ReadDouble()));
+                        var line = new LineString();
+                        for (int i = segments[lineId]; i < segments[lineId + 1]; i++)
+                            line.Vertices.Add(new Point(_brShapeFile.ReadDouble(), _brShapeFile.ReadDouble()));
                         mline.LineStrings.Add(line);
                     }
                     if (mline.LineStrings.Count == 1)
@@ -865,26 +793,25 @@ namespace Mapsui.Data.Providers
                 else //(_ShapeType == ShapeType.Polygon etc...)
                 {
                     //First read all the rings
-                    List<LinearRing> rings = new List<LinearRing>();
-                    for (int RingID = 0; RingID < nParts; RingID++)
+                    var rings = new List<LinearRing>();
+                    for (int ringId = 0; ringId < nParts; ringId++)
                     {
-                        LinearRing ring = new LinearRing();
-                        for (int i = segments[RingID]; i < segments[RingID + 1]; i++)
-                            ring.Vertices.Add(new Point(brShapeFile.ReadDouble(), brShapeFile.ReadDouble()));
+                        var ring = new LinearRing();
+                        for (int i = segments[ringId]; i < segments[ringId + 1]; i++)
+                            ring.Vertices.Add(new Point(_brShapeFile.ReadDouble(), _brShapeFile.ReadDouble()));
                         rings.Add(ring);
                     }
-                    bool[] IsCounterClockWise = new bool[rings.Count];
-                    int PolygonCount = 0;
+                    var isCounterClockWise = new bool[rings.Count];
+                    int polygonCount = 0;
                     for (int i = 0; i < rings.Count; i++)
                     {
-                        IsCounterClockWise[i] = rings[i].IsCCW();
-                        if (!IsCounterClockWise[i])
-                            PolygonCount++;
+                        isCounterClockWise[i] = rings[i].IsCCW();
+                        if (!isCounterClockWise[i])
+                            polygonCount++;
                     }
-                    if (PolygonCount == 1) //We only have one polygon
+                    if (polygonCount == 1) //We only have one polygon
                     {
-                        Polygon poly = new Polygon();
-                        poly.ExteriorRing = rings[0];
+                        var poly = new Polygon { ExteriorRing = rings[0] };
                         if (rings.Count > 1)
                             for (int i = 1; i < rings.Count; i++)
                                 poly.InteriorRings.Add(rings[i]);
@@ -892,12 +819,11 @@ namespace Mapsui.Data.Providers
                     }
                     else
                     {
-                        MultiPolygon mpoly = new MultiPolygon();
-                        Polygon poly = new Polygon();
-                        poly.ExteriorRing = rings[0];
-                        for (int i = 1; i < rings.Count; i++)
+                        var mpoly = new MultiPolygon();
+                        var poly = new Polygon { ExteriorRing = rings[0] };
+                        for (var i = 1; i < rings.Count; i++)
                         {
-                            if (!IsCounterClockWise[i])
+                            if (!isCounterClockWise[i])
                             {
                                 mpoly.Polygons.Add(poly);
                                 poly = new Polygon(rings[i]);
@@ -910,62 +836,81 @@ namespace Mapsui.Data.Providers
                     }
                 }
             }
-            else
-                throw (new ApplicationException("Shapefile type " + _ShapeType.ToString() + " not supported"));
+
+            throw (new ApplicationException("Shapefile type " + _shapeType.ToString() + " not supported"));
         }
 
         /// <summary>
         /// Gets a datarow from the datasource at the specified index
         /// </summary>
-        /// <param name="RowID"></param>
+        /// <param name="rowId"></param>
         /// <returns></returns>
-        public IFeature GetFeature(uint RowID)
+        public IFeature GetFeature(uint rowId)
         {
-            return GetFeature(RowID, null);
+            return GetFeature(rowId, null);
         }
 
         /// <summary>
         /// Gets a datarow from the datasource at the specified index belonging to the specified datatable
         /// </summary>
-        /// <param name="RowID"></param>
+        /// <param name="rowId"></param>
         /// <param name="dt">Datatable to feature should belong to.</param>
         /// <returns></returns>
-        public IFeature GetFeature(uint RowID, IFeatures dt)
+        public IFeature GetFeature(uint rowId, IFeatures dt)
         {
-            if (dbaseFile != null)
+            Open();
+
+            try
             {
-                IFeature dr = (IFeature)dbaseFile.GetFeature(RowID, (dt == null) ? new Features() : dt);
-                dr.Geometry = ReadGeometry(RowID);
+                return GetFeaturePrivate(rowId, dt);
+            }
+            finally
+            {
+                Close();
+            }
+
+        }
+
+        private IFeature GetFeaturePrivate(uint rowId, IFeatures dt)
+        {
+            if (_dbaseFile != null)
+            {
+                var dr = _dbaseFile.GetFeature(rowId, dt ?? new Features());
+                dr.Geometry = ReadGeometry(rowId);
                 if (FilterDelegate == null || FilterDelegate(dr))
                     return dr;
-                else
-                    return null;
+                return null;
             }
-            else
-                throw (new ApplicationException("An attempt was made to read DBase data from a shapefile without a valid .DBF file"));
+            throw (new ApplicationException("An attempt was made to read DBase data from a shapefile without a valid .DBF file"));
         }
 
         #region IProvider Members
 
-
         public IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
         {
-            //Use the spatial index to get a list of features whose boundingbox intersects bbox
-            Collection<uint> objectlist = GetObjectIDsInView(box);
-            IFeatures features = new Features();
-
-            foreach (uint index in objectlist)
+            Open();
+            try
             {
-                IFeature feature = dbaseFile.GetFeature(index, features);
-                feature.Geometry = ReadGeometry(index);
-                if (feature.Geometry != null)
-                    if (feature.Geometry.GetBoundingBox().Intersects(box))
-                        if (FilterDelegate == null || FilterDelegate(feature))
-                            features.Add(feature);
-            }
-            return features;
-        }
+                //Use the spatial index to get a list of features whose boundingbox intersects bbox
+                var objectlist = GetObjectIDsInView(box);
+                var features = new Features();
 
+                foreach (var index in objectlist)
+                {
+                    var feature = _dbaseFile.GetFeature(index, features);
+                    feature.Geometry = ReadGeometry(index);
+                    if (feature.Geometry == null) continue;
+                    if (!feature.Geometry.GetBoundingBox().Intersects(box)) continue;
+                    if (FilterDelegate != null && !FilterDelegate(feature)) continue;
+                    features.Add(feature);
+                }
+                return features;
+            }
+            finally
+            {
+                Close();
+            }
+        }
 
         #endregion
     }

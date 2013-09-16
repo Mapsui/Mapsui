@@ -29,9 +29,7 @@ namespace Mapsui.Fetcher
         {
             lock (provider)
             {
-                provider.Open();
                 var features = provider.GetFeaturesInView(extent, resolution);
-                provider.Close();
                 if (dataArrived != null) dataArrived(features, timeOfRequest);
             }
         }

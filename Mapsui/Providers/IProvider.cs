@@ -24,23 +24,8 @@ namespace Mapsui.Providers
     /// <summary>
     /// Interface for data providers
     /// </summary>
-    public interface IProvider : IDisposable
+    public interface IProvider
     {
-        /// <summary>
-        /// Gets the connection ID of the datasource
-        /// </summary>
-        /// <remarks>
-        /// <para>The ConnectionID should be unique to the datasource (for instance the filename or the
-        /// connectionstring), and is meant to be used for connection pooling.</para>
-        /// <para>If connection pooling doesn't apply to this datasource, the ConnectionID should return String.Empty</para>
-        /// </remarks>
-        string ConnectionId { get; }
-
-        /// <summary>
-        /// Returns true if the datasource is currently open
-        /// </summary>
-        bool IsOpen { get; }
-
         /// <summary>
         /// The spatial reference ID (CRS)
         /// </summary>
@@ -53,15 +38,5 @@ namespace Mapsui.Providers
         /// </summary>
         /// <returns>boundingbox</returns>
         BoundingBox GetExtents();
-
-        /// <summary>
-        /// Opens the datasource
-        /// </summary>
-        void Open();
-
-        /// <summary>
-        /// Closes the datasource
-        /// </summary>
-        void Close();
     }
 }

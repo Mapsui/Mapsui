@@ -64,15 +64,9 @@ namespace Mapsui.Layers
 
                 lock (DataSource)
                 {
-                    bool wasOpen = DataSource.IsOpen;
-                    if (!wasOpen)
-                        DataSource.Open();
-                    BoundingBox box = DataSource.GetExtents();
-                    if (!wasOpen) //Restore state
-                        DataSource.Close();
+                    var box = DataSource.GetExtents();
                     if (Transformation != null && Transformation.MapSRID != -1 && SRID != -1)
                         return Transformation.Transfrom(SRID, Transformation.MapSRID, box);
-
                     return box;
                 }
             }

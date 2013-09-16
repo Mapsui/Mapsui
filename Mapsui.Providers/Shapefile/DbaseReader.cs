@@ -32,29 +32,29 @@ namespace Mapsui.Data.Providers
     {
         private struct DbaseField
         {
-            public int Address;
             public string ColumnName;
             public Type DataType;
             public int Decimals;
             public int Length;
+            public int Address;
         }
 
         private DateTime _lastUpdate;
-        private int _NumberOfRecords;
-        private Int16 _HeaderLength;
-        private Int16 _RecordLength;
-        private string _filename;
-        private DbaseField[] DbaseColumns;
-        private FileStream fs;
-        private BinaryReader br;
-        private bool HeaderIsParsed;
+        private int _numberOfRecords;
+        private Int16 _headerLength;
+        private Int16 _recordLength;
+        private readonly string _filename;
+        private DbaseField[] _dbaseColumns;
+        private FileStream _fs;
+        private BinaryReader _br;
+        private bool _headerIsParsed;
 
         public DbaseReader(string filename)
         {
             if (!File.Exists(filename))
                 throw new FileNotFoundException(String.Format("Could not find file \"{0}\"", filename));
             _filename = filename;
-            HeaderIsParsed = false;
+            _headerIsParsed = false;
         }
 
         private bool _isOpen;
@@ -67,17 +67,16 @@ namespace Mapsui.Data.Providers
 
         public void Open()
         {
-            fs = new FileStream(_filename, FileMode.Open, FileAccess.Read);
-            br = new BinaryReader(fs);
+            _fs = new FileStream(_filename, FileMode.Open, FileAccess.Read);
+            _br = new BinaryReader(_fs);
             _isOpen = true;
-            if (!HeaderIsParsed) //Don't read the header if it's already parsed
-                ParseDbfHeader(_filename);
+            if (!_headerIsParsed) ParseDbfHeader(); // Don't read the header if it's already parsed
         }
 
         public void Close()
         {
-            br.Close();
-            fs.Close();
+            _br.Close();
+            _fs.Close();
             _isOpen = false;
         }
 
@@ -85,8 +84,8 @@ namespace Mapsui.Data.Providers
         {
             if (_isOpen)
                 Close();
-            br = null;
-            fs = null;
+            _br = null;
+            _fs = null;
         }
 
         // Binary Tree not working yet on Mono 
@@ -96,13 +95,13 @@ namespace Mapsui.Data.Providers
         /// Indexes a DBF column in a binary tree [NOT COMPLETE]
         /// </summary>
         /// <typeparam name="T">datatype to be indexed</typeparam>
-        /// <param name="ColumnId">Column to index</param>
+        /// <param name="columnId">Column to index</param>
         /// <returns></returns>
-        public BinaryTree<T, UInt32> CreateDbfIndex<T>(int ColumnId) where T : IComparable<T>
+        public BinaryTree<T, UInt32> CreateDbfIndex<T>(int columnId) where T : IComparable<T>
         {
-            BinaryTree<T, UInt32> tree = new BinaryTree<T, uint>();
-            for (uint i = 0; i < ((_NumberOfRecords > 10000) ? 10000 : _NumberOfRecords); i++)
-                tree.Add(new BinaryTree<T, uint>.ItemValue((T) GetValue(i, ColumnId), i));
+            var tree = new BinaryTree<T, uint>();
+            for (uint i = 0; i < ((_numberOfRecords > 10000) ? 10000 : _numberOfRecords); i++)
+                tree.Add(new BinaryTree<T, uint>.ItemValue((T) GetValue(i, columnId), i));
             return tree;
         }
 #endif
@@ -151,72 +150,74 @@ namespace Mapsui.Data.Providers
             get { return _lastUpdate; }
         }
 
-        private void ParseDbfHeader(string filename)
+        private void ParseDbfHeader()
         {
-            if (br.ReadByte() != 0x03)
+            if (_br.ReadByte() != 0x03)
                 throw new NotSupportedException("Unsupported DBF Type");
 
-            _lastUpdate = new DateTime((int) br.ReadByte() + 1900, (int) br.ReadByte(), (int) br.ReadByte());
+            _lastUpdate = new DateTime(_br.ReadByte() + 1900, _br.ReadByte(), _br.ReadByte());
                 //Read the last update date
-            _NumberOfRecords = br.ReadInt32(); // read number of records.
-            _HeaderLength = br.ReadInt16(); // read length of header structure.
-            _RecordLength = br.ReadInt16(); // read length of a record
-            fs.Seek(29, SeekOrigin.Begin); //Seek to encoding flag
-            _FileEncoding = GetDbaseLanguageDriver(br.ReadByte()); //Read and parse Language driver
-            fs.Seek(32, SeekOrigin.Begin); //Move past the reserved bytes
+            _numberOfRecords = _br.ReadInt32(); // read number of records.
+            _headerLength = _br.ReadInt16(); // read length of header structure.
+            _recordLength = _br.ReadInt16(); // read length of a record
+            _fs.Seek(29, SeekOrigin.Begin); //Seek to encoding flag
+            _fileEncoding = GetDbaseLanguageDriver(_br.ReadByte()); //Read and parse Language driver
+            _fs.Seek(32, SeekOrigin.Begin); //Move past the reserved bytes
 
-            int NumberOfColumns = (_HeaderLength - 31)/32; // calculate the number of DataColumns in the header
-            DbaseColumns = new DbaseField[NumberOfColumns];
-            for (int i = 0; i < DbaseColumns.Length; i++)
+            int numberOfColumns = (_headerLength - 31)/32; // calculate the number of DataColumns in the header
+            _dbaseColumns = new DbaseField[numberOfColumns];
+            for (int i = 0; i < _dbaseColumns.Length; i++)
             {
-                DbaseColumns[i] = new DbaseField();
-                DbaseColumns[i].ColumnName = Encoding.UTF7.GetString((br.ReadBytes(11))).Replace("\0", "").Trim();
-                char fieldtype = br.ReadChar();
+                _dbaseColumns[i] = new DbaseField
+                    {
+                        ColumnName = Encoding.UTF7.GetString((_br.ReadBytes(11))).Replace("\0", "").Trim()
+                    };
+                char fieldtype = _br.ReadChar();
                 switch (fieldtype)
                 {
                     case 'L':
-                        DbaseColumns[i].DataType = typeof (bool);
+                        _dbaseColumns[i].DataType = typeof (bool);
                         break;
                     case 'C':
-                        DbaseColumns[i].DataType = typeof (string);
+                        _dbaseColumns[i].DataType = typeof (string);
                         break;
                     case 'D':
-                        DbaseColumns[i].DataType = typeof (DateTime);
+                        _dbaseColumns[i].DataType = typeof (DateTime);
                         break;
                     case 'N':
-                        DbaseColumns[i].DataType = typeof (double);
+                        _dbaseColumns[i].DataType = typeof (double);
                         break;
                     case 'F':
-                        DbaseColumns[i].DataType = typeof (float);
+                        _dbaseColumns[i].DataType = typeof (float);
                         break;
                     case 'B':
-                        DbaseColumns[i].DataType = typeof (byte[]);
+                        _dbaseColumns[i].DataType = typeof (byte[]);
                         break;
                     default:
                         throw (new NotSupportedException("Invalid or unknown DBase field type '" + fieldtype +
-                                                         "' in column '" + DbaseColumns[i].ColumnName + "'"));
+                                                         "' in column '" + _dbaseColumns[i].ColumnName + "'"));
                 }
-                DbaseColumns[i].Address = br.ReadInt32();
+                _dbaseColumns[i].Address = _br.ReadInt32();
 
-                int Length = (int) br.ReadByte();
-                if (Length < 0) Length = Length + 256;
-                DbaseColumns[i].Length = Length;
-                DbaseColumns[i].Decimals = (int) br.ReadByte();
+                int length = _br.ReadByte();
+                if (length < 0) length = length + 256;
+                _dbaseColumns[i].Length = length;
+                _dbaseColumns[i].Decimals = _br.ReadByte();
                 //If the double-type doesn't have any decimals, make the type an integer
-                if (DbaseColumns[i].Decimals == 0 && DbaseColumns[i].DataType == typeof (double))
-                    if (DbaseColumns[i].Length <= 2)
-                        DbaseColumns[i].DataType = typeof (Int16);
-                    else if (DbaseColumns[i].Length <= 4)
-                        DbaseColumns[i].DataType = typeof (Int32);
+                if (_dbaseColumns[i].Decimals == 0 && _dbaseColumns[i].DataType == typeof (double))
+                    if (_dbaseColumns[i].Length <= 2)
+                        _dbaseColumns[i].DataType = typeof (Int16);
+                    else if (_dbaseColumns[i].Length <= 4)
+                        _dbaseColumns[i].DataType = typeof (Int32);
                     else
-                        DbaseColumns[i].DataType = typeof (Int64);
-                fs.Seek(fs.Position + 14, 0);
+                        _dbaseColumns[i].DataType = typeof (Int64);
+                _fs.Seek(_fs.Position + 14, 0);
             }
-            HeaderIsParsed = true;
+            _headerIsParsed = true;
             CreateBaseTable();
         }
 
-        private Encoding GetDbaseLanguageDriver(byte dbasecode)
+        private static Encoding GetDbaseLanguageDriver(byte dbasecode)
         {
             switch (dbasecode)
             {
@@ -365,7 +366,7 @@ namespace Mapsui.Data.Providers
         /// <returns>A DataTable that describes the column metadata.</returns>
         public DataTable GetSchemaTable()
         {
-            DataTable tab = new DataTable();
+            var tab = new DataTable();
             // all of common, non "base-table" fields implemented
             tab.Columns.Add("ColumnName", typeof (String));
             tab.Columns.Add("ColumnSize", typeof (Int32));
@@ -381,18 +382,18 @@ namespace Mapsui.Data.Providers
             tab.Columns.Add("IsAutoIncrement", typeof (bool));
             tab.Columns.Add("IsLong", typeof (bool));
 
-            foreach (DbaseField dbf in DbaseColumns)
+            foreach (DbaseField dbf in _dbaseColumns)
                 tab.Columns.Add(dbf.ColumnName, dbf.DataType);
 
-            for (int i = 0; i < DbaseColumns.Length; i++)
+            for (int i = 0; i < _dbaseColumns.Length; i++)
             {
                 DataRow r = tab.NewRow();
-                r["ColumnName"] = DbaseColumns[i].ColumnName;
-                r["ColumnSize"] = DbaseColumns[i].Length;
+                r["ColumnName"] = _dbaseColumns[i].ColumnName;
+                r["ColumnSize"] = _dbaseColumns[i].Length;
                 r["ColumnOrdinal"] = i;
-                r["NumericPrecision"] = DbaseColumns[i].Decimals;
+                r["NumericPrecision"] = _dbaseColumns[i].Decimals;
                 r["NumericScale"] = 0;
-                r["DataType"] = DbaseColumns[i].DataType;
+                r["DataType"] = _dbaseColumns[i].DataType;
                 r["AllowDBNull"] = true;
                 r["IsReadOnly"] = true;
                 r["IsUnique"] = false;
@@ -407,43 +408,41 @@ namespace Mapsui.Data.Providers
 
                 tab.Rows.Add(r);
             }
-
             return tab;
         }
 
-
-        private FeatureDataTable baseTable;
+        private FeatureDataTable _baseTable;
 
         private void CreateBaseTable()
         {
-            baseTable = new FeatureDataTable();
-            foreach (DbaseField dbf in DbaseColumns)
-                baseTable.Columns.Add(dbf.ColumnName, dbf.DataType);
+            _baseTable = new FeatureDataTable();
+            foreach (DbaseField dbf in _dbaseColumns)
+                _baseTable.Columns.Add(dbf.ColumnName, dbf.DataType);
         }
 
         internal FeatureDataTable NewTable
         {
-            get { return baseTable.Clone(); }
+            get { return _baseTable.Clone(); }
         }
 
         internal object GetValue(uint oid, int colid)
         {
             if (!_isOpen)
                 throw (new ApplicationException("An attempt was made to read from a closed DBF file"));
-            if (oid >= _NumberOfRecords)
-                throw (new ArgumentException("Invalid DataRow requested at index " + oid.ToString()));
-            if (colid >= DbaseColumns.Length || colid < 0)
+            if (oid >= _numberOfRecords)
+                throw (new ArgumentException("Invalid DataRow requested at index " + oid.ToString(CultureInfo.InvariantCulture)));
+            if (colid >= _dbaseColumns.Length || colid < 0)
                 throw ((new ArgumentException("Column index out of range")));
 
-            fs.Seek(_HeaderLength + oid*_RecordLength, 0);
+            _fs.Seek(_headerLength + oid*_recordLength, 0);
             for (int i = 0; i < colid; i++)
-                br.BaseStream.Seek(DbaseColumns[i].Length, SeekOrigin.Current);
+                _br.BaseStream.Seek(_dbaseColumns[i].Length, SeekOrigin.Current);
 
-            return ReadDbfValue(DbaseColumns[colid]);
+            return ReadDbfValue(_dbaseColumns[colid]);
         }
 
-        private Encoding _Encoding;
-        private Encoding _FileEncoding;
+        private Encoding _encoding;
+        private Encoding _fileEncoding;
 
         /// <summary>
         /// Gets or sets the <see cref="System.Text.Encoding"/> used for parsing strings from the DBase DBF file.
@@ -453,10 +452,9 @@ namespace Mapsui.Data.Providers
         /// </remarks>
         public Encoding Encoding
         {
-            get { return _Encoding; }
-            set { _Encoding = value; }
+            get { return _encoding; }
+            set { _encoding = value; }
         }
-
 
         /// <summary>
         /// Gets the feature at the specified Object ID
@@ -466,20 +464,17 @@ namespace Mapsui.Data.Providers
         /// <returns></returns>
         internal IFeature GetFeature(uint oid, IFeatures table)
         {
-            if (!_isOpen)
-                throw (new ApplicationException("An attempt was made to read from a closed DBF file"));
-            if (oid >= _NumberOfRecords)
-                throw (new ArgumentException("Invalid DataRow requested at index " + oid.ToString()));
-            fs.Seek(_HeaderLength + oid * _RecordLength, 0);
+            if (oid >= _numberOfRecords)
+                throw (new ArgumentException("Invalid DataRow requested at index " + oid.ToString(CultureInfo.InvariantCulture)));
+            _fs.Seek(_headerLength + oid * _recordLength, 0);
 
-            IFeature dr = table.New();
+            var dr = table.New();
 
-            if (br.ReadChar() == '*') //is record marked deleted?
-                return null;
+            if (_br.ReadChar() == '*') return null; // is record marked deleted?
+                
 
-            for (int i = 0; i < DbaseColumns.Length; i++)
+            foreach (var dbf in _dbaseColumns)
             {
-                DbaseField dbf = DbaseColumns[i];
                 dr[dbf.ColumnName] = ReadDbfValue(dbf);
             }
             return dr;
@@ -490,57 +485,50 @@ namespace Mapsui.Data.Providers
             switch (dbf.DataType.ToString())
             {
                 case "System.String":
-                    if (_Encoding == null)
-                        return _FileEncoding.GetString(br.ReadBytes(dbf.Length)).Replace("\0", "").Trim();
-                    else
-                        return _Encoding.GetString(br.ReadBytes(dbf.Length)).Replace("\0", "").Trim();
+                    if (_encoding == null)
+                        return _fileEncoding.GetString(_br.ReadBytes(dbf.Length)).Replace("\0", "").Trim();
+                    return _encoding.GetString(_br.ReadBytes(dbf.Length)).Replace("\0", "").Trim();
                 case "System.Double":
-                    string temp = Encoding.UTF7.GetString(br.ReadBytes(dbf.Length)).Replace("\0", "").Trim();
-                    double dbl = 0;
+                    string temp = Encoding.UTF7.GetString(_br.ReadBytes(dbf.Length)).Replace("\0", "").Trim();
+                    double dbl;
                     if (double.TryParse(temp, NumberStyles.Float, CultureInfo.InvariantCulture, out dbl))
                         return dbl;
-                    else
-                        return DBNull.Value;
+                    return DBNull.Value;
                 case "System.Int16":
-                    string temp16 = Encoding.UTF7.GetString((br.ReadBytes(dbf.Length))).Replace("\0", "").Trim();
-                    Int16 i16 = 0;
+                    string temp16 = Encoding.UTF7.GetString((_br.ReadBytes(dbf.Length))).Replace("\0", "").Trim();
+                    Int16 i16;
                     if (Int16.TryParse(temp16, NumberStyles.Float, CultureInfo.InvariantCulture, out i16))
                         return i16;
-                    else
-                        return DBNull.Value;
+                    return DBNull.Value;
                 case "System.Int32":
-                    string temp32 = Encoding.UTF7.GetString((br.ReadBytes(dbf.Length))).Replace("\0", "").Trim();
-                    Int32 i32 = 0;
+                    string temp32 = Encoding.UTF7.GetString((_br.ReadBytes(dbf.Length))).Replace("\0", "").Trim();
+                    Int32 i32;
                     if (Int32.TryParse(temp32, NumberStyles.Float, CultureInfo.InvariantCulture, out i32))
                         return i32;
-                    else
-                        return DBNull.Value;
+                    return DBNull.Value;
                 case "System.Int64":
-                    string temp64 = Encoding.UTF7.GetString((br.ReadBytes(dbf.Length))).Replace("\0", "").Trim();
-                    Int64 i64 = 0;
+                    string temp64 = Encoding.UTF7.GetString((_br.ReadBytes(dbf.Length))).Replace("\0", "").Trim();
+                    Int64 i64;
                     if (Int64.TryParse(temp64, NumberStyles.Float, CultureInfo.InvariantCulture, out i64))
                         return i64;
-                    else
-                        return DBNull.Value;
+                    return DBNull.Value;
                 case "System.Single":
-                    string temp4 = Encoding.UTF8.GetString((br.ReadBytes(dbf.Length)));
-                    float f = 0;
+                    string temp4 = Encoding.UTF8.GetString((_br.ReadBytes(dbf.Length)));
+                    float f;
                     if (float.TryParse(temp4, NumberStyles.Float, CultureInfo.InvariantCulture, out f))
                         return f;
-                    else
-                        return DBNull.Value;
+                    return DBNull.Value;
                 case "System.Boolean":
-                    char tempChar = br.ReadChar();
+                    char tempChar = _br.ReadChar();
                     return ((tempChar == 'T') || (tempChar == 't') || (tempChar == 'Y') || (tempChar == 'y'));
                 case "System.DateTime":
                     DateTime date;
                     // Mono has not yet implemented DateTime.TryParseExact
 #if !MONO
-                    if (DateTime.TryParseExact(Encoding.UTF7.GetString((br.ReadBytes(8))),
+                    if (DateTime.TryParseExact(Encoding.UTF7.GetString((_br.ReadBytes(8))),
                                                "yyyyMMdd", CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
                         return date;
-                    else
-                        return DBNull.Value;
+                    return DBNull.Value;
 #else
 					try 
 					{
@@ -554,7 +542,7 @@ namespace Mapsui.Data.Providers
 #endif
                 default:
                     throw (new NotSupportedException("Cannot parse DBase field '" + dbf.ColumnName + "' of type '" +
-                                                     dbf.DataType.ToString() + "'"));
+                                                     dbf.DataType + "'"));
             }
         }
     }

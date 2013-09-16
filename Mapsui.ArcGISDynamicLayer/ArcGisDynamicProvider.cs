@@ -72,18 +72,6 @@ namespace Mapsui.ArcGISDynamicLayer
             set { _timeOut = value; }
         }
 
-        #region IProvider Members
-
-        public string ConnectionId
-        {
-            get { return String.Empty; }
-        }
-
-        public bool IsOpen
-        {
-            get { return true; }
-        }
-
         public int SRID
         {
             get
@@ -118,23 +106,6 @@ namespace Mapsui.ArcGISDynamicLayer
         {
             return new BoundingBox(Capabilities.initialExtent.xmin, Capabilities.initialExtent.ymin, Capabilities.initialExtent.xmax, Capabilities.initialExtent.ymax);
         }
-
-        public void Open()
-        {
-
-        }
-
-        public void Close()
-        {
-
-        }
-
-        public void Dispose()
-        {
-
-        }
-
-        #endregion
 
         private void CapabilitiesHelperCapabilitiesFailed(object sender, EventArgs e)
         {

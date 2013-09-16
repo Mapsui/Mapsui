@@ -15,23 +15,23 @@
 // along with Mapsui; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
-using System;
-using System.Linq;
 using Mapsui.Fetcher;
 using Mapsui.Geometries;
 using Mapsui.Providers;
-using System.Threading;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
 
 namespace Mapsui.Layers
 {
     public class Layer : BaseLayer
     {
-        protected bool isFetching;
-        protected bool needsUpdate = true;
-        protected double newResolution;
-        protected BoundingBox newExtent;
-        protected MemoryProvider cache;
+        protected bool IsFetching;
+        protected bool NeedsUpdate = true;
+        protected double NewResolution;
+        protected BoundingBox NewExtent;
+        protected MemoryProvider Cache;
 
         public IProvider DataSource { get; set; }
 
@@ -60,29 +60,23 @@ namespace Mapsui.Layers
 
                 lock (DataSource)
                 {
-                    bool wasOpen = DataSource.IsOpen;
-                    if (!wasOpen)
-                        DataSource.Open();
-                    BoundingBox box = DataSource.GetExtents();
-                    if (!wasOpen) //Restore state
-                        DataSource.Close();
-                    if(Transformation != null && Transformation.MapSRID != -1 && SRID != -1)
+                    var box = DataSource.GetExtents();
+                    if (Transformation != null && Transformation.MapSRID != -1 && SRID != -1)
                         return Transformation.Transfrom(SRID, Transformation.MapSRID, box);
-
                     return box;
                 }
             }
         }
 
-        public Layer(string layername) 
+        public Layer(string layername)
         {
             LayerName = layername;
-            cache = new MemoryProvider();
+            Cache = new MemoryProvider();
         }
-        
+
         public override IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
         {
-            return cache.GetFeaturesInView(box, resolution);
+            return Cache.GetFeaturesInView(box, resolution);
         }
 
         public override void AbortFetch()
@@ -94,13 +88,13 @@ namespace Mapsui.Layers
             if (!Enabled) return;
             if (DataSource == null) return;
             if (!changeEnd) return;
-            
-            newExtent = extent;
-            newResolution = resolution;
 
-            if (isFetching)
+            NewExtent = extent;
+            NewResolution = resolution;
+
+            if (IsFetching)
             {
-                needsUpdate = true;
+                NeedsUpdate = true;
                 return;
             }
             StartNewFetch(extent, resolution);
@@ -108,11 +102,10 @@ namespace Mapsui.Layers
 
         protected void StartNewFetch(BoundingBox extent, double resolution)
         {
+            IsFetching = true;
+            NeedsUpdate = false;
 
-            isFetching = true;
-            needsUpdate = false;
-
-            if(Transformation != null && Transformation.MapSRID != -1 && SRID != -1)
+            if (Transformation != null && Transformation.MapSRID != -1 && SRID != -1)
                 extent = Transformation.Transfrom(Transformation.MapSRID, SRID, extent);
 
             var fetcher = new FeatureFetcher(extent, resolution, DataSource, DataArrived);
@@ -125,11 +118,11 @@ namespace Mapsui.Layers
             if (features == null) throw new ArgumentException("argument features may not be null");
 
             /* 
-             * ToDo 
+             * todo: 
              * Temporarily try catch added, fix for when features.ToList() crashes on InvalidOperationException 
-             * happens sometimes whith a really slow internet connection
+             * happens sometimes with a really slow internet connection
              */
-            try 
+            try
             {
                 features = features.ToList();
                 if (Transformation != null && Transformation.MapSRID != -1 && SRID != -1 && SRID != Transformation.MapSRID)
@@ -140,17 +133,17 @@ namespace Mapsui.Layers
                     }
                 }
 
-                cache = new MemoryProvider(features);
+                Cache = new MemoryProvider(features);
 
-                isFetching = false;
+                IsFetching = false;
                 OnDataChanged();
 
-                if (needsUpdate)
+                if (NeedsUpdate)
                 {
-                    StartNewFetch(newExtent, newResolution);
+                    StartNewFetch(NewExtent, NewResolution);
                 }
             }
-            catch(InvalidOperationException){}            
+            catch (InvalidOperationException) { }
         }
 
         protected void OnDataChanged()
@@ -165,7 +158,7 @@ namespace Mapsui.Layers
 
         public override void ClearCache()
         {
-            cache.Clear();
+            Cache.Clear();
         }
     }
 }

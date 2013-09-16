@@ -7,7 +7,7 @@ namespace Mapsui
 {
     public class LayerCollection : IEnumerable<ILayer>
     {
-        private readonly IList<ILayer> layers = new List<ILayer>();
+        private readonly IList<ILayer> _layers = new List<ILayer>();
         
         public delegate void LayerRemovedEventHandler(ILayer layer);
         public delegate void LayerAddedEventHandler(ILayer layer);
@@ -19,56 +19,56 @@ namespace Mapsui
 
         public int Count
         {
-            get { return layers.Count(); }
+            get { return _layers.Count(); }
         }
 
         public IEnumerator<ILayer> GetEnumerator()
         {
-            return layers.GetEnumerator();
+            return _layers.GetEnumerator();
         }
         
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return layers.GetEnumerator();
+            return _layers.GetEnumerator();
         }
 
         public void Clear()
         {
-            foreach (var layer in layers)
+            foreach (var layer in _layers)
             {
                 layer.AbortFetch();
                 OnLayerRemoved(layer);
             }
-            layers.Clear();
+            _layers.Clear();
         }
 
         public ILayer this[int index]
         {
-            get { return layers[index]; }
+            get { return _layers[index]; }
         }
 
         public void Add(ILayer layer)
         {
-            layers.Add(layer);
+            _layers.Add(layer);
             OnLayerAdded(layer);
         }
 
         public void Move(int index, ILayer layer)
         {
-            layers.Remove(layer);
-            layers.Insert(index, layer);
+            _layers.Remove(layer);
+            _layers.Insert(index, layer);
             OnLayerMoved(layer);
         }
 
         public void Insert(int index, ILayer layer)
         {
-            layers.Insert(index, layer);
+            _layers.Insert(index, layer);
             OnLayerAdded(layer);
         }
 
         public void Remove(ILayer layer)
         {
-            layers.Remove(layer);
+            _layers.Remove(layer);
             layer.AbortFetch();
             OnLayerRemoved(layer);
         }
@@ -90,7 +90,7 @@ namespace Mapsui
 
         public IEnumerable<ILayer> FindLayer(string layername)
         {
-            return layers.Where(layer => layer.LayerName.Contains(layername));
+            return _layers.Where(layer => layer.LayerName.Contains(layername));
         }
     }
 }

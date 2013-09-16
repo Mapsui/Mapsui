@@ -19,6 +19,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Text;
 using System.Xml;
@@ -41,8 +42,8 @@ namespace Mapsui.Providers.Wms
     /// </remarks>
     public class WmsProvider : IProvider
     {
-        private string mimeType = "";
-        private readonly Client wmsClient;
+        private string _mimeType = "";
+        private readonly Client _wmsClient;
 
         public WmsProvider(XmlDocument capabilities)
             : this(new Client(capabilities))
@@ -60,13 +61,13 @@ namespace Mapsui.Providers.Wms
 
         private WmsProvider(Client wmsClient)
         {
-            this.wmsClient = wmsClient;
+            _wmsClient = wmsClient;
             TimeOut = 10000;
             ContinueOnError = true;
 
-            if (OutputFormats.Contains("image/png")) mimeType = "image/png";
-            else if (OutputFormats.Contains("image/gif")) mimeType = "image/gif";
-            else if (OutputFormats.Contains("image/jpeg")) mimeType = "image/jpeg";
+            if (OutputFormats.Contains("image/png")) _mimeType = "image/png";
+            else if (OutputFormats.Contains("image/gif")) _mimeType = "image/gif";
+            else if (OutputFormats.Contains("image/jpeg")) _mimeType = "image/jpeg";
             else //None of the default formats supported - Look for the first supported output format
             {
                 throw new ArgumentException(
@@ -90,7 +91,7 @@ namespace Mapsui.Providers.Wms
         /// </summary>
         public Client.WmsServerLayer RootLayer
         {
-            get { return wmsClient.Layer; }
+            get { return _wmsClient.Layer; }
         }
 
         /// <summary>
@@ -98,7 +99,7 @@ namespace Mapsui.Providers.Wms
         /// </summary>
         public Collection<string> OutputFormats
         {
-            get { return wmsClient.GetMapOutputFormats; }
+            get { return _wmsClient.GetMapOutputFormats; }
         }
 
         /// <summary>
@@ -106,7 +107,7 @@ namespace Mapsui.Providers.Wms
         /// </summary>
         public Collection<string> GetFeatureInfoFormats
         {
-            get { return wmsClient.GetFeatureInfoOutputFormats; }
+            get { return _wmsClient.GetFeatureInfoOutputFormats; }
         }
 
         /// <summary>
@@ -119,7 +120,7 @@ namespace Mapsui.Providers.Wms
         /// </summary>
         public Capabilities.WmsServiceDescription ServiceDescription
         {
-            get { return wmsClient.ServiceDescription; }
+            get { return _wmsClient.ServiceDescription; }
         }
 
         /// <summary>
@@ -127,7 +128,7 @@ namespace Mapsui.Providers.Wms
         /// </summary>
         public string Version
         {
-            get { return wmsClient.WmsVersion; }
+            get { return _wmsClient.WmsVersion; }
         }
 
         /// <summary>
@@ -153,7 +154,7 @@ namespace Mapsui.Providers.Wms
         /// <exception cref="System.ArgumentException">Throws an exception is an unknown layer is added</exception>
         public void AddLayer(string name)
         {
-            if (!LayerExists(wmsClient.Layer, name))
+            if (!LayerExists(_wmsClient.Layer, name))
                 throw new ArgumentException("Cannot add WMS Layer - Unknown layername");
 
             LayerList.Add(name);
@@ -168,7 +169,7 @@ namespace Mapsui.Providers.Wms
         public Client.WmsServerLayer GetLayer(string name)
         {
             Client.WmsServerLayer layer;
-            if (FindLayer(wmsClient.Layer, name, out layer))
+            if (FindLayer(_wmsClient.Layer, name, out layer))
                 return layer;
              
             throw new ArgumentException("Layer not found");
@@ -182,10 +183,7 @@ namespace Mapsui.Providers.Wms
         /// <returns></returns>
         private bool LayerExists(Client.WmsServerLayer layer, string name)
         {
-            if (name == layer.Name) return true;
-            foreach (Client.WmsServerLayer childlayer in layer.ChildLayers)
-                if (LayerExists(childlayer, name)) return true;
-            return false;
+            return name == layer.Name || layer.ChildLayers.Any(childlayer => LayerExists(childlayer, name));
         }
 
         private bool FindLayer(Client.WmsServerLayer layer, string name, out Client.WmsServerLayer result)
@@ -238,7 +236,7 @@ namespace Mapsui.Providers.Wms
         /// <exception cref="System.ArgumentException">Throws an exception is an unknown layer is added</exception>
         public void AddStyle(string name)
         {
-            if (!StyleExists(wmsClient.Layer, name))
+            if (!StyleExists(_wmsClient.Layer, name))
                 throw new ArgumentException("Cannot add WMS Layer - Unknown layername");
             StylesList.Add(name);
         }
@@ -251,11 +249,8 @@ namespace Mapsui.Providers.Wms
         /// <returns>True of style exists</returns>
         private bool StyleExists(Client.WmsServerLayer layer, string name)
         {
-            foreach (Client.WmsLayerStyle style in layer.Style)
-                if (name == style.Name) return true;
-            foreach (Client.WmsServerLayer childlayer in layer.ChildLayers)
-                if (StyleExists(childlayer, name)) return true;
-            return false;
+            if (layer.Style.Any(style => name == style.Name)) return true;
+            return layer.ChildLayers.Any(childlayer => StyleExists(childlayer, name));
         }
 
         /// <summary>
@@ -297,7 +292,7 @@ namespace Mapsui.Providers.Wms
         {
             if (!OutputFormats.Contains(mimeType))
                 throw new ArgumentException("WMS service doesn't not offer mimetype '" + mimeType + "'");
-            this.mimeType = mimeType;
+            _mimeType = mimeType;
         }
 
         public bool TryGetMap(IViewport viewport, ref IRaster raster)
@@ -376,14 +371,11 @@ namespace Mapsui.Providers.Wms
                     strReq.AppendFormat("{0},", layer);
                 strReq.Remove(strReq.Length - 1, 1);
             }
-            strReq.AppendFormat("&FORMAT={0}", mimeType);
+            strReq.AppendFormat("&FORMAT={0}", _mimeType);
             if (SpatialReferenceSystem == string.Empty)
                 throw new ApplicationException("Spatial reference system not set");
-            if (wmsClient.WmsVersion == "1.3.0")
-                strReq.AppendFormat("&CRS={0}", SpatialReferenceSystem);
-            else
-                strReq.AppendFormat("&SRS={0}", SpatialReferenceSystem);
-            strReq.AppendFormat("&VERSION={0}", wmsClient.WmsVersion);
+            strReq.AppendFormat(_wmsClient.WmsVersion != "1.3.0" ? "&SRS={0}" : "&CRS={0}", SpatialReferenceSystem);
+            strReq.AppendFormat("&VERSION={0}", _wmsClient.WmsVersion);
             strReq.Append("&TRANSPARENT=true");
             strReq.Append("&Styles=");
             if (StylesList != null && StylesList.Count > 0)
@@ -414,7 +406,7 @@ namespace Mapsui.Providers.Wms
                 foreach (string layer in LayerList)
                 {
                     Client.WmsServerLayer result;
-                    if (FindLayer(wmsClient.Layer, layer, out result))
+                    if (FindLayer(_wmsClient.Layer, layer, out result))
                     {
                         foreach (var style in result.Style)
                         {
@@ -450,26 +442,14 @@ namespace Mapsui.Providers.Wms
         private Client.WmsOnlineResource GetPreferredMethod()
         {
             //We prefer get. Seek for supported 'get' method
-            for (int i = 0; i < wmsClient.GetMapRequests.Length; i++)
-                if (wmsClient.GetMapRequests[i].Type.ToLower() == "get")
-                    return wmsClient.GetMapRequests[i];
+            for (int i = 0; i < _wmsClient.GetMapRequests.Length; i++)
+                if (_wmsClient.GetMapRequests[i].Type.ToLower() == "get")
+                    return _wmsClient.GetMapRequests[i];
             //Next we prefer the 'post' method
-            for (int i = 0; i < wmsClient.GetMapRequests.Length; i++)
-                if (wmsClient.GetMapRequests[i].Type.ToLower() == "post")
-                    return wmsClient.GetMapRequests[i];
-            return wmsClient.GetMapRequests[0];
-        }
-
-        #region IProvider Members
-
-        public string ConnectionId
-        {
-            get { return String.Empty; }
-        }
-
-        public bool IsOpen
-        {
-            get { return true; }
+            for (int i = 0; i < _wmsClient.GetMapRequests.Length; i++)
+                if (_wmsClient.GetMapRequests[i].Type.ToLower() == "post")
+                    return _wmsClient.GetMapRequests[i];
+            return _wmsClient.GetMapRequests[0];
         }
 
         public int SRID { get; set; }
@@ -478,20 +458,8 @@ namespace Mapsui.Providers.Wms
 
         public BoundingBox GetExtents()
         {
-            return wmsClient.Layer.LatLonBoundingBox;
+            return _wmsClient.Layer.LatLonBoundingBox;
         }
-
-        public void Open()
-        {
-            //TODO: See if we can remove this from the interface
-        }
-
-        public void Close()
-        {
-            //TODO: See if we can remove this from the interface
-        }
-
-        #endregion
 
         #region IDisposable Members
 

@@ -58,9 +58,7 @@ namespace Mapsui.Providers
     /// </remarks>
     public class MemoryProvider : IProvider
     {
-        private readonly object syncRoot = new object();
-
-        #region Properties
+        private readonly object _syncRoot = new object();
 
         /// <summary>
         /// Gets or sets the geometries this datasource contains
@@ -68,22 +66,10 @@ namespace Mapsui.Providers
         public IFeatures Features { get; set; }
 
         /// <summary>
-        /// Returns true if the datasource is currently open
-        /// </summary>
-        public bool IsOpen
-        {
-            get { return true; }
-        }
-
-        /// <summary>
         /// The spatial reference ID (CRS)
         /// </summary>
         public int SRID { get; set; }
-
-        #endregion
         
-        #region Constructors
-
         public MemoryProvider()
         {
             SRID = -1;
@@ -113,8 +99,7 @@ namespace Mapsui.Providers
         public MemoryProvider(IFeature feature)
         {
             SRID = -1;
-            Features = new Features();
-            Features.Add(feature);
+            Features = new Features {feature};
         }
 
         /// <summary>
@@ -168,13 +153,9 @@ namespace Mapsui.Providers
         {
         }
 
-        #endregion
-
-        #region IProvider Members
-
         public IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
         {
-            lock (syncRoot)
+            lock (_syncRoot)
             {
                 var features = Features.ToList();
 
@@ -193,7 +174,7 @@ namespace Mapsui.Providers
 
         public IFeature Find(object value)
         {
-            lock (syncRoot)
+            lock (_syncRoot)
             {
                 if (string.IsNullOrEmpty(Features.PrimaryKey)) throw new Exception("ID Field was not set");
 
@@ -209,66 +190,26 @@ namespace Mapsui.Providers
         /// <returns>boundingbox</returns>
         public BoundingBox GetExtents()
         {
-            lock (syncRoot)
+            lock (_syncRoot)
             {
                 BoundingBox box = null;
                 foreach (IFeature feature in Features)
-                    if (!feature.Geometry.IsEmpty())
-                        box = box == null
-                                  ? feature.Geometry.GetBoundingBox()
-                                  : box.Join(feature.Geometry.GetBoundingBox());
-
+                {
+                    if (feature.Geometry.IsEmpty()) continue;
+                    box = box == null
+                            ? feature.Geometry.GetBoundingBox()
+                            : box.Join(feature.Geometry.GetBoundingBox());
+                }
                 return box;
             }
         }
-
-        /// <summary>
-        /// Gets the connection ID of the datasource
-        /// </summary>
-        /// <remarks>
-        /// The ConnectionID is meant for Connection Pooling which doesn't apply to this datasource. Instead
-        /// <c>String.Empty</c> is returned.
-        /// </remarks>
-        public string ConnectionId
-        {
-            get { return String.Empty; }
-        }
-
-        /// <summary>
-        /// Opens the datasource
-        /// </summary>
-        public void Open()
-        {
-            //Do nothing;
-        }
-
-        /// <summary>
-        /// Closes the datasource
-        /// </summary>
-        public void Close()
-        {
-            //Do nothing;
-        }
-
-        /// <summary>
-        /// Disposes the object
-        /// </summary>
-        public void Dispose()
-        {
-            lock (syncRoot)
-            {
-                Features = null;
-            }
-        }
-
+        
         public void Clear()
         {
-            lock (syncRoot)
+            lock (_syncRoot)
             {
                 Features.Clear();    
             }
         }
-
-        #endregion
     }
 }

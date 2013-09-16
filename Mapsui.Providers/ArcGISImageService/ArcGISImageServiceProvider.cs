@@ -12,36 +12,16 @@ namespace Mapsui.Providers.ArcGISImageService
 {
     public class ArcGISImageServiceProvider : IProvider
     {
-        private int srid = -1;
-        private readonly ArcGISImageServiceInfo info;
+        private readonly ArcGISImageServiceInfo _info;
         
         public ArcGISImageServiceProvider(ArcGISImageServiceInfo info, bool continueOnError = false)
         {
-            this.info = info;
+            SRID = -1;
+            _info = info;
             ContinueOnError = continueOnError;
         }
 
-        public string ConnectionId
-        {
-            get { return ""; }
-        }
-
-        public bool IsOpen
-        {
-            get { return true; }
-        }
-
-        public int SRID
-        {
-            get
-            {
-                return srid;
-            }
-            set
-            {
-                srid = value;
-            }
-        }
+        public int SRID { get; set; }
 
         public System.Collections.Generic.IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
         {
@@ -107,20 +87,20 @@ namespace Mapsui.Providers.ArcGISImageService
         
         private string GetRequestUrl(BoundingBox boundingBox, int width, int height)
         {
-            var url = new StringBuilder(info.Url);
+            var url = new StringBuilder(_info.Url);
 
-            if (!info.Url.Contains("?")) url.Append("?");
+            if (!_info.Url.Contains("?")) url.Append("?");
             if (!url.ToString().EndsWith("&") && !url.ToString().EndsWith("?")) url.Append("&");
 
             url.AppendFormat(CultureInfo.InvariantCulture, "bbox={0},{1},{2},{3}",
                 boundingBox.Min.X, boundingBox.Min.Y, boundingBox.Max.X, boundingBox.Max.Y);
             url.AppendFormat("&size={0},{1}", width, height);
-            url.AppendFormat("&interpolation=RSP_{0}", info.Interpolation.ToString());
-            url.AppendFormat("&format={0}", info.Format);
-            url.AppendFormat("&f={0}", info.F);
-            url.AppendFormat("&imageSR={0}", info.ImageSR);
-            url.AppendFormat("&bboxSR={0}", info.BBoxSR);
-            url.AppendFormat("&time={0}", info.Time);
+            url.AppendFormat("&interpolation=RSP_{0}", _info.Interpolation.ToString());
+            url.AppendFormat("&format={0}", _info.Format);
+            url.AppendFormat("&f={0}", _info.F);
+            url.AppendFormat("&imageSR={0}", _info.ImageSR);
+            url.AppendFormat("&bboxSR={0}", _info.BBoxSR);
+            url.AppendFormat("&time={0}", _info.Time);
 
             return url.ToString();
         }
@@ -128,18 +108,6 @@ namespace Mapsui.Providers.ArcGISImageService
         public BoundingBox GetExtents()
         {
             return null;
-        }
-
-        public void Open()
-        {
-        }
-
-        public void Close()
-        {
-        }
-
-        public void Dispose()
-        {
         }
 
         public bool ContinueOnError { get; set; }

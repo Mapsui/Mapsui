@@ -151,7 +151,7 @@ namespace Mapsui.Utilities.Wfs
         /// <summary>
         /// This method closes the WebResponse object.
         /// </summary>
-        public void Close()
+        public void Close() //This class should implement dispose instead.
         {
             if (_WebResponse != null)
             {

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Mapsui.Geometries;
+using Mapsui.Styles;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -6,8 +8,6 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
-using Mapsui.Geometries;
-using Mapsui.Styles;
 using Bitmap = System.Drawing.Bitmap;
 using Color = System.Drawing.Color;
 
@@ -19,27 +19,31 @@ namespace Mapsui.Providers.GeoTiff
         {
             public double Width;
             public double Height;
+// ReSharper disable NotAccessedField.Local
             public double HResolution;
             public double VResolution;
+// ReSharper restore NotAccessedField.Local
         }
 
         private struct WorldProperties
         {
             public double PixelSizeX;
+// ReSharper disable NotAccessedField.Local
             public double RotationAroundYAxis;
             public double RotationAroundXAxis;
+// ReSharper restore NotAccessedField.Local
             public double PixelSizeY;
             public double XCenterOfUpperLeftPixel;
             public double YCenterOfUpperLeftPixel;
         }
 
-        private readonly TiffProperties tiffProperties;
-        private readonly WorldProperties worldProperties;
+        private readonly TiffProperties _tiffProperties;
+        private readonly WorldProperties _worldProperties;
         private const string WorldExtention = ".tfw";
-        private readonly string worldPath;
-        private readonly IFeature feature;
-        private readonly BoundingBox extent;
-        private readonly MemoryStream data;
+        private readonly string _worldPath;
+        private readonly IFeature _feature;
+        private readonly BoundingBox _extent;
+        private readonly MemoryStream _data;
 
         public GeoTiffProvider(string tiffPath, List<Color> noDataColors = null)
         {
@@ -48,21 +52,21 @@ namespace Mapsui.Providers.GeoTiff
                 throw new ArgumentException(string.Format("Tiff file expected at {0}", tiffPath));
             }
 
-            worldPath = GetPathWithoutExtension(tiffPath) + WorldExtention;
-            if (!File.Exists(worldPath))
+            _worldPath = GetPathWithoutExtension(tiffPath) + WorldExtention;
+            if (!File.Exists(_worldPath))
             {
-                throw new ArgumentException(string.Format("World file expected at {0}", worldPath));
+                throw new ArgumentException(string.Format("World file expected at {0}", _worldPath));
             }
 
-            tiffProperties = LoadTiff(tiffPath);
-            worldProperties = LoadWorld(worldPath);
-            extent = CalculateExtent(tiffProperties, worldProperties);
+            _tiffProperties = LoadTiff(tiffPath);
+            _worldProperties = LoadWorld(_worldPath);
+            _extent = CalculateExtent(_tiffProperties, _worldProperties);
 
             try
             {
                 try
                 {
-                    data = ReadImageAsStream(tiffPath, noDataColors);
+                    _data = ReadImageAsStream(tiffPath, noDataColors);
                 }
                 catch (OutOfMemoryException e)
                 {
@@ -74,8 +78,8 @@ namespace Mapsui.Providers.GeoTiff
                 throw new ExternalException(e.Message, e.InnerException);
             }
 
-            feature = new Feature { Geometry = new Raster(data, extent) };
-            feature.Styles.Add(new VectorStyle());
+            _feature = new Feature { Geometry = new Raster(_data, _extent) };
+            _feature.Styles.Add(new VectorStyle());
         }
 
         private static BoundingBox CalculateExtent(TiffProperties tiffProperties, WorldProperties worldProperties)
@@ -209,39 +213,20 @@ namespace Mapsui.Providers.GeoTiff
         {
         }
 
-        public string ConnectionId
-        {
-            get { return string.Empty; }
-        }
-
-        public bool IsOpen
-        {
-            get { return true; }
-        }
-
         public int SRID { get; set; }
 
         public IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
         {
-            if (extent.Intersects(box))
+            if (_extent.Intersects(box))
             {
-                return new[] { feature };
+                return new[] { _feature };
             }
             return new Features();
-
         }
 
         public BoundingBox GetExtents()
         {
-            return extent;
-        }
-
-        public void Open()
-        {
-        }
-
-        public void Close()
-        {
+            return _extent;
         }
 
         private static string GetPathWithoutExtension(string path)
