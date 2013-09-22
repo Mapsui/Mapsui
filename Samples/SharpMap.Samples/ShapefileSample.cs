@@ -9,69 +9,66 @@ using System.IO;
 
 namespace Mapsui.Samples
 {
-    public static class ShapefileSample 
+    public static class ShapefileSample
     {
         public static Map CreateMap()
         {
-            var map = new Map { BackColor = Color.Blue};
-            
-            var countrySource = new ShapeFile(GetAppDir() + "\\GeoData\\World\\countries.shp", true);
-            var citySource = new ShapeFile(GetAppDir() + "\\GeoData\\World\\cities.shp", true);
+            var map = new Map { BackColor = Color.Blue };
+
+            var countrySource = new ShapeFile(GetAppDir() + "\\GeoData\\World\\countries.shp", true) { SRID = 3785 };
+            var citySource = new ShapeFile(GetAppDir() + "\\GeoData\\World\\cities.shp", true) { SRID = 3785 };
 
             map.Layers.Add(CreateCountryLayer(countrySource));
-            
             map.Layers.Add(CreateCityLayer(citySource));
-            
             map.Layers.Add(CreateCountryLabelLayer(countrySource));
-
             map.Layers.Add(CreateCityLabelLayer(citySource));
-            
+
             return map;
         }
 
         public static Layer CreateCountryLayer(IProvider countrySource)
         {
-            var countries = new Layer("Countries");
-            countries.DataSource = countrySource;
-            countries.DataSource.SRID = 3785;
-            countries.Styles.Add(CreateCountryTheme());
-            return countries;
+            return new Layer("Countries")
+                {
+                    DataSource = countrySource,
+                    Style = CreateCountryTheme()
+                };
         }
 
         public static Layer CreateCityLayer(IProvider citySource)
         {
-            var layCities = new Layer("Cities");
-            layCities.DataSource = citySource;
-            layCities.DataSource.SRID = 3785;
-            layCities.Styles.Add(CreateCityTheme());
-            layCities.MaxVisible = 10000000.0;
-            return layCities;
+            return new Layer("Cities")
+                {
+                    DataSource = citySource,
+                    Style = CreateCityTheme(),
+                    MaxVisible = 10000000.0
+                };
         }
-        
+
         private static LabelLayer CreateCountryLabelLayer(IProvider countryProvider)
         {
-            var countryLabelLayer = new LabelLayer("Country labels");
-            countryLabelLayer.DataSource = countryProvider;
-            countryLabelLayer.DataSource.SRID = 3785;
-            countryLabelLayer.Enabled = true;
-            countryLabelLayer.LabelColumn = "NAME";
-            countryLabelLayer.MaxVisible = double.MaxValue;
-            countryLabelLayer.MinVisible = double.MinValue;
-            countryLabelLayer.MultipartGeometryBehaviour = LabelLayer.MultipartGeometryBehaviourEnum.Largest;
-            countryLabelLayer.Styles.Add(CreateCountryLabelTheme());
-            return countryLabelLayer;
+            return new LabelLayer("Country labels")
+                {
+                    DataSource = countryProvider,
+                    Enabled = true,
+                    LabelColumn = "NAME",
+                    MaxVisible = double.MaxValue,
+                    MinVisible = double.MinValue,
+                    MultipartGeometryBehaviour = LabelLayer.MultipartGeometryBehaviourEnum.Largest,
+                    Style = CreateCountryLabelTheme()
+                };
         }
 
         private static ILayer CreateCityLabelLayer(IProvider citiesProvider)
         {
-            var cityLabelLayer = new LabelLayer("City labels");
-            cityLabelLayer.DataSource = citiesProvider;
-            cityLabelLayer.DataSource.SRID = 3785;
-            cityLabelLayer.Enabled = true;
-            cityLabelLayer.LabelColumn = "NAME";
-            cityLabelLayer.Styles.Add(CreateCityLabelTheme());
-            cityLabelLayer.LabelFilter = LabelCollisionDetection.ThoroughCollisionDetection;
-            return cityLabelLayer;
+            return new LabelLayer("City labels")
+                {
+                    DataSource = citiesProvider,
+                    Enabled = true,
+                    LabelColumn = "NAME",
+                    Style = CreateCityLabelTheme(),
+                    LabelFilter = LabelCollisionDetection.ThoroughCollisionDetection
+                };
         }
 
         private static IThemeStyle CreateCityTheme()
@@ -102,49 +99,49 @@ namespace Mapsui.Samples
             //In this case we will just use the default values and override the fill-colors
             //using a colorblender. If different line-widths, line- and fill-colors where used
             //in the min and max styles, these would automatically get linearly interpolated.
-            var min = new VectorStyle();
-            min.Outline = new Pen { Color = Color.Black };
-
-            var max = new VectorStyle();
-            max.Outline = new Pen { Color = Color.Black };
+            var min = new VectorStyle { Outline = new Pen { Color = Color.Black } };
+            var max = new VectorStyle { Outline = new Pen { Color = Color.Black } };
 
             //Create theme using a density from 0 (min) to 400 (max)
-            var popdens = new GradientTheme("PopDens", 0, 400, min, max);
-            //We can make more advanced coloring using the ColorBlend'er.
-            //Setting the FillColorBlend will override any fill-style in the min and max fills.
-            //In this case we just use the predefined Rainbow colorscale
-            popdens.FillColorBlend = ColorBlend.Rainbow5;
-            //countries.Styles.Clear(); //remove styles added earlier
-            return popdens;
+            return new GradientTheme("PopDens", 0, 400, min, max) { FillColorBlend = ColorBlend.Rainbow5 };
         }
 
         private static LabelStyle CreateCityLabelTheme()
         {
-            var cityLabelStyle = new LabelStyle();
-            cityLabelStyle.ForeColor = Color.Black;
-            cityLabelStyle.BackColor = new Brush { Color = Color.Orange };
-            cityLabelStyle.Font = new Font { FontFamily = "GenericSerif", Size = 11 };
-            cityLabelStyle.HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center;
-            cityLabelStyle.VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Center;
-            cityLabelStyle.Offset = new Offset { X = 0, Y = 0 };
-            cityLabelStyle.Halo = new Pen { Color = Color.Yellow, Width = 2 };
-            cityLabelStyle.CollisionDetection = true;
-            return cityLabelStyle;
+            return new LabelStyle
+                {
+                    ForeColor = Color.Black,
+                    BackColor = new Brush { Color = Color.Orange },
+                    Font = new Font { FontFamily = "GenericSerif", Size = 11 },
+                    HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center,
+                    VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Center,
+                    Offset = new Offset { X = 0, Y = 0 },
+                    Halo = new Pen { Color = Color.Yellow, Width = 2 },
+                    CollisionDetection = true
+                };
         }
 
         private static GradientTheme CreateCountryLabelTheme()
         {
             //Lets scale the labels so that big countries have larger texts as well
-            var lblMin = new LabelStyle();
-            var lblMax = new LabelStyle();
-            lblMin.ForeColor = Color.Black;
-            lblMin.Font = new Font { FontFamily = "GenericSerif", Size = 6 };
-            lblMax.ForeColor = Color.Blue;
-            lblMax.BackColor = new Brush { Color = new Color { A = 128, R = 255, G = 255, B = 255 } };
-            lblMin.BackColor = lblMax.BackColor;
-            lblMax.Font = new Font { FontFamily = "GenericSerif", Size = 9 };
-            var labelTheme = new GradientTheme("PopDens", 0, 400, lblMin, lblMax);
-            return labelTheme;
+            var backColor = new Brush { Color = new Color { A = 128, R = 255, G = 255, B = 255 } };
+
+            var lblMin = new LabelStyle
+                {
+                    ForeColor = Color.Black,
+                    BackColor = backColor,
+                    Font = new Font { FontFamily = "GenericSerif", Size = 6 }
+
+                };
+
+            var lblMax = new LabelStyle
+                {
+                    ForeColor = Color.Blue,
+                    BackColor = backColor,
+                    Font = new Font { FontFamily = "GenericSerif", Size = 9 }
+                };
+
+            return new GradientTheme("PopDens", 0, 400, lblMin, lblMax);
         }
 
         private static string GetAppDir()

@@ -20,12 +20,13 @@ using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
+using Mapsui.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Globalization;
-using Mapsui.Utilities;
+using System.Linq;
 
 namespace Mapsui.Rendering.GdiRendering
 {
@@ -33,7 +34,8 @@ namespace Mapsui.Rendering.GdiRendering
     {
         public static void Render(Graphics g, IViewport viewport, LabelLayer labelLayer)
         {
-            foreach (var layerStyle in labelLayer.Styles)
+            var layerStyles = BaseLayer.GetLayerStyles(labelLayer);
+            foreach (var layerStyle in layerStyles)
             {
                 if (layerStyle.Enabled && labelLayer.MaxVisible >= viewport.Resolution && labelLayer.MinVisible < viewport.Resolution)
                 {
@@ -41,7 +43,7 @@ namespace Mapsui.Rendering.GdiRendering
                         throw (new ApplicationException("DataSource property not set"));
 
                     g.SmoothingMode = SmoothingMode.AntiAlias;
-                    
+
                     var features = labelLayer.GetFeaturesInView(viewport.Extent, viewport.Resolution);
 
                     //Initialize label collection
@@ -97,7 +99,7 @@ namespace Mapsui.Rendering.GdiRendering
                                 {
                                     if ((feature.Geometry as GeometryCollection).Collection.Count > 0)
                                     {
-                                        Label label = CreateLabel(geometryCollection.Collection[0], text, rotation, 0, 
+                                        Label label = CreateLabel(geometryCollection.Collection[0], text, rotation, 0,
                                             style, viewport, g);
                                         if (label != null) labels.Add(label);
                                     }
@@ -155,7 +157,7 @@ namespace Mapsui.Rendering.GdiRendering
                         foreach (Label label in labels)
                         {
                             if (!label.Show) continue;
-                            GdiGeometryRenderer.DrawLabel(g, label.LabelPoint, label.Style.Offset, label.Style.Font, 
+                            GdiGeometryRenderer.DrawLabel(g, label.LabelPoint, label.Style.Offset, label.Style.Font,
                                 label.Style.ForeColor, label.Style.BackColor, label.Halo, label.Rotation, label.Text, viewport);
                         }
                     }

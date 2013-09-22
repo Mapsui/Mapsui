@@ -1,6 +1,6 @@
 ﻿using Mapsui.Geometries;
 using Mapsui.Layers;
-using Mapsui.Styles;
+using Mapsui.Providers;
 
 namespace Mapsui.Samples.Common
 {
@@ -8,10 +8,10 @@ namespace Mapsui.Samples.Common
     {
         public static ILayer AddLayerWithOnePolygon()
         {
-            var layer = new Layer("LayerWithPolygon");
-            layer.DataSource = new Mapsui.Providers.MemoryProvider(CreatePolygon());
-            layer.Styles.Add(new VectorStyle());
-            return layer;
+            return new Layer("LayerWithPolygon")
+                {
+                    DataSource = new MemoryProvider(CreatePolygon())
+                };
         }
 
         private static Polygon CreatePolygon()

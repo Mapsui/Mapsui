@@ -95,8 +95,9 @@ namespace Mapsui.Rendering.XamlRendering
             {
                 var canvas = new Canvas {Opacity = layer.Opacity, IsHitTestVisible = false};
                 var features = layer.GetFeaturesInView(viewport.Extent, viewport.Resolution).ToList();
-
-                foreach (var layerStyle in layer.Styles)
+                var layerStyles = BaseLayer.GetLayerStyles(layer);
+            
+                foreach (var layerStyle in layerStyles)
                 {
                     var style = layerStyle; // This is the default that could be overridden by an IThemeStyle
 

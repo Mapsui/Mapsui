@@ -1,4 +1,5 @@
-﻿using BruTile.Web;
+﻿using System.IO;
+using BruTile.Web;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
@@ -18,7 +19,7 @@ namespace Mapsui.Silverlight
 {
     public partial class GUIOverlay : UserControl
     {
-        public MapControl mapControl; //todo: remove
+        public MapControl _mapControl; //todo: remove
         bool _isMenuDown;
 
         public GUIOverlay()
@@ -32,39 +33,42 @@ namespace Mapsui.Silverlight
 
         internal void SetMap(MapControl mapControl)
         {
-            this.mapControl = mapControl;
+            _mapControl = mapControl;
             mapControl.ErrorMessageChanged += map_ErrorMessageChanged;
 
             mapControl.Map = CreateMap();
 
             FillLayerList(mapControl.Map);
-            if (mapControl.Map.Envelope != null)
-            {
-                var center = mapControl.Map.Envelope.GetCentroid();
-                mapControl.Viewport.Center = new Geometries.Point(center.X, center.Y);
-                mapControl.Viewport.Resolution = 10000;
-            }
+            if (mapControl.Map.Envelope == null) return;
+
+            var center = mapControl.Map.Envelope.GetCentroid();
+            mapControl.Viewport.Center = new Geometries.Point(center.X, center.Y);
+            mapControl.Viewport.Resolution = 10000;
         }
 
-        private Map CreateMap()
+        private static Map CreateMap()
         {
-            var map = new Map();
-            
-            var osmLayer = new TileLayer(new OsmTileSource()) { LayerName = "OSM" };
-            map.Layers.Add(osmLayer);
-
-            var pointLayer = PointLayerSample.CreateRandomPointLayer(map.Envelope, 600);
             var bitmapData = System.Reflection.Assembly.GetExecutingAssembly()
-              .GetManifestResourceStream("Mapsui.Silverlight.UI.Images.btnBbox.png");
-            var symbolStyle = new SymbolStyle { Symbol = new Bitmap { Data = bitmapData } };
-            pointLayer.Styles.Add(symbolStyle);
-            map.Layers.Add(pointLayer);
+                .GetManifestResourceStream("Mapsui.Silverlight.UI.Images.btnBbox.png");
 
-            var provider = CreateRandomPointsProvider(map.Envelope);
+            var osmLayer = new TileLayer(new OsmTileSource()) {LayerName = "OSM"};
+            var provider = CreateRandomPointsProvider(osmLayer.Envelope);
+            
+            var map = new Map();
+            map.Layers.Add(osmLayer);
+            map.Layers.Add(CreateRandomPointLayer(provider, bitmapData));
             map.Layers.Add(PointLayerSample.CreateRandomPointLayerWithLabel(provider));
             map.Layers.Add(PointLayerSample.CreateStackedLabelLayer(provider));
-
             return map;
+        }
+
+        private static Layer CreateRandomPointLayer(IProvider provider, Stream bitmapData)
+        {
+            return new Layer("pointlayer")
+                {
+                    DataSource = provider,
+                    Style = new SymbolStyle {Symbol = new Bitmap {Data = bitmapData}}
+                };
         }
 
         private static MemoryProvider CreateRandomPointsProvider(BoundingBox box)
@@ -120,13 +124,13 @@ namespace Mapsui.Silverlight
             if (!(sender is FrameworkElement)) return;
             var layer = ((sender as FrameworkElement).Tag as ILayer);
             layer.Enabled = !layer.Enabled;
-            mapControl.Clear();
-            mapControl.OnViewChanged();
+            _mapControl.Clear();
+            _mapControl.OnViewChanged();
         }
 
         void map_ErrorMessageChanged(object sender, EventArgs e)
         {
-            Error.Text = mapControl.ErrorMessage;
+            Error.Text = _mapControl.ErrorMessage;
             AnimateOpacity(errorBorder, 0.75, 0, 8000);
         }
 
@@ -225,12 +229,12 @@ namespace Mapsui.Silverlight
 
         private void buttonZoomIn_Click(object sender, RoutedEventArgs e)
         {
-            mapControl.ZoomIn();
+            _mapControl.ZoomIn();
         }
 
         private void buttonZoomOut_Click(object sender, RoutedEventArgs e)
         {
-            mapControl.ZoomOut();
+            _mapControl.ZoomOut();
         }
 
         private void btnLayers_Click(object sender, RoutedEventArgs e)
@@ -246,13 +250,13 @@ namespace Mapsui.Silverlight
 
         private void btnBbox_Click(object sender, RoutedEventArgs e)
         {
-            mapControl.ZoomToBoxMode = true;
+            _mapControl.ZoomToBoxMode = true;
         }
 
         private void buttonMaxExtend_Click(object sender, RoutedEventArgs e)
         {
-            var extent = mapControl.Map.Envelope;
-            mapControl.ZoomToBox(new Mapsui.Geometries.Point(extent.MinX, extent.MinY), new Mapsui.Geometries.Point(extent.MaxX, extent.MaxY));
+            var extent = _mapControl.Map.Envelope;
+            _mapControl.ZoomToBox(new Mapsui.Geometries.Point(extent.MinX, extent.MinY), new Mapsui.Geometries.Point(extent.MaxX, extent.MaxY));
         }
 
         private void btnGoto_Click(object sender, RoutedEventArgs e)

@@ -35,6 +35,9 @@ namespace Mapsui.Rendering.XamlRendering
             // step 2) Move GetFeaturesInViewStacked to a GetFeaturesInView
             // method of a new StackedLabelLayed.
 
+            if (!(layer.Style is LabelStyle)) throw new Exception("Style of label is not a LabelStyle");
+            var layerStyle = layer.Style as LabelStyle;
+
             var canvas = new Canvas { Opacity = layer.Opacity };
 
             // todo: take into account the priority 
@@ -44,39 +47,34 @@ namespace Mapsui.Rendering.XamlRendering
             const int symbolSize = 32; // todo: determine margin by symbol size
             const int boxMargin = symbolSize / 2;
 
-            foreach (var layerStyle in layer.Styles) // todo: there should be just on StackedLabelsStyle
+            var clusters = new List<Cluster>();
+            //todo: repeat until there are no more merges
+            ClusterFeatures(clusters, features, margin, layer.Style, viewport.Resolution);
+            const int textHeight = 18;
+            foreach (var cluster in clusters)
             {
-                var clusters = new List<Cluster>();
-                //todo: repeat until there are no more merges
-                ClusterFeatures(clusters, features, margin, layerStyle, viewport.Resolution);
-                const int textHeight = 18;
-                foreach (var cluster in clusters)
+                var stackOffsetY = double.NaN;
+
+                var orderedFeatures = cluster.Features.OrderBy(f => f.Geometry.GetBoundingBox().GetCentroid().Y);
+
+                if (cluster.Features.Count > 1) canvas.Children.Add(RenderBox(cluster.Box, viewport));
+
+                foreach (var feature in orderedFeatures)
                 {
-                    var stackOffsetY = double.NaN;
+                    if (double.IsNaN(stackOffsetY)) // first time
+                        stackOffsetY = textHeight * 0.5 + boxMargin;
+                    else
+                        stackOffsetY += textHeight; //todo: get size from text (or just pass stack nr)
 
-                    var orderedFeatures = cluster.Features.OrderBy(f => f.Geometry.GetBoundingBox().GetCentroid().Y);
-
-                    if (cluster.Features.Count > 1) canvas.Children.Add(RenderBox(cluster.Box, viewport));
-
-                    foreach (var feature in orderedFeatures)
+                    var labelStyle = new LabelStyle(layerStyle as LabelStyle)
                     {
-                        if (!(layerStyle is LabelStyle)) throw new Exception("Style of label is not a LabelStyle");
+                        Text = layer.GetLabelText(feature)
+                    };
+                    labelStyle.Offset.Y += stackOffsetY;
 
-                        if (double.IsNaN(stackOffsetY)) // first time
-                            stackOffsetY = textHeight * 0.5 + boxMargin;
-                        else
-                            stackOffsetY += textHeight; //todo: get size from text (or just pass stack nr)
+                    var position = new Geometries.Point(cluster.Box.GetCentroid().X, cluster.Box.Bottom);
 
-                        var labelStyle = new LabelStyle(layerStyle as LabelStyle)
-                        {
-                            Text = layer.GetLabelText(feature)
-                        };
-                        labelStyle.Offset.Y += stackOffsetY;
-
-                        var position = new Geometries.Point(cluster.Box.GetCentroid().X, cluster.Box.Bottom);
-
-                        canvas.Children.Add(SingleLabelRenderer.RenderLabel(position, labelStyle, viewport));
-                    }
+                    canvas.Children.Add(SingleLabelRenderer.RenderLabel(position, labelStyle, viewport));
                 }
             }
             return canvas;

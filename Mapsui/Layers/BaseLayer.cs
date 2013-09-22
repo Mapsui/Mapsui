@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using Mapsui.Fetcher;
 using Mapsui.Geometries;
 using Mapsui.Providers;
@@ -20,7 +21,7 @@ namespace Mapsui.Layers
         private double _opacity;
         private double _minVisible;
         private double _maxVisible;
-        private ICollection<IStyle> _styles;
+        private IStyle _style;
         private ITransformation _transformation;
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -138,13 +139,13 @@ namespace Mapsui.Layers
         /// <summary>
         /// Gets or sets the rendering style of the vector layer.
         /// </summary>
-        public ICollection<IStyle> Styles
+        public IStyle Style
         {
-            get { return _styles; }
+            get { return _style; }
             set
             {
-                _styles = value;
-                OnPropertyChanged("Styles");
+                _style = value;
+                OnPropertyChanged("Style");
             }
         }
 
@@ -172,7 +173,7 @@ namespace Mapsui.Layers
         protected BaseLayer()
         {
             LayerName = "Layer";
-            Styles = new List<IStyle>();
+            Style = new VectorStyle(); // todo: think, do we need a default style or should it be null
             Enabled = true;
             MinVisible = 0;
             MaxVisible = double.MaxValue;
@@ -217,5 +218,11 @@ namespace Mapsui.Layers
         public abstract event DataChangedEventHandler DataChanged;
 
         public abstract void ClearCache();
+
+        public static IEnumerable<IStyle> GetLayerStyles(ILayer layer)
+        {
+            if (layer == null) return new [] { new VectorStyle() } ;
+            return layer.Style is StyleCollection ? (layer.Style as StyleCollection).ToArray() : new[] { layer.Style };
+        }
     }
 }

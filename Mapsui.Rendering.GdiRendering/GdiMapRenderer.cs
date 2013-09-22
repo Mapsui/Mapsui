@@ -89,7 +89,9 @@ namespace Mapsui.Rendering.GdiRendering
 
             graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
 
-            foreach (var layerStyle in layer.Styles)
+            var layerStyles = BaseLayer.GetLayerStyles(layer);
+            
+            foreach (var layerStyle in layerStyles)
             {
                 var style = layerStyle;
 

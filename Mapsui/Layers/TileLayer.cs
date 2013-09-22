@@ -63,7 +63,7 @@ namespace Mapsui.Layers
                 SetTileSource(overrideTmsUrlWithUrlToTileMapXml
                     ? TileMapParser.CreateTileSource(stream, urlToTileMapXml)
                     : TileMapParser.CreateTileSource(stream));
-                Styles.Add(new VectorStyle());
+                Style = new VectorStyle();
             }
             catch (Exception ex)
             {
@@ -101,7 +101,7 @@ namespace Mapsui.Layers
             // be ignored altogher. Perhaps the style on the individual Features
             // should be used instead. Perhaps the Feature.Style could contain 
             // the tile data iso the Feature.Geometry
-            Styles.Add(new VectorStyle());
+            Style = new VectorStyle();
         }
 
         public override BoundingBox Envelope

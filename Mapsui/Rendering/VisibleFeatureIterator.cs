@@ -1,8 +1,8 @@
-﻿using System;
-using Mapsui.Layers;
+﻿using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -24,7 +24,7 @@ namespace Mapsui.Rendering
             }
         }
 
-        private static void RenderLayer(IViewport viewport, ILayer layer,
+        private static void RenderLayer(IViewport viewport, ILayer layer, 
             Action<IViewport, IStyle, IFeature> renderFeature)
         {
             if (layer.Enabled == false) return;
@@ -45,7 +45,8 @@ namespace Mapsui.Rendering
         {
             var features = layer.GetFeaturesInView(viewport.Extent, viewport.Resolution).ToList();
 
-            foreach (var layerStyle in layer.Styles)
+            var layerStyles = layer.Style is StyleCollection ? (layer.Style as StyleCollection).ToArray() : new [] {layer.Style};
+            foreach (var layerStyle in layerStyles)
             {
                 var style = layerStyle; // This is the default that could be overridden by an IThemeStyle
 
@@ -60,12 +61,12 @@ namespace Mapsui.Rendering
 
             foreach (var feature in features)
             {
-                var styles = feature.Styles ?? Enumerable.Empty<IStyle>();
-                foreach (var style in styles)
+                var featureStyles = feature.Styles ?? Enumerable.Empty<IStyle>();
+                foreach (var featureStyle in featureStyles)
                 {
-                    if (feature.Styles != null && style.Enabled)
+                    if (feature.Styles != null && featureStyle.Enabled)
                     {
-                        renderFeature(viewport, style, feature);
+                        renderFeature(viewport, featureStyle, feature);
                     }
                 }
             }

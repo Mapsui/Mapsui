@@ -73,10 +73,13 @@ namespace Mapsui.Samples.Metro
 
         private ILayer CreateRandomPointLayerWithLabel(IProvider dataSource, Stream bitmapStream)
         {
-            var pointLayer = new Layer("pointLayer") { DataSource = dataSource };
-            pointLayer.Styles.Add(new SymbolStyle { Symbol = new Bitmap { Data = bitmapStream }, SymbolRotation = 45.0 });
-            pointLayer.Styles.Add(new LabelStyle { Text = "TestLabel" });
-            return pointLayer;
+            var styles = new StyleCollection
+                {
+                    new SymbolStyle {Symbol = new Bitmap {Data = bitmapStream}, SymbolRotation = 45.0},
+                    new LabelStyle {Text = "TestLabel"}
+                };
+
+            return new Layer("pointLayer") { DataSource = dataSource, Style = styles };
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)

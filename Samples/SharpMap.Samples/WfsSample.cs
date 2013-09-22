@@ -23,8 +23,7 @@ namespace Mapsui.Samples
                 const string getCapabilitiesUri = "http://localhost:8080/geoserver/wfs";
                 const string serviceUri = "http://localhost:8080/geoserver/wfs";
 
-                var map = new Map();
-                map.BackColor = Color.White;
+                var map = new Map { BackColor = Color.White };
 
                 var layer1 = new Layer("States");
                 var layer2 = new Layer("SelectedStatesAndHousholds");
@@ -77,10 +76,10 @@ namespace Mapsui.Samples
                 prov3.OGCFilter = filter4;
 
                 // Layer Style
-                layer1.Styles.Add(new VectorStyle { Fill = new Brush { Color = Color.Red } });
-                layer2.Styles.Add(new VectorStyle { Fill = new Brush { Color = Color.Green } }); // SelectedStatesAndHousholds
-                layer3.Styles.Add(new VectorStyle { Fill = new Brush { Color = Color.Yellow } }); // e.g. New York, New Jersey,...
-                layer5.Styles.Add(new VectorStyle { Fill = new Brush { Color = Color.Blue } });
+                layer1.Style = new VectorStyle { Fill = new Brush { Color = Color.Red } };
+                layer2.Style = new VectorStyle { Fill = new Brush { Color = Color.Green } }; // SelectedStatesAndHousholds
+                layer3.Style = new VectorStyle { Fill = new Brush { Color = Color.Yellow } }; // e.g. New York, New Jersey,...
+                layer5.Style = new VectorStyle { Fill = new Brush { Color = Color.Blue } };
 
                 // Labels
                 // Labels are collected when parsing the geometry. So there's just one 'GetFeature' call necessary.

@@ -19,14 +19,14 @@ namespace Mapsui.Rendering.XamlRendering
 
             // todo: take into account the priority 
             var features = layer.GetFeaturesInView(viewport.Extent, viewport.Resolution).ToList();
-            
-            foreach (var layerStyle in layer.Styles)
-            {
-                var style = layerStyle;
 
+            var layerStyles = BaseLayer.GetLayerStyles(layer);
+            
+            foreach (var layerStyle in layerStyles)
+            {
                 foreach (var feature in features)
                 {
-                    if (layerStyle is IThemeStyle) style = (layerStyle as IThemeStyle).GetStyle(feature);
+                    var style = (layerStyle is IThemeStyle) ? (layerStyle as IThemeStyle).GetStyle(feature) : layerStyle;
 
                     if ((style == null) || 
                         (style.Enabled == false) || 

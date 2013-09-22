@@ -75,7 +75,7 @@ namespace Mapsui.Layers
         /// </summary>
         ITransformation Transformation { get; set; }
 
-        ICollection<IStyle> Styles { get; }
+        IStyle Style { get; set; }
 
         /// <summary>
         /// Of all layers with Exclusive is true only one will be Enabled at a time.
