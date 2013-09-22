@@ -7,7 +7,7 @@ using Mapsui.Styles.Thematics;
 using System;
 using System.IO;
 
-namespace Mapsui.Samples
+namespace Mapsui.Samples.Desktop
 {
     public static class ShapefileSample
     {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using Mapsui.Samples;
+using Mapsui.Samples.Desktop;
 
 namespace Mapsui.WinForms
 {

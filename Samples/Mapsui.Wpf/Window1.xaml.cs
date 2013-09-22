@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using Mapsui.Samples.Desktop;
 using Mapsui.Windows.Layers;
 
 namespace Mapsui.Wpf

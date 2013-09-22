@@ -1,7 +1,7 @@
 ﻿using Mapsui.Layers;
 using Mapsui.Providers.ArcGISImageService;
 
-namespace Mapsui.Samples
+namespace Mapsui.Samples.Desktop
 {
     public static class ArcGISImageServiceSample
     {

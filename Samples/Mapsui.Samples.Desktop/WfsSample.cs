@@ -5,7 +5,7 @@ using Mapsui.Utilities.Wfs;
 using System;
 using System.Net;
 
-namespace Mapsui.Samples
+namespace Mapsui.Samples.Desktop
 {
     public static class WfsSample
     {

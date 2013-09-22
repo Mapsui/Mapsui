@@ -1,18 +1,14 @@
-﻿using System;
-using Mapsui.Layers;
+﻿using Mapsui.Layers;
 using Mapsui.Providers.Wms;
-using Mapsui.Styles;
 
-namespace Mapsui.Samples
+namespace Mapsui.Samples.Desktop
 {
     public static class WmsSample
     {
         public static ILayer Create()
         {
             var provider = CreateWmsProvider();
-            var layer = new ImageLayer("WmsLayer");
-            layer.DataSource = provider;
-            layer.DataSource.SRID = 900913;
+            var layer = new ImageLayer("WmsLayer") {DataSource = provider};
             return layer;
         }
 
@@ -20,12 +16,16 @@ namespace Mapsui.Samples
         {
             const string wmsUrl = "http://geoserver.nl/world/mapserv.cgi?map=world/world.map&VERSION=1.1.1";
 
-            var provider = new WmsProvider(wmsUrl);
-            provider.SpatialReferenceSystem = "EPSG:900913";
+            var provider = new WmsProvider(wmsUrl)
+                {
+                    SpatialReferenceSystem = "EPSG:900913",
+                    ContinueOnError = true,
+                    TimeOut = 20000,
+                    SRID = 900913
+                };
+
             provider.AddLayer("World");
             provider.SetImageFormat(provider.OutputFormats[0]);
-            provider.ContinueOnError = true;
-            provider.TimeOut = 20000; //Set timeout to 20 seconds
             return provider;
         }
     }
