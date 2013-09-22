@@ -54,7 +54,9 @@
     <Compile Include="WmsSample.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Images\icon.png" />
+    <Content Include="Images\icon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="GeoData\World\cities.DBF">

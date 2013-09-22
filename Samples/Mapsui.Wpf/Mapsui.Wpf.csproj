@@ -211,6 +211,10 @@
       <Project>{508ae811-a03a-4138-8ccc-abde03c67010}</Project>
       <Name>Mapsui.Samples.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Mapsui.Samples.Desktop\Mapsui.Samples.Desktop.csproj">
+      <Project>{086f5a3a-7d9a-4125-8e67-0ebc72aab246}</Project>
+      <Name>Mapsui.Samples.Desktop</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
