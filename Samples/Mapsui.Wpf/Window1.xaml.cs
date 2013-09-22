@@ -64,8 +64,8 @@ namespace Mapsui.Wpf
             var provider = CreateRandomPointsProvider();
             mapControl.Map.Layers.Add(PointLayerSample.CreateRandomPointLayerWithLabel(provider));
             mapControl.Map.Layers.Add(PointLayerSample.CreateStackedLabelLayer(provider));
-
             layerList.Initialize(mapControl.Map.Layers);
+            mapControl.ZoomToFullEnvelope();
             mapControl.Refresh();
         }
 
@@ -88,6 +88,7 @@ namespace Mapsui.Wpf
             mapControl.Map.Layers.Clear();
             mapControl.Map.Layers.Add(new TileLayer(new GeodanWorldWmsTileSource()));
             layerList.Initialize(mapControl.Map.Layers);
+            mapControl.ZoomToFullEnvelope();
             mapControl.Refresh();
         }
 
@@ -105,6 +106,7 @@ namespace Mapsui.Wpf
             mapControl.Map.Layers.Clear();
             mapControl.Map.Layers.Add(new TileLayer(new BingTileSource(BingRequest.UrlBingStaging, String.Empty, BingMapType.Aerial)));
             layerList.Initialize(mapControl.Map.Layers);
+            mapControl.ZoomToFullEnvelope();
             mapControl.Refresh();
         }
 
@@ -121,12 +123,14 @@ namespace Mapsui.Wpf
             mapControl.Map.Layers.Clear();
             mapControl.Map.Layers.Add(CreateGroupLayer());
             layerList.Initialize(mapControl.Map.Layers);
+            mapControl.ZoomToFullEnvelope();
             mapControl.Refresh();
         }
 
         private void ShapefileClick(object sender, RoutedEventArgs e)
         {
             mapControl.Map = ShapefileSample.CreateMap();
+            mapControl.ZoomToFullEnvelope();
             layerList.Initialize(mapControl.Map.Layers);
             mapControl.Refresh();
         }
@@ -136,6 +140,7 @@ namespace Mapsui.Wpf
             mapControl.Map.Layers.Clear();
             mapControl.Map.Layers.Add(new TileLayer(new MapTilerTileSource()));
             layerList.Initialize(mapControl.Map.Layers);
+            mapControl.ZoomToFullEnvelope();
             mapControl.Refresh();
         }
 
@@ -162,6 +167,7 @@ namespace Mapsui.Wpf
             mapControl.Map.Layers.Clear();
             mapControl.Map.Layers.Add(WmsSample.Create());
             layerList.Initialize(mapControl.Map.Layers);
+            mapControl.ZoomToFullEnvelope();
             mapControl.Refresh();
         }
 
@@ -170,6 +176,7 @@ namespace Mapsui.Wpf
             mapControl.Map.Layers.Clear();
             mapControl.Map.Layers.Add(ArcGISImageServiceSample.Create());
             layerList.Initialize(mapControl.Map.Layers);
+            mapControl.ZoomToFullEnvelope();
             mapControl.Refresh();
         }
     }
