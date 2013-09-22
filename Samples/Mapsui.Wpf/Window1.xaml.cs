@@ -124,7 +124,7 @@ namespace Mapsui.Wpf
             mapControl.Refresh();
         }
 
-        private void SharpMapClick(object sender, RoutedEventArgs e)
+        private void ShapefileClick(object sender, RoutedEventArgs e)
         {
             mapControl.Map = ShapefileSample.CreateMap();
             layerList.Initialize(mapControl.Map.Layers);

@@ -17,7 +17,7 @@
                 <RadioButton FontSize="16" Content="WMS - tiled requests" Margin="4,4,4,4" Click="GeodanWmsClick"/>
                 <RadioButton FontSize="16" Content="TMS" Margin="4,4,4,4" Click="GeodanTmsClick"/>
                 <RadioButton FontSize="16" Content="WMS-C"  Margin="4,4,4,4" Click="GeodanWmscClick"/>
-                <RadioButton FontSize="16" Content="Shapefile"  Margin="4,4,4,4" Click="SharpMapClick" />
+                <RadioButton FontSize="16" Content="Shapefile"  Margin="4,4,4,4" Click="ShapefileClick" />
                 <RadioButton FontSize="16" Content="GroupTileLayer"  Margin="4,4,4,4" Click="GroupTileLayerClick"/>
                 <RadioButton FontSize="16" Content="MapTiler"  Margin="4,4,4,4" Click="MapTilerClick" />
                 <RadioButton FontSize="16" Content="WMS"  Margin="4,4,4,4" Click="WmsClick" />
