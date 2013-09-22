@@ -109,6 +109,7 @@
     <Compile Include="Styles\Pen.cs" />
     <Compile Include="Styles\Size.cs" />
     <Compile Include="Styles\Style.cs" />
+    <Compile Include="Styles\StyleCollection.cs" />
     <Compile Include="Styles\SymbolStyle.cs" />
     <Compile Include="Styles\Thematics\ColorBlend.cs" />
     <Compile Include="Styles\Thematics\CustomTheme.cs" />

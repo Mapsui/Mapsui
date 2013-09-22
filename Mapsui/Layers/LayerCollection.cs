@@ -5,7 +5,7 @@ using System.Collections;
 
 namespace Mapsui
 {
-    public class LayerCollection : IEnumerable<ILayer>
+    public class LayerCollection : ICollection<ILayer>
     {
         private readonly IList<ILayer> _layers = new List<ILayer>();
         
@@ -21,6 +21,8 @@ namespace Mapsui
         {
             get { return _layers.Count(); }
         }
+
+        public bool IsReadOnly { get { return _layers.IsReadOnly;  } }
 
         public IEnumerator<ILayer> GetEnumerator()
         {
@@ -40,6 +42,16 @@ namespace Mapsui
                 OnLayerRemoved(layer);
             }
             _layers.Clear();
+        }
+
+        public bool Contains(ILayer item)
+        {
+            return _layers.Contains(item);
+        }
+
+        public void CopyTo(ILayer[] array, int arrayIndex)
+        {
+            _layers.CopyTo(array, arrayIndex);
         }
 
         public ILayer this[int index]
@@ -66,11 +78,12 @@ namespace Mapsui
             OnLayerAdded(layer);
         }
 
-        public void Remove(ILayer layer)
+        public bool Remove(ILayer layer)
         {
-            _layers.Remove(layer);
+            var success = _layers.Remove(layer);
             layer.AbortFetch();
             OnLayerRemoved(layer);
+            return success;
         }
 
         private void OnLayerRemoved(ILayer layer)

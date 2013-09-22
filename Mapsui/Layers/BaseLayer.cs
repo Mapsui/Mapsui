@@ -10,19 +10,18 @@ namespace Mapsui.Layers
 {
     public abstract class BaseLayer : ILayer
     {
-        private static int instanceCounter;
-
-        private int srid;
-        private object tag;
-        private bool busy;
-        private bool enabled;
-        private bool exclusive;
-        private string layerName;
-        private double opacity;
-        private double minVisible;
-        private double maxVisible;
-        private ICollection<IStyle> styles;
-        private ITransformation transformation;
+        private static int _instanceCounter;
+        private int _srid;
+        private object _tag;
+        private bool _busy;
+        private bool _enabled;
+        private bool _exclusive;
+        private string _layerName;
+        private double _opacity;
+        private double _minVisible;
+        private double _maxVisible;
+        private ICollection<IStyle> _styles;
+        private ITransformation _transformation;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -33,10 +32,10 @@ namespace Mapsui.Layers
         /// </summary>
         public object Tag 
         { 
-            get { return tag; }
+            get { return _tag; }
             set
             { 
-                tag = value; 
+                _tag = value; 
                 OnPropertyChanged("Tag"); 
             }
         }
@@ -46,10 +45,10 @@ namespace Mapsui.Layers
         /// </summary>
         public double MinVisible
         {
-            get { return minVisible; }
+            get { return _minVisible; }
             set
             {
-                minVisible = value;
+                _minVisible = value;
                 OnPropertyChanged("MinVisible");
             }
         }
@@ -59,10 +58,10 @@ namespace Mapsui.Layers
         /// </summary>
         public double MaxVisible
         {
-            get { return maxVisible; }
+            get { return _maxVisible; }
             set
             {
-                maxVisible = value;
+                _maxVisible = value;
                 OnPropertyChanged("MaxVisible");
             }
         }
@@ -72,10 +71,10 @@ namespace Mapsui.Layers
         /// </summary>
         public bool Enabled
         {
-            get{ return enabled; } 
+            get{ return _enabled; } 
             set
             {
-                enabled = value;
+                _enabled = value;
                 OnPropertyChanged("Enabled");
             }
         }
@@ -85,10 +84,10 @@ namespace Mapsui.Layers
         /// </summary>
         public string LayerName
         {
-            get { return layerName; }
+            get { return _layerName; }
             set
             {
-                layerName = value;
+                _layerName = value;
                 OnPropertyChanged("LayerName");
             }
         }
@@ -98,40 +97,40 @@ namespace Mapsui.Layers
         /// </summary>
         public int SRID
         {
-            get { return srid; }
+            get { return _srid; }
             set
             {
-                srid = value;
+                _srid = value;
                 OnPropertyChanged("SRID");
             }
         }
 
         public bool Exclusive
         {
-            get { return exclusive; }
+            get { return _exclusive; }
             set
             {
-                exclusive = value;
+                _exclusive = value;
                 OnPropertyChanged("Exclusive");
             }
         }
 
         public double Opacity
         {
-            get { return opacity; }
+            get { return _opacity; }
             set
             {
-                opacity = value;
+                _opacity = value;
                 OnPropertyChanged("Opacity");
             }
         }
 
         public bool Busy
         {
-            get { return busy; }
+            get { return _busy; }
             set
             {
-                busy = value;
+                _busy = value;
                 OnPropertyChanged("Busy");
             }
         }
@@ -141,10 +140,10 @@ namespace Mapsui.Layers
         /// </summary>
         public ICollection<IStyle> Styles
         {
-            get { return styles; }
+            get { return _styles; }
             set
             {
-                styles = value;
+                _styles = value;
                 OnPropertyChanged("Styles");
             }
         }
@@ -154,10 +153,10 @@ namespace Mapsui.Layers
         /// </summary>
         public ITransformation Transformation
         {
-            get { return transformation; }
+            get { return _transformation; }
             set
             {
-                transformation = value;
+                _transformation = value;
                 OnPropertyChanged("Transformation");
             }
         }
@@ -178,7 +177,7 @@ namespace Mapsui.Layers
             MinVisible = 0;
             MaxVisible = double.MaxValue;
             Opacity = 1;
-            Id = instanceCounter++;
+            Id = _instanceCounter++;
         }
 
         protected BaseLayer(string layerName)
