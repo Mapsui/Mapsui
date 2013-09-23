@@ -9,6 +9,7 @@ using System.Globalization;
 using System.Xml;
 using Mapsui.Data;
 using Mapsui.Geometries;
+using Mapsui.Providers;
 
 namespace Mapsui.Utilities.Wfs
 {

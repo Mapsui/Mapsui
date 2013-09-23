@@ -15,6 +15,8 @@
 // along with Mapsui; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
+using Mapsui.Geometries;
+using Mapsui.Styles;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -27,19 +29,16 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Xml;
 using System.Xml.Schema;
-using Mapsui.Geometries;
-using Mapsui.Providers;
-using Mapsui.Styles;
 
-namespace Mapsui.Data
+namespace Mapsui.Providers
 {
     /// <summary>
     /// Represents an in-memory cache of spatial data. The FeatureDataSet is an extension of System.Data.DataSet
     /// </summary>
-    [Serializable()]
+    [Serializable]
     public class FeatureDataSet : DataSet
     {
-        private FeatureTableCollection _FeatureTables;
+        private FeatureTableCollection _featureTables;
 
         /// <summary>
         /// Initializes a new instance of the FeatureDataSet class.
@@ -47,7 +46,7 @@ namespace Mapsui.Data
         public FeatureDataSet()
         {
             InitClass();
-            CollectionChangeEventHandler schemaChangedHandler = new CollectionChangeEventHandler(SchemaChanged);
+            var schemaChangedHandler = new CollectionChangeEventHandler(SchemaChanged);
             //this.Tables.CollectionChanged += schemaChangedHandler;
             Relations.CollectionChanged += schemaChangedHandler;
             InitClass();
@@ -60,10 +59,10 @@ namespace Mapsui.Data
         /// <param name="context">streaming context</param>
         protected FeatureDataSet(SerializationInfo info, StreamingContext context)
         {
-            string strSchema = ((string) (info.GetValue("XmlSchema", typeof (string))));
+            var strSchema = ((string) (info.GetValue("XmlSchema", typeof (string))));
             if ((strSchema != null))
             {
-                DataSet ds = new DataSet();
+                var ds = new DataSet();
                 ds.ReadXmlSchema(new XmlTextReader(new StringReader(strSchema)));
                 if ((ds.Tables["FeatureTable"] != null))
                 {
@@ -92,7 +91,7 @@ namespace Mapsui.Data
         /// </summary>
         public new FeatureTableCollection Tables
         {
-            get { return _FeatureTables; }
+            get { return _featureTables; }
         }
 
         /// <summary>
@@ -101,7 +100,7 @@ namespace Mapsui.Data
         /// <returns></returns>
         public new FeatureDataSet Clone()
         {
-            FeatureDataSet cln = ((FeatureDataSet) (base.Clone()));
+            var cln = ((FeatureDataSet) (base.Clone()));
             return cln;
         }
 
@@ -123,14 +122,10 @@ namespace Mapsui.Data
             return false;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="reader"></param>
         protected override void ReadXmlSerializable(XmlReader reader)
         {
             Reset();
-            DataSet ds = new DataSet();
+            var ds = new DataSet();
             ds.ReadXml(reader);
             //if ((ds.Tables["FeatureTable"] != null))
             //{
@@ -145,22 +140,17 @@ namespace Mapsui.Data
             Merge(ds, false, MissingSchemaAction.Add);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
         protected override XmlSchema GetSchemaSerializable()
         {
-            MemoryStream stream = new MemoryStream();
+            var stream = new MemoryStream();
             WriteXmlSchema(new XmlTextWriter(stream, null));
             stream.Position = 0;
             return XmlSchema.Read(new XmlTextReader(stream), null);
         }
-
-
+        
         private void InitClass()
         {
-            _FeatureTables = new FeatureTableCollection();
+            _featureTables = new FeatureTableCollection();
             //this.DataSetName = "FeatureDataSet";
             Prefix = "";
             Namespace = "http://tempuri.org/FeatureDataSet.xsd";
@@ -193,8 +183,8 @@ namespace Mapsui.Data
     /// <summary>
     /// Represents one feature table of in-memory spatial data. 
     /// </summary>
-    [DebuggerStepThrough()]
-    [Serializable()]
+    [DebuggerStepThrough]
+    [Serializable]
     public class FeatureDataTable : DataTable, IEnumerable
     {
         /// <summary>
@@ -260,7 +250,7 @@ namespace Mapsui.Data
         /// <returns></returns>
         public IEnumerator GetEnumerator()
         {
-            return base.Rows.GetEnumerator();
+            return Rows.GetEnumerator();
         }
 
         #endregion
@@ -300,7 +290,7 @@ namespace Mapsui.Data
         /// <returns></returns>
         public new FeatureDataTable Clone()
         {
-            FeatureDataTable cln = ((FeatureDataTable) (base.Clone()));
+            var cln = ((FeatureDataTable) (base.Clone()));
             cln.InitVars();
             return cln;
         }
@@ -428,7 +418,7 @@ namespace Mapsui.Data
         {
             get
             {
-                foreach (FeatureDataRow row in base.Rows)
+                foreach (FeatureDataRow row in Rows)
                 {
                     yield return row;
                 }
@@ -452,7 +442,7 @@ namespace Mapsui.Data
     /// <summary>
     /// Represents the collection of tables for the FeatureDataSet.
     /// </summary>
-    [Serializable()]
+    [Serializable]
     public class FeatureTableCollection : List<FeatureDataTable>
     {
     }
@@ -460,8 +450,8 @@ namespace Mapsui.Data
     /// <summary>
     /// Represents a row of data in a FeatureDataTable.
     /// </summary>
-    [DebuggerStepThrough()]
-    [Serializable()]
+    [DebuggerStepThrough]
+    [Serializable]
     public class FeatureDataRow : DataRow, IFeature
     {
         internal FeatureDataRow(DataRowBuilder rb) : base(rb)
@@ -511,11 +501,11 @@ namespace Mapsui.Data
     /// <summary>
     /// Occurs after a FeatureDataRow has been changed successfully.
     /// </summary>
-    [DebuggerStepThrough()]
+    [DebuggerStepThrough]
     public class FeatureDataRowChangeEventArgs : EventArgs
     {
-        private DataRowAction eventAction;
-        private FeatureDataRow eventRow;
+        private readonly DataRowAction _eventAction;
+        private readonly FeatureDataRow _eventRow;
 
         /// <summary>
         /// Initializes a new instance of the FeatureDataRowChangeEventArgs class.
@@ -524,8 +514,8 @@ namespace Mapsui.Data
         /// <param name="action"></param>
         public FeatureDataRowChangeEventArgs(FeatureDataRow row, DataRowAction action)
         {
-            eventRow = row;
-            eventAction = action;
+            _eventRow = row;
+            _eventAction = action;
         }
 
         /// <summary>
@@ -533,7 +523,7 @@ namespace Mapsui.Data
         /// </summary>
         public FeatureDataRow Row
         {
-            get { return eventRow; }
+            get { return _eventRow; }
         }
 
         /// <summary>
@@ -541,7 +531,7 @@ namespace Mapsui.Data
         /// </summary>
         public DataRowAction Action
         {
-            get { return eventAction; }
+            get { return _eventAction; }
         }
 
     }
