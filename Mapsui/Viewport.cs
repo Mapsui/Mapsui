@@ -21,22 +21,22 @@ namespace Mapsui
 {
     public class Viewport : IViewport
     {
-        private double centerX;
-        private double centerY;
-        BoundingBox extent;
-        private double height;
-        private double resolution;
-        private double width;
+        private double _centerX;
+        private double _centerY;
+        BoundingBox _extent;
+        private double _height;
+        private double _resolution;
+        private double _width;
 
         public Viewport() { }
 
         public Viewport(Viewport viewport)
         {
-            resolution = viewport.resolution;
-            centerX = viewport.centerX;
-            centerY = viewport.centerY;
-            width = viewport.width;
-            height = viewport.height;
+            _resolution = viewport._resolution;
+            _centerX = viewport._centerX;
+            _centerY = viewport._centerY;
+            _width = viewport._width;
+            _height = viewport._height;
             UpdateExtent();
         }
 
@@ -44,65 +44,65 @@ namespace Mapsui
         {
             set
             {
-                centerX = value.X;
-                centerY = value.Y;
+                _centerX = value.X;
+                _centerY = value.Y;
                 UpdateExtent();
             }
         }
 
         public double Resolution
         {
-            get { return resolution; }
+            get { return _resolution; }
             set
             {
-                resolution = value;
+                _resolution = value;
                 UpdateExtent();
             }
         }
 
         public double Width
         {
-            get { return width; }
+            get { return _width; }
             set
             {
-                width = value;
+                _width = value;
                 UpdateExtent();
             }
         }
 
         public double Height
         {
-            get { return height; }
+            get { return _height; }
             set
             {
-                height = value;
+                _height = value;
                 UpdateExtent();
             }
         }
 
         public double CenterX
         {
-            get { return centerX; }
+            get { return _centerX; }
             set
             {
-                centerX = value;
+                _centerX = value;
                 UpdateExtent();
             }
         }
 
         public double CenterY
         {
-            get { return centerY; }
+            get { return _centerY; }
             set
             {
-                centerY = value;
+                _centerY = value;
                 UpdateExtent();
             }
         }
 
         public BoundingBox Extent
         {
-            get { return extent ?? (extent = new BoundingBox(0, 0, 0, 0)); }
+            get { return _extent ?? (_extent = new BoundingBox(0, 0, 0, 0)); }
         }
 
         public Point WorldToScreen(Point worldPosition)
@@ -117,12 +117,12 @@ namespace Mapsui
 
         public Point WorldToScreen(double worldX, double worldY)
         {
-            return new Point((worldX - extent.MinX) / resolution, (extent.MaxY - worldY) / resolution);
+            return new Point((worldX - _extent.MinX) / _resolution, (_extent.MaxY - worldY) / _resolution);
         }
 
         public Point ScreenToWorld(double screenX, double screenY)
         {
-            return new Point((extent.MinX + screenX * resolution), (extent.MaxY - (screenY * resolution)));
+            return new Point((_extent.MinX + screenX * _resolution), (_extent.MaxY - (screenY * _resolution)));
         }
 
         public void Transform(double screenX, double screenY, double previousScreenX, double previousScreenY, double deltaScale = 1)
@@ -145,9 +145,9 @@ namespace Mapsui
 
         private void UpdateExtent()
         {
-            double spanX = width * resolution;
-            double spanY = height * resolution;
-            extent = new BoundingBox(
+            double spanX = _width * _resolution;
+            double spanY = _height * _resolution;
+            _extent = new BoundingBox(
                 CenterX - spanX * 0.5, CenterY - spanY * 0.5,
                 CenterX + spanX * 0.5, CenterY + spanY * 0.5);
         }

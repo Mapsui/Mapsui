@@ -32,7 +32,7 @@ namespace Mapsui
     /// </summary>
     public class Map : IDisposable, INotifyPropertyChanged
     {
-        private readonly LayerCollection layers = new LayerCollection();
+        private readonly LayerCollection _layers = new LayerCollection();
         public event DataChangedEventHandler DataChanged;
         public event FeedbackEventHandler Feedback;
         public event PropertyChangedEventHandler PropertyChanged;
@@ -43,9 +43,9 @@ namespace Mapsui
         public Map()
         {
             BackColor = Color.White;
-            layers = new LayerCollection();
-            layers.LayerAdded += LayersLayerAdded;
-            layers.LayerRemoved += LayersLayerRemoved;
+            _layers = new LayerCollection();
+            _layers.LayerAdded += LayersLayerAdded;
+            _layers.LayerRemoved += LayersLayerRemoved;
         }
 
         void LayersLayerRemoved(ILayer layer)
@@ -109,7 +109,7 @@ namespace Mapsui
 
         public void AbortFetch()
         {
-            foreach (var layer in layers.ToList())
+            foreach (var layer in _layers.ToList())
             {
                 layer.AbortFetch();
             }
@@ -117,7 +117,7 @@ namespace Mapsui
 
         public void ViewChanged(bool changeEnd, BoundingBox extent, double resolution)
         {
-            foreach (var layer in layers.ToList())
+            foreach (var layer in _layers.ToList())
             {
                 layer.ViewChanged(changeEnd, extent, resolution);
             }
@@ -130,7 +130,7 @@ namespace Mapsui
         public void Dispose()
         {
             AbortFetch();
-            layers.Clear();
+            _layers.Clear();
         }
 
         /// <summary>
@@ -143,7 +143,7 @@ namespace Mapsui
         /// </summary>
         public LayerCollection Layers
         {
-            get { return layers; }
+            get { return _layers; }
         }
 
         /// <summary>
@@ -159,10 +159,10 @@ namespace Mapsui
         {
             get
             {
-                if (layers.Count == 0) return null;
+                if (_layers.Count == 0) return null;
 
                 BoundingBox bbox = null;
-                foreach (var layer in layers)
+                foreach (var layer in _layers)
                 {
                     bbox = bbox == null ? layer.Envelope : bbox.Join(layer.Envelope);
                 }
@@ -182,7 +182,7 @@ namespace Mapsui
 
         public void ClearCache()
         {
-            foreach (var layer in layers)
+            foreach (var layer in _layers)
             {
                 layer.ClearCache();
             }
