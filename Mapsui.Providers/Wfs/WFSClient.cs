@@ -50,16 +50,16 @@ namespace Mapsui.Providers.Wfs
     ///    
     /// // Demo data from Geoserver 1.5.3 and Geoserver 1.6.0 
     ///    
-    ///WFS prov1 = new WFS(getCapabilitiesURI, "topp", "states", WFS.WFSVersionEnum.WFS1_0_0);
+    ///WFS prov1 = new WFS(getCapabilitiesURI, "topp", "states", WFS.WFSVersionEnum.WFS_1_0_0);
     ///    
     /// // Bypass 'GetCapabilities' and 'DescribeFeatureType', if you know all necessary metadata.
     ///WfsFeatureTypeInfo featureTypeInfo = new WfsFeatureTypeInfo(serviceURI, "topp", null, "states", "the_geom");
-    /// // 'WFS.WFSVersionEnum.WFS1_1_0' supported by Geoserver 1.6.x
-    ///WFS prov2 = new Mapsui.Data.Providers.WFS(featureTypeInfo, WFS.WFSVersionEnum.WFS1_1_0);
+    /// // 'WFS.WFSVersionEnum.WFS_1_1_0' supported by Geoserver 1.6.x
+    ///WFS prov2 = new Mapsui.Data.Providers.WFS(featureTypeInfo, WFS.WFSVersionEnum.WFS_1_1_0);
     /// // Bypass 'GetCapabilities' and 'DescribeFeatureType' again...
     /// // It's possible to specify the geometry type, if 'DescribeFeatureType' does not...(.e.g 'GeometryAssociationType')
     /// // This helps to accelerate the initialization process in case of unprecise geometry information.
-    ///WFS prov3 = new WFS(serviceURI, "topp", "http://www.openplans.org/topp", "states", "the_geom", GeometryTypeEnum.MultiSurfacePropertyType, WFS.WFSVersionEnum.WFS1_1_0);
+    ///WFS prov3 = new WFS(serviceURI, "topp", "http://www.openplans.org/topp", "states", "the_geom", GeometryTypeEnum.MultiSurfacePropertyType, WFS.WFSVersionEnum.WFS_1_1_0);
     ///
     /// // Get data-filled FeatureTypeInfo after initialization of dataprovider (useful in Web Applications for caching metadata.
     ///WfsFeatureTypeInfo info = prov1.FeatureTypeInfo;
@@ -67,9 +67,9 @@ namespace Mapsui.Providers.Wfs
     /// // Use cached 'GetCapabilities' response of prov1 (featuretype hosted by same service).
     /// // Compiled XPath expressions are re-used automatically!
     /// // If you use a cached 'GetCapabilities' response make sure the data provider uses the same version of WFS as the one providing the cache!!!
-    ///WFS prov4 = new WFS(prov1.GetCapabilitiesCache, "tiger", "tiger_roads", WFS.WFSVersionEnum.WFS1_0_0);
-    ///WFS prov5 = new WFS(prov1.GetCapabilitiesCache, "tiger", "poly_landmarks", WFS.WFSVersionEnum.WFS1_0_0);
-    ///WFS prov6 = new WFS(prov1.GetCapabilitiesCache, "tiger", "poi", WFS.WFSVersionEnum.WFS1_0_0);
+    ///WFS prov4 = new WFS(prov1.GetCapabilitiesCache, "tiger", "tiger_roads", WFS.WFSVersionEnum.WFS_1_0_0);
+    ///WFS prov5 = new WFS(prov1.GetCapabilitiesCache, "tiger", "poly_landmarks", WFS.WFSVersionEnum.WFS_1_0_0);
+    ///WFS prov6 = new WFS(prov1.GetCapabilitiesCache, "tiger", "poi", WFS.WFSVersionEnum.WFS_1_0_0);
     /// // Clear cache of prov1 - data providers do not have any cache, if they use the one of another data provider  
     ///prov1.GetCapabilitiesCache = null;
     ///
@@ -162,9 +162,9 @@ namespace Mapsui.Providers.Wfs
         /// </summary>
         public enum WFSVersionEnum
         {
-            WFS1_0_0,
-            WFS1_1_0
-        } ;
+            WFS_1_0_0,
+            WFS_1_1_0
+        } 
 
         #endregion
 
@@ -291,7 +291,7 @@ namespace Mapsui.Providers.Wfs
         {
             _getCapabilitiesUri = getCapabilitiesURI;
 
-            if (wfsVersion == WFSVersionEnum.WFS1_0_0)
+            if (wfsVersion == WFSVersionEnum.WFS_1_0_0)
                 _textResources = new WFS_1_0_0_TextResources();
             else _textResources = new WFS_1_1_0_TextResources();
 
@@ -330,7 +330,7 @@ namespace Mapsui.Providers.Wfs
         {
             _featureTypeInfo = featureTypeInfo;
 
-            if (wfsVersion == WFSVersionEnum.WFS1_0_0)
+            if (wfsVersion == WFSVersionEnum.WFS_1_0_0)
                 _textResources = new WFS_1_0_0_TextResources();
             else _textResources = new WFS_1_1_0_TextResources();
 
@@ -357,7 +357,7 @@ namespace Mapsui.Providers.Wfs
             _featureTypeInfo = new WfsFeatureTypeInfo(serviceURI, nsPrefix, featureTypeNamespace, featureType,
                                                       geometryName, geometryType);
 
-            if (wfsVersion == WFSVersionEnum.WFS1_0_0)
+            if (wfsVersion == WFSVersionEnum.WFS_1_0_0)
                 _textResources = new WFS_1_0_0_TextResources();
             else _textResources = new WFS_1_1_0_TextResources();
 
@@ -403,7 +403,7 @@ namespace Mapsui.Providers.Wfs
         {
             _featureTypeInfoQueryManager = getCapabilitiesCache;
 
-            if (wfsVersion == WFSVersionEnum.WFS1_0_0)
+            if (wfsVersion == WFSVersionEnum.WFS_1_0_0)
                 _textResources = new WFS_1_0_0_TextResources();
             else _textResources = new WFS_1_1_0_TextResources();
 
@@ -711,7 +711,7 @@ namespace Mapsui.Providers.Wfs
                     formatInfo.NumberDecimalSeparator = ".";
                     string bboxVal = null;
 
-                    if (_wfsVersion == WFSVersionEnum.WFS1_0_0)
+                    if (_wfsVersion == WFSVersionEnum.WFS_1_0_0)
                         bbox._MinLat =
                             Convert.ToDouble(
                                 (bboxVal =
@@ -719,7 +719,7 @@ namespace Mapsui.Providers.Wfs
                                 null
                                     ? bboxVal
                                     : "0.0", formatInfo);
-                    else if (_wfsVersion == WFSVersionEnum.WFS1_1_0)
+                    else if (_wfsVersion == WFSVersionEnum.WFS_1_1_0)
                         bbox._MinLat =
                             Convert.ToDouble(
                                 (bboxVal =
@@ -728,7 +728,7 @@ namespace Mapsui.Providers.Wfs
                                     ? bboxVal.Substring(bboxVal.IndexOf(' ') + 1)
                                     : "0.0", formatInfo);
 
-                    if (_wfsVersion == WFSVersionEnum.WFS1_0_0)
+                    if (_wfsVersion == WFSVersionEnum.WFS_1_0_0)
                         bbox._MaxLat =
                             Convert.ToDouble(
                                 (bboxVal =
@@ -736,7 +736,7 @@ namespace Mapsui.Providers.Wfs
                                 null
                                     ? bboxVal
                                     : "0.0", formatInfo);
-                    else if (_wfsVersion == WFSVersionEnum.WFS1_1_0)
+                    else if (_wfsVersion == WFSVersionEnum.WFS_1_1_0)
                         bbox._MaxLat =
                             Convert.ToDouble(
                                 (bboxVal =
@@ -745,7 +745,7 @@ namespace Mapsui.Providers.Wfs
                                     ? bboxVal.Substring(bboxVal.IndexOf(' ') + 1)
                                     : "0.0", formatInfo);
 
-                    if (_wfsVersion == WFSVersionEnum.WFS1_0_0)
+                    if (_wfsVersion == WFSVersionEnum.WFS_1_0_0)
                         bbox._MinLong =
                             Convert.ToDouble(
                                 (bboxVal =
@@ -753,7 +753,7 @@ namespace Mapsui.Providers.Wfs
                                 null
                                     ? bboxVal
                                     : "0.0", formatInfo);
-                    else if (_wfsVersion == WFSVersionEnum.WFS1_1_0)
+                    else if (_wfsVersion == WFSVersionEnum.WFS_1_1_0)
                         bbox._MinLong =
                             Convert.ToDouble(
                                 (bboxVal =
@@ -762,7 +762,7 @@ namespace Mapsui.Providers.Wfs
                                     ? bboxVal.Substring(0, bboxVal.IndexOf(' ') + 1)
                                     : "0.0", formatInfo);
 
-                    if (_wfsVersion == WFSVersionEnum.WFS1_0_0)
+                    if (_wfsVersion == WFSVersionEnum.WFS_1_0_0)
                         bbox._MaxLong =
                             Convert.ToDouble(
                                 (bboxVal =
@@ -770,7 +770,7 @@ namespace Mapsui.Providers.Wfs
                                 null
                                     ? bboxVal
                                     : "0.0", formatInfo);
-                    else if (_wfsVersion == WFSVersionEnum.WFS1_1_0)
+                    else if (_wfsVersion == WFSVersionEnum.WFS_1_1_0)
                         bbox._MaxLong =
                             Convert.ToDouble(
                                 (bboxVal =
