@@ -1,15 +1,15 @@
 // WFS provider by Peter Robineau (peter.robineau@gmx.at)
 // This file can be redistributed and/or modified under the terms of the GNU Lesser General Public License.
 
+using Mapsui.Data;
+using Mapsui.Geometries;
+using Mapsui.Utilities.Wfs;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Net;
-using Mapsui.Data;
-using Mapsui.Geometries;
-using Mapsui.Utilities.Wfs;
 
 namespace Mapsui.Providers.Wfs
 {
@@ -153,7 +153,7 @@ namespace Mapsui.Providers.Wfs
     ///this.mapImage1.Image = demoMap.GetMap();
     /// </code> 
     ///</example>
-    public class WFS : IProvider
+    public class WFSProvider : IProvider
     {
         #region Enumerations
 
@@ -286,7 +286,7 @@ namespace Mapsui.Providers.Wfs
         /// Specifying the geometry type helps to accelerate the rendering process, 
         /// if the geometry type in 'DescribeFeatureType is unprecise.   
         /// </param>
-        public WFS(string getCapabilitiesURI, string nsPrefix, string featureType, GeometryTypeEnum geometryType,
+        public WFSProvider(string getCapabilitiesURI, string nsPrefix, string featureType, GeometryTypeEnum geometryType,
                    WFSVersionEnum wfsVersion)
         {
             _getCapabilitiesUri = getCapabilitiesURI;
@@ -316,7 +316,7 @@ namespace Mapsui.Providers.Wfs
         /// <param name="nsPrefix">
         /// Use an empty string or 'null', if there is no prefix for the featuretype.
         /// </param>
-        public WFS(string getCapabilitiesURI, string nsPrefix, string featureType, WFSVersionEnum wfsVersion)
+        public WFSProvider(string getCapabilitiesURI, string nsPrefix, string featureType, WFSVersionEnum wfsVersion)
             : this(getCapabilitiesURI, nsPrefix, featureType, GeometryTypeEnum.Unknown, wfsVersion)
         {
         }
@@ -326,7 +326,7 @@ namespace Mapsui.Providers.Wfs
         /// <see cref="WfsFeatureTypeInfo"/> object, 
         /// so that 'GetCapabilities' and 'DescribeFeatureType' can be bypassed.
         /// </summary>
-        public WFS(WfsFeatureTypeInfo featureTypeInfo, WFSVersionEnum wfsVersion)
+        public WFSProvider(WfsFeatureTypeInfo featureTypeInfo, WFSVersionEnum wfsVersion)
         {
             _featureTypeInfo = featureTypeInfo;
 
@@ -351,7 +351,7 @@ namespace Mapsui.Providers.Wfs
         /// <param name="geometryType">
         /// Specifying the geometry type helps to accelerate the rendering process.   
         /// </param>
-        public WFS(string serviceURI, string nsPrefix, string featureTypeNamespace, string featureType,
+        public WFSProvider(string serviceURI, string nsPrefix, string featureTypeNamespace, string featureType,
                    string geometryName, GeometryTypeEnum geometryType, WFSVersionEnum wfsVersion)
         {
             _featureTypeInfo = new WfsFeatureTypeInfo(serviceURI, nsPrefix, featureTypeNamespace, featureType,
@@ -375,7 +375,7 @@ namespace Mapsui.Providers.Wfs
         /// Use an empty string or 'null', if there is no namespace for the featuretype.
         /// You don't need to know the namespace of the feature type, if you use the quick geometries option.
         /// </param>
-        public WFS(string serviceURI, string nsPrefix, string featureTypeNamespace, string featureType,
+        public WFSProvider(string serviceURI, string nsPrefix, string featureTypeNamespace, string featureType,
                    string geometryName, WFSVersionEnum wfsVersion)
             : this(
                 serviceURI, nsPrefix, featureTypeNamespace, featureType, geometryName, GeometryTypeEnum.Unknown,
@@ -398,7 +398,7 @@ namespace Mapsui.Providers.Wfs
         /// Specifying the geometry type helps to accelerate the rendering process, 
         /// if the geometry type in 'DescribeFeatureType is unprecise.   
         /// </param>
-        public WFS(IXPathQueryManager getCapabilitiesCache, string nsPrefix, string featureType,
+        public WFSProvider(IXPathQueryManager getCapabilitiesCache, string nsPrefix, string featureType,
                    GeometryTypeEnum geometryType, WFSVersionEnum wfsVersion)
         {
             _featureTypeInfoQueryManager = getCapabilitiesCache;
@@ -432,7 +432,7 @@ namespace Mapsui.Providers.Wfs
         /// <param name="nsPrefix">
         /// Use an empty string or 'null', if there is no prefix for the featuretype.
         /// </param>
-        public WFS(IXPathQueryManager getCapabilitiesCache, string nsPrefix, string featureType,
+        public WFSProvider(IXPathQueryManager getCapabilitiesCache, string nsPrefix, string featureType,
                    WFSVersionEnum wfsVersion)
             : this(getCapabilitiesCache, nsPrefix, featureType, GeometryTypeEnum.Unknown, wfsVersion)
         {
@@ -446,7 +446,7 @@ namespace Mapsui.Providers.Wfs
         {
             if (_featureTypeInfo == null) return null;
 
-            Collection<Geometry> geoms = new Collection<Geometry>();
+            var geoms = new Collection<Geometry>();
 
             string geometryTypeString = _featureTypeInfo.Geometry._GeometryType;
 
@@ -987,7 +987,7 @@ namespace Mapsui.Providers.Wfs
             #region Constructors
 
             /// <summary>
-            /// Initializes a new instance of the <see cref="WFS.WFSClientHTTPConfigurator"/> class.
+            /// Initializes a new instance of the <see cref="WFSProvider.WFSClientHTTPConfigurator"/> class.
             /// An instance of this class can be used to configure a <see cref="Mapsui.Utilities.Wfs.HttpClientUtil"/> object.
             /// </summary>
             /// <param name="wfsTextResources">

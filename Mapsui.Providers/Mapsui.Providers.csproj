@@ -80,7 +80,7 @@
     <Compile Include="Wfs\Utilities\XPathQueryManager.cs" />
     <Compile Include="Wfs\Utilities\XPathQueryManager_CompiledExpressionsDecorator.cs" />
     <Compile Include="Wfs\Utilities\XPathQueryManager_DecoratorBase.cs" />
-    <Compile Include="Wfs\WFSClient.cs" />
+    <Compile Include="Wfs\WFSProvider.cs" />
     <Compile Include="Wms\Capabilities.cs" />
     <Compile Include="Wms\Client.cs" />
     <Compile Include="Wms\FeatureInfo.cs" />

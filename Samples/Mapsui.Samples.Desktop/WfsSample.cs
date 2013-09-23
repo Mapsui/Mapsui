@@ -9,7 +9,7 @@ namespace Mapsui.Samples.Desktop
 {
     public static class WfsSample
     {
-        public static Map InitializeMap()
+        public static Map CreateMap()
         {
             try
             {
@@ -34,25 +34,25 @@ namespace Mapsui.Samples.Desktop
 
                 // Demo data from Geoserver 1.5.3 and Geoserver 1.6.0 
 
-                var prov1 = new WFS(getCapabilitiesUri, "topp", "states", WFS.WFSVersionEnum.WFS1_0_0);
+                var prov1 = new WFSProvider(getCapabilitiesUri, "topp", "states", WFSProvider.WFSVersionEnum.WFS_1_0_0);
 
                 // Bypass 'GetCapabilities' and 'DescribeFeatureType', if you know all necessary metadata.
-                var featureTypeInfo = new WfsFeatureTypeInfo(serviceUri, "topp", null, "states",
-                                                                            "the_geom");
-                // 'WFS.WFSVersionEnum.WFS1_1_0' supported by Geoserver 1.6.x
-                var prov2 = new WFS(featureTypeInfo, WFS.WFSVersionEnum.WFS1_1_0);
+                var featureTypeInfo = new WfsFeatureTypeInfo(serviceUri, "topp", null, "states", "the_geom");
+                // 'WFS.WFSVersionEnum.WFS_1_1_0' supported by Geoserver 1.6.x
+                var prov2 = new WFSProvider(featureTypeInfo, WFSProvider.WFSVersionEnum.WFS_1_1_0);
                 // Bypass 'GetCapabilities' and 'DescribeFeatureType' again...
                 // It's possible to specify the geometry type, if 'DescribeFeatureType' does not...(.e.g 'GeometryAssociationType')
                 // This helps to accelerate the initialization process in case of unprecise geometry information.
-                var prov3 = new WFS(serviceUri, "topp", "http://www.openplans.org/topp", "states", "the_geom",
-                                    GeometryTypeEnum.MultiSurfacePropertyType, WFS.WFSVersionEnum.WFS1_1_0);
+                var prov3 = new WFSProvider(serviceUri, "topp", "http://www.openplans.org/topp", "states", "the_geom",
+                                    GeometryTypeEnum.MultiSurfacePropertyType, WFSProvider.WFSVersionEnum.WFS_1_1_0);
 
                 // Use cached 'GetCapabilities' response of prov1 (featuretype hosted by same service).
                 // Compiled XPath expressions are re-used automatically!
-                // If you use a cached 'GetCapabilities' response make sure the data provider uses the same version of WFS as the one providing the cache!!!
-                var prov4 = new WFS(prov1.GetCapabilitiesCache, "tiger", "tiger_roads", WFS.WFSVersionEnum.WFS1_0_0);
-                var prov5 = new WFS(prov1.GetCapabilitiesCache, "tiger", "poly_landmarks", WFS.WFSVersionEnum.WFS1_0_0);
-                var prov6 = new WFS(prov1.GetCapabilitiesCache, "tiger", "poi", WFS.WFSVersionEnum.WFS1_0_0);
+                // If you use a cached 'GetCapabilities' response make sure the data provider uses the same 
+                // version of WFS as the one providing the cache!!!
+                var prov4 = new WFSProvider(prov1.GetCapabilitiesCache, "tiger", "tiger_roads", WFSProvider.WFSVersionEnum.WFS_1_0_0);
+                var prov5 = new WFSProvider(prov1.GetCapabilitiesCache, "tiger", "poly_landmarks", WFSProvider.WFSVersionEnum.WFS_1_0_0);
+                var prov6 = new WFSProvider(prov1.GetCapabilitiesCache, "tiger", "poi", WFSProvider.WFSVersionEnum.WFS_1_0_0);
                 // Clear cache of prov1 - data providers do not have any cache, if they use the one of another data provider  
                 prov1.GetCapabilitiesCache = null;
 

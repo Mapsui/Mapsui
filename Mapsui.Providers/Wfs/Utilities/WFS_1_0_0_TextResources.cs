@@ -43,7 +43,7 @@ namespace Mapsui.Utilities.Wfs
         /// <summary>
         /// This method returns the query string for 'GetFeature'.
         /// </summary>
-        /// <param name="featureTypeInfo">A <see cref="WFS.WfsFeatureTypeInfo"/> instance providing metadata of the featuretype to query</param>
+        /// <param name="featureTypeInfo">A <see cref="WFSProvider.WfsFeatureTypeInfo"/> instance providing metadata of the featuretype to query</param>
         /// <param name="boundingBox">The bounding box of the query</param>
         /// <param name="filter">An instance implementing <see cref="IFilter"/></param>
         public string GetFeatureGETRequest(WfsFeatureTypeInfo featureTypeInfo, BoundingBox boundingBox, IFilter filter)
@@ -87,7 +87,7 @@ namespace Mapsui.Utilities.Wfs
         /// <summary>
         /// This method returns the POST request for 'GetFeature'.
         /// </summary>
-        /// <param name="featureTypeInfo">A <see cref="WFS.WfsFeatureTypeInfo"/> instance providing metadata of the featuretype to query</param>
+        /// <param name="featureTypeInfo">A <see cref="WFSProvider.WfsFeatureTypeInfo"/> instance providing metadata of the featuretype to query</param>
         /// <param name="labelProperty">A property necessary for label rendering</param>
         /// <param name="boundingBox">The bounding box of the query</param>
         /// <param name="filter">An instance implementing <see cref="IFilter"/></param>
