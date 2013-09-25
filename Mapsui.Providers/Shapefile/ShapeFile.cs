@@ -17,6 +17,7 @@
 
 using Mapsui.Geometries;
 using Mapsui.Providers;
+using Mapsui.Providers.Shapefile;
 using Mapsui.Utilities.SpatialIndexing;
 using System;
 using System.Collections.Generic;

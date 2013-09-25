@@ -425,27 +425,27 @@ namespace Mapsui.Providers.Wfs
 
                         // GML2
                     case "PointPropertyType":
-                        geomFactory = new PointFactory(_httpClientUtil, _featureTypeInfo, labelInfo);
+                        geomFactory = new PointFactory(_httpClientUtil, _featureTypeInfo);
                         break;
 
                         // GML2
                     case "LineStringPropertyType":
-                        geomFactory = new LineStringFactory(_httpClientUtil, _featureTypeInfo, labelInfo);
+                        geomFactory = new LineStringFactory(_httpClientUtil, _featureTypeInfo);
                         break;
 
                         // GML2
                     case "PolygonPropertyType":
-                        geomFactory = new PolygonFactory(_httpClientUtil, _featureTypeInfo, labelInfo);
+                        geomFactory = new PolygonFactory(_httpClientUtil, _featureTypeInfo);
                         break;
 
                         // GML3
                     case "CurvePropertyType":
-                        geomFactory = new LineStringFactory(_httpClientUtil, _featureTypeInfo, labelInfo);
+                        geomFactory = new LineStringFactory(_httpClientUtil, _featureTypeInfo);
                         break;
 
                         // GML3
                     case "SurfacePropertyType":
-                        geomFactory = new PolygonFactory(_httpClientUtil, _featureTypeInfo, labelInfo);
+                        geomFactory = new PolygonFactory(_httpClientUtil, _featureTypeInfo);
                         break;
 
                         /* Aggregate geometry elements */
@@ -453,49 +453,48 @@ namespace Mapsui.Providers.Wfs
                         // GML2
                     case "MultiPointPropertyType":
                         if (_multiGeometries)
-                            geomFactory = new MultiPointFactory(_httpClientUtil, _featureTypeInfo, labelInfo);
+                            geomFactory = new MultiPointFactory(_httpClientUtil, _featureTypeInfo);
                         else
-                            geomFactory = new PointFactory(_httpClientUtil, _featureTypeInfo, labelInfo);
+                            geomFactory = new PointFactory(_httpClientUtil, _featureTypeInfo);
                         break;
 
                         // GML2
                     case "MultiLineStringPropertyType":
                         if (_multiGeometries)
-                            geomFactory = new MultiLineStringFactory(_httpClientUtil, _featureTypeInfo, labelInfo);
+                            geomFactory = new MultiLineStringFactory(_httpClientUtil, _featureTypeInfo);
                         else
-                            geomFactory = new LineStringFactory(_httpClientUtil, _featureTypeInfo, labelInfo);
+                            geomFactory = new LineStringFactory(_httpClientUtil, _featureTypeInfo);
                         break;
 
                         // GML2
                     case "MultiPolygonPropertyType":
                         if (_multiGeometries)
-                            geomFactory = new MultiPolygonFactory(_httpClientUtil, _featureTypeInfo, labelInfo);
+                            geomFactory = new MultiPolygonFactory(_httpClientUtil, _featureTypeInfo);
                         else
-                            geomFactory = new PolygonFactory(_httpClientUtil, _featureTypeInfo, labelInfo);
+                            geomFactory = new PolygonFactory(_httpClientUtil, _featureTypeInfo);
                         break;
 
                         // GML3
                     case "MultiCurvePropertyType":
                         if (_multiGeometries)
-                            geomFactory = new MultiLineStringFactory(_httpClientUtil, _featureTypeInfo, labelInfo);
+                            geomFactory = new MultiLineStringFactory(_httpClientUtil, _featureTypeInfo);
                         else
-                            geomFactory = new LineStringFactory(_httpClientUtil, _featureTypeInfo, labelInfo);
+                            geomFactory = new LineStringFactory(_httpClientUtil, _featureTypeInfo);
                         break;
 
                         // GML3
                     case "MultiSurfacePropertyType":
                         if (_multiGeometries)
-                            geomFactory = new MultiPolygonFactory(_httpClientUtil, _featureTypeInfo, labelInfo);
+                            geomFactory = new MultiPolygonFactory(_httpClientUtil, _featureTypeInfo);
                         else
-                            geomFactory = new PolygonFactory(_httpClientUtil, _featureTypeInfo, labelInfo);
+                            geomFactory = new PolygonFactory(_httpClientUtil, _featureTypeInfo);
                         break;
 
                         // .e.g. 'gml:GeometryAssociationType' or 'GeometryPropertyType'
                         //It's better to set the geometry type manually, if it is known...
                     default:
                         geomFactory = new UnspecifiedGeometryFactory_WFS1_0_0_GML2(_httpClientUtil, _featureTypeInfo,
-                                                                                   _multiGeometries, _quickGeometries,
-                                                                                   labelInfo);
+                                                                                   _multiGeometries, _quickGeometries);
                         break;
 
 

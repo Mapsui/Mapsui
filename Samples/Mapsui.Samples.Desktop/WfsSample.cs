@@ -24,12 +24,12 @@ namespace Mapsui.Samples.Desktop
                 const string serviceUri = "http://localhost:8080/geoserver/wfs";
 
                 var map = new Map();
-                //map.Layers.Add(CreateStatesLayer(getCapabilitiesUri));
-                //map.Layers.Add(CreateStatesWithAdvancedFilter(getCapabilitiesUri));
-                //map.Layers.Add(CreateStatesWithFilterLayer(serviceUri));
-                // map.Layers.Add(CreateRoadsLayer(getCapabilitiesUri));
-                //map.Layers.Add(CreateLandmarksLayer(getCapabilitiesUri));
-                //map.Layers.Add(CreatePoiLayer(getCapabilitiesUri));
+                map.Layers.Add(CreateStatesLayer(getCapabilitiesUri));
+                map.Layers.Add(CreateStatesWithAdvancedFilter(getCapabilitiesUri));
+                map.Layers.Add(CreateStatesWithFilterLayer(serviceUri));
+                map.Layers.Add(CreateRoadsLayer(getCapabilitiesUri));
+                map.Layers.Add(CreateLandmarksLayer(getCapabilitiesUri));
+                map.Layers.Add(CreatePoiLayer(getCapabilitiesUri));
                 map.Layers.Add(CreateLabelLayer(getCapabilitiesUri));
                 return map;
 

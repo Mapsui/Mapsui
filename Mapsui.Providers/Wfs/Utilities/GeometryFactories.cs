@@ -30,7 +30,6 @@ namespace Mapsui.Providers.Wfs.Utilities
         protected WfsFeatureTypeInfo FeatureTypeInfo;
         protected XmlReader GeomReader;
         protected Collection<Geometry> Geoms = new Collection<Geometry>();
-        //protected Features LabelInfo;
         protected IPathNode LabelNode;
         protected AlternativePathNodesCollection ServiceExceptionNode;
         private string _ts;
@@ -45,9 +44,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// </summary>
         /// <param name="httpClientUtil">A configured <see cref="HttpClientUtil"/> instance for performing web requests</param>
         /// <param name="featureTypeInfo">A <see cref="WfsFeatureTypeInfo"/> instance providing metadata of the featuretype to query</param>
-        /// <param name="labelInfo">A Features for labels</param>
-        protected GeometryFactory(HttpClientUtil httpClientUtil, WfsFeatureTypeInfo featureTypeInfo,
-                                  Features labelInfo)
+        protected GeometryFactory(HttpClientUtil httpClientUtil, WfsFeatureTypeInfo featureTypeInfo)
         {
             FeatureTypeInfo = featureTypeInfo;
             _httpClientUtil = httpClientUtil;
@@ -146,12 +143,11 @@ namespace Mapsui.Providers.Wfs.Utilities
                     continue;
                 }
 
-                if (ServiceExceptionNode.Matches(XmlReader))
-                {
-                    string serviceException = XmlReader.ReadInnerXml();
-                    Trace.TraceError("A service exception occured: " + serviceException);
-                    throw new Exception("A service exception occured: " + serviceException);
-                }
+                if (!ServiceExceptionNode.Matches(XmlReader)) continue;
+
+                string serviceException = XmlReader.ReadInnerXml();
+                Trace.TraceError("A service exception occured: " + serviceException);
+                throw new Exception("A service exception occured: " + serviceException);
             }
 
             return Geoms;
@@ -235,12 +231,11 @@ namespace Mapsui.Providers.Wfs.Utilities
                                 labelValue[0] = reader.ReadElementString();
 
 
-                    if (ServiceExceptionNode.Matches(reader))
-                    {
-                        string errorMessage = reader.ReadInnerXml();
-                        Trace.TraceError("A service exception occured: " + errorMessage);
-                        throw new Exception("A service exception occured: " + errorMessage);
-                    }
+                    if (!ServiceExceptionNode.Matches(reader)) continue;
+
+                    string errorMessage = reader.ReadInnerXml();
+                    Trace.TraceError("A service exception occured: " + errorMessage);
+                    throw new Exception("A service exception occured: " + errorMessage);
                 }
             }
 
@@ -250,14 +245,14 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// <summary>
         /// This method adds a label to the collection.
         /// </summary>
-        protected void AddLabel(string labelValue, Geometry geom, Features labelInfo, string labelField)
+        protected void AddLabel(string labelValue, Geometry geom, Features features, string labelField)
         {
             try
             {
-                var row = labelInfo.New();
-                row[labelField] = labelValue;
+                var row = features.New();
+                if (labelField != null) row[labelField] = labelValue;
                 row.Geometry = geom;
-                labelInfo.Add(row);
+                features.Add(row);
             }
             catch (Exception ex)
             {
@@ -355,9 +350,8 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// </summary>
         /// <param name="httpClientUtil">A configured <see cref="HttpClientUtil"/> instance for performing web requests</param>
         /// <param name="featureTypeInfo">A <see cref="WfsFeatureTypeInfo"/> instance providing metadata of the featuretype to query</param>
-        /// <param name="labelInfo">A Features for labels</param>
-        internal PointFactory(HttpClientUtil httpClientUtil, WfsFeatureTypeInfo featureTypeInfo,
-                              Features labelInfo) : base(httpClientUtil, featureTypeInfo, labelInfo)
+        internal PointFactory(HttpClientUtil httpClientUtil, WfsFeatureTypeInfo featureTypeInfo) 
+            : base(httpClientUtil, featureTypeInfo)
         {
         }
 
@@ -427,9 +421,8 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// </summary>
         /// <param name="httpClientUtil">A configured <see cref="HttpClientUtil"/> instance for performing web requests</param>
         /// <param name="featureTypeInfo">A <see cref="WfsFeatureTypeInfo"/> instance providing metadata of the featuretype to query</param>
-        /// <param name="labelInfo">A Features for labels</param>
-        internal LineStringFactory(HttpClientUtil httpClientUtil, WfsFeatureTypeInfo featureTypeInfo,
-                                   Features labelInfo) : base(httpClientUtil, featureTypeInfo, labelInfo)
+        internal LineStringFactory(HttpClientUtil httpClientUtil, WfsFeatureTypeInfo featureTypeInfo) 
+            : base(httpClientUtil, featureTypeInfo)
         {
         }
 
@@ -500,9 +493,8 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// </summary>
         /// <param name="httpClientUtil">A configured <see cref="HttpClientUtil"/> instance for performing web requests</param>
         /// <param name="featureTypeInfo">A <see cref="WfsFeatureTypeInfo"/> instance providing metadata of the featuretype to query</param>
-        /// <param name="labelInfo">A Features for labels</param>
-        internal PolygonFactory(HttpClientUtil httpClientUtil, WfsFeatureTypeInfo featureTypeInfo,
-                                Features labelInfo) : base(httpClientUtil, featureTypeInfo, labelInfo)
+        internal PolygonFactory(HttpClientUtil httpClientUtil, WfsFeatureTypeInfo featureTypeInfo) 
+            : base(httpClientUtil, featureTypeInfo)
         {
         }
 
@@ -594,9 +586,8 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// </summary>
         /// <param name="httpClientUtil">A configured <see cref="HttpClientUtil"/> instance for performing web requests</param>
         /// <param name="featureTypeInfo">A <see cref="WfsFeatureTypeInfo"/> instance providing metadata of the featuretype to query</param>
-        /// <param name="labelInfo">A Features for labels</param>
-        internal MultiPointFactory(HttpClientUtil httpClientUtil, WfsFeatureTypeInfo featureTypeInfo,
-                                   Features labelInfo) : base(httpClientUtil, featureTypeInfo, labelInfo)
+        internal MultiPointFactory(HttpClientUtil httpClientUtil, WfsFeatureTypeInfo featureTypeInfo) 
+            : base(httpClientUtil, featureTypeInfo)
         {
         }
 
@@ -673,9 +664,8 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// </summary>
         /// <param name="httpClientUtil">A configured <see cref="HttpClientUtil"/> instance for performing web requests</param>
         /// <param name="featureTypeInfo">A <see cref="WfsFeatureTypeInfo"/> instance providing metadata of the featuretype to query</param>
-        /// <param name="labelInfo">A Features for labels</param>
-        internal MultiLineStringFactory(HttpClientUtil httpClientUtil, WfsFeatureTypeInfo featureTypeInfo,
-                                        Features labelInfo) : base(httpClientUtil, featureTypeInfo, labelInfo)
+        internal MultiLineStringFactory(HttpClientUtil httpClientUtil, WfsFeatureTypeInfo featureTypeInfo) 
+            : base(httpClientUtil, featureTypeInfo)
         {
         }
 
@@ -757,9 +747,8 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// </summary>
         /// <param name="httpClientUtil">A configured <see cref="HttpClientUtil"/> instance for performing web requests</param>
         /// <param name="featureTypeInfo">A <see cref="WfsFeatureTypeInfo"/> instance providing metadata of the featuretype to query</param>
-        /// <param name="labelInfo">A Features for labels</param>
-        internal MultiPolygonFactory(HttpClientUtil httpClientUtil, WfsFeatureTypeInfo featureTypeInfo,
-                                     Features labelInfo) : base(httpClientUtil, featureTypeInfo, labelInfo)
+        internal MultiPolygonFactory(HttpClientUtil httpClientUtil, WfsFeatureTypeInfo featureTypeInfo) 
+            : base(httpClientUtil, featureTypeInfo)
         {
         }
 
@@ -852,11 +841,10 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// <param name="featureTypeInfo">A <see cref="WfsFeatureTypeInfo"/> instance providing metadata of the featuretype to query</param>
         /// <param name="multiGeometries">A boolean value specifying whether multi-geometries should be created</param>
         /// <param name="quickGeometries">A boolean value specifying whether the factory should create geometries quickly, but without validation</param>
-        /// <param name="labelInfo">A Features for labels</param>
         internal UnspecifiedGeometryFactory_WFS1_0_0_GML2(HttpClientUtil httpClientUtil,
                                                           WfsFeatureTypeInfo featureTypeInfo, bool multiGeometries,
-                                                          bool quickGeometries, Features labelInfo)
-            : base(httpClientUtil, featureTypeInfo, labelInfo)
+                                                          bool quickGeometries)
+            : base(httpClientUtil, featureTypeInfo)
         {
             _httpClientUtil = httpClientUtil;
             _multiGeometries = multiGeometries;
@@ -899,19 +887,19 @@ namespace Mapsui.Providers.Wfs.Utilities
                     {
                         if (multiPointNode.Matches(XmlReader))
                         {
-                            geomFactory = new MultiPointFactory(_httpClientUtil, FeatureTypeInfo, labelInfo);
+                            geomFactory = new MultiPointFactory(_httpClientUtil, FeatureTypeInfo);
                             geometryTypeString = "MultiPointPropertyType";
                             break;
                         }
                         if (multiLineStringNodeAlt.Matches(XmlReader))
                         {
-                            geomFactory = new MultiLineStringFactory(_httpClientUtil, FeatureTypeInfo, labelInfo);
+                            geomFactory = new MultiLineStringFactory(_httpClientUtil, FeatureTypeInfo);
                             geometryTypeString = "MultiLineStringPropertyType";
                             break;
                         }
                         if (multiPolygonNodeAlt.Matches(XmlReader))
                         {
-                            geomFactory = new MultiPolygonFactory(_httpClientUtil, FeatureTypeInfo, labelInfo);
+                            geomFactory = new MultiPolygonFactory(_httpClientUtil, FeatureTypeInfo);
                             geometryTypeString = "MultiPolygonPropertyType";
                             break;
                         }
@@ -919,19 +907,19 @@ namespace Mapsui.Providers.Wfs.Utilities
 
                     if (pointNode.Matches(XmlReader))
                     {
-                        geomFactory = new PointFactory(_httpClientUtil, FeatureTypeInfo, labelInfo);
+                        geomFactory = new PointFactory(_httpClientUtil, FeatureTypeInfo);
                         geometryTypeString = "PointPropertyType";
                         break;
                     }
                     if (lineStringNode.Matches(XmlReader))
                     {
-                        geomFactory = new LineStringFactory(_httpClientUtil, FeatureTypeInfo, labelInfo);
+                        geomFactory = new LineStringFactory(_httpClientUtil, FeatureTypeInfo);
                         geometryTypeString = "LineStringPropertyType";
                         break;
                     }
                     if (polygonNode.Matches(XmlReader))
                     {
-                        geomFactory = new PolygonFactory(_httpClientUtil, FeatureTypeInfo, labelInfo);
+                        geomFactory = new PolygonFactory(_httpClientUtil, FeatureTypeInfo);
                         geometryTypeString = "PolygonPropertyType";
                         break;
                     }
