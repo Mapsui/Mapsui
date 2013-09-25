@@ -1,13 +1,11 @@
 // WFS provider by Peter Robineau (peter.robineau@gmx.at)
 // This file can be redistributed and/or modified under the terms of the GNU Lesser General Public License.
 
-using System.Data;
 using Mapsui.Geometries;
 using Mapsui.Providers.Wfs.Utilities;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Net;
 
@@ -375,17 +373,19 @@ namespace Mapsui.Providers.Wfs
             GetFeatureTypeInfo();
         }
 
-        /// <summary>
-        /// Use this constructor for initializing this dataprovider with all necessary
-        /// parameters to gather metadata from 'GetCapabilities' contract.
-        /// </summary>
-        /// <param name="getCapabilitiesCache">
-        /// This cache (obtained from an already instantiated dataprovider that retrieves a featuretype hosted by the same service) 
-        /// helps to speed up gathering metadata. It caches the 'GetCapabilities' response. 
-        ///</param>
-        /// <param name="nsPrefix">
-        /// Use an empty string or 'null', if there is no prefix for the featuretype.
+        ///  <summary>
+        ///  Use this constructor for initializing this dataprovider with all necessary
+        ///  parameters to gather metadata from 'GetCapabilities' contract.
+        ///  </summary>
+        ///  <param name="getCapabilitiesCache">
+        ///  This cache (obtained from an already instantiated dataprovider that retrieves a featuretype hosted by the same service) 
+        ///  helps to speed up gathering metadata. It caches the 'GetCapabilities' response. 
         /// </param>
+        ///  <param name="nsPrefix">
+        ///  Use an empty string or 'null', if there is no prefix for the featuretype.
+        ///  </param>
+        /// <param name="featureType"></param>
+        /// <param name="wfsVersion"></param>
         public WFSProvider(IXPathQueryManager getCapabilitiesCache, string nsPrefix, string featureType,
                    WFSVersionEnum wfsVersion)
             : this(getCapabilitiesCache, nsPrefix, featureType, GeometryTypeEnum.Unknown, wfsVersion)
@@ -396,21 +396,19 @@ namespace Mapsui.Providers.Wfs
 
         #region IProvider Member
 
-        public FeatureDataTable ExecuteIntersectionQuery(BoundingBox bbox)
+        public Features ExecuteIntersectionQuery(BoundingBox bbox)
         {
             if (_featureTypeInfo == null) return null;
 
-            var labelInfo = new FeatureDataTable();
-            //!!!labelInfo.Columns.Add("Label");
-
-            string geometryTypeString = _featureTypeInfo.Geometry._GeometryType;
+            var labelInfo = new Features();
+  
+            string geometryTypeString = _featureTypeInfo.Geometry.GeometryType;
 
             GeometryFactory geomFactory = null;
 
             if (!string.IsNullOrEmpty(_label))
             {
-                labelInfo.Columns.Add(_label);
-                // Turn off quick geometries, if a label is applied...
+                _featureTypeInfo.LableField = _label;
                 _quickGeometries = false;
             }
 
@@ -519,32 +517,12 @@ namespace Mapsui.Providers.Wfs
             }
         }
 
-        public Collection<uint> GetObjectIDsInView(BoundingBox bbox)
-        {
-            throw new Exception("The method or operation is not implemented.");
-        }
-
-        public Geometry GetGeometryById(uint oid)
-        {
-            throw new Exception("The method or operation is not implemented.");
-        }
-
-        public int GetFeatureCount()
-        {
-            throw new Exception("The method or operation is not implemented.");
-        }
-
-        public FeatureDataRow GetFeature(uint rowId)
-        {
-            throw new Exception("The method or operation is not implemented.");
-        }
-
         public BoundingBox GetExtents()
         {
-            return new BoundingBox(_featureTypeInfo.BBox._MinLong,
-                                   _featureTypeInfo.BBox._MinLat,
-                                   _featureTypeInfo.BBox._MaxLong,
-                                   _featureTypeInfo.BBox._MaxLat);
+            return new BoundingBox(_featureTypeInfo.BBox.MinLong,
+                                   _featureTypeInfo.BBox.MinLat,
+                                   _featureTypeInfo.BBox.MaxLong,
+                                   _featureTypeInfo.BBox.MaxLat);
         }
         
         public int SRID
@@ -612,13 +590,13 @@ namespace Mapsui.Providers.Wfs
                 }
 
                 /* Service URI (for WFS GetFeature request) */
-                _featureTypeInfo.ServiceURI = _featureTypeInfoQueryManager.GetValueFromNode
+                _featureTypeInfo.ServiceUri = _featureTypeInfoQueryManager.GetValueFromNode
                     (_featureTypeInfoQueryManager.Compile(_textResources.XPATH_GETFEATURERESOURCE));
                 /* If no GetFeature URI could be found, try GetCapabilities URI */
-                if (_featureTypeInfo.ServiceURI == null) _featureTypeInfo.ServiceURI = _getCapabilitiesUri;
-                else if (_featureTypeInfo.ServiceURI.EndsWith("?", StringComparison.Ordinal))
-                    _featureTypeInfo.ServiceURI =
-                        _featureTypeInfo.ServiceURI.Remove(_featureTypeInfo.ServiceURI.Length - 1);
+                if (_featureTypeInfo.ServiceUri == null) _featureTypeInfo.ServiceUri = _getCapabilitiesUri;
+                else if (_featureTypeInfo.ServiceUri.EndsWith("?", StringComparison.Ordinal))
+                    _featureTypeInfo.ServiceUri =
+                        _featureTypeInfo.ServiceUri.Remove(_featureTypeInfo.ServiceUri.Length - 1);
 
                 /* URI for DescribeFeatureType request */
                 string describeFeatureTypeUri = _featureTypeInfoQueryManager.GetValueFromNode
@@ -648,7 +626,7 @@ namespace Mapsui.Providers.Wfs
                     string bboxVal ;
 
                     if (_wfsVersion == WFSVersionEnum.WFS_1_0_0)
-                        bbox._MinLat =
+                        bbox.MinLat =
                             Convert.ToDouble(
                                 (bboxVal =
                                  bboxQuery.GetValueFromNode(bboxQuery.Compile(_textResources.XPATH_BOUNDINGBOXMINY))) !=
@@ -656,7 +634,7 @@ namespace Mapsui.Providers.Wfs
                                     ? bboxVal
                                     : "0.0", formatInfo);
                     else if (_wfsVersion == WFSVersionEnum.WFS_1_1_0)
-                        bbox._MinLat =
+                        bbox.MinLat =
                             Convert.ToDouble(
                                 (bboxVal =
                                  bboxQuery.GetValueFromNode(bboxQuery.Compile(_textResources.XPATH_BOUNDINGBOXMINY))) !=
@@ -665,7 +643,7 @@ namespace Mapsui.Providers.Wfs
                                     : "0.0", formatInfo);
 
                     if (_wfsVersion == WFSVersionEnum.WFS_1_0_0)
-                        bbox._MaxLat =
+                        bbox.MaxLat =
                             Convert.ToDouble(
                                 (bboxVal =
                                  bboxQuery.GetValueFromNode(bboxQuery.Compile(_textResources.XPATH_BOUNDINGBOXMAXY))) !=
@@ -673,7 +651,7 @@ namespace Mapsui.Providers.Wfs
                                     ? bboxVal
                                     : "0.0", formatInfo);
                     else if (_wfsVersion == WFSVersionEnum.WFS_1_1_0)
-                        bbox._MaxLat =
+                        bbox.MaxLat =
                             Convert.ToDouble(
                                 (bboxVal =
                                  bboxQuery.GetValueFromNode(bboxQuery.Compile(_textResources.XPATH_BOUNDINGBOXMAXY))) !=
@@ -682,7 +660,7 @@ namespace Mapsui.Providers.Wfs
                                     : "0.0", formatInfo);
 
                     if (_wfsVersion == WFSVersionEnum.WFS_1_0_0)
-                        bbox._MinLong =
+                        bbox.MinLong =
                             Convert.ToDouble(
                                 (bboxVal =
                                  bboxQuery.GetValueFromNode(bboxQuery.Compile(_textResources.XPATH_BOUNDINGBOXMINX))) !=
@@ -690,7 +668,7 @@ namespace Mapsui.Providers.Wfs
                                     ? bboxVal
                                     : "0.0", formatInfo);
                     else if (_wfsVersion == WFSVersionEnum.WFS_1_1_0)
-                        bbox._MinLong =
+                        bbox.MinLong =
                             Convert.ToDouble(
                                 (bboxVal =
                                  bboxQuery.GetValueFromNode(bboxQuery.Compile(_textResources.XPATH_BOUNDINGBOXMINX))) !=
@@ -699,7 +677,7 @@ namespace Mapsui.Providers.Wfs
                                     : "0.0", formatInfo);
 
                     if (_wfsVersion == WFSVersionEnum.WFS_1_0_0)
-                        bbox._MaxLong =
+                        bbox.MaxLong =
                             Convert.ToDouble(
                                 (bboxVal =
                                  bboxQuery.GetValueFromNode(bboxQuery.Compile(_textResources.XPATH_BOUNDINGBOXMAXX))) !=
@@ -707,7 +685,7 @@ namespace Mapsui.Providers.Wfs
                                     ? bboxVal
                                     : "0.0", formatInfo);
                     else if (_wfsVersion == WFSVersionEnum.WFS_1_1_0)
-                        bbox._MaxLong =
+                        bbox.MaxLong =
                             Convert.ToDouble(
                                 (bboxVal =
                                  bboxQuery.GetValueFromNode(bboxQuery.Compile(_textResources.XPATH_BOUNDINGBOXMAXX))) !=
@@ -874,8 +852,8 @@ namespace Mapsui.Providers.Wfs
 
                 _featureTypeInfo.Geometry = new WfsFeatureTypeInfo.GeometryInfo
                     {
-                        _GeometryName = geomName, 
-                        _GeometryType = geomType
+                        GeometryName = geomName, 
+                        GeometryType = geomType
                     };
             }
             finally
@@ -968,7 +946,7 @@ namespace Mapsui.Providers.Wfs
                                                                      IFilter filter, bool get)
             {
                 httpClientUtil.Reset();
-                httpClientUtil.Url = featureTypeInfo.ServiceURI;
+                httpClientUtil.Url = featureTypeInfo.ServiceUri;
 
                 if (get)
                 {
@@ -996,7 +974,7 @@ namespace Mapsui.Providers.Wfs
 
         public IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
         {
-            return Providers.Utilities.DataSetToFeatures(ExecuteIntersectionQuery(box));
+            return ExecuteIntersectionQuery(box);
         }
                 
         #endregion

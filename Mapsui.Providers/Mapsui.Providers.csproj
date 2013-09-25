@@ -42,29 +42,24 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArcGISImageService\ArcGISImageServiceInfo.cs" />
     <Compile Include="ArcGISImageService\ArcGISImageServiceProvider.cs" />
-    <Compile Include="FeatureDataSet.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="GeoTiff\GeoTiffProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shapefile\DbaseReader.cs" />
     <Compile Include="Shapefile\Indexing\BinaryTree.cs" />
     <Compile Include="Shapefile\Indexing\SpatialIndexing.cs" />
     <Compile Include="Shapefile\ShapeFile.cs" />
-    <Compile Include="Utilities.cs" />
     <Compile Include="Wfs\Utilities\FeatureTypeInfo.cs" />
     <Compile Include="Wfs\Utilities\GeometryFactories.cs" />
     <Compile Include="Wfs\Utilities\HttpClientUtil.cs" />

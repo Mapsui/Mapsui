@@ -73,7 +73,7 @@ namespace Mapsui.Providers.Wfs.Utilities
                     //added by PDD to get it to work for deegree default sample
             }
             filterBuilder.Append("%3E%3CBBOX%3E%3CPropertyName%3E");
-            filterBuilder.Append(qualification).Append(featureTypeInfo.Geometry._GeometryName);
+            filterBuilder.Append(qualification).Append(featureTypeInfo.Geometry.GeometryName);
             filterBuilder.Append("%3C/PropertyName%3E%3Cgml:Box%20srsName='" + featureTypeInfo.SRID + "'%3E");
             filterBuilder.Append("%3Cgml:coordinates%3E");
             filterBuilder.Append(XmlConvert.ToString(boundingBox.Left) + ",");
@@ -124,7 +124,7 @@ namespace Mapsui.Providers.Wfs.Utilities
                             //added by PDD to get it to work for deegree default sample
                     xWriter.WriteStartElement("Query", NSWFS);
                     xWriter.WriteAttributeString("typeName", qualification + featureTypeInfo.Name);
-                    xWriter.WriteElementString("PropertyName", qualification + featureTypeInfo.Geometry._GeometryName);
+                    xWriter.WriteElementString("PropertyName", qualification + featureTypeInfo.Geometry.GeometryName);
                     if (!string.IsNullOrEmpty(labelProperty))
                         xWriter.WriteElementString("PropertyName", qualification + labelProperty);
                     xWriter.WriteStartElement("Filter", NSOGC);
@@ -133,10 +133,10 @@ namespace Mapsui.Providers.Wfs.Utilities
                     if (!string.IsNullOrEmpty(featureTypeInfo.Prefix) &&
                         !string.IsNullOrEmpty(featureTypeInfo.FeatureTypeNamespace))
                         xWriter.WriteElementString("PropertyName",
-                                                   qualification + featureTypeInfo.Geometry._GeometryName);
+                                                   qualification + featureTypeInfo.Geometry.GeometryName);
                             //added qualification to get it to work for deegree default sample
                     else
-                        xWriter.WriteElementString("PropertyName", featureTypeInfo.Geometry._GeometryName);
+                        xWriter.WriteElementString("PropertyName", featureTypeInfo.Geometry.GeometryName);
                     xWriter.WriteStartElement("gml", "Envelope", NSGML);
                     xWriter.WriteAttributeString("srsName",
                                                  "http://www.opengis.net/gml/srs/epsg.xml#" + featureTypeInfo.SRID);

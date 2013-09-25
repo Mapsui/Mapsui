@@ -178,7 +178,7 @@ namespace Mapsui.Layers
                 return LabelStringDelegate(feature);
             }
             if (LabelColumn == null) throw new Exception("LabelColumn was not set");
-            return feature[LabelColumn].ToString();
+            return (feature[LabelColumn] == null) ? "" : feature[LabelColumn].ToString();
         }
 
         #endregion

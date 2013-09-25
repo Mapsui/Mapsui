@@ -22,17 +22,17 @@ namespace Mapsui.Providers.Wfs.Utilities
     {
         #region Fields with Properties
 
-        private BoundingBox _BoundingBox = new BoundingBox();
-        private string _Cs = ",";
-        private string _DecimalDel = ".";
-        private string _FeatureTypeNamespace = string.Empty;
-        private GeometryInfo _Geometry = new GeometryInfo();
-        private string _Name = string.Empty;
+        private BoundingBox _boundingBox = new BoundingBox();
+        private string _cs = ",";
+        private string _decimalDel = ".";
+        private string _featureTypeNamespace = string.Empty;
+        private GeometryInfo _geometry = new GeometryInfo();
+        private string _name = string.Empty;
 
-        private string _Prefix = string.Empty;
-        private string _ServiceURI = string.Empty;
-        private string _SRID = "4326";
-        private string _Ts = " ";
+        private string _prefix = string.Empty;
+        private string _serviceUri = string.Empty;
+        private string _srid = "4326";
+        private string _ts = " ";
 
         /// <summary>
         /// Gets or sets the name of the featuretype.
@@ -41,8 +41,8 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// <value>The name.</value>
         public string Name
         {
-            get { return _Name; }
-            set { _Name = value; }
+            get { return _name; }
+            set { _name = value; }
         }
 
         /// <summary>
@@ -53,8 +53,8 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// <value>The prefix.</value>
         public string Prefix
         {
-            get { return _Prefix; }
-            set { _Prefix = value; }
+            get { return _prefix; }
+            set { _prefix = value; }
         }
 
         /// <summary>
@@ -63,8 +63,8 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// </summary>
         public string FeatureTypeNamespace
         {
-            get { return _FeatureTypeNamespace; }
-            set { _FeatureTypeNamespace = value; }
+            get { return _featureTypeNamespace; }
+            set { _featureTypeNamespace = value; }
         }
 
         /// <summary>
@@ -72,17 +72,17 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// </summary>
         internal string QualifiedName
         {
-            get { return _FeatureTypeNamespace + _Name; }
+            get { return _featureTypeNamespace + _name; }
         }
 
         /// <summary>
         /// Gets or sets the service URI for WFS 'GetFeature' request.
         /// This argument is obligatory for data retrieving.
         /// </summary>
-        public string ServiceURI
+        public string ServiceUri
         {
-            get { return _ServiceURI; }
-            set { _ServiceURI = value; }
+            get { return _serviceUri; }
+            set { _serviceUri = value; }
         }
 
         /// <summary>
@@ -91,8 +91,8 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// </summary>
         public GeometryInfo Geometry
         {
-            get { return _Geometry; }
-            set { _Geometry = value; }
+            get { return _geometry; }
+            set { _geometry = value; }
         }
 
         /// <summary>
@@ -100,8 +100,8 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// </summary>
         public BoundingBox BBox
         {
-            get { return _BoundingBox; }
-            set { _BoundingBox = value; }
+            get { return _boundingBox; }
+            set { _boundingBox = value; }
         }
 
         /// <summary>
@@ -109,8 +109,8 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// </summary>
         public string SRID
         {
-            get { return _SRID; }
-            set { _SRID = value; }
+            get { return _srid; }
+            set { _srid = value; }
         }
 
         //Coordinates can be included in a single string, but there is no 
@@ -124,8 +124,8 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// </summary>
         public string DecimalDel
         {
-            get { return _DecimalDel; }
-            set { _DecimalDel = value; }
+            get { return _decimalDel; }
+            set { _decimalDel = value; }
         }
 
         /// <summary>
@@ -133,8 +133,8 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// </summary>
         public string Cs
         {
-            get { return _Cs; }
-            set { _Cs = value; }
+            get { return _cs; }
+            set { _cs = value; }
         }
 
         /// <summary>
@@ -142,9 +142,12 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// </summary>
         public string Ts
         {
-            get { return _Ts; }
-            set { _Ts = value; }
+            get { return _ts; }
+            set { _ts = value; }
         }
+
+
+        public string LableField { get; set; } // temp solution 
 
         #endregion
 
@@ -153,6 +156,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// <summary>
         /// Initializes a new instance of the <see cref="WfsFeatureTypeInfo"/> class.
         /// </summary>
+        /// <param name="serviceUri"></param>
         /// <param name="nsPrefix">
         /// Use an empty string or 'null', if there is no prefix for the featuretype.
         /// </param>
@@ -160,6 +164,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// Use an empty string or 'null', if there is no namespace for the featuretype.
         /// You don't need to know the namespace of the feature type, if you use the quick geometries option.
         /// </param>
+        /// <param name="featureType"></param>
         /// <param name="geometryName">
         /// The geometry name is the property of the featuretype from which geometry information can be obtained from.
         /// Usually this property is called something like 'Shape' or 'geom'. It is absolutely necessary to give this parameter. 
@@ -167,20 +172,21 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// <param name="geometryType">
         /// Specifying the geometry type helps to accelerate the rendering process.   
         /// </param>
-        public WfsFeatureTypeInfo(string serviceURI, string nsPrefix, string featureTypeNamespace, string featureType,
+        public WfsFeatureTypeInfo(string serviceUri, string nsPrefix, string featureTypeNamespace, string featureType,
                                   string geometryName, GeometryTypeEnum geometryType)
         {
-            _ServiceURI = serviceURI;
-            _Prefix = nsPrefix;
-            _FeatureTypeNamespace = string.IsNullOrEmpty(featureTypeNamespace) ? string.Empty : featureTypeNamespace;
-            _Name = featureType;
-            _Geometry._GeometryName = geometryName;
-            _Geometry._GeometryType = geometryType.ToString();
+            _serviceUri = serviceUri;
+            _prefix = nsPrefix;
+            _featureTypeNamespace = string.IsNullOrEmpty(featureTypeNamespace) ? string.Empty : featureTypeNamespace;
+            _name = featureType;
+            _geometry.GeometryName = geometryName;
+            _geometry.GeometryType = geometryType.ToString();
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WfsFeatureTypeInfo"/> class.
         /// </summary>
+        /// <param name="serviceUri"></param>
         /// <param name="nsPrefix">
         /// Use an empty string or 'null', if there is no prefix for the featuretype.
         /// </param>
@@ -188,13 +194,14 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// Use an empty string or 'null', if there is no namespace for the featuretype.
         /// You don't need to know the namespace of the feature type, if you use the quick geometries option.
         /// </param>
+        /// <param name="featureType"></param>
         /// <param name="geometryName">
         /// The geometry name is the property of the featuretype from which geometry information can be obtained from.
         /// Usually this property is called something like 'Shape' or 'geom'. It is absolutely necessary to give this parameter. 
         /// </param>
-        public WfsFeatureTypeInfo(string serviceURI, string nsPrefix, string featureTypeNamespace, string featureType,
+        public WfsFeatureTypeInfo(string serviceUri, string nsPrefix, string featureTypeNamespace, string featureType,
                                   string geometryName)
-            : this(serviceURI, nsPrefix, featureTypeNamespace, featureType, geometryName, GeometryTypeEnum.Unknown)
+            : this(serviceUri, nsPrefix, featureTypeNamespace, featureType, geometryName, GeometryTypeEnum.Unknown)
         {
         }
 
@@ -216,10 +223,10 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// </summary>
         public class BoundingBox
         {
-            public double _MaxLat;
-            public double _MaxLong;
-            public double _MinLat;
-            public double _MinLong;
+            public double MaxLat;
+            public double MaxLong;
+            public double MinLat;
+            public double MinLong;
         }
 
         #endregion
@@ -232,8 +239,8 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// </summary>
         public class GeometryInfo
         {
-            public string _GeometryName = string.Empty;
-            public string _GeometryType = string.Empty;
+            public string GeometryName = string.Empty;
+            public string GeometryType = string.Empty;
         }
 
         #endregion

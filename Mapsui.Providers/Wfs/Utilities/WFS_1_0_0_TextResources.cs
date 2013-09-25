@@ -66,7 +66,7 @@ namespace Mapsui.Providers.Wfs.Utilities
             var filterBuilder = new StringBuilder();
             filterBuilder.Append("&filter=%3CFilter%20xmlns=%22" + NSOGC + "%22%20xmlns:gml=%22" + NSGML +
                                  "%22%3E%3CBBOX%3E%3CPropertyName%3E");
-            filterBuilder.Append(qualification).Append(featureTypeInfo.Geometry._GeometryName);
+            filterBuilder.Append(qualification).Append(featureTypeInfo.Geometry.GeometryName);
             filterBuilder.Append("%3C/PropertyName%3E%3Cgml:Box%20srsName=%22" + featureTypeInfo.SRID + "%22%3E");
             filterBuilder.Append("%3Cgml:coordinates%3E");
             filterBuilder.Append(XmlConvert.ToString(boundingBox.Left) + ",");
@@ -105,12 +105,12 @@ namespace Mapsui.Providers.Wfs.Utilities
                     xWriter.WriteAttributeString("version", "1.0.0");
                     xWriter.WriteStartElement("Query", NSWFS);
                     xWriter.WriteAttributeString("typeName", qualification + featureTypeInfo.Name);
-                    xWriter.WriteElementString("PropertyName", qualification + featureTypeInfo.Geometry._GeometryName);
+                    xWriter.WriteElementString("PropertyName", qualification + featureTypeInfo.Geometry.GeometryName);
                     if (!string.IsNullOrEmpty(labelProperty))
                         xWriter.WriteElementString("PropertyName", qualification + labelProperty);
                     xWriter.WriteStartElement("Filter", NSOGC);
                     xWriter.WriteStartElement("BBOX");
-                    xWriter.WriteElementString("PropertyName", featureTypeInfo.Geometry._GeometryName);
+                    xWriter.WriteElementString("PropertyName", featureTypeInfo.Geometry.GeometryName);
                     xWriter.WriteStartElement("gml", "Box", NSGML);
                     xWriter.WriteAttributeString("srsName",
                                                  "http://www.opengis.net/gml/srs/epsg.xml#" + featureTypeInfo.SRID);

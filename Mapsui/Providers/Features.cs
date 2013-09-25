@@ -24,18 +24,18 @@ namespace Mapsui.Providers
 {
     public class Features : IFeatures
     {
-        private readonly List<IFeature> features = new List<IFeature>();
+        private readonly List<IFeature> _features = new List<IFeature>();
         
         public string PrimaryKey { get; private set; }
 
         public int Count
         {
-            get { return features.Count; }
+            get { return _features.Count; }
         }
 
         public IFeature this[int index]
         {
-            get { return features[index]; }
+            get { return _features[index]; }
         }
 
         public Features()
@@ -58,28 +58,28 @@ namespace Mapsui.Providers
 
         public void Add(IFeature feature)
         {
-            features.Add(feature);
+            _features.Add(feature);
         }
 
         public IEnumerator<IFeature> GetEnumerator()
         {
-            return features.GetEnumerator();
+            return _features.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return features.GetEnumerator();
+            return _features.GetEnumerator();
         }
 
         public void Delete(object id)
         {
             if (string.IsNullOrEmpty(PrimaryKey)) throw new Exception("Primary key of Features was not set");
-            features.Remove(features.First(f => f[PrimaryKey].Equals(id)));
+            _features.Remove(_features.First(f => f[PrimaryKey].Equals(id)));
         }
 
         public void Clear()
         {
-            features.Clear();
+            _features.Clear();
         }
     }        
 }

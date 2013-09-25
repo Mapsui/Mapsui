@@ -1,24 +1,28 @@
-﻿using System.Collections.Generic;
+﻿using Mapsui.Data;
 using System.Data;
 
 namespace Mapsui.Providers
 {
     static class Utilities
     {
-        public static IEnumerable<IFeature> DataSetToFeatures(FeatureDataTable table)
+        public static IEnumerable<IFeature> DataSetToFeatures(FeatureDataSet dataSet)
         {
             var features = new Features();
 
-            foreach (FeatureDataRow row in table)
+            foreach (FeatureDataTable table in dataSet.Tables)
             {
-                IFeature feature = features.New();
-                feature.Geometry = row.Geometry;
-                foreach (DataColumn column in table.Columns)
-                    feature[column.ColumnName] = row[column.ColumnName];
+                foreach (FeatureDataRow row in table)
+                {
+                    IFeature feature = features.New();
+                    feature.Geometry = row.Geometry;
+                    foreach (DataColumn column in table.Columns)
+                        feature[column.ColumnName] = row[column.ColumnName];
 
-                features.Add(feature);
+                    features.Add(feature);
+                }
             }
             return features;
         }
     }
 }
+
