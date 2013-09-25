@@ -396,7 +396,7 @@ namespace Mapsui.Providers.Wfs
 
         #region IProvider Member
 
-        public FeatureDataTable GetGeometriesInView(BoundingBox bbox)
+        public FeatureDataTable ExecuteIntersectionQuery(BoundingBox bbox)
         {
             if (_featureTypeInfo == null) return null;
 
@@ -527,11 +527,6 @@ namespace Mapsui.Providers.Wfs
         public Geometry GetGeometryById(uint oid)
         {
             throw new Exception("The method or operation is not implemented.");
-        }
-
-        public void ExecuteIntersectionQuery(BoundingBox box, FeatureDataSet ds)
-        {
-            ds.Tables.Add(GetGeometriesInView(box));
         }
 
         public int GetFeatureCount()
@@ -1001,9 +996,7 @@ namespace Mapsui.Providers.Wfs
 
         public IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
         {
-            var dataSet = new FeatureDataSet();
-            ExecuteIntersectionQuery(box, dataSet);
-            return Providers.Utilities.DataSetToFeatures(dataSet);
+            return Providers.Utilities.DataSetToFeatures(ExecuteIntersectionQuery(box));
         }
                 
         #endregion
