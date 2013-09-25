@@ -214,7 +214,6 @@ namespace Mapsui.Data.Providers
                 _fs.Seek(_fs.Position + 14, 0);
             }
             _headerIsParsed = true;
-            CreateBaseTable();
         }
 
         private static Encoding GetDbaseLanguageDriver(byte dbasecode)
@@ -409,20 +408,6 @@ namespace Mapsui.Data.Providers
                 tab.Rows.Add(r);
             }
             return tab;
-        }
-
-        private FeatureDataTable _baseTable;
-
-        private void CreateBaseTable()
-        {
-            _baseTable = new FeatureDataTable();
-            foreach (DbaseField dbf in _dbaseColumns)
-                _baseTable.Columns.Add(dbf.ColumnName, dbf.DataType);
-        }
-
-        internal FeatureDataTable NewTable
-        {
-            get { return _baseTable.Clone(); }
         }
 
         internal object GetValue(uint oid, int colid)
