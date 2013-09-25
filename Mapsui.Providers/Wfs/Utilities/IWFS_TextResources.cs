@@ -3,7 +3,7 @@
 
 using Mapsui.Geometries;
 
-namespace Mapsui.Utilities.Wfs
+namespace Mapsui.Providers.Wfs.Utilities
 {
     /// <summary>
     /// Text resources interface
@@ -41,9 +41,9 @@ namespace Mapsui.Utilities.Wfs
         string XPATH_TYPEATTRIBUTEQUERY { get; }
         string DescribeFeatureTypeRequest(string featureTypeName);
         string GetCapabilitiesRequest();
-        string GetFeatureGETRequest(WfsFeatureTypeInfo featureTypeInfo, BoundingBox boundingBox, IFilter filter);
-
-        byte[] GetFeaturePOSTRequest(WfsFeatureTypeInfo featureTypeInfo, string labelProperty, BoundingBox boundingBox,
-                                     IFilter filter);
+        string GetFeatureGETRequest(WfsFeatureTypeInfo featureTypeInfo, string labelProperty, 
+            BoundingBox boundingBox, IFilter filter);
+        byte[] GetFeaturePOSTRequest(WfsFeatureTypeInfo featureTypeInfo, string labelProperty, 
+            BoundingBox boundingBox, IFilter filter);
     }
 }

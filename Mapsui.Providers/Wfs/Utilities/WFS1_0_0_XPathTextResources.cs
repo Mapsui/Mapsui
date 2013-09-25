@@ -1,7 +1,7 @@
 // WFS provider by Peter Robineau (peter.robineau@gmx.at)
 // This file can be redistributed and/or modified under the terms of the GNU Lesser General Public License.
 
-namespace Mapsui.Utilities.Wfs
+namespace Mapsui.Providers.Wfs.Utilities
 {
     /// <summary>
     /// This class provides text resources specific for WFS 1.0.0 XML schema (for precompiling).

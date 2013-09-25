@@ -1,14 +1,12 @@
 // WFS provider by Peter Robineau (peter.robineau@gmx.at)
 // This file can be redistributed and/or modified under the terms of the GNU Lesser General Public License.
 
+using Mapsui.Geometries;
 using System.IO;
 using System.Text;
 using System.Xml;
-using Mapsui.Data.Providers;
-using Mapsui.Geometries;
-using Mapsui.Providers.Wfs;
 
-namespace Mapsui.Utilities.Wfs
+namespace Mapsui.Providers.Wfs.Utilities
 {
     public class WFS_1_1_0_TextResources : WFS_1_1_0_XPathTextResources, IWFS_TextResources
     {
@@ -44,10 +42,11 @@ namespace Mapsui.Utilities.Wfs
         /// <summary>
         /// This method returns the query string for 'GetFeature'.
         /// </summary>
-        /// <param name="featureTypeInfo">A <see cref="WFSProvider.WfsFeatureTypeInfo"/> instance providing metadata of the featuretype to query</param>
+        /// <param name="featureTypeInfo">A <see cref="WfsFeatureTypeInfo"/> instance providing metadata of the featuretype to query</param>
+        /// <param name="labelProperty"></param>
         /// <param name="boundingBox">The bounding box of the query</param>
         /// <param name="filter">An instance implementing <see cref="IFilter"/></param>
-        public string GetFeatureGETRequest(WfsFeatureTypeInfo featureTypeInfo, BoundingBox boundingBox, IFilter filter)
+        public string GetFeatureGETRequest(WfsFeatureTypeInfo featureTypeInfo, string labelProperty, BoundingBox boundingBox, IFilter filter)
         {
             string qualification = string.IsNullOrEmpty(featureTypeInfo.Prefix)
                                        ? string.Empty
@@ -65,7 +64,7 @@ namespace Mapsui.Utilities.Wfs
                 filterString = filterString.Replace("!", "%21");
             }
 
-            StringBuilder filterBuilder = new StringBuilder();
+            var filterBuilder = new StringBuilder();
             filterBuilder.Append("&FILTER=%3CFilter%20xmlns=%22" + NSOGC + "%22%20xmlns:gml=%22" + NSGML + "%22");
             if (!string.IsNullOrEmpty(featureTypeInfo.Prefix))
             {
@@ -74,9 +73,8 @@ namespace Mapsui.Utilities.Wfs
                     //added by PDD to get it to work for deegree default sample
             }
             filterBuilder.Append("%3E%3CBBOX%3E%3CPropertyName%3E");
-            filterBuilder.Append(qualification);
-            filterBuilder.Append(featureTypeInfo.Geometry._GeometryName);
-            filterBuilder.Append("%3C/PropertyName%3E%3Cgml:Box%20srsName='EPSG:" + featureTypeInfo.SRID + "'%3E");
+            filterBuilder.Append(qualification).Append(featureTypeInfo.Geometry._GeometryName);
+            filterBuilder.Append("%3C/PropertyName%3E%3Cgml:Box%20srsName='" + featureTypeInfo.SRID + "'%3E");
             filterBuilder.Append("%3Cgml:coordinates%3E");
             filterBuilder.Append(XmlConvert.ToString(boundingBox.Left) + ",");
             filterBuilder.Append(XmlConvert.ToString(boundingBox.Bottom) + "%20");
@@ -94,14 +92,13 @@ namespace Mapsui.Utilities.Wfs
             }
 
             return "?SERVICE=WFS&Version=1.1.0&REQUEST=GetFeature&TYPENAME=" + qualification + featureTypeInfo.Name +
-                   "&PROPERTYNAME=" + qualification + featureTypeInfo.Geometry._GeometryName +
                    "&SRS =" + featureTypeInfo.SRID + filterBuilder;
         }
 
         /// <summary>
         /// This method returns the POST request for 'GetFeature'.
         /// </summary>
-        /// <param name="featureTypeInfo">A <see cref="WFSProvider.WfsFeatureTypeInfo"/> instance providing metadata of the featuretype to query</param>
+        /// <param name="featureTypeInfo">A <see cref="WfsFeatureTypeInfo"/> instance providing metadata of the featuretype to query</param>
         /// <param name="labelProperty">A property necessary for label rendering</param>
         /// <param name="boundingBox">The bounding box of the query</param>
         /// <param name="filter">An instance implementing <see cref="IFilter"/></param>
@@ -112,9 +109,9 @@ namespace Mapsui.Utilities.Wfs
                                        ? string.Empty
                                        : featureTypeInfo.Prefix + ":";
 
-            using (StringWriter sWriter = new StringWriter())
+            using (var sWriter = new StringWriter())
             {
-                using (XmlTextWriter xWriter = new XmlTextWriter(sWriter))
+                using (var xWriter = new XmlTextWriter(sWriter))
                 {
                     xWriter.Namespaces = true;
                     xWriter.WriteStartElement("GetFeature", NSWFS);

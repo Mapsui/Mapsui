@@ -4,7 +4,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Mapsui.Utilities.Wfs
+namespace Mapsui.Providers.Wfs.Utilities
 {
     /// <summary>
     /// Filter interface

@@ -167,23 +167,23 @@ namespace Mapsui.Web.Wms
 
             //Build layerlist
 
-            XmlNode LayerRootNode = capabilities.CreateNode(XmlNodeType.Element, "Layer", wmsNamespaceURI);
-            LayerRootNode.AppendChild(CreateElement("Title", "Mapsui", capabilities, false, wmsNamespaceURI));
-            LayerRootNode.AppendChild(CreateElement("CRS", "EPSG:" + map.Layers[0].SRID, capabilities, false,
+            XmlNode layerRootNode = capabilities.CreateNode(XmlNodeType.Element, "Layer", wmsNamespaceURI);
+            layerRootNode.AppendChild(CreateElement("Title", "Mapsui", capabilities, false, wmsNamespaceURI));
+            layerRootNode.AppendChild(CreateElement("CRS", "EPSG:" + map.Layers[0].SRID, capabilities, false,
                                                     wmsNamespaceURI)); //TODO
-            LayerRootNode.AppendChild(GenerateBoundingBoxElement(map.Envelope, map.Layers[0].SRID, capabilities));
+            layerRootNode.AppendChild(GenerateBoundingBoxElement(map.Envelope, map.Layers[0].SRID, capabilities));
             //This should be changed when Transformation library is complete
             XmlElement geoBox = capabilities.CreateElement("EX_GeographicBoundingBox", wmsNamespaceURI);
             geoBox.Attributes.Append(CreateAttribute("minx", "-180", capabilities));
             geoBox.Attributes.Append(CreateAttribute("miny", "-90", capabilities));
             geoBox.Attributes.Append(CreateAttribute("maxx", "180", capabilities));
             geoBox.Attributes.Append(CreateAttribute("maxy", "90", capabilities));
-            LayerRootNode.AppendChild(geoBox);
+            layerRootNode.AppendChild(geoBox);
 
             foreach (ILayer layer in map.Layers)
-                LayerRootNode.AppendChild(GetWmsLayerNode(layer, capabilities));
+                layerRootNode.AppendChild(GetWmsLayerNode(layer, capabilities));
 
-            CapabilityNode.AppendChild(LayerRootNode);
+            CapabilityNode.AppendChild(layerRootNode);
 
             return CapabilityNode;
         }
@@ -285,14 +285,14 @@ namespace Mapsui.Web.Wms
             return LayerNode;
         }
 
-        private static XmlElement GenerateBoundingBoxElement(BoundingBox bbox, int SRID, XmlDocument doc)
+        private static XmlElement GenerateBoundingBoxElement(BoundingBox bbox, int srid, XmlDocument doc)
         {
-            XmlElement xmlBbox = doc.CreateElement("BoundingBox", wmsNamespaceURI);
+            var xmlBbox = doc.CreateElement("BoundingBox", wmsNamespaceURI);
             xmlBbox.Attributes.Append(CreateAttribute("minx", bbox.Left.ToString(CultureInfo.InvariantCulture), doc));
             xmlBbox.Attributes.Append(CreateAttribute("miny", bbox.Bottom.ToString(CultureInfo.InvariantCulture), doc));
             xmlBbox.Attributes.Append(CreateAttribute("maxx", bbox.Right.ToString(CultureInfo.InvariantCulture), doc));
             xmlBbox.Attributes.Append(CreateAttribute("maxy", bbox.Top.ToString(CultureInfo.InvariantCulture), doc));
-            xmlBbox.Attributes.Append(CreateAttribute("CRS", "EPSG:" + SRID, doc));
+            xmlBbox.Attributes.Append(CreateAttribute("CRS", "EPSG:" + srid.ToString(), doc));
             return xmlBbox;
         }
 

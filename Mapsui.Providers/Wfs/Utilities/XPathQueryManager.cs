@@ -10,7 +10,7 @@ using System.Xml;
 using System.Xml.XPath;
 using System.Xml.Xsl;
 
-namespace Mapsui.Utilities.Wfs
+namespace Mapsui.Providers.Wfs.Utilities
 {
     /// <summary>
     /// This class provides an easy-to-use interface for complex (parameterized) XPath queries.  
@@ -19,11 +19,11 @@ namespace Mapsui.Utilities.Wfs
     {
         #region Fields
 
-        private int _NavDiff = -1;
-        private CustomQueryContext _ParamContext;
-        private XPathNodeIterator _XIter;
-        private XPathNavigator _XNav;
-        private XPathDocument _XPathDoc;
+        private int _navDiff = -1;
+        private CustomQueryContext _paramContext;
+        private XPathNodeIterator _xIter;
+        private XPathNavigator _xNav;
+        private XPathDocument _xPathDoc;
 
         #endregion
 
@@ -61,7 +61,7 @@ namespace Mapsui.Utilities.Wfs
         public XPathQueryManager(XPathDocument xPathDoc)
         {
             SetDocumentToParse(xPathDoc);
-            _ParamContext = new CustomQueryContext(new NameTable());
+            _paramContext = new CustomQueryContext(new NameTable());
         }
 
         /// <summary>
@@ -86,10 +86,11 @@ namespace Mapsui.Utilities.Wfs
         /// Initializes a new instance of the <see cref="XPathQueryManager"/> class.
         /// </summary>
         /// <param name="xPathDoc">An XmlDocument instance</param>
+        /// <param name="xNav"></param>
         /// <param name="paramContext">A <see cref="XPathQueryManager.CustomQueryContext"/> instance for parameterized XPath expressions</param>
         private XPathQueryManager(XPathDocument xPathDoc, XPathNavigator xNav, CustomQueryContext paramContext)
         {
-            _XNav = xNav.Clone();
+            _xNav = xNav.Clone();
             SetDocumentToParse(xPathDoc);
             InitializeCustomContext(paramContext);
         }
@@ -98,13 +99,13 @@ namespace Mapsui.Utilities.Wfs
         /// Initializes a new instance of the <see cref="XPathQueryManager"/> class.
         /// </summary>
         /// <param name="xPathDoc">An XmlDocument instance</param>
-        /// <param name="xIter">An XPathNodeIterator instance</param
+        /// <param name="xIter">An XPathNodeIterator instance</param>
         /// <param name="paramContext">A <see cref="XPathQueryManager.CustomQueryContext"/> instance for parameterized XPath expressions</param>
         private XPathQueryManager(XPathDocument xPathDoc, XPathNodeIterator xIter, CustomQueryContext paramContext)
             : this(xPathDoc)
         {
             if (xIter != null)
-                _XNav = xIter.Current;
+                _xNav = xIter.Current;
             InitializeCustomContext(paramContext);
         }
 
@@ -119,7 +120,7 @@ namespace Mapsui.Utilities.Wfs
         /// <param name="ns">The namespace URI</param>
         public void AddNamespace(string prefix, string ns)
         {
-            _ParamContext.AddNamespace(prefix, ns);
+            _paramContext.AddNamespace(prefix, ns);
         }
 
         /// <summary>
@@ -129,7 +130,7 @@ namespace Mapsui.Utilities.Wfs
         /// <returns>A compiled XPath expression</returns>
         public XPathExpression Compile(string xPath)
         {
-            return _XNav.Compile(xPath);
+            return _xNav.Compile(xPath);
         }
 
         /// <summary>
@@ -138,7 +139,7 @@ namespace Mapsui.Utilities.Wfs
         /// </summary>
         public IXPathQueryManager Clone()
         {
-            return new XPathQueryManager(_XPathDoc, _XNav, _ParamContext);
+            return new XPathQueryManager(_xPathDoc, _xNav, _paramContext);
         }
 
         /// <summary>
@@ -148,8 +149,8 @@ namespace Mapsui.Utilities.Wfs
         /// <param name="xPath">The compiled XPath expression</param>
         public XPathNodeIterator GetIterator(XPathExpression xPath)
         {
-            findXPath(xPath);
-            return _XIter.Clone();
+            FindXPath(xPath);
+            return _xIter.Clone();
         }
 
         /// <summary>
@@ -160,7 +161,7 @@ namespace Mapsui.Utilities.Wfs
         /// <param name="queryParameters">Parameters for the compiled XPath expression</param>
         public XPathNodeIterator GetIterator(XPathExpression xPath, DictionaryEntry[] queryParameters)
         {
-            _ParamContext.AddParam(queryParameters);
+            _paramContext.AddParam(queryParameters);
             return GetIterator(xPath);
         }
 
@@ -171,9 +172,9 @@ namespace Mapsui.Utilities.Wfs
         public string GetValueFromNode(XPathExpression xPath)
         {
             string result = null;
-            findXPath(xPath);
-            if (_XIter.MoveNext())
-                result = _XIter.Current.Value;
+            FindXPath(xPath);
+            if (_xIter.MoveNext())
+                result = _xIter.Current.Value;
             return result;
         }
 
@@ -184,7 +185,7 @@ namespace Mapsui.Utilities.Wfs
         /// <param name="queryParameters">Parameters for the compiled XPath expression</param>
         public string GetValueFromNode(XPathExpression xPath, DictionaryEntry[] queryParameters)
         {
-            _ParamContext.AddParam(queryParameters);
+            _paramContext.AddParam(queryParameters);
             return GetValueFromNode(xPath);
         }
 
@@ -194,10 +195,10 @@ namespace Mapsui.Utilities.Wfs
         /// <param name="xPath">The compiled XPath expression</param>
         public List<string> GetValuesFromNodes(XPathExpression xPath)
         {
-            List<string> valuesList = new List<string>();
-            findXPath(xPath);
-            while (_XIter.MoveNext())
-                valuesList.Add(_XIter.Current.ToString());
+            var valuesList = new List<string>();
+            FindXPath(xPath);
+            while (_xIter.MoveNext())
+                valuesList.Add(_xIter.Current.ToString());
             return valuesList;
         }
 
@@ -208,7 +209,7 @@ namespace Mapsui.Utilities.Wfs
         /// <param name="queryParameters">Parameters for the compiled XPath expression</param>
         public List<string> GetValuesFromNodes(XPathExpression xPath, DictionaryEntry[] queryParameters)
         {
-            _ParamContext.AddParam(queryParameters);
+            _paramContext.AddParam(queryParameters);
             return GetValuesFromNodes(xPath);
         }
 
@@ -219,9 +220,9 @@ namespace Mapsui.Utilities.Wfs
         /// <param name="xPath">The compiled XPath expression</param>
         public IXPathQueryManager GetXPathQueryManagerInContext(XPathExpression xPath)
         {
-            findXPath(xPath);
-            if (_XIter.MoveNext())
-                return new XPathQueryManager(_XPathDoc, _XIter, _ParamContext);
+            FindXPath(xPath);
+            if (_xIter.MoveNext())
+                return new XPathQueryManager(_xPathDoc, _xIter, _paramContext);
             return null;
         }
 
@@ -233,10 +234,10 @@ namespace Mapsui.Utilities.Wfs
         /// <param name="queryParameters">Parameters for the compiled XPath expression</param>
         public IXPathQueryManager GetXPathQueryManagerInContext(XPathExpression xPath, DictionaryEntry[] queryParameters)
         {
-            _ParamContext.AddParam(queryParameters);
-            findXPath(xPath);
-            if (_XIter.MoveNext())
-                return new XPathQueryManager(_XPathDoc, _XIter, _ParamContext);
+            _paramContext.AddParam(queryParameters);
+            FindXPath(xPath);
+            if (_xIter.MoveNext())
+                return new XPathQueryManager(_xPathDoc, _xIter, _paramContext);
             return null;
         }
 
@@ -246,7 +247,7 @@ namespace Mapsui.Utilities.Wfs
         /// </summary>
         public bool GetContextOfNextNode()
         {
-            return GetContextOfNode((uint) _NavDiff + 1);
+            return GetContextOfNode((uint) _navDiff + 1);
         }
 
         /// <summary>
@@ -256,24 +257,22 @@ namespace Mapsui.Utilities.Wfs
         /// <param name="index">The index of the node to search</param>
         public bool GetContextOfNode(uint index)
         {
-            if (_NavDiff == -1) ++_NavDiff;
-            while (_NavDiff < index)
+            if (_navDiff == -1) ++_navDiff;
+            while (_navDiff < index)
             {
-                if (!_XNav.MoveToNext()) break;
-                _NavDiff++;
+                if (!_xNav.MoveToNext()) break;
+                _navDiff++;
             }
-            while (_NavDiff > index)
+            while (_navDiff > index)
             {
-                _XNav.MoveToPrevious();
-                _NavDiff--;
+                _xNav.MoveToPrevious();
+                _navDiff--;
             }
-            if (_NavDiff == index)
+            if (_navDiff == index)
                 return true;
-            else
-            {
-                ResetNavigator();
-                return false;
-            }
+
+            ResetNavigator();
+            return false;
         }
 
         /// <summary>
@@ -281,7 +280,7 @@ namespace Mapsui.Utilities.Wfs
         /// </summary>
         public void ResetNamespaces()
         {
-            _ParamContext = null;
+            _paramContext = null;
         }
 
         /// <summary>
@@ -290,7 +289,7 @@ namespace Mapsui.Utilities.Wfs
         public void ResetNavigator()
         {
             GetContextOfNode(0);
-            _NavDiff--;
+            _navDiff--;
         }
 
         /// <summary>
@@ -299,7 +298,7 @@ namespace Mapsui.Utilities.Wfs
         /// <param name="documentStream">A Stream with XML data</param>
         public void SetDocumentToParse(Stream documentStream)
         {
-            initializeXPathObjects(documentStream);
+            InitializeXPathObjects(documentStream);
         }
 
         /// <summary>
@@ -308,7 +307,7 @@ namespace Mapsui.Utilities.Wfs
         /// <param name="document">A byte array with XML data</param>
         public void SetDocumentToParse(byte[] document)
         {
-            initializeXPathObjects(new MemoryStream(document));
+            InitializeXPathObjects(new MemoryStream(document));
         }
 
         /// <summary>
@@ -319,7 +318,7 @@ namespace Mapsui.Utilities.Wfs
         {
             try
             {
-                initializeXPathObjects(httpClientUtil.GetDataStream());
+                InitializeXPathObjects(httpClientUtil.GetDataStream());
             }
             finally
             {
@@ -335,12 +334,12 @@ namespace Mapsui.Utilities.Wfs
         {
             try
             {
-                initializeXPathObjects(new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.Read));
+                InitializeXPathObjects(new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.Read));
             }
             catch (Exception ex)
             {
-                Trace.TraceError("An exception occured while reading the xml file: " + fileName);
-                throw ex;
+                Trace.TraceError("An exception occured while reading the xml file: " + fileName + ". " + ex.Message);
+                throw;
             }
         }
 
@@ -354,34 +353,34 @@ namespace Mapsui.Utilities.Wfs
         /// <param name="xPathDoc">An XPathDocument instance</param>
         private void SetDocumentToParse(XPathDocument xPathDoc)
         {
-            _XPathDoc = xPathDoc;
-            if (_XNav == null) _XNav = _XPathDoc.CreateNavigator().Clone();
+            _xPathDoc = xPathDoc;
+            if (_xNav == null) _xNav = _xPathDoc.CreateNavigator().Clone();
         }
 
         /// <summary>
         /// This method does some XPath specific initializations.
         /// </summary>
-        private void initializeXPathObjects(Stream xmlStream)
+        private void InitializeXPathObjects(Stream xmlStream)
         {
             try
             {
-                _XPathDoc = new XPathDocument(xmlStream);
-                _XNav = _XPathDoc.CreateNavigator();
-                _ParamContext = new CustomQueryContext(new NameTable());
+                _xPathDoc = new XPathDocument(xmlStream);
+                _xNav = _xPathDoc.CreateNavigator();
+                _paramContext = new CustomQueryContext(new NameTable());
             }
             catch (XmlException ex)
             {
                 Trace.TraceError("An XML specific exception occured " +
                                  "while initializing XPathDocument and XPathNavigator in XPathQueryManager: " +
                                  ex.Message);
-                throw ex;
+                throw;
             }
             catch (Exception ex)
             {
                 Trace.TraceError("An exception occured " +
                                  "while initializing XPathDocument and XPathNavigator in XPathQueryManager: " +
                                  ex.Message);
-                throw ex;
+                throw;
             }
             finally
             {
@@ -393,18 +392,18 @@ namespace Mapsui.Utilities.Wfs
         /// This method sets the inherent XPathNodeIterator instance.
         /// </summary>
         /// <param name="xPath">A compiled XPath expression</param>
-        private void findXPath(XPathExpression xPath)
+        private void FindXPath(XPathExpression xPath)
         {
-            xPath.SetContext(_ParamContext);
-            _XIter = _XNav.Select(xPath);
-            InitializeCustomContext(_ParamContext);
+            xPath.SetContext(_paramContext);
+            _xIter = _xNav.Select(xPath);
+            InitializeCustomContext(_paramContext);
         }
 
         private void InitializeCustomContext(CustomQueryContext paramContext)
         {
             IDictionary<string, string> namespaces = paramContext.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
-            _ParamContext = new CustomQueryContext((NameTable) paramContext.NameTable);
-            _ParamContext.AddNamespace(namespaces);
+            _paramContext = new CustomQueryContext((NameTable) paramContext.NameTable);
+            _paramContext.AddNamespace(namespaces);
         }
 
         #endregion
@@ -421,7 +420,7 @@ namespace Mapsui.Utilities.Wfs
         {
             #region Fields
 
-            private XsltArgumentList _ArgumentList = new XsltArgumentList();
+            private readonly XsltArgumentList _argumentList = new XsltArgumentList();
 
             #endregion
 
@@ -486,12 +485,12 @@ namespace Mapsui.Utilities.Wfs
             /// </summary>
             /// <param name="prefix">The prefix of the function</param>
             /// <param name="name">The name of the function</param>
-            /// <param name="ArgTypes">A list of argument types of the function</param>
-            public override IXsltContextFunction ResolveFunction(string prefix, string name, XPathResultType[] ArgTypes)
+            /// <param name="argTypes">A list of argument types of the function</param>
+            public override IXsltContextFunction ResolveFunction(string prefix, string name, XPathResultType[] argTypes)
             {
-                if (name.Equals(ParamCompare.FunctionName)) return new ParamCompare(ArgTypes, 2, 2);
+                if (name.Equals(ParamCompare.FunctionName)) return new ParamCompare(argTypes, 2, 2);
                 if (name.Equals(ParamCompareWithTargetNs.FunctionName))
-                    return new ParamCompareWithTargetNs(ArgTypes, 3, 3);
+                    return new ParamCompareWithTargetNs(argTypes, 3, 3);
                 return null;
             }
 
@@ -515,7 +514,7 @@ namespace Mapsui.Utilities.Wfs
             /// <param name="parameter">The value of the parameter</param>
             public void AddParam(string name, object parameter)
             {
-                _ArgumentList.AddParam(name, string.Empty, parameter);
+                _argumentList.AddParam(name, string.Empty, parameter);
             }
 
             /// <summary>
@@ -526,7 +525,7 @@ namespace Mapsui.Utilities.Wfs
             {
                 int length = parameters.Length;
                 for (int i = 0; i < length; i++)
-                    _ArgumentList.AddParam(parameters[i].Key.ToString(),
+                    _argumentList.AddParam(parameters[i].Key.ToString(),
                                            string.Empty, parameters[i].Value.ToString());
             }
 
@@ -536,7 +535,7 @@ namespace Mapsui.Utilities.Wfs
             /// <param name="name">The name of the parameter</param>
             public object GetParam(string name)
             {
-                return _ArgumentList.GetParam(name, string.Empty);
+                return _argumentList.GetParam(name, string.Empty);
             }
 
             /// <summary>
@@ -545,7 +544,7 @@ namespace Mapsui.Utilities.Wfs
             /// <param name="name">The name of the parameter</param>
             public object RemoveParam(string name)
             {
-                return _ArgumentList.RemoveParam(name, string.Empty);
+                return _argumentList.RemoveParam(name, string.Empty);
             }
 
             /// <summary>
@@ -553,7 +552,7 @@ namespace Mapsui.Utilities.Wfs
             /// </summary>
             public void ResetParams()
             {
-                _ArgumentList.Clear();
+                _argumentList.Clear();
             }
 
             #endregion
@@ -570,10 +569,10 @@ namespace Mapsui.Utilities.Wfs
         {
             #region Fields
 
-            private XPathResultType[] _ArgTypes;
-            private int _MaxArgs;
-            private int _MinArgs;
-            private XPathResultType _ReturnType;
+            private readonly XPathResultType[] _argTypes;
+            private readonly int _maxArgs;
+            private readonly int _minArgs;
+            private readonly XPathResultType _returnType;
 
             #endregion
 
@@ -584,7 +583,7 @@ namespace Mapsui.Utilities.Wfs
             /// </summary>
             public XPathResultType[] ArgTypes
             {
-                get { return _ArgTypes; }
+                get { return _argTypes; }
             }
 
             /// <summary>
@@ -592,7 +591,7 @@ namespace Mapsui.Utilities.Wfs
             /// </summary>
             public XPathResultType ReturnType
             {
-                get { return _ReturnType; }
+                get { return _returnType; }
             }
 
             /// <summary>
@@ -600,7 +599,7 @@ namespace Mapsui.Utilities.Wfs
             /// </summary>
             public int Minargs
             {
-                get { return _MinArgs; }
+                get { return _minArgs; }
             }
 
             /// <summary>
@@ -608,7 +607,7 @@ namespace Mapsui.Utilities.Wfs
             /// </summary>
             public int Maxargs
             {
-                get { return _MaxArgs; }
+                get { return _maxArgs; }
             }
 
             #endregion
@@ -625,10 +624,10 @@ namespace Mapsui.Utilities.Wfs
             protected ParamBase(XPathResultType[] argTypes, XPathResultType returnType,
                                 int minArgs, int maxArgs)
             {
-                _ArgTypes = argTypes;
-                _ReturnType = returnType;
-                _MinArgs = minArgs;
-                _MaxArgs = maxArgs;
+                _argTypes = argTypes;
+                _returnType = returnType;
+                _minArgs = minArgs;
+                _maxArgs = maxArgs;
             }
 
             #endregion
@@ -695,9 +694,12 @@ namespace Mapsui.Utilities.Wfs
             {
                 if (arg is string)
                     return arg.ToString();
-                else if (arg is XPathNodeIterator)
-                    if (((XPathNodeIterator) arg).MoveNext() == true)
-                        return ((XPathNodeIterator) arg).Current.Value;
+                var iterator = arg as XPathNodeIterator;
+                if (iterator != null)
+                {
+                    if (iterator.MoveNext())
+                        return iterator.Current.Value;
+                }
                 return string.Empty;
             }
 
@@ -714,11 +716,10 @@ namespace Mapsui.Utilities.Wfs
             /// <param name="xsltContext">The Xslt context for namespace resolving</param>
             private string resolveNsPrefix(string args, XsltContext xsltContext)
             {
-                string prefix;
-                string ns;
                 if (args.Contains(":"))
                 {
-                    prefix = args.Substring(0, args.IndexOf(":"));
+                    string prefix = args.Substring(0, args.IndexOf(":", StringComparison.Ordinal));
+                    string ns;
                     if (!string.IsNullOrEmpty((ns = xsltContext.LookupNamespace(prefix))))
                         args = args.Replace(prefix + ":", ns);
                 }
@@ -773,7 +774,7 @@ namespace Mapsui.Utilities.Wfs
             /// <returns>A boolean value indicating whether the argument strings are identical</returns>
             public override object Invoke(XsltContext xsltContext, object[] args, XPathNavigator docContext)
             {
-                return ((string) ((string) args[1] + ResolveArgument(args[2]))).Equals(
+                return (((string) args[1] + ResolveArgument(args[2]))).Equals(
                     resolveNsPrefix(ResolveArgument(args[0]), (string) args[1], docContext), StringComparison.Ordinal);
             }
 
@@ -787,16 +788,16 @@ namespace Mapsui.Utilities.Wfs
             /// and substituted. Otherwise the target namespace is placed first.
             /// </summary>
             /// <param name="args">An argument of the function to be resolved</param>
-            /// <param name="xsltContext">The Xslt context for namespace resolving</param>
+            /// <param name="targetNs"></param>
+            /// <param name="docContext"></param>
             private string resolveNsPrefix(string args, string targetNs, XPathNavigator docContext)
             {
-                string prefix;
-                string ns;
                 if (args.Contains(":"))
                 {
-                    prefix = args.Substring(0, args.IndexOf(":"));
+                    string prefix = args.Substring(0, args.IndexOf(":", StringComparison.Ordinal));
+                    string ns;
                     if (!string.IsNullOrEmpty((ns = docContext.LookupNamespace(prefix))))
-                        return args = args.Replace(prefix + ":", ns);
+                        return args.Replace(prefix + ":", ns);
                     return targetNs + args;
                 }
                 return targetNs + args;
@@ -816,8 +817,8 @@ namespace Mapsui.Utilities.Wfs
         {
             #region Fields
 
-            private string _Name;
-            private object _Param;
+            private string _name;
+            private readonly object _param;
 
             #endregion
 
@@ -830,8 +831,8 @@ namespace Mapsui.Utilities.Wfs
             /// <param name="param">The parameter</param>
             public ParamFunctionVar(string name, object param)
             {
-                _Name = name;
-                _Param = param;
+                _name = name;
+                _param = param;
             }
 
             #endregion
@@ -843,7 +844,7 @@ namespace Mapsui.Utilities.Wfs
             /// </summary>
             public object Evaluate(XsltContext xsltContext)
             {
-                return _Param;
+                return _param;
             }
 
             /// <summary>

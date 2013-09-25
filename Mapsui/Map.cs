@@ -148,8 +148,8 @@ namespace Mapsui
 
         /// <summary>
         /// Map background color (defaults to transparent)
-        /// </summary>
-        public Color BackColor { get; set; }
+        ///  </summary>
+        public Color BackColor { get; set; } // todo: check if this is actually used everywhere
 
         /// <summary>
         /// Gets the extents of the map based on the extents of all the layers in the layers collection

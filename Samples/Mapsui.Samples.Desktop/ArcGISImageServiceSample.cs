@@ -5,7 +5,7 @@ namespace Mapsui.Samples.Desktop
 {
     public static class ArcGISImageServiceSample
     {
-        public static ILayer Create()
+        public static ILayer CreateLayer()
         {
             return new ImageLayer("ArcGISImageServiceLayer") { DataSource = CreateProvider() };
         }

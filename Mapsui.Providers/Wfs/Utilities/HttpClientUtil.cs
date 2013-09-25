@@ -8,7 +8,7 @@ using System.IO;
 using System.Net;
 using System.Security;
 
-namespace Mapsui.Utilities.Wfs
+namespace Mapsui.Providers.Wfs.Utilities
 {
     /// <summary>
     /// This class provides an easy to use interface for HTTP-GET and HTTP-POST requests.
@@ -17,21 +17,20 @@ namespace Mapsui.Utilities.Wfs
     {
         #region Fields and Properties
 
-        private readonly NameValueCollection _RequestHeaders;
-        private byte[] _PostData;
-        private string _ProxyUrl;
-
-        private string _Url;
-        private HttpWebRequest _WebRequest;
-        private HttpWebResponse _WebResponse;
+        private readonly NameValueCollection _requestHeaders;
+        private byte[] _postData;
+        private string _proxyUrl;
+        private string _url;
+        private HttpWebRequest _webRequest;
+        private HttpWebResponse _webResponse;
 
         /// <summary>
         /// Gets ans sets the Url of the request.
         /// </summary>
         public string Url
         {
-            get { return _Url; }
-            set { _Url = value; }
+            get { return _url; }
+            set { _url = value; }
         }
 
         /// <summary>
@@ -39,8 +38,8 @@ namespace Mapsui.Utilities.Wfs
         /// </summary>
         public string ProxyUrl
         {
-            get { return _ProxyUrl; }
-            set { _ProxyUrl = value; }
+            get { return _proxyUrl; }
+            set { _proxyUrl = value; }
         }
 
         /// <summary>
@@ -48,7 +47,7 @@ namespace Mapsui.Utilities.Wfs
         /// </summary>
         public byte[] PostData
         {
-            set { _PostData = value; }
+            set { _postData = value; }
         }
 
         #endregion
@@ -60,7 +59,7 @@ namespace Mapsui.Utilities.Wfs
         /// </summary>
         public HttpClientUtil()
         {
-            _RequestHeaders = new NameValueCollection();
+            _requestHeaders = new NameValueCollection();
         }
 
         #endregion
@@ -74,7 +73,7 @@ namespace Mapsui.Utilities.Wfs
         /// <param name="value">The value of the header</param>
         public void AddHeader(string name, string value)
         {
-            _RequestHeaders.Add(name, value);
+            _requestHeaders.Add(name, value);
         }
 
         /// <summary>
@@ -82,58 +81,58 @@ namespace Mapsui.Utilities.Wfs
         /// </summary>
         public Stream GetDataStream()
         {
-            if (string.IsNullOrEmpty(_Url))
-                throw new ArgumentNullException("Request Url is not set!");
+            if (string.IsNullOrEmpty(_url))
+                throw new ArgumentNullException("_url");
 
             // Free all resources of the previous request, if it hasn't been done yet...
             Close();
 
             try
             {
-                _WebRequest = (HttpWebRequest) WebRequest.Create(_Url);
+                _webRequest = (HttpWebRequest) WebRequest.Create(_url);
             }
             catch (SecurityException ex)
             {
-                Trace.TraceError("An exception occured due to security reasons while initializing a request to " + _Url +
+                Trace.TraceError("An exception occured due to security reasons while initializing a request to " + _url +
                                  ": " + ex.Message);
-                throw ex;
+                throw;
             }
             catch (NotSupportedException ex)
             {
-                Trace.TraceError("An exception occured while initializing a request to " + _Url + ": " + ex.Message);
-                throw ex;
+                Trace.TraceError("An exception occured while initializing a request to " + _url + ": " + ex.Message);
+                throw;
             }
 
-            _WebRequest.Timeout = 90000;
+            _webRequest.Timeout = 90000;
 
-            if (!string.IsNullOrEmpty(_ProxyUrl))
-                _WebRequest.Proxy = new WebProxy(_ProxyUrl);
+            if (!string.IsNullOrEmpty(_proxyUrl))
+                _webRequest.Proxy = new WebProxy(_proxyUrl);
 
             try
             {
-                _WebRequest.Headers.Add(_RequestHeaders);
+                _webRequest.Headers.Add(_requestHeaders);
 
                 /* HTTP POST */
-                if (_PostData != null)
+                if (_postData != null)
                 {
-                    _WebRequest.ContentLength = _PostData.Length;
-                    _WebRequest.Method = WebRequestMethods.Http.Post;
-                    using (Stream requestStream = _WebRequest.GetRequestStream())
+                    _webRequest.ContentLength = _postData.Length;
+                    _webRequest.Method = WebRequestMethods.Http.Post;
+                    using (Stream requestStream = _webRequest.GetRequestStream())
                     {
-                        requestStream.Write(_PostData, 0, _PostData.Length);
+                        requestStream.Write(_postData, 0, _postData.Length);
                     }
                 }
                     /* HTTP GET */
                 else
-                    _WebRequest.Method = WebRequestMethods.Http.Get;
+                    _webRequest.Method = WebRequestMethods.Http.Get;
 
-                _WebResponse = (HttpWebResponse) _WebRequest.GetResponse();
-                return _WebResponse.GetResponseStream();
+                _webResponse = (HttpWebResponse) _webRequest.GetResponse();
+                return _webResponse.GetResponseStream();
             }
             catch (Exception ex)
             {
-                Trace.TraceError("An exception occured during a HTTP request to " + _Url + ": " + ex.Message);
-                throw ex;
+                Trace.TraceError("An exception occured during a HTTP request to " + _url + ": " + ex.Message);
+                throw;
             }
         }
 
@@ -142,10 +141,10 @@ namespace Mapsui.Utilities.Wfs
         /// </summary>
         public void Reset()
         {
-            _Url = null;
-            _ProxyUrl = null;
-            _PostData = null;
-            _RequestHeaders.Clear();
+            _url = null;
+            _proxyUrl = null;
+            _postData = null;
+            _requestHeaders.Clear();
         }
 
         /// <summary>
@@ -153,10 +152,11 @@ namespace Mapsui.Utilities.Wfs
         /// </summary>
         public void Close() //This class should implement dispose instead.
         {
-            if (_WebResponse != null)
+            if (_webResponse != null)
             {
-                _WebResponse.Close();
-                _WebResponse.GetResponseStream().Dispose();
+                _webResponse.Close();
+                var responseStream = _webResponse.GetResponseStream();
+                if (responseStream != null) responseStream.Dispose();
             }
         }
 

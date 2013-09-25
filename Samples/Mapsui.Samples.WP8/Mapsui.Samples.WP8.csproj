@@ -121,6 +121,12 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="..\Mapsui.Samples.WP7\Images\appbar.add.rest.png">
+      <Link>Images\appbar.add.rest.png</Link>
+    </Content>
+    <Content Include="..\Mapsui.Samples.WP7\Images\appbar.minus.rest.png">
+      <Link>Images\appbar.minus.rest.png</Link>
+    </Content>
     <Content Include="Assets\AlignmentGrid.png" />
     <Content Include="Assets\ApplicationIcon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -140,8 +146,6 @@
     <Content Include="Assets\Tiles\IconicTileSmall.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\appbar.add.rest.png" />
-    <Content Include="Images\appbar.minus.rest.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\AppResources.resx">

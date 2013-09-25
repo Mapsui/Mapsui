@@ -1,19 +1,19 @@
 ﻿using BruTile.Web;
-using Mapsui.Samples.Common;
 using Mapsui.Layers;
 using Mapsui.Providers;
-using Mapsui.Samples;
+using Mapsui.Samples.Common;
+using Mapsui.Samples.Desktop;
+using Mapsui.Windows.Layers;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using Mapsui.Samples.Desktop;
-using Mapsui.Windows.Layers;
 
 namespace Mapsui.Wpf
 {
-    public partial class Window1 : Window
+    public partial class Window1
     {
         public Window1()
         {
@@ -77,7 +77,7 @@ namespace Mapsui.Wpf
             foreach (var point in randomPoints)
             {
                 var feature = new Feature { Geometry = point };
-                feature["Label"] = count.ToString();
+                feature["Label"] = count.ToString(CultureInfo.InvariantCulture);
                 features.Add(feature);
                 count++;
             }
@@ -174,7 +174,15 @@ namespace Mapsui.Wpf
         private void ArcGISImageServiceClick(object sender, RoutedEventArgs e)
         {
             mapControl.Map.Layers.Clear();
-            mapControl.Map.Layers.Add(ArcGISImageServiceSample.Create());
+            mapControl.Map.Layers.Add(ArcGISImageServiceSample.CreateLayer());
+            layerList.Initialize(mapControl.Map.Layers);
+            mapControl.ZoomToFullEnvelope();
+            mapControl.Refresh();
+        }
+
+        private void WfsClick(object sender, RoutedEventArgs e)
+        {
+            mapControl.Map = WfsSample.CreateMap();
             layerList.Initialize(mapControl.Map.Layers);
             mapControl.ZoomToFullEnvelope();
             mapControl.Refresh();
