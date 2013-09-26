@@ -89,70 +89,8 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// Abstract method - overwritten by derived classes for producing instances
         /// derived from <see cref="Mapsui.Geometries.Geometry"/>.
         /// </summary>
-        internal abstract Collection<Geometry> CreateGeometries(Features labelInfo);
-
-        /// <summary>
-        /// This method parses quickly without paying attention to
-        /// context validation, polygon boundaries and multi-geometries.
-        /// This accelerates the geometry parsing process, 
-        /// but in scarce cases can lead to errors. 
-        /// </summary>
-        /// <param name="geometryType">The geometry type (Point, LineString, Polygon, MultiPoint, MultiCurve, 
-        /// MultiLineString (deprecated), MultiSurface, MultiPolygon (deprecated)</param>
-        /// <returns>The created geometries</returns>
-        internal virtual Collection<Geometry> CreateQuickGeometries(string geometryType)
-        {
-            // Ignore multi-geometries
-            if (geometryType.Equals("MultiPointPropertyType")) geometryType = "PointPropertyType";
-            else if (geometryType.Equals("MultiLineStringPropertyType")) geometryType = "LineStringPropertyType";
-            else if (geometryType.Equals("MultiPolygonPropertyType")) geometryType = "PolygonPropertyType";
-            else if (geometryType.Equals("MultiCurvePropertyType")) geometryType = "CurvePropertyType";
-            else if (geometryType.Equals("MultiSurfacePropertyType")) geometryType = "SurfacePropertyType";
-
-            while (XmlReader.Read())
-            {
-                if (CoordinatesNode.Matches(XmlReader))
-                {
-                    try
-                    {
-                        switch (geometryType)
-                        {
-                            case "PointPropertyType":
-                                Geoms.Add(ParseCoordinates(XmlReader.ReadSubtree())[0]);
-                                break;
-                            case "LineStringPropertyType":
-                            case "CurvePropertyType":
-                                Geoms.Add(new LineString(ParseCoordinates(XmlReader.ReadSubtree())));
-                                break;
-                            case "PolygonPropertyType":
-                            case "SurfacePropertyType":
-                                var polygon = new Polygon
-                                    {
-                                        ExteriorRing = new LinearRing(ParseCoordinates(XmlReader.ReadSubtree()))
-                                    };
-                                Geoms.Add(polygon);
-                                break;
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        Trace.TraceError("An exception occured while parsing a " + geometryType + " geometry: " +
-                                         ex.Message);
-                        throw;
-                    }
-                    continue;
-                }
-
-                if (!ServiceExceptionNode.Matches(XmlReader)) continue;
-
-                string serviceException = XmlReader.ReadInnerXml();
-                Trace.TraceError("A service exception occured: " + serviceException);
-                throw new Exception("A service exception occured: " + serviceException);
-            }
-
-            return Geoms;
-        }
-
+        internal abstract Collection<Geometry> CreateGeometries(Features features);
+        
         #endregion
 
         #region Protected Member
@@ -245,20 +183,12 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// <summary>
         /// This method adds a label to the collection.
         /// </summary>
-        protected void AddLabel(string labelValue, Geometry geom, Features features, string labelField)
+        protected IFeature CreateFeature(Geometry geom, string labelField, string labelValue)
         {
-            try
-            {
-                var row = features.New();
-                if (labelField != null) row[labelField] = labelValue;
-                row.Geometry = geom;
-                features.Add(row);
-            }
-            catch (Exception ex)
-            {
-                Trace.TraceError("An exception occured while adding a label to the collection! " + ex.Message);
-                throw;
-            }
+            var feature = new Feature();
+            if (labelField != null) feature[labelField] = labelValue;
+            feature.Geometry = geom;
+            return feature;
         }
 
         #endregion
@@ -375,7 +305,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// This method produces instances of type <see cref="Mapsui.Geometries.Point"/>.
         /// </summary>
         /// <returns>The created geometries</returns>
-        internal override Collection<Geometry> CreateGeometries(Features labelInfo)
+        internal override Collection<Geometry> CreateGeometries(Features features)
         {
             IPathNode pointNode = new PathNode(Gmlns, "Point", (NameTable) XmlReader.NameTable);
             var labelValue = new string[1];
@@ -386,13 +316,12 @@ namespace Mapsui.Providers.Wfs.Utilities
                 // Reading the entire feature's node makes it possible to collect label values that may appear before or after the geometry property
                 while ((FeatureReader = GetSubReaderOf(XmlReader, null, FeatureNode)) != null)
                 {
-                    while ((GeomReader = GetSubReaderOf(FeatureReader, labelValue, pointNode, CoordinatesNode)) !=
-                           null)
+                    while ((GeomReader = GetSubReaderOf(FeatureReader, labelValue, pointNode, CoordinatesNode)) != null)
                     {
                         Geoms.Add(ParseCoordinates(GeomReader)[0]);
                         geomFound = true;
                     }
-                    if (geomFound) AddLabel(labelValue[0], Geoms[Geoms.Count - 1], labelInfo, FeatureTypeInfo.LableField);
+                    if (geomFound) features.Add(CreateFeature(Geoms[Geoms.Count - 1], FeatureTypeInfo.LableField, labelValue[0]));
                     geomFound = false;
                 }
             }
@@ -446,7 +375,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// This method produces instances of type <see cref="Mapsui.Geometries.LineString"/>.
         /// </summary>
         /// <returns>The created geometries</returns>
-        internal override Collection<Geometry> CreateGeometries(Features labelInfo)
+        internal override Collection<Geometry> CreateGeometries(Features features)
         {
             IPathNode lineStringNode = new PathNode(Gmlns, "LineString", (NameTable) XmlReader.NameTable);
             var labelValue = new string[1];
@@ -464,7 +393,7 @@ namespace Mapsui.Providers.Wfs.Utilities
                         Geoms.Add(new LineString(ParseCoordinates(GeomReader)));
                         geomFound = true;
                     }
-                    if (geomFound) AddLabel(labelValue[0], Geoms[Geoms.Count - 1], labelInfo, FeatureTypeInfo.LableField);
+                    if (geomFound) features.Add(CreateFeature(Geoms[Geoms.Count - 1], FeatureTypeInfo.LableField, labelValue[0]));
                     geomFound = false;
                 }
             }
@@ -518,7 +447,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// This method produces instances of type <see cref="Mapsui.Geometries.Polygon"/>.
         /// </summary>
         /// <returns>The created geometries</returns>
-        internal override Collection<Geometry> CreateGeometries(Features labelInfo)
+        internal override Collection<Geometry> CreateGeometries(Features features)
         {
             IPathNode polygonNode = new PathNode(Gmlns, "Polygon", (NameTable) XmlReader.NameTable);
             IPathNode outerBoundaryNode = new PathNode(Gmlns, "outerBoundaryIs", (NameTable) XmlReader.NameTable);
@@ -557,7 +486,7 @@ namespace Mapsui.Providers.Wfs.Utilities
                         Geoms.Add(polygon);
                         geomFound = true;
                     }
-                    if (geomFound) AddLabel(labelValue[0], Geoms[Geoms.Count - 1], labelInfo, FeatureTypeInfo.LableField);
+                    if (geomFound) features.Add(CreateFeature(Geoms[Geoms.Count - 1], FeatureTypeInfo.LableField, labelValue[0]));
                     geomFound = false;
                 }
             }
@@ -609,7 +538,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// This method produces instances of type <see cref="Mapsui.Geometries.MultiPoint"/>.
         /// </summary>
         /// <returns>The created geometries</returns>
-        internal override Collection<Geometry> CreateGeometries(Features labelInfo)
+        internal override Collection<Geometry> CreateGeometries(Features features)
         {
             IPathNode multiPointNode = new PathNode(Gmlns, "MultiPoint", (NameTable) XmlReader.NameTable);
             IPathNode pointMemberNode = new PathNode(Gmlns, "pointMember", (NameTable) XmlReader.NameTable);
@@ -627,7 +556,7 @@ namespace Mapsui.Providers.Wfs.Utilities
                     {
                         var multiPoint = new MultiPoint();
                         GeometryFactory geomFactory = new PointFactory(GeomReader, FeatureTypeInfo);
-                        Collection<Geometry> points = geomFactory.CreateGeometries(labelInfo);
+                        Collection<Geometry> points = geomFactory.CreateGeometries(features);
 
                         foreach (Point point in points)
                             multiPoint.Points.Add(point);
@@ -635,7 +564,7 @@ namespace Mapsui.Providers.Wfs.Utilities
                         Geoms.Add(multiPoint);
                         geomFound = true;
                     }
-                    if (geomFound) AddLabel(labelValue[0], Geoms[Geoms.Count - 1], labelInfo, FeatureTypeInfo.LableField);
+                    if (geomFound) features.Add(CreateFeature(Geoms[Geoms.Count - 1], FeatureTypeInfo.LableField, labelValue[0]));
                     geomFound = false;
                 }
             }
@@ -687,7 +616,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// This method produces instances of type <see cref="Mapsui.Geometries.MultiLineString"/>.
         /// </summary>
         /// <returns>The created geometries</returns>
-        internal override Collection<Geometry> CreateGeometries(Features labelInfo)
+        internal override Collection<Geometry> CreateGeometries(Features features)
         {
             IPathNode multiLineStringNode = new PathNode(Gmlns, "MultiLineString", (NameTable) XmlReader.NameTable);
             IPathNode multiCurveNode = new PathNode(Gmlns, "MultiCurve", (NameTable) XmlReader.NameTable);
@@ -710,7 +639,7 @@ namespace Mapsui.Providers.Wfs.Utilities
                     {
                         var multiLineString = new MultiLineString();
                         GeometryFactory geomFactory = new LineStringFactory(GeomReader, FeatureTypeInfo);
-                        Collection<Geometry> lineStrings = geomFactory.CreateGeometries(labelInfo);
+                        Collection<Geometry> lineStrings = geomFactory.CreateGeometries(features);
 
                         foreach (LineString lineString in lineStrings)
                             multiLineString.LineStrings.Add(lineString);
@@ -718,7 +647,7 @@ namespace Mapsui.Providers.Wfs.Utilities
                         Geoms.Add(multiLineString);
                         geomFound = true;
                     }
-                    if (geomFound) AddLabel(labelValue[0], Geoms[Geoms.Count - 1], labelInfo, FeatureTypeInfo.LableField);
+                    if (geomFound) features.Add(CreateFeature(Geoms[Geoms.Count - 1], FeatureTypeInfo.LableField, labelValue[0]));
                     geomFound = false;
                 }
             }
@@ -770,7 +699,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// This method produces instances of type <see cref="Mapsui.Geometries.MultiPolygon"/>.
         /// </summary>
         /// <returns>The created geometries</returns>
-        internal override Collection<Geometry> CreateGeometries(Features labelInfo)
+        internal override Collection<Geometry> CreateGeometries(Features features)
         {
             IPathNode multiPolygonNode = new PathNode(Gmlns, "MultiPolygon", (NameTable) XmlReader.NameTable);
             IPathNode multiSurfaceNode = new PathNode(Gmlns, "MultiSurface", (NameTable) XmlReader.NameTable);
@@ -793,7 +722,7 @@ namespace Mapsui.Providers.Wfs.Utilities
                     {
                         var multiPolygon = new MultiPolygon();
                         GeometryFactory geomFactory = new PolygonFactory(GeomReader, FeatureTypeInfo);
-                        Collection<Geometry> polygons = geomFactory.CreateGeometries(labelInfo);
+                        Collection<Geometry> polygons = geomFactory.CreateGeometries(features);
 
                         foreach (Polygon polygon in polygons)
                             multiPolygon.Polygons.Add(polygon);
@@ -801,7 +730,7 @@ namespace Mapsui.Providers.Wfs.Utilities
                         Geoms.Add(multiPolygon);
                         geomFound = true;
                     }
-                    if (geomFound) AddLabel(labelValue[0], Geoms[Geoms.Count - 1], labelInfo, FeatureTypeInfo.LableField);
+                    if (geomFound) features.Add(CreateFeature(Geoms[Geoms.Count - 1], FeatureTypeInfo.LableField, labelValue[0]));
                     geomFound = false;
                 }
             }
@@ -860,7 +789,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// appropriate geometries.
         /// </summary>
         /// <returns></returns>
-        internal override Collection<Geometry> CreateGeometries(Features labelInfo)
+        internal override Collection<Geometry> CreateGeometries(Features features)
         {
             GeometryFactory geomFactory = null;
 
@@ -934,10 +863,8 @@ namespace Mapsui.Providers.Wfs.Utilities
 
             FeatureTypeInfo.Geometry.GeometryType = geometryTypeString;
 
-            if (geomFactory != null)
-                return _quickGeometries
-                           ? geomFactory.CreateQuickGeometries(geometryTypeString)
-                           : geomFactory.CreateGeometries(labelInfo);
+            if (geomFactory == null) return Geoms;
+            geomFactory.CreateGeometries(features);
             return Geoms;
         }
 
