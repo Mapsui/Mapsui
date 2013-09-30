@@ -169,24 +169,15 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// This method returns the value of the first node the XPath expression addresses.
         /// </summary>
         /// <param name="xPath">The compiled XPath expression</param>
-        public string GetValueFromNode(XPathExpression xPath)
+        /// <param name="queryParameters">Parameters for the compiled XPath expression</param>
+        public string GetValueFromNode(XPathExpression xPath, DictionaryEntry[] queryParameters = null)
         {
+            if (queryParameters != null) _paramContext.AddParam(queryParameters);
             string result = null;
             FindXPath(xPath);
             if (_xIter.MoveNext())
                 result = _xIter.Current.Value;
             return result;
-        }
-
-        /// <summary>
-        /// This method returns the value of the first node the XPath expression addresses.
-        /// </summary>
-        /// <param name="xPath">The compiled XPath expression</param>
-        /// <param name="queryParameters">Parameters for the compiled XPath expression</param>
-        public string GetValueFromNode(XPathExpression xPath, DictionaryEntry[] queryParameters)
-        {
-            _paramContext.AddParam(queryParameters);
-            return GetValueFromNode(xPath);
         }
 
         /// <summary>
@@ -218,61 +209,14 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// in the context of the first node the XPath expression addresses.
         /// </summary>
         /// <param name="xPath">The compiled XPath expression</param>
-        public IXPathQueryManager GetXPathQueryManagerInContext(XPathExpression xPath)
-        {
-            FindXPath(xPath);
-            if (_xIter.MoveNext())
-                return new XPathQueryManager(_xPathDoc, _xIter, _paramContext);
-            return null;
-        }
-
-        /// <summary>
-        /// This method returns an instance of <see cref="XPathQueryManager"/> 
-        /// in the context of the first node the XPath expression addresses.
-        /// </summary>
-        /// <param name="xPath">The compiled XPath expression</param>
         /// <param name="queryParameters">Parameters for the compiled XPath expression</param>
-        public IXPathQueryManager GetXPathQueryManagerInContext(XPathExpression xPath, DictionaryEntry[] queryParameters)
+        public IXPathQueryManager GetXPathQueryManagerInContext(XPathExpression xPath, DictionaryEntry[] queryParameters = null)
         {
-            _paramContext.AddParam(queryParameters);
+            if (queryParameters != null) _paramContext.AddParam(queryParameters);
             FindXPath(xPath);
             if (_xIter.MoveNext())
                 return new XPathQueryManager(_xPathDoc, _xIter, _paramContext);
             return null;
-        }
-
-        /// <summary>
-        /// This method moves the current instance of <see cref="XPathQueryManager"/> 
-        /// to the context of the next node a previously handed over XPath expression addresses.
-        /// </summary>
-        public bool GetContextOfNextNode()
-        {
-            return GetContextOfNode((uint) _navDiff + 1);
-        }
-
-        /// <summary>
-        /// This method moves the current instance of <see cref="XPathQueryManager"/> 
-        /// to the context of node[index] of current position.
-        /// </summary>
-        /// <param name="index">The index of the node to search</param>
-        public bool GetContextOfNode(uint index)
-        {
-            if (_navDiff == -1) ++_navDiff;
-            while (_navDiff < index)
-            {
-                if (!_xNav.MoveToNext()) break;
-                _navDiff++;
-            }
-            while (_navDiff > index)
-            {
-                _xNav.MoveToPrevious();
-                _navDiff--;
-            }
-            if (_navDiff == index)
-                return true;
-
-            ResetNavigator();
-            return false;
         }
 
         /// <summary>
@@ -288,7 +232,6 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// </summary>
         public void ResetNavigator()
         {
-            GetContextOfNode(0);
             _navDiff--;
         }
 

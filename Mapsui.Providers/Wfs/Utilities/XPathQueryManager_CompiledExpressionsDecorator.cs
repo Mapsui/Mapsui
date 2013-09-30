@@ -13,14 +13,14 @@ namespace Mapsui.Providers.Wfs.Utilities
     /// It stores compiled XPath expressions for re-use.
     /// </summary>
     public class XPathQueryManager_CompiledExpressionsDecorator
-        : XPathQueryManager_Decorator, IXPathQueryManager
+        : XPathQueryManager_DecoratorBase, IXPathQueryManager
     {
         #region Fields
 
-        private static readonly Dictionary<string, XPathExpression> _CompiledExpressions =
+        private static readonly Dictionary<string, XPathExpression> CompiledExpressions =
             new Dictionary<string, XPathExpression>();
 
-        private static readonly NameTable _NameTable = new NameTable();
+        private static readonly NameTable NameTable = new NameTable();
 
         #endregion
 
@@ -39,7 +39,7 @@ namespace Mapsui.Providers.Wfs.Utilities
 
         #region IXPathQueryManager Member
 
-        //// <summary>
+        /// <summary>
         /// This method compiles an XPath string, if not already saved.  
         /// Otherwise it returns the available XPath compilation. 
         /// </summary>
@@ -49,14 +49,12 @@ namespace Mapsui.Providers.Wfs.Utilities
         {
             XPathExpression expr;
             // Compare pointers instead of literal values
-            if (ReferenceEquals(xPath, _NameTable.Get(xPath)))
-                return _CompiledExpressions[xPath];
-            else
-            {
-                _NameTable.Add(xPath);
-                _CompiledExpressions.Add(xPath, (expr = _XPathQueryManager.Compile(xPath)));
-                return expr;
-            }
+            if (ReferenceEquals(xPath, NameTable.Get(xPath)))
+                return CompiledExpressions[xPath];
+
+            NameTable.Add(xPath);
+            CompiledExpressions.Add(xPath, (expr = _XPathQueryManager.Compile(xPath)));
+            return expr;
         }
 
         /// <summary>
@@ -68,17 +66,7 @@ namespace Mapsui.Providers.Wfs.Utilities
             return new XPathQueryManager_CompiledExpressionsDecorator(_XPathQueryManager.Clone());
         }
 
-        /// <summary>
-        /// This method returns an instance of <see cref="XPathQueryManager_CompiledExpressionsDecorator"/> 
-        /// in the context of the first node the XPath expression addresses.
-        /// </summary>
-        /// <param name="xPath">The compiled XPath expression</param>
-        public override IXPathQueryManager GetXPathQueryManagerInContext(XPathExpression xPath)
-        {
-            IXPathQueryManager xPathQueryManager = _XPathQueryManager.GetXPathQueryManagerInContext(xPath);
-            if (xPathQueryManager == null) return null;
-            return new XPathQueryManager_CompiledExpressionsDecorator(xPathQueryManager);
-        }
+
 
         /// <summary>
         /// This method returns an instance of <see cref="XPathQueryManager_CompiledExpressionsDecorator"/> 
@@ -87,31 +75,16 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// <param name="xPath">The compiled XPath expression</param>
         /// <param name="queryParameters">Parameters for the compiled XPath expression</param>
         public override IXPathQueryManager GetXPathQueryManagerInContext(XPathExpression xPath,
-                                                                         DictionaryEntry[] queryParameters)
+                                                                         DictionaryEntry[] queryParameters = null)
         {
-            IXPathQueryManager xPathQueryManager = _XPathQueryManager.GetXPathQueryManagerInContext(xPath,
-                                                                                                    queryParameters);
+            IXPathQueryManager xPathQueryManager = (queryParameters == null)
+                                                       ? _XPathQueryManager.GetXPathQueryManagerInContext(xPath)
+                                                       : _XPathQueryManager.GetXPathQueryManagerInContext(xPath,
+                                                                                                          queryParameters);
+
+
             if (xPathQueryManager == null) return null;
             return new XPathQueryManager_CompiledExpressionsDecorator(xPathQueryManager);
-        }
-
-        /// <summary>
-        /// This method moves the current instance of <see cref="XPathQueryManager_CompiledExpressionsDecorator"/> 
-        /// to the context of the next node a previously handed over XPath expression addresses.
-        /// </summary>
-        public override bool GetContextOfNextNode()
-        {
-            return _XPathQueryManager.GetContextOfNextNode();
-        }
-
-        /// <summary>
-        /// This method moves the current instance of <see cref="XPathQueryManager_CompiledExpressionsDecorator"/> 
-        /// to the context of node[index] of current position.
-        /// </summary>
-        /// <param name="index">The index of the node to search</param>
-        public override bool GetContextOfNode(uint index)
-        {
-            return _XPathQueryManager.GetContextOfNode(index);
         }
 
         #endregion

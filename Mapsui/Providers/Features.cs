@@ -61,6 +61,14 @@ namespace Mapsui.Providers
             _features.Add(feature);
         }
 
+        public void AddRange(IEnumerable<IFeature> features)
+        {
+            foreach (var feature in features)
+            {
+                _features.Add(feature);
+            }
+        }
+
         public IEnumerator<IFeature> GetEnumerator()
         {
             return _features.GetEnumerator();
