@@ -102,8 +102,5 @@ namespace Mapsui.Providers.Wfs.Utilities
 
         #endregion
 
-        #region Constructors
-
-        #endregion
     }
 }

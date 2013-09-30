@@ -4,8 +4,9 @@
 using System.Collections;
 using System.IO;
 using System.Xml.XPath;
+using Mapsui.Providers.Wfs.Utilities;
 
-namespace Mapsui.Providers.Wfs.Utilities
+namespace Mapsui.Providers.Wfs.Xml
 {
     /// <summary>
     /// XPathQueryManager interface

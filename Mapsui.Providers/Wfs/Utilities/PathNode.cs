@@ -20,16 +20,16 @@ namespace Mapsui.Providers.Wfs.Utilities
     {
         #region Fields and Properties
 
-        private readonly string _XmlElementNodeName;
-        private readonly string _XmlElementNsUri;
-        private bool _IsActive = true;
+        private readonly string _xmlElementNodeName;
+        private readonly string _xmlElementNsUri;
+        private bool _isActive = true;
 
         /// <summary>
         /// Gets the namespace URI of the element-node
         /// </summary>
         internal string XmlElementNsUri
         {
-            get { return _XmlElementNsUri; }
+            get { return _xmlElementNsUri; }
         }
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// </summary>
         internal string XmlElementNodeName
         {
-            get { return _XmlElementNodeName; }
+            get { return _xmlElementNodeName; }
         }
 
         #endregion
@@ -52,8 +52,8 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// <param name="nameTable">A NameTable for storing namespace URI and local name</param>
         internal PathNode(string elementNsUri, string elementNodeName, NameTable nameTable)
         {
-            _XmlElementNsUri = nameTable.Add(elementNsUri);
-            _XmlElementNodeName = nameTable.Add(elementNodeName);
+            _xmlElementNsUri = nameTable.Add(elementNsUri);
+            _xmlElementNodeName = nameTable.Add(elementNodeName);
         }
 
         #endregion
@@ -68,12 +68,12 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// <param name="xmlReader">An XmlReader instance</param>
         public bool Matches(XmlReader xmlReader)
         {
-            if (!_IsActive) return true;
+            if (!_isActive) return true;
 
             //Compare pointers instead of literal values
-            if ((ReferenceEquals(_XmlElementNsUri, xmlReader.NameTable.Get(xmlReader.NamespaceURI)))
-                &&
-                (ReferenceEquals(_XmlElementNodeName, xmlReader.NameTable.Get(xmlReader.LocalName))))
+            if (xmlReader.NameTable != null && 
+                ((ReferenceEquals(_xmlElementNsUri, xmlReader.NameTable.Get(xmlReader.NamespaceURI))) &&
+                 (ReferenceEquals(_xmlElementNodeName, xmlReader.NameTable.Get(xmlReader.LocalName)))))
                 return true;
 
             return false;
@@ -85,8 +85,8 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// </summary>
         public bool IsActive
         {
-            get { return _IsActive; }
-            set { _IsActive = value; }
+            get { return _isActive; }
+            set { _isActive = value; }
         }
 
         #endregion
@@ -99,7 +99,7 @@ namespace Mapsui.Providers.Wfs.Utilities
     {
         #region Fields
 
-        private readonly List<IPathNode> _PathNodes = new List<IPathNode>();
+        private readonly List<IPathNode> _pathNodes = new List<IPathNode>();
 
         #endregion
 
@@ -112,7 +112,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         internal AlternativePathNodesCollection(params IPathNode[] pathNodes)
         {
             if (pathNodes == null) throw new ArgumentNullException();
-            _PathNodes.AddRange(pathNodes);
+            _pathNodes.AddRange(pathNodes);
         }
 
         #endregion
@@ -125,7 +125,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// <param name="reader">An XmlReader instance</param>
         public bool Matches(XmlReader reader)
         {
-            foreach (IPathNode pathNode in _PathNodes)
+            foreach (IPathNode pathNode in _pathNodes)
                 if (pathNode.Matches(reader)) return true;
             return false;
         }
@@ -136,10 +136,10 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// </summary>
         public bool IsActive
         {
-            get { return _PathNodes[0].IsActive; }
+            get { return _pathNodes[0].IsActive; }
             set
             {
-                foreach (IPathNode pathNode in _PathNodes)
+                foreach (IPathNode pathNode in _pathNodes)
                     pathNode.IsActive = value;
             }
         }

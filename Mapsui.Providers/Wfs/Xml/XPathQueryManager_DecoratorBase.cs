@@ -4,18 +4,19 @@
 using System.Collections;
 using System.IO;
 using System.Xml.XPath;
+using Mapsui.Providers.Wfs.Utilities;
 
-namespace Mapsui.Providers.Wfs.Utilities
+namespace Mapsui.Providers.Wfs.Xml
 {
     /// <summary>
     /// This class should be the base class of all decorators for classes
     /// implementing <see cref="IXPathQueryManager"/>.
     /// </summary>
-    public abstract class XPathQueryManager_DecoratorBase
+    public abstract class XPathQueryManagerDecoratorBase
     {
         #region Fields
 
-        protected IXPathQueryManager _XPathQueryManager;
+        protected IXPathQueryManager XPathQueryManager;
 
         #endregion
 
@@ -25,9 +26,9 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// Protected constructor for the abstract class.
         /// </summary>
         /// <param name="xPathQueryManager">An instance implementing <see cref="IXPathQueryManager"/> to operate on</param>
-        protected XPathQueryManager_DecoratorBase(IXPathQueryManager xPathQueryManager)
+        protected XPathQueryManagerDecoratorBase(IXPathQueryManager xPathQueryManager)
         {
-            _XPathQueryManager = xPathQueryManager;
+            XPathQueryManager = xPathQueryManager;
         }
 
         #endregion
@@ -41,7 +42,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// <param name="ns">A namespace URI</param>
         public virtual void AddNamespace(string prefix, string ns)
         {
-            _XPathQueryManager.AddNamespace(prefix, ns);
+            XPathQueryManager.AddNamespace(prefix, ns);
         }
 
         /// <summary>
@@ -51,7 +52,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// <returns>A compiled XPath expression</returns>
         public virtual XPathExpression Compile(string xPath)
         {
-            return _XPathQueryManager.Compile(xPath);
+            return XPathQueryManager.Compile(xPath);
         }
 
         /// <summary>
@@ -67,8 +68,8 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// <param name="queryParameters">Parameters for the compiled XPath expression</param>
         public virtual string GetValueFromNode(XPathExpression xPath, DictionaryEntry[] queryParameters = null)
         {
-            if (queryParameters == null) return _XPathQueryManager.GetValueFromNode(xPath);
-            else return _XPathQueryManager.GetValueFromNode(xPath, queryParameters);
+            if (queryParameters == null) return XPathQueryManager.GetValueFromNode(xPath);
+            return XPathQueryManager.GetValueFromNode(xPath, queryParameters);
         }
 
         /// <summary>
@@ -84,7 +85,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// </summary>
         public virtual void ResetNamespaces()
         {
-            _XPathQueryManager.ResetNamespaces();
+            XPathQueryManager.ResetNamespaces();
         }
 
         /// <summary>
@@ -93,7 +94,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// <param name="documentStream">A Stream with XML data</param>
         public virtual void SetDocumentToParse(Stream documentStream)
         {
-            _XPathQueryManager.SetDocumentToParse(documentStream);
+            XPathQueryManager.SetDocumentToParse(documentStream);
         }
 
         /// <summary>
@@ -102,7 +103,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// <param name="httpClientUtil">A configured <see cref="HttpClientUtil"/> instance for performing web requests</param>
         public virtual void SetDocumentToParse(HttpClientUtil httpClientUtil)
         {
-            _XPathQueryManager.SetDocumentToParse(httpClientUtil);
+            XPathQueryManager.SetDocumentToParse(httpClientUtil);
         }
 
         #endregion

@@ -14,30 +14,14 @@ namespace Mapsui.Providers.Wfs.Utilities
         // XPath                                                              //                      
         // GetCapabilities WFS 1.0.0                                          //
         ////////////////////////////////////////////////////////////////////////
-
-        private static string _XPATH_BBOX =
-            "/wfs:WFS_Capabilities/wfs:FeatureTypeList/wfs:FeatureType[_PARAMCOMP_(wfs:Name, $_param1)]/wfs:LatLongBoundingBox";
-
-        private static string _XPATH_BOUNDINGBOXMAXX = "@maxx";
-        private static string _XPATH_BOUNDINGBOXMAXY = "@maxy";
-        private static string _XPATH_BOUNDINGBOXMINX = "@minx";
-        private static string _XPATH_BOUNDINGBOXMINY = "@miny";
-
-        private static string _XPATH_DESCRIBEFEATURETYPERESOURCE =
-            "/wfs:WFS_Capabilities/wfs:Capability/wfs:Request/wfs:DescribeFeatureType/wfs:DCPType/wfs:HTTP/wfs:Post/@onlineResource";
-
-        private static string _XPATH_GETFEATURERESOURCE =
-            "/wfs:WFS_Capabilities/wfs:Capability/wfs:Request/wfs:GetFeature/wfs:DCPType/wfs:HTTP/wfs:Post/@onlineResource";
-
-        private static string _XPATH_SRS =
-            "/wfs:WFS_Capabilities/wfs:FeatureTypeList/wfs:FeatureType[_PARAMCOMP_(wfs:Name, $_param1)]/wfs:SRS";
+ 
 
         /// <summary>
         /// Gets an XPath string addressing the SRID of a featuretype in 'GetCapabilities'.
         /// </summary>
         public string XPATH_SRS
         {
-            get { return _XPATH_SRS; }
+            get { return "/wfs:WFS_Capabilities/wfs:FeatureTypeList/wfs:FeatureType[_PARAMCOMP_(wfs:Name, $_param1)]/wfs:SRS"; }
         }
 
         /// <summary>
@@ -45,7 +29,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// </summary>
         public string XPATH_BBOX
         {
-            get { return _XPATH_BBOX; }
+            get { return "/wfs:WFS_Capabilities/wfs:FeatureTypeList/wfs:FeatureType[_PARAMCOMP_(wfs:Name, $_param1)]/wfs:LatLongBoundingBox"; }
         }
 
         /// <summary>
@@ -53,7 +37,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// </summary>
         public string XPATH_GETFEATURERESOURCE
         {
-            get { return _XPATH_GETFEATURERESOURCE; }
+            get { return "/wfs:WFS_Capabilities/wfs:Capability/wfs:Request/wfs:GetFeature/wfs:DCPType/wfs:HTTP/wfs:Post/@onlineResource"; }
         }
 
         /// <summary>
@@ -61,7 +45,11 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// </summary>
         public string XPATH_DESCRIBEFEATURETYPERESOURCE
         {
-            get { return _XPATH_DESCRIBEFEATURETYPERESOURCE; }
+            get
+            {
+                return
+                    "/wfs:WFS_Capabilities/wfs:Capability/wfs:Request/wfs:DescribeFeatureType/wfs:DCPType/wfs:HTTP/wfs:Post/@onlineResource";
+            }
         }
 
         /// <summary>
@@ -69,7 +57,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// </summary>
         public string XPATH_BOUNDINGBOXMINX
         {
-            get { return _XPATH_BOUNDINGBOXMINX; }
+            get { return "@minx"; }
         }
 
         /// <summary>
@@ -77,7 +65,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// </summary>
         public string XPATH_BOUNDINGBOXMAXX
         {
-            get { return _XPATH_BOUNDINGBOXMAXX; }
+            get { return "@maxx"; }
         }
 
         /// <summary>
@@ -85,7 +73,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// </summary>
         public string XPATH_BOUNDINGBOXMINY
         {
-            get { return _XPATH_BOUNDINGBOXMINY; }
+            get { return "@miny"; }
         }
 
         /// <summary>
@@ -93,7 +81,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// </summary>
         public string XPATH_BOUNDINGBOXMAXY
         {
-            get { return _XPATH_BOUNDINGBOXMAXY; }
+            get { return "@maxy"; }
         }
 
         #endregion

@@ -8,6 +8,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Net;
+using Mapsui.Providers.Wfs.Xml;
 
 namespace Mapsui.Providers.Wfs
 {
@@ -449,7 +450,7 @@ namespace Mapsui.Providers.Wfs
                 {
                     /* Initialize IXPathQueryManager with configured HttpClientUtil */
                     _featureTypeInfoQueryManager =
-                        new XPathQueryManager_CompiledExpressionsDecorator(new XPathQueryManager());
+                        new XPathQueryManagerCompiledExpressionsDecorator(new XPathQueryManager());
                     _featureTypeInfoQueryManager.SetDocumentToParse(
                         config.ConfigureForWfsGetCapabilitiesRequest(_httpClientUtil, _getCapabilitiesUri));
                     /* Namespaces for XPath queries */

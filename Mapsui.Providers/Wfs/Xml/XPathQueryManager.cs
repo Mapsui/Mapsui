@@ -9,8 +9,9 @@ using System.IO;
 using System.Xml;
 using System.Xml.XPath;
 using System.Xml.Xsl;
+using Mapsui.Providers.Wfs.Utilities;
 
-namespace Mapsui.Providers.Wfs.Utilities
+namespace Mapsui.Providers.Wfs.Xml
 {
     /// <summary>
     /// This class provides an easy-to-use interface for complex (parameterized) XPath queries.  
@@ -19,7 +20,6 @@ namespace Mapsui.Providers.Wfs.Utilities
     {
         #region Fields
 
-        private int _navDiff = -1;
         private CustomQueryContext _paramContext;
         private XPathNodeIterator _xIter;
         private XPathNavigator _xNav;
@@ -225,14 +225,6 @@ namespace Mapsui.Providers.Wfs.Utilities
         public void ResetNamespaces()
         {
             _paramContext = null;
-        }
-
-        /// <summary>
-        /// This method resets the inherent XPathNavigator instance.
-        /// </summary>
-        public void ResetNavigator()
-        {
-            _navDiff--;
         }
 
         /// <summary>
@@ -446,7 +438,7 @@ namespace Mapsui.Providers.Wfs.Utilities
             {
                 object param = GetParam(name);
                 if (param != null)
-                    return new ParamFunctionVar(name, param);
+                    return new ParamFunctionVar(param);
                 return null;
             }
 
@@ -760,7 +752,6 @@ namespace Mapsui.Providers.Wfs.Utilities
         {
             #region Fields
 
-            private string _name;
             private readonly object _param;
 
             #endregion
@@ -770,11 +761,9 @@ namespace Mapsui.Providers.Wfs.Utilities
             /// <summary>
             /// Initializes a new instance of the <see cref="ParamFunctionVar"/> class.
             /// </summary>
-            /// <param name="name">The name of the variable</param>
             /// <param name="param">The parameter</param>
-            public ParamFunctionVar(string name, object param)
+            public ParamFunctionVar(object param)
             {
-                _name = name;
                 _param = param;
             }
 

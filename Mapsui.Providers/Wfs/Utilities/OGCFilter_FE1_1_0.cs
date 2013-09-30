@@ -34,17 +34,17 @@ namespace Mapsui.Providers.Wfs.Utilities
 
         #region Fields and Properties
 
-        private List<IFilter> _Filters;
+        private List<IFilter> _filters;
 
-        private JunctorEnum _Junctor = JunctorEnum.And;
+        private JunctorEnum _junctor = JunctorEnum.And;
 
         /// <summary>
         /// Gets and sets a collection of instances implementing <see cref="IFilter"/>.
         /// </summary>
         public List<IFilter> Filters
         {
-            get { return _Filters; }
-            set { _Filters = value; }
+            get { return _filters; }
+            set { _filters = value; }
         }
 
         /// <summary>
@@ -52,8 +52,8 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// </summary>
         public JunctorEnum Junctor
         {
-            get { return _Junctor; }
-            set { _Junctor = value; }
+            get { return _junctor; }
+            set { _junctor = value; }
         }
 
         #endregion
@@ -65,7 +65,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// </summary>
         public OGCFilterCollection()
         {
-            _Filters = new List<IFilter>();
+            _filters = new List<IFilter>();
         }
 
         #endregion
@@ -78,7 +78,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// <param name="filter"></param>
         public void AddFilter(IFilter filter)
         {
-            _Filters.Add(filter);
+            _filters.Add(filter);
         }
 
         /// <summary>
@@ -88,7 +88,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         public void AddFilterCollection(OGCFilterCollection filterCollection)
         {
             if (!ReferenceEquals(filterCollection, this))
-                _Filters.Add(filterCollection);
+                _filters.Add(filterCollection);
         }
 
         #endregion
@@ -101,11 +101,11 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// <returns>An XML string</returns>
         public string Encode()
         {
-            StringBuilder filterBuilder = new StringBuilder();
-            filterBuilder.Append("<" + _Junctor + ">");
+            var filterBuilder = new StringBuilder();
+            filterBuilder.Append("<" + _junctor + ">");
             foreach (IFilter filter in Filters)
                 filterBuilder.Append(filter.Encode());
-            filterBuilder.Append("</" + _Junctor + ">");
+            filterBuilder.Append("</" + _junctor + ">");
             return filterBuilder.ToString();
         }
 
@@ -116,11 +116,11 @@ namespace Mapsui.Providers.Wfs.Utilities
     /// This class is the base class of all filters.
     /// It stores the filter arguments.
     /// </summary>
-    public abstract class OGCFilterBase
+    public abstract class OgcFilterBase
     {
         #region Fields
 
-        protected string[] _Args;
+        protected string[] Args;
 
         #endregion
 
@@ -130,9 +130,9 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// Protected constructor for the abstract class.
         /// </summary>
         /// <param name="args">An array of arguments for the filter</param>
-        protected OGCFilterBase(string[] args)
+        protected OgcFilterBase(string[] args)
         {
-            _Args = args;
+            Args = args;
         }
 
         #endregion
@@ -141,7 +141,7 @@ namespace Mapsui.Providers.Wfs.Utilities
     /// <summary>
     /// This class provides an interface for creating an OGC PropertyIsEqualToFilter Version 1.1.0.
     /// </summary>
-    public class PropertyIsEqualToFilter_FE1_1_0 : OGCFilterBase, IFilter
+    public class PropertyIsEqualToFilter_FE1_1_0 : OgcFilterBase, IFilter
     {
         #region Constructors
 
@@ -165,9 +165,9 @@ namespace Mapsui.Providers.Wfs.Utilities
         {
             return @"
             <PropertyIsEqualTo>
-                <PropertyName>" + _Args[0] +
+                <PropertyName>" + Args[0] +
                    @"</PropertyName>
-                <Literal>" + _Args[1] +
+                <Literal>" + Args[1] +
                    @"</Literal>
             </PropertyIsEqualTo>";
         }
@@ -178,7 +178,7 @@ namespace Mapsui.Providers.Wfs.Utilities
     /// <summary>
     /// This class provides an interface for creating an OGC PropertyIsNotEqualToFilter Version 1.1.0.
     /// </summary>
-    public class PropertyIsNotEqualToFilter_FE1_1_0 : OGCFilterBase, IFilter
+    public class PropertyIsNotEqualToFilter_FE1_1_0 : OgcFilterBase, IFilter
     {
         #region Constructors
 
@@ -202,9 +202,9 @@ namespace Mapsui.Providers.Wfs.Utilities
         {
             return @"
             <PropertyIsNotEqualTo>
-                <PropertyName>" + _Args[0] +
+                <PropertyName>" + Args[0] +
                    @"</PropertyName>
-                <Literal>" + _Args[1] +
+                <Literal>" + Args[1] +
                    @"</Literal>
             </PropertyIsNotEqualTo>";
         }
@@ -215,7 +215,7 @@ namespace Mapsui.Providers.Wfs.Utilities
     /// <summary>
     /// This class provides an interface for creating an OGC PropertyIsLessThanFilter Version 1.1.0.
     /// </summary>
-    public class PropertyIsLessThanFilter_FE1_1_0 : OGCFilterBase, IFilter
+    public class PropertyIsLessThanFilter_FE1_1_0 : OgcFilterBase, IFilter
     {
         #region Constructors
 
@@ -239,9 +239,9 @@ namespace Mapsui.Providers.Wfs.Utilities
         {
             return @"
             <PropertyIsLessThan>
-                <PropertyName>" + _Args[0] +
+                <PropertyName>" + Args[0] +
                    @"</PropertyName>
-                <Literal>" + _Args[1] +
+                <Literal>" + Args[1] +
                    @"</Literal>
             </PropertyIsLessThan>";
         }
@@ -252,7 +252,7 @@ namespace Mapsui.Providers.Wfs.Utilities
     /// <summary>
     /// This class provides an interface for creating an OGC PropertyIsGreaterThanFilter Version 1.1.0.
     /// </summary>
-    public class PropertyIsGreaterThanFilter_FE1_1_0 : OGCFilterBase, IFilter
+    public class PropertyIsGreaterThanFilter_FE1_1_0 : OgcFilterBase, IFilter
     {
         #region Constructors
 
@@ -276,9 +276,9 @@ namespace Mapsui.Providers.Wfs.Utilities
         {
             return @"
             <PropertyIsGreaterThan>
-                <PropertyName>" + _Args[0] +
+                <PropertyName>" + Args[0] +
                    @"</PropertyName>
-                <Literal>" + _Args[1] +
+                <Literal>" + Args[1] +
                    @"</Literal>
             </PropertyIsGreaterThan>";
         }
@@ -289,7 +289,7 @@ namespace Mapsui.Providers.Wfs.Utilities
     /// <summary>
     /// This class provides an interface for creating an OGC PropertyIsLessThanOrEqualToFilter Version 1.1.0.
     /// </summary>
-    public class PropertyIsLessThanOrEqualToFilter_FE1_1_0 : OGCFilterBase, IFilter
+    public class PropertyIsLessThanOrEqualToFilter_FE1_1_0 : OgcFilterBase, IFilter
     {
         #region Constructors
 
@@ -313,9 +313,9 @@ namespace Mapsui.Providers.Wfs.Utilities
         {
             return @"
             <PropertyIsLessThanOrEqualTo>
-                <PropertyName>" + _Args[0] +
+                <PropertyName>" + Args[0] +
                    @"</PropertyName>
-                <Literal>" + _Args[1] +
+                <Literal>" + Args[1] +
                    @"</Literal>
             </PropertyIsLessThanOrEqualTo>";
         }
@@ -326,7 +326,7 @@ namespace Mapsui.Providers.Wfs.Utilities
     /// <summary>
     /// This class provides an interface for creating an OGC PropertyIsGreaterThanOrEqualToFilter Version 1.1.0.
     /// </summary>
-    public class PropertyIsGreaterThanOrEqualToFilter_FE1_1_0 : OGCFilterBase, IFilter
+    public class PropertyIsGreaterThanOrEqualToFilter_FE1_1_0 : OgcFilterBase, IFilter
     {
         #region Constructors
 
@@ -350,9 +350,9 @@ namespace Mapsui.Providers.Wfs.Utilities
         {
             return @"
             <PropertyIsGreaterThanOrEqualTo>
-                <PropertyName>" + _Args[0] +
+                <PropertyName>" + Args[0] +
                    @"</PropertyName>
-                <Literal>" + _Args[1] +
+                <Literal>" + Args[1] +
                    @"</Literal>
             </PropertyIsGreaterThanOrEqualTo>";
         }
@@ -363,7 +363,7 @@ namespace Mapsui.Providers.Wfs.Utilities
     /// <summary>
     /// This class provides an interface for creating an OGC PropertyIsBetweenFilter Version 1.1.0.
     /// </summary>
-    public class PropertyIsBetweenFilter_FE1_1_0 : OGCFilterBase, IFilter
+    public class PropertyIsBetweenFilter_FE1_1_0 : OgcFilterBase, IFilter
     {
         #region Constructors
 
@@ -387,11 +387,11 @@ namespace Mapsui.Providers.Wfs.Utilities
         {
             return @"
             <PropertyIsBetween>
-                <PropertyName>" + _Args[0] +
+                <PropertyName>" + Args[0] +
                    @"</PropertyName>
-                    <LowerBoundary><Literal>" + _Args[1] +
+                    <LowerBoundary><Literal>" + Args[1] +
                    @"</Literal></LowerBoundary>
-                    <UpperBoundary><Literal>" + _Args[2] +
+                    <UpperBoundary><Literal>" + Args[2] +
                    @"</Literal></UpperBoundary>
             </PropertyIsBetween>";
         }
@@ -402,7 +402,7 @@ namespace Mapsui.Providers.Wfs.Utilities
     /// <summary>
     /// This class provides an interface for creating an OGC PropertyIsLikeFilter Version 1.1.0.
     /// </summary>
-    public class PropertyIsLikeFilter_FE1_1_0 : OGCFilterBase, IFilter
+    public class PropertyIsLikeFilter_FE1_1_0 : OgcFilterBase, IFilter
     {
         #region Constructors
 
@@ -428,8 +428,8 @@ namespace Mapsui.Providers.Wfs.Utilities
                 @"
             <PropertyIsLike wildCard='*' singleChar='#' escapeChar='!'>
                 <PropertyName>" +
-                _Args[0] + @"</PropertyName>
-                <Literal>" + _Args[1] +
+                Args[0] + @"</PropertyName>
+                <Literal>" + Args[1] +
                 @"</Literal>
             </PropertyIsLike>";
         }
@@ -440,7 +440,7 @@ namespace Mapsui.Providers.Wfs.Utilities
     /// <summary>
     /// This class provides an interface for creating an OGC FeatureIdFilter Version 1.1.0.
     /// </summary>
-    public class FeatureIdFilter_FE1_1_0 : OGCFilterBase, IFilter
+    public class FeatureIdFilter_FE1_1_0 : OgcFilterBase, IFilter
     {
         #region Constructors
 
@@ -458,14 +458,9 @@ namespace Mapsui.Providers.Wfs.Utilities
 
         public string Encode()
         {
-            return "<FeatureId fid=" + _Args[0] + "/>";
+            return "<FeatureId fid=" + Args[0] + "/>";
         }
 
         #endregion
-
-        /// <summary>
-        /// This method encodes the filter in XML.
-        /// </summary>
-        /// <returns>An XML string</returns>
     }
 }
