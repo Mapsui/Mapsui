@@ -49,25 +49,25 @@ namespace Mapsui.Rendering.MonoGame
             if (feature.Geometry is IRaster)
             {
                 var raster = (feature.Geometry as IRaster);
-                var destination = ToXna(RoundToPixel(WorldToScreen(viewport, raster.GetBoundingBox())));
-                var source = new Rectangle(0, 0, 256, 256);
-
-                raster.Data.Position = 0;
-                if (!feature.RenderedGeometry.Keys.Contains(new VectorStyle()))
+                
+                if (!feature.RenderedGeometry.Keys.Contains(style))
                 {
-                    feature.RenderedGeometry[new VectorStyle()] = Texture2D.FromStream(_game.GraphicsDevice, raster.Data);
+                    feature.RenderedGeometry[style] = GeometryRenderer.RenderRaster(_game.GraphicsDevice, raster);
                 }
-                _spriteBatch.Draw(feature.RenderedGeometry[new VectorStyle()] as Texture2D, destination, source, Color.White);
+                var bitmap = feature.RenderedGeometry[style] as Texture2D;
+                if (bitmap == null) throw new Exception("Incorrect geometry type");
+                var destination = RoundToPixel(WorldToScreen(viewport, raster.GetBoundingBox())).ToXna();
+                _spriteBatch.Draw(bitmap, destination, bitmap.Bounds, Color.White);
             }
             if (feature.Geometry is Point)
             {
                 if (style is SymbolStyle) DrawPoint(viewport, style as SymbolStyle, feature);
             }
         }
-
+        
         private void DrawPoint(IViewport viewport, SymbolStyle style, IFeature feature)
         {
-            var destination = ToXna(viewport.WorldToScreen(feature.Geometry as Point));
+            var destination = viewport.WorldToScreen(feature.Geometry as Point).ToXna();
 
             if (!_renderedResources.ContainsKey(style.BitmapLocation))
             {
@@ -78,60 +78,21 @@ namespace Mapsui.Rendering.MonoGame
             
             var texture = _renderedResources[style.BitmapLocation];
             
-            _spriteBatch.Draw(texture,
-                              destination,
-                              null,
-                              Color.Yellow,
-                              0,
-                              Vector2.Zero,
-                              new Vector2(10, 10),
-                              SpriteEffects.None,
-                              0);
+            //_spriteBatch.Draw(texture,
+            //                  destination,
+            //                  null,
+            //                  Color.Yellow,
+            //                  0,
+            //                  Vector2.Zero,
+            //                  new Vector2(10, 10),
+            //                  SpriteEffects.None,
+            //                  0);
 
             const int width = 10;
             const int height = 10;
-            var rect = new Rectangle((int) (destination.X - width*0.5), (int) (destination.Y - height*0.5),
-                                     width, height);
+            var rect = new Rectangle((int) (destination.X - width*0.5), (int) (destination.Y - height*0.5), width, height);
 
             _spriteBatch.Draw(texture, rect, Color.Red);
-        }
-
-        private static BoundingBox WorldToScreen(IViewport viewport, BoundingBox boundingBox)
-        {
-            var box = new BoundingBox
-                {
-                    Min = viewport.WorldToScreen(boundingBox.Min),
-                    Max = viewport.WorldToScreen(boundingBox.Max)
-                };
-            return box;
-        }
-
-        private static Rectangle ToXna(BoundingBox boundingBox)
-        {
-            return new Rectangle
-            {
-                X = (int)boundingBox.Left,
-                Y = (int)boundingBox.Bottom,
-                Width = (int)boundingBox.Width,
-                Height = (int)boundingBox.Height
-            };
-        }
-
-        private static Vector2 ToXna(Point point)
-        {
-            return new Vector2((float)point.X, (float)point.Y);
-        }
-
-        public static BoundingBox RoundToPixel(BoundingBox dest)
-        {
-            // To get seamless aligning you need to round the 
-            // corner coordinates to pixel. The new width and
-            // height will be a result of that.
-            return  new BoundingBox(
-                Math.Round(dest.Left),
-                Math.Round(dest.Top),
-                Math.Round(dest.Right),
-                Math.Round(dest.Bottom));
         }
 
         public MemoryStream ToBitmapStream(double width, double height)
@@ -143,6 +104,28 @@ namespace Mapsui.Rendering.MonoGame
             var stream = new MemoryStream();
             renderTarget.SaveAsPng(stream, (int)width, (int)height);
             return stream;
+        }
+
+        private static BoundingBox WorldToScreen(IViewport viewport, BoundingBox boundingBox)
+        {
+            var box = new BoundingBox
+            {
+                Min = viewport.WorldToScreen(boundingBox.Min),
+                Max = viewport.WorldToScreen(boundingBox.Max)
+            };
+            return box;
+        }
+        
+        public static BoundingBox RoundToPixel(BoundingBox dest)
+        {
+            // To get seamless aligning you need to round the 
+            // corner coordinates to pixel. The new width and
+            // height will be a result of that.
+            return new BoundingBox(
+                Math.Round(dest.Left),
+                Math.Round(dest.Top),
+                Math.Round(dest.Right),
+                Math.Round(dest.Bottom));
         }
     }
 }

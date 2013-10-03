@@ -136,7 +136,7 @@ namespace Mapsui.Layers
                 Cache = new MemoryProvider(features);
 
                 IsFetching = false;
-                OnDataChanged();
+                OnDataChanged(new DataChangedEventArgs(null, false, null, LayerName));
 
                 if (NeedsUpdate)
                 {
@@ -145,16 +145,6 @@ namespace Mapsui.Layers
             }
             catch (InvalidOperationException) { }
         }
-
-        protected void OnDataChanged()
-        {
-            if (DataChanged != null)
-            {
-                DataChanged(this, new DataChangedEventArgs(null, false, null, LayerName));
-            }
-        }
-
-        public override event DataChangedEventHandler DataChanged;
 
         public override void ClearCache()
         {

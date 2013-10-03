@@ -3,41 +3,39 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mapsui="clr-namespace:Mapsui.Windows;assembly=Mapsui.Windows"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:Wpf="clr-namespace:Mapsui.Wpf"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:wpf="clr-namespace:Mapsui.Wpf"
         mc:Ignorable="d"
     d:DesignWidth="584" d:DesignHeight="278" 
     Title="Mapsui.Wpf" SizeToContent="Manual">
     <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="Gray">
-        <mapsui:MapControl x:Name="mapControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+        <mapsui:MapControl x:Name="MapControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
         <Border BorderBrush="White" Opacity="0.75" Margin="10" Background="White" BorderThickness="6" CornerRadius="2" VerticalAlignment="Top" HorizontalAlignment="Left">
             <StackPanel Width="Auto">
                 <RadioButton IsChecked="True" FontSize="16" Content="OSM" Margin="4,4,4,4" Click="OsmClick"/>
                 <RadioButton FontSize="16" Content="PointSymbols" Margin="4,4,4,4" Click="PointSymbolsClick"/>
+                <RadioButton FontSize="16" Content="Points with stacked labels" Margin="4,4,4,4" Click="RandomPointWithStackLabel"/>
                 <RadioButton FontSize="16" Content="Bing Maps" Margin="4,4,4,4" Click="BingMapsClick"/>
                 <RadioButton FontSize="16" Content="WMS - tiled requests" Margin="4,4,4,4" Click="GeodanWmsClick"/>
                 <RadioButton FontSize="16" Content="TMS" Margin="4,4,4,4" Click="GeodanTmsClick"/>
                 <RadioButton FontSize="16" Content="WMS-C"  Margin="4,4,4,4" Click="GeodanWmscClick"/>
                 <RadioButton FontSize="16" Content="Shapefile"  Margin="4,4,4,4" Click="ShapefileClick" />
-                <RadioButton FontSize="16" Content="GroupTileLayer"  Margin="4,4,4,4" Click="GroupTileLayerClick"/>
                 <RadioButton FontSize="16" Content="MapTiler"  Margin="4,4,4,4" Click="MapTilerClick" />
                 <RadioButton FontSize="16" Content="WMS"  Margin="4,4,4,4" Click="WmsClick" />
                 <RadioButton FontSize="16" Content="ArcGISImageService"  Margin="4,4,4,4" Click="ArcGISImageServiceClick" />
-                <RadioButton FontSize="16" Content="WFS"  Margin="4,4,4,4" Click="WfsClick" />
-
             </StackPanel>
         </Border>
         <Border BorderBrush="White" Opacity="0.75" Margin="10" Background="White" BorderThickness="6" CornerRadius="2" VerticalAlignment="Top" HorizontalAlignment="Right">
-            <Wpf:LayerList x:Name="layerList"></Wpf:LayerList>
+            <wpf:LayerList x:Name="LayerList"></wpf:LayerList>
         </Border>
-        <Border x:Name="statistics" BorderBrush="White" Opacity="0.75" Margin="10" Background="White" BorderThickness="6" CornerRadius="2" HorizontalAlignment="Center" VerticalAlignment="Top">
+        <Border x:Name="Statistics" BorderBrush="White" Opacity="0.75" Margin="10" Background="White" BorderThickness="6" CornerRadius="2" HorizontalAlignment="Center" VerticalAlignment="Top">
             <StackPanel  Orientation="Vertical" HorizontalAlignment="Center"  >
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Fps:  "/>
-                    <TextBlock x:Name="fps"/>
+                    <TextBlock x:Name="Fps"/>
                 </StackPanel>
             </StackPanel>
         </Border>
-        <Border x:Name="errorBorder" BorderBrush="White" Opacity="0" Margin="10" Background="White" BorderThickness="6" CornerRadius="2" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+        <Border x:Name="ErrorBorder" BorderBrush="White" Opacity="0" Margin="10" Background="White" BorderThickness="6" CornerRadius="2" VerticalAlignment="Bottom" HorizontalAlignment="Right">
             <StackPanel Orientation="Horizontal" >
                 <TextBlock Text="Error:  "/>
                 <TextBlock x:Name="Error" Text="No Error"/>

@@ -33,12 +33,12 @@ namespace Mapsui.Layers
             public IEnumerable<IFeature> Features { get; set; }
         }
 
-        protected bool isFetching;
-        protected bool needsUpdate = true;
-        protected double newResolution;
-        protected BoundingBox newExtent;
-        protected List<FeatureSets> featureSets = new List<FeatureSets>();
-        protected Timer startFetchTimer; 
+        protected bool IsFetching;
+        protected bool NeedsUpdate = true;
+        protected double NewResolution;
+        protected BoundingBox NewExtent;
+        protected List<FeatureSets> Sets = new List<FeatureSets>();
+        protected Timer StartFetchTimer; 
 
         public IProvider DataSource { get; set; }
 
@@ -75,20 +75,20 @@ namespace Mapsui.Layers
         public ImageLayer(string layername)
         {
             LayerName = layername;
-            startFetchTimer = new Timer(StartFetchTimerElapsed, null, 500, int.MaxValue);
+            StartFetchTimer = new Timer(StartFetchTimerElapsed, null, 500, int.MaxValue);
         }
 
         void StartFetchTimerElapsed(object state)
         {
-            if (newExtent == null) return;
-            StartNewFetch(newExtent, newResolution);
-            startFetchTimer.Dispose();
+            if (NewExtent == null) return;
+            StartNewFetch(NewExtent, NewResolution);
+            StartFetchTimer.Dispose();
         }
 
         public override IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
         {
             var result = new List<IFeature>();
-            foreach (var featureSet in featureSets.OrderBy(c => c.TimeRequested))
+            foreach (var featureSet in Sets.OrderBy(c => c.TimeRequested))
             {
                 result.AddRange(GetFeaturesInView(box, featureSet.Features));
             }
@@ -119,22 +119,22 @@ namespace Mapsui.Layers
             if (DataSource == null) return;
             if (!changeEnd) return;
 
-            newExtent = extent;
-            newResolution = resolution;
+            NewExtent = extent;
+            NewResolution = resolution;
 
-            if (isFetching)
+            if (IsFetching)
             {
-                needsUpdate = true;
+                NeedsUpdate = true;
                 return;
             }
-            startFetchTimer.Dispose();
-            startFetchTimer = new Timer(StartFetchTimerElapsed, null, 500, int.MaxValue);
+            StartFetchTimer.Dispose();
+            StartFetchTimer = new Timer(StartFetchTimerElapsed, null, 500, int.MaxValue);
         }
 
         protected void StartNewFetch(BoundingBox extent, double resolution)
         {
-            isFetching = true;
-            needsUpdate = false;
+            IsFetching = true;
+            NeedsUpdate = false;
 
             if (Transformation != null && Transformation.MapSRID != -1 && SRID != -1)
                 extent = Transformation.Transfrom(Transformation.MapSRID, SRID, extent);
@@ -157,33 +157,23 @@ namespace Mapsui.Layers
                 }
             }
 
-            featureSets.Add(new FeatureSets { TimeRequested = (long)state, Features = features}); 
+            Sets.Add(new FeatureSets { TimeRequested = (long)state, Features = features}); 
             
             //Keep only two most recent sets. The older ones will be removed
-            featureSets = featureSets.OrderByDescending(c => c.TimeRequested).Take(2).ToList();
+            Sets = Sets.OrderByDescending(c => c.TimeRequested).Take(2).ToList();
             
-            isFetching = false;
-            OnDataChanged();
+            IsFetching = false;
+            OnDataChanged(new DataChangedEventArgs(null, false, null, LayerName));
 
-            if (needsUpdate)
+            if (NeedsUpdate)
             {
-                StartNewFetch(newExtent, newResolution);
+                StartNewFetch(NewExtent, NewResolution);
             }
         }
-
-        protected void OnDataChanged()
-        {
-            if (DataChanged != null)
-            {
-                DataChanged(this, new DataChangedEventArgs(null, false, null, LayerName));
-            }
-        }
-
-        public override event DataChangedEventHandler DataChanged;
 
         public override void ClearCache()
         {
-            foreach (var cache in featureSets)
+            foreach (var cache in Sets)
             {
                 cache.Features = new Features();
             }

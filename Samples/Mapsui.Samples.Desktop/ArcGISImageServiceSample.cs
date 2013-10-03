@@ -15,8 +15,8 @@ namespace Mapsui.Samples.Desktop
             return new ArcGISImageServiceProvider(
                 new ArcGISImageServiceInfo
                     {
-                        Url = @"http://imagery.arcgisonline.com/ArcGIS/rest/servi
-                            ces/LandsatGLS/FalseColor/ImageServer/exportImage",
+                        Url = "http://imagery.arcgisonline.com/ArcGIS/rest/services/La" + 
+                            "ndsatGLS/FalseColor/ImageServer/exportImage",
                         Format = "jpgpng",
                         Interpolation = InterpolationType.NearestNeighbor,
                         F = "image",

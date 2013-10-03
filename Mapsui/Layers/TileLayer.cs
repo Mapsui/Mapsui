@@ -15,17 +15,17 @@
 // along with Mapsui; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
-using System.Net;
 using BruTile;
 using BruTile.Cache;
 using BruTile.Web.TmsService;
 using Mapsui.Fetcher;
 using Mapsui.Geometries;
-using System.Collections.Generic;
 using Mapsui.Providers;
 using Mapsui.Styles;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 
 namespace Mapsui.Layers
 {
@@ -37,18 +37,18 @@ namespace Mapsui.Layers
 
     public class TileLayer : BaseLayer, ITileLayer
     {
-        private TileFetcher tileFetcher;
-        private ITileSource tileSource;
-        private readonly string urlToTileMapXml;
-        private readonly bool overrideTmsUrlWithUrlToTileMapXml;
-        private int maxRetries;
+        private TileFetcher _tileFetcher;
+        private ITileSource _tileSource;
+        private readonly string _urlToTileMapXml;
+        private readonly bool _overrideTmsUrlWithUrlToTileMapXml;
+        private int _maxRetries;
 
         public int MaxRetries
         {
-            set { maxRetries = value; }
+            set { _maxRetries = value; }
         } 
 
-        readonly MemoryCache<Feature> memoryCache = new MemoryCache<Feature>(200, 300);
+        readonly MemoryCache<Feature> _memoryCache = new MemoryCache<Feature>(200, 300);
 
         private void LoadTmsLayer(IAsyncResult result)
         {
@@ -60,26 +60,28 @@ namespace Mapsui.Layers
                 var request = (HttpWebRequest) state[0];
                 var response = request.EndGetResponse(result);
                 var stream = response.GetResponseStream();
-                SetTileSource(overrideTmsUrlWithUrlToTileMapXml
-                    ? TileMapParser.CreateTileSource(stream, urlToTileMapXml)
+                SetTileSource(_overrideTmsUrlWithUrlToTileMapXml
+                    ? TileMapParser.CreateTileSource(stream, _urlToTileMapXml)
                     : TileMapParser.CreateTileSource(stream));
                 Style = new VectorStyle();
             }
             catch (Exception ex)
             {
                 if (initializationFailed != null)
-                    initializationFailed(new Exception("Could not initialize TileLayer with url : " + urlToTileMapXml, ex));
+                    initializationFailed(new Exception("Could not initialize TileLayer with url : " + _urlToTileMapXml, ex));
                 // else: hopelesly lost with an error on a background thread with no option to report back.
             }
         }
 
         public TileLayer(string urlToTileMapXml, bool overrideTmsUrlWithUrlToTileMapXml = false, Action<Exception> initializationFailed = null)
         {
-            this.urlToTileMapXml = urlToTileMapXml;
-            this.overrideTmsUrlWithUrlToTileMapXml = overrideTmsUrlWithUrlToTileMapXml;
+            _urlToTileMapXml = urlToTileMapXml;
+            _overrideTmsUrlWithUrlToTileMapXml = overrideTmsUrlWithUrlToTileMapXml;
             var webRequest = (HttpWebRequest)WebRequest.Create(urlToTileMapXml);
             webRequest.BeginGetResponse(LoadTmsLayer, new object[] { webRequest, initializationFailed });
         }
+        
+        public TileLayer() {}      
         
         public TileLayer(ITileSource source)
             : this()
@@ -89,21 +91,12 @@ namespace Mapsui.Layers
 
         protected void SetTileSource(ITileSource source)
         {
-            tileSource = source;
-            tileFetcher = new TileFetcher(source, memoryCache, maxRetries);
-            tileFetcher.DataChanged += TileFetcherDataChanged;
+            _tileSource = source;
+            _tileFetcher = new TileFetcher(source, _memoryCache, _maxRetries);
+            _tileFetcher.DataChanged += TileFetcherDataChanged;
             OnPropertyChanged("Envelope");
         }
-
-        public TileLayer()
-        {
-            // We need to add a style on the layer or else all features will
-            // be ignored altogher. Perhaps the style on the individual Features
-            // should be used instead. Perhaps the Feature.Style could contain 
-            // the tile data iso the Feature.Geometry
-            Style = new VectorStyle();
-        }
-
+        
         public override BoundingBox Envelope
         {
             get
@@ -113,13 +106,11 @@ namespace Mapsui.Layers
             }
         }
 
-        public override event DataChangedEventHandler DataChanged;
-
         public override void ViewChanged(bool changeEnd, BoundingBox extent, double resolution)
         {
-            if (Enabled && extent.GetArea() > 0 && tileFetcher != null)
+            if (Enabled && extent.GetArea() > 0 && _tileFetcher != null)
             {
-                tileFetcher.ViewChanged(extent, resolution);
+                _tileFetcher.ViewChanged(extent, resolution);
             }
         }
 
@@ -130,15 +121,15 @@ namespace Mapsui.Layers
         /// </summary>
         public override void AbortFetch()
         {
-            if (tileFetcher != null)
+            if (_tileFetcher != null)
             {
-                tileFetcher.AbortFetch();
+                _tileFetcher.AbortFetch();
             }
         }
 
         public override void ClearCache()
         {
-            memoryCache.Clear();
+            _memoryCache.Clear();
         }
 
         #region ITileLayer Members
@@ -152,12 +143,12 @@ namespace Mapsui.Layers
             // this class. I would be nice though if there was some flexibility into
             // the specific search strategy. Perhaps it is possible to pass a search 
             // to some GetTiles method.
-            get { return tileSource != null ? tileSource.Schema : null; }
+            get { return _tileSource != null ? _tileSource.Schema : null; }
         }
 
         public MemoryCache<Feature> MemoryCache
         {
-            get { return memoryCache; }
+            get { return _memoryCache; }
         }
 
         #endregion
@@ -166,19 +157,14 @@ namespace Mapsui.Layers
         {
             OnDataChanged(e);
         }
-
-        private void OnDataChanged(DataChangedEventArgs e)
-        {
-            if (DataChanged != null) DataChanged(this, e);
-        }
-
+        
         public override IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
         {
             var dictionary = new Dictionary<TileIndex, IFeature>();
 
             if (Schema == null) return dictionary.Values;
 
-            GetRecursive(dictionary, Schema, memoryCache, box.ToExtent(), BruTile.Utilities.GetNearestLevel(Schema.Resolutions, resolution));
+            GetRecursive(dictionary, Schema, _memoryCache, box.ToExtent(), BruTile.Utilities.GetNearestLevel(Schema.Resolutions, resolution));
             var sortedDictionary = (from entry in dictionary orderby entry.Key ascending select entry).ToDictionary(pair => pair.Key, pair => pair.Value);
             return sortedDictionary.Values;
         }
@@ -187,9 +173,16 @@ namespace Mapsui.Layers
         {
             if (level < 0) return;
 
+            if (!schema.Resolutions.ContainsKey(level))
+            {
+                // I is possible intermediate levels are missing. If so continue search upwards.
+                GetRecursive(resultTiles, schema, cache, extent, level - 1);
+                return;
+            }
+
             var tiles = schema.GetTilesInView(extent, level);
 
-            foreach (TileInfo tileInfo in tiles)
+            foreach (var tileInfo in tiles)
             {
                 var feature = cache.Find(tileInfo.Index);
                 if (feature == null)

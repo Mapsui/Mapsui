@@ -49,6 +49,8 @@ namespace Mapsui.Rendering.XamlRendering
                 if (child is Canvas)
                 {
                     (child as Canvas).Children.Clear();
+                    
+
                 }
             }
             _target.Children.Clear();

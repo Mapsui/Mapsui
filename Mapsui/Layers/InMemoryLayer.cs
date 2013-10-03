@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Mapsui.Fetcher;
-using Mapsui.Geometries;
+﻿using Mapsui.Geometries;
 using Mapsui.Providers;
+using System.Collections.Generic;
 
 namespace Mapsui.Layers
 {
@@ -35,8 +32,6 @@ namespace Mapsui.Layers
         {
             // do nothing. No fetching is done
         }
-
-        public override event DataChangedEventHandler DataChanged;
 
         public override void ClearCache()
         {

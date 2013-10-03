@@ -458,7 +458,12 @@ namespace Mapsui.Providers.Wms
 
         public BoundingBox GetExtents()
         {
-            return _wmsClient.Layer.LatLonBoundingBox;
+            if (_wmsClient.Layer.BoundingBoxes.ContainsKey(SpatialReferenceSystem))
+            {
+                return _wmsClient.Layer.BoundingBoxes[SpatialReferenceSystem];
+            }
+
+            return null;
         }
 
         #region IDisposable Members

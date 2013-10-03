@@ -130,6 +130,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GeometryExtensions.cs" />
+    <Compile Include="GeometryRenderer.cs" />
     <Compile Include="MapRenderer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources.cs" />

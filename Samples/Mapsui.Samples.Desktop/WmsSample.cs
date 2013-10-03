@@ -14,17 +14,17 @@ namespace Mapsui.Samples.Desktop
 
         private static WmsProvider CreateWmsProvider()
         {
-            const string wmsUrl = "http://geoserver.nl/world/mapserv.cgi?map=world/world.map&VERSION=1.1.1";
+            const string wmsUrl = "http://geodata.nationaalgeoregister.nl/ahn25m/wms?service=wms&request=getcapabilities";
 
             var provider = new WmsProvider(wmsUrl)
                 {
-                    SpatialReferenceSystem = "EPSG:900913",
+                    SpatialReferenceSystem = "EPSG:28992",
                     ContinueOnError = true,
                     TimeOut = 20000,
-                    SRID = 900913
+                    SRID = 28992
                 };
 
-            provider.AddLayer("World");
+            provider.AddLayer("ahn25m");
             provider.SetImageFormat(provider.OutputFormats[0]);
             return provider;
         }

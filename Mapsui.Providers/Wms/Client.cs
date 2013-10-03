@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
@@ -97,6 +98,11 @@ namespace Mapsui.Web.Wms
             /// Coordinate Reference Systems supported by layer
             /// </summary>
             public string[] CRS;
+            
+            /// <summary>
+            /// Coordinate Reference Systems supported by layer
+            /// </summary>
+            public IDictionary<string, BoundingBox> BoundingBoxes;
 
             /// <summary>
             /// Keywords
@@ -490,6 +496,21 @@ namespace Mapsui.Web.Wms
                 for (int i = 0; i < xnlCrs.Count; i++)
                     wmsServerLayer.CRS[i] = xnlCrs[i].InnerText;
             }
+            XmlNodeList xnlBoundingBox = xmlLayer.SelectNodes("sm:BoundingBox", nsmgr);
+            if (xnlBoundingBox != null)
+            {
+                wmsServerLayer.BoundingBoxes = new Dictionary<string, BoundingBox>();
+                for (var i = 0; i < xnlBoundingBox.Count; i++){
+                    var xmlAttributeCollection = xnlBoundingBox[i].Attributes;
+                    if (xmlAttributeCollection != null)
+                        wmsServerLayer.BoundingBoxes[xmlAttributeCollection["CRS"].Value] = new BoundingBox(
+                            double.Parse(xmlAttributeCollection["minx"].Value),
+                            double.Parse(xmlAttributeCollection["miny"].Value),
+                            double.Parse(xmlAttributeCollection["maxx"].Value),
+                            double.Parse(xmlAttributeCollection["maxy"].Value));
+                }
+            }
+
             XmlNodeList xnlStyle = xmlLayer.SelectNodes("sm:Style", nsmgr);
             if (xnlStyle != null)
             {

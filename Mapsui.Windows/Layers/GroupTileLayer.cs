@@ -15,8 +15,8 @@ namespace Mapsui.Windows.Layers
 {
     public class GroupTileLayer : BaseLayer, ITileLayer
     {
-        private IList<TileLayer> layers = new List<TileLayer>();
-        private readonly MemoryCache<Feature> memoryCache = new MemoryCache<Feature>(100, 200);
+        private IList<TileLayer> _layers = new List<TileLayer>();
+        private readonly MemoryCache<Feature> _memoryCache = new MemoryCache<Feature>(100, 200);
         
         public GroupTileLayer(IEnumerable<TileLayer> tileLayers)
         {
@@ -52,7 +52,7 @@ namespace Mapsui.Windows.Layers
 #endif
                      var bitmap = CombineBitmaps(tiles, Schema.Width, Schema.Height);
                      if (bitmap != null) MemoryCache.Add(e.TileInfo.Index, new Feature { Geometry = new Raster(bitmap, e.TileInfo.Extent.ToBoundingBox()), Styles = new List<IStyle> { new VectorStyle()} });
-                     if (DataChanged != null) DataChanged(sender, e);
+                     OnDataChanged(e);
 #if SILVERLIGHT
                 });
 #endif
@@ -153,14 +153,12 @@ namespace Mapsui.Windows.Layers
             var infos = Schema.GetTilesInView(extent.ToExtent(), BruTile.Utilities.GetNearestLevel(Schema.Resolutions, resolution));
             foreach (var tileInfo in infos)
             {
-                if (memoryCache.Find(tileInfo.Index) == null)
+                if (_memoryCache.Find(tileInfo.Index) == null)
                 {
                     TileLayerDataChanged(this, new DataChangedEventArgs(null, false, tileInfo, LayerName));
                 }
             }
         }
-
-        public override event DataChangedEventHandler DataChanged;
 
         public ITileSchema Schema
         {
@@ -194,19 +192,19 @@ namespace Mapsui.Windows.Layers
         
         public MemoryCache<Feature> MemoryCache
         {
-            get { return memoryCache; }
+            get { return _memoryCache; }
         }
 
         public IList<TileLayer> Layers
         {
-            get { return layers; }
-            set { layers = value; }
+            get { return _layers; }
+            set { _layers = value; }
         }
 
         public override void ClearCache()
         {
             AbortFetch();
-            memoryCache.Clear();
+            _memoryCache.Clear();
         }
 
         public override IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
@@ -215,7 +213,7 @@ namespace Mapsui.Windows.Layers
 
             if (Schema == null) return dictionary.Values;
 
-            TileLayer.GetRecursive(dictionary, Schema, memoryCache, box.ToExtent(), BruTile.Utilities.GetNearestLevel(Schema.Resolutions, resolution));
+            TileLayer.GetRecursive(dictionary, Schema, _memoryCache, box.ToExtent(), BruTile.Utilities.GetNearestLevel(Schema.Resolutions, resolution));
             var sortedDictionary = (from entry in dictionary orderby entry.Key ascending select entry).ToDictionary(pair => pair.Key, pair => pair.Value);
             return sortedDictionary.Values;
         }

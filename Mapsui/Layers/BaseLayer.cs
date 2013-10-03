@@ -204,7 +204,7 @@ namespace Mapsui.Layers
 
         protected void OnPropertyChanged(string name)
         {
-            PropertyChangedEventHandler handler = PropertyChanged;
+            var handler = PropertyChanged;
             if (handler != null)
             {
                 handler(this, new PropertyChangedEventArgs(name));
@@ -215,7 +215,15 @@ namespace Mapsui.Layers
 
         public abstract void ViewChanged(bool changeEnd, BoundingBox extent, double resolution);
 
-        public abstract event DataChangedEventHandler DataChanged;
+        public event DataChangedEventHandler DataChanged;
+
+        protected void OnDataChanged(DataChangedEventArgs args)
+        {
+            if (DataChanged != null)
+            {
+                DataChanged(this, args);
+            }
+        }
 
         public abstract void ClearCache();
 

@@ -3,7 +3,6 @@ using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Desktop;
-using Mapsui.Windows.Layers;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -18,10 +17,10 @@ namespace Mapsui.Wpf
         public Window1()
         {
             InitializeComponent();
-            mapControl.ErrorMessageChanged += MapErrorMessageChanged;
-            mapControl.FeatureInfo += MapControlFeatureInfo;
-            fps.SetBinding(TextBlock.TextProperty, new Binding("Fps"));
-            fps.DataContext = mapControl.FpsCounter;
+            MapControl.ErrorMessageChanged += MapErrorMessageChanged;
+            MapControl.FeatureInfo += MapControlFeatureInfo;
+            Fps.SetBinding(TextBlock.TextProperty, new Binding("Fps"));
+            Fps.DataContext = MapControl.FpsCounter;
 
             OsmClick(this, null);
         }
@@ -53,25 +52,34 @@ namespace Mapsui.Wpf
 
         private void MapErrorMessageChanged(object sender, EventArgs e)
         {
-            Error.Text = mapControl.ErrorMessage;
-            Utilities.AnimateOpacity(errorBorder, 0.75, 0, 8000);
+            Error.Text = MapControl.ErrorMessage;
+            Utilities.AnimateOpacity(ErrorBorder, 0.75, 0, 8000);
         }
 
         private void OsmClick(object sender, RoutedEventArgs e)
         {
-            mapControl.Map.Layers.Clear();
-            mapControl.Map.Layers.Add(new TileLayer(new OsmTileSource()) { LayerName = "OSM" });
+            MapControl.Map.Layers.Clear();
+            MapControl.Map.Layers.Add(new TileLayer(new OsmTileSource()) { LayerName = "OSM" });
+            LayerList.Initialize(MapControl.Map.Layers);
+            MapControl.ZoomToFullEnvelope();
+            MapControl.Refresh();
+        }
+
+        private void RandomPointWithStackLabel(object sender, RoutedEventArgs e)
+        {
+            MapControl.Map.Layers.Clear();
+            MapControl.Map.Layers.Add(new TileLayer(new OsmTileSource()) { LayerName = "OSM" });
             var provider = CreateRandomPointsProvider();
-            mapControl.Map.Layers.Add(PointLayerSample.CreateRandomPointLayerWithLabel(provider));
-            mapControl.Map.Layers.Add(PointLayerSample.CreateStackedLabelLayer(provider));
-            layerList.Initialize(mapControl.Map.Layers);
-            mapControl.ZoomToFullEnvelope();
-            mapControl.Refresh();
+            MapControl.Map.Layers.Add(PointLayerSample.CreateStackedLabelLayer(provider));
+            MapControl.Map.Layers.Add(PointLayerSample.CreateRandomPointLayer(provider));
+            LayerList.Initialize(MapControl.Map.Layers);
+            MapControl.ZoomToFullEnvelope();
+            MapControl.Refresh();
         }
 
         private MemoryProvider CreateRandomPointsProvider()
         {
-            var randomPoints = PointLayerSample.GenerateRandomPoints(mapControl.Map.Envelope, 200);
+            var randomPoints = PointLayerSample.GenerateRandomPoints(MapControl.Map.Envelope, 100);
             var features = new Features();
             var count = 0;
             foreach (var point in randomPoints)
@@ -85,107 +93,82 @@ namespace Mapsui.Wpf
         }
         private void GeodanWmsClick(object sender, RoutedEventArgs e)
         {
-            mapControl.Map.Layers.Clear();
-            mapControl.Map.Layers.Add(new TileLayer(new GeodanWorldWmsTileSource()));
-            layerList.Initialize(mapControl.Map.Layers);
-            mapControl.ZoomToFullEnvelope();
-            mapControl.Refresh();
+            MapControl.Map.Layers.Clear();
+            MapControl.Map.Layers.Add(new TileLayer(new GeodanWorldWmsTileSource()));
+            LayerList.Initialize(MapControl.Map.Layers);
+            MapControl.ZoomToFullEnvelope();
+            MapControl.Refresh();
         }
 
         private void GeodanTmsClick(object sender, RoutedEventArgs e)
         {
-            mapControl.Map.Layers.Clear();
-            mapControl.Map.Layers.Add(new TileLayer("http://geoserver.nl/tiles/tilecache.aspx/1.0.0/worlddark_GM", 
+            MapControl.Map.Layers.Clear();
+            MapControl.Map.Layers.Add(new TileLayer("http://geoserver.nl/tiles/tilecache.aspx/1.0.0/worlddark_GM", 
                 true, ex => MessageBox.Show(ex.Message)));
-            layerList.Initialize(mapControl.Map.Layers);
-            mapControl.Refresh();
+            LayerList.Initialize(MapControl.Map.Layers);
+            MapControl.Refresh();
         }
 
         private void BingMapsClick(object sender, RoutedEventArgs e)
         {
-            mapControl.Map.Layers.Clear();
-            mapControl.Map.Layers.Add(new TileLayer(new BingTileSource(BingRequest.UrlBingStaging, String.Empty, BingMapType.Aerial)));
-            layerList.Initialize(mapControl.Map.Layers);
-            mapControl.ZoomToFullEnvelope();
-            mapControl.Refresh();
+            MapControl.Map.Layers.Clear();
+            MapControl.Map.Layers.Add(new TileLayer(new BingTileSource(BingRequest.UrlBingStaging, String.Empty, BingMapType.Aerial)));
+            LayerList.Initialize(MapControl.Map.Layers);
+            MapControl.ZoomToFullEnvelope();
+            MapControl.Refresh();
         }
 
         private void GeodanWmscClick(object sender, RoutedEventArgs e)
         {
-            mapControl.Map.Layers.Clear();
-            mapControl.Map.Layers.Add(new TileLayer(new GeodanWorldWmsCTileSource()));
-            layerList.Initialize(mapControl.Map.Layers);
-            mapControl.Refresh();
-        }
-
-        private void GroupTileLayerClick(object sender, RoutedEventArgs e)
-        {
-            mapControl.Map.Layers.Clear();
-            mapControl.Map.Layers.Add(CreateGroupLayer());
-            layerList.Initialize(mapControl.Map.Layers);
-            mapControl.ZoomToFullEnvelope();
-            mapControl.Refresh();
+            MapControl.Map.Layers.Clear();
+            MapControl.Map.Layers.Add(new TileLayer(new GeodanWorldWmsCTileSource()));
+            LayerList.Initialize(MapControl.Map.Layers);
+            MapControl.Refresh();
         }
 
         private void ShapefileClick(object sender, RoutedEventArgs e)
         {
-            mapControl.Map = ShapefileSample.CreateMap();
-            mapControl.ZoomToFullEnvelope();
-            layerList.Initialize(mapControl.Map.Layers);
-            mapControl.Refresh();
+            MapControl.Map = ShapefileSample.CreateMap();
+            MapControl.ZoomToFullEnvelope();
+            LayerList.Initialize(MapControl.Map.Layers);
+            MapControl.Refresh();
         }
 
         private void MapTilerClick(object sender, RoutedEventArgs e)
         {
-            mapControl.Map.Layers.Clear();
-            mapControl.Map.Layers.Add(new TileLayer(new MapTilerTileSource()));
-            layerList.Initialize(mapControl.Map.Layers);
-            mapControl.ZoomToFullEnvelope();
-            mapControl.Refresh();
-        }
-
-        private static ILayer CreateGroupLayer()
-        {
-            var osmLayer = new TileLayer(new OsmTileSource()) { LayerName = "OSM" };
-            var wmsLayer = new TileLayer(new GeodanWorldWmsTileSource()) { LayerName = "Geodan WMS" };
-            var groupLayer = new GroupTileLayer(new[] { osmLayer, wmsLayer });
-            return groupLayer;
+            MapControl.Map.Layers.Clear();
+            MapControl.Map.Layers.Add(new TileLayer(new MapTilerTileSource()));
+            LayerList.Initialize(MapControl.Map.Layers);
+            MapControl.ZoomToFullEnvelope();
+            MapControl.Refresh();
         }
 
         private void PointSymbolsClick(object sender, RoutedEventArgs e)
         {
-            mapControl.Map.Layers.Clear();
-            mapControl.Map.Layers.Add(new TileLayer(new OsmTileSource()) { LayerName = "OSM" });
-            mapControl.Map.Layers.Add(PointLayerSample.Create());
-            mapControl.Map.Layers.Add(PointLayerWithWorldUnitsForSymbolsSample.Create());
-            layerList.Initialize(mapControl.Map.Layers);
-            mapControl.Refresh();
+            MapControl.Map.Layers.Clear();
+            MapControl.Map.Layers.Add(new TileLayer(new OsmTileSource()) { LayerName = "OSM" });
+            MapControl.Map.Layers.Add(PointLayerSample.Create());
+            MapControl.Map.Layers.Add(PointLayerWithWorldUnitsForSymbolsSample.Create());
+            LayerList.Initialize(MapControl.Map.Layers);
+            MapControl.Refresh();
         }
 
         private void WmsClick(object sender, RoutedEventArgs e)
         {
-            mapControl.Map.Layers.Clear();
-            mapControl.Map.Layers.Add(WmsSample.Create());
-            layerList.Initialize(mapControl.Map.Layers);
-            mapControl.ZoomToFullEnvelope();
-            mapControl.Refresh();
+            MapControl.Map.Layers.Clear();
+            MapControl.Map.Layers.Add(WmsSample.Create());
+            LayerList.Initialize(MapControl.Map.Layers);
+            MapControl.ZoomToFullEnvelope();
+            MapControl.Refresh();
         }
 
         private void ArcGISImageServiceClick(object sender, RoutedEventArgs e)
         {
-            mapControl.Map.Layers.Clear();
-            mapControl.Map.Layers.Add(ArcGISImageServiceSample.CreateLayer());
-            layerList.Initialize(mapControl.Map.Layers);
-            mapControl.ZoomToFullEnvelope();
-            mapControl.Refresh();
-        }
-
-        private void WfsClick(object sender, RoutedEventArgs e)
-        {
-            mapControl.Map = WfsSample.CreateMap();
-            layerList.Initialize(mapControl.Map.Layers);
-            mapControl.ZoomToFullEnvelope();
-            mapControl.Refresh();
+            MapControl.Map.Layers.Clear();
+            MapControl.Map.Layers.Add(ArcGISImageServiceSample.CreateLayer());
+            LayerList.Initialize(MapControl.Map.Layers);
+            MapControl.ZoomToFullEnvelope();
+            MapControl.Refresh();
         }
     }
 }
