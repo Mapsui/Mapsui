@@ -18,9 +18,11 @@ namespace Mapsui.Samples.Common
                     DataSource = new MemoryProvider(new[]
                         {
                             CreatePointWithLabel(), 
-                            //!!! ahum... CreatePointWithDefaultStyle(),
+                            CreatePointWithDefaultStyle(),
                             CreatePointWithSmallBlackDot(),
-                        })
+                        }),
+                     Style = null
+
                 };
         }
 

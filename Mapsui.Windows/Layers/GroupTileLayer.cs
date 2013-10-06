@@ -58,7 +58,7 @@ namespace Mapsui.Windows.Layers
 #endif
         }
 
-        private MemoryStream CombineBitmaps(IList<MemoryStream> tiles, int width, int height)
+        private static MemoryStream CombineBitmaps(IList<MemoryStream> tiles, int width, int height)
         {
             if (tiles.Count == 0) return null;
 
@@ -125,8 +125,8 @@ namespace Mapsui.Windows.Layers
                 }
             }
             Stream png = ei.GetStream();
-            int len = (int)png.Length;
-            byte[] bytes = new byte[len];
+            var len = (int)png.Length;
+            var bytes = new byte[len];
             png.Read(bytes, 0, len);
             stream.Write(bytes, 0, len);
 

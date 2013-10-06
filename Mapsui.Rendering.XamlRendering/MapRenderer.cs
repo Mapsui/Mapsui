@@ -155,8 +155,9 @@ namespace Mapsui.Rendering.XamlRendering
                 {
                     PositionGeometry(renderedGeometry, viewport, style, feature);
                 }
-                
-                canvas.Children.Add(renderedGeometry);
+
+                if (!canvas.Children.Contains(renderedGeometry)) // Adding twice can happen when a single feature has two identical styles
+                    canvas.Children.Add(renderedGeometry);
             }
         }
 
@@ -199,6 +200,7 @@ namespace Mapsui.Rendering.XamlRendering
 
         public static void Animate(DependencyObject target, string property, double from, double to, int duration, AnimateEventHandler completed)
         {
+            return;
             var animation = new DoubleAnimation
                 {
                     From = from, 
