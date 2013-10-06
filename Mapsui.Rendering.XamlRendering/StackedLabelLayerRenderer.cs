@@ -66,9 +66,9 @@ namespace Mapsui.Rendering.XamlRendering
                     else
                         stackOffsetY += textHeight; //todo: get size from text (or just pass stack nr)
 
-                    var labelStyle = new LabelStyle(layerStyle as LabelStyle)
+                    var labelStyle = new LabelStyle(layerStyle)
                     {
-                        Text = layer.GetLabelText(feature)
+                        Text = layer.GetLabelText(feature) //we only use the layer for the text, this should be returned by style
                     };
                     labelStyle.Offset.Y += stackOffsetY;
 

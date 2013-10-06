@@ -6,36 +6,36 @@ namespace Mapsui.Layers
 {
     public  class InMemoryLayer : BaseLayer
     {
-        public MemoryProvider MemoryProvider { get; private set; }
-
-        public InMemoryLayer()
-        {
-            MemoryProvider = new MemoryProvider();
-        }
-
-        public InMemoryLayer(MemoryProvider memoryProvider)
-        {
-            MemoryProvider = memoryProvider;
-        }
+        public string Name { get; set; }
+        public IProvider DataSource { get; set; }
 
         public override IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
         {
-            return MemoryProvider.GetFeaturesInView(box, resolution);
+            return DataSource.GetFeaturesInView(box, resolution);
+        }
+
+        public override BoundingBox Envelope
+        {
+            get
+            {
+                return DataSource.GetExtents();
+            }
+
         }
 
         public override void AbortFetch()
         {
-            // do nothing. No fetching is done
+            // do nothing. This is not an async layer
         }
 
         public override void ViewChanged(bool changeEnd, BoundingBox extent, double resolution)
         {
-            // do nothing. No fetching is done
+            // do nothing. This is not an async layer
         }
 
         public override void ClearCache()
         {
-            MemoryProvider.Clear();
+            // do nothing. This is not an async layer
         }
     }
 }

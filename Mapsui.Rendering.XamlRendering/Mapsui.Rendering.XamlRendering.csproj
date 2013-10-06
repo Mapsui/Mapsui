@@ -52,6 +52,7 @@
     <Compile Include="MapRenderer.cs" />
     <Compile Include="MatrixHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RasterizingProvider.cs" />
     <Compile Include="StackedLabelLayerRenderer.cs" />
     <Compile Include="SingleLabelRenderer.cs" />
     <Compile Include="StyleExtensions.cs" />

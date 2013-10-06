@@ -68,6 +68,8 @@ namespace Mapsui.Layers
             }
         }
 
+        public Layer() : base("") { }
+
         public Layer(string layername)
         {
             LayerName = layername;

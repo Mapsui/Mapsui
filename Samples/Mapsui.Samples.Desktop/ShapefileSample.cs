@@ -2,6 +2,7 @@
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Rendering;
+using Mapsui.Rendering.XamlRendering;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 using System;
@@ -20,32 +21,41 @@ namespace Mapsui.Samples.Desktop
 
             map.Layers.Add(CreateCountryLayer(countrySource));
             map.Layers.Add(CreateCityLayer(citySource));
-            map.Layers.Add(CreateCountryLabelLayer(countrySource));
-            map.Layers.Add(CreateCityLabelLayer(citySource));
+            //todo: make LabelLayer rasterizable
+            //map.Layers.Add(CreateCountryLabelLayer(countrySource));
+            //map.Layers.Add(CreateCityLabelLayer(citySource));
 
             return map;
         }
 
-        public static Layer CreateCountryLayer(IProvider countrySource)
+        public static ILayer CreateCountryLayer(IProvider countrySource)
         {
-            return new Layer("Countries")
+            return new Layer
                 {
-                    DataSource = countrySource,
-                    Style = CreateCountryTheme()
+                    LayerName = "Countries",
+                    DataSource = new RasterizingProvider(new InMemoryLayer
+                        {
+                            DataSource = countrySource,
+                            Style = CreateCountryTheme()
+                        })
                 };
         }
 
-        public static Layer CreateCityLayer(IProvider citySource)
+        public static ILayer CreateCityLayer(IProvider citySource)
         {
-            return new Layer("Cities")
-                {
-                    DataSource = citySource,
-                    Style = CreateCityTheme(),
-                    MaxVisible = 10000000.0
-                };
+            return new Layer
+            {
+                LayerName = "Cities",
+                DataSource = new RasterizingProvider(new InMemoryLayer
+                    {
+                        DataSource = citySource,
+                        Style = CreateCityTheme(),
+                        MaxVisible = 10000000.0
+                    })
+            };
         }
 
-        private static LabelLayer CreateCountryLabelLayer(IProvider countryProvider)
+        private static ILayer CreateCountryLabelLayer(IProvider countryProvider)
         {
             return new LabelLayer("Country labels")
                 {

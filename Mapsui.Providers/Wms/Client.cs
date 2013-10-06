@@ -500,14 +500,18 @@ namespace Mapsui.Web.Wms
             if (xnlBoundingBox != null)
             {
                 wmsServerLayer.BoundingBoxes = new Dictionary<string, BoundingBox>();
-                for (var i = 0; i < xnlBoundingBox.Count; i++){
+                for (var i = 0; i < xnlBoundingBox.Count; i++)
+                {
                     var xmlAttributeCollection = xnlBoundingBox[i].Attributes;
                     if (xmlAttributeCollection != null)
-                        wmsServerLayer.BoundingBoxes[xmlAttributeCollection["CRS"].Value] = new BoundingBox(
+                    {
+                        var crs = (xmlAttributeCollection["CRS"] ?? xmlAttributeCollection["SRS"]).Value;
+                        wmsServerLayer.BoundingBoxes[crs] = new BoundingBox(
                             double.Parse(xmlAttributeCollection["minx"].Value),
                             double.Parse(xmlAttributeCollection["miny"].Value),
                             double.Parse(xmlAttributeCollection["maxx"].Value),
                             double.Parse(xmlAttributeCollection["maxy"].Value));
+                    }
                 }
             }
 

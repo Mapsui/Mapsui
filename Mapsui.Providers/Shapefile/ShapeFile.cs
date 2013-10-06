@@ -176,6 +176,7 @@ namespace Mapsui.Data.Providers
         private readonly DbaseReader _dbaseFile;
         private FileStream _fsShapeFile;
         private FileStream _fsShapeIndex;
+        private object _syncRoot = new object();
 
         /// <summary>
         /// Tree used for fast query of data
@@ -457,17 +458,20 @@ namespace Mapsui.Data.Providers
         /// <returns></returns>
         public BoundingBox GetExtents()
         {
-            Open();
+            lock (_syncRoot)
+            {
+                Open();
 
-            try
-            {
-                if (_tree == null)
-                    return _envelope;
-                return _tree.Box;
-            }
-            finally
-            {
-                Close();
+                try
+                {
+                    if (_tree == null)
+                        return _envelope;
+                    return _tree.Box;
+                }
+                finally
+                {
+                    Close();
+                }
             }
         }
 
@@ -859,15 +863,18 @@ namespace Mapsui.Data.Providers
         /// <returns></returns>
         public IFeature GetFeature(uint rowId, IFeatures dt)
         {
-            Open();
+            lock (_syncRoot)
+            {
+                Open();
 
-            try
-            {
-                return GetFeaturePrivate(rowId, dt);
-            }
-            finally
-            {
-                Close();
+                try
+                {
+                    return GetFeaturePrivate(rowId, dt);
+                }
+                finally
+                {
+                    Close();
+                }
             }
 
         }
@@ -889,27 +896,30 @@ namespace Mapsui.Data.Providers
 
         public IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
         {
-            Open();
-            try
+            lock (_syncRoot)
             {
-                //Use the spatial index to get a list of features whose boundingbox intersects bbox
-                var objectlist = GetObjectIDsInView(box);
-                var features = new Features();
-
-                foreach (var index in objectlist)
+                Open();
+                try
                 {
-                    var feature = _dbaseFile.GetFeature(index, features);
-                    feature.Geometry = ReadGeometry(index);
-                    if (feature.Geometry == null) continue;
-                    if (!feature.Geometry.GetBoundingBox().Intersects(box)) continue;
-                    if (FilterDelegate != null && !FilterDelegate(feature)) continue;
-                    features.Add(feature);
+                    //Use the spatial index to get a list of features whose boundingbox intersects bbox
+                    var objectlist = GetObjectIDsInView(box);
+                    var features = new Features();
+
+                    foreach (var index in objectlist)
+                    {
+                        var feature = _dbaseFile.GetFeature(index, features);
+                        feature.Geometry = ReadGeometry(index);
+                        if (feature.Geometry == null) continue;
+                        if (!feature.Geometry.GetBoundingBox().Intersects(box)) continue;
+                        if (FilterDelegate != null && !FilterDelegate(feature)) continue;
+                        features.Add(feature);
+                    }
+                    return features;
                 }
-                return features;
-            }
-            finally
-            {
-                Close();
+                finally
+                {
+                    Close();
+                }
             }
         }
 

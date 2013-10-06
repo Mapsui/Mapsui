@@ -163,10 +163,9 @@ namespace Mapsui.Layers
         }
 
         /// <summary>
-        /// Returns the extent of the layer
+        /// Returns the envelope of all avaiable data in the layer
         /// </summary>
-        /// <returns>Bounding box corresponding to the extent of the features in the layer</returns>
-        public virtual BoundingBox Envelope { get; protected set; }
+        public abstract BoundingBox Envelope { get; }
 
         public event FeedbackEventHandler Feedback;
 

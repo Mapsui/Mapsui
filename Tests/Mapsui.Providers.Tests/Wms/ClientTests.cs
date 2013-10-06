@@ -13,13 +13,12 @@ namespace Mapsui.Providers.Tests.Wms
         public void ParseCapabilities_WhenInputIsWellFormattedWms111_ShouldParseWithoutExceptions()
         {
             // arrange
-            var capabilties = new XmlDocument();
-            capabilties.XmlResolver = null;
+            var capabilties = new XmlDocument { XmlResolver = null };
             capabilties.Load(".\\Resources\\capabilities_1_1_1.xml");
-            
+
             // act
             var client = new Client(capabilties);
-            
+
             // assert
             Assert.True(client != null);
         }

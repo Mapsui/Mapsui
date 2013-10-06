@@ -1,19 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Mapsui.Providers;
+﻿using Mapsui.Providers;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 #if !NETFX_CORE
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using AnimateEventHandler = System.EventHandler;
+#if !SILVERLIGHT
+using System.Windows.Media;
+#endif
 #else
 using Windows.UI.Xaml.Controls;
 using Windows.Foundation;
@@ -49,8 +51,6 @@ namespace Mapsui.Rendering.XamlRendering
                 if (child is Canvas)
                 {
                     (child as Canvas).Children.Clear();
-                    
-
                 }
             }
             _target.Children.Clear();
@@ -71,7 +71,7 @@ namespace Mapsui.Rendering.XamlRendering
 #endif
         }
 
-        private static void RenderLayer(Canvas target, IViewport viewport, ILayer layer)
+        internal static void RenderLayer(Canvas target, IViewport viewport, ILayer layer)
         {
             if (layer.Enabled == false) return;
 
@@ -95,7 +95,12 @@ namespace Mapsui.Rendering.XamlRendering
             // when clearing and adding features to a layer while rendering
             try
             {
-                var canvas = new Canvas {Opacity = layer.Opacity, IsHitTestVisible = false};
+                var canvas = new Canvas
+                    {
+                        Opacity = layer.Opacity, 
+                        IsHitTestVisible = false
+                    };
+
                 var features = layer.GetFeaturesInView(viewport.Extent, viewport.Resolution).ToList();
                 var layerStyles = BaseLayer.GetLayerStyles(layer);
             
@@ -108,7 +113,7 @@ namespace Mapsui.Rendering.XamlRendering
                         if (layerStyle is IThemeStyle) style = (layerStyle as IThemeStyle).GetStyle(feature);
                         if ((style == null) || (style.Enabled == false) || (style.MinVisible > viewport.Resolution) || (style.MaxVisible < viewport.Resolution)) continue;
 
-                        RenderFeature(canvas, viewport, style, feature);
+                        RenderFeature(viewport, canvas, feature, style);
                     }
                 }
 
@@ -119,7 +124,7 @@ namespace Mapsui.Rendering.XamlRendering
                     {
                         if (feature.Styles != null && style.Enabled)
                         {
-                            RenderFeature(canvas, viewport, style, feature);
+                            RenderFeature(viewport, canvas, feature, style);
                         }
                     }
                 }
@@ -132,7 +137,7 @@ namespace Mapsui.Rendering.XamlRendering
             }
         }
 
-        private static void RenderFeature(Canvas canvas, IViewport viewport, IStyle style, IFeature feature)
+        private static void RenderFeature(IViewport viewport, Canvas canvas, IFeature feature, IStyle style)
         {
             if (style is LabelStyle)
             {
@@ -150,6 +155,7 @@ namespace Mapsui.Rendering.XamlRendering
                 {
                     PositionGeometry(renderedGeometry, viewport, style, feature);
                 }
+                
                 canvas.Children.Add(renderedGeometry);
             }
         }
@@ -193,14 +199,19 @@ namespace Mapsui.Rendering.XamlRendering
 
         public static void Animate(DependencyObject target, string property, double from, double to, int duration, AnimateEventHandler completed)
         {
-            var animation = new DoubleAnimation {From = from, To = to, Duration = new TimeSpan(0, 0, 0, 0, duration)};
+            var animation = new DoubleAnimation
+                {
+                    From = from, 
+                    To = to, 
+                    Duration = new TimeSpan(0, 0, 0, 0, duration)
+                };
+
             Storyboard.SetTarget(animation, target);
 #if !NETFX_CORE
             Storyboard.SetTargetProperty(animation, new PropertyPath(property));
 #else
             Storyboard.SetTargetProperty(animation, property);
 #endif
-
             var storyBoard = new Storyboard();
             storyBoard.Children.Add(animation);
             storyBoard.Completed += completed;
@@ -208,24 +219,36 @@ namespace Mapsui.Rendering.XamlRendering
         }
 
 #if !NETFX_CORE
-
         public MemoryStream ToBitmapStream(double width, double height)
         {
-            _target.Arrange(new Rect(0, 0, width, height));
-#if !SILVERLIGHT
+            return ToBitmapStream(_target, width, height);
+        }
+
+#if SILVERLIGHT
+
+        public static MemoryStream ToBitmapStream(UIElement uiElement, double width, double height)
+        {
+            uiElement.Arrange(new Rect(0, 0, width, height));
+
+            var writeableBitmap = new WriteableBitmap((int)width, (int)height);
+            writeableBitmap.Render(uiElement, null);
+            var bitmapStream = Utilities.ConverToBitmapStream(writeableBitmap);
+            return bitmapStream;
+        }
+#else
+        public static MemoryStream ToBitmapStream(UIElement uiElement, double width, double height)
+        {
+            uiElement.Arrange(new Rect(0, 0, width, height));
             var renderTargetBitmap = new RenderTargetBitmap((int)width, (int)height, 96, 96, new PixelFormat());
-            renderTargetBitmap.Render(_target);
+            renderTargetBitmap.Render(uiElement);
             var bitmap = new PngBitmapEncoder();
             bitmap.Frames.Add(BitmapFrame.Create(renderTargetBitmap));
             var bitmapStream = new MemoryStream();
             bitmap.Save(bitmapStream);
-#else
-            var writeableBitmap = new WriteableBitmap((int)width, (int)height);
-            writeableBitmap.Render(_target, null);
-            var bitmapStream = Utilities.ConverToBitmapStream(writeableBitmap);
-#endif
             return bitmapStream;
         }
 #endif
+#endif
+
     }
 }

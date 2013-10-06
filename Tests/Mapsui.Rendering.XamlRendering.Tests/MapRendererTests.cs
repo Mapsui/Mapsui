@@ -22,10 +22,10 @@ namespace Mapsui.Rendering.XamlRendering.Tests
                     CreateFeature(-20, 0, new SymbolStyle {SymbolType = SymbolType.Ellipse}),
                     CreateFeature(20, 0, new SymbolStyle {SymbolType = SymbolType.Rectangle})
                 };
-            var layers = new[] { new InMemoryLayer(new MemoryProvider(features)) };
+            var layers = new[] { new InMemoryLayer { DataSource = new MemoryProvider(features) } };
             var renderer = new MapRenderer();
             const string imagePath = ImagesFolder + "\\vector_symbol_symboltype.png";
-            
+
             // act
             renderer.Render(viewport, layers);
             var bitmap = renderer.ToBitmapStream(viewport.Width, viewport.Height);
@@ -47,10 +47,10 @@ namespace Mapsui.Rendering.XamlRendering.Tests
                     CreateFeature(-20, 0, new SymbolStyle {UnitType = UnitType.Pixel}),
                     CreateFeature(20, 0, new SymbolStyle {UnitType = UnitType.WorldUnit})
                 };
-            var layers = new[] { new InMemoryLayer(new MemoryProvider(features)) };
+            var layers = new[] { new InMemoryLayer { DataSource = new MemoryProvider(features) } };
             var renderer = new MapRenderer();
             const string imagePath = ImagesFolder + "\\vector_symbol_unittype.png";
-            
+
             // act
             renderer.Render(viewport, layers);
             var bitmap = renderer.ToBitmapStream(viewport.Width, viewport.Height);
@@ -68,10 +68,8 @@ namespace Mapsui.Rendering.XamlRendering.Tests
             // arrange
             var viewport = new Viewport { Center = new Point(100, 100), Width = 200, Height = 200, Resolution = 1 };
             var layer = new InMemoryLayer();
-            layer.MemoryProvider.Features.Add(new Feature { Geometry = new Point(50, 50), Styles = new[] { new VectorStyle { Fill = new Brush(Color.Red)} } });
-            layer.MemoryProvider.Features.Add(new Feature { Geometry = new Point(50, 100), Styles = new[] { new VectorStyle { Fill = new Brush(Color.Yellow), Outline = new Pen(Color.Black, 2) } } });
-            layer.MemoryProvider.Features.Add(new Feature { Geometry = new Point(100, 50), Styles = new[] { new VectorStyle { Fill = new Brush(Color.Blue), Outline = new Pen(Color.White, 2) } } });
-            layer.MemoryProvider.Features.Add(new Feature { Geometry = new Point(100, 100), Styles = new[] { new VectorStyle { Fill = new Brush(Color.Green), Outline = null } } });
+            var provider = CreateVectorStyleProvider();
+            layer.DataSource = provider;
             var layers = new[] { layer };
             var renderer = new MapRenderer();
             const string imagePath = ImagesFolder + "\\vector_symbol.png";
@@ -87,17 +85,42 @@ namespace Mapsui.Rendering.XamlRendering.Tests
             Assert.AreEqual(ReadFile(imagePath), bitmap.ToArray());
         }
 
+        private static MemoryProvider CreateVectorStyleProvider()
+        {
+            var features = new Features
+                {
+                    new Feature
+                        {
+                            Geometry = new Point(50, 50),
+                            Styles = new[] {new VectorStyle {Fill = new Brush(Color.Red)}}
+                        },
+                    new Feature
+                        {
+                            Geometry = new Point(50, 100),
+                            Styles = new[] {new VectorStyle {Fill = new Brush(Color.Yellow), Outline = new Pen(Color.Black, 2)}}
+                        },
+                    new Feature
+                        {
+                            Geometry = new Point(100, 50),
+                            Styles = new[] {new VectorStyle {Fill = new Brush(Color.Blue), Outline = new Pen(Color.White, 2)}}
+                        },
+                    new Feature
+                        {
+                            Geometry = new Point(100, 100),
+                            Styles = new[] {new VectorStyle {Fill = new Brush(Color.Green), Outline = null}}
+                        }
+                };
+            var provider = new MemoryProvider(features);
+            return provider;
+        }
+
         [Test]
         public static void RenderRotatedBitmapSymbolWithOffset()
         {
             // arrange
             var viewport = new Viewport { Center = new Point(80, 80), Width = 200, Height = 200, Resolution = 1 };
-            var layer = new InMemoryLayer();
-            layer.MemoryProvider.Features.Add(CreateFeatureWithRotatedBitmapSymbol(75, 75, 0));
-            layer.MemoryProvider.Features.Add(CreateFeatureWithRotatedBitmapSymbol(75, 125, 90));
-            layer.MemoryProvider.Features.Add(CreateFeatureWithRotatedBitmapSymbol(125, 125, 180));
-            layer.MemoryProvider.Features.Add(CreateFeatureWithRotatedBitmapSymbol(125, 75, 270));
-            var layers = new[] {layer};
+            var layer = new InMemoryLayer { DataSource = CreateProvider() };
+            var layers = new[] { layer };
             const string imagePath = ImagesFolder + "\\bitmap_symbol.png";
             var renderer = new MapRenderer();
 
@@ -110,6 +133,18 @@ namespace Mapsui.Rendering.XamlRendering.Tests
 
             // assert
             Assert.AreEqual(ReadFile(imagePath), bitmap.ToArray());
+        }
+
+        private static IProvider CreateProvider()
+        {
+            var features = new Features
+                {
+                    CreateFeatureWithRotatedBitmapSymbol(75, 75, 0),
+                    CreateFeatureWithRotatedBitmapSymbol(75, 125, 90),
+                    CreateFeatureWithRotatedBitmapSymbol(125, 125, 180),
+                    CreateFeatureWithRotatedBitmapSymbol(125, 75, 270)
+                };
+            return new MemoryProvider(features);
         }
 
         private static void WriteToDisk(string imagePath, MemoryStream bitmap)

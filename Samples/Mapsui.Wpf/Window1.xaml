@@ -5,7 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:wpf="clr-namespace:Mapsui.Wpf"
         mc:Ignorable="d"
-    d:DesignWidth="584" d:DesignHeight="278" 
+    d:DesignWidth="644.572" d:DesignHeight="333.913" Width="800" Height="600"
     Title="Mapsui.Wpf" SizeToContent="Manual">
     <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="Gray">
         <mapsui:MapControl x:Name="MapControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
