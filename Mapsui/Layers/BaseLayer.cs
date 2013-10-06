@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using Mapsui.Fetcher;
+﻿using Mapsui.Fetcher;
 using Mapsui.Geometries;
+using Mapsui.Projection;
 using Mapsui.Providers;
 using Mapsui.Styles;
-using Mapsui.Projection;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
 
 namespace Mapsui.Layers
 {
