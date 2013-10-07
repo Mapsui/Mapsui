@@ -25,92 +25,45 @@ namespace Mapsui.Styles.Thematics
     /// </summary>
     public class GradientTheme : Style, IThemeStyle
     {
-        #region Fields
-        private string columnName;
-        private double minVal;
-        private double maxVal;
-        private IStyle minStyle;
-        private IStyle maxStyle;
-        private ColorBlend textColorBlend;
-        private ColorBlend lineColorBlend;
-        private ColorBlend fillColorBlend;
-        #endregion
-
-        #region Properties
-
         /// <summary>
         /// Gets or sets the column name from where to get the attribute value
         /// </summary>
-        public string ColumnName
-        {
-            get { return columnName; }
-            set { columnName = value; }
-        }
+        public string ColumnName { get; set; }
 
         /// <summary>
         /// Gets or sets the minimum value of the gradient
         /// </summary>
-        public double Min
-        {
-            get { return minVal; }
-            set { minVal = value; }
-        }
+        public double Min { get; set; }
 
         /// <summary>
         /// Gets or sets the maximum value of the gradient
         /// </summary>
-        public double Max
-        {
-            get { return maxVal; }
-            set { maxVal = value; }
-        }
+        public double Max { get; set; }
 
         /// <summary>
         /// Gets or sets the <see cref="Mapsui.Styles.IStyle">style</see> for the minimum value
         /// </summary>
-        public IStyle MinStyle
-        {
-            get { return minStyle; }
-            set { minStyle = value; }
-        }
+        public IStyle MinStyle { get; set; }
 
         /// <summary>
         /// Gets or sets the <see cref="Mapsui.Styles.IStyle">style</see> for the maximum value
         /// </summary>
-        public IStyle MaxStyle
-        {
-            get { return maxStyle; }
-            set { maxStyle = value; }
-        }
+        public IStyle MaxStyle { get; set; }
 
         /// <summary>
         /// Gets or sets the <see cref="Mapsui.Styles.Thematics.ColorBlend"/> used on labels
         /// </summary>
-        public ColorBlend TextColorBlend
-        {
-            get { return textColorBlend; }
-            set { textColorBlend = value; }
-        }
+        public ColorBlend TextColorBlend { get; set; }
 
         /// <summary>
         /// Gets or sets the <see cref="Mapsui.Styles.Thematics.ColorBlend"/> used on lines
         /// </summary>
-        public ColorBlend LineColorBlend
-        {
-            get { return lineColorBlend; }
-            set { lineColorBlend = value; }
-        }
+        public ColorBlend LineColorBlend { get; set; }
 
         /// <summary>
         /// Gets or sets the <see cref="Mapsui.Styles.Thematics.ColorBlend"/> used as Fill
         /// </summary>
-        public ColorBlend FillColorBlend
-        {
-            get { return fillColorBlend; }
-            set { fillColorBlend = value; }
-        }
-
-#endregion
+        public ColorBlend FillColorBlend { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the GradientTheme class
@@ -156,11 +109,11 @@ namespace Mapsui.Styles.Thematics
         /// <param name="maxStyle">Color for maximum value</param>
         public GradientTheme(string columnName, double minValue, double maxValue, IStyle minStyle, IStyle maxStyle)
         {
-            this.columnName = columnName;
-            minVal = minValue;
-            maxVal = maxValue;
-            this.maxStyle = maxStyle;
-            this.minStyle = minStyle;
+            ColumnName = columnName;
+            Min = minValue;
+            Max = maxValue;
+            MaxStyle = maxStyle;
+            MinStyle = minStyle;
         }
 
         #region ITheme Members
@@ -174,9 +127,9 @@ namespace Mapsui.Styles.Thematics
         public IStyle GetStyle(IFeature row)
         {
             double attr;
-            try { attr = Convert.ToDouble(row[columnName.ToUpper()]); }
+            try { attr = Convert.ToDouble(row[ColumnName.ToUpper()]); }
             catch { throw new Exception("Invalid Attribute type in Gradient Theme - Couldn't parse attribute (must be numerical)"); }
-            if (minStyle.GetType() != maxStyle.GetType())
+            if (MinStyle.GetType() != MaxStyle.GetType())
                 throw new ArgumentException("MinStyle and MaxStyle must be of the same type");
 
 
@@ -195,15 +148,15 @@ namespace Mapsui.Styles.Thematics
             double dFrac = Fraction(value);
             double fFrac = Convert.ToSingle(dFrac);
             style.Enabled = (dFrac > 0.5 ? min.Enabled : max.Enabled);
-            if (fillColorBlend != null)
-                style.Fill = new Brush { Color = fillColorBlend.GetColor(fFrac) };
+            if (FillColorBlend != null)
+                style.Fill = new Brush { Color = FillColorBlend.GetColor(fFrac) };
             else if (min.Fill != null && max.Fill != null)
                 style.Fill = InterpolateBrush(min.Fill, max.Fill, value);
 
             if (min.Line != null && max.Line != null)
                 style.Line = InterpolatePen(min.Line, max.Line, value);
-            if (lineColorBlend != null)
-                style.Line.Color = lineColorBlend.GetColor(fFrac);
+            if (LineColorBlend != null)
+                style.Line.Color = LineColorBlend.GetColor(fFrac);
 
             if (min.Outline != null && max.Outline != null)
                 style.Outline = InterpolatePen(min.Outline, max.Outline, value);
@@ -229,10 +182,10 @@ namespace Mapsui.Styles.Thematics
             if (min.BackColor != null && max.BackColor != null)
                 style.BackColor = InterpolateBrush(min.BackColor, max.BackColor, value);
 
-            if (textColorBlend != null)
-                style.ForeColor = lineColorBlend.GetColor(Convert.ToSingle(Fraction(value)));
-            else
-                style.ForeColor = InterpolateColor(min.ForeColor, max.ForeColor, value);
+            style.ForeColor = TextColorBlend == null ? 
+                InterpolateColor(min.ForeColor, max.ForeColor, value) : 
+                LineColorBlend.GetColor(Convert.ToSingle(Fraction(value)));
+
             if (min.Halo != null && max.Halo != null)
                 style.Halo = InterpolatePen(min.Halo, max.Halo, value);
 
@@ -243,9 +196,9 @@ namespace Mapsui.Styles.Thematics
 
         private double Fraction(double attr)
         {
-            if (attr < minVal) return 0;
-            if (attr > maxVal) return 1;
-            return (attr - minVal) / (maxVal - minVal);
+            if (attr < Min) return 0;
+            if (attr > Max) return 1;
+            return (attr - Min) / (Max - Min);
         }
 
         private bool InterpolateBool(bool min, bool max, double attr)
@@ -253,11 +206,6 @@ namespace Mapsui.Styles.Thematics
             double frac = Fraction(attr);
             if (frac > 0.5) return max;
             return min;
-        }
-
-        private double InterpolateFloat(float min, float max, double attr)
-        {
-            return Convert.ToSingle((max - min) * Fraction(attr) + min);
         }
 
         private double InterpolateDouble(double min, double max, double attr)
@@ -280,15 +228,14 @@ namespace Mapsui.Styles.Thematics
                 Color = InterpolateColor(min.Color, max.Color, attr),
                 Width = InterpolateDouble(min.Width, max.Width, attr)
             };
-
         }
 
         private Color InterpolateColor(Color minCol, Color maxCol, double attr)
         {
             double frac = Fraction(attr);
-            if (frac == 1)
+            if (Math.Abs(frac - 1) < Utilities.Constants.Epsilon)
                 return maxCol;
-            if (frac == 0)
+            if (Math.Abs(frac - 0) < Utilities.Constants.Epsilon)
                 return minCol;
 
             double r = (maxCol.R - minCol.R) * frac + minCol.R;

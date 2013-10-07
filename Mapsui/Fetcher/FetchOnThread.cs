@@ -24,15 +24,15 @@ namespace Mapsui.Fetcher
         //This class is needed because in CF one can only pass arguments to a thread using a class constructor.
         //Once support for CF is dropped (replaced by SL on WinMo?) this class should be removed.
     {
-        readonly ITileProvider tileProvider;
-        readonly TileInfo tileInfo;
-        readonly FetchTileCompletedEventHandler fetchTileCompleted;
+        readonly ITileProvider _tileProvider;
+        readonly TileInfo _tileInfo;
+        readonly FetchTileCompletedEventHandler _fetchTileCompleted;
 
         public FetchOnThread(ITileProvider tileProvider, TileInfo tileInfo, FetchTileCompletedEventHandler fetchTileCompleted)
         {
-            this.tileProvider = tileProvider;
-            this.tileInfo = tileInfo;
-            this.fetchTileCompleted = fetchTileCompleted;
+            _tileProvider = tileProvider;
+            _tileInfo = tileInfo;
+            _fetchTileCompleted = fetchTileCompleted;
         }
 
         public void FetchTile(object state)
@@ -42,13 +42,13 @@ namespace Mapsui.Fetcher
 
             try
             {
-                if (tileProvider != null) image = tileProvider.GetTile(tileInfo);
+                if (_tileProvider != null) image = _tileProvider.GetTile(_tileInfo);
             }
             catch (Exception ex) //This may seem a bit weird. We catch the exception to pass it as an argument. This is because we are on a worker thread here, we cannot just let it fall through. 
             {
                 error = ex;
             }
-            fetchTileCompleted(this, new FetchTileCompletedEventArgs(error, false, tileInfo, image));
+            _fetchTileCompleted(this, new FetchTileCompletedEventArgs(error, false, _tileInfo, image));
         }
     }
 

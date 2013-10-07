@@ -52,17 +52,9 @@ namespace Mapsui.Styles.Thematics
 			StyleDelegate = getStyleMethod;
 		}
 
-
-		#region ITheme Members
-
 		public IStyle GetStyle(IFeature row)
 		{
-			IStyle style = StyleDelegate(row);
-			if (style != null)
-				return style;
-		    return DefaultStyle;
+            return StyleDelegate(row) ?? DefaultStyle;
 		}
-
-		#endregion
-}
+    }
 }

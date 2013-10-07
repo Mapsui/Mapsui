@@ -39,7 +39,7 @@ namespace Mapsui.Windows
     {
         #region Fields
         private Map _map;
-        private readonly Viewport _viewport = new Viewport();
+        private readonly Viewport _viewport = new Viewport { CenterX = double.NaN, CenterY = double.NaN, Resolution = double.NaN };
         private Point _previousMousePosition;
         private Point _currentMousePosition;
         private Point _downMousePosition;
@@ -49,7 +49,7 @@ namespace Mapsui.Windows
         private readonly Storyboard _zoomStoryBoard = new Storyboard();
         private double _toResolution = double.NaN;
         private bool _mouseDown;
-        private bool _viewInitialized;
+        private bool _viewportInitialized;
         private readonly Canvas _renderCanvas = new Canvas();
         private bool _invalid;
         private readonly Rectangle _bboxRect;
@@ -106,7 +106,7 @@ namespace Mapsui.Windows
         {
             if (e.PropertyName == "Envelope")
             {
-                InitializeView();
+                InitializeViewport();
                 _map.ViewChanged(true, _viewport.Extent, _viewport.Resolution);
             }
         }
@@ -313,7 +313,7 @@ namespace Mapsui.Windows
 
         private void MapControlLoaded(object sender, RoutedEventArgs e)
         {
-            if (!_viewInitialized) InitializeView();
+            if (!_viewportInitialized) InitializeViewport();
             UpdateSize();
             InitAnimation();
 
@@ -379,7 +379,7 @@ namespace Mapsui.Windows
 
         private void MapControlSizeChanged(object sender, SizeChangedEventArgs e)
         {
-            if (!_viewInitialized) InitializeView();
+            if (!_viewportInitialized) InitializeViewport();
             Clip = new RectangleGeometry { Rect = new Rect(0, 0, ActualWidth, ActualHeight) };
             UpdateSize();
             _map.ViewChanged(true, _viewport.Extent, _viewport.Resolution);
@@ -568,7 +568,7 @@ namespace Mapsui.Windows
             }
         }
 
-        private void InitializeView()
+        private void InitializeViewport()
         {
             if (ActualWidth.IsNanOrZero()) return;
             if (_map == null) return;
@@ -577,21 +577,18 @@ namespace Mapsui.Windows
             if (_map.Envelope.Height.IsNanOrZero()) return;
             if (_map.Envelope.GetCentroid() == null) return;
 
-            if ((_viewport.CenterX > 0) && (_viewport.CenterY > 0) && (_viewport.Resolution > 0))
-            {
-                _viewInitialized = true; //view was already initialized
-                return;
-            }
+            if (double.IsNaN(_viewport.Resolution))
+                _viewport.Resolution = _map.Envelope.Width / ActualWidth;
+            if (double.IsNaN(_viewport.CenterX) || double.IsNaN(_viewport.CenterY))
+                _viewport.Center = _map.Envelope.GetCentroid();
 
-            _viewport.Center = _map.Envelope.GetCentroid();
-            _viewport.Resolution = _map.Envelope.Width / ActualWidth;
-            _viewInitialized = true;
+            _viewportInitialized = true;
         }
 
         private void CompositionTargetRendering(object sender, EventArgs e)
         {
-            if (!_viewInitialized) InitializeView();
-            if (!_viewInitialized) return; //stop if the line above failed. 
+            if (!_viewportInitialized) InitializeViewport();
+            if (!_viewportInitialized) return; //stop if the line above failed. 
             if (!_invalid) return;
 
             if ((Renderer != null) && (_map != null))
@@ -714,7 +711,7 @@ namespace Mapsui.Windows
             var previous = _viewport.ScreenToWorld(e.ManipulationOrigin.X, e.ManipulationOrigin.Y);
             var current = _viewport.ScreenToWorld(e.ManipulationOrigin.X + e.DeltaManipulation.Translation.X, e.ManipulationOrigin.Y + e.DeltaManipulation.Translation.Y);
 
-            double scale = (e.DeltaManipulation.Scale.X != 1d && !ZoomLocked) ? 
+            double scale = (Math.Abs(e.DeltaManipulation.Scale.X - 1d) > Constants.Epsilon && !ZoomLocked) ? 
                 ((e.DeltaManipulation.Scale.X + e.DeltaManipulation.Scale.Y) / 2) : 1.0;
             PanAndZoom(current, previous, scale);
 

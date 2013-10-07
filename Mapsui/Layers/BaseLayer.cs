@@ -172,7 +172,7 @@ namespace Mapsui.Layers
         protected BaseLayer()
         {
             LayerName = "Layer";
-            Style = new VectorStyle(); // todo: think, do we need a default style or should it be null
+            Style = new VectorStyle();
             Enabled = true;
             MinVisible = 0;
             MaxVisible = double.MaxValue;

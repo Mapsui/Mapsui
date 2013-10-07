@@ -34,6 +34,7 @@ namespace Mapsui.Rendering.XamlRendering
                 IFeatures features = null;
                 var thread = new Thread(() => RenderToRaster(CreateViewport(box, resolution), _layer, out features));
                 thread.SetApartmentState(ApartmentState.STA);
+                thread.Priority = ThreadPriority.BelowNormal;
                 thread.Start();
                 thread.Join();
                 return features;

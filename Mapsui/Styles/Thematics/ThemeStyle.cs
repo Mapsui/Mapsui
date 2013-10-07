@@ -5,16 +5,16 @@ namespace Mapsui.Styles.Thematics
 {
     public class ThemeStyle : Style, IThemeStyle
     {
-        Func<IFeature, IStyle> method;
+        readonly Func<IFeature, IStyle> _method;
 
         public ThemeStyle(Func<IFeature, IStyle> method)
         {
-            this.method = method;
+            _method = method;
         }
 
         public IStyle GetStyle(IFeature attribute)
         {
-            return method(attribute);
+            return _method(attribute);
         }
     }
 }

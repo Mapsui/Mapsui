@@ -13,24 +13,11 @@ namespace Mapsui.Samples.Metro
 {
     public sealed partial class MainPage
     {
-        bool _first = true;
-
         public MainPage()
         {
             InitializeComponent();
-            mapControl.ViewChanged += mapControl_ViewChanged;
-        }
-
-        void mapControl_ViewChanged(object sender, Windows.ViewChangedEventArgs e)
-        {
-            if (!_first) return;
-            _first = false;
-
-            // sample: zoom to default area at startup
-            var beginPoint = new Point(-4000000, 2000000);
-            var endPoint = new Point(4000000, 11000000);
-            mapControl.ZoomToBox(beginPoint, endPoint);
-            mapControl.Refresh();
+            mapControl.Viewport.Resolution = 2000;
+            mapControl.Viewport.Center = new Point(0, 0);
         }
 
         /// <summary>
@@ -42,9 +29,9 @@ namespace Mapsui.Samples.Metro
         {
             mapControl.Map.Layers.Add(new TileLayer(new OsmTileSource()));
             var provider = CreateRandomPointsProvider();
-            mapControl.Map.Layers.Add(PointLayerSample.CreateRandomPointLayerWithLabel(provider));
-            mapControl.Map.Layers.Add(PointLayerSample.CreateStackedLabelLayer(provider));
-            mapControl.Map.Layers.Add(PointLayerSample.CreateRandomPolygonLayer(mapControl.Map.Envelope, 1));
+            //mapControl.Map.Layers.Add(PointLayerSample.CreateRandomPointLayerWithLabel(provider));
+            //mapControl.Map.Layers.Add(PointLayerSample.CreateStackedLabelLayer(provider));
+            //mapControl.Map.Layers.Add(PointLayerSample.CreateRandomPolygonLayer(mapControl.Map.Envelope, 1));
         }
 
         private Stream GetSymbolBitmapStream()

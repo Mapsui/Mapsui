@@ -27,8 +27,8 @@ namespace Mapsui.Styles.Thematics
 		/// <summary>
 		/// Returns the style based on a feature
 		/// </summary>
-		/// <param name="attribute">Attribute to calculate color from</param>
+		/// <param name="feature">Feature to calculate color from</param>
 		/// <returns>Color</returns>
-		IStyle GetStyle(IFeature attribute);
+		IStyle GetStyle(IFeature feature);
 	}
 }
