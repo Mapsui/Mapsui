@@ -200,6 +200,8 @@ namespace Mapsui.Rendering.XamlRendering
 
         public static void Animate(DependencyObject target, string property, double from, double to, int duration, AnimateEventHandler completed)
         {
+            return;
+
             var animation = new DoubleAnimation
                 {
                     From = from, 

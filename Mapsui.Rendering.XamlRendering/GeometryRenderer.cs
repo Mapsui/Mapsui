@@ -273,6 +273,7 @@ namespace Mapsui.Rendering.XamlRendering
             XamlShapes.Path path = CreateLineStringPath(vectorStyle);
             path.Data = lineString.ToXaml();
             path.RenderTransform = new XamlMedia.MatrixTransform { Matrix = CreateTransformMatrix1(viewport) };
+            CounterScaleLineWidth(path, viewport.Resolution);
             return path;
         }
 
@@ -284,8 +285,7 @@ namespace Mapsui.Rendering.XamlRendering
                 //todo: render an outline around the line. 
             }
             path.Stroke = new XamlMedia.SolidColorBrush(style.Line.Color.ToXaml());
-            path.StrokeThickness = style.Line.Width;
-            path.Tag = new double?(style.Line.Width); // see #outlinehack
+            path.Tag = style.Line.Width; // see #linewidthhack
             path.IsHitTestVisible = false;
             return path;
         }
@@ -294,9 +294,11 @@ namespace Mapsui.Rendering.XamlRendering
         {
             if (!(style is VectorStyle)) throw new ArgumentException("Style is not of type VectorStyle");
             var vectorStyle = style as VectorStyle;
+
             XamlShapes.Path path = CreateLineStringPath(vectorStyle);
             path.Data = multiLineString.ToXaml();
             path.RenderTransform = new XamlMedia.MatrixTransform { Matrix = CreateTransformMatrix1(viewport) };
+            CounterScaleLineWidth(path, viewport.Resolution);
             return path;
         }
 
@@ -319,7 +321,7 @@ namespace Mapsui.Rendering.XamlRendering
             {
                 path.Stroke = new XamlMedia.SolidColorBrush(style.Outline.Color.ToXaml());
                 path.StrokeThickness = style.Outline.Width * resolution;
-                path.Tag = style.Outline.Width; // see #outlinehack
+                path.Tag = style.Outline.Width; // see #linewidthhack
             }
             path.Fill = style.Fill.ToXaml();
             path.IsHitTestVisible = false;
@@ -429,14 +431,14 @@ namespace Mapsui.Rendering.XamlRendering
 
         public static void PositionGeometry(UIElement renderedGeometry, IViewport viewport)
         {
-            CounterScaleOutline(renderedGeometry, viewport.Resolution);
+            CounterScaleLineWidth(renderedGeometry, viewport.Resolution);
             renderedGeometry.RenderTransform = new XamlMedia.MatrixTransform { Matrix = CreateTransformMatrix1(viewport) };
         }
 
-        private static void CounterScaleOutline(UIElement renderedGeometry, double resolution)
+        private static void CounterScaleLineWidth(UIElement renderedGeometry, double resolution)
         {
-            // #outlinehack
-            // When the RenderTransform Matrix is applied the width of the outline
+            // #linewidthhack
+            // When the RenderTransform Matrix is applied the width of the line
             // is scaled along with the rest. We want the outline to have a fixed
             // width independent of the scale. So here we counter scale using
             // the orginal width stored in the Tag.
