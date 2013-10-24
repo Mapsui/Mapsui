@@ -189,10 +189,10 @@ namespace Mapsui.Windows
 
 #if (!SILVERLIGHT && !WINDOWS_PHONE)
             Dispatcher.ShutdownStarted += DispatcherShutdownStarted;
-            RenderCanvas.IsManipulationEnabled = true;
-            RenderCanvas.ManipulationDelta += OnManipulationDelta;
-            RenderCanvas.ManipulationCompleted += OnManipulationCompleted;
-            RenderCanvas.ManipulationInertiaStarting += OnManipulationInertiaStarting;
+            IsManipulationEnabled = true;
+            ManipulationDelta += OnManipulationDelta;
+            ManipulationCompleted += OnManipulationCompleted;
+            ManipulationInertiaStarting += OnManipulationInertiaStarting;
 #endif
 
 #if (WINDOWS_PHONE)
@@ -491,8 +491,6 @@ namespace Mapsui.Windows
 
         private void MapControlMouseMove(object sender, MouseEventArgs e)
         {
-            Debug.WriteLine("MapControlMouseMove");
-
             if (IsInBoxZoomMode || ZoomToBoxMode)
             {
                 DrawBbox(e.GetPosition(this));
@@ -718,6 +716,7 @@ namespace Mapsui.Windows
             _invalid = true;
             // not calling map.ViewChanged(false, view.Extent, view.Resolution); for smoother panning/zooming
             OnViewChanged(true);            
+            e.Handled = true;
         }
                
         private void OnManipulationCompleted(object sender, ManipulationCompletedEventArgs e)

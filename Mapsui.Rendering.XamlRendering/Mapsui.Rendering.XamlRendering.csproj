@@ -56,6 +56,7 @@
     <Compile Include="StackedLabelLayerRenderer.cs" />
     <Compile Include="SingleLabelRenderer.cs" />
     <Compile Include="StyleExtensions.cs" />
+    <Compile Include="Utilities.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Mapsui\Mapsui.csproj">

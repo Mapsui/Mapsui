@@ -68,7 +68,7 @@ namespace Mapsui.Layers
         /// <summary>
         /// The spatial reference ID (CRS)
         /// </summary>
-        int SRID { get; set; }
+        int SRID { get; }
 
         /// <summary>
         /// The coordinate transformation

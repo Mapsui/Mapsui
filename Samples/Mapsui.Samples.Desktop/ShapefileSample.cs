@@ -33,26 +33,17 @@ namespace Mapsui.Samples.Desktop
             return new Layer
                 {
                     LayerName = "Countries",
-                    DataSource = new RasterizingProvider(new InMemoryLayer
-                        {
-                            DataSource = countrySource,
-                            Style = CreateCountryTheme()
-                        })
+                    DataSource = new RasterizingProvider(countrySource, CreateCountryTheme())
                 };
         }
 
         public static ILayer CreateCityLayer(IProvider citySource)
         {
             return new Layer
-            {
-                LayerName = "Cities",
-                DataSource = new RasterizingProvider(new InMemoryLayer
-                    {
-                        DataSource = citySource,
-                        Style = CreateCityTheme(),
-                        MaxVisible = 10000000.0
-                    })
-            };
+                {
+                    LayerName = "Cities",
+                    DataSource = new RasterizingProvider(citySource, CreateCityTheme())
+                };
         }
 
         private static ILayer CreateCountryLabelLayer(IProvider countryProvider)

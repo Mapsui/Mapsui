@@ -148,9 +148,17 @@ namespace Mapsui.Wpf
             MapControl.Map.Layers.Clear();
             MapControl.Map.Layers.Add(new TileLayer(new OsmTileSource()) { LayerName = "OSM" });
             MapControl.Map.Layers.Add(PointLayerSample.Create());
-            MapControl.Map.Layers.Add(PointLayerWithWorldUnitsForSymbolsSample.Create());
+            MapControl.Map.Layers.Add(CreatePointLayerWithWorldUnitSymbol());
             LayerList.Initialize(MapControl.Map.Layers);
             MapControl.Refresh();
+        }
+
+        private static ILayer CreatePointLayerWithWorldUnitSymbol()
+        {
+            return new Layer("PointLayer WorldUnits")
+                {
+                    DataSource = PointLayerWithWorldUnitsForSymbolsSample.Create()
+                };
         }
 
         private void WmsClick(object sender, RoutedEventArgs e)

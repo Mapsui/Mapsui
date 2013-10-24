@@ -7,15 +7,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 #if !NETFX_CORE
-using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
 using AnimateEventHandler = System.EventHandler;
-#if !SILVERLIGHT
-using System.Windows.Media;
-#endif
 #else
 using Windows.UI.Xaml.Controls;
 using Windows.Foundation;
@@ -71,7 +66,7 @@ namespace Mapsui.Rendering.XamlRendering
 #endif
         }
 
-        internal static void RenderLayer(Canvas target, IViewport viewport, ILayer layer)
+        public static void RenderLayer(Canvas target, IViewport viewport, ILayer layer)
         {
             if (layer.Enabled == false) return;
 
@@ -220,39 +215,6 @@ namespace Mapsui.Rendering.XamlRendering
             storyBoard.Completed += completed;
             storyBoard.Begin();
         }
-
-#if !NETFX_CORE
-        public MemoryStream ToBitmapStream(double width, double height)
-        {
-            return ToBitmapStream(_target, width, height);
-        }
-
-#if SILVERLIGHT
-
-        public static MemoryStream ToBitmapStream(UIElement uiElement, double width, double height)
-        {
-            uiElement.Arrange(new Rect(0, 0, width, height));
-
-            var writeableBitmap = new WriteableBitmap((int)width, (int)height);
-            writeableBitmap.Render(uiElement, null);
-            var bitmapStream = Utilities.ConverToBitmapStream(writeableBitmap);
-            return bitmapStream;
-        }
-#else
-        public static MemoryStream ToBitmapStream(UIElement uiElement, double width, double height)
-        {
-            uiElement.Arrange(new Rect(0, 0, width, height));
-            var renderTargetBitmap = new RenderTargetBitmap((int)width, (int)height, 96, 96, new PixelFormat());
-            renderTargetBitmap.Render(uiElement);
-            var bitmap = new PngBitmapEncoder();
-            bitmap.Frames.Add(BitmapFrame.Create(renderTargetBitmap));
-            var bitmapStream = new MemoryStream();
-            bitmap.Save(bitmapStream);
-            return bitmapStream;
-        }
-#endif
-#endif
-
     }
 }
 

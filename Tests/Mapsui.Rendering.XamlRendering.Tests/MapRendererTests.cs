@@ -1,4 +1,4 @@
-﻿using BruTile;
+﻿using System.Windows.Controls;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
@@ -23,13 +23,13 @@ namespace Mapsui.Rendering.XamlRendering.Tests
                     CreateFeature(-20, 0, new SymbolStyle {SymbolType = SymbolType.Ellipse}),
                     CreateFeature(20, 0, new SymbolStyle {SymbolType = SymbolType.Rectangle})
                 };
-            var layers = new[] { new InMemoryLayer { DataSource = new MemoryProvider(features) } };
-            var renderer = new MapRenderer();
+            var layer = new InMemoryLayer { DataSource = new MemoryProvider(features) };
             const string imagePath = ImagesFolder + "\\vector_symbol_symboltype.png";
-
+            var canvas = new Canvas();
+            
             // act
-            renderer.Render(viewport, layers);
-            var bitmap = renderer.ToBitmapStream(viewport.Width, viewport.Height);
+            MapRenderer.RenderLayer(canvas, viewport, layer);
+            var bitmap = Utilities.ToBitmapStream(canvas, viewport.Width, viewport.Height);
 
             // aside
             if (Rendering.Default.WriteImageToDisk) WriteToDisk(imagePath, bitmap);
@@ -48,13 +48,13 @@ namespace Mapsui.Rendering.XamlRendering.Tests
                     CreateFeature(-20, 0, new SymbolStyle {UnitType = UnitType.Pixel}),
                     CreateFeature(20, 0, new SymbolStyle {UnitType = UnitType.WorldUnit})
                 };
-            var layers = new[] { new InMemoryLayer { DataSource = new MemoryProvider(features) } };
-            var renderer = new MapRenderer();
+            var layer = new InMemoryLayer { DataSource = new MemoryProvider(features) } ;
             const string imagePath = ImagesFolder + "\\vector_symbol_unittype.png";
+            var canvas = new Canvas();
 
             // act
-            renderer.Render(viewport, layers);
-            var bitmap = renderer.ToBitmapStream(viewport.Width, viewport.Height);
+            MapRenderer.RenderLayer(canvas, viewport, layer);
+            var bitmap = Utilities.ToBitmapStream(canvas, viewport.Width, viewport.Height);
 
             // aside
             if (Rendering.Default.WriteImageToDisk) WriteToDisk(imagePath, bitmap);
@@ -71,13 +71,12 @@ namespace Mapsui.Rendering.XamlRendering.Tests
             var layer = new InMemoryLayer();
             var provider = CreateVectorStyleProvider();
             layer.DataSource = provider;
-            var layers = new[] { layer };
-            var renderer = new MapRenderer();
+            var canvas = new Canvas();
             const string imagePath = ImagesFolder + "\\vector_symbol.png";
 
             // act
-            renderer.Render(viewport, layers);
-            var bitmap = renderer.ToBitmapStream(viewport.Width, viewport.Height);
+            MapRenderer.RenderLayer(canvas, viewport, layer);
+            var bitmap = Utilities.ToBitmapStream(canvas, viewport.Width, viewport.Height);
 
             // aside
             if (Rendering.Default.WriteImageToDisk) WriteToDisk(imagePath, bitmap);
@@ -101,13 +100,12 @@ namespace Mapsui.Rendering.XamlRendering.Tests
             var layer = new InMemoryLayer();
             var provider = CreatePolygonProvider();
             layer.DataSource = provider;
-            var layers = new[] { layer };
-            var renderer = new MapRenderer();
+            var canvas = new Canvas();
             const string imagePath = ImagesFolder + "\\polygon.png";
 
             // act
-            renderer.Render(viewport, layers);
-            var bitmap = renderer.ToBitmapStream(viewport.Width, viewport.Height);
+            MapRenderer.RenderLayer(canvas, viewport, layer);
+            var bitmap = Utilities.ToBitmapStream(canvas, viewport.Width, viewport.Height);
 
             // aside
             if (Rendering.Default.WriteImageToDisk) WriteToDisk(imagePath, bitmap);
@@ -131,13 +129,12 @@ namespace Mapsui.Rendering.XamlRendering.Tests
             var layer = new InMemoryLayer();
             var provider = CreateLineProvider();
             layer.DataSource = provider;
-            var layers = new[] { layer };
-            var renderer = new MapRenderer();
+  var canvas = new Canvas();
             const string imagePath = ImagesFolder + "\\line.png";
 
             // act
-            renderer.Render(viewport, layers);
-            var bitmap = renderer.ToBitmapStream(viewport.Width, viewport.Height);
+            MapRenderer.RenderLayer(canvas, viewport, layer);
+            var bitmap = Utilities.ToBitmapStream(canvas, viewport.Width, viewport.Height);
 
             // aside
             if (Rendering.Default.WriteImageToDisk) WriteToDisk(imagePath, bitmap);
@@ -213,13 +210,12 @@ namespace Mapsui.Rendering.XamlRendering.Tests
             // arrange
             var viewport = new Viewport { Center = new Point(80, 80), Width = 200, Height = 200, Resolution = 1 };
             var layer = new InMemoryLayer { DataSource = CreateProvider() };
-            var layers = new[] { layer };
             const string imagePath = ImagesFolder + "\\bitmap_symbol.png";
-            var renderer = new MapRenderer();
+            var canvas = new Canvas();
 
             // act
-            renderer.Render(viewport, layers);
-            var bitmap = renderer.ToBitmapStream(viewport.Width, viewport.Height);
+            MapRenderer.RenderLayer(canvas, viewport, layer);
+            var bitmap = Utilities.ToBitmapStream(canvas, viewport.Width, viewport.Height);
 
             // aside
             if (Rendering.Default.WriteImageToDisk) WriteToDisk(imagePath, bitmap);

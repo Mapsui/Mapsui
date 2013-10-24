@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Threading;
-using System.Windows.Controls;
-using Mapsui.Geometries;
+﻿using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
+using System.Collections.Generic;
+using System.Threading;
+using System.Windows.Controls;
+using Mapsui.Styles;
 
 namespace Mapsui.Rendering.XamlRendering
 {
@@ -13,12 +14,12 @@ namespace Mapsui.Rendering.XamlRendering
     public class RasterizingProvider : IProvider
     {
         private readonly object _syncLock = new object();
-        private readonly ILayer _layer;
+        private readonly InMemoryLayer _layer = new InMemoryLayer();
 
-
-        public RasterizingProvider(ILayer layer)
+        public RasterizingProvider(IProvider provider, IStyle style = null)
         {
-            _layer = layer;
+            _layer.DataSource = provider;
+            _layer.Style = style;
         }
 
         public int SRID
@@ -31,10 +32,17 @@ namespace Mapsui.Rendering.XamlRendering
         {
             lock (_syncLock)
             {
+                var viewport = CreateViewport(box, resolution);
+                foreach (var feature in _layer.GetFeaturesInView(box, resolution)) 
+                {
+                    // hack: clear cach to prevent cross thread exception. 
+                    // todo: remove this caching mechanis.
+                    feature.RenderedGeometry.Clear();   
+                }
                 IFeatures features = null;
-                var thread = new Thread(() => RenderToRaster(CreateViewport(box, resolution), _layer, out features));
+                var thread = new Thread(() => RenderToRaster(viewport, _layer, out features));
                 thread.SetApartmentState(ApartmentState.STA);
-                thread.Priority = ThreadPriority.BelowNormal;
+                thread.Priority = ThreadPriority.Lowest;
                 thread.Start();
                 thread.Join();
                 return features;
@@ -46,12 +54,13 @@ namespace Mapsui.Rendering.XamlRendering
             return _layer.Envelope;
         }
 
-        private static void RenderToRaster(IViewport viewport, ILayer layer, out IFeatures features)
+        private void RenderToRaster(IViewport viewport, ILayer layer, out IFeatures features)
         {
             var canvas = new Canvas();
             MapRenderer.RenderLayer(canvas, viewport, layer);
-            var bitmap = MapRenderer.ToBitmapStream(canvas, viewport.Width, viewport.Height);
+            var bitmap = Utilities.ToBitmapStream(canvas, viewport.Width, viewport.Height);
             features = new Features { new Feature { Geometry = new Raster(bitmap, viewport.Extent) } };
+            canvas.UpdateLayout();
         }
 
         private static Viewport CreateViewport(BoundingBox box, double resolution)
