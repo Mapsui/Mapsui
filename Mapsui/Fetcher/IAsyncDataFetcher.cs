@@ -33,9 +33,10 @@ namespace Mapsui.Fetcher
 
     public class DataChangedEventArgs
     {
+        public DataChangedEventArgs() : this(null, false, null) {}
+
         public DataChangedEventArgs(Exception error, bool cancelled, TileInfo tileInfo)
-            : this(error, cancelled, tileInfo, string.Empty)
-        { }
+            : this(error, cancelled, tileInfo, string.Empty) {}
         
         public DataChangedEventArgs(Exception error, bool cancelled, TileInfo tileInfo, string layerName)
         {
