@@ -410,7 +410,12 @@ namespace Mapsui.Windows
             }
             else
             {
-                if (e.Cancelled)
+                if (e == null) 
+                {
+                    _errorMessage = "Unexpected error: DataChangedEventArgs can not be null";
+                    OnErrorMessageChanged(EventArgs.Empty);
+                }
+                else if (e.Cancelled)
                 {
                     _errorMessage = "Cancelled";
                     OnErrorMessageChanged(EventArgs.Empty);
@@ -429,7 +434,6 @@ namespace Mapsui.Windows
                 {
                     RefreshGraphics();
                 }
-
             }
         }
 
