@@ -65,6 +65,8 @@ namespace Mapsui.Providers
         /// </summary>
         public IFeatures Features { get; set; }
 
+        public double SymbolSize { get; set; }
+
         /// <summary>
         /// The spatial reference ID (CRS)
         /// </summary>
@@ -143,6 +145,7 @@ namespace Mapsui.Providers
             IFeature feature = Features.New();
             feature.Geometry = geometry;
             Features.Add(feature);
+            SymbolSize = 64;
         }
 
         /// <summary>
@@ -164,7 +167,7 @@ namespace Mapsui.Providers
                     if (feature.Geometry == null)
                         continue;
 
-                    if (box.Intersects(feature.Geometry.GetBoundingBox()))
+                    if (box.Intersects(feature.Geometry.GetBoundingBox().Grow(resolution * SymbolSize * 0.5)))
                     {
                         yield return feature;
                     }
