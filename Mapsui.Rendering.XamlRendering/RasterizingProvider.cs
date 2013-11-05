@@ -14,19 +14,19 @@ namespace Mapsui.Rendering.XamlRendering
     public class RasterizingProvider : IProvider
     {
         private readonly object _syncLock = new object();
-        private readonly InMemoryLayer _layer = new InMemoryLayer();
+        private readonly ILayer _layer;
+
+        public RasterizingProvider(ILayer layer)
+        {
+            _layer = layer;
+        }
 
         public RasterizingProvider(IProvider provider, IStyle style = null)
         {
-            _layer.DataSource = provider;
-            _layer.Style = style;
+            _layer = new InMemoryLayer {DataSource = provider, Style = style};
         }
 
-        public int SRID
-        {
-            get { return _layer.SRID; }
-            set { }
-        }
+        public int SRID { get; set; }
 
         public IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
         {
@@ -36,7 +36,7 @@ namespace Mapsui.Rendering.XamlRendering
                 foreach (var feature in _layer.GetFeaturesInView(box, resolution)) 
                 {
                     // hack: clear cach to prevent cross thread exception. 
-                    // todo: remove this caching mechanis.
+                    // todo: remove this caching mechanism.
                     feature.RenderedGeometry.Clear();   
                 }
                 IFeatures features = null;
