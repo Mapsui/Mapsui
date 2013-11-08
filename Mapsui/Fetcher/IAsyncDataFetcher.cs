@@ -31,7 +31,7 @@ namespace Mapsui.Fetcher
 
     public delegate void DataChangedEventHandler(object sender, DataChangedEventArgs e);
 
-    public class DataChangedEventArgs
+    public class DataChangedEventArgs : EventArgs
     {
         public DataChangedEventArgs() : this(null, false, null) {}
 

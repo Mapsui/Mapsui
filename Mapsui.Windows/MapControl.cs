@@ -439,6 +439,8 @@ namespace Mapsui.Windows
 
         private void MapControlMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            if (e.StylusDevice != null) return;
+
             var eventArgs = GetMouseInfoEventArgs(e.GetPosition(this), MouseInfoDownLayers);
             OnMouseInfoDown(eventArgs ?? new MouseInfoEventArgs());
             _previousMousePosition = e.GetPosition(this);
@@ -449,6 +451,8 @@ namespace Mapsui.Windows
 
         private void MapControlMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
+            if (e.StylusDevice != null) return;
+
             if (IsInBoxZoomMode || ZoomToBoxMode)
             {
                 ZoomToBoxMode = false;
@@ -495,6 +499,8 @@ namespace Mapsui.Windows
 
         private void MapControlMouseMove(object sender, MouseEventArgs e)
         {
+            if (e.StylusDevice != null) return;
+
             if (IsInBoxZoomMode || ZoomToBoxMode)
             {
                 DrawBbox(e.GetPosition(this));
