@@ -70,11 +70,10 @@ namespace Mapsui.Layers
             }
         }
 
-        public Layer() : base("") { }
+        public Layer() : this("Layer") { }
 
-        public Layer(string layername)
+        public Layer(string layername) : base(layername)
         {
-            LayerName = layername;
             Cache = new MemoryProvider();
             FetchingPostponedInMilliseconds = 500;
         }
