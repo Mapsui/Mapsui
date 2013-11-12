@@ -63,6 +63,15 @@ namespace Mapsui.Rendering.XamlRendering
             canvas.UpdateLayout();
         }
 
+        public IProvider DataSource
+        {
+            get
+            {
+                var layer = _layer as InMemoryLayer;
+                return layer != null ? layer.DataSource : null;
+            }
+        }
+
         private static Viewport CreateViewport(BoundingBox box, double resolution)
         {
             return new Viewport
