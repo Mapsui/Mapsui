@@ -13,7 +13,8 @@
     <RootNamespace>BruTile.UI.Silverlight.Web</RootNamespace>
     <AssemblyName>BruTile.UI.Silverlight.Web</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <SilverlightApplicationList>{066B11A1-B05D-4DD4-B372-1CCEDF929962}|..\Mapsui.Silverlight\Mapsui.Silverlight.csproj|ClientBin|False</SilverlightApplicationList>
+    <SilverlightApplicationList>
+    </SilverlightApplicationList>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <UpgradeBackupLocation>
