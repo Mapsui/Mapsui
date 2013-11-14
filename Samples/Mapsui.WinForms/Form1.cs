@@ -8,7 +8,6 @@ namespace Mapsui.WinForms
     public partial class Form1 : Form
     {
         //WARNING: This WinForms implementation is very basic. 
-        //Contact me if you actually use BruTileWinforms I might make some improvements. PDD
 
         public Form1()
         {
