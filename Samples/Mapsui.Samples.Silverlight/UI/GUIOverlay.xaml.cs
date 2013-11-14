@@ -58,7 +58,6 @@ namespace Mapsui.Silverlight
             map.Layers.Add(osmLayer);
             map.Layers.Add(CreateRandomPointLayer(provider, bitmapData));
             map.Layers.Add(PointLayerSample.CreateRandomPointLayerWithLabel(provider));
-            map.Layers.Add(PointLayerSample.CreateStackedLabelLayer(provider));
             return map;
         }
 

@@ -74,8 +74,8 @@ namespace Mapsui.Samples.Common
         {
             var styleList = new StyleCollection
                 {
-                    new SymbolStyle {SymbolScale = 1.4, Fill = new Brush(Color.Blue)},
-                    new LabelStyle {Text = "TestLabel"}
+                    new SymbolStyle {SymbolScale = 1, Fill = new Brush(Color.Indigo)},
+                    new LabelStyle {Text = "TestLabel", HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Left, Offset = new Offset{ X= 16.0 }}
                 };
             return new Layer("pointLayer") {DataSource = dataSource, Style = styleList};
         }
