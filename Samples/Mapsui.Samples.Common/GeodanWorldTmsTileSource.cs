@@ -38,5 +38,6 @@ namespace Mapsui.Samples.Common
 
         public ITileProvider Provider { get; private set; }
         public ITileSchema Schema { get; private set; }
+        public string Title { get; private set; }
     }
 }

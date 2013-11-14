@@ -15,19 +15,20 @@ namespace Mapsui.UI.MonoGame
     /// </summary>
     public class MapControl : Game
     {
-        readonly MapRenderer renderer;
-        private readonly Map map = new Map();
-        private Viewport viewport;
-        private Vector2  previousPosition;
-        private TouchCollection? previousTouches;
-        private double previousDistance;
-        private double previousScrollViewValue;
+        private MapRenderer _renderer;
+        private readonly Map _map = new Map();
+        private Viewport _viewport;
+        private Vector2  _previousPosition;
+        private TouchCollection? _previousTouches;
+        private double _previousDistance;
+        private double _previousScrollViewValue;
         
         public MapControl()
         {
-            renderer = new MapRenderer(this);
-            map.Layers.Add(new TileLayer(new OsmTileSource()));
-            
+            _map.Layers.Add(new TileLayer(new OsmTileSource()));
+
+            // this weird code is correct:
+            new GraphicsDeviceManager(this);
         }
 
         /// <summary>
@@ -42,11 +43,12 @@ namespace Mapsui.UI.MonoGame
             TouchPanel.EnableMouseGestures = true;
             base.Initialize();
 
-            if (viewport == null)
-                if (CanInitializeView(map, GraphicsDevice.Viewport))
+            if (_viewport == null)
+                if (CanInitializeView(_map, GraphicsDevice.Viewport))
                 {
-                    viewport = InitializeView(map, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
-                    map.ViewChanged(true, viewport.Extent, viewport.Resolution);
+                    _viewport = InitializeView(_map, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
+                    _map.ViewChanged(true, _viewport.Extent, _viewport.Resolution);
+                    _renderer = new MapRenderer(GraphicsDevice);
                 }
         }
 
@@ -81,27 +83,27 @@ namespace Mapsui.UI.MonoGame
             MouseState mouseState = Mouse.GetState();
             
             var scrollViewValue = mouseState.ScrollWheelValue;
-            if (scrollViewValue == previousScrollViewValue)
+            if (scrollViewValue == _previousScrollViewValue)
             {
-                scale = GetScale(distance, previousDistance);
+                scale = GetScale(distance, _previousDistance);
             }
             else
             {
-                if (scrollViewValue > previousScrollViewValue) viewport.Resolution *= 0.5;
-                else viewport.Resolution *= 2;
+                if (scrollViewValue > _previousScrollViewValue) _viewport.Resolution *= 0.5;
+                else _viewport.Resolution *= 2;
             }
 
             if (center != default(Vector2) && touches.Count > 0 &&
-                previousTouches != null &&
-                touches.Count == previousTouches.Value.Count)
+                _previousTouches != null &&
+                touches.Count == _previousTouches.Value.Count)
             {
-                viewport.Transform(center.X, center.Y, previousPosition.X, previousPosition.Y, scale);
-                map.ViewChanged(true, viewport.Extent, viewport.Resolution);
+                _viewport.Transform(center.X, center.Y, _previousPosition.X, _previousPosition.Y, scale);
+                _map.ViewChanged(true, _viewport.Extent, _viewport.Resolution);
             }
-            previousPosition = center;
-            previousTouches = touches;
-            previousDistance = distance;
-            previousScrollViewValue = scrollViewValue;
+            _previousPosition = center;
+            _previousTouches = touches;
+            _previousDistance = distance;
+            _previousScrollViewValue = scrollViewValue;
             base.Update(gameTime);
         }
 
@@ -138,8 +140,8 @@ namespace Mapsui.UI.MonoGame
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            if (viewport == null) return;
-            renderer.Draw(map, viewport);
+            if (_viewport == null) return;
+            _renderer.Draw(_map, _viewport);
             base.Draw(gameTime);
         }
 

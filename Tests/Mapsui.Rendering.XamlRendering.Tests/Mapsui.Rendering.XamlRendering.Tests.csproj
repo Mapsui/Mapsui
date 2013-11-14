@@ -68,13 +68,14 @@
       <Project>{508AE811-A03A-4138-8CCC-ABDE03C67010}</Project>
       <Name>Mapsui.Samples.Common</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Images\circle.png" />
-    <EmbeddedResource Include="Resources\Images\iconthatneedsoffset.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Images\avion_silhouette.png" />
+    <ProjectReference Include="..\Mapsui.Tests.Common\Mapsui.Tests.Common.csproj">
+      <Project>{81bb36d2-4d01-44e3-9024-e7cbd10da316}</Project>
+      <Name>Mapsui.Tests.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mapsui.Tests\Mapsui.Tests.csproj">
+      <Project>{512db2db-61a0-4723-a6ac-e9ae23243283}</Project>
+      <Name>Mapsui.Tests</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

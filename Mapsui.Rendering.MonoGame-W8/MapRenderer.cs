@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using Mapsui.Geometries;
+﻿using Mapsui.Geometries;
+using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Styles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using BoundingBox = Mapsui.Geometries.BoundingBox;
 using Color = Microsoft.Xna.Framework.Color;
 using Point = Mapsui.Geometries.Point;
@@ -18,15 +19,12 @@ namespace Mapsui.Rendering.MonoGame
     public class MapRenderer
     {
         SpriteBatch _spriteBatch;
-        private readonly Game _game;
-        private readonly IDictionary<string, Texture2D> _renderedResources = new Dictionary<string, Texture2D>(); 
+        private readonly GraphicsDevice _graphicsDevice;
+        private readonly IDictionary<Bitmap, Texture2D> _renderedResources = new Dictionary<Bitmap, Texture2D>();
 
-        public MapRenderer(Game game)
+        public MapRenderer(GraphicsDevice graphicsDevice)
         {
-            _game = game;
-
-            // this weird code is correct:
-            new GraphicsDeviceManager(game);
+            _graphicsDevice = graphicsDevice;
         }
 
         /// <summary>
@@ -34,13 +32,25 @@ namespace Mapsui.Rendering.MonoGame
         /// </summary>
         public void Draw(Map map, IViewport viewport)
         {
-            if (_spriteBatch == null) _spriteBatch = new SpriteBatch(_game.GraphicsDevice);
-            
-            _game.GraphicsDevice.Clear(Color.LightGray);
+            if (_spriteBatch == null) _spriteBatch = new SpriteBatch(_graphicsDevice);
+
+            _graphicsDevice.Clear(Color.LightGray);
             _spriteBatch.Begin();
 
-            VisibleFeatureIterator.Render(viewport, map.Layers, RenderFeature);
-            
+            VisibleFeatureIterator.IterateLayers(viewport, map.Layers, RenderFeature);
+
+            _spriteBatch.End();
+        }
+
+        public void Render(ILayer layer, IViewport viewport)
+        {
+            if (_spriteBatch == null) _spriteBatch = new SpriteBatch(_graphicsDevice);
+
+            _graphicsDevice.Clear(Color.White);
+            _spriteBatch.Begin();
+
+            VisibleFeatureIterator.IterateLayer(viewport, layer, RenderFeature);
+
             _spriteBatch.End();
         }
 
@@ -49,10 +59,10 @@ namespace Mapsui.Rendering.MonoGame
             if (feature.Geometry is IRaster)
             {
                 var raster = (feature.Geometry as IRaster);
-                
+
                 if (!feature.RenderedGeometry.Keys.Contains(style))
                 {
-                    feature.RenderedGeometry[style] = GeometryRenderer.RenderRaster(_game.GraphicsDevice, raster);
+                    feature.RenderedGeometry[style] = raster.Data.ToTexture2D(_graphicsDevice);
                 }
                 var bitmap = feature.RenderedGeometry[style] as Texture2D;
                 if (bitmap == null) throw new Exception("Incorrect geometry type");
@@ -61,49 +71,72 @@ namespace Mapsui.Rendering.MonoGame
             }
             if (feature.Geometry is Point)
             {
-                if (style is SymbolStyle) DrawPoint(viewport, style as SymbolStyle, feature);
+                if (style is VectorStyle) DrawPoint(viewport, style as VectorStyle, feature);
             }
         }
-        
-        private void DrawPoint(IViewport viewport, SymbolStyle style, IFeature feature)
+
+        private Texture2D CreateTextureFromStyleInfo(Brush brush, Pen pen, SymbolType symbolType)
         {
+            const int width = (int)SymbolStyle.DefaultWidth;
+            const int height = (int)SymbolStyle.DefaultHeight;
+            var texture = new Texture2D(_graphicsDevice, width, height);
+            var color = new Color(brush.Color.R, brush.Color.G, brush.Color.B, brush.Color.A);
+            var pixelColors = Enumerable.Range(0, width * height).Select(i => color).ToArray();
+            texture.SetData(pixelColors);
+
+            //PresentationParameters pp = _graphicsDevice.PresentationParameters;
+            //var renderTarget = new RenderTarget2D(_graphicsDevice, 100, 100);
+
+            //_graphicsDevice.SetRenderTarget(renderTarget);
+            ////_graphicsDevice.Clear(ClearOptions.Target | ClearOptions.DepthBuffer, Color.DarkSlateBlue, 1.0f, 0);
+            //using (var sprite = new SpriteBatch(_graphicsDevice))
+            //{
+            //    sprite.Begin();
+            //    sprite.Draw(texture, new Vector2(0, 0), null, Color.White, 0, new Vector2(0, 0), 0.4f, SpriteEffects.None, 1);
+                
+            //    sprite.End();
+            //}
+
+            //_graphicsDevice.SetRenderTarget(null);
+            //var t = (Texture2D) renderTarget;
+            return texture;
+        }
+
+        private void DrawPoint(IViewport viewport, VectorStyle vectorStyle, IFeature feature)
+        {
+            var symbolStyle = (vectorStyle is SymbolStyle)
+                ? (vectorStyle as SymbolStyle)
+                : new SymbolStyle
+                    {
+                        Fill = vectorStyle.Fill,
+                        Line = vectorStyle.Line,
+                        Outline = vectorStyle.Outline
+                    };
+
             var destination = viewport.WorldToScreen(feature.Geometry as Point).ToXna();
 
-            if (!_renderedResources.ContainsKey(style.BitmapLocation))
-            {
-                var temp = new Texture2D(_game.GraphicsDevice, 1, 1);
-                temp.SetData(new[] { Color.White });
-                _renderedResources[style.BitmapLocation] = temp;
-            }
-            
-            var texture = _renderedResources[style.BitmapLocation];
-            
-            //_spriteBatch.Draw(texture,
-            //                  destination,
-            //                  null,
-            //                  Color.Yellow,
-            //                  0,
-            //                  Vector2.Zero,
-            //                  new Vector2(10, 10),
-            //                  SpriteEffects.None,
-            //                  0);
+            var texture = CreateTextureFromStyle(symbolStyle);
 
-            const int width = 10;
-            const int height = 10;
-            var rect = new Rectangle((int) (destination.X - width*0.5), (int) (destination.Y - height*0.5), width, height);
+            var origin = new Vector2(
+                texture.Width * 0.5f + (float)symbolStyle.SymbolOffset.X,
+                texture.Height * 0.5f + (float)symbolStyle.SymbolOffset.Y);
 
-            _spriteBatch.Draw(texture, rect, Color.Red);
+            var rotationInRadians = (float)symbolStyle.SymbolRotation * Mapsui.Utilities.Constants.DegreesToRadians;
+
+            _spriteBatch.Draw(texture, destination, null, Color.White * (float)symbolStyle.Opacity, rotationInRadians, 
+                origin, 1f, SpriteEffects.None, 0f);
         }
 
-        public MemoryStream ToBitmapStream(double width, double height)
+        private Texture2D CreateTextureFromStyle(SymbolStyle symbolStyle)
         {
-            var renderTarget = new RenderTarget2D(_game.GraphicsDevice, (int)width, (int)height);
-            _game.GraphicsDevice.SetRenderTarget(renderTarget);
+            return symbolStyle.Symbol == null || symbolStyle.Symbol.Data == null
+                       ? CreateTextureFromStyleInfo(symbolStyle.Fill, symbolStyle.Line, symbolStyle.SymbolType)
+                       : CreateTextureFromBitmapSymbol(symbolStyle.Symbol); 
+        }
 
-            _game.GraphicsDevice.SetRenderTarget(null);
-            var stream = new MemoryStream();
-            renderTarget.SaveAsPng(stream, (int)width, (int)height);
-            return stream;
+        private Texture2D CreateTextureFromBitmapSymbol(Bitmap symbol)
+        {
+            return _renderedResources[symbol] = symbol.Data.ToTexture2D(_graphicsDevice);
         }
 
         private static BoundingBox WorldToScreen(IViewport viewport, BoundingBox boundingBox)
@@ -115,7 +148,7 @@ namespace Mapsui.Rendering.MonoGame
             };
             return box;
         }
-        
+
         public static BoundingBox RoundToPixel(BoundingBox dest)
         {
             // To get seamless aligning you need to round the 

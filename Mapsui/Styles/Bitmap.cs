@@ -5,20 +5,19 @@ namespace Mapsui.Styles
 {
     public class Bitmap
     {
-        private MemoryStream data;
+        private MemoryStream _data;
 
         public Stream Data
         {
-            get { return data; }
+            get { return _data; }
             set
             {
                 if (value == null)
                 {
-                    data = null;
+                    _data = null;
                     return;
                 }
-                data = CopyStreamToMemoryStream(value);
-                //value.Close(); // not possible in PCL, not sure what effect this will have
+                _data = CopyStreamToMemoryStream(value);
             }
         }
 
@@ -49,7 +48,7 @@ namespace Mapsui.Styles
 
         public bool Equals(Bitmap bitmap)
         {
-            if (!CompareMemoryStreams(data, bitmap.data)) return false;
+            if (!CompareMemoryStreams(_data, bitmap._data)) return false;
             return true;
         }
 

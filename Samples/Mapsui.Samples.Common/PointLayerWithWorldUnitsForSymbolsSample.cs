@@ -1,5 +1,4 @@
 ﻿using Mapsui.Geometries;
-using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Styles;
 
@@ -18,12 +17,10 @@ namespace Mapsui.Samples.Common
                 SymbolType = SymbolType.Rectangle,
                 UnitType = UnitType.WorldUnit,
                 SymbolRotation = 5f,
-                SymbolScale = 1400,
-                Width = 365,
-                Height = 380
+                SymbolScale = 1400
             });
 
-            return new MemoryProvider(new[] { netherlands });
+            return new MemoryProvider(netherlands);
         }
     }
 }

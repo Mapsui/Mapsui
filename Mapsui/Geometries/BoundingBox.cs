@@ -198,6 +198,7 @@ namespace Mapsui.Geometries
         public double Width
         {
             get { return Math.Abs(max.X - min.X); }
+
         }
 
         /// <summary>

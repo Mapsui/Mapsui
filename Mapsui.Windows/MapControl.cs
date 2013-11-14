@@ -491,6 +491,7 @@ namespace Mapsui.Windows
 
         private void MapControlMouseMove(object sender, MouseEventArgs e)
         {
+            if (e.StylusDevice != null) return;
             if (IsInBoxZoomMode || ZoomToBoxMode)
             {
                 DrawBbox(e.GetPosition(this));

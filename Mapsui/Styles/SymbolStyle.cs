@@ -1,4 +1,6 @@
-﻿namespace Mapsui.Styles
+﻿using System;
+
+namespace Mapsui.Styles
 {
     public enum SymbolType
     {
@@ -19,16 +21,12 @@
             SymbolOffset = new Offset();
             SymbolScale = 1f;
             Opacity = 1f;
-            Width = 32;
-            Height = 32;
         }
 
         /// <summary>
         /// Symbol used for rendering points
         /// </summary>
         public Bitmap Symbol { get; set; }
-
-        public string BitmapLocation { get; set; }
 
         /// <summary>
         /// This identifies a resource (like a bitmap or svg) in a resource store. 
@@ -65,10 +63,6 @@
 
         public double Opacity { get; set; }
         
-        public double Width { get; set; }
-
-        public double Height { get; set; }
-
         public const double DefaultWidth = 32;
 
         public const double DefaultHeight = 32;
@@ -116,7 +110,7 @@
                 return false;
             }
 
-            if (SymbolRotation != symbolStyle.SymbolRotation)
+            if (Math.Abs(SymbolRotation - symbolStyle.SymbolRotation) > Utilities.Constants.Epsilon)
             {
                 return false;
             }
@@ -131,21 +125,11 @@
                 return false;
             }
 
-            if (Opacity != symbolStyle.Opacity)
+            if (Math.Abs(Opacity - symbolStyle.Opacity) > Utilities.Constants.Epsilon)
             {
                 return false;
             }
-
-            if (Width != symbolStyle.Width)
-            {
-                return false;
-            }
-
-            if (Height != symbolStyle.Height)
-            {
-                return false;
-            }
-
+            
             return true;
         }
 
@@ -154,7 +138,7 @@
             return (Symbol == null ? 0 : Symbol.GetHashCode()) ^ 
                 SymbolScale.GetHashCode() ^ SymbolOffset.GetHashCode() ^
                 SymbolRotation.GetHashCode() ^ UnitType.GetHashCode() ^ SymbolType.GetHashCode() ^
-                Opacity.GetHashCode() ^ Width.GetHashCode() ^ Height.GetHashCode() ^ base.GetHashCode();
+                Opacity.GetHashCode() ^ base.GetHashCode();
         }
 
         public static bool operator ==(SymbolStyle symbolStyle1, SymbolStyle symbolStyle2)

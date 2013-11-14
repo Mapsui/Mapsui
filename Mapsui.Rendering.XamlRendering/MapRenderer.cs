@@ -27,7 +27,7 @@ namespace Mapsui.Rendering.XamlRendering
 
         public MapRenderer()
         {
-            _target = new Canvas();
+            _target = new Canvas { IsHitTestVisible = false };
         }
 
         public MapRenderer(Canvas target)
@@ -128,7 +128,7 @@ namespace Mapsui.Rendering.XamlRendering
             }
             catch (Exception)
             {
-                return new Canvas();
+                return new Canvas { IsHitTestVisible = false };
             }
         }
 

@@ -118,7 +118,7 @@ namespace Mapsui.Providers.Wms
         /// <summary>
         /// Gets the service description from this server
         /// </summary>
-        public Capabilities.WmsServiceDescription ServiceDescription
+        public Web.Wms.Capabilities.WmsServiceDescription ServiceDescription
         {
             get { return _wmsClient.ServiceDescription; }
         }

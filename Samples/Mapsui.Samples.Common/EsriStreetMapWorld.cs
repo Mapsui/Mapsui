@@ -68,5 +68,11 @@ namespace Mapsui.Samples.Common
                 return new BasicRequest(url);
             }
         }
+
+
+        public string Title
+        {
+            get { throw new System.NotImplementedException(); }
+        }
     }
 }

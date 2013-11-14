@@ -10,24 +10,21 @@ namespace Mapsui.Rendering
 {
     public class VisibleFeatureIterator
     {
-        public static void Render(IViewport viewport, IEnumerable<ILayer> layers,
-            Action<IViewport, IStyle, IFeature> renderFeature)
+        public static void IterateLayers(IViewport viewport, IEnumerable<ILayer> layers,
+            Action<IViewport, IStyle, IFeature> callback)
         {
             foreach (var layer in layers)
             {
-                if (layer.Enabled &&
-                    layer.MinVisible <= viewport.Resolution &&
-                    layer.MaxVisible >= viewport.Resolution)
-                {
-                    RenderLayer(viewport, layer, renderFeature);
-                }
+                IterateLayer(viewport, layer, callback);
             }
         }
 
-        private static void RenderLayer(IViewport viewport, ILayer layer, 
-            Action<IViewport, IStyle, IFeature> renderFeature)
+        public static void IterateLayer(IViewport viewport, ILayer layer, 
+            Action<IViewport, IStyle, IFeature> callback)
         {
             if (layer.Enabled == false) return;
+            if (layer.MinVisible > viewport.Resolution) return;
+            if (layer.MaxVisible < viewport.Resolution) return;
 
             if (layer is LabelLayer)
             {
@@ -36,12 +33,12 @@ namespace Mapsui.Rendering
             }
             else
             {
-                RenderVectorLayer(viewport, layer, renderFeature);
+                IterateVectorLayer(viewport, layer, callback);
             }
         }
 
-        private static void RenderVectorLayer(IViewport viewport, ILayer layer,
-            Action<IViewport, IStyle, IFeature> renderFeature)
+        private static void IterateVectorLayer(IViewport viewport, ILayer layer,
+            Action<IViewport, IStyle, IFeature> callback)
         {
             var features = layer.GetFeaturesInView(viewport.Extent, viewport.Resolution).ToList();
 
@@ -55,7 +52,7 @@ namespace Mapsui.Rendering
                     if (layerStyle is IThemeStyle) style = (layerStyle as IThemeStyle).GetStyle(feature);
                     if ((style == null) || (style.Enabled == false) || (style.MinVisible > viewport.Resolution) || (style.MaxVisible < viewport.Resolution)) continue;
 
-                    renderFeature(viewport, style, feature);
+                    callback(viewport, style, feature);
                 }
             }
 
@@ -66,7 +63,7 @@ namespace Mapsui.Rendering
                 {
                     if (feature.Styles != null && featureStyle.Enabled)
                     {
-                        renderFeature(viewport, featureStyle, feature);
+                        callback(viewport, featureStyle, feature);
                     }
                 }
             }
