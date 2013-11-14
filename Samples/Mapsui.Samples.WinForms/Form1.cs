@@ -3,7 +3,7 @@ using System.Windows.Forms;
 using Mapsui.Samples;
 using Mapsui.Samples.Desktop;
 
-namespace Mapsui.WinForms
+namespace Mapsui.Samples.WinForms
 {
     public partial class Form1 : Form
     {

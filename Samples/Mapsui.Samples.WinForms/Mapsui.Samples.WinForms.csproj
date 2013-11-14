@@ -8,8 +8,8 @@
     <ProjectGuid>{6AE03941-7AD0-4022-A641-B137B9CD2B0F}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Mapsui.WinForms</RootNamespace>
-    <AssemblyName>Mapsui.WinForms</AssemblyName>
+    <RootNamespace>Mapsui.Samples.WinForms</RootNamespace>
+    <AssemblyName>Mapsui.Samples.WinForms</AssemblyName>
     <TargetFrameworkVersion>v4.0.3</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
@@ -37,6 +37,9 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>Mapsui.Samples.WinForms.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BruTile">

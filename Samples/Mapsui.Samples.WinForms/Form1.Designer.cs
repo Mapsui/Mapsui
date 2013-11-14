@@ -1,4 +1,4 @@
-﻿namespace Mapsui.WinForms
+﻿namespace Mapsui.Samples.WinForms
 {
   partial class Form1
   {

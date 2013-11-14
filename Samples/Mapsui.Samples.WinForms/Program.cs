@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace Mapsui.WinForms
+namespace Mapsui.Samples.WinForms
 {
   static class Program
   {
