@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
-using Mapsui.Silverlight;
+using Mapsui.Samples.Silverlight;
 using System.Net;
 using System.Globalization;
 
-namespace Mapsui.Silverlight
+namespace Mapsui.Samples.Silverlight
 {
 	public partial class GoTo : UserControl
 	{

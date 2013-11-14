@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows;
 
-namespace Mapsui.Silverlight
+namespace Mapsui.Samples.Silverlight
 {
     public partial class MainPage
     {
@@ -10,7 +10,7 @@ namespace Mapsui.Silverlight
             InitializeComponent();
             Application.Current.Host.Content.Resized += Content_Resized;
             Application.Current.Host.Content.FullScreenChanged += Content_FullScreenChanged;
-            GUI.SetMap(map);
+            Gui.SetMap(Map);
         }
 
         void Content_FullScreenChanged(object sender, EventArgs e)

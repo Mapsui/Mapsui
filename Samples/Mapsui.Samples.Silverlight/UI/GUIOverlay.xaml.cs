@@ -15,7 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using MapControl = Mapsui.Windows.MapControl;
 
-namespace Mapsui.Silverlight
+namespace Mapsui.Samples.Silverlight
 {
     public partial class GUIOverlay : UserControl
     {
@@ -49,7 +49,7 @@ namespace Mapsui.Silverlight
         private static Map CreateMap()
         {
             var bitmapData = System.Reflection.Assembly.GetExecutingAssembly()
-                .GetManifestResourceStream("Mapsui.Silverlight.UI.Images.btnBbox.png");
+                .GetManifestResourceStream("Mapsui.Samples.Silverlight.UI.Images.btnBbox.png");
 
             var osmLayer = new TileLayer(new OsmTileSource()) {LayerName = "OSM"};
             var provider = CreateRandomPointsProvider(osmLayer.Envelope);
