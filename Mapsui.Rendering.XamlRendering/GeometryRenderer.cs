@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using Mapsui.Geometries;
 using Mapsui.Styles;
 using Point = Mapsui.Geometries.Point;
@@ -361,9 +362,12 @@ namespace Mapsui.Rendering.XamlRendering
                ByteArrayToRandomAccessStream(stream.ToArray())));
                
 #elif !SILVERLIGHT
+            var localStream = new MemoryStream();
             stream.Position = 0;
+            stream.CopyTo(localStream);
+            localStream.Position = 0;
             bitmapImage.BeginInit();
-            bitmapImage.StreamSource = stream;
+            bitmapImage.StreamSource = localStream;
             bitmapImage.EndInit();
 #else
             bitmapImage.SetSource(stream);

@@ -32,8 +32,10 @@ namespace Mapsui.Layers
         protected double NewResolution;
         protected BoundingBox NewExtent;
         protected MemoryProvider Cache;
-
+        protected Timer StartFetchTimer; 
+        
         public IProvider DataSource { get; set; }
+        public int FetchingPostponedInMilliseconds { get; set; }
 
         /// <summary>
         /// Gets or sets the SRID of this VectorLayer's data source
@@ -68,12 +70,12 @@ namespace Mapsui.Layers
             }
         }
 
-        public Layer() : base("") { }
+        public Layer() : this("Layer") { }
 
-        public Layer(string layername)
+        public Layer(string layername) : base(layername)
         {
-            LayerName = layername;
             Cache = new MemoryProvider();
+            FetchingPostponedInMilliseconds = 500;
         }
 
         public override IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
@@ -99,7 +101,15 @@ namespace Mapsui.Layers
                 NeedsUpdate = true;
                 return;
             }
-            StartNewFetch(extent, resolution);
+            if (StartFetchTimer != null) StartFetchTimer.Dispose();
+            StartFetchTimer = new Timer(StartFetchTimerElapsed, null, FetchingPostponedInMilliseconds, int.MaxValue);
+        }
+        
+        void StartFetchTimerElapsed(object state)
+        {
+            if (NewExtent == null) return;
+            StartNewFetch(NewExtent, NewResolution);
+            StartFetchTimer.Dispose();
         }
 
         protected void StartNewFetch(BoundingBox extent, double resolution)

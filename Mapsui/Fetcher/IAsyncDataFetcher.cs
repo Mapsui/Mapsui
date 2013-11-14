@@ -31,11 +31,12 @@ namespace Mapsui.Fetcher
 
     public delegate void DataChangedEventHandler(object sender, DataChangedEventArgs e);
 
-    public class DataChangedEventArgs
+    public class DataChangedEventArgs : EventArgs
     {
+        public DataChangedEventArgs() : this(null, false, null) {}
+
         public DataChangedEventArgs(Exception error, bool cancelled, TileInfo tileInfo)
-            : this(error, cancelled, tileInfo, string.Empty)
-        { }
+            : this(error, cancelled, tileInfo, string.Empty) {}
         
         public DataChangedEventArgs(Exception error, bool cancelled, TileInfo tileInfo, string layerName)
         {

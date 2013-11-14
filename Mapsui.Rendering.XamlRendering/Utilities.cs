@@ -30,6 +30,7 @@ namespace Mapsui.Rendering.XamlRendering
             bitmap.Frames.Add(BitmapFrame.Create(renderTargetBitmap));
             var bitmapStream = new MemoryStream();
             bitmap.Save(bitmapStream);
+            
             return bitmapStream;
         }
 #endif
