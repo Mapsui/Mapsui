@@ -1,7 +1,7 @@
 ﻿using System.Windows.Controls;
 using Mapsui;
 
-namespace Mapsui.Wpf
+namespace Mapsui.Samples.Wpf
 {
     /// <summary>
     /// Interaction logic for LayerList.xaml

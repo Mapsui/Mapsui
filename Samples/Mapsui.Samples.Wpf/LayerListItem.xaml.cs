@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using Mapsui.Layers;
 
-namespace Mapsui.Wpf
+namespace Mapsui.Samples.Wpf
 {
     public partial class LayerListItem : UserControl
     {

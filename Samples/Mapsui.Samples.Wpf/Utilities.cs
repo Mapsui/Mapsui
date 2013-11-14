@@ -3,7 +3,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Media.Animation;
 
-namespace Mapsui.Wpf
+namespace Mapsui.Samples.Wpf
 {
     public static class Utilities
     {
