@@ -64,8 +64,6 @@
     <Content Include="ClientBin\Mapsui.Silverlight.xap" />
     <Content Include="Default.aspx" />
     <Content Include="index.html" />
-    <Content Include="Mapsui.Samples.SilverlightTestPage.aspx" />
-    <Content Include="Mapsui.Samples.SilverlightTestPage.html" />
     <Content Include="Silverlight.js" />
     <Content Include="Web.config" />
   </ItemGroup>
