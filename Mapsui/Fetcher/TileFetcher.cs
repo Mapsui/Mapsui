@@ -107,8 +107,8 @@ namespace Mapsui.Fetcher
 
                     if (isViewChanged && (tileSource.Schema != null))
                     {
-                        int level = BruTile.Utilities.GetNearestLevel(tileSource.Schema.Resolutions, resolution);
-                        missingTiles = strategy.GetTilesWanted(tileSource.Schema, extent.ToExtent(), level);
+                        var levelId = BruTile.Utilities.GetNearestLevel(tileSource.Schema.Resolutions, resolution);
+                        missingTiles = strategy.GetTilesWanted(tileSource.Schema, extent.ToExtent(), levelId);
                         retries.Clear();
                         isViewChanged = false;
                     }

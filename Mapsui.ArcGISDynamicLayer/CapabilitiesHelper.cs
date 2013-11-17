@@ -152,7 +152,8 @@ namespace Mapsui.ArcGISDynamicLayer
 
             foreach (var lod in capabilities.tileInfo.lods)
             {
-                schema.Resolutions[count] = new Resolution { Id = count.ToString(), UnitsPerPixel = lod.resolution };
+                var levelId = count.ToString();
+                schema.Resolutions[levelId] = new Resolution { Id = levelId, UnitsPerPixel = lod.resolution };
                 count++;
             }
 

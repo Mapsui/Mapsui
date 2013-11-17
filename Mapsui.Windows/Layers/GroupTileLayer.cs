@@ -213,7 +213,9 @@ namespace Mapsui.Windows.Layers
 
             if (Schema == null) return dictionary.Values;
 
-            TileLayer.GetRecursive(dictionary, Schema, _memoryCache, box.ToExtent(), BruTile.Utilities.GetNearestLevel(Schema.Resolutions, resolution));
+            var levelId = BruTile.Utilities.GetNearestLevel(Schema.Resolutions, resolution);
+            TileLayer.GetRecursive(dictionary, Schema, _memoryCache, box.ToExtent(), levelId);
+            
             var sortedDictionary = (from entry in dictionary orderby entry.Key ascending select entry).ToDictionary(pair => pair.Key, pair => pair.Value);
             return sortedDictionary.Values;
         }

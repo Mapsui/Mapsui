@@ -1,4 +1,8 @@
-﻿using BruTile.Web;
+﻿using System.Linq;
+using System.Net;
+using BruTile.Extensions;
+using BruTile.Web;
+using BruTile.Web.Wmts;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Samples.Common;
@@ -103,7 +107,7 @@ namespace Mapsui.Samples.Wpf
         private void GeodanTmsClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
-            MapControl.Map.Layers.Add(new TileLayer("http://geoserver.nl/tiles/tilecache.aspx/1.0.0/worlddark_GM", 
+            MapControl.Map.Layers.Add(new TileLayer("http://geoserver.nl/tiles/tilecache.aspx/1.0.0/worlddark_GM",
                 true, ex => MessageBox.Show(ex.Message)));
             LayerList.Initialize(MapControl.Map.Layers);
             MapControl.Refresh();
@@ -177,6 +181,20 @@ namespace Mapsui.Samples.Wpf
             LayerList.Initialize(MapControl.Map.Layers);
             MapControl.ZoomToFullEnvelope();
             MapControl.Refresh();
+        }
+
+        private void WmtsClick(object sender, RoutedEventArgs e)
+        {
+            MapControl.Map.Layers.Clear();
+            var webRequest = (HttpWebRequest)WebRequest.Create("http://openlayers.org/dev/examples/proxy.cgi?url=http%3A%2F%2Fmaps.wien.gv.at%2Fwmts%2F1.0.0%2FWMTSCapabilities.xml");
+            WebResponse webResponse = webRequest.GetSyncResponse(10000);
+            if (webResponse == null) throw (new WebException("An error occurred while fetching tile", null));
+            using (var responseStream = webResponse.GetResponseStream())
+            {
+                var tileSources = WmtsParser.Parse(responseStream);
+                MapControl.Map.Layers.Add(new TileLayer(tileSources.First()));
+                MapControl.Refresh();
+            }
         }
     }
 }

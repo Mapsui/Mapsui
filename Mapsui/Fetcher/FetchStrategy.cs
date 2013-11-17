@@ -39,7 +39,7 @@ namespace Mapsui.Fetcher
             return preFetchLayers;
         }
 
-        public IList<TileInfo> GetTilesWanted(ITileSchema schema, Extent extent, int level)
+        public IList<TileInfo> GetTilesWanted(ITileSchema schema, Extent extent, string levelId)
         {
             //line below only works properly of this instance is always called with the the resolutions. Think of something better
             if (preFetchLayers == null) preFetchLayers = GetPreFetchLevels(0, schema.Resolutions.Count - 1);
@@ -47,11 +47,12 @@ namespace Mapsui.Fetcher
             IList<TileInfo> infos = new List<TileInfo>();
             // Iterating through all levels from current to zero. If lower levels are
             // not availeble the renderer can fall back on higher level tiles. 
-            var levels = schema.Resolutions.Keys.Where(k => k <= level).OrderByDescending(x => x);
+            var resolution = schema.Resolutions[levelId].UnitsPerPixel;
+            var levels = schema.Resolutions.Where(k => k.Value.UnitsPerPixel >= resolution).OrderByDescending(x => x.Value.UnitsPerPixel);
 
-            foreach (var lvl in levels)
+            foreach (var level in levels)
             {
-                var tileInfos = schema.GetTilesInView(extent, lvl).OrderBy(
+                var tileInfos = schema.GetTilesInView(extent, level.Key).OrderBy(
                     t => Algorithms.Distance(extent.CenterX, extent.CenterY, t.Extent.CenterX, t.Extent.CenterY));
 
                 foreach (TileInfo info in tileInfos.Where(info => (info.Index.Row >= 0) && (info.Index.Col >= 0)))

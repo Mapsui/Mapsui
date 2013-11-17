@@ -15,6 +15,7 @@
 // along with Mapsui; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
+using System.Collections.Generic;
 using BruTile;
 using BruTile.Cache;
 using Mapsui.Geometries;
@@ -32,21 +33,37 @@ namespace Mapsui.Rendering.GdiRendering
         public static void Render(Graphics graphics, ITileSchema schema,
             IViewport viewport, MemoryCache<Feature> cache)
         {
-            int level = BruTile.Utilities.GetNearestLevel(schema.Resolutions, viewport.Resolution);
-            DrawRecursive(graphics, schema, viewport, cache, schema.GetExtentOfTilesInView(viewport.Extent.ToExtent(), level), level);
+            var levelId = BruTile.Utilities.GetNearestLevel(schema.Resolutions, viewport.Resolution);
+
+            var enumerator = GetEnumeratorPointingAtLevel(schema.Resolutions, levelId);
+            DrawRecursive(graphics, schema, viewport, cache, schema.GetExtentOfTilesInView(viewport.Extent.ToExtent(), levelId), enumerator);
+            enumerator.Dispose();
+        }
+
+        private static IEnumerator<KeyValuePair<string, Resolution>> GetEnumeratorPointingAtLevel(
+            IEnumerable<KeyValuePair<string, Resolution>> resolutions, string levelId)
+        {
+            var levelEnumerator = resolutions.GetEnumerator();
+            while (!levelEnumerator.Current.Key.Equals(levelId))
+            {
+                levelEnumerator.MoveNext();
+            }
+            return levelEnumerator;
         }
 
         private static void DrawRecursive(Graphics graphics, ITileSchema schema, IViewport viewport, 
-            MemoryCache<Feature> cache, Extent extent, int level)
+            MemoryCache<Feature> cache, Extent extent, IEnumerator<KeyValuePair<string, Resolution>> level)
         {
-            var tileInfos = schema.GetTilesInView(extent, level);
+            if (!level.MoveNext()) return;
+
+            var tileInfos = schema.GetTilesInView(extent, level.Current.Value.UnitsPerPixel);
 
             foreach (TileInfo info in tileInfos)
             {
                 var feature = cache.Find(info.Index);
                 if (feature == null)
                 {
-                    if (level > 0) DrawRecursive(graphics, schema, viewport, cache, info.Extent.Intersect(extent), level - 1);
+                    DrawRecursive(graphics, schema, viewport, cache, info.Extent.Intersect(extent), level);
                 }
                 else
                 {

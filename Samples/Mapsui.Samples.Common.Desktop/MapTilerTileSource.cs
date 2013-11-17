@@ -43,8 +43,8 @@ namespace Mapsui.Samples.Desktop
         {
             var schema = new SphericalMercatorWorldSchema();
             schema.Resolutions.Clear();
-            schema.Resolutions[0] = new Resolution { Id = "0", UnitsPerPixel = 156543.033900000 };
-            schema.Resolutions[1] = new Resolution { Id = "1", UnitsPerPixel = 78271.516950000 };
+            schema.Resolutions["0"] = new Resolution { Id = "0", UnitsPerPixel = 156543.033900000 };
+            schema.Resolutions["1"] = new Resolution { Id = "1", UnitsPerPixel = 78271.516950000 };
             return schema;
         }
 

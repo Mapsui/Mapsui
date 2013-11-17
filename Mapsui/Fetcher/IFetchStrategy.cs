@@ -22,6 +22,6 @@ namespace Mapsui.Fetcher
 {
     interface IFetchStrategy
     {
-        IList<TileInfo> GetTilesWanted(ITileSchema schema, Extent extent, int level);
+        IList<TileInfo> GetTilesWanted(ITileSchema schema, Extent extent, string levelId);
     }
 }

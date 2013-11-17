@@ -37,8 +37,8 @@ namespace Mapsui.Rendering.XamlRendering
 
         private static void RenderTile(WriteableBitmap bitmap, ITileSchema schema, IViewport viewport, MemoryCache<Feature> memoryCache)
         {
-            int level = BruTile.Utilities.GetNearestLevel(schema.Resolutions, viewport.Resolution);
-            var tiles = schema.GetTilesInView(viewport.Extent.ToExtent(), level);
+            var levelId = BruTile.Utilities.GetNearestLevel(schema.Resolutions, viewport.Resolution);
+            var tiles = schema.GetTilesInView(viewport.Extent.ToExtent(), levelId);
 
             foreach (TileInfo tile in tiles)
             {

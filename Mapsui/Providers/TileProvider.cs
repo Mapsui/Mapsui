@@ -47,8 +47,8 @@ namespace Mapsui.Providers
         public IEnumerable<IFeature> FetchTiles(BoundingBox boundingBox, double resolution)
         {
             var extent = new Extent(boundingBox.Min.X, boundingBox.Min.Y, boundingBox.Max.X, boundingBox.Max.Y);
-            int level = BruTile.Utilities.GetNearestLevel(_source.Schema.Resolutions, resolution);
-            var infos = _source.Schema.GetTilesInView(extent, level).ToList();
+            var levelId = BruTile.Utilities.GetNearestLevel(_source.Schema.Resolutions, resolution);
+            var infos = _source.Schema.GetTilesInView(extent, levelId).ToList();
 
             ICollection<WaitHandle> waitHandles = new List<WaitHandle>();
                         
