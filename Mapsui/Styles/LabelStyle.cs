@@ -70,7 +70,7 @@ namespace Mapsui.Styles
             CollisionBuffer = new Size { Width = 0, Height = 0 };
             ForeColor = Color.Black;
             BackColor = new Brush { Color = Color.White };
-            HorizontalAlignment = HorizontalAlignmentEnum.Right;
+            HorizontalAlignment = HorizontalAlignmentEnum.Center;
             VerticalAlignment = VerticalAlignmentEnum.Center;
         }
 
