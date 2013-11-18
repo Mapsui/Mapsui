@@ -39,6 +39,8 @@ namespace Mapsui.Layers
         protected BoundingBox NewExtent;
         protected List<FeatureSets> Sets = new List<FeatureSets>();
         protected Timer StartFetchTimer; 
+        public int NumberOfFeaturesReturned { get; set; }
+
 
         public IProvider DataSource { get; set; }
 
@@ -76,6 +78,7 @@ namespace Mapsui.Layers
         {
             LayerName = layername;
             StartFetchTimer = new Timer(StartFetchTimerElapsed, null, 500, int.MaxValue);
+            NumberOfFeaturesReturned = 1;
         }
 
         void StartFetchTimerElapsed(object state)
@@ -160,7 +163,7 @@ namespace Mapsui.Layers
             Sets.Add(new FeatureSets { TimeRequested = (long)state, Features = features}); 
             
             //Keep only two most recent sets. The older ones will be removed
-            Sets = Sets.OrderByDescending(c => c.TimeRequested).Take(2).ToList();
+            Sets = Sets.OrderByDescending(c => c.TimeRequested).Take(NumberOfFeaturesReturned).ToList();
             
             IsFetching = false;
             OnDataChanged(new DataChangedEventArgs(null, false, null, LayerName));
