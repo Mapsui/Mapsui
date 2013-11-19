@@ -186,13 +186,16 @@ namespace Mapsui.Samples.Wpf
         private void WmtsClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
-            var webRequest = (HttpWebRequest)WebRequest.Create("http://openlayers.org/dev/examples/proxy.cgi?url=http%3A%2F%2Fmaps.wien.gv.at%2Fwmts%2F1.0.0%2FWMTSCapabilities.xml");
+
+            var webRequest = (HttpWebRequest)WebRequest.Create("http://geodata.nationaalgeoregister.nl/wmts/top10nl?VERSION=1.0.0&request=GetCapabilities   ");
             WebResponse webResponse = webRequest.GetSyncResponse(10000);
             if (webResponse == null) throw (new WebException("An error occurred while fetching tile", null));
             using (var responseStream = webResponse.GetResponseStream())
             {
                 var tileSources = WmtsParser.Parse(responseStream);
-                MapControl.Map.Layers.Add(new TileLayer(tileSources.First()));
+                var natura2000 = tileSources.First(t => t.Title.ToLower().Contains("natura2000"));
+                MapControl.Map.Layers.Add(new TileLayer(natura2000));
+                MapControl.ZoomToFullEnvelope();
                 MapControl.Refresh();
             }
         }

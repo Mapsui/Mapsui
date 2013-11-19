@@ -176,7 +176,7 @@ namespace Mapsui.Data.Providers
         private readonly DbaseReader _dbaseFile;
         private FileStream _fsShapeFile;
         private FileStream _fsShapeIndex;
-        private object _syncRoot = new object();
+        private readonly object _syncRoot = new object();
 
         /// <summary>
         /// Tree used for fast query of data
