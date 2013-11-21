@@ -42,6 +42,7 @@ namespace Mapsui
 
         public Point Center
         {
+            get { return new Point(_centerX, _centerY);}
             set
             {
                 _centerX = value.X;
