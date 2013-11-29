@@ -1,6 +1,8 @@
+using System.Collections.Generic;
 using Android.Graphics;
 using Java.Lang;
 using Mapsui.Geometries;
+using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Styles;
 
@@ -8,15 +10,11 @@ namespace Mapsui.Rendering.Android
 {
     public class MapRenderer
     {
-        private Map _map;
-        private IViewport _viewport;
-        private Canvas _canvas;
-
-        public MapRenderer(Map map, IViewport viewport) 
+        public MapRenderer()
         {
-            _map = map;
-            _viewport = viewport;
         }
+
+        public Canvas Canvas { get; set; }
 
         private static BoundingBox WorldToScreen(IViewport viewport, BoundingBox boundingBox)
         {
@@ -37,10 +35,9 @@ namespace Mapsui.Rendering.Android
                 Math.Round(dest.Bottom));
         }
 
-        public void Render(Canvas canvas)
+        public void Render(IViewport viewport, IEnumerable<ILayer> layers)
         {
-            _canvas = canvas;
-            VisibleFeatureIterator.IterateLayers(_viewport, _map.Layers, RenderFeature);
+            VisibleFeatureIterator.IterateLayers(viewport, layers, RenderFeature);
         }
 
         private void RenderFeature(IViewport viewport, IStyle style, IFeature feature)
@@ -52,7 +49,7 @@ namespace Mapsui.Rendering.Android
                 var bmp = BitmapFactory.DecodeByteArray(rasterData, 0, rasterData.Length);
                 var destination = RoundToPixel(WorldToScreen(viewport, raster.GetBoundingBox()));
 
-                _canvas.DrawBitmap(bmp, null, destination, null);
+                Canvas.DrawBitmap(bmp, null, destination, null);
             }
         }
     }
