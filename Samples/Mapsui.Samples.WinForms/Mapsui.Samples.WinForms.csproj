@@ -95,9 +95,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Mapsui.Forms\Mapsui.UI.Forms.csproj">
+    <ProjectReference Include="..\..\Mapsui.Forms\Mapsui.UI.WinForms.csproj">
       <Project>{4E40E824-96B8-4F98-A0F8-2DBDF9D3DCE5}</Project>
-      <Name>Mapsui.UI.Forms</Name>
+      <Name>Mapsui.UI.WinForms</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Mapsui\Mapsui.csproj">
       <Project>{d74c052a-c07e-4b37-a898-134218aca5c9}</Project>
