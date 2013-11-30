@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Forms", "Mapsui.Forms\Mapsui.Forms.csproj", "{4E40E824-96B8-4F98-A0F8-2DBDF9D3DCE5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.UI.Forms", "Mapsui.Forms\Mapsui.UI.Forms.csproj", "{4E40E824-96B8-4F98-A0F8-2DBDF9D3DCE5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Windows", "Mapsui.Windows\Mapsui.Windows.csproj", "{9142A5C9-38F9-42DF-8E9A-79E5A919151F}"
 EndProject
