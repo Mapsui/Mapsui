@@ -8,7 +8,7 @@
     <ProjectGuid>{4E40E824-96B8-4F98-A0F8-2DBDF9D3DCE5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Mapsui.Forms</RootNamespace>
+    <RootNamespace>Mapsui.UI.WinForms</RootNamespace>
     <AssemblyName>Mapsui.UI.WinForms</AssemblyName>
     <TargetFrameworkVersion>v4.0.3</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
