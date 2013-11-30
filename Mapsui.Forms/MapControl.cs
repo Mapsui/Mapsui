@@ -22,28 +22,28 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace Mapsui.Forms
+namespace Mapsui.UI.WinForms
 {
     public class MapControl : Control
     {
         #region Fields
 
-        private Map map;
-        private Viewport viewport = new Viewport();
-        private string errorMessage;
-        private Bitmap buffer;
-        private Graphics bufferGraphics;
-        private Brush whiteBrush = new SolidBrush(Color.White);
-        private Mapsui.Geometries.Point mousePosition;
+        private Map _map;
+        private readonly Viewport _viewport = new Viewport();
+        private string _errorMessage;
+        private Bitmap _buffer;
+        private Graphics _bufferGraphics;
+        private readonly Brush _whiteBrush = new SolidBrush(Color.White);
+        private Geometries.Point _mousePosition;
             //Set if the user manipulates the map. If this happens we will limit 
             //the time it takes to render a frame by simply cutting if off. 
             //This way the control is always reponsive.
-        private bool isManipulated; 
+        private bool _isManipulated; 
             //Indicates that a redraw is needed. This often coincides with 
             //manipulation but not in the case of new data arriving.
-        private bool isInvalidated; 
-        private bool viewInitialized;
-        private long startTicks;
+        private bool _isInvalidated; 
+        private bool _viewInitialized;
+        private long _startTicks;
         private const int MaxMiliseconds = 40;
             //Ticks are in units of 100 nanoseconds. I prefer to use miliseconds myself
             //1 tick = 100 nanoseconds (from documentation)
@@ -61,19 +61,19 @@ namespace Mapsui.Forms
 
         public Viewport Transform
         {
-            get { return viewport; }
+            get { return _viewport; }
         }
 
         public Map Map
         {
             get
             {
-                return map;
+                return _map;
             }
             set
             {
-                var temp = map;
-                map = null;
+                var temp = _map;
+                _map = null;
 
                 if (temp != null)
                 {
@@ -81,8 +81,8 @@ namespace Mapsui.Forms
                     temp.Dispose();
                 }
 
-                map = value;
-                map.DataChanged += MapDataChanged;
+                _map = value;
+                _map.DataChanged += MapDataChanged;
 
                 ViewChanged(true);
                 InvalidateMap(false);
@@ -109,7 +109,7 @@ namespace Mapsui.Forms
 
         public void ZoomIn()
         {
-            viewport.Resolution = ZoomHelper.ZoomIn(map.Resolutions, viewport.Resolution);
+            _viewport.Resolution = ZoomHelper.ZoomIn(_map.Resolutions, _viewport.Resolution);
             ViewChanged(true);
             InvalidateMap(true);
         }
@@ -120,15 +120,15 @@ namespace Mapsui.Forms
                 // We do that in 3 steps.
 
                 // 1) Temporarily center on where the mouse is
-            viewport.Center = viewport.ScreenToWorld(mapPosition.X, mapPosition.Y);
+            _viewport.Center = _viewport.ScreenToWorld(mapPosition.X, mapPosition.Y);
 
                 // 2) Then zoom 
-            viewport.Resolution = ZoomHelper.ZoomIn(map.Resolutions, viewport.Resolution);
+            _viewport.Resolution = ZoomHelper.ZoomIn(_map.Resolutions, _viewport.Resolution);
 
                 // 3) Then move the temporary center back to the mouse position
-            viewport.Center = viewport.ScreenToWorld(
-              viewport.Width - mapPosition.X,
-              viewport.Height - mapPosition.Y);
+            _viewport.Center = _viewport.ScreenToWorld(
+              _viewport.Width - mapPosition.X,
+              _viewport.Height - mapPosition.Y);
 
             ViewChanged(true);
             InvalidateMap(true);
@@ -136,7 +136,7 @@ namespace Mapsui.Forms
 
         public void ZoomOut()
         {
-            viewport.Resolution = ZoomHelper.ZoomOut(map.Resolutions, viewport.Resolution);
+            _viewport.Resolution = ZoomHelper.ZoomOut(_map.Resolutions, _viewport.Resolution);
             ViewChanged(true);
             InvalidateMap(true);
         }
@@ -144,26 +144,26 @@ namespace Mapsui.Forms
         protected override void OnPaint(PaintEventArgs e)
         {
             if (isCallingDoEvents) return;
-            if (!viewInitialized) InitializeView();
-            if (!viewInitialized) return; //initialize in the line above failed. 
-            isManipulated = false;
-            isInvalidated = false;
+            if (!_viewInitialized) InitializeView();
+            if (!_viewInitialized) return; //initialize in the line above failed. 
+            _isManipulated = false;
+            _isInvalidated = false;
             
             base.OnPaint(e);
 
             //Reset background
-            bufferGraphics.FillRectangle(whiteBrush, 0, 0, buffer.Width, buffer.Height);
+            _bufferGraphics.FillRectangle(_whiteBrush, 0, 0, _buffer.Width, _buffer.Height);
 
             //set startTicks for use in AbortRender
-            startTicks = DateTime.Now.Ticks;
+            _startTicks = DateTime.Now.Ticks;
 
             //Render to the buffer
-            GdiMapRenderer.Render(bufferGraphics, new Viewport(viewport), map, AbortRender);
+            GdiMapRenderer.Render(_bufferGraphics, new Viewport(_viewport), _map, AbortRender);
             
             //Render the buffer to the control
-            e.Graphics.DrawImage(buffer, 0, 0);
+            e.Graphics.DrawImage(_buffer, 0, 0);
 
-            if (isInvalidated) Invalidate();
+            if (_isInvalidated) Invalidate();
         }
 
         private bool AbortRender()
@@ -173,15 +173,15 @@ namespace Mapsui.Forms
             isCallingDoEvents = true;
             Application.DoEvents();
             isCallingDoEvents = false;
-            if (isManipulated && (DateTime.Now.Ticks - startTicks) > MaxTicks) return true;
+            if (_isManipulated && (DateTime.Now.Ticks - _startTicks) > MaxTicks) return true;
             return false;
         }
 
         private void ViewChanged(bool changeEnd)
         {
-            if (map != null)
+            if (_map != null)
             {
-                map.ViewChanged(changeEnd, viewport.Extent, viewport.Resolution);
+                _map.ViewChanged(changeEnd, _viewport.Extent, _viewport.Resolution);
             }
         }
 
@@ -193,39 +193,39 @@ namespace Mapsui.Forms
             }
             else if (e.Cancelled)
             {
-                errorMessage = "Cancelled";
+                _errorMessage = "Cancelled";
                 OnErrorMessageChanged();
             }
             else if (e.Error is System.Net.WebException)
             {
-                errorMessage = "WebException: " + e.Error.Message;
+                _errorMessage = "WebException: " + e.Error.Message;
                 OnErrorMessageChanged();
             }
             else if (e.Error == null)
             {
-                errorMessage = "Unknown Exception";
+                _errorMessage = "Unknown Exception";
                 OnErrorMessageChanged();
             }
             else
             {
-                errorMessage = "Exception: " + e.Error.Message;
+                _errorMessage = "Exception: " + e.Error.Message;
                 OnErrorMessageChanged();
             }
         }
 
         private void MapControl_MouseDown(object sender, MouseEventArgs e)
         {
-            mousePosition = new Mapsui.Geometries.Point(e.X, e.Y);
+            _mousePosition = new Geometries.Point(e.X, e.Y);
         }
 
         private void MapControl_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
-                if (mousePosition == null) return;
-                var newMousePosition = new Mapsui.Geometries.Point(e.X, e.Y);
-                MapTransformHelpers.Pan(viewport, newMousePosition, mousePosition);
-                mousePosition = newMousePosition;
+                if (_mousePosition == null) return;
+                var newMousePosition = new Geometries.Point(e.X, e.Y);
+                MapTransformHelpers.Pan(_viewport, newMousePosition, _mousePosition);
+                _mousePosition = newMousePosition;
 
                 ViewChanged(false);
                 InvalidateMap(true);
@@ -236,10 +236,10 @@ namespace Mapsui.Forms
         {
             if (e.Button == MouseButtons.Left)
             {
-                if (mousePosition == null) return;
-                var newMousePosition = new Mapsui.Geometries.Point(e.X, e.Y);
-                MapTransformHelpers.Pan(viewport, newMousePosition, mousePosition);
-                mousePosition = newMousePosition;
+                if (_mousePosition == null) return;
+                var newMousePosition = new Geometries.Point(e.X, e.Y);
+                MapTransformHelpers.Pan(_viewport, newMousePosition, _mousePosition);
+                _mousePosition = newMousePosition;
 
                 ViewChanged(true);
                 InvalidateMap(true);
@@ -251,13 +251,13 @@ namespace Mapsui.Forms
             if (Width == 0) return;
             if (Height == 0) return;
 
-            viewport.Width = Width;
-            viewport.Height = Height;
+            _viewport.Width = Width;
+            _viewport.Height = Height;
 
-            if (buffer == null || buffer.Width != Width || buffer.Height != Height)
+            if (_buffer == null || _buffer.Width != Width || _buffer.Height != Height)
             {
-                buffer = new Bitmap(Width, Height);
-                bufferGraphics = Graphics.FromImage(buffer);
+                _buffer = new Bitmap(Width, Height);
+                _bufferGraphics = Graphics.FromImage(_buffer);
             }
 
             ViewChanged(true);
@@ -266,20 +266,20 @@ namespace Mapsui.Forms
 
         private void InvalidateMap(bool isManipulated)
         {
-            this.isManipulated = isManipulated;
-            isInvalidated = true;
+            _isManipulated = isManipulated;
+            _isInvalidated = true;
             Invalidate();
         }
 
         private void InitializeView()
         {
             if (double.IsNaN(Width) || Width == 0) return;
-            if (map == null || map.Envelope == null || double.IsNaN(map.Envelope.Width) || map.Envelope.Width <= 0) return;
-            if (map.Envelope.GetCentroid() == null) return;
+            if (_map == null || _map.Envelope == null || double.IsNaN(_map.Envelope.Width) || _map.Envelope.Width <= 0) return;
+            if (_map.Envelope.GetCentroid() == null) return;
 
-            viewport.Center = map.Envelope.GetCentroid();
-            viewport.Resolution = map.Envelope.Width / Width;
-            viewInitialized = true;
+            _viewport.Center = _map.Envelope.GetCentroid();
+            _viewport.Resolution = _map.Envelope.Width / Width;
+            _viewInitialized = true;
             ViewChanged(true);
         }
 

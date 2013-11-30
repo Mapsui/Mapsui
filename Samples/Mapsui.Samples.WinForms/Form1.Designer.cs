@@ -1,4 +1,6 @@
-﻿namespace Mapsui.Samples.WinForms
+﻿using Mapsui.UI.WinForms;
+
+namespace Mapsui.Samples.WinForms
 {
   partial class Form1
   {
@@ -32,7 +34,7 @@
         Mapsui.Styles.Color color2 = new Mapsui.Styles.Color();
         this.button1 = new System.Windows.Forms.Button();
         this.button2 = new System.Windows.Forms.Button();
-        this.mapControl1 = new Mapsui.Forms.MapControl();
+        this.mapControl1 = new MapControl();
         this.SuspendLayout();
         // 
         // button1
@@ -90,7 +92,7 @@
 
     private System.Windows.Forms.Button button1;
     private System.Windows.Forms.Button button2;
-    private Mapsui.Forms.MapControl mapControl1;
+    private MapControl mapControl1;
   }
 }
 
