@@ -17,7 +17,7 @@
 
 using BruTile;
 using BruTile.Cache;
-using BruTile.Web.TmsService;
+using BruTile.Tms;
 using Mapsui.Fetcher;
 using Mapsui.Geometries;
 using Mapsui.Providers;

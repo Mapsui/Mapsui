@@ -20,6 +20,7 @@ using System.Collections.Generic;
 using BruTile;
 using BruTile.Web;
 using BruTile.Predefined;
+using BruTile.Wmsc;
 
 namespace Mapsui.Samples.Common
 {

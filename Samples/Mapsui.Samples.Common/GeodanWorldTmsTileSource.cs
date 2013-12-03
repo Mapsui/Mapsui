@@ -18,6 +18,7 @@
 using System;
 using System.Collections.Generic;
 using BruTile;
+using BruTile.Tms;
 using BruTile.Web;
 using BruTile.Predefined;
 

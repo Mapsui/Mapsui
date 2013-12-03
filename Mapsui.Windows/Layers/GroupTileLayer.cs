@@ -50,9 +50,9 @@ namespace Mapsui.Windows.Layers
             System.Windows.Deployment.Current.Dispatcher.BeginInvoke(() =>
                 {
 #endif
-                     var bitmap = CombineBitmaps(tiles, Schema.Width, Schema.Height);
-                     if (bitmap != null) MemoryCache.Add(e.TileInfo.Index, new Feature { Geometry = new Raster(bitmap, e.TileInfo.Extent.ToBoundingBox()), Styles = new List<IStyle> { new VectorStyle()} });
-                     OnDataChanged(e);
+                var bitmap = CombineBitmaps(tiles, Schema.GetTileWidth(e.TileInfo.Index.Level), Schema.GetTileHeight(e.TileInfo.Index.Level));
+                if (bitmap != null) MemoryCache.Add(e.TileInfo.Index, new Feature { Geometry = new Raster(bitmap, e.TileInfo.Extent.ToBoundingBox()), Styles = new List<IStyle> { new VectorStyle()} });
+                OnDataChanged(e);
 #if SILVERLIGHT
                 });
 #endif

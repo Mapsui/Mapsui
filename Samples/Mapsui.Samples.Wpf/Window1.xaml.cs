@@ -2,7 +2,7 @@
 using System.Net;
 using BruTile.Extensions;
 using BruTile.Web;
-using BruTile.Web.Wmts;
+using BruTile.Wmts;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Samples.Common;
@@ -31,7 +31,7 @@ namespace Mapsui.Samples.Wpf
             OsmClick(this, null);
         }
 
-        void MapControlFeatureInfo(object sender, Windows.FeatureInfoEventArgs e)
+        void MapControlFeatureInfo(object sender, FeatureInfoEventArgs e)
         {
             MessageBox.Show(FeaturesToString(e.FeatureInfo));
         }
