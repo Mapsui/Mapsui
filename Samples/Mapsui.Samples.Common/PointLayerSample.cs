@@ -107,11 +107,11 @@ namespace Mapsui.Samples.Common
 
         public static ILayer CreateRandomPointLayer(IProvider dataSource)
         {
-            var styleList = new StyleCollection
+            return new Layer("pointLayer")
                 {
-                    new SymbolStyle {SymbolScale = 1, Fill = new Brush(Color.Blue)},
+                    DataSource = dataSource, 
+                    Style = new SymbolStyle {SymbolScale = 1, Fill = new Brush(Color.Blue)}
                 };
-            return new Layer("pointLayer") { DataSource = dataSource, Style = styleList };
         }
 
         public static ILayer CreateRandomPolygonLayer(BoundingBox envelope, int count = 10)

@@ -60,7 +60,7 @@ namespace Mapsui.Windows
         public event EventHandler<ViewChangedEventArgs> ViewChanged;
         public event EventHandler<MouseInfoEventArgs> MouseInfoOver;
         public event EventHandler MouseInfoLeave;
-        public event EventHandler<MouseInfoEventArgs> MouseInfoDown;
+        public event EventHandler<MouseInfoEventArgs> MouseInfoUp;
         public event EventHandler<FeatureInfoEventArgs> FeatureInfo;
         #endregion
 
@@ -68,7 +68,7 @@ namespace Mapsui.Windows
         public IRenderer Renderer { get; set; }
         private bool IsInBoxZoomMode { get; set; }
         public IList<ILayer> MouseInfoOverLayers { get; private set; }
-        public IList<ILayer> MouseInfoDownLayers { get; private set; }
+        public IList<ILayer> MouseInfoUpLayers { get; private set; }
 
         public bool ZoomToBoxMode { get; set; }
         public Viewport Viewport { get { return _viewport; } }
@@ -172,7 +172,7 @@ namespace Mapsui.Windows
 
             Map = new Map();
             MouseInfoOverLayers = new List<ILayer>();
-            MouseInfoDownLayers = new List<ILayer>();
+            MouseInfoUpLayers = new List<ILayer>();
             Loaded += MapControlLoaded;
             KeyDown += MapControlKeyDown;
             KeyUp += MapControlKeyUp;
@@ -442,8 +442,6 @@ namespace Mapsui.Windows
 #if !SILVERLIGHT
             if (e.StylusDevice != null) return;
 #endif
-            var eventArgs = GetMouseInfoEventArgs(e.GetPosition(this), MouseInfoDownLayers);
-            OnMouseInfoDown(eventArgs ?? new MouseInfoEventArgs());
             _previousMousePosition = e.GetPosition(this);
             _downMousePosition = e.GetPosition(this);
             _mouseDown = true;
@@ -465,6 +463,8 @@ namespace Mapsui.Windows
             else
             {
                 HandleFeatureInfo(e);
+                var eventArgs = GetMouseInfoEventArgs(e.GetPosition(this), MouseInfoUpLayers);
+                OnMouseInfoUp(eventArgs ?? new MouseInfoEventArgs());
             }
 
             _map.ViewChanged(true, _viewport.Extent, _viewport.Resolution);
@@ -540,13 +540,16 @@ namespace Mapsui.Windows
 
         private MouseInfoEventArgs GetMouseInfoEventArgs(Point mousePosition, IEnumerable<ILayer> layers)
         {
-            var margin = 8 * Viewport.Resolution;
+            var margin = 16 * Viewport.Resolution;
             var point = Viewport.ScreenToWorld(new Geometries.Point(mousePosition.X, mousePosition.Y));
 
             foreach (var layer in layers)
             {
-                var feature = layer.GetFeaturesInView(Map.Envelope, 0).FirstOrDefault(f =>
-                    f.Geometry.GetBoundingBox().GetCentroid().Distance(point) < margin);
+                var feature = layer.GetFeaturesInView(Map.Envelope, 0)
+                    .Where(f => f.Geometry.GetBoundingBox().GetCentroid().Distance(point) < margin)
+                    .OrderBy(f => f.Geometry.GetBoundingBox().GetCentroid().Distance(point))
+                    .FirstOrDefault();
+
                 if (feature != null)
                 {
                     return new MouseInfoEventArgs { LayerName = layer.LayerName, Feature = feature };
@@ -571,11 +574,11 @@ namespace Mapsui.Windows
             }
         }
 
-        protected void OnMouseInfoDown(MouseInfoEventArgs e)
+        protected void OnMouseInfoUp(MouseInfoEventArgs e)
         {
-            if (MouseInfoDown != null)
+            if (MouseInfoUp != null)
             {
-                MouseInfoDown(this, e);
+                MouseInfoUp(this, e);
             }
         }
 

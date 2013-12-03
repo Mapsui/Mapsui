@@ -13,6 +13,8 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using Mapsui.Styles;
+using Mapsui.Windows;
 
 namespace Mapsui.Samples.Wpf
 {
@@ -79,6 +81,33 @@ namespace Mapsui.Samples.Wpf
             LayerList.Initialize(MapControl.Map.Layers);
             MapControl.ZoomToFullEnvelope();
             MapControl.Refresh();
+        }
+
+        private void RandomPointsWithFeatureInfo(object server, RoutedEventArgs e)
+        {
+            MapControl.Map.Layers.Clear();
+            MapControl.Map.Layers.Add(new TileLayer(new OsmTileSource()) { LayerName = "OSM" });
+            var pointLayer = PointLayerSample.CreateRandomPointLayer(CreateRandomPointsProvider());
+            pointLayer.Style = new StyleCollection
+                {
+                    new SymbolStyle { SymbolScale = 1, Fill = new Brush(Color.Cyan) }
+                };
+                
+            MapControl.Map.Layers.Add(pointLayer);
+            MapControl.MouseInfoUp += MapControlOnMouseInfoDown;
+            MapControl.MouseInfoUpLayers.Add(pointLayer);
+            LayerList.Initialize(MapControl.Map.Layers);
+            MapControl.ZoomToFullEnvelope();
+            MapControl.Refresh();
+        }
+
+        private void MapControlOnMouseInfoDown(object sender, MouseInfoEventArgs mouseInfoEventArgs)
+        {
+            if (mouseInfoEventArgs.Feature != null)
+            {
+                MessageBox.Show(mouseInfoEventArgs.Feature["Label"].ToString());
+            }
+
         }
 
         private MemoryProvider CreateRandomPointsProvider()
