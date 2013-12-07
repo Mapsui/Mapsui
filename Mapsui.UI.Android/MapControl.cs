@@ -174,22 +174,18 @@ namespace Mapsui.UI.Android
                     if (e == null)
                     {
                         errorMessage = "Unexpected error: DataChangedEventArgs can not be null";
-                        //OnErrorMessageChanged(EventArgs.Empty);
                     }
                     else if (e.Cancelled)
                     {
                         errorMessage = "Cancelled";
-                        //OnErrorMessageChanged(EventArgs.Empty);
                     }
                     else if (e.Error is System.Net.WebException)
                     {
                         errorMessage = "WebException: " + e.Error.Message;
-                        //OnErrorMessageChanged(EventArgs.Empty);
                     }
                     else if (e.Error != null)
                     {
                         errorMessage = e.Error.GetType() + ": " + e.Error.Message;
-                        //OnErrorMessageChanged(EventArgs.Empty);
                     }
                     else // no problems
                     {
