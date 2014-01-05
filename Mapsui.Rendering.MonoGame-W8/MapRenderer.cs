@@ -20,6 +20,7 @@ namespace Mapsui.Rendering.MonoGame
     {
         SpriteBatch _spriteBatch;
         private readonly GraphicsDevice _graphicsDevice;
+        private readonly Color _backgroundColor = new Color(2, 5, 20);//new Color(27, 69, 127);
         private readonly IDictionary<Bitmap, Texture2D> _renderedResources = new Dictionary<Bitmap, Texture2D>();
 
         public MapRenderer(GraphicsDevice graphicsDevice)
@@ -34,7 +35,7 @@ namespace Mapsui.Rendering.MonoGame
         {
             if (_spriteBatch == null) _spriteBatch = new SpriteBatch(_graphicsDevice);
 
-            _graphicsDevice.Clear(Color.LightGray);
+            _graphicsDevice.Clear(_backgroundColor);
             _spriteBatch.Begin();
 
             VisibleFeatureIterator.IterateLayers(viewport, map.Layers, RenderFeature);
@@ -115,7 +116,9 @@ namespace Mapsui.Rendering.MonoGame
 
             var destination = viewport.WorldToScreen(feature.Geometry as Point).ToXna();
 
-            var texture = CreateTextureFromStyle(symbolStyle);
+            if (!feature.RenderedGeometry.ContainsKey(symbolStyle)) feature.RenderedGeometry[symbolStyle] = CreateTextureFromStyle(symbolStyle);
+
+            var texture = (Texture2D)feature.RenderedGeometry[symbolStyle];
 
             var origin = new Vector2(
                 texture.Width * 0.5f + (float)symbolStyle.SymbolOffset.X,
@@ -124,7 +127,7 @@ namespace Mapsui.Rendering.MonoGame
             var rotationInRadians = (float)symbolStyle.SymbolRotation * Mapsui.Utilities.Constants.DegreesToRadians;
 
             _spriteBatch.Draw(texture, destination, null, Color.White * (float)symbolStyle.Opacity, rotationInRadians, 
-                origin, 1f, SpriteEffects.None, 0f);
+                origin, (float)symbolStyle.SymbolScale, SpriteEffects.None, 0f);
         }
 
         private Texture2D CreateTextureFromStyle(SymbolStyle symbolStyle)

@@ -8,12 +8,8 @@ using Mapsui.Styles;
 
 namespace Mapsui.Rendering.Android
 {
-    public class MapRenderer
+    public class MapRenderer : IRenderer
     {
-        public MapRenderer()
-        {
-        }
-
         public Canvas Canvas { get; set; }
 
         private static BoundingBox WorldToScreen(IViewport viewport, BoundingBox boundingBox)
