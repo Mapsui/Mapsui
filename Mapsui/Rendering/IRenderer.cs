@@ -1,6 +1,5 @@
-﻿
+﻿using Mapsui.Layers;
 using System.Collections.Generic;
-using Mapsui.Layers;
 
 namespace Mapsui.Rendering
 {
