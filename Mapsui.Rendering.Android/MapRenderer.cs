@@ -5,6 +5,7 @@ using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Styles;
+using Bitmap = Android.Graphics.Bitmap;
 
 namespace Mapsui.Rendering.Android
 {
@@ -44,13 +45,19 @@ namespace Mapsui.Rendering.Android
         {
             if (feature.Geometry is IRaster)
             {
-                var raster = (feature.Geometry as IRaster);
-                var rasterData = raster.Data.ToArray();
-                var bmp = BitmapFactory.DecodeByteArray(rasterData, 0, rasterData.Length);
-                var destination = RoundToPixel(WorldToScreen(viewport, raster.GetBoundingBox()));
-
-                Canvas.DrawBitmap(bmp, null, destination, null);
+                if (!feature.RenderedGeometry.ContainsKey(style)) feature.RenderedGeometry[style] = ToAndroidBitmap(feature);
+                var bitmap = (Bitmap) feature.RenderedGeometry[style];
+                var destination = RoundToPixel(WorldToScreen(viewport, feature.Geometry.GetBoundingBox()));
+                Canvas.DrawBitmap(bitmap, null, destination, null);
             }
+        }
+
+        private static Bitmap ToAndroidBitmap(IFeature feature)
+        {
+            var raster = (IRaster)feature.Geometry;
+            var rasterData = raster.Data.ToArray();
+            var bitmap = BitmapFactory.DecodeByteArray(rasterData, 0, rasterData.Length);
+            return bitmap;
         }
     }
 }
