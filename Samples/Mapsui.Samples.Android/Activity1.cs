@@ -18,7 +18,7 @@ namespace Mapsui.Samples.Android
             SetContentView(Resource.Layout.Main);
 
             var mapControl = FindViewById<MapControl>(Resource.Id.mapcontrol);
-            mapControl.Map.Layers.Add(new TileLayer(new OsmTileSource()));                        
+            mapControl.Map.Layers.Add(new TileLayer(new OsmTileSource(), 40, 60));                        
             //mapControl.Map.Layers.Add(LufoTest());
         }
 

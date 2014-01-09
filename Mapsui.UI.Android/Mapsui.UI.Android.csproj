@@ -58,7 +58,7 @@
       <Project>{D74C052A-C07E-4B37-A898-134218ACA5C9}</Project>
       <Name>Mapsui</Name>
     </ProjectReference>
-    <ProjectReference Include="d:\projecten\Phoenix\mapsui\trunk\Mapsui.Rendering.Android\Mapsui.Rendering.Android.csproj">
+    <ProjectReference Include="..\Mapsui.Rendering.Android\Mapsui.Rendering.Android.csproj">
       <Project>{F7193717-5F16-44C8-A90C-05A4173D353E}</Project>
       <Name>Mapsui.Rendering.Android</Name>
     </ProjectReference>

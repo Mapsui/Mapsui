@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Globalization;
 using Android.Graphics;
 using Java.Lang;
 using Mapsui.Geometries;
@@ -35,6 +36,17 @@ namespace Mapsui.Rendering.Android
         public void Render(IViewport viewport, IEnumerable<ILayer> layers)
         {
             VisibleFeatureIterator.IterateLayers(viewport, layers, RenderFeature);
+
+            foreach (var layer in layers)
+            {
+                if (layer is ITileLayer)
+                {
+                    var text = (layer as ITileLayer).MemoryCache.TileCount.ToString(CultureInfo.InvariantCulture);
+                    var paint = new Paint { TextSize = 30 };
+                    Canvas.DrawText(text, 20f, 20f, paint);
+                }
+            }
+
         }
 
         private void RenderFeature(IViewport viewport, IStyle style, IFeature feature)
@@ -42,7 +54,7 @@ namespace Mapsui.Rendering.Android
             if (feature.Geometry is IRaster)
             {
                 if (!feature.RenderedGeometry.ContainsKey(style)) feature.RenderedGeometry[style] = ToAndroidBitmap(feature);
-                var bitmap = (Bitmap) feature.RenderedGeometry[style];
+                var bitmap = (Bitmap)feature.RenderedGeometry[style];
                 var destination = RoundToPixel(WorldToScreen(viewport, feature.Geometry.GetBoundingBox()));
                 Canvas.DrawBitmap(bitmap, null, destination, null);
             }

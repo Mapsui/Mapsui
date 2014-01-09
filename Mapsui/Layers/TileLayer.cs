@@ -48,7 +48,7 @@ namespace Mapsui.Layers
             set { _maxRetries = value; }
         } 
 
-        readonly MemoryCache<Feature> _memoryCache = new MemoryCache<Feature>(200, 300);
+        readonly MemoryCache<Feature> _memoryCache;
 
         private void LoadTmsLayer(IAsyncResult result)
         {
@@ -72,8 +72,14 @@ namespace Mapsui.Layers
                 // else: hopelesly lost with an error on a background thread with no option to report back.
             }
         }
+        
+        public TileLayer(int minTiles = 200, int maxTiles = 300)
+        {
+            _memoryCache = new MemoryCache<Feature>(minTiles, maxTiles);
+        }     
 
         public TileLayer(string urlToTileMapXml, bool overrideTmsUrlWithUrlToTileMapXml = false, Action<Exception> initializationFailed = null)
+            : this()
         {
             _urlToTileMapXml = urlToTileMapXml;
             _overrideTmsUrlWithUrlToTileMapXml = overrideTmsUrlWithUrlToTileMapXml;
@@ -81,10 +87,9 @@ namespace Mapsui.Layers
             webRequest.BeginGetResponse(LoadTmsLayer, new object[] { webRequest, initializationFailed });
         }
         
-        public TileLayer() {}      
-        
-        public TileLayer(ITileSource source)
-            : this()
+        public TileLayer(ITileSource source, int minTiles = 200, int maxTiles = 300)
+            : this(minTiles, maxTiles)
+
         {
             SetTileSource(source);
         }

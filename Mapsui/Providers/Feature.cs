@@ -1,13 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Mapsui.Geometries;
 using Mapsui.Styles;
 
 namespace Mapsui.Providers
 {
-    public class Feature : IFeature
+    public class Feature : IFeature, IDisposable
     {
         private readonly Dictionary<string, object> _dictionary;
+        private bool _disposed;
 
         public Feature()
         {
@@ -32,6 +34,39 @@ namespace Mapsui.Providers
         {
             get { return _dictionary.Keys; }
         }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        ~Feature()
+        {
+            Dispose(false);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_disposed)
+            {
+                if (disposing)
+                {
+                    foreach (var renderedGeometry in RenderedGeometry)
+                    {
+                        if (renderedGeometry.Value is IDisposable)
+                        {
+                            (renderedGeometry.Value as IDisposable).Dispose();
+                        }
+                    }
+                    RenderedGeometry.Clear();
+                }
+            }
+            _disposed = true;
+
+        }
+
+
     }
 
 }
