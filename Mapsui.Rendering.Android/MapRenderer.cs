@@ -13,24 +13,28 @@ namespace Mapsui.Rendering.Android
     public class MapRenderer : IRenderer
     {
         public Canvas Canvas { get; set; }
+        public float OutputMultiplier { get; set; }
 
         private static BoundingBox WorldToScreen(IViewport viewport, BoundingBox boundingBox)
         {
-            var box = new BoundingBox
-                {
-                    Min = viewport.WorldToScreen(boundingBox.Min),
-                    Max = viewport.WorldToScreen(boundingBox.Max)
-                };
-            return box;
+            var first = viewport.WorldToScreen(boundingBox.Min);
+            var second = viewport.WorldToScreen(boundingBox.Max);
+            return new BoundingBox
+                (
+                    Math.Min(first.X, second.X),
+                    Math.Min(first.Y, second.Y),
+                    Math.Max(first.X, second.X),
+                    Math.Max(first.Y, second.Y)
+                );
         }
 
         public static RectF RoundToPixel(BoundingBox dest)
         {
             return new RectF(
                 Math.Round(dest.Left),
-                Math.Round(dest.Top),
+                Math.Round(Math.Min(dest.Top, dest.Bottom)),
                 Math.Round(dest.Right),
-                Math.Round(dest.Bottom));
+                Math.Round(Math.Max(dest.Top, dest.Bottom)));
         }
 
         public void Render(IViewport viewport, IEnumerable<ILayer> layers)
@@ -55,7 +59,15 @@ namespace Mapsui.Rendering.Android
             {
                 if (!feature.RenderedGeometry.ContainsKey(style)) feature.RenderedGeometry[style] = ToAndroidBitmap(feature);
                 var bitmap = (Bitmap)feature.RenderedGeometry[style];
-                var destination = RoundToPixel(WorldToScreen(viewport, feature.Geometry.GetBoundingBox()));
+                var dest = WorldToScreen(viewport, feature.Geometry.GetBoundingBox());
+                dest = new BoundingBox(
+                    dest.MinX * OutputMultiplier,
+                    dest.MinY * OutputMultiplier,
+                    dest.MaxX * OutputMultiplier,
+                    dest.MaxY * OutputMultiplier);
+               
+                var destination = RoundToPixel(dest);
+                
                 Canvas.DrawBitmap(bitmap, null, destination, null);
             }
         }

@@ -22,6 +22,8 @@ namespace Mapsui.UI.Android
         private PointF _previousMid = new PointF();
         private readonly PointF _currentMid = new PointF();
         private float _oldDist = 1f;
+        private const float OutputMultiplier = 2;
+        private const float InvertedOutputMultiplier = (1/OutputMultiplier);
 
         public MapControl(Context context, IAttributeSet attrs) :
             base(context, attrs)
@@ -45,7 +47,7 @@ namespace Mapsui.UI.Android
         public void Initialize()
         {
             Map = new Map();
-            _renderer = new MapRenderer();
+            _renderer = new MapRenderer { OutputMultiplier = OutputMultiplier };
             InitializeViewport();
             SetOnTouchListener(this);
         }
@@ -63,8 +65,8 @@ namespace Mapsui.UI.Android
                 _viewport.Resolution = _map.Envelope.Width / Width;
             if (double.IsNaN(_viewport.CenterX) || double.IsNaN(_viewport.CenterY))
                 _viewport.Center = _map.Envelope.GetCentroid();
-            _viewport.Width = Width;
-            _viewport.Height = Height;
+            _viewport.Width = Width * InvertedOutputMultiplier;
+            _viewport.Height = Height * InvertedOutputMultiplier;
 
             _map.ViewChanged(true, _viewport.Extent, _viewport.Resolution);
             _viewportInitialized = true;
@@ -84,6 +86,7 @@ namespace Mapsui.UI.Android
                     _previousMap = null;
 			        Invalidate();
                     _mode = None;
+                    _map.ViewChanged(false, _viewport.Extent, _viewport.Resolution);
                     break;
                 case MotionEventActions.Pointer2Down:
                     _previousMap = null;
@@ -104,8 +107,11 @@ namespace Mapsui.UI.Android
         	              _currentMap = new PointF(x, y);
         	              if (_previousMap != null) 
         	              {
-        	                  _viewport.Transform(_currentMap.X, _currentMap.Y, _previousMap.X, _previousMap.Y);
-                              _map.ViewChanged(false, _viewport.Extent, _viewport.Resolution);
+                              _viewport.Transform(
+                                  _currentMap.X * InvertedOutputMultiplier, 
+                                  _currentMap.Y * InvertedOutputMultiplier,
+                                  _previousMap.X * InvertedOutputMultiplier,
+                                  _previousMap.Y * InvertedOutputMultiplier);
                               Invalidate();
         	              }
         	              _previousMap = _currentMap;
@@ -120,13 +126,19 @@ namespace Mapsui.UI.Android
 
                               _oldDist = Spacing(args);	 
         	                  _previousMid = new PointF(_currentMid.X, _currentMid.Y);
-        	                  MidPoint(_currentMid, args);        	         	                
-        	                  _viewport.Center = _viewport.ScreenToWorld(_currentMid.X, _currentMid.Y);        	                             
+        	                  MidPoint(_currentMid, args);
+                              _viewport.Center = _viewport.ScreenToWorld(
+                                  _currentMid.X * InvertedOutputMultiplier, 
+                                  _currentMid.Y * InvertedOutputMultiplier);                        
         	                  _viewport.Resolution =  _viewport.Resolution / scale;
-        	                  _viewport.Center = _viewport.ScreenToWorld(_viewport.Width - _currentMid.X, _viewport.Height - _currentMid.Y);
-        	                  _viewport.Transform(_currentMid.X, _currentMid.Y, _previousMid.X, _previousMid.Y);
-
-        	                  _map.ViewChanged(false, _viewport.Extent, _viewport.Resolution);
+                              _viewport.Center = _viewport.ScreenToWorld(
+                                  (_viewport.Width - _currentMid.X * InvertedOutputMultiplier), 
+                                  (_viewport.Height - _currentMid.Y * InvertedOutputMultiplier));
+                              _viewport.Transform(
+                                  _currentMid.X * InvertedOutputMultiplier, 
+                                  _currentMid.Y * InvertedOutputMultiplier, 
+                                  _previousMid.X * InvertedOutputMultiplier, 
+                                  _previousMid.Y * InvertedOutputMultiplier);
         	                  Invalidate();        
         	              }
         	              break;

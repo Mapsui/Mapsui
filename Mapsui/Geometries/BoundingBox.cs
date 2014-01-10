@@ -68,10 +68,10 @@ namespace Mapsui.Geometries
         /// <summary>
         /// Initializes a bounding box
         /// </summary>
-        /// <param name="lowerLeft">Lower left corner</param>
-        /// <param name="upperRight">Upper right corner</param>
-        public BoundingBox(Point lowerLeft, Point upperRight)
-            : this(lowerLeft.X, lowerLeft.Y, upperRight.X, upperRight.Y)
+        /// <param name="minPoint">Lower left corner</param>
+        /// <param name="maxPoint">Upper right corner</param>
+        public BoundingBox(Point minPoint, Point maxPoint)
+            : this(minPoint.X, minPoint.Y, maxPoint.X, maxPoint.Y)
         {
         }
 
@@ -103,7 +103,6 @@ namespace Mapsui.Geometries
         /// <summary>
         /// Initializes a new Bounding Box based on the bounds from a set of bounding boxes
         /// </summary>
-        /// <param name="objects">list of objects</param>
         public BoundingBox(IEnumerable<BoundingBox> boundingBoxex)
         {
             max = null;

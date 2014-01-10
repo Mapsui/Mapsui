@@ -1,11 +1,12 @@
-﻿using System;
-using System.Net;
-using Android.App;
+﻿using Android.App;
 using Android.OS;
 using BruTile.Tms;
 using BruTile.Web;
 using Mapsui.Layers;
 using Mapsui.UI.Android;
+using System;
+using System.Linq;
+using System.Net;
 
 namespace Mapsui.Samples.Android
 {
@@ -18,7 +19,8 @@ namespace Mapsui.Samples.Android
             SetContentView(Resource.Layout.Main);
 
             var mapControl = FindViewById<MapControl>(Resource.Id.mapcontrol);
-            mapControl.Map.Layers.Add(new TileLayer(new OsmTileSource(), 40, 60));                        
+            var osmTileSource = new OsmTileSource();
+            mapControl.Map.Layers.Add(new TileLayer(osmTileSource, 40, 60));                        
             //mapControl.Map.Layers.Add(LufoTest());
         }
 
