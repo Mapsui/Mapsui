@@ -82,6 +82,7 @@
     <Compile Include="Layers\LayerCollection.cs" />
     <Compile Include="Layers\LayerGroup.cs" />
     <Compile Include="Layers\TileLayer.cs" />
+    <Compile Include="NotifyingViewport.cs" />
     <Compile Include="Rendering\VisibleFeatureIterator.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="Projection\GeometryIterator.cs" />

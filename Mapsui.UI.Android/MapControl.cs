@@ -24,6 +24,7 @@ namespace Mapsui.UI.Android
         private float _oldDist = 1f;
         private const float OutputMultiplier = 2;
         private const float InvertedOutputMultiplier = (1/OutputMultiplier);
+        private bool _viewportInitialized;
 
         public MapControl(Context context, IAttributeSet attrs) :
             base(context, attrs)
@@ -39,10 +40,24 @@ namespace Mapsui.UI.Android
 
         private MapRenderer _renderer;
         private Map _map;
-        private readonly Viewport _viewport = new Viewport { CenterX = double.NaN, CenterY = double.NaN, Resolution = double.NaN };
-        private bool _viewportInitialized;
+        private NotifyingViewport _viewport = new NotifyingViewport { CenterX = double.NaN, CenterY = double.NaN, Resolution = double.NaN };
 
-        public event EventHandler<ViewChangedEventArgs> ViewChanged;
+        public NotifyingViewport Viewport
+        {
+            // The ViewModel should be the owner of the Viewport, not this MapControl
+            set
+            {
+                if (_viewport != null) _viewport.PropertyChanged += ViewportOnPropertyChanged;
+                _viewport = value;
+                _viewport.PropertyChanged += ViewportOnPropertyChanged;
+            }
+            get { return _viewport; }
+        }
+
+        private void ViewportOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
+        {
+            RefreshGraphics();
+        }
 
         public void Initialize()
         {
@@ -205,22 +220,7 @@ namespace Mapsui.UI.Android
                     _map.PropertyChanged += MapPropertyChanged;
                     _map.ViewChanged(true, _viewport.Extent, _viewport.Resolution);
                 }
-                OnViewChanged();
                 RefreshGraphics();
-            }
-        }
-
-        public void OnViewChanged()
-        {
-            OnViewChanged(false);
-        }
-
-        private void OnViewChanged(bool userAction)
-        {
-            if (_map == null) return;
-            if (ViewChanged != null)
-            {
-                ViewChanged(this, new ViewChangedEventArgs { Viewport = _viewport, UserAction = userAction });
             }
         }
 
@@ -237,7 +237,6 @@ namespace Mapsui.UI.Android
 
             ((Activity)Context).RunOnUiThread(new Runnable(() =>
                 {
-
                     if (e == null)
                     {
                         errorMessage = "Unexpected error: DataChangedEventArgs can not be null";
@@ -278,11 +277,5 @@ namespace Mapsui.UI.Android
 
             _renderer.Render(_viewport, _map.Layers);
         }
-    }
-
-    public class ViewChangedEventArgs : EventArgs
-    {
-        public Viewport Viewport { get; set; }
-        public bool UserAction { get; set; }
     }
 }
