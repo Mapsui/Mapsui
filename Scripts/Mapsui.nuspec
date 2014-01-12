@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>Mapsui</id>
+    <version>$version$</version>
+    <title>Mapsui</title>
+    <authors>Paul den Dulk</authors>
+    <owners>Paul den Dulk</owners>
+    <licenseUrl>http://mapsui.codeplex.com/license</licenseUrl>
+    <projectUrl>http://mapsui.codeplex.com</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>
+      Mapsui - Library for mapping
+    </description>
+    <tags>map maps mapping geo gis osm</tags>
+    <language>en-US</language>
+	<dependencies>
+    <dependency id="BruTile" version="0.9.0"/>
+    </dependencies>
+  </metadata>
+  <files>  
+  
+    <file src="..\Release\Portable\Mapsui.dll" target="lib\portable-net403+sl5+wp7+win8+MonoAndroid+MonoTouch\Mapsui.dll" />
+
+    <file src="..\Release\v4.0.3\Mapsui.dll" target="lib\net403\Mapsui.dll" />
+	<file src="..\Release\v4.0.3\Mapsui.Rendering.XamlRendering.dll" target="lib\net403\Mapsui.Rendering.XamlRendering.dll" />
+    <file src="..\Release\v4.0.3\Mapsui.Windows.dll" target="lib\net403\Mapsui.Windows.dll" />
+	
+    <file src="..\Release\SL\Mapsui.dll" target="lib\sl5\Mapsui.dll" />
+    <file src="..\Release\SL\Mapsui.Rendering.XamlRendering.dll" target="lib\sl5\Mapsui.Rendering.XamlRendering.dll" />
+    <file src="..\Release\SL\Mapsui.Windows.dll" target="lib\sl5\Mapsui.Windows.dll" />    
+
+	<file src="..\Release\Xamarin.Android\Mapsui.dll" target="lib\MonoAndroid\Mapsui.dll" />
+	<file src="..\Release\Xamarin.Android\Mapsui.Rendering.Android.dll" target="lib\MonoAndroid\Mapsui.Rendering.Android.dll" />
+    <file src="..\Release\Xamarin.Android\Mapsui.UI.Android.dll" target="lib\MonoAndroid\Mapsui.UI.Android.dll" />
+	
+  </files>
+</package>
