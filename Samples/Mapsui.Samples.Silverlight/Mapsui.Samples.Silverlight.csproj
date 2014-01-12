@@ -40,6 +40,8 @@
     </UpgradeBackupLocation>
     <OldToolsVersion>3.5</OldToolsVersion>
     <TargetFrameworkProfile />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -66,7 +68,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BruTile">
-      <HintPath>..\..\libs\BruTile.dll</HintPath>
+      <HintPath>..\..\packages\BruTile.0.9.0\lib\portable-net403+sl5+wp8+win8+MonoAndroid+MonoTouch\BruTile.dll</HintPath>
     </Reference>
     <Reference Include="System.Windows" />
     <Reference Include="mscorlib" />
@@ -127,6 +129,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="packages.config" />
     <None Include="Properties\AppManifest.xml" />
   </ItemGroup>
   <ItemGroup>
@@ -189,4 +192,5 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
 </Project>

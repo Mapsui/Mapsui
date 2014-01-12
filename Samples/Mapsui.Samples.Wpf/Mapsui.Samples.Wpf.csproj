@@ -62,13 +62,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BruTile">
-      <HintPath>..\..\libs\BruTile.dll</HintPath>
-    </Reference>
-    <Reference Include="BruTile.Desktop">
-      <HintPath>..\..\libs\BruTile.Desktop.dll</HintPath>
-    </Reference>
-    <Reference Include="BruTile.MbTiles">
-      <HintPath>..\..\libs\BruTile.MbTiles.dll</HintPath>
+      <HintPath>..\..\packages\BruTile.0.9.0\lib\net40\BruTile.dll</HintPath>
     </Reference>
     <Reference Include="Community.CsharpSqlite">
       <HintPath>..\..\libs\Community.CsharpSqlite.dll</HintPath>
@@ -151,6 +145,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="app.config" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

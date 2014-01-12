@@ -14,6 +14,8 @@
     <FileAlignment>512</FileAlignment>
     <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -35,9 +37,8 @@
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BruTile, Version=0.8.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Mapsui.UI.MonoGame-W8\bin\Windows8\x86\Debug\BruTile.dll</HintPath>
+    <Reference Include="BruTile">
+      <HintPath>..\packages\BruTile.0.9.0\lib\portable-net403+sl5+wp8+win8+MonoAndroid+MonoTouch\BruTile.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Android" />
     <Reference Include="mscorlib" />
@@ -52,6 +53,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
     <None Include="Resources\AboutResources.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -64,6 +66,7 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
