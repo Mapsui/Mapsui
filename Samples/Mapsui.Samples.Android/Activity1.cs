@@ -19,9 +19,7 @@ namespace Mapsui.Samples.Android
             SetContentView(Resource.Layout.Main);
 
             var mapView = FindViewById<MapView>(Resource.Id.mapview);
-            var osmTileSource = new OsmTileSource();
-            mapView.Map.Layers.Add(new TileLayer(osmTileSource, 40, 60));
-            //mapView.Map.Layers.Add(LufoTest());
+            mapView.Map.Layers.Add(new TileLayer(new OsmTileSource(), 40, 60));
         }
 
         private TileLayer LufoTest()
