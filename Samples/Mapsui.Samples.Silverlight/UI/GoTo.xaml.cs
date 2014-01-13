@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using Mapsui.Samples.Silverlight;
 using System.Net;
 using System.Globalization;
+using Mapsui.Samples.Silverlight.UI;
 
 namespace Mapsui.Samples.Silverlight
 {

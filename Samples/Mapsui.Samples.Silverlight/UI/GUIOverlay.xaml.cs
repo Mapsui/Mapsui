@@ -1,21 +1,21 @@
-﻿using System.IO;
+﻿using System;
+using System.Globalization;
+using System.IO;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
 using BruTile.Web;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Samples.Common;
 using Mapsui.Styles;
-using Mapsui.Windows.Layers;
-using System;
-using System.Globalization;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using MapControl = Mapsui.Windows.MapControl;
+using Mapsui.UI.Xaml;
+using Mapsui.UI.Xaml.Layers;
 
-namespace Mapsui.Samples.Silverlight
+namespace Mapsui.Samples.Silverlight.UI
 {
     public partial class GUIOverlay : UserControl
     {

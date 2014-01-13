@@ -14,7 +14,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using Mapsui.Styles;
-using Mapsui.Windows;
+using Mapsui.UI.Xaml;
 
 namespace Mapsui.Samples.Wpf
 {

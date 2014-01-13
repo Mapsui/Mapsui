@@ -4,7 +4,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
     xmlns:local="clr-namespace:Mapsui.Samples.Silverlight"
-    x:Class="Mapsui.Samples.Silverlight.GUIOverlay"
+    x:Class="Mapsui.Samples.Silverlight.UI.GUIOverlay"
     d:DesignWidth="640" d:DesignHeight="480">
     <UserControl.Resources>
         <ControlTemplate x:Key="menuButton" TargetType="Button">
