@@ -107,7 +107,7 @@
       <Project>{a676ff74-1ec6-4b36-96d7-f3faa313f0fe}</Project>
       <Name>Mapsui.Rendering.XamlRendering-W8</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Mapsui.Windows-W8\Mapsui.UI.Xaml-W8.csproj">
+    <ProjectReference Include="..\..\Mapsui.UI.Xaml-W8\Mapsui.UI.Xaml-W8.csproj">
       <Project>{ec7df5b3-7912-4848-afa1-e68e0e860101}</Project>
       <Name>Mapsui.UI.Xaml-W8</Name>
     </ProjectReference>

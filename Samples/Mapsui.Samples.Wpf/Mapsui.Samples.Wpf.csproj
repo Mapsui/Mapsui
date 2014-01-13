@@ -189,7 +189,7 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Mapsui.Windows\Mapsui.UI.Xaml.csproj">
+    <ProjectReference Include="..\..\Mapsui.UI.Xaml\Mapsui.UI.Xaml.csproj">
       <Project>{9142A5C9-38F9-42DF-8E9A-79E5A919151F}</Project>
       <Name>Mapsui.UI.Xaml</Name>
     </ProjectReference>

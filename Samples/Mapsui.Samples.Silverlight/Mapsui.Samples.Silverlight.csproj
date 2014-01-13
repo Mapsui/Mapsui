@@ -137,7 +137,7 @@
       <Project>{74a0bdf2-e6af-4bab-aa7e-73e68936f1f2}</Project>
       <Name>Mapsui.Rendering.XamlRendering-SL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Mapsui.Windows-SL\Mapsui.UI.Xaml-SL.csproj">
+    <ProjectReference Include="..\..\Mapsui.UI.Xaml-SL\Mapsui.UI.Xaml-SL.csproj">
       <Project>{451fb089-5b7f-4394-98ce-01b75a1505ba}</Project>
       <Name>Mapsui.UI.Xaml-SL</Name>
     </ProjectReference>
