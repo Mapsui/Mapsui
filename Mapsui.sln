@@ -53,7 +53,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Samples.WP8", "Sampl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.ArcGISDynamicLayer", "Mapsui.ArcGISDynamicLayer\Mapsui.ArcGISDynamicLayer.csproj", "{FC0CCE50-6227-4F62-8315-76D9B8CB4E09}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Tests.Common", "tests\Mapsui.Tests.Common\Mapsui.Tests.Common.csproj", "{81BB36D2-4D01-44E3-9024-E7CBD10DA316}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Tests.Common", "Tests\Mapsui.Tests.Common\Mapsui.Tests.Common.csproj", "{81BB36D2-4D01-44E3-9024-E7CBD10DA316}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Rendering.MonoGame.Tests-W8", "Tests\Mapsui.Rendering.MonoGame.Tests-W8\Mapsui.Rendering.MonoGame.Tests-W8.csproj", "{6D49369B-4645-49EF-B791-2D0AB2DD960D}"
 EndProject
