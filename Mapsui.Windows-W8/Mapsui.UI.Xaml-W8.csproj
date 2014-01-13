@@ -9,8 +9,8 @@
     <ProjectGuid>{EC7DF5B3-7912-4848-AFA1-E68E0E860101}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Mapsui.Windows</RootNamespace>
-    <AssemblyName>Mapsui.Windows</AssemblyName>
+    <RootNamespace>Mapsui.UI.Xaml</RootNamespace>
+    <AssemblyName>Mapsui.UI.Xaml</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{BC8A1FFA-BEE3-4634-8014-F334798102B3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>

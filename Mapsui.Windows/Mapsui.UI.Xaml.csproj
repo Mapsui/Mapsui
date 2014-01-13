@@ -8,8 +8,8 @@
     <ProjectGuid>{9142A5C9-38F9-42DF-8E9A-79E5A919151F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Mapsui.Windows</RootNamespace>
-    <AssemblyName>Mapsui.Windows</AssemblyName>
+    <RootNamespace>Mapsui.UI.Xaml</RootNamespace>
+    <AssemblyName>Mapsui.UI.Xaml</AssemblyName>
     <TargetFrameworkVersion>v4.0.3</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
