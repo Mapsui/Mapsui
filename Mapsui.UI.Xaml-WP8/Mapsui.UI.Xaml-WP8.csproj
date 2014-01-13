@@ -83,13 +83,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="..\Mapsui.Windows\Extensions.cs">
+    <Compile Include="..\Mapsui.UI.Xaml\Extensions.cs">
       <Link>Extensions.cs</Link>
     </Compile>
-    <Compile Include="..\Mapsui.Windows\FpsCounter.cs">
+    <Compile Include="..\Mapsui.UI.Xaml\FpsCounter.cs">
       <Link>FpsCounter.cs</Link>
     </Compile>
-    <Compile Include="..\Mapsui.Windows\MapControl.cs">
+    <Compile Include="..\Mapsui.UI.Xaml\MapControl.cs">
       <Link>MapControl.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -132,7 +132,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Mapsui.Windows\Extensions.cs">
+    <Compile Include="..\Mapsui.UI.Xaml\Extensions.cs">
       <Link>Extensions.cs</Link>
     </Compile>
     <Compile Include="MapControl.cs" />
