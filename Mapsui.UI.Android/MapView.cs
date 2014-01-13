@@ -12,7 +12,7 @@ using Math = System.Math;
 
 namespace Mapsui.UI.Android
 {
-    public class MapControl : View, View.IOnTouchListener
+    public class MapView : View, View.IOnTouchListener
     {
         private const int None = 0;
 	    private const int Drag = 1;
@@ -26,13 +26,13 @@ namespace Mapsui.UI.Android
         private const float InvertedOutputMultiplier = (1/OutputMultiplier);
         private bool _viewportInitialized;
 
-        public MapControl(Context context, IAttributeSet attrs) :
+        public MapView(Context context, IAttributeSet attrs) :
             base(context, attrs)
         {
             Initialize();
         }
 
-        public MapControl(Context context, IAttributeSet attrs, int defStyle) :
+        public MapView(Context context, IAttributeSet attrs, int defStyle) :
             base(context, attrs, defStyle)
         {
             Initialize();
