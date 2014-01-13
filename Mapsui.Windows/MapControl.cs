@@ -15,13 +15,6 @@
 // along with Mapsui; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA f
 
-using System.Diagnostics;
-using Mapsui.Fetcher;
-using Mapsui.Layers;
-using Mapsui.Providers;
-using Mapsui.Rendering;
-using Mapsui.Rendering.XamlRendering;
-using Mapsui.Utilities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -32,8 +25,14 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
+using Mapsui.Fetcher;
+using Mapsui.Layers;
+using Mapsui.Providers;
+using Mapsui.Rendering;
+using Mapsui.Rendering.XamlRendering;
+using Mapsui.Utilities;
 
-namespace Mapsui.Windows
+namespace Mapsui.UI.Xaml
 {
     public class MapControl : Grid
     {

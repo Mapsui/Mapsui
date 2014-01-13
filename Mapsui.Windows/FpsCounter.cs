@@ -23,7 +23,7 @@ using System.Windows;
 using Windows.UI.Xaml;
 #endif
 
-namespace Mapsui.Windows
+namespace Mapsui.UI.Xaml
 {
     public class FpsCounter : DependencyObject, INotifyPropertyChanged
     {
