@@ -32,10 +32,11 @@ namespace Mapsui
     /// </summary>
     public class Map : IDisposable, INotifyPropertyChanged
     {
-        private readonly LayerCollection _layers = new LayerCollection();
+        private LayerCollection _layers = new LayerCollection();
         public event DataChangedEventHandler DataChanged;
         public event FeedbackEventHandler Feedback;
         public event PropertyChangedEventHandler PropertyChanged;
+        private NotifyingViewport _viewport = new NotifyingViewport { CenterX = double.NaN, CenterY = double.NaN, Resolution = double.NaN };
 
         /// <summary>
         /// Initializes a new map
@@ -43,9 +44,7 @@ namespace Mapsui
         public Map()
         {
             BackColor = Color.White;
-            _layers = new LayerCollection();
-            _layers.LayerAdded += LayersLayerAdded;
-            _layers.LayerRemoved += LayersLayerRemoved;
+            Layers = new LayerCollection();
         }
 
         void LayersLayerRemoved(ILayer layer)
@@ -144,12 +143,44 @@ namespace Mapsui
         public LayerCollection Layers
         {
             get { return _layers; }
+            set
+            {
+                var tempLayers = _layers;
+                if (tempLayers != null)
+                {
+                    _layers.LayerAdded -= LayersLayerAdded;
+                    _layers.LayerRemoved -= LayersLayerRemoved;
+                }
+                _layers = value;
+                _layers.LayerAdded += LayersLayerAdded;
+                _layers.LayerRemoved += LayersLayerRemoved;
+            }
+        }
+
+        public NotifyingViewport Viewport
+        {
+            set
+            {
+                var tempViewport = _viewport;
+                if (tempViewport != null)
+                {
+                    _viewport.PropertyChanged -= ViewportOnPropertyChanged;
+                }
+                _viewport = value;
+                _viewport.PropertyChanged += ViewportOnPropertyChanged;
+            }
+            get { return _viewport; }
+        }
+
+        private void ViewportOnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            OnPropertyChanged(e.PropertyName);
         }
 
         /// <summary>
         /// Map background color (defaults to transparent)
         ///  </summary>
-        public Color BackColor { get; set; } // todo: check if this is actually used everywhere
+        public Color BackColor { get; set; } 
 
         /// <summary>
         /// Gets the extents of the map based on the extents of all the layers in the layers collection

@@ -40,19 +40,6 @@ namespace Mapsui.UI.Android
 
         private MapRenderer _renderer;
         private Map _map;
-        private NotifyingViewport _viewport = new NotifyingViewport { CenterX = double.NaN, CenterY = double.NaN, Resolution = double.NaN };
-
-        public NotifyingViewport Viewport
-        {
-            // The ViewModel should be the owner of the Viewport, not this MapControl
-            set
-            {
-                if (_viewport != null) _viewport.PropertyChanged += ViewportOnPropertyChanged;
-                _viewport = value;
-                _viewport.PropertyChanged += ViewportOnPropertyChanged;
-            }
-            get { return _viewport; }
-        }
 
         private void ViewportOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
@@ -76,14 +63,14 @@ namespace Mapsui.UI.Android
             if (Math.Abs(_map.Envelope.Height - 0d) < Utilities.Constants.Epsilon) return;
             if (_map.Envelope.GetCentroid() == null) return;
 
-            if (double.IsNaN(_viewport.Resolution))
-                _viewport.Resolution = _map.Envelope.Width / Width;
-            if (double.IsNaN(_viewport.CenterX) || double.IsNaN(_viewport.CenterY))
-                _viewport.Center = _map.Envelope.GetCentroid();
-            _viewport.Width = Width * InvertedOutputMultiplier;
-            _viewport.Height = Height * InvertedOutputMultiplier;
+            if (double.IsNaN(_map.Viewport.Resolution))
+                _map.Viewport.Resolution = _map.Envelope.Width / Width;
+            if (double.IsNaN(_map.Viewport.CenterX) || double.IsNaN(_map.Viewport.CenterY))
+                _map.Viewport.Center = _map.Envelope.GetCentroid();
+            _map.Viewport.Width = Width * InvertedOutputMultiplier;
+            _map.Viewport.Height = Height * InvertedOutputMultiplier;
 
-            _map.ViewChanged(true, _viewport.Extent, _viewport.Resolution);
+            _map.ViewChanged(true, _map.Viewport.Extent, _map.Viewport.Resolution);
             _viewportInitialized = true;
         }
 
@@ -101,7 +88,7 @@ namespace Mapsui.UI.Android
                     _previousMap = null;
 			        Invalidate();
                     _mode = None;
-                    _map.ViewChanged(false, _viewport.Extent, _viewport.Resolution);
+                    _map.ViewChanged(false, _map.Viewport.Extent, _map.Viewport.Resolution);
                     break;
                 case MotionEventActions.Pointer2Down:
                     _previousMap = null;
@@ -122,7 +109,7 @@ namespace Mapsui.UI.Android
         	              _currentMap = new PointF(x, y);
         	              if (_previousMap != null) 
         	              {
-                              _viewport.Transform(
+                              _map.Viewport.Transform(
                                   _currentMap.X * InvertedOutputMultiplier, 
                                   _currentMap.Y * InvertedOutputMultiplier,
                                   _previousMap.X * InvertedOutputMultiplier,
@@ -142,14 +129,14 @@ namespace Mapsui.UI.Android
                               _oldDist = Spacing(args);	 
         	                  _previousMid = new PointF(_currentMid.X, _currentMid.Y);
         	                  MidPoint(_currentMid, args);
-                              _viewport.Center = _viewport.ScreenToWorld(
+                              _map.Viewport.Center = _map.Viewport.ScreenToWorld(
                                   _currentMid.X * InvertedOutputMultiplier, 
-                                  _currentMid.Y * InvertedOutputMultiplier);                        
-        	                  _viewport.Resolution =  _viewport.Resolution / scale;
-                              _viewport.Center = _viewport.ScreenToWorld(
-                                  (_viewport.Width - _currentMid.X * InvertedOutputMultiplier), 
-                                  (_viewport.Height - _currentMid.Y * InvertedOutputMultiplier));
-                              _viewport.Transform(
+                                  _currentMid.Y * InvertedOutputMultiplier);
+                              _map.Viewport.Resolution = _map.Viewport.Resolution / scale;
+                              _map.Viewport.Center = _map.Viewport.ScreenToWorld(
+                                  (_map.Viewport.Width - _currentMid.X * InvertedOutputMultiplier),
+                                  (_map.Viewport.Height - _currentMid.Y * InvertedOutputMultiplier));
+                              _map.Viewport.Transform(
                                   _currentMid.X * InvertedOutputMultiplier, 
                                   _currentMid.Y * InvertedOutputMultiplier, 
                                   _previousMid.X * InvertedOutputMultiplier, 
@@ -218,7 +205,8 @@ namespace Mapsui.UI.Android
                 {
                     _map.DataChanged += MapDataChanged;
                     _map.PropertyChanged += MapPropertyChanged;
-                    _map.ViewChanged(true, _viewport.Extent, _viewport.Resolution);
+                    _map.Viewport.PropertyChanged += ViewportOnPropertyChanged; // not sure if this should be a direct coupling 
+                    _map.ViewChanged(true, _map.Viewport.Extent, _map.Viewport.Resolution);
                 }
                 RefreshGraphics();
             }
@@ -228,7 +216,7 @@ namespace Mapsui.UI.Android
         {
             if (e.PropertyName != "Envelope") return;
             InitializeViewport();
-            _map.ViewChanged(true, _viewport.Extent, _viewport.Resolution);
+            _map.ViewChanged(true, _map.Viewport.Extent, _map.Viewport.Resolution);
         }
 
         public void MapDataChanged(object sender, DataChangedEventArgs e)
@@ -275,7 +263,7 @@ namespace Mapsui.UI.Android
             if (_renderer.Canvas == null)
                 _renderer.Canvas = canvas;
 
-            _renderer.Render(_viewport, _map.Layers);
+            _renderer.Render(_map.Viewport, _map.Layers);
         }
     }
 }
