@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Mapsui.Windows")]
+[assembly: AssemblyTitle("Mapsui.UI.Xaml")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Geodan")]
-[assembly: AssemblyProduct("Mapsui.Windows")]
+[assembly: AssemblyProduct("Mapsui.UI.Xaml")]
 [assembly: AssemblyCopyright("Copyright © Geodan 2009")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

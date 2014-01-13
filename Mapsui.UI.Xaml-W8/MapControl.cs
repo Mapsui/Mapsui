@@ -34,7 +34,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Shapes;
 
-namespace Mapsui.Windows
+namespace Mapsui.UI.Xaml
 {
     public class MapControl : Grid
     {
