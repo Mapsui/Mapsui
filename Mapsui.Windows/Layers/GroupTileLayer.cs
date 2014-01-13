@@ -1,17 +1,17 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Windows.Controls;
-using System.Windows.Media.Imaging;
-using BruTile;
+﻿using BruTile;
 using BruTile.Cache;
 using Mapsui.Fetcher;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Styles;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 
-namespace Mapsui.Windows.Layers
+namespace Mapsui.UI.Xaml.Layers
 {
     public class GroupTileLayer : BaseLayer, ITileLayer
     {
