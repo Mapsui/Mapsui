@@ -18,10 +18,10 @@ namespace Mapsui.Samples.Android
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Main);
 
-            var mapControl = FindViewById<MapView>(Resource.Id.mapcontrol);
+            var mapView = FindViewById<MapView>(Resource.Id.mapview);
             var osmTileSource = new OsmTileSource();
-            mapControl.Map.Layers.Add(new TileLayer(osmTileSource, 40, 60));                        
-            //mapControl.Map.Layers.Add(LufoTest());
+            mapView.Map.Layers.Add(new TileLayer(osmTileSource, 40, 60));
+            //mapView.Map.Layers.Add(LufoTest());
         }
 
         private TileLayer LufoTest()
