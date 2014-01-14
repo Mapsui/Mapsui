@@ -30,12 +30,12 @@
              Properties="Configuration=Release;BaseIntermediateOutputPath=$(MSBuildProjectDirectory).\..\obj\portable\;OutputPath=$(MSBuildProjectDirectory).\..\Release\Portable\" />
 
 	<MSBuild Projects="$(SolutionFile)"
-             Targets="Mapsui;Mapsui_Rendering_XamlRendering;Mapsui_Windows"
+             Targets="Mapsui;Mapsui_Rendering_XamlRendering;Mapsui_UI_Xaml"
              Properties="Configuration=Release;Platform=Any CPU;BaseIntermediateOutputPath=$(MSBuildProjectDirectory).\..\obj\v4.0.3\;OutputPath=$(MSBuildProjectDirectory).\..\Release\v4.0.3\"
              RunEachTargetSeparately="true"/>
 
     <MSBuild Projects="$(SolutionFile)"
-             Targets="Mapsui;Mapsui_Rendering_XamlRendering-SL;Mapsui_Windows-SL"
+             Targets="Mapsui;Mapsui_Rendering_XamlRendering-SL;Mapsui_UI_Xaml-SL"
              Properties="Configuration=Release;Platform=Any CPU;BaseIntermediateOutputPath=$(MSBuildProjectDirectory).\..\obj\SL\;OutputPath=$(MSBuildProjectDirectory).\..\Release\SL\"
              RunEachTargetSeparately="true"/>
 
