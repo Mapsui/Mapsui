@@ -87,6 +87,8 @@ namespace Mapsui.Layers
 
         bool Busy { get; set; }
 
+        bool Rasterize { get; set; }
+
         IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution);
     }
 

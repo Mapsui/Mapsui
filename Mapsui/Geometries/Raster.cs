@@ -5,20 +5,20 @@ namespace Mapsui.Geometries
 {
     public class Raster : IRaster
     {
-        readonly BoundingBox boundingBox;
+        readonly BoundingBox _boundingBox;
         public MemoryStream Data { get; private set; }
         public long TickFetched { get; private set; }
 
         public Raster(MemoryStream data, BoundingBox box)
         {
             Data = data;
-            boundingBox = box;
+            _boundingBox = box;
             TickFetched = DateTime.Now.Ticks;
         }
 
         public BoundingBox GetBoundingBox()
         {
-            return boundingBox;
+            return _boundingBox;
         }
 
         #region IGeometry Members

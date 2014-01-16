@@ -37,36 +37,33 @@ namespace Mapsui.Providers.GeoTiff
             public double YCenterOfUpperLeftPixel;
         }
 
-        private readonly TiffProperties _tiffProperties;
-        private readonly WorldProperties _worldProperties;
         private const string WorldExtention = ".tfw";
-        private readonly string _worldPath;
         private readonly IFeature _feature;
         private readonly BoundingBox _extent;
-        private readonly MemoryStream _data;
 
         public GeoTiffProvider(string tiffPath, List<Color> noDataColors = null)
         {
+            MemoryStream data;
             if (!File.Exists(tiffPath))
             {
                 throw new ArgumentException(string.Format("Tiff file expected at {0}", tiffPath));
             }
 
-            _worldPath = GetPathWithoutExtension(tiffPath) + WorldExtention;
-            if (!File.Exists(_worldPath))
+            string worldPath = GetPathWithoutExtension(tiffPath) + WorldExtention;
+            if (!File.Exists(worldPath))
             {
-                throw new ArgumentException(string.Format("World file expected at {0}", _worldPath));
+                throw new ArgumentException(string.Format("World file expected at {0}", worldPath));
             }
 
-            _tiffProperties = LoadTiff(tiffPath);
-            _worldProperties = LoadWorld(_worldPath);
-            _extent = CalculateExtent(_tiffProperties, _worldProperties);
+            TiffProperties tiffProperties = LoadTiff(tiffPath);
+            WorldProperties worldProperties = LoadWorld(worldPath);
+            _extent = CalculateExtent(tiffProperties, worldProperties);
 
             try
             {
                 try
                 {
-                    _data = ReadImageAsStream(tiffPath, noDataColors);
+                    data = ReadImageAsStream(tiffPath, noDataColors);
                 }
                 catch (OutOfMemoryException e)
                 {
@@ -78,7 +75,7 @@ namespace Mapsui.Providers.GeoTiff
                 throw new ExternalException(e.Message, e.InnerException);
             }
 
-            _feature = new Feature { Geometry = new Raster(_data, _extent) };
+            _feature = new Feature { Geometry = new Raster(data, _extent) };
             _feature.Styles.Add(new VectorStyle());
         }
 

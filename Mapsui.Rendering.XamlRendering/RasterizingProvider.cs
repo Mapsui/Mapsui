@@ -32,14 +32,15 @@ namespace Mapsui.Rendering.XamlRendering
         {
             lock (_syncLock)
             {
-                var viewport = CreateViewport(box, resolution);
                 foreach (var feature in _layer.GetFeaturesInView(box, resolution)) 
                 {
                     // hack: clear cach to prevent cross thread exception. 
                     // todo: remove this caching mechanism.
                     feature.RenderedGeometry.Clear();   
                 }
+
                 IFeatures features = null;
+                var viewport = CreateViewport(box, resolution);
                 var thread = new Thread(() => RenderToRaster(viewport, _layer, out features));
                 thread.SetApartmentState(ApartmentState.STA);
                 thread.Priority = ThreadPriority.Lowest;
