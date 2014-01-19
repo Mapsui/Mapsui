@@ -1,3 +1,4 @@
+using System.IO;
 using Android.Graphics;
 using Mapsui.Geometries;
 using Mapsui.Layers;
@@ -39,6 +40,11 @@ namespace Mapsui.Rendering.Android
 
         public void Render(IViewport viewport, IEnumerable<ILayer> layers)
         {
+            Render(Canvas, viewport, layers);
+        }
+
+        private void Render(Canvas canvas, IViewport viewport, IEnumerable<ILayer> layers)
+        {
             VisibleFeatureIterator.IterateLayers(viewport, layers, RenderFeature);
 
             foreach (var layer in layers)
@@ -47,9 +53,19 @@ namespace Mapsui.Rendering.Android
                 {
                     var text = (layer as ITileLayer).MemoryCache.TileCount.ToString(CultureInfo.InvariantCulture);
                     var paint = new Paint { TextSize = 30 };
-                    Canvas.DrawText(text, 20f, 20f, paint);
+                    canvas.DrawText(text, 20f, 20f, paint);
                 }
             }
+        }
+
+        public MemoryStream RenderToBitmapStream(IViewport viewport, IEnumerable<ILayer> layers)
+        {
+            Bitmap target = Bitmap.CreateBitmap(5000, 5000, Bitmap.Config.Argb8888);
+            var canvas = new Canvas(target);
+            Render(canvas, viewport, layers);
+            var stream = new MemoryStream();
+            target.Compress(Bitmap.CompressFormat.Png, 100, stream);
+            return stream;
         }
 
         private void RenderFeature(IViewport viewport, IStyle style, IFeature feature)

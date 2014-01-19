@@ -1,4 +1,5 @@
-﻿using Mapsui.Geometries;
+﻿using System;
+using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Styles;
@@ -36,18 +37,23 @@ namespace Mapsui.Rendering.XamlRendering
                 {
                     // hack: clear cache to prevent cross thread exception. 
                     // todo: remove this caching mechanism.
-                    feature.RenderedGeometry.Clear();   
+                    feature.RenderedGeometry.Clear();
                 }
 
                 IFeatures features = null;
                 var viewport = CreateViewport(box, resolution);
-                var thread = new Thread(() => RenderToRaster(viewport, _layer, out features));
-                thread.SetApartmentState(ApartmentState.STA);
-                thread.Priority = ThreadPriority.Lowest;
-                thread.Start();
-                thread.Join();
+                RunMethodOnStaThread(() => RenderToRaster(viewport, _layer, out features));
                 return features;
             }
+        }
+
+        private static void RunMethodOnStaThread(ThreadStart operation)
+        {
+            var thread = new Thread(operation);
+            thread.SetApartmentState(ApartmentState.STA);
+            thread.Priority = ThreadPriority.Lowest;
+            thread.Start();
+            thread.Join();
         }
 
         public BoundingBox GetExtents()

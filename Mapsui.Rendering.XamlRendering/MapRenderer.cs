@@ -1,4 +1,5 @@
-﻿using Mapsui.Providers;
+﻿using System.IO;
+using Mapsui.Providers;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Styles;
@@ -63,6 +64,21 @@ namespace Mapsui.Rendering.XamlRendering
             _target.Visibility = Visibility.Visible;
 #if !SILVERLIGHT &&  !NETFX_CORE
             _target.EndInit();
+#endif
+        }
+
+        public MemoryStream RenderToBitmapStream(IViewport viewport, IEnumerable<ILayer> layers)
+        {
+#if !SILVERLIGHT && !WINDOWS_PHONE && !NETFX_CORE
+            var canvas = new Canvas();
+            foreach (var layer in layers)
+            {
+                RenderLayer(canvas, viewport, layer);
+            }
+            canvas.UpdateLayout();
+            return Utilities.ToBitmapStream(canvas, viewport.Width, viewport.Height);
+#else
+            throw new NotImplementedException();
 #endif
         }
 

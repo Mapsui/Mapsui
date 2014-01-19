@@ -20,7 +20,6 @@ namespace Mapsui.Layers
             {
                 return DataSource.GetExtents();
             }
-
         }
 
         public override void AbortFetch()
