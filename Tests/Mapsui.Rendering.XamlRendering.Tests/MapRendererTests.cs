@@ -28,7 +28,7 @@ namespace Mapsui.Rendering.XamlRendering.Tests
         {
             // arrange
             var viewport = new Viewport { Center = new Point(100, 100), Width = 200, Height = 200, Resolution = 1 };
-            var layer = new InMemoryLayer
+            var layer = new MemoryLayer
                 {
                     Style = null,
                     DataSource = Mapsui.Tests.Common.Utilities.CreateProviderWithPointsWithVectorStyle()
@@ -52,7 +52,7 @@ namespace Mapsui.Rendering.XamlRendering.Tests
         {
             // arrange
             var viewport = new Viewport { Center = new Point(100, 100), Width = 200, Height = 200, Resolution = 1 };
-            var layer = new InMemoryLayer
+            var layer = new MemoryLayer
                 {
                     Style = null,
                     DataSource = Mapsui.Tests.Common.Utilities.CreateProviderWithPointsWithSymbolStyles()
@@ -76,7 +76,7 @@ namespace Mapsui.Rendering.XamlRendering.Tests
         {
             // arrange
             var viewport = new Viewport { Center = new Point(80, 80), Width = 200, Height = 200, Resolution = 1 };
-            var layer = new InMemoryLayer { DataSource = Mapsui.Tests.Common.Utilities.CreateProviderWithRotatedBitmapSymbols() };
+            var layer = new MemoryLayer { DataSource = Mapsui.Tests.Common.Utilities.CreateProviderWithRotatedBitmapSymbols() };
             
             // act
             var bitmap = RenderToBitmap(viewport, layer);
@@ -101,7 +101,7 @@ namespace Mapsui.Rendering.XamlRendering.Tests
                     Mapsui.Tests.Common.Utilities.CreateSimplePointFeature(-20, 0, new SymbolStyle {Fill = new Brush { Color = Color.Gray}, SymbolType = SymbolType.Ellipse}),
                     Mapsui.Tests.Common.Utilities.CreateSimplePointFeature(20, 0, new SymbolStyle {Fill = new Brush { Color = Color.Gray}, SymbolType = SymbolType.Rectangle})
                 };
-            var layer = new InMemoryLayer { DataSource = new MemoryProvider(features) };
+            var layer = new MemoryLayer { DataSource = new MemoryProvider(features) };
             const string imagePath = ImagesFolder + "\\vector_symbol_symboltype.png";
             
             // act
@@ -126,7 +126,7 @@ namespace Mapsui.Rendering.XamlRendering.Tests
                     Mapsui.Tests.Common.Utilities.CreateSimplePointFeature(-20, 0, new SymbolStyle {UnitType = UnitType.Pixel}),
                     Mapsui.Tests.Common.Utilities.CreateSimplePointFeature(20, 0, new SymbolStyle {UnitType = UnitType.WorldUnit})
                 };
-            var layer = new InMemoryLayer { DataSource = new MemoryProvider(features) };
+            var layer = new MemoryLayer { DataSource = new MemoryProvider(features) };
             
             // act
             var bitmap = RenderToBitmap(viewport, layer);
@@ -153,7 +153,7 @@ namespace Mapsui.Rendering.XamlRendering.Tests
                 Resolution = 63000
             };
 
-            var layer = new InMemoryLayer();
+            var layer = new MemoryLayer();
             var provider = Mapsui.Tests.Common.Utilities.CreatePolygonProvider();
             layer.DataSource = provider;
             const string imagePath = ImagesFolder + "\\polygon.png";
@@ -182,7 +182,7 @@ namespace Mapsui.Rendering.XamlRendering.Tests
                 Resolution = 63000
             };
 
-            var layer = new InMemoryLayer();
+            var layer = new MemoryLayer();
             var provider = Mapsui.Tests.Common.Utilities.CreateLineProvider();
             layer.DataSource = provider;
             
@@ -217,14 +217,14 @@ namespace Mapsui.Rendering.XamlRendering.Tests
 
 #if MONOGAME
 
-        private MemoryStream RenderToBitmap(Viewport viewport, InMemoryLayer layer)
+        private MemoryStream RenderToBitmap(Viewport viewport, MemoryLayer layer)
         {
             var mapRenderer = new MonoGame.MapRenderer(_graphicsDevice);
             mapRenderer.Render(layer, viewport);
             return new MemoryStream(); // not implemented yet
         }
 #else
-        private MemoryStream RenderToBitmap(Viewport viewport, InMemoryLayer layer)
+        private MemoryStream RenderToBitmap(Viewport viewport, MemoryLayer layer)
         {
             var canvas = new Canvas();
             MapRenderer.RenderLayer(canvas, viewport, layer);

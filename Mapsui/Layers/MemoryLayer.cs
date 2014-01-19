@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Mapsui.Layers
 {
-    public  class InMemoryLayer : BaseLayer
+    public  class MemoryLayer : BaseLayer
     {
         public string Name { get; set; }
         public IProvider DataSource { get; set; }

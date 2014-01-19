@@ -1,10 +1,10 @@
 ﻿using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
+using Mapsui.Styles;
 using System.Collections.Generic;
 using System.Threading;
 using System.Windows.Controls;
-using Mapsui.Styles;
 
 namespace Mapsui.Rendering.XamlRendering
 {
@@ -23,7 +23,7 @@ namespace Mapsui.Rendering.XamlRendering
 
         public RasterizingProvider(IProvider provider, IStyle style = null)
         {
-            _layer = new InMemoryLayer {DataSource = provider, Style = style};
+            _layer = new MemoryLayer {DataSource = provider, Style = style};
         }
 
         public int SRID { get; set; }
@@ -34,7 +34,7 @@ namespace Mapsui.Rendering.XamlRendering
             {
                 foreach (var feature in _layer.GetFeaturesInView(box, resolution)) 
                 {
-                    // hack: clear cach to prevent cross thread exception. 
+                    // hack: clear cache to prevent cross thread exception. 
                     // todo: remove this caching mechanism.
                     feature.RenderedGeometry.Clear();   
                 }
@@ -59,16 +59,16 @@ namespace Mapsui.Rendering.XamlRendering
         {
             var canvas = new Canvas();
             MapRenderer.RenderLayer(canvas, viewport, layer);
+            canvas.UpdateLayout();
             var bitmap = Utilities.ToBitmapStream(canvas, viewport.Width, viewport.Height);
             features = new Features { new Feature { Geometry = new Raster(bitmap, viewport.Extent) } };
-            canvas.UpdateLayout();
         }
 
         public IProvider DataSource
         {
             get
             {
-                var layer = _layer as InMemoryLayer;
+                var layer = _layer as MemoryLayer;
                 return layer != null ? layer.DataSource : null;
             }
         }
