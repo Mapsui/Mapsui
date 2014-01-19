@@ -51,7 +51,7 @@ namespace Mapsui.Geometries
 
         public bool IsEmpty()
         {
-            throw new NotImplementedException();
+            return _boundingBox.Width * _boundingBox.Height <= 0;
         }
 
         public Geometry Boundary()

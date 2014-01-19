@@ -1,12 +1,12 @@
-using System.Collections.Generic;
-using System.Globalization;
 using Android.Graphics;
-using Java.Lang;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Styles;
+using System.Collections.Generic;
+using System.Globalization;
 using Bitmap = Android.Graphics.Bitmap;
+using Math = Java.Lang.Math;
 
 namespace Mapsui.Rendering.Android
 {
@@ -50,7 +50,6 @@ namespace Mapsui.Rendering.Android
                     Canvas.DrawText(text, 20f, 20f, paint);
                 }
             }
-
         }
 
         private void RenderFeature(IViewport viewport, IStyle style, IFeature feature)
@@ -67,7 +66,6 @@ namespace Mapsui.Rendering.Android
                     dest.MaxY * OutputMultiplier);
                
                 var destination = RoundToPixel(dest);
-                
                 Canvas.DrawBitmap(bitmap, null, destination, null);
             }
         }
