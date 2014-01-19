@@ -1,33 +1,21 @@
 ﻿using Android.App;
+using Android.Content.PM;
 using Android.OS;
-using BruTile.Tms;
 using BruTile.Web;
 using Mapsui.Layers;
 using Mapsui.UI.Android;
-using System;
-using System.Linq;
-using System.Net;
 
 namespace Mapsui.Samples.Android
 {
-    [Activity(Label = "Mapsui.Samples.Android", MainLauncher = true, Icon = "@drawable/icon")]
+    [Activity(Label = "Mapsui.Samples.Android", MainLauncher = true, Icon = "@drawable/icon", ScreenOrientation = ScreenOrientation.Nosensor)]
     public class Activity1 : Activity
     {
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Main);
-
             var mapView = FindViewById<MapView>(Resource.Id.mapview);
-            mapView.Map.Layers.Add(new TileLayer(new OsmTileSource(), 40, 60));
-        }
-
-        private TileLayer LufoTest()
-        {            
-            var client = new WebClient();
-            var stream = client.OpenRead(new Uri(@"http://geodata1.nationaalgeoregister.nl/luchtfoto/tms/1.0.0/luchtfoto/EPSG28992"));
-            var t = TileMapParser.CreateTileSource(stream);
-            return new TileLayer(t);
+            mapView.Map.Layers.Add(new TileLayer(new OsmTileSource()));
         }
     }
 }

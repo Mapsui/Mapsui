@@ -216,15 +216,15 @@ namespace Mapsui.Samples.Wpf
         {
             MapControl.Map.Layers.Clear();
 
-        //    var webRequest = (HttpWebRequest)WebRequest.Create("http://geodata.nationaalgeoregister.nl/wmts/top10nl?VERSION=1.0.0&request=GetCapabilities");
-            var webRequest = (HttpWebRequest)WebRequest.Create("http://tiles.geodan.nl/mapproxy/map/wmts/1.0.0/WMTSCapabilities.xml");
+            var webRequest = (HttpWebRequest)WebRequest.Create("http://geodata.nationaalgeoregister.nl/wmts/top10nl?VERSION=1.0.0&request=GetCapabilities");
+           // var webRequest = (HttpWebRequest)WebRequest.Create("http://tiles.geodan.nl/mapproxy/map/wmts/1.0.0/WMTSCapabilities.xml");
         
             WebResponse webResponse = webRequest.GetSyncResponse(10000);
             if (webResponse == null) throw (new WebException("An error occurred while fetching tile", null));
             using (var responseStream = webResponse.GetResponseStream())
             {
                 var tileSources = WmtsParser.Parse(responseStream);
-                var natura2000 = tileSources.First();//t => t.Title.ToLower().Contains("natura2000"));
+                var natura2000 = tileSources.First(t => t.Title.ToLower().Contains("natura2000"));
                 MapControl.Map.Layers.Add(new TileLayer(natura2000));
                 MapControl.ZoomToFullEnvelope();
                 MapControl.Refresh();
