@@ -102,10 +102,6 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-    <ProjectReference Include="..\..\Mapsui.Rendering.MonoGame-W8\Mapsui.Rendering.MonoGame-W8.csproj">
-      <Project>{1d42d29e-29b5-41b8-a515-6448f5c8587c}</Project>
-      <Name>Mapsui.Rendering.MonoGame-W8</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Mapsui\Mapsui.csproj">
       <Project>{d74c052a-c07e-4b37-a898-134218aca5c9}</Project>
       <Name>Mapsui</Name>
