@@ -27,6 +27,9 @@ namespace Mapsui.Layers
 {
     public class Layer : BaseLayer
     {
+        public IProvider DataSource { get; set; }
+        public int FetchingPostponedInMilliseconds { get; set; }
+
         protected bool IsFetching;
         protected bool NeedsUpdate = true;
         protected double NewResolution;
@@ -34,9 +37,6 @@ namespace Mapsui.Layers
         protected MemoryProvider Cache;
         protected Timer StartFetchTimer; 
         
-        public IProvider DataSource { get; set; }
-        public int FetchingPostponedInMilliseconds { get; set; }
-
         /// <summary>
         /// Gets or sets the SRID of this VectorLayer's data source
         /// </summary>
@@ -62,10 +62,10 @@ namespace Mapsui.Layers
 
                 lock (DataSource)
                 {
-                    var box = DataSource.GetExtents();
+                    var extent = DataSource.GetExtents();
                     if (Transformation != null && Transformation.MapSRID != -1 && SRID != -1)
-                        return Transformation.Transfrom(SRID, Transformation.MapSRID, box);
-                    return box;
+                        return Transformation.Transfrom(SRID, Transformation.MapSRID, extent);
+                    return extent;
                 }
             }
         }
@@ -78,9 +78,9 @@ namespace Mapsui.Layers
             FetchingPostponedInMilliseconds = 500;
         }
 
-        public override IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
+        public override IEnumerable<IFeature> GetFeaturesInView(BoundingBox extent, double resolution)
         {
-            return Cache.GetFeaturesInView(box, resolution);
+            return Cache.GetFeaturesInView(extent, resolution);
         }
 
         public override void AbortFetch()
@@ -137,11 +137,13 @@ namespace Mapsui.Layers
             try
             {
                 features = features.ToList();
-                if (Transformation != null && Transformation.MapSRID != -1 && SRID != -1 && SRID != Transformation.MapSRID)
+                if (Transformation != null && Transformation.MapSRID != -1 && SRID != -1 &&
+                    SRID != Transformation.MapSRID)
                 {
                     foreach (var feature in features.Where(feature => !(feature.Geometry is Raster)))
                     {
-                        feature.Geometry = Transformation.Transform(SRID, Transformation.MapSRID, (Geometry)feature.Geometry);
+                        feature.Geometry = Transformation.Transform(SRID, Transformation.MapSRID,
+                            (Geometry) feature.Geometry);
                     }
                 }
 
@@ -155,7 +157,10 @@ namespace Mapsui.Layers
                     StartNewFetch(NewExtent, NewResolution);
                 }
             }
-            catch (InvalidOperationException) { }
+            catch (InvalidOperationException ex)
+            {
+                var text = ex.Message;
+            }
         }
 
         public override void ClearCache()

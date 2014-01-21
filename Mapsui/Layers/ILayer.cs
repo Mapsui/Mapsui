@@ -89,7 +89,7 @@ namespace Mapsui.Layers
 
         bool Rasterize { get; set; }
 
-        IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution);
+        IEnumerable<IFeature> GetFeaturesInView(BoundingBox extent, double resolution);
     }
 
     public delegate void FeedbackEventHandler(object sender, FeedbackEventArgs e);

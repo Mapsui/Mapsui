@@ -1,5 +1,4 @@
-﻿using System;
-using Mapsui.Geometries;
+﻿using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Styles;
@@ -29,11 +28,11 @@ namespace Mapsui.Rendering.XamlRendering
 
         public int SRID { get; set; }
 
-        public IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
+        public IEnumerable<IFeature> GetFeaturesInView(BoundingBox extent, double resolution)
         {
             lock (_syncLock)
             {
-                foreach (var feature in _layer.GetFeaturesInView(box, resolution)) 
+                foreach (var feature in _layer.GetFeaturesInView(extent, resolution)) 
                 {
                     // hack: clear cache to prevent cross thread exception. 
                     // todo: remove this caching mechanism.
@@ -41,7 +40,7 @@ namespace Mapsui.Rendering.XamlRendering
                 }
 
                 IFeatures features = null;
-                var viewport = CreateViewport(box, resolution);
+                var viewport = CreateViewport(extent, resolution);
                 RunMethodOnStaThread(() => RenderToRaster(viewport, _layer, out features));
                 return features;
             }
@@ -79,14 +78,14 @@ namespace Mapsui.Rendering.XamlRendering
             }
         }
 
-        private static Viewport CreateViewport(BoundingBox box, double resolution)
+        private static Viewport CreateViewport(BoundingBox extent, double resolution)
         {
             return new Viewport
                 {
                     Resolution = resolution,
-                    Center = box.GetCentroid(),
-                    Width = box.Width/resolution,
-                    Height = box.Height/resolution
+                    Center = extent.GetCentroid(),
+                    Width = extent.Width/resolution,
+                    Height = extent.Height/resolution
                 };
         }
     }

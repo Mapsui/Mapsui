@@ -19,11 +19,10 @@ namespace Mapsui.Samples.Desktop
             var countrySource = new ShapeFile(GetAppDir() + "\\GeoData\\World\\countries.shp", true) { SRID = 3785 };
             var citySource = new ShapeFile(GetAppDir() + "\\GeoData\\World\\cities.shp", true) { SRID = 3785 };
 
-            map.Layers.Add(CreateCountryLayer(countrySource));
-            map.Layers.Add(CreateCityLayer(citySource));
-            //todo: make LabelLayer rasterizable
-            //map.Layers.Add(CreateCountryLabelLayer(countrySource));
-            //map.Layers.Add(CreateCityLabelLayer(citySource));
+            map.Layers.Add(new RasterizingLayer(CreateCountryLayer(countrySource)));
+            map.Layers.Add(new RasterizingLayer(CreateCityLayer(citySource)));
+            map.Layers.Add(new RasterizingLayer(CreateCountryLabelLayer(countrySource)));
+            map.Layers.Add(new RasterizingLayer(CreateCityLabelLayer(citySource)));
 
             return map;
         }
@@ -33,17 +32,19 @@ namespace Mapsui.Samples.Desktop
             return new Layer
                 {
                     LayerName = "Countries",
-                    DataSource = new RasterizingProvider(countrySource, CreateCountryTheme())
+                    DataSource = countrySource,
+                    Style = CreateCountryTheme()
                 };
         }
 
         public static ILayer CreateCityLayer(IProvider citySource)
         {
             return new Layer
-                {
-                    LayerName = "Cities",
-                    DataSource = new RasterizingProvider(citySource, CreateCityTheme())
-                };
+            {
+                LayerName = "Cities",
+                DataSource = citySource,
+                Style = CreateCityTheme()
+            };
         }
 
         private static ILayer CreateCountryLabelLayer(IProvider countryProvider)
@@ -150,6 +151,5 @@ namespace Mapsui.Samples.Desktop
             return Path.GetDirectoryName(
               System.Reflection.Assembly.GetEntryAssembly().GetModules()[0].FullyQualifiedName);
         }
-
     }
 }

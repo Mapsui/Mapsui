@@ -83,8 +83,10 @@
     <Compile Include="Layers\Layer.cs" />
     <Compile Include="Layers\LayerCollection.cs" />
     <Compile Include="Layers\LayerGroup.cs" />
+    <Compile Include="Layers\RasterizingLayer.cs" />
     <Compile Include="Layers\TileLayer.cs" />
     <Compile Include="NotifyingViewport.cs" />
+    <Compile Include="Rendering\RendererFactory.cs" />
     <Compile Include="Rendering\VisibleFeatureIterator.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="Projection\GeometryIterator.cs" />

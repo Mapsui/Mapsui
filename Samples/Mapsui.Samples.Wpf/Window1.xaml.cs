@@ -1,20 +1,20 @@
-﻿using System.Linq;
-using System.Net;
-using BruTile.Extensions;
+﻿using BruTile.Extensions;
 using BruTile.Web;
 using BruTile.Wmts;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Desktop;
+using Mapsui.Styles;
+using Mapsui.UI.Xaml;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
+using System.Net;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using Mapsui.Styles;
-using Mapsui.UI.Xaml;
 
 namespace Mapsui.Samples.Wpf
 {
@@ -107,7 +107,6 @@ namespace Mapsui.Samples.Wpf
             {
                 MessageBox.Show(mouseInfoEventArgs.Feature["Label"].ToString());
             }
-
         }
 
         private MemoryProvider CreateRandomPointsProvider()
@@ -124,6 +123,7 @@ namespace Mapsui.Samples.Wpf
             }
             return new MemoryProvider(features);
         }
+
         private void GeodanWmsClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
@@ -215,10 +215,7 @@ namespace Mapsui.Samples.Wpf
         private void WmtsClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
-
             var webRequest = (HttpWebRequest)WebRequest.Create("http://geodata.nationaalgeoregister.nl/wmts/top10nl?VERSION=1.0.0&request=GetCapabilities");
-           // var webRequest = (HttpWebRequest)WebRequest.Create("http://tiles.geodan.nl/mapproxy/map/wmts/1.0.0/WMTSCapabilities.xml");
-        
             WebResponse webResponse = webRequest.GetSyncResponse(10000);
             if (webResponse == null) throw (new WebException("An error occurred while fetching tile", null));
             using (var responseStream = webResponse.GetResponseStream())

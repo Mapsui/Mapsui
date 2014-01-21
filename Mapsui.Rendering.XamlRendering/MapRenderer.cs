@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Threading;
 using Mapsui.Providers;
 using Mapsui.Geometries;
 using Mapsui.Layers;
@@ -29,27 +30,39 @@ namespace Mapsui.Rendering.XamlRendering
         public MapRenderer()
         {
             _target = new Canvas { IsHitTestVisible = false };
+            CommonConstruction();
         }
 
         public MapRenderer(Canvas target)
         {
             _target = target;
+            CommonConstruction();
+        }
+
+        private void CommonConstruction()
+        {
+            RendererRegistry.Renderer = this;
         }
 
         public void Render(IViewport viewport, IEnumerable<ILayer> layers)
         {
+            Render(_target, viewport, layers);
+        }
+
+        public static void Render(Canvas target, IViewport viewport, IEnumerable<ILayer> layers)
+        {
 #if !SILVERLIGHT &&  !NETFX_CORE
-            _target.BeginInit();
+            target.BeginInit();
 #endif
-            _target.Visibility = Visibility.Collapsed;
-            foreach (var child in _target.Children)
+            target.Visibility = Visibility.Collapsed;
+            foreach (var child in target.Children)
             {
                 if (child is Canvas)
                 {
                     (child as Canvas).Children.Clear();
                 }
             }
-            _target.Children.Clear();
+            target.Children.Clear();
 
             foreach (var layer in layers)
             {
@@ -57,31 +70,45 @@ namespace Mapsui.Rendering.XamlRendering
                     layer.MinVisible <= viewport.Resolution &&
                     layer.MaxVisible >= viewport.Resolution)
                 {
-                    RenderLayer(_target, viewport, layer);
+                    RenderLayer(target, viewport, layer);
                 }
             }
-            _target.Arrange(new Rect(0, 0, viewport.Width, viewport.Height));
-            _target.Visibility = Visibility.Visible;
+            target.Arrange(new Rect(0, 0, viewport.Width, viewport.Height));
+            target.Visibility = Visibility.Visible;
 #if !SILVERLIGHT &&  !NETFX_CORE
-            _target.EndInit();
+            target.EndInit();
 #endif
         }
 
         public MemoryStream RenderToBitmapStream(IViewport viewport, IEnumerable<ILayer> layers)
         {
 #if !SILVERLIGHT && !WINDOWS_PHONE && !NETFX_CORE
-            var canvas = new Canvas();
-            foreach (var layer in layers)
-            {
-                RenderLayer(canvas, viewport, layer);
-            }
-            canvas.UpdateLayout();
-            return Utilities.ToBitmapStream(canvas, viewport.Width, viewport.Height);
+            var bitmapStream = new MemoryStream();
+            RunMethodOnStaThread(() => bitmapStream = RenderToBitmapStreamStatic(viewport, layers));
+            return bitmapStream;
 #else
             throw new NotImplementedException();
 #endif
         }
 
+#if !SILVERLIGHT && !WINDOWS_PHONE && !NETFX_CORE
+        private static MemoryStream RenderToBitmapStreamStatic(IViewport viewport, IEnumerable<ILayer> layers)
+        {
+            var canvas = new Canvas();
+            Render(canvas, viewport, layers);
+            return Utilities.ToBitmapStream(canvas, viewport.Width, viewport.Height);
+        }
+
+        private static void RunMethodOnStaThread(ThreadStart operation)
+        {
+            var thread = new Thread(operation);
+            thread.SetApartmentState(ApartmentState.STA);
+            thread.Priority = ThreadPriority.Lowest;
+            thread.Start();
+            thread.Join();
+        }
+#endif
+        
         public static void RenderLayer(Canvas target, IViewport viewport, ILayer layer)
         {
             if (layer.Enabled == false) return;

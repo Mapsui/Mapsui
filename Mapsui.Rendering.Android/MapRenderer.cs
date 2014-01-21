@@ -1,4 +1,3 @@
-using System.IO;
 using Android.Graphics;
 using Mapsui.Geometries;
 using Mapsui.Layers;
@@ -6,6 +5,8 @@ using Mapsui.Providers;
 using Mapsui.Styles;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
+using System.Threading;
 using Bitmap = Android.Graphics.Bitmap;
 using Math = Java.Lang.Math;
 
@@ -15,6 +16,11 @@ namespace Mapsui.Rendering.Android
     {
         public Canvas Canvas { get; set; }
         public float OutputMultiplier { get; set; }
+
+        public MapRenderer()
+        {
+            RendererFactory.Get = (() => this);
+        }
 
         private static BoundingBox WorldToScreen(IViewport viewport, BoundingBox boundingBox)
         {
@@ -60,8 +66,25 @@ namespace Mapsui.Rendering.Android
 
         public MemoryStream RenderToBitmapStream(IViewport viewport, IEnumerable<ILayer> layers)
         {
-            Bitmap target = Bitmap.CreateBitmap(5000, 5000, Bitmap.Config.Argb8888);
+            var bitmapStream = new MemoryStream();
+            RunMethodOnStaThread(() => bitmapStream = RenderToBitmapStreamPrivate(viewport, layers));
+            return bitmapStream;
+        }
+
+        private static void RunMethodOnStaThread(ThreadStart operation)
+        {
+            var thread = new Thread(operation);
+            thread.SetApartmentState(ApartmentState.STA);
+            thread.Priority = ThreadPriority.Lowest;
+            thread.Start();
+            thread.Join();
+        }
+
+        private MemoryStream RenderToBitmapStreamPrivate(IViewport viewport, IEnumerable<ILayer> layers)
+        {
+            Bitmap target = Bitmap.CreateBitmap((int)viewport.Width, (int)viewport.Height, Bitmap.Config.Argb8888);
             var canvas = new Canvas(target);
+            this.Canvas = canvas;//!!!hack
             Render(canvas, viewport, layers);
             var stream = new MemoryStream();
             target.Compress(Bitmap.CompressFormat.Png, 100, stream);

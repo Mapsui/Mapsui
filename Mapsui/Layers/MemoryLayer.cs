@@ -1,4 +1,5 @@
-﻿using Mapsui.Geometries;
+﻿using Mapsui.Fetcher;
+using Mapsui.Geometries;
 using Mapsui.Providers;
 using System.Collections.Generic;
 
@@ -30,6 +31,7 @@ namespace Mapsui.Layers
         public override void ViewChanged(bool changeEnd, BoundingBox extent, double resolution)
         {
             // do nothing. This is not an async layer
+            OnDataChanged(new DataChangedEventArgs());
         }
 
         public override void ClearCache()
