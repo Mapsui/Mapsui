@@ -19,9 +19,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Rendering.GdiRenderi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Providers", "Mapsui.Providers\Mapsui.Providers.csproj", "{8BD54487-8DB9-431A-9596-2DFD744887A1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Rendering.XamlRendering-SL", "Mapsui.Rendering.Xaml-SL\Mapsui.Rendering.XamlRendering-SL.csproj", "{74A0BDF2-E6AF-4BAB-AA7E-73E68936F1F2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Rendering.Xaml-SL", "Mapsui.Rendering.Xaml-SL\Mapsui.Rendering.Xaml-SL.csproj", "{74A0BDF2-E6AF-4BAB-AA7E-73E68936F1F2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Rendering.XamlRendering", "Mapsui.Rendering.Xaml\Mapsui.Rendering.XamlRendering.csproj", "{860D6C33-291C-4449-B7CB-720390E6FD0E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Rendering.Xaml", "Mapsui.Rendering.Xaml\Mapsui.Rendering.Xaml.csproj", "{860D6C33-291C-4449-B7CB-720390E6FD0E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.UI.Xaml-SL", "Mapsui.UI.Xaml-SL\Mapsui.UI.Xaml-SL.csproj", "{451FB089-5B7F-4394-98CE-01B75A1505BA}"
 EndProject
@@ -35,11 +35,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Samples.Common", "Sa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.UI.Xaml-W8", "Mapsui.UI.Xaml-W8\Mapsui.UI.Xaml-W8.csproj", "{EC7DF5B3-7912-4848-AFA1-E68E0E860101}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Rendering.XamlRendering-W8", "Mapsui.Rendering.Xaml-W8\Mapsui.Rendering.XamlRendering-W8.csproj", "{A676FF74-1EC6-4B36-96D7-F3FAA313F0FE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Rendering.Xaml-W8", "Mapsui.Rendering.Xaml-W8\Mapsui.Rendering.Xaml-W8.csproj", "{A676FF74-1EC6-4B36-96D7-F3FAA313F0FE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Samples.Metro", "Samples\Mapsui.Samples.Metro\Mapsui.Samples.Metro.csproj", "{5A164ABA-F62B-491D-B9A8-9E567C3B6F8E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Rendering.XamlRendering-WP8", "Mapsui.Rendering.Xaml-WP8\Mapsui.Rendering.XamlRendering-WP8.csproj", "{5BCD71BC-6FB5-4E6B-8004-B028496EEB95}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Rendering.Xaml-WP8", "Mapsui.Rendering.Xaml-WP8\Mapsui.Rendering.Xaml-WP8.csproj", "{5BCD71BC-6FB5-4E6B-8004-B028496EEB95}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.UI.Xaml-WP8", "Mapsui.UI.Xaml-WP8\Mapsui.UI.Xaml-WP8.csproj", "{070BC7BC-FBC9-4D56-94E6-24C8201CBA95}"
 EndProject

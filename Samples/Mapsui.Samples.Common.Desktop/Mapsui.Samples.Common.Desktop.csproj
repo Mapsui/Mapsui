@@ -130,9 +130,9 @@
       <Project>{8bd54487-8db9-431a-9596-2dfd744887a1}</Project>
       <Name>Mapsui.Providers</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Mapsui.Rendering.Xaml\Mapsui.Rendering.XamlRendering.csproj">
+    <ProjectReference Include="..\..\Mapsui.Rendering.Xaml\Mapsui.Rendering.Xaml.csproj">
       <Project>{860D6C33-291C-4449-B7CB-720390E6FD0E}</Project>
-      <Name>Mapsui.Rendering.XamlRendering</Name>
+      <Name>Mapsui.Rendering.Xaml</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Mapsui\Mapsui.csproj">
       <Project>{d74c052a-c07e-4b37-a898-134218aca5c9}</Project>

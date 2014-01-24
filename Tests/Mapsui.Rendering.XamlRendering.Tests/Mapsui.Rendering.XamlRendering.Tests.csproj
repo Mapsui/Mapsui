@@ -59,9 +59,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Mapsui.Rendering.Xaml\Mapsui.Rendering.XamlRendering.csproj">
+    <ProjectReference Include="..\..\Mapsui.Rendering.Xaml\Mapsui.Rendering.Xaml.csproj">
       <Project>{860D6C33-291C-4449-B7CB-720390E6FD0E}</Project>
-      <Name>Mapsui.Rendering.XamlRendering</Name>
+      <Name>Mapsui.Rendering.Xaml</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Mapsui\Mapsui.csproj">
       <Project>{D74C052A-C07E-4B37-A898-134218ACA5C9}</Project>

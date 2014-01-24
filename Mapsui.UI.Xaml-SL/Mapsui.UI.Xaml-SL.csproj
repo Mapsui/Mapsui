@@ -82,9 +82,9 @@
     <Compile Include="Utilities\PngEncoder.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Mapsui.Rendering.Xaml-SL\Mapsui.Rendering.XamlRendering-SL.csproj">
+    <ProjectReference Include="..\Mapsui.Rendering.Xaml-SL\Mapsui.Rendering.Xaml-SL.csproj">
       <Project>{74a0bdf2-e6af-4bab-aa7e-73e68936f1f2}</Project>
-      <Name>Mapsui.Rendering.XamlRendering-SL</Name>
+      <Name>Mapsui.Rendering.Xaml-SL</Name>
     </ProjectReference>
     <ProjectReference Include="..\Mapsui\Mapsui.csproj">
       <Project>{d74c052a-c07e-4b37-a898-134218aca5c9}</Project>

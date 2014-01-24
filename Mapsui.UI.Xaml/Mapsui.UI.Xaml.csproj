@@ -87,9 +87,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Mapsui.Rendering.Xaml\Mapsui.Rendering.XamlRendering.csproj">
+    <ProjectReference Include="..\Mapsui.Rendering.Xaml\Mapsui.Rendering.Xaml.csproj">
       <Project>{860d6c33-291c-4449-b7cb-720390e6fd0e}</Project>
-      <Name>Mapsui.Rendering.XamlRendering</Name>
+      <Name>Mapsui.Rendering.Xaml</Name>
     </ProjectReference>
     <ProjectReference Include="..\Mapsui\Mapsui.csproj">
       <Project>{d74c052a-c07e-4b37-a898-134218aca5c9}</Project>
