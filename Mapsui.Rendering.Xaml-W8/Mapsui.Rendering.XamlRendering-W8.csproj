@@ -106,28 +106,28 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Mapsui.Rendering.XamlRendering\GeometryExtensions.cs">
+    <Compile Include="..\Mapsui.Rendering.Xaml\GeometryExtensions.cs">
       <Link>GeometryExtensions.cs</Link>
     </Compile>
-    <Compile Include="..\Mapsui.Rendering.XamlRendering\GeometryRenderer.cs">
+    <Compile Include="..\Mapsui.Rendering.Xaml\GeometryRenderer.cs">
       <Link>GeometryRenderer.cs</Link>
     </Compile>
-    <Compile Include="..\Mapsui.Rendering.XamlRendering\LabelRenderer.cs">
+    <Compile Include="..\Mapsui.Rendering.Xaml\LabelRenderer.cs">
       <Link>LabelRenderer.cs</Link>
     </Compile>
-    <Compile Include="..\Mapsui.Rendering.XamlRendering\MapRenderer.cs">
+    <Compile Include="..\Mapsui.Rendering.Xaml\MapRenderer.cs">
       <Link>MapRenderer.cs</Link>
     </Compile>
-    <Compile Include="..\Mapsui.Rendering.XamlRendering\MatrixHelper.cs">
+    <Compile Include="..\Mapsui.Rendering.Xaml\MatrixHelper.cs">
       <Link>MatrixHelper.cs</Link>
     </Compile>
-    <Compile Include="..\Mapsui.Rendering.XamlRendering\SingleLabelRenderer.cs">
+    <Compile Include="..\Mapsui.Rendering.Xaml\SingleLabelRenderer.cs">
       <Link>SingleLabelRenderer.cs</Link>
     </Compile>
-    <Compile Include="..\Mapsui.Rendering.XamlRendering\StackedLabelLayerRenderer.cs">
+    <Compile Include="..\Mapsui.Rendering.Xaml\StackedLabelLayerRenderer.cs">
       <Link>StackedLabelLayerRenderer.cs</Link>
     </Compile>
-    <Compile Include="..\Mapsui.Rendering.XamlRendering\StyleExtensions.cs">
+    <Compile Include="..\Mapsui.Rendering.Xaml\StyleExtensions.cs">
       <Link>StyleExtensions.cs</Link>
     </Compile>
     <Compile Include="AsyncHelpers.cs" />

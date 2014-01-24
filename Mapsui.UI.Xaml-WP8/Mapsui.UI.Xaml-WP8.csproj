@@ -95,7 +95,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Mapsui.Rendering.XamlRendering-WP8\Mapsui.Rendering.XamlRendering-WP8.csproj">
+    <ProjectReference Include="..\Mapsui.Rendering.Xaml-WP8\Mapsui.Rendering.XamlRendering-WP8.csproj">
       <Project>{5BCD71BC-6FB5-4E6B-8004-B028496EEB95}</Project>
       <Name>Mapsui.Rendering.XamlRendering-WP8</Name>
     </ProjectReference>

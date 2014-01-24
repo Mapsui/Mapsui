@@ -133,7 +133,7 @@
     <None Include="Properties\AppManifest.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Mapsui.Rendering.XamlRendering-SL\Mapsui.Rendering.XamlRendering-SL.csproj">
+    <ProjectReference Include="..\..\Mapsui.Rendering.Xaml-SL\Mapsui.Rendering.XamlRendering-SL.csproj">
       <Project>{74a0bdf2-e6af-4bab-aa7e-73e68936f1f2}</Project>
       <Name>Mapsui.Rendering.XamlRendering-SL</Name>
     </ProjectReference>

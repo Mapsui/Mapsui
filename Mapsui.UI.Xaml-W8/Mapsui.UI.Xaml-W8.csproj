@@ -100,7 +100,7 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-    <ProjectReference Include="..\Mapsui.Rendering.XamlRendering-W8\Mapsui.Rendering.XamlRendering-W8.csproj">
+    <ProjectReference Include="..\Mapsui.Rendering.Xaml-W8\Mapsui.Rendering.XamlRendering-W8.csproj">
       <Project>{a676ff74-1ec6-4b36-96d7-f3faa313f0fe}</Project>
       <Name>Mapsui.Rendering.XamlRendering-W8</Name>
     </ProjectReference>
