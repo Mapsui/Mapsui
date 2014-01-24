@@ -7,7 +7,7 @@ using System.Net;
 
 namespace Mapsui.ArcGISDynamicLayer
 {
-    public delegate void ArcgisLegendEventHandler(object sender, ArcGisLegendResponse legendInfo);
+    public delegate void ArcGISLegendEventHandler(object sender, ArcGISLegendResponse legendInfo);
 
     /// <summary>
     /// ArcGislegend for getting the layer legends for ArcGIS layers only supports
@@ -17,10 +17,10 @@ namespace Mapsui.ArcGISDynamicLayer
     {
         private int _timeOut;
         private HttpWebRequest _webRequest;
-        private ArcGisLegendResponse _legendResponse;
+        private ArcGISLegendResponse _legendResponse;
 
-        public event ArcgisLegendEventHandler LegendReceived;
-        public event ArcgisLegendEventHandler LegendFailed;
+        public event ArcGISLegendEventHandler LegendReceived;
+        public event ArcGISLegendEventHandler LegendFailed;
 
         public ArcGisLegend()
         {
@@ -47,7 +47,7 @@ namespace Mapsui.ArcGISDynamicLayer
             _webRequest.BeginGetResponse(FinishWebRequest, null);
         }
 
-        public ArcGisLegendResponse GetLegendInfo(string serviceUrl, ICredentials credentials = null)
+        public ArcGISLegendResponse GetLegendInfo(string serviceUrl, ICredentials credentials = null)
         {
             _webRequest = CreateRequest(serviceUrl, credentials);
             var response = _webRequest.GetSyncResponse(_timeOut);
@@ -87,7 +87,7 @@ namespace Mapsui.ArcGISDynamicLayer
             }
         }
 
-        private ArcGisLegendResponse GetLegendResponseFromWebresponse(WebResponse webResponse)
+        private ArcGISLegendResponse GetLegendResponseFromWebresponse(WebResponse webResponse)
         {
             var dataStream = webResponse.GetResponseStream();
 
@@ -98,7 +98,7 @@ namespace Mapsui.ArcGISDynamicLayer
 
                 var serializer = new JsonSerializer();
                 var jToken = JObject.Parse(jsonString);
-                var legendResponse = (ArcGisLegendResponse)serializer.Deserialize(new JTokenReader(jToken), typeof(ArcGisLegendResponse));
+                var legendResponse = (ArcGISLegendResponse)serializer.Deserialize(new JTokenReader(jToken), typeof(ArcGISLegendResponse));
 
                 dataStream.Dispose();
                 webResponse.Dispose();
@@ -111,7 +111,7 @@ namespace Mapsui.ArcGISDynamicLayer
             return null;
         }
 
-        private void OnLegendReceived(ArcGisLegendResponse legendInfo)
+        private void OnLegendReceived(ArcGISLegendResponse legendInfo)
         {
             var handler = LegendReceived;
             if (handler != null) handler(this, legendInfo);

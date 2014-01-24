@@ -10,7 +10,7 @@ using System.Text;
 
 namespace Mapsui.ArcGISDynamicLayer
 {
-    public class ArcGisDynamicProvider : IProvider
+    public class ArcGISDynamicProvider : IProvider
     {
         private int _timeOut;
         private string _url;
@@ -20,7 +20,7 @@ namespace Mapsui.ArcGISDynamicLayer
         /// </summary>
         /// <param name="url">url to map service example: http://url/arcgis/rest/services/test/MapServer</param>
         /// <param name="capabilities"></param>
-        public ArcGisDynamicProvider(string url, Capabilities capabilities)
+        public ArcGISDynamicProvider(string url, Capabilities capabilities)
         {
             Url = url;
             Capabilities = capabilities;
@@ -31,7 +31,7 @@ namespace Mapsui.ArcGISDynamicLayer
         /// Create ArcGisDynamicProvider, capabilities will be parsed automatically
         /// </summary>
         /// <param name="url">url to map service example: http://url/arcgis/rest/services/test/MapServer</param>        
-        public ArcGisDynamicProvider(string url)
+        public ArcGISDynamicProvider(string url)
         {
             Url = url;
 

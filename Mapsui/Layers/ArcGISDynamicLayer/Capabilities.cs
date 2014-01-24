@@ -15,7 +15,7 @@ namespace Mapsui.ArcGISDynamicLayer
         public string capabilities { get; set; }
         public bool singleFusedMapCache { get; set; }
         public Table[] tables;
-        public ArcGisLayer[] layers { get; set; }
+        public ArcGISLayer[] layers { get; set; }
         public SpatialReference spatialReference { get; set; }    
         public IDictionary<string, string> documentInfo { get; set; }
         public Extent initialExtent { get; set; }

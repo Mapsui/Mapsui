@@ -11,18 +11,18 @@ namespace Mapsui.ArcGISDynamicLayer
 {
     //Documentation 9.3: http://resources.esri.com/help/9.3/arcgisserver/apis/rest/
     //Documentation 10.0: http://help.arcgis.com/EN/arcgisserver/10.0/apis/rest/index.html
-    public delegate void StatusEventHandler(object sender, ArcGisFeatureInfo featureInfo);
+    public delegate void StatusEventHandler(object sender, ArcGISFeatureInfo featureInfo);
 
-    public class ArcGisIdentify
+    public class ArcGISIdentify
     {
         private int _timeOut { get; set; }
         private HttpWebRequest _webRequest { get; set; }
-        private ArcGisFeatureInfo _featureInfo { get; set; }
+        private ArcGISFeatureInfo _featureInfo { get; set; }
 
         public event StatusEventHandler IdentifyFinished;
         public event StatusEventHandler IdentifyFailed;
 
-        public ArcGisIdentify()
+        public ArcGISIdentify()
         {
             TimeOut = 5000;
         }
@@ -106,7 +106,7 @@ namespace Mapsui.ArcGISDynamicLayer
 
                     var serializer = new JsonSerializer();
                     var jToken = JObject.Parse(jsonString);
-                    _featureInfo = (ArcGisFeatureInfo)serializer.Deserialize(new JTokenReader(jToken), typeof(ArcGisFeatureInfo));
+                    _featureInfo = (ArcGISFeatureInfo)serializer.Deserialize(new JTokenReader(jToken), typeof(ArcGISFeatureInfo));
 
                     dataStream.Position = 0;
 

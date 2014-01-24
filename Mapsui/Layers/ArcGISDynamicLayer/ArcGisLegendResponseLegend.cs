@@ -1,6 +1,6 @@
 ﻿namespace Mapsui.ArcGISDynamicLayer
 {
-    public class ArcGisLegendResponseLegend
+    public class ArcGISLegendResponseLegend
     {
         public string label { get; set; }
         public string url { get; set; }

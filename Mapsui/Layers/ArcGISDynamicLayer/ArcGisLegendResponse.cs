@@ -1,7 +1,9 @@
-﻿namespace Mapsui.ArcGISDynamicLayer
+﻿using Mapsui.Layers.ArcGISDynamicLayer;
+
+namespace Mapsui.ArcGISDynamicLayer
 {
-    public class ArcGisLegendResponse
+    public class ArcGISLegendResponse
     {
-        public ArcGisLegendResponseLayer[] layers { get; set; }
+        public ArcGISLegendResponseLayer[] layers { get; set; }
     }
 }

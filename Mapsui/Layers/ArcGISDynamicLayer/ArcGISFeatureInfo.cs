@@ -2,7 +2,7 @@
 
 namespace Mapsui.ArcGISDynamicLayer
 {
-    public class ArcGisFeatureInfo
+    public class ArcGISFeatureInfo
     {
         public Result[] results { get; set; }
     }
