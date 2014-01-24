@@ -74,6 +74,21 @@
     <Compile Include="Geometries\SpatialRelations.cs" />
     <Compile Include="Geometries\Surface.cs" />
     <Compile Include="IViewport.cs" />
+    <Compile Include="Layers\ArcGISDynamicLayer\ArcGisDynamicProvider.cs" />
+    <Compile Include="Layers\ArcGISDynamicLayer\ArcGisFeatureInfo.cs" />
+    <Compile Include="Layers\ArcGISDynamicLayer\ArcGisIdentify.cs" />
+    <Compile Include="Layers\ArcGISDynamicLayer\ArcGisLayer.cs" />
+    <Compile Include="Layers\ArcGISDynamicLayer\ArcGisLegend.cs" />
+    <Compile Include="Layers\ArcGISDynamicLayer\ArcGisLegendResponse.cs" />
+    <Compile Include="Layers\ArcGISDynamicLayer\ArcGisLegendResponseLayer.cs" />
+    <Compile Include="Layers\ArcGISDynamicLayer\ArcGisLegendResponseLegend.cs" />
+    <Compile Include="Layers\ArcGISDynamicLayer\Capabilities.cs" />
+    <Compile Include="Layers\ArcGISDynamicLayer\CapabilitiesHelper.cs" />
+    <Compile Include="Layers\ArcGISDynamicLayer\Extent.cs" />
+    <Compile Include="Layers\ArcGISDynamicLayer\SpatialReference.cs" />
+    <Compile Include="Layers\ArcGISDynamicLayer\Table.cs" />
+    <Compile Include="Layers\ArcGISDynamicLayer\TileInfo.cs" />
+    <Compile Include="Layers\ArcGISDynamicLayer\TimeInfo.cs" />
     <Compile Include="Layers\BaseLayer.cs" />
     <Compile Include="Layers\IFeatureInfo.cs" />
     <Compile Include="Layers\ILayer.cs" />
@@ -136,10 +151,14 @@
     <Reference Include="BruTile">
       <HintPath>..\packages\BruTile.0.9.0\lib\portable-net403+sl5+wp8+win8+MonoAndroid+MonoTouch\BruTile.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\portable-net40+sl4+wp7+win8\Newtonsoft.Json.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

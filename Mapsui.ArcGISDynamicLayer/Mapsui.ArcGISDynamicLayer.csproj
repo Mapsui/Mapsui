@@ -35,22 +35,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="ArcGisDynamicProvider.cs" />
-    <Compile Include="ArcGisFeatureInfo.cs" />
-    <Compile Include="ArcGisIdentify.cs" />
-    <Compile Include="ArcGisLayer.cs" />
-    <Compile Include="ArcGisLegend.cs" />
-    <Compile Include="ArcGisLegendResponse.cs" />
-    <Compile Include="ArcGisLegendResponseLayer.cs" />
-    <Compile Include="ArcGisLegendResponseLegend.cs" />
-    <Compile Include="Capabilities.cs" />
-    <Compile Include="CapabilitiesHelper.cs" />
-    <Compile Include="Extent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SpatialReference.cs" />
-    <Compile Include="Table.cs" />
-    <Compile Include="TileInfo.cs" />
-    <Compile Include="TimeInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="BruTile">
