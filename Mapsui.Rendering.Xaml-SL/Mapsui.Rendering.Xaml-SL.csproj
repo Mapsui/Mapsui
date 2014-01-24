@@ -10,7 +10,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Mapsui.Rendering.XamlRendering</RootNamespace>
-    <AssemblyName>Mapsui.Rendering.XamlRendering</AssemblyName>
+    <AssemblyName>Mapsui.Rendering.Xaml</AssemblyName>
     <TargetFrameworkIdentifier>Silverlight</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
     <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>

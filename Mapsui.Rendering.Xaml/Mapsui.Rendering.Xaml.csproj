@@ -7,8 +7,8 @@
     <ProjectGuid>{860D6C33-291C-4449-B7CB-720390E6FD0E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Mapsui.Rendering.XamlRendering</RootNamespace>
-    <AssemblyName>Mapsui.Rendering.XamlRendering</AssemblyName>
+    <RootNamespace>Mapsui.Rendering.Xaml</RootNamespace>
+    <AssemblyName>Mapsui.Rendering.Xaml</AssemblyName>
     <TargetFrameworkVersion>v4.0.3</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
