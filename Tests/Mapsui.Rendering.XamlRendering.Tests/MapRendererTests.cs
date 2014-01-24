@@ -1,6 +1,7 @@
 ﻿using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
+using Mapsui.Rendering.Xaml;
 using Mapsui.Styles;
 using NUnit.Framework;
 using System.IO;
@@ -228,7 +229,7 @@ namespace Mapsui.Rendering.XamlRendering.Tests
         {
             var canvas = new Canvas();
             MapRenderer.RenderLayer(canvas, viewport, layer);
-            return Utilities.ToBitmapStream(canvas, viewport.Width, viewport.Height);
+            return Xaml.Utilities.ToBitmapStream(canvas, viewport.Width, viewport.Height);
         }
 #endif
 
