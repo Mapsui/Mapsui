@@ -1,4 +1,5 @@
-﻿using Mapsui.Styles;
+﻿using Mapsui.Rendering.XamlRendering;
+using Mapsui.Styles;
 #if !NETFX_CORE
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -14,14 +15,14 @@ using XamlPoint = Windows.Foundation.Point;
 using XamlSize = Windows.Foundation.Size;
 #endif
 
-namespace Mapsui.Rendering.XamlRendering
+namespace Mapsui.Rendering.Xaml
 {
     class SingleLabelRenderer
     {
         public static UIElement RenderLabel(Geometries.Point position, LabelStyle labelStyle, IViewport viewport)
         {
             var screenPosition = viewport.WorldToScreen(position);
-            var windowsPosition = new XamlPoint(screenPosition.X, screenPosition.Y);
+            var windowsPosition = new Point(screenPosition.X, screenPosition.Y);
 
             //set some defaults which should be configurable someday
             const double witdhMargin = 3.0;

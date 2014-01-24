@@ -19,7 +19,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI;
 #endif
 
-namespace Mapsui.Rendering.XamlRendering
+namespace Mapsui.Rendering.Xaml
 {
     public static class StackedLabelLayerRenderer
     {

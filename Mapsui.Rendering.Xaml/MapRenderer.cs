@@ -21,7 +21,7 @@ using Windows.UI.Xaml.Media.Animation;
 using AnimateEventHandler = System.EventHandler<object>;
 #endif
 
-namespace Mapsui.Rendering.XamlRendering
+namespace Mapsui.Rendering.Xaml
 {
     public class MapRenderer : IRenderer
     {
@@ -108,7 +108,7 @@ namespace Mapsui.Rendering.XamlRendering
             thread.Join();
         }
 #endif
-        
+
         public static void RenderLayer(Canvas target, IViewport viewport, ILayer layer)
         {
             if (layer.Enabled == false) return;
@@ -134,14 +134,14 @@ namespace Mapsui.Rendering.XamlRendering
             try
             {
                 var canvas = new Canvas
-                    {
-                        Opacity = layer.Opacity, 
-                        IsHitTestVisible = false
-                    };
+                {
+                    Opacity = layer.Opacity,
+                    IsHitTestVisible = false
+                };
 
                 var features = layer.GetFeaturesInView(viewport.Extent, viewport.RenderResolution).ToList();
                 var layerStyles = BaseLayer.GetLayerStyles(layer);
-            
+
                 foreach (var layerStyle in layerStyles)
                 {
                     var style = layerStyle; // This is the default that could be overridden by an IThemeStyle
@@ -241,11 +241,11 @@ namespace Mapsui.Rendering.XamlRendering
             return;
 
             var animation = new DoubleAnimation
-                {
-                    From = from, 
-                    To = to, 
-                    Duration = new TimeSpan(0, 0, 0, 0, duration)
-                };
+            {
+                From = from,
+                To = to,
+                Duration = new TimeSpan(0, 0, 0, 0, duration)
+            };
 
             Storyboard.SetTarget(animation, target);
 #if !NETFX_CORE

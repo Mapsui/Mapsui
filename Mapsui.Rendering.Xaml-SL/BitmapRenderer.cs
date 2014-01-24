@@ -7,7 +7,7 @@ using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
 
-namespace Mapsui.Rendering.XamlRendering
+namespace Mapsui.Rendering.Xaml
 {
     public static class BitmapRenderer
     {

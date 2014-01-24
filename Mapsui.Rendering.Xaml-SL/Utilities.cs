@@ -1,7 +1,7 @@
 ﻿using System.Windows.Media.Imaging;
 using System.IO;
 
-namespace Mapsui.Rendering.XamlRendering
+namespace Mapsui.Rendering.Xaml
 {
     public static class Utilities
     {

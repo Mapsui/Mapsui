@@ -22,7 +22,7 @@ using Windows.UI.Xaml.Media.Imaging;
 using System.Threading.Tasks;
 #endif
 
-namespace Mapsui.Rendering.XamlRendering
+namespace Mapsui.Rendering.Xaml
 {
     ///<remarks>
     /// In this class there are a lot of collistions in class names between Mapsui
@@ -143,32 +143,32 @@ namespace Mapsui.Rendering.XamlRendering
             var height = bitmapImage.PixelHeight;
 
             return new XamlShapes.Path
+            {
+                Data = new XamlMedia.RectangleGeometry
                 {
-                    Data = new XamlMedia.RectangleGeometry
-                        {
-                            Rect = new Rect(-width * 0.5, -height * 0.5, width, height)
-                        },
-                    Fill = fill,
-                    Opacity = opacity
-                };
+                    Rect = new Rect(-width * 0.5, -height * 0.5, width, height)
+                },
+                Fill = fill,
+                Opacity = opacity
+            };
         }
 
         private static XamlMedia.EllipseGeometry CreateEllipse(double width, double height)
         {
             return new XamlMedia.EllipseGeometry
-                {
-                    Center = new XamlPoint(0, 0),
-                    RadiusX = width * 0.5,
-                    RadiusY = height * 0.5
-                };
+            {
+                Center = new XamlPoint(0, 0),
+                RadiusX = width * 0.5,
+                RadiusY = height * 0.5
+            };
         }
 
         private static XamlMedia.RectangleGeometry CreateRectangle(double width, double height)
         {
             return new XamlMedia.RectangleGeometry
-                {
-                    Rect = new Rect(width * -0.5, height * -0.5, width, height)
-                };
+            {
+                Rect = new Rect(width * -0.5, height * -0.5, width, height)
+            };
         }
 
         private static XamlShapes.Path CreatePointPath(SymbolStyle style)
@@ -193,11 +193,11 @@ namespace Mapsui.Rendering.XamlRendering
 
                 //Changes the rotation of the symbol
                 var rotation = new XamlMedia.RotateTransform
-                    {
-                        Angle = style.SymbolRotation,
-                        CenterX = bitmapImage.PixelWidth * style.SymbolScale * 0.5,
-                        CenterY = bitmapImage.PixelHeight * style.SymbolScale * 0.5
-                    };
+                {
+                    Angle = style.SymbolRotation,
+                    CenterX = bitmapImage.PixelWidth * style.SymbolScale * 0.5,
+                    CenterY = bitmapImage.PixelHeight * style.SymbolScale * 0.5
+                };
                 path.RenderTransform = rotation;
             }
 
@@ -361,10 +361,10 @@ namespace Mapsui.Rendering.XamlRendering
 
             var bitmapImage = new BitmapImage();
 #if NETFX_CORE
-           stream.Position = 0;
-           bitmapImage.SetSource(AsyncHelpers.RunSync(() =>
-               ByteArrayToRandomAccessStream(stream.ToArray())));
-               
+            stream.Position = 0;
+            bitmapImage.SetSource(AsyncHelpers.RunSync(() =>
+                ByteArrayToRandomAccessStream(stream.ToArray())));
+
 #elif !SILVERLIGHT
             var localStream = new MemoryStream();
             stream.Position = 0;
@@ -377,10 +377,10 @@ namespace Mapsui.Rendering.XamlRendering
             bitmapImage.SetSource(stream);
 #endif
             var path = new XamlShapes.Path
-                {
-                    Fill = new XamlMedia.ImageBrush { ImageSource = bitmapImage },
-                    IsHitTestVisible = false
-                };
+            {
+                Fill = new XamlMedia.ImageBrush { ImageSource = bitmapImage },
+                IsHitTestVisible = false
+            };
             return path;
         }
 
@@ -395,7 +395,7 @@ namespace Mapsui.Rendering.XamlRendering
             stream.Seek(0);
             return stream;
         }
-        
+
 #endif
         private static XamlMedia.Geometry ConvertRaster(BoundingBox boundingBox, IViewport viewport)
         {

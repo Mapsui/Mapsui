@@ -1,12 +1,12 @@
-﻿using Mapsui.Geometries;
+﻿using System.Collections.Generic;
+using System.Threading;
+using System.Windows.Controls;
+using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Styles;
-using System.Collections.Generic;
-using System.Threading;
-using System.Windows.Controls;
 
-namespace Mapsui.Rendering.XamlRendering
+namespace Mapsui.Rendering.Xaml
 {
     /// <summary>
     /// Wrapper around a feature provider that returns a rasterized image of the features.

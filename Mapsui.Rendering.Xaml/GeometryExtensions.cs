@@ -11,7 +11,7 @@ using XamlMedia = Windows.UI.Xaml.Media;
 using XamlPoint = Windows.Foundation.Point;
 #endif
 
-namespace Mapsui.Rendering.XamlRendering
+namespace Mapsui.Rendering.Xaml
 {
     static class GeometryExtensions
     {
@@ -83,3 +83,4 @@ namespace Mapsui.Rendering.XamlRendering
         }
     }
 }
+

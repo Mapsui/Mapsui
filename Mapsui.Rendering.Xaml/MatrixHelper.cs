@@ -5,7 +5,7 @@ using System.Windows.Media;
 using Windows.UI.Xaml.Media;
 #endif
 
-namespace Mapsui.Rendering.XamlRendering
+namespace Mapsui.Rendering.Xaml
 {
     public static class MatrixHelper
     {
