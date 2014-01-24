@@ -7,7 +7,7 @@ using System.Globalization;
 using System.IO;
 using System.Net;
 
-namespace Mapsui.ArcGISDynamicLayer
+namespace Mapsui.Layers.ArcGISDynamicLayer
 {
     //Documentation 9.3: http://resources.esri.com/help/9.3/arcgisserver/apis/rest/
     //Documentation 10.0: http://help.arcgis.com/EN/arcgisserver/10.0/apis/rest/index.html

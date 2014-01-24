@@ -1,11 +1,12 @@
-﻿using BruTile;
-using BruTile.Extensions;
-using System;
+﻿using System;
 using System.IO;
 using System.Net;
 using System.Runtime.Serialization.Json;
+using BruTile;
+using BruTile.Extensions;
+using Mapsui.ArcGISDynamicLayer;
 
-namespace Mapsui.ArcGISDynamicLayer
+namespace Mapsui.Layers.ArcGISDynamicLayer
 {
     public class CapabilitiesHelper
     {

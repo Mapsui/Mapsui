@@ -1,4 +1,5 @@
 ﻿using BruTile.Extensions;
+using Mapsui.ArcGISDynamicLayer;
 using Mapsui.Geometries;
 using Mapsui.Providers;
 using System;
@@ -8,7 +9,7 @@ using System.IO;
 using System.Net;
 using System.Text;
 
-namespace Mapsui.ArcGISDynamicLayer
+namespace Mapsui.Layers.ArcGISDynamicLayer
 {
     public class ArcGISDynamicProvider : IProvider
     {

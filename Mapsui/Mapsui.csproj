@@ -81,7 +81,6 @@
     <Compile Include="Layers\ArcGISDynamicLayer\ArcGISLegend.cs" />
     <Compile Include="Layers\ArcGISDynamicLayer\ArcGISLegendResponse.cs" />
     <Compile Include="Layers\ArcGISDynamicLayer\ArcGisLegendResponseLayer.cs" />
-    <Compile Include="Layers\ArcGISDynamicLayer\ArcGISLegendResponseLayer_2.cs" />
     <Compile Include="Layers\ArcGISDynamicLayer\ArcGISLegendResponseLegend.cs" />
     <Compile Include="Layers\ArcGISDynamicLayer\Capabilities.cs" />
     <Compile Include="Layers\ArcGISDynamicLayer\CapabilitiesHelper.cs" />

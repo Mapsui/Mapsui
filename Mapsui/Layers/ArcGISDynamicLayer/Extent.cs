@@ -1,4 +1,6 @@
-﻿namespace Mapsui.ArcGISDynamicLayer
+﻿using Mapsui.ArcGISDynamicLayer;
+
+namespace Mapsui.Layers.ArcGISDynamicLayer
 {
     public class Extent
     {

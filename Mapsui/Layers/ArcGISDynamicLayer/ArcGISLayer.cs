@@ -1,4 +1,4 @@
-﻿namespace Mapsui.ArcGISDynamicLayer
+﻿namespace Mapsui.Layers.ArcGISDynamicLayer
 {
     public class ArcGISLayer
     {

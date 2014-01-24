@@ -1,6 +1,4 @@
-﻿using Mapsui.Layers.ArcGISDynamicLayer;
-
-namespace Mapsui.ArcGISDynamicLayer
+﻿namespace Mapsui.Layers.ArcGISDynamicLayer
 {
     public class ArcGISLegendResponse
     {

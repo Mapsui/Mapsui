@@ -1,11 +1,12 @@
-﻿using BruTile.Extensions;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
+﻿using System;
 using System.IO;
 using System.Net;
+using BruTile.Extensions;
+using Mapsui.ArcGISDynamicLayer;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
-namespace Mapsui.ArcGISDynamicLayer
+namespace Mapsui.Layers.ArcGISDynamicLayer
 {
     public delegate void ArcGISLegendEventHandler(object sender, ArcGISLegendResponse legendInfo);
 

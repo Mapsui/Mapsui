@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Mapsui.ArcGISDynamicLayer
+namespace Mapsui.Layers.ArcGISDynamicLayer
 {
     public class ArcGISFeatureInfo
     {
