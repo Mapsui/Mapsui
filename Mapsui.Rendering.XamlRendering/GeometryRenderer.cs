@@ -343,6 +343,10 @@ namespace Mapsui.Rendering.XamlRendering
         {
             var path = CreateRasterPath(style, raster.Data);
             path.Data = ConvertRaster(raster.GetBoundingBox(), viewport);
+
+            //!!!path.Stroke = new XamlMedia.SolidColorBrush(XamlColors.Red);
+            //!!!path.StrokeThickness = 6;
+
             MapRenderer.Animate(path, "Opacity", 0, 1, 600, (s, e) => { });
             return path;
         }

@@ -22,8 +22,6 @@ namespace Mapsui.UI.Android
         private PointF _previousMid = new PointF();
         private readonly PointF _currentMid = new PointF();
         private float _oldDist = 1f;
-        private const float OutputMultiplier = 2;
-        private const float InvertedOutputMultiplier = (1/OutputMultiplier);
         private bool _viewportInitialized;
 
         public MapView(Context context, IAttributeSet attrs) :
@@ -49,7 +47,7 @@ namespace Mapsui.UI.Android
         public void Initialize()
         {
             Map = new Map();
-            _renderer = new MapRenderer { OutputMultiplier = OutputMultiplier };
+            _renderer = new MapRenderer();
             InitializeViewport();
             SetOnTouchListener(this);
         }
@@ -67,10 +65,11 @@ namespace Mapsui.UI.Android
                 _map.Viewport.Resolution = _map.Envelope.Width / Width;
             if (double.IsNaN(_map.Viewport.CenterX) || double.IsNaN(_map.Viewport.CenterY))
                 _map.Viewport.Center = _map.Envelope.GetCentroid();
-            _map.Viewport.Width = Width * InvertedOutputMultiplier;
-            _map.Viewport.Height = Height * InvertedOutputMultiplier;
+            _map.Viewport.Width = Width;
+            _map.Viewport.Height = Height;
+            _map.Viewport.RenderScaleFactor = 4;
 
-            _map.ViewChanged(true, _map.Viewport.Extent, _map.Viewport.Resolution);
+            _map.ViewChanged(true, _map.Viewport.Extent, _map.Viewport.RenderResolution);
             _viewportInitialized = true;
         }
 
@@ -110,10 +109,10 @@ namespace Mapsui.UI.Android
         	              if (_previousMap != null) 
         	              {
                               _map.Viewport.Transform(
-                                  _currentMap.X * InvertedOutputMultiplier, 
-                                  _currentMap.Y * InvertedOutputMultiplier,
-                                  _previousMap.X * InvertedOutputMultiplier,
-                                  _previousMap.Y * InvertedOutputMultiplier);
+                                  _currentMap.X, 
+                                  _currentMap.Y,
+                                  _previousMap.X,
+                                  _previousMap.Y);
                               Invalidate();
         	              }
         	              _previousMap = _currentMap;
@@ -130,17 +129,17 @@ namespace Mapsui.UI.Android
         	                  _previousMid = new PointF(_currentMid.X, _currentMid.Y);
         	                  MidPoint(_currentMid, args);
                               _map.Viewport.Center = _map.Viewport.ScreenToWorld(
-                                  _currentMid.X * InvertedOutputMultiplier, 
-                                  _currentMid.Y * InvertedOutputMultiplier);
+                                  _currentMid.X, 
+                                  _currentMid.Y);
                               _map.Viewport.Resolution = _map.Viewport.Resolution / scale;
                               _map.Viewport.Center = _map.Viewport.ScreenToWorld(
-                                  (_map.Viewport.Width - _currentMid.X * InvertedOutputMultiplier),
-                                  (_map.Viewport.Height - _currentMid.Y * InvertedOutputMultiplier));
+                                  (_map.Viewport.Width - _currentMid.X),
+                                  (_map.Viewport.Height - _currentMid.Y));
                               _map.Viewport.Transform(
-                                  _currentMid.X * InvertedOutputMultiplier, 
-                                  _currentMid.Y * InvertedOutputMultiplier, 
-                                  _previousMid.X * InvertedOutputMultiplier, 
-                                  _previousMid.Y * InvertedOutputMultiplier);
+                                  _currentMid.X, 
+                                  _currentMid.Y, 
+                                  _previousMid.X, 
+                                  _previousMid.Y);
         	                  Invalidate();        
         	              }
         	              break;
@@ -206,7 +205,7 @@ namespace Mapsui.UI.Android
                     _map.DataChanged += MapDataChanged;
                     _map.PropertyChanged += MapPropertyChanged;
                     _map.Viewport.PropertyChanged += ViewportOnPropertyChanged; // not sure if this should be a direct coupling 
-                    _map.ViewChanged(true, _map.Viewport.Extent, _map.Viewport.Resolution);
+                    _map.ViewChanged(true, _map.Viewport.Extent, _map.Viewport.RenderResolution);
                 }
                 RefreshGraphics();
             }
@@ -216,7 +215,7 @@ namespace Mapsui.UI.Android
         {
             if (e.PropertyName != "Envelope") return;
             InitializeViewport();
-            _map.ViewChanged(true, _map.Viewport.Extent, _map.Viewport.Resolution);
+            _map.ViewChanged(true, _map.Viewport.Extent, _map.Viewport.RenderResolution);
         }
 
         public void MapDataChanged(object sender, DataChangedEventArgs e)

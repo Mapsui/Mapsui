@@ -40,7 +40,7 @@ namespace Mapsui.Rendering
         private static void IterateVectorLayer(IViewport viewport, ILayer layer,
             Action<IViewport, IStyle, IFeature> callback)
         {
-            var features = layer.GetFeaturesInView(viewport.Extent, viewport.Resolution).ToList();
+            var features = layer.GetFeaturesInView(viewport.Extent, viewport.RenderResolution).ToList();
 
             var layerStyles = layer.Style is StyleCollection ? (layer.Style as StyleCollection).ToArray() : new [] {layer.Style};
             foreach (var layerStyle in layerStyles)

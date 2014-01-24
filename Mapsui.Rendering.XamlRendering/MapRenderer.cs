@@ -41,7 +41,7 @@ namespace Mapsui.Rendering.XamlRendering
 
         private void CommonConstruction()
         {
-            RendererRegistry.Renderer = this;
+            RendererFactory.Get = () => this;
         }
 
         public void Render(IViewport viewport, IEnumerable<ILayer> layers)
@@ -139,7 +139,7 @@ namespace Mapsui.Rendering.XamlRendering
                         IsHitTestVisible = false
                     };
 
-                var features = layer.GetFeaturesInView(viewport.Extent, viewport.Resolution).ToList();
+                var features = layer.GetFeaturesInView(viewport.Extent, viewport.RenderResolution).ToList();
                 var layerStyles = BaseLayer.GetLayerStyles(layer);
             
                 foreach (var layerStyle in layerStyles)

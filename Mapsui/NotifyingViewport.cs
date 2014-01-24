@@ -6,7 +6,18 @@ namespace Mapsui
     public class NotifyingViewport : IViewport
     {
         private readonly Viewport _viewport = new Viewport();
+
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public double RenderResolution
+        {
+            get { return _viewport.RenderResolution; }
+        }
+
+        public double RenderScaleFactor
+        {
+            set { _viewport.RenderScaleFactor = value; }
+        }
         
         public Point Center
         {
@@ -24,7 +35,6 @@ namespace Mapsui
                 _viewport.CenterX = value;
                 RaisePropertyChanged("CenterX");
             }
-            
         }
 
         public double CenterY

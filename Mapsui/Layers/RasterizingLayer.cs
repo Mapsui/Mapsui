@@ -63,7 +63,7 @@ namespace Mapsui.Layers
         {
             _layer.ClearCache();
         }
-
+        
         private static Viewport CreateViewport(BoundingBox extent, double resolution)
         {
             return new Viewport

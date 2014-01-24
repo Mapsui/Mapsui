@@ -40,9 +40,16 @@ namespace Mapsui
             UpdateExtent();
         }
 
+        public double RenderScaleFactor { get; set; }
+
+        public double RenderResolution
+        {
+            get { return Resolution * RenderScaleFactor; }
+        }
+
         public Point Center
         {
-            get { return new Point(_centerX, _centerY);}
+            get { return new Point(_centerX, _centerY); }
             set
             {
                 _centerX = value.X;

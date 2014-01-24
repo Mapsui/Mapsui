@@ -41,7 +41,7 @@ namespace Mapsui.Fetcher
 
         public IList<TileInfo> GetTilesWanted(ITileSchema schema, Extent extent, string levelId)
         {
-            //line below only works properly of this instance is always called with the the resolutions. Think of something better
+            //line below only works properly of this instance is always called with the resolutions. Think of something better
             if (preFetchLayers == null) preFetchLayers = GetPreFetchLevels(0, schema.Resolutions.Count - 1);
 
             IList<TileInfo> infos = new List<TileInfo>();

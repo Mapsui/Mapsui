@@ -28,6 +28,7 @@ namespace Mapsui
         double CenterX { get; }
         double CenterY { get; }
         double Resolution { get; }
+        double RenderResolution { get; }
         BoundingBox Extent { get; }
         double Width { get; }
         double Height { get; }

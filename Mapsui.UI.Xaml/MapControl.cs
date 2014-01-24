@@ -94,7 +94,7 @@ namespace Mapsui.UI.Xaml
                 {
                     _map.DataChanged += MapDataChanged;
                     _map.PropertyChanged += MapPropertyChanged;
-                    _map.ViewChanged(true, _viewport.Extent, _viewport.Resolution);
+                    _map.ViewChanged(true, _viewport.Extent, _viewport.RenderResolution);
                 }
                 OnViewChanged();
                 RefreshGraphics();
@@ -106,7 +106,7 @@ namespace Mapsui.UI.Xaml
             if (e.PropertyName == "Envelope")
             {
                 InitializeViewport();
-                _map.ViewChanged(true, _viewport.Extent, _viewport.Resolution);
+                _map.ViewChanged(true, _viewport.Extent, _viewport.RenderResolution);
             }
         }
 
@@ -221,7 +221,7 @@ namespace Mapsui.UI.Xaml
 
         public void Refresh()
         {
-            _map.ViewChanged(true, _viewport.Extent, _viewport.Resolution);
+            _map.ViewChanged(true, _viewport.Extent, _viewport.RenderResolution);
             RefreshGraphics();
         }
 
@@ -299,7 +299,7 @@ namespace Mapsui.UI.Xaml
               _viewport.Width - mousePosition.X,
               _viewport.Height - mousePosition.Y);
 
-            _map.ViewChanged(true, _viewport.Extent, _viewport.Resolution);
+            _map.ViewChanged(true, _viewport.Extent, _viewport.RenderResolution);
             OnViewChanged();
             RefreshGraphics();
         }
@@ -356,7 +356,7 @@ namespace Mapsui.UI.Xaml
             //some cheating for personal gain
             _viewport.CenterX += 0.000000001;
             _viewport.CenterY += 0.000000001;
-            _map.ViewChanged(false, _viewport.Extent, _viewport.Resolution);
+            _map.ViewChanged(false, _viewport.Extent, _viewport.RenderResolution);
             OnViewChanged(true);
 
             StartZoomAnimation(_viewport.Resolution, _toResolution);
@@ -381,7 +381,7 @@ namespace Mapsui.UI.Xaml
             if (!_viewportInitialized) InitializeViewport();
             Clip = new RectangleGeometry { Rect = new Rect(0, 0, ActualWidth, ActualHeight) };
             UpdateSize();
-            _map.ViewChanged(true, _viewport.Extent, _viewport.Resolution);
+            _map.ViewChanged(true, _viewport.Extent, _viewport.RenderResolution);
             OnViewChanged();
             Refresh();
         }
@@ -466,7 +466,7 @@ namespace Mapsui.UI.Xaml
                 OnMouseInfoUp(eventArgs ?? new MouseInfoEventArgs());
             }
 
-            _map.ViewChanged(true, _viewport.Extent, _viewport.Resolution);
+            _map.ViewChanged(true, _viewport.Extent, _viewport.RenderResolution);
             OnViewChanged(true);
             _mouseDown = false;
 
@@ -521,7 +521,7 @@ namespace Mapsui.UI.Xaml
                 _currentMousePosition = e.GetPosition(this); //Needed for both MouseMove and MouseWheel event
                 _viewport.Transform(_currentMousePosition.X, _currentMousePosition.Y, _previousMousePosition.X, _previousMousePosition.Y);
                 _previousMousePosition = _currentMousePosition;
-                _map.ViewChanged(false, _viewport.Extent, _viewport.Resolution);
+                _map.ViewChanged(false, _viewport.Extent, _viewport.RenderResolution);
                 OnViewChanged(true);
                 RefreshGraphics();
             }
@@ -589,11 +589,17 @@ namespace Mapsui.UI.Xaml
             if (_map.Envelope.Width.IsNanOrZero()) return;
             if (_map.Envelope.Height.IsNanOrZero()) return;
             if (_map.Envelope.GetCentroid() == null) return;
+            
 
             if (double.IsNaN(_viewport.Resolution))
                 _viewport.Resolution = _map.Envelope.Width / ActualWidth;
             if (double.IsNaN(_viewport.CenterX) || double.IsNaN(_viewport.CenterY))
                 _viewport.Center = _map.Envelope.GetCentroid();
+
+            _viewport.Width = ActualWidth;
+            _viewport.Height = ActualHeight;
+
+            _viewport.RenderScaleFactor = 2; 
 
             _viewportInitialized = true;
         }
@@ -606,6 +612,9 @@ namespace Mapsui.UI.Xaml
 
             if ((Renderer != null) && (_map != null))
             {
+                // does nothing at the moment.
+                //var outputViewport = new Viewport(_viewport) { Resolution = _viewport.Resolution};
+
                 Renderer.Render(_viewport, _map.Layers);
                 _fpsCounter.FramePlusOne();
                 _invalid = false;
@@ -642,7 +651,7 @@ namespace Mapsui.UI.Xaml
             _viewport.Resolution = resolution;
             _toResolution = resolution;
 
-            _map.ViewChanged(true, _viewport.Extent, _viewport.Resolution);
+            _map.ViewChanged(true, _viewport.Extent, _viewport.RenderResolution);
             OnViewChanged(true);
             RefreshGraphics();
             ClearBBoxDrawing();

@@ -15,7 +15,6 @@ namespace Mapsui.Rendering.Android
     public class MapRenderer : IRenderer
     {
         public Canvas Canvas { get; set; }
-        public float OutputMultiplier { get; set; }
 
         public MapRenderer()
         {
@@ -84,7 +83,7 @@ namespace Mapsui.Rendering.Android
         {
             Bitmap target = Bitmap.CreateBitmap((int)viewport.Width, (int)viewport.Height, Bitmap.Config.Argb8888);
             var canvas = new Canvas(target);
-            this.Canvas = canvas;//!!!hack
+            Canvas = canvas; //!!! hack to pass bitmap canvas to the RenderFeature method
             Render(canvas, viewport, layers);
             var stream = new MemoryStream();
             target.Compress(Bitmap.CompressFormat.Png, 100, stream);
@@ -95,23 +94,33 @@ namespace Mapsui.Rendering.Android
         {
             if (feature.Geometry is IRaster)
             {
-                if (!feature.RenderedGeometry.ContainsKey(style)) feature.RenderedGeometry[style] = ToAndroidBitmap(feature);
+                if (!feature.RenderedGeometry.ContainsKey(style)) feature.RenderedGeometry[style] = ToAndroidBitmap(feature.Geometry);
                 var bitmap = (Bitmap)feature.RenderedGeometry[style];
                 var dest = WorldToScreen(viewport, feature.Geometry.GetBoundingBox());
                 dest = new BoundingBox(
-                    dest.MinX * OutputMultiplier,
-                    dest.MinY * OutputMultiplier,
-                    dest.MaxX * OutputMultiplier,
-                    dest.MaxY * OutputMultiplier);
+                    dest.MinX,
+                    dest.MinY,
+                    dest.MaxX,
+                    dest.MaxY);
                
                 var destination = RoundToPixel(dest);
                 Canvas.DrawBitmap(bitmap, null, destination, null);
+                //!!!DrawRectangle(destination);
             }
         }
 
-        private static Bitmap ToAndroidBitmap(IFeature feature)
+        private void DrawRectangle(RectF destination)
         {
-            var raster = (IRaster)feature.Geometry;
+            var paint = new Paint();
+            paint.SetStyle(Paint.Style.Stroke);
+            paint.Color = global::Android.Graphics.Color.Red;
+            paint.StrokeWidth = 4;
+            Canvas.DrawRect(destination, paint);
+        }
+
+        private static Bitmap ToAndroidBitmap(IGeometry geometry)
+        {
+            var raster = (IRaster)geometry;
             var rasterData = raster.Data.ToArray();
             var bitmap = BitmapFactory.DecodeByteArray(rasterData, 0, rasterData.Length);
             return bitmap;
