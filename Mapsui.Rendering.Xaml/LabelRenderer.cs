@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using Mapsui.Layers;
-using Mapsui.Rendering.XamlRendering;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 #if !NETFX_CORE
