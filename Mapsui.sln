@@ -1,4 +1,3 @@
-﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.UI.Xaml", "Mapsui.UI.Xaml\Mapsui.UI.Xaml.csproj", "{9142A5C9-38F9-42DF-8E9A-79E5A919151F}"
@@ -15,7 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{969D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{F7130D3D-4E62-4EB3-B74C-1E819E017048}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Rendering.GdiRendering", "Mapsui.Rendering.GdiRendering\Mapsui.Rendering.GdiRendering.csproj", "{AAA56FF5-D130-461E-91F4-53100B686665}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Rendering.Gdi", "Mapsui.Rendering.Gdi\Mapsui.Rendering.Gdi.csproj", "{AAA56FF5-D130-461E-91F4-53100B686665}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Providers", "Mapsui.Providers\Mapsui.Providers.csproj", "{8BD54487-8DB9-431A-9596-2DFD744887A1}"
 EndProject

@@ -16,15 +16,15 @@
 // along with Mapsui; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
-using Mapsui.Geometries;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
+using Mapsui.Geometries;
 using Point = Mapsui.Geometries.Point;
 
-namespace Mapsui.Rendering.GdiRendering
+namespace Mapsui.Rendering.Gdi
 {
     /// <summary>
     /// This class renders individual geometry features to a graphics object using the settings of a map object.

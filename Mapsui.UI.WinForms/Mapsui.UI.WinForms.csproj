@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -62,9 +62,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Mapsui.Rendering.GdiRendering\Mapsui.Rendering.GdiRendering.csproj">
+    <ProjectReference Include="..\Mapsui.Rendering.Gdi\Mapsui.Rendering.Gdi.csproj">
       <Project>{aaa56ff5-d130-461e-91f4-53100b686665}</Project>
-      <Name>Mapsui.Rendering.GdiRendering</Name>
+      <Name>Mapsui.Rendering.Gdi</Name>
     </ProjectReference>
     <ProjectReference Include="..\Mapsui\Mapsui.csproj">
       <Project>{d74c052a-c07e-4b37-a898-134218aca5c9}</Project>

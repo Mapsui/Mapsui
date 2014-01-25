@@ -16,21 +16,20 @@
 // along with Mapsui; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
-using Mapsui;
-using Mapsui.Geometries;
-using Mapsui.Layers;
-using Mapsui.Providers;
-using Mapsui.Styles;
-using Mapsui.Styles.Thematics;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using Mapsui.Geometries;
+using Mapsui.Layers;
+using Mapsui.Providers;
+using Mapsui.Styles;
+using Mapsui.Styles.Thematics;
 using Point = Mapsui.Geometries.Point;
 
-namespace Mapsui.Rendering.GdiRendering
+namespace Mapsui.Rendering.Gdi
 {
     public class GdiMapRenderer
     {

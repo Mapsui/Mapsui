@@ -15,18 +15,18 @@
 // along with Mapsui; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
+using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 using BruTile;
 using BruTile.Cache;
 using Mapsui.Geometries;
 using Mapsui.Providers;
-using System;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Drawing.Imaging;
 using Point = Mapsui.Geometries.Point;
 
-namespace Mapsui.Rendering.GdiRendering
+namespace Mapsui.Rendering.Gdi
 {
     public static class GdiTileRenderer
     {

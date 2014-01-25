@@ -1,16 +1,16 @@
-﻿using System.Reflection;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Mapsui.Rendering.GdiRendering")]
+[assembly: AssemblyTitle("Mapsui.Rendering.Gdi")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Geodan")]
-[assembly: AssemblyProduct("Mapsui.Rendering.GdiRendering")]
-[assembly: AssemblyCopyright("Copyright © Geodan 2012")]
+[assembly: AssemblyProduct("Mapsui.Rendering.Gdi")]
+[assembly: AssemblyCopyright("Copyright � Geodan 2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

@@ -17,7 +17,7 @@
 
 using Mapsui.Styles;
 
-namespace Mapsui.Rendering.GdiRendering
+namespace Mapsui.Rendering.Gdi
 {
     public static class GdiStyle
     {

@@ -15,20 +15,20 @@
 // along with Mapsui; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
-using Mapsui.Geometries;
-using Mapsui.Layers;
-using Mapsui.Providers;
-using Mapsui.Styles;
-using Mapsui.Styles.Thematics;
-using Mapsui.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Globalization;
 using System.Linq;
+using Mapsui.Geometries;
+using Mapsui.Layers;
+using Mapsui.Providers;
+using Mapsui.Styles;
+using Mapsui.Styles.Thematics;
+using Mapsui.Utilities;
 
-namespace Mapsui.Rendering.GdiRendering
+namespace Mapsui.Rendering.Gdi
 {
     public static class GdiLabelRenderer
     {
