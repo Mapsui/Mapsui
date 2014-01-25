@@ -9,7 +9,7 @@
     <ProjectGuid>{A676FF74-1EC6-4B36-96D7-F3FAA313F0FE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Mapsui.Rendering.XamlRendering</RootNamespace>
+    <RootNamespace>Mapsui.Rendering.Xaml</RootNamespace>
     <AssemblyName>Mapsui.Rendering.Xaml</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
