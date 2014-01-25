@@ -54,9 +54,9 @@
     <Compile Include="Wms\WmsProviderTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Mapsui.Providers\Mapsui.Providers.csproj">
+    <ProjectReference Include="..\..\Mapsui.Desktop\Mapsui.Desktop.csproj">
       <Project>{8bd54487-8db9-431a-9596-2dfd744887a1}</Project>
-      <Name>Mapsui.Providers</Name>
+      <Name>Mapsui.Desktop</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Mapsui\Mapsui.csproj">
       <Project>{d74c052a-c07e-4b37-a898-134218aca5c9}</Project>

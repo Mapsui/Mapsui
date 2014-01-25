@@ -16,7 +16,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{F7130D3D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Rendering.Gdi", "Mapsui.Rendering.Gdi\Mapsui.Rendering.Gdi.csproj", "{AAA56FF5-D130-461E-91F4-53100B686665}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Providers", "Mapsui.Providers\Mapsui.Providers.csproj", "{8BD54487-8DB9-431A-9596-2DFD744887A1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Desktop", "Mapsui.Desktop\Mapsui.Desktop.csproj", "{8BD54487-8DB9-431A-9596-2DFD744887A1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Rendering.Xaml-SL", "Mapsui.Rendering.Xaml-SL\Mapsui.Rendering.Xaml-SL.csproj", "{74A0BDF2-E6AF-4BAB-AA7E-73E68936F1F2}"
 EndProject
