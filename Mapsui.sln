@@ -28,7 +28,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Providers.Tests", "T
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Tests", "Tests\Mapsui.Tests\Mapsui.Tests.csproj", "{512DB2DB-61A0-4723-A6AC-E9AE23243283}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Rendering.XamlRendering.Tests", "Tests\Mapsui.Rendering.XamlRendering.Tests\Mapsui.Rendering.XamlRendering.Tests.csproj", "{3F5F1E88-DA00-40C3-9F19-8582B5D516D7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Rendering.Xaml.Tests", "Tests\Mapsui.Rendering.Xaml.Tests\Mapsui.Rendering.Xaml.Tests.csproj", "{3F5F1E88-DA00-40C3-9F19-8582B5D516D7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Samples.Common", "Samples\Mapsui.Samples.Common\Mapsui.Samples.Common.csproj", "{508AE811-A03A-4138-8CCC-ABDE03C67010}"
 EndProject
