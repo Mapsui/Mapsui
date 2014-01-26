@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Mapsui.Rendering.XamlRendering.Tests
+﻿namespace Mapsui.Rendering.Xaml.Tests
 {
     class BitmapImage
     {

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Mapsui.Rendering.XamlRendering.Tests {
+namespace Mapsui.Rendering.Xaml.Tests {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

@@ -9,7 +9,7 @@ using System.IO;
 using System.Windows.Controls;
 #endif
 
-namespace Mapsui.Rendering.XamlRendering.Tests
+namespace Mapsui.Rendering.Xaml.Tests
 {
     [TestFixture, RequiresSTA]
     class MapRendererTests
