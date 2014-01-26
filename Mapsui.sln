@@ -36,7 +36,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.UI.Xaml-W8", "Mapsui
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Rendering.Xaml-W8", "Mapsui.Rendering.Xaml-W8\Mapsui.Rendering.Xaml-W8.csproj", "{A676FF74-1EC6-4B36-96D7-F3FAA313F0FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Samples.Metro", "Samples\Mapsui.Samples.Metro\Mapsui.Samples.Metro.csproj", "{5A164ABA-F62B-491D-B9A8-9E567C3B6F8E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Samples.Windows8", "Samples\Mapsui.Samples.Windows8\Mapsui.Samples.Windows8.csproj", "{5A164ABA-F62B-491D-B9A8-9E567C3B6F8E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Rendering.Xaml-WP8", "Mapsui.Rendering.Xaml-WP8\Mapsui.Rendering.Xaml-WP8.csproj", "{5BCD71BC-6FB5-4E6B-8004-B028496EEB95}"
 EndProject

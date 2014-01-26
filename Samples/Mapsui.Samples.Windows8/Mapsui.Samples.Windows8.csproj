@@ -7,8 +7,8 @@
     <ProjectGuid>{5A164ABA-F62B-491D-B9A8-9E567C3B6F8E}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Mapsui.Samples.Metro</RootNamespace>
-    <AssemblyName>Mapsui.Samples.Metro</AssemblyName>
+    <RootNamespace>Mapsui.Samples.Windows8</RootNamespace>
+    <AssemblyName>Mapsui.Samples.Windows8</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{BC8A1FFA-BEE3-4634-8014-F334798102B3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
