@@ -42,7 +42,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Rendering.Xaml-WP8",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.UI.Xaml-WP8", "Mapsui.UI.Xaml-WP8\Mapsui.UI.Xaml-WP8.csproj", "{070BC7BC-FBC9-4D56-94E6-24C8201CBA95}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Samples.WP8", "Samples\Mapsui.Samples.WP8\Mapsui.Samples.WP8.csproj", "{97F00D14-ADAD-46F0-A2BF-2B2FA287A752}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Samples.WindowsPhone8", "Samples\Mapsui.Samples.WindowsPhone8\Mapsui.Samples.WindowsPhone8.csproj", "{97F00D14-ADAD-46F0-A2BF-2B2FA287A752}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Tests.Common", "Tests\Mapsui.Tests.Common\Mapsui.Tests.Common.csproj", "{81BB36D2-4D01-44E3-9024-E7CBD10DA316}"
 EndProject
