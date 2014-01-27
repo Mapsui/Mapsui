@@ -1,8 +1,8 @@
 ﻿<Application
-    x:Class="Mapsui.Samples.Metro.App"
+    x:Class="Mapsui.Samples.Windows8.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Mapsui.Samples.Metro">
+    xmlns:local="using:Mapsui.Samples.Windows8">
 
     <Application.Resources>
         <ResourceDictionary>

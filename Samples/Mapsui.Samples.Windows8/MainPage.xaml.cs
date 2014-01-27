@@ -9,7 +9,7 @@ using System.Reflection;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Navigation;
 
-namespace Mapsui.Samples.Metro
+namespace Mapsui.Samples.Windows8
 {
     public sealed partial class MainPage
     {
@@ -38,7 +38,7 @@ namespace Mapsui.Samples.Metro
         {
             // add some sample symbols (resource images) to the map...
             var assembly = typeof(MainPage).GetTypeInfo().Assembly;
-            var stream = assembly.GetManifestResourceStream(@"Mapsui.Samples.Metro.Resources.Images.ns.png");
+            var stream = assembly.GetManifestResourceStream(@"Mapsui.Samples.Windows8.Resources.Images.ns.png");
             stream.Position = 0;
             return stream;
         }
