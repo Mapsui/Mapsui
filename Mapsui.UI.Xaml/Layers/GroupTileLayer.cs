@@ -16,7 +16,7 @@ namespace Mapsui.UI.Xaml.Layers
     public class GroupTileLayer : BaseLayer, ITileLayer
     {
         private IList<TileLayer> _layers = new List<TileLayer>();
-        private readonly MemoryCache<Feature> _memoryCache = new MemoryCache<Feature>(100, 200);
+        private readonly MemoryCache<Feature> _memoryCache = new MemoryCache<Feature>(200, 300);
         
         public GroupTileLayer(IEnumerable<TileLayer> tileLayers)
         {

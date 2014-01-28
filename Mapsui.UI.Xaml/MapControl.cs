@@ -95,7 +95,7 @@ namespace Mapsui.UI.Xaml
                 {
                     _map.DataChanged += MapDataChanged;
                     _map.PropertyChanged += MapPropertyChanged;
-                    _map.ViewChanged(true, _viewport.Extent, _viewport.RenderResolution);
+                    if (!double.IsNaN(_viewport.RenderResolution)) _map.ViewChanged(true, _viewport.Extent, _viewport.RenderResolution);
                 }
                 OnViewChanged();
                 RefreshGraphics();
@@ -600,7 +600,7 @@ namespace Mapsui.UI.Xaml
             _viewport.Width = ActualWidth;
             _viewport.Height = ActualHeight;
 
-            _viewport.RenderScaleFactor = 2; 
+            _viewport.RenderScaleFactor = 1.0; 
 
             _viewportInitialized = true;
         }

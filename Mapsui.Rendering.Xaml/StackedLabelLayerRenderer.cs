@@ -35,9 +35,6 @@ namespace Mapsui.Rendering.Xaml
             // step 2) Move GetFeaturesInViewStacked to a GetFeaturesInView
             // method of a new StackedLabelLayed.
 
-            if (!(layer.Style is LabelStyle)) throw new Exception("Style of label is not a LabelStyle");
-            var layerStyle = layer.Style as LabelStyle;
-
             var canvas = new Canvas { Opacity = layer.Opacity };
 
             // todo: take into account the priority 
@@ -66,7 +63,17 @@ namespace Mapsui.Rendering.Xaml
                     else
                         stackOffsetY += textHeight; //todo: get size from text (or just pass stack nr)
 
-                    var labelStyle = new LabelStyle(layerStyle)
+                    LabelStyle style;
+                    if (layer.Style is IThemeStyle)
+                    {
+                        style = (LabelStyle)((IThemeStyle)layer.Style).GetStyle(feature);
+                    }
+                    else
+                    {
+                        style = (LabelStyle)layer.Style;
+                    }
+
+                    var labelStyle = new LabelStyle(style)
                     {
                         Text = layer.GetLabelText(feature) //we only use the layer for the text, this should be returned by style
                     };
