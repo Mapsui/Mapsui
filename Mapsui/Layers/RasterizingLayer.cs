@@ -14,6 +14,7 @@ namespace Mapsui.Layers
         private readonly MemoryProvider _cache;
         private BoundingBox _extent;
         private double _resolution;
+        private bool _invalid;
 
         public RasterizingLayer(ILayer layer)
         {
@@ -24,15 +25,22 @@ namespace Mapsui.Layers
 
         private void LayerOnDataChanged(object sender, DataChangedEventArgs dataChangedEventArgs)
         {
+            if (_invalid) return;
+            _invalid = true;
+
             lock (_syncLock)
             {
-                if (double.IsNaN(_resolution)) return;
-                var viewport = CreateViewport(_extent, _resolution);
-                var renderer = RendererFactory.Get;
-                if (renderer == null) throw new Exception("No render was registered");
-                var bitmapStream = renderer().RenderToBitmapStream(viewport, new [] { _layer });
-                _cache.Clear();
-                _cache.Features = new Features { new Feature { Geometry = new Raster(bitmapStream, viewport.Extent) } };
+                while (_invalid)
+                {
+                    _invalid = false;
+                    if (double.IsNaN(_resolution)) return;
+                    var viewport = CreateViewport(_extent, _resolution);
+                    var renderer = RendererFactory.Get;
+                    if (renderer == null) throw new Exception("No render was registered");
+                    var bitmapStream = renderer().RenderToBitmapStream(viewport, new[] {_layer});
+                    _cache.Clear();
+                    _cache.Features = new Features {new Feature {Geometry = new Raster(bitmapStream, viewport.Extent)}};
+                }
             }
             OnDataChanged(dataChangedEventArgs);
         }
@@ -44,7 +52,7 @@ namespace Mapsui.Layers
 
         public override IEnumerable<IFeature> GetFeaturesInView(BoundingBox extent, double resolution)
         {
-            return _cache.GetFeaturesInView(extent, resolution); 
+            return _cache.GetFeaturesInView(extent, resolution);
         }
 
         public override void AbortFetch()
@@ -63,7 +71,7 @@ namespace Mapsui.Layers
         {
             _layer.ClearCache();
         }
-        
+
         private static Viewport CreateViewport(BoundingBox extent, double resolution)
         {
             return new Viewport

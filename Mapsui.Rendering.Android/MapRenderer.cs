@@ -50,7 +50,7 @@ namespace Mapsui.Rendering.Android
 
         private void Render(Canvas canvas, IViewport viewport, IEnumerable<ILayer> layers)
         {
-            VisibleFeatureIterator.IterateLayers(viewport, layers, RenderFeature);
+            VisibleFeatureIterator.IterateLayers(viewport, layers, (v, s, f) => RenderFeature(canvas, v, s, f));
 
             foreach (var layer in layers)
             {
@@ -83,14 +83,13 @@ namespace Mapsui.Rendering.Android
         {
             Bitmap target = Bitmap.CreateBitmap((int)viewport.Width, (int)viewport.Height, Bitmap.Config.Argb8888);
             var canvas = new Canvas(target);
-            Canvas = canvas; //!!! hack to pass bitmap canvas to the RenderFeature method
             Render(canvas, viewport, layers);
             var stream = new MemoryStream();
             target.Compress(Bitmap.CompressFormat.Png, 100, stream);
             return stream;
         }
 
-        private void RenderFeature(IViewport viewport, IStyle style, IFeature feature)
+        private static void RenderFeature(Canvas canvas, IViewport viewport, IStyle style, IFeature feature)
         {
             if (feature.Geometry is IRaster)
             {
@@ -104,7 +103,7 @@ namespace Mapsui.Rendering.Android
                     dest.MaxY);
                
                 var destination = RoundToPixel(dest);
-                Canvas.DrawBitmap(bitmap, null, destination, null);
+                canvas.DrawBitmap(bitmap, null, destination, null);
                 //!!!DrawRectangle(destination);
             }
         }
