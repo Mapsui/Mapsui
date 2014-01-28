@@ -23,11 +23,11 @@
     <file src="..\Release\Portable\Mapsui.dll" target="lib\portable-net403+sl5+wp7+win8+MonoAndroid+MonoTouch\Mapsui.dll" />
 
     <file src="..\Release\v4.0.3\Mapsui.dll" target="lib\net403\Mapsui.dll" />
-	<file src="..\Release\v4.0.3\Mapsui.Rendering.XamlRendering.dll" target="lib\net403\Mapsui.Rendering.XamlRendering.dll" />
+	<file src="..\Release\v4.0.3\Mapsui.Rendering.Xaml.dll" target="lib\net403\Mapsui.Rendering.Xaml.dll" />
     <file src="..\Release\v4.0.3\Mapsui.UI.Xaml.dll" target="lib\net403\Mapsui.UI.Xaml.dll" />
 	
     <file src="..\Release\SL\Mapsui.dll" target="lib\sl5\Mapsui.dll" />
-    <file src="..\Release\SL\Mapsui.Rendering.XamlRendering.dll" target="lib\sl5\Mapsui.Rendering.XamlRendering.dll" />
+    <file src="..\Release\SL\Mapsui.Rendering.Xaml.dll" target="lib\sl5\Mapsui.Rendering.Xaml.dll" />
     <file src="..\Release\SL\Mapsui.UI.Xaml.dll" target="lib\sl5\Mapsui.UI.Xaml.dll" />    
 
 	<file src="..\Release\Xamarin.Android\Mapsui.dll" target="lib\MonoAndroid\Mapsui.dll" />
