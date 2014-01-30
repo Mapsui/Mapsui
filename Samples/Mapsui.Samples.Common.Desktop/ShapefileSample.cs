@@ -2,7 +2,6 @@
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Rendering;
-using Mapsui.Rendering.XamlRendering;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 using System;

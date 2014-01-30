@@ -1,11 +1,13 @@
-﻿using Mapsui.Rendering.XamlRendering;
+﻿
 using Mapsui.Styles;
 #if !NETFX_CORE
 using System.Windows.Controls;
 using System.Windows.Media;
 using XamlPoint = System.Windows.Point;
-using System.Globalization;
 using System.Windows;
+#if !SILVERLIGHT
+using System.Globalization;
+#endif
 #else
 using Windows.Foundation;
 using Windows.UI.Xaml.Controls;

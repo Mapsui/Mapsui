@@ -30,7 +30,6 @@ using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Rendering;
 using Mapsui.Rendering.Xaml;
-using Mapsui.Rendering.XamlRendering;
 using Mapsui.Utilities;
 
 namespace Mapsui.UI.Xaml
