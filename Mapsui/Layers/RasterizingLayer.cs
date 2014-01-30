@@ -38,11 +38,26 @@ namespace Mapsui.Layers
                     var renderer = RendererFactory.Get;
                     if (renderer == null) throw new Exception("No render was registered");
                     var bitmapStream = renderer().RenderToBitmapStream(viewport, new[] {_layer});
+
+                    DisposeAllFeatures(_cache.Features);
                     _cache.Clear();
                     _cache.Features = new Features {new Feature {Geometry = new Raster(bitmapStream, viewport.Extent)}};
                 }
             }
             OnDataChanged(dataChangedEventArgs);
+        }
+
+        private static void DisposeAllFeatures(IEnumerable<IFeature> features)
+        {
+            foreach (var feature in features)
+            {
+                foreach (var key in feature.RenderedGeometry.Keys)
+                {
+                    var geometry = feature.RenderedGeometry[key];
+                    var disposable = (geometry as IDisposable);
+                    if (disposable != null) disposable.Dispose();
+                }
+            }
         }
 
         public override BoundingBox Envelope
