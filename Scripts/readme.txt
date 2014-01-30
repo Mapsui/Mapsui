@@ -1,4 +1,4 @@
-Run from the visual studio commond prompt in the Mapsui\Scripts folder.
+Run from the visual studio command prompt in the Mapsui\Scripts folder.
 
 To automatically build and create a nuget package run builtpack with the version number as argument like this:
 > builtpack 0.2.3

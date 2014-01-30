@@ -1,4 +1,6 @@
-﻿using Mapsui.Fetcher;
+﻿using System.Threading;
+using BruTile.Wmts.Generated;
+using Mapsui.Fetcher;
 using Mapsui.Geometries;
 using Mapsui.Providers;
 using System.Collections.Generic;
@@ -30,8 +32,8 @@ namespace Mapsui.Layers
 
         public override void ViewChanged(bool changeEnd, BoundingBox extent, double resolution)
         {
-            // do nothing. This is not an async layer
-            OnDataChanged(new DataChangedEventArgs());
+            //The MemoryLayer always has it's data ready so can fire a DataChanged event immediately so that listeners can act on it.
+            ThreadPool.QueueUserWorkItem(a => OnDataChanged(new DataChangedEventArgs()));
         }
 
         public override void ClearCache()

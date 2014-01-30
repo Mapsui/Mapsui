@@ -30,20 +30,20 @@ namespace Mapsui.Fetcher
     {
         #region Fields
 
-        private readonly MemoryCache<Feature> memoryCache;
-        private readonly ITileSource tileSource;
-        private BoundingBox extent;
-        private double resolution;
-        private readonly IList<TileIndex> tilesInProgress = new List<TileIndex>();
-        private IList<TileInfo> missingTiles = new List<TileInfo>();
-        private readonly IDictionary<TileIndex, int> retries = new Dictionary<TileIndex, int>();
+        private readonly MemoryCache<Feature> _memoryCache;
+        private readonly ITileSource _tileSource;
+        private BoundingBox _extent;
+        private double _resolution;
+        private readonly IList<TileIndex> _tilesInProgress = new List<TileIndex>();
+        private IList<TileInfo> _missingTiles = new List<TileInfo>();
+        private readonly IDictionary<TileIndex, int> _retries = new Dictionary<TileIndex, int>();
         private const int ThreadMax = 2;
-        private int threadCount;
-        private readonly AutoResetEvent waitHandle = new AutoResetEvent(true);
-        private readonly IFetchStrategy strategy = new FetchStrategy();
-        private readonly int maxRetries = 2;
-        private volatile bool isThreadRunning;
-        private volatile bool isViewChanged;
+        private int _threadCount;
+        private readonly AutoResetEvent _waitHandle = new AutoResetEvent(true);
+        private readonly IFetchStrategy _strategy = new FetchStrategy();
+        private readonly int _maxRetries = 0;
+        private volatile bool _isThreadRunning;
+        private volatile bool _isViewChanged;
         
         #endregion
 
@@ -58,12 +58,12 @@ namespace Mapsui.Fetcher
         public TileFetcher(ITileSource tileSource, MemoryCache<Feature> memoryCache, int maxRetries = 2)
         {
             if (tileSource == null) throw new ArgumentException("TileProvider can not be null");
-            this.tileSource = tileSource;
+            _tileSource = tileSource;
 
             if (memoryCache == null) throw new ArgumentException("MemoryCache can not be null");
-            this.memoryCache = memoryCache;
+            _memoryCache = memoryCache;
 
-            this.maxRetries = maxRetries;
+            _maxRetries = maxRetries;
         }
 
         #endregion
@@ -72,23 +72,23 @@ namespace Mapsui.Fetcher
 
         public void ViewChanged(BoundingBox newExtent, double newResolution)
         {
-            extent = newExtent;
-            resolution = newResolution;
-            isViewChanged = true;
-            waitHandle.Set();
-            if (!isThreadRunning) { StartLoopThread(); }
+            _extent = newExtent;
+            _resolution = newResolution;
+            _isViewChanged = true;
+            _waitHandle.Set();
+            if (!_isThreadRunning) { StartLoopThread(); }
         }
 
         private void StartLoopThread()
         {
-            isThreadRunning = true;
+            _isThreadRunning = true;
             ThreadPool.QueueUserWorkItem(TileFetchLoop);
         }
 
         public void AbortFetch()
         {
-            isThreadRunning = false;
-            waitHandle.Set();
+            _isThreadRunning = false;
+            _waitHandle.Set();
         }
 
         #endregion
@@ -99,36 +99,37 @@ namespace Mapsui.Fetcher
         {
             try
             {
-                while (isThreadRunning)
+                while (_isThreadRunning)
                 {
-                    if (tileSource.Schema == null) waitHandle.Reset();
+                    if (_tileSource.Schema == null) _waitHandle.Reset();
 
-                    waitHandle.WaitOne();
+                    _waitHandle.WaitOne();
 
-                    if (isViewChanged && (tileSource.Schema != null))
+                    if (_isViewChanged && (_tileSource.Schema != null))
                     {
-                        var levelId = BruTile.Utilities.GetNearestLevel(tileSource.Schema.Resolutions, resolution);
-                        missingTiles = strategy.GetTilesWanted(tileSource.Schema, extent.ToExtent(), levelId);
-                        retries.Clear();
-                        isViewChanged = false;
+                        var levelId = BruTile.Utilities.GetNearestLevel(_tileSource.Schema.Resolutions, _resolution);
+                        _missingTiles = _strategy.GetTilesWanted(_tileSource.Schema, _extent.ToExtent(), levelId);
+                        _retries.Clear();
+                        _isViewChanged = false;
                     }
 
-                    missingTiles = GetTilesMissing(missingTiles, memoryCache, retries, maxRetries);
+                    _missingTiles = GetTilesMissing(_missingTiles, _memoryCache, _retries, _maxRetries);
 
                     FetchTiles();
 
-                    if (missingTiles.Count == 0) { waitHandle.Reset(); }
+                    if (_missingTiles.Count == 0) { _waitHandle.Reset(); }
 
-                    if (threadCount >= ThreadMax) { waitHandle.Reset(); }
+                    if (_threadCount >= ThreadMax) { _waitHandle.Reset(); }
                 }
             }
             finally
             {
-                isThreadRunning = false;
+                _isThreadRunning = false;
             }
         }
 
-        private static IList<TileInfo> GetTilesMissing(IEnumerable<TileInfo> infosIn, MemoryCache<Feature> memoryCache, IDictionary<TileIndex, int> retries, int maxRetries)
+        private static IList<TileInfo> GetTilesMissing(IEnumerable<TileInfo> infosIn, MemoryCache<Feature> memoryCache, 
+            IDictionary<TileIndex, int> retries, int maxRetries)
         {
             IList<TileInfo> tilesOut = new List<TileInfo>();
             foreach (TileInfo info in infosIn)
@@ -143,9 +144,9 @@ namespace Mapsui.Fetcher
 
         private void FetchTiles()
         {
-            foreach (TileInfo info in missingTiles)
+            foreach (TileInfo info in _missingTiles)
             {
-                if (threadCount >= ThreadMax) return;
+                if (_threadCount >= ThreadMax) return;
                 FetchTile(info);
             }
         }
@@ -153,21 +154,21 @@ namespace Mapsui.Fetcher
         private void FetchTile(TileInfo info)
         {
             //first a number of checks
-            if (tilesInProgress.Contains(info.Index)) return;
-            if (retries.Keys.Contains(info.Index) && retries[info.Index] >= maxRetries) return;
-            if (memoryCache.Find(info.Index) != null) return;
+            if (_tilesInProgress.Contains(info.Index)) return;
+            if (_retries.Keys.Contains(info.Index) && _retries[info.Index] >= _maxRetries) return;
+            if (_memoryCache.Find(info.Index) != null) return;
 
             //now we can go for the request.
-            lock (tilesInProgress) { tilesInProgress.Add(info.Index); }
-            if (!retries.Keys.Contains(info.Index)) retries.Add(info.Index, 0);
-            else retries[info.Index]++;
-            threadCount++;
+            lock (_tilesInProgress) { _tilesInProgress.Add(info.Index); }
+            if (!_retries.Keys.Contains(info.Index)) _retries.Add(info.Index, 0);
+            else _retries[info.Index]++;
+            _threadCount++;
             StartFetchOnThread(info);
         }
 
         private void StartFetchOnThread(TileInfo info)
         {
-            var fetchOnThread = new FetchOnThread(tileSource.Provider, info, LocalFetchCompleted);
+            var fetchOnThread = new FetchOnThread(_tileSource.Provider, info, LocalFetchCompleted);
             ThreadPool.QueueUserWorkItem(fetchOnThread.FetchTile);
         }
 
@@ -176,13 +177,13 @@ namespace Mapsui.Fetcher
             //todo remove object sender
             try
             {
-                if (e.Error == null && e.Cancelled == false && isThreadRunning && e.Image != null)
+                if (e.Error == null && e.Cancelled == false && _isThreadRunning && e.Image != null)
                 {
                     var feature = new Feature
                         {
                             Geometry = new Raster(new MemoryStream(e.Image), e.TileInfo.Extent.ToBoundingBox())
                         };
-                    memoryCache.Add(e.TileInfo.Index, feature);
+                    _memoryCache.Add(e.TileInfo.Index, feature);
                 }
             }
             catch (Exception ex)
@@ -191,13 +192,13 @@ namespace Mapsui.Fetcher
             }
             finally
             {
-                threadCount--;
-                lock (tilesInProgress)
+                _threadCount--;
+                lock (_tilesInProgress)
                 {
-                    if (tilesInProgress.Contains(e.TileInfo.Index))
-                        tilesInProgress.Remove(e.TileInfo.Index);
+                    if (_tilesInProgress.Contains(e.TileInfo.Index))
+                        _tilesInProgress.Remove(e.TileInfo.Index);
                 }
-                waitHandle.Set();
+                _waitHandle.Set();
             }
 
             if (DataChanged != null)

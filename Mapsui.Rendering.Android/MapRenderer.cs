@@ -1,4 +1,5 @@
 using Android.Graphics;
+using Android.Media;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
@@ -57,28 +58,18 @@ namespace Mapsui.Rendering.Android
                 if (layer is ITileLayer)
                 {
                     var text = (layer as ITileLayer).MemoryCache.TileCount.ToString(CultureInfo.InvariantCulture);
-                    var paint = new Paint { TextSize = 30 };
-                    canvas.DrawText(text, 20f, 20f, paint);
+                    var paint = new Paint { TextSize = 60 };
+                    canvas.DrawText(text, 40f, 40f, paint);
+                    paint.Dispose();
                 }
             }
         }
 
         public MemoryStream RenderToBitmapStream(IViewport viewport, IEnumerable<ILayer> layers)
         {
-            var bitmapStream = new MemoryStream();
-            RunMethodOnStaThread(() => bitmapStream = RenderToBitmapStreamPrivate(viewport, layers));
-            return bitmapStream;
+            return RenderToBitmapStreamPrivate(viewport, layers);
         }
-
-        private static void RunMethodOnStaThread(ThreadStart operation)
-        {
-            var thread = new Thread(operation);
-            thread.SetApartmentState(ApartmentState.STA);
-            thread.Priority = ThreadPriority.Lowest;
-            thread.Start();
-            thread.Join();
-        }
-
+        
         private MemoryStream RenderToBitmapStreamPrivate(IViewport viewport, IEnumerable<ILayer> layers)
         {
             Bitmap target = Bitmap.CreateBitmap((int)viewport.Width, (int)viewport.Height, Bitmap.Config.Argb8888);
@@ -86,6 +77,8 @@ namespace Mapsui.Rendering.Android
             Render(canvas, viewport, layers);
             var stream = new MemoryStream();
             target.Compress(Bitmap.CompressFormat.Png, 100, stream);
+            target.Dispose();
+            canvas.Dispose();
             return stream;
         }
 
@@ -95,6 +88,7 @@ namespace Mapsui.Rendering.Android
             {
                 if (!feature.RenderedGeometry.ContainsKey(style)) feature.RenderedGeometry[style] = ToAndroidBitmap(feature.Geometry);
                 var bitmap = (Bitmap)feature.RenderedGeometry[style];
+
                 var dest = WorldToScreen(viewport, feature.Geometry.GetBoundingBox());
                 dest = new BoundingBox(
                     dest.MinX,
@@ -104,6 +98,7 @@ namespace Mapsui.Rendering.Android
                
                 var destination = RoundToPixel(dest);
                 canvas.DrawBitmap(bitmap, null, destination, null);
+
                 //!!!DrawRectangle(destination);
             }
         }
