@@ -30,7 +30,7 @@ namespace Mapsui
 
         public Viewport()
         {
-            RenderScaleFactor = 1;
+            RenderResolutionMultiplier = 1;
         }
 
         public Viewport(Viewport viewport)
@@ -40,14 +40,15 @@ namespace Mapsui
             _centerY = viewport._centerY;
             _width = viewport._width;
             _height = viewport._height;
+            RenderResolutionMultiplier = viewport.RenderResolutionMultiplier;
             UpdateExtent();
         }
 
-        public double RenderScaleFactor { get; set; }
+        public double RenderResolutionMultiplier { get; set; }
 
         public double RenderResolution
         {
-            get { return Resolution * RenderScaleFactor; }
+            get { return Resolution * RenderResolutionMultiplier; }
         }
 
         public Point Center

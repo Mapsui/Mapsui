@@ -599,7 +599,7 @@ namespace Mapsui.UI.Xaml
             _viewport.Width = ActualWidth;
             _viewport.Height = ActualHeight;
 
-            _viewport.RenderScaleFactor = 1.0; 
+            _viewport.RenderResolutionMultiplier = 1.0; 
 
             _viewportInitialized = true;
         }

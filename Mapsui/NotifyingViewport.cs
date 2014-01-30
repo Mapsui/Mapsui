@@ -16,7 +16,7 @@ namespace Mapsui
 
         public double RenderScaleFactor
         {
-            set { _viewport.RenderScaleFactor = value; }
+            set { _viewport.RenderResolutionMultiplier = value; }
         }
         
         public Point Center
