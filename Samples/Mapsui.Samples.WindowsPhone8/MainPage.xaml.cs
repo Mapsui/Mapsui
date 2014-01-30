@@ -9,9 +9,9 @@ using BruTile.Web;
 using Mapsui.Layers;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
-using Mapsui.Samples.WP8.Resources;
+using Mapsui.Samples.WindowsPhone8.Resources;
 
-namespace Mapsui.Samples.WP8
+namespace Mapsui.Samples.WindowsPhone8
 {
     public partial class MainPage : PhoneApplicationPage
     {

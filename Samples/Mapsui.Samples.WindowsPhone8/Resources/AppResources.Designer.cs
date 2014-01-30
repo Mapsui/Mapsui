@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Mapsui.Samples.WP8.Resources
+namespace Mapsui.Samples.WindowsPhone8.Resources
 {
     using System;
 
@@ -45,7 +45,7 @@ namespace Mapsui.Samples.WP8.Resources
             {
                 if (object.ReferenceEquals(resourceMan, null))
                 {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Mapsui.Samples.WP8.Resources.AppResources", typeof(AppResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Mapsui.Samples.WindowsPhone8.Resources.AppResources", typeof(AppResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

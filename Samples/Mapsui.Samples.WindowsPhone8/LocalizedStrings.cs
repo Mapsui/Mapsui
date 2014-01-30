@@ -1,6 +1,6 @@
-﻿using Mapsui.Samples.WP8.Resources;
+﻿using Mapsui.Samples.WindowsPhone8.Resources;
 
-namespace Mapsui.Samples.WP8
+namespace Mapsui.Samples.WindowsPhone8
 {
     /// <summary>
     /// Provides access to string resources.
