@@ -1,7 +1,7 @@
 ﻿using System;
 using Mapsui.Geometries;
 
-namespace Mapsui.Rendering.XamlRendering
+namespace Mapsui.Projection
 {
     public static class SphericalMercator
     {
