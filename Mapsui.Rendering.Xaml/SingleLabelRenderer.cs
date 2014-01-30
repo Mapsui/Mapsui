@@ -1,13 +1,10 @@
-﻿
-using Mapsui.Styles;
+﻿using Mapsui.Styles;
 #if !NETFX_CORE
 using System.Windows.Controls;
 using System.Windows.Media;
 using XamlPoint = System.Windows.Point;
-using System.Windows;
-#if !SILVERLIGHT
 using System.Globalization;
-#endif
+using System.Windows;
 #else
 using Windows.Foundation;
 using Windows.UI.Xaml.Controls;
@@ -24,7 +21,7 @@ namespace Mapsui.Rendering.Xaml
         public static UIElement RenderLabel(Geometries.Point position, LabelStyle labelStyle, IViewport viewport)
         {
             var screenPosition = viewport.WorldToScreen(position);
-            var windowsPosition = new Point(screenPosition.X, screenPosition.Y);
+            var windowsPosition = new XamlPoint(screenPosition.X, screenPosition.Y);
 
             //set some defaults which should be configurable someday
             const double witdhMargin = 3.0;

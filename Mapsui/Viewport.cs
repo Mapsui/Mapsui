@@ -28,7 +28,10 @@ namespace Mapsui
         private double _resolution;
         private double _width;
 
-        public Viewport() { }
+        public Viewport()
+        {
+            RenderScaleFactor = 1;
+        }
 
         public Viewport(Viewport viewport)
         {
