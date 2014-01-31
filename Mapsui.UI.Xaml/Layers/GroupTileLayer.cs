@@ -41,26 +41,48 @@ namespace Mapsui.UI.Xaml.Layers
             foreach (var tileLayer in Layers)
             {
                 if (!tileLayer.Enabled) continue;
-               
+
                 var tile = tileLayer.MemoryCache.Find(e.TileInfo.Index);
-                if (tile != null) tiles.Add(((IRaster)tile.Geometry).Data);
+                if (tile != null) tiles.Add(((IRaster) tile.Geometry).Data);
             }
 
+            if (tiles.Count == 0) return;
+            if (tiles.Count == 1)
+            {
+                AddBitmapToCache(e, tiles.First()); // If there is 1 tile omit the rasterization to gain performance.
+            }
+            else
+            {
 #if SILVERLIGHT
-            System.Windows.Deployment.Current.Dispatcher.BeginInvoke(() =>
-                {
+                    System.Windows.Deployment.Current.Dispatcher.BeginInvoke(() =>
+                    {
 #endif
-                var bitmap = CombineBitmaps(tiles, Schema.GetTileWidth(e.TileInfo.Index.Level), Schema.GetTileHeight(e.TileInfo.Index.Level));
-                if (bitmap != null) MemoryCache.Add(e.TileInfo.Index, new Feature { Geometry = new Raster(bitmap, e.TileInfo.Extent.ToBoundingBox()), Styles = new List<IStyle> { new VectorStyle()} });
-                OnDataChanged(e);
+                        var bitmap = CombineBitmaps(tiles, Schema.GetTileWidth(e.TileInfo.Index.Level), Schema.GetTileHeight(e.TileInfo.Index.Level));
+                        AddBitmapToCache(e, bitmap);
 #if SILVERLIGHT
-                });
+                    });
 #endif
+            }
+
+        }
+
+        private void AddBitmapToCache(DataChangedEventArgs e, MemoryStream bitmap)
+        {
+            if (bitmap != null)
+                MemoryCache.Add(e.TileInfo.Index,
+                    new Feature
+                    {
+                        Geometry = new Raster(bitmap, e.TileInfo.Extent.ToBoundingBox()),
+                        Styles = new List<IStyle> {new VectorStyle()}
+                    });
+            OnDataChanged(e);
         }
 
         private static MemoryStream CombineBitmaps(IList<MemoryStream> tiles, int width, int height)
         {
             if (tiles.Count == 0) return null;
+
+            if (tiles.Count == 1) return tiles.First(); // If there is 1 tile omit the rasterization to gain performance.
 
             var canvas = new Canvas();
             foreach (MemoryStream tile in tiles)

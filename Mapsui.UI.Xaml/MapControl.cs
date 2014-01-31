@@ -210,12 +210,11 @@ namespace Mapsui.UI.Xaml
 
         private void OnViewChanged(bool userAction)
         {
-            if (_map != null)
+            if (_map == null) return;
+
+            if (ViewChanged != null)
             {
-                if (ViewChanged != null)
-                {
-                    ViewChanged(this, new ViewChangedEventArgs { Viewport = _viewport, UserAction = userAction });
-                }
+                ViewChanged(this, new ViewChangedEventArgs { Viewport = _viewport, UserAction = userAction });
             }
         }
 
@@ -332,8 +331,7 @@ namespace Mapsui.UI.Xaml
 
         private void MapControlMouseWheel(object sender, MouseWheelEventArgs e)
         {
-            if (ZoomLocked)
-                return;
+            if (ZoomLocked) return;
 
             _currentMousePosition = e.GetPosition(this); //Needed for both MouseMove and MouseWheel event for mousewheel event
 
@@ -353,12 +351,10 @@ namespace Mapsui.UI.Xaml
 
             e.Handled = true; //so that the scroll event is not sent to the html page.
 
-            //some cheating for personal gain
+            // Some cheating for personal gain. This workaround could be ommitted if the zoom animations was on CenterX, CenterY and Resolution, not Resolution alone.
             _viewport.CenterX += 0.000000001;
             _viewport.CenterY += 0.000000001;
-            _map.ViewChanged(false, _viewport.Extent, _viewport.RenderResolution);
-            OnViewChanged(true);
-
+            
             StartZoomAnimation(_viewport.Resolution, _toResolution);
         }
 
@@ -599,7 +595,7 @@ namespace Mapsui.UI.Xaml
             _viewport.Width = ActualWidth;
             _viewport.Height = ActualHeight;
 
-            _viewport.RenderResolutionMultiplier = 1.0; 
+            _viewport.RenderResolutionMultiplier = 1.5; 
 
             _viewportInitialized = true;
         }
