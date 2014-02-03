@@ -40,7 +40,7 @@ namespace Mapsui.Rendering.Xaml
             var levelId = BruTile.Utilities.GetNearestLevel(schema.Resolutions, viewport.Resolution);
             var tiles = schema.GetTilesInView(viewport.Extent.ToExtent(), levelId);
 
-            foreach (TileInfo tile in tiles)
+            foreach (var tile in tiles)
             {
                 var p = NativeCache.Find(tile.Index);
                 if (p != null)
@@ -53,14 +53,12 @@ namespace Mapsui.Rendering.Xaml
 
                 if (image != null)
                 {
-                    Rect dest = WorldToView(tile.Extent, viewport);
-                    dest = GeometryRenderer.RoundToPixel(dest);
-
-                    //See here the clumsy way to write a bitmap in SL/WPF
-                    var path = new System.Windows.Shapes.Path();
-                    path.Data = new RectangleGeometry { Rect = dest };
+                    var bitmapStream = ((IRaster)image.Geometry).Data;
+                    var dest = GeometryRenderer.RoundToPixel(WorldToView(tile.Extent, viewport));
+                    // See here the clumsy way to write a bitmap in SL/WPF
+                    var path = new System.Windows.Shapes.Path { Data = new RectangleGeometry { Rect = dest } };
                     var bitmapImage = new BitmapImage();
-                    bitmapImage.SetSource(((IRaster)image.Geometry).Data);
+                    bitmapImage.SetSource(bitmapStream);
                     path.Fill = new ImageBrush { ImageSource = bitmapImage };
                     path.CacheMode = new BitmapCache();
                     bitmap.Render(path, null);

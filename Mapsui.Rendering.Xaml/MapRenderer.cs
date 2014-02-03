@@ -87,9 +87,19 @@ namespace Mapsui.Rendering.Xaml
             RunMethodOnStaThread(() => bitmapStream = RenderToBitmapStreamStatic(viewport, layers));
             return bitmapStream;
 #else
-            throw new NotImplementedException();
+            return RenderToBitmapStreamStatic(viewport, layers);
 #endif
         }
+
+#if SILVERLIGHT
+        private static MemoryStream RenderToBitmapStreamStatic(IViewport viewport, IEnumerable<ILayer> layers)
+        {
+            throw new NotImplementedException();
+            //var canvas = new Canvas();
+            //Render(canvas, viewport, layers);
+            //return Utilities.ToBitmapStream(canvas, viewport.Width, viewport.Height);
+        }
+#endif
 
 #if !SILVERLIGHT && !WINDOWS_PHONE && !NETFX_CORE
         private static MemoryStream RenderToBitmapStreamStatic(IViewport viewport, IEnumerable<ILayer> layers)
