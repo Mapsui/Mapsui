@@ -5,7 +5,7 @@ namespace Mapsui.Rendering.Xaml.BitmapRendering
 {
     public static class BitmapConverter2
     {
-        public static MemoryStream ConverToBitmapStream(WriteableBitmap bitmap)
+        public static MemoryStream ToBitmapStream(WriteableBitmap bitmap)
         {
             // Thanks Eiji for posting on msdn:
             // http://forums.silverlight.net/forums/p/114691/446894.aspx
