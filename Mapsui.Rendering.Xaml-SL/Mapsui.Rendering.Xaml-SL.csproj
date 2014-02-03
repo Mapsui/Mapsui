@@ -94,7 +94,7 @@
     <Compile Include="BitmapRendering\EditableImage.cs" />
     <Compile Include="BitmapRendering\PngEncoder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utilities.cs" />
+    <Compile Include="BitmapRendering\BitmapConverter2.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Mapsui\Mapsui.csproj">
