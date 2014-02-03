@@ -1,4 +1,5 @@
-﻿using BruTile;
+﻿using System;
+using BruTile;
 using BruTile.Cache;
 using Mapsui.Fetcher;
 using Mapsui.Geometries;
@@ -52,22 +53,26 @@ namespace Mapsui.UI.Xaml.Layers
             if (tiles.Count == 0) return;
             if (tiles.Count == 1)
             {
-                AddBitmapToCache(e, tiles.First()); // If there is 1 tile omit the rasterization to gain performance.
+                AddBitmapToCache(e, tiles.First()); // If there is 1 tile then omit the rasterization to gain performance.
             }
             else
             {
+                var tileWidth = Schema.GetTileWidth(e.TileInfo.Index.Level);
+                var tileHeight = Schema.GetTileHeight(e.TileInfo.Index.Level); 
 #if SILVERLIGHT
-                    System.Windows.Deployment.Current.Dispatcher.BeginInvoke(() =>
-                    {
-#endif
-                        var bitmap = CombineBitmaps(tiles, Schema.GetTileWidth(e.TileInfo.Index.Level), Schema.GetTileHeight(e.TileInfo.Index.Level));
-                        AddBitmapToCache(e, bitmap);
-#if SILVERLIGHT
-                    });
+                RunOnUIThread(() => AddBitmapToCache(e, CombineBitmaps(tiles, tileWidth, tileHeight)));
+#else
+                AddBitmapToCache(e, CombineBitmaps(tiles, tileWidth, tileHeight));
 #endif
             }
-
         }
+
+#if SILVERLIGHT
+        private void RunOnUIThread(Action method)
+        {
+            System.Windows.Deployment.Current.Dispatcher.BeginInvoke(method);
+        }
+#endif
 
         private void AddBitmapToCache(DataChangedEventArgs e, MemoryStream bitmap)
         {
@@ -80,9 +85,12 @@ namespace Mapsui.UI.Xaml.Layers
                     });
             OnDataChanged(e);
         }
-
+        
         private static MemoryStream CombineBitmaps(IList<MemoryStream> tiles, int width, int height)
         {
+            // Eventually the registered renderer should be used to combine the bitmaps. 
+            // The GroupTileLayer should be moved to Mapsui core.
+
             if (tiles.Count == 0) return null;
 
             if (tiles.Count == 1) return tiles.First(); // If there is 1 tile omit the rasterization to gain performance.
@@ -107,10 +115,7 @@ namespace Mapsui.UI.Xaml.Layers
 
             }
 #if SILVERLIGHT
-            var writeableBitmap = new WriteableBitmap(width, height);
-            writeableBitmap.Render(canvas, null);
-            writeableBitmap.Invalidate();
-            return ConvertToBitmapStream(writeableBitmap);
+            return BitmapConverter.ConvertToBitmapStream(width, height, canvas);
 #else
             canvas.Arrange(new System.Windows.Rect(0, 0, width, height));
             
@@ -124,40 +129,6 @@ namespace Mapsui.UI.Xaml.Layers
 #endif
 
         }
-
-#if SILVERLIGHT
-
-        public static MemoryStream ConvertToBitmapStream(WriteableBitmap bitmap)
-        {
-            var stream = new MemoryStream();
-
-            int width = bitmap.PixelWidth;
-            int height = bitmap.PixelHeight;
-
-            var ei = new EditableImage(width, height);
-
-            for (int i = 0; i < height; i++)
-            {
-                for (int j = 0; j < width; j++)
-                {
-                    int pixel = bitmap.Pixels[(i * width) + j];
-                    ei.SetPixel(j, i,
-                                (byte)((pixel >> 16) & 0xFF),
-                                (byte)((pixel >> 8) & 0xFF),
-                                (byte)(pixel & 0xFF),
-                                (byte)((pixel >> 24) & 0xFF)
-                        );
-                }
-            }
-            Stream png = ei.GetStream();
-            var len = (int)png.Length;
-            var bytes = new byte[len];
-            png.Read(bytes, 0, len);
-            stream.Write(bytes, 0, len);
-
-            return stream;
-        }
-#endif
 
         public override void AbortFetch()
         {
