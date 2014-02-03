@@ -89,7 +89,6 @@
     <Compile Include="..\Mapsui.Rendering.Xaml\StyleExtensions.cs">
       <Link>StyleExtensions.cs</Link>
     </Compile>
-    <Compile Include="BitmapRenderer.cs" />
     <Compile Include="BitmapRendering\BitmapConverter.cs" />
     <Compile Include="BitmapRendering\EditableImage.cs" />
     <Compile Include="BitmapRendering\PngEncoder.cs" />
