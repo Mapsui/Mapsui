@@ -11,14 +11,10 @@ using System.Linq;
 #if !NETFX_CORE
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media.Animation;
-using AnimateEventHandler = System.EventHandler;
 #else
 using Windows.UI.Xaml.Controls;
 using Windows.Foundation;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Media.Animation;
-using AnimateEventHandler = System.EventHandler<object>;
 #endif
 
 namespace Mapsui.Rendering.Xaml
