@@ -94,7 +94,7 @@ namespace Mapsui.Rendering.Xaml
         {
             var canvas = new Canvas();
             Render(canvas, viewport, layers);
-            return Mapsui.Rendering.Xaml.BitmapRendering.BitmapConverter.ConvertToBitmapStream(canvas, (int)viewport.Width, (int)viewport.Height);
+            return BitmapRendering.BitmapConverter.ToBitmapStream(canvas, (int)viewport.Width, (int)viewport.Height);
         }
 
         private void RunOnUIThread(Action method)
