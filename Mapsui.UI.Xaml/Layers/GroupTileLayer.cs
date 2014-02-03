@@ -10,6 +10,9 @@ using System.IO;
 using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
+#if SILVERLIGHT
+using Mapsui.Rendering.Xaml.BitmapRendering;
+#endif
 
 namespace Mapsui.UI.Xaml.Layers
 {
@@ -131,7 +134,7 @@ namespace Mapsui.UI.Xaml.Layers
             int width = bitmap.PixelWidth;
             int height = bitmap.PixelHeight;
 
-            var ei = new HackingSilverlightLibrary.EditableImage(width, height);
+            var ei = new EditableImage(width, height);
 
             for (int i = 0; i < height; i++)
             {

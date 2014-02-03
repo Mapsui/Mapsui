@@ -3383,7 +3383,6 @@ Global
 		{D7589313-8C2A-4D64-972E-636DC0E77533}.Windows8|x64.ActiveCfg = Release|Any CPU
 		{D7589313-8C2A-4D64-972E-636DC0E77533}.Windows8|x86.ActiveCfg = Release|Any CPU
 		{F783F99B-AAFA-4FB5-80F6-871D679BDB19}.Addins debug|Any CPU.ActiveCfg = Release|Any CPU
-		{F783F99B-AAFA-4FB5-80F6-871D679BDB19}.Addins debug|Any CPU.Build.0 = Release|Any CPU
 		{F783F99B-AAFA-4FB5-80F6-871D679BDB19}.Addins debug|ARM.ActiveCfg = Release|Any CPU
 		{F783F99B-AAFA-4FB5-80F6-871D679BDB19}.Addins debug|iPhone.ActiveCfg = Release|Any CPU
 		{F783F99B-AAFA-4FB5-80F6-871D679BDB19}.Addins debug|iPhoneSimulator.ActiveCfg = Release|Any CPU
@@ -3491,7 +3490,6 @@ Global
 		{F783F99B-AAFA-4FB5-80F6-871D679BDB19}.Windows8|x64.ActiveCfg = Release|Any CPU
 		{F783F99B-AAFA-4FB5-80F6-871D679BDB19}.Windows8|x86.ActiveCfg = Release|Any CPU
 		{B142AB17-285F-48C8-B6C6-94586028333B}.Addins debug|Any CPU.ActiveCfg = Release|Any CPU
-		{B142AB17-285F-48C8-B6C6-94586028333B}.Addins debug|Any CPU.Build.0 = Release|Any CPU
 		{B142AB17-285F-48C8-B6C6-94586028333B}.Addins debug|ARM.ActiveCfg = Release|Any CPU
 		{B142AB17-285F-48C8-B6C6-94586028333B}.Addins debug|iPhone.ActiveCfg = Release|Any CPU
 		{B142AB17-285F-48C8-B6C6-94586028333B}.Addins debug|iPhoneSimulator.ActiveCfg = Release|Any CPU

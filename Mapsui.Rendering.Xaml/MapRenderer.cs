@@ -86,9 +86,12 @@ namespace Mapsui.Rendering.Xaml
             var bitmapStream = new MemoryStream();
             RunMethodOnStaThread(() => bitmapStream = RenderToBitmapStreamStatic(viewport, layers));
             return bitmapStream;
-#else
+#elif SILVERLIGHT
             return RenderToBitmapStreamStatic(viewport, layers);
+#else
+            throw new NotImplementedException();
 #endif
+
         }
 
 #if SILVERLIGHT

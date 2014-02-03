@@ -2,16 +2,15 @@
 using System.IO;
 using System.Windows.Media;
 
-
-namespace HackingSilverlightLibrary
+namespace Mapsui.Rendering.Xaml.BitmapRendering
 {
     // by Joe Stegman
     // http://blogs.msdn.com/jstegman/archive/2008/04/21/dynamic-image-generation-in-silverlight.aspx
     public class EditableImage
     {
-        private int _width = 0;
-        private int _height = 0;
-        private bool _init = false;
+        private int _width;
+        private int _height;
+        private bool _init;
         private byte[] _buffer;
         private int _rowLength;
 
@@ -31,8 +30,8 @@ namespace HackingSilverlightLibrary
 
         public EditableImage(int width, int height)
         {
-            this.Width = width;
-            this.Height = height;
+            Width = width;
+            Height = height;
         }
 
         public bool Initialized
@@ -135,7 +134,7 @@ namespace HackingSilverlightLibrary
                 OnImageError("Error: Row must be greater than 0 and less than the Height");
             }
 
-            Color color = new Color();
+            var color = new Color();
             int start = _rowLength * row + col * 4 + 1;   // +1 is for the filter byte
 
             color.R = _buffer[start];
@@ -167,8 +166,7 @@ namespace HackingSilverlightLibrary
         {
             if (null != ImageError)
             {
-                EditableImageErrorEventArgs args = new EditableImageErrorEventArgs();
-                args.ErrorMessage = msg;
+                var args = new EditableImageErrorEventArgs { ErrorMessage = msg };
                 ImageError(this, args);
             }
         }
