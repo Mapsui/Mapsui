@@ -86,7 +86,7 @@ namespace Mapsui.Rendering.Xaml
             var bitmapStream = new MemoryStream();
             RunMethodOnStaThread(() => bitmapStream = RenderToBitmapStreamStatic(viewport, layers));
             return bitmapStream;
-#elif SILVERLIGHT
+#elif SILVERLIGHT && !WINDOWS_PHONE
             return RenderToBitmapStreamStatic(viewport, layers);
 #else
             throw new NotImplementedException();
@@ -94,13 +94,12 @@ namespace Mapsui.Rendering.Xaml
 
         }
 
-#if SILVERLIGHT
+#if SILVERLIGHT && !WINDOWS_PHONE
         private static MemoryStream RenderToBitmapStreamStatic(IViewport viewport, IEnumerable<ILayer> layers)
         {
-            throw new NotImplementedException();
-            //var canvas = new Canvas();
-            //Render(canvas, viewport, layers);
-            //return Utilities.ToBitmapStream(canvas, viewport.Width, viewport.Height);
+            var canvas = new Canvas();
+            Render(canvas, viewport, layers);
+            return Mapsui.Rendering.Xaml.BitmapRendering.BitmapConverter.ConvertToBitmapStream(canvas, (int)viewport.Width, (int)viewport.Height);
         }
 #endif
 
