@@ -53,7 +53,7 @@
     <Compile Include="StackedLabelLayerRenderer.cs" />
     <Compile Include="SingleLabelRenderer.cs" />
     <Compile Include="StyleExtensions.cs" />
-    <Compile Include="BitmapRendering\Utilities.cs" />
+    <Compile Include="BitmapRendering\BitmapConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Mapsui\Mapsui.csproj">

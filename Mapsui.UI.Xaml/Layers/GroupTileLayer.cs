@@ -118,7 +118,7 @@ namespace Mapsui.UI.Xaml.Layers
 #if SILVERLIGHT
             return BitmapConverter.ConvertToBitmapStream(canvas, width, height);
 #else
-            return Rendering.Xaml.BitmapRendering.Utilities.ToBitmapStream(canvas, width, height);
+            return Rendering.Xaml.BitmapRendering.BitmapConverter.ToBitmapStream(canvas, width, height);
 #endif
 
         }
