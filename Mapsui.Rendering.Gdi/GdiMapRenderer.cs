@@ -19,6 +19,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
@@ -27,18 +28,35 @@ using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
+using Color = System.Drawing.Color;
 using Point = Mapsui.Geometries.Point;
 
 namespace Mapsui.Rendering.Gdi
 {
-    public class GdiMapRenderer
+    public class GdiMapRenderer : IRenderer
     {
-        // TODO: derive from IRenderer
+        public Graphics Graphics { get; set; }
+
+        public GdiMapRenderer()
+        {
+            RendererFactory.Get = () => this;
+        }
+
         public delegate bool AbortRenderDelegate();
 
-        public static void Render(Graphics graphics, IViewport viewport, Map map, AbortRenderDelegate abortRender)
+        public void Render(IViewport viewport, IEnumerable<ILayer> layers)
         {
-            foreach (var layer in map.Layers)
+            Render(Graphics, viewport, layers, null);
+        }
+
+        public void Render(IViewport viewport, IEnumerable<ILayer> layers, AbortRenderDelegate abortRender)
+        {
+            Render(Graphics, viewport, layers, abortRender);
+        }
+
+        private static void Render(Graphics graphics, IViewport viewport, IEnumerable<ILayer> layers, AbortRenderDelegate abortRender)
+        {
+            foreach (var layer in layers)
             {
                 if (layer.Enabled &&
                     layer.MinVisible <= viewport.Resolution &&
@@ -63,22 +81,28 @@ namespace Mapsui.Rendering.Gdi
             }
         }
 
-        public static Image RenderMapAsImage(IViewport viewport, Map map)
+        public static Image RenderMapAsImage(IViewport viewport, IEnumerable<ILayer> layers)
         {
             if ((viewport.Width <= 0) || (viewport.Height <= 0)) throw new Exception("The view's width or heigh is 0");
-            var image = new System.Drawing.Bitmap((int)viewport.Width, (int)viewport.Height);
+            var image = new System.Drawing.Bitmap((int)viewport.Width, (int)viewport.Height, PixelFormat.Format32bppArgb);
             var graphics = Graphics.FromImage(image);
+            graphics.FillRectangle(new SolidBrush(Color.Transparent), 0, 0, image.Width, image.Height);
             graphics.PageUnit = GraphicsUnit.Pixel;
-            Render(graphics, viewport, map, null);
+            Render(graphics, viewport, layers, null);
             return image;
         }
 
-        public byte[] RenderMapAsByteArray(IViewport viewport, Map map)
+        public MemoryStream RenderToBitmapStream(IViewport viewport, IEnumerable<ILayer> layers)
         {
-            Image image = RenderMapAsImage(viewport, map);
+            Image image = RenderMapAsImage(viewport, layers);
             var memoryStream = new MemoryStream();
-            image.Save(memoryStream, ImageFormat.Bmp);
-            return memoryStream.ToArray();
+            image.Save(memoryStream, ImageFormat.Png);
+            return memoryStream;
+        }
+
+        public byte[] RenderMapAsByteArray(IViewport viewport, IEnumerable<ILayer> layers)
+        {
+            return RenderToBitmapStream(viewport, layers).ToArray();
         }
 
         private static void RenderLayer(Graphics graphics, IViewport viewport, ILayer layer, AbortRenderDelegate abortRender)
@@ -87,7 +111,7 @@ namespace Mapsui.Rendering.Gdi
             const int step = 100;
 
             graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-
+ 
             var layerStyles = BaseLayer.GetLayerStyles(layer);
             
             foreach (var layerStyle in layerStyles)

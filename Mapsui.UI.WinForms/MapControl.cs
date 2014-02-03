@@ -51,6 +51,7 @@ namespace Mapsui.UI.WinForms
             //1 milisecond = (1000000 / 100) = 10000 ticks.
         private const long MaxTicks = (long)MaxMiliseconds * 10000;
         private bool isCallingDoEvents;
+        private GdiMapRenderer _renderer = new GdiMapRenderer();
 
         #endregion
 
@@ -156,9 +157,10 @@ namespace Mapsui.UI.WinForms
 
             //set startTicks for use in AbortRender
             _startTicks = DateTime.Now.Ticks;
-
+            
             //Render to the buffer
-            GdiMapRenderer.Render(_bufferGraphics, new Viewport(_viewport), _map, AbortRender);
+            _renderer.Graphics = _bufferGraphics;
+            _renderer.Render(new Viewport(_viewport), _map.Layers, null);
             
             //Render the buffer to the control
             e.Graphics.DrawImage(_buffer, 0, 0);

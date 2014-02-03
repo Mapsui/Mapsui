@@ -230,7 +230,7 @@ namespace Mapsui.Rendering.Gdi
         public static void DrawRaster(Graphics graphics, IRaster raster, IViewport viewport)
         {
             var imageAttributes = new ImageAttributes();
-
+   
             var bitmap = new Bitmap(raster.Data);
 
             Point min = viewport.WorldToScreen(new Point(raster.GetBoundingBox().MinX, raster.GetBoundingBox().MinY));
