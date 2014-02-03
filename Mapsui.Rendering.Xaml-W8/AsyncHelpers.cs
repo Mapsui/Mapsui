@@ -72,11 +72,10 @@ namespace Mapsui.Rendering.Xaml
 
         private class ExclusiveSynchronizationContext : SynchronizationContext
         {
-            private bool done;
-            public Exception InnerException { get; set; }
-            readonly AutoResetEvent workItemsWaiting = new AutoResetEvent(false);
-            readonly Queue<Tuple<SendOrPostCallback, object>> items =
-                new Queue<Tuple<SendOrPostCallback, object>>();
+            private bool _done;
+            public Exception InnerException { private get; set; }
+            readonly AutoResetEvent _workItemsWaiting = new AutoResetEvent(false);
+            readonly Queue<Tuple<SendOrPostCallback, object>> _items = new Queue<Tuple<SendOrPostCallback, object>>();
 
             public override void Send(SendOrPostCallback d, object state)
             {
@@ -85,28 +84,28 @@ namespace Mapsui.Rendering.Xaml
 
             public override void Post(SendOrPostCallback d, object state)
             {
-                lock (items)
+                lock (_items)
                 {
-                    items.Enqueue(Tuple.Create(d, state));
+                    _items.Enqueue(Tuple.Create(d, state));
                 }
-                workItemsWaiting.Set();
+                _workItemsWaiting.Set();
             }
 
             public void EndMessageLoop()
             {
-                Post(_ => done = true, null);
+                Post(_ => _done = true, null);
             }
 
             public void BeginMessageLoop()
             {
-                while (!done)
+                while (!_done)
                 {
                     Tuple<SendOrPostCallback, object> task = null;
-                    lock (items)
+                    lock (_items)
                     {
-                        if (items.Count > 0)
+                        if (_items.Count > 0)
                         {
-                            task = items.Dequeue();
+                            task = _items.Dequeue();
                         }
                     }
                     if (task != null)
@@ -119,7 +118,7 @@ namespace Mapsui.Rendering.Xaml
                     }
                     else
                     {
-                        workItemsWaiting.WaitOne();
+                        _workItemsWaiting.WaitOne();
                     }
                 }
             }
