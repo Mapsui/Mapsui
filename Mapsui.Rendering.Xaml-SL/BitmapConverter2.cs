@@ -3,7 +3,7 @@ using System.IO;
 
 namespace Mapsui.Rendering.Xaml
 {
-    public static class Utilities
+    public static class BitmapConverter2
     {
         public static MemoryStream ConverToBitmapStream(WriteableBitmap bitmap)
         {
