@@ -247,29 +247,6 @@ namespace Mapsui.Rendering.Xaml
             if (feature.Geometry is IRaster)
                 GeometryRenderer.PositionRaster(renderedGeometry, feature.Geometry.GetBoundingBox(), viewport);
         }
-
-        public static void Animate(DependencyObject target, string property, double from, double to, int duration, AnimateEventHandler completed)
-        {
-            return;
-
-            var animation = new DoubleAnimation
-            {
-                From = from,
-                To = to,
-                Duration = new TimeSpan(0, 0, 0, 0, duration)
-            };
-
-            Storyboard.SetTarget(animation, target);
-#if !NETFX_CORE
-            Storyboard.SetTargetProperty(animation, new PropertyPath(property));
-#else
-            Storyboard.SetTargetProperty(animation, property);
-#endif
-            var storyBoard = new Storyboard();
-            storyBoard.Children.Add(animation);
-            storyBoard.Completed += completed;
-            storyBoard.Begin();
-        }
     }
 }
 
