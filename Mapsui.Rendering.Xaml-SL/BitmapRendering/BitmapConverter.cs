@@ -6,7 +6,7 @@ namespace Mapsui.Rendering.Xaml.BitmapRendering
 {
     public class BitmapConverter
     {
-        public static MemoryStream ConvertToBitmapStream(int width, int height, Canvas canvas)
+        public static MemoryStream ConvertToBitmapStream(Canvas canvas, int width, int height)
         {
             var writeableBitmap = new WriteableBitmap(width, height);
             writeableBitmap.Render(canvas, null);

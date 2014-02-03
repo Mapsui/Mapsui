@@ -115,10 +115,15 @@ namespace Mapsui.UI.Xaml.Layers
 
             }
 #if SILVERLIGHT
-            return BitmapConverter.ConvertToBitmapStream(width, height, canvas);
+            return BitmapConverter.ConvertToBitmapStream(canvas, width, height);
 #else
+            return ConvertToBitmapStream(canvas, width, height);
+#endif
+        }
+
+        private static MemoryStream ConvertToBitmapStream(Canvas canvas, int width, int height)
+        {
             canvas.Arrange(new System.Windows.Rect(0, 0, width, height));
-            
             var renderTargetBitmap = new RenderTargetBitmap(width, height, 96, 96, new System.Windows.Media.PixelFormat());
             renderTargetBitmap.Render(canvas);
             var bitmap = new PngBitmapEncoder();
@@ -126,8 +131,6 @@ namespace Mapsui.UI.Xaml.Layers
             var bitmapStream = new MemoryStream();
             bitmap.Save(bitmapStream);
             return bitmapStream;
-#endif
-
         }
 
         public override void AbortFetch()
