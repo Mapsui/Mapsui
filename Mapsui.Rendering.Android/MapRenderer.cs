@@ -8,6 +8,7 @@ using System.Globalization;
 using System.IO;
 using Bitmap = Android.Graphics.Bitmap;
 using Math = Java.Lang.Math;
+using Point = Mapsui.Geometries.Point;
 
 namespace Mapsui.Rendering.Android
 {
@@ -98,6 +99,12 @@ namespace Mapsui.Rendering.Android
                 canvas.DrawBitmap(bitmap, null, destination, null);
 
                 //!!!DrawRectangle(destination);
+            }
+            else if (feature.Geometry is Point)
+            {
+                var point = feature.Geometry as Point;
+                var dest = viewport.WorldToScreen(point);
+                canvas.DrawCircle((int)dest.X, (int)dest.Y, 20, new Paint());
             }
         }
 
