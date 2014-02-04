@@ -4,13 +4,7 @@
     <SolutionFile>.\..\Mapsui.sln</SolutionFile>
     <SolutionDir>$(MSBuildProjectDirectory)</SolutionDir>
   </PropertyGroup>
-
-  
-  <Target Name="CleanRelease">
-    <Exec Command="rmdir /s /q $(MSBuildProjectDirectory).\..\obj"></Exec>
-    <Exec Command="rmdir /s /q $(MSBuildProjectDirectory).\..\Release"></Exec>
-  </Target>
-  
+    
   <Target Name="BuildRelease" DependsOnTargets="CleanRelease">
 
     <MSBuild Projects="$(SolutionFile)"
@@ -36,11 +30,21 @@
              Targets="Mapsui;Mapsui_Rendering_Xaml-SL;Mapsui_UI_Xaml-SL"
              Properties="Configuration=Release;Platform=Any CPU;BaseIntermediateOutputPath=$(MSBuildProjectDirectory).\..\obj\SL\;OutputPath=$(MSBuildProjectDirectory).\..\Release\SL\"
              RunEachTargetSeparately="true"/>
-			 
+	
+    <MSBuild Projects="$(SolutionFile)"
+             Targets="Mapsui;Mapsui_Rendering_Gdi;Mapsui_UI_WinForms"
+             Properties="Configuration=Release;Platform=Any CPU;BaseIntermediateOutputPath=$(MSBuildProjectDirectory).\..\obj\WinForms\;OutputPath=$(MSBuildProjectDirectory).\..\Release\WinForms\"
+             RunEachTargetSeparately="true"/>
+	
     <MSBuild Projects="$(SolutionFile)"
              Targets="Mapsui;Mapsui_Rendering_Android;Mapsui_UI_Android"
              Properties="Configuration=Release;Platform=Any CPU;BaseIntermediateOutputPath=$(MSBuildProjectDirectory).\..\obj\Xamarin.Android\;OutputPath=$(MSBuildProjectDirectory).\..\Release\Xamarin.Android\"
              RunEachTargetSeparately="true"/>
-		 
   </Target>
+    
+  <Target Name="CleanRelease">
+    <Exec Command="rmdir /s /q $(MSBuildProjectDirectory).\..\obj"></Exec>
+    <Exec Command="rmdir /s /q $(MSBuildProjectDirectory).\..\Release"></Exec>
+  </Target>
+  
 </Project>

@@ -4,7 +4,7 @@ SET VERSION=%1
 SET NUGET=.\..\.nuget\nuget.exe
 
 msbuild updateversionnumber.proj /p:AsmVersion=%VERSION%
-msbuild /t:BuildRelease .\build.proj 
+msbuild build.proj /t:BuildRelease 
 %NUGET% pack Mapsui.nuspec -Version %VERSION% -outputdirectory .\..\Release
 
 
