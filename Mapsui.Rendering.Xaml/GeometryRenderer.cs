@@ -135,7 +135,7 @@ namespace Mapsui.Rendering.Xaml
             return matrix;
         }
 
-        private static UIElement CreateSymbolFromBitmap(System.IO.Stream data, double opacity)
+        private static UIElement CreateSymbolFromBitmap(Stream data, double opacity)
         {
             var bitmapImage = CreateBitmapImage(data);
             var fill = new XamlMedia.ImageBrush { ImageSource = bitmapImage };
@@ -210,7 +210,7 @@ namespace Mapsui.Rendering.Xaml
             return path;
         }
 
-        private static BitmapImage CreateBitmapImage(System.IO.Stream imageData)
+        private static BitmapImage CreateBitmapImage(Stream imageData)
         {
             var bitmapImage = new BitmapImage();
 #if SILVERLIGHT
@@ -350,7 +350,7 @@ namespace Mapsui.Rendering.Xaml
             return path;
         }
 
-        private static XamlShapes.Path CreateRasterPath(IStyle style, System.IO.MemoryStream stream)
+        private static XamlShapes.Path CreateRasterPath(IStyle style, MemoryStream stream)
         {
             //todo: use this:
             //style.Symbol.Convert();
