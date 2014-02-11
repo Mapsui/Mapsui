@@ -45,7 +45,7 @@ namespace Mapsui.Layers
         {
             lock (_syncLock)
             {
-                if (double.IsNaN(_resolution)) return;
+                if (double.IsNaN(_resolution) || _resolution <= 0) return;
                 var viewport = CreateViewport(_extent, _resolution);
 
                 var renderer = RendererFactory.Get;
