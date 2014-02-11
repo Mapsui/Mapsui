@@ -242,6 +242,7 @@ namespace Mapsui.Rendering.Gdi
                 0, 0, bitmap.Width, bitmap.Height,
                 GraphicsUnit.Pixel,
                 imageAttributes);
+            bitmap.Dispose();
         }
 
         private static Rectangle RoundToPixel(RectangleF dest)

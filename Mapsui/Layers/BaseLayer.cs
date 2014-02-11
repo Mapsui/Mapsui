@@ -15,7 +15,6 @@ namespace Mapsui.Layers
         private int _srid;
         private object _tag;
         private bool _busy;
-        private bool _rasterize;
         private bool _enabled;
         private bool _exclusive;
         private string _layerName;
@@ -134,16 +133,6 @@ namespace Mapsui.Layers
             {
                 _busy = value;
                 OnPropertyChanged("Busy");
-            }
-        }
-
-        public bool Rasterize
-        {
-            get { return _rasterize; }
-            set
-            {
-                _rasterize = value;
-                OnPropertyChanged("Rasterize");
             }
         }
 

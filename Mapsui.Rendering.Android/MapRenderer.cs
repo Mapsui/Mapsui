@@ -1,3 +1,4 @@
+using System.Linq;
 using Android.Graphics;
 using Mapsui.Geometries;
 using Mapsui.Layers;
@@ -50,6 +51,7 @@ namespace Mapsui.Rendering.Android
 
         private void Render(Canvas canvas, IViewport viewport, IEnumerable<ILayer> layers)
         {
+            layers = layers.ToList();
             VisibleFeatureIterator.IterateLayers(viewport, layers, (v, s, f) => RenderFeature(canvas, v, s, f));
 
             foreach (var layer in layers)
