@@ -18,6 +18,7 @@ namespace Mapsui.Layers
         private double _resolution;
         protected Timer TimerToStartRasterizing;
         private readonly int _delayBeforeRaterize;
+        private IEnumerable<IFeature> _previousFeatures;
 
         public RasterizingLayer(ILayer layer, int delayBeforeRasterize = 500)
         {
@@ -52,7 +53,6 @@ namespace Mapsui.Layers
                 if (renderer == null) throw new Exception("No renderer was registered");
 
                 var bitmapStream = renderer().RenderToBitmapStream(viewport, new[] {_layer});
-
                 RemoveExistingFeatures();
                 _cache.Features = new Features {new Feature {Geometry = new Raster(bitmapStream, viewport.Extent)}};
 
@@ -64,7 +64,10 @@ namespace Mapsui.Layers
         {
             var features = _cache.Features.ToList();
             _cache.Clear(); // clear before dispose to prevent possible null disposed exception on render
-            DisposeRenderedGeometries(features);
+
+            // Disposing previous and storing current in the previous field to prevent dispose during rendering.
+            if (_previousFeatures != null) DisposeRenderedGeometries(_previousFeatures);
+            _previousFeatures = features; 
         }
 
         private static void DisposeRenderedGeometries(IEnumerable<IFeature> features)

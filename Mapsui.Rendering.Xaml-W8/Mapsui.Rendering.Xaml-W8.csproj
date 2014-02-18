@@ -130,7 +130,6 @@
     <Compile Include="..\Mapsui.Rendering.Xaml\StyleExtensions.cs">
       <Link>StyleExtensions.cs</Link>
     </Compile>
-    <Compile Include="AsyncHelpers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '11.0' ">

@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using Bitmap = Android.Graphics.Bitmap;
+using Color = Android.Graphics.Color;
 using Math = Java.Lang.Math;
 using Point = Mapsui.Geometries.Point;
 
@@ -106,7 +107,7 @@ namespace Mapsui.Rendering.Android
             {
                 var point = feature.Geometry as Point;
                 var dest = viewport.WorldToScreen(point);
-                canvas.DrawCircle((int)dest.X, (int)dest.Y, 20, new Paint());
+                canvas.DrawCircle((int)dest.X, (int)dest.Y, 20, new Paint{ Color = Color.Blue});
             }
         }
 

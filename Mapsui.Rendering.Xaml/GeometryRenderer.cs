@@ -220,8 +220,7 @@ namespace Mapsui.Rendering.Xaml
             imageData.Position = 0;
             var memoryStream = new System.IO.MemoryStream();
             imageData.CopyTo(memoryStream);
-            bitmapImage.SetSource(AsyncHelpers.RunSync(() =>
-                ByteArrayToRandomAccessStream(memoryStream.ToArray())));
+            bitmapImage.SetSource(ByteArrayToRandomAccessStream(memoryStream.ToArray()).Result);
 #else
             imageData.Position = 0;
             bitmapImage.BeginInit();
@@ -361,8 +360,7 @@ namespace Mapsui.Rendering.Xaml
             var bitmapImage = new BitmapImage();
 #if NETFX_CORE
             stream.Position = 0;
-            bitmapImage.SetSource(AsyncHelpers.RunSync(() =>
-                ByteArrayToRandomAccessStream(stream.ToArray())));
+            bitmapImage.SetSource(ByteArrayToRandomAccessStream(stream.ToArray()).Result);
 
 #elif !SILVERLIGHT
             var localStream = new MemoryStream();
