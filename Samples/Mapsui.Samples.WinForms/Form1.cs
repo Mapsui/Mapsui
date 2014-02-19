@@ -1,14 +1,11 @@
-﻿using System;
+﻿using Mapsui.Samples.Desktop;
+using System;
 using System.Windows.Forms;
-using Mapsui.Samples;
-using Mapsui.Samples.Desktop;
 
 namespace Mapsui.Samples.WinForms
 {
     public partial class Form1 : Form
     {
-        //WARNING: This WinForms implementation is very basic. 
-
         public Form1()
         {
             InitializeComponent();

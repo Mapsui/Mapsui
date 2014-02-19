@@ -37,7 +37,12 @@ namespace Mapsui.Layers
         
         private void LayerOnDataChanged(object sender, DataChangedEventArgs dataChangedEventArgs)
         {
-            // Postpone the request by disposing the old and creating a new Timer.
+            StartTimerToTriggerRasterize();
+        }
+
+        private void StartTimerToTriggerRasterize()
+        {
+// Postpone the request by disposing the old and creating a new Timer.
             TimerToStartRasterizing.Dispose();
             TimerToStartRasterizing = new Timer(TimerToStartRasterizingElapsed, null, _delayBeforeRaterize, int.MaxValue);
         }
@@ -105,6 +110,7 @@ namespace Mapsui.Layers
             _extent = extent;
             _resolution = resolution;
             _layer.ViewChanged(changeEnd, extent, resolution);
+            StartTimerToTriggerRasterize();
         }
 
         public override void ClearCache()

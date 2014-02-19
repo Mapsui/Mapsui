@@ -49,7 +49,6 @@
     <Compile Include="GdiLabelRenderer.cs" />
     <Compile Include="GdiMapRenderer.cs" />
     <Compile Include="GdiStyle.cs" />
-    <Compile Include="GdiTileRenderer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

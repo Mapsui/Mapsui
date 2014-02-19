@@ -21,7 +21,13 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
+using System.Globalization;
 using Mapsui.Geometries;
+using Mapsui.Styles;
+using Bitmap = System.Drawing.Bitmap;
+using Brush = System.Drawing.Brush;
+using Color = System.Drawing.Color;
+using Pen = System.Drawing.Pen;
 using Point = Mapsui.Geometries.Point;
 
 namespace Mapsui.Rendering.Gdi
@@ -179,7 +185,7 @@ namespace Mapsui.Rendering.Gdi
             }
         }
         
-        public static void DrawPoint(Graphics graphics, Point point, Styles.IStyle style, IViewport viewport)
+        public static void DrawPoint(Graphics graphics, Point point, IStyle style, IViewport viewport)
         {
             var vectorStyle = (Styles.SymbolStyle)style;
             if (vectorStyle.Symbol == null) throw  new ArgumentException("No bitmap symbol set in Gdi rendering"); //todo: allow vector symbol
@@ -227,21 +233,28 @@ namespace Mapsui.Rendering.Gdi
             return new PointF((float)point.X, (float)point.Y);
         }
 
-        public static void DrawRaster(Graphics graphics, IRaster raster, IViewport viewport)
+        public static void DrawRaster(Graphics graphics, IGeometry feature, IStyle style, IViewport viewport)
         {
-            var imageAttributes = new ImageAttributes();
-   
-            var bitmap = new Bitmap(raster.Data);
+            var stream = ((IRaster)feature).Data;
+            stream.Position = 0;
+            var bitmap = new Bitmap(stream);
 
-            Point min = viewport.WorldToScreen(new Point(raster.GetBoundingBox().MinX, raster.GetBoundingBox().MinY));
-            Point max = viewport.WorldToScreen(new Point(raster.GetBoundingBox().MaxX, raster.GetBoundingBox().MaxY));
+            Point min = viewport.WorldToScreen(new Point(feature.GetBoundingBox().MinX, feature.GetBoundingBox().MinY));
+            Point max = viewport.WorldToScreen(new Point(feature.GetBoundingBox().MaxX, feature.GetBoundingBox().MaxY));
 
             Rectangle destination = RoundToPixel(new RectangleF((float)min.X, (float)max.Y, (float)(max.X - min.X), (float)(min.Y - max.Y)));
             graphics.DrawImage(bitmap,
                 destination,
                 0, 0, bitmap.Width, bitmap.Height,
                 GraphicsUnit.Pixel,
-                imageAttributes);
+                new ImageAttributes());
+
+#if DEBUG
+            var font = new System.Drawing.Font("Arial", 12);
+            var message = (GC.GetTotalMemory(true) / 1000).ToString(CultureInfo.InvariantCulture) + " KB";
+            graphics.DrawString(message, font, new SolidBrush(Color.Black), 10f, 10f);
+#endif
+
             bitmap.Dispose();
         }
 
