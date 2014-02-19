@@ -1,5 +1,6 @@
 using System.Linq;
 using Android.Graphics;
+using Android.Views;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
@@ -21,28 +22,6 @@ namespace Mapsui.Rendering.Android
         public MapRenderer()
         {
             RendererFactory.Get = (() => this);
-        }
-
-        private static BoundingBox WorldToScreen(IViewport viewport, BoundingBox boundingBox)
-        {
-            var first = viewport.WorldToScreen(boundingBox.Min);
-            var second = viewport.WorldToScreen(boundingBox.Max);
-            return new BoundingBox
-                (
-                    Math.Min(first.X, second.X),
-                    Math.Min(first.Y, second.Y),
-                    Math.Max(first.X, second.X),
-                    Math.Max(first.Y, second.Y)
-                );
-        }
-
-        public static RectF RoundToPixel(BoundingBox dest)
-        {
-            return new RectF(
-                Math.Round(dest.Left),
-                Math.Round(Math.Min(dest.Top, dest.Bottom)),
-                Math.Round(dest.Right),
-                Math.Round(Math.Max(dest.Top, dest.Bottom)));
         }
 
         public void Render(IViewport viewport, IEnumerable<ILayer> layers)
@@ -88,20 +67,7 @@ namespace Mapsui.Rendering.Android
         {
             if (feature.Geometry is IRaster)
             {
-                if (!feature.RenderedGeometry.ContainsKey(style)) feature.RenderedGeometry[style] = ToAndroidBitmap(feature.Geometry);
-                var bitmap = (Bitmap)feature.RenderedGeometry[style];
-
-                var dest = WorldToScreen(viewport, feature.Geometry.GetBoundingBox());
-                dest = new BoundingBox(
-                    dest.MinX,
-                    dest.MinY,
-                    dest.MaxX,
-                    dest.MaxY);
-               
-                var destination = RoundToPixel(dest);
-                canvas.DrawBitmap(bitmap, null, destination, null);
-
-                //!!!DrawRectangle(destination);
+                RasterRenderer.Draw(canvas, viewport, style, feature);
             }
             else if (feature.Geometry is Point)
             {
@@ -109,23 +75,6 @@ namespace Mapsui.Rendering.Android
                 var dest = viewport.WorldToScreen(point);
                 canvas.DrawCircle((int)dest.X, (int)dest.Y, 20, new Paint{ Color = Color.Blue});
             }
-        }
-
-        private void DrawRectangle(RectF destination)
-        {
-            var paint = new Paint();
-            paint.SetStyle(Paint.Style.Stroke);
-            paint.Color = global::Android.Graphics.Color.Red;
-            paint.StrokeWidth = 4;
-            Canvas.DrawRect(destination, paint);
-        }
-
-        private static Bitmap ToAndroidBitmap(IGeometry geometry)
-        {
-            var raster = (IRaster)geometry;
-            var rasterData = raster.Data.ToArray();
-            var bitmap = BitmapFactory.DecodeByteArray(rasterData, 0, rasterData.Length);
-            return bitmap;
         }
     }
 }
