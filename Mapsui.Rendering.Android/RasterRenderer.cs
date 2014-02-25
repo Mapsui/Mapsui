@@ -25,14 +25,16 @@ namespace Mapsui.Rendering.Android
             var destination = RoundToPixel(dest);
             canvas.DrawBitmap(bitmap, null, destination, null);
 
+            DrawOutline(canvas, style, destination);
+        }
+
+        private static void DrawOutline(Canvas canvas, IStyle style, RectF destination)
+        {
             var vectorStyle = (style as VectorStyle);
-            if (vectorStyle != null)
-            {
-                if (vectorStyle.Outline.Color != null)
-                {
-                    DrawRectangle(canvas, destination, vectorStyle.Outline.Color);
-                }
-            }
+            if (vectorStyle == null) return;
+            if (vectorStyle.Outline == null) return;
+            if (vectorStyle.Outline.Color == null) return;
+            DrawRectangle(canvas, destination, vectorStyle.Outline.Color);
         }
 
         private static BoundingBox WorldToScreen(IViewport viewport, BoundingBox boundingBox)
@@ -61,7 +63,7 @@ namespace Mapsui.Rendering.Android
         {
             var paint = new Paint();
             paint.SetStyle(Paint.Style.Stroke);
-            paint.Color = new Color(outlineColor.A, outlineColor.R, outlineColor.G, outlineColor.B);
+            paint.Color = new Color(outlineColor.R, outlineColor.G, outlineColor.B, outlineColor.A);
             paint.StrokeWidth = 4;
             canvas.DrawRect(destination, paint);
         }
