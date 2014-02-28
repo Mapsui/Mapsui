@@ -95,6 +95,10 @@
       <Project>{A9ED0AA7-B6F0-4946-8A08-7C531E5CFA9B}</Project>
       <Name>Mapsui.UI.Android</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Mapsui.Samples.Common\Mapsui.Samples.Common.csproj">
+      <Project>{508AE811-A03A-4138-8CCC-ABDE03C67010}</Project>
+      <Name>Mapsui.Samples.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

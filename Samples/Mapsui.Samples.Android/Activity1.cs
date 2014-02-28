@@ -3,6 +3,7 @@ using Android.Content.PM;
 using Android.OS;
 using BruTile.Web;
 using Mapsui.Layers;
+using Mapsui.Samples.Common;
 using Mapsui.UI.Android;
 
 namespace Mapsui.Samples.Android
@@ -16,6 +17,7 @@ namespace Mapsui.Samples.Android
             SetContentView(Resource.Layout.Main);
             var mapView = FindViewById<MapView>(Resource.Id.mapview);
             mapView.Map.Layers.Add(new TileLayer(new OsmTileSource()));
+            mapView.Map.Layers.Add(LineStringSample.CreateLineStringLayer());
         }
     }
 }

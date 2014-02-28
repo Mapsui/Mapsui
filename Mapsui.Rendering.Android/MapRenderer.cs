@@ -65,16 +65,24 @@ namespace Mapsui.Rendering.Android
 
         private static void RenderFeature(Canvas canvas, IViewport viewport, IStyle style, IFeature feature)
         {
-            if (feature.Geometry is IRaster)
-            {
+            if (feature.Geometry is Point)
+                PointRenderer.Draw(canvas, viewport, style, feature);
+            //else if (feature.Geometry is MultiPoint)
+            //    MultiPointRenderer.DrawMultiPoint(graphics, (MultiPoint)feature.Geometry, style, viewport);
+            else if (feature.Geometry is LineString)
+                LineStringRenderer.Draw(canvas, viewport, style, feature);
+            //else if (feature.Geometry is MultiLineString)
+            //    MultiLineStringRenderer.Draw(canvas, (MultiLineString)feature.Geometry, style, viewport);
+            //else if (feature.Geometry is Polygon)
+            //    PolygonRenderer.Draw(canvas, (Polygon)feature.Geometry, style, viewport);
+            //else if (feature.Geometry is MultiPolygon)
+            //    MultiPolygonRenderer.Draw(canvas, (MultiPolygon)feature.Geometry, style, viewport);
+            else if (feature.Geometry is IRaster)
                 RasterRenderer.Draw(canvas, viewport, style, feature);
-            }
-            else if (feature.Geometry is Point)
-            {
-                var point = feature.Geometry as Point;
-                var dest = viewport.WorldToScreen(point);
-                canvas.DrawCircle((int)dest.X, (int)dest.Y, 20, new Paint{ Color = Color.Blue});
-            }
+            
+
+
         }
+
     }
 }

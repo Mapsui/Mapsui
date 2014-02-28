@@ -83,7 +83,7 @@ namespace Mapsui.Rendering.Gdi
             if (line.Vertices.Count > 1)
             {
                 var gp = new GraphicsPath();
-                gp.AddLines(ConvertPoints(WorldToView(line, viewport)));
+                gp.AddLines(ConvertPoints(WorldToScreen(line, viewport)));
                 graphics.DrawPath(pen, gp);
             }
         }
@@ -111,10 +111,10 @@ namespace Mapsui.Rendering.Gdi
                 var gp = new GraphicsPath();
 
                 //Add the exterior polygon
-                gp.AddPolygon(ConvertPoints(WorldToView(pol.ExteriorRing, viewport)));
+                gp.AddPolygon(ConvertPoints(WorldToScreen(pol.ExteriorRing, viewport)));
                 //Add the interior polygons (holes)
                 foreach (LinearRing linearRing in pol.InteriorRings)
-                    gp.AddPolygon(ConvertPoints(WorldToView(linearRing, viewport)));
+                    gp.AddPolygon(ConvertPoints(WorldToScreen(linearRing, viewport)));
 
                 // Only render inside of polygon if the brush isn't null or isn't transparent
                 if (brush != null && brush != Brushes.Transparent)
@@ -125,7 +125,7 @@ namespace Mapsui.Rendering.Gdi
             }
         }
 
-        public static IEnumerable<Point> WorldToView(LineString linearRing, IViewport viewport)
+        public static IEnumerable<Point> WorldToScreen(LineString linearRing, IViewport viewport)
         {
             var v = new Point[linearRing.Vertices.Count];
             for (int i = 0; i < linearRing.Vertices.Count; i++)
@@ -133,7 +133,7 @@ namespace Mapsui.Rendering.Gdi
             return v;
         }
 
-        public static Point WorldToView(Point point, IViewport viewport)
+        public static Point WorldToScreen(Point point, IViewport viewport)
         {
             return viewport.WorldToScreen(point);
         }

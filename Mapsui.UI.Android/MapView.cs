@@ -223,7 +223,8 @@ namespace Mapsui.UI.Android
         {
             if (e.Cancelled || e.Error != null)
             {
-                Toast.MakeText(Context, GetErrorMessage(e), ToastLength.Short).Show();
+                //todo test code below:
+                //((Activity)Context).RunOnUiThread(new Runnable(Toast.MakeText(Context, GetErrorMessage(e), ToastLength.Short).Show));
             }
             else // no problems
             {
