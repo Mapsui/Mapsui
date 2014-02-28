@@ -28,7 +28,8 @@ namespace Mapsui.Samples.Common
                             new Point(0, 10000000)
                         }
                     )}
-                )
+                ),
+                LayerName = "LineStringLayer"
             };
         }
     }

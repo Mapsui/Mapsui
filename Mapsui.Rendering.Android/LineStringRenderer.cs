@@ -11,10 +11,13 @@ namespace Mapsui.Rendering.Android
     {
         public static void Draw(Canvas canvas, IViewport viewport, IStyle style, IFeature feature)
         {
-            var vertices = ((LineString) feature.Geometry).Vertices;
-            var points = vertices.ToAndroid();
-            WorldToScreen(viewport, points);
-            canvas.DrawLines(points, new Paint { Color = Color.Black, StrokeWidth = 8 });
+            using (var paint = new Paint {Color = Color.Black, StrokeWidth = 8, AntiAlias = true})
+            {
+                var vertices = ((LineString) feature.Geometry).Vertices;
+                var points = vertices.ToAndroid();
+                WorldToScreen(viewport, points);
+                canvas.DrawLines(points, paint);
+            }
         }
 
         private static void WorldToScreen(IViewport viewport, float[] points)

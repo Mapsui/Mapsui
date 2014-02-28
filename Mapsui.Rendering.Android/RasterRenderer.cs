@@ -3,8 +3,9 @@ using Java.Lang;
 using Mapsui.Geometries;
 using Mapsui.Providers;
 using Mapsui.Styles;
+using AndroidBitmap = Android.Graphics.Bitmap;
+using AndroidColor = Android.Graphics.Color;
 using AndroidGraphics = Android.Graphics;
-using Color = Android.Graphics.Color;
 
 namespace Mapsui.Rendering.Android
 {
@@ -63,12 +64,12 @@ namespace Mapsui.Rendering.Android
         {
             var paint = new Paint();
             paint.SetStyle(Paint.Style.Stroke);
-            paint.Color = new Color(outlineColor.R, outlineColor.G, outlineColor.B, outlineColor.A);
+            paint.Color = new AndroidColor(outlineColor.R, outlineColor.G, outlineColor.B, outlineColor.A);
             paint.StrokeWidth = 4;
             canvas.DrawRect(destination, paint);
         }
 
-        private static global::Android.Graphics.Bitmap ToAndroidBitmap(IGeometry geometry)
+        private static AndroidBitmap ToAndroidBitmap(IGeometry geometry)
         {
             var raster = (IRaster)geometry;
             var rasterData = raster.Data.ToArray();

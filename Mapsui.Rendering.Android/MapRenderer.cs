@@ -1,6 +1,4 @@
-using System.Linq;
 using Android.Graphics;
-using Android.Views;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
@@ -8,9 +6,8 @@ using Mapsui.Styles;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using Bitmap = Android.Graphics.Bitmap;
-using Color = Android.Graphics.Color;
-using Math = Java.Lang.Math;
 using Point = Mapsui.Geometries.Point;
 
 namespace Mapsui.Rendering.Android
@@ -18,30 +15,43 @@ namespace Mapsui.Rendering.Android
     public class MapRenderer : IRenderer
     {
         public Canvas Canvas { get; set; }
+        public bool ShowDebugInfoInMap { get; set; }
 
         public MapRenderer()
         {
             RendererFactory.Get = (() => this);
+            ShowDebugInfoInMap = true;
         }
 
         public void Render(IViewport viewport, IEnumerable<ILayer> layers)
         {
-            Render(Canvas, viewport, layers);
+            Render(Canvas, viewport, layers, ShowDebugInfoInMap);
         }
 
-        private void Render(Canvas canvas, IViewport viewport, IEnumerable<ILayer> layers)
+        private static void Render(Canvas canvas, IViewport viewport, IEnumerable<ILayer> layers, bool showDebugInfoInMap)
         {
             layers = layers.ToList();
             VisibleFeatureIterator.IterateLayers(viewport, layers, (v, s, f) => RenderFeature(canvas, v, s, f));
+            if (showDebugInfoInMap) DrawDebugInfo(canvas, layers);
+        }
 
-            foreach (var layer in layers)
+        private static void DrawDebugInfo(Canvas canvas, IEnumerable<ILayer> layers)
+        {
+            using (var paint = new Paint {TextSize = 40})
             {
-                if (layer is ITileLayer)
+                var lineCounter = 1;
+                const float tabWidth = 40f;
+                const float lineHeight = 40f;
+
+                foreach (var layer in layers)
                 {
-                    var text = (layer as ITileLayer).MemoryCache.TileCount.ToString(CultureInfo.InvariantCulture);
-                    var paint = new Paint { TextSize = 60 };
-                    canvas.DrawText(text, 40f, 40f, paint);
-                    paint.Dispose();
+                    canvas.DrawText(layer.ToString(), tabWidth, lineHeight*(lineCounter++), paint);
+
+                    if (layer is ITileLayer)
+                    {
+                        var text = "Tiles in memory: " + (layer as ITileLayer).MemoryCache.TileCount.ToString(CultureInfo.InvariantCulture);
+                        canvas.DrawText(text, tabWidth, lineHeight*(lineCounter++), paint);
+                    }
                 }
             }
         }
@@ -55,7 +65,7 @@ namespace Mapsui.Rendering.Android
         {
             Bitmap target = Bitmap.CreateBitmap((int)viewport.Width, (int)viewport.Height, Bitmap.Config.Argb8888);
             var canvas = new Canvas(target);
-            Render(canvas, viewport, layers);
+            Render(canvas, viewport, layers, ShowDebugInfoInMap);
             var stream = new MemoryStream();
             target.Compress(Bitmap.CompressFormat.Png, 100, stream);
             target.Dispose();
@@ -79,9 +89,6 @@ namespace Mapsui.Rendering.Android
             //    MultiPolygonRenderer.Draw(canvas, (MultiPolygon)feature.Geometry, style, viewport);
             else if (feature.Geometry is IRaster)
                 RasterRenderer.Draw(canvas, viewport, style, feature);
-            
-
-
         }
 
     }
