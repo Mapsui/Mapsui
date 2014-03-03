@@ -3,7 +3,6 @@ using Android.Content;
 using Android.Graphics;
 using Android.Util;
 using Android.Views;
-using Android.Widget;
 using Java.Lang;
 using Mapsui.Fetcher;
 using Mapsui.Rendering.Android;
@@ -68,7 +67,7 @@ namespace Mapsui.UI.Android
                 _map.Viewport.Center = _map.Envelope.GetCentroid();
             _map.Viewport.Width = Width;
             _map.Viewport.Height = Height;
-            _map.Viewport.RenderScaleFactor = 2;
+            _map.Viewport.RenderResolutionMultiplier = 2;
 
             _map.ViewChanged(true, _map.Viewport.Extent, _map.Viewport.RenderResolution);
             _viewportInitialized = true;

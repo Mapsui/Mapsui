@@ -3,7 +3,6 @@ using Mapsui.Geometries;
 using Mapsui.Providers;
 using Mapsui.Rendering.Android.ExtensionMethods;
 using Mapsui.Styles;
-using Color = Android.Graphics.Color;
 
 namespace Mapsui.Rendering.Android
 {
@@ -11,12 +10,16 @@ namespace Mapsui.Rendering.Android
     {
         public static void Draw(Canvas canvas, IViewport viewport, IStyle style, IFeature feature)
         {
-            using (var paint = new Paint {Color = Color.Black, StrokeWidth = 8, AntiAlias = true})
+            var lineString = ((LineString) feature.Geometry).Vertices;
+            var paints = style.ToAndroid();
+            //using (var paint = new Paint {Color = Color.Black, StrokeWidth = 8, AntiAlias = true})
+            foreach (var paint in paints)
             {
-                var vertices = ((LineString) feature.Geometry).Vertices;
+                var vertices = lineString;
                 var points = vertices.ToAndroid();
                 WorldToScreen(viewport, points);
                 canvas.DrawLines(points, paint);
+                paint.Dispose();
             }
         }
 
