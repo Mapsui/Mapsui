@@ -20,7 +20,6 @@ namespace Mapsui.Rendering.Android
         public MapRenderer()
         {
             RendererFactory.Get = (() => this);
-            ShowDebugInfoInMap = true;
         }
 
         public void Render(IViewport viewport, IEnumerable<ILayer> layers)

@@ -12,7 +12,7 @@ using Math = System.Math;
 
 namespace Mapsui.UI.Android
 {
-    public class MapView : View//, View.IOnTouchListener
+    public class MapView : View
     {
         private const int None = 0;
         private const int Drag = 1;
@@ -23,6 +23,14 @@ namespace Mapsui.UI.Android
         private readonly PointF _currentMid = new PointF();
         private float _oldDist = 1f;
         private bool _viewportInitialized;
+        private MapRenderer _renderer;
+        private Map _map;
+
+        public bool ShowDebugInfoInMap
+        {
+            get { return _renderer.ShowDebugInfoInMap; }
+            set { _renderer.ShowDebugInfoInMap = value; }
+        }
 
         public MapView(Context context, IAttributeSet attrs) :
             base(context, attrs)
@@ -35,9 +43,6 @@ namespace Mapsui.UI.Android
         {
             Initialize();
         }
-
-        private MapRenderer _renderer;
-        private Map _map;
 
         private void ViewportOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
