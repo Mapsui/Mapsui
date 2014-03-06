@@ -41,7 +41,7 @@ namespace Mapsui.Fetcher
         private int _threadCount;
         private readonly AutoResetEvent _waitHandle = new AutoResetEvent(true);
         private readonly IFetchStrategy _strategy = new FetchStrategy();
-        private readonly int _maxRetries = 0;
+        private readonly int _maxRetries;
         private volatile bool _isThreadRunning;
         private volatile bool _isViewChanged;
         

@@ -1,4 +1,5 @@
-﻿using BruTile;
+﻿using System;
+using BruTile;
 using BruTile.Cache;
 using Mapsui.Fetcher;
 using Mapsui.Geometries;
@@ -10,6 +11,9 @@ using System.IO;
 using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
+#if SILVERLIGHT
+using Mapsui.Rendering.Xaml.BitmapRendering;
+#endif
 
 namespace Mapsui.UI.Xaml.Layers
 {
@@ -41,26 +45,55 @@ namespace Mapsui.UI.Xaml.Layers
             foreach (var tileLayer in Layers)
             {
                 if (!tileLayer.Enabled) continue;
-               
+
                 var tile = tileLayer.MemoryCache.Find(e.TileInfo.Index);
-                if (tile != null) tiles.Add(((IRaster)tile.Geometry).Data);
+                if (tile != null) tiles.Add(((IRaster) tile.Geometry).Data);
             }
 
+            if (tiles.Count == 0) return;
+            if (tiles.Count == 1)
+            {
+                AddBitmapToCache(e, tiles.First()); // If there is 1 tile then omit the rasterization to gain performance.
+            }
+            else
+            {
+                var tileWidth = Schema.GetTileWidth(e.TileInfo.Index.Level);
+                var tileHeight = Schema.GetTileHeight(e.TileInfo.Index.Level); 
 #if SILVERLIGHT
-            System.Windows.Deployment.Current.Dispatcher.BeginInvoke(() =>
-                {
+                RunOnUIThread(() => AddBitmapToCache(e, CombineBitmaps(tiles, tileWidth, tileHeight)));
+#else
+                AddBitmapToCache(e, CombineBitmaps(tiles, tileWidth, tileHeight));
 #endif
-                var bitmap = CombineBitmaps(tiles, Schema.GetTileWidth(e.TileInfo.Index.Level), Schema.GetTileHeight(e.TileInfo.Index.Level));
-                if (bitmap != null) MemoryCache.Add(e.TileInfo.Index, new Feature { Geometry = new Raster(bitmap, e.TileInfo.Extent.ToBoundingBox()), Styles = new List<IStyle> { new VectorStyle()} });
-                OnDataChanged(e);
-#if SILVERLIGHT
-                });
-#endif
+            }
         }
 
+#if SILVERLIGHT
+        private void RunOnUIThread(Action method)
+        {
+            System.Windows.Deployment.Current.Dispatcher.BeginInvoke(method);
+        }
+#endif
+
+        private void AddBitmapToCache(DataChangedEventArgs e, MemoryStream bitmap)
+        {
+            if (bitmap != null)
+                MemoryCache.Add(e.TileInfo.Index,
+                    new Feature
+                    {
+                        Geometry = new Raster(bitmap, e.TileInfo.Extent.ToBoundingBox()),
+                        Styles = new List<IStyle> {new VectorStyle()}
+                    });
+            OnDataChanged(e);
+        }
+        
         private static MemoryStream CombineBitmaps(IList<MemoryStream> tiles, int width, int height)
         {
+            // Eventually the registered renderer should be used to combine the bitmaps. 
+            // The GroupTileLayer should be moved to Mapsui core.
+
             if (tiles.Count == 0) return null;
+
+            if (tiles.Count == 1) return tiles.First(); // If there is 1 tile omit the rasterization to gain performance.
 
             var canvas = new Canvas();
             foreach (MemoryStream tile in tiles)
@@ -81,58 +114,14 @@ namespace Mapsui.UI.Xaml.Layers
                 canvas.Children.Add(image);
 
             }
+
 #if SILVERLIGHT
-            var writeableBitmap = new WriteableBitmap(width, height);
-            writeableBitmap.Render(canvas, null);
-            writeableBitmap.Invalidate();
-            return ConvertToBitmapStream(writeableBitmap);
+            return BitmapConverter.ToBitmapStream(canvas, width, height);
 #else
-            canvas.Arrange(new System.Windows.Rect(0, 0, width, height));
-            
-            var renderTargetBitmap = new RenderTargetBitmap(width, height, 96, 96, new System.Windows.Media.PixelFormat());
-            renderTargetBitmap.Render(canvas);
-            var bitmap = new PngBitmapEncoder();
-            bitmap.Frames.Add(BitmapFrame.Create(renderTargetBitmap));
-            var bitmapStream = new MemoryStream();
-            bitmap.Save(bitmapStream);
-            return bitmapStream;
+            return Rendering.Xaml.BitmapRendering.BitmapConverter.ToBitmapStream(canvas, width, height);
 #endif
 
         }
-
-#if SILVERLIGHT
-
-        public static MemoryStream ConvertToBitmapStream(WriteableBitmap bitmap)
-        {
-            var stream = new MemoryStream();
-
-            int width = bitmap.PixelWidth;
-            int height = bitmap.PixelHeight;
-
-            var ei = new HackingSilverlightLibrary.EditableImage(width, height);
-
-            for (int i = 0; i < height; i++)
-            {
-                for (int j = 0; j < width; j++)
-                {
-                    int pixel = bitmap.Pixels[(i * width) + j];
-                    ei.SetPixel(j, i,
-                                (byte)((pixel >> 16) & 0xFF),
-                                (byte)((pixel >> 8) & 0xFF),
-                                (byte)(pixel & 0xFF),
-                                (byte)((pixel >> 24) & 0xFF)
-                        );
-                }
-            }
-            Stream png = ei.GetStream();
-            var len = (int)png.Length;
-            var bytes = new byte[len];
-            png.Read(bytes, 0, len);
-            stream.Write(bytes, 0, len);
-
-            return stream;
-        }
-#endif
 
         public override void AbortFetch()
         {

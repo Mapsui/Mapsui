@@ -63,7 +63,6 @@ namespace Mapsui.Layers
                 SetTileSource(_overrideTmsUrlWithUrlToTileMapXml
                     ? TileMapParser.CreateTileSource(stream, _urlToTileMapXml)
                     : TileMapParser.CreateTileSource(stream));
-                Style = new VectorStyle();
             }
             catch (Exception ex)
             {
@@ -76,6 +75,7 @@ namespace Mapsui.Layers
         public TileLayer(int minTiles = 200, int maxTiles = 300)
         {
             _memoryCache = new MemoryCache<Feature>(minTiles, maxTiles);
+            Style = new VectorStyle { Outline = { Color = Color.FromArgb(0, 0, 0, 0) } }; // initialize with transparent outline
         }     
 
         public TileLayer(string urlToTileMapXml, bool overrideTmsUrlWithUrlToTileMapXml = false, Action<Exception> initializationFailed = null)

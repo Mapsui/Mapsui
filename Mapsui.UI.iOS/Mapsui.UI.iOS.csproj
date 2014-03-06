@@ -45,6 +45,10 @@
       <Project>{b142ab17-285f-48c8-b6c6-94586028333b}</Project>
       <Name>Mapsui.Rendering.iOS</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Mapsui\Mapsui.csproj">
+      <Project>{d74c052a-c07e-4b37-a898-134218aca5c9}</Project>
+      <Name>Mapsui</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

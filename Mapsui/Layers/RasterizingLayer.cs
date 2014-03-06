@@ -1,9 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Linq;
 using Mapsui.Fetcher;
 using Mapsui.Geometries;
 using Mapsui.Providers;
 using Mapsui.Rendering;
+using System;
+using System.Collections.Generic;
+using System.Threading;
 
 namespace Mapsui.Layers
 {
@@ -14,48 +16,76 @@ namespace Mapsui.Layers
         private readonly MemoryProvider _cache;
         private BoundingBox _extent;
         private double _resolution;
-        private bool _invalid;
+        protected Timer TimerToStartRasterizing;
+        private readonly int _delayBeforeRaterize;
+        private IEnumerable<IFeature> _previousFeatures;
 
-        public RasterizingLayer(ILayer layer)
+        public RasterizingLayer(ILayer layer, int delayBeforeRasterize = 500)
         {
             _layer = layer;
+            _delayBeforeRaterize = delayBeforeRasterize;
+            TimerToStartRasterizing = new Timer(TimerToStartRasterizingElapsed, null, _delayBeforeRaterize, int.MaxValue);
             _layer.DataChanged += LayerOnDataChanged;
             _cache = new MemoryProvider();
         }
 
+        void TimerToStartRasterizingElapsed(object state)
+        {
+            TimerToStartRasterizing.Dispose();
+            Rasterize();
+        }
+        
         private void LayerOnDataChanged(object sender, DataChangedEventArgs dataChangedEventArgs)
         {
-            if (_invalid) return;
-            _invalid = true;
-
-            lock (_syncLock)
-            {
-                while (_invalid)
-                {
-                    _invalid = false;
-                    if (double.IsNaN(_resolution)) return;
-                    var viewport = CreateViewport(_extent, _resolution);
-                    var renderer = RendererFactory.Get;
-                    if (renderer == null) throw new Exception("No render was registered");
-                    var bitmapStream = renderer().RenderToBitmapStream(viewport, new[] {_layer});
-
-                    DisposeAllFeatures(_cache.Features);
-                    _cache.Clear();
-                    _cache.Features = new Features {new Feature {Geometry = new Raster(bitmapStream, viewport.Extent)}};
-                }
-            }
-            OnDataChanged(dataChangedEventArgs);
+            StartTimerToTriggerRasterize();
         }
 
-        private static void DisposeAllFeatures(IEnumerable<IFeature> features)
+        private void StartTimerToTriggerRasterize()
+        {
+// Postpone the request by disposing the old and creating a new Timer.
+            TimerToStartRasterizing.Dispose();
+            TimerToStartRasterizing = new Timer(TimerToStartRasterizingElapsed, null, _delayBeforeRaterize, int.MaxValue);
+        }
+
+        private void Rasterize()
+        {
+            lock (_syncLock)
+            {
+                if (double.IsNaN(_resolution) || _resolution <= 0) return;
+                var viewport = CreateViewport(_extent, _resolution);
+
+                var renderer = RendererFactory.Get;
+                if (renderer == null) throw new Exception("No renderer was registered");
+
+                var bitmapStream = renderer().RenderToBitmapStream(viewport, new[] {_layer});
+                RemoveExistingFeatures();
+                _cache.Features = new Features {new Feature {Geometry = new Raster(bitmapStream, viewport.Extent)}};
+
+                OnDataChanged(new DataChangedEventArgs());
+            }
+        }
+
+        private void RemoveExistingFeatures()
+        {
+            var features = _cache.Features.ToList();
+            _cache.Clear(); // clear before dispose to prevent possible null disposed exception on render
+
+            // Disposing previous and storing current in the previous field to prevent dispose during rendering.
+            if (_previousFeatures != null) DisposeRenderedGeometries(_previousFeatures);
+            _previousFeatures = features; 
+        }
+
+        private static void DisposeRenderedGeometries(IEnumerable<IFeature> features)
         {
             foreach (var feature in features)
             {
                 foreach (var key in feature.RenderedGeometry.Keys)
                 {
-                    var geometry = feature.RenderedGeometry[key];
-                    var disposable = (geometry as IDisposable);
-                    if (disposable != null) disposable.Dispose();
+                    var disposable = (feature.RenderedGeometry[key] as IDisposable);
+                    if (disposable != null)
+                    {
+                        disposable.Dispose();
+                    }
                 }
             }
         }
@@ -80,6 +110,7 @@ namespace Mapsui.Layers
             _extent = extent;
             _resolution = resolution;
             _layer.ViewChanged(changeEnd, extent, resolution);
+            StartTimerToTriggerRasterize();
         }
 
         public override void ClearCache()

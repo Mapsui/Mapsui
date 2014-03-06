@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace HackingSilverlightLibrary
+namespace Mapsui.Rendering.Xaml.BitmapRendering
 {
     // by Joe Stegman
     // http://blogs.msdn.com/jstegman/archive/2008/04/21/dynamic-image-generation-in-silverlight.aspx

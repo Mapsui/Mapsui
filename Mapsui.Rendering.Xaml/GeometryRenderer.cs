@@ -135,7 +135,7 @@ namespace Mapsui.Rendering.Xaml
             return matrix;
         }
 
-        private static UIElement CreateSymbolFromBitmap(System.IO.Stream data, double opacity)
+        private static UIElement CreateSymbolFromBitmap(Stream data, double opacity)
         {
             var bitmapImage = CreateBitmapImage(data);
             var fill = new XamlMedia.ImageBrush { ImageSource = bitmapImage };
@@ -210,7 +210,7 @@ namespace Mapsui.Rendering.Xaml
             return path;
         }
 
-        private static BitmapImage CreateBitmapImage(System.IO.Stream imageData)
+        private static BitmapImage CreateBitmapImage(Stream imageData)
         {
             var bitmapImage = new BitmapImage();
 #if SILVERLIGHT
@@ -220,8 +220,7 @@ namespace Mapsui.Rendering.Xaml
             imageData.Position = 0;
             var memoryStream = new System.IO.MemoryStream();
             imageData.CopyTo(memoryStream);
-            bitmapImage.SetSource(AsyncHelpers.RunSync(() =>
-                ByteArrayToRandomAccessStream(memoryStream.ToArray())));
+            bitmapImage.SetSource(ByteArrayToRandomAccessStream(memoryStream.ToArray()).Result);
 #else
             imageData.Position = 0;
             bitmapImage.BeginInit();
@@ -347,11 +346,10 @@ namespace Mapsui.Rendering.Xaml
             //!!!path.Stroke = new XamlMedia.SolidColorBrush(XamlColors.Red);
             //!!!path.StrokeThickness = 6;
 
-            MapRenderer.Animate(path, "Opacity", 0, 1, 600, (s, e) => { });
             return path;
         }
 
-        private static XamlShapes.Path CreateRasterPath(IStyle style, System.IO.MemoryStream stream)
+        private static XamlShapes.Path CreateRasterPath(IStyle style, MemoryStream stream)
         {
             //todo: use this:
             //style.Symbol.Convert();
@@ -362,8 +360,7 @@ namespace Mapsui.Rendering.Xaml
             var bitmapImage = new BitmapImage();
 #if NETFX_CORE
             stream.Position = 0;
-            bitmapImage.SetSource(AsyncHelpers.RunSync(() =>
-                ByteArrayToRandomAccessStream(stream.ToArray())));
+            bitmapImage.SetSource(ByteArrayToRandomAccessStream(stream.ToArray()).Result);
 
 #elif !SILVERLIGHT
             var localStream = new MemoryStream();

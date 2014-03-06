@@ -229,7 +229,7 @@ namespace Mapsui.Rendering.Xaml.Tests
         {
             var canvas = new Canvas();
             MapRenderer.RenderLayer(canvas, viewport, layer);
-            return Xaml.Utilities.ToBitmapStream(canvas, viewport.Width, viewport.Height);
+            return BitmapRendering.BitmapConverter.ToBitmapStream(canvas, viewport.Width, viewport.Height);
         }
 #endif
 

@@ -160,16 +160,10 @@ namespace Mapsui.Layers.ArcGISDynamicLayer
                 myWebResponse.Dispose();
                 return true;
             }
-            catch (WebException webEx)
+            catch
             {
-                //!!!Trace.Write("There was a problem connecting to the ArcGIS server: " + webEx.Message);
+                return false;
             }
-            catch (Exception ex)
-            {
-                //!!!Trace.Write("There was a problem while attempting to request the ArcGIS layer" + ex.Message);
-            }
-
-            return false;
         }
 
         /// <summary>

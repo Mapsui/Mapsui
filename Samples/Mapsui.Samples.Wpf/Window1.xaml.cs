@@ -88,11 +88,11 @@ namespace Mapsui.Samples.Wpf
             MapControl.Map.Layers.Clear();
             MapControl.Map.Layers.Add(new TileLayer(new OsmTileSource()) { LayerName = "OSM" });
             var pointLayer = PointLayerSample.CreateRandomPointLayer(CreateRandomPointsProvider());
-            pointLayer.Style = new StyleCollection
-                {
-                    new SymbolStyle { SymbolScale = 1, Fill = new Brush(Color.Cyan) }
+            pointLayer.Style = new StyleCollection {
+                new SymbolStyle {
+                        SymbolScale = 1, Fill = new Brush(Color.Cyan), 
+                        Outline = { Color = Color.White, Width = 2}}
                 };
-                
             MapControl.Map.Layers.Add(pointLayer);
             MapControl.MouseInfoUp += MapControlOnMouseInfoDown;
             MapControl.MouseInfoUpLayers.Add(pointLayer);

@@ -14,7 +14,7 @@ namespace Mapsui
             get { return _viewport.RenderResolution; }
         }
 
-        public double RenderScaleFactor
+        public double RenderResolutionMultiplier
         {
             set { _viewport.RenderResolutionMultiplier = value; }
         }

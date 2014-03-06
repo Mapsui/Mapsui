@@ -1,18 +1,14 @@
-﻿using System.Windows.Media.Imaging;
-using System.IO;
+﻿using System.IO;
+using System.Windows.Media.Imaging;
 
-namespace Mapsui.Rendering.Xaml
+namespace Mapsui.Rendering.Xaml.BitmapRendering
 {
-    public static class Utilities
+    public static class BitmapConverter2
     {
-        public static MemoryStream ConverToBitmapStream(WriteableBitmap bitmap)
+        public static MemoryStream ToBitmapStream(WriteableBitmap bitmap)
         {
-            //Thanks Eiji for posting on msdn:
-            //http://forums.silverlight.net/forums/p/114691/446894.aspx
-            //A nice simple static method which seems a more direct route than
-            //ConverToBitmapStream. There is still an exception in my scenario.
-            //I would like to figure out what is wrong exactly so I can use this 
-            //method instead of the clunky one above.
+            // Thanks Eiji for posting on msdn:
+            // http://forums.silverlight.net/forums/p/114691/446894.aspx
 
             int width = bitmap.PixelWidth;
             int height = bitmap.PixelHeight;

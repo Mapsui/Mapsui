@@ -24,31 +24,13 @@ namespace Mapsui.Fetcher
 {
     class FetchStrategy : IFetchStrategy
     {
-        HashSet<int> preFetchLayers;
-        public static HashSet<int> GetPreFetchLevels(int min, int max)
-        {
-            var preFetchLayers = new HashSet<int>();
-            int level = min;
-            var step = 1;
-            while (level <= max)
-            {
-                preFetchLayers.Add(level);
-                level += step;
-                step++;
-            }
-            return preFetchLayers;
-        }
-
         public IList<TileInfo> GetTilesWanted(ITileSchema schema, Extent extent, string levelId)
         {
-            //line below only works properly of this instance is always called with the resolutions. Think of something better
-            if (preFetchLayers == null) preFetchLayers = GetPreFetchLevels(0, schema.Resolutions.Count - 1);
-
-            IList<TileInfo> infos = new List<TileInfo>();
+            var infos = new List<TileInfo>();
             // Iterating through all levels from current to zero. If lower levels are
             // not availeble the renderer can fall back on higher level tiles. 
             var resolution = schema.Resolutions[levelId].UnitsPerPixel;
-            var levels = schema.Resolutions.Where(k => k.Value.UnitsPerPixel >= resolution).OrderByDescending(x => x.Value.UnitsPerPixel);
+            var levels = schema.Resolutions.Where(k => k.Value.UnitsPerPixel >= resolution).OrderBy(x => x.Value.UnitsPerPixel).ToList();
 
             foreach (var level in levels)
             {

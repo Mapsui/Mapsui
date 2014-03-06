@@ -65,7 +65,7 @@ namespace Mapsui.Rendering.Xaml
             var canvas = new Canvas();
             MapRenderer.RenderLayer(canvas, viewport, layer);
             canvas.UpdateLayout();
-            var bitmap = Utilities.ToBitmapStream(canvas, viewport.Width, viewport.Height);
+            var bitmap = BitmapRendering.BitmapConverter.ToBitmapStream(canvas, viewport.Width, viewport.Height);
             features = new Features { new Feature { Geometry = new Raster(bitmap, viewport.Extent) } };
         }
 

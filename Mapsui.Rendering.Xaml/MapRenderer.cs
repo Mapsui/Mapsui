@@ -11,14 +11,10 @@ using System.Linq;
 #if !NETFX_CORE
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media.Animation;
-using AnimateEventHandler = System.EventHandler;
 #else
 using Windows.UI.Xaml.Controls;
 using Windows.Foundation;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Media.Animation;
-using AnimateEventHandler = System.EventHandler<object>;
 #endif
 
 namespace Mapsui.Rendering.Xaml
@@ -26,6 +22,16 @@ namespace Mapsui.Rendering.Xaml
     public class MapRenderer : IRenderer
     {
         private readonly Canvas _target;
+#if !NETFX_CORE
+        private static int _mainThreadId;
+#endif
+
+        static MapRenderer()
+        {
+#if !NETFX_CORE
+            _mainThreadId = System.Threading.Thread.CurrentThread.ManagedThreadId;
+#endif
+        }
 
         public MapRenderer()
         {
@@ -46,10 +52,10 @@ namespace Mapsui.Rendering.Xaml
 
         public void Render(IViewport viewport, IEnumerable<ILayer> layers)
         {
-            Render(_target, viewport, layers);
+            Render(_target, viewport, layers, false);
         }
 
-        public static void Render(Canvas target, IViewport viewport, IEnumerable<ILayer> layers)
+        public static void Render(Canvas target, IViewport viewport, IEnumerable<ILayer> layers, bool rasterizing)
         {
 #if !SILVERLIGHT &&  !NETFX_CORE
             target.BeginInit();
@@ -70,7 +76,7 @@ namespace Mapsui.Rendering.Xaml
                     layer.MinVisible <= viewport.Resolution &&
                     layer.MaxVisible >= viewport.Resolution)
                 {
-                    RenderLayer(target, viewport, layer);
+                    RenderLayer(target, viewport, layer, rasterizing);
                 }
             }
             target.Arrange(new Rect(0, 0, viewport.Width, viewport.Height));
@@ -82,23 +88,44 @@ namespace Mapsui.Rendering.Xaml
 
         public MemoryStream RenderToBitmapStream(IViewport viewport, IEnumerable<ILayer> layers)
         {
-#if !SILVERLIGHT && !WINDOWS_PHONE && !NETFX_CORE
-            var bitmapStream = new MemoryStream();
-            RunMethodOnStaThread(() => bitmapStream = RenderToBitmapStreamStatic(viewport, layers));
+#if WINDOWS_PHONE || NETFX_CORE
+            throw new NotImplementedException();
+#elif SILVERLIGHT
+            MemoryStream bitmapStream = null;
+            var waitHandle = new AutoResetEvent(false);
+            RunOnUIThread(() =>
+            {
+                bitmapStream = RenderToBitmapStreamStatic(viewport, layers);
+                waitHandle.Set();
+            });
+            waitHandle.WaitOne(60000);
             return bitmapStream;
 #else
-            throw new NotImplementedException();
+            MemoryStream bitmapStream = null;
+            RunMethodOnStaThread(() => bitmapStream = RenderToBitmapStreamStatic(viewport, layers));
+            return bitmapStream;
 #endif
         }
 
-#if !SILVERLIGHT && !WINDOWS_PHONE && !NETFX_CORE
+#if !WINDOWS_PHONE && !NETFX_CORE
         private static MemoryStream RenderToBitmapStreamStatic(IViewport viewport, IEnumerable<ILayer> layers)
         {
             var canvas = new Canvas();
-            Render(canvas, viewport, layers);
-            return Utilities.ToBitmapStream(canvas, viewport.Width, viewport.Height);
+            Render(canvas, viewport, layers, true);
+            var bitmapStream = BitmapRendering.BitmapConverter.ToBitmapStream(canvas, (int)viewport.Width, (int)viewport.Height);
+            canvas.Children.Clear();
+            return bitmapStream;
         }
+#endif
 
+#if SILVERLIGHT && !WINDOWS_PHONE
+        private void RunOnUIThread(Action method)
+        {
+            Deployment.Current.Dispatcher.BeginInvoke(method);
+        }
+#endif
+
+#if !SILVERLIGHT && !WINDOWS_PHONE && !NETFX_CORE
         private static void RunMethodOnStaThread(ThreadStart operation)
         {
             var thread = new Thread(operation);
@@ -109,7 +136,7 @@ namespace Mapsui.Rendering.Xaml
         }
 #endif
 
-        public static void RenderLayer(Canvas target, IViewport viewport, ILayer layer)
+        public static void RenderLayer(Canvas target, IViewport viewport, ILayer layer, bool rasterizing = false)
         {
             if (layer.Enabled == false) return;
 
@@ -122,11 +149,11 @@ namespace Mapsui.Rendering.Xaml
             }
             else
             {
-                target.Children.Add(RenderVectorLayer(viewport, layer));
+                target.Children.Add(RenderVectorLayer(viewport, layer, rasterizing));
             }
         }
 
-        private static Canvas RenderVectorLayer(IViewport viewport, ILayer layer)
+        private static Canvas RenderVectorLayer(IViewport viewport, ILayer layer, bool rasterizing = false)
         {
             // todo:
             // find solution for try catch. Sometimes this method will throw an exception
@@ -151,7 +178,7 @@ namespace Mapsui.Rendering.Xaml
                         if (layerStyle is IThemeStyle) style = (layerStyle as IThemeStyle).GetStyle(feature);
                         if ((style == null) || (style.Enabled == false) || (style.MinVisible > viewport.Resolution) || (style.MaxVisible < viewport.Resolution)) continue;
 
-                        RenderFeature(viewport, canvas, feature, style);
+                        RenderFeature(viewport, canvas, feature, style, rasterizing);
                     }
                 }
 
@@ -162,7 +189,7 @@ namespace Mapsui.Rendering.Xaml
                     {
                         if (feature.Styles != null && style.Enabled)
                         {
-                            RenderFeature(viewport, canvas, feature, style);
+                            RenderFeature(viewport, canvas, feature, style, rasterizing);
                         }
                     }
                 }
@@ -175,7 +202,7 @@ namespace Mapsui.Rendering.Xaml
             }
         }
 
-        private static void RenderFeature(IViewport viewport, Canvas canvas, IFeature feature, IStyle style)
+        private static void RenderFeature(IViewport viewport, Canvas canvas, IFeature feature, IStyle style, bool rasterizing)
         {
             if (style is LabelStyle)
             {
@@ -187,7 +214,7 @@ namespace Mapsui.Rendering.Xaml
                 if (renderedGeometry == null)
                 {
                     renderedGeometry = RenderGeometry(viewport, style, feature);
-                    feature.RenderedGeometry[style] = renderedGeometry;
+                    if (!rasterizing) feature.RenderedGeometry[style] = renderedGeometry;
                 }
                 else
                 {
@@ -234,29 +261,6 @@ namespace Mapsui.Rendering.Xaml
                 GeometryRenderer.PositionGeometry(renderedGeometry, viewport);
             if (feature.Geometry is IRaster)
                 GeometryRenderer.PositionRaster(renderedGeometry, feature.Geometry.GetBoundingBox(), viewport);
-        }
-
-        public static void Animate(DependencyObject target, string property, double from, double to, int duration, AnimateEventHandler completed)
-        {
-            return;
-
-            var animation = new DoubleAnimation
-            {
-                From = from,
-                To = to,
-                Duration = new TimeSpan(0, 0, 0, 0, duration)
-            };
-
-            Storyboard.SetTarget(animation, target);
-#if !NETFX_CORE
-            Storyboard.SetTargetProperty(animation, new PropertyPath(property));
-#else
-            Storyboard.SetTargetProperty(animation, property);
-#endif
-            var storyBoard = new Storyboard();
-            storyBoard.Children.Add(animation);
-            storyBoard.Completed += completed;
-            storyBoard.Begin();
         }
     }
 }

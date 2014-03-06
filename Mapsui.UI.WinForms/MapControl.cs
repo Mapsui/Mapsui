@@ -35,22 +35,10 @@ namespace Mapsui.UI.WinForms
         private Graphics _bufferGraphics;
         private readonly Brush _whiteBrush = new SolidBrush(Color.White);
         private Geometries.Point _mousePosition;
-            //Set if the user manipulates the map. If this happens we will limit 
-            //the time it takes to render a frame by simply cutting if off. 
-            //This way the control is always reponsive.
-        private bool _isManipulated; 
             //Indicates that a redraw is needed. This often coincides with 
             //manipulation but not in the case of new data arriving.
-        private bool _isInvalidated; 
         private bool _viewInitialized;
-        private long _startTicks;
-        private const int MaxMiliseconds = 40;
-            //Ticks are in units of 100 nanoseconds. I prefer to use miliseconds myself
-            //1 tick = 100 nanoseconds (from documentation)
-            //1 milisecond = 1000000 nanoseconds
-            //1 milisecond = (1000000 / 100) = 10000 ticks.
-        private const long MaxTicks = (long)MaxMiliseconds * 10000;
-        private bool isCallingDoEvents;
+        private readonly GdiMapRenderer _renderer = new GdiMapRenderer();
 
         #endregion
 
@@ -85,7 +73,7 @@ namespace Mapsui.UI.WinForms
                 _map.DataChanged += MapDataChanged;
 
                 ViewChanged(true);
-                InvalidateMap(false);
+                Invalidate();
             }
         }
 
@@ -111,7 +99,7 @@ namespace Mapsui.UI.WinForms
         {
             _viewport.Resolution = ZoomHelper.ZoomIn(_map.Resolutions, _viewport.Resolution);
             ViewChanged(true);
-            InvalidateMap(true);
+            Invalidate();
         }
 
         public void ZoomIn(PointF mapPosition)
@@ -131,50 +119,32 @@ namespace Mapsui.UI.WinForms
               _viewport.Height - mapPosition.Y);
 
             ViewChanged(true);
-            InvalidateMap(true);
+            Invalidate();
         }
 
         public void ZoomOut()
         {
             _viewport.Resolution = ZoomHelper.ZoomOut(_map.Resolutions, _viewport.Resolution);
             ViewChanged(true);
-            InvalidateMap(true);
+            Invalidate();
         }
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            if (isCallingDoEvents) return;
             if (!_viewInitialized) InitializeView();
             if (!_viewInitialized) return; //initialize in the line above failed. 
-            _isManipulated = false;
-            _isInvalidated = false;
             
             base.OnPaint(e);
 
             //Reset background
             _bufferGraphics.FillRectangle(_whiteBrush, 0, 0, _buffer.Width, _buffer.Height);
-
-            //set startTicks for use in AbortRender
-            _startTicks = DateTime.Now.Ticks;
-
+            
             //Render to the buffer
-            GdiMapRenderer.Render(_bufferGraphics, new Viewport(_viewport), _map, AbortRender);
+            _renderer.Graphics = _bufferGraphics;
+            _renderer.Render(_viewport, _map.Layers);
             
             //Render the buffer to the control
             e.Graphics.DrawImage(_buffer, 0, 0);
-
-            if (_isInvalidated) Invalidate();
-        }
-
-        private bool AbortRender()
-        {
-            // When calling DoEvents we want all events to be called except 
-            // OnPaint. This is prevented by checking on isCallingDoEvents
-            isCallingDoEvents = true;
-            Application.DoEvents();
-            isCallingDoEvents = false;
-            if (_isManipulated && (DateTime.Now.Ticks - _startTicks) > MaxTicks) return true;
-            return false;
         }
 
         private void ViewChanged(bool changeEnd)
@@ -189,7 +159,7 @@ namespace Mapsui.UI.WinForms
         {
             if (e.Error == null && e.Cancelled == false)
             {
-                InvalidateMap(false);
+                Invalidate();
             }
             else if (e.Cancelled)
             {
@@ -228,7 +198,7 @@ namespace Mapsui.UI.WinForms
                 _mousePosition = newMousePosition;
 
                 ViewChanged(false);
-                InvalidateMap(true);
+                Invalidate();
             }
         }
 
@@ -242,7 +212,7 @@ namespace Mapsui.UI.WinForms
                 _mousePosition = newMousePosition;
 
                 ViewChanged(true);
-                InvalidateMap(true);
+                Invalidate();
             }
         }
 
@@ -261,13 +231,6 @@ namespace Mapsui.UI.WinForms
             }
 
             ViewChanged(true);
-            InvalidateMap(true);
-        }
-
-        private void InvalidateMap(bool isManipulated)
-        {
-            _isManipulated = isManipulated;
-            _isInvalidated = true;
             Invalidate();
         }
 
