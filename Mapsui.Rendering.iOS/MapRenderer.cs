@@ -23,7 +23,7 @@ namespace Mapsui.Rendering.iOS
 			_renderingLayer = new RenderingLayer ();
 
 			_target.Layer.AddSublayer (_renderingLayer);
-		}
+		}a
 
 		public MapRenderer(UIView target)
 		{
@@ -37,11 +37,16 @@ namespace Mapsui.Rendering.iOS
 
 		public void Render(IViewport viewport, IEnumerable<ILayer> layers)
 		{
+			if (_target.Layer.Sublayers != null) {
+				foreach (var layer in _target.Layer.Sublayers) {
+					layer.RemoveFromSuperLayer ();
+				}
+			}
+
 			CATransaction.Begin();
 			CATransaction.AnimationDuration = 0;
 			//lock (_syncRoot) {
-			_renderingLayer.PrepareLayer ();
-
+			//_renderingLayer.PrepareLayer ();
 			foreach (var layer in layers) {
 				if (layer.Enabled &&
 				    layer.MinVisible <= viewport.Resolution &&
@@ -51,7 +56,7 @@ namespace Mapsui.Rendering.iOS
 				}
 			}
 
-			_renderingLayer.UpdateLayer ();
+			//_renderingLayer.UpdateLayer ();
 			//}
 			CATransaction.Commit ();
 		}
@@ -80,10 +85,10 @@ namespace Mapsui.Rendering.iOS
 			}
 			else
 			{
-				var canvas = RenderVectorLayer(_renderingLayer, viewport, layer);
+				var canvas = RenderVectorLayer(new CALayer(), viewport, layer);
 
 				if(canvas != null) {
-					//target.Layer.AddSublayer (canvas);
+					target.Layer.AddSublayer (canvas);
 				}
 			}
 		}
@@ -98,6 +103,8 @@ namespace Mapsui.Rendering.iOS
 			{
 				//var canvas = new CALayer();
 				var features = layer.GetFeaturesInView(viewport.Extent, viewport.Resolution).ToList();
+
+				System.Diagnostics.Debug.WriteLine("Layer name: " + layer.LayerName + " feature count: " + features.Count);
 
 				if(layer.Style != null)
 				{
@@ -128,7 +135,7 @@ namespace Mapsui.Rendering.iOS
 			}
 			catch (Exception e)
 			{
-				Console.WriteLine(e.Message);
+				Console.WriteLine(layer.LayerName + " " + e.Message);
 				return null;   
 			}                    
 		}
@@ -144,18 +151,23 @@ namespace Mapsui.Rendering.iOS
 				var styleKey = layerName;//feature.GetHashCode ().ToString ();
 				var renderedGeometry = (feature[styleKey] != null) ? (CALayer)feature[styleKey] : null;
 
+				if (layerName.Equals ("GraafMeldingLayer"))
+					System.Diagnostics.Debug.WriteLine ("GraafMeldingLayer");
+
 				if (renderedGeometry == null) {
 					renderedGeometry = RenderGeometry (viewport, style, feature);
-
+					System.Diagnostics.Debug.WriteLine ("RenderGeometry done");
 					if (feature.Geometry is IRaster)
 					//if (feature.Geometry is Mapsui.Geometries.Point || feature.Geometry is IRaster) // positioning only supported for point and raster
 					{						//||feature.Geometry is Mapsui.Geometries.MultiPolygon)
 						feature [styleKey] = renderedGeometry;
 					}
 				} else {
+					System.Diagnostics.Debug.WriteLine ("position geom");
 					PositionGeometry(renderedGeometry, viewport, style, feature);
 				}
-
+				if(renderedGeometry == null)
+					System.Diagnostics.Debug.WriteLine ("renderedGeometry = null");
 				canvas.AddSublayer (renderedGeometry);
 			}
 		}
@@ -175,6 +187,7 @@ namespace Mapsui.Rendering.iOS
 		        return GeometryRenderer.RenderMultiPolygonOnLayer (feature.Geometry as MultiPolygon, style, viewport);
 		    }
 		    if (feature.Geometry is IRaster){
+				System.Diagnostics.Debug.WriteLine ("RenderGeometry as Raster");
 		        return GeometryRenderer.RenderRasterOnLayer (feature.Geometry as IRaster, style, viewport);
 		    }
 		    return null;
