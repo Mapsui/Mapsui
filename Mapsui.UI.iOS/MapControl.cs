@@ -90,7 +90,7 @@ namespace Mapsui.UI.iOS
 
             _map.Viewport.Width = Width;
             _map.Viewport.Height = Height;
-            _map.Viewport.RenderScaleFactor = 2;
+            _map.Viewport.RenderResolutionMultiplier = 2;
 
             _map.ViewChanged(true, _map.Viewport.Extent, _map.Viewport.RenderResolution);
             _viewportInitialized = true;
