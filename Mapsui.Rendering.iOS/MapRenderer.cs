@@ -23,7 +23,7 @@ namespace Mapsui.Rendering.iOS
 			_renderingLayer = new RenderingLayer ();
 
 			_target.Layer.AddSublayer (_renderingLayer);
-		}a
+		}
 
 		public MapRenderer(UIView target)
 		{
