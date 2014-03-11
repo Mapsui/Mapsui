@@ -17,16 +17,18 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Threading;
 using BruTile;
 using BruTile.Cache;
+using Mapsui.Annotations;
 using Mapsui.Geometries;
 using Mapsui.Providers;
 
 namespace Mapsui.Fetcher
 {
-    class TileFetcher
+    class TileFetcher : INotifyPropertyChanged
     {
         #region Fields
 
@@ -46,6 +48,7 @@ namespace Mapsui.Fetcher
         private volatile bool _isViewChanged;
         public const int DefaultMaxThreads = 2;
         public const int DefaultMaxRetries = 2;
+        private bool _busy;
         
         #endregion
 
@@ -70,6 +73,17 @@ namespace Mapsui.Fetcher
             _maxThreads = maxThreads;
 
             _strategy = strategy ?? new FetchStrategy();
+        }
+
+        public bool Busy
+        {
+            get { return _busy; }
+            set
+            {
+                if (_busy == value) return; // prevent notify              
+                _busy = value; 
+                OnPropertyChanged("Busy"); 
+            }
         }
 
         #endregion
@@ -110,6 +124,7 @@ namespace Mapsui.Fetcher
                     if (_tileSource.Schema == null) _waitHandle.Reset();
 
                     _waitHandle.WaitOne();
+                    Busy = true;
 
                     if (_isViewChanged && (_tileSource.Schema != null))
                     {
@@ -123,7 +138,11 @@ namespace Mapsui.Fetcher
 
                     FetchTiles();
 
-                    if (_missingTiles.Count == 0) { _waitHandle.Reset(); }
+                    if (_missingTiles.Count == 0)
+                    {
+                        Busy = false;
+                        _waitHandle.Reset();
+                    }
 
                     if (_threadCount >= _maxThreads) { _waitHandle.Reset(); }
                 }
@@ -212,5 +231,14 @@ namespace Mapsui.Fetcher
         }
 
         #endregion
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

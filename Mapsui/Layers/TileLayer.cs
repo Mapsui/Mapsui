@@ -102,6 +102,7 @@ namespace Mapsui.Layers
             _tileSource = source;
             _tileFetcher = new TileFetcher(source, _memoryCache, _maxRetries, _maxThreads, _fetchStrategy);
             _tileFetcher.DataChanged += TileFetcherDataChanged;
+            _tileFetcher.PropertyChanged += (sender, args) => Busy = _tileFetcher.Busy;
             OnPropertyChanged("Envelope");
         }
         
