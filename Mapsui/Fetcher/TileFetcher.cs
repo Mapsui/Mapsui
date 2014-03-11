@@ -37,13 +37,15 @@ namespace Mapsui.Fetcher
         private readonly IList<TileIndex> _tilesInProgress = new List<TileIndex>();
         private IList<TileInfo> _missingTiles = new List<TileInfo>();
         private readonly IDictionary<TileIndex, int> _retries = new Dictionary<TileIndex, int>();
-        private const int ThreadMax = 2;
+        private readonly int _maxThreads;
         private int _threadCount;
         private readonly AutoResetEvent _waitHandle = new AutoResetEvent(true);
-        private readonly IFetchStrategy _strategy = new FetchStrategy();
+        private readonly IFetchStrategy _strategy;
         private readonly int _maxRetries;
         private volatile bool _isThreadRunning;
         private volatile bool _isViewChanged;
+        public const int DefaultMaxThreads = 2;
+        public const int DefaultMaxRetries = 2;
         
         #endregion
 
@@ -55,7 +57,7 @@ namespace Mapsui.Fetcher
 
         #region Constructors Destructors
 
-        public TileFetcher(ITileSource tileSource, MemoryCache<Feature> memoryCache, int maxRetries = 2)
+        public TileFetcher(ITileSource tileSource, MemoryCache<Feature> memoryCache, int maxRetries = DefaultMaxRetries, int maxThreads = DefaultMaxThreads, IFetchStrategy strategy = null)
         {
             if (tileSource == null) throw new ArgumentException("TileProvider can not be null");
             _tileSource = tileSource;
@@ -64,6 +66,10 @@ namespace Mapsui.Fetcher
             _memoryCache = memoryCache;
 
             _maxRetries = maxRetries;
+
+            _maxThreads = maxThreads;
+
+            _strategy = strategy ?? new FetchStrategy();
         }
 
         #endregion
@@ -119,7 +125,7 @@ namespace Mapsui.Fetcher
 
                     if (_missingTiles.Count == 0) { _waitHandle.Reset(); }
 
-                    if (_threadCount >= ThreadMax) { _waitHandle.Reset(); }
+                    if (_threadCount >= _maxThreads) { _waitHandle.Reset(); }
                 }
             }
             finally
@@ -146,7 +152,7 @@ namespace Mapsui.Fetcher
         {
             foreach (TileInfo info in _missingTiles)
             {
-                if (_threadCount >= ThreadMax) return;
+                if (_threadCount >= _maxThreads) return;
                 FetchTile(info);
             }
         }

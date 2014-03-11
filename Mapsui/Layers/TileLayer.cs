@@ -41,12 +41,9 @@ namespace Mapsui.Layers
         private ITileSource _tileSource;
         private readonly string _urlToTileMapXml;
         private readonly bool _overrideTmsUrlWithUrlToTileMapXml;
-        private int _maxRetries;
-
-        public int MaxRetries
-        {
-            set { _maxRetries = value; }
-        } 
+        private readonly int _maxRetries;
+        private readonly int _maxThreads;
+        private readonly IFetchStrategy _fetchStrategy;
 
         readonly MemoryCache<Feature> _memoryCache;
 
@@ -71,13 +68,26 @@ namespace Mapsui.Layers
                 // else: hopelesly lost with an error on a background thread with no option to report back.
             }
         }
-        
-        public TileLayer(int minTiles = 200, int maxTiles = 300)
+
+        [Obsolete("use the named parameters of the constructor with tilesource if you want to omit the tilesource")]
+        public TileLayer(int minTiles = 200, int maxTiles = 300, int maxRetries = TileFetcher.DefaultMaxRetries,
+            int maxThreads = TileFetcher.DefaultMaxThreads, IFetchStrategy fetchStrategy = null)
         {
             _memoryCache = new MemoryCache<Feature>(minTiles, maxTiles);
             Style = new VectorStyle { Outline = { Color = Color.FromArgb(0, 0, 0, 0) } }; // initialize with transparent outline
-        }     
+            _maxRetries = maxRetries;
+            _maxThreads = maxThreads;
+            _fetchStrategy = fetchStrategy ?? new FetchStrategy();
+        }
 
+        public TileLayer(ITileSource source, int minTiles = 200, int maxTiles = 300, int maxRetries = TileFetcher.DefaultMaxRetries,
+            int maxThreads = TileFetcher.DefaultMaxThreads, IFetchStrategy fetchStrategy = null)
+            : this(minTiles, maxTiles, maxRetries, maxThreads, fetchStrategy)
+        {
+            SetTileSource(source);
+        }
+
+        [Obsolete("TileLayer should not have a dependency on TMS. This method will be removed")]
         public TileLayer(string urlToTileMapXml, bool overrideTmsUrlWithUrlToTileMapXml = false, Action<Exception> initializationFailed = null)
             : this()
         {
@@ -86,18 +96,11 @@ namespace Mapsui.Layers
             var webRequest = (HttpWebRequest)WebRequest.Create(urlToTileMapXml);
             webRequest.BeginGetResponse(LoadTmsLayer, new object[] { webRequest, initializationFailed });
         }
-        
-        public TileLayer(ITileSource source, int minTiles = 200, int maxTiles = 300)
-            : this(minTiles, maxTiles)
 
-        {
-            SetTileSource(source);
-        }
-
-        protected void SetTileSource(ITileSource source)
+        private void SetTileSource(ITileSource source)
         {
             _tileSource = source;
-            _tileFetcher = new TileFetcher(source, _memoryCache, _maxRetries);
+            _tileFetcher = new TileFetcher(source, _memoryCache, _maxRetries, _maxThreads, _fetchStrategy);
             _tileFetcher.DataChanged += TileFetcherDataChanged;
             OnPropertyChanged("Envelope");
         }
@@ -175,7 +178,7 @@ namespace Mapsui.Layers
             return sortedDictionary.ToDictionary(pair => pair.Key, pair => pair.Value).Values;
         }
 
-        public static void GetRecursive(IDictionary<TileIndex, IFeature> resultTiles, ITileSchema schema, 
+        public static void GetRecursive(IDictionary<TileIndex, IFeature> resultTiles, ITileSchema schema,
             MemoryCache<Feature> cache, Extent extent, string levelId)
         {
             var resolution = schema.Resolutions[levelId].UnitsPerPixel;
