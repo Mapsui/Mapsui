@@ -49,16 +49,11 @@ namespace Mapsui.Fetcher
         public const int DefaultMaxThreads = 2;
         public const int DefaultMaxRetries = 2;
         private bool _busy;
+        private int _numberTilesNeeded;
         
         #endregion
-
-        #region EventHandlers
-
+        
         public event DataChangedEventHandler DataChanged;
-
-        #endregion
-
-        #region Constructors Destructors
 
         public TileFetcher(ITileSource tileSource, MemoryCache<Feature> memoryCache, int maxRetries = DefaultMaxRetries, int maxThreads = DefaultMaxThreads, IFetchStrategy strategy = null)
         {
@@ -86,7 +81,10 @@ namespace Mapsui.Fetcher
             }
         }
 
-        #endregion
+        public int NumberTilesNeeded
+        {
+            get { return _numberTilesNeeded; }
+        }
 
         #region Public Methods
 
@@ -130,12 +128,13 @@ namespace Mapsui.Fetcher
                     {
                         var levelId = BruTile.Utilities.GetNearestLevel(_tileSource.Schema.Resolutions, _resolution);
                         _missingTiles = _strategy.GetTilesWanted(_tileSource.Schema, _extent.ToExtent(), levelId);
+                        _numberTilesNeeded = _missingTiles.Count;
                         _retries.Clear();
                         _isViewChanged = false;
                     }
 
                     _missingTiles = GetTilesMissing(_missingTiles, _memoryCache, _retries, _maxRetries);
-
+                    
                     FetchTiles();
 
                     if (_missingTiles.Count == 0)
@@ -162,7 +161,7 @@ namespace Mapsui.Fetcher
                 if ((memoryCache.Find(info.Index) == null) &&
                     (!retries.Keys.Contains(info.Index) || retries[info.Index] < maxRetries))
 
-                    tilesOut.Add(info);
+                tilesOut.Add(info);
             }
             return tilesOut;
         }

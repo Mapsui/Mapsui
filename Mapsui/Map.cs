@@ -36,7 +36,7 @@ namespace Mapsui
         public event DataChangedEventHandler DataChanged;
         public event FeedbackEventHandler Feedback;
         public event PropertyChangedEventHandler PropertyChanged;
-        private NotifyingViewport _viewport = new NotifyingViewport { CenterX = double.NaN, CenterY = double.NaN, Resolution = double.NaN };
+        private NotifyingViewport _viewport;
 
         /// <summary>
         /// Initializes a new map
@@ -45,6 +45,7 @@ namespace Mapsui
         {
             BackColor = Color.White;
             Layers = new LayerCollection();
+            Viewport =  new NotifyingViewport { CenterX = double.NaN, CenterY = double.NaN, Resolution = double.NaN };
         }
 
         void LayersLayerRemoved(ILayer layer)
@@ -65,19 +66,21 @@ namespace Mapsui
 
         void LayerPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "Envelope")
+            OnPropertyChanged(sender, e.PropertyName);
+        }
+
+        private void OnPropertyChanged(object sender, string name)
+        {
+            var handler = PropertyChanged;
+            if (handler != null)
             {
-                OnPropertyChanged(e.PropertyName);
+                handler(sender, new PropertyChangedEventArgs(name));
             }
         }
 
         protected void OnPropertyChanged(string name)
         {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null)
-            {
-                handler(this, new PropertyChangedEventArgs(name));
-            }
+            OnPropertyChanged(this, name);
         }
 
         private void LayerFeedback(object sender, FeedbackEventArgs e)
@@ -174,7 +177,7 @@ namespace Mapsui
 
         private void ViewportOnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            OnPropertyChanged(e.PropertyName);
+            OnPropertyChanged(sender, e.PropertyName);
         }
 
         /// <summary>

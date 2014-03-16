@@ -17,7 +17,7 @@ namespace Mapsui.Samples.Android
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Main);
             var mapView = FindViewById<MapView>(Resource.Id.mapview);
-            mapView.Map.Layers.Add(new TileLayer(new OsmTileSource()) { LayerName = "OSM"});
+            mapView.Map.Layers.Add(new TileLayer(new OsmTileSource()) { LayerName = "OSM" });
             var lineStringLayer = LineStringSample.CreateLineStringLayer();
             lineStringLayer.Style = CreateLineStringStyle();
 
@@ -33,7 +33,7 @@ namespace Mapsui.Samples.Android
             {
                 SymbolScale = 1,
                 Fill = new Brush(Color.Cyan),
-                Outline = {Color = Color.White, Width = 8},
+                Outline = { Color = Color.White, Width = 8 },
                 Line = null
             };
         }
@@ -41,11 +41,11 @@ namespace Mapsui.Samples.Android
         private static IStyle CreateLineStringStyle()
         {
             return new VectorStyle
-                {
-                    Fill = null,
-                    Outline = null,
-                    Line = {Color = Color.Red, Width = 4}
-                };
+            {
+                Fill = null,
+                Outline = null,
+                Line = { Color = Color.Red, Width = 4 }
+            };
         }
     }
 }

@@ -15,12 +15,14 @@
 // along with Mapsui; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
+using System.ComponentModel;
 using BruTile;
 using BruTile.Cache;
 using BruTile.Tms;
 using Mapsui.Fetcher;
 using Mapsui.Geometries;
 using Mapsui.Providers;
+using Mapsui.Rendering;
 using Mapsui.Styles;
 using System;
 using System.Collections.Generic;
@@ -44,6 +46,10 @@ namespace Mapsui.Layers
         private readonly int _maxRetries;
         private readonly int _maxThreads;
         private readonly IFetchStrategy _fetchStrategy;
+        private readonly IRenderGetStrategy _renderFetchStrategy;
+        private readonly int _minExtraTiles;
+        private readonly int _maxExtraTiles;
+        private int _numberTilesNeeded;
 
         readonly MemoryCache<Feature> _memoryCache;
 
@@ -68,21 +74,26 @@ namespace Mapsui.Layers
                 // else: hopelesly lost with an error on a background thread with no option to report back.
             }
         }
-
+        
         [Obsolete("use the named parameters of the constructor with tilesource if you want to omit the tilesource")]
         public TileLayer(int minTiles = 200, int maxTiles = 300, int maxRetries = TileFetcher.DefaultMaxRetries,
-            int maxThreads = TileFetcher.DefaultMaxThreads, IFetchStrategy fetchStrategy = null)
+            int maxThreads = TileFetcher.DefaultMaxThreads, IFetchStrategy fetchStrategy = null,
+            IRenderGetStrategy renderFetchStrategy = null, int minExtraTiles = -1, int maxExtraTiles = -1)
         {
             _memoryCache = new MemoryCache<Feature>(minTiles, maxTiles);
             Style = new VectorStyle { Outline = { Color = Color.FromArgb(0, 0, 0, 0) } }; // initialize with transparent outline
             _maxRetries = maxRetries;
             _maxThreads = maxThreads;
             _fetchStrategy = fetchStrategy ?? new FetchStrategy();
+            _renderFetchStrategy = renderFetchStrategy ?? new RenderGetStrategy();
+            _minExtraTiles = minExtraTiles;
+            _maxExtraTiles = maxExtraTiles;
         }
 
         public TileLayer(ITileSource source, int minTiles = 200, int maxTiles = 300, int maxRetries = TileFetcher.DefaultMaxRetries,
-            int maxThreads = TileFetcher.DefaultMaxThreads, IFetchStrategy fetchStrategy = null)
-            : this(minTiles, maxTiles, maxRetries, maxThreads, fetchStrategy)
+            int maxThreads = TileFetcher.DefaultMaxThreads, IFetchStrategy fetchStrategy = null, 
+            IRenderGetStrategy renderFetchStrategy = null, int minExtraTiles = -1, int maxExtraTiles = -1)
+            : this(minTiles, maxTiles, maxRetries, maxThreads, fetchStrategy, renderFetchStrategy, minExtraTiles, maxExtraTiles)
         {
             SetTileSource(source);
         }
@@ -96,30 +107,68 @@ namespace Mapsui.Layers
             var webRequest = (HttpWebRequest)WebRequest.Create(urlToTileMapXml);
             webRequest.BeginGetResponse(LoadTmsLayer, new object[] { webRequest, initializationFailed });
         }
-
-        private void SetTileSource(ITileSource source)
+        
+        protected void SetTileSource(ITileSource source)
         {
+            if (_tileSource != null)
+            {
+                _tileFetcher.AbortFetch();
+                _tileFetcher.DataChanged -= TileFetcherDataChanged;
+                _tileFetcher.PropertyChanged -= TileFetcherOnPropertyChanged;
+                _tileFetcher = null;
+                _memoryCache.Clear();
+            }
             _tileSource = source;
+
+            if (source == null) return;
             _tileFetcher = new TileFetcher(source, _memoryCache, _maxRetries, _maxThreads, _fetchStrategy);
             _tileFetcher.DataChanged += TileFetcherDataChanged;
-            _tileFetcher.PropertyChanged += (sender, args) => Busy = _tileFetcher.Busy;
+            _tileFetcher.PropertyChanged += TileFetcherOnPropertyChanged;
             OnPropertyChanged("Envelope");
+        }
+
+        private void TileFetcherOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
+        {
+            if (propertyChangedEventArgs.PropertyName == "Busy")
+            {
+                if (_tileFetcher != null) Busy = _tileFetcher.Busy;
+            }
+        }
+
+        public ITileSource TileSource
+        {
+            get { return _tileSource; }
+            set
+            {
+                SetTileSource(value);
+                OnPropertyChanged("TileSource");
+            }
         }
         
         public override BoundingBox Envelope
         {
             get
             {
-                if (Schema == null) return null;
-                return Schema.Extent.ToBoundingBox();
+                return Schema == null ? null : Schema.Extent.ToBoundingBox();
             }
         }
 
         public override void ViewChanged(bool changeEnd, BoundingBox extent, double resolution)
         {
-            if (Enabled && extent.GetArea() > 0 && _tileFetcher != null)
+            if (Enabled && extent.GetArea() > 0 && _tileFetcher != null && MaxVisible > resolution && MinVisible < resolution)
             {
                 _tileFetcher.ViewChanged(extent, resolution);
+            }
+        }
+
+        private void UpdateMemoryCacheMinAndMax()
+        {
+            if (_minExtraTiles >= 0 && _maxExtraTiles >= 0 &&
+                _numberTilesNeeded != _tileFetcher.NumberTilesNeeded)
+            {
+                _memoryCache.MinTiles = _numberTilesNeeded + _minExtraTiles;
+                _memoryCache.MaxTiles = _numberTilesNeeded + _maxExtraTiles;
+                _numberTilesNeeded = _tileFetcher.NumberTilesNeeded;
             }
         }
 
@@ -152,6 +201,7 @@ namespace Mapsui.Layers
             // this class. I would be nice though if there was some flexibility into
             // the specific search strategy. Perhaps it is possible to pass a search 
             // to some GetTiles method.
+            // Update. Schema is not used in the Renderer anymore and TileSource is now a public property
             get { return _tileSource != null ? _tileSource.Schema : null; }
         }
 
@@ -169,49 +219,9 @@ namespace Mapsui.Layers
         
         public override IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
         {
-            var dictionary = new Dictionary<TileIndex, IFeature>();
-
-            if (Schema == null) return dictionary.Values;
-
-            var levelId = BruTile.Utilities.GetNearestLevel(Schema.Resolutions, resolution);
-            GetRecursive(dictionary, Schema, _memoryCache, box.ToExtent(), levelId);
-            var sortedDictionary = dictionary.OrderByDescending(t => Schema.Resolutions[t.Key.Level].UnitsPerPixel);
-            return sortedDictionary.ToDictionary(pair => pair.Key, pair => pair.Value).Values;
-        }
-
-        public static void GetRecursive(IDictionary<TileIndex, IFeature> resultTiles, ITileSchema schema,
-            MemoryCache<Feature> cache, Extent extent, string levelId)
-        {
-            var resolution = schema.Resolutions[levelId].UnitsPerPixel;
-            var tiles = schema.GetTilesInView(extent, resolution);
-
-            foreach (var tileInfo in tiles)
-            {
-                var feature = cache.Find(tileInfo.Index);
-                var nextLevelId = schema.Resolutions.Where(r => r.Value.UnitsPerPixel > resolution)
-                       .OrderBy(r => r.Value.UnitsPerPixel).FirstOrDefault().Key;
-                   
-                if (feature == null)
-                {
-                    if (nextLevelId != null) GetRecursive(resultTiles, schema, cache, tileInfo.Extent.Intersect(extent), nextLevelId);
-                }
-                else
-                {
-                    resultTiles[tileInfo.Index] = feature;
-                    if (!IsFullyShown(feature))
-                    {
-                        if (nextLevelId != null) GetRecursive(resultTiles, schema, cache, tileInfo.Extent.Intersect(extent), nextLevelId);
-                    }
-                }
-            }
-        }
-
-        public static bool IsFullyShown(Feature feature)
-        {
-            var currentTile = DateTime.Now.Ticks;
-            var tile = ((IRaster)feature.Geometry);
-            const long second = 10000000;
-            return ((currentTile - tile.TickFetched) > second);
+            if (Schema == null) return Enumerable.Empty<IFeature>();
+            UpdateMemoryCacheMinAndMax();
+            return _renderFetchStrategy.GetFeatures(box, resolution, Schema, _memoryCache);
         }
     }
 }

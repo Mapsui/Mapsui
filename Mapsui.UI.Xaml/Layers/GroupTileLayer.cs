@@ -5,6 +5,7 @@ using Mapsui.Fetcher;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
+using Mapsui.Rendering;
 using Mapsui.Styles;
 using System.Collections.Generic;
 using System.IO;
@@ -203,7 +204,7 @@ namespace Mapsui.UI.Xaml.Layers
             if (Schema == null) return dictionary.Values;
 
             var levelId = BruTile.Utilities.GetNearestLevel(Schema.Resolutions, resolution);
-            TileLayer.GetRecursive(dictionary, Schema, _memoryCache, box.ToExtent(), levelId);
+            RenderGetStrategy.GetRecursive(dictionary, Schema, _memoryCache, box.ToExtent(), levelId);
             
             var sortedDictionary = (from entry in dictionary orderby entry.Key ascending select entry).ToDictionary(pair => pair.Key, pair => pair.Value);
             return sortedDictionary.Values;

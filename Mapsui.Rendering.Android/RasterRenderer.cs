@@ -1,4 +1,7 @@
+using System.Diagnostics;
 using Android.Graphics;
+using Android.OS;
+using Java.IO;
 using Java.Lang;
 using Mapsui.Geometries;
 using Mapsui.Providers;
@@ -6,6 +9,7 @@ using Mapsui.Styles;
 using AndroidBitmap = Android.Graphics.Bitmap;
 using AndroidColor = Android.Graphics.Color;
 using AndroidGraphics = Android.Graphics;
+using Exception = System.Exception;
 
 namespace Mapsui.Rendering.Android
 {
@@ -13,20 +17,28 @@ namespace Mapsui.Rendering.Android
     {
         public static void Draw(Canvas canvas, IViewport viewport, IStyle style, IFeature feature)
         {
-            if (!feature.RenderedGeometry.ContainsKey(style)) feature.RenderedGeometry[style] = ToAndroidBitmap(feature.Geometry);
-            var bitmap = (AndroidGraphics.Bitmap)feature.RenderedGeometry[style];
+            try
+            {
+                if (!feature.RenderedGeometry.ContainsKey(style)) feature.RenderedGeometry[style] = ToAndroidBitmap(feature.Geometry);
+                var bitmap = (AndroidGraphics.Bitmap)feature.RenderedGeometry[style];
+                
+                var dest = WorldToScreen(viewport, feature.Geometry.GetBoundingBox());
+                dest = new BoundingBox(
+                    dest.MinX,
+                    dest.MinY,
+                    dest.MaxX,
+                    dest.MaxY);
 
-            var dest = WorldToScreen(viewport, feature.Geometry.GetBoundingBox());
-            dest = new BoundingBox(
-                dest.MinX,
-                dest.MinY,
-                dest.MaxX,
-                dest.MaxY);
+                var destination = RoundToPixel(dest);
+                canvas.DrawBitmap(bitmap, null, destination, null);
 
-            var destination = RoundToPixel(dest);
-            canvas.DrawBitmap(bitmap, null, destination, null);
+                DrawOutline(canvas, style, destination);
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine(ex.Message);
+            }
 
-            DrawOutline(canvas, style, destination);
         }
 
         private static void DrawOutline(Canvas canvas, IStyle style, RectF destination)
