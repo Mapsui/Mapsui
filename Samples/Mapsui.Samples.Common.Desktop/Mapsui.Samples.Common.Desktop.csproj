@@ -33,21 +33,21 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BruTile, Version=0.9.4.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="BruTile, Version=0.9.5.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\BruTile.0.9.4\lib\net40\BruTile.dll</HintPath>
+      <HintPath>..\..\packages\BruTile.0.9.5\lib\net40\BruTile.dll</HintPath>
     </Reference>
-    <Reference Include="BruTile.Desktop, Version=0.9.4.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="BruTile.Desktop, Version=0.9.5.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\BruTile.Desktop.0.9.4\lib\net40\BruTile.Desktop.dll</HintPath>
+      <HintPath>..\..\packages\BruTile.Desktop.0.9.5\lib\net40\BruTile.Desktop.dll</HintPath>
     </Reference>
     <Reference Include="BruTile.MbTiles, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\BruTile.Desktop.0.9.4\lib\net40\BruTile.MbTiles.dll</HintPath>
+      <HintPath>..\..\packages\BruTile.Desktop.0.9.5\lib\net40\BruTile.MbTiles.dll</HintPath>
     </Reference>
-    <Reference Include="BruTile.Serialization, Version=0.9.4.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="BruTile.Serialization, Version=0.9.5.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\BruTile.Desktop.0.9.4\lib\net40\BruTile.Serialization.dll</HintPath>
+      <HintPath>..\..\packages\BruTile.Desktop.0.9.5\lib\net40\BruTile.Serialization.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
