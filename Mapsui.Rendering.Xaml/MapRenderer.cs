@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Globalization;
+using System.IO;
 using System.Threading;
 using Mapsui.Providers;
 using Mapsui.Geometries;
@@ -60,6 +61,7 @@ namespace Mapsui.Rendering.Xaml
 #if !SILVERLIGHT &&  !NETFX_CORE
             target.BeginInit();
 #endif
+            //var layers = inLayers.ToList();
             target.Visibility = Visibility.Collapsed;
             foreach (var child in target.Children)
             {
@@ -81,11 +83,42 @@ namespace Mapsui.Rendering.Xaml
             }
             target.Arrange(new Rect(0, 0, viewport.Width, viewport.Height));
             target.Visibility = Visibility.Visible;
+
+            //DrawDebugInfo(target, layers);
+
 #if !SILVERLIGHT &&  !NETFX_CORE
             target.EndInit();
 #endif
         }
 
+#if !SILVERLIGHT &&  !NETFX_CORE && !WINDOWS_PHONE
+        private static void DrawDebugInfo(Canvas canvas, IEnumerable<ILayer> layers)
+        {
+            var lineCounter = 1;
+            const float tabWidth = 40f;
+            const float lineHeight = 40f;
+
+            foreach (var layer in layers)
+            {
+                var textBox = AddTextBox(layer.ToString(), tabWidth, lineHeight*(lineCounter++));
+                canvas.Children.Add(textBox);
+
+                if (layer is ITileLayer)
+                {
+                    var text = "Tiles in memory: " + (layer as ITileLayer).MemoryCache.TileCount.ToString(CultureInfo.InvariantCulture);
+                    canvas.Children.Add(AddTextBox(text, tabWidth, lineHeight*(lineCounter++)));
+                }
+            }
+        }
+
+        private static TextBox AddTextBox(string text, float x, float y)
+        {
+            var textBox = new TextBox {Text = text};
+            Canvas.SetLeft(textBox, x);
+            Canvas.SetTop(textBox, y);
+            return textBox;
+        }
+#endif
         public MemoryStream RenderToBitmapStream(IViewport viewport, IEnumerable<ILayer> layers)
         {
 #if WINDOWS_PHONE || NETFX_CORE

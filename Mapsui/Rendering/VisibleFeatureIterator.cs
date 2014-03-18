@@ -23,8 +23,8 @@ namespace Mapsui.Rendering
             Action<IViewport, IStyle, IFeature> callback)
         {
             if (layer.Enabled == false) return;
-            if (layer.MinVisible > viewport.Resolution) return;
-            if (layer.MaxVisible < viewport.Resolution) return;
+            if (layer.MinVisible > viewport.RenderResolution) return;
+            if (layer.MaxVisible < viewport.RenderResolution) return;
 
             if (layer is LabelLayer)
             {
@@ -50,7 +50,7 @@ namespace Mapsui.Rendering
                 foreach (var feature in features)
                 {
                     if (layerStyle is IThemeStyle) style = (layerStyle as IThemeStyle).GetStyle(feature);
-                    if ((style == null) || (style.Enabled == false) || (style.MinVisible > viewport.Resolution) || (style.MaxVisible < viewport.Resolution)) continue;
+                    if ((style == null) || (style.Enabled == false) || (style.MinVisible > viewport.RenderResolution) || (style.MaxVisible < viewport.RenderResolution)) continue;
 
                     callback(viewport, style, feature);
                 }

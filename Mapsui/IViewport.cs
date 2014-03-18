@@ -25,12 +25,16 @@ namespace Mapsui
         Point ScreenToWorld(Point point);
         Point WorldToScreen(double x, double y);
         Point ScreenToWorld(double x, double y);
+        void Transform(double screenX, double screenY, double previousScreenX, double previousScreenY, 
+            double deltaScale = 1);
         double CenterX { get; }
         double CenterY { get; }
-        double Resolution { get; }
+        Point Center { set; }
+        double Resolution { get; set; }
         double RenderResolution { get; }
+        double RenderResolutionMultiplier { set; }
         BoundingBox Extent { get; }
-        double Width { get; }
-        double Height { get; }
+        double Width { get; set; }
+        double Height { get; set; }
     }
 }

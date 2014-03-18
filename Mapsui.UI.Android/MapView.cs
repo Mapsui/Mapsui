@@ -93,7 +93,7 @@ namespace Mapsui.UI.Android
                     _previousMap = null;
                     Invalidate();
                     _mode = None;
-                    _map.ViewChanged(false, _map.Viewport.Extent, _map.Viewport.Resolution);
+                    _map.ViewChanged(true, _map.Viewport.Extent, _map.Viewport.RenderResolution);
                     break;
                 case MotionEventActions.Pointer2Down:
                     _previousMap = null;

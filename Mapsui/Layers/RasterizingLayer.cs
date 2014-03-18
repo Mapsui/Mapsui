@@ -42,7 +42,7 @@ namespace Mapsui.Layers
 
         private void StartTimerToTriggerRasterize()
         {
-// Postpone the request by disposing the old and creating a new Timer.
+            // Postpone the request by disposing the old and creating a new Timer.
             TimerToStartRasterizing.Dispose();
             TimerToStartRasterizing = new Timer(TimerToStartRasterizingElapsed, null, _delayBeforeRaterize, int.MaxValue);
         }

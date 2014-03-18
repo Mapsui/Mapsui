@@ -20,7 +20,7 @@ using Mapsui.Geometries;
 
 namespace Mapsui.Utilities
 {
-    internal static class Algorithms
+    public static class Algorithms
     {
         /// <summary>
         /// Gets the euclidean distance between two points.
