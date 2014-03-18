@@ -28,8 +28,9 @@ namespace Mapsui.Rendering
             foreach (var tileInfo in tiles)
             {
                 var feature = cache.Find(tileInfo.Index);
-                var nextLevelId = schema.Resolutions.Where(r => r.Value.UnitsPerPixel > resolution)
-                       .OrderBy(r => r.Value.UnitsPerPixel).FirstOrDefault().Key;
+                var levels = schema.Resolutions.Where(r => r.Value.UnitsPerPixel > resolution)
+                    .OrderBy(r => r.Value.UnitsPerPixel);
+                var nextLevelId = levels.FirstOrDefault().Key;
 
                 if (feature == null)
                 {
@@ -38,20 +39,8 @@ namespace Mapsui.Rendering
                 else
                 {
                     resultTiles[tileInfo.Index] = feature;
-                    if (!IsFullyShown(feature))
-                    {
-                        if (nextLevelId != null) GetRecursive(resultTiles, schema, cache, tileInfo.Extent.Intersect(extent), nextLevelId);
-                    }
                 }
             }
-        }
-
-        public static bool IsFullyShown(Feature feature)
-        {
-            var currentTile = DateTime.Now.Ticks;
-            var tile = ((IRaster)feature.Geometry);
-            const long second = 10000000;
-            return ((currentTile - tile.TickFetched) > second);
         }
     }
 }
