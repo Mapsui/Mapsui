@@ -3,6 +3,7 @@ using MonoTouch.UIKit;
 using System.Collections.Generic;
 using System.Drawing;
 using Point = Mapsui.Geometries.Point;
+using System.Linq;
 
 namespace Mapsui.Rendering.iOS
 {
@@ -12,18 +13,37 @@ namespace Mapsui.Rendering.iOS
 
 		public static PointF ToUIKit(this Point point)
 		{
-		    double xo = OffSet.X;
-		    double yo = OffSet.Y;
-		    return new PointF((float)(point.X - (xo)), (float)(point.Y - yo));
+			double xo = OffSet.X;
+			double yo = OffSet.Y;
+			return new PointF((float)(point.X - (xo)), (float)(point.Y - yo));
 		}
-		
+
+		public static UIBezierPath ToUIKit(this IEnumerable<Mapsui.Geometries.Point> points, IViewport viewport)
+		{
+			var pathGeometry = new UIBezierPath ();
+			if (points.Count () > 0) {
+
+				var first = points.FirstOrDefault ();
+				var start = viewport.WorldToScreen (first);
+
+				pathGeometry.MoveTo (ToUIKit (start));
+
+				for (int i = 1; i < points.Count (); i++) {
+					var point = points.ElementAt (i);
+					var p = viewport.WorldToScreen (point);
+					pathGeometry.AddLineTo (new PointF ((float)p.X, (float)p.Y));
+				}
+			}
+			return pathGeometry;
+		}
+
 		public static UIBezierPath ToUIKit(this LineString lineString, IViewport viewport)
 		{
 			var pathGeometry = new UIBezierPath();
 			pathGeometry.AppendPath(CreatePathFigure(lineString, viewport));
 			return pathGeometry;
 		}
-		
+
 		public static UIBezierPath ToUIKit(this MultiLineString multiLineString, IViewport viewport)
 		{
 			var group = new UIBezierPath();
@@ -31,14 +51,14 @@ namespace Mapsui.Rendering.iOS
 				group.AppendPath(ToUIKit(lineString, viewport));
 			return group;
 		}
-		
+
 		public static UIBezierPath ToUIKit(this LinearRing linearRing, IViewport viewport)
 		{
 			var pathGeometry = new UIBezierPath();
 			pathGeometry.AppendPath(CreatePathFigure(linearRing, viewport));
 			return pathGeometry;
 		}
-		
+
 		public static UIBezierPath ToUIKit(this IEnumerable<LinearRing> linearRings, IViewport viewport)
 		{
 			var pathGeometry = new UIBezierPath();
@@ -46,7 +66,7 @@ namespace Mapsui.Rendering.iOS
 				pathGeometry.AppendPath(CreatePathFigure(linearRing, viewport));
 			return pathGeometry;
 		}
-		
+
 		public static UIBezierPath ToUIKit(this Polygon polygon,IViewport viewport)
 		{
 			var group = new UIBezierPath();
@@ -55,7 +75,7 @@ namespace Mapsui.Rendering.iOS
 			group.AppendPath(ToUIKit(polygon.InteriorRings, viewport));
 			return group;
 		}
-		
+
 		public static UIBezierPath ToUIKit(this MultiPolygon geometry, IViewport viewport)
 		{
 			var group = new UIBezierPath();
@@ -64,7 +84,7 @@ namespace Mapsui.Rendering.iOS
 
 			return group;
 		}
-		
+
 		private static UIBezierPath CreatePathFigure(LineString linearRing, IViewport viewport)
 		{
 			var pathFigure = new UIBezierPath();
@@ -80,7 +100,7 @@ namespace Mapsui.Rendering.iOS
 				pathFigure.AddLineTo(ToUIKit(screenPos));
 			}
 			pathFigure.ClosePath();
-			
+
 			return pathFigure;
 		}
 	}

@@ -15,22 +15,27 @@ namespace Mapsui.Rendering.iOS
 	public class MapRenderer : IRenderer
 	{
 		private readonly UIView _target;
-		private readonly RenderingLayer _renderingLayer;
+		//private readonly RenderingLayer _renderingLayer;
+		private CALayer _renderingLayer;
 
 		public MapRenderer()
 		{
 			_target = new UIView();
-			_renderingLayer = new RenderingLayer ();
+			_renderingLayer = new CALayer ();
 
-			_target.Layer.AddSublayer (_renderingLayer);
-		}a
+			//_renderingLayer = new RenderingLayer ();
+			//_target.Layer.AddSublayer (_renderingLayer);
+			//_target.Layer.AddSublayer (_renderingLayer);
+		}
 
 		public MapRenderer(UIView target)
 		{
 			_target = target;
-			_renderingLayer = new RenderingLayer ();
+			_renderingLayer = new CALayer ();
+			//_target.Layer.AddSublayer (_renderingLayer);
+			//_renderingLayer = new RenderingLayer ();
 
-			target.Layer.AddSublayer (_renderingLayer);
+			//target.Layer.AddSublayer (_renderingLayer);
 		}
 
 		//private readonly object _syncRoot = new object();
@@ -49,8 +54,8 @@ namespace Mapsui.Rendering.iOS
 			//_renderingLayer.PrepareLayer ();
 			foreach (var layer in layers) {
 				if (layer.Enabled &&
-				    layer.MinVisible <= viewport.Resolution &&
-				    layer.MaxVisible >= viewport.Resolution) {
+					layer.MinVisible <= viewport.Resolution &&
+					layer.MaxVisible >= viewport.Resolution) {
 
 					RenderLayer (_target, viewport, layer);
 				}
@@ -61,12 +66,12 @@ namespace Mapsui.Rendering.iOS
 			CATransaction.Commit ();
 		}
 
-	    public MemoryStream RenderToBitmapStream(IViewport viewport, IEnumerable<ILayer> layers)
-	    {
-	        return null;//!!!!
-	    }
+		public MemoryStream RenderToBitmapStream(IViewport viewport, IEnumerable<ILayer> layers)
+		{
+			return null;//!!!!
+		}
 
-	    private void RenderLayer(UIView target, IViewport viewport, ILayer layer)
+		private void RenderLayer(UIView target, IViewport viewport, ILayer layer)
 		{
 			if (layer.Enabled == false) return;
 
@@ -103,8 +108,7 @@ namespace Mapsui.Rendering.iOS
 			{
 				//var canvas = new CALayer();
 				var features = layer.GetFeaturesInView(viewport.Extent, viewport.Resolution).ToList();
-
-				System.Diagnostics.Debug.WriteLine("Layer name: " + layer.LayerName + " feature count: " + features.Count);
+				//System.Diagnostics.Debug.WriteLine("Layer name: " + layer.LayerName + " feature count: " + features.Count);
 
 				if(layer.Style != null)
 				{
@@ -135,7 +139,9 @@ namespace Mapsui.Rendering.iOS
 			}
 			catch (Exception e)
 			{
-				Console.WriteLine(layer.LayerName + " " + e.Message);
+				Console.WriteLine("RenderVectorLayer Exception: " + layer.LayerName + " " + e.Message);
+				Console.WriteLine("RenderVectorLayer Stacktrace: " + layer.LayerName + " " + e.StackTrace);
+
 				return null;   
 			}                    
 		}
@@ -151,24 +157,20 @@ namespace Mapsui.Rendering.iOS
 				var styleKey = layerName;//feature.GetHashCode ().ToString ();
 				var renderedGeometry = (feature[styleKey] != null) ? (CALayer)feature[styleKey] : null;
 
-				if (layerName.Equals ("GraafMeldingLayer"))
-					System.Diagnostics.Debug.WriteLine ("GraafMeldingLayer");
-
 				if (renderedGeometry == null) {
 					renderedGeometry = RenderGeometry (viewport, style, feature);
-					System.Diagnostics.Debug.WriteLine ("RenderGeometry done");
 					if (feature.Geometry is IRaster)
-					//if (feature.Geometry is Mapsui.Geometries.Point || feature.Geometry is IRaster) // positioning only supported for point and raster
+						//if (feature.Geometry is Mapsui.Geometries.Point || feature.Geometry is IRaster) // positioning only supported for point and raster
 					{						//||feature.Geometry is Mapsui.Geometries.MultiPolygon)
 						feature [styleKey] = renderedGeometry;
 					}
 				} else {
-					System.Diagnostics.Debug.WriteLine ("position geom");
 					PositionGeometry(renderedGeometry, viewport, style, feature);
 				}
-				if(renderedGeometry == null)
-					System.Diagnostics.Debug.WriteLine ("renderedGeometry = null");
-				canvas.AddSublayer (renderedGeometry);
+
+				if (renderedGeometry != null) {
+					canvas.AddSublayer (renderedGeometry);
+				}
 			}
 		}
 
@@ -178,19 +180,19 @@ namespace Mapsui.Rendering.iOS
 				return GeometryRenderer.RenderPoint (feature.Geometry as Point, style, viewport);
 				//return null;
 			}
-		    if (feature.Geometry is Polygon){
-		        return GeometryRenderer.RenderPolygonOnLayer (feature.Geometry as Polygon, style, viewport);
-		    }
-		    if (feature.Geometry is MultiPolygon){
-		        //var contextRenderer = new ContextRenderer ();
-		        //contextRenderer.RenderGeometry (feature.Geometry as Mapsui.Geometries.MultiPolygon, style, feature, viewport);
-		        return GeometryRenderer.RenderMultiPolygonOnLayer (feature.Geometry as MultiPolygon, style, viewport);
-		    }
-		    if (feature.Geometry is IRaster){
-				System.Diagnostics.Debug.WriteLine ("RenderGeometry as Raster");
-		        return GeometryRenderer.RenderRasterOnLayer (feature.Geometry as IRaster, style, viewport);
-		    }
-		    return null;
+			if (feature.Geometry is LineString) {
+				return LineStringRenderer.Draw (viewport, style, feature);
+			}
+			if (feature.Geometry is Polygon){
+				return GeometryRenderer.RenderPolygonOnLayer (feature.Geometry as Polygon, style, viewport);
+			}
+			if (feature.Geometry is MultiPolygon){
+				return GeometryRenderer.RenderMultiPolygonOnLayer (feature.Geometry as MultiPolygon, style, viewport);
+			}
+			if (feature.Geometry is IRaster){
+				return GeometryRenderer.RenderRasterOnLayer (feature.Geometry as IRaster, style, viewport);
+			}
+			return null;
 		}
 
 		private static void PositionGeometry(CALayer renderedGeometry, IViewport viewport, IStyle style, IFeature feature)
@@ -198,14 +200,18 @@ namespace Mapsui.Rendering.iOS
 			if (feature.Geometry is Point){
 				GeometryRenderer.PositionPoint(renderedGeometry, feature.Geometry as Point, style, viewport);
 			}
-			if (feature.Geometry is MultiPoint)
+			if (feature.Geometry is MultiPoint) {
 				return;
-			if (feature.Geometry is LineString)
+			}
+			if (feature.Geometry is LineString) {
 				return;
-			if (feature.Geometry is MultiLineString)
+			}
+			if (feature.Geometry is MultiLineString) {
 				return;
-			if (feature.Geometry is Polygon)
+			}
+			if (feature.Geometry is Polygon) {
 				return;
+			}
 			if (feature.Geometry is MultiPolygon){
 				GeometryRenderer.PositionMultiPolygon (renderedGeometry, feature.Geometry as MultiPolygon, style, viewport);
 			}
