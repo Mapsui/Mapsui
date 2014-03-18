@@ -1,11 +1,9 @@
-using System.Diagnostics;
 using Android.Graphics;
-using Android.OS;
-using Java.IO;
 using Java.Lang;
 using Mapsui.Geometries;
 using Mapsui.Providers;
 using Mapsui.Styles;
+using System.Diagnostics;
 using AndroidBitmap = Android.Graphics.Bitmap;
 using AndroidColor = Android.Graphics.Color;
 using AndroidGraphics = Android.Graphics;
