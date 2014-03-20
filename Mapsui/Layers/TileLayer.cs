@@ -166,9 +166,9 @@ namespace Mapsui.Layers
             if (_minExtraTiles >= 0 && _maxExtraTiles >= 0 &&
                 _numberTilesNeeded != _tileFetcher.NumberTilesNeeded)
             {
+                _numberTilesNeeded = _tileFetcher.NumberTilesNeeded;
                 _memoryCache.MinTiles = _numberTilesNeeded + _minExtraTiles;
                 _memoryCache.MaxTiles = _numberTilesNeeded + _maxExtraTiles;
-                _numberTilesNeeded = _tileFetcher.NumberTilesNeeded;
             }
         }
 
