@@ -54,6 +54,10 @@
     <BundleAssemblies>False</BundleAssemblies>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BruTile, Version=0.9.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\BruTile.0.9.6\lib\portable-net403+sl5+wp8+win8+MonoAndroid+MonoTouch\BruTile.dll</HintPath>
+    </Reference>
     <Reference Include="Mono.Android" />
     <Reference Include="mscorlib" />
     <Reference Include="System" />
@@ -67,6 +71,7 @@
     <Compile Include="Resources\Resource.Designer.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
   </ItemGroup>

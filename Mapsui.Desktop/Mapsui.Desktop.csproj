@@ -33,6 +33,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BruTile, Version=0.9.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\BruTile.0.9.6\lib\net40\BruTile.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
@@ -79,6 +83,7 @@
     <Compile Include="Wms\XmlGetFeatureInfoParser.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
     <None Include="Wms\Schemas\1.3.0\capabilities_1_3_0.xsd">
       <SubType>Designer</SubType>
     </None>

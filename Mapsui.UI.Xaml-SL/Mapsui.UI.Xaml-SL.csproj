@@ -51,6 +51,10 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BruTile, Version=0.9.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\BruTile.0.9.6\lib\portable-net403+sl5+wp8+win8+MonoAndroid+MonoTouch\BruTile.dll</HintPath>
+    </Reference>
     <Reference Include="mscorlib" />
     <Reference Include="System.Windows" />
     <Reference Include="system" />
@@ -88,6 +92,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Utilities\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
   <ProjectExtensions>
