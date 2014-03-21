@@ -48,25 +48,18 @@ namespace Mapsui.Providers
 
         protected virtual void Dispose(bool disposing)
         {
-            if (!_disposed)
+            if (_disposed) return;
+
+            if (disposing)
             {
-                if (disposing)
+                foreach (var kayValuePair in RenderedGeometry)
                 {
-                    foreach (var renderedGeometry in RenderedGeometry)
-                    {
-                        if (renderedGeometry.Value is IDisposable)
-                        {
-                            (renderedGeometry.Value as IDisposable).Dispose();
-                        }
-                    }
-                    RenderedGeometry.Clear();
+                    var disposable = kayValuePair.Value as IDisposable;
+                    if (disposable != null) disposable.Dispose();
                 }
+                RenderedGeometry.Clear();
             }
             _disposed = true;
-
         }
-
-
     }
-
 }
