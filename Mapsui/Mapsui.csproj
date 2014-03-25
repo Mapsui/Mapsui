@@ -67,6 +67,7 @@
     <Compile Include="Geometries\MultiPoint.cs" />
     <Compile Include="Geometries\MultiPolygon.cs" />
     <Compile Include="Geometries\MultiSurface.cs" />
+    <Compile Include="Geometries\NotifyingPoint.cs" />
     <Compile Include="Geometries\Point.cs" />
     <Compile Include="Geometries\Point3D.cs" />
     <Compile Include="Geometries\Polygon.cs" />

@@ -38,7 +38,7 @@ namespace Mapsui.UI.Xaml
     {
         #region Fields
         private Map _map;
-        private readonly Viewport _viewport = new Viewport { CenterX = double.NaN, CenterY = double.NaN, Resolution = double.NaN };
+        private readonly Viewport _viewport = new Viewport { Center = { X = double.NaN, Y = double.NaN }, Resolution = double.NaN };
         private Point _previousMousePosition;
         private Point _currentMousePosition;
         private Point _downMousePosition;
@@ -352,8 +352,8 @@ namespace Mapsui.UI.Xaml
             e.Handled = true; //so that the scroll event is not sent to the html page.
 
             // Some cheating for personal gain. This workaround could be ommitted if the zoom animations was on CenterX, CenterY and Resolution, not Resolution alone.
-            _viewport.CenterX += 0.000000001;
-            _viewport.CenterY += 0.000000001;
+            _viewport.Center.X += 0.000000001;
+            _viewport.Center.Y += 0.000000001;
             
             StartZoomAnimation(_viewport.Resolution, _toResolution);
         }
@@ -589,13 +589,13 @@ namespace Mapsui.UI.Xaml
 
             if (double.IsNaN(_viewport.Resolution))
                 _viewport.Resolution = _map.Envelope.Width / ActualWidth;
-            if (double.IsNaN(_viewport.CenterX) || double.IsNaN(_viewport.CenterY))
+            if (double.IsNaN(_viewport.Center.X) || double.IsNaN(_viewport.Center.Y))
                 _viewport.Center = _map.Envelope.GetCentroid();
 
             _viewport.Width = ActualWidth;
             _viewport.Height = ActualHeight;
 
-            _viewport.RenderResolutionMultiplier = 1.5; 
+            _viewport.RenderResolutionMultiplier = 1.0; 
 
             _viewportInitialized = true;
         }
@@ -776,10 +776,10 @@ namespace Mapsui.UI.Xaml
         {
             var diffX = previous.X - current.X;
             var diffY = previous.Y - current.Y;
-            var newX = _viewport.CenterX + diffX;
-            var newY = _viewport.CenterY + diffY;
-            var zoomCorrectionX = (1 - deltaScale) * (current.X - _viewport.CenterX);
-            var zoomCorrectionY = (1 - deltaScale) * (current.Y - _viewport.CenterY);
+            var newX = _viewport.Center.X + diffX;
+            var newY = _viewport.Center.Y + diffY;
+            var zoomCorrectionX = (1 - deltaScale) * (current.X - _viewport.Center.X);
+            var zoomCorrectionY = (1 - deltaScale) * (current.Y - _viewport.Center.Y);
             _viewport.Resolution = _viewport.Resolution / deltaScale;
 
             _viewport.Center = new Geometries.Point(newX - zoomCorrectionX, newY - zoomCorrectionY);

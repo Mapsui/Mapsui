@@ -113,7 +113,7 @@ namespace Mapsui.Rendering.Xaml
             var mapCenterX = viewport.Width * 0.5;
             var mapCenterY = viewport.Height * 0.5;
 
-            MatrixHelper.Translate(ref matrix, mapCenterX - viewport.CenterX, mapCenterY - viewport.CenterY);
+            MatrixHelper.Translate(ref matrix, mapCenterX - viewport.Center.X, mapCenterY - viewport.Center.Y);
             MatrixHelper.ScaleAt(ref matrix, 1 / viewport.Resolution, 1 / viewport.Resolution, mapCenterX, mapCenterY);
 
             // This will invert the Y axis, but will also put images upside down
@@ -127,7 +127,7 @@ namespace Mapsui.Rendering.Xaml
             var mapCenterX = viewport.Width * 0.5;
             var mapCenterY = viewport.Height * 0.5;
 
-            MatrixHelper.Translate(ref matrix, mapCenterX - viewport.CenterX, mapCenterY - viewport.CenterY);
+            MatrixHelper.Translate(ref matrix, mapCenterX - viewport.Center.X, mapCenterY - viewport.Center.Y);
             MatrixHelper.ScaleAt(ref matrix, 1 / viewport.Resolution, 1 / viewport.Resolution, mapCenterX, mapCenterY);
 
             // This will invert the Y axis, but will also put images upside down

@@ -21,28 +21,10 @@ namespace Mapsui
         
         public Point Center
         {
+            get { return _viewport.Center;  }
             set { 
                 _viewport.Center = value;
                 RaisePropertyChanged("Center");
-            }
-        }
-
-        public double CenterX
-        {
-            get { return _viewport.CenterX; }
-            set
-            {
-                _viewport.CenterX = value;
-                RaisePropertyChanged("CenterX");
-            }
-        }
-
-        public double CenterY
-        {
-            get { return _viewport.CenterY; }
-            set { 
-                _viewport.CenterY = value;
-                RaisePropertyChanged("CenterY");
             }
         }
 

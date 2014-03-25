@@ -27,7 +27,7 @@ namespace Mapsui.UI.WinForms
       Point previous = transform.ScreenToWorld(previousMap.X, previousMap.Y);
       double diffX = previous.X - current.X;
       double diffY = previous.Y - current.Y;
-      transform.Center = new Point(transform.CenterX + diffX, transform.CenterY + diffY);
+      transform.Center = new Point(transform.Center.X + diffX, transform.Center.Y + diffY);
     }
   }
 }

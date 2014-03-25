@@ -45,7 +45,7 @@ namespace Mapsui
         {
             BackColor = Color.White;
             Layers = new LayerCollection();
-            Viewport =  new NotifyingViewport { CenterX = double.NaN, CenterY = double.NaN, Resolution = double.NaN };
+            Viewport =  new NotifyingViewport { Center = { X = double.NaN, Y = double.NaN }, Resolution = double.NaN };
         }
 
         void LayersLayerRemoved(ILayer layer)

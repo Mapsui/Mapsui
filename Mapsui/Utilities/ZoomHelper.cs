@@ -96,8 +96,8 @@ namespace Mapsui.Utilities
             var x = (xMax + xMin) / 2;
             var y = (yMax + yMin) / 2;
             var resolution = (xMax - xMin) / screenWidth;
-            viewport.CenterX = x;
-            viewport.CenterY = y;
+            viewport.Center.X = x;
+            viewport.Center.Y = y;
             viewport.Resolution = resolution;
         }
     }

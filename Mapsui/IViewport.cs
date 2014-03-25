@@ -27,9 +27,7 @@ namespace Mapsui
         Point ScreenToWorld(double x, double y);
         void Transform(double screenX, double screenY, double previousScreenX, double previousScreenY, 
             double deltaScale = 1);
-        double CenterX { get; }
-        double CenterY { get; }
-        Point Center { set; }
+        Point Center { get; set; }
         double Resolution { get; set; }
         double RenderResolution { get; }
         double RenderResolutionMultiplier { set; }

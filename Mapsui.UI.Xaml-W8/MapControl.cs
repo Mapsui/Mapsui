@@ -39,7 +39,7 @@ namespace Mapsui.UI.Xaml
     public class MapControl : Grid
     {
         private Map _map;
-        private readonly Viewport _viewport = new Viewport { CenterX = double.NaN, CenterY = double.NaN, Resolution = double.NaN };
+        private readonly Viewport _viewport = new Viewport { Center = { X = double.NaN, Y = double.NaN }, Resolution = double.NaN };
         private string _errorMessage;
         private readonly DoubleAnimation _zoomAnimation = new DoubleAnimation();
         private readonly Storyboard _zoomStoryBoard = new Storyboard();
@@ -321,7 +321,7 @@ namespace Mapsui.UI.Xaml
  
             if (double.IsNaN(_viewport.Resolution)) 
                 _viewport.Resolution = _map.Envelope.Width / ActualWidth;
-            if (double.IsNaN(_viewport.CenterX) || double.IsNaN(_viewport.CenterY)) 
+            if (double.IsNaN(_viewport.Center.X) || double.IsNaN(_viewport.Center.Y)) 
                 _viewport.Center = _map.Envelope.GetCentroid();
             
             _viewportInitialized = true;

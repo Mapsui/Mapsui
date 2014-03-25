@@ -81,8 +81,8 @@ namespace Mapsui.UI.iOS
 
 			if (double.IsNaN(_map.Viewport.Resolution) || double.IsInfinity(_map.Viewport.Resolution))
 				_map.Viewport.Resolution = _map.Envelope.Width / Width;
-			if ((double.IsNaN(_map.Viewport.CenterX)) || double.IsNaN(_map.Viewport.CenterY) || 
-				double.IsInfinity(_map.Viewport.CenterX) || double.IsInfinity(_map.Viewport.CenterY))
+			if ((double.IsNaN(_map.Viewport.Center.X)) || double.IsNaN(_map.Viewport.Center.Y) || 
+				double.IsInfinity(_map.Viewport.Center.X) || double.IsInfinity(_map.Viewport.Center.Y))
 				_map.Viewport.Center = _map.Envelope.GetCentroid();
 
 			_map.Viewport.Width = Width;
