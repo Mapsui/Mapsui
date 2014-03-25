@@ -28,7 +28,10 @@ namespace Mapsui.Rendering.Android
                     dest.MaxY);
 
                 var destination = RoundToPixel(dest);
-                canvas.DrawBitmap(bitmap, null, destination, null);
+                using (var paint = new Paint())
+                {
+                    canvas.DrawBitmap(bitmap, new Rect(0, 0, bitmap.Width, bitmap.Height), destination, paint);
+                }
 
                 DrawOutline(canvas, style, destination);
             }
