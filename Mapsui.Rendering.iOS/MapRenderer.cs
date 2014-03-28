@@ -15,30 +15,17 @@ namespace Mapsui.Rendering.iOS
 	public class MapRenderer : IRenderer
 	{
 		private readonly UIView _target;
-		//private readonly RenderingLayer _renderingLayer;
-		private CALayer _renderingLayer;
+		//private CALayer _renderingLayer;
 
 		public MapRenderer()
 		{
 			_target = new UIView();
-			_renderingLayer = new CALayer ();
-
-			//_renderingLayer = new RenderingLayer ();
-			//_target.Layer.AddSublayer (_renderingLayer);
-			//_target.Layer.AddSublayer (_renderingLayer);
 		}
 
 		public MapRenderer(UIView target)
 		{
 			_target = target;
-			_renderingLayer = new CALayer ();
-			//_target.Layer.AddSublayer (_renderingLayer);
-			//_renderingLayer = new RenderingLayer ();
-
-			//target.Layer.AddSublayer (_renderingLayer);
 		}
-
-		//private readonly object _syncRoot = new object();
 
 		public void Render(IViewport viewport, IEnumerable<ILayer> layers)
 		{
@@ -50,8 +37,9 @@ namespace Mapsui.Rendering.iOS
 
 			CATransaction.Begin();
 			CATransaction.AnimationDuration = 0;
-			//lock (_syncRoot) {
-			//_renderingLayer.PrepareLayer ();
+
+			//Render(target, viewport, layers, ShowDebugInfoInMap);
+
 			foreach (var layer in layers) {
 				if (layer.Enabled &&
 					layer.MinVisible <= viewport.Resolution &&
@@ -61,9 +49,13 @@ namespace Mapsui.Rendering.iOS
 				}
 			}
 
-			//_renderingLayer.UpdateLayer ();
-			//}
 			CATransaction.Commit ();
+		}
+
+		private static void Render(CALayer target, IViewport viewport, IEnumerable<ILayer> layers, bool showDebugInfoInMap)
+		{
+//			layers = layers.ToList();
+//			VisibleFeatureIterator.IterateLayers(viewport, layers, (v, s, f) => RenderGeometry(target, v, s, f));
 		}
 
 		public MemoryStream RenderToBitmapStream(IViewport viewport, IEnumerable<ILayer> layers)
@@ -77,28 +69,15 @@ namespace Mapsui.Rendering.iOS
 
 			if (layer is LabelLayer)
 			{
-				/*
 				var labelLayer = layer as LabelLayer;
-				var canvas = LabelRenderer.RenderLabelLayer (viewport, labelLayer, features);
-
-				if (canvas != null)
-					target.Layer.AddSublayer (canvas);
-					*/
-				//target.Children.Add(labelLayer.UseLabelStacking
-				//                    ? LabelRenderer.RenderStackedLabelLayer(viewport, labelLayer)
-				//                    : LabelRenderer.RenderLabelLayer(viewport, labelLayer));
 			}
 			else
 			{
-				var canvas = RenderVectorLayer(new CALayer(), viewport, layer);
-
-				if(canvas != null) {
-					target.Layer.AddSublayer (canvas);
-				}
+				RenderVectorLayer(target.Layer, viewport, layer);
 			}
 		}
 
-		private static CALayer RenderVectorLayer (CALayer canvas, IViewport viewport, ILayer layer)
+		private static void RenderVectorLayer (CALayer canvas, IViewport viewport, ILayer layer)
 		{
 			// todo:
 			// find solution for try catch. Sometimes this method will throw an exception
@@ -119,7 +98,7 @@ namespace Mapsui.Rendering.iOS
 						if (layer.Style is IThemeStyle) style = (layer.Style as IThemeStyle).GetStyle(feature);
 						if ((style == null) || (style.Enabled == false) || (style.MinVisible > viewport.Resolution) || (style.MaxVisible < viewport.Resolution)) continue;
 
-						RenderFeature(canvas, viewport, style, feature, layer.LayerName);
+						RenderGeometry(canvas, viewport, style, feature);
 					}
 				}
 
@@ -130,93 +109,30 @@ namespace Mapsui.Rendering.iOS
 					{
 						if (feature.Styles != null && style.Enabled)
 						{
-							RenderFeature(canvas, viewport, style, feature, layer.LayerName);
+							RenderGeometry(canvas, viewport, style, feature);
 						}
 					}
 				}
-
-				return canvas;
 			}
 			catch (Exception e)
 			{
 				Console.WriteLine("RenderVectorLayer Exception: " + layer.LayerName + " " + e.Message);
 				Console.WriteLine("RenderVectorLayer Stacktrace: " + layer.LayerName + " " + e.StackTrace);
-
-				return null;   
 			}                    
 		}
 
-		private static void RenderFeature(CALayer canvas, IViewport viewport, IStyle style, IFeature feature, string layerName)
+		private static void RenderGeometry (CALayer target, IViewport viewport, IStyle style, IFeature feature)
 		{
-			if (style is LabelStyle)
-			{
-				//canvas.Children.Add(LabelRenderer.RenderLabel(feature.Geometry.GetBoundingBox().GetCentroid(), new Offset(), style as LabelStyle, viewport));
-			}
-			else 
-			{
-				var styleKey = layerName;//feature.GetHashCode ().ToString ();
-				var renderedGeometry = (feature[styleKey] != null) ? (CALayer)feature[styleKey] : null;
-
-				if (renderedGeometry == null) {
-					renderedGeometry = RenderGeometry (viewport, style, feature);
-					if (feature.Geometry is IRaster)
-						//if (feature.Geometry is Mapsui.Geometries.Point || feature.Geometry is IRaster) // positioning only supported for point and raster
-					{						//||feature.Geometry is Mapsui.Geometries.MultiPolygon)
-						feature [styleKey] = renderedGeometry;
-					}
-				} else {
-					PositionGeometry(renderedGeometry, viewport, style, feature);
-				}
-
-				if (renderedGeometry != null) {
-					canvas.AddSublayer (renderedGeometry);
-				}
-			}
-		}
-
-		private static CALayer RenderGeometry (IViewport viewport, IStyle style, IFeature feature)
-		{
-			if (feature.Geometry is Point){
-				return GeometryRenderer.RenderPoint (feature.Geometry as Point, style, viewport);
-				//return null;
-			}
-			if (feature.Geometry is LineString) {
-				return LineStringRenderer.Draw (viewport, style, feature);
-			}
-			if (feature.Geometry is Polygon){
-				return GeometryRenderer.RenderPolygonOnLayer (feature.Geometry as Polygon, style, viewport);
-			}
-			if (feature.Geometry is MultiPolygon){
-				return GeometryRenderer.RenderMultiPolygonOnLayer (feature.Geometry as MultiPolygon, style, viewport);
-			}
-			if (feature.Geometry is IRaster){
-				return GeometryRenderer.RenderRasterOnLayer (feature.Geometry as IRaster, style, viewport);
-			}
-			return null;
-		}
-
-		private static void PositionGeometry(CALayer renderedGeometry, IViewport viewport, IStyle style, IFeature feature)
-		{
-			if (feature.Geometry is Point){
-				GeometryRenderer.PositionPoint(renderedGeometry, feature.Geometry as Point, style, viewport);
-			}
-			if (feature.Geometry is MultiPoint) {
-				return;
-			}
-			if (feature.Geometry is LineString) {
-				return;
-			}
-			if (feature.Geometry is MultiLineString) {
-				return;
-			}
-			if (feature.Geometry is Polygon) {
-				return;
-			}
-			if (feature.Geometry is MultiPolygon){
-				GeometryRenderer.PositionMultiPolygon (renderedGeometry, feature.Geometry as MultiPolygon, style, viewport);
-			}
-			if (feature.Geometry is IRaster){
-				GeometryRenderer.PositionRaster(renderedGeometry, feature.Geometry.GetBoundingBox(), viewport);
+			if (feature.Geometry is Mapsui.Geometries.Point) {
+				PointRenderer.Draw (target, viewport, style, feature);
+			} else if (feature.Geometry is LineString) {
+				LineStringRenderer.Draw (target, viewport, style, feature);
+			} else if (feature.Geometry is Polygon){
+				GeometryRenderer.RenderPolygonOnLayer (feature.Geometry as Polygon, style, viewport);
+			} else if (feature.Geometry is MultiPolygon){
+				GeometryRenderer.RenderMultiPolygonOnLayer (feature.Geometry as MultiPolygon, style, viewport);
+			} else if (feature.Geometry is IRaster) {
+				RasterRenderer.Draw (target, viewport, style, feature);
 			}
 		}
 	}

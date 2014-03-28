@@ -2,7 +2,7 @@
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{F783F99B-AAFA-4FB5-80F6-871D679BDB19}</ProjectGuid>
@@ -41,20 +41,26 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Mapsui.Rendering.iOS\Mapsui.Rendering.iOS.csproj">
-      <Project>{b142ab17-285f-48c8-b6c6-94586028333b}</Project>
-      <Name>Mapsui.Rendering.iOS</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Mapsui\Mapsui.csproj">
-      <Project>{d74c052a-c07e-4b37-a898-134218aca5c9}</Project>
-      <Name>Mapsui</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="monotouch" />
+    <Reference Include="BruTile">
+      <HintPath>..\..\..\Projects\Wion\src\WionXamarin\packages\BruTile.0.9.5\lib\portable-net403+sl5+wp8+win8+MonoAndroid+MonoTouch\BruTile.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Mapsui.Rendering.iOS\Mapsui.Rendering.iOS.csproj">
+      <Project>{B142AB17-285F-48C8-B6C6-94586028333B}</Project>
+      <Name>Mapsui.Rendering.iOS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mapsui\Mapsui.csproj">
+      <Project>{D74C052A-C07E-4B37-A898-134218ACA5C9}</Project>
+      <Name>Mapsui</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>
