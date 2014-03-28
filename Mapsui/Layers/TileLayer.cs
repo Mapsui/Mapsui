@@ -187,6 +187,7 @@ namespace Mapsui.Layers
 
         public override void ClearCache()
         {
+            AbortFetch();
             _memoryCache.Clear();
         }
 
