@@ -7,6 +7,7 @@ using Mapsui.Rendering.iOS;
 using System.ComponentModel;
 using Mapsui.Fetcher;
 using MonoTouch.CoreFoundation;
+using MonoTouch.CoreGraphics;
 
 namespace Mapsui.UI.iOS
 {
@@ -54,6 +55,7 @@ namespace Mapsui.UI.iOS
 
 		private void ViewportOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
 		{
+			//System.Diagnostics.Debug.WriteLine ("ViewportOnPropertyChanged");
 			RefreshGraphics();
 		}
 
@@ -61,6 +63,7 @@ namespace Mapsui.UI.iOS
 		{
 			Map = new Map();
 			_renderer = new MapRenderer(this);
+
 			InitializeViewport();
 
 			this.ClipsToBounds = true;
@@ -92,6 +95,7 @@ namespace Mapsui.UI.iOS
 			_map.ViewChanged(true, _map.Viewport.Extent, _map.Viewport.RenderResolution);
 			_viewportInitialized = true;
 		}
+
 		private void PinchGesture (UIPinchGestureRecognizer recognizer)
 		{
 			if (recognizer.NumberOfTouches < 2)
@@ -128,6 +132,10 @@ namespace Mapsui.UI.iOS
 
 				RefreshGraphics();
 			}
+
+			if (recognizer.State == UIGestureRecognizerState.Ended) {
+				_map.ViewChanged(true, _map.Viewport.Extent, _map.Viewport.RenderResolution);
+			}
 		}
 
 		public override void TouchesMoved (MonoTouch.Foundation.NSSet touches, UIEvent evt)
@@ -143,6 +151,7 @@ namespace Mapsui.UI.iOS
 				if (!cRect.IntersectsWith(pRect))
 				{
 					_map.Viewport.Transform(currentPos.X, currentPos.Y, previousPos.X, previousPos.Y);
+
 					RefreshGraphics();
 				}
 			}
@@ -152,7 +161,7 @@ namespace Mapsui.UI.iOS
 		{
 			//base.TouchesEnded (touches, evt);
 			RefreshGraphics ();
-			_map.ViewChanged (false, _map.Viewport.Extent, _map.Viewport.Resolution);
+			_map.ViewChanged (true, _map.Viewport.Extent, _map.Viewport.RenderResolution);
 		}
 
 		/// <summary>
@@ -213,11 +222,13 @@ namespace Mapsui.UI.iOS
 			//			System.Diagnostics.Debug.WriteLine("MapDataChanged");
 			var errorMessage = "";
 
+			Console.WriteLine ("MapDataChanged: " + sender);
+
 			DispatchQueue.MainQueue.DispatchAsync (delegate {
 				if (e == null)
 				{
 					errorMessage = "Unexpected error: DataChangedEventArgs can not be null";
-					//					System.Diagnostics.Debug.WriteLine(errorMessage);
+					Console.WriteLine(errorMessage);
 				}
 				else if (e.Cancelled)
 				{
@@ -227,17 +238,18 @@ namespace Mapsui.UI.iOS
 				else if (e.Error is System.Net.WebException)
 				{
 					errorMessage = "WebException: " + e.Error.Message;
-					//					System.Diagnostics.Debug.WriteLine(errorMessage);
+					Console.WriteLine(errorMessage);
 				}
 				else if (e.Error != null)
 				{
-					errorMessage = e.Error.GetType() + ": " + e.Error.Message;
-					//					System.Diagnostics.Debug.WriteLine(errorMessage);
+					errorMessage = "errorMessage: " + e.Error.GetType() + ": " + e.Error.Message;
+					Console.WriteLine(errorMessage);
 				}
-				else // no problems
-				{
+//				else // no problems
+//				{
+					Console.WriteLine ("RefreshGraphics: " + sender);
 					RefreshGraphics();
-				}
+//				}
 			});
 		}
 
@@ -249,16 +261,14 @@ namespace Mapsui.UI.iOS
 
 		public override void Draw (RectangleF rect)
 		{
-			//			System.Diagnostics.Debug.WriteLine("Draw");
 			base.Draw (rect);
 			if (!ViewportInitialized) {
 				InitializeViewport ();
+
 			}
 			if (!ViewportInitialized) {
-				//				System.Diagnostics.Debug.WriteLine("!ViewportInitialized");
 				return;           
 			}
-
 			_renderer.Render(_map.Viewport, _map.Layers);
 		}
 	}
