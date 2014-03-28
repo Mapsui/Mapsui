@@ -9,39 +9,25 @@ using MonoTouch.CoreGraphics;
 
 namespace Mapsui.Rendering.iOS
 {
-	static class LineStringRenderer
+	public static class LineStringRenderer
 	{
-		public static CALayer Draw(IViewport viewport, IStyle style, IFeature feature)
+		public static void Draw(CALayer target, IViewport viewport, IStyle style, IFeature feature)
 		{
-			var shapeLayer = new CAShapeLayer ();
+			var lineString = ((LineString) feature.Geometry).Vertices;
+			var paints = style.ToiOS();
 
-			var vectorStyle = style as VectorStyle;
-			if (vectorStyle == null)
-				return null;
+			foreach (var paint in paints) 
+			{
+				var path = ((LineString) feature.Geometry).Vertices.ToUIKit(viewport);
+				var shape = new CAShapeLayer
+				{
+					StrokeColor = paint.CGColor,
+					LineWidth = 4f,
+					Path = path.CGPath
+				};
 
-			SetStyle (shapeLayer, vectorStyle);
-
-			var path = ((LineString) feature.Geometry).Vertices.ToUIKit(viewport);
-			shapeLayer.Path = path.CGPath;
-			//
-			//			var paints = style.ToiOS();
-			//			//using (var paint = new Paint {Color = Color.Black, StrokeWidth = 8, AntiAlias = true})
-			//			foreach (var paint in paints)
-			//			{
-			//				var vertices = lineString;
-			//				var points = vertices.ToiOS();
-			//				WorldToScreen(viewport, points);
-			//
-			//				var line = new UIBezierPath ();
-			//				foreach(var point in points){
-			//					line.AddLineTo (point);
-			//				}
-			//
-			//				paint.Dispose();
-			//				shapeLayer.Path = line.CGPath;
-			//			}
-
-			return shapeLayer;
+				target.AddSublayer (shape);
+			}
 		}
 
 		private static void SetStyle(CAShapeLayer symbol, VectorStyle style)
@@ -87,6 +73,18 @@ namespace Mapsui.Rendering.iOS
 				var point = viewport.WorldToScreen(points[i].X, points[i].Y);
 				points [i] = new PointF ((float)point.X, (float)point.Y);
 			}
+		}
+
+		private static PointF[] WorldToScreen2(IViewport viewport, PointF[] points)
+		{
+			var newPoints = new PointF[points.Length];
+			for (var i = 0; i < points.Length; i++)
+			{
+				var point = viewport.WorldToScreen(points[i].X, points[i].Y);
+				newPoints [i] = new PointF ((float)point.X, (float)point.Y);
+			}
+
+			return newPoints;
 		}
 	}
 }
