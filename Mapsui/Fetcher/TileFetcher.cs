@@ -58,15 +58,12 @@ namespace Mapsui.Fetcher
         public TileFetcher(ITileSource tileSource, MemoryCache<Feature> memoryCache, int maxRetries = DefaultMaxRetries, int maxThreads = DefaultMaxThreads, IFetchStrategy strategy = null)
         {
             if (tileSource == null) throw new ArgumentException("TileProvider can not be null");
-            _tileSource = tileSource;
-
             if (memoryCache == null) throw new ArgumentException("MemoryCache can not be null");
+
+            _tileSource = tileSource;
             _memoryCache = memoryCache;
-
             _maxRetries = maxRetries;
-
             _maxThreads = maxThreads;
-
             _strategy = strategy ?? new FetchStrategy();
         }
 
