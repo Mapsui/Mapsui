@@ -162,12 +162,15 @@ namespace Mapsui.Providers
             {
                 var features = Features.ToList();
 
+                // Use a larger extent so that symbols partially outside of the extent are included
+                var grownBox = box.Grow(resolution*SymbolSize*0.5);
+
                 foreach (var feature in features)
                 {
                     if (feature.Geometry == null)
                         continue;
 
-                    if (box.Intersects(feature.Geometry.GetBoundingBox().Grow(resolution * SymbolSize * 0.5)))
+                    if (grownBox.Intersects(feature.Geometry.GetBoundingBox()))
                     {
                         yield return feature;
                     }
