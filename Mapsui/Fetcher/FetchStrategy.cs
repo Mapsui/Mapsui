@@ -28,7 +28,7 @@ namespace Mapsui.Fetcher
         {
             var infos = new List<TileInfo>();
             // Iterating through all levels from current to zero. If lower levels are
-            // not availeble the renderer can fall back on higher level tiles. 
+            // not available the renderer can fall back on higher level tiles. 
             var resolution = schema.Resolutions[levelId].UnitsPerPixel;
             var levels = schema.Resolutions.Where(k => k.Value.UnitsPerPixel >= resolution).OrderBy(x => x.Value.UnitsPerPixel).ToList();
 
