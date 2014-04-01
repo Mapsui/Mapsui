@@ -62,6 +62,7 @@ namespace Mapsui.UI.iOS
 		public void Initialize()
 		{
 			Map = new Map();
+			BackgroundColor = UIColor.White;
 			_renderer = new MapRenderer(this);
 
 			InitializeViewport();
@@ -92,7 +93,7 @@ namespace Mapsui.UI.iOS
 			_map.Viewport.Height = Height;
 			_map.Viewport.RenderResolutionMultiplier = 2;
 
-			_map.ViewChanged(true, _map.Viewport.Extent, _map.Viewport.RenderResolution);
+			 _map.ViewChanged(true, _map.Viewport.Extent, _map.Viewport.RenderResolution);
 			_viewportInitialized = true;
 		}
 
@@ -219,37 +220,32 @@ namespace Mapsui.UI.iOS
 
 		public void MapDataChanged(object sender, DataChangedEventArgs e)
 		{
-			//			System.Diagnostics.Debug.WriteLine("MapDataChanged");
+//			System.Diagnostics.Debug.WriteLine("MapDataChanged: " + sender);
 			var errorMessage = "";
-
-			Console.WriteLine ("MapDataChanged: " + sender);
 
 			DispatchQueue.MainQueue.DispatchAsync (delegate {
 				if (e == null)
 				{
-					errorMessage = "Unexpected error: DataChangedEventArgs can not be null";
+					errorMessage = "MapDataChanged Unexpected error: DataChangedEventArgs can not be null";
 					Console.WriteLine(errorMessage);
 				}
 				else if (e.Cancelled)
 				{
-					errorMessage = "Cancelled";
+					errorMessage = "MapDataChanged: Cancelled";
 					System.Diagnostics.Debug.WriteLine(errorMessage);
 				}
 				else if (e.Error is System.Net.WebException)
 				{
-					errorMessage = "WebException: " + e.Error.Message;
+					errorMessage = "MapDataChanged WebException: " + e.Error.Message;
 					Console.WriteLine(errorMessage);
 				}
 				else if (e.Error != null)
 				{
-					errorMessage = "errorMessage: " + e.Error.GetType() + ": " + e.Error.Message;
+					errorMessage = "MapDataChanged errorMessage: " + e.Error.GetType() + ": " + e.Error.Message;
 					Console.WriteLine(errorMessage);
 				}
-//				else // no problems
-//				{
-					Console.WriteLine ("RefreshGraphics: " + sender);
-					RefreshGraphics();
-//				}
+
+				RefreshGraphics();
 			});
 		}
 
@@ -270,6 +266,12 @@ namespace Mapsui.UI.iOS
 				return;           
 			}
 			_renderer.Render(_map.Viewport, _map.Layers);
+		}
+
+		protected override void Dispose (bool disposing)
+		{
+			base.Dispose (disposing);
+			_renderer.Dispose ();
 		}
 	}
 }
