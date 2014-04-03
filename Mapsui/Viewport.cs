@@ -22,16 +22,18 @@ namespace Mapsui
 {
     public class Viewport : IViewport
     {
-        BoundingBox _extent;
+        readonly BoundingBox _extent;
         private double _height;
         private double _resolution;
         private double _width;
         private readonly NotifyingPoint _center = new NotifyingPoint();
+        private bool _modified = true;
 
         public Viewport()
         {
+            _extent = new BoundingBox(0, 0, 0, 0);
             RenderResolutionMultiplier = 1;
-            _center.PropertyChanged += (sender, args) => UpdateExtent();
+            _center.PropertyChanged += (sender, args) => _modified = true; 
         }
         
         public Viewport(Viewport viewport) : this()
@@ -40,7 +42,6 @@ namespace Mapsui
             _width = viewport._width;
             _height = viewport._height;
             RenderResolutionMultiplier = viewport.RenderResolutionMultiplier;
-            UpdateExtent();
         }
 
         public double RenderResolutionMultiplier { get; set; }
@@ -57,7 +58,7 @@ namespace Mapsui
             {
                 _center.X = value.X;
                 _center.Y = value.Y;
-                UpdateExtent();
+                _modified = true;
             }
         }
 
@@ -67,7 +68,7 @@ namespace Mapsui
             set
             {
                 _resolution = value;
-                UpdateExtent();
+                _modified = true;
             }
         }
 
@@ -77,7 +78,7 @@ namespace Mapsui
             set
             {
                 _width = value;
-                UpdateExtent();
+                _modified = true;
             }
         }
 
@@ -87,13 +88,17 @@ namespace Mapsui
             set
             {
                 _height = value;
-                UpdateExtent();
+                _modified = true;
             }
         }
 
         public BoundingBox Extent
         {
-            get { return _extent ?? (_extent = new BoundingBox(0, 0, 0, 0)); }
+            get
+            {
+                if (_modified) UpdateExtent(); 
+                return _extent;
+            }
         }
 
         public Point WorldToScreen(Point worldPosition)
@@ -108,12 +113,12 @@ namespace Mapsui
 
         public Point WorldToScreen(double worldX, double worldY)
         {
-            return new Point((worldX - _extent.MinX) / _resolution, (_extent.MaxY - worldY) / _resolution);
+            return new Point((worldX - Extent.MinX) / _resolution, (Extent.MaxY - worldY) / _resolution);
         }
 
         public Point ScreenToWorld(double screenX, double screenY)
         {
-            return new Point((_extent.MinX + screenX * _resolution), (_extent.MaxY - (screenY * _resolution)));
+            return new Point((Extent.MinX + screenX * _resolution), (Extent.MaxY - (screenY * _resolution)));
         }
 
         public void Transform(double screenX, double screenY, double previousScreenX, double previousScreenY, double deltaScale = 1)
@@ -132,15 +137,22 @@ namespace Mapsui
             Resolution = Resolution / deltaScale;
             Center.X = newX - scaleCorrectionX;
             Center.Y = newY - scaleCorrectionY;
+            _modified = true;
         }
 
         private void UpdateExtent()
         {
+            if (double.IsNaN(_center.X)) return;
+            if (double.IsNaN(_center.Y)) return;
+            if (double.IsNaN(_resolution)) return;
+
             var spanX = _width * _resolution;
             var spanY = _height * _resolution;
-            _extent = new BoundingBox(
-                Center.X - spanX * 0.5, Center.Y - spanY * 0.5,
-                Center.X + spanX * 0.5, Center.Y + spanY * 0.5);
+            _extent.Min.X = Center.X - spanX * 0.5;
+            _extent.Min.Y = Center.Y - spanY * 0.5;
+            _extent.Max.X = Center.X + spanX * 0.5;
+            _extent.Max.Y = Center.Y + spanY * 0.5;
+            _modified = false;
         }
     }
 }
