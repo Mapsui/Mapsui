@@ -156,7 +156,7 @@ namespace Mapsui.Providers
         {
         }
 
-        public IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
+        public virtual IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
         {
             lock (_syncRoot)
             {
@@ -178,15 +178,22 @@ namespace Mapsui.Providers
             }
         }
 
+
         public IFeature Find(object value)
         {
             lock (_syncRoot)
             {
                 if (string.IsNullOrEmpty(Features.PrimaryKey)) throw new Exception("ID Field was not set");
+                return Find(value, Features.PrimaryKey);
+            }
+        }
 
-                return Features.FirstOrDefault(f =>
-                                               ((f[Features.PrimaryKey] != null) && (value != null)) &&
-                                               f[Features.PrimaryKey].Equals(value));
+        public IFeature Find(object value, string primaryKey)
+        {
+            lock (_syncRoot)
+            {
+                return Features.FirstOrDefault(f => ((f[primaryKey] != null) && (value != null)) &&
+                    f[primaryKey].Equals(value));
             }
         }
 

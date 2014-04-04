@@ -21,7 +21,7 @@ namespace Mapsui.Layers
         {
             get
             {
-                return DataSource.GetExtents();
+                return (DataSource == null) ? null : DataSource.GetExtents();
             }
         }
 
