@@ -29,14 +29,9 @@ namespace Mapsui.Layers
             Task.Factory.StartNew(() =>
             {
                 var features = _dataSource.GetFeaturesInView(_extent, _resolution);
-                DataArrived(features);
+                _animationBuffer.AddFeatures(features);
+                OnDataChanged(new DataChangedEventArgs());
             });
-        }
-
-        protected void DataArrived(IEnumerable<IFeature> features, object state = null)
-        {
-            _animationBuffer.AddFeatures(features);
-            OnDataChanged(new DataChangedEventArgs());
         }
 
         public override BoundingBox Envelope

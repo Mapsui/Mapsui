@@ -68,11 +68,18 @@ namespace Mapsui.Layers
                 animatedFeatureList.Add(new AnimatedItem
                 {
                     Feature = feature,
-                    CurrentPoint = feature.Geometry as Point,
+                    CurrentPoint = CopyToPoint(feature.Geometry),
                     PreviousPoint = FindPreviousPoint(previousItems, feature, idField)
                 });
             }
             return animatedFeatureList;
+        }
+
+        private static Point CopyToPoint(IGeometry geometry)
+        {
+            var point = geometry as Point;
+            if (point == null) return null;
+            return new Point(point.X, point.Y);
         }
 
         private static void InterpolateAnimatedPosition(IEnumerable<AnimatedItem> items, double progress)
@@ -82,7 +89,10 @@ namespace Mapsui.Layers
                 if (feature.PreviousPoint == null || feature.CurrentPoint == null) continue;
                 var x = feature.PreviousPoint.X + (feature.CurrentPoint.X - feature.PreviousPoint.X) * progress;
                 var y = feature.PreviousPoint.Y + (feature.CurrentPoint.Y - feature.PreviousPoint.Y) * progress;
-                feature.Feature.Geometry = new Point(x, y);
+                var point = feature.Feature.Geometry as Point;
+                if (point == null) return;
+                point.X = x;
+                point.Y = y;
             }
         }
 
