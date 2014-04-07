@@ -13,7 +13,7 @@ namespace Mapsui.Layers
         private readonly IProvider _dataSource;
         private BoundingBox _extent;
         private double _resolution;
-        private readonly AnimationBuffer _animationBuffer = new AnimationBuffer();
+        private readonly TransitionAnimator _animationBuffer = new TransitionAnimator();
 
         public AnimatedPointLayer(IProvider dataSource)
         {

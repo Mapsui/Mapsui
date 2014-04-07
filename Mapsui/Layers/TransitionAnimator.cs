@@ -7,13 +7,13 @@ using System.Threading;
 
 namespace Mapsui.Layers
 {
-    internal class AnimationBuffer
+    internal class TransitionAnimator
     {
         private Timer _animation;
         private List<AnimatedItem> _cache = new List<AnimatedItem>();
         private long _startTimeAnimation;
 
-        public AnimationBuffer()
+        public TransitionAnimator()
         {
             MillisecondsBetweenUpdates = 16;
             AnimationDuration = 1000;
@@ -55,7 +55,7 @@ namespace Mapsui.Layers
 
         private static void AnimationCallback(object state)
         {
-            var animatedPointLayer = (AnimationBuffer)state;
+            var animatedPointLayer = (TransitionAnimator)state;
             animatedPointLayer.OnAnimatedPositionChanged();
         }
 
