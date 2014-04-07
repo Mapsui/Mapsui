@@ -74,6 +74,7 @@
     <Compile Include="Geometries\Raster.cs" />
     <Compile Include="Geometries\SpatialRelations.cs" />
     <Compile Include="Geometries\Surface.cs" />
+    <Compile Include="Layers\AnimationBuffer.cs" />
     <Compile Include="Layers\AnimatedPointLayer.cs" />
     <Compile Include="Rendering\IRenderGetStrategy.cs" />
     <Compile Include="IViewport.cs" />
