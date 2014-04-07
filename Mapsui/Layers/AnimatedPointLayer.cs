@@ -13,22 +13,31 @@ namespace Mapsui.Layers
 {
     public class AnimatedPointLayer : BaseLayer
     {
+        private class AnimatedPointFeature : Feature
+        {
+            public AnimatedPointFeature(Feature feature) : base(feature)
+            {
+            }
+
+            public Point PreviousPoint { get; set; }
+            public Point CurrentPoint { get; set; }
+        }
+        
         private const string PrimaryKey = "ID";
-        private readonly string _previousGeometryField = Guid.NewGuid().ToString();
-        private readonly string _currentGeometryField = Guid.NewGuid().ToString();
+        //private readonly string _previousGeometryField = Guid.NewGuid().ToString();
+        //private readonly string _currentGeometryField = Guid.NewGuid().ToString();
         private long _startTime;
         private const long AnimationDuration = 1000;
+        private List<AnimatedPointFeature> _cache;
+        private readonly IProvider _dataSource;
         private Timer _timer;
-        protected MemoryProvider Cache;
-        private IProvider _dataSource;
         private Timer _animation;
-        
+
         public AnimatedPointLayer(IProvider dataSource)
         {
             _dataSource = dataSource;
             _timer = new Timer(Callback, this, 0, 2000);
             _animation = new Timer(AnimationCallback, this, 0, 9);
-            
         }
 
         private static void Callback(object state)
@@ -47,25 +56,42 @@ namespace Mapsui.Layers
 
         protected void DataArrived(IEnumerable<IFeature> features, object state = null)
         {
-            var previousCache = Cache;
+            var previousCache = _cache;
 
-            var featureList = features.ToList();
-            Cache = new MemoryProvider(featureList);
-
+            _cache = ConvertToAnimatedFeatures(previousCache, features.ToList());
+            
             if (previousCache == null) return;
 
-            foreach (var feature in featureList)
-            {
-                var previousFeature = previousCache.Find(feature[PrimaryKey], PrimaryKey);
-                if (previousFeature != null)
-                {
-                    feature[_previousGeometryField] = previousFeature.Geometry;
-                    feature[_currentGeometryField] = feature.Geometry;
-                }
-            }
             _startTime = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
 
             OnDataChanged(new DataChangedEventArgs());
+        }
+
+        private List<AnimatedPointFeature> ConvertToAnimatedFeatures(List<AnimatedPointFeature> previousFeatures, IEnumerable<IFeature> features)
+        {
+            var animatedFeatureList = new List<AnimatedPointFeature>();
+
+            foreach (var feature in features)
+            {
+                var animatedPointFeature = new AnimatedPointFeature((Feature)feature);
+                if (previousFeatures != null)
+                {
+                    LookupPreviousState(previousFeatures, feature, animatedPointFeature);
+                }
+                animatedFeatureList.Add(animatedPointFeature);
+            }
+            return animatedFeatureList;
+        }
+
+        private static void LookupPreviousState(IEnumerable<AnimatedPointFeature> previousFeatures, IFeature feature,
+            AnimatedPointFeature animatedPointFeature)
+        {
+            var previousFeature = previousFeatures.FirstOrDefault(f => f[PrimaryKey].Equals(feature[PrimaryKey]));
+            if (previousFeature != null)
+            {
+                animatedPointFeature.PreviousPoint = previousFeature.Geometry as Point;
+                animatedPointFeature.CurrentPoint = animatedPointFeature.Geometry as Point;
+            }
         }
 
         public override BoundingBox Envelope
@@ -75,34 +101,37 @@ namespace Mapsui.Layers
 
         public override IEnumerable<IFeature> GetFeaturesInView(BoundingBox extent, double resolution)
         {
-            var features = Cache.Features;
+            var progression = CalculateProgressionAnimation(_startTime);
+            if (progression < 1) InterpolateAnimatedPosition(_cache, progression);
+            return _cache;
+        }
 
-            var currentTime = DateTime.Now.Ticks/TimeSpan.TicksPerMillisecond;
-            var elapsedTime = currentTime - _startTime;
-            var portion = elapsedTime/(float)AnimationDuration;
-            if (portion > 1) return features;
-
+        private static void InterpolateAnimatedPosition(IEnumerable<AnimatedPointFeature> features, double progression)
+        {
             foreach (var feature in features)
             {
-                var previous = feature[_previousGeometryField] as Point;
-                var current = feature[_currentGeometryField] as Point;
-                if (previous == null || current == null) continue;
-                var x = previous.X + (current.X - previous.X) * portion;
-                var y = previous.Y + (current.Y - previous.Y) * portion;
+                if (feature.PreviousPoint == null || feature.CurrentPoint == null) continue;
+                var x = feature.PreviousPoint.X + (feature.CurrentPoint.X - feature.PreviousPoint.X) * progression;
+                var y = feature.PreviousPoint.Y + (feature.CurrentPoint.Y - feature.PreviousPoint.Y) * progression;
                 feature.Geometry = new Point(x, y);
             }
+        }
 
-            return features;
+        private static double CalculateProgressionAnimation(long startTime)
+        {
+            var currentTime = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
+            var elapsedTime = currentTime - startTime;
+            return elapsedTime / (double)AnimationDuration;
         }
 
         public override void AbortFetch()
         {
-         
+
         }
 
         public override void ViewChanged(bool changeEnd, BoundingBox extent, double resolution)
         {
-         
+
         }
 
         public override void ClearCache()
