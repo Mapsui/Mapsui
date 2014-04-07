@@ -15,27 +15,27 @@ namespace Mapsui.Layers
 
         public AnimationBuffer()
         {
-            MilisecondsBetweenUpdates = 16;
+            MillisecondsBetweenUpdates = 16;
             AnimationDuration = 1000;
             IdField = "ID";
         }
 
         public string IdField { get; set; }
-        public int MilisecondsBetweenUpdates { get; set; }
+        public int MillisecondsBetweenUpdates { get; set; }
         public int AnimationDuration { get; set; }
 
         public event EventHandler AnimatedPositionChanged;
 
-        public void AddNewData(IEnumerable<IFeature> features)
+        public void AddFeatures(IEnumerable<IFeature> features)
         {
             var previousCache = _cache;
-            _cache = ConvertToAnimatedFeatures(previousCache, features.ToList(), IdField);
+            _cache = ConvertToAnimatedItems(previousCache, features.ToList(), IdField);
             _startTimeAnimation = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
             if (_animation != null) _animation.Dispose();
-            _animation = new Timer(AnimationCallback, this, 0, MilisecondsBetweenUpdates);
+            _animation = new Timer(AnimationCallback, this, 0, MillisecondsBetweenUpdates);
         }
 
-        public IEnumerable<IFeature> GetFeaturesInView()
+        public IEnumerable<IFeature> GetFeatures()
         {
             var progress = CalculateAnimationProgress(_startTimeAnimation, AnimationDuration);
             if (NotCompleted(progress)) InterpolateAnimatedPosition(_cache, progress);
@@ -59,18 +59,18 @@ namespace Mapsui.Layers
             animatedPointLayer.OnAnimatedPositionChanged();
         }
 
-        private static List<AnimatedItem> ConvertToAnimatedFeatures(List<AnimatedItem> previousItems,
+        private static List<AnimatedItem> ConvertToAnimatedItems(List<AnimatedItem> previousItems,
             IEnumerable<IFeature> features, string idField)
         {
             var animatedFeatureList = new List<AnimatedItem>();
             foreach (var feature in features)
             {
-                var animatedPointFeature = new AnimatedItem { Feature = feature };
-                if (previousItems != null)
+                animatedFeatureList.Add(new AnimatedItem
                 {
-                    LookupPreviousState(previousItems, feature, animatedPointFeature, idField);
-                }
-                animatedFeatureList.Add(animatedPointFeature);
+                    Feature = feature,
+                    CurrentPoint = feature.Geometry as Point,
+                    PreviousPoint = FindPreviousPoint(previousItems, feature, idField)
+                });
             }
             return animatedFeatureList;
         }
@@ -86,13 +86,13 @@ namespace Mapsui.Layers
             }
         }
 
-        private static void LookupPreviousState(IEnumerable<AnimatedItem> previousItems, IFeature feature,
-            AnimatedItem item, string idField)
+        private static Point FindPreviousPoint(IEnumerable<AnimatedItem> previousItems, IFeature feature, 
+            string idField)
         {
+            if (previousItems == null) return null;
             var previousItem = previousItems.FirstOrDefault(f => f.Feature[idField].Equals(feature[idField]));
-            if (previousItem == null) return;
-            item.PreviousPoint = previousItem.Feature.Geometry as Point;
-            item.CurrentPoint = item.Feature.Geometry as Point;
+            if (previousItem == null) return null;
+            return previousItem.Feature.Geometry as Point;
         }
 
         private static double CalculateAnimationProgress(long startTime, int animationDuration)

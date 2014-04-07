@@ -35,7 +35,7 @@ namespace Mapsui.Layers
 
         protected void DataArrived(IEnumerable<IFeature> features, object state = null)
         {
-            _animationBuffer.AddNewData(features);
+            _animationBuffer.AddFeatures(features);
             OnDataChanged(new DataChangedEventArgs());
         }
 
@@ -46,7 +46,7 @@ namespace Mapsui.Layers
 
         public override IEnumerable<IFeature> GetFeaturesInView(BoundingBox extent, double resolution)
         {
-            return _animationBuffer.GetFeaturesInView();
+            return _animationBuffer.GetFeatures();
         }
 
         public override void AbortFetch()
