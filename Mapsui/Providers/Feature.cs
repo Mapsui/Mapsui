@@ -18,6 +18,14 @@ namespace Mapsui.Providers
             Styles = new Collection<IStyle>();
         }
 
+        public Feature(Feature feature)
+        {
+            Geometry = feature.Geometry;
+            _dictionary = feature._dictionary;
+            RenderedGeometry = feature.RenderedGeometry;
+            Styles = feature.Styles;
+        }
+
         public IGeometry Geometry { get; set; }
 
         public IDictionary<IStyle, object> RenderedGeometry { get; private set; }

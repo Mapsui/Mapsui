@@ -65,7 +65,7 @@ namespace Mapsui.Samples.Common
            var result = new List<IGeometry>();
             for (var i = 0; i < count; i++)
             {
-                result.Add(new Point(Random.NextDouble() * box.Width + box.Left, Random.NextDouble() * box.Height - box.Top));
+                result.Add(new Point(Random.NextDouble() * box.Width + box.Left, Random.NextDouble() * box.Height - (box.Height - box.Top)));
             }
             return result;
         }
