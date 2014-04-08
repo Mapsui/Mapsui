@@ -7,22 +7,30 @@ using System.Threading;
 
 namespace Mapsui.Layers
 {
+    public enum EasingFunction
+    {
+        CubicEaseOut,
+        Linear
+    }
+
     internal class AnimatedFeatures
     {
         private Timer _animation;
         private List<AnimatedItem> _cache = new List<AnimatedItem>();
         private long _startTimeAnimation;
-
+        
         public AnimatedFeatures()
         {
             MillisecondsBetweenUpdates = 16;
             AnimationDuration = 1000;
             IdField = "ID";
+            Function = EasingFunction.CubicEaseOut;
         }
 
         public string IdField { get; set; }
         public int MillisecondsBetweenUpdates { get; set; }
         public int AnimationDuration { get; set; }
+        public EasingFunction Function { get; set; }
 
         public event EventHandler AnimatedPositionChanged;
 
@@ -37,7 +45,7 @@ namespace Mapsui.Layers
 
         public IEnumerable<IFeature> GetFeatures()
         {
-            var progress = CalculateProgress(_startTimeAnimation, AnimationDuration);
+            var progress = CalculateProgress(_startTimeAnimation, AnimationDuration, Function);
             if (!Completed(progress)) InterpolateAnimatedPosition(_cache, progress);
             return _cache.Select(f => f.Feature);
         }
@@ -96,7 +104,7 @@ namespace Mapsui.Layers
             }
         }
 
-        private static Point FindPreviousPoint(IEnumerable<AnimatedItem> previousItems, IFeature feature, 
+        private static Point FindPreviousPoint(IEnumerable<AnimatedItem> previousItems, IFeature feature,
             string idField)
         {
             if (previousItems == null) return null;
@@ -105,15 +113,24 @@ namespace Mapsui.Layers
             return previousItem.Feature.Geometry as Point;
         }
 
-        private static double CalculateProgress(long startTime, int animationDuration)
+        private static double CalculateProgress(long startTime, int animationDuration, EasingFunction function)
         {
             var currentTime = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
-            var t = (double)currentTime - startTime;
-            return ((t = t/animationDuration - 1)*t*t + 1);
-            //return -(elapsedTime /= animationDuration) * (elapsedTime - 2);
-            //return 1 / ((elapsedTime /= animationDuration) * elapsedTime); 
+            var elapsedTime = (double)currentTime - startTime;
+            
+            if (function == EasingFunction.CubicEaseOut)
+                return CubicEaseOut(animationDuration, elapsedTime);
+            return Linear(animationDuration, elapsedTime);    
+        }
 
-            //return (elapsedTime / (double)animationDuration) * (elapsedTime / (double)animationDuration);
+        private static double Linear(double d, double t)
+        {
+            return t / d;
+        }
+
+        private static double CubicEaseOut(double d, double t)
+        {
+            return ((t = t / d - 1) * t * t + 1);
         }
 
         private class AnimatedItem

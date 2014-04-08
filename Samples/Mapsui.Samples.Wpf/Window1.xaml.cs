@@ -1,6 +1,9 @@
-﻿using BruTile.Extensions;
+﻿using System.Threading;
+using BruTile;
+using BruTile.Extensions;
 using BruTile.Web;
 using BruTile.Wmts;
+using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Samples.Common;
@@ -15,6 +18,7 @@ using System.Net;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using Layer = Mapsui.Layers.Layer;
 
 namespace Mapsui.Samples.Wpf
 {
@@ -66,6 +70,18 @@ namespace Mapsui.Samples.Wpf
         {
             MapControl.Map.Layers.Clear();
             MapControl.Map.Layers.Add(new TileLayer(new OsmTileSource()) { LayerName = "OSM" });
+
+            LayerList.Initialize(MapControl.Map.Layers);
+            MapControl.ZoomToFullEnvelope();
+            MapControl.Refresh();
+        }
+
+        private void AnimatedPoints(object sender, RoutedEventArgs e)
+        {
+            MapControl.Map.Layers.Clear();
+            MapControl.Map.Layers.Add(new TileLayer(new OsmTileSource()) { LayerName = "OSM" });
+            MapControl.Map.Layers.Add(new AnimatedPointsWithAutoUpdateLayer { LayerName = "AnimatedLayer" });
+
             LayerList.Initialize(MapControl.Map.Layers);
             MapControl.ZoomToFullEnvelope();
             MapControl.Refresh();

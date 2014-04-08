@@ -15,6 +15,7 @@
                 <RadioButton FontSize="16" Content="PointSymbols" Margin="4,4,4,4" Click="PointSymbolsClick"/>
                 <RadioButton FontSize="16" Content="Points with stacked labels" Margin="4,4,4,4" Click="RandomPointWithStackLabel"/>
                 <RadioButton FontSize="16" Content="Points with feature info" Margin="4,4,4,4" Click="RandomPointsWithFeatureInfo"/>
+                <RadioButton FontSize="16" Content="Points with animation" Margin="4,4,4,4" Click="AnimatedPoints"/>
                 <RadioButton FontSize="16" Content="Bing Maps" Margin="4,4,4,4" Click="BingMapsClick"/>
                 <RadioButton FontSize="16" Content="WMS - tiled requests" Margin="4,4,4,4" Click="GeodanWmsClick"/>
                 <RadioButton FontSize="16" Content="TMS" Margin="4,4,4,4" Click="GeodanTmsClick"/>

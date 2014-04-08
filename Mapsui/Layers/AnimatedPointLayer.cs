@@ -13,12 +13,12 @@ namespace Mapsui.Layers
         private readonly IProvider _dataSource;
         private BoundingBox _extent;
         private double _resolution;
-        private readonly AnimatedFeatures _animator = new AnimatedFeatures();
+        private readonly AnimatedFeatures _animatedFeatures = new AnimatedFeatures();
 
         public AnimatedPointLayer(IProvider dataSource)
         {
             _dataSource = dataSource;
-            _animator.AnimatedPositionChanged += (sender, args) => OnDataChanged(new DataChangedEventArgs());
+            _animatedFeatures.AnimatedPositionChanged += (sender, args) => OnDataChanged(new DataChangedEventArgs());
         }
 
         public void UpdateData()
@@ -28,8 +28,7 @@ namespace Mapsui.Layers
 
             Task.Factory.StartNew(() =>
             {
-                var features = _dataSource.GetFeaturesInView(_extent, _resolution);
-                _animator.AddFeatures(features);
+                _animatedFeatures.AddFeatures(_dataSource.GetFeaturesInView(_extent, _resolution));
                 OnDataChanged(new DataChangedEventArgs());
             });
         }
@@ -41,7 +40,7 @@ namespace Mapsui.Layers
 
         public override IEnumerable<IFeature> GetFeaturesInView(BoundingBox extent, double resolution)
         {
-            return _animator.GetFeatures();
+            return _animatedFeatures.GetFeatures();
         }
 
         public override void AbortFetch()
