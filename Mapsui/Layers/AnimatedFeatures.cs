@@ -7,13 +7,13 @@ using System.Threading;
 
 namespace Mapsui.Layers
 {
-    internal class TransitionAnimator
+    internal class AnimatedFeatures
     {
         private Timer _animation;
         private List<AnimatedItem> _cache = new List<AnimatedItem>();
         private long _startTimeAnimation;
 
-        public TransitionAnimator()
+        public AnimatedFeatures()
         {
             MillisecondsBetweenUpdates = 16;
             AnimationDuration = 1000;
@@ -37,14 +37,14 @@ namespace Mapsui.Layers
 
         public IEnumerable<IFeature> GetFeatures()
         {
-            var progress = CalculateAnimationProgress(_startTimeAnimation, AnimationDuration);
-            if (NotCompleted(progress)) InterpolateAnimatedPosition(_cache, progress);
+            var progress = CalculateProgress(_startTimeAnimation, AnimationDuration);
+            if (!Completed(progress)) InterpolateAnimatedPosition(_cache, progress);
             return _cache.Select(f => f.Feature);
         }
 
-        private static bool NotCompleted(double progress)
+        private static bool Completed(double progress)
         {
-            return progress < 1;
+            return progress >= 1;
         }
 
         protected virtual void OnAnimatedPositionChanged()
@@ -55,7 +55,7 @@ namespace Mapsui.Layers
 
         private static void AnimationCallback(object state)
         {
-            var animatedPointLayer = (TransitionAnimator)state;
+            var animatedPointLayer = (AnimatedFeatures)state;
             animatedPointLayer.OnAnimatedPositionChanged();
         }
 
@@ -105,11 +105,15 @@ namespace Mapsui.Layers
             return previousItem.Feature.Geometry as Point;
         }
 
-        private static double CalculateAnimationProgress(long startTime, int animationDuration)
+        private static double CalculateProgress(long startTime, int animationDuration)
         {
             var currentTime = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
-            var elapsedTime = currentTime - startTime;
-            return elapsedTime / (double)animationDuration;
+            var t = (double)currentTime - startTime;
+            return ((t = t/animationDuration - 1)*t*t + 1);
+            //return -(elapsedTime /= animationDuration) * (elapsedTime - 2);
+            //return 1 / ((elapsedTime /= animationDuration) * elapsedTime); 
+
+            //return (elapsedTime / (double)animationDuration) * (elapsedTime / (double)animationDuration);
         }
 
         private class AnimatedItem
