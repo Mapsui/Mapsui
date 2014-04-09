@@ -38,17 +38,10 @@ namespace Mapsui.Layers
         public void AddFeatures(IEnumerable<IFeature> features)
         {
             var previousCache = _cache;
-            _cache = ConvertToAnimatedItems(previousCache, features.ToList(), IdField);
+            _cache = ConvertToAnimatedItems(features.ToList(), previousCache, IdField);
             _startTimeAnimation = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
             if (_animation != null) StopAnimation();
             _animation = new Timer(AnimationCallback, this, 0, MillisecondsBetweenUpdates);
-        }
-
-        private void StopAnimation()
-        {
-            _animation.Stop();
-            _animation.Dispose();
-            _animation = null;
         }
 
         public IEnumerable<IFeature> GetFeatures()
@@ -57,6 +50,13 @@ namespace Mapsui.Layers
             if (!Completed(progress)) InterpolateAnimatedPosition(_cache, progress);
             else if (_animation != null) StopAnimation();
             return _cache.Select(f => f.Feature);
+        }
+
+        private void StopAnimation()
+        {
+            _animation.Stop();
+            _animation.Dispose();
+            _animation = null;
         }
 
         private static bool Completed(double progress)
@@ -76,50 +76,46 @@ namespace Mapsui.Layers
             animatedPointLayer.OnAnimatedPositionChanged();
         }
 
-        private static List<AnimatedItem> ConvertToAnimatedItems(List<AnimatedItem> previousItems,
-            IEnumerable<IFeature> features, string idField)
+        private static List<AnimatedItem> ConvertToAnimatedItems(IEnumerable<IFeature> features, 
+            List<AnimatedItem> previousItems, string idField)
         {
-            var animatedFeatureList = new List<AnimatedItem>();
+            var result = new List<AnimatedItem>();
             foreach (var feature in features)
             {
-                animatedFeatureList.Add(new AnimatedItem
+                result.Add(new AnimatedItem
                 {
                     Feature = feature,
                     CurrentPoint = CopyAsPoint(feature.Geometry),
-                    PreviousPoint = CopyAsPoint(FindPreviousGeometry(previousItems, feature, idField))
+                    PreviousPoint = CopyAsPoint(FindPreviousPoint(previousItems, feature, idField))
                 });
             }
-            return animatedFeatureList;
+            return result;
         }
 
         private static Point CopyAsPoint(IGeometry geometry)
         {
             var point = geometry as Point;
-            if (point == null) return null;
-            return new Point(point.X, point.Y);
+            return point == null ? null : new Point(point.X, point.Y);
         }
 
         private static void InterpolateAnimatedPosition(IEnumerable<AnimatedItem> items, double progress)
         {
-            foreach (var feature in items)
+            foreach (var item in items)
             {
-                if (feature.PreviousPoint == null || feature.CurrentPoint == null) continue;
-                var x = feature.PreviousPoint.X + (feature.CurrentPoint.X - feature.PreviousPoint.X) * progress;
-                var y = feature.PreviousPoint.Y + (feature.CurrentPoint.Y - feature.PreviousPoint.Y) * progress;
-                var point = feature.Feature.Geometry as Point;
-                if (point == null) return;
-                point.X = x;
-                point.Y = y;
+                var target = item.Feature.Geometry as Point;
+                
+                if (item.PreviousPoint == null || item.CurrentPoint == null || target == null) continue;
+                target.X = item.PreviousPoint.X + (item.CurrentPoint.X - item.PreviousPoint.X) * progress;
+                target.Y = item.PreviousPoint.Y + (item.CurrentPoint.Y - item.PreviousPoint.Y) * progress;
             }
         }
 
-        private static Geometry FindPreviousGeometry(IEnumerable<AnimatedItem> previousItems, IFeature feature,
+        private static Point FindPreviousPoint(IEnumerable<AnimatedItem> previousItems, IFeature feature,
             string idField)
         {
             if (previousItems == null) return null;
             var previousItem = previousItems.FirstOrDefault(f => f.Feature[idField].Equals(feature[idField]));
-            if (previousItem == null) return null;
-            return previousItem.CurrentPoint;
+            return previousItem == null ? null : previousItem.CurrentPoint;
         }
 
         private static double CalculateProgress(long startTime, int animationDuration, EasingFunction function)
