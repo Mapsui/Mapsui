@@ -31,6 +31,11 @@ using Mapsui.Providers;
 using Mapsui.Rendering;
 using Mapsui.Rendering.Xaml;
 using Mapsui.Utilities;
+#if !SILVERLIGHT && !WINDOWS_PHONE
+using XamlVector = System.Windows.Vector;
+#else
+using XamlVector = System.Windows.Point;
+#endif
 
 namespace Mapsui.UI.Xaml
 {
@@ -63,7 +68,6 @@ namespace Mapsui.UI.Xaml
         public event EventHandler<FeatureInfoEventArgs> FeatureInfo;
         #endregion
 
-        #region Properties
         public IRenderer Renderer { get; set; }
         private bool IsInBoxZoomMode { get; set; }
         public IList<ILayer> MouseInfoOverLayers { get; private set; }
@@ -132,18 +136,12 @@ namespace Mapsui.UI.Xaml
         {
             get { return _renderCanvas; }
         }
-
-        #endregion
-
-        #region Dependency Properties
-
+        
         private static readonly DependencyProperty ResolutionProperty =
           DependencyProperty.Register(
           "Resolution", typeof(double), typeof(MapControl),
           new PropertyMetadata(OnResolutionChanged));
-
-        #endregion
-
+        
         public MapControl()
         {
             _renderCanvas = new Canvas
@@ -186,18 +184,12 @@ namespace Mapsui.UI.Xaml
             CompositionTarget.Rendering += CompositionTargetRendering;
             Renderer = new MapRenderer(RenderCanvas);
 
-#if (!SILVERLIGHT && !WINDOWS_PHONE)
-            Dispatcher.ShutdownStarted += DispatcherShutdownStarted;
-            IsManipulationEnabled = true;
             ManipulationDelta += OnManipulationDelta;
             ManipulationCompleted += OnManipulationCompleted;
+#if (!SILVERLIGHT && !WINDOWS_PHONE)
             ManipulationInertiaStarting += OnManipulationInertiaStarting;
-#endif
-
-#if (WINDOWS_PHONE)
-            RenderCanvas.ManipulationDelta += WP_OnManipulationDelta;
-            RenderCanvas.ManipulationCompleted += WP_OnManipulationCompleted;
-            RenderCanvas.ManipulationStarted += WP_OnManipulationStarted;
+            Dispatcher.ShutdownStarted += DispatcherShutdownStarted;
+            IsManipulationEnabled = true;
 #endif
         }
 
@@ -283,20 +275,9 @@ namespace Mapsui.UI.Xaml
 
         private void ZoomToResolution(double resolution)
         {
-            Point mousePosition = _currentMousePosition;
-            // When zooming we want the mouse position to stay above the same world coordinate.
-            // We calcultate that in 3 steps.
+            var current = _currentMousePosition;
 
-            // 1) Temporarily center on the mouse position
-            _viewport.Center = _viewport.ScreenToWorld(mousePosition.X, mousePosition.Y);
-
-            // 2) Then zoom 
-            _viewport.Resolution = resolution;
-
-            // 3) Then move the temporary center of the map back to the mouse position
-            _viewport.Center = _viewport.ScreenToWorld(
-              _viewport.Width - mousePosition.X,
-              _viewport.Height - mousePosition.Y);
+            _viewport.Transform(current.X, current.Y, current.X, current.Y, _viewport.Resolution / resolution);
 
             _map.ViewChanged(true, _viewport.Extent, _viewport.RenderResolution);
             OnViewChanged();
@@ -354,7 +335,7 @@ namespace Mapsui.UI.Xaml
             // Some cheating for personal gain. This workaround could be ommitted if the zoom animations was on CenterX, CenterY and Resolution, not Resolution alone.
             _viewport.Center.X += 0.000000001;
             _viewport.Center.Y += 0.000000001;
-            
+
             StartZoomAnimation(_viewport.Resolution, _toResolution);
         }
 
@@ -405,7 +386,7 @@ namespace Mapsui.UI.Xaml
             }
             else
             {
-                if (e == null) 
+                if (e == null)
                 {
                     _errorMessage = "Unexpected error: DataChangedEventArgs can not be null";
                     OnErrorMessageChanged(EventArgs.Empty);
@@ -509,7 +490,8 @@ namespace Mapsui.UI.Xaml
 
             if (_mouseDown)
             {
-                if (_previousMousePosition == new Point())
+                if (_previousMousePosition == default(Point))
+                
                 {
                     return; // It turns out that sometimes MouseMove+Pressed is called before MouseDown
                 }
@@ -525,12 +507,9 @@ namespace Mapsui.UI.Xaml
 
         private void RaiseMouseInfoEvents(Point mousePosition)
         {
-            if (!_mouseDown)
-            {
-                var mouseEventArgs = GetMouseInfoEventArgs(mousePosition, MouseInfoOverLayers);
-                if (mouseEventArgs == null) OnMouseInfoLeave();
-                else OnMouseInfoOver(mouseEventArgs);
-            }
+            var mouseEventArgs = GetMouseInfoEventArgs(mousePosition, MouseInfoOverLayers);
+            if (mouseEventArgs == null) OnMouseInfoLeave();
+            else OnMouseInfoOver(mouseEventArgs);
         }
 
         private MouseInfoEventArgs GetMouseInfoEventArgs(Point mousePosition, IEnumerable<ILayer> layers)
@@ -585,7 +564,7 @@ namespace Mapsui.UI.Xaml
             if (_map.Envelope.Width.IsNanOrZero()) return;
             if (_map.Envelope.Height.IsNanOrZero()) return;
             if (_map.Envelope.GetCentroid() == null) return;
-            
+
 
             if (double.IsNaN(_viewport.Resolution))
                 _viewport.Resolution = _map.Envelope.Width / ActualWidth;
@@ -595,7 +574,7 @@ namespace Mapsui.UI.Xaml
             _viewport.Width = ActualWidth;
             _viewport.Height = ActualHeight;
 
-            _viewport.RenderResolutionMultiplier = 1.0; 
+            _viewport.RenderResolutionMultiplier = 1.0;
 
             _viewportInitialized = true;
         }
@@ -608,16 +587,13 @@ namespace Mapsui.UI.Xaml
 
             if ((Renderer != null) && (_map != null))
             {
-                // does nothing at the moment.
-                //var outputViewport = new Viewport(_viewport) { Resolution = _viewport.Resolution};
-
                 Renderer.Render(_viewport, _map.Layers);
                 _fpsCounter.FramePlusOne();
                 _invalid = false;
             }
         }
 
-#if !SILVERLIGHT 
+#if !SILVERLIGHT
         private void DispatcherShutdownStarted(object sender, EventArgs e)
         {
             CompositionTarget.Rendering -= CompositionTargetRendering;
@@ -724,65 +700,33 @@ namespace Mapsui.UI.Xaml
             e.TranslationBehavior.DesiredDeceleration = 25 * 96.0 / (1000.0 * 1000.0);
         }
 
+#endif
         private void OnManipulationDelta(object sender, ManipulationDeltaEventArgs e)
         {
-            var previous = _viewport.ScreenToWorld(e.ManipulationOrigin.X, e.ManipulationOrigin.Y);
-            var current = _viewport.ScreenToWorld(e.ManipulationOrigin.X + e.DeltaManipulation.Translation.X, e.ManipulationOrigin.Y + e.DeltaManipulation.Translation.Y);
+            var previousX = e.ManipulationOrigin.X;
+            var previousY = e.ManipulationOrigin.Y;
+            var currentX = e.ManipulationOrigin.X + e.DeltaManipulation.Translation.X;
+            var currentY = e.ManipulationOrigin.Y + e.DeltaManipulation.Translation.Y;
+            var deltaScale = GetDeltaScale(e.DeltaManipulation.Scale);
 
-            double scale = (Math.Abs(e.DeltaManipulation.Scale.X - 1d) > Constants.Epsilon && !ZoomLocked) ? 
-                ((e.DeltaManipulation.Scale.X + e.DeltaManipulation.Scale.Y) / 2) : 1.0;
-            PanAndZoom(current, previous, scale);
+            _viewport.Transform(currentX, currentY, previousX, previousY, deltaScale);
 
             _invalid = true;
-            // not calling map.ViewChanged(false, view.Extent, view.Resolution); for smoother panning/zooming
-            OnViewChanged(true);            
+            OnViewChanged(true);
             e.Handled = true;
         }
-               
+
+        private double GetDeltaScale(XamlVector scale)
+        {
+            var deltaScale = (scale.X + scale.Y) / 2;
+            if (ZoomLocked) deltaScale = 1;
+            if (!(Math.Abs(deltaScale - 1d) > Constants.Epsilon)) deltaScale = 1;
+            return deltaScale;
+        }
+
         private void OnManipulationCompleted(object sender, ManipulationCompletedEventArgs e)
         {
             Refresh();
-        }
-
-#endif
-
-#if (WINDOWS_PHONE)
-        private void WP_OnManipulationStarted(object sender, ManipulationStartedEventArgs manipulationStartedEventArgs)
-        {
-        }
-
-        private void WP_OnManipulationCompleted(object sender, ManipulationCompletedEventArgs manipulationCompletedEventArgs)
-        {
-            Refresh();
-        }
-
-        private void WP_OnManipulationDelta(object sender, ManipulationDeltaEventArgs e)
-        {
-            var previous = _viewport.ScreenToWorld(e.ManipulationOrigin.X, e.ManipulationOrigin.Y);
-            var current = _viewport.ScreenToWorld(e.ManipulationOrigin.X + e.DeltaManipulation.Translation.X, e.ManipulationOrigin.Y + e.DeltaManipulation.Translation.Y);
-
-            double scale = (e.DeltaManipulation.Scale.X != 1d && !ZoomLocked) ?
-                ((e.DeltaManipulation.Scale.X + e.DeltaManipulation.Scale.Y) / 2) : 1.0;
-            PanAndZoom(current, previous, (scale <= 0) ? 1 : scale);
-
-            _invalid = true;
-            // not calling map.ViewChanged(false, view.Extent, view.Resolution); for smoother panning/zooming
-            OnViewChanged(true);
-        }
-#endif
-
-        //end of windows phone support
-        private void PanAndZoom(Geometries.Point current, Geometries.Point previous, double deltaScale)
-        {
-            var diffX = previous.X - current.X;
-            var diffY = previous.Y - current.Y;
-            var newX = _viewport.Center.X + diffX;
-            var newY = _viewport.Center.Y + diffY;
-            var zoomCorrectionX = (1 - deltaScale) * (current.X - _viewport.Center.X);
-            var zoomCorrectionY = (1 - deltaScale) * (current.Y - _viewport.Center.Y);
-            _viewport.Resolution = _viewport.Resolution / deltaScale;
-
-            _viewport.Center = new Geometries.Point(newX - zoomCorrectionX, newY - zoomCorrectionY);
         }
 
         #endregion
