@@ -183,13 +183,16 @@ namespace Mapsui.UI.Xaml
             SizeChanged += MapControlSizeChanged;
             CompositionTarget.Rendering += CompositionTargetRendering;
             Renderer = new MapRenderer(RenderCanvas);
-
+            
+#if (!SILVERLIGHT && !WINDOWS_PHONE)
             ManipulationDelta += OnManipulationDelta;
             ManipulationCompleted += OnManipulationCompleted;
-#if (!SILVERLIGHT && !WINDOWS_PHONE)
             ManipulationInertiaStarting += OnManipulationInertiaStarting;
             Dispatcher.ShutdownStarted += DispatcherShutdownStarted;
             IsManipulationEnabled = true;
+#elif WINDOWS_PHONE
+           _renderCanvas.ManipulationDelta += OnManipulationDelta;
+           _renderCanvas.ManipulationCompleted += OnManipulationCompleted;
 #endif
         }
 
