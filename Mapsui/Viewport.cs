@@ -132,12 +132,10 @@ namespace Mapsui
             Resolution = Resolution / deltaScale;
 
             current = ScreenToWorld(screenX, screenY); // calculate current position again with adjusted resolution
-            // When you pinch zoom outside the center of the map 
-            // this will also affect the new center. 
+            // Zooming should be centered on the place where the map is touched. This is done with the scale correction.
             var scaleCorrectionX = (1 - deltaScale) * (current.X - Center.X);
             var scaleCorrectionY = (1 - deltaScale) * (current.Y - Center.Y);
-
-           
+            
             Center.X = newX - scaleCorrectionX;
             Center.Y = newY - scaleCorrectionY;
             _modified = true;

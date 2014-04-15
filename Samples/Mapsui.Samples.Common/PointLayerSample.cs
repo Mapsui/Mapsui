@@ -143,5 +143,13 @@ namespace Mapsui.Samples.Common
             }
             return result;
         }
+
+        public static ILayer CreateLayerWithDataSourceWithWGS84Point()
+        {
+            return new Layer
+            {
+                DataSource = new MemoryProvider(new Point(4.643331, 52.433489)) { SRID = 4326 }
+            };
+        }
     }
 }

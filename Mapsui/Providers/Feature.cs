@@ -18,12 +18,15 @@ namespace Mapsui.Providers
             Styles = new Collection<IStyle>();
         }
 
-        public Feature(Feature feature)
+        public Feature(IFeature feature)
         {
             Geometry = feature.Geometry;
-            _dictionary = feature._dictionary;
             RenderedGeometry = feature.RenderedGeometry;
             Styles = feature.Styles;
+            foreach (var field in feature.Fields)
+            {
+                this[field] = feature[field];
+            }
         }
 
         public IGeometry Geometry { get; set; }

@@ -117,8 +117,7 @@ namespace Mapsui.Layers
             IsFetching = true;
             NeedsUpdate = false;
 
-            if (Transformation != null && Transformation.MapSRID != -1 && SRID != -1)
-                extent = Transformation.Transfrom(Transformation.MapSRID, SRID, extent);
+            extent = Transform(extent);
 
             var fetcher = new FeatureFetcher(extent, resolution, DataSource, DataArrived);
             ThreadPool.QueueUserWorkItem(fetcher.FetchOnThread);
@@ -129,38 +128,56 @@ namespace Mapsui.Layers
             //the data in the cache is stored in the map projection so it projected only once.
             if (features == null) throw new ArgumentException("argument features may not be null");
 
-            /* 
-             * todo: 
-             * Temporarily try catch added, fix for when features.ToList() crashes on InvalidOperationException 
-             * happens sometimes with a really slow internet connection
-             */
             try
             {
-                features = features.ToList();
-                if (Transformation != null && Transformation.MapSRID != -1 && SRID != -1 &&
-                    SRID != Transformation.MapSRID)
-                {
-                    foreach (var feature in features.Where(feature => !(feature.Geometry is Raster)))
-                    {
-                        feature.Geometry = Transformation.Transform(SRID, Transformation.MapSRID,
-                            (Geometry) feature.Geometry);
-                    }
-                }
-
-                Cache = new MemoryProvider(features);
-
-                IsFetching = false;
+                Cache = new MemoryProvider(Transform(features));
                 OnDataChanged(new DataChangedEventArgs(null, false, null, LayerName));
 
-                if (NeedsUpdate)
-                {
-                    StartNewFetch(NewExtent, NewResolution);
-                }
+                IsFetching = false;
+                if (NeedsUpdate) StartNewFetch(NewExtent, NewResolution);
             }
             catch (InvalidOperationException ex)
             {
-                var text = ex.Message;
             }
+        }
+
+        private BoundingBox Transform(BoundingBox extent)
+        {
+            if (Transformation != null && Transformation.MapSRID != -1 && SRID != -1)
+                extent = Transformation.Transfrom(Transformation.MapSRID, SRID, CopyBoundingBox(extent));
+            return extent;
+        }
+
+        private BoundingBox CopyBoundingBox(BoundingBox extent)
+        {
+            return new BoundingBox(extent.MinX, extent.MinY, extent.MaxX, extent.MaxY);
+        }
+
+        private IEnumerable<IFeature> Transform(IEnumerable<IFeature> features)
+        {
+            features = CopyFeatures(features).ToList();
+            if (Transformation != null &&
+                Transformation.MapSRID != -1 &&
+                SRID != -1 &&
+                SRID != Transformation.MapSRID)
+            {
+                foreach (var feature in features.Where(feature => !(feature.Geometry is Raster)))
+                {
+                    var geometry = Geometry.GeomFromWKB(feature.Geometry.AsBinary()); // copy
+                    feature.Geometry = Transformation.Transform(SRID, Transformation.MapSRID, geometry);
+                }
+            }
+            return features;
+        }
+
+        private IEnumerable<IFeature> CopyFeatures(IEnumerable<IFeature> features)
+        {
+            var result = new List<IFeature>();
+            foreach (var feature in features)
+            {
+                result.Add(new Feature(feature));
+            }
+            return result;
         }
 
         public override void ClearCache()

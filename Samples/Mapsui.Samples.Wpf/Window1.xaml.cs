@@ -5,6 +5,7 @@ using BruTile.Web;
 using BruTile.Wmts;
 using Mapsui.Geometries;
 using Mapsui.Layers;
+using Mapsui.Projection;
 using Mapsui.Providers;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Desktop;
@@ -70,13 +71,23 @@ namespace Mapsui.Samples.Wpf
         {
             MapControl.Map.Layers.Clear();
             MapControl.Map.Layers.Add(new TileLayer(new OsmTileSource()) { LayerName = "OSM" });
-
             LayerList.Initialize(MapControl.Map.Layers);
             MapControl.ZoomToFullEnvelope();
             MapControl.Refresh();
         }
 
-        private void AnimatedPoints(object sender, RoutedEventArgs e)
+        private void ProjectedPointClick(object sender, RoutedEventArgs e)
+        {
+            MapControl.Map.Layers.Clear();
+            MapControl.Map.Transformation = new MinimalTransformation { MapSRID = 3857 };
+            MapControl.Map.Layers.Add(new TileLayer(new OsmTileSource()) { LayerName = "OSM" });
+            MapControl.Map.Layers.Add(PointLayerSample.CreateLayerWithDataSourceWithWGS84Point());
+            LayerList.Initialize(MapControl.Map.Layers);
+            MapControl.ZoomToFullEnvelope();
+            MapControl.Refresh();
+        }
+
+        private void AnimatedPointsClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
             MapControl.Map.Layers.Add(new TileLayer(new OsmTileSource()) { LayerName = "OSM" });
@@ -87,7 +98,7 @@ namespace Mapsui.Samples.Wpf
             MapControl.Refresh();
         }
 
-        private void RandomPointWithStackLabel(object sender, RoutedEventArgs e)
+        private void RandomPointWithStackLabelClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
             MapControl.Map.Layers.Add(new TileLayer(new OsmTileSource()) { LayerName = "OSM" });
@@ -99,7 +110,7 @@ namespace Mapsui.Samples.Wpf
             MapControl.Refresh();
         }
 
-        private void RandomPointsWithFeatureInfo(object server, RoutedEventArgs e)
+        private void RandomPointsWithFeatureInfoClick(object server, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
             MapControl.Map.Layers.Add(new TileLayer(new OsmTileSource()) { LayerName = "OSM" });

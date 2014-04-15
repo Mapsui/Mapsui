@@ -172,7 +172,6 @@ namespace Mapsui.UI.Xaml
             
             e.Handled = true; 
 
-            RefreshGraphics();
             _map.ViewChanged(true, _viewport.Extent, _viewport.Resolution);
             OnViewChanged(true);
         }
@@ -201,7 +200,7 @@ namespace Mapsui.UI.Xaml
             RefreshGraphics();
         }
 
-        private void RefreshGraphics() //should be private soon
+        private void RefreshGraphics() 
         {
             InvalidateArrange();
             InvalidateMeasure();

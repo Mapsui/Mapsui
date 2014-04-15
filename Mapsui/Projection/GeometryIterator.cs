@@ -9,20 +9,16 @@ namespace Mapsui.Projection
     {
         public static IEnumerable<Point> AllVertices(this IGeometry geometry)
         {
-            if (geometry == null)
-                return new Point[0];
+            if (geometry == null) return new Point[0];
+
             var point = geometry as Point;
-            if (point != null)
-                return new[] { point };
+            if (point != null) return new[] { point };
             var lineString = geometry as LineString;
-            if (lineString != null)
-                return AllVertices(lineString);
-            var polygon = geometry as Polygon;
-            if (polygon != null)
-                return AllVertices(polygon);
-            var geometrys = geometry as IEnumerable<Geometry>;
-            if (geometrys != null)
-                return AllVertices(geometrys);
+            if (lineString != null) return AllVertices(lineString);
+            var polygon = geometry as Polygon; 
+            if (polygon != null) return AllVertices(polygon);
+            var geometries = geometry as IEnumerable<Geometry>;
+            if (geometries != null) return AllVertices(geometries);
             
             var format = String.Format("unsupported geometry: {0}", geometry.GetType().Name);
             throw new NotSupportedException(format);

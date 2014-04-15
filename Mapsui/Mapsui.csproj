@@ -76,6 +76,8 @@
     <Compile Include="Geometries\Surface.cs" />
     <Compile Include="Layers\AnimatedFeatures.cs" />
     <Compile Include="Layers\AnimatedPointLayer.cs" />
+    <Compile Include="Projection\BoundingBoxIterator.cs" />
+    <Compile Include="Projection\MinimalTransformation.cs" />
     <Compile Include="Rendering\IRenderGetStrategy.cs" />
     <Compile Include="IViewport.cs" />
     <Compile Include="Layers\ArcGISDynamicLayer\ArcGISDynamicProvider.cs" />
@@ -165,6 +167,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

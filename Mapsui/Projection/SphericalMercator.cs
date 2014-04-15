@@ -1,9 +1,9 @@
-﻿using System;
-using Mapsui.Geometries;
+﻿using Mapsui.Geometries;
+using System;
 
 namespace Mapsui.Projection
 {
-    public static class SphericalMercator
+    public class SphericalMercator
     {
         private const double Radius = 6378137;
         private const double D2R = Math.PI/180;
