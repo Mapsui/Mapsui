@@ -264,6 +264,7 @@ namespace Mapsui.UI.WinForms
 
         protected override void OnPaintBackground(PaintEventArgs e)
         {
+            if (DesignMode) base.OnPaintBackground(e);
             //by overriding this method and not calling the base class implementation 
             //we prevent flickering.
         }
