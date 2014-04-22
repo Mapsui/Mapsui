@@ -15,6 +15,7 @@
 // along with Mapsui; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
+using System.Threading.Tasks;
 using Mapsui.Fetcher;
 using Mapsui.Geometries;
 using Mapsui.Providers;
@@ -27,16 +28,16 @@ namespace Mapsui.Layers
 {
     public class Layer : BaseLayer
     {
-        public IProvider DataSource { get; set; }
-        public int FetchingPostponedInMilliseconds { get; set; }
-
         protected bool IsFetching;
         protected bool NeedsUpdate = true;
         protected double NewResolution;
         protected BoundingBox NewExtent;
-        protected MemoryProvider Cache;
-        protected Timer StartFetchTimer; 
-        
+        protected IEnumerable<IFeature> Cache;
+        protected Timer StartFetchTimer;
+
+        public IProvider DataSource { get; set; }
+        public int FetchingPostponedInMilliseconds { get; set; }
+
         /// <summary>
         /// Gets or sets the SRID of this VectorLayer's data source
         /// </summary>
@@ -44,8 +45,7 @@ namespace Mapsui.Layers
         {
             get
             {
-                if (DataSource == null)
-                    throw (new Exception("DataSource property not set on layer '" + LayerName + "'"));
+                if (DataSource == null) throw (new Exception("DataSource is null on'" + LayerName + "'"));
                 return DataSource.SRID;
             }
         }
@@ -74,13 +74,13 @@ namespace Mapsui.Layers
 
         public Layer(string layername) : base(layername)
         {
-            Cache = new MemoryProvider();
+            Cache = new List<IFeature>(); 
             FetchingPostponedInMilliseconds = 500;
         }
 
         public override IEnumerable<IFeature> GetFeaturesInView(BoundingBox extent, double resolution)
         {
-            return Cache.GetFeaturesInView(extent, resolution);
+            return Cache;
         }
 
         public override void AbortFetch()
@@ -120,17 +120,16 @@ namespace Mapsui.Layers
             extent = Transform(extent);
 
             var fetcher = new FeatureFetcher(extent, resolution, DataSource, DataArrived);
-            ThreadPool.QueueUserWorkItem(fetcher.FetchOnThread);
+            Task.Factory.StartNew(() => fetcher.FetchOnThread(null));
         }
 
         protected void DataArrived(IEnumerable<IFeature> features, object state = null)
         {
-            //the data in the cache is stored in the map projection so it projected only once.
             if (features == null) throw new ArgumentException("argument features may not be null");
 
             try
             {
-                Cache = new MemoryProvider(Transform(features));
+                Cache = Transform(features);
                 OnDataChanged(new DataChangedEventArgs(null, false, null, LayerName));
 
                 IsFetching = false;
@@ -143,8 +142,8 @@ namespace Mapsui.Layers
 
         private BoundingBox Transform(BoundingBox extent)
         {
-            if (Transformation != null && Transformation.MapSRID != -1 && SRID != -1)
-                extent = Transformation.Transfrom(Transformation.MapSRID, SRID, CopyBoundingBox(extent));
+            if (Transformation == null || Transformation.MapSRID == -1 || SRID == -1) return extent;
+            extent = Transformation.Transfrom(Transformation.MapSRID, SRID, CopyBoundingBox(extent));
             return extent;
         }
 
@@ -182,7 +181,7 @@ namespace Mapsui.Layers
 
         public override void ClearCache()
         {
-            Cache.Clear();
+            Cache = null;
         }
     }
 }
