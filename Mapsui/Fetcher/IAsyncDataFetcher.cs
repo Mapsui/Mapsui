@@ -24,7 +24,13 @@ namespace Mapsui.Fetcher
     public interface IAsyncDataFetcher
     {
         void AbortFetch();
-        void ViewChanged(bool changeEnd, BoundingBox extent, double resolution);
+        /// <summary>
+        /// Indicates that there has been a change in the view of the map
+        /// </summary>
+        /// <param name="majorChange">If true an implementation should always refresh it's data. If false (minorChange) the implemenatation could ignore it.</param>
+        /// <param name="extent">The extent of the visisble map</param>
+        /// <param name="resolution">The resolution of the visible map</param>
+        void ViewChanged(bool majorChange, BoundingBox extent, double resolution);
         event DataChangedEventHandler DataChanged;
         void ClearCache();
     }

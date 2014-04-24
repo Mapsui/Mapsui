@@ -212,7 +212,7 @@ namespace Mapsui.Layers
 
         public abstract void AbortFetch();
 
-        public abstract void ViewChanged(bool changeEnd, BoundingBox extent, double resolution);
+        public abstract void ViewChanged(bool majorChange, BoundingBox extent, double resolution);
 
         public event DataChangedEventHandler DataChanged;
 

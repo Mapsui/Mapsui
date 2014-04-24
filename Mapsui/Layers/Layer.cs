@@ -87,11 +87,11 @@ namespace Mapsui.Layers
         {
         }
 
-        public override void ViewChanged(bool changeEnd, BoundingBox extent, double resolution)
+        public override void ViewChanged(bool majorChange, BoundingBox extent, double resolution)
         {
             if (!Enabled) return;
             if (DataSource == null) return;
-            if (!changeEnd) return;
+            if (!majorChange) return;
 
             NewExtent = extent;
             NewResolution = resolution;
