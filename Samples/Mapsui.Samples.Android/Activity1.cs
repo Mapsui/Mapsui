@@ -25,6 +25,8 @@ namespace Mapsui.Samples.Android
             var pointLayer = PointLayerSample.CreateRandomPointLayer(mapView.Map.Envelope);
             pointLayer.Style = CreatePointLayerStyle();
             mapView.Map.Layers.Add(pointLayer);
+
+            mapView.Map.Layers.Add(PointLayerSample.CreateBitmapPointLayer());
         }
 
         private static IStyle CreatePointLayerStyle()

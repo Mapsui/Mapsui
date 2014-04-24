@@ -60,6 +60,20 @@ namespace Mapsui.Samples.Common
             return feature;
         }
 
+        private static Feature CreateBitmapPoint()
+        {
+            var feature = new Feature { Geometry = new Point(0, 1000000) };
+            feature.Styles.Add(new SymbolStyle
+                {
+                    Symbol = new Bitmap { Data = System.Reflection.Assembly.GetExecutingAssembly()
+                    .GetManifestResourceStream("Mapsui.Samples.Common.Images.loc.png")}, 
+                    SymbolType = SymbolType.Ellipse, 
+                    UnitType = UnitType.Pixel, 
+                    SymbolScale = 0.5 
+                });
+            return feature;
+        }
+
         public static IEnumerable<IGeometry> GenerateRandomPoints(BoundingBox box, int count = 25)
         {
            var result = new List<IGeometry>();
@@ -149,6 +163,14 @@ namespace Mapsui.Samples.Common
             return new Layer
             {
                 DataSource = new MemoryProvider(new Point(4.643331, 52.433489)) { SRID = 4326 }
+            };
+        }
+
+        public static ILayer CreateBitmapPointLayer()
+        {
+            return new Layer("bitmapPointLayer")
+            {
+                DataSource = new MemoryProvider(CreateBitmapPoint()),
             };
         }
     }

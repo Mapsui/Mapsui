@@ -46,7 +46,6 @@
     <Compile Include="GeodanWorldTmsTileSource.cs" />
     <Compile Include="GeodanWorldWmsCTileSource.cs" />
     <Compile Include="GeodanWorldWmsTileSource.cs" />
-    <Compile Include="GpsInputFaker.cs" />
     <Compile Include="LineStringSample.cs" />
     <Compile Include="PointLayerSample.cs" />
     <Compile Include="PointLayerWithWorldUnitsForSymbolsSample.cs" />
@@ -65,6 +64,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\loc.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
