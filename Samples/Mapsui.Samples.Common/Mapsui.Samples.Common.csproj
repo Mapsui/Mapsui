@@ -46,7 +46,6 @@
     <Compile Include="GeodanWorldTmsTileSource.cs" />
     <Compile Include="GeodanWorldWmsCTileSource.cs" />
     <Compile Include="GeodanWorldWmsTileSource.cs" />
-    <Compile Include="GpsInputFaker.cs" />
     <Compile Include="LineStringSample.cs" />
     <Compile Include="PointLayerSample.cs" />
     <Compile Include="PointLayerWithWorldUnitsForSymbolsSample.cs" />
