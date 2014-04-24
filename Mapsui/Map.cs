@@ -51,14 +51,14 @@ namespace Mapsui
         void LayersLayerRemoved(ILayer layer)
         {
             layer.AbortFetch();
-            layer.DataChanged -= AsyncLayerDataChanged;
+            layer.DataChanged -= LayerDataChanged;
             layer.Feedback -= LayerFeedback;
             layer.PropertyChanged -= LayerPropertyChanged;
         }
 
         void LayersLayerAdded(ILayer layer)
         {
-            layer.DataChanged += AsyncLayerDataChanged;
+            layer.DataChanged += LayerDataChanged;
             layer.Feedback += LayerFeedback;
             layer.PropertyChanged += LayerPropertyChanged;
             layer.Transformation = Transformation;
@@ -96,7 +96,7 @@ namespace Mapsui
             }
         }
 
-        private void AsyncLayerDataChanged(object sender, DataChangedEventArgs e)
+        private void LayerDataChanged(object sender, DataChangedEventArgs e)
         {
             OnDataChanged(sender, e);
         }
