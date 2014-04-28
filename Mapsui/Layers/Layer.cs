@@ -64,7 +64,7 @@ namespace Mapsui.Layers
                 {
                     var extent = DataSource.GetExtents();
                     if (Transformation != null && Transformation.MapSRID != -1 && SRID != -1)
-                        return Transformation.Transfrom(SRID, Transformation.MapSRID, extent);
+                        return Transformation.Transform(SRID, Transformation.MapSRID, extent);
                     return extent;
                 }
             }
@@ -143,7 +143,7 @@ namespace Mapsui.Layers
         private BoundingBox Transform(BoundingBox extent)
         {
             if (Transformation == null || Transformation.MapSRID == -1 || SRID == -1) return extent;
-            extent = Transformation.Transfrom(Transformation.MapSRID, SRID, CopyBoundingBox(extent));
+            extent = Transformation.Transform(Transformation.MapSRID, SRID, CopyBoundingBox(extent));
             return extent;
         }
 
