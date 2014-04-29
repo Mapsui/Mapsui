@@ -1,15 +1,13 @@
-﻿using BruTile.Extensions;
-using Mapsui.ArcGISDynamicLayer;
-using Mapsui.Geometries;
-using Mapsui.Providers;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Net;
 using System.Text;
+using BruTile.Extensions;
+using Mapsui.Geometries;
 
-namespace Mapsui.Layers.ArcGISDynamicLayer
+namespace Mapsui.Providers.ArcGIS.Dynamic
 {
     public class ArcGISDynamicProvider : IProvider
     {
@@ -20,11 +18,11 @@ namespace Mapsui.Layers.ArcGISDynamicLayer
         /// Create ArcGisDynamicProvider based on a given capabilities file
         /// </summary>
         /// <param name="url">url to map service example: http://url/arcgis/rest/services/test/MapServer</param>
-        /// <param name="capabilities"></param>
-        public ArcGISDynamicProvider(string url, Capabilities capabilities)
+        /// <param name="arcGisDynamicCapabilities"></param>
+        public ArcGISDynamicProvider(string url, ArcGISDynamicCapabilities arcGisDynamicCapabilities)
         {
             Url = url;
-            Capabilities = capabilities;
+            ArcGisDynamicCapabilities = arcGisDynamicCapabilities;
             _timeOut = 10000;            
         }
 
@@ -36,7 +34,7 @@ namespace Mapsui.Layers.ArcGISDynamicLayer
         {
             Url = url;
 
-            Capabilities = new Capabilities
+            ArcGisDynamicCapabilities = new ArcGISDynamicCapabilities
             {
                 fullExtent = new Extent { xmin = 0, xmax = 0, ymin = 0, ymax = 0 },
                 initialExtent = new Extent { xmin = 0, xmax = 0, ymin = 0, ymax = 0 }
@@ -45,12 +43,12 @@ namespace Mapsui.Layers.ArcGISDynamicLayer
             var capabilitiesHelper = new CapabilitiesHelper();
             capabilitiesHelper.CapabilitiesReceived += CapabilitiesHelperCapabilitiesReceived;
             capabilitiesHelper.CapabilitiesFailed += CapabilitiesHelperCapabilitiesFailed;
-            capabilitiesHelper.GetCapabilities(url);
+            capabilitiesHelper.GetCapabilities(url, CapabilitiesType.DynamicServiceCapabilities);
 
             _timeOut = 10000;
         }
 
-        public Capabilities Capabilities { get; private set; }
+        public ArcGISDynamicCapabilities ArcGisDynamicCapabilities { get; private set; }
         public ICredentials Credentials { get; set; }
 
         public string Url
@@ -77,18 +75,18 @@ namespace Mapsui.Layers.ArcGISDynamicLayer
         {
             get
             {
-                return Capabilities.spatialReference.wkid;
+                return ArcGisDynamicCapabilities.spatialReference.wkid;
             }
             set
             {
-                Capabilities.spatialReference.wkid = value;
+                ArcGisDynamicCapabilities.spatialReference.wkid = value;
             }
         }
 
         public IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
         {
             //If there are no layers (probably not initialised) return nothing
-            if (Capabilities.layers == null)
+            if (ArcGisDynamicCapabilities.layers == null)
                 return new Features();
 
             IFeatures features = new Features();
@@ -105,7 +103,7 @@ namespace Mapsui.Layers.ArcGISDynamicLayer
 
         public BoundingBox GetExtents()
         {
-            return new BoundingBox(Capabilities.initialExtent.xmin, Capabilities.initialExtent.ymin, Capabilities.initialExtent.xmax, Capabilities.initialExtent.ymax);
+            return new BoundingBox(ArcGisDynamicCapabilities.initialExtent.xmin, ArcGisDynamicCapabilities.initialExtent.ymin, ArcGisDynamicCapabilities.initialExtent.xmax, ArcGisDynamicCapabilities.initialExtent.ymax);
         }
 
         private void CapabilitiesHelperCapabilitiesFailed(object sender, EventArgs e)
@@ -115,11 +113,11 @@ namespace Mapsui.Layers.ArcGISDynamicLayer
         
         private void CapabilitiesHelperCapabilitiesReceived(object sender, EventArgs e)
         {
-            var capabilities = sender as Capabilities;
+            var capabilities = sender as ArcGISDynamicCapabilities;
             if (capabilities == null)
                 return;
 
-            Capabilities = capabilities;
+            ArcGisDynamicCapabilities = capabilities;
         }
 
         /// <summary>
@@ -192,7 +190,7 @@ namespace Mapsui.Layers.ArcGISDynamicLayer
              */
             var oneAdded = false;
 
-            foreach (var t in Capabilities.layers)
+            foreach (var t in ArcGisDynamicCapabilities.layers)
             {
                 if (t.defaultVisibility == false)
                     continue;
@@ -204,20 +202,20 @@ namespace Mapsui.Layers.ArcGISDynamicLayer
                 oneAdded = true;
             }
            
-            strReq.AppendFormat("&format={0}", GetFormat(Capabilities));
+            strReq.AppendFormat("&format={0}", GetFormat(ArcGisDynamicCapabilities));
             strReq.Append("&transparent=true");
             strReq.Append("&f=image");
 
             return strReq.ToString();
         }
         
-        private static string GetFormat(Capabilities capabilities)
+        private static string GetFormat(ArcGISDynamicCapabilities arcGisDynamicCapabilities)
         {
             //png | png8 | png24 | jpg | pdf | bmp | gif | svg | png32 (png32 only supported from 9.3.1 and up)
-            if (capabilities.supportedImageFormatTypes == null)//Not all services return supported types, use png
+            if (arcGisDynamicCapabilities.supportedImageFormatTypes == null)//Not all services return supported types, use png
                 return "png";
 
-            var supportedTypes = capabilities.supportedImageFormatTypes.ToLower();
+            var supportedTypes = arcGisDynamicCapabilities.supportedImageFormatTypes.ToLower();
 
             if (supportedTypes.Contains("png32"))
                 return "png32";
