@@ -1,17 +1,14 @@
-using System;
-using System.Drawing;
-using System.Net.Mime;
-using System.Threading;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Styles;
 using MonoTouch.CoreAnimation;
-using MonoTouch.CoreGraphics;
 using MonoTouch.UIKit;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using Point = Mapsui.Geometries.Point;
 
 namespace Mapsui.Rendering.iOS
@@ -31,18 +28,23 @@ namespace Mapsui.Rendering.iOS
 
         public void Render(IViewport viewport, IEnumerable<ILayer> layers)
         {
+            Render(_target, viewport, layers, ShowDebugInfoInMap);
+        }
+
+        public static void Render(UIView target, IViewport viewport, IEnumerable<ILayer> layers, bool showDebugInfoInMap)
+        {
             CATransaction.Begin();
             CATransaction.AnimationDuration = 0;
             
-            if (_target.Layer.Sublayers != null)
+            if (target.Layer.Sublayers != null)
             {
-                foreach (var layer in _target.Layer.Sublayers)
+                foreach (var layer in target.Layer.Sublayers)
                 {
                     layer.RemoveFromSuperLayer();
                 }
             }
             
-            Render(_target.Layer, viewport, layers, ShowDebugInfoInMap);
+            Render(target.Layer, viewport, layers, showDebugInfoInMap);
 
             CATransaction.Commit();
         }
@@ -59,7 +61,7 @@ namespace Mapsui.Rendering.iOS
             }
         }
 
-        private static void Render(CALayer target, IViewport viewport, IEnumerable<ILayer> layers, bool showDebugInfoInMap)
+        private static void Render(CALayer target, IViewport viewport, IEnumerable<ILayer> layers, bool showDebugInfoInMap = false)
         {
             layers = layers.ToList();
             VisibleFeatureIterator.IterateLayers(viewport, layers, (v, s, f) => RenderGeometry(target, v, s, f));
@@ -67,25 +69,31 @@ namespace Mapsui.Rendering.iOS
 
         public MemoryStream RenderToBitmapStream(IViewport viewport, IEnumerable<ILayer> layers)
         {
+            return RenderToBitmapStreamStatic(viewport, layers);
+        }
+
+        private MemoryStream RenderToBitmapStreamStatic(IViewport viewport, IEnumerable<ILayer> layers)
+        {
             UIImage image = null;
             var handle = new ManualResetEvent(false);
 
-            _target.InvokeOnMainThread(() =>
+            var view = new UIView();
+            view.InvokeOnMainThread(() =>
             {
-                _target.Opaque = false;
-                _target.BackgroundColor = UIColor.Clear;
-
-                Render(viewport, layers);
-                image = ToImage(_target);
+                view.Opaque = false;
+                view.BackgroundColor = UIColor.Clear;
+                Render(view, viewport, layers, false);
+                image = ToImage(view, new RectangleF(0, 0, (float)viewport.Width, (float)viewport.Height));
                 handle.Set();
             });
+
             handle.WaitOne();
             return new MemoryStream(image.AsPNG().ToArray());
         }
-        
-        private UIImage ToImage(UIView view)
+
+        private static UIImage ToImage(UIView view, RectangleF frame)
         {
-            UIGraphics.BeginImageContext(view.Frame.Size);
+            UIGraphics.BeginImageContext(frame.Size);
             UIColor.Clear.SetColor();
             UIGraphics.RectFill(view.Frame);
             view.Layer.RenderInContext(UIGraphics.GetCurrentContext());
