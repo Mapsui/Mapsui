@@ -18,6 +18,7 @@
 using System.Threading.Tasks;
 using Mapsui.Fetcher;
 using Mapsui.Geometries;
+using Mapsui.Projection;
 using Mapsui.Providers;
 using System;
 using System.Collections.Generic;
@@ -142,7 +143,7 @@ namespace Mapsui.Layers
 
         private BoundingBox Transform(BoundingBox extent)
         {
-            if (Transformation == null || Transformation.MapSRID == -1 || SRID == -1) return extent;
+            if (!NeedsTransform(Transformation, SRID)) return extent;
             extent = Transformation.Transform(Transformation.MapSRID, SRID, CopyBoundingBox(extent));
             return extent;
         }
@@ -154,29 +155,25 @@ namespace Mapsui.Layers
 
         private IEnumerable<IFeature> Transform(IEnumerable<IFeature> features)
         {
-            features = CopyFeatures(features).ToList();
-            if (Transformation != null &&
-                Transformation.MapSRID != -1 &&
-                SRID != -1 &&
-                SRID != Transformation.MapSRID)
+            if (!NeedsTransform(Transformation, SRID)) return features;
+            
+            var copiedFeatures = CopyFeatures(features).ToList();
+            foreach (var feature in copiedFeatures.Where(feature => !(feature.Geometry is Raster)))
             {
-                foreach (var feature in features.Where(feature => !(feature.Geometry is Raster)))
-                {
-                    var geometry = Geometry.GeomFromWKB(feature.Geometry.AsBinary()); // copy
-                    feature.Geometry = Transformation.Transform(SRID, Transformation.MapSRID, geometry);
-                }
+                var geometry = Geometry.GeomFromWKB(feature.Geometry.AsBinary()); // copy
+                feature.Geometry = Transformation.Transform(SRID, Transformation.MapSRID, geometry);
             }
-            return features;
+            return copiedFeatures;
+        }
+
+        private static bool NeedsTransform(ITransformation transformation, int SRID)
+        {
+            return !(transformation == null || transformation.MapSRID == -1 || SRID == -1 || SRID == transformation.MapSRID);
         }
 
         private IEnumerable<IFeature> CopyFeatures(IEnumerable<IFeature> features)
         {
-            var result = new List<IFeature>();
-            foreach (var feature in features)
-            {
-                result.Add(new Feature(feature));
-            }
-            return result;
+            return features.Select(feature => new Feature(feature)).Cast<IFeature>().ToList();
         }
 
         public override void ClearCache()
