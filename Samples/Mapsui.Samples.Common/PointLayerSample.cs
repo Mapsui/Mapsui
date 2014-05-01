@@ -66,10 +66,11 @@ namespace Mapsui.Samples.Common
             feature.Styles.Add(new SymbolStyle
                 {
                     Symbol = new Bitmap { Data = System.Reflection.Assembly.GetExecutingAssembly()
-                    .GetManifestResourceStream("Mapsui.Samples.Common.Images.loc.png")}, 
-                    SymbolType = SymbolType.Ellipse, 
-                    UnitType = UnitType.Pixel, 
+                            .GetManifestResourceStream("Mapsui.Samples.Common.Images.loc.png") },
+                    SymbolType = SymbolType.Ellipse,
+                    UnitType = UnitType.Pixel,
                     SymbolScale = 0.5 
+
                 });
             return feature;
         }
@@ -171,6 +172,7 @@ namespace Mapsui.Samples.Common
             return new Layer("bitmapPointLayer")
             {
                 DataSource = new MemoryProvider(CreateBitmapPoint()),
+                Style = null
             };
         }
     }
