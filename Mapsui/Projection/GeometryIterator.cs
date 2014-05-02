@@ -26,16 +26,14 @@ namespace Mapsui.Projection
 
         private static IEnumerable<Point> AllVertices(LineString lineString)
         {
-            if (lineString == null)
-                throw new ArgumentNullException("lineString");
+            if (lineString == null) throw new ArgumentNullException("lineString");
 
             return lineString.Vertices;
         }
 
         private static IEnumerable<Point> AllVertices(Polygon polygon)
         {
-            if (polygon == null)
-                throw new ArgumentNullException("polygon");
+            if (polygon == null) throw new ArgumentNullException("polygon");
 
             foreach (var point in polygon.ExteriorRing.Vertices)
                 yield return point;
@@ -46,8 +44,7 @@ namespace Mapsui.Projection
 
         private static IEnumerable<Point> AllVertices(IEnumerable<Geometry> collection)
         {
-            if (collection == null)
-                throw new ArgumentNullException("collection");
+            if (collection == null) throw new ArgumentNullException("collection");
 
             foreach (var geometry in collection)
                 foreach (var point in AllVertices(geometry))

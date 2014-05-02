@@ -75,6 +75,7 @@ namespace Mapsui.Layers
             get{ return _enabled; } 
             set
             {
+                if (_enabled == value) return;
                 _enabled = value;
                 OnPropertyChanged("Enabled");
             }
@@ -212,7 +213,7 @@ namespace Mapsui.Layers
 
         public abstract void AbortFetch();
 
-        public abstract void ViewChanged(bool changeEnd, BoundingBox extent, double resolution);
+        public abstract void ViewChanged(bool majorChange, BoundingBox extent, double resolution);
 
         public event DataChangedEventHandler DataChanged;
 

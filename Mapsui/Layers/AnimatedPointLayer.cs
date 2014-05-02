@@ -47,7 +47,7 @@ namespace Mapsui.Layers
         {
         }
 
-        public override void ViewChanged(bool changeEnd, BoundingBox extent, double resolution)
+        public override void ViewChanged(bool majorChange, BoundingBox extent, double resolution)
         {
             _extent = extent;
             _resolution = resolution;

@@ -30,7 +30,7 @@ namespace Mapsui.Layers
             // do nothing. This is not an async layer
         }
 
-        public override void ViewChanged(bool changeEnd, BoundingBox extent, double resolution)
+        public override void ViewChanged(bool majorChange, BoundingBox extent, double resolution)
         {
             //The MemoryLayer always has it's data ready so can fire a DataChanged event immediately so that listeners can act on it.
             ThreadPool.QueueUserWorkItem(a => OnDataChanged(new DataChangedEventArgs()));

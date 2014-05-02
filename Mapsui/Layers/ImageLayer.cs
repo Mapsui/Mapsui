@@ -68,7 +68,7 @@ namespace Mapsui.Layers
                 {
                     var box = DataSource.GetExtents();
                     if (Transformation != null && Transformation.MapSRID != -1 && SRID != -1)
-                        return Transformation.Transfrom(SRID, Transformation.MapSRID, box);
+                        return Transformation.Transform(SRID, Transformation.MapSRID, box);
                     return box;
                 }
             }
@@ -116,11 +116,11 @@ namespace Mapsui.Layers
         {
         }
 
-        public override void ViewChanged(bool changeEnd, BoundingBox extent, double resolution)
+        public override void ViewChanged(bool majorChange, BoundingBox extent, double resolution)
         {
             if (!Enabled) return;
             if (DataSource == null) return;
-            if (!changeEnd) return;
+            if (!majorChange) return;
 
             NewExtent = extent;
             NewResolution = resolution;
@@ -140,7 +140,7 @@ namespace Mapsui.Layers
             NeedsUpdate = false;
 
             if (Transformation != null && Transformation.MapSRID != -1 && SRID != -1)
-                extent = Transformation.Transfrom(Transformation.MapSRID, SRID, extent);
+                extent = Transformation.Transform(Transformation.MapSRID, SRID, extent);
 
             var fetcher = new FeatureFetcher(extent, resolution, DataSource, DataArrived, DateTime.Now.Ticks);
             ThreadPool.QueueUserWorkItem(fetcher.FetchOnThread);

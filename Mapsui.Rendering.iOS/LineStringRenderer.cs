@@ -1,11 +1,10 @@
-﻿using System;
-using MonoTouch.CoreAnimation;
-using Mapsui.Styles;
+﻿using Mapsui.Geometries;
 using Mapsui.Providers;
-using Mapsui.Geometries;
-using MonoTouch.UIKit;
-using System.Drawing;
+using Mapsui.Rendering.iOS.ExtensionMethods;
+using Mapsui.Styles;
+using MonoTouch.CoreAnimation;
 using MonoTouch.CoreGraphics;
+using System.Drawing;
 
 namespace Mapsui.Rendering.iOS
 {
@@ -14,7 +13,7 @@ namespace Mapsui.Rendering.iOS
 		public static void Draw(CALayer target, IViewport viewport, IStyle style, IFeature feature)
 		{
 			var lineString = ((LineString) feature.Geometry).Vertices;
-			var paints = style.ToiOS();
+			var paints = style.ToUIKit();
 
 			foreach (var paint in paints) 
 			{

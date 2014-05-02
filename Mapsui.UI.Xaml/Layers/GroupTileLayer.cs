@@ -132,11 +132,11 @@ namespace Mapsui.UI.Xaml.Layers
             }
         }
 
-        public override void ViewChanged(bool changeEnd, BoundingBox extent, double resolution)
+        public override void ViewChanged(bool majorChange, BoundingBox extent, double resolution)
         {
             foreach (var tileLayer in Layers)
             {
-                tileLayer.ViewChanged(changeEnd, extent, resolution);
+                tileLayer.ViewChanged(majorChange, extent, resolution);
             }
 
             if (Schema == null) return;

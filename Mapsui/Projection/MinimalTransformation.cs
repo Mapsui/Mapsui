@@ -36,7 +36,7 @@ namespace Mapsui.Projection
             }
         }
 
-        public BoundingBox Transfrom(int fromSRID, int toSRID, BoundingBox boundingBox)
+        public BoundingBox Transform(int fromSRID, int toSRID, BoundingBox boundingBox)
         {
             Transform(boundingBox.AllVertices(), _toLatLon[fromSRID]);
             Transform(boundingBox.AllVertices(), _fromLatLon[toSRID]);

@@ -19,11 +19,13 @@ namespace Mapsui.Layers
         protected Timer TimerToStartRasterizing;
         private readonly int _delayBeforeRaterize;
         private IEnumerable<IFeature> _previousFeatures;
+        private readonly double _renderResolutionMultiplier;
 
-        public RasterizingLayer(ILayer layer, int delayBeforeRasterize = 500)
+        public RasterizingLayer(ILayer layer, int delayBeforeRasterize = 500, double renderResolutionMultiplier = 1)
         {
             _layer = layer;
             _delayBeforeRaterize = delayBeforeRasterize;
+            _renderResolutionMultiplier = renderResolutionMultiplier;
             TimerToStartRasterizing = new Timer(TimerToStartRasterizingElapsed, null, _delayBeforeRaterize, int.MaxValue);
             _layer.DataChanged += LayerOnDataChanged;
             _cache = new MemoryProvider();
@@ -49,10 +51,12 @@ namespace Mapsui.Layers
 
         private void Rasterize()
         {
+            if (!Enabled) return;
+
             lock (_syncLock)
             {
                 if (double.IsNaN(_resolution) || _resolution <= 0) return;
-                var viewport = CreateViewport(_extent, _resolution);
+                var viewport = CreateViewport(_extent, _resolution, _renderResolutionMultiplier);
 
                 var renderer = RendererFactory.Get;
                 if (renderer == null) throw new Exception("No renderer was registered");
@@ -105,11 +109,11 @@ namespace Mapsui.Layers
             _layer.AbortFetch();
         }
 
-        public override void ViewChanged(bool changeEnd, BoundingBox extent, double resolution)
+        public override void ViewChanged(bool majorChange, BoundingBox extent, double resolution)
         {
             _extent = extent;
             _resolution = resolution;
-            _layer.ViewChanged(changeEnd, extent, resolution);
+            _layer.ViewChanged(majorChange, extent, resolution);
             StartTimerToTriggerRasterize();
         }
 
@@ -118,14 +122,15 @@ namespace Mapsui.Layers
             _layer.ClearCache();
         }
 
-        private static Viewport CreateViewport(BoundingBox extent, double resolution)
+        private static Viewport CreateViewport(BoundingBox extent, double resolution, double renderResolutionMultiplier)
         {
+            var renderResolution = resolution / renderResolutionMultiplier;
             return new Viewport
             {
-                Resolution = resolution,
+                Resolution = renderResolution,
                 Center = extent.GetCentroid(),
-                Width = extent.Width / resolution,
-                Height = extent.Height / resolution
+                Width = extent.Width / renderResolution,
+                Height = extent.Height / renderResolution
             };
         }
     }

@@ -15,8 +15,10 @@
 // along with Mapsui; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
+using System.Threading.Tasks;
 using Mapsui.Fetcher;
 using Mapsui.Geometries;
+using Mapsui.Projection;
 using Mapsui.Providers;
 using System;
 using System.Collections.Generic;
@@ -27,16 +29,16 @@ namespace Mapsui.Layers
 {
     public class Layer : BaseLayer
     {
-        public IProvider DataSource { get; set; }
-        public int FetchingPostponedInMilliseconds { get; set; }
-
         protected bool IsFetching;
         protected bool NeedsUpdate = true;
         protected double NewResolution;
         protected BoundingBox NewExtent;
-        protected MemoryProvider Cache;
-        protected Timer StartFetchTimer; 
-        
+        protected IEnumerable<IFeature> Cache;
+        protected Timer StartFetchTimer;
+
+        public IProvider DataSource { get; set; }
+        public int FetchingPostponedInMilliseconds { get; set; }
+
         /// <summary>
         /// Gets or sets the SRID of this VectorLayer's data source
         /// </summary>
@@ -44,8 +46,7 @@ namespace Mapsui.Layers
         {
             get
             {
-                if (DataSource == null)
-                    throw (new Exception("DataSource property not set on layer '" + LayerName + "'"));
+                if (DataSource == null) throw (new Exception("DataSource is null on'" + LayerName + "'"));
                 return DataSource.SRID;
             }
         }
@@ -64,7 +65,7 @@ namespace Mapsui.Layers
                 {
                     var extent = DataSource.GetExtents();
                     if (Transformation != null && Transformation.MapSRID != -1 && SRID != -1)
-                        return Transformation.Transfrom(SRID, Transformation.MapSRID, extent);
+                        return Transformation.Transform(SRID, Transformation.MapSRID, extent);
                     return extent;
                 }
             }
@@ -74,24 +75,24 @@ namespace Mapsui.Layers
 
         public Layer(string layername) : base(layername)
         {
-            Cache = new MemoryProvider();
+            Cache = new List<IFeature>(); 
             FetchingPostponedInMilliseconds = 500;
         }
 
         public override IEnumerable<IFeature> GetFeaturesInView(BoundingBox extent, double resolution)
         {
-            return Cache.GetFeaturesInView(extent, resolution);
+            return Cache;
         }
 
         public override void AbortFetch()
         {
         }
 
-        public override void ViewChanged(bool changeEnd, BoundingBox extent, double resolution)
+        public override void ViewChanged(bool majorChange, BoundingBox extent, double resolution)
         {
             if (!Enabled) return;
             if (DataSource == null) return;
-            if (!changeEnd) return;
+            if (!majorChange) return;
 
             NewExtent = extent;
             NewResolution = resolution;
@@ -120,17 +121,16 @@ namespace Mapsui.Layers
             extent = Transform(extent);
 
             var fetcher = new FeatureFetcher(extent, resolution, DataSource, DataArrived);
-            ThreadPool.QueueUserWorkItem(fetcher.FetchOnThread);
+            Task.Factory.StartNew(() => fetcher.FetchOnThread(null));
         }
 
         protected void DataArrived(IEnumerable<IFeature> features, object state = null)
         {
-            //the data in the cache is stored in the map projection so it projected only once.
             if (features == null) throw new ArgumentException("argument features may not be null");
 
             try
             {
-                Cache = new MemoryProvider(Transform(features));
+                Cache = Transform(features);
                 OnDataChanged(new DataChangedEventArgs(null, false, null, LayerName));
 
                 IsFetching = false;
@@ -143,8 +143,8 @@ namespace Mapsui.Layers
 
         private BoundingBox Transform(BoundingBox extent)
         {
-            if (Transformation != null && Transformation.MapSRID != -1 && SRID != -1)
-                extent = Transformation.Transfrom(Transformation.MapSRID, SRID, CopyBoundingBox(extent));
+            if (!NeedsTransform(Transformation, SRID)) return extent;
+            extent = Transformation.Transform(Transformation.MapSRID, SRID, CopyBoundingBox(extent));
             return extent;
         }
 
@@ -155,34 +155,30 @@ namespace Mapsui.Layers
 
         private IEnumerable<IFeature> Transform(IEnumerable<IFeature> features)
         {
-            features = CopyFeatures(features).ToList();
-            if (Transformation != null &&
-                Transformation.MapSRID != -1 &&
-                SRID != -1 &&
-                SRID != Transformation.MapSRID)
+            if (!NeedsTransform(Transformation, SRID)) return features;
+            
+            var copiedFeatures = CopyFeatures(features).ToList();
+            foreach (var feature in copiedFeatures.Where(feature => !(feature.Geometry is Raster)))
             {
-                foreach (var feature in features.Where(feature => !(feature.Geometry is Raster)))
-                {
-                    var geometry = Geometry.GeomFromWKB(feature.Geometry.AsBinary()); // copy
-                    feature.Geometry = Transformation.Transform(SRID, Transformation.MapSRID, geometry);
-                }
+                var geometry = Geometry.GeomFromWKB(feature.Geometry.AsBinary()); // copy
+                feature.Geometry = Transformation.Transform(SRID, Transformation.MapSRID, geometry);
             }
-            return features;
+            return copiedFeatures;
+        }
+
+        private static bool NeedsTransform(ITransformation transformation, int SRID)
+        {
+            return !(transformation == null || transformation.MapSRID == -1 || SRID == -1 || SRID == transformation.MapSRID);
         }
 
         private IEnumerable<IFeature> CopyFeatures(IEnumerable<IFeature> features)
         {
-            var result = new List<IFeature>();
-            foreach (var feature in features)
-            {
-                result.Add(new Feature(feature));
-            }
-            return result;
+            return features.Select(feature => new Feature(feature)).Cast<IFeature>().ToList();
         }
 
         public override void ClearCache()
         {
-            Cache.Clear();
+            Cache = null;
         }
     }
 }

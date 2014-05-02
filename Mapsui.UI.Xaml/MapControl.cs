@@ -721,9 +721,10 @@ namespace Mapsui.UI.Xaml
 
         private double GetDeltaScale(XamlVector scale)
         {
+            if (ZoomLocked) return 1;
             var deltaScale = (scale.X + scale.Y) / 2;
-            if (ZoomLocked) deltaScale = 1;
-            if (!(Math.Abs(deltaScale - 1d) > Constants.Epsilon)) deltaScale = 1;
+            if (Math.Abs(deltaScale) < Constants.Epsilon) return 1; // If there is no scaling the deltaScale will be 0.0 in Windows Phone (while it is 1.0 in wpf)
+            if (!(Math.Abs(deltaScale - 1d) > Constants.Epsilon)) return 1;
             return deltaScale;
         }
 
