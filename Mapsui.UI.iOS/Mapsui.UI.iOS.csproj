@@ -45,14 +45,8 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="monotouch" />
-    <Reference Include="BruTile">
-      <HintPath>..\..\..\Projects\Wion\src\WionXamarin\packages\BruTile.0.9.5\lib\portable-net403+sl5+wp8+win8+MonoAndroid+MonoTouch\BruTile.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Mapsui.Rendering.iOS\Mapsui.Rendering.iOS.csproj">
       <Project>{B142AB17-285F-48C8-B6C6-94586028333B}</Project>
