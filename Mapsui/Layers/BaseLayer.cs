@@ -75,6 +75,7 @@ namespace Mapsui.Layers
             get{ return _enabled; } 
             set
             {
+                if (_enabled == value) return;
                 _enabled = value;
                 OnPropertyChanged("Enabled");
             }
