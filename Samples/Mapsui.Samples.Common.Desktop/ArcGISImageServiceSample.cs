@@ -1,5 +1,6 @@
 ﻿using Mapsui.Layers;
-using Mapsui.Providers.ArcGISImageService;
+using Mapsui.Providers.ArcGIS;
+using Mapsui.Providers.ArcGIS.Image;
 
 namespace Mapsui.Samples.Desktop
 {
@@ -12,18 +13,28 @@ namespace Mapsui.Samples.Desktop
 
         private static ArcGISImageServiceProvider CreateProvider()
         {
+            //Get Capabilities from service
+            var capabilitiesHelper = new CapabilitiesHelper();
+            capabilitiesHelper.CapabilitiesReceived += CapabilitiesReceived;
+            capabilitiesHelper.CapabilitiesFailed += capabilitiesHelper_CapabilitiesFailed;
+            capabilitiesHelper.GetCapabilities(@"http://imagery.arcgisonline.com/ArcGIS/rest/services/LandsatGLS/FalseColor/ImageServer", CapabilitiesType.ImageServiceCapabilities);
+           
+            //Create own
             return new ArcGISImageServiceProvider(
-                new ArcGISImageServiceInfo
-                    {
-                        Url = "http://imagery.arcgisonline.com/ArcGIS/rest/services/La" + 
-                            "ndsatGLS/FalseColor/ImageServer/exportImage",
-                        Format = "jpgpng",
-                        Interpolation = InterpolationType.NearestNeighbor,
-                        F = "image",
-                        ImageSR = "102100",
-                        BBoxSR = "102100",
-                        Time = "268211520000,1262217600000"
-                    });
+                new ArcGISImageCapabilities("http://imagery.arcgisonline.com/ArcGIS/rest/services/LandsatGLS/FalseColor/ImageServer/exportImage", 268211520000, 1262217600000))
+            {
+                SRID = 102100
+            };
+        }
+
+        private static void capabilitiesHelper_CapabilitiesFailed(object sender, System.EventArgs e)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        private static void CapabilitiesReceived(object sender, System.EventArgs e)
+        {
+            var capabilities = sender as ArcGISImageCapabilities;
         }
     }
 }

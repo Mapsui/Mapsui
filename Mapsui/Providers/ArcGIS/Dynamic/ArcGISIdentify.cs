@@ -1,13 +1,13 @@
-﻿using BruTile.Extensions;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Net;
+using BruTile.Extensions;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
-namespace Mapsui.Layers.ArcGISDynamicLayer
+namespace Mapsui.Providers.ArcGIS.Dynamic
 {
     //Documentation 9.3: http://resources.esri.com/help/9.3/arcgisserver/apis/rest/
     //Documentation 10.0: http://help.arcgis.com/EN/arcgisserver/10.0/apis/rest/index.html

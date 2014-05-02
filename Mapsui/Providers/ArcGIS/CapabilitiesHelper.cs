@@ -4,16 +4,25 @@ using System.Net;
 using System.Runtime.Serialization.Json;
 using BruTile;
 using BruTile.Extensions;
-using Mapsui.ArcGISDynamicLayer;
+using Mapsui.Providers.ArcGIS.Dynamic;
+using Mapsui.Providers.ArcGIS.Image;
 
-namespace Mapsui.Layers.ArcGISDynamicLayer
+namespace Mapsui.Providers.ArcGIS
 {
+    public enum CapabilitiesType
+    {
+        ImageServiceCapabilities,
+        DynamicServiceCapabilities
+
+    }
+
     public class CapabilitiesHelper
     {
         #region fields
 
         private HttpWebRequest _webRequest { get; set; }
-        private Capabilities _capabilities { get; set; }
+        private IArcGISCapabilities _arcGisCapabilities { get; set; }
+        private CapabilitiesType _capabilitiesType;
         private int _timeOut { get; set; }
         private string _url { get; set; }
         public delegate void StatusEventHandler(object sender, EventArgs e);
@@ -51,9 +60,11 @@ namespace Mapsui.Layers.ArcGISDynamicLayer
         /// Get the capabilities of an ArcGIS Map Service
         /// </summary>
         /// <param name="url">Url of map service example: http://url/arcgis/rest/services/test/MapServer </param>
+        /// <param name="capabilitiesType"></param>
         /// <param name="credentials">Credentials to access the service </param>
-        public void GetCapabilities(string url, ICredentials credentials = null)
+        public void GetCapabilities(string url, CapabilitiesType capabilitiesType, ICredentials credentials = null)
         {
+            _capabilitiesType = capabilitiesType;
             //Check if user added a trailing slash and remove if exist, some webservers can't handle this
             _url = url;
             if (url[url.Length - 1].Equals('/'))
@@ -75,14 +86,19 @@ namespace Mapsui.Layers.ArcGISDynamicLayer
             {
                 var response = _webRequest.GetSyncResponse(_timeOut);
                 var dataStream = CopyAndClose(response.GetResponseStream());
-                
-                var serializer = new DataContractJsonSerializer(typeof(Capabilities));
+
+                DataContractJsonSerializer serializer = null;
+                if(_capabilitiesType == CapabilitiesType.DynamicServiceCapabilities)
+                    serializer = new DataContractJsonSerializer(typeof(ArcGISDynamicCapabilities));
+                else if (_capabilitiesType == CapabilitiesType.ImageServiceCapabilities)
+                    serializer = new DataContractJsonSerializer(typeof(ArcGISImageCapabilities));
+
                 if (dataStream != null)
                 {
-                    _capabilities = (Capabilities)serializer.ReadObject(dataStream);
+                    _arcGisCapabilities = (IArcGISCapabilities)serializer.ReadObject(dataStream);
                     dataStream.Position = 0;
                 }
-                _capabilities.ServiceUrl = _url;
+                _arcGisCapabilities.ServiceUrl = _url;
 
                 //Hack because ArcGIS Server doesn't return a normal StatusCode
                 if (dataStream != null)
@@ -129,7 +145,7 @@ namespace Mapsui.Layers.ArcGISDynamicLayer
 
         protected virtual void OnFinished(EventArgs e)
         {
-            CapabilitiesReceived(_capabilities, e);
+            CapabilitiesReceived(_arcGisCapabilities, e);
         }
 
         protected virtual void OnFailed(EventArgs e)
@@ -141,32 +157,33 @@ namespace Mapsui.Layers.ArcGISDynamicLayer
         /// Generate BruTile TileSchema based on ArcGIS Capabilities
         /// </summary>
         /// <returns>TileSchema, returns null if service is not tiled</returns>
-        public static ITileSchema GetTileSchema(Capabilities capabilities)
+        public static ITileSchema GetTileSchema(ArcGISDynamicCapabilities arcGisDynamicCapabilities)
         {
             //TODO: Does this belong in Mapsui.Providers?
 
-            if (capabilities.tileInfo == null)
+            if (arcGisDynamicCapabilities.tileInfo == null)
                 return null;
 
             var schema = new TileSchema();
             var count = 0;
 
-            foreach (var lod in capabilities.tileInfo.lods)
+            foreach (var lod in arcGisDynamicCapabilities.tileInfo.lods)
             {
                 var levelId = count.ToString();
                 schema.Resolutions[levelId] = new Resolution { Id = levelId, UnitsPerPixel = lod.resolution };
                 count++;
             }
 
-            schema.Height = capabilities.tileInfo.cols;
-            schema.Width = capabilities.tileInfo.rows;
-            schema.Extent = new BruTile.Extent(capabilities.fullExtent.xmin, capabilities.fullExtent.ymin, capabilities.fullExtent.xmax, capabilities.fullExtent.ymax);
-            schema.OriginX = capabilities.tileInfo.origin.x;
-            schema.OriginY = capabilities.tileInfo.origin.y;
+            schema.Height = arcGisDynamicCapabilities.tileInfo.cols;
+            schema.Width = arcGisDynamicCapabilities.tileInfo.rows;
+            schema.Extent = new BruTile.Extent(arcGisDynamicCapabilities.fullExtent.xmin, arcGisDynamicCapabilities.fullExtent.ymin, arcGisDynamicCapabilities.fullExtent.xmax, arcGisDynamicCapabilities.fullExtent.ymax);
+            schema.OriginX = arcGisDynamicCapabilities.tileInfo.origin.x;
+            schema.OriginY = arcGisDynamicCapabilities.tileInfo.origin.y;
+
             schema.Name = "ESRI";
-            schema.Format = capabilities.tileInfo.format;            
+            schema.Format = arcGisDynamicCapabilities.tileInfo.format;            
             schema.Axis = AxisDirection.InvertedY;
-            schema.Srs = string.Format("EPSG:{0}", capabilities.tileInfo.spatialReference.wkid);
+            schema.Srs = string.Format("EPSG:{0}", arcGisDynamicCapabilities.tileInfo.spatialReference.wkid);
 
             return schema;
         }

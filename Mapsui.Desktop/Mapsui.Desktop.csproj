@@ -49,8 +49,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ArcGISImageService\ArcGISImageServiceInfo.cs" />
-    <Compile Include="ArcGISImageService\ArcGISImageServiceProvider.cs" />
     <Compile Include="GeoTiff\GeoTiffProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shapefile\DbaseReader.cs" />
