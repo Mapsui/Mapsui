@@ -1,54 +1,43 @@
-﻿using System;
-using MonoTouch.UIKit;
+﻿using System.Collections.Generic;
 using Mapsui.Styles;
-using System.Collections.Generic;
+using MonoTouch.CoreGraphics;
+using MonoTouch.UIKit;
 
-namespace Mapsui.Rendering.iOS
+namespace Mapsui.Rendering.iOS.ExtensionMethods
 {
 	static class StyleExtensions
 	{
-		public static UIColor ToiOS(this Color color)
+		public static UIColor ToUIKit(this Color color)
 		{
-			return new UIColor(color.R, color.G, color.B, color.A);
+            return new UIColor(color.R / 255f, color.G / 255f, color.B / 255f, color.A / 255f);
 		}
 
-		private static UIColor ToiOS(this Pen pen)
-		{
-			//			var paint = new UIColor
-			//			{
-			//				AntiAlias = true,
-			//				Color = pen.Color.ToAndroid(),
-			//				StrokeWidth = (float)pen.Width,
-			//				StrokeJoin = Paint.Join.Round
-			//			};
-			//			paint.SetStyle(Paint.Style.Stroke);
+        public static CGColor ToCG(this Color color)
+        {
+            return new CGColor(color.R / 255f, color.G / 255f, color.B / 255f, color.A / 255f);
+        }
 
-			return pen.Color.ToiOS ();
+		private static UIColor ToUIKit(this Brush brush)
+		{
+			return brush.Color.ToUIKit();
 		}
 
-		private static UIColor ToiOS(this Brush brush)
-		{
-			//			var paint = new Paint { AntiAlias = true, Color = brush.Color.ToAndroid() };
-			//			paint.SetStyle(Paint.Style.Fill);
-			return brush.Color.ToiOS();
-		}
-
-		public static IEnumerable<UIColor> ToiOS(this IStyle style)
+		public static IEnumerable<UIColor> ToUIKit(this IStyle style)
 		{
 			var vectorStyle = style as VectorStyle;
 			if (vectorStyle == null) yield break;
 
 			if (vectorStyle.Outline != null && vectorStyle.Outline.Color != null)
 			{
-				yield return vectorStyle.Outline.ToiOS();
+				yield return vectorStyle.Outline.Color.ToUIKit();
 			}
 			if (vectorStyle.Line != null && vectorStyle.Line.Color != null)
 			{
-				yield return vectorStyle.Line.ToiOS();
+                yield return vectorStyle.Line.Color.ToUIKit();
 			}
 			if (vectorStyle.Fill != null && vectorStyle.Fill.Color != null)
 			{
-				yield return vectorStyle.Fill.ToiOS();
+				yield return vectorStyle.Fill.ToUIKit();
 			}
 		}
 	}

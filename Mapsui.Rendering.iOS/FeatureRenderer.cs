@@ -171,12 +171,9 @@ namespace XamarinRendering
 
 					feature [styleKey] = renderedGeometry;
 					feature ["first"] = true;
-
-					//if (feature.Geometry is Mapsui.Geometries.Point || feature.Geometry is IRaster) // positioning only supported for point and raster
-					//{						//||feature.Geometry is Mapsui.Geometries.MultiPolygon)
-
-					//}
-				} else {
+				} 
+                else 
+                {
 					feature ["first"] = false;
 				}
 			}
@@ -184,19 +181,16 @@ namespace XamarinRendering
 
 		private static CALayer RenderGeometry (IViewport viewport, IStyle style, IFeature feature)
 		{
-			if (feature.Geometry is Mapsui.Geometries.Point){
-				return GeometryRenderer.RenderPoint (feature.Geometry as Mapsui.Geometries.Point, style, viewport);
-				//return null;
-			} else if (feature.Geometry is Mapsui.Geometries.Polygon){
-				return GeometryRenderer.RenderPolygonOnLayer (feature.Geometry as Mapsui.Geometries.Polygon, style, viewport);
-			} else if (feature.Geometry is Mapsui.Geometries.MultiPolygon){
-				//var contextRenderer = new ContextRenderer ();
-				//contextRenderer.RenderGeometry (feature.Geometry as Mapsui.Geometries.MultiPolygon, style, feature, viewport);
-				return GeometryRenderer.RenderMultiPolygonOnLayer (feature.Geometry as Mapsui.Geometries.MultiPolygon, style, viewport);
+			if (feature.Geometry is Mapsui.Geometries.Point)
+			{
+			    return null;//!!!GeometryRenderer.RenderPoint (feature.Geometry as Mapsui.Geometries.Point, style, viewport);
+			} else if (feature.Geometry is Polygon){
+				return GeometryRenderer.RenderPolygonOnLayer (feature.Geometry as Polygon, style, viewport);
+			} else if (feature.Geometry is MultiPolygon){
+				return GeometryRenderer.RenderMultiPolygonOnLayer (feature.Geometry as MultiPolygon, style, viewport);
 			} else if (feature.Geometry is IRaster){
 				return GeometryRenderer.RenderRasterOnLayer (feature.Geometry as IRaster, style, viewport);
 			}
-
 			return null;
 		}
 

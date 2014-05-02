@@ -18,10 +18,11 @@ namespace Mapsui.Rendering.iOS
 			return new PointF((float)(point.X - (xo)), (float)(point.Y - yo));
 		}
 
-		public static UIBezierPath ToUIKit(this IEnumerable<Mapsui.Geometries.Point> points, IViewport viewport)
+		public static UIBezierPath ToUIKit(this IEnumerable<Point> points, IViewport viewport)
 		{
 			var pathGeometry = new UIBezierPath ();
-			if (points.Count () > 0) {
+		    points = points.ToList();
+			if (points.Any()) {
 
 				var first = points.FirstOrDefault ();
 				var start = viewport.WorldToScreen (first);

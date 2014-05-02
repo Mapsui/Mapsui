@@ -52,13 +52,11 @@ namespace Mapsui.Rendering.iOS
 
 		public static void Draw(CALayer target, IViewport viewport, IStyle style, IFeature feature)
 		{
-			//if (!feature.RenderedGeometry.ContainsKey(style)) feature["laag"] = ToiOSBitmap(feature.Geometry);
-			var styleKey = "laag";
+			const string styleKey = "laag";
 
 			if(feature[styleKey] == null) feature[styleKey] = ToiOSBitmap(feature.Geometry);
 
-			//if (!feature.RenderedGeometry.ContainsKey(style)) feature.RenderedGeometry[style] = ToiOSBitmap(feature.Geometry);
-			var bitmap = (UIImage)feature [styleKey];//(UIImage)feature.RenderedGeometry[style];
+			var bitmap = (UIImage)feature [styleKey];
 
 			var dest = WorldToScreen(viewport, feature.Geometry.GetBoundingBox());
 			dest = new BoundingBox(
@@ -69,7 +67,7 @@ namespace Mapsui.Rendering.iOS
 
 			var destination = RoundToPixel(dest);
 
-			var tile = new CALayer()
+			var tile = new CALayer
 			{
 				Frame = destination,
 				Contents = bitmap.CGImage
@@ -118,7 +116,7 @@ namespace Mapsui.Rendering.iOS
 			return frame;
 		}
 
-		private static void DrawRectangle(CGContext currentContext, RectangleF destination, Styles.Color outlineColor)
+		private static void DrawRectangle(CGContext currentContext, RectangleF destination, Color outlineColor)
 		{
 			currentContext.SetStrokeColor (outlineColor.R, outlineColor.G, outlineColor.B, outlineColor.A);
 			currentContext.SetLineWidth (4f);

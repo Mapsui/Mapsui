@@ -8,138 +8,13 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using Point = Mapsui.Geometries.Point;
 
 namespace Mapsui.Rendering.iOS
 {
     static class GeometryRenderer
     {
-        //public static List<double> Resolutions;
-        //public static double MinResolution;
-        //public static double MaxResolution;
-
-        private static readonly IDictionary<IStyle, UIImage> BitmapCache
-            = new Dictionary<IStyle, UIImage>();
-
-        public static CALayer RenderPoint(Geometries.Point point, IStyle style, IViewport viewport)
-        {
-            var tile = new CALayer();
-            var rotation = 0.0;
-
-            if (style is SymbolStyle)
-            {
-                var symbolStyle = style as SymbolStyle;
-                var frame = ConvertPointBoundingBox(symbolStyle, point.GetBoundingBox(), viewport);
-
-                if (symbolStyle.Symbol == null || symbolStyle.Symbol.Data == null)
-                {
-                    tile = CreateSymbolFromVectorStyle(symbolStyle, frame, symbolStyle.Opacity, symbolStyle.SymbolType);
-                }
-                else
-                {
-
-                    tile = CreateSymbolFromBitmap(symbolStyle, frame, symbolStyle.Opacity);
-                }
-
-                rotation = symbolStyle.SymbolRotation;
-                //matrix = CreatePointSymbolMatrix(viewport.Resolution, symbolStyle);
-                if (symbolStyle.Outline != null)
-                {
-
-                    float strokeAlpha = (float)symbolStyle.Outline.Color.A / 255;
-
-                    tile.BorderColor = new CGColor(new CGColor(symbolStyle.Outline.Color.R, symbolStyle.Outline.Color.G,
-                                                                symbolStyle.Outline.Color.B), strokeAlpha);
-                    tile.BorderWidth = (float)symbolStyle.Outline.Width;
-                }
-            }
-            else
-            {
-                //var frame = ConvertPointBoundingBox(symbolStyle, point.GetBoundingBox(), viewport);
-                //tile = CreateSymbolFromVectorStyle((style as VectorStyle) ?? new VectorStyle());
-                //MatrixHelper.ScaleAt(ref matrix, viewport.Resolution, viewport.Resolution);
-            }
-
-            //var symbolStyle = style as SymbolStyle;
-            //var frame = ConvertPointBoundingBox(symbolStyle, point.GetBoundingBox(), viewport);
-            /*
-            var image = CreateSymbolFromBitmap (symbolStyle);
-
-            tile.Contents = image.CGImage;
-            tile.Frame = frame;
-            */
-
-
-            var radians = Math.PI * rotation / 180.0;
-            var aOpacity = new CABasicAnimation
-                {
-                    KeyPath = @"transform.rotation.z",
-                    From = new NSNumber(radians),
-                    To = new NSNumber(radians),
-                    Duration = 0.1,
-                    RemovedOnCompletion = false,
-                    FillMode = CAFillMode.Forwards
-                };
-
-            //aOpacity.From = new NSNumber(0);//new NSNumber(0.1);
-
-            tile.AddAnimation(aOpacity, "transform.rotation.z");
-            tile.ContentsScale = 0.1f;
-
-            return tile;
-        }
-
-        private static CALayer CreateSymbolFromVectorStyle(VectorStyle style, RectangleF frame, double opacity = 1, SymbolType symbolType = SymbolType.Ellipse)
-        {
-            var symbol = new CAShapeLayer();
-
-            if (style.Fill != null && style.Fill.Color != null)
-            {
-                float fillAlpha = (float)style.Fill.Color.A / 255;
-                var fillColor = new CGColor(new CGColor(style.Fill.Color.R, style.Fill.Color.G,
-                                                        style.Fill.Color.B), fillAlpha);
-                symbol.FillColor = fillColor;
-            }
-            else
-            {
-                symbol.BackgroundColor = new CGColor(0, 0, 0, 0);
-            }
-
-            if (style.Outline != null)
-            {
-                float strokeAlpha = (float)style.Outline.Color.A / 255;
-
-                var strokeColor = new CGColor(style.Outline.Color.R, style.Outline.Color.G,
-                                                            style.Outline.Color.B, strokeAlpha);
-                //symbol.BorderColor = strokeColor;
-                //symbol.BorderWidth = (float)style.Outline.Width;
-                symbol.LineWidth = (float)style.Outline.Width;
-                symbol.StrokeColor = strokeColor;
-            }
-            else
-            {
-                float strokeAlpha = 1;
-                var strokeColor = new CGColor(0, 0, 0);
-                //symbol.BorderColor = strokeColor;
-                //symbol.BorderWidth = (float)style.Outline.Width;
-                symbol.LineWidth = 2f;
-                symbol.StrokeColor = strokeColor;
-            }
-
-            //symbol.Frame = frame;
-            var path = UIBezierPath.FromRoundedRect(new RectangleF(0, 0, frame.Width, frame.Height), frame.Width / 2);
-            symbol.Path = path.CGPath;
-
-            if (symbolType == SymbolType.Rectangle)
-            {
-            }
-            else
-            {
-            }
-
-            symbol.Opacity = (float)opacity;
-
-            return symbol;
-        }
+        private static readonly IDictionary<IStyle, UIImage> BitmapCache = new Dictionary<IStyle, UIImage>();
 
         public static CALayer RenderPolygonOnLayer(Polygon polygon, IStyle style, IViewport viewport)
         {
@@ -148,13 +23,13 @@ namespace Mapsui.Rendering.iOS
             if (!(style is VectorStyle)) throw new ArgumentException("Style is not of type VectorStyle");
             var vectorStyle = style as VectorStyle;
 
-            float strokeAlpha = (float)vectorStyle.Outline.Color.A / 255;
-            float fillAlpha = (float)vectorStyle.Fill.Color.A / 255;
+            var strokeAlpha = (float)vectorStyle.Outline.Color.A / 255;
+            var fillAlpha = (float)vectorStyle.Fill.Color.A / 255;
 
             var strokeColor = new CGColor(new CGColor(vectorStyle.Outline.Color.R, vectorStyle.Outline.Color.G,
-                                                      vectorStyle.Outline.Color.B), strokeAlpha);
+                vectorStyle.Outline.Color.B), strokeAlpha);
             var fillColor = new CGColor(new CGColor(vectorStyle.Fill.Color.R, vectorStyle.Fill.Color.G,
-                                                    vectorStyle.Fill.Color.B), fillAlpha);
+                vectorStyle.Fill.Color.B), fillAlpha);
 
             tile.StrokeColor = strokeColor;
             tile.FillColor = fillColor;
@@ -171,23 +46,15 @@ namespace Mapsui.Rendering.iOS
             if (!(style is VectorStyle)) throw new ArgumentException("Style is not of type VectorStyle");
             var vectorStyle = style as VectorStyle;
 
-            float strokeAlpha = (float)vectorStyle.Outline.Color.A / 255;
-            float fillAlpha = (float)vectorStyle.Fill.Color.A / 255;
+            var strokeAlpha = (float)vectorStyle.Outline.Color.A / 255;
+            var fillAlpha = (float)vectorStyle.Fill.Color.A / 255;
 
             var strokeColor = new CGColor(new CGColor(vectorStyle.Outline.Color.R, vectorStyle.Outline.Color.G,
-                                                      vectorStyle.Outline.Color.B), strokeAlpha);
+                vectorStyle.Outline.Color.B), strokeAlpha);
             var fillColor = new CGColor(new CGColor(vectorStyle.Fill.Color.R, vectorStyle.Fill.Color.G,
-                                                    vectorStyle.Fill.Color.B), fillAlpha);
+                vectorStyle.Fill.Color.B), fillAlpha);
 
-            /*
-            var bbRect = GeometryRenderer.ConvertBoundingBox (multiPolygon.GetBoundingBox(), viewport);
-            var offset = new System.Drawing.Point ((int)bbRect.GetMinX(),
-                                                   (int)bbRect.GetMinY());
-
-            GeometryExtension.OffSet = offset;
-            */
-
-            var path = GeometryExtension.ToUIKit(multiPolygon, viewport);
+            var path = multiPolygon.ToUIKit(viewport);
 
             tile.StrokeColor = strokeColor;
             tile.FillColor = fillColor;
@@ -195,41 +62,6 @@ namespace Mapsui.Rendering.iOS
             tile.Path = path.CGPath;
 
             return tile;
-        }
-
-        private static CALayer CreateSymbolFromBitmap(SymbolStyle style, RectangleF frame, double opacity)
-        {
-            var tile = new CALayer();
-
-            var stream = (MemoryStream)style.Symbol.Data;
-            var data = NSData.FromArray(stream.ToArray());
-            var image = UIImage.LoadFromData(data);
-
-            tile.Contents = image.CGImage;
-            tile.Frame = frame;
-            tile.Opacity = (float)opacity;
-
-            return tile;
-        }
-
-        private static UIImage RenderSymbolFromVectorStyle(SymbolStyle symbolStyle, RectangleF drawRect)
-        {
-            var context = UIGraphics.GetCurrentContext();
-
-            UIGraphics.PushContext(context);
-
-            var strokeColor = new CGColor(symbolStyle.Outline.Color.R, symbolStyle.Outline.Color.G, symbolStyle.Outline.Color.B);
-            var fillColor = new CGColor(symbolStyle.Fill.Color.R, symbolStyle.Fill.Color.G, symbolStyle.Fill.Color.B);
-
-            context.SetStrokeColor(strokeColor);
-            context.SetFillColor(fillColor);
-            context.StrokeRect(drawRect);
-
-            UIGraphics.PopContext();
-            var retImage = UIGraphics.GetImageFromCurrentImageContext();
-            UIGraphics.EndImageContext();
-
-            return retImage;
         }
 
         public static CALayer RenderRasterOnLayer(IRaster raster, IStyle style, IViewport viewport)
@@ -251,15 +83,7 @@ namespace Mapsui.Rendering.iOS
                 };
 
             tile.AddAnimation(aOpacity, "opacity");
-            /*
-            var anim = new CABasicAnimation();
-            anim.KeyPath = @"opacity";
-            anim.From = new NSNumber(0.1);
-            anim.To = new NSNumber(1.0);
-            anim.Duration = 0.6;
 
-            tile.AddAnimation(anim, "opacity");
-            */
             return tile;
         }
 
@@ -272,13 +96,6 @@ namespace Mapsui.Rendering.iOS
 
             tile.Image = image;
             tile.Frame = drawRectangle;
-
-            /*
-            Console.WriteLine ("RenderOnView minx: " + drawRectangle.GetMinX() + " miny: " + drawRectangle.GetMinY() +
-                               " maxx: " + drawRectangle.GetMaxX()+ " maxy: " + drawRectangle.GetMaxY() + 
-                               " width: " + drawRectangle.Width + " heigth: " + drawRectangle.Height);
-                               */
-
             return tile;
         }
 
@@ -287,15 +104,7 @@ namespace Mapsui.Rendering.iOS
             var data = NSData.FromArray(raster.Data.ToArray());
             var image = UIImage.LoadFromData(data);
             var drawRectangle = ConvertBoundingBox(raster.GetBoundingBox(), viewport);
-
-            /*
-            Console.WriteLine ("RenderRaster minx: " + drawRectangle.GetMinX() + " miny: " + drawRectangle.GetMinY() +
-                               " maxx: " + drawRectangle.GetMaxX()+ " maxy: " + drawRectangle.GetMaxY() + 
-                               " width: " + drawRectangle.Width + " heigth: " + drawRectangle.Height);
-                               */
-
             image.Draw(drawRectangle);
-
             return image;
         }
 
@@ -305,7 +114,7 @@ namespace Mapsui.Rendering.iOS
             raster.Frame = frame;
         }
 
-        public static void PositionPoint(CALayer symbol, Geometries.Point point, IStyle style, IViewport viewport)
+        public static void PositionPoint(CALayer symbol, Point point, IStyle style, IViewport viewport)
         {
             var frame = ConvertPointBoundingBox(style as SymbolStyle, point.GetBoundingBox(), viewport);
             symbol.Frame = frame;
@@ -412,11 +221,6 @@ namespace Mapsui.Rendering.iOS
             //caching still needs more work
             if (BitmapCache.Count > 4000) return;
             BitmapCache[style] = path;
-        }
-
-        private static System.Drawing.PointF ConvertPoint(Mapsui.Geometries.Point point)
-        {
-            return new System.Drawing.PointF((float)point.X, (float)point.Y);
         }
     }
 }

@@ -44,7 +44,7 @@ namespace Mapsui.Rendering.iOS
                 }
             }
             
-            Render(target.Layer, viewport, layers, showDebugInfoInMap);
+            Render(target.Layer, viewport, layers);
 
             CATransaction.Commit();
         }
@@ -61,7 +61,7 @@ namespace Mapsui.Rendering.iOS
             }
         }
 
-        private static void Render(CALayer target, IViewport viewport, IEnumerable<ILayer> layers, bool showDebugInfoInMap = false)
+        private static void Render(CALayer target, IViewport viewport, IEnumerable<ILayer> layers)
         {
             layers = layers.ToList();
             VisibleFeatureIterator.IterateLayers(viewport, layers, (v, s, f) => RenderGeometry(target, v, s, f));
@@ -72,7 +72,7 @@ namespace Mapsui.Rendering.iOS
             return RenderToBitmapStreamStatic(viewport, layers);
         }
 
-        private MemoryStream RenderToBitmapStreamStatic(IViewport viewport, IEnumerable<ILayer> layers)
+        private static MemoryStream RenderToBitmapStreamStatic(IViewport viewport, IEnumerable<ILayer> layers)
         {
             UIImage image = null;
             var handle = new ManualResetEvent(false);
@@ -106,7 +106,7 @@ namespace Mapsui.Rendering.iOS
         {
             if (feature.Geometry is Point)
             {
-                PointRenderer.Draw(target, viewport, style, feature);
+                PointRenderer2.RenderPoint(target, (Point)feature.Geometry, style, viewport,feature);
             }
             else if (feature.Geometry is LineString)
             {
