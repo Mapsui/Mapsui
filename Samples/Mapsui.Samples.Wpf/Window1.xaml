@@ -1,0 +1,50 @@
+﻿<Window x:Class="Mapsui.Samples.Wpf.Window1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:wpf="clr-namespace:Mapsui.Samples.Wpf"
+        xmlns:xaml="clr-namespace:Mapsui.UI.Xaml;assembly=Mapsui.UI.Xaml"
+        mc:Ignorable="d"
+    d:DesignWidth="644.572" d:DesignHeight="333.913" Width="800" Height="600"
+    Title="Mapsui.Samples.Wpf" SizeToContent="Manual">
+    <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="Gray">
+        <xaml:MapControl x:Name="MapControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+        <Border BorderBrush="White" Opacity="0.75" Margin="10" Background="White" BorderThickness="6" CornerRadius="2" VerticalAlignment="Top" HorizontalAlignment="Left">
+            <StackPanel Width="Auto">
+                <RadioButton IsChecked="True" FontSize="16" Content="OSM" Margin="4,4,4,4" Click="OsmClick"/>
+                <RadioButton FontSize="16" Content="PointSymbols" Margin="4,4,4,4" Click="PointSymbolsClick"/>
+                <RadioButton FontSize="16" Content="Points with stacked labels" Margin="4,4,4,4" Click="RandomPointWithStackLabelClick"/>
+                <RadioButton FontSize="16" Content="Points with feature info" Margin="4,4,4,4" Click="RandomPointsWithFeatureInfoClick"/>
+                <RadioButton FontSize="16" Content="Points with animation" Margin="4,4,4,4" Click="AnimatedPointsClick"/>
+                <RadioButton FontSize="16" Content="Projected Point" Margin="4,4,4,4" Click="ProjectedPointClick"/>
+                <RadioButton FontSize="16" Content="Bing Maps" Margin="4,4,4,4" Click="BingMapsClick"/>
+                <RadioButton FontSize="16" Content="WMS - tiled requests" Margin="4,4,4,4" Click="GeodanWmsClick"/>
+                <RadioButton FontSize="16" Content="TMS" Margin="4,4,4,4" Click="GeodanTmsClick"/>
+                <RadioButton FontSize="16" Content="WMS-C"  Margin="4,4,4,4" Click="GeodanWmscClick"/>
+                <RadioButton FontSize="16" Content="Shapefile"  Margin="4,4,4,4" Click="ShapefileClick" />
+                <RadioButton FontSize="16" Content="MapTiler"  Margin="4,4,4,4" Click="MapTilerClick" />
+                <RadioButton FontSize="16" Content="WMS"  Margin="4,4,4,4" Click="WmsClick" />
+                <RadioButton FontSize="16" Content="ArcGISImageService"  Margin="4,4,4,4" Click="ArcGISImageServiceClick" />
+                <RadioButton FontSize="16" Content="WMTS"  Margin="4,4,4,4" Click="WmtsClick" />
+
+            </StackPanel>
+        </Border>
+        <Border BorderBrush="White" Opacity="0.75" Margin="10" Background="White" BorderThickness="6" CornerRadius="2" VerticalAlignment="Top" HorizontalAlignment="Right">
+            <wpf:LayerList x:Name="LayerList"></wpf:LayerList>
+        </Border>
+        <Border x:Name="Statistics" BorderBrush="White" Opacity="0.75" Margin="10" Background="White" BorderThickness="6" CornerRadius="2" HorizontalAlignment="Center" VerticalAlignment="Top">
+            <StackPanel  Orientation="Vertical" HorizontalAlignment="Center"  >
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Fps:  "/>
+                    <TextBlock x:Name="Fps"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+        <Border x:Name="ErrorBorder" BorderBrush="White" Opacity="0" Margin="10" Background="White" BorderThickness="6" CornerRadius="2" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+            <StackPanel Orientation="Horizontal" >
+                <TextBlock Text="Error:  "/>
+                <TextBlock x:Name="Error" Text="No Error"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>

@@ -1,0 +1,244 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
+    xmlns:local="clr-namespace:Mapsui.Samples.Silverlight"
+    x:Class="Mapsui.Samples.Silverlight.UI.GUIOverlay"
+    d:DesignWidth="640" d:DesignHeight="480">
+    <UserControl.Resources>
+        <ControlTemplate x:Key="menuButton" TargetType="Button">
+            <Grid x:Name="grid" Width="24" Height="24" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
+                <Grid.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Grid.RenderTransform>
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualStateGroup.Transitions>
+                            <VisualTransition GeneratedDuration="10:00:00.1000000" To="MouseOver">
+                                <Storyboard>
+                                    <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="grid" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                                        <EasingDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
+                                        <EasingDoubleKeyFrame KeyTime="00:00:00.1000000" Value="1.15"/>
+                                    </DoubleAnimationUsingKeyFrames>
+                                    <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="grid" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                                        <EasingDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
+                                        <EasingDoubleKeyFrame KeyTime="00:00:00.1000000" Value="1.15"/>
+                                    </DoubleAnimationUsingKeyFrames>
+                                </Storyboard>
+                            </VisualTransition>
+                            <VisualTransition From="MouseOver" GeneratedDuration="00:00:00">
+                                <Storyboard>
+                                    <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="grid" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                                        <EasingDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
+                                    </DoubleAnimationUsingKeyFrames>
+                                    <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="grid" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                                        <EasingDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
+                                    </DoubleAnimationUsingKeyFrames>
+                                </Storyboard>
+                            </VisualTransition>
+                        </VisualStateGroup.Transitions>
+                        <VisualState x:Name="Normal"/>
+                        <VisualState x:Name="MouseOver"/>
+                        <VisualState x:Name="Pressed"/>
+                        <VisualState x:Name="Disabled"/>
+                    </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>
+                <Rectangle x:Name="rectangle" Stroke="#3E322E2E" Margin="0" RadiusX="28" RadiusY="28" >
+                    <Rectangle.Fill>
+                        <RadialGradientBrush>
+                            <GradientStop Color="#FFCECECE" Offset="1"/>
+                            <GradientStop Color="White"/>
+                        </RadialGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <ContentPresenter VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <Image VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Source="{Binding Path=Tag, RelativeSource={RelativeSource TemplatedParent}}"/>
+                </ContentPresenter>
+            </Grid>
+        </ControlTemplate>
+        <Storyboard x:Name="showMenu">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="menuGrid" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="231">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <QuarticEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="hideMenu">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="menuGrid" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="231"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <QuarticEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="ShowTopTooltip">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="tooltipTop" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.2000000" Value="40">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="HideTopTooltip">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="tooltipTop" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="40"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.2000000" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="ShowLowerTooltip">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="tooltipBottom" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.2000000" Value="-27.871">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="HideLowerTooltip">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="tooltipBottom" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="-23.862"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.2000000" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </UserControl.Resources>
+    <Grid x:Name="LayoutRoot">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition/>
+            <RowDefinition Height="74" MaxHeight="75"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="210"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="245"/>
+        </Grid.ColumnDefinitions>
+        <Grid x:Name="tooltipTop" Height="49" Margin="0,0,60,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
+            <Grid.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Grid.RenderTransform>
+            <Grid Margin="-15,0,0,0" >
+                <Border Margin="0,-15,0,0" Background="White" BorderBrush="#FFC51313" BorderThickness="2" CornerRadius="10"/>
+            </Grid>
+            <TextBlock x:Name="txtTooltipTop" Margin="4,0,0,2" TextWrapping="Wrap" FontFamily="Verdana" FontSize="10.667" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="137"/>
+        </Grid>
+        <Grid Margin="99,0,0,-27" Grid.Column="2" Grid.Row="2" Height="46" VerticalAlignment="Bottom">
+            <Grid x:Name="tooltipBottom" Height="46" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right" Width="168" Margin="0,0,-22,0">
+                <Grid.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Grid.RenderTransform>
+                <Border Background="White" BorderBrush="#FFC51313" BorderThickness="2" CornerRadius="12"/>
+                <TextBlock x:Name="txtTooltipBottom" Margin="61,3,8,8" TextWrapping="Wrap" FontFamily="Verdana" FontSize="10.667" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            </Grid>
+        </Grid>
+        <Image x:Name="topLeft" Height="61" HorizontalAlignment="Left" Margin="0" VerticalAlignment="Top" Width="210" Source="Images/topLeftBrutile.png" Stretch="Fill"/>
+        <Image x:Name="topMiddle" Margin="0" Grid.Column="1" Source="Images/topMiddle.png" Stretch="Fill" Height="56" VerticalAlignment="Top"/>
+        <Grid x:Name="menuGrid" Height="320" Margin="0,-265,0,0" VerticalAlignment="Top" Grid.Column="2" Grid.RowSpan="2" RenderTransformOrigin="0.5,0.5">
+            <Grid.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Grid.RenderTransform>
+            <Image HorizontalAlignment="Left" Margin="0" VerticalAlignment="Top" Source="Images/menu.png" Stretch="Fill"/>
+            <Border Margin="15,105,15,15" BorderBrush="#FF727272" CornerRadius="5" BorderThickness="2" Background="#FFE2E2E2">
+                <ScrollViewer Margin="0">
+                    <StackPanel Width="Auto" x:Name="layerList">
+                    </StackPanel>
+                </ScrollViewer>
+            </Border>
+            <Grid x:Name="hideBtn" MouseEnter="hideBtn_MouseEnter" MouseLeave="hideBtn_MouseLeave" MouseLeftButtonDown="hideBtn_MouseLeftButtonDown" Height="13" Margin="111,0,0,0" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="52">
+                <Image Height="13" HorizontalAlignment="Left" Margin="0" VerticalAlignment="Top" Width="52" Source="Images/menuShowHideOffHover.png" Stretch="Fill"/>
+                <Image Height="13" x:Name="menuShowHideOff" HorizontalAlignment="Left" Margin="0" VerticalAlignment="Top" Width="52" Source="Images/menuShowHideOff.png" Stretch="Fill"/>
+            </Grid>
+        </Grid>
+        <Image x:Name="lowerMIddle" Margin="0" VerticalAlignment="Bottom" Grid.Row="2" Source="Images/lowerMiddle.png" Stretch="Fill" Grid.ColumnSpan="3" Height="15"/>
+        <Image x:Name="topRight" Margin="0" VerticalAlignment="Top" Grid.Column="3" Source="Images/topRight.png" Stretch="Fill" Width="245" Height="56"/>
+        <StackPanel x:Name="LowerButtonBGPanel" Margin="-187,0,0,0" Grid.Column="2" Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Bottom" RenderTransformOrigin="0.5,0.5" Height="20">
+            <StackPanel.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="-1"/>
+                    <SkewTransform AngleX="0" AngleY="0"/>
+                    <RotateTransform Angle="0"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </StackPanel.RenderTransform>
+            <Image Margin="0" Width="40" Source="Images/lowerRightButton.png" Stretch="Fill"/>
+            <Image Margin="0" Width="40" Source="Images/lowerRightButton.png" Stretch="Fill"/>
+            <Image Margin="0" Width="40" Source="Images/lowerRightButton.png" Stretch="Fill"/>
+            <Image Margin="0" Width="40" Source="Images/lowerRightButton.png" Stretch="Fill"/>
+            <Image Margin="0" Width="40" Source="Images/lowerRightButton.png" Stretch="Fill"/>
+            <Image Margin="0" Width="37" Source="Images/lowerRightLeft.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="-1"/>
+                        <SkewTransform AngleX="0" AngleY="0"/>
+                        <RotateTransform Angle="0"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+        </StackPanel>
+        <Grid x:Name="topButtonsGrid" Height="24" HorizontalAlignment="Left" Margin="39,46,0,0" VerticalAlignment="Top" Width="111" Grid.RowSpan="2">
+            <Grid HorizontalAlignment="Left" VerticalAlignment="Top">
+                <Button x:Name="buttonZoomIn" Click="buttonZoomIn_Click" MouseEnter="buttonZoomIn_MouseEnter" MouseLeave="buttonZoomIn_MouseLeave" Height="24" VerticalAlignment="Top" Template="{StaticResource menuButton}" Tag="Images/btnZoomIn.png" RenderTransformOrigin="0.467,0.489" HorizontalAlignment="Left" Width="24"/>
+                <Button x:Name="buttonZoomOut" Click="buttonZoomOut_Click" Height="24" MouseEnter="buttonZoomOut_MouseEnter" MouseLeave="buttonZoomOut_MouseLeave" VerticalAlignment="Top" Template="{StaticResource menuButton}" Tag="Images/btnZoomOut.png" RenderTransformOrigin="0.467,0.489" HorizontalAlignment="Left" Width="24" Margin="40,0,0,0"/>
+                <Button x:Name="buttonMaxExtend" Click="buttonMaxExtend_Click" Height="24" VerticalAlignment="Top" MouseEnter="buttonMaxExtend_MouseEnter" MouseLeave="buttonMaxExtend_MouseLeave" Template="{StaticResource menuButton}" Tag="Images/btnMaxExtend.png" RenderTransformOrigin="0.467,0.489" HorizontalAlignment="Left" Width="24" Margin="80,0,0,0"/>
+            </Grid>
+        </Grid>
+        <Grid x:Name="showBtn" MouseEnter="showBtn_MouseEnter" MouseLeave="showBtn_MouseLeave" MouseLeftButtonDown="showBtn_MouseLeftButtonDown" Height="13" Margin="111,0,0,45" VerticalAlignment="Bottom" Grid.Column="2" Grid.Row="0" HorizontalAlignment="Left" Width="52">
+            <Image x:Name="menuShowHideOnHover" Height="13" Margin="0" VerticalAlignment="Top" Width="52" Source="Images/menuShowHideOnHover.png" Stretch="Fill" HorizontalAlignment="Left"/>
+            <Image x:Name="menuShowHideOn" HorizontalAlignment="Left" Width="52" Source="Images/menuShowHideOn.png" Stretch="Fill" VerticalAlignment="Top" Height="13"/>
+        </Grid>
+        <Grid x:Name="copyRightGrid" Margin="16,6,0,0" VerticalAlignment="Top" Grid.Row="2" Grid.ColumnSpan="5" HorizontalAlignment="Left" Visibility="Collapsed">
+            <Rectangle Fill="#47FFFFFF" Stroke="Black" StrokeThickness="0"/>
+            <TextBlock x:Name="txtCopyright" HorizontalAlignment="Left" Margin="2,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" FontSize="9.333" FontWeight="Bold" FontFamily="Verdana"/>
+        </Grid>
+        <Grid Margin="50,0,0,0" Grid.Column="2" Grid.Row="2" VerticalAlignment="Bottom">
+            <Button x:Name="btnLayers" HorizontalAlignment="Right" Margin="0,0,48,5" Content="Button" MouseEnter="btnLayers_MouseEnter" MouseLeave="lower_MouseLeave" Click="btnLayers_Click" Template="{StaticResource menuButton}" Tag="Images/btnLayers.png"/>
+            <Button x:Name="btnFullscreen" Tag="Images/btnFullscreen.png" HorizontalAlignment="Right" Margin="0,0,8,5" MouseEnter="btnFullscreen_MouseEnter" MouseLeave="lower_MouseLeave" Click="btnFullscreen_Click" Template="{StaticResource menuButton}"/>
+            <Button x:Name="btnBbox" HorizontalAlignment="Right" Margin="0,0,88,5" Content="Button" MouseEnter="btnBbox_MouseEnter" MouseLeave="lower_MouseLeave" Click="btnBbox_Click" Template="{StaticResource menuButton}" Tag="Images/btnBbox.png"/>
+            <Button x:Name="btnGoto" HorizontalAlignment="Right" Margin="0,0,128,5" Content="Button" MouseEnter="btnGoto_MouseEnter" MouseLeave="lower_MouseLeave" Click="btnGoto_Click" Template="{StaticResource menuButton}" Tag="Images/btnGoTo.png"/>
+        </Grid>
+        <local:GoTo Grid.Column="1" Grid.Row="1" x:Name="GoTo" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Collapsed"/>
+        <Border x:Name="errorBorder" Grid.Row="1" Grid.Column="1" BorderBrush="White" Opacity="0" Margin="20" Background="Transparent" BorderThickness="10" CornerRadius="5" VerticalAlignment="Bottom" HorizontalAlignment="Left" IsHitTestVisible="False">
+            <StackPanel Orientation="Horizontal" MaxHeight="100" >
+                <TextBlock Text="Error: " />
+                <TextBlock x:Name="Error" Text="No Error" />
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>
