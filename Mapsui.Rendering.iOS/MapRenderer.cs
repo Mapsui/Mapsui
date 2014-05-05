@@ -88,7 +88,10 @@ namespace Mapsui.Rendering.iOS
             });
 
             handle.WaitOne();
-            return new MemoryStream(image.AsPNG().ToArray());
+            using (var nsdata = image.AsPNG())
+            {
+                return new MemoryStream(nsdata.ToArray());
+            }
         }
 
         private static UIImage ToImage(UIView view, RectangleF frame)

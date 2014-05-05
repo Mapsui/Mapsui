@@ -15,15 +15,11 @@ namespace Mapsui.Rendering.iOS
     {
         private const double RadiansPerDegree = 0.0174532925f;
 
-        public static CALayer RenderPoint(CALayer target, Point point, IStyle style, IViewport viewport, IFeature feature)
+        public static void RenderPoint(CALayer target, Point point, IStyle style, IViewport viewport, IFeature feature)
         {
             CALayer symbol;
 
-            if (feature["cachedpoint"] != null)
-            {
-                symbol = (CALayer)feature["cachedpoint"];
-            }
-            else if (style is SymbolStyle)
+            if (style is SymbolStyle)
             {
                 var symbolStyle = style as SymbolStyle;
 
@@ -41,24 +37,19 @@ namespace Mapsui.Rendering.iOS
                     symbol.BorderColor = symbolStyle.Outline.Color.ToCG();
                     symbol.BorderWidth = (float)symbolStyle.Outline.Width;
                 }
-                target.AddSublayer(symbol);
             }
             else if (style is VectorStyle)
             {
                 var vectorStyle = (VectorStyle)style;
                 symbol = CreateSymbolFromVectorStyle(vectorStyle);
-                target.AddSublayer(symbol);
             }
             else
             {
                 symbol = CreateSymbolFromVectorStyle(new VectorStyle());
-                target.AddSublayer(symbol);
             }
 
             symbol.AffineTransform = CreateAffineTransform(0, viewport.WorldToScreen(point));
-
-            feature["cachedpoint"] = symbol;
-            return symbol;
+            target.AddSublayer(symbol);
         }
 
         private static CALayer CreateSymbolFromVectorStyle(VectorStyle style)
@@ -112,9 +103,10 @@ namespace Mapsui.Rendering.iOS
 
         private static UIImage ToUIImage(Stream stream)
         {
-            var data = NSData.FromArray(ToByteArray(stream));
-            var image = UIImage.LoadFromData(data);
-            return image;
+            using (var data = NSData.FromArray(ToByteArray(stream)))
+            {
+                return UIImage.LoadFromData(data);
+            }
         }
 
         private static byte[] ToByteArray(Stream input)

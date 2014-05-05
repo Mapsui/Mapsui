@@ -160,7 +160,7 @@ namespace Mapsui.Layers
             var copiedFeatures = CopyFeatures(features).ToList();
             foreach (var feature in copiedFeatures.Where(feature => !(feature.Geometry is Raster)))
             {
-                var geometry = Geometry.GeomFromWKB(feature.Geometry.AsBinary()); // copy
+                var geometry = Geometry.GeomFromWKB(feature.Geometry.AsBinary()); // copy geometry
                 feature.Geometry = Transformation.Transform(SRID, Transformation.MapSRID, geometry);
             }
             return copiedFeatures;
@@ -171,7 +171,7 @@ namespace Mapsui.Layers
             return !(transformation == null || transformation.MapSRID == -1 || SRID == -1 || SRID == transformation.MapSRID);
         }
 
-        private IEnumerable<IFeature> CopyFeatures(IEnumerable<IFeature> features)
+        private static IEnumerable<IFeature> CopyFeatures(IEnumerable<IFeature> features)
         {
             return features.Select(feature => new Feature(feature)).Cast<IFeature>().ToList();
         }
