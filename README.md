@@ -19,7 +19,7 @@ Mapsui is a C# library for mapping applications.
 
 ## Platforms Supported ##
 
-Mapsui, the core project, is compiled as Portable Class Library (Profile 147) for:
+Mapsui, the core project, is a Profile 147 Portable Class Library, compatible with:
 
 - .NET framework 4.0.3 and higher
 - .NET for Windows Store apps
