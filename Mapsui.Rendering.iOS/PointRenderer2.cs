@@ -18,10 +18,12 @@ namespace Mapsui.Rendering.iOS
         public static void RenderPoint(CALayer target, Point point, IStyle style, IViewport viewport, IFeature feature)
         {
             CALayer symbol;
+            double rotation = 0;
 
             if (style is SymbolStyle)
             {
                 var symbolStyle = style as SymbolStyle;
+                rotation = symbolStyle.SymbolRotation;
 
                 if (symbolStyle.Symbol == null || symbolStyle.Symbol.Data == null)
                 {
@@ -32,11 +34,13 @@ namespace Mapsui.Rendering.iOS
                     symbol = CreateSymbolFromBitmap(symbolStyle, symbolStyle);
                 }
 
+
                 if (symbolStyle.Outline != null)
                 {
                     symbol.BorderColor = symbolStyle.Outline.Color.ToCG();
                     symbol.BorderWidth = (float)symbolStyle.Outline.Width;
                 }
+
             }
             else if (style is VectorStyle)
             {
@@ -48,7 +52,7 @@ namespace Mapsui.Rendering.iOS
                 symbol = CreateSymbolFromVectorStyle(new VectorStyle());
             }
 
-            symbol.AffineTransform = CreateAffineTransform(0, viewport.WorldToScreen(point));
+            symbol.AffineTransform = CreateAffineTransform((float)rotation, viewport.WorldToScreen(point));
             target.AddSublayer(symbol);
         }
 
