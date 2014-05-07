@@ -23,9 +23,9 @@ Mapsui, the core project, is a Profile 147 Portable Class Library, compatible wi
 Per platform there are separate assemblies for the UI and for Rendering. Those are:
 
 - Mapsui.UI.Xaml and Mapsui.Rendering.Xaml for WPF on .NET 4.0.3
-- Mapsui.UI.Xaml-SL and Mapsui.Rendering.Xaml-SL for Silverlight 5
+- Mapsui.UI.Xaml-W8 and Mapsui.Rendering.Xaml-W8 for Windows Store apps
 - Mapsui.UI.Xaml-WP8 and Mapsui.Rendering.Xaml-WP8 for Windows Phone 8
-- Mapsui.UI.Xaml-W8 and Mapsui.Rendering.Xaml-W8 for Windows 8
+- Mapsui.UI.Xaml-SL and Mapsui.Rendering.Xaml-SL for Silverlight 5
 - Mapsui.UI.Android and Mapsui.Rendering.Android for API Level 10 (v2.3)
 - Mapsui.UI.iOS and Mapsui.Rendering.iOS
 
