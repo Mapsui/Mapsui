@@ -9,14 +9,6 @@ Mapsui is a C# library for mapping applications.
 - Based on a modified version of SharpMap. 
 - Uses BruTile to access tile services
 
-## Applications that use Mapsui ##
-
-- [BergerView 2.0](http://www.geodan.com/organisation/news/latest-news/article/bergerview-20-for-stichting-incident-management/)
-- [OutdoorMaps](http://www.outdoormaps.net/)
-- [Phoenix](http://www.geodan.nl/producten/touch-table-software/phoenix/)
-- [Bevoegd Gezag](http://apps.microsoft.com/windows/nl-nl/app/ceb52263-0e83-4bdd-a38a-bcab63295b9d)
-- [EarthWatchers](http://earthwatchers.cloudapp.net/)
-
 ## Platforms Supported ##
 
 Mapsui, the core project, is a Profile 147 Portable Class Library, compatible with:
@@ -36,6 +28,14 @@ Per platform there are separate assemblies for the UI and for Rendering. Those a
 - Mapsui.UI.Xaml-W8 and Mapsui.Rendering.Xaml-W8 for Windows 8
 - Mapsui.UI.Android and Mapsui.Rendering.Android for API Level 10 (v2.3)
 - Mapsui.UI.iOS and Mapsui.Rendering.iOS
+
+## Applications that use Mapsui ##
+
+- [BergerView 2.0](http://www.geodan.com/organisation/news/latest-news/article/bergerview-20-for-stichting-incident-management/)
+- [OutdoorMaps](http://www.outdoormaps.net/)
+- [Phoenix](http://www.geodan.nl/producten/touch-table-software/phoenix/)
+- [Bevoegd Gezag](http://apps.microsoft.com/windows/nl-nl/app/ceb52263-0e83-4bdd-a38a-bcab63295b9d)
+- [EarthWatchers](http://earthwatchers.cloudapp.net/)
 
 ## Warnings ##
 
