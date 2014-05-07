@@ -43,5 +43,5 @@ Per platform there are separate assemblies for the UI and for Rendering. Those a
 - Breaking changes will be introduced frequently. We change the API whenever we feel this is an improvement.
 - We adopt new technologies relatively fast, and dropping support for older frameworks.
 - Only use this project if you are willing to dig into the code.
-- Although I do have a general plan of where to go with this library I do not have the resources to go towards that goal in a systematic way. I add functionality depending on what is needed in the projects I work on.
+- Although there is a general plan of where to go with this library there are not enough resources to go towards that goal in a systematic way. Functionality is added depending on what is needed in the projects it is used.
 
