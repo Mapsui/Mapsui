@@ -11,11 +11,11 @@ Mapsui is a C# library for mapping applications.
 
 ## Applications that use Mapsui ##
 
-- BergerView 2.0 http://www.geodan.com/organisation/news/latest-news/article/bergerview-20-for-stichting-incident-management/
-- OutdoorMaps http://www.outdoormaps.net/
-- Phoenix http://www.geodan.nl/producten/touch-table-software/phoenix/
-- Bevoegd Gezag http://apps.microsoft.com/windows/nl-nl/app/ceb52263-0e83-4bdd-a38a-bcab63295b9d
-- EarthWatchers http://earthwatchers.cloudapp.net/
+- [BergerView 2.0](http://www.geodan.com/organisation/news/latest-news/article/bergerview-20-for-stichting-incident-management/)
+- [OutdoorMaps](http://www.outdoormaps.net/)
+- [Phoenix](http://www.geodan.nl/producten/touch-table-software/phoenix/)
+- [Bevoegd Gezag](http://apps.microsoft.com/windows/nl-nl/app/ceb52263-0e83-4bdd-a38a-bcab63295b9d)
+- [EarthWatchers](http://earthwatchers.cloudapp.net/)
 
 ## Platforms Supported ##
 
