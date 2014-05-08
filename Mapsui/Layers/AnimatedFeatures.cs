@@ -14,7 +14,7 @@ namespace Mapsui.Layers
         Linear
     }
 
-    internal class AnimatedFeatures
+    public class AnimatedFeatures
     {
         private Timer _animation;
         private List<AnimatedItem> _cache = new List<AnimatedItem>();
