@@ -58,10 +58,9 @@ namespace Mapsui.Layers
                 if (double.IsNaN(_resolution) || _resolution <= 0) return;
                 var viewport = CreateViewport(_extent, _resolution, _renderResolutionMultiplier);
 
-                var renderer = RendererFactory.Get;
-                if (renderer == null) throw new Exception("No renderer was registered");
+                var renderer = DefaultRendererFactory.Create();
 
-                var bitmapStream = renderer().RenderToBitmapStream(viewport, new[] {_layer});
+                var bitmapStream = renderer.RenderToBitmapStream(viewport, new[] {_layer});
                 RemoveExistingFeatures();
                 _cache.Features = new Features {new Feature {Geometry = new Raster(bitmapStream, viewport.Extent)}};
 

@@ -139,7 +139,7 @@
     <Content Include="Assets\SmallLogo.png" />
     <Content Include="Assets\SplashScreen.png" />
     <Content Include="Assets\StoreLogo.png" />
-    <EmbeddedResource Include="Resources\Images\ns.png" />
+    <Content Include="Resources\Images\ns.png" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">

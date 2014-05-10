@@ -17,9 +17,9 @@ namespace Mapsui.Rendering.Android
         public Canvas Canvas { get; set; }
         public bool ShowDebugInfoInMap { get; set; }
 
-        public MapRenderer()
+        static MapRenderer()
         {
-            RendererFactory.Get = (() => this);
+            DefaultRendererFactory.Create = () => new MapRenderer();
         }
 
         public void Render(IViewport viewport, IEnumerable<ILayer> layers)

@@ -18,12 +18,16 @@ namespace Mapsui.Rendering.iOS
         private readonly UIView _target;
         public bool ShowDebugInfoInMap { get; set; }
 
+        static MapRenderer()
+        {
+            DefaultRendererFactory.Create = () => new MapRenderer();
+        }
+
         public MapRenderer() : this(new UIView()) { }
 
         public MapRenderer(UIView target)
         {
             _target = target;
-            RendererFactory.Get = () => this;
         }
 
         public void Render(IViewport viewport, IEnumerable<ILayer> layers)

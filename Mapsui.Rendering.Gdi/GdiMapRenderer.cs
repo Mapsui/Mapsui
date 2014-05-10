@@ -35,10 +35,10 @@ namespace Mapsui.Rendering.Gdi
     public class GdiMapRenderer : IRenderer
     {
         public Graphics Graphics { get; set; }
-
-        public GdiMapRenderer()
+        
+        static GdiMapRenderer()
         {
-            RendererFactory.Get = () => this;
+            DefaultRendererFactory.Create = () => new GdiMapRenderer();
         }
 
         public void Render(IViewport viewport, IEnumerable<ILayer> layers)

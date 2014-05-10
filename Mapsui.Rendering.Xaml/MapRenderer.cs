@@ -32,23 +32,17 @@ namespace Mapsui.Rendering.Xaml
 #if !NETFX_CORE
             _mainThreadId = System.Threading.Thread.CurrentThread.ManagedThreadId;
 #endif
+            DefaultRendererFactory.Create = () => new MapRenderer();
         }
 
         public MapRenderer()
         {
             _target = new Canvas { IsHitTestVisible = false };
-            CommonConstruction();
         }
 
         public MapRenderer(Canvas target)
         {
             _target = target;
-            CommonConstruction();
-        }
-
-        private void CommonConstruction()
-        {
-            RendererFactory.Get = () => this;
         }
 
         public void Render(IViewport viewport, IEnumerable<ILayer> layers)

@@ -120,7 +120,8 @@
     <Compile Include="NotifyingViewport.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Rendering\MinimalRenderGetStrategy.cs" />
-    <Compile Include="Rendering\RendererFactory.cs" />
+    <Compile Include="Rendering\PlatformRenderer.cs" />
+    <Compile Include="Rendering\DefaultRendererFactory.cs" />
     <Compile Include="Rendering\RenderGetStrategy.cs" />
     <Compile Include="Rendering\VisibleFeatureIterator.cs" />
     <Compile Include="Map.cs" />
