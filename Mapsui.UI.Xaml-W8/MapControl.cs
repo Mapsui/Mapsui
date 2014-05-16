@@ -144,8 +144,11 @@ namespace Mapsui.UI.Xaml
             ManipulationInertiaStarting += OnManipulationInertiaStarting;
 
             _orientationSensor = SimpleOrientationSensor.GetDefault();
-            _orientationSensor.OrientationChanged += (sender, args) => 
-                Dispatcher.RunAsync(CoreDispatcherPriority.Normal, Refresh);
+            if (_orientationSensor != null)
+            {
+                _orientationSensor.OrientationChanged += (sender, args) =>
+                    Dispatcher.RunAsync(CoreDispatcherPriority.Normal, Refresh);
+            }
         }
 
         void MapControl_PointerWheelChanged(object sender, PointerRoutedEventArgs e)
