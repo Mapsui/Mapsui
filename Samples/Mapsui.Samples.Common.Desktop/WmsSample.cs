@@ -1,7 +1,7 @@
 ﻿using Mapsui.Layers;
 using Mapsui.Providers.Wms;
 
-namespace Mapsui.Samples.Desktop
+namespace Mapsui.Samples.Common.Desktop
 {
     public static class WmsSample
     {

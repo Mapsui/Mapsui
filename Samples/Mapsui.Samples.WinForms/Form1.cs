@@ -1,4 +1,4 @@
-﻿using Mapsui.Samples.Desktop;
+﻿using Mapsui.Samples.Common.Desktop;
 using System;
 using System.Windows.Forms;
 

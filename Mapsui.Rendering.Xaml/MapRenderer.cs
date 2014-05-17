@@ -37,7 +37,6 @@ namespace Mapsui.Rendering.Xaml
 
         public MapRenderer()
         {
-            _target = new Canvas { IsHitTestVisible = false };
         }
 
         public MapRenderer(Canvas target)

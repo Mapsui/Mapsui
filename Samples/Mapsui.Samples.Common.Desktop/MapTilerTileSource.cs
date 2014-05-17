@@ -20,7 +20,7 @@ using BruTile.Cache;
 using BruTile.FileSystem;
 using BruTile.Predefined;
 
-namespace Mapsui.Samples.Desktop
+namespace Mapsui.Samples.Common.Desktop
 {
     public class MapTilerTileSource : ITileSource
     {
@@ -36,7 +36,7 @@ namespace Mapsui.Samples.Desktop
 
         public static ITileProvider GetTileProvider()
         {
-            return new FileTileProvider(new FileCache(GetAppDir() + "\\Resources\\GeoData\\TrueMarble", "png"));
+            return new FileTileProvider(new FileCache(GetAppDir() + "\\GeoData\\TrueMarble", "png"));
         }
 
         public static ITileSchema GetTileSchema()

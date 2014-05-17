@@ -1,11 +1,11 @@
-﻿using Mapsui.Layers;
+﻿using System;
+using System.Net;
+using Mapsui.Layers;
 using Mapsui.Providers.Wfs;
 using Mapsui.Providers.Wfs.Utilities;
 using Mapsui.Styles;
-using System;
-using System.Net;
 
-namespace Mapsui.Samples.Desktop
+namespace Mapsui.Samples.Common.Desktop
 {
     public static class WfsSample
     {

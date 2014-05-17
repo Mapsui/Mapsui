@@ -2,7 +2,7 @@
 using Mapsui.Providers.ArcGIS;
 using Mapsui.Providers.ArcGIS.Image;
 
-namespace Mapsui.Samples.Desktop
+namespace Mapsui.Samples.Common.Desktop
 {
     public static class ArcGISImageServiceSample
     {

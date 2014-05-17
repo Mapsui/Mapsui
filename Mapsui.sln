@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30324.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.UI.Xaml", "Mapsui.UI.Xaml\Mapsui.UI.Xaml.csproj", "{9142A5C9-38F9-42DF-8E9A-79E5A919151F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{96F20EF6-F145-47CE-960D-C8899049DFB0}"
@@ -1587,6 +1589,7 @@ Global
 		{B59EF8B1-7948-481A-8C74-72C91E2A9B2A}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
 		{B59EF8B1-7948-481A-8C74-72C91E2A9B2A}.Debug|Mixed Platforms.ActiveCfg = Debug|iPhone
 		{B59EF8B1-7948-481A-8C74-72C91E2A9B2A}.Debug|Mixed Platforms.Build.0 = Debug|iPhone
+		{B59EF8B1-7948-481A-8C74-72C91E2A9B2A}.Debug|Mixed Platforms.Deploy.0 = Debug|iPhone
 		{B59EF8B1-7948-481A-8C74-72C91E2A9B2A}.Debug|x64.ActiveCfg = Debug|iPhone
 		{B59EF8B1-7948-481A-8C74-72C91E2A9B2A}.Debug|x86.ActiveCfg = Debug|iPhone
 		{B59EF8B1-7948-481A-8C74-72C91E2A9B2A}.iOS|Any CPU.ActiveCfg = AppStore|iPhone
@@ -2158,6 +2161,7 @@ Global
 		{5D5312D3-A1D2-44C7-BCA7-EB33EB9DAFDE}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
 		{5D5312D3-A1D2-44C7-BCA7-EB33EB9DAFDE}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
 		{5D5312D3-A1D2-44C7-BCA7-EB33EB9DAFDE}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{5D5312D3-A1D2-44C7-BCA7-EB33EB9DAFDE}.Debug|Mixed Platforms.Deploy.0 = Debug|Any CPU
 		{5D5312D3-A1D2-44C7-BCA7-EB33EB9DAFDE}.Debug|x64.ActiveCfg = Debug|Any CPU
 		{5D5312D3-A1D2-44C7-BCA7-EB33EB9DAFDE}.Debug|x64.Build.0 = Debug|Any CPU
 		{5D5312D3-A1D2-44C7-BCA7-EB33EB9DAFDE}.Debug|x86.ActiveCfg = Debug|Any CPU

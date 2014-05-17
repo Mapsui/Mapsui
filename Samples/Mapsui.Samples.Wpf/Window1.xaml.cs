@@ -8,7 +8,7 @@ using Mapsui.Layers;
 using Mapsui.Projection;
 using Mapsui.Providers;
 using Mapsui.Samples.Common;
-using Mapsui.Samples.Desktop;
+using Mapsui.Samples.Common.Desktop;
 using Mapsui.Styles;
 using Mapsui.UI.Xaml;
 using System;

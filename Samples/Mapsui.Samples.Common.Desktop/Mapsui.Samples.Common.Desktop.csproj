@@ -7,8 +7,8 @@
     <ProjectGuid>{086F5A3A-7D9A-4125-8E67-0EBC72AAB246}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Mapsui.Samples.Desktop</RootNamespace>
-    <AssemblyName>Mapsui.Samples.Desktop</AssemblyName>
+    <RootNamespace>Mapsui.Samples.Common.Desktop</RootNamespace>
+    <AssemblyName>Mapsui.Samples.Common.Desktop</AssemblyName>
     <TargetFrameworkVersion>v4.0.3</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -75,7 +75,22 @@
     <Compile Include="WmsSample.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Images\icon.png">
+    <EmbeddedResource Include="Images\icon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <Content Include="GeoData\TrueMarble\0\0\0.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="GeoData\TrueMarble\1\0\0.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="GeoData\TrueMarble\1\0\1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="GeoData\TrueMarble\1\1\0.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="GeoData\TrueMarble\1\1\1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="x64\SQLite.Interop.dll">
