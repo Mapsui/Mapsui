@@ -17,12 +17,12 @@ namespace Mapsui.Samples.Common.Desktop
             const string wmsUrl = "http://geodata.nationaalgeoregister.nl/ahn25m/wms?service=wms&request=getcapabilities";
 
             var provider = new WmsProvider(wmsUrl)
-                {
-                    SpatialReferenceSystem = "EPSG:28992",
-                    ContinueOnError = true,
-                    TimeOut = 20000,
-                    SRID = 28992
-                };
+            {
+                SpatialReferenceSystem = "EPSG:28992",
+                ContinueOnError = true,
+                TimeOut = 20000,
+                SRID = 28992
+            };
 
             provider.AddLayer("ahn25m");
             provider.SetImageFormat(provider.OutputFormats[0]);
