@@ -33,9 +33,6 @@ namespace Mapsui
     public class Map : IDisposable, INotifyPropertyChanged
     {
         private LayerCollection _layers = new LayerCollection();
-        public event DataChangedEventHandler DataChanged;
-        public event FeedbackEventHandler Feedback;
-        public event PropertyChangedEventHandler PropertyChanged;
         private NotifyingViewport _viewport;
 
         /// <summary>
@@ -49,6 +46,94 @@ namespace Mapsui
         }
 
         public string CRS { get; set; }
+
+        /// <summary>
+        /// The maps coördinate system
+        /// </summary>
+        public ITransformation Transformation { get; set; }
+
+        /// <summary>
+        /// A collection of layers. The first layer in the list is drawn first, the last one on top.
+        /// </summary>
+        public LayerCollection Layers
+        {
+            get { return _layers; }
+            set
+            {
+                var tempLayers = _layers;
+                if (tempLayers != null)
+                {
+                    _layers.LayerAdded -= LayersLayerAdded;
+                    _layers.LayerRemoved -= LayersLayerRemoved;
+                }
+                _layers = value;
+                _layers.LayerAdded += LayersLayerAdded;
+                _layers.LayerRemoved += LayersLayerRemoved;
+            }
+        }
+
+        public NotifyingViewport Viewport
+        {
+            set
+            {
+                var tempViewport = _viewport;
+                if (tempViewport != null)
+                {
+                    _viewport.PropertyChanged -= ViewportOnPropertyChanged;
+                }
+                _viewport = value;
+                _viewport.PropertyChanged += ViewportOnPropertyChanged;
+            }
+            get { return _viewport; }
+        }
+
+        /// <summary>
+        /// Map background color (defaults to transparent)
+        ///  </summary>
+        public Color BackColor { get; set; } 
+
+        /// <summary>
+        /// Gets the extents of the map based on the extents of all the layers in the layers collection
+        /// </summary>
+        /// <returns>Full map extents</returns>
+        public BoundingBox Envelope
+        {
+            get
+            {
+                if (_layers.Count == 0) return null;
+
+                BoundingBox bbox = null;
+                foreach (var layer in _layers)
+                {
+                    bbox = bbox == null ? layer.Envelope : bbox.Join(layer.Envelope);
+                }
+                return bbox;
+            }
+        }
+
+        public IList<double> Resolutions 
+        {
+            get 
+            { 
+                var baseLayer = Layers.FirstOrDefault(l => l.Enabled && l is ITileLayer) as ITileLayer;
+                if (baseLayer == null) return new List<double>();
+                return baseLayer.Schema.Resolutions.Select(r => r.Value.UnitsPerPixel).ToList();
+            }
+        }
+
+        /// <summary>
+        /// Disposes 
+        /// the map object
+        /// </summary>
+        public void Dispose()
+        {
+            AbortFetch();
+            _layers.Clear();
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public event DataChangedEventHandler DataChanged;
+        public event FeedbackEventHandler Feedback;
 
         void LayersLayerRemoved(ILayer layer)
         {
@@ -127,93 +212,9 @@ namespace Mapsui
             }
         }
 
-        /// <summary>
-        /// Disposes 
-        /// the map object
-        /// </summary>
-        public void Dispose()
-        {
-            AbortFetch();
-            _layers.Clear();
-        }
-
-        /// <summary>
-        /// The maps coördinate system
-        /// </summary>
-        public ITransformation Transformation { get; set; }
-
-        /// <summary>
-        /// A collection of layers. The first layer in the list is drawn first, the last one on top.
-        /// </summary>
-        public LayerCollection Layers
-        {
-            get { return _layers; }
-            set
-            {
-                var tempLayers = _layers;
-                if (tempLayers != null)
-                {
-                    _layers.LayerAdded -= LayersLayerAdded;
-                    _layers.LayerRemoved -= LayersLayerRemoved;
-                }
-                _layers = value;
-                _layers.LayerAdded += LayersLayerAdded;
-                _layers.LayerRemoved += LayersLayerRemoved;
-            }
-        }
-
-        public NotifyingViewport Viewport
-        {
-            set
-            {
-                var tempViewport = _viewport;
-                if (tempViewport != null)
-                {
-                    _viewport.PropertyChanged -= ViewportOnPropertyChanged;
-                }
-                _viewport = value;
-                _viewport.PropertyChanged += ViewportOnPropertyChanged;
-            }
-            get { return _viewport; }
-        }
-
         private void ViewportOnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             OnPropertyChanged(sender, e.PropertyName);
-        }
-
-        /// <summary>
-        /// Map background color (defaults to transparent)
-        ///  </summary>
-        public Color BackColor { get; set; } 
-
-        /// <summary>
-        /// Gets the extents of the map based on the extents of all the layers in the layers collection
-        /// </summary>
-        /// <returns>Full map extents</returns>
-        public BoundingBox Envelope
-        {
-            get
-            {
-                if (_layers.Count == 0) return null;
-
-                BoundingBox bbox = null;
-                foreach (var layer in _layers)
-                {
-                    bbox = bbox == null ? layer.Envelope : bbox.Join(layer.Envelope);
-                }
-                return bbox;
-            }
-        }
-
-        public IList<double> Resolutions 
-        {
-            get 
-            { 
-                var baseLayer = Layers.FirstOrDefault(l => l.Enabled && l is ITileLayer) as ITileLayer;
-                if (baseLayer == null) return new List<double>();
-                return baseLayer.Schema.Resolutions.Select(r => r.Value.UnitsPerPixel).ToList();
-            }
         }
 
         public void ClearCache()
