@@ -35,29 +35,29 @@
   <ItemGroup>
     <Reference Include="BruTile, Version=0.9.6.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\BruTile.0.9.8\lib\net40\BruTile.dll</HintPath>
+      <HintPath>$(SolutionDir)\packages\BruTile.0.9.8\lib\net40\BruTile.dll</HintPath>
     </Reference>
     <Reference Include="BruTile.Desktop, Version=0.9.8.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\BruTile.Desktop.0.9.8\lib\net40\BruTile.Desktop.dll</HintPath>
+      <HintPath>$(SolutionDir)\packages\BruTile.Desktop.0.9.8\lib\net40\BruTile.Desktop.dll</HintPath>
     </Reference>
     <Reference Include="BruTile.MbTiles, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\BruTile.Desktop.0.9.8\lib\net40\BruTile.MbTiles.dll</HintPath>
+      <HintPath>$(SolutionDir)\packages\BruTile.Desktop.0.9.8\lib\net40\BruTile.MbTiles.dll</HintPath>
     </Reference>
     <Reference Include="BruTile.Serialization, Version=0.9.8.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\BruTile.Desktop.0.9.8\lib\net40\BruTile.Serialization.dll</HintPath>
+      <HintPath>$(SolutionDir)\packages\BruTile.Desktop.0.9.8\lib\net40\BruTile.Serialization.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.SQLite, Version=1.0.86.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\System.Data.SQLite.1.0.86.0\lib\net40\System.Data.SQLite.dll</HintPath>
+      <HintPath>$(SolutionDir)\packages\System.Data.SQLite.1.0.86.0\lib\net40\System.Data.SQLite.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.SQLite.Linq, Version=1.0.86.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\System.Data.SQLite.1.0.86.0\lib\net40\System.Data.SQLite.Linq.dll</HintPath>
+      <HintPath>$(SolutionDir)\packages\System.Data.SQLite.1.0.86.0\lib\net40\System.Data.SQLite.Linq.dll</HintPath>
     </Reference>
     <Reference Include="System.Net" />
     <Reference Include="System.Xml.Linq" />
