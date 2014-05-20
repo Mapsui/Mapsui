@@ -66,9 +66,9 @@ namespace Mapsui.Layers
         BoundingBox Envelope { get; }
         
         /// <summary>
-        /// The spatial reference ID (CRS)
+        /// The spatial reference CRS
         /// </summary>
-        int SRID { get; }
+        int CRS { get; }
 
         /// <summary>
         /// The coordinate transformation

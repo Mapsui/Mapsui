@@ -169,9 +169,9 @@ namespace Mapsui.Web.Wms
 
             XmlNode layerRootNode = capabilities.CreateNode(XmlNodeType.Element, "Layer", wmsNamespaceURI);
             layerRootNode.AppendChild(CreateElement("Title", "Mapsui", capabilities, false, wmsNamespaceURI));
-            layerRootNode.AppendChild(CreateElement("CRS", "EPSG:" + map.Layers[0].SRID, capabilities, false,
+            layerRootNode.AppendChild(CreateElement("CRS", "EPSG:" + map.Layers[0].CRS, capabilities, false,
                                                     wmsNamespaceURI)); //TODO
-            layerRootNode.AppendChild(GenerateBoundingBoxElement(map.Envelope, map.Layers[0].SRID, capabilities));
+            layerRootNode.AppendChild(GenerateBoundingBoxElement(map.Envelope, map.Layers[0].CRS, capabilities));
             //This should be changed when Transformation library is complete
             XmlElement geoBox = capabilities.CreateElement("EX_GeographicBoundingBox", wmsNamespaceURI);
             geoBox.Attributes.Append(CreateAttribute("minx", "-180", capabilities));
@@ -280,7 +280,7 @@ namespace Mapsui.Web.Wms
                 foreach (Layer childlayer in ((LayerGroup) layer).Layers)
                     LayerNode.AppendChild(GetWmsLayerNode(childlayer, doc));
 
-            LayerNode.AppendChild(GenerateBoundingBoxElement(layer.Envelope, layer.SRID, doc));
+            LayerNode.AppendChild(GenerateBoundingBoxElement(layer.Envelope, layer.CRS, doc));
 
             return LayerNode;
         }
