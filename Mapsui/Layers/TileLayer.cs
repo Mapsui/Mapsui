@@ -16,6 +16,7 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
 using System.ComponentModel;
+using System.Threading.Tasks;
 using BruTile;
 using BruTile.Cache;
 using BruTile.Tms;
@@ -41,8 +42,6 @@ namespace Mapsui.Layers
     {
         private TileFetcher _tileFetcher;
         private ITileSource _tileSource;
-        private readonly string _urlToTileMapXml;
-        private readonly bool _overrideTmsUrlWithUrlToTileMapXml;
         private readonly int _maxRetries;
         private readonly int _maxThreads;
         private readonly IFetchStrategy _fetchStrategy;
@@ -52,29 +51,7 @@ namespace Mapsui.Layers
         private int _numberTilesNeeded;
 
         readonly MemoryCache<Feature> _memoryCache;
-
-        private void LoadTmsLayer(IAsyncResult result)
-        {
-            var state = (object[])result.AsyncState;
-            var initializationFailed = (Action<Exception>)state[1];
-                
-            try
-            {
-                var request = (HttpWebRequest) state[0];
-                var response = request.EndGetResponse(result);
-                var stream = response.GetResponseStream();
-                SetTileSource(_overrideTmsUrlWithUrlToTileMapXml
-                    ? TileMapParser.CreateTileSource(stream, _urlToTileMapXml)
-                    : TileMapParser.CreateTileSource(stream));
-            }
-            catch (Exception ex)
-            {
-                if (initializationFailed != null)
-                    initializationFailed(new Exception("Could not initialize TileLayer with url : " + _urlToTileMapXml, ex));
-                // else: hopelesly lost with an error on a background thread with no option to report back.
-            }
-        }
-        
+       
         [Obsolete("use the named parameters of the constructor with tilesource if you want to omit the tilesource")]
         public TileLayer(int minTiles = 200, int maxTiles = 300, int maxRetries = TileFetcher.DefaultMaxRetries,
             int maxThreads = TileFetcher.DefaultMaxThreads, IFetchStrategy fetchStrategy = null,
@@ -99,15 +76,40 @@ namespace Mapsui.Layers
         }
 
         [Obsolete("TileLayer should not have a dependency on TMS. This method will be removed")]
-        public TileLayer(string urlToTileMapXml, bool overrideTmsUrlWithUrlToTileMapXml = false, Action<Exception> initializationFailed = null)
+        public TileLayer(string urlToTileMapXml, bool overrideTmsUrlWithUrlToTileMapXml = false, Action<Exception> errorCallback = null)
             : this()
         {
-            _urlToTileMapXml = urlToTileMapXml;
-            _overrideTmsUrlWithUrlToTileMapXml = overrideTmsUrlWithUrlToTileMapXml;
             var webRequest = (HttpWebRequest)WebRequest.Create(urlToTileMapXml);
-            webRequest.BeginGetResponse(LoadTmsLayer, new object[] { webRequest, initializationFailed });
+            webRequest.BeginGetResponse(LoadTmsLayer, new object[]
+            {
+                errorCallback, webRequest, urlToTileMapXml, overrideTmsUrlWithUrlToTileMapXml
+            });
         }
-        
+
+        private void LoadTmsLayer(IAsyncResult result)
+        {
+            var state = (object[])result.AsyncState;
+            var errorCallback = (Action<Exception>)state[0];
+
+            try
+            {
+                var request = (HttpWebRequest)state[1];
+                var urlToTileMapXml = (string)state[2];
+                var overrideTmsUrlWithUrlToTileMapXml = (bool)state[3];
+
+                var response = request.EndGetResponse(result);
+                var stream = response.GetResponseStream();
+                SetTileSource(overrideTmsUrlWithUrlToTileMapXml
+                    ? TileMapParser.CreateTileSource(stream, urlToTileMapXml)
+                    : TileMapParser.CreateTileSource(stream));
+            }
+            catch (Exception ex)
+            {
+                if (errorCallback != null) errorCallback(ex);
+                // else: hopelesly lost with an error on a background thread and no option to report back.
+            }
+        }
+
         protected void SetTileSource(ITileSource source)
         {
             if (_tileSource != null)

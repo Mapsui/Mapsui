@@ -76,6 +76,7 @@
     <Compile Include="Geometries\Surface.cs" />
     <Compile Include="Layers\AnimatedFeatures.cs" />
     <Compile Include="Layers\AnimatedPointLayer.cs" />
+    <Compile Include="Layers\TmsTileSourceBuilder.cs" />
     <Compile Include="Projection\BoundingBoxIterator.cs" />
     <Compile Include="Projection\MinimalTransformation.cs" />
     <Compile Include="Providers\ArcGIS\CapabilitiesHelper.cs" />
