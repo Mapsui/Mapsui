@@ -83,6 +83,8 @@ namespace Mapsui.Samples.Wpf
             MapControl.Refresh();
         }
 
+
+
         private void AnimatedPointsClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
@@ -249,6 +251,16 @@ namespace Mapsui.Samples.Wpf
                 MapControl.ZoomToFullEnvelope();
                 MapControl.Refresh();
             }
+        }
+
+        private void PointsWithLabelsClick(object sender, RoutedEventArgs e)
+        {
+            MapControl.Map.Layers.Clear();
+            MapControl.Map.Layers.Add(new TileLayer(new OsmTileSource()) { LayerName = "OSM" });
+            MapControl.Map.Layers.Add(PointLayerSample.CreatePointLayerWithLabels());
+            LayerList.Initialize(MapControl.Map.Layers);
+            MapControl.ZoomToFullEnvelope();
+            MapControl.Refresh();
         }
     }
 }

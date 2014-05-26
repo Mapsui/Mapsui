@@ -50,6 +50,7 @@
     <Compile Include="PointLayerSample.cs" />
     <Compile Include="PointLayerWithWorldUnitsForSymbolsSample.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StyleSamples.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Mapsui\Mapsui.csproj">
