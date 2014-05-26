@@ -40,7 +40,7 @@ namespace Mapsui.Layers
         public int FetchingPostponedInMilliseconds { get; set; }
 
         /// <summary>
-        /// Gets or sets the SRID of this VectorLayer's data source
+        /// Gets or sets the CRS of this VectorLayer's data source
         /// </summary>
         public new int SRID
         {

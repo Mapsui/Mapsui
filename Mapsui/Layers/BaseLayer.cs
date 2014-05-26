@@ -12,7 +12,7 @@ namespace Mapsui.Layers
     public abstract class BaseLayer : ILayer
     {
         private static int _instanceCounter;
-        private int _srid;
+        private int _crs;
         private object _tag;
         private bool _busy;
         private bool _enabled;
@@ -95,15 +95,15 @@ namespace Mapsui.Layers
         }
 
         /// <summary>
-        /// Gets or sets the SRID of this VectorLayer's data source
+        /// Gets or sets the CRS of this VectorLayer's data source
         /// </summary>
-        public int SRID
+        public int CRS
         {
-            get { return _srid; }
+            get { return _crs; }
             set
             {
-                _srid = value;
-                OnPropertyChanged("SRID");
+                _crs = value;
+                OnPropertyChanged("CRS");
             }
         }
 

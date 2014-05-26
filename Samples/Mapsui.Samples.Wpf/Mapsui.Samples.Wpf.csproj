@@ -62,7 +62,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BruTile, Version=0.9.8.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\BruTile.0.9.8\lib\net40\BruTile.dll</HintPath>
+      <HintPath>$(SolutionDir)\packages\BruTile.0.9.8\lib\net40\BruTile.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
