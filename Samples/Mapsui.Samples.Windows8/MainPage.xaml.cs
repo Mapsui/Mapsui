@@ -5,7 +5,6 @@ using Mapsui.Providers;
 using Mapsui.Samples.Common;
 using Mapsui.Styles;
 using System.IO;
-using System.Reflection;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Navigation;
 
@@ -29,18 +28,9 @@ namespace Mapsui.Samples.Windows8
         {
             mapControl.Map.Layers.Add(new TileLayer(new OsmTileSource()));
             var provider = CreateRandomPointsProvider();
-            //mapControl.Map.Layers.Add(PointLayerSample.CreateRandomPointLayerWithLabel(provider));
-            //mapControl.Map.Layers.Add(PointLayerSample.CreateStackedLabelLayer(provider));
-            //mapControl.Map.Layers.Add(PointLayerSample.CreateRandomPolygonLayer(mapControl.Map.Envelope, 1));
-        }
-
-        private Stream GetSymbolBitmapStream()
-        {
-            // add some sample symbols (resource images) to the map...
-            var assembly = typeof(MainPage).GetTypeInfo().Assembly;
-            var stream = assembly.GetManifestResourceStream(@"Mapsui.Samples.Windows8.Resources.Images.ns.png");
-            stream.Position = 0;
-            return stream;
+            mapControl.Map.Layers.Add(PointLayerSample.CreateRandomPointLayerWithLabel(provider));
+            mapControl.Map.Layers.Add(PointLayerSample.CreateStackedLabelLayer(provider));
+            mapControl.Map.Layers.Add(PointLayerSample.CreateRandomPolygonLayer(mapControl.Map.Envelope, 1));
         }
 
         private MemoryProvider CreateRandomPointsProvider()

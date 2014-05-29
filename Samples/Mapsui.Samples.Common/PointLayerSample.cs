@@ -21,40 +21,40 @@ namespace Mapsui.Samples.Common
                             CreatePointWithDefaultStyle(),
                             CreatePointWithSmallBlackDot(),
                         }),
-                     Style = null
+                    Style = null
 
                 };
         }
 
         private static Feature CreatePointWithLabel()
         {
-            var feature = new Feature {Geometry = new Point(0, 1000000)};
-            feature.Styles.Add(new LabelStyle {Text = "Label"});
+            var feature = new Feature { Geometry = new Point(0, 1000000) };
+            feature.Styles.Add(new LabelStyle { Text = "Label" });
             return feature;
         }
 
         private static Feature CreatePointWithDefaultStyle()
         {
-            var feature = new Feature {Geometry = new Point(1000000, 1000000)};
+            var feature = new Feature { Geometry = new Point(1000000, 1000000) };
             feature.Styles.Add(new SymbolStyle());
             return feature;
         }
 
         private static IFeature CreatePointWithSmallBlackDot()
         {
-            var feature = new Feature {Geometry = new Point(1000000, 0)};
+            var feature = new Feature { Geometry = new Point(1000000, 0) };
 
             feature.Styles.Add(new SymbolStyle
                 {
                     SymbolScale = 2.0f,
-                    Fill = new Brush {Color = null},
-                    Outline = new Pen {Color = Color.Green}
+                    Fill = new Brush { Color = null },
+                    Outline = new Pen { Color = Color.Green }
                 });
 
             feature.Styles.Add(new SymbolStyle
                 {
                     SymbolScale = 0.5f,
-                    Fill = new Brush {Color = Color.Black},
+                    Fill = new Brush { Color = Color.Black },
                 });
 
             return feature;
@@ -65,11 +65,14 @@ namespace Mapsui.Samples.Common
             var feature = new Feature { Geometry = new Point(0, 1000000) };
             feature.Styles.Add(new SymbolStyle
                 {
-                    Symbol = new Bitmap { Data = System.Reflection.Assembly.GetExecutingAssembly()
-                            .GetManifestResourceStream("Mapsui.Samples.Common.Images.loc.png") },
+                    Symbol = new Bitmap
+                    {
+                        Data = System.Reflection.Assembly.GetExecutingAssembly()
+                            .GetManifestResourceStream("Mapsui.Samples.Common.Images.loc.png")
+                    },
                     SymbolType = SymbolType.Ellipse,
                     UnitType = UnitType.Pixel,
-                    SymbolScale = 0.5 
+                    SymbolScale = 0.5
 
                 });
             return feature;
@@ -77,7 +80,7 @@ namespace Mapsui.Samples.Common
 
         public static IEnumerable<IGeometry> GenerateRandomPoints(BoundingBox box, int count = 25)
         {
-           var result = new List<IGeometry>();
+            var result = new List<IGeometry>();
             for (var i = 0; i < count; i++)
             {
                 result.Add(new Point(Random.NextDouble() * box.Width + box.Left, Random.NextDouble() * box.Height - (box.Height - box.Top)));
@@ -92,7 +95,7 @@ namespace Mapsui.Samples.Common
                     new SymbolStyle {SymbolScale = 1, Fill = new Brush(Color.Indigo)},
                     new LabelStyle {Text = "TestLabel", HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Left, Offset = new Offset{ X= 16.0 }}
                 };
-            return new Layer("pointLayer") {DataSource = dataSource, Style = styleList};
+            return new Layer("pointLayer") { DataSource = dataSource, Style = styleList };
         }
 
         public static ILayer CreateStackedLabelLayer(IProvider provider)
@@ -107,7 +110,7 @@ namespace Mapsui.Samples.Common
         }
 
         public static Point GenerateRandomPoint(BoundingBox box)
-        {            
+        {
             return new Point(Random.NextDouble() * box.Width + box.Left, Random.NextDouble() * box.Height - box.Top);
         }
 
@@ -116,7 +119,7 @@ namespace Mapsui.Samples.Common
             return new Layer("pointLayer")
                 {
                     DataSource = new MemoryProvider(GenerateRandomPoints(envelope, count)),
-                    Style = new VectorStyle {Fill = new Brush(Color.White)},
+                    Style = new VectorStyle { Fill = new Brush(Color.White) },
                 };
         }
 
@@ -124,8 +127,8 @@ namespace Mapsui.Samples.Common
         {
             return new Layer("pointLayer")
                 {
-                    DataSource = dataSource, 
-                    Style = new SymbolStyle {SymbolScale = 1, Fill = new Brush(Color.Blue)}
+                    DataSource = dataSource,
+                    Style = new SymbolStyle { SymbolScale = 1, Fill = new Brush(Color.Blue) }
                 };
         }
 
@@ -174,6 +177,25 @@ namespace Mapsui.Samples.Common
                 DataSource = new MemoryProvider(CreateBitmapPoint()),
                 Style = null
             };
+        }
+
+        public static ILayer CreatePointLayerWithLabels()
+        {
+            var memoryProvider = new MemoryProvider();
+
+            var featureWithDefaultStyle = new Feature { Geometry = new Point(0, 0) };
+            featureWithDefaultStyle.Styles.Add(StyleSamples.CreateDefaultLabelStyle());
+            memoryProvider.Features.Add(featureWithDefaultStyle);
+
+            var featureWithRightAlignedStyle = new Feature { Geometry = new Point(0, -2000000) };
+            featureWithRightAlignedStyle.Styles.Add(StyleSamples.CreateRightAlignedLabelStyle());
+            memoryProvider.Features.Add(featureWithRightAlignedStyle);
+
+            var featureWithColors = new Feature { Geometry = new Point(0, -4000000) };
+            featureWithColors.Styles.Add(StyleSamples.CreateColoredLabelStyle());
+            memoryProvider.Features.Add(featureWithColors);
+
+            return new MemoryLayer { Name = "PointLayerWithLabels", DataSource = memoryProvider };
         }
     }
 }

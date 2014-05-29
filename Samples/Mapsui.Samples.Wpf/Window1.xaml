@@ -13,6 +13,7 @@
             <StackPanel Width="Auto">
                 <RadioButton IsChecked="True" FontSize="16" Content="OSM" Margin="4,4,4,4" Click="OsmClick"/>
                 <RadioButton FontSize="16" Content="PointSymbols" Margin="4,4,4,4" Click="PointSymbolsClick"/>
+                <RadioButton FontSize="16" Content="Points with labels" Margin="4,4,4,4" Click="PointsWithLabelsClick"/>
                 <RadioButton FontSize="16" Content="Points with stacked labels" Margin="4,4,4,4" Click="RandomPointWithStackLabelClick"/>
                 <RadioButton FontSize="16" Content="Points with feature info" Margin="4,4,4,4" Click="RandomPointsWithFeatureInfoClick"/>
                 <RadioButton FontSize="16" Content="Points with animation" Margin="4,4,4,4" Click="AnimatedPointsClick"/>
@@ -26,7 +27,6 @@
                 <RadioButton FontSize="16" Content="WMS"  Margin="4,4,4,4" Click="WmsClick" />
                 <RadioButton FontSize="16" Content="ArcGISImageService"  Margin="4,4,4,4" Click="ArcGISImageServiceClick" />
                 <RadioButton FontSize="16" Content="WMTS"  Margin="4,4,4,4" Click="WmtsClick" />
-
             </StackPanel>
         </Border>
         <Border BorderBrush="White" Opacity="0.75" Margin="10" Background="White" BorderThickness="6" CornerRadius="2" VerticalAlignment="Top" HorizontalAlignment="Right">

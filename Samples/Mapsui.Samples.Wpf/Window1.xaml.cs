@@ -1,9 +1,6 @@
-﻿using System.Threading;
-using BruTile;
-using BruTile.Extensions;
+﻿using BruTile.Extensions;
 using BruTile.Web;
 using BruTile.Wmts;
-using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Projection;
 using Mapsui.Providers;
@@ -19,7 +16,6 @@ using System.Net;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using Layer = Mapsui.Layers.Layer;
 
 namespace Mapsui.Samples.Wpf
 {
@@ -36,12 +32,12 @@ namespace Mapsui.Samples.Wpf
             OsmClick(this, null);
         }
 
-        void MapControlFeatureInfo(object sender, FeatureInfoEventArgs e)
+        static void MapControlFeatureInfo(object sender, FeatureInfoEventArgs e)
         {
             MessageBox.Show(FeaturesToString(e.FeatureInfo));
         }
 
-        string FeaturesToString(IEnumerable<KeyValuePair<string, IEnumerable<IFeature>>> featureInfos)
+        static string FeaturesToString(IEnumerable<KeyValuePair<string, IEnumerable<IFeature>>> featureInfos)
         {
             var result = string.Empty;
 
@@ -87,6 +83,8 @@ namespace Mapsui.Samples.Wpf
             MapControl.Refresh();
         }
 
+
+
         private void AnimatedPointsClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
@@ -128,7 +126,7 @@ namespace Mapsui.Samples.Wpf
             MapControl.Refresh();
         }
 
-        private void MapControlOnMouseInfoDown(object sender, MouseInfoEventArgs mouseInfoEventArgs)
+        private static void MapControlOnMouseInfoDown(object sender, MouseInfoEventArgs mouseInfoEventArgs)
         {
             if (mouseInfoEventArgs.Feature != null)
             {
@@ -253,6 +251,16 @@ namespace Mapsui.Samples.Wpf
                 MapControl.ZoomToFullEnvelope();
                 MapControl.Refresh();
             }
+        }
+
+        private void PointsWithLabelsClick(object sender, RoutedEventArgs e)
+        {
+            MapControl.Map.Layers.Clear();
+            MapControl.Map.Layers.Add(new TileLayer(new OsmTileSource()) { LayerName = "OSM" });
+            MapControl.Map.Layers.Add(PointLayerSample.CreatePointLayerWithLabels());
+            LayerList.Initialize(MapControl.Map.Layers);
+            MapControl.ZoomToFullEnvelope();
+            MapControl.Refresh();
         }
     }
 }
