@@ -6,8 +6,6 @@ namespace Mapsui.Projection
 {
     public class MinimalTransformation : ITransformation
     {
-        public int MapSRID { get; set; }
-
         private readonly IDictionary<int, Func<double, double, Point>> _toLatLon = new Dictionary<int, Func<double, double, Point>>();
         private readonly IDictionary<int, Func<double, double, Point>> _fromLatLon = new Dictionary<int, Func<double, double, Point>>();
 

@@ -44,16 +44,6 @@ namespace Mapsui.Layers
 
         public IProvider DataSource { get; set; }
 
-        public new int SRID
-        {
-            get
-            {
-                if (DataSource == null)
-                    throw (new Exception("DataSource property not set on layer '" + LayerName + "'"));
-                return DataSource.SRID;
-            }
-        }
-
         /// <summary>
         /// Returns the extent of the layer
         /// </summary>
@@ -67,8 +57,8 @@ namespace Mapsui.Layers
                 lock (DataSource)
                 {
                     var box = DataSource.GetExtents();
-                    if (Transformation != null && Transformation.MapSRID != -1 && SRID != -1)
-                        return Transformation.Transform(SRID, Transformation.MapSRID, box);
+                    if (Transformation != null && CRS != -1 && DataSource.SRID != -1)
+                        return Transformation.Transform(DataSource.SRID, CRS, box);
                     return box;
                 }
             }
@@ -139,8 +129,8 @@ namespace Mapsui.Layers
             IsFetching = true;
             NeedsUpdate = false;
 
-            if (Transformation != null && Transformation.MapSRID != -1 && SRID != -1)
-                extent = Transformation.Transform(Transformation.MapSRID, SRID, extent);
+            if (Transformation != null && CRS != -1 && DataSource.SRID != -1)
+                extent = Transformation.Transform(CRS, DataSource.SRID, extent);
 
             var fetcher = new FeatureFetcher(extent, resolution, DataSource, DataArrived, DateTime.Now.Ticks);
             ThreadPool.QueueUserWorkItem(fetcher.FetchOnThread);
@@ -152,11 +142,11 @@ namespace Mapsui.Layers
             if (features == null) throw new ArgumentException("argument features may not be null");
 
             features = features.ToList();
-            if (Transformation != null && Transformation.MapSRID != -1 && SRID != -1 && SRID != Transformation.MapSRID)
+            if (Transformation != null && CRS != -1 && DataSource.SRID != -1 && DataSource.SRID != CRS)
             {
                 foreach (var feature in features.Where(feature => !(feature.Geometry is Raster)))
                 {
-                    feature.Geometry = Transformation.Transform(SRID, Transformation.MapSRID, (Geometry)feature.Geometry);
+                    feature.Geometry = Transformation.Transform(DataSource.SRID, CRS, feature.Geometry);
                 }
             }
 

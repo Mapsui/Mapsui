@@ -22,8 +22,6 @@ namespace Mapsui.Geometries
     /// </summary>
     public interface IGeometry
     {
-        #region "Basic Methods on Geometry"
-
         /// <summary>
         ///  The inherent dimension of this <see cref="Geometry"/> object, which must be less than or equal to the coordinate dimension.
         /// </summary>
@@ -83,10 +81,6 @@ namespace Mapsui.Geometries
         /// <returns>True if spatially related</returns>
         bool Relate(Geometry other, string intersectionPattern);
 
-        #endregion
-
-        #region "Methods for testing Spatial Relations between geometric objects"
-
         /// <summary>
         /// Returns 'true' if this <see cref="Geometry"/> is 'spatially equal' to another <see cref="Geometry"/>
         /// </summary>
@@ -127,10 +121,6 @@ namespace Mapsui.Geometries
         /// </summary>
         bool Overlaps(Geometry geom);
 
-        #endregion
-
-        #region "Methods that support Spatial Analysis"
-
         /// <summary>
         /// Returns the shortest distance between any two points in the two geometries
         /// as calculated in the spatial reference system of this <see cref="Geometry"/>.
@@ -146,7 +136,5 @@ namespace Mapsui.Geometries
         /// <param name="geom"><see cref="Geometry"/> to intersect with</param>
         /// <returns>Returns a <see cref="Geometry"/> that represents the point set intersection of this <see cref="Geometry"/> with another <see cref="Geometry"/>.</returns>
         Geometry Intersection(Geometry geom);
-
-        #endregion
     }
 }

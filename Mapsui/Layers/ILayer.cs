@@ -66,9 +66,11 @@ namespace Mapsui.Layers
         BoundingBox Envelope { get; }
         
         /// <summary>
-        /// The spatial reference CRS
+        /// The spatial reference CRS. 
+        /// This always needs to be equal to the CRS or the map. 
+        /// It should eventually be removed altogether
         /// </summary>
-        int CRS { get; }
+        int CRS { get; set; }
 
         /// <summary>
         /// The coordinate transformation

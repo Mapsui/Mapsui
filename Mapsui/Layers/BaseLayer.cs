@@ -95,7 +95,7 @@ namespace Mapsui.Layers
         }
 
         /// <summary>
-        /// Gets or sets the CRS of this VectorLayer's data source
+        /// Gets or sets the CRS 
         /// </summary>
         public int CRS
         {
