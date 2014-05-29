@@ -1,9 +1,8 @@
-﻿using System.Threading;
-using BruTile.Wmts.Generated;
-using Mapsui.Fetcher;
+﻿using Mapsui.Fetcher;
 using Mapsui.Geometries;
 using Mapsui.Providers;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace Mapsui.Layers
 {

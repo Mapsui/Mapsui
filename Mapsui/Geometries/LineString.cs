@@ -18,6 +18,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace Mapsui.Geometries
 {
@@ -27,7 +28,7 @@ namespace Mapsui.Geometries
     /// </summary>
     public class LineString : Curve
     {
-        private IList<Point> vertices;
+        private IList<Point> _vertices;
 
         /// <summary>
         /// Initializes an instance of a LineString from a set of vertices
@@ -35,7 +36,7 @@ namespace Mapsui.Geometries
         /// <param name="vertices"></param>
         public LineString(IList<Point> vertices)
         {
-            this.vertices = vertices;
+            _vertices = vertices;
         }
 
         /// <summary>
@@ -52,11 +53,8 @@ namespace Mapsui.Geometries
         public LineString(IEnumerable<double[]> points)
         {
             var vertices = new Collection<Point>();
-
-            foreach (double[] point in points)
-                vertices.Add(new Point(point));
-
-            this.vertices = vertices;
+            foreach (var point in points) vertices.Add(new Point(point));
+            _vertices = vertices;
         }
 
         /// <summary>
@@ -64,8 +62,8 @@ namespace Mapsui.Geometries
         /// </summary>
         public IList<Point> Vertices
         {
-            get { return vertices; }
-            set { vertices = value; }
+            get { return _vertices; }
+            set { _vertices = value; }
         }
 
         /// <summary>
@@ -76,9 +74,9 @@ namespace Mapsui.Geometries
         {
             get
             {
-                if (vertices.Count == 0)
+                if (_vertices.Count == 0)
                     throw new Exception("No startpoint found: LineString has no vertices.");
-                return vertices[0];
+                return _vertices[0];
             }
         }
 
@@ -90,9 +88,9 @@ namespace Mapsui.Geometries
         {
             get
             {
-                if (vertices.Count == 0)
+                if (_vertices.Count == 0)
                     throw new Exception("No endpoint found: LineString has no vertices.");
-                return vertices[vertices.Count - 1];
+                return _vertices[_vertices.Count - 1];
             }
         }
 
@@ -128,7 +126,7 @@ namespace Mapsui.Geometries
         /// <remarks>This method is supplied as part of the OpenGIS Simple Features Specification</remarks>
         public int NumPoints
         {
-            get { return vertices.Count; }
+            get { return _vertices.Count; }
         }
 
         /// <summary>
@@ -139,7 +137,7 @@ namespace Mapsui.Geometries
         /// <returns></returns>
         public Point Point(int n)
         {
-            return vertices[n];
+            return _vertices[n];
         }
 
         #endregion
@@ -180,7 +178,7 @@ namespace Mapsui.Geometries
         public new LineString Clone()
         {
             var l = new LineString();
-            foreach (Point vertex in vertices)
+            foreach (Point vertex in _vertices)
                 l.Vertices.Add(vertex.Clone());
             return l;
         }
@@ -211,10 +209,7 @@ namespace Mapsui.Geometries
         /// <returns>A hash code for the current <see cref="GetHashCode"/>.</returns>
         public override int GetHashCode()
         {
-            int hash = 0;
-            for (int i = 0; i < Vertices.Count; i++)
-                hash = hash ^ Vertices[i].GetHashCode();
-            return hash;
+            return Vertices.Aggregate(0, (current, t) => current ^ t.GetHashCode());
         }
 
         /// <summary>
@@ -223,7 +218,7 @@ namespace Mapsui.Geometries
         /// <returns>Returns 'true' if this Geometry is the empty geometry</returns>
         public override bool IsEmpty()
         {
-            return vertices == null || vertices.Count == 0;
+            return _vertices == null || _vertices.Count == 0;
         }
 
         /// <summary>
@@ -236,11 +231,11 @@ namespace Mapsui.Geometries
         {
             var verts = new Collection<Point>();
 
-            foreach (Point vertex in vertices)
+            foreach (Point vertex in _vertices)
                 if (0 != verts.IndexOf(vertex))
                     verts.Add(vertex);
 
-            return (verts.Count == vertices.Count - (IsClosed ? 1 : 0));
+            return (verts.Count == _vertices.Count - (IsClosed ? 1 : 0));
         }
 
         /// <summary>

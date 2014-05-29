@@ -18,6 +18,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace Mapsui.Geometries
 {
@@ -62,10 +63,7 @@ namespace Mapsui.Geometries
         {
             get
             {
-                double result = 0;
-                for (int i = 0; i < polygons.Count; i++)
-                    result += polygons[i].Area;
-                return result;
+                return polygons.Sum(polygon => polygon.Area);
             }
         }
 
@@ -100,12 +98,8 @@ namespace Mapsui.Geometries
         /// <returns>Returns 'true' if this Geometry is the empty geometry</returns>
         public override bool IsEmpty()
         {
-            if (polygons == null || polygons.Count == 0)
-                return true;
-            for (int i = 0; i < polygons.Count; i++)
-                if (!polygons[i].IsEmpty())
-                    return false;
-            return true;
+            if (polygons == null || polygons.Count == 0) return true;
+            return polygons.All(polygon => polygon.IsEmpty());
         }
 
         /// <summary>

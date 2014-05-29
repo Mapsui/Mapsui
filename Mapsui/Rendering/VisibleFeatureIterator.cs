@@ -28,8 +28,9 @@ namespace Mapsui.Rendering
 
             if (layer is LabelLayer)
             {
-                var labelLayer = layer as LabelLayer;
-                //!!!labelLayer.UseLabelStacking ? LabelRenderer.RenderStackedLabelLayer(viewport, labelLayer) : LabelRenderer.RenderLabelLayer(viewport, labelLayer));
+                // todo: get rid of LabelLayer. Functionality should be implemented through ILayer
+                //!!! var labelLayer = layer as LabelLayer;
+                //!!! labelLayer.UseLabelStacking ? LabelRenderer.RenderStackedLabelLayer(viewport, labelLayer) : LabelRenderer.RenderLabelLayer(viewport, labelLayer));
             }
             else
             {

@@ -42,7 +42,7 @@ namespace Mapsui.Layers
         /// <summary>
         /// Gets or sets the CRS of this VectorLayer's data source
         /// </summary>
-        public new int SRID
+        private int SourceSRID
         {
             get
             {
@@ -64,8 +64,8 @@ namespace Mapsui.Layers
                 lock (DataSource)
                 {
                     var extent = DataSource.GetExtents();
-                    if (Transformation != null && Transformation.MapSRID != -1 && SRID != -1)
-                        return Transformation.Transform(SRID, Transformation.MapSRID, extent);
+                    if (Transformation != null && Transformation.MapSRID != -1 && SourceSRID != -1)
+                        return Transformation.Transform(SourceSRID, Transformation.MapSRID, extent);
                     return extent;
                 }
             }
@@ -143,8 +143,8 @@ namespace Mapsui.Layers
 
         private BoundingBox Transform(BoundingBox extent)
         {
-            if (!NeedsTransform(Transformation, SRID)) return extent;
-            extent = Transformation.Transform(Transformation.MapSRID, SRID, CopyBoundingBox(extent));
+            if (!NeedsTransform(Transformation, SourceSRID)) return extent;
+            extent = Transformation.Transform(Transformation.MapSRID, SourceSRID, CopyBoundingBox(extent));
             return extent;
         }
 
@@ -155,13 +155,13 @@ namespace Mapsui.Layers
 
         private IEnumerable<IFeature> Transform(IEnumerable<IFeature> features)
         {
-            if (!NeedsTransform(Transformation, SRID)) return features;
+            if (!NeedsTransform(Transformation, SourceSRID)) return features;
             
             var copiedFeatures = CopyFeatures(features).ToList();
             foreach (var feature in copiedFeatures.Where(feature => !(feature.Geometry is Raster)))
             {
                 var geometry = Geometry.GeomFromWKB(feature.Geometry.AsBinary()); // copy geometry
-                feature.Geometry = Transformation.Transform(SRID, Transformation.MapSRID, geometry);
+                feature.Geometry = Transformation.Transform(SourceSRID, Transformation.MapSRID, geometry);
             }
             return copiedFeatures;
         }

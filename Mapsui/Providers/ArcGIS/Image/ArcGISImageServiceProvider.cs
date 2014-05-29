@@ -62,7 +62,7 @@ namespace Mapsui.Providers.ArcGIS.Image
             }
         }
 
-        private void CapabilitiesHelperCapabilitiesFailed(object sender, EventArgs e)
+        private static void CapabilitiesHelperCapabilitiesFailed(object sender, EventArgs e)
         {
  	        throw new Exception("Unable to get ArcGISImage capbilities");
         }
