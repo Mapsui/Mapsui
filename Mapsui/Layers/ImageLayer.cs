@@ -27,33 +27,22 @@ namespace Mapsui.Layers
 {
     public class ImageLayer : BaseLayer
     {
+        protected class FeatureSets
+        {
+            public long TimeRequested { get; set; }
+            public IEnumerable<IFeature> Features { get; set; }
+        }
+
         protected bool IsFetching;
         protected bool NeedsUpdate = true;
-        protected BoundingBox NewExtent;
         protected double NewResolution;
+        protected BoundingBox NewExtent;
         protected List<FeatureSets> Sets = new List<FeatureSets>();
-        protected Timer StartFetchTimer;
-
-        public ImageLayer(string layername)
-        {
-            LayerName = layername;
-            StartFetchTimer = new Timer(StartFetchTimerElapsed, null, 500, int.MaxValue);
-            NumberOfFeaturesReturned = 1;
-        }
-
+        protected Timer StartFetchTimer; 
         public int NumberOfFeaturesReturned { get; set; }
 
-        public IProvider DataSource { get; set; }
 
-        private int SourceSRID
-        {
-            get
-            {
-                if (DataSource == null)
-                    throw (new Exception("DataSource property not set on layer '" + LayerName + "'"));
-                return DataSource.SRID;
-            }
-        }
+        public IProvider DataSource { get; set; }
 
         /// <summary>
         /// Returns the extent of the layer
@@ -68,11 +57,18 @@ namespace Mapsui.Layers
                 lock (DataSource)
                 {
                     var box = DataSource.GetExtents();
-                    if (Transformation != null && Transformation.MapSRID != -1 && SourceSRID != -1)
-                        return Transformation.Transform(SourceSRID, Transformation.MapSRID, box);
+                    if (Transformation != null && CRS != -1 && DataSource.SRID != -1)
+                        return Transformation.Transform(DataSource.SRID, CRS, box);
                     return box;
                 }
             }
+        }
+
+        public ImageLayer(string layername)
+        {
+            LayerName = layername;
+            StartFetchTimer = new Timer(StartFetchTimerElapsed, null, 500, int.MaxValue);
+            NumberOfFeaturesReturned = 1;
         }
 
         void StartFetchTimerElapsed(object state)
@@ -133,8 +129,8 @@ namespace Mapsui.Layers
             IsFetching = true;
             NeedsUpdate = false;
 
-            if (Transformation != null && Transformation.MapSRID != -1 && SourceSRID != -1)
-                extent = Transformation.Transform(Transformation.MapSRID, SourceSRID, extent);
+            if (Transformation != null && CRS != -1 && DataSource.SRID != -1)
+                extent = Transformation.Transform(CRS, DataSource.SRID, extent);
 
             var fetcher = new FeatureFetcher(extent, resolution, DataSource, DataArrived, DateTime.Now.Ticks);
             ThreadPool.QueueUserWorkItem(fetcher.FetchOnThread);
@@ -146,11 +142,11 @@ namespace Mapsui.Layers
             if (features == null) throw new ArgumentException("argument features may not be null");
 
             features = features.ToList();
-            if (Transformation != null && Transformation.MapSRID != -1 && SourceSRID != -1 && SourceSRID != Transformation.MapSRID)
+            if (Transformation != null && CRS != -1 && DataSource.SRID != -1 && DataSource.SRID != CRS)
             {
                 foreach (var feature in features.Where(feature => !(feature.Geometry is Raster)))
                 {
-                    feature.Geometry = Transformation.Transform(SourceSRID, Transformation.MapSRID, feature.Geometry);
+                    feature.Geometry = Transformation.Transform(DataSource.SRID, CRS, feature.Geometry);
                 }
             }
 
@@ -174,12 +170,6 @@ namespace Mapsui.Layers
             {
                 cache.Features = new Features();
             }
-        }
-
-        protected class FeatureSets
-        {
-            public long TimeRequested { get; set; }
-            public IEnumerable<IFeature> Features { get; set; }
         }
     }
 }

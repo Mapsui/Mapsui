@@ -28,12 +28,6 @@ namespace Mapsui.Geometries
             get { return 2; }
         }
 
-        public int SRID
-        {
-            get;
-            set;
-        }
-
         public Geometry Envelope()
         {
             throw new NotImplementedException();

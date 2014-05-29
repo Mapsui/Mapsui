@@ -40,18 +40,6 @@ namespace Mapsui.Layers
         public int FetchingPostponedInMilliseconds { get; set; }
 
         /// <summary>
-        /// Gets or sets the CRS of this VectorLayer's data source
-        /// </summary>
-        private int SourceSRID
-        {
-            get
-            {
-                if (DataSource == null) throw (new Exception("DataSource is null on'" + LayerName + "'"));
-                return DataSource.SRID;
-            }
-        }
-
-        /// <summary>
         /// Returns the extent of the layer
         /// </summary>
         /// <returns>Bounding box corresponding to the extent of the features in the layer</returns>
@@ -64,8 +52,8 @@ namespace Mapsui.Layers
                 lock (DataSource)
                 {
                     var extent = DataSource.GetExtents();
-                    if (Transformation != null && Transformation.MapSRID != -1 && SourceSRID != -1)
-                        return Transformation.Transform(SourceSRID, Transformation.MapSRID, extent);
+                    if (Transformation != null && CRS != -1 && DataSource.SRID != -1)
+                        return Transformation.Transform(DataSource.SRID, CRS, extent);
                     return extent;
                 }
             }
@@ -143,32 +131,32 @@ namespace Mapsui.Layers
 
         private BoundingBox Transform(BoundingBox extent)
         {
-            if (!NeedsTransform(Transformation, SourceSRID)) return extent;
-            extent = Transformation.Transform(Transformation.MapSRID, SourceSRID, CopyBoundingBox(extent));
+            if (!NeedsTransform(Transformation, DataSource.SRID)) return extent;
+            extent = Transformation.Transform(CRS, DataSource.SRID, CopyBoundingBox(extent));
             return extent;
         }
 
-        private BoundingBox CopyBoundingBox(BoundingBox extent)
+        private static BoundingBox CopyBoundingBox(BoundingBox extent)
         {
             return new BoundingBox(extent.MinX, extent.MinY, extent.MaxX, extent.MaxY);
         }
 
         private IEnumerable<IFeature> Transform(IEnumerable<IFeature> features)
         {
-            if (!NeedsTransform(Transformation, SourceSRID)) return features;
+            if (!NeedsTransform(Transformation, DataSource.SRID)) return features;
             
             var copiedFeatures = CopyFeatures(features).ToList();
             foreach (var feature in copiedFeatures.Where(feature => !(feature.Geometry is Raster)))
             {
                 var geometry = Geometry.GeomFromWKB(feature.Geometry.AsBinary()); // copy geometry
-                feature.Geometry = Transformation.Transform(SourceSRID, Transformation.MapSRID, geometry);
+                feature.Geometry = Transformation.Transform(DataSource.SRID, CRS, geometry);
             }
             return copiedFeatures;
         }
 
-        private static bool NeedsTransform(ITransformation transformation, int SRID)
+        private bool NeedsTransform(ITransformation transformation, int SRID)
         {
-            return !(transformation == null || transformation.MapSRID == -1 || SRID == -1 || SRID == transformation.MapSRID);
+            return !(transformation == null || CRS == -1 || SRID == -1 || SRID == CRS);
         }
 
         private static IEnumerable<IFeature> CopyFeatures(IEnumerable<IFeature> features)

@@ -18,6 +18,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Dynamic;
 using System.Linq;
 using Mapsui.Fetcher;
 using Mapsui.Styles;
@@ -45,7 +46,7 @@ namespace Mapsui
             Viewport =  new NotifyingViewport { Center = { X = double.NaN, Y = double.NaN }, Resolution = double.NaN };
         }
 
-        public string CRS { get; set; }
+        public int CRS { get; set; }
 
         /// <summary>
         /// The maps coördinate system
@@ -149,6 +150,8 @@ namespace Mapsui
             layer.Feedback += LayerFeedback;
             layer.PropertyChanged += LayerPropertyChanged;
             layer.Transformation = Transformation;
+            layer.CRS = CRS;
+
         }
 
         void LayerPropertyChanged(object sender, PropertyChangedEventArgs e)
