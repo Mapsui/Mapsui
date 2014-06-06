@@ -151,7 +151,7 @@ namespace Mapsui.UI.WinForms
         {
             if (_map != null)
             {
-                _map.ViewChanged(changeEnd, _viewport.Extent, _viewport.Resolution);
+                _map.ViewChanged(changeEnd);
             }
         }
 

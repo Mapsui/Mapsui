@@ -1,11 +1,11 @@
 ﻿using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
-using Mapsui.Rendering.Xaml;
 using Mapsui.Styles;
 using NUnit.Framework;
 using System.IO;
 #if !MONOGAME
+using Mapsui.Rendering.Xaml;
 using System.Windows.Controls;
 #endif
 

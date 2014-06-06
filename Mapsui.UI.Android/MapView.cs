@@ -74,7 +74,7 @@ namespace Mapsui.UI.Android
             _map.Viewport.Height = Height;
             _map.Viewport.RenderResolutionMultiplier = 2;
 
-            _map.ViewChanged(true, _map.Viewport.Extent, _map.Viewport.RenderResolution);
+            _map.ViewChanged(true);
             _viewportInitialized = true;
         }
 
@@ -93,7 +93,7 @@ namespace Mapsui.UI.Android
                     _previousMap = null;
                     Invalidate();
                     _mode = None;
-                    _map.ViewChanged(true, _map.Viewport.Extent, _map.Viewport.RenderResolution);
+                    _map.ViewChanged(true);
                     break;
                 case MotionEventActions.Pointer2Down:
                     _previousMap = null;
@@ -210,7 +210,7 @@ namespace Mapsui.UI.Android
                     _map.DataChanged += MapDataChanged;
                     _map.PropertyChanged += MapPropertyChanged;
                     _map.Viewport.PropertyChanged += ViewportOnPropertyChanged; // not sure if this should be a direct coupling 
-                    _map.ViewChanged(true, _map.Viewport.Extent, _map.Viewport.RenderResolution);
+                    _map.ViewChanged(true);
                 }
                 RefreshGraphics();
             }
@@ -220,7 +220,7 @@ namespace Mapsui.UI.Android
         {
             if (e.PropertyName != "Envelope") return;
             InitializeViewport();
-            _map.ViewChanged(true, _map.Viewport.Extent, _map.Viewport.RenderResolution);
+            _map.ViewChanged(true);
         }
 
         public void MapDataChanged(object sender, DataChangedEventArgs e)

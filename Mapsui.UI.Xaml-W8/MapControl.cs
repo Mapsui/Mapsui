@@ -79,7 +79,7 @@ namespace Mapsui.UI.Xaml
                 {
                     _map.DataChanged += MapDataChanged;
                     _map.PropertyChanged += MapPropertyChanged;
-                    _map.ViewChanged(true, _viewport.Extent, _viewport.Resolution);
+                    _map.ViewChanged(true);
                 }
                 OnViewChanged();
                 RefreshGraphics();
@@ -91,7 +91,7 @@ namespace Mapsui.UI.Xaml
             if (e.PropertyName == "Envelope")
             {
                 InitializeViewport();
-                _map.ViewChanged(true, _viewport.Extent, _viewport.Resolution);
+                _map.ViewChanged(true);
             }
         }
 
@@ -175,7 +175,7 @@ namespace Mapsui.UI.Xaml
             
             e.Handled = true; 
 
-            _map.ViewChanged(true, _viewport.Extent, _viewport.Resolution);
+            _map.ViewChanged(true);
             OnViewChanged(true);
         }
 
@@ -199,7 +199,7 @@ namespace Mapsui.UI.Xaml
 
         public void Refresh()
         {
-            _map.ViewChanged(true, _viewport.Extent, _viewport.Resolution);
+            _map.ViewChanged(true);
             RefreshGraphics();
         }
 
@@ -270,7 +270,7 @@ namespace Mapsui.UI.Xaml
             if (!_viewportInitialized) InitializeViewport();
             Clip = new RectangleGeometry {Rect = new Rect(0, 0, ActualWidth, ActualHeight)};
             UpdateSize();
-            _map.ViewChanged(true, _viewport.Extent, _viewport.Resolution);
+            _map.ViewChanged(true);
             OnViewChanged();
             Refresh();
         }
@@ -357,7 +357,7 @@ namespace Mapsui.UI.Xaml
             _viewport.Center = new Geometries.Point(x, y);
             _viewport.Resolution = resolution;
 
-            _map.ViewChanged(true, _viewport.Extent, _viewport.Resolution);
+            _map.ViewChanged(true);
             OnViewChanged();
             RefreshGraphics();
             ClearBBoxDrawing();
