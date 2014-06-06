@@ -1,4 +1,5 @@
-﻿using BruTile.Extensions;
+﻿using System.Threading.Tasks;
+using BruTile.Extensions;
 using BruTile.Web;
 using BruTile.Wmts;
 using Mapsui.Layers;
@@ -160,8 +161,8 @@ namespace Mapsui.Samples.Wpf
         private void GeodanTmsClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
-            MapControl.Map.Layers.Add(new TileLayer("http://geoserver.nl/tiles/tilecache.aspx/1.0.0/worlddark_GM",
-                true, ex => MessageBox.Show(ex.Message)));
+            MapControl.Map.Layers.Add(new TileLayer(
+                    () => TmsTileSourceBuilder.Build("http://geoserver.nl/tiles/tilecache.aspx/1.0.0/worlddark_GM", true)));
             LayerList.Initialize(MapControl.Map.Layers);
             MapControl.Refresh();
         }

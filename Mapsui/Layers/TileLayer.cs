@@ -15,11 +15,9 @@
 // along with Mapsui; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
-using System.ComponentModel;
 using System.Threading.Tasks;
 using BruTile;
 using BruTile.Cache;
-using BruTile.Tms;
 using Mapsui.Fetcher;
 using Mapsui.Geometries;
 using Mapsui.Providers;
@@ -27,18 +25,18 @@ using Mapsui.Rendering;
 using Mapsui.Styles;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
-using System.Net;
 
 namespace Mapsui.Layers
 {
-    public interface ITileLayer
+    public interface ITileLayer 
     {
         ITileSchema Schema { get; }
         MemoryCache<Feature> MemoryCache { get; }
     }
 
-    public class TileLayer : BaseLayer, ITileLayer
+    public class TileLayer : BaseLayer
     {
         private TileFetcher _tileFetcher;
         private ITileSource _tileSource;
@@ -51,9 +49,13 @@ namespace Mapsui.Layers
         private int _numberTilesNeeded;
 
         readonly MemoryCache<Feature> _memoryCache;
-       
-        [Obsolete("use the named parameters of the constructor with tilesource if you want to omit the tilesource")]
-        public TileLayer(int minTiles = 200, int maxTiles = 300, int maxRetries = TileFetcher.DefaultMaxRetries,
+
+        public TileLayer(Func<ITileSource> tileSourceInitializer) : this()
+        {
+            Task.Factory.StartNew(() => TileSource = tileSourceInitializer());
+        }
+
+        public TileLayer(ITileSource source = null, int minTiles = 200, int maxTiles = 300, int maxRetries = TileFetcher.DefaultMaxRetries,
             int maxThreads = TileFetcher.DefaultMaxThreads, IFetchStrategy fetchStrategy = null,
             IRenderGetStrategy renderFetchStrategy = null, int minExtraTiles = -1, int maxExtraTiles = -1)
         {
@@ -65,49 +67,7 @@ namespace Mapsui.Layers
             _renderFetchStrategy = renderFetchStrategy ?? new RenderGetStrategy();
             _minExtraTiles = minExtraTiles;
             _maxExtraTiles = maxExtraTiles;
-        }
-
-        public TileLayer(ITileSource source, int minTiles = 200, int maxTiles = 300, int maxRetries = TileFetcher.DefaultMaxRetries,
-            int maxThreads = TileFetcher.DefaultMaxThreads, IFetchStrategy fetchStrategy = null, 
-            IRenderGetStrategy renderFetchStrategy = null, int minExtraTiles = -1, int maxExtraTiles = -1)
-            : this(minTiles, maxTiles, maxRetries, maxThreads, fetchStrategy, renderFetchStrategy, minExtraTiles, maxExtraTiles)
-        {
             SetTileSource(source);
-        }
-
-        [Obsolete("TileLayer should not have a dependency on TMS. This method will be removed")]
-        public TileLayer(string urlToTileMapXml, bool overrideTmsUrlWithUrlToTileMapXml = false, Action<Exception> errorCallback = null)
-            : this()
-        {
-            var webRequest = (HttpWebRequest)WebRequest.Create(urlToTileMapXml);
-            webRequest.BeginGetResponse(LoadTmsLayer, new object[]
-            {
-                errorCallback, webRequest, urlToTileMapXml, overrideTmsUrlWithUrlToTileMapXml
-            });
-        }
-
-        private void LoadTmsLayer(IAsyncResult result)
-        {
-            var state = (object[])result.AsyncState;
-            var errorCallback = (Action<Exception>)state[0];
-
-            try
-            {
-                var request = (HttpWebRequest)state[1];
-                var urlToTileMapXml = (string)state[2];
-                var overrideTmsUrlWithUrlToTileMapXml = (bool)state[3];
-
-                var response = request.EndGetResponse(result);
-                var stream = response.GetResponseStream();
-                SetTileSource(overrideTmsUrlWithUrlToTileMapXml
-                    ? TileMapParser.CreateTileSource(stream, urlToTileMapXml)
-                    : TileMapParser.CreateTileSource(stream));
-            }
-            catch (Exception ex)
-            {
-                if (errorCallback != null) errorCallback(ex);
-                // else: hopelesly lost with an error on a background thread and no option to report back.
-            }
         }
 
         protected void SetTileSource(ITileSource source)
@@ -146,7 +106,7 @@ namespace Mapsui.Layers
                 OnPropertyChanged("TileSource");
             }
         }
-        
+
         public override BoundingBox Envelope
         {
             get
@@ -165,13 +125,11 @@ namespace Mapsui.Layers
 
         private void UpdateMemoryCacheMinAndMax()
         {
-            if (_minExtraTiles >= 0 && _maxExtraTiles >= 0 &&
-                _numberTilesNeeded != _tileFetcher.NumberTilesNeeded)
-            {
-                _numberTilesNeeded = _tileFetcher.NumberTilesNeeded;
-                _memoryCache.MinTiles = _numberTilesNeeded + _minExtraTiles;
-                _memoryCache.MaxTiles = _numberTilesNeeded + _maxExtraTiles;
-            }
+            if (_minExtraTiles < 0 || _maxExtraTiles < 0 
+                || _numberTilesNeeded == _tileFetcher.NumberTilesNeeded) return;
+            _numberTilesNeeded = _tileFetcher.NumberTilesNeeded;
+            _memoryCache.MinTiles = _numberTilesNeeded + _minExtraTiles;
+            _memoryCache.MaxTiles = _numberTilesNeeded + _maxExtraTiles;
         }
 
         /// <summary>
@@ -219,7 +177,7 @@ namespace Mapsui.Layers
         {
             OnDataChanged(e);
         }
-        
+
         public override IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
         {
             if (Schema == null) return Enumerable.Empty<IFeature>();
