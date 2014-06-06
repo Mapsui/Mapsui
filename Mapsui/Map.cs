@@ -207,11 +207,11 @@ namespace Mapsui
             }
         }
 
-        public void ViewChanged(bool changeEnd, BoundingBox extent, double resolution)
+        public void ViewChanged(bool changeEnd)
         {
             foreach (var layer in _layers.ToList())
             {
-                layer.ViewChanged(changeEnd, extent, resolution);
+                layer.ViewChanged(changeEnd, Viewport.Extent, Viewport.Resolution);
             }
         }
 
