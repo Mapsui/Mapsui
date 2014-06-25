@@ -14,7 +14,10 @@ namespace Mapsui.Samples.WinForms
 
         void Form1_Load(object sender, EventArgs e)
         {
-            mapControl1.Map = ShapefileSample.CreateMap();
+            foreach (var layer in ShapefileSample.CreateLayers())
+            {
+                mapControl1.Map.Layers.Add(layer);
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)

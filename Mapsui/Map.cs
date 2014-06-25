@@ -59,7 +59,7 @@ namespace Mapsui
         public LayerCollection Layers
         {
             get { return _layers; }
-            set
+            private set
             {
                 var tempLayers = _layers;
                 if (tempLayers != null)
@@ -75,7 +75,7 @@ namespace Mapsui
 
         public NotifyingViewport Viewport
         {
-            set
+            private set
             {
                 var tempViewport = _viewport;
                 if (tempViewport != null)

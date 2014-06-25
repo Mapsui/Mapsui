@@ -186,7 +186,11 @@ namespace Mapsui.Samples.Wpf
 
         private void ShapefileClick(object sender, RoutedEventArgs e)
         {
-            MapControl.Map = ShapefileSample.CreateMap();
+            MapControl.Map.Layers.Clear();
+            foreach (var layer in ShapefileSample.CreateLayers())
+            {
+                MapControl.Map.Layers.Add(layer);    
+            }
             MapControl.ZoomToFullEnvelope();
             LayerList.Initialize(MapControl.Map.Layers);
             MapControl.Refresh();
