@@ -141,16 +141,7 @@ namespace Mapsui.Converters.WellKnownText
         /// <returns>The TokenType of the next token.</returns>
         public TokenType NextToken(bool ignoreWhitespaceAsToken)
         {
-            TokenType nextTokenType;
-            if (ignoreWhitespaceAsToken)
-            {
-                nextTokenType = NextNonWhitespaceToken();
-            }
-            else
-            {
-                nextTokenType = NextTokenAny();
-            }
-            return nextTokenType;
+            return ignoreWhitespaceAsToken ? NextNonWhitespaceToken() : NextTokenAny();
         }
 
         /// <summary>

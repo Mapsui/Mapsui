@@ -58,7 +58,7 @@ namespace Mapsui
         public LayerCollection Layers
         {
             get { return _layers; }
-            set
+            private set
             {
                 var tempLayers = _layers;
                 if (tempLayers != null)
@@ -74,7 +74,7 @@ namespace Mapsui
 
         public NotifyingViewport Viewport
         {
-            set
+            private set
             {
                 var tempViewport = _viewport;
                 if (tempViewport != null)
@@ -206,11 +206,11 @@ namespace Mapsui
             }
         }
 
-        public void ViewChanged(bool changeEnd, BoundingBox extent, double resolution)
+        public void ViewChanged(bool changeEnd)
         {
             foreach (var layer in _layers.ToList())
             {
-                layer.ViewChanged(changeEnd, extent, resolution);
+                layer.ViewChanged(changeEnd, Viewport.Extent, Viewport.Resolution);
             }
         }
 

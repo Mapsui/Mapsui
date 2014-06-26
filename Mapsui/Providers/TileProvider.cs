@@ -62,9 +62,8 @@ namespace Mapsui.Providers
                 ThreadPool.QueueUserWorkItem(GetTileOnThread, new object[] { _source.Provider, info, _bitmaps, waitHandle });
             }
 
-            foreach (WaitHandle handle in waitHandles)
-                handle.WaitOne();
-
+            WaitHandle.WaitAll(waitHandles.ToArray());
+            
             IFeatures features = new Features();
             foreach (TileInfo info in infos)
             {

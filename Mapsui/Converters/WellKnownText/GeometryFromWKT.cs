@@ -106,20 +106,15 @@ namespace Mapsui.Converters.WellKnownText
         private static Collection<Point> GetCoordinates(WktStreamTokenizer tokenizer)
         {
             var coordinates = new Collection<Point>();
-            string nextToken = GetNextEmptyOrOpener(tokenizer);
-            if (nextToken == "EMPTY")
-                return coordinates;
+            var nextToken = GetNextEmptyOrOpener(tokenizer);
+            if (nextToken == "EMPTY") return coordinates;
 
-            var externalCoordinate = new Point();
-            externalCoordinate.X = GetNextNumber(tokenizer);
-            externalCoordinate.Y = GetNextNumber(tokenizer);
+            var externalCoordinate = new Point {X = GetNextNumber(tokenizer), Y = GetNextNumber(tokenizer)};
             coordinates.Add(externalCoordinate);
             nextToken = GetNextCloserOrComma(tokenizer);
             while (nextToken == ",")
             {
-                var internalCoordinate = new Point();
-                internalCoordinate.X = GetNextNumber(tokenizer);
-                internalCoordinate.Y = GetNextNumber(tokenizer);
+                var internalCoordinate = new Point {X = GetNextNumber(tokenizer), Y = GetNextNumber(tokenizer)};
                 coordinates.Add(internalCoordinate);
                 nextToken = GetNextCloserOrComma(tokenizer);
             }

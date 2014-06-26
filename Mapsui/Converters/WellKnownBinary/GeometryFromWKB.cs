@@ -36,6 +36,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using Mapsui.Geometries;
@@ -128,7 +129,7 @@ namespace Mapsui.Converters.WellKnownBinary
             return new Point(ReadDouble(reader, byteOrder), ReadDouble(reader, byteOrder));
         }
 
-        private static Point[] ReadCoordinates(BinaryReader reader, WkbByteOrder byteOrder)
+        private static IEnumerable<Point> ReadCoordinates(BinaryReader reader, WkbByteOrder byteOrder)
         {
             // Get the number of points in this linestring.
             var numPoints = (int) ReadUInt32(reader, byteOrder);
@@ -149,7 +150,7 @@ namespace Mapsui.Converters.WellKnownBinary
         {
             var l = new LineString();
             //l.Vertices.AddRange(ReadCoordinates(reader, byteOrder));
-            Point[] arrPoint = ReadCoordinates(reader, byteOrder);
+            IEnumerable<Point> arrPoint = ReadCoordinates(reader, byteOrder);
             foreach (Point t in arrPoint)
             {
                 l.Vertices.Add(t);
@@ -162,7 +163,7 @@ namespace Mapsui.Converters.WellKnownBinary
         {
             var l = new LinearRing();
             //l.Vertices.AddRange(ReadCoordinates(reader, byteOrder));
-            Point[] arrPoint = ReadCoordinates(reader, byteOrder);
+            IEnumerable<Point> arrPoint = ReadCoordinates(reader, byteOrder);
             foreach (Point t in arrPoint)
             {
                 l.Vertices.Add(t);

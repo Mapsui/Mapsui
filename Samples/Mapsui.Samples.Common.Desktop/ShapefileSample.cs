@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using Mapsui.Data.Providers;
@@ -12,19 +14,19 @@ namespace Mapsui.Samples.Common.Desktop
 {
     public static class ShapefileSample
     {
-        public static Map CreateMap()
+        public static IEnumerable<ILayer> CreateLayers()
         {
-            var map = new Map { BackColor = Color.Blue };
+            var layers = new List<ILayer>();
 
             var countrySource = new ShapeFile(GetAppDir() + "\\GeoData\\World\\countries.shp", true) { SRID = 3785 };
             var citySource = new ShapeFile(GetAppDir() + "\\GeoData\\World\\cities.shp", true) { SRID = 3785 };
 
-            map.Layers.Add(new RasterizingLayer(CreateCountryLayer(countrySource)));
-            map.Layers.Add(new RasterizingLayer(CreateCityLayer(citySource)));
-            map.Layers.Add(new RasterizingLayer(CreateCountryLabelLayer(countrySource)));
-            map.Layers.Add(new RasterizingLayer(CreateCityLabelLayer(citySource)));
+            layers.Add(new RasterizingLayer(CreateCountryLayer(countrySource)));
+            layers.Add(new RasterizingLayer(CreateCityLayer(citySource)));
+            layers.Add(new RasterizingLayer(CreateCountryLabelLayer(countrySource)));
+            layers.Add(new RasterizingLayer(CreateCityLabelLayer(citySource)));
 
-            return map;
+            return layers;
         }
 
         public static ILayer CreateCountryLayer(IProvider countrySource)

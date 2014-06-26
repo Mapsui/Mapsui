@@ -87,7 +87,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
             }
         }
 
-        private ArcGISLegendResponse GetLegendResponseFromWebresponse(WebResponse webResponse)
+        private static ArcGISLegendResponse GetLegendResponseFromWebresponse(WebResponse webResponse)
         {
             var dataStream = webResponse.GetResponseStream();
 

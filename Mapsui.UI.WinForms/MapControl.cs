@@ -29,7 +29,6 @@ namespace Mapsui.UI.WinForms
         #region Fields
 
         private Map _map;
-        private readonly Viewport _viewport = new Viewport();
         private string _errorMessage;
         private Bitmap _buffer;
         private Graphics _bufferGraphics;
@@ -44,12 +43,11 @@ namespace Mapsui.UI.WinForms
 
         public event EventHandler ErrorMessageChanged;
 
-
         #region Properties
 
-        public Viewport Transform
+        public IViewport Transform
         {
-            get { return _viewport; }
+            get { return _map.Viewport; }
         }
 
         public Map Map
@@ -97,7 +95,7 @@ namespace Mapsui.UI.WinForms
 
         public void ZoomIn()
         {
-            _viewport.Resolution = ZoomHelper.ZoomIn(_map.Resolutions, _viewport.Resolution);
+            Map.Viewport.Resolution = ZoomHelper.ZoomIn(_map.Resolutions, Map.Viewport.Resolution);
             ViewChanged(true);
             Invalidate();
         }
@@ -108,15 +106,15 @@ namespace Mapsui.UI.WinForms
                 // We do that in 3 steps.
 
                 // 1) Temporarily center on where the mouse is
-            _viewport.Center = _viewport.ScreenToWorld(mapPosition.X, mapPosition.Y);
+            Map.Viewport.Center = Map.Viewport.ScreenToWorld(mapPosition.X, mapPosition.Y);
 
                 // 2) Then zoom 
-            _viewport.Resolution = ZoomHelper.ZoomIn(_map.Resolutions, _viewport.Resolution);
+            Map.Viewport.Resolution = ZoomHelper.ZoomIn(_map.Resolutions, Map.Viewport.Resolution);
 
                 // 3) Then move the temporary center back to the mouse position
-            _viewport.Center = _viewport.ScreenToWorld(
-              _viewport.Width - mapPosition.X,
-              _viewport.Height - mapPosition.Y);
+            Map.Viewport.Center = Map.Viewport.ScreenToWorld(
+              Map.Viewport.Width - mapPosition.X,
+              Map.Viewport.Height - mapPosition.Y);
 
             ViewChanged(true);
             Invalidate();
@@ -124,7 +122,7 @@ namespace Mapsui.UI.WinForms
 
         public void ZoomOut()
         {
-            _viewport.Resolution = ZoomHelper.ZoomOut(_map.Resolutions, _viewport.Resolution);
+            Map.Viewport.Resolution = ZoomHelper.ZoomOut(_map.Resolutions, Map.Viewport.Resolution);
             ViewChanged(true);
             Invalidate();
         }
@@ -141,7 +139,7 @@ namespace Mapsui.UI.WinForms
             
             //Render to the buffer
             _renderer.Graphics = _bufferGraphics;
-            _renderer.Render(_viewport, _map.Layers);
+            _renderer.Render(Map.Viewport, _map.Layers);
             
             //Render the buffer to the control
             e.Graphics.DrawImage(_buffer, 0, 0);
@@ -151,7 +149,7 @@ namespace Mapsui.UI.WinForms
         {
             if (_map != null)
             {
-                _map.ViewChanged(changeEnd, _viewport.Extent, _viewport.Resolution);
+                _map.ViewChanged(changeEnd);
             }
         }
 
@@ -194,7 +192,7 @@ namespace Mapsui.UI.WinForms
             {
                 if (_mousePosition == null) return;
                 var newMousePosition = new Geometries.Point(e.X, e.Y);
-                MapTransformHelpers.Pan(_viewport, newMousePosition, _mousePosition);
+                MapTransformHelpers.Pan(Map.Viewport, newMousePosition, _mousePosition);
                 _mousePosition = newMousePosition;
 
                 ViewChanged(false);
@@ -208,7 +206,7 @@ namespace Mapsui.UI.WinForms
             {
                 if (_mousePosition == null) return;
                 var newMousePosition = new Geometries.Point(e.X, e.Y);
-                MapTransformHelpers.Pan(_viewport, newMousePosition, _mousePosition);
+                MapTransformHelpers.Pan(Map.Viewport, newMousePosition, _mousePosition);
                 _mousePosition = newMousePosition;
 
                 ViewChanged(true);
@@ -221,8 +219,8 @@ namespace Mapsui.UI.WinForms
             if (Width == 0) return;
             if (Height == 0) return;
 
-            _viewport.Width = Width;
-            _viewport.Height = Height;
+            Map.Viewport.Width = Width;
+            Map.Viewport.Height = Height;
 
             if (_buffer == null || _buffer.Width != Width || _buffer.Height != Height)
             {
@@ -240,8 +238,8 @@ namespace Mapsui.UI.WinForms
             if (_map == null || _map.Envelope == null || double.IsNaN(_map.Envelope.Width) || _map.Envelope.Width <= 0) return;
             if (_map.Envelope.GetCentroid() == null) return;
 
-            _viewport.Center = _map.Envelope.GetCentroid();
-            _viewport.Resolution = _map.Envelope.Width / Width;
+            Map.Viewport.Center = _map.Envelope.GetCentroid();
+            Map.Viewport.Resolution = _map.Envelope.Width / Width;
             _viewInitialized = true;
             ViewChanged(true);
         }

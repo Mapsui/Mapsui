@@ -6,28 +6,28 @@ namespace Mapsui.Fetcher
 {
     public class HashSet<T> : ICollection<T>
     {
-        private Dictionary<T, short> dictionary;
+        private readonly Dictionary<T, short> _dictionary;
 
         public HashSet()
         {
-            dictionary = new Dictionary<T, short>();
+            _dictionary = new Dictionary<T, short>();
         }
 
         // Methods
         public void Add(T item)
         {
             // We don't care for the value in dictionary, Keys matter.
-            dictionary.Add(item, 0);
+            _dictionary.Add(item, 0);
         }
 
         public void Clear()
         {
-            dictionary.Clear();
+            _dictionary.Clear();
         }
 
         public bool Contains(T item)
         {
-            return dictionary.ContainsKey(item);
+            return _dictionary.ContainsKey(item);
         }
 
         public void CopyTo(T[] array, int arrayIndex)
@@ -37,7 +37,7 @@ namespace Mapsui.Fetcher
 
         public bool Remove(T item)
         {
-            return dictionary.Remove(item);
+            return _dictionary.Remove(item);
         }
 
         public IEnumerator<T> GetEnumerator()
@@ -53,7 +53,7 @@ namespace Mapsui.Fetcher
         // Properties
         public int Count
         {
-            get { return dictionary.Keys.Count; }
+            get { return _dictionary.Keys.Count; }
         }
 
         public bool IsReadOnly

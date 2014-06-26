@@ -39,7 +39,6 @@ namespace Mapsui.UI.Xaml
     public class MapControl : Grid
     {
         private Map _map;
-        private readonly Viewport _viewport = new Viewport { Center = { X = double.NaN, Y = double.NaN }, Resolution = double.NaN };
         private string _errorMessage;
         private readonly DoubleAnimation _zoomAnimation = new DoubleAnimation();
         private readonly Storyboard _zoomStoryBoard = new Storyboard();
@@ -55,7 +54,7 @@ namespace Mapsui.UI.Xaml
         public event EventHandler<ViewChangedEventArgs> ViewChanged;
 
         public bool ZoomToBoxMode { get; set; }
-        public Viewport Viewport { get { return _viewport; } }
+        public IViewport Viewport { get { return Map.Viewport; } }
         
         public Map Map
         {
@@ -79,7 +78,7 @@ namespace Mapsui.UI.Xaml
                 {
                     _map.DataChanged += MapDataChanged;
                     _map.PropertyChanged += MapPropertyChanged;
-                    _map.ViewChanged(true, _viewport.Extent, _viewport.Resolution);
+                    _map.ViewChanged(true);
                 }
                 OnViewChanged();
                 RefreshGraphics();
@@ -91,7 +90,7 @@ namespace Mapsui.UI.Xaml
             if (e.PropertyName == "Envelope")
             {
                 InitializeViewport();
-                _map.ViewChanged(true, _viewport.Extent, _viewport.Resolution);
+                _map.ViewChanged(true);
             }
         }
 
@@ -160,22 +159,22 @@ namespace Mapsui.UI.Xaml
 
             var mousePosition = new Geometries.Point(currentPoint.RawPosition.X, currentPoint.RawPosition.Y);
 
-            var newResolution = DetermineNewResolution(currentPoint.Properties.MouseWheelDelta, _viewport.Resolution);
+            var newResolution = DetermineNewResolution(currentPoint.Properties.MouseWheelDelta, Map.Viewport.Resolution);
 
             // 1) Temporarily center on the mouse position
-            _viewport.Center = _viewport.ScreenToWorld(mousePosition.X, mousePosition.Y);
+            Map.Viewport.Center = Map.Viewport.ScreenToWorld(mousePosition.X, mousePosition.Y);
 
             // 2) Then zoom 
-            _viewport.Resolution = newResolution;
+            Map.Viewport.Resolution = newResolution;
 
             // 3) Then move the temporary center of the map back to the mouse position
-            _viewport.Center = _viewport.ScreenToWorld(
-              _viewport.Width - mousePosition.X,
-              _viewport.Height - mousePosition.Y);
+            Map.Viewport.Center = Map.Viewport.ScreenToWorld(
+              Map.Viewport.Width - mousePosition.X,
+              Map.Viewport.Height - mousePosition.Y);
             
             e.Handled = true; 
 
-            _map.ViewChanged(true, _viewport.Extent, _viewport.Resolution);
+            _map.ViewChanged(true);
             OnViewChanged(true);
         }
 
@@ -192,14 +191,14 @@ namespace Mapsui.UI.Xaml
             {
                 if (ViewChanged != null)
                 {
-                    ViewChanged(this, new ViewChangedEventArgs { Viewport = _viewport, UserAction = userAction });
+                    ViewChanged(this, new ViewChangedEventArgs { Viewport = Map.Viewport, UserAction = userAction });
                 }
             }
         }
 
         public void Refresh()
         {
-            _map.ViewChanged(true, _viewport.Extent, _viewport.Resolution);
+            _map.ViewChanged(true);
             RefreshGraphics();
         }
 
@@ -226,7 +225,7 @@ namespace Mapsui.UI.Xaml
             if (ZoomLocked) return;
             if (!_viewportInitialized) return;
 
-            _viewport.Resolution = ZoomHelper.ZoomIn(_map.Resolutions, _viewport.Resolution);
+            Map.Viewport.Resolution = ZoomHelper.ZoomIn(_map.Resolutions, Map.Viewport.Resolution);
 
             OnViewChanged();
         }
@@ -236,7 +235,7 @@ namespace Mapsui.UI.Xaml
             if (ZoomLocked) return;
             if (!_viewportInitialized) return;
 
-            _viewport.Resolution = ZoomHelper.ZoomOut(_map.Resolutions, _viewport.Resolution);
+            Map.Viewport.Resolution = ZoomHelper.ZoomOut(_map.Resolutions, Map.Viewport.Resolution);
 
             OnViewChanged();
         }
@@ -270,7 +269,7 @@ namespace Mapsui.UI.Xaml
             if (!_viewportInitialized) InitializeViewport();
             Clip = new RectangleGeometry {Rect = new Rect(0, 0, ActualWidth, ActualHeight)};
             UpdateSize();
-            _map.ViewChanged(true, _viewport.Extent, _viewport.Resolution);
+            _map.ViewChanged(true);
             OnViewChanged();
             Refresh();
         }
@@ -278,8 +277,8 @@ namespace Mapsui.UI.Xaml
         private void UpdateSize()
         {
             if (Viewport == null) return;
-            _viewport.Width = ActualWidth;
-            _viewport.Height = ActualHeight;
+            Map.Viewport.Width = ActualWidth;
+            Map.Viewport.Height = ActualHeight;
         }
 
         public void MapDataChanged(object sender, DataChangedEventArgs e)
@@ -321,10 +320,10 @@ namespace Mapsui.UI.Xaml
             if (_map.Envelope.Height.IsNanOrZero()) return;
             if (_map.Envelope.GetCentroid() == null) return;
  
-            if (double.IsNaN(_viewport.Resolution)) 
-                _viewport.Resolution = _map.Envelope.Width / ActualWidth;
-            if (double.IsNaN(_viewport.Center.X) || double.IsNaN(_viewport.Center.Y)) 
-                _viewport.Center = _map.Envelope.GetCentroid();
+            if (double.IsNaN(Map.Viewport.Resolution)) 
+                Map.Viewport.Resolution = _map.Envelope.Width / ActualWidth;
+            if (double.IsNaN(Map.Viewport.Center.X) || double.IsNaN(Map.Viewport.Center.Y)) 
+                Map.Viewport.Center = _map.Envelope.GetCentroid();
             
             _viewportInitialized = true;
         }
@@ -337,8 +336,8 @@ namespace Mapsui.UI.Xaml
 
             if ((_renderer != null) && (_map != null))
             {
-                _renderer.Render(_viewport, _map.Layers);
-                _renderTarget.Arrange(new Rect(0, 0, _viewport.Width, _viewport.Height));
+                _renderer.Render(Map.Viewport, _map.Layers);
+                _renderTarget.Arrange(new Rect(0, 0, Map.Viewport.Width, Map.Viewport.Height));
                 _invalid = false;
             }
         }
@@ -354,10 +353,10 @@ namespace Mapsui.UI.Xaml
             ZoomHelper.ZoomToBoudingbox(beginPoint.X, beginPoint.Y, endPoint.X, endPoint.Y, ActualWidth, out x, out y, out resolution);
             resolution = ZoomHelper.ClipToExtremes(_map.Resolutions, resolution);
 
-            _viewport.Center = new Geometries.Point(x, y);
-            _viewport.Resolution = resolution;
+            Map.Viewport.Center = new Geometries.Point(x, y);
+            Map.Viewport.Resolution = resolution;
 
-            _map.ViewChanged(true, _viewport.Extent, _viewport.Resolution);
+            _map.ViewChanged(true);
             OnViewChanged();
             RefreshGraphics();
             ClearBBoxDrawing();
@@ -374,8 +373,8 @@ namespace Mapsui.UI.Xaml
         {
             if (Map.Envelope == null) return;
             if (ActualWidth.IsNanOrZero()) return;
-            _viewport.Resolution =  Map.Envelope.Width / ActualWidth;
-            _viewport.Center = Map.Envelope.GetCentroid();
+            Map.Viewport.Resolution =  Map.Envelope.Width / ActualWidth;
+            Map.Viewport.Center = Map.Envelope.GetCentroid();
 
             OnViewChanged();
         }
@@ -407,7 +406,7 @@ namespace Mapsui.UI.Xaml
                 return;
             }
 
-            _viewport.Transform(e.Position.X, e.Position.Y, _previousPosition.X, _previousPosition.Y, e.Delta.Scale);
+            Map.Viewport.Transform(e.Position.X, e.Position.Y, _previousPosition.X, _previousPosition.Y, e.Delta.Scale);
 
             _previousPosition = e.Position;
             
@@ -430,7 +429,7 @@ namespace Mapsui.UI.Xaml
 
     public class ViewChangedEventArgs : EventArgs
     {
-        public Viewport Viewport { get; set; }
+        public IViewport Viewport { get; set; }
         public bool UserAction { get; set; }
     }
 
