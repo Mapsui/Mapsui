@@ -315,6 +315,7 @@ namespace Mapsui.UI.Xaml
 
         private void MapControlMouseWheel(object sender, MouseWheelEventArgs e)
         {
+            if (!_viewportInitialized) return;
             if (ZoomLocked) return;
 
             _currentMousePosition = e.GetPosition(this); //Needed for both MouseMove and MouseWheel event for mousewheel event
@@ -567,7 +568,6 @@ namespace Mapsui.UI.Xaml
             if (_map.Envelope.Width.IsNanOrZero()) return;
             if (_map.Envelope.Height.IsNanOrZero()) return;
             if (_map.Envelope.GetCentroid() == null) return;
-
 
             if (double.IsNaN(_viewport.Resolution))
                 _viewport.Resolution = _map.Envelope.Width / ActualWidth;

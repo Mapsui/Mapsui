@@ -52,8 +52,8 @@ namespace Mapsui.Layers
                 lock (DataSource)
                 {
                     var extent = DataSource.GetExtents();
-                    if (Transformation != null && CRS != -1 && DataSource.SRID != -1)
-                        return Transformation.Transform(DataSource.SRID, CRS, extent);
+                    if (NeedsTransform(Transformation, CRS, DataSource.SRID))
+                        return Transformation.Transform(DataSource.SRID, CRS, CopyBoundingBox(extent));
                     return extent;
                 }
             }
@@ -131,8 +131,8 @@ namespace Mapsui.Layers
 
         private BoundingBox Transform(BoundingBox extent)
         {
-            if (!NeedsTransform(Transformation, DataSource.SRID)) return extent;
-            extent = Transformation.Transform(CRS, DataSource.SRID, CopyBoundingBox(extent));
+            if (NeedsTransform(Transformation, CRS, DataSource.SRID)) 
+                return Transformation.Transform(CRS, DataSource.SRID, CopyBoundingBox(extent));
             return extent;
         }
 
@@ -143,7 +143,7 @@ namespace Mapsui.Layers
 
         private IEnumerable<IFeature> Transform(IEnumerable<IFeature> features)
         {
-            if (!NeedsTransform(Transformation, DataSource.SRID)) return features;
+            if (!NeedsTransform(Transformation, CRS, DataSource.SRID)) return features;
             
             var copiedFeatures = CopyFeatures(features).ToList();
             foreach (var feature in copiedFeatures.Where(feature => !(feature.Geometry is Raster)))
@@ -154,9 +154,9 @@ namespace Mapsui.Layers
             return copiedFeatures;
         }
 
-        private bool NeedsTransform(ITransformation transformation, int SRID)
+        private static bool NeedsTransform(ITransformation transformation, int layerCRS, int sourceCRS)
         {
-            return !(transformation == null || CRS == -1 || SRID == -1 || SRID == CRS);
+            return (transformation != null && layerCRS > 0 && sourceCRS > 0 && layerCRS != sourceCRS);
         }
 
         private static IEnumerable<IFeature> CopyFeatures(IEnumerable<IFeature> features)

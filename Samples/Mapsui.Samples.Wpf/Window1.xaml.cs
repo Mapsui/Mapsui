@@ -75,15 +75,14 @@ namespace Mapsui.Samples.Wpf
         private void ProjectedPointClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
-            MapControl.Map.Transformation = new MinimalTransformation { MapSRID = 3857 };
+            MapControl.Map.Transformation = new MinimalTransformation();
+            MapControl.Map.CRS = 3857;
             MapControl.Map.Layers.Add(new TileLayer(new OsmTileSource()) { LayerName = "OSM" });
             MapControl.Map.Layers.Add(PointLayerSample.CreateLayerWithDataSourceWithWGS84Point());
             LayerList.Initialize(MapControl.Map.Layers);
             MapControl.ZoomToFullEnvelope();
             MapControl.Refresh();
         }
-
-
 
         private void AnimatedPointsClick(object sender, RoutedEventArgs e)
         {

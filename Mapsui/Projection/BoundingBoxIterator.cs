@@ -7,7 +7,7 @@ namespace Mapsui.Projection
     {
         public static IEnumerable<Point> AllVertices(this BoundingBox boundingBox)
         {
-            return new [] {boundingBox.Min, boundingBox.Max };
+            return new[] { boundingBox.Min, boundingBox.Max };
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Reflection;
 using Mapsui.Data.Providers;
 using Mapsui.Layers;
 using Mapsui.Providers;
@@ -138,8 +139,7 @@ namespace Mapsui.Samples.Common.Desktop
 
         private static string GetAppDir()
         {
-            return Path.GetDirectoryName(
-              System.Reflection.Assembly.GetEntryAssembly().GetModules()[0].FullyQualifiedName);
+            return Path.GetDirectoryName(Assembly.GetEntryAssembly().GetModules()[0].FullyQualifiedName);
         }
     }
 }

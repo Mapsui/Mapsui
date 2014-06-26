@@ -8,12 +8,11 @@ namespace Mapsui.Providers
 {
     public class Feature : IFeature, IDisposable
     {
-        private readonly Dictionary<string, object> _dictionary;
+        private readonly Dictionary<string, object> _dictionary = new Dictionary<string, object>();
         private bool _disposed;
 
         public Feature()
         {
-            _dictionary = new Dictionary<string, object>();
             RenderedGeometry = new Dictionary<IStyle, object>();
             Styles = new Collection<IStyle>();
         }
