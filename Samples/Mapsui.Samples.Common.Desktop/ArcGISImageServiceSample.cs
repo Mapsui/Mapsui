@@ -23,7 +23,7 @@ namespace Mapsui.Samples.Common.Desktop
             return new ArcGISImageServiceProvider(
                 new ArcGISImageCapabilities("http://imagery.arcgisonline.com/ArcGIS/rest/services/LandsatGLS/FalseColor/ImageServer/exportImage", 268211520000, 1262217600000))
             {
-                SRID = 102100
+                CRS = 102100
             };
         }
 

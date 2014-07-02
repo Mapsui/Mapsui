@@ -52,8 +52,8 @@ namespace Mapsui.Layers
                 lock (DataSource)
                 {
                     var extent = DataSource.GetExtents();
-                    if (NeedsTransform(Transformation, CRS, DataSource.SRID))
-                        return Transformation.Transform(DataSource.SRID, CRS, CopyBoundingBox(extent));
+                    if (NeedsTransform(Transformation, CRS, DataSource.CRS))
+                        return Transformation.Transform(DataSource.CRS, CRS, CopyBoundingBox(extent));
                     return extent;
                 }
             }
@@ -131,8 +131,8 @@ namespace Mapsui.Layers
 
         private BoundingBox Transform(BoundingBox extent)
         {
-            if (NeedsTransform(Transformation, CRS, DataSource.SRID)) 
-                return Transformation.Transform(CRS, DataSource.SRID, CopyBoundingBox(extent));
+            if (NeedsTransform(Transformation, CRS, DataSource.CRS)) 
+                return Transformation.Transform(CRS, DataSource.CRS, CopyBoundingBox(extent));
             return extent;
         }
 
@@ -143,13 +143,13 @@ namespace Mapsui.Layers
 
         private IEnumerable<IFeature> Transform(IEnumerable<IFeature> features)
         {
-            if (!NeedsTransform(Transformation, CRS, DataSource.SRID)) return features;
+            if (!NeedsTransform(Transformation, CRS, DataSource.CRS)) return features;
             
             var copiedFeatures = CopyFeatures(features).ToList();
             foreach (var feature in copiedFeatures.Where(feature => !(feature.Geometry is Raster)))
             {
                 var geometry = Geometry.GeomFromWKB(feature.Geometry.AsBinary()); // copy geometry
-                feature.Geometry = Transformation.Transform(DataSource.SRID, CRS, geometry);
+                feature.Geometry = Transformation.Transform(DataSource.CRS, CRS, geometry);
             }
             return copiedFeatures;
         }

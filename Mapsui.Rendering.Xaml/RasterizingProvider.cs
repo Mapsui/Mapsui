@@ -26,7 +26,7 @@ namespace Mapsui.Rendering.Xaml
             _layer = new MemoryLayer {DataSource = provider, Style = style};
         }
 
-        public int SRID { get; set; }
+        public int CRS { get; set; }
 
         public IEnumerable<IFeature> GetFeaturesInView(BoundingBox extent, double resolution)
         {

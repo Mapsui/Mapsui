@@ -395,7 +395,7 @@ namespace Mapsui.Providers.Wfs
                                    _featureTypeInfo.BBox.MaxLat);
         }
         
-        public int SRID
+        public int CRS
         {
             get { return Convert.ToInt32(_featureTypeInfo.SRID); }
             set { _featureTypeInfo.SRID = value.ToString(CultureInfo.InvariantCulture); }

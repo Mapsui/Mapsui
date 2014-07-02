@@ -57,8 +57,8 @@ namespace Mapsui.Layers
                 lock (DataSource)
                 {
                     var box = DataSource.GetExtents();
-                    if (Transformation != null && CRS != -1 && DataSource.SRID != -1)
-                        return Transformation.Transform(DataSource.SRID, CRS, box);
+                    if (Transformation != null && CRS != -1 && DataSource.CRS != -1)
+                        return Transformation.Transform(DataSource.CRS, CRS, box);
                     return box;
                 }
             }
@@ -129,8 +129,8 @@ namespace Mapsui.Layers
             IsFetching = true;
             NeedsUpdate = false;
 
-            if (Transformation != null && CRS != -1 && DataSource.SRID != -1)
-                extent = Transformation.Transform(CRS, DataSource.SRID, extent);
+            if (Transformation != null && CRS != -1 && DataSource.CRS != -1)
+                extent = Transformation.Transform(CRS, DataSource.CRS, extent);
 
             var fetcher = new FeatureFetcher(extent, resolution, DataSource, DataArrived, DateTime.Now.Ticks);
             ThreadPool.QueueUserWorkItem(fetcher.FetchOnThread);
@@ -142,11 +142,11 @@ namespace Mapsui.Layers
             if (features == null) throw new ArgumentException("argument features may not be null");
 
             features = features.ToList();
-            if (Transformation != null && CRS != -1 && DataSource.SRID != -1 && DataSource.SRID != CRS)
+            if (Transformation != null && CRS != -1 && DataSource.CRS != -1 && DataSource.CRS != CRS)
             {
                 foreach (var feature in features.Where(feature => !(feature.Geometry is Raster)))
                 {
-                    feature.Geometry = Transformation.Transform(DataSource.SRID, CRS, feature.Geometry);
+                    feature.Geometry = Transformation.Transform(DataSource.CRS, CRS, feature.Geometry);
                 }
             }
 

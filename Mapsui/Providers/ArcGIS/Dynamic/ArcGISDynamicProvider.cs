@@ -71,7 +71,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
             set { _timeOut = value; }
         }
 
-        public int SRID
+        public int CRS
         {
             get
             {
@@ -178,8 +178,8 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
             var strReq = new StringBuilder(_url);
             strReq.Append("/export?");
             strReq.AppendFormat(CultureInfo.InvariantCulture, "bbox={0},{1},{2},{3}", box.Min.X, box.Min.Y, box.Max.X, box.Max.Y);
-            strReq.AppendFormat("&bboxSR={0}", SRID);
-            strReq.AppendFormat("&imageSR={0}", SRID);
+            strReq.AppendFormat("&bboxSR={0}", CRS);
+            strReq.AppendFormat("&imageSR={0}", CRS);
             strReq.AppendFormat("&size={0},{1}", width, height);
             strReq.Append("&layers=show:");
 

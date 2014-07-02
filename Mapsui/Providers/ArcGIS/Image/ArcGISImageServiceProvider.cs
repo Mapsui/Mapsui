@@ -20,7 +20,7 @@ namespace Mapsui.Providers.ArcGIS.Image
 
         public ArcGISImageServiceProvider(ArcGISImageCapabilities capabilities, bool continueOnError = true)
         {
-            SRID = -1;
+            CRS = -1;
             TimeOut = 10000;     
             ContinueOnError = continueOnError;
             ArcGisImageCapabilities = capabilities;
@@ -30,7 +30,7 @@ namespace Mapsui.Providers.ArcGIS.Image
         public ArcGISImageServiceProvider(string url, bool continueOnError = false, string format = "jpgpng", InterpolationType interpolation = InterpolationType.RSP_NearestNeighbor, long startTime = -1, long endTime = -1)
         {
             Url = url;
-            SRID = -1;
+            CRS = -1;
             TimeOut = 10000;
             ContinueOnError = continueOnError;
 
@@ -76,7 +76,7 @@ namespace Mapsui.Providers.ArcGIS.Image
             ArcGisImageCapabilities = capabilities;
         }
 
-        public int SRID { get; set; }
+        public int CRS { get; set; }
 
         public ICredentials Credentials { get; set; }
 
@@ -171,11 +171,11 @@ namespace Mapsui.Providers.ArcGIS.Image
             url.AppendFormat("&format={0}", ArcGisImageCapabilities.Format);
             url.AppendFormat("&f={0}", "image");
 
-            if (SRID == -1)
-                throw new Exception("SRID not set");
+            if (CRS == -1)
+                throw new Exception("CRS not set");
 
-            url.AppendFormat("&imageSR={0}", SRID);
-            url.AppendFormat("&bboxSR={0}", SRID);
+            url.AppendFormat("&imageSR={0}", CRS);
+            url.AppendFormat("&bboxSR={0}", CRS);
 
             if (ArcGisImageCapabilities.StartTime == -1 && ArcGisImageCapabilities.EndTime == -1)
             {

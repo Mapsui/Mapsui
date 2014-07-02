@@ -452,7 +452,7 @@ namespace Mapsui.Providers.Wms
             return _wmsClient.GetMapRequests[0];
         }
 
-        public int SRID { get; set; }
+        public int CRS { get; set; }
 
         public Dictionary<string, string> ExtraParams { get; set; }
 

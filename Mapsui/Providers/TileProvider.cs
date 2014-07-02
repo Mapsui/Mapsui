@@ -37,7 +37,7 @@ namespace Mapsui.Providers
             return _source.Schema.Extent.ToBoundingBox();
         }
 
-        public int SRID { get; set; }
+        public int CRS { get; set; }
         
         public TileProvider(ITileSource tileSource)
         {
