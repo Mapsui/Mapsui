@@ -18,12 +18,12 @@
 using System.Threading.Tasks;
 using Mapsui.Fetcher;
 using Mapsui.Geometries;
-using Mapsui.Projection;
 using Mapsui.Providers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using Mapsui.Utilities;
 
 namespace Mapsui.Layers
 {
@@ -52,7 +52,8 @@ namespace Mapsui.Layers
                 lock (DataSource)
                 {
                     var extent = DataSource.GetExtents();
-                    if (NeedsTransform(Transformation, CRS, DataSource.CRS))
+                    if (extent == null) return null;
+                    if (ProjectionHelper.NeedsTransform(Transformation, CRS, DataSource.CRS))
                         return Transformation.Transform(DataSource.CRS, CRS, CopyBoundingBox(extent));
                     return extent;
                 }
@@ -131,7 +132,7 @@ namespace Mapsui.Layers
 
         private BoundingBox Transform(BoundingBox extent)
         {
-            if (NeedsTransform(Transformation, CRS, DataSource.CRS)) 
+            if (ProjectionHelper.NeedsTransform(Transformation, CRS, DataSource.CRS)) 
                 return Transformation.Transform(CRS, DataSource.CRS, CopyBoundingBox(extent));
             return extent;
         }
@@ -143,7 +144,7 @@ namespace Mapsui.Layers
 
         private IEnumerable<IFeature> Transform(IEnumerable<IFeature> features)
         {
-            if (!NeedsTransform(Transformation, CRS, DataSource.CRS)) return features;
+            if (!ProjectionHelper.NeedsTransform(Transformation, CRS, DataSource.CRS)) return features;
             
             var copiedFeatures = CopyFeatures(features).ToList();
             foreach (var feature in copiedFeatures.Where(feature => !(feature.Geometry is Raster)))
@@ -152,11 +153,6 @@ namespace Mapsui.Layers
                 feature.Geometry = Transformation.Transform(DataSource.CRS, CRS, geometry);
             }
             return copiedFeatures;
-        }
-
-        private static bool NeedsTransform(ITransformation transformation, int layerCRS, int sourceCRS)
-        {
-            return (transformation != null && layerCRS > 0 && sourceCRS > 0 && layerCRS != sourceCRS);
         }
 
         private static IEnumerable<IFeature> CopyFeatures(IEnumerable<IFeature> features)

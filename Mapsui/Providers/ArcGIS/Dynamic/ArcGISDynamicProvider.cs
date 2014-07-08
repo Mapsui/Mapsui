@@ -6,6 +6,7 @@ using System.Net;
 using System.Text;
 using BruTile.Extensions;
 using Mapsui.Geometries;
+using Mapsui.Utilities;
 
 namespace Mapsui.Providers.ArcGIS.Dynamic
 {
@@ -71,15 +72,15 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
             set { _timeOut = value; }
         }
 
-        public int CRS
+        public string CRS
         {
             get
             {
-                return ArcGisDynamicCapabilities.spatialReference.wkid;
+                return ProjectionHelper.EpsgPrefix + ArcGisDynamicCapabilities.spatialReference.wkid;
             }
             set
             {
-                ArcGisDynamicCapabilities.spatialReference.wkid = value;
+                ArcGisDynamicCapabilities.spatialReference.wkid = int.Parse(value.Substring(ProjectionHelper.EpsgPrefix.Length));
             }
         }
 

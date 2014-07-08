@@ -45,7 +45,7 @@ namespace Mapsui
             Viewport =  new NotifyingViewport { Center = { X = double.NaN, Y = double.NaN }, Resolution = double.NaN };
         }
 
-        public int CRS { get; set; }
+        public string CRS { get; set; }
 
         /// <summary>
         /// The maps coördinate system

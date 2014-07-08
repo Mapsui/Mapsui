@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Net;
 using Mapsui.Providers.Wfs.Xml;
+using Mapsui.Utilities;
 
 namespace Mapsui.Providers.Wfs
 {
@@ -395,10 +396,10 @@ namespace Mapsui.Providers.Wfs
                                    _featureTypeInfo.BBox.MaxLat);
         }
         
-        public int CRS
+        public string CRS
         {
-            get { return Convert.ToInt32(_featureTypeInfo.SRID); }
-            set { _featureTypeInfo.SRID = value.ToString(CultureInfo.InvariantCulture); }
+            get { return ProjectionHelper.EpsgPrefix + _featureTypeInfo.SRID; }
+            set { _featureTypeInfo.SRID = value.Substring(ProjectionHelper.EpsgPrefix.Length); }
         }
 
         #endregion

@@ -70,11 +70,11 @@ namespace Mapsui.Providers
         /// <summary>
         /// The spatial reference ID (CRS)
         /// </summary>
-        public int CRS { get; set; }
+        public string CRS { get; set; }
         
         public MemoryProvider()
         {
-            CRS = -1;
+            CRS = "";
             Features = new Features();
         }
 
@@ -84,7 +84,7 @@ namespace Mapsui.Providers
         /// <param name="geometries">Set of geometries that this datasource should contain</param>
         public MemoryProvider(IEnumerable<IGeometry> geometries)
         {
-            CRS = -1;
+            CRS = "";
             Features = new Features();
             foreach (IGeometry geometry in geometries)
             {
@@ -100,7 +100,7 @@ namespace Mapsui.Providers
         /// <param name="feature">Feature to be in this datasource</param>
         public MemoryProvider(IFeature feature)
         {
-            CRS = -1;
+            CRS = "";
             Features = new Features {feature};
         }
 
@@ -119,7 +119,7 @@ namespace Mapsui.Providers
         /// <param name="features">Features to be included in this datasource</param>
         public MemoryProvider(IEnumerable<IFeature> features)
         {
-            CRS = -1;
+            CRS = "";
             Features = new Features();
             foreach (var feature in features) Features.Add(feature);
         }
@@ -130,7 +130,7 @@ namespace Mapsui.Providers
         /// <param name="features">Features to be included in this datasource</param>
         public MemoryProvider(IFeatures features)
         {
-            CRS = -1;
+            CRS = "";
             Features = features;
         }
 
@@ -140,7 +140,7 @@ namespace Mapsui.Providers
         /// <param name="geometry">Geometry to be in this datasource</param>
         public MemoryProvider(Geometry geometry)
         {
-            CRS = -1;
+            CRS = "";
             Features = new Features();
             IFeature feature = Features.New();
             feature.Geometry = geometry;

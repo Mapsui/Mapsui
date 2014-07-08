@@ -29,7 +29,7 @@ namespace Mapsui.Providers
         /// <summary>
         /// The spatial reference ID (CRS)
         /// </summary>
-        int CRS { get; set; }
+        string CRS { get; set; }
 
         IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution);
 

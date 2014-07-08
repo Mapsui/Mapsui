@@ -163,6 +163,7 @@
     <Compile Include="Utilities\Constants.cs" />
     <Compile Include="Utilities\Extensions.cs" />
     <Compile Include="Utilities\LeastSquaresTransform.cs" />
+    <Compile Include="Utilities\ProjectionHelper.cs" />
     <Compile Include="Utilities\Providers.cs" />
     <Compile Include="Utilities\Version.cs" />
     <Compile Include="Utilities\ZoomHelper.cs" />

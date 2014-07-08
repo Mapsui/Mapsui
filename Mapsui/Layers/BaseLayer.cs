@@ -12,7 +12,7 @@ namespace Mapsui.Layers
     public abstract class BaseLayer : ILayer
     {
         private static int _instanceCounter;
-        private int _crs;
+        private string _crs;
         private object _tag;
         private bool _busy;
         private bool _enabled;
@@ -97,7 +97,7 @@ namespace Mapsui.Layers
         /// <summary>
         /// Gets or sets the CRS 
         /// </summary>
-        public int CRS
+        public string CRS
         {
             get { return _crs; }
             set

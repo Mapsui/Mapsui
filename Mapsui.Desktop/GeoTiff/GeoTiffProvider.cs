@@ -210,7 +210,7 @@ namespace Mapsui.Providers.GeoTiff
         {
         }
 
-        public int CRS { get; set; }
+        public string CRS { get; set; }
 
         public IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
         {

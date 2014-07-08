@@ -170,7 +170,7 @@ namespace Mapsui.Data.Providers
         private string _filename;
         private bool _isOpen;
         private ShapeType _shapeType;
-        private int _crs = -1;
+        private string _crs = "";
         private BinaryReader _brShapeFile;
         private BinaryReader _brShapeIndex;
         private readonly DbaseReader _dbaseFile;
@@ -478,7 +478,7 @@ namespace Mapsui.Data.Providers
         /// <summary>
         /// Gets or sets the spatial reference ID (CRS)
         /// </summary>
-        public int CRS
+        public string CRS
         {
             get { return _crs; }
             set { _crs = value; }

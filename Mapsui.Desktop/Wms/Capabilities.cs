@@ -24,6 +24,7 @@ using System.Xml.Schema;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using System.Globalization;
+using Mapsui.Utilities;
 
 namespace Mapsui.Web.Wms
 {
@@ -171,7 +172,7 @@ namespace Mapsui.Web.Wms
             layerRootNode.AppendChild(CreateElement("Title", "Mapsui", capabilities, false, wmsNamespaceURI));
             layerRootNode.AppendChild(CreateElement("CRS", "EPSG:" + map.Layers[0].CRS, capabilities, false,
                                                     wmsNamespaceURI)); //TODO
-            layerRootNode.AppendChild(GenerateBoundingBoxElement(map.Envelope, map.Layers[0].CRS, capabilities));
+            layerRootNode.AppendChild(GenerateBoundingBoxElement(map.Envelope, int.Parse(map.Layers[0].CRS.Substring(ProjectionHelper.EpsgPrefix.Length)), capabilities));
             //This should be changed when Transformation library is complete
             XmlElement geoBox = capabilities.CreateElement("EX_GeographicBoundingBox", wmsNamespaceURI);
             geoBox.Attributes.Append(CreateAttribute("minx", "-180", capabilities));
@@ -280,7 +281,7 @@ namespace Mapsui.Web.Wms
                 foreach (Layer childlayer in ((LayerGroup) layer).Layers)
                     LayerNode.AppendChild(GetWmsLayerNode(childlayer, doc));
 
-            LayerNode.AppendChild(GenerateBoundingBoxElement(layer.Envelope, layer.CRS, doc));
+            LayerNode.AppendChild(GenerateBoundingBoxElement(layer.Envelope, int.Parse(layer.CRS.Substring(ProjectionHelper.EpsgPrefix.Length)), doc));
 
             return LayerNode;
         }
@@ -292,7 +293,7 @@ namespace Mapsui.Web.Wms
             xmlBbox.Attributes.Append(CreateAttribute("miny", bbox.Bottom.ToString(CultureInfo.InvariantCulture), doc));
             xmlBbox.Attributes.Append(CreateAttribute("maxx", bbox.Right.ToString(CultureInfo.InvariantCulture), doc));
             xmlBbox.Attributes.Append(CreateAttribute("maxy", bbox.Top.ToString(CultureInfo.InvariantCulture), doc));
-            xmlBbox.Attributes.Append(CreateAttribute("CRS", "EPSG:" + srid.ToString(), doc));
+            xmlBbox.Attributes.Append(CreateAttribute("CRS", "EPSG:" + srid, doc));
             return xmlBbox;
         }
 

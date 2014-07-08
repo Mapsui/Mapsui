@@ -70,7 +70,7 @@ namespace Mapsui.Layers
         /// This always needs to be equal to the CRS or the map. 
         /// It should eventually be removed altogether
         /// </summary>
-        int CRS { get; set; }
+        string CRS { get; set; }
 
         /// <summary>
         /// The coordinate transformation

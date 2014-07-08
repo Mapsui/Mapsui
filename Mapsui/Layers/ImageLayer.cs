@@ -22,6 +22,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using Mapsui.Utilities;
 
 namespace Mapsui.Layers
 {
@@ -57,7 +58,7 @@ namespace Mapsui.Layers
                 lock (DataSource)
                 {
                     var box = DataSource.GetExtents();
-                    if (Transformation != null && CRS != -1 && DataSource.CRS != -1)
+                    if (ProjectionHelper.NeedsTransform(Transformation, CRS, DataSource.CRS))
                         return Transformation.Transform(DataSource.CRS, CRS, box);
                     return box;
                 }
@@ -129,7 +130,7 @@ namespace Mapsui.Layers
             IsFetching = true;
             NeedsUpdate = false;
 
-            if (Transformation != null && CRS != -1 && DataSource.CRS != -1)
+            if (ProjectionHelper.NeedsTransform(Transformation, CRS, DataSource.CRS))
                 extent = Transformation.Transform(CRS, DataSource.CRS, extent);
 
             var fetcher = new FeatureFetcher(extent, resolution, DataSource, DataArrived, DateTime.Now.Ticks);
@@ -142,7 +143,7 @@ namespace Mapsui.Layers
             if (features == null) throw new ArgumentException("argument features may not be null");
 
             features = features.ToList();
-            if (Transformation != null && CRS != -1 && DataSource.CRS != -1 && DataSource.CRS != CRS)
+            if (ProjectionHelper.NeedsTransform(Transformation, CRS, DataSource.CRS))
             {
                 foreach (var feature in features.Where(feature => !(feature.Geometry is Raster)))
                 {
