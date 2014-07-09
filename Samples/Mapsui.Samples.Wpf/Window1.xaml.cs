@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using BruTile.Extensions;
+﻿using BruTile.Extensions;
 using BruTile.Web;
 using BruTile.Wmts;
 using Mapsui.Layers;

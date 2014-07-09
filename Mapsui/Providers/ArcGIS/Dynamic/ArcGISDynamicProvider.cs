@@ -14,6 +14,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
     {
         private int _timeOut;
         private string _url;
+        private string _crs;
 
         /// <summary>
         /// Create ArcGisDynamicProvider based on a given capabilities file
@@ -74,14 +75,8 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
 
         public string CRS
         {
-            get
-            {
-                return ProjectionHelper.EpsgPrefix + ArcGisDynamicCapabilities.spatialReference.wkid;
-            }
-            set
-            {
-                ArcGisDynamicCapabilities.spatialReference.wkid = int.Parse(value.Substring(ProjectionHelper.EpsgPrefix.Length));
-            }
+            get {  return _crs; }
+            set { _crs = value; }
         }
 
         public IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
@@ -175,12 +170,13 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
         public string GetRequestUrl(BoundingBox box, int width, int height)
         {
             //ArcGIS Export description see: http://resources.esri.com/help/9.3/arcgisserver/apis/rest/index.html?export.html
-
+            
+            var sr = CreateSr(CRS);
             var strReq = new StringBuilder(_url);
             strReq.Append("/export?");
             strReq.AppendFormat(CultureInfo.InvariantCulture, "bbox={0},{1},{2},{3}", box.Min.X, box.Min.Y, box.Max.X, box.Max.Y);
-            strReq.AppendFormat("&bboxSR={0}", CRS);
-            strReq.AppendFormat("&imageSR={0}", CRS);
+            strReq.AppendFormat("&bboxSR={0}", sr);
+            strReq.AppendFormat("&imageSR={0}", sr);
             strReq.AppendFormat("&size={0},{1}", width, height);
             strReq.Append("&layers=show:");
 
@@ -209,7 +205,14 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
 
             return strReq.ToString();
         }
-        
+
+        private static string CreateSr(string crs)
+        {
+            if (crs.StartsWith(ProjectionHelper.EsriStringPrefix)) return "{\"wkt\":\"" + crs.Substring(ProjectionHelper.EsriStringPrefix.Length).Replace("\"", "\\\"") + "\"}";
+            if (crs.StartsWith(ProjectionHelper.EpsgPrefix)) return ProjectionHelper.ToEpsgCode(crs).ToString();
+            throw new Exception("crs type not supported");
+        }
+
         private static string GetFormat(ArcGISDynamicCapabilities arcGisDynamicCapabilities)
         {
             //png | png8 | png24 | jpg | pdf | bmp | gif | svg | png32 (png32 only supported from 9.3.1 and up)
