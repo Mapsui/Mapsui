@@ -44,6 +44,9 @@
     <Compile Include="Converters\WellKnownText\StreamTokenizer.cs" />
     <Compile Include="Converters\WellKnownText\TokenType.cs" />
     <Compile Include="Converters\WellKnownText\WKTStreamTokenizer.cs" />
+    <Compile Include="ExtensionMethods\BoundingBoxExtensions.cs" />
+    <Compile Include="ExtensionMethods\FeatureExtensions.cs" />
+    <Compile Include="ExtensionMethods\GeometryExtensions.cs" />
     <Compile Include="Fetcher\FeatureFetcher.cs" />
     <Compile Include="Fetcher\FetchOnThread.cs" />
     <Compile Include="Fetcher\FetchStrategy.cs" />

@@ -54,7 +54,7 @@ namespace Mapsui.Layers
                     var extent = DataSource.GetExtents();
                     if (extent == null) return null;
                     if (ProjectionHelper.NeedsTransform(Transformation, CRS, DataSource.CRS))
-                        return Transformation.Transform(DataSource.CRS, CRS, CopyBoundingBox(extent));
+                        return Transformation.Transform(DataSource.CRS, CRS, extent.Copy());
                     return extent;
                 }
             }
@@ -133,31 +133,21 @@ namespace Mapsui.Layers
         private BoundingBox Transform(BoundingBox extent)
         {
             if (ProjectionHelper.NeedsTransform(Transformation, CRS, DataSource.CRS)) 
-                return Transformation.Transform(CRS, DataSource.CRS, CopyBoundingBox(extent));
+                return Transformation.Transform(CRS, DataSource.CRS, extent.Copy());
             return extent;
-        }
-
-        private static BoundingBox CopyBoundingBox(BoundingBox extent)
-        {
-            return new BoundingBox(extent.MinX, extent.MinY, extent.MaxX, extent.MaxY);
         }
 
         private IEnumerable<IFeature> Transform(IEnumerable<IFeature> features)
         {
             if (!ProjectionHelper.NeedsTransform(Transformation, CRS, DataSource.CRS)) return features;
             
-            var copiedFeatures = CopyFeatures(features).ToList();
-            foreach (var feature in copiedFeatures.Where(feature => !(feature.Geometry is Raster)))
+            var copiedFeatures = features.Copy().ToList();
+            foreach (var feature in copiedFeatures)
             {
-                var geometry = Geometry.GeomFromWKB(feature.Geometry.AsBinary()); // copy geometry
-                feature.Geometry = Transformation.Transform(DataSource.CRS, CRS, geometry);
+                if (feature.Geometry is Raster) continue;
+                feature.Geometry = Transformation.Transform(DataSource.CRS, CRS, feature.Geometry.Copy());
             }
             return copiedFeatures;
-        }
-
-        private static IEnumerable<IFeature> CopyFeatures(IEnumerable<IFeature> features)
-        {
-            return features.Select(feature => new Feature(feature)).Cast<IFeature>().ToList();
         }
 
         public override void ClearCache()

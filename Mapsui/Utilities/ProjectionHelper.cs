@@ -16,40 +16,31 @@ namespace Mapsui.Utilities
         public const string EsriStringPrefix = "ESRISTRING:";
         public const string Proj4StringPrefix = "PROJ4STRING:";
         
-        public static string ToStandardizedCRS(string CRS)
+        public static string ToStandardizedCRS(string crs)
         {
-            if (CRS == null) return null;
-            if (string.IsNullOrWhiteSpace(CRS)) return CRS.Trim();
+            if (crs == null) return null;
+            if (string.IsNullOrWhiteSpace(crs)) return crs.Trim();
 
-            var crsType = GetCrsType(CRS);
+            var crsType = GetCrsType(crs);
 
-            if (crsType == CrsType.Epgs) return EpsgPrefix + CRS.Substring(EpsgPrefix.Length);
-            if (crsType == CrsType.EsriString) return EsriStringPrefix + CRS.Substring(EsriStringPrefix.Length);
-            if (crsType == CrsType.Proj4String) return Proj4StringPrefix + CRS.Substring(Proj4StringPrefix.Length);
+            if (crsType == CrsType.Epgs) return EpsgPrefix + crs.Substring(EpsgPrefix.Length);
+            if (crsType == CrsType.EsriString) return EsriStringPrefix + crs.Substring(EsriStringPrefix.Length);
+            if (crsType == CrsType.Proj4String) return Proj4StringPrefix + crs.Substring(Proj4StringPrefix.Length);
 
-            throw new Exception(string.Format("CRS is not recognized as a projection string: '{0}'", CRS));
+            throw new Exception(string.Format("crs is not recognized as a projection string: '{0}'", crs));
         }
 
-        public static int ToEpsgCode(string CRS)
+        public static int ToEpsgCode(string crs)
         {
-            return int.Parse(CRS.Substring(EpsgPrefix.Length));
+            return int.Parse(crs.Substring(EpsgPrefix.Length));
         }
 
-        private static void ThrowIfNotInt(string CRS)
+        public static CrsType GetCrsType(string crs)
         {
-            int result; // The result is not relevant here, just that it actually is an int.
-            if (!int.TryParse(CRS, out result))
-            {
-                throw new Exception(string.Format("CRS is not recognized as a projection string: '{0}'", CRS));
-            }
-        }
-
-        public static CrsType GetCrsType(string CRS)
-        {
-            if (CRS.StartsWith(EpsgPrefix)) return CrsType.Epgs;
-            if (CRS.StartsWith(EsriStringPrefix)) return CrsType.EsriString;
-            if (CRS.StartsWith(Proj4StringPrefix)) return CrsType.Proj4String;
-            throw new Exception(string.Format("CRS not recognized: '{0}'", CRS));
+            if (crs.StartsWith(EpsgPrefix)) return CrsType.Epgs;
+            if (crs.StartsWith(EsriStringPrefix)) return CrsType.EsriString;
+            if (crs.StartsWith(Proj4StringPrefix)) return CrsType.Proj4String;
+            throw new Exception(string.Format("crs not recognized: '{0}'", crs));
         }
 
         public static bool NeedsTransform(ITransformation transformation, string layerCRS, string sourceCRS)
