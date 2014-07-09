@@ -44,7 +44,7 @@ namespace Mapsui.Tests.Projection
             var transformation = new MinimalTransformation();
 
             // act
-            var enumeration = transformation.Transform(4326, 3857, geomety);
+            var enumeration = transformation.Transform("EPSG:4326", "EPSG:3857", geomety);
 
             // assert
             Assert.AreEqual(14, enumeration.AllVertices().Count());

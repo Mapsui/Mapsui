@@ -166,7 +166,7 @@ namespace Mapsui.Samples.Common
         {
             return new Layer
             {
-                DataSource = new MemoryProvider(new Point(4.643331, 52.433489)) { CRS = 4326 }
+                DataSource = new MemoryProvider(new Point(4.643331, 52.433489)) { CRS = "EPSG:4326" }
             };
         }
 

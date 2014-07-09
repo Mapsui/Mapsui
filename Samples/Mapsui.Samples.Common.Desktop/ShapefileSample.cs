@@ -18,8 +18,8 @@ namespace Mapsui.Samples.Common.Desktop
         {
             var layers = new List<ILayer>();
 
-            var countrySource = new ShapeFile(GetAppDir() + "\\GeoData\\World\\countries.shp", true) { CRS = 3785 };
-            var citySource = new ShapeFile(GetAppDir() + "\\GeoData\\World\\cities.shp", true) { CRS = 3785 };
+            var countrySource = new ShapeFile(GetAppDir() + "\\GeoData\\World\\countries.shp", true) { CRS = "EPSG:3785" };
+            var citySource = new ShapeFile(GetAppDir() + "\\GeoData\\World\\cities.shp", true) { CRS = "EPSG:3785" };
 
             layers.Add(new RasterizingLayer(CreateCountryLayer(countrySource)));
             layers.Add(new RasterizingLayer(CreateCityLayer(citySource)));

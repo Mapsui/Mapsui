@@ -77,7 +77,7 @@ namespace Mapsui.Samples.Wpf
         {
             MapControl.Map.Layers.Clear();
             MapControl.Map.Transformation = new MinimalTransformation();
-            MapControl.Map.CRS = 3857;
+            MapControl.Map.CRS = "EPSG:3857";
             MapControl.Map.Layers.Add(new TileLayer(new OsmTileSource()) { LayerName = "OSM" });
             MapControl.Map.Layers.Add(PointLayerSample.CreateLayerWithDataSourceWithWGS84Point());
             LayerList.Initialize(MapControl.Map.Layers);

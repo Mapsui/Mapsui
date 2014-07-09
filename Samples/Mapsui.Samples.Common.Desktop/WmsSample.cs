@@ -21,7 +21,7 @@ namespace Mapsui.Samples.Common.Desktop
                 SpatialReferenceSystem = "EPSG:28992",
                 ContinueOnError = true,
                 TimeOut = 20000,
-                CRS = 28992
+                CRS = "EPSG:28992"
             };
 
             provider.AddLayer("ahn25m");
