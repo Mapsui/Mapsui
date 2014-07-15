@@ -71,6 +71,7 @@ namespace Mapsui.UI.Xaml
         private bool IsInBoxZoomMode { get; set; }
         public IList<ILayer> MouseInfoOverLayers { get; private set; }
         public IList<ILayer> MouseInfoUpLayers { get; private set; }
+        public event EventHandler ViewportInitialized;
 
         public bool ZoomToBoxMode { get; set; }
         public IViewport Viewport { get { return Map.Viewport; } }
@@ -579,6 +580,14 @@ namespace Mapsui.UI.Xaml
             Map.Viewport.RenderResolutionMultiplier = 1.0;
 
             _viewportInitialized = true;
+
+            OnViewportInitialize();
+        }
+
+        private void OnViewportInitialize()
+        {
+            var handler = ViewportInitialized;
+            if (handler != null) ViewportInitialized(this, EventArgs.Empty);
         }
 
         private void CompositionTargetRendering(object sender, EventArgs e)
