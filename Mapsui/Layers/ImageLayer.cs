@@ -39,11 +39,22 @@ namespace Mapsui.Layers
         protected double NewResolution;
         protected BoundingBox NewExtent;
         protected List<FeatureSets> Sets = new List<FeatureSets>();
-        protected Timer StartFetchTimer; 
+        protected Timer StartFetchTimer;
+        private IProvider _dataSource;
         public int NumberOfFeaturesReturned { get; set; }
 
 
-        public IProvider DataSource { get; set; }
+        public IProvider DataSource
+        {
+            get { return _dataSource; }
+            set
+            {
+                if (_dataSource == value) return;
+                _dataSource = value;
+                OnPropertyChanged("DataSource");
+                OnDataChanged(new DataChangedEventArgs());
+            }
+        }
 
         /// <summary>
         /// Returns the extent of the layer
