@@ -35,8 +35,20 @@ namespace Mapsui.Layers
         protected BoundingBox NewExtent;
         protected IEnumerable<IFeature> Cache;
         protected Timer StartFetchTimer;
+        private IProvider _dataSource;
 
-        public IProvider DataSource { get; set; }
+        public IProvider DataSource
+        {
+            get { return _dataSource; }
+            set
+            {
+                if (_dataSource == value) return;
+                _dataSource = value;
+                OnPropertyChanged("DataSource");
+                OnPropertyChanged("Envelope");
+
+            }
+        }
         public int FetchingPostponedInMilliseconds { get; set; }
 
         /// <summary>
@@ -153,6 +165,13 @@ namespace Mapsui.Layers
         public override void ClearCache()
         {
             Cache = null;
+        }
+
+        public override bool? IsCrsSupported(string crs)
+        {
+            if (Transformation == null) return null;
+            if (DataSource == null) return null;
+            return Transformation.IsProjectionSupported(DataSource.CRS, crs);
         }
     }
 }
