@@ -642,9 +642,13 @@ namespace Mapsui.UI.Xaml
 
         private void ClearBBoxDrawing()
         {
-            _bboxRect.Margin = new Thickness(0, 0, 0, 0);
-            _bboxRect.Width = 0;
-            _bboxRect.Height = 0;
+            Dispatcher.BeginInvoke(new Action(() =>
+            {
+                _bboxRect.Margin = new Thickness(0, 0, 0, 0);
+                _bboxRect.Width = 0;
+                _bboxRect.Height = 0;
+            }));
+
         }
 
         private void MapControlKeyUp(object sender, KeyEventArgs e)
