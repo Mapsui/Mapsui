@@ -90,6 +90,13 @@ namespace Mapsui.Layers
         bool Busy { get; set; }
 
         IEnumerable<IFeature> GetFeaturesInView(BoundingBox extent, double resolution);
+
+        /// <summary>
+        /// Queries whether a layer supports projection to a certain CRS.
+        /// </summary>
+        /// <param name="crs">The crs to project to</param>
+        /// <returns>True if is does, false if it does not, null if it is unknown</returns>
+        bool? IsCrsSupported(string crs);
     }
 
     public delegate void FeedbackEventHandler(object sender, FeedbackEventArgs e);

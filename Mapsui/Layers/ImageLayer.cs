@@ -184,5 +184,12 @@ namespace Mapsui.Layers
                 cache.Features = new Features();
             }
         }
+
+        public override bool? IsCrsSupported(string crs)
+        {
+            var projectingProvider = (DataSource as IProjectingProvider);
+            if (projectingProvider == null) return (crs == CRS);
+            return projectingProvider.IsCrsSupported(crs);
+        }
     }
 }

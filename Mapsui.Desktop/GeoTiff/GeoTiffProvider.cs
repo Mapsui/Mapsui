@@ -233,6 +233,11 @@ namespace Mapsui.Providers.GeoTiff
                 Path.DirectorySeparatorChar +
                 Path.GetFileNameWithoutExtension(path);
         }
+
+        public bool? IsCrsSupported(string crs)
+        {
+            return String.Equals(crs.Trim(), CRS.Trim(), StringComparison.CurrentCultureIgnoreCase);
+        }
     }
 }
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Runtime.Serialization.Json;
@@ -13,7 +14,6 @@ namespace Mapsui.Providers.ArcGIS
     {
         ImageServiceCapabilities,
         DynamicServiceCapabilities
-
     }
 
     public class CapabilitiesHelper
@@ -120,8 +120,9 @@ namespace Mapsui.Providers.ArcGIS
                 _webRequest.EndGetResponse(result);
                 OnFinished(EventArgs.Empty);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Debug.WriteLine(ex);
                 OnFailed(EventArgs.Empty);
             }
         }

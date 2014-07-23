@@ -10,7 +10,7 @@ using Mapsui.Utilities;
 
 namespace Mapsui.Providers.ArcGIS.Dynamic
 {
-    public class ArcGISDynamicProvider : IProvider
+    public class ArcGISDynamicProvider : IProjectingProvider
     {
         private int _timeOut;
         private string _url;
@@ -59,7 +59,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
             set
             {
                 _url = value;
-                if (value[value.Length - 1].Equals('/'))
+                if (!string.IsNullOrEmpty(value) && value[value.Length - 1].Equals('/'))
                     _url = value.Remove(value.Length - 1);
             }
         }
@@ -231,6 +231,11 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
                 return "png";
 
             return "jpg";
+        }
+
+        public bool? IsCrsSupported(string crs)
+        {
+            return true; // for now assuming ArcGISServer supports all CRSes 
         }
     }
 }

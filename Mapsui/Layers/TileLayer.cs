@@ -184,5 +184,17 @@ namespace Mapsui.Layers
             UpdateMemoryCacheMinAndMax();
             return _renderFetchStrategy.GetFeatures(box, resolution, Schema, _memoryCache);
         }
+
+        public override bool? IsCrsSupported(string crs)
+        {
+            return (String.Equals(ToSimpleEpsgCode(), crs, StringComparison.CurrentCultureIgnoreCase));
+        }
+
+        private string ToSimpleEpsgCode()
+        {
+            var startEpsgCode = TileSource.Schema.Srs.IndexOf("EPSG:", StringComparison.Ordinal);
+            if (startEpsgCode < 0) return TileSource.Schema.Srs;
+            return TileSource.Schema.Srs.Substring(startEpsgCode).Replace("::", ":").Trim();
+        }
     }
 }

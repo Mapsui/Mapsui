@@ -11,7 +11,7 @@ using Mapsui.Rendering;
 
 namespace Mapsui.Providers.ArcGIS.Image
 {
-    public class ArcGISImageServiceProvider : IProvider
+    public class ArcGISImageServiceProvider : IProjectingProvider
     {
         private int _timeOut;
         private string _url;
@@ -204,5 +204,10 @@ namespace Mapsui.Providers.ArcGIS.Image
         }
 
         public bool ContinueOnError { get; set; }
+
+        public bool? IsCrsSupported(string crs)
+        {
+            return true; // for now assuming ArcGISServer supports all CRSes 
+        }
     }
 }

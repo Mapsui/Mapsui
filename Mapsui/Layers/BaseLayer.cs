@@ -232,5 +232,10 @@ namespace Mapsui.Layers
             if (layer == null) return new IStyle[0];
             return layer.Style is StyleCollection ? (layer.Style as StyleCollection).ToArray() : new[] { layer.Style };
         }
+
+        public virtual bool? IsCrsSupported(string crs)
+        {
+            return null;
+        }
     }
 }

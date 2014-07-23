@@ -40,5 +40,12 @@ namespace Mapsui.Projection
             Transform(boundingBox.AllVertices(), _fromLatLon[toCRS]);
             return boundingBox; // this method not have a return value
         }
+
+        public bool? IsProjectionSupported(string fromCRS, string toCRS)
+        {
+            if (!_toLatLon.ContainsKey(fromCRS)) return false;
+            if (!_fromLatLon.ContainsKey(toCRS)) return false;
+            return true;
+        }
     }
 }

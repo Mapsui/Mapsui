@@ -25,6 +25,7 @@ using System.Text;
 using System.Xml;
 using Mapsui.Geometries;
 using Mapsui.Rendering;
+using Mapsui.Utilities.Indexing;
 using Mapsui.Web.Wms;
 using System.Globalization;
 using System.Collections.Generic;
@@ -40,7 +41,7 @@ namespace Mapsui.Providers.Wms
     /// and the WmsLayer will set the remaining BoundingBox property and proper requests that changes between the requests.
     /// See the example below.
     /// </remarks>
-    public class WmsProvider : IProvider
+    public class WmsProvider : IProjectingProvider
     {
         private string _mimeType = "";
         private readonly Client _wmsClient;
@@ -464,6 +465,12 @@ namespace Mapsui.Providers.Wms
             }
 
             return null;
+        }
+
+        public bool? IsCrsSupported(string crs)
+        {
+            if (_wmsClient == null) return null;
+            return _wmsClient.Layer.CRS.FirstOrDefault(item => String.Equals(item.Trim(), crs.Trim(), StringComparison.CurrentCultureIgnoreCase)) != null;
         }
 
         #region IDisposable Members
