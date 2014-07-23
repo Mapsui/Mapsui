@@ -18,8 +18,7 @@ namespace Mapsui.Providers.Wfs.Utilities
     /// </summary>
     internal class PathNode : IPathNode
     {
-        #region Fields and Properties
-
+        
         private readonly string _xmlElementNodeName;
         private readonly string _xmlElementNsUri;
         private bool _isActive = true;
@@ -40,10 +39,8 @@ namespace Mapsui.Providers.Wfs.Utilities
             get { return _xmlElementNodeName; }
         }
 
-        #endregion
-
-        #region Constructors
-
+        
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="PathNode"/> class.
         /// </summary>
@@ -56,10 +53,8 @@ namespace Mapsui.Providers.Wfs.Utilities
             _xmlElementNodeName = nameTable.Add(elementNodeName);
         }
 
-        #endregion
-
-        #region IPathNode Member
-
+        
+        
         /// <summary>
         /// This method evaluates, if the position of an XmlReader is at the element-node represented by the instance of this class.
         /// It compares pointers instead of literal values due to performance reasons.
@@ -89,22 +84,18 @@ namespace Mapsui.Providers.Wfs.Utilities
             set { _isActive = value; }
         }
 
-        #endregion
-    }
+            }
 
     /// <summary>
     /// This class represents a collection of path nodes that can be used alternatively.
     /// </summary>
     internal class AlternativePathNodesCollection : IPathNode
     {
-        #region Fields
-
+        
         private readonly List<IPathNode> _pathNodes = new List<IPathNode>();
 
-        #endregion
-
-        #region Constructors
-
+        
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="AlternativePathNodesCollection"/> class.
         /// </summary>
@@ -115,10 +106,8 @@ namespace Mapsui.Providers.Wfs.Utilities
             _pathNodes.AddRange(pathNodes);
         }
 
-        #endregion
-
-        #region IPathNode Member
-
+        
+        
         /// <summary>
         /// This method evaluates all inherent instances of <see cref="IPathNode"/>.
         /// </summary>
@@ -144,6 +133,5 @@ namespace Mapsui.Providers.Wfs.Utilities
             }
         }
 
-        #endregion
-    }
+            }
 }

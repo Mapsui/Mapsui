@@ -20,8 +20,7 @@ namespace Mapsui.Providers.Wfs.Utilities
 
     public class WfsFeatureTypeInfo
     {
-        #region Fields with Properties
-
+        
         private BoundingBox _boundingBox = new BoundingBox();
         private string _cs = ",";
         private string _decimalDel = ".";
@@ -149,10 +148,8 @@ namespace Mapsui.Providers.Wfs.Utilities
 
         public string LableField { get; set; } // temp solution 
 
-        #endregion
-
-        #region Constructors
-
+        
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="WfsFeatureTypeInfo"/> class.
         /// </summary>
@@ -212,12 +209,9 @@ namespace Mapsui.Providers.Wfs.Utilities
         {
         }
 
-        #endregion
-
-        #region Nested Types
-
-        #region BoundingBox
-
+        
+        
+        
         /// <summary>
         /// The bounding box defines the spatial extent of a featuretype.
         /// </summary>
@@ -229,10 +223,8 @@ namespace Mapsui.Providers.Wfs.Utilities
             public double MinLong;
         }
 
-        #endregion
-
-        #region GeometryInfo
-
+        
+        
         /// <summary>
         /// The geometry info comprises the name of the geometry attribute (e.g. 'Shape" or 'geom')
         /// and the type of the featuretype's geometry.
@@ -243,8 +235,6 @@ namespace Mapsui.Providers.Wfs.Utilities
             public string GeometryType = string.Empty;
         }
 
-        #endregion
-
-        #endregion
-    }
+        
+            }
 }

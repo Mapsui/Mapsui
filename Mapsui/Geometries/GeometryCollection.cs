@@ -63,8 +63,7 @@ namespace Mapsui.Geometries
             set { geometries = value; }
         }
 
-        #region IEnumerable<Geometry> Members
-
+        
         /// <summary>
         /// Gets an enumerator for enumerating the geometries in the GeometryCollection
         /// </summary>
@@ -84,10 +83,8 @@ namespace Mapsui.Geometries
                 yield return g;
         }
 
-        #endregion
-
-        #region IGeometryCollection Members
-
+        
+        
         /// <summary>
         /// Gets the number of geometries in the collection.
         /// </summary>
@@ -185,8 +182,7 @@ namespace Mapsui.Geometries
             throw new NotImplementedException();
         }
 
-        #endregion
-
+        
         /// <summary>
         /// Determines whether this GeometryCollection is spatially equal to the GeometryCollection 'g'
         /// </summary>

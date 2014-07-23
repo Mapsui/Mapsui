@@ -116,8 +116,7 @@ namespace Mapsui.Styles.Thematics
             MinStyle = minStyle;
         }
 
-        #region ITheme Members
-
+        
         /// <summary>
         /// Returns the style based on a numeric DataColumn, where style
         /// properties are linearly interpolated between max and min values.
@@ -249,6 +248,5 @@ namespace Mapsui.Styles.Thematics
 
             return Color.FromArgb((int)a, (int)r, (int)g, (int)b);
         }
-        #endregion
-    }
+            }
 }

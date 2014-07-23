@@ -147,8 +147,7 @@ namespace Mapsui.Data.Providers
     /// </example>
     public class ShapeFile : IProvider, IDisposable
     {
-        #region Delegates
-
+        
         /// <summary>
         /// Filter Delegate Method
         /// </summary>
@@ -162,8 +161,7 @@ namespace Mapsui.Data.Providers
         /// <returns>true if this feature should be included, false if it should be filtered</returns>
         public delegate bool FilterMethod(IFeature dr);
 
-        #endregion
-
+        
         private BoundingBox _envelope;
         private int _featureCount;
         private readonly bool _fileBasedIndex;
@@ -298,8 +296,7 @@ namespace Mapsui.Data.Providers
         /// <seealso cref="FilterMethod"/>
         public FilterMethod FilterDelegate { get; set; }
 
-        #region Disposers and finalizers
-
+        
         private bool _disposed;
 
         /// <summary>
@@ -333,10 +330,8 @@ namespace Mapsui.Data.Providers
             Dispose();
         }
 
-        #endregion
-
-        #region IProvider Members
-
+        
+        
         /// <summary>
         /// Opens the datasource
         /// </summary>
@@ -484,8 +479,7 @@ namespace Mapsui.Data.Providers
             set { _crs = value; }
         }
 
-        #endregion
-
+        
         private void InitializeShape(string filename, bool fileBasedIndex)
         {
             if (!File.Exists(filename))
@@ -892,8 +886,7 @@ namespace Mapsui.Data.Providers
             throw (new ApplicationException("An attempt was made to read DBase data from a shapefile without a valid .DBF file"));
         }
 
-        #region IProvider Members
-
+        
         public IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
         {
             lock (_syncRoot)
@@ -923,6 +916,5 @@ namespace Mapsui.Data.Providers
             }
         }
 
-        #endregion
-    }
+            }
 }

@@ -41,8 +41,7 @@ namespace Mapsui.UI.Xaml
 {
     public class MapControl : Grid
     {
-        #region Fields
-        private Map _map;
+                private Map _map;
         private Point _previousMousePosition;
         private Point _currentMousePosition;
         private Point _downMousePosition;
@@ -56,17 +55,14 @@ namespace Mapsui.UI.Xaml
         private readonly Canvas _renderCanvas = new Canvas();
         private bool _invalid;
         private readonly Rectangle _bboxRect;
-        #endregion
-
-        #region Events
-        public event EventHandler ErrorMessageChanged;
+        
+                public event EventHandler ErrorMessageChanged;
         public event EventHandler<ViewChangedEventArgs> ViewChanged;
         public event EventHandler<MouseInfoEventArgs> MouseInfoOver;
         public event EventHandler MouseInfoLeave;
         public event EventHandler<MouseInfoEventArgs> MouseInfoUp;
         public event EventHandler<FeatureInfoEventArgs> FeatureInfo;
-        #endregion
-
+        
         public IRenderer Renderer { get; set; }
         private bool IsInBoxZoomMode { get; set; }
         public IList<ILayer> MouseInfoOverLayers { get; private set; }
@@ -196,8 +192,7 @@ namespace Mapsui.UI.Xaml
 #endif
         }
 
-        #region Public methods
-
+        
         public void OnViewChanged()
         {
             OnViewChanged(false);
@@ -258,10 +253,8 @@ namespace Mapsui.UI.Xaml
             ZoomMiddle();
         }
 
-        #endregion
-
-        #region Protected and private methods
-
+        
+        
         protected void OnErrorMessageChanged(EventArgs e)
         {
             if (ErrorMessageChanged != null)
@@ -615,10 +608,8 @@ namespace Mapsui.UI.Xaml
         }
 #endif
 
-        #endregion
-
-        #region Bbox zoom
-
+        
+        
         public void ZoomToBox(Geometries.Point beginPoint, Geometries.Point endPoint)
         {
             double x, y, resolution;
@@ -696,8 +687,7 @@ namespace Mapsui.UI.Xaml
             }
         }
 
-        #endregion
-
+        
         public void ZoomToFullEnvelope()
         {
             if (Map.Envelope == null) return;
@@ -706,8 +696,7 @@ namespace Mapsui.UI.Xaml
             Map.Viewport.Center = Map.Envelope.GetCentroid();
         }
 
-        #region WPF4 Touch Support
-
+        
 #if (!SILVERLIGHT && !WINDOWS_PHONE)
 
         private static void OnManipulationInertiaStarting(object sender, ManipulationInertiaStartingEventArgs e)
@@ -745,8 +734,7 @@ namespace Mapsui.UI.Xaml
             Refresh();
         }
 
-        #endregion
-    }
+            }
 
     public class ViewChangedEventArgs : EventArgs
     {

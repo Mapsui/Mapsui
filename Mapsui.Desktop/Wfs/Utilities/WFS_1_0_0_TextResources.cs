@@ -10,8 +10,7 @@ namespace Mapsui.Providers.Wfs.Utilities
 {
     public class WFS_1_0_0_TextResources : WFS_1_0_0_XPathTextResources, IWFS_TextResources
     {
-        #region Public Member
-
+        
         ////////////////////////////////////////////////////////////////////////
         // HTTP Configuration                                                 //                      
         // POST & GET                                                         //
@@ -34,10 +33,8 @@ namespace Mapsui.Providers.Wfs.Utilities
             return "?SERVICE=WFS&Version=1.0.0&REQUEST=DescribeFeatureType&TYPENAME=" + featureTypeName;
         }
 
-        #endregion
-
-        #region IWFS_TextResources Member
-
+        
+        
         /// <summary>
         /// This method returns the query string for 'GetFeature'.
         /// </summary>
@@ -132,6 +129,5 @@ namespace Mapsui.Providers.Wfs.Utilities
             }
         }
 
-        #endregion
-    }
+            }
 }

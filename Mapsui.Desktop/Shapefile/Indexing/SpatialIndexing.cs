@@ -140,8 +140,7 @@ namespace Mapsui.Utilities.SpatialIndexing
         {
         }
 
-        #region Read/Write index to/from a file
-
+        
         private const double INDEXFILEVERSION = 1.0;
 
         /// <summary>
@@ -256,8 +255,7 @@ namespace Mapsui.Utilities.SpatialIndexing
             }
         }
 
-        #endregion
-
+        
         /// <summary>
         /// Determines whether the node is a leaf (if data is stored at the node, we assume the node is a leaf)
         /// </summary>
@@ -310,8 +308,7 @@ namespace Mapsui.Utilities.SpatialIndexing
             get { return _Depth; }
         }
 
-        #region IDisposable Members
-
+        
         /// <summary>
         /// Disposes the node
         /// </summary>
@@ -323,8 +320,7 @@ namespace Mapsui.Utilities.SpatialIndexing
             _objList = null;
         }
 
-        #endregion
-
+        
         /// <summary>
         /// Calculate the floating point error metric 
         /// </summary>
@@ -379,8 +375,7 @@ namespace Mapsui.Utilities.SpatialIndexing
             }
         }
 
-        #region Nested type: BoxObjects
-
+        
         /// <summary>
         /// BoundingBox and Feature ID structure used for storing in the quadtree 
         /// </summary>
@@ -397,6 +392,5 @@ namespace Mapsui.Utilities.SpatialIndexing
             public uint ID;
         }
 
-        #endregion
-    }
+            }
 }

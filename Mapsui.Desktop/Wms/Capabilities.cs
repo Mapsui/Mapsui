@@ -339,8 +339,7 @@ namespace Mapsui.Web.Wms
         {
         }
 
-        #region Nested type: WmsContactInformation
-
+        
         /// <summary>
         /// Stores contact metadata about WMS service
         /// </summary>
@@ -376,8 +375,7 @@ namespace Mapsui.Web.Wms
             /// </summary>
             public string VoiceTelephone;
 
-            #region Nested type: ContactAddress
-
+            
             /// <summary>
             /// Information about a contact address for the service.
             /// </summary>
@@ -414,10 +412,8 @@ namespace Mapsui.Web.Wms
                 public string StateOrProvince;
             }
 
-            #endregion
-
-            #region Nested type: ContactPerson
-
+            
+            
             /// <summary>
             /// Information about a contact person for the service.
             /// </summary>
@@ -434,13 +430,10 @@ namespace Mapsui.Web.Wms
                 public string Person;
             }
 
-            #endregion
-        }
+                    }
 
-        #endregion
-
-        #region Nested type: WmsServiceDescription
-
+        
+        
         /// <summary>
         /// The Wms Service Description stores metadata parameters for a WMS service
         /// </summary>
@@ -522,6 +515,5 @@ namespace Mapsui.Web.Wms
             }
         }
 
-        #endregion
-    }
+            }
 }

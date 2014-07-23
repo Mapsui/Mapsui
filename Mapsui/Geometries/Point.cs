@@ -144,8 +144,7 @@ namespace Mapsui.Geometries
             get { return 2; }
         }
 
-        #region IComparable<Point> Members
-
+        
         /// <summary>
         /// Comparator used for ordering point first by ascending X, then by ascending Y.
         /// </summary>
@@ -163,8 +162,7 @@ namespace Mapsui.Geometries
                 return 0;
         }
 
-        #endregion
-
+        
         /// <summary>
         /// exports a point into a 2-dimensional double array
         /// </summary>
@@ -210,8 +208,7 @@ namespace Mapsui.Geometries
             return new Point(X, Y);
         }
 
-        #region Operators
-
+        
         /// <summary>
         /// Vector + Vector
         /// </summary>
@@ -246,10 +243,8 @@ namespace Mapsui.Geometries
             return new Point(m.X*d, m.Y*d);
         }
 
-        #endregion
-
-        #region "Inherited methods from abstract class Geometry"
-
+        
+        
         /// <summary>
         ///  The inherent dimension of this Geometry object, which must be less than or equal to the coordinate dimension.
         /// </summary>
@@ -383,6 +378,5 @@ namespace Mapsui.Geometries
             return false;
         }
 
-        #endregion
-    }
+            }
 }

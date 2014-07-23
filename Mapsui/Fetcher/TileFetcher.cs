@@ -30,8 +30,7 @@ namespace Mapsui.Fetcher
 {
     class TileFetcher : INotifyPropertyChanged
     {
-        #region Fields
-
+        
         private readonly MemoryCache<Feature> _memoryCache;
         private readonly ITileSource _tileSource;
         private BoundingBox _extent;
@@ -51,8 +50,7 @@ namespace Mapsui.Fetcher
         private bool _busy;
         private int _numberTilesNeeded;
         
-        #endregion
-        
+                
         public event DataChangedEventHandler DataChanged;
 
         public TileFetcher(ITileSource tileSource, MemoryCache<Feature> memoryCache, int maxRetries = DefaultMaxRetries, int maxThreads = DefaultMaxThreads, IFetchStrategy strategy = null)
@@ -83,8 +81,7 @@ namespace Mapsui.Fetcher
             get { return _numberTilesNeeded; }
         }
 
-        #region Public Methods
-
+        
         public void ViewChanged(BoundingBox newExtent, double newResolution)
         {
             _extent = newExtent;
@@ -106,10 +103,8 @@ namespace Mapsui.Fetcher
             _waitHandle.Set();
         }
 
-        #endregion
-
-        #region Private Methods
-
+        
+        
         private void TileFetchLoop(object state)
         {
             try
@@ -226,8 +221,7 @@ namespace Mapsui.Fetcher
                 DataChanged(this, new DataChangedEventArgs(e.Error, e.Cancelled, e.TileInfo));
         }
 
-        #endregion
-
+        
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]

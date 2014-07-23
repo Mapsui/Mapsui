@@ -22,8 +22,7 @@ namespace Mapsui.Samples.WinForms
       base.Dispose(disposing);
     }
 
-    #region Windows Form Designer generated code
-
+    
     /// <summary>
     /// Required method for Designer support - do not modify
     /// the contents of this method with the code editor.
@@ -88,8 +87,7 @@ namespace Mapsui.Samples.WinForms
 
     }
 
-    #endregion
-
+    
     private System.Windows.Forms.Button button1;
     private System.Windows.Forms.Button button2;
     private MapControl mapControl1;

@@ -473,15 +473,13 @@ namespace Mapsui.Providers.Wms
             return _wmsClient.Layer.CRS.FirstOrDefault(item => String.Equals(item.Trim(), crs.Trim(), StringComparison.CurrentCultureIgnoreCase)) != null;
         }
 
-        #region IDisposable Members
-
+        
         public void Dispose()
         {
             //nothing to dispose
         }
 
-        #endregion
-
+        
         public IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
         {
             var features = new Features();

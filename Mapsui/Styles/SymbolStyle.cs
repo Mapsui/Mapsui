@@ -67,8 +67,7 @@ namespace Mapsui.Styles
 
         public const double DefaultHeight = 32;
 
-        #region Equals operator
-
+        
         public override bool Equals(object obj)
         {
             if (!(obj is SymbolStyle))
@@ -151,6 +150,5 @@ namespace Mapsui.Styles
             return !Equals(symbolStyle1, symbolStyle2);
         }
 
-        #endregion
-    }
+            }
 }

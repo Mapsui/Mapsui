@@ -35,11 +35,9 @@
  *
  */
 
-#region Using
 
 
 
-#endregion
 
 namespace Mapsui.Converters.WellKnownText
 {

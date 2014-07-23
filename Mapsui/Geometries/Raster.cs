@@ -21,8 +21,7 @@ namespace Mapsui.Geometries
             return _boundingBox;
         }
 
-        #region IGeometry Members
-
+        
         public int Dimension
         {
             get { return 2; }
@@ -108,6 +107,5 @@ namespace Mapsui.Geometries
             throw new NotImplementedException();
         }
         
-        #endregion
-    }
+            }
 }

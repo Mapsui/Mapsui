@@ -32,8 +32,7 @@ namespace Mapsui.Providers.Wfs
     /// </summary>
     public class WFSProvider : IProvider
     {
-        #region Enumerations
-
+        
         /// <summary>
         /// This enumeration consists of expressions denoting WFS versions.
         /// </summary>
@@ -43,10 +42,8 @@ namespace Mapsui.Providers.Wfs
             WFS_1_1_0
         } 
 
-        #endregion
-
-        #region Fields
-        private readonly GeometryTypeEnum _geometryType = GeometryTypeEnum.Unknown;
+        
+                private readonly GeometryTypeEnum _geometryType = GeometryTypeEnum.Unknown;
         private readonly string _getCapabilitiesUri;
         private readonly HttpClientUtil _httpClientUtil = new HttpClientUtil();
         private readonly IWFS_TextResources _textResources;
@@ -65,10 +62,8 @@ namespace Mapsui.Providers.Wfs
         // The type of geometry can be specified in case of unprecise information (e.g. 'GeometryAssociationType').
         // It helps to accelerate the rendering process significantly.
 
-        #endregion
-
-        #region Properties
-
+        
+        
         /// <summary>
         /// This cache (obtained from an already instantiated dataprovider that retrieves a featuretype hosted by the same service) 
         /// helps to speed up gathering metadata. It caches the 'GetCapabilities' response. 
@@ -140,10 +135,8 @@ namespace Mapsui.Providers.Wfs
             set { _label = value; }
         }
 
-        #endregion
-
-        #region Constructors
-
+        
+        
         /// <summary>
         /// Use this constructor for initializing this dataprovider with all necessary
         /// parameters to gather metadata from 'GetCapabilities' contract.
@@ -271,10 +264,8 @@ namespace Mapsui.Providers.Wfs
         {
         }
 
-        #endregion
-
-        #region IProvider Member
-
+        
+        
         public Features ExecuteIntersectionQuery(BoundingBox bbox)
         {
             if (_featureTypeInfo == null) return null;
@@ -402,10 +393,8 @@ namespace Mapsui.Providers.Wfs
             set { _featureTypeInfo.SRID = value.Substring(ProjectionHelper.EpsgPrefix.Length); }
         }
 
-        #endregion
-
-        #region IDisposable Member
-
+        
+        
         public void Dispose()
         {
             Dispose(true);
@@ -422,10 +411,8 @@ namespace Mapsui.Providers.Wfs
             _disposed = true;
         }
 
-        #endregion
-
-        #region Private Member
-
+        
+        
         /// <summary>
         /// This method gets metadata about the featuretype to query from 'GetCapabilities' and 'DescribeFeatureType'.
         /// </summary>
@@ -745,26 +732,20 @@ namespace Mapsui.Providers.Wfs
                 _featureType = featureType;
         }
 
-        #endregion
-
-        #region Nested Types
-
-        #region WFSClientHTTPConfigurator
-
+        
+        
+        
         /// <summary>
         /// This class configures a <see cref="HttpClientUtil"/> class 
         /// for requests to a Web Feature Service.
         /// </summary>
         private class WFSClientHttpConfigurator
         {
-            #region Fields
-
+            
             private readonly IWFS_TextResources _wfsTextResources;
 
-            #endregion
-
-            #region Constructors
-
+            
+            
             /// <summary>
             /// Initializes a new instance of the <see cref="WFSClientHttpConfigurator"/> class.
             /// An instance of this class can be used to configure a <see cref="HttpClientUtil"/> object.
@@ -778,10 +759,8 @@ namespace Mapsui.Providers.Wfs
                 _wfsTextResources = wfsTextResources;
             }
 
-            #endregion
-
-            #region Internal Member
-
+            
+            
             /// <summary>
             /// Configures for WFS 'GetCapabilities' request using an instance implementing <see cref="IWFS_TextResources"/>.
             /// The <see cref="HttpClientUtil"/> instance is returned for immediate usage. 
@@ -834,20 +813,15 @@ namespace Mapsui.Providers.Wfs
                 return httpClientUtil;
             }
 
-            #endregion
-        }
+                    }
 
-        #endregion
-
-        #endregion
-
-        #region IProvider Members
-
+        
+        
+        
         public IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
         {
             return ExecuteIntersectionQuery(box);
         }
                 
-        #endregion
-    }
+            }
 }

@@ -8,8 +8,7 @@ namespace Mapsui.Providers.Wfs.Utilities
     /// </summary>
     public class WFS_1_0_0_XPathTextResources : WFS_XPathTextResourcesBase
     {
-        #region Fields and Properties
-
+        
         ////////////////////////////////////////////////////////////////////////
         // XPath                                                              //                      
         // GetCapabilities WFS 1.0.0                                          //
@@ -84,10 +83,7 @@ namespace Mapsui.Providers.Wfs.Utilities
             get { return "@maxy"; }
         }
 
-        #endregion
-
-        #region Constructors
-
-        #endregion
-    }
+        
+        
+            }
 }

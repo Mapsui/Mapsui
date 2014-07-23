@@ -26,8 +26,7 @@ namespace Mapsui.UI.WinForms
 {
     public class MapControl : Control
     {
-        #region Fields
-
+        
         private Map _map;
         private string _errorMessage;
         private Bitmap _buffer;
@@ -39,12 +38,10 @@ namespace Mapsui.UI.WinForms
         private bool _viewInitialized;
         private readonly GdiMapRenderer _renderer = new GdiMapRenderer();
 
-        #endregion
-
+        
         public event EventHandler ErrorMessageChanged;
 
-        #region Properties
-
+        
         public IViewport Transform
         {
             get { return _map.Viewport; }
@@ -81,8 +78,7 @@ namespace Mapsui.UI.WinForms
             BeginInvoke((Action) (() => DataChanged(sender, e)));
         }
         
-        #endregion
-
+        
         public MapControl()
         {
             Map = new Map();

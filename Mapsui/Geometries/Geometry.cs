@@ -33,8 +33,7 @@ namespace Mapsui.Geometries
     /// </remarks>
     public abstract class Geometry : IGeometry, IEquatable<Geometry>
     {
-        #region IGeometry Members
-
+        
         // The following are methods that should be implemented on a geometry object according to
         // the OpenGIS Simple Features Specification
 
@@ -46,10 +45,8 @@ namespace Mapsui.Geometries
             return SpatialRelations.Equals(this, other);
         }
 
-        #endregion
-
-        #region "Basic Methods on Geometry"
-
+        
+        
         /// <summary>
         ///  The inherent dimension of this <see cref="Geometry"/> object, which must be less than or equal
         ///  to the coordinate dimension.
@@ -142,10 +139,8 @@ namespace Mapsui.Geometries
             return GeometryFromWKB.Parse(WKB);
         }
 
-        #endregion
-
-        #region "Methods for testing Spatial Relations between geometric objects"
-
+        
+        
         /// <summary>
         /// Returns 'true' if this Geometry is ‘spatially disjoint’ from another <see cref="Geometry"/>.
         /// </summary>
@@ -216,10 +211,8 @@ namespace Mapsui.Geometries
             throw new NotImplementedException();
         }
 
-        #endregion
-
-        #region "Methods that support Spatial Analysis"
-
+        
+        
         /// <summary>
         /// Returns the shortest distance between any two points in the two geometries
         /// as calculated in the spatial reference system of this Geometry.
@@ -232,8 +225,7 @@ namespace Mapsui.Geometries
         /// </summary>
         public abstract Geometry Intersection(Geometry geom);
 
-        #endregion
-
+        
         /// <summary>
         /// This method must be overridden using 'public new [derived_data_type] Clone()'
         /// </summary>

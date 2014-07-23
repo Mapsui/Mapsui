@@ -105,8 +105,7 @@ namespace Mapsui.Styles.Thematics
         //}
 
 
-        #region Predefined color scales
-
+        
         /// <summary>
         /// Gets a linear gradient scale with seven colours making a rainbow from red to violet.
         /// </summary>
@@ -234,10 +233,8 @@ namespace Mapsui.Styles.Thematics
 			}
 		}
 
-		#endregion
-
-		#region Constructor helpers
-
+		
+		
 		/// <summary>
 		/// Creates a linear gradient scale from two colors
 		/// </summary>
@@ -257,6 +254,5 @@ namespace Mapsui.Styles.Thematics
 			return new ColorBlend(new[] { fromColor, middleColor, toColor }, new[] { 0, 0.5, 1 });
 		}
 
-		#endregion
-	}
+			}
 }

@@ -18,8 +18,7 @@ namespace Mapsui.Providers.ArcGIS
 
     public class CapabilitiesHelper
     {
-        #region fields
-
+        
         private HttpWebRequest _webRequest { get; set; }
         private IArcGISCapabilities _arcGisCapabilities { get; set; }
         private CapabilitiesType _capabilitiesType;
@@ -37,8 +36,7 @@ namespace Mapsui.Providers.ArcGIS
         /// </summary>
         public event StatusEventHandler CapabilitiesFailed;
 
-        #endregion
-
+        
         /// <summary>
         /// Helper class for getting capabilities of an ArcGIS service + extras
         /// </summary>

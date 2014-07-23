@@ -24,8 +24,7 @@ namespace Mapsui.Rendering
     /// </summary>
     public static class LabelCollisionDetection
     {
-        #region Delegates
-
+        
         /// <summary>
         /// Delegate method for filtering labels. Useful for performing custom collision detection on labels
         /// </summary>
@@ -33,10 +32,8 @@ namespace Mapsui.Rendering
         /// <returns></returns>
         public delegate void LabelFilterMethod(List<Label> labels);
 
-        #endregion
-
-        #region Label filter methods
-
+        
+        
         /// <summary>
         /// Simple and fast label collision detection.
         /// </summary>
@@ -89,6 +86,5 @@ namespace Mapsui.Rendering
             }
         }
 
-        #endregion
-    }
+            }
 }

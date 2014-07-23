@@ -19,8 +19,7 @@ namespace Mapsui.Styles
 
         public Color Color { get; set; }
 
-        #region Equals operator
-
+        
         public override bool Equals(object obj)
         {
             if (!(obj is Brush))
@@ -59,7 +58,6 @@ namespace Mapsui.Styles
             return !Equals(brush1, brush2);
         }
 
-        #endregion
-
+        
     }
 }

@@ -23,8 +23,7 @@
         /// </summary>
         public Brush Fill { get; set; }
 
-        #region Equals operator
-
+        
         public override bool Equals(object obj)
         {
             if (!(obj is VectorStyle))
@@ -92,7 +91,6 @@
             return !Equals(vectorStyle1, vectorStyle2);
         }
 
-        #endregion
-
+        
     }
 }

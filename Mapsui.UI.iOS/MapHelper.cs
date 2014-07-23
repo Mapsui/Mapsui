@@ -62,8 +62,7 @@ namespace Mapsui.UI.iOS
             if (handler != null) handler(touches, evt);
         }
 
-        #region ScreenToWorld (From screen to map)
-
+        
         public static Point ConvertScreenToWorld(double x, double y)
         {
             // Log4netLogger.DebugFormat("Convert screen point {0}, {1} to map coördinates", x, y);
@@ -102,10 +101,8 @@ namespace Mapsui.UI.iOS
             return new Polygon(linearRing);
         }
 
-        #endregion
-
-        #region WorldToScreen (From map to screen)
-
+        
+        
         public static Point ConvertWorldToScreen(double x, double y)
         {
             Point convertedPoint = null;
@@ -127,8 +124,7 @@ namespace Mapsui.UI.iOS
             return ConvertWorldToScreen(iOSPoint.X, iOSPoint.Y);
         }
 
-        #endregion
-
+        
         public static void RefreshMap()
         {
             if (CurrentMapControl != null)

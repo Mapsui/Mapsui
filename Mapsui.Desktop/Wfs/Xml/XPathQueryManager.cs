@@ -18,17 +18,14 @@ namespace Mapsui.Providers.Wfs.Xml
     /// </summary>
     public class XPathQueryManager : IXPathQueryManager
     {
-        #region Fields
-
+        
         private CustomQueryContext _paramContext;
         private XPathNodeIterator _xIter;
         private XPathNavigator _xNav;
         private XPathDocument _xPathDoc;
 
-        #endregion
-
-        #region Constructors
-
+        
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="XPathQueryManager"/> class.
         /// </summary>
@@ -109,10 +106,8 @@ namespace Mapsui.Providers.Wfs.Xml
             InitializeCustomContext(paramContext);
         }
 
-        #endregion
-
-        #region IXPathQueryManager Member
-
+        
+        
         /// <summary>
         /// This method adds a namespace for XPath queries.
         /// </summary>
@@ -278,10 +273,8 @@ namespace Mapsui.Providers.Wfs.Xml
             }
         }
 
-        #endregion
-
-        #region Private Member
-
+        
+        
         /// <summary>
         /// Sets a new XML document.
         /// </summary>
@@ -341,26 +334,20 @@ namespace Mapsui.Providers.Wfs.Xml
             _paramContext.AddNamespace(namespaces);
         }
 
-        #endregion
-
-        #region Nested Types
-
-        #region CustomQueryContext
-
+        
+        
+        
         /// <summary>
         /// This class represents a custom context for XPath queries.
         /// It is derived from XsltContext.
         /// </summary>
         public class CustomQueryContext : XsltContext
         {
-            #region Fields
-
+            
             private readonly XsltArgumentList _argumentList = new XsltArgumentList();
 
-            #endregion
-
-            #region Constructors
-
+            
+            
             /// <summary>
             /// Initializes a new instance of the <see cref="CustomQueryContext"/> class.
             /// </summary>
@@ -377,10 +364,8 @@ namespace Mapsui.Providers.Wfs.Xml
             {
             }
 
-            #endregion
-
-            #region Public Member
-
+            
+            
             /// <summary>
             /// Method from XsltContext.
             /// </summary>
@@ -490,29 +475,23 @@ namespace Mapsui.Providers.Wfs.Xml
                 _argumentList.Clear();
             }
 
-            #endregion
-        }
+                    }
 
-        #endregion
-
-        #region ParamBase
-
+        
+        
         /// <summary>
         /// This class is the base class of <see cref="ParamCompare"/> and <see cref="ParamCompareWithTargetNs"/>.
         /// </summary>
         public abstract class ParamBase
         {
-            #region Fields
-
+            
             private readonly XPathResultType[] _argTypes;
             private readonly int _maxArgs;
             private readonly int _minArgs;
             private readonly XPathResultType _returnType;
 
-            #endregion
-
-            #region Properties
-
+            
+            
             /// <summary>
             /// Gets the argument types.
             /// </summary>
@@ -545,10 +524,8 @@ namespace Mapsui.Providers.Wfs.Xml
                 get { return _maxArgs; }
             }
 
-            #endregion
-
-            #region Constructors
-
+            
+            
             /// <summary>
             /// Protected constructor for the abstract class.
             /// </summary>
@@ -565,29 +542,23 @@ namespace Mapsui.Providers.Wfs.Xml
                 _maxArgs = maxArgs;
             }
 
-            #endregion
-        }
+                    }
 
-        #endregion
-
-        #region ParamCompare
-
+        
+        
         /// <summary>
         /// This class performs a string comparison in an XPath expression.
         /// </summary>
         public class ParamCompare : ParamBase, IXsltContextFunction
         {
-            #region Fields
-
+            
             /// <summary>
             /// The name to use when embedding the function in an XPath expression.
             /// </summary>
             public static readonly string FunctionName = "_PARAMCOMP_";
 
-            #endregion
-
-            #region Constructors
-
+            
+            
             /// <summary>
             /// Initializes a new instance of the <see cref="ParamCompare"/> class.
             /// </summary>
@@ -599,10 +570,8 @@ namespace Mapsui.Providers.Wfs.Xml
             {
             }
 
-            #endregion
-
-            #region IXsltContextFunction Member
-
+            
+            
             /// <summary>
             /// This method performs a string comparison.
             /// </summary>
@@ -616,10 +585,8 @@ namespace Mapsui.Providers.Wfs.Xml
                     resolveNsPrefix(ResolveArgument(args[1]), xsltContext), StringComparison.Ordinal);
             }
 
-            #endregion
-
-            #region Protected Member
-
+            
+            
             /// <summary>
             /// This method creates a string from an object argument.
             /// In many cases the argument is an XPathNodeIterator that must be resolved.
@@ -638,10 +605,8 @@ namespace Mapsui.Providers.Wfs.Xml
                 return string.Empty;
             }
 
-            #endregion
-
-            #region Private Member
-
+            
+            
             /// <summary>
             /// This method resolves the prefix of an argument.
             /// If a prefix is found, the corresponding namespace URI is looked up 
@@ -661,30 +626,24 @@ namespace Mapsui.Providers.Wfs.Xml
                 return args;
             }
 
-            #endregion
-        }
+                    }
 
-        #endregion
-
-        #region ParamCompareWithTargetNs
-
+        
+        
         /// <summary>
         /// This class performs a string comparison in an XPath expression.
         /// It is specifically created for using in XML schema documents.
         /// </summary>
         public class ParamCompareWithTargetNs : ParamCompare
         {
-            #region Fields
-
+            
             /// <summary>
             /// The name to use when embedding the function in an XPath expression.
             /// </summary>
             public new static readonly string FunctionName = "_PARAMCOMPWITHTARGETNS_";
 
-            #endregion
-
-            #region Constructors
-
+            
+            
             /// <summary>
             /// Initializes a new instance of the <see cref="ParamCompareWithTargetNs"/> class.
             /// </summary>
@@ -696,10 +655,8 @@ namespace Mapsui.Providers.Wfs.Xml
             {
             }
 
-            #endregion
-
-            #region IXsltContextFunction Member
-
+            
+            
             /// <summary>
             /// This method performs a string comparison.
             /// </summary>
@@ -713,10 +670,8 @@ namespace Mapsui.Providers.Wfs.Xml
                     resolveNsPrefix(ResolveArgument(args[0]), (string) args[1], docContext), StringComparison.Ordinal);
             }
 
-            #endregion
-
-            #region Private Member
-
+            
+            
             /// <summary>
             /// This method resolves the prefix of an argument.
             /// If a prefix is found, the corresponding namespace URI (if existing) is looked up 
@@ -738,26 +693,20 @@ namespace Mapsui.Providers.Wfs.Xml
                 return targetNs + args;
             }
 
-            #endregion
-        }
+                    }
 
-        #endregion
-
-        #region ParamFunctionVar
-
+        
+        
         /// <summary>
         /// This class represents a variable in an XPath expression.
         /// </summary>
         public class ParamFunctionVar : IXsltContextVariable
         {
-            #region Fields
-
+            
             private readonly object _param;
 
-            #endregion
-
-            #region Constructors
-
+            
+            
             /// <summary>
             /// Initializes a new instance of the <see cref="ParamFunctionVar"/> class.
             /// </summary>
@@ -767,10 +716,8 @@ namespace Mapsui.Providers.Wfs.Xml
                 _param = param;
             }
 
-            #endregion
-
-            #region IXsltContextVariable Member
-
+            
+            
             /// <summary>
             /// Method implementing IXsltContextVariable
             /// </summary>
@@ -803,11 +750,8 @@ namespace Mapsui.Providers.Wfs.Xml
                 get { return XPathResultType.Any; }
             }
 
-            #endregion
-        }
+                    }
 
-        #endregion
-
-        #endregion
-    }
+        
+            }
 }

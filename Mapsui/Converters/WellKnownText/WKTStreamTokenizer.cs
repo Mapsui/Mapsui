@@ -35,13 +35,11 @@
  *
  */
 
-#region Using
 
 using System;
 using System.IO;
 using System.Globalization;
 
-#endregion
 
 namespace Mapsui.Converters.WellKnownText
 {
@@ -50,8 +48,7 @@ namespace Mapsui.Converters.WellKnownText
     /// </summary>
     internal class WktStreamTokenizer : StreamTokenizer
     {
-        #region Constructors
-
+        
         /// <summary>
         /// Initializes a new instance of the WktStreamTokenizer class.
         /// </summary>
@@ -65,10 +62,8 @@ namespace Mapsui.Converters.WellKnownText
             }
         }
 
-        #endregion
-
-        #region Methods
-
+        
+        
         /// <summary>
         /// Reads a token and checks it is what is expected.
         /// </summary>
@@ -121,6 +116,5 @@ namespace Mapsui.Converters.WellKnownText
             ReadToken("]");
         }
 
-        #endregion
-    }
+            }
 }

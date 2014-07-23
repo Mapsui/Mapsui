@@ -17,8 +17,7 @@ namespace Mapsui.Providers.Wfs.Utilities
     /// </summary>
     internal abstract class GeometryFactory : IDisposable
     {
-        #region Fields
-
+        
         protected const string Gmlns = "http://www.opengis.net/gml";
         private readonly NumberFormatInfo _formatInfo = new NumberFormatInfo();
         private readonly HttpClientUtil _httpClientUtil;
@@ -35,10 +34,8 @@ namespace Mapsui.Providers.Wfs.Utilities
         private string _ts;
         protected XmlReader XmlReader;
 
-        #endregion
-
-        #region Constructors
-
+        
+        
         /// <summary>
         /// Protected constructor for the abstract class.
         /// </summary>
@@ -81,20 +78,16 @@ namespace Mapsui.Providers.Wfs.Utilities
             InitializeSeparators();
         }
 
-        #endregion
-
-        #region Internal Member
-
+        
+        
         /// <summary>
         /// Abstract method - overwritten by derived classes for producing instances
         /// derived from <see cref="Mapsui.Geometries.Geometry"/>.
         /// </summary>
         internal abstract Collection<Geometry> CreateGeometries(Features features);
         
-        #endregion
-
-        #region Protected Member
-
+        
+        
         /// <summary>
         /// This method parses a coordinates or posList(from 'GetFeature' response). 
         /// </summary>
@@ -191,10 +184,8 @@ namespace Mapsui.Providers.Wfs.Utilities
             return feature;
         }
 
-        #endregion
-
-        #region Private Member
-
+        
+        
         /// <summary>
         /// This method initializes the XmlReader member.
         /// </summary>
@@ -249,10 +240,8 @@ namespace Mapsui.Providers.Wfs.Utilities
             _formatInfo.NumberDecimalSeparator = decimalDel;
         }
 
-        #endregion
-
-        #region IDisposable Member
-
+        
+        
         /// <summary>
         /// This method closes the XmlReader member and the used <see cref="HttpClientUtil"/> instance.
         /// </summary>
@@ -264,8 +253,7 @@ namespace Mapsui.Providers.Wfs.Utilities
                 _httpClientUtil.Close();
         }
 
-        #endregion
-    }
+            }
 
     /// <summary>
     /// This class produces instances of type <see cref="Mapsui.Geometries.Point"/>.
@@ -273,8 +261,7 @@ namespace Mapsui.Providers.Wfs.Utilities
     /// </summary>
     internal class PointFactory : GeometryFactory
     {
-        #region Constructors
-
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="PointFactory"/> class.
         /// </summary>
@@ -297,10 +284,8 @@ namespace Mapsui.Providers.Wfs.Utilities
             FeatureNode.IsActive = false;
         }
 
-        #endregion
-
-        #region Internal Member
-
+        
+        
         /// <summary>
         /// This method produces instances of type <see cref="Mapsui.Geometries.Point"/>.
         /// </summary>
@@ -334,8 +319,7 @@ namespace Mapsui.Providers.Wfs.Utilities
             return Geoms;
         }
 
-        #endregion
-    }
+            }
 
     /// <summary>
     /// This class produces instances of type <see cref="Mapsui.Geometries.LineString"/>.
@@ -343,8 +327,7 @@ namespace Mapsui.Providers.Wfs.Utilities
     /// </summary>
     internal class LineStringFactory : GeometryFactory
     {
-        #region Constructors
-
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="LineStringFactory"/> class.
         /// </summary>
@@ -367,10 +350,8 @@ namespace Mapsui.Providers.Wfs.Utilities
             FeatureNode.IsActive = false;
         }
 
-        #endregion
-
-        #region Internal Member
-
+        
+        
         /// <summary>
         /// This method produces instances of type <see cref="Mapsui.Geometries.LineString"/>.
         /// </summary>
@@ -406,8 +387,7 @@ namespace Mapsui.Providers.Wfs.Utilities
             return Geoms;
         }
 
-        #endregion
-    }
+            }
 
     /// <summary>
     /// This class produces instances of type <see cref="Mapsui.Geometries.Polygon"/>.
@@ -415,8 +395,7 @@ namespace Mapsui.Providers.Wfs.Utilities
     /// </summary>
     internal class PolygonFactory : GeometryFactory
     {
-        #region Constructors
-
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="PolygonFactory"/> class.
         /// </summary>
@@ -439,10 +418,8 @@ namespace Mapsui.Providers.Wfs.Utilities
             FeatureNode.IsActive = false;
         }
 
-        #endregion
-
-        #region Internal Member
-
+        
+        
         /// <summary>
         /// This method produces instances of type <see cref="Mapsui.Geometries.Polygon"/>.
         /// </summary>
@@ -499,8 +476,7 @@ namespace Mapsui.Providers.Wfs.Utilities
             return Geoms;
         }
 
-        #endregion
-    }
+            }
 
     /// <summary>
     /// This class produces instances of type <see cref="Mapsui.Geometries.MultiPoint"/>.
@@ -508,8 +484,7 @@ namespace Mapsui.Providers.Wfs.Utilities
     /// </summary>
     internal class MultiPointFactory : GeometryFactory
     {
-        #region Constructors
-
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="MultiPointFactory"/> class.
         /// </summary>
@@ -530,10 +505,8 @@ namespace Mapsui.Providers.Wfs.Utilities
         {
         }
 
-        #endregion
-
-        #region Internal Member
-
+        
+        
         /// <summary>
         /// This method produces instances of type <see cref="Mapsui.Geometries.MultiPoint"/>.
         /// </summary>
@@ -577,8 +550,7 @@ namespace Mapsui.Providers.Wfs.Utilities
             return Geoms;
         }
 
-        #endregion
-    }
+            }
 
     /// <summary>
     /// This class produces objects of type <see cref="Mapsui.Geometries.MultiLineString"/>.
@@ -586,8 +558,7 @@ namespace Mapsui.Providers.Wfs.Utilities
     /// </summary>
     internal class MultiLineStringFactory : GeometryFactory
     {
-        #region Constructors
-
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="MultiLineStringFactory"/> class.
         /// </summary>
@@ -608,10 +579,8 @@ namespace Mapsui.Providers.Wfs.Utilities
         {
         }
 
-        #endregion
-
-        #region Internal Member
-
+        
+        
         /// <summary>
         /// This method produces instances of type <see cref="Mapsui.Geometries.MultiLineString"/>.
         /// </summary>
@@ -660,8 +629,7 @@ namespace Mapsui.Providers.Wfs.Utilities
             return Geoms;
         }
 
-        #endregion
-    }
+            }
 
     /// <summary>
     /// This class produces instances of type <see cref="Mapsui.Geometries.MultiPolygon"/>.
@@ -669,8 +637,7 @@ namespace Mapsui.Providers.Wfs.Utilities
     /// </summary>
     internal class MultiPolygonFactory : GeometryFactory
     {
-        #region Constructors
-
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="MultiPolygonFactory"/> class.
         /// </summary>
@@ -691,10 +658,8 @@ namespace Mapsui.Providers.Wfs.Utilities
         {
         }
 
-        #endregion
-
-        #region Internal Member
-
+        
+        
         /// <summary>
         /// This method produces instances of type <see cref="Mapsui.Geometries.MultiPolygon"/>.
         /// </summary>
@@ -743,8 +708,7 @@ namespace Mapsui.Providers.Wfs.Utilities
             return Geoms;
         }
 
-        #endregion
-    }
+            }
 
     /// <summary>
     /// This class must detect the geometry type of the queried layer.
@@ -753,16 +717,13 @@ namespace Mapsui.Providers.Wfs.Utilities
     /// </summary>
     internal class UnspecifiedGeometryFactory_WFS1_0_0_GML2 : GeometryFactory
     {
-        #region Fields
-
+        
         private readonly HttpClientUtil _httpClientUtil;
         private readonly bool _quickGeometries;
         private bool _multiGeometries;
 
-        #endregion
-
-        #region Constructors
-
+        
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="UnspecifiedGeometryFactory_WFS1_0_0_GML2"/> class.
         /// </summary>
@@ -780,10 +741,8 @@ namespace Mapsui.Providers.Wfs.Utilities
             _quickGeometries = quickGeometries;
         }
 
-        #endregion
-
-        #region Internal Member
-
+        
+        
         /// <summary>
         /// This method detects the geometry type from 'GetFeature' response and uses a geometry factory to create the 
         /// appropriate geometries.
@@ -868,6 +827,5 @@ namespace Mapsui.Providers.Wfs.Utilities
             return Geoms;
         }
 
-        #endregion
-    }
+            }
 }

@@ -27,26 +27,21 @@ namespace Mapsui.UI.Xaml
 {
     public class FpsCounter : DependencyObject, INotifyPropertyChanged
     {
-        #region Fields
-
+        
         private double elapsed;
         private int lastTick;
         private int currentTick;
         private int frameCount;
         private double frameCountTime;
         
-        #endregion
-
-        #region DependencyProperties
-
+        
+        
         private static readonly DependencyProperty FpsProperty = DependencyProperty.Register(
           "Fps", typeof(int), typeof(FpsCounter), new PropertyMetadata(0));
 
 
-        #endregion
-
-        #region Properties
-
+        
+        
         public int Fps
         {
             get { return (int)GetValue(FpsProperty); }
@@ -57,10 +52,8 @@ namespace Mapsui.UI.Xaml
             }
         }
 
-        #endregion
-
-        #region Methods
-
+        
+        
         public FpsCounter()
         {
             lastTick = Environment.TickCount;
@@ -90,12 +83,9 @@ namespace Mapsui.UI.Xaml
             }
         }
 
-        #endregion
-
-        #region INotifyPropertyChanged Members
-
+        
+        
         public event PropertyChangedEventHandler PropertyChanged;
 
-        #endregion
-    }
+            }
 }

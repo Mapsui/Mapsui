@@ -120,8 +120,7 @@ namespace Mapsui.Converters.WellKnownBinary
                 writer.Write(value);
         }
 
-        #region Methods
-
+        
         /// <summary>
         /// Writes the type number for this geometry.
         /// </summary>
@@ -358,6 +357,5 @@ namespace Mapsui.Converters.WellKnownBinary
             }
         }
 
-        #endregion
-    }
+            }
 }

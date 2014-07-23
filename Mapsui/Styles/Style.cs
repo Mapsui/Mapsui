@@ -46,8 +46,7 @@ namespace Mapsui.Styles
         /// </summary>
         public bool Enabled { get; set; }
 
-        #region Equals operator
-
+        
         public override bool Equals(object obj)
         {
             if (!(obj is Style))
@@ -92,6 +91,5 @@ namespace Mapsui.Styles
             return !Equals(style1, style2);
         }
 
-        #endregion
-    }
+            }
 }

@@ -60,8 +60,7 @@ namespace Mapsui.Converters.WellKnownText
         private readonly bool ignoreWhitespace;
         private readonly TextReader reader;
 
-        #region Constructors
-
+        
         /// <summary>
         /// Initializes a new instance of the StreamTokenizer class.
         /// </summary>
@@ -79,10 +78,8 @@ namespace Mapsui.Converters.WellKnownText
             this.ignoreWhitespace = ignoreWhitespace;
         }
 
-        #endregion
-
-        #region Properties
-
+        
+        
         /// <summary>
         /// The current line number of the stream being read.
         /// </summary>
@@ -93,10 +90,8 @@ namespace Mapsui.Converters.WellKnownText
         /// </summary>
         public int Column { get; private set; }
 
-        #endregion
-
-        #region Methods
-
+        
+        
         /// <summary>
         /// If the current token is a number, this field contains the value of that number. 
         /// </summary>
@@ -301,6 +296,5 @@ namespace Mapsui.Converters.WellKnownText
             return tokentype;
         }
 
-        #endregion
-    }
+            }
 }

@@ -15,8 +15,7 @@ namespace Mapsui.Providers.Wfs.Utilities
     /// </summary>
     public class HttpClientUtil
     {
-        #region Fields and Properties
-
+        
         private readonly NameValueCollection _requestHeaders;
         private byte[] _postData;
         private string _proxyUrl;
@@ -50,10 +49,8 @@ namespace Mapsui.Providers.Wfs.Utilities
             set { _postData = value; }
         }
 
-        #endregion
-
-        #region Constructors
-
+        
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="HttpClientUtil"/> class.
         /// </summary>
@@ -62,10 +59,8 @@ namespace Mapsui.Providers.Wfs.Utilities
             _requestHeaders = new NameValueCollection();
         }
 
-        #endregion
-
-        #region Public Member
-
+        
+        
         /// <summary>
         /// Adds a HTTP header.
         /// </summary>
@@ -160,6 +155,5 @@ namespace Mapsui.Providers.Wfs.Utilities
             }
         }
 
-        #endregion
-    }
+            }
 }

@@ -18,8 +18,7 @@ namespace Mapsui.Styles
             Y = offset.Y;
         }
 
-        #region Equals operator
-
+        
         public override bool Equals(object obj)
         {
             if (!(obj is Offset))
@@ -51,6 +50,5 @@ namespace Mapsui.Styles
             return !Equals(offset1, offset2);
         }
 
-        #endregion
-    }
+            }
 }

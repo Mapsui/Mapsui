@@ -234,8 +234,7 @@ namespace Mapsui.Geometries
             }
         }
 
-        #region IEquatable<BoundingBox> Members
-
+        
         /// <summary>
         /// Checks whether the values of this instance is equal to the values of another instance.
         /// </summary>
@@ -247,8 +246,7 @@ namespace Mapsui.Geometries
             return Left == other.Left && Right == other.Right && Top == other.Top && Bottom == other.Bottom;
         }
 
-        #endregion
-
+        
         /// <summary>
         /// Moves/translates the <see cref="BoundingBox"/> along the the specified vector
         /// </summary>

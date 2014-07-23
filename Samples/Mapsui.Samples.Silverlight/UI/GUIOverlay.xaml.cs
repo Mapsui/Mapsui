@@ -156,13 +156,10 @@ namespace Mapsui.Samples.Silverlight.UI
             Clip = geom;
         }
 
-        #region layer handling
+        
 
-
-        #endregion
-
-        #region menu animation events
-
+        
+        
         void showMenu_Completed(object sender, EventArgs e)
         {
             _isMenuDown = true;
@@ -210,11 +207,7 @@ namespace Mapsui.Samples.Silverlight.UI
         {
             hideMenu.Begin();
         }
-
-        # endregion
-
-        #region event handlers
-
+        
         void GUIOverlay_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             SetClip();
@@ -273,10 +266,8 @@ namespace Mapsui.Samples.Silverlight.UI
             }
         }
 
-        #endregion
-
-        #region TopTooltip
-
+        
+        
         private void buttonZoomIn_MouseEnter(object sender, MouseEventArgs e)
         {
             txtTooltipTop.Text = "Zoom In";
@@ -310,10 +301,8 @@ namespace Mapsui.Samples.Silverlight.UI
             HideTopTooltip.Begin();
         }
 
-        #endregion
-
-        #region lowertooltip
-
+        
+        
         private void btnLayers_MouseEnter(object sender, MouseEventArgs e)
         {
             ShowLowerTooltip.Begin();
@@ -349,6 +338,5 @@ namespace Mapsui.Samples.Silverlight.UI
             HideLowerTooltip.Begin();
         }
 
-        #endregion
-    }
+            }
 }

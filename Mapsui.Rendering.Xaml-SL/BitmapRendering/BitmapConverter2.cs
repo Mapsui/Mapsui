@@ -15,8 +15,7 @@ namespace Mapsui.Rendering.Xaml.BitmapRendering
 
             var ms = new MemoryStream();
 
-            #region BMP File Header(14 bytes)
-            //the magic number(2 bytes):BM
+                        //the magic number(2 bytes):BM
             ms.WriteByte(0x42);
             ms.WriteByte(0x4D);
 
@@ -41,10 +40,8 @@ namespace Mapsui.Rendering.Xaml.BitmapRendering
             ms.WriteByte(0x00);
             ms.WriteByte(0x00);
             ms.WriteByte(0x00);
-            #endregion
-
-            #region Bitmap Information(40 bytes:Windows V3)
-            //the size of this header(4 bytes)
+            
+                        //the size of this header(4 bytes)
             ms.WriteByte(0x28);
             ms.WriteByte(0x00);
             ms.WriteByte(0x00);
@@ -105,10 +102,8 @@ namespace Mapsui.Rendering.Xaml.BitmapRendering
             ms.WriteByte(0x00);
             ms.WriteByte(0x00);
             ms.WriteByte(0x00);
-            #endregion
-
-            #region Bitmap data
-            for (int y = height - 1; y >= 0; y--)
+            
+                        for (int y = height - 1; y >= 0; y--)
             {
                 for (int x = 0; x < width; x++)
                 {
@@ -120,8 +115,7 @@ namespace Mapsui.Rendering.Xaml.BitmapRendering
                     ms.WriteByte(0x00); //reserved
                 }
             }
-            #endregion
-
+            
             return new MemoryStream(ms.GetBuffer());
         }
     }

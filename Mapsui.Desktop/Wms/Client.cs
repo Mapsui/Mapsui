@@ -20,10 +20,8 @@ namespace Mapsui.Web.Wms
         private XmlNode vendorSpecificCapabilities;
         private XmlNamespaceManager nsmgr;
 
-        #region WMS Data structures
-
-        #region Nested type: WmsLayerStyle
-
+        
+        
         /// <summary>
         /// Structure for storing information about a WMS Layer Style
         /// </summary>
@@ -55,10 +53,8 @@ namespace Mapsui.Web.Wms
             public string Title;
         }
 
-        #endregion
-
-        #region Nested type: WmsOnlineResource
-
+        
+        
         /// <summary>
         /// Structure for storing info on an Online Resource
         /// </summary>
@@ -75,10 +71,8 @@ namespace Mapsui.Web.Wms
             public string Type;
         }
 
-        #endregion
-
-        #region Nested type: WmsServerLayer
-
+        
+        
         /// <summary>
         /// Structure for holding information about a WMS Layer 
         /// </summary>
@@ -135,10 +129,8 @@ namespace Mapsui.Web.Wms
             public string Title;
         }
 
-        #endregion
-
-        #region Nested type: WmsStyleLegend
-
+        
+        
         /// <summary>
         /// Structure for storing WMS Legend information
         /// </summary>
@@ -155,12 +147,9 @@ namespace Mapsui.Web.Wms
             public Size Size;
         }
 
-        #endregion
-
-        #endregion
-
-        #region Properties
-
+        
+        
+        
         private string[] exceptionFormats;
         private Capabilities.WmsServiceDescription serviceDescription;
 
@@ -210,8 +199,7 @@ namespace Mapsui.Web.Wms
         /// </summary>
         public WmsServerLayer Layer { get; private set; }
 
-        #endregion
-
+        
         /// <summary>
         /// Initalizes WMS server and parses the Capabilities request
         /// </summary>

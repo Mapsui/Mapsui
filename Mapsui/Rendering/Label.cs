@@ -90,8 +90,7 @@ namespace Mapsui.Rendering
             get { return Top - Height; }
         }
 
-        #region IComparable<LabelBox> Members
-
+        
         /// <summary>
         /// Returns 0 if the boxes intersects each other
         /// </summary>
@@ -106,8 +105,7 @@ namespace Mapsui.Rendering
             return -1;
         }
 
-        #endregion
-
+        
         /// <summary>
         /// Determines whether the boundingbox intersects another boundingbox
         /// </summary>
@@ -190,8 +188,7 @@ namespace Mapsui.Rendering
 
         public Pen Halo { get; set; }
 
-        #region IComparable<Label> Members
-
+        
         /// <summary>
         /// Tests if two label boxes intersects
         /// </summary>
@@ -208,10 +205,8 @@ namespace Mapsui.Rendering
             return Box.CompareTo(other.Box);
         }
 
-        #endregion
-
-        #region IComparer<Label> Members
-
+        
+        
         /// <summary>
         /// Checks if two labels intersect
         /// </summary>
@@ -223,6 +218,5 @@ namespace Mapsui.Rendering
             return x.CompareTo(y);
         }
 
-        #endregion
-    }
+            }
 }

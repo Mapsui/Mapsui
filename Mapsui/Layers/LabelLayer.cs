@@ -26,8 +26,7 @@ namespace Mapsui.Layers
     /// </summary>
     public class LabelLayer : Layer
     {
-        #region Delegates
-
+        
         /// <summary>
         /// Delegate method for creating advanced label texts
         /// </summary>
@@ -42,10 +41,8 @@ namespace Mapsui.Layers
         /// <returns></returns>
         public delegate int GetPriorityMethod(IFeature fdr);
 
-        #endregion
-
-        #region Enums
-
+        
+        
         /// <summary>
         /// Labelling behaviour for Multipart geometry collections
         /// </summary>
@@ -72,14 +69,10 @@ namespace Mapsui.Layers
             First
         }
 
-        #endregion
-
-        #region Fields
-
-        #endregion
-
-        #region Properties
-
+        
+        
+        
+        
         public bool UseLabelStacking { get; set; }
 
         /// <summary>
@@ -155,10 +148,8 @@ namespace Mapsui.Layers
 
         public string PriorityColumn { get; set; }
 
-        #endregion
-
-        #region Constructors and Public members
-
+        
+        
         /// <summary>
         /// Creates a new instance of a LabelLayer
         /// </summary>
@@ -181,6 +172,5 @@ namespace Mapsui.Layers
             return (feature[LabelColumn] == null) ? "" : feature[LabelColumn].ToString();
         }
 
-        #endregion
-    }
+            }
 }

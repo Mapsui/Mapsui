@@ -124,8 +124,7 @@ namespace Mapsui.Geometries
             get { return 3; }
         }
 
-        #region Operators
-
+        
         /// <summary>
         /// Vector + Vector
         /// </summary>
@@ -160,10 +159,8 @@ namespace Mapsui.Geometries
             return new Point3D(m.X*d, m.Y*d, m.Z*d);
         }
 
-        #endregion
-
-        #region "Inherited methods from abstract class Geometry"
-
+        
+        
         /// <summary>
         /// Checks whether this instance is spatially equal to the Point 'o'
         /// </summary>
@@ -200,8 +197,7 @@ namespace Mapsui.Geometries
             return base.Distance(geom);
         }
 
-        #endregion
-
+        
         /// <summary>
         /// exports a point into a 3-dimensional double array
         /// </summary>

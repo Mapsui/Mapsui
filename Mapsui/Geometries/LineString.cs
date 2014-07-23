@@ -118,8 +118,7 @@ namespace Mapsui.Geometries
             }
         }
 
-        #region OpenGIS Methods
-
+        
         /// <summary>
         /// The number of points in this LineString.
         /// </summary>
@@ -140,8 +139,7 @@ namespace Mapsui.Geometries
             return _vertices[n];
         }
 
-        #endregion
-
+        
         /// <summary>
         /// The position of a point on the line, parameterised by length.
         /// </summary>
@@ -183,8 +181,7 @@ namespace Mapsui.Geometries
             return l;
         }
 
-        #region "Inherited methods from abstract class Geometry"
-
+        
         /// <summary>
         /// Checks whether this instance is spatially equal to the LineString 'l'
         /// </summary>
@@ -272,6 +269,5 @@ namespace Mapsui.Geometries
             throw new NotImplementedException();
         }
 
-        #endregion
-    }
+            }
 }

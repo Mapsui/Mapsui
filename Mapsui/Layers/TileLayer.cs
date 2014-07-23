@@ -151,8 +151,7 @@ namespace Mapsui.Layers
             _memoryCache.Clear();
         }
 
-        #region ITileLayer Members
-
+        
         public ITileSchema Schema
         {
             // TODO: 
@@ -171,8 +170,7 @@ namespace Mapsui.Layers
             get { return _memoryCache; }
         }
 
-        #endregion
-
+        
         private void TileFetcherDataChanged(object sender, DataChangedEventArgs e)
         {
             OnDataChanged(e);

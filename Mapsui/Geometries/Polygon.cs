@@ -166,8 +166,7 @@ namespace Mapsui.Geometries
             return p;
         }
 
-        #region "Inherited methods from abstract class Geometry"
-
+        
         /// <summary>
         /// Determines if this Polygon and the specified Polygon object has the same values
         /// </summary>
@@ -239,6 +238,5 @@ namespace Mapsui.Geometries
             throw new NotImplementedException();
         }
 
-        #endregion
-    }
+            }
 }

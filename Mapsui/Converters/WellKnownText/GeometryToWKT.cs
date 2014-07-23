@@ -68,8 +68,7 @@ namespace Mapsui.Converters.WellKnownText
     /// </remarks>
     public static class GeometryToWKT
     {
-        #region Methods
-
+        
         /// <summary>
         /// Converts a Geometry to its Well-known Text representation.
         /// </summary>
@@ -388,6 +387,5 @@ namespace Mapsui.Converters.WellKnownText
             }
         }
 
-        #endregion
-    }
+            }
 }

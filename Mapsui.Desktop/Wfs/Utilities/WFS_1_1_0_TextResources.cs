@@ -10,8 +10,7 @@ namespace Mapsui.Providers.Wfs.Utilities
 {
     public class WFS_1_1_0_TextResources : WFS_1_1_0_XPathTextResources, IWFS_TextResources
     {
-        #region Public Member
-
+        
         ////////////////////////////////////////////////////////////////////////
         // HTTP Configuration                                                 //                      
         // POST & GET                                                         //
@@ -35,10 +34,8 @@ namespace Mapsui.Providers.Wfs.Utilities
                    "&NAMESPACE=xmlns(app=http://www.deegree.org/app)";
         }
 
-        #endregion
-
-        #region IWFS_TextResources Member
-
+        
+        
         /// <summary>
         /// This method returns the query string for 'GetFeature'.
         /// </summary>
@@ -159,6 +156,5 @@ namespace Mapsui.Providers.Wfs.Utilities
             }
         }
 
-        #endregion
-    }
+            }
 }

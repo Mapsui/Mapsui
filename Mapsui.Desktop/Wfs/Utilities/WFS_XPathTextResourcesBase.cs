@@ -5,8 +5,7 @@ namespace Mapsui.Providers.Wfs.Utilities
 {
     public class WFS_XPathTextResourcesBase
     {
-        #region Fields and Properties
-
+        
         ////////////////////////////////////////////////////////////////////////
         // NamespaceURIs and                                                  //                      
         // Prefixes                                                           //
@@ -231,6 +230,5 @@ namespace Mapsui.Providers.Wfs.Utilities
             get { return _XPATH_GEOMETRY_ELEMREF_GMLELEMENTQUERY; }
         }
 
-        #endregion
-    }
+            }
 }

@@ -83,8 +83,7 @@ namespace Mapsui.Utilities.Indexing
             root = new Node<T, U>();
         }
 
-        #region Read/Write index to/from a file
-
+        
         /*
 		private const double INDEXFILEVERSION = 1.0;
 
@@ -102,8 +101,7 @@ namespace Mapsui.Utilities.Indexing
 		}
 		*/
 
-        #endregion
-
+        
         /// <summary>
         /// Inserts a value into the tree
         /// </summary>
@@ -169,8 +167,7 @@ namespace Mapsui.Utilities.Indexing
                 TraceInOrder(root.RightNode);
         }
 
-        #region IEnumerables
-
+        
         /// <summary>
         /// Gets an enumerator for all the values in the tree in ascending order
         /// </summary>
@@ -321,10 +318,8 @@ namespace Mapsui.Utilities.Indexing
             }
         }
 
-        #endregion
-
-        #region Nested type: ItemValue
-
+        
+        
         /// <summary>
         /// A value in a <see cref="BinaryTree&lt;T, U&gt;"/>.
         /// </summary>
@@ -352,7 +347,6 @@ namespace Mapsui.Utilities.Indexing
             }
         }
 
-        #endregion
-    }
+            }
 #endif
 }

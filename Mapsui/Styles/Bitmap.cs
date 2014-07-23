@@ -35,8 +35,7 @@ namespace Mapsui.Styles
             return output;
         }
 
-        #region Equals operator
-
+        
         public override bool Equals(object obj)
         {
             if (!(obj is Bitmap))
@@ -82,7 +81,6 @@ namespace Mapsui.Styles
             return !Equals(bitmap1, bitmap2);
         }
 
-        #endregion
-
+        
     }
 }

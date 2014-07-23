@@ -16,8 +16,7 @@ namespace Mapsui.Styles
         public double Width { get; set; }
         public Color Color { get; set; }
 
-        #region Equals operator
-
+        
         public override bool Equals(object obj)
         {
             if (!(obj is Pen))
@@ -62,6 +61,5 @@ namespace Mapsui.Styles
             return !Equals(pen1, pen2);
         }
 
-        #endregion
-    }
+            }
 }

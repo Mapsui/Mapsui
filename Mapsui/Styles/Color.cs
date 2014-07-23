@@ -42,8 +42,7 @@ namespace Mapsui.Styles
         public static Color Indigo { get { return new Color { A = 255, R = 75, G = 0, B = 130 }; } }
         public static Color Violet { get { return new Color { A = 255, R = 238, G = 130, B = 238 }; } }
 
-        #region Equals operator
-
+        
         public override bool Equals(object obj)
         {
             if (!(obj is Color))
@@ -77,6 +76,5 @@ namespace Mapsui.Styles
             return !Equals(color1, color2);
         }
 
-        #endregion
-    }
+            }
 }
