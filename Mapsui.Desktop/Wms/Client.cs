@@ -489,13 +489,9 @@ namespace Mapsui.Web.Wms
                 for (int i = 0; i < xnlKeywords.Count; i++)
                     wmsServerLayer.Keywords[i] = xnlKeywords[i].InnerText;
             }
-            XmlNodeList xnlCrs = xmlLayer.SelectNodes("sm:CRS", nsmgr);
-            if (xnlCrs != null)
-            {
-                wmsServerLayer.CRS = new string[xnlCrs.Count];
-                for (int i = 0; i < xnlCrs.Count; i++)
-                    wmsServerLayer.CRS[i] = xnlCrs[i].InnerText;
-            }
+
+            wmsServerLayer.CRS = ParseCrses(xmlLayer);
+
             XmlNodeList xnlBoundingBox = xmlLayer.SelectNodes("sm:BoundingBox", nsmgr);
             if (xnlBoundingBox != null)
             {
@@ -572,6 +568,27 @@ namespace Mapsui.Web.Wms
                 wmsServerLayer.LatLonBoundingBox = new BoundingBox(minx, miny, maxx, maxy);
             }
             return wmsServerLayer;
+        }
+
+        private string[] ParseCrses(XmlNode xmlLayer)
+        {
+            var crses = new List<string>();
+
+            XmlNodeList xnlSrs = xmlLayer.SelectNodes("sm:SRS", nsmgr);
+            if (xnlSrs != null)
+            {
+                for (int i = 0; i < xnlSrs.Count; i++)
+                    crses.Add(xnlSrs[i].InnerText);
+            }
+
+            XmlNodeList xnlCrs = xmlLayer.SelectNodes("sm:CRS", nsmgr);
+            if (xnlCrs != null)
+            {
+                for (int i = 0; i < xnlCrs.Count; i++)
+                    crses.Add(xnlCrs[i].InnerText);
+            }
+
+            return crses.ToArray();
         }
     }
 }
