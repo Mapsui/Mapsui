@@ -1,12 +1,10 @@
-﻿using Mapsui.Geometries;
-using Mapsui.Layers;
-using Mapsui.Providers;
-using Mapsui.Styles;
+﻿using Mapsui.Tests.Common;
 using NUnit.Framework;
 using System.IO;
 #if !MONOGAME
-using Mapsui.Rendering.Xaml;
 using System.Windows.Controls;
+#else
+using Mapsui.Layers;
 #endif
 
 namespace Mapsui.Rendering.Xaml.Tests
@@ -28,15 +26,10 @@ namespace Mapsui.Rendering.Xaml.Tests
         public void RenderPointsWithVectorStyle()
         {
             // arrange
-            var viewport = new Viewport { Center = new Point(100, 100), Width = 200, Height = 200, Resolution = 1 };
-            var layer = new MemoryLayer
-                {
-                    Style = null,
-                    DataSource = Mapsui.Tests.Common.Utilities.CreateProviderWithPointsWithVectorStyle()
-                };
+            var map = ArrangeRenderingTests.RenderPointsWithVectorStyle();
             
             // act
-            var bitmap = RenderToBitmap(viewport, layer);
+            var bitmap = RenderToBitmap(map);
             
 #if !MONOGAME
             // aside
@@ -52,15 +45,10 @@ namespace Mapsui.Rendering.Xaml.Tests
         public void RenderPointWithBitmapSymbols()
         {
             // arrange
-            var viewport = new Viewport { Center = new Point(100, 100), Width = 200, Height = 200, Resolution = 1 };
-            var layer = new MemoryLayer
-                {
-                    Style = null,
-                    DataSource = Mapsui.Tests.Common.Utilities.CreateProviderWithPointsWithSymbolStyles()
-                };
+            var map = ArrangeRenderingTests.RenderPointWithBitmapSymbols();
             
             // act
-            var bitmap = RenderToBitmap(viewport, layer);
+            var bitmap = RenderToBitmap(map);
             
 #if !MONOGAME
             // aside
@@ -76,11 +64,10 @@ namespace Mapsui.Rendering.Xaml.Tests
         public void RenderRotatedBitmapSymbolWithOffset()
         {
             // arrange
-            var viewport = new Viewport { Center = new Point(80, 80), Width = 200, Height = 200, Resolution = 1 };
-            var layer = new MemoryLayer { DataSource = Mapsui.Tests.Common.Utilities.CreateProviderWithRotatedBitmapSymbols() };
+            var map = ArrangeRenderingTests.RenderRotatedBitmapSymbolWithOffset();
             
             // act
-            var bitmap = RenderToBitmap(viewport, layer);
+            var bitmap = RenderToBitmap(map);
 
 #if !MONOGAME
             // aside
@@ -96,19 +83,14 @@ namespace Mapsui.Rendering.Xaml.Tests
         public void RenderPointsWithDifferentSymbolTypes()
         {
             // arrange
-            var viewport = new Viewport { Center = new Point(0, 0), Width = 200, Height = 100, Resolution = 0.5 };
-            var features = new Features
-                {
-                    Mapsui.Tests.Common.Utilities.CreateSimplePointFeature(-20, 0, new SymbolStyle {Fill = new Brush { Color = Color.Gray}, SymbolType = SymbolType.Ellipse}),
-                    Mapsui.Tests.Common.Utilities.CreateSimplePointFeature(20, 0, new SymbolStyle {Fill = new Brush { Color = Color.Gray}, SymbolType = SymbolType.Rectangle})
-                };
-            var layer = new MemoryLayer { DataSource = new MemoryProvider(features) };
-            const string imagePath = ImagesFolder + "\\vector_symbol_symboltype.png";
+            var map = ArrangeRenderingTests.RenderPointsWithDifferentSymbolTypes();
             
             // act
-            var bitmap = RenderToBitmap(viewport, layer);
+            var bitmap = RenderToBitmap(map);
 
 #if !MONOGAME
+            const string imagePath = ImagesFolder + "\\vector_symbol_symboltype.png";
+           
             // aside
             if (Rendering.Default.WriteImageToDisk) WriteFile(imagePath, bitmap);
 
@@ -121,16 +103,10 @@ namespace Mapsui.Rendering.Xaml.Tests
         public void RenderSymbolWithWorldUnits()
         {
             // arrange
-            var viewport = new Viewport { Center = new Point(0, 0), Width = 200, Height = 100, Resolution = 0.5 };
-            var features = new Features
-                {
-                    Mapsui.Tests.Common.Utilities.CreateSimplePointFeature(-20, 0, new SymbolStyle {UnitType = UnitType.Pixel}),
-                    Mapsui.Tests.Common.Utilities.CreateSimplePointFeature(20, 0, new SymbolStyle {UnitType = UnitType.WorldUnit})
-                };
-            var layer = new MemoryLayer { DataSource = new MemoryProvider(features) };
+            var map = ArrangeRenderingTests.RenderSymbolWithWorldUnits();
             
             // act
-            var bitmap = RenderToBitmap(viewport, layer);
+            var bitmap = RenderToBitmap(map);
 
 #if !MONOGAME
             // aside
@@ -146,23 +122,14 @@ namespace Mapsui.Rendering.Xaml.Tests
         public void RenderPolygon()
         {
             // arrange
-            var viewport = new Viewport
-            {
-                Center = new Point(0, 0),
-                Width = 600,
-                Height = 400,
-                Resolution = 63000
-            };
-
-            var layer = new MemoryLayer();
-            var provider = Mapsui.Tests.Common.Utilities.CreatePolygonProvider();
-            layer.DataSource = provider;
-            const string imagePath = ImagesFolder + "\\polygon.png";
+            var map = ArrangeRenderingTests.RenderPolygon();
 
             // act
-            var bitmap = RenderToBitmap(viewport, layer);
+            var bitmap = RenderToBitmap(map);
 
 #if !MONOGAME
+            const string imagePath = ImagesFolder + "\\polygon.png";
+
             // aside
             if (Rendering.Default.WriteImageToDisk) WriteFile(imagePath, bitmap);
 
@@ -175,20 +142,10 @@ namespace Mapsui.Rendering.Xaml.Tests
         public void RenderLine()
         {
             // arrange
-            var viewport = new Viewport
-            {
-                Center = new Point(0, 0),
-                Width = 600,
-                Height = 400,
-                Resolution = 63000
-            };
-
-            var layer = new MemoryLayer();
-            var provider = Mapsui.Tests.Common.Utilities.CreateLineProvider();
-            layer.DataSource = provider;
+            var map = ArrangeRenderingTests.RenderLine();
             
             // act
-            var bitmap = RenderToBitmap(viewport, layer);
+            var bitmap = RenderToBitmap(map);
 
 #if !MONOGAME
             // aside
@@ -218,18 +175,18 @@ namespace Mapsui.Rendering.Xaml.Tests
 
 #if MONOGAME
 
-        private MemoryStream RenderToBitmap(Viewport viewport, MemoryLayer layer)
+        private MemoryStream RenderToBitmap(Map map)
         {
             var mapRenderer = new MonoGame.MapRenderer(_graphicsDevice);
-            mapRenderer.Render(layer, viewport);
+            mapRenderer.Draw(map, map.Viewport);
             return new MemoryStream(); // not implemented yet
         }
 #else
-        private MemoryStream RenderToBitmap(Viewport viewport, MemoryLayer layer)
+        private MemoryStream RenderToBitmap(Map map)
         {
             var canvas = new Canvas();
-            MapRenderer.RenderLayer(canvas, viewport, layer);
-            return BitmapRendering.BitmapConverter.ToBitmapStream(canvas, viewport.Width, viewport.Height);
+            MapRenderer.Render(canvas, map.Viewport, map.Layers, false);
+            return BitmapRendering.BitmapConverter.ToBitmapStream(canvas, map.Viewport.Width, map.Viewport.Height);
         }
 #endif
 
