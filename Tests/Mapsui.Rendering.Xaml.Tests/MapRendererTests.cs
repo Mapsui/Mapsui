@@ -26,7 +26,7 @@ namespace Mapsui.Rendering.Xaml.Tests
         public void RenderPointsWithVectorStyle()
         {
             // arrange
-            var map = ArrangeRenderingTests.RenderPointsWithVectorStyle();
+            var map = ArrangeRenderingTests.PointsWithVectorStyle();
             
             // act
             var bitmap = RenderToBitmap(map);
@@ -45,7 +45,7 @@ namespace Mapsui.Rendering.Xaml.Tests
         public void RenderPointWithBitmapSymbols()
         {
             // arrange
-            var map = ArrangeRenderingTests.RenderPointWithBitmapSymbols();
+            var map = ArrangeRenderingTests.PointWithBitmapSymbols();
             
             // act
             var bitmap = RenderToBitmap(map);
@@ -64,7 +64,7 @@ namespace Mapsui.Rendering.Xaml.Tests
         public void RenderRotatedBitmapSymbolWithOffset()
         {
             // arrange
-            var map = ArrangeRenderingTests.RenderRotatedBitmapSymbolWithOffset();
+            var map = ArrangeRenderingTests.RotatedBitmapSymbolWithOffset();
             
             // act
             var bitmap = RenderToBitmap(map);
@@ -83,7 +83,7 @@ namespace Mapsui.Rendering.Xaml.Tests
         public void RenderPointsWithDifferentSymbolTypes()
         {
             // arrange
-            var map = ArrangeRenderingTests.RenderPointsWithDifferentSymbolTypes();
+            var map = ArrangeRenderingTests.PointsWithDifferentSymbolTypes();
             
             // act
             var bitmap = RenderToBitmap(map);
@@ -103,7 +103,7 @@ namespace Mapsui.Rendering.Xaml.Tests
         public void RenderSymbolWithWorldUnits()
         {
             // arrange
-            var map = ArrangeRenderingTests.RenderSymbolWithWorldUnits();
+            var map = ArrangeRenderingTests.SymbolWithWorldUnits();
             
             // act
             var bitmap = RenderToBitmap(map);
@@ -122,7 +122,7 @@ namespace Mapsui.Rendering.Xaml.Tests
         public void RenderPolygon()
         {
             // arrange
-            var map = ArrangeRenderingTests.RenderPolygon();
+            var map = ArrangeRenderingTests.Polygon();
 
             // act
             var bitmap = RenderToBitmap(map);
@@ -142,7 +142,7 @@ namespace Mapsui.Rendering.Xaml.Tests
         public void RenderLine()
         {
             // arrange
-            var map = ArrangeRenderingTests.RenderLine();
+            var map = ArrangeRenderingTests.Line();
             
             // act
             var bitmap = RenderToBitmap(map);
@@ -150,6 +150,26 @@ namespace Mapsui.Rendering.Xaml.Tests
 #if !MONOGAME
             // aside
             const string imagePath = ImagesFolder + "\\line.png";
+            if (Rendering.Default.WriteImageToDisk) WriteFile(imagePath, bitmap);
+
+            // assert
+            Assert.AreEqual(ReadFile(imagePath), bitmap.ToArray());
+#endif
+        }
+
+
+        [Test]
+        public void RenderTileLayer()
+        {
+            // arrange
+            var map = ArrangeRenderingTests.Tiles();
+
+            // act
+            var bitmap = RenderToBitmap(map);
+
+#if !MONOGAME
+            // aside
+            const string imagePath = ImagesFolder + "\\tilelayer.png";
             if (Rendering.Default.WriteImageToDisk) WriteFile(imagePath, bitmap);
 
             // assert
