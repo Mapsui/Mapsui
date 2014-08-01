@@ -6,56 +6,60 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using OpenTK.Graphics.OpenGL;
-using All = OpenTK.Graphics.ES11.All;
+using All = OpenTK.Graphics.OpenGL.All;
 using Bitmap = System.Drawing.Bitmap;
-using GL = OpenTK.Graphics.ES11.GL;
-using PixelFormat = OpenTK.Graphics.ES11.PixelFormat;
-using PixelType = OpenTK.Graphics.ES11.PixelType;
+using GL = OpenTK.Graphics.OpenGL.GL;
+using PixelFormat = OpenTK.Graphics.OpenGL.PixelFormat;
+using PixelType = OpenTK.Graphics.OpenGL.PixelType;
 using Point = Mapsui.Geometries.Point;
-using TextureMagFilter = OpenTK.Graphics.ES11.TextureMagFilter;
-using TextureMinFilter = OpenTK.Graphics.ES11.TextureMinFilter;
-using TextureParameterName = OpenTK.Graphics.ES11.TextureParameterName;
-using TextureTarget = OpenTK.Graphics.ES11.TextureTarget;
+using TextureMagFilter = OpenTK.Graphics.OpenGL.TextureMagFilter;
+using TextureMinFilter = OpenTK.Graphics.OpenGL.TextureMinFilter;
+using TextureParameterName = OpenTK.Graphics.OpenGL.TextureParameterName;
+using TextureTarget = OpenTK.Graphics.OpenGL.TextureTarget;
 
 namespace Mapsui.Rendering.OpenTK
 {
     public class PointRenderer
     {
-        private static BitmapData bitmapData;
+        private static BitmapData _bitmapData;
 
         public static int LoadTexture(Stream data)
         {
             int texture;
-            GL.ShadeModel(All.Smooth);
+            GL.ShadeModel(ShadingModel.Smooth);
             GL.ClearColor(0, 0, 0, 1);
 
             GL.ClearDepth(1.0f);
-            GL.Enable(All.DepthTest);
-            GL.DepthFunc(All.Lequal);
+            GL.Enable(EnableCap.DepthTest);
+            GL.DepthFunc(DepthFunction.Lequal);
 
-            GL.Enable(All.CullFace);
-            GL.CullFace(All.Front);
+            GL.Enable(EnableCap.CullFace);
+            GL.CullFace(CullFaceMode.Front);
 
-            GL.Hint(All.PerspectiveCorrectionHint, All.Nicest);
+            GL.Hint(HintTarget.PerspectiveCorrectionHint, HintMode.Nicest);
 
             // create texture ids
-            GL.Enable(All.Texture2D);
+            GL.Enable(EnableCap.Texture2D);
             
             GL.GenTextures(1, out texture);
 
-            GL.BindTexture(All.Texture2D, texture);
+            GL.BindTexture(TextureTarget.Texture2D, texture);
        
             data.Position = 0;
             var bitmap = (Bitmap)Image.FromStream(data);
 
-            bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
-            GL.TexImage2D(TextureTarget.Texture2D, 0, 0, bitmapData.Width, bitmapData.Height, 0, PixelFormat.Rgba, PixelType.Bitmap, bitmapData.Scan0);
-            bitmap.UnlockBits(bitmapData);
+            //bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+            //GL.TexImage2D(TextureTarget.Texture2D, 0, 0, bitmapData.Width, bitmapData.Height, 0, PixelFormat.Rgba, PixelType.Bitmap, bitmapData.Scan0);
+            //bitmap.UnlockBits(bitmapData);
 
-            GL.BindTexture(All.Texture2D, 0);
-            //SetParameters();
 
-            ////GL.MatrixMode.
+            _bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+            GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba, _bitmapData.Width, _bitmapData.Height, 0, PixelFormat.Bgra, PixelType.UnsignedByte, _bitmapData.Scan0);
+            bitmap.UnlockBits(_bitmapData);
+
+            GL.BindTexture(TextureTarget.Texture2D, 0);
+            SetParameters();
+
             //Android.Opengl.GLUtils.TexImage2D((int)All.Texture2D, 0, b, 0);
             return texture;
         }
@@ -64,8 +68,8 @@ namespace Mapsui.Rendering.OpenTK
         {
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.Linear);
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Linear);
-            GL.TexParameterx(All.Texture2D, All.TextureWrapS, (int)All.ClampToEdge);
-            GL.TexParameterx(All.Texture2D, All.TextureWrapT, (int)All.ClampToEdge);
+            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int)All.ClampToEdge);
+            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int)All.ClampToEdge);
         }
 
         public static void Draw(IViewport viewport, IStyle style, IFeature feature)
@@ -85,17 +89,6 @@ namespace Mapsui.Rendering.OpenTK
                     if (!feature.RenderedGeometry.ContainsKey(style))
                     {
                         textureId = LoadTexture(symbolStyle.Symbol.Data);
-                        //GL.GenTextures(1, out _texture);
-
-
-                        //var bitmap = (Bitmap)Image.FromStream(symbolStyle.Symbol.Data);
-                        //var bitmapData = ToBitmapData(bitmap);
-
-                        //GL.TexImage2D(TextureTarget.Texture2D, 0, 10, bitmapData.Width, bitmapData.Height, 0, PixelFormat.Rgba, PixelType.Bitmap, bitmapData.Scan0);
-                        //bitmap.UnlockBits(bitmapData);
-
-                        //GL.BindTexture(TextureTarget.Texture2D, _texture);
-
                         feature.RenderedGeometry[style] = textureId;
                     }
                     else
@@ -131,27 +124,27 @@ namespace Mapsui.Rendering.OpenTK
                 if (symbolStyle.SymbolScale > 0) symbolSize = (float)symbolStyle.SymbolScale * symbolSize;
             }
 
-            //var vectorStyle = style as VectorStyle;
-            //if (vectorStyle != null)
-            //{
-            //    var fillColor = vectorStyle.Fill.Color;
-            //    GL.Color4((byte)fillColor.R, (byte)fillColor.G, (byte)fillColor.B, (byte)fillColor.A);
-            //    GL.PointSize((float)SymbolStyle.DefaultWidth);
-            //    GL.EnableClientState(All.VertexArray);
-            //    var destAsArray = new[] { (float)dest.X, (float)dest.Y};
-            //    GL.VertexPointer(2, All.Float, 0, destAsArray);
-            //    GL.DrawArrays(All.Points, 0, 1);
-            //    GL.DisableClientState(All.VertexArray);
-            //}
+            var vectorStyle = style as VectorStyle;
+            if (vectorStyle != null)
+            {
+                var fillColor = vectorStyle.Fill.Color;
+                GL.Color4((byte)fillColor.R, (byte)fillColor.G, (byte)fillColor.B, (byte)fillColor.A);
+                GL.PointSize((float)SymbolStyle.DefaultWidth);
+                GL.EnableClientState(ArrayCap.VertexArray);
+                var destAsArray = new[] { (float)dest.X, (float)dest.Y };
+                GL.VertexPointer(2, VertexPointerType.Float, 0, destAsArray);
+                GL.DrawArrays(PrimitiveType.Points, 0, 1);
+                GL.DisableClientState(ArrayCap.VertexArray);
+            }
         }
 
         public static void RenderTexture(int textureId, float[] vertextArray)
         {
-            GL.Enable(All.Texture2D);
-            GL.BindTexture(All.Texture2D, textureId);
+            GL.Enable(EnableCap.Texture2D);
+            GL.BindTexture(TextureTarget.Texture2D, textureId);
 
-            GL.EnableClientState(All.VertexArray);
-            GL.EnableClientState(All.TextureCoordArray);
+            GL.EnableClientState(ArrayCap.VertexArray);
+            GL.EnableClientState(ArrayCap.TextureCoordArray);
 
 
             var textureArray = new[]
@@ -162,12 +155,12 @@ namespace Mapsui.Rendering.OpenTK
                 0.0f, 1.0f
             };
 
-            GL.VertexPointer(2, All.Float, 0, vertextArray);
-            GL.TexCoordPointer(2, All.Float, 0, textureArray);
-            GL.DrawArrays(All.TriangleFan, 0, 4);
+            GL.VertexPointer(2, VertexPointerType.Float, 0, vertextArray);
+            GL.TexCoordPointer(2, TexCoordPointerType.Float, 0, textureArray);
+            GL.DrawArrays(PrimitiveType.TriangleFan, 0, 4);
 
-            GL.DisableClientState(All.VertexArray);
-            GL.DisableClientState(All.TextureCoordArray);
+            GL.DisableClientState(ArrayCap.VertexArray);
+            GL.DisableClientState(ArrayCap.TextureCoordArray);
         }
     }
 }
