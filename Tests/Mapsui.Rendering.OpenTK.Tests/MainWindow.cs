@@ -24,6 +24,7 @@ namespace Mapsui.Rendering.OpenTK.Tests
 
         public MainWindow()
             : base(800, 600, GraphicsMode.Default, "", GameWindowFlags.Default, DisplayDevice.Default, 2, 0, GraphicsContextFlags.Default)
+
         {
             _samples.Add(ArrangeRenderingTests.Line);
             _samples.Add(ArrangeRenderingTests.PointWithBitmapSymbols);
@@ -88,7 +89,7 @@ namespace Mapsui.Rendering.OpenTK.Tests
         {
             GL.VertexPointer(3, VertexPointerType.Float, 0, vertexArray);
             GL.EnableClientState(ArrayCap.VertexArray);
-            GL.DrawElements(All.Triangles, 3, All.UnsignedByte, _triangles);
+            GL.DrawElements(PrimitiveType.Triangles, 3, DrawElementsType.UnsignedByte, _triangles);
             GL.DisableClientState(ArrayCap.VertexArray);
         }
 
@@ -105,6 +106,14 @@ namespace Mapsui.Rendering.OpenTK.Tests
             GL.Scale(1f / Width, -1f / Height, 1);
 
             Set2DViewport();
+        }
+        
+        protected override void OnLoad(EventArgs e)
+        {
+            GL.ClearColor(Color4.Green);
+            GL.Enable(EnableCap.Texture2D);
+
+            GL.Hint(HintTarget.PerspectiveCorrectionHint, HintMode.Nicest);
         }
 
         private void Set2DViewport()
