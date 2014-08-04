@@ -1,11 +1,14 @@
 ﻿using Mapsui.Tests.Common;
 using OpenTK;
-using OpenTK.Graphics;
-//using OpenTK.Graphics.ES11;
-using OpenTK.Graphics.OpenGL;
 using OpenTK.Input;
 using System;
 using System.Collections.Generic;
+#if ES11
+using OpenTK.Graphics.ES11;
+#else
+using OpenTK.Graphics.OpenGL;
+#endif
+
 namespace Mapsui.Rendering.OpenTK.Tests
 {
     class MainWindow : GameWindow
@@ -19,8 +22,8 @@ namespace Mapsui.Rendering.OpenTK.Tests
 
         public MainWindow() : base(800, 600)
         {
-            _samples.Add(ArrangeRenderingTests.PointWithBitmapSymbols);
             _samples.Add(ArrangeRenderingTests.Line);
+            _samples.Add(ArrangeRenderingTests.PointWithBitmapSymbols);
             _samples.Add(ArrangeRenderingTests.PointsWithVectorStyle);
             _samples.Add(ArrangeRenderingTests.Tiles);
             _map = _samples[_currentSampleIndex]();
@@ -55,15 +58,15 @@ namespace Mapsui.Rendering.OpenTK.Tests
             _viewportHeight = Height;
 
             // Translate and scale are necesary on ES11 on desktop bot not on ES11 on Android or OpenGL on desktop.
-            // GL.Translate(-1f, -1f, 0);
-            // GL.Scale(1f / Width, 1f / Height, 1);
+            GL.Translate(-1f, 1f, 0);
+            GL.Scale(1f / Width, -1f / Height, 1);
 
             Set2DViewport();
         }
         
         protected override void OnLoad(EventArgs e)
         {
-            GL.ClearColor(Color4.White);
+            GL.ClearColor((byte)255, (byte)255, (byte)255, (byte)255);
             GL.Enable(EnableCap.Texture2D);
 
             GL.Hint(HintTarget.PerspectiveCorrectionHint, HintMode.Nicest);
@@ -75,7 +78,7 @@ namespace Mapsui.Rendering.OpenTK.Tests
             GL.LoadIdentity();
            
             GL.Ortho(0, _viewportWidth, _viewportHeight, 0, 0, 1);
-            GL.Translate(0.375, 0.375, 0);
+            // pixel correction: GL.Translate(0.375, 0.375, 0);
 
             GL.MatrixMode(MatrixMode.Modelview);
         }

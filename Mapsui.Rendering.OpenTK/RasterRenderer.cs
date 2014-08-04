@@ -6,8 +6,13 @@ using System.IO;
 using Mapsui.Geometries;
 using Mapsui.Providers;
 using Mapsui.Styles;
+#if ES11
+using OpenTK.Graphics.ES11;
+using ArrayCapX = OpenTK.Graphics.ES11.All;
+#else
 using OpenTK.Graphics.OpenGL;
-using PixelFormat = OpenTK.Graphics.OpenGL.PixelFormat;
+using ArrayCapX = OpenTK.Graphics.OpenGL.ArrayCap;
+#endif
 
 namespace Mapsui.Rendering.OpenTK
 {
@@ -72,7 +77,7 @@ namespace Mapsui.Rendering.OpenTK
             //GL.TexImage2D(TextureTarget.Texture2D, 0, 0, bitmapData.Width, bitmapData.Height, 0, PixelFormat.Rgba, PixelType.Bitmap, bitmapData.Scan0);
             //bitmap.UnlockBits(bitmapData);
             var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
-            GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba, bitmapData.Width, bitmapData.Height, 0, PixelFormat.Bgra, PixelType.UnsignedByte, bitmapData.Scan0);
+            GL.TexImage2D(TextureTarget.Texture2D, 0, 0, bitmapData.Width, bitmapData.Height, 0, 0, PixelType.UnsignedByte, bitmapData.Scan0);
             bitmap.UnlockBits(bitmapData);
 
             GL.BindTexture(TextureTarget.Texture2D, 0);
@@ -134,10 +139,10 @@ namespace Mapsui.Rendering.OpenTK
             GL.Enable(EnableCap.Texture2D);
             GL.BindTexture(TextureTarget.Texture2D, textureId);
 
-            int width;
-            GL.GetTexLevelParameter(TextureTarget.Texture2D,0,  GetTextureParameter.TextureWidth, out width);
-            int height;
-            GL.GetTexLevelParameter(TextureTarget.Texture2D, 0, GetTextureParameter.TextureWidth, out height);
+            int width = 32;
+            //GL.GetTexLevelParameter(TextureTarget.Texture2D,0,  GetTextureParameter.TextureWidth, out width);
+            int height = 32;
+            //GL.GetTexLevelParameter(TextureTarget.Texture2D, 0, GetTextureParameter.TextureWidth, out height);
 
             x = (float)Math.Round(x);
             y = (float)Math.Round(y);
@@ -178,8 +183,8 @@ namespace Mapsui.Rendering.OpenTK
             //The operation/order to blend
             GL.BlendFunc(BlendingFactorSrc.SrcAlpha, BlendingFactorDest.OneMinusSrcAlpha);
 
-            GL.EnableClientState(ArrayCap.VertexArray);
-            GL.EnableClientState(ArrayCap.TextureCoordArray);
+            GL.EnableClientState(ArrayCapX.VertexArray);
+            GL.EnableClientState(ArrayCapX.TextureCoordArray);
             
             var textureArray = new[]
             {
@@ -197,9 +202,9 @@ namespace Mapsui.Rendering.OpenTK
             GL.Disable(EnableCap.Blend);
             //The operation/order to blend
             //GL.BlendFunc(BlendingFactorSrc.SrcAlpha, 0);
-            
-            GL.DisableClientState(ArrayCap.VertexArray);
-            GL.DisableClientState(ArrayCap.TextureCoordArray);
+
+            GL.DisableClientState(ArrayCapX.VertexArray);
+            GL.DisableClientState(ArrayCapX.TextureCoordArray);
         }
     }
 }
