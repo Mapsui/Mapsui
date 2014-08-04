@@ -47,26 +47,26 @@ namespace Mapsui.Tests.Common
 
             var features = new Features
                 {
-                    //new Feature
-                    //    {
-                    //        Geometry = new Point(50, 50),
-                    //        Styles = new[] { new VectorStyle { Fill = new Brush(Color.Red) }}
-                    //    },
+                    new Feature
+                        {
+                            Geometry = new Point(50, 50),
+                            Styles = new[] { new VectorStyle { Fill = new Brush(Color.Red) }}
+                        },
                     new Feature
                         {
                             Geometry = new Point(50, 100),
                             Styles = new[] { new SymbolStyle { Symbol = new Bitmap { Data =  circleIcon }, ResourceId = circleIconPath }}
                         },
-                    //new Feature
-                    //    {
-                    //        Geometry = new Point(100, 50),
-                    //        Styles = new[] { new SymbolStyle { Symbol = new Bitmap { Data = checkeredIcon }, ResourceId = checkeredIconPath }}
-                    //    },
-                    //new Feature
-                    //    {
-                    //        Geometry = new Point(100, 100),
-                    //        Styles = new[] { new VectorStyle { Fill = new Brush(Color.Green), Outline = null }}
-                    //    }
+                    new Feature
+                        {
+                            Geometry = new Point(100, 50),
+                            Styles = new[] { new SymbolStyle { Symbol = new Bitmap { Data = checkeredIcon }, ResourceId = checkeredIconPath }}
+                        },
+                    new Feature
+                        {
+                            Geometry = new Point(100, 100),
+                            Styles = new[] { new VectorStyle { Fill = new Brush(Color.Green), Outline = null }}
+                        }
                 };
             var provider = new MemoryProvider(features);
             return provider;

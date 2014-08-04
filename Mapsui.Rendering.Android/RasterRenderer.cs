@@ -89,5 +89,7 @@ namespace Mapsui.Rendering.Android
             var bitmap = BitmapFactory.DecodeByteArray(rasterData, 0, rasterData.Length);
             return bitmap;
         }
+
+
     }
 }
