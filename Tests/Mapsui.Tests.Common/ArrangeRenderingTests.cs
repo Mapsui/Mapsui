@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using BruTile;
 using Mapsui.Geometries;
@@ -10,6 +11,25 @@ namespace Mapsui.Tests.Common
 {
     public static class ArrangeRenderingTests
     {
+        private static readonly List<Func<Map>> _samples = new List<Func<Map>>();
+
+        public static List<Func<Map>> Samples
+        {
+            get { return _samples; }
+        }
+
+        static ArrangeRenderingTests()
+        {
+            _samples.Add(PointsWithVectorStyle);
+            _samples.Add(PointWithBitmapSymbols);
+            _samples.Add(RotatedBitmapSymbolWithOffset);
+            _samples.Add(PointsWithDifferentSymbolTypes);
+            _samples.Add(SymbolWithWorldUnits);
+            _samples.Add(Polygon);
+            _samples.Add(Line);
+            _samples.Add(Tiles);
+        }
+
         public static Map PointsWithVectorStyle()
         {
             var map = new Map { Viewport = { Center = new Point(100, 100), Width = 200, Height = 200, Resolution = 1 } };
@@ -129,7 +149,7 @@ namespace Mapsui.Tests.Common
             };
 
             var features = TileIndexToFeatures(tileIndexes, new SampleTileSource());
-            map.Layers.Add(new MemoryLayer{ DataSource = new MemoryProvider(features) });
+            map.Layers.Add(new MemoryLayer { DataSource = new MemoryProvider(features) });
             return map;
         }
 

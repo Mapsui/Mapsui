@@ -1,9 +1,7 @@
-﻿using System.IO;
-using BruTile;
-using BruTile.Predefined;
-using Mapsui.Geometries;
+﻿using Mapsui.Geometries;
 using Mapsui.Providers;
 using Mapsui.Styles;
+using System.IO;
 
 namespace Mapsui.Tests.Common
 {
@@ -139,25 +137,13 @@ namespace Mapsui.Tests.Common
             return feature;
         }
 
-        public static byte[] ToByteArray(Stream fileStream)
+        public static byte[] ToByteArray(Stream input)
         {
-            byte[] buffer;
-            try
+            using (var memoryStream = new MemoryStream())
             {
-                var length = (int)fileStream.Length; // get file length
-                buffer = new byte[length]; // create buffer
-                int count; // actual number of bytes read
-                int sum = 0; // total number of bytes read
-
-                // read until Read method returns 0 (end of the stream has been reached)
-                while ((count = fileStream.Read(buffer, sum, length - sum)) > 0)
-                    sum += count; // sum is a buffer offset for next reading
+                input.CopyTo(memoryStream);
+                return memoryStream.ToArray();
             }
-            finally
-            {
-                fileStream.Dispose();
-            }
-            return buffer;
         }
     }
 }
