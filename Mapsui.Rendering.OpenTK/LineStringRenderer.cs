@@ -1,12 +1,8 @@
-﻿using System.Collections.Generic;
-using Mapsui.Geometries;
+﻿using Mapsui.Geometries;
 using Mapsui.Providers;
 using Mapsui.Styles;
-#if ES11
 using OpenTK.Graphics.ES11;
-#else
-using OpenTK.Graphics.OpenGL;
-#endif
+using System.Collections.Generic;
 
 namespace Mapsui.Rendering.OpenTK
 {

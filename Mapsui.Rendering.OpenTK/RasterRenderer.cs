@@ -1,22 +1,10 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Drawing;
-using System.Drawing.Imaging;
 using System.IO;
-
 using Mapsui.Geometries;
 using Mapsui.Providers;
 using Mapsui.Styles;
-using Bitmap = Mapsui.Styles.Bitmap;
-using PixelFormat = OpenTK.Graphics.ES11.PixelFormat;
-#if ES11
 using OpenTK.Graphics.ES11;
-//using Android.Graphics;
-#else
-using OpenTK.Graphics.OpenGL;
-using PixelFormat = OpenTK.Graphics.OpenGL.PixelFormat;
-using System.Drawing.Imaging;
-#endif
 
 namespace Mapsui.Rendering.OpenTK
 {
@@ -85,18 +73,7 @@ namespace Mapsui.Rendering.OpenTK
             
             SetParameters();
 
-            data.Position = 0;
-#if AAAAES11
-            var tileArray = ReadFully(data);
-            var bitmap = BitmapFactory.DecodeByteArray(tileArray, 0, tileArray.Length, new BitmapFactory.Options());
-            Android.Opengl.GLUtils.TexImage2D((int)All.Texture2D, 0, bitmap, 0);
-
-            // All GL.TexImage2D overloads in ES11 throw a NotImplementedException. Still working on a solution.
-#else
-            //var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
-            //GL.TexImage2D(All.Texture2D, 0, PixelInternalFormat.Rgba, bitmapData.Width, bitmapData.Height, 0, PixelFormat.Bgra, PixelType.UnsignedByte, bitmapData.Scan0);
-            //bitmap.UnlockBits(bitmapData);
-#endif
+            TextureLoader.TexImage2D(data);
 
             GL.BindTexture(All.Texture2D, 0);
 
@@ -143,14 +120,6 @@ namespace Mapsui.Rendering.OpenTK
                 rect.MinX, rect.MaxY
             };
         }
-
-        // private static AndroidBitmap ToAndroidBitmap(IGeometry geometry)
-        // {
-        //     var raster = (IRaster)geometry;
-        //     var rasterData = raster.Data.ToArray();
-        //     var bitmap = BitmapFactory.DecodeByteArray(rasterData, 0, rasterData.Length);
-        //     return bitmap;
-        // }
 
         public static void RenderTexture(int textureId, float x, float y)
         {

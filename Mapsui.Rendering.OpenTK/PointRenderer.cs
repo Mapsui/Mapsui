@@ -1,10 +1,6 @@
 ﻿using Mapsui.Providers;
 using Mapsui.Styles;
-#if ES11
 using OpenTK.Graphics.ES11;
-#else
-using OpenTK.Graphics.OpenGL;
-#endif
 using Point = Mapsui.Geometries.Point;
 
 namespace Mapsui.Rendering.OpenTK
