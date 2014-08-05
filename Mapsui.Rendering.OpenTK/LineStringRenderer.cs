@@ -4,10 +4,8 @@ using Mapsui.Providers;
 using Mapsui.Styles;
 #if ES11
 using OpenTK.Graphics.ES11;
-using ArrayCapX = OpenTK.Graphics.ES11.All;
 #else
 using OpenTK.Graphics.OpenGL;
-using ArrayCapX = OpenTK.Graphics.OpenGL.ArrayCap;
 #endif
 
 namespace Mapsui.Rendering.OpenTK
@@ -33,11 +31,11 @@ namespace Mapsui.Rendering.OpenTK
             WorldToScreen(viewport, points);
 
             GL.Color4((byte)lineColor.R, (byte)lineColor.G, (byte)lineColor.B, (byte)lineColor.A);
-            GL.EnableClientState(ArrayCapX.VertexArray);
+            GL.EnableClientState(EnableCap.VertexArray);
             GL.LineWidth(lineWidth);
             GL.VertexPointer(2, VertexPointerType.Float, 0, points);
             GL.DrawArrays(PrimitiveType.Lines, 0, points.Length / 2);
-            GL.DisableClientState(ArrayCapX.VertexArray);
+            GL.DisableClientState(EnableCap.VertexArray);
             GL.Enable(EnableCap.LineSmooth);
         }
 

@@ -6,12 +6,11 @@ using System.IO;
 using Mapsui.Geometries;
 using Mapsui.Providers;
 using Mapsui.Styles;
+using PixelFormat = OpenTK.Graphics.OpenGL.PixelFormat;
 #if ES11
 using OpenTK.Graphics.ES11;
-using ArrayCapX = OpenTK.Graphics.ES11.All;
 #else
 using OpenTK.Graphics.OpenGL;
-using ArrayCapX = OpenTK.Graphics.OpenGL.ArrayCap;
 #endif
 
 namespace Mapsui.Rendering.OpenTK
@@ -73,12 +72,13 @@ namespace Mapsui.Rendering.OpenTK
 
             data.Position = 0;
             var bitmap = (System.Drawing.Bitmap)Image.FromStream(data);
-            //bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
-            //GL.TexImage2D(TextureTarget.Texture2D, 0, 0, bitmapData.Width, bitmapData.Height, 0, PixelFormat.Rgba, PixelType.Bitmap, bitmapData.Scan0);
-            //bitmap.UnlockBits(bitmapData);
+#if ES11
+            // All GL.TexImage2D overloads in ES11 throw a NotImplementedException. Still working on a solution.
+#else
             var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
-            GL.TexImage2D(TextureTarget.Texture2D, 0, 0, bitmapData.Width, bitmapData.Height, 0, 0, PixelType.UnsignedByte, bitmapData.Scan0);
+            GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba, bitmapData.Width, bitmapData.Height, 0, PixelFormat.Bgra, PixelType.UnsignedByte, bitmapData.Scan0);
             bitmap.UnlockBits(bitmapData);
+#endif
 
             GL.BindTexture(TextureTarget.Texture2D, 0);
 
@@ -183,8 +183,8 @@ namespace Mapsui.Rendering.OpenTK
             //The operation/order to blend
             GL.BlendFunc(BlendingFactorSrc.SrcAlpha, BlendingFactorDest.OneMinusSrcAlpha);
 
-            GL.EnableClientState(ArrayCapX.VertexArray);
-            GL.EnableClientState(ArrayCapX.TextureCoordArray);
+            GL.EnableClientState(EnableCap.VertexArray);
+            GL.EnableClientState(EnableCap.TextureCoordArray);
             
             var textureArray = new[]
             {
@@ -203,8 +203,8 @@ namespace Mapsui.Rendering.OpenTK
             //The operation/order to blend
             //GL.BlendFunc(BlendingFactorSrc.SrcAlpha, 0);
 
-            GL.DisableClientState(ArrayCapX.VertexArray);
-            GL.DisableClientState(ArrayCapX.TextureCoordArray);
+            GL.DisableClientState(EnableCap.VertexArray);
+            GL.DisableClientState(EnableCap.TextureCoordArray);
         }
     }
 }

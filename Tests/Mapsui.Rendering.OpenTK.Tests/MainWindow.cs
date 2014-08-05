@@ -27,6 +27,7 @@ namespace Mapsui.Rendering.OpenTK.Tests
             _samples.Add(ArrangeRenderingTests.PointsWithVectorStyle);
             _samples.Add(ArrangeRenderingTests.Tiles);
             _map = _samples[_currentSampleIndex]();
+            Title = "OpenTK Rendering samples - press ENTER for next sample";
         }
 
         protected override void OnRenderFrame(FrameEventArgs e)
@@ -58,8 +59,8 @@ namespace Mapsui.Rendering.OpenTK.Tests
             _viewportHeight = Height;
 
             // Translate and scale are necesary on ES11 on desktop bot not on ES11 on Android or OpenGL on desktop.
-            GL.Translate(-1f, 1f, 0);
-            GL.Scale(1f / Width, -1f / Height, 1);
+            // GL.Translate(-1f, 1f, 0);
+            // GL.Scale(1f / Width, -1f / Height, 1);
 
             Set2DViewport();
         }

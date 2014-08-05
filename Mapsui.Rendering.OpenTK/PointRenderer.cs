@@ -2,10 +2,8 @@
 using Mapsui.Styles;
 #if ES11
 using OpenTK.Graphics.ES11;
-using ArrayCapX = OpenTK.Graphics.ES11.All;
 #else
 using OpenTK.Graphics.OpenGL;
-using ArrayCapX = OpenTK.Graphics.OpenGL.ArrayCap;
 #endif
 using Point = Mapsui.Geometries.Point;
 
@@ -50,11 +48,11 @@ namespace Mapsui.Rendering.OpenTK
                 var fillColor = vectorStyle.Fill.Color;
                 GL.Color4((byte)fillColor.R, (byte)fillColor.G, (byte)fillColor.B, (byte)fillColor.A);
                 GL.PointSize((float)SymbolStyle.DefaultWidth);
-                GL.EnableClientState(ArrayCapX.VertexArray);
+                GL.EnableClientState(EnableCap.VertexArray);
                 var destAsArray = new[] { (float)dest.X, (float)dest.Y };
                 GL.VertexPointer(2, VertexPointerType.Float, 0, destAsArray);
                 GL.DrawArrays(PrimitiveType.Points, 0, 1);
-                GL.DisableClientState(ArrayCapX.VertexArray);
+                GL.DisableClientState(EnableCap.VertexArray);
             }
         }
 
