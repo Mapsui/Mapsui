@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Drawing;
-using System.Drawing.Imaging;
 using System.IO;
 using Mapsui.Geometries;
 using Mapsui.Providers;
 using Mapsui.Styles;
-using PixelFormat = OpenTK.Graphics.OpenGL.PixelFormat;
 #if ES11
 using OpenTK.Graphics.ES11;
 #else
 using OpenTK.Graphics.OpenGL;
+using PixelFormat = OpenTK.Graphics.OpenGL.PixelFormat;
+using System.Drawing.Imaging;
 #endif
 
 namespace Mapsui.Rendering.OpenTK
