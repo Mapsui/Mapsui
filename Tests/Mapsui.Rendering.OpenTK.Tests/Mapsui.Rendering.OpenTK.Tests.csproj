@@ -78,7 +78,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Mapsui.Rendering.OpenTK\Mapsui.Rendering.OpenTK.csproj">
-      <Project>{d2d5df40-f519-4e66-9060-5fef3dacb003}</Project>
+      <Project>{7c1a68be-0db2-479a-84e2-d80e79edf87f}</Project>
       <Name>Mapsui.Rendering.OpenTK</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Mapsui\Mapsui.csproj">

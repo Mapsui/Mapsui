@@ -1,12 +1,17 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
+
 using Mapsui.Geometries;
 using Mapsui.Providers;
 using Mapsui.Styles;
+using Bitmap = Mapsui.Styles.Bitmap;
+using PixelFormat = OpenTK.Graphics.ES11.PixelFormat;
 #if ES11
 using OpenTK.Graphics.ES11;
+//using Android.Graphics;
 #else
 using OpenTK.Graphics.OpenGL;
 using PixelFormat = OpenTK.Graphics.OpenGL.PixelFormat;
@@ -61,36 +66,49 @@ namespace Mapsui.Rendering.OpenTK
             }
         }
 
+        public static byte[] ReadFully(Stream input)
+        {
+            using (var memoryStream = new MemoryStream())
+            {
+                input.CopyTo(memoryStream);
+                return memoryStream.ToArray();
+            }
+        }
+
         public static int LoadTexture(Stream data)
         {
             int texture;
 
-            GL.Enable(EnableCap.Texture2D);
+            GL.Enable(All.Texture2D);
             GL.GenTextures(1, out texture);
-            GL.BindTexture(TextureTarget.Texture2D, texture);
+            GL.BindTexture(All.Texture2D, texture);
+            
             SetParameters();
 
             data.Position = 0;
-            var bitmap = (System.Drawing.Bitmap)Image.FromStream(data);
-#if ES11
+#if AAAAES11
+            var tileArray = ReadFully(data);
+            var bitmap = BitmapFactory.DecodeByteArray(tileArray, 0, tileArray.Length, new BitmapFactory.Options());
+            Android.Opengl.GLUtils.TexImage2D((int)All.Texture2D, 0, bitmap, 0);
+
             // All GL.TexImage2D overloads in ES11 throw a NotImplementedException. Still working on a solution.
 #else
-            var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
-            GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba, bitmapData.Width, bitmapData.Height, 0, PixelFormat.Bgra, PixelType.UnsignedByte, bitmapData.Scan0);
-            bitmap.UnlockBits(bitmapData);
+            //var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+            //GL.TexImage2D(All.Texture2D, 0, PixelInternalFormat.Rgba, bitmapData.Width, bitmapData.Height, 0, PixelFormat.Bgra, PixelType.UnsignedByte, bitmapData.Scan0);
+            //bitmap.UnlockBits(bitmapData);
 #endif
 
-            GL.BindTexture(TextureTarget.Texture2D, 0);
+            GL.BindTexture(All.Texture2D, 0);
 
             return texture;
         }
 
         private static void SetParameters()
         {
-            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.Linear);
-            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Linear);
-            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int)All.ClampToEdge);
-            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int)All.ClampToEdge);
+            GL.TexParameter(All.Texture2D, All.TextureMinFilter, (int)All.Linear);
+            GL.TexParameter(All.Texture2D, All.TextureMagFilter, (int)All.Linear);
+            GL.TexParameter(All.Texture2D, All.TextureWrapS, (int)All.ClampToEdge);
+            GL.TexParameter(All.Texture2D, All.TextureWrapT, (int)All.ClampToEdge);
         }
 
         private static BoundingBox WorldToScreen(IViewport viewport, BoundingBox boundingBox)
@@ -126,23 +144,23 @@ namespace Mapsui.Rendering.OpenTK
             };
         }
 
-        //private static AndroidBitmap ToAndroidBitmap(IGeometry geometry)
-        //{
-        //    var raster = (IRaster)geometry;
-        //    var rasterData = raster.Data.ToArray();
-        //    var bitmap = BitmapFactory.DecodeByteArray(rasterData, 0, rasterData.Length);
-        //    return bitmap;
-        //}
+        // private static AndroidBitmap ToAndroidBitmap(IGeometry geometry)
+        // {
+        //     var raster = (IRaster)geometry;
+        //     var rasterData = raster.Data.ToArray();
+        //     var bitmap = BitmapFactory.DecodeByteArray(rasterData, 0, rasterData.Length);
+        //     return bitmap;
+        // }
 
         public static void RenderTexture(int textureId, float x, float y)
         {
-            GL.Enable(EnableCap.Texture2D);
-            GL.BindTexture(TextureTarget.Texture2D, textureId);
+            GL.Enable(All.Texture2D);
+            GL.BindTexture(All.Texture2D, textureId);
 
             int width = 32;
-            //GL.GetTexLevelParameter(TextureTarget.Texture2D,0,  GetTextureParameter.TextureWidth, out width);
+            //GL.GetTexLevelParameter(All.Texture2D,0,  GetTextureParameter.TextureWidth, out width);
             int height = 32;
-            //GL.GetTexLevelParameter(TextureTarget.Texture2D, 0, GetTextureParameter.TextureWidth, out height);
+            //GL.GetTexLevelParameter(All.Texture2D, 0, GetTextureParameter.TextureWidth, out height);
 
             x = (float)Math.Round(x);
             y = (float)Math.Round(y);
@@ -159,32 +177,30 @@ namespace Mapsui.Rendering.OpenTK
 
             RenderTextureWithoutBinding(textureId, vertextArray);
 
-            GL.BindTexture(TextureTarget.Texture2D, 0);
-            GL.Disable(EnableCap.Texture2D);
+            GL.BindTexture(All.Texture2D, 0);
+            GL.Disable(All.Texture2D);
         }
 
         public static void RenderTexture(int textureId, float[] vertextArray)
         {
-            GL.Enable(EnableCap.Texture2D);
-            GL.BindTexture(TextureTarget.Texture2D, textureId);
+            GL.Enable(All.Texture2D);
+            GL.BindTexture(All.Texture2D, textureId);
 
             RenderTextureWithoutBinding(textureId, vertextArray);
 
-            GL.BindTexture(TextureTarget.Texture2D, 0);
-            GL.Disable(EnableCap.Texture2D);
+            GL.BindTexture(All.Texture2D, 0);
+            GL.Disable(All.Texture2D);
         }
 
         public static void RenderTextureWithoutBinding(int textureId, float[] vertextArray)
         {
             GL.Color4((byte)255, (byte)255, (byte)255, (byte)255);
+            
+            GL.Enable(All.Blend); //Basically enables the alpha channel to be used in the color buffer
+            GL.BlendFunc(All.SrcAlpha, All.OneMinusSrcAlpha); //The operation/order to blend
 
-            //Basically enables the alpha channel to be used in the color buffer
-            GL.Enable(EnableCap.Blend);
-            //The operation/order to blend
-            GL.BlendFunc(BlendingFactorSrc.SrcAlpha, BlendingFactorDest.OneMinusSrcAlpha);
-
-            GL.EnableClientState(EnableCap.VertexArray);
-            GL.EnableClientState(EnableCap.TextureCoordArray);
+            GL.EnableClientState(All.VertexArray);
+            GL.EnableClientState(All.TextureCoordArray);
             
             var textureArray = new[]
             {
@@ -194,17 +210,14 @@ namespace Mapsui.Rendering.OpenTK
                 0.0f, 1.0f
             };
 
-            GL.VertexPointer(2, VertexPointerType.Float, 0, vertextArray);
-            GL.TexCoordPointer(2, TexCoordPointerType.Float, 0, textureArray);
-            GL.DrawArrays(PrimitiveType.TriangleFan, 0, 4);
+            GL.VertexPointer(2, All.Float, 0, vertextArray);
+            GL.TexCoordPointer(2, All.Float, 0, textureArray);
+            GL.DrawArrays(All.TriangleFan, 0, 4);
+            
+            GL.Disable(All.Blend); //Basically enables the alpha channel to be used in the color buffer
 
-            //Basically enables the alpha channel to be used in the color buffer
-            GL.Disable(EnableCap.Blend);
-            //The operation/order to blend
-            //GL.BlendFunc(BlendingFactorSrc.SrcAlpha, 0);
-
-            GL.DisableClientState(EnableCap.VertexArray);
-            GL.DisableClientState(EnableCap.TextureCoordArray);
+            GL.DisableClientState(All.VertexArray);
+            GL.DisableClientState(All.TextureCoordArray);
         }
     }
 }

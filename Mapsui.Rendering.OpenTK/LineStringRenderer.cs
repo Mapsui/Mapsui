@@ -31,12 +31,12 @@ namespace Mapsui.Rendering.OpenTK
             WorldToScreen(viewport, points);
 
             GL.Color4((byte)lineColor.R, (byte)lineColor.G, (byte)lineColor.B, (byte)lineColor.A);
-            GL.EnableClientState(EnableCap.VertexArray);
+            GL.EnableClientState(All.VertexArray);
             GL.LineWidth(lineWidth);
-            GL.VertexPointer(2, VertexPointerType.Float, 0, points);
-            GL.DrawArrays(PrimitiveType.Lines, 0, points.Length / 2);
-            GL.DisableClientState(EnableCap.VertexArray);
-            GL.Enable(EnableCap.LineSmooth);
+            GL.VertexPointer(2, All.Float, 0, points);
+            GL.DrawArrays(All.Lines, 0, points.Length / 2);
+            GL.DisableClientState(All.VertexArray);
+            GL.Enable(All.LineSmooth);
         }
 
         private static float[] ToOpenTK(IList<Point> vertices)

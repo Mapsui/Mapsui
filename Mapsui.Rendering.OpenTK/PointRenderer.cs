@@ -39,7 +39,6 @@ namespace Mapsui.Rendering.OpenTK
                 }
                 symbolType = symbolStyle.SymbolType;
                 if (symbolStyle.SymbolScale > 0) symbolSize = (float)symbolStyle.SymbolScale * symbolSize;
-
             }
 
             var vectorStyle = style as VectorStyle;
@@ -48,11 +47,11 @@ namespace Mapsui.Rendering.OpenTK
                 var fillColor = vectorStyle.Fill.Color;
                 GL.Color4((byte)fillColor.R, (byte)fillColor.G, (byte)fillColor.B, (byte)fillColor.A);
                 GL.PointSize((float)SymbolStyle.DefaultWidth);
-                GL.EnableClientState(EnableCap.VertexArray);
+                GL.EnableClientState(All.VertexArray);
                 var destAsArray = new[] { (float)dest.X, (float)dest.Y };
-                GL.VertexPointer(2, VertexPointerType.Float, 0, destAsArray);
-                GL.DrawArrays(PrimitiveType.Points, 0, 1);
-                GL.DisableClientState(EnableCap.VertexArray);
+                GL.VertexPointer(2, All.Float, 0, destAsArray);
+                GL.DrawArrays(All.Points, 0, 1);
+                GL.DisableClientState(All.VertexArray);
             }
         }
 
