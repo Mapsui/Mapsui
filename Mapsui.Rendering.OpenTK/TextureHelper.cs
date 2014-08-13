@@ -74,7 +74,7 @@ namespace Mapsui.Rendering.OpenTK
         {
             GL.Color4((byte)255, (byte)255, (byte)255, (byte)255);
 
-            GL.Enable(All.Blend); //Basically enables the alpha channel to be used in the color buffer
+            GL.Enable(All.Blend); // Enables the alpha channel to be used in the color buffer
             GL.BlendFunc(All.SrcAlpha, All.OneMinusSrcAlpha); //The operation/order to blend
 
             GL.EnableClientState(All.VertexArray);
@@ -92,7 +92,7 @@ namespace Mapsui.Rendering.OpenTK
             GL.TexCoordPointer(2, All.Float, 0, textureArray);
             GL.DrawArrays(All.TriangleFan, 0, 4);
 
-            GL.Disable(All.Blend); //Basically enables the alpha channel to be used in the color buffer
+            GL.Disable(All.Blend);
 
             GL.DisableClientState(All.VertexArray);
             GL.DisableClientState(All.TextureCoordArray);
