@@ -8,22 +8,6 @@ using System.IO;
 
 namespace Mapsui.Rendering.OpenTK
 {
-    struct RectF
-    {
-        public RectF(float minX, float minY, float maxX, float maxY)
-        {
-            MinX = minX;
-            MinY = minY;
-            MaxX = maxX;
-            MaxY = maxY;
-        }
-
-        public float MinX;
-        public float MinY;
-        public float MaxX;
-        public float MaxY;
-    }
-
     public static class RasterRenderer
     {
         public static void Draw(IViewport viewport, IStyle style, IFeature feature)
@@ -43,32 +27,15 @@ namespace Mapsui.Rendering.OpenTK
                     cachedTexture = (CachedTexture)feature.RenderedGeometry[style];
                 }
                 
-                var dest = WorldToScreen(viewport, feature.Geometry.GetBoundingBox());
-                dest = new BoundingBox(
-                    dest.MinX,
-                    dest.MinY,
-                    dest.MaxX,
-                    dest.MaxY);
-
-                var destination = RoundToPixel(dest);
-
-                RenderTexture(cachedTexture.TextureId, ToVertexArray(destination));
+                var destination = WorldToScreen(viewport, feature.Geometry.GetBoundingBox());
+                RenderTexture(cachedTexture.TextureId, ToVertexArray(RoundToPixel(destination)));
             }
             catch (Exception ex)
             {
                 Trace.WriteLine(ex.Message);
             }
         }
-
-        public static byte[] ReadFully(Stream input)
-        {
-            using (var memoryStream = new MemoryStream())
-            {
-                input.CopyTo(memoryStream);
-                return memoryStream.ToArray();
-            }
-        }
-
+        
         public static CachedTexture LoadTexture(Stream data)
         {
             var cachedTexture = new CachedTexture();
@@ -107,51 +74,37 @@ namespace Mapsui.Rendering.OpenTK
                 );
         }
 
-        private static RectF RoundToPixel(BoundingBox dest)
+        private static BoundingBox RoundToPixel(BoundingBox boundingBox)
         {
-            return new RectF(
-                (float)Math.Round(dest.Left),
-                (float)Math.Round(Math.Min(dest.Top, dest.Bottom)),
-                (float)Math.Round(dest.Right),
-                (float)Math.Round(Math.Max(dest.Top, dest.Bottom)));
+            return new BoundingBox(
+                (float)Math.Round(boundingBox.Left),
+                (float)Math.Round(Math.Min(boundingBox.Top, boundingBox.Bottom)),
+                (float)Math.Round(boundingBox.Right),
+                (float)Math.Round(Math.Max(boundingBox.Top, boundingBox.Bottom)));
         }
 
-        private static float[] ToVertexArray(RectF rect)
+        private static float[] ToVertexArray(BoundingBox boundingBox)
         {
             return new[]
             {
-                rect.MinX, rect.MinY,
-                rect.MaxX, rect.MinY,
-                rect.MaxX, rect.MaxY,
-                rect.MinX, rect.MaxY
+                (float)boundingBox.MinX, (float)boundingBox.MinY,
+                (float)boundingBox.MaxX, (float)boundingBox.MinY,
+                (float)boundingBox.MaxX, (float)boundingBox.MaxY,
+                (float)boundingBox.MinX, (float)boundingBox.MaxY
             };
         }
 
         public static void RenderTexture(CachedTexture cachedTexture, float x, float y, float orientation = 0, float offsetX = 0, float offsetY = 0)
         {
-
             GL.Enable(All.Texture2D);
             GL.BindTexture(All.Texture2D, cachedTexture.TextureId);
             
-            //GL.MatrixMode(MatrixMode.Projection);
             GL.PushMatrix();
             GL.Translate(x, y, 0f);
-            
             GL.Rotate(orientation, 0, 0, 1);
-            //GL.Translate(-cachedTexture.Width * 0.5f, -cachedTexture.Height * 0.5f, 0f);
             
-            //GL.Translate(x, y, 0f);
-            //GL.MatrixMode(MatrixMode.Modelview);
-
-            //GL.MatrixMode(GL_TEXTURE);
-            //GL.LoadIdentity();
-            //GL.Translate(0.5f, 0.5f, 0.0f);
-            //GL.Rotate(angle, 0.0, 0.0, 1.0);
-            //GL.Translatef(-0.5, -0.5, 0.0);
-            //GL.MatrixMode(GL_MODELVIEW);
-
-            x = -offsetX; //(float)Math.Round(x);
-            y = -offsetY; //(float)Math.Round(y);
+            x = -offsetX; 
+            y = -offsetY; 
             var halfWidth = cachedTexture.Width / 2;
             var halfHeight = cachedTexture.Height / 2;
 
@@ -166,7 +119,6 @@ namespace Mapsui.Rendering.OpenTK
             RenderTextureWithoutBinding(cachedTexture.TextureId, vertextArray);
 
             GL.PopMatrix();
-
             GL.BindTexture(All.Texture2D, 0);
             GL.Disable(All.Texture2D);
         }
