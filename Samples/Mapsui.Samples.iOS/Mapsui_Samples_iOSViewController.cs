@@ -11,7 +11,7 @@ namespace Mapsui.Samples.iOS
 {
 	public partial class Mapsui_Samples_iOSViewController : UIViewController
 	{
-		private MapControl _mapcontrol;
+		private MapControlUIKit _mapcontrol;
 
 		public Mapsui_Samples_iOSViewController () : base ("Mapsui_Samples_iOSViewController", null)
 		{
@@ -29,7 +29,7 @@ namespace Mapsui.Samples.iOS
 		{
 			base.ViewDidLoad ();
 
-			_mapcontrol = new MapControl (this.View.Frame);
+			_mapcontrol = new MapControlUIKit (this.View.Frame);
 			_mapcontrol.ViewportInitializedEvent += (object sender) => {
 				SetExtent ();
 			};

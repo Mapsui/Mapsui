@@ -19,9 +19,19 @@ namespace Mapsui.Rendering.OpenTK
 
         private static void RenderFeature(IViewport viewport, IStyle style, IFeature feature)
         {
-            if (feature.Geometry is Point) PointRenderer.Draw(viewport, style, feature);
-            else if (feature.Geometry is LineString) LineStringRenderer.Draw(viewport, style, feature);
-            else if (feature.Geometry is IRaster) RasterRenderer.Draw(viewport, style, feature);
+            if (feature.Geometry is Point) 
+            {
+                PointRenderer.Draw(viewport, style, feature);
+            }
+            else if (feature.Geometry is LineString) 
+            {
+                LineStringRenderer.Draw(viewport, style, feature);
+            }
+            else if (feature.Geometry is IRaster) 
+            {
+                RasterRenderer.Draw(viewport, style, feature);
+            }
+
         }
 
         public MemoryStream RenderToBitmapStream(IViewport viewport, IEnumerable<ILayer> layers)

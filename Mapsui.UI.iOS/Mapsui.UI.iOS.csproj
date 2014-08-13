@@ -35,12 +35,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="FpsCounter.cs" />
-    <Compile Include="GestureDelegate.cs" />
     <Compile Include="MapControl.cs" />
-    <Compile Include="MapHelper.cs" />
+    <Compile Include="MapControlUIKit.cs" />
+    <Compile Include="Monkey.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="OpenTK-1.0" />
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />

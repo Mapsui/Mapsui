@@ -41,6 +41,9 @@
     <Reference Include="OpenTK, Version=1.1.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
       <HintPath>..\..\packages\OpenTK.1.1.1589.5942\lib\NET40\OpenTK.dll</HintPath>
     </Reference>
+    <Reference Include="OpenTK.Compatibility">
+      <HintPath>..\..\packages\Lyncee.OpenTK.Compatibility.1.1.1173.43181\lib\OpenTK.Compatibility.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -49,8 +52,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FpsCounter.cs" />
     <Compile Include="MainWindow.cs" />
-    <Compile Include="MapRendererTests.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">

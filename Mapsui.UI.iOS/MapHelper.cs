@@ -61,7 +61,6 @@ namespace Mapsui.UI.iOS
             var handler = TouchUp;
             if (handler != null) handler(touches, evt);
         }
-
         
         public static Point ConvertScreenToWorld(double x, double y)
         {
@@ -100,8 +99,6 @@ namespace Mapsui.UI.iOS
             // Log4netLogger.Debug("Screen polygon to map polygon conversion ended");
             return new Polygon(linearRing);
         }
-
-        
         
         public static Point ConvertWorldToScreen(double x, double y)
         {
@@ -123,7 +120,6 @@ namespace Mapsui.UI.iOS
         {
             return ConvertWorldToScreen(iOSPoint.X, iOSPoint.Y);
         }
-
         
         public static void RefreshMap()
         {

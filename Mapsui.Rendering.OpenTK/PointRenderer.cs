@@ -19,18 +19,18 @@ namespace Mapsui.Rendering.OpenTK
             {
                 if (symbolStyle.Symbol != null && symbolStyle.Symbol.Data != null)
                 {
-                    int textureId;
+                    CachedTexture cachedTexture;
                     if (!feature.RenderedGeometry.ContainsKey(style))
                     {
-                        textureId = RasterRenderer.LoadTexture(symbolStyle.Symbol.Data);
-                        feature.RenderedGeometry[style] = textureId;
+                        cachedTexture = RasterRenderer.LoadTexture(symbolStyle.Symbol.Data);
+                        feature.RenderedGeometry[style] = cachedTexture;
                     }
                     else
                     {
-                        textureId = (int)feature.RenderedGeometry[style];
+                        cachedTexture = (CachedTexture)feature.RenderedGeometry[style];
                     }
 
-                    RasterRenderer.RenderTexture(textureId, (float)dest.X, (float)dest.Y);
+                    RasterRenderer.RenderTexture(cachedTexture, (float)dest.X, (float)dest.Y, (float)symbolStyle.SymbolRotation, (float)symbolStyle.SymbolOffset.X, (float)symbolStyle.SymbolOffset.Y);
                     return;
                 }
                 symbolType = symbolStyle.SymbolType;
@@ -40,8 +40,17 @@ namespace Mapsui.Rendering.OpenTK
             var vectorStyle = style as VectorStyle;
             if (vectorStyle != null)
             {
+                GL.MatrixMode(All.Modelview);
+                GL.LoadIdentity();
+                GL.MatrixMode(All.Projection);
+
                 var fillColor = vectorStyle.Fill.Color;
-                GL.Color4((byte)fillColor.R, (byte)fillColor.G, (byte)fillColor.B, (byte)fillColor.A);
+                var r = (byte)fillColor.R;
+                var g = (byte)fillColor.G;
+                var b = (byte)fillColor.B;
+                var a = (byte)fillColor.A;
+                GL.Color4(r, g, b, a);
+                //GL.Color4((byte)fillColor.R, (byte)fillColor.G, (byte)fillColor.B, (byte)fillColor.A);
                 GL.PointSize((float)SymbolStyle.DefaultWidth);
                 GL.EnableClientState(All.VertexArray);
                 var destAsArray = new[] { (float)dest.X, (float)dest.Y };
@@ -50,7 +59,5 @@ namespace Mapsui.Rendering.OpenTK
                 GL.DisableClientState(All.VertexArray);
             }
         }
-
-     
     }
 }

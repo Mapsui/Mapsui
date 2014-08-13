@@ -1,276 +1,109 @@
-using Mapsui.Fetcher;
-using Mapsui.Rendering.iOS;
-using MonoTouch.CoreFoundation;
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
 using System;
-using System.ComponentModel;
-using System.Drawing;
-using Math = System.Math;
+using GLKBaseEffectDrawing;
+using MonoTouch.GLKit;
+using MonoTouch.OpenGLES;
+using OpenTK;
+using OpenTK.Graphics.ES20;
 
 namespace Mapsui.UI.iOS
 {
-    [Register("MapControl")]
-    public class MapControl : UIView
+    class MapControl : GLKViewController
     {
-        public delegate void ViewportInitializedEventHandler(object sender);
-        public event ViewportInitializedEventHandler ViewportInitializedEvent;
+        float _rotation;
+        uint _vertexArray;
+        uint _vertexBuffer;
+        EAGLContext _context;
+        GLKBaseEffect _effect;
 
-        private PointF _previousMid;
-        private PointF _currentMid;
-        private float _oldDist = 1f;
-
-        private bool _viewportInitialized;
-        public bool ViewportInitialized
+        public override void ViewDidLoad()
         {
-            get { return _viewportInitialized; }
-            set
-            {
-                _viewportInitialized = value;
-                if (_viewportInitialized && ViewportInitializedEvent != null) ViewportInitializedEvent(this);
-            }
+            base.ViewDidLoad();
+
+            _context = new EAGLContext(EAGLRenderingAPI.OpenGLES2);
+
+            if (_context == null)
+                Console.WriteLine("Failed to create ES context");
+
+            var view = (GLKView)View;
+            view.Context = _context;
+            view.DrawableDepthFormat = GLKViewDrawableDepthFormat.Format24;
+            view.DrawInRect += Draw;
+
+            SetupGl();
         }
 
-        private float Width { get { return Frame.Width; } }
-        private float Height { get { return Frame.Height; } }
-
-        public MapControl(IntPtr handle)
-            : base(handle)
+        void SetupGl()
         {
-            Initialize();
+            EAGLContext.SetCurrentContext(_context);
+
+            _effect = new GLKBaseEffect { LightingType = GLKLightingType.PerPixel };
+
+            _effect.Light0.Enabled = true;
+            _effect.Light0.DiffuseColor = new Vector4(1.0f, 0.4f, 0.4f, 1.0f);
+            _effect.Light0.Position = new Vector4(-5f, -5f, 10f, 1f);
+            _effect.Light0.SpecularColor = new Vector4(1f, 0f, 0f, 1f);
+
+            _effect.Light1.Enabled = true;
+            _effect.Light1.DiffuseColor = new Vector4(1f, 0.4f, 0.4f, 1f);
+            _effect.Light1.Position = new Vector4(15f, 15f, 10f, 1f);
+            _effect.Light1.SpecularColor = new Vector4(1f, 0f, 0f, 1f);
+
+            _effect.Material.DiffuseColor = new Vector4(0f, 0.5f, 1f, 1f);
+            _effect.Material.AmbientColor = new Vector4(0f, 0.5f, 0f, 1f);
+            _effect.Material.SpecularColor = new Vector4(1f, 0f, 0f, 1f);
+            _effect.Material.Shininess = 20f;
+            _effect.Material.EmissiveColor = new Vector4(0.2f, 0f, 0.2f, 1f);
+
+            GL.Enable(EnableCap.DepthTest);
+
+            GL.Oes.GenVertexArrays(1, out _vertexArray);
+            GL.Oes.BindVertexArray(_vertexArray);
+
+            GL.GenBuffers(1, out _vertexBuffer);
+            GL.BindBuffer(BufferTarget.ArrayBuffer, _vertexBuffer);
+            GL.BufferData(BufferTarget.ArrayBuffer, (IntPtr)(Monkey.MeshVertexData.Length * sizeof(float)),
+                           Monkey.MeshVertexData, BufferUsage.StaticDraw);
+
+            GL.EnableVertexAttribArray((int)GLKVertexAttrib.Position);
+            GL.VertexAttribPointer((int)GLKVertexAttrib.Position, 3, VertexAttribPointerType.Float,
+                                    false, 6 * sizeof(float), 0);
+
+            GL.EnableVertexAttribArray((int)GLKVertexAttrib.Normal);
+            GL.VertexAttribPointer((int)GLKVertexAttrib.Normal, 3, VertexAttribPointerType.Float,
+                                    false, 6 * sizeof(float), 12);
+
+            GL.Oes.BindVertexArray(0);
         }
 
-        public MapControl(RectangleF frame)
-            : base(frame)
+        public override void Update()
         {
-            Initialize();
-        }
-        
-        private MapRenderer _renderer;
-        private Map _map;
+            float aspect = Math.Abs(View.Bounds.Size.Width / View.Bounds.Size.Height);
 
-        private void ViewportOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
-        {
-            //System.Diagnostics.Debug.WriteLine ("ViewportOnPropertyChanged");
-            RefreshGraphics();
-        }
+            Matrix4 projectionMatrix =
+                Matrix4.CreatePerspectiveFieldOfView((float)(Math.PI * 65f / 180.0f),
+                                                   aspect, 0.1f, 100.0f);
 
-        public void Initialize()
-        {
-            Map = new Map();
-            BackgroundColor = UIColor.White;
-            _renderer = new MapRenderer(this);
+            _effect.Transform.ProjectionMatrix = projectionMatrix;
 
-            InitializeViewport();
+            Matrix4 modelViewMatrix = Matrix4.CreateTranslation(new Vector3(0f, 0f, -3.5f));
+            modelViewMatrix = Matrix4.Mult(Matrix4.CreateFromAxisAngle(new Vector3(1f, 1f, 1f), _rotation), modelViewMatrix);
 
-            ClipsToBounds = true;
+            _effect.Transform.ModelViewMatrix = modelViewMatrix;
 
-            var pinchGesture = new UIPinchGestureRecognizer(PinchGesture) { Enabled = true };
-            AddGestureRecognizer(pinchGesture);
+            _rotation += (float)TimeSinceLastUpdate * 0.5f;
         }
 
-        private void InitializeViewport()
+        public void Draw(object sender, GLKViewDrawEventArgs args)
         {
-            if (Math.Abs(Width - 0f) < Utilities.Constants.Epsilon) return;
-            if (_map == null) return;
-            if (_map.Envelope == null) return;
-            if (Math.Abs(_map.Envelope.Width - 0d) < Utilities.Constants.Epsilon) return;
-            if (Math.Abs(_map.Envelope.Height - 0d) < Utilities.Constants.Epsilon) return;
-            if (_map.Envelope.GetCentroid() == null) return;
+            GL.ClearColor(0.65f, 0.65f, 0.65f, 1f);
+            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
-            if (double.IsNaN(_map.Viewport.Resolution) || double.IsInfinity(_map.Viewport.Resolution))
-                _map.Viewport.Resolution = _map.Envelope.Width / Width;
-            if ((double.IsNaN(_map.Viewport.Center.X)) || double.IsNaN(_map.Viewport.Center.Y) ||
-                double.IsInfinity(_map.Viewport.Center.X) || double.IsInfinity(_map.Viewport.Center.Y))
-                _map.Viewport.Center = _map.Envelope.GetCentroid();
+            GL.Oes.BindVertexArray(_vertexArray);
 
-            _map.Viewport.Width = Width;
-            _map.Viewport.Height = Height;
-            _map.Viewport.RenderResolutionMultiplier = 2;
+            _effect.PrepareToDraw();
 
-            _map.ViewChanged(true);
-            _viewportInitialized = true;
+            GL.DrawArrays(BeginMode.Triangles, 0, Monkey.MeshVertexData.Length / 6);
         }
 
-        private void PinchGesture(UIPinchGestureRecognizer recognizer)
-        {
-            if (recognizer.NumberOfTouches < 2)
-                return;
-
-            if (recognizer.State == UIGestureRecognizerState.Began)
-            {
-                _oldDist = 1;
-                _currentMid = recognizer.LocationInView(this);
-            }
-
-            float scale = 1 - (_oldDist - recognizer.Scale);
-
-            if (scale > 0.5 && scale < 1.5)
-            {
-                if (_oldDist != recognizer.Scale)
-                {
-                    _oldDist = recognizer.Scale;
-                    _currentMid = recognizer.LocationInView(this);
-                    _previousMid = new PointF(_currentMid.X, _currentMid.Y);
-
-                    _map.Viewport.Center = _map.Viewport.ScreenToWorld(
-                        _currentMid.X,
-                        _currentMid.Y);
-                    _map.Viewport.Resolution = _map.Viewport.Resolution / scale;
-                    _map.Viewport.Center = _map.Viewport.ScreenToWorld(
-                        (_map.Viewport.Width - _currentMid.X),
-                        (_map.Viewport.Height - _currentMid.Y));
-                }
-
-                _map.Viewport.Transform(
-                    _currentMid.X,
-                    _currentMid.Y,
-                    _previousMid.X,
-                    _previousMid.Y);
-
-                RefreshGraphics();
-            }
-
-            var majorChange = (recognizer.State == UIGestureRecognizerState.Ended);
-            _map.ViewChanged(majorChange);
-        }
-
-        public override void TouchesMoved(NSSet touches, UIEvent evt)
-        {
-            if (touches.Count == 1)
-            {
-                var touch = touches.AnyObject as UITouch;
-                if (touch != null)
-                {
-                    var currentPos = touch.LocationInView(this);
-                    var previousPos = touch.PreviousLocationInView(this);
-
-                    var cRect = new Rectangle(new Point((int)currentPos.X, (int)currentPos.Y), new Size(5, 5));
-                    var pRect = new Rectangle(new Point((int)previousPos.X, (int)previousPos.Y), new Size(5, 5));
-
-                    if (!cRect.IntersectsWith(pRect))
-                    {
-                        _map.Viewport.Transform(currentPos.X, currentPos.Y, previousPos.X, previousPos.Y);
-
-                        RefreshGraphics();
-                    }
-                }
-            }
-        }
-
-        public override void TouchesEnded(NSSet touches, UIEvent evt)
-        {
-            //base.TouchesEnded (touches, evt);
-            RefreshGraphics();
-            _map.ViewChanged(true);
-        }
-
-        /// <summary>
-        /// LoadContent will be called once per game and is the place to load
-        /// all of your content.
-        /// </summary>
-        protected void LoadContent()
-        {
-        }
-
-        /// <summary>
-        /// UnloadContent will be called once per game and is the place to unload
-        /// all content.
-        /// </summary>
-        protected void UnloadContent()
-        {
-        }
-
-        public Map Map
-        {
-            get
-            {
-                return _map;
-            }
-            set
-            {
-                if (_map != null)
-                {
-                    var temp = _map;
-                    _map = null;
-                    temp.PropertyChanged -= MapPropertyChanged;
-                    temp.Dispose();
-                }
-
-                _map = value;
-                //all changes of all layers are returned through this event handler on the map
-                if (_map != null)
-                {
-                    _map.DataChanged += MapDataChanged;
-                    _map.PropertyChanged += MapPropertyChanged;
-                    _map.Viewport.PropertyChanged += ViewportOnPropertyChanged; // not sure if this should be a direct coupling 
-                    _map.ViewChanged(true);
-                }
-                RefreshGraphics();
-            }
-        }
-
-        private void MapPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName != "Envelope") return;
-
-            InitializeViewport();
-            _map.ViewChanged(true);
-        }
-
-        public void MapDataChanged(object sender, DataChangedEventArgs e)
-        {
-            string errorMessage;
-
-            DispatchQueue.MainQueue.DispatchAsync(delegate
-            {
-                if (e == null)
-                {
-                    errorMessage = "MapDataChanged Unexpected error: DataChangedEventArgs can not be null";
-                    Console.WriteLine(errorMessage);
-                }
-                else if (e.Cancelled)
-                {
-                    errorMessage = "MapDataChanged: Cancelled";
-                    System.Diagnostics.Debug.WriteLine(errorMessage);
-                }
-                else if (e.Error is System.Net.WebException)
-                {
-                    errorMessage = "MapDataChanged WebException: " + e.Error.Message;
-                    Console.WriteLine(errorMessage);
-                }
-                else if (e.Error != null)
-                {
-                    errorMessage = "MapDataChanged errorMessage: " + e.Error.GetType() + ": " + e.Error.Message;
-                    Console.WriteLine(errorMessage);
-                }
-
-                RefreshGraphics();
-            });
-        }
-
-        private void RefreshGraphics()
-        {
-            //			System.Diagnostics.Debug.WriteLine("RefreshGraphics");
-            SetNeedsDisplay();
-        }
-
-        public override void Draw(RectangleF rect)
-        {
-            base.Draw(rect);
-            if (!ViewportInitialized) InitializeViewport();
-            if (!ViewportInitialized) return;
-
-            if (Width != _map.Viewport.Width) _map.Viewport.Width = Width;
-            if (Height != _map.Viewport.Height) _map.Viewport.Height = Height;
-
-            _renderer.Render(_map.Viewport, _map.Layers);
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            base.Dispose(disposing);
-            _renderer.Dispose();
-        }
     }
 }

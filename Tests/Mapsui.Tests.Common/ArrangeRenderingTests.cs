@@ -1,33 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using BruTile;
+﻿using BruTile;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Styles;
+using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace Mapsui.Tests.Common
 {
     public static class ArrangeRenderingTests
     {
-        private static readonly List<Func<Map>> _samples = new List<Func<Map>>();
-
-        public static List<Func<Map>> Samples
-        {
-            get { return _samples; }
-        }
+        public static readonly List<Func<Map>> Samples = new List<Func<Map>>();
 
         static ArrangeRenderingTests()
         {
-            _samples.Add(PointsWithVectorStyle);
-            _samples.Add(PointWithBitmapSymbols);
-            _samples.Add(RotatedBitmapSymbolWithOffset);
-            _samples.Add(PointsWithDifferentSymbolTypes);
-            _samples.Add(SymbolWithWorldUnits);
-            _samples.Add(Polygon);
-            _samples.Add(Line);
-            _samples.Add(Tiles);
+            Samples.Add(PointsWithVectorStyle);
+            Samples.Add(PointWithBitmapSymbols);
+            Samples.Add(RotatedBitmapSymbolWithOffset);
+            Samples.Add(PointsWithDifferentSymbolTypes);
+            Samples.Add(SymbolWithWorldUnits);
+            Samples.Add(Polygon);
+            Samples.Add(Line);
+            Samples.Add(Tiles);
         }
 
         public static Map PointsWithVectorStyle()

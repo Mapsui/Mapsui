@@ -16,7 +16,7 @@ namespace Mapsui.Samples.Android
         {
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Main);
-            var mapView = FindViewById<MapView>(Resource.Id.mapview);
+            var mapView = FindViewById<MapControl>(Resource.Id.mapview);
             mapView.Map.Layers.Add(new TileLayer(new OsmTileSource()) { LayerName = "OSM" });
             var lineStringLayer = LineStringSample.CreateLineStringLayer();
             lineStringLayer.Style = CreateLineStringStyle();

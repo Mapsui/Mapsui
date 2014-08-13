@@ -80,7 +80,6 @@ namespace Mapsui.UI.Android
 
         void MapView_Touch(object sender, TouchEventArgs args)
         {
-
             var x = (int)args.Event.RawX;
             var y = (int)args.Event.RawY;
             switch (args.Event.Action)
@@ -241,7 +240,7 @@ namespace Mapsui.UI.Android
             return (e.Cancelled) ? "Cancelled" : ((e.Error != null) ? e.Error.GetType() + ": " + e.Error.Message : "");
         }
 
-        private void RefreshGraphics() //should be private soon
+        private void RefreshGraphics() 
         {
             PostInvalidate();
         }

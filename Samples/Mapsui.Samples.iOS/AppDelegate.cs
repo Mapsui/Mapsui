@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using MonoTouch.Foundation;
+﻿using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 
 namespace Mapsui.Samples.iOS
@@ -13,8 +10,8 @@ namespace Mapsui.Samples.iOS
 	public partial class AppDelegate : UIApplicationDelegate
 	{
 		// class-level declarations
-		UIWindow window;
-		Mapsui_Samples_iOSViewController viewController;
+		UIWindow _window;
+		Mapsui_Samples_iOSViewController _viewController;
 		//
 		// This method is invoked when the application has loaded and is ready to run. In this
 		// method you should instantiate the window, load the UI into it and then make the window
@@ -24,11 +21,11 @@ namespace Mapsui.Samples.iOS
 		//
 		public override bool FinishedLaunching (UIApplication app, NSDictionary options)
 		{
-			window = new UIWindow (UIScreen.MainScreen.Bounds);
+			_window = new UIWindow (UIScreen.MainScreen.Bounds);
 			
-			viewController = new Mapsui_Samples_iOSViewController ();
-			window.RootViewController = viewController;
-			window.MakeKeyAndVisible ();
+			_viewController = new Mapsui_Samples_iOSViewController ();
+			_window.RootViewController = _viewController;
+			_window.MakeKeyAndVisible ();
 			
 			return true;
 		}

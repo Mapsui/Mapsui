@@ -12,7 +12,7 @@ namespace Mapsui.Rendering.OpenTK.Tests
         {
             using (var mw = new MainWindow())
             {
-                mw.Run();
+                mw.Run(200);
             }
         }
     }

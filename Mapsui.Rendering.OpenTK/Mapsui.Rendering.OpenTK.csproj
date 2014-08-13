@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CachedTexture.cs" />
     <Compile Include="LineStringRenderer.cs" />
     <Compile Include="MapRenderer.cs" />
     <Compile Include="PointRenderer.cs" />
