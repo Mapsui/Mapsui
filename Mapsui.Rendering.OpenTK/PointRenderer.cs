@@ -19,18 +19,18 @@ namespace Mapsui.Rendering.OpenTK
             {
                 if (symbolStyle.Symbol != null && symbolStyle.Symbol.Data != null)
                 {
-                    CachedTexture cachedTexture;
+                    TextureInfo textureInfo;
                     if (!feature.RenderedGeometry.ContainsKey(style))
                     {
-                        cachedTexture = RasterRenderer.LoadTexture(symbolStyle.Symbol.Data);
-                        feature.RenderedGeometry[style] = cachedTexture;
+                        textureInfo = RasterRenderer.LoadTexture(symbolStyle.Symbol.Data);
+                        feature.RenderedGeometry[style] = textureInfo;
                     }
                     else
                     {
-                        cachedTexture = (CachedTexture)feature.RenderedGeometry[style];
+                        textureInfo = (TextureInfo)feature.RenderedGeometry[style];
                     }
 
-                    RasterRenderer.RenderTexture(cachedTexture, (float)dest.X, (float)dest.Y, (float)symbolStyle.SymbolRotation, (float)symbolStyle.SymbolOffset.X, (float)symbolStyle.SymbolOffset.Y);
+                    RasterRenderer.RenderTexture(textureInfo, (float)dest.X, (float)dest.Y, (float)symbolStyle.SymbolRotation, (float)symbolStyle.SymbolOffset.X, (float)symbolStyle.SymbolOffset.Y);
                     return;
                 }
                 symbolType = symbolStyle.SymbolType;

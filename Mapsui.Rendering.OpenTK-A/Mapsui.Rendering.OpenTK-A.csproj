@@ -47,7 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Mapsui.Rendering.OpenTK\CachedTexture.cs">
+    <Compile Include="..\Mapsui.Rendering.OpenTK\TextureInfo.cs">
       <Link>CachedTexture.cs</Link>
     </Compile>
     <Compile Include="..\Mapsui.Rendering.OpenTK\LineStringRenderer.cs">

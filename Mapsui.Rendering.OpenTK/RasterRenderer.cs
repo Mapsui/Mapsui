@@ -15,20 +15,20 @@ namespace Mapsui.Rendering.OpenTK
             try
             {
                 var raster = (IRaster)feature.Geometry;
-                CachedTexture cachedTexture;
+                TextureInfo textureInfo;
 
                 if (!feature.RenderedGeometry.ContainsKey(style))
                 {
-                    cachedTexture = LoadTexture(raster.Data);
-                    feature.RenderedGeometry[style] = cachedTexture;
+                    textureInfo = LoadTexture(raster.Data);
+                    feature.RenderedGeometry[style] = textureInfo;
                 }
                 else
                 {
-                    cachedTexture = (CachedTexture)feature.RenderedGeometry[style];
+                    textureInfo = (TextureInfo)feature.RenderedGeometry[style];
                 }
                 
                 var destination = WorldToScreen(viewport, feature.Geometry.GetBoundingBox());
-                RenderTexture(cachedTexture.TextureId, ToVertexArray(RoundToPixel(destination)));
+                RenderTexture(textureInfo.TextureId, ToVertexArray(RoundToPixel(destination)));
             }
             catch (Exception ex)
             {
@@ -36,21 +36,21 @@ namespace Mapsui.Rendering.OpenTK
             }
         }
         
-        public static CachedTexture LoadTexture(Stream data)
+        public static TextureInfo LoadTexture(Stream data)
         {
-            var cachedTexture = new CachedTexture();
+            var textureInfo = new TextureInfo();
 
             GL.Enable(All.Texture2D);
-            GL.GenTextures(1, out cachedTexture.TextureId);
-            GL.BindTexture(All.Texture2D, cachedTexture.TextureId);
+            GL.GenTextures(1, out textureInfo.TextureId);
+            GL.BindTexture(All.Texture2D, textureInfo.TextureId);
             
             SetParameters();
 
-            TextureLoader.TexImage2D(data, out cachedTexture.Width, out cachedTexture.Height);
+            TextureLoader.TexImage2D(data, out textureInfo.Width, out textureInfo.Height);
 
             GL.BindTexture(All.Texture2D, 0);
 
-            return cachedTexture;
+            return textureInfo;
         }
 
         private static void SetParameters()
@@ -94,10 +94,10 @@ namespace Mapsui.Rendering.OpenTK
             };
         }
 
-        public static void RenderTexture(CachedTexture cachedTexture, float x, float y, float orientation = 0, float offsetX = 0, float offsetY = 0)
+        public static void RenderTexture(TextureInfo textureInfo, float x, float y, float orientation = 0, float offsetX = 0, float offsetY = 0)
         {
             GL.Enable(All.Texture2D);
-            GL.BindTexture(All.Texture2D, cachedTexture.TextureId);
+            GL.BindTexture(All.Texture2D, textureInfo.TextureId);
             
             GL.PushMatrix();
             GL.Translate(x, y, 0f);
@@ -105,8 +105,8 @@ namespace Mapsui.Rendering.OpenTK
             
             x = -offsetX; 
             y = -offsetY; 
-            var halfWidth = cachedTexture.Width / 2;
-            var halfHeight = cachedTexture.Height / 2;
+            var halfWidth = textureInfo.Width / 2;
+            var halfHeight = textureInfo.Height / 2;
 
             var vertextArray = new[]
                 {
@@ -116,7 +116,7 @@ namespace Mapsui.Rendering.OpenTK
                     x - halfWidth, y + halfHeight
                 };
 
-            RenderTextureWithoutBinding(cachedTexture.TextureId, vertextArray);
+            RenderTextureWithoutBinding(textureInfo.TextureId, vertextArray);
 
             GL.PopMatrix();
             GL.BindTexture(All.Texture2D, 0);
