@@ -34,6 +34,9 @@
     <CodesignKey>iPhone Developer</CodesignKey>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="..\Mapsui.Rendering.OpenTK\TextureHelper.cs">
+      <Link>TextureHelper.cs</Link>
+    </Compile>
     <Compile Include="..\Mapsui.Rendering.OpenTK\TextureInfo.cs">
       <Link>CachedTexture.cs</Link>
     </Compile>

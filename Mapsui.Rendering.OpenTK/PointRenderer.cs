@@ -22,7 +22,7 @@ namespace Mapsui.Rendering.OpenTK
                     TextureInfo textureInfo;
                     if (!feature.RenderedGeometry.ContainsKey(style))
                     {
-                        textureInfo = RasterRenderer.LoadTexture(symbolStyle.Symbol.Data);
+                        textureInfo = TextureHelper.LoadTexture(symbolStyle.Symbol.Data);
                         feature.RenderedGeometry[style] = textureInfo;
                     }
                     else
@@ -30,7 +30,7 @@ namespace Mapsui.Rendering.OpenTK
                         textureInfo = (TextureInfo)feature.RenderedGeometry[style];
                     }
 
-                    RasterRenderer.RenderTexture(textureInfo, (float)dest.X, (float)dest.Y, (float)symbolStyle.SymbolRotation, (float)symbolStyle.SymbolOffset.X, (float)symbolStyle.SymbolOffset.Y);
+                    TextureHelper.RenderTexture(textureInfo, (float)dest.X, (float)dest.Y, (float)symbolStyle.SymbolRotation, (float)symbolStyle.SymbolOffset.X, (float)symbolStyle.SymbolOffset.Y);
                     return;
                 }
                 symbolType = symbolStyle.SymbolType;
