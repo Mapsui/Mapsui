@@ -3,8 +3,6 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{F783F99B-AAFA-4FB5-80F6-871D679BDB19}</ProjectGuid>
     <ProjectTypeGuids>{6BC8ED88-2882-458C-8E55-DFD12B67127B};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
@@ -35,10 +33,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="FpsCounter.cs" />
-    <Compile Include="MapControl.cs" />
     <Compile Include="MapControlUIKit.cs" />
-    <Compile Include="Monkey.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="MapControl.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="OpenTK-1.0" />
@@ -49,13 +46,17 @@
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
   <ItemGroup>
+    <ProjectReference Include="..\Mapsui\Mapsui.csproj">
+      <Project>{D74C052A-C07E-4B37-A898-134218ACA5C9}</Project>
+      <Name>Mapsui</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Mapsui.Rendering.iOS\Mapsui.Rendering.iOS.csproj">
       <Project>{B142AB17-285F-48C8-B6C6-94586028333B}</Project>
       <Name>Mapsui.Rendering.iOS</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Mapsui\Mapsui.csproj">
-      <Project>{D74C052A-C07E-4B37-A898-134218ACA5C9}</Project>
-      <Name>Mapsui</Name>
+    <ProjectReference Include="..\Mapsui.Rendering.OpenTK-iOS\Mapsui.Rendering.OpenTK-iOS.csproj">
+      <Project>{2D1A291B-0B35-423B-B428-49474D52A73B}</Project>
+      <Name>Mapsui.Rendering.OpenTK-iOS</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

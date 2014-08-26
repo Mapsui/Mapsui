@@ -1,0 +1,31 @@
+﻿<Properties>
+  <DisabledProjects>
+    <String>Mapsui.UI.Xaml/Mapsui.UI.Xaml.csproj</String>
+    <String>Mapsui.Rendering.Xaml/Mapsui.Rendering.Xaml.csproj</String>
+  </DisabledProjects>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="iOS|iPhone" PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneDeviceTarget.iPad" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Mapsui.Rendering.OpenTK-iOS/TextureLoader.cs">
+    <Files>
+      <File FileName="Mapsui.UI.iOS/MapControl.cs" Line="1" Column="1" />
+      <File FileName="Samples/Mapsui.Samples.iOS/Main.cs" Line="1" Column="1" />
+      <File FileName="Samples/Mapsui.Samples.iOS/MainWindow.xib.designer.cs" Line="1" Column="1" />
+      <File FileName="Mapsui.Rendering.OpenTK-iOS/TextureLoader.cs" Line="4" Column="4" />
+      <File FileName="Mapsui.Rendering.OpenTK-A/TextureLoader.cs" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/Users/paul/code/Mapsui/Samples/Mapsui.Samples.iOS/MapControlSample.cs" line="147" column="3" />
+      <Breakpoint file="/Users/paul/code/Mapsui/Samples/Mapsui.Samples.iOS/MapControlSample.cs" line="31" column="3" />
+      <Breakpoint file="/Users/paul/code/Mapsui/Samples/Mapsui.Samples.iOS/MapControlSample.cs" line="25" column="2" />
+      <Breakpoint file="/Users/paul/code/Mapsui/Samples/Mapsui.Samples.iOS/MapControlSample.cs" line="40" column="2" />
+      <Breakpoint file="/Users/paul/code/monotouch-samples/OpenGLESSample-GameView/Main.cs" line="26" column="3" />
+      <Breakpoint file="/Users/paul/code/monotouch-samples/OpenGLESSample-GameView/Main.cs" line="13" column="1" />
+      <Breakpoint file="/Users/paul/code/Mapsui/Samples/Mapsui.Samples.iOS/EAGLView.cs" line="17" column="2" />
+      <Breakpoint file="/Users/paul/code/Mapsui/Samples/Mapsui.Samples.iOS/EAGLView.cs" line="23" column="4" />
+      <Breakpoint file="/Users/paul/code/Mapsui/Samples/TestTestTest/EAGLView.cs" line="23" column="4" />
+      <Breakpoint file="/Users/paul/code/Mapsui/Mapsui.UI.iOS/MapControl.cs" line="48" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

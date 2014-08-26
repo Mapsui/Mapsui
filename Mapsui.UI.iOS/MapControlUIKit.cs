@@ -250,7 +250,6 @@ namespace Mapsui.UI.iOS
 
         private void RefreshGraphics()
         {
-            //			System.Diagnostics.Debug.WriteLine("RefreshGraphics");
             SetNeedsDisplay();
         }
 

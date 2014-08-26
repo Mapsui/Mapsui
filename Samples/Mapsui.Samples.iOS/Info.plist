@@ -29,5 +29,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSMainNibFile~ipad</key>
+	<string>MainWindow</string>
 </dict>
 </plist>

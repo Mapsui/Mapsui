@@ -36,13 +36,13 @@
     
     <Target Name="CheckPrerequisites">
         <!-- Raise an error if we're unable to locate nuget.exe  -->
-        <Error Condition="!Exists('$(NuGetExePath)')" Text="Unable to locate '$(NuGetExePath)'" />
+        <!-- Disabled condition below because of error on Xamarin iOS -->
+        <!-- http://forums.xamarin.com/discussion/19845/nuget-error-after-migrate-vs2013-project-to-xamarin-studio -->
+        <!--  <Error Condition="!Exists('$(NuGetExePath)')" Text="Unable to locate '$(NuGetExePath)'" />  -->
     </Target>
     
     <Target Name="RestorePackages" DependsOnTargets="CheckPrerequisites">
-        <Exec Command="$(RestoreCommand)"
-              LogStandardErrorAsError="true"
-              Condition="Exists('$(PackagesConfig)')" />
+
     </Target>
 
     <Target Name="BuildPackage" DependsOnTargets="CheckPrerequisites">
