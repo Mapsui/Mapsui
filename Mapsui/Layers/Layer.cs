@@ -24,7 +24,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using Mapsui.Utilities;
-using Newtonsoft.Json;
 
 namespace Mapsui.Layers
 {
