@@ -15,7 +15,7 @@ using OpenTK.Platform.iPhoneOS;
 
 namespace Mapsui.UI.iOS
 {
-	public partial class MapControl : iPhoneOSGameView
+	public class MapControl : iPhoneOSGameView
 	{
 		public delegate void ViewportInitializedEventHandler(object sender);
 		public event ViewportInitializedEventHandler ViewportInitializedEvent;
@@ -266,7 +266,7 @@ namespace Mapsui.UI.iOS
 
 			Set2DViewport();
 
-			GL.Clear(ClearBufferMask.ColorBufferBit);
+			GL.Clear((int)ClearBufferMask.ColorBufferBit);
 
 			_renderer.Render(_map.Viewport, _map.Layers);
 
