@@ -11,17 +11,19 @@ namespace Mapsui.Rendering.OpenTK
 {
     public class MapRenderer : IRenderer
     {
+        readonly IDictionary<int, TextureInfo> _bitmapCache = new Dictionary<int, TextureInfo>();
+
         public void Render(IViewport viewport, IEnumerable<ILayer> layers)
         {
             layers = layers.ToList();
             VisibleFeatureIterator.IterateLayers(viewport, layers, RenderFeature);
         }
 
-        private static void RenderFeature(IViewport viewport, IStyle style, IFeature feature)
+        private void RenderFeature(IViewport viewport, IStyle style, IFeature feature)
         {
             if (feature.Geometry is Point) 
             {
-                PointRenderer.Draw(viewport, style, feature);
+                PointRenderer.Draw(viewport, style, feature, _bitmapCache);
             }
             else if (feature.Geometry is LineString) 
             {
