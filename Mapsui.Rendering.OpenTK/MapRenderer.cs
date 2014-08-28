@@ -31,7 +31,6 @@ namespace Mapsui.Rendering.OpenTK
             {
                 RasterRenderer.Draw(viewport, style, feature);
             }
-
         }
 
         public MemoryStream RenderToBitmapStream(IViewport viewport, IEnumerable<ILayer> layers)
