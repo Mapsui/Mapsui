@@ -145,6 +145,7 @@
     <Compile Include="Rendering\LabelCollisionDetection.cs" />
     <Compile Include="Rendering\RenderExceptions.cs" />
     <Compile Include="Styles\Bitmap.cs" />
+    <Compile Include="Styles\BitmapRegistry.cs" />
     <Compile Include="Styles\Brush.cs" />
     <Compile Include="Styles\Color.cs" />
     <Compile Include="Styles\Font.cs" />
