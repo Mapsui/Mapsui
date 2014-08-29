@@ -40,8 +40,10 @@ namespace Mapsui.Tests.Common
         {
             const string circleIconPath = @"Mapsui.Tests.Common.Resources.Images.circle.png";
             var circleIcon = typeof(Utilities).Assembly.GetManifestResourceStream(circleIconPath);
+            var circleIconId = BitmapRegistry.Instance.Register(circleIcon);
             const string checkeredIconPath = @"Mapsui.Tests.Common.Resources.Images.checkered.png";
             var checkeredIcon = typeof(Utilities).Assembly.GetManifestResourceStream(checkeredIconPath);
+            var checkeredIconId = BitmapRegistry.Instance.Register(checkeredIcon);
 
             var features = new Features
                 {
@@ -53,12 +55,12 @@ namespace Mapsui.Tests.Common
                     new Feature
                         {
                             Geometry = new Point(50, 100),
-                            Styles = new[] { new SymbolStyle { Symbol = new Bitmap { Data =  circleIcon }, ResourceId = circleIconPath }}
+                            Styles = new[] { new SymbolStyle { Symbol = new Bitmap { Data =  circleIcon }, ResourceId = circleIconId }}
                         },
                     new Feature
                         {
                             Geometry = new Point(100, 50),
-                            Styles = new[] { new SymbolStyle { Symbol = new Bitmap { Data = checkeredIcon }, ResourceId = checkeredIconPath }}
+                            Styles = new[] { new SymbolStyle { Symbol = new Bitmap { Data = checkeredIcon }, ResourceId = checkeredIconId }}
                         },
                     new Feature
                         {
@@ -124,12 +126,13 @@ namespace Mapsui.Tests.Common
         {
             const string iconPath = @"Mapsui.Tests.Common.Resources.Images.iconthatneedsoffset.png";
             var iconThatNeedsOffsetStream = typeof(Utilities).Assembly.GetManifestResourceStream(iconPath);
+            var iconThatNeedsOffsetStreamId = BitmapRegistry.Instance.Register(iconThatNeedsOffsetStream);
 
             var feature = new Feature { Geometry = new Point(x, y) };
 
             feature.Styles.Add(new SymbolStyle
                 {
-                    ResourceId = iconPath,
+                    ResourceId = iconThatNeedsOffsetStreamId,
                     Symbol = new Bitmap { Data = iconThatNeedsOffsetStream },
                     SymbolOffset = new Offset { Y = -24 },
                     SymbolRotation = rotation,
