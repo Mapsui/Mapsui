@@ -168,7 +168,7 @@ namespace Mapsui.Rendering.Gdi
         private static Label CreateLabel(IGeometry feature, string text, float rotation, int priority, LabelStyle style, IViewport viewport,
                                   Graphics g)
         {
-            var gdiSize = g.MeasureString(text, style.Font.Convert());
+            var gdiSize = g.MeasureString(text, style.Font.ToBitmap());
             var size = new Styles.Size { Width = gdiSize.Width, Height = gdiSize.Height };
 
             Geometries.Point position = viewport.WorldToScreen(feature.GetBoundingBox().GetCentroid());

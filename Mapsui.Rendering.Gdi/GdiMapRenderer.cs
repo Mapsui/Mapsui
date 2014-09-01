@@ -130,13 +130,13 @@ namespace Mapsui.Rendering.Gdi
             else if (feature.Geometry is MultiPoint)
                 GdiGeometryRenderer.DrawMultiPoint(graphics, (MultiPoint) feature.Geometry, style, viewport);
             else if (feature.Geometry is LineString)
-                GdiGeometryRenderer.DrawLineString(graphics, (LineString)feature.Geometry, style.Line.Convert(), viewport);
+                GdiGeometryRenderer.DrawLineString(graphics, (LineString)feature.Geometry, style.Line.ToBitmap(), viewport);
             else if (feature.Geometry is MultiLineString)
-                GdiGeometryRenderer.DrawMultiLineString(graphics, (MultiLineString)feature.Geometry, style.Line.Convert(), viewport);
+                GdiGeometryRenderer.DrawMultiLineString(graphics, (MultiLineString)feature.Geometry, style.Line.ToBitmap(), viewport);
             else if (feature.Geometry is Polygon)
-                GdiGeometryRenderer.DrawPolygon(graphics, (Polygon)feature.Geometry, style.Fill.Convert(), style.Outline.Convert(), viewport);
+                GdiGeometryRenderer.DrawPolygon(graphics, (Polygon)feature.Geometry, style.Fill.ToBitmap(), style.Outline.ToBitmap(), viewport);
             else if (feature.Geometry is MultiPolygon)
-                GdiGeometryRenderer.DrawMultiPolygon(graphics, (MultiPolygon)feature.Geometry, style.Fill.Convert(), style.Outline.Convert(), viewport);
+                GdiGeometryRenderer.DrawMultiPolygon(graphics, (MultiPolygon)feature.Geometry, style.Fill.ToBitmap(), style.Outline.ToBitmap(), viewport);
             else if (feature.Geometry is IRaster)
                 GdiGeometryRenderer.DrawRaster(graphics, feature.Geometry, style, viewport);
         }

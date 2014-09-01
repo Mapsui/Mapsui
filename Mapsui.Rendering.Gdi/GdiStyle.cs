@@ -21,33 +21,27 @@ namespace Mapsui.Rendering.Gdi
 {
     public static class GdiStyle
     {
-        public static System.Drawing.Color Convert(this Color color)
+        public static System.Drawing.Color ToBitmap(this Color color)
         {
             return System.Drawing.Color.FromArgb(color.A, color.R, color.G, color.B);
         }
 
-        public static System.Drawing.Pen Convert(this Pen pen)
+        public static System.Drawing.Pen ToBitmap(this Pen pen)
         {
-            return new System.Drawing.Pen(pen.Color.Convert(), (float)pen.Width);
+            return new System.Drawing.Pen(pen.Color.ToBitmap(), (float)pen.Width);
         }
 
-        public static System.Drawing.Brush Convert(this Brush brush)
+        public static System.Drawing.Brush ToBitmap(this Brush brush)
         {
-            return new System.Drawing.SolidBrush(brush.Color.Convert());
+            return new System.Drawing.SolidBrush(brush.Color.ToBitmap());
         }
 
-        public static System.Drawing.Bitmap Convert(this Bitmap bitmap)
-        {
-            if (bitmap == null) return null;
-            return new System.Drawing.Bitmap(bitmap.Data);
-        }
-
-        public static System.Drawing.PointF Convert(this Offset offset)
+        public static System.Drawing.PointF ToBitmap(this Offset offset)
         {
             return new System.Drawing.PointF((float)offset.X, (float)offset.Y);
         }
 
-        public static System.Drawing.Font Convert(this Font font)
+        public static System.Drawing.Font ToBitmap(this Font font)
         {
             return new System.Drawing.Font(font.FontFamily, (float)font.Size);
         }
