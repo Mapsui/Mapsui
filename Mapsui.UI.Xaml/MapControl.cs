@@ -41,7 +41,7 @@ namespace Mapsui.UI.Xaml
 {
     public class MapControl : Grid
     {
-                private Map _map;
+        private Map _map;
         private Point _previousMousePosition;
         private Point _currentMousePosition;
         private Point _downMousePosition;
@@ -56,7 +56,7 @@ namespace Mapsui.UI.Xaml
         private bool _invalid;
         private readonly Rectangle _bboxRect;
         
-                public event EventHandler ErrorMessageChanged;
+        public event EventHandler ErrorMessageChanged;
         public event EventHandler<ViewChangedEventArgs> ViewChanged;
         public event EventHandler<MouseInfoEventArgs> MouseInfoOver;
         public event EventHandler MouseInfoLeave;
