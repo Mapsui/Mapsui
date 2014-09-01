@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace Mapsui.Styles
 {
@@ -16,6 +17,8 @@ namespace Mapsui.Styles
 
     public class SymbolStyle : VectorStyle
     {
+        private Bitmap _bitmap;
+
         public SymbolStyle()
         {
             SymbolOffset = new Offset();
@@ -26,7 +29,23 @@ namespace Mapsui.Styles
         /// <summary>
         /// Symbol used for rendering points
         /// </summary>
-        public Bitmap Symbol { get; set; }
+        [Obsolete("use BitmapID and BitmapRegistry instead")]
+        public Bitmap Symbol
+        {
+            get { return _bitmap;  }
+            set
+            {
+                _bitmap = value;
+                // The code below is to make sure existing bitmap initialization still works (for now)
+                if (_bitmap != null && _bitmap.Data != null) ResourceId = BitmapRegistry.Instance.Register(_bitmap.Data);
+                if (_bitmap != null) _bitmap.BitmapDataAddedEventHandler += (sender, args) => Register(_bitmap.Data);
+            }
+        }
+
+        private void Register(Stream data)
+        {
+            if (data != null) ResourceId = BitmapRegistry.Instance.Register(data);
+        }
 
         /// <summary>
         /// This identifies a resource (like a bitmap or svg) in a resource store. 
@@ -84,12 +103,8 @@ namespace Mapsui.Styles
                 return false;
             }
 
-            if ((Symbol == null) ^ (symbolStyle.Symbol == null))
-            {
-                return false;
-            }
 
-            if (Symbol != null && !Symbol.Equals(symbolStyle.Symbol))
+            if (ResourceId == symbolStyle.ResourceId)
             {
                 return false;
             }
