@@ -30,7 +30,7 @@ namespace Mapsui.Rendering.Xaml
         static MapRenderer()
         {
 #if !NETFX_CORE
-            _mainThreadId = System.Threading.Thread.CurrentThread.ManagedThreadId;
+            _mainThreadId = Thread.CurrentThread.ManagedThreadId;
 #endif
             DefaultRendererFactory.Create = () => new MapRenderer();
         }
@@ -54,7 +54,6 @@ namespace Mapsui.Rendering.Xaml
 #if !SILVERLIGHT &&  !NETFX_CORE
             target.BeginInit();
 #endif
-            //var layers = inLayers.ToList();
             target.Visibility = Visibility.Collapsed;
             foreach (var child in target.Children)
             {
@@ -67,12 +66,12 @@ namespace Mapsui.Rendering.Xaml
 
             foreach (var layer in layers)
             {
-                if (layer.Enabled &&
-                    layer.MinVisible <= viewport.Resolution &&
-                    layer.MaxVisible >= viewport.Resolution)
-                {
-                    RenderLayer(target, viewport, layer, rasterizing);
-                }
+                if (!layer.Enabled) continue;
+                if (layer.MinVisible > viewport.Resolution) continue;
+                if(layer.MaxVisible < viewport.Resolution) continue;                
+
+                RenderLayer(target, viewport, layer, rasterizing);
+
             }
             target.Arrange(new Rect(0, 0, viewport.Width, viewport.Height));
             target.Visibility = Visibility.Visible;
@@ -275,17 +274,17 @@ namespace Mapsui.Rendering.Xaml
         {
             if (feature.Geometry is Geometries.Point)
                 GeometryRenderer.PositionPoint(renderedGeometry, feature.Geometry as Geometries.Point, style, viewport);
-            if (feature.Geometry is MultiPoint)
+            else if (feature.Geometry is MultiPoint)
                 GeometryRenderer.PositionGeometry(renderedGeometry, viewport);
-            if (feature.Geometry is LineString)
+            else if (feature.Geometry is LineString)
                 GeometryRenderer.PositionGeometry(renderedGeometry, viewport);
-            if (feature.Geometry is MultiLineString)
+            else if (feature.Geometry is MultiLineString)
                 GeometryRenderer.PositionGeometry(renderedGeometry, viewport);
-            if (feature.Geometry is Polygon)
+            else if (feature.Geometry is Polygon)
                 GeometryRenderer.PositionGeometry(renderedGeometry, viewport);
-            if (feature.Geometry is MultiPolygon)
+            else if (feature.Geometry is MultiPolygon)
                 GeometryRenderer.PositionGeometry(renderedGeometry, viewport);
-            if (feature.Geometry is IRaster)
+            else if (feature.Geometry is IRaster)
                 GeometryRenderer.PositionRaster(renderedGeometry, feature.Geometry.GetBoundingBox(), viewport);
         }
     }
