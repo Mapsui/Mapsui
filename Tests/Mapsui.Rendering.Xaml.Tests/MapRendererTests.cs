@@ -12,7 +12,8 @@ namespace Mapsui.Rendering.Xaml.Tests
     [TestFixture, RequiresSTA]
     class MapRendererTests
     {
-        private const string ImagesFolder = "Resources\\Images\\TestOutput";
+        private readonly string _originalImagesFolder = Path.Combine("Resources", "Images", "Original");
+        private readonly string _generatedImagesFolder = Path.Combine("Resources", "Images", "Generated");
 #if MONOGAME
         private readonly Microsoft.Xna.Framework.Graphics.GraphicsDevice _graphicsDevice;
 
@@ -27,17 +28,17 @@ namespace Mapsui.Rendering.Xaml.Tests
         {
             // arrange
             var map = ArrangeRenderingTests.PointsWithVectorStyle();
+            const string fileName = "vector_symbol.png";
             
             // act
             var bitmap = RenderToBitmap(map);
             
 #if !MONOGAME
             // aside
-            const string imagePath = ImagesFolder + "\\vector_symbol.png";
-            if (Rendering.Default.WriteImageToDisk) WriteFile(imagePath, bitmap);
+            if (Rendering.Default.WriteImageToDisk) WriteFile(Path.Combine(_generatedImagesFolder, fileName), bitmap);
 
             // assert
-            Assert.AreEqual(ReadFile(imagePath), bitmap.ToArray());
+            Assert.AreEqual(ReadFile(Path.Combine(_originalImagesFolder, fileName)), bitmap.ToArray());
 #endif
         }
 
@@ -46,17 +47,17 @@ namespace Mapsui.Rendering.Xaml.Tests
         {
             // arrange
             var map = ArrangeRenderingTests.PointWithBitmapSymbols();
+            const string fileName = "points_with_symbolstyle.png";
             
             // act
             var bitmap = RenderToBitmap(map);
             
 #if !MONOGAME
             // aside
-            const string imagePath = ImagesFolder + "\\points_with_symbolstyle.png";
-            if (Rendering.Default.WriteImageToDisk) WriteFile(imagePath, bitmap);
+            if (Rendering.Default.WriteImageToDisk) WriteFile(Path.Combine(_generatedImagesFolder, fileName), bitmap);
 
             // assert
-            Assert.AreEqual(ReadFile(imagePath), bitmap.ToArray());
+            Assert.AreEqual(ReadFile(Path.Combine(_originalImagesFolder, fileName)), bitmap.ToArray());
 #endif
         }
 
@@ -65,17 +66,16 @@ namespace Mapsui.Rendering.Xaml.Tests
         {
             // arrange
             var map = ArrangeRenderingTests.RotatedBitmapSymbolWithOffset();
-            
+            const string fileName = "bitmap_symbol.png";
             // act
             var bitmap = RenderToBitmap(map);
 
 #if !MONOGAME
             // aside
-            const string imagePath = ImagesFolder + "\\bitmap_symbol.png";
-            if (Rendering.Default.WriteImageToDisk) WriteFile(imagePath, bitmap);
+            if (Rendering.Default.WriteImageToDisk) WriteFile(Path.Combine(_generatedImagesFolder, fileName), bitmap);
 
             // assert
-            Assert.AreEqual(ReadFile(imagePath), bitmap.ToArray());
+            Assert.AreEqual(ReadFile(Path.Combine(_originalImagesFolder, fileName)), bitmap.ToArray());
 #endif
         }
 
@@ -84,18 +84,17 @@ namespace Mapsui.Rendering.Xaml.Tests
         {
             // arrange
             var map = ArrangeRenderingTests.PointsWithDifferentSymbolTypes();
+            const string fileName = "vector_symbol_symboltype.png";
             
             // act
             var bitmap = RenderToBitmap(map);
 
 #if !MONOGAME
-            const string imagePath = ImagesFolder + "\\vector_symbol_symboltype.png";
-           
             // aside
-            if (Rendering.Default.WriteImageToDisk) WriteFile(imagePath, bitmap);
+            if (Rendering.Default.WriteImageToDisk) WriteFile(Path.Combine(_generatedImagesFolder, fileName), bitmap);
 
             // assert
-            Assert.AreEqual(ReadFile(imagePath), bitmap.ToArray());
+            Assert.AreEqual(ReadFile(Path.Combine(_originalImagesFolder, fileName)), bitmap.ToArray());
 #endif
         }
 
@@ -104,17 +103,17 @@ namespace Mapsui.Rendering.Xaml.Tests
         {
             // arrange
             var map = ArrangeRenderingTests.SymbolWithWorldUnits();
+            const string fileName = "vector_symbol_unittype.png";
             
             // act
             var bitmap = RenderToBitmap(map);
 
 #if !MONOGAME
             // aside
-            const string imagePath = ImagesFolder + "\\vector_symbol_unittype.png";
-            if (Rendering.Default.WriteImageToDisk) WriteFile(imagePath, bitmap);
+            if (Rendering.Default.WriteImageToDisk) WriteFile(Path.Combine(_generatedImagesFolder, fileName), bitmap);
 
             // assert
-            Assert.AreEqual(ReadFile(imagePath), bitmap.ToArray());
+            Assert.AreEqual(ReadFile(Path.Combine(_originalImagesFolder, fileName)), bitmap.ToArray());
 #endif
         }
 
@@ -123,18 +122,17 @@ namespace Mapsui.Rendering.Xaml.Tests
         {
             // arrange
             var map = ArrangeRenderingTests.Polygon();
+            const string fileName = "polygon.png";
 
             // act
             var bitmap = RenderToBitmap(map);
 
 #if !MONOGAME
-            const string imagePath = ImagesFolder + "\\polygon.png";
-
             // aside
-            if (Rendering.Default.WriteImageToDisk) WriteFile(imagePath, bitmap);
+            if (Rendering.Default.WriteImageToDisk) WriteFile(Path.Combine(_generatedImagesFolder, fileName), bitmap);
 
             // assert
-            Assert.AreEqual(ReadFile(imagePath), bitmap.ToArray());
+            Assert.AreEqual(ReadFile(Path.Combine(_originalImagesFolder, fileName)), bitmap.ToArray());
 #endif
         }
 
@@ -143,17 +141,18 @@ namespace Mapsui.Rendering.Xaml.Tests
         {
             // arrange
             var map = ArrangeRenderingTests.Line();
+            const string fileName = "line.png";
             
             // act
             var bitmap = RenderToBitmap(map);
 
 #if !MONOGAME
             // aside
-            const string imagePath = ImagesFolder + "\\line.png";
-            if (Rendering.Default.WriteImageToDisk) WriteFile(imagePath, bitmap);
+
+            if (Rendering.Default.WriteImageToDisk) WriteFile(Path.Combine(_generatedImagesFolder, fileName), bitmap);
 
             // assert
-            Assert.AreEqual(ReadFile(imagePath), bitmap.ToArray());
+            Assert.AreEqual(ReadFile(Path.Combine(_originalImagesFolder, fileName)), bitmap.ToArray());
 #endif
         }
 
@@ -163,23 +162,26 @@ namespace Mapsui.Rendering.Xaml.Tests
         {
             // arrange
             var map = ArrangeRenderingTests.Tiles();
+            const string fileName = "tilelayer.png";
 
             // act
             var bitmap = RenderToBitmap(map);
 
 #if !MONOGAME
-            // aside
-            const string imagePath = ImagesFolder + "\\tilelayer.png";
-            if (Rendering.Default.WriteImageToDisk) WriteFile(imagePath, bitmap);
+            // aside;
+            if (Rendering.Default.WriteImageToDisk) WriteFile(Path.Combine(_generatedImagesFolder, fileName), bitmap);
 
             // assert
-            Assert.AreEqual(ReadFile(imagePath), bitmap.ToArray());
+            Assert.AreEqual(ReadFile(Path.Combine(_originalImagesFolder, fileName)), bitmap.ToArray());
 #endif
         }
         
 #if !MONOGAME
         private static void WriteFile(string imagePath, MemoryStream bitmap)
         {
+            var folder = Path.GetDirectoryName(imagePath);
+            if (!Directory.Exists(folder)) Directory.CreateDirectory(folder);
+            
             using (var fileStream = new FileStream(imagePath, FileMode.Create, FileAccess.Write))
             {
                 bitmap.WriteTo(fileStream);
