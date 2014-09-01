@@ -6,6 +6,8 @@ namespace Mapsui.Styles
 {
     /// <summary>
     /// This class has been replaced with BitmapID/BitmapRegistry. It is left in for backward compatibility.
+    /// The problem with this class is that the renderer creates instances for each bitmap even if this
+    /// same bitmap is used. 
     /// </summary>
     public class Bitmap
     {

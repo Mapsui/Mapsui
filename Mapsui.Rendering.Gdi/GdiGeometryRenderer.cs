@@ -189,7 +189,7 @@ namespace Mapsui.Rendering.Gdi
         {
             var symbolStyle = (SymbolStyle)style;
             if (symbolStyle.Symbol == null) throw  new ArgumentException("No bitmap symbol set in Gdi rendering"); //todo: allow vector symbol
-            var symbol = new Bitmap(BitmapRegistry.Instance.Get(symbolStyle.ResourceId));
+            var symbol = new Bitmap(BitmapRegistry.Instance.Get(symbolStyle.BitmapId));
             var symbolscale = symbolStyle.SymbolScale;
             PointF offset = symbolStyle.SymbolOffset.ToBitmap();
             var rotation = symbolStyle.SymbolRotation;

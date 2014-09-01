@@ -33,14 +33,14 @@ namespace Mapsui.Rendering.OpenTK
         private static void DrawPointWithSymbolStyle(SymbolStyle symbolStyle, Point destination, IDictionary<int, TextureInfo> bitmapCache)
         {
             TextureInfo textureInfo;
-            if (!bitmapCache.Keys.Contains(symbolStyle.ResourceId))
+            if (!bitmapCache.Keys.Contains(symbolStyle.BitmapId))
             {
-                textureInfo = TextureHelper.LoadTexture(BitmapRegistry.Instance.Get(symbolStyle.ResourceId));
-                bitmapCache[symbolStyle.ResourceId] = textureInfo;
+                textureInfo = TextureHelper.LoadTexture(BitmapRegistry.Instance.Get(symbolStyle.BitmapId));
+                bitmapCache[symbolStyle.BitmapId] = textureInfo;
             }
             else
             {
-                textureInfo = bitmapCache[symbolStyle.ResourceId];
+                textureInfo = bitmapCache[symbolStyle.BitmapId];
             }
             TextureHelper.RenderTexture(textureInfo, (float)destination.X, (float)destination.Y, 
                 (float)symbolStyle.SymbolRotation, (float)symbolStyle.SymbolOffset.X, (float)symbolStyle.SymbolOffset.Y);

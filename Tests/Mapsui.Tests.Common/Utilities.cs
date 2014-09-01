@@ -131,7 +131,7 @@ namespace Mapsui.Tests.Common
 
             feature.Styles.Add(new SymbolStyle
                 {
-                    ResourceId = iconThatNeedsOffsetStreamId,
+                    BitmapId = iconThatNeedsOffsetStreamId,
                     Symbol = new Bitmap { Data = iconThatNeedsOffsetStream },
                     SymbolOffset = new Offset { Y = -24 },
                     SymbolRotation = rotation,

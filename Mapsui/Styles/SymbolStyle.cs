@@ -37,23 +37,20 @@ namespace Mapsui.Styles
             {
                 _bitmap = value;
                 // The code below is to make sure existing bitmap initialization still works (for now)
-                if (_bitmap != null && _bitmap.Data != null) ResourceId = BitmapRegistry.Instance.Register(_bitmap.Data);
+                if (_bitmap != null && _bitmap.Data != null) BitmapId = BitmapRegistry.Instance.Register(_bitmap.Data);
                 if (_bitmap != null) _bitmap.BitmapDataAddedEventHandler += (sender, args) => Register(_bitmap.Data);
             }
         }
 
         private void Register(Stream data)
         {
-            if (data != null) ResourceId = BitmapRegistry.Instance.Register(data);
+            if (data != null) BitmapId = BitmapRegistry.Instance.Register(data);
         }
 
         /// <summary>
-        /// This identifies a resource (like a bitmap or svg) in a resource store. 
+        /// This identifies bitmap in the BitmapRegistry. 
         /// </summary>
-        /// <remarks>
-        /// The ResourceId will eventually replace the Symbol pointer. The problem with the pointer is that the 
-        /// rendered geometry will be generated for each style even if the styles use the same resource. </remarks>
-        public int ResourceId { get; set; }
+        public int BitmapId { get; set; }
 
         /// <summary>
         /// Scale of the symbol (defaults to 1)
@@ -104,7 +101,7 @@ namespace Mapsui.Styles
             }
 
 
-            if (ResourceId == symbolStyle.ResourceId)
+            if (BitmapId == symbolStyle.BitmapId)
             {
                 return false;
             }

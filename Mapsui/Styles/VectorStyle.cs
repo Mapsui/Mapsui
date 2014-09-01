@@ -22,7 +22,6 @@
         /// Fillstyle for Polygon geometries
         /// </summary>
         public Brush Fill { get; set; }
-
         
         public override bool Equals(object obj)
         {
@@ -90,7 +89,5 @@
         {
             return !Equals(vectorStyle1, vectorStyle2);
         }
-
-        
     }
 }

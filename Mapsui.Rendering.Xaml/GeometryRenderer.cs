@@ -41,10 +41,10 @@ namespace Mapsui.Rendering.Xaml
             {
                 var symbolStyle = style as SymbolStyle;
 
-                if (symbolStyle.ResourceId < 0)
+                if (symbolStyle.BitmapId < 0)
                     symbol = CreateSymbolFromVectorStyle(symbolStyle, symbolStyle.Opacity, symbolStyle.SymbolType);
                 else
-                    symbol = CreateSymbolFromBitmap(BitmapRegistry.Instance.Get(symbolStyle.ResourceId), symbolStyle.Opacity);
+                    symbol = CreateSymbolFromBitmap(BitmapRegistry.Instance.Get(symbolStyle.BitmapId), symbolStyle.Opacity);
                 matrix = CreatePointSymbolMatrix(viewport.Resolution, symbolStyle);
             }
             else
@@ -187,7 +187,7 @@ namespace Mapsui.Rendering.Xaml
             }
             else
             {
-                BitmapImage bitmapImage = CreateBitmapImage(BitmapRegistry.Instance.Get(style.ResourceId));
+                BitmapImage bitmapImage = CreateBitmapImage(BitmapRegistry.Instance.Get(style.BitmapId));
 
                 path.Fill = new XamlMedia.ImageBrush { ImageSource = bitmapImage };
 
@@ -237,7 +237,7 @@ namespace Mapsui.Rendering.Xaml
             var rect = new XamlMedia.RectangleGeometry();
             if (style.Symbol != null)
             {
-                var bitmapImage = CreateBitmapImage(BitmapRegistry.Instance.Get(style.ResourceId));
+                var bitmapImage = CreateBitmapImage(BitmapRegistry.Instance.Get(style.BitmapId));
                 var width = bitmapImage.PixelWidth * style.SymbolScale;
                 var height = bitmapImage.PixelHeight * style.SymbolScale;
                 rect.Rect = new Rect(p.X - width * 0.5, p.Y - height * 0.5, width, height);
