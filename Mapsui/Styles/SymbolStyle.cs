@@ -146,7 +146,7 @@ namespace Mapsui.Styles
 
         public override int GetHashCode()
         {
-            return (Symbol == null ? 0 : Symbol.GetHashCode()) ^ 
+            return BitmapId.GetHashCode() ^ 
                 SymbolScale.GetHashCode() ^ SymbolOffset.GetHashCode() ^
                 SymbolRotation.GetHashCode() ^ UnitType.GetHashCode() ^ SymbolType.GetHashCode() ^
                 Opacity.GetHashCode() ^ base.GetHashCode();
