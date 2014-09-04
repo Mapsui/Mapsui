@@ -41,7 +41,7 @@ namespace Mapsui.UI.Xaml
 {
     public class MapControl : Grid
     {
-                private Map _map;
+        private Map _map;
         private Point _previousMousePosition;
         private Point _currentMousePosition;
         private Point _downMousePosition;
@@ -56,7 +56,7 @@ namespace Mapsui.UI.Xaml
         private bool _invalid;
         private readonly Rectangle _bboxRect;
         
-                public event EventHandler ErrorMessageChanged;
+        public event EventHandler ErrorMessageChanged;
         public event EventHandler<ViewChangedEventArgs> ViewChanged;
         public event EventHandler<MouseInfoEventArgs> MouseInfoOver;
         public event EventHandler MouseInfoLeave;
@@ -587,12 +587,12 @@ namespace Mapsui.UI.Xaml
         {
             if (!_viewportInitialized) InitializeViewport();
             if (!_viewportInitialized) return; //stop if the line above failed. 
-            if (!_invalid) return;
+            if (!_invalid && !DeveloperTools.DeveloperMode) return; //in developermode always render so that fps can be counterd.
 
             if ((Renderer != null) && (_map != null))
             {
                 Renderer.Render(Map.Viewport, _map.Layers);
-                _fpsCounter.FramePlusOne();
+                if (DeveloperTools.DeveloperMode) _fpsCounter.FramePlusOne();
                 _invalid = false;
             }
         }
@@ -607,8 +607,6 @@ namespace Mapsui.UI.Xaml
             }
         }
 #endif
-
-        
         
         public void ZoomToBox(Geometries.Point beginPoint, Geometries.Point endPoint)
         {
@@ -639,7 +637,6 @@ namespace Mapsui.UI.Xaml
                 _bboxRect.Width = 0;
                 _bboxRect.Height = 0;
             }));
-
         }
 
         private void MapControlKeyUp(object sender, KeyEventArgs e)

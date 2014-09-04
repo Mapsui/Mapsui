@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace Mapsui.Styles
 {
@@ -16,6 +17,8 @@ namespace Mapsui.Styles
 
     public class SymbolStyle : VectorStyle
     {
+        private Bitmap _bitmap;
+
         public SymbolStyle()
         {
             SymbolOffset = new Offset();
@@ -26,15 +29,28 @@ namespace Mapsui.Styles
         /// <summary>
         /// Symbol used for rendering points
         /// </summary>
-        public Bitmap Symbol { get; set; }
+        [Obsolete("use BitmapID and BitmapRegistry instead")]
+        public Bitmap Symbol
+        {
+            get { return _bitmap;  }
+            set
+            {
+                _bitmap = value;
+                // The code below is to make sure existing bitmap initialization still works (for now)
+                if (_bitmap != null && _bitmap.Data != null) BitmapId = BitmapRegistry.Instance.Register(_bitmap.Data);
+                if (_bitmap != null) _bitmap.BitmapDataAddedEventHandler += (sender, args) => Register(_bitmap.Data);
+            }
+        }
+
+        private void Register(Stream data)
+        {
+            if (data != null) BitmapId = BitmapRegistry.Instance.Register(data);
+        }
 
         /// <summary>
-        /// This identifies a resource (like a bitmap or svg) in a resource store. 
+        /// This identifies bitmap in the BitmapRegistry. 
         /// </summary>
-        /// <remarks>
-        /// The ResourceId will eventually replace the Symbol pointer. The problem with the pointer is that the 
-        /// rendered geometry will be generated for each style even if the styles use the same resource. </remarks>
-        public string ResourceId { get; set; }
+        public int BitmapId { get; set; }
 
         /// <summary>
         /// Scale of the symbol (defaults to 1)
@@ -84,12 +100,8 @@ namespace Mapsui.Styles
                 return false;
             }
 
-            if ((Symbol == null) ^ (symbolStyle.Symbol == null))
-            {
-                return false;
-            }
 
-            if (Symbol != null && !Symbol.Equals(symbolStyle.Symbol))
+            if (BitmapId == symbolStyle.BitmapId)
             {
                 return false;
             }
@@ -134,7 +146,7 @@ namespace Mapsui.Styles
 
         public override int GetHashCode()
         {
-            return (Symbol == null ? 0 : Symbol.GetHashCode()) ^ 
+            return BitmapId.GetHashCode() ^ 
                 SymbolScale.GetHashCode() ^ SymbolOffset.GetHashCode() ^
                 SymbolRotation.GetHashCode() ^ UnitType.GetHashCode() ^ SymbolType.GetHashCode() ^
                 Opacity.GetHashCode() ^ base.GetHashCode();

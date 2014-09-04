@@ -70,6 +70,14 @@ namespace Mapsui.Rendering.OpenTK
             GL.Disable(All.Texture2D);
         }
 
+        static readonly float[] textureArray = new[]
+            {
+                0.0f, 0.0f,
+                1.0f, 0.0f,
+                1.0f, 1.0f,
+                0.0f, 1.0f
+            };
+
         public static void RenderTextureWithoutBinding(int textureId, float[] vertextArray)
         {
             GL.Color4((byte)255, (byte)255, (byte)255, (byte)255);
@@ -79,14 +87,6 @@ namespace Mapsui.Rendering.OpenTK
 
             GL.EnableClientState(All.VertexArray);
             GL.EnableClientState(All.TextureCoordArray);
-
-            var textureArray = new[]
-            {
-                0.0f, 0.0f,
-                1.0f, 0.0f,
-                1.0f, 1.0f,
-                0.0f, 1.0f
-            };
 
             GL.VertexPointer(2, All.Float, 0, vertextArray);
             GL.TexCoordPointer(2, All.Float, 0, textureArray);

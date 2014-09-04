@@ -41,10 +41,10 @@ namespace Mapsui.Rendering.Xaml
             {
                 var symbolStyle = style as SymbolStyle;
 
-                if (symbolStyle.Symbol == null || symbolStyle.Symbol.Data == null)
+                if (symbolStyle.BitmapId < 0)
                     symbol = CreateSymbolFromVectorStyle(symbolStyle, symbolStyle.Opacity, symbolStyle.SymbolType);
                 else
-                    symbol = CreateSymbolFromBitmap(symbolStyle.Symbol.Data, symbolStyle.Opacity);
+                    symbol = CreateSymbolFromBitmap(BitmapRegistry.Instance.Get(symbolStyle.BitmapId), symbolStyle.Opacity);
                 matrix = CreatePointSymbolMatrix(viewport.Resolution, symbolStyle);
             }
             else
@@ -187,7 +187,7 @@ namespace Mapsui.Rendering.Xaml
             }
             else
             {
-                BitmapImage bitmapImage = CreateBitmapImage(style.Symbol.Data);
+                BitmapImage bitmapImage = CreateBitmapImage(BitmapRegistry.Instance.Get(style.BitmapId));
 
                 path.Fill = new XamlMedia.ImageBrush { ImageSource = bitmapImage };
 
@@ -237,7 +237,7 @@ namespace Mapsui.Rendering.Xaml
             var rect = new XamlMedia.RectangleGeometry();
             if (style.Symbol != null)
             {
-                var bitmapImage = CreateBitmapImage(style.Symbol.Data);
+                var bitmapImage = CreateBitmapImage(BitmapRegistry.Instance.Get(style.BitmapId));
                 var width = bitmapImage.PixelWidth * style.SymbolScale;
                 var height = bitmapImage.PixelHeight * style.SymbolScale;
                 rect.Rect = new Rect(p.X - width * 0.5, p.Y - height * 0.5, width, height);
@@ -343,8 +343,8 @@ namespace Mapsui.Rendering.Xaml
             var path = CreateRasterPath(style, raster.Data);
             path.Data = ConvertRaster(raster.GetBoundingBox(), viewport);
 
-            //!!!path.Stroke = new XamlMedia.SolidColorBrush(XamlColors.Red);
-            //!!!path.StrokeThickness = 6;
+            // path.Stroke = new XamlMedia.SolidColorBrush(XamlColors.Red);
+            // path.StrokeThickness = 6;
 
             return path;
         }

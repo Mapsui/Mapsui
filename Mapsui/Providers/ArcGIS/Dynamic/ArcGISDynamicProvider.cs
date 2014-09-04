@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Net;
@@ -104,7 +105,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
 
         private void CapabilitiesHelperCapabilitiesFailed(object sender, EventArgs e)
         {
-            //!!!Trace.Write("Error getting ArcGIS Capabilities");
+            Debug.WriteLine("Error getting ArcGIS Capabilities");
         }
         
         private void CapabilitiesHelperCapabilitiesReceived(object sender, EventArgs e)
@@ -131,7 +132,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
             }
             catch (OverflowException)
             {
-                //!!!Trace.Write("Could not conver double to int (ExportMap size)");
+                Debug.WriteLine("Could not conver double to int (ExportMap size)");
                 return false;
             }
            

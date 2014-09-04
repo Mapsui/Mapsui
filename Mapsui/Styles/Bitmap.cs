@@ -1,11 +1,19 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
 
 namespace Mapsui.Styles
 {
+    /// <summary>
+    /// This class has been replaced with BitmapID/BitmapRegistry. It is left in for backward compatibility.
+    /// The problem with this class is that the renderer creates instances for each bitmap even if this
+    /// same bitmap is used. 
+    /// </summary>
     public class Bitmap
     {
         private MemoryStream _data;
+
+        public EventHandler<BitmapDataAddedEventArgs> BitmapDataAddedEventHandler;
 
         public Stream Data
         {
@@ -18,7 +26,14 @@ namespace Mapsui.Styles
                     return;
                 }
                 _data = CopyStreamToMemoryStream(value);
+                OnBitmapDataAddedEventArgs(_data);
             }
+        }
+
+        public void OnBitmapDataAddedEventArgs(Stream data)
+        {
+            var handler = BitmapDataAddedEventHandler;
+            if (handler != null) BitmapDataAddedEventHandler(this, new BitmapDataAddedEventArgs(data));
         }
 
         private static MemoryStream CopyStreamToMemoryStream(Stream input)
@@ -34,53 +49,16 @@ namespace Mapsui.Styles
             output.Position = 0;
             return output;
         }
-
-        
-        public override bool Equals(object obj)
-        {
-            if (!(obj is Bitmap))
-            {
-                return false;
-            }
-            return Equals((Bitmap)obj);
-        }
-
-        public bool Equals(Bitmap bitmap)
-        {
-            if (!CompareMemoryStreams(_data, bitmap._data)) return false;
-            return true;
-        }
-
-        private static bool CompareMemoryStreams(MemoryStream ms1, MemoryStream ms2)
-        {
-            if (ms1.Length != ms2.Length)
-                return false;
-            ms1.Position = 0;
-            ms2.Position = 0;
-
-            var msArray1 = ms1.ToArray();
-            var msArray2 = ms2.ToArray();
-
-            return msArray1.SequenceEqual(msArray2);
-        }
-
-        public override int GetHashCode()
-        {
-            // Since Data.GetHashCode reads the full stream it is more efficient
-            // to return the stream length. 
-            return Data.CanSeek ? (int) Data.Length : 0;
-        }
-
-        public static bool operator ==(Bitmap bitmap1, Bitmap bitmap2)
-        {
-            return Equals(bitmap1, bitmap2);
-        }
-
-        public static bool operator !=(Bitmap bitmap1, Bitmap bitmap2)
-        {
-            return !Equals(bitmap1, bitmap2);
-        }
-
-        
     }
+
+    public class BitmapDataAddedEventArgs : EventArgs
+    {
+        public BitmapDataAddedEventArgs(Stream data)
+        {
+            Data = data;
+        }
+
+        public Stream Data;
+    }
+
 }

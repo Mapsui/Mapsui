@@ -1,4 +1,6 @@
-﻿using Mapsui.Providers;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Mapsui.Providers;
 using Mapsui.Styles;
 using OpenTK.Graphics.ES11;
 using Point = Mapsui.Geometries.Point;
@@ -7,12 +9,12 @@ namespace Mapsui.Rendering.OpenTK
 {
     public class PointRenderer
     {
-        public static void Draw(IViewport viewport, IStyle style, IFeature feature)
+        public static void Draw(IViewport viewport, IStyle style, IFeature feature, IDictionary<int, TextureInfo> bitmapCache)
         {
             var point = feature.Geometry as Point;
             var destination = viewport.WorldToScreen(point);
 
-            if (style is SymbolStyle) DrawPointWithSymbolStyle(feature, (SymbolStyle)style, destination);
+            if (style is SymbolStyle) DrawPointWithSymbolStyle((SymbolStyle)style, destination, bitmapCache);
             else if (style is VectorStyle) DrawPointWithVectorStyle((VectorStyle)style, destination);
         }
 
@@ -28,23 +30,20 @@ namespace Mapsui.Rendering.OpenTK
             GL.DisableClientState(All.VertexArray);
         }
 
-        private static void DrawPointWithSymbolStyle(IFeature feature, SymbolStyle symbolStyle, Point destination)
+        private static void DrawPointWithSymbolStyle(SymbolStyle symbolStyle, Point destination, IDictionary<int, TextureInfo> bitmapCache)
         {
-            if (symbolStyle.Symbol != null && symbolStyle.Symbol.Data != null)
+            TextureInfo textureInfo;
+            if (!bitmapCache.Keys.Contains(symbolStyle.BitmapId))
             {
-                TextureInfo textureInfo;
-                if (!feature.RenderedGeometry.ContainsKey(symbolStyle))
-                {
-                    textureInfo = TextureHelper.LoadTexture(symbolStyle.Symbol.Data);
-                    feature.RenderedGeometry[symbolStyle] = textureInfo;
-                }
-                else
-                {
-                    textureInfo = (TextureInfo)feature.RenderedGeometry[symbolStyle];
-                }
-                TextureHelper.RenderTexture(textureInfo, (float)destination.X, (float)destination.Y, 
-                    (float)symbolStyle.SymbolRotation, (float)symbolStyle.SymbolOffset.X, (float)symbolStyle.SymbolOffset.Y);
+                textureInfo = TextureHelper.LoadTexture(BitmapRegistry.Instance.Get(symbolStyle.BitmapId));
+                bitmapCache[symbolStyle.BitmapId] = textureInfo;
             }
+            else
+            {
+                textureInfo = bitmapCache[symbolStyle.BitmapId];
+            }
+            TextureHelper.RenderTexture(textureInfo, (float)destination.X, (float)destination.Y, 
+                (float)symbolStyle.SymbolRotation, (float)symbolStyle.SymbolOffset.X, (float)symbolStyle.SymbolOffset.Y);
         }
     }
 }

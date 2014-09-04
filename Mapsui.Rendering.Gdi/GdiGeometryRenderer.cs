@@ -24,6 +24,7 @@ using System.Drawing.Imaging;
 using System.Globalization;
 using Mapsui.Geometries;
 using Mapsui.Styles;
+using Mapsui.Utilities;
 using Bitmap = System.Drawing.Bitmap;
 using Brush = System.Drawing.Brush;
 using Color = System.Drawing.Color;
@@ -59,11 +60,11 @@ namespace Mapsui.Rendering.Gdi
             //Draw background of all line-outlines first
             if (geometry is LineString)
             {
-                DrawLineString(graphics, geometry as LineString, style.Outline.Convert(), viewport);
+                DrawLineString(graphics, geometry as LineString, style.Outline.ToBitmap(), viewport);
             }
             else if (geometry is MultiLineString)
             {
-                DrawMultiLineString(graphics, geometry as MultiLineString, style.Outline.Convert(), viewport);
+                DrawMultiLineString(graphics, geometry as MultiLineString, style.Outline.ToBitmap(), viewport);
             }
         }
 
@@ -153,46 +154,46 @@ namespace Mapsui.Rendering.Gdi
         /// <param name="viewport"></param>
         public static void DrawLabel(Graphics graphics, Point labelPoint, Styles.Offset offset, Styles.Font font, Styles.Color forecolor, Styles.Brush backcolor, Styles.Pen halo, double rotation, string text, IViewport viewport)
         {
-            SizeF fontSize = graphics.MeasureString(text, font.Convert()); //Calculate the size of the text
+            SizeF fontSize = graphics.MeasureString(text, font.ToBitmap()); //Calculate the size of the text
             labelPoint.X += offset.X; labelPoint.Y += offset.Y; //add label offset
             if (rotation != 0 && !double.IsNaN(rotation))
             {
                 graphics.TranslateTransform((float)labelPoint.X, (float)labelPoint.Y);
                 graphics.RotateTransform((float)rotation);
                 graphics.TranslateTransform(-fontSize.Width / 2, -fontSize.Height / 2);
-                if (backcolor != null && backcolor.Convert() != Brushes.Transparent)
-                    graphics.FillRectangle(backcolor.Convert(), 0, 0, fontSize.Width * 0.74f + 1f, fontSize.Height * 0.74f);
+                if (backcolor != null && backcolor.ToBitmap() != Brushes.Transparent)
+                    graphics.FillRectangle(backcolor.ToBitmap(), 0, 0, fontSize.Width * 0.74f + 1f, fontSize.Height * 0.74f);
                 var path = new GraphicsPath();
-                path.AddString(text, new FontFamily(font.FontFamily), (int)font.Convert().Style, font.Convert().Size, new System.Drawing.Point(0, 0), null);
+                path.AddString(text, new FontFamily(font.FontFamily), (int)font.ToBitmap().Style, font.ToBitmap().Size, new System.Drawing.Point(0, 0), null);
                 if (halo != null)
-                    graphics.DrawPath(halo.Convert(), path);
-                graphics.FillPath(new SolidBrush(forecolor.Convert()), path);
+                    graphics.DrawPath(halo.ToBitmap(), path);
+                graphics.FillPath(new SolidBrush(forecolor.ToBitmap()), path);
                 //g.DrawString(text, font, new System.Drawing.SolidBrush(forecolor), 0, 0);                
             }
             else
             {
-                if (backcolor != null && backcolor.Convert() != Brushes.Transparent)
-                    graphics.FillRectangle(backcolor.Convert(), (float)labelPoint.X, (float)labelPoint.Y, fontSize.Width * 0.74f + 1, fontSize.Height * 0.74f);
+                if (backcolor != null && backcolor.ToBitmap() != Brushes.Transparent)
+                    graphics.FillRectangle(backcolor.ToBitmap(), (float)labelPoint.X, (float)labelPoint.Y, fontSize.Width * 0.74f + 1, fontSize.Height * 0.74f);
 
                 var path = new GraphicsPath();
 
                 //Arial hack
-                path.AddString(text, new FontFamily("Arial"), (int)font.Convert().Style, (float)font.Size, new System.Drawing.Point((int)labelPoint.X, (int)labelPoint.Y), null);
+                path.AddString(text, new FontFamily("Arial"), (int)font.ToBitmap().Style, (float)font.Size, new System.Drawing.Point((int)labelPoint.X, (int)labelPoint.Y), null);
                 if (halo != null)
-                    graphics.DrawPath(halo.Convert(), path);
-                graphics.FillPath(new SolidBrush(forecolor.Convert()), path);
+                    graphics.DrawPath(halo.ToBitmap(), path);
+                graphics.FillPath(new SolidBrush(forecolor.ToBitmap()), path);
                 //g.DrawString(text, font, new System.Drawing.SolidBrush(forecolor), LabelPoint.X, LabelPoint.Y);
             }
         }
         
         public static void DrawPoint(Graphics graphics, Point point, IStyle style, IViewport viewport)
         {
-            var vectorStyle = (Styles.SymbolStyle)style;
-            if (vectorStyle.Symbol == null) throw  new ArgumentException("No bitmap symbol set in Gdi rendering"); //todo: allow vector symbol
-            Bitmap symbol= vectorStyle.Symbol.Convert();
-            var symbolscale = vectorStyle.SymbolScale;
-            PointF offset = vectorStyle.SymbolOffset.Convert();
-            var rotation = vectorStyle.SymbolRotation;
+            var symbolStyle = (SymbolStyle)style;
+            if (symbolStyle.Symbol == null) throw  new ArgumentException("No bitmap symbol set in Gdi rendering"); //todo: allow vector symbol
+            var symbol = new Bitmap(BitmapRegistry.Instance.Get(symbolStyle.BitmapId));
+            var symbolscale = symbolStyle.SymbolScale;
+            PointF offset = symbolStyle.SymbolOffset.ToBitmap();
+            var rotation = symbolStyle.SymbolRotation;
 
             if (point == null)
                 return;
@@ -249,11 +250,12 @@ namespace Mapsui.Rendering.Gdi
                 GraphicsUnit.Pixel,
                 new ImageAttributes());
 
-#if DEBUG
-            var font = new System.Drawing.Font("Arial", 12);
-            var message = (GC.GetTotalMemory(true) / 1000).ToString(CultureInfo.InvariantCulture) + " KB";
-            graphics.DrawString(message, font, new SolidBrush(Color.Black), 10f, 10f);
-#endif
+            if (DeveloperTools.DeveloperMode)
+            {
+                var font = new System.Drawing.Font("Arial", 12);
+                var message = (GC.GetTotalMemory(true)/1000).ToString(CultureInfo.InvariantCulture) + " KB";
+                graphics.DrawString(message, font, new SolidBrush(Color.Black), 10f, 10f);
+            }
 
             bitmap.Dispose();
         }

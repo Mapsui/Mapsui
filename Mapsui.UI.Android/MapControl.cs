@@ -1,5 +1,6 @@
 using Android.Content;
 using Android.Graphics;
+using Android.Locations;
 using Android.Runtime;
 using Android.Util;
 using Android.Views;
@@ -29,6 +30,7 @@ namespace Mapsui.UI.Android
         private MapRenderer _renderer;
         private Map _map;
         private bool _refreshGraphics;
+        public event  EventHandler<EventArgs> ViewportInitialized;
         
         public MapControl(Context context, IAttributeSet attrs) : base(context, attrs)
         {
@@ -60,6 +62,7 @@ namespace Mapsui.UI.Android
 
         private void InitializeViewport()
         {
+            if (_viewportInitialized) return;
             if (Math.Abs(Width - 0f) < Utilities.Constants.Epsilon) return;
             if (_map == null) return;
             if (_map.Envelope == null) return;
@@ -73,10 +76,11 @@ namespace Mapsui.UI.Android
                 _map.Viewport.Center = _map.Envelope.GetCentroid();
             _map.Viewport.Width = Width;
             _map.Viewport.Height = Height;
-            _map.Viewport.RenderResolutionMultiplier = 2;
+            if (Width >= 1080 && Height >= 1080) _map.Viewport.RenderResolutionMultiplier = 2;
 
-            _map.ViewChanged(true);
             _viewportInitialized = true;
+            OnViewportInitialized();
+            _map.ViewChanged(true);
         }
 
         private void ViewportOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
@@ -251,10 +255,7 @@ namespace Mapsui.UI.Android
         {
             GL.MatrixMode(All.Projection);
             GL.LoadIdentity();
-
             GL.Ortho(0, Width, Height, 0, 0, 1);
-            // pixel correction: GL.Translate(0.375, 0.375, 0);
-
             GL.MatrixMode(All.Modelview);
         }
 
@@ -277,6 +278,12 @@ namespace Mapsui.UI.Android
            _renderer.Render(_map.Viewport, _map.Layers);
 
             SwapBuffers();
+        }
+
+        private void OnViewportInitialized()
+        {
+            var handler = ViewportInitialized;
+            if (handler != null) handler(this, new EventArgs());
         }
     }
 }

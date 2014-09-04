@@ -18,7 +18,6 @@
 using System;
 using System.ComponentModel;
 using System.Windows;
-
 #if NETFX_CORE
 using Windows.UI.Xaml;
 #endif
@@ -27,21 +26,17 @@ namespace Mapsui.UI.Xaml
 {
     public class FpsCounter : DependencyObject, INotifyPropertyChanged
     {
-        
-        private double elapsed;
-        private int lastTick;
-        private int currentTick;
-        private int frameCount;
-        private double frameCountTime;
-        
-        
-        
+        private double _elapsed;
+        private int _lastTick;
+        private int _currentTick;
+        private int _frameCount;
+        private double _frameCountTime;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
         private static readonly DependencyProperty FpsProperty = DependencyProperty.Register(
           "Fps", typeof(int), typeof(FpsCounter), new PropertyMetadata(0));
 
-
-        
-        
         public int Fps
         {
             get { return (int)GetValue(FpsProperty); }
@@ -52,26 +47,24 @@ namespace Mapsui.UI.Xaml
             }
         }
 
-        
-        
         public FpsCounter()
         {
-            lastTick = Environment.TickCount;
+            _lastTick = Environment.TickCount;
         }
 
         public void FramePlusOne()
         {
-            currentTick = Environment.TickCount;
-            elapsed = (currentTick - lastTick) / 1000.0;
-            lastTick = currentTick;
+            _currentTick = Environment.TickCount;
+            _elapsed = (_currentTick - _lastTick) / 1000.0;
+            _lastTick = _currentTick;
 
-            frameCount++;
-            frameCountTime += elapsed;
-            if (frameCountTime >= 1.0)
+            _frameCount++;
+            _frameCountTime += _elapsed;
+            if (_frameCountTime >= 1.0)
             {
-                frameCountTime -= 1.0;
-                Fps = frameCount;
-                frameCount = 0;
+                _frameCountTime -= 1.0;
+                Fps = _frameCount;
+                _frameCount = 0;
             }
         }
 
@@ -82,10 +75,5 @@ namespace Mapsui.UI.Xaml
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
-
-        
-        
-        public event PropertyChangedEventHandler PropertyChanged;
-
-            }
+    }
 }

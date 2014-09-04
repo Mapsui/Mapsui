@@ -106,6 +106,5 @@ namespace Mapsui.Geometries
         {
             throw new NotImplementedException();
         }
-        
-            }
+    }
 }

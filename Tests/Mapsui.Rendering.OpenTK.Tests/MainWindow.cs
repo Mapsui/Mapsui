@@ -22,6 +22,7 @@ namespace Mapsui.Rendering.OpenTK.Tests
         {
             _map = ArrangeRenderingTests.Samples[_currentSampleIndex]();
             Title = "OpenTK Rendering samples - press ENTER for next sample";
+            Context.SwapInterval = 0;
         }
 
         protected override void OnLoad(EventArgs e)
@@ -45,6 +46,7 @@ namespace Mapsui.Rendering.OpenTK.Tests
 
             CheckError();
 
+            FpsCounter.Calculate(e.Time);
             FpsCounter.Render(new[] { "FPS   : " + FpsCounter.Fps });
 
             SwapBuffers();
@@ -107,8 +109,6 @@ namespace Mapsui.Rendering.OpenTK.Tests
             {
                 _enterUp = true;
             }
-
-            FpsCounter.Calculate(e.Time);
 
             if (Keyboard[Key.Escape])
             {
