@@ -17,8 +17,7 @@ namespace Mapsui.UI.iOS
 {
 	public class MapControl : iPhoneOSGameView
 	{
-		public delegate void ViewportInitializedEventHandler(object sender);
-		public event ViewportInitializedEventHandler ViewportInitializedEvent;
+		public event EventHandler<EventArgs> ViewportInitialized;
 
 		private PointF _previousMid;
 		private PointF _currentMid;
@@ -28,20 +27,10 @@ namespace Mapsui.UI.iOS
 		private bool _refreshGraphics;
 
 		private bool _viewportInitialized;
-		public bool ViewportInitialized
-		{
-			get { return _viewportInitialized; }
-			set
-			{
-				_viewportInitialized = value;
-				if (_viewportInitialized && ViewportInitializedEvent != null) ViewportInitializedEvent(this);
-			}
-		}
 
 		private float Width { get { return Frame.Width; } }
 		private float Height { get { return Frame.Height; } }
-
-
+        
 		[Export ("layerClass")]
 		static Class LayerClass()
 		{
@@ -99,10 +88,11 @@ namespace Mapsui.UI.iOS
 
 			_map.Viewport.Width = Width;
 			_map.Viewport.Height = Height;
-			_map.Viewport.RenderResolutionMultiplier = 2;
+            if (Width >= 1048) _map.Viewport.RenderResolutionMultiplier = 2;
 
 			_map.ViewChanged(true);
 			_viewportInitialized = true;
+		    OnViewportInitialized();
 		}
 
 		private void PinchGesture(UIPinchGestureRecognizer recognizer)
@@ -283,5 +273,11 @@ namespace Mapsui.UI.iOS
 
 			GL.MatrixMode(All.Modelview);
 		}
+
+	    private void OnViewportInitialized()
+	    {
+	        var handler = ViewportInitialized;
+	        if (handler != null) handler(this, new EventArgs());
+	    }
 	}
 }
