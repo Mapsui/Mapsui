@@ -210,7 +210,7 @@ namespace Mapsui
         {
             foreach (var layer in _layers.ToList())
             {
-                layer.ViewChanged(changeEnd, Viewport.Extent, Viewport.Resolution);
+                layer.ViewChanged(changeEnd, Viewport.Extent, Viewport.RenderResolution);
             }
         }
 
