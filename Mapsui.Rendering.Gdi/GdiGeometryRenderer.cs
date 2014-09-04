@@ -24,6 +24,7 @@ using System.Drawing.Imaging;
 using System.Globalization;
 using Mapsui.Geometries;
 using Mapsui.Styles;
+using Mapsui.Utilities;
 using Bitmap = System.Drawing.Bitmap;
 using Brush = System.Drawing.Brush;
 using Color = System.Drawing.Color;
@@ -249,11 +250,12 @@ namespace Mapsui.Rendering.Gdi
                 GraphicsUnit.Pixel,
                 new ImageAttributes());
 
-#if DEBUG
-            var font = new System.Drawing.Font("Arial", 12);
-            var message = (GC.GetTotalMemory(true) / 1000).ToString(CultureInfo.InvariantCulture) + " KB";
-            graphics.DrawString(message, font, new SolidBrush(Color.Black), 10f, 10f);
-#endif
+            if (DeveloperTools.DeveloperMode)
+            {
+                var font = new System.Drawing.Font("Arial", 12);
+                var message = (GC.GetTotalMemory(true)/1000).ToString(CultureInfo.InvariantCulture) + " KB";
+                graphics.DrawString(message, font, new SolidBrush(Color.Black), 10f, 10f);
+            }
 
             bitmap.Dispose();
         }
