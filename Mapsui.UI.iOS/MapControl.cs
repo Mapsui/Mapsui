@@ -88,11 +88,11 @@ namespace Mapsui.UI.iOS
 
 			_map.Viewport.Width = Width;
 			_map.Viewport.Height = Height;
-            if (Width >= 1048) _map.Viewport.RenderResolutionMultiplier = 2;
+            if (Width >= 1080 && Height >= 1080) _map.Viewport.RenderResolutionMultiplier = 2;
 
-			_map.ViewChanged(true);
 			_viewportInitialized = true;
 		    OnViewportInitialized();
+            _map.ViewChanged(true);
 		}
 
 		private void PinchGesture(UIPinchGestureRecognizer recognizer)
@@ -267,10 +267,7 @@ namespace Mapsui.UI.iOS
 		{
 			GL.MatrixMode(All.Projection);
 			GL.LoadIdentity();
-
 			GL.Ortho(0, Width, Height, 0, 0, 1);
-			// pixel correction: GL.Translate(0.375, 0.375, 0);
-
 			GL.MatrixMode(All.Modelview);
 		}
 
