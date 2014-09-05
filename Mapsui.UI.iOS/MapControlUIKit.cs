@@ -10,7 +10,7 @@ using Math = System.Math;
 
 namespace Mapsui.UI.iOS
 {
-    [Register("MapControl")]
+    //[Register("MapControl")]
     public class MapControlUIKit : UIView
     {
         public delegate void ViewportInitializedEventHandler(object sender);

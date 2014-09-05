@@ -15,6 +15,7 @@ using OpenTK.Platform.iPhoneOS;
 
 namespace Mapsui.UI.iOS
 {
+	[Register("MapControl")]
 	public class MapControl : iPhoneOSGameView
 	{
 		public event EventHandler<EventArgs> ViewportInitialized;
@@ -40,10 +41,13 @@ namespace Mapsui.UI.iOS
 		[Export ("initWithCoder:")]
 		public MapControl (NSCoder coder) : base(coder)
 		{
-			LayerRetainsBacking = false;
-			LayerColorFormat    = EAGLColorFormat.RGBA8;
-			ContextRenderingApi = EAGLRenderingAPI.OpenGLES1;
 			Initialize();
+		}
+
+		[Export("drawFrame")]
+		public void DrawFrame()
+		{
+			OnRenderFrame(new FrameEventArgs());
 		}
 
 		protected override void ConfigureLayer(CAEAGLLayer eaglLayer)
@@ -60,15 +64,29 @@ namespace Mapsui.UI.iOS
 		public void Initialize()
 		{
 			Map = new Map();
-			BackgroundColor = UIColor.White;
-			_renderer = new MapRenderer();
 
+			_renderer = new MapRenderer();
+			BackgroundColor = UIColor.White;
+		
 			InitializeViewport();
 
 			ClipsToBounds = true;
 
 			var pinchGesture = new UIPinchGestureRecognizer(PinchGesture) { Enabled = true };
 			AddGestureRecognizer(pinchGesture);
+
+		}
+
+		public void StartRendering()
+		{
+			LayerColorFormat = EAGLColorFormat.RGBA8;
+			CreateFrameBuffer ();
+			GL.ClearColor (1, 1, 1, 1);
+			CADisplayLink displayLink = UIScreen.MainScreen.CreateDisplayLink(this, new Selector("drawFrame"));
+			displayLink.FrameInterval = 1;
+			displayLink.AddToRunLoop(NSRunLoop.Current, NSRunLoop.NSDefaultRunLoopMode);
+
+			Map.ViewChanged (true);
 		}
 
 		private void InitializeViewport()
@@ -242,6 +260,17 @@ namespace Mapsui.UI.iOS
 			SetNeedsDisplay();
 		}
 
+		protected override void CreateFrameBuffer()
+		{
+			ContextRenderingApi = EAGLRenderingAPI.OpenGLES1;
+				base.CreateFrameBuffer();
+		}
+
+		protected override void DestroyFrameBuffer()
+		{
+			base.DestroyFrameBuffer();
+		}
+
 		protected override void OnRenderFrame(FrameEventArgs e)
 		{
 			base.OnRenderFrame(e);
@@ -253,6 +282,9 @@ namespace Mapsui.UI.iOS
 				InitializeViewport();
 			if (!_viewportInitialized)
 				return;
+
+			Map.Viewport.Width = Width;
+			Map.Viewport.Height = Height;
 
 			Set2DViewport();
 
