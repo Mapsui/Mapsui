@@ -164,7 +164,7 @@ namespace Mapsui.Styles.Thematics
         private void CalculateSymbolStyle(SymbolStyle style, SymbolStyle min, SymbolStyle max, double value)
         {
             double dFrac = Fraction(value);
-            style.Symbol = (dFrac > 0.5 ? min.Symbol : max.Symbol);
+            style.BitmapId = (dFrac > 0.5) ? min.BitmapId : max.BitmapId;
             style.SymbolOffset = (dFrac > 0.5 ? min.SymbolOffset : max.SymbolOffset);
             //We don't interpolate the offset but let it follow the symbol instead
             style.SymbolScale = InterpolateDouble(min.SymbolScale, max.SymbolScale, value);
