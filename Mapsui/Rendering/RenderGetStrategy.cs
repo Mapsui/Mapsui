@@ -18,23 +18,38 @@ namespace Mapsui.Rendering
             var sortedFeatures = dictionary.OrderByDescending(t => schema.Resolutions[t.Key.Level].UnitsPerPixel);
             return sortedFeatures.ToDictionary(pair => pair.Key, pair => pair.Value).Values.ToList();
         }
-        
+
         public static void GetRecursive(IDictionary<TileIndex, IFeature> resultTiles, ITileSchema schema,
             ITileCache<Feature> cache, Extent extent, string levelId)
         {
-            var resolution = schema.Resolutions[levelId].UnitsPerPixel;
-            var tiles = schema.GetTilesInView(extent, resolution);
+            // to improve performance, convert the resolutions to a list so they can be walked up by
+            // simply decrementing an index when the level index needs to change
+            var resolutions = schema.Resolutions.OrderByDescending(pair => pair.Value.UnitsPerPixel).ToList();
+            for (int i = 0; i < resolutions.Count; i++)
+            {
+                if (levelId == resolutions[i].Key)
+                {
+                    GetRecursive(resultTiles, schema, cache, extent, resolutions, i);
+                    break;
+                }
+            }
+        }
+
+        private static void GetRecursive(IDictionary<TileIndex, IFeature> resultTiles, ITileSchema schema,
+            ITileCache<Feature> cache, Extent extent, IList<KeyValuePair<string, Resolution>> resolutions, int resolutionIndex)
+        {
+            if (resolutionIndex < 0 || resolutionIndex >= resolutions.Count)
+                return;
+
+            var tiles = schema.GetTilesInView(extent, resolutions[resolutionIndex].Key);
 
             foreach (var tileInfo in tiles)
             {
                 var feature = cache.Find(tileInfo.Index);
-                var levels = schema.Resolutions.Where(r => r.Value.UnitsPerPixel > resolution)
-                    .OrderBy(r => r.Value.UnitsPerPixel);
-                var nextLevelId = levels.FirstOrDefault().Key;
 
                 if (feature == null)
                 {
-                    if (nextLevelId != null) GetRecursive(resultTiles, schema, cache, tileInfo.Extent.Intersect(extent), nextLevelId);
+                    GetRecursive(resultTiles, schema, cache, tileInfo.Extent.Intersect(extent), resolutions, resolutionIndex - 1);
                 }
                 else
                 {
