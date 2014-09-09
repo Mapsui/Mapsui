@@ -20,7 +20,7 @@ namespace Mapsui.Tests.Rendering
             const int levelId = 4;
             var resolution = schema.Resolutions[levelId.ToString(CultureInfo.InvariantCulture)];
             var memoryCache = PopulateMemoryCache(schema, new MemoryCache<Feature>(), levelId);
-            var renderGetStrategy = new RenderGetStrategyOld();
+            var renderGetStrategy = new RenderGetStrategy();
 
             // act
             var tiles = renderGetStrategy.GetFeatures(box, resolution.UnitsPerPixel, schema, memoryCache);
