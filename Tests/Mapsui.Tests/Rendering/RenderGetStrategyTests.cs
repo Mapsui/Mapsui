@@ -1,7 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-using System.Linq;
-using BruTile;
+﻿using BruTile;
 using BruTile.Cache;
 using BruTile.Predefined;
 using Mapsui.Providers;
@@ -20,19 +17,18 @@ namespace Mapsui.Tests.Rendering
             // arrange
             var schema = new GlobalSphericalMercator();
             var box = schema.Extent.ToBoundingBox();
-            var levelId = 4;
+            const int levelId = 4;
             var resolution = schema.Resolutions[levelId.ToString(CultureInfo.InvariantCulture)];
             var memoryCache = PopulateMemoryCache(schema, new MemoryCache<Feature>(), levelId);
             var renderGetStrategy = new RenderGetStrategyOld();
 
             // act
-            
-             var tiles = renderGetStrategy.GetFeatures(box, resolution.UnitsPerPixel, schema, memoryCache);
+            var tiles = renderGetStrategy.GetFeatures(box, resolution.UnitsPerPixel, schema, memoryCache);
 
             // assert
             Assert.True(tiles.Count == 16);
         }
-        
+
         private static ITileCache<Feature> PopulateMemoryCache(GlobalSphericalMercator schema, MemoryCache<Feature> cache, int levelId)
         {
             for (var i = levelId; i >= 0; i--)
@@ -40,7 +36,7 @@ namespace Mapsui.Tests.Rendering
                 var tiles = schema.GetTilesInView(schema.Extent, i.ToString(CultureInfo.InvariantCulture));
                 foreach (var tile in tiles)
                 {
-                    if (tile.Index.Col + tile.Index.Row%2 == 0)
+                    if ((tile.Index.Col + tile.Index.Row) % 2 == 0) // Add only 50% of the tiles with the arbitrary rule.
                     {
                         cache.Add(tile.Index, new Feature());
                     }
