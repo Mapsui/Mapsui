@@ -17,16 +17,16 @@ namespace Mapsui.Tests.Rendering
             // arrange
             var schema = new GlobalSphericalMercator();
             var box = schema.Extent.ToBoundingBox();
-            const int levelId = 4;
+            const int levelId = 3;
             var resolution = schema.Resolutions[levelId.ToString(CultureInfo.InvariantCulture)];
             var memoryCache = PopulateMemoryCache(schema, new MemoryCache<Feature>(), levelId);
-            var renderGetStrategy = new RenderGetStrategy();
+            var renderGetStrategy = new RenderGetStrategyOld();
 
             // act
             var tiles = renderGetStrategy.GetFeatures(box, resolution.UnitsPerPixel, schema, memoryCache);
 
             // assert
-            Assert.True(tiles.Count == 16);
+            Assert.True(tiles.Count == 43);
         }
 
         private static ITileCache<Feature> PopulateMemoryCache(GlobalSphericalMercator schema, MemoryCache<Feature> cache, int levelId)
