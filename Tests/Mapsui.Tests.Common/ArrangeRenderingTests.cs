@@ -15,11 +15,12 @@ namespace Mapsui.Tests.Common
 
         static ArrangeRenderingTests()
         {
+            Samples.Add(Labels);
             Samples.Add(PointsWithVectorStyle);
-            Samples.Add(PointWithBitmapSymbols);
-            Samples.Add(RotatedBitmapSymbolWithOffset);
+            Samples.Add(PointsWithBitmapSymbols);
+            Samples.Add(PointsWithBitmapRotatedAndOffset);
             Samples.Add(PointsWithDifferentSymbolTypes);
-            Samples.Add(SymbolWithWorldUnits);
+            Samples.Add(PointsWithWorldUnits);
             Samples.Add(Polygon);
             Samples.Add(Line);
             Samples.Add(Tiles);
@@ -36,7 +37,7 @@ namespace Mapsui.Tests.Common
             return map;
         }
 
-        public static Map PointWithBitmapSymbols()
+        public static Map PointsWithBitmapSymbols()
         {
             var map = new Map { Viewport = { Center = new Point(100, 100), Width = 200, Height = 200, Resolution = 1 } };
             var layer = new MemoryLayer
@@ -48,7 +49,7 @@ namespace Mapsui.Tests.Common
             return map;
         }
 
-        public static Map RotatedBitmapSymbolWithOffset()
+        public static Map PointsWithBitmapRotatedAndOffset()
         {
             var map = new Map { Viewport = { Center = new Point(80, 80), Width = 200, Height = 200, Resolution = 1 } };
             var layer = new MemoryLayer { DataSource = Utilities.CreateProviderWithRotatedBitmapSymbols() };
@@ -69,7 +70,7 @@ namespace Mapsui.Tests.Common
             return map;
         }
 
-        public static Map SymbolWithWorldUnits()
+        public static Map PointsWithWorldUnits()
         {
             var map = new Map { Viewport = { Center = new Point(0, 0), Width = 200, Height = 100, Resolution = 0.5 } };
             var features = new Features
@@ -171,5 +172,48 @@ namespace Mapsui.Tests.Common
             }
             return features;
         }
+
+        public static Map Labels()
+        {
+            var map = new Map { Viewport = { Center = new Point(100, 100), Width = 200, Height = 200, Resolution = 1 } };
+            map.Layers.Add(new MemoryLayer
+            {
+                Style = null,
+                DataSource = CreateProviderWithLabels()
+            });
+            return map;
+
+        }
+
+        public static MemoryProvider CreateProviderWithLabels()
+        {
+            var features = new Features
+                {
+                    new Feature
+                        {
+                            Geometry = new Point(50, 50),
+                            Styles = new[] {new VectorStyle {Fill = new Brush(Color.Gray), Outline = new Pen(Color.Black)}}
+                        },
+                    new Feature
+                        {
+                            Geometry = new Point(50, 150),
+                            Styles = new[]  { new LabelStyle{ Text = "Black Text", BackColor = null } } 
+                        },
+                    new Feature
+                        {
+                            Geometry = new Point(150, 50),
+                            Styles = new[] { new LabelStyle{ Text = "Gray Backcolor", BackColor = new Brush(Color.Gray), ForeColor = Color.White} } 
+                        },
+                    new Feature
+                        {
+                            Geometry = new Point(150, 150),
+                            Styles = new[]  { new LabelStyle{ Text = "Black Halo", ForeColor = Color.White, Halo = new Pen(Color.Red), BackColor = null} } 
+                        }
+                };
+            var provider = new MemoryProvider(features);
+            return provider;
+        }
+
+
     }
 }

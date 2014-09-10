@@ -85,7 +85,7 @@ namespace Mono.Samples.TexturedCube
         private void InitializeSamples()
         {
             _samples.Add(ArrangeRenderingTests.Line);
-            _samples.Add(ArrangeRenderingTests.PointWithBitmapSymbols);
+            _samples.Add(ArrangeRenderingTests.PointsWithBitmapSymbols);
             _samples.Add(ArrangeRenderingTests.PointsWithVectorStyle);
             _samples.Add(ArrangeRenderingTests.Tiles);
             _map = _samples[_currentSampleIndex]();
