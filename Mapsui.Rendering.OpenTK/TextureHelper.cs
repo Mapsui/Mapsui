@@ -15,7 +15,7 @@ namespace Mapsui.Rendering.OpenTK
 
             SetParameters();
 
-            TextureLoader.TexImage2D(data, out textureInfo.Width, out textureInfo.Height);
+            PlatformTextureLoader.TexImage2D(data, out textureInfo.Width, out textureInfo.Height);
 
             GL.BindTexture(All.Texture2D, 0);
 

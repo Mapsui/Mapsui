@@ -71,7 +71,7 @@
     <Compile Include="PlatformLabelBitmap.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TextureLoader.cs" />
+    <Compile Include="PlatformTextureLoader.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

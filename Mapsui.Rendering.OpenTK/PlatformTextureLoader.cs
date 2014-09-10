@@ -9,7 +9,7 @@ namespace Mapsui.Rendering.OpenTK
     /// <summary>
     /// <remarks>This class is specific for the Windows Desktop platform</remarks>
     /// </summary>
-    public static class TextureLoader
+    public static class PlatformTextureLoader
     {
         public static void TexImage2D(Stream data, out int width, out int height)
         {
