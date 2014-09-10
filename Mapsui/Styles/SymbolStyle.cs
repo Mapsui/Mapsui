@@ -24,6 +24,7 @@ namespace Mapsui.Styles
             SymbolOffset = new Offset();
             SymbolScale = 1f;
             Opacity = 1f;
+            BitmapId = -1;
         }
 
         /// <summary>
