@@ -231,7 +231,8 @@ namespace Mapsui.Rendering.Xaml
         {
             if (style is LabelStyle)
             {
-                canvas.Children.Add(SingleLabelRenderer.RenderLabel(feature.Geometry.GetBoundingBox().GetCentroid(), style as LabelStyle, viewport));
+                var labelStyle = (LabelStyle) style;
+                canvas.Children.Add(SingleLabelRenderer.RenderLabel(feature.Geometry.GetBoundingBox().GetCentroid(), labelStyle, viewport, labelStyle.GetLabelText(feature)));
             }
             else
             {

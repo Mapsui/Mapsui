@@ -81,7 +81,8 @@ namespace Mapsui.Rendering.Xaml
 
                     var position = new Geometries.Point(cluster.Box.GetCentroid().X, cluster.Box.Bottom);
 
-                    canvas.Children.Add(SingleLabelRenderer.RenderLabel(position, labelStyle, viewport));
+                    var labelText = labelStyle.GetLabelText(feature);
+                    canvas.Children.Add(SingleLabelRenderer.RenderLabel(position, labelStyle, viewport, labelText));
                 }
             }
             return canvas;

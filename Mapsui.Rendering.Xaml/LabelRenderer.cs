@@ -39,7 +39,8 @@ namespace Mapsui.Rendering.Xaml
                     labelStyle.Text = layer.GetLabelText(feature);
 
                     var postion = feature.Geometry.GetBoundingBox().GetCentroid();
-                    canvas.Children.Add(SingleLabelRenderer.RenderLabel(postion, labelStyle, viewport));
+                    var labelText = labelStyle.GetLabelText(feature);
+                    canvas.Children.Add(SingleLabelRenderer.RenderLabel(postion, labelStyle, viewport, labelText));
                 }
             }
             return canvas;

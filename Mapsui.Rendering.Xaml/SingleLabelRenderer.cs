@@ -20,7 +20,7 @@ namespace Mapsui.Rendering.Xaml
 {
     class SingleLabelRenderer
     {
-        public static UIElement RenderLabel(Geometries.Point position, LabelStyle labelStyle, IViewport viewport)
+        public static UIElement RenderLabel(Geometries.Point position, LabelStyle labelStyle, IViewport viewport, string labelText)
         {
             var screenPosition = viewport.WorldToScreen(position);
             var windowsPosition = screenPosition.ToXaml();
@@ -31,7 +31,7 @@ namespace Mapsui.Rendering.Xaml
 
             var textblock = new TextBlock
             {
-                Text = labelStyle.Text,
+                Text = labelText,
                 Foreground = new SolidColorBrush(labelStyle.ForeColor.ToXaml()),
 
                 FontFamily = new FontFamily(labelStyle.Font.FontFamily),
@@ -55,7 +55,7 @@ namespace Mapsui.Rendering.Xaml
 #elif SILVERLIGHT
             DetermineTextWidthAndHeightSilverlight(out textWidth, out textHeight, textblock);
 #else // WPF
-            DetermineTextWidthAndHeightWpf(out textWidth, out textHeight, labelStyle);
+            DetermineTextWidthAndHeightWpf(out textWidth, out textHeight, labelStyle, labelText);
 #endif
             border.SetValue(Canvas.LeftProperty, windowsPosition.X + labelStyle.Offset.X
                 - (textWidth + 2 * witdhMargin) * (short)labelStyle.HorizontalAlignment * 0.5f);
@@ -81,11 +81,11 @@ namespace Mapsui.Rendering.Xaml
             textHeight = textblock.ActualHeight;
         }
 #else // WPF
-        private static void DetermineTextWidthAndHeightWpf(out double width, out double height, LabelStyle style)
+        private static void DetermineTextWidthAndHeightWpf(out double width, out double height, LabelStyle style, string text)
         {
             // in WPF the width and height is not calculated at this point. So we use FormattedText
             var formattedText = new FormattedText(
-                style.Text,
+                text,
                 CultureInfo.InvariantCulture,
                 FlowDirection.LeftToRight,
                 new Typeface(style.Font.FontFamily),
