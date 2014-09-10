@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using Mapsui.Styles;
 using OpenTK.Graphics.ES11;
 
 namespace Mapsui.Rendering.OpenTK
@@ -30,7 +31,10 @@ namespace Mapsui.Rendering.OpenTK
             GL.TexParameter(All.Texture2D, All.TextureWrapT, (int)All.ClampToEdge);
         }
 
-        public static void RenderTexture(TextureInfo textureInfo, float x, float y, float orientation = 0, float offsetX = 0, float offsetY = 0)
+        public static void RenderTexture(TextureInfo textureInfo, float x, float y, float orientation = 0,
+            float offsetX = 0, float offsetY = 0,
+            LabelStyle.HorizontalAlignmentEnum horizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center,
+            LabelStyle.VerticalAlignmentEnum verticalAlignment = LabelStyle.VerticalAlignmentEnum.Center)
         {
             GL.Enable(All.Texture2D);
             GL.BindTexture(All.Texture2D, textureInfo.TextureId);
@@ -39,8 +43,9 @@ namespace Mapsui.Rendering.OpenTK
             GL.Translate(x, y, 0f);
             GL.Rotate(orientation, 0, 0, 1);
 
-            x = -offsetX;
-            y = -offsetY;
+            x = offsetX + DetermineHorizontalAlignmentCorrection(horizontalAlignment, textureInfo.Width);
+            y = offsetY + DetermineVerticalAlignmentCorrection(verticalAlignment, textureInfo.Height);
+
             var halfWidth = textureInfo.Width / 2;
             var halfHeight = textureInfo.Height / 2;
 
@@ -57,6 +62,22 @@ namespace Mapsui.Rendering.OpenTK
             GL.PopMatrix();
             GL.BindTexture(All.Texture2D, 0);
             GL.Disable(All.Texture2D);
+        }
+
+        private static int DetermineHorizontalAlignmentCorrection(LabelStyle.HorizontalAlignmentEnum horizontalAlignment,
+            int width)
+        {
+            if (horizontalAlignment == LabelStyle.HorizontalAlignmentEnum.Left) return width / 2;
+            if (horizontalAlignment == LabelStyle.HorizontalAlignmentEnum.Right) return -width / 2;
+            return 0; // center
+        }
+
+        private static int DetermineVerticalAlignmentCorrection(LabelStyle.VerticalAlignmentEnum verticalAlignment,
+            int height)
+        {
+            if (verticalAlignment == LabelStyle.VerticalAlignmentEnum.Top) return -height / 2;
+            if (verticalAlignment == LabelStyle.VerticalAlignmentEnum.Bottom) return height / 2;
+            return 0; // center
         }
 
         public static void RenderTexture(int textureId, float[] vertextArray)

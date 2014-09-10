@@ -50,7 +50,7 @@ namespace Mapsui.Layers
 
         public IEnumerable<IFeature> GetFeatures()
         {
-            //!!! LogAllFeatures(_cache);
+            LogAllFeatures(_cache);
 
             var progress = CalculateProgress(_startTimeAnimation, AnimationDuration, Function);
             if (!Completed(progress)) InterpolateAnimatedPosition(_cache, progress, Threshold);

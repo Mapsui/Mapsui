@@ -14,11 +14,11 @@ namespace Mapsui.Rendering.OpenTK
             if (!LabelBitmapCache.Keys.Contains(key))
             {
                 var memoryStream = PlatformLabelBitmap.Create(style, text);
-
                 LabelBitmapCache[key] = TextureHelper.LoadTexture(memoryStream);
             }
             var info = LabelBitmapCache[key];
-            TextureHelper.RenderTexture(info, (int)x, (int)y);
+            TextureHelper.RenderTexture(info, x, y, offsetX:(float)style.Offset.X, offsetY:(float)style.Offset.Y,
+                horizontalAlignment: style.HorizontalAlignment, verticalAlignment: style.VerticalAlignment);
         }
     }
 }

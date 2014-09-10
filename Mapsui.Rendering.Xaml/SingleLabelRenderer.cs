@@ -37,7 +37,7 @@ namespace Mapsui.Rendering.Xaml
                 FontFamily = new FontFamily(labelStyle.Font.FontFamily),
                 FontSize = labelStyle.Font.Size,
                 Margin = new Thickness(witdhMargin, heightMargin, witdhMargin, heightMargin),
-                
+                FontWeight = FontWeights.Bold
             };
 
             var border = new Border
