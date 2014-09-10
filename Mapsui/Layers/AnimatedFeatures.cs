@@ -1,4 +1,5 @@
-﻿using Mapsui.Geometries;
+﻿using System.Diagnostics;
+using Mapsui.Geometries;
 using Mapsui.Providers;
 using System;
 using System.Collections.Generic;
@@ -19,13 +20,15 @@ namespace Mapsui.Layers
         private Timer _animation;
         private List<AnimatedItem> _cache = new List<AnimatedItem>();
         private long _startTimeAnimation;
-        
+        public double Threshold { get; set; }
+
         public AnimatedFeatures()
         {
             MillisecondsBetweenUpdates = 16;
             AnimationDuration = 1000;
             IdField = "ID";
             Function = EasingFunction.CubicEaseOut;
+            Threshold = 20000;
         }
 
         public string IdField { get; set; }
@@ -47,7 +50,7 @@ namespace Mapsui.Layers
         public IEnumerable<IFeature> GetFeatures()
         {
             var progress = CalculateProgress(_startTimeAnimation, AnimationDuration, Function);
-            if (!Completed(progress)) InterpolateAnimatedPosition(_cache, progress);
+            if (!Completed(progress)) InterpolateAnimatedPosition(_cache, progress, Threshold);
             else if (_animation != null) StopAnimation();
             return _cache.Select(f => f.Feature);
         }
@@ -76,7 +79,7 @@ namespace Mapsui.Layers
             animatedPointLayer.OnAnimatedPositionChanged();
         }
 
-        private static List<AnimatedItem> ConvertToAnimatedItems(IEnumerable<IFeature> features, 
+        private static List<AnimatedItem> ConvertToAnimatedItems(IEnumerable<IFeature> features,
             List<AnimatedItem> previousItems, string idField)
         {
             var result = new List<AnimatedItem>();
@@ -98,13 +101,31 @@ namespace Mapsui.Layers
             return point == null ? null : new Point(point.X, point.Y);
         }
 
-        private static void InterpolateAnimatedPosition(IEnumerable<AnimatedItem> items, double progress)
+        private static void InterpolateAnimatedPosition(IEnumerable<AnimatedItem> items, double progress, double threshold)
         {
             foreach (var item in items)
             {
                 var target = item.Feature.Geometry as Point;
-                
+
                 if (item.PreviousPoint == null || item.CurrentPoint == null || target == null) continue;
+                if (item.PreviousPoint.Distance(item.CurrentPoint) > threshold)
+                {
+                    Debug.WriteLine("Trackee: " + item.Feature["Trackee"]);
+                    Debug.WriteLine("ID: " + item.Feature["ID"]);
+                    Debug.WriteLine("speed: " + item.Feature["Speed"]);
+                    Debug.WriteLine("Bps: " + item.Feature["Bps"]);
+                    Debug.WriteLine("DateGps: " + item.Feature["DateGps"]);
+                    Debug.WriteLine("DateReceived: " + item.Feature["DateReceived"]);
+                    Debug.WriteLine("Longitude: " + item.Feature["Longitude"]);
+                    Debug.WriteLine("Latitude: " + item.Feature["Latitude"]);
+                    
+                    Debug.WriteLine("X: " + item.CurrentPoint.X);
+                    Debug.WriteLine("Y: " + item.CurrentPoint.Y);
+                    Debug.WriteLine("Previous X: " + item.PreviousPoint.X);
+                    Debug.WriteLine("Previous Y: " + item.PreviousPoint.Y);
+                    
+                    continue;
+                }
                 target.X = item.PreviousPoint.X + (item.CurrentPoint.X - item.PreviousPoint.X) * progress;
                 target.Y = item.PreviousPoint.Y + (item.CurrentPoint.Y - item.PreviousPoint.Y) * progress;
             }
@@ -122,10 +143,10 @@ namespace Mapsui.Layers
         {
             var currentTime = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
             var elapsedTime = (double)currentTime - startTime;
-            
+
             if (function == EasingFunction.CubicEaseOut)
                 return CubicEaseOut(animationDuration, elapsedTime);
-            return Linear(animationDuration, elapsedTime);    
+            return Linear(animationDuration, elapsedTime);
         }
 
         private static double Linear(double d, double t)
