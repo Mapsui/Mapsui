@@ -14,7 +14,13 @@ namespace Mapsui.Rendering.OpenTK
             var point = feature.Geometry as Point;
             var destination = viewport.WorldToScreen(point);
 
-            if (style is SymbolStyle) DrawPointWithSymbolStyle((SymbolStyle)style, destination, bitmapCache);
+            if (style is LabelStyle)
+            {
+                var labelStyle = (LabelStyle) style;
+                LabelRenderer.Draw(labelStyle, labelStyle.GetLabelText(feature), (float)destination.X, (float)destination.Y);
+            }
+            var symbolStyle = style as SymbolStyle;
+            if (symbolStyle != null && symbolStyle.BitmapId >= 0) DrawPointWithSymbolStyle(symbolStyle, destination, bitmapCache);
             else if (style is VectorStyle) DrawPointWithVectorStyle((VectorStyle)style, destination);
         }
 
@@ -42,6 +48,7 @@ namespace Mapsui.Rendering.OpenTK
             {
                 textureInfo = bitmapCache[symbolStyle.BitmapId];
             }
+
             TextureHelper.RenderTexture(textureInfo, (float)destination.X, (float)destination.Y, 
                 (float)symbolStyle.SymbolRotation, (float)symbolStyle.SymbolOffset.X, (float)symbolStyle.SymbolOffset.Y);
         }

@@ -5,6 +5,7 @@ using System.Windows.Media;
 using XamlPoint = System.Windows.Point;
 using System.Globalization;
 using System.Windows;
+using Colors = System.Windows.Media.Colors;
 #else
 using Windows.Foundation;
 using Windows.UI.Xaml.Controls;
@@ -12,6 +13,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
 using XamlPoint = Windows.Foundation.Point;
 using XamlSize = Windows.Foundation.Size;
+using Colors = Windows.UI.Colors;
 #endif
 
 namespace Mapsui.Rendering.Xaml
@@ -21,7 +23,7 @@ namespace Mapsui.Rendering.Xaml
         public static UIElement RenderLabel(Geometries.Point position, LabelStyle labelStyle, IViewport viewport)
         {
             var screenPosition = viewport.WorldToScreen(position);
-            var windowsPosition = new XamlPoint(screenPosition.X, screenPosition.Y);
+            var windowsPosition = screenPosition.ToXaml();
 
             //set some defaults which should be configurable someday
             const double witdhMargin = 3.0;
@@ -31,17 +33,19 @@ namespace Mapsui.Rendering.Xaml
             {
                 Text = labelStyle.Text,
                 Foreground = new SolidColorBrush(labelStyle.ForeColor.ToXaml()),
+
                 FontFamily = new FontFamily(labelStyle.Font.FontFamily),
                 FontSize = labelStyle.Font.Size,
-                Margin = new Thickness(witdhMargin, heightMargin, witdhMargin, heightMargin)
+                Margin = new Thickness(witdhMargin, heightMargin, witdhMargin, heightMargin),
+                
             };
 
             var border = new Border
-            {
-                Background = new SolidColorBrush(labelStyle.BackColor.Color.ToXaml()),
-                CornerRadius = new CornerRadius(4),
-                Child = textblock
-            };
+                {
+                    Background = new SolidColorBrush(labelStyle.BackColor == null ? Colors.Transparent : labelStyle.BackColor.Color.ToXaml()),
+                    CornerRadius = new CornerRadius(4),
+                    Child = textblock
+                };
 
             double textWidth;
             double textHeight;

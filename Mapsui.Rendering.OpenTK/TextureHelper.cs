@@ -70,7 +70,7 @@ namespace Mapsui.Rendering.OpenTK
             GL.Disable(All.Texture2D);
         }
 
-        static readonly float[] textureArray = new[]
+        static readonly float[] TextureArray =
             {
                 0.0f, 0.0f,
                 1.0f, 0.0f,
@@ -89,7 +89,7 @@ namespace Mapsui.Rendering.OpenTK
             GL.EnableClientState(All.TextureCoordArray);
 
             GL.VertexPointer(2, All.Float, 0, vertextArray);
-            GL.TexCoordPointer(2, All.Float, 0, textureArray);
+            GL.TexCoordPointer(2, All.Float, 0, TextureArray);
             GL.DrawArrays(All.TriangleFan, 0, 4);
 
             GL.Disable(All.Blend);

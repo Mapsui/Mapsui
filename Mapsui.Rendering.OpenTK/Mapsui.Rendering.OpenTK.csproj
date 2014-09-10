@@ -49,6 +49,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LabelRenderer.cs" />
+    <Compile Include="PlatformLabelBitmap.cs" />
     <Compile Include="TextureHelper.cs" />
     <Compile Include="TextureInfo.cs" />
     <Compile Include="LineStringRenderer.cs" />

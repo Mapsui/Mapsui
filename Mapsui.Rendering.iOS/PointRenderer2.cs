@@ -34,7 +34,6 @@ namespace Mapsui.Rendering.iOS
                     symbol = CreateSymbolFromBitmap(symbolStyle, symbolStyle);
                 }
 
-
                 if (symbolStyle.Outline != null)
                 {
                     symbol.BorderColor = symbolStyle.Outline.Color.ToCG();

@@ -16,6 +16,7 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
 using System;
+using Mapsui.Providers;
 
 namespace Mapsui.Styles
 {
@@ -132,9 +133,26 @@ namespace Mapsui.Styles
         /// </summary>
         public VerticalAlignmentEnum VerticalAlignment { get; set; }
 
-        /// <summary>
-        /// The text used for this specific label. 
-        /// </summary>
+        /// <summary>The text used for this specific label.</summary>
+        /// <remarks>Used only when LabelColumn and LabelMethod are not set.</remarks>
         public string Text { get; set; }
+
+        /// <summary>The column of the feature used by GetLabelText to return the label text.</summary>
+        /// <remarks>Used only when LabelMethod is not set. Overrides use of the Text field.</remarks>
+        public string LabelColumn { get; set; }
+
+        /// <summary>Method used by GetLabelText to return the label text.</summary>
+        /// <remarks>Overrides use of Text and LabelColumn fields.</remarks>
+        public Func<IFeature, string> LabelMethod { get; set; }
+
+        /// <summary>The text used for this specific label.</summary>
+        public string GetLabelText(IFeature feature)
+        {
+            if (LabelMethod != null) return LabelMethod(feature);
+            if (LabelColumn != null) return feature[LabelColumn].ToString();
+            return Text;
+        }
+
+
     }
 }
