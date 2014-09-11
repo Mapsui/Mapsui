@@ -7,6 +7,7 @@ using System.Globalization;
 using System.Windows;
 using Colors = System.Windows.Media.Colors;
 #else
+using Windows.UI.Text;
 using Windows.Foundation;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml;
