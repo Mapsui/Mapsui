@@ -49,7 +49,11 @@ namespace Mapsui.Rendering
 
                 if (feature == null)
                 {
-                    GetRecursive(resultTiles, schema, cache, tileInfo.Extent.Intersect(extent), resolutions, resolutionIndex - 1);
+                    // only continue the recursive search if this tile is within the extent
+                    if (tileInfo.Extent.Intersects(extent))
+                    {
+                        GetRecursive(resultTiles, schema, cache, tileInfo.Extent.Intersect(extent), resolutions, resolutionIndex - 1);
+                    }
                 }
                 else
                 {

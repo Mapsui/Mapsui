@@ -9,11 +9,17 @@
 
 *.java
 
+*.v12.suo
+
+*.csproj.user
+
 Mapsui.Rendering.Android/obj/Debug/library_project_imports/__res_name_case_map.txt
 
 Mapsui.Rendering.Android/obj/Debug/library_project_imports/res/values/strings.xml
 
 Mapsui.Rendering.Android/obj/Debug/Mapsui.Rendering.Android.csproj.FilesWrittenAbsolute.txt
+
+Samples/Mapsui.Samples.Silverlight.Web/ClientBin
 
 obj/
 

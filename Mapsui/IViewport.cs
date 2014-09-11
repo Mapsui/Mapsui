@@ -32,7 +32,14 @@ namespace Mapsui
         double RenderResolution { get; }
         double RenderResolutionMultiplier { set; }
         BoundingBox Extent { get; }
+        BoundingBox WindowExtent { get; }
         double Width { get; set; }
         double Height { get; set; }
+
+        /// <summary>
+        /// Viewport rotation from True North (clockwise degrees)
+        /// </summary>
+        double Rotation { get; set; }
+        bool IsRotated { get; }
     }
 }

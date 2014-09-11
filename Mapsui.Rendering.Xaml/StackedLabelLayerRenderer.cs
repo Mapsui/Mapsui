@@ -79,7 +79,9 @@ namespace Mapsui.Rendering.Xaml
                     };
                     labelStyle.Offset.Y += stackOffsetY;
 
-                    var position = new Geometries.Point(cluster.Box.GetCentroid().X, cluster.Box.Bottom);
+                    // since the box can be rotated, find the minimal Y value of all 4 corners
+                    var box = cluster.Box.RotateAndCircumscribe(viewport.Rotation);
+                    var position = new Geometries.Point(cluster.Box.GetCentroid().X, box.Bottom);
 
                     canvas.Children.Add(SingleLabelRenderer.RenderLabel(position, labelStyle, viewport));
                 }
@@ -92,17 +94,17 @@ namespace Mapsui.Rendering.Xaml
             const int symbolSize = 32; // todo: determine margin by symbol size
             const int boxMargin = symbolSize / 2;
 
-            var p1 = viewport.WorldToScreen(box.Min);
-            var p2 = viewport.WorldToScreen(box.Max);
-
             var rectangle = new Rectangle
             {
-                Width = p2.X - p1.X + symbolSize,
-                Height = p1.Y - p2.Y + symbolSize
+                Width = box.Width / viewport.Resolution + symbolSize,
+                Height = box.Height / viewport.Resolution + symbolSize
             };
 
-            Canvas.SetLeft(rectangle, p1.X - boxMargin);
-            Canvas.SetTop(rectangle, p2.Y - boxMargin);
+            // offset the bounding box left and up by the box margin
+            var offset = boxMargin * viewport.Resolution;
+            var offsetBox = new BoundingBox(box.Min.X - offset, box.Min.Y + offset, box.Max.X - offset, box.Max.Y + offset);
+
+            GeometryRenderer.PositionElement(rectangle, offsetBox, viewport);
 
             rectangle.Stroke = new SolidColorBrush(Colors.White);
             rectangle.StrokeThickness = 2;

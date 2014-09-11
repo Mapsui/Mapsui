@@ -19,6 +19,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Collections.Generic;
+using Mapsui.Utilities;
 
 namespace Mapsui.Geometries
 {
@@ -479,6 +480,34 @@ namespace Mapsui.Geometries
         }
 
         /// <summary>
+        /// Calculates a new bounding box by rotating this box about its center by the specified angle
+        /// clockwise and then creating a bounding box around the rotated rectangle.
+        /// </summary>
+        /// <param name="degrees">Angle about which to rotate (degrees)</param>
+        /// <returns>Returns the calculate cicrumscribed bounding by around the rotated rectangle</returns>
+        public BoundingBox RotateAndCircumscribe(double degrees)
+        {
+            var halfWidth = Width / 2.0;
+            var halfHeight = Height / 2.0;
+            var rotationRadians = Algorithms.DegreesToRadians(degrees);
+            var offset1 = Algorithms.RotateClockwiseRadians(-halfWidth, -halfHeight, rotationRadians);
+            var offset2 = Algorithms.RotateClockwiseRadians(-halfWidth, halfHeight, rotationRadians);
+            var offset3 = Algorithms.RotateClockwiseRadians(halfWidth, halfHeight, rotationRadians);
+            var offset4 = Algorithms.RotateClockwiseRadians(halfWidth, -halfHeight, rotationRadians);
+            var minOffsetX = Math.Min(Math.Min(offset1.X, offset2.X), Math.Min(offset3.X, offset4.X));
+            var minOffsetY = Math.Min(Math.Min(offset1.Y, offset2.Y), Math.Min(offset3.Y, offset4.Y));
+            var maxOffsetX = Math.Max(Math.Max(offset1.X, offset2.X), Math.Max(offset3.X, offset4.X));
+            var maxOffsetY = Math.Max(Math.Max(offset1.Y, offset2.Y), Math.Max(offset3.Y, offset4.Y));
+            var center = GetCentroid();
+            var minX = center.X + minOffsetX;
+            var minY = center.Y + minOffsetY;
+            var maxX = center.X + maxOffsetX;
+            var maxY = center.Y + maxOffsetY;
+
+            return new BoundingBox(minX, minY, maxX, maxY);
+        }
+
+        /// <summary>
         /// Checks whether a point lies within the bounding box
         /// </summary>
         /// <param name="p">Point</param>
@@ -540,7 +569,7 @@ namespace Mapsui.Geometries
         /// </summary>
         public Point GetCentroid()
         {
-            return (min + max)*.5f;
+            return (min + max)*.5;
         }
 
         /// <summary>

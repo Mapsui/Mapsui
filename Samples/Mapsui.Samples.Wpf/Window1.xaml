@@ -32,6 +32,9 @@
         <Border BorderBrush="White" Opacity="0.75" Margin="10" Background="White" BorderThickness="6" CornerRadius="2" VerticalAlignment="Top" HorizontalAlignment="Right">
             <wpf:LayerList x:Name="LayerList"></wpf:LayerList>
         </Border>
+        <Border BorderBrush="White" Opacity="0.75" Margin="10" Background="White" BorderThickness="6" CornerRadius="2" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+            <Slider x:Name="RotationSlider" Width="205" ValueChanged="RotationSliderChanged" />
+        </Border>
         <Border x:Name="Statistics" BorderBrush="White" Opacity="0.75" Margin="10" Background="White" BorderThickness="6" CornerRadius="2" HorizontalAlignment="Center" VerticalAlignment="Top">
             <StackPanel  Orientation="Vertical" HorizontalAlignment="Center"  >
                 <StackPanel Orientation="Horizontal">

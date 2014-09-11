@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using Mapsui.Geometries;
 using Mapsui.Styles;
 using Point = Mapsui.Geometries.Point;
@@ -30,7 +31,7 @@ namespace Mapsui.Rendering.Xaml
     /// namespace aliases. I will use 'Xaml' in namespace and method names to refer to 
     /// all .net framework classes related to Xaml, even if they are not.
     /// </remarks>
-    static class GeometryRenderer
+    public static class GeometryRenderer
     {
         public static UIElement RenderPoint(Point point, IStyle style, IViewport viewport)
         {
@@ -114,6 +115,10 @@ namespace Mapsui.Rendering.Xaml
             var mapCenterY = viewport.Height * 0.5;
 
             MatrixHelper.Translate(ref matrix, mapCenterX - viewport.Center.X, mapCenterY - viewport.Center.Y);
+            if (viewport.IsRotated)
+            {
+                MatrixHelper.RotateAt(ref matrix, -viewport.Rotation);
+            }
             MatrixHelper.ScaleAt(ref matrix, 1 / viewport.Resolution, 1 / viewport.Resolution, mapCenterX, mapCenterY);
 
             // This will invert the Y axis, but will also put images upside down
@@ -128,6 +133,10 @@ namespace Mapsui.Rendering.Xaml
             var mapCenterY = viewport.Height * 0.5;
 
             MatrixHelper.Translate(ref matrix, mapCenterX - viewport.Center.X, mapCenterY - viewport.Center.Y);
+            if (viewport.IsRotated)
+            {
+                MatrixHelper.RotateAt(ref matrix, -viewport.Rotation);
+            }
             MatrixHelper.ScaleAt(ref matrix, 1 / viewport.Resolution, 1 / viewport.Resolution, mapCenterX, mapCenterY);
 
             // This will invert the Y axis, but will also put images upside down
@@ -341,7 +350,8 @@ namespace Mapsui.Rendering.Xaml
         public static XamlShapes.Path RenderRaster(IRaster raster, IStyle style, IViewport viewport)
         {
             var path = CreateRasterPath(style, raster.Data);
-            path.Data = ConvertRaster(raster.GetBoundingBox(), viewport);
+            path.Data = new XamlMedia.RectangleGeometry();
+            PositionRaster(path, raster.GetBoundingBox(), viewport);
 
             // path.Stroke = new XamlMedia.SolidColorBrush(XamlColors.Red);
             // path.StrokeThickness = 6;
@@ -394,15 +404,6 @@ namespace Mapsui.Rendering.Xaml
         }
 
 #endif
-        private static XamlMedia.Geometry ConvertRaster(BoundingBox boundingBox, IViewport viewport)
-        {
-            return new XamlMedia.RectangleGeometry
-            {
-                Rect = RoundToPixel(new Rect(
-                    viewport.WorldToScreen(boundingBox.Min).ToXaml(),
-                    viewport.WorldToScreen(boundingBox.Max).ToXaml()))
-            };
-        }
 
         public static Rect RoundToPixel(Rect dest)
         {
@@ -428,10 +429,27 @@ namespace Mapsui.Rendering.Xaml
 
         public static void PositionRaster(UIElement renderedGeometry, BoundingBox boundingBox, IViewport viewport)
         {
+            PositionElement(renderedGeometry, boundingBox, viewport);
+
+            // position the rect relative the tile's center since it is translated above
+            var rectWidthPixels = boundingBox.Width / viewport.Resolution;
+            var rectHeightPixels = boundingBox.Height / viewport.Resolution;
             ((XamlMedia.RectangleGeometry)((XamlShapes.Path)renderedGeometry).Data).Rect =
-                RoundToPixel(new Rect(
-                viewport.WorldToScreen(boundingBox.Min).ToXaml(),
-                viewport.WorldToScreen(boundingBox.Max).ToXaml()));
+                RoundToPixel(new Rect(0, 0, rectWidthPixels, rectHeightPixels));
+        }
+
+        public static void PositionElement(UIElement renderedGeometry, BoundingBox boundingBox, IViewport viewport)
+        {
+            var matrix = new XamlMedia.Matrix();
+            var boundingBoxTopLeftScreen = viewport.WorldToScreen(boundingBox.TopLeft);
+
+            if (viewport.IsRotated)
+            {
+                MatrixHelper.RotateAt(ref matrix, viewport.Rotation);
+            }
+
+            MatrixHelper.Translate(ref matrix, boundingBoxTopLeftScreen.X, boundingBoxTopLeftScreen.Y);
+            renderedGeometry.RenderTransform = new XamlMedia.MatrixTransform { Matrix = matrix };
         }
 
         public static void PositionGeometry(UIElement renderedGeometry, IViewport viewport)

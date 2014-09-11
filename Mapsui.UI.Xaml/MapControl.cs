@@ -108,6 +108,11 @@ namespace Mapsui.UI.Xaml
                 InitializeViewport();
                 _map.ViewChanged(true);
             }
+            else if (e.PropertyName == "Rotation")
+            {
+                _map.ViewChanged(true);
+                OnViewChanged();
+            }
         }
 
         public FpsCounter FpsCounter
