@@ -32,7 +32,7 @@ namespace Mapsui
         double RenderResolution { get; }
         double RenderResolutionMultiplier { set; }
         BoundingBox Extent { get; }
-        BoundingBox WindowExtent { get; }
+        Quad WindowExtent { get; }
         double Width { get; set; }
         double Height { get; set; }
 

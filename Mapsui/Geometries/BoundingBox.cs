@@ -480,31 +480,21 @@ namespace Mapsui.Geometries
         }
 
         /// <summary>
-        /// Calculates a new bounding box by rotating this box about its center by the specified angle
-        /// clockwise and then creating a bounding box around the rotated rectangle.
+        /// Calculates a new quad by rotating this bounding box about its center by the
+        /// specified angle clockwise 
         /// </summary>
         /// <param name="degrees">Angle about which to rotate (degrees)</param>
-        /// <returns>Returns the calculate cicrumscribed bounding by around the rotated rectangle</returns>
-        public BoundingBox RotateAndCircumscribe(double degrees)
+        /// <returns>Returns the calculated quad</returns>
+        public Quad Rotate(double degrees)
         {
-            var halfWidth = Width / 2.0;
-            var halfHeight = Height / 2.0;
-            var rotationRadians = Algorithms.DegreesToRadians(degrees);
-            var offset1 = Algorithms.RotateClockwiseRadians(-halfWidth, -halfHeight, rotationRadians);
-            var offset2 = Algorithms.RotateClockwiseRadians(-halfWidth, halfHeight, rotationRadians);
-            var offset3 = Algorithms.RotateClockwiseRadians(halfWidth, halfHeight, rotationRadians);
-            var offset4 = Algorithms.RotateClockwiseRadians(halfWidth, -halfHeight, rotationRadians);
-            var minOffsetX = Math.Min(Math.Min(offset1.X, offset2.X), Math.Min(offset3.X, offset4.X));
-            var minOffsetY = Math.Min(Math.Min(offset1.Y, offset2.Y), Math.Min(offset3.Y, offset4.Y));
-            var maxOffsetX = Math.Max(Math.Max(offset1.X, offset2.X), Math.Max(offset3.X, offset4.X));
-            var maxOffsetY = Math.Max(Math.Max(offset1.Y, offset2.Y), Math.Max(offset3.Y, offset4.Y));
+            var bottomLeft = new Point(MinX, MinY);
+            var topLeft = new Point(MinX, MaxY);
+            var topRight = new Point(MaxX, MaxY);
+            var bottomRight = new Point(MaxX, MinY);
+            var quad = new Quad(bottomLeft, topLeft, topRight, bottomRight);
             var center = GetCentroid();
-            var minX = center.X + minOffsetX;
-            var minY = center.Y + minOffsetY;
-            var maxX = center.X + maxOffsetX;
-            var maxY = center.Y + maxOffsetY;
 
-            return new BoundingBox(minX, minY, maxX, maxY);
+            return quad.Rotate(degrees, center.X, center.Y);
         }
 
         /// <summary>

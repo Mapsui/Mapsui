@@ -78,7 +78,7 @@ namespace Mapsui
             get { return _viewport.Extent; }
         }
 
-        public BoundingBox WindowExtent
+        public Quad WindowExtent
         {
             get { return _viewport.WindowExtent; }
         }

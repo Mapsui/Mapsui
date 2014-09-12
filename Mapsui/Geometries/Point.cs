@@ -16,6 +16,7 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
 using System;
+using Mapsui.Utilities;
 
 namespace Mapsui.Geometries
 {
@@ -378,5 +379,38 @@ namespace Mapsui.Geometries
             return false;
         }
 
-            }
+        /// <summary>
+        /// Calculates a new point by rotating this point clockwise about the specified center point
+        /// </summary>
+        /// <param name="degrees">Angle to rotate clockwise (degrees)</param>
+        /// <param name="centerX">X coordinate of point about which to rotate</param>
+        /// <param name="centerY">Y coordinate of point about which to rotate</param>
+        /// <returns>Returns the rotated point</returns>
+        public Point Rotate(double degrees, double centerX, double centerY)
+        {
+            // translate this point back to the center
+            var newX = x - centerX;
+            var newY = y - centerY;
+
+            // rotate the values
+            var p = Algorithms.RotateClockwiseDegrees(newX, newY, degrees);
+
+            // translate back to original reference frame
+            newX = p.X + centerX;
+            newY = p.Y + centerY;
+
+            return new Point(newX, newY);
+        }
+
+        /// <summary>
+        /// Calculates a new point by rotating this point clockwise about the specified center point
+        /// </summary>
+        /// <param name="degrees">Angle to rotate clockwise (degrees)</param>
+        /// <param name="center">Point about which to rotate</param>
+        /// <returns>Returns the rotated point</returns>
+        public Point Rotate(double degrees, Point center)
+        {
+            return Rotate(degrees, center.X, center.Y);
+        }
+    }
 }

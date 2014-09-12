@@ -80,8 +80,9 @@ namespace Mapsui.Rendering.Xaml
                     labelStyle.Offset.Y += stackOffsetY;
 
                     // since the box can be rotated, find the minimal Y value of all 4 corners
-                    var box = cluster.Box.RotateAndCircumscribe(viewport.Rotation);
-                    var position = new Geometries.Point(cluster.Box.GetCentroid().X, box.Bottom);
+                    var rotatedBox = cluster.Box.Rotate(-viewport.Rotation);
+                    var minY = rotatedBox.Vertices.Select(v => v.Y).Min();
+                    var position = new Geometries.Point(cluster.Box.GetCentroid().X, minY);
 
                     canvas.Children.Add(SingleLabelRenderer.RenderLabel(position, labelStyle, viewport));
                 }
