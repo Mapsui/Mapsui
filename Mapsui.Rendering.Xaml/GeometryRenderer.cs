@@ -429,26 +429,26 @@ namespace Mapsui.Rendering.Xaml
 
         public static void PositionRaster(UIElement renderedGeometry, BoundingBox boundingBox, IViewport viewport)
         {
-            PositionElement(renderedGeometry, boundingBox, viewport);
+            UpdateRenderTransform(renderedGeometry, viewport);
 
-            // position the rect relative the tile's center since it is translated above
+            // since the render transform will take care of the rotation, calculate top-left using unrotated viewport
+            var topLeft = viewport.WorldToScreenUnrotated(boundingBox.TopLeft);
             var rectWidthPixels = boundingBox.Width / viewport.Resolution;
             var rectHeightPixels = boundingBox.Height / viewport.Resolution;
             ((XamlMedia.RectangleGeometry)((XamlShapes.Path)renderedGeometry).Data).Rect =
-                RoundToPixel(new Rect(0, 0, rectWidthPixels, rectHeightPixels));
+                RoundToPixel(new Rect(topLeft.X, topLeft.Y, rectWidthPixels, rectHeightPixels));
         }
 
-        public static void PositionElement(UIElement renderedGeometry, BoundingBox boundingBox, IViewport viewport)
+        private static void UpdateRenderTransform(UIElement renderedGeometry, IViewport viewport)
         {
             var matrix = new XamlMedia.Matrix();
-            var boundingBoxTopLeftScreen = viewport.WorldToScreen(boundingBox.TopLeft);
 
             if (viewport.IsRotated)
             {
-                MatrixHelper.RotateAt(ref matrix, viewport.Rotation);
+                var center = viewport.WorldToScreen(viewport.Center);
+                MatrixHelper.RotateAt(ref matrix, viewport.Rotation, center.X, center.Y);
             }
 
-            MatrixHelper.Translate(ref matrix, boundingBoxTopLeftScreen.X, boundingBoxTopLeftScreen.Y);
             renderedGeometry.RenderTransform = new XamlMedia.MatrixTransform { Matrix = matrix };
         }
 

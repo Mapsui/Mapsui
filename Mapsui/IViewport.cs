@@ -22,8 +22,10 @@ namespace Mapsui
     public interface IViewport
     {
         Point WorldToScreen(Point point);
+        Point WorldToScreenUnrotated(Point point);
         Point ScreenToWorld(Point point);
         Point WorldToScreen(double x, double y);
+        Point WorldToScreenUnrotated(double x, double y);
         Point ScreenToWorld(double x, double y);
         void Transform(double screenX, double screenY, double previousScreenX, double previousScreenY, 
             double deltaScale = 1);

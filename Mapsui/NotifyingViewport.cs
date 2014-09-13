@@ -98,9 +98,19 @@ namespace Mapsui
             return _viewport.WorldToScreen(x, y);
         }
 
+        public Point WorldToScreenUnrotated(double x, double y)
+        {
+            return _viewport.WorldToScreenUnrotated(x, y);
+        }
+
         public Point WorldToScreen(Point point)
         {
             return _viewport.WorldToScreen(point);
+        }
+
+        public Point WorldToScreenUnrotated(Point point)
+        {
+            return _viewport.WorldToScreenUnrotated(point);
         }
 
         public void Transform(double screenX, double screenY, double previousScreenX, double previousScreenY, double deltaScale = 1)

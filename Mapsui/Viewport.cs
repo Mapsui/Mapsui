@@ -137,6 +137,11 @@ namespace Mapsui
             return WorldToScreen(worldPosition.X, worldPosition.Y);
         }
 
+        public Point WorldToScreenUnrotated(Point worldPosition)
+        {
+            return WorldToScreenUnrotated(worldPosition.X, worldPosition.Y);
+        }
+
         public Point ScreenToWorld(Point screenPosition)
         {
             return ScreenToWorld(screenPosition.X, screenPosition.Y);
@@ -144,18 +149,26 @@ namespace Mapsui
 
         public Point WorldToScreen(double worldX, double worldY)
         {
-            var screenCenterX = Width / 2.0;
-            var screenCenterY = Height / 2.0;
-            var screenX = (worldX - Center.X) / _resolution + screenCenterX;
-            var screenY = (Center.Y - worldY) / _resolution + screenCenterY;
-            var p = new Point(screenX, screenY);
+            var p = WorldToScreenUnrotated(worldX, worldY);
             
             if (IsRotated)
             {
+                var screenCenterX = Width / 2.0;
+                var screenCenterY = Height / 2.0;
                 p = p.Rotate(-_rotation, screenCenterX, screenCenterY);
             }
 
             return p;
+        }
+
+        public Point WorldToScreenUnrotated(double worldX, double worldY)
+        {
+            var screenCenterX = Width / 2.0;
+            var screenCenterY = Height / 2.0;
+            var screenX = (worldX - Center.X) / _resolution + screenCenterX;
+            var screenY = (Center.Y - worldY) / _resolution + screenCenterY;
+
+            return new Point(screenX, screenY);
         }
 
         public Point ScreenToWorld(double screenX, double screenY)

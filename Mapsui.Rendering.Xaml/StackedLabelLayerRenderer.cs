@@ -6,6 +6,7 @@ using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
+using Point = Mapsui.Geometries.Point;
 #if !NETFX_CORE
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -95,22 +96,19 @@ namespace Mapsui.Rendering.Xaml
             const int symbolSize = 32; // todo: determine margin by symbol size
             const int boxMargin = symbolSize / 2;
 
-            var rectangle = new Rectangle
+            var path = new Path
             {
-                Width = box.Width / viewport.Resolution + symbolSize,
-                Height = box.Height / viewport.Resolution + symbolSize
+                Stroke = new SolidColorBrush(Colors.White),
+                StrokeThickness = 2,
+                Data = new RectangleGeometry()
             };
 
             // offset the bounding box left and up by the box margin
-            var offset = boxMargin * viewport.Resolution;
-            var offsetBox = new BoundingBox(box.Min.X - offset, box.Min.Y + offset, box.Max.X - offset, box.Max.Y + offset);
+            var offsetBox = box.Grow(boxMargin * viewport.Resolution);
 
-            GeometryRenderer.PositionElement(rectangle, offsetBox, viewport);
+            GeometryRenderer.PositionRaster(path, offsetBox, viewport);
 
-            rectangle.Stroke = new SolidColorBrush(Colors.White);
-            rectangle.StrokeThickness = 2;
-
-            return rectangle;
+            return path;
         }
 
         private static void ClusterFeatures(
