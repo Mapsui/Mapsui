@@ -37,12 +37,12 @@
              RunEachTargetSeparately="true"/>
 	
     <MSBuild Projects="$(SolutionFile)"
-             Targets="Mapsui;Mapsui_Rendering_Android;Mapsui_UI_Android"
+             Targets="Mapsui;Mapsui_Rendering_Android;Mapsui_Rendering_OpenTK-A;Mapsui_UI_Android"
              Properties="Configuration=Release;Platform=Any CPU;BaseIntermediateOutputPath=$(MSBuildProjectDirectory).\..\obj\Xamarin.Android\;OutputPath=$(MSBuildProjectDirectory).\..\Release\Xamarin.Android\"
              RunEachTargetSeparately="true"/>
 			 
 	<MSBuild Projects="$(SolutionFile)"
-             Targets="Mapsui;Mapsui_Rendering_iOS;Mapsui_UI_iOS"
+             Targets="Mapsui;Mapsui_Rendering_iOS;Mapsui_Rendering_OpenTK-iOS;Mapsui_UI_iOS"
              Properties="Configuration=Release;Platform=Any CPU;BaseIntermediateOutputPath=$(MSBuildProjectDirectory).\..\obj\Xamarin.iOS\;OutputPath=$(MSBuildProjectDirectory).\..\Release\Xamarin.iOS\"
              RunEachTargetSeparately="true"/>
   </Target>
