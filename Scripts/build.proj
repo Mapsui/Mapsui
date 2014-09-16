@@ -41,10 +41,10 @@
              Properties="Configuration=Release;Platform=Any CPU;BaseIntermediateOutputPath=$(MSBuildProjectDirectory).\..\obj\Xamarin.Android\;OutputPath=$(MSBuildProjectDirectory).\..\Release\Xamarin.Android\"
              RunEachTargetSeparately="true"/>
 			 
-	<MSBuild Projects="$(SolutionFile)"
+	<!--<MSBuild Projects="$(SolutionFile)"
              Targets="Mapsui;Mapsui_Rendering_iOS;Mapsui_Rendering_OpenTK-iOS;Mapsui_UI_iOS"
              Properties="Configuration=Release;Platform=Any CPU;BaseIntermediateOutputPath=$(MSBuildProjectDirectory).\..\obj\Xamarin.iOS\;OutputPath=$(MSBuildProjectDirectory).\..\Release\Xamarin.iOS\"
-             RunEachTargetSeparately="true"/>
+             RunEachTargetSeparately="true"/>-->
   </Target>
     
   <Target Name="CleanRelease">
