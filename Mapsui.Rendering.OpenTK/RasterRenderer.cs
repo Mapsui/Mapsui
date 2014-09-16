@@ -1,32 +1,34 @@
-﻿using Mapsui.Geometries;
+﻿using System.Collections.Generic;
+using Mapsui.Geometries;
 using Mapsui.Providers;
 using Mapsui.Styles;
-using OpenTK.Graphics.ES11;
 using System;
 using System.Diagnostics;
-using System.IO;
 
 namespace Mapsui.Rendering.OpenTK
 {
     public static class RasterRenderer
     {
-        public static void Draw(IViewport viewport, IStyle style, IFeature feature)
+        public static void Draw(IViewport viewport, IStyle style, IFeature feature, IDictionary<object, TextureInfo> TextureCache)
         {
             try
             {
                 var raster = (IRaster)feature.Geometry;
+
                 TextureInfo textureInfo;
 
-                if (!feature.RenderedGeometry.ContainsKey(style))
+                if (!TextureCache.Keys.Contains(raster))
                 {
                     textureInfo = TextureHelper.LoadTexture(raster.Data);
-                    feature.RenderedGeometry[style] = textureInfo;
+                    TextureCache[raster] = textureInfo;
                 }
                 else
                 {
-                    textureInfo = (TextureInfo)feature.RenderedGeometry[style];
+                    textureInfo = TextureCache[raster];
                 }
-                
+
+                textureInfo.Used = true;
+                TextureCache[raster] = textureInfo;
                 var destination = WorldToScreen(viewport, feature.Geometry.GetBoundingBox());
                 TextureHelper.RenderTexture(textureInfo.TextureId, ToVertexArray(RoundToPixel(destination)));
             }
@@ -67,6 +69,6 @@ namespace Mapsui.Rendering.OpenTK
                 (float)boundingBox.MaxX, (float)boundingBox.MaxY,
                 (float)boundingBox.MinX, (float)boundingBox.MaxY
             };
-        }   
+        }
     }
 }

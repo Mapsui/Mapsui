@@ -8,5 +8,6 @@
         public int Width;
         public int Height;
         public int TextureId;
+        public bool Used;
     }
 }
