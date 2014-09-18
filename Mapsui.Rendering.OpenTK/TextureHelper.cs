@@ -34,7 +34,8 @@ namespace Mapsui.Rendering.OpenTK
         public static void RenderTexture(TextureInfo textureInfo, float x, float y, float orientation = 0,
             float offsetX = 0, float offsetY = 0,
             LabelStyle.HorizontalAlignmentEnum horizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center,
-            LabelStyle.VerticalAlignmentEnum verticalAlignment = LabelStyle.VerticalAlignmentEnum.Center)
+            LabelStyle.VerticalAlignmentEnum verticalAlignment = LabelStyle.VerticalAlignmentEnum.Center,
+            float opacity = 1f)
         {
             GL.Enable(All.Texture2D);
             GL.BindTexture(All.Texture2D, textureInfo.TextureId);
@@ -57,7 +58,7 @@ namespace Mapsui.Rendering.OpenTK
                     x - halfWidth, y + halfHeight
                 };
 
-            RenderTextureWithoutBinding(textureInfo.TextureId, vertextArray);
+            RenderTextureWithoutBinding(textureInfo.TextureId, vertextArray, opacity);
 
             GL.PopMatrix();
             GL.BindTexture(All.Texture2D, 0);
@@ -99,9 +100,9 @@ namespace Mapsui.Rendering.OpenTK
                 0.0f, 1.0f
             };
 
-        public static void RenderTextureWithoutBinding(int textureId, float[] vertextArray)
+        public static void RenderTextureWithoutBinding(int textureId, float[] vertextArray, float opacity = 1f)
         {
-            GL.Color4((byte)255, (byte)255, (byte)255, (byte)255);
+            GL.Color4((byte)255, (byte)255, (byte)255, (byte)(255 * opacity));
 
             GL.Enable(All.Blend); // Enables the alpha channel to be used in the color buffer
             GL.BlendFunc(All.SrcAlpha, All.OneMinusSrcAlpha); //The operation/order to blend
