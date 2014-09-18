@@ -19,6 +19,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Collections.Generic;
+using Mapsui.Utilities;
 
 namespace Mapsui.Geometries
 {
@@ -479,6 +480,24 @@ namespace Mapsui.Geometries
         }
 
         /// <summary>
+        /// Calculates a new quad by rotating this bounding box about its center by the
+        /// specified angle clockwise 
+        /// </summary>
+        /// <param name="degrees">Angle about which to rotate (degrees)</param>
+        /// <returns>Returns the calculated quad</returns>
+        public Quad Rotate(double degrees)
+        {
+            var bottomLeft = new Point(MinX, MinY);
+            var topLeft = new Point(MinX, MaxY);
+            var topRight = new Point(MaxX, MaxY);
+            var bottomRight = new Point(MaxX, MinY);
+            var quad = new Quad(bottomLeft, topLeft, topRight, bottomRight);
+            var center = GetCentroid();
+
+            return quad.Rotate(degrees, center.X, center.Y);
+        }
+
+        /// <summary>
         /// Checks whether a point lies within the bounding box
         /// </summary>
         /// <param name="p">Point</param>
@@ -540,7 +559,7 @@ namespace Mapsui.Geometries
         /// </summary>
         public Point GetCentroid()
         {
-            return (min + max)*.5f;
+            return (min + max)*.5;
         }
 
         /// <summary>

@@ -15,23 +15,26 @@
 // along with Mapsui; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
-using System;
 using Mapsui.Geometries;
+using Mapsui.Utilities;
 
 namespace Mapsui
 {
     public class Viewport : IViewport
     {
-        readonly BoundingBox _extent;
+        private readonly BoundingBox _extent;
+        private Quad _windowExtent;
         private double _height;
         private double _resolution;
         private double _width;
+        private double _rotation;
         private readonly NotifyingPoint _center = new NotifyingPoint();
         private bool _modified = true;
 
         public Viewport()
         {
             _extent = new BoundingBox(0, 0, 0, 0);
+            _windowExtent = new Quad();
             RenderResolutionMultiplier = 1;
             _center.PropertyChanged += (sender, args) => _modified = true; 
         }
@@ -41,6 +44,7 @@ namespace Mapsui
             _resolution = viewport._resolution;
             _width = viewport._width;
             _height = viewport._height;
+            _rotation = viewport._rotation;
             RenderResolutionMultiplier = viewport.RenderResolutionMultiplier;
         }
 
@@ -92,6 +96,24 @@ namespace Mapsui
             }
         }
 
+        public double Rotation
+        {
+            get { return _rotation; }
+            set
+            {
+                // normalize the value to be [0, 360)
+                _rotation = value % 360.0;
+                if (_rotation < 0)
+                    _rotation += 360.0;
+                _modified = true;
+            }
+        }
+
+        public bool IsRotated
+        {
+            get { return !double.IsNaN(_rotation) && _rotation > Constants.Epsilon && _rotation < (360 - Constants.Epsilon); }
+        }
+
         public BoundingBox Extent
         {
             get
@@ -101,9 +123,23 @@ namespace Mapsui
             }
         }
 
+        public Quad WindowExtent
+        {
+            get
+            {
+                if (_modified) UpdateExtent();
+                return _windowExtent;
+            }
+        }
+
         public Point WorldToScreen(Point worldPosition)
         {
             return WorldToScreen(worldPosition.X, worldPosition.Y);
+        }
+
+        public Point WorldToScreenUnrotated(Point worldPosition)
+        {
+            return WorldToScreenUnrotated(worldPosition.X, worldPosition.Y);
         }
 
         public Point ScreenToWorld(Point screenPosition)
@@ -113,12 +149,43 @@ namespace Mapsui
 
         public Point WorldToScreen(double worldX, double worldY)
         {
-            return new Point((worldX - Extent.MinX) / _resolution, (Extent.MaxY - worldY) / _resolution);
+            var p = WorldToScreenUnrotated(worldX, worldY);
+            
+            if (IsRotated)
+            {
+                var screenCenterX = Width / 2.0;
+                var screenCenterY = Height / 2.0;
+                p = p.Rotate(-_rotation, screenCenterX, screenCenterY);
+            }
+
+            return p;
+        }
+
+        public Point WorldToScreenUnrotated(double worldX, double worldY)
+        {
+            var screenCenterX = Width / 2.0;
+            var screenCenterY = Height / 2.0;
+            var screenX = (worldX - Center.X) / _resolution + screenCenterX;
+            var screenY = (Center.Y - worldY) / _resolution + screenCenterY;
+
+            return new Point(screenX, screenY);
         }
 
         public Point ScreenToWorld(double screenX, double screenY)
         {
-            return new Point((Extent.MinX + screenX * _resolution), (Extent.MaxY - (screenY * _resolution)));
+            var screenCenterX = Width / 2.0;
+            var screenCenterY = Height / 2.0;
+
+            if (IsRotated)
+            {
+                var screen = new Point(screenX, screenY).Rotate(_rotation, screenCenterX, screenCenterY);
+                screenX = screen.X;
+                screenY = screen.Y;
+            }
+
+            var worldX = Center.X + (screenX - screenCenterX) * _resolution;
+            var worldY = Center.Y - ((screenY - screenCenterY) * _resolution);
+            return new Point(worldX, worldY);
         }
 
         public void Transform(double screenX, double screenY, double previousScreenX, double previousScreenY, double deltaScale = 1)
@@ -147,12 +214,37 @@ namespace Mapsui
             if (double.IsNaN(_center.Y)) return;
             if (double.IsNaN(_resolution)) return;
 
-            var spanX = _width * _resolution;
-            var spanY = _height * _resolution;
-            _extent.Min.X = Center.X - spanX * 0.5;
-            _extent.Min.Y = Center.Y - spanY * 0.5;
-            _extent.Max.X = Center.X + spanX * 0.5;
-            _extent.Max.Y = Center.Y + spanY * 0.5;
+            // calculate the window extent which is not rotate
+            var halfSpanX = _width * _resolution * 0.5;
+            var halfSpanY = _height * _resolution * 0.5;
+            var left = Center.X - halfSpanX;
+            var bottom = Center.Y - halfSpanY;
+            var right = Center.X + halfSpanX;
+            var top = Center.Y + halfSpanY;
+            _windowExtent.BottomLeft = new Point(left, bottom);
+            _windowExtent.TopLeft = new Point(left, top);
+            _windowExtent.TopRight = new Point(right, top);
+            _windowExtent.BottomRight = new Point(right, bottom);
+
+            if (!IsRotated)
+            {
+                _extent.Min.X = left;
+                _extent.Min.Y = bottom;
+                _extent.Max.X = right;
+                _extent.Max.Y = top;
+            }
+            else
+            {
+                // Calculate the extent that will encompass a rotated viewport (slighly larger - used for tiles).
+                // Perform rotations on corner offsets and then add them to the Center point.
+                _windowExtent = _windowExtent.Rotate(-_rotation, Center.X, Center.Y);
+                var rotatedBoundingBox = _windowExtent.ToBoundingBox();
+                _extent.Min.X = rotatedBoundingBox.MinX;
+                _extent.Min.Y = rotatedBoundingBox.MinY;
+                _extent.Max.X = rotatedBoundingBox.MaxX;
+                _extent.Max.Y = rotatedBoundingBox.MaxY;
+            }
+
             _modified = false;
         }
     }

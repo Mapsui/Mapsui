@@ -74,6 +74,7 @@
     <Compile Include="Geometries\Point.cs" />
     <Compile Include="Geometries\Point3D.cs" />
     <Compile Include="Geometries\Polygon.cs" />
+    <Compile Include="Geometries\Quad.cs" />
     <Compile Include="Geometries\Raster.cs" />
     <Compile Include="Geometries\SpatialRelations.cs" />
     <Compile Include="Geometries\Surface.cs" />

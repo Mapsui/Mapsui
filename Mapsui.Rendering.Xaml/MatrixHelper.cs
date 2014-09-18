@@ -1,4 +1,5 @@
 ﻿using System;
+using Mapsui.Utilities;
 #if !NETFX_CORE
 using System.Windows.Media;
 #else
@@ -117,7 +118,8 @@ namespace Mapsui.Rendering.Xaml
         public static void Rotate(ref Matrix matrix, double angle)
         {
             angle = angle % 360.0;
-            Multiply(ref matrix, CreateRotationRadians(angle * 0.017453292519943295));
+            var radians = Algorithms.DegreesToRadians(angle);
+            Multiply(ref matrix, CreateRotationRadians(radians));
         }
 
         internal static Matrix CreateRotationRadians(double angle)
@@ -139,7 +141,8 @@ namespace Mapsui.Rendering.Xaml
         public static void RotateAt(ref Matrix matrix, double angle, double centerX = 0, double centerY = 0)
         {
             angle = angle % 360.0;
-            Multiply(ref matrix, CreateRotationRadians(angle * 0.017453292519943295, centerX, centerY));
+            var radians = Algorithms.DegreesToRadians(angle);
+            Multiply(ref matrix, CreateRotationRadians(radians, centerX, centerY));
         }
     }
 }

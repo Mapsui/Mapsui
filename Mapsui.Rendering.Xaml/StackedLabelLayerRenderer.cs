@@ -6,6 +6,7 @@ using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
+using Point = Mapsui.Geometries.Point;
 #if !NETFX_CORE
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -79,7 +80,10 @@ namespace Mapsui.Rendering.Xaml
                     };
                     labelStyle.Offset.Y += stackOffsetY;
 
-                    var position = new Geometries.Point(cluster.Box.GetCentroid().X, cluster.Box.Bottom);
+                    // since the box can be rotated, find the minimal Y value of all 4 corners
+                    var rotatedBox = cluster.Box.Rotate(-viewport.Rotation);
+                    var minY = rotatedBox.Vertices.Select(v => v.Y).Min();
+                    var position = new Geometries.Point(cluster.Box.GetCentroid().X, minY);
 
                     var labelText = labelStyle.GetLabelText(feature);
                     canvas.Children.Add(SingleLabelRenderer.RenderLabel(position, labelStyle, viewport, labelText));
@@ -93,22 +97,19 @@ namespace Mapsui.Rendering.Xaml
             const int symbolSize = 32; // todo: determine margin by symbol size
             const int boxMargin = symbolSize / 2;
 
-            var p1 = viewport.WorldToScreen(box.Min);
-            var p2 = viewport.WorldToScreen(box.Max);
-
-            var rectangle = new Rectangle
+            var path = new Path
             {
-                Width = p2.X - p1.X + symbolSize,
-                Height = p1.Y - p2.Y + symbolSize
+                Stroke = new SolidColorBrush(Colors.White),
+                StrokeThickness = 2,
+                Data = new RectangleGeometry()
             };
 
-            Canvas.SetLeft(rectangle, p1.X - boxMargin);
-            Canvas.SetTop(rectangle, p2.Y - boxMargin);
+            // offset the bounding box left and up by the box margin
+            var offsetBox = box.Grow(boxMargin * viewport.Resolution);
 
-            rectangle.Stroke = new SolidColorBrush(Colors.White);
-            rectangle.StrokeThickness = 2;
+            GeometryRenderer.PositionRaster(path, offsetBox, viewport);
 
-            return rectangle;
+            return path;
         }
 
         private static void ClusterFeatures(

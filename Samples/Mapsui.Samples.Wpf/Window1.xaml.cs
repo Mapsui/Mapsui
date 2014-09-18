@@ -265,6 +265,13 @@ namespace Mapsui.Samples.Wpf
             MapControl.ZoomToFullEnvelope();
             MapControl.Refresh();
         }
+
+        private void RotationSliderChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            var percent = RotationSlider.Value / (RotationSlider.Maximum - RotationSlider.Minimum);
+            MapControl.Map.Viewport.Rotation = percent * 360;
+            MapControl.Refresh();
+        }
     }
 }
 

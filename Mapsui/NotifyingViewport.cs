@@ -47,6 +47,22 @@ namespace Mapsui
             }
         }
 
+        public double Rotation
+        {
+            get { return _viewport.Rotation; }
+            set
+            {
+                _viewport.Rotation = value;
+                RaisePropertyChanged("Rotation");
+                RaisePropertyChanged("IsRotated");
+            }
+        }
+
+        public bool IsRotated
+        {
+            get { return _viewport.IsRotated; }
+        }
+
         public double Resolution
         {
             get { return _viewport.Resolution; }
@@ -60,6 +76,11 @@ namespace Mapsui
         public BoundingBox Extent
         {
             get { return _viewport.Extent; }
+        }
+
+        public Quad WindowExtent
+        {
+            get { return _viewport.WindowExtent; }
         }
 
         public Point ScreenToWorld(double x, double y)
@@ -77,9 +98,19 @@ namespace Mapsui
             return _viewport.WorldToScreen(x, y);
         }
 
+        public Point WorldToScreenUnrotated(double x, double y)
+        {
+            return _viewport.WorldToScreenUnrotated(x, y);
+        }
+
         public Point WorldToScreen(Point point)
         {
             return _viewport.WorldToScreen(point);
+        }
+
+        public Point WorldToScreenUnrotated(Point point)
+        {
+            return _viewport.WorldToScreenUnrotated(point);
         }
 
         public void Transform(double screenX, double screenY, double previousScreenX, double previousScreenY, double deltaScale = 1)

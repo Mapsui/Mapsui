@@ -22,8 +22,10 @@ namespace Mapsui
     public interface IViewport
     {
         Point WorldToScreen(Point point);
+        Point WorldToScreenUnrotated(Point point);
         Point ScreenToWorld(Point point);
         Point WorldToScreen(double x, double y);
+        Point WorldToScreenUnrotated(double x, double y);
         Point ScreenToWorld(double x, double y);
         void Transform(double screenX, double screenY, double previousScreenX, double previousScreenY, 
             double deltaScale = 1);
@@ -32,7 +34,14 @@ namespace Mapsui
         double RenderResolution { get; }
         double RenderResolutionMultiplier { set; }
         BoundingBox Extent { get; }
+        Quad WindowExtent { get; }
         double Width { get; set; }
         double Height { get; set; }
+
+        /// <summary>
+        /// Viewport rotation from True North (clockwise degrees)
+        /// </summary>
+        double Rotation { get; set; }
+        bool IsRotated { get; }
     }
 }
