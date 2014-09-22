@@ -36,7 +36,7 @@ namespace Mapsui.Layers
         MemoryCache<Feature> MemoryCache { get; }
     }
 
-    public class TileLayer : BaseLayer
+    public class TileLayer : BaseLayer, ITileLayer
     {
         private TileFetcher _tileFetcher;
         private ITileSource _tileSource;
