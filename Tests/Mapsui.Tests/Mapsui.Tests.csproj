@@ -48,6 +48,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Fetcher\FailingTileProvider.cs" />
+    <Compile Include="Fetcher\TileFetcherTests.cs" />
     <Compile Include="Projection\TransformTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\FeaturesTests.cs" />

@@ -8,6 +8,7 @@ namespace Mapsui.Tests.Common
     public class SampleTileProvider : ITileProvider
     {
         readonly IDictionary<TileIndex, byte[]> _dictionary = new Dictionary<TileIndex, byte[]>();
+        Random _random = new Random();
 
         public SampleTileProvider()
         {
@@ -25,6 +26,8 @@ namespace Mapsui.Tests.Common
 
         public byte[] GetTile(TileInfo tileInfo)
         {
+            //if (_random.Next(1) == 0) 
+                throw new Exception("random fail");
             return _dictionary[tileInfo.Index];
         }
 
