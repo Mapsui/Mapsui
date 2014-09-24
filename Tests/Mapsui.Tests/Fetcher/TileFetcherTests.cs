@@ -11,7 +11,7 @@ namespace Mapsui.Tests.Fetcher
     public class TileFetcherTests
     {
         [Test]
-        public void TestFetch()
+        public void TileFetcherShouldBehaveProperlyWithFailingTests()
         {
             // Arrange
             var schema = new GlobalSphericalMercator();
