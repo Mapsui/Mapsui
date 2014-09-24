@@ -55,7 +55,7 @@ namespace Mapsui.Layers
             Task.Factory.StartNew(() => TileSource = tileSourceInitializer());
         }
 
-        public TileLayer(ITileSource source = null, int minTiles = 200, int maxTiles = 300, int maxRetries = TileFetcher.DefaultMaxRetries,
+        public TileLayer(ITileSource source = null, int minTiles = 200, int maxTiles = 300, int maxRetries = TileFetcher.DefaultMaxAttempts,
             int maxThreads = TileFetcher.DefaultMaxThreads, IFetchStrategy fetchStrategy = null,
             IRenderGetStrategy renderFetchStrategy = null, int minExtraTiles = -1, int maxExtraTiles = -1)
         {
