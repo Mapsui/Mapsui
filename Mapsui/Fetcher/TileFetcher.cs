@@ -28,9 +28,8 @@ using Mapsui.Providers;
 
 namespace Mapsui.Fetcher
 {
-    class TileFetcher : INotifyPropertyChanged
+    public class TileFetcher : INotifyPropertyChanged
     {
-        
         private readonly MemoryCache<Feature> _memoryCache;
         private readonly ITileSource _tileSource;
         private BoundingBox _extent;
@@ -42,25 +41,24 @@ namespace Mapsui.Fetcher
         private int _threadCount;
         private readonly AutoResetEvent _waitHandle = new AutoResetEvent(true);
         private readonly IFetchStrategy _strategy;
-        private readonly int _maxRetries;
+        private readonly int _maxAttempts;
         private volatile bool _isThreadRunning;
         private volatile bool _isViewChanged;
         public const int DefaultMaxThreads = 2;
-        public const int DefaultMaxRetries = 2;
+        public const int DefaultMaxAttempts = 2;
         private bool _busy;
         private int _numberTilesNeeded;
-        
-                
+
         public event DataChangedEventHandler DataChanged;
 
-        public TileFetcher(ITileSource tileSource, MemoryCache<Feature> memoryCache, int maxRetries = DefaultMaxRetries, int maxThreads = DefaultMaxThreads, IFetchStrategy strategy = null)
+        public TileFetcher(ITileSource tileSource, MemoryCache<Feature> memoryCache, int maxAttempts = DefaultMaxAttempts, int maxThreads = DefaultMaxThreads, IFetchStrategy strategy = null)
         {
             if (tileSource == null) throw new ArgumentException("TileProvider can not be null");
             if (memoryCache == null) throw new ArgumentException("MemoryCache can not be null");
 
             _tileSource = tileSource;
             _memoryCache = memoryCache;
-            _maxRetries = maxRetries;
+            _maxAttempts = maxAttempts;
             _maxThreads = maxThreads;
             _strategy = strategy ?? new FetchStrategy();
         }
@@ -71,8 +69,8 @@ namespace Mapsui.Fetcher
             set
             {
                 if (_busy == value) return; // prevent notify              
-                _busy = value; 
-                OnPropertyChanged("Busy"); 
+                _busy = value;
+                OnPropertyChanged("Busy");
             }
         }
 
@@ -81,14 +79,19 @@ namespace Mapsui.Fetcher
             get { return _numberTilesNeeded; }
         }
 
-        
+
         public void ViewChanged(BoundingBox newExtent, double newResolution)
         {
             _extent = newExtent;
             _resolution = newResolution;
             _isViewChanged = true;
             _waitHandle.Set();
-            if (!_isThreadRunning) { StartLoopThread(); }
+
+            if (!_isThreadRunning)
+            {
+                StartLoopThread();
+                Busy = true;
+            }
         }
 
         private void StartLoopThread()
@@ -103,8 +106,6 @@ namespace Mapsui.Fetcher
             _waitHandle.Set();
         }
 
-        
-        
         private void TileFetchLoop(object state)
         {
             try
@@ -125,8 +126,8 @@ namespace Mapsui.Fetcher
                         _isViewChanged = false;
                     }
 
-                    _missingTiles = GetTilesMissing(_missingTiles, _memoryCache, _retries, _maxRetries);
-                    
+                    _missingTiles = GetTilesMissing(_missingTiles, _memoryCache, _retries, _maxAttempts);
+
                     FetchTiles();
 
                     if (_missingTiles.Count == 0)
@@ -144,7 +145,7 @@ namespace Mapsui.Fetcher
             }
         }
 
-        private static IList<TileInfo> GetTilesMissing(IEnumerable<TileInfo> infosIn, MemoryCache<Feature> memoryCache, 
+        private static IList<TileInfo> GetTilesMissing(IEnumerable<TileInfo> infosIn, MemoryCache<Feature> memoryCache,
             IDictionary<TileIndex, int> retries, int maxRetries)
         {
             IList<TileInfo> tilesOut = new List<TileInfo>();
@@ -153,7 +154,7 @@ namespace Mapsui.Fetcher
                 if ((memoryCache.Find(info.Index) == null) &&
                     (!retries.Keys.Contains(info.Index) || retries[info.Index] < maxRetries))
 
-                tilesOut.Add(info);
+                    tilesOut.Add(info);
             }
             return tilesOut;
         }
@@ -171,7 +172,7 @@ namespace Mapsui.Fetcher
         {
             //first a number of checks
             if (_tilesInProgress.Contains(info.Index)) return;
-            if (_retries.Keys.Contains(info.Index) && _retries[info.Index] >= _maxRetries) return;
+            if (_retries.Keys.Contains(info.Index) && _retries[info.Index] >= _maxAttempts) return;
             if (_memoryCache.Find(info.Index) != null) return;
 
             //now we can go for the request.
@@ -221,7 +222,7 @@ namespace Mapsui.Fetcher
                 DataChanged(this, new DataChangedEventArgs(e.Error, e.Cancelled, e.TileInfo));
         }
 
-        
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]
