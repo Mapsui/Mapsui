@@ -26,8 +26,6 @@ namespace Mapsui.Tests.Common
 
         public byte[] GetTile(TileInfo tileInfo)
         {
-            //if (_random.Next(1) == 0) 
-                throw new Exception("random fail");
             return _dictionary[tileInfo.Index];
         }
 
