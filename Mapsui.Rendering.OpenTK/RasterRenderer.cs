@@ -9,7 +9,7 @@ namespace Mapsui.Rendering.OpenTK
 {
     public static class RasterRenderer
     {
-        public static void Draw(IViewport viewport, IStyle style, IFeature feature, IDictionary<object, TextureInfo> TextureCache)
+        public static void Draw(IViewport viewport, IStyle style, IFeature feature, IDictionary<object, TextureInfo> TextureCache, long currentIteration)
         {
             try
             {
@@ -27,7 +27,7 @@ namespace Mapsui.Rendering.OpenTK
                     textureInfo = TextureCache[raster];
                 }
 
-                textureInfo.Used = true;
+                textureInfo.IterationUsed = currentIteration;
                 TextureCache[raster] = textureInfo;
                 var destination = WorldToScreen(viewport, feature.Geometry.GetBoundingBox());
                 TextureHelper.RenderTexture(textureInfo.TextureId, ToVertexArray(RoundToPixel(destination)));

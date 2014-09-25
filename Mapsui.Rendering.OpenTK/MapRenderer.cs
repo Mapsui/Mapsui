@@ -14,6 +14,8 @@ namespace Mapsui.Rendering.OpenTK
     {
         readonly IDictionary<int, TextureInfo> _symbolTextureCache = new Dictionary<int, TextureInfo>();
         readonly IDictionary<object, TextureInfo> _tileTextureCache = new Dictionary<object, TextureInfo>(new IdentityComparer<object>());
+        private long _currentIteration;
+        private const int TilesToKeepMultiplier = 3;
 
         public void Render(IViewport viewport, IEnumerable<ILayer> layers)
         {
@@ -24,19 +26,27 @@ namespace Mapsui.Rendering.OpenTK
             VisibleFeatureIterator.IterateLayers(viewport, layers, RenderFeature);
 
             RemoveUnusedTextureInfos();
+
+            _currentIteration++;
         }
 
         private void RemoveUnusedTextureInfos()
         {
-            foreach (var key in _tileTextureCache.Keys.ToList())
+            var numberOfTilesUsedInCurrentIteration = _tileTextureCache.Values.Count(i => i.IterationUsed == _currentIteration);
+
+            var orderedKeys = _tileTextureCache.OrderBy(kvp => kvp.Value.IterationUsed).Select(kvp => kvp.Key).ToList();
+
+            var counter = 0;
+            var tilesToKeep = orderedKeys.Count()*TilesToKeepMultiplier;
+            var numberToRemove = numberOfTilesUsedInCurrentIteration - tilesToKeep;
+            foreach (var key in orderedKeys)
             {
-                if (_tileTextureCache[key].Used == false)
-                {
-                    var textureInfo = _tileTextureCache[key];
-                    _tileTextureCache.Remove(key);
-                    GL.BindTexture(All.Texture2D, 0);
-                    GL.DeleteTextures(1, ref textureInfo.TextureId);
-                }
+                if (counter > numberToRemove) break;
+                var textureInfo = _tileTextureCache[key];
+                _tileTextureCache.Remove(key);
+                GL.BindTexture(All.Texture2D, 0);
+                GL.DeleteTextures(1, ref textureInfo.TextureId);
+                counter++;
             }
         }
 
@@ -45,24 +55,24 @@ namespace Mapsui.Rendering.OpenTK
             foreach (var key in _tileTextureCache.Keys.ToList())
             {
                 var textureInfo = _tileTextureCache[key];
-                textureInfo.Used = false;
+                textureInfo.IterationUsed = _currentIteration;
                 _tileTextureCache[key] = textureInfo;
             }
         }
 
         private void RenderFeature(IViewport viewport, IStyle style, IFeature feature)
         {
-            if (feature.Geometry is Point) 
+            if (feature.Geometry is Point)
             {
                 PointRenderer.Draw(viewport, style, feature, _symbolTextureCache);
             }
-            else if (feature.Geometry is LineString) 
+            else if (feature.Geometry is LineString)
             {
                 LineStringRenderer.Draw(viewport, style, feature);
             }
-            else if (feature.Geometry is IRaster) 
+            else if (feature.Geometry is IRaster)
             {
-                RasterRenderer.Draw(viewport, style, feature, _tileTextureCache);
+                RasterRenderer.Draw(viewport, style, feature, _tileTextureCache, _currentIteration);
             }
         }
 
