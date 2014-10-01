@@ -101,8 +101,7 @@ namespace Mapsui.Styles
                 return false;
             }
 
-
-            if (BitmapId == symbolStyle.BitmapId)
+            if (BitmapId != symbolStyle.BitmapId)
             {
                 return false;
             }
