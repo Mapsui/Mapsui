@@ -116,7 +116,7 @@ namespace Mapsui
             get 
             { 
                 var baseLayer = Layers.FirstOrDefault(l => l.Enabled && l is ITileLayer) as ITileLayer;
-                if (baseLayer == null) return new List<double>();
+                if (baseLayer == null || baseLayer.Schema == null) return new List<double>();
                 return baseLayer.Schema.Resolutions.Select(r => r.Value.UnitsPerPixel).ToList();
             }
         }
