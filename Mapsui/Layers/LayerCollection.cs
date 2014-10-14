@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using Mapsui.Layers;
 using System.Collections;
@@ -61,6 +62,7 @@ namespace Mapsui
 
         public void Add(ILayer layer)
         {
+            if (layer == null) throw new ArgumentException("Layer cannot be null");
             _layers.Add(layer);
             OnLayerAdded(layer);
         }
