@@ -188,19 +188,14 @@ namespace Mapsui.Rendering.Gdi
         
         public static void DrawPoint(Graphics graphics, Point point, IStyle style, IViewport viewport)
         {
+            if (point == null) return;
+            
             var symbolStyle = (SymbolStyle)style;
-            if (symbolStyle.Symbol == null) throw  new ArgumentException("No bitmap symbol set in Gdi rendering"); //todo: allow vector symbol
             var symbol = new Bitmap(BitmapRegistry.Instance.Get(symbolStyle.BitmapId));
             var symbolscale = symbolStyle.SymbolScale;
-            PointF offset = symbolStyle.SymbolOffset.ToBitmap();
+            var offset = symbolStyle.SymbolOffset.ToBitmap();
             var rotation = symbolStyle.SymbolRotation;
-
-            if (point == null)
-                return;
-            if (symbol == null)
-                symbol = DefaultSymbol;
-
-            PointF dest = ConvertPoint(viewport.WorldToScreen(point));
+            var dest = ConvertPoint(viewport.WorldToScreen(point));
 
             if (rotation != 0 && !double.IsNaN(rotation))
             {
