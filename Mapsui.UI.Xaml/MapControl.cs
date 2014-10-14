@@ -55,14 +55,14 @@ namespace Mapsui.UI.Xaml
         private readonly Canvas _renderCanvas = new Canvas();
         private bool _invalid;
         private readonly Rectangle _bboxRect;
-        
+
         public event EventHandler ErrorMessageChanged;
         public event EventHandler<ViewChangedEventArgs> ViewChanged;
         public event EventHandler<MouseInfoEventArgs> MouseInfoOver;
         public event EventHandler MouseInfoLeave;
         public event EventHandler<MouseInfoEventArgs> MouseInfoUp;
         public event EventHandler<FeatureInfoEventArgs> FeatureInfo;
-        
+
         public IRenderer Renderer { get; set; }
         private bool IsInBoxZoomMode { get; set; }
         public IList<ILayer> MouseInfoOverLayers { get; private set; }
@@ -103,15 +103,19 @@ namespace Mapsui.UI.Xaml
 
         void MapPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "Envelope")
+            if (!Dispatcher.CheckAccess()) Dispatcher.BeginInvoke(new Action(() => MapPropertyChanged(sender, e)));
+            else
             {
-                InitializeViewport();
-                _map.ViewChanged(true);
-            }
-            else if (e.PropertyName == "Rotation")
-            {
-                _map.ViewChanged(true);
-                OnViewChanged();
+                if (e.PropertyName == "Envelope")
+                {
+                    InitializeViewport();
+                    _map.ViewChanged(true);
+                }
+                else if (e.PropertyName == "Rotation")
+                {
+                    _map.ViewChanged(true);
+                    OnViewChanged();
+                }
             }
         }
 
@@ -137,12 +141,12 @@ namespace Mapsui.UI.Xaml
         {
             get { return _renderCanvas; }
         }
-        
+
         private static readonly DependencyProperty ResolutionProperty =
           DependencyProperty.Register(
           "Resolution", typeof(double), typeof(MapControl),
           new PropertyMetadata(OnResolutionChanged));
-        
+
         public MapControl()
         {
             _renderCanvas = new Canvas
@@ -184,7 +188,7 @@ namespace Mapsui.UI.Xaml
             SizeChanged += MapControlSizeChanged;
             CompositionTarget.Rendering += CompositionTargetRendering;
             Renderer = new MapRenderer(RenderCanvas);
-            
+
 #if (!SILVERLIGHT && !WINDOWS_PHONE)
             ManipulationDelta += OnManipulationDelta;
             ManipulationCompleted += OnManipulationCompleted;
@@ -197,7 +201,7 @@ namespace Mapsui.UI.Xaml
 #endif
         }
 
-        
+
         public void OnViewChanged()
         {
             OnViewChanged(false);
@@ -222,10 +226,17 @@ namespace Mapsui.UI.Xaml
         private void RefreshGraphics()
         {
 #if (!SILVERLIGHT && !WINDOWS_PHONE)
-            InvalidateVisual();
+            Dispatcher.Invoke(new Action(() =>
+            {
+
+                InvalidateVisual();
+                InvalidateArrange();
+                _invalid = true;
+            }));
+#else
+                InvalidateArrange();
+                _invalid = true;
 #endif
-            InvalidateArrange();
-            _invalid = true;
         }
 
         public void Clear()
@@ -258,8 +269,6 @@ namespace Mapsui.UI.Xaml
             ZoomMiddle();
         }
 
-        
-        
         protected void OnErrorMessageChanged(EventArgs e)
         {
             if (ErrorMessageChanged != null)
@@ -493,7 +502,6 @@ namespace Mapsui.UI.Xaml
             if (_mouseDown)
             {
                 if (_previousMousePosition == default(Point))
-                
                 {
                     return; // It turns out that sometimes MouseMove+Pressed is called before MouseDown
                 }
@@ -521,6 +529,7 @@ namespace Mapsui.UI.Xaml
 
             foreach (var layer in layers)
             {
+                if (layer == null) continue;
                 var feature = layer.GetFeaturesInView(Map.Envelope, 0)
                     .Where(f => f.Geometry.GetBoundingBox().GetCentroid().Distance(point) < margin)
                     .OrderBy(f => f.Geometry.GetBoundingBox().GetCentroid().Distance(point))
@@ -612,7 +621,7 @@ namespace Mapsui.UI.Xaml
             }
         }
 #endif
-        
+
         public void ZoomToBox(Geometries.Point beginPoint, Geometries.Point endPoint)
         {
             double x, y, resolution;
@@ -689,7 +698,6 @@ namespace Mapsui.UI.Xaml
             }
         }
 
-        
         public void ZoomToFullEnvelope()
         {
             if (Map.Envelope == null) return;
@@ -698,7 +706,6 @@ namespace Mapsui.UI.Xaml
             Map.Viewport.Center = Map.Envelope.GetCentroid();
         }
 
-        
 #if (!SILVERLIGHT && !WINDOWS_PHONE)
 
         private static void OnManipulationInertiaStarting(object sender, ManipulationInertiaStartingEventArgs e)
@@ -735,8 +742,7 @@ namespace Mapsui.UI.Xaml
         {
             Refresh();
         }
-
-            }
+    }
 
     public class ViewChangedEventArgs : EventArgs
     {
