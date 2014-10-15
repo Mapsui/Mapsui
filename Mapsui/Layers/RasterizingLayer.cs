@@ -20,12 +20,14 @@ namespace Mapsui.Layers
         private readonly int _delayBeforeRaterize;
         private IEnumerable<IFeature> _previousFeatures;
         private readonly double _renderResolutionMultiplier;
+        private readonly IRenderer _rasterizer;
 
-        public RasterizingLayer(ILayer layer, int delayBeforeRasterize = 500, double renderResolutionMultiplier = 1)
+        public RasterizingLayer(ILayer layer, int delayBeforeRasterize = 500, double renderResolutionMultiplier = 1, IRenderer rasterizer = null)
         {
             _layer = layer;
             _delayBeforeRaterize = delayBeforeRasterize;
             _renderResolutionMultiplier = renderResolutionMultiplier;
+            _rasterizer = rasterizer;
             TimerToStartRasterizing = new Timer(TimerToStartRasterizingElapsed, null, _delayBeforeRaterize, int.MaxValue);
             _layer.DataChanged += LayerOnDataChanged;
             _cache = new MemoryProvider();
@@ -58,9 +60,9 @@ namespace Mapsui.Layers
                 if (double.IsNaN(_resolution) || _resolution <= 0) return;
                 var viewport = CreateViewport(_extent, _resolution, _renderResolutionMultiplier);
 
-                var renderer = DefaultRendererFactory.Create();
+                var rasterizer = _rasterizer ?? DefaultRendererFactory.Create();
 
-                var bitmapStream = renderer.RenderToBitmapStream(viewport, new[] {_layer});
+                var bitmapStream = rasterizer.RenderToBitmapStream(viewport, new[] { _layer });
                 RemoveExistingFeatures();
                 _cache.Features = new Features {new Feature {Geometry = new Raster(bitmapStream, viewport.Extent)}};
 
