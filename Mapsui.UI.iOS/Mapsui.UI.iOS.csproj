@@ -54,7 +54,7 @@
       <Project>{B142AB17-285F-48C8-B6C6-94586028333B}</Project>
       <Name>Mapsui.Rendering.iOS</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\mapsui\Trunk\Mapsui.Rendering.OpenTK-iOS\Mapsui.Rendering.OpenTK-iOS.csproj">
+    <ProjectReference Include="..\Mapsui.Rendering.OpenTK-iOS\Mapsui.Rendering.OpenTK-iOS.csproj">
       <Project>{2D1A291B-0B35-423B-B428-49474D52A73B}</Project>
       <Name>Mapsui.Rendering.OpenTK-iOS</Name>
     </ProjectReference>
