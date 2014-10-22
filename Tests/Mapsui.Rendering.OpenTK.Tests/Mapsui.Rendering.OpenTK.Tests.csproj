@@ -51,9 +51,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Mapsui.Rendering.Xaml.Tests\MapRendererTests.cs">
-      <Link>MapRendererTests.cs</Link>
-    </Compile>
     <Compile Include="FpsCounter.cs" />
     <Compile Include="MainWindow.cs" />
     <Compile Include="Program.cs" />
