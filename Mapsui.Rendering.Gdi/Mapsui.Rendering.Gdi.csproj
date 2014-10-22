@@ -51,6 +51,7 @@
     <Compile Include="GdiMapRenderer.cs" />
     <Compile Include="GdiStyle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VisibleFeatureIterator.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Mapsui\Mapsui.csproj">

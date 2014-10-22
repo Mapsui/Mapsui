@@ -1,11 +1,11 @@
-﻿using BruTile;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using BruTile;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Styles;
-using System;
-using System.Collections.Generic;
-using System.IO;
 
 namespace Mapsui.Tests.Common
 {
@@ -15,15 +15,15 @@ namespace Mapsui.Tests.Common
 
         static ArrangeRenderingTests()
         {
-            Samples.Add(Labels);
-            Samples.Add(PointsWithVectorStyle);
             Samples.Add(PointsWithBitmapSymbols);
-            Samples.Add(PointsWithBitmapRotatedAndOffset);
             Samples.Add(PointsWithDifferentSymbolTypes);
+            Samples.Add(PointsWithVectorStyle);
+            Samples.Add(PointsWithBitmapRotatedAndOffset);
             Samples.Add(PointsWithWorldUnits);
             Samples.Add(Polygon);
             Samples.Add(Line);
             Samples.Add(Tiles);
+            Samples.Add(Labels);
         }
 
         public static Map PointsWithVectorStyle()
@@ -58,7 +58,8 @@ namespace Mapsui.Tests.Common
             var layer = new MemoryLayer
             {
                 DataSource = Utilities.CreateProviderWithRotatedBitmapSymbols(), 
-                LayerName = "Points with rotated bitmaps"
+                LayerName = "Points with rotated bitmaps",
+                Style = null
             };
             map.Layers.Add(layer);
             return map;
@@ -75,7 +76,7 @@ namespace Mapsui.Tests.Common
             var layer = new MemoryLayer
             {
                 DataSource = new MemoryProvider(features),
-                LayerName = "Points with various symbol types"
+                LayerName = "Points with different symbol types"
             };
             map.Layers.Add(layer);
             return map;
@@ -200,7 +201,6 @@ namespace Mapsui.Tests.Common
                 LayerName = "Labels"
             });
             return map;
-
         }
 
         public static MemoryProvider CreateProviderWithLabels()

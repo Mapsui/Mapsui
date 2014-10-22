@@ -26,7 +26,6 @@ using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Styles;
-using Mapsui.Styles.Thematics;
 using Color = System.Drawing.Color;
 using Point = Mapsui.Geometries.Point;
 
@@ -46,27 +45,13 @@ namespace Mapsui.Rendering.Gdi
             Render(Graphics, viewport, layers);
         }
 
-        private static void Render(Graphics graphics, IViewport viewport, IEnumerable<ILayer> layers)
+        private void Render(Graphics graphics, IViewport viewport, IEnumerable<ILayer> layers)
         {
-            foreach (var layer in layers)
-            {
-                if (layer.Enabled &&
-                    layer.MinVisible <= viewport.Resolution &&
-                    layer.MaxVisible >= viewport.Resolution)
-                {
-                    if (layer is LabelLayer)
-                    {
-                        GdiLabelRenderer.Render(graphics, viewport, layer as LabelLayer);
-                    }
-                    else
-                    {
-                        RenderLayer(graphics, viewport, layer);
-                    }
-                }
-            }
+            Graphics = graphics;
+            VisibleFeatureIterator.IterateLayers(graphics, viewport, layers, RenderFeature);
         }
 
-        public static Image RenderMapAsImage(IViewport viewport, IEnumerable<ILayer> layers)
+        public Image RenderMapAsImage(IViewport viewport, IEnumerable<ILayer> layers)
         {
             if ((viewport.Width <= 0) || (viewport.Height <= 0)) throw new Exception("The view's width or heigh is 0");
             var image = new System.Drawing.Bitmap((int)viewport.Width, (int)viewport.Height, PixelFormat.Format32bppArgb);
@@ -90,55 +75,23 @@ namespace Mapsui.Rendering.Gdi
             return RenderToBitmapStream(viewport, layers).ToArray();
         }
 
-        private static void RenderLayer(Graphics graphics, IViewport viewport, ILayer layer)
+        private void RenderFeature(IViewport viewport, IStyle style, IFeature feature)
         {
-            graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
- 
-            var layerStyles = BaseLayer.GetLayerStyles(layer);
-            
-            foreach (var layerStyle in layerStyles)
-            {
-                var style = layerStyle;
-
-                var features = layer.GetFeaturesInView(viewport.Extent, viewport.Resolution);
-
-                //Linestring outlines is drawn by drawing the layer once with a thicker line
-                //before drawing the "inline" on top.
-                var enumerable = features as IList<IFeature> ?? features.ToList();
-                foreach (var feature in enumerable)
-                {
-                    if (layerStyle is IThemeStyle) style = (layerStyle as IThemeStyle).GetStyle(feature);
-
-                    if ((style is VectorStyle) && ((style as VectorStyle).Outline != null))
-                    {
-                        GdiGeometryRenderer.RenderGeometryOutline(graphics, viewport, feature.Geometry, style as VectorStyle);
-                    }
-                }
-
-                foreach (var feature in enumerable)
-                {
-                    if (layerStyle is IThemeStyle) style = (layerStyle as IThemeStyle).GetStyle(feature);
-                    RenderGeometry(graphics, viewport, feature, style as VectorStyle);
-                }
-            }
-        }
-
-        private static void RenderGeometry(Graphics graphics, IViewport viewport, IFeature feature, VectorStyle style)
-        {
+            var vectorStyle = style as VectorStyle;
             if (feature.Geometry is Point)
-                GdiGeometryRenderer.DrawPoint(graphics, (Point)feature.Geometry, style, viewport);
+                GdiGeometryRenderer.DrawPoint(Graphics, (Point)feature.Geometry, vectorStyle, viewport);
             else if (feature.Geometry is MultiPoint)
-                GdiGeometryRenderer.DrawMultiPoint(graphics, (MultiPoint) feature.Geometry, style, viewport);
+                GdiGeometryRenderer.DrawMultiPoint(Graphics, (MultiPoint)feature.Geometry, vectorStyle, viewport);
             else if (feature.Geometry is LineString)
-                GdiGeometryRenderer.DrawLineString(graphics, (LineString)feature.Geometry, style.Line.ToBitmap(), viewport);
+                GdiGeometryRenderer.DrawLineString(Graphics, (LineString)feature.Geometry, vectorStyle.Line.ToBitmap(), viewport);
             else if (feature.Geometry is MultiLineString)
-                GdiGeometryRenderer.DrawMultiLineString(graphics, (MultiLineString)feature.Geometry, style.Line.ToBitmap(), viewport);
+                GdiGeometryRenderer.DrawMultiLineString(Graphics, (MultiLineString)feature.Geometry, vectorStyle.Line.ToBitmap(), viewport);
             else if (feature.Geometry is Polygon)
-                GdiGeometryRenderer.DrawPolygon(graphics, (Polygon)feature.Geometry, style.Fill.ToBitmap(), style.Outline.ToBitmap(), viewport);
+                GdiGeometryRenderer.DrawPolygon(Graphics, (Polygon)feature.Geometry, vectorStyle.Fill.ToBitmap(), vectorStyle.Outline.ToBitmap(), viewport);
             else if (feature.Geometry is MultiPolygon)
-                GdiGeometryRenderer.DrawMultiPolygon(graphics, (MultiPolygon)feature.Geometry, style.Fill.ToBitmap(), style.Outline.ToBitmap(), viewport);
+                GdiGeometryRenderer.DrawMultiPolygon(Graphics, (MultiPolygon)feature.Geometry, vectorStyle.Fill.ToBitmap(), vectorStyle.Outline.ToBitmap(), viewport);
             else if (feature.Geometry is IRaster)
-                GdiGeometryRenderer.DrawRaster(graphics, feature.Geometry, style, viewport);
+                GdiGeometryRenderer.DrawRaster(Graphics, feature.Geometry, vectorStyle, viewport);
         }
     }
 }

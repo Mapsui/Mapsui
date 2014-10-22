@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Mapsui.Rendering.Xaml.Tests.Properties {
+namespace Mapsui.Rendering.Gdi.Tests.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
@@ -20,18 +20,6 @@ namespace Mapsui.Rendering.Xaml.Tests.Properties {
         public static Settings Default {
             get {
                 return defaultInstance;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool WriteToDisk {
-            get {
-                return ((bool)(this["WriteToDisk"]));
-            }
-            set {
-                this["WriteToDisk"] = value;
             }
         }
     }

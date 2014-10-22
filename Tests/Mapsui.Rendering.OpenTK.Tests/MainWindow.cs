@@ -1,4 +1,5 @@
-﻿using Mapsui.Tests.Common;
+﻿using System.Linq;
+using Mapsui.Tests.Common;
 using OpenTK;
 using OpenTK.Input;
 using System;
@@ -21,7 +22,8 @@ namespace Mapsui.Rendering.OpenTK.Tests
         public MainWindow() : base(800, 600)
         {
             _map = ArrangeRenderingTests.Samples[_currentSampleIndex]();
-            Title = "OpenTK Rendering samples - press ENTER for next sample";
+            Title = string.Format("OpenTK Rendering samples -[{0}] press ENTER for next sample", _map.Layers.First().LayerName);
+                    
             Context.SwapInterval = 0;
         }
 
@@ -39,7 +41,6 @@ namespace Mapsui.Rendering.OpenTK.Tests
         {
             if (_map == null) return;
 
-            Set2DViewport();
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
             _mapRenderer.Render(_map.Viewport, _map.Layers);
@@ -65,10 +66,6 @@ namespace Mapsui.Rendering.OpenTK.Tests
         {
             _viewportWidth = Width;
             _viewportHeight = Height;
-
-            // Translate and scale are necesary on ES11 on desktop but not on ES11 on Android or OpenGL on desktop.
-            // GL.Translate(-1f, 1f, 0);
-            // GL.Scale(1f / Width, -1f / Height, 1);
 
             Set2DViewport();
         }
@@ -99,9 +96,8 @@ namespace Mapsui.Rendering.OpenTK.Tests
                 {
                     _currentSampleIndex++;
                     if (_currentSampleIndex == ArrangeRenderingTests.Samples.Count) _currentSampleIndex = 0;
-
                     _map = ArrangeRenderingTests.Samples[_currentSampleIndex]();
-
+                    Title = string.Format("OpenTK Rendering samples -[{0}] press ENTER for next sample", _map.Layers.First().LayerName);
                     _enterUp = false;
                 }
             }

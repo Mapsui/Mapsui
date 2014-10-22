@@ -38,13 +38,6 @@ namespace Mapsui.Rendering.Gdi
     /// </summary>
     public static class GdiGeometryRenderer
     {
-        private static readonly Bitmap DefaultSymbol;
-
-        static GdiGeometryRenderer()
-        {
-            DefaultSymbol = CreateDefaultSymbol();
-        }
-
         private static Bitmap CreateDefaultSymbol()
         {
             const int size = 16;
@@ -152,7 +145,7 @@ namespace Mapsui.Rendering.Gdi
         /// <param name="rotation">Text rotation in degrees</param>
         /// <param name="text">Text to render</param>
         /// <param name="viewport"></param>
-        public static void DrawLabel(Graphics graphics, Point labelPoint, Styles.Offset offset, Styles.Font font, Styles.Color forecolor, Styles.Brush backcolor, Styles.Pen halo, double rotation, string text, IViewport viewport)
+        public static void DrawLabel(Graphics graphics, Point labelPoint, Offset offset, Styles.Font font, Styles.Color forecolor, Styles.Brush backcolor, Styles.Pen halo, double rotation, string text, IViewport viewport)
         {
             SizeF fontSize = graphics.MeasureString(text, font.ToBitmap()); //Calculate the size of the text
             labelPoint.X += offset.X; labelPoint.Y += offset.Y; //add label offset
@@ -189,41 +182,34 @@ namespace Mapsui.Rendering.Gdi
         public static void DrawPoint(Graphics graphics, Point point, IStyle style, IViewport viewport)
         {
             if (point == null) return;
+            if (style == null) return;
             
-            var symbolStyle = (SymbolStyle)style;
+            var symbolStyle = style as SymbolStyle;
+            if (symbolStyle == null) return;
+            if (symbolStyle.BitmapId < 0) return;
+            
             var symbol = new Bitmap(BitmapRegistry.Instance.Get(symbolStyle.BitmapId));
             var symbolscale = symbolStyle.SymbolScale;
             var offset = symbolStyle.SymbolOffset.ToBitmap();
             var rotation = symbolStyle.SymbolRotation;
             var dest = ConvertPoint(viewport.WorldToScreen(point));
 
-            if (rotation != 0 && !double.IsNaN(rotation))
-            {
-                graphics.TranslateTransform(dest.X, dest.Y);
-                graphics.RotateTransform((float)rotation);
-                graphics.TranslateTransform((int)(-symbol.Width / 2.0), (int)(-symbol.Height / 2.0));
-                if (symbolscale == 1f)
-                    graphics.DrawImageUnscaled(symbol, (int)(dest.X - symbol.Width / 2.0 + offset.X), (int)(dest.Y - symbol.Height / 2.0 + offset.Y));
-                else
-                {
-                    var width = symbol.Width * symbolscale;
-                    var height = symbol.Height * symbolscale;
-                    graphics.DrawImage(symbol, (int)(dest.X - width / 2 + offset.X * symbolscale), (int)(dest.Y - height / 2 + offset.Y * symbolscale), (float)width, (float)height);
-                }
-            }
-            else
-            {
-                if (symbolscale == 1f)
-                    graphics.DrawImageUnscaled(symbol, (int)(dest.X - symbol.Width / 2.0 + offset.X), (int)(dest.Y - symbol.Height / 2.0 + offset.Y));
-                else
-                {
-                    var width = symbol.Width * symbolscale;
-                    var height = symbol.Height * symbolscale;
-                    graphics.DrawImage(symbol, (int)(dest.X - width / 2 + offset.X * symbolscale), (int)(dest.Y - height / 2 + offset.Y * symbolscale), (float)width, (float)height);
-                }
-            }
+            var width = symbol.Width * symbolscale;
+            var height = symbol.Height * symbolscale;
+            
+            graphics.TranslateTransform(dest.X, dest.Y);
+            graphics.RotateTransform((float)rotation);
+            graphics.TranslateTransform(offset.X, -offset.Y);
+            graphics.TranslateTransform((int)(-width / 2.0), (int)(-height / 2.0));
+            graphics.DrawImage(symbol, 0, 0, (float)width, (float)height);
+            graphics.ResetTransform();
         }
-        
+
+        public static void DrawPoint(Graphics graphics, Point point, SymbolStyle style, IViewport viewport)
+        {
+
+        }
+
         public static PointF ConvertPoint(Point point)
         {
             return new PointF((float)point.X, (float)point.Y);

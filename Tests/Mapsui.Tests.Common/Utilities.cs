@@ -46,28 +46,28 @@ namespace Mapsui.Tests.Common
             var checkeredIconId = BitmapRegistry.Instance.Register(checkeredIcon);
 
             var features = new Features
+            {
+                new Feature
                 {
-                    new Feature
-                        {
-                            Geometry = new Point(50, 50),
-                            Styles = new[] { new VectorStyle { Fill = new Brush(Color.Red) }}
-                        },
-                    new Feature
-                        {
-                            Geometry = new Point(50, 100),
-                            Styles = new[] { new SymbolStyle { Symbol = new Bitmap { Data =  circleIcon } }}
-                        },
-                    new Feature
-                        {
-                            Geometry = new Point(100, 50),
-                            Styles = new[] { new SymbolStyle { Symbol = new Bitmap { Data = checkeredIcon } }}
-                        },
-                    new Feature
-                        {
-                            Geometry = new Point(100, 100),
-                            Styles = new[] { new VectorStyle { Fill = new Brush(Color.Green), Outline = null }}
-                        }
-                };
+                    Geometry = new Point(50, 50),
+                    Styles = new[] { new VectorStyle { Fill = new Brush(Color.Red) }}
+                },
+                new Feature
+                {
+                    Geometry = new Point(50, 100),
+                    Styles = new[] { new SymbolStyle { BitmapId = circleIconId }}
+                },
+                new Feature
+                {
+                    Geometry = new Point(100, 50),
+                    Styles = new[] { new SymbolStyle { BitmapId = checkeredIconId }}
+                },
+                new Feature
+                {
+                    Geometry = new Point(100, 100),
+                    Styles = new[] { new VectorStyle { Fill = new Brush(Color.Green), Outline = null }}
+                }
+            };
             var provider = new MemoryProvider(features);
             return provider;
         }
@@ -112,29 +112,29 @@ namespace Mapsui.Tests.Common
         public static IProvider CreateProviderWithRotatedBitmapSymbols()
         {
             var features = new Features
-                {
-                    CreateFeatureWithRotatedBitmapSymbol(75, 75, 0),
-                    CreateFeatureWithRotatedBitmapSymbol(75, 125, 90),
-                    CreateFeatureWithRotatedBitmapSymbol(125, 125, 180),
-                    CreateFeatureWithRotatedBitmapSymbol(125, 75, 270)
-                };
+            {
+                new Feature { Geometry = new Point(75, 75), Styles = new[] { new SymbolStyle { Fill = new Brush(Color.Red)}}}, // for reference
+                CreateFeatureWithRotatedBitmapSymbol(75, 125, 90),
+                CreateFeatureWithRotatedBitmapSymbol(125, 125, 180),
+                CreateFeatureWithRotatedBitmapSymbol(125, 75, 270)
+            };
             return new MemoryProvider(features);
         }
 
         public static Feature CreateFeatureWithRotatedBitmapSymbol(double x, double y, double rotation)
         {
-            const string iconPath = @"Mapsui.Tests.Common.Resources.Images.iconthatneedsoffset.png";
-            var iconThatNeedsOffsetStream = typeof(Utilities).Assembly.GetManifestResourceStream(iconPath);
-            var iconThatNeedsOffsetStreamId = BitmapRegistry.Instance.Register(iconThatNeedsOffsetStream);
+            const string bitmapPath = @"Mapsui.Tests.Common.Resources.Images.iconthatneedsoffset.png";
+            var bitmapStream = typeof(Utilities).Assembly.GetManifestResourceStream(bitmapPath);
+            var bitmapId = BitmapRegistry.Instance.Register(bitmapStream);
 
             var feature = new Feature { Geometry = new Point(x, y) };
 
-            feature.Styles.Add(new SymbolStyle
+            feature.Styles.Add(
+                new SymbolStyle
                 {
-                    BitmapId = iconThatNeedsOffsetStreamId,
-                    Symbol = new Bitmap { Data = iconThatNeedsOffsetStream },
+                    BitmapId = bitmapId,
                     SymbolOffset = new Offset { Y = -24 },
-                    SymbolRotation = rotation,
+                    SymbolRotation = rotation
                 });
             return feature;
         }

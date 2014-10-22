@@ -45,18 +45,18 @@ namespace Mapsui.Rendering.OpenTK
             GL.Rotate(orientation, 0, 0, 1);
 
             x = offsetX + DetermineHorizontalAlignmentCorrection(horizontalAlignment, textureInfo.Width);
-            y = offsetY + DetermineVerticalAlignmentCorrection(verticalAlignment, textureInfo.Height);
+            y = -offsetY + DetermineVerticalAlignmentCorrection(verticalAlignment, textureInfo.Height);
 
             var halfWidth = textureInfo.Width / 2;
             var halfHeight = textureInfo.Height / 2;
 
             var vertextArray = new[]
-                {
-                    x - halfWidth, y - halfHeight,
-                    x + halfWidth, y - halfHeight,
-                    x + halfWidth, y + halfHeight,
-                    x - halfWidth, y + halfHeight
-                };
+            {
+                x - halfWidth, y - halfHeight,
+                x + halfWidth, y - halfHeight,
+                x + halfWidth, y + halfHeight,
+                x - halfWidth, y + halfHeight
+            };
 
             RenderTextureWithoutBinding(textureInfo.TextureId, vertextArray, opacity);
 
