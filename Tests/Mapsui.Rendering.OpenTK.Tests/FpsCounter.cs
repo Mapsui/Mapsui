@@ -27,12 +27,12 @@ namespace Mapsui.Rendering.OpenTK.Tests
         }
         
         private const int FontHeight = 13;
-        private static global::OpenTK.Graphics.TextPrinter textPrinter;
+        private static TextPrinter textPrinter;
         private static readonly Font Font = new Font("Arial Black", FontHeight, FontStyle.Regular);
 
         public static void Initialize()
         {
-            textPrinter = new global::OpenTK.Graphics.TextPrinter();
+            textPrinter = new TextPrinter();
         }
 
         public static void Render(params string[] message)
