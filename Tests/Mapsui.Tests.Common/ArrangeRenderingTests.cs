@@ -30,10 +30,12 @@ namespace Mapsui.Tests.Common
         {
             var map = new Map { Viewport = { Center = new Point(100, 100), Width = 200, Height = 200, Resolution = 1 } };
             map.Layers.Add(new MemoryLayer
-                {
-                    Style = null,
-                    DataSource = Utilities.CreateProviderWithPointsWithVectorStyle()
-                });
+            {
+                Style = null,
+                DataSource = Utilities.CreateProviderWithPointsWithVectorStyle()
+                ,
+                LayerName = "Points with VectorStyle"
+            });
             return map;
         }
 
@@ -41,10 +43,11 @@ namespace Mapsui.Tests.Common
         {
             var map = new Map { Viewport = { Center = new Point(100, 100), Width = 200, Height = 200, Resolution = 1 } };
             var layer = new MemoryLayer
-                {
-                    Style = null,
-                    DataSource = Utilities.CreateProviderWithPointsWithSymbolStyles()
-                };
+            {
+                Style = null,
+                DataSource = Utilities.CreateProviderWithPointsWithSymbolStyles(),
+                LayerName = "Points with bitmaps"
+            };
             map.Layers.Add(layer);
             return map;
         }
@@ -52,7 +55,11 @@ namespace Mapsui.Tests.Common
         public static Map PointsWithBitmapRotatedAndOffset()
         {
             var map = new Map { Viewport = { Center = new Point(80, 80), Width = 200, Height = 200, Resolution = 1 } };
-            var layer = new MemoryLayer { DataSource = Utilities.CreateProviderWithRotatedBitmapSymbols() };
+            var layer = new MemoryLayer
+            {
+                DataSource = Utilities.CreateProviderWithRotatedBitmapSymbols(), 
+                LayerName = "Points with rotated bitmaps"
+            };
             map.Layers.Add(layer);
             return map;
         }
@@ -61,11 +68,15 @@ namespace Mapsui.Tests.Common
         {
             var map = new Map { Viewport = { Center = new Point(0, 0), Width = 200, Height = 100, Resolution = 0.5 } };
             var features = new Features
-                {
-                    Utilities.CreateSimplePointFeature(-20, 0, new SymbolStyle {Fill = new Brush { Color = Color.Gray}, Outline = new Pen(Color.Black), SymbolType = SymbolType.Ellipse}),
-                    Utilities.CreateSimplePointFeature(20, 0, new SymbolStyle {Fill = new Brush { Color = Color.Gray}, Outline = new Pen(Color.Black), SymbolType = SymbolType.Rectangle})
-                };
-            var layer = new MemoryLayer { DataSource = new MemoryProvider(features) };
+            {
+                Utilities.CreateSimplePointFeature(-20, 0, new SymbolStyle {Fill = new Brush { Color = Color.Gray}, Outline = new Pen(Color.Black), SymbolType = SymbolType.Ellipse}),
+                Utilities.CreateSimplePointFeature(20, 0, new SymbolStyle {Fill = new Brush { Color = Color.Gray}, Outline = new Pen(Color.Black), SymbolType = SymbolType.Rectangle})
+            };
+            var layer = new MemoryLayer
+            {
+                DataSource = new MemoryProvider(features),
+                LayerName = "Points with various symbol types"
+            };
             map.Layers.Add(layer);
             return map;
         }
@@ -74,11 +85,11 @@ namespace Mapsui.Tests.Common
         {
             var map = new Map { Viewport = { Center = new Point(0, 0), Width = 200, Height = 100, Resolution = 0.5 } };
             var features = new Features
-                {
-                    Utilities.CreateSimplePointFeature(-20, 0, new SymbolStyle {UnitType = UnitType.Pixel}),
-                    Utilities.CreateSimplePointFeature(20, 0, new SymbolStyle {UnitType = UnitType.WorldUnit})
-                };
-            var layer = new MemoryLayer { DataSource = new MemoryProvider(features) };
+            {
+                Utilities.CreateSimplePointFeature(-20, 0, new SymbolStyle {UnitType = UnitType.Pixel}),
+                Utilities.CreateSimplePointFeature(20, 0, new SymbolStyle {UnitType = UnitType.WorldUnit})
+            };
+            var layer = new MemoryLayer { DataSource = new MemoryProvider(features), LayerName = "Points in world units"};
             map.Layers.Add(layer);
             return map;
         }
@@ -88,17 +99,19 @@ namespace Mapsui.Tests.Common
             var map = new Map
             {
                 Viewport =
-                    {
-                        Center = new Point(0, 0),
-                        Width = 600,
-                        Height = 400,
-                        Resolution = 63000
-                    }
+                {
+                    Center = new Point(0, 0),
+                    Width = 600,
+                    Height = 400,
+                    Resolution = 63000
+                }
             };
 
-            var layer = new MemoryLayer();
-            var provider = Utilities.CreatePolygonProvider();
-            layer.DataSource = provider;
+            var layer = new MemoryLayer
+            {
+                DataSource = Utilities.CreatePolygonProvider(), 
+                LayerName = "Polygon"
+            };
             map.Layers.Add(layer);
             return map;
         }
@@ -108,17 +121,21 @@ namespace Mapsui.Tests.Common
             var map = new Map
             {
                 Viewport =
-                    {
-                        Center = new Point(0, 0),
-                        Width = 600,
-                        Height = 400,
-                        Resolution = 63000
-                    }
+                {
+                    Center = new Point(0, 0),
+                    Width = 600,
+                    Height = 400,
+                    Resolution = 63000
+                }
             };
 
-            var layer = new MemoryLayer { Style = null };
-            var provider = Utilities.CreateLineProvider();
-            layer.DataSource = provider;
+            var layer = new MemoryLayer
+            {
+                Style = null, 
+                DataSource = Utilities.CreateLineProvider(), 
+                LayerName = "Line"
+            };
+
             map.Layers.Add(layer);
             return map;
         }
@@ -145,7 +162,7 @@ namespace Mapsui.Tests.Common
             };
 
             var features = TileIndexToFeatures(tileIndexes, new SampleTileSource());
-            map.Layers.Add(new MemoryLayer { DataSource = new MemoryProvider(features) });
+            map.Layers.Add(new MemoryLayer { DataSource = new MemoryProvider(features), LayerName = "Tiles"});
             return map;
         }
 
@@ -179,7 +196,8 @@ namespace Mapsui.Tests.Common
             map.Layers.Add(new MemoryLayer
             {
                 Style = null,
-                DataSource = CreateProviderWithLabels()
+                DataSource = CreateProviderWithLabels(),
+                LayerName = "Labels"
             });
             return map;
 
