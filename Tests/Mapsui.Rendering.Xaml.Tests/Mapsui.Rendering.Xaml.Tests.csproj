@@ -87,6 +87,9 @@
     <Content Include="Resources\Images\Original\bitmap_symbol.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Images\Original\labels.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Images\Original\line.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
