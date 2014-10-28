@@ -1,9 +1,11 @@
-﻿using Mapsui.Rendering.Xaml.Tests.Properties;
+﻿using System;
 using Mapsui.Tests.Common;
 using NUnit.Framework;
 using System.IO;
 #if OPENTK
 using Mapsui.Rendering.OpenTK;
+#elif GDI
+using Mapsui.Rendering.Gdi;
 #endif
 
 namespace Mapsui.Rendering.Xaml.Tests
@@ -34,7 +36,7 @@ namespace Mapsui.Rendering.Xaml.Tests
             
 #if !MONOGAME
             // aside
-            if (Settings.Default.WriteToDisk) WriteFile(Path.Combine(_generatedImagesFolder, fileName), bitmap);
+            WriteFile(Path.Combine(_generatedImagesFolder, fileName), bitmap);
 
             // assert
             Assert.AreEqual(ReadFile(Path.Combine(_originalImagesFolder, fileName)), bitmap.ToArray());
@@ -53,7 +55,7 @@ namespace Mapsui.Rendering.Xaml.Tests
             
 #if !MONOGAME
             // aside
-            if (Settings.Default.WriteToDisk) WriteFile(Path.Combine(_generatedImagesFolder, fileName), bitmap);
+            WriteFile(Path.Combine(_generatedImagesFolder, fileName), bitmap);
 
             // assert
             Assert.AreEqual(ReadFile(Path.Combine(_originalImagesFolder, fileName)), bitmap.ToArray());
@@ -71,7 +73,7 @@ namespace Mapsui.Rendering.Xaml.Tests
 
 #if !MONOGAME
             // aside
-            if (Settings.Default.WriteToDisk) WriteFile(Path.Combine(_generatedImagesFolder, fileName), bitmap);
+            WriteFile(Path.Combine(_generatedImagesFolder, fileName), bitmap);
 
             // assert
             Assert.AreEqual(ReadFile(Path.Combine(_originalImagesFolder, fileName)), bitmap.ToArray());
@@ -90,7 +92,7 @@ namespace Mapsui.Rendering.Xaml.Tests
 
 #if !MONOGAME
             // aside
-            if (Settings.Default.WriteToDisk) WriteFile(Path.Combine(_generatedImagesFolder, fileName), bitmap);
+            WriteFile(Path.Combine(_generatedImagesFolder, fileName), bitmap);
 
             // assert
             Assert.AreEqual(ReadFile(Path.Combine(_originalImagesFolder, fileName)), bitmap.ToArray());
@@ -109,7 +111,7 @@ namespace Mapsui.Rendering.Xaml.Tests
 
 #if !MONOGAME
             // aside
-            if (Settings.Default.WriteToDisk) WriteFile(Path.Combine(_generatedImagesFolder, fileName), bitmap);
+            WriteFile(Path.Combine(_generatedImagesFolder, fileName), bitmap);
 
             // assert
             Assert.AreEqual(ReadFile(Path.Combine(_originalImagesFolder, fileName)), bitmap.ToArray());
@@ -128,7 +130,7 @@ namespace Mapsui.Rendering.Xaml.Tests
 
 #if !MONOGAME
             // aside
-            if (Settings.Default.WriteToDisk) WriteFile(Path.Combine(_generatedImagesFolder, fileName), bitmap);
+            WriteFile(Path.Combine(_generatedImagesFolder, fileName), bitmap);
 
             // assert
             Assert.AreEqual(ReadFile(Path.Combine(_originalImagesFolder, fileName)), bitmap.ToArray());
@@ -147,14 +149,12 @@ namespace Mapsui.Rendering.Xaml.Tests
 
 #if !MONOGAME
             // aside
-
-            if (Settings.Default.WriteToDisk) WriteFile(Path.Combine(_generatedImagesFolder, fileName), bitmap);
+            WriteFile(Path.Combine(_generatedImagesFolder, fileName), bitmap);
 
             // assert
             Assert.AreEqual(ReadFile(Path.Combine(_originalImagesFolder, fileName)), bitmap.ToArray());
 #endif
         }
-
 
         [Test]
         public void RenderTiles()
@@ -168,7 +168,7 @@ namespace Mapsui.Rendering.Xaml.Tests
 
 #if !MONOGAME
             // aside;
-            if (Settings.Default.WriteToDisk) WriteFile(Path.Combine(_generatedImagesFolder, fileName), bitmap);
+            WriteFile(Path.Combine(_generatedImagesFolder, fileName), bitmap);
 
             // assert
             Assert.AreEqual(ReadFile(Path.Combine(_originalImagesFolder, fileName)), bitmap.ToArray());
@@ -187,7 +187,7 @@ namespace Mapsui.Rendering.Xaml.Tests
 
 #if !MONOGAME
             // aside;
-            if (Settings.Default.WriteToDisk) WriteFile(Path.Combine(_generatedImagesFolder, fileName), bitmap);
+            WriteFile(Path.Combine(_generatedImagesFolder, fileName), bitmap);
 
             // assert
             Assert.AreEqual(ReadFile(Path.Combine(_originalImagesFolder, fileName)), bitmap.ToArray());
@@ -198,6 +198,7 @@ namespace Mapsui.Rendering.Xaml.Tests
         private static void WriteFile(string imagePath, MemoryStream bitmap)
         {
             var folder = Path.GetDirectoryName(imagePath);
+            if (folder == null) throw new Exception("Images folder was not found");
             if (!Directory.Exists(folder)) Directory.CreateDirectory(folder);
             
             using (var fileStream = new FileStream(imagePath, FileMode.Create, FileAccess.Write))
@@ -213,21 +214,10 @@ namespace Mapsui.Rendering.Xaml.Tests
         }
 #endif
 
-#if MONOGAME
-
-        private MemoryStream RenderToBitmap(Map map)
-        {
-            var mapRenderer = new MonoGame.MapRenderer(_graphicsDevice);
-            mapRenderer.Draw(map, map.Viewport);
-            return new MemoryStream(); // not implemented yet
-        }
-#else
-        private MemoryStream RenderToBitmap(Map map)
+        private static MemoryStream RenderToBitmap(Map map)
         {
             var rasterizer = new MapRenderer();
             return rasterizer.RenderToBitmapStream(map.Viewport, map.Layers);
         }
-#endif
-
     }
 }

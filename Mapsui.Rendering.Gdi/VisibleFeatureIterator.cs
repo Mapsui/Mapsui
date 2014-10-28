@@ -29,7 +29,7 @@ namespace Mapsui.Rendering.Gdi
 
             if (layer is LabelLayer)
             {
-                GdiLabelRenderer.Render(graphics, viewport, layer as LabelLayer);
+                LabellayerRenderer.Render(graphics, viewport, layer as LabelLayer);
             }
             else
             {

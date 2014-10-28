@@ -36,7 +36,7 @@ namespace Mapsui.UI.WinForms
             //Indicates that a redraw is needed. This often coincides with 
             //manipulation but not in the case of new data arriving.
         private bool _viewInitialized;
-        private readonly GdiMapRenderer _renderer = new GdiMapRenderer();
+        private readonly MapRenderer _renderer = new MapRenderer();
 
         
         public event EventHandler ErrorMessageChanged;

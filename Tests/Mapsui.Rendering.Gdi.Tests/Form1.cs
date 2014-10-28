@@ -6,7 +6,7 @@ namespace Mapsui.Rendering.Gdi.Tests
 {
     public partial class Form1 : Form
     {
-        private readonly GdiMapRenderer _renderer = new GdiMapRenderer();
+        private readonly MapRenderer _renderer = new MapRenderer();
         private int _currentSampleIndex;
         private Map _map;
 
