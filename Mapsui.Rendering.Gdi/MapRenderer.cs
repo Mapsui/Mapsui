@@ -65,7 +65,7 @@ namespace Mapsui.Rendering.Gdi
 
         public MemoryStream RenderToBitmapStream(IViewport viewport, IEnumerable<ILayer> layers)
         {
-            Image image = RenderMapAsImage(viewport, layers);
+            var image = RenderMapAsImage(viewport, layers);
             var memoryStream = new MemoryStream();
             image.Save(memoryStream, ImageFormat.Png);
             return memoryStream;

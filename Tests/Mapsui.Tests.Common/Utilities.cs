@@ -141,10 +141,15 @@ namespace Mapsui.Tests.Common
 
         public static byte[] ToByteArray(Stream input)
         {
+            return ToMemoryStream(input).ToArray();
+        }
+
+        public static MemoryStream ToMemoryStream(Stream input)
+        {
             using (var memoryStream = new MemoryStream())
             {
                 input.CopyTo(memoryStream);
-                return memoryStream.ToArray();
+                return memoryStream;
             }
         }
     }

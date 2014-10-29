@@ -49,6 +49,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Mapsui.Rendering.Xaml.Tests\File.cs">
+      <Link>File.cs</Link>
+    </Compile>
     <Compile Include="..\Mapsui.Rendering.Xaml.Tests\MapRendererTests.cs">
       <Link>MapRendererTests.cs</Link>
     </Compile>
