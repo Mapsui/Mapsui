@@ -20,7 +20,7 @@
   </metadata>
   <files>  
   
-    <file src="..\Release\Portable\Mapsui.dll" target="lib\portable-net403+sl5+wp8+win8+MonoAndroid+MonoTouch\Mapsui.dll" />
+    <file src="..\Release\Portable\Mapsui.dll" target="lib\portable-net403+sl5+wp8+wpa+win8+MonoAndroid+MonoTouch\Mapsui.dll" />
 
     <file src="..\Release\v4.0.3\Mapsui.dll" target="lib\net403\Mapsui.dll" />
 	<file src="..\Release\v4.0.3\Mapsui.Rendering.Xaml.dll" target="lib\net403\Mapsui.Rendering.Xaml.dll" />

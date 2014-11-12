@@ -31,7 +31,7 @@ namespace Mapsui.Samples.Common.Desktop
         }
 
         public ITileSchema Schema { get; private set; }
-        public string Title { get; private set; }
+        public string Name { get; private set; }
         public ITileProvider Provider { get; private set; }
 
         public static ITileProvider GetTileProvider()

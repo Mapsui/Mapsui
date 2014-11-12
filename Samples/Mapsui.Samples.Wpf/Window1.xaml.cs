@@ -249,7 +249,7 @@ namespace Mapsui.Samples.Wpf
             using (var responseStream = webResponse.GetResponseStream())
             {
                 var tileSources = WmtsParser.Parse(responseStream);
-                var natura2000 = tileSources.First(t => t.Title.ToLower().Contains("natura2000"));
+                var natura2000 = tileSources.First(t => t.Name.ToLower().Contains("natura2000"));
                 MapControl.Map.Layers.Add(new TileLayer(natura2000));
                 MapControl.ZoomToFullEnvelope();
                 MapControl.Refresh();

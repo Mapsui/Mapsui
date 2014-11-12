@@ -26,6 +26,8 @@ namespace Mapsui.Samples.Android
 		
 		public static void UpdateIdValues()
 		{
+			global::Mapsui.UI.Android.Resource.Drawable.attachment = global::Mapsui.Samples.Android.Resource.Drawable.attachment;
+			global::Mapsui.UI.Android.Resource.Drawable.button_background = global::Mapsui.Samples.Android.Resource.Drawable.button_background;
 			global::Mapsui.UI.Android.Resource.String.ApplicationName = global::Mapsui.Samples.Android.Resource.String.ApplicationName;
 			global::Mapsui.UI.Android.Resource.String.Hello = global::Mapsui.Samples.Android.Resource.String.Hello;
 		}
@@ -47,7 +49,13 @@ namespace Mapsui.Samples.Android
 		{
 			
 			// aapt resource value: 0x7f020000
-			public const int Icon = 2130837504;
+			public const int attachment = 2130837504;
+			
+			// aapt resource value: 0x7f020001
+			public const int button_background = 2130837505;
+			
+			// aapt resource value: 0x7f020002
+			public const int Icon = 2130837506;
 			
 			static Drawable()
 			{

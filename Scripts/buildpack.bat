@@ -1,7 +1,7 @@
 @ECHO OFF
 SETLOCAL
 SET VERSION=%1
-SET NUGET=.\..\.nuget\nuget.exe
+SET NUGET=.\..\tools\nuget\nuget.exe
 
 rmdir .\..\obj /s /q
 rmdir .\..\release /s /q

@@ -46,7 +46,7 @@ namespace Mapsui.Samples.Common
 
 
 
-        public string Title
+        public string Name
         {
             get { throw new NotImplementedException(); }
         }

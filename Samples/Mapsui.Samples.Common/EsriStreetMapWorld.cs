@@ -56,7 +56,7 @@ namespace Mapsui.Samples.Common
             schema.OriginY = 90;
             schema.Name = "ESRI";
             schema.Format = format;
-            schema.Axis = AxisDirection.InvertedY;
+            schema.YAxis = YAxis.OSM;
             schema.Srs = "EPSG:4326";
             return schema;
         }
@@ -71,7 +71,7 @@ namespace Mapsui.Samples.Common
         }
 
 
-        public string Title
+        public string Name
         {
             get { throw new System.NotImplementedException(); }
         }
