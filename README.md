@@ -1,3 +1,5 @@
+[![NuGet Status](http://img.shields.io/nuget/v/Mapsui.svg?style=flat)](https://www.nuget.org/packages/Mapsui/)
+
 ## Mapsui (pronounced map-su-wii) ##
 
 Mapsui is a C# library for mapping applications.
