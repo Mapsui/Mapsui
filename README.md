@@ -1,3 +1,5 @@
+[![NuGet Status](http://img.shields.io/nuget/v/Mapsui.svg?style=flat)](https://www.nuget.org/packages/Mapsui/)
+
 ## Mapsui (pronounced map-su-wii) ##
 
 Mapsui is a C# library for mapping applications.
@@ -18,14 +20,15 @@ https://www.nuget.org/packages/Mapsui
 
 ## Platforms Supported ##
 
-Mapsui, the core project, is a Profile 147 Portable Class Library, compatible with:
+Mapsui, the core project, is a PCL with Profile336 which targets:
 
-- .NET framework 4.0.3 and higher
-- .NET for Windows Store apps
-- Windows Phone 8 and higher
-- Silverlight 5 and higher
-- Xamarin.Android
+- .Net Framework 4.0.3 and higher
+- Windows 8
+- Windows Phone Silverlight 8
+- Silverlight 5
+- Windows Phone 8.1
 - Xamarin.iOS
+- Xamarin.Android
 
 Per platform there are separate assemblies for the UI and for Rendering. Those are:
 
