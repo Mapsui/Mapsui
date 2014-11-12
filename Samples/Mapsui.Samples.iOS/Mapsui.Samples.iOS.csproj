@@ -95,13 +95,13 @@
     <StartupObject>Mapsui.Samples.iOS.Application</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BruTile">
+      <HintPath>..\..\packages\BruTile.0.10.1\lib\portable-net403+sl5+wp8+wpa+win8+MonoAndroid+MonoTouch\BruTile.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="monotouch" />
-    <Reference Include="BruTile">
-      <HintPath>..\..\packages\BruTile.0.9.8\lib\portable-net403+sl5+wp8+win8+MonoAndroid+MonoTouch\BruTile.dll</HintPath>
-    </Reference>
     <Reference Include="OpenTK-1.0" />
   </ItemGroup>
   <ItemGroup>
@@ -142,4 +142,3 @@
     </ProjectReference>
   </ItemGroup>
 </Project>
-
