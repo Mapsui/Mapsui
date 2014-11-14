@@ -14,8 +14,9 @@
     </description>
     <tags>map maps mapping geo gis osm</tags>
     <language>en-US</language>
-	<dependencies>
+    <dependencies>
     <dependency id="BruTile" version="0.9.8"/>
+    <dependency id="Newtonsoft.json" version="6.0.6"/>
     </dependencies>
   </metadata>
   <files>  
@@ -23,28 +24,30 @@
     <file src="..\Release\Portable\Mapsui.dll" target="lib\portable-net403+sl5+wp8+wpa+win8+MonoAndroid+MonoTouch\Mapsui.dll" />
 
     <file src="..\Release\v4.0.3\Mapsui.dll" target="lib\net403\Mapsui.dll" />
-	<file src="..\Release\v4.0.3\Mapsui.Rendering.Xaml.dll" target="lib\net403\Mapsui.Rendering.Xaml.dll" />
+    <file src="..\Release\v4.0.3\Mapsui.Rendering.Xaml.dll" target="lib\net403\Mapsui.Rendering.Xaml.dll" />
     <file src="..\Release\v4.0.3\Mapsui.UI.Xaml.dll" target="lib\net403\Mapsui.UI.Xaml.dll" />
 
     <file src="..\Release\W8\Mapsui.dll" target="lib\win8\Mapsui.dll" />
     <file src="..\Release\W8\Mapsui.Rendering.Xaml.dll" target="lib\win8\Mapsui.Rendering.Xaml.dll" />
     <file src="..\Release\W8\Mapsui.UI.Xaml.dll" target="lib\win8\Mapsui.UI.Xaml.dll" />    
-	
-	<file src="..\Release\WP8\Mapsui.dll" target="lib\wp8\Mapsui.dll" />
+
+    <file src="..\Release\WP8\Mapsui.dll" target="lib\wp8\Mapsui.dll" />
     <file src="..\Release\WP8\Mapsui.Rendering.Xaml.dll" target="lib\wp8\Mapsui.Rendering.Xaml.dll" />
     <file src="..\Release\WP8\Mapsui.UI.Xaml.dll" target="lib\wp8\Mapsui.UI.Xaml.dll" />    
-		
+
     <file src="..\Release\SL\Mapsui.dll" target="lib\sl5\Mapsui.dll" />
     <file src="..\Release\SL\Mapsui.Rendering.Xaml.dll" target="lib\sl5\Mapsui.Rendering.Xaml.dll" />
     <file src="..\Release\SL\Mapsui.UI.Xaml.dll" target="lib\sl5\Mapsui.UI.Xaml.dll" />    
-	
-	<file src="..\Release\Xamarin.Android\Mapsui.dll" target="lib\MonoAndroid\Mapsui.dll" />
-	<file src="..\Release\Xamarin.Android\Mapsui.Rendering.Android.dll" target="lib\MonoAndroid\Mapsui.Rendering.Android.dll" />
+
+    <file src="..\Release\Xamarin.Android\Mapsui.dll" target="lib\MonoAndroid\Mapsui.dll" />
+    <file src="..\Release\Xamarin.Android\Mapsui.Rendering.Android.dll" target="lib\MonoAndroid\Mapsui.Rendering.Android.dll" />
+    <file src="..\Release\Xamarin.Android\Mapsui.Rendering.OpenTK.dll" target="lib\MonoAndroid\Mapsui.Rendering.OpenTK.dll" />
     <file src="..\Release\Xamarin.Android\Mapsui.UI.Android.dll" target="lib\MonoAndroid\Mapsui.UI.Android.dll" />
 
-	<file src="..\Release\Xamarin.iOS\Mapsui.dll" target="lib\MonoTouch\Mapsui.dll" />
-	<file src="..\Release\Xamarin.iOS\Mapsui.Rendering.iOS.dll" target="lib\MonoTouch\Mapsui.Rendering.iOS.dll" />
+    <file src="..\Release\Xamarin.iOS\Mapsui.dll" target="lib\MonoTouch\Mapsui.dll" />
+    <file src="..\Release\Xamarin.iOS\Mapsui.Rendering.iOS.dll" target="lib\MonoTouch\Mapsui.Rendering.iOS.dll" />
+    <file src="..\Release\Xamarin.iOS\Mapsui.Rendering.OpenTK.dll" target="lib\MonoTouch\Mapsui.Rendering.OpenTK.dll" />
     <file src="..\Release\Xamarin.iOS\Mapsui.UI.iOS.dll" target="lib\MonoTouch\Mapsui.UI.iOS.dll" />
-	
+
   </files>
 </package>
