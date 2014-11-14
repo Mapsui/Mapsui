@@ -128,10 +128,6 @@
       <Project>{D74C052A-C07E-4B37-A898-134218ACA5C9}</Project>
       <Name>Mapsui</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Mapsui.Rendering.iOS\Mapsui.Rendering.iOS.csproj">
-      <Project>{B142AB17-285F-48C8-B6C6-94586028333B}</Project>
-      <Name>Mapsui.Rendering.iOS</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Mapsui.Rendering.OpenTK-iOS\Mapsui.Rendering.OpenTK-iOS.csproj">
       <Project>{2D1A291B-0B35-423B-B428-49474D52A73B}</Project>
       <Name>Mapsui.Rendering.OpenTK-iOS</Name>

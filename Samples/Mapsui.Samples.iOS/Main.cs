@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
+using BruTile.Predefined;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
-using Mapsui.UI.iOS;
 
 namespace Mapsui.Samples.iOS
 {
@@ -27,13 +26,13 @@ namespace Mapsui.Samples.iOS
 			// If you have defined a view, add it here:
 			// window.AddSubview (navigationController.View);
 
-			glView.Map.Layers.Add(new Mapsui.Layers.TileLayer(new BruTile.Web.OsmTileSource()));
+			glView.Map.Layers.Add(new Layers.TileLayer(KnownTileSources.Create()));
 
 			glView.Run(60.0);
 
 			var frm = glView.Frame;
-			var width = this.window.Frame.Width;
-			var height = this.window.Frame.Height;
+			var width = window.Frame.Width;
+			var height = window.Frame.Height;
 			glView.Frame = new System.Drawing.RectangleF (0, 0, width, height);
 			window.MakeKeyAndVisible ();
 
