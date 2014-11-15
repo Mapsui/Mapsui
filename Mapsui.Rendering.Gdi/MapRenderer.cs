@@ -80,19 +80,19 @@ namespace Mapsui.Rendering.Gdi
         {
             var vectorStyle = style as VectorStyle;
             if (feature.Geometry is Point)
-                GeometryRenderer.DrawPoint(Graphics, (Point)feature.Geometry, vectorStyle, viewport);
+                PointRenderer.Render(Graphics, (Point)feature.Geometry, vectorStyle, viewport);
             else if (feature.Geometry is MultiPoint)
-                GeometryRenderer.DrawMultiPoint(Graphics, (MultiPoint)feature.Geometry, vectorStyle, viewport);
+                MultiPointRenderer.Render(Graphics, (MultiPoint)feature.Geometry, vectorStyle, viewport);
             else if (feature.Geometry is LineString)
-                GeometryRenderer.DrawLineString(Graphics, (LineString)feature.Geometry, vectorStyle.Line.ToGdi(), viewport);
+                LineStringRenderer.Render(Graphics, (LineString)feature.Geometry, vectorStyle.Line.ToGdi(), viewport);
             else if (feature.Geometry is MultiLineString)
-                GeometryRenderer.DrawMultiLineString(Graphics, (MultiLineString)feature.Geometry, vectorStyle.Line.ToGdi(), viewport);
+                MultiLineStringRenderer.Render(Graphics, (MultiLineString)feature.Geometry, vectorStyle.Line.ToGdi(), viewport);
             else if (feature.Geometry is Polygon)
-                GeometryRenderer.DrawPolygon(Graphics, (Polygon)feature.Geometry, vectorStyle.Fill.ToGdi(), vectorStyle.Outline.ToGdi(), viewport);
+                PolygonRenderer.DrawPolygon(Graphics, (Polygon)feature.Geometry, vectorStyle.Fill.ToGdi(), vectorStyle.Outline.ToGdi(), viewport);
             else if (feature.Geometry is MultiPolygon)
-                GeometryRenderer.DrawMultiPolygon(Graphics, (MultiPolygon)feature.Geometry, vectorStyle.Fill.ToGdi(), vectorStyle.Outline.ToGdi(), viewport);
+                MultiPolygonRenderer.Render(Graphics, (MultiPolygon)feature.Geometry, vectorStyle.Fill.ToGdi(), vectorStyle.Outline.ToGdi(), viewport);
             else if (feature.Geometry is IRaster)
-                GeometryRenderer.DrawRaster(Graphics, feature.Geometry, vectorStyle, viewport);
+                RasterRenderer.Render(Graphics, feature.Geometry, vectorStyle, viewport);
         }
     }
 }

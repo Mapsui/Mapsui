@@ -1,4 +1,4 @@
-﻿// Copyright 20010 - Paul den Dulk (Geodan) - Adapted SharpMap for Mapsui.
+﻿// Copyright 2010 - Paul den Dulk (Geodan) - Adapted SharpMap for Mapsui.
 // 
 // This file is part of Mapsui.
 // Mapsui is free software; you can redistribute it and/or modify
@@ -159,7 +159,7 @@ namespace Mapsui.Rendering.Gdi
                         foreach (Label label in labels)
                         {
                             if (!label.Show) continue;
-                            GeometryRenderer.DrawLabel(graphics, label.LabelPoint, label.Style.Offset, label.Style.Font,
+                            LabelRenderer.DrawLabel(graphics, label.LabelPoint, label.Style.Offset, label.Style.Font,
                                 label.Style.ForeColor, label.Style.BackColor, label.Halo, label.Rotation, label.Text, viewport);
                         }
                     }
@@ -173,36 +173,36 @@ namespace Mapsui.Rendering.Gdi
             var gdiSize = g.MeasureString(text, style.Font.ToGdi());
             var size = new Styles.Size { Width = gdiSize.Width, Height = gdiSize.Height };
 
-            Geometries.Point position = viewport.WorldToScreen(feature.GetBoundingBox().GetCentroid());
+            var position = viewport.WorldToScreen(feature.GetBoundingBox().GetCentroid());
             position.X = position.X - size.Width * (short)style.HorizontalAlignment * 0.5f;
             position.Y = position.Y - size.Height * (short)style.VerticalAlignment * 0.5f;
             if (position.X - size.Width > viewport.Width || position.X + size.Width < 0 ||
                 position.Y - size.Height > viewport.Height || position.Y + size.Height < 0)
                 return null;
 
-            Label lbl;
+            Label label;
 
             if (!style.CollisionDetection)
-                lbl = new Label(text, position, rotation, priority, null, style);
+                label = new Label(text, position, rotation, priority, null, style);
             else
             {
                 //Collision detection is enabled so we need to measure the size of the string
-                lbl = new Label(text, position, rotation, priority,
+                label = new Label(text, position, rotation, priority,
                                 new LabelBox(position.X - size.Width * 0.5f - style.CollisionBuffer.Width,
                                              position.Y + size.Height * 0.5f + style.CollisionBuffer.Height,
                                              size.Width + 2f * style.CollisionBuffer.Width,
                                              size.Height + style.CollisionBuffer.Height * 2f), style);
             }
-            if (feature is LineString)
-            {
-                var line = feature as LineString;
-                if (line.Length / viewport.Resolution > size.Width) //Only label feature if it is long enough
-                    CalculateLabelOnLinestring(line, ref lbl, viewport);
-                else
-                    return null;
-            }
 
-            return lbl;
+            if (!(feature is LineString)) return label;
+            var line = feature as LineString;
+
+            if (line.Length / viewport.Resolution > size.Width) //Only label feature if it is long enough
+                CalculateLabelOnLinestring(line, ref label, viewport);
+            else
+                return null;
+
+            return label;
         }
 
         private static void CalculateLabelOnLinestring(LineString line, ref Label label, IViewport viewportTransform)
