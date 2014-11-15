@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Drawing.Drawing2D;
+using System.Linq;
 using System.Windows.Forms;
 using Mapsui.Tests.Common;
 
@@ -26,6 +27,7 @@ namespace Mapsui.Rendering.Gdi.Tests
             base.OnPaint(e);
 
             _renderer.Graphics = e.Graphics;
+            _renderer.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
             _renderer.Render(_map.Viewport, _map.Layers);
         }
 
