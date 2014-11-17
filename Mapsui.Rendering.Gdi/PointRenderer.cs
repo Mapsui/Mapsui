@@ -18,7 +18,6 @@
 
 using System;
 using System.Drawing;
-using System.Drawing.Drawing2D;
 using Mapsui.Rendering.Gdi.Extensions;
 using Mapsui.Styles;
 using Bitmap = System.Drawing.Bitmap;
