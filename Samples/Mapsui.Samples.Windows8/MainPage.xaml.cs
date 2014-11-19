@@ -1,4 +1,5 @@
-﻿using BruTile.Web;
+﻿using BruTile.Predefined;
+using BruTile.Web;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
@@ -26,11 +27,11 @@ namespace Mapsui.Samples.Windows8
         /// property is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            mapControl.Map.Layers.Add(new TileLayer(new OsmTileSource()));
-            var provider = CreateRandomPointsProvider();
-            mapControl.Map.Layers.Add(PointLayerSample.CreateRandomPointLayerWithLabel(provider));
-            mapControl.Map.Layers.Add(PointLayerSample.CreateStackedLabelLayer(provider));
-            mapControl.Map.Layers.Add(PointLayerSample.CreateRandomPolygonLayer(mapControl.Map.Envelope, 1));
+            mapControl.Map.Layers.Add(new TileLayer(KnownTileSources.Create()));
+            //var provider = CreateRandomPointsProvider();
+            //mapControl.Map.Layers.Add(PointLayerSample.CreateRandomPointLayerWithLabel(provider));
+            //mapControl.Map.Layers.Add(PointLayerSample.CreateStackedLabelLayer(provider));
+            //mapControl.Map.Layers.Add(PointLayerSample.CreateRandomPolygonLayer(mapControl.Map.Envelope, 1));
         }
 
         private MemoryProvider CreateRandomPointsProvider()
