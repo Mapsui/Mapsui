@@ -441,7 +441,7 @@ namespace Mapsui.Rendering.Xaml
 
         private static void UpdateRenderTransform(UIElement renderedGeometry, IViewport viewport)
         {
-            var matrix = new XamlMedia.Matrix();
+            var matrix = XamlMedia.Matrix.Identity;
 
             if (viewport.IsRotated)
             {
