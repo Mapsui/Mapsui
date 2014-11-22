@@ -168,8 +168,6 @@ namespace Mapsui.Layers
         /// </summary>
         public abstract BoundingBox Envelope { get; }
 
-        public event FeedbackEventHandler Feedback;
-
         protected BaseLayer()
         {
             LayerName = "Layer";
@@ -192,14 +190,6 @@ namespace Mapsui.Layers
         public override string ToString()
         {
             return LayerName;
-        }
-
-        protected void OnFeedback(string message)
-        {
-            if (Feedback != null)
-            {
-                Feedback(this, new FeedbackEventArgs { Message = message });
-            }
         }
 
         protected void OnPropertyChanged(string name)

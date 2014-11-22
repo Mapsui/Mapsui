@@ -31,8 +31,6 @@ namespace Mapsui.Layers
     /// </summary>
     public interface ILayer : IAsyncDataFetcher, INotifyPropertyChanged 
     {
-        event FeedbackEventHandler Feedback;
-        
         int Id { get; }
 
         /// <summary>
@@ -97,12 +95,5 @@ namespace Mapsui.Layers
         /// <param name="crs">The crs to project to</param>
         /// <returns>True if is does, false if it does not, null if it is unknown</returns>
         bool? IsCrsSupported(string crs);
-    }
-
-    public delegate void FeedbackEventHandler(object sender, FeedbackEventArgs e);
-
-    public class FeedbackEventArgs : EventArgs
-    {
-        public string Message { get; set; }
     }
 }

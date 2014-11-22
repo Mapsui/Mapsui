@@ -133,24 +133,20 @@ namespace Mapsui
 
         public event PropertyChangedEventHandler PropertyChanged;
         public event DataChangedEventHandler DataChanged;
-        public event FeedbackEventHandler Feedback;
 
         void LayersLayerRemoved(ILayer layer)
         {
             layer.AbortFetch();
             layer.DataChanged -= LayerDataChanged;
-            layer.Feedback -= LayerFeedback;
             layer.PropertyChanged -= LayerPropertyChanged;
         }
 
         void LayersLayerAdded(ILayer layer)
         {
             layer.DataChanged += LayerDataChanged;
-            layer.Feedback += LayerFeedback;
             layer.PropertyChanged += LayerPropertyChanged;
             layer.Transformation = Transformation;
             layer.CRS = CRS;
-
         }
 
         void LayerPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -158,31 +154,15 @@ namespace Mapsui
             OnPropertyChanged(sender, e.PropertyName);
         }
 
-        private void OnPropertyChanged(object sender, string name)
+        protected void OnPropertyChanged(object sender, string name)
         {
             var handler = PropertyChanged;
-            if (handler != null)
-            {
-                handler(sender, new PropertyChangedEventArgs(name));
-            }
+            if (handler != null) handler(sender, new PropertyChangedEventArgs(name));
         }
 
         protected void OnPropertyChanged(string name)
         {
             OnPropertyChanged(this, name);
-        }
-
-        private void LayerFeedback(object sender, FeedbackEventArgs e)
-        {
-            OnFeedback(sender, e);
-        }
-
-        private void OnFeedback(object sender, FeedbackEventArgs e)
-        {
-            if (Feedback != null)
-            {
-                Feedback(sender, e);
-            }
         }
 
         private void LayerDataChanged(object sender, DataChangedEventArgs e)
