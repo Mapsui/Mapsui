@@ -20,9 +20,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using Mapsui.Fetcher;
 using Mapsui.Geometries;
+using Mapsui.Projection;
 using Mapsui.Providers;
 using Mapsui.Styles;
-using Mapsui.Projection;
 
 namespace Mapsui.Layers
 {

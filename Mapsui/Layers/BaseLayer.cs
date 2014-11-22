@@ -1,28 +1,45 @@
-﻿using Mapsui.Fetcher;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using Mapsui.Fetcher;
 using Mapsui.Geometries;
 using Mapsui.Projection;
 using Mapsui.Providers;
 using Mapsui.Styles;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
 
 namespace Mapsui.Layers
 {
     public abstract class BaseLayer : ILayer
     {
         private static int _instanceCounter;
-        private string _crs;
-        private object _tag;
         private bool _busy;
+        private string _crs;
         private bool _enabled;
         private bool _exclusive;
         private string _layerName;
-        private double _opacity;
-        private double _minVisible;
         private double _maxVisible;
+        private double _minVisible;
+        private double _opacity;
         private IStyle _style;
+        private object _tag;
         private ITransformation _transformation;
+
+        protected BaseLayer()
+        {
+            LayerName = "Layer";
+            Style = new VectorStyle();
+            Enabled = true;
+            MinVisible = 0;
+            MaxVisible = double.MaxValue;
+            Opacity = 1;
+            Id = _instanceCounter++;
+        }
+
+        protected BaseLayer(string layerName)
+            : this()
+        {
+            LayerName = layerName;
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -168,24 +185,20 @@ namespace Mapsui.Layers
         /// </summary>
         public abstract BoundingBox Envelope { get; }
 
-        protected BaseLayer()
-        {
-            LayerName = "Layer";
-            Style = new VectorStyle();
-            Enabled = true;
-            MinVisible = 0;
-            MaxVisible = double.MaxValue;
-            Opacity = 1;
-            Id = _instanceCounter++;
-        }
-
-        protected BaseLayer(string layerName)
-            : this()
-        {
-            LayerName = layerName;
-        }
-
         public abstract IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution);
+
+        public abstract void AbortFetch();
+
+        public abstract void ViewChanged(bool majorChange, BoundingBox extent, double resolution);
+
+        public event DataChangedEventHandler DataChanged;
+
+        public abstract void ClearCache();
+
+        public virtual bool? IsCrsSupported(string crs)
+        {
+            return null;
+        }
 
         public override string ToString()
         {
@@ -201,12 +214,6 @@ namespace Mapsui.Layers
             }
         }
 
-        public abstract void AbortFetch();
-
-        public abstract void ViewChanged(bool majorChange, BoundingBox extent, double resolution);
-
-        public event DataChangedEventHandler DataChanged;
-
         protected void OnDataChanged(DataChangedEventArgs args)
         {
             if (DataChanged != null)
@@ -215,17 +222,10 @@ namespace Mapsui.Layers
             }
         }
 
-        public abstract void ClearCache();
-
         public static IEnumerable<IStyle> GetLayerStyles(ILayer layer)
         {
             if (layer == null) return new IStyle[0];
             return layer.Style is StyleCollection ? (layer.Style as StyleCollection).ToArray() : new[] { layer.Style };
-        }
-
-        public virtual bool? IsCrsSupported(string crs)
-        {
-            return null;
         }
     }
 }
