@@ -195,7 +195,7 @@ namespace Mapsui.Samples.Common
             featureWithColors.Styles.Add(StyleSamples.CreateColoredLabelStyle());
             memoryProvider.Features.Add(featureWithColors);
 
-            return new MemoryLayer { Name = "PointLayerWithLabels", DataSource = memoryProvider };
+            return new MemoryLayer { LayerName = "PointLayerWithLabels", DataSource = memoryProvider };
         }
     }
 }

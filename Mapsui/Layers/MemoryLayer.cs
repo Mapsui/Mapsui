@@ -8,7 +8,6 @@ namespace Mapsui.Layers
 {
     public  class MemoryLayer : BaseLayer
     {
-        public string Name { get; set; }
         public IProvider DataSource { get; set; }
 
         public override IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
