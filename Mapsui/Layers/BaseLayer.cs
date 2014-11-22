@@ -216,9 +216,10 @@ namespace Mapsui.Layers
 
         protected void OnDataChanged(DataChangedEventArgs args)
         {
-            if (DataChanged != null)
+            var handler = DataChanged;
+            if (handler != null)
             {
-                DataChanged(this, args);
+                handler(this, args);
             }
         }
 
