@@ -26,6 +26,8 @@ namespace Mapsui.Rendering.OpenTK.Android.Tests
 		
 		public static void UpdateIdValues()
 		{
+			global::Mapsui.Rendering.OpenTK.Resource.String.ApplicationName = global::Mapsui.Rendering.OpenTK.Android.Tests.Resource.String.ApplicationName;
+			global::Mapsui.Rendering.OpenTK.Resource.String.Hello = global::Mapsui.Rendering.OpenTK.Android.Tests.Resource.String.Hello;
 		}
 		
 		public partial class Attribute
