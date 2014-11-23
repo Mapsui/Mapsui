@@ -1,4 +1,5 @@
 ﻿using BruTile.Extensions;
+using BruTile.Predefined;
 using BruTile.Web;
 using BruTile.Wmts;
 using Mapsui.Layers;
@@ -66,7 +67,7 @@ namespace Mapsui.Samples.Wpf
         private void OsmClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
-            MapControl.Map.Layers.Add(new TileLayer(new OsmTileSource()) { LayerName = "OSM" });
+            MapControl.Map.Layers.Add(new TileLayer(KnownTileSources.Create()) { LayerName = "OSM" });
             LayerList.Initialize(MapControl.Map.Layers);
             MapControl.ZoomToFullEnvelope();
             MapControl.Refresh();
@@ -77,7 +78,7 @@ namespace Mapsui.Samples.Wpf
             MapControl.Map.Layers.Clear();
             MapControl.Map.Transformation = new MinimalTransformation();
             MapControl.Map.CRS = "EPSG:3857";
-            MapControl.Map.Layers.Add(new TileLayer(new OsmTileSource()) { LayerName = "OSM" });
+            MapControl.Map.Layers.Add(new TileLayer(KnownTileSources.Create()) { LayerName = "OSM" });
             MapControl.Map.Layers.Add(PointLayerSample.CreateLayerWithDataSourceWithWGS84Point());
             LayerList.Initialize(MapControl.Map.Layers);
             MapControl.ZoomToFullEnvelope();
@@ -87,7 +88,7 @@ namespace Mapsui.Samples.Wpf
         private void AnimatedPointsClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
-            MapControl.Map.Layers.Add(new TileLayer(new OsmTileSource()) { LayerName = "OSM" });
+            MapControl.Map.Layers.Add(new TileLayer(KnownTileSources.Create()) { LayerName = "OSM" });
             MapControl.Map.Layers.Add(new AnimatedPointsWithAutoUpdateLayer { LayerName = "AnimatedLayer" });
 
             LayerList.Initialize(MapControl.Map.Layers);
@@ -98,7 +99,7 @@ namespace Mapsui.Samples.Wpf
         private void RandomPointWithStackLabelClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
-            MapControl.Map.Layers.Add(new TileLayer(new OsmTileSource()) { LayerName = "OSM" });
+            MapControl.Map.Layers.Add(new TileLayer(KnownTileSources.Create()) { LayerName = "OSM" });
             var provider = CreateRandomPointsProvider();
             MapControl.Map.Layers.Add(PointLayerSample.CreateStackedLabelLayer(provider));
             MapControl.Map.Layers.Add(PointLayerSample.CreateRandomPointLayer(provider));
@@ -110,7 +111,7 @@ namespace Mapsui.Samples.Wpf
         private void RandomPointsWithFeatureInfoClick(object server, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
-            MapControl.Map.Layers.Add(new TileLayer(new OsmTileSource()) { LayerName = "OSM" });
+            MapControl.Map.Layers.Add(new TileLayer(KnownTileSources.Create()) { LayerName = "OSM" });
             var pointLayer = PointLayerSample.CreateRandomPointLayer(CreateRandomPointsProvider());
             pointLayer.Style = new StyleCollection {
                 new SymbolStyle {
@@ -169,7 +170,7 @@ namespace Mapsui.Samples.Wpf
         private void BingMapsClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
-            MapControl.Map.Layers.Add(new TileLayer(new BingTileSource(BingRequest.UrlBingStaging, String.Empty, BingMapType.Aerial)));
+            MapControl.Map.Layers.Add(new TileLayer(KnownTileSources.Create(KnownTileSource.BingAerial)));
             LayerList.Initialize(MapControl.Map.Layers);
             MapControl.ZoomToFullEnvelope();
             MapControl.Refresh();
@@ -188,7 +189,7 @@ namespace Mapsui.Samples.Wpf
             MapControl.Map.Layers.Clear();
             foreach (var layer in ShapefileSample.CreateLayers())
             {
-                MapControl.Map.Layers.Add(layer);    
+                MapControl.Map.Layers.Add(layer);
             }
             MapControl.ZoomToFullEnvelope();
             LayerList.Initialize(MapControl.Map.Layers);
@@ -207,7 +208,7 @@ namespace Mapsui.Samples.Wpf
         private void PointSymbolsClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
-            MapControl.Map.Layers.Add(new TileLayer(new OsmTileSource()) { LayerName = "OSM" });
+            MapControl.Map.Layers.Add(new TileLayer(KnownTileSources.Create()) { LayerName = "OSM" });
             MapControl.Map.Layers.Add(PointLayerSample.Create());
             MapControl.Map.Layers.Add(CreatePointLayerWithWorldUnitSymbol());
             LayerList.Initialize(MapControl.Map.Layers);
@@ -259,7 +260,7 @@ namespace Mapsui.Samples.Wpf
         private void PointsWithLabelsClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
-            MapControl.Map.Layers.Add(new TileLayer(new OsmTileSource()) { LayerName = "OSM" });
+            MapControl.Map.Layers.Add(new TileLayer(KnownTileSources.Create()) { LayerName = "OSM" });
             MapControl.Map.Layers.Add(PointLayerSample.CreatePointLayerWithLabels());
             LayerList.Initialize(MapControl.Map.Layers);
             MapControl.ZoomToFullEnvelope();
