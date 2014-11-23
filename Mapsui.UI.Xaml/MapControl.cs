@@ -185,8 +185,8 @@ namespace Mapsui.UI.Xaml
             Dispatcher.ShutdownStarted += DispatcherShutdownStarted;
             IsManipulationEnabled = true;
 #elif WINDOWS_PHONE
-           _renderCanvas.ManipulationDelta += OnManipulationDelta;
-           _renderCanvas.ManipulationCompleted += OnManipulationCompleted;
+            RenderCanvas.ManipulationDelta += OnManipulationDelta;
+            RenderCanvas.ManipulationCompleted += OnManipulationCompleted;
 #endif
         }
 
