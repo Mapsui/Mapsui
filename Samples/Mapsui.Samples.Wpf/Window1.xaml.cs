@@ -1,6 +1,13 @@
-﻿using BruTile.Extensions;
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Net;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using BruTile.Extensions;
 using BruTile.Predefined;
-using BruTile.Web;
 using BruTile.Wmts;
 using Mapsui.Layers;
 using Mapsui.Projection;
@@ -9,14 +16,6 @@ using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Desktop;
 using Mapsui.Styles;
 using Mapsui.UI.Xaml;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Net;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
 
 namespace Mapsui.Samples.Wpf
 {
