@@ -149,7 +149,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Mapsui.UI.Xaml\Mapsui.UI.Xaml.csproj">
-      <Project>{9142A5C9-38F9-42DF-8E9A-79E5A919151F}</Project>
+      <Project>{4b5676a4-6c5a-4caa-8317-faf40cefd361}</Project>
       <Name>Mapsui.UI.Xaml</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Mapsui\Mapsui.csproj">

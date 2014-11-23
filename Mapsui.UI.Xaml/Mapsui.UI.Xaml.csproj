@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{9142A5C9-38F9-42DF-8E9A-79E5A919151F}</ProjectGuid>
+    <ProjectGuid>{4B5676A4-6C5A-4CAA-8317-FAF40CEFD361}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Mapsui.UI.Xaml</RootNamespace>
