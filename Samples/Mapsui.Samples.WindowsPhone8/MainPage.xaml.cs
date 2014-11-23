@@ -5,6 +5,7 @@ using System.Net;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
+using BruTile.Predefined;
 using BruTile.Web;
 using Mapsui.Layers;
 using Microsoft.Phone.Controls;
@@ -28,7 +29,7 @@ namespace Mapsui.Samples.WindowsPhone8
         private void Init()
         {
             //Openstreetmap URI: 
-            var osm = new TileLayer(new OsmTileSource()) { LayerName = "OSM" };
+            var osm = new TileLayer(KnownTileSources.Create()) { LayerName = "OSM" };
             //add layers
             MapControl.Map.Layers.Add(osm);
             MapControl.Refresh();

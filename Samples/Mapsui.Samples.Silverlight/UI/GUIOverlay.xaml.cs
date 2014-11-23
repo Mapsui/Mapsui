@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using BruTile.Predefined;
 using BruTile.Web;
 using Mapsui.Geometries;
 using Mapsui.Layers;
@@ -51,7 +52,7 @@ namespace Mapsui.Samples.Silverlight.UI
             var bitmapData = System.Reflection.Assembly.GetExecutingAssembly()
                 .GetManifestResourceStream("Mapsui.Samples.Silverlight.UI.Images.btnBbox.png");
 
-            var osmLayer = new TileLayer(new OsmTileSource()) {LayerName = "OSM"};
+            var osmLayer = new TileLayer(KnownTileSources.Create()) {LayerName = "OSM"};
             var provider = CreateRandomPointsProvider(osmLayer.Envelope);
             
             var map = new Map();
@@ -59,15 +60,6 @@ namespace Mapsui.Samples.Silverlight.UI
             // map.Layers.Add(CreateRandomPointLayer(provider, bitmapData));
             map.Layers.Add(new RasterizingLayer(PointLayerSample.CreateRandomPointLayerWithLabel(provider)));
             return map;
-        }
-
-        private static Layer CreateRandomPointLayer(IProvider provider, Stream bitmapData)
-        {
-            return new Layer("pointlayer")
-                {
-                    DataSource = provider,
-                    Style = new SymbolStyle {Symbol = new Bitmap {Data = bitmapData}}
-                };
         }
 
         private static MemoryProvider CreateRandomPointsProvider(BoundingBox box)
