@@ -45,14 +45,12 @@ namespace Mapsui.UI.Xaml
         private Point _previousMousePosition;
         private Point _currentMousePosition;
         private Point _downMousePosition;
-        private string _errorMessage;
         private readonly FpsCounter _fpsCounter = new FpsCounter();
         private readonly DoubleAnimation _zoomAnimation = new DoubleAnimation();
         private readonly Storyboard _zoomStoryBoard = new Storyboard();
         private double _toResolution = double.NaN;
         private bool _mouseDown;
         private bool _viewportInitialized;
-        private readonly Canvas _renderCanvas = new Canvas();
         private bool _invalid;
         private readonly Rectangle _bboxRect;
 
@@ -127,20 +125,11 @@ namespace Mapsui.UI.Xaml
             }
         }
 
-        public string ErrorMessage
-        {
-            get
-            {
-                return _errorMessage;
-            }
-        }
+        public string ErrorMessage { get; private set; }
 
         public bool ZoomLocked { get; set; }
 
-        public Canvas RenderCanvas
-        {
-            get { return _renderCanvas; }
-        }
+        public Canvas RenderCanvas { get; private set; }
 
         private static readonly DependencyProperty ResolutionProperty =
           DependencyProperty.Register(
@@ -149,7 +138,7 @@ namespace Mapsui.UI.Xaml
 
         public MapControl()
         {
-            _renderCanvas = new Canvas
+            RenderCanvas = new Canvas
                 {
                     VerticalAlignment = VerticalAlignment.Stretch,
                     HorizontalAlignment = HorizontalAlignment.Stretch,
@@ -399,22 +388,22 @@ namespace Mapsui.UI.Xaml
             {
                 if (e == null)
                 {
-                    _errorMessage = "Unexpected error: DataChangedEventArgs can not be null";
+                    ErrorMessage = "Unexpected error: DataChangedEventArgs can not be null";
                     OnErrorMessageChanged(EventArgs.Empty);
                 }
                 else if (e.Cancelled)
                 {
-                    _errorMessage = "Cancelled";
+                    ErrorMessage = "Cancelled";
                     OnErrorMessageChanged(EventArgs.Empty);
                 }
                 else if (e.Error is System.Net.WebException)
                 {
-                    _errorMessage = "WebException: " + e.Error.Message;
+                    ErrorMessage = "WebException: " + e.Error.Message;
                     OnErrorMessageChanged(EventArgs.Empty);
                 }
                 else if (e.Error != null)
                 {
-                    _errorMessage = e.Error.GetType() + ": " + e.Error.Message;
+                    ErrorMessage = e.Error.GetType() + ": " + e.Error.Message;
                     OnErrorMessageChanged(EventArgs.Empty);
                 }
                 else // no problems
