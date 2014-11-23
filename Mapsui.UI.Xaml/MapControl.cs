@@ -65,8 +65,8 @@ namespace Mapsui.UI.Xaml
 
         public IRenderer Renderer { get; set; }
         private bool IsInBoxZoomMode { get; set; }
-        public IList<ILayer> MouseInfoOverLayers { get; private set; }
-        public IList<ILayer> MouseInfoUpLayers { get; private set; }
+        public IList<ILayer> MouseInfoOverLayers { get; private set; } // This should be on the Map
+        public IList<ILayer> MouseInfoUpLayers { get; private set; } // This should be on the Map
         public event EventHandler ViewportInitialized;
 
         public bool ZoomToBoxMode { get; set; }
@@ -470,7 +470,7 @@ namespace Mapsui.UI.Xaml
             {
                 foreach (var layer in Map.Layers)
                 {
-                    if (layer is IFeatureInfo)
+                    if (layer is IFeatureInfo) // There should also be a check if feature info is supported for a specific layer
                     {
                         (layer as IFeatureInfo).GetFeatureInfo(Map.Viewport, _downMousePosition.X, _downMousePosition.Y, OnFeatureInfo);
                     }
