@@ -63,7 +63,7 @@ namespace Mapsui.Samples.Android
 		{
 			
 			// aapt resource value: 0x7f050000
-			public const int mapview = 2131034112;
+			public const int mapcontrol = 2131034112;
 			
 			static Id()
 			{

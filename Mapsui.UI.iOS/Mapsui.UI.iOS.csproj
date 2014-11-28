@@ -40,7 +40,6 @@
   <ItemGroup>
     <Reference Include="OpenTK-1.0" />
     <Reference Include="System" />
-    <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="monotouch" />
   </ItemGroup>

@@ -115,6 +115,8 @@ namespace Mapsui.UI.iOS
 
 		private void PinchGesture(UIPinchGestureRecognizer recognizer)
 		{
+		    if (_map.Lock) return;
+
 			if (recognizer.NumberOfTouches < 2)
 				return;
 
@@ -264,11 +266,6 @@ namespace Mapsui.UI.iOS
 		{
 			ContextRenderingApi = EAGLRenderingAPI.OpenGLES1;
 				base.CreateFrameBuffer();
-		}
-
-		protected override void DestroyFrameBuffer()
-		{
-			base.DestroyFrameBuffer();
 		}
 
 		protected override void OnRenderFrame(FrameEventArgs e)

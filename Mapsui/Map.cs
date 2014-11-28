@@ -34,6 +34,7 @@ namespace Mapsui
     {
         private LayerCollection _layers = new LayerCollection();
         private NotifyingViewport _viewport;
+        private bool _lock;
 
         /// <summary>
         /// Initializes a new map
@@ -43,6 +44,17 @@ namespace Mapsui
             BackColor = Color.White;
             Layers = new LayerCollection();
             Viewport =  new NotifyingViewport { Center = { X = double.NaN, Y = double.NaN }, Resolution = double.NaN };
+        }
+
+        public bool Lock
+        {
+            get { return _lock; }
+            set
+            {
+                if (_lock == value) return;
+                _lock = value;
+                OnPropertyChanged("Lock");
+            }
         }
 
         public string CRS { get; set; }
@@ -154,10 +166,10 @@ namespace Mapsui
             OnPropertyChanged(sender, e.PropertyName);
         }
 
-        protected void OnPropertyChanged(object sender, string name)
+        protected virtual void OnPropertyChanged(object sender, string propertyName)
         {
             var handler = PropertyChanged;
-            if (handler != null) handler(sender, new PropertyChangedEventArgs(name));
+            if (handler != null) handler(sender, new PropertyChangedEventArgs(propertyName));
         }
 
         protected void OnPropertyChanged(string name)

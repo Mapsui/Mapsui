@@ -18,22 +18,24 @@ namespace Mapsui
         {
             set { _viewport.RenderResolutionMultiplier = value; }
         }
-        
+
         public Point Center
         {
             get { return _viewport.Center;  }
-            set { 
+            set {
+                if (Equals(_viewport.Center, value)) return; 
                 _viewport.Center = value;
-                RaisePropertyChanged("Center");
+                OnPropertyChanged("Center");
             }
         }
 
         public double Width
         {
             get { return _viewport.Width; }
-            set { 
+            set {
+                if (_viewport.Width == value) return; 
                 _viewport.Width = value;
-                RaisePropertyChanged("Width");
+                OnPropertyChanged("Width");
             }
         }
 
@@ -42,8 +44,9 @@ namespace Mapsui
             get { return _viewport.Height; }
             set
             {
+                if (_viewport.Height == value) return; 
                 _viewport.Height = value;
-                RaisePropertyChanged("Height");
+                OnPropertyChanged("Height");
             }
         }
 
@@ -52,9 +55,10 @@ namespace Mapsui
             get { return _viewport.Rotation; }
             set
             {
+                if (_viewport.Rotation == value) return; 
                 _viewport.Rotation = value;
-                RaisePropertyChanged("Rotation");
-                RaisePropertyChanged("IsRotated");
+                OnPropertyChanged("Rotation");
+                OnPropertyChanged("IsRotated");
             }
         }
 
@@ -68,8 +72,9 @@ namespace Mapsui
             get { return _viewport.Resolution; }
             set
             {
+                if (_viewport.Resolution == value) return; 
                 _viewport.Resolution = value;
-                RaisePropertyChanged("Resolution");
+                OnPropertyChanged("Resolution");
             }
         }
 
@@ -118,9 +123,10 @@ namespace Mapsui
             _viewport.Transform(screenX, screenY, previousScreenX, previousScreenY, deltaScale);
         }
 
-        private void RaisePropertyChanged(string property)
+        protected virtual void OnPropertyChanged(string propertyName)
         {
-            if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs(property));
+            var handler = PropertyChanged;
+            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

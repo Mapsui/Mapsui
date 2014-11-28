@@ -17,7 +17,6 @@ namespace Mapsui.UI.Android
 {
     public class MapControl : AndroidGameView
     {
-        Context _context;
         private const int None = 0;
         private const int Drag = 1;
         private const int Zoom = 2;
@@ -44,8 +43,6 @@ namespace Mapsui.UI.Android
 
         private void Initialize()
         {
-            _context = Context;
-
             Map = new Map();
             _renderer = new MapRenderer();
             InitializeViewport();
@@ -88,10 +85,13 @@ namespace Mapsui.UI.Android
             _refreshGraphics = true;
         }
 
-        void MapControl_Touch(object sender, View.TouchEventArgs args)
+        void MapControl_Touch(object sender, TouchEventArgs args)
         {
+            if (_map.Lock) return;
+
             var x = (int)args.Event.RawX;
             var y = (int)args.Event.RawY;
+
             switch (args.Event.Action)
             {
                 case MotionEventActions.Down:
