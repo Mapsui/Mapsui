@@ -33,24 +33,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BruTile, Version=0.10.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\BruTile.0.10.1\lib\net40\BruTile.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="BruTile.Desktop, Version=0.10.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\BruTile.Desktop.0.10.1\lib\net40\BruTile.Desktop.dll</HintPath>
-    </Reference>
-    <Reference Include="BruTile.MbTiles, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\BruTile.Desktop.0.10.1\lib\net40\BruTile.MbTiles.dll</HintPath>
-    </Reference>
-    <Reference Include="BruTile.Serialization, Version=0.10.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\BruTile.Desktop.0.10.1\lib\net40\BruTile.Serialization.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.SQLite, Version=1.0.86.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
@@ -67,6 +49,18 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="BruTile">
+      <HintPath>..\..\packages\BruTile.0.10.1\lib\net40\BruTile.dll</HintPath>
+    </Reference>
+    <Reference Include="BruTile.Desktop">
+      <HintPath>..\..\packages\BruTile.Desktop.0.10.1\lib\net40\BruTile.Desktop.dll</HintPath>
+    </Reference>
+    <Reference Include="BruTile.MbTiles">
+      <HintPath>..\..\packages\BruTile.Desktop.0.10.1\lib\net40\BruTile.MbTiles.dll</HintPath>
+    </Reference>
+    <Reference Include="BruTile.Serialization">
+      <HintPath>..\..\packages\BruTile.Desktop.0.10.1\lib\net40\BruTile.Serialization.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArcGISImageServiceSample.cs" />
@@ -151,11 +145,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Mapsui.Desktop\Mapsui.Desktop.csproj">
-      <Project>{8bd54487-8db9-431a-9596-2dfd744887a1}</Project>
+      <Project>{8BD54487-8DB9-431A-9596-2DFD744887A1}</Project>
       <Name>Mapsui.Desktop</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Mapsui\Mapsui.csproj">
-      <Project>{d74c052a-c07e-4b37-a898-134218aca5c9}</Project>
+      <Project>{D74C052A-C07E-4B37-A898-134218ACA5C9}</Project>
       <Name>Mapsui</Name>
     </ProjectReference>
   </ItemGroup>
