@@ -26,9 +26,7 @@ namespace Mapsui.UI.iOS
 		private MapRenderer _renderer;
 		private Map _map;
 		private bool _refreshGraphics;
-
 		private bool _viewportInitialized;
-
 		private float Width { get { return Frame.Width; } }
 		private float Height { get { return Frame.Height; } }
         
@@ -74,7 +72,6 @@ namespace Mapsui.UI.iOS
 
 			var pinchGesture = new UIPinchGestureRecognizer(PinchGesture) { Enabled = true };
 			AddGestureRecognizer(pinchGesture);
-
 		}
 
 		public void StartRendering()
@@ -279,9 +276,6 @@ namespace Mapsui.UI.iOS
 				InitializeViewport();
 			if (!_viewportInitialized)
 				return;
-
-			Map.Viewport.Width = Width;
-			Map.Viewport.Height = Height;
 
 			Set2DViewport();
 

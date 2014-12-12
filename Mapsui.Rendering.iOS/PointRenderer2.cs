@@ -18,20 +18,22 @@ namespace Mapsui.Rendering.iOS
         public static void RenderPoint(CALayer target, Point point, IStyle style, IViewport viewport, IFeature feature)
         {
             CALayer symbol;
-            double rotation = 0;
+			float rotation = 0;
+			float scale = 1;
 
             if (style is SymbolStyle)
             {
                 var symbolStyle = style as SymbolStyle;
-                rotation = symbolStyle.SymbolRotation;
+				rotation = (float)symbolStyle.SymbolRotation;
+				scale = (float)symbolStyle.SymbolScale;
 
-                if (symbolStyle.Symbol == null || symbolStyle.Symbol.Data == null)
+				if (symbolStyle.BitmapId < 0)
                 {
                     symbol = CreateSymbolFromVectorStyle(symbolStyle);
                 }
                 else
                 {
-                    symbol = CreateSymbolFromBitmap(symbolStyle, symbolStyle);
+                    symbol = CreateSymbolFromBitmap(symbolStyle);
                 }
 
                 if (symbolStyle.Outline != null)
@@ -51,7 +53,7 @@ namespace Mapsui.Rendering.iOS
                 symbol = CreateSymbolFromVectorStyle(new VectorStyle());
             }
 
-            symbol.AffineTransform = CreateAffineTransform((float)rotation, viewport.WorldToScreen(point));
+			symbol.AffineTransform = CreateAffineTransform(rotation, viewport.WorldToScreen(point), scale);
             target.AddSublayer(symbol);
         }
 
@@ -83,23 +85,24 @@ namespace Mapsui.Rendering.iOS
             return symbol;
         }
 
-        private static CALayer CreateSymbolFromBitmap(SymbolStyle style, SymbolStyle symbolStyle)
+        private static CALayer CreateSymbolFromBitmap(SymbolStyle style)
         {
             var symbol = new CALayer();
-            var image = ToUIImage(style.Symbol.Data);
+			var image = ToUIImage(BitmapRegistry.Instance.Get(style.BitmapId));
 
             symbol.Contents = image.CGImage;
             symbol.Frame = new RectangleF(-image.Size.Width * 0.5f, -image.Size.Height * 0.5f, image.Size.Width, image.Size.Height);
 
-            symbol.Opacity = (float)symbolStyle.Opacity;
+            symbol.Opacity = (float)style.Opacity;
 
             return symbol;
         }
 
-        private static CGAffineTransform CreateAffineTransform(double rotation, Point position)
+        private static CGAffineTransform CreateAffineTransform(double rotation, Point position, float scale)
         {
             var transformTranslate = CGAffineTransform.MakeTranslation((float)position.X, (float)position.Y);
             var transformRotate = CGAffineTransform.MakeRotation((float)(rotation * RadiansPerDegree));
+			var transformScale = CGAffineTransform.MakeScale (scale, scale);
             var transform = transformRotate * transformTranslate;
             return transform;
         }
