@@ -26,13 +26,12 @@ namespace Mapsui.Rendering.OpenTK
             float[] points = ToOpenTK(lineString);
             WorldToScreen(viewport, points);
 
+            GL.LineWidth(lineWidth);
             GL.Color4((byte)lineColor.R, (byte)lineColor.G, (byte)lineColor.B, (byte)lineColor.A);
             GL.EnableClientState(All.VertexArray);
-            GL.LineWidth(lineWidth);
             GL.VertexPointer(2, All.Float, 0, points);
             GL.DrawArrays(All.Lines, 0, points.Length / 2);
             GL.DisableClientState(All.VertexArray);
-            GL.Enable(All.LineSmooth);
         }
 
         private static float[] ToOpenTK(IList<Point> vertices)
