@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using Mapsui.Geometries;
 using Mapsui.Providers;
 using Mapsui.Styles;
-using System;
-using System.Diagnostics;
 
 namespace Mapsui.Rendering.OpenTK
 {

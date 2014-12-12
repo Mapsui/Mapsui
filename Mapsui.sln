@@ -4990,7 +4990,7 @@ Global
 		{55810379-AFDF-416D-8593-E2D8F9D8727A} = {F7130D3D-4E62-4EB3-B74C-1E819E017048}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = Samples\Mapsui.Samples.Android\Mapsui.Samples.Android.csproj
+		StartupItem = Tests\Mapsui.Rendering.OpenTK.Tests\Mapsui.Rendering.OpenTK.Tests.csproj
 		Policies = $0
 		$0.DotNetNamingPolicy = $1
 		$1.DirectoryNamespaceAssociation = None
