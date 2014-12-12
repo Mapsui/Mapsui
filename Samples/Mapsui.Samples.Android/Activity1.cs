@@ -1,7 +1,7 @@
 ﻿using Android.App;
 using Android.Content.PM;
 using Android.OS;
-using BruTile.Web;
+using BruTile.Predefined;
 using Mapsui.Layers;
 using Mapsui.Samples.Common;
 using Mapsui.Styles;
@@ -16,17 +16,18 @@ namespace Mapsui.Samples.Android
         {
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Main);
-            var mapView = FindViewById<MapControl>(Resource.Id.mapview);
-            mapView.Map.Layers.Add(new TileLayer(new OsmTileSource()) { LayerName = "OSM" });
+            var mapControl = FindViewById<MapControl>(Resource.Id.mapcontrol);
+            mapControl.Map.Layers.Add(new TileLayer(KnownTileSources.Create()) { LayerName = "OSM" });
             var lineStringLayer = LineStringSample.CreateLineStringLayer();
             lineStringLayer.Style = CreateLineStringStyle();
 
-            mapView.Map.Layers.Add(lineStringLayer);
-            var pointLayer = PointLayerSample.CreateRandomPointLayer(mapView.Map.Envelope);
+            mapControl.Map.Layers.Add(lineStringLayer);
+            var pointLayer = PointLayerSample.CreateRandomPointLayer(mapControl.Map.Envelope);
             pointLayer.Style = CreatePointLayerStyle();
-            mapView.Map.Layers.Add(pointLayer);
+            mapControl.Map.Layers.Add(pointLayer);
 
-            mapView.Map.Layers.Add(PointLayerSample.CreateBitmapPointLayer());
+            mapControl.Map.Layers.Add(PointLayerSample.CreateBitmapPointLayer());
+            mapControl.Map.Viewport.RenderResolutionMultiplier = 2;
         }
 
         private static IStyle CreatePointLayerStyle()
@@ -35,7 +36,7 @@ namespace Mapsui.Samples.Android
             {
                 SymbolScale = 1,
                 Fill = new Brush(Color.Cyan),
-                Outline = { Color = Color.White, Width = 8 },
+                Outline = { Color = Color.White, Width = 4 },
                 Line = null
             };
         }

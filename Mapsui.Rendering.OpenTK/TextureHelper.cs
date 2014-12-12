@@ -35,7 +35,8 @@ namespace Mapsui.Rendering.OpenTK
             float offsetX = 0, float offsetY = 0,
             LabelStyle.HorizontalAlignmentEnum horizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center,
             LabelStyle.VerticalAlignmentEnum verticalAlignment = LabelStyle.VerticalAlignmentEnum.Center,
-            float opacity = 1f)
+            float opacity = 1f,
+            float scale = 1f)
         {
             GL.Enable(All.Texture2D);
             GL.BindTexture(All.Texture2D, textureInfo.TextureId);
@@ -43,6 +44,7 @@ namespace Mapsui.Rendering.OpenTK
             GL.PushMatrix();
             GL.Translate(x, y, 0f);
             GL.Rotate(orientation, 0, 0, 1);
+            GL.Scale (scale, scale, 1);
 
             x = offsetX + DetermineHorizontalAlignmentCorrection(horizontalAlignment, textureInfo.Width);
             y = -offsetY + DetermineVerticalAlignmentCorrection(verticalAlignment, textureInfo.Height);

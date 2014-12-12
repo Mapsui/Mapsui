@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿
+using System.Linq;
 using Mapsui.Tests.Common;
 using OpenTK;
 using OpenTK.Input;
@@ -74,10 +75,7 @@ namespace Mapsui.Rendering.OpenTK.Tests
         {
             GL.MatrixMode(MatrixMode.Projection);
             GL.LoadIdentity();
-           
-            GL.Ortho(0, _viewportWidth, _viewportHeight, 0, 0, 1);
-            // pixel correction: GL.Translate(0.375, 0.375, 0);
-
+            GL.Ortho(0, _viewportWidth * 0.25, _viewportHeight * 0.25, 0, 0, 1);
             GL.MatrixMode(MatrixMode.Modelview);
         }
 

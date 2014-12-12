@@ -52,7 +52,7 @@ namespace Mapsui.Rendering.OpenTK
             TextureHelper.RenderTexture(textureInfo, (float)destination.X, (float)destination.Y, 
                 (float)symbolStyle.SymbolRotation, 
                 (float)symbolStyle.SymbolOffset.X, (float)symbolStyle.SymbolOffset.Y, 
-                opacity:(float)symbolStyle.Opacity);
+                opacity:(float)symbolStyle.Opacity, scale:(float)symbolStyle.SymbolScale);
         }
     }
 }
