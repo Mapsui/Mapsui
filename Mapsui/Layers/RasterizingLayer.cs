@@ -25,6 +25,7 @@ namespace Mapsui.Layers
         public RasterizingLayer(ILayer layer, int delayBeforeRasterize = 500, double renderResolutionMultiplier = 1, IRenderer rasterizer = null)
         {
             _layer = layer;
+            LayerName = layer.LayerName;
             _delayBeforeRaterize = delayBeforeRasterize;
             _renderResolutionMultiplier = renderResolutionMultiplier;
             _rasterizer = rasterizer;
