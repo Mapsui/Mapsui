@@ -15,7 +15,9 @@
 // along with Mapsui; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
+using System;
 using System.Collections.Generic;
+using Mapsui.Styles;
 
 namespace Mapsui.Utilities
 {
@@ -64,41 +66,61 @@ namespace Mapsui.Utilities
             return resolutions[0];
         }
 
-        public static void ZoomToBoudingbox(double xMin, double yMin, double xMax, double yMax, double screenWidth, out double x, out double y, out double resolution)
+        public static double DetermineResolution(double worldWidth, double worldHeight, double screenWidth, double screenHeight, ScaleMethod scaleMethod = ScaleMethod.Fit)
         {
-            if (xMin > xMax)//User dragged from right to left
+            double widthResolution = worldWidth / screenWidth;
+            double heightResolution = worldHeight/screenHeight;
+            switch (scaleMethod)
             {
-                double tempX = xMin;
-                double tempY = yMin;
-                xMin = xMax;
-                yMin = yMax;
-                xMax = tempX;
-                yMax = tempY;
+                case ScaleMethod.FitHeight:
+                    return heightResolution;
+                case ScaleMethod.FitWidth:
+                    return widthResolution;
+                case ScaleMethod.Fill:
+                    return Math.Max(widthResolution, heightResolution);
+                case ScaleMethod.Fit:
+                    return Math.Min(widthResolution, heightResolution);
+                default:
+                    throw new Exception("ScaleMethod not supported");
             }
-
-            x = (xMax + xMin) / 2;
-            y = (yMax + yMin) / 2;
-            resolution = (xMax - xMin) / screenWidth;
         }
 
-        public static void ZoomToBoudingbox(Viewport viewport, double xMin, double yMin, double xMax, double yMax, double screenWidth)
+        public static void ZoomToBoudingbox(double x1, double y1, double x2, double y2, double screenWidth, out double x, out double y, out double resolution)
         {
-            if (xMin > xMax)//User dragged from right to left
-            {
-                double tempX = xMin;
-                double tempY = yMin;
-                xMin = xMax;
-                yMin = yMax;
-                xMax = tempX;
-                yMax = tempY;
-            }
+            if (x1 > x2) Swap(ref x1, ref x2);
+            if (y1 > y2) Swap(ref y1, ref y2);
 
-            var x = (xMax + xMin) / 2;
-            var y = (yMax + yMin) / 2;
-            var resolution = (xMax - xMin) / screenWidth;
+            x = (x2 + x1) / 2;
+            y = (y2 + y1) / 2;
+            resolution = (x2 - x1) / screenWidth;
+        }
+
+        public static void ZoomToBoudingbox(Viewport viewport, double x1, double y1, double x2, double y2, double screenWidth)
+        {
+            if (x1 > x2) Swap(ref x1, ref x2);
+            if (y1 > y2) Swap(ref y1, ref y2);
+
+            var x = (x2 + x1) / 2;
+            var y = (y2 + y1) / 2;
+            var resolution = (x2 - x1) / screenWidth;
             viewport.Center.X = x;
             viewport.Center.Y = y;
             viewport.Resolution = resolution;
         }
+
+        private static void Swap(ref double xMin, ref double xMax)
+        {
+            var tempX = xMin;
+            xMin = xMax;
+            xMax = tempX;
+        }
+    }
+
+    public enum ScaleMethod
+    {
+        FitWidth,
+        FitHeight,
+        Fill,
+        Fit
     }
 }
