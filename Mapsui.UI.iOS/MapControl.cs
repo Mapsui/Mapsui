@@ -197,22 +197,30 @@ namespace Mapsui.UI.iOS
 				{
 					var temp = _map;
 					_map = null;
+				    temp.DataChanged -= MapDataChanged;
 					temp.PropertyChanged -= MapPropertyChanged;
+                    temp.RefreshGraphics -= MapRefreshGraphics;
 					temp.Dispose();
 				}
 
 				_map = value;
-				//all changes of all layers are returned through this event handler on the map
+				
 				if (_map != null)
 				{
 					_map.DataChanged += MapDataChanged;
 					_map.PropertyChanged += MapPropertyChanged;
-					_map.Viewport.PropertyChanged += ViewportOnPropertyChanged; // not sure if this should be a direct coupling 
+					_map.RefreshGraphics += MapRefreshGraphics;
 					_map.ViewChanged(true);
 				}
-				RefreshGraphics();
+
+                RefreshGraphics();
 			}
 		}
+
+        void MapRefreshGraphics(object sender, EventArgs e)
+        {
+            RefreshGraphics();
+        }
 
 		private void MapPropertyChanged(object sender, PropertyChangedEventArgs e)
 		{

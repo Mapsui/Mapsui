@@ -82,21 +82,30 @@ namespace Mapsui.UI.Xaml
                 {
                     var temp = _map;
                     _map = null;
+                    temp.DataChanged -= MapDataChanged;
                     temp.PropertyChanged -= MapPropertyChanged;
+                    temp.RefreshGraphics -= MapRefreshGraphics;
                     temp.Dispose();
                 }
 
                 _map = value;
-                //all changes of all layers are returned through this event handler on the map
+                
                 if (_map != null)
                 {
-                    _map.DataChanged += MapDataChanged;
+                    _map.DataChanged += MapDataChanged; 
                     _map.PropertyChanged += MapPropertyChanged;
-                    if (!double.IsNaN(Map.Viewport.RenderResolution)) _map.ViewChanged(true);
+                    _map.RefreshGraphics += MapRefreshGraphics;
+                    _map.ViewChanged(true);
                 }
+
                 OnViewChanged();
                 RefreshGraphics();
             }
+        }
+
+        private void MapRefreshGraphics(object sender, EventArgs eventArgs)
+        {
+            RefreshGraphics();
         }
 
         void MapPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -104,7 +113,15 @@ namespace Mapsui.UI.Xaml
             if (!Dispatcher.CheckAccess()) Dispatcher.BeginInvoke(new Action(() => MapPropertyChanged(sender, e)));
             else
             {
-                if (e.PropertyName == "Envelope")
+                if (e.PropertyName == "Enabled")
+                {
+                    RefreshGraphics();
+                }
+                else if (e.PropertyName == "Opacity")
+                {
+                    RefreshGraphics();
+                }
+                else if (e.PropertyName == "Envelope")
                 {
                     InitializeViewport();
                     _map.ViewChanged(true);
@@ -189,21 +206,14 @@ namespace Mapsui.UI.Xaml
             RenderCanvas.ManipulationCompleted += OnManipulationCompleted;
 #endif
         }
-
-
-        public void OnViewChanged()
-        {
-            OnViewChanged(false);
-        }
-
-        private void OnViewChanged(bool userAction)
+        
+        public virtual void OnViewChanged(bool userAction = false)
         {
             if (_map == null) return;
 
-            if (ViewChanged != null)
-            {
-                ViewChanged(this, new ViewChangedEventArgs { Viewport = Map.Viewport, UserAction = userAction });
-            }
+            var handler = ViewChanged;
+            if (handler != null)  ViewChanged(this, new ViewChangedEventArgs { Viewport = Map.Viewport, UserAction = userAction });
+           
         }
 
         public void Refresh()

@@ -1,19 +1,18 @@
+using System;
+using System.ComponentModel;
+using Android.App;
 using Android.Content;
 using Android.Graphics;
-using Android.Locations;
 using Android.Runtime;
 using Android.Util;
 using Android.Views;
+using Java.Lang;
 using Mapsui.Fetcher;
 using Mapsui.Rendering.OpenTK;
 using OpenTK;
 using OpenTK.Graphics.ES11;
 using OpenTK.Platform.Android;
-using System;
-using System.ComponentModel;
 using Math = System.Math;
-using Android.App;
-using Java.Lang;
 
 namespace Mapsui.UI.Android
 {
@@ -78,11 +77,6 @@ namespace Mapsui.UI.Android
             _viewportInitialized = true;
             OnViewportInitialized();
             _map.ViewChanged(true);
-        }
-
-        private void ViewportOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
-        {
-            // Do nothing. For performance it is better to have more specific control
         }
 
         void MapControl_Touch(object sender, TouchEventArgs args)
@@ -188,21 +182,29 @@ namespace Mapsui.UI.Android
                 {
                     var temp = _map;
                     _map = null;
+                    temp.DataChanged -= MapDataChanged;
                     temp.PropertyChanged -= MapPropertyChanged;
+                    temp.RefreshGraphics -= MapRefreshGraphics;
                     temp.Dispose();
                 }
 
                 _map = value;
-                //all changes of all layers are returned through this event handler on the map
+
                 if (_map != null)
                 {
                     _map.DataChanged += MapDataChanged;
                     _map.PropertyChanged += MapPropertyChanged;
-                    _map.Viewport.PropertyChanged += ViewportOnPropertyChanged; // not sure if this should be a direct coupling 
+                    _map.RefreshGraphics += MapRefreshGraphics;
                     _map.ViewChanged(true);
                 }
+
                 RefreshGraphics();
             }
+        }
+
+        void MapRefreshGraphics(object sender, EventArgs e)
+        {
+            ((Activity)Context).RunOnUiThread(new Runnable(RefreshGraphics));
         }
 
         private void RefreshGraphics()
@@ -234,7 +236,7 @@ namespace Mapsui.UI.Android
             }
             else // no problems
             {
-                ((Activity)Context).RunOnUiThread(new Runnable(() =>RefreshGraphics()));
+                ((Activity)Context).RunOnUiThread(new Runnable(RefreshGraphics));
             }
         }
 

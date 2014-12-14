@@ -48,12 +48,6 @@ namespace Mapsui.UI.iOS
             Initialize();
         }
 
-        private void ViewportOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
-        {
-            //System.Diagnostics.Debug.WriteLine ("ViewportOnPropertyChanged");
-            RefreshGraphics();
-        }
-
         public void Initialize()
         {
             Map = new Map();
@@ -192,21 +186,29 @@ namespace Mapsui.UI.iOS
                 {
                     var temp = _map;
                     _map = null;
+                    temp.DataChanged -= MapDataChanged;
                     temp.PropertyChanged -= MapPropertyChanged;
+                    temp.RefreshGraphics -= MapRefreshGraphics;
                     temp.Dispose();
                 }
 
                 _map = value;
-                //all changes of all layers are returned through this event handler on the map
+                
                 if (_map != null)
                 {
                     _map.DataChanged += MapDataChanged;
                     _map.PropertyChanged += MapPropertyChanged;
-                    _map.Viewport.PropertyChanged += ViewportOnPropertyChanged; // not sure if this should be a direct coupling 
+                    _map.RefreshGraphics += MapRefreshGraphics;
                     _map.ViewChanged(true);
                 }
+
                 RefreshGraphics();
             }
+        }
+
+        private void MapRefreshGraphics(object sender, EventArgs eventArgs)
+        {
+            RefreshGraphics();
         }
 
         private void MapPropertyChanged(object sender, PropertyChangedEventArgs e)
