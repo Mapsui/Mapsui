@@ -16,7 +16,7 @@ namespace Mapsui.Layers
         private string _crs;
         private bool _enabled;
         private bool _exclusive;
-        private string _layerName;
+        private string _name;
         private double _maxVisible;
         private double _minVisible;
         private double _opacity;
@@ -26,7 +26,7 @@ namespace Mapsui.Layers
 
         protected BaseLayer()
         {
-            LayerName = "Layer";
+            Name = "Layer";
             Style = new VectorStyle();
             Enabled = true;
             MinVisible = 0;
@@ -35,10 +35,10 @@ namespace Mapsui.Layers
             Id = _instanceCounter++;
         }
 
-        protected BaseLayer(string layerName)
+        protected BaseLayer(string name)
             : this()
         {
-            LayerName = layerName;
+            Name = name;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -101,13 +101,13 @@ namespace Mapsui.Layers
         /// <summary>
         /// Gets or sets the name of the layer
         /// </summary>
-        public string LayerName
+        public string Name
         {
-            get { return _layerName; }
+            get { return _name; }
             set
             {
-                _layerName = value;
-                OnPropertyChanged("LayerName");
+                _name = value;
+                OnPropertyChanged("Name");
             }
         }
 
@@ -202,7 +202,7 @@ namespace Mapsui.Layers
 
         public override string ToString()
         {
-            return LayerName;
+            return Name;
         }
 
         protected void OnPropertyChanged(string name)

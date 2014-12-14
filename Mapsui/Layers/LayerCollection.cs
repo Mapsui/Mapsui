@@ -105,7 +105,7 @@ namespace Mapsui
 
         public IEnumerable<ILayer> FindLayer(string layername)
         {
-            return _layers.Where(layer => layer.LayerName.Contains(layername));
+            return _layers.Where(layer => layer.Name.Contains(layername));
         }
     }
 }

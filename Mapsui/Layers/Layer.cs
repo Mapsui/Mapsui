@@ -132,7 +132,7 @@ namespace Mapsui.Layers
             try
             {
                 Cache = Transform(features);
-                OnDataChanged(new DataChangedEventArgs(null, false, null, LayerName));
+                OnDataChanged(new DataChangedEventArgs(null, false, null, Name));
 
                 IsFetching = false;
                 if (NeedsUpdate) StartNewFetch(NewExtent, NewResolution);

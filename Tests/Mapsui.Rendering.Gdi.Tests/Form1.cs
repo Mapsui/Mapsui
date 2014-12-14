@@ -18,7 +18,7 @@ namespace Mapsui.Rendering.Gdi.Tests
             {
                 _map = ArrangeRenderingTests.Samples[_currentSampleIndex]();
                 Text = string.Format("OpenTK Rendering samples -[{0}] press ENTER for next sample",
-                    _map.Layers.First().LayerName);
+                    _map.Layers.First().Name);
             };
         }
 
@@ -39,7 +39,7 @@ namespace Mapsui.Rendering.Gdi.Tests
                 _currentSampleIndex++;
                 if (_currentSampleIndex == ArrangeRenderingTests.Samples.Count) _currentSampleIndex = 0;
                 _map = ArrangeRenderingTests.Samples[_currentSampleIndex]();
-                Text = string.Format("OpenTK Rendering samples -[{0}] press ENTER for next sample", _map.Layers.First().LayerName);             
+                Text = string.Format("OpenTK Rendering samples -[{0}] press ENTER for next sample", _map.Layers.First().Name);             
                 Invalidate();
             }
         }

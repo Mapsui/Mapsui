@@ -34,7 +34,7 @@ namespace Mapsui.Tests.Common
                 Style = null,
                 DataSource = Utilities.CreateProviderWithPointsWithVectorStyle()
                 ,
-                LayerName = "Points with VectorStyle"
+                Name = "Points with VectorStyle"
             });
             return map;
         }
@@ -46,7 +46,7 @@ namespace Mapsui.Tests.Common
             {
                 Style = null,
                 DataSource = Utilities.CreateProviderWithPointsWithSymbolStyles(),
-                LayerName = "Points with bitmaps"
+                Name = "Points with bitmaps"
             };
             map.Layers.Add(layer);
             return map;
@@ -58,7 +58,7 @@ namespace Mapsui.Tests.Common
             var layer = new MemoryLayer
             {
                 DataSource = Utilities.CreateProviderWithRotatedBitmapSymbols(), 
-                LayerName = "Points with rotated bitmaps",
+                Name = "Points with rotated bitmaps",
                 Style = null
             };
             map.Layers.Add(layer);
@@ -76,7 +76,7 @@ namespace Mapsui.Tests.Common
             var layer = new MemoryLayer
             {
                 DataSource = new MemoryProvider(features),
-                LayerName = "Points with different symbol types"
+                Name = "Points with different symbol types"
             };
             map.Layers.Add(layer);
             return map;
@@ -90,7 +90,7 @@ namespace Mapsui.Tests.Common
                 Utilities.CreateSimplePointFeature(-20, 0, new SymbolStyle {UnitType = UnitType.Pixel}),
                 Utilities.CreateSimplePointFeature(20, 0, new SymbolStyle {UnitType = UnitType.WorldUnit})
             };
-            var layer = new MemoryLayer { DataSource = new MemoryProvider(features), LayerName = "Points in world units"};
+            var layer = new MemoryLayer { DataSource = new MemoryProvider(features), Name = "Points in world units"};
             map.Layers.Add(layer);
             return map;
         }
@@ -111,7 +111,7 @@ namespace Mapsui.Tests.Common
             var layer = new MemoryLayer
             {
                 DataSource = Utilities.CreatePolygonProvider(), 
-                LayerName = "Polygon"
+                Name = "Polygon"
             };
             map.Layers.Add(layer);
             return map;
@@ -134,7 +134,7 @@ namespace Mapsui.Tests.Common
             {
                 Style = null, 
                 DataSource = Utilities.CreateLineProvider(), 
-                LayerName = "Line"
+                Name = "Line"
             };
 
             map.Layers.Add(layer);
@@ -163,7 +163,7 @@ namespace Mapsui.Tests.Common
             };
 
             var features = TileIndexToFeatures(tileIndexes, new SampleTileSource());
-            map.Layers.Add(new MemoryLayer { DataSource = new MemoryProvider(features), LayerName = "Tiles"});
+            map.Layers.Add(new MemoryLayer { DataSource = new MemoryProvider(features), Name = "Tiles"});
             return map;
         }
 
@@ -198,7 +198,7 @@ namespace Mapsui.Tests.Common
             {
                 Style = null,
                 DataSource = CreateProviderWithLabels(),
-                LayerName = "Labels"
+                Name = "Labels"
             });
             return map;
         }

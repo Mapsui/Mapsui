@@ -536,7 +536,7 @@ namespace Mapsui.UI.Xaml
 
                 if (feature != null)
                 {
-                    return new MouseInfoEventArgs { LayerName = layer.LayerName, Feature = feature };
+                    return new MouseInfoEventArgs { LayerName = layer.Name, Feature = feature };
                 }
             }
             return null;

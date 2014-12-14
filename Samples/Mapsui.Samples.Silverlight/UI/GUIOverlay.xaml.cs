@@ -52,7 +52,7 @@ namespace Mapsui.Samples.Silverlight.UI
             var bitmapData = System.Reflection.Assembly.GetExecutingAssembly()
                 .GetManifestResourceStream("Mapsui.Samples.Silverlight.UI.Images.btnBbox.png");
 
-            var osmLayer = new TileLayer(KnownTileSources.Create()) {LayerName = "OSM"};
+            var osmLayer = new TileLayer(KnownTileSources.Create()) {Name = "OSM"};
             var provider = CreateRandomPointsProvider(osmLayer.Envelope);
             
             var map = new Map();
@@ -91,7 +91,7 @@ namespace Mapsui.Samples.Silverlight.UI
                         var checkBox = new CheckBox
                             {
                                 Name = random.Next().ToString(CultureInfo.InvariantCulture),
-                                Content = subLayer.LayerName,
+                                Content = subLayer.Name,
                                 Tag = subLayer,
                                 Margin = new Thickness(4),
                                 FontSize = 12,

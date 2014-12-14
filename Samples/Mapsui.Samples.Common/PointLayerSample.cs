@@ -167,7 +167,7 @@ namespace Mapsui.Samples.Common
             return new Layer
             {
                 DataSource = new MemoryProvider(new Point(4.643331, 52.433489)) { CRS = "EPSG:4326" },
-                LayerName = "WGS84 Point"
+                Name = "WGS84 Point"
             };
         }
 
@@ -196,7 +196,7 @@ namespace Mapsui.Samples.Common
             featureWithColors.Styles.Add(StyleSamples.CreateColoredLabelStyle());
             memoryProvider.Features.Add(featureWithColors);
 
-            return new MemoryLayer { LayerName = "PointLayerWithLabels", DataSource = memoryProvider };
+            return new MemoryLayer { Name = "PointLayerWithLabels", DataSource = memoryProvider };
         }
     }
 }

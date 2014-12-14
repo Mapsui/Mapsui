@@ -31,7 +31,7 @@ namespace Mapsui.Samples.Common.Desktop
         {
             return new Layer
             {
-                LayerName = "Countries",
+                Name = "Countries",
                 DataSource = countrySource,
                 Style = CreateCountryTheme()
             };
@@ -41,7 +41,7 @@ namespace Mapsui.Samples.Common.Desktop
         {
             return new Layer
             {
-                LayerName = "Cities",
+                Name = "Cities",
                 DataSource = citySource,
                 Style = CreateCityTheme()
             };

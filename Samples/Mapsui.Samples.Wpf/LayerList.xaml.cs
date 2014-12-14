@@ -19,7 +19,7 @@ namespace Mapsui.Samples.Wpf
 
             foreach (var layer in layers)
             {
-                var item = new LayerListItem {LayerName = layer.LayerName};
+                var item = new LayerListItem {LayerName = layer.Name};
                 item.Enabled = layer.Enabled;
                 item.LayerOpacity = layer.Opacity;
                 item.Layer = layer;

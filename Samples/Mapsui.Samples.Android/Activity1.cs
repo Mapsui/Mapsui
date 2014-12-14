@@ -17,7 +17,7 @@ namespace Mapsui.Samples.Android
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Main);
             var mapControl = FindViewById<MapControl>(Resource.Id.mapcontrol);
-            mapControl.Map.Layers.Add(new TileLayer(KnownTileSources.Create()) { LayerName = "OSM" });
+            mapControl.Map.Layers.Add(new TileLayer(KnownTileSources.Create()) { Name = "OSM" });
             var lineStringLayer = LineStringSample.CreateLineStringLayer();
             lineStringLayer.Style = CreateLineStringStyle();
 

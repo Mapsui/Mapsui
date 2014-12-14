@@ -52,7 +52,7 @@ namespace XamarinRendering
 					var layerName = RenderFeaturesForLayer(viewport, layer);
 					if(layerName != null)
 						layerNames.Add (layerName);
-					//renderQueue.PutLayer (layer.LayerName, features);
+					//renderQueue.PutLayer (layer.Name, features);
 				}
 			}
 
@@ -75,24 +75,24 @@ namespace XamarinRendering
 				var renderedFeatures = SymbolRenderer.RenderStackedLabelLayer (viewport, layer as BasicLayer);
 
 				if (renderedFeatures != null && renderedFeatures.Count > 0){
-					renderQueue.PutLayer (layer.LayerName, renderedFeatures);
-					return layer.LayerName;
+					renderQueue.PutLayer (layer.Name, renderedFeatures);
+					return layer.Name;
 				}
 			}
 			else*/ if (layer is LabelLayer) {
 				var renderedFeatures = LabelRenderer.RenderStackedLabelLayer (viewport, layer as LabelLayer);
 
 				if (renderedFeatures != null && renderedFeatures.Count > 0){
-					renderQueue.PutLayer (layer.LayerName, renderedFeatures);
-					return layer.LayerName;
+					renderQueue.PutLayer (layer.Name, renderedFeatures);
+					return layer.Name;
 				}
 			} else {
 				var renderedFeatures = RenderVectorLayerFeatures (viewport, layer);// new List<CALayer> ();
 
 				if (renderedFeatures != null && renderedFeatures.Count > 0){
-					//renderQueue.PutLayer (layer.LayerName, renderedFeatures);
-					_featuresForLayer.Add(layer.LayerName, renderedFeatures);
-					return layer.LayerName;
+					//renderQueue.PutLayer (layer.Name, renderedFeatures);
+					_featuresForLayer.Add(layer.Name, renderedFeatures);
+					return layer.Name;
 				}
 			}
 
@@ -105,7 +105,7 @@ namespace XamarinRendering
 			{
 
 				var features = new List<IFeature>();
-				if(layer.LayerName.Equals("Open Street Map"))
+				if(layer.Name.Equals("Open Street Map"))
 				{
 					Console.WriteLine("");
 					features = layer.GetFeaturesInView(viewport.Extent, viewport.Resolution).ToList();
@@ -114,9 +114,9 @@ namespace XamarinRendering
 					features = layer.GetFeaturesInView(viewport.Extent, viewport.Resolution).ToList();
 				}
 
-				//Console.WriteLine("Layer " + layer.LayerName + " Features.Count = " + features.Count);
+				//Console.WriteLine("Layer " + layer.Name + " Features.Count = " + features.Count);
 
-				//if(layer.LayerName.Equals("Open Street Map") && features.Count > 0)
+				//if(layer.Name.Equals("Open Street Map") && features.Count > 0)
 					Console.WriteLine("");
 
 				if(layer.Style != null)
@@ -128,7 +128,7 @@ namespace XamarinRendering
 						if (layer.Style is IThemeStyle) style = (layer.Style as IThemeStyle).GetStyle(feature);
 						if ((style == null) || (style.Enabled == false) || (style.MinVisible > viewport.Resolution) || (style.MaxVisible < viewport.Resolution)) continue;
 
-						RenderFeature(viewport, style, feature, layer.LayerName);
+						RenderFeature(viewport, style, feature, layer.Name);
 					}
 				}
 
@@ -139,7 +139,7 @@ namespace XamarinRendering
 					{
 						if (feature.Styles != null && style.Enabled)
 						{
-							RenderFeature(viewport, style, feature, layer.LayerName);
+							RenderFeature(viewport, style, feature, layer.Name);
 						}
 					}
 				}

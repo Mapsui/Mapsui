@@ -274,8 +274,8 @@ namespace Mapsui.Web.Wms
         private static XmlNode GetWmsLayerNode(ILayer layer, XmlDocument doc)
         {
             XmlNode LayerNode = doc.CreateNode(XmlNodeType.Element, "Layer", wmsNamespaceURI);
-            LayerNode.AppendChild(CreateElement("Name", layer.LayerName, doc, false, wmsNamespaceURI));
-            LayerNode.AppendChild(CreateElement("Title", layer.LayerName, doc, false, wmsNamespaceURI));
+            LayerNode.AppendChild(CreateElement("Name", layer.Name, doc, false, wmsNamespaceURI));
+            LayerNode.AppendChild(CreateElement("Title", layer.Name, doc, false, wmsNamespaceURI));
             //If this is a grouplayer, add childlayers recursively
             if (layer.GetType() == typeof (LayerGroup))
                 foreach (Layer childlayer in ((LayerGroup) layer).Layers)

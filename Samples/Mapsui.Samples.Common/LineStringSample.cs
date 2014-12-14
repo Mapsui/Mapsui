@@ -29,7 +29,7 @@ namespace Mapsui.Samples.Common
                         }
                     )}
                 ),
-                LayerName = "LineStringLayer"
+                Name = "LineStringLayer"
             };
         }
     }

@@ -29,7 +29,7 @@ namespace Mapsui.Samples.WindowsPhone8
         private void Init()
         {
             //Openstreetmap URI: 
-            var osm = new TileLayer(KnownTileSources.Create()) { LayerName = "OSM" };
+            var osm = new TileLayer(KnownTileSources.Create()) { Name = "OSM" };
             //add layers
             MapControl.Map.Layers.Add(osm);
             MapControl.Refresh();

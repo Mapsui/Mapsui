@@ -56,7 +56,7 @@ namespace Mapsui.Layers
         /// <summary>
         /// Name of layer
         /// </summary>
-        string LayerName { get; set; }
+        string Name { get; set; }
 
         /// <summary>
         /// Gets the boundingbox of the entire layer

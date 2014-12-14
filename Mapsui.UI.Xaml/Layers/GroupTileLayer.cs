@@ -145,7 +145,7 @@ namespace Mapsui.UI.Xaml.Layers
             {
                 if (_memoryCache.Find(tileInfo.Index) == null)
                 {
-                    TileLayerDataChanged(this, new DataChangedEventArgs(null, false, tileInfo, LayerName));
+                    TileLayerDataChanged(this, new DataChangedEventArgs(null, false, tileInfo, Name));
                 }
             }
         }

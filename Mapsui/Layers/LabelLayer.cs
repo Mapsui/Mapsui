@@ -153,11 +153,11 @@ namespace Mapsui.Layers
         /// <summary>
         /// Creates a new instance of a LabelLayer
         /// </summary>
-        public LabelLayer(string layerName)
-            : base(layerName)
+        public LabelLayer(string name)
+            : base(name)
         {
             PriorityColumn = "";
-            LayerName = layerName;
+            Name = name;
             MultipartGeometryBehaviour = MultipartGeometryBehaviourEnum.All;
             LabelFilter = LabelCollisionDetection.SimpleCollisionDetection;
         }

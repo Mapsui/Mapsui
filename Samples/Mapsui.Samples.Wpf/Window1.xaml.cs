@@ -66,7 +66,7 @@ namespace Mapsui.Samples.Wpf
         private void OsmClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
-            MapControl.Map.Layers.Add(new TileLayer(KnownTileSources.Create()) { LayerName = "OSM" });
+            MapControl.Map.Layers.Add(new TileLayer(KnownTileSources.Create()) { Name = "OSM" });
             LayerList.Initialize(MapControl.Map.Layers);
             MapControl.ZoomToFullEnvelope();
             MapControl.Refresh();
@@ -77,7 +77,7 @@ namespace Mapsui.Samples.Wpf
             MapControl.Map.Layers.Clear();
             MapControl.Map.Transformation = new MinimalTransformation();
             MapControl.Map.CRS = "EPSG:3857";
-            MapControl.Map.Layers.Add(new TileLayer(KnownTileSources.Create()) { LayerName = "OSM" });
+            MapControl.Map.Layers.Add(new TileLayer(KnownTileSources.Create()) { Name = "OSM" });
             MapControl.Map.Layers.Add(PointLayerSample.CreateLayerWithDataSourceWithWGS84Point());
             LayerList.Initialize(MapControl.Map.Layers);
             MapControl.ZoomToFullEnvelope();
@@ -87,8 +87,8 @@ namespace Mapsui.Samples.Wpf
         private void AnimatedPointsClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
-            MapControl.Map.Layers.Add(new TileLayer(KnownTileSources.Create()) { LayerName = "OSM" });
-            MapControl.Map.Layers.Add(new AnimatedPointsWithAutoUpdateLayer { LayerName = "AnimatedLayer" });
+            MapControl.Map.Layers.Add(new TileLayer(KnownTileSources.Create()) { Name = "OSM" });
+            MapControl.Map.Layers.Add(new AnimatedPointsWithAutoUpdateLayer { Name = "AnimatedLayer" });
 
             LayerList.Initialize(MapControl.Map.Layers);
             MapControl.ZoomToFullEnvelope();
@@ -98,7 +98,7 @@ namespace Mapsui.Samples.Wpf
         private void RandomPointWithStackLabelClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
-            MapControl.Map.Layers.Add(new TileLayer(KnownTileSources.Create()) { LayerName = "OSM" });
+            MapControl.Map.Layers.Add(new TileLayer(KnownTileSources.Create()) { Name = "OSM" });
             var provider = CreateRandomPointsProvider();
             MapControl.Map.Layers.Add(PointLayerSample.CreateStackedLabelLayer(provider));
             MapControl.Map.Layers.Add(PointLayerSample.CreateRandomPointLayer(provider));
@@ -110,7 +110,7 @@ namespace Mapsui.Samples.Wpf
         private void RandomPointsWithFeatureInfoClick(object server, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
-            MapControl.Map.Layers.Add(new TileLayer(KnownTileSources.Create()) { LayerName = "OSM" });
+            MapControl.Map.Layers.Add(new TileLayer(KnownTileSources.Create()) { Name = "OSM" });
             var pointLayer = PointLayerSample.CreateRandomPointLayer(CreateRandomPointsProvider());
             pointLayer.Style = new StyleCollection {
                 new SymbolStyle {
@@ -151,7 +151,7 @@ namespace Mapsui.Samples.Wpf
         private void GeodanWmsClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
-            MapControl.Map.Layers.Add(new TileLayer(new GeodanWorldWmsTileSource()) { LayerName = "WMS called as WMSC"});
+            MapControl.Map.Layers.Add(new TileLayer(new GeodanWorldWmsTileSource()) { Name = "WMS called as WMSC"});
             LayerList.Initialize(MapControl.Map.Layers);
             MapControl.ZoomToFullEnvelope();
             MapControl.Refresh();
@@ -162,7 +162,7 @@ namespace Mapsui.Samples.Wpf
             MapControl.Map.Layers.Clear();
             MapControl.Map.Layers.Add(new TileLayer(
                     () => TmsTileSourceBuilder.Build("http://geoserver.nl/tiles/tilecache.aspx/1.0.0/worlddark_GM", true))
-                    { LayerName = "TMS"});
+                    { Name = "TMS"});
             LayerList.Initialize(MapControl.Map.Layers);
             MapControl.Refresh();
         }
@@ -171,7 +171,7 @@ namespace Mapsui.Samples.Wpf
         {
             MapControl.Map.Layers.Clear();
             MapControl.Map.Layers.Add(new TileLayer(KnownTileSources.Create(KnownTileSource.BingAerial)) 
-                { LayerName = "Bing Aerial"});
+                { Name = "Bing Aerial"});
             LayerList.Initialize(MapControl.Map.Layers);
             MapControl.ZoomToFullEnvelope();
             MapControl.Refresh();
@@ -200,7 +200,7 @@ namespace Mapsui.Samples.Wpf
         private void MapTilerClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
-            MapControl.Map.Layers.Add(new TileLayer(new MapTilerTileSource()){LayerName = "True Marble in MapTiler"} );
+            MapControl.Map.Layers.Add(new TileLayer(new MapTilerTileSource()){Name = "True Marble in MapTiler"} );
             LayerList.Initialize(MapControl.Map.Layers);
             MapControl.ZoomToFullEnvelope();
             MapControl.Refresh();
@@ -209,7 +209,7 @@ namespace Mapsui.Samples.Wpf
         private void PointSymbolsClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
-            MapControl.Map.Layers.Add(new TileLayer(KnownTileSources.Create()) { LayerName = "OSM" });
+            MapControl.Map.Layers.Add(new TileLayer(KnownTileSources.Create()) { Name = "OSM" });
             MapControl.Map.Layers.Add(PointLayerSample.Create());
             MapControl.Map.Layers.Add(CreatePointLayerWithWorldUnitSymbol());
             LayerList.Initialize(MapControl.Map.Layers);
@@ -252,7 +252,7 @@ namespace Mapsui.Samples.Wpf
             {
                 var tileSources = WmtsParser.Parse(responseStream);
                 var natura2000 = tileSources.First(t => t.Name.ToLower().Contains("natura2000"));
-                MapControl.Map.Layers.Add(new TileLayer(natura2000) { LayerName = "Natura 2000"});
+                MapControl.Map.Layers.Add(new TileLayer(natura2000) { Name = "Natura 2000"});
                 MapControl.ZoomToFullEnvelope();
                 MapControl.Refresh();
                 LayerList.Initialize(MapControl.Map.Layers);
@@ -262,7 +262,7 @@ namespace Mapsui.Samples.Wpf
         private void PointsWithLabelsClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
-            MapControl.Map.Layers.Add(new TileLayer(KnownTileSources.Create()) { LayerName = "OSM" });
+            MapControl.Map.Layers.Add(new TileLayer(KnownTileSources.Create()) { Name = "OSM" });
             MapControl.Map.Layers.Add(PointLayerSample.CreatePointLayerWithLabels());
             LayerList.Initialize(MapControl.Map.Layers);
             MapControl.ZoomToFullEnvelope();

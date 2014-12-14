@@ -79,7 +79,7 @@ namespace Mapsui.Layers
 
         public ImageLayer(string layername)
         {
-            LayerName = layername;
+            Name = layername;
             StartFetchTimer = new Timer(StartFetchTimerElapsed, null, 500, int.MaxValue);
             NumberOfFeaturesReturned = 1;
         }
@@ -169,7 +169,7 @@ namespace Mapsui.Layers
             Sets = Sets.OrderByDescending(c => c.TimeRequested).Take(NumberOfFeaturesReturned).ToList();
             
             IsFetching = false;
-            OnDataChanged(new DataChangedEventArgs(null, false, null, LayerName));
+            OnDataChanged(new DataChangedEventArgs(null, false, null, Name));
 
             if (NeedsUpdate)
             {

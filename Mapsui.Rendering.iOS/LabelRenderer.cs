@@ -33,7 +33,7 @@ namespace XamarinRendering
 				foreach (var cluster in clusters)
 				{
 					var feature = cluster.Features.OrderBy(f => f.Geometry.GetBoundingBox().GetCentroid().Y).FirstOrDefault();
-					//SetFeatureOutline (feature, layer.LayerName, cluster.Features.Count);
+					//SetFeatureOutline (feature, layer.Name, cluster.Features.Count);
 					//var bb = RenderBox(cluster.Box, viewport);
 
 					//Zorg dat dit ALTIJD decimal zelfde ISet als ViewChanged is
@@ -44,7 +44,7 @@ namespace XamarinRendering
 					{
 						if (feature.Styles != null && style.Enabled)
 						{
-							var styleKey = layer.LayerName; //feature.GetHashCode ().ToString ();
+							var styleKey = layer.Name; //feature.GetHashCode ().ToString ();
 							var renderedGeometry = (feature[styleKey] != null) ? (CALayer)feature[styleKey] : null;
 							var labelText = layer.GetLabelText(feature);
 
