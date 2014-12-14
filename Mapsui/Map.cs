@@ -86,12 +86,34 @@ namespace Mapsui
 
         public Viewport Viewport { get; private set; }
 
-        public void ZoomTo(BoundingBox extent, ScaleMethod scaleMethod = ScaleMethod.Fit)
+        public void NavigateTo(BoundingBox extent, ScaleMethod scaleMethod = ScaleMethod.Fit)
         {
             Viewport.Resolution = ZoomHelper.DetermineResolution(
                 extent.Width, extent.Height, Viewport.Width, Viewport.Height, scaleMethod);
             Viewport.Center = extent.GetCentroid();
 
+            OnRefreshGraphics();
+            ViewChanged(true);
+        }
+
+        public void NavigateTo(double resolution)
+        {
+            Viewport.Resolution = resolution;
+            OnRefreshGraphics();
+            ViewChanged(true);
+        }
+
+        public void NavigateTo(Point center)
+        {
+            Viewport.Center = center;
+            OnRefreshGraphics();
+            ViewChanged(true);
+        }
+
+        public void NavigateTo(double x, double y)
+        {
+            Viewport.Center.X = x;
+            Viewport.Center.Y = y;
             OnRefreshGraphics();
             ViewChanged(true);
         }

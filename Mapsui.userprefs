@@ -4,34 +4,7 @@
     <String>Mapsui.Rendering.Xaml/Mapsui.Rendering.Xaml.csproj</String>
   </DisabledProjects>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Tests\Mapsui.Tests.Common\Utilities.cs">
-    <Files>
-      <File FileName="Mapsui.UI.Android\MapControl.cs" Line="40" Column="40" />
-      <File FileName="Samples\Mapsui.Samples.Android\Activity1.cs" Line="6" Column="6" />
-      <File FileName="Mapsui.Rendering.OpenTK\MapRenderer.cs" Line="38" Column="38" />
-      <File FileName="Mapsui.Rendering.OpenTK\LineStringRenderer.cs" Line="1" Column="1" />
-      <File FileName="Tests\Mapsui.Rendering.OpenTK.Tests\MainWindow.cs" Line="13" Column="13" />
-      <File FileName="Mapsui.Rendering.Android\MapRenderer.cs" Line="9" Column="9" />
-      <File FileName="Mapsui.Rendering.OpenTK\PointRenderer.cs" Line="24" Column="24" />
-      <File FileName="Mapsui.Rendering.OpenTK\RasterRenderer.cs" Line="21" Column="21" />
-      <File FileName="Mapsui.Rendering.OpenTK\TextureHelper.cs" Line="13" Column="13" />
-      <File FileName="Samples\Mapsui.Samples.Common\PointLayerSample.cs" Line="13" Column="13" />
-      <File FileName="Mapsui.Rendering.Android\RasterRenderer.cs" Line="10" Column="10" />
-      <File FileName="Tests\Mapsui.Tests.Common\ArrangeRenderingTests.cs" Line="46" Column="46" />
-      <File FileName="Tests\Mapsui.Tests.Common\Utilities.cs" Line="58" Column="58" />
-    </Files>
-    <Pads>
-      <Pad Id="ProjectPad">
-        <State selected="True" />
-      </Pad>
-      <Pad Id="MonoDevelop.Debugger.WatchPad">
-        <State />
-      </Pad>
-      <Pad Id="MonoDevelop.NUnit.TestPad">
-        <State expanded="True" selected="True" />
-      </Pad>
-    </Pads>
-  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
       <Breakpoint file="/Users/paul/code/Mapsui/Samples/Mapsui.Samples.iOS/MapControlSample.cs" line="147" column="3" />

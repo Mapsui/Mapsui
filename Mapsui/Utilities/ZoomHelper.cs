@@ -70,6 +70,7 @@ namespace Mapsui.Utilities
         {
             double widthResolution = worldWidth / screenWidth;
             double heightResolution = worldHeight/screenHeight;
+
             switch (scaleMethod)
             {
                 case ScaleMethod.FitHeight:
@@ -77,9 +78,9 @@ namespace Mapsui.Utilities
                 case ScaleMethod.FitWidth:
                     return widthResolution;
                 case ScaleMethod.Fill:
-                    return Math.Max(widthResolution, heightResolution);
-                case ScaleMethod.Fit:
                     return Math.Min(widthResolution, heightResolution);
+                case ScaleMethod.Fit:
+                    return Math.Max(widthResolution, heightResolution);
                 default:
                     throw new Exception("ScaleMethod not supported");
             }
