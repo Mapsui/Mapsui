@@ -20,7 +20,13 @@ namespace Mapsui.Layers
         private Timer _animation;
         private List<AnimatedItem> _cache = new List<AnimatedItem>();
         private long _startTimeAnimation;
-        public double Threshold { get; set; }
+
+        /// <summary>
+        /// When the distane between the current and the previous position is larger
+        /// than the DistanceThreshold it will not be animated. 
+        /// The default is Double.MaxValue
+        /// </summary>
+        public double DistanceThreshold { get; set; }
 
         public AnimatedFeatures()
         {
@@ -28,7 +34,7 @@ namespace Mapsui.Layers
             AnimationDuration = 1000;
             IdField = "ID";
             Function = EasingFunction.CubicEaseOut;
-            Threshold = 20000;
+            DistanceThreshold = Double.MaxValue;
         }
 
         public string IdField { get; set; }
@@ -53,7 +59,7 @@ namespace Mapsui.Layers
             LogAllFeatures(_cache);
 
             var progress = CalculateProgress(_startTimeAnimation, AnimationDuration, Function);
-            if (!Completed(progress)) InterpolateAnimatedPosition(_cache, progress, Threshold);
+            if (!Completed(progress)) InterpolateAnimatedPosition(_cache, progress, DistanceThreshold);
             else if (_animation != null) StopAnimation();
             return _cache.Select(f => f.Feature);
         }
