@@ -2,15 +2,88 @@
     x:Class="Mapsui.Samples.Windows8.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Mapsui.Samples.Windows8"
     xmlns:mapsuiWindows="using:Mapsui.UI.Xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
+    <Page.BottomAppBar>
+        <CommandBar IsSticky="True">
+            <CommandBar.PrimaryCommands>
+                <AppBarButton x:Name="MenuZoomInButton" 
+                              Label="Zoom In" 
+                              Click="OnZoomInButtonClicked">
+                    <TextBlock Text="&#xf067;"
+                               HorizontalAlignment="Center" 
+                               VerticalAlignment="Center"
+                               FontFamily="{StaticResource FontAwesome}" 
+                               FontSize="25">
+                    </TextBlock>
+                </AppBarButton>
+                <AppBarButton x:Name="MenuZoomOutButton" 
+                              Label="Zoom Out" 
+                              Click="OnZoomOutButtonClicked">
+                    <TextBlock Text="&#xf068;"
+                               HorizontalAlignment="Center" 
+                               VerticalAlignment="Center"
+                               FontFamily="{StaticResource FontAwesome}" 
+                               FontSize="25">
+                    </TextBlock>
+                </AppBarButton>
+            </CommandBar.PrimaryCommands>
+            
+            <CommandBar.SecondaryCommands>
+                <AppBarButton x:Name="RefreshMapAppBarButton" 
+                              Label="Refresh" 
+                              Click="OnRefreshMapAppBarButtonClicked" >
+                    <TextBlock Text="&#xf021;"
+                               HorizontalAlignment="Center" 
+                               VerticalAlignment="Center"
+                               FontFamily="{StaticResource FontAwesome}" 
+                               FontSize="25">
+                    </TextBlock>
+                </AppBarButton>
+                <AppBarButton x:Name="GoToCurrentLocationButton" 
+                              Label="Current" 
+                              Click="OnGoToCurrentLocationMenoButtonClicked">
+                    <TextBlock Text="&#xf124;"
+                               HorizontalAlignment="Center" 
+                               VerticalAlignment="Center"
+                               FontFamily="{StaticResource FontAwesome}" 
+                               FontSize="25">
+                    </TextBlock>
+                </AppBarButton>
+            </CommandBar.SecondaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
     <Grid>
-        <mapsuiWindows:MapControl Background="DarkSlateGray" x:Name="mapControl" >
-            <Button Content="Zoomin" HorizontalAlignment="Left" Margin="30,392,0,0" VerticalAlignment="Top" Click="Button_Click_1" Width="96" />
-            <Button Content="Zoomout" HorizontalAlignment="Left" Margin="30,450,0,0" VerticalAlignment="Top" Click="Button_Click_2"/>
+        <mapsuiWindows:MapControl x:Name="mapControl" Background="DarkSlateGray">
+            <StackPanel Background="#44000000" 
+                        Margin="5,50,0,0" 
+                        VerticalAlignment="Top" 
+                        HorizontalAlignment="Left" >
+                <Slider x:Name="MapZoomSlider"  
+                        Margin="0,5,0,0" 
+                        Orientation="Vertical" 
+                        SnapsTo="Ticks" 
+                        Height="200" 
+                        StepFrequency="1" 
+                        TickPlacement="Outside" 
+                        TickFrequency="1" 
+                        ValueChanged="OnMapZoomSliderValueChanged">
+                </Slider>
+                <RepeatButton x:Name="SliderZoomInButton" 
+                              BorderThickness="0" Click="OnZoomInButtonClicked">
+                    <TextBlock FontFamily="{StaticResource FontAwesome}" 
+                               FontSize="25" 
+                               Text="&#xf196;" />
+                </RepeatButton>
+                <RepeatButton x:Name="SliderZoomOutButton" 
+                              BorderThickness="0" Click="OnZoomOutButtonClicked">
+                    <TextBlock FontFamily="{StaticResource FontAwesome}" 
+                               FontSize="25" 
+                               Text="&#xf147;" />
+                </RepeatButton>
+            </StackPanel>
         </mapsuiWindows:MapControl>
     </Grid>
 </Page>
