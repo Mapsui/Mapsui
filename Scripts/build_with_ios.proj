@@ -1,0 +1,63 @@
+<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <SolutionFile>.\..\Mapsui.sln</SolutionFile>
+    <SolutionDir>$(MSBuildProjectDirectory)</SolutionDir>
+    <ToolsHome Condition=" '$(ToolsHome)'=='' ">$(MSBuildProjectDirectory)\..\tools\</ToolsHome>
+  </PropertyGroup>
+  
+  <Target Name="BuildRelease" DependsOnTargets="CleanRelease;RestorePackages">
+
+    <MSBuild Projects="$(SolutionFile)"
+             Targets="Mapsui"
+             Properties="Configuration=Release;BaseIntermediateOutputPath=$(MSBuildProjectDirectory).\..\obj\portable\;OutputPath=$(MSBuildProjectDirectory).\..\Release\Portable\" />
+
+    <MSBuild Projects="$(SolutionFile)"
+             Targets="Mapsui;Mapsui_Rendering_Xaml;Mapsui_UI_Xaml"
+             Properties="Configuration=Release;Platform=Any CPU;BaseIntermediateOutputPath=$(MSBuildProjectDirectory).\..\obj\v4.0.3\;OutputPath=$(MSBuildProjectDirectory).\..\Release\v4.0.3\"
+             RunEachTargetSeparately="true"/>
+
+    <MSBuild Projects="$(SolutionFile)"
+             Targets="Mapsui;Mapsui_Rendering_Xaml-W8;Mapsui_UI_Xaml-W8"
+             Properties="Configuration=Release;Platform=Any CPU;BaseIntermediateOutputPath=$(MSBuildProjectDirectory).\..\obj\W8\;OutputPath=$(MSBuildProjectDirectory).\..\Release\W8\"
+             RunEachTargetSeparately="true"/>
+
+    <MSBuild Projects="$(SolutionFile)"
+             Targets="Mapsui;Mapsui_Rendering_Xaml-WP8;Mapsui_UI_Xaml-WP8"
+             Properties="Configuration=Release;Platform=Any CPU;BaseIntermediateOutputPath=$(MSBuildProjectDirectory).\..\obj\WP8\;OutputPath=$(MSBuildProjectDirectory).\..\Release\WP8\"
+             RunEachTargetSeparately="true"/>
+
+    <MSBuild Projects="$(SolutionFile)"
+             Targets="Mapsui;Mapsui_Rendering_Xaml-SL;Mapsui_UI_Xaml-SL"
+             Properties="Configuration=Release;Platform=Any CPU;BaseIntermediateOutputPath=$(MSBuildProjectDirectory).\..\obj\SL\;OutputPath=$(MSBuildProjectDirectory).\..\Release\SL\"
+             RunEachTargetSeparately="true"/>
+
+    <MSBuild Projects="$(SolutionFile)"
+             Targets="Mapsui;Mapsui_Rendering_Gdi;Mapsui_UI_WinForms"
+             Properties="Configuration=Release;Platform=Any CPU;BaseIntermediateOutputPath=$(MSBuildProjectDirectory).\..\obj\WinForms\;OutputPath=$(MSBuildProjectDirectory).\..\Release\WinForms\"
+             RunEachTargetSeparately="true"/>
+
+    <MSBuild Projects="$(SolutionFile)"
+             Targets="Mapsui;Mapsui_Rendering_Android;Mapsui_Rendering_OpenTK-A;Mapsui_UI_Android"
+             Properties="Configuration=Release;Platform=Any CPU;BaseIntermediateOutputPath=$(MSBuildProjectDirectory).\..\obj\Xamarin.Android\;OutputPath=$(MSBuildProjectDirectory).\..\Release\Xamarin.Android\"
+             RunEachTargetSeparately="true"/>
+
+    <!-- We have a build server problem related to toolversion 4.0 versus 12.0. When Xamarin Studio starts using ToolVersion 12.0 we will try to fix the ios build.
+    -->
+    <MSBuild Projects="$(SolutionFile)"
+             Targets="Mapsui;Mapsui_Rendering_iOS;Mapsui_Rendering_OpenTK-iOS;Mapsui_UI_iOS"
+             Properties="Configuration=Release;Platform=Any CPU;BaseIntermediateOutputPath=$(MSBuildProjectDirectory).\..\obj\Xamarin.iOS\;OutputPath=$(MSBuildProjectDirectory).\..\Release\Xamarin.iOS\"
+             RunEachTargetSeparately="true"/>
+             
+  </Target>
+    
+  <Target Name="CleanRelease">
+    <Exec Command="rmdir /s /q $(MSBuildProjectDirectory).\..\obj"></Exec>
+    <Exec Command="rmdir /s /q $(MSBuildProjectDirectory).\..\Release"></Exec>
+  </Target>
+  
+  <Target Name="RestorePackages">
+    <Exec Command="&quot;$(ToolsHome)NuGet\NuGet.exe&quot; restore .\..\Mapsui.sln" />
+  </Target>
+  
+</Project>
