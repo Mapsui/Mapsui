@@ -151,7 +151,7 @@ namespace Mapsui.Samples.Wpf
         private void GeodanWmsClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
-            MapControl.Map.Layers.Add(new TileLayer(new GeodanWorldWmsTileSource()));
+            MapControl.Map.Layers.Add(new TileLayer(new GeodanWorldWmsTileSource()) { LayerName = "WMS called as WMSC"});
             LayerList.Initialize(MapControl.Map.Layers);
             MapControl.ZoomToFullEnvelope();
             MapControl.Refresh();
@@ -161,7 +161,8 @@ namespace Mapsui.Samples.Wpf
         {
             MapControl.Map.Layers.Clear();
             MapControl.Map.Layers.Add(new TileLayer(
-                    () => TmsTileSourceBuilder.Build("http://geoserver.nl/tiles/tilecache.aspx/1.0.0/worlddark_GM", true)));
+                    () => TmsTileSourceBuilder.Build("http://geoserver.nl/tiles/tilecache.aspx/1.0.0/worlddark_GM", true))
+                    { LayerName = "TMS"});
             LayerList.Initialize(MapControl.Map.Layers);
             MapControl.Refresh();
         }
@@ -169,7 +170,8 @@ namespace Mapsui.Samples.Wpf
         private void BingMapsClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
-            MapControl.Map.Layers.Add(new TileLayer(KnownTileSources.Create(KnownTileSource.BingAerial)));
+            MapControl.Map.Layers.Add(new TileLayer(KnownTileSources.Create(KnownTileSource.BingAerial)) 
+                { LayerName = "Bing Aerial"});
             LayerList.Initialize(MapControl.Map.Layers);
             MapControl.ZoomToFullEnvelope();
             MapControl.Refresh();
@@ -198,7 +200,7 @@ namespace Mapsui.Samples.Wpf
         private void MapTilerClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
-            MapControl.Map.Layers.Add(new TileLayer(new MapTilerTileSource()));
+            MapControl.Map.Layers.Add(new TileLayer(new MapTilerTileSource()){LayerName = "True Marble in MapTiler"} );
             LayerList.Initialize(MapControl.Map.Layers);
             MapControl.ZoomToFullEnvelope();
             MapControl.Refresh();
@@ -250,9 +252,10 @@ namespace Mapsui.Samples.Wpf
             {
                 var tileSources = WmtsParser.Parse(responseStream);
                 var natura2000 = tileSources.First(t => t.Name.ToLower().Contains("natura2000"));
-                MapControl.Map.Layers.Add(new TileLayer(natura2000));
+                MapControl.Map.Layers.Add(new TileLayer(natura2000) { LayerName = "Natura 2000"});
                 MapControl.ZoomToFullEnvelope();
                 MapControl.Refresh();
+                LayerList.Initialize(MapControl.Map.Layers);
             }
         }
 

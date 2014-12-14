@@ -26,6 +26,7 @@ namespace Mapsui.Samples.Wpf
         public LayerListItem()
         {
             InitializeComponent();
+            opacitySlider.IsMoveToPointEnabled = true; // mouse click moves slider to that specific position (otherwise only 0 or 1 is selected)
         }
 
         private void OpacitySliderValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
