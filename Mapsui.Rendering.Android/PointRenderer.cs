@@ -19,10 +19,12 @@ namespace Mapsui.Rendering.Android
             var symbolStyle = style as SymbolStyle;
             if (symbolStyle != null)
             {
-                if (symbolStyle.Symbol != null && symbolStyle.Symbol.Data != null)
+                if (symbolStyle.BitmapId >= 0)
                 {
                     // Bitmap
-                    if (!feature.RenderedGeometry.ContainsKey(style)) feature.RenderedGeometry[style] = BitmapFactory.DecodeStream(symbolStyle.Symbol.Data);
+                    if (!feature.RenderedGeometry.ContainsKey(style))
+                        feature.RenderedGeometry[style] = 
+                            BitmapFactory.DecodeStream(BitmapRegistry.Instance.Get(symbolStyle.BitmapId));
                     var bitmap = (Bitmap)feature.RenderedGeometry[style];
                     var halfWidth = bitmap.Width / 2;
                     var halfHeight = bitmap.Height / 2;

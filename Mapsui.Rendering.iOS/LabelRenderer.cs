@@ -95,22 +95,20 @@ namespace XamarinRendering
 		private static CALayer RenderBox(BoundingBox box, IViewport viewport)
 		{
 			const int margin = 32;
-			const int halfMargin = margin / 2;
 
 			var p1 = viewport.WorldToScreen(box.Min);
 			var p2 = viewport.WorldToScreen(box.Max);
 
-			var rectangle = new RectangleF();
-			rectangle.Width = (float)(p2.X - p1.X + margin);
-			rectangle.Height = (float)(p1.Y - p2.Y + margin);
+			var rectangle = new RectangleF {Width = (float) (p2.X - p1.X + margin), Height = (float) (p1.Y - p2.Y + margin)};
 
-			var canvas = new CALayer ();
+		    var canvas = new CALayer
+		    {
+		        Frame = rectangle,
+		        BorderColor = new MonoTouch.CoreGraphics.CGColor(0, 0, 0, 1),
+		        BorderWidth = 2
+		    };
 
-			canvas.Frame = rectangle;
-			canvas.BorderColor = new MonoTouch.CoreGraphics.CGColor (0, 0, 0, 1);
-			canvas.BorderWidth = 2;
-
-			return canvas;
+		    return canvas;
 		}
 
 		public static CALayer RenderLabelLayer(IViewport viewport, LabelLayer layer, List<IFeature> features)

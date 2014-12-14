@@ -16,10 +16,6 @@ namespace Mapsui.Rendering.iOS
     {
         private BackgroundWorker _bgWorker;
 
-        public RenderedImageCompleteDelegate Delegate;
-
-        public Action<CALayer> GeometryToImageComplete;
-
         public void RenderGeometry(MultiPolygon multiPolygon, IStyle style, IFeature feature, IViewport viewport)
         {
             if (_bgWorker == null)
@@ -49,7 +45,7 @@ namespace Mapsui.Rendering.iOS
             _bgWorker.RunWorkerAsync();
         }
 
-        private CALayer RenderImage(MultiPolygon multiPolygon, IStyle style, IViewport viewport)
+        private static CALayer RenderImage(MultiPolygon multiPolygon, IStyle style, IViewport viewport)
         {
             var geom = new CAShapeLayer();
 

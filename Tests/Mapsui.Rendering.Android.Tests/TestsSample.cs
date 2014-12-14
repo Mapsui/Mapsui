@@ -58,7 +58,7 @@ namespace Mapsui.Rendering.Android.Tests
                 fos.Flush();
                 fos.Close();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 Console.WriteLine("fout!");
             }
