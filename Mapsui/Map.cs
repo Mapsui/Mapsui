@@ -24,6 +24,7 @@ using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Projection;
 using Mapsui.Styles;
+using Mapsui.Utilities;
 
 namespace Mapsui
 {
@@ -33,7 +34,6 @@ namespace Mapsui
     public class Map : IDisposable, INotifyPropertyChanged
     {
         private LayerCollection _layers = new LayerCollection();
-        private NotifyingViewport _viewport;
         private bool _lock;
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace Mapsui
         {
             BackColor = Color.White;
             Layers = new LayerCollection();
-            Viewport =  new NotifyingViewport { Center = { X = double.NaN, Y = double.NaN }, Resolution = double.NaN };
+            Viewport =  new Viewport { Center = { X = double.NaN, Y = double.NaN }, Resolution = double.NaN };
         }
 
         public bool Lock
@@ -84,19 +84,16 @@ namespace Mapsui
             }
         }
 
-        public NotifyingViewport Viewport
+        public Viewport Viewport { get; private set; }
+
+        public void ZoomTo(BoundingBox extent, ScaleMethod scaleMethod = ScaleMethod.Fit)
         {
-            private set
-            {
-                var tempViewport = _viewport;
-                if (tempViewport != null)
-                {
-                    _viewport.PropertyChanged -= ViewportOnPropertyChanged;
-                }
-                _viewport = value;
-                _viewport.PropertyChanged += ViewportOnPropertyChanged;
-            }
-            get { return _viewport; }
+            Viewport.Resolution = ZoomHelper.DetermineResolution(
+                extent.Width, extent.Height, Viewport.Width, Viewport.Height, scaleMethod);
+            Viewport.Center = extent.GetCentroid();
+
+            OnRefreshGraphics();
+            ViewChanged(true);
         }
 
         /// <summary>
@@ -144,7 +141,12 @@ namespace Mapsui
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        /// DataChanged should be triggered by any data changes of any of the child layers
+        /// </summary>
         public event DataChangedEventHandler DataChanged;
+        public event EventHandler RefreshGraphics;
 
         void LayersLayerRemoved(ILayer layer)
         {
@@ -160,10 +162,16 @@ namespace Mapsui
             layer.Transformation = Transformation;
             layer.CRS = CRS;
         }
-
+        
         void LayerPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             OnPropertyChanged(sender, e.PropertyName);
+        }
+
+        protected virtual void OnRefreshGraphics()
+        {
+            var handler = RefreshGraphics;
+            if (handler != null) RefreshGraphics(this, EventArgs.Empty);
         }
 
         protected virtual void OnPropertyChanged(object sender, string propertyName)
@@ -204,11 +212,6 @@ namespace Mapsui
             {
                 layer.ViewChanged(changeEnd, Viewport.Extent, Viewport.RenderResolution);
             }
-        }
-
-        private void ViewportOnPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            OnPropertyChanged(sender, e.PropertyName);
         }
 
         public void ClearCache()
