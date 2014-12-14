@@ -9,6 +9,49 @@
     <Page.BottomAppBar>
         <CommandBar IsSticky="True">
             <CommandBar.PrimaryCommands>
+                <AppBarButton x:Name="Demo1Button" 
+                              Label="Demo 1" 
+                              Click="OnDemo1ButtonClicked">
+                    <TextBlock Text="&#xf04b;"
+                               HorizontalAlignment="Center" 
+                               VerticalAlignment="Center"
+                               FontFamily="{StaticResource FontAwesome}" 
+                               FontSize="20">
+                    </TextBlock>
+                </AppBarButton>
+                <AppBarButton x:Name="Demo2Button" 
+                              Label="Demo 2" 
+                              Click="OnDemo2ButtonClicked">
+                    <TextBlock Text="&#xf04b;"
+                               HorizontalAlignment="Center" 
+                               VerticalAlignment="Center"
+                               FontFamily="{StaticResource FontAwesome}" 
+                               FontSize="20">
+                    </TextBlock>
+                </AppBarButton>
+                <AppBarButton x:Name="Demo3Button" 
+                              Label="Demo 3" 
+                              Click="OnDemo3ButtonClicked">
+                    <TextBlock Text="&#xf04b;"
+                               HorizontalAlignment="Center" 
+                               VerticalAlignment="Center"
+                               FontFamily="{StaticResource FontAwesome}" 
+                               FontSize="20">
+                    </TextBlock>
+                </AppBarButton>
+                <AppBarButton x:Name="ResetButton" 
+                              Label="Reset" 
+                              Click="OnResetButtonClicked">
+                    <TextBlock Text="&#xf12d;"
+                               HorizontalAlignment="Center" 
+                               VerticalAlignment="Center"
+                               FontFamily="{StaticResource FontAwesome}" 
+                               FontSize="20">
+                    </TextBlock>
+                </AppBarButton>
+            </CommandBar.PrimaryCommands>
+            
+            <CommandBar.SecondaryCommands>
                 <AppBarButton x:Name="MenuZoomInButton" 
                               Label="Zoom In" 
                               Click="OnZoomInButtonClicked">
@@ -29,9 +72,6 @@
                                FontSize="25">
                     </TextBlock>
                 </AppBarButton>
-            </CommandBar.PrimaryCommands>
-            
-            <CommandBar.SecondaryCommands>
                 <AppBarButton x:Name="RefreshMapAppBarButton" 
                               Label="Refresh" 
                               Click="OnRefreshMapAppBarButtonClicked" >
@@ -52,6 +92,15 @@
                                FontSize="25">
                     </TextBlock>
                 </AppBarButton>
+                <AppBarToggleButton x:Name="TrackCurrentLocationToggleButton" 
+                                    Label="Track Current">
+                    <TextBlock Text="&#xf05b;"
+                               HorizontalAlignment="Center" 
+                               VerticalAlignment="Center"
+                               FontFamily="{StaticResource FontAwesome}" 
+                               FontSize="25" />
+                </AppBarToggleButton>
+                
             </CommandBar.SecondaryCommands>
         </CommandBar>
     </Page.BottomAppBar>

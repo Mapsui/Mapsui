@@ -1,8 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using Windows.Devices.Geolocation;
-using Windows.UI.Core;
-using Windows.UI.Xaml.Controls.Primitives;
+﻿using System.Linq;
 using BruTile.Predefined;
 using Mapsui.Geometries;
 using Mapsui.Layers;
@@ -10,10 +6,15 @@ using Mapsui.Projection;
 using Mapsui.Providers;
 using Mapsui.Samples.Common;
 using Mapsui.Styles;
-using System.IO;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Navigation;
 using Mapsui.UI.Xaml;
+using System;
+using System.IO;
+using System.Threading.Tasks;
+using Windows.Devices.Geolocation;
+using Windows.UI.Core;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls.Primitives;
+using Windows.UI.Xaml.Navigation;
 
 namespace Mapsui.Samples.Windows8
 {
@@ -28,6 +29,7 @@ namespace Mapsui.Samples.Windows8
             mapControl.Viewport.Center = new Point(0, 0);
             mapControl.ViewChanged += OnMapControlViewChanged;
             mapControl.Map.Layers.LayerAdded += OnMapLayerAdded;
+            GetGeoLocator();
         }
 
         /// <summary>
@@ -37,16 +39,13 @@ namespace Mapsui.Samples.Windows8
         /// property is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            mapControl.Map.Layers.Add(new TileLayer(KnownTileSources.Create()));
+            var mapLayer = new TileLayer(KnownTileSources.Create());
+            mapLayer.LayerName = "Map";
+            mapControl.Map.Layers.Add(mapLayer);
 
             GetGeoLocator();
             
             UpdateZoomControls();
-
-            //var provider = CreateRandomPointsProvider();
-            //mapControl.Map.Layers.Add(PointLayerSample.CreateRandomPointLayerWithLabel(provider));
-            //mapControl.Map.Layers.Add(PointLayerSample.CreateStackedLabelLayer(provider));
-            //mapControl.Map.Layers.Add(PointLayerSample.CreateRandomPolygonLayer(mapControl.Map.Envelope, 1));
         }
 
         private void UpdateZoomControls()
@@ -77,10 +76,19 @@ namespace Mapsui.Samples.Windows8
 
         private Geolocator GetGeoLocator()
         {
-            if (_loc == null)
+            try
             {
-                _loc = new Geolocator();
-                _loc.PositionChanged += OnGeolocatorPositionChanged;
+                if (_loc == null)
+                {
+                    _loc = new Geolocator();
+                    _loc.PositionChanged += OnGeolocatorPositionChanged;
+                }
+            }
+            catch (Exception)
+            {
+                _loc = null;
+                GoToCurrentLocationButton.Visibility = Visibility.Collapsed;
+                TrackCurrentLocationToggleButton.Visibility = Visibility.Collapsed;
             }
 
             return _loc;
@@ -114,11 +122,21 @@ namespace Mapsui.Samples.Windows8
 
         private void OnGeolocatorPositionChanged(Geolocator sender, PositionChangedEventArgs args)
         {
-            if (sender.LocationStatus == PositionStatus.Ready)
+            if (Dispatcher.HasThreadAccess)
             {
-                SetLocation(
-                    args.Position.Coordinate.Point.Position.Longitude,
-                    args.Position.Coordinate.Point.Position.Latitude);
+                if (TrackCurrentLocationToggleButton.IsChecked ?? false)
+                {
+                    if (sender.LocationStatus == PositionStatus.Ready)
+                    {
+                        SetLocation(
+                            args.Position.Coordinate.Point.Position.Longitude,
+                            args.Position.Coordinate.Point.Position.Latitude);
+                    }
+                }
+            }
+            else
+            {
+                Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => OnGeolocatorPositionChanged(sender, args));
             }
         }
 
@@ -137,7 +155,7 @@ namespace Mapsui.Samples.Windows8
             // sample: zoomin...
             mapControl.ZoomIn();
             mapControl.Refresh();
-            MapZoomSlider.Value = mapControl.Map.Resolutions.IndexOf(mapControl.Map.Viewport.Resolution);
+            UpdateZoomControls();
         }
 
         private void OnZoomOutButtonClicked(object sender, RoutedEventArgs e)
@@ -145,7 +163,7 @@ namespace Mapsui.Samples.Windows8
             // sample: zoomin...
             mapControl.ZoomOut();
             mapControl.Refresh();
-            MapZoomSlider.Value = mapControl.Map.Resolutions.IndexOf(mapControl.Map.Viewport.Resolution);
+            UpdateZoomControls();
         }
 
         private void OnRefreshMapAppBarButtonClicked(object sender, RoutedEventArgs e)
@@ -164,7 +182,7 @@ namespace Mapsui.Samples.Windows8
         {
             var geoLocator = GetGeoLocator();
 
-            if (geoLocator.LocationStatus == PositionStatus.Ready)
+            if (geoLocator != null && geoLocator.LocationStatus == PositionStatus.Ready)
             {
                 var task = geoLocator.GetGeopositionAsync().AsTask();
                 Task.WaitAll(task);
@@ -175,6 +193,36 @@ namespace Mapsui.Samples.Windows8
                         task.Result.Coordinate.Latitude);
                 }
             }
+        }
+
+        private void OnDemo1ButtonClicked(object sender, RoutedEventArgs e)
+        {
+            var provider = CreateRandomPointsProvider();
+            mapControl.Map.Layers.Add(PointLayerSample.CreateRandomPointLayerWithLabel(provider));
+            mapControl.Refresh();
+        }
+
+        private void OnDemo2ButtonClicked(object sender, RoutedEventArgs e)
+        {
+            var provider = CreateRandomPointsProvider();
+            mapControl.Map.Layers.Add(PointLayerSample.CreateStackedLabelLayer(provider));
+            mapControl.Refresh();
+        }
+
+        private void OnDemo3ButtonClicked(object sender, RoutedEventArgs e)
+        {
+            mapControl.Map.Layers.Add(PointLayerSample.CreateRandomPolygonLayer(mapControl.Map.Envelope, 1));
+            mapControl.Refresh();
+        }
+
+        private void OnResetButtonClicked(object sender, RoutedEventArgs e)
+        {
+            var nonMapLayers = mapControl.Map.Layers.Where(x => x.LayerName != "Map").ToList();
+            foreach (var nonMapLayer in nonMapLayers)
+            {
+                mapControl.Map.Layers.Remove(nonMapLayer);
+            }
+            mapControl.Refresh();
         }
     }
 }

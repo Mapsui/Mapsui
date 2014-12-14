@@ -92,7 +92,9 @@ namespace Mapsui.Samples.Windows8
             if (mapControl != null)
             {
                 mapControl.Map.Layers.Clear();
-                mapControl.Map.Layers.Add(new TileLayer(KnownTileSources.Create(tileSource)));
+                var mapLayer = new TileLayer(KnownTileSources.Create(tileSource));
+                mapLayer.LayerName = "Map";
+                mapControl.Map.Layers.Add(mapLayer);
                 mapControl.Refresh();
             }
         }
