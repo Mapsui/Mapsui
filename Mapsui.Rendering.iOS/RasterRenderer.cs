@@ -13,43 +13,6 @@ namespace Mapsui.Rendering.iOS
 {
 	public static class RasterRenderer
 	{
-
-//		public static void Draw(CGContext currentContext, IViewport viewport, IStyle style, IFeature feature)
-//		{
-//			try
-//			{
-//				if (!feature.RenderedGeometry.ContainsKey(style)) feature.RenderedGeometry[style] = ToiOSBitmap(feature.Geometry);
-//				var bitmap = (UIImage)feature.RenderedGeometry[style];
-//
-//				var dest = WorldToScreen(viewport, feature.Geometry.GetBoundingBox());
-//				dest = new BoundingBox(
-//					dest.MinX,
-//					dest.MinY,
-//					dest.MaxX,
-//					dest.MaxY);
-//
-//				var destination = RoundToPixel(dest);
-////				var destination = GeometryRenderer.ConvertBoundingBox(feature.Geometry.GetBoundingBox(), viewport);
-////				destination = new RectangleF(0, (256 - destination.Height), destination.Width, destination.Height);
-//
-//				currentContext.DrawImage(destination, bitmap.CGImage);
-//				//var img = UIImage.FromImage(bitmap);
-//				//img.Draw(destination);
-//
-//				//UIGraphics.PushContext(currentContext);
-//			
-//				//bitmap.Draw(destination);
-//				//bitmap.Dispose();
-//				//DrawOutline(currentContext, style, destination);
-//
-//				//UIGraphics.PopContext();
-//			}
-//			catch (Exception ex)
-//			{
-//				Trace.WriteLine(ex.Message);
-//			}
-//		}
-
 		public static void Draw(CALayer target, IViewport viewport, IStyle style, IFeature feature)
 		{
 			const string styleKey = "laag";
@@ -70,21 +33,11 @@ namespace Mapsui.Rendering.iOS
 			var tile = new CALayer
 			{
 				Frame = destination,
-				Contents = bitmap.CGImage
+				Contents = bitmap.CGImage,
 			};
-
-//			Console.WriteLine ("Destination: " + destination.X + " " + destination.Y + " " + destination.Width + " "+ destination.Height);
+			tile
 
 			target.AddSublayer(tile);
-		}
-
-		private static void DrawOutline(CGContext currentContext, IStyle style, RectangleF destination)
-		{
-			var vectorStyle = (style as VectorStyle);
-			if (vectorStyle == null) return;
-			if (vectorStyle.Outline == null) return;
-			if (vectorStyle.Outline.Color == null) return;
-			DrawRectangle(currentContext, destination, vectorStyle.Outline.Color);
 		}
 
 		private static BoundingBox WorldToScreen(IViewport viewport, BoundingBox boundingBox)
@@ -104,8 +57,6 @@ namespace Mapsui.Rendering.iOS
 		public static RectangleF RoundToPixel(BoundingBox dest)
 		{
 			var height = (float)(Math.Round (dest.MaxY) - Math.Round (dest.MinY));
-
-			//height = height * -1;
 
 			var frame = new RectangleF(
 				(float)Math.Round(dest.MinX),

@@ -87,6 +87,8 @@ namespace Mapsui.UI.iOS
 
         private void PinchGesture(UIPinchGestureRecognizer recognizer)
         {
+			if (_map.Lock) return;
+
             if (recognizer.NumberOfTouches < 2)
                 return;
 
@@ -130,6 +132,8 @@ namespace Mapsui.UI.iOS
 
         public override void TouchesMoved(NSSet touches, UIEvent evt)
         {
+			if (_map.Lock) return;
+
             if (touches.Count == 1)
             {
                 var touch = touches.AnyObject as UITouch;
@@ -213,10 +217,24 @@ namespace Mapsui.UI.iOS
 
         private void MapPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName != "Envelope") return;
-
-            InitializeViewport();
-            _map.ViewChanged(true);
+			if (e.PropertyName == "Enabled")
+			{
+				RefreshGraphics();
+			}
+			else if (e.PropertyName == "Opacity")
+			{
+				RefreshGraphics();
+			}
+			else if (e.PropertyName == "Envelope")
+			{
+				InitializeViewport();
+				_map.ViewChanged(true);
+			}
+			else if (e.PropertyName == "Rotation") // not supported yet
+			{
+				RefreshGraphics();
+				_map.ViewChanged(true);
+			}
         }
 
         public void MapDataChanged(object sender, DataChangedEventArgs e)
