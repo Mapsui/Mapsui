@@ -35,8 +35,7 @@ namespace Mapsui.Rendering.iOS
 				Frame = destination,
 				Contents = bitmap.CGImage,
 			};
-			tile
-
+			
 			target.AddSublayer(tile);
 		}
 
