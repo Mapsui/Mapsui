@@ -103,7 +103,7 @@ namespace Mapsui.Rendering.iOS
             var transformTranslate = CGAffineTransform.MakeTranslation((float)position.X, (float)position.Y);
             var transformRotate = CGAffineTransform.MakeRotation((float)(rotation * RadiansPerDegree));
 			var transformScale = CGAffineTransform.MakeScale (scale, scale);
-            var transform = transformRotate * transformTranslate;
+            var transform = transformScale * transformRotate * transformTranslate;
             return transform;
         }
 
