@@ -1,0 +1,68 @@
+﻿<SettingsFlyout
+    x:Class="Mapsui.Samples.Windows8.AppSettingsFlyout"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Mapsui.Samples.Windows8"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    IconSource="Assets/SmallLogo.png"
+    Title="Mapsui"
+    d:DesignWidth="346">
+
+    <!-- This StackPanel acts as a root panel for vertical layout of the content sections -->
+    <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" >
+
+        <!-- The StackPanel(s) below define individual content sections -->
+
+        <!-- Content Section 1-->
+        <StackPanel Style="{StaticResource SettingsFlyoutSectionStyle}">
+
+            <!-- Section 1 header -->
+            <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="Map Provider" />
+
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="OpenStreetMap" />
+                    <RadioButton x:Name="OpenStreetMapRadioButton" GroupName="TileProviders">
+                        <TextBlock Text="Default" />
+                    </RadioButton>
+                    <RadioButton x:Name="OpenCycleMapRadioButton" GroupName="TileProviders">
+                        <TextBlock Text="Cycle Map" />
+                    </RadioButton>
+                    <RadioButton x:Name="OpenCycleMapTransportRadioButton" GroupName="TileProviders">
+                        <TextBlock Text="Cycle Map Transport" />
+                    </RadioButton>
+                    <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="Bing" />
+                    <RadioButton x:Name="BingRoadsRadioButton" GroupName="TileProviders">
+                        <TextBlock Text="Roads" />
+                    </RadioButton>
+                    <RadioButton x:Name="BingAerialRadioButton" GroupName="TileProviders">
+                        <TextBlock Text="Aerial" />
+                    </RadioButton>
+                    <RadioButton x:Name="BingHybridRadioButton" GroupName="TileProviders">
+                        <TextBlock Text="Hybrid" />
+                    </RadioButton>
+                    <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="MapQuest" />
+                    <RadioButton x:Name="MapQuestRadioButton" GroupName="TileProviders">
+                        <TextBlock Text="Default" />
+                    </RadioButton>
+                    <RadioButton x:Name="MapQuestAerialRadioButton" GroupName="TileProviders">
+                        <TextBlock Text="Aerial" />
+                    </RadioButton>
+                    <RadioButton x:Name="MapQuestRoadsAndLabelsRadioButton" GroupName="TileProviders">
+                        <TextBlock Text="Roads &amp; Labels" />
+                    </RadioButton>
+                    <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="Esri" />
+                    <RadioButton x:Name="EsriWorldPhysicalRadioButton" GroupName="TileProviders">
+                        <TextBlock Text="World Physical" />
+                    </RadioButton>
+                    <RadioButton x:Name="EsriWorldTopoRadioButton" GroupName="TileProviders">
+                        <TextBlock Text="World Topo" />
+                    </RadioButton>
+                </StackPanel>
+
+            </ScrollViewer>
+        </StackPanel>
+    </Grid>
+</SettingsFlyout>
