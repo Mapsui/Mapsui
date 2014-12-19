@@ -217,43 +217,8 @@ namespace XamarinRendering
 
 			// = MonoTouch.UIKit.UIScreen.MainScreen.Scale;
 			//	label.ContentsScale = scale;
-
-
+            
 			return label;
-			//var border = new Border();
-			//var textblock = new TextBlock();
-
-			//Text
-			//textblock.Text = text;
-
-			//Colors
-			//textblock.Foreground = new SolidColorBrush(style.ForeColor.ToXaml());
-			//border.Background = new SolidColorBrush(style.BackColor.Color.ToXaml());
-
-			//Font
-			//textblock.FontFamily = new FontFamily(style.Font.FontFamily);
-			//textblock.FontSize = style.Font.Size;
-
-			//set some defaults which should be configurable someday
-			const double witdhMargin = 3.0;
-			const double heightMargin = 0.0;
-			//textblock.Margin = new Thickness(witdhMargin, heightMargin, witdhMargin, heightMargin);
-			//border.CornerRadius = new CornerRadius(4);
-			//border.Child = textblock;
-			//Offset
-
-			//var textWidth = textblock.ActualWidth;
-			//var textHeight = textblock.ActualHeight;
-			#if !SILVERLIGHT && !NETFX_CORE
-			// in WPF the width and height is not calculated at this point. So we use FormattedText
-			//getTextWidthAndHeight(ref textWidth, ref textHeight, style, text);
-			#endif
-			//border.SetValue(Canvas.LeftProperty, windowsPoint.X + style.Offset.X + stackOffset.X - (textWidth + 2 * witdhMargin) * (short)style.HorizontalAlignment * 0.5f);
-			//border.SetValue(Canvas.TopProperty, windowsPoint.Y + style.Offset.Y + stackOffset.Y - (textHeight + 2 * heightMargin) * (short)style.VerticalAlignment * 0.5f);
-
-			//return border;
-			//return null;
-
 		}
 
 		private static SizeF GetSizeForText(int width, MonoTouch.Foundation.NSAttributedString aString)
@@ -271,26 +236,7 @@ namespace XamarinRendering
 
 			return size;
 		}
-
-		#if !SILVERLIGHT && !NETFX_CORE
-		private static void getTextWidthAndHeight(ref double width, ref double height, LabelStyle style, string text)
-		{
-			/*
-			var formattedText = new FormattedText(
-				text,
-				CultureInfo.InvariantCulture,
-				FlowDirection.LeftToRight,
-				new Typeface(style.Font.FontFamily),
-				style.Font.Size,
-				new SolidColorBrush(style.ForeColor.ToXaml()));
-
-			width = formattedText.Width;
-			height = formattedText.Height;
-			*/
-		}
-
-		#endif
-
+        
 		private class Cluster
 		{
 			public BoundingBox Box { get; set; }
