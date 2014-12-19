@@ -55,12 +55,12 @@ namespace Mapsui.Samples.Windows8
         {
             SetMainTileLayer(KnownTileSource.MapQuest);
         }
-        
+
         private void MapQuestAerialRadioButtonOnChecked(object sender, RoutedEventArgs routedEventArgs)
         {
             SetMainTileLayer(KnownTileSource.MapQuestAerial);
         }
-        
+
         private void MapQuestRoadsAndLabelsRadioButtonOnChecked(object sender, RoutedEventArgs routedEventArgs)
         {
             SetMainTileLayer(KnownTileSource.MapQuestRoadsAndLabels);
@@ -70,7 +70,7 @@ namespace Mapsui.Samples.Windows8
         {
             SetMainTileLayer(KnownTileSource.OpenStreetMap);
         }
-        
+
         private void OpenCycleMapRadioButtonOnChecked(object sender, RoutedEventArgs routedEventArgs)
         {
             SetMainTileLayer(KnownTileSource.OpenCycleMap);
@@ -92,8 +92,7 @@ namespace Mapsui.Samples.Windows8
             if (mapControl != null)
             {
                 mapControl.Map.Layers.Clear();
-                var mapLayer = new TileLayer(KnownTileSources.Create(tileSource));
-                mapLayer.LayerName = "Map";
+                var mapLayer = new TileLayer(KnownTileSources.Create(tileSource)) { Name = "Map" };
                 mapControl.Map.Layers.Add(mapLayer);
                 mapControl.Refresh();
             }
@@ -109,7 +108,7 @@ namespace Mapsui.Samples.Windows8
                     var layer = mapControl.Map.Layers[0] as TileLayer;
                     if (layer != null)
                     {
-                        var tileSource = (KnownTileSource) Enum.Parse(typeof (KnownTileSource), layer.TileSource.Name);
+                        var tileSource = (KnownTileSource)Enum.Parse(typeof(KnownTileSource), layer.TileSource.Name);
                         switch (tileSource)
                         {
                             case KnownTileSource.BingAerial:
@@ -121,7 +120,7 @@ namespace Mapsui.Samples.Windows8
                             case KnownTileSource.BingRoads:
                                 BingRoadsRadioButton.IsChecked = true;
                                 break;
-                            
+
                             case KnownTileSource.EsriWorldBoundariesAndPlaces:
                                 break;
                             case KnownTileSource.EsriWorldPhysical:
@@ -136,7 +135,7 @@ namespace Mapsui.Samples.Windows8
                                 break;
                             case KnownTileSource.EsriWorldTransportation:
                                 break;
-                            
+
                             case KnownTileSource.MapQuest:
                                 MapQuestRadioButton.IsChecked = true;
                                 break;
@@ -183,7 +182,7 @@ namespace Mapsui.Samples.Windows8
                     result = mainPage.FindName("mapControl") as MapControl;
                 }
             }
-            
+
             return result;
         }
     }

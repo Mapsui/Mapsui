@@ -1,4 +1,7 @@
-﻿using System.Linq;
+﻿using System;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 using BruTile.Predefined;
 using Mapsui.Geometries;
 using Mapsui.Layers;
@@ -7,9 +10,6 @@ using Mapsui.Providers;
 using Mapsui.Samples.Common;
 using Mapsui.Styles;
 using Mapsui.UI.Xaml;
-using System;
-using System.IO;
-using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
@@ -40,7 +40,7 @@ namespace Mapsui.Samples.Windows8
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             var mapLayer = new TileLayer(KnownTileSources.Create());
-            mapLayer.LayerName = "Map";
+            mapLayer.Name = "Map";
             mapControl.Map.Layers.Add(mapLayer);
 
             GetGeoLocator();
@@ -218,7 +218,7 @@ namespace Mapsui.Samples.Windows8
 
         private void OnResetButtonClicked(object sender, RoutedEventArgs e)
         {
-            var nonMapLayers = mapControl.Map.Layers.Where(x => x.LayerName != "Map").ToList();
+            var nonMapLayers = mapControl.Map.Layers.Where(x => x.Name != "Map").ToList();
             foreach (var nonMapLayer in nonMapLayers)
             {
                 mapControl.Map.Layers.Remove(nonMapLayer);

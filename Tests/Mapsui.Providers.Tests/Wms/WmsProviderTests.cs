@@ -12,11 +12,9 @@ namespace Mapsui.Providers.Tests.Wms
         public void GetLegendRequestUrls_WhenInitialized_ShouldReturnListOfUrls()
         {
             // arrange
-            var capabilties = new XmlDocument();
-            capabilties.XmlResolver = null;
+            var capabilties = new XmlDocument { XmlResolver = null };
             capabilties.Load(".\\Resources\\capabilities_1_3_0.xml");
-            var provider = new WmsProvider(capabilties);
-            provider.SpatialReferenceSystem = "EPSG:900913";
+            var provider = new WmsProvider(capabilties) { CRS = "EPSG:3857" };
             provider.AddLayer("Maasluis complex - top");
             provider.AddLayer("Kreftenheye z2 - top");
             provider.SetImageFormat(provider.OutputFormats[0]);
@@ -37,7 +35,7 @@ namespace Mapsui.Providers.Tests.Wms
             capabilties.XmlResolver = null;
             capabilties.Load(".\\Resources\\capabilities_1_3_0.xml");
             var provider = new WmsProvider(capabilties);
-            provider.SpatialReferenceSystem = "EPSG:900913";
+            provider.CRS = "EPSG:900913";
             provider.AddLayer("Maasluis complex - top");
             provider.AddLayer("Kreftenheye z2 - top");
             provider.SetImageFormat(provider.OutputFormats[0]);
@@ -45,7 +43,7 @@ namespace Mapsui.Providers.Tests.Wms
 
             // act
             var legendImages = provider.GetLegends();
-            
+
 
             // assert
             Assert.True(legendImages.Count() == 2);
