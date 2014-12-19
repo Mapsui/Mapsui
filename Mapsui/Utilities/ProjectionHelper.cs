@@ -43,9 +43,9 @@ namespace Mapsui.Utilities
             throw new Exception(string.Format("crs not recognized: '{0}'", crs));
         }
 
-        public static bool NeedsTransform(ITransformation transformation, string layerCRS, string sourceCRS)
+        public static bool NeedsTransform(ITransformation transformation, string fromCRS, string toCRS)
         {
-            return (transformation != null && !string.IsNullOrWhiteSpace(layerCRS) && !string.IsNullOrWhiteSpace(sourceCRS) && layerCRS != sourceCRS);
+            return (transformation != null && !string.IsNullOrWhiteSpace(fromCRS) && !string.IsNullOrWhiteSpace(toCRS) && fromCRS != toCRS);
         }
     }
 }

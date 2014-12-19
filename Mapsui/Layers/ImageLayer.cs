@@ -69,10 +69,16 @@ namespace Mapsui.Layers
 
                 lock (DataSource)
                 {
-                    var box = DataSource.GetExtents();
-                    if (ProjectionHelper.NeedsTransform(Transformation, CRS, DataSource.CRS))
-                        return Transformation.Transform(DataSource.CRS, CRS, box);
-                    return box;
+                    if (ProjectionHelper.NeedsTransform(Transformation, DataSource.CRS, CRS))
+                    {
+                        if (Transformation.IsProjectionSupported(DataSource.CRS, CRS) == true)
+                        {
+                            var box = DataSource.GetExtents();
+                            return Transformation.Transform(DataSource.CRS, CRS, box);
+                        }
+                    }
+                    if (string.IsNullOrWhiteSpace(CRS)) return DataSource.GetExtents();
+                    return null;
                 }
             }
         }
@@ -141,9 +147,13 @@ namespace Mapsui.Layers
         {
             IsFetching = true;
             NeedsUpdate = false;
+            
+            if (Transformation != null && !string.IsNullOrWhiteSpace(CRS)) DataSource.CRS = CRS;
 
             if (ProjectionHelper.NeedsTransform(Transformation, CRS, DataSource.CRS))
-                extent = Transformation.Transform(CRS, DataSource.CRS, extent);
+                if (Transformation.IsProjectionSupported(CRS, DataSource.CRS) == true)
+                    extent = Transformation.Transform(CRS, DataSource.CRS, extent);
+                
 
             var fetcher = new FeatureFetcher(extent, resolution, DataSource, DataArrived, DateTime.Now.Ticks);
             ThreadPool.QueueUserWorkItem(fetcher.FetchOnThread);
@@ -163,11 +173,11 @@ namespace Mapsui.Layers
                 }
             }
 
-            Sets.Add(new FeatureSets { TimeRequested = (long)state, Features = features}); 
-            
+            Sets.Add(new FeatureSets { TimeRequested = (long)state, Features = features });
+
             //Keep only two most recent sets. The older ones will be removed
             Sets = Sets.OrderByDescending(c => c.TimeRequested).Take(NumberOfFeaturesReturned).ToList();
-            
+
             IsFetching = false;
             OnDataChanged(new DataChangedEventArgs(null, false, null, Name));
 

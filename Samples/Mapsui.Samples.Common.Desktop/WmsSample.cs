@@ -18,7 +18,6 @@ namespace Mapsui.Samples.Common.Desktop
 
             var provider = new WmsProvider(wmsUrl)
             {
-                SpatialReferenceSystem = "EPSG:28992",
                 ContinueOnError = true,
                 TimeOut = 20000,
                 CRS = "EPSG:28992"

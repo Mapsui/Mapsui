@@ -112,11 +112,6 @@ namespace Mapsui.Providers.Wms
         }
 
         /// <summary>
-        /// Gets or sets the spatial reference used for the WMS server request
-        /// </summary>
-        public string SpatialReferenceSystem { get; set; }
-        
-        /// <summary>
         /// Gets the service description from this server
         /// </summary>
         public Web.Wms.Capabilities.WmsServiceDescription ServiceDescription
@@ -373,9 +368,9 @@ namespace Mapsui.Providers.Wms
                 strReq.Remove(strReq.Length - 1, 1);
             }
             strReq.AppendFormat("&FORMAT={0}", _mimeType);
-            if (SpatialReferenceSystem == string.Empty)
+            if (string.IsNullOrWhiteSpace(CRS))
                 throw new ApplicationException("Spatial reference system not set");
-            strReq.AppendFormat(_wmsClient.WmsVersion != "1.3.0" ? "&SRS={0}" : "&CRS={0}", SpatialReferenceSystem);
+            strReq.AppendFormat(_wmsClient.WmsVersion != "1.3.0" ? "&SRS={0}" : "&CRS={0}", CRS);
             strReq.AppendFormat("&VERSION={0}", _wmsClient.WmsVersion);
             strReq.Append("&TRANSPARENT=true");
             strReq.Append("&Styles=");
@@ -459,9 +454,9 @@ namespace Mapsui.Providers.Wms
 
         public BoundingBox GetExtents()
         {
-            if (_wmsClient.Layer.BoundingBoxes.ContainsKey(SpatialReferenceSystem))
+            if (_wmsClient.Layer.BoundingBoxes.ContainsKey(CRS))
             {
-                return _wmsClient.Layer.BoundingBoxes[SpatialReferenceSystem];
+                return _wmsClient.Layer.BoundingBoxes[CRS];
             }
 
             return null;
