@@ -66,8 +66,9 @@ namespace Mapsui.UI.Xaml
         public IList<ILayer> MouseInfoOverLayers { get; private set; } // This should be on the Map
         public IList<ILayer> MouseInfoUpLayers { get; private set; } // This should be on the Map
         public event EventHandler ViewportInitialized;
-
         public bool ZoomToBoxMode { get; set; }
+
+        [Obsolete("Map.Viewport instead")]
         public IViewport Viewport { get { return Map.Viewport; } }
 
         public Map Map
@@ -442,8 +443,8 @@ namespace Mapsui.UI.Xaml
             if (IsInBoxZoomMode || ZoomToBoxMode)
             {
                 ZoomToBoxMode = false;
-                Geometries.Point previous = Viewport.ScreenToWorld(_previousMousePosition.X, _previousMousePosition.Y);
-                Geometries.Point current = Viewport.ScreenToWorld(e.GetPosition(this).X, e.GetPosition(this).Y);
+                Geometries.Point previous = Map.Viewport.ScreenToWorld(_previousMousePosition.X, _previousMousePosition.Y);
+                Geometries.Point current = Map.Viewport.ScreenToWorld(e.GetPosition(this).X, e.GetPosition(this).Y);
                 ZoomToBox(previous, current);
             }
             else
@@ -523,8 +524,8 @@ namespace Mapsui.UI.Xaml
 
         private MouseInfoEventArgs GetMouseInfoEventArgs(Point mousePosition, IEnumerable<ILayer> layers)
         {
-            var margin = 16 * Viewport.Resolution;
-            var point = Viewport.ScreenToWorld(new Geometries.Point(mousePosition.X, mousePosition.Y));
+            var margin = 16 * Map.Viewport.Resolution;
+            var point = Map.Viewport.ScreenToWorld(new Geometries.Point(mousePosition.X, mousePosition.Y));
 
             foreach (var layer in layers)
             {
