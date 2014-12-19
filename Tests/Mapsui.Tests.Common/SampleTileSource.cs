@@ -19,7 +19,7 @@ namespace Mapsui.Tests.Common
 
         public static ITileSchema GetTileSchema()
         {
-            var schema = new SphericalMercatorWorldSchema();
+            var schema = new GlobalSphericalMercator(YAxis.TMS);
             schema.Resolutions.Clear();
             schema.Resolutions["0"] = new Resolution { Id = "0", UnitsPerPixel = 156543.033900000 };
             schema.Resolutions["1"] = new Resolution { Id = "1", UnitsPerPixel = 78271.516950000 };

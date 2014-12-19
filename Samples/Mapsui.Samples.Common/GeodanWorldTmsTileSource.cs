@@ -34,7 +34,7 @@ namespace Mapsui.Samples.Common
             parameters.Add("uid", "4c6b3b161be3a2eb513b66b09a70f18d");
             var request = new TmsRequest(new Uri(url), "png", parameters);
             Provider = new WebTileProvider(request);
-            Schema = new SphericalMercatorWorldSchema();
+            Schema = new GlobalSphericalMercator(YAxis.TMS);
         }
 
         public ITileProvider Provider { get; private set; }

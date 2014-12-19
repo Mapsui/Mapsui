@@ -51,9 +51,10 @@ namespace Mapsui.Samples.Windows8
 
         private ILayer CreateRandomPointLayerWithLabel(IProvider dataSource, Stream bitmapStream)
         {
+            var bitmapId = BitmapRegistry.Instance.Register(bitmapStream);
             var styles = new StyleCollection
                 {
-                    new SymbolStyle {Symbol = new Bitmap {Data = bitmapStream}, SymbolRotation = 45.0},
+                    new SymbolStyle { BitmapId = bitmapId, SymbolRotation = 45.0},
                     new LabelStyle {Text = "TestLabel"}
                 };
 

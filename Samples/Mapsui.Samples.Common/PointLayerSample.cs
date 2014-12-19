@@ -63,13 +63,11 @@ namespace Mapsui.Samples.Common
         private static Feature CreateBitmapPoint()
         {
             var feature = new Feature { Geometry = new Point(0, 1000000) };
+            var bitmapId = BitmapRegistry.Instance.Register(
+                System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("Mapsui.Samples.Common.Images.loc.png"));
             feature.Styles.Add(new SymbolStyle
                 {
-                    Symbol = new Bitmap
-                    {
-                        Data = System.Reflection.Assembly.GetExecutingAssembly()
-                            .GetManifestResourceStream("Mapsui.Samples.Common.Images.loc.png")
-                    },
+                    BitmapId = bitmapId,
                     SymbolType = SymbolType.Ellipse,
                     UnitType = UnitType.Pixel,
                     SymbolScale = 0.5

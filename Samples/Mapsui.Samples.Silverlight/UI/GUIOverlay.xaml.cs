@@ -43,8 +43,8 @@ namespace Mapsui.Samples.Silverlight.UI
             if (mapControl.Map.Envelope == null) return;
 
             var center = mapControl.Map.Envelope.GetCentroid();
-            mapControl.Viewport.Center = new Geometries.Point(center.X, center.Y);
-            mapControl.Viewport.Resolution = 10000;
+            mapControl.Map.Viewport.Center = new Geometries.Point(center.X, center.Y);
+            mapControl.Map.Viewport.Resolution = 10000;
         }
 
         private static Map CreateMap()

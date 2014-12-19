@@ -190,7 +190,7 @@ namespace Mapsui.Rendering.Xaml
 
             var path = new XamlShapes.Path();
 
-            if (style.Symbol == null)
+            if (style.BitmapId < 0)
             {
                 path.Fill = new XamlMedia.SolidColorBrush(XamlColors.Gray);
             }
@@ -244,7 +244,7 @@ namespace Mapsui.Rendering.Xaml
             Point p = viewport.WorldToScreen(point);
 
             var rect = new XamlMedia.RectangleGeometry();
-            if (style.Symbol != null)
+            if (style.BitmapId >= 0)
             {
                 var bitmapImage = CreateBitmapImage(BitmapRegistry.Instance.Get(style.BitmapId));
                 var width = bitmapImage.PixelWidth * style.SymbolScale;

@@ -28,7 +28,7 @@ namespace Mapsui.Samples.Common
     {
         public GeodanWorldWmsCTileSource()
         {
-            Schema = new SphericalMercatorWorldSchema();
+            Schema = new GlobalSphericalMercator(YAxis.TMS);
             Provider = GetTileProvider(Schema);
         }
 
