@@ -10,7 +10,7 @@ namespace Mapsui.Rendering
     {
         public IList<IFeature> GetFeatures(BoundingBox box, double resolution, ITileSchema schema, ITileCache<Feature> memoryCache)
         {
-            var tiles = schema.GetTilesInView(box.ToExtent(), resolution);
+            var tiles = schema.GetTileInfos(box.ToExtent(), resolution);
             var result = new List<IFeature>();
             foreach (var tileInfo in tiles)
             {

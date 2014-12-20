@@ -33,6 +33,11 @@ namespace Mapsui.Samples.Common
             Schema = schema;
         }
 
+        public byte[] GetTile(TileInfo tileInfo)
+        {
+            return Provider.GetTile(tileInfo);
+        }
+        
         private static WmscRequest CreateWmsRequest(ITileSchema schema)
         {
             const string url = "http://geoserver.nl/world/mapserv.cgi?map=world/world.map&VERSION=1.1.1";

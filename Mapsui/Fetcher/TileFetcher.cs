@@ -185,7 +185,7 @@ namespace Mapsui.Fetcher
 
         private void StartFetchOnThread(TileInfo info)
         {
-            var fetchOnThread = new FetchOnThread(_tileSource.Provider, info, LocalFetchCompleted);
+            var fetchOnThread = new FetchOnThread(_tileSource, info, LocalFetchCompleted);
             ThreadPool.QueueUserWorkItem(fetchOnThread.FetchTile);
         }
 

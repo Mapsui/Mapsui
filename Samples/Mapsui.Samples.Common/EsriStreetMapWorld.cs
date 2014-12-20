@@ -14,6 +14,11 @@ namespace Mapsui.Samples.Common
         public ITileProvider Provider { get; private set; }
         public ITileSchema Schema { get; private set; }
 
+        public byte[] GetTile(TileInfo tileInfo)
+        {
+            return Provider.GetTile(tileInfo);
+        }
+        
         private static ITileProvider CreateProvider()
         {
             return new WebTileProvider(RequestBuilder);

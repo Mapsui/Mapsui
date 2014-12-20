@@ -41,7 +41,7 @@ namespace Mapsui.Rendering
             if (resolutionIndex < 0 || resolutionIndex >= resolutions.Count)
                 return;
 
-            var tiles = schema.GetTilesInView(extent, resolutions[resolutionIndex].Key);
+            var tiles = schema.GetTileInfos(extent, resolutions[resolutionIndex].Key);
 
             foreach (var tileInfo in tiles)
             {

@@ -40,6 +40,11 @@
     <StartupObject>Mapsui.Samples.WinForms.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BruTile, Version=0.11.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\BruTile.0.11.2\lib\net40\BruTile.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -55,9 +60,6 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="BruTile">
-      <HintPath>..\..\packages\BruTile.0.10.1\lib\net40\BruTile.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Form1.cs">

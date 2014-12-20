@@ -48,7 +48,7 @@ namespace Mapsui.Providers
         {
             var extent = new Extent(boundingBox.Min.X, boundingBox.Min.Y, boundingBox.Max.X, boundingBox.Max.Y);
             var levelId = BruTile.Utilities.GetNearestLevel(_source.Schema.Resolutions, resolution);
-            var infos = _source.Schema.GetTilesInView(extent, levelId).ToList();
+            var infos = _source.Schema.GetTileInfos(extent, levelId).ToList();
 
             ICollection<WaitHandle> waitHandles = new List<WaitHandle>();
                         
@@ -59,7 +59,7 @@ namespace Mapsui.Providers
                 var waitHandle = new AutoResetEvent(false);
                 waitHandles.Add(waitHandle);
                 _queue.Add(info.Index);
-                ThreadPool.QueueUserWorkItem(GetTileOnThread, new object[] { _source.Provider, info, _bitmaps, waitHandle });
+                ThreadPool.QueueUserWorkItem(GetTileOnThread, new object[] { _source, info, _bitmaps, waitHandle });
             }
 
             WaitHandle.WaitAll(waitHandles.ToArray());

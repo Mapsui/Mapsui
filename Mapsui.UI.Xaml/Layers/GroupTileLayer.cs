@@ -140,7 +140,7 @@ namespace Mapsui.UI.Xaml.Layers
             }
 
             if (Schema == null) return;
-            var infos = Schema.GetTilesInView(extent.ToExtent(), BruTile.Utilities.GetNearestLevel(Schema.Resolutions, resolution));
+            var infos = Schema.GetTileInfos(extent.ToExtent(), BruTile.Utilities.GetNearestLevel(Schema.Resolutions, resolution));
             foreach (var tileInfo in infos)
             {
                 if (_memoryCache.Find(tileInfo.Index) == null)

@@ -36,6 +36,11 @@ namespace Mapsui.Samples.Common
         public string Name { get; private set; }
         public ITileProvider Provider { get; private set; }
 
+        public byte[] GetTile(TileInfo tileInfo)
+        {
+            return Provider.GetTile(tileInfo);
+        }
+        
         private static ITileProvider GetTileProvider(ITileSchema schema)
         {
             return new WebTileProvider(GetRequestBuilder(schema));

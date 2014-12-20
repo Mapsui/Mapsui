@@ -17,6 +17,11 @@ namespace Mapsui.Tests.Common
         public string Name { get; private set; }
         public ITileProvider Provider { get; private set; }
 
+        public byte[] GetTile(TileInfo tileInfo)
+        {
+            return Provider.GetTile(tileInfo);
+        }
+        
         public static ITileSchema GetTileSchema()
         {
             var schema = new GlobalSphericalMercator(YAxis.TMS);

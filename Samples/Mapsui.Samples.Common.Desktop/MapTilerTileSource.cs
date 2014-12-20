@@ -34,6 +34,11 @@ namespace Mapsui.Samples.Common.Desktop
         public string Name { get; private set; }
         public ITileProvider Provider { get; private set; }
 
+        public byte[] GetTile(TileInfo tileInfo)
+        {
+            return Provider.GetTile(tileInfo);
+        }
+        
         public static ITileProvider GetTileProvider()
         {
             return new FileTileProvider(new FileCache(GetAppDir() + "\\GeoData\\TrueMarble", "png"));

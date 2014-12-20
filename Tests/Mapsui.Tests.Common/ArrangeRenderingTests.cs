@@ -182,7 +182,7 @@ namespace Mapsui.Tests.Common
 
                 var feature = new Feature
                 {
-                    Geometry = new Raster(new MemoryStream(tileSource.Provider.GetTile(tileInfo)),
+                    Geometry = new Raster(new MemoryStream(tileSource.GetTile(tileInfo)),
                             tileInfo.Extent.ToBoundingBox())
                 };
 
