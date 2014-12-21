@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+
   <metadata>
     <id>Mapsui</id>
     <version>$version$</version>
@@ -19,9 +20,10 @@
     <dependency id="Newtonsoft.json" version="6.0"/>
     </dependencies>
   </metadata>
-  <files>  
   
-    <file src="..\Release\Portable\Mapsui.dll" target="lib\portable-net403+sl5+wp8+wpa+win8+MonoAndroid+MonoTouch\Mapsui.dll" />
+  <files>
+  
+    <file src="..\Release\Portable\Mapsui.dll" target="lib\portable-net403+sl50+win+wpa81+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10\Mapsui.dll" />
 
     <file src="..\Release\v4.0.3\Mapsui.dll" target="lib\net403\Mapsui.dll" />
     <file src="..\Release\v4.0.3\Mapsui.Rendering.Xaml.dll" target="lib\net403\Mapsui.Rendering.Xaml.dll" />
