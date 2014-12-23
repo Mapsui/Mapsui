@@ -42,6 +42,11 @@ namespace Mapsui.UI.iOS
 			Initialize();
 		}
 
+		public MapControl (RectangleF frame) : base(frame)
+		{
+			Initialize();
+		}
+
 		[Export("drawFrame")]
 		public void DrawFrame()
 		{
@@ -59,7 +64,7 @@ namespace Mapsui.UI.iOS
 			RefreshGraphics();
 		}
 
-		public void Initialize()
+		public void Initialize() 
 		{
 			Map = new Map();
 
@@ -72,6 +77,20 @@ namespace Mapsui.UI.iOS
 
 			var pinchGesture = new UIPinchGestureRecognizer(PinchGesture) { Enabled = true };
 			AddGestureRecognizer(pinchGesture);
+
+			UIDevice.Notifications.ObserveOrientationDidChange((n, a) => {
+				if (this.Window != null) {
+
+					// after rotation all textures show up as white. I don't know why. 
+					// By deleting all textures they are rebound and they show up properly.
+					_renderer.DeleteAllBoundTextures();	
+
+					Frame = new RectangleF (0, 0, Frame.Width, Frame.Height);
+					Map.Viewport.Width = Frame.Width;
+					Map.Viewport.Height = Frame.Height;
+					Map.NavigateTo(Map.Viewport.Extent);
+				}});
+							
 		}
 
 		public void StartRendering()

@@ -61,9 +61,6 @@ namespace XamarinRendering
 			}
 
 			renderQueue.ResetQueue (layerNames);
-
-            //var mapControl = target as MapControl;
-            //mapControl.RefreshGraphics ();
 		}
 
 		private static string RenderFeaturesForLayer(IViewport viewport, ILayer layer)

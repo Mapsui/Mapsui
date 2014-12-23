@@ -3,14 +3,8 @@
     <String>Mapsui.UI.Xaml/Mapsui.UI.Xaml.csproj</String>
     <String>Mapsui.Rendering.Xaml/Mapsui.Rendering.Xaml.csproj</String>
   </DisabledProjects>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="iOS|iPhone" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Mapsui.UI.Android/MapControl.cs">
-    <Files>
-      <File FileName="Mapsui.UI.iOS/MapControlUIKit.cs" Line="26" Column="26" />
-      <File FileName="Mapsui.UI.iOS/MapControl.cs" Line="64" Column="64" />
-      <File FileName="Mapsui.UI.Android/MapControl.cs" Line="29" Column="29" />
-    </Files>
-  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="iOS|iPhone" PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneDeviceTarget.Paul’s iPad" />
+  <MonoDevelop.Ide.Workbench />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
