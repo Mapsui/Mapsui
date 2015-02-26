@@ -244,13 +244,10 @@ namespace Mapsui.Web.Wms
         {
             try
             {
-                WebRequest myRequest = WebRequest.Create(url);
-                WebResponse myResponse = myRequest.GetResponse();
-                Stream stream = myResponse.GetResponseStream();
-                var r = new XmlTextReader(url, stream);
-                r.XmlResolver = null;
-                var doc = new XmlDocument();
-                doc.XmlResolver = null;
+                var stream = GetResponseStream(url);
+
+                var r = new XmlTextReader(url, stream) {XmlResolver = null};
+                var doc = new XmlDocument {XmlResolver = null};
                 doc.Load(r);
                 stream.Close();
                 nsmgr = new XmlNamespaceManager(doc.NameTable);
@@ -260,6 +257,14 @@ namespace Mapsui.Web.Wms
             {
                 throw new ApplicationException("Could not download capabilities", ex);
             }
+        }
+
+        private static Stream GetResponseStream(string url)
+        {
+            var request = WebRequest.Create(url);
+            var response = request.GetResponse();
+            var stream = response.GetResponseStream();
+            return stream;
         }
 
 
