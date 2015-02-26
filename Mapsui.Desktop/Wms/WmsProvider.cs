@@ -24,6 +24,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading.Tasks;
 using System.Xml;
 using Mapsui.Geometries;
 using Mapsui.Rendering;
@@ -307,14 +308,15 @@ namespace Mapsui.Providers.Wms
                 return false;
             }
 
-            var uri = new Uri(GetRequestUrl(viewport.Extent, width, height));
+            var url = GetRequestUrl(viewport.Extent, width, height);
 
             try
             {
-                using (var dataStream = GetDataStream(uri))
+                using (var task = GetStreamAsync(url))
                 {
+                    var responseStream = task.Result;
                     // PDD: This could be more efficient
-                    byte[] bytes = BruTile.Utilities.ReadFully(dataStream);
+                    byte[] bytes = BruTile.Utilities.ReadFully(responseStream);
                     raster = new Raster(new MemoryStream(bytes), viewport.Extent);
                 }
                 return true;
@@ -336,16 +338,26 @@ namespace Mapsui.Providers.Wms
             return false;
         }
 
-        private Stream GetDataStream(Uri uri)
+        private Task<Stream> GetStreamAsync(string url)
         {
-            var webRequest = WebRequest.Create(uri);
-            webRequest.Method = GetPreferredMethod().Type;
-            webRequest.Timeout = TimeOut;
-            webRequest.Credentials = Credentials ?? CredentialCache.DefaultCredentials;
-            using (var webResponse = (HttpWebResponse) webRequest.GetResponse())
+            var source = new TaskCompletionSource<Stream>();
+                
+            try
             {
-                return webResponse.GetResponseStream();
+                var webRequest = WebRequest.Create(url);
+                webRequest.Method = GetPreferredMethod().Type;
+                webRequest.Timeout = TimeOut;
+                webRequest.Credentials = Credentials ?? CredentialCache.DefaultCredentials;
+                using (var webResponse = (HttpWebResponse)webRequest.GetResponse())
+                {
+                    source.SetResult(webResponse.GetResponseStream());
+                }
             }
+            catch (Exception ex)
+            {
+                source.SetException(ex);
+            }
+            return source.Task;
         }
 
         /// <summary>
