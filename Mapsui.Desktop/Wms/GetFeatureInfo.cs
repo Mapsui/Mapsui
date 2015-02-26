@@ -9,10 +9,9 @@ namespace Mapsui.Providers.Wms
 
     public class GetFeatureInfo
     {
-        private int _timeOut { get; set; }
-        private WebRequest _webRequest { get; set; }
         private string _infoFormat;
         private string _layerName;
+        private int _timeOut;
         public event StatusEventHandler IdentifyFinished;
         public event StatusEventHandler IdentifyFailed;
 
@@ -57,11 +56,10 @@ namespace Mapsui.Providers.Wms
         {
             _infoFormat = infoFormat;
             var requestUrl = CreateRequestUrl(baseUrl, wmsVersion, infoFormat, srs, layer, extendXmin, extendYmin, extendXmax, extendYmax, x, y, mapWidth, mapHeight);
-            _webRequest = WebRequest.Create(requestUrl);
-            _webRequest.Timeout = _timeOut;
-            _webRequest.Credentials = credentials;
-
-            _webRequest.BeginGetResponse(FinishWebRequest, null);
+            WebRequest webRequest = WebRequest.Create(requestUrl);
+            webRequest.Timeout = _timeOut;
+            webRequest.Credentials = credentials;
+            webRequest.BeginGetResponse(FinishWebRequest, webRequest);
         }
 
         private string CreateRequestUrl(string baseUrl, string wmsVersion, string infoFormat, string srs, string layer, double extendXmin, double extendYmin, double extendXmax, double extendYmax, double x, double y, double mapWidth, double mapHeight)
@@ -126,7 +124,8 @@ namespace Mapsui.Providers.Wms
         {
             try
             {
-                var response = (HttpWebResponse)_webRequest.GetResponse();
+                var webRequest = (WebRequest) result.AsyncState;
+                var response = (HttpWebResponse)webRequest.GetResponse();
                 var stream = response.GetResponseStream();
 
                 var parser = GetParserFromFormat(_infoFormat);
@@ -135,7 +134,7 @@ namespace Mapsui.Providers.Wms
                 if (parser == null)
                 {
                     response.Close();
-                    _webRequest.EndGetResponse(result);
+                    webRequest.EndGetResponse(result);
                     OnIdentifyFailed();
                     return;
                 }
@@ -143,7 +142,7 @@ namespace Mapsui.Providers.Wms
                 var featureInfo = parser.ParseWMSResult(_layerName, stream);
 
                 response.Close();
-                _webRequest.EndGetResponse(result);
+                webRequest.EndGetResponse(result);
                 OnIdentifyFinished(featureInfo);
             }
             catch (Exception)
