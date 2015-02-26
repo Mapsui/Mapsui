@@ -166,7 +166,7 @@ namespace Mapsui.Providers.Wms
             Client.WmsServerLayer layer;
             if (FindLayer(_wmsClient.Layer, name, out layer))
                 return layer;
-             
+
             throw new ArgumentException("Layer not found");
         }
 
@@ -307,20 +307,13 @@ namespace Mapsui.Providers.Wms
                 return false;
             }
 
-            Client.WmsOnlineResource resource = GetPreferredMethod();
             var uri = new Uri(GetRequestUrl(viewport.Extent, width, height));
-            WebRequest webRequest = WebRequest.Create(uri);
-            webRequest.Method = resource.Type;
-            webRequest.Timeout = TimeOut;
-            webRequest.Credentials = Credentials ?? CredentialCache.DefaultCredentials;
 
             try
             {
-                using (var webResponse = (HttpWebResponse)webRequest.GetResponse())
-                using (var dataStream = webResponse.GetResponseStream())
+                using (var dataStream = GetDataStream(uri))
                 {
-                    if (!webResponse.ContentType.StartsWith("image")) return false;
-
+                    // PDD: This could be more efficient
                     byte[] bytes = BruTile.Utilities.ReadFully(dataStream);
                     raster = new Raster(new MemoryStream(bytes), viewport.Extent);
                 }
@@ -341,6 +334,18 @@ namespace Mapsui.Providers.Wms
                 Trace.Write("There was a problem while attempting to request the WMS" + ex.Message);
             }
             return false;
+        }
+
+        private Stream GetDataStream(Uri uri)
+        {
+            var webRequest = WebRequest.Create(uri);
+            webRequest.Method = GetPreferredMethod().Type;
+            webRequest.Timeout = TimeOut;
+            webRequest.Credentials = Credentials ?? CredentialCache.DefaultCredentials;
+            using (var webResponse = (HttpWebResponse) webRequest.GetResponse())
+            {
+                return webResponse.GetResponseStream();
+            }
         }
 
         /// <summary>
@@ -429,7 +434,7 @@ namespace Mapsui.Providers.Wms
                 catch (WebException e)
                 {
                     throw new Exception("Error adding legend image", e);
-                }               
+                }
             }
             return images;
         }
@@ -467,13 +472,13 @@ namespace Mapsui.Providers.Wms
             return _wmsClient.Layer.CRS.FirstOrDefault(item => String.Equals(item.Trim(), crs.Trim(), StringComparison.CurrentCultureIgnoreCase)) != null;
         }
 
-        
+
         public void Dispose()
         {
             //nothing to dispose
         }
 
-        
+
         public IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
         {
             var features = new Features();
