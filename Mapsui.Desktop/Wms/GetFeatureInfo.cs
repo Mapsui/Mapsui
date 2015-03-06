@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Net;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Mapsui.Providers.Wms
 {
@@ -14,10 +17,12 @@ namespace Mapsui.Providers.Wms
         private int _timeOut;
         public event StatusEventHandler IdentifyFinished;
         public event StatusEventHandler IdentifyFailed;
+        private readonly Func<string, Task<Stream>> _getStreamAsync;
 
-        public GetFeatureInfo()
+        public GetFeatureInfo(Func<string, Task<Stream>> getStreamAsync = null)
         {
             TimeOut = 7000;
+            _getStreamAsync = getStreamAsync ?? GetStreamAsync;
         }
 
         /// <summary>
@@ -30,6 +35,11 @@ namespace Mapsui.Providers.Wms
         }
 
         public Dictionary<string, string> ExtraParams { get; set; }
+
+        /// <summary>
+        /// Provides the base authentication interface for retrieving credentials for Web client authentication.
+        /// </summary>
+        public ICredentials Credentials { get; set; }
 
         /// <summary>
         /// Request FeatureInfo for a WMS Server
@@ -49,17 +59,56 @@ namespace Mapsui.Providers.Wms
         /// <param name="mapHeight">Height of the map</param>
         public void Request(string baseUrl, string wmsVersion, string infoFormat, string srs, string layer, double extendXmin, double extendYmin, double extendXmax, double extendYmax, int x, int y, int mapWidth, int mapHeight)
         {
-            Request(baseUrl, wmsVersion, infoFormat, srs, layer, extendXmin, extendYmin, extendXmax, extendYmax, x, y, mapWidth, mapHeight, CredentialCache.DefaultCredentials);
-        }
-
-        public void Request(string baseUrl, string wmsVersion, string infoFormat, string srs, string layer, double extendXmin, double extendYmin, double extendXmax, double extendYmax, int x, int y, int mapWidth, int mapHeight, ICredentials credentials)
-        {
             _infoFormat = infoFormat;
             var requestUrl = CreateRequestUrl(baseUrl, wmsVersion, infoFormat, srs, layer, extendXmin, extendYmin, extendXmax, extendYmax, x, y, mapWidth, mapHeight);
-            WebRequest webRequest = WebRequest.Create(requestUrl);
-            webRequest.Timeout = _timeOut;
-            webRequest.Credentials = credentials;
-            webRequest.BeginGetResponse(FinishWebRequest, webRequest);
+
+            var thread = new Thread(delegate()
+            {
+                using (var task = _getStreamAsync(requestUrl))
+                {
+                    try
+                    {
+                        var parser = GetParserFromFormat(_infoFormat);
+
+                        if (parser == null)
+                        {
+                            OnIdentifyFailed();
+                            return;
+                        }
+
+                        var featureInfo = parser.ParseWMSResult(_layerName, task.Result);
+                        OnIdentifyFinished(featureInfo);
+                    }
+                    catch (Exception)
+                    {
+                        OnIdentifyFailed();
+                    }
+                }
+            });
+
+            thread.Start();
+        }
+
+        private Task<Stream> GetStreamAsync(string url)
+        {
+            var source = new TaskCompletionSource<Stream>();
+
+            try
+            {
+                var webRequest = WebRequest.Create(url);
+                webRequest.Timeout = TimeOut;
+                webRequest.Credentials = Credentials;
+
+                var webResponse = (HttpWebResponse) webRequest.GetResponse();
+                source.SetResult(webResponse.GetResponseStream());
+                webResponse.Close();                                  
+            }
+            catch (Exception ex)
+            {
+                source.SetException(ex);
+            }
+
+            return source.Task;
         }
 
         private string CreateRequestUrl(string baseUrl, string wmsVersion, string infoFormat, string srs, string layer, double extendXmin, double extendYmin, double extendXmax, double extendYmax, double x, double y, double mapWidth, double mapHeight)
@@ -115,40 +164,6 @@ namespace Mapsui.Providers.Wms
             }
 
             return requestUrl;
-        }
-
-        /// <summary>
-        /// Webrequest finished, parse the response
-        /// </summary>
-        private void FinishWebRequest(IAsyncResult result)
-        {
-            try
-            {
-                var webRequest = (WebRequest) result.AsyncState;
-                var response = (HttpWebResponse)webRequest.GetResponse();
-                var stream = response.GetResponseStream();
-
-                var parser = GetParserFromFormat(_infoFormat);
-
-                //When the output format is currently is not exported
-                if (parser == null)
-                {
-                    response.Close();
-                    webRequest.EndGetResponse(result);
-                    OnIdentifyFailed();
-                    return;
-                }
-
-                var featureInfo = parser.ParseWMSResult(_layerName, stream);
-
-                response.Close();
-                webRequest.EndGetResponse(result);
-                OnIdentifyFinished(featureInfo);
-            }
-            catch (Exception)
-            {
-                OnIdentifyFailed();
-            }
         }
 
         /// <summary>

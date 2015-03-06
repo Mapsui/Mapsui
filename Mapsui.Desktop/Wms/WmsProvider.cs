@@ -45,23 +45,29 @@ namespace Mapsui.Providers.Wms
     {
         private string _mimeType = "";
         private readonly Client _wmsClient;
+        private Func<string, Task<Stream>> _getStreamAsync;
 
-        public WmsProvider(XmlDocument capabilities)
-            : this(new Client(capabilities))
+        public WmsProvider(XmlDocument capabilities, Func<string, Task<Stream>> getStreamAsync = null)
+            : this(new Client(capabilities, getStreamAsync))
         {
+            InitialiseGetStreamAsyncMethod(getStreamAsync);
         }
 
         /// <summary>
         /// Initializes a new layer, and downloads and parses the service description
         /// </summary>
         /// <param name="url">Url of WMS server</param>
-        public WmsProvider(string url)
-            : this(new Client(url))
+        /// <param name="wmsVersion">Version number of wms leave null to get the default service version</param>
+        /// <param name="getStreamAsync">Download method, leave null for default</param>
+        public WmsProvider(string url, string wmsVersion = null, Func<string, Task<Stream>> getStreamAsync = null)
+            : this(new Client(url, wmsVersion, getStreamAsync))
         {
+            InitialiseGetStreamAsyncMethod(getStreamAsync);
         }
 
-        private WmsProvider(Client wmsClient)
+        private WmsProvider(Client wmsClient, Func<string, Task<Stream>> getStreamAsync = null)
         {
+            InitialiseGetStreamAsyncMethod(getStreamAsync);
             _wmsClient = wmsClient;
             TimeOut = 10000;
             ContinueOnError = true;
@@ -77,6 +83,12 @@ namespace Mapsui.Providers.Wms
             LayerList = new Collection<string>();
             StylesList = new Collection<string>();
         }
+
+        private void InitialiseGetStreamAsyncMethod(Func<string, Task<Stream>> getStreamAsync)
+        {
+            _getStreamAsync = getStreamAsync ?? GetStreamAsync;
+        }
+
         /// <summary>
         /// Gets the list of enabled layers
         /// </summary>
@@ -114,7 +126,7 @@ namespace Mapsui.Providers.Wms
         /// <summary>
         /// Gets the service description from this server
         /// </summary>
-        public Web.Wms.Capabilities.WmsServiceDescription ServiceDescription
+        public Capabilities.WmsServiceDescription ServiceDescription
         {
             get { return _wmsClient.ServiceDescription; }
         }
@@ -312,11 +324,10 @@ namespace Mapsui.Providers.Wms
 
             try
             {
-                using (var task = GetStreamAsync(url))
+                using (var task = _getStreamAsync(url))
                 {
-                    var responseStream = task.Result;
                     // PDD: This could be more efficient
-                    byte[] bytes = BruTile.Utilities.ReadFully(responseStream);
+                    var bytes = BruTile.Utilities.ReadFully(task.Result);
                     raster = new Raster(new MemoryStream(bytes), viewport.Extent);
                 }
                 return true;
@@ -338,35 +349,13 @@ namespace Mapsui.Providers.Wms
             return false;
         }
 
-        private Task<Stream> GetStreamAsync(string url)
-        {
-            var source = new TaskCompletionSource<Stream>();
-                
-            try
-            {
-                var webRequest = WebRequest.Create(url);
-                webRequest.Method = GetPreferredMethod().Type;
-                webRequest.Timeout = TimeOut;
-                webRequest.Credentials = Credentials ?? CredentialCache.DefaultCredentials;
-                using (var webResponse = (HttpWebResponse)webRequest.GetResponse())
-                {
-                    source.SetResult(webResponse.GetResponseStream());
-                }
-            }
-            catch (Exception ex)
-            {
-                source.SetException(ex);
-            }
-            return source.Task;
-        }
-
         /// <summary>
         /// Gets the URL for a map request base on current settings, the image size and boundingbox
         /// </summary>
         /// <returns>URL for WMS request</returns>
         public string GetRequestUrl(BoundingBox box, int width, int height)
         {
-            Client.WmsOnlineResource resource = GetPreferredMethod();
+            var resource = GetPreferredMethod();
             var strReq = new StringBuilder(resource.OnlineResource);
             if (!resource.OnlineResource.Contains("?"))
                 strReq.Append("?");
@@ -379,7 +368,7 @@ namespace Mapsui.Providers.Wms
             strReq.Append("&Layers=");
             if (LayerList != null && LayerList.Count > 0)
             {
-                foreach (string layer in LayerList)
+                foreach (var layer in LayerList)
                     strReq.AppendFormat("{0},", layer);
                 strReq.Remove(strReq.Length - 1, 1);
             }
@@ -392,7 +381,7 @@ namespace Mapsui.Providers.Wms
             strReq.Append("&Styles=");
             if (StylesList != null && StylesList.Count > 0)
             {
-                foreach (string style in StylesList)
+                foreach (var style in StylesList)
                     strReq.AppendFormat("{0},", style);
                 strReq.Remove(strReq.Length - 1, 1);
             }
@@ -440,8 +429,11 @@ namespace Mapsui.Providers.Wms
             {
                 try
                 {
-                    var imageAsByteArray = BruTile.Web.RequestHelper.FetchImage(new Uri(url));
-                    images.Add(new MemoryStream(imageAsByteArray));
+                    using (var task = _getStreamAsync(url))
+                    {
+                        var bytes = BruTile.Utilities.ReadFully(task.Result);
+                        images.Add(new MemoryStream(bytes));
+                    }
                 }
                 catch (WebException e)
                 {
@@ -454,11 +446,11 @@ namespace Mapsui.Providers.Wms
         private Client.WmsOnlineResource GetPreferredMethod()
         {
             //We prefer get. Seek for supported 'get' method
-            for (int i = 0; i < _wmsClient.GetMapRequests.Length; i++)
+            for (var i = 0; i < _wmsClient.GetMapRequests.Length; i++)
                 if (_wmsClient.GetMapRequests[i].Type.ToLower() == "get")
                     return _wmsClient.GetMapRequests[i];
             //Next we prefer the 'post' method
-            for (int i = 0; i < _wmsClient.GetMapRequests.Length; i++)
+            for (var i = 0; i < _wmsClient.GetMapRequests.Length; i++)
                 if (_wmsClient.GetMapRequests[i].Type.ToLower() == "post")
                     return _wmsClient.GetMapRequests[i];
             return _wmsClient.GetMapRequests[0];
@@ -470,12 +462,7 @@ namespace Mapsui.Providers.Wms
 
         public BoundingBox GetExtents()
         {
-            if (_wmsClient.Layer.BoundingBoxes.ContainsKey(CRS))
-            {
-                return _wmsClient.Layer.BoundingBoxes[CRS];
-            }
-
-            return null;
+            return _wmsClient.Layer.BoundingBoxes.ContainsKey(CRS) ? _wmsClient.Layer.BoundingBoxes[CRS] : null;
         }
 
         public bool? IsCrsSupported(string crs)
@@ -490,7 +477,6 @@ namespace Mapsui.Providers.Wms
             //nothing to dispose
         }
 
-
         public IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
         {
             var features = new Features();
@@ -498,11 +484,34 @@ namespace Mapsui.Providers.Wms
             var view = new Viewport { Resolution = resolution, Center = box.GetCentroid(), Width = (box.Width / resolution), Height = (box.Height / resolution) };
             if (TryGetMap(view, ref raster))
             {
-                IFeature feature = features.New();
+                var feature = features.New();
                 feature.Geometry = raster;
                 features.Add(feature);
             }
             return features;
+        }
+
+        private Task<Stream> GetStreamAsync(string url)
+        {
+            var source = new TaskCompletionSource<Stream>();
+
+            try
+            {
+                var webRequest = WebRequest.Create(url);
+                webRequest.Method = GetPreferredMethod().Type;
+                webRequest.Timeout = TimeOut;
+                webRequest.Credentials = Credentials ?? CredentialCache.DefaultCredentials;
+
+                var webResponse = (HttpWebResponse)webRequest.GetResponse();
+                source.SetResult(webResponse.GetResponseStream());
+                webResponse.Close();
+            }
+            catch (Exception ex)
+            {
+                source.SetException(ex);
+            }
+
+            return source.Task;
         }
     }
 }
