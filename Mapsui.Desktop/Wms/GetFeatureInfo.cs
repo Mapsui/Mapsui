@@ -77,6 +77,7 @@ namespace Mapsui.Providers.Wms
                         }
 
                         var featureInfo = parser.ParseWMSResult(_layerName, task.Result);
+                        task.Result.Close();
                         OnIdentifyFinished(featureInfo);
                     }
                     catch (Exception)
@@ -101,7 +102,6 @@ namespace Mapsui.Providers.Wms
 
                 var webResponse = (HttpWebResponse) webRequest.GetResponse();
                 source.SetResult(webResponse.GetResponseStream());
-                webResponse.Close();                                  
             }
             catch (Exception ex)
             {
