@@ -327,8 +327,9 @@ namespace Mapsui.Providers.Wms
                 using (var task = _getStreamAsync(url))
                 {
                     // PDD: This could be more efficient
-                    var bytes = BruTile.Utilities.ReadFully(task.Result);
+                    var bytes = BruTile.Utilities.ReadFully(task.Result);                    
                     raster = new Raster(new MemoryStream(bytes), viewport.Extent);
+                    task.Result.Close();
                 }
                 return true;
             }
@@ -431,8 +432,9 @@ namespace Mapsui.Providers.Wms
                 {
                     using (var task = _getStreamAsync(url))
                     {
-                        var bytes = BruTile.Utilities.ReadFully(task.Result);
+                        var bytes = BruTile.Utilities.ReadFully(task.Result);                        
                         images.Add(new MemoryStream(bytes));
+                        task.Result.Close();
                     }
                 }
                 catch (WebException e)
@@ -503,8 +505,7 @@ namespace Mapsui.Providers.Wms
                 webRequest.Credentials = Credentials ?? CredentialCache.DefaultCredentials;
 
                 var webResponse = (HttpWebResponse)webRequest.GetResponse();
-                source.SetResult(webResponse.GetResponseStream());
-                webResponse.Close();
+                source.SetResult(webResponse.GetResponseStream());               
             }
             catch (Exception ex)
             {

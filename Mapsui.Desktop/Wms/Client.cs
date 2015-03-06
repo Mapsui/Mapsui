@@ -246,8 +246,7 @@ namespace Mapsui.Web.Wms
             {
                 var webRequest = WebRequest.Create(url);
                 var webResponse = (HttpWebResponse) webRequest.GetResponse();
-                source.SetResult(webResponse.GetResponseStream());
-                webResponse.Close();                
+                source.SetResult(webResponse.GetResponseStream());             
             }
             catch (Exception ex)
             {
@@ -279,8 +278,9 @@ namespace Mapsui.Web.Wms
 
                 using (var task = _getStreamAsync(url))
                 {
-                    var r = new XmlTextReader(url, task.Result) { XmlResolver = null };
+                    var r = new XmlTextReader(url, task.Result) { XmlResolver = null };                    
                     doc.Load(r);
+                    task.Result.Close();
                 }
 
                 nsmgr = new XmlNamespaceManager(doc.NameTable);
