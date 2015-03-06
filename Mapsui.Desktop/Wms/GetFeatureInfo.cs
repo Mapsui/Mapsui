@@ -99,18 +99,9 @@ namespace Mapsui.Providers.Wms
                 webRequest.Timeout = TimeOut;
                 webRequest.Credentials = Credentials;
 
-                using (var webResponse = (HttpWebResponse)webRequest.GetResponse())
-                {
-                    var copiedStream = new MemoryStream();
-                    var responseStream = webResponse.GetResponseStream();
-                    if (responseStream != null)
-                    {
-                        responseStream.CopyTo(copiedStream);
-                        copiedStream.Seek(0, SeekOrigin.Begin);
-                    }
-                    source.SetResult(copiedStream);
-                    webResponse.Close();
-                }
+                var webResponse = (HttpWebResponse) webRequest.GetResponse();
+                source.SetResult(webResponse.GetResponseStream());
+                webResponse.Close();                                  
             }
             catch (Exception ex)
             {
@@ -173,40 +164,6 @@ namespace Mapsui.Providers.Wms
             }
 
             return requestUrl;
-        }
-
-        /// <summary>
-        /// Webrequest finished, parse the response
-        /// </summary>
-        private void FinishWebRequest(IAsyncResult result)
-        {
-            try
-            {
-                var webRequest = (WebRequest)result.AsyncState;
-                var response = (HttpWebResponse)webRequest.GetResponse();
-                var stream = response.GetResponseStream();
-
-                var parser = GetParserFromFormat(_infoFormat);
-
-                //When the output format is currently is not exported
-                if (parser == null)
-                {
-                    response.Close();
-                    webRequest.EndGetResponse(result);
-                    OnIdentifyFailed();
-                    return;
-                }
-
-                var featureInfo = parser.ParseWMSResult(_layerName, stream);
-
-                response.Close();
-                webRequest.EndGetResponse(result);
-                OnIdentifyFinished(featureInfo);
-            }
-            catch (Exception)
-            {
-                OnIdentifyFailed();
-            }
         }
 
         /// <summary>
