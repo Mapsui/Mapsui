@@ -277,10 +277,13 @@ namespace Mapsui.Web.Wms
                 var doc = new XmlDocument { XmlResolver = null };
 
                 using (var task = _getStreamAsync(url))
-                {
-                    var r = new XmlTextReader(url, task.Result) { XmlResolver = null };                    
-                    doc.Load(r);
-                    task.Result.Close();
+                {                     
+                    using (var stReader = new StreamReader(task.Result))
+                    {
+                        var r = new XmlTextReader(url, stReader) { XmlResolver = null };
+                        doc.Load(r);
+                        task.Result.Close();
+                    }
                 }
 
                 nsmgr = new XmlNamespaceManager(doc.NameTable);
