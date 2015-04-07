@@ -21,7 +21,7 @@ namespace Mapsui.Tests.Fetcher
 
             // Act
             tileFetcher.ViewChanged(schema.Extent.ToBoundingBox(), schema.Resolutions["2"].UnitsPerPixel);
-            while (tileFetcher.Busy) { }
+            //while (tileFetcher.Busy) { }
 
             // Assert
             Assert.True(memoryCache.TileCount == 0);
