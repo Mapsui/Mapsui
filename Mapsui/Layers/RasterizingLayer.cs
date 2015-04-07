@@ -21,9 +21,24 @@ namespace Mapsui.Layers
         private IEnumerable<IFeature> _previousFeatures;
         private readonly double _renderResolutionMultiplier;
         private readonly IRenderer _rasterizer;
+        private double _overscan;
+        private Viewport _currentViewport = null;
+        private bool _onlyRerasterizeIfOutsideOverscan;
 
-        public RasterizingLayer(ILayer layer, int delayBeforeRasterize = 500, double renderResolutionMultiplier = 1, IRenderer rasterizer = null)
+        /// <summary>
+        /// Creates a RasterizingLayer which rasterizes a layer for performance
+        /// </summary>
+        /// <param name="layer">The Layer to be rasterized</param>
+        /// <param name="delayBeforeRasterize">Delay after viewport change to start rerasterising</param>
+        /// <param name="renderResolutionMultiplier"></param>
+        /// <param name="rasterizer">Rasterizer to use. null will use the default</param>
+        /// <param name="overscanRatio">The ratio of the size of the rasterized output to the current viewport</param>
+        /// <param name="onlyRerasterizeIfOutsideOverscan">Set the rerasterization policy. false will trigger a Rerasterisation on every viewport change. true will trigger a Rerasterisation only if the viewport moves outside the existing rasterisation.</param>
+        public RasterizingLayer(ILayer layer, int delayBeforeRasterize = 500, double renderResolutionMultiplier = 1, IRenderer rasterizer = null, double overscanRatio = 1, bool onlyRerasterizeIfOutsideOverscan = false)
         {
+            if (overscanRatio < 1)
+                throw new ArgumentException("overscanRatio must be >= 1", "overscanRatio");
+
             _layer = layer;
             Name = layer.Name;
             _delayBeforeRaterize = delayBeforeRasterize;
@@ -32,6 +47,8 @@ namespace Mapsui.Layers
             TimerToStartRasterizing = new Timer(TimerToStartRasterizingElapsed, null, _delayBeforeRaterize, int.MaxValue);
             _layer.DataChanged += LayerOnDataChanged;
             _cache = new MemoryProvider();
+            _overscan = overscanRatio;
+            _onlyRerasterizeIfOutsideOverscan = onlyRerasterizeIfOutsideOverscan;
         }
 
         void TimerToStartRasterizingElapsed(object state)
@@ -59,7 +76,9 @@ namespace Mapsui.Layers
             lock (_syncLock)
             {
                 if (double.IsNaN(_resolution) || _resolution <= 0) return;
-                var viewport = CreateViewport(_extent, _resolution, _renderResolutionMultiplier);
+                var viewport = CreateViewport(_extent, _resolution, _renderResolutionMultiplier, _overscan);
+
+                _currentViewport = viewport;
 
                 var rasterizer = _rasterizer ?? DefaultRendererFactory.Create();
 
@@ -113,10 +132,18 @@ namespace Mapsui.Layers
 
         public override void ViewChanged(bool majorChange, BoundingBox extent, double resolution)
         {
-            _extent = extent;
-            _resolution = resolution;
-            _layer.ViewChanged(majorChange, extent, resolution);
-            StartTimerToTriggerRasterize();
+            var newViewport = CreateViewport(extent, resolution, _renderResolutionMultiplier, 1);
+
+            if (!_onlyRerasterizeIfOutsideOverscan ||
+                _currentViewport == null ||
+                _currentViewport.RenderResolution != newViewport.Resolution ||
+                !_currentViewport.Extent.Contains(newViewport.Extent))
+            {
+                _extent = extent;
+                _resolution = resolution;
+                _layer.ViewChanged(majorChange, extent, resolution);
+                StartTimerToTriggerRasterize();
+            }
         }
 
         public override void ClearCache()
@@ -124,15 +151,15 @@ namespace Mapsui.Layers
             _layer.ClearCache();
         }
 
-        private static Viewport CreateViewport(BoundingBox extent, double resolution, double renderResolutionMultiplier)
+        private static Viewport CreateViewport(BoundingBox extent, double resolution, double renderResolutionMultiplier, double overscan)
         {
             var renderResolution = resolution / renderResolutionMultiplier;
             return new Viewport
             {
                 Resolution = renderResolution,
                 Center = extent.GetCentroid(),
-                Width = extent.Width / renderResolution,
-                Height = extent.Height / renderResolution
+                Width = extent.Width * overscan / renderResolution,
+                Height = extent.Height * overscan / renderResolution
             };
         }
     }

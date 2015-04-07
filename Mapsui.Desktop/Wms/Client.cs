@@ -5,6 +5,7 @@ using System.Globalization;
 using System.IO;
 using System.Net;
 using System.Text;
+using System.Threading.Tasks;
 using System.Xml;
 using Mapsui.Geometries;
 using Mapsui.Styles;
@@ -20,8 +21,8 @@ namespace Mapsui.Web.Wms
         private XmlNode vendorSpecificCapabilities;
         private XmlNamespaceManager nsmgr;
 
-        
-        
+
+
         /// <summary>
         /// Structure for storing information about a WMS Layer Style
         /// </summary>
@@ -53,8 +54,8 @@ namespace Mapsui.Web.Wms
             public string Title;
         }
 
-        
-        
+
+
         /// <summary>
         /// Structure for storing info on an Online Resource
         /// </summary>
@@ -71,8 +72,8 @@ namespace Mapsui.Web.Wms
             public string Type;
         }
 
-        
-        
+
+
         /// <summary>
         /// Structure for holding information about a WMS Layer 
         /// </summary>
@@ -92,7 +93,7 @@ namespace Mapsui.Web.Wms
             /// Coordinate Reference Systems supported by layer
             /// </summary>
             public string[] CRS;
-            
+
             /// <summary>
             /// Coordinate Reference Systems supported by layer
             /// </summary>
@@ -129,8 +130,8 @@ namespace Mapsui.Web.Wms
             public string Title;
         }
 
-        
-        
+
+
         /// <summary>
         /// Structure for storing WMS Legend information
         /// </summary>
@@ -147,9 +148,9 @@ namespace Mapsui.Web.Wms
             public Size Size;
         }
 
-        
-        
-        
+
+
+        private Func<string, Task<Stream>> _getStreamAsync;
         private string[] exceptionFormats;
         private Capabilities.WmsServiceDescription serviceDescription;
 
@@ -199,13 +200,16 @@ namespace Mapsui.Web.Wms
         /// </summary>
         public WmsServerLayer Layer { get; private set; }
 
-        
+
         /// <summary>
         /// Initalizes WMS server and parses the Capabilities request
         /// </summary>
         /// <param name="url">URL of wms server</param>
-        public Client(string url)
+        /// <param name="wmsVersion">WMS version number, null to get the default from service</param>
+        /// <param name="getStreamAsync">Download method, leave null for default</param>
+        public Client(string url, string wmsVersion = null, Func<string, Task<Stream>> getStreamAsync = null)
         {
+            InitialiseGetStreamAsyncMethod(getStreamAsync);
             var strReq = new StringBuilder(url);
             if (!url.Contains("?"))
                 strReq.Append("?");
@@ -215,15 +219,41 @@ namespace Mapsui.Web.Wms
                 strReq.AppendFormat("SERVICE=WMS&");
             if (!url.ToLower().Contains("request=getcapabilities"))
                 strReq.AppendFormat("REQUEST=GetCapabilities&");
+            if (!url.ToLower().Contains("version=") && !string.IsNullOrEmpty(wmsVersion))
+                strReq.AppendFormat("VERSION={0}&", wmsVersion);
 
-            XmlDocument xml = GetRemoteXml(strReq.ToString());
+            var xml = GetRemoteXml(strReq.ToString());
             ParseCapabilities(xml);
         }
 
-        public Client(XmlDocument capabilitiesXmlDocument)
+        public Client(XmlDocument capabilitiesXmlDocument, Func<string, Task<Stream>> getStreamAsync = null)
         {
+            InitialiseGetStreamAsyncMethod(getStreamAsync);
             nsmgr = new XmlNamespaceManager(capabilitiesXmlDocument.NameTable);
             ParseCapabilities(capabilitiesXmlDocument);
+        }
+
+        private void InitialiseGetStreamAsyncMethod(Func<string, Task<Stream>> getStreamAsync)
+        {
+            _getStreamAsync = getStreamAsync ?? GetStreamAsync;
+        }
+
+        private Task<Stream> GetStreamAsync(string url)
+        {
+            var source = new TaskCompletionSource<Stream>();
+
+            try
+            {
+                var webRequest = WebRequest.Create(url);
+                var webResponse = (HttpWebResponse) webRequest.GetResponse();
+                source.SetResult(webResponse.GetResponseStream());             
+            }
+            catch (Exception ex)
+            {
+                source.SetException(ex);
+            }
+
+            return source.Task;
         }
 
         /// <summary>
@@ -244,12 +274,18 @@ namespace Mapsui.Web.Wms
         {
             try
             {
-                var stream = GetResponseStream(url);
+                var doc = new XmlDocument { XmlResolver = null };
 
-                var r = new XmlTextReader(url, stream) {XmlResolver = null};
-                var doc = new XmlDocument {XmlResolver = null};
-                doc.Load(r);
-                stream.Close();
+                using (var task = _getStreamAsync(url))
+                {                     
+                    using (var stReader = new StreamReader(task.Result))
+                    {
+                        var r = new XmlTextReader(url, stReader) { XmlResolver = null };
+                        doc.Load(r);
+                        task.Result.Close();
+                    }
+                }
+
                 nsmgr = new XmlNamespaceManager(doc.NameTable);
                 return doc;
             }
@@ -257,14 +293,6 @@ namespace Mapsui.Web.Wms
             {
                 throw new ApplicationException("Could not download capabilities", ex);
             }
-        }
-
-        private static Stream GetResponseStream(string url)
-        {
-            var request = WebRequest.Create(url);
-            var response = request.GetResponse();
-            var stream = response.GetResponseStream();
-            return stream;
         }
 
 
@@ -474,7 +502,7 @@ namespace Mapsui.Web.Wms
             wmsServerLayer.Abstract = (node != null ? node.InnerText : null);
             XmlAttribute attr = xmlLayer.Attributes["queryable"];
             wmsServerLayer.Queryable = (attr != null && attr.InnerText == "1");
-            
+
             XmlNodeList xnlKeywords = xmlLayer.SelectNodes("sm:KeywordList/sm:Keyword", nsmgr);
             if (xnlKeywords != null)
             {
@@ -522,7 +550,7 @@ namespace Mapsui.Web.Wms
                     {
                         wmsServerLayer.Style[i].LegendUrl = new WmsStyleLegend();
                         wmsServerLayer.Style[i].LegendUrl.Size = new Size();
-                        wmsServerLayer.Style[i].LegendUrl.Size.Width  = int.Parse(node.Attributes["width"].InnerText);
+                        wmsServerLayer.Style[i].LegendUrl.Size.Width = int.Parse(node.Attributes["width"].InnerText);
                         wmsServerLayer.Style[i].LegendUrl.Size.Height = int.Parse(node.Attributes["height"].InnerText);
                         wmsServerLayer.Style[i].LegendUrl.OnlineResource.OnlineResource =
                             node.SelectSingleNode("sm:OnlineResource", nsmgr).Attributes["xlink:href"].InnerText;
