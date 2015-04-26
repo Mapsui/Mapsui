@@ -41,7 +41,7 @@ Per platform there are separate assemblies for the UI and for Rendering. Those a
 
 ## Applications that use Mapsui ##
 
-- [BergerView 2.0](http://www.geodan.com/organisation/news/latest-news/article/bergerview-20-for-stichting-incident-management/)
+- [BergerView 2.0](http://www.stichtingimn.nl/130228-aanrijdtijdensysteem-en-bergerview-vernieuwd.php)
 - [OutdoorMaps](http://www.outdoormaps.net/)
 - [Phoenix](http://www.geodan.nl/producten/touch-table-software/phoenix/)
 - [Bevoegd Gezag](http://apps.microsoft.com/windows/nl-nl/app/ceb52263-0e83-4bdd-a38a-bcab63295b9d)
