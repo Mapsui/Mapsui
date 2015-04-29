@@ -42,7 +42,7 @@ namespace Mapsui.Rendering.Xaml
 
         public static Brush MapsuiBrushToXaml(Styles.Brush brush)
         {
-#if !SILVERLIGHT
+#if !SILVERLIGHT && !NETFX_CORE
             switch (brush.FillStyle)
             {
                 case FillStyle.Cross:
@@ -72,7 +72,7 @@ namespace Mapsui.Rendering.Xaml
             return new SolidColorBrush(brush.Color.ToXaml());
         }
 
-#if !SILVERLIGHT
+#if !SILVERLIGHT && !NETFX_CORE
         private static Color GetColor(Styles.Color color)
         {
             return color == null ? Colors.Black : color.ToXaml();
