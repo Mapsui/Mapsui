@@ -28,7 +28,7 @@ namespace Mapsui.Providers
     /// Datasource for storing a limited set of geometries.
     /// </summary>
     /// <remarks>
-    /// <para>The MemoryProvider doesn’t utilize performance optimizations of spatial indexing,
+    /// <para>The MemoryProvider doesnâ€™t utilize performance optimizations of spatial indexing,
     /// and thus is primarily meant for rendering a limited set of Geometries.</para>
     /// <para>A common use of the MemoryProvider is for highlighting a set of selected features.</para>
     /// <example>

@@ -1,4 +1,4 @@
-﻿using System.ComponentModel;
+using System.ComponentModel;
 using Mapsui.Geometries;
 
 namespace Mapsui

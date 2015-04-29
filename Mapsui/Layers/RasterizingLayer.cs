@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using Mapsui.Fetcher;
 using Mapsui.Geometries;
 using Mapsui.Providers;

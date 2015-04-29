@@ -1,13 +1,19 @@
+using System;
+using System;
+using System;
+using System;
+using System;
+using System;
 using Mapsui.Providers;
 using Mapsui.Rendering.iOS.ExtensionMethods;
 using Mapsui.Styles;
-using MonoTouch.CoreAnimation;
-using MonoTouch.CoreGraphics;
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
-using System.Drawing;
+using CoreAnimation;
+using CoreGraphics;
+using Foundation;
+using UIKit;
+using CoreGraphics;
 using System.IO;
-using Point = Mapsui.Geometries.Point;
+using CGPoint = Mapsui.Geometries.CGPoint;
 
 namespace Mapsui.Rendering.iOS
 {
@@ -15,7 +21,7 @@ namespace Mapsui.Rendering.iOS
     {
         private const double RadiansPerDegree = 0.0174532925f;
 
-        public static void RenderPoint(CALayer target, Point point, IStyle style, IViewport viewport, IFeature feature)
+        public static void RenderPoint(CALayer target, CGPoint point, IStyle style, IViewport viewport, IFeature feature)
         {
             CALayer symbol;
 			float rotation = 0;
@@ -79,8 +85,8 @@ namespace Mapsui.Rendering.iOS
                 symbol.StrokeColor = style.Outline.Color.ToCG();
             }
 
-            var frame = new RectangleF(-defaultWidth * 0.5f, -defaultHeight * 0.5f, defaultWidth, defaultHeight);
-            symbol.Path = UIBezierPath.FromRoundedRect(frame, frame.Width / 2).CGPath;
+            var frame = new CGRect(-defaultWidth * 0.5f, -defaultHeight * 0.5f, defaultWidth, defaultHeight);
+            symbol.Path = UIBezierPath.FromRoundedRect((CGRect)frame, (nfloat)frame.Width / 2).CGPath;
 
             return symbol;
         }
@@ -91,18 +97,18 @@ namespace Mapsui.Rendering.iOS
 			var image = ToUIImage(BitmapRegistry.Instance.Get(style.BitmapId));
 
             symbol.Contents = image.CGImage;
-            symbol.Frame = new RectangleF(-image.Size.Width * 0.5f, -image.Size.Height * 0.5f, image.Size.Width, image.Size.Height);
+            symbol.Frame = new CGRect(-(CGSize)image.Size.Width * 0.5f, -(CGSize)image.Size.Height * 0.5f, (CGSize)image.Size.Width, (CGSize)image.Size.Height);
 
             symbol.Opacity = (float)style.Opacity;
 
             return symbol;
         }
 
-        private static CGAffineTransform CreateAffineTransform(double rotation, Point position, float scale)
+        private static CGAffineTransform CreateAffineTransform(double rotation, CGPoint position, float scale)
         {
-            var transformTranslate = CGAffineTransform.MakeTranslation((float)position.X, (float)position.Y);
-            var transformRotate = CGAffineTransform.MakeRotation((float)(rotation * RadiansPerDegree));
-			var transformScale = CGAffineTransform.MakeScale (scale, scale);
+            var transformTranslate = CGAffineTransform.MakeTranslation((nfloat)(float)position.X, (nfloat)(float)position.Y);
+            var transformRotate = CGAffineTransform.MakeRotation((nfloat)(float)(rotation * RadiansPerDegree));
+			var transformScale = CGAffineTransform.MakeScale ((nfloat)scale, (nfloat)scale);
             var transform = transformScale * transformRotate * transformTranslate;
             return transform;
         }

@@ -1,4 +1,4 @@
-﻿using BruTile;
+using BruTile;
 using Mapsui.Geometries;
 
 namespace System.Threading.Timers

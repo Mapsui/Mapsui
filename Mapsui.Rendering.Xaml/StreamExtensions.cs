@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 #if !NETFX_CORE
 using System.Windows.Media.Imaging;

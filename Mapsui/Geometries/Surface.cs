@@ -21,9 +21,9 @@ namespace Mapsui.Geometries
     /// A Surface is a two-dimensional geometric object.
     /// </summary>
     /// <remarks>
-    /// The OpenGIS Abstract Specification defines a simple Surface as consisting of a single ‘patch’ that is
-    /// associated with one ‘exterior boundary’ and 0 or more ‘interior’ boundaries. Simple surfaces in threedimensional
-    /// space are isomorphic to planar surfaces. Polyhedral surfaces are formed by ‘stitching’ together
+    /// The OpenGIS Abstract Specification defines a simple Surface as consisting of a single â€˜patchâ€™ that is
+    /// associated with one â€˜exterior boundaryâ€™ and 0 or more â€˜interiorâ€™ boundaries. Simple surfaces in threedimensional
+    /// space are isomorphic to planar surfaces. Polyhedral surfaces are formed by â€˜stitchingâ€™ together
     /// simple surfaces along their boundaries, polyhedral surfaces in three-dimensional space may not be planar as
     /// a whole.
     /// </remarks>

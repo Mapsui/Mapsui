@@ -2,14 +2,14 @@ using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Styles;
-using MonoTouch.CoreAnimation;
-using MonoTouch.UIKit;
+using CoreAnimation;
+using UIKit;
 using System.Collections.Generic;
-using System.Drawing;
+using CoreGraphics;
 using System.IO;
 using System.Linq;
 using System.Threading;
-using Point = Mapsui.Geometries.Point;
+using CGPoint = Mapsui.Geometries.CGPoint;
 
 namespace Mapsui.Rendering.iOS
 {
@@ -87,7 +87,7 @@ namespace Mapsui.Rendering.iOS
                 view.Opaque = false;
                 view.BackgroundColor = UIColor.Clear;
                 Render(view, viewport, layers, false);
-                image = ToImage(view, new RectangleF(0, 0, (float)viewport.Width, (float)viewport.Height));
+                image = ToImage(view, new CGRect(0, 0, (float)viewport.Width, (float)viewport.Height));
                 handle.Set();
             });
 
@@ -98,11 +98,11 @@ namespace Mapsui.Rendering.iOS
             }
         }
 
-        private static UIImage ToImage(UIView view, RectangleF frame)
+        private static UIImage ToImage(UIView view, CGRect frame)
         {
-            UIGraphics.BeginImageContext(frame.Size);
+            UIGraphics.BeginImageContext((CGSize)frame.Size);
             UIColor.Clear.SetColor();
-            UIGraphics.RectFill(view.Frame);
+            UIGraphics.RectFill((CGRect)view.Frame);
             view.Layer.RenderInContext(UIGraphics.GetCurrentContext());
             var image = UIGraphics.GetImageFromCurrentImageContext();
             UIGraphics.EndImageContext();
@@ -111,9 +111,9 @@ namespace Mapsui.Rendering.iOS
 
         private static void RenderGeometry(CALayer target, IViewport viewport, IStyle style, IFeature feature)
         {
-            if (feature.Geometry is Point)
+            if (feature.Geometry is CGPoint)
             {
-                PointRenderer2.RenderPoint(target, (Point)feature.Geometry, style, viewport,feature);
+                PointRenderer2.RenderPoint(target, (CGPoint)feature.Geometry, style, viewport,feature);
             }
             else if (feature.Geometry is LineString)
             {

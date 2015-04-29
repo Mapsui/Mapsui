@@ -1,4 +1,4 @@
-﻿using Mapsui.Layers;
+using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;

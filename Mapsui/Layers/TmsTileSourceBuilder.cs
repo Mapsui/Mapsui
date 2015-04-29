@@ -1,4 +1,4 @@
-﻿using BruTile;
+using BruTile;
 using BruTile.Tms;
 using System;
 using System.Net;

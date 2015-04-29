@@ -8,16 +8,16 @@ using Mapsui.Geometries;
 using Mapsui.Providers;
 using Mapsui;
 using Mapsui.Rendering.iOS;
-using MonoTouch.UIKit;
-using System.Drawing;
-using MonoTouch.CoreGraphics;
+using UIKit;
+using CoreGraphics;
+using CoreGraphics;
 using Mapsui.Layers;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
-using MonoTouch.Foundation;
+using Foundation;
 using BruTile;
-using MonoTouch.CoreAnimation;
-using MonoTouch.CoreFoundation;
+using CoreAnimation;
+using CoreFoundation;
 using System.Runtime.InteropServices;
 using System.Collections;
 using System.Threading;
@@ -178,7 +178,7 @@ namespace XamarinRendering
 
 		private static CALayer RenderGeometry (IViewport viewport, IStyle style, IFeature feature)
 		{
-			if (feature.Geometry is Mapsui.Geometries.Point)
+			if (feature.Geometry is Mapsui.Geometries.CGPoint)
 			{
 			    return null;//!!!GeometryRenderer.RenderPoint (feature.Geometry as Mapsui.Geometries.Point, style, viewport);
 			} else if (feature.Geometry is Polygon){
@@ -193,8 +193,8 @@ namespace XamarinRendering
 
 		private static void PositionGeometry(CALayer renderedGeometry, IViewport viewport, IStyle style, IFeature feature)
 		{
-			if (feature.Geometry is Mapsui.Geometries.Point){
-				GeometryRenderer.PositionPoint(renderedGeometry, feature.Geometry as Mapsui.Geometries.Point, style, viewport);
+			if (feature.Geometry is Mapsui.Geometries.CGPoint){
+				GeometryRenderer.PositionPoint(renderedGeometry, feature.Geometry as Mapsui.Geometries.CGPoint, style, viewport);
 			}
 			if (feature.Geometry is MultiPoint)
 				return;

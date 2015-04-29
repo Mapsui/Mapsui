@@ -1,4 +1,5 @@
-﻿using Mapsui.Geometries;
+using CoreGraphics;
+using Mapsui.Geometries;
 using Mapsui.Providers;
 using Mapsui.Styles;
 using OpenTK.Graphics.ES11;
@@ -34,7 +35,7 @@ namespace Mapsui.Rendering.OpenTK
             GL.DisableClientState(All.VertexArray);
         }
 
-        private static float[] ToOpenTK(IList<Point> vertices)
+        private static float[] ToOpenTK(IList<CGPoint> vertices)
         {
             const int dimensions = 2; // x and y are both in one array
             int numberOfCoordinates = vertices.Count * 2 - 2; // Times two because of duplicate begin en end. Minus two because the very begin and end need no duplicate

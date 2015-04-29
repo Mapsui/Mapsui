@@ -1,4 +1,4 @@
-﻿using System.IO;
+using System.IO;
 
 namespace Mapsui.Providers.Wms
 {

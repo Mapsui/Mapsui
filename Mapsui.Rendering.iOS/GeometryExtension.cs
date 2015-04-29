@@ -1,24 +1,24 @@
 using Mapsui.Geometries;
-using MonoTouch.UIKit;
+using UIKit;
 using System.Collections.Generic;
-using System.Drawing;
-using Point = Mapsui.Geometries.Point;
+using CoreGraphics;
+using CGPoint = Mapsui.Geometries.CGPoint;
 using System.Linq;
 
 namespace Mapsui.Rendering.iOS
 {
 	static class GeometryExtension
 	{
-		public static System.Drawing.Point OffSet;
+		public static CoreGraphics.CGPoint OffSet;
 
-		public static PointF ToUIKit(this Point point)
+		public static CGPoint ToUIKit(this CGPoint point)
 		{
 			double xo = OffSet.X;
 			double yo = OffSet.Y;
-			return new PointF((float)(point.X - (xo)), (float)(point.Y - yo));
+			return new CGPoint((float)(point.X - (xo)), (float)(point.Y - yo));
 		}
 
-		public static UIBezierPath ToUIKit(this IEnumerable<Point> points, IViewport viewport)
+		public static UIBezierPath ToUIKit(this IEnumerable<CGPoint> points, IViewport viewport)
 		{
 			var pathGeometry = new UIBezierPath ();
 		    points = points.ToList();
@@ -27,12 +27,12 @@ namespace Mapsui.Rendering.iOS
 				var first = points.FirstOrDefault ();
 				var start = viewport.WorldToScreen (first);
 
-				pathGeometry.MoveTo (ToUIKit (start));
+				pathGeometry.MoveTo ((CGPoint)ToUIKit (start));
 
 				for (int i = 1; i < points.Count (); i++) {
 					var point = points.ElementAt (i);
 					var p = viewport.WorldToScreen (point);
-					pathGeometry.AddLineTo (new PointF ((float)p.X, (float)p.Y));
+					pathGeometry.AddLineTo ((CGPoint)new CGPoint ((float)p.X, (float)p.Y));
 				}
 			}
 			return pathGeometry;
@@ -92,13 +92,13 @@ namespace Mapsui.Rendering.iOS
 			var start = linearRing.Vertices[0];
 			var startPos = viewport.WorldToScreen(start);
 
-			pathFigure.MoveTo(ToUIKit(startPos));
+			pathFigure.MoveTo((CGPoint)ToUIKit(startPos));
 
 			for(int i = 1; i < linearRing.Vertices.Count; i++)
 			{
 				var pos = linearRing.Vertices[i];
 				var screenPos = viewport.WorldToScreen(pos);
-				pathFigure.AddLineTo(ToUIKit(screenPos));
+				pathFigure.AddLineTo((CGPoint)ToUIKit(screenPos));
 			}
 			pathFigure.ClosePath();
 

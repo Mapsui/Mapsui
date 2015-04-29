@@ -1,11 +1,11 @@
 using System;
 using System.Diagnostics;
-using System.Drawing;
+using CoreGraphics;
 using System.IO;
-using MonoTouch.CoreGraphics;
-using MonoTouch.Foundation;
-using MonoTouch.GLKit;
-using MonoTouch.UIKit;
+using CoreGraphics;
+using Foundation;
+using GLKit;
+using UIKit;
 using OpenTK.Graphics.ES20;
 
 namespace Mapsui.Rendering.OpenTK
@@ -23,8 +23,8 @@ namespace Mapsui.Rendering.OpenTK
 			UIImage image = UIImage.LoadFromData(nsData);
 			if (image == null) new Exception ("could not load image data");
 
-			width = image.CGImage.Width;
-			height = image.CGImage.Height;
+			width = (int)image.CGImage.Width;
+			height = (int)image.CGImage.Height;
 
 			CGColorSpace colorSpace = CGColorSpace.CreateDeviceRGB();
 			byte [] imageData = new byte[height * width * 4];
@@ -32,8 +32,8 @@ namespace Mapsui.Rendering.OpenTK
 				CGBitmapFlags.PremultipliedLast | CGBitmapFlags.ByteOrder32Big);
 
 			colorSpace.Dispose();
-			context.ClearRect(new RectangleF(0, 0, width, height));
-			context.DrawImage(new RectangleF(0, 0, width, height), image.CGImage);
+			context.ClearRect((CGRect)new CGRect(0, 0, width, height));
+			context.DrawImage((CGRect)new CGRect(0, 0, width, height), (CGImage)image.CGImage);
 
 			GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba, width, height, 0, PixelFormat.Rgba, PixelType.UnsignedByte, imageData);
 			context.Dispose();

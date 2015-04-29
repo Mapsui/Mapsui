@@ -1,13 +1,13 @@
-﻿using System;
-using MonoTouch.CoreGraphics;
+using System;
+using CoreGraphics;
 using Mapsui.Geometries;
-using System.Drawing;
+using CoreGraphics;
 using Mapsui.Styles;
 using Mapsui.Providers;
-using MonoTouch.CoreAnimation;
+using CoreAnimation;
 using System.Diagnostics;
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using Foundation;
+using UIKit;
 
 namespace Mapsui.Rendering.iOS
 {
@@ -53,11 +53,11 @@ namespace Mapsui.Rendering.iOS
 				);
 		}
 
-		public static RectangleF RoundToPixel(BoundingBox dest)
+		public static CGRect RoundToPixel(BoundingBox dest)
 		{
 			var height = (float)(Math.Round (dest.MaxY) - Math.Round (dest.MinY));
 
-			var frame = new RectangleF(
+			var frame = new CGRect(
 				(float)Math.Round(dest.MinX),
 				(float)Math.Round(dest.MinY),
 				(float)(Math.Round(dest.MaxX) - Math.Round(dest.MinX)),
@@ -66,11 +66,11 @@ namespace Mapsui.Rendering.iOS
 			return frame;
 		}
 
-		private static void DrawRectangle(CGContext currentContext, RectangleF destination, Color outlineColor)
+		private static void DrawRectangle(CGContext currentContext, CGRect destination, Color outlineColor)
 		{
 			currentContext.SetStrokeColor (outlineColor.R, outlineColor.G, outlineColor.B, outlineColor.A);
-			currentContext.SetLineWidth (4f);
-			currentContext.StrokeRect (destination);
+			currentContext.SetLineWidth ((nfloat)4f);
+			currentContext.StrokeRect ((CGRect)destination);
 		}
 
 		private static UIImage ToiOSBitmap(IGeometry geometry)

@@ -300,23 +300,23 @@ namespace Mapsui.Providers.Shapefile
                 case 0x59:
                     return Encoding.GetEncoding(1252); // Spanish ANSI
                 case 0x64:
-                    return Encoding.GetEncoding(852); // Eastern European MS–DOS
+                    return Encoding.GetEncoding(852); // Eastern European MSâ€“DOS
                 case 0x65:
-                    return Encoding.GetEncoding(866); // Russian MS–DOS
+                    return Encoding.GetEncoding(866); // Russian MSâ€“DOS
                 case 0x66:
-                    return Encoding.GetEncoding(865); // Nordic MS–DOS
+                    return Encoding.GetEncoding(865); // Nordic MSâ€“DOS
                 case 0x67:
-                    return Encoding.GetEncoding(861); // Icelandic MS–DOS
+                    return Encoding.GetEncoding(861); // Icelandic MSâ€“DOS
                 case 0x68:
                     return Encoding.GetEncoding(895); // Kamenicky (Czech) MS-DOS 
                 case 0x69:
                     return Encoding.GetEncoding(620); // Mazovia (Polish) MS-DOS 
                 case 0x6A:
-                    return Encoding.GetEncoding(737); // Greek MS–DOS (437G)
+                    return Encoding.GetEncoding(737); // Greek MSâ€“DOS (437G)
                 case 0x6B:
-                    return Encoding.GetEncoding(857); // Turkish MS–DOS
+                    return Encoding.GetEncoding(857); // Turkish MSâ€“DOS
                 case 0x6C:
-                    return Encoding.GetEncoding(863); // French–Canadian MS–DOS
+                    return Encoding.GetEncoding(863); // Frenchâ€“Canadian MSâ€“DOS
                 case 0x78:
                     return Encoding.GetEncoding(950); // Taiwan Big 5
                 case 0x79:
@@ -326,7 +326,7 @@ namespace Mapsui.Providers.Shapefile
                 case 0x7B:
                     return Encoding.GetEncoding(932); // Japanese Shift-JIS
                 case 0x7C:
-                    return Encoding.GetEncoding(874); // Thai Windows/MS–DOS
+                    return Encoding.GetEncoding(874); // Thai Windows/MSâ€“DOS
                 case 0x7D:
                     return Encoding.GetEncoding(1255); // Hebrew Windows 
                 case 0x7E:

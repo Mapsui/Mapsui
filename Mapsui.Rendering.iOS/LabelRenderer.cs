@@ -1,13 +1,15 @@
+using Foundation;
+using CoreText;
 using Mapsui;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
-using MonoTouch.CoreAnimation;
+using CoreAnimation;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
+using CoreGraphics;
 using System.Linq;
 
 namespace XamarinRendering
@@ -50,7 +52,7 @@ namespace XamarinRendering
 
 							if (renderedGeometry == null) {
 							//Mapsui.Geometries.Point point, Offset stackOffset, LabelStyle style, IFeature feature, IViewport viewport, string text)
-								renderedGeometry = RenderLabel(feature.Geometry as Mapsui.Geometries.Point,
+								renderedGeometry = RenderLabel(feature.Geometry as Mapsui.Geometries.CGPoint,
 								                               style as LabelStyle, feature, viewport, labelText);
 
 								feature [styleKey] = renderedGeometry;
@@ -99,12 +101,12 @@ namespace XamarinRendering
 			var p1 = viewport.WorldToScreen(box.Min);
 			var p2 = viewport.WorldToScreen(box.Max);
 
-			var rectangle = new RectangleF {Width = (float) (p2.X - p1.X + margin), Height = (float) (p1.Y - p2.Y + margin)};
+			var rectangle = new CGRect {Width = (float) (p2.X - p1.X + margin), Height = (float) (p1.Y - p2.Y + margin)};
 
 		    var canvas = new CALayer
 		    {
 		        Frame = rectangle,
-		        BorderColor = new MonoTouch.CoreGraphics.CGColor(0, 0, 0, 1),
+		        BorderColor = new CoreGraphics.CGColor(0, 0, 0, 1),
 		        BorderWidth = 2
 		    };
 
@@ -132,7 +134,7 @@ namespace XamarinRendering
 					//var labelStyle = style as LabelStyle;
 					string labelText = layer.GetLabelText(feature);
 
-					var label = RenderLabel (feature.Geometry as Mapsui.Geometries.Point,
+					var label = RenderLabel (feature.Geometry as Mapsui.Geometries.CGPoint,
 					                         style as LabelStyle, feature, viewport, labelText);
 
 					canvas.AddSublayer(label);
@@ -181,39 +183,39 @@ namespace XamarinRendering
 			}
 		}
 
-		public static CALayer RenderLabel(Mapsui.Geometries.Point point, LabelStyle style, IViewport viewport)
+		public static CALayer RenderLabel(Mapsui.Geometries.CGPoint point, LabelStyle style, IViewport viewport)
 		{
 			//Offset stackOffset,
 			//return RenderLabel(point, stackOffset, style, viewport, style.Text);
 			return new CALayer ();
 		}
 
-		public static CATextLayer RenderLabel(Mapsui.Geometries.Point point, LabelStyle style, IFeature feature, IViewport viewport, string text)
+		public static CATextLayer RenderLabel(Mapsui.Geometries.CGPoint point, LabelStyle style, IFeature feature, IViewport viewport, string text)
 		{
 			// Offset stackOffset,
-			Mapsui.Geometries.Point p = viewport.WorldToScreen(point);
+			Mapsui.Geometries.CGPoint p = viewport.WorldToScreen(point);
 			//var pointF = new xPointF((float)p.X, (float)p.Y);
 			var label = new CATextLayer ();
 
 
-			var aString = new MonoTouch.Foundation.NSAttributedString (text,
-			                                                           new MonoTouch.CoreText.CTStringAttributes(){
-				Font = new MonoTouch.CoreText.CTFont("ArialMT", 10)
+			var aString = new Foundation.NSAttributedString (text,
+			                                                           new CoreText.CTStringAttributes(){
+				Font = new CoreText.CTFont("ArialMT", 10)
 			});
 
-			var frame = new RectangleF(new System.Drawing.Point((int)p.X, (int)p.Y), GetSizeForText(0, aString));
+			var frame = new CGRect(new CoreGraphics.CGPoint((int)p.X, (int)p.Y), GetSizeForText(0, aString));
 			//label.Frame = frame;
 			//frame.Width = (float)(p2.X - p1.X);// + margin);
 			//frame.Height = (float)(p1.Y - p2.Y);
 
 			label.FontSize = 10;
-			label.ForegroundColor = new MonoTouch.CoreGraphics.CGColor (0, 0, 255, 150);
-			label.BackgroundColor = new MonoTouch.CoreGraphics.CGColor (255, 0, 2, 150);
+			label.ForegroundColor = new CoreGraphics.CGColor (0, 0, 255, 150);
+			label.BackgroundColor = new CoreGraphics.CGColor (255, 0, 2, 150);
 			label.String = text;
 
 			label.Frame = frame;
 
-			Console.WriteLine ("Pos " + label.Frame.X + ":" + label.Frame.Y + " w " + label.Frame.Width + " h " + label.Frame.Height);
+			Console.WriteLine ("Pos " + (CGRect)label.Frame.X + ":" + (CGRect)label.Frame.Y + " w " + (CGRect)label.Frame.Width + " h " + (CGRect)label.Frame.Height);
 
 			// = MonoTouch.UIKit.UIScreen.MainScreen.Scale;
 			//	label.ContentsScale = scale;
@@ -221,14 +223,14 @@ namespace XamarinRendering
 			return label;
 		}
 
-		private static SizeF GetSizeForText(int width, MonoTouch.Foundation.NSAttributedString aString)
+		private static CGSize GetSizeForText(int width, Foundation.NSAttributedString aString)
 		{
-			var frameSetter = new MonoTouch.CoreText.CTFramesetter (aString);
+			var frameSetter = new CoreText.CTFramesetter (aString);
 
-			MonoTouch.Foundation.NSRange range;
+			Foundation.NSRange range;
 			//CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString( (CFMutableAttributedStringRef) attributedString); 
-			var size = frameSetter.SuggestFrameSize (new MonoTouch.Foundation.NSRange (0, 0), null,
-			                                         new System.Drawing.Size (width, Int32.MaxValue), out range);
+			var size = (CGSize)frameSetter.SuggestFrameSize ((NSRange)new Foundation.NSRange (0, 0), (CTFrameAttributes)null,
+(CGSize)			                                         new CoreGraphics.CGSize (width, Int32.MaxValue), out range);
 
 			//CGSize suggestedSize = CTFramesetterSuggestFrameSizeWithConstraints(framesetter, CFRangeMake(0, 0), NULL, CGSizeMake(inWidth, CGFLOAT_MAX), NULL);
 			//CFRelease(framesetter);

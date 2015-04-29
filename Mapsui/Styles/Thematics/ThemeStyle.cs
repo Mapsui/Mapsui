@@ -1,4 +1,4 @@
-﻿using Mapsui.Providers;
+using Mapsui.Providers;
 using System;
 
 namespace Mapsui.Styles.Thematics

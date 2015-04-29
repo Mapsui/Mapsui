@@ -1,9 +1,13 @@
-﻿using System.Collections.Generic;
+using CoreGraphics;
+using CoreGraphics;
+using CoreGraphics;
+using CoreGraphics;
+using System.Collections.Generic;
 using System.Linq;
 using Mapsui.Providers;
 using Mapsui.Styles;
 using OpenTK.Graphics.ES11;
-using Point = Mapsui.Geometries.Point;
+using CGPoint = Mapsui.Geometries.CGPoint;
 
 namespace Mapsui.Rendering.OpenTK
 {
@@ -11,7 +15,7 @@ namespace Mapsui.Rendering.OpenTK
     {
         public static void Draw(IViewport viewport, IStyle style, IFeature feature, IDictionary<int, TextureInfo> bitmapCache)
         {
-            var point = feature.Geometry as Point;
+            var point = feature.Geometry as CGPoint;
             var destination = viewport.WorldToScreen(point);
 
             if (style is LabelStyle)
@@ -24,7 +28,7 @@ namespace Mapsui.Rendering.OpenTK
             else if (style is VectorStyle) DrawPointWithVectorStyle((VectorStyle)style, destination);
         }
 
-        private static void DrawPointWithVectorStyle(VectorStyle vectorStyle, Point destination)
+        private static void DrawPointWithVectorStyle(VectorStyle vectorStyle, CGPoint destination)
         {
             var color = vectorStyle.Fill.Color;
             GL.Color4((byte) color.R, (byte) color.G, (byte) color.B, (byte) color.A);
@@ -36,7 +40,7 @@ namespace Mapsui.Rendering.OpenTK
             GL.DisableClientState(All.VertexArray);
         }
 
-        private static void DrawPointWithSymbolStyle(SymbolStyle symbolStyle, Point destination, IDictionary<int, TextureInfo> bitmapCache)
+        private static void DrawPointWithSymbolStyle(SymbolStyle symbolStyle, CGPoint destination, IDictionary<int, TextureInfo> bitmapCache)
         {
             TextureInfo textureInfo;
             if (!bitmapCache.Keys.Contains(symbolStyle.BitmapId))

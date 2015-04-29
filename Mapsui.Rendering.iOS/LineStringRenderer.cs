@@ -1,11 +1,11 @@
-﻿using Mapsui.Geometries;
+using Mapsui.Geometries;
 using Mapsui.Providers;
 using Mapsui.Rendering.iOS.ExtensionMethods;
 using Mapsui.Styles;
-using MonoTouch.CoreAnimation;
-using MonoTouch.CoreGraphics;
-using System.Drawing;
-using MonoTouch.UIKit;
+using CoreAnimation;
+using CoreGraphics;
+using CoreGraphics;
+using UIKit;
 
 namespace Mapsui.Rendering.iOS
 {

@@ -1,11 +1,11 @@
 using Mapsui.Fetcher;
 using Mapsui.Rendering.iOS;
-using MonoTouch.CoreFoundation;
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using CoreFoundation;
+using Foundation;
+using UIKit;
 using System;
 using System.ComponentModel;
-using System.Drawing;
+using CoreGraphics;
 using Math = System.Math;
 
 namespace Mapsui.UI.iOS
@@ -16,8 +16,8 @@ namespace Mapsui.UI.iOS
         public delegate void ViewportInitializedEventHandler(object sender);
         public event ViewportInitializedEventHandler ViewportInitializedEvent;
 
-        private PointF _previousMid;
-        private PointF _currentMid;
+        private CGPoint _previousMid;
+        private CGPoint _currentMid;
         private float _oldDist = 1f;
         private MapRenderer _renderer;
         private Map _map;
@@ -42,7 +42,7 @@ namespace Mapsui.UI.iOS
             Initialize();
         }
 
-        public MapControlUIKit(RectangleF frame)
+        public MapControlUIKit(CGRect frame)
             : base(frame)
         {
             Initialize();
@@ -89,24 +89,24 @@ namespace Mapsui.UI.iOS
         {
 			if (_map.Lock) return;
 
-            if (recognizer.NumberOfTouches < 2)
+            if ((int)recognizer.NumberOfTouches < 2)
                 return;
 
             if (recognizer.State == UIGestureRecognizerState.Began)
             {
                 _oldDist = 1;
-                _currentMid = recognizer.LocationInView(this);
+                _currentMid = (CGPoint)recognizer.LocationInView((UIView)this);
             }
 
-            float scale = 1 - (_oldDist - recognizer.Scale);
+            float scale = 1 - (_oldDist - (float)recognizer.Scale);
 
             if (scale > 0.5 && scale < 1.5)
             {
-                if (_oldDist != recognizer.Scale)
+                if (_oldDist != (float)recognizer.Scale)
                 {
-                    _oldDist = recognizer.Scale;
-                    _currentMid = recognizer.LocationInView(this);
-                    _previousMid = new PointF(_currentMid.X, _currentMid.Y);
+                    _oldDist = (float)recognizer.Scale;
+                    _currentMid = (CGPoint)recognizer.LocationInView((UIView)this);
+                    _previousMid = new CGPoint(_currentMid.X, _currentMid.Y);
 
                     _map.Viewport.Center = _map.Viewport.ScreenToWorld(
                         _currentMid.X,
@@ -134,16 +134,16 @@ namespace Mapsui.UI.iOS
         {
 			if (_map.Lock) return;
 
-            if (touches.Count == 1)
+            if ((uint)touches.Count == 1)
             {
                 var touch = touches.AnyObject as UITouch;
                 if (touch != null)
                 {
-                    var currentPos = touch.LocationInView(this);
-                    var previousPos = touch.PreviousLocationInView(this);
+                    var currentPos = (CGPoint)touch.LocationInView((UIView)this);
+                    var previousPos = (CGPoint)touch.PreviousLocationInView((UIView)this);
 
-                    var cRect = new Rectangle(new Point((int)currentPos.X, (int)currentPos.Y), new Size(5, 5));
-                    var pRect = new Rectangle(new Point((int)previousPos.X, (int)previousPos.Y), new Size(5, 5));
+                    var cRect = new CGRect(new CGPoint((int)currentPos.X, (int)currentPos.Y), new CGSize(5, 5));
+                    var pRect = new CGRect(new CGPoint((int)previousPos.X, (int)previousPos.Y), new CGSize(5, 5));
 
                     if (!cRect.IntersectsWith(pRect))
                     {
@@ -241,7 +241,7 @@ namespace Mapsui.UI.iOS
         {
             string errorMessage;
 
-            DispatchQueue.MainQueue.DispatchAsync(delegate
+            DispatchQueue.MainQueue.DispatchAsync((Action)delegate
             {
                 if (e == null)
                 {
@@ -273,9 +273,9 @@ namespace Mapsui.UI.iOS
             SetNeedsDisplay();
         }
 
-        public override void Draw(RectangleF rect)
+        public override void Draw(CGRect rect)
         {
-            base.Draw(rect);
+            base.Draw((CGRect)rect);
             if (!ViewportInitialized) InitializeViewport();
             if (!ViewportInitialized) return;
 

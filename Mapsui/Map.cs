@@ -60,7 +60,7 @@ namespace Mapsui
         public string CRS { get; set; }
 
         /// <summary>
-        /// The maps coördinate system
+        /// The maps coÃ¶rdinate system
         /// </summary>
         public ITransformation Transformation { get; set; }
 

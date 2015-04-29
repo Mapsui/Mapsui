@@ -1,12 +1,12 @@
 using Mapsui.Geometries;
 using Mapsui.Providers;
 using Mapsui.Styles;
-using MonoTouch.CoreAnimation;
-using MonoTouch.CoreGraphics;
-using MonoTouch.UIKit;
+using CoreAnimation;
+using CoreGraphics;
+using UIKit;
 using System;
 using System.ComponentModel;
-using System.Drawing;
+using CoreGraphics;
 
 namespace Mapsui.Rendering.iOS
 {
@@ -64,17 +64,17 @@ namespace Mapsui.Rendering.iOS
             geom.LineWidth = (float)vectorStyle.Outline.Width;
 
             var bbRect = GeometryRenderer.ConvertBoundingBox(multiPolygon.GetBoundingBox(), viewport);
-            var offset = new System.Drawing.Point((int)bbRect.GetMinX(), (int)bbRect.GetMinY());
+            var offset = new CoreGraphics.CGPoint((int)bbRect.GetMinX(), (int)bbRect.GetMinY());
 
             GeometryExtension.OffSet = offset;
 
             var path = multiPolygon.ToUIKit(viewport);
-            var frame = new RectangleF(0, 0, (int)(bbRect.GetMaxX() - bbRect.GetMinX()), (int)(bbRect.GetMaxY() - bbRect.GetMinY()));
+            var frame = new CGRect(0, 0, (int)((float)bbRect.GetMaxX() - (float)bbRect.GetMinX()), (int)((float)bbRect.GetMaxY() - (float)bbRect.GetMinY()));
             var size = frame.Size;
 
             geom.Path = path.CGPath;
 
-            UIGraphics.BeginImageContext(size);
+            UIGraphics.BeginImageContext((CGSize)size);
 
             var context = UIGraphics.GetCurrentContext();
 

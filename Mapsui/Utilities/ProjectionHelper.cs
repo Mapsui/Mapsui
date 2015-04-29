@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Mapsui.Projection;
 
 namespace Mapsui.Utilities
