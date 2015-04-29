@@ -26,7 +26,7 @@ namespace Mapsui.Rendering.OpenTK
                 view.Opaque = false;
 					view.BackgroundColor = UIColor.Clear;
                 
-                var bitmapSize = view.StringSize(text, UIFont.SystemFontOfSize(14), new CGSize(115, float.MaxValue), UILineBreakMode.WordWrap);
+                var bitmapSize = UIStringDrawing.StringSize(text, UIFont.SystemFontOfSize(14), new CGSize(115, float.MaxValue), UILineBreakMode.WordWrap);
 
 				view.Layer.AddSublayer(CreateCATextLayer(style, text));
 					view.BackgroundColor = new UIColor(ToCGColor(style.BackColor.Color));

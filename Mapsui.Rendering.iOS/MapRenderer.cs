@@ -9,7 +9,7 @@ using CoreGraphics;
 using System.IO;
 using System.Linq;
 using System.Threading;
-using CGPoint = Mapsui.Geometries.CGPoint;
+using CGPoint = Mapsui.Geometries.Point;
 
 namespace Mapsui.Rendering.iOS
 {

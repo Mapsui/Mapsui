@@ -33,8 +33,8 @@ namespace Mapsui.UI.iOS
             }
         }
 
-        private float Width { get { return Frame.Width; } }
-        private float Height { get { return Frame.Height; } }
+        private float Width { get { return (float)Frame.Width; } }
+        private float Height { get { return (float)Frame.Height; } }
 
         public MapControlUIKit(IntPtr handle)
             : base(handle)

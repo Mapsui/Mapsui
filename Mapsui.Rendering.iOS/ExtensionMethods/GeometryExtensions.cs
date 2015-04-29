@@ -5,7 +5,7 @@ namespace Mapsui.Rendering.iOS.ExtensionMethods
 {
 	static class GeometryExtensions
 	{
-		public static CGPoint[] ToiOS(this IList<Geometries.CGPoint> geometry)
+		public static CGPoint[] ToiOS(this IList<Geometries.Point> geometry)
 		{
 			var points = new CGPoint[geometry.Count]; // Times two because x and y are in one array. Times two because of duplicate begin en end. Minus two because the very begin and end need no duplicate
 

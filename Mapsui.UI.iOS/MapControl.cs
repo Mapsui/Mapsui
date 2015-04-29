@@ -27,8 +27,8 @@ namespace Mapsui.UI.iOS
 		private Map _map;
 		private bool _refreshGraphics;
 		private bool _viewportInitialized;
-		private float Width { get { return Frame.Width; } }
-		private float Height { get { return Frame.Height; } }
+		private float Width { get { return (float)Frame.Width; } }
+        private float Height { get { return (float)Frame.Height; } }
         
 		[Foundation.Export("layerClass")]
 		static Class LayerClass()
@@ -98,7 +98,7 @@ namespace Mapsui.UI.iOS
 			LayerColorFormat = EAGLColorFormat.RGBA8;
 			CreateFrameBuffer ();
 			GL.ClearColor (1, 1, 1, 1);
-			CADisplayLink displayLink = UIScreen.MainScreen.CreateDisplayLink((Action)this, new Selector("drawFrame"));
+			CADisplayLink displayLink = UIScreen.MainScreen.CreateDisplayLink(this, new Selector("drawFrame"));
 			displayLink.FrameInterval = 1;
 			displayLink.AddToRunLoop(NSRunLoop.Current, NSRunLoop.NSDefaultRunLoopMode);
 

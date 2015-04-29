@@ -8,7 +8,7 @@ using System;
 using System.Collections.Generic;
 using CoreGraphics;
 using System.IO;
-using CGPoint = Mapsui.Geometries.CGPoint;
+using CGPoint = Mapsui.Geometries.Point;
 
 namespace Mapsui.Rendering.iOS
 {
@@ -162,24 +162,24 @@ namespace Mapsui.Rendering.iOS
 
             if (symbolStyle.SymbolOffset != null)
             {
-                screenMin = new Geometries.CGPoint(
+                screenMin = new Geometries.Point(
                     screenMin.X - symbolStyle.SymbolOffset.X,
                     screenMin.Y - symbolStyle.SymbolOffset.Y);
-                screenMax = new Geometries.CGPoint(
+                screenMax = new Geometries.Point(
                     screenMax.X - symbolStyle.SymbolOffset.X,
                     screenMax.Y - symbolStyle.SymbolOffset.Y);
 
                 var w = viewport.ScreenToWorld(screenMin);
 
-                boundingBox.Offset(new Geometries.CGPoint(w.X - boundingBox.MinX, w.Y - boundingBox.MinY));
+                boundingBox.Offset(new Geometries.Point(w.X - boundingBox.MinX, w.Y - boundingBox.MinY));
 
                 screenMin = viewport.WorldToScreen(boundingBox.Min);
                 screenMax = viewport.WorldToScreen(boundingBox.Max);
             }
 
 
-            var min = new Geometries.CGPoint(screenMin.X - (32 / 2), screenMax.Y - (32 / 2)); //!!!
-            var max = new Geometries.CGPoint((min.X + 32), (min.Y + 32)); //!!!
+            var min = new Geometries.Point(screenMin.X - (32 / 2), screenMax.Y - (32 / 2)); //!!!
+            var max = new Geometries.Point((min.X + 32), (min.Y + 32)); //!!!
 
             var frame = RoundToPixel(min, max);
             //if(symbolStyle.SymbolOffset != null)
@@ -196,7 +196,7 @@ namespace Mapsui.Rendering.iOS
             return RoundToPixel(min, max);
         }
 
-        private static CGRect RoundToPixel(Geometries.CGPoint min, Geometries.CGPoint max)
+        private static CGRect RoundToPixel(Geometries.Point min, Geometries.Point max)
         {
             // To get seamless aligning you need to round the 
             // corner coordinates to pixel. The new width and

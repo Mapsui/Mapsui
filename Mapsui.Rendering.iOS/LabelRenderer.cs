@@ -52,7 +52,7 @@ namespace XamarinRendering
 
 							if (renderedGeometry == null) {
 							//Mapsui.Geometries.Point point, Offset stackOffset, LabelStyle style, IFeature feature, IViewport viewport, string text)
-								renderedGeometry = RenderLabel(feature.Geometry as Mapsui.Geometries.CGPoint,
+								renderedGeometry = RenderLabel(feature.Geometry as Mapsui.Geometries.Point,
 								                               style as LabelStyle, feature, viewport, labelText);
 
 								feature [styleKey] = renderedGeometry;
@@ -134,7 +134,7 @@ namespace XamarinRendering
 					//var labelStyle = style as LabelStyle;
 					string labelText = layer.GetLabelText(feature);
 
-					var label = RenderLabel (feature.Geometry as Mapsui.Geometries.CGPoint,
+					var label = RenderLabel (feature.Geometry as Mapsui.Geometries.Point,
 					                         style as LabelStyle, feature, viewport, labelText);
 
 					canvas.AddSublayer(label);
@@ -183,17 +183,17 @@ namespace XamarinRendering
 			}
 		}
 
-		public static CALayer RenderLabel(Mapsui.Geometries.CGPoint point, LabelStyle style, IViewport viewport)
+		public static CALayer RenderLabel(Mapsui.Geometries.Point point, LabelStyle style, IViewport viewport)
 		{
 			//Offset stackOffset,
 			//return RenderLabel(point, stackOffset, style, viewport, style.Text);
 			return new CALayer ();
 		}
 
-		public static CATextLayer RenderLabel(Mapsui.Geometries.CGPoint point, LabelStyle style, IFeature feature, IViewport viewport, string text)
+		public static CATextLayer RenderLabel(Mapsui.Geometries.Point point, LabelStyle style, IFeature feature, IViewport viewport, string text)
 		{
 			// Offset stackOffset,
-			Mapsui.Geometries.CGPoint p = viewport.WorldToScreen(point);
+			Mapsui.Geometries.Point p = viewport.WorldToScreen(point);
 			//var pointF = new xPointF((float)p.X, (float)p.Y);
 			var label = new CATextLayer ();
 
@@ -215,7 +215,7 @@ namespace XamarinRendering
 
 			label.Frame = frame;
 
-			Console.WriteLine ("Pos " + (CGRect)label.Frame.X + ":" + (CGRect)label.Frame.Y + " w " + (CGRect)label.Frame.Width + " h " + (CGRect)label.Frame.Height);
+			Console.WriteLine ("Pos " + label.Frame.X + ":" + label.Frame.Y + " w " + label.Frame.Width + " h " + label.Frame.Height);
 
 			// = MonoTouch.UIKit.UIScreen.MainScreen.Scale;
 			//	label.ContentsScale = scale;

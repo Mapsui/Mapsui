@@ -1,4 +1,3 @@
-using CoreGraphics;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
@@ -89,7 +88,7 @@ namespace Mapsui.Rendering.OpenTK
 
         private void RenderFeature(IViewport viewport, IStyle style, IFeature feature)
         {
-            if (feature.Geometry is CGPoint)
+            if (feature.Geometry is Point)
             {
                 PointRenderer.Draw(viewport, style, feature, _symbolTextureCache);
             }

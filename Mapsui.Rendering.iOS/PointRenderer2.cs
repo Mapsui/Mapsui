@@ -13,7 +13,7 @@ using Foundation;
 using UIKit;
 using CoreGraphics;
 using System.IO;
-using CGPoint = Mapsui.Geometries.CGPoint;
+using CGPoint = Mapsui.Geometries.Point;
 
 namespace Mapsui.Rendering.iOS
 {
@@ -97,7 +97,7 @@ namespace Mapsui.Rendering.iOS
 			var image = ToUIImage(BitmapRegistry.Instance.Get(style.BitmapId));
 
             symbol.Contents = image.CGImage;
-            symbol.Frame = new CGRect(-(CGSize)image.Size.Width * 0.5f, -(CGSize)image.Size.Height * 0.5f, (CGSize)image.Size.Width, (CGSize)image.Size.Height);
+            symbol.Frame = new CGRect(-image.Size.Width * 0.5f, -image.Size.Height * 0.5f, image.Size.Width, image.Size.Height);
 
             symbol.Opacity = (float)style.Opacity;
 

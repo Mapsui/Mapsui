@@ -12,7 +12,7 @@ namespace Mapsui.Rendering.iOS
 	{
 		public static void Draw(CALayer target, IViewport viewport, IStyle style, IFeature feature)
 		{
-			var point = feature.Geometry as Geometries.CGPoint;
+			var point = feature.Geometry as Geometries.Point;
 			var dest = viewport.WorldToScreen(point);
             //var path = UIBezierPath.FromRect(new Rectangle((int)dest.X, (int)dest.Y, 20, 20));
             var path = CGPath.FromRect(new CGRect((float)dest.X, (float)dest.Y, 20, 20), CGAffineTransform.MakeIdentity());

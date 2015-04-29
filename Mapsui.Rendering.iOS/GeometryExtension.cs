@@ -1,8 +1,7 @@
+using CoreGraphics;
 using Mapsui.Geometries;
 using UIKit;
 using System.Collections.Generic;
-using CoreGraphics;
-using CGPoint = Mapsui.Geometries.CGPoint;
 using System.Linq;
 
 namespace Mapsui.Rendering.iOS
@@ -11,14 +10,14 @@ namespace Mapsui.Rendering.iOS
 	{
 		public static CoreGraphics.CGPoint OffSet;
 
-		public static CGPoint ToUIKit(this CGPoint point)
+		public static CGPoint ToUIKit(this Point point)
 		{
 			double xo = OffSet.X;
 			double yo = OffSet.Y;
 			return new CGPoint((float)(point.X - (xo)), (float)(point.Y - yo));
 		}
 
-		public static UIBezierPath ToUIKit(this IEnumerable<CGPoint> points, IViewport viewport)
+		public static UIBezierPath ToUIKit(this IEnumerable<Point> points, IViewport viewport)
 		{
 			var pathGeometry = new UIBezierPath ();
 		    points = points.ToList();
@@ -27,12 +26,12 @@ namespace Mapsui.Rendering.iOS
 				var first = points.FirstOrDefault ();
 				var start = viewport.WorldToScreen (first);
 
-				pathGeometry.MoveTo ((CGPoint)ToUIKit (start));
+				pathGeometry.MoveTo(ToUIKit (start));
 
 				for (int i = 1; i < points.Count (); i++) {
 					var point = points.ElementAt (i);
 					var p = viewport.WorldToScreen (point);
-					pathGeometry.AddLineTo ((CGPoint)new CGPoint ((float)p.X, (float)p.Y));
+					pathGeometry.AddLineTo (new CGPoint ((float)p.X, (float)p.Y));
 				}
 			}
 			return pathGeometry;
@@ -92,13 +91,13 @@ namespace Mapsui.Rendering.iOS
 			var start = linearRing.Vertices[0];
 			var startPos = viewport.WorldToScreen(start);
 
-			pathFigure.MoveTo((CGPoint)ToUIKit(startPos));
+			pathFigure.MoveTo(ToUIKit(startPos));
 
 			for(int i = 1; i < linearRing.Vertices.Count; i++)
 			{
 				var pos = linearRing.Vertices[i];
 				var screenPos = viewport.WorldToScreen(pos);
-				pathFigure.AddLineTo((CGPoint)ToUIKit(screenPos));
+				pathFigure.AddLineTo(ToUIKit(screenPos));
 			}
 			pathFigure.ClosePath();
 

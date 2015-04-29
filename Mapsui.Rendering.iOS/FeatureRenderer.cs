@@ -178,7 +178,7 @@ namespace XamarinRendering
 
 		private static CALayer RenderGeometry (IViewport viewport, IStyle style, IFeature feature)
 		{
-			if (feature.Geometry is Mapsui.Geometries.CGPoint)
+			if (feature.Geometry is Mapsui.Geometries.Point)
 			{
 			    return null;//!!!GeometryRenderer.RenderPoint (feature.Geometry as Mapsui.Geometries.Point, style, viewport);
 			} else if (feature.Geometry is Polygon){
@@ -193,8 +193,8 @@ namespace XamarinRendering
 
 		private static void PositionGeometry(CALayer renderedGeometry, IViewport viewport, IStyle style, IFeature feature)
 		{
-			if (feature.Geometry is Mapsui.Geometries.CGPoint){
-				GeometryRenderer.PositionPoint(renderedGeometry, feature.Geometry as Mapsui.Geometries.CGPoint, style, viewport);
+			if (feature.Geometry is Mapsui.Geometries.Point){
+				GeometryRenderer.PositionPoint(renderedGeometry, feature.Geometry as Mapsui.Geometries.Point, style, viewport);
 			}
 			if (feature.Geometry is MultiPoint)
 				return;
