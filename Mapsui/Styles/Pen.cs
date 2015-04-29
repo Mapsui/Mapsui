@@ -1,10 +1,9 @@
-﻿using System;
-using System.Linq;
-
-namespace Mapsui.Styles
+﻿namespace Mapsui.Styles
 {
     public class Pen
     {
+        private PenStyle _penStyle = PenStyle.Solid;
+
         public Pen() {}
 
         public Pen(Color color, double width = 1)
@@ -16,7 +15,12 @@ namespace Mapsui.Styles
         public double Width { get; set; }
         public Color Color { get; set; }
 
-        
+        public PenStyle PenStyle
+        {
+            get { return _penStyle; }
+            set { _penStyle = value; }
+        }
+
         public override bool Equals(object obj)
         {
             if (!(obj is Pen))
@@ -60,6 +64,5 @@ namespace Mapsui.Styles
         {
             return !Equals(pen1, pen2);
         }
-
-            }
+    }
 }

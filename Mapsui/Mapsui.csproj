@@ -149,11 +149,13 @@
     <Compile Include="Styles\BitmapRegistry.cs" />
     <Compile Include="Styles\Brush.cs" />
     <Compile Include="Styles\Color.cs" />
+    <Compile Include="Styles\FillStyle.cs" />
     <Compile Include="Styles\Font.cs" />
     <Compile Include="Styles\IStyle.cs" />
     <Compile Include="Styles\LabelStyle.cs" />
     <Compile Include="Styles\Offset.cs" />
     <Compile Include="Styles\Pen.cs" />
+    <Compile Include="Styles\PenStyle.cs" />
     <Compile Include="Styles\Size.cs" />
     <Compile Include="Styles\Style.cs" />
     <Compile Include="Styles\StyleCollection.cs" />

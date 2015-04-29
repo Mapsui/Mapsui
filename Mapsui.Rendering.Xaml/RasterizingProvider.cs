@@ -32,7 +32,7 @@ namespace Mapsui.Rendering.Xaml
         {
             lock (_syncLock)
             {
-                foreach (var feature in _layer.GetFeaturesInView(extent, resolution)) 
+                foreach (var feature in _layer.GetFeaturesInView(extent, resolution))
                 {
                     // hack: clear cache to prevent cross thread exception. 
                     // todo: remove this caching mechanism.

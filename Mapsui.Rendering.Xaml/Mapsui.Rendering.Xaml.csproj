@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5DC32B05-0B6E-478F-A9FB-57762AA2F814}</ProjectGuid>
+    <ProjectGuid>{860D6C33-291C-4449-B7CB-720390E6FD0E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Mapsui.Rendering.Xaml</RootNamespace>
@@ -58,6 +58,8 @@
     <Compile Include="RasterizingProvider.cs" />
     <Compile Include="StackedLabelLayerRenderer.cs" />
     <Compile Include="SingleLabelRenderer.cs" />
+    <Compile Include="StreamExtensions.cs" />
+    <Compile Include="StyleConverter.cs" />
     <Compile Include="StyleExtensions.cs" />
     <Compile Include="BitmapRendering\BitmapConverter.cs" />
   </ItemGroup>

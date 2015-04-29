@@ -33,9 +33,9 @@ namespace Mapsui.Rendering.Xaml
     /// </remarks>
     public static class GeometryRenderer
     {
-        public static UIElement RenderPoint(Point point, IStyle style, IViewport viewport)
+        public static XamlShapes.Shape RenderPoint(Point point, IStyle style, IViewport viewport)
         {
-            UIElement symbol;
+            XamlShapes.Shape symbol;
             var matrix = XamlMedia.Matrix.Identity;
 
             if (style is SymbolStyle)
@@ -57,18 +57,17 @@ namespace Mapsui.Rendering.Xaml
             MatrixHelper.Append(ref matrix, CreateTransformMatrix(point, viewport));
 
             symbol.RenderTransform = new XamlMedia.MatrixTransform { Matrix = matrix };
-
             symbol.IsHitTestVisible = false;
 
             return symbol;
         }
 
-        private static UIElement CreateSymbolFromVectorStyle(VectorStyle style, double opacity = 1, SymbolType symbolType = SymbolType.Ellipse)
+        private static XamlShapes.Shape CreateSymbolFromVectorStyle(VectorStyle style, double opacity = 1, SymbolType symbolType = SymbolType.Ellipse)
         {
             var path = new XamlShapes.Path { StrokeThickness = 0 };  //The SL StrokeThickness default is 1 which causes blurry bitmaps
 
-            if (style.Fill != null && style.Fill.Color != null)
-                path.Fill = style.Fill.ToXaml();
+            if (style.Fill != null && (style.Fill.Color != null || style.Fill.BitmapId != -1))
+                path.Fill = style.Fill.ToXaml();                
             else
                 path.Fill = new XamlMedia.SolidColorBrush(XamlColors.Transparent);
 
@@ -76,6 +75,7 @@ namespace Mapsui.Rendering.Xaml
             {
                 path.Stroke = new XamlMedia.SolidColorBrush(style.Outline.Color.ToXaml());
                 path.StrokeThickness = style.Outline.Width;
+                path.StrokeDashArray = style.Outline.PenStyle.ToXaml();
             }
 
             if (symbolType == SymbolType.Ellipse)
@@ -144,9 +144,9 @@ namespace Mapsui.Rendering.Xaml
             return matrix;
         }
 
-        private static UIElement CreateSymbolFromBitmap(Stream data, double opacity)
+        private static XamlShapes.Shape CreateSymbolFromBitmap(Stream data, double opacity)
         {
-            var bitmapImage = CreateBitmapImage(data);
+            var bitmapImage = data.CreateBitmapImage();
             var fill = new XamlMedia.ImageBrush { ImageSource = bitmapImage };
             var width = bitmapImage.PixelWidth;
             var height = bitmapImage.PixelHeight;
@@ -196,7 +196,7 @@ namespace Mapsui.Rendering.Xaml
             }
             else
             {
-                BitmapImage bitmapImage = CreateBitmapImage(BitmapRegistry.Instance.Get(style.BitmapId));
+                BitmapImage bitmapImage = BitmapRegistry.Instance.Get(style.BitmapId).CreateBitmapImage();
 
                 path.Fill = new XamlMedia.ImageBrush { ImageSource = bitmapImage };
 
@@ -218,27 +218,7 @@ namespace Mapsui.Rendering.Xaml
             path.IsHitTestVisible = false;
             return path;
         }
-
-        private static BitmapImage CreateBitmapImage(Stream imageData)
-        {
-            var bitmapImage = new BitmapImage();
-#if SILVERLIGHT
-            imageData.Position = 0;
-            bitmapImage.SetSource(imageData);
-#elif NETFX_CORE
-            imageData.Position = 0;
-            var memoryStream = new System.IO.MemoryStream();
-            imageData.CopyTo(memoryStream);
-            bitmapImage.SetSource(ByteArrayToRandomAccessStream(memoryStream.ToArray()).Result);
-#else
-            imageData.Position = 0;
-            bitmapImage.BeginInit();
-            bitmapImage.StreamSource = imageData;
-            bitmapImage.EndInit();
-#endif
-            return bitmapImage;
-        }
-
+     
         private static XamlMedia.Geometry ConvertSymbol(Point point, SymbolStyle style, IViewport viewport)
         {
             Point p = viewport.WorldToScreen(point);
@@ -246,7 +226,7 @@ namespace Mapsui.Rendering.Xaml
             var rect = new XamlMedia.RectangleGeometry();
             if (style.BitmapId >= 0)
             {
-                var bitmapImage = CreateBitmapImage(BitmapRegistry.Instance.Get(style.BitmapId));
+                var bitmapImage = BitmapRegistry.Instance.Get(style.BitmapId).CreateBitmapImage();
                 var width = bitmapImage.PixelWidth * style.SymbolScale;
                 var height = bitmapImage.PixelHeight * style.SymbolScale;
                 rect.Rect = new Rect(p.X - width * 0.5, p.Y - height * 0.5, width, height);
@@ -255,7 +235,7 @@ namespace Mapsui.Rendering.Xaml
             return rect;
         }
 
-        public static UIElement RenderMultiPoint(MultiPoint multiPoint, IStyle style, IViewport viewport)
+        public static XamlShapes.Shape RenderMultiPoint(MultiPoint multiPoint, IStyle style, IViewport viewport)
         {
             // This method needs a test
             if (!(style is SymbolStyle)) throw new ArgumentException("Style is not of type SymboStyle");
@@ -274,7 +254,7 @@ namespace Mapsui.Rendering.Xaml
             return group;
         }
 
-        public static UIElement RenderLineString(LineString lineString, IStyle style, IViewport viewport)
+        public static XamlShapes.Shape RenderLineString(LineString lineString, IStyle style, IViewport viewport)
         {
             if (!(style is VectorStyle)) throw new ArgumentException("Style is not of type VectorStyle");
             var vectorStyle = style as VectorStyle;
@@ -294,12 +274,13 @@ namespace Mapsui.Rendering.Xaml
                 //todo: render an outline around the line. 
             }
             path.Stroke = new XamlMedia.SolidColorBrush(style.Line.Color.ToXaml());
+            path.StrokeDashArray = style.Outline.PenStyle.ToXaml();
             path.Tag = style.Line.Width; // see #linewidthhack
             path.IsHitTestVisible = false;
             return path;
         }
 
-        public static UIElement RenderMultiLineString(MultiLineString multiLineString, IStyle style, IViewport viewport)
+        public static XamlShapes.Shape RenderMultiLineString(MultiLineString multiLineString, IStyle style, IViewport viewport)
         {
             if (!(style is VectorStyle)) throw new ArgumentException("Style is not of type VectorStyle");
             var vectorStyle = style as VectorStyle;
@@ -311,14 +292,19 @@ namespace Mapsui.Rendering.Xaml
             return path;
         }
 
-        public static UIElement RenderPolygon(Polygon polygon, IStyle style, IViewport viewport)
+        public static XamlShapes.Shape RenderPolygon(Polygon polygon, IStyle style, IViewport viewport)
         {
             if (!(style is VectorStyle)) throw new ArgumentException("Style is not of type VectorStyle");
             var vectorStyle = style as VectorStyle;
 
             XamlShapes.Path path = CreatePolygonPath(vectorStyle, viewport.Resolution);
             path.Data = polygon.ToXaml();
-            path.RenderTransform = new XamlMedia.MatrixTransform { Matrix = CreateTransformMatrix1(viewport) };
+
+            var matrixTransform = new XamlMedia.MatrixTransform { Matrix = CreateTransformMatrix1(viewport) };
+            path.RenderTransform = matrixTransform;
+            
+            if (path.Fill != null)
+                path.Fill.Transform = matrixTransform.Inverse as XamlMedia.MatrixTransform;
             path.UseLayoutRounding = true;
             return path;
         }
@@ -326,12 +312,15 @@ namespace Mapsui.Rendering.Xaml
         private static XamlShapes.Path CreatePolygonPath(VectorStyle style, double resolution)
         {
             var path = new XamlShapes.Path();
+
             if (style.Outline != null)
             {
                 path.Stroke = new XamlMedia.SolidColorBrush(style.Outline.Color.ToXaml());
                 path.StrokeThickness = style.Outline.Width * resolution;
+                path.StrokeDashArray = style.Outline.PenStyle.ToXaml();
                 path.Tag = style.Outline.Width; // see #linewidthhack
             }
+
             path.Fill = style.Fill.ToXaml();
             path.IsHitTestVisible = false;
             return path;
@@ -343,7 +332,12 @@ namespace Mapsui.Rendering.Xaml
             var vectorStyle = style as VectorStyle;
             var path = CreatePolygonPath(vectorStyle, viewport.Resolution);
             path.Data = geometry.ToXaml();
-            path.RenderTransform = new XamlMedia.MatrixTransform { Matrix = CreateTransformMatrix1(viewport) };
+            var matrixTransform = new XamlMedia.MatrixTransform { Matrix = CreateTransformMatrix1(viewport) };
+            path.RenderTransform = matrixTransform;
+
+            if (path.Fill != null)
+                path.Fill.Transform = matrixTransform.Inverse as XamlMedia.MatrixTransform;
+
             return path;
         }
 
@@ -452,10 +446,14 @@ namespace Mapsui.Rendering.Xaml
             renderedGeometry.RenderTransform = new XamlMedia.MatrixTransform { Matrix = matrix };
         }
 
-        public static void PositionGeometry(UIElement renderedGeometry, IViewport viewport)
+        public static void PositionGeometry(XamlShapes.Shape renderedGeometry, IViewport viewport)
         {
             CounterScaleLineWidth(renderedGeometry, viewport.Resolution);
-            renderedGeometry.RenderTransform = new XamlMedia.MatrixTransform { Matrix = CreateTransformMatrix1(viewport) };
+            var matrixTransform = new XamlMedia.MatrixTransform {Matrix = CreateTransformMatrix1(viewport)};
+            renderedGeometry.RenderTransform = matrixTransform;
+
+            if (renderedGeometry.Fill != null)
+                renderedGeometry.Fill.Transform = matrixTransform.Inverse as XamlMedia.MatrixTransform;
         }
 
         private static void CounterScaleLineWidth(UIElement renderedGeometry, double resolution)

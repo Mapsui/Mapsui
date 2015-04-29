@@ -1,6 +1,7 @@
 ﻿using System.Globalization;
 using System.IO;
 using System.Threading;
+using System.Windows.Shapes;
 using Mapsui.Providers;
 using Mapsui.Geometries;
 using Mapsui.Layers;
@@ -9,6 +10,7 @@ using Mapsui.Styles.Thematics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Polygon = Mapsui.Geometries.Polygon;
 #if !NETFX_CORE
 using System.Windows;
 using System.Windows.Controls;
@@ -236,7 +238,7 @@ namespace Mapsui.Rendering.Xaml
             }
             else
             {
-                var renderedGeometry = feature.RenderedGeometry.ContainsKey(style) ? feature.RenderedGeometry[style] as UIElement : null;
+                var renderedGeometry = feature.RenderedGeometry.ContainsKey(style) ? feature.RenderedGeometry[style] as Shape : null;
                 if (renderedGeometry == null)
                 {
                     renderedGeometry = RenderGeometry(viewport, style, feature);
@@ -252,7 +254,7 @@ namespace Mapsui.Rendering.Xaml
             }
         }
 
-        private static UIElement RenderGeometry(IViewport viewport, IStyle style, IFeature feature)
+        private static Shape RenderGeometry(IViewport viewport, IStyle style, IFeature feature)
         {
             if (feature.Geometry is Geometries.Point)
                 return GeometryRenderer.RenderPoint(feature.Geometry as Geometries.Point, style, viewport);
@@ -271,7 +273,7 @@ namespace Mapsui.Rendering.Xaml
             return null;
         }
 
-        private static void PositionGeometry(UIElement renderedGeometry, IViewport viewport, IStyle style, IFeature feature)
+        private static void PositionGeometry(Shape renderedGeometry, IViewport viewport, IStyle style, IFeature feature)
         {
             if (feature.Geometry is Geometries.Point)
                 GeometryRenderer.PositionPoint(renderedGeometry, feature.Geometry as Geometries.Point, style, viewport);

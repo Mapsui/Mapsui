@@ -1,4 +1,8 @@
-﻿using Mapsui.Styles;
+﻿using System.IO;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Shapes;
+using Mapsui.Styles;
 #if !NETFX_CORE
 using Media = System.Windows.Media;
 using WinPoint = System.Windows.Point;
@@ -14,6 +18,11 @@ namespace Mapsui.Rendering.Xaml
 {
     static class StyleExtensions
     {
+        public static Media.DoubleCollection ToXaml(this PenStyle penStyle)
+        {
+            return StyleConverter.MapsuiPentoXaml(penStyle);
+        }
+
         public static WinColor ToXaml(this Color color)
         {
             return WinColor.FromArgb((byte)color.A, (byte)color.R, (byte)color.G, (byte)color.B);
@@ -21,7 +30,7 @@ namespace Mapsui.Rendering.Xaml
         
         public static Media.Brush ToXaml(this Brush brush)
         {
-            return new Media.SolidColorBrush(brush.Color.ToXaml());
+            return StyleConverter.MapsuiBrushToXaml(brush);
         }
 
         public static WinPoint ToXaml(this Offset offset)
