@@ -1,12 +1,12 @@
 ﻿using System.IO;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Shapes;
 using Mapsui.Styles;
 #if !NETFX_CORE
 using Media = System.Windows.Media;
 using WinPoint = System.Windows.Point;
 using WinColor = System.Windows.Media.Color;
+using System.Windows.Controls;
+using System.Windows.Shapes;
 #else
 using Media = Windows.UI.Xaml.Media;
 using WinPoint = Windows.Foundation.Point;

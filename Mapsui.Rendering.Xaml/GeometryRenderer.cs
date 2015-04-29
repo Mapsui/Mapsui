@@ -364,7 +364,7 @@ namespace Mapsui.Rendering.Xaml
             var bitmapImage = new BitmapImage();
 #if NETFX_CORE
             stream.Position = 0;
-            bitmapImage.SetSource(ByteArrayToRandomAccessStream(stream.ToArray()).Result);
+            bitmapImage.SetSource(stream.ToRandomAccessStream().Result);
 
 #elif !SILVERLIGHT
             var localStream = new MemoryStream();
@@ -384,20 +384,6 @@ namespace Mapsui.Rendering.Xaml
             };
             return path;
         }
-
-#if NETFX_CORE
-
-        private static async Task<IRandomAccessStream> ByteArrayToRandomAccessStream(byte[] tile)
-        {
-            var stream = new InMemoryRandomAccessStream();
-            var dataWriter = new DataWriter(stream);
-            dataWriter.WriteBytes(tile);
-            await dataWriter.StoreAsync();
-            stream.Seek(0);
-            return stream;
-        }
-
-#endif
 
         public static Rect RoundToPixel(Rect dest)
         {

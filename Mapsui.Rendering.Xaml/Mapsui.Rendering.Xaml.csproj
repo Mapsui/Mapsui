@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{860D6C33-291C-4449-B7CB-720390E6FD0E}</ProjectGuid>
+    <ProjectGuid>{5DC32B05-0B6E-478F-A9FB-57762AA2F814}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Mapsui.Rendering.Xaml</RootNamespace>

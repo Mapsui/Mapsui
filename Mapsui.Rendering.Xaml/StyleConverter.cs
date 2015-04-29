@@ -1,11 +1,17 @@
-﻿using System.Collections.Generic;
-using System.Windows;
+﻿#if !NETFX_CORE
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using XamlBrush = System.Windows.Media.Brush;
+using XamlColor = System.Windows.Media.Color;
+using System.Windows;
+using System.Collections;
+using System.Collections.Generic;
+#else
+using XamlBrush = Windows.UI.Xaml.Media.Brush;
+using Windows.UI.Xaml.Media;
+#endif
 using Mapsui.Styles;
-using Brush = System.Windows.Media.Brush;
-using Color = System.Windows.Media.Color;
 
 namespace Mapsui.Rendering.Xaml
 {
@@ -40,7 +46,7 @@ namespace Mapsui.Rendering.Xaml
             return null;
         }
 
-        public static Brush MapsuiBrushToXaml(Styles.Brush brush)
+        public static XamlBrush MapsuiBrushToXaml(Styles.Brush brush)
         {
 #if !SILVERLIGHT && !NETFX_CORE
             switch (brush.FillStyle)
@@ -73,7 +79,7 @@ namespace Mapsui.Rendering.Xaml
         }
 
 #if !SILVERLIGHT && !NETFX_CORE
-        private static Color GetColor(Styles.Color color)
+        private static XamlColor GetColor(Styles.Color color)
         {
             return color == null ? Colors.Black : color.ToXaml();
         }

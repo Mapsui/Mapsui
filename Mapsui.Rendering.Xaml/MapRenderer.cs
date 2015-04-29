@@ -1,7 +1,5 @@
-﻿using System.Globalization;
-using System.IO;
+﻿using System.IO;
 using System.Threading;
-using System.Windows.Shapes;
 using Mapsui.Providers;
 using Mapsui.Geometries;
 using Mapsui.Layers;
@@ -14,10 +12,13 @@ using Polygon = Mapsui.Geometries.Polygon;
 #if !NETFX_CORE
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Shapes;
+using System.Globalization;
 #else
 using Windows.UI.Xaml.Controls;
 using Windows.Foundation;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Shapes;
 #endif
 
 namespace Mapsui.Rendering.Xaml
