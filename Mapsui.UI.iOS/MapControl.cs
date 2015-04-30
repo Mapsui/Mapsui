@@ -304,6 +304,8 @@ namespace Mapsui.UI.iOS
 
 		protected override void CreateFrameBuffer()
 		{
+			//Set the LayerColorFormat property to an EAGLColorFormat value before calling Run().
+			LayerColorFormat = EAGLColorFormat.RGBA8;
 			ContextRenderingApi = EAGLRenderingAPI.OpenGLES1;
 				base.CreateFrameBuffer();
 		}

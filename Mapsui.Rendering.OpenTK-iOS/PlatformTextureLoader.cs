@@ -1,12 +1,11 @@
 using System;
 using System.Diagnostics;
-using CoreGraphics;
 using System.IO;
 using CoreGraphics;
 using Foundation;
 using GLKit;
-using UIKit;
 using OpenTK.Graphics.ES20;
+using UIKit;
 
 namespace Mapsui.Rendering.OpenTK
 {

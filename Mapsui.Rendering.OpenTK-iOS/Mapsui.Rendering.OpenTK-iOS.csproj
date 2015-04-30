@@ -58,7 +58,7 @@
     <Compile Include="PlatformTextureLoader.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Mapsui\Trunk\Mapsui\Mapsui.csproj">
+    <ProjectReference Include="..\Mapsui\Mapsui.csproj">
       <Project>{D74C052A-C07E-4B37-A898-134218ACA5C9}</Project>
       <Name>Mapsui</Name>
     </ProjectReference>

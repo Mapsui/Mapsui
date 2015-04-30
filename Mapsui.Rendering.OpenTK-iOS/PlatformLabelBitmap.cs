@@ -1,12 +1,11 @@
-using Foundation;
-using CoreText;
 using System;
-using CoreGraphics;
 using System.IO;
 using System.Threading;
-using Mapsui.Styles;
 using CoreAnimation;
 using CoreGraphics;
+using CoreText;
+using Foundation;
+using Mapsui.Styles;
 using UIKit;
 
 namespace Mapsui.Rendering.OpenTK

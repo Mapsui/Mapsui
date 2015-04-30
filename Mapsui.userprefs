@@ -1,10 +1,23 @@
-﻿<Properties GitUserInfo="UsingGIT">
+﻿<Properties GitUserInfo="UsingGIT" StartupItem="Samples/Mapsui.Samples.iOS/Mapsui.Samples.iOS.csproj">
   <DisabledProjects>
     <String>Mapsui.UI.Xaml/Mapsui.UI.Xaml.csproj</String>
     <String>Mapsui.Rendering.Xaml/Mapsui.Rendering.Xaml.csproj</String>
   </DisabledProjects>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="iOS|iPhone" PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneDeviceTarget.Paul’s iPad" />
-  <MonoDevelop.Ide.Workbench />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="iOS|iPhoneSimulator" PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.IPad2.8.3" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Mapsui.Rendering.OpenTK-iOS/PlatformLabelBitmap.cs">
+    <Files>
+      <File FileName="Mapsui.Rendering.OpenTK-iOS/PlatformLabelBitmap.cs" Line="1" Column="7" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="Mapsui" expanded="True">
+            <Node name="Mapsui.Rendering.OpenTK-iOS" selected="True" />
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

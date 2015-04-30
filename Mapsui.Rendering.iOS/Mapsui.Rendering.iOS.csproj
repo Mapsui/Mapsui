@@ -51,14 +51,13 @@
     <Compile Include="RasterRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="BruTile, Version=0.11.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\BruTile.0.11.2\lib\portable-net403+sl50+win+wpa81+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10\BruTile.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Xamarin.iOS" />
+    <Reference Include="BruTile">
+      <HintPath>..\packages\BruTile.0.12.0\lib\portable-net403+sl50+win+wpa81+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10\BruTile.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
