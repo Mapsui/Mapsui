@@ -1,6 +1,5 @@
 using Foundation;
 using UIKit;
-using Mapsui.UI.iOS;
 
 namespace Mapsui.Samples.iOS
 {
@@ -14,7 +13,7 @@ namespace Mapsui.Samples.iOS
 
 		public override bool FinishedLaunching (UIApplication app, NSDictionary options)
 		{
-			window = new UIWindow ((RectangleF)UIScreen.MainScreen.Bounds);
+			window = new UIWindow (UIScreen.MainScreen.Bounds);
 
 			window.MakeKeyAndVisible ();
 
