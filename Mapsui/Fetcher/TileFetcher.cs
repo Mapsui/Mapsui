@@ -146,7 +146,7 @@ namespace Mapsui.Fetcher
             }
         }
 
-        private static IList<TileInfo> GetTilesMissing(IEnumerable<TileInfo> tileInfos, MemoryCache<Feature> memoryCache,
+        private IList<TileInfo> GetTilesMissing(IEnumerable<TileInfo> tileInfos, MemoryCache<Feature> memoryCache, 
             Retries retries)
         {
             var result = new List<TileInfo>();
