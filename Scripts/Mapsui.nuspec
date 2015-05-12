@@ -46,10 +46,10 @@
     <file src="..\Release\Xamarin.Android\Mapsui.Rendering.OpenTK.dll" target="lib\MonoAndroid\Mapsui.Rendering.OpenTK.dll" />
     <file src="..\Release\Xamarin.Android\Mapsui.UI.Android.dll" target="lib\MonoAndroid\Mapsui.UI.Android.dll" />
 
-    <file src="..\Release\Xamarin.iOS\Mapsui.dll" target="lib\MonoTouch\Mapsui.dll" />
-    <file src="..\Release\Xamarin.iOS\Mapsui.Rendering.iOS.dll" target="lib\MonoTouch\Mapsui.Rendering.iOS.dll" />
-    <file src="..\Release\Xamarin.iOS\Mapsui.Rendering.OpenTK.dll" target="lib\MonoTouch\Mapsui.Rendering.OpenTK.dll" />
-    <file src="..\Release\Xamarin.iOS\Mapsui.UI.iOS.dll" target="lib\MonoTouch\Mapsui.UI.iOS.dll" />
+    <file src="..\Release\Xamarin.iOS\Mapsui.dll" target="lib\Xamarin.iOS\Mapsui.dll" />
+    <file src="..\Release\Xamarin.iOS\Mapsui.Rendering.iOS.dll" target="lib\Xamarin.iOS\Mapsui.Rendering.iOS.dll" />
+    <file src="..\Release\Xamarin.iOS\Mapsui.Rendering.OpenTK.dll" target="lib\Xamarin.iOS\Mapsui.Rendering.OpenTK.dll" />
+    <file src="..\Release\Xamarin.iOS\Mapsui.UI.iOS.dll" target="lib\Xamarin.iOS\Mapsui.UI.iOS.dll" />
 
   </files>
 </package>
