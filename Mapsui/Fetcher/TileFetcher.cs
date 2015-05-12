@@ -36,7 +36,6 @@ namespace Mapsui.Fetcher
         private double _resolution;
         private readonly IList<TileIndex> _tilesInProgress = new List<TileIndex>();
         private IList<TileInfo> _missingTiles = new List<TileInfo>();
-        private readonly IDictionary<TileIndex, int> _retries = new Dictionary<TileIndex, int>();
         private readonly int _maxThreads;
         private int _threadCount;
         private readonly AutoResetEvent _waitHandle = new AutoResetEvent(true);
@@ -55,7 +54,7 @@ namespace Mapsui.Fetcher
         {
             if (tileSource == null) throw new ArgumentException("TileProvider can not be null");
             if (memoryCache == null) throw new ArgumentException("MemoryCache can not be null");
-
+            
             _tileSource = tileSource;
             _memoryCache = memoryCache;
             _maxAttempts = maxAttempts;
@@ -110,6 +109,8 @@ namespace Mapsui.Fetcher
         {
             try
             {
+                var retries = new Retries(_maxAttempts);
+
                 while (_isThreadRunning)
                 {
                     if (_tileSource.Schema == null) _waitHandle.Reset();
@@ -122,13 +123,13 @@ namespace Mapsui.Fetcher
                         var levelId = BruTile.Utilities.GetNearestLevel(_tileSource.Schema.Resolutions, _resolution);
                         _missingTiles = _strategy.GetTilesWanted(_tileSource.Schema, _extent.ToExtent(), levelId);
                         _numberTilesNeeded = _missingTiles.Count;
-                        _retries.Clear();
+                        retries.Clear();
                         _isViewChanged = false;
                     }
 
-                    _missingTiles = GetTilesMissing(_missingTiles, _memoryCache, _retries, _maxAttempts);
+                    _missingTiles = GetTilesMissing(_missingTiles, _memoryCache, retries);
 
-                    FetchTiles();
+                    FetchTiles(retries);
 
                     if (_missingTiles.Count == 0)
                     {
@@ -145,41 +146,42 @@ namespace Mapsui.Fetcher
             }
         }
 
-        private static IList<TileInfo> GetTilesMissing(IEnumerable<TileInfo> infosIn, MemoryCache<Feature> memoryCache,
-            IDictionary<TileIndex, int> retries, int maxRetries)
+        private static IList<TileInfo> GetTilesMissing(IEnumerable<TileInfo> tileInfos, MemoryCache<Feature> memoryCache,
+            Retries retries)
         {
-            IList<TileInfo> tilesOut = new List<TileInfo>();
-            foreach (TileInfo info in infosIn)
-            {
-                if ((memoryCache.Find(info.Index) == null) &&
-                    (!retries.Keys.Contains(info.Index) || retries[info.Index] < maxRetries))
+            var result = new List<TileInfo>();
 
-                    tilesOut.Add(info);
+            foreach (var info in tileInfos)
+            {
+                if (retries.ReachedMax(info.Index)) continue;
+                if (memoryCache.Find(info.Index) == null) result.Add(info);
             }
-            return tilesOut;
+
+            return result;
         }
 
-        private void FetchTiles()
+        private void FetchTiles(Retries retries)
         {
-            foreach (TileInfo info in _missingTiles)
+            foreach (var info in _missingTiles)
             {
-                if (_threadCount >= _maxThreads) return;
-                FetchTile(info);
+                if (_threadCount >= _maxThreads) break;
+                FetchTile(info, retries);
             }
         }
 
-        private void FetchTile(TileInfo info)
+        private void FetchTile(TileInfo info, Retries retries)
         {
-            //first a number of checks
-            if (_tilesInProgress.Contains(info.Index)) return;
-            if (_retries.Keys.Contains(info.Index) && _retries[info.Index] >= _maxAttempts) return;
-            if (_memoryCache.Find(info.Index) != null) return;
+            if (retries.ReachedMax(info.Index)) return;
+            
+            lock (_tilesInProgress)
+            {
+                if (_tilesInProgress.Contains(info.Index)) return;
+                _tilesInProgress.Add(info.Index);
+            }
 
-            //now we can go for the request.
-            lock (_tilesInProgress) { _tilesInProgress.Add(info.Index); }
-            if (!_retries.Keys.Contains(info.Index)) _retries.Add(info.Index, 0);
-            else _retries[info.Index]++;
+            retries.PlusOne(info.Index);
             _threadCount++;
+
             StartFetchOnThread(info);
         }
 
@@ -222,6 +224,46 @@ namespace Mapsui.Fetcher
                 DataChanged(this, new DataChangedEventArgs(e.Error, e.Cancelled, e.TileInfo));
         }
 
+                /// <summary>
+        /// Keeps track of retries per tile. This class doesn't do much interesting work
+        /// but makes the rest of the code a bit easier to read.
+        /// </summary>
+        class Retries
+        {
+            private readonly IDictionary<TileIndex, int> _retries = new Dictionary<TileIndex, int>();
+            private readonly int _maxRetries;
+            private readonly int _threadId;
+            private const string CrossThreadExceptionMessage = "Cross thread access not allowed on class Retries";
+
+            public Retries(int maxRetries)
+            {
+                _maxRetries = maxRetries;
+                _threadId = Thread.CurrentThread.ManagedThreadId;
+            }
+
+            public bool ReachedMax(TileIndex index)
+            {
+                if (_threadId != Thread.CurrentThread.ManagedThreadId) throw new Exception(CrossThreadExceptionMessage);
+
+                var retryCount = (!_retries.Keys.Contains(index)) ? 0 : _retries[index];
+                return retryCount > _maxRetries;
+            }
+
+            public void PlusOne(TileIndex index)
+            {
+                if (_threadId != Thread.CurrentThread.ManagedThreadId) throw new Exception(CrossThreadExceptionMessage);
+
+                if (!_retries.Keys.Contains(index)) _retries.Add(index, 0);
+                else _retries[index]++;
+            }
+
+            public void Clear()
+            {
+                if (_threadId != Thread.CurrentThread.ManagedThreadId) throw new Exception(CrossThreadExceptionMessage);
+
+                _retries.Clear();
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
