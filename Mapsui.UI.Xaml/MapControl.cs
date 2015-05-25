@@ -226,7 +226,7 @@ namespace Mapsui.UI.Xaml
         private void RefreshGraphics()
         {
 #if (!SILVERLIGHT && !WINDOWS_PHONE)
-            Dispatcher.Invoke(new Action(() =>
+            Dispatcher.BeginInvoke(new Action(() =>
             {
 
                 InvalidateVisual();
