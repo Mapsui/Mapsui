@@ -230,7 +230,6 @@ namespace Mapsui.UI.Xaml
             {
 
                 InvalidateVisual();
-                InvalidateArrange();
                 _invalid = true;
             }));
 #else
