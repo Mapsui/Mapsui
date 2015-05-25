@@ -1,12 +1,13 @@
 ﻿using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
+using Mapsui.Styles;
 
 namespace Mapsui.Samples.Common
 {
     public static class LineStringSample
     {
-        public static ILayer CreateLineStringLayer()
+        public static ILayer CreateLineStringLayer(IStyle style = null)
         {
             return new MemoryLayer
             {
@@ -29,7 +30,8 @@ namespace Mapsui.Samples.Common
                         }
                     )}
                 ),
-                Name = "LineStringLayer"
+                Name = "LineStringLayer",
+                Style = style
             };
         }
     }
