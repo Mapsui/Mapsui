@@ -31,15 +31,6 @@ namespace Mapsui.Samples.Android
             mapControl.Map.Viewport.RenderResolutionMultiplier = 2;
         }
 
-        private static IStyle CreateBitmapStyle()
-        {
-            const string circleIconPath = @"Mapsui.Tests.Common.Resources.Images.circle.png";
-            var circleIcon = typeof(Mapsui.Tests.Common.Utilities).Assembly.GetManifestResourceStream(circleIconPath);
-            var circleIconId = BitmapRegistry.Instance.Register(circleIcon);
-            
-            return new SymbolStyle {BitmapId = circleIconId};
-        }
-
         private static TileLayer CreateTileLayer()
         {
             var tileLayer = new TileLayer(KnownTileSources.Create(KnownTileSource.EsriWorldReferenceOverlay))
