@@ -118,6 +118,13 @@ namespace Mapsui
             ViewChanged(true);
         }
 
+        public void RotateTo(double rotation)
+        {
+            Viewport.Rotation = rotation;
+            OnRefreshGraphics();
+            ViewChanged(true);
+        }
+
         /// <summary>
         /// Map background color (defaults to transparent)
         ///  </summary>
