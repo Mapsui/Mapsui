@@ -434,6 +434,9 @@ namespace Mapsui.Web.Wms
             ParseGetMapRequest(xnGetMap);
 
             XmlNode xnGetFeatureInfo = xmlRequestNode.SelectSingleNode("sm:GetFeatureInfo", nsmgr);
+            if (xnGetFeatureInfo == null)
+                return;
+
             ParseGetFeatureInfo(xnGetFeatureInfo);
         }
 
