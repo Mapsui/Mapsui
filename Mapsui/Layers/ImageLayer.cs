@@ -1,4 +1,4 @@
-﻿// Copyright 2005, 2006 - Morten Nielsen (www.iter.dk)
+// Copyright 2005, 2006 - Morten Nielsen (www.iter.dk)
 //
 // This file is part of Mapsui.
 // Mapsui is free software; you can redistribute it and/or modify

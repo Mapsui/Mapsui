@@ -1,14 +1,14 @@
 using Mapsui.Geometries;
 using Mapsui.Styles;
-using MonoTouch.CoreAnimation;
-using MonoTouch.CoreGraphics;
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using CoreAnimation;
+using CoreGraphics;
+using Foundation;
+using UIKit;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
+using CoreGraphics;
 using System.IO;
-using Point = Mapsui.Geometries.Point;
+using CGPoint = Mapsui.Geometries.Point;
 
 namespace Mapsui.Rendering.iOS
 {
@@ -104,7 +104,7 @@ namespace Mapsui.Rendering.iOS
             var data = NSData.FromArray(raster.Data.ToArray());
             var image = UIImage.LoadFromData(data);
             var drawRectangle = ConvertBoundingBox(raster.GetBoundingBox(), viewport);
-            image.Draw(drawRectangle);
+            image.Draw((CGRect)drawRectangle);
             return image;
         }
 
@@ -114,7 +114,7 @@ namespace Mapsui.Rendering.iOS
             raster.Frame = frame;
         }
 
-        public static void PositionPoint(CALayer symbol, Point point, IStyle style, IViewport viewport)
+        public static void PositionPoint(CALayer symbol, CGPoint point, IStyle style, IViewport viewport)
         {
             var frame = ConvertPointBoundingBox(style as SymbolStyle, point.GetBoundingBox(), viewport);
             symbol.Frame = frame;
@@ -151,7 +151,7 @@ namespace Mapsui.Rendering.iOS
             */
         }
 
-        public static RectangleF ConvertPointBoundingBox(SymbolStyle symbolStyle, BoundingBox boundingBox, IViewport viewport)
+        public static CGRect ConvertPointBoundingBox(SymbolStyle symbolStyle, BoundingBox boundingBox, IViewport viewport)
         {
             var screenMin = viewport.WorldToScreen(boundingBox.Min);
             var screenMax = viewport.WorldToScreen(boundingBox.Max);
@@ -188,7 +188,7 @@ namespace Mapsui.Rendering.iOS
             return frame;
         }
 
-        public static RectangleF ConvertBoundingBox(BoundingBox boundingBox, IViewport viewport)
+        public static CGRect ConvertBoundingBox(BoundingBox boundingBox, IViewport viewport)
         {
             var min = viewport.WorldToScreen(boundingBox.Min);
             var max = viewport.WorldToScreen(boundingBox.Max);
@@ -196,7 +196,7 @@ namespace Mapsui.Rendering.iOS
             return RoundToPixel(min, max);
         }
 
-        private static RectangleF RoundToPixel(Geometries.Point min, Geometries.Point max)
+        private static CGRect RoundToPixel(Geometries.Point min, Geometries.Point max)
         {
             // To get seamless aligning you need to round the 
             // corner coordinates to pixel. The new width and
@@ -206,7 +206,7 @@ namespace Mapsui.Rendering.iOS
             var width = Math.Round(max.X) - Math.Round(min.X);
             var height = Math.Round(max.Y) - Math.Round(min.Y);
 
-            return new RectangleF((float)x, (float)y, (float)width, (float)height);
+            return new CGRect((float)x, (float)y, (float)width, (float)height);
         }
 
         private static UIImage GetBitmapCache(IStyle style)

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Mapsui.Utilities;
 #if !NETFX_CORE
 using System.Windows.Media;

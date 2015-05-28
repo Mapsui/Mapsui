@@ -1,4 +1,4 @@
-﻿#if !NETFX_CORE
+#if !NETFX_CORE
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;

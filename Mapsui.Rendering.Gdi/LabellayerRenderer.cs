@@ -1,4 +1,4 @@
-﻿// Copyright 2010 - Paul den Dulk (Geodan) - Adapted SharpMap for Mapsui.
+// Copyright 2010 - Paul den Dulk (Geodan) - Adapted SharpMap for Mapsui.
 // 
 // This file is part of Mapsui.
 // Mapsui is free software; you can redistribute it and/or modify

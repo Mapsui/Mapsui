@@ -1,4 +1,4 @@
-﻿using System.IO;
+using System.IO;
 using System.Windows.Media.Imaging;
 
 namespace Mapsui.Rendering.Xaml.BitmapRendering

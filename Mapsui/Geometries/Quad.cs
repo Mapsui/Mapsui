@@ -1,4 +1,4 @@
-﻿// Copyright 2014 Scott Dewald
+// Copyright 2014 Scott Dewald
 //
 // This file is part of Mapsui.
 // Mapsui is free software; you can redistribute it and/or modify

@@ -1,8 +1,9 @@
-﻿using System;
+using System;
 using System.Linq;
 using BruTile.Predefined;
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using CoreGraphics;
+using Foundation;
+using UIKit;
 
 namespace Mapsui.Samples.iOS
 {
@@ -30,12 +31,10 @@ namespace Mapsui.Samples.iOS
 
 			glView.Run(60.0);
 
-			var frm = glView.Frame;
 			var width = window.Frame.Width;
 			var height = window.Frame.Height;
-			glView.Frame = new System.Drawing.RectangleF (0, 0, width, height);
+			glView.Frame = new CGRect (0, 0, width, height);
 			window.MakeKeyAndVisible ();
-
 	
 			return true;
 		}

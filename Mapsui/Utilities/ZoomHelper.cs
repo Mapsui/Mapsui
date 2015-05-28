@@ -1,4 +1,4 @@
-﻿// Copyright 2009 - Paul den Dulk (Geodan)
+// Copyright 2009 - Paul den Dulk (Geodan)
 // 
 // This file is part of Mapsui.
 // Mapsui is free software; you can redistribute it and/or modify
@@ -17,7 +17,6 @@
 
 using System;
 using System.Collections.Generic;
-using Mapsui.Styles;
 
 namespace Mapsui.Utilities
 {
@@ -32,8 +31,7 @@ namespace Mapsui.Utilities
 
             foreach (double resolutionOfLevel in resolutions)
             {
-                if (resolutionOfLevel < resolution)
-                    return resolutionOfLevel;
+                if (resolutionOfLevel < resolution) return resolutionOfLevel;
             }
             return resolutions[resolutions.Count - 1];
         }
@@ -43,7 +41,7 @@ namespace Mapsui.Utilities
             if (resolutions.Count == 0) return resolution;
 
             //smaller than smallest
-            if (resolutions[resolutions.Count - 1] > (resolution + 0.2 * resolution)) return resolutions[resolutions.Count - 1];
+            if (resolutions[resolutions.Count - 1] > resolution) return resolutions[resolutions.Count - 1];
 
             //bigger than biggest
             if (resolutions[0] < resolution) return resolutions[0];
@@ -60,8 +58,7 @@ namespace Mapsui.Utilities
 
             for (int i = resolutions.Count - 1; i >= 0; i--)
             {
-                if (resolutions[i] > (resolution + 0.2 * resolution))
-                    return resolutions[i];
+                if (resolutions[i] > resolution) return resolutions[i];
             }
             return resolutions[0];
         }

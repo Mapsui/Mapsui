@@ -57,7 +57,7 @@ namespace Mapsui.Geometries
         string ToString();
 
         /// <summary>
-        /// If true, then this <see cref="Geometry"/> represents the empty point set, Ø, for the coordinate space. 
+        /// If true, then this <see cref="Geometry"/> represents the empty point set, Ã˜, for the coordinate space. 
         /// </summary>
         /// <returns>Returns 'true' if this <see cref="Geometry"/> is the empty geometry</returns>
         bool IsEmpty();

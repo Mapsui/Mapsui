@@ -1,4 +1,4 @@
-﻿namespace System
+namespace System
 {
     static class Extensions
     {

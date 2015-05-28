@@ -1,4 +1,4 @@
-﻿using System.IO;
+using System.IO;
 using Mapsui.Styles;
 using OpenTK.Graphics.ES11;
 

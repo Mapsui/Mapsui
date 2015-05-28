@@ -107,7 +107,7 @@ namespace Mapsui.Geometries
 
         /// <summary>
         /// Returns 'true' if this <see cref="Geometry"/> is the empty geometry . If true, then this
-        /// <see cref="Geometry"/> represents the empty point set, Ø, for the coordinate space. 
+        /// <see cref="Geometry"/> represents the empty point set, Ã˜, for the coordinate space. 
         /// </summary>
         public abstract bool IsEmpty();
 
@@ -142,7 +142,7 @@ namespace Mapsui.Geometries
         
         
         /// <summary>
-        /// Returns 'true' if this Geometry is ‘spatially disjoint’ from another <see cref="Geometry"/>.
+        /// Returns 'true' if this Geometry is â€˜spatially disjointâ€™ from another <see cref="Geometry"/>.
         /// </summary>
         public virtual bool Disjoint(Geometry geom)
         {
@@ -150,7 +150,7 @@ namespace Mapsui.Geometries
         }
 
         /// <summary>
-        /// Returns 'true' if this <see cref="Geometry"/> ‘spatially intersects’ another <see cref="Geometry"/>.
+        /// Returns 'true' if this <see cref="Geometry"/> â€˜spatially intersectsâ€™ another <see cref="Geometry"/>.
         /// </summary>
         public virtual bool Intersects(Geometry geom)
         {
@@ -158,7 +158,7 @@ namespace Mapsui.Geometries
         }
 
         /// <summary>
-        /// Returns 'true' if this <see cref="Geometry"/> ‘spatially touches’ another <see cref="Geometry"/>.
+        /// Returns 'true' if this <see cref="Geometry"/> â€˜spatially touchesâ€™ another <see cref="Geometry"/>.
         /// </summary>
         public virtual bool Touches(Geometry geom)
         {
@@ -166,7 +166,7 @@ namespace Mapsui.Geometries
         }
 
         /// <summary>
-        /// Returns 'true' if this <see cref="Geometry"/> ‘spatially crosses’ another <see cref="Geometry"/>.
+        /// Returns 'true' if this <see cref="Geometry"/> â€˜spatially crossesâ€™ another <see cref="Geometry"/>.
         /// </summary>
         public virtual bool Crosses(Geometry geom)
         {
@@ -174,7 +174,7 @@ namespace Mapsui.Geometries
         }
 
         /// <summary>
-        /// Returns 'true' if this <see cref="Geometry"/> is ‘spatially within’ another <see cref="Geometry"/>.
+        /// Returns 'true' if this <see cref="Geometry"/> is â€˜spatially withinâ€™ another <see cref="Geometry"/>.
         /// </summary>
         public virtual bool Within(Geometry geom)
         {
@@ -182,7 +182,7 @@ namespace Mapsui.Geometries
         }
 
         /// <summary>
-        /// Returns 'true' if this <see cref="Geometry"/> ‘spatially contains’ another <see cref="Geometry"/>.
+        /// Returns 'true' if this <see cref="Geometry"/> â€˜spatially containsâ€™ another <see cref="Geometry"/>.
         /// </summary>
         public virtual bool Contains(Geometry geom)
         {

@@ -169,12 +169,12 @@ namespace Mapsui.Samples.Common
             };
         }
 
-        public static ILayer CreateBitmapPointLayer()
+        public static ILayer CreateBitmapPointLayer(IStyle style = null)
         {
             return new Layer("bitmapPointLayer")
             {
                 DataSource = new MemoryProvider(CreateBitmapPoint()),
-                Style = null,
+                Style = style,
             };
         }
 

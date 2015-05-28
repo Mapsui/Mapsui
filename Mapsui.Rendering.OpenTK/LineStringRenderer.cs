@@ -1,4 +1,5 @@
-﻿using Mapsui.Geometries;
+
+using Mapsui.Geometries;
 using Mapsui.Providers;
 using Mapsui.Styles;
 using OpenTK.Graphics.ES11;

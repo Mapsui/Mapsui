@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using BruTile;
 using BruTile.Cache;
 using Mapsui.Fetcher;

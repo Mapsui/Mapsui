@@ -1,4 +1,4 @@
-﻿namespace Mapsui.Utilities
+namespace Mapsui.Utilities
 {
     public static class DeveloperTools
     {

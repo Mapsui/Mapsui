@@ -1,4 +1,4 @@
-﻿namespace Mapsui.Geometries
+namespace Mapsui.Geometries
 {
     public static class GeometryExtensions
     {

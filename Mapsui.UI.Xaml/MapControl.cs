@@ -1,4 +1,4 @@
-﻿// Copyright 2008 - Paul den Dulk (Geodan)
+// Copyright 2008 - Paul den Dulk (Geodan)
 // 
 // This file is part of Mapsui.
 // Mapsui is free software; you can redistribute it and/or modify
@@ -226,11 +226,10 @@ namespace Mapsui.UI.Xaml
         private void RefreshGraphics()
         {
 #if (!SILVERLIGHT && !WINDOWS_PHONE)
-            Dispatcher.Invoke(new Action(() =>
+            Dispatcher.BeginInvoke(new Action(() =>
             {
 
                 InvalidateVisual();
-                InvalidateArrange();
                 _invalid = true;
             }));
 #else

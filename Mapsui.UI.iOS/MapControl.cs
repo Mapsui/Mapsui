@@ -1,53 +1,53 @@
-﻿using System;
+using System;
 using System.ComponentModel;
-using System.Drawing;
+using CoreGraphics;
 using Mapsui.Fetcher;
 using Mapsui.Rendering.OpenTK;
-using MonoTouch.CoreAnimation;
-using MonoTouch.CoreFoundation;
-using MonoTouch.Foundation;
-using MonoTouch.ObjCRuntime;
-using MonoTouch.OpenGLES;
-using MonoTouch.UIKit;
+using CoreAnimation;
+using CoreFoundation;
+using Foundation;
+using ObjCRuntime;
+using OpenGLES;
+using UIKit;
 using OpenTK;
 using OpenTK.Graphics.ES11;
 using OpenTK.Platform.iPhoneOS;
 
 namespace Mapsui.UI.iOS
 {
-	[Register("MapControl")]
+	[Foundation.Register("MapControl")]
 	public class MapControl : iPhoneOSGameView
 	{
 		public event EventHandler<EventArgs> ViewportInitialized;
 
-		private PointF _previousMid;
-		private PointF _currentMid;
+		private CGPoint _previousMid;
+		private CGPoint _currentMid;
 		private float _oldDist = 1f;
 		private MapRenderer _renderer;
 		private Map _map;
 		private bool _refreshGraphics;
 		private bool _viewportInitialized;
-		private float Width { get { return Frame.Width; } }
-		private float Height { get { return Frame.Height; } }
+		private float Width { get { return (float)Frame.Width; } }
+        private float Height { get { return (float)Frame.Height; } }
         
-		[Export ("layerClass")]
+		[Foundation.Export("layerClass")]
 		static Class LayerClass()
 		{
 			return iPhoneOSGameView.GetLayerClass();
 		}
 
-		[Export ("initWithCoder:")]
+		[Foundation.Export("initWithCoder:")]
 		public MapControl (NSCoder coder) : base(coder)
 		{
 			Initialize();
 		}
 
-		public MapControl (RectangleF frame) : base(frame)
+		public MapControl (CGRect frame) : base(frame)
 		{
 			Initialize();
 		}
 
-		[Export("drawFrame")]
+		[Foundation.Export("drawFrame")]
 		public void DrawFrame()
 		{
 			OnRenderFrame(new FrameEventArgs());
@@ -85,7 +85,7 @@ namespace Mapsui.UI.iOS
 					// By deleting all textures they are rebound and they show up properly.
 					_renderer.DeleteAllBoundTextures();	
 
-					Frame = new RectangleF (0, 0, Frame.Width, Frame.Height);
+					Frame = new CGRect (0, 0, Frame.Width, Frame.Height);
 					Map.Viewport.Width = Frame.Width;
 					Map.Viewport.Height = Frame.Height;
 					Map.NavigateTo(Map.Viewport.Extent);
@@ -133,24 +133,24 @@ namespace Mapsui.UI.iOS
 		{
 		    if (_map.Lock) return;
 
-			if (recognizer.NumberOfTouches < 2)
+			if ((int)recognizer.NumberOfTouches < 2)
 				return;
 
 			if (recognizer.State == UIGestureRecognizerState.Began)
 			{
 				_oldDist = 1;
-				_currentMid = recognizer.LocationInView(this);
+				_currentMid = (CGPoint)recognizer.LocationInView((UIView)this);
 			}
 
-			float scale = 1 - (_oldDist - recognizer.Scale);
+			float scale = 1 - (_oldDist - (float)recognizer.Scale);
 
 			if (scale > 0.5 && scale < 1.5)
 			{
-				if (_oldDist != recognizer.Scale)
+				if (_oldDist != (float)recognizer.Scale)
 				{
-					_oldDist = recognizer.Scale;
-					_currentMid = recognizer.LocationInView(this);
-					_previousMid = new PointF(_currentMid.X, _currentMid.Y);
+					_oldDist = (float)recognizer.Scale;
+					_currentMid = (CGPoint)recognizer.LocationInView((UIView)this);
+					_previousMid = new CGPoint(_currentMid.X, _currentMid.Y);
 
 					_map.Viewport.Center = _map.Viewport.ScreenToWorld(
 						_currentMid.X,
@@ -178,16 +178,16 @@ namespace Mapsui.UI.iOS
 		{
 			if (_map.Lock) return;
 
-			if (touches.Count == 1)
+			if ((uint)touches.Count == 1)
 			{
 				var touch = touches.AnyObject as UITouch;
 				if (touch != null)
 				{
-					var currentPos = touch.LocationInView(this);
-					var previousPos = touch.PreviousLocationInView(this);
+					var currentPos = (CGPoint)touch.LocationInView((UIView)this);
+					var previousPos = (CGPoint)touch.PreviousLocationInView((UIView)this);
 
-					var cRect = new Rectangle(new Point((int)currentPos.X, (int)currentPos.Y), new Size(5, 5));
-					var pRect = new Rectangle(new Point((int)previousPos.X, (int)previousPos.Y), new Size(5, 5));
+					var cRect = new CGRect(new CGPoint((int)currentPos.X, (int)currentPos.Y), new CGSize(5, 5));
+					var pRect = new CGRect(new CGPoint((int)previousPos.X, (int)previousPos.Y), new CGSize(5, 5));
 
 					if (!cRect.IntersectsWith(pRect))
 					{
@@ -269,7 +269,7 @@ namespace Mapsui.UI.iOS
 		{
 			string errorMessage;
 
-			DispatchQueue.MainQueue.DispatchAsync(delegate
+			DispatchQueue.MainQueue.DispatchAsync((Action)delegate
 				{
 					if (e == null)
 					{
@@ -304,6 +304,8 @@ namespace Mapsui.UI.iOS
 
 		protected override void CreateFrameBuffer()
 		{
+			//Set the LayerColorFormat property to an EAGLColorFormat value before calling Run().
+			LayerColorFormat = EAGLColorFormat.RGBA8;
 			ContextRenderingApi = EAGLRenderingAPI.OpenGLES1;
 				base.CreateFrameBuffer();
 		}

@@ -1,21 +1,20 @@
+using CoreGraphics;
 using Mapsui.Geometries;
-using MonoTouch.UIKit;
+using UIKit;
 using System.Collections.Generic;
-using System.Drawing;
-using Point = Mapsui.Geometries.Point;
 using System.Linq;
 
 namespace Mapsui.Rendering.iOS
 {
 	static class GeometryExtension
 	{
-		public static System.Drawing.Point OffSet;
+		public static CoreGraphics.CGPoint OffSet;
 
-		public static PointF ToUIKit(this Point point)
+		public static CGPoint ToUIKit(this Point point)
 		{
 			double xo = OffSet.X;
 			double yo = OffSet.Y;
-			return new PointF((float)(point.X - (xo)), (float)(point.Y - yo));
+			return new CGPoint((float)(point.X - (xo)), (float)(point.Y - yo));
 		}
 
 		public static UIBezierPath ToUIKit(this IEnumerable<Point> points, IViewport viewport)
@@ -27,12 +26,12 @@ namespace Mapsui.Rendering.iOS
 				var first = points.FirstOrDefault ();
 				var start = viewport.WorldToScreen (first);
 
-				pathGeometry.MoveTo (ToUIKit (start));
+				pathGeometry.MoveTo(ToUIKit (start));
 
 				for (int i = 1; i < points.Count (); i++) {
 					var point = points.ElementAt (i);
 					var p = viewport.WorldToScreen (point);
-					pathGeometry.AddLineTo (new PointF ((float)p.X, (float)p.Y));
+					pathGeometry.AddLineTo (new CGPoint ((float)p.X, (float)p.Y));
 				}
 			}
 			return pathGeometry;

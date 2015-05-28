@@ -1,11 +1,12 @@
 using System;
-using System.Drawing;
 using System.IO;
 using System.Threading;
+using CoreAnimation;
+using CoreGraphics;
+using CoreText;
+using Foundation;
 using Mapsui.Styles;
-using MonoTouch.CoreAnimation;
-using MonoTouch.CoreGraphics;
-using MonoTouch.UIKit;
+using UIKit;
 
 namespace Mapsui.Rendering.OpenTK
 {
@@ -24,12 +25,12 @@ namespace Mapsui.Rendering.OpenTK
                 view.Opaque = false;
 					view.BackgroundColor = UIColor.Clear;
                 
-                var bitmapSize = view.StringSize(text, UIFont.SystemFontOfSize(14), new SizeF(115, float.MaxValue), UILineBreakMode.WordWrap);
+                var bitmapSize = UIStringDrawing.StringSize(text, UIFont.SystemFontOfSize(14), new CGSize(115, float.MaxValue), UILineBreakMode.WordWrap);
 
 				view.Layer.AddSublayer(CreateCATextLayer(style, text));
 					view.BackgroundColor = new UIColor(ToCGColor(style.BackColor.Color));
 
-                image = ToImage(view, new RectangleF(0, 0, (float)bitmapSize.Width, (float)bitmapSize.Height));
+                image = ToImage(view, new CGRect(0, 0, (float)bitmapSize.Width, (float)bitmapSize.Height));
                 handle.Set();
             });
 
@@ -44,9 +45,9 @@ namespace Mapsui.Rendering.OpenTK
 		{
 			var label = new CATextLayer ();
 
-			var ctFont = new MonoTouch.CoreText.CTFont (style.Font.FontFamily, (float)style.Font.Size);
-			var aString = new MonoTouch.Foundation.NSAttributedString (text, 
-				new MonoTouch.CoreText.CTStringAttributes() { Font = ctFont });
+			var ctFont = new CoreText.CTFont (style.Font.FontFamily, (float)style.Font.Size);
+			var aString = new Foundation.NSAttributedString (text, 
+				new CoreText.CTStringAttributes() { Font = ctFont });
 
 			label.SetFont(ctFont);
 			label.FontSize = (float)style.Font.Size;
@@ -59,33 +60,33 @@ namespace Mapsui.Rendering.OpenTK
 
 			var size = GetSizeForText (0, aString);
 
-			label.Frame = new RectangleF (0, 0, size.Width, size.Height);
+			label.Frame = new CGRect (0, 0, size.Width, size.Height);
 
 			return label;
 		}
 
 		private static CGColor ToCGColor(Mapsui.Styles.Color color)
 		{
-			return new MonoTouch.CoreGraphics.CGColor(color.R / 255f, color.G / 255f, color.B / 255f, color.A / 255f);
+			return new CoreGraphics.CGColor(color.R / 255f, color.G / 255f, color.B / 255f, color.A / 255f);
 		}
 
-		private static SizeF GetSizeForText(int width, MonoTouch.Foundation.NSAttributedString aString)
+		private static CGSize GetSizeForText(int width, Foundation.NSAttributedString aString)
 		{
-			var frameSetter = new MonoTouch.CoreText.CTFramesetter (aString);
+			var frameSetter = new CoreText.CTFramesetter (aString);
 
-			MonoTouch.Foundation.NSRange range;
-			var size = frameSetter.SuggestFrameSize (new MonoTouch.Foundation.NSRange (0, 0), null,
-				new System.Drawing.Size (width, Int32.MaxValue), out range);
+			Foundation.NSRange range;
+			var size = (CGSize)frameSetter.SuggestFrameSize ((NSRange)new Foundation.NSRange (0, 0), (CTFrameAttributes)null,
+(CGSize)				new CoreGraphics.CGSize (width, Int32.MaxValue), out range);
 
 			return size;
 		}
 
-        private static UIImage ToImage(UIView view, RectangleF frame)
+        private static UIImage ToImage(UIView view, CGRect frame)
         {
-            UIGraphics.BeginImageContext(frame.Size);
+            UIGraphics.BeginImageContext((CGSize)frame.Size);
 			view.Layer.BackgroundColor = TransparentColor;
 			var context = UIGraphics.GetCurrentContext ();
-			UIGraphics.RectFill(view.Frame);
+			UIGraphics.RectFill((CGRect)view.Frame);
             view.Layer.RenderInContext(UIGraphics.GetCurrentContext());
             var image = UIGraphics.GetImageFromCurrentImageContext();
             UIGraphics.EndImageContext();

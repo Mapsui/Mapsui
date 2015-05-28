@@ -210,7 +210,7 @@ namespace Mapsui.Geometries
         }
 
         /// <summary>
-        /// If true, then this Geometry represents the empty point set, Ø, for the coordinate space. 
+        /// If true, then this Geometry represents the empty point set, Ã˜, for the coordinate space. 
         /// </summary>
         /// <returns>Returns 'true' if this Geometry is the empty geometry</returns>
         public override bool IsEmpty()

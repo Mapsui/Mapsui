@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
+using Mapsui.Geometries;
 using Mapsui.Providers;
 using Mapsui.Styles;
 using OpenTK.Graphics.ES11;
-using Point = Mapsui.Geometries.Point;
 
 namespace Mapsui.Rendering.OpenTK
 {

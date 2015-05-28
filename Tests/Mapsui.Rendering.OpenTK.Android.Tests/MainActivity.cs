@@ -1,17 +1,13 @@
-﻿using System;
-using Android.App;
-using Android.Content;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
+﻿using Android.App;
 using Android.OS;
+using Android.Widget;
 
 namespace Mapsui.Rendering.OpenTK.Android.Tests
 {
     [Activity(Label = "Mapsui.Rendering.OpenTK.Android.Tests", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : Activity
     {
-        int count = 1;
+        int _count = 1;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -24,7 +20,7 @@ namespace Mapsui.Rendering.OpenTK.Android.Tests
             // and attach an event to it
             var button = FindViewById<Button>(Resource.Id.MyButton);
 
-            button.Click += delegate { button.Text = string.Format("{0} clicks!", count++); };
+            button.Click += delegate { button.Text = string.Format("{0} clicks!", _count++); };
         }
     }
 }

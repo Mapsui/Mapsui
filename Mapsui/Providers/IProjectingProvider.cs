@@ -1,4 +1,4 @@
-﻿namespace Mapsui.Providers
+namespace Mapsui.Providers
 {
     public interface IProjectingProvider : IProvider
     {

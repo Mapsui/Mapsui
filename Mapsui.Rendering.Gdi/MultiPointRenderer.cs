@@ -1,4 +1,4 @@
-﻿// Copyright 2005, 2006 - Morten Nielsen (www.iter.dk)
+// Copyright 2005, 2006 - Morten Nielsen (www.iter.dk)
 // Copyright 2010 - Paul den Dulk (Geodan) - Adapted SharpMap for Mapsui
 //
 // This file is part of Mapsui.

@@ -1,4 +1,4 @@
-﻿using Mapsui.Geometries;
+using Mapsui.Geometries;
 using System;
 
 namespace Mapsui.Projection

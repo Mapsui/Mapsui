@@ -17,17 +17,27 @@ namespace Mapsui.Samples.Android
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Main);
             var mapControl = FindViewById<MapControl>(Resource.Id.mapcontrol);
-            mapControl.Map.Layers.Add(new TileLayer(KnownTileSources.Create()) { Name = "OSM" });
-            var lineStringLayer = LineStringSample.CreateLineStringLayer();
-            lineStringLayer.Style = CreateLineStringStyle();
+            var tileLayer = CreateTileLayer();
+            mapControl.Map.Layers.Add(tileLayer);
 
-            mapControl.Map.Layers.Add(lineStringLayer);
+            mapControl.Map.Layers.Add(LineStringSample.CreateLineStringLayer(CreateLineStringStyle()));
+
             var pointLayer = PointLayerSample.CreateRandomPointLayer(mapControl.Map.Envelope);
             pointLayer.Style = CreatePointLayerStyle();
             mapControl.Map.Layers.Add(pointLayer);
 
             mapControl.Map.Layers.Add(PointLayerSample.CreateBitmapPointLayer());
+
             mapControl.Map.Viewport.RenderResolutionMultiplier = 2;
+        }
+
+        private static TileLayer CreateTileLayer()
+        {
+            var tileLayer = new TileLayer(KnownTileSources.Create(KnownTileSource.EsriWorldReferenceOverlay))
+            {
+                Name = "OSM"
+            };
+            return tileLayer;
         }
 
         private static IStyle CreatePointLayerStyle()

@@ -60,7 +60,7 @@ namespace Mapsui
         public string CRS { get; set; }
 
         /// <summary>
-        /// The maps coördinate system
+        /// The maps coÃ¶rdinate system
         /// </summary>
         public ITransformation Transformation { get; set; }
 
@@ -114,6 +114,13 @@ namespace Mapsui
         {
             Viewport.Center.X = x;
             Viewport.Center.Y = y;
+            OnRefreshGraphics();
+            ViewChanged(true);
+        }
+
+        public void RotateTo(double rotation)
+        {
+            Viewport.Rotation = rotation;
             OnRefreshGraphics();
             ViewChanged(true);
         }

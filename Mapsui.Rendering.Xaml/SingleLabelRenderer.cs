@@ -1,4 +1,4 @@
-﻿using Mapsui.Styles;
+using Mapsui.Styles;
 #if !NETFX_CORE
 using System.Windows.Controls;
 using System.Windows.Media;

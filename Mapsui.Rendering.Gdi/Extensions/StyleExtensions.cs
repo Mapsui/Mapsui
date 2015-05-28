@@ -1,4 +1,4 @@
-﻿// Copyright 20010 - Paul den Dulk (Geodan)
+// Copyright 20010 - Paul den Dulk (Geodan)
 // 
 // This file is part of Mapsui.
 // Mapsui is free software; you can redistribute it and/or modify

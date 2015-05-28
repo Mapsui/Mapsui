@@ -1,4 +1,4 @@
-﻿using Mapsui.Styles;
+using Mapsui.Styles;
 using System.Collections.Generic;
 
 namespace Mapsui.Rendering.OpenTK

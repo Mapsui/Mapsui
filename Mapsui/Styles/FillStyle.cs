@@ -1,4 +1,4 @@
-﻿namespace Mapsui.Styles
+namespace Mapsui.Styles
 {
     public enum FillStyle
     {

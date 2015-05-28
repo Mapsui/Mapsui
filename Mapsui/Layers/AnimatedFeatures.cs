@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using Mapsui.Geometries;
 using Mapsui.Providers;
 using System;

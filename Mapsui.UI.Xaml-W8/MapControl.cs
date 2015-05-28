@@ -1,4 +1,4 @@
-﻿// Copyright 2008 - Paul den Dulk (Geodan)
+// Copyright 2008 - Paul den Dulk (Geodan)
 // 
 // This file is part of Mapsui.
 // Mapsui is free software; you can redistribute it and/or modify
@@ -19,7 +19,6 @@ using Mapsui.Fetcher;
 using Mapsui.Providers;
 using Mapsui.Rendering;
 using Mapsui.Rendering.Xaml;
-using Mapsui.Utilities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

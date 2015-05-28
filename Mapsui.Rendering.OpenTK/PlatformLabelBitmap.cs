@@ -1,4 +1,4 @@
-﻿using Mapsui.Styles;
+using Mapsui.Styles;
 using System;
 using System.Drawing;
 using System.Drawing.Text;
