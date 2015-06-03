@@ -1,4 +1,5 @@
 using System;
+using Mapsui.Geometries;
 using Mapsui.Projection;
 
 namespace Mapsui.Utilities
@@ -46,6 +47,36 @@ namespace Mapsui.Utilities
         public static bool NeedsTransform(ITransformation transformation, string fromCRS, string toCRS)
         {
             return (transformation != null && !string.IsNullOrWhiteSpace(fromCRS) && !string.IsNullOrWhiteSpace(toCRS) && fromCRS != toCRS);
+        }
+
+        public static BoundingBox GetTransformedBoundingBox(ITransformation transformatiom, BoundingBox extent, string fromCRS, string toCRS)
+        {
+            if (!IsProjectionInfoAvailable(transformatiom, fromCRS, toCRS))
+                return null;
+
+            if (!IsTransformationNeeded(fromCRS, toCRS))
+                return extent;
+
+            if (IsTransformationSupported(transformatiom, fromCRS, toCRS))
+                return transformatiom.Transform(fromCRS, toCRS, extent);
+
+            return null;
+
+        }
+
+        private static bool IsProjectionInfoAvailable(ITransformation transformation, string fromCRS, string toCRS)
+        {
+            return !string.IsNullOrEmpty(fromCRS) && !string.IsNullOrEmpty(toCRS) && transformation != null;
+        }
+
+        private static bool IsTransformationNeeded(string fromCRS, string toCRS)
+        {
+           return !fromCRS.Equals(toCRS);
+        }
+
+        private static bool IsTransformationSupported(ITransformation transformation, string fromCRS, string toCRS)
+        {
+            return transformation.IsProjectionSupported(fromCRS, toCRS) == true;
         }
     }
 }
