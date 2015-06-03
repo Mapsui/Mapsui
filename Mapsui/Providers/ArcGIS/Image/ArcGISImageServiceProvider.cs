@@ -131,14 +131,19 @@ namespace Mapsui.Providers.ArcGIS.Image
             {
                 var myWebResponse = webRequest.GetSyncResponse(_timeOut);
 
-                using (var dataStream = myWebResponse.GetResponseStream())
+               using (var dataStream = myWebResponse.GetResponseStream())
                {
-                   if (!myWebResponse.ContentType.StartsWith("image")) return false;
-
-                   byte[] bytes = BruTile.Utilities.ReadFully(dataStream);
-                   raster = new Raster(new MemoryStream(bytes), viewport.Extent);
+                   try
+                   {
+                       var bytes = BruTile.Utilities.ReadFully(dataStream);
+                       raster = new Raster(new MemoryStream(bytes), viewport.Extent);
+                   }
+                   catch (Exception)
+                   {
+                       return false;
+                   }                   
                }
-               return true;           
+               return true;
             }
             catch (WebException webEx)
             {
