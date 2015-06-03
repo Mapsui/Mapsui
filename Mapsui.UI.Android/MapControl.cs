@@ -240,11 +240,6 @@ namespace Mapsui.UI.Android
             }
         }
 
-        private static string GetErrorMessage(DataChangedEventArgs e)
-        {
-            return (e.Cancelled) ? "Cancelled" : ((e.Error != null) ? e.Error.GetType() + ": " + e.Error.Message : "");
-        }
-
         private void Set2DViewport()
         {
             GL.MatrixMode(All.Projection);

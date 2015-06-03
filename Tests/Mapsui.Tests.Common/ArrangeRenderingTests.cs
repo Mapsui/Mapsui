@@ -231,7 +231,5 @@ namespace Mapsui.Tests.Common
             var provider = new MemoryProvider(features);
             return provider;
         }
-
-
     }
 }

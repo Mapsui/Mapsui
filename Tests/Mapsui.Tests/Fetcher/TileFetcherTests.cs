@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Globalization;
-using System.Threading.Tasks;
 using BruTile;
 using BruTile.Cache;
 using BruTile.Predefined;
@@ -37,6 +35,7 @@ namespace Mapsui.Tests.Fetcher
                 foreach (var tileInfo in tileInfos)
                 {
                     var tiles = memoryCache.Find(tileInfo.Index);
+
                 }
             }
 
