@@ -110,16 +110,22 @@ namespace Mapsui.Rendering.Xaml
         private static XamlMedia.Matrix CreateTransformMatrix(Point point, IViewport viewport)
         {
             var matrix = XamlMedia.Matrix.Identity;
-            MatrixHelper.Translate(ref matrix, point.X, point.Y);
             var mapCenterX = viewport.Width * 0.5;
             var mapCenterY = viewport.Height * 0.5;
+            
+            var pointOffsetFromViewPortCenterX = point.X - viewport.Center.X;
+            var pointOffsetFromViewPortCenterY = point.Y - viewport.Center.Y;
 
-            MatrixHelper.Translate(ref matrix, mapCenterX - viewport.Center.X, mapCenterY - viewport.Center.Y);
+            matrix.Translate(pointOffsetFromViewPortCenterX, pointOffsetFromViewPortCenterY);
+
             if (viewport.IsRotated)
             {
-                MatrixHelper.RotateAt(ref matrix, -viewport.Rotation);
+                matrix.Rotate(-viewport.Rotation);
             }
-            MatrixHelper.ScaleAt(ref matrix, 1 / viewport.Resolution, 1 / viewport.Resolution, mapCenterX, mapCenterY);
+
+
+            matrix.Translate(mapCenterX, mapCenterY);
+            matrix.ScaleAt(1 / viewport.Resolution, 1 / viewport.Resolution, mapCenterX, mapCenterY);
 
             // This will invert the Y axis, but will also put images upside down
             MatrixHelper.InvertY(ref matrix, mapCenterY);
@@ -132,12 +138,12 @@ namespace Mapsui.Rendering.Xaml
             var mapCenterX = viewport.Width * 0.5;
             var mapCenterY = viewport.Height * 0.5;
 
-            MatrixHelper.Translate(ref matrix, mapCenterX - viewport.Center.X, mapCenterY - viewport.Center.Y);
+            matrix.Translate(mapCenterX - viewport.Center.X, mapCenterY - viewport.Center.Y);
             if (viewport.IsRotated)
             {
-                MatrixHelper.RotateAt(ref matrix, -viewport.Rotation);
+                matrix.Rotate(-viewport.Rotation);
             }
-            MatrixHelper.ScaleAt(ref matrix, 1 / viewport.Resolution, 1 / viewport.Resolution, mapCenterX, mapCenterY);
+            matrix.ScaleAt(1 / viewport.Resolution, 1 / viewport.Resolution, mapCenterX, mapCenterY);
 
             // This will invert the Y axis, but will also put images upside down
             MatrixHelper.InvertY(ref matrix, mapCenterY);
