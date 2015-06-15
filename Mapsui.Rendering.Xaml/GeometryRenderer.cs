@@ -134,20 +134,7 @@ namespace Mapsui.Rendering.Xaml
 
         private static XamlMedia.Matrix CreateTransformMatrix1(IViewport viewport)
         {
-            var matrix = XamlMedia.Matrix.Identity;
-            var mapCenterX = viewport.Width * 0.5;
-            var mapCenterY = viewport.Height * 0.5;
-
-            matrix.Translate(mapCenterX - viewport.Center.X, mapCenterY - viewport.Center.Y);
-            if (viewport.IsRotated)
-            {
-                matrix.Rotate(-viewport.Rotation);
-            }
-            matrix.ScaleAt(1 / viewport.Resolution, 1 / viewport.Resolution, mapCenterX, mapCenterY);
-
-            // This will invert the Y axis, but will also put images upside down
-            MatrixHelper.InvertY(ref matrix, mapCenterY);
-            return matrix;
+            return CreateTransformMatrix(new Point(0, 0), viewport);
         }
 
         private static XamlShapes.Shape CreateSymbolFromBitmap(Stream data, double opacity)
