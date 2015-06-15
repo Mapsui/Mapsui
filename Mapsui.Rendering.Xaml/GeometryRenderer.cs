@@ -116,16 +116,16 @@ namespace Mapsui.Rendering.Xaml
             var pointOffsetFromViewPortCenterX = point.X - viewport.Center.X;
             var pointOffsetFromViewPortCenterY = point.Y - viewport.Center.Y;
 
-            matrix.Translate(pointOffsetFromViewPortCenterX, pointOffsetFromViewPortCenterY);
+            MatrixHelper.Translate(ref matrix, pointOffsetFromViewPortCenterX, pointOffsetFromViewPortCenterY);
 
             if (viewport.IsRotated)
             {
-                matrix.Rotate(-viewport.Rotation);
+                MatrixHelper.Rotate(ref matrix, -viewport.Rotation);
             }
 
 
-            matrix.Translate(mapCenterX, mapCenterY);
-            matrix.ScaleAt(1 / viewport.Resolution, 1 / viewport.Resolution, mapCenterX, mapCenterY);
+            MatrixHelper.Translate(ref matrix, mapCenterX, mapCenterY);
+            MatrixHelper.ScaleAt(ref matrix, 1 / viewport.Resolution, 1 / viewport.Resolution, mapCenterX, mapCenterY);
 
             // This will invert the Y axis, but will also put images upside down
             MatrixHelper.InvertY(ref matrix, mapCenterY);
