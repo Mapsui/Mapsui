@@ -107,7 +107,7 @@ namespace Mapsui.Rendering.OpenTK
             GL.Color4((byte)255, (byte)255, (byte)255, (byte)(255 * opacity));
 
             GL.Enable(All.Blend); // Enables the alpha channel to be used in the color buffer
-            GL.BlendFunc(All.One, All.OneMinusSrcAlpha); //The operation/order to blend
+            GL.BlendFunc(All.SrcAlpha, All.OneMinusSrcAlpha); //The operation/order to blend
 
             GL.EnableClientState(All.VertexArray);
             GL.EnableClientState(All.TextureCoordArray);
