@@ -69,16 +69,7 @@ namespace Mapsui.Layers
 
                 lock (DataSource)
                 {
-                    if (ProjectionHelper.NeedsTransform(Transformation, DataSource.CRS, CRS))
-                    {
-                        if (Transformation.IsProjectionSupported(DataSource.CRS, CRS) == true)
-                        {
-                            var box = DataSource.GetExtents();
-                            return Transformation.Transform(DataSource.CRS, CRS, box);
-                        }
-                    }
-                    if (string.IsNullOrWhiteSpace(CRS)) return DataSource.GetExtents();
-                    return null;
+                    return ProjectionHelper.GetTransformedBoundingBox(Transformation, DataSource.GetExtents(), DataSource.CRS, CRS);                   
                 }
             }
         }
