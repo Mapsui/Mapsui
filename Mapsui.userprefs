@@ -1,4 +1,4 @@
-﻿<Properties GitUserInfo="UsingGIT" StartupItem="Samples/Mapsui.Samples.iOS/Mapsui.Samples.iOS.csproj">
+﻿<Properties GitUserInfo="UsingGIT" StartupItem="Tests\Mapsui.Rendering.OpenTK.Android.Tests\Mapsui.Rendering.OpenTK.Android.Tests.csproj">
   <DisabledProjects>
     <String>Mapsui.UI.Xaml/Mapsui.UI.Xaml.csproj</String>
     <String>Mapsui.Rendering.Xaml/Mapsui.Rendering.Xaml.csproj</String>
