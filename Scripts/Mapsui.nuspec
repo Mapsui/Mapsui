@@ -7,8 +7,7 @@
     <title>Mapsui</title>
     <authors>Paul den Dulk</authors>
     <owners>Paul den Dulk</owners>
-    <licenseUrl>http://mapsui.codeplex.com/license</licenseUrl>
-    <projectUrl>http://mapsui.codeplex.com</projectUrl>
+    <projectUrl>https://github.com/pauldendulk/Mapsui</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>
       Mapsui - Library for mapping
