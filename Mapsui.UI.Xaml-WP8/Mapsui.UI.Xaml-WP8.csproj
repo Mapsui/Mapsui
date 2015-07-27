@@ -93,6 +93,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Mapsui.Geometries\Mapsui.Geometries.csproj">
+      <Project>{ee55b62d-ffa2-4c24-a4ad-7a47ace55ce5}</Project>
+      <Name>Mapsui.Geometries</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Mapsui.Rendering.Xaml-WP8\Mapsui.Rendering.Xaml-WP8.csproj">
       <Project>{5BCD71BC-6FB5-4E6B-8004-B028496EEB95}</Project>
       <Name>Mapsui.Rendering.Xaml-WP8</Name>

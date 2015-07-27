@@ -89,6 +89,10 @@
     <Content Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Mapsui.Geometries\Mapsui.Geometries.csproj">
+      <Project>{ee55b62d-ffa2-4c24-a4ad-7a47ace55ce5}</Project>
+      <Name>Mapsui.Geometries</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Mapsui.Rendering.OpenTK-A\Mapsui.Rendering.OpenTK-A.csproj">
       <Project>{D7616DAD-25C1-4E3D-B0BD-1710382B60E5}</Project>
       <Name>Mapsui.Rendering.OpenTK-A</Name>

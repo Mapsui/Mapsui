@@ -86,6 +86,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Mapsui.Geometries\Mapsui.Geometries.csproj">
+      <Project>{ee55b62d-ffa2-4c24-a4ad-7a47ace55ce5}</Project>
+      <Name>Mapsui.Geometries</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Mapsui.Rendering.Xaml\Mapsui.Rendering.Xaml.csproj">
       <Project>{5DC32B05-0B6E-478F-A9FB-57762AA2F814}</Project>
       <Name>Mapsui.Rendering.Xaml</Name>

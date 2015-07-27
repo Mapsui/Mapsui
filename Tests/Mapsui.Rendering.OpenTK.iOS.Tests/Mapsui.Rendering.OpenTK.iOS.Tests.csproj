@@ -87,6 +87,10 @@
     <BundleResource Include="Resources\Default-568h%402x.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Mapsui.Geometries\Mapsui.Geometries.csproj">
+      <Project>{ee55b62d-ffa2-4c24-a4ad-7a47ace55ce5}</Project>
+      <Name>Mapsui.Geometries</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Mapsui.Rendering.OpenTK-iOS\Mapsui.Rendering.OpenTK-iOS.csproj">
       <Project>{2D1A291B-0B35-423B-B428-49474D52A73B}</Project>
       <Name>Mapsui.Rendering.OpenTK-iOS</Name>

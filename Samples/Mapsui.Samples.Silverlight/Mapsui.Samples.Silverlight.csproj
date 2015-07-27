@@ -132,6 +132,10 @@
     <None Include="Properties\AppManifest.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Mapsui.Geometries\Mapsui.Geometries.csproj">
+      <Project>{ee55b62d-ffa2-4c24-a4ad-7a47ace55ce5}</Project>
+      <Name>Mapsui.Geometries</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Mapsui.Rendering.Xaml-SL\Mapsui.Rendering.Xaml-SL.csproj">
       <Project>{74a0bdf2-e6af-4bab-aa7e-73e68936f1f2}</Project>
       <Name>Mapsui.Rendering.Xaml-SL</Name>

@@ -71,6 +71,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Mapsui.Geometries\Mapsui.Geometries.csproj">
+      <Project>{ee55b62d-ffa2-4c24-a4ad-7a47ace55ce5}</Project>
+      <Name>Mapsui.Geometries</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Mapsui.Rendering.OpenTK\Mapsui.Rendering.OpenTK.csproj">
       <Project>{7C1A68BE-0DB2-479A-84E2-D80E79EDF87F}</Project>
       <Name>Mapsui.Rendering.OpenTK</Name>
