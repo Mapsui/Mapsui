@@ -19,6 +19,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Collections.Generic;
+using System.Linq;
 using Mapsui.Utilities;
 
 namespace Mapsui.Geometries
@@ -80,39 +81,24 @@ namespace Mapsui.Geometries
         /// Initializes a new Bounding Box based on the bounds from a set of geometries
         /// </summary>
         /// <param name="objects">list of objects</param>
-        public BoundingBox(Collection<Geometry> objects)
+        public BoundingBox(IEnumerable<Geometry> objects) : this(objects.Select(o => o.GetBoundingBox()))
         {
-            if (objects == null || objects.Count == 0)
-            {
-                min = null;
-                max = null;
-                return;
-            }
-            min = objects[0].GetBoundingBox().Min.Clone();
-            max = objects[0].GetBoundingBox().Max.Clone();
-            CheckMinMax();
-            for (int i = 1; i < objects.Count; i++)
-            {
-                BoundingBox box = objects[i].GetBoundingBox();
-                min.X = Math.Min(box.Min.X, Min.X);
-                min.Y = Math.Min(box.Min.Y, Min.Y);
-                max.X = Math.Max(box.Max.X, Max.X);
-                max.Y = Math.Max(box.Max.Y, Max.Y);
-            }
         }
 
         /// <summary>
         /// Initializes a new Bounding Box based on the bounds from a set of bounding boxes
         /// </summary>
-        public BoundingBox(IEnumerable<BoundingBox> boundingBoxex)
+        public BoundingBox(IEnumerable<BoundingBox> boundingBoxes)
         {
             max = null;
             min = null;
 
-            foreach (var boundingBox in boundingBoxex)
+            foreach (var boundingBox in boundingBoxes)
             {
-                if (min == null) boundingBox.Min.Clone();
-                if (max == null) boundingBox.Max.Clone();
+                if (min == null)
+                    min = boundingBox.Min.Clone();
+                if (max == null)
+                    max = boundingBox.Max.Clone();
 
                 min.X = Math.Min(boundingBox.Min.X, Min.X);
                 min.Y = Math.Min(boundingBox.Min.Y, Min.Y);
@@ -328,7 +314,8 @@ namespace Mapsui.Geometries
         /// <returns>True if touches</returns>
         public bool Touches(Geometry s)
         {
-            if (s is Point) return Touches(s as Point);
+            var point = s as Point;
+            if (point != null) return Touches(point);
             throw new NotImplementedException("Touches: Not implemented on this geometry type");
         }
 
@@ -352,7 +339,8 @@ namespace Mapsui.Geometries
         /// <returns>True it contains</returns>
         public bool Contains(Geometry s)
         {
-            if (s is Point) return Contains(s as Point);
+            var point = s as Point;
+            if (point != null) return Contains(point);
             throw new NotImplementedException("Contains: Not implemented on these geometries");
         }
 
