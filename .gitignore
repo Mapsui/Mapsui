@@ -28,3 +28,7 @@ obj/
 bin/
 
 packages/
+
+.vs/
+
+Release/
