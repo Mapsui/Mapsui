@@ -158,6 +158,8 @@ namespace Mapsui.Providers
 
         public virtual IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
         {
+            if (box == null) throw new ArgumentNullException("box");
+
             lock (_syncRoot)
             {
                 var features = Features.ToList();
@@ -170,7 +172,8 @@ namespace Mapsui.Providers
                     if (feature.Geometry == null)
                         continue;
 
-                    if (grownBox.Intersects(feature.Geometry.GetBoundingBox()))
+                    var boundingBox = feature.Geometry.GetBoundingBox();
+                    if (boundingBox!= null && grownBox.Intersects(boundingBox))
                     {
                         yield return feature;
                     }
