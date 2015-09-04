@@ -183,7 +183,7 @@ namespace Mapsui.Providers.ArcGIS.Image
 
             if (ArcGisImageCapabilities.StartTime == -1 && ArcGisImageCapabilities.EndTime == -1)
             {
-                if (ArcGisImageCapabilities.timeInfo.timeExtent == null || ArcGisImageCapabilities.timeInfo.timeExtent.Count() == 0)
+                if (ArcGisImageCapabilities.timeInfo == null || ArcGisImageCapabilities.timeInfo.timeExtent == null || ArcGisImageCapabilities.timeInfo.timeExtent.Count() == 0)
                     url.Append("&time=null, null");
                 else if (ArcGisImageCapabilities.timeInfo.timeExtent.Count() == 1)
                     url.AppendFormat("&time={0}, null", ArcGisImageCapabilities.timeInfo.timeExtent[0]);

@@ -36,7 +36,7 @@ namespace Mapsui.Providers.ArcGIS
         /// </summary>
         public event StatusEventHandler CapabilitiesFailed;
 
-        
+
         /// <summary>
         /// Helper class for getting capabilities of an ArcGIS service + extras
         /// </summary>
@@ -106,7 +106,7 @@ namespace Mapsui.Providers.ArcGIS
                         var contentString = reader.ReadToEnd();
                         if (contentString.Contains("{\"error\":{\""))
                         {
-                            OnFailed(EventArgs.Empty);
+                            OnCapabilitiesFailed(EventArgs.Empty);
                             return;
                         }
                     }
@@ -121,7 +121,7 @@ namespace Mapsui.Providers.ArcGIS
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
-                OnFailed(EventArgs.Empty);
+                OnCapabilitiesFailed(EventArgs.Empty);
             }
         }
 
@@ -144,12 +144,14 @@ namespace Mapsui.Providers.ArcGIS
 
         protected virtual void OnFinished(EventArgs e)
         {
-            CapabilitiesReceived(_arcGisCapabilities, e);
+            var handler = CapabilitiesReceived;
+            if (handler != null) handler(_arcGisCapabilities, e);
         }
 
-        protected virtual void OnFailed(EventArgs e)
+        protected virtual void OnCapabilitiesFailed(EventArgs e)
         {
-            CapabilitiesFailed(null, e);
+            var handler = CapabilitiesFailed;
+            if (handler != null) handler(null, e);
         }
 
         /// <summary>
