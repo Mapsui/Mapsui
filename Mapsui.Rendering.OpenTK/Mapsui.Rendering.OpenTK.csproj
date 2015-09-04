@@ -52,6 +52,7 @@
     <Compile Include="LabelRenderer.cs" />
     <Compile Include="PlatformLabelBitmap.cs" />
     <Compile Include="PlatformTextureLoader.cs" />
+    <Compile Include="PolygonRenderer.cs" />
     <Compile Include="TextureHelper.cs" />
     <Compile Include="TextureInfo.cs" />
     <Compile Include="LineStringRenderer.cs" />

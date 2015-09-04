@@ -96,6 +96,10 @@ namespace Mapsui.Rendering.OpenTK
             {
                 LineStringRenderer.Draw(viewport, style, feature);
             }
+            else if (feature.Geometry is Polygon)
+            {
+                PolygonRenderer.Draw(viewport, style, feature);
+            }
             else if (feature.Geometry is IRaster)
             {
                 RasterRenderer.Draw(viewport, style, feature, _tileTextureCache, _currentIteration);

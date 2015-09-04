@@ -48,6 +48,9 @@
     <Compile Include="..\Mapsui.Rendering.OpenTK\LabelRenderer.cs">
       <Link>LabelRenderer.cs</Link>
     </Compile>
+    <Compile Include="..\Mapsui.Rendering.OpenTK\PolygonRenderer.cs">
+      <Link>PolygonRenderer.cs</Link>
+    </Compile>
     <Compile Include="..\Mapsui.Rendering.OpenTK\TextureHelper.cs">
       <Link>TextureHelper.cs</Link>
     </Compile>
