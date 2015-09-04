@@ -28,7 +28,7 @@ namespace Mapsui.Rendering.OpenTK
                 fillColor = vectorStyle.Fill.Color;
             }
 
-            float[] points = ToOpenTK2(lineString);
+            float[] points = ToOpenTK(lineString);
             WorldToScreen(viewport, points);
 
             // Fill
@@ -43,11 +43,10 @@ namespace Mapsui.Rendering.OpenTK
             GL.DisableClientState(All.VertexArray);
         }
 
-        private static float[] ToOpenTK2(IList<Point> vertices)
+        private static float[] ToOpenTK(IList<Point> vertices)
         {
             const int dimensions = 2; // x and y are both in one array
-            int numberOfCoordinates = vertices.Count; // Times two because of duplicate begin en end. Minus two because the very begin and end need no duplicate
-            var points = new float[(numberOfCoordinates + 1) * dimensions];
+            var points = new float[vertices.Count * dimensions];
 
             for (var i = 0; i < vertices.Count; i++)
             {
@@ -55,26 +54,6 @@ namespace Mapsui.Rendering.OpenTK
                 points[i * 2 + 1] = (float)vertices[i].Y;
             }
 
-            var lastCoordinate = points.Length - 2;
-            points[lastCoordinate] = (float)vertices[0].X;
-            points[lastCoordinate + 1] = (float)vertices[0].Y;
-
-            return points;
-        }
-
-        private static float[] ToOpenTK(IList<Point> vertices)
-        {
-            const int dimensions = 2; // x and y are both in one array
-            int numberOfCoordinates = vertices.Count * 2 - 2; // Times two because of duplicate begin en end. Minus two because the very begin and end need no duplicate
-            var points = new float[numberOfCoordinates * dimensions];
-
-            for (var i = 0; i < vertices.Count - 1; i++)
-            {
-                points[i * 4 + 0] = (float)vertices[i].X;
-                points[i * 4 + 1] = (float)vertices[i].Y;
-                points[i * 4 + 2] = (float)vertices[i + 1].X;
-                points[i * 4 + 3] = (float)vertices[i + 1].Y;
-            }
             return points;
         }
 
