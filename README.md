@@ -39,15 +39,6 @@ Per platform there are separate assemblies for the UI and for Rendering. Those a
 - Mapsui.UI.Android and Mapsui.Rendering.Android for API Level 10 (v2.3)
 - Mapsui.UI.iOS and Mapsui.Rendering.iOS
 
-## Applications that use Mapsui ##
-
-- [BergerView 2.0](http://www.stichtingimn.nl/130228-aanrijdtijdensysteem-en-bergerview-vernieuwd.php)
-- [OutdoorMaps](http://www.outdoormaps.net/)
-- [Phoenix](http://www.geodan.nl/producten/touch-table-software/phoenix/)
-- [Bevoegd Gezag](http://apps.microsoft.com/windows/nl-nl/app/ceb52263-0e83-4bdd-a38a-bcab63295b9d)
-- [EarthWatchers](http://earthwatchers.cloudapp.net/)
-- [WIONapp] (http://www.geodanvandenberg.nl/wionapp/)
-
 ## Warnings ##
 
 - There is limited documentation.
