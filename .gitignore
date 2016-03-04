@@ -15,11 +15,9 @@
 
 *.csproj.user
 
-Mapsui.Rendering.Android/obj/Debug/library_project_imports/__res_name_case_map.txt
+*.userprefs
 
-Mapsui.Rendering.Android/obj/Debug/library_project_imports/res/values/strings.xml
-
-Mapsui.Rendering.Android/obj/Debug/Mapsui.Rendering.Android.csproj.FilesWrittenAbsolute.txt
+Mapsui.Rendering.Android/obj/
 
 Samples/Mapsui.Samples.Silverlight.Web/ClientBin
 
