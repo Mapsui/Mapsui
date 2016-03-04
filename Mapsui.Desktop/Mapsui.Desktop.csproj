@@ -33,8 +33,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BruTile, Version=0.13.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\BruTile.0.15.0\lib\net40\BruTile.dll</HintPath>
+    <Reference Include="BruTile, Version=0.16.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\BruTile.0.16.0\lib\net40\BruTile.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
