@@ -33,7 +33,7 @@ namespace Mapsui.Samples.Android
 
         private static TileLayer CreateTileLayer()
         {
-            var tileLayer = new TileLayer(KnownTileSources.Create(KnownTileSource.EsriWorldReferenceOverlay))
+            var tileLayer = new TileLayer(KnownTileSources.Create(KnownTileSource.OpenStreetMap))
             {
                 Name = "OSM"
             };
