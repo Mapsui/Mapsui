@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui", "Mapsui\Mapsui.csproj", "{D74C052A-C07E-4B37-A898-134218ACA5C9}"
 EndProject
@@ -88,6 +88,24 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.UI.Xaml-UA", "Mapsui.UI.Xaml-UA\Mapsui.UI.Xaml-UA.csproj", "{2D788351-33FC-4051-894F-4308E2A6B7F2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Geometries", "Mapsui.Geometries\Mapsui.Geometries.csproj", "{EE55B62D-FFA2-4C24-A4AD-7A47ACE55CE5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution", "Solution", "{08F7A74F-3AAF-4A0F-8E64-ADE4BCC4AA6F}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{B2DB6CAC-1C30-42C9-B628-BACEBF790AB9}"
+	ProjectSection(SolutionItems) = preProject
+		Scripts\build.proj = Scripts\build.proj
+		Scripts\build_with_ios.proj = Scripts\build_with_ios.proj
+		Scripts\buildpack.bat = Scripts\buildpack.bat
+		Scripts\buildpackpush.bat = Scripts\buildpackpush.bat
+		Scripts\Mapsui.nuspec = Scripts\Mapsui.nuspec
+		Scripts\readme.txt = Scripts\readme.txt
+		Scripts\rename.ps1 = Scripts\rename.ps1
+		Scripts\updateversionnumber.proj = Scripts\updateversionnumber.proj
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
