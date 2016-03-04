@@ -43,7 +43,7 @@ namespace Mapsui.Samples.Common
         
         private static ITileProvider GetTileProvider(ITileSchema schema)
         {
-            return new WebTileProvider(GetRequestBuilder(schema));
+            return new HttpTileProvider(GetRequestBuilder(schema));
         }
 
         private static IRequest GetRequestBuilder(ITileSchema schema)

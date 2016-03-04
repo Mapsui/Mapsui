@@ -15,6 +15,7 @@
 // along with Mapsui; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
+using System.Diagnostics;
 using BruTile;
 using BruTile.Cache;
 using BruTile.FileSystem;
@@ -48,8 +49,8 @@ namespace Mapsui.Samples.Common.Desktop
         {
             var schema = new GlobalSphericalMercator(YAxis.TMS);
             schema.Resolutions.Clear();
-            schema.Resolutions["0"] = new Resolution { Id = "0", UnitsPerPixel = 156543.033900000 };
-            schema.Resolutions["1"] = new Resolution { Id = "1", UnitsPerPixel = 78271.516950000 };
+            schema.Resolutions["0"] = new Resolution("0", 156543.033900000, 256, 256);
+            schema.Resolutions["1"] = new Resolution("1", 78271.516950000, 256, 256);
             return schema;
         }
 

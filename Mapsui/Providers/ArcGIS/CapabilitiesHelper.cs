@@ -171,12 +171,12 @@ namespace Mapsui.Providers.ArcGIS
             foreach (var lod in arcGisDynamicCapabilities.tileInfo.lods)
             {
                 var levelId = count.ToString();
-                schema.Resolutions[levelId] = new Resolution { Id = levelId, UnitsPerPixel = lod.resolution };
+                schema.Resolutions[levelId] = new Resolution (levelId, lod.resolution, 
+                    arcGisDynamicCapabilities.tileInfo.cols,
+                    arcGisDynamicCapabilities.tileInfo.rows);
                 count++;
             }
 
-            schema.Height = arcGisDynamicCapabilities.tileInfo.cols;
-            schema.Width = arcGisDynamicCapabilities.tileInfo.rows;
             schema.Extent = new BruTile.Extent(arcGisDynamicCapabilities.fullExtent.xmin, arcGisDynamicCapabilities.fullExtent.ymin, arcGisDynamicCapabilities.fullExtent.xmax, arcGisDynamicCapabilities.fullExtent.ymax);
             schema.OriginX = arcGisDynamicCapabilities.tileInfo.origin.x;
             schema.OriginY = arcGisDynamicCapabilities.tileInfo.origin.y;

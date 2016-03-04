@@ -25,10 +25,10 @@ namespace Mapsui.Rendering.Xaml.Tests
             var bitmap = new MapRenderer().RenderToBitmapStream(map.Viewport, map.Layers);
             
             // aside
-            File.Write(fileName, bitmap);
+            File.WriteToGeneratedFolder(fileName, bitmap);
 
             // assert
-            Assert.AreEqual(File.Read(fileName).ToArray(), bitmap.ToArray());
+            Assert.AreEqual(File.ReadFromOriginalFolder(fileName).ToArray(), bitmap.ToArray());
         }
 
         [Test]
@@ -42,10 +42,10 @@ namespace Mapsui.Rendering.Xaml.Tests
             var bitmap = new MapRenderer().RenderToBitmapStream(map.Viewport, map.Layers);
             
             // aside
-            File.Write(fileName, bitmap);
+            File.WriteToGeneratedFolder(fileName, bitmap);
 
             // assert
-            Assert.AreEqual(File.Read(fileName).ToArray(), bitmap.ToArray());
+            Assert.AreEqual(File.ReadFromOriginalFolder(fileName).ToArray(), bitmap.ToArray());
         }
 
         [Test]
@@ -59,10 +59,10 @@ namespace Mapsui.Rendering.Xaml.Tests
             var bitmap = new MapRenderer().RenderToBitmapStream(map.Viewport, map.Layers);
 
             // aside
-            File.Write(fileName, bitmap);
+            File.WriteToGeneratedFolder(fileName, bitmap);
 
             // assert
-            Assert.AreEqual(File.Read(fileName).ToArray(), bitmap.ToArray());
+            Assert.AreEqual(File.ReadFromOriginalFolder(fileName).ToArray(), bitmap.ToArray());
         }
 
         [Test]
@@ -76,10 +76,10 @@ namespace Mapsui.Rendering.Xaml.Tests
             var bitmap = new MapRenderer().RenderToBitmapStream(map.Viewport, map.Layers);
 
             // aside
-            File.Write(fileName, bitmap);
+            File.WriteToGeneratedFolder(fileName, bitmap);
 
             // assert
-            Assert.AreEqual(File.Read(fileName).ToArray(), bitmap.ToArray());
+            Assert.AreEqual(File.ReadFromOriginalFolder(fileName).ToArray(), bitmap.ToArray());
         }
 
         [Test]
@@ -93,10 +93,10 @@ namespace Mapsui.Rendering.Xaml.Tests
             var bitmap = new MapRenderer().RenderToBitmapStream(map.Viewport, map.Layers);
 
             // aside
-            File.Write(fileName, bitmap);
+            File.WriteToGeneratedFolder(fileName, bitmap);
 
             // assert
-            Assert.AreEqual(File.Read(fileName).ToArray(), bitmap.ToArray());
+            Assert.AreEqual(File.ReadFromOriginalFolder(fileName).ToArray(), bitmap.ToArray());
         }
 
         [Test]
@@ -110,10 +110,10 @@ namespace Mapsui.Rendering.Xaml.Tests
             var bitmap = new MapRenderer().RenderToBitmapStream(map.Viewport, map.Layers);
 
             // aside
-            File.Write(fileName, bitmap);
+            File.WriteToGeneratedFolder(fileName, bitmap);
 
             // assert
-            Assert.AreEqual(File.Read(fileName).ToArray(), bitmap.ToArray());
+            Assert.AreEqual(File.ReadFromOriginalFolder(fileName).ToArray(), bitmap.ToArray());
         }
 
         [Test]
@@ -127,10 +127,10 @@ namespace Mapsui.Rendering.Xaml.Tests
             var bitmap = new MapRenderer().RenderToBitmapStream(map.Viewport, map.Layers);
 
             // aside
-            File.Write(fileName, bitmap);
+            File.WriteToGeneratedFolder(fileName, bitmap);
 
             // assert
-            Assert.AreEqual(File.Read(fileName).ToArray(), bitmap.ToArray());
+            Assert.AreEqual(File.ReadFromOriginalFolder(fileName).ToArray(), bitmap.ToArray());
         }
 
         [Test]
@@ -144,10 +144,10 @@ namespace Mapsui.Rendering.Xaml.Tests
             var bitmap = new MapRenderer().RenderToBitmapStream(map.Viewport, map.Layers);
 
             // aside;
-            File.Write(fileName, bitmap);
+            File.WriteToGeneratedFolder(fileName, bitmap);
 
             // assert
-            Assert.AreEqual(File.Read(fileName).ToArray(), bitmap.ToArray());
+            Assert.AreEqual(File.ReadFromOriginalFolder(fileName).ToArray(), bitmap.ToArray());
         }
 
         [Test]
@@ -161,10 +161,10 @@ namespace Mapsui.Rendering.Xaml.Tests
             var bitmap = new MapRenderer().RenderToBitmapStream(map.Viewport, map.Layers);
 
             // aside;
-            File.Write(fileName, bitmap);
+            File.WriteToGeneratedFolder(fileName, bitmap);
 
             // assert
-            Assert.AreEqual(File.Read(fileName).ToArray(), bitmap.ToArray());
+            Assert.AreEqual(File.ReadFromOriginalFolder(fileName).ToArray(), bitmap.ToArray());
         }
     }
 }

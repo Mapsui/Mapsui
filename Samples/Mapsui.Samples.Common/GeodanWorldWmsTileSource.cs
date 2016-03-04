@@ -29,7 +29,7 @@ namespace Mapsui.Samples.Common
         public GeodanWorldWmsTileSource()
         {
             var schema = new GlobalSphericalMercator(YAxis.TMS) { Srs = "EPSG:900913"};
-            Provider = new WebTileProvider(CreateWmsRequest(schema));
+            Provider = new HttpTileProvider(CreateWmsRequest(schema));
             Schema = schema;
         }
 

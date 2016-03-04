@@ -21,7 +21,7 @@ namespace Mapsui.Samples.Common
         
         private static ITileProvider CreateProvider()
         {
-            return new WebTileProvider(RequestBuilder);
+            return new HttpTileProvider(RequestBuilder);
         }
 
         private static ITileSchema CreateSchema()
@@ -51,11 +51,9 @@ namespace Mapsui.Samples.Common
             foreach (double resolution in resoltions)
             {
                 var levelId = count.ToString();
-                schema.Resolutions[levelId] = new Resolution { Id = levelId, UnitsPerPixel = resolution};
+                schema.Resolutions[levelId] = new Resolution(levelId, resolution, 512, 512);
                 count++;
             }
-            schema.Height = 512;
-            schema.Width = 512;
             schema.Extent = new Extent(-180, -90, 180, 90);
             schema.OriginX = -180;
             schema.OriginY = 90;
