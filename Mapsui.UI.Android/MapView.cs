@@ -12,6 +12,7 @@ using Math = System.Math;
 
 namespace Mapsui.UI.Android
 {
+    [Obsolete("Use MapControl instead")]
     public class MapView : View
     {
         private const int None = 0;
