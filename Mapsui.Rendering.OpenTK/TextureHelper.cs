@@ -6,7 +6,7 @@ namespace Mapsui.Rendering.OpenTK
 {
     public static class TextureHelper
     {
-        public static TextureInfo LoadTexture(Stream data)
+        public static TextureInfo LoadTexture(Stream textureData)
         {
             var textureInfo = new TextureInfo();
 
@@ -16,7 +16,7 @@ namespace Mapsui.Rendering.OpenTK
 
             SetParameters();
 
-            PlatformTextureLoader.TexImage2D(data, out textureInfo.Width, out textureInfo.Height);
+            PlatformTextureLoader.TexImage2D(textureData, out textureInfo.Width, out textureInfo.Height);
 
             GL.BindTexture(All.Texture2D, 0);
 
