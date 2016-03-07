@@ -4,6 +4,7 @@ using Mapsui.Providers;
 using Mapsui.Styles;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace Mapsui.Samples.Common
 {
@@ -14,16 +15,15 @@ namespace Mapsui.Samples.Common
         public static ILayer Create()
         {
             return new Layer("PointLayer")
+            {
+                DataSource = new MemoryProvider(new[]
                 {
-                    DataSource = new MemoryProvider(new[]
-                        {
-                            CreatePointWithLabel(), 
-                            CreatePointWithDefaultStyle(),
-                            CreatePointWithSmallBlackDot(),
-                        }),
-                    Style = null
-
-                };
+                    CreatePointWithLabel(), 
+                    CreatePointWithDefaultStyle(),
+                    CreatePointWithSmallBlackDot()
+                }),
+                Style = null
+            };
         }
 
         private static Feature CreatePointWithLabel()
@@ -45,17 +45,17 @@ namespace Mapsui.Samples.Common
             var feature = new Feature { Geometry = new Point(1000000, 0) };
 
             feature.Styles.Add(new SymbolStyle
-                {
-                    SymbolScale = 2.0f,
-                    Fill = new Brush { Color = null },
-                    Outline = new Pen { Color = Color.Green }
-                });
+            {
+                SymbolScale = 2.0f,
+                Fill = new Brush { Color = null },
+                Outline = new Pen { Color = Color.Green }
+            });
 
             feature.Styles.Add(new SymbolStyle
-                {
-                    SymbolScale = 0.5f,
-                    Fill = new Brush { Color = Color.Black },
-                });
+            {
+                SymbolScale = 0.5f,
+                Fill = new Brush { Color = Color.Black },
+            });
 
             return feature;
         }
@@ -63,17 +63,21 @@ namespace Mapsui.Samples.Common
         private static Feature CreateBitmapPoint()
         {
             var feature = new Feature { Geometry = new Point(0, 1000000) };
-            var bitmapId = BitmapRegistry.Instance.Register(
-                System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("Mapsui.Samples.Common.Images.loc.png"));
-            feature.Styles.Add(new SymbolStyle
-                {
-                    BitmapId = bitmapId,
-                    SymbolType = SymbolType.Ellipse,
-                    UnitType = UnitType.Pixel,
-                    SymbolScale = 0.5
-
-                });
+            feature.Styles.Add(CreateBitmapStyle("Mapsui.Samples.Common.Images.loc.png"));
             return feature;
+        }
+
+        public static SymbolStyle CreateBitmapStyle(string embeddedResourcePath)
+        {
+            var bitmapId = GetBitmapIdForEmbeddedResource(embeddedResourcePath);
+            return new SymbolStyle { BitmapId = bitmapId };
+        }
+
+        public static int GetBitmapIdForEmbeddedResource(string imagePath)
+        {
+            var image = Assembly.GetExecutingAssembly().GetManifestResourceStream(imagePath);
+            var bitmapId = BitmapRegistry.Instance.Register(image);
+            return bitmapId;
         }
 
         public static IEnumerable<IGeometry> GenerateRandomPoints(BoundingBox box, int count = 25)
@@ -89,22 +93,22 @@ namespace Mapsui.Samples.Common
         public static ILayer CreateRandomPointLayerWithLabel(IProvider dataSource)
         {
             var styleList = new StyleCollection
-                {
-                    new SymbolStyle {SymbolScale = 1, Fill = new Brush(Color.Indigo)},
-                    new LabelStyle {Text = "TestLabel", HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Left, Offset = new Offset{ X= 16.0 }}
-                };
+            {
+                new SymbolStyle {SymbolScale = 1, Fill = new Brush(Color.Indigo)},
+                new LabelStyle {Text = "TestLabel", HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Left, Offset = new Offset{ X= 16.0 }}
+            };
             return new Layer("pointLayer") { DataSource = dataSource, Style = styleList };
         }
 
         public static ILayer CreateStackedLabelLayer(IProvider provider)
         {
             return new LabelLayer("stacks")
-                {
-                    DataSource = provider,
-                    UseLabelStacking = true,
-                    LabelColumn = "Label",
-                    Style = new LabelStyle(),
-                };
+            {
+                DataSource = provider,
+                UseLabelStacking = true,
+                LabelColumn = "Label",
+                Style = new LabelStyle(),
+            };
         }
 
         public static Point GenerateRandomPoint(BoundingBox box)
@@ -112,35 +116,35 @@ namespace Mapsui.Samples.Common
             return new Point(Random.NextDouble() * box.Width + box.Left, Random.NextDouble() * box.Height - box.Top);
         }
 
-        public static ILayer CreateRandomPointLayer(BoundingBox envelope, int count = 25)
+        public static ILayer CreateRandomPointLayer(BoundingBox envelope, int count = 25, IStyle style = null)
         {
             return new Layer("pointLayer")
-                {
-                    DataSource = new MemoryProvider(GenerateRandomPoints(envelope, count)),
-                    Style = new VectorStyle { Fill = new Brush(Color.White) },
-                };
+            {
+                DataSource = new MemoryProvider(GenerateRandomPoints(envelope, count)),
+                Style = style ?? new VectorStyle { Fill = new Brush(Color.White) }
+            };
         }
 
         public static ILayer CreateRandomPointLayer(IProvider dataSource)
         {
             return new Layer("pointLayer")
-                {
-                    DataSource = dataSource,
-                    Style = new SymbolStyle { SymbolScale = 1, Fill = new Brush(Color.Blue) }
-                };
+            {
+                DataSource = dataSource,
+                Style = new SymbolStyle { SymbolScale = 1, Fill = new Brush(Color.Blue) }
+            };
         }
 
         public static ILayer CreateRandomPolygonLayer(BoundingBox envelope, int count = 10)
         {
             return new Layer("pointLayer")
+            {
+                DataSource = new MemoryProvider(GenerateRandomPolygons(envelope, count)),
+                Style = new VectorStyle
                 {
-                    DataSource = new MemoryProvider(GenerateRandomPolygons(envelope, count)),
-                    Style = new VectorStyle
-                        {
-                            Fill = new Brush(Color.Orange),
-                            Outline = new Pen(Color.Red, 2)
-                        }
-                };
+                    Fill = new Brush(Color.Orange),
+                    Outline = new Pen(Color.Red, 2)
+                }
+            };
         }
 
         private static IEnumerable<IGeometry> GenerateRandomPolygons(BoundingBox envelope, int count)
@@ -173,8 +177,7 @@ namespace Mapsui.Samples.Common
         {
             return new Layer("bitmapPointLayer")
             {
-                DataSource = new MemoryProvider(CreateBitmapPoint()),
-                Style = style,
+                DataSource = new MemoryProvider(CreateBitmapPoint())
             };
         }
 
