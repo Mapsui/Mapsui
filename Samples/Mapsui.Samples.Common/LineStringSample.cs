@@ -34,5 +34,15 @@ namespace Mapsui.Samples.Common
                 Style = style
             };
         }
+
+        public static IStyle CreateLineStringStyle()
+        {
+            return new VectorStyle
+            {
+                Fill = null,
+                Outline = null,
+                Line = { Color = Color.Red, Width = 4 }
+            };
+        }
     }
 }
