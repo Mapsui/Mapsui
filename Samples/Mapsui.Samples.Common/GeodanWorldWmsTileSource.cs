@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using BruTile;
 using BruTile.Web;
 using BruTile.Predefined;
@@ -41,19 +42,12 @@ namespace Mapsui.Samples.Common
         private static WmscRequest CreateWmsRequest(ITileSchema schema)
         {
             const string url = "http://geoserver.nl/world/mapserv.cgi?map=world/world.map&VERSION=1.1.1";
-            return new WmscRequest(new Uri(url), schema,
-                                          new List<string>(new[] {"world"}), new List<string>(),
-                                          new Dictionary<string, string>());
+            return new WmscRequest(new Uri(url), schema, new[] {"world"}.ToList(), new string[0].ToList());
         }
 
-        public ITileProvider Provider { get; private set; }
-        public ITileSchema Schema { get; private set; }
+        public ITileProvider Provider { get; }
+        public ITileSchema Schema { get; }
 
-
-
-        public string Name
-        {
-            get { throw new NotImplementedException(); }
-        }
+        public string Name => "GeodanWorldWmsTileSource";
     }
 }
