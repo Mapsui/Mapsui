@@ -92,6 +92,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution", "Solution", "{08F7A74F-3AAF-4A0F-8E64-ADE4BCC4AA6F}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		Mapsui.sln.DotSettings = Mapsui.sln.DotSettings
 		README.md = README.md
 	EndProjectSection
 EndProject
