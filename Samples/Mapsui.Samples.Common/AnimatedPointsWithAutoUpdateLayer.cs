@@ -6,6 +6,7 @@ using System.Threading;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
+using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Common
 {

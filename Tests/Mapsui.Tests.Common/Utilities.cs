@@ -2,6 +2,7 @@
 using Mapsui.Providers;
 using Mapsui.Styles;
 using System.IO;
+using System.Reflection;
 
 namespace Mapsui.Tests.Common
 {
@@ -39,10 +40,10 @@ namespace Mapsui.Tests.Common
         public static MemoryProvider CreateProviderWithPointsWithSymbolStyles()
         {
             const string circleIconPath = @"Mapsui.Tests.Common.Resources.Images.circle.png";
-            var circleIcon = typeof(Utilities).Assembly.GetManifestResourceStream(circleIconPath);
+            var circleIcon = typeof(Utilities).GetTypeInfo().Assembly.GetManifestResourceStream(circleIconPath);
             var circleIconId = BitmapRegistry.Instance.Register(circleIcon);
             const string checkeredIconPath = @"Mapsui.Tests.Common.Resources.Images.checkered.png";
-            var checkeredIcon = typeof(Utilities).Assembly.GetManifestResourceStream(checkeredIconPath);
+            var checkeredIcon = typeof(Utilities).GetTypeInfo().Assembly.GetManifestResourceStream(checkeredIconPath);
             var checkeredIconId = BitmapRegistry.Instance.Register(checkeredIcon);
 
             var features = new Features
@@ -124,7 +125,7 @@ namespace Mapsui.Tests.Common
         public static Feature CreateFeatureWithRotatedBitmapSymbol(double x, double y, double rotation)
         {
             const string bitmapPath = @"Mapsui.Tests.Common.Resources.Images.iconthatneedsoffset.png";
-            var bitmapStream = typeof(Utilities).Assembly.GetManifestResourceStream(bitmapPath);
+            var bitmapStream = typeof(Utilities).GetTypeInfo().Assembly.GetManifestResourceStream(bitmapPath);
             var bitmapId = BitmapRegistry.Instance.Register(bitmapStream);
 
             var feature = new Feature { Geometry = new Point(x, y) };

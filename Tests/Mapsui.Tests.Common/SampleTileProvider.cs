@@ -2,6 +2,7 @@
 using BruTile;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 
 namespace Mapsui.Tests.Common
 {
@@ -29,10 +30,10 @@ namespace Mapsui.Tests.Common
             return _dictionary[tileInfo.Index];
         }
 
-        private static Stream GetTileStream(TileIndex tileIndex)
+        private static Stream GetTileStream(TileIndex index)
         {
-            var path = string.Format(@"Mapsui.Tests.Common.Resources.SampleTiles.{0}_{1}_{2}.png", tileIndex.Level, tileIndex.Col, tileIndex.Row);
-            var data = typeof(Utilities).Assembly.GetManifestResourceStream(path);
+            var path = $@"Mapsui.Tests.Common.Resources.SampleTiles.{index.Level}_{index.Col}_{index.Row}.png";
+            var data = typeof(Utilities).GetTypeInfo().Assembly.GetManifestResourceStream(path);
             if (data == null) throw new Exception("Resource could not be found: " + path);
             return data;
         }

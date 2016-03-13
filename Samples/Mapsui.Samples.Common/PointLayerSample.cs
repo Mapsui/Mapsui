@@ -75,7 +75,8 @@ namespace Mapsui.Samples.Common
 
         public static int GetBitmapIdForEmbeddedResource(string imagePath)
         {
-            var image = Assembly.GetExecutingAssembly().GetManifestResourceStream(imagePath);
+            var assembly = typeof(PointLayerSample).GetTypeInfo().Assembly;
+            var image = assembly.GetManifestResourceStream(imagePath);
             var bitmapId = BitmapRegistry.Instance.Register(image);
             return bitmapId;
         }

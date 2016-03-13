@@ -190,8 +190,8 @@ namespace Mapsui.Samples.Windows8
                 if (task.IsCompleted)
                 {
                     SetLocation(
-                        task.Result.Coordinate.Longitude,
-                        task.Result.Coordinate.Latitude);
+                        task.Result.Coordinate.Point.Position.Longitude,
+                        task.Result.Coordinate.Point.Position.Latitude);
                 }
             }
         }

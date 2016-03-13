@@ -15,8 +15,9 @@
 // along with Mapsui; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
-using System;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 
 namespace Mapsui.Utilities
 {
@@ -28,30 +29,15 @@ namespace Mapsui.Utilities
         /// <summary>
         /// Returns a list of available data providers in this assembly
         /// </summary>
-        public static Collection<Type> GetProviders()
+        public static IEnumerable<TypeInfo> GetProviders()
         {
-            var providerList = new Collection<Type>();
-            System.Reflection.Assembly asm = System.Reflection.Assembly.GetExecutingAssembly();
-            foreach (Type t in asm.GetTypes())
+            Assembly assembly = typeof(Providers).GetTypeInfo().Assembly;
+            var typeInfos = assembly.DefinedTypes.Where(m => m.IsInterface && m.Name == nameof(Mapsui.Providers.IProvider));
+            foreach (var typeInfo in typeInfos)
             {
-                Type[] interfaces = t.GetInterfaces();
-
-                bool foundOne = false;
-                //Do the filtering manually.
-                foreach (Type i in interfaces)
-                {
-                    if (i.Name == "Mapsui.Providers.IProvider")
-                    {
-                        foundOne = true;
-                    }
-                }
-
-                if (foundOne)
-                    providerList.Add(t);
-
-
+                if (typeInfo.ImplementedInterfaces.Any(i => i == typeof (Mapsui.Providers.IProvider)))
+                    yield return typeInfo;
             }
-            return providerList;
         }
     }
 }

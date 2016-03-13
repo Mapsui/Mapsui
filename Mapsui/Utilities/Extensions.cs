@@ -1,5 +1,6 @@
 using BruTile;
 using Mapsui.Geometries;
+using Mapsui.Utilities;
 
 namespace System.Threading.Timers
 {

@@ -31,11 +31,10 @@ namespace Mapsui.Utilities
         /// <returns></returns>
         public static System.Version GetCurrentVersion()
         {
-            Assembly assembly = Assembly.GetExecutingAssembly();
-            var versionExpression = new System.Text.RegularExpressions.Regex("Version=(?<version>[0-9.]*)");
-            var match = versionExpression.Match(assembly.FullName);
-            if (!match.Success) { throw new Exception("could not dertermine version"); }
-            return new System.Version(match.Groups["version"].Value);
+            var assembly = typeof(Version).GetTypeInfo().Assembly;
+            // In some PCL profiles the above line is: var assembly = typeof(MyType).Assembly;
+            var assemblyName = new AssemblyName(assembly.FullName);
+            return assemblyName.Version;
         }
     }
 }
