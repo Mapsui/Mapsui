@@ -71,5 +71,22 @@ namespace Mapsui.Tests.Fetcher
             // Assert
             Assert.True(memoryCache.TileCount == 0);
         }
+
+        [Test]
+        public void TileFetcherShouldBehaveProperlyWithTileProviderReturningNull()
+        {
+            // Arrange
+            var schema = new GlobalSphericalMercator();
+            var tileSource = new TileSource(new NullTileProvider(), schema);
+            var memoryCache = new MemoryCache<Feature>();
+            var tileFetcher = new TileFetcher(tileSource, memoryCache);
+
+            // Act
+            tileFetcher.ViewChanged(schema.Extent.ToBoundingBox(), schema.Resolutions["2"].UnitsPerPixel);
+            while (tileFetcher.Busy) { }
+
+            // Assert
+            Assert.True(memoryCache.TileCount == 0);
+        }
     }
 }
