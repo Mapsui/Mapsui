@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -51,10 +51,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BruTile, Version=0.18.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\BruTile.0.18.0\lib\net40\BruTile.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="PresentationCore">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
@@ -77,6 +73,9 @@
     <Reference Include="WindowsBase">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="BruTile, Version=0.18.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\BruTile.0.18.0\lib\net40\BruTile.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions.cs" />
@@ -87,7 +86,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Mapsui.Geometries\Mapsui.Geometries.csproj">
-      <Project>{ee55b62d-ffa2-4c24-a4ad-7a47ace55ce5}</Project>
+      <Project>{EE55B62D-FFA2-4C24-A4AD-7A47ACE55CE5}</Project>
       <Name>Mapsui.Geometries</Name>
     </ProjectReference>
     <ProjectReference Include="..\Mapsui.Rendering.Xaml\Mapsui.Rendering.Xaml.csproj">

@@ -16,14 +16,10 @@
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
-    <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
-    <AndroidSupportedAbis>armeabi,armeabi-v7a,x86</AndroidSupportedAbis>
-    <AndroidStoreUncompressedFileExtensions />
     <MandroidI18n />
     <JavaMaximumHeapSize>1G</JavaMaximumHeapSize>
-    <JavaOptions />
-    <AndroidLinkSkip />
     <AndroidUseLatestPlatformSdk>False</AndroidUseLatestPlatformSdk>
+    <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -35,6 +31,8 @@
     <WarningLevel>4</WarningLevel>
     <AndroidLinkMode>None</AndroidLinkMode>
     <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <AndroidSupportedAbis>armeabi;armeabi-v7a;x86</AndroidSupportedAbis>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -46,12 +44,16 @@
     <AndroidUseSharedRuntime>False</AndroidUseSharedRuntime>
     <AndroidLinkMode>Full</AndroidLinkMode>
     <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <AndroidLinkSkip>
+    </AndroidLinkSkip>
+    <AndroidStoreUncompressedFileExtensions>
+    </AndroidStoreUncompressedFileExtensions>
+    <AndroidSupportedAbis>armeabi,armeabi-v7a,x86</AndroidSupportedAbis>
+    <JavaOptions>
+    </JavaOptions>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BruTile, Version=0.18.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\BruTile.0.18.0\lib\portable-net45+win+WindowsPhoneApp81+Xamarin.iOS10+MonoAndroid10+MonoTouch10\BruTile.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Mono.Android" />
     <Reference Include="mscorlib" />
     <Reference Include="OpenTK-1.0" />
@@ -59,6 +61,9 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml" />
+    <Reference Include="BruTile, Version=0.18.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\packages\BruTile.0.18.0\lib\portable-net45+win+WindowsPhoneApp81+Xamarin.iOS10+MonoAndroid10+MonoTouch10\BruTile.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activity1.cs" />
@@ -84,7 +89,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Mapsui.Geometries\Mapsui.Geometries.csproj">
-      <Project>{ee55b62d-ffa2-4c24-a4ad-7a47ace55ce5}</Project>
+      <Project>{EE55B62D-FFA2-4C24-A4AD-7A47ACE55CE5}</Project>
       <Name>Mapsui.Geometries</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Mapsui\Mapsui.csproj">

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -35,10 +35,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="nunit.framework, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
-    </Reference>
     <Reference Include="OpenTK.Compatibility">
       <HintPath>..\..\packages\Lyncee.OpenTK.Compatibility.1.1.1173.43181\lib\OpenTK.Compatibility.dll</HintPath>
     </Reference>
@@ -50,6 +46,9 @@
     <Reference Include="System.Xml" />
     <Reference Include="OpenTK, Version=1.1.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4">
       <HintPath>..\..\packages\OpenTK.1.1.1589.5942\lib\NET40\OpenTK.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -74,12 +73,8 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Mapsui.Geometries\Mapsui.Geometries.csproj">
-      <Project>{ee55b62d-ffa2-4c24-a4ad-7a47ace55ce5}</Project>
+      <Project>{EE55B62D-FFA2-4C24-A4AD-7A47ACE55CE5}</Project>
       <Name>Mapsui.Geometries</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Mapsui.Rendering.OpenTK\Mapsui.Rendering.OpenTK.csproj">
-      <Project>{7C1A68BE-0DB2-479A-84E2-D80E79EDF87F}</Project>
-      <Name>Mapsui.Rendering.OpenTK</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Mapsui\Mapsui.csproj">
       <Project>{D74C052A-C07E-4B37-A898-134218ACA5C9}</Project>
