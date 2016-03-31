@@ -62,6 +62,14 @@
       <Project>{EE55B62D-FFA2-4C24-A4AD-7A47ACE55CE5}</Project>
       <Name>Mapsui.Geometries</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Mapsui.Rendering.Android\Mapsui.Rendering.Android.csproj">
+      <Project>{f7193717-5f16-44c8-a90c-05a4173d353e}</Project>
+      <Name>Mapsui.Rendering.Android</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mapsui.Rendering.OpenTK-A\Mapsui.Rendering.OpenTK-A.csproj">
+      <Project>{d7616dad-25c1-4e3d-b0bd-1710382b60e5}</Project>
+      <Name>Mapsui.Rendering.OpenTK-A</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Mapsui\Mapsui.csproj">
       <Project>{D74C052A-C07E-4B37-A898-134218ACA5C9}</Project>
       <Name>Mapsui</Name>

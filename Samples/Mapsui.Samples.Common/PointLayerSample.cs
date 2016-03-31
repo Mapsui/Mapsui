@@ -70,7 +70,7 @@ namespace Mapsui.Samples.Common
         public static SymbolStyle CreateBitmapStyle(string embeddedResourcePath)
         {
             var bitmapId = GetBitmapIdForEmbeddedResource(embeddedResourcePath);
-            return new SymbolStyle { BitmapId = bitmapId };
+            return new SymbolStyle { BitmapId = bitmapId};
         }
 
         public static int GetBitmapIdForEmbeddedResource(string imagePath)

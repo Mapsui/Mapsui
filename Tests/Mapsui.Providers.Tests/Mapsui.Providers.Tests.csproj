@@ -71,6 +71,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Mapsui.Desktop\Mapsui.Desktop.csproj">
+      <Project>{8bd54487-8db9-431a-9596-2dfd744887a1}</Project>
+      <Name>Mapsui.Desktop</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Mapsui.Geometries\Mapsui.Geometries.csproj">
       <Project>{EE55B62D-FFA2-4C24-A4AD-7A47ACE55CE5}</Project>
       <Name>Mapsui.Geometries</Name>
