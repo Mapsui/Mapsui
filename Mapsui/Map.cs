@@ -46,6 +46,10 @@ namespace Mapsui
             Viewport =  new Viewport { Center = { X = double.NaN, Y = double.NaN }, Resolution = double.NaN };
         }
 
+
+        /// <summary>
+        /// When Lock is true the map view will not respond to touch input.
+        /// </summary>
         public bool Lock
         {
             get { return _lock; }
