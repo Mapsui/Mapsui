@@ -63,13 +63,15 @@ namespace Mapsui.UI.Xaml
 
         public IRenderer Renderer { get; set; }
         private bool IsInBoxZoomMode { get; set; }
-        public IList<ILayer> MouseInfoOverLayers { get; private set; } // This should be on the Map
-        public IList<ILayer> MouseInfoUpLayers { get; private set; } // This should be on the Map
+        public IList<ILayer> MouseInfoOverLayers { get; } // This should be on the Map
+        public IList<ILayer> MouseInfoUpLayers { get; } // This should be on the Map
         public event EventHandler ViewportInitialized;
         public bool ZoomToBoxMode { get; set; }
 
-        [Obsolete("Map.Viewport instead")]
+        [Obsolete("Map.Viewport instead", true)]
         public IViewport Viewport { get { return Map.Viewport; } }
+
+
 
         public Map Map
         {

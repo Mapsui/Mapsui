@@ -15,13 +15,7 @@ namespace Mapsui.Layers
             return DataSource.GetFeaturesInView(box, resolution);
         }
 
-        public override BoundingBox Envelope
-        {
-            get
-            {
-                return (DataSource == null) ? null : DataSource.GetExtents();
-            }
-        }
+        public override BoundingBox Envelope => DataSource?.GetExtents();
 
         public override void AbortFetch()
         {
