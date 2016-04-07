@@ -33,6 +33,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BruTile, Version=0.18.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\BruTile.0.18.1\lib\net40\BruTile.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -43,9 +47,6 @@
     <Reference Include="System.Xml" />
     <Reference Include="OpenTK, Version=1.1.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4">
       <HintPath>..\packages\OpenTK.1.1.1589.5942\lib\NET40\OpenTK.dll</HintPath>
-    </Reference>
-    <Reference Include="BruTile, Version=0.18.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\packages\BruTile.0.18.0\lib\net40\BruTile.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

@@ -57,8 +57,8 @@
     <StartupObject>Mapsui.Samples.Wpf.App</StartupObject>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BruTile, Version=0.18.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\BruTile.0.18.0\lib\net40\BruTile.dll</HintPath>
+    <Reference Include="BruTile, Version=0.18.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\BruTile.0.18.1\lib\net40\BruTile.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
