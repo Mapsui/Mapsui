@@ -211,18 +211,11 @@ namespace Mapsui.Samples.Wpf
             MapControl.Map.Layers.Clear();
             MapControl.Map.Layers.Add(new TileLayer(KnownTileSources.Create()) { Name = "OSM" });
             MapControl.Map.Layers.Add(PointLayerSample.Create());
-            MapControl.Map.Layers.Add(CreatePointLayerWithWorldUnitSymbol());
+            MapControl.Map.Layers.Add(PointLayerWithWorldUnitsForSymbolsSample.CreateLayer());
             LayerList.Initialize(MapControl.Map.Layers);
             MapControl.Refresh();
         }
 
-        private static ILayer CreatePointLayerWithWorldUnitSymbol()
-        {
-            return new Layer("PointLayer WorldUnits")
-                {
-                    DataSource = PointLayerWithWorldUnitsForSymbolsSample.Create()
-                };
-        }
 
         private void WmsClick(object sender, RoutedEventArgs e)
         {

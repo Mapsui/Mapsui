@@ -44,7 +44,7 @@
     <EmbeddedResource Include="Images\netherlands.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddPolygonInCode.cs" />
+    <Compile Include="PolygonSample.cs" />
     <Compile Include="AnimatedPointsWithAutoUpdateLayer.cs" />
     <Compile Include="EsriStreetMapWorld.cs" />
     <Compile Include="GeodanOfficesSample.cs" />

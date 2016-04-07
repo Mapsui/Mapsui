@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using Mapsui.Geometries;
+using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Styles;
 
@@ -7,7 +8,15 @@ namespace Mapsui.Samples.Common
 {
     public static class PointLayerWithWorldUnitsForSymbolsSample
     {
-        public static IProvider Create()
+        public static ILayer CreateLayer()
+        {
+            return new Layer("PointLayer WorldUnits")
+            {
+                DataSource = CreateProvider()
+            };
+        }
+
+        public static IProvider CreateProvider()
         {
             var netherlands = new Feature { Geometry = new Point(710000, 6800000)};
 
