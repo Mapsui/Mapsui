@@ -33,10 +33,10 @@ namespace Mapsui
 
         public Viewport()
         {
+            RenderResolutionMultiplier = 1;
             _extent = new BoundingBox(0, 0, 0, 0);
             _windowExtent = new Quad();
-            RenderResolutionMultiplier = 1;
-            _center.PropertyChanged += (sender, args) => _modified = true; 
+            _center.PropertyChanged += (sender, args) => _modified = true;
         }
         
         public Viewport(Viewport viewport) : this()
@@ -45,15 +45,19 @@ namespace Mapsui
             _width = viewport._width;
             _height = viewport._height;
             _rotation = viewport._rotation;
+            _center.X = viewport._center.X;
+            _center.Y = viewport._center.Y;
+            if (viewport.Extent!= null) _extent = new BoundingBox(viewport.Extent);
+            if (viewport.WindowExtent != null) _windowExtent = new Quad(
+                viewport.WindowExtent.BottomLeft, viewport.WindowExtent.TopLeft,
+                viewport.WindowExtent.TopRight, viewport.WindowExtent.BottomRight);
+            _center.PropertyChanged += (sender, args) => _modified = true;
             RenderResolutionMultiplier = viewport.RenderResolutionMultiplier;
         }
 
         public double RenderResolutionMultiplier { get; set; }
 
-        public double RenderResolution
-        {
-            get { return Resolution * RenderResolutionMultiplier; }
-        }
+        public double RenderResolution => Resolution * RenderResolutionMultiplier;
 
         public Point Center
         {
@@ -109,10 +113,8 @@ namespace Mapsui
             }
         }
 
-        public bool IsRotated
-        {
-            get { return !double.IsNaN(_rotation) && _rotation > Constants.Epsilon && _rotation < (360 - Constants.Epsilon); }
-        }
+        public bool IsRotated => 
+            !double.IsNaN(_rotation) && _rotation > Constants.Epsilon && _rotation < 360 - Constants.Epsilon;
 
         public BoundingBox Extent
         {
