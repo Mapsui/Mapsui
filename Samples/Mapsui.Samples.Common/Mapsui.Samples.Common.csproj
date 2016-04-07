@@ -47,6 +47,7 @@
     <Compile Include="AddPolygonInCode.cs" />
     <Compile Include="AnimatedPointsWithAutoUpdateLayer.cs" />
     <Compile Include="EsriStreetMapWorld.cs" />
+    <Compile Include="GeodanOfficesSample.cs" />
     <Compile Include="GeodanWorldTmsTileSource.cs" />
     <Compile Include="GeodanWorldWmsCTileSource.cs" />
     <Compile Include="GeodanWorldWmsTileSource.cs" />
