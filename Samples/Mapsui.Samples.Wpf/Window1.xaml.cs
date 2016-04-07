@@ -253,6 +253,15 @@ namespace Mapsui.Samples.Wpf
                 var tileSources = WmtsParser.Parse(responseStream);
                 var natura2000 = tileSources.First(t => t.Name.ToLower().Contains("natura2000"));
                 MapControl.Map.Layers.Add(new TileLayer(natura2000) { Name = "Natura 2000"});
+
+                var layer = new MemoryLayer
+                {
+                    DataSource = new MemoryProvider(new Geometries.Point(122698, 483922)),
+                    Style = new SymbolStyle { Fill = new Brush(Color.Red), SymbolScale = 1}
+                };
+                MapControl.Map.Layers.Add(layer);
+                
+
                 MapControl.ZoomToFullEnvelope();
                 MapControl.Refresh();
                 LayerList.Initialize(MapControl.Map.Layers);
