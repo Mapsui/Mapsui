@@ -29,17 +29,20 @@ namespace Mapsui.Samples.Common
         public GeodanWorldTmsTileSource()
         {
             const string url = "http://geoserver.nl/tiles/tilecache.aspx/1.0.0/world_GM/";
-            var parameters = new Dictionary<string, string>();
-            parameters.Add("seriveparam", "world_GM");
-            parameters.Add("uid", "4c6b3b161be3a2eb513b66b09a70f18d");
+            var parameters = new Dictionary<string, string>
+            {
+                {"seriveparam", "world_GM"},
+                {"uid", "4c6b3b161be3a2eb513b66b09a70f18d"}
+            };
             var request = new TmsRequest(new Uri(url), "png", parameters);
             Provider = new HttpTileProvider(request);
             Schema = new GlobalSphericalMercator(YAxis.TMS);
+            Name = "Geodan TMS";
         }
 
-        public ITileProvider Provider { get; private set; }
-        public ITileSchema Schema { get; private set; }
-        public string Name { get; private set; }
+        public ITileProvider Provider { get; }
+        public ITileSchema Schema { get; }
+        public string Name { get; }
 
         public byte[] GetTile(TileInfo tileInfo)
         {

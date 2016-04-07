@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Threading;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
@@ -27,13 +26,16 @@ namespace Mapsui.Samples.Common
             {
                 var geometries = PointLayerSample.GenerateRandomPoints(box, 10).ToList();
                 var count = 0;
-                var random = _random.Next(geometries.Count());
+                var random = _random.Next(geometries.Count);
                 foreach (var geometry in geometries)
                 {
                     if (count != random) // skip a random element to test robustness
                     {
-                        var feature = new Feature {Geometry = geometry};
-                        feature["ID"] = count.ToString(CultureInfo.InvariantCulture);
+                        var feature = new Feature
+                        {
+                            Geometry = geometry,
+                            ["ID"] = count.ToString(CultureInfo.InvariantCulture)
+                        };
                         yield return feature;
                     }
                     count++;

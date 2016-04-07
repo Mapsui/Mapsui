@@ -11,8 +11,8 @@ namespace Mapsui.Samples.Common
             Schema = CreateSchema();
         }
 
-        public ITileProvider Provider { get; private set; }
-        public ITileSchema Schema { get; private set; }
+        public ITileProvider Provider { get; }
+        public ITileSchema Schema { get; }
 
         public byte[] GetTile(TileInfo tileInfo)
         {

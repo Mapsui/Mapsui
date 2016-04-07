@@ -30,6 +30,7 @@ namespace Mapsui.Samples.Common
         {
             Schema = new GlobalSphericalMercator(YAxis.TMS);
             Provider = GetTileProvider(Schema);
+            Name = "Geodan WMS-C";
         }
 
         public ITileSchema Schema { get; private set; }
