@@ -186,7 +186,8 @@ namespace Mapsui.Samples.Common
         {
             return new Layer("bitmapPointLayer")
             {
-                DataSource = new MemoryProvider(CreateBitmapPoint())
+                DataSource = new MemoryProvider(CreateBitmapPoint()),
+                Style = null
             };
         }
 

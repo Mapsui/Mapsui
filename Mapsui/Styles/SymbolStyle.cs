@@ -6,7 +6,8 @@ namespace Mapsui.Styles
     public enum SymbolType
     {
         Ellipse,
-        Rectangle
+        Rectangle,
+        Image
     }
 
     public enum UnitType
@@ -33,7 +34,7 @@ namespace Mapsui.Styles
         [Obsolete("use BitmapID and BitmapRegistry instead")]
         public Bitmap Symbol
         {
-            get { return _bitmap;  }
+            get { return _bitmap; }
             set
             {
                 _bitmap = value;
@@ -79,12 +80,12 @@ namespace Mapsui.Styles
         public SymbolType SymbolType { get; set; }
 
         public double Opacity { get; set; }
-        
-        public const double DefaultWidth = 32;
 
-        public const double DefaultHeight = 32;
+        public static double DefaultWidth = 256;
 
-        
+        public static double DefaultHeight = 256;
+
+
         public override bool Equals(object obj)
         {
             if (!(obj is SymbolStyle))
@@ -140,13 +141,13 @@ namespace Mapsui.Styles
             {
                 return false;
             }
-            
+
             return true;
         }
 
         public override int GetHashCode()
         {
-            return BitmapId.GetHashCode() ^ 
+            return BitmapId.GetHashCode() ^
                 SymbolScale.GetHashCode() ^ SymbolOffset.GetHashCode() ^
                 SymbolRotation.GetHashCode() ^ UnitType.GetHashCode() ^ SymbolType.GetHashCode() ^
                 Opacity.GetHashCode() ^ base.GetHashCode();
@@ -162,5 +163,5 @@ namespace Mapsui.Styles
             return !Equals(symbolStyle1, symbolStyle2);
         }
 
-            }
+    }
 }
