@@ -6,8 +6,7 @@ namespace Mapsui.Styles
     public enum SymbolType
     {
         Ellipse,
-        Rectangle,
-        Image
+        Rectangle
     }
 
     public enum UnitType
@@ -81,10 +80,9 @@ namespace Mapsui.Styles
 
         public double Opacity { get; set; }
 
-        public static double DefaultWidth = 256;
+        public const double DefaultWidth = 32;
 
-        public static double DefaultHeight = 256;
-
+        public const double DefaultHeight = 32;
 
         public override bool Equals(object obj)
         {
