@@ -135,7 +135,7 @@ namespace Mapsui.Rendering.iOS
                 shape.Contents = newImage.Contents;
                 shape.Frame = newImage.Frame;
 
-                var resolution = ZoomHelper.ClipToExtremes (Resolutions, viewport.Resolution);
+                var resolution = ZoomHelper.ClipResolutionToExtremes (Resolutions, viewport.Resolution);
 
                 MinResolution = ZoomHelper.ZoomOut (Resolutions, resolution);
                 MaxResolution = ZoomHelper.ZoomIn (Resolutions, resolution);
