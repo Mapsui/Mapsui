@@ -1,20 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using System.Net;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using BruTile.Extensions;
-using BruTile.Predefined;
-using BruTile.Wmts;
 using Mapsui.Layers;
 using Mapsui.Projection;
 using Mapsui.Providers;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Desktop;
-using Mapsui.Styles;
 using Mapsui.UI.Xaml;
 
 namespace Mapsui.Samples.Wpf
@@ -63,10 +57,26 @@ namespace Mapsui.Samples.Wpf
             Utilities.AnimateOpacity(ErrorBorder, 0.75, 0, 8000);
         }
 
+        private void RotationSliderChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            var percent = RotationSlider.Value / (RotationSlider.Maximum - RotationSlider.Minimum);
+            MapControl.Map.Viewport.Rotation = percent * 360;
+            MapControl.Refresh();
+        }
+        private static void MapControlOnMouseInfoDown(object sender, MouseInfoEventArgs mouseInfoEventArgs)
+        {
+            if (mouseInfoEventArgs.Feature != null)
+            {
+                MessageBox.Show(mouseInfoEventArgs.Feature["Label"].ToString());
+            }
+        }
+        
+        // ************************************ start click events ******************************************
+
         private void OsmClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
-            MapControl.Map.Layers.Add(new TileLayer(KnownTileSources.Create()) { Name = "OSM" });
+            MapControl.Map.Layers.Add(OsmSample.CreateLayer());
 
             LayerList.Initialize(MapControl.Map.Layers);
             MapControl.ZoomToFullEnvelope();
@@ -78,8 +88,8 @@ namespace Mapsui.Samples.Wpf
             MapControl.Map.Layers.Clear();
             MapControl.Map.Transformation = new MinimalTransformation();
             MapControl.Map.CRS = "EPSG:3857";
-            MapControl.Map.Layers.Add(new TileLayer(KnownTileSources.Create()) { Name = "OSM" });
-            MapControl.Map.Layers.Add(PointLayerSample.CreateLayerWithDataSourceWithWGS84Point());
+            MapControl.Map.Layers.Add(OsmSample.CreateLayer());
+            MapControl.Map.Layers.Add(PointsInWgs84Sample.CreateLayer());
 
             LayerList.Initialize(MapControl.Map.Layers);
             MapControl.ZoomToFullEnvelope();
@@ -89,7 +99,7 @@ namespace Mapsui.Samples.Wpf
         private void AnimatedPointsClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
-            MapControl.Map.Layers.Add(new TileLayer(KnownTileSources.Create()) { Name = "OSM" });
+            MapControl.Map.Layers.Add(OsmSample.CreateLayer());
             MapControl.Map.Layers.Add(AnimatedPointsSample.CreateLayer());
 
             LayerList.Initialize(MapControl.Map.Layers);
@@ -100,10 +110,10 @@ namespace Mapsui.Samples.Wpf
         private void RandomPointWithStackLabelClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
-            MapControl.Map.Layers.Add(new TileLayer(KnownTileSources.Create()) { Name = "OSM" });
-            var provider = CreateRandomPointsProvider();
-            MapControl.Map.Layers.Add(PointLayerSample.CreateStackedLabelLayer(provider));
-            MapControl.Map.Layers.Add(PointLayerSample.CreateRandomPointLayer(provider));
+            MapControl.Map.Layers.Add(OsmSample.CreateLayer());
+            var provider = PointsSample.CreateRandomPointsProvider(MapControl.Map.Envelope);
+            MapControl.Map.Layers.Add(PointsWithStackedLabelsSample.CreateLayer(provider));
+            MapControl.Map.Layers.Add(PointsSample.CreateRandomPointLayer(provider));
 
             LayerList.Initialize(MapControl.Map.Layers);
             MapControl.ZoomToFullEnvelope();
@@ -113,44 +123,17 @@ namespace Mapsui.Samples.Wpf
         private void RandomPointsWithFeatureInfoClick(object server, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
-            MapControl.Map.Layers.Add(new TileLayer(KnownTileSources.Create()) { Name = "OSM" });
-            var pointLayer = PointLayerSample.CreateRandomPointLayer(CreateRandomPointsProvider());
-            pointLayer.Style = new StyleCollection {
-                new SymbolStyle {
-                        SymbolScale = 1, Fill = new Brush(Color.Cyan), 
-                        Outline = { Color = Color.White, Width = 2}}
-                };
-            MapControl.Map.Layers.Add(pointLayer);
+            MapControl.Map.Layers.Add(OsmSample.CreateLayer());
+            MapControl.Map.Layers.Add(PointsWithFeatureInfoSample.CreateLayer(MapControl.Map.Envelope));
+
             MapControl.MouseInfoUp += MapControlOnMouseInfoDown;
-            MapControl.MouseInfoUpLayers.Add(pointLayer);
+            MapControl.MouseInfoUpLayers.Add(MapControl.Map.Layers.FindLayer("Points with feature info").First());
 
             LayerList.Initialize(MapControl.Map.Layers);
             MapControl.ZoomToFullEnvelope();
             MapControl.Refresh();
         }
 
-        private static void MapControlOnMouseInfoDown(object sender, MouseInfoEventArgs mouseInfoEventArgs)
-        {
-            if (mouseInfoEventArgs.Feature != null)
-            {
-                MessageBox.Show(mouseInfoEventArgs.Feature["Label"].ToString());
-            }
-        }
-
-        private MemoryProvider CreateRandomPointsProvider()
-        {
-            var randomPoints = PointLayerSample.GenerateRandomPoints(MapControl.Map.Envelope, 100);
-            var features = new Features();
-            var count = 0;
-            foreach (var point in randomPoints)
-            {
-                var feature = new Feature { Geometry = point };
-                feature["Label"] = count.ToString(CultureInfo.InvariantCulture);
-                features.Add(feature);
-                count++;
-            }
-            return new MemoryProvider(features);
-        }
 
         private void GeodanWmsClick(object sender, RoutedEventArgs e)
         {
@@ -165,18 +148,18 @@ namespace Mapsui.Samples.Wpf
         private void GeodanTmsClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
-            MapControl.Map.Layers.Add(new TileLayer(
-                    () => TmsTileSourceBuilder.Build("http://geoserver.nl/tiles/tilecache.aspx/1.0.0/worlddark_GM", true))
-                    { Name = "TMS"});
+            MapControl.Map.Layers.Add(TmsSample.CreateLayer());
+
             LayerList.Initialize(MapControl.Map.Layers);
+            MapControl.ZoomToFullEnvelope();
             MapControl.Refresh();
         }
 
         private void BingMapsClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
-            MapControl.Map.Layers.Add(new TileLayer(KnownTileSources.Create(KnownTileSource.BingAerial)) 
-                { Name = "Bing Aerial"});
+            MapControl.Map.Layers.Add(BingSample.CreateLayer());
+
             LayerList.Initialize(MapControl.Map.Layers);
             MapControl.ZoomToFullEnvelope();
             MapControl.Refresh();
@@ -188,6 +171,7 @@ namespace Mapsui.Samples.Wpf
             MapControl.Map.Layers.Add(WmscSample.CreateLayer());
 
             LayerList.Initialize(MapControl.Map.Layers);
+            MapControl.ZoomToFullEnvelope();
             MapControl.Refresh();
         }
 
@@ -198,8 +182,9 @@ namespace Mapsui.Samples.Wpf
             {
                 MapControl.Map.Layers.Add(layer);
             }
-            MapControl.ZoomToFullEnvelope();
+            
             LayerList.Initialize(MapControl.Map.Layers);
+            MapControl.ZoomToFullEnvelope();
             MapControl.Refresh();
         }
 
@@ -207,6 +192,7 @@ namespace Mapsui.Samples.Wpf
         {
             MapControl.Map.Layers.Clear();
             MapControl.Map.Layers.Add(MapTilerSample.CreateLayer());
+
             LayerList.Initialize(MapControl.Map.Layers);
             MapControl.ZoomToFullEnvelope();
             MapControl.Refresh();
@@ -215,19 +201,22 @@ namespace Mapsui.Samples.Wpf
         private void PointSymbolsClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
-            MapControl.Map.Layers.Add(new TileLayer(KnownTileSources.Create()) { Name = "OSM" });
-            MapControl.Map.Layers.Add(PointLayerSample.Create());
-            MapControl.Map.Layers.Add(PointLayerWithWorldUnitsForSymbolsSample.CreateLayer());
+            MapControl.Map.Layers.Add(OsmSample.CreateLayer());
+            MapControl.Map.Layers.Add(PointsSample.Create());
+            MapControl.Map.Layers.Add(PointsWithSymbolsInWorldUnitsSample.CreateLayer());
+
             LayerList.Initialize(MapControl.Map.Layers);
+            MapControl.ZoomToFullEnvelope();
             MapControl.Refresh();
         }
-
 
         private void WmsClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
             MapControl.Map.Layers.Add(WmsSample.Create());
+
             LayerList.Initialize(MapControl.Map.Layers);
+            MapControl.Map.CRS = "EPSG:28992";
             MapControl.ZoomToFullEnvelope();
             MapControl.Refresh();
         }
@@ -236,6 +225,7 @@ namespace Mapsui.Samples.Wpf
         {
             MapControl.Map.Layers.Clear();
             MapControl.Map.Layers.Add(ArcGISImageServiceSample.CreateLayer());
+
             LayerList.Initialize(MapControl.Map.Layers);
             MapControl.ZoomToFullEnvelope();
             MapControl.Refresh();
@@ -244,35 +234,22 @@ namespace Mapsui.Samples.Wpf
         private void WmtsClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
-            var webRequest = (HttpWebRequest)WebRequest.Create("http://geodata.nationaalgeoregister.nl/wmts/top10nl?VERSION=1.0.0&request=GetCapabilities");
-            var webResponse = webRequest.GetSyncResponse(10000);
-            if (webResponse == null) throw (new WebException("An error occurred while fetching tile", null));
-            using (var responseStream = webResponse.GetResponseStream())
-            {
-                var tileSources = WmtsParser.Parse(responseStream);
-                var natura2000 = tileSources.First(t => t.Name.ToLower().Contains("natura2000"));
-                MapControl.Map.Layers.Add(new TileLayer(natura2000) { Name = "Natura 2000"});
-                MapControl.Map.Layers.Add(GeodanOfficesSample.CreateLayer());
-                MapControl.ZoomToFullEnvelope();
-                MapControl.Refresh();
-                LayerList.Initialize(MapControl.Map.Layers);
-            }
-        }
+            MapControl.Map.Layers.Add(WmtsSample.CreateLayer());
+            MapControl.Map.Layers.Add(GeodanOfficesSample.CreateLayer());
 
-        private void PointsWithLabelsClick(object sender, RoutedEventArgs e)
-        {
-            MapControl.Map.Layers.Clear();
-            MapControl.Map.Layers.Add(new TileLayer(KnownTileSources.Create()) { Name = "OSM" });
-            MapControl.Map.Layers.Add(PointLayerSample.CreatePointLayerWithLabels());
             LayerList.Initialize(MapControl.Map.Layers);
             MapControl.ZoomToFullEnvelope();
             MapControl.Refresh();
         }
 
-        private void RotationSliderChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        private void PointsWithLabelsClick(object sender, RoutedEventArgs e)
         {
-            var percent = RotationSlider.Value / (RotationSlider.Maximum - RotationSlider.Minimum);
-            MapControl.Map.Viewport.Rotation = percent * 360;
+            MapControl.Map.Layers.Clear();
+            MapControl.Map.Layers.Add(OsmSample.CreateLayer());
+            MapControl.Map.Layers.Add(PointsSample.CreatePointLayerWithLabels());
+
+            LayerList.Initialize(MapControl.Map.Layers);
+            MapControl.ZoomToFullEnvelope();
             MapControl.Refresh();
         }
     }

@@ -44,16 +44,23 @@
     <EmbeddedResource Include="Images\netherlands.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BingSample.cs" />
+    <Compile Include="OsmSample.cs" />
+    <Compile Include="PointsInWgs84Sample.cs" />
+    <Compile Include="PointsWithFeatureInfoSample.cs" />
+    <Compile Include="PointsWithStackedLabelsSample.cs" />
     <Compile Include="PolygonSample.cs" />
     <Compile Include="AnimatedPointsSample.cs" />
     <Compile Include="GeodanOfficesSample.cs" />
+    <Compile Include="TmsSample.cs" />
     <Compile Include="WmscSample.cs" />
     <Compile Include="TiledWmsSample.cs" />
     <Compile Include="LineStringSample.cs" />
-    <Compile Include="PointLayerSample.cs" />
-    <Compile Include="PointLayerWithWorldUnitsForSymbolsSample.cs" />
+    <Compile Include="PointsSample.cs" />
+    <Compile Include="PointsWithSymbolsInWorldUnitsSample.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StyleSamples.cs" />
+    <Compile Include="WmtsSample.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Mapsui.Geometries\Mapsui.Geometries.csproj">

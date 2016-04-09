@@ -32,7 +32,7 @@ namespace Mapsui.Samples.Common
             readonly Random _random = new Random(0);
             public override IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
             {
-                var geometries = PointLayerSample.GenerateRandomPoints(box, 10).ToList();
+                var geometries = PointsSample.GenerateRandomPoints(box, 10).ToList();
                 var count = 0;
                 var random = _random.Next(geometries.Count);
                 foreach (var geometry in geometries)

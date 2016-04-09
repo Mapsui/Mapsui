@@ -20,7 +20,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Globalization;
-using System.Linq;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
