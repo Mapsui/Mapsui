@@ -139,6 +139,7 @@
     <Compile Include="Styles\VectorStyle.cs" />
     <Compile Include="Utilities\Constants.cs" />
     <Compile Include="Utilities\DeveloperTools.cs" />
+    <Compile Include="Utilities\EmbeddedResourceLoader.cs" />
     <Compile Include="Utilities\Extensions.cs" />
     <Compile Include="Utilities\LeastSquaresTransform.cs" />
     <Compile Include="Utilities\ProjectionHelper.cs" />
