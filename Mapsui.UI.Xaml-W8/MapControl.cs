@@ -22,6 +22,7 @@ using Mapsui.Rendering.Xaml;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using Windows.ApplicationModel.Activation;
 using Windows.Devices.Sensors;
 using Windows.Foundation;
 using Windows.UI;
@@ -278,6 +279,7 @@ namespace Mapsui.UI.Xaml
             if (Viewport == null) return;
             Map.Viewport.Width = ActualWidth;
             Map.Viewport.Height = ActualHeight;
+            
         }
 
         public void MapDataChanged(object sender, DataChangedEventArgs e)
