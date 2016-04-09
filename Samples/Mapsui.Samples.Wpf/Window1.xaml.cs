@@ -4,7 +4,6 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using Mapsui.Layers;
 using Mapsui.Projection;
 using Mapsui.Providers;
 using Mapsui.Samples.Common;
@@ -213,11 +212,12 @@ namespace Mapsui.Samples.Wpf
         private void WmsClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
+            MapControl.Map.CRS = "EPSG:28992";
             MapControl.Map.Layers.Add(WmsSample.Create());
 
             LayerList.Initialize(MapControl.Map.Layers);
-            MapControl.Map.CRS = "EPSG:28992";
-            MapControl.ZoomToFullEnvelope();
+            
+            MapControl.ZoomToFullEnvelope(); 
             MapControl.Refresh();
         }
 
