@@ -206,7 +206,7 @@ namespace Mapsui.Samples.Wpf
         private void MapTilerClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
-            MapControl.Map.Layers.Add(new TileLayer(new MapTilerTileSource()){Name = "True Marble in MapTiler"} );
+            MapControl.Map.Layers.Add(MapTilerSample.CreateLayer());
             LayerList.Initialize(MapControl.Map.Layers);
             MapControl.ZoomToFullEnvelope();
             MapControl.Refresh();
