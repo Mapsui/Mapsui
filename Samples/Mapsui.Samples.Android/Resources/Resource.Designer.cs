@@ -28,6 +28,8 @@ namespace Mapsui.Samples.Android
 		{
 			global::Mapsui.UI.Android.Resource.String.ApplicationName = global::Mapsui.Samples.Android.Resource.String.ApplicationName;
 			global::Mapsui.UI.Android.Resource.String.Hello = global::Mapsui.Samples.Android.Resource.String.Hello;
+			global::SQLite.Net.Platform.XamarinAndroid.Resource.String.ApplicationName = global::Mapsui.Samples.Android.Resource.String.ApplicationName;
+			global::SQLite.Net.Platform.XamarinAndroid.Resource.String.Hello = global::Mapsui.Samples.Android.Resource.String.Hello;
 		}
 		
 		public partial class Attribute
