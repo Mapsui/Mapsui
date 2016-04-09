@@ -67,6 +67,7 @@ namespace Mapsui.Samples.Wpf
         {
             MapControl.Map.Layers.Clear();
             MapControl.Map.Layers.Add(new TileLayer(KnownTileSources.Create()) { Name = "OSM" });
+
             LayerList.Initialize(MapControl.Map.Layers);
             MapControl.ZoomToFullEnvelope();
             MapControl.Refresh();
@@ -79,6 +80,7 @@ namespace Mapsui.Samples.Wpf
             MapControl.Map.CRS = "EPSG:3857";
             MapControl.Map.Layers.Add(new TileLayer(KnownTileSources.Create()) { Name = "OSM" });
             MapControl.Map.Layers.Add(PointLayerSample.CreateLayerWithDataSourceWithWGS84Point());
+
             LayerList.Initialize(MapControl.Map.Layers);
             MapControl.ZoomToFullEnvelope();
             MapControl.Refresh();
@@ -88,7 +90,7 @@ namespace Mapsui.Samples.Wpf
         {
             MapControl.Map.Layers.Clear();
             MapControl.Map.Layers.Add(new TileLayer(KnownTileSources.Create()) { Name = "OSM" });
-            MapControl.Map.Layers.Add(new AnimatedPointsWithAutoUpdateLayer { Name = "AnimatedLayer" });
+            MapControl.Map.Layers.Add(AnimatedPointsSample.CreateLayer());
 
             LayerList.Initialize(MapControl.Map.Layers);
             MapControl.ZoomToFullEnvelope();
@@ -102,6 +104,7 @@ namespace Mapsui.Samples.Wpf
             var provider = CreateRandomPointsProvider();
             MapControl.Map.Layers.Add(PointLayerSample.CreateStackedLabelLayer(provider));
             MapControl.Map.Layers.Add(PointLayerSample.CreateRandomPointLayer(provider));
+
             LayerList.Initialize(MapControl.Map.Layers);
             MapControl.ZoomToFullEnvelope();
             MapControl.Refresh();
@@ -120,6 +123,7 @@ namespace Mapsui.Samples.Wpf
             MapControl.Map.Layers.Add(pointLayer);
             MapControl.MouseInfoUp += MapControlOnMouseInfoDown;
             MapControl.MouseInfoUpLayers.Add(pointLayer);
+
             LayerList.Initialize(MapControl.Map.Layers);
             MapControl.ZoomToFullEnvelope();
             MapControl.Refresh();
@@ -151,7 +155,8 @@ namespace Mapsui.Samples.Wpf
         private void GeodanWmsClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
-            MapControl.Map.Layers.Add(new TileLayer(new GeodanWorldWmsTileSource()) { Name = "WMS called as WMSC"});
+            MapControl.Map.Layers.Add(TiledWmsSample.CreateLayer());
+
             LayerList.Initialize(MapControl.Map.Layers);
             MapControl.ZoomToFullEnvelope();
             MapControl.Refresh();
@@ -180,7 +185,8 @@ namespace Mapsui.Samples.Wpf
         private void GeodanWmscClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
-            MapControl.Map.Layers.Add(new TileLayer(new GeodanWorldWmsCTileSource()));
+            MapControl.Map.Layers.Add(WmscSample.CreateLayer());
+
             LayerList.Initialize(MapControl.Map.Layers);
             MapControl.Refresh();
         }

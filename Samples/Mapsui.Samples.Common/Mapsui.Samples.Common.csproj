@@ -45,12 +45,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PolygonSample.cs" />
-    <Compile Include="AnimatedPointsWithAutoUpdateLayer.cs" />
-    <Compile Include="EsriStreetMapWorld.cs" />
+    <Compile Include="AnimatedPointsSample.cs" />
     <Compile Include="GeodanOfficesSample.cs" />
-    <Compile Include="GeodanWorldTmsTileSource.cs" />
-    <Compile Include="GeodanWorldWmsCTileSource.cs" />
-    <Compile Include="GeodanWorldWmsTileSource.cs" />
+    <Compile Include="WmscSample.cs" />
+    <Compile Include="TiledWmsSample.cs" />
     <Compile Include="LineStringSample.cs" />
     <Compile Include="PointLayerSample.cs" />
     <Compile Include="PointLayerWithWorldUnitsForSymbolsSample.cs" />
