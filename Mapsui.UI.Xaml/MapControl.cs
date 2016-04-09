@@ -69,8 +69,7 @@ namespace Mapsui.UI.Xaml
         public bool ZoomToBoxMode { get; set; }
 
         [Obsolete("Map.Viewport instead", true)]
-        public IViewport Viewport { get { return Map.Viewport; } }
-
+        public IViewport Viewport => Map.Viewport;
 
 
         public Map Map
@@ -632,7 +631,7 @@ namespace Mapsui.UI.Xaml
             if (height <= 0) return;
 
             ZoomHelper.ZoomToBoudingbox(beginPoint.X, beginPoint.Y, endPoint.X, endPoint.Y, ActualWidth, out x, out y, out resolution);
-            resolution = ZoomHelper.ClipToExtremes(_map.Resolutions, resolution);
+            resolution = ZoomHelper.ClipResolutionToExtremes(_map.Resolutions, resolution);
 
             Map.Viewport.Center = new Geometries.Point(x, y);
             Map.Viewport.Resolution = resolution;
