@@ -40,7 +40,13 @@
              RunEachTargetSeparately="true"/>
              -->    
   </Target>
-    
+  
+  <Target Name="BuildTests" DependsOnTargets="BuildRelease">
+    <MSBuild Projects="$(SolutionFile)"
+             Targets="Tests\Mapsui_Tests;Tests\Mapsui_Providers_Tests;Tests\Mapsui_Rendering_Xaml_Tests"
+             Properties="Configuration=Release;BaseIntermediateOutputPath=$(MSBuildProjectDirectory).\..\obj\tests\;OutputPath=$(MSBuildProjectDirectory).\..\Release\tests\" />
+  </Target>
+  
   <Target Name="CleanRelease">
     <Exec Command="rmdir /s /q $(MSBuildProjectDirectory).\..\obj"></Exec>
     <Exec Command="rmdir /s /q $(MSBuildProjectDirectory).\..\Release"></Exec>
