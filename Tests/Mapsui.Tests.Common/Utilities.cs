@@ -147,11 +147,9 @@ namespace Mapsui.Tests.Common
 
         public static MemoryStream ToMemoryStream(Stream input)
         {
-            using (var memoryStream = new MemoryStream())
-            {
-                input.CopyTo(memoryStream);
-                return memoryStream;
-            }
+            var memoryStream = new MemoryStream();
+            input.CopyTo(memoryStream);
+            return memoryStream;
         }
     }
 }
