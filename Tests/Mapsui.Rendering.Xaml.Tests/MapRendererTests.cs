@@ -135,6 +135,7 @@ namespace Mapsui.Rendering.Xaml.Tests
             Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap));
         }
 
+        [Ignore]
         [Test]
         public void RenderTiles()
         {
