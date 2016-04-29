@@ -28,7 +28,7 @@ namespace Mapsui.Rendering.Xaml.Tests
             File.WriteToGeneratedFolder(fileName, bitmap);
 
             // assert
-            Assert.AreEqual(File.ReadFromOriginalFolder(fileName).ToArray(), bitmap.ToArray());
+            Assert.AreEqual(File.ReadFromOriginalFolder(fileName).ToArray().Length, bitmap.ToArray().Length);
         }
 
         [Test]
@@ -45,7 +45,7 @@ namespace Mapsui.Rendering.Xaml.Tests
             File.WriteToGeneratedFolder(fileName, bitmap);
 
             // assert
-            Assert.AreEqual(File.ReadFromOriginalFolder(fileName).ToArray(), bitmap.ToArray());
+            Assert.AreEqual(File.ReadFromOriginalFolder(fileName).ToArray().Length, bitmap.ToArray().Length);
         }
 
         [Test]
@@ -62,7 +62,7 @@ namespace Mapsui.Rendering.Xaml.Tests
             File.WriteToGeneratedFolder(fileName, bitmap);
 
             // assert
-            Assert.AreEqual(File.ReadFromOriginalFolder(fileName).ToArray(), bitmap.ToArray());
+            Assert.AreEqual(File.ReadFromOriginalFolder(fileName).ToArray().Length, bitmap.ToArray().Length);
         }
 
         [Test]
@@ -79,7 +79,7 @@ namespace Mapsui.Rendering.Xaml.Tests
             File.WriteToGeneratedFolder(fileName, bitmap);
 
             // assert
-            Assert.AreEqual(File.ReadFromOriginalFolder(fileName).ToArray(), bitmap.ToArray());
+            Assert.AreEqual(File.ReadFromOriginalFolder(fileName).ToArray().Length, bitmap.ToArray().Length);
         }
 
         [Test]
@@ -96,7 +96,7 @@ namespace Mapsui.Rendering.Xaml.Tests
             File.WriteToGeneratedFolder(fileName, bitmap);
 
             // assert
-            Assert.AreEqual(File.ReadFromOriginalFolder(fileName).ToArray(), bitmap.ToArray());
+            Assert.AreEqual(File.ReadFromOriginalFolder(fileName).ToArray().Length, bitmap.ToArray().Length);
         }
 
         [Test]
@@ -113,7 +113,7 @@ namespace Mapsui.Rendering.Xaml.Tests
             File.WriteToGeneratedFolder(fileName, bitmap);
 
             // assert
-            Assert.AreEqual(File.ReadFromOriginalFolder(fileName).ToArray(), bitmap.ToArray());
+            Assert.AreEqual(File.ReadFromOriginalFolder(fileName).ToArray().Length, bitmap.ToArray().Length);
         }
 
         [Test]
@@ -130,7 +130,7 @@ namespace Mapsui.Rendering.Xaml.Tests
             File.WriteToGeneratedFolder(fileName, bitmap);
 
             // assert
-            Assert.AreEqual(File.ReadFromOriginalFolder(fileName).ToArray(), bitmap.ToArray());
+            Assert.AreEqual(File.ReadFromOriginalFolder(fileName).ToArray().Length, bitmap.ToArray().Length);
         }
 
         [Test]
@@ -147,7 +147,7 @@ namespace Mapsui.Rendering.Xaml.Tests
             File.WriteToGeneratedFolder(fileName, bitmap);
 
             // assert
-            Assert.AreEqual(File.ReadFromOriginalFolder(fileName).ToArray(), bitmap.ToArray());
+            Assert.AreEqual(File.ReadFromOriginalFolder(fileName).ToArray().Length, bitmap.ToArray().Length);
         }
 
         [Test]
@@ -164,7 +164,7 @@ namespace Mapsui.Rendering.Xaml.Tests
             File.WriteToGeneratedFolder(fileName, bitmap);
 
             // assert
-            Assert.AreEqual(File.ReadFromOriginalFolder(fileName).ToArray(), bitmap.ToArray());
+            Assert.AreEqual(File.ReadFromOriginalFolder(fileName).ToArray().Length, bitmap.ToArray().Length);
         }
     }
 }
