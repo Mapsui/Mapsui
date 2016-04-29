@@ -1,4 +1,6 @@
-﻿using Mapsui.Tests.Common;
+﻿using System.Drawing;
+using System.IO;
+using Mapsui.Tests.Common;
 using NUnit.Framework;
 #if OPENTK
 using Mapsui.Rendering.OpenTK;
@@ -28,7 +30,7 @@ namespace Mapsui.Rendering.Xaml.Tests
             File.WriteToGeneratedFolder(fileName, bitmap);
 
             // assert
-            Assert.AreEqual(File.ReadFromOriginalFolder(fileName).ToArray().Length, bitmap.ToArray().Length);
+            Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap));
         }
 
         [Test]
@@ -45,7 +47,7 @@ namespace Mapsui.Rendering.Xaml.Tests
             File.WriteToGeneratedFolder(fileName, bitmap);
 
             // assert
-            Assert.AreEqual(File.ReadFromOriginalFolder(fileName).ToArray().Length, bitmap.ToArray().Length);
+            Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap));
         }
 
         [Test]
@@ -62,7 +64,7 @@ namespace Mapsui.Rendering.Xaml.Tests
             File.WriteToGeneratedFolder(fileName, bitmap);
 
             // assert
-            Assert.AreEqual(File.ReadFromOriginalFolder(fileName).ToArray().Length, bitmap.ToArray().Length);
+            Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap));
         }
 
         [Test]
@@ -79,7 +81,7 @@ namespace Mapsui.Rendering.Xaml.Tests
             File.WriteToGeneratedFolder(fileName, bitmap);
 
             // assert
-            Assert.AreEqual(File.ReadFromOriginalFolder(fileName).ToArray().Length, bitmap.ToArray().Length);
+            Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap));
         }
 
         [Test]
@@ -96,7 +98,7 @@ namespace Mapsui.Rendering.Xaml.Tests
             File.WriteToGeneratedFolder(fileName, bitmap);
 
             // assert
-            Assert.AreEqual(File.ReadFromOriginalFolder(fileName).ToArray().Length, bitmap.ToArray().Length);
+            Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap));
         }
 
         [Test]
@@ -113,7 +115,7 @@ namespace Mapsui.Rendering.Xaml.Tests
             File.WriteToGeneratedFolder(fileName, bitmap);
 
             // assert
-            Assert.AreEqual(File.ReadFromOriginalFolder(fileName).ToArray().Length, bitmap.ToArray().Length);
+            Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap));
         }
 
         [Test]
@@ -130,7 +132,7 @@ namespace Mapsui.Rendering.Xaml.Tests
             File.WriteToGeneratedFolder(fileName, bitmap);
 
             // assert
-            Assert.AreEqual(File.ReadFromOriginalFolder(fileName).ToArray().Length, bitmap.ToArray().Length);
+            Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap));
         }
 
         [Test]
@@ -147,7 +149,7 @@ namespace Mapsui.Rendering.Xaml.Tests
             File.WriteToGeneratedFolder(fileName, bitmap);
 
             // assert
-            Assert.AreEqual(File.ReadFromOriginalFolder(fileName).ToArray().Length, bitmap.ToArray().Length);
+            Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap));
         }
 
         [Test]
@@ -164,7 +166,29 @@ namespace Mapsui.Rendering.Xaml.Tests
             File.WriteToGeneratedFolder(fileName, bitmap);
 
             // assert
-            Assert.AreEqual(File.ReadFromOriginalFolder(fileName).ToArray().Length, bitmap.ToArray().Length);
+            Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap));
+        }
+        
+        private bool CompareBitmaps(Stream bitmapStream1, Stream bitmapStream2)
+        {
+            bitmapStream1.Position = 0;
+            bitmapStream2.Position = 0;
+
+            var bitmap1 = (Bitmap)Image.FromStream(bitmapStream1);
+            var bitmap2 = (Bitmap)Image.FromStream(bitmapStream2);
+
+            for (var x = 0; x < bitmap1.Width; x++)
+            {
+                for (var y = 0; y < bitmap1.Height; y++)
+                {
+                    if (bitmap1.GetPixel(x, y) != bitmap2.GetPixel(x, y))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
         }
     }
 }

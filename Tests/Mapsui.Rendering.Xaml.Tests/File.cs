@@ -21,11 +21,10 @@ namespace Mapsui.Rendering.Xaml.Tests
             }
         }
 
-        public static MemoryStream ReadFromOriginalFolder(string fileName)
+        public static Stream ReadFromOriginalFolder(string fileName)
         {
             var filePath = Path.Combine(OriginalImagesFolder, fileName);
-            var fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
-            return Mapsui.Tests.Common.Utilities.ToMemoryStream(fileStream);
+            return new FileStream(filePath, FileMode.Open, FileAccess.Read);
         }
     }
 }
