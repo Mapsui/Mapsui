@@ -42,7 +42,6 @@
     <Compile Include="MapRenderer.cs" />
     <Compile Include="PointRenderer2.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RenderingLayer.cs" />
     <Compile Include="RenderQueue.cs" />
     <Compile Include="LineStringRenderer.cs" />
     <Compile Include="ExtensionMethods\GeometryExtensions.cs" />
