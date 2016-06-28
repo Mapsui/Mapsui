@@ -16,15 +16,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" id="5" customClass="MapControlUIKit" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                            </view>
-                        </subviews>
+                        <subviews/>
                     </view>
-                    <connections>
-                        <outlet property="mapControlUIKit" destination="5" id="name-outlet-5"/>
-                    </connections>
+                    <connections/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

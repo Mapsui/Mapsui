@@ -14,16 +14,8 @@ namespace Mapsui.Samples.MapControlUIKit
     [Register ("ViewController")]
     partial class ViewController
     {
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        Mapsui.UI.iOS.MapControlUIKit mapControlUIKit { get; set; }
-
         void ReleaseDesignerOutlets ()
         {
-            if (mapControlUIKit != null) {
-                mapControlUIKit.Dispose ();
-                mapControlUIKit = null;
-            }
         }
     }
 }

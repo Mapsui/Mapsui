@@ -1,5 +1,6 @@
 ﻿using System;
 using BruTile.Predefined;
+using CoreGraphics;
 using Mapsui.Layers;
 using UIKit;
 
@@ -15,6 +16,10 @@ namespace Mapsui.Samples.MapControlUIKit
 		public override void ViewDidLoad()
 		{
 			base.ViewDidLoad();
+
+			var mapControlUIKit = new UI.iOS.MapControlUIKit(new CGRect(0, 0, View.Frame.Width, View.Frame.Height));
+			View.AddSubview(mapControlUIKit);
+
 			var layer = new TileLayer(KnownTileSources.Create());
 			mapControlUIKit.Map.Layers.Add(layer);
 			mapControlUIKit.Map.NavigateTo(mapControlUIKit.Map.Envelope);
@@ -27,4 +32,3 @@ namespace Mapsui.Samples.MapControlUIKit
 		}
 	}
 }
-
