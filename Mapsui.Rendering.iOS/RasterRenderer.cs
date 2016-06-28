@@ -1,7 +1,6 @@
 using System;
 using CoreGraphics;
 using Mapsui.Geometries;
-using CoreGraphics;
 using Mapsui.Styles;
 using Mapsui.Providers;
 using CoreAnimation;
@@ -17,7 +16,7 @@ namespace Mapsui.Rendering.iOS
 		{
 			const string styleKey = "laag";
 
-			if(feature[styleKey] == null) feature[styleKey] = ToiOSBitmap(feature.Geometry);
+  			if(feature[styleKey] == null) feature[styleKey] = ToiOSBitmap(feature.Geometry);
 
 			var bitmap = (UIImage)feature [styleKey];
 
@@ -33,9 +32,9 @@ namespace Mapsui.Rendering.iOS
 			var tile = new CALayer
 			{
 				Frame = destination,
-				Contents = bitmap.CGImage,
+				Contents = bitmap.CGImage
 			};
-			
+
 			target.AddSublayer(tile);
 		}
 
@@ -78,7 +77,6 @@ namespace Mapsui.Rendering.iOS
 			var raster = (IRaster)geometry;
 			var rasterData = NSData.FromArray(raster.Data.ToArray());
 			var bitmap = UIImage.LoadFromData(rasterData);
-
 			return bitmap;
 		}
 	}

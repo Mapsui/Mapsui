@@ -1,26 +1,15 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Windows;
-using Mapsui.Rendering;
 using Mapsui.Geometries;
 using Mapsui.Providers;
 using Mapsui;
 using Mapsui.Rendering.iOS;
 using UIKit;
-using CoreGraphics;
-using CoreGraphics;
 using Mapsui.Layers;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
-using Foundation;
-using BruTile;
 using CoreAnimation;
-using CoreFoundation;
-using System.Runtime.InteropServices;
-using System.Collections;
-using System.Threading;
 
 namespace XamarinRendering
 {
@@ -193,8 +182,8 @@ namespace XamarinRendering
 
 		private static void PositionGeometry(CALayer renderedGeometry, IViewport viewport, IStyle style, IFeature feature)
 		{
-			if (feature.Geometry is Mapsui.Geometries.Point){
-				GeometryRenderer.PositionPoint(renderedGeometry, feature.Geometry as Mapsui.Geometries.Point, style, viewport);
+			if (feature.Geometry is Point){
+				GeometryRenderer.PositionPoint(renderedGeometry, feature.Geometry as Point, style, viewport);
 			}
 			if (feature.Geometry is MultiPoint)
 				return;
@@ -205,7 +194,7 @@ namespace XamarinRendering
 			if (feature.Geometry is Polygon)
 				return;
 			if (feature.Geometry is MultiPolygon){
-				GeometryRenderer.PositionMultiPolygon (renderedGeometry as CALayer, feature.Geometry as Mapsui.Geometries.MultiPolygon, style, viewport);
+				GeometryRenderer.PositionMultiPolygon (renderedGeometry as CALayer, feature.Geometry as MultiPolygon, style, viewport);
 			}
 			if (feature.Geometry is IRaster){
 				GeometryRenderer.PositionRaster(renderedGeometry, feature.Geometry.GetBoundingBox(), viewport);
