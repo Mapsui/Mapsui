@@ -1,23 +1,42 @@
+using BruTile.Predefined;
+using CoreGraphics;
 using Foundation;
 using UIKit;
 
 namespace Mapsui.Samples.iOS
 {
-	// The UIApplicationDelegate for the application. This class is responsible for launching the
-	// User Interface of the application, as well as listening (and optionally responding) to
-	// application events from iOS.
-	[Foundation.Register("AppDelegate")]
-	public partial class AppDelegate : UIApplicationDelegate
+	// The name AppDelegate is referenced in the MainWindow.xib file.
+	public partial class OpenGLESSampleAppDelegate : UIApplicationDelegate
 	{
-		UIWindow window;
-
-		public override bool FinishedLaunching (UIApplication app, NSDictionary options)
+		// This method is invoked when the application has loaded its UI and its ready to run
+		public override bool FinishedLaunching(UIApplication app, NSDictionary options)
 		{
-			window = new UIWindow (UIScreen.MainScreen.Bounds);
+			// If you have defined a view, add it here:
+			// window.AddSubview (navigationController.View);
 
-			window.MakeKeyAndVisible ();
+			glView.Map.Layers.Add(new Layers.TileLayer(KnownTileSources.Create()));
+
+			glView.Run(60.0);
+
+			var width = window.Frame.Width;
+			var height = window.Frame.Height;
+			glView.Frame = new CGRect(0, 0, width, height);
+			window.MakeKeyAndVisible();
 
 			return true;
+		}
+
+		public override void OnResignActivation(UIApplication application)
+		{
+			glView.Stop();
+			glView.Run(5.0);
+		}
+
+		// This method is required in iPhoneOS 3.0
+		public override void OnActivated(UIApplication application)
+		{
+			glView.Stop();
+			glView.Run(60.0);
 		}
 	}
 }
