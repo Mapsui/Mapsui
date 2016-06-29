@@ -65,18 +65,18 @@ namespace Mapsui.Rendering.iOS
             }
         }
 
-        private static void Render(CALayer target, IViewport viewport, IEnumerable<ILayer> layers)
-        {
-            layers = layers.ToList();
-            VisibleFeatureIterator.IterateLayers(viewport, layers, (v, s, f) => RenderGeometry(target, v, s, f));
-        }
-
         public MemoryStream RenderToBitmapStream(IViewport viewport, IEnumerable<ILayer> layers)
         {
             return RenderToBitmapStreamStatic(viewport, layers);
         }
 
-        private static MemoryStream RenderToBitmapStreamStatic(IViewport viewport, IEnumerable<ILayer> layers)
+		static void Render(CALayer target, IViewport viewport, IEnumerable<ILayer> layers)
+		{
+			layers = layers.ToList();
+			VisibleFeatureIterator.IterateLayers(viewport, layers, (v, s, f) => RenderGeometry(target, v, s, f));
+		}
+
+        static MemoryStream RenderToBitmapStreamStatic(IViewport viewport, IEnumerable<ILayer> layers)
         {
             UIImage image = null;
             var handle = new ManualResetEvent(false);
@@ -98,18 +98,18 @@ namespace Mapsui.Rendering.iOS
             }
         }
 
-        private static UIImage ToImage(UIView view, CGRect frame)
+        static UIImage ToImage(UIView view, CGRect frame)
         {
-            UIGraphics.BeginImageContext((CGSize)frame.Size);
+            UIGraphics.BeginImageContext(frame.Size);
             UIColor.Clear.SetColor();
-            UIGraphics.RectFill((CGRect)view.Frame);
+            UIGraphics.RectFill(view.Frame);
             view.Layer.RenderInContext(UIGraphics.GetCurrentContext());
             var image = UIGraphics.GetImageFromCurrentImageContext();
             UIGraphics.EndImageContext();
             return image;
         }
 
-        private static void RenderGeometry(CALayer target, IViewport viewport, IStyle style, IFeature feature)
+        static void RenderGeometry(CALayer target, IViewport viewport, IStyle style, IFeature feature)
         {
             if (feature.Geometry is CGPoint)
             {
