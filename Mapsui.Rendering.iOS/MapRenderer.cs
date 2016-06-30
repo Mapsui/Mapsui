@@ -15,10 +15,11 @@ namespace Mapsui.Rendering.iOS
 {
     public class MapRenderer : IRenderer
     {
-        private readonly UIView _target;
         public bool ShowDebugInfoInMap { get; set; }
 
-        static MapRenderer()
+		readonly UIView _target;
+
+		static MapRenderer()
         {
             DefaultRendererFactory.Create = () => new MapRenderer();
         }
@@ -36,24 +37,29 @@ namespace Mapsui.Rendering.iOS
         }
 
         public static void Render(UIView target, IViewport viewport, IEnumerable<ILayer> layers, bool showDebugInfoInMap)
-        {
-            CATransaction.Begin();
-            CATransaction.AnimationDuration = 0;
-            
-            if (target.Layer.Sublayers != null)
-            {
-                foreach (var layer in target.Layer.Sublayers)
-                {
-                    layer.RemoveFromSuperLayer();
-                }
-            }
-            
-            Render(target.Layer, viewport, layers);
+		{
+			CATransaction.Begin();
+			CATransaction.AnimationDuration = 0;
+			RemoveSublayers(target.Layer);
+			Render(target.Layer, viewport, layers);
 
-            CATransaction.Commit();
-        }
+			CATransaction.Commit();
+		}
 
-        public void Dispose()
+		static void RemoveSublayers(CALayer parent)
+		{
+			if (parent.Sublayers != null)
+			{
+				foreach (var layer in parent.Sublayers)
+				{
+					RemoveSublayers(layer);
+					layer.RemoveFromSuperLayer();
+					layer.Dispose();
+				}
+			}
+		}
+
+		public void Dispose()
         {
             if (_target.Layer.Sublayers != null)
             {
