@@ -10,6 +10,8 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using CGPoint = Mapsui.Geometries.Point;
+using System;
+using System.Diagnostics;
 
 namespace Mapsui.Rendering.iOS
 {
@@ -90,11 +92,21 @@ namespace Mapsui.Rendering.iOS
             var view = new UIView();
             view.InvokeOnMainThread(() =>
             {
-                view.Opaque = false;
-                view.BackgroundColor = UIColor.Clear;
-                Render(view, viewport, layers, false);
-                image = ToImage(view, new CGRect(0, 0, (float)viewport.Width, (float)viewport.Height));
-                handle.Set();
+				try
+				{
+					view.Opaque = false;
+					view.BackgroundColor = UIColor.Clear;
+					Render(view, viewport, layers, false);
+					image = ToImage(view, new CGRect(0, 0, (float)viewport.Width, (float)viewport.Height));
+				}
+				catch (Exception ex)
+				{
+					Debug.WriteLine($"Exception in {nameof(RenderToBitmapStreamStatic)}: {ex}");
+				}
+				finally
+				{
+					handle.Set();
+				}
             });
 
             handle.WaitOne();
