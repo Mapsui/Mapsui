@@ -552,11 +552,13 @@ namespace Mapsui.Web.Wms
                     if (node != null)
                     {
                         wmsServerLayer.Style[i].LegendUrl = new WmsStyleLegend();
-                        wmsServerLayer.Style[i].LegendUrl.Size = new Size();
-                        wmsServerLayer.Style[i].LegendUrl.Size.Width = int.Parse(node.Attributes["width"].InnerText);
-                        wmsServerLayer.Style[i].LegendUrl.Size.Height = int.Parse(node.Attributes["height"].InnerText);
-                        wmsServerLayer.Style[i].LegendUrl.OnlineResource.OnlineResource =
-                            node.SelectSingleNode("sm:OnlineResource", nsmgr).Attributes["xlink:href"].InnerText;
+
+                        if (node.Attributes["width"]?.InnerText != null && node.Attributes["height"]?.InnerText != null)
+                        {
+                            wmsServerLayer.Style[i].LegendUrl.Size = new Size { Width = int.Parse(node.Attributes["width"].InnerText), Height = int.Parse(node.Attributes["height"].InnerText) };
+                        }
+
+                        wmsServerLayer.Style[i].LegendUrl.OnlineResource.OnlineResource = node.SelectSingleNode("sm:OnlineResource", nsmgr).Attributes["xlink:href"].InnerText;
                         wmsServerLayer.Style[i].LegendUrl.OnlineResource.Type =
                             node.SelectSingleNode("sm:Format", nsmgr).InnerText;
                     }
