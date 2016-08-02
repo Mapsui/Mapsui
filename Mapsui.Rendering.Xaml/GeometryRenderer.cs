@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Mapsui.Geometries;
@@ -33,7 +34,7 @@ namespace Mapsui.Rendering.Xaml
     /// </remarks>
     public static class GeometryRenderer
     {
-        public static XamlShapes.Shape RenderPoint(Point point, IStyle style, IViewport viewport)
+        public static XamlShapes.Shape RenderPoint(Point point, IStyle style, IViewport viewport, Dictionary<int, XamlMedia.ImageBrush> brushCache = null)
         {
             XamlShapes.Shape symbol;
             var matrix = XamlMedia.Matrix.Identity;
@@ -45,7 +46,7 @@ namespace Mapsui.Rendering.Xaml
                 if (symbolStyle.BitmapId < 0)
                     symbol = CreateSymbolFromVectorStyle(symbolStyle, symbolStyle.Opacity, symbolStyle.SymbolType);
                 else
-                    symbol = CreateSymbolFromBitmap(BitmapRegistry.Instance.Get(symbolStyle.BitmapId), symbolStyle.Opacity);
+                    symbol = CreateSymbolFromBitmap(symbolStyle.BitmapId, symbolStyle.Opacity, brushCache);
                 matrix = CreatePointSymbolMatrix(viewport.Resolution, symbolStyle);
             }
             else
@@ -137,23 +138,24 @@ namespace Mapsui.Rendering.Xaml
             return CreateTransformMatrix(new Point(0, 0), viewport);
         }
 
-        private static XamlShapes.Shape CreateSymbolFromBitmap(Stream data, double opacity)
+        private static XamlShapes.Shape CreateSymbolFromBitmap(int bmpId, double opacity, Dictionary<int, XamlMedia.ImageBrush> brushCache = null)
         {
-            var bitmapImage = data.CreateBitmapImage();
-            var fill = new XamlMedia.ImageBrush { ImageSource = bitmapImage };
-            var width = bitmapImage.PixelWidth;
-            var height = bitmapImage.PixelHeight;
+            var imageBrush = GetImageBrush(bmpId, brushCache);
+            var width = imageBrush.ImageSource.Width;
+            var height = imageBrush.ImageSource.Height;
 
-            return new XamlShapes.Path
+            var path = new XamlShapes.Path
             {
                 Data = new XamlMedia.RectangleGeometry
                 {
                     Rect = new Rect(-width * 0.5, -height * 0.5, width, height)
                 },
-                Fill = fill,
+                Fill = imageBrush,
                 Opacity = opacity
             };
-        }
+
+            return path;
+        }                
 
         private static XamlMedia.EllipseGeometry CreateEllipse(double width, double height)
         {
@@ -376,6 +378,23 @@ namespace Mapsui.Rendering.Xaml
                 IsHitTestVisible = false
             };
             return path;
+        }
+
+        // Try to get an imagebrush from cache by given BitmapRegistry id, if not exist
+        // create a new brush and return it.
+        private static XamlMedia.ImageBrush GetImageBrush(int bmpId, IDictionary<int, XamlMedia.ImageBrush> brushCache = null)
+        {
+            if (brushCache != null && brushCache.ContainsKey(bmpId))
+                return brushCache[bmpId];
+
+            var data = BitmapRegistry.Instance.Get(bmpId);
+            var bitmapImage = data.CreateBitmapImage();
+            var fill = new XamlMedia.ImageBrush { ImageSource = bitmapImage };
+
+            if(brushCache != null)
+                brushCache[bmpId] = fill;
+
+            return fill;
         }
 
         public static Rect RoundToPixel(Rect dest)

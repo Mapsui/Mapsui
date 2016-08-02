@@ -8,6 +8,7 @@ using Mapsui.Styles.Thematics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Media;
 using Polygon = Mapsui.Geometries.Polygon;
 #if !NETFX_CORE
 using System.Windows;
@@ -196,6 +197,7 @@ namespace Mapsui.Rendering.Xaml
 
                 var features = layer.GetFeaturesInView(viewport.Extent, viewport.RenderResolution).ToList();
                 var layerStyles = BaseLayer.GetLayerStyles(layer);
+                var brushCache = new Dictionary<int, ImageBrush>();
 
                 foreach (var layerStyle in layerStyles)
                 {
@@ -206,7 +208,7 @@ namespace Mapsui.Rendering.Xaml
                         if (layerStyle is IThemeStyle) style = (layerStyle as IThemeStyle).GetStyle(feature);
                         if ((style == null) || (style.Enabled == false) || (style.MinVisible > viewport.Resolution) || (style.MaxVisible < viewport.Resolution)) continue;
 
-                        RenderFeature(viewport, canvas, feature, style, rasterizing);
+                        RenderFeature(viewport, canvas, feature, style, rasterizing, brushCache);
                     }
                 }
 
@@ -217,20 +219,20 @@ namespace Mapsui.Rendering.Xaml
                     {
                         if (feature.Styles != null && style.Enabled)
                         {
-                            RenderFeature(viewport, canvas, feature, style, rasterizing);
+                            RenderFeature(viewport, canvas, feature, style, rasterizing, brushCache);
                         }
                     }
                 }
 
                 return canvas;
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return new Canvas { IsHitTestVisible = false };
             }
         }
 
-        private static void RenderFeature(IViewport viewport, Canvas canvas, IFeature feature, IStyle style, bool rasterizing)
+        private static void RenderFeature(IViewport viewport, Canvas canvas, IFeature feature, IStyle style, bool rasterizing, Dictionary<int, ImageBrush> brushCache = null)
         {
             if (style is LabelStyle)
             {
@@ -242,7 +244,7 @@ namespace Mapsui.Rendering.Xaml
                 var renderedGeometry = feature.RenderedGeometry.ContainsKey(style) ? feature.RenderedGeometry[style] as Shape : null;
                 if (renderedGeometry == null)
                 {
-                    renderedGeometry = RenderGeometry(viewport, style, feature);
+                    renderedGeometry = RenderGeometry(viewport, style, feature, brushCache);
                     if (!rasterizing) feature.RenderedGeometry[style] = renderedGeometry;
                 }
                 else
@@ -255,10 +257,10 @@ namespace Mapsui.Rendering.Xaml
             }
         }
 
-        private static Shape RenderGeometry(IViewport viewport, IStyle style, IFeature feature)
+        private static Shape RenderGeometry(IViewport viewport, IStyle style, IFeature feature, Dictionary<int, ImageBrush> brushCache = null)
         {
             if (feature.Geometry is Geometries.Point)
-                return GeometryRenderer.RenderPoint(feature.Geometry as Geometries.Point, style, viewport);
+                return GeometryRenderer.RenderPoint(feature.Geometry as Geometries.Point, style, viewport, brushCache);
             if (feature.Geometry is MultiPoint)
                 return GeometryRenderer.RenderMultiPoint(feature.Geometry as MultiPoint, style, viewport);
             if (feature.Geometry is LineString)
