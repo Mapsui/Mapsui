@@ -23,8 +23,13 @@ namespace Mapsui.Rendering.Android
                 {
                     // Bitmap
                     if (!feature.RenderedGeometry.ContainsKey(style))
-                        feature.RenderedGeometry[style] = 
-                            BitmapFactory.DecodeStream(BitmapRegistry.Instance.Get(symbolStyle.BitmapId));
+                    {
+                        var imageStream = BitmapRegistry.Instance.Get(symbolStyle.BitmapId);
+                        imageStream.Position = 0;
+                        var androidBitmap = BitmapFactory.DecodeStream(imageStream);
+                        feature.RenderedGeometry[style] = androidBitmap;
+                    }
+
                     var bitmap = (Bitmap)feature.RenderedGeometry[style];
                     var halfWidth = bitmap.Width / 2;
                     var halfHeight = bitmap.Height / 2;

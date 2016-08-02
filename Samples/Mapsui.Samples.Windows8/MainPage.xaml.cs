@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using BruTile.Predefined;
@@ -8,7 +7,6 @@ using Mapsui.Layers;
 using Mapsui.Projection;
 using Mapsui.Providers;
 using Mapsui.Samples.Common;
-using Mapsui.Styles;
 using Mapsui.UI.Xaml;
 using Windows.Devices.Geolocation;
 using Windows.UI.Core;
@@ -39,8 +37,7 @@ namespace Mapsui.Samples.Windows8
         /// property is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            var mapLayer = new TileLayer(KnownTileSources.Create());
-            mapLayer.Name = "Map";
+            var mapLayer = new TileLayer(KnownTileSources.Create()) {Name = "Map"};
             mapControl.Map.Layers.Add(mapLayer);
 
             GetGeoLocator();
@@ -96,29 +93,19 @@ namespace Mapsui.Samples.Windows8
 
         private MemoryProvider CreateRandomPointsProvider()
         {
-            var randomPoints = PointLayerSample.GenerateRandomPoints(mapControl.Map.Envelope, 200);
+            var randomPoints = PointsSample.GenerateRandomPoints(mapControl.Map.Envelope, 200);
             var features = new Features();
             var count = 0;
             foreach (var point in randomPoints)
             {
-                var feature = new Feature { Geometry = point };
-                feature["Label"] = count.ToString();
-                features.Add(feature);
+                features.Add(new Feature
+                {
+                    Geometry = point,
+                    ["Label"] = count.ToString()
+                });
                 count++;
             }
             return new MemoryProvider(features);
-        }
-
-        private ILayer CreateRandomPointLayerWithLabel(IProvider dataSource, Stream bitmapStream)
-        {
-            var bitmapId = BitmapRegistry.Instance.Register(bitmapStream);
-            var styles = new StyleCollection
-                {
-                    new SymbolStyle { BitmapId = bitmapId, SymbolRotation = 45.0},
-                    new LabelStyle {Text = "TestLabel"}
-                };
-
-            return new Layer("pointLayer") { DataSource = dataSource, Style = styles };
         }
 
         private void OnGeolocatorPositionChanged(Geolocator sender, PositionChangedEventArgs args)
@@ -190,8 +177,8 @@ namespace Mapsui.Samples.Windows8
                 if (task.IsCompleted)
                 {
                     SetLocation(
-                        task.Result.Coordinate.Longitude,
-                        task.Result.Coordinate.Latitude);
+                        task.Result.Coordinate.Point.Position.Longitude,
+                        task.Result.Coordinate.Point.Position.Latitude);
                 }
             }
         }
@@ -199,20 +186,20 @@ namespace Mapsui.Samples.Windows8
         private void OnDemo1ButtonClicked(object sender, RoutedEventArgs e)
         {
             var provider = CreateRandomPointsProvider();
-            mapControl.Map.Layers.Add(PointLayerSample.CreateRandomPointLayerWithLabel(provider));
+            mapControl.Map.Layers.Add(PointsSample.CreateRandomPointLayerWithLabel(provider));
             mapControl.Refresh();
         }
 
         private void OnDemo2ButtonClicked(object sender, RoutedEventArgs e)
         {
             var provider = CreateRandomPointsProvider();
-            mapControl.Map.Layers.Add(PointLayerSample.CreateStackedLabelLayer(provider));
+            mapControl.Map.Layers.Add(PointsSample.CreateStackedLabelLayer(provider));
             mapControl.Refresh();
         }
 
         private void OnDemo3ButtonClicked(object sender, RoutedEventArgs e)
         {
-            mapControl.Map.Layers.Add(PointLayerSample.CreateRandomPolygonLayer(mapControl.Map.Envelope, 1));
+            mapControl.Map.Layers.Add(PointsSample.CreateRandomPolygonLayer(mapControl.Map.Envelope, 1));
             mapControl.Refresh();
         }
 

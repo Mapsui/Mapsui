@@ -28,7 +28,7 @@ namespace Mapsui.Utilities
             if (crsType == CrsType.EsriString) return EsriStringPrefix + crs.Substring(EsriStringPrefix.Length);
             if (crsType == CrsType.Proj4String) return Proj4StringPrefix + crs.Substring(Proj4StringPrefix.Length);
 
-            throw new Exception(string.Format("crs is not recognized as a projection string: '{0}'", crs));
+            throw new Exception($"crs is not recognized as a projection string: '{crs}'");
         }
 
         public static int ToEpsgCode(string crs)
@@ -41,7 +41,7 @@ namespace Mapsui.Utilities
             if (crs.StartsWith(EpsgPrefix)) return CrsType.Epgs;
             if (crs.StartsWith(EsriStringPrefix)) return CrsType.EsriString;
             if (crs.StartsWith(Proj4StringPrefix)) return CrsType.Proj4String;
-            throw new Exception(string.Format("crs not recognized: '{0}'", crs));
+            throw new Exception($"crs not recognized: '{crs}'");
         }
 
         public static bool NeedsTransform(ITransformation transformation, string fromCRS, string toCRS)
@@ -51,11 +51,11 @@ namespace Mapsui.Utilities
 
         public static BoundingBox GetTransformedBoundingBox(ITransformation transformatiom, BoundingBox extent, string fromCRS, string toCRS)
         {
-            if (!IsProjectionInfoAvailable(transformatiom, fromCRS, toCRS))
-                return null;
-
             if (!IsTransformationNeeded(fromCRS, toCRS))
                 return extent;
+
+            if (!IsProjectionInfoAvailable(transformatiom, fromCRS, toCRS))
+                return null;
 
             if (IsTransformationSupported(transformatiom, fromCRS, toCRS))
                 return transformatiom.Transform(fromCRS, toCRS, extent);

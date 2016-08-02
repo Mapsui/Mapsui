@@ -110,15 +110,21 @@ namespace Mapsui.Rendering.Xaml
         private static XamlMedia.Matrix CreateTransformMatrix(Point point, IViewport viewport)
         {
             var matrix = XamlMedia.Matrix.Identity;
-            MatrixHelper.Translate(ref matrix, point.X, point.Y);
             var mapCenterX = viewport.Width * 0.5;
             var mapCenterY = viewport.Height * 0.5;
+            
+            var pointOffsetFromViewPortCenterX = point.X - viewport.Center.X;
+            var pointOffsetFromViewPortCenterY = point.Y - viewport.Center.Y;
 
-            MatrixHelper.Translate(ref matrix, mapCenterX - viewport.Center.X, mapCenterY - viewport.Center.Y);
+            MatrixHelper.Translate(ref matrix, pointOffsetFromViewPortCenterX, pointOffsetFromViewPortCenterY);
+
             if (viewport.IsRotated)
             {
-                MatrixHelper.RotateAt(ref matrix, -viewport.Rotation);
+                MatrixHelper.Rotate(ref matrix, -viewport.Rotation);
             }
+
+
+            MatrixHelper.Translate(ref matrix, mapCenterX, mapCenterY);
             MatrixHelper.ScaleAt(ref matrix, 1 / viewport.Resolution, 1 / viewport.Resolution, mapCenterX, mapCenterY);
 
             // This will invert the Y axis, but will also put images upside down
@@ -128,20 +134,7 @@ namespace Mapsui.Rendering.Xaml
 
         private static XamlMedia.Matrix CreateTransformMatrix1(IViewport viewport)
         {
-            var matrix = XamlMedia.Matrix.Identity;
-            var mapCenterX = viewport.Width * 0.5;
-            var mapCenterY = viewport.Height * 0.5;
-
-            MatrixHelper.Translate(ref matrix, mapCenterX - viewport.Center.X, mapCenterY - viewport.Center.Y);
-            if (viewport.IsRotated)
-            {
-                MatrixHelper.RotateAt(ref matrix, -viewport.Rotation);
-            }
-            MatrixHelper.ScaleAt(ref matrix, 1 / viewport.Resolution, 1 / viewport.Resolution, mapCenterX, mapCenterY);
-
-            // This will invert the Y axis, but will also put images upside down
-            MatrixHelper.InvertY(ref matrix, mapCenterY);
-            return matrix;
+            return CreateTransformMatrix(new Point(0, 0), viewport);
         }
 
         private static XamlShapes.Shape CreateSymbolFromBitmap(Stream data, double opacity)

@@ -12,9 +12,10 @@
     <FileAlignment>512</FileAlignment>
     <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
-    <TargetFrameworkVersion>v2.3</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0.3</TargetFrameworkVersion>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <AndroidUseLatestPlatformSdk>False</AndroidUseLatestPlatformSdk>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -57,12 +58,16 @@
     <AndroidResource Include="Resources\Values\Strings.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Mapsui.Geometries\Mapsui.Geometries.csproj">
+      <Project>{EE55B62D-FFA2-4C24-A4AD-7A47ACE55CE5}</Project>
+      <Name>Mapsui.Geometries</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Mapsui.Rendering.Android\Mapsui.Rendering.Android.csproj">
-      <Project>{F7193717-5F16-44C8-A90C-05A4173D353E}</Project>
+      <Project>{f7193717-5f16-44c8-a90c-05a4173d353e}</Project>
       <Name>Mapsui.Rendering.Android</Name>
     </ProjectReference>
     <ProjectReference Include="..\Mapsui.Rendering.OpenTK-A\Mapsui.Rendering.OpenTK-A.csproj">
-      <Project>{D7616DAD-25C1-4E3D-B0BD-1710382B60E5}</Project>
+      <Project>{d7616dad-25c1-4e3d-b0bd-1710382b60e5}</Project>
       <Name>Mapsui.Rendering.OpenTK-A</Name>
     </ProjectReference>
     <ProjectReference Include="..\Mapsui\Mapsui.csproj">

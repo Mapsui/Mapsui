@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 
@@ -15,11 +16,14 @@ namespace Mapsui.Styles
             get { return _instance ?? (_instance = new BitmapRegistry()); }
         }
 
-        public int Register(Stream stream)
+        public int Register(Stream bitmapData)
         {
+            if (bitmapData == null) throw new ArgumentException(
+                "The bitmap data that is registered is null. Was the image loaded correctly?");
+
             var id = _counter;
             _counter++;
-            _register[id] = stream;
+            _register[id] = bitmapData;
             return id;
         }
 

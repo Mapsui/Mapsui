@@ -6,7 +6,7 @@ namespace Mapsui.Rendering.OpenTK
 {
     public static class TextureHelper
     {
-        public static TextureInfo LoadTexture(Stream data)
+        public static TextureInfo LoadTexture(Stream textureData)
         {
             var textureInfo = new TextureInfo();
 
@@ -16,7 +16,7 @@ namespace Mapsui.Rendering.OpenTK
 
             SetParameters();
 
-            PlatformTextureLoader.TexImage2D(data, out textureInfo.Width, out textureInfo.Height);
+            PlatformTextureLoader.TexImage2D(textureData, out textureInfo.Width, out textureInfo.Height);
 
             GL.BindTexture(All.Texture2D, 0);
 
@@ -107,7 +107,7 @@ namespace Mapsui.Rendering.OpenTK
             GL.Color4((byte)255, (byte)255, (byte)255, (byte)(255 * opacity));
 
             GL.Enable(All.Blend); // Enables the alpha channel to be used in the color buffer
-            GL.BlendFunc(All.One, All.OneMinusSrcAlpha); //The operation/order to blend
+            GL.BlendFunc(All.SrcAlpha, All.OneMinusSrcAlpha); //The operation/order to blend
 
             GL.EnableClientState(All.VertexArray);
             GL.EnableClientState(All.TextureCoordArray);

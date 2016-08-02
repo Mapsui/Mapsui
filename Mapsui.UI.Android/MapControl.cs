@@ -19,8 +19,8 @@ namespace Mapsui.UI.Android
     public class MapControl : AndroidGameView
     {
         private const int None = 0;
-        private const int Drag = 1;
-        private const int Zoom = 2;
+        private const int Dragging = 1;
+        private const int Zooming = 2;
         private int _mode = None;
         private PointF _previousMap, _currentMap;
         private PointF _previousMid = new PointF();
@@ -60,8 +60,7 @@ namespace Mapsui.UI.Android
         {
             if (_viewportInitialized) return;
             if (Math.Abs(Width - 0f) < Utilities.Constants.Epsilon) return;
-            if (_map == null) return;
-            if (_map.Envelope == null) return;
+            if (_map?.Envelope == null) return;
             if (Math.Abs(_map.Envelope.Width - 0d) < Utilities.Constants.Epsilon) return;
             if (Math.Abs(_map.Envelope.Height - 0d) < Utilities.Constants.Epsilon) return;
             if (_map.Envelope.GetCentroid() == null) return;
@@ -90,7 +89,7 @@ namespace Mapsui.UI.Android
             {
             case MotionEventActions.Down:
                 _previousMap = null;
-                _mode = Drag;
+                _mode = Dragging;
                 break;
             case MotionEventActions.Up:
                 _previousMap = null;
@@ -102,18 +101,18 @@ namespace Mapsui.UI.Android
                 _oldDist = Spacing(args.Event);
                 MidPoint(_currentMid, args.Event);
                 _previousMid = _currentMid;
-                _mode = Zoom;
+                _mode = Zooming;
                 break;
             case MotionEventActions.Pointer2Up:
                 _previousMap = null;
                 _previousMid = null;
-                _mode = Drag;
+                _mode = Dragging;
                 _map.ViewChanged (true);
                 break;
             case MotionEventActions.Move:
                 switch (_mode)
                 {
-                case Drag:
+                case Dragging:
                     _currentMap = new PointF (x, y);
                     if (_previousMap != null) {
                         _map.Viewport.Transform (_currentMap.X, _currentMap.Y, _previousMap.X, _previousMap.Y);
@@ -121,7 +120,7 @@ namespace Mapsui.UI.Android
                     }
                     _previousMap = _currentMap;                    
                     break;
-                case Zoom:
+                case Zooming:
                     if (args.Event.PointerCount < 2) return;
 
                     var newDist = Spacing (args.Event);
@@ -207,7 +206,7 @@ namespace Mapsui.UI.Android
             ((Activity)Context).RunOnUiThread(new Runnable(RefreshGraphics));
         }
 
-        private void RefreshGraphics()
+        public void RefreshGraphics()
         {
             _refreshGraphics = true;
             Invalidate ();
@@ -273,7 +272,7 @@ namespace Mapsui.UI.Android
         private void OnViewportInitialized()
         {
             var handler = ViewportInitialized;
-            if (handler != null) handler(this, new EventArgs());
+            handler?.Invoke(this, new EventArgs());
         }
     }
 }

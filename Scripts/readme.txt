@@ -7,11 +7,11 @@ To also publish to nuget run buildpackpush like this:
 > buildpackpush 0.2.3
 
 Now the nuget package is pushed. The script also updates the version number. This needs to be committed:
-> hg commit m"0.2.3"
+> git commit m"0.2.3"
 
 and tag:
-> hg tag 0.2.3
+> git tag 0.2.3
 
 and push:
-> hg push
+> git push
 

@@ -63,13 +63,14 @@ namespace Mapsui.UI.Xaml
 
         public IRenderer Renderer { get; set; }
         private bool IsInBoxZoomMode { get; set; }
-        public IList<ILayer> MouseInfoOverLayers { get; private set; } // This should be on the Map
-        public IList<ILayer> MouseInfoUpLayers { get; private set; } // This should be on the Map
+        public IList<ILayer> MouseInfoOverLayers { get; } // This should be on the Map
+        public IList<ILayer> MouseInfoUpLayers { get; } // This should be on the Map
         public event EventHandler ViewportInitialized;
         public bool ZoomToBoxMode { get; set; }
 
-        [Obsolete("Map.Viewport instead")]
-        public IViewport Viewport { get { return Map.Viewport; } }
+        [Obsolete("Map.Viewport instead", true)]
+        public IViewport Viewport => Map.Viewport;
+
 
         public Map Map
         {
@@ -630,7 +631,7 @@ namespace Mapsui.UI.Xaml
             if (height <= 0) return;
 
             ZoomHelper.ZoomToBoudingbox(beginPoint.X, beginPoint.Y, endPoint.X, endPoint.Y, ActualWidth, out x, out y, out resolution);
-            resolution = ZoomHelper.ClipToExtremes(_map.Resolutions, resolution);
+            resolution = ZoomHelper.ClipResolutionToExtremes(_map.Resolutions, resolution);
 
             Map.Viewport.Center = new Geometries.Point(x, y);
             Map.Viewport.Resolution = resolution;

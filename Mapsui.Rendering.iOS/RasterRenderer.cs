@@ -1,11 +1,9 @@
 using System;
 using CoreGraphics;
 using Mapsui.Geometries;
-using CoreGraphics;
 using Mapsui.Styles;
 using Mapsui.Providers;
 using CoreAnimation;
-using System.Diagnostics;
 using Foundation;
 using UIKit;
 
@@ -17,7 +15,7 @@ namespace Mapsui.Rendering.iOS
 		{
 			const string styleKey = "laag";
 
-			if(feature[styleKey] == null) feature[styleKey] = ToiOSBitmap(feature.Geometry);
+  			if (feature[styleKey] == null) feature[styleKey] = ToiOSBitmap(feature.Geometry);
 
 			var bitmap = (UIImage)feature [styleKey];
 
@@ -33,13 +31,13 @@ namespace Mapsui.Rendering.iOS
 			var tile = new CALayer
 			{
 				Frame = destination,
-				Contents = bitmap.CGImage,
+				Contents = bitmap.CGImage
 			};
-			
+
 			target.AddSublayer(tile);
 		}
 
-		private static BoundingBox WorldToScreen(IViewport viewport, BoundingBox boundingBox)
+		static BoundingBox WorldToScreen(IViewport viewport, BoundingBox boundingBox)
 		{
 			var first = viewport.WorldToScreen(boundingBox.Min);
 			var second = viewport.WorldToScreen(boundingBox.Max);
@@ -53,7 +51,7 @@ namespace Mapsui.Rendering.iOS
 				);
 		}
 
-		public static CGRect RoundToPixel(BoundingBox dest)
+		static CGRect RoundToPixel(BoundingBox dest)
 		{
 			var height = (float)(Math.Round (dest.MaxY) - Math.Round (dest.MinY));
 
@@ -66,19 +64,18 @@ namespace Mapsui.Rendering.iOS
 			return frame;
 		}
 
-		private static void DrawRectangle(CGContext currentContext, CGRect destination, Color outlineColor)
+		static void DrawRectangle(CGContext currentContext, CGRect destination, Color outlineColor)
 		{
 			currentContext.SetStrokeColor (outlineColor.R, outlineColor.G, outlineColor.B, outlineColor.A);
 			currentContext.SetLineWidth ((nfloat)4f);
 			currentContext.StrokeRect ((CGRect)destination);
 		}
 
-		private static UIImage ToiOSBitmap(IGeometry geometry)
+		static UIImage ToiOSBitmap(IGeometry geometry)
 		{
 			var raster = (IRaster)geometry;
 			var rasterData = NSData.FromArray(raster.Data.ToArray());
 			var bitmap = UIImage.LoadFromData(rasterData);
-
 			return bitmap;
 		}
 	}

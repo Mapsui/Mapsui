@@ -20,6 +20,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Threading;
+using System.Threading.Tasks;
 using BruTile;
 using BruTile.Cache;
 using Mapsui.Annotations;
@@ -96,7 +97,7 @@ namespace Mapsui.Fetcher
         private void StartLoopThread()
         {
             _isThreadRunning = true;
-            ThreadPool.QueueUserWorkItem(TileFetchLoop);
+            Task.Run(() => TileFetchLoop());
         }
 
         public void AbortFetch()
@@ -105,7 +106,7 @@ namespace Mapsui.Fetcher
             _waitHandle.Set();
         }
 
-        private void TileFetchLoop(object state)
+        private void TileFetchLoop()
         {
             try
             {
@@ -188,7 +189,7 @@ namespace Mapsui.Fetcher
         private void StartFetchOnThread(TileInfo info)
         {
             var fetchOnThread = new FetchOnThread(_tileSource, info, LocalFetchCompleted);
-            ThreadPool.QueueUserWorkItem(fetchOnThread.FetchTile);
+            Task.Run(() => fetchOnThread.FetchTile());
         }
 
         private void LocalFetchCompleted(object sender, FetchTileCompletedEventArgs e)
@@ -238,12 +239,12 @@ namespace Mapsui.Fetcher
             public Retries(int maxRetries)
             {
                 _maxRetries = maxRetries;
-                _threadId = Thread.CurrentThread.ManagedThreadId;
+                _threadId = Environment.CurrentManagedThreadId;
             }
 
             public bool ReachedMax(TileIndex index)
             {
-                if (_threadId != Thread.CurrentThread.ManagedThreadId) throw new Exception(CrossThreadExceptionMessage);
+                if (_threadId != Environment.CurrentManagedThreadId) throw new Exception(CrossThreadExceptionMessage);
 
                 var retryCount = (!_retries.Keys.Contains(index)) ? 0 : _retries[index];
                 return retryCount > _maxRetries;
@@ -251,7 +252,7 @@ namespace Mapsui.Fetcher
 
             public void PlusOne(TileIndex index)
             {
-                if (_threadId != Thread.CurrentThread.ManagedThreadId) throw new Exception(CrossThreadExceptionMessage);
+                if (_threadId != Environment.CurrentManagedThreadId) throw new Exception(CrossThreadExceptionMessage);
 
                 if (!_retries.Keys.Contains(index)) _retries.Add(index, 0);
                 else _retries[index]++;
@@ -259,7 +260,7 @@ namespace Mapsui.Fetcher
 
             public void Clear()
             {
-                if (_threadId != Thread.CurrentThread.ManagedThreadId) throw new Exception(CrossThreadExceptionMessage);
+                if (_threadId != Environment.CurrentManagedThreadId) throw new Exception(CrossThreadExceptionMessage);
 
                 _retries.Clear();
             }

@@ -2,7 +2,7 @@ using Mapsui.Fetcher;
 using Mapsui.Geometries;
 using Mapsui.Providers;
 using System.Collections.Generic;
-using System.Threading;
+using System.Threading.Tasks;
 
 namespace Mapsui.Layers
 {
@@ -15,13 +15,7 @@ namespace Mapsui.Layers
             return DataSource.GetFeaturesInView(box, resolution);
         }
 
-        public override BoundingBox Envelope
-        {
-            get
-            {
-                return (DataSource == null) ? null : DataSource.GetExtents();
-            }
-        }
+        public override BoundingBox Envelope => DataSource?.GetExtents();
 
         public override void AbortFetch()
         {
@@ -31,7 +25,7 @@ namespace Mapsui.Layers
         public override void ViewChanged(bool majorChange, BoundingBox extent, double resolution)
         {
             //The MemoryLayer always has it's data ready so can fire a DataChanged event immediately so that listeners can act on it.
-            ThreadPool.QueueUserWorkItem(a => OnDataChanged(new DataChangedEventArgs()));
+            Task.Run(() => OnDataChanged(new DataChangedEventArgs()));
         }
 
         public override void ClearCache()

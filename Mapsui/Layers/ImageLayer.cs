@@ -22,6 +22,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using Mapsui.Utilities;
 
 namespace Mapsui.Layers
@@ -147,7 +148,7 @@ namespace Mapsui.Layers
                 
 
             var fetcher = new FeatureFetcher(extent, resolution, DataSource, DataArrived, DateTime.Now.Ticks);
-            ThreadPool.QueueUserWorkItem(fetcher.FetchOnThread);
+            Task.Run(() => fetcher.FetchOnThread());
         }
 
         protected virtual void DataArrived(IEnumerable<IFeature> features, object state)

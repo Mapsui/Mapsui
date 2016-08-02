@@ -35,7 +35,7 @@ namespace Mapsui.Fetcher
             _fetchTileCompleted = fetchTileCompleted;
         }
 
-        public void FetchTile(object state)
+        public void FetchTile()
         {
             Exception error = null;
             byte[] image = null;

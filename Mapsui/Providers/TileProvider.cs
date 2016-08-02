@@ -23,6 +23,7 @@ using BruTile;
 using BruTile.Cache;
 using Mapsui.Geometries;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace Mapsui.Providers
 {
@@ -59,7 +60,7 @@ namespace Mapsui.Providers
                 var waitHandle = new AutoResetEvent(false);
                 waitHandles.Add(waitHandle);
                 _queue.Add(info.Index);
-                ThreadPool.QueueUserWorkItem(GetTileOnThread, new object[] { _source, info, _bitmaps, waitHandle });
+                Task.Run(() => GetTileOnThread(new object[] { _source, info, _bitmaps, waitHandle }));
             }
 
             WaitHandle.WaitAll(waitHandles.ToArray());
@@ -77,7 +78,7 @@ namespace Mapsui.Providers
             return features;
         }
         
-        private void GetTileOnThread(object parameter)
+        private void GetTileOnThread(object parameter) // This could accept normal parameters now we use PCL Profile111
         {
             var parameters = (object[])parameter;
             if (parameters.Length != 4) throw new ArgumentException("Four parameters expected");

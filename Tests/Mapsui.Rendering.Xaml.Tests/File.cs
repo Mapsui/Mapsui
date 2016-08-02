@@ -8,7 +8,7 @@ namespace Mapsui.Rendering.Xaml.Tests
         private readonly static string OriginalImagesFolder = Path.Combine("Resources", "Images", "Original");
         private readonly static string GeneratedImagesFolder = Path.Combine("Resources", "Images", "Generated");
 
-        public static void Write(string fileName, MemoryStream stream)
+        public static void WriteToGeneratedFolder(string fileName, MemoryStream stream)
         {
             var filePath = Path.Combine(GeneratedImagesFolder, fileName);
             var folder = Path.GetDirectoryName(filePath);
@@ -21,11 +21,10 @@ namespace Mapsui.Rendering.Xaml.Tests
             }
         }
 
-        public static MemoryStream Read(string fileName)
+        public static Stream ReadFromOriginalFolder(string fileName)
         {
             var filePath = Path.Combine(OriginalImagesFolder, fileName);
-            var fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
-            return Mapsui.Tests.Common.Utilities.ToMemoryStream(fileStream);
+            return new FileStream(filePath, FileMode.Open, FileAccess.Read);
         }
     }
 }

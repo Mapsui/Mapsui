@@ -23,7 +23,7 @@ namespace Mapsui.Fetcher
             _timeOfRequest = timeOfRequest;
         }
 
-        public void FetchOnThread(object state)
+        public void FetchOnThread()
         {
             lock (_provider)
             {

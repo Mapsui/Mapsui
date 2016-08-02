@@ -10,15 +10,18 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using CGPoint = Mapsui.Geometries.Point;
+using System;
+using System.Diagnostics;
 
 namespace Mapsui.Rendering.iOS
 {
     public class MapRenderer : IRenderer
     {
-        private readonly UIView _target;
         public bool ShowDebugInfoInMap { get; set; }
 
-        static MapRenderer()
+		readonly UIView _target;
+
+		static MapRenderer()
         {
             DefaultRendererFactory.Create = () => new MapRenderer();
         }
@@ -36,24 +39,29 @@ namespace Mapsui.Rendering.iOS
         }
 
         public static void Render(UIView target, IViewport viewport, IEnumerable<ILayer> layers, bool showDebugInfoInMap)
-        {
-            CATransaction.Begin();
-            CATransaction.AnimationDuration = 0;
-            
-            if (target.Layer.Sublayers != null)
-            {
-                foreach (var layer in target.Layer.Sublayers)
-                {
-                    layer.RemoveFromSuperLayer();
-                }
-            }
-            
-            Render(target.Layer, viewport, layers);
+		{
+			CATransaction.Begin();
+			CATransaction.AnimationDuration = 0;
+			RemoveSublayers(target.Layer);
+			Render(target.Layer, viewport, layers);
 
-            CATransaction.Commit();
-        }
+			CATransaction.Commit();
+		}
 
-        public void Dispose()
+		static void RemoveSublayers(CALayer parent)
+		{
+			if (parent.Sublayers != null)
+			{
+				foreach (var layer in parent.Sublayers)
+				{
+					RemoveSublayers(layer);
+					layer.RemoveFromSuperLayer();
+					layer.Dispose();
+				}
+			}
+		}
+
+		public void Dispose()
         {
             if (_target.Layer.Sublayers != null)
             {
@@ -65,18 +73,18 @@ namespace Mapsui.Rendering.iOS
             }
         }
 
-        private static void Render(CALayer target, IViewport viewport, IEnumerable<ILayer> layers)
-        {
-            layers = layers.ToList();
-            VisibleFeatureIterator.IterateLayers(viewport, layers, (v, s, f) => RenderGeometry(target, v, s, f));
-        }
-
         public MemoryStream RenderToBitmapStream(IViewport viewport, IEnumerable<ILayer> layers)
         {
             return RenderToBitmapStreamStatic(viewport, layers);
         }
 
-        private static MemoryStream RenderToBitmapStreamStatic(IViewport viewport, IEnumerable<ILayer> layers)
+		static void Render(CALayer target, IViewport viewport, IEnumerable<ILayer> layers)
+		{
+			layers = layers.ToList();
+			VisibleFeatureIterator.IterateLayers(viewport, layers, (v, s, f) => RenderGeometry(target, v, s, f));
+		}
+
+        static MemoryStream RenderToBitmapStreamStatic(IViewport viewport, IEnumerable<ILayer> layers)
         {
             UIImage image = null;
             var handle = new ManualResetEvent(false);
@@ -84,11 +92,21 @@ namespace Mapsui.Rendering.iOS
             var view = new UIView();
             view.InvokeOnMainThread(() =>
             {
-                view.Opaque = false;
-                view.BackgroundColor = UIColor.Clear;
-                Render(view, viewport, layers, false);
-                image = ToImage(view, new CGRect(0, 0, (float)viewport.Width, (float)viewport.Height));
-                handle.Set();
+				try
+				{
+					view.Opaque = false;
+					view.BackgroundColor = UIColor.Clear;
+					Render(view, viewport, layers, false);
+					image = ToImage(view, new CGRect(0, 0, (float)viewport.Width, (float)viewport.Height));
+				}
+				catch (Exception ex)
+				{
+					Debug.WriteLine($"Exception in {nameof(RenderToBitmapStreamStatic)}: {ex}");
+				}
+				finally
+				{
+					handle.Set();
+				}
             });
 
             handle.WaitOne();
@@ -98,18 +116,18 @@ namespace Mapsui.Rendering.iOS
             }
         }
 
-        private static UIImage ToImage(UIView view, CGRect frame)
+        static UIImage ToImage(UIView view, CGRect frame)
         {
-            UIGraphics.BeginImageContext((CGSize)frame.Size);
+            UIGraphics.BeginImageContext(frame.Size);
             UIColor.Clear.SetColor();
-            UIGraphics.RectFill((CGRect)view.Frame);
+            UIGraphics.RectFill(view.Frame);
             view.Layer.RenderInContext(UIGraphics.GetCurrentContext());
             var image = UIGraphics.GetImageFromCurrentImageContext();
             UIGraphics.EndImageContext();
             return image;
         }
 
-        private static void RenderGeometry(CALayer target, IViewport viewport, IStyle style, IFeature feature)
+        static void RenderGeometry(CALayer target, IViewport viewport, IStyle style, IFeature feature)
         {
             if (feature.Geometry is CGPoint)
             {

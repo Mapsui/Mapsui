@@ -12,10 +12,12 @@ namespace Mapsui.Rendering.OpenTK
     /// </summary>
     public class PlatformTextureLoader
     {
-        public static void TexImage2D(Stream data, out int width, out int height)
+        public static void TexImage2D(Stream textureData, out int width, out int height)
         {
-			data.Position = 0;		
-			var nsData = NSData.FromStream(data);
+            if (textureData == null) throw new ArgumentException("Texture data is null");
+
+            textureData.Position = 0;		
+			var nsData = NSData.FromStream(textureData);
 
 			var image = UIImage.LoadFromData(nsData);
 			if (image == null) throw new Exception ("could not load image data");

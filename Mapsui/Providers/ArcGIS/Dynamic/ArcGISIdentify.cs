@@ -53,7 +53,8 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
         /// <param name="mapDpi">The screen image display dpi, default is: 96</param>
         /// <param name="returnGeometry"></param>
         /// <param name="credentials"></param>
-        public void Request(string url, double x, double y, int tolerance, string[] layers, double extendXmin, double extendYmin, double extendXmax, double extendYmax, double mapWidth, double mapHeight, double mapDpi, bool returnGeometry, ICredentials credentials = null)
+        /// <param name="sr">sr code of input geometry</param>
+        public void Request(string url, double x, double y, int tolerance, string[] layers, double extendXmin, double extendYmin, double extendXmax, double extendYmax, double mapWidth, double mapHeight, double mapDpi, bool returnGeometry, ICredentials credentials = null, int sr = int.MinValue)
         {
             //remove trailing slash from url
             if (url.Length > 0 && url[url.Length - 1].Equals('/'))
@@ -63,7 +64,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
             var layersString = CreateLayersString(layers);
             var mapExtend = string.Format(CultureInfo.InvariantCulture, "{0},{1},{2},{3}", extendXmin, extendYmin, extendXmax, extendYmax);
             var imageDisplay = string.Format(CultureInfo.InvariantCulture, "{0},{1},{2}", mapWidth, mapHeight, mapDpi);
-            var requestUrl = string.Format("{0}/identify?f=pjson&geometryType=esriGeometryPoint&geometry={1}&tolerance={2}{3}&mapExtent={4}&imageDisplay={5}&returnGeometry={6}", url, pointGeom, tolerance, layersString, mapExtend, imageDisplay, returnGeometry);
+            var requestUrl = string.Format("{0}/identify?f=pjson&geometryType=esriGeometryPoint&geometry={1}&tolerance={2}{3}&mapExtent={4}&imageDisplay={5}&returnGeometry={6}{7}", url, pointGeom, tolerance, layersString, mapExtend, imageDisplay, returnGeometry, sr != int.MinValue ? string.Format("&sr={0}", sr) : "");
 
             _webRequest = (HttpWebRequest)WebRequest.Create(requestUrl);
             if (credentials == null)

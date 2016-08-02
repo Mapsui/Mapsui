@@ -7,9 +7,7 @@ namespace Mapsui.Samples.Common.Desktop
     {
         public static ILayer Create()
         {
-            var provider = CreateWmsProvider();
-            var layer = new ImageLayer("WmsLayer") {DataSource = provider};
-            return layer;
+            return new ImageLayer("WmsLayer") { DataSource = CreateWmsProvider() };
         }
 
         private static WmsProvider CreateWmsProvider()

@@ -5,7 +5,7 @@
 	<key>CFBundleDisplayName</key>
 	<string>Mapsui.Samples.iOS</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.your-company.Mapsui.Samples.iOS</string>
+	<string>com.mapsui.sampleapp</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
@@ -13,7 +13,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>MinimumOSVersion</key>
-	<string>7.0</string>
+	<string>9.3</string>
 	<key>UIDeviceFamily</key>
 	<array>
 		<integer>2</integer>
@@ -30,6 +30,10 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>NSMainNibFile~ipad</key>
+	<string>MainWindow</string>
+	<key>CFBundleName</key>
+	<string>Mapsui.Samples.iOS</string>
+	<key>UIMainNibFile</key>
 	<string>MainWindow</string>
 </dict>
 </plist>

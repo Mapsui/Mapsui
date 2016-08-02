@@ -26,24 +26,24 @@ namespace Mapsui.Utilities
         {
             if (resolutions.Count == 0) return resolution / 2.0;
             
-            //smaller than smallest
+            // smaller than smallest
             if (resolutions[resolutions.Count - 1] > resolution) return resolutions[resolutions.Count - 1];
 
-            foreach (double resolutionOfLevel in resolutions)
+            foreach (var resolutionOfLevel in resolutions)
             {
                 if (resolutionOfLevel < resolution) return resolutionOfLevel;
             }
             return resolutions[resolutions.Count - 1];
         }
 
-        public static double ClipToExtremes(IList<double> resolutions, double resolution)
+        public static double ClipResolutionToExtremes(IList<double> resolutions, double resolution)
         {
             if (resolutions.Count == 0) return resolution;
 
-            //smaller than smallest
+            // smaller than smallest
             if (resolutions[resolutions.Count - 1] > resolution) return resolutions[resolutions.Count - 1];
 
-            //bigger than biggest
+            // bigger than biggest
             if (resolutions[0] < resolution) return resolutions[0];
 
             return resolution;
@@ -56,7 +56,7 @@ namespace Mapsui.Utilities
             //bigger than biggest
             if (resolutions[0] < resolution) return resolutions[0];
 
-            for (int i = resolutions.Count - 1; i >= 0; i--)
+            for (var i = resolutions.Count - 1; i >= 0; i--)
             {
                 if (resolutions[i] > resolution) return resolutions[i];
             }

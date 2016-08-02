@@ -46,6 +46,10 @@ namespace Mapsui
             Viewport =  new Viewport { Center = { X = double.NaN, Y = double.NaN }, Resolution = double.NaN };
         }
 
+
+        /// <summary>
+        /// When Lock is true the map view will not respond to touch input.
+        /// </summary>
         public bool Lock
         {
             get { return _lock; }
@@ -84,7 +88,7 @@ namespace Mapsui
             }
         }
 
-        public Viewport Viewport { get; private set; }
+        public Viewport Viewport { get; }
 
         public void NavigateTo(BoundingBox extent, ScaleMethod scaleMethod = ScaleMethod.Fit)
         {
@@ -154,7 +158,7 @@ namespace Mapsui
             get 
             { 
                 var baseLayer = Layers.FirstOrDefault(l => l.Enabled && l is ITileLayer) as ITileLayer;
-                if (baseLayer == null || baseLayer.Schema == null) return new List<double>();
+                if (baseLayer?.Schema == null) return new List<double>();
                 return baseLayer.Schema.Resolutions.Select(r => r.Value.UnitsPerPixel).ToList();
             }
         }
@@ -200,7 +204,7 @@ namespace Mapsui
         protected virtual void OnRefreshGraphics()
         {
             var handler = RefreshGraphics;
-            if (handler != null) RefreshGraphics(this, EventArgs.Empty);
+            if (handler != null) handler(this, EventArgs.Empty);
         }
 
         protected virtual void OnPropertyChanged(object sender, string propertyName)
@@ -221,10 +225,8 @@ namespace Mapsui
         
         private void OnDataChanged(object sender, DataChangedEventArgs e)
         {
-            if (DataChanged != null)
-            {
-                DataChanged(sender, e);
-            }
+            var handler = DataChanged;
+            if (handler != null) handler(sender, e);
         }
 
         public void AbortFetch()

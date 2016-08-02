@@ -10,12 +10,11 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Mapsui</RootNamespace>
     <AssemblyName>Mapsui</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Profile336</TargetFrameworkProfile>
+    <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
-    <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile>Profile111</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -35,15 +34,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Converters\WellKnownBinary\GeometryFromWKB.cs" />
-    <Compile Include="Converters\WellKnownBinary\GeometryToWKB.cs" />
-    <Compile Include="Converters\WellKnownBinary\WKBByteOrder.cs" />
-    <Compile Include="Converters\WellKnownBinary\WKBGeometryType.cs" />
-    <Compile Include="Converters\WellKnownText\GeometryFromWKT.cs" />
-    <Compile Include="Converters\WellKnownText\GeometryToWKT.cs" />
-    <Compile Include="Converters\WellKnownText\StreamTokenizer.cs" />
-    <Compile Include="Converters\WellKnownText\TokenType.cs" />
-    <Compile Include="Converters\WellKnownText\WKTStreamTokenizer.cs" />
+    <!-- A reference to the entire .NET Framework is automatically included -->
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="ExtensionMethods\BoundingBoxExtensions.cs" />
     <Compile Include="ExtensionMethods\FeatureExtensions.cs" />
     <Compile Include="ExtensionMethods\GeometryExtensions.cs" />
@@ -54,30 +48,7 @@
     <Compile Include="Fetcher\IAsyncDataFetcher.cs" />
     <Compile Include="Fetcher\IFetchStrategy.cs" />
     <Compile Include="Fetcher\TileFetcher.cs" />
-    <Compile Include="Geometries\BoundingBox.cs" />
-    <Compile Include="Geometries\Curve.cs" />
-    <Compile Include="Geometries\Geometry.cs" />
-    <Compile Include="Geometries\GeometryCollection.cs" />
-    <Compile Include="Geometries\GeometryType.cs" />
-    <Compile Include="Geometries\IGeometry.cs" />
-    <Compile Include="Geometries\IGeometryCollection.cs" />
-    <Compile Include="Geometries\IRaster.cs" />
-    <Compile Include="Geometries\ISpatialReference.cs" />
-    <Compile Include="Geometries\LinearRing.cs" />
-    <Compile Include="Geometries\LineString.cs" />
-    <Compile Include="Geometries\MultiCurve.cs" />
-    <Compile Include="Geometries\MultiLineString.cs" />
-    <Compile Include="Geometries\MultiPoint.cs" />
-    <Compile Include="Geometries\MultiPolygon.cs" />
-    <Compile Include="Geometries\MultiSurface.cs" />
     <Compile Include="Geometries\NotifyingPoint.cs" />
-    <Compile Include="Geometries\Point.cs" />
-    <Compile Include="Geometries\Point3D.cs" />
-    <Compile Include="Geometries\Polygon.cs" />
-    <Compile Include="Geometries\Quad.cs" />
-    <Compile Include="Geometries\Raster.cs" />
-    <Compile Include="Geometries\SpatialRelations.cs" />
-    <Compile Include="Geometries\Surface.cs" />
     <Compile Include="Layers\AnimatedFeatures.cs" />
     <Compile Include="Layers\AnimatedPointLayer.cs" />
     <Compile Include="Layers\TmsTileSourceBuilder.cs" />
@@ -166,30 +137,41 @@
     <Compile Include="Styles\Thematics\IThemeStyle.cs" />
     <Compile Include="Styles\Thematics\ThemeStyle.cs" />
     <Compile Include="Styles\VectorStyle.cs" />
-    <Compile Include="Utilities\Algorithms.cs" />
-    <Compile Include="Utilities\CGAlgoritm.cs" />
     <Compile Include="Utilities\Constants.cs" />
     <Compile Include="Utilities\DeveloperTools.cs" />
+    <Compile Include="Utilities\EmbeddedResourceLoader.cs" />
     <Compile Include="Utilities\Extensions.cs" />
     <Compile Include="Utilities\LeastSquaresTransform.cs" />
     <Compile Include="Utilities\ProjectionHelper.cs" />
     <Compile Include="Utilities\Providers.cs" />
+    <Compile Include="Utilities\Timer.cs" />
     <Compile Include="Utilities\Version.cs" />
     <Compile Include="Utilities\ZoomHelper.cs" />
     <Compile Include="Viewport.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="BruTile">
-      <HintPath>..\packages\BruTile.0.12.0\lib\portable-net403+sl50+win+wpa81+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10\BruTile.dll</HintPath>
+    <Reference Include="BruTile, Version=0.18.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\BruTile.0.18.2\lib\portable-net45+win+WindowsPhoneApp81+Xamarin.iOS10+MonoAndroid10+MonoTouch10\BruTile.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="BruTile.MbTiles, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\BruTile.0.18.2\lib\portable-net45+win+WindowsPhoneApp81+Xamarin.iOS10+MonoAndroid10+MonoTouch10\BruTile.MbTiles.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLite.Net, Version=3.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SQLite.Net.Core-PCL.3.1.0\lib\portable-win8+net45+wp8+wpa81+MonoAndroid1+MonoTouch1\SQLite.Net.dll</HintPath>
+      <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <ProjectReference Include="..\Mapsui.Geometries\Mapsui.Geometries.csproj">
+      <Project>{EE55B62D-FFA2-4C24-A4AD-7A47ACE55CE5}</Project>
+      <Name>Mapsui.Geometries</Name>
+    </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

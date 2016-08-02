@@ -11,8 +11,8 @@ namespace Mapsui.Projection
 
         public static Point FromLonLat(double lon, double lat)
         {
-            var lonRadians = (D2R * lon);
-            var latRadians = (D2R * lat);
+            var lonRadians = D2R * lon;
+            var latRadians = D2R * lat;
 
             var x = Radius * lonRadians;
             var y = Radius * Math.Log(Math.Tan(Math.PI * 0.25 + latRadians * 0.5));
@@ -25,10 +25,10 @@ namespace Mapsui.Projection
             var ts = Math.Exp(-y / (Radius));
             var latRadians = HalfPi - 2 * Math.Atan(ts);
 
-            var lonRadians = x / (Radius);
+            var lonRadians = x / Radius;
 
-            var lon = (lonRadians / D2R);
-            var lat = (latRadians / D2R);
+            var lon = lonRadians / D2R;
+            var lat = latRadians / D2R;
 
             return new Point((float)lon, (float)lat);
         }

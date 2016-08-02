@@ -6,6 +6,7 @@ using Mapsui.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using Mapsui.Utilities;
 
 namespace Mapsui.Layers
 {
