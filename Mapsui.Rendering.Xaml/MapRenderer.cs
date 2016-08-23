@@ -198,7 +198,7 @@ namespace Mapsui.Rendering.Xaml
 
                 var features = layer.GetFeaturesInView(viewport.Extent, viewport.RenderResolution).ToList();
                 var layerStyles = BaseLayer.GetLayerStyles(layer);
-                var brushCache = new Dictionary<int, XamlMedia.ImageBrush>();
+                var brushCache = new BrushCache();
 
                 foreach (var layerStyle in layerStyles)
                 {
@@ -233,7 +233,7 @@ namespace Mapsui.Rendering.Xaml
             }
         }
 
-        private static void RenderFeature(IViewport viewport, Canvas canvas, IFeature feature, IStyle style, bool rasterizing, Dictionary<int, XamlMedia.ImageBrush> brushCache = null)
+        private static void RenderFeature(IViewport viewport, Canvas canvas, IFeature feature, IStyle style, bool rasterizing, BrushCache brushCache = null)
         {
             if (style is LabelStyle)
             {
@@ -258,7 +258,7 @@ namespace Mapsui.Rendering.Xaml
             }
         }
 
-        private static Shape RenderGeometry(IViewport viewport, IStyle style, IFeature feature, Dictionary<int, XamlMedia.ImageBrush> brushCache = null)
+        private static Shape RenderGeometry(IViewport viewport, IStyle style, IFeature feature, BrushCache brushCache = null)
         {
             if (feature.Geometry is Geometries.Point)
                 return GeometryRenderer.RenderPoint(feature.Geometry as Geometries.Point, style, viewport, brushCache);
@@ -269,7 +269,7 @@ namespace Mapsui.Rendering.Xaml
             if (feature.Geometry is MultiLineString)
                 return GeometryRenderer.RenderMultiLineString(feature.Geometry as MultiLineString, style, viewport);
             if (feature.Geometry is Polygon)
-                return GeometryRenderer.RenderPolygon(feature.Geometry as Polygon, style, viewport);
+                return GeometryRenderer.RenderPolygon(feature.Geometry as Polygon, style, viewport, brushCache);
             if (feature.Geometry is MultiPolygon)
                 return GeometryRenderer.RenderMultiPolygon(feature.Geometry as MultiPolygon, style, viewport);
             if (feature.Geometry is IRaster)
