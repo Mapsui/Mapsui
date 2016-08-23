@@ -8,18 +8,19 @@ using Mapsui.Styles.Thematics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows.Media;
 using Polygon = Mapsui.Geometries.Polygon;
 #if !NETFX_CORE
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Shapes;
 using System.Globalization;
+using XamlMedia = System.Windows.Media;
 #else
 using Windows.UI.Xaml.Controls;
 using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Shapes;
+using XamlMedia = Windows.UI.Xaml.Media;
 #endif
 
 namespace Mapsui.Rendering.Xaml
@@ -197,7 +198,7 @@ namespace Mapsui.Rendering.Xaml
 
                 var features = layer.GetFeaturesInView(viewport.Extent, viewport.RenderResolution).ToList();
                 var layerStyles = BaseLayer.GetLayerStyles(layer);
-                var brushCache = new Dictionary<int, ImageBrush>();
+                var brushCache = new Dictionary<int, XamlMedia.ImageBrush>();
 
                 foreach (var layerStyle in layerStyles)
                 {
@@ -232,7 +233,7 @@ namespace Mapsui.Rendering.Xaml
             }
         }
 
-        private static void RenderFeature(IViewport viewport, Canvas canvas, IFeature feature, IStyle style, bool rasterizing, Dictionary<int, ImageBrush> brushCache = null)
+        private static void RenderFeature(IViewport viewport, Canvas canvas, IFeature feature, IStyle style, bool rasterizing, Dictionary<int, XamlMedia.ImageBrush> brushCache = null)
         {
             if (style is LabelStyle)
             {
@@ -257,7 +258,7 @@ namespace Mapsui.Rendering.Xaml
             }
         }
 
-        private static Shape RenderGeometry(IViewport viewport, IStyle style, IFeature feature, Dictionary<int, ImageBrush> brushCache = null)
+        private static Shape RenderGeometry(IViewport viewport, IStyle style, IFeature feature, Dictionary<int, XamlMedia.ImageBrush> brushCache = null)
         {
             if (feature.Geometry is Geometries.Point)
                 return GeometryRenderer.RenderPoint(feature.Geometry as Geometries.Point, style, viewport, brushCache);
@@ -295,4 +296,3 @@ namespace Mapsui.Rendering.Xaml
         }
     }
 }
-
