@@ -17,24 +17,33 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
         private string _url;
         private string _crs;
 
+        public string Token { get; set; }
+
         /// <summary>
         /// Create ArcGisDynamicProvider based on a given capabilities file
         /// </summary>
         /// <param name="url">url to map service example: http://url/arcgis/rest/services/test/MapServer</param>
         /// <param name="arcGisDynamicCapabilities"></param>
-        public ArcGISDynamicProvider(string url, ArcGISDynamicCapabilities arcGisDynamicCapabilities)
+        /// <param name="token">token to request service</param>        
+        public ArcGISDynamicProvider(string url, ArcGISDynamicCapabilities arcGisDynamicCapabilities, string token = null)
         {
+            _timeOut = 10000;
+            Token = token;
+
             Url = url;
             ArcGisDynamicCapabilities = arcGisDynamicCapabilities;
-            _timeOut = 10000;            
         }
+
 
         /// <summary>
         /// Create ArcGisDynamicProvider, capabilities will be parsed automatically
         /// </summary>
-        /// <param name="url">url to map service example: http://url/arcgis/rest/services/test/MapServer</param>        
-        public ArcGISDynamicProvider(string url)
+        /// <param name="url">url to map service example: http://url/arcgis/rest/services/test/MapServer</param>
+        /// <param name="token">token to request service</param>        
+        public ArcGISDynamicProvider(string url, string token = null)
         {
+            _timeOut = 10000;
+            Token = token;
             Url = url;
 
             ArcGisDynamicCapabilities = new ArcGISDynamicCapabilities
@@ -46,9 +55,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
             var capabilitiesHelper = new CapabilitiesHelper();
             capabilitiesHelper.CapabilitiesReceived += CapabilitiesHelperCapabilitiesReceived;
             capabilitiesHelper.CapabilitiesFailed += CapabilitiesHelperCapabilitiesFailed;
-            capabilitiesHelper.GetCapabilities(url, CapabilitiesType.DynamicServiceCapabilities);
-
-            _timeOut = 10000;
+            capabilitiesHelper.GetCapabilities(url, CapabilitiesType.DynamicServiceCapabilities, token);            
         }
 
         public ArcGISDynamicCapabilities ArcGisDynamicCapabilities { get; private set; }
@@ -181,6 +188,10 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
             strReq.AppendFormat("&size={0},{1}", width, height);
             strReq.Append("&layers=show:");
 
+            if (!string.IsNullOrEmpty(Token))
+            {
+                strReq.Append($"&token={Token}");
+            }
             /* 
              * Add all layers to the request that have defaultVisibility to true, the normal request to ArcGIS allready does this already
              * without specifying "layers=show", but this adds the opportunity for the user to set the defaultVisibility of layers
