@@ -7,9 +7,11 @@ using XamlColor = System.Windows.Media.Color;
 using System.Windows;
 using System.Collections;
 using System.Collections.Generic;
+using XamlMedia = System.Windows.Media;
 #else
 using XamlBrush = Windows.UI.Xaml.Media.Brush;
 using Windows.UI.Xaml.Media;
+using XamlMedia = Windows.UI.Xaml.Media;
 #endif
 using Mapsui.Styles;
 
@@ -46,7 +48,7 @@ namespace Mapsui.Rendering.Xaml
             return null;
         }
 
-        public static XamlBrush MapsuiBrushToXaml(Styles.Brush brush)
+        public static XamlBrush MapsuiBrushToXaml(Styles.Brush brush, BrushCache brushCache = null)
         {
 #if !SILVERLIGHT && !NETFX_CORE
             switch (brush.FillStyle)
@@ -56,7 +58,7 @@ namespace Mapsui.Rendering.Xaml
                 case FillStyle.BackwardDiagonal:
                     return CreateHatchBrush(brush, 10, 10, new List<Geometry> { Geometry.Parse("M 0 10 l 10 -10"), Geometry.Parse("M -0.5 0.5 l 10 -10"), Geometry.Parse("M 8 12 l 10 -10") });                    
                 case FillStyle.Bitmap:
-                    return CreateImageBrush(brush);
+                    return CreateImageBrush(brush, brushCache);
                 case FillStyle.Dotted:
                     return DottedBrush(brush);
                 case FillStyle.DiagonalCross:
@@ -107,9 +109,14 @@ namespace Mapsui.Rendering.Xaml
             return CreatePatternVisual(elements, viewport, viewbox);
         }
 
-        private static ImageBrush CreateImageBrush(Styles.Brush brush)
+        private static ImageBrush CreateImageBrush(Styles.Brush brush, BrushCache brushCache = null)
         {
-            var bmp = BitmapRegistry.Instance.Get(brush.BitmapId).CreateBitmapImage();
+            return brushCache != null ? brushCache.GetImageBrush(brush.BitmapId, CreateImageBrush) : CreateImageBrush(BitmapRegistry.Instance.Get(brush.BitmapId));
+        }
+
+        private static XamlMedia.ImageBrush CreateImageBrush(System.IO.Stream stream)
+        {
+            var bmp = stream.CreateBitmapImage();
 
             var imageBrush = new ImageBrush(bmp)
             {

@@ -34,7 +34,7 @@ namespace Mapsui.Rendering.Xaml
     /// </remarks>
     public static class GeometryRenderer
     {
-        public static XamlShapes.Shape RenderPoint(Point point, IStyle style, IViewport viewport, Dictionary<int, XamlMedia.ImageBrush> brushCache = null)
+        public static XamlShapes.Shape RenderPoint(Point point, IStyle style, IViewport viewport, BrushCache brushCache = null)
         {
             XamlShapes.Shape symbol;
             var matrix = XamlMedia.Matrix.Identity;
@@ -138,9 +138,21 @@ namespace Mapsui.Rendering.Xaml
             return CreateTransformMatrix(new Point(0, 0), viewport);
         }
 
-        private static XamlShapes.Shape CreateSymbolFromBitmap(int bmpId, double opacity, Dictionary<int, XamlMedia.ImageBrush> brushCache = null)
+        private static XamlShapes.Shape CreateSymbolFromBitmap(int bmpId, double opacity, BrushCache brushCache = null)
         {
-            var imageBrush = GetImageBrush(bmpId, brushCache);
+            XamlMedia.ImageBrush imageBrush;
+
+            if (brushCache == null)
+            {
+                var data = BitmapRegistry.Instance.Get(bmpId);
+                var bitmapImage = data.CreateBitmapImage();
+                imageBrush = new XamlMedia.ImageBrush { ImageSource = bitmapImage };
+            }
+            else
+            {
+                imageBrush = brushCache.GetImageBrush(bmpId);
+            }
+
             var width = imageBrush.ImageSource.Width;
             var height = imageBrush.ImageSource.Height;
 
@@ -287,12 +299,12 @@ namespace Mapsui.Rendering.Xaml
             return path;
         }
 
-        public static XamlShapes.Shape RenderPolygon(Polygon polygon, IStyle style, IViewport viewport)
+        public static XamlShapes.Shape RenderPolygon(Polygon polygon, IStyle style, IViewport viewport, BrushCache brushCache = null)
         {
             if (!(style is VectorStyle)) throw new ArgumentException("Style is not of type VectorStyle");
             var vectorStyle = style as VectorStyle;
 
-            XamlShapes.Path path = CreatePolygonPath(vectorStyle, viewport.Resolution);
+            XamlShapes.Path path = CreatePolygonPath(vectorStyle, viewport.Resolution, brushCache);
             path.Data = polygon.ToXaml();
 
             var matrixTransform = new XamlMedia.MatrixTransform { Matrix = CreateTransformMatrix1(viewport) };
@@ -304,7 +316,7 @@ namespace Mapsui.Rendering.Xaml
             return path;
         }
 
-        private static XamlShapes.Path CreatePolygonPath(VectorStyle style, double resolution)
+        private static XamlShapes.Path CreatePolygonPath(VectorStyle style, double resolution, BrushCache brushCache = null)
         {
             var path = new XamlShapes.Path();
 
@@ -316,7 +328,7 @@ namespace Mapsui.Rendering.Xaml
                 path.Tag = style.Outline.Width; // see #linewidthhack
             }
 
-            path.Fill = style.Fill.ToXaml();
+            path.Fill = style.Fill.ToXaml(brushCache);
             path.IsHitTestVisible = false;
             return path;
         }
@@ -378,23 +390,6 @@ namespace Mapsui.Rendering.Xaml
                 IsHitTestVisible = false
             };
             return path;
-        }
-
-        // Try to get an imagebrush from cache by given BitmapRegistry id, if not exist
-        // create a new brush and return it.
-        private static XamlMedia.ImageBrush GetImageBrush(int bmpId, IDictionary<int, XamlMedia.ImageBrush> brushCache = null)
-        {
-            if (brushCache != null && brushCache.ContainsKey(bmpId))
-                return brushCache[bmpId];
-
-            var data = BitmapRegistry.Instance.Get(bmpId);
-            var bitmapImage = data.CreateBitmapImage();
-            var fill = new XamlMedia.ImageBrush { ImageSource = bitmapImage };
-
-            if(brushCache != null)
-                brushCache[bmpId] = fill;
-
-            return fill;
         }
 
         public static Rect RoundToPixel(Rect dest)

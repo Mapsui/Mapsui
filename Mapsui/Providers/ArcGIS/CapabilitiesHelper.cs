@@ -17,8 +17,7 @@ namespace Mapsui.Providers.ArcGIS
     }
 
     public class CapabilitiesHelper
-    {
-        
+    {        
         private HttpWebRequest _webRequest { get; set; }
         private IArcGISCapabilities _arcGisCapabilities { get; set; }
         private CapabilitiesType _capabilitiesType;
@@ -59,16 +58,42 @@ namespace Mapsui.Providers.ArcGIS
         /// </summary>
         /// <param name="url">Url of map service example: http://url/arcgis/rest/services/test/MapServer </param>
         /// <param name="capabilitiesType"></param>
+        public void GetCapabilities(string url, CapabilitiesType capabilitiesType)
+        {
+            ExecuteRequest(url, capabilitiesType);
+        }
+
+        /// <summary>
+        /// Get the capabilities of an ArcGIS Map Service
+        /// </summary>
+        /// <param name="url">Url of map service example: http://url/arcgis/rest/services/test/MapServer </param>
+        /// <param name="capabilitiesType"></param>
+        /// <param name="token">Token string to access the service </param>
+        public void GetCapabilities(string url, CapabilitiesType capabilitiesType, string token = null)
+        {
+            ExecuteRequest(url, capabilitiesType, null, token);
+        }
+
+        /// <summary>
+        /// Get the capabilities of an ArcGIS Map Service
+        /// </summary>
+        /// <param name="url">Url of map service example: http://url/arcgis/rest/services/test/MapServer </param>
+        /// <param name="capabilitiesType"></param>
         /// <param name="credentials">Credentials to access the service </param>
         public void GetCapabilities(string url, CapabilitiesType capabilitiesType, ICredentials credentials = null)
         {
-            _capabilitiesType = capabilitiesType;
-            //Check if user added a trailing slash and remove if exist, some webservers can't handle this
-            _url = url;
-            if (url[url.Length - 1].Equals('/'))
-                _url = url.Remove(url.Length - 1);
+            ExecuteRequest(url, capabilitiesType, credentials);
+        }
 
-            var requestUri = string.Format("{0}?f=json", _url);
+        private void ExecuteRequest(string url, CapabilitiesType capabilitiesType, ICredentials credentials = null, string token = null)
+        {
+            _capabilitiesType = capabilitiesType;
+            _url = RemoveTrailingSlash(url);
+
+            var requestUri = $"{_url}?f=json";
+            if (!string.IsNullOrEmpty(token))
+                requestUri = $"{requestUri}&token={token}";
+
             _webRequest = (HttpWebRequest)WebRequest.Create(requestUri);
             if (credentials == null)
                 _webRequest.UseDefaultCredentials = true;
@@ -76,6 +101,14 @@ namespace Mapsui.Providers.ArcGIS
                 _webRequest.Credentials = credentials;
 
             _webRequest.BeginGetResponse(FinishWebRequest, null);
+        }
+
+        private string RemoveTrailingSlash(string url)
+        {
+            if (url[url.Length - 1].Equals('/'))
+                url = url.Remove(url.Length - 1);
+
+            return url;
         }
 
         private void FinishWebRequest(IAsyncResult result)
