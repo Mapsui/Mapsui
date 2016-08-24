@@ -62,6 +62,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BrushCache.cs" />
     <Compile Include="GeometryExtensions.cs" />
     <Compile Include="GeometryRenderer.cs" />
     <Compile Include="LabelRenderer.cs" />
