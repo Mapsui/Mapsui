@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.IO;
 using System.Windows;
 using Mapsui.Styles;
@@ -13,7 +14,6 @@ using WinPoint = Windows.Foundation.Point;
 using WinColor = Windows.UI.Color;
 #endif
 
-
 namespace Mapsui.Rendering.Xaml
 {
     static class StyleExtensions
@@ -28,9 +28,9 @@ namespace Mapsui.Rendering.Xaml
             return WinColor.FromArgb((byte)color.A, (byte)color.R, (byte)color.G, (byte)color.B);
         }
         
-        public static Media.Brush ToXaml(this Brush brush)
+        public static Media.Brush ToXaml(this Brush brush, BrushCache brushCache = null)
         {
-            return StyleConverter.MapsuiBrushToXaml(brush);
+            return StyleConverter.MapsuiBrushToXaml(brush, brushCache);
         }
 
         public static WinPoint ToXaml(this Offset offset)

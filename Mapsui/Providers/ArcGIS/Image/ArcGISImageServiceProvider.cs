@@ -15,11 +15,13 @@ namespace Mapsui.Providers.ArcGIS.Image
     {
         private int _timeOut;
         private string _url;
-
+		
+        public string Token { get; set; }
         public ArcGISImageCapabilities ArcGisImageCapabilities { get; private set; }
 
-        public ArcGISImageServiceProvider(ArcGISImageCapabilities capabilities, bool continueOnError = true)
+        public ArcGISImageServiceProvider(ArcGISImageCapabilities capabilities, bool continueOnError = true, string token = null)
         {
+            Token = token;
             CRS = "";
             TimeOut = 10000;     
             ContinueOnError = continueOnError;
@@ -27,8 +29,9 @@ namespace Mapsui.Providers.ArcGIS.Image
             Url = ArcGisImageCapabilities.ServiceUrl;
         }
 
-        public ArcGISImageServiceProvider(string url, bool continueOnError = false, string format = "jpgpng", InterpolationType interpolation = InterpolationType.RSP_NearestNeighbor, long startTime = -1, long endTime = -1)
+        public ArcGISImageServiceProvider(string url, bool continueOnError = false, string format = "jpgpng", InterpolationType interpolation = InterpolationType.RSP_NearestNeighbor, long startTime = -1, long endTime = -1, string token = null)
         {
+            Token = token;
             Url = url;
             CRS = "";
             TimeOut = 10000;
@@ -43,7 +46,7 @@ namespace Mapsui.Providers.ArcGIS.Image
             var capabilitiesHelper = new CapabilitiesHelper();
             capabilitiesHelper.CapabilitiesReceived += CapabilitiesHelperCapabilitiesReceived;
             capabilitiesHelper.CapabilitiesFailed += CapabilitiesHelperCapabilitiesFailed;
-            capabilitiesHelper.GetCapabilities(url, CapabilitiesType.DynamicServiceCapabilities);
+            capabilitiesHelper.GetCapabilities(url, CapabilitiesType.DynamicServiceCapabilities, token);
         }
 
         public string Url
@@ -198,6 +201,11 @@ namespace Mapsui.Providers.ArcGIS.Image
                     url.AppendFormat("&time={0}, null", ArcGisImageCapabilities.StartTime);
                 if (ArcGisImageCapabilities.StartTime == -1 && ArcGisImageCapabilities.EndTime != -1)
                     url.AppendFormat("&time=null, {0}", ArcGisImageCapabilities.EndTime);
+            }
+
+            if (!string.IsNullOrEmpty(Token))
+            {
+                url.AppendFormat("&token={0}", Token);
             }
 
             return url.ToString();
