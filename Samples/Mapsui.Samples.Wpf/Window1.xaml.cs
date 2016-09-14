@@ -252,6 +252,25 @@ namespace Mapsui.Samples.Wpf
             MapControl.ZoomToFullEnvelope();
             MapControl.Refresh();
         }
+
+        private void RasterizingLabelWithPointsClick(object sender, RoutedEventArgs e)
+        {
+            MapControl.Map.Layers.Clear();
+            MapControl.Map.Layers.Add(OsmSample.CreateLayer());
+            var provider = new MemoryProvider();
+            var rnd = new Random();
+            for (var i = 0; i < 10000; i++)
+            {
+                var feature = new Feature
+                {
+                    Geometry = new Geometries.Point(rnd.Next(100000, 5000000), rnd.Next(100000, 5000000))
+                };
+                provider.Features.Add(feature);
+            }
+            var layer = new Layers.MemoryLayer {DataSource = provider};
+            var rasterizingLayer = new Layers.RasterizingLayer(layer);
+            MapControl.Map.Layers.Add(rasterizingLayer);
+        }
     }
 }
 

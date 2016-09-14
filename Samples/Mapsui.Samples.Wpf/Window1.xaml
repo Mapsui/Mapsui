@@ -27,6 +27,7 @@
                 <RadioButton FontSize="16" Content="WMS"  Margin="4,4,4,4" Click="WmsClick" />
                 <RadioButton FontSize="16" Content="ArcGISImageService"  Margin="4,4,4,4" Click="ArcGISImageServiceClick" />
                 <RadioButton FontSize="16" Content="WMTS"  Margin="4,4,4,4" Click="WmtsClick" />
+                <RadioButton FontSize="16" Content="Rasterizing Layer" Margin="4,4,4,4" Click="RasterizingLabelWithPointsClick" />
             </StackPanel>
         </Border>
         <Border BorderBrush="White" Opacity="0.75" Margin="10" Background="White" BorderThickness="6" CornerRadius="2" VerticalAlignment="Top" HorizontalAlignment="Right">
