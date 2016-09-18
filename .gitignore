@@ -17,8 +17,6 @@
 
 *.userprefs
 
-*.ncrunchproject
-
 Mapsui.Rendering.Android/obj/
 
 Samples/Mapsui.Samples.Silverlight.Web/ClientBin
@@ -33,3 +31,6 @@ packages/
 
 Release/
 
+*.ncrunchproject
+
+*.ncrunchsolution
