@@ -66,7 +66,7 @@ namespace Mapsui.Utilities
             Change((int)dueTime.TotalMilliseconds, (int)period.TotalMilliseconds);
         }
 
-        void Reset(int due)
+        public void Reset(int due)
         {
             Cancel();
             if (due >= 0)
