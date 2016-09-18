@@ -38,7 +38,7 @@
     <MtouchFloat32>true</MtouchFloat32>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <MtouchArch>ARMv7, ARM64</MtouchArch>
-    <AssemblyName>Mapsui.Samples.iOS</AssemblyName>
+    <AssemblyName>MapsuiSamplesiOS</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BruTile, Version=0.18.2.0, Culture=neutral, processorArchitecture=MSIL">
