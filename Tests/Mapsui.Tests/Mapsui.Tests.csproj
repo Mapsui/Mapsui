@@ -49,6 +49,7 @@
     <Compile Include="Fetcher\FailingTileProvider.cs" />
     <Compile Include="Fetcher\SometimesFailingTileProvider.cs" />
     <Compile Include="Fetcher\TileFetcherTests.cs" />
+    <Compile Include="Layers\RasterizingLayerTests.cs" />
     <Compile Include="Projection\TransformTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\FeaturesTests.cs" />
