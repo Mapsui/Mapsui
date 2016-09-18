@@ -9,8 +9,6 @@ using System.Threading.Timers;
 using Mapsui.Logging;
 using Mapsui.Utilities;
 
-//using Mapsui.Utilities;
-
 namespace Mapsui.Layers
 {
     public class RasterizingLayer : BaseLayer
@@ -20,7 +18,7 @@ namespace Mapsui.Layers
         private readonly MemoryProvider _cache;
         private BoundingBox _extent;
         private double _resolution;
-        private Timer _timer;
+        private readonly Timer _timer;
         private readonly int _delayBeforeRasterize;
         private IEnumerable<IFeature> _previousFeatures;
         private readonly double _renderResolutionMultiplier;
