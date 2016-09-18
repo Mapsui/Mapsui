@@ -21,7 +21,6 @@ using Mapsui.Providers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using Mapsui.Utilities;
 
@@ -143,7 +142,7 @@ namespace Mapsui.Layers
             if (Transformation != null && !string.IsNullOrWhiteSpace(CRS)) DataSource.CRS = CRS;
 
             if (ProjectionHelper.NeedsTransform(Transformation, CRS, DataSource.CRS))
-                if (Transformation.IsProjectionSupported(CRS, DataSource.CRS) == true)
+                if (Transformation != null && Transformation.IsProjectionSupported(CRS, DataSource.CRS) == true)
                     extent = Transformation.Transform(CRS, DataSource.CRS, extent);
                 
 
