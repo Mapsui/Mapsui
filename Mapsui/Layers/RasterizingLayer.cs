@@ -22,10 +22,12 @@ namespace Mapsui.Layers
         private readonly int _delayBeforeRasterize;
         private IEnumerable<IFeature> _previousFeatures;
         private readonly double _renderResolutionMultiplier;
-        private readonly IRenderer _rasterizer;
+        private IRenderer _rasterizer;
         private readonly double _overscan;
         private Viewport _currentViewport;
         private readonly bool _onlyRerasterizeIfOutsideOverscan;
+        private bool _buzy;
+        private bool _modified;
 
         /// <summary>
         /// Creates a RasterizingLayer which rasterizes a layer for performance
@@ -36,7 +38,8 @@ namespace Mapsui.Layers
         /// <param name="rasterizer">Rasterizer to use. null will use the default</param>
         /// <param name="overscanRatio">The ratio of the size of the rasterized output to the current viewport</param>
         /// <param name="onlyRerasterizeIfOutsideOverscan">Set the rerasterization policy. false will trigger a Rerasterisation on every viewport change. true will trigger a Rerasterisation only if the viewport moves outside the existing rasterisation.</param>
-        public RasterizingLayer(ILayer layer, int delayBeforeRasterize = 500, double renderResolutionMultiplier = 1, IRenderer rasterizer = null, double overscanRatio = 1, bool onlyRerasterizeIfOutsideOverscan = false)
+        public RasterizingLayer(ILayer layer, int delayBeforeRasterize = 500, double renderResolutionMultiplier = 1,
+            IRenderer rasterizer = null, double overscanRatio = 1, bool onlyRerasterizeIfOutsideOverscan = false)
         {
             if (overscanRatio < 1)
                 throw new ArgumentException($"{nameof(overscanRatio)} must be >= 1", nameof(overscanRatio));
@@ -59,37 +62,51 @@ namespace Mapsui.Layers
             _timer.Stop();
             Rasterize();
         }
-        
+
         private void LayerOnDataChanged(object sender, DataChangedEventArgs dataChangedEventArgs)
         {
-            StartTimer();
+            _modified = true;
+            if (_buzy) return;
+            RestartTimer();
         }
 
-        private void StartTimer()
+        private void RestartTimer()
         {
-            _timer.Reset(_delayBeforeRasterize);
+            _timer.Change(_delayBeforeRasterize, _delayBeforeRasterize);
         }
 
         private void Rasterize()
         {
             if (!Enabled) return;
+            if (_buzy) return;
+            _buzy = true;
+            _modified = false;
 
             lock (_syncLock)
             {
-                if (double.IsNaN(_resolution) || _resolution <= 0) return;
-                var viewport = CreateViewport(_extent, _resolution, _renderResolutionMultiplier, _overscan);
+                try
+                {
+                    if (double.IsNaN(_resolution) || _resolution <= 0) return;
+                    var viewport = CreateViewport(_extent, _resolution, _renderResolutionMultiplier, _overscan);
 
-                _currentViewport = viewport;
+                    _currentViewport = viewport;
 
-                var rasterizer = _rasterizer ?? DefaultRendererFactory.Create();
+                    _rasterizer = _rasterizer ?? DefaultRendererFactory.Create();
 
-                var bitmapStream = rasterizer.RenderToBitmapStream(viewport, new[] { _layer });
-                RemoveExistingFeatures();
-                _cache.Features = new Features {new Feature {Geometry = new Raster(bitmapStream, viewport.Extent)}};
+                    var bitmapStream = _rasterizer.RenderToBitmapStream(viewport, new[] { _layer });
+                    RemoveExistingFeatures();
+                    _cache.Features = new Features {new Feature {Geometry = new Raster(bitmapStream, viewport.Extent)}};
 
-                Logger.Log(LogLevel.Debug, $"Memory after rasterizing layer {GC.GetTotalMemory(true):N0}");
+                    Logger.Log(LogLevel.Debug, $"Memory after rasterizing layer {GC.GetTotalMemory(true):N0}");
 
-                OnDataChanged(new DataChangedEventArgs());
+                    OnDataChanged(new DataChangedEventArgs());
+
+                    if (_modified) RestartTimer();
+                }
+                finally
+                {
+                    _buzy = false;
+                }
             }
         }
 
@@ -143,7 +160,7 @@ namespace Mapsui.Layers
                 _extent = extent;
                 _resolution = resolution;
                 _layer.ViewChanged(majorChange, extent, resolution);
-                StartTimer();
+                RestartTimer();
             }
         }
 
