@@ -4,6 +4,8 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using Mapsui.Layers;
+using Mapsui.Logging;
 using Mapsui.Projection;
 using Mapsui.Providers;
 using Mapsui.Samples.Common;
@@ -23,6 +25,13 @@ namespace Mapsui.Samples.Wpf
             Fps.DataContext = MapControl.FpsCounter;
 
             OsmClick(this, null);
+
+            Logger.LogDelegate += LogMethod;
+        }
+
+        private void LogMethod(LogLevel logLevel, string s, Exception exception)
+        {
+            Dispatcher.Invoke(() => LogTextBox.Text = $"{logLevel} {s}");
         }
 
         static void MapControlFeatureInfo(object sender, FeatureInfoEventArgs e)
@@ -52,8 +61,8 @@ namespace Mapsui.Samples.Wpf
 
         private void MapErrorMessageChanged(object sender, EventArgs e)
         {
-            Error.Text = MapControl.ErrorMessage;
-            Utilities.AnimateOpacity(ErrorBorder, 0.75, 0, 8000);
+            LogTextBox.Clear(); // Should a list of messages
+            LogTextBox.AppendText(MapControl.ErrorMessage + "\n");
         }
 
         private void RotationSliderChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -132,8 +141,7 @@ namespace Mapsui.Samples.Wpf
             MapControl.ZoomToFullEnvelope();
             MapControl.Refresh();
         }
-
-
+        
         private void GeodanWmsClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
@@ -257,9 +265,16 @@ namespace Mapsui.Samples.Wpf
         {
             MapControl.Map.Layers.Clear();
             MapControl.Map.Layers.Add(OsmSample.CreateLayer());
+            var layer = CreatePointLayer();
+            var rasterizingLayer = new RasterizingLayer(layer);
+            MapControl.Map.Layers.Add(rasterizingLayer);
+        }
+
+        private static MemoryLayer CreatePointLayer()
+        {
             var provider = new MemoryProvider();
             var rnd = new Random();
-            for (var i = 0; i < 10000; i++)
+            for (var i = 0; i < 100; i++)
             {
                 var feature = new Feature
                 {
@@ -267,9 +282,8 @@ namespace Mapsui.Samples.Wpf
                 };
                 provider.Features.Add(feature);
             }
-            var layer = new Layers.MemoryLayer {DataSource = provider};
-            var rasterizingLayer = new Layers.RasterizingLayer(layer);
-            MapControl.Map.Layers.Add(rasterizingLayer);
+            var layer = new MemoryLayer {DataSource = provider};
+            return layer;
         }
     }
 }
