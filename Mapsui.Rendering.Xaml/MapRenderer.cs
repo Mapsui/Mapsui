@@ -13,8 +13,6 @@ using Polygon = Mapsui.Geometries.Polygon;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Shapes;
-using System.Globalization;
-using XamlMedia = System.Windows.Media;
 #else
 using Windows.UI.Xaml.Controls;
 using Windows.Foundation;
@@ -28,15 +26,9 @@ namespace Mapsui.Rendering.Xaml
     public class MapRenderer : IRenderer
     {
         private readonly Canvas _target;
-#if !NETFX_CORE
-        private static int _mainThreadId;
-#endif
 
         static MapRenderer()
         {
-#if !NETFX_CORE
-            _mainThreadId = Thread.CurrentThread.ManagedThreadId;
-#endif
             DefaultRendererFactory.Create = () => new MapRenderer();
         }
 
@@ -56,16 +48,13 @@ namespace Mapsui.Rendering.Xaml
 
         public static void Render(Canvas target, IViewport viewport, IEnumerable<ILayer> layers, bool rasterizing)
         {
-#if !SILVERLIGHT &&  !NETFX_CORE
+#if !NETFX_CORE
             target.BeginInit();
 #endif
             target.Visibility = Visibility.Collapsed;
             foreach (var child in target.Children)
             {
-                if (child is Canvas)
-                {
-                    (child as Canvas).Children.Clear();
-                }
+                (child as Canvas)?.Children.Clear();
             }
             target.Children.Clear();
 
@@ -80,56 +69,46 @@ namespace Mapsui.Rendering.Xaml
             }
             target.Arrange(new Rect(0, 0, viewport.Width, viewport.Height));
             target.Visibility = Visibility.Visible;
-
+            
             //DrawDebugInfo(target, layers);
 
-#if !SILVERLIGHT &&  !NETFX_CORE
+#if !NETFX_CORE
             target.EndInit();
 #endif
         }
 
-#if !SILVERLIGHT &&  !NETFX_CORE && !WINDOWS_PHONE
-        private static void DrawDebugInfo(Canvas canvas, IEnumerable<ILayer> layers)
-        {
-            var lineCounter = 1;
-            const float tabWidth = 40f;
-            const float lineHeight = 40f;
+#if !NETFX_CORE
+        //private static void DrawDebugInfo(Canvas canvas, IEnumerable<ILayer> layers)
+        //{
+        //    var lineCounter = 1;
+        //    const float tabWidth = 40f;
+        //    const float lineHeight = 40f;
 
-            foreach (var layer in layers)
-            {
-                var textBox = AddTextBox(layer.ToString(), tabWidth, lineHeight*(lineCounter++));
-                canvas.Children.Add(textBox);
+        //    foreach (var layer in layers)
+        //    {
+        //        var textBox = AddTextBox(layer.ToString(), tabWidth, lineHeight*(lineCounter++));
+        //        canvas.Children.Add(textBox);
 
-                if (layer is ITileLayer)
-                {
-                    var text = "Tiles in memory: " + (layer as ITileLayer).MemoryCache.TileCount.ToString(CultureInfo.InvariantCulture);
-                    canvas.Children.Add(AddTextBox(text, tabWidth, lineHeight*(lineCounter++)));
-                }
-            }
-        }
+        //        if (layer is ITileLayer)
+        //        {
+        //            var text = "Tiles in memory: " + (layer as ITileLayer).MemoryCache.TileCount.ToString(CultureInfo.InvariantCulture);
+        //            canvas.Children.Add(AddTextBox(text, tabWidth, lineHeight*lineCounter++));
+        //        }
+        //    }
+        //}
 
-        private static TextBox AddTextBox(string text, float x, float y)
-        {
-            var textBox = new TextBox {Text = text};
-            Canvas.SetLeft(textBox, x);
-            Canvas.SetTop(textBox, y);
-            return textBox;
-        }
+        //private static TextBox AddTextBox(string text, float x, float y)
+        //{
+        //    var textBox = new TextBox {Text = text};
+        //    Canvas.SetLeft(textBox, x);
+        //    Canvas.SetTop(textBox, y);
+        //    return textBox;
+        //}
 #endif
         public MemoryStream RenderToBitmapStream(IViewport viewport, IEnumerable<ILayer> layers)
         {
 #if WINDOWS_PHONE || NETFX_CORE
             throw new NotImplementedException();
-#elif SILVERLIGHT
-            MemoryStream bitmapStream = null;
-            var waitHandle = new AutoResetEvent(false);
-            RunOnUIThread(() =>
-            {
-                bitmapStream = RenderToBitmapStreamStatic(viewport, layers);
-                waitHandle.Set();
-            });
-            waitHandle.WaitOne(60000);
-            return bitmapStream;
 #else
             MemoryStream bitmapStream = null;
             RunMethodOnStaThread(() => bitmapStream = RenderToBitmapStreamStatic(viewport, layers));
@@ -137,7 +116,7 @@ namespace Mapsui.Rendering.Xaml
 #endif
         }
 
-#if !WINDOWS_PHONE && !NETFX_CORE
+#if !NETFX_CORE
         private static MemoryStream RenderToBitmapStreamStatic(IViewport viewport, IEnumerable<ILayer> layers)
         {
             var canvas = new Canvas();
@@ -149,14 +128,7 @@ namespace Mapsui.Rendering.Xaml
         }
 #endif
 
-#if SILVERLIGHT && !WINDOWS_PHONE
-        private void RunOnUIThread(Action method)
-        {
-            Deployment.Current.Dispatcher.BeginInvoke(method);
-        }
-#endif
-
-#if !SILVERLIGHT && !WINDOWS_PHONE && !NETFX_CORE
+#if !NETFX_CORE
         private static void RunMethodOnStaThread(ThreadStart operation)
         {
             var thread = new Thread(operation);
@@ -228,7 +200,7 @@ namespace Mapsui.Rendering.Xaml
 
                 return canvas;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return new Canvas { IsHitTestVisible = false };
             }
