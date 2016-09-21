@@ -144,6 +144,7 @@ namespace Mapsui.Rendering.Xaml
             Render(canvas, viewport, layers, true);
             var bitmapStream = BitmapRendering.BitmapConverter.ToBitmapStream(canvas, (int)viewport.Width, (int)viewport.Height);
             canvas.Children.Clear();
+            canvas.Dispatcher.InvokeShutdown();
             return bitmapStream;
         }
 #endif
@@ -199,7 +200,7 @@ namespace Mapsui.Rendering.Xaml
                 var features = layer.GetFeaturesInView(viewport.Extent, viewport.RenderResolution).ToList();
                 var layerStyles = BaseLayer.GetLayerStyles(layer);
                 var brushCache = new BrushCache();
-
+                
                 foreach (var layerStyle in layerStyles)
                 {
                     var style = layerStyle; // This is the default that could be overridden by an IThemeStyle
