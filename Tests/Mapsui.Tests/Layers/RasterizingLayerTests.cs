@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Linq;
+using System.Threading;
 using BruTile;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using NUnit.Framework;
 using BruTile.Predefined;
+using Mapsui.Rendering;
+using Mapsui.Rendering.Xaml;
 
 namespace Mapsui.Tests.Layers
 {
@@ -19,23 +22,27 @@ namespace Mapsui.Tests.Layers
             var schema = new GlobalSphericalMercator();
             var box = schema.Extent.ToBoundingBox();
             var resolution = schema.Resolutions.First().Value.UnitsPerPixel;
-
+            var waitHandle = new AutoResetEvent(false);
+            DefaultRendererFactory.Create = () => new MapRenderer(); // Using xaml renderer here to test rasterizer. Suboptimal. 
+            
             Assert.AreEqual(0, layer.GetFeaturesInView(box, resolution).Count());
             layer.DataChanged += (sender, args) =>
             {
                 // assert
-                Assert.AreSame(layer.GetFeaturesInView(box, resolution).Count(), 1);
+                waitHandle.Set();
             };
 
             // act
             layer.ViewChanged(true, box, resolution);
+            waitHandle.WaitOne();
+            Assert.AreEqual(layer.GetFeaturesInView(box, resolution).Count(), 1);
         }
 
         private static MemoryLayer CreatePointLayer()
         {
             var provider = new MemoryProvider();
             var random = new Random();
-            for (var i = 0; i < 10000; i++)
+            for (var i = 0; i < 100; i++)
             {
                 var feature = new Feature
                 {
