@@ -33,7 +33,7 @@ Mapsui, the core project, is a PCL with Profile111 which targets:
 For several platforms there are separate assemblies for the UI and for Rendering. Those are:
 
 - Mapsui.UI.Xaml and Mapsui.Rendering.Xaml for WPF on .NET 4.5
-- Mapsui.UI.Xaml-W8 and Mapsui.Rendering.Xaml-W8 for Windows Store apps
+- Mapsui.UI.Xaml-UA and Mapsui.Rendering.Xaml-UA Profile32 PCLs (Windows 8.1 and Windows Phone 8.1)
 - Mapsui.UI.Android and Mapsui.Rendering.Android for API Level 15 (v4.0.3 - Ice Cream Sandwich)
 - Mapsui.UI.iOS and Mapsui.Rendering.iOS
 
