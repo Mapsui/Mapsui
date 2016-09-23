@@ -18,7 +18,7 @@ namespace Mapsui.Samples.Uwp
         {
             InitializeComponent();
 
-            MapControl.Map.Layers.Add(new TileLayer(CreateOsmTileSource()));
+            MainMapControl.Map.Layers.Add(new TileLayer(CreateOsmTileSource()));
         }
 
         private ITileSource CreateOsmTileSource()

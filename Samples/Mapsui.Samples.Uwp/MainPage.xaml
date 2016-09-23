@@ -8,6 +8,6 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <xaml:MapControl Name="MapControl"></xaml:MapControl>
+        <xaml:MapControl Name="MainMapControl"></xaml:MapControl>
     </Grid>
 </Page>
