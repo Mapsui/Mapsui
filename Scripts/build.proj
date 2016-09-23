@@ -22,11 +22,6 @@
              RunEachTargetSeparately="true"/>
 
     <MSBuild Projects="$(SolutionFile)"
-             Targets="Mapsui_Geometries;Mapsui;Mapsui_Rendering_Xaml-UA;Mapsui_UI_Xaml-UA"
-             Properties="Configuration=Release;Platform=Any CPU;BaseIntermediateOutputPath=$(MSBuildProjectDirectory).\..\obj\UWP\;OutputPath=$(MSBuildProjectDirectory).\..\Release\UWP\"
-             RunEachTargetSeparately="true"/>
-
-    <MSBuild Projects="$(SolutionFile)"
              Targets="Mapsui_Geometries;Mapsui;Mapsui_Rendering_Gdi;Mapsui_UI_WinForms"
              Properties="Configuration=Release;Platform=Any CPU;BaseIntermediateOutputPath=$(MSBuildProjectDirectory).\..\obj\WinForms\;OutputPath=$(MSBuildProjectDirectory).\..\Release\WinForms\"
              RunEachTargetSeparately="true"/>
