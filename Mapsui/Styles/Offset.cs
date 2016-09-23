@@ -30,7 +30,9 @@ namespace Mapsui.Styles
 
         public bool Equals(Offset offset)
         {
+            // ReSharper disable once CompareOfFloatsByEqualityOperator
             if (X != offset.X) return false;
+            // ReSharper disable once CompareOfFloatsByEqualityOperator
             if (Y != offset.Y) return false;
             return true;
         }

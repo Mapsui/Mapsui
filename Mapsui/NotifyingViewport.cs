@@ -9,10 +9,7 @@ namespace Mapsui
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public double RenderResolution
-        {
-            get { return _viewport.RenderResolution; }
-        }
+        public double RenderResolution => _viewport.RenderResolution;
 
         public double RenderResolutionMultiplier
         {
@@ -33,6 +30,7 @@ namespace Mapsui
         {
             get { return _viewport.Width; }
             set {
+                // ReSharper disable once CompareOfFloatsByEqualityOperator
                 if (_viewport.Width == value) return; 
                 _viewport.Width = value;
                 OnPropertyChanged("Width");
@@ -44,6 +42,7 @@ namespace Mapsui
             get { return _viewport.Height; }
             set
             {
+                // ReSharper disable once CompareOfFloatsByEqualityOperator
                 if (_viewport.Height == value) return; 
                 _viewport.Height = value;
                 OnPropertyChanged("Height");
@@ -55,6 +54,7 @@ namespace Mapsui
             get { return _viewport.Rotation; }
             set
             {
+                // ReSharper disable once CompareOfFloatsByEqualityOperator
                 if (_viewport.Rotation == value) return; 
                 _viewport.Rotation = value;
                 OnPropertyChanged("Rotation");
@@ -62,31 +62,23 @@ namespace Mapsui
             }
         }
 
-        public bool IsRotated
-        {
-            get { return _viewport.IsRotated; }
-        }
+        public bool IsRotated => _viewport.IsRotated;
 
         public double Resolution
         {
             get { return _viewport.Resolution; }
             set
             {
+                // ReSharper disable once CompareOfFloatsByEqualityOperator
                 if (_viewport.Resolution == value) return; 
                 _viewport.Resolution = value;
                 OnPropertyChanged("Resolution");
             }
         }
 
-        public BoundingBox Extent
-        {
-            get { return _viewport.Extent; }
-        }
+        public BoundingBox Extent => _viewport.Extent;
 
-        public Quad WindowExtent
-        {
-            get { return _viewport.WindowExtent; }
-        }
+        public Quad WindowExtent => _viewport.WindowExtent;
 
         public Point ScreenToWorld(double x, double y)
         {
@@ -126,7 +118,7 @@ namespace Mapsui
         protected virtual void OnPropertyChanged(string propertyName)
         {
             var handler = PropertyChanged;
-            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+            handler?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

@@ -66,13 +66,15 @@ namespace Mapsui.Styles.Thematics
 		public Color GetColor(double pos)
 		{
 			if (Colors.Length != Positions.Length)
-				throw (new ArgumentException("Colors and Positions arrays must be of equal length"));
+				throw new ArgumentException("Colors and Positions arrays must be of equal length");
 			if (Colors.Length < 2)
-				throw (new ArgumentException("At least two colors must be defined in the ColorBlend"));
+				throw new ArgumentException("At least two colors must be defined in the ColorBlend");
+		    // ReSharper disable once CompareOfFloatsByEqualityOperator
 			if (Positions[0] != 0f)
-				throw (new ArgumentException("First position value must be 0.0f"));
+				throw new ArgumentException("First position value must be 0.0f");
+		    // ReSharper disable once CompareOfFloatsByEqualityOperator
 			if (Positions[Positions.Length - 1] != 1f)
-				throw (new ArgumentException("Last position value must be 1.0f"));
+				throw new ArgumentException("Last position value must be 1.0f");
 			if (pos > 1 || pos < 0) pos -= Math.Floor(pos);
 			int i = 1;
 			while (i < Positions.Length && Positions[i] < pos)

@@ -26,16 +26,16 @@ namespace Mapsui.Utilities
     /// </summary>
     public class LeastSquaresTransform
     {
-        private readonly List<Point> inputs;
-        private readonly List<Point> outputs;
+        private readonly List<Point> _inputs;
+        private readonly List<Point> _outputs;
 
         /// <summary>
         /// Initialize Least Squares transformations
         /// </summary>
         public LeastSquaresTransform()
         {
-            inputs = new List<Point>();
-            outputs = new List<Point>();
+            _inputs = new List<Point>();
+            _outputs = new List<Point>();
         }
 
         /// <summary>
@@ -45,8 +45,8 @@ namespace Mapsui.Utilities
         /// <param name="output"></param>
         public void AddInputOutputPoint(Point input, Point output)
         {
-            inputs.Add(input);
-            outputs.Add(output);
+            _inputs.Add(input);
+            _outputs.Add(output);
         }
 
         /// <summary>
@@ -55,8 +55,8 @@ namespace Mapsui.Utilities
         /// <param name="i"></param>
         public void RemoveInputOutputPointAt(int i)
         {
-            inputs.RemoveAt(i);
-            outputs.RemoveAt(i);
+            _inputs.RemoveAt(i);
+            _outputs.RemoveAt(i);
         }
 
         /// <summary>
@@ -66,7 +66,7 @@ namespace Mapsui.Utilities
         /// <returns>Input point value a index 'i'</returns>
         public Point GetInputPoint(int i)
         {
-            return inputs[i];
+            return _inputs[i];
         }
 
         /// <summary>
@@ -76,7 +76,7 @@ namespace Mapsui.Utilities
         /// <param name="i">index</param>
         public void SetInputPointAt(Point p, int i)
         {
-            inputs[i] = p;
+            _inputs[i] = p;
         }
 
         /// <summary>
@@ -86,7 +86,7 @@ namespace Mapsui.Utilities
         /// <returns>Output point value a index 'i'</returns>
         public Point GetOutputPoint(int i)
         {
-            return outputs[i];
+            return _outputs[i];
         }
 
         /// <summary>
@@ -96,7 +96,7 @@ namespace Mapsui.Utilities
         /// <param name="i">index</param>
         public void SetOutputPointAt(Point p, int i)
         {
-            outputs[i] = p;
+            _outputs[i] = p;
         }
 
         /// <summary>
@@ -116,7 +116,7 @@ namespace Mapsui.Utilities
         /// <returns>Array with the six transformation parameters and sum of squared residuals:  a,b,c,d,e,f,s0</returns>
         public double[] GetAffineTransformation()
         {
-            if (inputs.Count < 3)
+            if (_inputs.Count < 3)
                 throw (new Exception("At least 3 measurements required to calculate affine transformation"));
 
             //double precision isn't always enough when transforming large numbers.
@@ -124,49 +124,49 @@ namespace Mapsui.Utilities
             //Find approximate center values:
             var meanInput = new Point(0, 0);
             var meanOutput = new Point(0, 0);
-            for (int i = 0; i < inputs.Count; i++)
+            for (int i = 0; i < _inputs.Count; i++)
             {
-                meanInput.X += inputs[i].X;
-                meanInput.Y += inputs[i].Y;
-                meanOutput.X += outputs[i].X;
-                meanOutput.Y += outputs[i].Y;
+                meanInput.X += _inputs[i].X;
+                meanInput.Y += _inputs[i].Y;
+                meanOutput.X += _outputs[i].X;
+                meanOutput.Y += _outputs[i].Y;
             }
-            meanInput.X = Math.Round(meanInput.X/inputs.Count);
-            meanInput.Y = Math.Round(meanInput.Y/inputs.Count);
-            meanOutput.X = Math.Round(meanOutput.X/inputs.Count);
-            meanOutput.Y = Math.Round(meanOutput.Y/inputs.Count);
+            meanInput.X = Math.Round(meanInput.X/_inputs.Count);
+            meanInput.Y = Math.Round(meanInput.Y/_inputs.Count);
+            meanOutput.X = Math.Round(meanOutput.X/_inputs.Count);
+            meanOutput.Y = Math.Round(meanOutput.Y/_inputs.Count);
 
             double[][] n = CreateMatrix(3, 3);
             //Create normal equation: transpose(B)*B
             //B: matrix of calibrated values. Example of row in B: [x , y , -1]
-            for (int i = 0; i < inputs.Count; i++)
+            for (int i = 0; i < _inputs.Count; i++)
             {
                 //Subtract mean values
-                inputs[i].X -= meanInput.X;
-                inputs[i].Y -= meanInput.Y;
-                outputs[i].X -= meanOutput.X;
-                outputs[i].Y -= meanOutput.Y;
+                _inputs[i].X -= meanInput.X;
+                _inputs[i].Y -= meanInput.Y;
+                _outputs[i].X -= meanOutput.X;
+                _outputs[i].Y -= meanOutput.Y;
                 //Calculate summed values
-                n[0][0] += Math.Pow(inputs[i].X, 2);
-                n[0][1] += inputs[i].X*inputs[i].Y;
-                n[0][2] += -inputs[i].X;
-                n[1][1] += Math.Pow(inputs[i].Y, 2);
-                n[1][2] += -inputs[i].Y;
+                n[0][0] += Math.Pow(_inputs[i].X, 2);
+                n[0][1] += _inputs[i].X*_inputs[i].Y;
+                n[0][2] += -_inputs[i].X;
+                n[1][1] += Math.Pow(_inputs[i].Y, 2);
+                n[1][2] += -_inputs[i].Y;
             }
-            n[2][2] = inputs.Count;
+            n[2][2] = _inputs.Count;
 
             var t1 = new double[3];
             var t2 = new double[3];
 
-            for (int i = 0; i < inputs.Count; i++)
+            for (int i = 0; i < _inputs.Count; i++)
             {
-                t1[0] += inputs[i].X*outputs[i].X;
-                t1[1] += inputs[i].Y*outputs[i].X;
-                t1[2] += -outputs[i].X;
+                t1[0] += _inputs[i].X*_outputs[i].X;
+                t1[1] += _inputs[i].Y*_outputs[i].X;
+                t1[2] += -_outputs[i].X;
 
-                t2[0] += inputs[i].X*outputs[i].Y;
-                t2[1] += inputs[i].Y*outputs[i].Y;
-                t2[2] += -outputs[i].Y;
+                t2[0] += _inputs[i].X*_outputs[i].Y;
+                t2[1] += _inputs[i].Y*_outputs[i].Y;
+                t2[2] += -_outputs[i].Y;
             }
             var trans = new double[7];
             // Solve equation N = transpose(B)*t1
@@ -192,23 +192,23 @@ namespace Mapsui.Utilities
             trans[5] += - meanOutput.Y + meanInput.Y;
 
             //Restore values
-            for (int i = 0; i < inputs.Count; i++)
+            for (int i = 0; i < _inputs.Count; i++)
             {
-                inputs[i].X += meanInput.X;
-                inputs[i].Y += meanInput.Y;
-                outputs[i].X += meanOutput.X;
-                outputs[i].Y += meanOutput.Y;
+                _inputs[i].X += meanInput.X;
+                _inputs[i].Y += meanInput.Y;
+                _outputs[i].X += meanOutput.X;
+                _outputs[i].Y += meanOutput.Y;
             }
 
             //Calculate s0
             double s0 = 0;
-            for (int i = 0; i < inputs.Count; i++)
+            for (int i = 0; i < _inputs.Count; i++)
             {
-                double x = inputs[i].X*trans[0] + inputs[i].Y*trans[1] + trans[2];
-                double y = inputs[i].X*trans[3] + inputs[i].Y*trans[4] + trans[5];
-                s0 += Math.Pow(x - outputs[i].X, 2) + Math.Pow(y - outputs[i].Y, 2);
+                double x = _inputs[i].X*trans[0] + _inputs[i].Y*trans[1] + trans[2];
+                double y = _inputs[i].X*trans[3] + _inputs[i].Y*trans[4] + trans[5];
+                s0 += Math.Pow(x - _outputs[i].X, 2) + Math.Pow(y - _outputs[i].Y, 2);
             }
-            trans[6] = Math.Sqrt(s0)/(inputs.Count);
+            trans[6] = Math.Sqrt(s0)/(_inputs.Count);
             return trans;
         }
 
@@ -229,70 +229,70 @@ namespace Mapsui.Utilities
         /// <returns>Array with the four transformation parameters, and sum of squared residuals: a,b,c,d,s0</returns>
         public double[] GetHelmertTransformation()
         {
-            if (inputs.Count < 2)
+            if (_inputs.Count < 2)
                 throw (new Exception("At least 2 measurements required to calculate helmert transformation"));
 
             //double precision isn't always enough. Lets subtract some mean values and add them later again:
             //Find approximate center values:
             var meanInput = new Point(0, 0);
             var meanOutput = new Point(0, 0);
-            for (int i = 0; i < inputs.Count; i++)
+            for (int i = 0; i < _inputs.Count; i++)
             {
-                meanInput.X += inputs[i].X;
-                meanInput.Y += inputs[i].Y;
-                meanOutput.X += outputs[i].X;
-                meanOutput.Y += outputs[i].Y;
+                meanInput.X += _inputs[i].X;
+                meanInput.Y += _inputs[i].Y;
+                meanOutput.X += _outputs[i].X;
+                meanOutput.Y += _outputs[i].Y;
             }
-            meanInput.X = Math.Round(meanInput.X/inputs.Count);
-            meanInput.Y = Math.Round(meanInput.Y/inputs.Count);
-            meanOutput.X = Math.Round(meanOutput.X/inputs.Count);
-            meanOutput.Y = Math.Round(meanOutput.Y/inputs.Count);
+            meanInput.X = Math.Round(meanInput.X/_inputs.Count);
+            meanInput.Y = Math.Round(meanInput.Y/_inputs.Count);
+            meanOutput.X = Math.Round(meanOutput.X/_inputs.Count);
+            meanOutput.Y = Math.Round(meanOutput.Y/_inputs.Count);
 
             double b00 = 0;
             double b02 = 0;
             double b03 = 0;
             var t = new double[4];
-            for (int i = 0; i < inputs.Count; i++)
+            for (int i = 0; i < _inputs.Count; i++)
             {
                 //Subtract mean values
-                inputs[i].X -= meanInput.X;
-                inputs[i].Y -= meanInput.Y;
-                outputs[i].X -= meanOutput.X;
-                outputs[i].Y -= meanOutput.Y;
+                _inputs[i].X -= meanInput.X;
+                _inputs[i].Y -= meanInput.Y;
+                _outputs[i].X -= meanOutput.X;
+                _outputs[i].Y -= meanOutput.Y;
                 //Calculate summed values
-                b00 += Math.Pow(inputs[i].X, 2) + Math.Pow(inputs[i].Y, 2);
-                b02 -= inputs[i].X;
-                b03 -= inputs[i].Y;
-                t[0] += -(inputs[i].X*outputs[i].X) - (inputs[i].Y*outputs[i].Y);
-                t[1] += -(inputs[i].Y*outputs[i].X) + (inputs[i].X*outputs[i].Y);
-                t[2] += outputs[i].X;
-                t[3] += outputs[i].Y;
+                b00 += Math.Pow(_inputs[i].X, 2) + Math.Pow(_inputs[i].Y, 2);
+                b02 -= _inputs[i].X;
+                b03 -= _inputs[i].Y;
+                t[0] += -(_inputs[i].X*_outputs[i].X) - (_inputs[i].Y*_outputs[i].Y);
+                t[1] += -(_inputs[i].Y*_outputs[i].X) + (_inputs[i].X*_outputs[i].Y);
+                t[2] += _outputs[i].X;
+                t[3] += _outputs[i].Y;
             }
-            double frac = 1/(-inputs.Count*b00 + Math.Pow(b02, 2) + Math.Pow(b03, 2));
+            double frac = 1/(-_inputs.Count*b00 + Math.Pow(b02, 2) + Math.Pow(b03, 2));
             var result = new double[5];
-            result[0] = (-inputs.Count*t[0] + b02*t[2] + b03*t[3])*frac;
-            result[1] = (-inputs.Count*t[1] + b03*t[2] - b02*t[3])*frac;
+            result[0] = (-_inputs.Count*t[0] + b02*t[2] + b03*t[3])*frac;
+            result[1] = (-_inputs.Count*t[1] + b03*t[2] - b02*t[3])*frac;
             result[2] = (b02*t[0] + b03*t[1] - t[2]*b00)*frac + meanOutput.X;
             result[3] = (b03*t[0] - b02*t[1] - t[3]*b00)*frac + meanOutput.Y;
 
             //Restore values
-            for (int i = 0; i < inputs.Count; i++)
+            for (int i = 0; i < _inputs.Count; i++)
             {
-                inputs[i].X += meanInput.X;
-                inputs[i].Y += meanInput.Y;
-                outputs[i].X += meanOutput.X;
-                outputs[i].Y += meanOutput.Y;
+                _inputs[i].X += meanInput.X;
+                _inputs[i].Y += meanInput.Y;
+                _outputs[i].X += meanOutput.X;
+                _outputs[i].Y += meanOutput.Y;
             }
 
             //Calculate s0
             double s0 = 0;
-            for (int i = 0; i < inputs.Count; i++)
+            for (int i = 0; i < _inputs.Count; i++)
             {
-                double x = inputs[i].X*result[0] + inputs[i].Y*result[1] + result[2];
-                double y = -inputs[i].X*result[1] + inputs[i].Y*result[0] + result[3];
-                s0 += Math.Pow(x - outputs[i].X, 2) + Math.Pow(y - outputs[i].Y, 2);
+                double x = _inputs[i].X*result[0] + _inputs[i].Y*result[1] + result[2];
+                double y = -_inputs[i].X*result[1] + _inputs[i].Y*result[0] + result[3];
+                s0 += Math.Pow(x - _outputs[i].X, 2) + Math.Pow(y - _outputs[i].Y, 2);
             }
-            result[4] = Math.Sqrt(s0)/(inputs.Count);
+            result[4] = Math.Sqrt(s0)/(_inputs.Count);
             return result;
         }
 

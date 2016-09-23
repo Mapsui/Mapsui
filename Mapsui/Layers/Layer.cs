@@ -22,7 +22,6 @@ using Mapsui.Providers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using Mapsui.Utilities;
 
 namespace Mapsui.Layers
@@ -103,7 +102,8 @@ namespace Mapsui.Layers
                 NeedsUpdate = true;
                 return;
             }
-            if (StartFetchTimer != null) StartFetchTimer.Dispose();
+
+            StartFetchTimer?.Dispose();
             StartFetchTimer = new Timer(StartFetchTimerElapsed, null, FetchingPostponedInMilliseconds, int.MaxValue);
         }
         

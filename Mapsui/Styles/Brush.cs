@@ -75,7 +75,7 @@ namespace Mapsui.Styles
 
         public override int GetHashCode()
         {            
-            return (Color == null) ? 0 : Color.GetHashCode();
+            return Color == null ? 0 : Color.GetHashCode();
         }
 
         public static bool operator ==(Brush brush1, Brush brush2)
