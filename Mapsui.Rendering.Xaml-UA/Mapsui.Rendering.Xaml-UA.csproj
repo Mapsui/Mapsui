@@ -21,7 +21,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;NETFX_CORE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -35,12 +35,53 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
+    <ProjectReference Include="..\Mapsui.Geometries\Mapsui.Geometries.csproj">
+      <Project>{ee55b62d-ffa2-4c24-a4ad-7a47ace55ce5}</Project>
+      <Name>Mapsui.Geometries</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mapsui\Mapsui.csproj">
+      <Project>{d74c052a-c07e-4b37-a898-134218aca5c9}</Project>
+      <Name>Mapsui</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <TargetPlatform Include="WindowsPhoneApp, Version=8.1" />
     <TargetPlatform Include="Windows, Version=8.1" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Mapsui.Rendering.Xaml\BrushCache.cs">
+      <Link>BrushCache.cs</Link>
+    </Compile>
+    <Compile Include="..\Mapsui.Rendering.Xaml\GeometryExtensions.cs">
+      <Link>GeometryExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Mapsui.Rendering.Xaml\GeometryRenderer.cs">
+      <Link>GeometryRenderer.cs</Link>
+    </Compile>
+    <Compile Include="..\Mapsui.Rendering.Xaml\LabelRenderer.cs">
+      <Link>LabelRenderer.cs</Link>
+    </Compile>
+    <Compile Include="..\Mapsui.Rendering.Xaml\MapRenderer.cs">
+      <Link>MapRenderer.cs</Link>
+    </Compile>
+    <Compile Include="..\Mapsui.Rendering.Xaml\MatrixHelper.cs">
+      <Link>MatrixHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\Mapsui.Rendering.Xaml\SingleLabelRenderer.cs">
+      <Link>SingleLabelRenderer.cs</Link>
+    </Compile>
+    <Compile Include="..\Mapsui.Rendering.Xaml\StackedLabelLayerRenderer.cs">
+      <Link>StackedLabelLayerRenderer.cs</Link>
+    </Compile>
+    <Compile Include="..\Mapsui.Rendering.Xaml\StreamExtensions.cs">
+      <Link>StreamExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Mapsui.Rendering.Xaml\StyleConverter.cs">
+      <Link>StyleConverter.cs</Link>
+    </Compile>
+    <Compile Include="..\Mapsui.Rendering.Xaml\StyleExtensions.cs">
+      <Link>StyleExtensions.cs</Link>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

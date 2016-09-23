@@ -1,11 +1,11 @@
 using System;
 using System.IO;
-#if !NETFX_CORE
-using System.Windows.Media.Imaging;
-#else
+#if NETFX_CORE
 using System.Threading.Tasks;
 using Windows.Storage.Streams;
 using Windows.UI.Xaml.Media.Imaging;
+#else
+using System.Windows.Media.Imaging;
 #endif
 
 namespace Mapsui.Rendering.Xaml
@@ -15,12 +15,9 @@ namespace Mapsui.Rendering.Xaml
         public static BitmapImage CreateBitmapImage(this Stream imageData)
         {
             var bitmapImage = new BitmapImage();
-#if SILVERLIGHT
+#if NETFX_CORE
             imageData.Position = 0;
-            bitmapImage.SetSource(imageData);
-#elif NETFX_CORE
-            imageData.Position = 0;
-            var memoryStream = new System.IO.MemoryStream();
+            var memoryStream = new MemoryStream();
             imageData.CopyTo(memoryStream);
             bitmapImage.SetSource(ToRandomAccessStream(memoryStream).Result);
 #else
@@ -34,7 +31,6 @@ namespace Mapsui.Rendering.Xaml
 
 
 #if NETFX_CORE
-
         public static async Task<IRandomAccessStream> ToRandomAccessStream(this MemoryStream memoryStream)
         {
             var tile = memoryStream.ToArray();
@@ -45,7 +41,6 @@ namespace Mapsui.Rendering.Xaml
             stream.Seek(0);
             return stream;
         }
-    
 #endif
     }  
 }

@@ -107,7 +107,7 @@ namespace Mapsui.Rendering.Xaml
 #endif
         public MemoryStream RenderToBitmapStream(IViewport viewport, IEnumerable<ILayer> layers)
         {
-#if WINDOWS_PHONE || NETFX_CORE
+#if NETFX_CORE
             throw new NotImplementedException();
 #else
             MemoryStream bitmapStream = null;

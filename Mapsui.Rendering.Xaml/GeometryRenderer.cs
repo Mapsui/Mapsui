@@ -151,8 +151,15 @@ namespace Mapsui.Rendering.Xaml
                 imageBrush = brushCache.GetImageBrush(bmpId);
             }
 
+#if NETFX_CORE
+
+            var width = ((BitmapImage)imageBrush.ImageSource).PixelWidth;
+            var height = ((BitmapImage)imageBrush.ImageSource).PixelHeight;
+#else
+            // note: It probably makes more sense to use PixelWith here:
             var width = imageBrush.ImageSource.Width;
             var height = imageBrush.ImageSource.Height;
+#endif
 
             var path = new XamlShapes.Path
             {
@@ -371,7 +378,7 @@ namespace Mapsui.Rendering.Xaml
             stream.Position = 0;
             bitmapImage.SetSource(stream.ToRandomAccessStream().Result);
 
-#elif !SILVERLIGHT
+#else
             var localStream = new MemoryStream();
             stream.Position = 0;
             stream.CopyTo(localStream);
@@ -379,8 +386,6 @@ namespace Mapsui.Rendering.Xaml
             bitmapImage.BeginInit();
             bitmapImage.StreamSource = localStream;
             bitmapImage.EndInit();
-#else
-            bitmapImage.SetSource(stream);
 #endif
             var path = new XamlShapes.Path
             {

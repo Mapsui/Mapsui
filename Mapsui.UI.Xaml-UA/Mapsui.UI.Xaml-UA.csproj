@@ -35,13 +35,28 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
+    <ProjectReference Include="..\Mapsui.Geometries\Mapsui.Geometries.csproj">
+      <Project>{ee55b62d-ffa2-4c24-a4ad-7a47ace55ce5}</Project>
+      <Name>Mapsui.Geometries</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mapsui.Rendering.Xaml-UA\Mapsui.Rendering.Xaml-UA.csproj">
+      <Project>{1e0146e1-3b36-4352-bf7d-bf9d9d63a059}</Project>
+      <Name>Mapsui.Rendering.Xaml-UA</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mapsui\Mapsui.csproj">
+      <Project>{d74c052a-c07e-4b37-a898-134218aca5c9}</Project>
+      <Name>Mapsui</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <TargetPlatform Include="WindowsPhoneApp, Version=8.1" />
     <TargetPlatform Include="Windows, Version=8.1" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions.cs" />
+    <Compile Include="MapControl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ZoomHelper.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
