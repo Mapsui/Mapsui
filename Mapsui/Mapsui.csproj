@@ -45,7 +45,6 @@
     <Compile Include="Fetcher\FeatureFetcher.cs" />
     <Compile Include="Fetcher\FetchOnThread.cs" />
     <Compile Include="Fetcher\FetchStrategy.cs" />
-    <Compile Include="Fetcher\HashSet.cs" />
     <Compile Include="Fetcher\IAsyncDataFetcher.cs" />
     <Compile Include="Fetcher\IFetchStrategy.cs" />
     <Compile Include="Fetcher\TileFetcher.cs" />
