@@ -16,7 +16,7 @@ namespace Mapsui.UI.Android
     public class MapView : View
     {
         private const int None = 0;
-        private const int Drag = 1;
+        private const int Dragging = 1;
         private const int Zoom = 2;
         private int _mode = None;
         private PointF _previousMap, _currentMap;
@@ -43,11 +43,6 @@ namespace Mapsui.UI.Android
             base(context, attrs, defStyle)
         {
             Initialize();
-        }
-
-        private void ViewportOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
-        {
-            RefreshGraphics();
         }
 
         public void Initialize()
@@ -87,7 +82,7 @@ namespace Mapsui.UI.Android
             {
                 case MotionEventActions.Down:
                     _previousMap = null;
-                    _mode = Drag;
+                    _mode = Dragging;
                     break;
                 case MotionEventActions.Up:
                     _previousMap = null;
@@ -105,12 +100,12 @@ namespace Mapsui.UI.Android
                 case MotionEventActions.Pointer2Up:
                     _previousMap = null;
                     _previousMid = null;
-                    _mode = Drag;
+                    _mode = Dragging;
                     break;
                 case MotionEventActions.Move:
                     switch (_mode)
                     {
-                        case Drag:
+                        case Dragging:
                             _currentMap = new PointF(x, y);
                             if (_previousMap != null)
                             {
@@ -242,11 +237,6 @@ namespace Mapsui.UI.Android
             {
                 ((Activity)Context).RunOnUiThread(new Runnable(RefreshGraphics));
             }
-        }
-
-        private static string GetErrorMessage(DataChangedEventArgs e)
-        {
-            return (e.Cancelled) ? "Cancelled" : ((e.Error != null) ? e.Error.GetType() + ": " + e.Error.Message : "");
         }
 
         private void RefreshGraphics() 

@@ -53,9 +53,7 @@ namespace Mapsui.Rendering.Xaml
 
 #if NETFX_CORE
             DetermineTextWidthAndHeightWindows8(out textWidth, out textHeight, border, textblock);
-#elif SILVERLIGHT
-            DetermineTextWidthAndHeightSilverlight(out textWidth, out textHeight, textblock);
-#else // WPF
+#else
             DetermineTextWidthAndHeightWpf(out textWidth, out textHeight, labelStyle, labelText);
 #endif
             border.SetValue(Canvas.LeftProperty, windowsPosition.X + labelStyle.Offset.X

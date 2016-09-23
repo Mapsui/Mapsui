@@ -22,6 +22,7 @@ using Mapsui.Rendering.Xaml;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Threading.Tasks;
 using Windows.Devices.Sensors;
 using Windows.Foundation;
 using Windows.UI;
@@ -138,7 +139,7 @@ namespace Mapsui.UI.Xaml
             if (orientationSensor != null)
             {
                 orientationSensor.OrientationChanged += (sender, args) =>
-                    Dispatcher.RunAsync(CoreDispatcherPriority.Normal, Refresh);
+                    Task.Run(() => Dispatcher.RunAsync(CoreDispatcherPriority.Normal, Refresh)).ConfigureAwait(false);
             }
         }
 
@@ -268,7 +269,9 @@ namespace Mapsui.UI.Xaml
         {
             if (!Dispatcher.HasThreadAccess)
             {
-                Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => MapDataChanged(sender, e));
+                Task.Run(
+                    () => Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => MapDataChanged(sender, e)))
+                    .ConfigureAwait(false);
             }
             else
             {

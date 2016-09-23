@@ -1,9 +1,6 @@
 ﻿using Mapsui.Geometries;
 using Mapsui.Providers;
 using Mapsui.Styles;
-using Mapsui.Geometries;
-using Mapsui.Providers;
-using Mapsui.Styles;
 using OpenTK.Graphics.ES11;
 using System.Collections.Generic;
 

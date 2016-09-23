@@ -5,13 +5,10 @@ using System.Windows.Shapes;
 using XamlBrush = System.Windows.Media.Brush;
 using XamlColor = System.Windows.Media.Color;
 using System.Windows;
-using System.Collections;
 using System.Collections.Generic;
-using XamlMedia = System.Windows.Media;
 #else
 using XamlBrush = Windows.UI.Xaml.Media.Brush;
 using Windows.UI.Xaml.Media;
-using XamlMedia = Windows.UI.Xaml.Media;
 #endif
 using Mapsui.Styles;
 
@@ -50,7 +47,7 @@ namespace Mapsui.Rendering.Xaml
 
         public static XamlBrush MapsuiBrushToXaml(Styles.Brush brush, BrushCache brushCache = null)
         {
-#if !SILVERLIGHT && !NETFX_CORE
+#if !NETFX_CORE
             switch (brush.FillStyle)
             {
                 case FillStyle.Cross:
@@ -66,7 +63,7 @@ namespace Mapsui.Rendering.Xaml
                 case FillStyle.ForwardDiagonal:
                     return CreateHatchBrush(brush, 10, 10, new List<Geometry> { Geometry.Parse("M -1 9 l 10 10"), Geometry.Parse("M 0 0 l 10 10"), Geometry.Parse("M 9 -1 l 10 10") });
                 case FillStyle.Hollow:
-                    return new SolidColorBrush(Colors.Transparent);;
+                    return new SolidColorBrush(Colors.Transparent);
                 case FillStyle.Horizontal:
                     return CreateHatchBrush(brush, 10, 10, new List<Geometry> { Geometry.Parse("M 0 5 h 10") });
                 case FillStyle.Solid:
@@ -76,8 +73,9 @@ namespace Mapsui.Rendering.Xaml
                 default:
                     return new SolidColorBrush(brush.Color.ToXaml());
             }
-#endif
+#else
             return new SolidColorBrush(brush.Color.ToXaml());
+#endif
         }
 
 #if !SILVERLIGHT && !NETFX_CORE
@@ -114,7 +112,7 @@ namespace Mapsui.Rendering.Xaml
             return brushCache != null ? brushCache.GetImageBrush(brush.BitmapId, CreateImageBrush) : CreateImageBrush(BitmapRegistry.Instance.Get(brush.BitmapId));
         }
 
-        private static XamlMedia.ImageBrush CreateImageBrush(System.IO.Stream stream)
+        private static ImageBrush CreateImageBrush(System.IO.Stream stream)
         {
             var bmp = stream.CreateBitmapImage();
 
