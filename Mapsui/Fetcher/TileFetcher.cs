@@ -74,10 +74,7 @@ namespace Mapsui.Fetcher
             }
         }
 
-        public int NumberTilesNeeded
-        {
-            get { return _numberTilesNeeded; }
-        }
+        public int NumberTilesNeeded => _numberTilesNeeded;
 
 
         public void ViewChanged(BoundingBox newExtent, double newResolution)
@@ -221,8 +218,7 @@ namespace Mapsui.Fetcher
                 _waitHandle.Set();
             }
 
-            if (DataChanged != null)
-                DataChanged(this, new DataChangedEventArgs(e.Error, e.Cancelled, e.TileInfo));
+            DataChanged?.Invoke(this, new DataChangedEventArgs(e.Error, e.Cancelled, e.TileInfo));
         }
 
                 /// <summary>
@@ -271,8 +267,8 @@ namespace Mapsui.Fetcher
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged(string propertyName)
         {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+            var handler = PropertyChanged;
+            handler?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
