@@ -5,9 +5,9 @@ namespace Mapsui.Geometries
 {
     public class Raster : IRaster
     {
-        readonly BoundingBox _boundingBox;
-        public MemoryStream Data { get; private set; }
-        public long TickFetched { get; private set; }
+        private readonly BoundingBox _boundingBox;
+        public MemoryStream Data { get; }
+        public long TickFetched { get; }
 
         public Raster(MemoryStream data, BoundingBox box)
         {
@@ -20,12 +20,8 @@ namespace Mapsui.Geometries
         {
             return _boundingBox;
         }
-
         
-        public int Dimension
-        {
-            get { return 2; }
-        }
+        public int Dimension => 2;
 
         public Geometry Envelope()
         {
