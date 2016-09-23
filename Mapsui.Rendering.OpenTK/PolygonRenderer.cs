@@ -14,7 +14,7 @@ namespace Mapsui.Rendering.OpenTK
 
             float lineWidth = 1;
             var lineColor = Color.Black; // default
-            var fillColor = Color.Gray; // default
+            // todo: var fillColor = Color.Gray; // default
 
             var vectorStyle = style as VectorStyle;
 
@@ -22,7 +22,7 @@ namespace Mapsui.Rendering.OpenTK
             {
                 lineWidth = (float)vectorStyle.Outline.Width;
                 lineColor = vectorStyle.Outline.Color;
-                fillColor = vectorStyle.Fill.Color;
+                // todo: fillColor = vectorStyle.Fill.Color;
             }
 
             float[] points = ToOpenTK(lineString);
