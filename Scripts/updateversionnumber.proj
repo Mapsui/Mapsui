@@ -1,4 +1,4 @@
-<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
   <PropertyGroup>
     <SolutionFile>.\..\Mapsui.sln</SolutionFile>
@@ -23,7 +23,7 @@
     <FileUpdate Files="@(AssemblyFiles)"
         Multiline="true"
         Singleline="false"
-        Regex="(AssemblyVersion|AssemblyFileVersionAttribute|AssemblyFileVersion)\(&quot;([0-9]+\.[0-9]+\.[0-9]+)(\.[0-9]+)?&quot;\)"
+        Regex="(AssemblyVersion|AssemblyFileVersionAttribute|AssemblyFileVersion)\(&quot;(\s*)?&quot;\)"
         ReplacementText="$1(&quot;$(AsmVersion)&quot;)" />
 </Target>
 </Project>

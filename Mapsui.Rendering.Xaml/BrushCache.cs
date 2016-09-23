@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using Mapsui.Styles;
-#if !NETFX_CORE
-using XamlMedia = System.Windows.Media;
-#else
+#if NETFX_CORE
 using XamlMedia = Windows.UI.Xaml.Media;
+#else
+using XamlMedia = System.Windows.Media;
 #endif
 
 namespace Mapsui.Rendering.Xaml

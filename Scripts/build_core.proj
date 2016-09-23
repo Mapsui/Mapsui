@@ -9,7 +9,11 @@
   <Target Name="BuildRelease" DependsOnTargets="CleanRelease;RestorePackages">
 
     <MSBuild Projects="$(SolutionFile)"
-             Targets="Mapsui"
+             Targets="Mapsui_Geometries"
+             Properties="Configuration=Release;BaseIntermediateOutputPath=$(MSBuildProjectDirectory).\..\obj\portable\;OutputPath=$(MSBuildProjectDirectory).\..\Release\Portable\" />
+
+    <MSBuild Projects="$(SolutionFile)"
+             Targets="Mapsui_Geometries;Mapsui"
              Properties="Configuration=Release;BaseIntermediateOutputPath=$(MSBuildProjectDirectory).\..\obj\portable\;OutputPath=$(MSBuildProjectDirectory).\..\Release\Portable\" />
 
   </Target>

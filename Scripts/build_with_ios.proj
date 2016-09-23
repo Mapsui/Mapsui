@@ -1,4 +1,4 @@
-<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
   <PropertyGroup>
     <SolutionFile>.\..\Mapsui.sln</SolutionFile>
@@ -9,26 +9,30 @@
   <Target Name="BuildRelease" DependsOnTargets="CleanRelease;RestorePackages">
 
     <MSBuild Projects="$(SolutionFile)"
-             Targets="Mapsui"
+           Targets="Mapsui_Geometries"
+           Properties="Configuration=Release;BaseIntermediateOutputPath=$(MSBuildProjectDirectory).\..\obj\portable\;OutputPath=$(MSBuildProjectDirectory).\..\Release\Portable\" />
+
+    <MSBuild Projects="$(SolutionFile)"
+             Targets="Mapsui_Geometries;Mapsui"
              Properties="Configuration=Release;BaseIntermediateOutputPath=$(MSBuildProjectDirectory).\..\obj\portable\;OutputPath=$(MSBuildProjectDirectory).\..\Release\Portable\" />
 
     <MSBuild Projects="$(SolutionFile)"
-             Targets="Mapsui;Mapsui_Rendering_Xaml;Mapsui_UI_Xaml"
+             Targets="Mapsui_Geometries;Mapsui;Mapsui_Rendering_Xaml;Mapsui_UI_Xaml"
              Properties="Configuration=Release;Platform=Any CPU;BaseIntermediateOutputPath=$(MSBuildProjectDirectory).\..\obj\v4.5\;OutputPath=$(MSBuildProjectDirectory).\..\Release\v4.5\"
              RunEachTargetSeparately="true"/>
 
     <MSBuild Projects="$(SolutionFile)"
-             Targets="Mapsui;Mapsui_Rendering_Xaml-W8;Mapsui_UI_Xaml-W8"
-             Properties="Configuration=Release;Platform=Any CPU;BaseIntermediateOutputPath=$(MSBuildProjectDirectory).\..\obj\W8\;OutputPath=$(MSBuildProjectDirectory).\..\Release\W8\"
+             Targets="Mapsui_Geometries;Mapsui;Mapsui_Rendering_Xaml-UA;Mapsui_UI_Xaml-UA"
+             Properties="Configuration=Release;Platform=Any CPU;BaseIntermediateOutputPath=$(MSBuildProjectDirectory).\..\obj\UWP\;OutputPath=$(MSBuildProjectDirectory).\..\Release\UWP\"
              RunEachTargetSeparately="true"/>
 
     <MSBuild Projects="$(SolutionFile)"
-             Targets="Mapsui;Mapsui_Rendering_Gdi;Mapsui_UI_WinForms"
+             Targets="Mapsui_Geometries;Mapsui;Mapsui_Rendering_Gdi;Mapsui_UI_WinForms"
              Properties="Configuration=Release;Platform=Any CPU;BaseIntermediateOutputPath=$(MSBuildProjectDirectory).\..\obj\WinForms\;OutputPath=$(MSBuildProjectDirectory).\..\Release\WinForms\"
              RunEachTargetSeparately="true"/>
 
     <MSBuild Projects="$(SolutionFile)"
-             Targets="Mapsui;Mapsui_Rendering_Android;Mapsui_Rendering_OpenTK-A;Mapsui_UI_Android"
+             Targets="Mapsui_Geometries;Mapsui;Mapsui_Rendering_Android;Mapsui_Rendering_OpenTK-A;Mapsui_UI_Android"
              Properties="Configuration=Release;Platform=Any CPU;BaseIntermediateOutputPath=$(MSBuildProjectDirectory).\..\obj\Xamarin.Android\;OutputPath=$(MSBuildProjectDirectory).\..\Release\Xamarin.Android\"
              RunEachTargetSeparately="true"/>
 
