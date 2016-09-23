@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Mapsui.Geometries;
 
 namespace Mapsui.Projection
@@ -20,20 +19,20 @@ namespace Mapsui.Projection
             var geometries = geometry as IEnumerable<Geometry>;
             if (geometries != null) return AllVertices(geometries);
             
-            var format = String.Format("unsupported geometry: {0}", geometry.GetType().Name);
+            var format = $"unsupported geometry: {geometry.GetType().Name}";
             throw new NotSupportedException(format);
         }
 
         private static IEnumerable<Point> AllVertices(LineString lineString)
         {
-            if (lineString == null) throw new ArgumentNullException("lineString");
+            if (lineString == null) throw new ArgumentNullException(nameof(lineString));
 
             return lineString.Vertices;
         }
 
         private static IEnumerable<Point> AllVertices(Polygon polygon)
         {
-            if (polygon == null) throw new ArgumentNullException("polygon");
+            if (polygon == null) throw new ArgumentNullException(nameof(polygon));
 
             foreach (var point in polygon.ExteriorRing.Vertices)
                 yield return point;
@@ -44,7 +43,7 @@ namespace Mapsui.Projection
 
         private static IEnumerable<Point> AllVertices(IEnumerable<Geometry> collection)
         {
-            if (collection == null) throw new ArgumentNullException("collection");
+            if (collection == null) throw new ArgumentNullException(nameof(collection));
 
             foreach (var geometry in collection)
                 foreach (var point in AllVertices(geometry))
