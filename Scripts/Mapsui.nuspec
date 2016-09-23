@@ -30,10 +30,10 @@
     <file src="..\Release\v4.5\Mapsui.Rendering.Xaml.dll" target="lib\net45\Mapsui.Rendering.Xaml.dll" />
     <file src="..\Release\v4.5\Mapsui.UI.Xaml.dll" target="lib\net45\Mapsui.UI.Xaml.dll" />
 
-    <file src="..\Release\W8\Mapsui.Geometries.dll" target="lib\win8\Mapsui.Geometries.dll" />
-    <file src="..\Release\W8\Mapsui.dll" target="lib\win8\Mapsui.dll" />
-    <file src="..\Release\W8\Mapsui.Rendering.Xaml.dll" target="lib\win8\Mapsui.Rendering.Xaml.dll" />
-    <file src="..\Release\W8\Mapsui.UI.Xaml.dll" target="lib\win8\Mapsui.UI.Xaml.dll" />
+    <file src="..\Release\UWP\Mapsui.Geometries.dll" target="lib\portable46-win81+wpa81\Mapsui.Geometries.dll" />
+    <file src="..\Release\UWP\Mapsui.dll" target="lib\portable46-win81+wpa81\Mapsui.dll" />
+    <file src="..\Release\UWP\Mapsui.Rendering.Xaml.dll" target="lib\portable46-win81+wpa81\Mapsui.Rendering.Xaml.dll" />
+    <file src="..\Release\UWP\Mapsui.UI.Xaml.dll" target="lib\portable46-win81+wpa81\Mapsui.UI.Xaml.dll" />
 
     <file src="..\Release\Xamarin.Android\Mapsui.Geometries.dll" target="lib\MonoAndroid\Mapsui.Geometries.dll" />
     <file src="..\Release\Xamarin.Android\Mapsui.dll" target="lib\MonoAndroid\Mapsui.dll" />

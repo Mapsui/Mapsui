@@ -18,8 +18,8 @@
              RunEachTargetSeparately="true"/>
 
     <MSBuild Projects="$(SolutionFile)"
-             Targets="Mapsui;Mapsui_Rendering_Xaml-W8;Mapsui_UI_Xaml-W8"
-             Properties="Configuration=Release;Platform=Any CPU;BaseIntermediateOutputPath=$(MSBuildProjectDirectory).\..\obj\W8\;OutputPath=$(MSBuildProjectDirectory).\..\Release\W8\"
+             Targets="Mapsui;Mapsui_Rendering_Xaml-UA;Mapsui_UI_Xaml-UA"
+             Properties="Configuration=Release;Platform=Any CPU;BaseIntermediateOutputPath=$(MSBuildProjectDirectory).\..\obj\UWP\;OutputPath=$(MSBuildProjectDirectory).\..\Release\UWP\"
              RunEachTargetSeparately="true"/>
 
     <MSBuild Projects="$(SolutionFile)"
