@@ -32,6 +32,9 @@ If you install the NuGet package into your app three assemblies are added:
 - Mapsui.Rendering - A platform specific renderer
 - Mapsui.UI - Platorm specific UI. Contains the MapControl
 
+## Wiki
+Take a look at the [wiki](https://github.com/pauldendulk/Mapsui/wiki). We are starting to add some information there. If you have a question please post an issue in the forum or a question on stackoverflow the the 'mapsui' tag (I will get a notification).
+
 ## Warnings
 
 - There is limited documentation.
