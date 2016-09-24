@@ -147,20 +147,15 @@ namespace Mapsui.Data.Providers
     /// </example>
     public class ShapeFile : IProvider, IDisposable
     {
-        
         /// <summary>
         /// Filter Delegate Method
         /// </summary>
         /// <remarks>
         /// The FilterMethod delegate is used for applying a method that filters data from the dataset.
         /// The method should return 'true' if the feature should be included and false if not.
-        /// <para>See the <see cref="FilterDelegate"/> property for more info</para>
         /// </remarks>
-        /// <seealso cref="FilterDelegate"/>
-        /// <param name="dr"><see cref="Mapsui.Data.FeatureDataRow"/> to test on</param>
         /// <returns>true if this feature should be included, false if it should be filtered</returns>
         public delegate bool FilterMethod(IFeature dr);
-
         
         private BoundingBox _envelope;
         private int _featureCount;
