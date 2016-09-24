@@ -21,44 +21,16 @@ https://www.nuget.org/packages/Mapsui
 ## Platforms Supported
 
 There are four platforms supported:
-- Windows Desktop
-- Windows Store
-- Mapsui Android
+- Windows Desktop - WPF on .NET 4.5
+- Windows Store - Profile32 PCLs (Windows 8.1 and Windows Phone 8.1)
+- Mapsui Android - for API Level 15 (v4.0.3 - Ice Cream Sandwich)
 - Mapsui iOS
 
-To build an application you need Mapsui's three components:
+If you install the NuGet package into your app three assemblies are added:
 
-- Mapsui - The core library
+- Mapsui - The core project, is a PCL with Profile111 which targets (.Net Framework 4.5, ASP.NET Core 5.0, Windows 8, Windows Phone 8.1, Xamarin.Android, Xamarin.iOS, Xamarin.iOS (Classic))
 - Mapsui.Rendering - A platform specific renderer
-- Mapsui.UI - A platform specific map view
-
-## Mapsui core assembly
-
-The core project, is a PCL with Profile111 which targets:
-
-- .Net Framework 4.5
-- ASP.NET Core 5.0
-- Windows 8
-- Windows Phone 8.1
-- Xamarin.Android
-- Xamarin.iOS
-- Xamarin.iOS (Classic)
-
-## Mapsui.Rendering assemblies
-
-For several platforms there are separate assemblies for the UI and for Rendering. Those are:
-
-- Mapsui.Rendering.Xaml - 
-- Mapsui.Rendering.Xaml-UA- Profile32 PCLs (Windows 8.1 and Windows Phone 8.1)
-- Mapsui.Rendering.Android
-- Mapsui.Rendering.iOS
-
-## Mapsui.UI assemblies
-
-- Mapsui.UI.Xaml - for WPF on .NET 4.5
-- Mapsui.UI.Xaml-UA - Profile32 PCLs (Windows 8.1 and Windows Phone 8.1)
-- Mapsui.UI.Android -  for API Level 15 (v4.0.3 - Ice Cream Sandwich)
-- Mapsui.UI.iOS 
+- Mapsui.UI - Which contains the MapControl for that platform
 
 ## Warnings
 
