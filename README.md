@@ -30,7 +30,7 @@ If you install the NuGet package into your app three assemblies are added:
 
 - Mapsui - The core project, is a PCL with Profile111 which targets (.Net Framework 4.5, ASP.NET Core 5.0, Windows 8, Windows Phone 8.1, Xamarin.Android, Xamarin.iOS, Xamarin.iOS (Classic))
 - Mapsui.Rendering - A platform specific renderer
-- Mapsui.UI - Platorm specific UI component(s). Primarily the MapControl
+- Mapsui.UI - Platorm specific UI. Contains the MapControl
 
 ## Warnings
 
