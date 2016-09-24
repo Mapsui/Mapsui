@@ -11,7 +11,7 @@ Mapsui is a C# library for mapping applications.
 - Based on a modified version of SharpMap. 
 - Uses BruTile to access tile services
 
-### Get it from NuGet 
+## Get it from NuGet 
 `
 PM> Install-Package Mapsui
 `
@@ -25,6 +25,8 @@ There are four platforms supported:
 - Windows Store - Profile32 PCLs (Windows 8.1 and Windows Phone 8.1)
 - Mapsui Android - for API Level 15 (v4.0.3 - Ice Cream Sandwich)
 - Mapsui iOS
+
+## Three components
 
 If you install the NuGet package into your app three assemblies are added:
 
