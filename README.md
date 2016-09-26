@@ -16,9 +16,9 @@ Mapsui is a C# library for mapping applications.
 Look [here](https://github.com/pauldendulk/Mapsui/wiki/Getting-Started-with-Mapsui)
 
 ## Get it from NuGet 
-'
+```
 PM> Install-Package Mapsui
-`
+```
 
 https://www.nuget.org/packages/Mapsui
 
