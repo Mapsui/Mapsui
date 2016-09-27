@@ -27,8 +27,8 @@ https://www.nuget.org/packages/Mapsui
 There are four platforms supported:
 - Windows Desktop - WPF on .NET 4.5
 - Windows Store - Profile32 PCLs (Windows 8.1 and Windows Phone 8.1)
-- Mapsui Android - for API Level 15 (v4.0.3 - Ice Cream Sandwich)
-- Mapsui iOS
+- Xamarin Android - for API Level 15 (v4.0.3 - Ice Cream Sandwich)
+- Xamarin iOS
 
 ## Components
 
