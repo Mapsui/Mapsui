@@ -30,7 +30,7 @@ There are four platforms supported:
 - Mapsui Android - for API Level 15 (v4.0.3 - Ice Cream Sandwich)
 - Mapsui iOS
 
-## Three components
+## Components
 
 If you install the NuGet package into your app these assemblies are added:
 
