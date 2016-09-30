@@ -59,8 +59,10 @@ namespace Mapsui.UI.Xaml
 
         public IRenderer Renderer { get; set; }
         private bool IsInBoxZoomMode { get; set; }
-        public IList<ILayer> MouseInfoOverLayers { get; } // This should be on the Map
-        public IList<ILayer> MouseInfoUpLayers { get; } // This should be on the Map
+        [Obsolete("Use Map.HoverInfoLayers", true)]
+        public IList<ILayer> MouseInfoOverLayers { get; } 
+        [Obsolete("Use Map.InfoLayers", true)]
+        public IList<ILayer> MouseInfoUpLayers { get; } 
         public event EventHandler ViewportInitialized;
         public bool ZoomToBoxMode { get; set; }
 
@@ -174,8 +176,6 @@ namespace Mapsui.UI.Xaml
             Children.Add(_bboxRect);
 
             Map = new Map();
-            MouseInfoOverLayers = new List<ILayer>();
-            MouseInfoUpLayers = new List<ILayer>();
             Loaded += MapControlLoaded;
             KeyDown += MapControlKeyDown;
             KeyUp += MapControlKeyUp;
@@ -420,7 +420,7 @@ namespace Mapsui.UI.Xaml
             else
             {
                 HandleFeatureInfo(e);
-                var eventArgs = GetMouseInfoEventArgs(e.GetPosition(this), MouseInfoUpLayers);
+                var eventArgs = GetMouseInfoEventArgs(e.GetPosition(this), Map.InfoLayers);
                 OnMouseInfoUp(eventArgs ?? new MouseInfoEventArgs());
             }
 
@@ -481,8 +481,7 @@ namespace Mapsui.UI.Xaml
 
         private void RaiseMouseInfoOverEvents(Point mousePosition)
         {
-            
-            var mouseOverEventArgs = GetMouseInfoEventArgs(mousePosition, MouseInfoOverLayers);
+            var mouseOverEventArgs = GetMouseInfoEventArgs(mousePosition, Map.HoverInfoLayers);
             if (_previousMouseOverEventArgs != null && mouseOverEventArgs != null) OnMouseInfoLeave();
             else OnMouseInfoOver(mouseOverEventArgs);
             _previousMouseOverEventArgs = mouseOverEventArgs;

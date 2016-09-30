@@ -1,4 +1,5 @@
 ﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -21,6 +22,8 @@ namespace Mapsui.Samples.Wpf
             InitializeComponent();
             MapControl.ErrorMessageChanged += MapErrorMessageChanged;
             MapControl.FeatureInfo += MapControlFeatureInfo;
+            MapControl.MouseInfoUp += MapControlOnMouseInfoUp;
+
             Fps.SetBinding(TextBlock.TextProperty, new Binding("Fps"));
             Fps.DataContext = MapControl.FpsCounter;
 
@@ -61,7 +64,7 @@ namespace Mapsui.Samples.Wpf
 
         private void MapErrorMessageChanged(object sender, EventArgs e)
         {
-            LogTextBox.Clear(); // Should a list of messages
+            LogTextBox.Clear(); // Should be a list of messages
             LogTextBox.AppendText(MapControl.ErrorMessage + "\n");
         }
 
@@ -71,7 +74,8 @@ namespace Mapsui.Samples.Wpf
             MapControl.Map.Viewport.Rotation = percent * 360;
             MapControl.Refresh();
         }
-        private static void MapControlOnMouseInfoDown(object sender, MouseInfoEventArgs mouseInfoEventArgs)
+
+        private static void MapControlOnMouseInfoUp(object sender, MouseInfoEventArgs mouseInfoEventArgs)
         {
             if (mouseInfoEventArgs.Feature != null)
             {
@@ -95,11 +99,12 @@ namespace Mapsui.Samples.Wpf
         private void ProjectedPointClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
+
             MapControl.Map.Transformation = new MinimalTransformation();
             MapControl.Map.CRS = "EPSG:3857";
             MapControl.Map.Layers.Add(OsmSample.CreateLayer());
             MapControl.Map.Layers.Add(PointsInWgs84Sample.CreateLayer());
-
+            
             LayerList.Initialize(MapControl.Map.Layers);
             MapControl.ZoomToFullEnvelope();
             MapControl.Refresh();
@@ -108,6 +113,7 @@ namespace Mapsui.Samples.Wpf
         private void AnimatedPointsClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
+
             MapControl.Map.Layers.Add(OsmSample.CreateLayer());
             MapControl.Map.Layers.Add(AnimatedPointsSample.CreateLayer());
 
@@ -136,8 +142,7 @@ namespace Mapsui.Samples.Wpf
 
             MapControl.Map.Layers.Add(OsmSample.CreateLayer());
             MapControl.Map.Layers.Add(PointsWithFeatureInfoSample.CreateLayer(MapControl.Map.Envelope));
-            MapControl.MouseInfoUp += MapControlOnMouseInfoDown;
-            MapControl.MouseInfoUpLayers.Add(MapControl.Map.Layers.FindLayer("Points with feature info").First());
+            MapControl.Map.InfoLayers.Add(MapControl.Map.Layers.FindLayer("Points with feature info").First());
 
             LayerList.Initialize(MapControl.Map.Layers);
             MapControl.ZoomToFullEnvelope();

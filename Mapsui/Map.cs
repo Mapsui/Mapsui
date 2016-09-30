@@ -44,6 +44,9 @@ namespace Mapsui
             BackColor = Color.White;
             Layers = new LayerCollection();
             Viewport =  new Viewport { Center = { X = double.NaN, Y = double.NaN }, Resolution = double.NaN };
+            InfoLayers = new List<ILayer>();
+            HoverInfoLayers = new List<ILayer>();
+
         }
 
 
@@ -87,6 +90,10 @@ namespace Mapsui
                 _layers.LayerRemoved += LayersLayerRemoved;
             }
         }
+
+        public IList<ILayer> InfoLayers { get; set; }
+
+        public IList<ILayer> HoverInfoLayers { get; set; }
 
         public Viewport Viewport { get; }
 
