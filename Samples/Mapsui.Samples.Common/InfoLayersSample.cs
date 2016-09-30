@@ -1,4 +1,4 @@
-﻿using System.Globalization;
+﻿using System.Linq;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
@@ -6,12 +6,14 @@ using Mapsui.Styles;
 
 namespace Mapsui.Samples.Common
 {
-    public static class PointsWithFeatureInfoSample
+    public static class InfoLayersSample
     {
+        private const string InfoLayerName = "Points with feature info";
+
         public static ILayer CreateLayer(BoundingBox envelope)
         {
             var pointLayer = CreateRandomPointLayer(PointsSample.CreateRandomPointsProvider(envelope));
-            pointLayer.Name = "Points with feature info";
+            pointLayer.Name = InfoLayerName;
             pointLayer.Style = new StyleCollection
             {
                 new SymbolStyle
@@ -23,9 +25,18 @@ namespace Mapsui.Samples.Common
             return pointLayer;
         }
 
+        public static Map CreateMap()
+        {
+            var map = new Map();
+            map.Layers.Add(OsmSample.CreateLayer());
+            map.Layers.Add(CreateLayer(map.Envelope));
+            map.InfoLayers.Add(map.Layers.FindLayer(InfoLayerName).First());
+            return map;
+        }
+
         public static ILayer CreateRandomPointLayer(IProvider dataSource)
         {
-            return new Layer("pointLayer")
+            return new Layer("Point Layer")
             {
                 DataSource = dataSource,
                 Style = new SymbolStyle { SymbolScale = 1, Fill = new Brush(Color.Blue) }

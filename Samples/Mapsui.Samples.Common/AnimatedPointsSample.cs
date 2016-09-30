@@ -15,8 +15,16 @@ namespace Mapsui.Samples.Common
         {
             return new AnimatedPointsWithAutoUpdateLayer {Name = "AnimatedLayer"};
         }
-    }
 
+        public static Map CreateMap()
+        {
+            var map = new Map();
+            map.Layers.Add(OsmSample.CreateLayer());
+            map.Layers.Add(CreateLayer());
+            return map;
+        }
+    }
+    
     public class AnimatedPointsWithAutoUpdateLayer : AnimatedPointLayer
     {
         private Timer _timer;

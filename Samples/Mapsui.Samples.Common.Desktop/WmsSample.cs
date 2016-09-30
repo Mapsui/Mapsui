@@ -5,9 +5,17 @@ namespace Mapsui.Samples.Common.Desktop
 {
     public static class WmsSample
     {
-        public static ILayer Create()
+        public static ILayer CreateLayer()
         {
-            return new ImageLayer("WmsLayer") { DataSource = CreateWmsProvider() };
+            return new ImageLayer("WMS Layer") { DataSource = CreateWmsProvider() };
+        }
+
+        public static Map CreateMap()
+        {
+            var map = new Map();
+            map.CRS = "EPSG:28992"; // The WMS request needs a CRS
+            map.Layers.Add(CreateLayer());
+            return map;
         }
 
         private static WmsProvider CreateWmsProvider()

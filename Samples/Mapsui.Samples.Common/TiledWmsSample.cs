@@ -34,6 +34,13 @@ namespace Mapsui.Samples.Common
         { 
             return new TileLayer(new GeodanWorldWmsTileSource()) { Name = "WMS called as WMSC" };
         }
+
+        public static Map CreateMap()
+        {
+            var map = new Map();
+            map.Layers.Add(CreateLayer());
+            return map;
+        }
     }
 
     public class GeodanWorldWmsTileSource : ITileSource

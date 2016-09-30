@@ -29,6 +29,12 @@ namespace Mapsui.Samples.Common.Desktop
         {
             return new TileLayer(new MapTilerTileSource()) {Name = "True Marble in MapTiler"};
         }
+        public static Map CreateMap()
+        {
+            var map = new Map();
+            map.Layers.Add(CreateLayer());
+            return map;
+        }
     }
     public class MapTilerTileSource : ITileSource
     {

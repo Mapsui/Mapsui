@@ -31,6 +31,13 @@ namespace Mapsui.Samples.Common
         {
             return new TileLayer(new GeodanWorldWmscTileSource());
         }
+
+        public static Map CreateMap()
+        {
+            var map = new Map();
+            map.Layers.Add(CreateLayer());
+            return map;
+        }
     }
 
     public class GeodanWorldWmscTileSource : ITileSource
@@ -42,9 +49,9 @@ namespace Mapsui.Samples.Common
             Name = "Geodan WMS-C";
         }
 
-        public ITileSchema Schema { get; private set; }
-        public string Name { get; private set; }
-        public ITileProvider Provider { get; private set; }
+        public ITileSchema Schema { get; }
+        public string Name { get; }
+        public ITileProvider Provider { get; }
 
         public byte[] GetTile(TileInfo tileInfo)
         {

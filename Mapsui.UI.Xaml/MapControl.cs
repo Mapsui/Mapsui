@@ -94,13 +94,12 @@ namespace Mapsui.UI.Xaml
                 
                 if (_map != null)
                 {
+                    _viewportInitialized = false;
                     _map.DataChanged += MapDataChanged; 
                     _map.PropertyChanged += MapPropertyChanged;
                     _map.RefreshGraphics += MapRefreshGraphics;
-                    _map.ViewChanged(true);
                 }
 
-                OnViewChanged();
                 RefreshGraphics();
             }
         }
@@ -545,6 +544,8 @@ namespace Mapsui.UI.Xaml
             _viewportInitialized = true;
 
             OnViewportInitialize();
+
+            Map.ViewChanged(true);
         }
 
         private void OnViewportInitialize()

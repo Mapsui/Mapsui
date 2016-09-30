@@ -12,19 +12,19 @@ namespace Mapsui.Samples.Common.Desktop
 {
     public static class ShapefileSample
     {
-        public static IEnumerable<ILayer> CreateLayers()
+        public static Map CreateMap()
         {
-            var layers = new List<ILayer>();
+            var map = new Map();
 
             var countrySource = new ShapeFile(GetAppDir() + "\\GeoData\\World\\countries.shp", true) { CRS = "EPSG:3785" };
             var citySource = new ShapeFile(GetAppDir() + "\\GeoData\\World\\cities.shp", true) { CRS = "EPSG:3785" };
 
-            layers.Add(new RasterizingLayer(CreateCountryLayer(countrySource)));
-            layers.Add(new RasterizingLayer(CreateCityLayer(citySource)));
-            layers.Add(new RasterizingLayer(CreateCountryLabelLayer(countrySource)));
-            layers.Add(new RasterizingLayer(CreateCityLabelLayer(citySource)));
+            map.Layers.Add(new RasterizingLayer(CreateCountryLayer(countrySource)));
+            map.Layers.Add(new RasterizingLayer(CreateCityLayer(citySource)));
+            map.Layers.Add(new RasterizingLayer(CreateCountryLabelLayer(countrySource)));
+            map.Layers.Add(new RasterizingLayer(CreateCityLabelLayer(citySource)));
 
-            return layers;
+            return map;
         }
 
         public static ILayer CreateCountryLayer(IProvider countrySource)

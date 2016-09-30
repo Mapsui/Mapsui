@@ -9,9 +9,16 @@ namespace Mapsui.Samples.Common
         public static ILayer CreateLayer()
         {
             return new Layer("LayerWithPolygon")
-                {
-                    DataSource = new MemoryProvider(CreatePolygon())
-                };
+            {
+                DataSource = new MemoryProvider(CreatePolygon())
+            };
+        }
+
+        public static Map CreateMap()
+        {
+            var map = new Map();
+            map.Layers.Add(CreateLayer());
+            return map;
         }
 
         private static Polygon CreatePolygon()

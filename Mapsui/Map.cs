@@ -46,9 +46,7 @@ namespace Mapsui
             Viewport =  new Viewport { Center = { X = double.NaN, Y = double.NaN }, Resolution = double.NaN };
             InfoLayers = new List<ILayer>();
             HoverInfoLayers = new List<ILayer>();
-
         }
-
 
         /// <summary>
         /// When Lock is true the map view will not respond to touch input.
@@ -60,7 +58,7 @@ namespace Mapsui
             {
                 if (_lock == value) return;
                 _lock = value;
-                OnPropertyChanged("Lock");
+                OnPropertyChanged(nameof(Lock));
             }
         }
 
@@ -188,36 +186,34 @@ namespace Mapsui
         public event DataChangedEventHandler DataChanged;
         public event EventHandler RefreshGraphics;
 
-        void LayersLayerRemoved(ILayer layer)
+        private void LayersLayerRemoved(ILayer layer)
         {
             layer.AbortFetch();
             layer.DataChanged -= LayerDataChanged;
             layer.PropertyChanged -= LayerPropertyChanged;
         }
 
-        void LayersLayerAdded(ILayer layer)
+        private void LayersLayerAdded(ILayer layer)
         {
             layer.DataChanged += LayerDataChanged;
             layer.PropertyChanged += LayerPropertyChanged;
             layer.Transformation = Transformation;
             layer.CRS = CRS;
         }
-        
-        void LayerPropertyChanged(object sender, PropertyChangedEventArgs e)
+
+        private void LayerPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             OnPropertyChanged(sender, e.PropertyName);
         }
 
         protected virtual void OnRefreshGraphics()
         {
-            var handler = RefreshGraphics;
-            if (handler != null) handler(this, EventArgs.Empty);
+            RefreshGraphics?.Invoke(this, EventArgs.Empty);
         }
 
         protected virtual void OnPropertyChanged(object sender, string propertyName)
         {
-            var handler = PropertyChanged;
-            if (handler != null) handler(sender, new PropertyChangedEventArgs(propertyName));
+            PropertyChanged?.Invoke(sender, new PropertyChangedEventArgs(propertyName));
         }
 
         protected void OnPropertyChanged(string name)
@@ -232,8 +228,7 @@ namespace Mapsui
         
         private void OnDataChanged(object sender, DataChangedEventArgs e)
         {
-            var handler = DataChanged;
-            if (handler != null) handler(sender, e);
+            DataChanged?.Invoke(sender, e);
         }
 
         public void AbortFetch()

@@ -11,6 +11,13 @@ namespace Mapsui.Samples.Common.Desktop
             return new ImageLayer("ArcGISImageServiceLayer") { DataSource = CreateProvider() };
         }
 
+        public static Map CreateMap()
+        {
+            var map = new Map();
+            map.Layers.Add(CreateLayer());
+            return map;
+        }
+
         private static ArcGISImageServiceProvider CreateProvider()
         {
             //Get Capabilities from service

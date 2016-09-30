@@ -1,13 +1,9 @@
 ﻿using System;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using Mapsui.Layers;
 using Mapsui.Logging;
-using Mapsui.Projection;
 using Mapsui.Providers;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Desktop;
@@ -37,12 +33,12 @@ namespace Mapsui.Samples.Wpf
             Dispatcher.Invoke(() => LogTextBox.Text = $"{logLevel} {s}");
         }
 
-        static void MapControlFeatureInfo(object sender, FeatureInfoEventArgs e)
+        private static void MapControlFeatureInfo(object sender, FeatureInfoEventArgs e)
         {
             MessageBox.Show(FeaturesToString(e.FeatureInfo));
         }
 
-        static string FeaturesToString(IEnumerable<KeyValuePair<string, IEnumerable<IFeature>>> featureInfos)
+        private static string FeaturesToString(IEnumerable<KeyValuePair<string, IEnumerable<IFeature>>> featureInfos)
         {
             var result = string.Empty;
 
@@ -88,9 +84,7 @@ namespace Mapsui.Samples.Wpf
         private void OsmClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
-
-            MapControl.Map.Layers.Add(OsmSample.CreateLayer());
-
+            MapControl.Map = OsmSample.CreateMap();
             LayerList.Initialize(MapControl.Map.Layers);
             MapControl.ZoomToFullEnvelope();
             MapControl.Refresh();
@@ -99,12 +93,7 @@ namespace Mapsui.Samples.Wpf
         private void ProjectedPointClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
-
-            MapControl.Map.Transformation = new MinimalTransformation();
-            MapControl.Map.CRS = "EPSG:3857";
-            MapControl.Map.Layers.Add(OsmSample.CreateLayer());
-            MapControl.Map.Layers.Add(PointsInWgs84Sample.CreateLayer());
-            
+            MapControl.Map = ProjectionSample.CreateMap();
             LayerList.Initialize(MapControl.Map.Layers);
             MapControl.ZoomToFullEnvelope();
             MapControl.Refresh();
@@ -113,10 +102,7 @@ namespace Mapsui.Samples.Wpf
         private void AnimatedPointsClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
-
-            MapControl.Map.Layers.Add(OsmSample.CreateLayer());
-            MapControl.Map.Layers.Add(AnimatedPointsSample.CreateLayer());
-
+            MapControl.Map = AnimatedPointsSample.CreateMap();
             LayerList.Initialize(MapControl.Map.Layers);
             MapControl.ZoomToFullEnvelope();
             MapControl.Refresh();
@@ -125,12 +111,7 @@ namespace Mapsui.Samples.Wpf
         private void RandomPointWithStackLabelClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
-
-            MapControl.Map.Layers.Add(OsmSample.CreateLayer());
-            var provider = PointsSample.CreateRandomPointsProvider(MapControl.Map.Envelope);
-            MapControl.Map.Layers.Add(PointsWithStackedLabelsSample.CreateLayer(provider));
-            MapControl.Map.Layers.Add(PointsSample.CreateRandomPointLayer(provider));
-
+            MapControl.Map = StackedLabelsSample.CreateMap();
             LayerList.Initialize(MapControl.Map.Layers);
             MapControl.ZoomToFullEnvelope();
             MapControl.Refresh();
@@ -139,11 +120,7 @@ namespace Mapsui.Samples.Wpf
         private void RandomPointsWithFeatureInfoClick(object server, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
-
-            MapControl.Map.Layers.Add(OsmSample.CreateLayer());
-            MapControl.Map.Layers.Add(PointsWithFeatureInfoSample.CreateLayer(MapControl.Map.Envelope));
-            MapControl.Map.InfoLayers.Add(MapControl.Map.Layers.FindLayer("Points with feature info").First());
-
+            MapControl.Map = InfoLayersSample.CreateMap();
             LayerList.Initialize(MapControl.Map.Layers);
             MapControl.ZoomToFullEnvelope();
             MapControl.Refresh();
@@ -152,9 +129,7 @@ namespace Mapsui.Samples.Wpf
         private void GeodanWmsClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
-
-            MapControl.Map.Layers.Add(TiledWmsSample.CreateLayer());
-
+            MapControl.Map = TiledWmsSample.CreateMap();
             LayerList.Initialize(MapControl.Map.Layers);
             MapControl.ZoomToFullEnvelope();
             MapControl.Refresh();
@@ -163,9 +138,7 @@ namespace Mapsui.Samples.Wpf
         private void GeodanTmsClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
-
-            MapControl.Map.Layers.Add(TmsSample.CreateLayer());
-
+            MapControl.Map = TmsSample.CreateMap();
             LayerList.Initialize(MapControl.Map.Layers);
             MapControl.ZoomToFullEnvelope();
             MapControl.Refresh();
@@ -174,9 +147,7 @@ namespace Mapsui.Samples.Wpf
         private void BingMapsClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
-
-            MapControl.Map.Layers.Add(BingSample.CreateLayer());
-
+            MapControl.Map = BingSample.CreateMap();
             LayerList.Initialize(MapControl.Map.Layers);
             MapControl.ZoomToFullEnvelope();
             MapControl.Refresh();
@@ -185,9 +156,7 @@ namespace Mapsui.Samples.Wpf
         private void GeodanWmscClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
-
-            MapControl.Map.Layers.Add(WmscSample.CreateLayer());
-
+            MapControl.Map = WmscSample.CreateMap();
             LayerList.Initialize(MapControl.Map.Layers);
             MapControl.ZoomToFullEnvelope();
             MapControl.Refresh();
@@ -196,12 +165,7 @@ namespace Mapsui.Samples.Wpf
         private void ShapefileClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
-
-            foreach (var layer in ShapefileSample.CreateLayers())
-            {
-                MapControl.Map.Layers.Add(layer);
-            }
-            
+            MapControl.Map = ShapefileSample.CreateMap();
             LayerList.Initialize(MapControl.Map.Layers);
             MapControl.ZoomToFullEnvelope();
             MapControl.Refresh();
@@ -210,9 +174,7 @@ namespace Mapsui.Samples.Wpf
         private void MapTilerClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
-
-            MapControl.Map.Layers.Add(MapTilerSample.CreateLayer());
-
+            MapControl.Map = MapTilerSample.CreateMap();
             LayerList.Initialize(MapControl.Map.Layers);
             MapControl.ZoomToFullEnvelope();
             MapControl.Refresh();
@@ -221,11 +183,7 @@ namespace Mapsui.Samples.Wpf
         private void PointSymbolsClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
-
-            MapControl.Map.Layers.Add(OsmSample.CreateLayer());
-            MapControl.Map.Layers.Add(PointsSample.Create());
-            MapControl.Map.Layers.Add(PointsWithSymbolsInWorldUnitsSample.CreateLayer());
-
+            MapControl.Map = SymbolsInWorldUnitsSample.CreateMap();
             LayerList.Initialize(MapControl.Map.Layers);
             MapControl.ZoomToFullEnvelope();
             MapControl.Refresh();
@@ -234,10 +192,7 @@ namespace Mapsui.Samples.Wpf
         private void WmsClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
-
-            MapControl.Map.CRS = "EPSG:28992";
-            MapControl.Map.Layers.Add(WmsSample.Create());
-
+            MapControl.Map = WmsSample.CreateMap();
             LayerList.Initialize(MapControl.Map.Layers);
             MapControl.ZoomToFullEnvelope(); 
             MapControl.Refresh();
@@ -246,9 +201,7 @@ namespace Mapsui.Samples.Wpf
         private void ArcGISImageServiceClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
-
-            MapControl.Map.Layers.Add(ArcGISImageServiceSample.CreateLayer());
-
+            MapControl.Map = ArcGISImageServiceSample.CreateMap();
             LayerList.Initialize(MapControl.Map.Layers);
             MapControl.ZoomToFullEnvelope();
             MapControl.Refresh();
@@ -257,10 +210,7 @@ namespace Mapsui.Samples.Wpf
         private void WmtsClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
-
-            MapControl.Map.Layers.Add(WmtsSample.CreateLayer());
-            MapControl.Map.Layers.Add(GeodanOfficesSample.CreateLayer());
-
+            MapControl.Map = WmtsSample.CreateMap();
             LayerList.Initialize(MapControl.Map.Layers);
             MapControl.ZoomToFullEnvelope();
             MapControl.Refresh();
@@ -269,10 +219,7 @@ namespace Mapsui.Samples.Wpf
         private void PointsWithLabelsClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
-
-            MapControl.Map.Layers.Add(OsmSample.CreateLayer());
-            MapControl.Map.Layers.Add(PointsSample.CreatePointLayerWithLabels());
-
+            MapControl.Map = LabelsSample.CreateMap();
             LayerList.Initialize(MapControl.Map.Layers);
             MapControl.ZoomToFullEnvelope();
             MapControl.Refresh();
@@ -281,29 +228,10 @@ namespace Mapsui.Samples.Wpf
         private void RasterizingLabelWithPointsClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
-
-            MapControl.Map.Layers.Add(OsmSample.CreateLayer());
-            var layer = CreatePointLayer();
-            var rasterizingLayer = new RasterizingLayer(layer);
-
-            MapControl.Map.Layers.Add(rasterizingLayer);
-        }
-
-        private static MemoryLayer CreatePointLayer()
-        {
-            var provider = new MemoryProvider();
-            var rnd = new Random();
-            for (var i = 0; i < 100; i++)
-            {
-                var feature = new Feature
-                {
-                    Geometry = new Geometries.Point(rnd.Next(100000, 5000000), rnd.Next(100000, 5000000))
-                };
-                provider.Features.Add(feature);
-            }
-            var layer = new MemoryLayer {DataSource = provider};
-            return layer;
+            MapControl.Map = RasterizingLayerSample.CreateMap();
+            LayerList.Initialize(MapControl.Map.Layers);
+            MapControl.ZoomToFullEnvelope();
+            MapControl.Refresh();
         }
     }
 }
-
