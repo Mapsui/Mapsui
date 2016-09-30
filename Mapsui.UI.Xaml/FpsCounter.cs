@@ -18,9 +18,6 @@
 using System;
 using System.ComponentModel;
 using System.Windows;
-#if NETFX_CORE
-using Windows.UI.Xaml;
-#endif
 
 namespace Mapsui.UI.Xaml
 {

@@ -31,11 +31,7 @@ using Mapsui.Providers;
 using Mapsui.Rendering;
 using Mapsui.Rendering.Xaml;
 using Mapsui.Utilities;
-#if !SILVERLIGHT && !WINDOWS_PHONE
 using XamlVector = System.Windows.Vector;
-#else
-using XamlVector = System.Windows.Point;
-#endif
 
 namespace Mapsui.UI.Xaml
 {
@@ -182,25 +178,20 @@ namespace Mapsui.UI.Xaml
             KeyUp += MapControlKeyUp;
             MouseLeftButtonDown += MapControlMouseLeftButtonDown;
             MouseLeftButtonUp += MapControlMouseLeftButtonUp;
-#if (!WINDOWS_PHONE) //turn off mouse controls
+
             MouseMove += MapControlMouseMove;
             MouseLeave += MapControlMouseLeave;
             MouseWheel += MapControlMouseWheel;
-#endif
+
             SizeChanged += MapControlSizeChanged;
             CompositionTarget.Rendering += CompositionTargetRendering;
             Renderer = new MapRenderer(RenderCanvas);
 
-#if (!SILVERLIGHT && !WINDOWS_PHONE)
             ManipulationDelta += OnManipulationDelta;
             ManipulationCompleted += OnManipulationCompleted;
             ManipulationInertiaStarting += OnManipulationInertiaStarting;
             Dispatcher.ShutdownStarted += DispatcherShutdownStarted;
             IsManipulationEnabled = true;
-#elif WINDOWS_PHONE
-            RenderCanvas.ManipulationDelta += OnManipulationDelta;
-            RenderCanvas.ManipulationCompleted += OnManipulationCompleted;
-#endif
         }
         
         public virtual void OnViewChanged(bool userAction = false)
@@ -218,25 +209,17 @@ namespace Mapsui.UI.Xaml
 
         private void RefreshGraphics()
         {
-#if (!SILVERLIGHT && !WINDOWS_PHONE)
             Dispatcher.BeginInvoke(new Action(() =>
             {
 
                 InvalidateVisual();
                 _invalid = true;
             }));
-#else
-                InvalidateArrange();
-                _invalid = true;
-#endif
         }
 
         public void Clear()
         {
-            if (_map != null)
-            {
-                _map.ClearCache();
-            }
+            _map?.ClearCache();
             RefreshGraphics();
         }
 
@@ -263,10 +246,7 @@ namespace Mapsui.UI.Xaml
 
         protected void OnErrorMessageChanged(EventArgs e)
         {
-            if (ErrorMessageChanged != null)
-            {
-                ErrorMessageChanged(this, e);
-            }
+            ErrorMessageChanged?.Invoke(this, e);
         }
 
         private static void OnResolutionChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
@@ -297,10 +277,7 @@ namespace Mapsui.UI.Xaml
             if (!_viewportInitialized) InitializeViewport();
             UpdateSize();
             InitAnimation();
-
-#if (!SILVERLIGHT && !WINDOWS_PHONE)
             Focusable = true;
-#endif
         }
 
         private void InitAnimation()
@@ -385,7 +362,7 @@ namespace Mapsui.UI.Xaml
         {
             if (!Dispatcher.CheckAccess())
             {
-                Dispatcher.BeginInvoke(new DataChangedEventHandler(MapDataChanged), new[] { sender, e });
+                Dispatcher.BeginInvoke(new DataChangedEventHandler(MapDataChanged), sender, e);
             }
             else
             {
@@ -418,9 +395,8 @@ namespace Mapsui.UI.Xaml
 
         private void MapControlMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-#if !SILVERLIGHT
             if (e.StylusDevice != null) return;
-#endif
+
             _previousMousePosition = e.GetPosition(this);
             _downMousePosition = e.GetPosition(this);
             _mouseDown = true;
@@ -429,9 +405,8 @@ namespace Mapsui.UI.Xaml
 
         private void MapControlMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-#if !SILVERLIGHT
             if (e.StylusDevice != null) return;
-#endif
+
             if (IsInBoxZoomMode || ZoomToBoxMode)
             {
                 ZoomToBoxMode = false;
@@ -472,17 +447,13 @@ namespace Mapsui.UI.Xaml
 
         private void OnFeatureInfo(IDictionary<string, IEnumerable<IFeature>> features)
         {
-            if (FeatureInfo != null)
-            {
-                FeatureInfo(this, new FeatureInfoEventArgs { FeatureInfo = features });
-            }
+            FeatureInfo?.Invoke(this, new FeatureInfoEventArgs { FeatureInfo = features });
         }
 
         private void MapControlMouseMove(object sender, MouseEventArgs e)
         {
-#if !SILVERLIGHT
             if (e.StylusDevice != null) return;
-#endif
+
             if (IsInBoxZoomMode || ZoomToBoxMode)
             {
                 DrawBbox(e.GetPosition(this));
@@ -521,8 +492,7 @@ namespace Mapsui.UI.Xaml
 
             foreach (var layer in layers)
             {
-                if (layer == null) continue;
-                var feature = layer.GetFeaturesInView(Map.Envelope, 0)
+                var feature = layer?.GetFeaturesInView(Map.Envelope, 0)
                     .Where(f => f.Geometry.GetBoundingBox().GetCentroid().Distance(point) < margin)
                     .OrderBy(f => f.Geometry.GetBoundingBox().GetCentroid().Distance(point))
                     .FirstOrDefault();
@@ -537,10 +507,7 @@ namespace Mapsui.UI.Xaml
 
         protected void OnMouseInfoLeave()
         {
-            if (MouseInfoLeave != null)
-            {
-                MouseInfoLeave(this, new EventArgs());
-            }
+            MouseInfoLeave?.Invoke(this, new EventArgs());
         }
 
         protected void OnMouseInfoOver(MouseInfoEventArgs e)
@@ -579,8 +546,7 @@ namespace Mapsui.UI.Xaml
 
         private void OnViewportInitialize()
         {
-            var handler = ViewportInitialized;
-            if (handler != null) ViewportInitialized(this, EventArgs.Empty);
+            ViewportInitialized?.Invoke(this, EventArgs.Empty);
         }
 
         private void CompositionTargetRendering(object sender, EventArgs e)
@@ -596,18 +562,13 @@ namespace Mapsui.UI.Xaml
                 _invalid = false;
             }
         }
-
-#if !SILVERLIGHT
+        
         private void DispatcherShutdownStarted(object sender, EventArgs e)
         {
             CompositionTarget.Rendering -= CompositionTargetRendering;
-            if (_map != null)
-            {
-                _map.Dispose();
-            }
+            _map?.Dispose();
         }
-#endif
-
+        
         public void ZoomToBox(Geometries.Point beginPoint, Geometries.Point endPoint)
         {
             double x, y, resolution;
@@ -650,7 +611,7 @@ namespace Mapsui.UI.Xaml
 
         private void MapControlKeyDown(object sender, KeyEventArgs e)
         {
-            String keyName = e.Key.ToString().ToLower();
+            var keyName = e.Key.ToString().ToLower();
             if (keyName.Equals("ctrl") || keyName.Equals("leftctrl") || keyName.Equals("rightctrl"))
             {
                 IsInBoxZoomMode = true;
@@ -661,19 +622,19 @@ namespace Mapsui.UI.Xaml
         {
             if (_mouseDown)
             {
-                Point from = _previousMousePosition;
-                Point to = newPos;
+                var from = _previousMousePosition;
+                var to = newPos;
 
                 if (from.X > to.X)
                 {
-                    Point temp = from;
+                    var temp = from;
                     from.X = to.X;
                     to.X = temp.X;
                 }
 
                 if (from.Y > to.Y)
                 {
-                    Point temp = from;
+                    var temp = from;
                     from.Y = to.Y;
                     to.Y = temp.Y;
                 }
@@ -692,14 +653,11 @@ namespace Mapsui.UI.Xaml
             Map.Viewport.Center = Map.Envelope.GetCentroid();
         }
 
-#if (!SILVERLIGHT && !WINDOWS_PHONE)
-
         private static void OnManipulationInertiaStarting(object sender, ManipulationInertiaStartingEventArgs e)
         {
             e.TranslationBehavior.DesiredDeceleration = 25 * 96.0 / (1000.0 * 1000.0);
         }
 
-#endif
         private void OnManipulationDelta(object sender, ManipulationDeltaEventArgs e)
         {
             var previousX = e.ManipulationOrigin.X;

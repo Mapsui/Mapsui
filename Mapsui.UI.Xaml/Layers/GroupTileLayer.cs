@@ -1,4 +1,3 @@
-using System;
 using BruTile;
 using BruTile.Cache;
 using Mapsui.Fetcher;
@@ -12,15 +11,11 @@ using System.IO;
 using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
-#if SILVERLIGHT
-using Mapsui.Rendering.Xaml.BitmapRendering;
-#endif
 
 namespace Mapsui.UI.Xaml.Layers
 {
     public class GroupTileLayer : BaseLayer, ITileLayer
     {
-        private IList<TileLayer> _layers = new List<TileLayer>();
         private readonly MemoryCache<Feature> _memoryCache = new MemoryCache<Feature>(200, 300);
         
         public GroupTileLayer(IEnumerable<TileLayer> tileLayers)
@@ -60,20 +55,10 @@ namespace Mapsui.UI.Xaml.Layers
             {
                 var tileWidth = Schema.GetTileWidth(e.TileInfo.Index.Level);
                 var tileHeight = Schema.GetTileHeight(e.TileInfo.Index.Level); 
-#if SILVERLIGHT
-                RunOnUIThread(() => AddBitmapToCache(e, CombineBitmaps(tiles, tileWidth, tileHeight)));
-#else
+
                 AddBitmapToCache(e, CombineBitmaps(tiles, tileWidth, tileHeight));
-#endif
             }
         }
-
-#if SILVERLIGHT
-        private void RunOnUIThread(Action method)
-        {
-            System.Windows.Deployment.Current.Dispatcher.BeginInvoke(method);
-        }
-#endif
 
         private void AddBitmapToCache(DataChangedEventArgs e, MemoryStream bitmap)
         {
@@ -100,28 +85,17 @@ namespace Mapsui.UI.Xaml.Layers
             foreach (MemoryStream tile in tiles)
             {
                 var bitmapImage = new BitmapImage();
-#if SILVERLIGHT
-                tile.Position = 0;
-                var copyOfTile = new MemoryStream(tile.ToArray());
-                bitmapImage.SetSource(copyOfTile);
-#else
                 tile.Position = 0;
                 var copyOfTile = new MemoryStream(tile.ToArray()); 
                 bitmapImage.BeginInit();
                 bitmapImage.StreamSource = copyOfTile;
                 bitmapImage.EndInit();
-#endif
                 var image = new Image {Source = bitmapImage};
                 canvas.Children.Add(image);
 
             }
 
-#if SILVERLIGHT
-            return BitmapConverter.ToBitmapStream(canvas, width, height);
-#else
             return Rendering.Xaml.BitmapRendering.BitmapConverter.ToBitmapStream(canvas, width, height);
-#endif
-
         }
 
         public override void AbortFetch()
@@ -180,16 +154,9 @@ namespace Mapsui.UI.Xaml.Layers
             }
         }
         
-        public MemoryCache<Feature> MemoryCache
-        {
-            get { return _memoryCache; }
-        }
+        public MemoryCache<Feature> MemoryCache => _memoryCache;
 
-        public IList<TileLayer> Layers
-        {
-            get { return _layers; }
-            set { _layers = value; }
-        }
+        public IList<TileLayer> Layers { get; set; } = new List<TileLayer>();
 
         public override void ClearCache()
         {
