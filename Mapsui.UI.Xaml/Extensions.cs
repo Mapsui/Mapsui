@@ -5,7 +5,8 @@ namespace System
         public static bool IsNanOrZero(this double target)
         {
             if (double.IsNaN(target)) return true;
-            return (target == 0);
+            // ReSharper disable once CompareOfFloatsByEqualityOperator
+            return target == 0;
         }
     }
 }

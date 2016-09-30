@@ -26,7 +26,7 @@ namespace Mapsui.Rendering.Xaml
             {
                 foreach (var feature in features)
                 {
-                    var style = (layerStyle is IThemeStyle) ? (layerStyle as IThemeStyle).GetStyle(feature) : layerStyle;
+                    var style = layerStyle is IThemeStyle ? (layerStyle as IThemeStyle).GetStyle(feature) : layerStyle;
 
                     if ((style == null) || 
                         (style.Enabled == false) || 

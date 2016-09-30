@@ -67,6 +67,8 @@ namespace Mapsui.UI.Xaml
         [Obsolete("Map.Viewport instead", true)]
         public IViewport Viewport => Map.Viewport;
 
+        private MouseInfoEventArgs _previousMouseOverEventArgs;
+
 
         public Map Map
         {
@@ -140,10 +142,11 @@ namespace Mapsui.UI.Xaml
 
         public Canvas RenderCanvas { get; }
 
+        // ReSharper disable once UnusedMember.Local // This registration triggers the call to OnResolutionChanged
         private static readonly DependencyProperty ResolutionProperty =
-          DependencyProperty.Register(
-          "Resolution", typeof(double), typeof(MapControl),
-          new PropertyMetadata(OnResolutionChanged));
+            DependencyProperty.Register(
+            "Resolution", typeof(double), typeof(MapControl),
+            new PropertyMetadata(OnResolutionChanged));
 
         public MapControl()
         {
@@ -437,10 +440,7 @@ namespace Mapsui.UI.Xaml
             {
                 foreach (var layer in Map.Layers)
                 {
-                    if (layer is IFeatureInfo) // There should also be a check if feature info is supported for a specific layer
-                    {
-                        (layer as IFeatureInfo).GetFeatureInfo(Map.Viewport, _downMousePosition.X, _downMousePosition.Y, OnFeatureInfo);
-                    }
+                    (layer as IFeatureInfo)?.GetFeatureInfo(Map.Viewport, _downMousePosition.X, _downMousePosition.Y, OnFeatureInfo);
                 }
             }
         }
@@ -480,9 +480,12 @@ namespace Mapsui.UI.Xaml
 
         private void RaiseMouseInfoOverEvents(Point mousePosition)
         {
-            var mouseEventArgs = GetMouseInfoEventArgs(mousePosition, MouseInfoOverLayers);
-            if (mouseEventArgs == null) OnMouseInfoLeave();
-            else OnMouseInfoOver(mouseEventArgs);
+            
+            var mouseOverEventArgs = GetMouseInfoEventArgs(mousePosition, MouseInfoOverLayers);
+            if (_previousMouseOverEventArgs != null && mouseOverEventArgs != null) OnMouseInfoLeave();
+            else OnMouseInfoOver(mouseOverEventArgs);
+            _previousMouseOverEventArgs = mouseOverEventArgs;
+            
         }
 
         private MouseInfoEventArgs GetMouseInfoEventArgs(Point mousePosition, IEnumerable<ILayer> layers)
