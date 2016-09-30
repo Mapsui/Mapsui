@@ -84,6 +84,7 @@ namespace Mapsui.Samples.Wpf
         private void OsmClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
+
             MapControl.Map.Layers.Add(OsmSample.CreateLayer());
 
             LayerList.Initialize(MapControl.Map.Layers);
@@ -118,6 +119,7 @@ namespace Mapsui.Samples.Wpf
         private void RandomPointWithStackLabelClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
+
             MapControl.Map.Layers.Add(OsmSample.CreateLayer());
             var provider = PointsSample.CreateRandomPointsProvider(MapControl.Map.Envelope);
             MapControl.Map.Layers.Add(PointsWithStackedLabelsSample.CreateLayer(provider));
@@ -131,9 +133,9 @@ namespace Mapsui.Samples.Wpf
         private void RandomPointsWithFeatureInfoClick(object server, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
+
             MapControl.Map.Layers.Add(OsmSample.CreateLayer());
             MapControl.Map.Layers.Add(PointsWithFeatureInfoSample.CreateLayer(MapControl.Map.Envelope));
-
             MapControl.MouseInfoUp += MapControlOnMouseInfoDown;
             MapControl.MouseInfoUpLayers.Add(MapControl.Map.Layers.FindLayer("Points with feature info").First());
 
@@ -145,6 +147,7 @@ namespace Mapsui.Samples.Wpf
         private void GeodanWmsClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
+
             MapControl.Map.Layers.Add(TiledWmsSample.CreateLayer());
 
             LayerList.Initialize(MapControl.Map.Layers);
@@ -155,6 +158,7 @@ namespace Mapsui.Samples.Wpf
         private void GeodanTmsClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
+
             MapControl.Map.Layers.Add(TmsSample.CreateLayer());
 
             LayerList.Initialize(MapControl.Map.Layers);
@@ -165,6 +169,7 @@ namespace Mapsui.Samples.Wpf
         private void BingMapsClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
+
             MapControl.Map.Layers.Add(BingSample.CreateLayer());
 
             LayerList.Initialize(MapControl.Map.Layers);
@@ -175,6 +180,7 @@ namespace Mapsui.Samples.Wpf
         private void GeodanWmscClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
+
             MapControl.Map.Layers.Add(WmscSample.CreateLayer());
 
             LayerList.Initialize(MapControl.Map.Layers);
@@ -185,6 +191,7 @@ namespace Mapsui.Samples.Wpf
         private void ShapefileClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
+
             foreach (var layer in ShapefileSample.CreateLayers())
             {
                 MapControl.Map.Layers.Add(layer);
@@ -198,6 +205,7 @@ namespace Mapsui.Samples.Wpf
         private void MapTilerClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
+
             MapControl.Map.Layers.Add(MapTilerSample.CreateLayer());
 
             LayerList.Initialize(MapControl.Map.Layers);
@@ -208,6 +216,7 @@ namespace Mapsui.Samples.Wpf
         private void PointSymbolsClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
+
             MapControl.Map.Layers.Add(OsmSample.CreateLayer());
             MapControl.Map.Layers.Add(PointsSample.Create());
             MapControl.Map.Layers.Add(PointsWithSymbolsInWorldUnitsSample.CreateLayer());
@@ -220,11 +229,11 @@ namespace Mapsui.Samples.Wpf
         private void WmsClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
+
             MapControl.Map.CRS = "EPSG:28992";
             MapControl.Map.Layers.Add(WmsSample.Create());
 
             LayerList.Initialize(MapControl.Map.Layers);
-            
             MapControl.ZoomToFullEnvelope(); 
             MapControl.Refresh();
         }
@@ -232,6 +241,7 @@ namespace Mapsui.Samples.Wpf
         private void ArcGISImageServiceClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
+
             MapControl.Map.Layers.Add(ArcGISImageServiceSample.CreateLayer());
 
             LayerList.Initialize(MapControl.Map.Layers);
@@ -242,6 +252,7 @@ namespace Mapsui.Samples.Wpf
         private void WmtsClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
+
             MapControl.Map.Layers.Add(WmtsSample.CreateLayer());
             MapControl.Map.Layers.Add(GeodanOfficesSample.CreateLayer());
 
@@ -253,6 +264,7 @@ namespace Mapsui.Samples.Wpf
         private void PointsWithLabelsClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
+
             MapControl.Map.Layers.Add(OsmSample.CreateLayer());
             MapControl.Map.Layers.Add(PointsSample.CreatePointLayerWithLabels());
 
@@ -264,9 +276,11 @@ namespace Mapsui.Samples.Wpf
         private void RasterizingLabelWithPointsClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
+
             MapControl.Map.Layers.Add(OsmSample.CreateLayer());
             var layer = CreatePointLayer();
             var rasterizingLayer = new RasterizingLayer(layer);
+
             MapControl.Map.Layers.Add(rasterizingLayer);
         }
 
