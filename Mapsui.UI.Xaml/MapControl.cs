@@ -440,6 +440,7 @@ namespace Mapsui.UI.Xaml
             {
                 foreach (var layer in Map.Layers)
                 {
+                    // ReSharper disable once SuspiciousTypeConversion.Global
                     (layer as IFeatureInfo)?.GetFeatureInfo(Map.Viewport, _downMousePosition.X, _downMousePosition.Y, OnFeatureInfo);
                 }
             }
@@ -555,8 +556,8 @@ namespace Mapsui.UI.Xaml
         private void CompositionTargetRendering(object sender, EventArgs e)
         {
             if (!_viewportInitialized) InitializeViewport();
-            if (!_viewportInitialized) return; //stop if the line above failed. 
-            if (!_invalid && !DeveloperTools.DeveloperMode) return; //in developermode always render so that fps can be counterd.
+            if (!_viewportInitialized) return; // Stop if the line above failed. 
+            if (!_invalid && !DeveloperTools.DeveloperMode) return; // In developermode always render so that fps can be counterd.
 
             if ((Renderer != null) && (_map != null))
             {
