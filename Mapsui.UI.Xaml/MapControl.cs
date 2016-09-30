@@ -136,19 +136,13 @@ namespace Mapsui.UI.Xaml
             }
         }
 
-        public FpsCounter FpsCounter
-        {
-            get
-            {
-                return _fpsCounter;
-            }
-        }
+        public FpsCounter FpsCounter => _fpsCounter;
 
         public string ErrorMessage { get; private set; }
 
         public bool ZoomLocked { get; set; }
 
-        public Canvas RenderCanvas { get; private set; }
+        public Canvas RenderCanvas { get; }
 
         private static readonly DependencyProperty ResolutionProperty =
           DependencyProperty.Register(
@@ -213,9 +207,7 @@ namespace Mapsui.UI.Xaml
         {
             if (_map == null) return;
 
-            var handler = ViewChanged;
-            if (handler != null)  ViewChanged(this, new ViewChangedEventArgs { Viewport = Map.Viewport, UserAction = userAction });
-           
+            ViewChanged?.Invoke(this, new ViewChangedEventArgs { Viewport = Map.Viewport, UserAction = userAction });
         }
 
         public void Refresh()
@@ -553,18 +545,12 @@ namespace Mapsui.UI.Xaml
 
         protected void OnMouseInfoOver(MouseInfoEventArgs e)
         {
-            if (MouseInfoOver != null)
-            {
-                MouseInfoOver(this, e);
-            }
+            MouseInfoOver?.Invoke(this, e);
         }
 
         protected void OnMouseInfoUp(MouseInfoEventArgs e)
         {
-            if (MouseInfoUp != null)
-            {
-                MouseInfoUp(this, e);
-            }
+            MouseInfoUp?.Invoke(this, e);
         }
 
         private void InitializeViewport()
