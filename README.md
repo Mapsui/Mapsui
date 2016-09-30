@@ -11,10 +11,14 @@ Mapsui is a C# library for mapping applications.
 - Based on a modified version of SharpMap. 
 - Uses BruTile to access tile services
 
+## Getting Started
+
+Look [here](https://github.com/pauldendulk/Mapsui/wiki/Getting-Started-with-Mapsui)
+
 ## Get it from NuGet 
-`
+```
 PM> Install-Package Mapsui
-`
+```
 
 https://www.nuget.org/packages/Mapsui
 
@@ -23,16 +27,18 @@ https://www.nuget.org/packages/Mapsui
 There are four platforms supported:
 - Windows Desktop - WPF on .NET 4.5
 - Windows Store - Profile32 PCLs (Windows 8.1 and Windows Phone 8.1)
-- Mapsui Android - for API Level 15 (v4.0.3 - Ice Cream Sandwich)
-- Mapsui iOS
+- Xamarin Android - for API Level 15 (v4.0.3 - Ice Cream Sandwich)
+- Xamarin iOS
 
-## Three components
+## Components
 
-If you install the NuGet package into your app three assemblies are added:
+If you install the NuGet package into your app these assemblies are added:
 
-- Mapsui - The core project, is a PCL with Profile111 which targets (.Net Framework 4.5, ASP.NET Core 5.0, Windows 8, Windows Phone 8.1, Xamarin.Android, Xamarin.iOS, Xamarin.iOS (Classic))
-- Mapsui.Rendering - A platform specific renderer
 - Mapsui.UI - Platorm specific UI. Contains the MapControl
+- Mapsui.Rendering - A platform specific renderer
+- Mapsui and Mapsui.Geometries - The core projects, is a PCL with Profile111 which targets (.Net Framework 4.5, ASP.NET Core 5.0, Windows 8, Windows Phone 8.1, Xamarin.Android, Xamarin.iOS, Xamarin.iOS (Classic))
+- BruTile - Used for the tile layers.
+
 
 ## Wiki
 Take a look at the [wiki](https://github.com/pauldendulk/Mapsui/wiki). We are starting to add some information there. If you have a question please submit an [issue](https://github.com/pauldendulk/Mapsui/issues) or a question on stackoverflow the the 'mapsui' tag (I will get a notification).
