@@ -73,7 +73,7 @@ namespace Mapsui.UI.WinForms
         void MapDataChanged(object sender, DataChangedEventArgs e)
         {
                 //ViewChanged should not be called here. This would cause a loop
-            BeginInvoke((Action) (() => DataChanged(sender, e)));
+            BeginInvoke((Action) (() => DataChanged(e)));
         }
         
         
@@ -144,7 +144,7 @@ namespace Mapsui.UI.WinForms
             _map?.ViewChanged(changeEnd);
         }
 
-        private void DataChanged(object sender, DataChangedEventArgs e)
+        private void DataChanged(DataChangedEventArgs e)
         {
             if (e.Error == null && e.Cancelled == false)
             {
