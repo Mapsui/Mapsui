@@ -62,7 +62,6 @@
     <Compile Include="PointsSample.cs" />
     <Compile Include="SymbolsInWorldUnitsSample.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StyleSamples.cs" />
     <Compile Include="WmtsSample.cs" />
   </ItemGroup>
   <ItemGroup>

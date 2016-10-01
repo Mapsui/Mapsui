@@ -14,15 +14,17 @@ namespace Mapsui.Samples.Common
         {
             var pointLayer = CreateRandomPointLayer(PointsSample.CreateRandomPointsProvider(envelope));
             pointLayer.Name = InfoLayerName;
-            pointLayer.Style = new StyleCollection
-            {
-                new SymbolStyle
-                {
-                    SymbolScale = 1, Fill = new Brush(Color.Cyan),
-                    Outline = { Color = Color.White, Width = 2}
-                }
-            };
+            pointLayer.Style = new StyleCollection { CreateSymbolStyle() };
             return pointLayer;
+        }
+
+        private static SymbolStyle CreateSymbolStyle()
+        {
+            return new SymbolStyle
+            {
+                SymbolScale = 1, Fill = new Brush(Color.Cyan),
+                Outline = { Color = Color.White, Width = 2}
+            };
         }
 
         public static Map CreateMap()

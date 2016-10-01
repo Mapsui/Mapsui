@@ -101,6 +101,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Mapsui.Geometries\Mapsui.Geometries.csproj">
+      <Project>{ee55b62d-ffa2-4c24-a4ad-7a47ace55ce5}</Project>
+      <Name>Mapsui.Geometries</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Mapsui.UI.WinForms\Mapsui.UI.WinForms.csproj">
       <Project>{4e40e824-96b8-4f98-a0f8-2dbdf9d3dce5}</Project>
       <Name>Mapsui.UI.WinForms</Name>

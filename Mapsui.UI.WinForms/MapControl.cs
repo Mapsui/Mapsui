@@ -28,7 +28,7 @@ namespace Mapsui.UI.WinForms
     {
         
         private Map _map;
-        private string _errorMessage;
+        public string ErrorMessage { get; private set; }
         private Bitmap _buffer;
         private Graphics _bufferGraphics;
         private readonly Brush _whiteBrush = new SolidBrush(Color.White);
@@ -42,10 +42,7 @@ namespace Mapsui.UI.WinForms
         public event EventHandler ErrorMessageChanged;
 
         
-        public IViewport Transform
-        {
-            get { return _map.Viewport; }
-        }
+        public IViewport Transform => _map.Viewport;
 
         public Map Map
         {
@@ -61,12 +58,13 @@ namespace Mapsui.UI.WinForms
                 if (temp != null)
                 {
                     temp.DataChanged -= MapDataChanged;
-                    temp.Dispose();
                 }
 
                 _map = value;
+                
                 _map.DataChanged += MapDataChanged;
 
+                _viewInitialized = false;
                 ViewChanged(true);
                 Invalidate();
             }
@@ -143,10 +141,7 @@ namespace Mapsui.UI.WinForms
 
         private void ViewChanged(bool changeEnd)
         {
-            if (_map != null)
-            {
-                _map.ViewChanged(changeEnd);
-            }
+            _map?.ViewChanged(changeEnd);
         }
 
         private void DataChanged(object sender, DataChangedEventArgs e)
@@ -157,22 +152,22 @@ namespace Mapsui.UI.WinForms
             }
             else if (e.Cancelled)
             {
-                _errorMessage = "Cancelled";
+                ErrorMessage = "Cancelled";
                 OnErrorMessageChanged();
             }
             else if (e.Error is System.Net.WebException)
             {
-                _errorMessage = "WebException: " + e.Error.Message;
+                ErrorMessage = "WebException: " + e.Error.Message;
                 OnErrorMessageChanged();
             }
             else if (e.Error == null)
             {
-                _errorMessage = "Unknown Exception";
+                ErrorMessage = "Unknown Exception";
                 OnErrorMessageChanged();
             }
             else
             {
-                _errorMessage = "Exception: " + e.Error.Message;
+                ErrorMessage = "Exception: " + e.Error.Message;
                 OnErrorMessageChanged();
             }
         }
@@ -231,11 +226,15 @@ namespace Mapsui.UI.WinForms
         private void InitializeView()
         {
             if (double.IsNaN(Width) || Width == 0) return;
-            if (_map == null || _map.Envelope == null || double.IsNaN(_map.Envelope.Width) || _map.Envelope.Width <= 0) return;
+            if (_map?.Envelope == null || double.IsNaN(_map.Envelope.Width) || _map.Envelope.Width <= 0) return;
             if (_map.Envelope.GetCentroid() == null) return;
+
+            Map.Viewport.Width = Width;
+            Map.Viewport.Height = Height;
 
             Map.Viewport.Center = _map.Envelope.GetCentroid();
             Map.Viewport.Resolution = _map.Envelope.Width / Width;
+            
             _viewInitialized = true;
             ViewChanged(true);
         }
@@ -253,7 +252,7 @@ namespace Mapsui.UI.WinForms
 
         protected void OnErrorMessageChanged()
         {
-            if (ErrorMessageChanged != null) ErrorMessageChanged(this, null);
+            ErrorMessageChanged?.Invoke(this, null);
         }
 
         protected override void OnPaintBackground(PaintEventArgs e)
