@@ -55,7 +55,7 @@ namespace Mapsui.Samples.Wpf
             return radioButton;
         }
 
-        Dictionary<string, Func<Map>> InitializeSampleList()
+        private Dictionary<string, Func<Map>> InitializeSampleList()
         {
             return new Dictionary<string, Func<Map>>
             {
