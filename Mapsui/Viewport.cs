@@ -186,7 +186,7 @@ namespace Mapsui
             }
 
             var worldX = Center.X + (screenX - screenCenterX) * _resolution;
-            var worldY = Center.Y - ((screenY - screenCenterY) * _resolution);
+            var worldY = Center.Y - (screenY - screenCenterY) * _resolution;
             return new Point(worldX, worldY);
         }
 

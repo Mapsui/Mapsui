@@ -1,4 +1,5 @@
-﻿using Mapsui.Layers;
+﻿using Mapsui.Geometries;
+using Mapsui.Layers;
 using Mapsui.Providers.ArcGIS;
 using Mapsui.Providers.ArcGIS.Image;
 
@@ -15,6 +16,9 @@ namespace Mapsui.Samples.Common.Desktop
         {
             var map = new Map();
             map.Layers.Add(CreateLayer());
+            map.Viewport.Resolution = 1;
+            map.Viewport.Center.X = 0;
+            map.Viewport.Center.Y = 0;
             return map;
         }
 

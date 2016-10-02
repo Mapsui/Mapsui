@@ -84,6 +84,7 @@ namespace Mapsui.Layers
         void StartFetchTimerElapsed(object state)
         {
             if (NewExtent == null) return;
+            if (double.IsNaN(NewResolution)) return;
             StartNewFetch(NewExtent, NewResolution);
             StartFetchTimer.Dispose();
         }
@@ -138,15 +139,17 @@ namespace Mapsui.Layers
         {
             IsFetching = true;
             NeedsUpdate = false;
+
+            var newExtent = new BoundingBox(extent);
             
             if (Transformation != null && !string.IsNullOrWhiteSpace(CRS)) DataSource.CRS = CRS;
 
             if (ProjectionHelper.NeedsTransform(Transformation, CRS, DataSource.CRS))
                 if (Transformation != null && Transformation.IsProjectionSupported(CRS, DataSource.CRS) == true)
-                    extent = Transformation.Transform(CRS, DataSource.CRS, extent);
+                    newExtent = Transformation.Transform(CRS, DataSource.CRS, extent);
                 
 
-            var fetcher = new FeatureFetcher(extent, resolution, DataSource, DataArrived, DateTime.Now.Ticks);
+            var fetcher = new FeatureFetcher(newExtent, resolution, DataSource, DataArrived, DateTime.Now.Ticks);
             Task.Run(() => fetcher.FetchOnThread());
         }
 

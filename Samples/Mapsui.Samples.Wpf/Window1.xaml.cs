@@ -198,15 +198,6 @@ namespace Mapsui.Samples.Wpf
             MapControl.Refresh();
         }
 
-        private void ArcGISImageServiceClick(object sender, RoutedEventArgs e)
-        {
-            MapControl.Map.Layers.Clear();
-            MapControl.Map = ArcGISImageServiceSample.CreateMap();
-            LayerList.Initialize(MapControl.Map.Layers);
-            MapControl.ZoomToFullEnvelope();
-            MapControl.Refresh();
-        }
-
         private void WmtsClick(object sender, RoutedEventArgs e)
         {
             MapControl.Map.Layers.Clear();
