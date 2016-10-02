@@ -1,9 +1,7 @@
 using Mapsui.Fetcher;
 using Mapsui.Geometries;
 using Mapsui.Providers;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Mapsui.Layers
@@ -33,10 +31,7 @@ namespace Mapsui.Layers
             });
         }
 
-        public override BoundingBox Envelope
-        {
-            get { return (_dataSource == null) ? null : _dataSource.GetExtents(); }
-        }
+        public override BoundingBox Envelope => _dataSource?.GetExtents();
 
         public override IEnumerable<IFeature> GetFeaturesInView(BoundingBox extent, double resolution)
         {
