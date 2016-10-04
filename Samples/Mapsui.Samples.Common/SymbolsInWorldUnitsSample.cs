@@ -8,11 +8,6 @@ namespace Mapsui.Samples.Common
 {
     public static class SymbolsInWorldUnitsSample
     {
-        public static ILayer CreateLayer()
-        {
-            return new Layer("PointLayer WorldUnits") { DataSource = CreateProvider() };
-        }
-
         public static Map CreateMap()
         {
             var map = new Map();
@@ -22,9 +17,14 @@ namespace Mapsui.Samples.Common
             return map;
         }
 
+        public static ILayer CreateLayer()
+        {
+            return new Layer("PointLayer WorldUnits") {DataSource = CreateProvider()};
+        }
+
         public static IProvider CreateProvider()
         {
-            var netherlands = new Feature { Geometry = new Point(710000, 6800000)};
+            var netherlands = new Feature {Geometry = new Point(710000, 6800000)};
 
             const string resource = "Mapsui.Samples.Common.Images.netherlands.jpg";
             var assembly = typeof(SymbolsInWorldUnitsSample).GetTypeInfo().Assembly;

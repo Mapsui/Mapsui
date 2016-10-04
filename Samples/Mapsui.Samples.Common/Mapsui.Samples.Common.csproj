@@ -47,7 +47,6 @@
     <Compile Include="BingSample.cs" />
     <Compile Include="LabelsSample.cs" />
     <Compile Include="OsmSample.cs" />
-    <Compile Include="PointsInWgs84Sample.cs" />
     <Compile Include="InfoLayersSample.cs" />
     <Compile Include="RasterizingLayerSample.cs" />
     <Compile Include="StackedLabelsSample.cs" />

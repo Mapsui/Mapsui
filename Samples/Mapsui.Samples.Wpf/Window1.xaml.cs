@@ -74,7 +74,8 @@ namespace Mapsui.Samples.Wpf
                 ["WMS"] = () => WmsSample.CreateMap(),
                 ["WMTS"] = () => WmtsSample.CreateMap(),
                 ["Labels"] = () => LabelsSample.CreateMap(),
-                ["Rasterizing Layer"] = () => RasterizingLayerSample.CreateMap()
+                ["Rasterizing Layer"] = () => RasterizingLayerSample.CreateMap(),
+                ["Polygons"] = () => PolygonSample.CreateMap()
             };
         }
 

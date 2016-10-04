@@ -7,6 +7,14 @@ namespace Mapsui.Samples.Common
 {
     public class LabelsSample
     {
+        public static Map CreateMap()
+        {
+            var map = new Map();
+            map.Layers.Add(OsmSample.CreateLayer());
+            map.Layers.Add(CreateLayer());
+            return map;
+        }
+
         public static ILayer CreateLayer()
         {
             var memoryProvider = new MemoryProvider();
@@ -24,14 +32,6 @@ namespace Mapsui.Samples.Common
             memoryProvider.Features.Add(featureWithColors);
 
             return new MemoryLayer { Name = "Points with labels", DataSource = memoryProvider };
-        }
-
-        public static Map CreateMap()
-        {
-            var map = new Map();
-            map.Layers.Add(OsmSample.CreateLayer());
-            map.Layers.Add(CreateLayer());
-            return map;
         }
 
         private static IStyle CreateDefaultLabelStyle()
