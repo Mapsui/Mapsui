@@ -26,7 +26,7 @@ namespace Mapsui.Samples.Common
                 };
                 provider.Features.Add(feature);
             }
-            var layer = new MemoryLayer { DataSource = provider };
+            var layer = new MemoryLayer {DataSource = provider};
             return layer;
         }
     }

@@ -19,9 +19,10 @@ namespace Mapsui.Samples.Common
             map.Layers.Add(CreateLayer());
             return map;
         }
+
         public static ILayer CreateLayer()
-        { 
-            return new TileLayer(new GeodanWorldWmsTileSource()) { Name = "WMS called as WMS-C" };
+        {
+            return new TileLayer(new GeodanWorldWmsTileSource()) {Name = "WMS called as WMS-C"};
         }
     }
 
@@ -29,7 +30,7 @@ namespace Mapsui.Samples.Common
     {
         public GeodanWorldWmsTileSource()
         {
-            var schema = new GlobalSphericalMercator(YAxis.TMS) { Srs = "EPSG:900913"};
+            var schema = new GlobalSphericalMercator(YAxis.TMS) {Srs = "EPSG:900913"};
             Provider = new HttpTileProvider(CreateWmsRequest(schema));
             Schema = schema;
         }
@@ -38,7 +39,7 @@ namespace Mapsui.Samples.Common
         {
             return Provider.GetTile(tileInfo);
         }
-        
+
         private static WmscRequest CreateWmsRequest(ITileSchema schema)
         {
             const string url = "http://geoserver.nl/world/mapserv.cgi?map=world/world.map&VERSION=1.1.1";

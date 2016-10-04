@@ -15,12 +15,12 @@ namespace Mapsui.Samples.Common
         public static Map CreateMap()
         {
             var map = new Map();
-            map.Layers.Add(new TileLayer(KnownTileSources.Create()) { Name = "OSM" });
-            map.Layers.Add(new AnimatedPointsWithAutoUpdateLayer { Name = "Animated Points" });
+            map.Layers.Add(new TileLayer(KnownTileSources.Create()) {Name = "OSM"});
+            map.Layers.Add(new AnimatedPointsWithAutoUpdateLayer {Name = "Animated Points"});
             return map;
         }
     }
-    
+
     public class AnimatedPointsWithAutoUpdateLayer : AnimatedPointLayer
     {
         private Timer _timer;
@@ -34,6 +34,7 @@ namespace Mapsui.Samples.Common
         private class DynamicMemoryProvider : MemoryProvider
         {
             readonly Random _random = new Random(0);
+
             public override IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
             {
                 var geometries = PointsSample.GenerateRandomPoints(box, 10).ToList();

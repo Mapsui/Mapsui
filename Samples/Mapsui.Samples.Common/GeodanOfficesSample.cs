@@ -11,15 +11,15 @@ namespace Mapsui.Samples.Common
         {
             var geodanAmsterdam = new Geometries.Point(122698, 483922);
             var geodanDenBosch = new Geometries.Point(148949, 411446);
-            var imageStream = EmbeddedResourceLoader.Load("Images.location.png", typeof (GeodanOfficesSample));
+            var imageStream = EmbeddedResourceLoader.Load("Images.location.png", typeof(GeodanOfficesSample));
 
             var layer = new MemoryLayer
             {
-                DataSource = new MemoryProvider(new [] { geodanAmsterdam, geodanDenBosch }),
+                DataSource = new MemoryProvider(new[] {geodanAmsterdam, geodanDenBosch}),
                 Style = new SymbolStyle
                 {
                     BitmapId = BitmapRegistry.Instance.Register(imageStream),
-                    SymbolOffset = new Offset { Y= 64 },
+                    SymbolOffset = new Offset {Y = 64},
                     SymbolScale = 0.25
                 },
                 CRS = "EPSG:28992",

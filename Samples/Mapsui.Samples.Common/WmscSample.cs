@@ -40,7 +40,7 @@ namespace Mapsui.Samples.Common
         {
             return Provider.GetTile(tileInfo);
         }
-        
+
         private static ITileProvider GetTileProvider(ITileSchema schema)
         {
             return new HttpTileProvider(GetRequestBuilder(schema));
@@ -51,7 +51,7 @@ namespace Mapsui.Samples.Common
             const string url = "http://geoserver.nl/tiles/tilecache.aspx?";
             var parameters = new Dictionary<string, string>();
             var request = new WmscRequest(new Uri(url), schema,
-              new List<string>(new[] { "world_GM" }), new List<string>(), parameters);
+                new List<string>(new[] {"world_GM"}), new List<string>(), parameters);
             return request;
         }
     }

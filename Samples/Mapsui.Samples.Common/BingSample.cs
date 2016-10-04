@@ -8,7 +8,7 @@ namespace Mapsui.Samples.Common
         public static Map CreateMap()
         {
             var map = new Map();
-            map.Layers.Add(new TileLayer(KnownTileSources.Create(KnownTileSource.BingAerial)) { Name = "Bing Aerial" });
+            map.Layers.Add(new TileLayer(KnownTileSources.Create(KnownTileSource.BingAerial)) {Name = "Bing Aerial"});
             return map;
         }
     }

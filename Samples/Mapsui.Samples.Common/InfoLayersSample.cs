@@ -31,7 +31,7 @@ namespace Mapsui.Samples.Common
             {
                 SymbolScale = 1,
                 Fill = new Brush(Color.Cyan),
-                Outline = { Color = Color.White, Width = 2 }
+                Outline = {Color = Color.White, Width = 2}
             };
         }
     }

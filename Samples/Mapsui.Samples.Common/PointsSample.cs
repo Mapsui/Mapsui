@@ -34,8 +34,11 @@ namespace Mapsui.Samples.Common
             var count = 0;
             foreach (var point in randomPoints)
             {
-                var feature = new Feature {Geometry = point};
-                feature["Label"] = count.ToString(CultureInfo.InvariantCulture);
+                var feature = new Feature
+                {
+                    Geometry = point,
+                    ["Label"] = count.ToString(CultureInfo.InvariantCulture)
+                };
                 features.Add(feature);
                 count++;
             }
