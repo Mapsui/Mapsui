@@ -1,5 +1,4 @@
-﻿using Mapsui.Geometries;
-using Mapsui.Layers;
+﻿using Mapsui.Layers;
 using Mapsui.Providers.ArcGIS;
 using Mapsui.Providers.ArcGIS.Image;
 
