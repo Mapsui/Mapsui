@@ -11,12 +11,12 @@ namespace Mapsui.Samples.Common
             var map = new Map();
             map.Layers.Add(OsmSample.CreateLayer());
             var provider = PointsSample.CreateRandomPointsProvider(map.Envelope);
+            map.Layers.Add(CreateLabelLayer(provider));
             map.Layers.Add(CreateLayer(provider));
-            map.Layers.Add(PointsSample.CreateRandomPointLayer(provider));
             return map;
         }
 
-        public static ILayer CreateLayer(IProvider provider)
+        private static ILayer CreateLabelLayer(IProvider provider)
         {
             return new LabelLayer("stacks")
             {
@@ -24,6 +24,15 @@ namespace Mapsui.Samples.Common
                 UseLabelStacking = true,
                 LabelColumn = "Label",
                 Style = new LabelStyle(),
+            };
+        }
+
+        private static ILayer CreateLayer(IProvider dataSource)
+        {
+            return new Layer("Point Layer")
+            {
+                DataSource = dataSource,
+                Style = new SymbolStyle { SymbolScale = 1, Fill = new Brush(Color.Blue) }
             };
         }
     }

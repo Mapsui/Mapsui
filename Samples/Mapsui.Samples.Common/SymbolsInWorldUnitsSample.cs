@@ -12,7 +12,7 @@ namespace Mapsui.Samples.Common
         {
             var map = new Map();
             map.Layers.Add(OsmSample.CreateLayer());
-            map.Layers.Add(PointsSample.Create());
+            map.Layers.Add(Create());
             map.Layers.Add(CreateLayer());
             return map;
         }
@@ -39,6 +39,54 @@ namespace Mapsui.Samples.Common
             });
 
             return new MemoryProvider(netherlands);
+        }
+
+        public static ILayer Create()
+        {
+            return new Layer("PointLayer")
+            {
+                DataSource = new MemoryProvider(new[]
+                {
+                    CreatePointWithLabel(),
+                    CreatePointWithDefaultStyle(),
+                    CreatePointWithSmallBlackDot()
+                }),
+                Style = null
+            };
+        }
+
+        private static Feature CreatePointWithLabel()
+        {
+            var feature = new Feature { Geometry = new Point(0, 1000000) };
+            feature.Styles.Add(new LabelStyle { Text = "Label" });
+            return feature;
+        }
+
+        private static Feature CreatePointWithDefaultStyle()
+        {
+            var feature = new Feature { Geometry = new Point(1000000, 1000000) };
+            feature.Styles.Add(new SymbolStyle());
+            return feature;
+        }
+
+        private static IFeature CreatePointWithSmallBlackDot()
+        {
+            var feature = new Feature { Geometry = new Point(1000000, 0) };
+
+            feature.Styles.Add(new SymbolStyle
+            {
+                SymbolScale = 2.0f,
+                Fill = new Brush { Color = null },
+                Outline = new Pen { Color = Color.Green }
+            });
+
+            feature.Styles.Add(new SymbolStyle
+            {
+                SymbolScale = 0.5f,
+                Fill = new Brush { Color = Color.Black }
+            });
+
+            return feature;
         }
     }
 }

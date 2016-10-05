@@ -8,17 +8,19 @@ namespace Mapsui.Samples.Common.Desktop
 {
     public static class MapTilerSample
     {
-        public static ILayer CreateLayer()
-        {
-            return new TileLayer(new MapTilerTileSource()) {Name = "True Marble in MapTiler"};
-        }
         public static Map CreateMap()
         {
             var map = new Map();
             map.Layers.Add(CreateLayer());
             return map;
         }
+
+        public static ILayer CreateLayer()
+        {
+            return new TileLayer(new MapTilerTileSource()) {Name = "True Marble in MapTiler"};
+        }
     }
+
     public class MapTilerTileSource : ITileSource
     {
         public MapTilerTileSource()
