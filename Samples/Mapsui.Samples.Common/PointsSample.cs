@@ -13,6 +13,14 @@ namespace Mapsui.Samples.Common
     {
         private static readonly Random Random = new Random(0);
 
+        public static Map CreateMap()
+        {
+            var map = new Map();
+            map.Layers.Add(OsmSample.CreateLayer());
+            map.Layers.Add(CreateRandomPointLayer(map.Envelope));
+            return map;
+        }
+
         public static MemoryProvider CreateRandomPointsProvider(BoundingBox envelope)
         {
             var randomPoints = GenerateRandomPoints(envelope, 100);
@@ -44,7 +52,7 @@ namespace Mapsui.Samples.Common
             return new SymbolStyle {BitmapId = bitmapId};
         }
 
-        public static int GetBitmapIdForEmbeddedResource(string imagePath)
+        private static int GetBitmapIdForEmbeddedResource(string imagePath)
         {
             var assembly = typeof(PointsSample).GetTypeInfo().Assembly;
             var image = assembly.GetManifestResourceStream(imagePath);
@@ -60,12 +68,7 @@ namespace Mapsui.Samples.Common
                     Random.NextDouble()*box.Height - (box.Height - box.Top)));
             return result;
         }
-
-        public static Point GenerateRandomPoint(BoundingBox box)
-        {
-            return new Point(Random.NextDouble()*box.Width + box.Left, Random.NextDouble()*box.Height - box.Top);
-        }
-
+        
         public static ILayer CreateRandomPointLayer(BoundingBox envelope, int count = 25, IStyle style = null)
         {
             return new Layer("Point Layer")

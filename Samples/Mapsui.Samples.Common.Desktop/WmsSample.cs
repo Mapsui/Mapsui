@@ -30,7 +30,7 @@ namespace Mapsui.Samples.Common.Desktop
                 CRS = "EPSG:28992"
             };
 
-            provider.AddLayer("AHN 25 meter");
+            provider.AddLayer("ahn25m");
             provider.SetImageFormat(provider.OutputFormats[0]);
             return provider;
         }

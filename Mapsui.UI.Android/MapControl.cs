@@ -191,6 +191,7 @@ namespace Mapsui.UI.Android
 
                 if (_map != null)
                 {
+                    _viewportInitialized = false;
                     _map.DataChanged += MapDataChanged;
                     _map.PropertyChanged += MapPropertyChanged;
                     _map.RefreshGraphics += MapRefreshGraphics;

@@ -59,7 +59,7 @@ namespace Mapsui.Samples.Wpf
         {
             return new Dictionary<string, Func<Map>>
             {
-                ["Point symbols"] = () => OsmSample.CreateMap(),
+                ["OpenStreetMap"] = () => OsmSample.CreateMap(),
                 ["Projected point"] = () => ProjectionSample.CreateMap(),
                 ["Animated point movement"] = () => AnimatedPointsSample.CreateMap(),
                 ["Stacked labels"] = () => StackedLabelsSample.CreateMap(),
@@ -69,13 +69,16 @@ namespace Mapsui.Samples.Wpf
                 ["Bing maps"] = () => BingSample.CreateMap(),
                 ["WMS-C"] = () => WmscSample.CreateMap(),
                 ["Shapefile"] = () => ShapefileSample.CreateMap(),
-                ["Map Tiler"] = () => MapTilerSample.CreateMap(),
+                ["MapTiler (tiles on disk)"] = () => MapTilerSample.CreateMap(),
                 ["Symbols in World Units"] = () => SymbolsInWorldUnitsSample.CreateMap(),
                 ["WMS"] = () => WmsSample.CreateMap(),
                 ["WMTS"] = () => WmtsSample.CreateMap(),
                 ["Labels"] = () => LabelsSample.CreateMap(),
                 ["Rasterizing Layer"] = () => RasterizingLayerSample.CreateMap(),
-                ["Polygons"] = () => PolygonSample.CreateMap()
+                ["Polygons"] = () => PolygonSample.CreateMap(),
+                ["LineStrings"] = () => LineStringSample.CreateMap(),
+                ["Points"] = () => PointsSample.CreateMap(),
+                ["Various Layers"] = () => VariousSample.CreateMap()
             };
         }
 

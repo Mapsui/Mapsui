@@ -49,7 +49,7 @@
     <Compile Include="OsmSample.cs" />
     <Compile Include="InfoLayersSample.cs" />
     <Compile Include="RasterizingLayerSample.cs" />
-    <Compile Include="SeveralLayersSample.cs" />
+    <Compile Include="VariousSample.cs" />
     <Compile Include="StackedLabelsSample.cs" />
     <Compile Include="PolygonSample.cs" />
     <Compile Include="AnimatedPointsSample.cs" />

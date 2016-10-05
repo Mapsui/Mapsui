@@ -16,14 +16,7 @@ namespace Mapsui.Samples.Android
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Main);
             var mapControl = FindViewById<MapControl>(Resource.Id.mapcontrol);
-
-            mapControl.Map.Layers.Add(new TileLayer(KnownTileSources.Create()) { Name = "OSM" });
-            mapControl.Map.Layers.Add(LineStringSample.CreateLineStringLayer(LineStringSample.CreateLineStringStyle()));
-            mapControl.Map.Layers.Add(PointsSample.CreateRandomPointLayer(mapControl.Map.Envelope,
-                style: PointsSample.CreateBitmapStyle("Mapsui.Samples.Common.Images.ic_place_black_24dp.png")));
-            mapControl.Map.Layers.Add(PointsSample.CreateBitmapPointLayer());
-            
-            mapControl.Map.Viewport.RenderResolutionMultiplier = 2;
+            mapControl.Map = VariousSample.CreateMap();
         }
     }
 }

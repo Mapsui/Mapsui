@@ -98,6 +98,7 @@ namespace Mapsui.UI.Xaml
                     _map.DataChanged += MapDataChanged; 
                     _map.PropertyChanged += MapPropertyChanged;
                     _map.RefreshGraphics += MapRefreshGraphics;
+                    _map.ViewChanged(true);
                 }
 
                 RefreshGraphics();

@@ -7,6 +7,14 @@ namespace Mapsui.Samples.Common
 {
     public static class LineStringSample
     {
+        public static Map CreateMap()
+        {
+            var map = new Map();
+            map.Layers.Add(OsmSample.CreateLayer());
+            map.Layers.Add(CreateLineStringLayer(CreateLineStringStyle()));
+            return map;
+        }
+
         public static ILayer CreateLineStringLayer(IStyle style = null)
         {
             return new MemoryLayer
