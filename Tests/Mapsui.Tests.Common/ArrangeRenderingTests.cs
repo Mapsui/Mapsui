@@ -28,12 +28,11 @@ namespace Mapsui.Tests.Common
 
         public static Map PointsWithVectorStyle()
         {
-            var map = new Map { Viewport = { Center = new Point(100, 100), Width = 200, Height = 200, Resolution = 1 } };
+            var map = new Map {Viewport = {Center = new Point(100, 100), Width = 200, Height = 200, Resolution = 1}};
             map.Layers.Add(new MemoryLayer
             {
                 Style = null,
-                DataSource = Utilities.CreateProviderWithPointsWithVectorStyle()
-                ,
+                DataSource = Utilities.CreateProviderWithPointsWithVectorStyle(),
                 Name = "Points with VectorStyle"
             });
             return map;
@@ -41,7 +40,7 @@ namespace Mapsui.Tests.Common
 
         public static Map PointsWithBitmapSymbols()
         {
-            var map = new Map { Viewport = { Center = new Point(100, 100), Width = 200, Height = 200, Resolution = 1 } };
+            var map = new Map {Viewport = {Center = new Point(100, 100), Width = 200, Height = 200, Resolution = 1}};
             var layer = new MemoryLayer
             {
                 Style = null,
@@ -54,10 +53,10 @@ namespace Mapsui.Tests.Common
 
         public static Map PointsWithBitmapRotatedAndOffset()
         {
-            var map = new Map { Viewport = { Center = new Point(80, 80), Width = 200, Height = 200, Resolution = 1 } };
+            var map = new Map {Viewport = {Center = new Point(80, 80), Width = 200, Height = 200, Resolution = 1}};
             var layer = new MemoryLayer
             {
-                DataSource = Utilities.CreateProviderWithRotatedBitmapSymbols(), 
+                DataSource = Utilities.CreateProviderWithRotatedBitmapSymbols(),
                 Name = "Points with rotated bitmaps",
                 Style = null
             };
@@ -67,11 +66,23 @@ namespace Mapsui.Tests.Common
 
         public static Map PointsWithDifferentSymbolTypes()
         {
-            var map = new Map { Viewport = { Center = new Point(0, 0), Width = 200, Height = 100, Resolution = 0.5 } };
+            var map = new Map {Viewport = {Center = new Point(0, 0), Width = 200, Height = 100, Resolution = 0.5}};
             var features = new Features
             {
-                Utilities.CreateSimplePointFeature(-20, 0, new SymbolStyle {Fill = new Brush { Color = Color.Gray}, Outline = new Pen(Color.Black), SymbolType = SymbolType.Ellipse}),
-                Utilities.CreateSimplePointFeature(20, 0, new SymbolStyle {Fill = new Brush { Color = Color.Gray}, Outline = new Pen(Color.Black), SymbolType = SymbolType.Rectangle})
+                Utilities.CreateSimplePointFeature(-20, 0,
+                    new SymbolStyle
+                    {
+                        Fill = new Brush {Color = Color.Gray},
+                        Outline = new Pen(Color.Black),
+                        SymbolType = SymbolType.Ellipse
+                    }),
+                Utilities.CreateSimplePointFeature(20, 0,
+                    new SymbolStyle
+                    {
+                        Fill = new Brush {Color = Color.Gray},
+                        Outline = new Pen(Color.Black),
+                        SymbolType = SymbolType.Rectangle
+                    })
             };
             var layer = new MemoryLayer
             {
@@ -84,13 +95,13 @@ namespace Mapsui.Tests.Common
 
         public static Map PointsWithWorldUnits()
         {
-            var map = new Map { Viewport = { Center = new Point(0, 0), Width = 200, Height = 100, Resolution = 0.5 } };
+            var map = new Map {Viewport = {Center = new Point(0, 0), Width = 200, Height = 100, Resolution = 0.5}};
             var features = new Features
             {
                 Utilities.CreateSimplePointFeature(-20, 0, new SymbolStyle {UnitType = UnitType.Pixel}),
                 Utilities.CreateSimplePointFeature(20, 0, new SymbolStyle {UnitType = UnitType.WorldUnit})
             };
-            var layer = new MemoryLayer { DataSource = new MemoryProvider(features), Name = "Points in world units"};
+            var layer = new MemoryLayer {DataSource = new MemoryProvider(features), Name = "Points in world units"};
             map.Layers.Add(layer);
             return map;
         }
@@ -110,7 +121,7 @@ namespace Mapsui.Tests.Common
 
             var layer = new MemoryLayer
             {
-                DataSource = Utilities.CreatePolygonProvider(), 
+                DataSource = Utilities.CreatePolygonProvider(),
                 Name = "Polygon"
             };
             map.Layers.Add(layer);
@@ -132,8 +143,8 @@ namespace Mapsui.Tests.Common
 
             var layer = new MemoryLayer
             {
-                Style = null, 
-                DataSource = Utilities.CreateLineProvider(), 
+                Style = null,
+                DataSource = Utilities.CreateLineProvider(),
                 Name = "Line"
             };
 
@@ -163,7 +174,7 @@ namespace Mapsui.Tests.Common
             };
 
             var features = TileIndexToFeatures(tileIndexes, new SampleTileSource());
-            map.Layers.Add(new MemoryLayer { DataSource = new MemoryProvider(features), Name = "Tiles"});
+            map.Layers.Add(new MemoryLayer {DataSource = new MemoryProvider(features), Name = "Tiles"});
             return map;
         }
 
@@ -183,7 +194,7 @@ namespace Mapsui.Tests.Common
                 var feature = new Feature
                 {
                     Geometry = new Raster(new MemoryStream(tileSource.GetTile(tileInfo)),
-                            tileInfo.Extent.ToBoundingBox())
+                        tileInfo.Extent.ToBoundingBox())
                 };
 
                 features.Add(feature);
@@ -193,7 +204,7 @@ namespace Mapsui.Tests.Common
 
         public static Map Labels()
         {
-            var map = new Map { Viewport = { Center = new Point(100, 100), Width = 200, Height = 200, Resolution = 1 } };
+            var map = new Map {Viewport = {Center = new Point(100, 100), Width = 200, Height = 200, Resolution = 1}};
             map.Layers.Add(new MemoryLayer
             {
                 Style = null,
@@ -206,28 +217,47 @@ namespace Mapsui.Tests.Common
         public static MemoryProvider CreateProviderWithLabels()
         {
             var features = new Features
+            {
+                new Feature
                 {
-                    new Feature
+                    Geometry = new Point(50, 50),
+                    Styles = new[] {new VectorStyle {Fill = new Brush(Color.Gray), Outline = new Pen(Color.Black)}}
+                },
+                new Feature
+                {
+                    Geometry = new Point(50, 150),
+                    Styles = new[] {new LabelStyle {Text = "Black Text", BackColor = null}}
+                },
+                new Feature
+                {
+                    Geometry = new Point(150, 50),
+                    Styles =
+                        new[]
                         {
-                            Geometry = new Point(50, 50),
-                            Styles = new[] {new VectorStyle {Fill = new Brush(Color.Gray), Outline = new Pen(Color.Black)}}
-                        },
-                    new Feature
-                        {
-                            Geometry = new Point(50, 150),
-                            Styles = new[]  { new LabelStyle{ Text = "Black Text", BackColor = null } } 
-                        },
-                    new Feature
-                        {
-                            Geometry = new Point(150, 50),
-                            Styles = new[] { new LabelStyle{ Text = "Gray Backcolor", BackColor = new Brush(Color.Gray), ForeColor = Color.White} } 
-                        },
-                    new Feature
-                        {
-                            Geometry = new Point(150, 150),
-                            Styles = new[]  { new LabelStyle{ Text = "Black Halo", ForeColor = Color.White, Halo = new Pen(Color.Red), BackColor = null} } 
+                            new LabelStyle
+                            {
+                                Text = "Gray Backcolor",
+                                BackColor = new Brush(Color.Gray),
+                                ForeColor = Color.White
+                            }
                         }
-                };
+                },
+                new Feature
+                {
+                    Geometry = new Point(150, 150),
+                    Styles =
+                        new[]
+                        {
+                            new LabelStyle
+                            {
+                                Text = "Black Halo",
+                                ForeColor = Color.White,
+                                Halo = new Pen(Color.Red),
+                                BackColor = null
+                            }
+                        }
+                }
+            };
             var provider = new MemoryProvider(features);
             return provider;
         }
