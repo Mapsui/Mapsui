@@ -5,8 +5,8 @@ namespace Mapsui.Rendering.Xaml.Tests
 {
     public static class File
     {
-        private readonly static string OriginalImagesFolder = Path.Combine("Resources", "Images", "Original");
-        private readonly static string GeneratedImagesFolder = Path.Combine("Resources", "Images", "Generated");
+        private static readonly string OriginalImagesFolder = Path.Combine("Resources", "Images", "Original");
+        private static readonly string GeneratedImagesFolder = Path.Combine("Resources", "Images", "Generated");
 
         public static void WriteToGeneratedFolder(string fileName, MemoryStream stream)
         {

@@ -6,7 +6,6 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using Mapsui.Logging;
 using Mapsui.Providers;
-using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Desktop;
 using Mapsui.UI.Xaml;
 
@@ -26,13 +25,23 @@ namespace Mapsui.Samples.Wpf
 
             Logger.LogDelegate += LogMethod;
 
-            foreach (var sample in InitializeSampleList())
+            foreach (var sample in AllSamples())
             {
                 SampleList.Children.Add(CreateRadioButton(sample));
             }
+
             var firstRadioButton = (RadioButton) SampleList.Children[0];
             firstRadioButton.IsChecked = true;
             firstRadioButton.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+        }
+
+        public static Dictionary<string, Func<Map>> AllSamples()
+        { 
+            var allSamples = Common.AllSamples.CreateListOfAllSamples();
+            allSamples["Shapefile"] = ShapefileSample.CreateMap;
+            allSamples["MapTiler (tiles on disk)"] = MapTilerSample.CreateMap;
+            allSamples["WMS"] = WmsSample.CreateMap;
+            return allSamples;
         }
 
         private UIElement CreateRadioButton(KeyValuePair<string, Func<Map>> sample)
@@ -53,33 +62,6 @@ namespace Mapsui.Samples.Wpf
                 MapControl.Refresh();
             };
             return radioButton;
-        }
-
-        private Dictionary<string, Func<Map>> InitializeSampleList()
-        {
-            return new Dictionary<string, Func<Map>>
-            {
-                ["OpenStreetMap"] = () => OsmSample.CreateMap(),
-                ["Projected point"] = () => ProjectionSample.CreateMap(),
-                ["Animated point movement"] = () => AnimatedPointsSample.CreateMap(),
-                ["Stacked labels"] = () => StackedLabelsSample.CreateMap(),
-                ["Info"] = () => InfoLayersSample.CreateMap(),
-                ["Tiled request to WMS"] = () => TiledWmsSample.CreateMap(),
-                ["TMS"] = () => TmsSample.CreateMap(),
-                ["Bing maps"] = () => BingSample.CreateMap(),
-                ["WMS-C"] = () => WmscSample.CreateMap(),
-                ["Shapefile"] = () => ShapefileSample.CreateMap(),
-                ["MapTiler (tiles on disk)"] = () => MapTilerSample.CreateMap(),
-                ["Symbols in World Units"] = () => SymbolsInWorldUnitsSample.CreateMap(),
-                ["WMS"] = () => WmsSample.CreateMap(),
-                ["WMTS"] = () => WmtsSample.CreateMap(),
-                ["Labels"] = () => LabelsSample.CreateMap(),
-                ["Rasterizing Layer"] = () => RasterizingLayerSample.CreateMap(),
-                ["Polygons"] = () => PolygonSample.CreateMap(),
-                ["LineStrings"] = () => LineStringSample.CreateMap(),
-                ["Points"] = () => PointsSample.CreateMap(),
-                ["Various Layers"] = () => VariousSample.CreateMap()
-            };
         }
 
         private void LogMethod(LogLevel logLevel, string s, Exception exception)

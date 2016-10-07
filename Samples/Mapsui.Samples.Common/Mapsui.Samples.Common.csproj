@@ -44,6 +44,7 @@
     <EmbeddedResource Include="Images\netherlands.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AllSamples.cs" />
     <Compile Include="BingSample.cs" />
     <Compile Include="LabelsSample.cs" />
     <Compile Include="OsmSample.cs" />

@@ -1,4 +1,5 @@
-﻿using Mapsui.Geometries;
+﻿using System.Collections.Generic;
+using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Styles;
@@ -19,23 +20,13 @@ namespace Mapsui.Samples.Common
         {
             return new MemoryLayer
             {
-                DataSource = new MemoryProvider(new[]
-                    {
+                DataSource = new MemoryProvider(new Feature { Styles = new List<IStyle> { style }, Geometry = 
+                    
                         new LineString(new[]
                             {
                                 new Point(0, 0),
                                 new Point(10000, 10000),
-                                new Point(10000, 0),
-                                new Point(0, 10000),
-                                new Point(100000, 100000),
-                                new Point(100000, 0),
-                                new Point(0, 100000),
-                                new Point(1000000, 1000000),
-                                new Point(1000000, 0),
-                                new Point(0, 1000000),
-                                new Point(10000000, 10000000),
-                                new Point(10000000, 0),
-                                new Point(0, 10000000)
+                                new Point(10000, 0)
                             }
                         )
                     }
