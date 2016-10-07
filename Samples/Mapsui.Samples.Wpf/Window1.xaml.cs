@@ -38,6 +38,7 @@ namespace Mapsui.Samples.Wpf
         public static Dictionary<string, Func<Map>> AllSamples()
         { 
             var allSamples = Common.AllSamples.CreateListOfAllSamples();
+            // Append samples from Mapsui.Desktop
             allSamples["Shapefile"] = ShapefileSample.CreateMap;
             allSamples["MapTiler (tiles on disk)"] = MapTilerSample.CreateMap;
             allSamples["WMS"] = WmsSample.CreateMap;

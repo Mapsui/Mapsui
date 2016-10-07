@@ -23,6 +23,7 @@ namespace Mapsui.Rendering.Gdi.Extensions
     {
         public static System.Drawing.Color ToGdi(this Color color)
         {
+            if (color == null) return System.Drawing.Color.Transparent;
             return System.Drawing.Color.FromArgb(color.A, color.R, color.G, color.B);
         }
 
