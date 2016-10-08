@@ -25,8 +25,15 @@ namespace Mapsui.Samples.Common
                         new LineString(new[]
                             {
                                 new Point(0, 0),
+                                new Point(1000000, 0),
                                 new Point(1000000, 1000000),
-                                new Point(1000000, 0)
+                                new Point(2000000, 1000000),
+                                new Point(2000000, 2000000),
+                                new Point(3000000, 2000000),
+                                new Point(3000000, 3000000),
+                                new Point(4000000, 3000000),
+                                new Point(4000000, 4000000),
+                                new Point(5000000, 4000000)
                             }
                         )
                     }
