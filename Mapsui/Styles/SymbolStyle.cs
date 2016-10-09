@@ -145,10 +145,15 @@ namespace Mapsui.Styles
 
         public override int GetHashCode()
         {
-            return BitmapId.GetHashCode() ^
-                SymbolScale.GetHashCode() ^ SymbolOffset.GetHashCode() ^
-                SymbolRotation.GetHashCode() ^ UnitType.GetHashCode() ^ SymbolType.GetHashCode() ^
-                Opacity.GetHashCode() ^ base.GetHashCode();
+            return 
+                BitmapId.GetHashCode() ^
+                SymbolScale.GetHashCode() ^ 
+                SymbolOffset.GetHashCode() ^
+                SymbolRotation.GetHashCode() ^ 
+                UnitType.GetHashCode() ^ 
+                SymbolType.GetHashCode() ^
+                Opacity.GetHashCode() ^ 
+                base.GetHashCode();
         }
 
         public static bool operator ==(SymbolStyle symbolStyle1, SymbolStyle symbolStyle2)
