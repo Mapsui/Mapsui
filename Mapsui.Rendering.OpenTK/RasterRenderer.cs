@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using Mapsui.Geometries;
+using Mapsui.Logging;
 using Mapsui.Providers;
 using Mapsui.Styles;
 
@@ -9,7 +10,8 @@ namespace Mapsui.Rendering.OpenTK
 {
     public static class RasterRenderer
     {
-        public static void Draw(IViewport viewport, IStyle style, IFeature feature, IDictionary<object, TextureInfo> TextureCache, long currentIteration)
+        public static void Draw(IViewport viewport, IStyle style, IFeature feature, 
+            IDictionary<object, TextureInfo> TextureCache, long currentIteration)
         {
             try
             {
@@ -34,7 +36,7 @@ namespace Mapsui.Rendering.OpenTK
             }
             catch (Exception ex)
             {
-                Trace.WriteLine(ex.Message);
+                Logger.Log(LogLevel.Error, ex.Message, ex);
             }
         }
 
