@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using Mapsui.Geometries;
 using Mapsui.Providers;
 using Mapsui.Styles;
@@ -49,7 +48,8 @@ namespace Mapsui.Rendering.OpenTK
                 textureInfo = bitmapCache[symbolStyle.BitmapId];
             }
 
-            TextureHelper.RenderTexture(textureInfo, (float)destination.X, (float)destination.Y, 
+            TextureHelper.RenderTexture(textureInfo, 
+                (float)destination.X, (float)destination.Y, 
                 (float)symbolStyle.SymbolRotation, 
                 (float)symbolStyle.SymbolOffset.X, (float)symbolStyle.SymbolOffset.Y, 
                 opacity:(float)symbolStyle.Opacity, scale:(float)symbolStyle.SymbolScale);
