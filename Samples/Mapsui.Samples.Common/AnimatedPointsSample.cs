@@ -28,7 +28,7 @@ namespace Mapsui.Samples.Common
         public AnimatedPointsWithAutoUpdateLayer()
             : base(new DynamicMemoryProvider())
         {
-            _timer = new Timer(arg => UpdateData(), this, 0, 2000);
+            _timer = new Timer(arg => UpdateData(), this, 0, 10000);
         }
 
         private class DynamicMemoryProvider : MemoryProvider
@@ -37,9 +37,11 @@ namespace Mapsui.Samples.Common
 
             public override IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
             {
+                var features = new List<IFeature>();
                 var geometries = PointsSample.GenerateRandomPoints(box, 10).ToList();
                 var count = 0;
                 var random = _random.Next(geometries.Count);
+                
                 foreach (var geometry in geometries)
                 {
                     if (count != random) // skip a random element to test robustness
@@ -49,10 +51,11 @@ namespace Mapsui.Samples.Common
                             Geometry = geometry,
                             ["ID"] = count.ToString(CultureInfo.InvariantCulture)
                         };
-                        yield return feature;
+                        features.Add(feature);
                     }
                     count++;
                 }
+                return features;
             }
         }
     }
