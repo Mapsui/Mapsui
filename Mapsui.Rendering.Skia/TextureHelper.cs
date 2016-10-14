@@ -6,11 +6,11 @@ namespace Mapsui.Rendering.Skia
 {
     public static class TextureHelper
     {
-        public static SKBitmap LoadTexture(Stream bitmapStream)
+        public static SKBitmapInfo LoadTexture(Stream bitmapStream)
         {
             bitmapStream.Position = 0;
             var stream = new SKManagedStream(bitmapStream);
-            return SKBitmap.Decode(stream);
+            return new SKBitmapInfo {Bitmap = SKBitmap.Decode(stream)};
         }
 
         public static void RenderTexture(SKCanvas canvas, SKBitmap bitmap, float x, float y, float orientation = 0,
@@ -24,7 +24,7 @@ namespace Mapsui.Rendering.Skia
             canvas.Translate(x, y);
             canvas.RotateDegrees(orientation, 0, 0); // todo: or degrees?
             canvas.Scale(scale, scale);
-
+            
             x = offsetX + DetermineHorizontalAlignmentCorrection(horizontalAlignment, bitmap.Width);
             y = -offsetY + DetermineVerticalAlignmentCorrection(verticalAlignment, bitmap.Height);
 
@@ -57,11 +57,9 @@ namespace Mapsui.Rendering.Skia
 
         public static void RenderTexture(SKCanvas canvas, SKBitmap bitmap, SKRect rect, float opacity = 1f)
         {
-            // todo: save state here?
             var color = new SKColor((byte) 255, (byte) 255, (byte) 255, (byte) (255*opacity));
             var paint = new SKPaint() {Color = color};
-
-            canvas.DrawBitmap(bitmap, rect);
+            canvas.DrawBitmap(bitmap, rect, paint);
         }
     }
 }

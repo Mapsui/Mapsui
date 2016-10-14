@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Mapsui.Geometries;
 using Mapsui.Providers;
 using Mapsui.Styles;
@@ -12,58 +11,64 @@ namespace Mapsui.Rendering.Skia
         private const float HalfWidth = (float) SymbolStyle.DefaultWidth/2;
         private const float HalfHeight = (float) SymbolStyle.DefaultHeight/2;
 
-        public static void Draw(SKCanvas skCanvas, IViewport viewport, IStyle style, IFeature feature,
-            IDictionary<int, SKBitmapInfo> _symbolTextureCache)
+        public static void Draw(SKCanvas canvas, IViewport viewport, IStyle style, IFeature feature,
+            IDictionary<int, SKBitmapInfo> symbolBitmapCache)
         {
             var point = feature.Geometry as Point;
             var destination = viewport.WorldToScreen(point);
 
-            if (style is LabelStyle)
+            var labelStyle = style as LabelStyle;
+            if (labelStyle != null)
             {
-                var labelStyle = (LabelStyle) style;
-                //LabelRenderer.Draw(labelStyle, labelStyle.GetLabelText(feature), (float)destination.X, (float)destination.Y);
+                LabelRenderer.Draw(canvas, labelStyle, labelStyle.GetLabelText(feature), (float)destination.X, (float)destination.Y);
             }
             var symbolStyle = style as SymbolStyle;
             if (symbolStyle != null && symbolStyle.BitmapId >= 0)
-                DrawPointWithSymbolStyle(skCanvas, symbolStyle, destination);
+                DrawPointWithSymbolStyle(canvas, symbolStyle, destination, symbolBitmapCache);
             else if (style is VectorStyle)
-                DrawPointWithVectorStyle(skCanvas, (VectorStyle) style, destination);
+                DrawPointWithVectorStyle(canvas, (VectorStyle) style, destination);
         }
 
-        private static void DrawPointWithVectorStyle(SKCanvas sKCanvas, VectorStyle vectorStyle, Point destination)
+        private static void DrawPointWithVectorStyle(SKCanvas skCanvas, VectorStyle vectorStyle, 
+            Point destination)
         {
-            sKCanvas.Save();
-            sKCanvas.Translate((float) destination.X, (float) destination.Y);
+            skCanvas.Save();
+            skCanvas.Translate((float) destination.X, (float) destination.Y);
 
             var rect = new SKRect(-HalfWidth, -HalfHeight, HalfWidth, HalfHeight);
 
-            sKCanvas.DrawRect(rect, new SKPaint {Color = vectorStyle.Fill.Color.ToSkia(), Style = SKPaintStyle.Fill});
-            sKCanvas.DrawRect(rect,
+            skCanvas.DrawRect(rect, new SKPaint {Color = vectorStyle.Fill.Color.ToSkia(), Style = SKPaintStyle.Fill});
+            skCanvas.DrawRect(rect,
                 new SKPaint
                 {
                     Color = vectorStyle.Outline.Color.ToSkia(),
                     StrokeWidth = (float) vectorStyle.Outline.Width,
                     Style = SKPaintStyle.Stroke
                 });
-            sKCanvas.Restore();
+            skCanvas.Restore();
         }
 
-        private static void DrawPointWithSymbolStyle(SKCanvas skCanvas, SymbolStyle symbolStyle, Point destination)
+        private static void DrawPointWithSymbolStyle(SKCanvas skCanvas, SymbolStyle symbolStyle, Point destination,
+            IDictionary<int, SKBitmapInfo> symbolBitmapCache)
         {
             var stream = BitmapRegistry.Instance.Get(symbolStyle.BitmapId);
             stream.Position = 0;
-
-            using (var skStream = new SKManagedStream(stream))
+            SKBitmapInfo textureInfo;
+            if (!symbolBitmapCache.Keys.Contains(symbolStyle.BitmapId))
             {
-                using (var bitmap = SKBitmap.Decode(skStream))
-                {
-                    skCanvas.DrawBitmap(bitmap, (float)destination.X, (float)destination.Y);
-                }
-                //TextureHelper.RenderTexture(textureInfo, (float) destination.X, (float) destination.Y,
-                //        (float) symbolStyle.SymbolRotation,
-                //        (float) symbolStyle.SymbolOffset.X, (float) symbolStyle.SymbolOffset.Y,
-                //        opacity: (float) symbolStyle.Opacity, scale: (float) symbolStyle.SymbolScale);
+                textureInfo = TextureHelper.LoadTexture(BitmapRegistry.Instance.Get(symbolStyle.BitmapId));
+                symbolBitmapCache[symbolStyle.BitmapId] = textureInfo;
             }
+            else
+            {
+                textureInfo = symbolBitmapCache[symbolStyle.BitmapId];
+            }
+            
+            TextureHelper.RenderTexture(skCanvas, textureInfo.Bitmap,
+                (float) destination.X, (float) destination.Y,
+                (float) symbolStyle.SymbolRotation,
+                (float) symbolStyle.SymbolOffset.X, (float) symbolStyle.SymbolOffset.Y,
+                opacity: (float) symbolStyle.Opacity, scale: (float) symbolStyle.SymbolScale);
         }
     }
 }

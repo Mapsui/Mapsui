@@ -16,12 +16,23 @@ namespace Mapsui.Rendering.Skia
             try
             {
                 var raster = (IRaster)feature.Geometry;
-                var bitmap = TextureHelper.LoadTexture(raster.Data);
-                var destination = WorldToScreen(viewport, feature.Geometry.GetBoundingBox());
 
-                TextureHelper.RenderTexture(canvas, bitmap, RoundToPixel(destination).ToSkia());
-                bitmap.UnlockPixels();
-                bitmap.Dispose();
+                SKBitmapInfo textureInfo;
+
+                if (!skBitmapCache.Keys.Contains(raster))
+                {
+                    textureInfo = TextureHelper.LoadTexture(raster.Data);
+                    skBitmapCache[raster] = textureInfo;
+                }
+                else
+                {
+                    textureInfo = skBitmapCache[raster];
+                }
+
+                textureInfo.IterationUsed = currentIteration;
+                skBitmapCache[raster] = textureInfo;
+                var destination = WorldToScreen(viewport, feature.Geometry.GetBoundingBox());
+                TextureHelper.RenderTexture(canvas, textureInfo.Bitmap, RoundToPixel(destination).ToSkia());
             }
             catch (Exception ex)
             {

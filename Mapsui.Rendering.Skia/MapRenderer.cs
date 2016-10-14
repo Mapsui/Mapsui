@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using Mapsui.Geometries;
 using Mapsui.Layers;
+using Mapsui.Logging;
 using Mapsui.Providers;
 using Mapsui.Styles;
 using SkiaSharp;
@@ -22,13 +23,26 @@ namespace Mapsui.Rendering.Skia
 
         public SKCanvas SKCanvas { get; set; }
 
+        static MapRenderer()
+        {
+            DefaultRendererFactory.Create = () => new MapRenderer();
+        }
+
         public void Render(IViewport viewport, IEnumerable<ILayer> layers)
+        {
+            Render(SKCanvas, viewport, layers);
+        }
+
+        private void Render(SKCanvas canvas, IViewport viewport, IEnumerable<ILayer> layers)
         {
             layers = layers.ToList();
 
             SetAllTextureInfosToUnused();
 
-            VisibleFeatureIterator.IterateLayers(viewport, layers, RenderFeature);
+            VisibleFeatureIterator.IterateLayers(viewport, layers, (v, l, s) =>
+            {
+                RenderFeature(canvas, v, l, s);
+            });
 
             RemoveUnusedTextureInfos();
 
@@ -90,11 +104,11 @@ namespace Mapsui.Rendering.Skia
             }
         }
 
-        private void RenderFeature(IViewport viewport, IStyle style, IFeature feature)
+        private void RenderFeature(SKCanvas canvas, IViewport viewport, IStyle style, IFeature feature)
         {
             if (feature.Geometry is Point)
             {
-                PointRenderer.Draw(SKCanvas, viewport, style, feature, _symbolTextureCache);
+                PointRenderer.Draw(canvas, viewport, style, feature, _symbolTextureCache);
             }
             else if (feature.Geometry is LineString)
             {
@@ -106,13 +120,32 @@ namespace Mapsui.Rendering.Skia
             }
             else if (feature.Geometry is IRaster)
             {
-                RasterRenderer.Draw(SKCanvas, viewport, style, feature, _tileTextureCache, _currentIteration);
+                RasterRenderer.Draw(canvas, viewport, style, feature, _tileTextureCache, _currentIteration);
             }
         }
 
         public MemoryStream RenderToBitmapStream(IViewport viewport, IEnumerable<ILayer> layers)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (var bitmap = new SKBitmap((int)viewport.Width, (int)viewport.Height, SKColorType.Rgb565, SKAlphaType.Premul))
+                using (var canvas = new SKCanvas(bitmap))
+                {
+                    Render(canvas, viewport, layers);
+                    using (var image = SKImage.FromBitmap(bitmap))
+                    using (var data = image.Encode())
+                    {
+                        var memoryStream = new MemoryStream();
+                        data.SaveTo(memoryStream);
+                        return memoryStream;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Log(LogLevel.Error, ex.Message);
+                return null;
+            }
         }
     }
 

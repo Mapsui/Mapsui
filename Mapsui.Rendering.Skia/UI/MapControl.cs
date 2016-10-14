@@ -126,7 +126,7 @@ namespace Mapsui.Rendering.Skia.UI
 
         public bool ZoomLocked { get; set; }
 
-        public SkiaControl SkiaControl { get; } = new SkiaControl();
+        public SkiaControl SkiaControl { get; }
 
         // ReSharper disable once UnusedMember.Local // This registration is in order to triggers the call to OnResolutionChanged
         private static readonly DependencyProperty ResolutionProperty =
@@ -136,22 +136,13 @@ namespace Mapsui.Rendering.Skia.UI
 
         public MapControl()
         {
-            //RenderCanvas = new Canvas
-            //{
-            //    VerticalAlignment = VerticalAlignment.Stretch,
-            //    HorizontalAlignment = HorizontalAlignment.Stretch,
-            //    Background = new SolidColorBrush(Colors.Transparent),
-            //};
-            //Children.Add(RenderCanvas);
-
             SkiaControl = new SkiaControl()
             {
                 VerticalAlignment = VerticalAlignment.Stretch,
-                HorizontalAlignment = HorizontalAlignment.Stretch,
-                //!!Background = new SolidColorBrush(Colors.Transparent),
+                HorizontalAlignment = HorizontalAlignment.Stretch
+
             };
 
-            //!!!Children.Add(RenderCanvas);
             Children.Add(SkiaControl);
             _bboxRect = new Rectangle
                 {
@@ -521,8 +512,7 @@ namespace Mapsui.Rendering.Skia.UI
         private void InitializeViewport()
         {
             if (ActualWidth.IsNanOrZero()) return;
-            if (_map == null) return;
-            if (_map.Envelope == null) return;
+            if (_map?.Envelope == null) return;
             if (_map.Envelope.Width.IsNanOrZero()) return;
             if (_map.Envelope.Height.IsNanOrZero()) return;
             if (_map.Envelope.GetCentroid() == null) return;
@@ -603,7 +593,7 @@ namespace Mapsui.Rendering.Skia.UI
 
         private void MapControlKeyUp(object sender, KeyEventArgs e)
         {
-            String keyName = e.Key.ToString().ToLower();
+            var keyName = e.Key.ToString().ToLower();
             if (keyName.Equals("ctrl") || keyName.Equals("leftctrl") || keyName.Equals("rightctrl"))
             {
                 IsInBoxZoomMode = false;
@@ -621,29 +611,28 @@ namespace Mapsui.Rendering.Skia.UI
 
         private void DrawBbox(Point newPos)
         {
-            if (_mouseDown)
+            if (!_mouseDown) return;
+
+            var from = _previousMousePosition;
+            var to = newPos;
+
+            if (from.X > to.X)
             {
-                var from = _previousMousePosition;
-                var to = newPos;
-
-                if (from.X > to.X)
-                {
-                    var temp = from;
-                    from.X = to.X;
-                    to.X = temp.X;
-                }
-
-                if (from.Y > to.Y)
-                {
-                    var temp = from;
-                    from.Y = to.Y;
-                    to.Y = temp.Y;
-                }
-
-                _bboxRect.Width = to.X - from.X;
-                _bboxRect.Height = to.Y - from.Y;
-                _bboxRect.Margin = new Thickness(from.X, from.Y, 0, 0);
+                var temp = from;
+                from.X = to.X;
+                to.X = temp.X;
             }
+
+            if (from.Y > to.Y)
+            {
+                var temp = from;
+                from.Y = to.Y;
+                to.Y = temp.Y;
+            }
+
+            _bboxRect.Width = to.X - from.X;
+            _bboxRect.Height = to.Y - from.Y;
+            _bboxRect.Margin = new Thickness(from.X, from.Y, 0, 0);
         }
 
         public void ZoomToFullEnvelope()
