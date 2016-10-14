@@ -38,7 +38,7 @@ namespace Mapsui.Rendering.Skia
             layers = layers.ToList();
 
             SetAllTextureInfosToUnused();
-
+            
             VisibleFeatureIterator.IterateLayers(viewport, layers, (v, l, s) =>
             {
                 RenderFeature(canvas, v, l, s);

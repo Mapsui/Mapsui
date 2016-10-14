@@ -8,26 +8,26 @@ namespace Mapsui.Rendering.Skia
     {
         public static SKBitmap Create(LabelStyle style, string text)
         {
-            //!!!var font = new Font(style.Font.FontFamily, (float)style.Font.Size, FontStyle.Bold);
-
             using (var paint = new SKPaint())
             {
-                paint.TextSize = 64.0f;
+                paint.TextSize = (float) style.Font.Size;
                 paint.IsAntialias = true;
                 paint.Color = style.ForeColor.ToSkia();
+                paint.Typeface = SKTypeface.FromFamilyName(style.Font.FontFamily);
                 paint.IsStroke = false;
-                
+                paint.FakeBoldText = true;
+                paint.IsEmbeddedBitmapText = true;
+
                 var rect = new SKRect();
+                paint.MeasureText(text, ref rect);
 
-                var size = paint.MeasureText(text, ref rect);
-                var targetBitmap = new SKBitmap((int) Math.Ceiling(rect.Width), (int) Math.Ceiling(rect.Height));
-                var targetGraphics = new SKCanvas(targetBitmap);
-                
-                // Render a text label
-                targetGraphics.Clear(style.BackColor.Color.ToSkia());
-                targetGraphics.DrawText(text, 0, 0, paint);
-
-                return targetBitmap;
+                using (var targetBitmap = new SKBitmap((int) Math.Ceiling(rect.Width), (int) Math.Ceiling(rect.Height)))
+                using (var targetGraphics = new SKCanvas(targetBitmap))
+                {
+                    targetGraphics.Clear(style.BackColor.Color.ToSkia());
+                    targetGraphics.DrawText(text, -rect.Left, -rect.Top, paint);
+                    return targetBitmap;
+                }
             }
         }
     }
