@@ -19,8 +19,10 @@ namespace Mapsui.Rendering.OpenTK
                 LabelRenderer.Draw(labelStyle, labelStyle.GetLabelText(feature), (float)destination.X, (float)destination.Y);
             }
             var symbolStyle = style as SymbolStyle;
-            if (symbolStyle != null && symbolStyle.BitmapId >= 0) DrawPointWithSymbolStyle(symbolStyle, destination, bitmapCache);
-            else if (style is VectorStyle) DrawPointWithVectorStyle((VectorStyle)style, destination);
+            if (symbolStyle != null && symbolStyle.BitmapId >= 0)
+                DrawPointWithSymbolStyle(symbolStyle, destination, bitmapCache);
+            else if (style is VectorStyle)
+                DrawPointWithVectorStyle((VectorStyle)style, destination);
         }
 
         private static void DrawPointWithVectorStyle(VectorStyle vectorStyle, Point destination)

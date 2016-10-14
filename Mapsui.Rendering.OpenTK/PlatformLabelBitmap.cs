@@ -22,8 +22,8 @@ namespace Mapsui.Rendering.OpenTK
 
         private static void InitializeBitmapAndGraphics(int width, int height)
         {
-            if (_graphics != null) _graphics.Dispose();
-            if (_bitmap != null) _bitmap.Dispose();
+            _graphics?.Dispose();
+            _bitmap?.Dispose();
             _bitmap = new Bitmap(width, height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
             _graphics = Graphics.FromImage(_bitmap);
         }

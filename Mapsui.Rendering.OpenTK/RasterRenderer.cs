@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using Mapsui.Geometries;
 using Mapsui.Logging;
 using Mapsui.Providers;
@@ -11,7 +10,7 @@ namespace Mapsui.Rendering.OpenTK
     public static class RasterRenderer
     {
         public static void Draw(IViewport viewport, IStyle style, IFeature feature, 
-            IDictionary<object, TextureInfo> TextureCache, long currentIteration)
+            IDictionary<object, TextureInfo> textureCache, long currentIteration)
         {
             try
             {
@@ -19,18 +18,18 @@ namespace Mapsui.Rendering.OpenTK
 
                 TextureInfo textureInfo;
 
-                if (!TextureCache.Keys.Contains(raster))
+                if (!textureCache.Keys.Contains(raster))
                 {
                     textureInfo = TextureHelper.LoadTexture(raster.Data);
-                    TextureCache[raster] = textureInfo;
+                    textureCache[raster] = textureInfo;
                 }
                 else
                 {
-                    textureInfo = TextureCache[raster];
+                    textureInfo = textureCache[raster];
                 }
 
                 textureInfo.IterationUsed = currentIteration;
-                TextureCache[raster] = textureInfo;
+                textureCache[raster] = textureInfo;
                 var destination = WorldToScreen(viewport, feature.Geometry.GetBoundingBox());
                 TextureHelper.RenderTexture(textureInfo.TextureId, ToVertexArray(RoundToPixel(destination)));
             }
