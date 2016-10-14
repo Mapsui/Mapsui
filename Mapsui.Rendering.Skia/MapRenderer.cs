@@ -128,6 +128,7 @@ namespace Mapsui.Rendering.Skia
         {
             try
             {
+                // todo: Use SKColorType.Rgba8888 when it does not crash anymore
                 using (var bitmap = new SKBitmap((int)viewport.Width, (int)viewport.Height, SKColorType.Rgb565, SKAlphaType.Premul))
                 using (var canvas = new SKCanvas(bitmap))
                 {
