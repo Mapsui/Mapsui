@@ -97,10 +97,7 @@ namespace Mapsui.Geometries
         /// <summary>
         /// Returns true if this LineString is closed and simple
         /// </summary>
-        public override bool IsRing
-        {
-            get { return (IsClosed && IsSimple()); }
-        }
+        public override bool IsRing => (IsClosed && IsSimple());
 
         /// <summary>
         /// The length of this LineString, as measured in the spatial reference system of this LineString.
@@ -118,15 +115,12 @@ namespace Mapsui.Geometries
             }
         }
 
-        
+
         /// <summary>
         /// The number of points in this LineString.
         /// </summary>
         /// <remarks>This method is supplied as part of the OpenGIS Simple Features Specification</remarks>
-        public int NumPoints
-        {
-            get { return _vertices.Count; }
-        }
+        public int NumPoints => _vertices.Count;
 
         /// <summary>
         /// Returns the specified point N in this Linestring.
@@ -139,7 +133,7 @@ namespace Mapsui.Geometries
             return _vertices[n];
         }
 
-        
+
         /// <summary>
         /// The position of a point on the line, parameterised by length.
         /// </summary>
@@ -181,20 +175,18 @@ namespace Mapsui.Geometries
             return l;
         }
 
-        
+
         /// <summary>
         /// Checks whether this instance is spatially equal to the LineString 'l'
         /// </summary>
-        /// <param name="l">LineString to compare to</param>
+        /// <param name="lineString">LineString to compare to</param>
         /// <returns>true of the objects are spatially equal</returns>
-        public bool Equals(LineString l)
+        public bool Equals(LineString lineString)
         {
-            if (l == null)
+            if (lineString?.Vertices.Count != Vertices.Count)
                 return false;
-            if (l.Vertices.Count != Vertices.Count)
-                return false;
-            for (int i = 0; i < l.Vertices.Count; i++)
-                if (!l.Vertices[i].Equals(Vertices[i]))
+            for (int i = 0; i < lineString.Vertices.Count; i++)
+                if (!lineString.Vertices[i].Equals(Vertices[i]))
                     return false;
             return true;
         }
@@ -268,6 +260,5 @@ namespace Mapsui.Geometries
         {
             throw new NotImplementedException();
         }
-
-            }
+    }
 }
