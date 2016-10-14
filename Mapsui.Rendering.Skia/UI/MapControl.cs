@@ -11,12 +11,11 @@ using System.Windows.Shapes;
 using Mapsui.Fetcher;
 using Mapsui.Layers;
 using Mapsui.Providers;
-using Mapsui.Rendering;
-using Mapsui.Rendering.Skia;
+using Mapsui.UI.Xaml;
 using Mapsui.Utilities;
 using XamlVector = System.Windows.Vector;
 
-namespace Mapsui.UI.Xaml
+namespace Mapsui.Rendering.Skia.UI
 {
     public class MapControl : Grid
     {
@@ -43,8 +42,10 @@ namespace Mapsui.UI.Xaml
         public IRenderer Renderer { get; set; }
         private bool IsInBoxZoomMode { get; set; }
         [Obsolete("Use Map.HoverInfoLayers", true)]
+        // ReSharper disable once UnassignedGetOnlyAutoProperty // This is here just to help upgraders
         public IList<ILayer> MouseInfoOverLayers { get; } 
         [Obsolete("Use Map.InfoLayers", true)]
+        // ReSharper disable once UnassignedGetOnlyAutoProperty // This is here just to help upgraders
         public IList<ILayer> MouseInfoUpLayers { get; } 
         public event EventHandler ViewportInitialized;
         public bool ZoomToBoxMode { get; set; }
@@ -124,8 +125,6 @@ namespace Mapsui.UI.Xaml
         public string ErrorMessage { get; private set; }
 
         public bool ZoomLocked { get; set; }
-
-        public Canvas RenderCanvas { get; }
 
         public SkiaControl SkiaControl { get; } = new SkiaControl();
 
