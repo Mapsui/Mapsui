@@ -112,7 +112,7 @@ namespace Mapsui.Rendering.Skia
             }
             else if (feature.Geometry is LineString)
             {
-                //!!!LineStringRenderer.Draw(viewport, style, feature);
+                LineStringRenderer.Draw(canvas, viewport, style, feature);
             }
             else if (feature.Geometry is Polygon)
             {

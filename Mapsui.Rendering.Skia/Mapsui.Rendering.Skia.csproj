@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LabelRenderer.cs" />
+    <Compile Include="LineStringRenderer.cs" />
     <Compile Include="MapRenderer.cs" />
     <Compile Include="PlatformLabelBitmap.cs" />
     <Compile Include="PolygonRenderer.cs" />
