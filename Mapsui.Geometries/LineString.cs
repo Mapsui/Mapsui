@@ -28,13 +28,13 @@ namespace Mapsui.Geometries
     /// </summary>
     public class LineString : Curve
     {
-        private IList<Point> _vertices;
+        private List<Point> _vertices;
 
         /// <summary>
         /// Initializes an instance of a LineString from a set of vertices
         /// </summary>
         /// <param name="vertices"></param>
-        public LineString(IList<Point> vertices)
+        public LineString(List<Point> vertices)
         {
             _vertices = vertices;
         }
@@ -42,7 +42,7 @@ namespace Mapsui.Geometries
         /// <summary>
         /// Initializes an instance of a LineString
         /// </summary>
-        public LineString() : this(new Collection<Point>())
+        public LineString() : this(new List<Point>())
         {
         }
 
@@ -54,13 +54,13 @@ namespace Mapsui.Geometries
         {
             var vertices = new Collection<Point>();
             foreach (var point in points) vertices.Add(new Point(point));
-            _vertices = vertices;
+            _vertices = vertices.ToList();
         }
 
         /// <summary>
         /// Gets or sets the collection of vertices in this Geometry
         /// </summary>
-        public IList<Point> Vertices
+        public List<Point> Vertices
         {
             get { return _vertices; }
             set { _vertices = value; }
