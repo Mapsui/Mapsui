@@ -28,7 +28,7 @@ namespace Mapsui.Samples.Common
         public AnimatedPointsWithAutoUpdateLayer()
             : base(new DynamicMemoryProvider())
         {
-            _timer = new Timer(arg => UpdateData(), this, 0, 10000);
+            _timer = new Timer(arg => UpdateData(), this, 0, 2000);
         }
 
         private class DynamicMemoryProvider : MemoryProvider
