@@ -60,8 +60,10 @@ namespace Mapsui.UI.Xaml
         public IRenderer Renderer { get; set; }
         private bool IsInBoxZoomMode { get; set; }
         [Obsolete("Use Map.HoverInfoLayers", true)]
+        // ReSharper disable once UnassignedGetOnlyAutoProperty // This is here just to help upgraders
         public IList<ILayer> MouseInfoOverLayers { get; } 
         [Obsolete("Use Map.InfoLayers", true)]
+        // ReSharper disable once UnassignedGetOnlyAutoProperty // This is here just to help upgraders
         public IList<ILayer> MouseInfoUpLayers { get; } 
         public event EventHandler ViewportInitialized;
         public bool ZoomToBoxMode { get; set; }
