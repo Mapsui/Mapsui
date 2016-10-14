@@ -12,8 +12,8 @@ namespace Mapsui.Samples.Common
         {
             var map = new Map();
             map.Layers.Add(OsmSample.CreateLayer());
-            map.Layers.Add(Create());
             map.Layers.Add(CreateLayer());
+            map.Layers.Add(CreateLayerWithVectorStyles());
             return map;
         }
 
@@ -38,40 +38,40 @@ namespace Mapsui.Samples.Common
                 SymbolScale = 1400
             });
 
+            netherlands.Styles.Add(new LabelStyle { Text = "Style in world units",
+                HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Left });
+
             return new MemoryProvider(netherlands);
         }
 
-        public static ILayer Create()
+        public static ILayer CreateLayerWithVectorStyles()
         {
-            return new Layer("PointLayer")
+            return new Layer("Point Layer")
             {
                 DataSource = new MemoryProvider(new[]
                 {
-                    CreatePointWithLabel(),
                     CreatePointWithDefaultStyle(),
-                    CreatePointWithSmallBlackDot()
+                    CreatePointWithStackedStyles()
                 }),
                 Style = null
             };
         }
 
-        private static Feature CreatePointWithLabel()
-        {
-            var feature = new Feature { Geometry = new Point(0, 1000000) };
-            feature.Styles.Add(new LabelStyle { Text = "Label" });
-            return feature;
-        }
 
         private static Feature CreatePointWithDefaultStyle()
         {
-            var feature = new Feature { Geometry = new Point(1000000, 1000000) };
+            var feature = new Feature { Geometry = new Point(0, 0) };
+
             feature.Styles.Add(new SymbolStyle());
+            feature.Styles.Add(new LabelStyle { Text = "Default Style",
+                HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Left });
+
             return feature;
         }
 
-        private static IFeature CreatePointWithSmallBlackDot()
+        private static IFeature CreatePointWithStackedStyles()
         {
-            var feature = new Feature { Geometry = new Point(1000000, 0) };
+            var feature = new Feature { Geometry = new Point(0, -1000000) };
 
             feature.Styles.Add(new SymbolStyle
             {
@@ -86,6 +86,9 @@ namespace Mapsui.Samples.Common
                 Fill = new Brush { Color = Color.Black }
             });
 
+            feature.Styles.Add(new LabelStyle { Text = "Stacked Styles",
+                HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Left});
+            
             return feature;
         }
     }
