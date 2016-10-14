@@ -34,9 +34,9 @@ namespace Mapsui.Geometries
         /// Initializes an instance of a LineString from a set of vertices
         /// </summary>
         /// <param name="vertices"></param>
-        public LineString(List<Point> vertices)
+        public LineString(IEnumerable<Point> vertices)
         {
-            _vertices = vertices;
+            _vertices = vertices.ToList();
         }
 
         /// <summary>
