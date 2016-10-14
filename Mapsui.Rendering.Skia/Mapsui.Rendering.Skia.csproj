@@ -55,6 +55,7 @@
     <Compile Include="LabelRenderer.cs" />
     <Compile Include="MapRenderer.cs" />
     <Compile Include="PlatformLabelBitmap.cs" />
+    <Compile Include="PolygonRenderer.cs" />
     <Compile Include="SKBitmapInfo.cs" />
     <Compile Include="UI\Extensions.cs" />
     <Compile Include="UI\SkiaExtensions.cs" />

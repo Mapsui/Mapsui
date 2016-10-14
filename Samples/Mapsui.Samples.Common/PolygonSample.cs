@@ -30,6 +30,13 @@ namespace Mapsui.Samples.Common
             polygon.ExteriorRing.Vertices.Add(new Point(10000000, 10000000));
             polygon.ExteriorRing.Vertices.Add(new Point(10000000, 0));
             polygon.ExteriorRing.Vertices.Add(new Point(0, 0));
+            var linearRing = new LinearRing();
+            linearRing.Vertices.Add(new Point(1000000, 1000000));
+            linearRing.Vertices.Add(new Point(9000000, 1000000));
+            linearRing.Vertices.Add(new Point(9000000, 9000000));
+            linearRing.Vertices.Add(new Point(1000000, 9000000));
+            linearRing.Vertices.Add(new Point(1000000, 1000000));
+            polygon.InteriorRings.Add(linearRing);
             return polygon;
         }
     }

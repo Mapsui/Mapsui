@@ -21,7 +21,8 @@ namespace Mapsui.Rendering.Skia
                 var rect = new SKRect();
                 paint.MeasureText(text, ref rect);
 
-                using (var targetBitmap = new SKBitmap((int) Math.Ceiling(rect.Width), (int) Math.Ceiling(rect.Height)))
+                var targetBitmap = new SKBitmap((int) Math.Ceiling(rect.Width), (int) Math.Ceiling(rect.Height));
+
                 using (var targetGraphics = new SKCanvas(targetBitmap))
                 {
                     targetGraphics.Clear(style.BackColor.Color.ToSkia());

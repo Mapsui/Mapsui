@@ -116,7 +116,7 @@ namespace Mapsui.Rendering.Skia
             }
             else if (feature.Geometry is Polygon)
             {
-                //!!!PolygonRenderer.Draw(viewport, style, feature);
+                PolygonRenderer.Draw(canvas, viewport, style, feature);
             }
             else if (feature.Geometry is IRaster)
             {
