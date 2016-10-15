@@ -1,0 +1,50 @@
+﻿<Window x:Class="Mapsui.Samples.Wpf.Skia.Window1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ui="clr-namespace:Mapsui.Rendering.Skia.UI;assembly=Mapsui.Rendering.Skia"
+        xmlns:skia="clr-namespace:Mapsui.Samples.Wpf.Skia"
+        mc:Ignorable="d"
+        d:DesignWidth="644.572"
+        d:DesignHeight="333.913"
+        Width="1000"
+        Height="800"
+        Title="Mapsui.Samples.Wpf"
+        SizeToContent="Manual">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="40" />
+        </Grid.RowDefinitions>
+        <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="Gray">
+            <ui:MapControl x:Name="MapControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                           Margin="10,0,-10.4,0.4" />
+            <Border BorderBrush="White" Opacity="0.75" Margin="10" Background="White" BorderThickness="6"
+                    CornerRadius="2" VerticalAlignment="Top" HorizontalAlignment="Left">
+                <StackPanel Name="SampleList" Width="Auto" />
+            </Border>
+            <Border BorderBrush="White" Opacity="0.75" Margin="10" Background="White" BorderThickness="6"
+                    CornerRadius="2" VerticalAlignment="Top" HorizontalAlignment="Right">
+                <skia:LayerList x:Name="LayerList" />
+            </Border>
+            <Border BorderBrush="White" Opacity="0.75" Margin="10" Background="White" BorderThickness="6"
+                    CornerRadius="2" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+                <Slider x:Name="RotationSlider" Width="205" ValueChanged="RotationSliderChanged" />
+            </Border>
+            <Border x:Name="Statistics" BorderBrush="White" Opacity="0.75" Margin="10" Background="White"
+                    BorderThickness="6" CornerRadius="2" HorizontalAlignment="Center" VerticalAlignment="Top">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Fps:  " />
+                        <TextBlock x:Name="Fps" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </Grid>
+        <StackPanel Name="LogPanel" Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Stretch"
+                    HorizontalAlignment="Stretch">
+            <TextBox Name="LogTextBox" AcceptsReturn="True" />
+        </StackPanel>
+    </Grid>
+</Window>
