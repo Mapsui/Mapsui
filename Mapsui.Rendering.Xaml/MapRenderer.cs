@@ -146,6 +146,7 @@ namespace Mapsui.Rendering.Xaml
             if (layer is LabelLayer)
             {
                 var labelLayer = layer as LabelLayer;
+
                 target.Children.Add(labelLayer.UseLabelStacking
                     ? StackedLabelLayerRenderer.Render(viewport, labelLayer)
                     : LabelRenderer.RenderLabelLayer(viewport, labelLayer));
@@ -234,7 +235,7 @@ namespace Mapsui.Rendering.Xaml
         private static Shape RenderGeometry(IViewport viewport, IStyle style, IFeature feature, BrushCache brushCache = null)
         {
             if (feature.Geometry is Geometries.Point)
-                return GeometryRenderer.RenderPoint(feature.Geometry as Geometries.Point, style, viewport, brushCache);
+                return PointRenderer.RenderPoint(feature.Geometry as Geometries.Point, style, viewport, brushCache);
             if (feature.Geometry is MultiPoint)
                 return GeometryRenderer.RenderMultiPoint(feature.Geometry as MultiPoint, style, viewport);
             if (feature.Geometry is LineString)
@@ -253,7 +254,7 @@ namespace Mapsui.Rendering.Xaml
         private static void PositionGeometry(Shape renderedGeometry, IViewport viewport, IStyle style, IFeature feature)
         {
             if (feature.Geometry is Geometries.Point)
-                GeometryRenderer.PositionPoint(renderedGeometry, feature.Geometry as Geometries.Point, style, viewport);
+                PointRenderer.PositionPoint(renderedGeometry, feature.Geometry as Geometries.Point, style, viewport);
             else if (feature.Geometry is MultiPoint)
                 GeometryRenderer.PositionGeometry(renderedGeometry, viewport);
             else if (feature.Geometry is LineString)
