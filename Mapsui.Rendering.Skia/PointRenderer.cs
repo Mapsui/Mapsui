@@ -20,7 +20,8 @@ namespace Mapsui.Rendering.Skia
             var labelStyle = style as LabelStyle;
             if (labelStyle != null)
             {
-                LabelRenderer.Draw(canvas, labelStyle, labelStyle.GetLabelText(feature), (float)destination.X, (float)destination.Y);
+                LabelRenderer.Draw(canvas, labelStyle, labelStyle.GetLabelText(feature), 
+                    (float) destination.X, (float) destination.Y);
             }
             var symbolStyle = style as SymbolStyle;
             if (symbolStyle != null && symbolStyle.BitmapId >= 0)
@@ -29,7 +30,7 @@ namespace Mapsui.Rendering.Skia
                 DrawPointWithVectorStyle(canvas, (VectorStyle) style, destination);
         }
 
-        private static void DrawPointWithVectorStyle(SKCanvas skCanvas, VectorStyle vectorStyle, 
+        private static void DrawPointWithVectorStyle(SKCanvas skCanvas, VectorStyle vectorStyle,
             Point destination)
         {
             skCanvas.Save();
@@ -63,7 +64,7 @@ namespace Mapsui.Rendering.Skia
             {
                 textureInfo = symbolBitmapCache[symbolStyle.BitmapId];
             }
-            
+
             TextureHelper.RenderTexture(skCanvas, textureInfo.Bitmap,
                 (float) destination.X, (float) destination.Y,
                 (float) symbolStyle.SymbolRotation,
