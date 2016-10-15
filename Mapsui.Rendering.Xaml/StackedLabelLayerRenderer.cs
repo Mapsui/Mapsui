@@ -18,6 +18,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Shapes;
 using Windows.UI.Xaml.Media;
 using Windows.UI;
+
 #endif
 
 namespace Mapsui.Rendering.Xaml
@@ -36,14 +37,14 @@ namespace Mapsui.Rendering.Xaml
             // step 2) Move GetFeaturesInViewStacked to a GetFeaturesInView
             // method of a new StackedLabelLayed.
 
-            var canvas = new Canvas { Opacity = layer.Opacity };
+            var canvas = new Canvas {Opacity = layer.Opacity};
 
             // todo: take into account the priority 
             var features = layer.GetFeaturesInView(viewport.Extent, viewport.Resolution).ToArray();
-            var margin = viewport.Resolution * 50;
+            var margin = viewport.Resolution*50;
 
             const int symbolSize = 32; // todo: determine margin by symbol size
-            const int boxMargin = symbolSize / 2;
+            const int boxMargin = symbolSize/2;
 
             var clusters = new List<Cluster>();
             //todo: repeat until there are no more merges
@@ -60,30 +61,31 @@ namespace Mapsui.Rendering.Xaml
                 foreach (var feature in orderedFeatures)
                 {
                     if (double.IsNaN(stackOffsetY)) // first time
-                        stackOffsetY = textHeight * 0.5 + boxMargin;
+                        stackOffsetY = textHeight*0.5 + boxMargin;
                     else
                         stackOffsetY += textHeight; //todo: get size from text (or just pass stack nr)
 
                     LabelStyle style;
                     if (layer.Style is IThemeStyle)
                     {
-                        style = (LabelStyle)((IThemeStyle)layer.Style).GetStyle(feature);
+                        style = (LabelStyle) ((IThemeStyle) layer.Style).GetStyle(feature);
                     }
                     else
                     {
-                        style = (LabelStyle)layer.Style;
+                        style = (LabelStyle) layer.Style;
                     }
 
                     var labelStyle = new LabelStyle(style)
                     {
-                        Text = layer.GetLabelText(feature) //we only use the layer for the text, this should be returned by style
+                        Text = layer.GetLabelText(feature)
+                        //we only use the layer for the text, this should be returned by style
                     };
                     labelStyle.Offset.Y += stackOffsetY;
 
-                    // since the box can be rotated, find the minimal Y value of all 4 corners
+                    // Since the box can be rotated, find the minimal Y value of all 4 corners
                     var rotatedBox = cluster.Box.Rotate(-viewport.Rotation);
                     var minY = rotatedBox.Vertices.Select(v => v.Y).Min();
-                    var position = new Geometries.Point(cluster.Box.GetCentroid().X, minY);
+                    var position = new Point(cluster.Box.GetCentroid().X, minY);
 
                     var labelText = labelStyle.GetLabelText(feature);
                     canvas.Children.Add(SingleLabelRenderer.RenderLabel(position, labelStyle, viewport, labelText));
@@ -95,7 +97,7 @@ namespace Mapsui.Rendering.Xaml
         private static UIElement RenderBox(BoundingBox box, IViewport viewport)
         {
             const int symbolSize = 32; // todo: determine margin by symbol size
-            const int boxMargin = symbolSize / 2;
+            const int boxMargin = symbolSize/2;
 
             var path = new Path
             {
@@ -105,7 +107,7 @@ namespace Mapsui.Rendering.Xaml
             };
 
             // offset the bounding box left and up by the box margin
-            var offsetBox = box.Grow(boxMargin * viewport.Resolution);
+            var offsetBox = box.Grow(boxMargin*viewport.Resolution);
 
             GeometryRenderer.PositionRaster(path, offsetBox, viewport);
 
@@ -113,11 +115,11 @@ namespace Mapsui.Rendering.Xaml
         }
 
         private static void ClusterFeatures(
-           ICollection<Cluster> clusters,
-           IEnumerable<IFeature> features,
-           double minDistance,
-           IStyle layerStyle,
-           double resolution)
+            ICollection<Cluster> clusters,
+            IEnumerable<IFeature> features,
+            double minDistance,
+            IStyle layerStyle,
+            double resolution)
         {
             var style = layerStyle;
 
@@ -145,10 +147,11 @@ namespace Mapsui.Rendering.Xaml
                 }
 
                 if (found) continue;
+
                 clusters.Add(new Cluster
                 {
                     Box = feature.Geometry.GetBoundingBox().Clone(),
-                    Features = new List<IFeature> { feature }
+                    Features = new List<IFeature> {feature}
                 });
             }
         }
