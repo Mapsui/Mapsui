@@ -1,11 +1,7 @@
-﻿using System;
-using System.IO;
-using Mapsui.Geometries;
-using Mapsui.Styles;
+﻿using Mapsui.Styles;
 using Point = Mapsui.Geometries.Point;
 #if !NETFX_CORE
 using System.Windows;
-using System.Windows.Media.Imaging;
 using XamlMedia = System.Windows.Media;
 using XamlShapes = System.Windows.Shapes;
 using XamlPoint = System.Windows.Point;
@@ -17,9 +13,7 @@ using XamlMedia = Windows.UI.Xaml.Media;
 using XamlShapes = Windows.UI.Xaml.Shapes;
 using XamlPoint = Windows.Foundation.Point;
 using XamlColors = Windows.UI.Colors;
-using Windows.Storage.Streams;
 using Windows.UI.Xaml.Media.Imaging;
-using System.Threading.Tasks;
 #endif
 
 namespace Mapsui.Rendering.Xaml
