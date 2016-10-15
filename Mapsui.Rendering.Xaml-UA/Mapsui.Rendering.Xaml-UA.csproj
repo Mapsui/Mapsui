@@ -68,6 +68,9 @@
     <Compile Include="..\Mapsui.Rendering.Xaml\MatrixHelper.cs">
       <Link>MatrixHelper.cs</Link>
     </Compile>
+    <Compile Include="..\Mapsui.Rendering.Xaml\PointRenderer.cs">
+      <Link>PointRenderer.cs</Link>
+    </Compile>
     <Compile Include="..\Mapsui.Rendering.Xaml\SingleLabelRenderer.cs">
       <Link>SingleLabelRenderer.cs</Link>
     </Compile>
