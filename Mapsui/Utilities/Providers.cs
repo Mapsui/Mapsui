@@ -31,11 +31,13 @@ namespace Mapsui.Utilities
         /// </summary>
         public static IEnumerable<TypeInfo> GetProviders()
         {
-            Assembly assembly = typeof(Providers).GetTypeInfo().Assembly;
-            var typeInfos = assembly.DefinedTypes.Where(m => m.IsInterface && m.Name == nameof(Mapsui.Providers.IProvider));
+            const string providerName = nameof(Mapsui.Providers.IProvider);
+            var assembly = typeof(Providers).GetTypeInfo().Assembly;
+            var typeInfos = assembly.DefinedTypes.Where(m => m.IsInterface && m.Name == providerName);
+
             foreach (var typeInfo in typeInfos)
             {
-                if (typeInfo.ImplementedInterfaces.Any(i => i == typeof (Mapsui.Providers.IProvider)))
+                if (typeInfo.ImplementedInterfaces.Any(i => i == typeof(Mapsui.Providers.IProvider)))
                     yield return typeInfo;
             }
         }

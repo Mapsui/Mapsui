@@ -2,6 +2,7 @@
 using Mapsui.Providers.Wms;
 using System.Linq;
 using System.Xml;
+using Mapsui.Providers.Tests.Utilities;
 
 namespace Mapsui.Providers.Tests.Wms
 {
@@ -13,7 +14,7 @@ namespace Mapsui.Providers.Tests.Wms
         {
             // arrange
             var capabilties = new XmlDocument { XmlResolver = null };
-            capabilties.Load(".\\Resources\\capabilities_1_3_0.xml");
+            capabilties.Load($"{AssemblyInfo.AssemblyDirectory}\\Resources\\capabilities_1_3_0.xml");
             var provider = new WmsProvider(capabilties) { CRS = "EPSG:3857" };
             provider.AddLayer("Maasluis complex - top");
             provider.AddLayer("Kreftenheye z2 - top");
@@ -31,15 +32,17 @@ namespace Mapsui.Providers.Tests.Wms
         public void GetLegend_WhenCalled_ShouldReturnLegend()
         {
             // arrange
-            var capabilties = new XmlDocument();
-            capabilties.XmlResolver = null;
-            capabilties.Load(".\\Resources\\capabilities_1_3_0.xml");
-            var provider = new WmsProvider(capabilties);
-            provider.CRS = "EPSG:900913";
+            var capabilties = new XmlDocument {XmlResolver = null};
+            capabilties.Load($"{AssemblyInfo.AssemblyDirectory}\\Resources\\capabilities_1_3_0.xml");
+            var provider = new WmsProvider(capabilties)
+            {
+                CRS = "EPSG:900913",
+                ContinueOnError = true
+            };
             provider.AddLayer("Maasluis complex - top");
             provider.AddLayer("Kreftenheye z2 - top");
             provider.SetImageFormat(provider.OutputFormats[0]);
-            provider.ContinueOnError = true;
+            
 
             // act
             var legendImages = provider.GetLegends();

@@ -3,6 +3,7 @@ using System.Linq;
 using NUnit.Framework;
 using Mapsui.Web.Wms;
 using System.Xml;
+using Mapsui.Providers.Tests.Utilities;
 
 namespace Mapsui.Providers.Tests.Wms
 {
@@ -14,7 +15,7 @@ namespace Mapsui.Providers.Tests.Wms
         {
             // arrange
             var capabilties = new XmlDocument { XmlResolver = null };
-            capabilties.Load(".\\Resources\\capabilities_1_1_1.xml");
+            capabilties.Load($"{AssemblyInfo.AssemblyDirectory}\\Resources\\capabilities_1_1_1.xml");
 
             // act
             var client = new Client(capabilties);
@@ -29,7 +30,7 @@ namespace Mapsui.Providers.Tests.Wms
             // arrange
             var capabilties = new XmlDocument();
             capabilties.XmlResolver = null;
-            capabilties.Load(".\\Resources\\capabilities_1_3_0.xml");
+            capabilties.Load($"{AssemblyInfo.AssemblyDirectory}\\Resources\\capabilities_1_3_0.xml");
 
             // act
             var client = new Client(capabilties);

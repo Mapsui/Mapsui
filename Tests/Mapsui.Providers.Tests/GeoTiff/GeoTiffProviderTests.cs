@@ -1,7 +1,8 @@
 ﻿using System;
-using System.Linq;
+using System.Globalization;
 using NUnit.Framework;
 using Mapsui.Providers.GeoTiff;
+using Mapsui.Providers.Tests.Utilities;
 
 namespace Mapsui.Providers.Tests.GeoTiff
 {
@@ -11,11 +12,10 @@ namespace Mapsui.Providers.Tests.GeoTiff
         [Test]
         public void GeoTiffProviderConstructor_WhenInitialized_ShouldReturnFeatures()
         {
-            const string location = @".\Resources\example.tif";
+            var location = $@"{AssemblyInfo.AssemblyDirectory}\Resources\example.tif";
             var geoTiffProvider = new GeoTiffProvider(location);
-            var test = geoTiffProvider.GetExtents().Left.ToString();
+            var test = geoTiffProvider.GetExtents().Left.ToString(CultureInfo.InvariantCulture);
             Console.WriteLine(test);
-                
         }
     }
 }
