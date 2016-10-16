@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using Mapsui.Web.Wms;
 using System.Xml;
 using Mapsui.Providers.Tests.Utilities;
@@ -28,8 +26,7 @@ namespace Mapsui.Providers.Tests.Wms
         public void ParseCapabilities_WhenInputIsWellFormattedWms130_ShouldParseWithoutExceptions()
         {
             // arrange
-            var capabilties = new XmlDocument();
-            capabilties.XmlResolver = null;
+            var capabilties = new XmlDocument {XmlResolver = null};
             capabilties.Load($"{AssemblyInfo.AssemblyDirectory}\\Resources\\capabilities_1_3_0.xml");
 
             // act
