@@ -74,9 +74,9 @@
     <Compile Include="RasterizingProvider.cs" />
     <Compile Include="StackedLabelLayerRenderer.cs" />
     <Compile Include="SingleLabelRenderer.cs" />
-    <Compile Include="StreamExtensions.cs" />
+    <Compile Include="Extensions\StreamExtensions.cs" />
     <Compile Include="StyleConverter.cs" />
-    <Compile Include="StyleExtensions.cs" />
+    <Compile Include="Extensions\StyleExtensions.cs" />
     <Compile Include="BitmapRendering\BitmapConverter.cs" />
   </ItemGroup>
   <ItemGroup>

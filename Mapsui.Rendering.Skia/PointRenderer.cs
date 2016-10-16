@@ -20,36 +20,73 @@ namespace Mapsui.Rendering.Skia
             var labelStyle = style as LabelStyle;
             if (labelStyle != null)
             {
-                LabelRenderer.Draw(canvas, labelStyle, labelStyle.GetLabelText(feature), 
+                LabelRenderer.Draw(canvas, labelStyle, labelStyle.GetLabelText(feature),
                     (float) destination.X, (float) destination.Y);
             }
             var symbolStyle = style as SymbolStyle;
-            if (symbolStyle != null && symbolStyle.BitmapId >= 0)
-                DrawPointWithSymbolStyle(canvas, symbolStyle, destination, symbolBitmapCache);
+
+            if (symbolStyle != null)
+            {
+                if (symbolStyle.BitmapId >= 0)
+                    DrawPointWithSymbolStyle(canvas, symbolStyle, destination, symbolBitmapCache);
+                else
+                    DrawPointWithVectorStyle(canvas, (VectorStyle) style, destination, symbolStyle.SymbolType);
+            }
             else if (style is VectorStyle)
                 DrawPointWithVectorStyle(canvas, (VectorStyle) style, destination);
         }
 
-        private static void DrawPointWithVectorStyle(SKCanvas skCanvas, VectorStyle vectorStyle,
-            Point destination)
+        private static void DrawPointWithVectorStyle(SKCanvas canvas, VectorStyle vectorStyle,
+            Point destination, SymbolType symbolType = SymbolType.Ellipse)
         {
-            skCanvas.Save();
-            skCanvas.Translate((float) destination.X, (float) destination.Y);
+            canvas.Save();
 
-            var rect = new SKRect(-HalfWidth, -HalfHeight, HalfWidth, HalfHeight);
+            canvas.Translate((float) destination.X, (float) destination.Y);
 
-            skCanvas.DrawRect(rect, new SKPaint {Color = vectorStyle.Fill.Color.ToSkia(), Style = SKPaintStyle.Fill});
-            skCanvas.DrawRect(rect,
-                new SKPaint
-                {
-                    Color = vectorStyle.Outline.Color.ToSkia(),
-                    StrokeWidth = (float) vectorStyle.Outline.Width,
-                    Style = SKPaintStyle.Stroke
-                });
-            skCanvas.Restore();
+
+            var fillPaint = new SKPaint
+            {
+                Color = vectorStyle.Fill.Color.ToSkia(),
+                Style = SKPaintStyle.Fill,
+                IsAntialias = true
+            };
+
+            var linePaint = (vectorStyle.Outline == null) ? null : new SKPaint
+            {
+                Color = vectorStyle.Outline.Color.ToSkia(),
+                StrokeWidth = (float) vectorStyle.Outline.Width,
+                Style = SKPaintStyle.Stroke,
+                IsAntialias = true
+            };
+
+            if (symbolType == SymbolType.Rectangle)
+            {
+                var rect = new SKRect(-HalfWidth, -HalfHeight, HalfWidth, HalfHeight);
+                DrawRect(canvas, rect, fillPaint, linePaint);
+            }
+            else if (symbolType == SymbolType.Ellipse)
+            {
+
+                DrawCircle(canvas, 0, 0, HalfWidth, fillPaint, linePaint);
+            }
+
+            canvas.Restore();
+        }
+        
+        private static void DrawCircle(SKCanvas canvas, float x, float y, float radius, SKPaint fillColor,
+            SKPaint lineColor)
+        {
+            if ((fillColor != null) && fillColor.Color.Alpha != 0) canvas.DrawCircle(x, y, radius, fillColor);
+            if ((lineColor != null) && lineColor.Color.Alpha != 0) canvas.DrawCircle(x, y, radius, lineColor);
         }
 
-        private static void DrawPointWithSymbolStyle(SKCanvas skCanvas, SymbolStyle symbolStyle, Point destination,
+        private static void DrawRect(SKCanvas canvas, SKRect rect, SKPaint fillColor, SKPaint lineColor)
+        {
+            if ((fillColor != null) && fillColor.Color.Alpha != 0) canvas.DrawRect(rect, fillColor);
+            if ((lineColor != null) && lineColor.Color.Alpha != 0) canvas.DrawRect(rect, lineColor);
+        }
+
+        private static void DrawPointWithSymbolStyle(SKCanvas canvas, SymbolStyle symbolStyle, Point destination,
             IDictionary<int, SKBitmapInfo> symbolBitmapCache)
         {
             var stream = BitmapRegistry.Instance.Get(symbolStyle.BitmapId);
@@ -57,7 +94,7 @@ namespace Mapsui.Rendering.Skia
             SKBitmapInfo textureInfo;
             if (!symbolBitmapCache.Keys.Contains(symbolStyle.BitmapId))
             {
-                textureInfo = TextureHelper.LoadTexture(BitmapRegistry.Instance.Get(symbolStyle.BitmapId));
+                textureInfo = BitmapHelper.LoadTexture(BitmapRegistry.Instance.Get(symbolStyle.BitmapId));
                 symbolBitmapCache[symbolStyle.BitmapId] = textureInfo;
             }
             else
@@ -65,7 +102,7 @@ namespace Mapsui.Rendering.Skia
                 textureInfo = symbolBitmapCache[symbolStyle.BitmapId];
             }
 
-            TextureHelper.RenderTexture(skCanvas, textureInfo.Bitmap,
+            BitmapHelper.RenderTexture(canvas, textureInfo.Bitmap,
                 (float) destination.X, (float) destination.Y,
                 (float) symbolStyle.SymbolRotation,
                 (float) symbolStyle.SymbolOffset.X, (float) symbolStyle.SymbolOffset.Y,

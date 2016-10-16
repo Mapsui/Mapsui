@@ -1,14 +1,14 @@
-using System;
 using System.IO;
 #if NETFX_CORE
 using System.Threading.Tasks;
 using Windows.Storage.Streams;
 using Windows.UI.Xaml.Media.Imaging;
+using System;
 #else
 using System.Windows.Media.Imaging;
 #endif
 
-namespace Mapsui.Rendering.Xaml
+namespace Mapsui.Rendering.Xaml.Extensions
 {
     public static class StreamExtensions
     {

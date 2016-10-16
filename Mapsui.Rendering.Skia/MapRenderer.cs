@@ -21,7 +21,7 @@ namespace Mapsui.Rendering.Skia
         private long _currentIteration;
         private const int TilesToKeepMultiplier = 3;
 
-        public SKCanvas SKCanvas { get; set; }
+        public SKCanvas Canvas { get; set; }
 
         static MapRenderer()
         {
@@ -30,11 +30,12 @@ namespace Mapsui.Rendering.Skia
 
         public void Render(IViewport viewport, IEnumerable<ILayer> layers)
         {
-            Render(SKCanvas, viewport, layers);
+            Render(Canvas, viewport, layers);
         }
 
         private void Render(SKCanvas canvas, IViewport viewport, IEnumerable<ILayer> layers)
         {
+            canvas.Clear(new SKColor(255, 255, 255));
             layers = layers.ToList();
 
             SetAllTextureInfosToUnused();

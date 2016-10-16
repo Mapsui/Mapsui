@@ -25,7 +25,7 @@ namespace Mapsui.Rendering.Skia
 
                 using (var targetGraphics = new SKCanvas(targetBitmap))
                 {
-                    targetGraphics.Clear(style.BackColor.Color.ToSkia());
+                    targetGraphics.Clear((style.BackColor == null) ? new SKColor() : style.BackColor.Color.ToSkia());
                     targetGraphics.DrawText(text, -rect.Left, -rect.Top, paint);
                     return targetBitmap;
                 }

@@ -1,3 +1,4 @@
+using Mapsui.Rendering.Xaml.Extensions;
 using Mapsui.Styles;
 #if !NETFX_CORE
 using System.Windows.Controls;

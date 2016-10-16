@@ -53,6 +53,12 @@
     <Compile Include="..\Mapsui.Rendering.Xaml\BrushCache.cs">
       <Link>BrushCache.cs</Link>
     </Compile>
+    <Compile Include="..\Mapsui.Rendering.Xaml\Extensions\StreamExtensions.cs">
+      <Link>Extensions\StreamExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Mapsui.Rendering.Xaml\Extensions\StyleExtensions.cs">
+      <Link>Extensions\StyleExtensions.cs</Link>
+    </Compile>
     <Compile Include="..\Mapsui.Rendering.Xaml\GeometryExtensions.cs">
       <Link>GeometryExtensions.cs</Link>
     </Compile>
@@ -77,14 +83,8 @@
     <Compile Include="..\Mapsui.Rendering.Xaml\StackedLabelLayerRenderer.cs">
       <Link>StackedLabelLayerRenderer.cs</Link>
     </Compile>
-    <Compile Include="..\Mapsui.Rendering.Xaml\StreamExtensions.cs">
-      <Link>StreamExtensions.cs</Link>
-    </Compile>
     <Compile Include="..\Mapsui.Rendering.Xaml\StyleConverter.cs">
       <Link>StyleConverter.cs</Link>
-    </Compile>
-    <Compile Include="..\Mapsui.Rendering.Xaml\StyleExtensions.cs">
-      <Link>StyleExtensions.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

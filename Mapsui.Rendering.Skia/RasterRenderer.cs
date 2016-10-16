@@ -21,7 +21,7 @@ namespace Mapsui.Rendering.Skia
 
                 if (!skBitmapCache.Keys.Contains(raster))
                 {
-                    textureInfo = TextureHelper.LoadTexture(raster.Data);
+                    textureInfo = BitmapHelper.LoadTexture(raster.Data);
                     skBitmapCache[raster] = textureInfo;
                 }
                 else
@@ -32,7 +32,7 @@ namespace Mapsui.Rendering.Skia
                 textureInfo.IterationUsed = currentIteration;
                 skBitmapCache[raster] = textureInfo;
                 var destination = WorldToScreen(viewport, feature.Geometry.GetBoundingBox());
-                TextureHelper.RenderTexture(canvas, textureInfo.Bitmap, RoundToPixel(destination).ToSkia());
+                BitmapHelper.RenderTexture(canvas, textureInfo.Bitmap, RoundToPixel(destination).ToSkia());
             }
             catch (Exception ex)
             {

@@ -5,6 +5,8 @@ using Mapsui.Tests.Common;
 using NUnit.Framework;
 #if OPENTK
 using Mapsui.Rendering.OpenTK;
+#elif SKIA
+using Mapsui.Rendering.Skia;
 #elif GDI
 using Mapsui.Rendering.Gdi;
 #elif MONOGAME

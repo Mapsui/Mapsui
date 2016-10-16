@@ -1,4 +1,5 @@
-﻿using Mapsui.Styles;
+﻿using Mapsui.Rendering.Xaml.Extensions;
+using Mapsui.Styles;
 using Point = Mapsui.Geometries.Point;
 #if !NETFX_CORE
 using System.Windows;
@@ -53,13 +54,12 @@ namespace Mapsui.Rendering.Xaml
         private static XamlShapes.Shape CreateSymbolFromVectorStyle(VectorStyle style, double opacity = 1,
             SymbolType symbolType = SymbolType.Ellipse)
         {
-            var path = new XamlShapes.Path {StrokeThickness = 0};
-                //The SL StrokeThickness default is 1 which causes blurry bitmaps
-
-            if (style.Fill != null && (style.Fill.Color != null || style.Fill.BitmapId != -1))
-                path.Fill = style.Fill.ToXaml();
-            else
-                path.Fill = new XamlMedia.SolidColorBrush(XamlColors.Transparent);
+            // The SL StrokeThickness default is 1 which causes blurry bitmaps
+            var path = new XamlShapes.Path
+            {
+                StrokeThickness = 0,
+                Fill = ToXaml(style.Fill)
+            };
 
             if (style.Outline != null)
             {
@@ -77,6 +77,13 @@ namespace Mapsui.Rendering.Xaml
 
             return path;
         }
+
+        private static XamlMedia.Brush ToXaml(Brush brush)
+        {
+            return brush != null && (brush.Color != null || brush.BitmapId != -1) ?
+                brush.ToXaml() : new XamlMedia.SolidColorBrush(XamlColors.Transparent);
+        }
+
 
         private static XamlMedia.Matrix CreatePointSymbolMatrix(double resolution, SymbolStyle symbolStyle)
         {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Mapsui.Rendering.Xaml.Extensions;
 using Mapsui.Styles;
 #if NETFX_CORE
 using XamlMedia = Windows.UI.Xaml.Media;

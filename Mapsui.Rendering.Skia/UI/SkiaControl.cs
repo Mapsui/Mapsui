@@ -1,4 +1,7 @@
-﻿using System;
+﻿
+
+
+using System;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -36,7 +39,7 @@ namespace Mapsui.Rendering.Skia.UI
                 skcanvas.Scale((float)dpiX, (float)dpiY);
                 using (new SKAutoCanvasRestore(skcanvas, true))
                 {
-                    _renderer.SKCanvas = skcanvas;
+                    _renderer.Canvas = skcanvas;
                     if (!double.IsNaN(Map.Viewport.Resolution)) _renderer.Render(Map.Viewport, Map.Layers);
                 }
             }

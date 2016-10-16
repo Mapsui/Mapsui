@@ -4,7 +4,7 @@ using SkiaSharp;
 
 namespace Mapsui.Rendering.Skia
 {
-    public static class TextureHelper
+    public static class BitmapHelper
     {
         public static SKBitmapInfo LoadTexture(Stream bitmapStream)
         {
@@ -24,7 +24,7 @@ namespace Mapsui.Rendering.Skia
             canvas.Translate(x, y);
             canvas.RotateDegrees(orientation, 0, 0); // todo: or degrees?
             canvas.Scale(scale, scale);
-            
+
             x = offsetX + DetermineHorizontalAlignmentCorrection(horizontalAlignment, bitmap.Width);
             y = -offsetY + DetermineVerticalAlignmentCorrection(verticalAlignment, bitmap.Height);
 
