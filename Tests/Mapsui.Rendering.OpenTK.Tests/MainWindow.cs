@@ -4,6 +4,7 @@ using Mapsui.Tests.Common;
 using OpenTK;
 using OpenTK.Input;
 using System;
+using Mapsui.Tests.Common.Maps;
 #if ES11
 using OpenTK.Graphics.ES11;
 #else
@@ -23,7 +24,7 @@ namespace Mapsui.Rendering.OpenTK.Tests
         public MainWindow() : base(800, 600)
         {
             _map = ArrangeRenderingTests.Samples[_currentSampleIndex]();
-            Title = string.Format("OpenTK Rendering samples -[{0}] press ENTER for next sample", _map.Layers.First().Name);
+            Title = $"OpenTK Rendering samples -[{_map.Layers.First().Name}] press ENTER for next sample";
                     
             Context.SwapInterval = 0;
         }

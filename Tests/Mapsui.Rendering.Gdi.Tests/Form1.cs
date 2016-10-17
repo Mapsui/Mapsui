@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Windows.Forms;
 using Mapsui.Tests.Common;
+using Mapsui.Tests.Common.Maps;
 
 namespace Mapsui.Rendering.Gdi.Tests
 {

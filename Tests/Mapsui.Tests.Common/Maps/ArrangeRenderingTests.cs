@@ -7,7 +7,7 @@ using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Styles;
 
-namespace Mapsui.Tests.Common
+namespace Mapsui.Tests.Common.Maps
 {
     public static class ArrangeRenderingTests
     {
