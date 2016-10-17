@@ -186,15 +186,14 @@ namespace Mapsui.Tests.Common
                 var tileInfo = new TileInfo
                 {
                     Index = tileIndex,
-                    Extent =
-                        TileTransform.TileToWorld(new TileRange(tileIndex.Col, tileIndex.Row), tileIndex.Level,
-                            tileSource.Schema)
+                    Extent = TileTransform.TileToWorld(
+                        new TileRange(tileIndex.Col, tileIndex.Row), tileIndex.Level, tileSource.Schema)
                 };
 
                 var feature = new Feature
                 {
-                    Geometry = new Raster(new MemoryStream(tileSource.GetTile(tileInfo)),
-                        tileInfo.Extent.ToBoundingBox())
+                    Geometry = new Raster(new MemoryStream(
+                        tileSource.GetTile(tileInfo)), tileInfo.Extent.ToBoundingBox())
                 };
 
                 features.Add(feature);

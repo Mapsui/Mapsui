@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Mapsui.Samples.Common.Maps;
 
 namespace Mapsui.Samples.Common
 {

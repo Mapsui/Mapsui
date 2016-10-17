@@ -8,7 +8,7 @@ using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Utilities;
 
-namespace Mapsui.Samples.Common
+namespace Mapsui.Samples.Common.Maps
 {
     public static class AnimatedPointsSample
     {

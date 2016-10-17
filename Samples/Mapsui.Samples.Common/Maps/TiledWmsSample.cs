@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Linq;
 using BruTile;
-using BruTile.Web;
 using BruTile.Predefined;
+using BruTile.Web;
 using BruTile.Wmsc;
 using Mapsui.Layers;
 
-namespace Mapsui.Samples.Common
+namespace Mapsui.Samples.Common.Maps
 {
     /// <summary>
     /// An ordinary WMS service called through a tiled schema (WMS-C) 

@@ -4,7 +4,7 @@ using BruTile.Extensions;
 using BruTile.Wmts;
 using Mapsui.Layers;
 
-namespace Mapsui.Samples.Common
+namespace Mapsui.Samples.Common.Maps
 {
     public static class WmtsSample
     {

@@ -45,25 +45,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AllSamples.cs" />
-    <Compile Include="BingSample.cs" />
-    <Compile Include="LabelsSample.cs" />
-    <Compile Include="OsmSample.cs" />
-    <Compile Include="InfoLayersSample.cs" />
-    <Compile Include="RasterizingLayerSample.cs" />
-    <Compile Include="VariousSample.cs" />
-    <Compile Include="StackedLabelsSample.cs" />
-    <Compile Include="PolygonSample.cs" />
-    <Compile Include="AnimatedPointsSample.cs" />
-    <Compile Include="GeodanOfficesSample.cs" />
-    <Compile Include="ProjectionSample.cs" />
-    <Compile Include="TmsSample.cs" />
-    <Compile Include="WmscSample.cs" />
-    <Compile Include="TiledWmsSample.cs" />
-    <Compile Include="LineStringSample.cs" />
-    <Compile Include="PointsSample.cs" />
-    <Compile Include="SymbolsInWorldUnitsSample.cs" />
+    <Compile Include="Maps\BingSample.cs" />
+    <Compile Include="Maps\LabelsSample.cs" />
+    <Compile Include="Maps\OsmSample.cs" />
+    <Compile Include="Maps\InfoLayersSample.cs" />
+    <Compile Include="Maps\RasterizingLayerSample.cs" />
+    <Compile Include="Maps\VariousSample.cs" />
+    <Compile Include="Maps\StackedLabelsSample.cs" />
+    <Compile Include="Maps\PolygonSample.cs" />
+    <Compile Include="Maps\AnimatedPointsSample.cs" />
+    <Compile Include="Maps\GeodanOfficesSample.cs" />
+    <Compile Include="Maps\ProjectionSample.cs" />
+    <Compile Include="Maps\TmsSample.cs" />
+    <Compile Include="Maps\WmscSample.cs" />
+    <Compile Include="Maps\TiledWmsSample.cs" />
+    <Compile Include="Maps\LineStringSample.cs" />
+    <Compile Include="Maps\PointsSample.cs" />
+    <Compile Include="Maps\SymbolsInWorldUnitsSample.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WmtsSample.cs" />
+    <Compile Include="Maps\WmtsSample.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Mapsui.Geometries\Mapsui.Geometries.csproj">

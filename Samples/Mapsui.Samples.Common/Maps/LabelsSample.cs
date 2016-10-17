@@ -3,7 +3,7 @@ using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Styles;
 
-namespace Mapsui.Samples.Common
+namespace Mapsui.Samples.Common.Maps
 {
     public class LabelsSample
     {

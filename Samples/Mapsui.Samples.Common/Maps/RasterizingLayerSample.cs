@@ -2,7 +2,7 @@
 using Mapsui.Layers;
 using Mapsui.Providers;
 
-namespace Mapsui.Samples.Common
+namespace Mapsui.Samples.Common.Maps
 {
     public static class RasterizingLayerSample
     {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.IO;
+using System.Threading;
 using Mapsui.Tests.Common;
 using NUnit.Framework;
 #if OPENTK
@@ -16,7 +17,7 @@ using Mapsui.Rendering.MonoGame.Tests_W8;
 
 namespace Mapsui.Rendering.Xaml.Tests
 {
-    [TestFixture, RequiresSTA]
+    [TestFixture, Apartment(ApartmentState.STA)]
     class MapRendererTests
     {
         [Test]

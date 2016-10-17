@@ -1,6 +1,6 @@
 ﻿using Mapsui.Layers;
 
-namespace Mapsui.Samples.Common
+namespace Mapsui.Samples.Common.Maps
 {
     public static class TmsSample
     {

@@ -3,7 +3,7 @@ using Mapsui.Providers;
 using Mapsui.Styles;
 using Mapsui.Utilities;
 
-namespace Mapsui.Samples.Common
+namespace Mapsui.Samples.Common.Maps
 {
     public class GeodanOfficesSample
     {
