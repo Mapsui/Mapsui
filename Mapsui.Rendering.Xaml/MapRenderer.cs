@@ -162,13 +162,14 @@ namespace Mapsui.Rendering.Xaml
             // todo:
             // find solution for try catch. Sometimes this method will throw an exception
             // when clearing and adding features to a layer while rendering
+            var canvas = new Canvas
+            {
+                Opacity = layer.Opacity,
+                IsHitTestVisible = false
+            };
             try
             {
-                var canvas = new Canvas
-                {
-                    Opacity = layer.Opacity,
-                    IsHitTestVisible = false
-                };
+                
 
                 var features = layer.GetFeaturesInView(viewport.Extent, viewport.RenderResolution).ToList();
                 var layerStyles = BaseLayer.GetLayerStyles(layer);
@@ -203,7 +204,12 @@ namespace Mapsui.Rendering.Xaml
             }
             catch (Exception)
             {
-                return new Canvas { IsHitTestVisible = false };
+                return canvas;
+                //If exception happens inside RenderFeature function after at-least one child has been added to the canvas,
+                //returning new canvas will leave the previously created (but not yet added to parent canvas) canvas abandoned, that will 
+                //cause the exception when resuing RenderedGeometry object, because at-least one RenderedGeometry was attached to that abandoned canvas.
+                //returning the same canvas will solve this error, as it will be clear this canvas childs on next render call.
+                //return new Canvas { IsHitTestVisible = false };
             }
         }
 
