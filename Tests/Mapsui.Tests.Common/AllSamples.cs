@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using Mapsui.Tests.Common.Maps;
 
-namespace Mapsui.Tests.Common.Maps
+namespace Mapsui.Tests.Common
 {
     public static class AllSamples
     {

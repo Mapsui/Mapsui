@@ -1,4 +1,5 @@
-﻿using Mapsui.Geometries;
+﻿using System.Collections.Generic;
+using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Styles;
@@ -12,20 +13,32 @@ namespace Mapsui.Tests.Common.Maps
             var map = new Map {Viewport = {Center = new Point(0, 0), Width = 200, Height = 100, Resolution = 0.5}};
             var features = new Features
             {
-                Utilities.CreateSimplePointFeature(-20, 0,
-                    new SymbolStyle
+                new Feature
+                {
+                    Geometry = new Point(-20, 0),
+                    Styles = new List<IStyle>
                     {
-                        Fill = new Brush {Color = Color.Gray},
-                        Outline = new Pen(Color.Black),
-                        SymbolType = SymbolType.Ellipse
-                    }),
-                Utilities.CreateSimplePointFeature(20, 0,
-                    new SymbolStyle
+                        new SymbolStyle
+                        {
+                            Fill = new Brush {Color = Color.Gray},
+                            Outline = new Pen(Color.Black),
+                            SymbolType = SymbolType.Ellipse
+                        }
+                    }
+                },
+                new Feature
+                {
+                    Geometry = new Point(20, 0),
+                    Styles = new List<IStyle>
                     {
-                        Fill = new Brush {Color = Color.Gray},
-                        Outline = new Pen(Color.Black),
-                        SymbolType = SymbolType.Rectangle
-                    })
+                        new SymbolStyle
+                        {
+                            Fill = new Brush {Color = Color.Gray},
+                            Outline = new Pen(Color.Black),
+                            SymbolType = SymbolType.Rectangle
+                        }
+                    }
+                }
             };
             var layer = new MemoryLayer
             {

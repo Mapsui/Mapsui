@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Windows.Forms;
-using Mapsui.Tests.Common.Maps;
+using Mapsui.Tests.Common;
 
 namespace Mapsui.Rendering.Gdi.Tests
 {

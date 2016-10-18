@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Android.Content;
 using Android.Util;
 using Android.Views;
-using Mapsui.Tests.Common.Maps;
+using Mapsui.Tests.Common;
 using OpenTK;
 using OpenTK.Graphics.ES11;
 using OpenTK.Platform.Android;

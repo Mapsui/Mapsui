@@ -3,7 +3,7 @@ using OpenTK;
 using OpenTK.Input;
 using System;
 using System.Collections.Generic;
-using Mapsui.Tests.Common.Maps;
+using Mapsui.Tests.Common;
 #if ES11
 using OpenTK.Graphics.ES11;
 #else
