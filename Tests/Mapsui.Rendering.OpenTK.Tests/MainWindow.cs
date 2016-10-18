@@ -1,9 +1,8 @@
-﻿
-using System.Linq;
-using Mapsui.Tests.Common;
+﻿using System.Linq;
 using OpenTK;
 using OpenTK.Input;
 using System;
+using System.Collections.Generic;
 using Mapsui.Tests.Common.Maps;
 #if ES11
 using OpenTK.Graphics.ES11;
@@ -20,10 +19,11 @@ namespace Mapsui.Rendering.OpenTK.Tests
         private bool _enterUp = true;
         private readonly MapRenderer _mapRenderer = new MapRenderer();
         private Map _map;
+        private readonly List<Func<Map>> _samples = AllSamples.CreateList();
 
         public MainWindow() : base(800, 600)
         {
-            _map = ArrangeRenderingTests.Samples[_currentSampleIndex]();
+            _map = _samples[_currentSampleIndex]();
             Title = $"OpenTK Rendering samples -[{_map.Layers.First().Name}] press ENTER for next sample";
                     
             Context.SwapInterval = 0;
@@ -94,9 +94,9 @@ namespace Mapsui.Rendering.OpenTK.Tests
                 if (_enterUp)
                 {
                     _currentSampleIndex++;
-                    if (_currentSampleIndex == ArrangeRenderingTests.Samples.Count) _currentSampleIndex = 0;
-                    _map = ArrangeRenderingTests.Samples[_currentSampleIndex]();
-                    Title = string.Format("OpenTK Rendering samples -[{0}] press ENTER for next sample", _map.Layers.First().Name);
+                    if (_currentSampleIndex == _samples.Count) _currentSampleIndex = 0;
+                    _map = _samples[_currentSampleIndex]();
+                    Title = $"OpenTK Rendering samples -[{_map.Layers.First().Name}] press ENTER for next sample";
                     _enterUp = false;
                 }
             }

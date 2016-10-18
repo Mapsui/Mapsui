@@ -1,7 +1,8 @@
-﻿using System.Drawing.Drawing2D;
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Windows.Forms;
-using Mapsui.Tests.Common;
 using Mapsui.Tests.Common.Maps;
 
 namespace Mapsui.Rendering.Gdi.Tests
@@ -11,15 +12,15 @@ namespace Mapsui.Rendering.Gdi.Tests
         private readonly MapRenderer _renderer = new MapRenderer();
         private int _currentSampleIndex;
         private Map _map;
+        private readonly List<Func<Map>> _samples = AllSamples.CreateList();
 
         public Form1()
         {
             InitializeComponent();
             Load += (sender, args) =>
             {
-                _map = ArrangeRenderingTests.Samples[_currentSampleIndex]();
-                Text = string.Format("OpenTK Rendering samples -[{0}] press ENTER for next sample",
-                    _map.Layers.First().Name);
+                _map = _samples[_currentSampleIndex]();
+                Text = $"OpenTK Rendering samples -[{_map.Layers.First().Name}] press ENTER for next sample";
             };
         }
 
@@ -38,9 +39,9 @@ namespace Mapsui.Rendering.Gdi.Tests
             if (e.KeyCode == Keys.Enter)
             {
                 _currentSampleIndex++;
-                if (_currentSampleIndex == ArrangeRenderingTests.Samples.Count) _currentSampleIndex = 0;
-                _map = ArrangeRenderingTests.Samples[_currentSampleIndex]();
-                Text = string.Format("OpenTK Rendering samples -[{0}] press ENTER for next sample", _map.Layers.First().Name);             
+                if (_currentSampleIndex == _samples.Count) _currentSampleIndex = 0;
+                _map = _samples[_currentSampleIndex]();
+                Text = $"OpenTK Rendering samples -[{_map.Layers.First().Name}] press ENTER for next sample";             
                 Invalidate();
             }
         }

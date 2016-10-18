@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Android.Content;
 using Android.Util;
 using Android.Views;
-using Mapsui.Tests.Common;
+using Mapsui.Tests.Common.Maps;
 using OpenTK;
 using OpenTK.Graphics.ES11;
 using OpenTK.Platform.Android;
@@ -13,7 +13,7 @@ namespace Mapsui.Rendering.OpenTK.Android.Tests
     class PaintingView : AndroidGameView
     {
         private int _viewportWidth, _viewportHeight;
-        private readonly List<Func<Map>> _samples = new List<Func<Map>>();
+        private List<Func<Map>> _samples = new List<Func<Map>>();
         private int _currentSampleIndex;
         private readonly MapRenderer _mapRenderer = new MapRenderer();
         private Map _map;
@@ -59,11 +59,8 @@ namespace Mapsui.Rendering.OpenTK.Android.Tests
 
         private void InitializeSamples()
         {
-            _samples.Add(ArrangeRenderingTests.Line);
-            _samples.Add(ArrangeRenderingTests.PointsWithBitmapSymbols);
-            _samples.Add(ArrangeRenderingTests.PointsWithBitmapRotatedAndOffset);
-            _samples.Add(ArrangeRenderingTests.PointsWithVectorStyle);
-            _samples.Add(ArrangeRenderingTests.Tiles);
+            _samples = AllSamples.CreateList();
+
             _map = _samples[_currentSampleIndex]();
         }
 

@@ -42,7 +42,16 @@
     <EmbeddedResource Include="Resources\Images\iconthatneedsoffset.png" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Maps\ArrangeRenderingTests.cs" />
+    <Compile Include="Maps\AllSamples.cs" />
+    <Compile Include="Maps\BitmapSymbolSample.cs" />
+    <Compile Include="Maps\BitmapSymbolWithRotationAndOffsetSample.cs" />
+    <Compile Include="Maps\CircleAndRectangleSymbolSample.cs" />
+    <Compile Include="Maps\LabelSample.cs" />
+    <Compile Include="Maps\LineSample.cs" />
+    <Compile Include="Maps\PointInWorldUnits.cs" />
+    <Compile Include="Maps\PolygonSample.cs" />
+    <Compile Include="Maps\TilesSample.cs" />
+    <Compile Include="Maps\VectorStyleSample.cs" />
     <Compile Include="SampleTileProvider.cs" />
     <Compile Include="SampleTileSource.cs" />
     <Compile Include="Utilities.cs" />

@@ -25,7 +25,7 @@ namespace Mapsui.Rendering.Xaml.Tests
         public void RenderPointsWithVectorStyle()
         {
             // arrange
-            var map = ArrangeRenderingTests.PointsWithVectorStyle();
+            var map = VectorStyleSample.CreateMap();
             const string fileName = "vector_symbol.png";
             
             // act
@@ -42,7 +42,7 @@ namespace Mapsui.Rendering.Xaml.Tests
         public void RenderPointWithBitmapSymbols()
         {
             // arrange
-            var map = ArrangeRenderingTests.PointsWithBitmapSymbols();
+            var map = BitmapSymbolSample.CreateMap();
             const string fileName = "points_with_symbolstyle.png";
             
             // act
@@ -59,7 +59,7 @@ namespace Mapsui.Rendering.Xaml.Tests
         public void RenderRotatedBitmapSymbolWithOffset()
         {
             // arrange
-            var map = ArrangeRenderingTests.PointsWithBitmapRotatedAndOffset();
+            var map = BitmapSymbolWithRotationAndOffsetSample.CreateMap();
             const string fileName = "bitmap_symbol.png";
 
             // act
@@ -76,7 +76,7 @@ namespace Mapsui.Rendering.Xaml.Tests
         public void RenderPointsWithDifferentSymbolTypes()
         {
             // arrange
-            var map = ArrangeRenderingTests.PointsWithDifferentSymbolTypes();
+            var map = CircleAndRectangleSymbolSample.CreateMap();
             const string fileName = "vector_symbol_symboltype.png";
             
             // act
@@ -93,7 +93,7 @@ namespace Mapsui.Rendering.Xaml.Tests
         public void RenderSymbolWithWorldUnits()
         {
             // arrange
-            var map = ArrangeRenderingTests.PointsWithWorldUnits();
+            var map = PointInWorldUnits.CreateMap();
             const string fileName = "vector_symbol_unittype.png";
             
             // act
@@ -110,7 +110,7 @@ namespace Mapsui.Rendering.Xaml.Tests
         public void RenderPolygon()
         {
             // arrange
-            var map = ArrangeRenderingTests.Polygon();
+            var map = PolygonSample.CreateMap();
             const string fileName = "polygon.png";
 
             // act
@@ -127,7 +127,7 @@ namespace Mapsui.Rendering.Xaml.Tests
         public void RenderLine()
         {
             // arrange
-            var map = ArrangeRenderingTests.Line();
+            var map = LineSample.CreateMap();
             const string fileName = "line.png";
             
             // act
@@ -144,7 +144,7 @@ namespace Mapsui.Rendering.Xaml.Tests
         public void RenderTiles()
         {
             // arrange
-            var map = ArrangeRenderingTests.Tiles();
+            var map = TilesSample.CreateMap();
             const string fileName = "tilelayer.png";
 
             // act
@@ -161,7 +161,7 @@ namespace Mapsui.Rendering.Xaml.Tests
         public void RenderLabels()
         {
             // arrange
-            var map = ArrangeRenderingTests.Labels();
+            var map = LabelSample.CreateMap();
             const string fileName = "labels.png";
 
             // act

@@ -6,7 +6,7 @@ namespace Mapsui.Samples.Common
 {
     public static class AllSamples
     {
-        public static Dictionary<string, Func<Map>> CreateListOfAllSamples()
+        public static Dictionary<string, Func<Map>> CreateList()
         {
             return new Dictionary<string, Func<Map>>
             {

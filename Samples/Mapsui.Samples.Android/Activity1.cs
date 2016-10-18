@@ -1,9 +1,7 @@
 ﻿using Android.App;
 using Android.Content.PM;
 using Android.OS;
-using BruTile.Predefined;
-using Mapsui.Layers;
-using Mapsui.Samples.Common;
+using Mapsui.Samples.Common.Maps;
 using Mapsui.UI.Android;
 
 namespace Mapsui.Samples.Android
