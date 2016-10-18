@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Reflection;
+﻿using System.Reflection;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
@@ -15,22 +14,18 @@ namespace Mapsui.Tests.Common.Maps
             map.Layers.Add(new MemoryLayer
             {
                 Style = null,
-                DataSource = CreateProviderWithPointsWithSymbolStyles(),
+                DataSource = new MemoryProvider(CreateFeatures()),
                 Name = "Points with bitmaps"
             });
             return map;
         }
 
-        public static MemoryProvider CreateProviderWithPointsWithSymbolStyles()
+        public static Features CreateFeatures()
         {
-            const string circleIconPath = @"Mapsui.Tests.Common.Resources.Images.circle.png";
-            var circleIcon = typeof(Utilities).GetTypeInfo().Assembly.GetManifestResourceStream(circleIconPath);
-            var circleIconId = BitmapRegistry.Instance.Register(circleIcon);
-            const string checkeredIconPath = @"Mapsui.Tests.Common.Resources.Images.checkered.png";
-            var checkeredIcon = typeof(Utilities).GetTypeInfo().Assembly.GetManifestResourceStream(checkeredIconPath);
-            var checkeredIconId = BitmapRegistry.Instance.Register(checkeredIcon);
-
-            var features = new Features
+            var circleIconId = LoadBitmap("Mapsui.Tests.Common.Resources.Images.circle.png");
+            var checkeredIconId = LoadBitmap("Mapsui.Tests.Common.Resources.Images.checkered.png");
+           
+            return new Features
             {
                 new Feature
                 {
@@ -53,10 +48,13 @@ namespace Mapsui.Tests.Common.Maps
                     Styles = new[] {new VectorStyle {Fill = new Brush(Color.Green), Outline = null}}
                 }
             };
-            var provider = new MemoryProvider(features);
-            return provider;
         }
 
-     
+        private static int LoadBitmap(string bitmapPath)
+        {
+            var bitmapStream = typeof(Utilities).GetTypeInfo().Assembly.GetManifestResourceStream(bitmapPath);
+            return BitmapRegistry.Instance.Register(bitmapStream);
+
+        }
     }
 }
