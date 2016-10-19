@@ -528,10 +528,9 @@ namespace Mapsui.UI.Xaml
         private void InitializeViewport()
         {
             if (ActualWidth.IsNanOrZero()) return;
-            if (_map == null) return;
-            if (_map.Envelope == null) return;
-            if (_map.Envelope.Width.IsNanOrZero()) return;
-            if (_map.Envelope.Height.IsNanOrZero()) return;
+            if (_map?.Envelope == null) return;
+            if (double.IsNaN(_map.Envelope.Width)) return;
+            if (double.IsNaN(_map.Envelope.Height)) return;
             if (_map.Envelope.GetCentroid() == null) return;
 
             if (double.IsNaN(Map.Viewport.Resolution))
