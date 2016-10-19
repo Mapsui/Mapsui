@@ -46,6 +46,7 @@
     <Compile Include="Maps\BitmapSymbolSample.cs" />
     <Compile Include="Maps\BitmapSymbolWithRotationAndOffsetSample.cs" />
     <Compile Include="Maps\CircleAndSquareSymbolSample.cs" />
+    <Compile Include="Maps\EmptySample.cs" />
     <Compile Include="Maps\LabelSample.cs" />
     <Compile Include="Maps\LineSample.cs" />
     <Compile Include="Maps\PointInWorldUnits.cs" />

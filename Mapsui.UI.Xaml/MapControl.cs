@@ -533,9 +533,16 @@ namespace Mapsui.UI.Xaml
             if (double.IsNaN(_map.Envelope.Height)) return;
             if (_map.Envelope.GetCentroid() == null) return;
 
-            if (double.IsNaN(Map.Viewport.Resolution))
-                Map.Viewport.Resolution = _map.Envelope.Width / ActualWidth;
-            if (double.IsNaN(Map.Viewport.Center.X) || double.IsNaN(Map.Viewport.Center.Y))
+            if (double.IsNaN(Map.Viewport.Resolution)) // only when not set yet
+            {
+                if (Math.Abs(_map.Envelope.Width) > Constants.Epsilon)
+                    Map.Viewport.Resolution = _map.Envelope.Width/ActualWidth;
+                else
+                    // An envelope width of zero can happen when there is no data in the Maps' layers (yet).
+                    // It should be possible to start with an empty map.
+                    Map.Viewport.Resolution = Constants.DefaultResolution; 
+            }
+            if (double.IsNaN(Map.Viewport.Center.X) || double.IsNaN(Map.Viewport.Center.Y)) // only when not set yet
                 Map.Viewport.Center = _map.Envelope.GetCentroid();
 
             Map.Viewport.Width = ActualWidth;
@@ -608,7 +615,7 @@ namespace Mapsui.UI.Xaml
 
         private void MapControlKeyUp(object sender, KeyEventArgs e)
         {
-            String keyName = e.Key.ToString().ToLower();
+            var keyName = e.Key.ToString().ToLower();
             if (keyName.Equals("ctrl") || keyName.Equals("leftctrl") || keyName.Equals("rightctrl"))
             {
                 IsInBoxZoomMode = false;
