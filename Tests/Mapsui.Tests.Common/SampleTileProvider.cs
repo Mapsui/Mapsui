@@ -9,8 +9,7 @@ namespace Mapsui.Tests.Common
     public class SampleTileProvider : ITileProvider
     {
         readonly IDictionary<TileIndex, byte[]> _dictionary = new Dictionary<TileIndex, byte[]>();
-        Random _random = new Random();
-
+        
         public SampleTileProvider()
         {
             AddTile(new TileIndex(0, 0, "0"));
@@ -32,9 +31,9 @@ namespace Mapsui.Tests.Common
 
         private static Stream GetTileStream(TileIndex index)
         {
-            var path = $@"Mapsui.Tests.Common.Resources.SampleTiles.{index.Level}_{index.Col}_{index.Row}.png";
+            var path = $"Mapsui.Tests.Common.Resources.SampleTiles.{index.Level}_{index.Col}_{index.Row}.png";
             var data = typeof(Utilities).GetTypeInfo().Assembly.GetManifestResourceStream(path);
-            if (data == null) throw new Exception("Resource could not be found: " + path);
+            if (data == null) throw new Exception($"Resource could not be found: {path}");
             return data;
         }
 
