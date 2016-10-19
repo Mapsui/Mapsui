@@ -2,7 +2,6 @@
 using System.Drawing;
 using System.IO;
 using System.Threading;
-using Mapsui.Tests.Common;
 using Mapsui.Tests.Common.Maps;
 using NUnit.Framework;
 #if OPENTK
@@ -76,7 +75,7 @@ namespace Mapsui.Rendering.Xaml.Tests
         public void RenderPointsWithDifferentSymbolTypes()
         {
             // arrange
-            var map = CircleAndRectangleSymbolSample.CreateMap();
+            var map = CircleAndSquareSymbolSample.CreateMap();
             const string fileName = "vector_symbol_symboltype.png";
             
             // act

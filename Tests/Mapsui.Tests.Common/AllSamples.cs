@@ -11,7 +11,7 @@ namespace Mapsui.Tests.Common
             return new List<Func<Map>>
             {
                 VectorStyleSample.CreateMap,
-                CircleAndRectangleSymbolSample.CreateMap,
+                CircleAndSquareSymbolSample.CreateMap,
                 BitmapSymbolSample.CreateMap,
                 BitmapSymbolWithRotationAndOffsetSample.CreateMap,
                 PointInWorldUnits.CreateMap,
