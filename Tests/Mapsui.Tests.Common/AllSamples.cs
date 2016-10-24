@@ -10,6 +10,7 @@ namespace Mapsui.Tests.Common
         {
             return new List<Func<Map>>
             {
+                StackedLabelsSample.CreateMap,
                 VectorStyleSample.CreateMap,
                 CircleAndSquareSymbolSample.CreateMap,
                 BitmapSymbolSample.CreateMap,

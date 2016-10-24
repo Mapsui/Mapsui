@@ -173,7 +173,7 @@ namespace Mapsui.Rendering.Xaml.Tests
             Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap));
         }
 
-        private bool CompareColors(Color color1, Color color2, int allowedColorDistance)
+        private static bool CompareColors(Color color1, Color color2, int allowedColorDistance)
         {
             if (Math.Abs(color1.A - color2.A) > allowedColorDistance) return false;
             if (Math.Abs(color1.R - color2.R) > allowedColorDistance) return false;

@@ -51,7 +51,7 @@
     <Compile Include="Maps\LineSample.cs" />
     <Compile Include="Maps\PointInWorldUnits.cs" />
     <Compile Include="Maps\PolygonSample.cs" />
-    <Compile Include="Maps\StackLabelSample.cs" />
+    <Compile Include="Maps\StackedLabelsSample.cs" />
     <Compile Include="Maps\TilesSample.cs" />
     <Compile Include="Maps\VectorStyleSample.cs" />
     <Compile Include="SampleTileProvider.cs" />
