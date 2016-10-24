@@ -10,20 +10,31 @@ namespace Mapsui.Tests.Common.Maps
     {
         public static Map CreateMap()
         {
-            var map = new Map {Viewport = {Center = new Point(0, 0), Width = 200, Height = 100, Resolution = 0.5}};
             var features = new Features
             {
-                CreateSimplePointFeature(-20, 0, new SymbolStyle {UnitType = UnitType.Pixel}),
-                CreateSimplePointFeature(20, 0, new SymbolStyle {UnitType = UnitType.WorldUnit})
+                CreateFeature(-20, 0, UnitType.Pixel),
+                CreateFeature(20, 0, UnitType.WorldUnit)
             };
-            var layer = new MemoryLayer {DataSource = new MemoryProvider(features), Name = "Points in world units"};
+
+            var layer = new MemoryLayer
+            {
+                Style = null,
+                DataSource = new MemoryProvider(features),
+                Name = "Points in world units"
+            };
+
+            var map = new Map { Viewport = { Center = new Point(0, 0), Width = 200, Height = 100, Resolution = 0.5 } };
             map.Layers.Add(layer);
             return map;
         }
 
-        public static Feature CreateSimplePointFeature(double x, double y, IStyle style)
+        private static Feature CreateFeature(double x, double y, UnitType unitType)
         {
-            return new Feature { Geometry = new Point(x, y), Styles = new List<IStyle> { style } };
+            return new Feature
+            {
+                Geometry = new Point(x, y),
+                Styles = new List<IStyle> {new SymbolStyle {UnitType = unitType}}
+            };
         }
     }
 }

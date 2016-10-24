@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -42,6 +43,11 @@ namespace Mapsui.Samples.Wpf
             allSamples["Shapefile"] = ShapefileSample.CreateMap;
             allSamples["MapTiler (tiles on disk)"] = MapTilerSample.CreateMap;
             allSamples["WMS"] = WmsSample.CreateMap;
+            allSamples.Clear();
+            foreach (var func in Tests.Common.AllSamples.CreateList())
+            {
+                allSamples.Add(func().Layers.First().Name, func);
+            }
             return allSamples;
         }
 
@@ -59,7 +65,7 @@ namespace Mapsui.Samples.Wpf
                 MapControl.Map.Layers.Clear();
                 MapControl.Map = sample.Value();
                 LayerList.Initialize(MapControl.Map.Layers);
-                MapControl.ZoomToFullEnvelope();
+                //!!!MapControl.ZoomToFullEnvelope();
                 MapControl.Refresh();
             };
             return radioButton;

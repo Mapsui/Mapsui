@@ -2,7 +2,6 @@
 using System.Drawing;
 using System.IO;
 using System.Threading;
-using Mapsui.Tests.Common;
 using Mapsui.Tests.Common.Maps;
 using NUnit.Framework;
 #if OPENTK
@@ -76,7 +75,7 @@ namespace Mapsui.Rendering.Xaml.Tests
         public void RenderPointsWithDifferentSymbolTypes()
         {
             // arrange
-            var map = CircleAndRectangleSymbolSample.CreateMap();
+            var map = CircleAndSquareSymbolSample.CreateMap();
             const string fileName = "vector_symbol_symboltype.png";
             
             // act
@@ -174,7 +173,7 @@ namespace Mapsui.Rendering.Xaml.Tests
             Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap));
         }
 
-        private bool CompareColors(Color color1, Color color2, int allowedColorDistance)
+        private static bool CompareColors(Color color1, Color color2, int allowedColorDistance)
         {
             if (Math.Abs(color1.A - color2.A) > allowedColorDistance) return false;
             if (Math.Abs(color1.R - color2.R) > allowedColorDistance) return false;

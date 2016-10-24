@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 
@@ -12,7 +11,7 @@ namespace Mapsui.Rendering.Xaml.Tests
 
         static File()
         {
-            Debug.WriteLine($"Assembly Directory: {AssemblyDirectory}");
+            Console.WriteLine($"Assembly Directory: {AssemblyDirectory}");
         }
 
         public static void WriteToGeneratedFolder(string fileName, MemoryStream stream)

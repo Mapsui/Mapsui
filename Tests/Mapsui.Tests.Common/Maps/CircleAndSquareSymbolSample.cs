@@ -6,12 +6,22 @@ using Mapsui.Styles;
 
 namespace Mapsui.Tests.Common.Maps
 {
-    public static class CircleAndRectangleSymbolSample
+    public static class CircleAndSquareSymbolSample
     {
         public static Map CreateMap()
         {
-            var map = new Map {Viewport = {Center = new Point(0, 0), Width = 200, Height = 100, Resolution = 0.5}};
-            var features = new Features
+            var map = new Map {Viewport = {Center = new Point(0, 0), Width = 200, Height = 200, Resolution = 0.2}};
+            map.Layers.Add(new MemoryLayer
+            {
+                DataSource = new MemoryProvider(CreateFeatures()),
+                Name = "Circle and square symbols"
+            });
+            return map;
+        }
+
+        private static Features CreateFeatures()
+        {
+            return new Features
             {
                 new Feature
                 {
@@ -40,13 +50,6 @@ namespace Mapsui.Tests.Common.Maps
                     }
                 }
             };
-            var layer = new MemoryLayer
-            {
-                DataSource = new MemoryProvider(features),
-                Name = "Points with different symbol types"
-            };
-            map.Layers.Add(layer);
-            return map;
         }
     }
 }
