@@ -100,9 +100,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="libSkiaSharp.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Resources\Images\Original\bitmap_symbol.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

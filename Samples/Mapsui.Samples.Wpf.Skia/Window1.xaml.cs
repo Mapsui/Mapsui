@@ -16,16 +16,16 @@ namespace Mapsui.Samples.Wpf.Skia
         public Window1()
         {
             InitializeComponent();
-            MapControl.ErrorMessageChanged += MapErrorMessageChanged;
-            MapControl.FeatureInfo += MapControlFeatureInfo;
-            MapControl.MouseInfoUp += MapControlOnMouseInfoUp;
+            MainMapControl.ErrorMessageChanged += MapErrorMessageChanged;
+            MainMapControl.FeatureInfo += MapControlFeatureInfo;
+            MainMapControl.MouseInfoUp += MapControlOnMouseInfoUp;
 
             Fps.SetBinding(TextBlock.TextProperty, new Binding("Fps"));
-            Fps.DataContext = MapControl.FpsCounter;
+            Fps.DataContext = MainMapControl.FpsCounter;
 
             Logger.LogDelegate += LogMethod;
 
-            foreach (var sample in AllSamples())
+            foreach (var sample in InitializeSampleList1())
             {
                 SampleList.Children.Add(CreateRadioButton(sample));
             }
@@ -45,6 +45,18 @@ namespace Mapsui.Samples.Wpf.Skia
             return allSamples;
         }
 
+        private Dictionary<string, Func<Map>> InitializeSampleList1()
+        {
+            var result = new Dictionary<string, Func<Map>>();
+            var i = 0;
+            foreach (var sample in Mapsui.Tests.Common.AllSamples.CreateList())
+            {
+                result[i.ToString()] = sample;
+                i++;
+            }
+            return result;
+        }
+
         private UIElement CreateRadioButton(KeyValuePair<string, Func<Map>> sample)
         {
             var radioButton = new RadioButton
@@ -56,11 +68,11 @@ namespace Mapsui.Samples.Wpf.Skia
 
             radioButton.Click += (s, a) =>
             {
-                MapControl.Map.Layers.Clear();
-                MapControl.Map = sample.Value();
-                LayerList.Initialize(MapControl.Map.Layers);
-                MapControl.ZoomToFullEnvelope();
-                MapControl.Refresh();
+                MainMapControl.Map.Layers.Clear();
+                MainMapControl.Map = sample.Value();
+                LayerList.Initialize(MainMapControl.Map.Layers);
+                MainMapControl.ZoomToFullEnvelope();
+                MainMapControl.Refresh();
             };
             return radioButton;
         }
@@ -98,14 +110,14 @@ namespace Mapsui.Samples.Wpf.Skia
         private void MapErrorMessageChanged(object sender, EventArgs e)
         {
             LogTextBox.Clear(); // Should be a list of messages
-            LogTextBox.AppendText(MapControl.ErrorMessage + "\n");
+            LogTextBox.AppendText(MainMapControl.ErrorMessage + "\n");
         }
 
         private void RotationSliderChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             var percent = RotationSlider.Value / (RotationSlider.Maximum - RotationSlider.Minimum);
-            MapControl.Map.Viewport.Rotation = percent * 360;
-            MapControl.Refresh();
+            MainMapControl.Map.Viewport.Rotation = percent * 360;
+            MainMapControl.Refresh();
         }
 
         private static void MapControlOnMouseInfoUp(object sender, MouseInfoEventArgs mouseInfoEventArgs)

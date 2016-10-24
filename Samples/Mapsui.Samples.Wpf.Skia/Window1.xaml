@@ -18,7 +18,7 @@
             <RowDefinition Height="40" />
         </Grid.RowDefinitions>
         <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="Gray">
-            <ui:MapControl x:Name="MapControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+            <ui:MapControl x:Name="MainMapControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                            Margin="10,0,-10.4,0.4" />
             <Border BorderBrush="White" Opacity="0.75" Margin="10" Background="White" BorderThickness="6"
                     CornerRadius="2" VerticalAlignment="Top" HorizontalAlignment="Left">
