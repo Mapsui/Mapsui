@@ -19,7 +19,7 @@ using Windows.UI.Xaml.Media.Imaging;
 
 namespace Mapsui.Rendering.Xaml
 {
-    internal class PointRenderer
+    internal static class PointRenderer
     {
         public static XamlShapes.Shape RenderPoint(Point point, IStyle style, IViewport viewport,
             BrushCache brushCache = null)

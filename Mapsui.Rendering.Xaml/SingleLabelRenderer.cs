@@ -3,7 +3,6 @@ using Mapsui.Styles;
 #if !NETFX_CORE
 using System.Windows.Controls;
 using System.Windows.Media;
-using XamlPoint = System.Windows.Point;
 using System.Globalization;
 using System.Windows;
 using Colors = System.Windows.Media.Colors;
@@ -20,14 +19,14 @@ using Colors = Windows.UI.Colors;
 
 namespace Mapsui.Rendering.Xaml
 {
-    class SingleLabelRenderer
+    internal static class SingleLabelRenderer
     {
         public static UIElement RenderLabel(Geometries.Point position, LabelStyle labelStyle, IViewport viewport, string labelText)
         {
             var screenPosition = viewport.WorldToScreen(position);
             var windowsPosition = screenPosition.ToXaml();
 
-            //set some defaults which should be configurable someday
+            // Set some defaults which should be configurable someday
             const double witdhMargin = 3.0;
             const double heightMargin = 0.0;
 
@@ -35,7 +34,6 @@ namespace Mapsui.Rendering.Xaml
             {
                 Text = labelText,
                 Foreground = new SolidColorBrush(labelStyle.ForeColor.ToXaml()),
-
                 FontFamily = new FontFamily(labelStyle.Font.FontFamily),
                 FontSize = labelStyle.Font.Size,
                 Margin = new Thickness(witdhMargin, heightMargin, witdhMargin, heightMargin),

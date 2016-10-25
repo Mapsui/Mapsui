@@ -14,7 +14,7 @@ namespace Mapsui.Tests.Common.Maps
         {
             var map = new Map
             {
-                Viewport = {Center = new Point(0, 0), Width = 250, Height = 250, Resolution = 1}
+                Viewport = {Center = new Point(0, 0), Width = 250, Height = 250, Resolution = 0.5}
             };
             var provider = CreateRandomPointsProvider(GenerateRandomPoints(new BoundingBox(-100, -100, 100, 100), 20));
             map.Layers.Add(CreateLabelLayer(provider));

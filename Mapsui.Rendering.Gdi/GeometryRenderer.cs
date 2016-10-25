@@ -19,8 +19,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using Mapsui.Geometries;
-using Bitmap = System.Drawing.Bitmap;
-using Color = System.Drawing.Color;
 using Point = Mapsui.Geometries.Point;
 
 namespace Mapsui.Rendering.Gdi
@@ -43,11 +41,6 @@ namespace Mapsui.Rendering.Gdi
             for (int i = 0; i < linearRing.Vertices.Count; i++)
                 v[i] = viewport.WorldToScreen(linearRing.Vertices[i]);
             return v;
-        }
-
-        internal static Point WorldToScreen(Point point, IViewport viewport)
-        {
-            return viewport.WorldToScreen(point);
         }
     }
 }

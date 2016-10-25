@@ -50,6 +50,9 @@ namespace Mapsui.Rendering.Xaml
             //todo: repeat until there are no more merges
             ClusterFeatures(clusters, features, margin, layer.Style, viewport.Resolution);
             const int textHeight = 18;
+
+            var results = new List<Feature>();
+
             foreach (var cluster in clusters)
             {
                 var stackOffsetY = double.NaN;
@@ -87,10 +90,21 @@ namespace Mapsui.Rendering.Xaml
                     var minY = rotatedBox.Vertices.Select(v => v.Y).Min();
                     var position = new Point(cluster.Box.GetCentroid().X, minY);
 
-                    var labelText = labelStyle.GetLabelText(feature);
-                    canvas.Children.Add(SingleLabelRenderer.RenderLabel(position, labelStyle, viewport, labelText));
+                    results.Add(new Feature { Geometry = position, Styles = new [] { labelStyle }});
                 }
             }
+
+            foreach (var result in results)
+            {
+                foreach (var style in result.Styles)
+                {
+                    var labelStyle = (LabelStyle) style;
+                    var labelText = labelStyle.GetLabelText(result);
+                    canvas.Children.Add(SingleLabelRenderer.RenderLabel(result.Geometry.GetBoundingBox().GetCentroid(), 
+                        labelStyle, viewport, labelText));   
+                }
+            }
+
             return canvas;
         }
 
