@@ -15,12 +15,10 @@
 // along with Mapsui; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
-using System;
-
 namespace Mapsui.Styles
 {
     /// <summary>
-    /// Defines a style used for rendering vector data
+    ///     Defines a style used for rendering vector data
     /// </summary>
     public class Style : IStyle
     {
@@ -32,46 +30,38 @@ namespace Mapsui.Styles
         }
 
         /// <summary>
-        /// Gets or sets the minimum zoom value where the style is applied
+        ///     Gets or sets the minimum zoom value where the style is applied
         /// </summary>
         public double MinVisible { get; set; }
 
         /// <summary>
-        /// Gets or sets the maximum zoom value where the style is applied
+        ///     Gets or sets the maximum zoom value where the style is applied
         /// </summary>
         public double MaxVisible { get; set; }
 
         /// <summary>
-        /// Gets or sets whether objects in this style is rendered or not
+        ///     Gets or sets whether objects in this style is rendered or not
         /// </summary>
         public bool Enabled { get; set; }
 
-        
+
         public override bool Equals(object obj)
         {
             if (!(obj is Style))
-            {
                 return false;
-            }
-            return Equals((Style)obj);
+            return Equals((Style) obj);
         }
 
         public bool Equals(Style style)
         {
             if (MinVisible != style.MinVisible)
-            {
                 return false;
-            }
 
             if (MaxVisible != style.MaxVisible)
-            {
                 return false;
-            }
 
             if (Enabled != style.Enabled)
-            {
                 return false;
-            }
 
             return true;
         }
@@ -90,6 +80,5 @@ namespace Mapsui.Styles
         {
             return !Equals(style1, style2);
         }
-
-            }
+    }
 }

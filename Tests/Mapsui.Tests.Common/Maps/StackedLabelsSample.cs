@@ -29,7 +29,7 @@ namespace Mapsui.Tests.Common.Maps
                 DataSource = provider,
                 UseLabelStacking = true,
                 LabelColumn = "Label",
-                Style = new LabelStyle(),
+                Style = new LabelStyle { LabelColumn = "Label"},
             };
         }
 
