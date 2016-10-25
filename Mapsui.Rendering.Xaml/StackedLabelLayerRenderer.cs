@@ -45,7 +45,7 @@ namespace Mapsui.Rendering.Xaml
             // todo: take into account the priority 
             var features = layer.GetFeaturesInView(viewport.Extent, viewport.Resolution).ToArray();
 
-            var results = GetFeaturesInView(viewport, layer, features);
+            var results = GetFeaturesInView(viewport, layer.Style, features);
 
             foreach (var result in results)
                 foreach (var style in result.Styles)
@@ -68,7 +68,7 @@ namespace Mapsui.Rendering.Xaml
             return canvas;
         }
 
-        private static List<Feature> GetFeaturesInView(IViewport viewport, LabelLayer layer, IFeature[] features)
+        private static List<Feature> GetFeaturesInView(IViewport viewport, IStyle inStyle, IFeature[] features)
         {
             var margin = viewport.Resolution*50;
 
@@ -77,7 +77,7 @@ namespace Mapsui.Rendering.Xaml
 
             var clusters = new List<Cluster>();
             // todo: repeat until there are no more merges
-            ClusterFeatures(clusters, features, margin, layer.Style, viewport.Resolution);
+            ClusterFeatures(clusters, features, margin, inStyle, viewport.Resolution);
 
             const int textHeight = 18;
 
@@ -112,25 +112,31 @@ namespace Mapsui.Rendering.Xaml
                         stackOffsetY += textHeight; //todo: get size from text (or just pass stack nr)
 
                     LabelStyle style;
-                    if (layer.Style is IThemeStyle)
-                        style = (LabelStyle) ((IThemeStyle) layer.Style).GetStyle(feature);
+                    if (inStyle is IThemeStyle)
+                        style = (LabelStyle) ((IThemeStyle) inStyle).GetStyle(feature);
                     else
-                        style = (LabelStyle) layer.Style;
+                        style = (LabelStyle) inStyle;
 
-                    var text = style.GetLabelText(feature);
-                    var labelStyle = new LabelStyle(style)
-                    {
-                        Text =  layer.GetLabelText(feature)
-                        //we only use the layer for the text, this should be returned by style
-                    };
-                    labelStyle.Offset.Y += stackOffsetY;
+                    var labelStyle = new LabelStyle(style) {Offset = {Y = stackOffsetY}};
 
                     // Since the box can be rotated, find the minimal Y value of all 4 corners
                     var rotatedBox = cluster.Box.Rotate(-viewport.Rotation);
                     var minY = rotatedBox.Vertices.Select(v => v.Y).Min();
                     var position = new Point(cluster.Box.GetCentroid().X, minY);
 
-                    results.Add(new Feature {Geometry = position, Styles = new[] {labelStyle}});
+                    var labelFeature = new Feature
+                    {
+                        Geometry = position,
+                        Styles = new[] { labelStyle },
+
+                    };
+
+                    results.Add(labelFeature);
+
+                    foreach (var field in feature.Fields)
+                    {
+                        labelFeature[field] = feature[field]; //copying fields. Is this really necessary?
+                    }
                 }
             }
             return results;
@@ -145,22 +151,6 @@ namespace Mapsui.Rendering.Xaml
                     box.BottomLeft, box.TopLeft, box.TopRight, box.BottomRight, box.BottomLeft
                 })
             };
-        }
-
-        private static UIElement RenderBox(BoundingBox box, IViewport viewport)
-        {
-            var path = new Path
-            {
-                Stroke = new SolidColorBrush(Colors.White),
-                StrokeThickness = 2,
-                Data = new RectangleGeometry()
-            };
-
-            var grownBox = GrowBox(box, viewport);
-
-            GeometryRenderer.PositionRaster(path, grownBox, viewport);
-
-            return path;
         }
 
         private static BoundingBox GrowBox(BoundingBox box, IViewport viewport)

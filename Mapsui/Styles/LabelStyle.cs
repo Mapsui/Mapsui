@@ -85,6 +85,9 @@ namespace Mapsui.Styles
             BackColor = new Brush(labelStyle.BackColor);
             HorizontalAlignment = HorizontalAlignmentEnum.Center;
             VerticalAlignment = VerticalAlignmentEnum.Center;
+            Text = labelStyle.Text;
+            LabelColumn = labelStyle.LabelColumn;
+            LabelMethod = labelStyle.LabelMethod;
         }
 
         /// <summary>
