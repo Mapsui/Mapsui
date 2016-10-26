@@ -10,21 +10,22 @@ namespace Mapsui.Providers
     {
         private const int SymbolSize = 32; // todo: determine margin by symbol size
         private const int BoxMargin = SymbolSize/2;
-        private readonly IProvider _provider;
 
-        public StackedLabelProvider(IProvider provider)
+        private readonly IProvider _provider;
+        private readonly LabelStyle _labelStyle;
+
+        public StackedLabelProvider(IProvider provider, LabelStyle labelStyle)
         {
             _provider = provider;
+            _labelStyle = labelStyle;
         }
-
-        public LabelStyle LabelStyle { get; set; }
-
+        
         public string CRS { get; set; }
 
         public IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
         {
             var features = _provider.GetFeaturesInView(box, resolution);
-            return GetFeaturesInView(resolution, LabelStyle, features);
+            return GetFeaturesInView(resolution, _labelStyle, features);
         }
 
         public BoundingBox GetExtents()
@@ -79,7 +80,7 @@ namespace Mapsui.Providers
         private static Point CalculatePosition(Cluster cluster)
         {
             // Since the box can be rotated, find the minimal Y value of all 4 corners
-            var rotatedBox = cluster.Box.Rotate(0); //todo: Add rotation '-viewport.Rotation'
+            var rotatedBox = cluster.Box.Rotate(0); // todo: Add rotation '-viewport.Rotation'
             var minY = rotatedBox.Vertices.Select(v => v.Y).Min();
             var position = new Point(cluster.Box.GetCentroid().X, minY);
             return position;
