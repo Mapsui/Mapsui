@@ -10,6 +10,8 @@ namespace Mapsui.Tests.Common.Maps
 {
     public static class StackedLabelsSample
     {
+        private const string LabelColumn = "Label";
+
         public static Map CreateMap()
         {
             var map = new Map
@@ -28,8 +30,8 @@ namespace Mapsui.Tests.Common.Maps
             {
                 DataSource = provider,
                 UseLabelStacking = true,
-                LabelColumn = "Label",
-                Style = new LabelStyle { LabelColumn = "Label"},
+                LabelColumn = LabelColumn,
+                Style = new LabelStyle {LabelColumn = LabelColumn}
             };
         }
 
@@ -38,11 +40,11 @@ namespace Mapsui.Tests.Common.Maps
             return new MemoryLayer
             {
                 DataSource = dataSource,
-                Style = new SymbolStyle { SymbolScale = 1, Fill = new Brush(Color.Blue) }
+                Style = new SymbolStyle {SymbolScale = 1, Fill = new Brush(new Color {A = 128, R = 8, G = 20, B = 192})}
             };
         }
 
-        public static MemoryProvider CreateRandomPointsProvider(IEnumerable<IGeometry> randomPoints)
+        private static MemoryProvider CreateRandomPointsProvider(IEnumerable<IGeometry> randomPoints)
         {
             var features = new Features();
             var count = 0;
@@ -51,7 +53,7 @@ namespace Mapsui.Tests.Common.Maps
                 var feature = new Feature
                 {
                     Geometry = point,
-                    ["Label"] = count.ToString(CultureInfo.InvariantCulture)
+                    [LabelColumn] = count.ToString(CultureInfo.InvariantCulture)
                 };
                 features.Add(feature);
                 count++;
@@ -59,11 +61,11 @@ namespace Mapsui.Tests.Common.Maps
             return new MemoryProvider(features);
         }
 
-        public static IEnumerable<IGeometry> GenerateRandomPoints(BoundingBox box, int count = 25)
+        private static IEnumerable<IGeometry> GenerateRandomPoints(BoundingBox box, int count = 25)
         {
             var result = new List<IGeometry>();
             var random = new Random(0);
-            
+
             for (var i = 0; i < count; i++)
             {
                 var x = random.NextDouble()*box.Width + box.Left;
