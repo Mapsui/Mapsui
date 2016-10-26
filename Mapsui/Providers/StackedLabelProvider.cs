@@ -8,6 +8,8 @@ namespace Mapsui.Providers
 {
     internal class StackedLabelProvider : IProvider
     {
+        private const int SymbolSize = 32; // todo: determine margin by symbol size
+        private const int BoxMargin = SymbolSize/2;
         private readonly IProvider _provider;
 
         public StackedLabelProvider(IProvider provider)
@@ -30,16 +32,13 @@ namespace Mapsui.Providers
             return _provider.GetExtents();
         }
 
-        private static List<Feature> GetFeaturesInView(double resolution, IStyle inStyle, IEnumerable<IFeature> features)
+        private static List<Feature> GetFeaturesInView(double resolution, LabelStyle labelStyle,
+            IEnumerable<IFeature> features)
         {
             var margin = resolution*50;
-
-            const int symbolSize = 32; // todo: determine margin by symbol size
-            const int boxMargin = symbolSize/2;
-
             var clusters = new List<Cluster>();
             // todo: repeat until there are no more merges
-            ClusterFeatures(clusters, features, margin, inStyle, resolution);
+            ClusterFeatures(clusters, features, margin, labelStyle, resolution);
 
             const int textHeight = 18;
 
@@ -52,42 +51,55 @@ namespace Mapsui.Providers
                 var offsetY = double.NaN;
 
                 var orderedFeatures = cluster.Features.OrderBy(f => f.Geometry.GetBoundingBox().GetCentroid().Y);
-                
-                foreach (var feature in orderedFeatures)
+
+                foreach (var pointFeature in orderedFeatures)
                 {
-                    // Since the box can be rotated, find the minimal Y value of all 4 corners
-                    var rotatedBox = cluster.Box.Rotate(0); //todo: Add rotation '-viewport.Rotation'
-                    var minY = rotatedBox.Vertices.Select(v => v.Y).Min();
-                    var position = new Point(cluster.Box.GetCentroid().X, minY);
+                    var position = CalculatePosition(cluster);
 
-                    if (double.IsNaN(offsetY)) // first time
-                    {
-                        offsetY = textHeight*0.5 + boxMargin;
-                    }
-                    else
-                        offsetY += textHeight; // todo: get size from text (or just pass stack nr)
+                    offsetY = CalculateOffsetY(offsetY, textHeight);
 
-                    LabelStyle style;
-                    if (inStyle is IThemeStyle)
-                        style = (LabelStyle) ((IThemeStyle) inStyle).GetStyle(feature);
-                    else
-                        style = (LabelStyle) inStyle;
-
-                    var labelStyle = new LabelStyle(style) {Offset = {Y = offsetY}};
-
-                    var labelFeature = new Feature
-                    {
-                        Geometry = position,
-                        Styles = new[] {labelStyle}
-                    };
+                    var labelText = labelStyle.GetLabelText(pointFeature);
+                    var labelFeature = CreateLabelFeature(position, labelStyle, offsetY, labelText);
 
                     results.Add(labelFeature);
-
-                    foreach (var field in feature.Fields)
-                        labelFeature[field] = feature[field]; //copying fields. Is this really necessary?
                 }
             }
             return results;
+        }
+
+        private static double CalculateOffsetY(double offsetY, int textHeight)
+        {
+            if (double.IsNaN(offsetY)) // first time
+                offsetY = textHeight*0.5 + BoxMargin;
+            else
+                offsetY += textHeight; // todo: get size from text (or just pass stack nr)
+            return offsetY;
+        }
+
+        private static Point CalculatePosition(Cluster cluster)
+        {
+            // Since the box can be rotated, find the minimal Y value of all 4 corners
+            var rotatedBox = cluster.Box.Rotate(0); //todo: Add rotation '-viewport.Rotation'
+            var minY = rotatedBox.Vertices.Select(v => v.Y).Min();
+            var position = new Point(cluster.Box.GetCentroid().X, minY);
+            return position;
+        }
+
+        private static Feature CreateLabelFeature(Point position, LabelStyle labelStyle, double offsetY,
+            string text)
+        {
+            return new Feature
+            {
+                Geometry = position,
+                Styles = new[]
+                {
+                    new LabelStyle(labelStyle)
+                    {
+                        Offset = {Y = offsetY},
+                        LabelMethod = f => text
+                    }
+                }
+            };
         }
 
         private static Feature CreateBoxFeature(double resolution, Cluster cluster)
