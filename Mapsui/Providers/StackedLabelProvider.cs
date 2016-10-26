@@ -59,8 +59,7 @@ namespace Mapsui.Providers
                         {
                             new VectorStyle
                             {
-                                Line = new Pen {Width = 2, Color = Color.White},
-                                Outline = new Pen {Width = 2, Color = Color.White},
+                                Outline = new Pen {Width = 2, Color = Color.Orange},
                                 Fill = new Brush {Color = null}
                             }
                         }
