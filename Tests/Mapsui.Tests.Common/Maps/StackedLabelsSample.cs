@@ -30,10 +30,7 @@ namespace Mapsui.Tests.Common.Maps
         {
             return new MemoryLayer
             {
-                DataSource = new StackedLabelProvider(provider)
-                {
-                    LabelStyle = new LabelStyle { LabelColumn = labelColumn }
-                },
+                DataSource = new StackedLabelProvider(provider, new LabelStyle { LabelColumn = labelColumn }),
                 Style = null
             };
         }
