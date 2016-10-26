@@ -20,14 +20,12 @@ namespace Mapsui.Samples.Common.Maps
 
         private static ILayer CreateStackedLabelLayer(IProvider provider, string labelColumn)
         {
-            var stackLabelProvider = new StackedLabelProvider(provider)
+            return new MemoryLayer
             {
-                LabelStyle = new LabelStyle { LabelColumn = labelColumn }
-            };
-
-            return new MemoryLayer()
-            {
-                DataSource = stackLabelProvider,
+                DataSource = new StackedLabelProvider(provider)
+                {
+                    LabelStyle = new LabelStyle {LabelColumn = labelColumn}
+                },
                 Style = null
             };
         }
@@ -37,7 +35,7 @@ namespace Mapsui.Samples.Common.Maps
             return new Layer("Point Layer")
             {
                 DataSource = dataSource,
-                Style = new SymbolStyle { SymbolScale = 1, Fill = new Brush(Color.Blue) }
+                Style = new SymbolStyle {SymbolScale = 1, Fill = new Brush(Color.Blue)}
             };
         }
     }

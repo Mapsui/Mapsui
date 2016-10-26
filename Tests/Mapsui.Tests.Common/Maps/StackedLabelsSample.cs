@@ -28,14 +28,12 @@ namespace Mapsui.Tests.Common.Maps
 
         private static ILayer CreateStackedLabelLayer(IProvider provider, string labelColumn)
         {
-            var stackLabelProvider = new StackedLabelProvider(provider)
+            return new MemoryLayer
             {
-                LabelStyle = new LabelStyle {LabelColumn = labelColumn}
-            };
-
-            return new MemoryLayer()
-            {
-                DataSource = stackLabelProvider,
+                DataSource = new StackedLabelProvider(provider)
+                {
+                    LabelStyle = new LabelStyle { LabelColumn = labelColumn }
+                },
                 Style = null
             };
         }
