@@ -18,20 +18,25 @@ namespace Mapsui.Tests.Common.Maps
             {
                 Viewport = {Center = new Point(0, 0), Width = 250, Height = 250, Resolution = 0.5}
             };
+
             var provider = CreateRandomPointsProvider(GenerateRandomPoints(new BoundingBox(-100, -100, 100, 100), 20));
-            map.Layers.Add(CreateLabelLayer(provider));
+            map.Layers.Add(CreateStackedLabelLayer(provider));
             map.Layers.Add(CreateLayer(provider));
+
             return map;
         }
 
-        private static ILayer CreateLabelLayer(IProvider provider)
+        private static ILayer CreateStackedLabelLayer(IProvider provider)
         {
-            return new LabelLayer("stacks")
+            var stackLabelProvider = new StackedLabelProvider(provider)
             {
-                DataSource = provider,
-                UseLabelStacking = true,
-                LabelColumn = LabelColumn,
-                Style = new LabelStyle {LabelColumn = LabelColumn}
+                LabelStyle = new LabelStyle {LabelColumn = LabelColumn}
+            };
+
+            return new MemoryLayer()
+            {
+                DataSource = stackLabelProvider,
+                Style = null
             };
         }
 

@@ -1,76 +1,45 @@
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using Mapsui.Geometries;
-using Mapsui.Layers;
-using Mapsui.Providers;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
-#if !NETFX_CORE
-using System.Windows.Controls;
+using System.Linq;
 
-#else
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Shapes;
-using Windows.UI.Xaml.Media;
-using Windows.UI;
-#endif
-
-namespace Mapsui.Rendering.Xaml
+namespace Mapsui.Providers
 {
-    public static class StackedLabelLayerRenderer
+    class StackedLabelProvider : IProvider
     {
-        public static Canvas Render(IViewport viewport, LabelLayer layer)
+        private readonly IProvider _provider;
+
+        public StackedLabelProvider(IProvider provider)
         {
-            // todo: 
-            // Move stack functionality to Mapsui core.
-            // step 1) Split RenderStackedLabelLayer into a method
-            // GetFeaturesInViewStacked en a RenderStackedLabel 
-            // which can later be replace by normal label rendering.
-            // The method GetFeaturesInViewStacked 
-            // returns a style with an offset determined by the stackoffset
-            // and a position determined by CenterX en Cluster.Box.Bottom.
-            // step 2) Move GetFeaturesInViewStacked to a GetFeaturesInView
-            // method of a new StackedLabelLayed.
-
-            var canvas = new Canvas {Opacity = layer.Opacity};
-
-            // todo: take into account the priority 
-            var features = layer.GetFeaturesInView(viewport.Extent, viewport.Resolution).ToArray();
-
-            var results = GetFeaturesInView(viewport, layer.Style, features);
-
-            foreach (var result in results)
-                foreach (var style in result.Styles)
-                {
-                    var labelStyle = style as LabelStyle;
-                    if (labelStyle != null)
-                    {
-                        var labelText = labelStyle.GetLabelText(result);
-                        canvas.Children.Add(
-                            SingleLabelRenderer.RenderLabel(result.Geometry.GetBoundingBox().GetCentroid(),
-                                labelStyle, viewport, labelText));
-                    }
-                    else
-                    {
-                        canvas.Children.Add(
-                            GeometryRenderer.RenderPolygon((Polygon) result.Geometry, style, viewport));
-                    }
-                }
-
-            return canvas;
+            _provider = provider;
         }
 
-        private static List<Feature> GetFeaturesInView(IViewport viewport, IStyle inStyle, IFeature[] features)
+        public LabelStyle LabelStyle { get; set; }
+
+        public string CRS { get; set; }
+
+        public IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
         {
-            var margin = viewport.Resolution*50;
+            var features = _provider.GetFeaturesInView(box, resolution);
+            return GetFeaturesInView(resolution, LabelStyle, features);
+        }
+
+        public BoundingBox GetExtents()
+        {
+            return _provider.GetExtents();
+        }
+
+        private static List<Feature> GetFeaturesInView(double resolution, IStyle inStyle, IEnumerable<IFeature> features)
+        {
+           var margin = resolution * 50;
 
             const int symbolSize = 32; // todo: determine margin by symbol size
-            const int boxMargin = symbolSize/2;
+            const int boxMargin = symbolSize / 2;
 
             var clusters = new List<Cluster>();
             // todo: repeat until there are no more merges
-            ClusterFeatures(clusters, features, margin, inStyle, viewport.Resolution);
+            ClusterFeatures(clusters, features, margin, inStyle, resolution);
 
             const int textHeight = 18;
 
@@ -85,7 +54,7 @@ namespace Mapsui.Rendering.Xaml
                 if (cluster.Features.Count > 1)
                     results.Add(new Feature
                     {
-                        Geometry = ToPolygon(GrowBox(cluster.Box, viewport)),
+                        Geometry = ToPolygon(GrowBox(cluster.Box, resolution)),
                         Styles = new[]
                         {
                             new VectorStyle
@@ -100,27 +69,27 @@ namespace Mapsui.Rendering.Xaml
                 foreach (var feature in orderedFeatures)
                 {
                     if (double.IsNaN(stackOffsetY)) // first time
-                        stackOffsetY = textHeight*0.5 + boxMargin;
+                        stackOffsetY = textHeight * 0.5 + boxMargin;
                     else
                         stackOffsetY += textHeight; //todo: get size from text (or just pass stack nr)
 
                     LabelStyle style;
                     if (inStyle is IThemeStyle)
-                        style = (LabelStyle) ((IThemeStyle) inStyle).GetStyle(feature);
+                        style = (LabelStyle)((IThemeStyle)inStyle).GetStyle(feature);
                     else
-                        style = (LabelStyle) inStyle;
+                        style = (LabelStyle)inStyle;
 
-                    var labelStyle = new LabelStyle(style) {Offset = {Y = stackOffsetY}};
+                    var labelStyle = new LabelStyle(style) { Offset = { Y = stackOffsetY } };
 
                     // Since the box can be rotated, find the minimal Y value of all 4 corners
-                    var rotatedBox = cluster.Box.Rotate(-viewport.Rotation);
+                    var rotatedBox = cluster.Box.Rotate(0); //todo: Add rotation '-viewport.Rotation'
                     var minY = rotatedBox.Vertices.Select(v => v.Y).Min();
                     var position = new Point(cluster.Box.GetCentroid().X, minY);
 
                     var labelFeature = new Feature
                     {
                         Geometry = position,
-                        Styles = new[] {labelStyle}
+                        Styles = new[] { labelStyle }
                     };
 
                     results.Add(labelFeature);
@@ -143,13 +112,13 @@ namespace Mapsui.Rendering.Xaml
             };
         }
 
-        private static BoundingBox GrowBox(BoundingBox box, IViewport viewport)
+        private static BoundingBox GrowBox(BoundingBox box, double resolution)
         {
             const int symbolSize = 32; // todo: determine margin by symbol size
-            const int boxMargin = symbolSize/2;
+            const int boxMargin = symbolSize / 2;
 
             // offset the bounding box left and up by the box margin
-            var grownBox = box.Grow(boxMargin*viewport.Resolution);
+            var grownBox = box.Grow(boxMargin * resolution);
             return grownBox;
         }
 
@@ -187,7 +156,7 @@ namespace Mapsui.Rendering.Xaml
                 clusters.Add(new Cluster
                 {
                     Box = feature.Geometry.GetBoundingBox().Clone(),
-                    Features = new List<IFeature> {feature}
+                    Features = new List<IFeature> { feature }
                 });
             }
         }

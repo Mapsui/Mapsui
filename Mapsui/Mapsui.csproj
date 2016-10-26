@@ -82,6 +82,7 @@
     <Compile Include="Providers\ArcGIS\TileInfo.cs" />
     <Compile Include="Providers\ArcGIS\TimeInfo.cs" />
     <Compile Include="Providers\IProjectingProvider.cs" />
+    <Compile Include="Providers\StackedLabelProvider.cs" />
     <Compile Include="Rendering\IRenderGetStrategy.cs" />
     <Compile Include="IViewport.cs" />
     <Compile Include="Layers\BaseLayer.cs" />
