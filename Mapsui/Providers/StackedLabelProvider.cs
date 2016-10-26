@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Mapsui.Geometries;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
-using System.Linq;
 
 namespace Mapsui.Providers
 {
-    class StackedLabelProvider : IProvider
+    internal class StackedLabelProvider : IProvider
     {
         private readonly IProvider _provider;
 
@@ -32,10 +32,10 @@ namespace Mapsui.Providers
 
         private static List<Feature> GetFeaturesInView(double resolution, IStyle inStyle, IEnumerable<IFeature> features)
         {
-           var margin = resolution * 50;
+            var margin = resolution*50;
 
             const int symbolSize = 32; // todo: determine margin by symbol size
-            const int boxMargin = symbolSize / 2;
+            const int boxMargin = symbolSize/2;
 
             var clusters = new List<Cluster>();
             // todo: repeat until there are no more merges
@@ -47,48 +47,38 @@ namespace Mapsui.Providers
 
             foreach (var cluster in clusters)
             {
-                var stackOffsetY = double.NaN;
+                if (cluster.Features.Count > 1) results.Add(CreateBoxFeature(resolution, cluster));
+
+                var offsetY = double.NaN;
 
                 var orderedFeatures = cluster.Features.OrderBy(f => f.Geometry.GetBoundingBox().GetCentroid().Y);
-
-                if (cluster.Features.Count > 1)
-                    results.Add(new Feature
-                    {
-                        Geometry = ToPolygon(GrowBox(cluster.Box, resolution)),
-                        Styles = new[]
-                        {
-                            new VectorStyle
-                            {
-                                Outline = new Pen {Width = 2, Color = Color.Orange},
-                                Fill = new Brush {Color = null}
-                            }
-                        }
-                    });
-
+                
                 foreach (var feature in orderedFeatures)
                 {
-                    if (double.IsNaN(stackOffsetY)) // first time
-                        stackOffsetY = textHeight * 0.5 + boxMargin;
-                    else
-                        stackOffsetY += textHeight; //todo: get size from text (or just pass stack nr)
-
-                    LabelStyle style;
-                    if (inStyle is IThemeStyle)
-                        style = (LabelStyle)((IThemeStyle)inStyle).GetStyle(feature);
-                    else
-                        style = (LabelStyle)inStyle;
-
-                    var labelStyle = new LabelStyle(style) { Offset = { Y = stackOffsetY } };
-
                     // Since the box can be rotated, find the minimal Y value of all 4 corners
                     var rotatedBox = cluster.Box.Rotate(0); //todo: Add rotation '-viewport.Rotation'
                     var minY = rotatedBox.Vertices.Select(v => v.Y).Min();
                     var position = new Point(cluster.Box.GetCentroid().X, minY);
 
+                    if (double.IsNaN(offsetY)) // first time
+                    {
+                        offsetY = textHeight*0.5 + boxMargin;
+                    }
+                    else
+                        offsetY += textHeight; // todo: get size from text (or just pass stack nr)
+
+                    LabelStyle style;
+                    if (inStyle is IThemeStyle)
+                        style = (LabelStyle) ((IThemeStyle) inStyle).GetStyle(feature);
+                    else
+                        style = (LabelStyle) inStyle;
+
+                    var labelStyle = new LabelStyle(style) {Offset = {Y = offsetY}};
+
                     var labelFeature = new Feature
                     {
                         Geometry = position,
-                        Styles = new[] { labelStyle }
+                        Styles = new[] {labelStyle}
                     };
 
                     results.Add(labelFeature);
@@ -98,6 +88,22 @@ namespace Mapsui.Providers
                 }
             }
             return results;
+        }
+
+        private static Feature CreateBoxFeature(double resolution, Cluster cluster)
+        {
+            return new Feature
+            {
+                Geometry = ToPolygon(GrowBox(cluster.Box, resolution)),
+                Styles = new[]
+                {
+                    new VectorStyle
+                    {
+                        Outline = new Pen {Width = 2, Color = Color.Orange},
+                        Fill = new Brush {Color = null}
+                    }
+                }
+            };
         }
 
         private static Polygon ToPolygon(BoundingBox box)
@@ -114,11 +120,8 @@ namespace Mapsui.Providers
         private static BoundingBox GrowBox(BoundingBox box, double resolution)
         {
             const int symbolSize = 32; // todo: determine margin by symbol size
-            const int boxMargin = symbolSize / 2;
-
-            // offset the bounding box left and up by the box margin
-            var grownBox = box.Grow(boxMargin * resolution);
-            return grownBox;
+            const int boxMargin = symbolSize/2;
+            return box.Grow(boxMargin*resolution);
         }
 
         private static void ClusterFeatures(
@@ -130,7 +133,7 @@ namespace Mapsui.Providers
         {
             var style = layerStyle;
 
-            // This method should repeated several times until there are no more merges
+            // todo: This method should repeated several times until there are no more merges
             foreach (var feature in features.OrderBy(f => f.Geometry.GetBoundingBox().GetCentroid().Y))
             {
                 if (layerStyle is IThemeStyle) style = (layerStyle as IThemeStyle).GetStyle(feature);
@@ -155,7 +158,7 @@ namespace Mapsui.Providers
                 clusters.Add(new Cluster
                 {
                     Box = feature.Geometry.GetBoundingBox().Clone(),
-                    Features = new List<IFeature> { feature }
+                    Features = new List<IFeature> {feature}
                 });
             }
         }
