@@ -6,24 +6,29 @@ namespace Mapsui.Samples.Common.Maps
 {
     public static class StackedLabelsSample
     {
+        private const string LabelColumn = "Label";
+
         public static Map CreateMap()
         {
             var map = new Map();
             map.Layers.Add(OsmSample.CreateLayer());
             var provider = PointsSample.CreateRandomPointsProvider(map.Envelope);
-            map.Layers.Add(CreateLabelLayer(provider));
+            map.Layers.Add(CreateStackedLabelLayer(provider, LabelColumn));
             map.Layers.Add(CreateLayer(provider));
             return map;
         }
 
-        private static ILayer CreateLabelLayer(IProvider provider)
+        private static ILayer CreateStackedLabelLayer(IProvider provider, string labelColumn)
         {
-            return new LabelLayer("stacks")
+            var stackLabelProvider = new StackedLabelProvider(provider)
             {
-                DataSource = provider,
-                UseLabelStacking = true,
-                LabelColumn = "Label",
-                Style = new LabelStyle(),
+                LabelStyle = new LabelStyle { LabelColumn = labelColumn }
+            };
+
+            return new MemoryLayer()
+            {
+                DataSource = stackLabelProvider,
+                Style = null
             };
         }
 

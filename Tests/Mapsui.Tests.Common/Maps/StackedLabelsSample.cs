@@ -20,17 +20,17 @@ namespace Mapsui.Tests.Common.Maps
             };
 
             var provider = CreateRandomPointsProvider(GenerateRandomPoints(new BoundingBox(-100, -100, 100, 100), 20));
-            map.Layers.Add(CreateStackedLabelLayer(provider));
+            map.Layers.Add(CreateStackedLabelLayer(provider, LabelColumn));
             map.Layers.Add(CreateLayer(provider));
 
             return map;
         }
 
-        private static ILayer CreateStackedLabelLayer(IProvider provider)
+        private static ILayer CreateStackedLabelLayer(IProvider provider, string labelColumn)
         {
             var stackLabelProvider = new StackedLabelProvider(provider)
             {
-                LabelStyle = new LabelStyle {LabelColumn = LabelColumn}
+                LabelStyle = new LabelStyle {LabelColumn = labelColumn}
             };
 
             return new MemoryLayer()

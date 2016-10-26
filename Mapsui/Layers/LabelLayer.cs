@@ -69,12 +69,6 @@ namespace Mapsui.Layers
             First
         }
 
-
-
-
-
-        public bool UseLabelStacking { get; set; }
-
         /// <summary>
         /// Gets or sets labelling behavior on multipart geometries
         /// </summary>

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Mapsui.Geometries;
@@ -7,17 +8,13 @@ using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 #if !NETFX_CORE
 using System.Windows.Controls;
-
 #else
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Shapes;
-using Windows.UI.Xaml.Media;
-using Windows.UI;
 #endif
 
 namespace Mapsui.Rendering.Xaml
 {
+    [Obsolete("Use StackedLabelProvider instead", false)]
     public static class StackedLabelLayerRenderer
     {
         public static Canvas Render(IViewport viewport, LabelLayer layer)

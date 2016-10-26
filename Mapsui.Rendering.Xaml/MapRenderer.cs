@@ -146,10 +146,7 @@ namespace Mapsui.Rendering.Xaml
             if (layer is LabelLayer)
             {
                 var labelLayer = layer as LabelLayer;
-
-                target.Children.Add(labelLayer.UseLabelStacking
-                    ? StackedLabelLayerRenderer.Render(viewport, labelLayer)
-                    : LabelRenderer.RenderLabelLayer(viewport, labelLayer));
+                target.Children.Add(LabelRenderer.RenderLabelLayer(viewport, labelLayer));
             }
             else
             {
