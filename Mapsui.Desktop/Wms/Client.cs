@@ -527,10 +527,10 @@ namespace Mapsui.Web.Wms
                     {
                         var crs = (xmlAttributeCollection["CRS"] ?? xmlAttributeCollection["SRS"]).Value;
                         wmsServerLayer.BoundingBoxes[crs] = new BoundingBox(
-                            double.Parse(xmlAttributeCollection["minx"].Value),
-                            double.Parse(xmlAttributeCollection["miny"].Value),
-                            double.Parse(xmlAttributeCollection["maxx"].Value),
-                            double.Parse(xmlAttributeCollection["maxy"].Value));
+                            double.Parse(xmlAttributeCollection["minx"].Value, NumberFormatInfo.InvariantInfo),
+                            double.Parse(xmlAttributeCollection["miny"].Value, NumberFormatInfo.InvariantInfo),
+                            double.Parse(xmlAttributeCollection["maxx"].Value, NumberFormatInfo.InvariantInfo),
+                            double.Parse(xmlAttributeCollection["maxy"].Value, NumberFormatInfo.InvariantInfo));
                     }
                 }
             }
