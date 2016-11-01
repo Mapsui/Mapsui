@@ -154,10 +154,9 @@ namespace Mapsui.Samples.Common.Desktop
             var provider = CreateStatesProvider(getCapabilitiesUri);
             provider.Label = labelField;
 
-            return new LabelLayer("labels")
+            return new Layer("labels")
             {
                 DataSource = provider,
-                LabelColumn = labelField,
                 MaxVisible = 90,
                 Style = new LabelStyle
                 {
@@ -165,7 +164,8 @@ namespace Mapsui.Samples.Common.Desktop
                     CollisionBuffer = new Size {Width = 5, Height = 5},
                     ForeColor = Color.Black,
                     Font = new Font {FontFamily = "GenericSerif", Size = 10},
-                    HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center
+                    HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center,
+                    LabelColumn = labelField
                 }
             };
         }

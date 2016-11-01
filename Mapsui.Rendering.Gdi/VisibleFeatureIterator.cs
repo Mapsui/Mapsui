@@ -45,14 +45,7 @@ namespace Mapsui.Rendering.Gdi
             if (layer.MinVisible > viewport.RenderResolution) return;
             if (layer.MaxVisible < viewport.RenderResolution) return;
 
-            if (layer is LabelLayer)
-            {
-                LabellayerRenderer.Render(graphics, viewport, layer as LabelLayer);
-            }
-            else
-            {
-                IterateVectorLayer(viewport, layer, callback);
-            }
+            IterateVectorLayer(viewport, layer, callback);
         }
 
         private static void IterateVectorLayer(IViewport viewport, ILayer layer,

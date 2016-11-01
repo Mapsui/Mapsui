@@ -61,7 +61,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GeometryRenderer.cs" />
-    <Compile Include="LabellayerRenderer.cs" />
     <Compile Include="LabelRenderer.cs" />
     <Compile Include="LineStringRenderer.cs" />
     <Compile Include="MapRenderer.cs" />

@@ -7,7 +7,9 @@ using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using Mapsui.Utilities;
 using Polygon = Mapsui.Geometries.Polygon;
 #if !NETFX_CORE
 using System.Windows;
@@ -46,11 +48,12 @@ namespace Mapsui.Rendering.Xaml
             Render(_target, viewport, layers, false);
         }
 
-        public static void Render(Canvas target, IViewport viewport, IEnumerable<ILayer> layers, bool rasterizing)
+        private static void Render(Canvas target, IViewport viewport, IEnumerable<ILayer> layers, bool rasterizing)
         {
 #if !NETFX_CORE
             target.BeginInit();
 #endif
+            
             target.Visibility = Visibility.Collapsed;
             foreach (var child in target.Children)
             {
@@ -69,42 +72,17 @@ namespace Mapsui.Rendering.Xaml
             }
             target.Arrange(new Rect(0, 0, viewport.Width, viewport.Height));
             target.Visibility = Visibility.Visible;
-            
-            //DrawDebugInfo(target, layers);
+
+            if (DeveloperTools.DeveloperMode)
+            {
+                DrawDebugInfo(target, layers);
+            }
 
 #if !NETFX_CORE
             target.EndInit();
 #endif
         }
 
-#if !NETFX_CORE
-        //private static void DrawDebugInfo(Canvas canvas, IEnumerable<ILayer> layers)
-        //{
-        //    var lineCounter = 1;
-        //    const float tabWidth = 40f;
-        //    const float lineHeight = 40f;
-
-        //    foreach (var layer in layers)
-        //    {
-        //        var textBox = AddTextBox(layer.ToString(), tabWidth, lineHeight*(lineCounter++));
-        //        canvas.Children.Add(textBox);
-
-        //        if (layer is ITileLayer)
-        //        {
-        //            var text = "Tiles in memory: " + (layer as ITileLayer).MemoryCache.TileCount.ToString(CultureInfo.InvariantCulture);
-        //            canvas.Children.Add(AddTextBox(text, tabWidth, lineHeight*lineCounter++));
-        //        }
-        //    }
-        //}
-
-        //private static TextBox AddTextBox(string text, float x, float y)
-        //{
-        //    var textBox = new TextBox {Text = text};
-        //    Canvas.SetLeft(textBox, x);
-        //    Canvas.SetTop(textBox, y);
-        //    return textBox;
-        //}
-#endif
         public MemoryStream RenderToBitmapStream(IViewport viewport, IEnumerable<ILayer> layers)
         {
 #if NETFX_CORE
@@ -143,15 +121,7 @@ namespace Mapsui.Rendering.Xaml
         {
             if (layer.Enabled == false) return;
 
-            if (layer is LabelLayer)
-            {
-                var labelLayer = layer as LabelLayer;
-                target.Children.Add(LabelRenderer.RenderLabelLayer(viewport, labelLayer));
-            }
-            else
-            {
-                target.Children.Add(RenderVectorLayer(viewport, layer, rasterizing));
-            }
+            target.Children.Add(RenderVectorLayer(viewport, layer, rasterizing));
         }
 
         private static Canvas RenderVectorLayer(IViewport viewport, ILayer layer, bool rasterizing = false)
@@ -274,5 +244,34 @@ namespace Mapsui.Rendering.Xaml
             else if (feature.Geometry is IRaster)
                 GeometryRenderer.PositionRaster(renderedGeometry, feature.Geometry.GetBoundingBox(), viewport);
         }
+
+#if !NETFX_CORE
+        private static void DrawDebugInfo(Canvas canvas, IEnumerable<ILayer> layers)
+        {
+            var lineCounter = 1;
+            const float tabWidth = 40f;
+            const float lineHeight = 40f;
+
+            foreach (var layer in layers)
+            {
+                var textBox = AddTextBox(layer.ToString(), tabWidth, lineHeight * (lineCounter++));
+                canvas.Children.Add(textBox);
+
+                if (layer is ITileLayer)
+                {
+                    var text = "Tiles in memory: " + (layer as ITileLayer).MemoryCache.TileCount.ToString(CultureInfo.InvariantCulture);
+                    canvas.Children.Add(AddTextBox(text, tabWidth, lineHeight * lineCounter++));
+                }
+            }
+        }
+
+        private static TextBox AddTextBox(string text, float x, float y)
+        {
+            var textBox = new TextBox { Text = text };
+            Canvas.SetLeft(textBox, x);
+            Canvas.SetTop(textBox, y);
+            return textBox;
+        }
+#endif
     }
 }

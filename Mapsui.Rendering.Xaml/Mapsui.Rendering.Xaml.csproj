@@ -66,7 +66,6 @@
     <Compile Include="BrushCache.cs" />
     <Compile Include="GeometryExtensions.cs" />
     <Compile Include="GeometryRenderer.cs" />
-    <Compile Include="LabelRenderer.cs" />
     <Compile Include="MapRenderer.cs" />
     <Compile Include="MatrixHelper.cs" />
     <Compile Include="PointRenderer.cs" />

@@ -65,9 +65,6 @@
     <Compile Include="..\Mapsui.Rendering.Xaml\GeometryRenderer.cs">
       <Link>GeometryRenderer.cs</Link>
     </Compile>
-    <Compile Include="..\Mapsui.Rendering.Xaml\LabelRenderer.cs">
-      <Link>LabelRenderer.cs</Link>
-    </Compile>
     <Compile Include="..\Mapsui.Rendering.Xaml\MapRenderer.cs">
       <Link>MapRenderer.cs</Link>
     </Compile>
