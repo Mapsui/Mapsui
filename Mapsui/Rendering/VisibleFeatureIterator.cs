@@ -26,16 +26,7 @@ namespace Mapsui.Rendering
             if (layer.MinVisible > viewport.RenderResolution) return;
             if (layer.MaxVisible < viewport.RenderResolution) return;
 
-            if (layer is LabelLayer)
-            {
-                // todo: get rid of LabelLayer. This functionality should be implemented through ILayer
-                // var labelLayer = layer as LabelLayer;
-                // labelLayer.UseLabelStacking ? LabelRenderer.RenderStackedLabelLayer(viewport, labelLayer) : LabelRenderer.RenderLabelLayer(viewport, labelLayer));
-            }
-            else
-            {
-                IterateVectorLayer(viewport, layer, callback);
-            }
+            IterateVectorLayer(viewport, layer, callback);
         }
 
         private static void IterateVectorLayer(IViewport viewport, ILayer layer,
