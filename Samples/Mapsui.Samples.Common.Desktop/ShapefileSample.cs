@@ -1,7 +1,6 @@
 ﻿using Mapsui.Data.Providers;
 using Mapsui.Layers;
 using Mapsui.Providers;
-using Mapsui.Rendering;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 using System.IO;
@@ -26,7 +25,7 @@ namespace Mapsui.Samples.Common.Desktop
             return map;
         }
 
-        public static ILayer CreateCountryLayer(IProvider countrySource)
+        private static ILayer CreateCountryLayer(IProvider countrySource)
         {
             return new Layer
             {
@@ -36,7 +35,7 @@ namespace Mapsui.Samples.Common.Desktop
             };
         }
 
-        public static ILayer CreateCityLayer(IProvider citySource)
+        private static ILayer CreateCityLayer(IProvider citySource)
         {
             return new Layer
             {
@@ -48,27 +47,23 @@ namespace Mapsui.Samples.Common.Desktop
 
         private static ILayer CreateCountryLabelLayer(IProvider countryProvider)
         {
-            return new LabelLayer("Country labels")
+            return new Layer("Country labels")
             {
                 DataSource = countryProvider,
                 Enabled = true,
-                LabelColumn = "NAME",
                 MaxVisible = double.MaxValue,
                 MinVisible = double.MinValue,
-                MultipartGeometryBehaviour = LabelLayer.MultipartGeometryBehaviourEnum.Largest,
                 Style = CreateCountryLabelTheme()
             };
         }
 
         private static ILayer CreateCityLabelLayer(IProvider citiesProvider)
         {
-            return new LabelLayer("City labels")
+            return new Layer("City labels")
             {
                 DataSource = citiesProvider,
                 Enabled = true,
-                LabelColumn = "NAME",
-                Style = CreateCityLabelTheme(),
-                LabelFilter = LabelCollisionDetection.ThoroughCollisionDetection
+                Style = CreateCityLabelStyle()
             };
         }
 
@@ -99,7 +94,7 @@ namespace Mapsui.Samples.Common.Desktop
             return new GradientTheme("PopDens", 0, 400, min, max) {FillColorBlend = ColorBlend.Rainbow5};
         }
 
-        private static LabelStyle CreateCityLabelTheme()
+        private static LabelStyle CreateCityLabelStyle()
         {
             return new LabelStyle
             {
@@ -110,7 +105,8 @@ namespace Mapsui.Samples.Common.Desktop
                 VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Center,
                 Offset = new Offset {X = 0, Y = 0},
                 Halo = new Pen {Color = Color.Yellow, Width = 2},
-                CollisionDetection = true
+                CollisionDetection = true, 
+                LabelColumn = "NAME"
             };
         }
 
@@ -123,14 +119,16 @@ namespace Mapsui.Samples.Common.Desktop
             {
                 ForeColor = Color.Black,
                 BackColor = backColor,
-                Font = new Font {FontFamily = "GenericSerif", Size = 6}
+                Font = new Font {FontFamily = "GenericSerif", Size = 6},
+                LabelColumn = "NAME"
             };
 
             var lblMax = new LabelStyle
             {
                 ForeColor = Color.Blue,
                 BackColor = backColor,
-                Font = new Font {FontFamily = "GenericSerif", Size = 9}
+                Font = new Font {FontFamily = "GenericSerif", Size = 9},
+                LabelColumn= "NAME"
             };
 
             return new GradientTheme("PopDens", 0, 400, lblMin, lblMax);

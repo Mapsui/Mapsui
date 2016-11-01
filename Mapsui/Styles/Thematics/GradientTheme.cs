@@ -174,6 +174,7 @@ namespace Mapsui.Styles.Thematics
         {
             style.CollisionDetection = min.CollisionDetection;
             style.Enabled = InterpolateBool(min.Enabled, max.Enabled, value);
+            style.LabelColumn = InterpolateString(min.LabelColumn, max.LabelColumn, value);
 
             double fontSize = InterpolateDouble(min.Font.Size, max.Font.Size, value);
             style.Font = new Font { FontFamily = min.Font.FontFamily, Size = fontSize };
@@ -191,6 +192,7 @@ namespace Mapsui.Styles.Thematics
             var x = InterpolateDouble(min.Offset.X, max.Offset.X, value);
             var y = InterpolateDouble(min.Offset.Y, max.Offset.Y, value);
             style.Offset = new Offset { X = x, Y = y };
+            style.LabelColumn = min.LabelColumn;
         }
 
         private double Fraction(double attr)
@@ -202,9 +204,14 @@ namespace Mapsui.Styles.Thematics
 
         private bool InterpolateBool(bool min, bool max, double attr)
         {
-            double frac = Fraction(attr);
-            if (frac > 0.5) return max;
-            return min;
+            var frac = Fraction(attr);
+            return frac > 0.5 ? max : min;
+        }
+
+        private string InterpolateString(string min, string max, double attr)
+        {
+            var frac = Fraction(attr);
+            return frac > 0.5 ? max : min;
         }
 
         private double InterpolateDouble(double min, double max, double attr)
