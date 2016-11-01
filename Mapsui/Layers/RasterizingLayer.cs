@@ -125,7 +125,7 @@ namespace Mapsui.Layers
             foreach (var feature in features)
             {
                 var raster = feature.Geometry as Raster;
-                raster?.Data.Dispose();
+                raster?.Data?.Dispose();
 
                 foreach (var key in feature.RenderedGeometry.Keys)
                 {
