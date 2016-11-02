@@ -127,7 +127,7 @@ namespace Mapsui.UI.Xaml
 
             SizeChanged += MapControlSizeChanged;
             CompositionTarget.Rendering += CompositionTarget_Rendering;
-            _renderer = new MapRenderer(_renderTarget);
+            _renderer = new MapRenderer();
             PointerWheelChanged += MapControl_PointerWheelChanged;
             
             ManipulationMode = ManipulationModes.Scale | ManipulationModes.TranslateX | ManipulationModes.TranslateY;     
@@ -322,7 +322,7 @@ namespace Mapsui.UI.Xaml
 
             if ((_renderer != null) && (_map != null))
             {
-                _renderer.Render(Map.Viewport, _map.Layers);
+                _renderer.Render(_renderTarget, Map.Viewport, _map.Layers);
                 _renderTarget.Arrange(new Rect(0, 0, Map.Viewport.Width, Map.Viewport.Height));
                 _invalid = false;
             }

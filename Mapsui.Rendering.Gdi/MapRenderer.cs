@@ -34,21 +34,18 @@ namespace Mapsui.Rendering.Gdi
 {
     public class MapRenderer : IRenderer
     {
-        public Graphics Graphics { get; set; }
-        
         static MapRenderer()
         {
             DefaultRendererFactory.Create = () => new MapRenderer();
         }
 
-        public void Render(IViewport viewport, IEnumerable<ILayer> layers)
+        public void Render(object target, IViewport viewport, IEnumerable<ILayer> layers, Styles.Color background = null)
         {
-            Render(Graphics, viewport, layers);
+            Render((Graphics)target, viewport, layers, background);
         }
 
-        private void Render(Graphics graphics, IViewport viewport, IEnumerable<ILayer> layers)
+        private void Render(Graphics graphics, IViewport viewport, IEnumerable<ILayer> layers, Styles.Color background = null)
         {
-            Graphics = graphics;
             VisibleFeatureIterator.IterateLayers(graphics, viewport, layers, RenderFeature);
         }
 
@@ -71,28 +68,23 @@ namespace Mapsui.Rendering.Gdi
             return memoryStream;
         }
 
-        public byte[] RenderMapAsByteArray(IViewport viewport, IEnumerable<ILayer> layers)
-        {
-            return RenderToBitmapStream(viewport, layers).ToArray();
-        }
-
-        private void RenderFeature(IViewport viewport, IStyle style, IFeature feature)
+        private void RenderFeature(Graphics graphics, IViewport viewport, IStyle style, IFeature feature)
         {
             var vectorStyle = style as VectorStyle;
             if (feature.Geometry is Point)
-                PointRenderer.Render(Graphics, (Point)feature.Geometry, vectorStyle, viewport);
+                PointRenderer.Render(graphics, (Point)feature.Geometry, vectorStyle, viewport);
             else if (feature.Geometry is MultiPoint)
-                MultiPointRenderer.Render(Graphics, (MultiPoint)feature.Geometry, vectorStyle, viewport);
+                MultiPointRenderer.Render(graphics, (MultiPoint)feature.Geometry, vectorStyle, viewport);
             else if (feature.Geometry is LineString)
-                LineStringRenderer.Render(Graphics, (LineString)feature.Geometry, vectorStyle.Line.ToGdi(), viewport);
+                LineStringRenderer.Render(graphics, (LineString)feature.Geometry, vectorStyle.Line.ToGdi(), viewport);
             else if (feature.Geometry is MultiLineString)
-                MultiLineStringRenderer.Render(Graphics, (MultiLineString)feature.Geometry, vectorStyle.Line.ToGdi(), viewport);
+                MultiLineStringRenderer.Render(graphics, (MultiLineString)feature.Geometry, vectorStyle.Line.ToGdi(), viewport);
             else if (feature.Geometry is Polygon)
-                PolygonRenderer.DrawPolygon(Graphics, (Polygon)feature.Geometry, vectorStyle.Fill.ToGdi(), vectorStyle.Outline.ToGdi(), viewport);
+                PolygonRenderer.DrawPolygon(graphics, (Polygon)feature.Geometry, vectorStyle.Fill.ToGdi(), vectorStyle.Outline.ToGdi(), viewport);
             else if (feature.Geometry is MultiPolygon)
-                MultiPolygonRenderer.Render(Graphics, (MultiPolygon)feature.Geometry, vectorStyle.Fill.ToGdi(), vectorStyle.Outline.ToGdi(), viewport);
+                MultiPolygonRenderer.Render(graphics, (MultiPolygon)feature.Geometry, vectorStyle.Fill.ToGdi(), vectorStyle.Outline.ToGdi(), viewport);
             else if (feature.Geometry is IRaster)
-                RasterRenderer.Render(Graphics, feature.Geometry, vectorStyle, viewport);
+                RasterRenderer.Render(graphics, feature.Geometry, vectorStyle, viewport);
         }
     }
 }

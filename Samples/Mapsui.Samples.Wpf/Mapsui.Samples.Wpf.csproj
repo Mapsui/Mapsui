@@ -160,10 +160,6 @@
       <Project>{ee55b62d-ffa2-4c24-a4ad-7a47ace55ce5}</Project>
       <Name>Mapsui.Geometries</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Mapsui.Rendering.Gdi\Mapsui.Rendering.Gdi.csproj">
-      <Project>{AAA56FF5-D130-461E-91F4-53100B686665}</Project>
-      <Name>Mapsui.Rendering.Gdi</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Mapsui.UI.Xaml\Mapsui.UI.Xaml.csproj">
       <Project>{4b5676a4-6c5a-4caa-8317-faf40cefd361}</Project>
       <Name>Mapsui.UI.Xaml</Name>

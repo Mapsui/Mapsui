@@ -551,13 +551,7 @@ namespace Mapsui.Rendering.Skia.UI
             if (!_viewportInitialized) InitializeViewport();
             if (!_viewportInitialized) return; // Stop if the line above failed. 
             if (!_invalid && !DeveloperTools.DeveloperMode) return; // In developermode always render so that fps can be counterd.
-
-            if ((Renderer != null) && (_map != null))
-            {
-                Renderer.Render(Map.Viewport, _map.Layers);
-                if (DeveloperTools.DeveloperMode) _fpsCounter.FramePlusOne();
-                _invalid = false;
-            }
+            
             SkiaControl.InvalidateVisual();
         }
         

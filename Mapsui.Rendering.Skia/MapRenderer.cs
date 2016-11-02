@@ -20,20 +20,19 @@ namespace Mapsui.Rendering.Skia
 
         private long _currentIteration;
         private const int TilesToKeepMultiplier = 3;
-
-        public SKCanvas Canvas { get; set; }
-
+        
         static MapRenderer()
         {
             DefaultRendererFactory.Create = () => new MapRenderer();
         }
 
-        public void Render(IViewport viewport, IEnumerable<ILayer> layers)
+        public void Render(object target, IViewport viewport, IEnumerable<ILayer> layers, Color background = null)
         {
-            Render(Canvas, viewport, layers);
+            Render((SKCanvas)target, viewport, layers, background);
         }
 
-        private void Render(SKCanvas canvas, IViewport viewport, IEnumerable<ILayer> layers)
+        private void Render(SKCanvas canvas, IViewport viewport, IEnumerable<ILayer> layers, 
+            Color background)
         {
             canvas.Clear(new SKColor(255, 255, 255));
             layers = layers.ToList();
@@ -125,7 +124,7 @@ namespace Mapsui.Rendering.Skia
             }
         }
 
-        public MemoryStream RenderToBitmapStream(IViewport viewport, IEnumerable<ILayer> layers)
+        public MemoryStream RenderToBitmapStream(IViewport viewport, IEnumerable<ILayer> layers, Color background = null)
         {
             try
             {
@@ -133,7 +132,7 @@ namespace Mapsui.Rendering.Skia
                 using (var bitmap = new SKBitmap((int)viewport.Width, (int)viewport.Height, SKColorType.Rgb565, SKAlphaType.Premul))
                 using (var canvas = new SKCanvas(bitmap))
                 {
-                    Render(canvas, viewport, layers);
+                    Render(canvas, viewport, layers, background);
                     using (var image = SKImage.FromBitmap(bitmap))
                     using (var data = image.Encode())
                     {

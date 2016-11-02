@@ -27,78 +27,68 @@ namespace Mapsui.Rendering.Xaml
 {
     public class MapRenderer : IRenderer
     {
-        private readonly Canvas _target;
-
         static MapRenderer()
         {
             DefaultRendererFactory.Create = () => new MapRenderer();
         }
 
-        public MapRenderer()
+        public void Render(object target, IViewport viewport, IEnumerable<ILayer> layers, Color background)
         {
+            Render((Canvas) target, viewport, layers, background, false);
         }
 
-        public MapRenderer(Canvas target)
-        {
-            _target = target;
-        }
-
-        public void Render(IViewport viewport, IEnumerable<ILayer> layers)
-        {
-            Render(_target, viewport, layers, false);
-        }
-
-        private static void Render(Canvas target, IViewport viewport, IEnumerable<ILayer> layers, bool rasterizing)
+        private static void Render(Canvas target, IViewport viewport, IEnumerable<ILayer> layers,
+            Color background, bool rasterizing)
         {
 #if !NETFX_CORE
             target.BeginInit();
 #endif
-            
+
             target.Visibility = Visibility.Collapsed;
+           
             foreach (var child in target.Children)
-            {
                 (child as Canvas)?.Children.Clear();
-            }
             target.Children.Clear();
 
             foreach (var layer in layers)
             {
                 if (!layer.Enabled) continue;
                 if (layer.MinVisible > viewport.Resolution) continue;
-                if(layer.MaxVisible < viewport.Resolution) continue;                
+                if (layer.MaxVisible < viewport.Resolution) continue;
 
                 RenderLayer(target, viewport, layer, rasterizing);
-
             }
             target.Arrange(new Rect(0, 0, viewport.Width, viewport.Height));
             target.Visibility = Visibility.Visible;
 
+#if !NETFX_CORE
             if (DeveloperTools.DeveloperMode)
             {
                 DrawDebugInfo(target, layers);
             }
+#endif
 
 #if !NETFX_CORE
             target.EndInit();
 #endif
         }
 
-        public MemoryStream RenderToBitmapStream(IViewport viewport, IEnumerable<ILayer> layers)
+        public MemoryStream RenderToBitmapStream(IViewport viewport, IEnumerable<ILayer> layers, Color background = null)
         {
 #if NETFX_CORE
             throw new NotImplementedException();
 #else
             MemoryStream bitmapStream = null;
-            RunMethodOnStaThread(() => bitmapStream = RenderToBitmapStreamStatic(viewport, layers));
+            RunMethodOnStaThread(() => bitmapStream = RenderToBitmapStreamStatic(viewport, layers, background));
             return bitmapStream;
 #endif
         }
 
 #if !NETFX_CORE
-        private static MemoryStream RenderToBitmapStreamStatic(IViewport viewport, IEnumerable<ILayer> layers)
+        private static MemoryStream RenderToBitmapStreamStatic(IViewport viewport, IEnumerable<ILayer> layers, Color background)
         {
             var canvas = new Canvas();
-            Render(canvas, viewport, layers, true);
+            Render(canvas, viewport, layers, background, true);
             var bitmapStream = BitmapRendering.BitmapConverter.ToBitmapStream(canvas, (int)viewport.Width, (int)viewport.Height);
             canvas.Children.Clear();
             canvas.Dispatcher.InvokeShutdown();
@@ -140,7 +130,7 @@ namespace Mapsui.Rendering.Xaml
                 var features = layer.GetFeaturesInView(viewport.Extent, viewport.RenderResolution).ToList();
                 var layerStyles = BaseLayer.GetLayerStyles(layer);
                 var brushCache = new BrushCache();
-                
+
                 foreach (var layerStyle in layerStyles)
                 {
                     var style = layerStyle; // This is the default that could be overridden by an IThemeStyle
@@ -148,7 +138,8 @@ namespace Mapsui.Rendering.Xaml
                     foreach (var feature in features)
                     {
                         if (layerStyle is IThemeStyle) style = (layerStyle as IThemeStyle).GetStyle(feature);
-                        if ((style == null) || (style.Enabled == false) || (style.MinVisible > viewport.Resolution) || (style.MaxVisible < viewport.Resolution)) continue;
+                        if ((style == null) || (style.Enabled == false) || (style.MinVisible > viewport.Resolution) ||
+                            (style.MaxVisible < viewport.Resolution)) continue;
 
                         RenderFeature(viewport, canvas, feature, style, rasterizing, brushCache);
                     }
@@ -158,12 +149,8 @@ namespace Mapsui.Rendering.Xaml
                 {
                     var styles = feature.Styles ?? Enumerable.Empty<IStyle>();
                     foreach (var style in styles)
-                    {
-                        if (feature.Styles != null && style.Enabled)
-                        {
+                        if ((feature.Styles != null) && style.Enabled)
                             RenderFeature(viewport, canvas, feature, style, rasterizing, brushCache);
-                        }
-                    }
                 }
 
                 return canvas;
@@ -183,16 +170,20 @@ namespace Mapsui.Rendering.Xaml
             }
         }
 
-        private static void RenderFeature(IViewport viewport, Canvas canvas, IFeature feature, IStyle style, bool rasterizing, BrushCache brushCache = null)
+        private static void RenderFeature(IViewport viewport, Canvas canvas, IFeature feature, IStyle style,
+            bool rasterizing, BrushCache brushCache = null)
         {
             if (style is LabelStyle)
             {
                 var labelStyle = (LabelStyle) style;
-                canvas.Children.Add(SingleLabelRenderer.RenderLabel(feature.Geometry.GetBoundingBox().GetCentroid(), labelStyle, viewport, labelStyle.GetLabelText(feature)));
+                canvas.Children.Add(SingleLabelRenderer.RenderLabel(feature.Geometry.GetBoundingBox().GetCentroid(),
+                    labelStyle, viewport, labelStyle.GetLabelText(feature)));
             }
             else
             {
-                var renderedGeometry = feature.RenderedGeometry.ContainsKey(style) ? feature.RenderedGeometry[style] as Shape : null;
+                var renderedGeometry = feature.RenderedGeometry.ContainsKey(style)
+                    ? feature.RenderedGeometry[style] as Shape
+                    : null;
                 if (renderedGeometry == null)
                 {
                     renderedGeometry = RenderGeometry(viewport, style, feature, brushCache);
@@ -203,12 +194,14 @@ namespace Mapsui.Rendering.Xaml
                     PositionGeometry(renderedGeometry, viewport, style, feature);
                 }
 
-                if (!canvas.Children.Contains(renderedGeometry)) // Adding twice can happen when a single feature has two identical styles
+                if (!canvas.Children.Contains(renderedGeometry))
+                    // Adding twice can happen when a single feature has two identical styles
                     canvas.Children.Add(renderedGeometry);
             }
         }
 
-        private static Shape RenderGeometry(IViewport viewport, IStyle style, IFeature feature, BrushCache brushCache = null)
+        private static Shape RenderGeometry(IViewport viewport, IStyle style, IFeature feature,
+            BrushCache brushCache = null)
         {
             if (feature.Geometry is Geometries.Point)
                 return PointRenderer.RenderPoint(feature.Geometry as Geometries.Point, style, viewport, brushCache);

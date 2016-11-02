@@ -59,10 +59,6 @@
       <Project>{EE55B62D-FFA2-4C24-A4AD-7A47ACE55CE5}</Project>
       <Name>Mapsui.Geometries</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Mapsui.Rendering.Gdi\Mapsui.Rendering.Gdi.csproj">
-      <Project>{AAA56FF5-D130-461E-91F4-53100B686665}</Project>
-      <Name>Mapsui.Rendering.Gdi</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Mapsui\Mapsui.csproj">
       <Project>{D74C052A-C07E-4B37-A898-134218ACA5C9}</Project>
       <Name>Mapsui</Name>

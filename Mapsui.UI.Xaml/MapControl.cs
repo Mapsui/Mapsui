@@ -190,7 +190,7 @@ namespace Mapsui.UI.Xaml
 
             SizeChanged += MapControlSizeChanged;
             CompositionTarget.Rendering += CompositionTargetRendering;
-            Renderer = new MapRenderer(RenderCanvas);
+            Renderer = new MapRenderer();
 
             ManipulationDelta += OnManipulationDelta;
             ManipulationCompleted += OnManipulationCompleted;
@@ -570,7 +570,7 @@ namespace Mapsui.UI.Xaml
 
             if ((Renderer != null) && (_map != null))
             {
-                Renderer.Render(Map.Viewport, _map.Layers);
+                Renderer.Render(RenderCanvas, Map.Viewport, _map.Layers);
                 if (DeveloperTools.DeveloperMode) _fpsCounter.FramePlusOne();
                 _invalid = false;
             }

@@ -17,7 +17,7 @@ namespace Mapsui.Rendering.OpenTK
         private long _currentIteration;
         private const int TilesToKeepMultiplier = 3;
 
-        public void Render(IViewport viewport, IEnumerable<ILayer> layers)
+        public void Render(object target, IViewport viewport, IEnumerable<ILayer> layers,  Color background = null)
         {
             layers = layers.ToList();
 
@@ -106,7 +106,8 @@ namespace Mapsui.Rendering.OpenTK
             }
         }
 
-        public MemoryStream RenderToBitmapStream(IViewport viewport, IEnumerable<ILayer> layers)
+        public MemoryStream RenderToBitmapStream(IViewport viewport, IEnumerable<ILayer> layers, 
+            Color background = null)
         {
             throw new NotImplementedException();
         }
