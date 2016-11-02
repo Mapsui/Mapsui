@@ -100,9 +100,7 @@ namespace Mapsui.Layers
 
                     _rasterizer = _rasterizer ?? DefaultRendererFactory.Create();
 
-                    var transparent = new Color {A = 0, R = 128, G = 128, B = 128};
-
-                    var bitmapStream = _rasterizer.RenderToBitmapStream(viewport, new[] {_layer}, transparent);
+                    var bitmapStream = _rasterizer.RenderToBitmapStream(viewport, new[] {_layer}, Color.Transparent);
                     RemoveExistingFeatures();
                     _cache.Features = new Features {new Feature {Geometry = new Raster(bitmapStream, viewport.Extent)}};
 

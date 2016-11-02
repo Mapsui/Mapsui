@@ -1,16 +1,15 @@
 using System.Collections.Generic;
 using Mapsui.Geometries;
-using Mapsui.Providers;
 using Mapsui.Styles;
 using SkiaSharp;
 
 namespace Mapsui.Rendering.Skia
 {
-    public class LineStringRenderer
+    public static class LineStringRenderer
     {
-        public static void Draw(SKCanvas canvas, IViewport viewport, IStyle style, IFeature feature)
+        public static void Draw(SKCanvas canvas, IViewport viewport, IStyle style, IGeometry geometry)
         {
-            var lineString = ((LineString) feature.Geometry).Vertices;
+            var lineString = ((LineString) geometry).Vertices;
 
             float lineWidth = 1;
             var lineColor = new Color();

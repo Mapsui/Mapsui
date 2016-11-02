@@ -73,6 +73,9 @@
     <Compile Include="LabelRenderer.cs" />
     <Compile Include="LineStringRenderer.cs" />
     <Compile Include="MapRenderer.cs" />
+    <Compile Include="MultiLineStringRenderer.cs" />
+    <Compile Include="MultiPointRenderer.cs" />
+    <Compile Include="MultiPolygonRenderer.cs" />
     <Compile Include="PlatformLabelBitmap.cs" />
     <Compile Include="PolygonRenderer.cs" />
     <Compile Include="SKBitmapInfo.cs" />

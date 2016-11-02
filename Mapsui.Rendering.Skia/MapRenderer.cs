@@ -13,14 +13,14 @@ namespace Mapsui.Rendering.Skia
 {
     public class MapRenderer : IRenderer
     {
-        readonly IDictionary<int, SKBitmapInfo> _symbolTextureCache = new Dictionary<int, SKBitmapInfo>();
+        private const int TilesToKeepMultiplier = 3;
+        private readonly IDictionary<int, SKBitmapInfo> _symbolTextureCache = new Dictionary<int, SKBitmapInfo>();
 
-        readonly IDictionary<object, SKBitmapInfo> _tileTextureCache =
+        private readonly IDictionary<object, SKBitmapInfo> _tileTextureCache =
             new Dictionary<object, SKBitmapInfo>(new IdentityComparer<object>());
 
         private long _currentIteration;
-        private const int TilesToKeepMultiplier = 3;
-        
+
         static MapRenderer()
         {
             DefaultRendererFactory.Create = () => new MapRenderer();
@@ -28,21 +28,59 @@ namespace Mapsui.Rendering.Skia
 
         public void Render(object target, IViewport viewport, IEnumerable<ILayer> layers, Color background = null)
         {
-            Render((SKCanvas)target, viewport, layers, background);
+            Render((SKCanvas) target, viewport, layers, background);
         }
 
-        private void Render(SKCanvas canvas, IViewport viewport, IEnumerable<ILayer> layers, 
+        public MemoryStream RenderToBitmapStream(IViewport viewport, IEnumerable<ILayer> layers, Color background = null)
+        {
+            try
+            {
+                // todo: Use SKColorType.Rgba8888 when it does not crash anymore
+                using (
+                    var bitmap = new SKBitmap((int) viewport.Width, (int) viewport.Height, SKColorType.Rgb565,
+                        SKAlphaType.Premul))
+                {
+                    using (var canvas = new SKCanvas(bitmap))
+                    {
+                        Render(canvas, viewport, layers, background);
+                        using (var image = SKImage.FromBitmap(bitmap))
+                        {
+                            using (var data = image.Encode())
+                            {
+                                var memoryStream = new MemoryStream();
+                                data.SaveTo(memoryStream);
+                                return memoryStream;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Log(LogLevel.Error, ex.Message);
+                return null;
+            }
+        }
+
+        private void Render(SKCanvas canvas, IViewport viewport, IEnumerable<ILayer> layers,
             Color background)
         {
-            canvas.Clear(new SKColor(255, 255, 255));
+            if (background != null)
+            {
+                var c = new SKColor((byte) background.R, (byte) background.G, (byte) background.B, (byte) background.A);
+                canvas.Clear(c);
+            }
+            else
+            {
+               // canvas.Clear(Color.White.ToSkia());
+                canvas.Clear(new SKColor(255, 255, 255));
+            }
+
             layers = layers.ToList();
 
             SetAllTextureInfosToUnused();
-            
-            VisibleFeatureIterator.IterateLayers(viewport, layers, (v, l, s) =>
-            {
-                RenderFeature(canvas, v, l, s);
-            });
+
+            VisibleFeatureIterator.IterateLayers(viewport, layers, (v, l, s) => { RenderFeature(canvas, v, l, s); });
 
             RemoveUnusedTextureInfos();
 
@@ -58,18 +96,14 @@ namespace Mapsui.Rendering.Skia
         private void DeleteAllSymbolTextures()
         {
             foreach (var key in _symbolTextureCache.Keys)
-            {
                 _symbolTextureCache[key].Bitmap.Dispose();
-            }
             _symbolTextureCache.Clear();
         }
 
         private void DeleteAllTileTextures()
         {
             foreach (var key in _tileTextureCache.Keys)
-            {
                 _tileTextureCache[key].Bitmap.Dispose();
-            }
             _tileTextureCache.Clear();
         }
 
@@ -107,46 +141,19 @@ namespace Mapsui.Rendering.Skia
         private void RenderFeature(SKCanvas canvas, IViewport viewport, IStyle style, IFeature feature)
         {
             if (feature.Geometry is Point)
-            {
-                PointRenderer.Draw(canvas, viewport, style, feature, _symbolTextureCache);
-            }
+                PointRenderer.Draw(canvas, viewport, style, feature, feature.Geometry, _symbolTextureCache);
+            else if (feature.Geometry is MultiPoint)
+                MultiPointRenderer.Draw(canvas, viewport, style, feature, feature.Geometry, _symbolTextureCache);
             else if (feature.Geometry is LineString)
-            {
-                LineStringRenderer.Draw(canvas, viewport, style, feature);
-            }
+                LineStringRenderer.Draw(canvas, viewport, style, feature.Geometry);
+            else if (feature.Geometry is MultiLineString)
+                MultiLineStringRenderer.Draw(canvas, viewport, style, feature.Geometry);
             else if (feature.Geometry is Polygon)
-            {
-                PolygonRenderer.Draw(canvas, viewport, style, feature);
-            }
+                PolygonRenderer.Draw(canvas, viewport, style, feature.Geometry);
+            else if (feature.Geometry is MultiPolygon)
+                MultiPolygonRenderer.Draw(canvas, viewport, style, feature.Geometry);
             else if (feature.Geometry is IRaster)
-            {
                 RasterRenderer.Draw(canvas, viewport, style, feature, _tileTextureCache, _currentIteration);
-            }
-        }
-
-        public MemoryStream RenderToBitmapStream(IViewport viewport, IEnumerable<ILayer> layers, Color background = null)
-        {
-            try
-            {
-                // todo: Use SKColorType.Rgba8888 when it does not crash anymore
-                using (var bitmap = new SKBitmap((int)viewport.Width, (int)viewport.Height, SKColorType.Rgb565, SKAlphaType.Premul))
-                using (var canvas = new SKCanvas(bitmap))
-                {
-                    Render(canvas, viewport, layers, background);
-                    using (var image = SKImage.FromBitmap(bitmap))
-                    using (var data = image.Encode())
-                    {
-                        var memoryStream = new MemoryStream();
-                        data.SaveTo(memoryStream);
-                        return memoryStream;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Logger.Log(LogLevel.Error, ex.Message);
-                return null;
-            }
         }
     }
 

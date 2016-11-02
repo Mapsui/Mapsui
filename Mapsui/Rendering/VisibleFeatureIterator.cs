@@ -8,28 +8,22 @@ using System.Linq;
 
 namespace Mapsui.Rendering
 {
-    public class VisibleFeatureIterator
+    public static class VisibleFeatureIterator
     {
         public static void IterateLayers(IViewport viewport, IEnumerable<ILayer> layers,
             Action<IViewport, IStyle, IFeature> callback)
         {
             foreach (var layer in layers)
             {
+                if (layer.Enabled == false) continue;
+                if (layer.MinVisible > viewport.RenderResolution) continue;
+                if (layer.MaxVisible < viewport.RenderResolution) continue;
+
                 IterateLayer(viewport, layer, callback);
             }
         }
 
-        public static void IterateLayer(IViewport viewport, ILayer layer, 
-            Action<IViewport, IStyle, IFeature> callback)
-        {
-            if (layer.Enabled == false) return;
-            if (layer.MinVisible > viewport.RenderResolution) return;
-            if (layer.MaxVisible < viewport.RenderResolution) return;
-
-            IterateVectorLayer(viewport, layer, callback);
-        }
-
-        private static void IterateVectorLayer(IViewport viewport, ILayer layer,
+        private static void IterateLayer(IViewport viewport, ILayer layer,
             Action<IViewport, IStyle, IFeature> callback)
         {
             var features = layer.GetFeaturesInView(viewport.Extent, viewport.RenderResolution).ToList();

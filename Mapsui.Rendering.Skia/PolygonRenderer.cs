@@ -1,15 +1,14 @@
 ﻿using Mapsui.Geometries;
-using Mapsui.Providers;
 using Mapsui.Styles;
 using SkiaSharp;
 
 namespace Mapsui.Rendering.Skia
 {
-    internal class PolygonRenderer
+    internal static class PolygonRenderer
     {
-        public static void Draw(SKCanvas canvas, IViewport viewport, IStyle style, IFeature feature)
+        public static void Draw(SKCanvas canvas, IViewport viewport, IStyle style, IGeometry geometry)
         {
-            var polygon = (Polygon)feature.Geometry;
+            var polygon = (Polygon)geometry;
             
             float lineWidth = 1;
             var lineColor = Color.Black; // default
@@ -55,12 +54,14 @@ namespace Mapsui.Rendering.Skia
                    var point = viewport.WorldToScreen(vertices[i].X, vertices[i].Y);
                     path.LineTo((float) point.X, (float) point.Y);
                 }
+                path.Close();
                 foreach (var interiorRing in polygon.InteriorRings)
                 {
                     // note: For Skia inner rings need to be clockwise and outer rings
                     // need to be counter clockwise (if this is the other way around it also
                     // seems to work)
                     // this is not a requirement of the OGC polygon.
+                    interiorRing.Vertices.Reverse();
                     var firstInner = viewport.WorldToScreen(interiorRing.Vertices[0].X, interiorRing.Vertices[0].Y);
                     path.MoveTo((float)firstInner.X, (float)firstInner.Y);
                     for (var i = 1; i < interiorRing.Vertices.Count; i++)

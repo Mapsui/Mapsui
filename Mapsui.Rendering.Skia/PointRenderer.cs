@@ -6,15 +6,16 @@ using SkiaSharp;
 
 namespace Mapsui.Rendering.Skia
 {
-    internal class PointRenderer
+    static class PointRenderer
     {
         private const float HalfWidth = (float) SymbolStyle.DefaultWidth/2;
         private const float HalfHeight = (float) SymbolStyle.DefaultHeight/2;
 
-        public static void Draw(SKCanvas canvas, IViewport viewport, IStyle style, IFeature feature,
-            IDictionary<int, SKBitmapInfo> symbolBitmapCache)
+        // todo: try to remove feature argument. LabelStyle should already contain the feature specific text
+        public static void Draw(SKCanvas canvas, IViewport viewport, IStyle style, IFeature feature, 
+            IGeometry geometry, IDictionary<int, SKBitmapInfo> symbolBitmapCache)
         {
-            var point = feature.Geometry as Point;
+            var point = geometry as Point;
             var destination = viewport.WorldToScreen(point);
 
             var labelStyle = style as LabelStyle;

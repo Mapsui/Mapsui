@@ -20,7 +20,7 @@ namespace Mapsui.Rendering.Skia
             var info = LabelBitmapCache[key];
 
             BitmapHelper.RenderTexture(canvas, info.Bitmap, x, y, 
-                offsetX:(float)style.Offset.X, offsetY:(float)style.Offset.Y,
+                offsetX:(float)style.Offset.X, offsetY:(float)-style.Offset.Y,
                 horizontalAlignment: style.HorizontalAlignment, verticalAlignment: style.VerticalAlignment);
         }
     }
