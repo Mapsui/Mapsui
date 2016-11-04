@@ -61,7 +61,6 @@ namespace Mapsui.Rendering.Skia
                     // need to be counter clockwise (if this is the other way around it also
                     // seems to work)
                     // this is not a requirement of the OGC polygon.
-                    interiorRing.Vertices.Reverse();
                     var firstInner = viewport.WorldToScreen(interiorRing.Vertices[0].X, interiorRing.Vertices[0].Y);
                     path.MoveTo((float)firstInner.X, (float)firstInner.Y);
                     for (var i = 1; i < interiorRing.Vertices.Count; i++)
