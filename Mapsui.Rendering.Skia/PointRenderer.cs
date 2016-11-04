@@ -11,7 +11,9 @@ namespace Mapsui.Rendering.Skia
         private const float HalfWidth = (float) SymbolStyle.DefaultWidth/2;
         private const float HalfHeight = (float) SymbolStyle.DefaultHeight/2;
 
-        // todo: try to remove feature argument. LabelStyle should already contain the feature specific text
+        // todo: 
+        // try to remove the feature argument. LabelStyle should already contain the feature specific text
+        // The visible feature iterator should create this LabelStyle
         public static void Draw(SKCanvas canvas, IViewport viewport, IStyle style, IFeature feature, 
             IGeometry geometry, IDictionary<int, SKBitmapInfo> symbolBitmapCache)
         {
@@ -21,20 +23,23 @@ namespace Mapsui.Rendering.Skia
             var labelStyle = style as LabelStyle;
             if (labelStyle != null)
             {
-                LabelRenderer.Draw(canvas, labelStyle, labelStyle.GetLabelText(feature),
-                    (float) destination.X, (float) destination.Y);
+                var text = labelStyle.GetLabelText(null);
+                LabelRenderer.Draw(canvas, labelStyle, text, (float) destination.X, (float) destination.Y);
             }
-            var symbolStyle = style as SymbolStyle;
-
-            if (symbolStyle != null)
+            else
             {
-                if (symbolStyle.BitmapId >= 0)
-                    DrawPointWithSymbolStyle(canvas, symbolStyle, destination, symbolBitmapCache);
-                else
-                    DrawPointWithVectorStyle(canvas, (VectorStyle) style, destination, symbolStyle.SymbolType);
+                var symbolStyle = style as SymbolStyle;
+
+                if (symbolStyle != null)
+                {
+                    if (symbolStyle.BitmapId >= 0)
+                        DrawPointWithSymbolStyle(canvas, symbolStyle, destination, symbolBitmapCache);
+                    else
+                        DrawPointWithVectorStyle(canvas, (VectorStyle) style, destination, symbolStyle.SymbolType);
+                }
+                else if (style is VectorStyle)
+                    DrawPointWithVectorStyle(canvas, (VectorStyle) style, destination);
             }
-            else if (style is VectorStyle)
-                DrawPointWithVectorStyle(canvas, (VectorStyle) style, destination);
         }
 
         private static void DrawPointWithVectorStyle(SKCanvas canvas, VectorStyle vectorStyle,
