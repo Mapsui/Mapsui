@@ -173,14 +173,12 @@ namespace Mapsui.UI.Xaml
                     Opacity = 0.3,
                     VerticalAlignment = VerticalAlignment.Top,
                     HorizontalAlignment = HorizontalAlignment.Left,
-                    Visibility = Visibility.Collapsed
+                    Visibility = Visibility.Visible
                 };
             Children.Add(_bboxRect);
 
             Map = new Map();
             Loaded += MapControlLoaded;
-            KeyDown += MapControlKeyDown;
-            KeyUp += MapControlKeyUp;
             MouseLeftButtonDown += MapControlMouseLeftButtonDown;
             MouseLeftButtonUp += MapControlMouseLeftButtonUp;
 
@@ -406,6 +404,7 @@ namespace Mapsui.UI.Xaml
             _downMousePosition = e.GetPosition(this);
             _mouseDown = true;
             CaptureMouse();
+            IsInBoxZoomMode = Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl);
         }
 
         private void MapControlMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -611,24 +610,6 @@ namespace Mapsui.UI.Xaml
                 _bboxRect.Width = 0;
                 _bboxRect.Height = 0;
             }));
-        }
-
-        private void MapControlKeyUp(object sender, KeyEventArgs e)
-        {
-            var keyName = e.Key.ToString().ToLower();
-            if (keyName.Equals("ctrl") || keyName.Equals("leftctrl") || keyName.Equals("rightctrl"))
-            {
-                IsInBoxZoomMode = false;
-            }
-        }
-
-        private void MapControlKeyDown(object sender, KeyEventArgs e)
-        {
-            var keyName = e.Key.ToString().ToLower();
-            if (keyName.Equals("ctrl") || keyName.Equals("leftctrl") || keyName.Equals("rightctrl"))
-            {
-                IsInBoxZoomMode = true;
-            }
         }
 
         private void DrawBbox(Point newPos)
