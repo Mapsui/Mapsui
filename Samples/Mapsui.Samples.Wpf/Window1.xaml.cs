@@ -12,7 +12,7 @@ using Mapsui.UI.Xaml;
 
 namespace Mapsui.Samples.Wpf
 {
-    public partial class Window1
+    public partial class Window1 : Window
     {
         public Window1()
         {
@@ -26,28 +26,68 @@ namespace Mapsui.Samples.Wpf
 
             Logger.LogDelegate += LogMethod;
 
-            foreach (var sample in AllSamples())
-            {
-                SampleList.Children.Add(CreateRadioButton(sample));
-            }
+            IEnumerable<KeyValuePair<string, Func<Map>>> list = TestSamples();
 
+            FillComboBoxWithDemoSamples();
+
+            SampleSet.SelectionChanged += SampleSet_SelectionChanged;
+             
             var firstRadioButton = (RadioButton) SampleList.Children[0];
             firstRadioButton.IsChecked = true;
             firstRadioButton.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
         }
 
+        private void FillComboBoxWithDemoSamples()
+        {
+            SampleList.Children.Clear();
+            foreach (var sample in AllSamples().ToList())
+                SampleList.Children.Add(CreateRadioButton(sample));
+        }
+
+        private void FillComboBoxWithTestSamples()
+        {
+            SampleList.Children.Clear();
+            foreach (var sample in TestSamples().ToList())
+                SampleList.Children.Add(CreateRadioButton(sample));
+        }
+
+        private void SampleSet_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var selectedValue = ((sender as ComboBox).SelectedItem as ComboBoxItem).Content as string;
+
+            if (selectedValue == "Demo samples")
+            {
+                FillComboBoxWithDemoSamples();
+            }
+            else if (selectedValue == "Test samples")
+            {
+                FillComboBoxWithTestSamples();
+            }
+            else
+            {
+                throw new Exception("Unknown ComboBox item");
+            }
+        }
+
+        private Dictionary<string, Func<Map>> TestSamples()
+        {
+            var result = new Dictionary<string, Func<Map>>();
+            var i = 0;
+            foreach (var sample in Tests.Common.AllSamples.CreateList())
+            {
+                result[i.ToString()] = sample;
+                i++;
+            }
+            return result;
+        }
+
         public static Dictionary<string, Func<Map>> AllSamples()
-        { 
+        {
             var allSamples = Common.AllSamples.CreateList();
             // Append samples from Mapsui.Desktop
             allSamples["Shapefile"] = ShapefileSample.CreateMap;
             allSamples["MapTiler (tiles on disk)"] = MapTilerSample.CreateMap;
             allSamples["WMS"] = WmsSample.CreateMap;
-            allSamples.Clear();
-            foreach (var func in Tests.Common.AllSamples.CreateList())
-            {
-                allSamples.Add(func().Layers.First().Name, func);
-            }
             return allSamples;
         }
 
@@ -91,9 +131,7 @@ namespace Mapsui.Samples.Wpf
                 foreach (var feature in layer.Value)
                 {
                     foreach (var field in feature.Fields)
-                    {
                         result += field + ":" + feature[field] + ".";
-                    }
                     result += "\n";
                 }
                 result += "\n";
@@ -103,23 +141,20 @@ namespace Mapsui.Samples.Wpf
 
         private void MapErrorMessageChanged(object sender, EventArgs e)
         {
-            LogTextBox.Clear(); // Should be a list of messages
-            LogTextBox.AppendText(MapControl.ErrorMessage + "\n");
+            LogTextBox.Text = MapControl.ErrorMessage; // todo: keep history
         }
 
         private void RotationSliderChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            var percent = RotationSlider.Value / (RotationSlider.Maximum - RotationSlider.Minimum);
-            MapControl.Map.Viewport.Rotation = percent * 360;
+            var percent = RotationSlider.Value/(RotationSlider.Maximum - RotationSlider.Minimum);
+            MapControl.Map.Viewport.Rotation = percent*360;
             MapControl.Refresh();
         }
 
         private static void MapControlOnMouseInfoUp(object sender, MouseInfoEventArgs mouseInfoEventArgs)
         {
             if (mouseInfoEventArgs.Feature != null)
-            {
                 MessageBox.Show(mouseInfoEventArgs.Feature["Label"].ToString());
-            }
         }
     }
 }
