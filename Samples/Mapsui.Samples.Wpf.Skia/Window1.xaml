@@ -15,25 +15,30 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
-            <RowDefinition Height="40" />
+            <RowDefinition Height="30" />
         </Grid.RowDefinitions>
         <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="Gray">
-            <ui:MapControl x:Name="MainMapControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-                           Margin="10,0,-10.4,0.4" />
-            <Border BorderBrush="White" Opacity="0.75" Margin="10" Background="White" BorderThickness="6"
-                    CornerRadius="2" VerticalAlignment="Top" HorizontalAlignment="Left">
-                <StackPanel Name="SampleList" Width="Auto" />
+            <ui:MapControl x:Name="MapControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+            <Border BorderBrush="White" Opacity="0.65" Background="White" BorderThickness="6" MinWidth="140" MinHeight="30"
+                     VerticalAlignment="Top" HorizontalAlignment="Left">
+                <StackPanel>
+                    <ComboBox Name="SampleSet" Margin="0,0, 0, 10" >
+                        <ComboBoxItem  IsSelected="True">Demo samples</ComboBoxItem>
+                        <ComboBoxItem>Test samples</ComboBoxItem>
+                    </ComboBox>
+                    <StackPanel Name="SampleList" Width="Auto" />
+                </StackPanel>
             </Border>
-            <Border BorderBrush="White" Opacity="0.75" Margin="10" Background="White" BorderThickness="6"
-                    CornerRadius="2" VerticalAlignment="Top" HorizontalAlignment="Right">
+            <Border BorderBrush="White" Opacity="0.65" Background="White" BorderThickness="6"
+                    VerticalAlignment="Top" HorizontalAlignment="Right" MinWidth="140" MinHeight="30">
                 <skia:LayerList x:Name="LayerList" />
             </Border>
-            <Border BorderBrush="White" Opacity="0.75" Margin="10" Background="White" BorderThickness="6"
-                    CornerRadius="2" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+            <Border BorderBrush="White" Opacity="0.65" Background="White" BorderThickness="6"
+                   VerticalAlignment="Bottom" HorizontalAlignment="Right">
                 <Slider x:Name="RotationSlider" Width="205" ValueChanged="RotationSliderChanged" />
             </Border>
-            <Border x:Name="Statistics" BorderBrush="White" Opacity="0.75" Margin="10" Background="White"
-                    BorderThickness="6" CornerRadius="2" HorizontalAlignment="Center" VerticalAlignment="Top">
+            <Border x:Name="Statistics" BorderBrush="White" Opacity="0.65"  Background="White"
+                    BorderThickness="6" HorizontalAlignment="Center" VerticalAlignment="Top">
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Fps:  " />
@@ -44,7 +49,7 @@
         </Grid>
         <StackPanel Name="LogPanel" Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Stretch"
                     HorizontalAlignment="Stretch">
-            <TextBox Name="LogTextBox" AcceptsReturn="True" />
+            <TextBlock Name="LogTextBox"/>
         </StackPanel>
     </Grid>
 </Window>
