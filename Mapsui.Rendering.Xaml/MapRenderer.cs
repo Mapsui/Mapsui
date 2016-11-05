@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using Mapsui.Logging;
 using Mapsui.Utilities;
 using Polygon = Mapsui.Geometries.Polygon;
 #if !NETFX_CORE
@@ -155,8 +156,9 @@ namespace Mapsui.Rendering.Xaml
 
                 return canvas;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Logger.LogDelegate(LogLevel.Error, "Unexpected error in renderer", ex);
                 return canvas;
                 // If exception happens inside RenderFeature function after 
                 // at -least one child has been added to the canvas,

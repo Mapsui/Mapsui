@@ -49,7 +49,7 @@ namespace Mapsui.Samples.Common.Maps
         public static SymbolStyle CreateBitmapStyle(string embeddedResourcePath)
         {
             var bitmapId = GetBitmapIdForEmbeddedResource(embeddedResourcePath);
-            return new SymbolStyle {BitmapId = bitmapId};
+            return new SymbolStyle {BitmapId = bitmapId, SymbolScale = 0.75};
         }
 
         private static int GetBitmapIdForEmbeddedResource(string imagePath)
@@ -60,6 +60,15 @@ namespace Mapsui.Samples.Common.Maps
             return bitmapId;
         }
 
+        public static IEnumerable<IFeature> GenerateRandomFeatures(BoundingBox box, int count = 25, IStyle style = null)
+        {
+            var result = new List<Feature>();
+            var points = GenerateRandomPoints(box, count);
+            foreach (var point in points)
+                result.Add(new Feature {Geometry = point, Styles = new List<IStyle> {style}});
+            return result;
+        }
+
         public static IEnumerable<IGeometry> GenerateRandomPoints(BoundingBox box, int count = 25)
         {
             var result = new List<IGeometry>();
@@ -68,7 +77,7 @@ namespace Mapsui.Samples.Common.Maps
                     Random.NextDouble()*box.Height - (box.Height - box.Top)));
             return result;
         }
-        
+
         public static ILayer CreateRandomPointLayer(BoundingBox envelope, int count = 25, IStyle style = null)
         {
             return new Layer("Point Layer")
@@ -78,11 +87,31 @@ namespace Mapsui.Samples.Common.Maps
             };
         }
 
+        public static ILayer CreateRandomPointLayerWithBitmapSymbols(BoundingBox envelope, int count = 25)
+        {
+            return new Layer("Points with style on Layer")
+            {
+                DataSource = new MemoryProvider(GenerateRandomPoints(envelope, count)),
+                Style = CreateBitmapStyle("Mapsui.Samples.Common.Images.ic_place_black_24dp.png")
+            };
+        }
+
         public static ILayer CreateBitmapPointLayer(IStyle style = null)
         {
             return new Layer("bitmapPointLayer")
             {
                 DataSource = new MemoryProvider(CreateBitmapPoint()),
+                Style = null
+            };
+        }
+
+        public static ILayer CreatePointLayerWithBitmapSymbolOnFeature(BoundingBox envelope, int count = 25)
+        {
+            var style = CreateBitmapStyle("Mapsui.Samples.Common.Images.loc.png");
+
+            return new Layer("Points with style on feature")
+            {
+                DataSource = new MemoryProvider(GenerateRandomFeatures(envelope, count, style)),
                 Style = null
             };
         }

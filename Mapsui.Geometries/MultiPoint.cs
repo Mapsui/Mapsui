@@ -27,14 +27,14 @@ namespace Mapsui.Geometries
     /// </summary>
     public class MultiPoint : GeometryCollection
     {
-        private IList<Point> points;
+        private IList<Point> _points;
 
         /// <summary>
         /// Initializes a new MultiPoint collection
         /// </summary>
         public MultiPoint()
         {
-            points = new Collection<Point>();
+            _points = new Collection<Point>();
         }
 
         /// <summary>
@@ -42,9 +42,9 @@ namespace Mapsui.Geometries
         /// </summary>		
         public MultiPoint(IEnumerable<double[]> points)
         {
-            this.points = new Collection<Point>();
+            _points = new Collection<Point>();
             foreach (double[] point in points)
-                this.points.Add(new Point(point[0], point[1]));
+                _points.Add(new Point(point[0], point[1]));
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace Mapsui.Geometries
         /// <returns>Point</returns>
         public new Point this[int n]
         {
-            get { return points[n]; }
+            get { return _points[n]; }
         }
 
         /// <summary>
@@ -62,8 +62,8 @@ namespace Mapsui.Geometries
         /// </summary>
         public IList<Point> Points
         {
-            get { return points; }
-            set { points = value; }
+            get { return _points; }
+            set { _points = value; }
         }
 
         /// <summary>
@@ -71,7 +71,7 @@ namespace Mapsui.Geometries
         /// </summary>
         public override int NumGeometries
         {
-            get { return points.Count; }
+            get { return _points.Count; }
         }
 
         /// <summary>
@@ -89,7 +89,7 @@ namespace Mapsui.Geometries
         /// <returns>Geometry at index N</returns>
         public new Point Geometry(int n)
         {
-            return points[n];
+            return _points[n];
         }
 
         /// <summary>
@@ -98,7 +98,7 @@ namespace Mapsui.Geometries
         /// <returns>Returns 'true' if this Geometry is the empty geometry</returns>
         public override bool IsEmpty()
         {
-            return (points != null && points.Count == 0);
+            return (_points != null && _points.Count == 0);
         }
 
         /// <summary>
@@ -138,15 +138,15 @@ namespace Mapsui.Geometries
         /// <returns></returns>
         public override BoundingBox GetBoundingBox()
         {
-            if (points == null || points.Count == 0)
+            if (_points == null || _points.Count == 0)
                 return null;
-            var bbox = new BoundingBox(points[0], points[0]);
-            for (int i = 1; i < points.Count; i++)
+            var bbox = new BoundingBox(_points[0], _points[0]);
+            for (int i = 1; i < _points.Count; i++)
             {
-                bbox.Min.X = points[i].X < bbox.Min.X ? points[i].X : bbox.Min.X;
-                bbox.Min.Y = points[i].Y < bbox.Min.Y ? points[i].Y : bbox.Min.Y;
-                bbox.Max.X = points[i].X > bbox.Max.X ? points[i].X : bbox.Max.X;
-                bbox.Max.Y = points[i].Y > bbox.Max.Y ? points[i].Y : bbox.Max.Y;
+                bbox.Min.X = _points[i].X < bbox.Min.X ? _points[i].X : bbox.Min.X;
+                bbox.Min.Y = _points[i].Y < bbox.Min.Y ? _points[i].Y : bbox.Min.Y;
+                bbox.Max.X = _points[i].X > bbox.Max.X ? _points[i].X : bbox.Max.X;
+                bbox.Max.Y = _points[i].Y > bbox.Max.Y ? _points[i].Y : bbox.Max.Y;
             }
             return bbox;
         }
@@ -158,7 +158,7 @@ namespace Mapsui.Geometries
         public new MultiPoint Clone()
         {
             var geoms = new MultiPoint();
-            foreach (var point in points)
+            foreach (var point in _points)
                 geoms.Points.Add(point.Clone());
             return geoms;
         }
@@ -169,7 +169,7 @@ namespace Mapsui.Geometries
         /// <returns></returns>
         public override IEnumerator<Geometry> GetEnumerator()
         {
-            foreach (Point p in points)
+            foreach (Point p in _points)
                 yield return p;
         }
     }

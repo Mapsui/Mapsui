@@ -154,7 +154,7 @@ namespace Mapsui.Rendering.Xaml
                 //todo: render an outline around the line. 
             }
             path.Stroke = new XamlMedia.SolidColorBrush(style.Line.Color.ToXaml());
-            path.StrokeDashArray = style.Outline.PenStyle.ToXaml();
+            path.StrokeDashArray = style.Line.PenStyle.ToXaml();
             path.Tag = style.Line.Width; // see #linewidthhack
             path.IsHitTestVisible = false;
             return path;
