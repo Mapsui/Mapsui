@@ -63,43 +63,24 @@ namespace Mapsui.Samples.Wpf.Skia
 
         private void SampleSet_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var selectedValue = ((sender as ComboBox).SelectedItem as ComboBoxItem).Content as string;
+            var selectedValue = ((ComboBoxItem) ((ComboBox) sender).SelectedItem).Content.ToString();
 
             if (selectedValue == "Demo samples")
-            {
                 FillComboBoxWithDemoSamples();
-            }
             else if (selectedValue == "Test samples")
-            {
                 FillComboBoxWithTestSamples();
-            }
             else
-            {
                 throw new Exception("Unknown ComboBox item");
-            }
         }
 
-
-        public static Dictionary<string, Func<Map>> AllSamples()
-        { 
+        private static Dictionary<string, Func<Map>> AllSamples()
+        {
             var allSamples = Common.AllSamples.CreateList();
             // Append samples from Mapsui.Desktop
             allSamples["Shapefile"] = ShapefileSample.CreateMap;
             allSamples["MapTiler (tiles on disk)"] = MapTilerSample.CreateMap;
             allSamples["WMS"] = WmsSample.CreateMap;
             return allSamples;
-        }
-
-        private Dictionary<string, Func<Map>> InitializeSampleList1()
-        {
-            var result = new Dictionary<string, Func<Map>>();
-            var i = 0;
-            foreach (var sample in Mapsui.Tests.Common.AllSamples.CreateList())
-            {
-                result[i.ToString()] = sample;
-                i++;
-            }
-            return result;
         }
 
         private UIElement CreateRadioButton(KeyValuePair<string, Func<Map>> sample)
@@ -142,9 +123,7 @@ namespace Mapsui.Samples.Wpf.Skia
                 foreach (var feature in layer.Value)
                 {
                     foreach (var field in feature.Fields)
-                    {
                         result += field + ":" + feature[field] + ".";
-                    }
                     result += "\n";
                 }
                 result += "\n";
@@ -159,17 +138,15 @@ namespace Mapsui.Samples.Wpf.Skia
 
         private void RotationSliderChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            var percent = RotationSlider.Value / (RotationSlider.Maximum - RotationSlider.Minimum);
-            MapControl.Map.Viewport.Rotation = percent * 360;
+            var percent = RotationSlider.Value/(RotationSlider.Maximum - RotationSlider.Minimum);
+            MapControl.Map.Viewport.Rotation = percent*360;
             MapControl.Refresh();
         }
 
         private static void MapControlOnMouseInfoUp(object sender, MouseInfoEventArgs mouseInfoEventArgs)
         {
             if (mouseInfoEventArgs.Feature != null)
-            {
                 MessageBox.Show(mouseInfoEventArgs.Feature["Label"].ToString());
-            }
         }
     }
 }

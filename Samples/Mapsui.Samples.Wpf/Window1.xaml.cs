@@ -12,7 +12,7 @@ using Mapsui.UI.Xaml;
 
 namespace Mapsui.Samples.Wpf
 {
-    public partial class Window1 : Window
+    public partial class Window1
     {
         public Window1()
         {
@@ -25,9 +25,7 @@ namespace Mapsui.Samples.Wpf
             Fps.DataContext = MapControl.FpsCounter;
 
             Logger.LogDelegate += LogMethod;
-
-            IEnumerable<KeyValuePair<string, Func<Map>>> list = TestSamples();
-
+            
             FillComboBoxWithDemoSamples();
 
             SampleSet.SelectionChanged += SampleSet_SelectionChanged;
@@ -53,7 +51,7 @@ namespace Mapsui.Samples.Wpf
 
         private void SampleSet_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var selectedValue = ((sender as ComboBox).SelectedItem as ComboBoxItem).Content as string;
+            var selectedValue = ((ComboBoxItem)((ComboBox)sender).SelectedItem).Content.ToString();
 
             if (selectedValue == "Demo samples")
             {
@@ -81,7 +79,7 @@ namespace Mapsui.Samples.Wpf
             return result;
         }
 
-        public static Dictionary<string, Func<Map>> AllSamples()
+        private static Dictionary<string, Func<Map>> AllSamples()
         {
             var allSamples = Common.AllSamples.CreateList();
             // Append samples from Mapsui.Desktop
