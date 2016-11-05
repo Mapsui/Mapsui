@@ -97,7 +97,6 @@ namespace Mapsui.Samples.Wpf.Skia
                 MapControl.Map.Layers.Clear();
                 MapControl.Map = sample.Value();
                 LayerList.Initialize(MapControl.Map.Layers);
-                MapControl.ZoomToFullEnvelope();
                 MapControl.Refresh();
             };
             return radioButton;
