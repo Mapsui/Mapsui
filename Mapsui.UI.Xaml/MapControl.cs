@@ -26,11 +26,13 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Mapsui.Fetcher;
+using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Rendering;
 using Mapsui.Rendering.Xaml;
 using Mapsui.Utilities;
+using Point = System.Windows.Point;
 using XamlVector = System.Windows.Vector;
 
 namespace Mapsui.UI.Xaml
@@ -527,13 +529,12 @@ namespace Mapsui.UI.Xaml
         private void InitializeViewport()
         {
             if (ActualWidth.IsNanOrZero()) return;
-            if (_map?.Envelope == null) return;
-            if (double.IsNaN(_map.Envelope.Width)) return;
-            if (double.IsNaN(_map.Envelope.Height)) return;
-            if (_map.Envelope.GetCentroid() == null) return;
 
             if (double.IsNaN(Map.Viewport.Resolution)) // only when not set yet
             {
+                if (!_map.Envelope.IsInitialized()) return;
+                if (_map.Envelope.GetCentroid() == null) return;
+
                 if (Math.Abs(_map.Envelope.Width) > Constants.Epsilon)
                     Map.Viewport.Resolution = _map.Envelope.Width/ActualWidth;
                 else
@@ -542,7 +543,12 @@ namespace Mapsui.UI.Xaml
                     Map.Viewport.Resolution = Constants.DefaultResolution; 
             }
             if (double.IsNaN(Map.Viewport.Center.X) || double.IsNaN(Map.Viewport.Center.Y)) // only when not set yet
+            {
+                if (!_map.Envelope.IsInitialized()) return;
+                if (_map.Envelope.GetCentroid() == null) return;
+
                 Map.Viewport.Center = _map.Envelope.GetCentroid();
+            }
 
             Map.Viewport.Width = ActualWidth;
             Map.Viewport.Height = ActualHeight;
@@ -589,7 +595,8 @@ namespace Mapsui.UI.Xaml
             if (width <= 0) return;
             if (height <= 0) return;
 
-            ZoomHelper.ZoomToBoudingbox(beginPoint.X, beginPoint.Y, endPoint.X, endPoint.Y, ActualWidth, out x, out y, out resolution);
+            ZoomHelper.ZoomToBoudingbox(beginPoint.X, beginPoint.Y, endPoint.X, endPoint.Y, 
+                ActualWidth, ActualHeight, out x, out y, out resolution);
             resolution = ZoomHelper.ClipResolutionToExtremes(_map.Resolutions, resolution);
 
             Map.Viewport.Center = new Geometries.Point(x, y);

@@ -1,8 +1,5 @@
 ﻿using BruTile.Predefined;
-using Mapsui.Geometries;
 using Mapsui.Layers;
-using Mapsui.Providers;
-using Mapsui.Styles;
 
 namespace Mapsui.Samples.Common.Maps
 {
@@ -16,7 +13,9 @@ namespace Mapsui.Samples.Common.Maps
             map.Layers.Add(LineStringSample.CreateLineStringLayer(LineStringSample.CreateLineStringStyle()));
             map.Layers.Add(PointsSample.CreateRandomPointLayerWithBitmapSymbols(map.Envelope, 10));
             map.Layers.Add(PointsSample.CreatePointLayerWithBitmapSymbolOnFeature(map.Envelope, 10));
+
             map.Viewport.RenderResolutionMultiplier = 2;
+
             return map;
         }
     }

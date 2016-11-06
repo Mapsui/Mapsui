@@ -47,7 +47,7 @@ namespace Mapsui.Samples.Wpf
         private void FillComboBoxWithDemoSamples()
         {
             SampleList.Children.Clear();
-            foreach (var sample in AllSamples().ToList())
+            foreach (var sample in DemoSamples().ToList())
                 SampleList.Children.Add(CreateRadioButton(sample));
         }
 
@@ -88,13 +88,13 @@ namespace Mapsui.Samples.Wpf
             return result;
         }
 
-        private static Dictionary<string, Func<Map>> AllSamples()
+        private static Dictionary<string, Func<Map>> DemoSamples()
         {
             var allSamples = Common.AllSamples.CreateList();
             // Append samples from Mapsui.Desktop
-            allSamples["Shapefile"] = ShapefileSample.CreateMap;
-            allSamples["MapTiler (tiles on disk)"] = MapTilerSample.CreateMap;
-            allSamples["WMS"] = WmsSample.CreateMap;
+            allSamples["Shapefile (Desktop)"] = ShapefileSample.CreateMap;
+            allSamples["Tiles on disk (Desktop)"] = MapTilerSample.CreateMap;
+            allSamples["WMS (Desktop)"] = WmsSample.CreateMap;
             return allSamples;
         }
 

@@ -50,6 +50,7 @@
     <Compile Include="Maps\OsmSample.cs" />
     <Compile Include="Maps\InfoLayersSample.cs" />
     <Compile Include="Maps\RasterizingLayerSample.cs" />
+    <Compile Include="Maps\EmptyMapSample.cs" />
     <Compile Include="Maps\VariousSample.cs" />
     <Compile Include="Maps\StackedLabelsSample.cs" />
     <Compile Include="Maps\PolygonSample.cs" />

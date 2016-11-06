@@ -569,7 +569,8 @@ namespace Mapsui.Rendering.Skia.UI
             if (width <= 0) return;
             if (height <= 0) return;
 
-            ZoomHelper.ZoomToBoudingbox(beginPoint.X, beginPoint.Y, endPoint.X, endPoint.Y, ActualWidth, out x, out y, out resolution);
+            ZoomHelper.ZoomToBoudingbox(beginPoint.X, beginPoint.Y, endPoint.X, endPoint.Y, 
+                ActualWidth, ActualHeight, out x, out y, out resolution);
             resolution = ZoomHelper.ClipResolutionToExtremes(_map.Resolutions, resolution);
 
             Map.Viewport.Center = new Geometries.Point(x, y);

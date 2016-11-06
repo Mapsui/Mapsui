@@ -24,15 +24,13 @@ namespace Mapsui.Utilities
     {
         public static double ZoomIn(IList<double> resolutions, double resolution)
         {
-            if (resolutions.Count == 0) return resolution / 2.0;
-            
+            if (resolutions.Count == 0) return resolution/2.0;
+
             // smaller than smallest
             if (resolutions[resolutions.Count - 1] > resolution) return resolutions[resolutions.Count - 1];
 
             foreach (var resolutionOfLevel in resolutions)
-            {
                 if (resolutionOfLevel < resolution) return resolutionOfLevel;
-            }
             return resolutions[resolutions.Count - 1];
         }
 
@@ -51,22 +49,21 @@ namespace Mapsui.Utilities
 
         public static double ZoomOut(IList<double> resolutions, double resolution)
         {
-            if (resolutions.Count == 0) return resolution * 2.0;
+            if (resolutions.Count == 0) return resolution*2.0;
 
             //bigger than biggest
             if (resolutions[0] < resolution) return resolutions[0];
 
             for (var i = resolutions.Count - 1; i >= 0; i--)
-            {
                 if (resolutions[i] > resolution) return resolutions[i];
-            }
             return resolutions[0];
         }
 
-        public static double DetermineResolution(double worldWidth, double worldHeight, double screenWidth, double screenHeight, ScaleMethod scaleMethod = ScaleMethod.Fit)
+        public static double DetermineResolution(double worldWidth, double worldHeight, double screenWidth,
+            double screenHeight, ScaleMethod scaleMethod = ScaleMethod.Fit)
         {
-            double widthResolution = worldWidth / screenWidth;
-            double heightResolution = worldHeight/screenHeight;
+            var widthResolution = worldWidth/screenWidth;
+            var heightResolution = worldHeight/screenHeight;
 
             switch (scaleMethod)
             {
@@ -83,26 +80,44 @@ namespace Mapsui.Utilities
             }
         }
 
-        public static void ZoomToBoudingbox(double x1, double y1, double x2, double y2, double screenWidth, out double x, out double y, out double resolution)
+        public static void ZoomToBoudingbox(double x1, double y1, double x2, double y2,
+            double screenWidth, double screenHeight,
+            out double x, out double y, out double resolution,
+            ScaleMethod scaleMethod = ScaleMethod.Fit)
         {
             if (x1 > x2) Swap(ref x1, ref x2);
             if (y1 > y2) Swap(ref y1, ref y2);
 
-            x = (x2 + x1) / 2;
-            y = (y2 + y1) / 2;
-            resolution = (x2 - x1) / screenWidth;
+            x = (x2 + x1)/2;
+            y = (y2 + y1)/2;
+
+            if (scaleMethod == ScaleMethod.Fit)
+                resolution = Math.Max((x2 - x1) / screenWidth, (y2 - y1) / screenHeight);
+            else if (scaleMethod == ScaleMethod.Fill)
+                resolution = Math.Min((x2 - x1) / screenWidth, (y2 - y1) / screenHeight);
+            else if (scaleMethod == ScaleMethod.FitWidth)
+                resolution = (x2 - x1) / screenWidth;
+            else if (scaleMethod == ScaleMethod.FitHeight)
+                resolution = (y2 - y1) / screenHeight;
+            else
+                throw new Exception("FillMethod not found");
         }
 
-        public static void ZoomToBoudingbox(Viewport viewport, double x1, double y1, double x2, double y2, double screenWidth)
+        public static void ZoomToBoudingbox(Viewport viewport,
+            double x1, double y1, double x2, double y2,
+            double screenWidth, double screenHeight,
+            ScaleMethod scaleMethod = ScaleMethod.Fit)
         {
-            if (x1 > x2) Swap(ref x1, ref x2);
-            if (y1 > y2) Swap(ref y1, ref y2);
+            double centerX;
+            double centerY;
+            double resolution;
 
-            var x = (x2 + x1) / 2;
-            var y = (y2 + y1) / 2;
-            var resolution = (x2 - x1) / screenWidth;
-            viewport.Center.X = x;
-            viewport.Center.Y = y;
+            ZoomToBoudingbox(x1, y1, x2, y2, screenWidth, screenHeight,
+                out centerX, out centerY, out resolution, scaleMethod);
+
+            viewport.Center.X = centerX;
+            viewport.Center.Y = centerY;
+
             viewport.Resolution = resolution;
         }
 
@@ -116,9 +131,24 @@ namespace Mapsui.Utilities
 
     public enum ScaleMethod
     {
-        FitWidth,
-        FitHeight,
+        /// <summary>
+        ///     Fit within the view port of the screen
+        /// </summary>
+        Fit,
+
+        /// <summary>
+        ///     Fill up the entire view port of the screen
+        /// </summary>
         Fill,
-        Fit
+
+        /// <summary>
+        ///     Fill the width of the screen
+        /// </summary>
+        FitWidth,
+
+        /// <summary>
+        ///     Fill the height of the screen
+        /// </summary>
+        FitHeight
     }
 }

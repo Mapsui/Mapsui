@@ -26,7 +26,8 @@ namespace Mapsui.Samples.Common
                 ["Polygons"] = () => PolygonSample.CreateMap(),
                 ["LineStrings"] = () => LineStringSample.CreateMap(),
                 ["Points"] = () => PointsSample.CreateMap(),
-                ["Various Layers"] = () => VariousSample.CreateMap()
+                ["Various Layers"] = () => VariousSample.CreateMap(),
+                ["Empty Map"] = () => EmptyMapSample.CreateMap()
             };
         }
     }
