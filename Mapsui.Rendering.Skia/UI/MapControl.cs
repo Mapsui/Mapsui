@@ -14,15 +14,16 @@ using Mapsui.Providers;
 using Mapsui.UI.Xaml;
 using Mapsui.Utilities;
 using XamlVector = System.Windows.Vector;
+using Mapsui.Geometries;
 
 namespace Mapsui.Rendering.Skia.UI
 {
     public class MapControl : Grid
     {
         private Map _map;
-        private Point _previousMousePosition;
-        private Point _currentMousePosition;
-        private Point _downMousePosition;
+        private System.Windows.Point _previousMousePosition;
+        private System.Windows.Point _currentMousePosition;
+        private System.Windows.Point _downMousePosition;
         private readonly FpsCounter _fpsCounter = new FpsCounter();
         private readonly DoubleAnimation _zoomAnimation = new DoubleAnimation();
         private readonly Storyboard _zoomStoryBoard = new Storyboard();
@@ -257,7 +258,7 @@ namespace Mapsui.Rendering.Skia.UI
 
         private void ZoomMiddle()
         {
-            _currentMousePosition = new Point(ActualWidth / 2, ActualHeight / 2);
+            _currentMousePosition = new System.Windows.Point(ActualWidth / 2, ActualHeight / 2);
             StartZoomAnimation(Map.Viewport.Resolution, _toResolution);
         }
 
@@ -343,7 +344,7 @@ namespace Mapsui.Rendering.Skia.UI
 
         private void MapControlMouseLeave(object sender, MouseEventArgs e)
         {
-            _previousMousePosition = new Point();
+            _previousMousePosition = new System.Windows.Point();
             ReleaseMouseCapture();
         }
 
@@ -414,7 +415,7 @@ namespace Mapsui.Rendering.Skia.UI
             OnViewChanged(true);
             _mouseDown = false;
 
-            _previousMousePosition = new Point();
+            _previousMousePosition = new System.Windows.Point();
             ReleaseMouseCapture();
         }
 
@@ -451,7 +452,7 @@ namespace Mapsui.Rendering.Skia.UI
 
             if (_mouseDown)
             {
-                if (_previousMousePosition == default(Point))
+                if (_previousMousePosition == default(System.Windows.Point))
                 {
                     return; // It turns out that sometimes MouseMove+Pressed is called before MouseDown
                 }
@@ -465,7 +466,7 @@ namespace Mapsui.Rendering.Skia.UI
             }
         }
 
-        private void RaiseMouseInfoOverEvents(Point mousePosition)
+        private void RaiseMouseInfoOverEvents(System.Windows.Point mousePosition)
         {
             var mouseOverEventArgs = GetMouseInfoEventArgs(mousePosition, Map.HoverInfoLayers);
             if (_previousMouseOverEventArgs != null && mouseOverEventArgs != null) OnMouseInfoLeave();
@@ -474,7 +475,7 @@ namespace Mapsui.Rendering.Skia.UI
             
         }
 
-        private MouseInfoEventArgs GetMouseInfoEventArgs(Point mousePosition, IEnumerable<ILayer> layers)
+        private MouseInfoEventArgs GetMouseInfoEventArgs(System.Windows.Point mousePosition, IEnumerable<ILayer> layers)
         {
             var margin = 16 * Map.Viewport.Resolution;
             var point = Map.Viewport.ScreenToWorld(new Geometries.Point(mousePosition.X, mousePosition.Y));
@@ -512,13 +513,12 @@ namespace Mapsui.Rendering.Skia.UI
         private void InitializeViewport()
         {
             if (ActualWidth.IsNanOrZero()) return;
-            if (_map?.Envelope == null) return;
-            if (double.IsNaN(_map.Envelope.Width)) return;
-            if (double.IsNaN(_map.Envelope.Height)) return;
-            if (_map.Envelope.GetCentroid() == null) return;
 
             if (double.IsNaN(Map.Viewport.Resolution)) // only when not set yet
             {
+                if (!_map.Envelope.IsInitialized()) return;
+                if (_map.Envelope.GetCentroid() == null) return;
+
                 if (Math.Abs(_map.Envelope.Width) > Constants.Epsilon)
                     Map.Viewport.Resolution = _map.Envelope.Width / ActualWidth;
                 else
@@ -527,7 +527,12 @@ namespace Mapsui.Rendering.Skia.UI
                     Map.Viewport.Resolution = Constants.DefaultResolution;
             }
             if (double.IsNaN(Map.Viewport.Center.X) || double.IsNaN(Map.Viewport.Center.Y)) // only when not set yet
+            {
+                if (!_map.Envelope.IsInitialized()) return;
+                if (_map.Envelope.GetCentroid() == null) return;
+
                 Map.Viewport.Center = _map.Envelope.GetCentroid();
+            }
 
             Map.Viewport.Width = ActualWidth;
             Map.Viewport.Height = ActualHeight;
@@ -611,7 +616,7 @@ namespace Mapsui.Rendering.Skia.UI
             }
         }
 
-        private void DrawBbox(Point newPos)
+        private void DrawBbox(System.Windows.Point newPos)
         {
             if (!_mouseDown) return;
 
