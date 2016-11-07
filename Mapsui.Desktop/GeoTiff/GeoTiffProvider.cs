@@ -46,35 +46,21 @@ namespace Mapsui.Providers.GeoTiff
             MemoryStream data;
             if (!File.Exists(tiffPath))
             {
-                throw new ArgumentException(string.Format("Tiff file expected at {0}", tiffPath));
+                throw new ArgumentException($"Tiff file expected at {tiffPath}");
             }
 
             string worldPath = GetPathWithoutExtension(tiffPath) + WorldExtention;
             if (!File.Exists(worldPath))
             {
-                throw new ArgumentException(string.Format("World file expected at {0}", worldPath));
+                throw new ArgumentException($"World file expected at {worldPath}");
             }
 
-            TiffProperties tiffProperties = LoadTiff(tiffPath);
-            WorldProperties worldProperties = LoadWorld(worldPath);
+            var tiffProperties = LoadTiff(tiffPath);
+            var worldProperties = LoadWorld(worldPath);
             _extent = CalculateExtent(tiffProperties, worldProperties);
 
-            try
-            {
-                try
-                {
-                    data = ReadImageAsStream(tiffPath, noDataColors);
-                }
-                catch (OutOfMemoryException e)
-                {
-                    throw new OutOfMemoryException("Out of memory", e.InnerException);
-                }
-            }
-            catch (ExternalException e)
-            {
-                throw new ExternalException(e.Message, e.InnerException);
-            }
-
+            data = ReadImageAsStream(tiffPath, noDataColors);
+            
             _feature = new Feature { Geometry = new Raster(data, _extent) };
             _feature.Styles.Add(new VectorStyle());
         }

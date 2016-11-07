@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Net;
 using BruTile.Extensions;
+using Mapsui.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -81,8 +82,9 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
                 else
                     OnLegendReceived(_legendResponse);
             }
-            catch (WebException)
+            catch (WebException ex)
             {
+                Logger.Log(LogLevel.Warning, ex.Message, ex);
                 OnLegendFailed();
             }
         }

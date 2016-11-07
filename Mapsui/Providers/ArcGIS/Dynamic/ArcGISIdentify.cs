@@ -4,6 +4,7 @@ using System.Globalization;
 using System.IO;
 using System.Net;
 using BruTile.Extensions;
+using Mapsui.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -127,8 +128,9 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
                 _webRequest.EndGetResponse(result);
                 OnIdentifyFinished();
             }
-            catch (WebException)
+            catch (WebException ex)
             {
+                Logger.Log(LogLevel.Warning, ex.Message, ex);
                 OnIdentifyFailed();
             }
         }

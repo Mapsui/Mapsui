@@ -4,7 +4,7 @@ using SkiaSharp;
 
 namespace Mapsui.Rendering.Skia
 {
-    public class PlatformLabelBitmap
+    public static class PlatformLabelBitmap
     {
         public static SKBitmap Create(LabelStyle style, string text)
         {

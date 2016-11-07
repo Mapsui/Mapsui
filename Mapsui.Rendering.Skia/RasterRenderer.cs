@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using Mapsui.Geometries;
+using Mapsui.Logging;
 using Mapsui.Providers;
 using Mapsui.Styles;
 using SkiaSharp;
@@ -36,7 +36,7 @@ namespace Mapsui.Rendering.Skia
             }
             catch (Exception ex)
             {
-                Trace.WriteLine(ex.Message);
+                Logger.LogDelegate(LogLevel.Error, ex.Message, ex);
             }
         }
 

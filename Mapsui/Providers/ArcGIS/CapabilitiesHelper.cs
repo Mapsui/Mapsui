@@ -1,10 +1,10 @@
 using System;
-using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Runtime.Serialization.Json;
 using BruTile;
 using BruTile.Extensions;
+using Mapsui.Logging;
 using Mapsui.Providers.ArcGIS.Dynamic;
 using Mapsui.Providers.ArcGIS.Image;
 
@@ -153,7 +153,7 @@ namespace Mapsui.Providers.ArcGIS
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex);
+                Logger.Log(LogLevel.Error, ex.Message, ex);
                 OnCapabilitiesFailed(EventArgs.Empty);
             }
         }

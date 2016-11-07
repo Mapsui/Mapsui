@@ -24,6 +24,7 @@ using BruTile.Cache;
 using Mapsui.Geometries;
 using System.IO;
 using System.Threading.Tasks;
+using Mapsui.Logging;
 
 namespace Mapsui.Providers
 {
@@ -91,8 +92,9 @@ namespace Mapsui.Providers
             {
                 bitmap.Add(tileInfo.Index, tileProvider.GetTile(tileInfo));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Logger.Log(LogLevel.Error, ex.Message, ex);
                 // todo: report back through callback
             }
             finally

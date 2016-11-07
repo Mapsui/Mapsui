@@ -3,6 +3,7 @@ using BruTile.Tms;
 using System;
 using System.Net;
 using System.Threading;
+using Mapsui.Logging;
 
 namespace Mapsui.Layers
 {
@@ -61,7 +62,8 @@ namespace Mapsui.Layers
             }
             catch (Exception ex)
             {
-                if (errorCallback != null) errorCallback(ex);
+                Logger.Log(LogLevel.Error, ex.Message, ex);
+                errorCallback?.Invoke(ex);
                 // else: hopelesly lost with an error on a background thread and no option to report back.
             }
         }

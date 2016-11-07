@@ -7,6 +7,7 @@ using System.Net;
 using System.Text;
 using BruTile.Extensions;
 using Mapsui.Geometries;
+using Mapsui.Logging;
 using Mapsui.Rendering;
 
 namespace Mapsui.Providers.ArcGIS.Image
@@ -116,9 +117,9 @@ namespace Mapsui.Providers.ArcGIS.Image
                 width = Convert.ToInt32(viewport.Width);
                 height = Convert.ToInt32(viewport.Height);
             }
-            catch (OverflowException)
+            catch (OverflowException ex)
             {
-                Debug.WriteLine("Could not convert double to int (ExportMap size)");
+                Logger.Log(LogLevel.Error, "Could not convert double to int (ExportMap size)", ex);
                 return false;
             }
 
@@ -141,20 +142,22 @@ namespace Mapsui.Providers.ArcGIS.Image
                        var bytes = BruTile.Utilities.ReadFully(dataStream);
                        raster = new Raster(new MemoryStream(bytes), viewport.Extent);
                    }
-                   catch (Exception)
+                   catch (Exception ex)
                    {
-                       return false;
+                        Logger.Log(LogLevel.Error, ex.Message, ex);
+                        return false;
                    }                   
                }
                return true;
             }
-            catch (WebException webEx)
+            catch (WebException ex)
             {
+                Logger.Log(LogLevel.Warning, ex.Message, ex);
                 if (!ContinueOnError)
                     throw (new RenderException(
                         "There was a problem connecting to the ArcGISImage server",
-                        webEx));
-                Debug.WriteLine("There was a problem connecting to the WMS server: " + webEx.Message);
+                        ex));
+                Debug.WriteLine("There was a problem connecting to the WMS server: " + ex.Message);
             }
             catch (Exception ex)
             {

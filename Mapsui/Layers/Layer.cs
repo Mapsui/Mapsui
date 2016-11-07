@@ -22,6 +22,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Mapsui.Fetcher;
 using Mapsui.Geometries;
+using Mapsui.Logging;
 using Mapsui.Providers;
 using Mapsui.Utilities;
 
@@ -142,7 +143,7 @@ namespace Mapsui.Layers
             }
             catch (InvalidOperationException ex)
             {
-                Debug.WriteLine(ex);
+                Logger.Log(LogLevel.Error, ex.Message, ex);
             }
         }
 

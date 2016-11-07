@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using Mapsui.Layers;
+using Mapsui.Logging;
 using Mapsui.Providers.Wfs;
 using Mapsui.Providers.Wfs.Utilities;
 using Mapsui.Styles;
@@ -41,6 +42,7 @@ namespace Mapsui.Samples.Common.Desktop
             }
             catch (WebException ex)
             {
+                Logger.Log(LogLevel.Warning, ex.Message, ex);
                 if ((ex.Message.Contains("(502) Bad Gateway")) ||
                     (ex.Message.Contains("Unable to connect to the remote server")))
                 {
