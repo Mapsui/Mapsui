@@ -33,6 +33,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Shapes;
+using Mapsui.Utilities;
 
 namespace Mapsui.UI.Xaml
 {
@@ -67,24 +68,31 @@ namespace Mapsui.UI.Xaml
                 {
                     var temp = _map;
                     _map = null;
+                    temp.DataChanged -= MapDataChanged;
                     temp.PropertyChanged -= MapPropertyChanged;
                     temp.Dispose();
                 }
 
                 _map = value;
-                //all changes of all layers are returned through this event handler on the map
+
                 if (_map != null)
                 {
+                    _viewportInitialized = false;
                     _map.DataChanged += MapDataChanged;
                     _map.PropertyChanged += MapPropertyChanged;
                     _map.ViewChanged(true);
                 }
-                OnViewChanged();
+
                 RefreshGraphics();
             }
         }
 
-        void MapPropertyChanged(object sender, PropertyChangedEventArgs e)
+        async  void MapPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Low, () => MapPropertyChanged(e));
+        }
+
+        private void MapPropertyChanged(PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "Envelope")
             {
@@ -296,24 +304,7 @@ namespace Mapsui.UI.Xaml
                 }
             }
         }
-
-        private void InitializeViewport()
-        {
-            if (ActualWidth.IsNanOrZero()) return;
-            if (_map == null) return;
-            if (_map.Envelope == null) return;
-            if (_map.Envelope.Width.IsNanOrZero()) return;
-            if (_map.Envelope.Height.IsNanOrZero()) return;
-            if (_map.Envelope.GetCentroid() == null) return;
- 
-            if (double.IsNaN(Map.Viewport.Resolution)) 
-                Map.Viewport.Resolution = _map.Envelope.Width / ActualWidth;
-            if (double.IsNaN(Map.Viewport.Center.X) || double.IsNaN(Map.Viewport.Center.Y)) 
-                Map.Viewport.Center = _map.Envelope.GetCentroid();
-            
-            _viewportInitialized = true;
-        }
-
+        
         void CompositionTarget_Rendering(object sender, object e)
         {
             if (!_viewportInitialized) InitializeViewport();
@@ -411,6 +402,42 @@ namespace Mapsui.UI.Xaml
             _previousPosition = default(Point);
             Refresh();
         }
+
+        private void InitializeViewport()
+        {
+            if (ActualWidth.IsNanOrZero()) return;
+
+            if (double.IsNaN(Map.Viewport.Resolution)) // only when not set yet
+            {
+                if (!Mapsui.Geometries.BoundingBoxExtensions.IsInitialized(_map.Envelope)) return;
+                if (_map.Envelope.GetCentroid() == null) return;
+
+                if (Math.Abs(_map.Envelope.Width) > Constants.Epsilon)
+                    Map.Viewport.Resolution = _map.Envelope.Width / ActualWidth;
+                else
+                    // An envelope width of zero can happen when there is no data in the Maps' layers (yet).
+                    // It should be possible to start with an empty map.
+                    Map.Viewport.Resolution = Constants.DefaultResolution;
+            }
+            if (double.IsNaN(Map.Viewport.Center.X) || double.IsNaN(Map.Viewport.Center.Y)) // only when not set yet
+            {
+                if (!Mapsui.Geometries.BoundingBoxExtensions.IsInitialized(_map.Envelope)) return;
+                if (_map.Envelope.GetCentroid() == null) return;
+
+                Map.Viewport.Center = _map.Envelope.GetCentroid();
+            }
+
+            Map.Viewport.Width = ActualWidth;
+            Map.Viewport.Height = ActualHeight;
+
+            Map.Viewport.RenderResolutionMultiplier = 1.0;
+
+            _viewportInitialized = true;
+
+           
+
+            Map.ViewChanged(true);
+        }
     }
 
     public class ViewChangedEventArgs : EventArgs
@@ -434,4 +461,6 @@ namespace Mapsui.UI.Xaml
     {
         public IDictionary<string, IEnumerable<IFeature>> FeatureInfo { get; set; }
     }
+
+
 }

@@ -22,6 +22,7 @@ namespace Mapsui.Rendering.Xaml.Extensions
 
         public static WinColor ToXaml(this Color color)
         {
+            if (color == null) return WinColor.FromArgb(0, 255, 255, 255);
             return WinColor.FromArgb((byte)color.A, (byte)color.R, (byte)color.G, (byte)color.B);
         }
         

@@ -5,9 +5,37 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:xaml="using:Mapsui.UI.Xaml"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    d:DesignWidth="644.572" d:DesignHeight="333.913">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <xaml:MapControl Name="MainMapControl"></xaml:MapControl>
+        <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="Gray">
+            <xaml:MapControl x:Name="MapControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+            <Border BorderBrush="White" Opacity="0.65" Background="White" BorderThickness="6" MinWidth="140"
+                    MinHeight="30"
+                    VerticalAlignment="Top" HorizontalAlignment="Left">
+                <StackPanel>
+                    <ComboBox Name="SampleSet" Margin="0,0, 0, 10">
+                        <ComboBoxItem IsSelected="True">Demo samples</ComboBoxItem>
+                        <ComboBoxItem>Test samples</ComboBoxItem>
+                    </ComboBox>
+                    <StackPanel Name="SampleList" Width="Auto" />
+                </StackPanel>
+            </Border>
+            
+            <Border x:Name="Statistics" BorderBrush="White" Opacity="0.65" Background="White"
+                    BorderThickness="6" HorizontalAlignment="Center" VerticalAlignment="Top">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Fps:  " />
+                        <TextBlock x:Name="Fps" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="White" Opacity="0.65" Background="White" BorderThickness="6" 
+                    VerticalAlignment="Bottom" HorizontalAlignment="Center" MinWidth="40" MinHeight="30">
+                <TextBlock x:Name="MouseCoordinates" Text ="0, 0" />
+            </Border>
+        </Grid>
     </Grid>
 </Page>
