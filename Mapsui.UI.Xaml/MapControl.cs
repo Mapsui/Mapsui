@@ -159,8 +159,7 @@ namespace Mapsui.UI.Xaml
             RenderCanvas = new Canvas
                 {
                     VerticalAlignment = VerticalAlignment.Stretch,
-                    HorizontalAlignment = HorizontalAlignment.Stretch,
-                    Background = new SolidColorBrush(Colors.Transparent),
+                    HorizontalAlignment = HorizontalAlignment.Stretch
                 };
             Children.Add(RenderCanvas);
 
@@ -575,7 +574,7 @@ namespace Mapsui.UI.Xaml
 
             if ((Renderer != null) && (_map != null))
             {
-                Renderer.Render(RenderCanvas, Map.Viewport, _map.Layers);
+                Renderer.Render(RenderCanvas, Map.Viewport, _map.Layers, _map.BackColor);
                 if (DeveloperTools.DeveloperMode) _fpsCounter.FramePlusOne();
                 _invalid = false;
             }

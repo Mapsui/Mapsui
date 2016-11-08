@@ -7,7 +7,6 @@ using Mapsui.Geometries;
 using Mapsui.Logging;
 using Mapsui.Providers;
 using Mapsui.Rendering;
-using Mapsui.Styles;
 using Mapsui.Utilities;
 
 namespace Mapsui.Layers
@@ -100,7 +99,7 @@ namespace Mapsui.Layers
 
                     _rasterizer = _rasterizer ?? DefaultRendererFactory.Create();
 
-                    var bitmapStream = _rasterizer.RenderToBitmapStream(viewport, new[] {_layer}, Color.Transparent);
+                    var bitmapStream = _rasterizer.RenderToBitmapStream(viewport, new[] {_layer});
                     RemoveExistingFeatures();
                     _cache.Features = new Features {new Feature {Geometry = new Raster(bitmapStream, viewport.Extent)}};
 

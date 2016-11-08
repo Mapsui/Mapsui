@@ -2,6 +2,7 @@
 using Mapsui.Layers;
 using Mapsui.Projection;
 using Mapsui.Providers;
+using Mapsui.Styles;
 
 namespace Mapsui.Samples.Common.Maps
 {
@@ -12,7 +13,8 @@ namespace Mapsui.Samples.Common.Maps
             var map = new Map
             {
                 Transformation = new MinimalTransformation(),
-                CRS = "EPSG:3857"
+                CRS = "EPSG:3857",
+                BackColor = Color.Gray
             };
             map.Layers.Add(OsmSample.CreateLayer());
             map.Layers.Add(CreateWgs84PointLayer());

@@ -1,6 +1,5 @@
 ﻿using BruTile.Predefined;
 using Mapsui.Layers;
-using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Common.Maps
 {

@@ -1,5 +1,4 @@
 using System.IO;
-using System.Threading;
 using Mapsui.Providers;
 using Mapsui.Geometries;
 using Mapsui.Layers;
@@ -7,15 +6,19 @@ using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using Mapsui.Logging;
-using Mapsui.Utilities;
+using Mapsui.Rendering.Xaml.Extensions;
+using Color = Mapsui.Styles.Color;
 using Polygon = Mapsui.Geometries.Polygon;
 #if !NETFX_CORE
+using System.Threading;
+using Mapsui.Utilities;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Shapes;
+using XamlMedia = System.Windows.Media;
 #else
 using Windows.UI.Xaml.Controls;
 using Windows.Foundation;
@@ -44,12 +47,18 @@ namespace Mapsui.Rendering.Xaml
 #if !NETFX_CORE
             target.BeginInit();
 #endif
+            target.Background = background == null ? null : new XamlMedia.SolidColorBrush {Color = background.ToXaml()};
 
             target.Visibility = Visibility.Collapsed;
-           
+
             foreach (var child in target.Children)
+            {
                 (child as Canvas)?.Children.Clear();
+            }
+
             target.Children.Clear();
+
+            layers = layers.ToList();
 
             foreach (var layer in layers)
             {
