@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using Mapsui.Geometries;
+using Mapsui.Logging;
 using Mapsui.Styles;
 
 namespace Mapsui.Web.Wms
@@ -291,7 +292,9 @@ namespace Mapsui.Web.Wms
             }
             catch (Exception ex)
             {
-                throw new ApplicationException("Could not download capabilities", ex);
+                var message = "Could not download capabilities";
+                Logger.Log(LogLevel.Warning, message, ex);
+                throw new ApplicationException(message, ex);
             }
         }
 
