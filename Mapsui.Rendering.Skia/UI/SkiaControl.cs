@@ -36,7 +36,10 @@ namespace Mapsui.Rendering.Skia.UI
                 skcanvas.Scale((float)dpiX, (float)dpiY);
                 using (new SKAutoCanvasRestore(skcanvas, true))
                 {
-                    if (!double.IsNaN(Map.Viewport.Resolution)) _renderer.Render(skcanvas, Map.Viewport, Map.Layers);
+                    if (!double.IsNaN(Map.Viewport.Resolution))
+                    {
+                        _renderer.Render(skcanvas, Map.Viewport, Map.Layers, Map.BackColor);
+                    }
                 }
             }
             bitmap.AddDirtyRect(new Int32Rect(0, 0, width, height));

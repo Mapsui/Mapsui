@@ -62,20 +62,13 @@ namespace Mapsui.Rendering.Skia
             }
         }
 
-        private void Render(SKCanvas canvas, IViewport viewport, IEnumerable<ILayer> layers,
-            Color background)
+        private void Render(SKCanvas canvas, IViewport viewport, IEnumerable<ILayer> layers, Color background)
         {
             if (background != null)
             {
-                var c = new SKColor((byte) background.R, (byte) background.G, (byte) background.B, (byte) background.A);
-                canvas.Clear(c);
+                canvas.Clear(background.ToSkia());
             }
-            else
-            {
-               // canvas.Clear(Color.White.ToSkia());
-                canvas.Clear(new SKColor(255, 255, 255));
-            }
-
+  
             layers = layers.ToList();
 
             SetAllTextureInfosToUnused();
