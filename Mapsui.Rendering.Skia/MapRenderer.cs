@@ -37,11 +37,12 @@ namespace Mapsui.Rendering.Skia
             {
                 // todo: Use SKColorType.Rgba8888 when it does not crash anymore
                 using (
-                    var bitmap = new SKBitmap((int) viewport.Width, (int) viewport.Height, SKColorType.Rgb565,
-                        SKAlphaType.Premul))
+                    var bitmap = new SKBitmap((int) viewport.Width, (int) viewport.Height, SKColorType.Bgra8888,
+                        SKAlphaType.Unpremul))
                 {
                     using (var canvas = new SKCanvas(bitmap))
                     {
+                        
                         Render(canvas, viewport, layers, background);
                         using (var image = SKImage.FromBitmap(bitmap))
                         {
@@ -49,6 +50,7 @@ namespace Mapsui.Rendering.Skia
                             {
                                 var memoryStream = new MemoryStream();
                                 data.SaveTo(memoryStream);
+                                //System.IO.File.WriteAllBytes($"c:/temp/{layers.First().Name}.png", memoryStream.ToArray());
                                 return memoryStream;
                             }
                         }
