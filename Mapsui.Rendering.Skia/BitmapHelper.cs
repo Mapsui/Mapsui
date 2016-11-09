@@ -57,8 +57,8 @@ namespace Mapsui.Rendering.Skia
 
         public static void RenderTexture(SKCanvas canvas, SKBitmap bitmap, SKRect rect, float opacity = 1f)
         {
-            var color = new SKColor((byte) 255, (byte) 255, (byte) 255, (byte) (255*opacity));
-            var paint = new SKPaint() {Color = color};
+            var color = new SKColor(255, 255, 255, (byte) (255*opacity));
+            var paint = new SKPaint {Color = color};
             canvas.DrawBitmap(bitmap, rect, paint);
         }
     }
