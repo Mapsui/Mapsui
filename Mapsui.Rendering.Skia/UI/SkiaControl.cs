@@ -29,16 +29,16 @@ namespace Mapsui.Rendering.Skia.UI
 
             var bitmap = new WriteableBitmap(width, height, 96, 96, PixelFormats.Pbgra32, null);
             bitmap.Lock();
-            using (var surface = SKSurface.Create(width, height, SKImageInfo.PlatformColorType, SKAlphaType.Premul, 
+            using (var surface = SKSurface.Create(width, height, SKImageInfo.PlatformColorType, SKAlphaType.Unpremul, 
                 bitmap.BackBuffer, bitmap.BackBufferStride))
             {
-                var skcanvas = surface.Canvas;
-                skcanvas.Scale((float)dpiX, (float)dpiY);
-                using (new SKAutoCanvasRestore(skcanvas, true))
+                var canvas = surface.Canvas;
+                canvas.Scale((float)dpiX, (float)dpiY);
+                using (new SKAutoCanvasRestore(canvas, true))
                 {
                     if (!double.IsNaN(Map.Viewport.Resolution))
                     {
-                        _renderer.Render(skcanvas, Map.Viewport, Map.Layers, Map.BackColor);
+                        _renderer.Render(canvas, Map.Viewport, Map.Layers, Map.BackColor);
                     }
                 }
             }
