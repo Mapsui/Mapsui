@@ -17,6 +17,7 @@ using XamlVector = System.Windows.Vector;
 using Mapsui.Geometries;
 using SkiaSharp;
 using SkiaSharp.Views;
+using Point = Mapsui.Geometries.Point;
 
 namespace Mapsui.Rendering.Skia.UI
 {
@@ -58,6 +59,8 @@ namespace Mapsui.Rendering.Skia.UI
 
         private MouseInfoEventArgs _previousMouseOverEventArgs;
 
+        private Point _scale;
+        
         public Map Map
         {
             get
@@ -128,9 +131,9 @@ namespace Mapsui.Rendering.Skia.UI
 
         public bool ZoomLocked { get; set; }
         
-        private readonly SKElement skElement;
+        private readonly SKElement _skElement;
 
-        private MapRenderer renderer = new MapRenderer();
+        private readonly MapRenderer _renderer = new MapRenderer();
 
         // ReSharper disable once UnusedMember.Local // This registration is in order to triggers the call to OnResolutionChanged
         private static readonly DependencyProperty ResolutionProperty =
@@ -142,24 +145,38 @@ namespace Mapsui.Rendering.Skia.UI
         {
             if (double.IsNaN(Map.Viewport.Resolution)) return;
 
-            Map.Viewport.Width = width;
-            Map.Viewport.Height = height;
+            Map.Viewport.Width = ActualWidth;
+            Map.Viewport.Height = ActualHeight;
             
-            renderer.Render(canvas, Map.Viewport, Map.Layers, Map.BackColor);
+            _renderer.Render(canvas, Map.Viewport, Map.Layers, Map.BackColor);
+        }
+
+        private Point GetScale()
+        {
+            var presentationSource = PresentationSource.FromVisual(this);
+            if (presentationSource == null) throw new Exception("PresentationSource is null");
+            var compositionTarget = presentationSource.CompositionTarget;
+            if (compositionTarget == null) throw new Exception("CompositionTarget is null");
+
+            var m = compositionTarget.TransformToDevice;
+
+            var dpiX = m.M11;
+            var dpiY = m.M22;
+
+            return new Point(dpiX, dpiY);
         }
 
         public MapControl()
         {
-            skElement = new SKElement
+            _skElement = new SKElement
             {
                 VerticalAlignment = VerticalAlignment.Stretch,
                 HorizontalAlignment = HorizontalAlignment.Stretch
             };
    
-            Children.Add(skElement);
-            skElement.PaintSurface += SKElementOnPaintSurface;
-
-
+            Children.Add(_skElement);
+            _skElement.PaintSurface += SKElementOnPaintSurface;
+            
             //Children.Add(host);
             //AddGlControl(host);
 
@@ -205,6 +222,8 @@ namespace Mapsui.Rendering.Skia.UI
             if (!_viewportInitialized) return; // Stop if the line above failed. 
             if (!_invalid && !DeveloperTools.DeveloperMode) return; // In developermode always render so that fps can be counterd.
 
+            if (_scale == null) _scale = GetScale();
+            e.Surface.Canvas.Scale((float)_scale.X, (float)_scale.Y);
             OnPaintSurface(e.Surface.Canvas, e.Info.Width, e.Info.Height);
         }
 
@@ -582,7 +601,7 @@ namespace Mapsui.Rendering.Skia.UI
             if (!_viewportInitialized) return; // Stop if the line above failed. 
             if (!_invalid && !DeveloperTools.DeveloperMode) return; // In developermode always render so that fps can be counterd.
             
-            skElement.InvalidateVisual();
+            _skElement.InvalidateVisual();
         }
         
         private void DispatcherShutdownStarted(object sender, EventArgs e)
