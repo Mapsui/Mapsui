@@ -15,6 +15,8 @@ using Mapsui.UI.Xaml;
 using Mapsui.Utilities;
 using XamlVector = System.Windows.Vector;
 using Mapsui.Geometries;
+using SkiaSharp;
+using SkiaSharp.Views;
 
 namespace Mapsui.Rendering.Skia.UI
 {
@@ -82,7 +84,6 @@ namespace Mapsui.Rendering.Skia.UI
                     _map.DataChanged += MapDataChanged; 
                     _map.PropertyChanged += MapPropertyChanged;
                     _map.RefreshGraphics += MapRefreshGraphics;
-                    SkiaControl.Map = _map;
                     _map.ViewChanged(true);
                 }
 
@@ -126,8 +127,10 @@ namespace Mapsui.Rendering.Skia.UI
         public string ErrorMessage { get; private set; }
 
         public bool ZoomLocked { get; set; }
+        
+        private readonly SKElement skElement;
 
-        public SkiaControl SkiaControl { get; }
+        private MapRenderer renderer = new MapRenderer();
 
         // ReSharper disable once UnusedMember.Local // This registration is in order to triggers the call to OnResolutionChanged
         private static readonly DependencyProperty ResolutionProperty =
@@ -135,16 +138,31 @@ namespace Mapsui.Rendering.Skia.UI
             "Resolution", typeof(double), typeof(MapControl),
             new PropertyMetadata(OnResolutionChanged));
 
+        private void OnPaintSurface(SKCanvas canvas, int width, int height)
+        {
+            if (double.IsNaN(Map.Viewport.Resolution)) return;
+
+            Map.Viewport.Width = width;
+            Map.Viewport.Height = height;
+            
+            renderer.Render(canvas, Map.Viewport, Map.Layers, Map.BackColor);
+        }
+
         public MapControl()
         {
-            SkiaControl = new SkiaControl()
+            skElement = new SKElement
             {
                 VerticalAlignment = VerticalAlignment.Stretch,
                 HorizontalAlignment = HorizontalAlignment.Stretch
-
             };
+   
+            Children.Add(skElement);
+            skElement.PaintSurface += SKElementOnPaintSurface;
 
-            Children.Add(SkiaControl);
+
+            //Children.Add(host);
+            //AddGlControl(host);
+
             _bboxRect = new Rectangle
                 {
                     Fill = new SolidColorBrush(Colors.Red),
@@ -173,17 +191,24 @@ namespace Mapsui.Rendering.Skia.UI
 
             SizeChanged += MapControlSizeChanged;
             CompositionTarget.Rendering += CompositionTargetRendering;
-            
-            //Renderer = skiaRenderer;
-            
-
+   
             ManipulationDelta += OnManipulationDelta;
             ManipulationCompleted += OnManipulationCompleted;
             ManipulationInertiaStarting += OnManipulationInertiaStarting;
             Dispatcher.ShutdownStarted += DispatcherShutdownStarted;
             IsManipulationEnabled = true;
         }
-        
+
+        private void SKElementOnPaintSurface(object sender, SKPaintSurfaceEventArgs e)
+        {
+            if (!_viewportInitialized) InitializeViewport();
+            if (!_viewportInitialized) return; // Stop if the line above failed. 
+            if (!_invalid && !DeveloperTools.DeveloperMode) return; // In developermode always render so that fps can be counterd.
+
+            OnPaintSurface(e.Surface.Canvas, e.Info.Width, e.Info.Height);
+        }
+
+
         public virtual void OnViewChanged(bool userAction = false)
         {
             if (_map == null) return;
@@ -557,7 +582,7 @@ namespace Mapsui.Rendering.Skia.UI
             if (!_viewportInitialized) return; // Stop if the line above failed. 
             if (!_invalid && !DeveloperTools.DeveloperMode) return; // In developermode always render so that fps can be counterd.
             
-            SkiaControl.InvalidateVisual();
+            skElement.InvalidateVisual();
         }
         
         private void DispatcherShutdownStarted(object sender, EventArgs e)
