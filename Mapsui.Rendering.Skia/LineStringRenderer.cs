@@ -22,8 +22,9 @@ namespace Mapsui.Rendering.Skia
                 lineColor = vectorStyle.Line.Color;
             }
 
-            var points = ToSkia(lineString);
-            WorldToScreen(viewport, points);
+            var line = WorldToScreen(viewport, lineString);
+            var path = ToSkia(line);
+            
 
             using (var paint = new SKPaint())
             {
@@ -32,37 +33,36 @@ namespace Mapsui.Rendering.Skia
                 paint.Color = lineColor.ToSkia();
                 paint.StrokeJoin = SKStrokeJoin.Round;
 
-                // todo: figure out how to draw all segments at once to get round stroke joints
-                for (var i = 2; i < points.Length; i = i + 2)
-                    canvas.DrawLine(points[i - 2], points[i - 1], points[i], points[i + 1], paint);
+                canvas.DrawPath(path, paint);
             }
         }
 
-        private static float[] ToSkia(IList<Point> vertices)
+        private static SKPath ToSkia(List<Point> vertices)
         {
-            const int dimensions = 2; // x and y are both in one array
-            var numberOfCoordinates = vertices.Count*2 - 2;
-                // Times two because of duplicate begin en end. Minus two because the very begin and end need no duplicate
-            var points = new float[numberOfCoordinates*dimensions];
+            var points = new SKPath();
 
-            for (var i = 0; i < vertices.Count - 1; i++)
+            for (var i = 0; i < vertices.Count; i++)
             {
-                points[i*4 + 0] = (float) vertices[i].X;
-                points[i*4 + 1] = (float) vertices[i].Y;
-                points[i*4 + 2] = (float) vertices[i + 1].X;
-                points[i*4 + 3] = (float) vertices[i + 1].Y;
+                if (i == 0)
+                {
+                    points.MoveTo((float)vertices[i].X, (float)vertices[i].Y);
+                }
+                else
+                {
+                    points.LineTo((float)vertices[i].X, (float)vertices[i].Y);
+                }
             }
             return points;
         }
 
-        private static void WorldToScreen(IViewport viewport, float[] points)
+        private static List<Point> WorldToScreen(IViewport viewport, IEnumerable<Point> points)
         {
-            for (var i = 0; i < points.Length/2; i++)
+            var result = new List<Point>();
+            foreach (var point in points)
             {
-                var point = viewport.WorldToScreen(points[i*2], points[i*2 + 1]);
-                points[i*2] = (float) point.X;
-                points[i*2 + 1] = (float) point.Y;
+                result.Add(viewport.WorldToScreen(point.X, point.Y));
             }
+            return result;
         }
     }
 }
