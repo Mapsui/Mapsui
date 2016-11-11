@@ -23,7 +23,7 @@ namespace Mapsui.Rendering.Skia
             var labelStyle = style as LabelStyle;
             if (labelStyle != null)
             {
-                var text = labelStyle.GetLabelText(null);
+                var text = labelStyle.GetLabelText(feature);
                 LabelRenderer.Draw(canvas, labelStyle, text, (float) destination.X, (float) destination.Y);
             }
             else
