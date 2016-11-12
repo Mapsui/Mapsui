@@ -1,10 +1,9 @@
 using System;
-using System.Linq;
-using System.Collections.Generic;
-using Mapsui.Layers;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
-namespace Mapsui
+namespace Mapsui.Layers
 {
     public class LayerCollection : ICollection<ILayer>
     {

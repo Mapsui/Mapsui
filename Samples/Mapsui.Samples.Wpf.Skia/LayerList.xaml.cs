@@ -1,4 +1,5 @@
 ﻿using System.Windows.Controls;
+using Mapsui.Layers;
 
 namespace Mapsui.Samples.Wpf.Skia
 {

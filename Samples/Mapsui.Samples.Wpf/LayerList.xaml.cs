@@ -1,5 +1,5 @@
 ﻿using System.Windows.Controls;
-using Mapsui;
+using Mapsui.Layers;
 
 namespace Mapsui.Samples.Wpf
 {
