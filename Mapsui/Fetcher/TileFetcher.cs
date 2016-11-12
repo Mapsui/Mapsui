@@ -66,7 +66,7 @@ namespace Mapsui.Fetcher
         public bool Busy
         {
             get { return _busy; }
-            set
+            private set
             {
                 if (_busy == value) return; // prevent notify              
                 _busy = value;
@@ -265,7 +265,7 @@ namespace Mapsui.Fetcher
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged(string propertyName)
+        private void OnPropertyChanged(string propertyName)
         {
             var handler = PropertyChanged;
             handler?.Invoke(this, new PropertyChangedEventArgs(propertyName));
