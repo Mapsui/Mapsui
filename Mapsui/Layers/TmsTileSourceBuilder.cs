@@ -7,7 +7,7 @@ using Mapsui.Logging;
 
 namespace Mapsui.Layers
 {
-    public class TmsTileSourceBuilder
+    public static class TmsTileSourceBuilder
     {
         public static ITileSource Build(
             string urlToTileMapXml, 

@@ -93,7 +93,6 @@
     <Compile Include="Layers\LabelLayer.cs" />
     <Compile Include="Layers\Layer.cs" />
     <Compile Include="Layers\LayerCollection.cs" />
-    <Compile Include="Layers\LayerGroup.cs" />
     <Compile Include="Layers\RasterizingLayer.cs" />
     <Compile Include="Layers\TileLayer.cs" />
     <Compile Include="NotifyingViewport.cs" />
@@ -115,8 +114,6 @@
     <Compile Include="Providers\MemoryProvider.cs" />
     <Compile Include="Providers\TileProvider.cs" />
     <Compile Include="Rendering\IRenderer.cs" />
-    <Compile Include="Rendering\Label.cs" />
-    <Compile Include="Rendering\LabelCollisionDetection.cs" />
     <Compile Include="Rendering\RenderExceptions.cs" />
     <Compile Include="Styles\Bitmap.cs" />
     <Compile Include="Styles\BitmapRegistry.cs" />

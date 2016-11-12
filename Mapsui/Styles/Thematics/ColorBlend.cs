@@ -119,9 +119,8 @@ namespace Mapsui.Styles.Thematics
         {
             get
             {
-                var cb = new ColorBlend();
-                cb.Positions = new double[7];
-                int i = 0;
+                var cb = new ColorBlend {Positions = new double[7]};
+                var i = 0;
                 for (double f = 0; f <= 1; f += 1.0f / 6)
                     cb.Positions[i++] = f;
                 cb.Colors = new[] { 

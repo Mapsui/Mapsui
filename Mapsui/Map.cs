@@ -91,7 +91,7 @@ namespace Mapsui
 
         public IList<ILayer> InfoLayers { get; set; }
 
-        public IList<ILayer> HoverInfoLayers { get; set; }
+        public IList<ILayer> HoverInfoLayers { get; set; } // todo: add to info layers sample with separate layer
 
         public Viewport Viewport { get; }
 

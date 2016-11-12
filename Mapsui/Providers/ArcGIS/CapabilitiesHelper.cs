@@ -217,7 +217,7 @@ namespace Mapsui.Providers.ArcGIS
             schema.Name = "ESRI";
             schema.Format = arcGisDynamicCapabilities.tileInfo.format;            
             schema.YAxis = YAxis.OSM;
-            schema.Srs = string.Format("EPSG:{0}", arcGisDynamicCapabilities.tileInfo.spatialReference.wkid);
+            schema.Srs = $"EPSG:{arcGisDynamicCapabilities.tileInfo.spatialReference.wkid}";
 
             return schema;
         }

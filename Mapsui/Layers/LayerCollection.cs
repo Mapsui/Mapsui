@@ -20,7 +20,7 @@ namespace Mapsui
 
         public int Count
         {
-            get { return _layers.Count(); }
+            get { return _layers.Count; }
         }
 
         public bool IsReadOnly { get { return _layers.IsReadOnly;  } }

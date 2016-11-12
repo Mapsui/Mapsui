@@ -1,3 +1,5 @@
+// ReSharper disable CheckNamespace
+
 namespace Mapsui.Geometries
 {
     public static class BoundingBoxExtensions
@@ -9,9 +11,10 @@ namespace Mapsui.Geometries
 
         public static bool IsInitialized(this BoundingBox box)
         {
-            if (box == null) return false; // 'this' can be null: http://stackoverflow.com/questions/847209/in-c-what-happens-when-you-call-an-extension-method-on-a-null-object
+            if (box == null) return false;
             if (double.IsNaN(box.Width)) return false;
             if (double.IsNaN(box.Height)) return false;
+
             return true;
         }
     }

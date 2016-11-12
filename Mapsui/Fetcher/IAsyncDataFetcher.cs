@@ -24,13 +24,18 @@ namespace Mapsui.Fetcher
     public interface IAsyncDataFetcher
     {
         void AbortFetch();
+
         /// <summary>
-        /// Indicates that there has been a change in the view of the map
+        ///     Indicates that there has been a change in the view of the map
         /// </summary>
-        /// <param name="majorChange">If true an implementation should always refresh it's data. If false (minorChange) the implemenatation could ignore it.</param>
+        /// <param name="majorChange">
+        ///     If true an implementation should always refresh it's data. If false (minorChange) the
+        ///     implemenatation could ignore it.
+        /// </param>
         /// <param name="extent">The new extent of the visisble map</param>
         /// <param name="resolution">The new resolution of the visible map</param>
         void ViewChanged(bool majorChange, BoundingBox extent, double resolution);
+
         event DataChangedEventHandler DataChanged;
         void ClearCache();
     }
@@ -39,11 +44,15 @@ namespace Mapsui.Fetcher
 
     public class DataChangedEventArgs : EventArgs
     {
-        public DataChangedEventArgs() : this(null, false, null) {}
+        public DataChangedEventArgs() : this(null, false, null)
+        {
+        }
 
         public DataChangedEventArgs(Exception error, bool cancelled, TileInfo tileInfo)
-            : this(error, cancelled, tileInfo, string.Empty) {}
-        
+            : this(error, cancelled, tileInfo, string.Empty)
+        {
+        }
+
         public DataChangedEventArgs(Exception error, bool cancelled, TileInfo tileInfo, string layerName)
         {
             Error = error;
@@ -55,6 +64,6 @@ namespace Mapsui.Fetcher
         public Exception Error { get; private set; }
         public bool Cancelled { get; private set; }
         public TileInfo TileInfo { get; private set; }
-        public string LayerName { get; set; }
+        public string LayerName { get; private set; }
     }
 }

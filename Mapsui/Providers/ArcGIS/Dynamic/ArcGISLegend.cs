@@ -59,7 +59,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
         private HttpWebRequest CreateRequest(string serviceUrl, ICredentials credentials)
         {
             var trailing = serviceUrl.Contains("?") ? "&" : "?";
-            var requestUrl = string.Format("{0}/legend{1}f=json", serviceUrl, trailing);
+            var requestUrl = $"{serviceUrl}/legend{trailing}f=json";
             _webRequest = (HttpWebRequest)WebRequest.Create(requestUrl);
             if (credentials == null)
                 _webRequest.UseDefaultCredentials = true;
