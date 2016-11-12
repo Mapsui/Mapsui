@@ -21,12 +21,17 @@ namespace Mapsui.Rendering.Skia
                 var rect = new SKRect();
                 paint.MeasureText(text, ref rect);
 
-                var targetBitmap = new SKBitmap((int) Math.Ceiling(rect.Width), (int) Math.Ceiling(rect.Height));
+                var padding = 4;
+                rect = SKRect.Inflate(rect, padding, padding);
 
-                using (var targetGraphics = new SKCanvas(targetBitmap))
+                var targetBitmap = new SKBitmap((int) Math.Ceiling(rect.Width), (int) Math.Ceiling(rect.Height));
+                
+
+
+                using (var target = new SKCanvas(targetBitmap))
                 {
-                    targetGraphics.Clear((style.BackColor == null) ? new SKColor() : style.BackColor.Color.ToSkia());
-                    targetGraphics.DrawText(text, -rect.Left, -rect.Top, paint);
+                    target.Clear((style.BackColor == null) ? new SKColor() : style.BackColor.Color.ToSkia());
+                    target.DrawText(text, -rect.Left, -rect.Top, paint);
                     return targetBitmap;
                 }
             }
