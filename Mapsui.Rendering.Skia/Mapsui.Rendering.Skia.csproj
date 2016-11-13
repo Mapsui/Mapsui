@@ -90,7 +90,7 @@
     <Compile Include="PolygonRenderer.cs" />
     <Compile Include="SKBitmapInfo.cs" />
     <Compile Include="UI\Extensions.cs" />
-    <Compile Include="UI\SkiaExtensions.cs" />
+    <Compile Include="ExtensionMethods\SkiaExtensions.cs" />
     <Compile Include="UI\FpsCounter.cs" />
     <Compile Include="UI\MapControl.cs" />
     <Compile Include="PointRenderer.cs" />
