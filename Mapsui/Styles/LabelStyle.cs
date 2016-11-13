@@ -103,7 +103,7 @@ namespace Mapsui.Styles
         /// <summary>
         /// The background color of the label. Set to transparent brush or null if background isn't needed
         /// </summary>
-        public Brush BackColor { get; set; }
+        public Brush BackColor { get; set; } // todo: rename
 
         /// <summary>
         /// Creates a halo around the text
