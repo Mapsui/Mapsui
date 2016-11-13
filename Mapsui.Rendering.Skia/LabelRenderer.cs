@@ -7,23 +7,23 @@ namespace Mapsui.Rendering.Skia
 {
     public static class LabelRenderer
     {
-        private static readonly IDictionary<string, SKBitmapInfo> LabelBitmapCache = new Dictionary<string, SKBitmapInfo>();
+        private static readonly IDictionary<string, SKBitmapInfo> LabelBitmapCache =
+            new Dictionary<string, SKBitmapInfo>();
 
         public static void Draw(SKCanvas canvas, LabelStyle style, IFeature feature, float x, float y)
         {
             var text = style.GetLabelText(feature);
 
-            var key = text + "_" + style.Font.FontFamily + "_" + style.Font.Size + "_" + (float)style.Font.Size + "_" + style.BackColor + "_" + style.ForeColor;
+            var key = text + "_" + style.Font.FontFamily + "_" + style.Font.Size + "_" + (float) style.Font.Size + "_" +
+                      style.BackColor + "_" + style.ForeColor;
 
             if (!LabelBitmapCache.Keys.Contains(key))
-            {
-                LabelBitmapCache[key] = new SKBitmapInfo { Bitmap = PlatformLabelBitmap.Create(style, text) };
-            }
+                LabelBitmapCache[key] = new SKBitmapInfo {Bitmap = PlatformLabelBitmap.Create(style, text)};
 
             var info = LabelBitmapCache[key];
 
-            BitmapHelper.RenderTexture(canvas, info.Bitmap, x, y, 
-                offsetX:(float)style.Offset.X, offsetY:(float)-style.Offset.Y,
+            BitmapHelper.RenderTexture(canvas, info.Bitmap, x, y,
+                offsetX: (float) style.Offset.X, offsetY: (float) -style.Offset.Y,
                 horizontalAlignment: style.HorizontalAlignment, verticalAlignment: style.VerticalAlignment);
         }
     }
