@@ -17,22 +17,32 @@ namespace Mapsui.Rendering.Skia
                 paint.IsStroke = false;
                 paint.FakeBoldText = true;
                 paint.IsEmbeddedBitmapText = true;
-
+                
                 var rect = new SKRect();
                 paint.MeasureText(text, ref rect);
 
-                var padding = 4;
+                var padding = 4; // todo get this from LabelStyle
                 rect = SKRect.Inflate(rect, padding, padding);
 
-                var targetBitmap = new SKBitmap((int) Math.Ceiling(rect.Width), (int) Math.Ceiling(rect.Height));
-                
+                var bitmap = new SKBitmap((int) Math.Ceiling(rect.Width), (int) Math.Ceiling(rect.Height));
 
-
-                using (var target = new SKCanvas(targetBitmap))
+                using (var target = new SKCanvas(bitmap))
                 {
-                    target.Clear((style.BackColor == null) ? new SKColor() : style.BackColor.Color.ToSkia());
+                    target.Clear();
+                    if (style.BackColor != null)
+                    {
+                        var color = style.BackColor?.Background?.ToSkia();
+                        if (color.HasValue)
+                        {
+                            var rounding = 5;
+                            using (var backgroundPaint = new SKPaint {Color = color.Value})
+                            {
+                                target.DrawRoundRect(new SKRect(0, 0, rect.Width, rect.Height), rounding, rounding, backgroundPaint);
+                            }
+                        }
+                    }
                     target.DrawText(text, -rect.Left, -rect.Top, paint);
-                    return targetBitmap;
+                    return bitmap;
                 }
             }
         }
