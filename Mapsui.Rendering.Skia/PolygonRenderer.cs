@@ -20,7 +20,7 @@ namespace Mapsui.Rendering.Skia
             {
                 lineWidth = (float) vectorStyle.Outline.Width;
                 lineColor = vectorStyle.Outline.Color;
-                fillColor = vectorStyle.Fill.Color;
+                fillColor = vectorStyle.Fill?.Color;
             }
 
             using (var path = ToSkia(viewport, polygon))

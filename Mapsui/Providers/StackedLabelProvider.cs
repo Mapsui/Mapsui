@@ -14,18 +14,25 @@ namespace Mapsui.Providers
         private readonly IProvider _provider;
         private readonly LabelStyle _labelStyle;
 
-        public StackedLabelProvider(IProvider provider, LabelStyle labelStyle)
+        public StackedLabelProvider(IProvider provider, LabelStyle labelStyle, Pen rectangleLine = null,
+            Brush rectangleFill = null)
         {
             _provider = provider;
             _labelStyle = labelStyle;
+            _rectangleLine = rectangleLine ?? new Pen(Color.Gray);
+            _rectangleFill = rectangleFill;
         }
         
         public string CRS { get; set; }
 
+        private readonly Brush _rectangleFill;
+
+        private readonly Pen _rectangleLine;
+
         public IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
         {
             var features = _provider.GetFeaturesInView(box, resolution);
-            return GetFeaturesInView(resolution, _labelStyle, features);
+            return GetFeaturesInView(resolution, _labelStyle, features, _rectangleLine, _rectangleFill);
         }
 
         public BoundingBox GetExtents()
@@ -34,8 +41,9 @@ namespace Mapsui.Providers
         }
 
         private static List<Feature> GetFeaturesInView(double resolution, LabelStyle labelStyle,
-            IEnumerable<IFeature> features)
+            IEnumerable<IFeature> features, Pen line, Brush fill)
         {
+
             var margin = resolution*50;
             var clusters = new List<Cluster>();
             // todo: repeat until there are no more merges
@@ -47,7 +55,7 @@ namespace Mapsui.Providers
 
             foreach (var cluster in clusters)
             {
-                if (cluster.Features.Count > 1) results.Add(CreateBoxFeature(resolution, cluster));
+                if (cluster.Features.Count > 1) results.Add(CreateBoxFeature(resolution, cluster, line, fill));
 
                 var offsetY = double.NaN;
 
@@ -103,7 +111,8 @@ namespace Mapsui.Providers
             };
         }
 
-        private static Feature CreateBoxFeature(double resolution, Cluster cluster)
+        private static Feature CreateBoxFeature(double resolution, Cluster cluster, Pen line, 
+            Brush fill)
         {
             return new Feature
             {
@@ -112,8 +121,8 @@ namespace Mapsui.Providers
                 {
                     new VectorStyle
                     {
-                        Outline = new Pen {Width = 2, Color = Color.Orange},
-                        Fill = new Brush {Color = null}
+                        Outline = line,
+                        Fill = fill
                     }
                 }
             };

@@ -28,7 +28,7 @@ namespace Mapsui.Samples.Common.Maps
                     {
                         Color = new Color(240, 240, 240, 128)
                     },
-                    ForeColor = new Color(25, 25, 25),
+                    ForeColor = new Color(95, 95, 95),
                     LabelColumn = labelColumn
                 }),
                 Style = null
@@ -40,7 +40,12 @@ namespace Mapsui.Samples.Common.Maps
             return new Layer("Point Layer")
             {
                 DataSource = dataSource,
-                Style = new SymbolStyle {SymbolScale = 0.75, Fill = new Brush(Color.Blue)}
+                Style = new SymbolStyle
+                {
+                    SymbolScale = 0.85,
+                    Fill = new Brush(new Color(190, 100, 130, 210)),
+                    Outline = new Pen(new Color(140, 50, 100, 210), 1)
+                }
             };
         }
     }

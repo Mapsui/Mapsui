@@ -50,6 +50,7 @@ namespace Mapsui.Rendering.Xaml
         public static XamlBrush MapsuiBrushToXaml(Styles.Brush brush, BrushCache brushCache = null)
         {
 #if !NETFX_CORE
+            if (brush == null) return null;
             switch (brush.FillStyle)
             {
                 case FillStyle.Cross:
