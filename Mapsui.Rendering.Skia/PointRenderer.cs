@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Mapsui.Geometries;
 using Mapsui.Providers;
 using Mapsui.Styles;
@@ -20,36 +21,55 @@ namespace Mapsui.Rendering.Skia
             var point = geometry as Point;
             var destination = viewport.WorldToScreen(point);
 
-            var labelStyle = style as LabelStyle;
-            if (labelStyle != null)
+            if (style is LabelStyle)              // case 1) LabelStyle
             {
-                var text = labelStyle.GetLabelText(feature);
-                LabelRenderer.Draw(canvas, labelStyle, text, (float) destination.X, (float) destination.Y);
+                LabelRenderer.Draw(canvas, (LabelStyle) style, feature, (float) destination.X, (float) destination.Y);
+            }
+            else if (style is SymbolStyle)
+            {
+                var symbolStyle = (SymbolStyle)style;
+
+                if ( symbolStyle.BitmapId >= 0)   // case 2) Bitmap Style
+                {
+                    DrawPointWithBitmapStyle(canvas, symbolStyle, destination, symbolBitmapCache);
+                }
+                else                              // case 3) SymbolStyle without bitmap
+                {
+                    DrawPointWithSymbolStyle(canvas, symbolStyle, destination, symbolStyle.SymbolType);
+                }
+            }
+            else if (style is VectorStyle)        // case 4) VectorStyle
+            {
+                DrawPointWithVectorStyle(canvas, (VectorStyle) style, destination);
             }
             else
             {
-                var symbolStyle = style as SymbolStyle;
-
-                if (symbolStyle != null)
-                {
-                    if (symbolStyle.BitmapId >= 0)
-                        DrawPointWithSymbolStyle(canvas, symbolStyle, destination, symbolBitmapCache);
-                    else
-                        DrawPointWithVectorStyle(canvas, (VectorStyle) style, destination, symbolStyle.SymbolType);
-                }
-                else if (style is VectorStyle)
-                    DrawPointWithVectorStyle(canvas, (VectorStyle) style, destination);
+                throw new Exception($"Style of type '{style.GetType()}' is not supported for points");
             }
+        }
+
+        private static void DrawPointWithSymbolStyle(SKCanvas canvas, SymbolStyle style,
+            Point destination, SymbolType symbolType = SymbolType.Ellipse)
+        {
+            canvas.Save();
+            canvas.Translate((float)destination.X,(float)destination.Y);
+            canvas.Scale((float)style.SymbolScale, (float)style.SymbolScale);
+            DrawPointWithVectorStyle(canvas, style, symbolType);
+            canvas.Restore();
         }
 
         private static void DrawPointWithVectorStyle(SKCanvas canvas, VectorStyle vectorStyle,
             Point destination, SymbolType symbolType = SymbolType.Ellipse)
         {
             canvas.Save();
+            canvas.Translate((float)destination.X, (float)destination.Y);
+            DrawPointWithVectorStyle(canvas, vectorStyle, symbolType);
+            canvas.Restore();
+        }
 
-            canvas.Translate((float) destination.X, (float) destination.Y);
-
-
+        private static void DrawPointWithVectorStyle(SKCanvas canvas, VectorStyle vectorStyle,
+            SymbolType symbolType = SymbolType.Ellipse)
+        {
             var fillPaint = new SKPaint
             {
                 Color = vectorStyle.Fill.Color.ToSkia(),
@@ -75,8 +95,6 @@ namespace Mapsui.Rendering.Skia
 
                 DrawCircle(canvas, 0, 0, HalfWidth, fillPaint, linePaint);
             }
-
-            canvas.Restore();
         }
         
         private static void DrawCircle(SKCanvas canvas, float x, float y, float radius, SKPaint fillColor,
@@ -92,7 +110,7 @@ namespace Mapsui.Rendering.Skia
             if ((lineColor != null) && lineColor.Color.Alpha != 0) canvas.DrawRect(rect, lineColor);
         }
 
-        private static void DrawPointWithSymbolStyle(SKCanvas canvas, SymbolStyle symbolStyle, Point destination,
+        private static void DrawPointWithBitmapStyle(SKCanvas canvas, SymbolStyle symbolStyle, Point destination,
             IDictionary<int, SKBitmapInfo> symbolBitmapCache)
         {
             var stream = BitmapRegistry.Instance.Get(symbolStyle.BitmapId);

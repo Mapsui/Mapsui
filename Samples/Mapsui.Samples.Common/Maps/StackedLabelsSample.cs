@@ -26,7 +26,6 @@ namespace Mapsui.Samples.Common.Maps
                 {
                     BackColor = new Brush
                     {
-                        Background = new Color(240, 240, 240, 128),
                         Color = new Color(240, 240, 240, 128)
                     },
                     ForeColor = new Color(25, 25, 25),
@@ -41,7 +40,7 @@ namespace Mapsui.Samples.Common.Maps
             return new Layer("Point Layer")
             {
                 DataSource = dataSource,
-                Style = new SymbolStyle {SymbolScale = 1, Fill = new Brush(Color.Blue)}
+                Style = new SymbolStyle {SymbolScale = 0.75, Fill = new Brush(Color.Blue)}
             };
         }
     }

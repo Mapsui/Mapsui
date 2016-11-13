@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Mapsui.Providers;
 using Mapsui.Styles;
 using SkiaSharp;
 
@@ -8,8 +9,10 @@ namespace Mapsui.Rendering.Skia
     {
         private static readonly IDictionary<string, SKBitmapInfo> LabelBitmapCache = new Dictionary<string, SKBitmapInfo>();
 
-        public static void Draw(SKCanvas canvas, LabelStyle style, string text, float x, float y)
+        public static void Draw(SKCanvas canvas, LabelStyle style, IFeature feature, float x, float y)
         {
+            var text = style.GetLabelText(feature);
+
             var key = text + "_" + style.Font.FontFamily + "_" + style.Font.Size + "_" + (float)style.Font.Size + "_" + style.BackColor + "_" + style.ForeColor;
 
             if (!LabelBitmapCache.Keys.Contains(key))
