@@ -21,6 +21,7 @@ namespace Mapsui.Rendering.Skia
             float scale = 1f)
         {
             canvas.Save();
+
             canvas.Translate(x, y);
             canvas.RotateDegrees(orientation, 0, 0); // todo: or degrees?
             canvas.Scale(scale, scale);
@@ -54,6 +55,10 @@ namespace Mapsui.Rendering.Skia
             return 0; // center
         }
 
+        public static void RenderRaster(SKCanvas canvas, SKBitmap bitmap, SKRect rect, float opacity = 1f)
+        {
+            canvas.DrawBitmap(bitmap, rect);
+        }
 
         public static void RenderTexture(SKCanvas canvas, SKBitmap bitmap, SKRect rect, float opacity = 1f)
         {

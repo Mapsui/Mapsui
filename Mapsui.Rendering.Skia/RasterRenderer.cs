@@ -32,7 +32,7 @@ namespace Mapsui.Rendering.Skia
                 textureInfo.IterationUsed = currentIteration;
                 skBitmapCache[raster] = textureInfo;
                 var destination = WorldToScreen(viewport, feature.Geometry.GetBoundingBox());
-                BitmapHelper.RenderTexture(canvas, textureInfo.Bitmap, RoundToPixel(destination).ToSkia());
+                BitmapHelper.RenderRaster(canvas, textureInfo.Bitmap, RoundToPixel(destination).ToSkia());
             }
             catch (Exception ex)
             {
