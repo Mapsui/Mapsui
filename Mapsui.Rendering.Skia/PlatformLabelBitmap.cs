@@ -31,7 +31,7 @@ namespace Mapsui.Rendering.Skia
                     target.Clear();
                     if (style.BackColor != null)
                     {
-                        var color = style.BackColor?.Background?.ToSkia();
+                        var color = style.BackColor?.Color?.ToSkia();
                         if (color.HasValue)
                         {
                             var rounding = 5;

@@ -22,7 +22,16 @@ namespace Mapsui.Samples.Common.Maps
         {
             return new MemoryLayer
             {
-                DataSource = new StackedLabelProvider(provider, new LabelStyle { LabelColumn = labelColumn }),
+                DataSource = new StackedLabelProvider(provider, new LabelStyle
+                {
+                    BackColor = new Brush
+                    {
+                        Background = new Color(240, 240, 240, 128),
+                        Color = new Color(240, 240, 240, 128)
+                    },
+                    ForeColor = new Color(25, 25, 25),
+                    LabelColumn = labelColumn
+                }),
                 Style = null
             };
         }
