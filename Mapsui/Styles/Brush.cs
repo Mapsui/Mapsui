@@ -24,8 +24,10 @@ namespace Mapsui.Styles
 
         public Color Color { get; set; }
 
-        public Color Background { get; set; }        
-
+        // todo: 
+        // Perhaps rename to something like SecondaryColor. The 'Color' 
+        // field is itself a background in many cases. This is confusing
+        public Color Background { get; set; } 
 
         /// <summary>
         /// This identifies bitmap in the BitmapRegistry
