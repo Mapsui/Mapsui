@@ -15,13 +15,13 @@ namespace Mapsui.Rendering.Skia
                 paint.Color = style.ForeColor.ToSkia();
                 paint.Typeface = SKTypeface.FromFamilyName(style.Font.FontFamily);
                 paint.IsStroke = false;
-                paint.FakeBoldText = true;
+                paint.FakeBoldText = false;
                 paint.IsEmbeddedBitmapText = true;
                 
                 var rect = new SKRect();
                 paint.MeasureText(text, ref rect);
 
-                var padding = 4; // todo get this from LabelStyle
+                var padding = 3; // todo get this from LabelStyle
                 rect = SKRect.Inflate(rect, padding, padding);
 
                 var bitmap = new SKBitmap((int) Math.Ceiling(rect.Width), (int) Math.Ceiling(rect.Height));
@@ -34,7 +34,7 @@ namespace Mapsui.Rendering.Skia
                         var color = style.BackColor?.Color?.ToSkia();
                         if (color.HasValue)
                         {
-                            var rounding = 5;
+                            var rounding = 6;
                             using (var backgroundPaint = new SKPaint {Color = color.Value})
                             {
                                 target.DrawRoundRect(new SKRect(0, 0, rect.Width, rect.Height), rounding, rounding, backgroundPaint);
