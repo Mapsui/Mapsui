@@ -15,18 +15,17 @@
 // along with Mapsui; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
-using System;
 using System.Reflection;
 
 namespace Mapsui.Utilities
 {
     /// <summary>
-    /// Version information helper class
+    ///     Version information helper class
     /// </summary>
     public static class Version
     {
         /// <summary>
-        /// Returns the current build version of Mapsui
+        ///     Returns the current build version of Mapsui
         /// </summary>
         /// <returns></returns>
         public static System.Version GetCurrentVersion()
