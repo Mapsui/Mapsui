@@ -13,7 +13,6 @@ using Mapsui.Fetcher;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
-using Mapsui.UI.Xaml;
 using Mapsui.Utilities;
 using SkiaSharp;
 using SkiaSharp.Views;
@@ -142,9 +141,7 @@ namespace Mapsui.Rendering.Skia.UI
                 RefreshGraphics();
             }
         }
-
-        public FpsCounter FpsCounter { get; } = new FpsCounter();
-
+        
         public string ErrorMessage { get; private set; }
 
         public bool ZoomLocked { get; set; }

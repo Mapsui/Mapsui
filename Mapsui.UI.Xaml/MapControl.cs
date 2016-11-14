@@ -16,11 +16,19 @@ using Mapsui.Providers;
 using Mapsui.Rendering;
 using Mapsui.Rendering.Xaml;
 using Mapsui.Utilities;
+using SkiaSharp;
+using SkiaSharp.Views;
 using Point = System.Windows.Point;
 using XamlVector = System.Windows.Vector;
 
 namespace Mapsui.UI.Xaml
 {
+    public enum RenderMode
+    {
+        Wpf,
+        Skia
+    }
+
     public class MapControl : Grid
     {
         // ReSharper disable once UnusedMember.Local // This registration triggers the call to OnResolutionChanged
@@ -42,15 +50,17 @@ namespace Mapsui.UI.Xaml
         private Point _previousMousePosition;
         private double _toResolution = double.NaN;
         private bool _viewportInitialized;
+        private RenderMode _renderMode;
+        private Geometries.Point _skiaScale;
 
         public MapControl()
         {
-            RenderCanvas = new Canvas
-            {
-                VerticalAlignment = VerticalAlignment.Stretch,
-                HorizontalAlignment = HorizontalAlignment.Stretch
-            };
             Children.Add(RenderCanvas);
+            Children.Add(RenderElement);
+            RenderMode = RenderMode.Skia;
+
+            RenderElement.PaintSurface += SKElementOnPaintSurface;
+            CompositionTarget.Rendering += CompositionTargetRendering;
 
             _bboxRect = new Rectangle
             {
@@ -77,8 +87,6 @@ namespace Mapsui.UI.Xaml
             MouseWheel += MapControlMouseWheel;
 
             SizeChanged += MapControlSizeChanged;
-            CompositionTarget.Rendering += CompositionTargetRendering;
-            Renderer = new MapRenderer();
 
             ManipulationDelta += OnManipulationDelta;
             ManipulationCompleted += OnManipulationCompleted;
@@ -87,7 +95,26 @@ namespace Mapsui.UI.Xaml
             IsManipulationEnabled = true;
         }
 
+        private static Canvas CreateRenderCanvas()
+        {
+            return new Canvas
+            {
+                VerticalAlignment = VerticalAlignment.Stretch,
+                HorizontalAlignment = HorizontalAlignment.Stretch
+            };
+        }
+
+        private static SKElement CreateRenderElement()
+        {
+            return new SKElement
+            {
+                VerticalAlignment = VerticalAlignment.Stretch,
+                HorizontalAlignment = HorizontalAlignment.Stretch
+            };
+        }
+
         public IRenderer Renderer { get; set; }
+        
         private bool IsInBoxZoomMode { get; set; }
 
         [Obsolete("Use Map.HoverInfoLayers", true)]
@@ -139,7 +166,31 @@ namespace Mapsui.UI.Xaml
 
         public bool ZoomLocked { get; set; }
 
-        public Canvas RenderCanvas { get; }
+        public Canvas RenderCanvas { get; } = CreateRenderCanvas();
+
+        private SKElement RenderElement { get; } = CreateRenderElement();
+
+        public RenderMode RenderMode
+        {
+            get { return _renderMode; }
+            set
+            {
+                if (value == RenderMode.Skia)
+                {
+                    RenderCanvas.Children.Clear();
+                    RenderCanvas.Visibility = Visibility.Collapsed;
+                    RenderElement.Visibility = Visibility.Visible;
+                    Renderer = new Rendering.Skia.MapRenderer();
+                }
+                else
+                {
+                    RenderElement.Visibility = Visibility.Collapsed;
+                    RenderCanvas.Visibility = Visibility.Visible;
+                    Renderer = new MapRenderer();
+                }
+                _renderMode = value;
+            }
+        }
 
         public event EventHandler ErrorMessageChanged;
         public event EventHandler<ViewChangedEventArgs> ViewChanged;
@@ -540,10 +591,16 @@ namespace Mapsui.UI.Xaml
         private void CompositionTargetRendering(object sender, EventArgs e)
         {
             if (!_viewportInitialized) InitializeViewport();
-            if (!_viewportInitialized) return; // Stop if the line above failed. 
-            if (!_invalid && !DeveloperTools.DeveloperMode)
-                return; // In developermode always render so that fps can be counterd.
+            if (!_viewportInitialized) return; // Stop if the line above failed.
+            // In developermode always render so that fps can be counted
+            if (!_invalid && !DeveloperTools.DeveloperMode) return; 
 
+            if (RenderMode == RenderMode.Wpf) RenderWpf();
+            else RenderElement.InvalidateVisual();
+        }
+
+        private void RenderWpf()
+        {
             if ((Renderer != null) && (_map != null))
             {
                 Renderer.Render(RenderCanvas, Map.Viewport, _map.Layers, _map.BackColor);
@@ -658,6 +715,43 @@ namespace Mapsui.UI.Xaml
         private void OnManipulationCompleted(object sender, ManipulationCompletedEventArgs e)
         {
             Refresh();
+        }
+
+        private void OnPaintSurface(SKCanvas canvas, int width, int height)
+        {
+            if (double.IsNaN(Map.Viewport.Resolution)) return;
+
+            Map.Viewport.Width = ActualWidth;
+            Map.Viewport.Height = ActualHeight;
+
+            Renderer.Render(canvas, Map.Viewport, Map.Layers, Map.BackColor);
+        }
+
+        private Geometries.Point GetSkiaScale()
+        {
+            var presentationSource = PresentationSource.FromVisual(this);
+            if (presentationSource == null) throw new Exception("PresentationSource is null");
+            var compositionTarget = presentationSource.CompositionTarget;
+            if (compositionTarget == null) throw new Exception("CompositionTarget is null");
+
+            var m = compositionTarget.TransformToDevice;
+
+            var dpiX = m.M11;
+            var dpiY = m.M22;
+
+            return new Geometries.Point(dpiX, dpiY);
+        }
+
+        private void SKElementOnPaintSurface(object sender, SKPaintSurfaceEventArgs e)
+        {
+            if (!_viewportInitialized) InitializeViewport();
+            if (!_viewportInitialized) return; // Stop if the line above failed. 
+            if (!_invalid && !DeveloperTools.DeveloperMode)
+                return; // In developermode always render so that fps can be counterd.
+
+            if (_skiaScale == null) _skiaScale = GetSkiaScale();
+            e.Surface.Canvas.Scale((float)_skiaScale.X, (float)_skiaScale.Y);
+            OnPaintSurface(e.Surface.Canvas, e.Info.Width, e.Info.Height);
         }
     }
 

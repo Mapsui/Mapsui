@@ -22,7 +22,6 @@ namespace Mapsui.Samples.Wpf.Skia
             MapControl.MouseInfoUp += MapControlOnMouseInfoUp;
 
             Fps.SetBinding(TextBlock.TextProperty, new Binding("Fps"));
-            Fps.DataContext = MapControl.FpsCounter;
 
             Logger.LogDelegate += LogMethod;
 
