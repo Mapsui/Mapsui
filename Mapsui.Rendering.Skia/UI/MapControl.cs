@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Net;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -16,7 +17,7 @@ using Mapsui.UI.Xaml;
 using Mapsui.Utilities;
 using SkiaSharp;
 using SkiaSharp.Views;
-using Point = Mapsui.Geometries.Point;
+using Point = System.Windows.Point;
 using XamlVector = System.Windows.Vector;
 
 namespace Mapsui.Rendering.Skia.UI
@@ -26,27 +27,26 @@ namespace Mapsui.Rendering.Skia.UI
         // ReSharper disable once UnusedMember.Local // This registration is in order to triggers the call to OnResolutionChanged
         private static readonly DependencyProperty ResolutionProperty =
             DependencyProperty.Register(
-            "Resolution", typeof(double), typeof(MapControl),
-            new PropertyMetadata(OnResolutionChanged));
+                "Resolution", typeof(double), typeof(MapControl),
+                new PropertyMetadata(OnResolutionChanged));
 
         private readonly Rectangle _bboxRect;
-        private readonly FpsCounter _fpsCounter = new FpsCounter();
 
         private readonly MapRenderer _renderer = new MapRenderer();
 
         private readonly SKElement _skElement;
         private readonly DoubleAnimation _zoomAnimation = new DoubleAnimation();
         private readonly Storyboard _zoomStoryBoard = new Storyboard();
-        private System.Windows.Point _currentMousePosition;
-        private System.Windows.Point _downMousePosition;
+        private Point _currentMousePosition;
+        private Point _downMousePosition;
         private bool _invalid;
         private Map _map;
         private bool _mouseDown;
 
         private MouseInfoEventArgs _previousMouseOverEventArgs;
-        private System.Windows.Point _previousMousePosition;
+        private Point _previousMousePosition;
 
-        private Point _scale;
+        private Geometries.Point _scale;
         private double _toResolution = double.NaN;
         private bool _viewportInitialized;
 
@@ -57,23 +57,23 @@ namespace Mapsui.Rendering.Skia.UI
                 VerticalAlignment = VerticalAlignment.Stretch,
                 HorizontalAlignment = HorizontalAlignment.Stretch
             };
-   
+
             Children.Add(_skElement);
             _skElement.PaintSurface += SKElementOnPaintSurface;
-            
+
             _bboxRect = new Rectangle
-                {
-                    Fill = new SolidColorBrush(Colors.Red),
-                    Stroke = new SolidColorBrush(Colors.Black),
-                    StrokeThickness = 3,
-                    RadiusX = 0.5,
-                    RadiusY = 0.5,
-                    StrokeDashArray = new DoubleCollection { 3.0 },
-                    Opacity = 0.3,
-                    VerticalAlignment = VerticalAlignment.Top,
-                    HorizontalAlignment = HorizontalAlignment.Left,
-                    Visibility = Visibility.Collapsed
-                };
+            {
+                Fill = new SolidColorBrush(Colors.Red),
+                Stroke = new SolidColorBrush(Colors.Black),
+                StrokeThickness = 3,
+                RadiusX = 0.5,
+                RadiusY = 0.5,
+                StrokeDashArray = new DoubleCollection {3.0},
+                Opacity = 0.3,
+                VerticalAlignment = VerticalAlignment.Top,
+                HorizontalAlignment = HorizontalAlignment.Left,
+                Visibility = Visibility.Collapsed
+            };
             Children.Add(_bboxRect);
 
             Map = new Map();
@@ -89,7 +89,7 @@ namespace Mapsui.Rendering.Skia.UI
 
             SizeChanged += MapControlSizeChanged;
             CompositionTarget.Rendering += CompositionTargetRendering;
-   
+
             ManipulationDelta += OnManipulationDelta;
             ManipulationCompleted += OnManipulationCompleted;
             ManipulationInertiaStarting += OnManipulationInertiaStarting;
@@ -115,10 +115,7 @@ namespace Mapsui.Rendering.Skia.UI
 
         public Map Map
         {
-            get
-            {
-                return _map;
-            }
+            get { return _map; }
             set
             {
                 if (_map != null)
@@ -132,11 +129,11 @@ namespace Mapsui.Rendering.Skia.UI
                 }
 
                 _map = value;
-                
+
                 if (_map != null)
                 {
                     _viewportInitialized = false;
-                    _map.DataChanged += MapDataChanged; 
+                    _map.DataChanged += MapDataChanged;
                     _map.PropertyChanged += MapPropertyChanged;
                     _map.RefreshGraphics += MapRefreshGraphics;
                     _map.ViewChanged(true);
@@ -146,7 +143,7 @@ namespace Mapsui.Rendering.Skia.UI
             }
         }
 
-        public FpsCounter FpsCounter => _fpsCounter;
+        public FpsCounter FpsCounter { get; } = new FpsCounter();
 
         public string ErrorMessage { get; private set; }
 
@@ -165,7 +162,7 @@ namespace Mapsui.Rendering.Skia.UI
             RefreshGraphics();
         }
 
-        void MapPropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void MapPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (!Dispatcher.CheckAccess()) Dispatcher.BeginInvoke(new Action(() => MapPropertyChanged(sender, e)));
             else
@@ -197,11 +194,11 @@ namespace Mapsui.Rendering.Skia.UI
 
             Map.Viewport.Width = ActualWidth;
             Map.Viewport.Height = ActualHeight;
-            
+
             _renderer.Render(canvas, Map.Viewport, Map.Layers, Map.BackColor);
         }
 
-        private Point GetScale()
+        private Geometries.Point GetScale()
         {
             var presentationSource = PresentationSource.FromVisual(this);
             if (presentationSource == null) throw new Exception("PresentationSource is null");
@@ -213,17 +210,18 @@ namespace Mapsui.Rendering.Skia.UI
             var dpiX = m.M11;
             var dpiY = m.M22;
 
-            return new Point(dpiX, dpiY);
+            return new Geometries.Point(dpiX, dpiY);
         }
 
         private void SKElementOnPaintSurface(object sender, SKPaintSurfaceEventArgs e)
         {
             if (!_viewportInitialized) InitializeViewport();
             if (!_viewportInitialized) return; // Stop if the line above failed. 
-            if (!_invalid && !DeveloperTools.DeveloperMode) return; // In developermode always render so that fps can be counterd.
+            if (!_invalid && !DeveloperTools.DeveloperMode)
+                return; // In developermode always render so that fps can be counterd.
 
             if (_scale == null) _scale = GetScale();
-            e.Surface.Canvas.Scale((float)_scale.X, (float)_scale.Y);
+            e.Surface.Canvas.Scale((float) _scale.X, (float) _scale.Y);
             OnPaintSurface(e.Surface.Canvas, e.Info.Width, e.Info.Height);
         }
 
@@ -231,7 +229,7 @@ namespace Mapsui.Rendering.Skia.UI
         {
             if (_map == null) return;
 
-            ViewChanged?.Invoke(this, new ViewChangedEventArgs { Viewport = Map.Viewport, UserAction = userAction });
+            ViewChanged?.Invoke(this, new ViewChangedEventArgs {Viewport = Map.Viewport, UserAction = userAction});
         }
 
         public void Refresh()
@@ -244,7 +242,6 @@ namespace Mapsui.Rendering.Skia.UI
         {
             Dispatcher.BeginInvoke(new Action(() =>
             {
-
                 InvalidateVisual();
                 _invalid = true;
             }));
@@ -284,15 +281,15 @@ namespace Mapsui.Rendering.Skia.UI
 
         private static void OnResolutionChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
         {
-            var newResolution = (double)e.NewValue;
-            ((MapControl)dependencyObject).ZoomToResolution(newResolution);
+            var newResolution = (double) e.NewValue;
+            ((MapControl) dependencyObject).ZoomToResolution(newResolution);
         }
 
         private void ZoomToResolution(double resolution)
         {
             var current = _currentMousePosition;
 
-            Map.Viewport.Transform(current.X, current.Y, current.X, current.Y, Map.Viewport.Resolution / resolution);
+            Map.Viewport.Transform(current.X, current.Y, current.X, current.Y, Map.Viewport.Resolution/resolution);
 
             _map.ViewChanged(true);
             OnViewChanged();
@@ -301,7 +298,7 @@ namespace Mapsui.Rendering.Skia.UI
 
         private void ZoomMiddle()
         {
-            _currentMousePosition = new System.Windows.Point(ActualWidth / 2, ActualHeight / 2);
+            _currentMousePosition = new Point(ActualWidth/2, ActualHeight/2);
             StartZoomAnimation(Map.Viewport.Resolution, _toResolution);
         }
 
@@ -327,21 +324,16 @@ namespace Mapsui.Rendering.Skia.UI
             if (!_viewportInitialized) return;
             if (ZoomLocked) return;
 
-            _currentMousePosition = e.GetPosition(this); //Needed for both MouseMove and MouseWheel event for mousewheel event
+            _currentMousePosition = e.GetPosition(this);
+                //Needed for both MouseMove and MouseWheel event for mousewheel event
 
             if (double.IsNaN(_toResolution))
-            {
                 _toResolution = Map.Viewport.Resolution;
-            }
 
             if (e.Delta > 0)
-            {
                 _toResolution = ZoomHelper.ZoomIn(_map.Resolutions, _toResolution);
-            }
             else if (e.Delta < 0)
-            {
                 _toResolution = ZoomHelper.ZoomOut(_map.Resolutions, _toResolution);
-            }
 
             e.Handled = true; //so that the scroll event is not sent to the html page.
 
@@ -369,7 +361,7 @@ namespace Mapsui.Rendering.Skia.UI
         private void MapControlSizeChanged(object sender, SizeChangedEventArgs e)
         {
             if (!_viewportInitialized) InitializeViewport();
-            Clip = new RectangleGeometry { Rect = new Rect(0, 0, ActualWidth, ActualHeight) };
+            Clip = new RectangleGeometry {Rect = new Rect(0, 0, ActualWidth, ActualHeight)};
             UpdateSize();
             _map.ViewChanged(true);
             OnViewChanged();
@@ -387,7 +379,7 @@ namespace Mapsui.Rendering.Skia.UI
 
         private void MapControlMouseLeave(object sender, MouseEventArgs e)
         {
-            _previousMousePosition = new System.Windows.Point();
+            _previousMousePosition = new Point();
             ReleaseMouseCapture();
         }
 
@@ -409,7 +401,7 @@ namespace Mapsui.Rendering.Skia.UI
                     ErrorMessage = "Cancelled";
                     OnErrorMessageChanged(EventArgs.Empty);
                 }
-                else if (e.Error is System.Net.WebException)
+                else if (e.Error is WebException)
                 {
                     ErrorMessage = "WebException: " + e.Error.Message;
                     OnErrorMessageChanged(EventArgs.Empty);
@@ -458,7 +450,7 @@ namespace Mapsui.Rendering.Skia.UI
             OnViewChanged(true);
             _mouseDown = false;
 
-            _previousMousePosition = new System.Windows.Point();
+            _previousMousePosition = new Point();
             ReleaseMouseCapture();
         }
 
@@ -467,18 +459,17 @@ namespace Mapsui.Rendering.Skia.UI
             if (FeatureInfo == null) return; // don't fetch if you the call back is not set.
 
             if (_downMousePosition == e.GetPosition(this))
-            {
                 foreach (var layer in Map.Layers)
                 {
                     // ReSharper disable once SuspiciousTypeConversion.Global
-                    (layer as IFeatureInfo)?.GetFeatureInfo(Map.Viewport, _downMousePosition.X, _downMousePosition.Y, OnFeatureInfo);
+                    (layer as IFeatureInfo)?.GetFeatureInfo(Map.Viewport, _downMousePosition.X, _downMousePosition.Y,
+                        OnFeatureInfo);
                 }
-            }
         }
 
         private void OnFeatureInfo(IDictionary<string, IEnumerable<IFeature>> features)
         {
-            FeatureInfo?.Invoke(this, new FeatureInfoEventArgs { FeatureInfo = features });
+            FeatureInfo?.Invoke(this, new FeatureInfoEventArgs {FeatureInfo = features});
         }
 
         private void MapControlMouseMove(object sender, MouseEventArgs e)
@@ -495,13 +486,12 @@ namespace Mapsui.Rendering.Skia.UI
 
             if (_mouseDown)
             {
-                if (_previousMousePosition == default(System.Windows.Point))
-                {
+                if (_previousMousePosition == default(Point))
                     return; // It turns out that sometimes MouseMove+Pressed is called before MouseDown
-                }
 
                 _currentMousePosition = e.GetPosition(this); //Needed for both MouseMove and MouseWheel event
-                Map.Viewport.Transform(_currentMousePosition.X, _currentMousePosition.Y, _previousMousePosition.X, _previousMousePosition.Y);
+                Map.Viewport.Transform(_currentMousePosition.X, _currentMousePosition.Y, _previousMousePosition.X,
+                    _previousMousePosition.Y);
                 _previousMousePosition = _currentMousePosition;
                 _map.ViewChanged(false);
                 OnViewChanged(true);
@@ -509,18 +499,17 @@ namespace Mapsui.Rendering.Skia.UI
             }
         }
 
-        private void RaiseMouseInfoOverEvents(System.Windows.Point mousePosition)
+        private void RaiseMouseInfoOverEvents(Point mousePosition)
         {
             var mouseOverEventArgs = GetMouseInfoEventArgs(mousePosition, Map.HoverInfoLayers);
-            if (_previousMouseOverEventArgs != null && mouseOverEventArgs != null) OnMouseInfoLeave();
+            if ((_previousMouseOverEventArgs != null) && (mouseOverEventArgs != null)) OnMouseInfoLeave();
             else OnMouseInfoOver(mouseOverEventArgs);
             _previousMouseOverEventArgs = mouseOverEventArgs;
-            
         }
 
-        private MouseInfoEventArgs GetMouseInfoEventArgs(System.Windows.Point mousePosition, IEnumerable<ILayer> layers)
+        private MouseInfoEventArgs GetMouseInfoEventArgs(Point mousePosition, IEnumerable<ILayer> layers)
         {
-            var margin = 16 * Map.Viewport.Resolution;
+            var margin = 16*Map.Viewport.Resolution;
             var point = Map.Viewport.ScreenToWorld(new Geometries.Point(mousePosition.X, mousePosition.Y));
 
             foreach (var layer in layers)
@@ -531,9 +520,7 @@ namespace Mapsui.Rendering.Skia.UI
                     .FirstOrDefault();
 
                 if (feature != null)
-                {
-                    return new MouseInfoEventArgs { LayerName = layer.Name, Feature = feature };
-                }
+                    return new MouseInfoEventArgs {LayerName = layer.Name, Feature = feature};
             }
             return null;
         }
@@ -563,7 +550,7 @@ namespace Mapsui.Rendering.Skia.UI
                 if (_map.Envelope.GetCentroid() == null) return;
 
                 if (Math.Abs(_map.Envelope.Width) > Constants.Epsilon)
-                    Map.Viewport.Resolution = _map.Envelope.Width / ActualWidth;
+                    Map.Viewport.Resolution = _map.Envelope.Width/ActualWidth;
                 else
                     // An envelope width of zero can happen when there is no data in the Maps' layers (yet).
                     // It should be possible to start with an empty map.
@@ -598,8 +585,9 @@ namespace Mapsui.Rendering.Skia.UI
         {
             if (!_viewportInitialized) InitializeViewport();
             if (!_viewportInitialized) return; // Stop if the line above failed. 
-            if (!_invalid && !DeveloperTools.DeveloperMode) return; // In developermode always render so that fps can be counterd.
-            
+            if (!_invalid && !DeveloperTools.DeveloperMode)
+                return; // In developermode always render so that fps can be counterd.
+
             _skElement.InvalidateVisual();
         }
 
@@ -617,7 +605,7 @@ namespace Mapsui.Rendering.Skia.UI
             if (width <= 0) return;
             if (height <= 0) return;
 
-            ZoomHelper.ZoomToBoudingbox(beginPoint.X, beginPoint.Y, endPoint.X, endPoint.Y, 
+            ZoomHelper.ZoomToBoudingbox(beginPoint.X, beginPoint.Y, endPoint.X, endPoint.Y,
                 ActualWidth, ActualHeight, out x, out y, out resolution);
             resolution = ZoomHelper.ClipResolutionToExtremes(_map.Resolutions, resolution);
 
@@ -645,21 +633,17 @@ namespace Mapsui.Rendering.Skia.UI
         {
             var keyName = e.Key.ToString().ToLower();
             if (keyName.Equals("ctrl") || keyName.Equals("leftctrl") || keyName.Equals("rightctrl"))
-            {
                 IsInBoxZoomMode = false;
-            }
         }
 
         private void MapControlKeyDown(object sender, KeyEventArgs e)
         {
             var keyName = e.Key.ToString().ToLower();
             if (keyName.Equals("ctrl") || keyName.Equals("leftctrl") || keyName.Equals("rightctrl"))
-            {
                 IsInBoxZoomMode = true;
-            }
         }
 
-        private void DrawBbox(System.Windows.Point newPos)
+        private void DrawBbox(Point newPos)
         {
             if (!_mouseDown) return;
 
@@ -695,7 +679,7 @@ namespace Mapsui.Rendering.Skia.UI
 
         private static void OnManipulationInertiaStarting(object sender, ManipulationInertiaStartingEventArgs e)
         {
-            e.TranslationBehavior.DesiredDeceleration = 25 * 96.0 / (1000.0 * 1000.0);
+            e.TranslationBehavior.DesiredDeceleration = 25*96.0/(1000.0*1000.0);
         }
 
         private void OnManipulationDelta(object sender, ManipulationDeltaEventArgs e)
@@ -716,8 +700,9 @@ namespace Mapsui.Rendering.Skia.UI
         private double GetDeltaScale(XamlVector scale)
         {
             if (ZoomLocked) return 1;
-            var deltaScale = (scale.X + scale.Y) / 2;
-            if (Math.Abs(deltaScale) < Constants.Epsilon) return 1; // If there is no scaling the deltaScale will be 0.0 in Windows Phone (while it is 1.0 in wpf)
+            var deltaScale = (scale.X + scale.Y)/2;
+            if (Math.Abs(deltaScale) < Constants.Epsilon)
+                return 1; // If there is no scaling the deltaScale will be 0.0 in Windows Phone (while it is 1.0 in wpf)
             if (!(Math.Abs(deltaScale - 1d) > Constants.Epsilon)) return 1;
             return deltaScale;
         }
