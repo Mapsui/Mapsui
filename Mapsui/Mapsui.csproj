@@ -140,7 +140,6 @@
     <Compile Include="Utilities\DeveloperTools.cs" />
     <Compile Include="Utilities\EmbeddedResourceLoader.cs" />
     <Compile Include="ExtensionMethods\Extensions.cs" />
-    <Compile Include="Utilities\LeastSquaresTransform.cs" />
     <Compile Include="Utilities\ProjectionHelper.cs" />
     <Compile Include="Utilities\Providers.cs" />
     <Compile Include="Utilities\Timer.cs" />
