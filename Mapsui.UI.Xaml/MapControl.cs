@@ -1,20 +1,3 @@
-// Copyright 2008 - Paul den Dulk (Geodan)
-// 
-// This file is part of Mapsui.
-// Mapsui is free software; you can redistribute it and/or modify
-// it under the terms of the GNU Lesser General Public License as published by
-// the Free Software Foundation; either version 2 of the License, or
-// (at your option) any later version.
-// 
-// Mapsui is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU Lesser General Public License for more details.
-
-// You should have received a copy of the GNU Lesser General Public License
-// along with Mapsui; if not, write to the Free Software
-// Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA f
-
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -39,120 +22,26 @@ namespace Mapsui.UI.Xaml
 {
     public class MapControl : Grid
     {
-        private Map _map;
-        private Point _previousMousePosition;
-        private Point _currentMousePosition;
-        private Point _downMousePosition;
-        private readonly FpsCounter _fpsCounter = new FpsCounter();
-        private readonly DoubleAnimation _zoomAnimation = new DoubleAnimation();
-        private readonly Storyboard _zoomStoryBoard = new Storyboard();
-        private double _toResolution = double.NaN;
-        private bool _mouseDown;
-        private bool _viewportInitialized;
-        private bool _invalid;
-        private readonly Rectangle _bboxRect;
-
-        public event EventHandler ErrorMessageChanged;
-        public event EventHandler<ViewChangedEventArgs> ViewChanged;
-        public event EventHandler<MouseInfoEventArgs> MouseInfoOver;
-        public event EventHandler MouseInfoLeave;
-        public event EventHandler<MouseInfoEventArgs> MouseInfoUp;
-        public event EventHandler<FeatureInfoEventArgs> FeatureInfo;
-
-        public IRenderer Renderer { get; set; }
-        private bool IsInBoxZoomMode { get; set; }
-        [Obsolete("Use Map.HoverInfoLayers", true)]
-        // ReSharper disable once UnassignedGetOnlyAutoProperty // This is here just to help upgraders
-        public IList<ILayer> MouseInfoOverLayers { get; } 
-        [Obsolete("Use Map.InfoLayers", true)]
-        // ReSharper disable once UnassignedGetOnlyAutoProperty // This is here just to help upgraders
-        public IList<ILayer> MouseInfoUpLayers { get; } 
-        public event EventHandler ViewportInitialized;
-        public bool ZoomToBoxMode { get; set; }
-
-        [Obsolete("Map.Viewport instead", true)]
-        public IViewport Viewport => Map.Viewport;
-
-        private MouseInfoEventArgs _previousMouseOverEventArgs;
-
-
-        public Map Map
-        {
-            get
-            {
-                return _map;
-            }
-            set
-            {
-                if (_map != null)
-                {
-                    var temp = _map;
-                    _map = null;
-                    temp.DataChanged -= MapDataChanged;
-                    temp.PropertyChanged -= MapPropertyChanged;
-                    temp.RefreshGraphics -= MapRefreshGraphics;
-                    temp.Dispose();
-                }
-
-                _map = value;
-                
-                if (_map != null)
-                {
-                    _viewportInitialized = false;
-                    _map.DataChanged += MapDataChanged; 
-                    _map.PropertyChanged += MapPropertyChanged;
-                    _map.RefreshGraphics += MapRefreshGraphics;
-                    _map.ViewChanged(true);
-                }
-
-                RefreshGraphics();
-            }
-        }
-
-        private void MapRefreshGraphics(object sender, EventArgs eventArgs)
-        {
-            RefreshGraphics();
-        }
-
-        void MapPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (!Dispatcher.CheckAccess()) Dispatcher.BeginInvoke(new Action(() => MapPropertyChanged(sender, e)));
-            else
-            {
-                if (e.PropertyName == "Enabled")
-                {
-                    RefreshGraphics();
-                }
-                else if (e.PropertyName == "Opacity")
-                {
-                    RefreshGraphics();
-                }
-                else if (e.PropertyName == "Envelope")
-                {
-                    InitializeViewport();
-                    _map.ViewChanged(true);
-                }
-                else if (e.PropertyName == "Rotation")
-                {
-                    _map.ViewChanged(true);
-                    OnViewChanged();
-                }
-            }
-        }
-
-        public FpsCounter FpsCounter => _fpsCounter;
-
-        public string ErrorMessage { get; private set; }
-
-        public bool ZoomLocked { get; set; }
-
-        public Canvas RenderCanvas { get; }
-
         // ReSharper disable once UnusedMember.Local // This registration triggers the call to OnResolutionChanged
         private static readonly DependencyProperty ResolutionProperty =
             DependencyProperty.Register(
             "Resolution", typeof(double), typeof(MapControl),
             new PropertyMetadata(OnResolutionChanged));
+
+        private readonly Rectangle _bboxRect;
+        private readonly FpsCounter _fpsCounter = new FpsCounter();
+        private readonly DoubleAnimation _zoomAnimation = new DoubleAnimation();
+        private readonly Storyboard _zoomStoryBoard = new Storyboard();
+        private Point _currentMousePosition;
+        private Point _downMousePosition;
+        private bool _invalid;
+        private Map _map;
+        private bool _mouseDown;
+
+        private MouseInfoEventArgs _previousMouseOverEventArgs;
+        private Point _previousMousePosition;
+        private double _toResolution = double.NaN;
+        private bool _viewportInitialized;
 
         public MapControl()
         {
@@ -197,7 +86,103 @@ namespace Mapsui.UI.Xaml
             Dispatcher.ShutdownStarted += DispatcherShutdownStarted;
             IsManipulationEnabled = true;
         }
-        
+
+        public IRenderer Renderer { get; set; }
+        private bool IsInBoxZoomMode { get; set; }
+
+        [Obsolete("Use Map.HoverInfoLayers", true)]
+        // ReSharper disable once UnassignedGetOnlyAutoProperty // This is here just to help upgraders
+        public IList<ILayer> MouseInfoOverLayers { get; }
+
+        [Obsolete("Use Map.InfoLayers", true)]
+        // ReSharper disable once UnassignedGetOnlyAutoProperty // This is here just to help upgraders
+        public IList<ILayer> MouseInfoUpLayers { get; }
+
+        public bool ZoomToBoxMode { get; set; }
+
+        [Obsolete("Map.Viewport instead", true)]
+        public IViewport Viewport => Map.Viewport;
+
+        public Map Map
+        {
+            get
+            {
+                return _map;
+            }
+            set
+            {
+                if (_map != null)
+                {
+                    var temp = _map;
+                    _map = null;
+                    temp.DataChanged -= MapDataChanged;
+                    temp.PropertyChanged -= MapPropertyChanged;
+                    temp.RefreshGraphics -= MapRefreshGraphics;
+                    temp.Dispose();
+                }
+
+                _map = value;
+                
+                if (_map != null)
+                {
+                    _viewportInitialized = false;
+                    _map.DataChanged += MapDataChanged; 
+                    _map.PropertyChanged += MapPropertyChanged;
+                    _map.RefreshGraphics += MapRefreshGraphics;
+                    _map.ViewChanged(true);
+                }
+
+                RefreshGraphics();
+            }
+        }
+
+        public FpsCounter FpsCounter => _fpsCounter;
+
+        public string ErrorMessage { get; private set; }
+
+        public bool ZoomLocked { get; set; }
+
+        public Canvas RenderCanvas { get; }
+
+        public event EventHandler ErrorMessageChanged;
+        public event EventHandler<ViewChangedEventArgs> ViewChanged;
+        public event EventHandler<MouseInfoEventArgs> MouseInfoOver;
+        public event EventHandler MouseInfoLeave;
+        public event EventHandler<MouseInfoEventArgs> MouseInfoUp;
+        public event EventHandler<FeatureInfoEventArgs> FeatureInfo;
+        public event EventHandler ViewportInitialized;
+
+        private void MapRefreshGraphics(object sender, EventArgs eventArgs)
+        {
+            RefreshGraphics();
+        }
+
+        void MapPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (!Dispatcher.CheckAccess()) Dispatcher.BeginInvoke(new Action(() => MapPropertyChanged(sender, e)));
+            else
+            {
+                if (e.PropertyName == "Enabled")
+                {
+                    RefreshGraphics();
+                }
+                else if (e.PropertyName == "Opacity")
+                {
+                    RefreshGraphics();
+                }
+                else if (e.PropertyName == "Envelope")
+                {
+                    InitializeViewport();
+                    _map.ViewChanged(true);
+                }
+                else if (e.PropertyName == "Rotation")
+                {
+                    _map.ViewChanged(true);
+                    OnViewChanged();
+                }
+            }
+        }
+
         public void OnViewChanged(bool userAction = false)
         {
             if (_map == null) return;
@@ -579,13 +564,13 @@ namespace Mapsui.UI.Xaml
                 _invalid = false;
             }
         }
-        
+
         private void DispatcherShutdownStarted(object sender, EventArgs e)
         {
             CompositionTarget.Rendering -= CompositionTargetRendering;
             _map?.Dispose();
         }
-        
+
         public void ZoomToBox(Geometries.Point beginPoint, Geometries.Point endPoint)
         {
             double x, y, resolution;

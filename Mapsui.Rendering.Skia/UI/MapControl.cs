@@ -9,162 +9,46 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Mapsui.Fetcher;
+using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.UI.Xaml;
 using Mapsui.Utilities;
-using XamlVector = System.Windows.Vector;
-using Mapsui.Geometries;
 using SkiaSharp;
 using SkiaSharp.Views;
 using Point = Mapsui.Geometries.Point;
+using XamlVector = System.Windows.Vector;
 
 namespace Mapsui.Rendering.Skia.UI
 {
     public class MapControl : Grid
     {
-        private Map _map;
-        private System.Windows.Point _previousMousePosition;
-        private System.Windows.Point _currentMousePosition;
-        private System.Windows.Point _downMousePosition;
-        private readonly FpsCounter _fpsCounter = new FpsCounter();
-        private readonly DoubleAnimation _zoomAnimation = new DoubleAnimation();
-        private readonly Storyboard _zoomStoryBoard = new Storyboard();
-        private double _toResolution = double.NaN;
-        private bool _mouseDown;
-        private bool _viewportInitialized;
-        private bool _invalid;
-        private readonly Rectangle _bboxRect;
-
-        public event EventHandler ErrorMessageChanged;
-        public event EventHandler<ViewChangedEventArgs> ViewChanged;
-        public event EventHandler<MouseInfoEventArgs> MouseInfoOver;
-        public event EventHandler MouseInfoLeave;
-        public event EventHandler<MouseInfoEventArgs> MouseInfoUp;
-        public event EventHandler<FeatureInfoEventArgs> FeatureInfo;
-
-        public IRenderer Renderer { get; set; }
-        private bool IsInBoxZoomMode { get; set; }
-        [Obsolete("Use Map.HoverInfoLayers", true)]
-        // ReSharper disable once UnassignedGetOnlyAutoProperty // This is here just to help upgraders
-        public IList<ILayer> MouseInfoOverLayers { get; } 
-        [Obsolete("Use Map.InfoLayers", true)]
-        // ReSharper disable once UnassignedGetOnlyAutoProperty // This is here just to help upgraders
-        public IList<ILayer> MouseInfoUpLayers { get; } 
-        public event EventHandler ViewportInitialized;
-        public bool ZoomToBoxMode { get; set; }
-
-        [Obsolete("Map.Viewport instead", true)]
-        public IViewport Viewport => Map.Viewport;
-
-        private MouseInfoEventArgs _previousMouseOverEventArgs;
-
-        private Point _scale;
-        
-        public Map Map
-        {
-            get
-            {
-                return _map;
-            }
-            set
-            {
-                if (_map != null)
-                {
-                    var temp = _map;
-                    _map = null;
-                    temp.DataChanged -= MapDataChanged;
-                    temp.PropertyChanged -= MapPropertyChanged;
-                    temp.RefreshGraphics -= MapRefreshGraphics;
-                    temp.Dispose();
-                }
-
-                _map = value;
-                
-                if (_map != null)
-                {
-                    _viewportInitialized = false;
-                    _map.DataChanged += MapDataChanged; 
-                    _map.PropertyChanged += MapPropertyChanged;
-                    _map.RefreshGraphics += MapRefreshGraphics;
-                    _map.ViewChanged(true);
-                }
-
-                RefreshGraphics();
-            }
-        }
-
-        private void MapRefreshGraphics(object sender, EventArgs eventArgs)
-        {
-            RefreshGraphics();
-        }
-
-        void MapPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (!Dispatcher.CheckAccess()) Dispatcher.BeginInvoke(new Action(() => MapPropertyChanged(sender, e)));
-            else
-            {
-                if (e.PropertyName == "Enabled")
-                {
-                    RefreshGraphics();
-                }
-                else if (e.PropertyName == "Opacity")
-                {
-                    RefreshGraphics();
-                }
-                else if (e.PropertyName == "Envelope")
-                {
-                    InitializeViewport();
-                    _map.ViewChanged(true);
-                }
-                else if (e.PropertyName == "Rotation")
-                {
-                    _map.ViewChanged(true);
-                    OnViewChanged();
-                }
-            }
-        }
-
-        public FpsCounter FpsCounter => _fpsCounter;
-
-        public string ErrorMessage { get; private set; }
-
-        public bool ZoomLocked { get; set; }
-        
-        private readonly SKElement _skElement;
-
-        private readonly MapRenderer _renderer = new MapRenderer();
-
         // ReSharper disable once UnusedMember.Local // This registration is in order to triggers the call to OnResolutionChanged
         private static readonly DependencyProperty ResolutionProperty =
             DependencyProperty.Register(
             "Resolution", typeof(double), typeof(MapControl),
             new PropertyMetadata(OnResolutionChanged));
 
-        private void OnPaintSurface(SKCanvas canvas, int width, int height)
-        {
-            if (double.IsNaN(Map.Viewport.Resolution)) return;
+        private readonly Rectangle _bboxRect;
+        private readonly FpsCounter _fpsCounter = new FpsCounter();
 
-            Map.Viewport.Width = ActualWidth;
-            Map.Viewport.Height = ActualHeight;
-            
-            _renderer.Render(canvas, Map.Viewport, Map.Layers, Map.BackColor);
-        }
+        private readonly MapRenderer _renderer = new MapRenderer();
 
-        private Point GetScale()
-        {
-            var presentationSource = PresentationSource.FromVisual(this);
-            if (presentationSource == null) throw new Exception("PresentationSource is null");
-            var compositionTarget = presentationSource.CompositionTarget;
-            if (compositionTarget == null) throw new Exception("CompositionTarget is null");
+        private readonly SKElement _skElement;
+        private readonly DoubleAnimation _zoomAnimation = new DoubleAnimation();
+        private readonly Storyboard _zoomStoryBoard = new Storyboard();
+        private System.Windows.Point _currentMousePosition;
+        private System.Windows.Point _downMousePosition;
+        private bool _invalid;
+        private Map _map;
+        private bool _mouseDown;
 
-            var m = compositionTarget.TransformToDevice;
+        private MouseInfoEventArgs _previousMouseOverEventArgs;
+        private System.Windows.Point _previousMousePosition;
 
-            var dpiX = m.M11;
-            var dpiY = m.M22;
-
-            return new Point(dpiX, dpiY);
-        }
+        private Point _scale;
+        private double _toResolution = double.NaN;
+        private bool _viewportInitialized;
 
         public MapControl()
         {
@@ -213,6 +97,125 @@ namespace Mapsui.Rendering.Skia.UI
             IsManipulationEnabled = true;
         }
 
+        public IRenderer Renderer { get; set; }
+        private bool IsInBoxZoomMode { get; set; }
+
+        [Obsolete("Use Map.HoverInfoLayers", true)]
+        // ReSharper disable once UnassignedGetOnlyAutoProperty // This is here just to help upgraders
+        public IList<ILayer> MouseInfoOverLayers { get; }
+
+        [Obsolete("Use Map.InfoLayers", true)]
+        // ReSharper disable once UnassignedGetOnlyAutoProperty // This is here just to help upgraders
+        public IList<ILayer> MouseInfoUpLayers { get; }
+
+        public bool ZoomToBoxMode { get; set; }
+
+        [Obsolete("Map.Viewport instead", true)]
+        public IViewport Viewport => Map.Viewport;
+
+        public Map Map
+        {
+            get
+            {
+                return _map;
+            }
+            set
+            {
+                if (_map != null)
+                {
+                    var temp = _map;
+                    _map = null;
+                    temp.DataChanged -= MapDataChanged;
+                    temp.PropertyChanged -= MapPropertyChanged;
+                    temp.RefreshGraphics -= MapRefreshGraphics;
+                    temp.Dispose();
+                }
+
+                _map = value;
+                
+                if (_map != null)
+                {
+                    _viewportInitialized = false;
+                    _map.DataChanged += MapDataChanged; 
+                    _map.PropertyChanged += MapPropertyChanged;
+                    _map.RefreshGraphics += MapRefreshGraphics;
+                    _map.ViewChanged(true);
+                }
+
+                RefreshGraphics();
+            }
+        }
+
+        public FpsCounter FpsCounter => _fpsCounter;
+
+        public string ErrorMessage { get; private set; }
+
+        public bool ZoomLocked { get; set; }
+
+        public event EventHandler ErrorMessageChanged;
+        public event EventHandler<ViewChangedEventArgs> ViewChanged;
+        public event EventHandler<MouseInfoEventArgs> MouseInfoOver;
+        public event EventHandler MouseInfoLeave;
+        public event EventHandler<MouseInfoEventArgs> MouseInfoUp;
+        public event EventHandler<FeatureInfoEventArgs> FeatureInfo;
+        public event EventHandler ViewportInitialized;
+
+        private void MapRefreshGraphics(object sender, EventArgs eventArgs)
+        {
+            RefreshGraphics();
+        }
+
+        void MapPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (!Dispatcher.CheckAccess()) Dispatcher.BeginInvoke(new Action(() => MapPropertyChanged(sender, e)));
+            else
+            {
+                if (e.PropertyName == "Enabled")
+                {
+                    RefreshGraphics();
+                }
+                else if (e.PropertyName == "Opacity")
+                {
+                    RefreshGraphics();
+                }
+                else if (e.PropertyName == "Envelope")
+                {
+                    InitializeViewport();
+                    _map.ViewChanged(true);
+                }
+                else if (e.PropertyName == "Rotation")
+                {
+                    _map.ViewChanged(true);
+                    OnViewChanged();
+                }
+            }
+        }
+
+        private void OnPaintSurface(SKCanvas canvas, int width, int height)
+        {
+            if (double.IsNaN(Map.Viewport.Resolution)) return;
+
+            Map.Viewport.Width = ActualWidth;
+            Map.Viewport.Height = ActualHeight;
+            
+            _renderer.Render(canvas, Map.Viewport, Map.Layers, Map.BackColor);
+        }
+
+        private Point GetScale()
+        {
+            var presentationSource = PresentationSource.FromVisual(this);
+            if (presentationSource == null) throw new Exception("PresentationSource is null");
+            var compositionTarget = presentationSource.CompositionTarget;
+            if (compositionTarget == null) throw new Exception("CompositionTarget is null");
+
+            var m = compositionTarget.TransformToDevice;
+
+            var dpiX = m.M11;
+            var dpiY = m.M22;
+
+            return new Point(dpiX, dpiY);
+        }
+
         private void SKElementOnPaintSurface(object sender, SKPaintSurfaceEventArgs e)
         {
             if (!_viewportInitialized) InitializeViewport();
@@ -223,7 +226,6 @@ namespace Mapsui.Rendering.Skia.UI
             e.Surface.Canvas.Scale((float)_scale.X, (float)_scale.Y);
             OnPaintSurface(e.Surface.Canvas, e.Info.Width, e.Info.Height);
         }
-
 
         public void OnViewChanged(bool userAction = false)
         {
@@ -600,13 +602,13 @@ namespace Mapsui.Rendering.Skia.UI
             
             _skElement.InvalidateVisual();
         }
-        
+
         private void DispatcherShutdownStarted(object sender, EventArgs e)
         {
             CompositionTarget.Rendering -= CompositionTargetRendering;
             _map?.Dispose();
         }
-        
+
         public void ZoomToBox(Geometries.Point beginPoint, Geometries.Point endPoint)
         {
             double x, y, resolution;
