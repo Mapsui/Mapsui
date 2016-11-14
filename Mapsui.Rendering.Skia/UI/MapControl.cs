@@ -177,9 +177,6 @@ namespace Mapsui.Rendering.Skia.UI
             Children.Add(_skElement);
             _skElement.PaintSurface += SKElementOnPaintSurface;
             
-            //Children.Add(host);
-            //AddGlControl(host);
-
             _bboxRect = new Rectangle
                 {
                     Fill = new SolidColorBrush(Colors.Red),
@@ -228,7 +225,7 @@ namespace Mapsui.Rendering.Skia.UI
         }
 
 
-        public virtual void OnViewChanged(bool userAction = false)
+        public void OnViewChanged(bool userAction = false)
         {
             if (_map == null) return;
 
@@ -278,7 +275,7 @@ namespace Mapsui.Rendering.Skia.UI
             ZoomMiddle();
         }
 
-        protected void OnErrorMessageChanged(EventArgs e)
+        private void OnErrorMessageChanged(EventArgs e)
         {
             ErrorMessageChanged?.Invoke(this, e);
         }
@@ -539,17 +536,17 @@ namespace Mapsui.Rendering.Skia.UI
             return null;
         }
 
-        protected void OnMouseInfoLeave()
+        private void OnMouseInfoLeave()
         {
             MouseInfoLeave?.Invoke(this, new EventArgs());
         }
 
-        protected void OnMouseInfoOver(MouseInfoEventArgs e)
+        private void OnMouseInfoOver(MouseInfoEventArgs e)
         {
             MouseInfoOver?.Invoke(this, e);
         }
 
-        protected void OnMouseInfoUp(MouseInfoEventArgs e)
+        private void OnMouseInfoUp(MouseInfoEventArgs e)
         {
             MouseInfoUp?.Invoke(this, e);
         }

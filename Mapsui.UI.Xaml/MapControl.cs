@@ -198,7 +198,7 @@ namespace Mapsui.UI.Xaml
             IsManipulationEnabled = true;
         }
         
-        public virtual void OnViewChanged(bool userAction = false)
+        public void OnViewChanged(bool userAction = false)
         {
             if (_map == null) return;
 
@@ -248,7 +248,7 @@ namespace Mapsui.UI.Xaml
             ZoomMiddle();
         }
 
-        protected void OnErrorMessageChanged(EventArgs e)
+        private void OnErrorMessageChanged(EventArgs e)
         {
             ErrorMessageChanged?.Invoke(this, e);
         }
@@ -510,17 +510,17 @@ namespace Mapsui.UI.Xaml
             return null;
         }
 
-        protected void OnMouseInfoLeave()
+        private void OnMouseInfoLeave()
         {
             MouseInfoLeave?.Invoke(this, new EventArgs());
         }
 
-        protected void OnMouseInfoOver(MouseInfoEventArgs e)
+        private void OnMouseInfoOver(MouseInfoEventArgs e)
         {
             MouseInfoOver?.Invoke(this, e);
         }
 
-        protected void OnMouseInfoUp(MouseInfoEventArgs e)
+        private void OnMouseInfoUp(MouseInfoEventArgs e)
         {
             MouseInfoUp?.Invoke(this, e);
         }
