@@ -89,9 +89,9 @@ namespace Mapsui
             }
         }
 
-        public IList<ILayer> InfoLayers { get; set; }
+        public IList<ILayer> InfoLayers { get; private set; }
 
-        public IList<ILayer> HoverInfoLayers { get; set; } // todo: add to info layers sample with separate layer
+        public IList<ILayer> HoverInfoLayers { get; private set; } // todo: add to info layers sample with separate layer
 
         public Viewport Viewport { get; }
 
@@ -206,17 +206,17 @@ namespace Mapsui
             OnPropertyChanged(sender, e.PropertyName);
         }
 
-        protected virtual void OnRefreshGraphics()
+        private void OnRefreshGraphics()
         {
             RefreshGraphics?.Invoke(this, EventArgs.Empty);
         }
 
-        protected virtual void OnPropertyChanged(object sender, string propertyName)
+        private void OnPropertyChanged(object sender, string propertyName)
         {
             PropertyChanged?.Invoke(sender, new PropertyChangedEventArgs(propertyName));
         }
 
-        protected void OnPropertyChanged(string name)
+        private void OnPropertyChanged(string name)
         {
             OnPropertyChanged(this, name);
         }
