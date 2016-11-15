@@ -86,7 +86,6 @@
     <Compile Include="MultiLineStringRenderer.cs" />
     <Compile Include="MultiPointRenderer.cs" />
     <Compile Include="MultiPolygonRenderer.cs" />
-    <Compile Include="PlatformLabelBitmap.cs" />
     <Compile Include="PolygonRenderer.cs" />
     <Compile Include="SKBitmapInfo.cs" />
     <Compile Include="ExtensionMethods\SkiaExtensions.cs" />
