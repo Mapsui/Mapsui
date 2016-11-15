@@ -13,7 +13,7 @@ namespace Mapsui.Rendering.Xaml
     /// Wrapper around a feature provider that returns a rasterized image of the features.
     /// </summary>
     ///
-    [Obsolete("Use RasterizingLayer as an alternative approach")]
+    [Obsolete("Use RasterizingLayer as an alternative approach", true)]
     public class RasterizingProvider : IProvider
     {
         private readonly object _syncLock = new object();
