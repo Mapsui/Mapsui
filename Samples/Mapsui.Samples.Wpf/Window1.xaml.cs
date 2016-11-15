@@ -30,11 +30,29 @@ namespace Mapsui.Samples.Wpf
             
             FillComboBoxWithDemoSamples();
 
-            SampleSet.SelectionChanged += SampleSet_SelectionChanged;
-             
+            SampleSet.SelectionChanged += SampleSetOnSelectionChanged;
+            RenderMode.SelectionChanged += RenderModeOnSelectionChanged;
             var firstRadioButton = (RadioButton) SampleList.Children[0];
             firstRadioButton.IsChecked = true;
             firstRadioButton.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+        }
+
+        private void RenderModeOnSelectionChanged(object sender, SelectionChangedEventArgs selectionChangedEventArgs)
+        {
+            var selectedValue = ((ComboBoxItem)((ComboBox)sender).SelectedItem).Content.ToString();
+
+            if (selectedValue.ToLower().Contains("wpf"))
+            {
+                MapControl.RenderMode = UI.Xaml.RenderMode.Wpf;
+            }
+            else if (selectedValue.ToLower().Contains("skia"))
+            {
+                MapControl.RenderMode = UI.Xaml.RenderMode.Skia;
+            }
+            else
+            {
+                throw new Exception("Unknown ComboBox item");
+            }
         }
 
         private void MapControlOnMouseMove(object sender, MouseEventArgs e)
@@ -58,7 +76,7 @@ namespace Mapsui.Samples.Wpf
                 SampleList.Children.Add(CreateRadioButton(sample));
         }
 
-        private void SampleSet_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void SampleSetOnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var selectedValue = ((ComboBoxItem)((ComboBox)sender).SelectedItem).Content.ToString();
 

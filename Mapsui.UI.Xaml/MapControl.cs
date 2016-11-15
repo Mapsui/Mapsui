@@ -57,8 +57,7 @@ namespace Mapsui.UI.Xaml
         {
             Children.Add(RenderCanvas);
             Children.Add(RenderElement);
-            RenderMode = RenderMode.Skia;
-
+            
             RenderElement.PaintSurface += SKElementOnPaintSurface;
             CompositionTarget.Rendering += CompositionTargetRendering;
 
@@ -95,7 +94,7 @@ namespace Mapsui.UI.Xaml
             IsManipulationEnabled = true;
         }
 
-        private static Canvas CreateRenderCanvas()
+        private static Canvas CreateWpfRenderCanvas()
         {
             return new Canvas
             {
@@ -104,16 +103,17 @@ namespace Mapsui.UI.Xaml
             };
         }
 
-        private static SKElement CreateRenderElement()
+        private static SKElement CreateSkiaRenderElement()
         {
             return new SKElement
             {
                 VerticalAlignment = VerticalAlignment.Stretch,
-                HorizontalAlignment = HorizontalAlignment.Stretch
+                HorizontalAlignment = HorizontalAlignment.Stretch,
+                Visibility = Visibility.Collapsed
             };
         }
 
-        public IRenderer Renderer { get; set; }
+        public IRenderer Renderer { get; set; } = new MapRenderer();
         
         private bool IsInBoxZoomMode { get; set; }
 
@@ -166,9 +166,9 @@ namespace Mapsui.UI.Xaml
 
         public bool ZoomLocked { get; set; }
 
-        public Canvas RenderCanvas { get; } = CreateRenderCanvas();
+        public Canvas RenderCanvas { get; } = CreateWpfRenderCanvas();
 
-        private SKElement RenderElement { get; } = CreateRenderElement();
+        private SKElement RenderElement { get; } = CreateSkiaRenderElement();
 
         public RenderMode RenderMode
         {
@@ -177,16 +177,17 @@ namespace Mapsui.UI.Xaml
             {
                 if (value == RenderMode.Skia)
                 {
-                    RenderCanvas.Children.Clear();
                     RenderCanvas.Visibility = Visibility.Collapsed;
                     RenderElement.Visibility = Visibility.Visible;
                     Renderer = new Rendering.Skia.MapRenderer();
+                    Refresh();
                 }
                 else
                 {
                     RenderElement.Visibility = Visibility.Collapsed;
                     RenderCanvas.Visibility = Visibility.Visible;
                     Renderer = new MapRenderer();
+                    Refresh();
                 }
                 _renderMode = value;
             }

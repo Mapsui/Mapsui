@@ -20,6 +20,10 @@
                     MinHeight="30"
                     VerticalAlignment="Top" HorizontalAlignment="Left">
                 <StackPanel>
+                    <ComboBox Name="RenderMode" Margin="0,0, 0, 10">
+                        <ComboBoxItem IsSelected="True">Wpf renderer</ComboBoxItem>
+                        <ComboBoxItem>Skia renderer</ComboBoxItem>
+                    </ComboBox>
                     <ComboBox Name="SampleSet" Margin="0,0, 0, 10">
                         <ComboBoxItem IsSelected="True">Demo samples</ComboBoxItem>
                         <ComboBoxItem>Test samples</ComboBoxItem>
