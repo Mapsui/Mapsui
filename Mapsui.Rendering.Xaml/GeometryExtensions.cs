@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using Mapsui.Geometries;
 using Point = Mapsui.Geometries.Point;
 #if !NETFX_CORE
@@ -30,8 +28,11 @@ namespace Mapsui.Rendering.Xaml
         public static XamlMedia.Geometry ToXaml(this MultiLineString multiLineString)
         {
             var group = new XamlMedia.GeometryGroup();
-            foreach (LineString lineString in multiLineString)
+            foreach (var geometry in multiLineString)
+            {
+                var lineString = (LineString) geometry;
                 group.Children.Add(ToXaml(lineString));
+            }
             return group;
         }
 
@@ -83,4 +84,3 @@ namespace Mapsui.Rendering.Xaml
         }
     }
 }
-
