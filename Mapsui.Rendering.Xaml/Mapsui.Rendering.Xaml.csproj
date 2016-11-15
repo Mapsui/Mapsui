@@ -64,7 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BrushCache.cs" />
-    <Compile Include="GeometryExtensions.cs" />
+    <Compile Include="Extensions\GeometryExtensions.cs" />
     <Compile Include="GeometryRenderer.cs" />
     <Compile Include="MapRenderer.cs" />
     <Compile Include="MatrixHelper.cs" />
