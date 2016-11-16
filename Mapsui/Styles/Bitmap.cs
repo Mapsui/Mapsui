@@ -1,6 +1,5 @@
 using System;
 using System.IO;
-using System.Linq;
 
 namespace Mapsui.Styles
 {
@@ -9,6 +8,7 @@ namespace Mapsui.Styles
     /// The problem with this class is that the renderer creates instances for each bitmap even if this
     /// same bitmap is used. 
     /// </summary>
+    [Obsolete("Use bitmapId in SymbolStyle instead", true)]
     public class Bitmap
     {
         private MemoryStream _data;
@@ -55,10 +55,7 @@ namespace Mapsui.Styles
     {
         public BitmapDataAddedEventArgs(Stream data)
         {
-            Data = data;
+            throw new NotImplementedException();
         }
-
-        public Stream Data;
     }
-
 }
