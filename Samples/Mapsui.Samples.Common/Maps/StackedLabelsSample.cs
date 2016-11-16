@@ -25,8 +25,9 @@ namespace Mapsui.Samples.Common.Maps
                 DataSource = new StackedLabelProvider(provider, new LabelStyle
                 {
                     BackColor = new Brush {Color = new Color(240, 240, 240, 128)},
-                    ForeColor = new Color(65, 65, 65),
-                    LabelColumn = labelColumn
+                    ForeColor = new Color(50, 50, 50),
+                    LabelColumn = labelColumn,
+                    Font = new Font {  FontFamily = "Cambria", Size = 14}
                 }),
                 Style = null
             };
