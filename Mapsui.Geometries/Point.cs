@@ -192,7 +192,7 @@ namespace Mapsui.Geometries
         }
 
         /// <summary>
-        /// Returns a 2D <see cref="Point"/> instance from this <see cref="Point3D"/>
+        /// Returns a 2D <see cref="Point"/> instance from this
         /// </summary>
         /// <returns><see cref="Point"/></returns>
         public Point AsPoint()

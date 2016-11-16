@@ -64,7 +64,6 @@
     <Compile Include="MultiPolygon.cs" />
     <Compile Include="MultiSurface.cs" />
     <Compile Include="Point.cs" />
-    <Compile Include="Point3D.cs" />
     <Compile Include="Polygon.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Quad.cs" />
