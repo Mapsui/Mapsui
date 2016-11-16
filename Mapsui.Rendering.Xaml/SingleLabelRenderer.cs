@@ -5,7 +5,6 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Globalization;
 using System.Windows;
-using Colors = System.Windows.Media.Colors;
 #else
 using Windows.UI.Text;
 using Windows.Foundation;
@@ -21,7 +20,8 @@ namespace Mapsui.Rendering.Xaml
 {
     internal static class SingleLabelRenderer
     {
-        public static UIElement RenderLabel(Geometries.Point position, LabelStyle labelStyle, IViewport viewport, string labelText)
+        public static UIElement RenderLabel(Geometries.Point position, LabelStyle labelStyle, IViewport viewport, 
+            string labelText)
         {
             var screenPosition = viewport.WorldToScreen(position);
             var windowsPosition = screenPosition.ToXaml();
@@ -37,15 +37,15 @@ namespace Mapsui.Rendering.Xaml
                 FontFamily = new FontFamily(labelStyle.Font.FontFamily),
                 FontSize = labelStyle.Font.Size,
                 Margin = new Thickness(witdhMargin, heightMargin, witdhMargin, heightMargin),
-                FontWeight = FontWeights.Bold
+                FontWeight =  FontWeights.Bold
             };
 
             var border = new Border
-                {
-                    Background = new SolidColorBrush(labelStyle.BackColor == null ? Colors.Transparent : labelStyle.BackColor.Color.ToXaml()),
-                    CornerRadius = new CornerRadius(4),
-                    Child = textblock
-                };
+            {
+                Background = labelStyle.BackColor.ToXaml(),
+                CornerRadius = new CornerRadius(4),
+                Child = textblock
+            };
 
             double textWidth;
             double textHeight;

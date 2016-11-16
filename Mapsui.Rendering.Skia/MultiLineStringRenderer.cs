@@ -8,7 +8,7 @@ namespace Mapsui.Rendering.Skia
     {
         public static void Draw(SKCanvas canvas, IViewport viewport, IStyle style, IGeometry geometry)
         {
-            var multiLineString = (MultiLineString)geometry;
+            var multiLineString = (MultiLineString) geometry;
 
             foreach (var lineString in multiLineString)
             {
