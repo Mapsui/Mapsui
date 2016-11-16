@@ -74,7 +74,7 @@ namespace Mapsui.Rendering.Xaml
                 case FillStyle.Vertical:
                     return CreateHatchBrush(brush, 10, 10, new List<Geometry> { Geometry.Parse("M 5 0 l 0 10") });
                 default:
-                    return new SolidColorBrush(brush.Color.ToXaml());
+                    return (brush.Color != null) ? new SolidColorBrush(brush.Color.ToXaml()) : null;
             }
 #else
             return new SolidColorBrush(brush.Color.ToXaml());
