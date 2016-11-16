@@ -36,8 +36,7 @@ namespace Mapsui.Rendering.Xaml
                 Foreground = new SolidColorBrush(labelStyle.ForeColor.ToXaml()),
                 FontFamily = new FontFamily(labelStyle.Font.FontFamily),
                 FontSize = labelStyle.Font.Size,
-                Margin = new Thickness(witdhMargin, heightMargin, witdhMargin, heightMargin),
-                FontWeight =  FontWeights.Bold
+                Margin = new Thickness(witdhMargin, heightMargin, witdhMargin, heightMargin)
             };
 
             var border = new Border
