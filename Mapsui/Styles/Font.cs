@@ -1,6 +1,3 @@
-using System;
-using System.Linq;
-
 namespace Mapsui.Styles
 {
     public class Font
