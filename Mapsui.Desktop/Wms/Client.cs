@@ -223,7 +223,7 @@ namespace Mapsui.Web.Wms
             if (!url.ToLower().Contains("version=") && !string.IsNullOrEmpty(wmsVersion))
                 strReq.AppendFormat("VERSION={0}&", wmsVersion);
 
-            var xml = GetRemoteXml(strReq.ToString());
+            var xml = GetRemoteXml(strReq.ToString().TrimEnd('&'));
             ParseCapabilities(xml);
         }
 
