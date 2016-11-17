@@ -158,24 +158,31 @@ namespace Mapsui.Layers
             //the data in the cache is stored in the map projection so it projected only once.
             if (features == null) throw new ArgumentException("argument features may not be null");
 
-            features = features.ToList();
-            if (ProjectionHelper.NeedsTransform(Transformation, CRS, DataSource.CRS))
+			// We can get 0 features if some error was occured up call stack
+			// We should not add new FeatureSets if we have not any feature
+
+			IsFetching = false;
+
+			if (features.Count() > 0)
             {
-                foreach (var feature in features.Where(feature => !(feature.Geometry is Raster)))
+                features = features.ToList();
+                if (ProjectionHelper.NeedsTransform(Transformation, CRS, DataSource.CRS))
                 {
-                    feature.Geometry = Transformation.Transform(DataSource.CRS, CRS, feature.Geometry);
+                    foreach (var feature in features.Where(feature => !(feature.Geometry is Raster)))
+                    {
+                        feature.Geometry = Transformation.Transform(DataSource.CRS, CRS, feature.Geometry);
+                    }
                 }
-            }
 
-            Sets.Add(new FeatureSets { TimeRequested = (long)state, Features = features });
+                Sets.Add(new FeatureSets { TimeRequested = (long)state, Features = features });
 
-            //Keep only two most recent sets. The older ones will be removed
-            Sets = Sets.OrderByDescending(c => c.TimeRequested).Take(NumberOfFeaturesReturned).ToList();
+                //Keep only two most recent sets. The older ones will be removed
+                Sets = Sets.OrderByDescending(c => c.TimeRequested).Take(NumberOfFeaturesReturned).ToList();
 
-            IsFetching = false;
-            OnDataChanged(new DataChangedEventArgs(null, false, null, Name));
+				OnDataChanged(new DataChangedEventArgs(null, false, null, Name));
+			}
 
-            if (NeedsUpdate)
+			if (NeedsUpdate)
             {
                 StartNewFetch(NewExtent, NewResolution);
             }
