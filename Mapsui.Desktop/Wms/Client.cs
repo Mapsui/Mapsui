@@ -398,10 +398,31 @@ namespace Mapsui.Web.Wms
             if (xnRequest == null)
                 throw (new Exception("Request parameter not specified in Service Description"));
             ParseRequest(xnRequest);
-            XmlNode xnLayer = xnCapability.SelectSingleNode("sm:Layer", nsmgr);
-            if (xnLayer == null)
-                throw (new Exception("No layer tag found in Service Description"));
-            Layer = ParseLayer(xnLayer);
+
+			// Workaround for some WMS servers that have returning more than one root layer
+			var layerNodes = xnCapability.SelectNodes("sm:Layer", nsmgr);
+			if (layerNodes.Count > 1)
+			{
+				List<WmsServerLayer> layers = new List<WmsServerLayer>();
+				foreach (XmlNode l in layerNodes)
+				{
+					layers.Add(ParseLayer(l));
+				}
+
+				var rootLayer = new WmsServerLayer();
+				rootLayer = layers[0];
+				rootLayer.Name = "__auto_generated_root_layer__";
+				rootLayer.Title = "";
+				rootLayer.ChildLayers = layers.ToArray();
+				Layer = rootLayer;
+			}
+			else
+			{
+				XmlNode xnLayer = xnCapability.SelectSingleNode("sm:Layer", nsmgr);
+				if (xnLayer == null)
+					throw (new Exception("No layer tag found in Service Description"));
+				Layer = ParseLayer(xnLayer);
+			}
 
             XmlNode xnException = xnCapability.SelectSingleNode("sm:Exception", nsmgr);
             if (xnException != null)
