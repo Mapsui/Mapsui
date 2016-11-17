@@ -324,13 +324,13 @@ namespace Mapsui.Providers.Wms
 
             try
             {
-                using (var task = _getStreamAsync(url))
-                {
-                    // PDD: This could be more efficient
-                    var bytes = BruTile.Utilities.ReadFully(task.Result);                    
-                    raster = new Raster(new MemoryStream(bytes), viewport.Extent);
-                    task.Result.Close();
-                }
+				using (var task = _getStreamAsync(url))
+				using (var result = task.Result)    // We should correctly dispose the stream even if exception will thrown
+				{
+					// PDD: This could be more efficient
+					var bytes = BruTile.Utilities.ReadFully(result);
+					raster = new Raster(new MemoryStream(bytes), viewport.Extent);	// This can throw exception
+				}
                 return true;
             }
             catch (WebException webEx)
@@ -505,7 +505,11 @@ namespace Mapsui.Providers.Wms
                 webRequest.Credentials = Credentials ?? CredentialCache.DefaultCredentials;
 
                 var webResponse = (HttpWebResponse)webRequest.GetResponse();
-                source.SetResult(webResponse.GetResponseStream());               
+                if (webResponse.ContentType != _mimeType)
+                { 
+                    throw new Exception($"Unexpected WMS response content type. Expected - {_mimeType}, getted - {webResponse.ContentType}");
+                }
+                source.SetResult(webResponse.GetResponseStream());
             }
             catch (Exception ex)
             {
