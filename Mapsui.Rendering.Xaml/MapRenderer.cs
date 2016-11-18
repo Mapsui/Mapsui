@@ -176,7 +176,7 @@ namespace Mapsui.Rendering.Xaml
             }
             catch (Exception ex)
             {
-                Logger.LogDelegate(LogLevel.Error, "Unexpected error in renderer", ex);
+                Logger.Log(LogLevel.Error, "Unexpected error in renderer", ex);
                 return canvas;
                 // If exception happens inside RenderFeature function after 
                 // at -least one child has been added to the canvas,
