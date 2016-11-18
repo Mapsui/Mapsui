@@ -12,6 +12,7 @@ namespace Mapsui.Geometries
         public static bool IsInitialized(this BoundingBox box)
         {
             if (box == null) return false;
+            if (box.Max == null || box.Min == null) return false;
             if (double.IsNaN(box.Width)) return false;
             if (double.IsNaN(box.Height)) return false;
 

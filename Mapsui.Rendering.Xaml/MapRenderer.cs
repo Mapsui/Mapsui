@@ -44,43 +44,52 @@ namespace Mapsui.Rendering.Xaml
         private static void Render(Canvas target, IViewport viewport, IEnumerable<ILayer> layers,
             Color background, bool rasterizing)
         {
-#if !NETFX_CORE
-            target.BeginInit();
-#endif
-            target.Background = background == null ? null : new XamlMedia.SolidColorBrush {Color = background.ToXaml()};
-
-            target.Visibility = Visibility.Collapsed;
-
-            foreach (var child in target.Children)
+            try
             {
-                (child as Canvas)?.Children.Clear();
-            }
-
-            target.Children.Clear();
-
-            layers = layers.ToList();
-
-            foreach (var layer in layers)
-            {
-                if (!layer.Enabled) continue;
-                if (layer.MinVisible > viewport.Resolution) continue;
-                if (layer.MaxVisible < viewport.Resolution) continue;
-
-                RenderLayer(target, viewport, layer, rasterizing);
-            }
-            target.Arrange(new Rect(0, 0, viewport.Width, viewport.Height));
-            target.Visibility = Visibility.Visible;
 
 #if !NETFX_CORE
-            if (DeveloperTools.DeveloperMode)
-            {
-                DrawDebugInfo(target, layers);
-            }
+                target.BeginInit();
 #endif
+                target.Background = background == null ? null : new XamlMedia.SolidColorBrush { Color = background.ToXaml() };
+
+                target.Visibility = Visibility.Collapsed;
+
+                foreach (var child in target.Children)
+                {
+                    (child as Canvas)?.Children.Clear();
+                }
+
+                target.Children.Clear();
+
+                layers = layers.ToList();
+
+                foreach (var layer in layers)
+                {
+                    if (!layer.Enabled) continue;
+                    if (layer.MinVisible > viewport.Resolution) continue;
+                    if (layer.MaxVisible < viewport.Resolution) continue;
+
+                    RenderLayer(target, viewport, layer, rasterizing);  // An exception can be thrown here, 
+                                                                        // so we must use try/finally stmt to ensure that the target.EndInit will be called in any case
+                }
+                target.Arrange(new Rect(0, 0, viewport.Width, viewport.Height));
+                target.Visibility = Visibility.Visible;
 
 #if !NETFX_CORE
-            target.EndInit();
+                if (DeveloperTools.DeveloperMode)
+                {
+                    DrawDebugInfo(target, layers);
+                }
 #endif
+            }
+            // We MUST call EndInit in any case
+            // If we don't do so (i.e. as a result of an exception in the code above) - we get the System.InvalidOperationException in BeginInit in subsequent calls
+            finally
+            {
+#if !NETFX_CORE
+                target.EndInit();
+#endif
+            }
         }
 
         public MemoryStream RenderToBitmapStream(IViewport viewport, IEnumerable<ILayer> layers, Color background = null)
@@ -167,7 +176,7 @@ namespace Mapsui.Rendering.Xaml
             }
             catch (Exception ex)
             {
-                Logger.LogDelegate(LogLevel.Error, "Unexpected error in renderer", ex);
+                Logger.Log(LogLevel.Error, "Unexpected error in renderer", ex);
                 return canvas;
                 // If exception happens inside RenderFeature function after 
                 // at -least one child has been added to the canvas,
