@@ -44,8 +44,6 @@ namespace Mapsui
             BackColor = Color.White;
             Layers = new LayerCollection();
             Viewport =  new Viewport { Center = { X = double.NaN, Y = double.NaN }, Resolution = double.NaN };
-            InfoLayers = new List<ILayer>();
-            HoverInfoLayers = new List<ILayer>();
         }
 
         /// <summary>
@@ -89,9 +87,9 @@ namespace Mapsui
             }
         }
 
-        public IList<ILayer> InfoLayers { get; private set; }
+        public IList<ILayer> InfoLayers { get; private set; } = new List<ILayer>();
 
-        public IList<ILayer> HoverInfoLayers { get; private set; } // todo: add to info layers sample with separate layer
+        public IList<ILayer> HoverInfoLayers { get; private set; } = new List<ILayer>();
 
         public Viewport Viewport { get; }
 

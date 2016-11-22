@@ -151,6 +151,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ExtensionMethods\FeatureExtensions.cs" />
     <Compile Include="LayerList.xaml.cs">
       <DependentUpon>LayerList.xaml</DependentUpon>
     </Compile>

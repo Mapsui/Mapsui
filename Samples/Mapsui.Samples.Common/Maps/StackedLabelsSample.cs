@@ -12,7 +12,7 @@ namespace Mapsui.Samples.Common.Maps
         {
             var map = new Map();
             map.Layers.Add(OsmSample.CreateLayer());
-            var provider = PointsSample.CreateRandomPointsProvider(map.Envelope);
+            var provider = PointsSample.CreateProviderWithRandomPoints(map.Envelope);
             map.Layers.Add(CreateStackedLabelLayer(provider, LabelColumn));
             map.Layers.Add(CreateLayer(provider));
             return map;

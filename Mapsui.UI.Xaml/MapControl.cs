@@ -45,19 +45,18 @@ namespace Mapsui.UI.Xaml
         private bool _invalid;
         private Map _map;
         private bool _mouseDown;
-
-        private MouseInfoEventArgs _previousMouseOverEventArgs;
+        private MouseInfoEventArgs _previousHoverInfoEventArgs;
         private Point _previousMousePosition;
-        private double _toResolution = double.NaN;
-        private bool _viewportInitialized;
         private RenderMode _renderMode;
         private Geometries.Point _skiaScale;
+        private double _toResolution = double.NaN;
+        private bool _viewportInitialized;
 
         public MapControl()
         {
             Children.Add(RenderCanvas);
             Children.Add(RenderElement);
-            
+
             RenderElement.PaintSurface += SKElementOnPaintSurface;
             CompositionTarget.Rendering += CompositionTargetRendering;
 
@@ -94,27 +93,8 @@ namespace Mapsui.UI.Xaml
             IsManipulationEnabled = true;
         }
 
-        private static Canvas CreateWpfRenderCanvas()
-        {
-            return new Canvas
-            {
-                VerticalAlignment = VerticalAlignment.Stretch,
-                HorizontalAlignment = HorizontalAlignment.Stretch
-            };
-        }
-
-        private static SKElement CreateSkiaRenderElement()
-        {
-            return new SKElement
-            {
-                VerticalAlignment = VerticalAlignment.Stretch,
-                HorizontalAlignment = HorizontalAlignment.Stretch,
-                Visibility = Visibility.Collapsed
-            };
-        }
-
         public IRenderer Renderer { get; set; } = new MapRenderer();
-        
+
         private bool IsInBoxZoomMode { get; set; }
 
         [Obsolete("Use Map.HoverInfoLayers", true)]
@@ -193,11 +173,29 @@ namespace Mapsui.UI.Xaml
             }
         }
 
+        private static Canvas CreateWpfRenderCanvas()
+        {
+            return new Canvas
+            {
+                VerticalAlignment = VerticalAlignment.Stretch,
+                HorizontalAlignment = HorizontalAlignment.Stretch
+            };
+        }
+
+        private static SKElement CreateSkiaRenderElement()
+        {
+            return new SKElement
+            {
+                VerticalAlignment = VerticalAlignment.Stretch,
+                HorizontalAlignment = HorizontalAlignment.Stretch,
+                Visibility = Visibility.Collapsed
+            };
+        }
+
         public event EventHandler ErrorMessageChanged;
         public event EventHandler<ViewChangedEventArgs> ViewChanged;
-        public event EventHandler<MouseInfoEventArgs> MouseInfoOver;
-        public event EventHandler MouseInfoLeave;
-        public event EventHandler<MouseInfoEventArgs> MouseInfoUp;
+        public event EventHandler<MouseInfoEventArgs> HoverInfo;
+        public event EventHandler<MouseInfoEventArgs> Info;
         public event EventHandler<FeatureInfoEventArgs> FeatureInfo;
         public event EventHandler ViewportInitialized;
 
@@ -332,7 +330,7 @@ namespace Mapsui.UI.Xaml
             if (ZoomLocked) return;
 
             _currentMousePosition = e.GetPosition(this);
-                //Needed for both MouseMove and MouseWheel event for mousewheel event
+            //Needed for both MouseMove and MouseWheel event for mousewheel event
 
             if (double.IsNaN(_toResolution))
                 _toResolution = Map.Viewport.Resolution;
@@ -450,7 +448,7 @@ namespace Mapsui.UI.Xaml
             else
             {
                 HandleFeatureInfo(e);
-                var eventArgs = GetMouseInfoEventArgs(e.GetPosition(this), Map.InfoLayers);
+                var eventArgs = GetHoverInfoEventArgs(e.GetPosition(this), Map.InfoLayers);
                 OnMouseInfoUp(eventArgs ?? new MouseInfoEventArgs());
             }
 
@@ -490,7 +488,7 @@ namespace Mapsui.UI.Xaml
                 return;
             }
 
-            if (!_mouseDown) RaiseMouseInfoOverEvents(e.GetPosition(this));
+            if (!_mouseDown) RaiseHoverInfoEvents(e.GetPosition(this));
 
             if (_mouseDown)
             {
@@ -507,22 +505,28 @@ namespace Mapsui.UI.Xaml
             }
         }
 
-        private void RaiseMouseInfoOverEvents(Point mousePosition)
+        private void RaiseHoverInfoEvents(Point mousePosition)
         {
-            var mouseOverEventArgs = GetMouseInfoEventArgs(mousePosition, Map.HoverInfoLayers);
-            if ((_previousMouseOverEventArgs != null) && (mouseOverEventArgs != null)) OnMouseInfoLeave();
-            else OnMouseInfoOver(mouseOverEventArgs);
-            _previousMouseOverEventArgs = mouseOverEventArgs;
+            var mouseOverEventArgs = GetHoverInfoEventArgs(mousePosition, Map.HoverInfoLayers);
+
+            if (mouseOverEventArgs != null)
+                OnMouseHoverInfo(mouseOverEventArgs);
+            else if (_previousHoverInfoEventArgs != null)
+                OnMouseHoverInfoLeave();
+
+            _previousHoverInfoEventArgs = mouseOverEventArgs;
         }
 
-        private MouseInfoEventArgs GetMouseInfoEventArgs(Point mousePosition, IEnumerable<ILayer> layers)
+        private MouseInfoEventArgs GetHoverInfoEventArgs(Point mousePosition, IEnumerable<ILayer> layers)
         {
             var margin = 16*Map.Viewport.Resolution;
             var point = Map.Viewport.ScreenToWorld(new Geometries.Point(mousePosition.X, mousePosition.Y));
 
             foreach (var layer in layers)
             {
-                var feature = layer?.GetFeaturesInView(Map.Envelope, 0)
+                if (layer.Enabled == false) continue;
+
+                var feature = layer.GetFeaturesInView(Map.Envelope, 0)
                     .Where(f => f.Geometry.GetBoundingBox().GetCentroid().Distance(point) < margin)
                     .OrderBy(f => f.Geometry.GetBoundingBox().GetCentroid().Distance(point))
                     .FirstOrDefault();
@@ -533,19 +537,19 @@ namespace Mapsui.UI.Xaml
             return null;
         }
 
-        private void OnMouseInfoLeave()
+        private void OnMouseHoverInfoLeave()
         {
-            MouseInfoLeave?.Invoke(this, new EventArgs());
+            HoverInfo?.Invoke(this, new MouseInfoEventArgs {Leaving = true});
         }
 
-        private void OnMouseInfoOver(MouseInfoEventArgs e)
+        private void OnMouseHoverInfo(MouseInfoEventArgs e)
         {
-            MouseInfoOver?.Invoke(this, e);
+            HoverInfo?.Invoke(this, e);
         }
 
         private void OnMouseInfoUp(MouseInfoEventArgs e)
         {
-            MouseInfoUp?.Invoke(this, e);
+            Info?.Invoke(this, e);
         }
 
         private void InitializeViewport()
@@ -594,7 +598,7 @@ namespace Mapsui.UI.Xaml
             if (!_viewportInitialized) InitializeViewport();
             if (!_viewportInitialized) return; // Stop if the line above failed.
             // In developermode always render so that fps can be counted
-            if (!_invalid && !DeveloperTools.DeveloperMode) return; 
+            if (!_invalid && !DeveloperTools.DeveloperMode) return;
 
             if (RenderMode == RenderMode.Wpf) RenderWpf();
             else RenderElement.InvalidateVisual();
@@ -751,7 +755,7 @@ namespace Mapsui.UI.Xaml
                 return; // In developermode always render so that fps can be counterd.
 
             if (_skiaScale == null) _skiaScale = GetSkiaScale();
-            e.Surface.Canvas.Scale((float)_skiaScale.X, (float)_skiaScale.Y);
+            e.Surface.Canvas.Scale((float) _skiaScale.X, (float) _skiaScale.Y);
             OnPaintSurface(e.Surface.Canvas, e.Info.Width, e.Info.Height);
         }
     }
@@ -764,13 +768,9 @@ namespace Mapsui.UI.Xaml
 
     public class MouseInfoEventArgs : EventArgs
     {
-        public MouseInfoEventArgs()
-        {
-            LayerName = string.Empty;
-        }
-
-        public string LayerName { get; set; }
+        public string LayerName { get; set; } = "";
         public IFeature Feature { get; set; }
+        public bool Leaving { get; set; }
     }
 
     public class FeatureInfoEventArgs : EventArgs

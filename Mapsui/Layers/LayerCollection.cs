@@ -17,12 +17,9 @@ namespace Mapsui.Layers
         public event LayerAddedEventHandler LayerAdded;
         public event LayerMovedEventHandler LayerMoved;
 
-        public int Count
-        {
-            get { return _layers.Count; }
-        }
+        public int Count => _layers.Count;
 
-        public bool IsReadOnly { get { return _layers.IsReadOnly;  } }
+        public bool IsReadOnly => _layers.IsReadOnly;
 
         public IEnumerator<ILayer> GetEnumerator()
         {
@@ -89,12 +86,12 @@ namespace Mapsui.Layers
 
         private void OnLayerRemoved(ILayer layer)
         {
-            if (LayerRemoved != null) LayerRemoved(layer);
+            LayerRemoved?.Invoke(layer);
         }
 
         private void OnLayerAdded(ILayer layer)
         {
-            if (LayerAdded != null) LayerAdded(layer);
+            LayerAdded?.Invoke(layer);
         }
 
         private void OnLayerMoved(ILayer layer)

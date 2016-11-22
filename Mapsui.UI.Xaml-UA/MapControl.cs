@@ -109,7 +109,6 @@ namespace Mapsui.UI.Xaml
                 {
                     var temp = _map;
                     _map = null;
-                    temp.DataChanged -= MapDataChanged;
                     temp.PropertyChanged -= MapPropertyChanged;
                     temp.Dispose();
                 }
@@ -119,7 +118,6 @@ namespace Mapsui.UI.Xaml
                 if (_map != null)
                 {
                     _viewportInitialized = false;
-                    _map.DataChanged += MapDataChanged;
                     _map.PropertyChanged += MapPropertyChanged;
                     _map.ViewChanged(true);
                 }

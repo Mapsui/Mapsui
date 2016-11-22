@@ -7,8 +7,8 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Input;
 using Mapsui.Logging;
-using Mapsui.Providers;
 using Mapsui.Samples.Common.Desktop;
+using Mapsui.Tests.Common;
 using Mapsui.UI.Xaml;
 
 namespace Mapsui.Samples.Wpf
@@ -20,14 +20,15 @@ namespace Mapsui.Samples.Wpf
             InitializeComponent();
             MapControl.ErrorMessageChanged += MapErrorMessageChanged;
             MapControl.FeatureInfo += MapControlFeatureInfo;
-            MapControl.MouseInfoUp += MapControlOnMouseInfoUp;
+            MapControl.Info += MapControlOnInfo;
             MapControl.MouseMove += MapControlOnMouseMove;
+            MapControl.HoverInfo += MapControlOnHoverInfo;
 
             Fps.SetBinding(TextBlock.TextProperty, new Binding("Fps"));
             Fps.DataContext = MapControl.FpsCounter;
 
             Logger.LogDelegate += LogMethod;
-            
+
             FillComboBoxWithDemoSamples();
 
             SampleSet.SelectionChanged += SampleSetOnSelectionChanged;
@@ -37,22 +38,21 @@ namespace Mapsui.Samples.Wpf
             firstRadioButton.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
         }
 
+        private void MapControlOnHoverInfo(object sender, MouseInfoEventArgs e)
+        {
+            FeatureInfo.Text = e.Leaving ? "" : $"Hover Info:{Environment.NewLine}{e.Feature.ToDisplayText()}";
+        }
+
         private void RenderModeOnSelectionChanged(object sender, SelectionChangedEventArgs selectionChangedEventArgs)
         {
-            var selectedValue = ((ComboBoxItem)((ComboBox)sender).SelectedItem).Content.ToString();
+            var selectedValue = ((ComboBoxItem) ((ComboBox) sender).SelectedItem).Content.ToString();
 
             if (selectedValue.ToLower().Contains("wpf"))
-            {
                 MapControl.RenderMode = UI.Xaml.RenderMode.Wpf;
-            }
             else if (selectedValue.ToLower().Contains("skia"))
-            {
                 MapControl.RenderMode = UI.Xaml.RenderMode.Skia;
-            }
             else
-            {
                 throw new Exception("Unknown ComboBox item");
-            }
         }
 
         private void MapControlOnMouseMove(object sender, MouseEventArgs e)
@@ -66,39 +66,37 @@ namespace Mapsui.Samples.Wpf
         {
             SampleList.Children.Clear();
             foreach (var sample in DemoSamples().ToList())
+            {
                 SampleList.Children.Add(CreateRadioButton(sample));
+            }
         }
 
         private void FillComboBoxWithTestSamples()
         {
             SampleList.Children.Clear();
             foreach (var sample in TestSamples().ToList())
+            {
                 SampleList.Children.Add(CreateRadioButton(sample));
+            }
         }
 
         private void SampleSetOnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var selectedValue = ((ComboBoxItem)((ComboBox)sender).SelectedItem).Content.ToString();
+            var selectedValue = ((ComboBoxItem) ((ComboBox) sender).SelectedItem).Content.ToString();
 
             if (selectedValue == "Demo samples")
-            {
                 FillComboBoxWithDemoSamples();
-            }
             else if (selectedValue == "Test samples")
-            {
                 FillComboBoxWithTestSamples();
-            }
             else
-            {
                 throw new Exception("Unknown ComboBox item");
-            }
         }
 
         private Dictionary<string, Func<Map>> TestSamples()
         {
             var result = new Dictionary<string, Func<Map>>();
             var i = 0;
-            foreach (var sample in Tests.Common.AllSamples.CreateList())
+            foreach (var sample in AllSamples.CreateList())
             {
                 result[i.ToString()] = sample;
                 i++;
@@ -142,25 +140,7 @@ namespace Mapsui.Samples.Wpf
 
         private static void MapControlFeatureInfo(object sender, FeatureInfoEventArgs e)
         {
-            MessageBox.Show(FeaturesToString(e.FeatureInfo));
-        }
-
-        private static string FeaturesToString(IEnumerable<KeyValuePair<string, IEnumerable<IFeature>>> featureInfos)
-        {
-            var result = string.Empty;
-
-            foreach (var layer in featureInfos)
-            {
-                result += layer.Key + "\n";
-                foreach (var feature in layer.Value)
-                {
-                    foreach (var field in feature.Fields)
-                        result += field + ":" + feature[field] + ".";
-                    result += "\n";
-                }
-                result += "\n";
-            }
-            return result;
+            MessageBox.Show(e.FeatureInfo.ToDisplayText());
         }
 
         private void MapErrorMessageChanged(object sender, EventArgs e)
@@ -175,10 +155,10 @@ namespace Mapsui.Samples.Wpf
             MapControl.Refresh();
         }
 
-        private static void MapControlOnMouseInfoUp(object sender, MouseInfoEventArgs mouseInfoEventArgs)
+        private void MapControlOnInfo(object sender, MouseInfoEventArgs mouseInfoEventArgs)
         {
             if (mouseInfoEventArgs.Feature != null)
-                MessageBox.Show(mouseInfoEventArgs.Feature["Label"].ToString());
+                FeatureInfo.Text = $"Click Info:{Environment.NewLine}{mouseInfoEventArgs.Feature.ToDisplayText()}";
         }
     }
 }
