@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Net;
 using System.Windows;
@@ -722,6 +723,7 @@ namespace Mapsui.UI.Xaml
             Refresh();
         }
 
+        [SuppressMessage("ReSharper", "UnusedParameter.Local")]
         private void OnPaintSurface(SKCanvas canvas, int width, int height)
         {
             if (double.IsNaN(Map.Viewport.Resolution)) return;
