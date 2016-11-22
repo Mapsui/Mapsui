@@ -96,7 +96,7 @@ namespace Mapsui.Layers
 
         private void OnLayerMoved(ILayer layer)
         {
-            if (LayerMoved != null) LayerMoved(layer);
+            LayerMoved?.Invoke(layer);
         }
 
         public IEnumerable<ILayer> FindLayer(string layername)
