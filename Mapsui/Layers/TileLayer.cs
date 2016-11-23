@@ -74,7 +74,7 @@ namespace Mapsui.Layers
         {
             if (_tileSource != null)
             {
-                _tileFetcher.AbortFetch();
+                // is causing thread leak _tileFetcher.AbortFetch();
                 _tileFetcher.DataChanged -= TileFetcherDataChanged;
                 _tileFetcher.PropertyChanged -= TileFetcherOnPropertyChanged;
                 _tileFetcher = null;
@@ -132,26 +132,11 @@ namespace Mapsui.Layers
             _memoryCache.MaxTiles = _numberTilesNeeded + _maxExtraTiles;
         }
 
-        /// <summary>
-        /// Aborts the fetch of data that is currently in progress.
-        /// With new ViewChanged calls the fetch will start again. 
-        /// Call this method to speed up garbage collection
-        /// </summary>
-        public override void AbortFetch()
-        {
-            if (_tileFetcher != null)
-            {
-                _tileFetcher.AbortFetch();
-            }
-        }
-
         public override void ClearCache()
         {
-            AbortFetch();
             _memoryCache.Clear();
         }
 
-        
         public ITileSchema Schema
         {
             // TODO: 
@@ -170,7 +155,7 @@ namespace Mapsui.Layers
             get { return _memoryCache; }
         }
 
-        
+
         private void TileFetcherDataChanged(object sender, DataChangedEventArgs e)
         {
             OnDataChanged(e);
@@ -185,14 +170,19 @@ namespace Mapsui.Layers
 
         public override bool? IsCrsSupported(string crs)
         {
-            return (String.Equals(ToSimpleEpsgCode(), crs, StringComparison.CurrentCultureIgnoreCase));
+            return (string.Equals(ToSimpleEpsgCode(), crs, StringComparison.CurrentCultureIgnoreCase));
         }
 
-        private string ToSimpleEpsgCode()
+        string ToSimpleEpsgCode()
         {
             var startEpsgCode = TileSource.Schema.Srs.IndexOf("EPSG:", StringComparison.Ordinal);
             if (startEpsgCode < 0) return TileSource.Schema.Srs;
             return TileSource.Schema.Srs.Substring(startEpsgCode).Replace("::", ":").Trim();
+        }
+
+        public override void AbortFetch()
+        {
+            // to nothing for now
         }
     }
 }
