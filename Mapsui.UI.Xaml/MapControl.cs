@@ -336,9 +336,9 @@ namespace Mapsui.UI.Xaml
             if (double.IsNaN(_toResolution))
                 _toResolution = Map.Viewport.Resolution;
 
-            if (e.Delta > 0)
+            if (e.Delta > Constants.Epsilon)
                 _toResolution = ZoomHelper.ZoomIn(_map.Resolutions, _toResolution);
-            else if (e.Delta < 0)
+            else if (e.Delta < Constants.Epsilon)
                 _toResolution = ZoomHelper.ZoomOut(_map.Resolutions, _toResolution);
 
             e.Handled = true; //so that the scroll event is not sent to the html page.
