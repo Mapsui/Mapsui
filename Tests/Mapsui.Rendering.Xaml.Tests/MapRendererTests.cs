@@ -28,7 +28,7 @@ namespace Mapsui.Rendering.Xaml.Tests
             const string fileName = "vector_symbol.png";
             
             // act
-            var bitmap = new MapRenderer().RenderToBitmapStream(map.Viewport, map.Layers);
+            var bitmap = new MapRenderer().RenderToBitmapStream(map.Viewport, map.Layers, map.BackColor);
             
             // aside
             File.WriteToGeneratedFolder(fileName, bitmap);
@@ -45,7 +45,7 @@ namespace Mapsui.Rendering.Xaml.Tests
             const string fileName = "points_with_symbolstyle.png";
             
             // act
-            var bitmap = new MapRenderer().RenderToBitmapStream(map.Viewport, map.Layers);
+            var bitmap = new MapRenderer().RenderToBitmapStream(map.Viewport, map.Layers, map.BackColor);
             
             // aside
             File.WriteToGeneratedFolder(fileName, bitmap);
@@ -62,7 +62,7 @@ namespace Mapsui.Rendering.Xaml.Tests
             const string fileName = "bitmap_symbol.png";
 
             // act
-            var bitmap = new MapRenderer().RenderToBitmapStream(map.Viewport, map.Layers);
+            var bitmap = new MapRenderer().RenderToBitmapStream(map.Viewport, map.Layers, map.BackColor);
 
             // aside
             File.WriteToGeneratedFolder(fileName, bitmap);
@@ -79,7 +79,7 @@ namespace Mapsui.Rendering.Xaml.Tests
             const string fileName = "vector_symbol_symboltype.png";
             
             // act
-            var bitmap = new MapRenderer().RenderToBitmapStream(map.Viewport, map.Layers);
+            var bitmap = new MapRenderer().RenderToBitmapStream(map.Viewport, map.Layers, map.BackColor);
 
             // aside
             File.WriteToGeneratedFolder(fileName, bitmap);
@@ -96,7 +96,7 @@ namespace Mapsui.Rendering.Xaml.Tests
             const string fileName = "vector_symbol_unittype.png";
             
             // act
-            var bitmap = new MapRenderer().RenderToBitmapStream(map.Viewport, map.Layers);
+            var bitmap = new MapRenderer().RenderToBitmapStream(map.Viewport, map.Layers, map.BackColor);
 
             // aside
             File.WriteToGeneratedFolder(fileName, bitmap);
@@ -113,7 +113,7 @@ namespace Mapsui.Rendering.Xaml.Tests
             const string fileName = "polygon.png";
 
             // act
-            var bitmap = new MapRenderer().RenderToBitmapStream(map.Viewport, map.Layers);
+            var bitmap = new MapRenderer().RenderToBitmapStream(map.Viewport, map.Layers, map.BackColor);
 
             // aside
             File.WriteToGeneratedFolder(fileName, bitmap);
@@ -130,7 +130,7 @@ namespace Mapsui.Rendering.Xaml.Tests
             const string fileName = "line.png";
             
             // act
-            var bitmap = new MapRenderer().RenderToBitmapStream(map.Viewport, map.Layers);
+            var bitmap = new MapRenderer().RenderToBitmapStream(map.Viewport, map.Layers, map.BackColor);
 
             // aside
             File.WriteToGeneratedFolder(fileName, bitmap);
@@ -147,7 +147,7 @@ namespace Mapsui.Rendering.Xaml.Tests
             const string fileName = "tilelayer.png";
 
             // act
-            var bitmap = new MapRenderer().RenderToBitmapStream(map.Viewport, map.Layers);
+            var bitmap = new MapRenderer().RenderToBitmapStream(map.Viewport, map.Layers, map.BackColor);
 
             // aside;
             File.WriteToGeneratedFolder(fileName, bitmap);
@@ -164,7 +164,7 @@ namespace Mapsui.Rendering.Xaml.Tests
             const string fileName = "labels.png";
 
             // act
-            var bitmap = new MapRenderer().RenderToBitmapStream(map.Viewport, map.Layers);
+            var bitmap = new MapRenderer().RenderToBitmapStream(map.Viewport, map.Layers, map.BackColor);
 
             // aside;
             File.WriteToGeneratedFolder(fileName, bitmap);
