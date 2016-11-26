@@ -44,7 +44,7 @@ namespace Mapsui.Fetcher
             {
                 if (_tileProvider != null) image = _tileProvider.GetTile(_tileInfo);
             }
-            catch (Exception ex) //This may seem a bit weird. We catch the exception to pass it as an argument. This is because we are on a worker thread here, we cannot just let it fall through. 
+            catch (Exception ex) // On this worker thread exceptions will not fall through to the caller so catch and pass in callback  
             {
                 error = ex;
             }
