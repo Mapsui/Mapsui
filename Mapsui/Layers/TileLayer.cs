@@ -74,7 +74,7 @@ namespace Mapsui.Layers
         {
             if (_tileSource != null)
             {
-                // is causing thread leak _tileFetcher.AbortFetch();
+                // Is causing thread leak _tileFetcher.AbortFetch();
                 _tileFetcher.DataChanged -= TileFetcherDataChanged;
                 _tileFetcher.PropertyChanged -= TileFetcherOnPropertyChanged;
                 _tileFetcher = null;
