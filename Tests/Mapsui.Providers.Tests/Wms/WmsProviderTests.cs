@@ -27,29 +27,5 @@ namespace Mapsui.Providers.Tests.Wms
             // assert
             Assert.True(legendUrls.Count() == 2);
         }
-
-        [Test]
-        public void GetLegend_WhenCalled_ShouldReturnLegend()
-        {
-            // arrange
-            var capabilties = new XmlDocument {XmlResolver = null};
-            capabilties.Load($"{AssemblyInfo.AssemblyDirectory}\\Resources\\capabilities_1_3_0.xml");
-            var provider = new WmsProvider(capabilties)
-            {
-                CRS = "EPSG:900913",
-                ContinueOnError = true
-            };
-            provider.AddLayer("Maasluis complex - top");
-            provider.AddLayer("Kreftenheye z2 - top");
-            provider.SetImageFormat(provider.OutputFormats[0]);
-            
-
-            // act
-            var legendImages = provider.GetLegends();
-
-
-            // assert
-            Assert.True(legendImages.Count() == 2);
-        }
     }
 }
