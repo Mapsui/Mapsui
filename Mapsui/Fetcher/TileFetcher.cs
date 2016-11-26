@@ -31,6 +31,8 @@ namespace Mapsui.Fetcher
 {
     public class TileFetcher : INotifyPropertyChanged
     {
+        public const int DefaultMaxThreads = 2;
+        public const int DefaultMaxAttempts = 2;
         private readonly MemoryCache<Feature> _memoryCache;
         private readonly ITileSource _tileSource;
         private BoundingBox _extent;
@@ -44,8 +46,6 @@ namespace Mapsui.Fetcher
         private readonly int _maxAttempts;
         private volatile bool _isThreadRunning;
         private volatile bool _isViewChanged;
-        public const int DefaultMaxThreads = 2;
-        public const int DefaultMaxAttempts = 2;
         private bool _busy;
         private int _numberTilesNeeded;
 
@@ -197,9 +197,9 @@ namespace Mapsui.Fetcher
                 if (e.Error == null && e.Cancelled == false && _isThreadRunning && e.Image != null)
                 {
                     var feature = new Feature
-                        {
-                            Geometry = new Raster(new MemoryStream(e.Image), e.TileInfo.Extent.ToBoundingBox())
-                        };
+                    {
+                        Geometry = new Raster(new MemoryStream(e.Image), e.TileInfo.Extent.ToBoundingBox())
+                    };
                     _memoryCache.Add(e.TileInfo.Index, feature);
                 }
             }
