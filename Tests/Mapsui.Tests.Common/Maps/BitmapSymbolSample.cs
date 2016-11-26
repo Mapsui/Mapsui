@@ -10,10 +10,17 @@ namespace Mapsui.Tests.Common.Maps
     {
         public static Map CreateMap()
         {
-            var map = new Map {BackColor = Color.Transparent, Viewport =
+            var map = new Map
             {
-                Center = new Point(100, 100), Width = 200, Height = 200, Resolution = 1
-            }};
+                BackColor = Color.Transparent,
+                Viewport =
+                {
+                    Center = new Point(100, 100),
+                    Width = 200,
+                    Height = 200,
+                    Resolution = 1
+                }
+            };
             map.Layers.Add(new MemoryLayer
             {
                 Style = null,
@@ -27,7 +34,7 @@ namespace Mapsui.Tests.Common.Maps
         {
             var circleIconId = LoadBitmap("Mapsui.Tests.Common.Resources.Images.circle.png");
             var checkeredIconId = LoadBitmap("Mapsui.Tests.Common.Resources.Images.checkered.png");
-           
+
             return new Features
             {
                 new Feature
@@ -57,7 +64,6 @@ namespace Mapsui.Tests.Common.Maps
         {
             var bitmapStream = typeof(Utilities).GetTypeInfo().Assembly.GetManifestResourceStream(bitmapPath);
             return BitmapRegistry.Instance.Register(bitmapStream);
-
         }
     }
 }
