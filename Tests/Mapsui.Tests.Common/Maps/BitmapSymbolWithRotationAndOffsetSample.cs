@@ -37,19 +37,18 @@ namespace Mapsui.Tests.Common.Maps
             return new MemoryProvider(features);
         }
 
-
-        public static Feature CreateFeatureWithRotatedBitmapSymbol(double x, double y, double rotation)
+        private static Feature CreateFeatureWithRotatedBitmapSymbol(double x, double y, double rotation)
         {
             const string bitmapPath = @"Mapsui.Tests.Common.Resources.Images.iconthatneedsoffset.png";
             var bitmapStream = typeof(Utilities).GetTypeInfo().Assembly.GetManifestResourceStream(bitmapPath);
             var bitmapId = BitmapRegistry.Instance.Register(bitmapStream);
 
-            var feature = new Feature { Geometry = new Point(x, y) };
+            var feature = new Feature {Geometry = new Point(x, y)};
 
             feature.Styles.Add(new SymbolStyle
             {
                 BitmapId = bitmapId,
-                SymbolOffset = new Offset { Y = -24 },
+                SymbolOffset = new Offset {Y = -24},
                 SymbolRotation = rotation
             });
             return feature;
