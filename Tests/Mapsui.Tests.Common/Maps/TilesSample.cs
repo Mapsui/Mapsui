@@ -4,6 +4,7 @@ using BruTile;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
+using Mapsui.Styles;
 
 namespace Mapsui.Tests.Common.Maps
 {
@@ -13,6 +14,7 @@ namespace Mapsui.Tests.Common.Maps
         {
             var map = new Map
             {
+                BackColor = Color.Transparent,
                 Viewport = {Center = new Point(-7641856, 4804912), Width = 600, Height = 400, Resolution = 51116}
             };
 

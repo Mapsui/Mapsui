@@ -11,6 +11,7 @@ namespace Mapsui.Tests.Common.Maps
         {
             var map = new Map
             {
+                BackColor = Color.Transparent,
                 Viewport =
                 {
                     Center = new Point(0, 0),
