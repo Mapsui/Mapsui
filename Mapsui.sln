@@ -59,14 +59,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.UI.Xaml-UA", "Mapsui
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Geometries", "Mapsui.Geometries\Mapsui.Geometries.csproj", "{EE55B62D-FFA2-4C24-A4AD-7A47ACE55CE5}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution", "Solution", "{08F7A74F-3AAF-4A0F-8E64-ADE4BCC4AA6F}"
-	ProjectSection(SolutionItems) = preProject
-		.gitignore = .gitignore
-		licence.txt = licence.txt
-		Mapsui.sln.DotSettings = Mapsui.sln.DotSettings
-		README.md = README.md
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{B2DB6CAC-1C30-42C9-B628-BACEBF790AB9}"
 	ProjectSection(SolutionItems) = preProject
 		Scripts\build.proj = Scripts\build.proj
@@ -88,6 +80,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{45FC7141-9D40-43F2-8EE2-2BF3B37F7557}"
 	ProjectSection(SolutionItems) = preProject
 		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		licence.txt = licence.txt
+		Mapsui.sln.DotSettings = Mapsui.sln.DotSettings
+		README.md = README.md
 	EndProjectSection
 EndProject
 Global
