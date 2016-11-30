@@ -42,7 +42,7 @@ namespace Mapsui.Geometries
         /// </summary>
         public virtual bool Equals(Geometry other)
         {
-            return SpatialRelations.Equals(this, other);
+            return Equals(this, other);
         }
 
         
@@ -146,7 +146,7 @@ namespace Mapsui.Geometries
         /// </summary>
         public virtual bool Disjoint(Geometry geom)
         {
-            return SpatialRelations.Disjoint(this, geom);
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -154,7 +154,7 @@ namespace Mapsui.Geometries
         /// </summary>
         public virtual bool Intersects(Geometry geom)
         {
-            return SpatialRelations.Intersects(this, geom);
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -162,7 +162,7 @@ namespace Mapsui.Geometries
         /// </summary>
         public virtual bool Touches(Geometry geom)
         {
-            return SpatialRelations.Touches(this, geom);
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -170,7 +170,7 @@ namespace Mapsui.Geometries
         /// </summary>
         public virtual bool Crosses(Geometry geom)
         {
-            return SpatialRelations.Crosses(this, geom);
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -178,7 +178,7 @@ namespace Mapsui.Geometries
         /// </summary>
         public virtual bool Within(Geometry geom)
         {
-            return SpatialRelations.Within(this, geom);
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -186,7 +186,7 @@ namespace Mapsui.Geometries
         /// </summary>
         public virtual bool Contains(Geometry geom)
         {
-            return SpatialRelations.Contains(this, geom);
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -194,7 +194,7 @@ namespace Mapsui.Geometries
         /// </summary>
         public virtual bool Overlaps(Geometry geom)
         {
-            return SpatialRelations.Overlaps(this, geom);
+            throw new NotImplementedException();
         }
 
 
