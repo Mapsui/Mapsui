@@ -359,16 +359,6 @@ namespace Mapsui.Geometries
         }
 
         /// <summary>
-        /// Returns true if this instance contains 'geom'
-        /// </summary>
-        /// <param name="geom">Geometry</param>
-        /// <returns>True if geom is contained by this instance</returns>
-        public override bool Contains(Geometry geom)
-        {
-            return false;
-        }
-
-        /// <summary>
         /// Calculates a new point by rotating this point clockwise about the specified center point
         /// </summary>
         /// <param name="degrees">Angle to rotate clockwise (degrees)</param>

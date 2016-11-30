@@ -73,16 +73,6 @@ namespace Mapsui.Geometries
             throw new NotImplementedException();
         }
 
-        public bool Within(Geometry geom)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Contains(Geometry geom)
-        {
-            throw new NotImplementedException();
-        }
-
         public bool Overlaps(Geometry geom)
         {
             throw new NotImplementedException();

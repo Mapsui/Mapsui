@@ -102,16 +102,6 @@ namespace Mapsui.Geometries
         bool Touches(Geometry geom);
 
         /// <summary>
-        /// Returns 'true' if this <see cref="Geometry"/> is 'spatially within' another <see cref="Geometry"/>.
-        /// </summary>
-        bool Within(Geometry geom);
-
-        /// <summary>
-        /// Returns 'true' if this <see cref="Geometry"/> 'spatially contains' another <see cref="Geometry"/>.
-        /// </summary>
-        bool Contains(Geometry geom);
-
-        /// <summary>
         /// Returns 'true' if this <see cref="Geometry"/> 'spatially overlaps' another <see cref="Geometry"/>.
         /// </summary>
         bool Overlaps(Geometry geom);
