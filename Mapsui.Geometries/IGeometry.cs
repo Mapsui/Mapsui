@@ -87,16 +87,6 @@ namespace Mapsui.Geometries
         bool Equals(Geometry geom);
 
         /// <summary>
-        /// Returns 'true' if this <see cref="Geometry"/> is 'spatially disjoint' from another <see cref="Geometry"/>
-        /// </summary>
-        bool Disjoint(Geometry geom);
-
-        /// <summary>
-        /// Returns 'true' if this <see cref="Geometry"/> 'spatially intersects' another <see cref="Geometry"/>
-        /// </summary>
-        bool Intersects(Geometry geom);
-
-        /// <summary>
         /// Returns 'true' if this <see cref="Geometry"/> 'spatially touches' another <see cref="Geometry"/>.
         /// </summary>
         bool Touches(Geometry geom);

@@ -139,24 +139,6 @@ namespace Mapsui.Geometries
             return GeometryFromWKB.Parse(WKB);
         }
 
-        
-        
-        /// <summary>
-        /// Returns 'true' if this Geometry is ‘spatially disjoint’ from another <see cref="Geometry"/>.
-        /// </summary>
-        public virtual bool Disjoint(Geometry geom)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Returns 'true' if this <see cref="Geometry"/> ‘spatially intersects’ another <see cref="Geometry"/>.
-        /// </summary>
-        public virtual bool Intersects(Geometry geom)
-        {
-            throw new NotImplementedException();
-        }
-
         /// <summary>
         /// Returns 'true' if this <see cref="Geometry"/> ‘spatially touches’ another <see cref="Geometry"/>.
         /// </summary>
