@@ -16,43 +16,33 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
 using System;
-using System.Globalization;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 namespace Mapsui.Geometries
 {
     /// <summary>
-    /// Bounding box type with double precision
+    ///     Bounding box type with double precision
     /// </summary>
     /// <remarks>
-    /// The Bounding Box represents a box whose sides are parallel to the two axes of the coordinate system.
+    ///     The Bounding Box represents a box whose sides are parallel to the two axes of the coordinate system.
     /// </remarks>
     public class BoundingBox : IEquatable<BoundingBox>
     {
-        private Point max;
-        private Point min;
-
-        public double MinX { get { return min.X; } }
-        public double MinY { get { return min.Y; } }
-        public double MaxX { get { return max.X; } }
-        public double MaxY { get { return max.Y; } }
-
         public BoundingBox() {}
 
         public BoundingBox(BoundingBox boundingBox) : this(
-            boundingBox.min.X,
-            boundingBox.min.Y,
-            boundingBox.max.X,
-            boundingBox.max.Y)
-        {
-        }
+            boundingBox.Min.X,
+            boundingBox.Min.Y,
+            boundingBox.Max.X,
+            boundingBox.Max.Y) {}
 
         /// <summary>
-        /// Initializes a bounding box
+        ///     Initializes a bounding box
         /// </summary>
         /// <remarks>
-        /// In case min values are larger than max values, the parameters will be swapped to ensure correct min/max boundary
+        ///     In case min values are larger than max values, the parameters will be swapped to ensure correct min/max boundary
         /// </remarks>
         /// <param name="minX">left</param>
         /// <param name="minY">bottom</param>
@@ -60,148 +50,113 @@ namespace Mapsui.Geometries
         /// <param name="maxY">top</param>
         public BoundingBox(double minX, double minY, double maxX, double maxY)
         {
-            min = new Point(minX, minY);
-            max = new Point(maxX, maxY);
+            Min = new Point(minX, minY);
+            Max = new Point(maxX, maxY);
             CheckMinMax();
         }
 
         /// <summary>
-        /// Initializes a bounding box
+        ///     Initializes a bounding box
         /// </summary>
         /// <param name="minPoint">Lower left corner</param>
         /// <param name="maxPoint">Upper right corner</param>
         public BoundingBox(Point minPoint, Point maxPoint)
-            : this(minPoint.X, minPoint.Y, maxPoint.X, maxPoint.Y)
-        {
-        }
+            : this(minPoint.X, minPoint.Y, maxPoint.X, maxPoint.Y) {}
 
         /// <summary>
-        /// Initializes a new Bounding Box based on the bounds from a set of geometries
+        ///     Initializes a new Bounding Box based on the bounds from a set of geometries
         /// </summary>
         /// <param name="objects">list of objects</param>
-        public BoundingBox(IEnumerable<Geometry> objects) : this(objects.Select(o => o.GetBoundingBox()))
-        {
-        }
+        public BoundingBox(IEnumerable<Geometry> objects) : this(objects.Select(o => o.GetBoundingBox())) {}
 
         /// <summary>
-        /// Initializes a new Bounding Box based on the bounds from a set of bounding boxes
+        ///     Initializes a new Bounding Box based on the bounds from a set of bounding boxes
         /// </summary>
         public BoundingBox(IEnumerable<BoundingBox> boundingBoxes)
         {
-            max = null;
-            min = null;
+            Max = null;
+            Min = null;
 
             foreach (var boundingBox in boundingBoxes)
             {
-                if (min == null)
-                    min = boundingBox.Min.Clone();
-                if (max == null)
-                    max = boundingBox.Max.Clone();
+                if (Min == null)
+                    Min = boundingBox.Min.Clone();
+                if (Max == null)
+                    Max = boundingBox.Max.Clone();
 
-                min.X = Math.Min(boundingBox.Min.X, Min.X);
-                min.Y = Math.Min(boundingBox.Min.Y, Min.Y);
-                max.X = Math.Max(boundingBox.Max.X, Max.X);
-                max.Y = Math.Max(boundingBox.Max.Y, Max.Y);
+                Min.X = Math.Min(boundingBox.Min.X, Min.X);
+                Min.Y = Math.Min(boundingBox.Min.Y, Min.Y);
+                Max.X = Math.Max(boundingBox.Max.X, Max.X);
+                Max.Y = Math.Max(boundingBox.Max.Y, Max.Y);
             }
         }
 
+        public double MinX => Min.X;
+
+        public double MinY => Min.Y;
+
+        public double MaxX => Max.X;
+
+        public double MaxY => Max.Y;
+
         /// <summary>
-        /// Gets or sets the lower left corner.
+        ///     Gets or sets the lower left corner.
         /// </summary>
-        public Point Min
-        {
-            get { return min; }
-            set { min = value; }
-        }
+        public Point Min { get; set; }
 
         /// <summary>
-        /// Gets or sets the upper right corner.
+        ///     Gets or sets the upper right corner.
         /// </summary>
-        public Point Max
-        {
-            get { return max; }
-            set { max = value; }
-        }
+        public Point Max { get; set; }
 
         /// <summary>
-        /// Gets the left boundary
+        ///     Gets the left boundary
         /// </summary>
-        public Double Left
-        {
-            get { return min.X; }
-        }
+        public double Left => Min.X;
 
         /// <summary>
-        /// Gets the right boundary
+        ///     Gets the right boundary
         /// </summary>
-        public Double Right
-        {
-            get { return max.X; }
-        }
+        public double Right => Max.X;
 
         /// <summary>
-        /// Gets the top boundary
+        ///     Gets the top boundary
         /// </summary>
-        public Double Top
-        {
-            get { return max.Y; }
-        }
+        public double Top => Max.Y;
 
         /// <summary>
-        /// Gets the bottom boundary
+        ///     Gets the bottom boundary
         /// </summary>
-        public Double Bottom
-        {
-            get { return min.Y; }
-        }
+        public double Bottom => Min.Y;
 
-        public Point TopLeft
-        {
-            get { return new Point(Left, Top); }
-        }
+        public Point TopLeft => new Point(Left, Top);
 
-        public Point TopRight
-        {
-            get { return new Point(Right, Top); }
-        }
+        public Point TopRight => new Point(Right, Top);
 
-        public Point BottomLeft
-        {
-            get { return new Point(Left, Bottom); }
-        }
+        public Point BottomLeft => new Point(Left, Bottom);
 
-        public Point BottomRight
-        {
-            get { return new Point(Right, Bottom); }
-        }
+        public Point BottomRight => new Point(Right, Bottom);
 
         /// <summary>
-        /// Returns the width of the bounding box
+        ///     Returns the width of the bounding box
         /// </summary>
         /// <returns>Width of boundingbox</returns>
-        public double Width
-        {
-            get { return Math.Abs(max.X - min.X); }
-
-        }
+        public double Width => Math.Abs(Max.X - Min.X);
 
         /// <summary>
-        /// Returns the height of the bounding box
+        ///     Returns the height of the bounding box
         /// </summary>
         /// <returns>Height of boundingbox</returns>
-        public double Height
-        {
-            get { return Math.Abs(max.Y - min.Y); }
-        }
+        public double Height => Math.Abs(Max.Y - Min.Y);
 
         /// <summary>
-        /// Intersection scalar (used for weighting in building the tree) 
+        ///     Intersection scalar (used for weighting in building the tree)
         /// </summary>
         public uint LongestAxis
         {
             get
             {
-                Point boxdim = Max - Min;
+                var boxdim = Max - Min;
                 uint la = 0; // longest axis
                 double lav = 0; // longest axis length
                 // for each dimension  
@@ -219,68 +174,66 @@ namespace Mapsui.Geometries
             }
         }
 
-        
         /// <summary>
-        /// Checks whether the values of this instance is equal to the values of another instance.
+        ///     Checks whether the values of this instance is equal to the values of another instance.
         /// </summary>
-        /// <param name="other"><see cref="BoundingBox"/> to compare to.</param>
+        /// <param name="other"><see cref="BoundingBox" /> to compare to.</param>
         /// <returns>True if equal</returns>
         public bool Equals(BoundingBox other)
         {
             if (other == null) return false;
-            return Left == other.Left && Right == other.Right && Top == other.Top && Bottom == other.Bottom;
+            return (Left == other.Left) && (Right == other.Right) && (Top == other.Top) && (Bottom == other.Bottom);
         }
 
-        
         /// <summary>
-        /// Moves/translates the <see cref="BoundingBox"/> along the the specified vector
+        ///     Moves/translates the <see cref="BoundingBox" /> along the the specified vector
         /// </summary>
         /// <param name="vector">Offset vector</param>
         public void Offset(Point vector)
         {
-            min += vector;
-            max += vector;
+            Min += vector;
+            Max += vector;
         }
 
         /// <summary>
-        /// Checks whether min values are actually smaller than max values and in that case swaps them.
+        ///     Checks whether min values are actually smaller than max values and in that case swaps them.
         /// </summary>
         /// <returns>true if the bounding was changed</returns>
         public bool CheckMinMax()
         {
-            bool wasSwapped = false;
-            if (min.X > max.X)
+            var wasSwapped = false;
+            if (Min.X > Max.X)
             {
-                double tmp = min.X;
-                min.X = max.X;
-                max.X = tmp;
+                var tmp = Min.X;
+                Min.X = Max.X;
+                Max.X = tmp;
                 wasSwapped = true;
             }
-            if (min.Y > max.Y)
+            if (Min.Y > Max.Y)
             {
-                double tmp = min.Y;
-                min.Y = max.Y;
-                max.Y = tmp;
+                var tmp = Min.Y;
+                Min.Y = Max.Y;
+                Max.Y = tmp;
                 wasSwapped = true;
             }
             return wasSwapped;
         }
 
         /// <summary>
-        /// Determines whether the boundingbox intersects another boundingbox
+        ///     Determines whether the boundingbox intersects another boundingbox
         /// </summary>
         /// <param name="box"></param>
         /// <returns></returns>
         public bool Intersects(BoundingBox box)
         {
-            return !(box.Min.X > Max.X ||
-                     box.Max.X < Min.X ||
-                     box.Min.Y > Max.Y ||
-                     box.Max.Y < Min.Y);
+            return !((box.Min.X > Max.X) ||
+                     (box.Max.X < Min.X) ||
+                     (box.Min.Y > Max.Y) ||
+                     (box.Max.Y < Min.Y));
         }
 
         /// <summary>
-        /// Returns true if this <see cref="BoundingBox"/> intersects the geometry
+        ///     Returns true if this <see cref="BoundingBox" /> intersects the geometry
         /// </summary>
         /// <param name="g">Geometry</param>
         /// <returns>True if intersects</returns>
@@ -290,23 +243,25 @@ namespace Mapsui.Geometries
         }
 
         /// <summary>
-        /// Returns true if this instance touches the <see cref="BoundingBox"/>
+        ///     Returns true if this instance touches the <see cref="BoundingBox" />
         /// </summary>
-        /// <param name="r"><see cref="BoundingBox"/></param>
+        /// <param name="r">
+        ///     <see cref="BoundingBox" />
+        /// </param>
         /// <returns>True it touches</returns>
         public bool Touches(BoundingBox r)
         {
             for (uint cIndex = 0; cIndex < 2; cIndex++)
             {
-                if ((Min[cIndex] > r.Min[cIndex] && Min[cIndex] < r.Min[cIndex]) ||
-                    (Max[cIndex] > r.Max[cIndex] && Max[cIndex] < r.Max[cIndex]))
+                if (((Min[cIndex] > r.Min[cIndex]) && (Min[cIndex] < r.Min[cIndex])) ||
+                    ((Max[cIndex] > r.Max[cIndex]) && (Max[cIndex] < r.Max[cIndex])))
                     return true;
             }
             return false;
         }
 
         /// <summary>
-        /// Returns true if this <see cref="BoundingBox"/> touches the geometry
+        ///     Returns true if this <see cref="BoundingBox" /> touches the geometry
         /// </summary>
         /// <param name="s">Geometry</param>
         /// <returns>True if touches</returns>
@@ -318,22 +273,28 @@ namespace Mapsui.Geometries
         }
 
         /// <summary>
-        /// Returns true if this instance contains the <see cref="BoundingBox"/>
+        ///     Returns true if this instance contains the <see cref="BoundingBox" />
         /// </summary>
-        /// <param name="r"><see cref="BoundingBox"/></param>
+        /// <param name="r">
+        ///     <see cref="BoundingBox" />
+        /// </param>
         /// <returns>True it contains</returns>
         public bool Contains(BoundingBox r)
         {
             for (uint cIndex = 0; cIndex < 2; cIndex++)
-                if (Min[cIndex] > r.Min[cIndex] || Max[cIndex] < r.Max[cIndex]) return false;
+            {
+                if ((Min[cIndex] > r.Min[cIndex]) || (Max[cIndex] < r.Max[cIndex])) return false;
+            }
 
             return true;
         }
 
         /// <summary>
-        /// Returns true if this instance contains the geometry
+        ///     Returns true if this instance contains the geometry
         /// </summary>
-        /// <param name="s"><see cref="BoundingBox"/></param>
+        /// <param name="s">
+        ///     <see cref="BoundingBox" />
+        /// </param>
         /// <returns>True it contains</returns>
         public bool Contains(Geometry s)
         {
@@ -343,7 +304,7 @@ namespace Mapsui.Geometries
         }
 
         /// <summary>
-        /// Returns true if this instance touches the <see cref="Point"/>
+        ///     Returns true if this instance touches the <see cref="Point" />
         /// </summary>
         /// <param name="p">Geometry</param>
         /// <returns>True if touches</returns>
@@ -351,15 +312,15 @@ namespace Mapsui.Geometries
         {
             for (uint cIndex = 0; cIndex < 2; cIndex++)
             {
-                if ((Min[cIndex] > p[cIndex] && Min[cIndex] < p[cIndex]) ||
-                    (Max[cIndex] > p[cIndex] && Max[cIndex] < p[cIndex]))
+                if (((Min[cIndex] > p[cIndex]) && (Min[cIndex] < p[cIndex])) ||
+                    ((Max[cIndex] > p[cIndex]) && (Max[cIndex] < p[cIndex])))
                     return true;
             }
             return false;
         }
 
         /// <summary>
-        /// Returns the area of the BoundingBox
+        ///     Returns the area of the BoundingBox
         /// </summary>
         /// <returns>Area of box</returns>
         public double GetArea()
@@ -368,7 +329,7 @@ namespace Mapsui.Geometries
         }
 
         /// <summary>
-        /// Gets the intersecting area between two boundingboxes
+        ///     Gets the intersecting area between two boundingboxes
         /// </summary>
         /// <param name="r">BoundingBox</param>
         /// <returns>Area</returns>
@@ -376,21 +337,23 @@ namespace Mapsui.Geometries
         {
             uint cIndex;
             for (cIndex = 0; cIndex < 2; cIndex++)
-                if (Min[cIndex] > r.Max[cIndex] || Max[cIndex] < r.Min[cIndex]) return 0.0;
+            {
+                if ((Min[cIndex] > r.Max[cIndex]) || (Max[cIndex] < r.Min[cIndex])) return 0.0;
+            }
 
-            double ret = 1.0;
+            var ret = 1.0;
 
             for (cIndex = 0; cIndex < 2; cIndex++)
             {
-                double f1 = Math.Max(Min[cIndex], r.Min[cIndex]);
-                double f2 = Math.Min(Max[cIndex], r.Max[cIndex]);
+                var f1 = Math.Max(Min[cIndex], r.Min[cIndex]);
+                var f2 = Math.Min(Max[cIndex], r.Max[cIndex]);
                 ret *= f2 - f1;
             }
             return ret;
         }
 
         /// <summary>
-        /// Computes the joined boundingbox of this instance and another boundingbox
+        ///     Computes the joined boundingbox of this instance and another boundingbox
         /// </summary>
         /// <param name="box">Boundingbox to join with</param>
         /// <returns>Boundingbox containing both boundingboxes</returns>
@@ -398,29 +361,27 @@ namespace Mapsui.Geometries
         {
             if (box == null)
                 return Clone();
-            else
-                return new BoundingBox(Math.Min(Min.X, box.Min.X), Math.Min(Min.Y, box.Min.Y),
-                                       Math.Max(Max.X, box.Max.X), Math.Max(Max.Y, box.Max.Y));
+            return new BoundingBox(Math.Min(Min.X, box.Min.X), Math.Min(Min.Y, box.Min.Y),
+                Math.Max(Max.X, box.Max.X), Math.Max(Max.Y, box.Max.Y));
         }
 
         /// <summary>
-        /// Computes the joined boundingbox of two boundingboxes
+        ///     Computes the joined boundingbox of two boundingboxes
         /// </summary>
         /// <param name="box1"></param>
         /// <param name="box2"></param>
         /// <returns></returns>
         public static BoundingBox Join(BoundingBox box1, BoundingBox box2)
         {
-            if (box1 == null && box2 == null)
+            if ((box1 == null) && (box2 == null))
                 return null;
-            else if (box1 == null)
+            if (box1 == null)
                 return box2.Clone();
-            else
-                return box1.Join(box2);
+            return box1.Join(box2);
         }
 
         /// <summary>
-        /// Computes the joined <see cref="BoundingBox"/> of an array of boundingboxes.
+        ///     Computes the joined <see cref="BoundingBox" /> of an array of boundingboxes.
         /// </summary>
         /// <param name="boxes">Boxes to join</param>
         /// <returns>Combined BoundingBox</returns>
@@ -428,19 +389,21 @@ namespace Mapsui.Geometries
         {
             if (boxes == null) return null;
             if (boxes.Length == 1) return boxes[0];
-            BoundingBox box = boxes[0].Clone();
-            for (int i = 1; i < boxes.Length; i++)
+            var box = boxes[0].Clone();
+            for (var i = 1; i < boxes.Length; i++)
+            {
                 box = box.Join(boxes[i]);
+            }
             return box;
         }
 
         /// <summary>
-        /// Increases the size of the boundingbox by the givent amount in all directions
+        ///     Increases the size of the boundingbox by the givent amount in all directions
         /// </summary>
         /// <param name="amount">Amount to grow in all directions</param>
         public BoundingBox Grow(double amount)
         {
-            BoundingBox box = Clone();
+            var box = Clone();
             box.Min.X -= amount;
             box.Min.Y -= amount;
             box.Max.X += amount;
@@ -450,13 +413,13 @@ namespace Mapsui.Geometries
         }
 
         /// <summary>
-        /// Increases the size of the boundingbox by the givent amount in horizontal and vertical directions
+        ///     Increases the size of the boundingbox by the givent amount in horizontal and vertical directions
         /// </summary>
         /// <param name="amountInX">Amount to grow in horizontal direction</param>
         /// <param name="amountInY">Amount to grow in vertical direction</param>
         public BoundingBox Grow(double amountInX, double amountInY)
         {
-            BoundingBox box = Clone();
+            var box = Clone();
             box.Min.X -= amountInX;
             box.Min.Y -= amountInY;
             box.Max.X += amountInX;
@@ -466,8 +429,8 @@ namespace Mapsui.Geometries
         }
 
         /// <summary>
-        /// Calculates a new quad by rotating this bounding box about its center by the
-        /// specified angle clockwise 
+        ///     Calculates a new quad by rotating this bounding box about its center by the
+        ///     specified angle clockwise
         /// </summary>
         /// <param name="degrees">Angle about which to rotate (degrees)</param>
         /// <returns>Returns the calculated quad</returns>
@@ -484,7 +447,7 @@ namespace Mapsui.Geometries
         }
 
         /// <summary>
-        /// Checks whether a point lies within the bounding box
+        ///     Checks whether a point lies within the bounding box
         /// </summary>
         /// <param name="p">Point</param>
         /// <returns>true if point is within</returns>
@@ -501,19 +464,19 @@ namespace Mapsui.Geometries
             return true;
         }
 
-        /// <summary> 
-        /// Computes the minimum distance between this and another <see cref="BoundingBox"/>.
-        /// The distance between overlapping bounding boxes is 0.  Otherwise, the
-        /// distance is the Euclidean distance between the closest points.
+        /// <summary>
+        ///     Computes the minimum distance between this and another <see cref="BoundingBox" />.
+        ///     The distance between overlapping bounding boxes is 0.  Otherwise, the
+        ///     distance is the Euclidean distance between the closest points.
         /// </summary>
         /// <param name="box">Box to calculate distance to</param>
-        /// <returns>The distance between this and another <see cref="BoundingBox"/>.</returns>
+        /// <returns>The distance between this and another <see cref="BoundingBox" />.</returns>
         public virtual double Distance(BoundingBox box)
         {
-            double ret = 0.0;
+            var ret = 0.0;
             for (uint cIndex = 0; cIndex < 2; cIndex++)
             {
-                double x = 0.0;
+                var x = 0.0;
 
                 if (box.Max[cIndex] < Min[cIndex]) x = Math.Abs(box.Max[cIndex] - Min[cIndex]);
                 else if (Max[cIndex] < box.Min[cIndex]) x = Math.Abs(box.Min[cIndex] - Max[cIndex]);
@@ -523,13 +486,13 @@ namespace Mapsui.Geometries
         }
 
         /// <summary>
-        /// Computes the minimum distance between this BoundingBox and a <see cref="Point"/>
+        ///     Computes the minimum distance between this BoundingBox and a <see cref="Point" />
         /// </summary>
-        /// <param name="p"><see cref="Point"/> to calculate distance to.</param>
+        /// <param name="p"><see cref="Point" /> to calculate distance to.</param>
         /// <returns>Minimum distance.</returns>
         public virtual double Distance(Point p)
         {
-            double ret = 0.0;
+            var ret = 0.0;
 
             for (uint cIndex = 0; cIndex < 2; cIndex++)
             {
@@ -541,51 +504,50 @@ namespace Mapsui.Geometries
         }
 
         /// <summary>
-        /// Returns the center of the bounding box
+        ///     Returns the center of the bounding box
         /// </summary>
         public Point GetCentroid()
         {
-            return (min + max)*.5;
+            return (Min + Max)*.5;
         }
 
         /// <summary>
-        /// Creates a copy of the BoundingBox
+        ///     Creates a copy of the BoundingBox
         /// </summary>
         /// <returns></returns>
         public BoundingBox Clone()
         {
-            return new BoundingBox(min.X, min.Y, max.X, max.Y);
+            return new BoundingBox(Min.X, Min.Y, Max.X, Max.Y);
         }
 
         /// <summary>
-        /// Returns a string representation of the boundingbox as LowerLeft + UpperRight formatted as "MinX,MinY MaxX,MaxY"
+        ///     Returns a string representation of the boundingbox as LowerLeft + UpperRight formatted as "MinX,MinY MaxX,MaxY"
         /// </summary>
         /// <returns>MinX,MinY MaxX,MaxY</returns>
         public override string ToString()
         {
-            return String.Format(CultureInfo.InvariantCulture, "{0},{1} {2},{3}", Min.X, Min.Y, Max.X, Max.Y);
+            return string.Format(CultureInfo.InvariantCulture, "{0},{1} {2},{3}", Min.X, Min.Y, Max.X, Max.Y);
         }
 
         /// <summary>
-        /// Indicates whether the current object is equal to another object of the same type.
+        ///     Indicates whether the current object is equal to another object of the same type.
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
         public override bool Equals(object obj)
         {
-            BoundingBox box = obj as BoundingBox;
+            var box = obj as BoundingBox;
             if (obj == null) return false;
-            else return Equals(box);
+            return Equals(box);
         }
 
         /// <summary>
-        /// Returns a hash code for the specified object
+        ///     Returns a hash code for the specified object
         /// </summary>
         /// <returns>A hash code for the specified object</returns>
         public override int GetHashCode()
         {
             return Min.GetHashCode() ^ Max.GetHashCode();
         }
-
     }
 }

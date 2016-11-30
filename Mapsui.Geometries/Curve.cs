@@ -26,10 +26,7 @@ namespace Mapsui.Geometries
         /// <summary>
         ///  The inherent dimension of this Geometry object, which must be less than or equal to the coordinate dimension.
         /// </summary>
-        public override int Dimension
-        {
-            get { return 1; }
-        }
+        public override int Dimension => 1;
 
         /// <summary>
         /// The length of this Curve in its associated spatial reference.
@@ -49,10 +46,7 @@ namespace Mapsui.Geometries
         /// <summary>
         /// Returns true if this Curve is closed (StartPoint = EndPoint).
         /// </summary>
-        public bool IsClosed
-        {
-            get { return (StartPoint.Equals(EndPoint)); }
-        }
+        public bool IsClosed => (StartPoint.Equals(EndPoint));
 
         /// <summary>
         /// true if this Curve is closed (StartPoint = EndPoint) and
