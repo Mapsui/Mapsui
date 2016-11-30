@@ -166,14 +166,6 @@ namespace Mapsui.Geometries
         }
 
         /// <summary>
-        /// Returns 'true' if this <see cref="Geometry"/> ‘spatially crosses’ another <see cref="Geometry"/>.
-        /// </summary>
-        public virtual bool Crosses(Geometry geom)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
         /// Returns 'true' if this <see cref="Geometry"/> is ‘spatially within’ another <see cref="Geometry"/>.
         /// </summary>
         public virtual bool Within(Geometry geom)

@@ -73,11 +73,6 @@ namespace Mapsui.Geometries
             throw new NotImplementedException();
         }
 
-        public bool Crosses(Geometry geom)
-        {
-            throw new NotImplementedException();
-        }
-
         public bool Within(Geometry geom)
         {
             throw new NotImplementedException();
