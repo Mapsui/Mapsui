@@ -140,14 +140,6 @@ namespace Mapsui.Geometries
         }
 
         /// <summary>
-        /// Returns 'true' if this <see cref="Geometry"/> 'spatially overlaps' another <see cref="Geometry"/>.
-        /// </summary>
-        public virtual bool Overlaps(Geometry geom)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
         /// Returns 'true' if this <see cref="Geometry"/> is spatially related to another <see cref="Geometry"/>, by testing
         /// for intersections between the Interior, Boundary and Exterior of the two geometries
         /// as specified by the values in the intersectionPatternMatrix

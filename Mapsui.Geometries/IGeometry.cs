@@ -87,11 +87,6 @@ namespace Mapsui.Geometries
         bool Equals(Geometry geom);
 
         /// <summary>
-        /// Returns 'true' if this <see cref="Geometry"/> 'spatially overlaps' another <see cref="Geometry"/>.
-        /// </summary>
-        bool Overlaps(Geometry geom);
-
-        /// <summary>
         /// Returns the shortest distance between any two points in the two geometries
         /// as calculated in the spatial reference system of this <see cref="Geometry"/>.
         /// </summary>
