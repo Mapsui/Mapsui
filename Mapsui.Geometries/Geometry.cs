@@ -138,21 +138,6 @@ namespace Mapsui.Geometries
         {
             return GeometryFromWKB.Parse(WKB);
         }
-
-        /// <summary>
-        /// Returns 'true' if this <see cref="Geometry"/> is spatially related to another <see cref="Geometry"/>, by testing
-        /// for intersections between the Interior, Boundary and Exterior of the two geometries
-        /// as specified by the values in the intersectionPatternMatrix
-        /// </summary>
-        /// <param name="other"><see cref="Geometry"/> to relate to</param>
-        /// <param name="intersectionPattern">Intersection Pattern</param>
-        /// <returns>True if spatially related</returns>
-        public bool Relate(Geometry other, string intersectionPattern)
-        {
-            throw new NotImplementedException();
-        }
-
-        
         
         /// <summary>
         /// Returns the shortest distance between any two points in the two geometries

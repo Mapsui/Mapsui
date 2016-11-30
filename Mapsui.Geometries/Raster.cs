@@ -48,11 +48,6 @@ namespace Mapsui.Geometries
             throw new NotImplementedException();
         }
 
-        public bool Relate(Geometry other, string intersectionPattern)
-        {
-            throw new NotImplementedException();
-        }
-
         public bool Equals(Geometry geom)
         {
             throw new NotImplementedException();
