@@ -140,14 +140,6 @@ namespace Mapsui.Geometries
         }
 
         /// <summary>
-        /// Returns 'true' if this <see cref="Geometry"/> ‘spatially touches’ another <see cref="Geometry"/>.
-        /// </summary>
-        public virtual bool Touches(Geometry geom)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
         /// Returns 'true' if this <see cref="Geometry"/> 'spatially overlaps' another <see cref="Geometry"/>.
         /// </summary>
         public virtual bool Overlaps(Geometry geom)

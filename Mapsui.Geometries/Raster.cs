@@ -58,11 +58,6 @@ namespace Mapsui.Geometries
             throw new NotImplementedException();
         }
 
-        public bool Touches(Geometry geom)
-        {
-            throw new NotImplementedException();
-        }
-
         public bool Overlaps(Geometry geom)
         {
             throw new NotImplementedException();

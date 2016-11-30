@@ -338,17 +338,6 @@ namespace Mapsui.Geometries
         }
 
         /// <summary>
-        /// Checks whether this point touches another <see cref="Geometry"/>
-        /// </summary>
-        /// <param name="geom">Geometry</param>
-        /// <returns>true if they touch</returns>
-        public override bool Touches(Geometry geom)
-        {
-            if (geom is Point && Equals(geom)) return true;
-            throw new NotImplementedException("Touches not implemented for this feature type");
-        }
-
-        /// <summary>
         /// Checks whether this point intersects a <see cref="BoundingBox"/>
         /// </summary>
         /// <param name="box">Box</param>

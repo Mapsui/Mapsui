@@ -87,11 +87,6 @@ namespace Mapsui.Geometries
         bool Equals(Geometry geom);
 
         /// <summary>
-        /// Returns 'true' if this <see cref="Geometry"/> 'spatially touches' another <see cref="Geometry"/>.
-        /// </summary>
-        bool Touches(Geometry geom);
-
-        /// <summary>
         /// Returns 'true' if this <see cref="Geometry"/> 'spatially overlaps' another <see cref="Geometry"/>.
         /// </summary>
         bool Overlaps(Geometry geom);
