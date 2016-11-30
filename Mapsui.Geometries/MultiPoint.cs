@@ -122,17 +122,6 @@ namespace Mapsui.Geometries
         }
 
         /// <summary>
-        /// Returns a geometry that represents the point set intersection of this Geometry
-        /// with anotherGeometry.
-        /// </summary>
-        /// <param name="geom">Geometry to intersect with</param>
-        /// <returns>Returns a geometry that represents the point set intersection of this Geometry with anotherGeometry.</returns>
-        public override Geometry Intersection(Geometry geom)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
         /// The minimum bounding box for this Geometry.
         /// </summary>
         /// <returns></returns>

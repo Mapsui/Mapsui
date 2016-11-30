@@ -220,13 +220,6 @@ namespace Mapsui.Geometries
         public abstract double Distance(Geometry geom);
 
         /// <summary>
-        /// Returns a geometry that represents the point set intersection of this Geometry
-        /// with anotherGeometry.
-        /// </summary>
-        public abstract Geometry Intersection(Geometry geom);
-
-        
-        /// <summary>
         /// This method must be overridden using 'public new [derived_data_type] Clone()'
         /// </summary>
         /// <returns>Copy of Geometry</returns>

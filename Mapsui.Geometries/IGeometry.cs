@@ -128,13 +128,5 @@ namespace Mapsui.Geometries
         /// <param name="geom"><see cref="Geometry"/> to calculate distance to</param>
         /// <returns>Shortest distance between any two points in the two geometries</returns>
         double Distance(Geometry geom);
-
-        /// <summary>
-        /// Returns a <see cref="Geometry"/> that represents the point set intersection of this <see cref="Geometry"/>
-        /// with another <see cref="Geometry"/>.
-        /// </summary>
-        /// <param name="geom"><see cref="Geometry"/> to intersect with</param>
-        /// <returns>Returns a <see cref="Geometry"/> that represents the point set intersection of this <see cref="Geometry"/> with another <see cref="Geometry"/>.</returns>
-        Geometry Intersection(Geometry geom);
     }
 }

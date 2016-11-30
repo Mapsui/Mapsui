@@ -228,15 +228,5 @@ namespace Mapsui.Geometries
         {
             throw new NotImplementedException();
         }
-
-        /// <summary>
-        /// Returns a geometry that represents the point set intersection of this Geometry
-        /// with anotherGeometry.
-        /// </summary>
-        public override Geometry Intersection(Geometry geom)
-        {
-            throw new NotImplementedException();
-        }
-
-            }
+    }
 }

@@ -97,10 +97,5 @@ namespace Mapsui.Geometries
         {
             throw new NotImplementedException();
         }
-
-        public Geometry Intersection(Geometry geom)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
