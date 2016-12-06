@@ -138,6 +138,7 @@ namespace Mapsui.Geometries
             //	(Might want to assert this)
             //  (1) is handled by checking if next is left of prev ==> CCW
 
+            // ReSharper disable once CompareOfFloatsByEqualityOperator
             if (disc == 0.0)
             {
                 // poly is CCW if prev x is right of next x

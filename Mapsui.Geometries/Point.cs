@@ -26,9 +26,9 @@ namespace Mapsui.Geometries
     /// </summary>
     public class Point : Geometry, IComparable<Point>
     {
-        private bool isEmpty;
-        private double x;
-        private double y;
+        private bool _isEmpty;
+        private double _x;
+        private double _y;
 
         /// <summary>
         /// Initializes a new Point
@@ -37,8 +37,8 @@ namespace Mapsui.Geometries
         /// <param name="y">Y coordinate</param>
         public Point(double x, double y)
         {
-            this.x = x;
-            this.y = y;
+            _x = x;
+            _y = y;
         }
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace Mapsui.Geometries
         /// </summary>
         public Point() : this(0, 0)
         {
-            isEmpty = true;
+            _isEmpty = true;
         }
 
         /// <summary>
@@ -58,8 +58,8 @@ namespace Mapsui.Geometries
             if (point.Length != 2)
                 throw new Exception("Only 2 dimensions are supported for points");
 
-            x = point[0];
-            y = point[1];
+            _x = point[0];
+            _y = point[1];
         }
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace Mapsui.Geometries
         /// </summary>
         protected bool SetIsEmpty
         {
-            set { isEmpty = value; }
+            set { _isEmpty = value; }
         }
 
         /// <summary>
@@ -77,14 +77,14 @@ namespace Mapsui.Geometries
         {
             get
             {
-                if (!isEmpty)
-                    return x;
+                if (!_isEmpty)
+                    return _x;
                 throw new Exception("Point is empty");
             }
             set
             {
-                x = value;
-                isEmpty = false;
+                _x = value;
+                _isEmpty = false;
             }
         }
 
@@ -95,14 +95,14 @@ namespace Mapsui.Geometries
         {
             get
             {
-                if (!isEmpty)
-                    return y;
+                if (!_isEmpty)
+                    return _y;
                 throw new Exception("Point is empty");
             }
             set
             {
-                y = value;
-                isEmpty = false;
+                _y = value;
+                _isEmpty = false;
             }
         }
 
@@ -115,7 +115,7 @@ namespace Mapsui.Geometries
         {
             get
             {
-                if (isEmpty)
+                if (_isEmpty)
                     throw new Exception("Point is empty");
                 else if (index == 0)
                     return X;
@@ -133,7 +133,7 @@ namespace Mapsui.Geometries
                     Y = value;
                 else
                     throw (new Exception("Point index out of bounds"));
-                isEmpty = false;
+                _isEmpty = false;
             }
         }
 
@@ -153,14 +153,15 @@ namespace Mapsui.Geometries
         /// <returns></returns>
         public virtual int CompareTo(Point other)
         {
+            // ReSharper disable once CompareOfFloatsByEqualityOperator
             if (X < other.X || X == other.X && Y < other.Y)
                 return -1;
 
+            // ReSharper disable once CompareOfFloatsByEqualityOperator
             if (X > other.X || X == other.X && Y > other.Y)
                 return 1;
 
-            else // (this.X == other.X && this.Y == other.Y)
-                return 0;
+            return 0;
         }
 
         
@@ -170,7 +171,7 @@ namespace Mapsui.Geometries
         /// <returns></returns>
         public double[] ToDoubleArray()
         {
-            return new[] {x, y};
+            return new[] {_x, _y};
         }
 
         /// <summary>
@@ -197,7 +198,7 @@ namespace Mapsui.Geometries
         /// <returns><see cref="Point"/></returns>
         public Point AsPoint()
         {
-            return new Point(x, y);
+            return new Point(_x, _y);
         }
 
         /// <summary>
@@ -261,7 +262,9 @@ namespace Mapsui.Geometries
         /// <returns></returns>
         public bool Equals(Point p)
         {
-            return p != null && p.X == x && p.Y == y && isEmpty == p.IsEmpty();
+            // ReSharper disable CompareOfFloatsByEqualityOperator
+            return p != null && p.X == _x && p.Y == _y && _isEmpty == p.IsEmpty();
+            // ReSharper restore CompareOfFloatsByEqualityOperator
         }
 
         /// <summary>
@@ -271,7 +274,7 @@ namespace Mapsui.Geometries
         /// <returns>A hash code for the current <see cref="GetHashCode"/>.</returns>
         public override int GetHashCode()
         {
-            return x.GetHashCode() ^ y.GetHashCode() ^ isEmpty.GetHashCode();
+            return _x.GetHashCode() ^ _y.GetHashCode() ^ _isEmpty.GetHashCode();
         }
 
         /// <summary>
@@ -280,7 +283,7 @@ namespace Mapsui.Geometries
         /// <returns>Returns 'true' if this Geometry is the empty geometry</returns>
         public override bool IsEmpty()
         {
-            return isEmpty;
+            return _isEmpty;
         }
 
         /// <summary>
@@ -302,7 +305,7 @@ namespace Mapsui.Geometries
         {
             if (geom.GetType() == typeof (Point))
             {
-                var p = geom as Point;
+                var p = (Point)geom;
                 return Math.Sqrt(Math.Pow(X - p.X, 2) + Math.Pow(Y - p.Y, 2));
             }
             throw new Exception("The method or operation is not implemented for this geometry type.");
@@ -357,8 +360,8 @@ namespace Mapsui.Geometries
         public Point Rotate(double degrees, double centerX, double centerY)
         {
             // translate this point back to the center
-            var newX = x - centerX;
-            var newY = y - centerY;
+            var newX = _x - centerX;
+            var newY = _y - centerY;
 
             // rotate the values
             var p = Algorithms.RotateClockwiseDegrees(newX, newY, degrees);

@@ -27,14 +27,14 @@ namespace Mapsui.Geometries
     /// </summary>
     public class MultiLineString : MultiCurve
     {
-        private IList<LineString> lineStrings;
+        private IList<LineString> _lineStrings;
 
         /// <summary>
         /// Initializes an instance of a MultiLineString
         /// </summary>
         public MultiLineString()
         {
-            lineStrings = new Collection<LineString>();
+            _lineStrings = new Collection<LineString>();
         }
 
         /// <summary>
@@ -42,8 +42,8 @@ namespace Mapsui.Geometries
         /// </summary>
         public IList<LineString> LineStrings
         {
-            get { return lineStrings; }
-            set { lineStrings = value; }
+            get { return _lineStrings; }
+            set { _lineStrings = value; }
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace Mapsui.Geometries
         /// <returns>Geometry at index</returns>
         public new LineString this[int index]
         {
-            get { return lineStrings[index]; }
+            get { return _lineStrings[index]; }
         }
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace Mapsui.Geometries
         {
             get
             {
-                foreach (LineString lineString in lineStrings)
+                foreach (LineString lineString in _lineStrings)
                     if (!lineString.IsClosed)
                         return false;
                 return true;
@@ -78,7 +78,7 @@ namespace Mapsui.Geometries
             get
             {
                 double l = 0;
-                foreach (LineString lineString in lineStrings)
+                foreach (LineString lineString in _lineStrings)
                     l += lineString.Length;
                 return l;
             }
@@ -89,7 +89,7 @@ namespace Mapsui.Geometries
         /// </summary>
         public override int NumGeometries
         {
-            get { return lineStrings.Count; }
+            get { return _lineStrings.Count; }
         }
 
         /// <summary>
@@ -98,10 +98,10 @@ namespace Mapsui.Geometries
         /// <returns>Returns 'true' if this Geometry is the empty geometry</returns>
         public override bool IsEmpty()
         {
-            if (lineStrings == null || lineStrings.Count == 0)
+            if (_lineStrings == null || _lineStrings.Count == 0)
                 return true;
 
-            foreach (LineString lineString in lineStrings)
+            foreach (LineString lineString in _lineStrings)
                 if (!lineString.IsEmpty())
                     return false;
 
@@ -134,7 +134,7 @@ namespace Mapsui.Geometries
                 var coord = geom as Point;
                 // brute force approach!
                 double minDist = double.MaxValue;
-                foreach (var ls in lineStrings)
+                foreach (var ls in _lineStrings)
                 {
                     IList<Point> coord0 = ls.Vertices;
                     for (int i = 0; i < coord0.Count - 1; i++)
@@ -153,7 +153,7 @@ namespace Mapsui.Geometries
                 IList<Point> coord1 = (geom as LineString).Vertices;
                 // brute force approach!
                 double minDistance = double.MaxValue;
-                foreach (var ls in lineStrings)
+                foreach (var ls in _lineStrings)
                 {
                     IList<Point> coord0 = ls.Vertices;
                     for (int i = 0; i < coord0.Count - 1; i++)
@@ -183,7 +183,7 @@ namespace Mapsui.Geometries
         /// <returns>Geometry at index N</returns>
         public override Geometry Geometry(int n)
         {
-            return lineStrings[n];
+            return _lineStrings[n];
         }
 
         /// <summary>
@@ -192,11 +192,11 @@ namespace Mapsui.Geometries
         /// <returns></returns>
         public override BoundingBox GetBoundingBox()
         {
-            if (lineStrings == null || lineStrings.Count == 0)
+            if (_lineStrings == null || _lineStrings.Count == 0)
                 return null;
-            BoundingBox bbox = lineStrings[0].GetBoundingBox();
-            for (int i = 1; i < lineStrings.Count; i++)
-                bbox = bbox.Join(lineStrings[i].GetBoundingBox());
+            BoundingBox bbox = _lineStrings[0].GetBoundingBox();
+            for (int i = 1; i < _lineStrings.Count; i++)
+                bbox = bbox.Join(_lineStrings[i].GetBoundingBox());
             return bbox;
         }
 
@@ -207,7 +207,7 @@ namespace Mapsui.Geometries
         public new MultiLineString Clone()
         {
             var geoms = new MultiLineString();
-            foreach (LineString lineString in lineStrings)
+            foreach (LineString lineString in _lineStrings)
                 geoms.LineStrings.Add(lineString.Clone());
             return geoms;
         }
@@ -218,7 +218,7 @@ namespace Mapsui.Geometries
         /// <returns></returns>
         public override IEnumerator<Geometry> GetEnumerator()
         {
-            foreach (LineString l in lineStrings)
+            foreach (LineString l in _lineStrings)
                 yield return l;
         }
     }

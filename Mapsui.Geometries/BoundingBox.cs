@@ -182,7 +182,10 @@ namespace Mapsui.Geometries
         public bool Equals(BoundingBox other)
         {
             if (other == null) return false;
+
+            // ReSharper disable CompareOfFloatsByEqualityOperator
             return (Left == other.Left) && (Right == other.Right) && (Top == other.Top) && (Bottom == other.Bottom);
+            // ReSharper restore CompareOfFloatsByEqualityOperator
         }
 
         /// <summary>

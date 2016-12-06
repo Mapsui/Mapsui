@@ -27,14 +27,14 @@ namespace Mapsui.Geometries
     /// </summary>
     public class MultiPolygon : MultiSurface
     {
-        private IList<Polygon> polygons;
+        private IList<Polygon> _polygons;
 
         /// <summary>
         /// Instantiates a MultiPolygon
         /// </summary>
         public MultiPolygon()
         {
-            polygons = new Collection<Polygon>();
+            _polygons = new Collection<Polygon>();
         }
 
         /// <summary>
@@ -42,8 +42,8 @@ namespace Mapsui.Geometries
         /// </summary>
         public IList<Polygon> Polygons
         {
-            get { return polygons; }
-            set { polygons = value; }
+            get { return _polygons; }
+            set { _polygons = value; }
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace Mapsui.Geometries
         /// <returns>Geometry at index</returns>
         public new Polygon this[int index]
         {
-            get { return polygons[index]; }
+            get { return _polygons[index]; }
         }
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace Mapsui.Geometries
         {
             get
             {
-                return polygons.Sum(polygon => polygon.Area);
+                return _polygons.Sum(polygon => polygon.Area);
             }
         }
 
@@ -89,7 +89,7 @@ namespace Mapsui.Geometries
         /// </summary>
         public override int NumGeometries
         {
-            get { return polygons.Count; }
+            get { return _polygons.Count; }
         }
 
         /// <summary>
@@ -98,8 +98,8 @@ namespace Mapsui.Geometries
         /// <returns>Returns 'true' if this Geometry is the empty geometry</returns>
         public override bool IsEmpty()
         {
-            if (polygons == null || polygons.Count == 0) return true;
-            return polygons.All(polygon => polygon.IsEmpty());
+            if (_polygons == null || _polygons.Count == 0) return true;
+            return _polygons.All(polygon => polygon.IsEmpty());
         }
 
         /// <summary>
@@ -132,7 +132,7 @@ namespace Mapsui.Geometries
         /// <returns>Geometry at index N</returns>
         public override Geometry Geometry(int n)
         {
-            return polygons[n];
+            return _polygons[n];
         }
 
         /// <summary>
@@ -141,7 +141,7 @@ namespace Mapsui.Geometries
         /// <returns>bounding box</returns>
         public override BoundingBox GetBoundingBox()
         {
-            if (polygons == null || polygons.Count == 0)
+            if (_polygons == null || _polygons.Count == 0)
                 return null;
             BoundingBox bbox = Polygons[0].GetBoundingBox();
             for (int i = 1; i < Polygons.Count; i++)
@@ -156,7 +156,7 @@ namespace Mapsui.Geometries
         public new MultiPolygon Clone()
         {
             var geoms = new MultiPolygon();
-            foreach (var polygon in polygons)
+            foreach (var polygon in _polygons)
                 geoms.Polygons.Add(polygon.Clone());
             return geoms;
         }
@@ -167,7 +167,7 @@ namespace Mapsui.Geometries
         /// <returns></returns>
         public override IEnumerator<Geometry> GetEnumerator()
         {
-            foreach (Polygon p in polygons)
+            foreach (Polygon p in _polygons)
                 yield return p;
         }
     }

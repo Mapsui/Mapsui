@@ -30,8 +30,8 @@ namespace Mapsui.Geometries
     /// </remarks>
     public class Polygon : Surface
     {
-        private LinearRing exteriorRing;
-        private IList<LinearRing> interiorRings;
+        private LinearRing _exteriorRing;
+        private IList<LinearRing> _interiorRings;
 
         /// <summary>
         /// Instatiates a polygon based on one extorier ring and a collection of interior rings.
@@ -40,8 +40,8 @@ namespace Mapsui.Geometries
         /// <param name="interiorRings">Interior rings</param>
         public Polygon(LinearRing exteriorRing, IList<LinearRing> interiorRings)
         {
-            this.exteriorRing = exteriorRing;
-            this.interiorRings = interiorRings;
+            _exteriorRing = exteriorRing;
+            _interiorRings = interiorRings;
         }
 
         /// <summary>
@@ -65,8 +65,8 @@ namespace Mapsui.Geometries
         /// <remarks>This method is supplied as part of the OpenGIS Simple Features Specification</remarks>
         public LinearRing ExteriorRing
         {
-            get { return exteriorRing; }
-            set { exteriorRing = value; }
+            get { return _exteriorRing; }
+            set { _exteriorRing = value; }
         }
 
         /// <summary>
@@ -74,8 +74,8 @@ namespace Mapsui.Geometries
         /// </summary>
         public IList<LinearRing> InteriorRings
         {
-            get { return interiorRings; }
-            set { interiorRings = value; }
+            get { return _interiorRings; }
+            set { _interiorRings = value; }
         }
 
         /// <summary>
@@ -85,7 +85,7 @@ namespace Mapsui.Geometries
         /// <returns></returns>
         public int NumInteriorRing
         {
-            get { return interiorRings.Count; }
+            get { return _interiorRings.Count; }
         }
 
         /// <summary>
@@ -96,9 +96,9 @@ namespace Mapsui.Geometries
             get
             {
                 double area = 0.0;
-                area += exteriorRing.Area;
-                bool extIsClockwise = exteriorRing.IsCCW();
-                foreach (LinearRing linearRing in interiorRings)
+                area += _exteriorRing.Area;
+                bool extIsClockwise = _exteriorRing.IsCCW();
+                foreach (LinearRing linearRing in _interiorRings)
                     if (linearRing.IsCCW() != extIsClockwise)
                         area -= linearRing.Area;
                     else
@@ -132,7 +132,7 @@ namespace Mapsui.Geometries
         /// <returns></returns>
         public LinearRing InteriorRing(int n)
         {
-            return interiorRings[n];
+            return _interiorRings[n];
         }
 
         /// <summary>
@@ -141,14 +141,14 @@ namespace Mapsui.Geometries
         /// <returns>bounding box</returns>
         public override BoundingBox GetBoundingBox()
         {
-            if (exteriorRing == null || exteriorRing.Vertices.Count == 0) return null;
-            var bbox = new BoundingBox(exteriorRing.Vertices[0], exteriorRing.Vertices[0]);
-            for (int i = 1; i < exteriorRing.Vertices.Count; i++)
+            if (_exteriorRing == null || _exteriorRing.Vertices.Count == 0) return null;
+            var bbox = new BoundingBox(_exteriorRing.Vertices[0], _exteriorRing.Vertices[0]);
+            for (int i = 1; i < _exteriorRing.Vertices.Count; i++)
             {
-                bbox.Min.X = Math.Min(exteriorRing.Vertices[i].X, bbox.Min.X);
-                bbox.Min.Y = Math.Min(exteriorRing.Vertices[i].Y, bbox.Min.Y);
-                bbox.Max.X = Math.Max(exteriorRing.Vertices[i].X, bbox.Max.X);
-                bbox.Max.Y = Math.Max(exteriorRing.Vertices[i].Y, bbox.Max.Y);
+                bbox.Min.X = Math.Min(_exteriorRing.Vertices[i].X, bbox.Min.X);
+                bbox.Min.Y = Math.Min(_exteriorRing.Vertices[i].Y, bbox.Min.Y);
+                bbox.Max.X = Math.Max(_exteriorRing.Vertices[i].X, bbox.Max.X);
+                bbox.Max.Y = Math.Max(_exteriorRing.Vertices[i].Y, bbox.Max.Y);
             }
             return bbox;
         }
@@ -159,8 +159,8 @@ namespace Mapsui.Geometries
         /// <returns>Copy of Geometry</returns>
         public new Polygon Clone()
         {
-            var polygon = new Polygon {ExteriorRing = exteriorRing.Clone()};
-            foreach (var interiorRing in interiorRings)
+            var polygon = new Polygon {ExteriorRing = _exteriorRing.Clone()};
+            foreach (var interiorRing in _interiorRings)
                 polygon.InteriorRings.Add(interiorRing.Clone());
             return polygon;
         }
