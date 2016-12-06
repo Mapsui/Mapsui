@@ -113,21 +113,21 @@ namespace Mapsui.Geometries
         /// <summary>
         /// Creates a <see cref="Geometry"/> based on a WellKnownText string
         /// </summary>
-        /// <param name="WKT">Well-known Text</param>
+        /// <param name="wkt">Well-known Text</param>
         /// <returns></returns>
-        public static Geometry GeomFromText(string WKT)
+        public static Geometry GeomFromText(string wkt)
         {
-            return GeometryFromWKT.Parse(WKT);
+            return GeometryFromWKT.Parse(wkt);
         }
 
         /// <summary>
         /// Creates a <see cref="Geometry"/> based on a WellKnownBinary byte array
         /// </summary>
-        /// <param name="WKB">Well-known Binary</param>
+        /// <param name="wkb">Well-known Binary</param>
         /// <returns></returns>
-        public static Geometry GeomFromWKB(byte[] WKB)
+        public static Geometry GeomFromWKB(byte[] wkb)
         {
-            return GeometryFromWKB.Parse(WKB);
+            return GeometryFromWKB.Parse(wkb);
         }
         
         /// <summary>
