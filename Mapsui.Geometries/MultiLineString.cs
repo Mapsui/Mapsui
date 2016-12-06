@@ -101,7 +101,7 @@ namespace Mapsui.Geometries
             if (_lineStrings == null || _lineStrings.Count == 0)
                 return true;
 
-            foreach (LineString lineString in _lineStrings)
+            foreach (var lineString in _lineStrings)
                 if (!lineString.IsEmpty())
                     return false;
 

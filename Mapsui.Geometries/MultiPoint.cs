@@ -90,7 +90,7 @@ namespace Mapsui.Geometries
         /// <returns>Returns 'true' if this Geometry is the empty geometry</returns>
         public override bool IsEmpty()
         {
-            return (_points != null && _points.Count == 0);
+            return _points != null && _points.Count == 0;
         }
 
         /// <summary>

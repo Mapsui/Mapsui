@@ -111,9 +111,11 @@ namespace Mapsui.Geometries
         {
             if (_geometries == null)
                 return true;
-            foreach (Geometry geometry in _geometries)
+
+            foreach (var geometry in _geometries)
                 if (!geometry.IsEmpty())
                     return false;
+
             return true;
         }
 
