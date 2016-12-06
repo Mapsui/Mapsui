@@ -154,14 +154,11 @@ namespace Mapsui.Geometries
         {
             if (obj == null)
                 return false;
-            else
-            {
-                Geometry g = obj as Geometry;
-                if (g == null)
-                    return false;
-                else
-                    return Equals(g);
-            }
+
+            Geometry g = obj as Geometry;
+            if (g == null)
+                return false;
+            return Equals(g);
         }
 
         /// <summary>
