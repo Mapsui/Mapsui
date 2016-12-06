@@ -55,7 +55,6 @@
     <Compile Include="IGeometry.cs" />
     <Compile Include="IGeometryCollection.cs" />
     <Compile Include="IRaster.cs" />
-    <Compile Include="ISpatialReference.cs" />
     <Compile Include="LinearRing.cs" />
     <Compile Include="LineString.cs" />
     <Compile Include="MultiCurve.cs" />
