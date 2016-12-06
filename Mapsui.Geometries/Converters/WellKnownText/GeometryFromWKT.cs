@@ -37,11 +37,10 @@
 
 using System;
 using System.Collections.ObjectModel;
-using System.IO;
-using Mapsui.Geometries;
 using System.Globalization;
+using System.IO;
 
-namespace Mapsui.Converters.WellKnownText
+namespace Mapsui.Geometries.WellKnownText
 {
     /// <summary>
     ///  Converts a Well-known Text representation to a <see cref="Mapsui.Geometries.Geometry"/> instance.

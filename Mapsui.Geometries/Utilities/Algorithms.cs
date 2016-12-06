@@ -16,9 +16,8 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
 using System;
-using Mapsui.Geometries;
 
-namespace Mapsui.Utilities
+namespace Mapsui.Geometries.Utilities
 {
     public static class Algorithms
     {
@@ -145,13 +144,14 @@ namespace Mapsui.Utilities
             //	(Might want to assert this)
             //  (1) is handled by checking if next is left of prev ==> CCW
 
+            // ReSharper disable once CompareOfFloatsByEqualityOperator
             if (disc == 0.0)
             {
                 // poly is CCW if prev x is right of next x
-                return (prevPoint.X > nextPoint.X);
+                return prevPoint.X > nextPoint.X;
             }
             // if area is positive, points are ordered CCW
-            return (disc > 0.0);
+            return disc > 0.0;
         }
     }
 }

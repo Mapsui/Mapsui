@@ -36,11 +36,10 @@
  */
 
 using System;
-using System.IO;
-using Mapsui.Geometries;
 using System.Globalization;
+using System.IO;
 
-namespace Mapsui.Converters.WellKnownText
+namespace Mapsui.Geometries.WellKnownText
 {
     /// <summary>
     /// Outputs the textual representation of a <see cref="Mapsui.Geometries.Geometry"/> instance.

@@ -35,13 +35,11 @@
  *
  */
 
-
 using System;
-using System.IO;
 using System.Globalization;
+using System.IO;
 
-
-namespace Mapsui.Converters.WellKnownText
+namespace Mapsui.Geometries.WellKnownText
 {
     /// <summary>
     /// Reads a stream of Well Known Text (wkt) string and returns a stream of tokens.

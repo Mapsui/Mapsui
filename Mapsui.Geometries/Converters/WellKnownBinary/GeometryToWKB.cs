@@ -35,12 +35,10 @@
  *
  */
 
-
 using System;
 using System.IO;
-using Mapsui.Geometries;
 
-namespace Mapsui.Converters.WellKnownBinary
+namespace Mapsui.Geometries.WellKnownBinary
 {
     /// <summary>
     /// Converts a <see cref="Mapsui.Geometries.Geometry"/> instance to a Well-known Binary string representation.

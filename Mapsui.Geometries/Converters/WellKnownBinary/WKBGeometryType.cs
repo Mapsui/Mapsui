@@ -35,7 +35,7 @@
  *
  */
 
-namespace Mapsui.Converters.WellKnownBinary
+namespace Mapsui.Geometries.WellKnownBinary
 {
     /// <summary>
     /// Enumeration to determine geometrytype in Well-known Binary

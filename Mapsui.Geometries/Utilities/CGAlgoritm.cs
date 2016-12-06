@@ -1,8 +1,7 @@
-using Mapsui.Geometries;
 using System;
 using System.Collections.Generic;
 
-namespace Mapsui.Utilities
+namespace Mapsui.Geometries.Utilities
 {
     /// <summary>
     /// Specifies and implements various fundamental Computational Geometric algorithms.
@@ -223,12 +222,14 @@ namespace Mapsui.Utilities
             double sTop = (a.Y - c.Y) * (b.X - a.X) - (a.X - c.X) * (b.Y - a.Y);
             double sBottom = (b.X - a.X) * (d.Y - c.Y) - (b.Y - a.Y) * (d.X - c.X);
 
+            // ReSharper disable CompareOfFloatsByEqualityOperator
             if ((rBottom == 0) || (sBottom == 0))
+                
                 return Math.Min(DistancePointLine(a, c, d),
                         Math.Min(DistancePointLine(b, c, d),
                         Math.Min(DistancePointLine(c, a, b),
                         DistancePointLine(d, a, b))));
-
+            // ReSharper restore CompareOfFloatsByEqualityOperator
 
             double s = sTop / sBottom;
             double r = rTop / rBottom;

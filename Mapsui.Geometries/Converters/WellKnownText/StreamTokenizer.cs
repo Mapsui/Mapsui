@@ -36,8 +36,8 @@
  */
 
 using System;
-using System.IO;
 using System.Globalization;
+using System.IO;
 
 // http://java.sun.com/j2se/1.4/docs/api/java/io/StreamTokenizer.html
 // a better implementation could be written. Here is a good Java implementation of StreamTokenizer.
@@ -45,7 +45,7 @@ using System.Globalization;
 // a C# StringTokenizer
 //  http://sourceforge.net/snippet/detail.php?type=snippet&id=101171
 
-namespace Mapsui.Converters.WellKnownText
+namespace Mapsui.Geometries.WellKnownText
 {
     ///<summary>
     ///The StreamTokenizer class takes an input stream and parses it into "tokens", allowing the tokens to be read one at a time. The parsing process is controlled by a table and a number of flags that can be set to various states. The stream tokenizer can recognize identifiers, numbers, quoted strings, and various comment style

@@ -15,12 +15,12 @@
 // along with SharpMap; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
-using Mapsui.Converters.WellKnownBinary;
-using Mapsui.Converters.WellKnownText;
 using Mapsui.Geometries;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Mapsui.Geometries.WellKnownBinary;
+using Mapsui.Geometries.WellKnownText;
 
 namespace Mapsui.Providers
 {

@@ -39,9 +39,8 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using Mapsui.Geometries;
 
-namespace Mapsui.Converters.WellKnownBinary
+namespace Mapsui.Geometries.WellKnownBinary
 {
     /// <summary>
     ///  Converts Well-known Binary representations to a <see cref="Mapsui.Geometries.Geometry"/> instance.

@@ -18,7 +18,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using Mapsui.Utilities;
+using Mapsui.Geometries.Utilities;
 
 namespace Mapsui.Geometries
 {

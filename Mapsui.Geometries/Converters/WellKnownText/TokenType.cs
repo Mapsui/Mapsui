@@ -35,11 +35,7 @@
  *
  */
 
-
-
-
-
-namespace Mapsui.Converters.WellKnownText
+namespace Mapsui.Geometries.WellKnownText
 {
     /// <summary>
     /// Represents the type of token created by the StreamTokenizer class.

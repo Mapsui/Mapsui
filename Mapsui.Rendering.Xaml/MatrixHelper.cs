@@ -1,4 +1,5 @@
 using System;
+using Mapsui.Geometries.Utilities;
 using Mapsui.Utilities;
 #if !NETFX_CORE
 using System.Windows.Media;
