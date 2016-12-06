@@ -51,7 +51,6 @@
     <Compile Include="Curve.cs" />
     <Compile Include="Geometry.cs" />
     <Compile Include="GeometryCollection.cs" />
-    <Compile Include="GeometryType.cs" />
     <Compile Include="IGeometry.cs" />
     <Compile Include="IGeometryCollection.cs" />
     <Compile Include="IRaster.cs" />
