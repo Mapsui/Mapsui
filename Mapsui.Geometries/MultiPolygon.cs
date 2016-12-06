@@ -156,7 +156,7 @@ namespace Mapsui.Geometries
         public new MultiPolygon Clone()
         {
             var geoms = new MultiPolygon();
-            foreach (Polygon polygon in polygons)
+            foreach (var polygon in polygons)
                 geoms.Polygons.Add(polygon.Clone());
             return geoms;
         }

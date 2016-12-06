@@ -159,11 +159,10 @@ namespace Mapsui.Geometries
         /// <returns>Copy of Geometry</returns>
         public new Polygon Clone()
         {
-            var p = new Polygon();
-            p.ExteriorRing = exteriorRing.Clone();
-            foreach (var t in interiorRings)
-                p.InteriorRings.Add(t.Clone());
-            return p;
+            var polygon = new Polygon {ExteriorRing = exteriorRing.Clone()};
+            foreach (var interiorRing in interiorRings)
+                polygon.InteriorRings.Add(interiorRing.Clone());
+            return polygon;
         }
 
         

@@ -22,6 +22,7 @@ namespace Mapsui.Geometries
     /// </summary>
     public interface IGeometry
     {
+
         /// <summary>
         ///  The inherent dimension of this <see cref="Geometry"/> object, which must be less than or equal to the coordinate dimension.
         /// </summary>
@@ -70,7 +71,13 @@ namespace Mapsui.Geometries
         /// </summary>
         /// <returns>Closure of the combinatorial boundary of this <see cref="Geometry"/></returns>
         Geometry Boundary();
-        
+
+        /// <summary>
+        /// This method must be overridden using 'public new [derived_data_type] Clone()'
+        /// </summary>
+        /// <returns>Copy of Geometry</returns>
+        Geometry Clone();
+
         /// <summary>
         /// Returns 'true' if this <see cref="Geometry"/> is 'spatially equal' to another <see cref="Geometry"/>
         /// </summary>

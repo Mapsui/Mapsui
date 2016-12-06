@@ -82,10 +82,10 @@ namespace Mapsui.Geometries
         /// <returns>Copy of Geometry</returns>
         public new LinearRing Clone()
         {
-            var l = new LinearRing();
-            for (int i = 0; i < Vertices.Count; i++)
-                l.Vertices.Add(Vertices[i].Clone());
-            return l;
+            var linearRing = new LinearRing();
+            for (var i = 0; i < Vertices.Count; i++)
+                linearRing.Vertices.Add(Vertices[i].Clone());
+            return linearRing;
         }
 
         /// <summary>

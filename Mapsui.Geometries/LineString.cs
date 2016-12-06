@@ -170,11 +170,10 @@ namespace Mapsui.Geometries
         public new LineString Clone()
         {
             var l = new LineString();
-            foreach (Point vertex in _vertices)
+            foreach (var vertex in _vertices)
                 l.Vertices.Add(vertex.Clone());
             return l;
         }
-
 
         /// <summary>
         /// Checks whether this instance is spatially equal to the LineString 'l'

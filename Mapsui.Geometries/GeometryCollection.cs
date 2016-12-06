@@ -34,14 +34,14 @@ namespace Mapsui.Geometries
     /// </remarks>
     public class GeometryCollection : Geometry, IGeometryCollection, IEnumerable<Geometry>
     {
-        private IList<Geometry> geometries;
+        private IList<Geometry> _geometries;
 
         /// <summary>
         /// Initializes a new GeometryCollection
         /// </summary>
         public GeometryCollection()
         {
-            geometries = new Collection<Geometry>();
+            _geometries = new Collection<Geometry>();
         }
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace Mapsui.Geometries
         /// <returns>Geometry</returns>
         public Geometry this[int index]
         {
-            get { return geometries[index]; }
+            get { return _geometries[index]; }
         }
 
         /// <summary>
@@ -59,8 +59,8 @@ namespace Mapsui.Geometries
         /// </summary>
         public IList<Geometry> Collection
         {
-            get { return geometries; }
-            set { geometries = value; }
+            get { return _geometries; }
+            set { _geometries = value; }
         }
 
         
@@ -90,7 +90,7 @@ namespace Mapsui.Geometries
         /// </summary>
         public virtual int NumGeometries
         {
-            get { return geometries.Count; }
+            get { return _geometries.Count; }
         }
 
         /// <summary>
@@ -100,7 +100,7 @@ namespace Mapsui.Geometries
         /// <returns>Geometry at index N</returns>
         public virtual Geometry Geometry(int n)
         {
-            return geometries[n];
+            return _geometries[n];
         }
 
         /// <summary>
@@ -109,9 +109,9 @@ namespace Mapsui.Geometries
         /// <returns>true of collection is empty</returns>
         public override bool IsEmpty()
         {
-            if (geometries == null)
+            if (_geometries == null)
                 return true;
-            foreach (Geometry geometry in geometries)
+            foreach (Geometry geometry in _geometries)
                 if (!geometry.IsEmpty())
                     return false;
             return true;
@@ -196,21 +196,21 @@ namespace Mapsui.Geometries
         public override int GetHashCode()
         {
             int hash = 0;
-            foreach (var geometry in geometries)
+            foreach (var geometry in _geometries)
                 hash = hash ^ geometry.GetHashCode();
             return hash;
         }
 
-        /// <summary>
-        /// Return a copy of this geometry
-        /// </summary>
-        /// <returns>Copy of Geometry</returns>
         public new GeometryCollection Clone()
         {
-            var geoms = new GeometryCollection();
-            foreach (Geometry geometry in geometries)
-                geoms.Collection.Add(geometry.Clone());
-            return geoms;
+            var geometryCollection = new GeometryCollection();
+
+            foreach (var geometry in this)
+            {
+                    geometryCollection.Collection.Add(geometry.Clone());
+            }
+
+            return geometryCollection;
         }
     }
 }
