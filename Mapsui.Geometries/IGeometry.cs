@@ -22,12 +22,6 @@ namespace Mapsui.Geometries
     /// </summary>
     public interface IGeometry
     {
-
-        /// <summary>
-        ///  The inherent dimension of this <see cref="Geometry"/> object, which must be less than or equal to the coordinate dimension.
-        /// </summary>
-        int Dimension { get; }
-
         /// <summary>
         /// The minimum bounding box for this Geometry, returned as a <see cref="Geometry"/>. The
         /// polygon is defined by the corner points of the bounding box ((MINX, MINY), (MAXX, MINY), (MAXX,

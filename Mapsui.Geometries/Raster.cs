@@ -21,8 +21,6 @@ namespace Mapsui.Geometries
             return _boundingBox;
         }
         
-        public int Dimension => 2;
-
         public Geometry Envelope()
         {
             throw new NotImplementedException();

@@ -44,16 +44,7 @@ namespace Mapsui.Geometries
         {
             return Equals(this, other);
         }
-
         
-        
-        /// <summary>
-        ///  The inherent dimension of this <see cref="Geometry"/> object, which must be less than or equal
-        ///  to the coordinate dimension.
-        /// </summary>
-        /// <remarks>This specification is restricted to geometries in two-dimensional coordinate space.</remarks>
-        public abstract int Dimension { get; }
-
         /// <summary>
         /// The minimum bounding box for this <see cref="Geometry"/>, returned as a <see cref="Geometry"/>. The
         /// polygon is defined by the corner points of the bounding box ((MINX, MINY), (MAXX, MINY), (MAXX,

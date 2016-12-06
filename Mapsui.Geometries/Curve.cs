@@ -24,11 +24,6 @@ namespace Mapsui.Geometries
     public abstract class Curve : Geometry
     {
         /// <summary>
-        ///  The inherent dimension of this Geometry object, which must be less than or equal to the coordinate dimension.
-        /// </summary>
-        public override int Dimension => 1;
-
-        /// <summary>
         /// The length of this Curve in its associated spatial reference.
         /// </summary>
         public abstract double Length { get; }

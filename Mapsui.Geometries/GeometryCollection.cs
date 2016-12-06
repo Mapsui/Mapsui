@@ -118,22 +118,6 @@ namespace Mapsui.Geometries
         }
 
         /// <summary>
-        ///  The inherent dimension of this Geometry object, which must be less than or equal
-        ///  to the coordinate dimension.
-        /// </summary>
-        /// <remarks>This specification is restricted to geometries in two-dimensional coordinate space.</remarks>
-        public override int Dimension
-        {
-            get
-            {
-                int dim = 0;
-                foreach (Geometry geometry in Collection)
-                    dim = (dim < geometry.Dimension ? geometry.Dimension : dim);
-                return dim;
-            }
-        }
-
-        /// <summary>
         /// The minimum bounding box for this Geometry, returned as a BoundingBox.
         /// </summary>
         /// <returns></returns>

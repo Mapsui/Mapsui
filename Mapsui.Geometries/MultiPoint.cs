@@ -75,14 +75,6 @@ namespace Mapsui.Geometries
         }
 
         /// <summary>
-        ///  The inherent dimension of this Geometry object, which must be less than or equal to the coordinate dimension.
-        /// </summary>
-        public override int Dimension
-        {
-            get { return 0; }
-        }
-
-        /// <summary>
         /// Returns an indexed geometry in the collection
         /// </summary>
         /// <param name="n">Geometry index</param>

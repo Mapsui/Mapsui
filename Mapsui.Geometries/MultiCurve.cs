@@ -23,14 +23,6 @@ namespace Mapsui.Geometries
     public abstract class MultiCurve : GeometryCollection
     {
         /// <summary>
-        ///  The inherent dimension of this Geometry object, which must be less than or equal to the coordinate dimension.
-        /// </summary>
-        public override int Dimension
-        {
-            get { return 1; }
-        }
-
-        /// <summary>
         /// Returns true if this MultiCurve is closed (StartPoint=EndPoint for each curve in this MultiCurve)
         /// </summary>
         public abstract bool IsClosed { get; }

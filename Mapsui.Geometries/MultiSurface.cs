@@ -44,13 +44,5 @@ namespace Mapsui.Geometries
         /// A point guaranteed to be on this Surface.
         /// </summary>
         public abstract Point PointOnSurface { get; }
-
-        /// <summary>
-        ///  The inherent dimension of this Geometry object, which must be less than or equal to the coordinate dimension.
-        /// </summary>
-        public override int Dimension
-        {
-            get { return 2; }
-        }
     }
 }

@@ -245,16 +245,6 @@ namespace Mapsui.Geometries
             return new Point(m.X*d, m.Y*d);
         }
 
-        
-        
-        /// <summary>
-        ///  The inherent dimension of this Geometry object, which must be less than or equal to the coordinate dimension.
-        /// </summary>
-        public override int Dimension
-        {
-            get { return 0; }
-        }
-
         /// <summary>
         /// Checks whether this instance is spatially equal to the Point 'o'
         /// </summary>
