@@ -90,11 +90,6 @@ namespace Mapsui.Geometries
         }
 
         /// <summary>
-        ///     Returns true if this LineString is closed and simple
-        /// </summary>
-        public override bool IsRing => IsClosed && IsSimple();
-
-        /// <summary>
         ///     The length of this LineString, as measured in the spatial reference system of this LineString.
         /// </summary>
         public override double Length

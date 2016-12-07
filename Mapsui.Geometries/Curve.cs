@@ -42,11 +42,5 @@ namespace Mapsui.Geometries
         ///     Returns true if this Curve is closed (StartPoint = EndPoint).
         /// </summary>
         public bool IsClosed => StartPoint.Equals(EndPoint);
-
-        /// <summary>
-        ///     true if this Curve is closed (StartPoint = EndPoint) and
-        ///     this Curve is simple (does not pass through the same point more than once).
-        /// </summary>
-        public abstract bool IsRing { get; }
     }
 }
