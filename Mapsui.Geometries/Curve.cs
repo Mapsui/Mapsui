@@ -48,12 +48,5 @@ namespace Mapsui.Geometries
         ///     this Curve is simple (does not pass through the same point more than once).
         /// </summary>
         public abstract bool IsRing { get; }
-
-        /// <summary>
-        ///     The position of a point on the line, parameterised by length.
-        /// </summary>
-        /// <param name="t"></param>
-        /// <returns></returns>
-        public abstract Point Value(double t);
     }
 }

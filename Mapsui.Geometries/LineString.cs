@@ -130,16 +130,6 @@ namespace Mapsui.Geometries
         }
 
         /// <summary>
-        ///     The position of a point on the line, parameterised by length.
-        /// </summary>
-        /// <param name="t">Distance down the line</param>
-        /// <returns>Point at line at distance t from StartPoint</returns>
-        public override Point Value(double t)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
         ///     The minimum bounding box for this Geometry.
         /// </summary>
         /// <returns>BoundingBox for this geometry</returns>
