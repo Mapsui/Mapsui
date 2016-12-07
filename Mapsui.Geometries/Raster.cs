@@ -41,14 +41,11 @@ namespace Mapsui.Geometries
 
         public new Geometry Clone()
         {
-            throw new NotImplementedException();
+            var copy = new MemoryStream();
+            Data.CopyTo(copy);
+            return new Raster(copy, _boundingBox.Clone());
         }
-
-        public new bool Equals(Geometry geom)
-        {
-            throw new NotImplementedException();
-        }
-
+        
         public override double Distance(Geometry geom)
         {
             throw new NotImplementedException();
