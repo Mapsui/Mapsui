@@ -45,10 +45,7 @@ namespace Mapsui.Geometries
         /// </summary>
         /// <param name="index">Geometry index</param>
         /// <returns>Geometry at index</returns>
-        public new LineString this[int index]
-        {
-            get { return LineStrings[index]; }
-        }
+        public new LineString this[int index] => LineStrings[index];
 
         /// <summary>
         ///     Returns true if all LineStrings in this MultiLineString is closed (StartPoint=EndPoint for each LineString in this
