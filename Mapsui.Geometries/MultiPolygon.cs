@@ -81,7 +81,12 @@ namespace Mapsui.Geometries
         /// <returns>Shortest distance between any two points in the two geometries</returns>
         public override double Distance(Point point)
         {
-            throw new NotImplementedException();
+            var minDistance = double.MaxValue;
+            foreach (var geometry in Collection)
+            {
+                minDistance = Math.Min(minDistance, geometry.Distance(point));
+            }
+            return minDistance;
         }
 
         /// <summary>

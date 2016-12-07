@@ -49,7 +49,8 @@ namespace Mapsui.Geometries
         
         public override double Distance(Point point)
         {
-            throw new NotImplementedException();
+            var geometry = Envelope();
+            return geometry.Distance(point);
         }
     }
 }
