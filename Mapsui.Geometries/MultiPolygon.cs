@@ -45,10 +45,7 @@ namespace Mapsui.Geometries
         /// </summary>
         /// <param name="index">Geometry index</param>
         /// <returns>Geometry at index</returns>
-        public new Polygon this[int index]
-        {
-            get { return Polygons[index]; }
-        }
+        public new Polygon this[int index] => Polygons[index];
 
         /// <summary>
         ///     Returns summed area of the Polygons in the MultiPolygon collection
