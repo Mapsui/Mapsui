@@ -236,16 +236,6 @@ namespace Mapsui.Geometries
         }
 
         /// <summary>
-        ///     Returns true if this <see cref="BoundingBox" /> intersects the geometry
-        /// </summary>
-        /// <param name="g">Geometry</param>
-        /// <returns>True if intersects</returns>
-        public bool Intersects(Geometry g)
-        {
-            return Touches(g);
-        }
-
-        /// <summary>
         ///     Returns true if this instance touches the <see cref="BoundingBox" />
         /// </summary>
         /// <param name="r">
@@ -278,20 +268,6 @@ namespace Mapsui.Geometries
             }
 
             return true;
-        }
-
-        /// <summary>
-        ///     Returns true if this instance contains the geometry
-        /// </summary>
-        /// <param name="s">
-        ///     <see cref="BoundingBox" />
-        /// </param>
-        /// <returns>True it contains</returns>
-        public bool Contains(Geometry s)
-        {
-            var point = s as Point;
-            if (point != null) return Contains(point);
-            throw new NotImplementedException("Contains: Not implemented on these geometries");
         }
 
         /// <summary>
