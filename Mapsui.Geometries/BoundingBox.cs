@@ -264,18 +264,6 @@ namespace Mapsui.Geometries
         }
 
         /// <summary>
-        ///     Returns true if this <see cref="BoundingBox" /> touches the geometry
-        /// </summary>
-        /// <param name="s">Geometry</param>
-        /// <returns>True if touches</returns>
-        public bool Touches(Geometry s)
-        {
-            var point = s as Point;
-            if (point != null) return Touches(point);
-            throw new NotImplementedException("Touches: Not implemented on this geometry type");
-        }
-
-        /// <summary>
         ///     Returns true if this instance contains the <see cref="BoundingBox" />
         /// </summary>
         /// <param name="r">
