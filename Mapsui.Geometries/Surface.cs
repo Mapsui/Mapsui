@@ -38,14 +38,6 @@ namespace Mapsui.Geometries
         ///     The mathematical centroid for this Surface as a Point.
         ///     The result is not guaranteed to be on this Surface.
         /// </summary>
-        public virtual Point Centroid
-        {
-            get { return GetBoundingBox().GetCentroid(); }
-        }
-
-        /// <summary>
-        ///     A point guaranteed to be on this Surface.
-        /// </summary>
-        public abstract Point PointOnSurface { get; }
+        public virtual Point Centroid => GetBoundingBox().GetCentroid();
     }
 }

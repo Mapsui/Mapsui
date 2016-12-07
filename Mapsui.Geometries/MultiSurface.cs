@@ -39,10 +39,5 @@ namespace Mapsui.Geometries
         ///     The result is not guaranteed to be on this Surface.
         /// </summary>
         public abstract Point Centroid { get; }
-
-        /// <summary>
-        ///     A point guaranteed to be on this Surface.
-        /// </summary>
-        public abstract Point PointOnSurface { get; }
     }
 }

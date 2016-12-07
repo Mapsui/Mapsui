@@ -68,14 +68,6 @@ namespace Mapsui.Geometries
         }
 
         /// <summary>
-        ///     A point guaranteed to be on this Surface.
-        /// </summary>
-        public override Point PointOnSurface
-        {
-            get { throw new NotImplementedException(); }
-        }
-
-        /// <summary>
         ///     Returns the number of geometries in the collection.
         /// </summary>
         public override int NumGeometries
