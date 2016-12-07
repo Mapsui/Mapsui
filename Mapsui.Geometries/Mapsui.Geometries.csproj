@@ -56,7 +56,6 @@
     <Compile Include="IRaster.cs" />
     <Compile Include="LinearRing.cs" />
     <Compile Include="LineString.cs" />
-    <Compile Include="MultiCurve.cs" />
     <Compile Include="MultiLineString.cs" />
     <Compile Include="MultiPoint.cs" />
     <Compile Include="MultiPolygon.cs" />

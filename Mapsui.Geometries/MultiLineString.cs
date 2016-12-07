@@ -25,7 +25,7 @@ namespace Mapsui.Geometries
     /// <summary>
     ///     A MultiLineString is a MultiCurve whose elements are LineStrings.
     /// </summary>
-    public class MultiLineString : MultiCurve
+    public class MultiLineString : GeometryCollection
     {
         /// <summary>
         ///     Initializes an instance of a MultiLineString
@@ -51,7 +51,7 @@ namespace Mapsui.Geometries
         ///     Returns true if all LineStrings in this MultiLineString is closed (StartPoint=EndPoint for each LineString in this
         ///     MultiLineString)
         /// </summary>
-        public override bool IsClosed
+        public bool IsClosed
         {
             get
             {
@@ -67,7 +67,7 @@ namespace Mapsui.Geometries
         /// <summary>
         ///     The length of this MultiLineString which is equal to the sum of the lengths of the element LineStrings.
         /// </summary>
-        public override double Length
+        public double Length
         {
             get
             {
