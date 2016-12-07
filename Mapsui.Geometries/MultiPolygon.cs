@@ -25,7 +25,7 @@ namespace Mapsui.Geometries
     /// <summary>
     ///     A MultiPolygon is a MultiSurface whose elements are Polygons.
     /// </summary>
-    public class MultiPolygon : MultiSurface
+    public class MultiPolygon : GeometryCollection
     {
         /// <summary>
         ///     Instantiates a MultiPolygon
@@ -53,7 +53,7 @@ namespace Mapsui.Geometries
         /// <summary>
         ///     Returns summed area of the Polygons in the MultiPolygon collection
         /// </summary>
-        public override double Area
+        public double Area
         {
             get { return Polygons.Sum(polygon => polygon.Area); }
         }

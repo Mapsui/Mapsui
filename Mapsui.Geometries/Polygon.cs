@@ -28,7 +28,7 @@ namespace Mapsui.Geometries
     /// <remarks>
     ///     Vertices of rings defining holes in polygons are in the opposite direction of the exterior ring.
     /// </remarks>
-    public class Polygon : Surface
+    public class Polygon : Geometry
     {
         /// <summary>
         ///     Instatiates a polygon based on one extorier ring and a collection of interior rings.
@@ -68,15 +68,12 @@ namespace Mapsui.Geometries
         /// </summary>
         /// <remarks>This method is supplied as part of the OpenGIS Simple Features Specification</remarks>
         /// <returns></returns>
-        public int NumInteriorRing
-        {
-            get { return InteriorRings.Count; }
-        }
+        public int NumInteriorRing => InteriorRings.Count;
 
         /// <summary>
         ///     The area of this Surface, as measured in the spatial reference system of this Surface.
         /// </summary>
-        public override double Area
+        public double Area
         {
             get
             {
