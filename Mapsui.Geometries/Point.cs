@@ -275,16 +275,7 @@ namespace Mapsui.Geometries
         {
             return _isEmpty;
         }
-
-        /// <summary>
-        /// The boundary of a point is the empty set.
-        /// </summary>
-        /// <returns>null</returns>
-        public override Geometry Boundary()
-        {
-            return null;
-        }
-
+        
         /// <summary>
         /// Returns the distance between this geometry instance and another geometry, as
         /// measured in the spatial reference system of this instance.

@@ -58,15 +58,6 @@ namespace Mapsui.Geometries
         bool IsEmpty();
 
         /// <summary>
-        /// Returns the closure of the combinatorial boundary of this <see cref="Geometry"/>. The
-        /// combinatorial boundary is defined as described in section 3.12.3.2 of [1]. Because the result of this function
-        /// is a closure, and hence topologically closed, the resulting boundary can be represented using
-        /// representational geometry primitives
-        /// </summary>
-        /// <returns>Closure of the combinatorial boundary of this <see cref="Geometry"/></returns>
-        Geometry Boundary();
-
-        /// <summary>
         /// This method must be overridden using 'public new [derived_data_type] Clone()'
         /// </summary>
         /// <returns>Copy of Geometry</returns>

@@ -93,15 +93,7 @@ namespace Mapsui.Geometries
             return _points != null && _points.Count == 0;
         }
 
-        /// <summary>
-        /// The boundary of a MultiPoint is the empty set (null).
-        /// </summary>
-        /// <returns></returns>
-        public override Geometry Boundary()
-        {
-            return null;
-        }
-
+        
         /// <summary>
         /// Returns the shortest distance between any two points in the two geometries
         /// as calculated in the spatial reference system of this Geometry.

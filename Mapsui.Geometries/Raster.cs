@@ -1,9 +1,11 @@
 using System;
 using System.IO;
+using Mapsui.Geometries.WellKnownBinary;
+using Mapsui.Geometries.WellKnownText;
 
 namespace Mapsui.Geometries
 {
-    public class Raster : IRaster
+    public class Raster : Geometry, IRaster
     {
         private readonly BoundingBox _boundingBox;
         public MemoryStream Data { get; }
@@ -16,47 +18,37 @@ namespace Mapsui.Geometries
             TickFetched = DateTime.Now.Ticks;
         }
 
-        public BoundingBox GetBoundingBox()
+        public override BoundingBox GetBoundingBox()
         {
             return _boundingBox;
         }
-        
-        public Geometry Envelope()
+      
+        public new string AsText()
         {
-            throw new NotImplementedException();
+            return GeometryToWKT.Write(Envelope());
         }
 
-        public string AsText()
+        public new byte[] AsBinary()
         {
-            throw new NotImplementedException();
+            return GeometryToWKB.Write(Envelope());
         }
 
-        public byte[] AsBinary()
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool IsEmpty()
+        public override bool IsEmpty()
         {
             return _boundingBox.Width * _boundingBox.Height <= 0;
         }
 
-        public Geometry Boundary()
+        public new Geometry Clone()
         {
             throw new NotImplementedException();
         }
 
-        public Geometry Clone()
+        public new bool Equals(Geometry geom)
         {
             throw new NotImplementedException();
         }
 
-        public bool Equals(Geometry geom)
-        {
-            throw new NotImplementedException();
-        }
-
-        public double Distance(Geometry geom)
+        public override double Distance(Geometry geom)
         {
             throw new NotImplementedException();
         }

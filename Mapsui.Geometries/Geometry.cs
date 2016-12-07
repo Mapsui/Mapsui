@@ -101,15 +101,7 @@ namespace Mapsui.Geometries
         /// <see cref="Geometry"/> represents the empty point set, Ø, for the coordinate space. 
         /// </summary>
         public abstract bool IsEmpty();
-
-        /// <summary>
-        /// Returns the closure of the combinatorial boundary of this <see cref="Geometry"/>. The
-        /// combinatorial boundary is defined as described in section 3.12.3.2 of [1]. Because the result of this function
-        /// is a closure, and hence topologically closed, the resulting boundary can be represented using
-        /// representational geometry primitives
-        /// </summary>
-        public abstract Geometry Boundary();
-
+        
         /// <summary>
         /// Creates a <see cref="Geometry"/> based on a WellKnownText string
         /// </summary>
