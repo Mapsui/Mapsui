@@ -310,16 +310,6 @@ namespace Mapsui.Geometries
         }
 
         /// <summary>
-        ///     Checks whether this point touches a <see cref="BoundingBox" />
-        /// </summary>
-        /// <param name="box">box</param>
-        /// <returns>true if they touch</returns>
-        public bool Touches(BoundingBox box)
-        {
-            return box.Touches(this);
-        }
-
-        /// <summary>
         ///     Checks whether this point intersects a <see cref="BoundingBox" />
         /// </summary>
         /// <param name="box">Box</param>
