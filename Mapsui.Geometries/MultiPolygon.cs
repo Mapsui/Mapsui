@@ -59,15 +59,6 @@ namespace Mapsui.Geometries
         }
 
         /// <summary>
-        ///     The mathematical centroid for the surfaces as a Point.
-        ///     The result is not guaranteed to be on any of the surfaces.
-        /// </summary>
-        public override Point Centroid
-        {
-            get { throw new NotImplementedException(); }
-        }
-
-        /// <summary>
         ///     Returns the number of geometries in the collection.
         /// </summary>
         public override int NumGeometries

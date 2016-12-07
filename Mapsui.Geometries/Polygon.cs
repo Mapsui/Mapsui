@@ -93,13 +93,7 @@ namespace Mapsui.Geometries
                 return area;
             }
         }
-
-        /// <summary>
-        ///     The mathematical centroid for this Surface as a Point.
-        ///     The result is not guaranteed to be on this Surface.
-        /// </summary>
-        public override Point Centroid => ExteriorRing.GetBoundingBox().GetCentroid();
-
+        
         /// <summary>
         ///     Returns the Nth interior ring for this Polygon as a LineString
         /// </summary>

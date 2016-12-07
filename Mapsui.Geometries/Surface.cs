@@ -33,11 +33,5 @@ namespace Mapsui.Geometries
         ///     The area of this Surface, as measured in the spatial reference system of this Surface.
         /// </summary>
         public abstract double Area { get; }
-
-        /// <summary>
-        ///     The mathematical centroid for this Surface as a Point.
-        ///     The result is not guaranteed to be on this Surface.
-        /// </summary>
-        public virtual Point Centroid => GetBoundingBox().GetCentroid();
     }
 }
