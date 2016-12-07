@@ -22,94 +22,81 @@ using System.Collections.ObjectModel;
 namespace Mapsui.Geometries
 {
     /// <summary>
-    /// A Polygon is a planar Surface, defined by 1 exterior boundary and 0 or more interior boundaries. Each
-    /// interior boundary defines a hole in the Polygon.
+    ///     A Polygon is a planar Surface, defined by 1 exterior boundary and 0 or more interior boundaries. Each
+    ///     interior boundary defines a hole in the Polygon.
     /// </summary>
     /// <remarks>
-    /// Vertices of rings defining holes in polygons are in the opposite direction of the exterior ring.
+    ///     Vertices of rings defining holes in polygons are in the opposite direction of the exterior ring.
     /// </remarks>
     public class Polygon : Surface
     {
-        private LinearRing _exteriorRing;
-        private IList<LinearRing> _interiorRings;
-
         /// <summary>
-        /// Instatiates a polygon based on one extorier ring and a collection of interior rings.
+        ///     Instatiates a polygon based on one extorier ring and a collection of interior rings.
         /// </summary>
         /// <param name="exteriorRing">Exterior ring</param>
         /// <param name="interiorRings">Interior rings</param>
         public Polygon(LinearRing exteriorRing, IList<LinearRing> interiorRings)
         {
-            _exteriorRing = exteriorRing;
-            _interiorRings = interiorRings;
+            ExteriorRing = exteriorRing;
+            InteriorRings = interiorRings;
         }
 
         /// <summary>
-        /// Instatiates a polygon based on one extorier ring.
+        ///     Instatiates a polygon based on one extorier ring.
         /// </summary>
         /// <param name="exteriorRing">Exterior ring</param>
-        public Polygon(LinearRing exteriorRing) : this(exteriorRing, new Collection<LinearRing>())
-        {
-        }
+        public Polygon(LinearRing exteriorRing) : this(exteriorRing, new Collection<LinearRing>()) {}
 
         /// <summary>
-        /// Instatiates a polygon
+        ///     Instatiates a polygon
         /// </summary>
-        public Polygon() : this(new LinearRing(), new Collection<LinearRing>())
-        {
-        }
+        public Polygon() : this(new LinearRing(), new Collection<LinearRing>()) {}
 
         /// <summary>
-        /// Gets or sets the exterior ring of this Polygon
+        ///     Gets or sets the exterior ring of this Polygon
         /// </summary>
         /// <remarks>This method is supplied as part of the OpenGIS Simple Features Specification</remarks>
-        public LinearRing ExteriorRing
-        {
-            get { return _exteriorRing; }
-            set { _exteriorRing = value; }
-        }
+        public LinearRing ExteriorRing { get; set; }
 
         /// <summary>
-        /// Gets or sets the interior rings of this Polygon
+        ///     Gets or sets the interior rings of this Polygon
         /// </summary>
-        public IList<LinearRing> InteriorRings
-        {
-            get { return _interiorRings; }
-            set { _interiorRings = value; }
-        }
+        public IList<LinearRing> InteriorRings { get; set; }
 
         /// <summary>
-        /// Returns the number of interior rings in this Polygon
+        ///     Returns the number of interior rings in this Polygon
         /// </summary>
         /// <remarks>This method is supplied as part of the OpenGIS Simple Features Specification</remarks>
         /// <returns></returns>
         public int NumInteriorRing
         {
-            get { return _interiorRings.Count; }
+            get { return InteriorRings.Count; }
         }
 
         /// <summary>
-        /// The area of this Surface, as measured in the spatial reference system of this Surface.
+        ///     The area of this Surface, as measured in the spatial reference system of this Surface.
         /// </summary>
         public override double Area
         {
             get
             {
-                double area = 0.0;
-                area += _exteriorRing.Area;
-                bool extIsClockwise = _exteriorRing.IsCCW();
-                foreach (LinearRing linearRing in _interiorRings)
+                var area = 0.0;
+                area += ExteriorRing.Area;
+                var extIsClockwise = ExteriorRing.IsCCW();
+                foreach (var linearRing in InteriorRings)
+                {
                     if (linearRing.IsCCW() != extIsClockwise)
                         area -= linearRing.Area;
                     else
                         area += linearRing.Area;
+                }
                 return area;
             }
         }
 
         /// <summary>
-        /// The mathematical centroid for this Surface as a Point.
-        /// The result is not guaranteed to be on this Surface.
+        ///     The mathematical centroid for this Surface as a Point.
+        ///     The result is not guaranteed to be on this Surface.
         /// </summary>
         public override Point Centroid
         {
@@ -117,7 +104,7 @@ namespace Mapsui.Geometries
         }
 
         /// <summary>
-        /// A point guaranteed to be on this Surface.
+        ///     A point guaranteed to be on this Surface.
         /// </summary>
         public override Point PointOnSurface
         {
@@ -125,49 +112,50 @@ namespace Mapsui.Geometries
         }
 
         /// <summary>
-        /// Returns the Nth interior ring for this Polygon as a LineString
+        ///     Returns the Nth interior ring for this Polygon as a LineString
         /// </summary>
         /// <remarks>This method is supplied as part of the OpenGIS Simple Features Specification</remarks>
         /// <param name="n"></param>
         /// <returns></returns>
         public LinearRing InteriorRing(int n)
         {
-            return _interiorRings[n];
+            return InteriorRings[n];
         }
 
         /// <summary>
-        /// Returns the bounding box of the object
+        ///     Returns the bounding box of the object
         /// </summary>
         /// <returns>bounding box</returns>
         public override BoundingBox GetBoundingBox()
         {
-            if (_exteriorRing == null || _exteriorRing.Vertices.Count == 0) return null;
-            var bbox = new BoundingBox(_exteriorRing.Vertices[0], _exteriorRing.Vertices[0]);
-            for (int i = 1; i < _exteriorRing.Vertices.Count; i++)
+            if ((ExteriorRing == null) || (ExteriorRing.Vertices.Count == 0)) return null;
+            var bbox = new BoundingBox(ExteriorRing.Vertices[0], ExteriorRing.Vertices[0]);
+            for (var i = 1; i < ExteriorRing.Vertices.Count; i++)
             {
-                bbox.Min.X = Math.Min(_exteriorRing.Vertices[i].X, bbox.Min.X);
-                bbox.Min.Y = Math.Min(_exteriorRing.Vertices[i].Y, bbox.Min.Y);
-                bbox.Max.X = Math.Max(_exteriorRing.Vertices[i].X, bbox.Max.X);
-                bbox.Max.Y = Math.Max(_exteriorRing.Vertices[i].Y, bbox.Max.Y);
+                bbox.Min.X = Math.Min(ExteriorRing.Vertices[i].X, bbox.Min.X);
+                bbox.Min.Y = Math.Min(ExteriorRing.Vertices[i].Y, bbox.Min.Y);
+                bbox.Max.X = Math.Max(ExteriorRing.Vertices[i].X, bbox.Max.X);
+                bbox.Max.Y = Math.Max(ExteriorRing.Vertices[i].Y, bbox.Max.Y);
             }
             return bbox;
         }
 
         /// <summary>
-        /// Return a copy of this geometry
+        ///     Return a copy of this geometry
         /// </summary>
         /// <returns>Copy of Geometry</returns>
         public new Polygon Clone()
         {
-            var polygon = new Polygon {ExteriorRing = _exteriorRing.Clone()};
-            foreach (var interiorRing in _interiorRings)
+            var polygon = new Polygon {ExteriorRing = ExteriorRing.Clone()};
+            foreach (var interiorRing in InteriorRings)
+            {
                 polygon.InteriorRings.Add(interiorRing.Clone());
+            }
             return polygon;
         }
 
-        
         /// <summary>
-        /// Determines if this Polygon and the specified Polygon object has the same values
+        ///     Determines if this Polygon and the specified Polygon object has the same values
         /// </summary>
         /// <param name="p">Polygon to compare with</param>
         /// <returns></returns>
@@ -179,28 +167,32 @@ namespace Mapsui.Geometries
                 return false;
             if (p.InteriorRings.Count != InteriorRings.Count)
                 return false;
-            for (int i = 0; i < p.InteriorRings.Count; i++)
+            for (var i = 0; i < p.InteriorRings.Count; i++)
+            {
                 if (!p.InteriorRings[i].Equals(InteriorRings[i]))
                     return false;
+            }
             return true;
         }
 
         /// <summary>
-        /// Serves as a hash function for a particular type. <see cref="GetHashCode"/> is suitable for use 
-        /// in hashing algorithms and data structures like a hash table.
+        ///     Serves as a hash function for a particular type. <see cref="GetHashCode" /> is suitable for use
+        ///     in hashing algorithms and data structures like a hash table.
         /// </summary>
-        /// <returns>A hash code for the current <see cref="GetHashCode"/>.</returns>
+        /// <returns>A hash code for the current <see cref="GetHashCode" />.</returns>
         public override int GetHashCode()
         {
-            int hash = ExteriorRing.GetHashCode();
-            
+            var hash = ExteriorRing.GetHashCode();
+
             foreach (var t in InteriorRings)
+            {
                 hash = hash ^ t.GetHashCode();
+            }
             return hash;
         }
 
         /// <summary>
-        /// If true, then this Geometry represents the empty point set, Ø, for the coordinate space. 
+        ///     If true, then this Geometry represents the empty point set, Ø, for the coordinate space.
         /// </summary>
         /// <returns>Returns 'true' if this Geometry is the empty geometry</returns>
         public override bool IsEmpty()
@@ -209,8 +201,8 @@ namespace Mapsui.Geometries
         }
 
         /// <summary>
-        /// Returns the shortest distance between any two points in the two geometries
-        /// as calculated in the spatial reference system of this Geometry.
+        ///     Returns the shortest distance between any two points in the two geometries
+        ///     as calculated in the spatial reference system of this Geometry.
         /// </summary>
         public override double Distance(Geometry geom)
         {

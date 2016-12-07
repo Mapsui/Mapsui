@@ -18,61 +18,61 @@
 namespace Mapsui.Geometries
 {
     /// <summary>
-    /// Defines basic interface for a Geometry
+    ///     Defines basic interface for a Geometry
     /// </summary>
     public interface IGeometry
     {
         /// <summary>
-        /// The minimum bounding box for this Geometry, returned as a <see cref="Geometry"/>. The
-        /// polygon is defined by the corner points of the bounding box ((MINX, MINY), (MAXX, MINY), (MAXX,
-        /// MAXY), (MINX, MAXY), (MINX, MINY)).
+        ///     The minimum bounding box for this Geometry, returned as a <see cref="Geometry" />. The
+        ///     polygon is defined by the corner points of the bounding box ((MINX, MINY), (MAXX, MINY), (MAXX,
+        ///     MAXY), (MINX, MAXY), (MINX, MINY)).
         /// </summary>
         Geometry Envelope();
 
         /// <summary>
-        /// The minimum <see cref="BoundingBox"/> for this <see cref="Geometry"/>.
+        ///     The minimum <see cref="BoundingBox" /> for this <see cref="Geometry" />.
         /// </summary>
-        /// <returns><see cref="BoundingBox"/> for this <see cref="Geometry"/></returns>
+        /// <returns><see cref="BoundingBox" /> for this <see cref="Geometry" /></returns>
         BoundingBox GetBoundingBox();
 
         /// <summary>
-        /// Exports this <see cref="Geometry"/> to a specific well-known text representation of <see cref="Geometry"/>.
+        ///     Exports this <see cref="Geometry" /> to a specific well-known text representation of <see cref="Geometry" />.
         /// </summary>
         string AsText();
 
         /// <summary>
-        /// Exports this <see cref="Geometry"/> to a specific well-known binary representation of <see cref="Geometry"/>.
+        ///     Exports this <see cref="Geometry" /> to a specific well-known binary representation of <see cref="Geometry" />.
         /// </summary>
         byte[] AsBinary();
 
         /// <summary>
-        /// Returns a WellKnownText representation of the <see cref="Geometry"/>
+        ///     Returns a WellKnownText representation of the <see cref="Geometry" />
         /// </summary>
         /// <returns>Well-known text</returns>
         string ToString();
 
         /// <summary>
-        /// If true, then this <see cref="Geometry"/> represents the empty point set, Ø, for the coordinate space. 
+        ///     If true, then this <see cref="Geometry" /> represents the empty point set, Ø, for the coordinate space.
         /// </summary>
-        /// <returns>Returns 'true' if this <see cref="Geometry"/> is the empty geometry</returns>
+        /// <returns>Returns 'true' if this <see cref="Geometry" /> is the empty geometry</returns>
         bool IsEmpty();
 
         /// <summary>
-        /// This method must be overridden using 'public new [derived_data_type] Clone()'
+        ///     This method must be overridden using 'public new [derived_data_type] Clone()'
         /// </summary>
         /// <returns>Copy of Geometry</returns>
         Geometry Clone();
 
         /// <summary>
-        /// Returns 'true' if this <see cref="Geometry"/> is 'spatially equal' to another <see cref="Geometry"/>
+        ///     Returns 'true' if this <see cref="Geometry" /> is 'spatially equal' to another <see cref="Geometry" />
         /// </summary>
         bool Equals(Geometry geom);
 
         /// <summary>
-        /// Returns the shortest distance between any two points in the two geometries
-        /// as calculated in the spatial reference system of this <see cref="Geometry"/>.
+        ///     Returns the shortest distance between any two points in the two geometries
+        ///     as calculated in the spatial reference system of this <see cref="Geometry" />.
         /// </summary>
-        /// <param name="geom"><see cref="Geometry"/> to calculate distance to</param>
+        /// <param name="geom"><see cref="Geometry" /> to calculate distance to</param>
         /// <returns>Shortest distance between any two points in the two geometries</returns>
         double Distance(Geometry geom);
     }

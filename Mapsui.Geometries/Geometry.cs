@@ -22,39 +22,43 @@ using Mapsui.Geometries.WellKnownText;
 namespace Mapsui.Geometries
 {
     /// <summary>
-    /// <see cref="Geometry"/> is the root class of the Geometry Object Model hierarchy.
-    /// <see cref="Geometry"/> is an abstract (non-instantiable) class.
+    ///     <see cref="Geometry" /> is the root class of the Geometry Object Model hierarchy.
+    ///     <see cref="Geometry" /> is an abstract (non-instantiable) class.
     /// </summary>
     /// <remarks>
-    /// <para>The instantiable subclasses of <see cref="Geometry"/> defined in the specification are restricted to 0, 1 and twodimensional
-    /// geometric objects that exist in two-dimensional coordinate space (R^2).</para>
-    /// <para>All instantiable geometry classes described in this specification are defined so that valid instances of a
-    /// geometry class are topologically closed (i.e. all defined geometries include their boundary).</para>
+    ///     <para>
+    ///         The instantiable subclasses of <see cref="Geometry" /> defined in the specification are restricted to 0, 1 and
+    ///         twodimensional
+    ///         geometric objects that exist in two-dimensional coordinate space (R^2).
+    ///     </para>
+    ///     <para>
+    ///         All instantiable geometry classes described in this specification are defined so that valid instances of a
+    ///         geometry class are topologically closed (i.e. all defined geometries include their boundary).
+    ///     </para>
     /// </remarks>
     public abstract class Geometry : IGeometry, IEquatable<Geometry>
     {
-        
         // The following are methods that should be implemented on a geometry object according to
         // the OpenGIS Simple Features Specification
 
         /// <summary>
-        /// Returns 'true' if this Geometry is 'spatially equal' to anotherGeometry
+        ///     Returns 'true' if this Geometry is 'spatially equal' to anotherGeometry
         /// </summary>
         public virtual bool Equals(Geometry other)
         {
             return Equals(this, other);
         }
-        
+
         /// <summary>
-        /// The minimum bounding box for this <see cref="Geometry"/>, returned as a <see cref="Geometry"/>. The
-        /// polygon is defined by the corner points of the bounding box ((MINX, MINY), (MAXX, MINY), (MAXX,
-        /// MAXY), (MINX, MAXY), (MINX, MINY)).
+        ///     The minimum bounding box for this <see cref="Geometry" />, returned as a <see cref="Geometry" />. The
+        ///     polygon is defined by the corner points of the bounding box ((MINX, MINY), (MAXX, MINY), (MAXX,
+        ///     MAXY), (MINX, MAXY), (MINX, MINY)).
         /// </summary>
-        /// <remarks>The envelope is actually the <see cref="BoundingBox"/> converted into a polygon.</remarks>
-        /// <seealso cref="GetBoundingBox"/>
+        /// <remarks>The envelope is actually the <see cref="BoundingBox" /> converted into a polygon.</remarks>
+        /// <seealso cref="GetBoundingBox" />
         public Geometry Envelope()
         {
-            BoundingBox box = GetBoundingBox();
+            var box = GetBoundingBox();
             var envelope = new Polygon();
             envelope.ExteriorRing.Vertices.Add(box.Min); //minx miny
             envelope.ExteriorRing.Vertices.Add(new Point(box.Max.X, box.Min.Y)); //maxx minu
@@ -64,15 +68,14 @@ namespace Mapsui.Geometries
             return envelope;
         }
 
-
         /// <summary>
-        /// The minimum bounding box for this <see cref="Geometry"/>, returned as a <see cref="BoundingBox"/>.
+        ///     The minimum bounding box for this <see cref="Geometry" />, returned as a <see cref="BoundingBox" />.
         /// </summary>
         /// <returns></returns>
         public abstract BoundingBox GetBoundingBox();
 
         /// <summary>
-        /// Exports this <see cref="Geometry"/> to a specific well-known text representation of <see cref="Geometry"/>.
+        ///     Exports this <see cref="Geometry" /> to a specific well-known text representation of <see cref="Geometry" />.
         /// </summary>
         public string AsText()
         {
@@ -80,7 +83,7 @@ namespace Mapsui.Geometries
         }
 
         /// <summary>
-        /// Exports this <see cref="Geometry"/> to a specific well-known binary representation of <see cref="Geometry"/>.
+        ///     Exports this <see cref="Geometry" /> to a specific well-known binary representation of <see cref="Geometry" />.
         /// </summary>
         public byte[] AsBinary()
         {
@@ -88,7 +91,7 @@ namespace Mapsui.Geometries
         }
 
         /// <summary>
-        /// Returns a WellKnownText representation of the <see cref="Geometry"/>
+        ///     Returns a WellKnownText representation of the <see cref="Geometry" />
         /// </summary>
         /// <returns>Well-known text</returns>
         public override string ToString()
@@ -97,13 +100,28 @@ namespace Mapsui.Geometries
         }
 
         /// <summary>
-        /// Returns 'true' if this <see cref="Geometry"/> is the empty geometry . If true, then this
-        /// <see cref="Geometry"/> represents the empty point set, Ø, for the coordinate space. 
+        ///     Returns 'true' if this <see cref="Geometry" /> is the empty geometry . If true, then this
+        ///     <see cref="Geometry" /> represents the empty point set, Ø, for the coordinate space.
         /// </summary>
         public abstract bool IsEmpty();
-        
+
         /// <summary>
-        /// Creates a <see cref="Geometry"/> based on a WellKnownText string
+        ///     Returns the shortest distance between any two points in the two geometries
+        ///     as calculated in the spatial reference system of this Geometry.
+        /// </summary>
+        public abstract double Distance(Geometry geom);
+
+        /// <summary>
+        ///     This method must be overridden using 'public new [derived_data_type] Clone()'
+        /// </summary>
+        /// <returns>Copy of Geometry</returns>
+        public Geometry Clone()
+        {
+            throw new Exception("Clone() has not been implemented on derived datatype");
+        }
+
+        /// <summary>
+        ///     Creates a <see cref="Geometry" /> based on a WellKnownText string
         /// </summary>
         /// <param name="wkt">Well-known Text</param>
         /// <returns></returns>
@@ -113,7 +131,7 @@ namespace Mapsui.Geometries
         }
 
         /// <summary>
-        /// Creates a <see cref="Geometry"/> based on a WellKnownBinary byte array
+        ///     Creates a <see cref="Geometry" /> based on a WellKnownBinary byte array
         /// </summary>
         /// <param name="wkb">Well-known Binary</param>
         /// <returns></returns>
@@ -121,43 +139,28 @@ namespace Mapsui.Geometries
         {
             return GeometryFromWKB.Parse(wkb);
         }
-        
-        /// <summary>
-        /// Returns the shortest distance between any two points in the two geometries
-        /// as calculated in the spatial reference system of this Geometry.
-        /// </summary>
-        public abstract double Distance(Geometry geom);
 
         /// <summary>
-        /// This method must be overridden using 'public new [derived_data_type] Clone()'
+        ///     Determines whether the specified <see cref="Object" /> is equal to the current <see cref="Object" />.
         /// </summary>
-        /// <returns>Copy of Geometry</returns>
-        public Geometry Clone()
-        {
-            throw (new Exception("Clone() has not been implemented on derived datatype"));
-        }
-
-        /// <summary>
-        /// Determines whether the specified <see cref="Object"/> is equal to the current <see cref="Object"/>.
-        /// </summary>
-        /// <param name="obj">The <see cref="Object"/> to compare with the current <see cref="Object"/>.</param>
-        /// <returns>true if the specified <see cref="Object"/> is equal to the current <see cref="Object"/>; otherwise, false</returns>
+        /// <param name="obj">The <see cref="Object" /> to compare with the current <see cref="Object" />.</param>
+        /// <returns>true if the specified <see cref="Object" /> is equal to the current <see cref="Object" />; otherwise, false</returns>
         public override bool Equals(object obj)
         {
             if (obj == null)
                 return false;
 
-            Geometry g = obj as Geometry;
+            var g = obj as Geometry;
             if (g == null)
                 return false;
             return Equals(g);
         }
 
         /// <summary>
-        /// Serves as a hash function for a particular type. <see cref="GetHashCode"/> is suitable for use 
-        /// in hashing algorithms and data structures like a hash table.
+        ///     Serves as a hash function for a particular type. <see cref="GetHashCode" /> is suitable for use
+        ///     in hashing algorithms and data structures like a hash table.
         /// </summary>
-        /// <returns>A hash code for the current <see cref="GetHashCode"/>.</returns>
+        /// <returns>A hash code for the current <see cref="GetHashCode" />.</returns>
         public override int GetHashCode()
         {
             return AsBinary().GetHashCode();

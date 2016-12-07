@@ -21,8 +21,9 @@ using Mapsui.Geometries.Utilities;
 namespace Mapsui.Geometries
 {
     /// <summary>
-    /// A Point is a 0-dimensional geometry and represents a single location in 2D coordinate space. A Point has a x coordinate
-    /// value and a y-coordinate value. The boundary of a Point is the empty set.
+    ///     A Point is a 0-dimensional geometry and represents a single location in 2D coordinate space. A Point has a x
+    ///     coordinate
+    ///     value and a y-coordinate value. The boundary of a Point is the empty set.
     /// </summary>
     public class Point : Geometry, IComparable<Point>
     {
@@ -31,7 +32,7 @@ namespace Mapsui.Geometries
         private double _y;
 
         /// <summary>
-        /// Initializes a new Point
+        ///     Initializes a new Point
         /// </summary>
         /// <param name="x">X coordinate</param>
         /// <param name="y">Y coordinate</param>
@@ -42,7 +43,7 @@ namespace Mapsui.Geometries
         }
 
         /// <summary>
-        /// Initializes a new empty Point
+        ///     Initializes a new empty Point
         /// </summary>
         public Point() : this(0, 0)
         {
@@ -50,7 +51,7 @@ namespace Mapsui.Geometries
         }
 
         /// <summary>
-        /// Create a new point by a douuble[] array
+        ///     Create a new point by a douuble[] array
         /// </summary>
         /// <param name="point"></param>
         public Point(double[] point)
@@ -63,7 +64,7 @@ namespace Mapsui.Geometries
         }
 
         /// <summary>
-        /// Sets whether this object is empty
+        ///     Sets whether this object is empty
         /// </summary>
         protected bool SetIsEmpty
         {
@@ -71,7 +72,7 @@ namespace Mapsui.Geometries
         }
 
         /// <summary>
-        /// Gets or sets the X coordinate of the point
+        ///     Gets or sets the X coordinate of the point
         /// </summary>
         public double X
         {
@@ -89,7 +90,7 @@ namespace Mapsui.Geometries
         }
 
         /// <summary>
-        /// Gets or sets the Y coordinate of the point
+        ///     Gets or sets the Y coordinate of the point
         /// </summary>
         public double Y
         {
@@ -107,7 +108,7 @@ namespace Mapsui.Geometries
         }
 
         /// <summary>
-        /// Returns part of coordinate. Index 0 = X, Index 1 = Y
+        ///     Returns part of coordinate. Index 0 = X, Index 1 = Y
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
@@ -117,13 +118,12 @@ namespace Mapsui.Geometries
             {
                 if (_isEmpty)
                     throw new Exception("Point is empty");
-                else if (index == 0)
+                if (index == 0)
                     return X;
-                else if
+                if
                     (index == 1)
                     return Y;
-                else
-                    throw (new Exception("Point index out of bounds"));
+                throw new Exception("Point index out of bounds");
             }
             set
             {
@@ -132,41 +132,39 @@ namespace Mapsui.Geometries
                 else if (index == 1)
                     Y = value;
                 else
-                    throw (new Exception("Point index out of bounds"));
+                    throw new Exception("Point index out of bounds");
                 _isEmpty = false;
             }
         }
 
         /// <summary>
-        /// Returns the number of ordinates for this point
+        ///     Returns the number of ordinates for this point
         /// </summary>
         public virtual int NumOrdinates
         {
             get { return 2; }
         }
 
-        
         /// <summary>
-        /// Comparator used for ordering point first by ascending X, then by ascending Y.
+        ///     Comparator used for ordering point first by ascending X, then by ascending Y.
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
         public virtual int CompareTo(Point other)
         {
             // ReSharper disable once CompareOfFloatsByEqualityOperator
-            if (X < other.X || X == other.X && Y < other.Y)
+            if ((X < other.X) || ((X == other.X) && (Y < other.Y)))
                 return -1;
 
             // ReSharper disable once CompareOfFloatsByEqualityOperator
-            if (X > other.X || X == other.X && Y > other.Y)
+            if ((X > other.X) || ((X == other.X) && (Y > other.Y)))
                 return 1;
 
             return 0;
         }
 
-        
         /// <summary>
-        /// exports a point into a 2-dimensional double array
+        ///     exports a point into a 2-dimensional double array
         /// </summary>
         /// <returns></returns>
         public double[] ToDoubleArray()
@@ -175,8 +173,8 @@ namespace Mapsui.Geometries
         }
 
         /// <summary>
-        /// Returns a point based on degrees, minutes and seconds notation.
-        /// For western or southern coordinates, add minus '-' in front of all longitude and/or latitude values
+        ///     Returns a point based on degrees, minutes and seconds notation.
+        ///     For western or southern coordinates, add minus '-' in front of all longitude and/or latitude values
         /// </summary>
         /// <param name="longDegrees">Longitude degrees</param>
         /// <param name="longMinutes">Longitude minutes</param>
@@ -186,23 +184,25 @@ namespace Mapsui.Geometries
         /// <param name="latSeconds">Latitude seconds</param>
         /// <returns>Point</returns>
         public static Point FromDMS(double longDegrees, double longMinutes, double longSeconds,
-                                    double latDegrees, double latMinutes, double latSeconds)
+            double latDegrees, double latMinutes, double latSeconds)
         {
             return new Point(longDegrees + longMinutes/60 + longSeconds/3600,
-                             latDegrees + latMinutes/60 + latSeconds/3600);
+                latDegrees + latMinutes/60 + latSeconds/3600);
         }
 
         /// <summary>
-        /// Returns a 2D <see cref="Point"/> instance from this
+        ///     Returns a 2D <see cref="Point" /> instance from this
         /// </summary>
-        /// <returns><see cref="Point"/></returns>
+        /// <returns>
+        ///     <see cref="Point" />
+        /// </returns>
         public Point AsPoint()
         {
             return new Point(_x, _y);
         }
 
         /// <summary>
-        /// This method must be overridden using 'public new [derived_data_type] Clone()'
+        ///     This method must be overridden using 'public new [derived_data_type] Clone()'
         /// </summary>
         /// <returns>Clone</returns>
         public new Point Clone()
@@ -210,9 +210,8 @@ namespace Mapsui.Geometries
             return new Point(X, Y);
         }
 
-        
         /// <summary>
-        /// Vector + Vector
+        ///     Vector + Vector
         /// </summary>
         /// <param name="v1">Vector</param>
         /// <param name="v2">Vector</param>
@@ -222,9 +221,8 @@ namespace Mapsui.Geometries
             return new Point(v1.X + v2.X, v1.Y + v2.Y);
         }
 
-
         /// <summary>
-        /// Vector - Vector
+        ///     Vector - Vector
         /// </summary>
         /// <param name="v1">Vector</param>
         /// <param name="v2">Vector</param>
@@ -235,7 +233,7 @@ namespace Mapsui.Geometries
         }
 
         /// <summary>
-        /// Vector * Scalar
+        ///     Vector * Scalar
         /// </summary>
         /// <param name="m">Vector</param>
         /// <param name="d">Scalar (double)</param>
@@ -246,54 +244,54 @@ namespace Mapsui.Geometries
         }
 
         /// <summary>
-        /// Checks whether this instance is spatially equal to the Point 'o'
+        ///     Checks whether this instance is spatially equal to the Point 'o'
         /// </summary>
         /// <param name="p">Point to compare to</param>
         /// <returns></returns>
         public bool Equals(Point p)
         {
             // ReSharper disable CompareOfFloatsByEqualityOperator
-            return p != null && p.X == _x && p.Y == _y && _isEmpty == p.IsEmpty();
+            return (p != null) && (p.X == _x) && (p.Y == _y) && (_isEmpty == p.IsEmpty());
             // ReSharper restore CompareOfFloatsByEqualityOperator
         }
 
         /// <summary>
-        /// Serves as a hash function for a particular type. <see cref="GetHashCode"/> is suitable for use 
-        /// in hashing algorithms and data structures like a hash table.
+        ///     Serves as a hash function for a particular type. <see cref="GetHashCode" /> is suitable for use
+        ///     in hashing algorithms and data structures like a hash table.
         /// </summary>
-        /// <returns>A hash code for the current <see cref="GetHashCode"/>.</returns>
+        /// <returns>A hash code for the current <see cref="GetHashCode" />.</returns>
         public override int GetHashCode()
         {
             return _x.GetHashCode() ^ _y.GetHashCode() ^ _isEmpty.GetHashCode();
         }
 
         /// <summary>
-        /// If true, then this Geometry represents the empty point set, Ø, for the coordinate space. 
+        ///     If true, then this Geometry represents the empty point set, Ø, for the coordinate space.
         /// </summary>
         /// <returns>Returns 'true' if this Geometry is the empty geometry</returns>
         public override bool IsEmpty()
         {
             return _isEmpty;
         }
-        
+
         /// <summary>
-        /// Returns the distance between this geometry instance and another geometry, as
-        /// measured in the spatial reference system of this instance.
+        ///     Returns the distance between this geometry instance and another geometry, as
+        ///     measured in the spatial reference system of this instance.
         /// </summary>
         /// <param name="geom"></param>
         /// <returns></returns>
         public override double Distance(Geometry geom)
         {
-            if (geom.GetType() == typeof (Point))
+            if (geom.GetType() == typeof(Point))
             {
-                var p = (Point)geom;
+                var p = (Point) geom;
                 return Math.Sqrt(Math.Pow(X - p.X, 2) + Math.Pow(Y - p.Y, 2));
             }
             throw new Exception("The method or operation is not implemented for this geometry type.");
         }
 
         /// <summary>
-        /// Returns the distance between this point and a <see cref="BoundingBox"/>
+        ///     Returns the distance between this point and a <see cref="BoundingBox" />
         /// </summary>
         /// <param name="box"></param>
         /// <returns></returns>
@@ -303,7 +301,7 @@ namespace Mapsui.Geometries
         }
 
         /// <summary>
-        /// The minimum bounding box for this Geometry.
+        ///     The minimum bounding box for this Geometry.
         /// </summary>
         /// <returns></returns>
         public override BoundingBox GetBoundingBox()
@@ -312,7 +310,7 @@ namespace Mapsui.Geometries
         }
 
         /// <summary>
-        /// Checks whether this point touches a <see cref="BoundingBox"/>
+        ///     Checks whether this point touches a <see cref="BoundingBox" />
         /// </summary>
         /// <param name="box">box</param>
         /// <returns>true if they touch</returns>
@@ -322,7 +320,7 @@ namespace Mapsui.Geometries
         }
 
         /// <summary>
-        /// Checks whether this point intersects a <see cref="BoundingBox"/>
+        ///     Checks whether this point intersects a <see cref="BoundingBox" />
         /// </summary>
         /// <param name="box">Box</param>
         /// <returns>True if they intersect</returns>
@@ -332,7 +330,7 @@ namespace Mapsui.Geometries
         }
 
         /// <summary>
-        /// Calculates a new point by rotating this point clockwise about the specified center point
+        ///     Calculates a new point by rotating this point clockwise about the specified center point
         /// </summary>
         /// <param name="degrees">Angle to rotate clockwise (degrees)</param>
         /// <param name="centerX">X coordinate of point about which to rotate</param>
@@ -355,7 +353,7 @@ namespace Mapsui.Geometries
         }
 
         /// <summary>
-        /// Calculates a new point by rotating this point clockwise about the specified center point
+        ///     Calculates a new point by rotating this point clockwise about the specified center point
         /// </summary>
         /// <param name="degrees">Angle to rotate clockwise (degrees)</param>
         /// <param name="center">Point about which to rotate</param>

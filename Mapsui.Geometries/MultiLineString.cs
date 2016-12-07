@@ -23,115 +23,113 @@ using Mapsui.Geometries.Utilities;
 namespace Mapsui.Geometries
 {
     /// <summary>
-    /// A MultiLineString is a MultiCurve whose elements are LineStrings.
+    ///     A MultiLineString is a MultiCurve whose elements are LineStrings.
     /// </summary>
     public class MultiLineString : MultiCurve
     {
-        private IList<LineString> _lineStrings;
-
         /// <summary>
-        /// Initializes an instance of a MultiLineString
+        ///     Initializes an instance of a MultiLineString
         /// </summary>
         public MultiLineString()
         {
-            _lineStrings = new Collection<LineString>();
+            LineStrings = new Collection<LineString>();
         }
 
         /// <summary>
-        /// Collection of <see cref="LineString">LineStrings</see> in the <see cref="MultiLineString"/>
+        ///     Collection of <see cref="LineString">LineStrings</see> in the <see cref="MultiLineString" />
         /// </summary>
-        public IList<LineString> LineStrings
-        {
-            get { return _lineStrings; }
-            set { _lineStrings = value; }
-        }
+        public IList<LineString> LineStrings { get; set; }
 
         /// <summary>
-        /// Returns an indexed geometry in the collection
+        ///     Returns an indexed geometry in the collection
         /// </summary>
         /// <param name="index">Geometry index</param>
         /// <returns>Geometry at index</returns>
         public new LineString this[int index]
         {
-            get { return _lineStrings[index]; }
+            get { return LineStrings[index]; }
         }
 
         /// <summary>
-        /// Returns true if all LineStrings in this MultiLineString is closed (StartPoint=EndPoint for each LineString in this MultiLineString)
+        ///     Returns true if all LineStrings in this MultiLineString is closed (StartPoint=EndPoint for each LineString in this
+        ///     MultiLineString)
         /// </summary>
         public override bool IsClosed
         {
             get
             {
-                foreach (LineString lineString in _lineStrings)
+                foreach (var lineString in LineStrings)
+                {
                     if (!lineString.IsClosed)
                         return false;
+                }
                 return true;
             }
         }
 
         /// <summary>
-        /// The length of this MultiLineString which is equal to the sum of the lengths of the element LineStrings.
+        ///     The length of this MultiLineString which is equal to the sum of the lengths of the element LineStrings.
         /// </summary>
         public override double Length
         {
             get
             {
                 double l = 0;
-                foreach (LineString lineString in _lineStrings)
+                foreach (var lineString in LineStrings)
+                {
                     l += lineString.Length;
+                }
                 return l;
             }
         }
 
         /// <summary>
-        /// Returns the number of geometries in the collection.
+        ///     Returns the number of geometries in the collection.
         /// </summary>
         public override int NumGeometries
         {
-            get { return _lineStrings.Count; }
+            get { return LineStrings.Count; }
         }
 
         /// <summary>
-        /// If true, then this Geometry represents the empty point set, Ø, for the coordinate space. 
+        ///     If true, then this Geometry represents the empty point set, Ø, for the coordinate space.
         /// </summary>
         /// <returns>Returns 'true' if this Geometry is the empty geometry</returns>
         public override bool IsEmpty()
         {
-            if (_lineStrings == null || _lineStrings.Count == 0)
+            if ((LineStrings == null) || (LineStrings.Count == 0))
                 return true;
 
-            foreach (var lineString in _lineStrings)
+            foreach (var lineString in LineStrings)
+            {
                 if (!lineString.IsEmpty())
                     return false;
+            }
 
             return true;
         }
 
         /// <summary>
-        /// Returns the shortest distance between any two points in the two geometries
-        /// as calculated in the spatial reference system of this Geometry.
+        ///     Returns the shortest distance between any two points in the two geometries
+        ///     as calculated in the spatial reference system of this Geometry.
         /// </summary>
         /// <param name="geom">Geometry to calculate distance to</param>
         /// <returns>Shortest distance between any two points in the two geometries</returns>
         public override double Distance(Geometry geom)
         {
-
             if (geom is Point)
             {
                 var coord = geom as Point;
                 // brute force approach!
-                double minDist = double.MaxValue;
-                foreach (var ls in _lineStrings)
+                var minDist = double.MaxValue;
+                foreach (var ls in LineStrings)
                 {
                     IList<Point> coord0 = ls.Vertices;
-                    for (int i = 0; i < coord0.Count - 1; i++)
+                    for (var i = 0; i < coord0.Count - 1; i++)
                     {
-                        double dist = CGAlgorithms.DistancePointLine(coord, coord0[i], coord0[i + 1]);
+                        var dist = CGAlgorithms.DistancePointLine(coord, coord0[i], coord0[i + 1]);
                         if (dist < minDist)
-                        {
                             minDist = dist;
-                        }
                     }
                 }
                 return minDist;
@@ -140,21 +138,19 @@ namespace Mapsui.Geometries
             {
                 IList<Point> coord1 = (geom as LineString).Vertices;
                 // brute force approach!
-                double minDistance = double.MaxValue;
-                foreach (var ls in _lineStrings)
+                var minDistance = double.MaxValue;
+                foreach (var ls in LineStrings)
                 {
                     IList<Point> coord0 = ls.Vertices;
-                    for (int i = 0; i < coord0.Count - 1; i++)
+                    for (var i = 0; i < coord0.Count - 1; i++)
                     {
-                        for (int j = 0; j < coord1.Count - 1; j++)
+                        for (var j = 0; j < coord1.Count - 1; j++)
                         {
-                            double dist = CGAlgorithms.DistanceLineLine(
+                            var dist = CGAlgorithms.DistanceLineLine(
                                 coord0[i], coord0[i + 1],
                                 coord1[j], coord1[j + 1]);
                             if (dist < minDistance)
-                            {
                                 minDistance = dist;
-                            }
                         }
                     }
                 }
@@ -165,49 +161,55 @@ namespace Mapsui.Geometries
         }
 
         /// <summary>
-        /// Returns an indexed geometry in the collection
+        ///     Returns an indexed geometry in the collection
         /// </summary>
         /// <param name="n">Geometry index</param>
         /// <returns>Geometry at index N</returns>
         public override Geometry Geometry(int n)
         {
-            return _lineStrings[n];
+            return LineStrings[n];
         }
 
         /// <summary>
-        /// The minimum bounding box for this Geometry.
+        ///     The minimum bounding box for this Geometry.
         /// </summary>
         /// <returns></returns>
         public override BoundingBox GetBoundingBox()
         {
-            if (_lineStrings == null || _lineStrings.Count == 0)
+            if ((LineStrings == null) || (LineStrings.Count == 0))
                 return null;
-            BoundingBox bbox = _lineStrings[0].GetBoundingBox();
-            for (int i = 1; i < _lineStrings.Count; i++)
-                bbox = bbox.Join(_lineStrings[i].GetBoundingBox());
+            var bbox = LineStrings[0].GetBoundingBox();
+            for (var i = 1; i < LineStrings.Count; i++)
+            {
+                bbox = bbox.Join(LineStrings[i].GetBoundingBox());
+            }
             return bbox;
         }
 
         /// <summary>
-        /// Return a copy of this geometry
+        ///     Return a copy of this geometry
         /// </summary>
         /// <returns>Copy of Geometry</returns>
         public new MultiLineString Clone()
         {
             var geoms = new MultiLineString();
-            foreach (LineString lineString in _lineStrings)
+            foreach (var lineString in LineStrings)
+            {
                 geoms.LineStrings.Add(lineString.Clone());
+            }
             return geoms;
         }
 
         /// <summary>
-        /// Gets an enumerator for enumerating the geometries in the GeometryCollection
+        ///     Gets an enumerator for enumerating the geometries in the GeometryCollection
         /// </summary>
         /// <returns></returns>
         public override IEnumerator<Geometry> GetEnumerator()
         {
-            foreach (LineString l in _lineStrings)
+            foreach (var l in LineStrings)
+            {
                 yield return l;
+            }
         }
     }
 }

@@ -38,7 +38,7 @@
 namespace Mapsui.Geometries.WellKnownBinary
 {
     /// <summary>
-    /// Enumeration to determine geometrytype in Well-known Binary
+    ///     Enumeration to determine geometrytype in Well-known Binary
     /// </summary>
     internal enum WKBGeometryType : uint
     {

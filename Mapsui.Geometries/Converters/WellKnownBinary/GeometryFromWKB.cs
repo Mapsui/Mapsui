@@ -43,27 +43,35 @@ using System.IO;
 namespace Mapsui.Geometries.WellKnownBinary
 {
     /// <summary>
-    ///  Converts Well-known Binary representations to a <see cref="Mapsui.Geometries.Geometry"/> instance.
+    ///     Converts Well-known Binary representations to a <see cref="Mapsui.Geometries.Geometry" /> instance.
     /// </summary>
     /// <remarks>
-    /// <para>The Well-known Binary Representation for <see cref="Mapsui.Geometries.Geometry"/> (WKBGeometry) provides a portable 
-    /// representation of a <see cref="Mapsui.Geometries.Geometry"/> value as a contiguous stream of bytes. It permits <see cref="Mapsui.Geometries.Geometry"/> 
-    /// values to be exchanged between an ODBC client and an SQL database in binary form.</para>
-    /// <para>The Well-known Binary Representation for <see cref="Mapsui.Geometries.Geometry"/> is obtained by serializing a <see cref="Mapsui.Geometries.Geometry"/>
-    /// instance as a sequence of numeric types drawn from the set {Unsigned Integer, Double} and
-    /// then serializing each numeric type as a sequence of bytes using one of two well defined,
-    /// standard, binary representations for numeric types (NDR, XDR). The specific binary encoding
-    /// (NDR or XDR) used for a geometry byte stream is described by a one byte tag that precedes
-    /// the serialized bytes. The only difference between the two encodings of geometry is one of
-    /// byte order, the XDR encoding is Big Endian, the NDR encoding is Little Endian.</para>
-    /// </remarks> 
+    ///     <para>
+    ///         The Well-known Binary Representation for <see cref="Mapsui.Geometries.Geometry" /> (WKBGeometry) provides a
+    ///         portable
+    ///         representation of a <see cref="Mapsui.Geometries.Geometry" /> value as a contiguous stream of bytes. It permits
+    ///         <see cref="Mapsui.Geometries.Geometry" />
+    ///         values to be exchanged between an ODBC client and an SQL database in binary form.
+    ///     </para>
+    ///     <para>
+    ///         The Well-known Binary Representation for <see cref="Mapsui.Geometries.Geometry" /> is obtained by serializing a
+    ///         <see cref="Mapsui.Geometries.Geometry" />
+    ///         instance as a sequence of numeric types drawn from the set {Unsigned Integer, Double} and
+    ///         then serializing each numeric type as a sequence of bytes using one of two well defined,
+    ///         standard, binary representations for numeric types (NDR, XDR). The specific binary encoding
+    ///         (NDR or XDR) used for a geometry byte stream is described by a one byte tag that precedes
+    ///         the serialized bytes. The only difference between the two encodings of geometry is one of
+    ///         byte order, the XDR encoding is Big Endian, the NDR encoding is Little Endian.
+    ///     </para>
+    /// </remarks>
     public static class GeometryFromWKB
     {
         /// <summary>
-        /// Creates a <see cref="Mapsui.Geometries.Geometry"/> from the supplied byte[] containing the Well-known Binary representation.
+        ///     Creates a <see cref="Mapsui.Geometries.Geometry" /> from the supplied byte[] containing the Well-known Binary
+        ///     representation.
         /// </summary>
         /// <param name="bytes">byte[] containing the Well-known Binary representation.</param>
-        /// <returns>A <see cref="Mapsui.Geometries.Geometry"/> bases on the supplied Well-known Binary representation.</returns>
+        /// <returns>A <see cref="Mapsui.Geometries.Geometry" /> bases on the supplied Well-known Binary representation.</returns>
         public static Geometry Parse(byte[] bytes)
         {
             // Create a memory stream using the suppiled byte array.
@@ -79,18 +87,21 @@ namespace Mapsui.Geometries.WellKnownBinary
         }
 
         /// <summary>
-        /// Creates a <see cref="Mapsui.Geometries.Geometry"/> based on the Well-known binary representation.
+        ///     Creates a <see cref="Mapsui.Geometries.Geometry" /> based on the Well-known binary representation.
         /// </summary>
-        /// <param name="reader">A <see cref="System.IO.BinaryReader">BinaryReader</see> used to read the Well-known binary representation.</param>
-        /// <returns>A <see cref="Mapsui.Geometries.Geometry"/> based on the Well-known binary representation.</returns>
+        /// <param name="reader">
+        ///     A <see cref="System.IO.BinaryReader">BinaryReader</see> used to read the Well-known binary
+        ///     representation.
+        /// </param>
+        /// <returns>A <see cref="Mapsui.Geometries.Geometry" /> based on the Well-known binary representation.</returns>
         public static Geometry Parse(BinaryReader reader)
         {
             // Get the first Byte in the array. This specifies if the WKB is in
             // XDR (big-endian) format of NDR (little-endian) format.
-            Byte byteOrder = reader.ReadByte();
+            var byteOrder = reader.ReadByte();
 
             // Get the type of this geometry.
-            UInt32 type = ReadUInt32(reader, (WkbByteOrder) byteOrder);
+            var type = ReadUInt32(reader, (WkbByteOrder) byteOrder);
 
             switch ((WKBGeometryType) type)
             {
@@ -116,7 +127,7 @@ namespace Mapsui.Geometries.WellKnownBinary
                     return CreateWKBGeometryCollection(reader, (WkbByteOrder) byteOrder);
 
                 default:
-                    if (!Enum.IsDefined(typeof (WKBGeometryType), type))
+                    if (!Enum.IsDefined(typeof(WKBGeometryType), type))
                         throw new ArgumentException("Geometry type not recognized");
                     throw new NotSupportedException("Geometry type '" + type + "' not supported");
             }
@@ -137,7 +148,7 @@ namespace Mapsui.Geometries.WellKnownBinary
             var coords = new Point[numPoints];
 
             // Loop on the number of points in the ring.
-            for (int i = 0; i < numPoints; i++)
+            for (var i = 0; i < numPoints; i++)
             {
                 // Add the coordinate.
                 coords[i] = new Point(ReadDouble(reader, byteOrder), ReadDouble(reader, byteOrder));
@@ -149,8 +160,8 @@ namespace Mapsui.Geometries.WellKnownBinary
         {
             var l = new LineString();
             //l.Vertices.AddRange(ReadCoordinates(reader, byteOrder));
-            IEnumerable<Point> arrPoint = ReadCoordinates(reader, byteOrder);
-            foreach (Point t in arrPoint)
+            var arrPoint = ReadCoordinates(reader, byteOrder);
+            foreach (var t in arrPoint)
             {
                 l.Vertices.Add(t);
             }
@@ -162,15 +173,15 @@ namespace Mapsui.Geometries.WellKnownBinary
         {
             var l = new LinearRing();
             //l.Vertices.AddRange(ReadCoordinates(reader, byteOrder));
-            IEnumerable<Point> arrPoint = ReadCoordinates(reader, byteOrder);
-            foreach (Point t in arrPoint)
+            var arrPoint = ReadCoordinates(reader, byteOrder);
+            foreach (var t in arrPoint)
             {
                 l.Vertices.Add(t);
             }
 
             //if polygon isn't closed, add the first point to the end (this shouldn't occur for correct WKB data)
-            if (l.Vertices[0].X != l.Vertices[l.Vertices.Count - 1].X ||
-                l.Vertices[0].Y != l.Vertices[l.Vertices.Count - 1].Y)
+            if ((l.Vertices[0].X != l.Vertices[l.Vertices.Count - 1].X) ||
+                (l.Vertices[0].Y != l.Vertices[l.Vertices.Count - 1].Y))
                 l.Vertices.Add(new Point(l.Vertices[0].X, l.Vertices[0].Y));
             return l;
         }
@@ -185,8 +196,10 @@ namespace Mapsui.Geometries.WellKnownBinary
             var shell = new Polygon(CreateWKBLinearRing(reader, byteOrder));
 
             // Create a new array of linearrings for the interior rings.
-            for (var i = 0; i < (numRings - 1); i++)
+            for (var i = 0; i < numRings - 1; i++)
+            {
                 shell.InteriorRings.Add(CreateWKBLinearRing(reader, byteOrder));
+            }
 
             // Create and return the Poylgon.
             return shell;
@@ -224,7 +237,7 @@ namespace Mapsui.Geometries.WellKnownBinary
             var mline = new MultiLineString();
 
             // Loop on the number of linestrings.
-            for (int i = 0; i < numLineStrings; i++)
+            for (var i = 0; i < numLineStrings; i++)
             {
                 // Read linestring header
                 reader.ReadByte();
@@ -247,7 +260,7 @@ namespace Mapsui.Geometries.WellKnownBinary
             var polygons = new MultiPolygon();
 
             // Loop on the number of polygons.
-            for (int i = 0; i < numPolygons; i++)
+            for (var i = 0; i < numPolygons; i++)
             {
                 // read polygon header
                 reader.ReadByte();
@@ -272,7 +285,7 @@ namespace Mapsui.Geometries.WellKnownBinary
             var geometries = new GeometryCollection();
 
             // Loop on the number of geometries.
-            for (int i = 0; i < numGeometries; i++)
+            for (var i = 0; i < numGeometries; i++)
             {
                 // Call the main create function with the next geometry.
                 geometries.Collection.Add(Parse(reader));
@@ -286,7 +299,7 @@ namespace Mapsui.Geometries.WellKnownBinary
         {
             if (byteOrder == WkbByteOrder.Xdr)
             {
-                byte[] bytes = BitConverter.GetBytes(reader.ReadUInt32());
+                var bytes = BitConverter.GetBytes(reader.ReadUInt32());
                 Array.Reverse(bytes);
                 return BitConverter.ToUInt32(bytes, 0);
             }
@@ -299,7 +312,7 @@ namespace Mapsui.Geometries.WellKnownBinary
         {
             if (byteOrder == WkbByteOrder.Xdr)
             {
-                byte[] bytes = BitConverter.GetBytes(reader.ReadDouble());
+                var bytes = BitConverter.GetBytes(reader.ReadDouble());
                 Array.Reverse(bytes);
                 return BitConverter.ToDouble(bytes, 0);
             }

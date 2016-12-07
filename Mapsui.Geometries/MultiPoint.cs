@@ -22,81 +22,76 @@ using System.Collections.ObjectModel;
 namespace Mapsui.Geometries
 {
     /// <summary>
-    /// A MultiPoint is a 0 dimensional geometric collection. The elements of a MultiPoint are
-    /// restricted to Points. The points are not connected or ordered.
+    ///     A MultiPoint is a 0 dimensional geometric collection. The elements of a MultiPoint are
+    ///     restricted to Points. The points are not connected or ordered.
     /// </summary>
     public class MultiPoint : GeometryCollection
     {
-        private IList<Point> _points;
-
         /// <summary>
-        /// Initializes a new MultiPoint collection
+        ///     Initializes a new MultiPoint collection
         /// </summary>
         public MultiPoint()
         {
-            _points = new Collection<Point>();
+            Points = new Collection<Point>();
         }
 
         /// <summary>
-        /// Initializes a new MultiPoint collection
-        /// </summary>		
+        ///     Initializes a new MultiPoint collection
+        /// </summary>
         public MultiPoint(IEnumerable<double[]> points)
         {
-            _points = new Collection<Point>();
-            foreach (double[] point in points)
-                _points.Add(new Point(point[0], point[1]));
+            Points = new Collection<Point>();
+            foreach (var point in points)
+            {
+                Points.Add(new Point(point[0], point[1]));
+            }
         }
 
         /// <summary>
-        /// Gets the n'th point in the MultiPoint collection
+        ///     Gets the n'th point in the MultiPoint collection
         /// </summary>
         /// <param name="n">Index in collection</param>
         /// <returns>Point</returns>
         public new Point this[int n]
         {
-            get { return _points[n]; }
+            get { return Points[n]; }
         }
 
         /// <summary>
-        /// Gets or sets the MultiPoint collection
+        ///     Gets or sets the MultiPoint collection
         /// </summary>
-        public IList<Point> Points
-        {
-            get { return _points; }
-            set { _points = value; }
-        }
+        public IList<Point> Points { get; set; }
 
         /// <summary>
-        /// Returns the number of geometries in the collection.
+        ///     Returns the number of geometries in the collection.
         /// </summary>
         public override int NumGeometries
         {
-            get { return _points.Count; }
+            get { return Points.Count; }
         }
 
         /// <summary>
-        /// Returns an indexed geometry in the collection
+        ///     Returns an indexed geometry in the collection
         /// </summary>
         /// <param name="n">Geometry index</param>
         /// <returns>Geometry at index N</returns>
         public new Point Geometry(int n)
         {
-            return _points[n];
+            return Points[n];
         }
 
         /// <summary>
-        /// If true, then this Geometry represents the empty point set, Ø, for the coordinate space. 
+        ///     If true, then this Geometry represents the empty point set, Ø, for the coordinate space.
         /// </summary>
         /// <returns>Returns 'true' if this Geometry is the empty geometry</returns>
         public override bool IsEmpty()
         {
-            return _points != null && _points.Count == 0;
+            return (Points != null) && (Points.Count == 0);
         }
 
-        
         /// <summary>
-        /// Returns the shortest distance between any two points in the two geometries
-        /// as calculated in the spatial reference system of this Geometry.
+        ///     Returns the shortest distance between any two points in the two geometries
+        ///     as calculated in the spatial reference system of this Geometry.
         /// </summary>
         /// <param name="geom">Geometry to calculate distance to</param>
         /// <returns>Shortest distance between any two points in the two geometries</returns>
@@ -106,44 +101,48 @@ namespace Mapsui.Geometries
         }
 
         /// <summary>
-        /// The minimum bounding box for this Geometry.
+        ///     The minimum bounding box for this Geometry.
         /// </summary>
         /// <returns></returns>
         public override BoundingBox GetBoundingBox()
         {
-            if (_points == null || _points.Count == 0)
+            if ((Points == null) || (Points.Count == 0))
                 return null;
-            var bbox = new BoundingBox(_points[0], _points[0]);
-            for (int i = 1; i < _points.Count; i++)
+            var bbox = new BoundingBox(Points[0], Points[0]);
+            for (var i = 1; i < Points.Count; i++)
             {
-                bbox.Min.X = _points[i].X < bbox.Min.X ? _points[i].X : bbox.Min.X;
-                bbox.Min.Y = _points[i].Y < bbox.Min.Y ? _points[i].Y : bbox.Min.Y;
-                bbox.Max.X = _points[i].X > bbox.Max.X ? _points[i].X : bbox.Max.X;
-                bbox.Max.Y = _points[i].Y > bbox.Max.Y ? _points[i].Y : bbox.Max.Y;
+                bbox.Min.X = Points[i].X < bbox.Min.X ? Points[i].X : bbox.Min.X;
+                bbox.Min.Y = Points[i].Y < bbox.Min.Y ? Points[i].Y : bbox.Min.Y;
+                bbox.Max.X = Points[i].X > bbox.Max.X ? Points[i].X : bbox.Max.X;
+                bbox.Max.Y = Points[i].Y > bbox.Max.Y ? Points[i].Y : bbox.Max.Y;
             }
             return bbox;
         }
 
         /// <summary>
-        /// Return a copy of this geometry
+        ///     Return a copy of this geometry
         /// </summary>
         /// <returns>Copy of Geometry</returns>
         public new MultiPoint Clone()
         {
             var geoms = new MultiPoint();
-            foreach (var point in _points)
+            foreach (var point in Points)
+            {
                 geoms.Points.Add(point.Clone());
+            }
             return geoms;
         }
 
         /// <summary>
-        /// Gets an enumerator for enumerating the geometries in the GeometryCollection
+        ///     Gets an enumerator for enumerating the geometries in the GeometryCollection
         /// </summary>
         /// <returns></returns>
         public override IEnumerator<Geometry> GetEnumerator()
         {
-            foreach (Point p in _points)
+            foreach (var p in Points)
+            {
                 yield return p;
+            }
         }
     }
 }

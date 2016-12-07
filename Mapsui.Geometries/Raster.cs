@@ -8,8 +8,6 @@ namespace Mapsui.Geometries
     public class Raster : Geometry, IRaster
     {
         private readonly BoundingBox _boundingBox;
-        public MemoryStream Data { get; }
-        public long TickFetched { get; }
 
         public Raster(MemoryStream data, BoundingBox box)
         {
@@ -18,11 +16,14 @@ namespace Mapsui.Geometries
             TickFetched = DateTime.Now.Ticks;
         }
 
+        public MemoryStream Data { get; }
+        public long TickFetched { get; }
+
         public override BoundingBox GetBoundingBox()
         {
             return _boundingBox;
         }
-      
+
         public new string AsText()
         {
             return GeometryToWKT.Write(Envelope());
@@ -35,7 +36,7 @@ namespace Mapsui.Geometries
 
         public override bool IsEmpty()
         {
-            return _boundingBox.Width * _boundingBox.Height <= 0;
+            return _boundingBox.Width*_boundingBox.Height <= 0;
         }
 
         public new Geometry Clone()

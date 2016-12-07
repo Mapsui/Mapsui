@@ -18,27 +18,27 @@
 namespace Mapsui.Geometries
 {
     /// <summary>
-    /// A MultiCurve is a one-dimensional GeometryCollection whose elements are Curves
+    ///     A MultiCurve is a one-dimensional GeometryCollection whose elements are Curves
     /// </summary>
     public abstract class MultiCurve : GeometryCollection
     {
         /// <summary>
-        /// Returns true if this MultiCurve is closed (StartPoint=EndPoint for each curve in this MultiCurve)
+        ///     Returns true if this MultiCurve is closed (StartPoint=EndPoint for each curve in this MultiCurve)
         /// </summary>
         public abstract bool IsClosed { get; }
 
         /// <summary>
-        /// The Length of this MultiCurve which is equal to the sum of the lengths of the element Curves.
+        ///     The Length of this MultiCurve which is equal to the sum of the lengths of the element Curves.
         /// </summary>
         public abstract double Length { get; }
 
         /// <summary>
-        /// Returns the number of geometries in the collection.
+        ///     Returns the number of geometries in the collection.
         /// </summary>
         public new abstract int NumGeometries { get; }
 
         /// <summary>
-        /// Returns an indexed geometry in the collection
+        ///     Returns an indexed geometry in the collection
         /// </summary>
         /// <param name="n">Geometry index</param>
         /// <returns>Geometry at index N</returns>

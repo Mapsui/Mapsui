@@ -18,39 +18,39 @@
 namespace Mapsui.Geometries
 {
     /// <summary>
-    /// A Curve is a one-dimensional geometric object usually stored as a sequence of points,
-    /// with the subtype of Curve specifying the form of the interpolation between points.
+    ///     A Curve is a one-dimensional geometric object usually stored as a sequence of points,
+    ///     with the subtype of Curve specifying the form of the interpolation between points.
     /// </summary>
     public abstract class Curve : Geometry
     {
         /// <summary>
-        /// The length of this Curve in its associated spatial reference.
+        ///     The length of this Curve in its associated spatial reference.
         /// </summary>
         public abstract double Length { get; }
 
         /// <summary>
-        /// The start point of this Curve.
+        ///     The start point of this Curve.
         /// </summary>
         public abstract Point StartPoint { get; }
 
         /// <summary>
-        /// The end point of this Curve.
+        ///     The end point of this Curve.
         /// </summary>
         public abstract Point EndPoint { get; }
 
         /// <summary>
-        /// Returns true if this Curve is closed (StartPoint = EndPoint).
+        ///     Returns true if this Curve is closed (StartPoint = EndPoint).
         /// </summary>
-        public bool IsClosed => (StartPoint.Equals(EndPoint));
+        public bool IsClosed => StartPoint.Equals(EndPoint);
 
         /// <summary>
-        /// true if this Curve is closed (StartPoint = EndPoint) and
-        /// this Curve is simple (does not pass through the same point more than once).
+        ///     true if this Curve is closed (StartPoint = EndPoint) and
+        ///     this Curve is simple (does not pass through the same point more than once).
         /// </summary>
         public abstract bool IsRing { get; }
 
         /// <summary>
-        /// The position of a point on the line, parameterised by length.
+        ///     The position of a point on the line, parameterised by length.
         /// </summary>
         /// <param name="t"></param>
         /// <returns></returns>

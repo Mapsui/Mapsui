@@ -23,84 +23,79 @@ using System.Linq;
 namespace Mapsui.Geometries
 {
     /// <summary>
-    /// A LineString is a Curve with linear interpolation between points. Each consecutive pair of points defines a
-    /// line segment.
+    ///     A LineString is a Curve with linear interpolation between points. Each consecutive pair of points defines a
+    ///     line segment.
     /// </summary>
     public class LineString : Curve
     {
-        private List<Point> _vertices;
-
         /// <summary>
-        /// Initializes an instance of a LineString from a set of vertices
+        ///     Initializes an instance of a LineString from a set of vertices
         /// </summary>
         /// <param name="vertices"></param>
         public LineString(IEnumerable<Point> vertices)
         {
-            _vertices = vertices.ToList();
+            Vertices = vertices.ToList();
         }
 
         /// <summary>
-        /// Initializes an instance of a LineString
+        ///     Initializes an instance of a LineString
         /// </summary>
-        public LineString() : this(new List<Point>())
-        {
-        }
+        public LineString() : this(new List<Point>()) {}
 
         /// <summary>
-        /// Initializes an instance of a LineString
+        ///     Initializes an instance of a LineString
         /// </summary>
         /// <param name="points"></param>
         public LineString(IEnumerable<double[]> points)
         {
             var vertices = new Collection<Point>();
-            foreach (var point in points) vertices.Add(new Point(point));
-            _vertices = vertices.ToList();
+            foreach (var point in points)
+            {
+                vertices.Add(new Point(point));
+            }
+            Vertices = vertices.ToList();
         }
 
         /// <summary>
-        /// Gets or sets the collection of vertices in this Geometry
+        ///     Gets or sets the collection of vertices in this Geometry
         /// </summary>
-        public List<Point> Vertices
-        {
-            get { return _vertices; }
-            set { _vertices = value; }
-        }
+        public List<Point> Vertices { get; set; }
 
         /// <summary>
-        /// Returns the vertice where this Geometry begins
+        ///     Returns the vertice where this Geometry begins
         /// </summary>
         /// <returns>First vertice in LineString</returns>
         public override Point StartPoint
         {
             get
             {
-                if (_vertices.Count == 0)
+                if (Vertices.Count == 0)
                     throw new Exception("No startpoint found: LineString has no vertices.");
-                return _vertices[0];
+                return Vertices[0];
             }
         }
 
         /// <summary>
-        /// Gets the vertice where this Geometry ends
+        ///     Gets the vertice where this Geometry ends
         /// </summary>
         /// <returns>Last vertice in LineString</returns>
         public override Point EndPoint
         {
             get
             {
-                if (_vertices.Count == 0)
+                if (Vertices.Count == 0)
                     throw new Exception("No endpoint found: LineString has no vertices.");
-                return _vertices[_vertices.Count - 1];
+                return Vertices[Vertices.Count - 1];
             }
         }
 
         /// <summary>
-        /// Returns true if this LineString is closed and simple
+        ///     Returns true if this LineString is closed and simple
         /// </summary>
-        public override bool IsRing => (IsClosed && IsSimple());
+        public override bool IsRing => IsClosed && IsSimple();
 
         /// <summary>
-        /// The length of this LineString, as measured in the spatial reference system of this LineString.
+        ///     The length of this LineString, as measured in the spatial reference system of this LineString.
         /// </summary>
         public override double Length
         {
@@ -109,33 +104,33 @@ namespace Mapsui.Geometries
                 if (Vertices.Count < 2)
                     return 0;
                 double sum = 0;
-                for (int i = 1; i < Vertices.Count; i++)
+                for (var i = 1; i < Vertices.Count; i++)
+                {
                     sum += Vertices[i].Distance(Vertices[i - 1]);
+                }
                 return sum;
             }
         }
 
-
         /// <summary>
-        /// The number of points in this LineString.
+        ///     The number of points in this LineString.
         /// </summary>
         /// <remarks>This method is supplied as part of the OpenGIS Simple Features Specification</remarks>
-        public int NumPoints => _vertices.Count;
+        public int NumPoints => Vertices.Count;
 
         /// <summary>
-        /// Returns the specified point N in this Linestring.
+        ///     Returns the specified point N in this Linestring.
         /// </summary>
         /// <remarks>This method is supplied as part of the OpenGIS Simple Features Specification</remarks>
         /// <param name="n"></param>
         /// <returns></returns>
         public Point Point(int n)
         {
-            return _vertices[n];
+            return Vertices[n];
         }
 
-
         /// <summary>
-        /// The position of a point on the line, parameterised by length.
+        ///     The position of a point on the line, parameterised by length.
         /// </summary>
         /// <param name="t">Distance down the line</param>
         /// <returns>Point at line at distance t from StartPoint</returns>
@@ -145,15 +140,15 @@ namespace Mapsui.Geometries
         }
 
         /// <summary>
-        /// The minimum bounding box for this Geometry.
+        ///     The minimum bounding box for this Geometry.
         /// </summary>
         /// <returns>BoundingBox for this geometry</returns>
         public override BoundingBox GetBoundingBox()
         {
-            if (Vertices == null || Vertices.Count == 0)
+            if ((Vertices == null) || (Vertices.Count == 0))
                 return null;
             var bbox = new BoundingBox(Vertices[0], Vertices[0]);
-            for (int i = 1; i < Vertices.Count; i++)
+            for (var i = 1; i < Vertices.Count; i++)
             {
                 bbox.Min.X = Vertices[i].X < bbox.Min.X ? Vertices[i].X : bbox.Min.X;
                 bbox.Min.Y = Vertices[i].Y < bbox.Min.Y ? Vertices[i].Y : bbox.Min.Y;
@@ -164,19 +159,21 @@ namespace Mapsui.Geometries
         }
 
         /// <summary>
-        /// Return a copy of this geometry
+        ///     Return a copy of this geometry
         /// </summary>
         /// <returns>Copy of Geometry</returns>
         public new LineString Clone()
         {
             var l = new LineString();
-            foreach (var vertex in _vertices)
+            foreach (var vertex in Vertices)
+            {
                 l.Vertices.Add(vertex.Clone());
+            }
             return l;
         }
 
         /// <summary>
-        /// Checks whether this instance is spatially equal to the LineString 'l'
+        ///     Checks whether this instance is spatially equal to the LineString 'l'
         /// </summary>
         /// <param name="lineString">LineString to compare to</param>
         /// <returns>true of the objects are spatially equal</returns>
@@ -184,51 +181,55 @@ namespace Mapsui.Geometries
         {
             if (lineString?.Vertices.Count != Vertices.Count)
                 return false;
-            for (int i = 0; i < lineString.Vertices.Count; i++)
+            for (var i = 0; i < lineString.Vertices.Count; i++)
+            {
                 if (!lineString.Vertices[i].Equals(Vertices[i]))
                     return false;
+            }
             return true;
         }
 
         /// <summary>
-        /// Serves as a hash function for a particular type. <see cref="GetHashCode"/> is suitable for use 
-        /// in hashing algorithms and data structures like a hash table.
+        ///     Serves as a hash function for a particular type. <see cref="GetHashCode" /> is suitable for use
+        ///     in hashing algorithms and data structures like a hash table.
         /// </summary>
-        /// <returns>A hash code for the current <see cref="GetHashCode"/>.</returns>
+        /// <returns>A hash code for the current <see cref="GetHashCode" />.</returns>
         public override int GetHashCode()
         {
             return Vertices.Aggregate(0, (current, t) => current ^ t.GetHashCode());
         }
 
         /// <summary>
-        /// If true, then this Geometry represents the empty point set, Ø, for the coordinate space. 
+        ///     If true, then this Geometry represents the empty point set, Ø, for the coordinate space.
         /// </summary>
         /// <returns>Returns 'true' if this Geometry is the empty geometry</returns>
         public override bool IsEmpty()
         {
-            return _vertices == null || _vertices.Count == 0;
+            return (Vertices == null) || (Vertices.Count == 0);
         }
 
         /// <summary>
-        ///  Returns 'true' if this Geometry has no anomalous geometric points, such as self
-        /// intersection or self tangency. The description of each instantiable geometric class will include the specific
-        /// conditions that cause an instance of that class to be classified as not simple.
+        ///     Returns 'true' if this Geometry has no anomalous geometric points, such as self
+        ///     intersection or self tangency. The description of each instantiable geometric class will include the specific
+        ///     conditions that cause an instance of that class to be classified as not simple.
         /// </summary>
         /// <returns>true if the geometry is simple</returns>
         public bool IsSimple()
         {
             var verts = new Collection<Point>();
 
-            foreach (Point vertex in _vertices)
+            foreach (var vertex in Vertices)
+            {
                 if (0 != verts.IndexOf(vertex))
                     verts.Add(vertex);
+            }
 
-            return (verts.Count == _vertices.Count - (IsClosed ? 1 : 0));
+            return verts.Count == Vertices.Count - (IsClosed ? 1 : 0);
         }
 
         /// <summary>
-        /// Returns the shortest distance between any two points in the two geometries
-        /// as calculated in the spatial reference system of this Geometry.
+        ///     Returns the shortest distance between any two points in the two geometries
+        ///     as calculated in the spatial reference system of this Geometry.
         /// </summary>
         /// <param name="geom">Geometry to calculate distance to</param>
         /// <returns>Shortest distance between any two points in the two geometries</returns>

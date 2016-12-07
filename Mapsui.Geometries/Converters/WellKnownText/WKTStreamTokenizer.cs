@@ -42,51 +42,44 @@ using System.IO;
 namespace Mapsui.Geometries.WellKnownText
 {
     /// <summary>
-    /// Reads a stream of Well Known Text (wkt) string and returns a stream of tokens.
+    ///     Reads a stream of Well Known Text (wkt) string and returns a stream of tokens.
     /// </summary>
     internal class WktStreamTokenizer : StreamTokenizer
     {
-        
         /// <summary>
-        /// Initializes a new instance of the WktStreamTokenizer class.
+        ///     Initializes a new instance of the WktStreamTokenizer class.
         /// </summary>
         /// <remarks>The WktStreamTokenizer class ais in reading WKT streams.</remarks>
         /// <param name="reader">A TextReader that contains </param>
         public WktStreamTokenizer(TextReader reader) : base(reader, true)
         {
             if (reader == null)
-            {
                 throw new ArgumentNullException("reader");
-            }
         }
 
-        
-        
         /// <summary>
-        /// Reads a token and checks it is what is expected.
+        ///     Reads a token and checks it is what is expected.
         /// </summary>
         /// <param name="expectedToken">The expected token.</param>
         internal void ReadToken(string expectedToken)
         {
             NextToken();
             if (GetStringValue() != expectedToken)
-            {
-                throw new Exception(String.Format(CultureInfo.InvariantCulture,
-                                                  "Expecting ('{3}') but got a '{0}' at line {1} column {2}.",
-                                                  GetStringValue(), LineNumber, Column, expectedToken));
-            }
+                throw new Exception(string.Format(CultureInfo.InvariantCulture,
+                    "Expecting ('{3}') but got a '{0}' at line {1} column {2}.",
+                    GetStringValue(), LineNumber, Column, expectedToken));
         }
 
         /// <summary>
-        /// Reads a string inside double quotes.
+        ///     Reads a string inside double quotes.
         /// </summary>
         /// <remarks>
-        /// White space inside quotes is preserved.
+        ///     White space inside quotes is preserved.
         /// </remarks>
         /// <returns>The string inside the double quotes.</returns>
         public string ReadDoubleQuotedWord()
         {
-            string word = "";
+            var word = "";
             ReadToken("\"");
             NextToken(false);
             while (GetStringValue() != "\"")
@@ -98,7 +91,7 @@ namespace Mapsui.Geometries.WellKnownText
         }
 
         /// <summary>
-        /// Reads the authority and authority code.
+        ///     Reads the authority and authority code.
         /// </summary>
         /// <param name="authority">String to place the authority in.</param>
         /// <param name="authorityCode">String to place the authority code in.</param>
@@ -113,6 +106,5 @@ namespace Mapsui.Geometries.WellKnownText
             authorityCode = long.Parse(ReadDoubleQuotedWord());
             ReadToken("]");
         }
-
-            }
+    }
 }
