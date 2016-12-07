@@ -278,16 +278,11 @@ namespace Mapsui.Geometries
         ///     Returns the distance between this geometry instance and another geometry, as
         ///     measured in the spatial reference system of this instance.
         /// </summary>
-        /// <param name="geom"></param>
+        /// <param name="point"></param>
         /// <returns></returns>
-        public override double Distance(Geometry geom)
+        public override double Distance(Point point)
         {
-            if (geom.GetType() == typeof(Point))
-            {
-                var p = (Point) geom;
-                return Math.Sqrt(Math.Pow(X - p.X, 2) + Math.Pow(Y - p.Y, 2));
-            }
-            throw new Exception("The method or operation is not implemented for this geometry type.");
+            return Math.Sqrt(Math.Pow(X - point.X, 2) + Math.Pow(Y - point.Y, 2));
         }
 
         /// <summary>

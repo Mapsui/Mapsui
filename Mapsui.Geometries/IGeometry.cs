@@ -72,8 +72,8 @@ namespace Mapsui.Geometries
         ///     Returns the shortest distance between any two points in the two geometries
         ///     as calculated in the spatial reference system of this <see cref="Geometry" />.
         /// </summary>
-        /// <param name="geom"><see cref="Geometry" /> to calculate distance to</param>
+        /// <param name="point"><see cref="Point" /> to calculate distance to</param>
         /// <returns>Shortest distance between any two points in the two geometries</returns>
-        double Distance(Geometry geom);
+        double Distance(Point point);
     }
 }

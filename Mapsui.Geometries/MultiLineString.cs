@@ -15,7 +15,6 @@
 // along with SharpMap; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Mapsui.Geometries.Utilities;
@@ -110,51 +109,23 @@ namespace Mapsui.Geometries
         ///     Returns the shortest distance between any two points in the two geometries
         ///     as calculated in the spatial reference system of this Geometry.
         /// </summary>
-        /// <param name="geom">Geometry to calculate distance to</param>
+        /// <param name="point">Geometry to calculate distance to</param>
         /// <returns>Shortest distance between any two points in the two geometries</returns>
-        public override double Distance(Geometry geom)
+        public override double Distance(Point point)
         {
-            if (geom is Point)
+            // brute force approach!
+            var minDist = double.MaxValue;
+            foreach (var ls in LineStrings)
             {
-                var coord = geom as Point;
-                // brute force approach!
-                var minDist = double.MaxValue;
-                foreach (var ls in LineStrings)
+                IList<Point> coord0 = ls.Vertices;
+                for (var i = 0; i < coord0.Count - 1; i++)
                 {
-                    IList<Point> coord0 = ls.Vertices;
-                    for (var i = 0; i < coord0.Count - 1; i++)
-                    {
-                        var dist = CGAlgorithms.DistancePointLine(coord, coord0[i], coord0[i + 1]);
-                        if (dist < minDist)
-                            minDist = dist;
-                    }
+                    var dist = CGAlgorithms.DistancePointLine(point, coord0[i], coord0[i + 1]);
+                    if (dist < minDist)
+                        minDist = dist;
                 }
-                return minDist;
             }
-            if (geom is LineString)
-            {
-                IList<Point> coord1 = (geom as LineString).Vertices;
-                // brute force approach!
-                var minDistance = double.MaxValue;
-                foreach (var ls in LineStrings)
-                {
-                    IList<Point> coord0 = ls.Vertices;
-                    for (var i = 0; i < coord0.Count - 1; i++)
-                    {
-                        for (var j = 0; j < coord1.Count - 1; j++)
-                        {
-                            var dist = CGAlgorithms.DistanceLineLine(
-                                coord0[i], coord0[i + 1],
-                                coord1[j], coord1[j + 1]);
-                            if (dist < minDistance)
-                                minDistance = dist;
-                        }
-                    }
-                }
-                return minDistance;
-            }
-
-            throw new NotImplementedException();
+            return minDist;
         }
 
         /// <summary>

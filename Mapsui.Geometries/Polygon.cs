@@ -184,7 +184,7 @@ namespace Mapsui.Geometries
         ///     Returns the shortest distance between any two points in the two geometries
         ///     as calculated in the spatial reference system of this Geometry.
         /// </summary>
-        public override double Distance(Geometry geom)
+        public override double Distance(Point point)
         {
             throw new NotImplementedException();
         }

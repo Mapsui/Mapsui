@@ -19,6 +19,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using Mapsui.Geometries.Utilities;
 
 namespace Mapsui.Geometries
 {
@@ -112,6 +113,11 @@ namespace Mapsui.Geometries
         /// </summary>
         /// <remarks>This method is supplied as part of the OpenGIS Simple Features Specification</remarks>
         public int NumPoints => Vertices.Count;
+
+        /// <summary>
+        ///     Returns true if this Curve is closed (StartPoint = EndPoint).
+        /// </summary>
+        public bool IsClosed => StartPoint.Equals(EndPoint);
 
         /// <summary>
         ///     Returns the specified point N in this Linestring.
@@ -213,19 +219,24 @@ namespace Mapsui.Geometries
         }
 
         /// <summary>
-        ///     Returns true if this Curve is closed (StartPoint = EndPoint).
-        /// </summary>
-        public bool IsClosed => StartPoint.Equals(EndPoint);
-
-        /// <summary>
         ///     Returns the shortest distance between any two points in the two geometries
         ///     as calculated in the spatial reference system of this Geometry.
         /// </summary>
-        /// <param name="geom">Geometry to calculate distance to</param>
+        /// <param name="point">Geometry to calculate distance to</param>
         /// <returns>Shortest distance between any two points in the two geometries</returns>
-        public override double Distance(Geometry geom)
+        public override double Distance(Point point)
         {
-            throw new NotImplementedException();
+            var minDist = double.MaxValue;
+
+            IList<Point> coord0 = Vertices;
+            for (var i = 0; i < coord0.Count - 1; i++)
+            {
+                var dist = CGAlgorithms.DistancePointLine(point, coord0[i], coord0[i + 1]);
+                if (dist < minDist)
+                    minDist = dist;
+            }
+
+            return minDist;
         }
     }
 }

@@ -42,11 +42,12 @@ namespace Mapsui.Geometries
         public new Geometry Clone()
         {
             var copy = new MemoryStream();
+            Data.Position = 0;
             Data.CopyTo(copy);
             return new Raster(copy, _boundingBox.Clone());
         }
         
-        public override double Distance(Geometry geom)
+        public override double Distance(Point point)
         {
             throw new NotImplementedException();
         }
