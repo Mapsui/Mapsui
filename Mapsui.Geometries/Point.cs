@@ -310,16 +310,6 @@ namespace Mapsui.Geometries
         }
 
         /// <summary>
-        ///     Checks whether this point intersects a <see cref="BoundingBox" />
-        /// </summary>
-        /// <param name="box">Box</param>
-        /// <returns>True if they intersect</returns>
-        public bool Intersects(BoundingBox box)
-        {
-            return box.Contains(this);
-        }
-
-        /// <summary>
         ///     Calculates a new point by rotating this point clockwise about the specified center point
         /// </summary>
         /// <param name="degrees">Angle to rotate clockwise (degrees)</param>
