@@ -26,7 +26,7 @@ namespace Mapsui.Geometries
     ///     A LineString is a Curve with linear interpolation between points. Each consecutive pair of points defines a
     ///     line segment.
     /// </summary>
-    public class LineString : Curve
+    public class LineString : Geometry
     {
         /// <summary>
         ///     Initializes an instance of a LineString from a set of vertices
@@ -65,7 +65,7 @@ namespace Mapsui.Geometries
         ///     Returns the vertice where this Geometry begins
         /// </summary>
         /// <returns>First vertice in LineString</returns>
-        public override Point StartPoint
+        public Point StartPoint
         {
             get
             {
@@ -79,7 +79,7 @@ namespace Mapsui.Geometries
         ///     Gets the vertice where this Geometry ends
         /// </summary>
         /// <returns>Last vertice in LineString</returns>
-        public override Point EndPoint
+        public Point EndPoint
         {
             get
             {
@@ -92,7 +92,7 @@ namespace Mapsui.Geometries
         /// <summary>
         ///     The length of this LineString, as measured in the spatial reference system of this LineString.
         /// </summary>
-        public override double Length
+        public double Length
         {
             get
             {
@@ -211,6 +211,11 @@ namespace Mapsui.Geometries
 
             return verts.Count == Vertices.Count - (IsClosed ? 1 : 0);
         }
+
+        /// <summary>
+        ///     Returns true if this Curve is closed (StartPoint = EndPoint).
+        /// </summary>
+        public bool IsClosed => StartPoint.Equals(EndPoint);
 
         /// <summary>
         ///     Returns the shortest distance between any two points in the two geometries

@@ -48,7 +48,6 @@
     <Compile Include="Converters\WellKnownText\StreamTokenizer.cs" />
     <Compile Include="Converters\WellKnownText\TokenType.cs" />
     <Compile Include="Converters\WellKnownText\WKTStreamTokenizer.cs" />
-    <Compile Include="Curve.cs" />
     <Compile Include="Geometry.cs" />
     <Compile Include="GeometryCollection.cs" />
     <Compile Include="IGeometry.cs" />
