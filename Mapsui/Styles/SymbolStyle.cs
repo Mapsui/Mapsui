@@ -33,7 +33,7 @@ namespace Mapsui.Styles
         /// <summary>
         ///     Symbol used for rendering points
         /// </summary>
-        [Obsolete("use BitmapID and BitmapRegistry instead", true)]
+        [Obsolete("Use BitmapID and BitmapRegistry instead", true)]
         public Bitmap Symbol
         {
             get { throw new NotImplementedException(); }

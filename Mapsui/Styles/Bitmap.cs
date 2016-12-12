@@ -51,6 +51,7 @@ namespace Mapsui.Styles
         }
     }
 
+    [Obsolete("Use BitmapID and BitmapRegistry instead", true)]
     public class BitmapDataAddedEventArgs : EventArgs
     {
         public BitmapDataAddedEventArgs(Stream data)

@@ -1,4 +1,5 @@
 ﻿using Mapsui.Layers;
+using Mapsui.Logging;
 using Mapsui.Providers.ArcGIS;
 using Mapsui.Providers.ArcGIS.Image;
 
@@ -39,7 +40,7 @@ namespace Mapsui.Samples.Common.Desktop
 
         private static void capabilitiesHelper_CapabilitiesFailed(object sender, System.EventArgs e)
         {
-            throw new System.NotImplementedException();
+            Logger.Log(LogLevel.Warning, "ArcGISImageService capabilities request failed");
         }
 
         private static void CapabilitiesReceived(object sender, System.EventArgs e)
