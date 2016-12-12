@@ -16,6 +16,7 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
 using System;
+using System.Collections.Generic;
 
 namespace Mapsui.Geometries.Utilities
 {
@@ -149,6 +150,35 @@ namespace Mapsui.Geometries.Utilities
                 return prevPoint.X > nextPoint.X;
             // if area is positive, points are ordered CCW
             return disc > 0.0;
+        }
+
+        public static bool PointInPolygon(List<Point> ring, Point point)
+        {
+            // taken from: http://stackoverflow.com/a/2922778/85325
+            var result = false;
+            
+            for (int i = 0, j = ring.Count - 1; i < ring.Count; j = i++)
+            {
+                if ((ring[i].Y > point.Y != ring[j].Y > point.Y) &&
+                    (point.X < (ring[j].X - ring[i].X)*(point.Y - ring[i].Y)/(ring[j].Y - ring[i].Y) + ring[i].X))
+                    result = !result;
+            }
+
+            return result;
+        }
+
+        public static double DistanceToLine(Point point, List<Point> points)
+        {
+            var minDist = Double.MaxValue;
+
+            for (var i = 0; i < points.Count - 1; i++)
+            {
+                var dist = CGAlgorithms.DistancePointLine(point, points[i], points[i + 1]);
+                if (dist < minDist)
+                    minDist = dist;
+            }
+
+            return minDist;
         }
     }
 }

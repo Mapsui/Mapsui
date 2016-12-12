@@ -226,17 +226,7 @@ namespace Mapsui.Geometries
         /// <returns>Shortest distance between any two points in the two geometries</returns>
         public override double Distance(Point point)
         {
-            var minDist = double.MaxValue;
-
-            IList<Point> coord0 = Vertices;
-            for (var i = 0; i < coord0.Count - 1; i++)
-            {
-                var dist = CGAlgorithms.DistancePointLine(point, coord0[i], coord0[i + 1]);
-                if (dist < minDist)
-                    minDist = dist;
-            }
-
-            return minDist;
+            return Algorithms.DistanceToLine(point, Vertices);
         }
     }
 }

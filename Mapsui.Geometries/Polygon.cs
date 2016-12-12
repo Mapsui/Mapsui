@@ -18,6 +18,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Mapsui.Geometries.Utilities;
 
 namespace Mapsui.Geometries
 {
@@ -186,7 +187,15 @@ namespace Mapsui.Geometries
         /// </summary>
         public override double Distance(Point point)
         {
-            throw new NotImplementedException();
+            if (Contains(point)) return 0;
+
+            return Algorithms.DistanceToLine(point, ExteriorRing.Vertices);
+        }
+
+        private bool Contains(Point point)
+        {
+            return GetBoundingBox().Contains(point) && // First check bounds for performance
+                Algorithms.PointInPolygon(ExteriorRing.Vertices, point);
         }
     }
 }
