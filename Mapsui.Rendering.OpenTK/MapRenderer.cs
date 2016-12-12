@@ -109,7 +109,7 @@ namespace Mapsui.Rendering.OpenTK
         public MemoryStream RenderToBitmapStream(IViewport viewport, IEnumerable<ILayer> layers, 
             Color background = null)
         {
-            throw new NotImplementedException();
+             throw new NotImplementedException();
         }
     }
 
