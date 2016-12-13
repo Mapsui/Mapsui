@@ -23,6 +23,7 @@ using Mapsui.Fetcher;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Projection;
+using Mapsui.Providers;
 using Mapsui.Styles;
 using Mapsui.Utilities;
 
@@ -85,6 +86,27 @@ namespace Mapsui
                 _layers.LayerAdded += LayersLayerAdded;
                 _layers.LayerRemoved += LayersLayerRemoved;
             }
+        }
+
+        public IFeature GetFeatureInfo(IEnumerable<ILayer> layers, Point point)
+        {
+            var margin = 16 * Viewport.Resolution;
+
+            foreach (var layer in layers)
+            {
+                if (layer.Enabled == false) continue;
+
+                var feature = layer.GetFeaturesInView(Envelope, 0)
+                    .Where(f => f.Geometry.Touches(point, margin))
+                    .OrderBy(f => f.Geometry.GetBoundingBox().GetCentroid().Distance(point))
+                    .FirstOrDefault();
+
+                if (feature != null)
+                {
+                    return feature;
+                }
+            }
+            return null;
         }
 
         public IList<ILayer> InfoLayers { get; private set; } = new List<ILayer>();

@@ -147,13 +147,10 @@ namespace Mapsui.Geometries
         /// <returns>true if the specified <see cref="Object" /> is equal to the current <see cref="Object" />; otherwise, false</returns>
         public override bool Equals(object obj)
         {
-            if (obj == null)
+            var geometry = obj as Geometry;
+            if (geometry == null)
                 return false;
-
-            var g = obj as Geometry;
-            if (g == null)
-                return false;
-            return Equals(g);
+            return Equals(geometry);
         }
 
         /// <summary>
@@ -165,5 +162,16 @@ namespace Mapsui.Geometries
         {
             return AsBinary().GetHashCode();
         }
+
+        public bool Touches(Point point, double margin = 0)
+        {
+            if (this is Polygon) margin = 0; // todo: find a better solution
+            var biggerBox = GetBoundingBox().Grow(margin);
+            if (!biggerBox.Contains(point)) return false;
+            if (margin <= 0 && !Contains(point)) return false;
+            return Distance(point) <= margin;
+        }
+
+        public abstract bool Contains(Point point);
     }
 }

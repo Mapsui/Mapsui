@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Mapsui.Geometries;
 using Mapsui.Layers;
+using Mapsui.Providers;
 using Mapsui.Styles;
 
 namespace Mapsui.Samples.Common.Maps
@@ -9,6 +10,7 @@ namespace Mapsui.Samples.Common.Maps
     {
         private const string InfoLayerName = "Info Layer";
         private const string HoverInfoLayerName = "Hover Info Layer";
+        private const string PolygonLayerName = "Polygon Layer";
 
         public static Map CreateMap()
         {
@@ -17,11 +19,34 @@ namespace Mapsui.Samples.Common.Maps
             map.Layers.Add(OsmSample.CreateLayer());
             map.Layers.Add(CreateInfoLayer(map.Envelope));
             map.Layers.Add(CreateHoverInfoLayer(map.Envelope));
+            map.Layers.Add(CreatePolygonLayer());
 
             map.InfoLayers.Add(map.Layers.First(l => l.Name == InfoLayerName));
+            map.InfoLayers.Add(map.Layers.First(l => l.Name == PolygonLayerName));
             map.HoverInfoLayers.Add(map.Layers.First(l => l.Name == HoverInfoLayerName));
 
             return map;
+        }
+
+        private static ILayer CreatePolygonLayer()
+        {
+            var layer = new MemoryLayer {Name = PolygonLayerName};
+            var provider = new MemoryProvider();
+            var feature = new Feature
+            {
+                Geometry = new Polygon(new LinearRing(new[]
+                {
+                    new Point(1000000, 1000000),
+                    new Point(1000000, -1000000),
+                    new Point(-1000000, -1000000),
+                    new Point(-1000000, 1000000),
+                    new Point(1000000, 1000000)
+                })),
+                ["Name"] = "Polygon 1"
+            };
+            provider.Features.Add(feature);
+            layer.DataSource = provider;
+            return layer;
         }
 
         private static ILayer CreateInfoLayer(BoundingBox envelope)

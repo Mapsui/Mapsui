@@ -75,5 +75,9 @@ namespace Mapsui.Geometries
         /// <param name="point"><see cref="Point" /> to calculate distance to</param>
         /// <returns>Shortest distance between any two points in the two geometries</returns>
         double Distance(Point point);
+
+        bool Touches(Point point, double margin = 0);
+
+        bool Contains(Point point);
     }
 }

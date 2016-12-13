@@ -193,5 +193,15 @@ namespace Mapsui.Geometries
 
             return geometryCollection;
         }
+
+
+        public override bool Contains(Point point)
+        {
+            foreach (var geometry in Collection)
+            {
+                if (geometry.Contains(point)) return true;
+            }
+            return false;
+        }
     }
 }

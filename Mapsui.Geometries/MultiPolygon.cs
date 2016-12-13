@@ -135,9 +135,9 @@ namespace Mapsui.Geometries
         /// <returns></returns>
         public override IEnumerator<Geometry> GetEnumerator()
         {
-            foreach (var p in Polygons)
+            foreach (var polygon in Polygons)
             {
-                yield return p;
+                yield return polygon;
             }
         }
     }

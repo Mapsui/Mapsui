@@ -62,10 +62,10 @@ namespace Mapsui.Providers
 
             if (disposing)
             {
-                foreach (var kayValuePair in RenderedGeometry)
+                foreach (var keyValuePair in RenderedGeometry)
                 {
-                    var disposable = kayValuePair.Value as IDisposable;
-                    if (disposable != null) disposable.Dispose();
+                    var disposable = keyValuePair.Value as IDisposable;
+                    disposable?.Dispose();
                 }
                 RenderedGeometry.Clear();
             }

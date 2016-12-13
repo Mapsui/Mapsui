@@ -192,7 +192,7 @@ namespace Mapsui.Geometries
             return Algorithms.DistanceToLine(point, ExteriorRing.Vertices);
         }
 
-        private bool Contains(Point point)
+        public override bool Contains(Point point)
         {
             return GetBoundingBox().Contains(point) && // First check bounds for performance
                 Algorithms.PointInPolygon(ExteriorRing.Vertices, point);

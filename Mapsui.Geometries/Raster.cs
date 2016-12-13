@@ -52,5 +52,10 @@ namespace Mapsui.Geometries
             var geometry = Envelope();
             return geometry.Distance(point);
         }
+
+        public override bool Contains(Point point)
+        {
+            return Envelope().Contains(point);
+        }
     }
 }

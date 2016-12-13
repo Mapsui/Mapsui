@@ -337,5 +337,10 @@ namespace Mapsui.Geometries
         {
             return Rotate(degrees, center.X, center.Y);
         }
+
+        public override bool Contains(Point point)
+        {
+            return false;
+        }
     }
 }

@@ -228,5 +228,10 @@ namespace Mapsui.Geometries
         {
             return Algorithms.DistanceToLine(point, Vertices);
         }
+
+        public override bool Contains(Point point)
+        {
+            return false;
+        }
     }
 }

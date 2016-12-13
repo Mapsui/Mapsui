@@ -449,7 +449,7 @@ namespace Mapsui.UI.Xaml
             else
             {
                 HandleFeatureInfo(e);
-                var eventArgs = GetHoverInfoEventArgs(e.GetPosition(this), Map.InfoLayers);
+                var eventArgs = GetInfoEventArgs(e.GetPosition(this), Map.InfoLayers);
                 OnMouseInfoUp(eventArgs ?? new MouseInfoEventArgs());
             }
 
@@ -508,36 +508,37 @@ namespace Mapsui.UI.Xaml
 
         private void RaiseHoverInfoEvents(Point mousePosition)
         {
-            var mouseOverEventArgs = GetHoverInfoEventArgs(mousePosition, Map.HoverInfoLayers);
+            var hoverInfoEventArgs = GetInfoEventArgs(mousePosition, Map.HoverInfoLayers);
 
-            if (mouseOverEventArgs != null)
-                OnMouseHoverInfo(mouseOverEventArgs);
-            else if (_previousHoverInfoEventArgs != null)
-                OnMouseHoverInfoLeave();
+            if (HasChanged(_previousHoverInfoEventArgs, hoverInfoEventArgs))
+            {
+                if (hoverInfoEventArgs != null) // Don't raise new event when nothing changed.
+                    OnMouseHoverInfo(hoverInfoEventArgs);
+                else if (_previousHoverInfoEventArgs != null)
+                    OnMouseHoverInfoLeave();
+            }
 
-            _previousHoverInfoEventArgs = mouseOverEventArgs;
+            _previousHoverInfoEventArgs = hoverInfoEventArgs;
         }
 
-        private MouseInfoEventArgs GetHoverInfoEventArgs(Point mousePosition, IEnumerable<ILayer> layers)
+        private static bool HasChanged(MouseInfoEventArgs previousInfoEventArgs, MouseInfoEventArgs infoEventArgs)
         {
-            var margin = 16*Map.Viewport.Resolution;
+            if (previousInfoEventArgs == null) return true;
+            return previousInfoEventArgs.Feature != infoEventArgs?.Feature;
+        }
+
+        private MouseInfoEventArgs GetInfoEventArgs(Point mousePosition, IEnumerable<ILayer> layers)
+        {
             var point = Map.Viewport.ScreenToWorld(new Geometries.Point(mousePosition.X, mousePosition.Y));
 
-            foreach (var layer in layers)
-            {
-                if (layer.Enabled == false) continue;
+            var feature = Map.GetFeatureInfo(layers, point);
 
-                var feature = layer.GetFeaturesInView(Map.Envelope, 0)
-                    .Where(f => f.Geometry.GetBoundingBox().GetCentroid().Distance(point) < margin)
-                    .OrderBy(f => f.Geometry.GetBoundingBox().GetCentroid().Distance(point))
-                    .FirstOrDefault();
+            if (feature != null)
+                return new MouseInfoEventArgs { LayerName = "", Feature = feature };
 
-                if (feature != null)
-                    return new MouseInfoEventArgs {LayerName = layer.Name, Feature = feature};
-            }
             return null;
         }
-
+        
         private void OnMouseHoverInfoLeave()
         {
             HoverInfo?.Invoke(this, new MouseInfoEventArgs {Leaving = true});
