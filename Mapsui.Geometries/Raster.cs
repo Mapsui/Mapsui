@@ -60,7 +60,8 @@ namespace Mapsui.Geometries
 
         public override int GetHashCode()
         {
-            return Envelope().GetHashCode()*Data.GetHashCode();
+            // todo: check performance of MemoryStream.GetHashCode
+            return Envelope().GetHashCode()*Data.GetHashCode(); 
         }
     }
 }
