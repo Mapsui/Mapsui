@@ -15,7 +15,6 @@
 // along with SharpMap; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using Mapsui.Fetcher;
@@ -95,5 +94,7 @@ namespace Mapsui.Layers
         /// <param name="crs">The crs to project to</param>
         /// <returns>True if is does, false if it does not, null if it is unknown</returns>
         bool? IsCrsSupported(string crs);
+
+        Attribution Attribution { get; }
     }
 }

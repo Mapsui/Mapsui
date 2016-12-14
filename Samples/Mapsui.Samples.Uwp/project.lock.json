@@ -3,16 +3,11 @@
   "version": 1,
   "targets": {
     "UAP,Version=v10.0": {
-      "brutile/0.18.2": {
-        "dependencies": {
-          "SQLite.Net-PCL": "[3.1.0, 3.2.0)"
-        },
+      "BruTile/0.19.0": {
         "compile": {
-          "lib/portable-net45+win+WindowsPhoneApp81+Xamarin.iOS10+MonoAndroid10+MonoTouch10/BruTile.MbTiles.dll": {},
           "lib/portable-net45+win+WindowsPhoneApp81+Xamarin.iOS10+MonoAndroid10+MonoTouch10/BruTile.dll": {}
         },
         "runtime": {
-          "lib/portable-net45+win+WindowsPhoneApp81+Xamarin.iOS10+MonoAndroid10+MonoTouch10/BruTile.MbTiles.dll": {},
           "lib/portable-net45+win+WindowsPhoneApp81+Xamarin.iOS10+MonoAndroid10+MonoTouch10/BruTile.dll": {}
         }
       },
@@ -307,25 +302,6 @@
         },
         "runtime": {
           "lib/netstandard1.0/_._": {}
-        }
-      },
-      "SQLite.Net-PCL/3.1.0": {
-        "dependencies": {
-          "SQLite.Net.Core-PCL": "3.0.5"
-        },
-        "compile": {
-          "lib/Windows8/SQLite.Net.Platform.WinRT.dll": {}
-        },
-        "runtime": {
-          "lib/Windows8/SQLite.Net.Platform.WinRT.dll": {}
-        }
-      },
-      "SQLite.Net.Core-PCL/3.1.0": {
-        "compile": {
-          "lib/portable-win8+net45+wp8+wpa81+MonoAndroid1+MonoTouch1/SQLite.Net.dll": {}
-        },
-        "runtime": {
-          "lib/portable-win8+net45+wp8+wpa81+MonoAndroid1+MonoTouch1/SQLite.Net.dll": {}
         }
       },
       "System.AppContext/4.1.0": {
@@ -2065,16 +2041,11 @@
       }
     },
     "UAP,Version=v10.0/win10-arm": {
-      "brutile/0.18.2": {
-        "dependencies": {
-          "SQLite.Net-PCL": "[3.1.0, 3.2.0)"
-        },
+      "BruTile/0.19.0": {
         "compile": {
-          "lib/portable-net45+win+WindowsPhoneApp81+Xamarin.iOS10+MonoAndroid10+MonoTouch10/BruTile.MbTiles.dll": {},
           "lib/portable-net45+win+WindowsPhoneApp81+Xamarin.iOS10+MonoAndroid10+MonoTouch10/BruTile.dll": {}
         },
         "runtime": {
-          "lib/portable-net45+win+WindowsPhoneApp81+Xamarin.iOS10+MonoAndroid10+MonoTouch10/BruTile.MbTiles.dll": {},
           "lib/portable-net45+win+WindowsPhoneApp81+Xamarin.iOS10+MonoAndroid10+MonoTouch10/BruTile.dll": {}
         }
       },
@@ -2597,25 +2568,6 @@
       "runtime.win8-arm.runtime.native.System.IO.Compression/4.0.1": {
         "native": {
           "runtimes/win8-arm/native/clrcompression.dll": {}
-        }
-      },
-      "SQLite.Net-PCL/3.1.0": {
-        "dependencies": {
-          "SQLite.Net.Core-PCL": "3.0.5"
-        },
-        "compile": {
-          "lib/Windows8/SQLite.Net.Platform.WinRT.dll": {}
-        },
-        "runtime": {
-          "lib/Windows8/SQLite.Net.Platform.WinRT.dll": {}
-        }
-      },
-      "SQLite.Net.Core-PCL/3.1.0": {
-        "compile": {
-          "lib/portable-win8+net45+wp8+wpa81+MonoAndroid1+MonoTouch1/SQLite.Net.dll": {}
-        },
-        "runtime": {
-          "lib/portable-win8+net45+wp8+wpa81+MonoAndroid1+MonoTouch1/SQLite.Net.dll": {}
         }
       },
       "System.AppContext/4.1.0": {
@@ -4207,16 +4159,11 @@
       }
     },
     "UAP,Version=v10.0/win10-arm-aot": {
-      "brutile/0.18.2": {
-        "dependencies": {
-          "SQLite.Net-PCL": "[3.1.0, 3.2.0)"
-        },
+      "BruTile/0.19.0": {
         "compile": {
-          "lib/portable-net45+win+WindowsPhoneApp81+Xamarin.iOS10+MonoAndroid10+MonoTouch10/BruTile.MbTiles.dll": {},
           "lib/portable-net45+win+WindowsPhoneApp81+Xamarin.iOS10+MonoAndroid10+MonoTouch10/BruTile.dll": {}
         },
         "runtime": {
-          "lib/portable-net45+win+WindowsPhoneApp81+Xamarin.iOS10+MonoAndroid10+MonoTouch10/BruTile.MbTiles.dll": {},
           "lib/portable-net45+win+WindowsPhoneApp81+Xamarin.iOS10+MonoAndroid10+MonoTouch10/BruTile.dll": {}
         }
       },
@@ -4778,25 +4725,6 @@
         },
         "native": {
           "runtimes/win8-arm-aot/native/_._": {}
-        }
-      },
-      "SQLite.Net-PCL/3.1.0": {
-        "dependencies": {
-          "SQLite.Net.Core-PCL": "3.0.5"
-        },
-        "compile": {
-          "lib/Windows8/SQLite.Net.Platform.WinRT.dll": {}
-        },
-        "runtime": {
-          "lib/Windows8/SQLite.Net.Platform.WinRT.dll": {}
-        }
-      },
-      "SQLite.Net.Core-PCL/3.1.0": {
-        "compile": {
-          "lib/portable-win8+net45+wp8+wpa81+MonoAndroid1+MonoTouch1/SQLite.Net.dll": {}
-        },
-        "runtime": {
-          "lib/portable-win8+net45+wp8+wpa81+MonoAndroid1+MonoTouch1/SQLite.Net.dll": {}
         }
       },
       "System.AppContext/4.1.0": {
@@ -6388,16 +6316,11 @@
       }
     },
     "UAP,Version=v10.0/win10-x64": {
-      "brutile/0.18.2": {
-        "dependencies": {
-          "SQLite.Net-PCL": "[3.1.0, 3.2.0)"
-        },
+      "BruTile/0.19.0": {
         "compile": {
-          "lib/portable-net45+win+WindowsPhoneApp81+Xamarin.iOS10+MonoAndroid10+MonoTouch10/BruTile.MbTiles.dll": {},
           "lib/portable-net45+win+WindowsPhoneApp81+Xamarin.iOS10+MonoAndroid10+MonoTouch10/BruTile.dll": {}
         },
         "runtime": {
-          "lib/portable-net45+win+WindowsPhoneApp81+Xamarin.iOS10+MonoAndroid10+MonoTouch10/BruTile.MbTiles.dll": {},
           "lib/portable-net45+win+WindowsPhoneApp81+Xamarin.iOS10+MonoAndroid10+MonoTouch10/BruTile.dll": {}
         }
       },
@@ -6929,25 +6852,6 @@
         },
         "runtime": {
           "runtimes/win/lib/netcore50/System.Private.Uri.dll": {}
-        }
-      },
-      "SQLite.Net-PCL/3.1.0": {
-        "dependencies": {
-          "SQLite.Net.Core-PCL": "3.0.5"
-        },
-        "compile": {
-          "lib/Windows8/SQLite.Net.Platform.WinRT.dll": {}
-        },
-        "runtime": {
-          "lib/Windows8/SQLite.Net.Platform.WinRT.dll": {}
-        }
-      },
-      "SQLite.Net.Core-PCL/3.1.0": {
-        "compile": {
-          "lib/portable-win8+net45+wp8+wpa81+MonoAndroid1+MonoTouch1/SQLite.Net.dll": {}
-        },
-        "runtime": {
-          "lib/portable-win8+net45+wp8+wpa81+MonoAndroid1+MonoTouch1/SQLite.Net.dll": {}
         }
       },
       "System.AppContext/4.1.0": {
@@ -8539,16 +8443,11 @@
       }
     },
     "UAP,Version=v10.0/win10-x64-aot": {
-      "brutile/0.18.2": {
-        "dependencies": {
-          "SQLite.Net-PCL": "[3.1.0, 3.2.0)"
-        },
+      "BruTile/0.19.0": {
         "compile": {
-          "lib/portable-net45+win+WindowsPhoneApp81+Xamarin.iOS10+MonoAndroid10+MonoTouch10/BruTile.MbTiles.dll": {},
           "lib/portable-net45+win+WindowsPhoneApp81+Xamarin.iOS10+MonoAndroid10+MonoTouch10/BruTile.dll": {}
         },
         "runtime": {
-          "lib/portable-net45+win+WindowsPhoneApp81+Xamarin.iOS10+MonoAndroid10+MonoTouch10/BruTile.MbTiles.dll": {},
           "lib/portable-net45+win+WindowsPhoneApp81+Xamarin.iOS10+MonoAndroid10+MonoTouch10/BruTile.dll": {}
         }
       },
@@ -9119,25 +9018,6 @@
         },
         "runtime": {
           "runtimes/aot/lib/netcore50/System.Private.Uri.dll": {}
-        }
-      },
-      "SQLite.Net-PCL/3.1.0": {
-        "dependencies": {
-          "SQLite.Net.Core-PCL": "3.0.5"
-        },
-        "compile": {
-          "lib/Windows8/SQLite.Net.Platform.WinRT.dll": {}
-        },
-        "runtime": {
-          "lib/Windows8/SQLite.Net.Platform.WinRT.dll": {}
-        }
-      },
-      "SQLite.Net.Core-PCL/3.1.0": {
-        "compile": {
-          "lib/portable-win8+net45+wp8+wpa81+MonoAndroid1+MonoTouch1/SQLite.Net.dll": {}
-        },
-        "runtime": {
-          "lib/portable-win8+net45+wp8+wpa81+MonoAndroid1+MonoTouch1/SQLite.Net.dll": {}
         }
       },
       "System.AppContext/4.1.0": {
@@ -10729,16 +10609,11 @@
       }
     },
     "UAP,Version=v10.0/win10-x86": {
-      "brutile/0.18.2": {
-        "dependencies": {
-          "SQLite.Net-PCL": "[3.1.0, 3.2.0)"
-        },
+      "BruTile/0.19.0": {
         "compile": {
-          "lib/portable-net45+win+WindowsPhoneApp81+Xamarin.iOS10+MonoAndroid10+MonoTouch10/BruTile.MbTiles.dll": {},
           "lib/portable-net45+win+WindowsPhoneApp81+Xamarin.iOS10+MonoAndroid10+MonoTouch10/BruTile.dll": {}
         },
         "runtime": {
-          "lib/portable-net45+win+WindowsPhoneApp81+Xamarin.iOS10+MonoAndroid10+MonoTouch10/BruTile.MbTiles.dll": {},
           "lib/portable-net45+win+WindowsPhoneApp81+Xamarin.iOS10+MonoAndroid10+MonoTouch10/BruTile.dll": {}
         }
       },
@@ -11270,25 +11145,6 @@
         },
         "runtime": {
           "runtimes/win/lib/netcore50/System.Private.Uri.dll": {}
-        }
-      },
-      "SQLite.Net-PCL/3.1.0": {
-        "dependencies": {
-          "SQLite.Net.Core-PCL": "3.0.5"
-        },
-        "compile": {
-          "lib/Windows8/SQLite.Net.Platform.WinRT.dll": {}
-        },
-        "runtime": {
-          "lib/Windows8/SQLite.Net.Platform.WinRT.dll": {}
-        }
-      },
-      "SQLite.Net.Core-PCL/3.1.0": {
-        "compile": {
-          "lib/portable-win8+net45+wp8+wpa81+MonoAndroid1+MonoTouch1/SQLite.Net.dll": {}
-        },
-        "runtime": {
-          "lib/portable-win8+net45+wp8+wpa81+MonoAndroid1+MonoTouch1/SQLite.Net.dll": {}
         }
       },
       "System.AppContext/4.1.0": {
@@ -12880,16 +12736,11 @@
       }
     },
     "UAP,Version=v10.0/win10-x86-aot": {
-      "brutile/0.18.2": {
-        "dependencies": {
-          "SQLite.Net-PCL": "[3.1.0, 3.2.0)"
-        },
+      "BruTile/0.19.0": {
         "compile": {
-          "lib/portable-net45+win+WindowsPhoneApp81+Xamarin.iOS10+MonoAndroid10+MonoTouch10/BruTile.MbTiles.dll": {},
           "lib/portable-net45+win+WindowsPhoneApp81+Xamarin.iOS10+MonoAndroid10+MonoTouch10/BruTile.dll": {}
         },
         "runtime": {
-          "lib/portable-net45+win+WindowsPhoneApp81+Xamarin.iOS10+MonoAndroid10+MonoTouch10/BruTile.MbTiles.dll": {},
           "lib/portable-net45+win+WindowsPhoneApp81+Xamarin.iOS10+MonoAndroid10+MonoTouch10/BruTile.dll": {}
         }
       },
@@ -13460,25 +13311,6 @@
         },
         "runtime": {
           "runtimes/aot/lib/netcore50/System.Private.Uri.dll": {}
-        }
-      },
-      "SQLite.Net-PCL/3.1.0": {
-        "dependencies": {
-          "SQLite.Net.Core-PCL": "3.0.5"
-        },
-        "compile": {
-          "lib/Windows8/SQLite.Net.Platform.WinRT.dll": {}
-        },
-        "runtime": {
-          "lib/Windows8/SQLite.Net.Platform.WinRT.dll": {}
-        }
-      },
-      "SQLite.Net.Core-PCL/3.1.0": {
-        "compile": {
-          "lib/portable-win8+net45+wp8+wpa81+MonoAndroid1+MonoTouch1/SQLite.Net.dll": {}
-        },
-        "runtime": {
-          "lib/portable-win8+net45+wp8+wpa81+MonoAndroid1+MonoTouch1/SQLite.Net.dll": {}
         }
       },
       "System.AppContext/4.1.0": {
@@ -15071,15 +14903,14 @@
     }
   },
   "libraries": {
-    "brutile/0.18.2": {
-      "sha512": "g+slRhtpb4x7q76fr04+BfjZbM+0rvKfLHNEnHh1xpgysNJlT2Nw/xvxJT+F1T64XptzpPtwEf5FGpD66t7Syg==",
+    "BruTile/0.19.0": {
+      "sha512": "TskwhVU5kcWumP8uYzuSESTaOUtFL6DCxeyh3lZve9MlSct8rZhzA+tI658ZoD8dLn80jatd/JxVoWjcvdRc1A==",
       "type": "package",
       "files": [
-        "brutile.0.18.2.nupkg.sha512",
-        "brutile.nuspec",
+        "BruTile.0.19.0.nupkg.sha512",
+        "BruTile.nuspec",
         "lib/net35/BruTile.dll",
         "lib/net40/BruTile.dll",
-        "lib/portable-net45+win+WindowsPhoneApp81+Xamarin.iOS10+MonoAndroid10+MonoTouch10/BruTile.MbTiles.dll",
         "lib/portable-net45+win+WindowsPhoneApp81+Xamarin.iOS10+MonoAndroid10+MonoTouch10/BruTile.dll"
       ]
     },
@@ -16345,33 +16176,6 @@
         "runtime.win8-arm.runtime.native.System.IO.Compression.4.0.1.nupkg.sha512",
         "runtime.win8-arm.runtime.native.System.IO.Compression.nuspec",
         "runtimes/win8-arm/native/clrcompression.dll"
-      ]
-    },
-    "SQLite.Net-PCL/3.1.0": {
-      "sha512": "u+Vvd3jN0s0qDpyU9ru7bfz6oaiFSg9j26WdkyvYJ4A/SBwMwtW/SaK++OW45a2eQiPlSmrv4w3OxffmDHc1FQ==",
-      "type": "package",
-      "files": [
-        "SQLite.Net-PCL.3.1.0.nupkg.sha512",
-        "SQLite.Net-PCL.nuspec",
-        "lib/MonoAndroid/SQLite.Net.Platform.XamarinAndroid.dll",
-        "lib/Windows8/SQLite.Net.Platform.WinRT.dll",
-        "lib/Xamarin.iOS10/SQLite.Net.Platform.XamarinIOS.Unified.dll",
-        "lib/monotouch/SQLite.Net.Platform.XamarinIOS.dll",
-        "lib/net4/SQLite.Net.Platform.Win32.dll",
-        "lib/net40/SQLite.Net.Platform.Generic.dll",
-        "lib/portable-win8+net45+wp8+wpa81+MonoAndroid1+MonoTouch1/_._",
-        "lib/portable-win81+wpa81/SQLite.Net.Platform.WinRT.dll",
-        "lib/windowsphone8/ARM/SQLite.Net.Platform.WindowsPhone8.dll",
-        "lib/windowsphone8/x86/SQLite.Net.Platform.WindowsPhone8.dll"
-      ]
-    },
-    "SQLite.Net.Core-PCL/3.1.0": {
-      "sha512": "4Edd2N1jUFxNP6uf5xgULr4Aqw8nI9XGWgtDVUzabtrZrbAZF301TcSKFDItAVu9AvWxQDb57SUxgiFhoh4qWg==",
-      "type": "package",
-      "files": [
-        "SQLite.Net.Core-PCL.3.1.0.nupkg.sha512",
-        "SQLite.Net.Core-PCL.nuspec",
-        "lib/portable-win8+net45+wp8+wpa81+MonoAndroid1+MonoTouch1/SQLite.Net.dll"
       ]
     },
     "System.AppContext/4.1.0": {
@@ -21279,8 +21083,8 @@
   },
   "projectFileDependencyGroups": {
     "": [
-      "Microsoft.NETCore.UniversalWindowsPlatform >= 5.2.2",
-      "brutile >= 0.18.2"
+      "BruTile >= 0.19.0",
+      "Microsoft.NETCore.UniversalWindowsPlatform >= 5.2.2"
     ],
     "UAP,Version=v10.0": []
   }

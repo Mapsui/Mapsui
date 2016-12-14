@@ -5,6 +5,7 @@ using BruTile.Predefined;
 using BruTile.Web;
 using BruTile.Wmsc;
 using Mapsui.Layers;
+using Attribution = BruTile.Attribution;
 
 namespace Mapsui.Samples.Common.Maps
 {
@@ -50,5 +51,6 @@ namespace Mapsui.Samples.Common.Maps
         public ITileSchema Schema { get; }
 
         public string Name => "GeodanWorldWmsTileSource";
+        public Attribution Attribution { get; } = new Attribution();
     }
 }

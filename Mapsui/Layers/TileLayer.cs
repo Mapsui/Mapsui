@@ -80,9 +80,12 @@ namespace Mapsui.Layers
                 _tileFetcher = null;
                 _memoryCache.Clear();
             }
+
             _tileSource = source;
 
             if (source == null) return;
+            Attribution.Text = _tileSource.Attribution.Text;
+            Attribution.Url = _tileSource.Attribution.Url;
             _tileFetcher = new TileFetcher(source, _memoryCache, _maxRetries, _maxThreads, _fetchStrategy);
             _tileFetcher.DataChanged += TileFetcherDataChanged;
             _tileFetcher.PropertyChanged += TileFetcherOnPropertyChanged;

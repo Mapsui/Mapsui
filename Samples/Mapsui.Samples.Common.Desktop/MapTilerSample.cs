@@ -3,6 +3,7 @@ using BruTile.Cache;
 using BruTile.FileSystem;
 using BruTile.Predefined;
 using Mapsui.Layers;
+using Attribution = BruTile.Attribution;
 
 namespace Mapsui.Samples.Common.Desktop
 {
@@ -32,6 +33,7 @@ namespace Mapsui.Samples.Common.Desktop
 
         public ITileSchema Schema { get; }
         public string Name { get; }
+        public Attribution Attribution { get; } = new Attribution();
         public ITileProvider Provider { get; }
 
         public byte[] GetTile(TileInfo tileInfo)

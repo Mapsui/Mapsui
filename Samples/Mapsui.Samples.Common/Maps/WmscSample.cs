@@ -5,6 +5,7 @@ using BruTile.Predefined;
 using BruTile.Web;
 using BruTile.Wmsc;
 using Mapsui.Layers;
+using Attribution = BruTile.Attribution;
 
 namespace Mapsui.Samples.Common.Maps
 {
@@ -34,6 +35,7 @@ namespace Mapsui.Samples.Common.Maps
 
         public ITileSchema Schema { get; }
         public string Name { get; }
+        public Attribution Attribution { get; } = new Attribution();
         public ITileProvider Provider { get; }
 
         public byte[] GetTile(TileInfo tileInfo)

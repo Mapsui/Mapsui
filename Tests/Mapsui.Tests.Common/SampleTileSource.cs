@@ -13,8 +13,9 @@ namespace Mapsui.Tests.Common
             Provider = new SampleTileProvider();
         }
 
-        public ITileSchema Schema { get; private set; }
+        public ITileSchema Schema { get; }
         public string Name { get; private set; }
+        public Attribution Attribution { get; } = new Attribution();
         public ITileProvider Provider { get; private set; }
 
         public byte[] GetTile(TileInfo tileInfo)
