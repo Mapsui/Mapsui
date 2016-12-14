@@ -57,5 +57,10 @@ namespace Mapsui.Geometries
         {
             return Envelope().Contains(point);
         }
+
+        public override int GetHashCode()
+        {
+            return Envelope().GetHashCode()*Data.GetHashCode();
+        }
     }
 }
