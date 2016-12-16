@@ -23,7 +23,7 @@ using System.Data;
 using System.Globalization;
 using System.IO;
 using System.Text;
-using Mapsui.Utilities.Indexing;
+using Mapsui.Providers.Shapefile.Indexing;
 
 namespace Mapsui.Providers.Shapefile
 {
@@ -40,8 +40,8 @@ namespace Mapsui.Providers.Shapefile
 
         private DateTime _lastUpdate;
         private int _numberOfRecords;
-        private Int16 _headerLength;
-        private Int16 _recordLength;
+        private short _headerLength;
+        private short _recordLength;
         private readonly string _filename;
         private DbaseField[] _dbaseColumns;
         private FileStream _fs;
@@ -215,6 +215,7 @@ namespace Mapsui.Providers.Shapefile
             _headerIsParsed = true;
         }
 
+        // ReSharper disable once CyclomaticComplexity // It's a switch statement!
         private static Encoding GetDbaseLanguageDriver(byte dbasecode)
         {
             switch (dbasecode)

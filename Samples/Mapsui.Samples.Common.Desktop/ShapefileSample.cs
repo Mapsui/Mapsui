@@ -1,10 +1,10 @@
-﻿using Mapsui.Data.Providers;
-using Mapsui.Layers;
+﻿using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 using System.IO;
 using System.Reflection;
+using Mapsui.Providers.Shapefile;
 
 namespace Mapsui.Samples.Common.Desktop
 {

@@ -1,8 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+ // ReSharper disable once CheckNamespace
 namespace System
 {
     static class Extensions
@@ -10,6 +6,7 @@ namespace System
         public static bool IsNanOrZero(this double target)
         {
             if (double.IsNaN(target)) return true;
+            // ReSharper disable once CompareOfFloatsByEqualityOperator
             return target == 0;
         }
     }

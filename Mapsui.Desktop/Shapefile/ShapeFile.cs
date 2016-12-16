@@ -15,10 +15,6 @@
 // along with SharpMap; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
-using Mapsui.Geometries;
-using Mapsui.Providers;
-using Mapsui.Providers.Shapefile;
-using Mapsui.Utilities.SpatialIndexing;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -27,8 +23,10 @@ using System.IO;
 using System.Text;
 using System.Web;
 using System.Web.Caching;
+using Mapsui.Geometries;
+using Mapsui.Providers.Shapefile.Indexing;
 
-namespace Mapsui.Data.Providers
+namespace Mapsui.Providers.Shapefile
 {
     /// <summary>
     /// Shapefile geometry type.
@@ -214,7 +212,7 @@ namespace Mapsui.Data.Providers
         }
 
         /// <summary>
-        /// Gets the <see cref="Mapsui.Data.Providers.ShapeType">shape geometry type</see> in this shapefile.
+        /// Gets the <see cref="Shapefile.ShapeType">shape geometry type</see> in this shapefile.
         /// </summary>
         /// <remarks>
         /// The property isn't set until the first time the datasource has been opened,
@@ -618,17 +616,17 @@ namespace Mapsui.Data.Providers
                 if (!double.IsNaN(box.Left) && !double.IsNaN(box.Right) && !double.IsNaN(box.Bottom) &&
                     !double.IsNaN(box.Top))
                 {
-                    var g = new QuadTree.BoxObjects { box = box, ID = i };
+                    var g = new QuadTree.BoxObjects { Box = box, Id = i };
                     objList.Add(g);
                     i++;
                 }
             }
 
             Heuristic heur;
-            heur.maxdepth = (int)Math.Ceiling(Math.Log(GetFeatureCount(), 2));
-            heur.minerror = 10;
-            heur.tartricnt = 5;
-            heur.mintricnt = 2;
+            heur.Maxdepth = (int)Math.Ceiling(Math.Log(GetFeatureCount(), 2));
+            heur.Minerror = 10;
+            heur.Tartricnt = 5;
+            heur.Mintricnt = 2;
             return new QuadTree(objList, 0, heur);
         }
 

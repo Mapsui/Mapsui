@@ -21,7 +21,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using Mapsui.Geometries;
 
-namespace Mapsui.Utilities.SpatialIndexing
+namespace Mapsui.Providers.Shapefile.Indexing
 {
     /// <summary>
     /// Heuristics used for tree generation
@@ -31,23 +31,23 @@ namespace Mapsui.Utilities.SpatialIndexing
         /// <summary>
         /// Maximum tree depth
         /// </summary>
-        public int maxdepth;
+        public int Maxdepth;
 
         /// <summary>
         /// Minimum Error metric – the volume of a box + a unit cube.
         /// The unit cube in the metric prevents big boxes that happen to be flat having a zero result and muddling things up.
         /// </summary>
-        public int minerror;
+        public int Minerror;
 
         /// <summary>
         /// Minimum object count at node
         /// </summary>
-        public int mintricnt;
+        public int Mintricnt;
 
         /// <summary>
         /// Target object count at node
         /// </summary>
-        public int tartricnt;
+        public int Tartricnt;
     }
 
     /// <summary>
@@ -62,12 +62,7 @@ namespace Mapsui.Utilities.SpatialIndexing
         /// <summary>
         /// Nodes depth in a tree
         /// </summary>
-        protected uint _Depth;
-
-        /// <summary>
-        /// Node ID
-        /// </summary>
-        public uint? _ID;
+        private uint _depth;
 
         private List<BoxObjects> _objList;
 
@@ -80,15 +75,15 @@ namespace Mapsui.Utilities.SpatialIndexing
         /// <param name="heurdata">Heuristics data</param>
         public QuadTree(List<BoxObjects> objList, uint depth, Heuristic heurdata)
         {
-            _Depth = depth;
+            _depth = depth;
 
-            _box = objList[0].box;
+            _box = objList[0].Box;
             for (int i = 0; i < objList.Count; i++)
-                _box = _box.Join(objList[i].box);
+                _box = _box.Join(objList[i].Box);
 
             // test our build heuristic - if passes, make children
-            if (depth < heurdata.maxdepth && objList.Count > heurdata.mintricnt &&
-                (objList.Count > heurdata.tartricnt || ErrorMetric(_box) > heurdata.minerror))
+            if (depth < heurdata.Maxdepth && objList.Count > heurdata.Mintricnt &&
+                (objList.Count > heurdata.Tartricnt || ErrorMetric(_box) > heurdata.Minerror))
             {
                 List<BoxObjects>[] objBuckets = new List<BoxObjects>[2]; // buckets of geometries
                 objBuckets[0] = new List<BoxObjects>();
@@ -100,11 +95,11 @@ namespace Mapsui.Utilities.SpatialIndexing
                 // go through all bbox and calculate the average of the midpoints
                 double frac = 1.0f/objList.Count;
                 for (int i = 0; i < objList.Count; i++)
-                    geoavg += objList[i].box.GetCentroid()[longaxis]*frac;
+                    geoavg += objList[i].Box.GetCentroid()[longaxis]*frac;
 
                 // bucket bbox based on their midpoint's side of the geo average in the longest axis
                 for (int i = 0; i < objList.Count; i++)
-                    objBuckets[geoavg > objList[i].box.GetCentroid()[longaxis] ? 1 : 0].Add(objList[i]);
+                    objBuckets[geoavg > objList[i].Box.GetCentroid()[longaxis] ? 1 : 0].Add(objList[i]);
 
                 //If objects couldn't be splitted, just store them at the leaf
                 //TODO: Try splitting on another axis
@@ -141,7 +136,7 @@ namespace Mapsui.Utilities.SpatialIndexing
         }
 
         
-        private const double INDEXFILEVERSION = 1.0;
+        private const double Indexfileversion = 1.0;
 
         /// <summary>
         /// Loads a quadtree from a file
@@ -150,16 +145,17 @@ namespace Mapsui.Utilities.SpatialIndexing
         /// <returns></returns>
         public static QuadTree FromFile(string filename)
         {
-            FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read);
-            BinaryReader br = new BinaryReader(fs);
-            if (br.ReadDouble() != INDEXFILEVERSION) //Check fileindex version
+            var fs = new FileStream(filename, FileMode.Open, FileAccess.Read);
+            var br = new BinaryReader(fs);
+            // ReSharper disable once CompareOfFloatsByEqualityOperator
+            if (br.ReadDouble() != Indexfileversion) //Check fileindex version
             {
                 fs.Close();
                 fs.Dispose();
                 throw new ObsoleteFileFormatException(
                     "Invalid index file version. Please rebuild the spatial index by either deleting the index");
             }
-            QuadTree node = ReadNode(0, ref br);
+            var node = ReadNode(0, ref br);
             br.Close();
             fs.Close();
             return node;
@@ -173,26 +169,32 @@ namespace Mapsui.Utilities.SpatialIndexing
         /// <returns></returns>
         private static QuadTree ReadNode(uint depth, ref BinaryReader br)
         {
-            QuadTree node = new QuadTree();
-            node._Depth = depth;
-            node.Box = new BoundingBox(br.ReadDouble(), br.ReadDouble(), br.ReadDouble(), br.ReadDouble());
-            bool IsLeaf = br.ReadBoolean();
-            if (IsLeaf)
+            QuadTree node = new QuadTree
             {
-                int FeatureCount = br.ReadInt32();
+                _depth = depth,
+                Box = new BoundingBox(br.ReadDouble(), br.ReadDouble(), br.ReadDouble(), br.ReadDouble())
+            };
+            var isLeaf = br.ReadBoolean();
+            if (isLeaf)
+            {
+                int featureCount = br.ReadInt32();
                 node._objList = new List<BoxObjects>();
-                for (int i = 0; i < FeatureCount; i++)
+                for (int i = 0; i < featureCount; i++)
                 {
-                    BoxObjects box = new BoxObjects();
-                    box.box = new BoundingBox(br.ReadDouble(), br.ReadDouble(), br.ReadDouble(), br.ReadDouble());
-                    box.ID = (uint) br.ReadInt32();
+                    BoxObjects box = new BoxObjects
+                    {
+                        Box = new BoundingBox(
+                            br.ReadDouble(), br.ReadDouble(), 
+                            br.ReadDouble(), br.ReadDouble()),
+                        Id = (uint) br.ReadInt32()
+                    };
                     node._objList.Add(box);
                 }
             }
             else
             {
-                node.Child0 = ReadNode(node._Depth + 1, ref br);
-                node.Child1 = ReadNode(node._Depth + 1, ref br);
+                node.Child0 = ReadNode(node._depth + 1, ref br);
+                node.Child1 = ReadNode(node._depth + 1, ref br);
             }
             return node;
         }
@@ -205,7 +207,7 @@ namespace Mapsui.Utilities.SpatialIndexing
         {
             FileStream fs = new FileStream(filename, FileMode.Create);
             BinaryWriter bw = new BinaryWriter(fs);
-            bw.Write(INDEXFILEVERSION); //Save index version
+            bw.Write(Indexfileversion); //Save index version
             SaveNode(this, ref bw);
             bw.Close();
             fs.Close();
@@ -229,11 +231,11 @@ namespace Mapsui.Utilities.SpatialIndexing
                 sw.Write(node._objList.Count); //Write number of features at node
                 for (int i = 0; i < node._objList.Count; i++) //Write each featurebox
                 {
-                    sw.Write(node._objList[i].box.Min.X);
-                    sw.Write(node._objList[i].box.Min.Y);
-                    sw.Write(node._objList[i].box.Max.X);
-                    sw.Write(node._objList[i].box.Max.Y);
-                    sw.Write(node._objList[i].ID);
+                    sw.Write(node._objList[i].Box.Min.X);
+                    sw.Write(node._objList[i].Box.Min.Y);
+                    sw.Write(node._objList[i].Box.Max.X);
+                    sw.Write(node._objList[i].Box.Max.Y);
+                    sw.Write(node._objList[i].Id);
                 }
             }
             else if (!node.IsLeaf) //Save next node
@@ -303,12 +305,8 @@ namespace Mapsui.Utilities.SpatialIndexing
         /// <summary>
         /// Gets the depth of the current node in the tree
         /// </summary>
-        public uint Depth
-        {
-            get { return _Depth; }
-        }
+        public uint Depth => _depth;
 
-        
         /// <summary>
         /// Disposes the node
         /// </summary>
@@ -354,16 +352,10 @@ namespace Mapsui.Utilities.SpatialIndexing
             {
                 foreach (BoxObjects boxObject in node._objList)
                 {
-                    if(box.Intersects(boxObject.box))
-                        list.Add(boxObject.ID);
+                    if(box.Intersects(boxObject.Box))
+                        list.Add(boxObject.Id);
 
                 }
-                /*
-                for (int i = 0; i < node._objList.Count; i++)
-                {
-                    list.Add(node._objList[i].ID);
-                }
-                */
             }
             else
             {
@@ -384,13 +376,12 @@ namespace Mapsui.Utilities.SpatialIndexing
             /// <summary>
             /// Boundingbox
             /// </summary>
-            public BoundingBox box;
+            public BoundingBox Box;
 
             /// <summary>
             /// Feature ID
             /// </summary>
-            public uint ID;
+            public uint Id;
         }
-
-            }
+    }
 }

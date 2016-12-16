@@ -160,12 +160,10 @@ namespace Mapsui.Providers.GeoTiff
                 var r = argbValues[counter + 2];
                 var a = argbValues[counter + 3];
 
-                var found = false;
-
-                foreach (var filterValue in filterValues.Where(filterValue => filterValue[0] == a && filterValue[1] == r && filterValue[2] == g && filterValue[3] == b))
-                {
-                    found = true;
-                }
+                var found = filterValues.Any(
+                    filterValue => filterValue[0] == a && 
+                    filterValue[1] == r && filterValue[2] == g && 
+                    filterValue[3] == b);
 
                 if (found)
                     argbValues[counter + 3] = 0;
