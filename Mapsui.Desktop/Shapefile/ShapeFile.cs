@@ -175,15 +175,6 @@ namespace Mapsui.Providers.Shapefile
         private QuadTree _tree;
 
         /// <summary>
-        /// Initializes a ShapeFile DataProvider without a file-based spatial index.
-        /// </summary>
-        /// <param name="filename">Path to shape file</param>
-        public ShapeFile(string filename)
-            : this(filename, false)
-        {
-        }
-
-        /// <summary>
         /// Initializes a ShapeFile DataProvider.
         /// </summary>
         /// <remarks>
@@ -195,7 +186,7 @@ namespace Mapsui.Providers.Shapefile
         /// </remarks>
         /// <param name="filename">Path to shape file</param>
         /// <param name="fileBasedIndex">Use file-based spatial index</param>
-        public ShapeFile(string filename, bool fileBasedIndex)
+        public ShapeFile(string filename, bool fileBasedIndex = false)
         {
             _filename = filename;
             _fileBasedIndex = (fileBasedIndex) && File.Exists(Path.ChangeExtension(filename, ".shx"));
@@ -354,18 +345,13 @@ namespace Mapsui.Providers.Shapefile
         {
             if (!_disposed)
             {
-                //TODO: (ConnectionPooling)
-                /*	if (connector != null)
-					{ Pooling.ConnectorPool.ConnectorPoolManager.Release...()
-				}*/
                 if (_isOpen)
                 {
                     _brShapeFile.Close();
                     _fsShapeFile.Close();
                     _brShapeIndex.Close();
                     _fsShapeIndex.Close();
-                    if (_dbaseFile != null)
-                        _dbaseFile.Close();
+                    _dbaseFile?.Close();
                     _isOpen = false;
                 }
             }
@@ -833,22 +819,12 @@ namespace Mapsui.Providers.Shapefile
         }
 
         /// <summary>
-        /// Gets a datarow from the datasource at the specified index
-        /// </summary>
-        /// <param name="rowId"></param>
-        /// <returns></returns>
-        public IFeature GetFeature(uint rowId)
-        {
-            return GetFeature(rowId, null);
-        }
-
-        /// <summary>
         /// Gets a datarow from the datasource at the specified index belonging to the specified datatable
         /// </summary>
         /// <param name="rowId"></param>
-        /// <param name="dt">Datatable to feature should belong to.</param>
+        /// <param name="feature">Datatable to feature should belong to.</param>
         /// <returns></returns>
-        public IFeature GetFeature(uint rowId, IFeatures dt)
+        public IFeature GetFeature(uint rowId, IFeatures feature = null)
         {
             lock (_syncRoot)
             {
@@ -856,7 +832,7 @@ namespace Mapsui.Providers.Shapefile
 
                 try
                 {
-                    return GetFeaturePrivate(rowId, dt);
+                    return GetFeaturePrivate(rowId, feature);
                 }
                 finally
                 {

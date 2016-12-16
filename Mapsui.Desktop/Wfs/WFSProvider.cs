@@ -363,7 +363,7 @@ namespace Mapsui.Providers.Wfs
                         // .e.g. 'gml:GeometryAssociationType' or 'GeometryPropertyType'
                         //It's better to set the geometry type manually, if it is known...
                     default:
-                        geomFactory = new UnspecifiedGeometryFactory_WFS1_0_0_GML2(_httpClientUtil, _featureTypeInfo,
+                        geomFactory = new UnspecifiedGeometryFactoryWfs100Gml2(_httpClientUtil, _featureTypeInfo,
                                                                                    _multiGeometries, _quickGeometries);
                         break;
                 }
