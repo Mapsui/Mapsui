@@ -664,8 +664,6 @@ namespace Mapsui.Providers.Wfs.Utilities
         {
         }
 
-        
-        
         /// <summary>
         /// This method produces instances of type <see cref="Mapsui.Geometries.MultiPolygon"/>.
         /// </summary>
