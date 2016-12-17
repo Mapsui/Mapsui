@@ -11,7 +11,7 @@ using WinPoint = Windows.Foundation.Point;
 using WinColor = Windows.UI.Color;
 #endif
 
-namespace Mapsui.Rendering.Xaml.Extensions
+namespace Mapsui.Rendering.Xaml
 {
     static class StyleExtensions
     {

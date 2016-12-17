@@ -8,8 +8,6 @@ using NUnit.Framework;
 using Mapsui.Rendering.OpenTK;
 #elif SKIA
 using Mapsui.Rendering.Skia;
-#elif GDI
-using Mapsui.Rendering.Gdi;
 #elif MONOGAME
 using Mapsui.Rendering.MonoGame;
 using Mapsui.Rendering.MonoGame.Tests_W8;

@@ -43,7 +43,7 @@ namespace Mapsui.Providers.Wms
     /// </remarks>
     public class WmsProvider : IProjectingProvider
     {
-        private string _mimeType = "";
+        private string _mimeType;
         private readonly Client _wmsClient;
         private Func<string, Task<Stream>> _getStreamAsync;
 

@@ -58,10 +58,10 @@ namespace Mapsui.Geometries.WellKnownText
     /// </remarks>
     internal class StreamTokenizer
     {
-        private readonly bool ignoreWhitespace;
-        private readonly TextReader reader;
-        private string currentToken;
-        private TokenType currentTokenType;
+        private readonly bool _ignoreWhitespace;
+        private readonly TextReader _reader;
+        private string _currentToken;
+        private TokenType _currentTokenType;
 
         /// <summary>
         ///     Initializes a new instance of the StreamTokenizer class.
@@ -73,9 +73,9 @@ namespace Mapsui.Geometries.WellKnownText
             Column = 1;
             LineNumber = 1;
             if (reader == null)
-                throw new ArgumentNullException("reader");
-            this.reader = reader;
-            this.ignoreWhitespace = ignoreWhitespace;
+                throw new ArgumentNullException(nameof(reader));
+            _reader = reader;
+            _ignoreWhitespace = ignoreWhitespace;
         }
 
         /// <summary>
@@ -111,7 +111,7 @@ namespace Mapsui.Geometries.WellKnownText
         /// </summary>
         public string GetStringValue()
         {
-            return currentToken;
+            return _currentToken;
         }
 
         /// <summary>
@@ -120,7 +120,7 @@ namespace Mapsui.Geometries.WellKnownText
         /// <returns></returns>
         public TokenType GetTokenType()
         {
-            return currentTokenType;
+            return _currentTokenType;
         }
 
         /// <summary>
@@ -139,15 +139,15 @@ namespace Mapsui.Geometries.WellKnownText
         /// <returns>The TokenType of the next token.</returns>
         public TokenType NextToken()
         {
-            return NextToken(ignoreWhitespace);
+            return NextToken(_ignoreWhitespace);
         }
 
         private TokenType NextTokenAny()
         {
             var chars = new char[1];
-            currentToken = "";
-            currentTokenType = TokenType.Eof;
-            var finished = reader.Read(chars, 0, 1);
+            _currentToken = "";
+            _currentTokenType = TokenType.Eof;
+            var finished = _reader.Read(chars, 0, 1);
 
             var isNumber = false;
             var isWord = false;
@@ -155,28 +155,28 @@ namespace Mapsui.Geometries.WellKnownText
             while (finished != 0)
             {
                 // convert int to char
-                var ba = (char) reader.Peek();
+                var ba = (char) _reader.Peek();
                 var ascii = new[] {ba};
 
                 var currentCharacter = chars[0];
                 var nextCharacter = ascii[0];
-                currentTokenType = GetType(currentCharacter);
+                _currentTokenType = GetType(currentCharacter);
                 var nextTokenType = GetType(nextCharacter);
 
                 // handling of words with _
                 if (isWord && (currentCharacter == '_'))
-                    currentTokenType = TokenType.Word;
+                    _currentTokenType = TokenType.Word;
                 // handing of words ending in numbers
-                if (isWord && (currentTokenType == TokenType.Number))
-                    currentTokenType = TokenType.Word;
+                if (isWord && (_currentTokenType == TokenType.Number))
+                    _currentTokenType = TokenType.Word;
 
-                if ((currentTokenType == TokenType.Word) && (nextCharacter == '_'))
+                if ((_currentTokenType == TokenType.Word) && (nextCharacter == '_'))
                 {
                     //enable words with _ inbetween
                     nextTokenType = TokenType.Word;
                     isWord = true;
                 }
-                if ((currentTokenType == TokenType.Word) && (nextTokenType == TokenType.Number))
+                if ((_currentTokenType == TokenType.Word) && (nextTokenType == TokenType.Number))
                 {
                     //enable words ending with numbers
                     nextTokenType = TokenType.Word;
@@ -186,7 +186,7 @@ namespace Mapsui.Geometries.WellKnownText
                 // handle negative numbers
                 if ((currentCharacter == '-') && (nextTokenType == TokenType.Number)) // && isNumber == false)
                 {
-                    currentTokenType = TokenType.Number;
+                    _currentTokenType = TokenType.Number;
                     nextTokenType = TokenType.Number;
                     //isNumber = true;
                 }
@@ -198,40 +198,40 @@ namespace Mapsui.Geometries.WellKnownText
                 if (isNumber && (currentCharacter.Equals('E') || currentCharacter.Equals('e')) &&
                     ((nextTokenType == TokenType.Number) || (nextTokenType == TokenType.Symbol)))
                 {
-                    currentTokenType = TokenType.Number;
+                    _currentTokenType = TokenType.Number;
                     nextTokenType = TokenType.Number;
                 }
 
                 // this handles numbers with a decimal point
                 if (isNumber && (nextTokenType == TokenType.Number) && (currentCharacter == '.'))
-                    currentTokenType = TokenType.Number;
-                if ((currentTokenType == TokenType.Number) && (nextCharacter == '.') && (isNumber == false))
+                    _currentTokenType = TokenType.Number;
+                if ((_currentTokenType == TokenType.Number) && (nextCharacter == '.') && (isNumber == false))
                 {
                     nextTokenType = TokenType.Number;
                     isNumber = true;
                 }
 
                 Column++;
-                if (currentTokenType == TokenType.Eol)
+                if (_currentTokenType == TokenType.Eol)
                 {
                     LineNumber++;
                     Column = 1;
                 }
 
-                currentToken = currentToken + currentCharacter;
+                _currentToken = _currentToken + currentCharacter;
                 //if (_currentTokenType==TokenType.Word && nextCharacter=='_')
                 //{
                 // enable words with _ inbetween
                 //	finished = _reader.Read(chars,0,1);
                 //}
-                if (currentTokenType != nextTokenType)
+                if (_currentTokenType != nextTokenType)
                     finished = 0;
-                else if ((currentTokenType == TokenType.Symbol) && (currentCharacter != '-'))
+                else if ((_currentTokenType == TokenType.Symbol) && (currentCharacter != '-'))
                     finished = 0;
                 else
-                    finished = reader.Read(chars, 0, 1);
+                    finished = _reader.Read(chars, 0, 1);
             }
-            return currentTokenType;
+            return _currentTokenType;
         }
 
         /// <summary>

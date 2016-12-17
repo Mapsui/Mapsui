@@ -30,8 +30,8 @@ namespace Mapsui.Tests.Fetcher
             }
             
             // Assert
-            while (tileFetcher.Busy == true) {};
-                
+            while (tileFetcher.Busy) {}
+
             Assert.Pass("The fetcher did not go into an infinite loop");
         }
 
@@ -55,7 +55,7 @@ namespace Mapsui.Tests.Fetcher
             }
 
             // Assert
-            while (tileFetcher.Busy) { };
+            while (tileFetcher.Busy) { }
 
             Assert.Pass("The fetcher did not go into an infinite loop");
         }

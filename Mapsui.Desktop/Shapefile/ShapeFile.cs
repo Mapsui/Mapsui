@@ -228,7 +228,9 @@ namespace Mapsui.Providers.Shapefile
             {
                 if (value != _filename)
                 {
-                    _filename = value;
+                    lock (_syncRoot) {
+                        _filename = value;
+                    }
                     if (_isOpen)
                         throw new ApplicationException("Cannot change filename while datasource is open");
 

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Xml;
 using Mapsui.Geometries;
 using Mapsui.Logging;
+using Mapsui.Providers.Wms;
 using Mapsui.Styles;
 
 namespace Mapsui.Web.Wms

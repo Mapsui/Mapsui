@@ -581,8 +581,8 @@ namespace Mapsui.Providers.Wfs.Xml
             /// <returns>A boolean value indicating whether the argument strings are identical</returns>
             public virtual object Invoke(XsltContext xsltContext, object[] args, XPathNavigator docContext)
             {
-                return resolveNsPrefix(ResolveArgument(args[0]), xsltContext).Equals(
-                    resolveNsPrefix(ResolveArgument(args[1]), xsltContext), StringComparison.Ordinal);
+                return ResolveNsPrefix(ResolveArgument(args[0]), xsltContext).Equals(
+                    ResolveNsPrefix(ResolveArgument(args[1]), xsltContext), StringComparison.Ordinal);
             }
 
             
@@ -614,7 +614,7 @@ namespace Mapsui.Providers.Wfs.Xml
             /// </summary>
             /// <param name="args">An argument of the function to be resolved</param>
             /// <param name="xsltContext">The Xslt context for namespace resolving</param>
-            private string resolveNsPrefix(string args, XsltContext xsltContext)
+            private string ResolveNsPrefix(string args, XsltContext xsltContext)
             {
                 if (args.Contains(":"))
                 {
@@ -680,7 +680,7 @@ namespace Mapsui.Providers.Wfs.Xml
             /// <param name="args">An argument of the function to be resolved</param>
             /// <param name="targetNs"></param>
             /// <param name="docContext"></param>
-            private string resolveNsPrefix(string args, string targetNs, XPathNavigator docContext)
+            private static string resolveNsPrefix(string args, string targetNs, XPathNavigator docContext)
             {
                 if (args.Contains(":"))
                 {

@@ -104,7 +104,7 @@ namespace Mapsui.Rendering.OpenTK
 
         public static void RenderTextureWithoutBinding(int textureId, float[] vertextArray, float opacity = 1f)
         {
-            GL.Color4((byte)255, (byte)255, (byte)255, (byte)(255 * opacity));
+            GL.Color4(255, 255, 255, (byte)(255 * opacity));
 
             GL.Enable(All.Blend); // Enables the alpha channel to be used in the color buffer
             GL.BlendFunc(All.SrcAlpha, All.OneMinusSrcAlpha); //The operation/order to blend

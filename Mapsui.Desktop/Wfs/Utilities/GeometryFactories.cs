@@ -86,8 +86,6 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// </summary>
         internal abstract Collection<Geometry> CreateGeometries(Features features);
         
-        
-        
         /// <summary>
         /// This method parses a coordinates or posList(from 'GetFeature' response). 
         /// </summary>
@@ -833,6 +831,5 @@ namespace Mapsui.Providers.Wfs.Utilities
             geomFactory.CreateGeometries(features);
             return Geoms;
         }
-
-            }
+    }
 }

@@ -8,7 +8,7 @@ using System;
 using System.Windows.Media.Imaging;
 #endif
 
-namespace Mapsui.Rendering.Xaml.Extensions
+namespace Mapsui.Rendering.Xaml
 {
     public static class StreamExtensions
     {

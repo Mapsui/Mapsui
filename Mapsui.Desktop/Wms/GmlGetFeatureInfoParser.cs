@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -42,7 +41,7 @@ namespace Mapsui.Providers.Wms
         private void LookExtractMultipleElements(XElement layer)
         {
             if (!layer.HasElements) return;
-            var element = layer.Descendants().FirstOrDefault();
+            var element = layer.Descendants().First();
 
             if (element != null && layer.Elements(element.Name).Count() == 1)
                 LookExtractMultipleElements(element);

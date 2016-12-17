@@ -263,8 +263,6 @@ namespace Mapsui.Providers.Wfs
             : this(getCapabilitiesCache, nsPrefix, featureType, GeometryTypeEnum.Unknown, wfsVersion)
         {
         }
-
-        
         
         public Features ExecuteIntersectionQuery(BoundingBox bbox)
         {
@@ -368,14 +366,14 @@ namespace Mapsui.Providers.Wfs
                         break;
                 }
 
-                var geoms = geomFactory.CreateGeometries(features);
+                geomFactory.CreateGeometries(features);
                 geomFactory.Dispose();
                 return features;
             }
                 // Free resources (net connection of geometry factory)
             finally
             {
-                if (geomFactory != null) geomFactory.Dispose();
+                geomFactory?.Dispose();
             }
         }
 
@@ -392,8 +390,6 @@ namespace Mapsui.Providers.Wfs
             get { return ProjectionHelper.EpsgPrefix + _featureTypeInfo.SRID; }
             set { _featureTypeInfo.SRID = value.Substring(ProjectionHelper.EpsgPrefix.Length); }
         }
-
-        
         
         public void Dispose()
         {
@@ -410,8 +406,6 @@ namespace Mapsui.Providers.Wfs
             }
             _disposed = true;
         }
-
-        
         
         /// <summary>
         /// This method gets metadata about the featuretype to query from 'GetCapabilities' and 'DescribeFeatureType'.
@@ -790,10 +784,9 @@ namespace Mapsui.Providers.Wfs
             /// Configures for WFS 'GetFeature' request using an instance implementing <see cref="IWFS_TextResources"/>.
             /// The <see cref="HttpClientUtil"/> instance is returned for immediate usage. 
             /// </summary>
-            internal HttpClientUtil ConfigureForWfsGetFeatureRequest(HttpClientUtil httpClientUtil,
-                                                                     WfsFeatureTypeInfo featureTypeInfo,
-                                                                     string labelProperty, BoundingBox boundingBox,
-                                                                     IFilter filter, bool get)
+            internal void ConfigureForWfsGetFeatureRequest(HttpClientUtil httpClientUtil, 
+                WfsFeatureTypeInfo featureTypeInfo, string labelProperty, BoundingBox boundingBox,
+                IFilter filter, bool get)
             {
                 httpClientUtil.Reset();
                 httpClientUtil.Url = featureTypeInfo.ServiceUri;
@@ -803,20 +796,14 @@ namespace Mapsui.Providers.Wfs
                     /* HTTP-GET */
                     httpClientUtil.Url += _wfsTextResources.GetFeatureGETRequest(
                         featureTypeInfo, labelProperty, boundingBox, filter);
-                    return httpClientUtil;
                 }
 
                 /* HTTP-POST */
                 httpClientUtil.PostData = _wfsTextResources.GetFeaturePOSTRequest(
                     featureTypeInfo, labelProperty, boundingBox, filter);
                 httpClientUtil.AddHeader(HttpRequestHeader.ContentType.ToString(), "text/xml");
-                return httpClientUtil;
             }
-
-                    }
-
-        
-        
+        }
         
         public IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
         {

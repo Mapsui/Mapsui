@@ -165,9 +165,9 @@ namespace Mapsui.Geometries
         {
             var hash = ExteriorRing.GetHashCode();
 
-            foreach (var t in InteriorRings)
+            foreach (var ring in InteriorRings)
             {
-                hash = hash ^ t.GetHashCode();
+                hash = hash ^ ring.GetHashCode();
             }
             return hash;
         }

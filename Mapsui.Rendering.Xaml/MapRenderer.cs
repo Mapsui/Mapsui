@@ -8,7 +8,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Mapsui.Logging;
-using Mapsui.Rendering.Xaml.Extensions;
 using Color = Mapsui.Styles.Color;
 using Polygon = Mapsui.Geometries.Polygon;
 #if !NETFX_CORE

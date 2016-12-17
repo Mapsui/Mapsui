@@ -80,26 +80,6 @@ namespace Mapsui.Rendering.Skia
             target.DrawText(text, rect.Left, rect.Bottom, paint);
         }
 
-        private static SKRect MeasureRect(string text, SKPaint paint)
-        {
-            var rect = new SKRect();
-            paint.MeasureText(text, ref rect);
-
-            var padding = 3; // todo get this from LabelStyle
-            rect = SKRect.Inflate(rect, padding, padding);
-            //rect = SnapToPixel(rect);
-            return rect;
-        }
-
-        private static SKRect SnapToPixel(SKRect rect)
-        {
-            return new SKRect(
-                (int) Math.Floor(rect.Left),
-                (int) Math.Floor(rect.Top),
-                (int) Math.Ceiling(rect.Right),
-                (int) Math.Ceiling(rect.Bottom));
-        }
-
         private static void DrawBackground(LabelStyle style, SKRect rect, SKCanvas target)
         {
             if (style.BackColor != null)

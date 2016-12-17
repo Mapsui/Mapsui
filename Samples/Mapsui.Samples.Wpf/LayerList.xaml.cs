@@ -6,7 +6,7 @@ namespace Mapsui.Samples.Wpf
     /// <summary>
     /// Interaction logic for LayerList.xaml
     /// </summary>
-    public partial class LayerList : UserControl
+    public partial class LayerList
     {
         public LayerList()
         {

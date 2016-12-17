@@ -1,4 +1,3 @@
-using Mapsui.Rendering.Xaml.Extensions;
 using Mapsui.Styles;
 #if !NETFX_CORE
 using System.Windows.Controls;
@@ -6,14 +5,11 @@ using System.Windows.Media;
 using System.Globalization;
 using System.Windows;
 #else
-using Windows.UI.Text;
 using Windows.Foundation;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
-using XamlPoint = Windows.Foundation.Point;
 using XamlSize = Windows.Foundation.Size;
-using Colors = Windows.UI.Colors;
 #endif
 
 namespace Mapsui.Rendering.Xaml

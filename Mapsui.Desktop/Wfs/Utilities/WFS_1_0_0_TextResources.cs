@@ -5,6 +5,7 @@ using Mapsui.Geometries;
 using System.IO;
 using System.Text;
 using System.Xml;
+// ReSharper disable InconsistentNaming
 
 namespace Mapsui.Providers.Wfs.Utilities
 {

@@ -23,7 +23,7 @@
                 </StackPanel>
             </Border>
             
-            <Border x:Name="Statistics" BorderBrush="White" Opacity="0.65" Background="White"
+            <Border BorderBrush="White" Opacity="0.65" Background="White"
                     BorderThickness="6" HorizontalAlignment="Center" VerticalAlignment="Top">
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
                     <StackPanel Orientation="Horizontal">

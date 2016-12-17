@@ -1,5 +1,3 @@
-
-using Mapsui.Rendering.Xaml.Extensions;
 #if !NETFX_CORE
 using System.Windows.Controls;
 using System.Windows.Media;

@@ -1,7 +1,6 @@
 using System;
 using System.IO;
 using Mapsui.Geometries;
-using Mapsui.Rendering.Xaml.Extensions;
 using Mapsui.Styles;
 using Point = Mapsui.Geometries.Point;
 #if !NETFX_CORE
@@ -129,8 +128,11 @@ namespace Mapsui.Rendering.Xaml
         private static XamlMedia.GeometryGroup ConvertMultiPoint(MultiPoint multiPoint, SymbolStyle style, IViewport viewport)
         {
             var group = new XamlMedia.GeometryGroup();
-            foreach (Point point in multiPoint)
+            foreach (var geometry in multiPoint)
+            {
+                var point = (Point) geometry;
                 group.Children.Add(ConvertSymbol(point, style, viewport));
+            }
             return group;
         }
 

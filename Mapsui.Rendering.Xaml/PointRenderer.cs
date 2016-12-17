@@ -1,5 +1,4 @@
-﻿using Mapsui.Rendering.Xaml.Extensions;
-using Mapsui.Styles;
+﻿using Mapsui.Styles;
 using Point = Mapsui.Geometries.Point;
 #if !NETFX_CORE
 using System.Windows;

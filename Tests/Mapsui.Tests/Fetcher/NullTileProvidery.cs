@@ -1,5 +1,4 @@
-﻿using System;
-using BruTile;
+﻿using BruTile;
 
 namespace Mapsui.Tests.Fetcher
 {
