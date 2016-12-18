@@ -60,6 +60,7 @@ namespace Mapsui.UI.Xaml
                 HorizontalAlignment = HorizontalAlignment.Stretch,
                 Background = new SolidColorBrush(Colors.Transparent)
             };
+
             Children.Add(_renderTarget);
 
             _bboxRect = new Rectangle
