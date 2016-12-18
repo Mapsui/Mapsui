@@ -9,10 +9,9 @@ using System.Threading.Tasks;
 using System.Xml;
 using Mapsui.Geometries;
 using Mapsui.Logging;
-using Mapsui.Providers.Wms;
 using Mapsui.Styles;
 
-namespace Mapsui.Web.Wms
+namespace Mapsui.Providers.Wms
 {
     /// <summary>
     /// Class for requesting and parsing a WMS servers capabilities

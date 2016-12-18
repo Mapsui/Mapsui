@@ -28,7 +28,6 @@ using System.Threading.Tasks;
 using System.Xml;
 using Mapsui.Geometries;
 using Mapsui.Rendering;
-using Mapsui.Web.Wms;
 
 namespace Mapsui.Providers.Wms
 {
