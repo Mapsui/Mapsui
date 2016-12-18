@@ -74,11 +74,6 @@ namespace Mapsui.Styles
 
         public double Opacity { get; set; }
 
-        private void Register(Stream data)
-        {
-            if (data != null) BitmapId = BitmapRegistry.Instance.Register(data);
-        }
-
         public override bool Equals(object obj)
         {
             if (!(obj is SymbolStyle))
