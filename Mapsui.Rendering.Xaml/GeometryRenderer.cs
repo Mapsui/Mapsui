@@ -228,21 +228,11 @@ namespace Mapsui.Rendering.Xaml
             var path = CreateRasterPath(style, raster.Data);
             path.Data = new XamlMedia.RectangleGeometry();
             PositionRaster(path, raster.GetBoundingBox(), viewport);
-
-            // path.Stroke = new XamlMedia.SolidColorBrush(XamlColors.Red);
-            // path.StrokeThickness = 6;
-
             return path;
         }
 
         private static XamlShapes.Path CreateRasterPath(IStyle style, MemoryStream stream)
         {
-            // todo: use this:
-            // style.Symbol.Convert();
-            // style.SymbolScale;
-            // style.SymbolOffset.Convert();
-            // style.SymbolRotation;
-
             var bitmapImage = new BitmapImage();
 #if NETFX_CORE
             stream.Position = 0;
@@ -260,7 +250,19 @@ namespace Mapsui.Rendering.Xaml
             {
                 Fill = new XamlMedia.ImageBrush { ImageSource = bitmapImage },
                 IsHitTestVisible = false
+                 
             };
+
+            if (Utilities.DeveloperTools.DeveloperMode)
+            {
+                var color = (style as VectorStyle)?.Line.Color.ToXaml();
+                if (color.HasValue && color.Value.A > 0)
+                {
+                    path.Stroke = new XamlMedia.SolidColorBrush {Color = color.Value};
+                    path.StrokeThickness = ((VectorStyle) style).Line.Width;
+                }
+            }
+
             return path;
         }
 
