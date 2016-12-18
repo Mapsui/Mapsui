@@ -515,8 +515,10 @@ namespace Mapsui.Providers.Shapefile
             {
                 try
                 {
-                    var wkt = File.ReadAllText(projfile);
-                    //TODO: Automatically parse coordinate system: CoordinateSystemWktReader.Parse(wkt);
+                    // todo: Automatically parse coordinate system: 
+                    // var wkt = File.ReadAllText(projfile);
+                    // CoordinateSystemWktReader.Parse(wkt);
+
                 }
                 catch (Exception ex)
                 {

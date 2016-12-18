@@ -12,9 +12,9 @@ namespace Mapsui.Tests.Common
         }
 
         public ITileSchema Schema { get; }
-        public string Name { get; private set; }
+        public string Name { get; } = "TileSource";
         public Attribution Attribution { get; } = new Attribution();
-        public ITileProvider Provider { get; private set; }
+        public ITileProvider Provider { get; }
 
         public byte[] GetTile(TileInfo tileInfo)
         {

@@ -141,7 +141,8 @@ namespace Mapsui.Geometries.WellKnownText
         {
             return NextToken(_ignoreWhitespace);
         }
-
+        
+        // ReSharper disable once CyclomaticComplexity // Fix this when work needs to be done on this method
         private TokenType NextTokenAny()
         {
             var chars = new char[1];

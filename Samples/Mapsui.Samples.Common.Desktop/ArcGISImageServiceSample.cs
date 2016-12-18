@@ -45,7 +45,7 @@ namespace Mapsui.Samples.Common.Desktop
 
         private static void CapabilitiesReceived(object sender, System.EventArgs e)
         {
-            var capabilities = sender as ArcGISImageCapabilities;
+            //todo: make use of: var capabilities = sender as ArcGISImageCapabilities;
         }
     }
 }

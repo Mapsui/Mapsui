@@ -163,7 +163,6 @@ namespace Mapsui.Samples.Common.Desktop
                 Style = new LabelStyle
                 {
                     CollisionDetection = false,
-                    CollisionBuffer = new Size {Width = 5, Height = 5},
                     ForeColor = Color.Black,
                     Font = new Font {FontFamily = "GenericSerif", Size = 10},
                     HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center,

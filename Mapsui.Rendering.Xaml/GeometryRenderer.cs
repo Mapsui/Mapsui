@@ -237,17 +237,16 @@ namespace Mapsui.Rendering.Xaml
 
         private static XamlShapes.Path CreateRasterPath(IStyle style, MemoryStream stream)
         {
-            //todo: use this:
-            //style.Symbol.Convert();
-            //style.SymbolScale;
-            //style.SymbolOffset.Convert();
-            //style.SymbolRotation;
+            // todo: use this:
+            // style.Symbol.Convert();
+            // style.SymbolScale;
+            // style.SymbolOffset.Convert();
+            // style.SymbolRotation;
 
             var bitmapImage = new BitmapImage();
 #if NETFX_CORE
             stream.Position = 0;
             bitmapImage.SetSource(stream.ToRandomAccessStream().Result);
-
 #else
             var localStream = new MemoryStream();
             stream.Position = 0;

@@ -68,7 +68,6 @@ namespace Mapsui.Styles
             Font = new Font { FontFamily = "Verdana", Size = 12 };
             Offset = new Offset { X = 0, Y = 0 };
             CollisionDetection = false;
-            CollisionBuffer = new Size { Width = 0, Height = 0 };
             ForeColor = Color.Black;
             BackColor = new Brush { Color = Color.White };
             HorizontalAlignment = HorizontalAlignmentEnum.Center;
@@ -80,7 +79,6 @@ namespace Mapsui.Styles
             Font = new Font(labelStyle.Font);
             Offset = new Offset(labelStyle.Offset);
             CollisionDetection = false;
-            CollisionBuffer = new Size(labelStyle.CollisionBuffer);
             ForeColor = new Color(labelStyle.ForeColor);
             BackColor = new Brush(labelStyle.BackColor);
             HorizontalAlignment = HorizontalAlignmentEnum.Center;
@@ -120,11 +118,6 @@ namespace Mapsui.Styles
         /// If set to true, label collision will be tested.
         /// </summary>
         public bool CollisionDetection { get; set; }
-
-        /// <summary>
-        /// Distance around label where collision buffer is active
-        /// </summary>
-        public Size CollisionBuffer { get; set; }
 
         /// <summary>
         /// The horisontal alignment of the text in relation to the labelpoint

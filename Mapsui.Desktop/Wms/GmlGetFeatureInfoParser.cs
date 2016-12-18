@@ -43,12 +43,15 @@ namespace Mapsui.Providers.Wms
             if (!layer.HasElements) return;
             var element = layer.Descendants().First();
 
-            if (element != null && layer.Elements(element.Name).Count() == 1)
-                LookExtractMultipleElements(element);
-
-            if (layer.Elements(element.Name).Count() > 1)
+            if (element != null)
             {
-                ExtractFeatures(layer);
+                if (layer.Elements(element.Name).Count() == 1)
+                    LookExtractMultipleElements(element);
+
+                if (layer.Elements(element.Name).Count() > 1)
+                {
+                    ExtractFeatures(layer);
+                }
             }
         }
 

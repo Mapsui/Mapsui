@@ -54,11 +54,13 @@ namespace Mapsui.Styles
 
         public bool Equals(Style style)
         {
+            // ReSharper disable CompareOfFloatsByEqualityOperator
             if (MinVisible != style.MinVisible)
                 return false;
 
             if (MaxVisible != style.MaxVisible)
                 return false;
+            // ReSharper restore CompareOfFloatsByEqualityOperator
 
             if (Enabled != style.Enabled)
                 return false;

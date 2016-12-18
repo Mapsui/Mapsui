@@ -22,19 +22,11 @@
                     <StackPanel Name="SampleList" Width="Auto" />
                 </StackPanel>
             </Border>
-            
             <Border BorderBrush="White" Opacity="0.65" Background="White"
                     BorderThickness="6" HorizontalAlignment="Center" VerticalAlignment="Top">
-                <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Fps:  " />
-                        <TextBlock x:Name="Fps" />
-                    </StackPanel>
-                </StackPanel>
             </Border>
             <Border BorderBrush="White" Opacity="0.65" Background="White" BorderThickness="6" 
                     VerticalAlignment="Bottom" HorizontalAlignment="Center" MinWidth="40" MinHeight="30">
-                <TextBlock x:Name="MouseCoordinates" Text ="0, 0" />
             </Border>
         </Grid>
     </Grid>
