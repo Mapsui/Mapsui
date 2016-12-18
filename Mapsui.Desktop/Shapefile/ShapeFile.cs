@@ -717,6 +717,7 @@ namespace Mapsui.Providers.Shapefile
         /// <remarks><see cref="FilterDelegate">Filtering</see> is not applied to this method</remarks>
         /// <param name="oid">Object ID</param>
         /// <returns>geometry</returns>
+        // ReSharper disable once CyclomaticComplexity // Fix when changes need to be made here
         private Geometry ReadGeometry(uint oid)
         {
             _brShapeFile.BaseStream.Seek(GetShapeIndex(oid) + 8, 0); //Skip record number and content length
