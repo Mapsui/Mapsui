@@ -75,6 +75,7 @@ namespace Mapsui.Rendering.Xaml
                     return (brush.Color != null) ? new SolidColorBrush(brush.Color.ToXaml()) : null;
             }
 #else
+            if (brush == null) return new SolidColorBrush();
             return new SolidColorBrush(brush.Color.ToXaml());
 #endif
         }
