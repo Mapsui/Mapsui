@@ -209,16 +209,21 @@ namespace Mapsui
         private void LayersLayerRemoved(ILayer layer)
         {
             layer.AbortFetch();
+
             layer.DataChanged -= LayerDataChanged;
             layer.PropertyChanged -= LayerPropertyChanged;
+
+            OnPropertyChanged(nameof(Layers));
         }
 
         private void LayersLayerAdded(ILayer layer)
         {
             layer.DataChanged += LayerDataChanged;
             layer.PropertyChanged += LayerPropertyChanged;
+
             layer.Transformation = Transformation;
             layer.CRS = CRS;
+            OnPropertyChanged(nameof(Layers));
         }
 
         private void LayerPropertyChanged(object sender, PropertyChangedEventArgs e)

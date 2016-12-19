@@ -36,15 +36,14 @@
             </Border>
             <Border BorderBrush="White" Opacity="0.65" Background="White" BorderThickness="6"
                     VerticalAlignment="Top" HorizontalAlignment="Right" MinWidth="140" MinHeight="30">
+                <StackPanel>
                 <wpf:LayerList x:Name="LayerList" />
+                    <Slider x:Name="RotationSlider" MinWidth="140" ValueChanged="RotationSliderChanged" />
+                </StackPanel>
             </Border>
             <Border BorderBrush="White" Opacity="0.65" Background="White" BorderThickness="6"
                     VerticalAlignment="Center" HorizontalAlignment="Right">
                 <TextBlock Name="FeatureInfo" TextWrapping="Wrap"/>
-            </Border>
-            <Border BorderBrush="White" Opacity="0.65" Background="White" BorderThickness="6"
-                    VerticalAlignment="Bottom" HorizontalAlignment="Right">
-                <Slider x:Name="RotationSlider" Width="205" ValueChanged="RotationSliderChanged" />
             </Border>
             <Border x:Name="Statistics" BorderBrush="White" Opacity="0.65" Background="White"
                     BorderThickness="6" HorizontalAlignment="Center" VerticalAlignment="Top">

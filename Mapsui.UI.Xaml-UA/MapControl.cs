@@ -42,9 +42,10 @@ namespace Mapsui.UI.Xaml
 {
     public class MapControl : Grid
     {
-        private readonly Rectangle _bboxRect;
         private readonly IRenderer _renderer;
-        private readonly Canvas _renderTarget;
+        private readonly Rectangle _bboxRect = CreateSelectRectangle();
+        private readonly Canvas _renderTarget = CreateRenderTarget();
+        private readonly AttributionPanel _attributionPanel = CreateAttributionPanel();
         private readonly DoubleAnimation _zoomAnimation = new DoubleAnimation();
         private readonly Storyboard _zoomStoryBoard = new Storyboard();
         private bool _invalid;
@@ -54,29 +55,9 @@ namespace Mapsui.UI.Xaml
 
         public MapControl()
         {
-            _renderTarget = new Canvas
-            {
-                VerticalAlignment = VerticalAlignment.Stretch,
-                HorizontalAlignment = HorizontalAlignment.Stretch,
-                Background = new SolidColorBrush(Colors.Transparent)
-            };
-
             Children.Add(_renderTarget);
-
-            _bboxRect = new Rectangle
-            {
-                Fill = new SolidColorBrush(Colors.Red),
-                Stroke = new SolidColorBrush(Colors.Black),
-                StrokeThickness = 3,
-                RadiusX = 0.5,
-                RadiusY = 0.5,
-                StrokeDashArray = new DoubleCollection {3.0},
-                Opacity = 0.3,
-                VerticalAlignment = VerticalAlignment.Top,
-                HorizontalAlignment = HorizontalAlignment.Left,
-                Visibility = Visibility.Collapsed
-            };
             Children.Add(_bboxRect);
+            Children.Add(_attributionPanel);
 
             Map = new Map();
             Loaded += MapControlLoaded;
@@ -96,6 +77,42 @@ namespace Mapsui.UI.Xaml
                 orientationSensor.OrientationChanged += (sender, args) =>
                     Task.Run(() => Dispatcher.RunAsync(CoreDispatcherPriority.Normal, Refresh))
                         .ConfigureAwait(false);
+        }
+
+        private static Rectangle CreateSelectRectangle()
+        {
+            return new Rectangle
+            {
+                Fill = new SolidColorBrush(Colors.Red),
+                Stroke = new SolidColorBrush(Colors.Black),
+                StrokeThickness = 3,
+                RadiusX = 0.5,
+                RadiusY = 0.5,
+                StrokeDashArray = new DoubleCollection { 3.0 },
+                Opacity = 0.3,
+                VerticalAlignment = VerticalAlignment.Top,
+                HorizontalAlignment = HorizontalAlignment.Left,
+                Visibility = Visibility.Collapsed
+            };
+        }
+
+        private static AttributionPanel CreateAttributionPanel()
+        {
+            return new AttributionPanel
+            {
+                VerticalAlignment = VerticalAlignment.Bottom,
+                HorizontalAlignment = HorizontalAlignment.Right
+            };
+        }
+
+        private static Canvas CreateRenderTarget()
+        {
+            return new Canvas
+            {
+                VerticalAlignment = VerticalAlignment.Stretch,
+                HorizontalAlignment = HorizontalAlignment.Stretch,
+                Background = new SolidColorBrush(Colors.Transparent)
+            };
         }
 
         public bool ZoomToBoxMode { get; set; }
@@ -123,6 +140,7 @@ namespace Mapsui.UI.Xaml
                     _map.DataChanged += MapDataChanged;
                     _map.PropertyChanged += MapPropertyChanged;
                     _map.ViewChanged(true);
+                    _attributionPanel.Populate(Map.Layers);
                 }
 
                 RefreshGraphics();
@@ -143,10 +161,14 @@ namespace Mapsui.UI.Xaml
 
         private void MapPropertyChanged(PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "Envelope")
+            if (e.PropertyName == nameof(Map.Envelope))
             {
                 InitializeViewport();
                 _map.ViewChanged(true);
+            }
+            else if (e.PropertyName == nameof(Map.Layers))
+            {
+                _attributionPanel.Populate(Map.Layers);
             }
         }
 
@@ -156,7 +178,7 @@ namespace Mapsui.UI.Xaml
             if (!_viewportInitialized) return;
 
             var currentPoint = e.GetCurrentPoint(this);
-                //Needed for both MouseMove and MouseWheel event for mousewheel event
+            //Needed for both MouseMove and MouseWheel event for mousewheel event
 
             var mousePosition = new Geometries.Point(currentPoint.RawPosition.X, currentPoint.RawPosition.Y);
 
@@ -189,7 +211,7 @@ namespace Mapsui.UI.Xaml
         private void OnViewChanged(bool userAction = false)
         {
             if (_map != null)
-                ViewChanged?.Invoke(this, new ViewChangedEventArgs {Viewport = Map.Viewport, UserAction = userAction});
+                ViewChanged?.Invoke(this, new ViewChangedEventArgs { Viewport = Map.Viewport, UserAction = userAction });
         }
 
         public void Refresh()
@@ -257,7 +279,7 @@ namespace Mapsui.UI.Xaml
         private void MapControlSizeChanged(object sender, SizeChangedEventArgs e)
         {
             if (!_viewportInitialized) InitializeViewport();
-            Clip = new RectangleGeometry {Rect = new Rect(0, 0, ActualWidth, ActualHeight)};
+            Clip = new RectangleGeometry { Rect = new Rect(0, 0, ActualWidth, ActualHeight) };
             UpdateSize();
             _map.ViewChanged(true);
             OnViewChanged();
@@ -275,8 +297,8 @@ namespace Mapsui.UI.Xaml
         {
             if (!Dispatcher.HasThreadAccess)
             {
-                Task.Run(
-                        () => Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => MapDataChanged(sender, e)))
+                Task.Run(() => Dispatcher.RunAsync(
+                    CoreDispatcherPriority.Normal, () => MapDataChanged(sender, e)))
                     .ConfigureAwait(false);
             }
             else
@@ -349,7 +371,7 @@ namespace Mapsui.UI.Xaml
         {
             if (Map.Envelope == null) return;
             if (ActualWidth.IsNanOrZero()) return;
-            Map.Viewport.Resolution = Map.Envelope.Width/ActualWidth;
+            Map.Viewport.Resolution = Map.Envelope.Width / ActualWidth;
             Map.Viewport.Center = Map.Envelope.GetCentroid();
 
             OnViewChanged();
@@ -357,7 +379,7 @@ namespace Mapsui.UI.Xaml
 
         private static void OnManipulationInertiaStarting(object sender, ManipulationInertiaStartingRoutedEventArgs e)
         {
-            e.TranslationBehavior.DesiredDeceleration = 25*96.0/(1000.0*1000.0);
+            e.TranslationBehavior.DesiredDeceleration = 25 * 96.0 / (1000.0 * 1000.0);
         }
 
         private void OnManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
@@ -412,7 +434,7 @@ namespace Mapsui.UI.Xaml
                 if (_map.Envelope.GetCentroid() == null) return;
 
                 if (Math.Abs(_map.Envelope.Width) > Constants.Epsilon)
-                    Map.Viewport.Resolution = _map.Envelope.Width/ActualWidth;
+                    Map.Viewport.Resolution = _map.Envelope.Width / ActualWidth;
                 else
                     // An envelope width of zero can happen when there is no data in the Maps' layers (yet).
                     // It should be possible to start with an empty map.

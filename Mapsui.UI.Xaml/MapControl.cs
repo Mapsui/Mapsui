@@ -37,7 +37,7 @@ namespace Mapsui.UI.Xaml
                 "Resolution", typeof(double), typeof(MapControl),
                 new PropertyMetadata(OnResolutionChanged));
 
-        private readonly Rectangle _bboxRect;
+        private readonly Rectangle _bboxRect = CreateSelectRectangle();
         private readonly DoubleAnimation _zoomAnimation = new DoubleAnimation();
         private readonly Storyboard _zoomStoryBoard = new Storyboard();
         private Point _currentMousePosition;
@@ -51,29 +51,17 @@ namespace Mapsui.UI.Xaml
         private Geometries.Point _skiaScale;
         private double _toResolution = double.NaN;
         private bool _viewportInitialized;
+        private readonly AttributionPanel _attributionPanel = CreateAttributionPanel();
 
         public MapControl()
         {
             Children.Add(RenderCanvas);
             Children.Add(RenderElement);
+            Children.Add(_attributionPanel);
+            Children.Add(_bboxRect);
 
             RenderElement.PaintSurface += SKElementOnPaintSurface;
             CompositionTarget.Rendering += CompositionTargetRendering;
-
-            _bboxRect = new Rectangle
-            {
-                Fill = new SolidColorBrush(Colors.Red),
-                Stroke = new SolidColorBrush(Colors.Black),
-                StrokeThickness = 3,
-                RadiusX = 0.5,
-                RadiusY = 0.5,
-                StrokeDashArray = new DoubleCollection {3.0},
-                Opacity = 0.3,
-                VerticalAlignment = VerticalAlignment.Top,
-                HorizontalAlignment = HorizontalAlignment.Left,
-                Visibility = Visibility.Visible
-            };
-            Children.Add(_bboxRect);
 
             Map = new Map();
             Loaded += MapControlLoaded;
@@ -91,6 +79,23 @@ namespace Mapsui.UI.Xaml
             ManipulationInertiaStarting += OnManipulationInertiaStarting;
             Dispatcher.ShutdownStarted += DispatcherShutdownStarted;
             IsManipulationEnabled = true;
+        }
+
+        private static Rectangle CreateSelectRectangle()
+        {
+            return new Rectangle
+            {
+                Fill = new SolidColorBrush(Colors.Red),
+                Stroke = new SolidColorBrush(Colors.Black),
+                StrokeThickness = 3,
+                RadiusX = 0.5,
+                RadiusY = 0.5,
+                StrokeDashArray = new DoubleCollection {3.0},
+                Opacity = 0.3,
+                VerticalAlignment = VerticalAlignment.Top,
+                HorizontalAlignment = HorizontalAlignment.Left,
+                Visibility = Visibility.Visible
+            };
         }
 
         public IRenderer Renderer { get; set; } = new MapRenderer();
@@ -134,6 +139,7 @@ namespace Mapsui.UI.Xaml
                     _map.PropertyChanged += MapPropertyChanged;
                     _map.RefreshGraphics += MapRefreshGraphics;
                     _map.ViewChanged(true);
+                    _attributionPanel.Populate(Map.Layers);
                 }
 
                 RefreshGraphics();
@@ -217,7 +223,7 @@ namespace Mapsui.UI.Xaml
                 {
                     RefreshGraphics();
                 }
-                else if (e.PropertyName == "Envelope")
+                else if (e.PropertyName == nameof(Map.Envelope))
                 {
                     InitializeViewport();
                     _map.ViewChanged(true);
@@ -226,6 +232,10 @@ namespace Mapsui.UI.Xaml
                 {
                     _map.ViewChanged(true);
                     OnViewChanged();
+                }
+                else if (e.PropertyName == nameof(Map.Layers))
+                {
+                    _attributionPanel.Populate(Map.Layers);
                 }
             }
         }
@@ -759,6 +769,15 @@ namespace Mapsui.UI.Xaml
             if (_skiaScale == null) _skiaScale = GetSkiaScale();
             e.Surface.Canvas.Scale((float) _skiaScale.X, (float) _skiaScale.Y);
             OnPaintSurface(e.Surface.Canvas, e.Info.Width, e.Info.Height);
+        }
+
+        private static AttributionPanel CreateAttributionPanel()
+        {
+            return new AttributionPanel
+            {
+                VerticalAlignment = VerticalAlignment.Bottom,
+                HorizontalAlignment = HorizontalAlignment.Right
+            };
         }
     }
 
