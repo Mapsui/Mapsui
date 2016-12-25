@@ -251,9 +251,7 @@ namespace Mapsui.UI.Android
             if (!_viewportInitialized)
                 return;
 
-            _renderer.Canvas = canvas;
-
-            _renderer.Render(_map.Viewport, _map.Layers);
+            _renderer.Render(canvas, _map.Viewport, _map.Layers);
         }
     }
 }
