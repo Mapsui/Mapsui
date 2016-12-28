@@ -27,7 +27,8 @@ namespace Mapsui.Samples.Common
                 ["LineStrings"] = () => LineStringSample.CreateMap(),
                 ["Points"] = () => PointsSample.CreateMap(),
                 ["Various Layers"] = () => VariousSample.CreateMap(),
-                ["Empty Map"] = () => EmptyMapSample.CreateMap()
+                ["Empty Map"] = () => EmptyMapSample.CreateMap(),
+                ["Mutating triangle"] = () => MutatingTriangleSample.CreateMap()
             };
         }
     }
