@@ -20,12 +20,10 @@ using Windows.UI.Xaml.Media.Imaging;
 
 namespace Mapsui.Rendering.Xaml
 {
-    ///<remarks>
-    /// In this class there are a lot of collistions in class names between Mapsui
-    /// and the .net framework libaries I use for Xaml rendering. I resolve this by using
-    /// namespace aliases. I will use 'Xaml' in namespace and method names to refer to 
-    /// all .net framework classes related to Xaml, even if they are not.
-    /// </remarks>
+    // Note: In this class there are a lot of collisions in namespaces between Mapsui
+    // and the .NET framework libaries I use for Xaml rendering. I resolve this by using
+    // namespace aliases. I will use 'Xaml' in namespace and method names to refer to 
+    // all .net framework classes related to Xaml, even if they are not.
     public static class GeometryRenderer
     {
         public static XamlMedia.Matrix CreateTransformMatrix(Point point, IViewport viewport)
