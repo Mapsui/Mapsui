@@ -45,7 +45,7 @@ namespace Mapsui.Rendering.OpenTK.Tests
 
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
-            _mapRenderer.Render(_map.Viewport, _map.Layers);
+            _mapRenderer.Render(null, _map.Viewport, _map.Layers);
 
             CheckError();
 
