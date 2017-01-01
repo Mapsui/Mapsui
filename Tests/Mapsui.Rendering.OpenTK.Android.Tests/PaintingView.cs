@@ -33,7 +33,7 @@ namespace Mapsui.Rendering.OpenTK.Android.Tests
             GL.ClearColor(255, 255, 255, 255);
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
-            _mapRenderer.Render(_map.Viewport, _map.Layers);
+            _mapRenderer.Render(null, _map.Viewport, _map.Layers);
 
             CheckError();
 

@@ -265,7 +265,7 @@ namespace Mapsui.UI.Android
             GL.ClearColor(_map.BackColor.R, _map.BackColor.G, _map.BackColor.B, _map.BackColor.A);
             GL.Clear(ClearBufferMask.ColorBufferBit);
 
-           _renderer.Render(_map.Viewport, _map.Layers);
+           _renderer.Render(null, _map.Viewport, _map.Layers);
 
             SwapBuffers();
         }

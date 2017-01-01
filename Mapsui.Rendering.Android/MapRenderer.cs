@@ -9,12 +9,12 @@ using System.IO;
 using System.Linq;
 using Bitmap = Android.Graphics.Bitmap;
 using Point = Mapsui.Geometries.Point;
+using System;
 
 namespace Mapsui.Rendering.Android
 {
     public class MapRenderer : IRenderer
     {
-        public Canvas Canvas { get; set; }
         public bool ShowDebugInfoInMap { get; set; }
 
         static MapRenderer()
@@ -22,9 +22,9 @@ namespace Mapsui.Rendering.Android
             DefaultRendererFactory.Create = () => new MapRenderer();
         }
 
-        public void Render(IViewport viewport, IEnumerable<ILayer> layers)
+        public void Render(object target, IViewport viewport, IEnumerable<ILayer> layers, Styles.Color background = null)
         {
-            Render(Canvas, viewport, layers, ShowDebugInfoInMap);
+            Render((Canvas)target, viewport, layers, ShowDebugInfoInMap);
         }
 
         private static void Render(Canvas canvas, IViewport viewport, IEnumerable<ILayer> layers, bool showDebugInfoInMap)
@@ -55,7 +55,7 @@ namespace Mapsui.Rendering.Android
             }
         }
 
-        public MemoryStream RenderToBitmapStream(IViewport viewport, IEnumerable<ILayer> layers)
+        public MemoryStream RenderToBitmapStream(IViewport viewport, IEnumerable<ILayer> layers, Styles.Color background = null)
         {
             return RenderToBitmapStreamPrivate(viewport, layers);
         }
@@ -89,6 +89,5 @@ namespace Mapsui.Rendering.Android
             else if (feature.Geometry is IRaster)
                 RasterRenderer.Draw(canvas, viewport, style, feature);
         }
-
     }
 }
