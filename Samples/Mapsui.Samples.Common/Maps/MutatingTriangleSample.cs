@@ -22,17 +22,23 @@ namespace Mapsui.Samples.Common.Maps
         private static ILayer CreateMutatingTriangleLayer(BoundingBox envelope)
         {
             var layer = new MemoryLayer();
-            var datasource = new MemoryProvider();
+           
             var polygon = new Polygon(new LinearRing(GenerateRandomPoints(envelope, 3)));
-            datasource.Features.Add(new Feature() { Geometry = polygon });
-            layer.DataSource = datasource;
+            var feature = new Feature() { Geometry = polygon };
+            var features = new Features();
+            features.Add(feature);
+
+            layer.DataSource = new MemoryProvider(features);
 
             PeriodicTask.Run(() =>
             {
                 polygon.ExteriorRing = new LinearRing(GenerateRandomPoints(envelope, 3));
-                // todo: call something to trigger data refresh
+                // Clear cache for change to show
+                feature.RenderedGeometry.Clear();
+                // Trigger DataChanged notification
+                layer.ViewChanged(true, layer.Envelope, 1);
             },
-            TimeSpan.FromMilliseconds(500));
+            TimeSpan.FromMilliseconds(1000));
 
             return layer;
         }
@@ -47,6 +53,8 @@ namespace Mapsui.Samples.Common.Maps
                     Random.NextDouble() * envelope.Width + envelope.Left,
                     Random.NextDouble() * envelope.Height + envelope.Bottom));
             }
+
+            result.Add(result[0]); // close polygon by adding start point.
 
             return result;
         }
