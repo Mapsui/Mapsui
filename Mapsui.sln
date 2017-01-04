@@ -87,6 +87,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Rendering.Skia-A", "Mapsui.Rendering.Skia-A\Mapsui.Rendering.Skia-A.csproj", "{00964874-BB3D-47EA-9170-BB7AD4DA3F37}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Mixed Platforms = Debug|Mixed Platforms
@@ -218,6 +220,10 @@ Global
 		{53A4E033-F814-46CC-8105-DAC289524455}.Debug|Mixed Platforms.Build.0 = Debug|x64
 		{53A4E033-F814-46CC-8105-DAC289524455}.Release|Mixed Platforms.ActiveCfg = Release|x64
 		{53A4E033-F814-46CC-8105-DAC289524455}.Release|Mixed Platforms.Build.0 = Release|x64
+		{00964874-BB3D-47EA-9170-BB7AD4DA3F37}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{00964874-BB3D-47EA-9170-BB7AD4DA3F37}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{00964874-BB3D-47EA-9170-BB7AD4DA3F37}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{00964874-BB3D-47EA-9170-BB7AD4DA3F37}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

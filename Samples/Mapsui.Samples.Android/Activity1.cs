@@ -2,7 +2,7 @@
 using Android.Content.PM;
 using Android.OS;
 using Mapsui.Samples.Common.Maps;
-using Mapsui.UI.Android;
+using Mapsui.UI.Android.Skia;
 
 namespace Mapsui.Samples.Android
 {
@@ -13,7 +13,7 @@ namespace Mapsui.Samples.Android
         {
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Main);
-            var mapControl = FindViewById<MapView>(Resource.Id.mapcontrol);
+            var mapControl = FindViewById<MapControl>(Resource.Id.mapcontrol);
             mapControl.Map = VariousSample.CreateMap();
         }
     }

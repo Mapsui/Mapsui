@@ -3,7 +3,7 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
-    <Mapsui.UI.Android.MapView
+    <Mapsui.UI.Android.Skia.MapControl
         android:id="@+id/mapcontrol"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" />

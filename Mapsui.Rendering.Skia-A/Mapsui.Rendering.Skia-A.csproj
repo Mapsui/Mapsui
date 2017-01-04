@@ -3,19 +3,19 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A9ED0AA7-B6F0-4946-8A08-7C531E5CFA9B}</ProjectGuid>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{00964874-BB3D-47EA-9170-BB7AD4DA3F37}</ProjectGuid>
     <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Mapsui.UI.Android</RootNamespace>
-    <AssemblyName>Mapsui.UI.Android</AssemblyName>
+    <RootNamespace>Mapsui.Rendering.Skia</RootNamespace>
+    <AssemblyName>Mapsui.Rendering.Skia</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
-    <TargetFrameworkVersion>v4.4</TargetFrameworkVersion>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
-    <RestorePackages>true</RestorePackages>
     <AndroidUseLatestPlatformSdk>False</AndroidUseLatestPlatformSdk>
+    <TargetFrameworkVersion>v4.4</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -25,8 +25,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <AndroidLinkMode>None</AndroidLinkMode>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -35,25 +33,61 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />
     <Reference Include="mscorlib" />
-    <Reference Include="OpenTK-1.0" />
+    <Reference Include="SkiaSharp, Version=1.55.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\packages\SkiaSharp.1.55.1\lib\MonoAndroid\SkiaSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MapControl.cs" />
-    <Compile Include="MapView.cs" />
+    <Compile Include="..\Mapsui.Rendering.Skia\BitmapHelper.cs">
+      <Link>BitmapHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\Mapsui.Rendering.Skia\ExtensionMethods\SkiaExtensions.cs">
+      <Link>ExtensionMethods\SkiaExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Mapsui.Rendering.Skia\LabelRenderer.cs">
+      <Link>LabelRenderer.cs</Link>
+    </Compile>
+    <Compile Include="..\Mapsui.Rendering.Skia\LineStringRenderer.cs">
+      <Link>LineStringRenderer.cs</Link>
+    </Compile>
+    <Compile Include="..\Mapsui.Rendering.Skia\MapRenderer.cs">
+      <Link>MapRenderer.cs</Link>
+    </Compile>
+    <Compile Include="..\Mapsui.Rendering.Skia\MultiLineStringRenderer.cs">
+      <Link>MultiLineStringRenderer.cs</Link>
+    </Compile>
+    <Compile Include="..\Mapsui.Rendering.Skia\MultiPointRenderer.cs">
+      <Link>MultiPointRenderer.cs</Link>
+    </Compile>
+    <Compile Include="..\Mapsui.Rendering.Skia\MultiPolygonRenderer.cs">
+      <Link>MultiPolygonRenderer.cs</Link>
+    </Compile>
+    <Compile Include="..\Mapsui.Rendering.Skia\PointRenderer.cs">
+      <Link>PointRenderer.cs</Link>
+    </Compile>
+    <Compile Include="..\Mapsui.Rendering.Skia\PolygonRenderer.cs">
+      <Link>PolygonRenderer.cs</Link>
+    </Compile>
+    <Compile Include="..\Mapsui.Rendering.Skia\RasterRenderer.cs">
+      <Link>RasterRenderer.cs</Link>
+    </Compile>
+    <Compile Include="..\Mapsui.Rendering.Skia\SKBitmapInfo.cs">
+      <Link>SKBitmapInfo.cs</Link>
+    </Compile>
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Skia\MapControl.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
     <None Include="Resources\AboutResources.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -61,23 +95,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Mapsui.Geometries\Mapsui.Geometries.csproj">
-      <Project>{EE55B62D-FFA2-4C24-A4AD-7A47ACE55CE5}</Project>
+      <Project>{ee55b62d-ffa2-4c24-a4ad-7a47ace55ce5}</Project>
       <Name>Mapsui.Geometries</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Mapsui.Rendering.Android\Mapsui.Rendering.Android.csproj">
-      <Project>{f7193717-5f16-44c8-a90c-05a4173d353e}</Project>
-      <Name>Mapsui.Rendering.Android</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Mapsui.Rendering.OpenTK-A\Mapsui.Rendering.OpenTK-A.csproj">
-      <Project>{d7616dad-25c1-4e3d-b0bd-1710382b60e5}</Project>
-      <Name>Mapsui.Rendering.OpenTK-A</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Mapsui.Rendering.Skia-A\Mapsui.Rendering.Skia-A.csproj">
-      <Project>{00964874-bb3d-47ea-9170-bb7ad4da3f37}</Project>
-      <Name>Mapsui.Rendering.Skia-A</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Mapsui\Mapsui.csproj">
-      <Project>{D74C052A-C07E-4B37-A898-134218ACA5C9}</Project>
+      <Project>{d74c052a-c07e-4b37-a898-134218aca5c9}</Project>
       <Name>Mapsui</Name>
     </ProjectReference>
   </ItemGroup>
