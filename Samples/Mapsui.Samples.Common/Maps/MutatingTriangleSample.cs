@@ -20,7 +20,7 @@ namespace Mapsui.Samples.Common.Maps
         }
 
         private static ILayer CreateMutatingTriangleLayer(BoundingBox envelope)
-        {
+        {   
             var layer = new MemoryLayer();
            
             var polygon = new Polygon(new LinearRing(GenerateRandomPoints(envelope, 3)));
