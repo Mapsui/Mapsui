@@ -19,7 +19,8 @@ namespace Mapsui.UI.Android
         private const int Dragging = 1;
         private const int Zoom = 2;
         private int _mode = None;
-        private PointF _previousMap, _currentMap;
+        private PointF _previousMap;
+        private PointF _currentMap;
         private PointF _previousMid = new PointF();
         private readonly PointF _currentMid = new PointF();
         private float _oldDist = 1f;

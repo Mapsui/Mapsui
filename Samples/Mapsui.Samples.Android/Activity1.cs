@@ -18,4 +18,3 @@ namespace Mapsui.Samples.Android
         }
     }
 }
-

@@ -9,11 +9,14 @@ using Mapsui.Rendering.Android;
 using System;
 using System.ComponentModel;
 using Math = System.Math;
+using SkiaSharp;
+using SkiaSharp.Views;
 
 namespace Mapsui.UI.Android.Skia
 {
-    public class MapControl : View
+    public class MapControl : SkiaSharp.Views.Android.SKCanvasView
     {
+        
         private const int None = 0;
         private const int Dragging = 1;
         private const int Zoom = 2;
@@ -23,16 +26,16 @@ namespace Mapsui.UI.Android.Skia
         private readonly PointF _currentMid = new PointF();
         private float _oldDist = 1f;
         private bool _viewportInitialized;
-        private MapRenderer _renderer;
+        private Mapsui.Rendering.Skia.MapRenderer _renderer;
         private Map _map;
                 
-        public MapControl(Context context, IAttributeSet attrs) :
+        public MapControl(Context context, IAttributeSet attrs):
             base(context, attrs)
         {
             Initialize();
         }
 
-        public MapControl(Context context, IAttributeSet attrs, int defStyle) :
+        public MapControl(Context context, IAttributeSet attrs, int defStyle):
             base(context, attrs, defStyle)
         {
             Initialize();
@@ -41,7 +44,8 @@ namespace Mapsui.UI.Android.Skia
         public void Initialize()
         {
             Map = new Map();
-            _renderer = new MapRenderer();
+            this.
+            _renderer = new Mapsui.Rendering.Skia.MapRenderer();
             InitializeViewport();
             Touch += MapView_Touch;
         }
@@ -223,8 +227,8 @@ namespace Mapsui.UI.Android.Skia
         {
             if (e.Cancelled || e.Error != null)
             {
-                //todo test code below:
-                //((Activity)Context).RunOnUiThread(new Runnable(Toast.MakeText(Context, GetErrorMessage(e), ToastLength.Short).Show));
+                // todo: test code below:
+                // ((Activity)Context).RunOnUiThread(new Runnable(Toast.MakeText(Context, GetErrorMessage(e), ToastLength.Short).Show));
             }
             else // no problems
             {
@@ -236,15 +240,17 @@ namespace Mapsui.UI.Android.Skia
         {
             PostInvalidate();
         }
-
-        protected override void OnDraw(Canvas canvas)
+        protected override void OnDraw(SKSurface surface, SKImageInfo info)
         {
+            base.OnDraw(surface, info);
+
             if (!_viewportInitialized)
                 InitializeViewport();
             if (!_viewportInitialized)
                 return;
 
-            _renderer.Render(canvas, _map.Viewport, _map.Layers);
+            _renderer.Render(surface.Canvas, _map.Viewport, _map.Layers);
+            
         }
     }
 }

@@ -764,7 +764,7 @@ namespace Mapsui.UI.Xaml
             if (!_viewportInitialized) InitializeViewport();
             if (!_viewportInitialized) return; // Stop if the line above failed. 
             if (!_invalid && !DeveloperTools.DeveloperMode)
-                return; // In developermode always render so that fps can be counterd.
+                return; // In developermode always render so that fps can be counted
 
             if (_skiaScale == null) _skiaScale = GetSkiaScale();
             e.Surface.Canvas.Scale((float) _skiaScale.X, (float) _skiaScale.Y);
