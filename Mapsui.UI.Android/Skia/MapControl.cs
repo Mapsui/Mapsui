@@ -5,16 +5,15 @@ using Android.Util;
 using Android.Views;
 using Java.Lang;
 using Mapsui.Fetcher;
-using Mapsui.Rendering.Android;
 using System;
 using System.ComponentModel;
 using Math = System.Math;
 using SkiaSharp;
-using SkiaSharp.Views;
+using SkiaSharp.Views.Android;
 
 namespace Mapsui.UI.Android.Skia
 {
-    public class MapControl : SkiaSharp.Views.Android.SKCanvasView
+    public class MapControl : SKCanvasView
     {
         
         private const int None = 0;
@@ -44,8 +43,7 @@ namespace Mapsui.UI.Android.Skia
         public void Initialize()
         {
             Map = new Map();
-            this.
-            _renderer = new Mapsui.Rendering.Skia.MapRenderer();
+                        _renderer = new Rendering.Skia.MapRenderer();
             InitializeViewport();
             Touch += MapView_Touch;
         }
@@ -249,7 +247,7 @@ namespace Mapsui.UI.Android.Skia
             if (!_viewportInitialized)
                 return;
 
-            _renderer.Render(surface.Canvas, _map.Viewport, _map.Layers);
+            _renderer.Render(surface.Canvas, _map.Viewport, _map.Layers, _map.BackColor);
             
         }
     }
