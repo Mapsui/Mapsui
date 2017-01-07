@@ -59,6 +59,8 @@ namespace Mapsui.UI.Xaml
             Children.Add(_bboxRect);
             Children.Add(_attributionPanel);
 
+            Background = new SolidColorBrush(Colors.White); // DON'T REMOVE! Touch events do not work without a background
+
             Map = new Map();
             Loaded += MapControlLoaded;
 
@@ -197,6 +199,7 @@ namespace Mapsui.UI.Xaml
 
             e.Handled = true;
 
+            RefreshGraphics();
             _map.ViewChanged(true);
             OnViewChanged(true);
         }
@@ -333,7 +336,7 @@ namespace Mapsui.UI.Xaml
 
             if ((_renderer != null) && (_map != null))
             {
-                _renderer.Render(_renderTarget, Map.Viewport, _map.Layers);
+                _renderer.Render(_renderTarget, Map.Viewport, _map.Layers, _map.BackColor);
                 _renderTarget.Arrange(new Rect(0, 0, Map.Viewport.Width, Map.Viewport.Height));
                 _invalid = false;
             }
