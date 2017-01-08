@@ -38,6 +38,8 @@ using Mapsui.Rendering.Skia;
 using Mapsui.Utilities;
 using Point = Windows.Foundation.Point;
 using SkiaSharp.Views.UWP;
+using Windows.UI.ViewManagement;
+using Windows.Graphics.Display;
 
 namespace Mapsui.UI.Xaml
 {
@@ -53,6 +55,7 @@ namespace Mapsui.UI.Xaml
         private Map _map;
         private Point _previousPosition;
         private bool _viewportInitialized;
+        private Geometries.Point _skiaScale;
 
         public MapControl()
         {
@@ -345,6 +348,8 @@ namespace Mapsui.UI.Xaml
 
             if ((_renderer != null) && (_map != null))
             {
+                if (_skiaScale == null) _skiaScale = GetSkiaScale();
+                e.Surface.Canvas.Scale((float)_skiaScale.X, (float)_skiaScale.Y);
                 _renderer.Render(e.Surface.Canvas, Map.Viewport, _map.Layers, _map.BackColor);
                 _renderTarget.Arrange(new Rect(0, 0, Map.Viewport.Width, Map.Viewport.Height));
                 _invalid = false;
@@ -469,6 +474,13 @@ namespace Mapsui.UI.Xaml
 
             Map.ViewChanged(true);
         }
+
+        private Geometries.Point GetSkiaScale()
+        {
+            var bounds = ApplicationView.GetForCurrentView().VisibleBounds;
+            var scaleFactor = DisplayInformation.GetForCurrentView().RawPixelsPerViewPixel;
+            return new Geometries.Point(scaleFactor, scaleFactor);
+        }
     }
 
     public class ViewChangedEventArgs : EventArgs
@@ -492,4 +504,6 @@ namespace Mapsui.UI.Xaml
     {
         public IDictionary<string, IEnumerable<IFeature>> FeatureInfo { get; set; }
     }
+
+ 
 }
