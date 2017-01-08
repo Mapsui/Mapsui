@@ -107,19 +107,11 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Mapsui.UI.Xaml-UA\AttributionPanel.cs">
-      <Link>AttributionPanel.cs</Link>
-    </Compile>
-    <Compile Include="..\Mapsui.UI.Xaml-UA\Extensions.cs">
-      <Link>Extensions.cs</Link>
-    </Compile>
-    <Compile Include="..\Mapsui.UI.Xaml-UA\MapControl.cs">
-      <Link>MapControl.cs</Link>
-    </Compile>
-    <Compile Include="..\Mapsui.UI.Xaml-UA\ZoomHelper.cs">
-      <Link>ZoomHelper.cs</Link>
-    </Compile>
+    <Compile Include="AttributionPanel.cs" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="MapControl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ZoomHelper.cs" />
     <EmbeddedResource Include="Properties\Mapsui.UI.Uwp.rd.xml" />
   </ItemGroup>
   <ItemGroup>
