@@ -1,9 +1,7 @@
 ﻿{
   "dependencies": {
-    "BruTile": "0.19.0",
-    "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2",
-    "skiasharp": "1.55.1",
-    "skiasharp.views": "1.55.1"
+    "Microsoft.NETCore.UniversalWindowsPlatform": "5.1.0",
+    "skiasharp": "1.55.1"
   },
   "frameworks": {
     "uap10.0": {}

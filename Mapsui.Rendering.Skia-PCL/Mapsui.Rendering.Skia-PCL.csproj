@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <MinimumVisualStudioVersion>10.0</MinimumVisualStudioVersion>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B4F5CDC7-8D34-4B7E-BE62-206FC716D4FF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Mapsui.Rendering.Skia</RootNamespace>
+    <AssemblyName>Mapsui.Rendering.Skia</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TargetFrameworkProfile>Profile111</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\Mapsui.Rendering.Skia\BitmapHelper.cs">
+      <Link>BitmapHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\Mapsui.Rendering.Skia\ExtensionMethods\SkiaExtensions.cs">
+      <Link>ExtensionMethods\SkiaExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Mapsui.Rendering.Skia\LabelRenderer.cs">
+      <Link>LabelRenderer.cs</Link>
+    </Compile>
+    <Compile Include="..\Mapsui.Rendering.Skia\LineStringRenderer.cs">
+      <Link>LineStringRenderer.cs</Link>
+    </Compile>
+    <Compile Include="..\Mapsui.Rendering.Skia\MapRenderer.cs">
+      <Link>MapRenderer.cs</Link>
+    </Compile>
+    <Compile Include="..\Mapsui.Rendering.Skia\MultiLineStringRenderer.cs">
+      <Link>MultiLineStringRenderer.cs</Link>
+    </Compile>
+    <Compile Include="..\Mapsui.Rendering.Skia\MultiPointRenderer.cs">
+      <Link>MultiPointRenderer.cs</Link>
+    </Compile>
+    <Compile Include="..\Mapsui.Rendering.Skia\MultiPolygonRenderer.cs">
+      <Link>MultiPolygonRenderer.cs</Link>
+    </Compile>
+    <Compile Include="..\Mapsui.Rendering.Skia\PointRenderer.cs">
+      <Link>PointRenderer.cs</Link>
+    </Compile>
+    <Compile Include="..\Mapsui.Rendering.Skia\PolygonRenderer.cs">
+      <Link>PolygonRenderer.cs</Link>
+    </Compile>
+    <Compile Include="..\Mapsui.Rendering.Skia\RasterRenderer.cs">
+      <Link>RasterRenderer.cs</Link>
+    </Compile>
+    <Compile Include="..\Mapsui.Rendering.Skia\SKBitmapInfo.cs">
+      <Link>SKBitmapInfo.cs</Link>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="SkiaSharp, Version=1.55.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\packages\SkiaSharp.1.55.1\lib\portable-net45+win8+wpa81+wp8\SkiaSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Mapsui.Geometries\Mapsui.Geometries.csproj">
+      <Project>{ee55b62d-ffa2-4c24-a4ad-7a47ace55ce5}</Project>
+      <Name>Mapsui.Geometries</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mapsui\Mapsui.csproj">
+      <Project>{d74c052a-c07e-4b37-a898-134218aca5c9}</Project>
+      <Name>Mapsui</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

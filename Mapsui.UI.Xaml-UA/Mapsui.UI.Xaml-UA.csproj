@@ -40,6 +40,10 @@
       <Project>{ee55b62d-ffa2-4c24-a4ad-7a47ace55ce5}</Project>
       <Name>Mapsui.Geometries</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Mapsui.Rendering.Skia-PCL\Mapsui.Rendering.Skia-PCL.csproj">
+      <Project>{b4f5cdc7-8d34-4b7e-be62-206fc716d4ff}</Project>
+      <Name>Mapsui.Rendering.Skia-PCL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Mapsui.Rendering.Xaml-UA\Mapsui.Rendering.Xaml-UA.csproj">
       <Project>{1e0146e1-3b36-4352-bf7d-bf9d9d63a059}</Project>
       <Name>Mapsui.Rendering.Xaml-UA</Name>

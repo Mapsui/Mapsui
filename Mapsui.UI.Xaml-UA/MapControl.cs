@@ -34,9 +34,10 @@ using Mapsui.Fetcher;
 using Mapsui.Geometries;
 using Mapsui.Providers;
 using Mapsui.Rendering;
-using Mapsui.Rendering.Xaml;
+using Mapsui.Rendering.Skia;
 using Mapsui.Utilities;
 using Point = Windows.Foundation.Point;
+using SkiaSharp.Views.UWP;
 
 namespace Mapsui.UI.Xaml
 {
@@ -44,7 +45,7 @@ namespace Mapsui.UI.Xaml
     {
         private readonly IRenderer _renderer;
         private readonly Rectangle _bboxRect = CreateSelectRectangle();
-        private readonly Canvas _renderTarget = CreateRenderTarget();
+        private readonly SkiaSharp.Views.UWP.SKXamlCanvas _renderTarget = CreateRenderTarget();
         private readonly AttributionPanel _attributionPanel = CreateAttributionPanel();
         private readonly DoubleAnimation _zoomAnimation = new DoubleAnimation();
         private readonly Storyboard _zoomStoryBoard = new Storyboard();
@@ -55,12 +56,14 @@ namespace Mapsui.UI.Xaml
 
         public MapControl()
         {
+            Background = new SolidColorBrush(Colors.White); // DON'T REMOVE! Touch events do not work without a background
+
             Children.Add(_renderTarget);
             Children.Add(_bboxRect);
             Children.Add(_attributionPanel);
 
-            Background = new SolidColorBrush(Colors.White); // DON'T REMOVE! Touch events do not work without a background
-
+            _renderTarget.PaintSurface += _renderTarget_PaintSurface;
+                        
             Map = new Map();
             Loaded += MapControlLoaded;
 
@@ -107,9 +110,9 @@ namespace Mapsui.UI.Xaml
             };
         }
 
-        private static Canvas CreateRenderTarget()
+        private static SKXamlCanvas CreateRenderTarget()
         {
-            return new Canvas
+            return new SKXamlCanvas
             {
                 VerticalAlignment = VerticalAlignment.Stretch,
                 HorizontalAlignment = HorizontalAlignment.Stretch,
@@ -275,7 +278,7 @@ namespace Mapsui.UI.Xaml
             _zoomAnimation.Duration = new Duration(new TimeSpan(0, 0, 0, 0, 1000));
             _zoomAnimation.EasingFunction = new QuarticEase();
             Storyboard.SetTarget(_zoomAnimation, this);
-            Storyboard.SetTargetProperty(_zoomAnimation, "Resolution");
+            Storyboard.SetTargetProperty(_zoomAnimation, nameof(Map.Viewport.Resolution));
             _zoomStoryBoard.Children.Add(_zoomAnimation);
         }
 
@@ -330,13 +333,19 @@ namespace Mapsui.UI.Xaml
 
         private void CompositionTarget_Rendering(object sender, object e)
         {
+            _renderTarget.Invalidate();
+        }
+
+
+        private void _renderTarget_PaintSurface(object sender, SKPaintSurfaceEventArgs e)
+        {
             if (!_viewportInitialized) InitializeViewport();
             if (!_viewportInitialized) return; //stop if the line above failed. 
             if (!_invalid) return;
 
             if ((_renderer != null) && (_map != null))
             {
-                _renderer.Render(_renderTarget, Map.Viewport, _map.Layers, _map.BackColor);
+                _renderer.Render(e.Surface.Canvas, Map.Viewport, _map.Layers, _map.BackColor);
                 _renderTarget.Arrange(new Rect(0, 0, Map.Viewport.Width, Map.Viewport.Height));
                 _invalid = false;
             }
