@@ -326,7 +326,7 @@ namespace Mapsui.UI.iOS
 
 			GL.Clear((int)ClearBufferMask.ColorBufferBit);
 
-			_renderer.Render(_map.Viewport, _map.Layers);
+			_renderer.Render(this, _map.Viewport, _map.Layers, _map.BackColor);
 
 			SwapBuffers();
 		}

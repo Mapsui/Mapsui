@@ -16,34 +16,22 @@ using System.Diagnostics;
 namespace Mapsui.Rendering.iOS
 {
     public class MapRenderer : IRenderer
-    {
-        public bool ShowDebugInfoInMap { get; set; }
-
-		readonly UIView _target;
-
+    {        
 		static MapRenderer()
         {
             DefaultRendererFactory.Create = () => new MapRenderer();
         }
+        
+        
 
-        public MapRenderer() : this(new UIView()) { }
-
-        public MapRenderer(UIView target)
-        {
-            _target = target;
-        }
-
-        public void Render(IViewport viewport, IEnumerable<ILayer> layers)
-        {
-            Render(_target, viewport, layers, ShowDebugInfoInMap);
-        }
-
-        public static void Render(UIView target, IViewport viewport, IEnumerable<ILayer> layers, bool showDebugInfoInMap)
+        public void Render(object target, IViewport viewport, IEnumerable<ILayer> layers, Color background = null)
 		{
-			CATransaction.Begin();
+            var view = (UIView)target;
+
+            CATransaction.Begin();
 			CATransaction.AnimationDuration = 0;
-			RemoveSublayers(target.Layer);
-			Render(target.Layer, viewport, layers);
+			RemoveSublayers(view.Layer);
+			Render(view.Layer, viewport, layers);
 
 			CATransaction.Commit();
 		}
@@ -61,31 +49,27 @@ namespace Mapsui.Rendering.iOS
 			}
 		}
 
-		public void Dispose()
-        {
-            if (_target.Layer.Sublayers != null)
-            {
-                foreach (var layer in _target.Layer.Sublayers)
-                {
-                    layer.RemoveFromSuperLayer();
-                    layer.Dispose();
-                }
-            }
-        }
+        // do I need something like this? perhaps after each render iteration?
+        //      public void Dispose()
+        //      {
+        //          if (target.Layer.Sublayers != null)
+        //          {
+        //              foreach (var layer in target.Layer.Sublayers)
+        //              {
+        //                  layer.RemoveFromSuperLayer();
+        //                  layer.Dispose();
+        //              }
+        //          }
+        //      }
 
-        public MemoryStream RenderToBitmapStream(IViewport viewport, IEnumerable<ILayer> layers)
-        {
-            return RenderToBitmapStreamStatic(viewport, layers);
-        }
-
-		static void Render(CALayer target, IViewport viewport, IEnumerable<ILayer> layers)
+ 		static void Render(CALayer target, IViewport viewport, IEnumerable<ILayer> layers)
 		{
 			layers = layers.ToList();
 			VisibleFeatureIterator.IterateLayers(viewport, layers, (v, s, f) => RenderGeometry(target, v, s, f));
 		}
 
-        static MemoryStream RenderToBitmapStreamStatic(IViewport viewport, IEnumerable<ILayer> layers)
-        {
+        MemoryStream IRenderer.RenderToBitmapStream(IViewport viewport, IEnumerable<ILayer> layers, Color background)
+        { 
             UIImage image = null;
             var handle = new ManualResetEvent(false);
 
@@ -95,13 +79,13 @@ namespace Mapsui.Rendering.iOS
 				try
 				{
 					view.Opaque = false;
-					view.BackgroundColor = UIColor.Clear;
-					Render(view, viewport, layers, false);
+					view.BackgroundColor = new UIColor(background.R, background.G, background.B, background.A);
+					Render(view, viewport, layers, background);
 					image = ToImage(view, new CGRect(0, 0, (float)viewport.Width, (float)viewport.Height));
 				}
 				catch (Exception ex)
 				{
-					Debug.WriteLine($"Exception in {nameof(RenderToBitmapStreamStatic)}: {ex}");
+					Debug.WriteLine($"Exception in {nameof(IRenderer.RenderToBitmapStream)}: {ex}");
 				}
 				finally
 				{

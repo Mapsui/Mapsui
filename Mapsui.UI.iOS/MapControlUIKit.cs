@@ -52,7 +52,7 @@ namespace Mapsui.UI.iOS
         {
             Map = new Map();
             BackgroundColor = UIColor.White;
-            _renderer = new MapRenderer(this);
+            _renderer = new MapRenderer();
 
             InitializeViewport();
 
@@ -282,13 +282,13 @@ namespace Mapsui.UI.iOS
             if (Width != _map.Viewport.Width) _map.Viewport.Width = Width;
             if (Height != _map.Viewport.Height) _map.Viewport.Height = Height;
 
-            _renderer.Render(_map.Viewport, _map.Layers);
+            _renderer.Render(this, _map.Viewport, _map.Layers, _map.BackColor);
         }
 
         protected override void Dispose(bool disposing)
         {
             base.Dispose(disposing);
-            _renderer.Dispose();
+            //!!! todo: delete this line: _renderer.Dispose();
         }
     }
 }
