@@ -26,6 +26,7 @@
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <MtouchDebug>true</MtouchDebug>
     <StartupObject>Mapsui.Samples.iOS.Application</StartupObject>
+    <CodesignKey>iPhone Developer</CodesignKey>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
     <Optimize>false</Optimize>
@@ -38,7 +39,6 @@
     <MtouchFloat32>true</MtouchFloat32>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <MtouchArch>ARMv7, ARM64</MtouchArch>
-    <AssemblyName>MapsuiSamplesiOS</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BruTile, Version=0.19.0.0, Culture=neutral, processorArchitecture=MSIL">

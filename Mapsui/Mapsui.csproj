@@ -55,6 +55,7 @@
     <Compile Include="Layers\TmsTileSourceBuilder.cs" />
     <Compile Include="Logging\Logger.cs" />
     <Compile Include="Projection\BoundingBoxIterator.cs" />
+    <Compile Include="Projection\Mercator.cs" />
     <Compile Include="Projection\MinimalTransformation.cs" />
     <Compile Include="Providers\ArcGIS\CapabilitiesHelper.cs" />
     <Compile Include="Providers\ArcGIS\Dynamic\ArcGISDynamicCapabilities.cs" />
