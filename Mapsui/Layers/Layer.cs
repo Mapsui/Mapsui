@@ -54,8 +54,8 @@ namespace Mapsui.Layers
             {
                 if (_dataSource == value) return;
                 _dataSource = value;
-                OnPropertyChanged("DataSource");
-                OnPropertyChanged("Envelope");
+                OnPropertyChanged(nameof(DataSource));
+                OnPropertyChanged(nameof(Envelope));
             }
         }
 
