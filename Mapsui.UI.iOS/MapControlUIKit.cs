@@ -6,7 +6,6 @@ using UIKit;
 using System;
 using System.ComponentModel;
 using CoreGraphics;
-using Mapsui.Geometries;
 using SkiaSharp.Views.iOS;
 using Math = System.Math;
 
@@ -23,8 +22,7 @@ namespace Mapsui.UI.iOS
         private float _oldDist = 1f;
         private MapRenderer _renderer;
         private Map _map;
-        private Geometries.Point _skiaScale;
-
+        
         private bool _viewportInitialized;
         public bool ViewportInitialized
         {
@@ -58,7 +56,7 @@ namespace Mapsui.UI.iOS
             var pinchGesture = new UIPinchGestureRecognizer(PinchGesture) { Enabled = true };
             AddGestureRecognizer(pinchGesture);
 
-            this.PaintSurface += OnPaintSurface;
+            PaintSurface += OnPaintSurface;
         }
 
         private void OnPaintSurface(object sender, SKPaintSurfaceEventArgs skPaintSurfaceEventArgs)
@@ -108,7 +106,7 @@ namespace Mapsui.UI.iOS
             if (recognizer.State == UIGestureRecognizerState.Began)
             {
                 _oldDist = 1;
-                _currentMid = (CGPoint)recognizer.LocationInView((UIView)this);
+                _currentMid = recognizer.LocationInView(this);
             }
 
             float scale = 1 - (_oldDist - (float)recognizer.Scale);
@@ -118,7 +116,7 @@ namespace Mapsui.UI.iOS
                 if (_oldDist != (float)recognizer.Scale)
                 {
                     _oldDist = (float)recognizer.Scale;
-                    _currentMid = (CGPoint)recognizer.LocationInView((UIView)this);
+                    _currentMid = recognizer.LocationInView(this);
                     _previousMid = new CGPoint(_currentMid.X, _currentMid.Y);
 
                     _map.Viewport.Center = _map.Viewport.ScreenToWorld(
@@ -139,7 +137,7 @@ namespace Mapsui.UI.iOS
                 RefreshGraphics();
             }
 
-            var majorChange = (recognizer.State == UIGestureRecognizerState.Ended);
+            var majorChange = recognizer.State == UIGestureRecognizerState.Ended;
             _map.ViewChanged(majorChange);
         }
 
@@ -254,7 +252,7 @@ namespace Mapsui.UI.iOS
         {
             string errorMessage;
 
-            DispatchQueue.MainQueue.DispatchAsync((Action)delegate
+            DispatchQueue.MainQueue.DispatchAsync(delegate
             {
                 if (e == null)
                 {
@@ -284,12 +282,6 @@ namespace Mapsui.UI.iOS
         private void RefreshGraphics()
         {
             SetNeedsDisplay();
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            base.Dispose(disposing);
-            //!!! todo: delete this line: _renderer.Dispose();
         }
     }
 }
