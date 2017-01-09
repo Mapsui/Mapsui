@@ -14,7 +14,7 @@ namespace Mapsui.Samples.Common.Maps
             return map;
         }
 
-        private static ILayer CreateLayer()
+        public static ILayer CreateLayer()
         {
             return new Layer("Polygons")
             {

@@ -15,6 +15,7 @@ namespace Mapsui.Samples.Common.Maps
             var map = new Map();
 
             map.Layers.Add(new TileLayer(KnownTileSources.Create()) { Name = "OSM" });
+            map.Layers.Add(PolygonSample.CreateLayer());
             map.Layers.Add(LineStringSample.CreateLineStringLayer(LineStringSample.CreateLineStringStyle()));
             map.Layers.Add(CreateLayerWithStyleOnLayer(map.Envelope, 10));
             map.Layers.Add(CreateLayerWithStyleOnFeature(map.Envelope, 10));
