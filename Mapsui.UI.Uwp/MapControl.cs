@@ -124,8 +124,7 @@ namespace Mapsui.UI.Xaml
         }
 
         public bool ZoomToBoxMode { get; set; }
-        public IViewport Viewport => Map.Viewport;
-
+        
         public Map Map
         {
             get { return _map; }
@@ -297,7 +296,7 @@ namespace Mapsui.UI.Xaml
 
         private void UpdateSize()
         {
-            if (Viewport == null) return;
+            if (Map.Viewport == null) return;
             Map.Viewport.Width = ActualWidth;
             Map.Viewport.Height = ActualHeight;
         }
@@ -477,6 +476,7 @@ namespace Mapsui.UI.Xaml
 
         private Geometries.Point GetSkiaScale()
         {
+            this.bo
             var bounds = ApplicationView.GetForCurrentView().VisibleBounds;
             var scaleFactor = DisplayInformation.GetForCurrentView().RawPixelsPerViewPixel;
             return new Geometries.Point(scaleFactor, scaleFactor);

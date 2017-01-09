@@ -20,7 +20,7 @@ namespace Mapsui.Samples.Common.Maps
             map.Layers.Add(CreateLayerWithStyleOnLayer(map.Envelope, 10));
             map.Layers.Add(CreateLayerWithStyleOnFeature(map.Envelope, 10));
 
-            map.Viewport.RenderResolutionMultiplier = 2;
+            //map.Viewport.RenderResolutionMultiplier = 2;
 
             return map;
         }

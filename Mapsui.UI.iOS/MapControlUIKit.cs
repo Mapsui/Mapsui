@@ -1,17 +1,19 @@
 using Mapsui.Fetcher;
-using Mapsui.Rendering.iOS;
+using Mapsui.Rendering.Skia;
 using CoreFoundation;
 using Foundation;
 using UIKit;
 using System;
 using System.ComponentModel;
 using CoreGraphics;
+using Mapsui.Geometries;
+using SkiaSharp.Views.iOS;
 using Math = System.Math;
 
 namespace Mapsui.UI.iOS
 {
     [Register("MapControlUIKit"), DesignTimeVisible(true)]
-    public class MapControlUIKit : UIView
+    public class MapControlUIKit :  SKCanvasView
     {
         public delegate void ViewportInitializedEventHandler(object sender);
         public event ViewportInitializedEventHandler ViewportInitializedEvent;
@@ -21,6 +23,7 @@ namespace Mapsui.UI.iOS
         private float _oldDist = 1f;
         private MapRenderer _renderer;
         private Map _map;
+        private Geometries.Point _skiaScale;
 
         private bool _viewportInitialized;
         public bool ViewportInitialized
@@ -36,12 +39,6 @@ namespace Mapsui.UI.iOS
         private float Width { get { return (float)Frame.Width; } }
         private float Height { get { return (float)Frame.Height; } }
 
-        public MapControlUIKit(IntPtr handle)
-            : base(handle)
-        {
-            Initialize();
-        }
-
         public MapControlUIKit(CGRect frame)
             : base(frame)
         {
@@ -55,11 +52,27 @@ namespace Mapsui.UI.iOS
             _renderer = new MapRenderer();
 
             InitializeViewport();
-
+            
             ClipsToBounds = true;
 
             var pinchGesture = new UIPinchGestureRecognizer(PinchGesture) { Enabled = true };
             AddGestureRecognizer(pinchGesture);
+
+            this.PaintSurface += OnPaintSurface;
+        }
+
+        private void OnPaintSurface(object sender, SKPaintSurfaceEventArgs skPaintSurfaceEventArgs)
+        {
+            if (!ViewportInitialized) InitializeViewport();
+            if (!ViewportInitialized) return;
+
+            if (Width != _map.Viewport.Width) _map.Viewport.Width = Width;
+            if (Height != _map.Viewport.Height) _map.Viewport.Height = Height;
+
+            var scaleFactor = 2; // todo: figure out how to get this value programatically
+            skPaintSurfaceEventArgs.Surface.Canvas.Scale((float)scaleFactor, (float)scaleFactor);
+
+            _renderer.Render(skPaintSurfaceEventArgs.Surface.Canvas, _map.Viewport, _map.Layers, _map.BackColor);
         }
 
         private void InitializeViewport()
@@ -79,7 +92,7 @@ namespace Mapsui.UI.iOS
 
             _map.Viewport.Width = Width;
             _map.Viewport.Height = Height;
-            _map.Viewport.RenderResolutionMultiplier = 2;
+            _map.Viewport.RenderResolutionMultiplier = 1;
 
             _map.ViewChanged(true);
             _viewportInitialized = true;
@@ -139,8 +152,8 @@ namespace Mapsui.UI.iOS
                 var touch = touches.AnyObject as UITouch;
                 if (touch != null)
                 {
-                    var currentPos = (CGPoint)touch.LocationInView((UIView)this);
-                    var previousPos = (CGPoint)touch.PreviousLocationInView((UIView)this);
+                    var currentPos = touch.LocationInView(this);
+                    var previousPos = touch.PreviousLocationInView(this);
 
                     var cRect = new CGRect(new CGPoint((int)currentPos.X, (int)currentPos.Y), new CGSize(5, 5));
                     var pRect = new CGRect(new CGPoint((int)previousPos.X, (int)previousPos.Y), new CGSize(5, 5));
@@ -271,18 +284,6 @@ namespace Mapsui.UI.iOS
         private void RefreshGraphics()
         {
             SetNeedsDisplay();
-        }
-
-        public override void Draw(CGRect rect)
-        {
-            base.Draw((CGRect)rect);
-            if (!ViewportInitialized) InitializeViewport();
-            if (!ViewportInitialized) return;
-
-            if (Width != _map.Viewport.Width) _map.Viewport.Width = Width;
-            if (Height != _map.Viewport.Height) _map.Viewport.Height = Height;
-
-            _renderer.Render(this, _map.Viewport, _map.Layers, _map.BackColor);
         }
 
         protected override void Dispose(bool disposing)
