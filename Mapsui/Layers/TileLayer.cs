@@ -83,18 +83,20 @@ namespace Mapsui.Layers
 
             _tileSource = source;
 
-            if (source == null) return;
-            Attribution.Text = _tileSource.Attribution.Text;
-            Attribution.Url = _tileSource.Attribution.Url;
-            _tileFetcher = new TileFetcher(source, _memoryCache, _maxRetries, _maxThreads, _fetchStrategy);
-            _tileFetcher.DataChanged += TileFetcherDataChanged;
-            _tileFetcher.PropertyChanged += TileFetcherOnPropertyChanged;
-            OnPropertyChanged("Envelope");
+            if (_tileSource != null)
+            {
+                Attribution.Text = _tileSource.Attribution.Text;
+                Attribution.Url = _tileSource.Attribution.Url;
+                _tileFetcher = new TileFetcher(source, _memoryCache, _maxRetries, _maxThreads, _fetchStrategy);
+                _tileFetcher.DataChanged += TileFetcherDataChanged;
+                _tileFetcher.PropertyChanged += TileFetcherOnPropertyChanged;
+                OnPropertyChanged(nameof(Envelope));
+            }
         }
 
         private void TileFetcherOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
-            if (propertyChangedEventArgs.PropertyName == "Busy")
+            if (propertyChangedEventArgs.PropertyName == nameof(Busy))
             {
                 if (_tileFetcher != null) Busy = _tileFetcher.Busy;
             }
@@ -106,17 +108,11 @@ namespace Mapsui.Layers
             set
             {
                 SetTileSource(value);
-                OnPropertyChanged("TileSource");
+                OnPropertyChanged(nameof(TileSource));
             }
         }
 
-        public override BoundingBox Envelope
-        {
-            get
-            {
-                return Schema == null ? null : Schema.Extent.ToBoundingBox();
-            }
-        }
+        public override BoundingBox Envelope => Schema?.Extent.ToBoundingBox();
 
         public override void ViewChanged(bool majorChange, BoundingBox extent, double resolution)
         {
@@ -140,24 +136,17 @@ namespace Mapsui.Layers
             _memoryCache.Clear();
         }
 
-        public ITileSchema Schema
-        {
-            // TODO: 
-            // investigate whether we can do without this public Schema. 
-            // Its primary use is in the Renderer which recursively searches for
-            // available tiles. Perhaps this recursive search can be done within
-            // this class. I would be nice though if there was some flexibility into
-            // the specific search strategy. Perhaps it is possible to pass a search 
-            // to some GetTiles method.
-            // Update. Schema is not used in the Renderer anymore and TileSource is now a public property
-            get { return _tileSource != null ? _tileSource.Schema : null; }
-        }
+        // TODO: 
+        // investigate whether we can do without this public Schema. 
+        // Its primary use is in the Renderer which recursively searches for
+        // available tiles. Perhaps this recursive search can be done within
+        // this class. I would be nice though if there was some flexibility into
+        // the specific search strategy. Perhaps it is possible to pass a search 
+        // to some GetTiles method.
+        // Update. Schema is not used in the Renderer anymore and TileSource is now a public property
+        public ITileSchema Schema => _tileSource?.Schema;
 
-        public MemoryCache<Feature> MemoryCache
-        {
-            get { return _memoryCache; }
-        }
-
+        public MemoryCache<Feature> MemoryCache => _memoryCache;
 
         private void TileFetcherDataChanged(object sender, DataChangedEventArgs e)
         {
