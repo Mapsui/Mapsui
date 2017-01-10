@@ -264,11 +264,11 @@ namespace Mapsui
             }
         }
 
-        public void ViewChanged(bool changeEnd)
+        public void ViewChanged(bool majorChange)
         {
             foreach (var layer in _layers.ToList())
             {
-                layer.ViewChanged(changeEnd, Viewport.Extent, Viewport.RenderResolution);
+                layer.ViewChanged(majorChange, Viewport.Extent, Viewport.RenderResolution);
             }
         }
 
