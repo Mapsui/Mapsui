@@ -52,6 +52,8 @@ namespace Mapsui.UI.Uwp
         private bool _viewportInitialized;
         private Geometries.Point _skiaScale;
 
+        public event EventHandler ViewportInitialized;
+
         public MapControl()
         {
             Background = new SolidColorBrush(Colors.White); // DON'T REMOVE! Touch events do not work without a background
@@ -441,7 +443,13 @@ namespace Mapsui.UI.Uwp
             {
                 _viewportInitialized = true;
                 Map.ViewChanged(true);
+                OnViewportInitialized();
             }
+        }
+
+        private void OnViewportInitialized()
+        {
+            ViewportInitialized?.Invoke(this, EventArgs.Empty);
         }
 
         private Geometries.Point GetSkiaScale()

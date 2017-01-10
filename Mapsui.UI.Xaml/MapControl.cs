@@ -566,11 +566,11 @@ namespace Mapsui.UI.Xaml
             {
                 _viewportInitialized = true;
                 Map.ViewChanged(true);
-                OnViewportInitialize();
+                OnViewportInitialized();
             }
         }
 
-        private void OnViewportInitialize()
+        private void OnViewportInitialized()
         {
             ViewportInitialized?.Invoke(this, EventArgs.Empty);
         }

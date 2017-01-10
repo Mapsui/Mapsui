@@ -26,7 +26,9 @@ namespace Mapsui.UI.Android
         private bool _viewportInitialized;
         private Rendering.Skia.MapRenderer _renderer;
         private Map _map;
-                
+
+        public event EventHandler ViewportInitialized;
+
         public MapControl(Context context, IAttributeSet attrs):
             base(context, attrs)
         {
@@ -53,7 +55,13 @@ namespace Mapsui.UI.Android
             {
                 _viewportInitialized = true;
                 Map.ViewChanged(true);
+                OnViewportInitialized();
             }
+        }
+
+        private void OnViewportInitialized()
+        {
+            ViewportInitialized?.Invoke(this, EventArgs.Empty);
         }
 
         public void MapView_Touch(object sender, TouchEventArgs args)

@@ -13,8 +13,7 @@ namespace Mapsui.UI.iOS
     [Register("MapControl"), DesignTimeVisible(true)]
     public class MapControl : SKCanvasView, IMapControl
     {
-        public delegate void ViewportInitializedEventHandler(object sender);
-        public event ViewportInitializedEventHandler ViewportInitializedEvent;
+        public event EventHandler ViewportInitialized;
 
         private CGPoint _previousMid;
         private CGPoint _currentMid;
@@ -23,16 +22,6 @@ namespace Mapsui.UI.iOS
         private Map _map;
         
         private bool _viewportInitialized;
-
-        private bool ViewportInitialized
-        {
-            get { return _viewportInitialized; }
-            set
-            {
-                _viewportInitialized = value;
-                if (_viewportInitialized) ViewportInitializedEvent?.Invoke(this);
-            }
-        }
 
         private float Width => (float)Frame.Width;
         private float Height => (float)Frame.Height;
@@ -61,8 +50,8 @@ namespace Mapsui.UI.iOS
 
         private void OnPaintSurface(object sender, SKPaintSurfaceEventArgs skPaintSurfaceEventArgs)
         {
-            if (!ViewportInitialized) InitializeViewport();
-            if (!ViewportInitialized) return;
+            if (!_viewportInitialized) InitializeViewport();
+            if (!_viewportInitialized) return;
 
             if (Width != _map.Viewport.Width) _map.Viewport.Width = Width;
             if (Height != _map.Viewport.Height) _map.Viewport.Height = Height;
@@ -79,7 +68,13 @@ namespace Mapsui.UI.iOS
             {
                 _viewportInitialized = true;
                 Map.ViewChanged(true);
+                OnViewportInitialized();
             }
+        }
+        
+        private void OnViewportInitialized()
+        {
+            ViewportInitialized?.Invoke(this, EventArgs.Empty);
         }
 
         private void PinchGesture(UIPinchGestureRecognizer recognizer)
