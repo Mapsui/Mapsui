@@ -29,8 +29,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Rendering.OpenTK.Tes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Rendering.OpenTK.Android.Tests", "Tests\Mapsui.Rendering.OpenTK.Android.Tests\Mapsui.Rendering.OpenTK.Android.Tests.csproj", "{AED552C8-E440-446E-881A-D28265409EFE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Rendering.OpenTK.iOS.Tests", "Tests\Mapsui.Rendering.OpenTK.iOS.Tests\Mapsui.Rendering.OpenTK.iOS.Tests.csproj", "{A736A2B4-56CB-4A61-B887-319BBC551F30}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Desktop", "Mapsui.Desktop\Mapsui.Desktop.csproj", "{8BD54487-8DB9-431A-9596-2DFD744887A1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Rendering.Android", "Mapsui.Rendering.Android\Mapsui.Rendering.Android.csproj", "{F7193717-5F16-44C8-A90C-05A4173D353E}"
@@ -791,37 +789,6 @@ Global
 		{AED552C8-E440-446E-881A-D28265409EFE}.Release|x86.ActiveCfg = Release|Any CPU
 		{AED552C8-E440-446E-881A-D28265409EFE}.Release|x86.Build.0 = Release|Any CPU
 		{AED552C8-E440-446E-881A-D28265409EFE}.Release|x86.Deploy.0 = Release|Any CPU
-		{A736A2B4-56CB-4A61-B887-319BBC551F30}.Ad-Hoc|Any CPU.ActiveCfg = Debug|iPhone
-		{A736A2B4-56CB-4A61-B887-319BBC551F30}.Ad-Hoc|ARM.ActiveCfg = Debug|iPhone
-		{A736A2B4-56CB-4A61-B887-319BBC551F30}.Ad-Hoc|iPhone.ActiveCfg = Debug|iPhone
-		{A736A2B4-56CB-4A61-B887-319BBC551F30}.Ad-Hoc|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
-		{A736A2B4-56CB-4A61-B887-319BBC551F30}.Ad-Hoc|Mixed Platforms.ActiveCfg = Debug|iPhone
-		{A736A2B4-56CB-4A61-B887-319BBC551F30}.Ad-Hoc|x64.ActiveCfg = Debug|iPhone
-		{A736A2B4-56CB-4A61-B887-319BBC551F30}.Ad-Hoc|x86.ActiveCfg = Debug|iPhone
-		{A736A2B4-56CB-4A61-B887-319BBC551F30}.AppStore|Any CPU.ActiveCfg = Debug|iPhone
-		{A736A2B4-56CB-4A61-B887-319BBC551F30}.AppStore|ARM.ActiveCfg = Debug|iPhone
-		{A736A2B4-56CB-4A61-B887-319BBC551F30}.AppStore|iPhone.ActiveCfg = Debug|iPhone
-		{A736A2B4-56CB-4A61-B887-319BBC551F30}.AppStore|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
-		{A736A2B4-56CB-4A61-B887-319BBC551F30}.AppStore|Mixed Platforms.ActiveCfg = Debug|iPhone
-		{A736A2B4-56CB-4A61-B887-319BBC551F30}.AppStore|x64.ActiveCfg = Debug|iPhone
-		{A736A2B4-56CB-4A61-B887-319BBC551F30}.AppStore|x86.ActiveCfg = Debug|iPhone
-		{A736A2B4-56CB-4A61-B887-319BBC551F30}.Debug|Any CPU.ActiveCfg = Debug|iPhoneSimulator
-		{A736A2B4-56CB-4A61-B887-319BBC551F30}.Debug|ARM.ActiveCfg = Debug|iPhoneSimulator
-		{A736A2B4-56CB-4A61-B887-319BBC551F30}.Debug|iPhone.ActiveCfg = Debug|iPhone
-		{A736A2B4-56CB-4A61-B887-319BBC551F30}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
-		{A736A2B4-56CB-4A61-B887-319BBC551F30}.Debug|Mixed Platforms.ActiveCfg = Debug|iPhone
-		{A736A2B4-56CB-4A61-B887-319BBC551F30}.Debug|Mixed Platforms.Build.0 = Debug|iPhone
-		{A736A2B4-56CB-4A61-B887-319BBC551F30}.Debug|Mixed Platforms.Deploy.0 = Debug|iPhone
-		{A736A2B4-56CB-4A61-B887-319BBC551F30}.Debug|x64.ActiveCfg = Debug|iPhoneSimulator
-		{A736A2B4-56CB-4A61-B887-319BBC551F30}.Debug|x86.ActiveCfg = Debug|iPhoneSimulator
-		{A736A2B4-56CB-4A61-B887-319BBC551F30}.Release|Any CPU.ActiveCfg = Debug|iPhoneSimulator
-		{A736A2B4-56CB-4A61-B887-319BBC551F30}.Release|ARM.ActiveCfg = Debug|iPhoneSimulator
-		{A736A2B4-56CB-4A61-B887-319BBC551F30}.Release|iPhone.ActiveCfg = Debug|iPhone
-		{A736A2B4-56CB-4A61-B887-319BBC551F30}.Release|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
-		{A736A2B4-56CB-4A61-B887-319BBC551F30}.Release|Mixed Platforms.ActiveCfg = Debug|iPhoneSimulator
-		{A736A2B4-56CB-4A61-B887-319BBC551F30}.Release|Mixed Platforms.Build.0 = Debug|iPhoneSimulator
-		{A736A2B4-56CB-4A61-B887-319BBC551F30}.Release|x64.ActiveCfg = Debug|iPhoneSimulator
-		{A736A2B4-56CB-4A61-B887-319BBC551F30}.Release|x86.ActiveCfg = Debug|iPhoneSimulator
 		{8BD54487-8DB9-431A-9596-2DFD744887A1}.Ad-Hoc|Any CPU.ActiveCfg = Release|Any CPU
 		{8BD54487-8DB9-431A-9596-2DFD744887A1}.Ad-Hoc|Any CPU.Build.0 = Release|Any CPU
 		{8BD54487-8DB9-431A-9596-2DFD744887A1}.Ad-Hoc|ARM.ActiveCfg = Release|Any CPU
@@ -1767,7 +1734,6 @@ Global
 		{81BB36D2-4D01-44E3-9024-E7CBD10DA316} = {F7130D3D-4E62-4EB3-B74C-1E819E017048}
 		{2890CF60-5A40-4364-9E9C-0A055D0EC1D5} = {F7130D3D-4E62-4EB3-B74C-1E819E017048}
 		{AED552C8-E440-446E-881A-D28265409EFE} = {F7130D3D-4E62-4EB3-B74C-1E819E017048}
-		{A736A2B4-56CB-4A61-B887-319BBC551F30} = {F7130D3D-4E62-4EB3-B74C-1E819E017048}
 		{CA0C7AF3-03ED-42D0-A001-001E8EE095E6} = {969DB691-49FB-4785-98F4-2112CC1BA7C4}
 		{53A4E033-F814-46CC-8105-DAC289524455} = {F7130D3D-4E62-4EB3-B74C-1E819E017048}
 		{5C1F0E76-BF98-4C6E-8AAB-CDB7E3735A9C} = {969DB691-49FB-4785-98F4-2112CC1BA7C4}
