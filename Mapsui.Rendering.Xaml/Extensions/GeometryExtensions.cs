@@ -1,13 +1,8 @@
 using System.Collections.Generic;
 using Mapsui.Geometries;
 using Point = Mapsui.Geometries.Point;
-#if !NETFX_CORE
 using XamlMedia = System.Windows.Media;
 using XamlPoint = System.Windows.Point;
-#else
-using XamlMedia = Windows.UI.Xaml.Media;
-using XamlPoint = Windows.Foundation.Point;
-#endif
 
 namespace Mapsui.Rendering.Xaml
 {

@@ -3,20 +3,11 @@ using System.IO;
 using Mapsui.Geometries;
 using Mapsui.Styles;
 using Point = Mapsui.Geometries.Point;
-#if !NETFX_CORE
 using System.Windows;
 using System.Windows.Media.Imaging;
 using XamlMedia = System.Windows.Media;
 using XamlShapes = System.Windows.Shapes;
 using XamlColors = System.Windows.Media.Colors;
-#else
-using Windows.Foundation;
-using Windows.UI.Xaml;
-using XamlMedia = Windows.UI.Xaml.Media;
-using XamlShapes = Windows.UI.Xaml.Shapes;
-using XamlColors = Windows.UI.Colors;
-using Windows.UI.Xaml.Media.Imaging;
-#endif
 
 namespace Mapsui.Rendering.Xaml
 {
@@ -232,10 +223,7 @@ namespace Mapsui.Rendering.Xaml
         private static XamlShapes.Path CreateRasterPath(IStyle style, MemoryStream stream)
         {
             var bitmapImage = new BitmapImage();
-#if NETFX_CORE
-            stream.Position = 0;
-            bitmapImage.SetSource(stream.ToRandomAccessStream().Result);
-#else
+
             var localStream = new MemoryStream();
             stream.Position = 0;
             stream.CopyTo(localStream);
@@ -243,7 +231,7 @@ namespace Mapsui.Rendering.Xaml
             bitmapImage.BeginInit();
             bitmapImage.StreamSource = localStream;
             bitmapImage.EndInit();
-#endif
+
             var path = new XamlShapes.Path
             {
                 Fill = new XamlMedia.ImageBrush { ImageSource = bitmapImage },

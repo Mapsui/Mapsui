@@ -10,7 +10,6 @@ using System.Linq;
 using Mapsui.Logging;
 using Color = Mapsui.Styles.Color;
 using Polygon = Mapsui.Geometries.Polygon;
-#if !NETFX_CORE
 using System.Threading;
 using Mapsui.Utilities;
 using System.Globalization;
@@ -18,13 +17,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Shapes;
 using XamlMedia = System.Windows.Media;
-#else
-using Windows.UI.Xaml.Controls;
-using Windows.Foundation;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Shapes;
-using XamlMedia = Windows.UI.Xaml.Media;
-#endif
 
 namespace Mapsui.Rendering.Xaml
 {
@@ -43,9 +35,9 @@ namespace Mapsui.Rendering.Xaml
         private static void Render(Canvas target, IViewport viewport, IEnumerable<ILayer> layers,
             Color background, bool rasterizing)
         {
-#if !NETFX_CORE
+
             target.BeginInit();
-#endif
+
             target.Background = background == null ? null : new XamlMedia.SolidColorBrush {Color = background.ToXaml()};
 
             target.Visibility = Visibility.Collapsed;
@@ -69,31 +61,22 @@ namespace Mapsui.Rendering.Xaml
             }
             target.Arrange(new Rect(0, 0, viewport.Width, viewport.Height));
             target.Visibility = Visibility.Visible;
-
-#if !NETFX_CORE
+            
             if (DeveloperTools.DeveloperMode)
             {
                 DrawDebugInfo(target, layers);
             }
-#endif
 
-#if !NETFX_CORE
             target.EndInit();
-#endif
         }
 
         public MemoryStream RenderToBitmapStream(IViewport viewport, IEnumerable<ILayer> layers, Color background = null)
         {
-#if NETFX_CORE
-            throw new NotImplementedException();
-#else
             MemoryStream bitmapStream = null;
             RunMethodOnStaThread(() => bitmapStream = RenderToBitmapStreamStatic(viewport, layers, background));
             return bitmapStream;
-#endif
         }
-
-#if !NETFX_CORE
+        
         private static MemoryStream RenderToBitmapStreamStatic(IViewport viewport, IEnumerable<ILayer> layers, Color background)
         {
             var canvas = new Canvas();
@@ -103,9 +86,7 @@ namespace Mapsui.Rendering.Xaml
             canvas.Dispatcher.InvokeShutdown();
             return bitmapStream;
         }
-#endif
 
-#if !NETFX_CORE
         private static void RunMethodOnStaThread(ThreadStart operation)
         {
             var thread = new Thread(operation);
@@ -114,7 +95,6 @@ namespace Mapsui.Rendering.Xaml
             thread.Start();
             thread.Join();
         }
-#endif
 
         public static void RenderLayer(Canvas target, IViewport viewport, ILayer layer, bool rasterizing = false)
         {
@@ -248,7 +228,6 @@ namespace Mapsui.Rendering.Xaml
                 GeometryRenderer.PositionRaster(renderedGeometry, feature.Geometry.GetBoundingBox(), viewport);
         }
 
-#if !NETFX_CORE
         private static void DrawDebugInfo(Canvas canvas, IEnumerable<ILayer> layers)
         {
             var lineCounter = 1;
@@ -275,6 +254,5 @@ namespace Mapsui.Rendering.Xaml
             Canvas.SetTop(textBox, y);
             return textBox;
         }
-#endif
     }
 }

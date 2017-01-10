@@ -1,15 +1,9 @@
 using Mapsui.Styles;
 using Brush = Mapsui.Styles.Brush;
 using Color = Mapsui.Styles.Color;
-#if !NETFX_CORE
 using Media = System.Windows.Media;
 using WinPoint = System.Windows.Point;
 using WinColor = System.Windows.Media.Color;
-#else
-using Media = Windows.UI.Xaml.Media;
-using WinPoint = Windows.Foundation.Point;
-using WinColor = Windows.UI.Color;
-#endif
 
 namespace Mapsui.Rendering.Xaml
 {

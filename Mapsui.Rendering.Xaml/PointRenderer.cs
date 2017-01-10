@@ -1,20 +1,10 @@
 ﻿using Mapsui.Styles;
 using Point = Mapsui.Geometries.Point;
-#if !NETFX_CORE
 using System.Windows;
 using XamlMedia = System.Windows.Media;
 using XamlShapes = System.Windows.Shapes;
 using XamlPoint = System.Windows.Point;
 using XamlColors = System.Windows.Media.Colors;
-#else
-using Windows.Foundation;
-using Windows.UI.Xaml;
-using XamlMedia = Windows.UI.Xaml.Media;
-using XamlShapes = Windows.UI.Xaml.Shapes;
-using XamlPoint = Windows.Foundation.Point;
-using XamlColors = Windows.UI.Colors;
-using Windows.UI.Xaml.Media.Imaging;
-#endif
 
 namespace Mapsui.Rendering.Xaml
 {
@@ -118,15 +108,9 @@ namespace Mapsui.Rendering.Xaml
                 imageBrush = brushCache.GetImageBrush(bmpId);
             }
 
-#if NETFX_CORE
-
-            var width = ((BitmapImage) imageBrush.ImageSource).PixelWidth;
-            var height = ((BitmapImage) imageBrush.ImageSource).PixelHeight;
-#else
-// note: It probably makes more sense to use PixelWith here:
+            // note: It probably makes more sense to use PixelWith here:
             var width = imageBrush.ImageSource.Width;
             var height = imageBrush.ImageSource.Height;
-#endif
 
             var path = new XamlShapes.Path
             {

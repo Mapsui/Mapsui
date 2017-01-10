@@ -1,16 +1,8 @@
 using Mapsui.Styles;
-#if !NETFX_CORE
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Globalization;
 using System.Windows;
-#else
-using Windows.Foundation;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Media;
-using XamlSize = Windows.Foundation.Size;
-#endif
 
 namespace Mapsui.Rendering.Xaml
 {
@@ -45,11 +37,8 @@ namespace Mapsui.Rendering.Xaml
             double textWidth;
             double textHeight;
 
-#if NETFX_CORE
-            DetermineTextWidthAndHeightWindows8(out textWidth, out textHeight, border, textblock);
-#else
             DetermineTextWidthAndHeightWpf(out textWidth, out textHeight, labelStyle, labelText);
-#endif
+
             border.SetValue(Canvas.LeftProperty, windowsPosition.X + labelStyle.Offset.X
                 - (textWidth + 2 * witdhMargin) * (short)labelStyle.HorizontalAlignment * 0.5f);
             border.SetValue(Canvas.TopProperty, windowsPosition.Y + labelStyle.Offset.Y
@@ -58,22 +47,6 @@ namespace Mapsui.Rendering.Xaml
             return border;
         }
 
-#if NETFX_CORE
-        private static void DetermineTextWidthAndHeightWindows8(out double textWidth, out double textHeight, Border border, TextBlock textblock)
-        {
-            const int bigEnough = 10000;
-            border.Measure(new XamlSize(double.PositiveInfinity, double.PositiveInfinity));
-            border.Arrange(new Rect(0, 0, bigEnough, bigEnough));
-            textWidth = textblock.ActualWidth;
-            textHeight = textblock.ActualHeight;
-        }
-#elif SILVERLIGHT
-        private static void DetermineTextWidthAndHeightSilverlight(out double textWidth, out double textHeight, TextBlock textblock)
-        {
-            textWidth = textblock.ActualWidth;
-            textHeight = textblock.ActualHeight;
-        }
-#else // WPF
         private static void DetermineTextWidthAndHeightWpf(out double width, out double height, LabelStyle style, string text)
         {
             // in WPF the width and height is not calculated at this point. So we use FormattedText
@@ -88,6 +61,5 @@ namespace Mapsui.Rendering.Xaml
             width = formattedText.Width;
             height = formattedText.Height;
         }
-#endif
     }
 }
