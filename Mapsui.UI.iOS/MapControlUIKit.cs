@@ -30,12 +30,12 @@ namespace Mapsui.UI.iOS
             set
             {
                 _viewportInitialized = value;
-                if (_viewportInitialized && ViewportInitializedEvent != null) ViewportInitializedEvent(this);
+                if (_viewportInitialized) ViewportInitializedEvent?.Invoke(this);
             }
         }
 
-        private float Width { get { return (float)Frame.Width; } }
-        private float Height { get { return (float)Frame.Height; } }
+        private float Width => (float)Frame.Width;
+        private float Height => (float)Frame.Height;
 
         public MapControlUIKit(CGRect frame)
             : base(frame)
@@ -76,8 +76,7 @@ namespace Mapsui.UI.iOS
         private void InitializeViewport()
         {
             if (Math.Abs(Width - 0f) < Utilities.Constants.Epsilon) return;
-            if (_map == null) return;
-            if (_map.Envelope == null) return;
+            if (_map?.Envelope == null) return;
             if (Math.Abs(_map.Envelope.Width - 0d) < Utilities.Constants.Epsilon) return;
             if (Math.Abs(_map.Envelope.Height - 0d) < Utilities.Constants.Epsilon) return;
             if (_map.Envelope.GetCentroid() == null) return;
