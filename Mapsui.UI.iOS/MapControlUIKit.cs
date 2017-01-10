@@ -68,7 +68,7 @@ namespace Mapsui.UI.iOS
             if (Height != _map.Viewport.Height) _map.Viewport.Height = Height;
 
             var scaleFactor = 2; // todo: figure out how to get this value programatically
-            skPaintSurfaceEventArgs.Surface.Canvas.Scale((float)scaleFactor, (float)scaleFactor);
+            skPaintSurfaceEventArgs.Surface.Canvas.Scale(scaleFactor, scaleFactor);
 
             _renderer.Render(skPaintSurfaceEventArgs.Surface.Canvas, _map.Viewport, _map.Layers, _map.BackColor);
         }
