@@ -10,7 +10,6 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Mapsui.Fetcher;
-using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Rendering;
@@ -566,8 +565,8 @@ namespace Mapsui.UI.Xaml
             if (ViewportHelper.TryInitializeViewport(_map, ActualWidth, ActualHeight))
             {
                 _viewportInitialized = true;
-                OnViewportInitialize();
                 Map.ViewChanged(true);
+                OnViewportInitialize();
             }
         }
 

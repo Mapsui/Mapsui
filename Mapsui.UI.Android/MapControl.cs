@@ -49,22 +49,11 @@ namespace Mapsui.UI.Android
 
         private void InitializeViewport()
         {
-            if (Math.Abs(Width - 0f) < Utilities.Constants.Epsilon) return;
-            if (_map?.Envelope == null) return;
-            if (Math.Abs(_map.Envelope.Width - 0d) < Utilities.Constants.Epsilon) return;
-            if (Math.Abs(_map.Envelope.Height - 0d) < Utilities.Constants.Epsilon) return;
-            if (_map.Envelope.GetCentroid() == null) return;
-
-            if (double.IsNaN(_map.Viewport.Resolution))
-                _map.Viewport.Resolution = _map.Envelope.Width / Width;
-            if (double.IsNaN(_map.Viewport.Center.X) || double.IsNaN(_map.Viewport.Center.Y))
-                _map.Viewport.Center = _map.Envelope.GetCentroid();
-            _map.Viewport.Width = Width;
-            _map.Viewport.Height = Height;
-            _map.Viewport.RenderResolutionMultiplier = 2;
-
-            _map.ViewChanged(true);
-            _viewportInitialized = true;
+            if (ViewportHelper.TryInitializeViewport(_map, Width, Height))
+            {
+                _viewportInitialized = true;
+                Map.ViewChanged(true);
+            }
         }
 
         void MapView_Touch(object sender, TouchEventArgs args)

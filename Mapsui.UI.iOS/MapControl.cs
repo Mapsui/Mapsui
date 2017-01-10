@@ -75,24 +75,11 @@ namespace Mapsui.UI.iOS
 
         private void InitializeViewport()
         {
-            if (Math.Abs(Width - 0f) < Utilities.Constants.Epsilon) return;
-            if (_map?.Envelope == null) return;
-            if (Math.Abs(_map.Envelope.Width - 0d) < Utilities.Constants.Epsilon) return;
-            if (Math.Abs(_map.Envelope.Height - 0d) < Utilities.Constants.Epsilon) return;
-            if (_map.Envelope.GetCentroid() == null) return;
-
-            if (double.IsNaN(_map.Viewport.Resolution) || double.IsInfinity(_map.Viewport.Resolution))
-                _map.Viewport.Resolution = _map.Envelope.Width / Width;
-            if ((double.IsNaN(_map.Viewport.Center.X)) || double.IsNaN(_map.Viewport.Center.Y) ||
-                double.IsInfinity(_map.Viewport.Center.X) || double.IsInfinity(_map.Viewport.Center.Y))
-                _map.Viewport.Center = _map.Envelope.GetCentroid();
-
-            _map.Viewport.Width = Width;
-            _map.Viewport.Height = Height;
-            _map.Viewport.RenderResolutionMultiplier = 1;
-
-            _map.ViewChanged(true);
-            _viewportInitialized = true;
+            if (ViewportHelper.TryInitializeViewport(_map, Width, Height))
+            {
+                _viewportInitialized = true;
+                Map.ViewChanged(true);
+            }
         }
 
         private void PinchGesture(UIPinchGestureRecognizer recognizer)
@@ -108,7 +95,7 @@ namespace Mapsui.UI.iOS
                 _currentMid = recognizer.LocationInView(this);
             }
 
-            float scale = 1 - (_oldDist - (float)recognizer.Scale);
+            var scale = 1 - (_oldDist - (float)recognizer.Scale);
 
             if (scale > 0.5 && scale < 1.5)
             {

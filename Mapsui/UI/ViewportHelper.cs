@@ -23,6 +23,7 @@ namespace Mapsui.UI
                     // It should be possible to start with an empty map.
                     map.Viewport.Resolution = Constants.DefaultResolution;
             }
+
             if (double.IsNaN(map.Viewport.Center.X) || double.IsNaN(map.Viewport.Center.Y)) // only when not set yet
             {
                 if (!map.Envelope.IsInitialized()) return false;
