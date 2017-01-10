@@ -5,7 +5,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Documents;
 using Mapsui.Layers;
 
-namespace Mapsui.UI.Xaml
+namespace Mapsui.UI.Uwp
 {
     class AttributionPanel : StackPanel
     {
@@ -26,7 +26,6 @@ namespace Mapsui.UI.Xaml
                     var hyperlink = new Hyperlink();
                     hyperlink.Inlines.Add(new Run{ Text = layer.Attribution.Text});
                     hyperlink.NavigateUri = new Uri(layer.Attribution.Url);
-                    //!!!hyperlink += (sender, args) => Process.Start(args.Uri.ToString());
                     textBlock.Inlines.Add(hyperlink);
                     textBlock.Padding = new Thickness(6, 2, 6, 2);
                     attribution.Children.Add(textBlock);

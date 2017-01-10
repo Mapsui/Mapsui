@@ -22,6 +22,7 @@ using System.Net;
 using System.Threading.Tasks;
 using Windows.Devices.Sensors;
 using Windows.Foundation;
+using Windows.Graphics.Display;
 using Windows.UI;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
@@ -36,12 +37,11 @@ using Mapsui.Providers;
 using Mapsui.Rendering;
 using Mapsui.Rendering.Skia;
 using Mapsui.Utilities;
-using Point = Windows.Foundation.Point;
 using SkiaSharp.Views.UWP;
-using Windows.UI.ViewManagement;
-using Windows.Graphics.Display;
+using Point = Windows.Foundation.Point;
+using ZoomHelper = Mapsui.UI.Uwp.ZoomHelper;
 
-namespace Mapsui.UI.Xaml
+namespace Mapsui.UI.Uwp
 {
     public class MapControl : Grid
     {

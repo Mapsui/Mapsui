@@ -18,7 +18,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Mapsui.UI.Xaml
+namespace Mapsui.UI.Uwp
 {
     public static class ZoomHelper
     {
