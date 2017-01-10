@@ -17,7 +17,8 @@ using Mapsui.Rendering;
 using Mapsui.Rendering.Xaml;
 using Mapsui.Utilities;
 using SkiaSharp;
-using SkiaSharp.Views;
+using SkiaSharp.Views.Desktop;
+using SkiaSharp.Views.WPF;
 using Point = System.Windows.Point;
 using XamlVector = System.Windows.Vector;
 
