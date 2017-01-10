@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExtensionMethods\BoundingBoxExtensions.cs" />
+    <Compile Include="ExtensionMethods\DoubleExtensions.cs" />
     <Compile Include="ExtensionMethods\FeatureExtensions.cs" />
     <Compile Include="ExtensionMethods\GeometryExtensions.cs" />
     <Compile Include="Fetcher\FeatureFetcher.cs" />
@@ -143,6 +144,7 @@
     <Compile Include="UI\ViewChangedEventArgs.cs" />
     <Compile Include="UI\IMapControl.cs" />
     <Compile Include="UI\MapControlBase.cs" />
+    <Compile Include="UI\ViewportHelper.cs" />
     <Compile Include="Utilities\Constants.cs" />
     <Compile Include="Utilities\DeveloperTools.cs" />
     <Compile Include="Utilities\EmbeddedResourceLoader.cs" />

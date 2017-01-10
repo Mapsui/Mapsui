@@ -16,7 +16,6 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA f
 
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Net;
 using System.Threading.Tasks;
@@ -33,21 +32,19 @@ using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Shapes;
 using Mapsui.Fetcher;
 using Mapsui.Geometries;
-using Mapsui.Providers;
 using Mapsui.Rendering;
 using Mapsui.Rendering.Skia;
 using Mapsui.Utilities;
 using SkiaSharp.Views.UWP;
 using Point = Windows.Foundation.Point;
-using ZoomHelper = Mapsui.UI.Uwp.ZoomHelper;
 
 namespace Mapsui.UI.Uwp
 {
-    public class MapControl : Grid
+    public class MapControl : Grid, IMapControl
     {
         private readonly IRenderer _renderer;
         private readonly Rectangle _bboxRect = CreateSelectRectangle();
-        private readonly SkiaSharp.Views.UWP.SKXamlCanvas _renderTarget = CreateRenderTarget();
+        private readonly SKXamlCanvas _renderTarget = CreateRenderTarget();
         private readonly AttributionPanel _attributionPanel = CreateAttributionPanel();
         private readonly DoubleAnimation _zoomAnimation = new DoubleAnimation();
         private readonly Storyboard _zoomStoryBoard = new Storyboard();
@@ -228,7 +225,7 @@ namespace Mapsui.UI.Uwp
             RefreshGraphics();
         }
 
-        private void RefreshGraphics()
+        public void RefreshGraphics()
         {
             InvalidateArrange();
             InvalidateMeasure();
@@ -480,28 +477,4 @@ namespace Mapsui.UI.Uwp
             return new Geometries.Point(scaleFactor, scaleFactor);
         }
     }
-
-    public class ViewChangedEventArgs : EventArgs
-    {
-        public IViewport Viewport { get; set; }
-        public bool UserAction { get; set; }
-    }
-
-    public class MouseInfoEventArgs : EventArgs
-    {
-        public MouseInfoEventArgs()
-        {
-            LayerName = string.Empty;
-        }
-
-        public string LayerName { get; set; }
-        public IFeature Feature { get; set; }
-    }
-
-    public class FeatureInfoEventArgs : EventArgs
-    {
-        public IDictionary<string, IEnumerable<IFeature>> FeatureInfo { get; set; }
-    }
-
- 
 }

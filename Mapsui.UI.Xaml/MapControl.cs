@@ -251,7 +251,7 @@ namespace Mapsui.UI.Xaml
             RefreshGraphics();
         }
 
-        private void RefreshGraphics()
+        public void RefreshGraphics()
         {
             Dispatcher.BeginInvoke(new Action(() =>
             {
@@ -563,38 +563,12 @@ namespace Mapsui.UI.Xaml
 
         private void InitializeViewport()
         {
-            if (ActualWidth.IsNanOrZero()) return;
-
-            if (double.IsNaN(Map.Viewport.Resolution)) // only when not set yet
+            if (ViewportHelper.TryInitializeViewport(_map, ActualWidth, ActualHeight))
             {
-                if (!_map.Envelope.IsInitialized()) return;
-                if (_map.Envelope.GetCentroid() == null) return;
-
-                if (Math.Abs(_map.Envelope.Width) > Constants.Epsilon)
-                    Map.Viewport.Resolution = _map.Envelope.Width/ActualWidth;
-                else
-                    // An envelope width of zero can happen when there is no data in the Maps' layers (yet).
-                    // It should be possible to start with an empty map.
-                    Map.Viewport.Resolution = Constants.DefaultResolution;
+                _viewportInitialized = true;
+                OnViewportInitialize();
+                Map.ViewChanged(true);
             }
-            if (double.IsNaN(Map.Viewport.Center.X) || double.IsNaN(Map.Viewport.Center.Y)) // only when not set yet
-            {
-                if (!_map.Envelope.IsInitialized()) return;
-                if (_map.Envelope.GetCentroid() == null) return;
-
-                Map.Viewport.Center = _map.Envelope.GetCentroid();
-            }
-
-            Map.Viewport.Width = ActualWidth;
-            Map.Viewport.Height = ActualHeight;
-
-            Map.Viewport.RenderResolutionMultiplier = 1.0;
-
-            _viewportInitialized = true;
-
-            OnViewportInitialize();
-
-            Map.ViewChanged(true);
         }
 
         private void OnViewportInitialize()

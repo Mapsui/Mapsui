@@ -1,7 +1,7 @@
  // ReSharper disable once CheckNamespace
 namespace System
 {
-    static class Extensions
+    public static class Extensions
     {
         public static bool IsNanOrZero(this double target)
         {

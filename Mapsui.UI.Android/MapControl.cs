@@ -13,7 +13,7 @@ using Math = System.Math;
 
 namespace Mapsui.UI.Android
 {
-    public class MapControl : SKCanvasView
+    public class MapControl : SKCanvasView, IMapControl
     {
         private const int None = 0;
         private const int Dragging = 1;
@@ -232,10 +232,11 @@ namespace Mapsui.UI.Android
             }
         }
 
-        private void RefreshGraphics()
+        public void RefreshGraphics()
         {
             PostInvalidate();
         }
+
         protected override void OnDraw(SKSurface surface, SKImageInfo info)
         {
             base.OnDraw(surface, info);

@@ -12,7 +12,7 @@ using Math = System.Math;
 namespace Mapsui.UI.iOS
 {
     [Register("MapControl"), DesignTimeVisible(true)]
-    public class MapControl :  SKCanvasView
+    public class MapControl : SKCanvasView, IMapControl
     {
         public delegate void ViewportInitializedEventHandler(object sender);
         public event ViewportInitializedEventHandler ViewportInitializedEvent;
@@ -167,25 +167,13 @@ namespace Mapsui.UI.iOS
 
         public override void TouchesEnded(NSSet touches, UIEvent evt)
         {
-            //base.TouchesEnded (touches, evt);
+            Refresh();
+        }
+
+        public void Refresh()
+        {
             RefreshGraphics();
             _map.ViewChanged(true);
-        }
-
-        /// <summary>
-        /// LoadContent will be called once per game and is the place to load
-        /// all of your content.
-        /// </summary>
-        protected void LoadContent()
-        {
-        }
-
-        /// <summary>
-        /// UnloadContent will be called once per game and is the place to unload
-        /// all content.
-        /// </summary>
-        protected void UnloadContent()
-        {
         }
 
         public Map Map
@@ -278,7 +266,7 @@ namespace Mapsui.UI.iOS
             });
         }
 
-        private void RefreshGraphics()
+        public void RefreshGraphics()
         {
             SetNeedsDisplay();
         }
