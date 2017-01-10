@@ -34,9 +34,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="FpsCounter.cs" />
-    <Compile Include="MapControlUIKit.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MapControl.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="OpenTK\MapControl.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="OpenTK-1.0" />

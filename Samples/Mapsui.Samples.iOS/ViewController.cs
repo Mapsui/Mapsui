@@ -15,7 +15,7 @@ namespace Mapsui.Samples.iOS
         {
             base.ViewDidLoad();
 
-            var mapControl = new MapControlUIKit(View.Bounds)
+            var mapControl = new MapControl(View.Bounds)
             {
                 Map = Common.AllSamples.CreateList().First(s => s.Key == "Various Layers").Value()
             };

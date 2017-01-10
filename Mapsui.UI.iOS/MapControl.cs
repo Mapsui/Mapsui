@@ -1,250 +1,232 @@
+using Mapsui.Fetcher;
+using Mapsui.Rendering.Skia;
+using CoreFoundation;
+using Foundation;
+using UIKit;
 using System;
 using System.ComponentModel;
 using CoreGraphics;
-using Mapsui.Fetcher;
-using Mapsui.Rendering.OpenTK;
-using CoreAnimation;
-using CoreFoundation;
-using Foundation;
-using ObjCRuntime;
-using OpenGLES;
-using UIKit;
-using OpenTK;
-using OpenTK.Graphics.ES11;
-using OpenTK.Platform.iPhoneOS;
+using SkiaSharp.Views.iOS;
+using Math = System.Math;
 
 namespace Mapsui.UI.iOS
 {
-	[Foundation.Register("MapControl")]
-	public class MapControl : iPhoneOSGameView
-	{
-		public event EventHandler<EventArgs> ViewportInitialized;
+    [Register("MapControl"), DesignTimeVisible(true)]
+    public class MapControl :  SKCanvasView
+    {
+        public delegate void ViewportInitializedEventHandler(object sender);
+        public event ViewportInitializedEventHandler ViewportInitializedEvent;
 
-		private CGPoint _previousMid;
-		private CGPoint _currentMid;
-		private float _oldDist = 1f;
-		private MapRenderer _renderer;
-		private Map _map;
-		private bool _refreshGraphics;
-		private bool _viewportInitialized;
-		private float Width { get { return (float)Frame.Width; } }
-        private float Height { get { return (float)Frame.Height; } }
+        private CGPoint _previousMid;
+        private CGPoint _currentMid;
+        private float _oldDist = 1f;
+        private MapRenderer _renderer;
+        private Map _map;
         
-		[Foundation.Export("layerClass")]
-		static Class LayerClass()
-		{
-			return iPhoneOSGameView.GetLayerClass();
-		}
+        private bool _viewportInitialized;
+        public bool ViewportInitialized
+        {
+            get { return _viewportInitialized; }
+            set
+            {
+                _viewportInitialized = value;
+                if (_viewportInitialized) ViewportInitializedEvent?.Invoke(this);
+            }
+        }
 
-		[Foundation.Export("initWithCoder:")]
-		public MapControl (NSCoder coder) : base(coder)
-		{
-			Initialize();
-		}
+        private float Width => (float)Frame.Width;
+        private float Height => (float)Frame.Height;
 
-		public MapControl (CGRect frame) : base(frame)
-		{
-			Initialize();
-		}
+        public MapControl(CGRect frame)
+            : base(frame)
+        {
+            Initialize();
+        }
 
-		[Foundation.Export("drawFrame")]
-		public void DrawFrame()
-		{
-			OnRenderFrame(new FrameEventArgs());
-		}
+        public void Initialize()
+        {
+            Map = new Map();
+            BackgroundColor = UIColor.White;
+            _renderer = new MapRenderer();
 
-		protected override void ConfigureLayer(CAEAGLLayer eaglLayer)
-		{
-			eaglLayer.Opaque = true;
-		}
+            InitializeViewport();
+            
+            ClipsToBounds = true;
 
-		private void ViewportOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
-		{
-			//System.Diagnostics.Debug.WriteLine ("ViewportOnPropertyChanged");
-			RefreshGraphics();
-		}
+            var pinchGesture = new UIPinchGestureRecognizer(PinchGesture) { Enabled = true };
+            AddGestureRecognizer(pinchGesture);
 
-		public void Initialize() 
-		{
-			Map = new Map();
+            PaintSurface += OnPaintSurface;
+        }
 
-			_renderer = new MapRenderer();
-			BackgroundColor = UIColor.White;
-		
-			InitializeViewport();
+        private void OnPaintSurface(object sender, SKPaintSurfaceEventArgs skPaintSurfaceEventArgs)
+        {
+            if (!ViewportInitialized) InitializeViewport();
+            if (!ViewportInitialized) return;
 
-			ClipsToBounds = true;
+            if (Width != _map.Viewport.Width) _map.Viewport.Width = Width;
+            if (Height != _map.Viewport.Height) _map.Viewport.Height = Height;
 
-			var pinchGesture = new UIPinchGestureRecognizer(PinchGesture) { Enabled = true };
-			AddGestureRecognizer(pinchGesture);
+            var scaleFactor = 2; // todo: figure out how to get this value programatically
+            skPaintSurfaceEventArgs.Surface.Canvas.Scale(scaleFactor, scaleFactor);
 
-			UIDevice.Notifications.ObserveOrientationDidChange((n, a) => {
-				if (this.Window != null) {
+            _renderer.Render(skPaintSurfaceEventArgs.Surface.Canvas, _map.Viewport, _map.Layers, _map.BackColor);
+        }
 
-					// after rotation all textures show up as white. I don't know why. 
-					// By deleting all textures they are rebound and they show up properly.
-					_renderer.DeleteAllBoundTextures();	
+        private void InitializeViewport()
+        {
+            if (Math.Abs(Width - 0f) < Utilities.Constants.Epsilon) return;
+            if (_map?.Envelope == null) return;
+            if (Math.Abs(_map.Envelope.Width - 0d) < Utilities.Constants.Epsilon) return;
+            if (Math.Abs(_map.Envelope.Height - 0d) < Utilities.Constants.Epsilon) return;
+            if (_map.Envelope.GetCentroid() == null) return;
 
-					Frame = new CGRect (0, 0, Frame.Width, Frame.Height);
-					Map.Viewport.Width = Frame.Width;
-					Map.Viewport.Height = Frame.Height;
-					Map.NavigateTo(Map.Viewport.Extent);
-				}});
-							
-		}
+            if (double.IsNaN(_map.Viewport.Resolution) || double.IsInfinity(_map.Viewport.Resolution))
+                _map.Viewport.Resolution = _map.Envelope.Width / Width;
+            if ((double.IsNaN(_map.Viewport.Center.X)) || double.IsNaN(_map.Viewport.Center.Y) ||
+                double.IsInfinity(_map.Viewport.Center.X) || double.IsInfinity(_map.Viewport.Center.Y))
+                _map.Viewport.Center = _map.Envelope.GetCentroid();
 
-		public void StartRendering()
-		{
-			LayerColorFormat = EAGLColorFormat.RGBA8;
-			CreateFrameBuffer ();
-			GL.ClearColor (1, 1, 1, 1);
-			CADisplayLink displayLink = UIScreen.MainScreen.CreateDisplayLink(this, new Selector("drawFrame"));
-			displayLink.FrameInterval = 1;
-			displayLink.AddToRunLoop(NSRunLoop.Current, NSRunLoop.NSDefaultRunLoopMode);
+            _map.Viewport.Width = Width;
+            _map.Viewport.Height = Height;
+            _map.Viewport.RenderResolutionMultiplier = 1;
 
-			Map.ViewChanged (true);
-		}
-
-		private void InitializeViewport()
-		{
-			if (Math.Abs(Width - 0f) < Utilities.Constants.Epsilon) return;
-			if (_map == null) return;
-			if (_map.Envelope == null) return;
-			if (Math.Abs(_map.Envelope.Width - 0d) < Utilities.Constants.Epsilon) return;
-			if (Math.Abs(_map.Envelope.Height - 0d) < Utilities.Constants.Epsilon) return;
-			if (_map.Envelope.GetCentroid() == null) return;
-
-			if (double.IsNaN(_map.Viewport.Resolution) || double.IsInfinity(_map.Viewport.Resolution))
-				_map.Viewport.Resolution = _map.Envelope.Width / Width;
-			if ((double.IsNaN(_map.Viewport.Center.X)) || double.IsNaN(_map.Viewport.Center.Y) ||
-				double.IsInfinity(_map.Viewport.Center.X) || double.IsInfinity(_map.Viewport.Center.Y))
-				_map.Viewport.Center = _map.Envelope.GetCentroid();
-
-			_map.Viewport.Width = Width;
-			_map.Viewport.Height = Height;
-            if (Width >= 1080 && Height >= 1080) _map.Viewport.RenderResolutionMultiplier = 2;
-
-			_viewportInitialized = true;
-		    OnViewportInitialized();
             _map.ViewChanged(true);
-		}
+            _viewportInitialized = true;
+        }
 
-		private void PinchGesture(UIPinchGestureRecognizer recognizer)
-		{
-		    if (_map.Lock) return;
-
-			if ((int)recognizer.NumberOfTouches < 2)
-				return;
-
-			if (recognizer.State == UIGestureRecognizerState.Began)
-			{
-				_oldDist = 1;
-				_currentMid = (CGPoint)recognizer.LocationInView((UIView)this);
-			}
-
-			float scale = 1 - (_oldDist - (float)recognizer.Scale);
-
-			if (scale > 0.5 && scale < 1.5)
-			{
-				if (_oldDist != (float)recognizer.Scale)
-				{
-					_oldDist = (float)recognizer.Scale;
-					_currentMid = (CGPoint)recognizer.LocationInView((UIView)this);
-					_previousMid = new CGPoint(_currentMid.X, _currentMid.Y);
-
-					_map.Viewport.Center = _map.Viewport.ScreenToWorld(
-						_currentMid.X,
-						_currentMid.Y);
-					_map.Viewport.Resolution = _map.Viewport.Resolution / scale;
-					_map.Viewport.Center = _map.Viewport.ScreenToWorld(
-						(_map.Viewport.Width - _currentMid.X),
-						(_map.Viewport.Height - _currentMid.Y));
-				}
-
-				_map.Viewport.Transform(
-					_currentMid.X,
-					_currentMid.Y,
-					_previousMid.X,
-					_previousMid.Y);
-
-				RefreshGraphics();
-			}
-
-			var majorChange = (recognizer.State == UIGestureRecognizerState.Ended);
-			_map.ViewChanged(majorChange);
-		}
-
-		public override void TouchesMoved(NSSet touches, UIEvent evt)
-		{
+        private void PinchGesture(UIPinchGestureRecognizer recognizer)
+        {
 			if (_map.Lock) return;
 
-			if ((uint)touches.Count == 1)
-			{
-				var touch = touches.AnyObject as UITouch;
-				if (touch != null)
-				{
-					var currentPos = (CGPoint)touch.LocationInView((UIView)this);
-					var previousPos = (CGPoint)touch.PreviousLocationInView((UIView)this);
+            if ((int)recognizer.NumberOfTouches < 2)
+                return;
 
-					var cRect = new CGRect(new CGPoint((int)currentPos.X, (int)currentPos.Y), new CGSize(5, 5));
-					var pRect = new CGRect(new CGPoint((int)previousPos.X, (int)previousPos.Y), new CGSize(5, 5));
+            if (recognizer.State == UIGestureRecognizerState.Began)
+            {
+                _oldDist = 1;
+                _currentMid = recognizer.LocationInView(this);
+            }
 
-					if (!cRect.IntersectsWith(pRect))
-					{
-						_map.Viewport.Transform(currentPos.X, currentPos.Y, previousPos.X, previousPos.Y);
+            float scale = 1 - (_oldDist - (float)recognizer.Scale);
 
-						RefreshGraphics();
-					}
-				}
-			}
-		}
+            if (scale > 0.5 && scale < 1.5)
+            {
+                if (_oldDist != (float)recognizer.Scale)
+                {
+                    _oldDist = (float)recognizer.Scale;
+                    _currentMid = recognizer.LocationInView(this);
+                    _previousMid = new CGPoint(_currentMid.X, _currentMid.Y);
 
-		public override void TouchesEnded(NSSet touches, UIEvent evt)
-		{
-			//base.TouchesEnded (touches, evt);
-			RefreshGraphics();
-			_map.ViewChanged(true);
-		}
+                    _map.Viewport.Center = _map.Viewport.ScreenToWorld(
+                        _currentMid.X,
+                        _currentMid.Y);
+                    _map.Viewport.Resolution = _map.Viewport.Resolution / scale;
+                    _map.Viewport.Center = _map.Viewport.ScreenToWorld(
+                        (_map.Viewport.Width - _currentMid.X),
+                        (_map.Viewport.Height - _currentMid.Y));
+                }
 
-		public Map Map
-		{
-			get
-			{
-				return _map;
-			}
-			set
-			{
-				if (_map != null)
-				{
-					var temp = _map;
-					_map = null;
-				    temp.DataChanged -= MapDataChanged;
-					temp.PropertyChanged -= MapPropertyChanged;
-                    temp.RefreshGraphics -= MapRefreshGraphics;
-					temp.Dispose();
-				}
-
-				_map = value;
-				
-				if (_map != null)
-				{
-					_map.DataChanged += MapDataChanged;
-					_map.PropertyChanged += MapPropertyChanged;
-					_map.RefreshGraphics += MapRefreshGraphics;
-					_map.ViewChanged(true);
-				}
+                _map.Viewport.Transform(
+                    _currentMid.X,
+                    _currentMid.Y,
+                    _previousMid.X,
+                    _previousMid.Y);
 
                 RefreshGraphics();
-			}
-		}
+            }
 
-        void MapRefreshGraphics(object sender, EventArgs e)
+            var majorChange = recognizer.State == UIGestureRecognizerState.Ended;
+            _map.ViewChanged(majorChange);
+        }
+
+        public override void TouchesMoved(NSSet touches, UIEvent evt)
+        {
+			if (_map.Lock) return;
+
+            if ((uint)touches.Count == 1)
+            {
+                var touch = touches.AnyObject as UITouch;
+                if (touch != null)
+                {
+                    var currentPos = touch.LocationInView(this);
+                    var previousPos = touch.PreviousLocationInView(this);
+
+                    var cRect = new CGRect(new CGPoint((int)currentPos.X, (int)currentPos.Y), new CGSize(5, 5));
+                    var pRect = new CGRect(new CGPoint((int)previousPos.X, (int)previousPos.Y), new CGSize(5, 5));
+
+                    if (!cRect.IntersectsWith(pRect))
+                    {
+                        _map.Viewport.Transform(currentPos.X, currentPos.Y, previousPos.X, previousPos.Y);
+
+                        RefreshGraphics();
+                    }
+                }
+            }
+        }
+
+        public override void TouchesEnded(NSSet touches, UIEvent evt)
+        {
+            //base.TouchesEnded (touches, evt);
+            RefreshGraphics();
+            _map.ViewChanged(true);
+        }
+
+        /// <summary>
+        /// LoadContent will be called once per game and is the place to load
+        /// all of your content.
+        /// </summary>
+        protected void LoadContent()
+        {
+        }
+
+        /// <summary>
+        /// UnloadContent will be called once per game and is the place to unload
+        /// all content.
+        /// </summary>
+        protected void UnloadContent()
+        {
+        }
+
+        public Map Map
+        {
+            get
+            {
+                return _map;
+            }
+            set
+            {
+                if (_map != null)
+                {
+                    var temp = _map;
+                    _map = null;
+                    temp.DataChanged -= MapDataChanged;
+                    temp.PropertyChanged -= MapPropertyChanged;
+                    temp.RefreshGraphics -= MapRefreshGraphics;
+                    temp.Dispose();
+                }
+
+                _map = value;
+                
+                if (_map != null)
+                {
+                    _map.DataChanged += MapDataChanged;
+                    _map.PropertyChanged += MapPropertyChanged;
+                    _map.RefreshGraphics += MapRefreshGraphics;
+                    _map.ViewChanged(true);
+                }
+
+                RefreshGraphics();
+            }
+        }
+
+        private void MapRefreshGraphics(object sender, EventArgs eventArgs)
         {
             RefreshGraphics();
         }
 
-		private void MapPropertyChanged(object sender, PropertyChangedEventArgs e)
-		{
+        private void MapPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
 			if (e.PropertyName == "Enabled")
 			{
 				RefreshGraphics();
@@ -263,86 +245,42 @@ namespace Mapsui.UI.iOS
 				RefreshGraphics();
 				_map.ViewChanged(true);
 			}
-		}
+        }
 
-		public void MapDataChanged(object sender, DataChangedEventArgs e)
-		{
-			string errorMessage;
+        public void MapDataChanged(object sender, DataChangedEventArgs e)
+        {
+            string errorMessage;
 
-			DispatchQueue.MainQueue.DispatchAsync((Action)delegate
-				{
-					if (e == null)
-					{
-						errorMessage = "MapDataChanged Unexpected error: DataChangedEventArgs can not be null";
-						Console.WriteLine(errorMessage);
-					}
-					else if (e.Cancelled)
-					{
-						errorMessage = "MapDataChanged: Cancelled";
-						System.Diagnostics.Debug.WriteLine(errorMessage);
-					}
-					else if (e.Error is System.Net.WebException)
-					{
-						errorMessage = "MapDataChanged WebException: " + e.Error.Message;
-						Console.WriteLine(errorMessage);
-					}
-					else if (e.Error != null)
-					{
-						errorMessage = "MapDataChanged errorMessage: " + e.Error.GetType() + ": " + e.Error.Message;
-						Console.WriteLine(errorMessage);
-					}
+            DispatchQueue.MainQueue.DispatchAsync(delegate
+            {
+                if (e == null)
+                {
+                    errorMessage = "MapDataChanged Unexpected error: DataChangedEventArgs can not be null";
+                    Console.WriteLine(errorMessage);
+                }
+                else if (e.Cancelled)
+                {
+                    errorMessage = "MapDataChanged: Cancelled";
+                    System.Diagnostics.Debug.WriteLine(errorMessage);
+                }
+                else if (e.Error is System.Net.WebException)
+                {
+                    errorMessage = "MapDataChanged WebException: " + e.Error.Message;
+                    Console.WriteLine(errorMessage);
+                }
+                else if (e.Error != null)
+                {
+                    errorMessage = "MapDataChanged errorMessage: " + e.Error.GetType() + ": " + e.Error.Message;
+                    Console.WriteLine(errorMessage);
+                }
 
-					RefreshGraphics();
-				});
-		}
+                RefreshGraphics();
+            });
+        }
 
-		private void RefreshGraphics()
-		{
-			_refreshGraphics = true;
-			SetNeedsDisplay();
-		}
-
-		protected override void CreateFrameBuffer()
-		{
-			//Set the LayerColorFormat property to an EAGLColorFormat value before calling Run().
-			LayerColorFormat = EAGLColorFormat.RGBA8;
-			ContextRenderingApi = EAGLRenderingAPI.OpenGLES1;
-				base.CreateFrameBuffer();
-		}
-
-		protected override void OnRenderFrame(FrameEventArgs e)
-		{
-			base.OnRenderFrame(e);
-
-			if (!_refreshGraphics) return;
-			_refreshGraphics = false;
-
-			if (!_viewportInitialized)
-				InitializeViewport();
-			if (!_viewportInitialized)
-				return;
-
-			Set2DViewport();
-
-			GL.Clear((int)ClearBufferMask.ColorBufferBit);
-
-			_renderer.Render(this, _map.Viewport, _map.Layers, _map.BackColor);
-
-			SwapBuffers();
-		}
-
-		private void Set2DViewport()
-		{
-			GL.MatrixMode(All.Projection);
-			GL.LoadIdentity();
-			GL.Ortho(0, Width, Height, 0, 0, 1);
-			GL.MatrixMode(All.Modelview);
-		}
-
-	    private void OnViewportInitialized()
-	    {
-	        var handler = ViewportInitialized;
-	        if (handler != null) handler(this, new EventArgs());
-	    }
-	}
+        private void RefreshGraphics()
+        {
+            SetNeedsDisplay();
+        }
+    }
 }
