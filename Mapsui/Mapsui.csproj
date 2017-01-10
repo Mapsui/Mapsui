@@ -145,7 +145,6 @@
     <Compile Include="UI\MouseInfoEventArgs.cs" />
     <Compile Include="UI\ViewChangedEventArgs.cs" />
     <Compile Include="UI\IMapControl.cs" />
-    <Compile Include="UI\MapControlBase.cs" />
     <Compile Include="UI\ViewportHelper.cs" />
     <Compile Include="Utilities\Constants.cs" />
     <Compile Include="Utilities\DeveloperTools.cs" />
