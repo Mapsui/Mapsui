@@ -29,8 +29,8 @@ namespace Mapsui.UI.Xaml
         Wpf,
         Skia
     }
-
-    public class MapControl : Grid
+    
+    public class MapControl : Grid, IMapControl
     {
         // ReSharper disable once UnusedMember.Local // This registration triggers the call to OnResolutionChanged
         private static readonly DependencyProperty ResolutionProperty =
@@ -112,9 +112,6 @@ namespace Mapsui.UI.Xaml
         public IList<ILayer> MouseInfoUpLayers { get; }
 
         public bool ZoomToBoxMode { get; set; }
-
-        [Obsolete("Map.Viewport instead", true)]
-        public IViewport Viewport => Map.Viewport;
 
         public Map Map
         {
@@ -241,7 +238,7 @@ namespace Mapsui.UI.Xaml
             }
         }
 
-        public void OnViewChanged(bool userAction = false)
+        private void OnViewChanged(bool userAction = false)
         {
             if (_map == null) return;
 
@@ -399,7 +396,7 @@ namespace Mapsui.UI.Xaml
             ReleaseMouseCapture();
         }
 
-        public void MapDataChanged(object sender, DataChangedEventArgs e)
+        public void MapDataChanged(object sender, DataChangedEventArgs e) // todo: make private?
         {
             if (!Dispatcher.CheckAccess())
             {
@@ -780,23 +777,5 @@ namespace Mapsui.UI.Xaml
                 HorizontalAlignment = HorizontalAlignment.Right
             };
         }
-    }
-
-    public class ViewChangedEventArgs : EventArgs
-    {
-        public IViewport Viewport { get; set; }
-        public bool UserAction { get; set; }
-    }
-
-    public class MouseInfoEventArgs : EventArgs
-    {
-        public string LayerName { get; set; } = "";
-        public IFeature Feature { get; set; }
-        public bool Leaving { get; set; }
-    }
-
-    public class FeatureInfoEventArgs : EventArgs
-    {
-        public IDictionary<string, IEnumerable<IFeature>> FeatureInfo { get; set; }
     }
 }

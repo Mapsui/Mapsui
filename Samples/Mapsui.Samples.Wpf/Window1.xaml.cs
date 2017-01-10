@@ -9,6 +9,7 @@ using System.Windows.Input;
 using Mapsui.Logging;
 using Mapsui.Samples.Common.Desktop;
 using Mapsui.Tests.Common;
+using Mapsui.UI;
 using Mapsui.UI.Xaml;
 
 namespace Mapsui.Samples.Wpf
