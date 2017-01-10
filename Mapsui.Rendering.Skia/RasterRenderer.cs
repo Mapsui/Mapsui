@@ -36,7 +36,7 @@ namespace Mapsui.Rendering.Skia
             }
             catch (Exception ex)
             {
-                Logger.LogDelegate(LogLevel.Error, ex.Message, ex);
+                Logger.Log(LogLevel.Error, ex.Message, ex);
             }
         }
 
