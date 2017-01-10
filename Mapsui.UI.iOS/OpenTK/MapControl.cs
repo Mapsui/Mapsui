@@ -329,7 +329,7 @@ namespace Mapsui.UI.iOS.OpenTK
 	    private void OnViewportInitialized()
 	    {
 	        var handler = ViewportInitialized;
-	        if (handler != null) handler(this, new EventArgs());
+	        handler?.Invoke(this, new EventArgs());
 	    }
 	}
 }
