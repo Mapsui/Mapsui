@@ -6,7 +6,7 @@ using Mapsui.Styles.Thematics;
 
 namespace Mapsui.Providers
 {
-    internal class StackedLabelProvider : IProvider
+    public class StackedLabelProvider : IProvider
     {
         private const int SymbolSize = 32; // todo: determine margin by symbol size
         private const int BoxMargin = SymbolSize/2;
