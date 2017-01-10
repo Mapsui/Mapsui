@@ -2,7 +2,7 @@
 using Android.Content.PM;
 using Android.OS;
 using Mapsui.Samples.Common.Maps;
-using Mapsui.UI.Android.Skia;
+using Mapsui.UI.Android;
 
 namespace Mapsui.Samples.Android
 {

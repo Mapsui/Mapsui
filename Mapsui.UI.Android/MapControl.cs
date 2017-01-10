@@ -1,3 +1,5 @@
+using System;
+using System.ComponentModel;
 using Android.App;
 using Android.Content;
 using Android.Graphics;
@@ -5,17 +7,14 @@ using Android.Util;
 using Android.Views;
 using Java.Lang;
 using Mapsui.Fetcher;
-using System;
-using System.ComponentModel;
-using Math = System.Math;
 using SkiaSharp;
 using SkiaSharp.Views.Android;
+using Math = System.Math;
 
-namespace Mapsui.UI.Android.Skia
+namespace Mapsui.UI.Android
 {
     public class MapControl : SKCanvasView
     {
-        
         private const int None = 0;
         private const int Dragging = 1;
         private const int Zoom = 2;
@@ -25,7 +24,7 @@ namespace Mapsui.UI.Android.Skia
         private readonly PointF _currentMid = new PointF();
         private float _oldDist = 1f;
         private bool _viewportInitialized;
-        private Mapsui.Rendering.Skia.MapRenderer _renderer;
+        private Rendering.Skia.MapRenderer _renderer;
         private Map _map;
                 
         public MapControl(Context context, IAttributeSet attrs):
@@ -51,8 +50,7 @@ namespace Mapsui.UI.Android.Skia
         private void InitializeViewport()
         {
             if (Math.Abs(Width - 0f) < Utilities.Constants.Epsilon) return;
-            if (_map == null) return;
-            if (_map.Envelope == null) return;
+            if (_map?.Envelope == null) return;
             if (Math.Abs(_map.Envelope.Width - 0d) < Utilities.Constants.Epsilon) return;
             if (Math.Abs(_map.Envelope.Height - 0d) < Utilities.Constants.Epsilon) return;
             if (_map.Envelope.GetCentroid() == null) return;
@@ -248,7 +246,6 @@ namespace Mapsui.UI.Android.Skia
                 return;
 
             _renderer.Render(surface.Canvas, _map.Viewport, _map.Layers, _map.BackColor);
-            
         }
     }
 }
