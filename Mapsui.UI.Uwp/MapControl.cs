@@ -476,8 +476,6 @@ namespace Mapsui.UI.Xaml
 
         private Geometries.Point GetSkiaScale()
         {
-            this.bo
-            var bounds = ApplicationView.GetForCurrentView().VisibleBounds;
             var scaleFactor = DisplayInformation.GetForCurrentView().RawPixelsPerViewPixel;
             return new Geometries.Point(scaleFactor, scaleFactor);
         }
