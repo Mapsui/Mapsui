@@ -14,8 +14,9 @@ using OpenTK.Graphics.ES11;
 using OpenTK.Platform.Android;
 using Math = System.Math;
 
-namespace Mapsui.UI.Android
+namespace Mapsui.UI.Android.OpenTK
 {
+    [Obsolete("Use Mapsui.UI.Android.MapControl instead")]
     public class MapControl : AndroidGameView
     {
         private const int None = 0;
