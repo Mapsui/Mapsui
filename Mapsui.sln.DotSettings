@@ -3,6 +3,7 @@
 	<s:Boolean x:Key="/Default/CodeEditing/ContextActionTable/DisabledContextActions/=JetBrains_002EReSharper_002EIntentions_002ECSharp_002EContextActions_002EInlineAsAnonymousTypeAction/@EntryIndexRemoved">True</s:Boolean>
 	<s:Boolean x:Key="/Default/CodeEditing/ContextActionTable/DisabledContextActions/=JetBrains_002EReSharper_002EIntentions_002ECSharp_002EContextActions_002ENonI18n_002ECSharpSurroundWithQuotesAction/@EntryIndexedValue">False</s:Boolean>
 	<s:Boolean x:Key="/Default/CodeEditing/ContextActionTable/DisabledContextActions/=JetBrains_002EReSharper_002EIntentions_002ECSharp_002EContextActions_002ENonI18n_002ECSharpSurroundWithQuotesAction/@EntryIndexRemoved">True</s:Boolean>
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=2890CF60_002D5A40_002D4364_002D9E9C_002D0A055D0EC1D5/@EntryIndexedValue">ExplicitlyExcluded</s:String>
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=2D1A291B_002D0B35_002D423B_002DB428_002D49474D52A73B/@EntryIndexedValue">ExplicitlyExcluded</s:String>
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=7C1A68BE_002D0DB2_002D479A_002D84E2_002DD80E79EDF87F/@EntryIndexedValue">ExplicitlyExcluded</s:String>
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=8BD54487_002D8DB9_002D431A_002D9596_002D2DFD744887A1_002Fd_003AWfs/@EntryIndexedValue">ExplicitlyExcluded</s:String>

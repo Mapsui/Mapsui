@@ -31,10 +31,8 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Shapes;
 using Mapsui.Fetcher;
-using Mapsui.Geometries;
 using Mapsui.Rendering;
 using Mapsui.Rendering.Skia;
-using Mapsui.Utilities;
 using SkiaSharp.Views.UWP;
 using Point = Windows.Foundation.Point;
 

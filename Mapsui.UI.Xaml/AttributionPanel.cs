@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
-using System.Windows.Navigation;
 using Mapsui.Layers;
 
 namespace Mapsui.UI.Xaml
