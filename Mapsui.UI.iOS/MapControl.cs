@@ -7,7 +7,6 @@ using System;
 using System.ComponentModel;
 using CoreGraphics;
 using SkiaSharp.Views.iOS;
-using Math = System.Math;
 
 namespace Mapsui.UI.iOS
 {
@@ -24,7 +23,8 @@ namespace Mapsui.UI.iOS
         private Map _map;
         
         private bool _viewportInitialized;
-        public bool ViewportInitialized
+
+        private bool ViewportInitialized
         {
             get { return _viewportInitialized; }
             set
@@ -152,7 +152,7 @@ namespace Mapsui.UI.iOS
             }
         }
 
-        public override void TouchesEnded(NSSet touches, UIEvent evt)
+        public override void TouchesEnded(NSSet touches, UIEvent e)
         {
             Refresh();
         }
@@ -210,19 +210,19 @@ namespace Mapsui.UI.iOS
 			{
 				RefreshGraphics();
 			}
-			else if (e.PropertyName == "Envelope")
+			else if (e.PropertyName == nameof(_map.Envelope))
 			{
 				InitializeViewport();
 				_map.ViewChanged(true);
 			}
-			else if (e.PropertyName == "Rotation") // not supported yet
+			else if (e.PropertyName == nameof(_map.Viewport.Rotation)) 
 			{
 				RefreshGraphics();
 				_map.ViewChanged(true);
 			}
         }
 
-        public void MapDataChanged(object sender, DataChangedEventArgs e)
+        private void MapDataChanged(object sender, DataChangedEventArgs e)
         {
             string errorMessage;
 
