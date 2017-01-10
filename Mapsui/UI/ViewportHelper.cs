@@ -33,7 +33,6 @@ namespace Mapsui.UI
 
             map.Viewport.Width = screenWidth;
             map.Viewport.Height = screenHeight;
-            map.Viewport.RenderResolutionMultiplier = 1.0;
 
             return true;
         }

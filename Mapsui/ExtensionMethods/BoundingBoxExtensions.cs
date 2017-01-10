@@ -1,5 +1,6 @@
-// ReSharper disable CheckNamespace
+using BruTile;
 
+// ReSharper disable CheckNamespace
 namespace Mapsui.Geometries
 {
     public static class BoundingBoxExtensions
@@ -16,6 +17,11 @@ namespace Mapsui.Geometries
             if (double.IsNaN(box.Height)) return false;
 
             return true;
+        }
+
+        public static Extent ToExtent(this BoundingBox boundingBox)
+        {
+            return new Extent(boundingBox.MinX, boundingBox.MinY, boundingBox.MaxX, boundingBox.MaxY);
         }
     }
 }
