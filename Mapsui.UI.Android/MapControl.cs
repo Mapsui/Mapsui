@@ -56,7 +56,7 @@ namespace Mapsui.UI.Android
             }
         }
 
-        void MapView_Touch(object sender, TouchEventArgs args)
+        public void MapView_Touch(object sender, TouchEventArgs args)
         {
             var x = (int)args.Event.RawX;
             var y = (int)args.Event.RawY;
@@ -146,22 +146,6 @@ namespace Mapsui.UI.Android
             var x = me.GetX(0) + me.GetX(1);
             var y = me.GetY(0) + me.GetY(1);
             point.Set(x / 2, y / 2);
-        }
-
-        /// <summary>
-        /// LoadContent will be called once per game and is the place to load
-        /// all of your content.
-        /// </summary>
-        protected void LoadContent()
-        {
-        }
-
-        /// <summary>
-        /// UnloadContent will be called once per game and is the place to unload
-        /// all content.
-        /// </summary>
-        protected void UnloadContent()
-        {
         }
 
         public Map Map
