@@ -42,7 +42,7 @@ namespace Mapsui.UI.Android
         public void Initialize()
         {
             Map = new Map();
-                        _renderer = new Rendering.Skia.MapRenderer();
+            _renderer = new Rendering.Skia.MapRenderer();
             InitializeViewport();
             Touch += MapView_Touch;
         }
