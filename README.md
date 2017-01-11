@@ -25,9 +25,9 @@ https://www.nuget.org/packages/Mapsui
 ## Platforms Supported
 
 There are four platforms supported:
-- WPF for Windows Desktop - WPF on .NET 4.5.2
-- UWP for Windows Store - min version: Windows 10 build 10586
-- Xamarin Android - for API Level 19 (v4.4 - Kit Kat)
+- WPF for Windows Desktop - .NET 4.5.2
+- UWP for Windows Store - Windows 10 build 10586
+- Xamarin Android - API Level 19 (v4.4 - Kit Kat)
 - Xamarin iOS
 
 ## Components
