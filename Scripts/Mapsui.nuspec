@@ -16,8 +16,8 @@
     <language>en-US</language>
     <dependencies>
       <!-- [ or ] is including, ( or ) is excluding -->
-      <dependency id="BruTile" version="[0.18,0.19)"/>
-      <dependency id="Newtonsoft.json" version="[8.0,8.1)"/>
+      <dependency id="BruTile" version="[0.19,0.20)"/>
+      <dependency id="Newtonsoft.json" version="[9.0,10.0)"/>
       <dependency id="SkiaSharp" version="[1.55,1.56)"/>
       <dependency id="SkiaSharp.Views" version="[1.55,1.56)"/>
     </dependencies>
