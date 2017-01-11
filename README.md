@@ -25,9 +25,9 @@ https://www.nuget.org/packages/Mapsui
 ## Platforms Supported
 
 There are four platforms supported:
-- Windows Desktop - WPF on .NET 4.5
-- Windows Store - Profile32 PCLs (Windows 8.1 and Windows Phone 8.1)
-- Xamarin Android - for API Level 15 (v4.0.3 - Ice Cream Sandwich)
+- WPF for Windows Desktop - .NET 4.5.2
+- UWP for Windows Store - Windows 10 build 10586
+- Xamarin Android - API Level 19 (v4.4 - Kit Kat)
 - Xamarin iOS
 
 ## Components
@@ -36,13 +36,14 @@ If you install the NuGet package into your app these assemblies are added:
 
 - Mapsui.UI - Platorm specific UI. Contains the MapControl
 - Mapsui.Rendering - A platform specific renderer
-- Mapsui and Mapsui.Geometries - The core projects, is a PCL with Profile111 which targets (.Net Framework 4.5, ASP.NET Core 5.0, Windows 8, Windows Phone 8.1, Xamarin.Android, Xamarin.iOS, Xamarin.iOS (Classic))
-- BruTile - Used for the tile layers.
+- Mapsui - A PCL with Profile111 
+- Mapsui.Geometries - A PCL with Profile111
 
+Profile111 targets: .Net Framework 4.5, ASP.NET Core 5.0, Windows 8, Windows Phone 8.1, Xamarin.Android, Xamarin.iOS, Xamarin.iOS (Classic)
 
 ## Wiki
 Take a look at the [wiki](https://github.com/pauldendulk/Mapsui/wiki). We are starting to add some information there. If you have a question please submit an [issue](https://github.com/pauldendulk/Mapsui/issues) or a question on stackoverflow the the 'mapsui' tag (I will get a notification).
-
+  
 ## Warnings
 
 - There is limited documentation.
