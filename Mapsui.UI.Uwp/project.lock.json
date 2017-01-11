@@ -1,5 +1,4 @@
 {
-  "locked": false,
   "version": 1,
   "targets": {
     "UAP,Version=v10.0": {
@@ -304,7 +303,7 @@
           "lib/uap10.0/SkiaSharp.dll": {}
         }
       },
-      "skiasharp.views/1.55.1": {
+      "SkiaSharp.Views/1.55.1": {
         "dependencies": {
           "SkiaSharp": "1.55.1"
         },
@@ -2581,7 +2580,7 @@
           "lib/uap10.0/SkiaSharp.dll": {}
         }
       },
-      "skiasharp.views/1.55.1": {
+      "SkiaSharp.Views/1.55.1": {
         "dependencies": {
           "SkiaSharp": "1.55.1"
         },
@@ -4749,7 +4748,7 @@
           "lib/uap10.0/SkiaSharp.dll": {}
         }
       },
-      "skiasharp.views/1.55.1": {
+      "SkiaSharp.Views/1.55.1": {
         "dependencies": {
           "SkiaSharp": "1.55.1"
         },
@@ -6887,7 +6886,7 @@
           "lib/uap10.0/SkiaSharp.dll": {}
         }
       },
-      "skiasharp.views/1.55.1": {
+      "SkiaSharp.Views/1.55.1": {
         "dependencies": {
           "SkiaSharp": "1.55.1"
         },
@@ -9064,7 +9063,7 @@
           "lib/uap10.0/SkiaSharp.dll": {}
         }
       },
-      "skiasharp.views/1.55.1": {
+      "SkiaSharp.Views/1.55.1": {
         "dependencies": {
           "SkiaSharp": "1.55.1"
         },
@@ -11202,7 +11201,7 @@
           "lib/uap10.0/SkiaSharp.dll": {}
         }
       },
-      "skiasharp.views/1.55.1": {
+      "SkiaSharp.Views/1.55.1": {
         "dependencies": {
           "SkiaSharp": "1.55.1"
         },
@@ -13379,7 +13378,7 @@
           "lib/uap10.0/SkiaSharp.dll": {}
         }
       },
-      "skiasharp.views/1.55.1": {
+      "SkiaSharp.Views/1.55.1": {
         "dependencies": {
           "SkiaSharp": "1.55.1"
         },
@@ -16279,7 +16278,7 @@
         "lib/uap10.0/SkiaSharp.xml"
       ]
     },
-    "skiasharp.views/1.55.1": {
+    "SkiaSharp.Views/1.55.1": {
       "sha512": "xbo8bX4sFUaqxezodlnbBIpYD2B7kiEj3CYvjY3TOWE2hF/A2pdgluFY+hisMWpY5szypba1NbFwOhu1SNzMsA==",
       "type": "package",
       "path": "skiasharp.views/1.55.1",
@@ -21211,5 +21210,8 @@
       "skiasharp.views >= 1.55.1"
     ],
     "UAP,Version=v10.0": []
+  },
+  "packageFolders": {
+    "C:\\Users\\paul\\.nuget\\packages\\": {}
   }
 }
