@@ -25,10 +25,10 @@ https://www.nuget.org/packages/Mapsui
 ## Platforms Supported
 
 There are four platforms supported:
-- WPF for Windows Desktop - .NET 4.5.2
-- UWP for Windows Store - Windows 10 build 10586
-- Xamarin Android - API Level 19 (v4.4 - Kit Kat)
-- Xamarin iOS
+- **WPF** - Windows Desktop on .NET 4.5.2
+- **UWP** - Windows Store on Windows 10 build 10586
+- **Android** - Xamarin.Android onAPI Level 19 (v4.4 - Kit Kat)
+- **iOS** - Xamarin.iOS
 
 ## Components
 
@@ -43,14 +43,6 @@ Profile111 targets: .Net Framework 4.5, ASP.NET Core 5.0, Windows 8, Windows Pho
 
 ## Wiki
 Take a look at the [wiki](https://github.com/pauldendulk/Mapsui/wiki). We are starting to add some information there. If you have a question please submit an [issue](https://github.com/pauldendulk/Mapsui/issues) or a question on stackoverflow the the 'mapsui' tag (I will get a notification).
-  
-## Warnings
-
-- There is limited documentation.
-- Breaking changes will be introduced frequently. We change the API whenever we feel this is an improvement.
-- We adopt new technologies relatively fast, and dropping support for older frameworks.
-- Only use this project if you are willing to dig into the code.
-- Although there is a general plan of where to go with this library there are not enough resources to go towards that goal in a systematic way. New functionality is driven by what is needed in our projects.
 
 ## License 
 
