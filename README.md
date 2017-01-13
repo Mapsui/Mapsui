@@ -34,7 +34,7 @@ There are four platforms supported:
 
 If you install the NuGet package into your app these assemblies are added:
 
-- Mapsui.UI.{platform} - Platorm specific UI. Contains the MapControl
+- Mapsui.UI.{platform} - Platform specific UI. Contains the MapControl
 - Mapsui.Rendering.Skia [1]
 - Mapsui [1]
 - Mapsui.Geometries [1]
