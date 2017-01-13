@@ -4,11 +4,10 @@
 
 Mapsui is library for apps that need a map
 
-- Intended to develop apps
+- Is meant for apps
 - Designed to be fast and responsive (see [architecture](https://github.com/pauldendulk/Mapsui/wiki/Async-Fetching))
-- All data fetching is on a background thread (disk, web, or database)
-- Code is written to be used cross platform (using PCL or code sharing)
-- Based on a modified version of SharpMap. 
+- Cross platform (WPF, UWP, Android, iOS)
+- Based on a modified version of SharpMap
 - Uses BruTile to access tile services
 
 ## Getting Started
