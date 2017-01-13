@@ -6,37 +6,32 @@
     <ToolsHome Condition=" '$(ToolsHome)'=='' ">$(MSBuildProjectDirectory)\..\tools\</ToolsHome>
   </PropertyGroup>
   
-  <Target Name="BuildRelease" DependsOnTargets="CleanRelease;RestorePackages">
+  <Target Name="BuildRelease" DependsOnTargets="RestorePackages">
 
     <MSBuild Projects="$(SolutionFile)"
              Targets="Mapsui_Geometries;Mapsui"
-             Properties="Configuration=Release;BaseIntermediateOutputPath=$(MSBuildProjectDirectory).\..\obj\portable\;OutputPath=$(MSBuildProjectDirectory).\..\Release\Portable\" />
+             Properties="Configuration=Release;BaseIntermediateOutputPath=$(MSBuildProjectDirectory)\..\obj\portable\;OutputPath=$(MSBuildProjectDirectory)\..\Release\Portable\" />
 
     <MSBuild Projects="$(SolutionFile)"
              Targets="Mapsui_Geometries;Mapsui;Mapsui_Rendering_Xaml;Mapsui_Rendering_Skia-PCL;Mapsui_UI_Xaml"
-             Properties="Configuration=Release;Platform=Any CPU;BaseIntermediateOutputPath=$(MSBuildProjectDirectory).\..\obj\v4.5\;OutputPath=$(MSBuildProjectDirectory).\..\Release\v4.5\"
+             Properties="Configuration=Release;Platform=Any CPU;BaseIntermediateOutputPath=$(MSBuildProjectDirectory)\..\obj\v4.5\;OutputPath=$(MSBuildProjectDirectory)\..\Release\v4.5\"
              RunEachTargetSeparately="true"/>
 
     <MSBuild Projects="$(SolutionFile)"
              Targets="Mapsui_Geometries;Mapsui;Mapsui_Rendering_Skia-PCL;Mapsui_UI_Uwp"
-             Properties="Configuration=Release;Platform=Any CPU;BaseIntermediateOutputPath=$(MSBuildProjectDirectory).\..\obj\UWP\;OutputPath=$(MSBuildProjectDirectory).\..\Release\UWP\"
+             Properties="Configuration=Release;Platform=Any CPU;BaseIntermediateOutputPath=$(MSBuildProjectDirectory)\..\obj\UWP\;OutputPath=$(MSBuildProjectDirectory)\..\Release\UWP\"
              RunEachTargetSeparately="true"/>
 
     <MSBuild Projects="$(SolutionFile)"
              Targets="Mapsui_Geometries;Mapsui;Mapsui_Rendering_Skia-PCL;Mapsui_UI_Android"
-             Properties="Configuration=Release;Platform=Any CPU;BaseIntermediateOutputPath=$(MSBuildProjectDirectory).\..\obj\Xamarin.Android\;OutputPath=$(MSBuildProjectDirectory).\..\Release\Xamarin.Android\"
+             Properties="Configuration=Release;Platform=Any CPU;BaseIntermediateOutputPath=$(MSBuildProjectDirectory)\..\obj\Xamarin.Android\;OutputPath=$(MSBuildProjectDirectory)\..\Release\Xamarin.Android\"
              RunEachTargetSeparately="true"/>
 
     <MSBuild Projects="$(SolutionFile)"
              Targets="Mapsui_Geometries;Mapsui;Mapsui_Rendering_Skia-PCL;Mapsui_UI_iOS"
-             Properties="Configuration=Release;Platform=Any CPU;BaseIntermediateOutputPath=$(MSBuildProjectDirectory).\..\obj\Xamarin.iOS\;OutputPath=$(MSBuildProjectDirectory).\..\Release\Xamarin.iOS\"
+             Properties="Configuration=Release;Platform=Any CPU;BaseIntermediateOutputPath=$(MSBuildProjectDirectory)\..\obj\Xamarin.iOS\;OutputPath=$(MSBuildProjectDirectory)\..\Release\Xamarin.iOS\"
              RunEachTargetSeparately="true"/>
              
-  </Target>
-    
-  <Target Name="CleanRelease">
-    <Exec Command="rmdir /s /q $(MSBuildProjectDirectory).\..\obj"></Exec>
-    <Exec Command="rmdir /s /q $(MSBuildProjectDirectory).\..\Release"></Exec>
   </Target>
   
   <Target Name="RestorePackages">
