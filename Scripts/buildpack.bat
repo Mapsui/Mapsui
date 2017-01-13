@@ -7,4 +7,4 @@ rmdir obj /s /q
 rmdir release /s /q
 msbuild Scripts\updateversionnumber.proj /p:AsmVersion=%VERSION%
 msbuild Scripts\build_with_ios.proj 
-%NUGET% pack Scripts\Mapsui.nuspec -Version %VERSION% -outputdirectory Release
+%NUGET% pack Scripts\Mapsui.nuspec -Version %VERSION% -outputdirectory Mapsui
