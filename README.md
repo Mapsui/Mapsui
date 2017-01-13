@@ -38,7 +38,8 @@ If you install the NuGet package into your app these assemblies are added:
 - Mapsui.Rendering.Skia
 - Mapsui
 - Mapsui.Geometries
-- On Windows dekstop Mapsui.Rendeirng.Xaml is added.
+- On Windows dekstop Mapsui.Rendering.Xaml is added.
+- A number of nuget dependencies
 
 A PCL with Profile111 targets: .Net Framework 4.5, ASP.NET Core 5.0, Windows 8, Windows Phone 8.1, Xamarin.Android, Xamarin.iOS, Xamarin.iOS (Classic)
 
