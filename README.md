@@ -1,14 +1,14 @@
 [![NuGet Status](http://img.shields.io/nuget/v/Mapsui.svg?style=flat)](https://www.nuget.org/packages/Mapsui/)
+[![Build status](https://ci.appveyor.com/api/projects/status/p20w43qv4ixkkftp?svg=true)](https://ci.appveyor.com/project/pauldendulk/mapsui)
 
 ## Mapsui (pronounced map-su-wii)
 
 Mapsui is library for apps that need a map
 
-- Intended to develop apps
+- Is meant for apps
 - Designed to be fast and responsive (see [architecture](https://github.com/pauldendulk/Mapsui/wiki/Async-Fetching))
-- All data fetching is on a background thread (disk, web, or database)
-- Code is written to be used cross platform (using PCL or code sharing)
-- Based on a modified version of SharpMap. 
+- Cross platform (WPF, UWP, Android, iOS)
+- Based on a modified version of SharpMap
 - Uses BruTile to access tile services
 
 ## Getting Started
@@ -34,12 +34,14 @@ There are four platforms supported:
 
 If you install the NuGet package into your app these assemblies are added:
 
-- Mapsui.UI - Platorm specific UI. Contains the MapControl
-- Mapsui.Rendering - A platform specific renderer
-- Mapsui - A PCL with Profile111 
-- Mapsui.Geometries - A PCL with Profile111
+- Mapsui.UI.{platform} - Platform specific UI. Contains the MapControl
+- Mapsui.Rendering.Skia [1]
+- Mapsui [1]
+- Mapsui.Geometries [1]
+- On Windows dekstop Mapsui.Rendering.Xaml is added.
+- A number of nuget dependencies
 
-Profile111 targets: .Net Framework 4.5, ASP.NET Core 5.0, Windows 8, Windows Phone 8.1, Xamarin.Android, Xamarin.iOS, Xamarin.iOS (Classic)
+[1] A PCL with Profile111. Targets: .Net Framework 4.5, ASP.NET Core 5.0, Windows 8, Windows Phone 8.1, Xamarin.Android, Xamarin.iOS, Xamarin.iOS (Classic)
 
 ## Wiki
 Please take a look at the [wiki](https://github.com/pauldendulk/Mapsui/wiki). Please let us know what information you are missing. If you have a question please submit an [issue](https://github.com/pauldendulk/Mapsui/issues) or a question on stackoverflow with the 'mapsui' tag (I will get a notification).
