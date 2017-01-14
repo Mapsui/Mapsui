@@ -26,10 +26,6 @@ namespace Mapsui.Samples.Android
 		
 		public static void UpdateIdValues()
 		{
-			global::Mapsui.Rendering.Android.Resource.String.ApplicationName = global::Mapsui.Samples.Android.Resource.String.ApplicationName;
-			global::Mapsui.Rendering.Android.Resource.String.Hello = global::Mapsui.Samples.Android.Resource.String.Hello;
-			global::Mapsui.Rendering.OpenTK.Resource.String.ApplicationName = global::Mapsui.Samples.Android.Resource.String.ApplicationName;
-			global::Mapsui.Rendering.OpenTK.Resource.String.Hello = global::Mapsui.Samples.Android.Resource.String.Hello;
 			global::Mapsui.UI.Android.Resource.String.ApplicationName = global::Mapsui.Samples.Android.Resource.String.ApplicationName;
 			global::Mapsui.UI.Android.Resource.String.Hello = global::Mapsui.Samples.Android.Resource.String.Hello;
 			global::SQLite.Net.Platform.XamarinAndroid.Resource.String.ApplicationName = global::Mapsui.Samples.Android.Resource.String.ApplicationName;
