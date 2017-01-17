@@ -12,7 +12,7 @@ using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 
-namespace Mapsui.UI.Xaml.Layers
+namespace Mapsui.UI.Wpf.Layers
 {
     public class GroupTileLayer : BaseLayer, ITileLayer
     {

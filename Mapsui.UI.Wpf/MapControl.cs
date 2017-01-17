@@ -21,7 +21,7 @@ using SkiaSharp.Views.WPF;
 using Point = System.Windows.Point;
 using XamlVector = System.Windows.Vector;
 
-namespace Mapsui.UI.Xaml
+namespace Mapsui.UI.Wpf
 {
     public enum RenderMode
     {

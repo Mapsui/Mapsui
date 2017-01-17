@@ -6,7 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using Mapsui.Layers;
 
-namespace Mapsui.UI.Xaml
+namespace Mapsui.UI.Wpf
 {
     internal class AttributionPanel : StackPanel
     {
