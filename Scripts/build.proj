@@ -13,7 +13,7 @@
              Properties="Configuration=Release;BaseIntermediateOutputPath=$(MSBuildProjectDirectory).\..\obj\portable\;OutputPath=$(MSBuildProjectDirectory).\..\Release\Portable\" />
 
     <MSBuild Projects="$(SolutionFile)"
-             Targets="Mapsui_Geometries;Mapsui;Mapsui_Rendering_Xaml;Mapsui_Rendering_Skia-PCL;Mapsui_UI_Xaml"
+             Targets="Mapsui_Geometries;Mapsui;Mapsui_Rendering_Xaml;Mapsui_Rendering_Skia-PCL;Mapsui_UI_Wpf"
              Properties="Configuration=Release;Platform=Any CPU;BaseIntermediateOutputPath=$(MSBuildProjectDirectory).\..\obj\v4.5\;OutputPath=$(MSBuildProjectDirectory).\..\Release\v4.5\"
              RunEachTargetSeparately="true"/>
 
@@ -30,7 +30,8 @@
     <!-- 
     This is the section where we have no iOS.
     We have a build server problem related to toolversion 4.0 versus 12.0. 
-    When Xamarin Studio starts using ToolVersion 12.0 we will try to fix the ios build. --> 
+    When Xamarin Studio starts using ToolVersion 12.0 we will try to fix the ios build. 
+    --> 
     
   </Target>
   

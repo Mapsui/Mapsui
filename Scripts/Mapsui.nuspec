@@ -31,7 +31,7 @@
     <file src="..\Release\v4.5\Mapsui.dll" target="lib\net45\Mapsui.dll" />
     <file src="..\Release\v4.5\Mapsui.Rendering.Xaml.dll" target="lib\net45\Mapsui.Rendering.Xaml.dll" />
     <file src="..\Release\v4.5\Mapsui.Rendering.Skia.dll" target="lib\net45\Mapsui.Rendering.Skia.dll" />
-    <file src="..\Release\v4.5\Mapsui.UI.Xaml.dll" target="lib\net45\Mapsui.UI.Xaml.dll" />
+    <file src="..\Release\v4.5\Mapsui.UI.Wpf.dll" target="lib\net45\Mapsui.UI.Wpf.dll" />
 
     <file src="..\Release\UWP\Mapsui.Geometries.dll" target="lib\portable46-win81+wpa81\Mapsui.Geometries.dll" />
     <file src="..\Release\UWP\Mapsui.dll" target="lib\portable46-win81+wpa81\Mapsui.dll" />
