@@ -158,12 +158,6 @@
       <Project>{ee55b62d-ffa2-4c24-a4ad-7a47ace55ce5}</Project>
       <Name>Mapsui.Geometries</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Mapsui.Rendering.iOS\Mapsui.Rendering.iOS.csproj">
-      <Project>{b142ab17-285f-48c8-b6c6-94586028333b}</Project>
-      <Name>Mapsui.Rendering.iOS</Name>
-      <IsAppExtension>false</IsAppExtension>
-      <IsWatchApp>false</IsWatchApp>
-    </ProjectReference>
     <ProjectReference Include="..\..\Mapsui.UI.iOS\Mapsui.UI.iOS.csproj">
       <Project>{f783f99b-aafa-4fb5-80f6-871d679bdb19}</Project>
       <Name>Mapsui.UI.iOS</Name>

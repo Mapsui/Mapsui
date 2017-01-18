@@ -61,13 +61,15 @@ namespace Mapsui.Rendering.Skia
             }
         }
 
-        public static void DrawLabel(SKCanvas target, float x, float y, LabelStyle style, string text)
+        private static void DrawLabel(SKCanvas target, float x, float y, LabelStyle style, string text)
         {
             var paint = CreatePaint(style);
 
             var rect = new SKRect();
 
             paint.MeasureText(text, ref rect);
+
+            var align = CalcAlignFactor(style.VerticalAlignment);
 
             rect.Offset(
                 x - rect.Width*0.5f + (float) style.Offset.X,
@@ -78,6 +80,11 @@ namespace Mapsui.Rendering.Skia
             DrawBackground(style, backRect, target);
 
             target.DrawText(text, rect.Left, rect.Bottom, paint);
+        }
+
+        private static object CalcAlignFactor(LabelStyle.VerticalAlignmentEnum verticalAlignment)
+        {
+            return (verticalAlignment == LabelStyle.VerticalAlignmentEnum.Center) ? 0.5f : 0f; 
         }
 
         private static void DrawBackground(LabelStyle style, SKRect rect, SKCanvas target)
