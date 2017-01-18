@@ -48,9 +48,9 @@ namespace Mapsui.Samples.Wpf
             var selectedValue = ((ComboBoxItem) ((ComboBox) sender).SelectedItem).Content.ToString();
 
             if (selectedValue.ToLower().Contains("wpf"))
-                MapControl.RenderMode = UI.Xaml.RenderMode.Wpf;
+                MapControl.RenderMode = UI.Wpf.RenderMode.Wpf;
             else if (selectedValue.ToLower().Contains("skia"))
-                MapControl.RenderMode = UI.Xaml.RenderMode.Skia;
+                MapControl.RenderMode = UI.Wpf.RenderMode.Skia;
             else
                 throw new Exception("Unknown ComboBox item");
         }

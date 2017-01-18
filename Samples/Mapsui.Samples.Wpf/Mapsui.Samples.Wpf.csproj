@@ -215,9 +215,9 @@
       <Project>{ee55b62d-ffa2-4c24-a4ad-7a47ace55ce5}</Project>
       <Name>Mapsui.Geometries</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Mapsui.UI.Xaml\Mapsui.UI.Xaml.csproj">
-      <Project>{4b5676a4-6c5a-4caa-8317-faf40cefd361}</Project>
-      <Name>Mapsui.UI.Xaml</Name>
+    <ProjectReference Include="..\..\Mapsui.UI.Wpf\Mapsui.UI.Wpf.csproj">
+      <Project>{ae693902-feda-4034-a7c5-9aa9872f7878}</Project>
+      <Name>Mapsui.UI.Wpf</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Mapsui\Mapsui.csproj">
       <Project>{d74c052a-c07e-4b37-a898-134218aca5c9}</Project>
