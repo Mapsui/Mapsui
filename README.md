@@ -1,5 +1,6 @@
 [![NuGet Status](http://img.shields.io/nuget/v/Mapsui.svg?style=flat)](https://www.nuget.org/packages/Mapsui/)
 [![Build status](https://ci.appveyor.com/api/projects/status/p20w43qv4ixkkftp?svg=true)](https://ci.appveyor.com/project/pauldendulk/mapsui)
+[![Build Status](https://www.bitrise.io/app/f6f2ae30c3eb921b.svg?token=HqPHuFR_4KakFkxNuh4D-g&branch=master)](https://www.bitrise.io/app/f6f2ae30c3eb921b)
 
 ## Mapsui (pronounced map-su-wii)
 
