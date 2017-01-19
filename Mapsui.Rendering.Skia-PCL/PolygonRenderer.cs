@@ -1,4 +1,5 @@
 ﻿using Mapsui.Geometries;
+using Mapsui.Providers;
 using Mapsui.Styles;
 using SkiaSharp;
 
@@ -6,36 +7,44 @@ namespace Mapsui.Rendering.Skia
 {
     internal static class PolygonRenderer
     {
-        public static void Draw(SKCanvas canvas, IViewport viewport, IStyle style, IGeometry geometry)
+        public static void Draw(SKCanvas canvas, IViewport viewport, IStyle style, IFeature feature, IGeometry geometry)
         {
-            var polygon = (Polygon)geometry;
-            
-            float lineWidth = 1;
-            var lineColor = Color.Black; // default
-            var fillColor = Color.Gray; // default
-
-            var vectorStyle = style as VectorStyle;
-
-            if (vectorStyle != null)
+            if (style is LabelStyle)
             {
-                lineWidth = (float) vectorStyle.Outline.Width;
-                lineColor = vectorStyle.Outline.Color;
-                fillColor = vectorStyle.Fill?.Color;
+                var center = geometry.GetBoundingBox().GetCentroid();
+                LabelRenderer.Draw(canvas, (LabelStyle)style, feature, (float)center.X, (float)center.Y);
             }
-
-            using (var path = ToSkia(viewport, polygon))
+            else
             {
-                using (var paint = new SKPaint())
-                {
-                    paint.IsAntialias = true;
-                    paint.StrokeWidth = lineWidth;
+                var polygon = (Polygon)geometry;
 
-                    paint.Style = SKPaintStyle.Fill;
-                    paint.Color = fillColor.ToSkia();
-                    canvas.DrawPath(path, paint);
-                    paint.Style = SKPaintStyle.Stroke;
-                    paint.Color = lineColor.ToSkia();
-                    canvas.DrawPath(path, paint);
+                float lineWidth = 1;
+                var lineColor = Color.Black; // default
+                var fillColor = Color.Gray; // default
+
+                var vectorStyle = style as VectorStyle;
+
+                if (vectorStyle != null)
+                {
+                    lineWidth = (float) vectorStyle.Outline.Width;
+                    lineColor = vectorStyle.Outline.Color;
+                    fillColor = vectorStyle.Fill?.Color;
+                }
+
+                using (var path = ToSkia(viewport, polygon))
+                {
+                    using (var paint = new SKPaint())
+                    {
+                        paint.IsAntialias = true;
+                        paint.StrokeWidth = lineWidth;
+
+                        paint.Style = SKPaintStyle.Fill;
+                        paint.Color = fillColor.ToSkia();
+                        canvas.DrawPath(path, paint);
+                        paint.Style = SKPaintStyle.Stroke;
+                        paint.Color = lineColor.ToSkia();
+                        canvas.DrawPath(path, paint);
+                    }
                 }
             }
         }

@@ -139,13 +139,13 @@ namespace Mapsui.Rendering.Skia
             else if (feature.Geometry is MultiPoint)
                 MultiPointRenderer.Draw(canvas, viewport, style, feature, feature.Geometry, _symbolTextureCache);
             else if (feature.Geometry is LineString)
-                LineStringRenderer.Draw(canvas, viewport, style, feature.Geometry);
+                LineStringRenderer.Draw(canvas, viewport, style, feature, feature.Geometry);
             else if (feature.Geometry is MultiLineString)
-                MultiLineStringRenderer.Draw(canvas, viewport, style, feature.Geometry);
+                MultiLineStringRenderer.Draw(canvas, viewport, style, feature, feature.Geometry);
             else if (feature.Geometry is Polygon)
-                PolygonRenderer.Draw(canvas, viewport, style, feature.Geometry);
+                PolygonRenderer.Draw(canvas, viewport, style, feature, feature.Geometry);
             else if (feature.Geometry is MultiPolygon)
-                MultiPolygonRenderer.Draw(canvas, viewport, style, feature.Geometry);
+                MultiPolygonRenderer.Draw(canvas, viewport, style, feature, feature.Geometry);
             else if (feature.Geometry is IRaster)
                 RasterRenderer.Draw(canvas, viewport, style, feature, _tileTextureCache, _currentIteration);
         }

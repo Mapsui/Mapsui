@@ -46,15 +46,14 @@ namespace Mapsui.Rendering.Xaml
         {
             return CreateTransformMatrix(new Point(0, 0), viewport);
         }
-
-   
+        
         private static XamlShapes.Path CreatePointPath(SymbolStyle style)
         {
-            //todo: use this:
-            //style.Symbol.Convert();
-            //style.SymbolScale;
-            //style.SymbolOffset.Convert();
-            //style.SymbolRotation;
+            // todo: use this:
+            // style.Symbol.Convert();
+            // style.SymbolScale;
+            // style.SymbolOffset.Convert();
+            // style.SymbolRotation;
 
             var path = new XamlShapes.Path();
 

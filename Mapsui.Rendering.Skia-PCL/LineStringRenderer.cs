@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Mapsui.Geometries;
+using Mapsui.Providers;
 using Mapsui.Styles;
 using SkiaSharp;
 
@@ -7,33 +8,41 @@ namespace Mapsui.Rendering.Skia
 {
     public static class LineStringRenderer
     {
-        public static void Draw(SKCanvas canvas, IViewport viewport, IStyle style, IGeometry geometry)
+        public static void Draw(SKCanvas canvas, IViewport viewport, IStyle style, IFeature feature, IGeometry geometry)
         {
-            var lineString = ((LineString) geometry).Vertices;
-
-            float lineWidth = 1;
-            var lineColor = new Color();
-
-            var vectorStyle = style as VectorStyle;
-
-            if (vectorStyle != null)
+            if (style is LabelStyle)
             {
-                lineWidth = (float) vectorStyle.Line.Width;
-                lineColor = vectorStyle.Line.Color;
+                var center = geometry.GetBoundingBox().GetCentroid();
+                LabelRenderer.Draw(canvas, (LabelStyle) style, feature, (float) center.X, (float) center.Y);
             }
-
-            var line = WorldToScreen(viewport, lineString);
-            var path = ToSkia(line);
-            
-
-            using (var paint = new SKPaint())
+            else
             {
-                paint.IsStroke = true;
-                paint.StrokeWidth = lineWidth;
-                paint.Color = lineColor.ToSkia();
-                paint.StrokeJoin = SKStrokeJoin.Round;
 
-                canvas.DrawPath(path, paint);
+                var lineString = ((LineString) geometry).Vertices;
+
+                float lineWidth = 1;
+                var lineColor = new Color();
+
+                var vectorStyle = style as VectorStyle;
+
+                if (vectorStyle != null)
+                {
+                    lineWidth = (float) vectorStyle.Line.Width;
+                    lineColor = vectorStyle.Line.Color;
+                }
+
+                var line = WorldToScreen(viewport, lineString);
+                var path = ToSkia(line);
+                
+                using (var paint = new SKPaint())
+                {
+                    paint.IsStroke = true;
+                    paint.StrokeWidth = lineWidth;
+                    paint.Color = lineColor.ToSkia();
+                    paint.StrokeJoin = SKStrokeJoin.Round;
+
+                    canvas.DrawPath(path, paint);
+                }
             }
         }
 
