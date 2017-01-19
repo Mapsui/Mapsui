@@ -1,4 +1,5 @@
 {
+  "locked": false,
   "version": 1,
   "targets": {
     "UAP,Version=v10.0": {
@@ -303,7 +304,7 @@
           "lib/uap10.0/SkiaSharp.dll": {}
         }
       },
-      "SkiaSharp.Views/1.55.1": {
+      "skiasharp.views/1.55.1": {
         "dependencies": {
           "SkiaSharp": "1.55.1"
         },
@@ -2580,7 +2581,7 @@
           "lib/uap10.0/SkiaSharp.dll": {}
         }
       },
-      "SkiaSharp.Views/1.55.1": {
+      "skiasharp.views/1.55.1": {
         "dependencies": {
           "SkiaSharp": "1.55.1"
         },
@@ -4748,7 +4749,7 @@
           "lib/uap10.0/SkiaSharp.dll": {}
         }
       },
-      "SkiaSharp.Views/1.55.1": {
+      "skiasharp.views/1.55.1": {
         "dependencies": {
           "SkiaSharp": "1.55.1"
         },
@@ -6886,7 +6887,7 @@
           "lib/uap10.0/SkiaSharp.dll": {}
         }
       },
-      "SkiaSharp.Views/1.55.1": {
+      "skiasharp.views/1.55.1": {
         "dependencies": {
           "SkiaSharp": "1.55.1"
         },
@@ -9063,7 +9064,7 @@
           "lib/uap10.0/SkiaSharp.dll": {}
         }
       },
-      "SkiaSharp.Views/1.55.1": {
+      "skiasharp.views/1.55.1": {
         "dependencies": {
           "SkiaSharp": "1.55.1"
         },
@@ -11201,7 +11202,7 @@
           "lib/uap10.0/SkiaSharp.dll": {}
         }
       },
-      "SkiaSharp.Views/1.55.1": {
+      "skiasharp.views/1.55.1": {
         "dependencies": {
           "SkiaSharp": "1.55.1"
         },
@@ -13378,7 +13379,7 @@
           "lib/uap10.0/SkiaSharp.dll": {}
         }
       },
-      "SkiaSharp.Views/1.55.1": {
+      "skiasharp.views/1.55.1": {
         "dependencies": {
           "SkiaSharp": "1.55.1"
         },
@@ -16278,11 +16279,13 @@
         "lib/uap10.0/SkiaSharp.xml"
       ]
     },
-    "SkiaSharp.Views/1.55.1": {
+    "skiasharp.views/1.55.1": {
       "sha512": "xbo8bX4sFUaqxezodlnbBIpYD2B7kiEj3CYvjY3TOWE2hF/A2pdgluFY+hisMWpY5szypba1NbFwOhu1SNzMsA==",
       "type": "package",
       "path": "skiasharp.views/1.55.1",
       "files": [
+        "SkiaSharp.Views.1.55.1.nupkg.sha512",
+        "SkiaSharp.Views.nuspec",
         "build/uap10.0/SkiaSharp.Views.targets",
         "build/uap10.0/arm/libEGL.dll",
         "build/uap10.0/arm/libGLESv2.dll",
@@ -16296,9 +16299,7 @@
         "lib/XamarintvOS/SkiaSharp.Views.tvOS.dll",
         "lib/net45/SkiaSharp.Views.Desktop.dll",
         "lib/net45/SkiaSharp.Views.WPF.dll",
-        "lib/uap10.0/SkiaSharp.Views.UWP.dll",
-        "skiasharp.views.1.55.1.nupkg.sha512",
-        "skiasharp.views.nuspec"
+        "lib/uap10.0/SkiaSharp.Views.UWP.dll"
       ]
     },
     "System.AppContext/4.1.0": {
@@ -21210,8 +21211,5 @@
       "skiasharp.views >= 1.55.1"
     ],
     "UAP,Version=v10.0": []
-  },
-  "packageFolders": {
-    "C:\\Users\\Paul\\.nuget\\packages\\": {}
   }
 }
