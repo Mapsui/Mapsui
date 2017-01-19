@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:wpf="clr-namespace:Mapsui.Samples.Wpf"
-        xmlns:xaml="clr-namespace:Mapsui.UI.Wpf;assembly=Mapsui.UI.Wpf"
+        xmlns:wpf1="clr-namespace:Mapsui.UI.Wpf;assembly=Mapsui.UI.Wpf"
         mc:Ignorable="d"
         d:DesignWidth="644.572"
         d:DesignHeight="333.913"
@@ -18,7 +18,7 @@
             <RowDefinition Height="30" />
         </Grid.RowDefinitions>
         <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-            <xaml:MapControl x:Name="MapControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+            <wpf1:MapControl x:Name="MapControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
             <Border BorderBrush="White" Opacity="0.65" Background="White" BorderThickness="6" MinWidth="140"
                     MinHeight="30"
                     VerticalAlignment="Top" HorizontalAlignment="Left">
