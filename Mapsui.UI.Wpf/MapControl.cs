@@ -42,7 +42,7 @@ namespace Mapsui.UI.Wpf
         private readonly Storyboard _zoomStoryBoard = new Storyboard();
         private Point _currentMousePosition;
         private Point _downMousePosition;
-        private bool _invalid;
+        private bool _invalid = true;
         private Map _map;
         private bool _mouseDown;
         private MouseInfoEventArgs _previousHoverInfoEventArgs;
@@ -252,11 +252,8 @@ namespace Mapsui.UI.Wpf
 
         public void RefreshGraphics()
         {
-            Dispatcher.BeginInvoke(new Action(() =>
-            {
-                InvalidateVisual();
-                _invalid = true;
-            }));
+            _invalid = true;
+            Dispatcher.BeginInvoke(new Action(InvalidateVisual));
         }
 
         public void Clear()
@@ -579,8 +576,7 @@ namespace Mapsui.UI.Wpf
         {
             if (!_viewportInitialized) InitializeViewport();
             if (!_viewportInitialized) return; // Stop if the line above failed.
-            // In developermode always render so that fps can be counted
-            if (!_invalid && !DeveloperTools.DeveloperMode) return;
+            if (!_invalid) return; // Don't render when nothing has changed
 
             if (RenderMode == RenderMode.Wpf) RenderWpf();
             else RenderElement.InvalidateVisual();
@@ -588,12 +584,12 @@ namespace Mapsui.UI.Wpf
 
         private void RenderWpf()
         {
-            if ((Renderer != null) && (_map != null))
+            if (Renderer != null && _map != null)
             {
                 Renderer.Render(RenderCanvas, Map.Viewport, _map.Layers, _map.BackColor);
-                if (DeveloperTools.DeveloperMode) FpsCounter.FramePlusOne();
                 _invalid = false;
-            }
+
+                if (DeveloperTools.DeveloperMode) FpsCounter.FramePlusOne();}
         }
 
         private void DispatcherShutdownStarted(object sender, EventArgs e)
@@ -713,6 +709,7 @@ namespace Mapsui.UI.Wpf
             Map.Viewport.Height = ActualHeight;
 
             Renderer.Render(canvas, Map.Viewport, Map.Layers, Map.BackColor);
+            _invalid = false;
         }
 
         private Geometries.Point GetSkiaScale()
@@ -734,8 +731,7 @@ namespace Mapsui.UI.Wpf
         {
             if (!_viewportInitialized) InitializeViewport();
             if (!_viewportInitialized) return; // Stop if the line above failed. 
-            if (!_invalid && !DeveloperTools.DeveloperMode)
-                return; // In developermode always render so that fps can be counted
+            if (!_invalid) return; // Don't render when nothing has changed
 
             if (_skiaScale == null) _skiaScale = GetSkiaScale();
             e.Surface.Canvas.Scale((float) _skiaScale.X, (float) _skiaScale.Y);
