@@ -16282,7 +16282,6 @@
     "skiasharp.views/1.55.1": {
       "sha512": "xbo8bX4sFUaqxezodlnbBIpYD2B7kiEj3CYvjY3TOWE2hF/A2pdgluFY+hisMWpY5szypba1NbFwOhu1SNzMsA==",
       "type": "package",
-      "path": "skiasharp.views/1.55.1",
       "files": [
         "SkiaSharp.Views.1.55.1.nupkg.sha512",
         "SkiaSharp.Views.nuspec",

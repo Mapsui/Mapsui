@@ -69,22 +69,39 @@ namespace Mapsui.Rendering.Skia
 
             paint.MeasureText(text, ref rect);
 
-            var align = CalcAlignFactor(style.VerticalAlignment);
+            var horizontalAlign = CalcHorizontalAlignment(style.HorizontalAlignment);
+            var verticalAlign = CalcVerticalAlignment(style.VerticalAlignment);
+                        
+            var backRectXOffset = -rect.Left;
+            var backRectYOffset = rect.Bottom;
 
             rect.Offset(
-                x - rect.Width*0.5f + (float) style.Offset.X,
-                y + rect.Height*0.5f + (float) style.Offset.Y);
+                x - rect.Width * horizontalAlign + (float)style.Offset.X,
+                y + rect.Height * verticalAlign + (float)style.Offset.Y);
 
-            var backRect = rect;
+            var backRect = rect; // copy
+            rect.Offset(-backRectXOffset, -backRectYOffset); // correct for text specific offset returned paint.Measure
+
             backRect.Inflate(3, 3);
             DrawBackground(style, backRect, target);
 
             target.DrawText(text, rect.Left, rect.Bottom, paint);
         }
 
-        private static object CalcAlignFactor(LabelStyle.VerticalAlignmentEnum verticalAlignment)
+        private static float CalcHorizontalAlignment(LabelStyle.HorizontalAlignmentEnum horizontalAligment)
         {
-            return (verticalAlignment == LabelStyle.VerticalAlignmentEnum.Center) ? 0.5f : 0f; 
+            if (horizontalAligment == LabelStyle.HorizontalAlignmentEnum.Center) return 0.5f;
+            if (horizontalAligment == LabelStyle.HorizontalAlignmentEnum.Left) return 0f;
+            if (horizontalAligment == LabelStyle.HorizontalAlignmentEnum.Right) return 1f;
+            throw new ArgumentException(); 
+        }
+
+        private static float CalcVerticalAlignment(LabelStyle.VerticalAlignmentEnum VerticalAligment)
+        {
+            if (VerticalAligment == LabelStyle.VerticalAlignmentEnum.Center) return 0.5f;
+            if (VerticalAligment == LabelStyle.VerticalAlignmentEnum.Top) return 0f;
+            if (VerticalAligment == LabelStyle.VerticalAlignmentEnum.Bottom) return 1f;
+            throw new ArgumentException();
         }
 
         private static void DrawBackground(LabelStyle style, SKRect rect, SKCanvas target)
