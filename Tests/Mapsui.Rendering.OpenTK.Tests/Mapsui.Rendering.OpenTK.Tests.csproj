@@ -98,10 +98,6 @@
       <Project>{EE55B62D-FFA2-4C24-A4AD-7A47ACE55CE5}</Project>
       <Name>Mapsui.Geometries</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Mapsui.Rendering.OpenTK\Mapsui.Rendering.OpenTK.csproj">
-      <Project>{7c1a68be-0db2-479a-84e2-d80e79edf87f}</Project>
-      <Name>Mapsui.Rendering.OpenTK</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Mapsui\Mapsui.csproj">
       <Project>{D74C052A-C07E-4B37-A898-134218ACA5C9}</Project>
       <Name>Mapsui</Name>
