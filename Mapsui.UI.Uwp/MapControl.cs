@@ -397,7 +397,7 @@ namespace Mapsui.UI.Uwp
 
         private void OnManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
-            if ((_previousPosition == default(Point)) || double.IsNaN(_previousPosition.X))
+            if (_previousPosition == default(Point) || double.IsNaN(_previousPosition.X))
             {
                 _previousPosition = e.Position;
                 return;
@@ -410,8 +410,8 @@ namespace Mapsui.UI.Uwp
             // The solution: This hacked up workaround below. When the distance is high
             // but the velocity is low, do not move the map.
 
-            if ((Distance(e.Position.X, e.Position.Y, _previousPosition.X, _previousPosition.Y) > 50)
-                && (Math.Sqrt(Math.Pow(e.Velocities.Linear.X, 2.0) + Math.Pow(e.Velocities.Linear.Y, 2.0)) < 1))
+            if (Distance(e.Position.X, e.Position.Y, _previousPosition.X, _previousPosition.Y) > 50
+                && Math.Sqrt(Math.Pow(e.Velocities.Linear.X, 2.0) + Math.Pow(e.Velocities.Linear.Y, 2.0)) < 1)
             {
                 _previousPosition = default(Point);
                 return;
