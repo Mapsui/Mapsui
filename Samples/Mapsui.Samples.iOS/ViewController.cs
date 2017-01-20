@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using Mapsui.UI.iOS;
 using UIKit;
 
@@ -17,7 +16,7 @@ namespace Mapsui.Samples.iOS
 
             var mapControl = new MapControl(View.Bounds)
             {
-                Map = Common.AllSamples.CreateList().First(s => s.Key == "Various Layers").Value()
+                Map = Common.Maps.VariousSample.CreateMap()
             };
             View.AddSubview(mapControl);
         }
