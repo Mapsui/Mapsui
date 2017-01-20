@@ -11,24 +11,26 @@ namespace Mapsui.Samples.Common
             return new Dictionary<string, Func<Map>>
             {
                 ["OpenStreetMap"] = () => OsmSample.CreateMap(),
+                ["Simple Points"] = () => PointsSample.CreateMap(),
+                ["Simple LineStrings"] = () => LineStringSample.CreateMap(),
+                ["Simple Polygons"] = () => PolygonSample.CreateMap(),
+                ["Various"] = () => VariousSample.CreateMap(),
+                ["Labels"] = () => LabelsSample.CreateMap(),
+                ["Center on location"] = () => CenterOnLocationSample.CreateMap(),
                 ["Projected point"] = () => ProjectionSample.CreateMap(),
-                ["Animated point movement"] = () => AnimatedPointsSample.CreateMap(),
                 ["Stacked labels"] = () => StackedLabelsSample.CreateMap(),
                 ["Info"] = () => InfoLayersSample.CreateMap(),
-                ["Tiled request to WMS"] = () => TiledWmsSample.CreateMap(),
-                ["TMS"] = () => TmsSample.CreateMap(),
-                ["Bing maps"] = () => BingSample.CreateMap(),
-                ["WMS-C"] = () => WmscSample.CreateMap(),
-                ["Symbols in World Units"] = () => SymbolsInWorldUnitsSample.CreateMap(),
-                ["WMTS"] = () => WmtsSample.CreateMap(),
-                ["Labels"] = () => LabelsSample.CreateMap(),
+                ["Animated point movement"] = () => AnimatedPointsSample.CreateMap(),
+                ["TileSources: WMTS"] = () => WmtsSample.CreateMap(),
+                ["TileSources: Bing maps"] = () => BingSample.CreateMap(),
+                ["TileSources: TMS"] = () => TmsSample.CreateMap(),
+                ["TileSources: WMS-C"] = () => WmscSample.CreateMap(),
+                ["TileSources: regular WMS"] = () => TiledWmsSample.CreateMap(),
                 ["Rasterizing Layer"] = () => RasterizingLayerSample.CreateMap(),
-                ["Polygons"] = () => PolygonSample.CreateMap(),
-                ["LineStrings"] = () => LineStringSample.CreateMap(),
-                ["Points"] = () => PointsSample.CreateMap(),
-                ["Various Layers"] = () => VariousSample.CreateMap(),
                 ["Empty Map"] = () => EmptyMapSample.CreateMap(),
-                ["Mutating triangle"] = () => MutatingTriangleSample.CreateMap()
+                ["Mutating triangle"] = () => MutatingTriangleSample.CreateMap(),
+                ["Symbols in World Units"] = () => SymbolsInWorldUnitsSample.CreateMap(),
+
             };
         }
     }
