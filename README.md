@@ -45,7 +45,7 @@ If you install the NuGet package into your app these assemblies are added:
 \* A PCL with Profile111. Targets: .Net Framework 4.5, ASP.NET Core 5.0, Windows 8, Windows Phone 8.1, Xamarin.Android, Xamarin.iOS, Xamarin.iOS (Classic)
 
 ## Wiki
-Please take a look at the [wiki](https://github.com/pauldendulk/Mapsui/wiki). Please let us know what information you are missing. If you have a question please submit an [issue](https://github.com/pauldendulk/Mapsui/issues) or a question on stackoverflow with the 'mapsui' tag (I will get a notification).
+Please take a look at the [wiki](https://github.com/pauldendulk/Mapsui/wiki). Let us know what information you are missing for your projects. If you have a question please submit an [issue](https://github.com/pauldendulk/Mapsui/issues) or a question on stackoverflow with the 'mapsui' tag (I will get a notification).
 
 ## License 
 
