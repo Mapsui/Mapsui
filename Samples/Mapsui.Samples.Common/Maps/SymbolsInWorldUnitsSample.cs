@@ -58,7 +58,6 @@ namespace Mapsui.Samples.Common.Maps
             };
         }
 
-
         private static Feature CreatePointWithDefaultStyle()
         {
             var feature = new Feature { Geometry = new Point(0, 0) };
