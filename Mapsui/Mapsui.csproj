@@ -149,6 +149,7 @@
     <Compile Include="Utilities\Constants.cs" />
     <Compile Include="Utilities\DeveloperTools.cs" />
     <Compile Include="Utilities\EmbeddedResourceLoader.cs" />
+    <Compile Include="Utilities\OpenStreetMap.cs" />
     <Compile Include="Utilities\ProjectionHelper.cs" />
     <Compile Include="Utilities\Timer.cs" />
     <Compile Include="Utilities\Version.cs" />
