@@ -1,9 +1,9 @@
 ﻿using System;
-using BruTile.Predefined;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using System.Collections.Generic;
 using Mapsui.Geometries;
+using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Common.Maps
 {
@@ -14,7 +14,7 @@ namespace Mapsui.Samples.Common.Maps
         public static Map CreateMap()
         {
             var map = new Map();
-            map.Layers.Add(CreateLayer());
+            map.Layers.Add(OpenStreetMap.CreateTileLayer());
             map.Layers.Add(CreateMutatingTriangleLayer(map.Envelope));
             return map;
         }
@@ -57,11 +57,6 @@ namespace Mapsui.Samples.Common.Maps
             result.Add(result[0]); // close polygon by adding start point.
 
             return result;
-        }
-
-        public static ILayer CreateLayer()
-        {
-            return new TileLayer(KnownTileSources.Create()) { Name = "OSM"};
         }
     }
 }

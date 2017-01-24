@@ -1,7 +1,6 @@
-﻿using BruTile.Predefined;
-using Mapsui.Geometries;
-using Mapsui.Layers;
+﻿using Mapsui.Geometries;
 using Mapsui.Projection;
+using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Common.Maps
 {
@@ -10,7 +9,7 @@ namespace Mapsui.Samples.Common.Maps
         public static Map CreateMap()
         {
             var map = new Map();
-            map.Layers.Add(CreateLayer());
+            map.Layers.Add(OpenStreetMap.CreateTileLayer());
 
             // Get the lon lat coordinates from somewhere (Mapsui can not help you there)
             var centerOfLondonOntario = new Point(-81.2497, 42.9837);
@@ -22,11 +21,6 @@ namespace Mapsui.Samples.Common.Maps
             map.Viewport.Resolution = map.Resolutions[9];
 
             return map;
-        }
-
-        public static ILayer CreateLayer()
-        {
-            return new TileLayer(KnownTileSources.Create()) {Name = "OSM"};
         }
     }
 }

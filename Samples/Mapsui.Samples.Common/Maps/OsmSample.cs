@@ -1,5 +1,4 @@
-﻿using BruTile.Predefined;
-using Mapsui.Layers;
+﻿using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Common.Maps
 {
@@ -8,13 +7,8 @@ namespace Mapsui.Samples.Common.Maps
         public static Map CreateMap()
         {
             var map = new Map();
-            map.Layers.Add(CreateLayer());
+            map.Layers.Add(OpenStreetMap.CreateTileLayer());
             return map;
-        }
-
-        public static ILayer CreateLayer()
-        {
-            return new TileLayer(KnownTileSources.Create()) {Name = "OSM"};
         }
     }
 }

@@ -4,6 +4,7 @@ using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Styles;
+using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Common.Maps
 {
@@ -14,7 +15,7 @@ namespace Mapsui.Samples.Common.Maps
         public static Map CreateMap()
         {
             var map = new Map();
-            map.Layers.Add(OsmSample.CreateLayer());
+            map.Layers.Add(OpenStreetMap.CreateTileLayer());
             map.Layers.Add(CreateRandomPointLayer(map.Envelope));
             return map;
         }

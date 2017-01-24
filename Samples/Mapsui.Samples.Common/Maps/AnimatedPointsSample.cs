@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using BruTile.Predefined;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
@@ -16,7 +15,7 @@ namespace Mapsui.Samples.Common.Maps
         public static Map CreateMap()
         {
             var map = new Map();
-            map.Layers.Add(new TileLayer(KnownTileSources.Create()) {Name = "OSM"});
+            map.Layers.Add(OpenStreetMap.CreateTileLayer());
             map.Layers.Add(new AnimatedPointsWithAutoUpdateLayer {Name = "Animated Points"});
             return map;
         }

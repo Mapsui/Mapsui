@@ -3,6 +3,7 @@ using Mapsui.Layers;
 using Mapsui.Projection;
 using Mapsui.Providers;
 using Mapsui.Styles;
+using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Common.Maps
 {
@@ -16,7 +17,7 @@ namespace Mapsui.Samples.Common.Maps
                 CRS = "EPSG:3857",
                 BackColor = Color.Gray
             };
-            map.Layers.Add(OsmSample.CreateLayer());
+            map.Layers.Add(OpenStreetMap.CreateTileLayer());
             map.Layers.Add(CreateWgs84PointLayer());
             return map;
         }

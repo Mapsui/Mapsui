@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
-using BruTile.Predefined;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Styles;
+using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Common.Maps
 {
@@ -14,7 +14,7 @@ namespace Mapsui.Samples.Common.Maps
         {
             var map = new Map();
 
-            map.Layers.Add(new TileLayer(KnownTileSources.Create()) { Name = "OSM" });
+            map.Layers.Add(OpenStreetMap.CreateTileLayer());
             map.Layers.Add(PolygonSample.CreateLayer());
             map.Layers.Add(LineStringSample.CreateLineStringLayer(LineStringSample.CreateLineStringStyle()));
             map.Layers.Add(CreateLayerWithStyleOnLayer(map.Envelope, 10));
