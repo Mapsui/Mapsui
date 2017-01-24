@@ -32,7 +32,7 @@ namespace Mapsui.Rendering.Xaml.Tests
             File.WriteToGeneratedFolder(fileName, bitmap);
 
             // assert
-            Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap));
+            Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
         }
 
         [Test]
@@ -49,7 +49,7 @@ namespace Mapsui.Rendering.Xaml.Tests
             File.WriteToGeneratedFolder(fileName, bitmap);
 
             // assert
-            Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap));
+            Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
         }
 
         [Test]
@@ -83,7 +83,7 @@ namespace Mapsui.Rendering.Xaml.Tests
             File.WriteToGeneratedFolder(fileName, bitmap);
 
             // assert
-            Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap));
+            Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
         }
 
         [Test]
@@ -100,7 +100,7 @@ namespace Mapsui.Rendering.Xaml.Tests
             File.WriteToGeneratedFolder(fileName, bitmap);
 
             // assert
-            Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap));
+            Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
         }
 
         [Test]
@@ -168,7 +168,7 @@ namespace Mapsui.Rendering.Xaml.Tests
             File.WriteToGeneratedFolder(fileName, bitmap);
 
             // assert
-            Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap));
+            Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
         }
 
         private static bool CompareColors(Color color1, Color color2, int allowedColorDistance)
