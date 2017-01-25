@@ -52,6 +52,7 @@ namespace Mapsui.UI.Wpf
         private double _toResolution = double.NaN;
         private bool _viewportInitialized;
         private readonly AttributionPanel _attributionPanel = CreateAttributionPanel();
+        private bool _layersInitialized;
 
         public MapControl()
         {
@@ -64,7 +65,6 @@ namespace Mapsui.UI.Wpf
             CompositionTarget.Rendering += CompositionTargetRendering;
 
             Map = new Map();
-            if (StartWithOpenStreetMap) Map.Layers.Add(OpenStreetMap.CreateTileLayer());
 
             Loaded += MapControlLoaded;
             MouseLeftButtonDown += MapControlMouseLeftButtonDown;
@@ -315,6 +315,12 @@ namespace Mapsui.UI.Wpf
 
         private void MapControlLoaded(object sender, RoutedEventArgs e)
         {
+            if (!_layersInitialized && StartWithOpenStreetMap)
+            {
+                Map.Layers.Add(OpenStreetMap.CreateTileLayer());
+                _layersInitialized = true;
+            }
+
             if (!_viewportInitialized) InitializeViewport();
             UpdateSize();
             InitAnimation();
