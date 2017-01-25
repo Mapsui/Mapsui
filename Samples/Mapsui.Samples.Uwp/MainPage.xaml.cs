@@ -3,18 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using BruTile;
-using BruTile.Predefined;
-using BruTile.Web;
-using Mapsui.Layers;
-
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
+using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Uwp
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     // ReSharper disable once RedundantExtendsListEntry
     public sealed partial class MainPage : Page
     {
@@ -22,7 +14,7 @@ namespace Mapsui.Samples.Uwp
         {
             InitializeComponent();
 
-            MapControl.Map.Layers.Add(new TileLayer(CreateOsmTileSource()));
+            MapControl.Map.Layers.Add(OpenStreetMap.CreateTileLayer());
 
             FillComboBoxWithDemoSamples();
 
@@ -100,13 +92,5 @@ namespace Mapsui.Samples.Uwp
 
             return radioButton;
         }
-
-        private ITileSource CreateOsmTileSource()
-        {
-            return new HttpTileSource(new GlobalSphericalMercator(0, 18),
-                "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-                new[] {"a", "b", "c"}, name: "OSM");
-        }
-
     }
 }
