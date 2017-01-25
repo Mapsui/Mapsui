@@ -3,18 +3,17 @@ using System.ComponentModel;
 using Android.App;
 using Android.Content;
 using Android.Graphics;
-using Android.Graphics.Drawables;
 using Android.Util;
 using Android.Views;
-using Android.Widget;
 using Java.Lang;
 using Mapsui.Fetcher;
+using SkiaSharp;
 using SkiaSharp.Views.Android;
 using Math = System.Math;
 
 namespace Mapsui.UI.Android
 {
-    public class MapControl : RelativeLayout, IMapControl
+    public class MapControl : SKCanvasView, IMapControl
     {
         private const int None = 0;
         private const int Dragging = 1;
@@ -27,33 +26,28 @@ namespace Mapsui.UI.Android
         private bool _viewportInitialized;
         private Rendering.Skia.MapRenderer _renderer;
         private Map _map;
-        private SKCanvasView _skCanvasView;
 
         public event EventHandler ViewportInitialized;
 
-        public MapControl(Context context, IAttributeSet attrs):
+        public MapControl(Context context, IAttributeSet attrs) :
             base(context, attrs)
         {
             Initialize();
         }
 
-        public MapControl(Context context, IAttributeSet attrs, int defStyle):
+        public MapControl(Context context, IAttributeSet attrs, int defStyle) :
             base(context, attrs, defStyle)
         {
             Initialize();
         }
-        
+
         public void Initialize()
         {
-
             Map = new Map();
             _renderer = new Rendering.Skia.MapRenderer();
             InitializeViewport();
-            
             Touch += MapView_Touch;
         }
- 
-
 
         private void InitializeViewport()
         {
@@ -224,59 +218,16 @@ namespace Mapsui.UI.Android
             PostInvalidate();
         }
 
-        private void SKCanvasViewOnPaintSurface(object sender, SKPaintSurfaceEventArgs skPaintSurfaceEventArgs)
+        protected override void OnDraw(SKSurface surface, SKImageInfo info)
         {
+            base.OnDraw(surface, info);
+
             if (!_viewportInitialized)
                 InitializeViewport();
             if (!_viewportInitialized)
                 return;
 
-            _renderer.Render(skPaintSurfaceEventArgs.Surface.Canvas, _map.Viewport, _map.Layers, _map.BackColor);
-        }
-
-        //protected override void OnDraw(SKSurface surface, SKImageInfo info)
-        //{
-        //    base.OnDraw(surface, info);
-
-        //    if (!_viewportInitialized)
-        //        InitializeViewport();
-        //    if (!_viewportInitialized)
-        //        return;
-
-        //    _renderer.Render(surface.Canvas, _map.Viewport, _map.Layers, _map.BackColor);
-        //}
-
-        protected override void OnLayout(bool changed, int l, int t, int r, int b)
-        {
-            if (_skCanvasView == null)
-            {
-                _skCanvasView = new SKCanvasView(Context);
-                //AddView(_skCanvasView, CreateMatchParentParams());
-                _skCanvasView.PaintSurface += SKCanvasViewOnPaintSurface;
-
-                var button = new Button(Context);
-                
-                button.Text = "Soep";
-                button.Right = r;
-                button.Bottom = b;
-                button.Background = new PaintDrawable(Color.Red);
-                AddView(button, CreateAttributionParameters());
-            }
-            _skCanvasView.Right = r;
-            _skCanvasView.Bottom = b;
-        }
-
-        private static LayoutParams CreateAttributionParameters()
-        {
-            var layoutParams = new LayoutParams(ViewGroup.LayoutParams.WrapContent, ViewGroup.LayoutParams.WrapContent);
-            layoutParams.AddRule(LayoutRules.AlignBottom);
-            layoutParams.AddRule(LayoutRules.AlignRight);
-            return layoutParams;
-        }
-
-        private static LayoutParams CreateMatchParentParams()
-        {
-            return new LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.MatchParent);
+            _renderer.Render(surface.Canvas, _map.Viewport, _map.Layers, _map.BackColor);
         }
     }
 }
