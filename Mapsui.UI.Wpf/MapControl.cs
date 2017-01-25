@@ -64,6 +64,8 @@ namespace Mapsui.UI.Wpf
             CompositionTarget.Rendering += CompositionTargetRendering;
 
             Map = new Map();
+            if (StartWithOpenStreetMap) Map.Layers.Add(OpenStreetMap.CreateTileLayer());
+
             Loaded += MapControlLoaded;
             MouseLeftButtonDown += MapControlMouseLeftButtonDown;
             MouseLeftButtonUp += MapControlMouseLeftButtonUp;
@@ -746,5 +748,7 @@ namespace Mapsui.UI.Wpf
                 HorizontalAlignment = HorizontalAlignment.Right
             };
         }
+
+        public bool StartWithOpenStreetMap { get; set; }
     }
 }

@@ -7,6 +7,7 @@ using Android.Util;
 using Android.Views;
 using Java.Lang;
 using Mapsui.Fetcher;
+using Mapsui.Utilities;
 using SkiaSharp;
 using SkiaSharp.Views.Android;
 using Math = System.Math;
@@ -44,6 +45,8 @@ namespace Mapsui.UI.Android
         public void Initialize()
         {
             Map = new Map();
+            if (StartWithOpenStreetMap) Map.Layers.Add(OpenStreetMap.CreateTileLayer());
+
             _renderer = new Rendering.Skia.MapRenderer();
             InitializeViewport();
             Touch += MapView_Touch;
@@ -229,5 +232,7 @@ namespace Mapsui.UI.Android
 
             _renderer.Render(surface.Canvas, _map.Viewport, _map.Layers, _map.BackColor);
         }
+
+        public bool StartWithOpenStreetMap { get; set; }
     }
 }

@@ -33,6 +33,7 @@ using Windows.UI.Xaml.Shapes;
 using Mapsui.Fetcher;
 using Mapsui.Rendering;
 using Mapsui.Rendering.Skia;
+using Mapsui.Utilities;
 using SkiaSharp.Views.UWP;
 using Point = Windows.Foundation.Point;
 
@@ -65,6 +66,7 @@ namespace Mapsui.UI.Uwp
             _renderTarget.PaintSurface += _renderTarget_PaintSurface;
                         
             Map = new Map();
+            if (StartWithOpenStreetMap) Map.Layers.Add(OpenStreetMap.CreateTileLayer());
             Loaded += MapControlLoaded;
 
             SizeChanged += MapControlSizeChanged;
@@ -457,5 +459,7 @@ namespace Mapsui.UI.Uwp
             var scaleFactor = DisplayInformation.GetForCurrentView().RawPixelsPerViewPixel;
             return new Geometries.Point(scaleFactor, scaleFactor);
         }
+
+        public bool StartWithOpenStreetMap { get; set; }
     }
 }
