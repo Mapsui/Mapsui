@@ -234,7 +234,8 @@ namespace Mapsui.Rendering.Xaml
             var path = new XamlShapes.Path
             {
                 Fill = new XamlMedia.ImageBrush { ImageSource = bitmapImage },
-                IsHitTestVisible = false
+                IsHitTestVisible = false,
+                SnapsToDevicePixels = true
                  
             };
 
@@ -259,8 +260,8 @@ namespace Mapsui.Rendering.Xaml
             dest = new Rect(
                 Math.Round(dest.Left),
                 Math.Round(dest.Top),
-                (Math.Round(dest.Right) - Math.Round(dest.Left)),
-                (Math.Round(dest.Bottom) - Math.Round(dest.Top)));
+                Math.Round(dest.Right) - Math.Round(dest.Left),
+                Math.Round(dest.Bottom) - Math.Round(dest.Top));
             return dest;
         }
         

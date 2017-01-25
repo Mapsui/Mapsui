@@ -35,7 +35,6 @@ namespace Mapsui.Rendering.Xaml
         private static void Render(Canvas target, IViewport viewport, IEnumerable<ILayer> layers,
             Color background, bool rasterizing)
         {
-
             target.BeginInit();
 
             target.Background = background == null ? null : new XamlMedia.SolidColorBrush {Color = background.ToXaml()};
