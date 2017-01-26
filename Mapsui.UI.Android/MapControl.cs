@@ -27,13 +27,18 @@ namespace Mapsui.UI.Android
         private bool _viewportInitialized;
         private Rendering.Skia.MapRenderer _renderer;
         private Map _map;
+        private bool _layersInitialized;
 
         public event EventHandler ViewportInitialized;
 
         public MapControl(Context context, IAttributeSet attrs) :
             base(context, attrs)
         {
+            //var a = context.ObtainStyledAttributes(attrs, Resource.Styleable.start_with_openstreetmap_style);
+            //var startWithOpenStreetMap = a.GetBoolean(Resource.Attribute.start_with_openstreetmap, false);
+            
             Initialize();
+
         }
 
         public MapControl(Context context, IAttributeSet attrs, int defStyle) :
@@ -223,6 +228,12 @@ namespace Mapsui.UI.Android
 
         protected override void OnDraw(SKSurface surface, SKImageInfo info)
         {
+            if (!_layersInitialized && StartWithOpenStreetMap)
+            {
+                Map.Layers.Add(OpenStreetMap.CreateTileLayer());
+                _layersInitialized = true;
+            }
+
             base.OnDraw(surface, info);
 
             if (!_viewportInitialized)
@@ -232,7 +243,9 @@ namespace Mapsui.UI.Android
 
             _renderer.Render(surface.Canvas, _map.Viewport, _map.Layers, _map.BackColor);
         }
+        
 
         public bool StartWithOpenStreetMap { get; set; }
     }
+
 }

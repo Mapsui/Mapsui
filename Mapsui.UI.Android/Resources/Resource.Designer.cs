@@ -27,6 +27,9 @@ namespace Mapsui.UI.Android
 		public partial class Attribute
 		{
 			
+			// aapt resource value: 0x7f010000
+			public static int start_with_openstreetmap = 2130771968;
+			
 			static Attribute()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
@@ -52,6 +55,25 @@ namespace Mapsui.UI.Android
 			}
 			
 			private String()
+			{
+			}
+		}
+		
+		public partial class Styleable
+		{
+			
+			public static int[] start_with_openstreetmap_style = new int[] {
+					2130771968};
+			
+			// aapt resource value: 0
+			public static int start_with_openstreetmap_style_start_with_openstreetmap = 0;
+			
+			static Styleable()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Styleable()
 			{
 			}
 		}
