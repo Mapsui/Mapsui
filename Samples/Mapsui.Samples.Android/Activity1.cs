@@ -14,7 +14,7 @@ namespace Mapsui.Samples.Android
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Main);
             var mapControl = FindViewById<MapControl>(Resource.Id.mapcontrol);
-            //!!!mapControl.Map = VariousSample.CreateMap();
+            mapControl.Map = VariousSample.CreateMap();
         }
     }
 }
