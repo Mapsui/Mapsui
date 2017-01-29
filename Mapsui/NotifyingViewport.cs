@@ -20,7 +20,7 @@ namespace Mapsui
         {
             get { return _viewport.Center;  }
             set {
-                if (Equals(_viewport.Center, value)) return; 
+                if (_viewport.Center.Equals(value)) return; 
                 _viewport.Center = value;
                 OnPropertyChanged("Center");
             }
@@ -120,5 +120,7 @@ namespace Mapsui
             var handler = PropertyChanged;
             handler?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+
     }
 }
