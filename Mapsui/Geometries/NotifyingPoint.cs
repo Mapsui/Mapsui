@@ -31,5 +31,17 @@ namespace Mapsui.Geometries
             var handler = PropertyChanged;
             handler?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        /// <summary>
+        ///     Checks whether this instance is spatially equal to the Point 'o'
+        /// </summary>
+        /// <param name="p">Point to compare to</param>
+        /// <returns></returns>
+        public override bool Equals(Point p)
+        {
+            // ReSharper disable CompareOfFloatsByEqualityOperator
+            return (p != null) && (p.X == X) && (p.Y == Y) && (IsEmpty() == p.IsEmpty());
+            // ReSharper restore CompareOfFloatsByEqualityOperator
+        }
     }
 }
