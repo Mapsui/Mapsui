@@ -248,7 +248,7 @@ namespace Mapsui.Geometries
         /// </summary>
         /// <param name="p">Point to compare to</param>
         /// <returns></returns>
-        public bool Equals(Point p)
+        public virtual bool Equals(Point p)
         {
             // ReSharper disable CompareOfFloatsByEqualityOperator
             return (p != null) && (p.X == _x) && (p.Y == _y) && (_isEmpty == p.IsEmpty());
