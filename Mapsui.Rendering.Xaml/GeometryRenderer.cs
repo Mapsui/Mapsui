@@ -42,7 +42,7 @@ namespace Mapsui.Rendering.Xaml
             return matrix;
         }
 
-        private static XamlMedia.Matrix CreateTransformMatrix1(IViewport viewport)
+        public static XamlMedia.Matrix CreateTransformMatrix1(IViewport viewport)
         {
             return CreateTransformMatrix(new Point(0, 0), viewport);
         }
@@ -122,93 +122,6 @@ namespace Mapsui.Rendering.Xaml
                 group.Children.Add(ConvertSymbol(point, style, viewport));
             }
             return group;
-        }
-
-        public static XamlShapes.Shape RenderLineString(LineString lineString, IStyle style, IViewport viewport)
-        {
-            if (!(style is VectorStyle)) throw new ArgumentException("Style is not of type VectorStyle");
-            var vectorStyle = style as VectorStyle;
-
-            XamlShapes.Path path = CreateLineStringPath(vectorStyle);
-            path.Data = lineString.ToXaml();
-            path.RenderTransform = new XamlMedia.MatrixTransform { Matrix = CreateTransformMatrix1(viewport) };
-            CounterScaleLineWidth(path, viewport.Resolution);
-            return path;
-        }
-
-        private static XamlShapes.Path CreateLineStringPath(VectorStyle style)
-        {
-            var path = new XamlShapes.Path();
-            if (style.Outline != null)
-            {
-                //todo: render an outline around the line. 
-            }
-            path.Stroke = new XamlMedia.SolidColorBrush(style.Line.Color.ToXaml());
-            path.StrokeDashArray = style.Line.PenStyle.ToXaml();
-            path.Tag = style.Line.Width; // see #linewidthhack
-            path.IsHitTestVisible = false;
-            return path;
-        }
-
-        public static XamlShapes.Shape RenderMultiLineString(MultiLineString multiLineString, IStyle style, IViewport viewport)
-        {
-            if (!(style is VectorStyle)) throw new ArgumentException("Style is not of type VectorStyle");
-            var vectorStyle = style as VectorStyle;
-
-            XamlShapes.Path path = CreateLineStringPath(vectorStyle);
-            path.Data = multiLineString.ToXaml();
-            path.RenderTransform = new XamlMedia.MatrixTransform { Matrix = CreateTransformMatrix1(viewport) };
-            CounterScaleLineWidth(path, viewport.Resolution);
-            return path;
-        }
-
-        public static XamlShapes.Shape RenderPolygon(Polygon polygon, IStyle style, IViewport viewport, BrushCache brushCache = null)
-        {
-            if (!(style is VectorStyle)) throw new ArgumentException("Style is not of type VectorStyle");
-            var vectorStyle = style as VectorStyle;
-
-            XamlShapes.Path path = CreatePolygonPath(vectorStyle, viewport.Resolution, brushCache);
-            path.Data = polygon.ToXaml();
-
-            var matrixTransform = new XamlMedia.MatrixTransform { Matrix = CreateTransformMatrix1(viewport) };
-            path.RenderTransform = matrixTransform;
-            
-            if (path.Fill != null)
-                path.Fill.Transform = matrixTransform.Inverse as XamlMedia.MatrixTransform;
-            path.UseLayoutRounding = true;
-            return path;
-        }
-
-        private static XamlShapes.Path CreatePolygonPath(VectorStyle style, double resolution, BrushCache brushCache = null)
-        {
-            var path = new XamlShapes.Path();
-
-            if (style.Outline != null)
-            {
-                path.Stroke = new XamlMedia.SolidColorBrush(style.Outline.Color.ToXaml());
-                path.StrokeThickness = style.Outline.Width * resolution;
-                path.StrokeDashArray = style.Outline.PenStyle.ToXaml();
-                path.Tag = style.Outline.Width; // see #linewidthhack
-            }
-
-            path.Fill = style.Fill.ToXaml(brushCache);
-            path.IsHitTestVisible = false;
-            return path;
-        }
-
-        public static XamlShapes.Path RenderMultiPolygon(MultiPolygon geometry, IStyle style, IViewport viewport)
-        {
-            if (!(style is VectorStyle)) throw new ArgumentException("Style is not of type VectorStyle");
-            var vectorStyle = style as VectorStyle;
-            var path = CreatePolygonPath(vectorStyle, viewport.Resolution);
-            path.Data = geometry.ToXaml();
-            var matrixTransform = new XamlMedia.MatrixTransform { Matrix = CreateTransformMatrix1(viewport) };
-            path.RenderTransform = matrixTransform;
-
-            if (path.Fill != null)
-                path.Fill.Transform = matrixTransform.Inverse as XamlMedia.MatrixTransform;
-
-            return path;
         }
 
         public static XamlShapes.Path RenderRaster(IRaster raster, IStyle style, IViewport viewport)
@@ -300,7 +213,7 @@ namespace Mapsui.Rendering.Xaml
                 renderedGeometry.Fill.Transform = matrixTransform.Inverse as XamlMedia.MatrixTransform;
         }
 
-        private static void CounterScaleLineWidth(UIElement renderedGeometry, double resolution)
+        public static void CounterScaleLineWidth(UIElement renderedGeometry, double resolution)
         {
             // #linewidthhack
             // When the RenderTransform Matrix is applied the width of the line
