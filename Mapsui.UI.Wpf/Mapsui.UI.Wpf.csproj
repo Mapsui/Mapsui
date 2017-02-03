@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AttributionPanel.cs" />
+    <Compile Include="ExtensionMethods\PointExtensions.cs" />
     <Compile Include="FpsCounter.cs" />
     <Compile Include="Layers\GroupTileLayer.cs" />
     <Compile Include="MapControl.cs" />
