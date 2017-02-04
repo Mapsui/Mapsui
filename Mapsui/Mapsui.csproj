@@ -40,8 +40,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExtensionMethods\BoundingBoxExtensions.cs" />
+    <Compile Include="ExtensionMethods\DoubleExtensions.cs" />
+    <Compile Include="ExtensionMethods\ExtentExtensions.cs" />
     <Compile Include="ExtensionMethods\FeatureExtensions.cs" />
     <Compile Include="ExtensionMethods\GeometryExtensions.cs" />
+    <Compile Include="ExtensionMethods\TimerExtensions.cs" />
     <Compile Include="Fetcher\FeatureFetcher.cs" />
     <Compile Include="Fetcher\FetchOnThread.cs" />
     <Compile Include="Fetcher\FetchStrategy.cs" />
@@ -147,7 +150,7 @@
     <Compile Include="Utilities\Constants.cs" />
     <Compile Include="Utilities\DeveloperTools.cs" />
     <Compile Include="Utilities\EmbeddedResourceLoader.cs" />
-    <Compile Include="ExtensionMethods\Extensions.cs" />
+    <Compile Include="Utilities\OpenStreetMap.cs" />
     <Compile Include="Utilities\ProjectionHelper.cs" />
     <Compile Include="Utilities\Timer.cs" />
     <Compile Include="Utilities\Version.cs" />

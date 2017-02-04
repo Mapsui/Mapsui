@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="AllSamples.cs" />
     <Compile Include="Maps\BingSample.cs" />
+    <Compile Include="Maps\CenterOnLocationSample.cs" />
     <Compile Include="Maps\LabelsSample.cs" />
     <Compile Include="Maps\MutatingTriangleSample.cs" />
     <Compile Include="Maps\OsmSample.cs" />
