@@ -1112,7 +1112,7 @@ Global
 		{5C1F0E76-BF98-4C6E-8AAB-CDB7E3735A9C}.AppStore|Mixed Platforms.Build.0 = AppStore|iPhone
 		{5C1F0E76-BF98-4C6E-8AAB-CDB7E3735A9C}.AppStore|x64.ActiveCfg = AppStore|iPhone
 		{5C1F0E76-BF98-4C6E-8AAB-CDB7E3735A9C}.AppStore|x86.ActiveCfg = AppStore|iPhone
-		{5C1F0E76-BF98-4C6E-8AAB-CDB7E3735A9C}.Debug|Any CPU.ActiveCfg = Debug|iPhone
+		{5C1F0E76-BF98-4C6E-8AAB-CDB7E3735A9C}.Debug|Any CPU.ActiveCfg = Debug|iPhoneSimulator
 		{5C1F0E76-BF98-4C6E-8AAB-CDB7E3735A9C}.Debug|ARM.ActiveCfg = Debug|iPhone
 		{5C1F0E76-BF98-4C6E-8AAB-CDB7E3735A9C}.Debug|iPhone.ActiveCfg = Debug|iPhone
 		{5C1F0E76-BF98-4C6E-8AAB-CDB7E3735A9C}.Debug|iPhone.Build.0 = Debug|iPhone
