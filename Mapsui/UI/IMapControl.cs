@@ -11,7 +11,5 @@ namespace Mapsui.UI
         void RefreshGraphics();
 
         bool StartWithOpenStreetMap { get; set; }
-
-        event EventHandler<MouseInfoEventArgs> Info;
     }
 }

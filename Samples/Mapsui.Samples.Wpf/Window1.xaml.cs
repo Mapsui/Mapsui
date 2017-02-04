@@ -20,7 +20,7 @@ namespace Mapsui.Samples.Wpf
             InitializeComponent();
             MapControl.ErrorMessageChanged += MapErrorMessageChanged;
             MapControl.FeatureInfo += MapControlFeatureInfo;
-            MapControl.Info += MapControlOnInfo;
+            MapControl.Map.Info += MapControlOnInfo;
             MapControl.MouseMove += MapControlOnMouseMove;
             MapControl.HoverInfo += MapControlOnHoverInfo;
 
@@ -127,10 +127,17 @@ namespace Mapsui.Samples.Wpf
             {
                 MapControl.Map.Layers.Clear();
                 MapControl.Map = sample.Value();
+                MapControl.Map.Info += MapControlOnInfo;
                 LayerList.Initialize(MapControl.Map.Layers);
                 MapControl.Refresh();
+                
             };
             return radioButton;
+        }
+
+        private void MapOnInfo(object sender, MouseInfoEventArgs mouseInfoEventArgs)
+        {
+            
         }
 
         private void LogMethod(LogLevel logLevel, string s, Exception exception)

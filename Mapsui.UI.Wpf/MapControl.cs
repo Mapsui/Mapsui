@@ -200,7 +200,6 @@ namespace Mapsui.UI.Wpf
         public event EventHandler ErrorMessageChanged;
         public event EventHandler<ViewChangedEventArgs> ViewChanged;
         public event EventHandler<MouseInfoEventArgs> HoverInfo;
-        public event EventHandler<MouseInfoEventArgs> Info;
         public event EventHandler<FeatureInfoEventArgs> FeatureInfo;
         public event EventHandler ViewportInitialized;
 
@@ -460,8 +459,7 @@ namespace Mapsui.UI.Wpf
             else
             {
                 HandleFeatureInfo(e);
-                var eventArgs = InfoHelper.GetInfoEventArgs(Map, e.GetPosition(this).ToMapsui(), Map.InfoLayers);
-                if (eventArgs != null) OnMouseInfoUp(eventArgs);
+                Map.InvokeInfo(e.GetPosition(this).ToMapsui());
             }
 
             _map.ViewChanged(true);
@@ -546,11 +544,6 @@ namespace Mapsui.UI.Wpf
         private void OnMouseHoverInfo(MouseInfoEventArgs e)
         {
             HoverInfo?.Invoke(this, e);
-        }
-
-        private void OnMouseInfoUp(MouseInfoEventArgs e)
-        {
-            Info?.Invoke(this, e);
         }
 
         private void InitializeViewport()

@@ -25,6 +25,7 @@ using Mapsui.Layers;
 using Mapsui.Projection;
 using Mapsui.Providers;
 using Mapsui.Styles;
+using Mapsui.UI;
 using Mapsui.Utilities;
 
 namespace Mapsui
@@ -205,6 +206,7 @@ namespace Mapsui
         /// </summary>
         public event DataChangedEventHandler DataChanged;
         public event EventHandler RefreshGraphics;
+        public event EventHandler<MouseInfoEventArgs> Info;
 
         private void LayersLayerRemoved(ILayer layer)
         {
@@ -214,6 +216,13 @@ namespace Mapsui
             layer.PropertyChanged -= LayerPropertyChanged;
 
             OnPropertyChanged(nameof(Layers));
+        }
+
+        public void InvokeInfo(Point screenPosition)
+        {
+            if (Info == null) return;
+            var eventArgs = InfoHelper.GetInfoEventArgs(this, screenPosition, InfoLayers);
+            if (eventArgs != null) Info?.Invoke(this, eventArgs);
         }
 
         private void LayersLayerAdded(ILayer layer)

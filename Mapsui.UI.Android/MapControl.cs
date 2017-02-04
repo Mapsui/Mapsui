@@ -30,7 +30,6 @@ namespace Mapsui.UI.Android
         private bool _layersInitialized;
 
         public event EventHandler ViewportInitialized;
-        public event EventHandler<MouseInfoEventArgs> Info;
 
         public MapControl(Context context, IAttributeSet attrs) :
             base(context, attrs)
@@ -87,7 +86,7 @@ namespace Mapsui.UI.Android
                     Invalidate();
                     _mode = None;
                     _map.ViewChanged(true);
-                    HandleInfo(GetPosition(args.Event));
+                    Map.InvokeInfo(GetPosition(args.Event).ToMapsui());
                     break;
                 case MotionEventActions.Pointer2Down:
                     _previousMap = null;
@@ -146,13 +145,6 @@ namespace Mapsui.UI.Android
                     }
                     break;
             }
-        }
-
-        private void HandleInfo(PointF screenPosition)
-        {
-            if (Info == null) return;
-            var args = InfoHelper.GetInfoEventArgs(Map, screenPosition.ToMapsui(), Map.InfoLayers);
-            if (args != null) Info?.Invoke(this, args);
         }
 
         private static float Spacing(MotionEvent me)

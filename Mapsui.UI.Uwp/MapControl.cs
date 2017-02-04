@@ -55,7 +55,6 @@ namespace Mapsui.UI.Uwp
         private bool _layersInitialized;
 
         public event EventHandler ViewportInitialized;
-        public event EventHandler<MouseInfoEventArgs> Info;
 
         public MapControl()
         {
@@ -445,15 +444,7 @@ namespace Mapsui.UI.Uwp
         {
             _previousPosition = default(Point);
             Refresh();
-            HandleInfo(e.Position);
-
-        }
-
-        private void HandleInfo(Point screenPosition)
-        {
-            if (Info == null) return;
-            var eventArgs = InfoHelper.GetInfoEventArgs(Map, screenPosition.ToMapsui(), Map.InfoLayers);
-            if (eventArgs != null) Info?.Invoke(this, eventArgs);
+            Map.InvokeInfo(e.Position.ToMapsui());
         }
 
         private void InitializeViewport()
