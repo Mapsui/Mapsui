@@ -5,6 +5,7 @@ using Foundation;
 using UIKit;
 using System;
 using System.ComponentModel;
+using System.Linq;
 using CoreGraphics;
 using Mapsui.Utilities;
 using SkiaSharp.Views.iOS;
@@ -14,8 +15,6 @@ namespace Mapsui.UI.iOS
     [Register("MapControl"), DesignTimeVisible(true)]
     public class MapControl : SKCanvasView, IMapControl
     {
-        public event EventHandler ViewportInitialized;
-
         private CGPoint _previousMid;
         private CGPoint _currentMid;
         private float _oldDist = 1f;
@@ -26,6 +25,9 @@ namespace Mapsui.UI.iOS
 
         private float Width => (float)Frame.Width;
         private float Height => (float)Frame.Height;
+
+        public event EventHandler<MouseInfoEventArgs> Info;
+        public event EventHandler ViewportInitialized;
 
         public MapControl(CGRect frame)
             : base(frame)
@@ -153,6 +155,18 @@ namespace Mapsui.UI.iOS
         public override void TouchesEnded(NSSet touches, UIEvent e)
         {
             Refresh();
+            HandleInfo(e.AllTouches);
+        }
+
+        private void HandleInfo(NSSet touches)
+        {
+            if (Info == null) return;
+            if (touches.Count != 1) return;
+            var touch = touches.FirstOrDefault() as UITouch;
+            if (touch == null) return;
+            var screenPosition = touch.LocationInView(this);
+            var args = InfoHelper.GetInfoEventArgs(Map, screenPosition.ToMapsui(), Map.InfoLayers);
+            if (args != null) Info?.Invoke(this, args);
         }
 
         public void Refresh()

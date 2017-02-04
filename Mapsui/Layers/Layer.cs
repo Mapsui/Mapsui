@@ -125,7 +125,7 @@ namespace Mapsui.Layers
             extent = Transform(extent);
 
             var fetcher = new FeatureFetcher(extent, resolution, DataSource, DataArrived);
-            Task.Factory.StartNew(() => fetcher.FetchOnThread()); //!!! Why Task.Factory iso Task.Run
+            Task.Factory.StartNew(() => fetcher.FetchOnThread()); // Why Task.Factory iso Task.Run?
         }
 
         protected void DataArrived(IEnumerable<IFeature> features, object state = null)

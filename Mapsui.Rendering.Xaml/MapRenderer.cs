@@ -197,13 +197,13 @@ namespace Mapsui.Rendering.Xaml
             if (feature.Geometry is MultiPoint)
                 return GeometryRenderer.RenderMultiPoint(feature.Geometry as MultiPoint, style, viewport);
             if (feature.Geometry is LineString)
-                return GeometryRenderer.RenderLineString(feature.Geometry as LineString, style, viewport);
+                return LineStringRenderer.RenderLineString(feature.Geometry as LineString, style, viewport);
             if (feature.Geometry is MultiLineString)
-                return GeometryRenderer.RenderMultiLineString(feature.Geometry as MultiLineString, style, viewport);
+                return MultiLineStringRenderer.Render(feature.Geometry as MultiLineString, style, viewport);
             if (feature.Geometry is Polygon)
-                return GeometryRenderer.RenderPolygon(feature.Geometry as Polygon, style, viewport, brushCache);
+                return PolygonRenderer.RenderPolygon(feature.Geometry as Polygon, style, viewport, brushCache);
             if (feature.Geometry is MultiPolygon)
-                return GeometryRenderer.RenderMultiPolygon(feature.Geometry as MultiPolygon, style, viewport);
+                return MultiPolygonRenderer.RenderMultiPolygon(feature.Geometry as MultiPolygon, style, viewport);
             if (feature.Geometry is IRaster)
                 return GeometryRenderer.RenderRaster(feature.Geometry as IRaster, style, viewport);
             return null;

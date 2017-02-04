@@ -30,6 +30,7 @@ namespace Mapsui.UI.Android
         private bool _layersInitialized;
 
         public event EventHandler ViewportInitialized;
+        public event EventHandler<MouseInfoEventArgs> Info;
 
         public MapControl(Context context, IAttributeSet attrs) :
             base(context, attrs)
@@ -38,10 +39,9 @@ namespace Mapsui.UI.Android
             //var startWithOpenStreetMap = a.GetBoolean(Resource.Attribute.start_with_openstreetmap, false);
             
             Initialize();
-
         }
 
-        public MapControl(Context context, IAttributeSet attrs, int defStyle) :
+        public MapControl(Context context, IAttributeSet attrs, int defStyle):
             base(context, attrs, defStyle)
         {
             Initialize();
@@ -87,6 +87,7 @@ namespace Mapsui.UI.Android
                     Invalidate();
                     _mode = None;
                     _map.ViewChanged(true);
+                    HandleInfo(GetPosition(args.Event));
                     break;
                 case MotionEventActions.Pointer2Down:
                     _previousMap = null;
@@ -147,6 +148,13 @@ namespace Mapsui.UI.Android
             }
         }
 
+        private void HandleInfo(PointF screenPosition)
+        {
+            if (Info == null) return;
+            var args = InfoHelper.GetInfoEventArgs(Map, screenPosition.ToMapsui(), Map.InfoLayers);
+            if (args != null) Info?.Invoke(this, args);
+        }
+
         private static float Spacing(MotionEvent me)
         {
             if (me.PointerCount < 2)
@@ -157,11 +165,20 @@ namespace Mapsui.UI.Android
             return (float)Math.Sqrt(x * x + y * y);
         }
 
-        private static void MidPoint(PointF point, MotionEvent me)
+        private static void MidPoint(PointF point, MotionEvent motionEvent)
         {
-            var x = me.GetX(0) + me.GetX(1);
-            var y = me.GetY(0) + me.GetY(1);
-            point.Set(x / 2, y / 2);
+            var position = GetPosition2(motionEvent);
+            point.Set(position.X / 2, position.Y / 2);
+        }
+        
+        private static PointF GetPosition2(MotionEvent motionEvent)
+        {
+            return new PointF(motionEvent.GetX(0) + motionEvent.GetX(1), motionEvent.GetY(0) + motionEvent.GetY(1));
+        }
+
+        private static PointF GetPosition(MotionEvent motionEvent)
+        {
+            return new PointF(motionEvent.GetX(0) , motionEvent.GetY(0));
         }
 
         public Map Map

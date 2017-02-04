@@ -1,7 +1,11 @@
-﻿using Android.App;
+﻿using System;
+using Android.App;
 using Android.Content.PM;
 using Android.OS;
+using Android.Widget;
+using Java.Lang;
 using Mapsui.Samples.Common.Maps;
+using Mapsui.UI;
 using Mapsui.UI.Android;
 
 namespace Mapsui.Samples.Android
@@ -14,7 +18,8 @@ namespace Mapsui.Samples.Android
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Main);
             var mapControl = FindViewById<MapControl>(Resource.Id.mapcontrol);
-            mapControl.Map = VariousSample.CreateMap();
+            mapControl.Map = InfoLayersSample.CreateMap();
+
         }
     }
 }

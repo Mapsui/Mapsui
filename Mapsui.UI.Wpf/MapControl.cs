@@ -460,8 +460,8 @@ namespace Mapsui.UI.Wpf
             else
             {
                 HandleFeatureInfo(e);
-                var eventArgs = GetInfoEventArgs(e.GetPosition(this), Map.InfoLayers);
-                OnMouseInfoUp(eventArgs ?? new MouseInfoEventArgs());
+                var eventArgs = InfoHelper.GetInfoEventArgs(Map, e.GetPosition(this).ToMapsui(), Map.InfoLayers);
+                if (eventArgs != null) OnMouseInfoUp(eventArgs);
             }
 
             _map.ViewChanged(true);
@@ -519,7 +519,7 @@ namespace Mapsui.UI.Wpf
 
         private void RaiseHoverInfoEvents(Point mousePosition)
         {
-            var hoverInfoEventArgs = GetInfoEventArgs(mousePosition, Map.HoverInfoLayers);
+            var hoverInfoEventArgs = InfoHelper.GetInfoEventArgs(Map, mousePosition.ToMapsui(), Map.HoverInfoLayers);
 
             if (HasChanged(_previousHoverInfoEventArgs, hoverInfoEventArgs))
             {
@@ -536,18 +536,6 @@ namespace Mapsui.UI.Wpf
         {
             if (previousInfoEventArgs == null) return true;
             return previousInfoEventArgs.Feature != infoEventArgs?.Feature;
-        }
-
-        private MouseInfoEventArgs GetInfoEventArgs(Point mousePosition, IEnumerable<ILayer> layers)
-        {
-            var point = Map.Viewport.ScreenToWorld(new Geometries.Point(mousePosition.X, mousePosition.Y));
-
-            var feature = Map.GetFeatureInfo(layers, point);
-
-            if (feature != null)
-                return new MouseInfoEventArgs { LayerName = "", Feature = feature };
-
-            return null;
         }
         
         private void OnMouseHoverInfoLeave()

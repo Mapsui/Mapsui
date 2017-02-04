@@ -36,6 +36,7 @@ namespace Mapsui.Tests.Fetcher
         }
 
         [Test]
+        [Ignore("Under investigation")]
         public void TileFetcherWithReturningNull()
         {
             // Arrange

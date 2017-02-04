@@ -32,7 +32,7 @@ namespace Mapsui.Samples.iOS
         {
             var mapControl = new MapControl(bounds)
             {
-                Map = Common.Maps.CenterOnLocationSample.CreateMap()
+                Map = Common.Maps.InfoLayersSample.CreateMap()
             };
 
             CGRect frame = mapControl.Frame;

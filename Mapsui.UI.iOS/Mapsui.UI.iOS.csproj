@@ -33,6 +33,7 @@
     <CodesignKey>iPhone Developer</CodesignKey>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ExtensionMethods\CGPointExtensions.cs" />
     <Compile Include="FpsCounter.cs" />
     <Compile Include="MapControl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -69,4 +70,5 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
 </Project>
