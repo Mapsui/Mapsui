@@ -9,9 +9,6 @@ namespace Mapsui.Rendering.Skia
 {
     static class PointRenderer
     {
-        private const float HalfWidth = (float) SymbolStyle.DefaultWidth/2;
-        private const float HalfHeight = (float) SymbolStyle.DefaultHeight/2;
-
         // todo: 
         // try to remove the feature argument. LabelStyle should already contain the feature specific text
         // The visible feature iterator should create this LabelStyle
@@ -70,6 +67,10 @@ namespace Mapsui.Rendering.Skia
         private static void DrawPointWithVectorStyle(SKCanvas canvas, VectorStyle vectorStyle,
             SymbolType symbolType = SymbolType.Ellipse)
         {
+
+            var halfWidth = (float)SymbolStyle.DefaultWidth / 2;
+            var halfHeight = (float)SymbolStyle.DefaultHeight / 2;
+
             var fillPaint = new SKPaint
             {
                 Color = vectorStyle.Fill.Color.ToSkia(),
@@ -87,13 +88,13 @@ namespace Mapsui.Rendering.Skia
 
             if (symbolType == SymbolType.Rectangle)
             {
-                var rect = new SKRect(-HalfWidth, -HalfHeight, HalfWidth, HalfHeight);
+                var rect = new SKRect(-halfWidth, -halfHeight, halfWidth, halfHeight);
                 DrawRect(canvas, rect, fillPaint, linePaint);
             }
             else if (symbolType == SymbolType.Ellipse)
             {
 
-                DrawCircle(canvas, 0, 0, HalfWidth, fillPaint, linePaint);
+                DrawCircle(canvas, 0, 0, halfWidth, fillPaint, linePaint);
             }
         }
         

@@ -9,7 +9,5 @@ namespace Mapsui.UI
         event EventHandler ViewportInitialized;
 
         void RefreshGraphics();
-
-        bool StartWithOpenStreetMap { get; set; }
     }
 }

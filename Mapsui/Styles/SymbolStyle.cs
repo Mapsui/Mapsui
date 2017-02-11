@@ -17,9 +17,9 @@ namespace Mapsui.Styles
 
     public class SymbolStyle : VectorStyle
     {
-        public const double DefaultWidth = 32;
+        public static double DefaultWidth { get; set; } = 32;
 
-        public const double DefaultHeight = 32;
+        public static double DefaultHeight { get; set; } = 32;
 
         public SymbolStyle()
         {

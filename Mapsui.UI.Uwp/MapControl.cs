@@ -52,7 +52,6 @@ namespace Mapsui.UI.Uwp
         private Point _previousPosition;
         private bool _viewportInitialized;
         private Geometries.Point _skiaScale;
-        private bool _layersInitialized;
 
         public event EventHandler ViewportInitialized;
 
@@ -270,12 +269,6 @@ namespace Mapsui.UI.Uwp
 
         private void MapControlLoaded(object sender, RoutedEventArgs e)
         {
-            if (!_layersInitialized && StartWithOpenStreetMap)
-            {
-                Map.Layers.Add(OpenStreetMap.CreateTileLayer());
-                _layersInitialized = true;
-            }
-
             if (!_viewportInitialized) InitializeViewport();
             UpdateSize();
             InitAnimation();
@@ -467,7 +460,5 @@ namespace Mapsui.UI.Uwp
             var scaleFactor = DisplayInformation.GetForCurrentView().RawPixelsPerViewPixel;
             return new Geometries.Point(scaleFactor, scaleFactor);
         }
-
-        public bool StartWithOpenStreetMap { get; set; }
     }
 }

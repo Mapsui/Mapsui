@@ -52,7 +52,6 @@ namespace Mapsui.UI.Wpf
         private double _toResolution = double.NaN;
         private bool _viewportInitialized;
         private readonly AttributionPanel _attributionPanel = CreateAttributionPanel();
-        private bool _layersInitialized;
 
         public MapControl()
         {
@@ -314,12 +313,6 @@ namespace Mapsui.UI.Wpf
 
         private void MapControlLoaded(object sender, RoutedEventArgs e)
         {
-            if (!_layersInitialized && StartWithOpenStreetMap)
-            {
-                Map.Layers.Add(OpenStreetMap.CreateTileLayer());
-                _layersInitialized = true;
-            }
-
             if (!_viewportInitialized) InitializeViewport();
             UpdateSize();
             InitAnimation();
@@ -735,7 +728,5 @@ namespace Mapsui.UI.Wpf
                 HorizontalAlignment = HorizontalAlignment.Right
             };
         }
-
-        public bool StartWithOpenStreetMap { get; set; }
     }
 }

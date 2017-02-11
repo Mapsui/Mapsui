@@ -37,8 +37,7 @@ namespace Mapsui.UI.iOS
         public void Initialize()
         {
             Map = new Map();
-            if (StartWithOpenStreetMap) Map.Layers.Add(OpenStreetMap.CreateTileLayer());
-
+            
             BackgroundColor = UIColor.White;
             _renderer = new MapRenderer();
 
@@ -266,7 +265,5 @@ namespace Mapsui.UI.iOS
         {
             SetNeedsDisplay();
         }
-
-        public bool StartWithOpenStreetMap { get; set; }
     }
 }
