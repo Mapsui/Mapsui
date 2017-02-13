@@ -7,20 +7,23 @@ using System;
 using System.ComponentModel;
 using System.Linq;
 using CoreGraphics;
-using Mapsui.Utilities;
 using SkiaSharp.Views.iOS;
+using Mapsui.Layers;
+using System.Collections.Generic;
 
 namespace Mapsui.UI.iOS
 {
     [Register("MapControl"), DesignTimeVisible(true)]
-    public class MapControl : SKCanvasView, IMapControl
+    public class MapControl : UIStackView, IMapControl
     {
         private CGPoint _previousMid;
         private CGPoint _currentMid;
         private float _oldDist = 1f;
-        private MapRenderer _renderer;
         private Map _map;
-        
+        private MapRenderer _renderer = new MapRenderer();
+        private SKCanvasView _canvas;
+        private AttributionView _attribution = new AttributionView();
+
         private bool _viewportInitialized;
 
         private float Width => (float)Frame.Width;
@@ -31,15 +34,22 @@ namespace Mapsui.UI.iOS
         public MapControl(CGRect frame)
             : base(frame)
         {
-            Initialize();
+            Initialize(frame);
         }
 
-        public void Initialize()
+        public void Initialize(CGRect frame)
         {
             Map = new Map();
-            
             BackgroundColor = UIColor.White;
-            _renderer = new MapRenderer();
+
+            Axis = UILayoutConstraintAxis.Vertical;    
+            
+            _canvas = new SKCanvasView();
+            _canvas.Frame = frame;
+            _canvas.ClipsToBounds = true;           
+            AddSubview(_canvas);
+
+            AddSubview(_attribution);
 
             InitializeViewport();
             
@@ -48,7 +58,19 @@ namespace Mapsui.UI.iOS
             var pinchGesture = new UIPinchGestureRecognizer(PinchGesture) { Enabled = true };
             AddGestureRecognizer(pinchGesture);
 
-            PaintSurface += OnPaintSurface;
+            _canvas.PaintSurface += OnPaintSurface;
+        }
+        
+
+        public override void LayoutMarginsDidChange()
+        {
+            if (_canvas == null) return;
+
+            var frame = _canvas.Frame;
+            frame.Size = frame.Size;
+            _canvas.Frame = frame;
+
+            base.LayoutMarginsDidChange();
         }
 
         private void OnPaintSurface(object sender, SKPaintSurfaceEventArgs skPaintSurfaceEventArgs)
@@ -187,16 +209,18 @@ namespace Mapsui.UI.iOS
                     temp.PropertyChanged -= MapPropertyChanged;
                     temp.RefreshGraphics -= MapRefreshGraphics;
                     temp.Dispose();
+                    _attribution.Populate(new List<ILayer>()); // clear;
                 }
 
                 _map = value;
-                
+
                 if (_map != null)
                 {
                     _map.DataChanged += MapDataChanged;
                     _map.PropertyChanged += MapPropertyChanged;
                     _map.RefreshGraphics += MapRefreshGraphics;
                     _map.ViewChanged(true);
+                    _attribution.Populate(Map.Layers);
                 }
 
                 RefreshGraphics();
@@ -264,6 +288,7 @@ namespace Mapsui.UI.iOS
         public void RefreshGraphics()
         {
             SetNeedsDisplay();
+            if (_canvas != null) _canvas.SetNeedsDisplay();
         }
     }
 }

@@ -365,6 +365,7 @@ Global
 		{508AE811-A03A-4138-8CCC-ABDE03C67010}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
 		{508AE811-A03A-4138-8CCC-ABDE03C67010}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
 		{508AE811-A03A-4138-8CCC-ABDE03C67010}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{508AE811-A03A-4138-8CCC-ABDE03C67010}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
 		{508AE811-A03A-4138-8CCC-ABDE03C67010}.Debug|x64.ActiveCfg = Debug|Any CPU
 		{508AE811-A03A-4138-8CCC-ABDE03C67010}.Debug|x64.Build.0 = Debug|Any CPU
 		{508AE811-A03A-4138-8CCC-ABDE03C67010}.Debug|x86.ActiveCfg = Debug|Any CPU
@@ -700,6 +701,7 @@ Global
 		{81BB36D2-4D01-44E3-9024-E7CBD10DA316}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
 		{81BB36D2-4D01-44E3-9024-E7CBD10DA316}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
 		{81BB36D2-4D01-44E3-9024-E7CBD10DA316}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{81BB36D2-4D01-44E3-9024-E7CBD10DA316}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
 		{81BB36D2-4D01-44E3-9024-E7CBD10DA316}.Debug|x64.ActiveCfg = Debug|Any CPU
 		{81BB36D2-4D01-44E3-9024-E7CBD10DA316}.Debug|x64.Build.0 = Debug|Any CPU
 		{81BB36D2-4D01-44E3-9024-E7CBD10DA316}.Debug|x86.ActiveCfg = Debug|Any CPU
@@ -1368,8 +1370,8 @@ Global
 		{53A4E033-F814-46CC-8105-DAC289524455}.Debug|ARM.Build.0 = Debug|Any CPU
 		{53A4E033-F814-46CC-8105-DAC289524455}.Debug|iPhone.ActiveCfg = Debug|Any CPU
 		{53A4E033-F814-46CC-8105-DAC289524455}.Debug|iPhone.Build.0 = Debug|Any CPU
-		{53A4E033-F814-46CC-8105-DAC289524455}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
-		{53A4E033-F814-46CC-8105-DAC289524455}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{53A4E033-F814-46CC-8105-DAC289524455}.Debug|iPhoneSimulator.ActiveCfg = Debug|x86
+		{53A4E033-F814-46CC-8105-DAC289524455}.Debug|iPhoneSimulator.Build.0 = Debug|x86
 		{53A4E033-F814-46CC-8105-DAC289524455}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
 		{53A4E033-F814-46CC-8105-DAC289524455}.Debug|Mixed Platforms.Build.0 = Debug|x86
 		{53A4E033-F814-46CC-8105-DAC289524455}.Debug|x64.ActiveCfg = Debug|x64
