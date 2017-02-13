@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using Mapsui.UI.iOS;
 using UIKit;
 using CoreGraphics;
+using Mapsui.Layers;
 
 namespace Mapsui.Samples.iOS
 {
@@ -16,8 +18,12 @@ namespace Mapsui.Samples.iOS
             base.ViewDidLoad();
 
             var table = CreateContainer();
+            var map = CreateMap(View.Bounds);
+            table.AddArrangedSubview(map);
+            //var attribution = CreateAttribution();
+            //table.AddArrangedSubview(attribution);
+            //attribution.Populate(map.Map.Layers);
             View = table;
-            table.AddArrangedSubview(CreateMap(View.Bounds));
         }
 
         private static UIStackView CreateContainer()
@@ -36,22 +42,20 @@ namespace Mapsui.Samples.iOS
             };
 
             CGRect frame = mapControl.Frame;
-            frame.Size = new CGSize(300, 200);
+            frame.Size = new CGSize(500, 500);
             mapControl.Frame = frame;
             mapControl.BackgroundColor = UIColor.Orange;
             return mapControl;
         }
 
-        private static UIButton CreateButton()
+        private static AttributionView CreateAttribution()
         {
-            var button = UIButton.FromType(UIButtonType.System);
-            button.SetTitle("Button!", UIControlState.Normal);
-
-            CGRect buttonFrame = button.Frame;
-            buttonFrame.Size = new CGSize(300, 200);
-            button.Frame = buttonFrame;
-            button.BackgroundColor = UIColor.Orange;
-            return button;
+            var attributeView = new AttributionView();
+            CGRect buttonFrame = attributeView.Frame;
+            buttonFrame.Size = new CGSize(500, 500);
+            attributeView.Frame = buttonFrame;
+            attributeView.BackgroundColor = null;
+            return attributeView;
         }
     }
 }
