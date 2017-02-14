@@ -56,6 +56,11 @@ namespace Mapsui.UI.iOS
         private void Resize(CGRect frame)
         {
             _canvas.Frame = frame;
+            _attribution.Frame = new CGRect(
+                frame.Width - _attribution.Frame.Width, 
+                frame.Height - _attribution.Frame.Height,
+                _attribution.Frame.Width,
+                _attribution.Frame.Height);
         }
 
         public void Initialize()
@@ -227,7 +232,7 @@ namespace Mapsui.UI.iOS
                     temp.PropertyChanged -= MapPropertyChanged;
                     temp.RefreshGraphics -= MapRefreshGraphics;
                     temp.Dispose();
-                    _attribution.Populate(new List<ILayer>()); // clear;
+                    _attribution.Clear();
                 }
 
                 _map = value;

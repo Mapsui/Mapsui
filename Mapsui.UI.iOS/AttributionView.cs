@@ -17,6 +17,11 @@ namespace Mapsui.UI.iOS
             SizeToFit();
         }
 
+        public void Clear()
+        {
+            Text = "";
+        }
+
         private static string ToAttributionText(IEnumerable<ILayer> layers)
         {
             var text = "";
