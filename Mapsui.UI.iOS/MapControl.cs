@@ -20,9 +20,9 @@ namespace Mapsui.UI.iOS
         private CGPoint _currentMid;
         private float _oldDist = 1f;
         private Map _map;
-        private MapRenderer _renderer = new MapRenderer();
-        private SKCanvasView _canvas;
-        private AttributionView _attribution = new AttributionView();
+        private readonly MapRenderer _renderer = new MapRenderer();
+        private readonly SKCanvasView _canvas = new SKCanvasView();
+        private readonly AttributionView _attribution = new AttributionView();
 
         private bool _viewportInitialized;
 
@@ -34,18 +34,37 @@ namespace Mapsui.UI.iOS
         public MapControl(CGRect frame)
             : base(frame)
         {
-            Initialize(frame);
+            Initialize();
         }
 
-        public void Initialize(CGRect frame)
+        [Preserve]
+        public MapControl(IntPtr handle) : base(handle) // used when initialized from storyboard
+        {
+            Initialize();
+        }
+        
+        public override CGRect Frame
+        {
+            get { return base.Frame; }
+            set
+            {
+                Resize(value);
+                base.Frame = value;
+            }
+        }
+
+        private void Resize(CGRect frame)
+        {
+            _canvas.Frame = frame;
+        }
+
+        public void Initialize()
         {
             Map = new Map();
             BackgroundColor = UIColor.White;
 
             Axis = UILayoutConstraintAxis.Vertical;    
             
-            _canvas = new SKCanvasView();
-            _canvas.Frame = frame;
             _canvas.ClipsToBounds = true;           
             AddSubview(_canvas);
 
@@ -60,7 +79,6 @@ namespace Mapsui.UI.iOS
 
             _canvas.PaintSurface += OnPaintSurface;
         }
-        
 
         public override void LayoutMarginsDidChange()
         {
@@ -288,7 +306,7 @@ namespace Mapsui.UI.iOS
         public void RefreshGraphics()
         {
             SetNeedsDisplay();
-            if (_canvas != null) _canvas.SetNeedsDisplay();
+            _canvas?.SetNeedsDisplay();
         }
     }
 }
