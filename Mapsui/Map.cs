@@ -37,6 +37,7 @@ namespace Mapsui
     {
         private LayerCollection _layers = new LayerCollection();
         private bool _lock;
+		private Color _backColor;
 
         /// <summary>
         /// Initializes a new map
@@ -137,7 +138,17 @@ namespace Mapsui
         /// <summary>
         /// Map background color (defaults to transparent)
         ///  </summary>
-        public Color BackColor { get; set; } 
+        public Color BackColor
+		{
+			get { return _backColor; }
+			set
+			{
+				if (_backColor == value)
+					return;
+				_backColor = value;
+				OnRefreshGraphics();
+			}
+		} 
 
         /// <summary>
         /// Gets the extents of the map based on the extents of all the layers in the layers collection
