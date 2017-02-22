@@ -37,7 +37,7 @@ namespace Mapsui
     {
         private LayerCollection _layers = new LayerCollection();
         private bool _lock;
-		private Color _backColor;
+		private Color _backColor = Color.White;
 
         /// <summary>
         /// Initializes a new map
