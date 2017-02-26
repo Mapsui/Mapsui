@@ -15,6 +15,7 @@
 // along with SharpMap; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
+using System;
 using Mapsui.Geometries;
 using Mapsui.Utilities;
 
@@ -22,6 +23,8 @@ namespace Mapsui
 {
     public class Viewport : IViewport
     {
+        public event EventHandler ViewportChanged;
+
         private readonly BoundingBox _extent;
         private Quad _windowExtent;
         private double _height;
@@ -36,7 +39,7 @@ namespace Mapsui
             RenderResolutionMultiplier = 1;
             _extent = new BoundingBox(0, 0, 0, 0);
             _windowExtent = new Quad();
-            _center.PropertyChanged += (sender, args) => _modified = true;
+            _center.PropertyChanged += (sender, args) => OnViewportChanged();
         }
         
         public Viewport(Viewport viewport) : this()
@@ -51,8 +54,13 @@ namespace Mapsui
             if (viewport.WindowExtent != null) _windowExtent = new Quad(
                 viewport.WindowExtent.BottomLeft, viewport.WindowExtent.TopLeft,
                 viewport.WindowExtent.TopRight, viewport.WindowExtent.BottomRight);
-            _center.PropertyChanged += (sender, args) => _modified = true;
             RenderResolutionMultiplier = viewport.RenderResolutionMultiplier;
+        }
+
+        private void OnViewportChanged()
+        {
+            _modified = true;
+            ViewportChanged?.Invoke(this, new EventArgs());
         }
 
         public double RenderResolutionMultiplier { get; set; }
@@ -66,7 +74,7 @@ namespace Mapsui
             {
                 _center.X = value.X;
                 _center.Y = value.Y;
-                _modified = true;
+                OnViewportChanged();
             }
         }
 
@@ -76,7 +84,7 @@ namespace Mapsui
             set
             {
                 _resolution = value;
-                _modified = true;
+                OnViewportChanged();
             }
         }
 
@@ -86,7 +94,7 @@ namespace Mapsui
             set
             {
                 _width = value;
-                _modified = true;
+                OnViewportChanged();
             }
         }
 
@@ -96,7 +104,7 @@ namespace Mapsui
             set
             {
                 _height = value;
-                _modified = true;
+                OnViewportChanged();
             }
         }
 
@@ -109,7 +117,7 @@ namespace Mapsui
                 _rotation = value % 360.0;
                 if (_rotation < 0)
                     _rotation += 360.0;
-                _modified = true;
+                OnViewportChanged();
             }
         }
 
@@ -207,7 +215,7 @@ namespace Mapsui
             
             Center.X = newX - scaleCorrectionX;
             Center.Y = newY - scaleCorrectionY;
-            _modified = true;
+            OnViewportChanged();
         }
 
         private void UpdateExtent()
