@@ -8,8 +8,6 @@ using System.ComponentModel;
 using System.Linq;
 using CoreGraphics;
 using SkiaSharp.Views.iOS;
-using Mapsui.Layers;
-using System.Collections.Generic;
 
 namespace Mapsui.UI.iOS
 {
@@ -22,7 +20,7 @@ namespace Mapsui.UI.iOS
         private Map _map;
         private readonly MapRenderer _renderer = new MapRenderer();
         private readonly SKCanvasView _canvas = new SKCanvasView();
-        private readonly AttributionView _attribution = new AttributionView();
+        private readonly AttributionView _attributionPanel = new AttributionView();
 
         private bool _viewportInitialized;
 
@@ -56,11 +54,11 @@ namespace Mapsui.UI.iOS
         private void Resize(CGRect frame)
         {
             _canvas.Frame = frame;
-            _attribution.Frame = new CGRect(
-                frame.Width - _attribution.Frame.Width, 
-                frame.Height - _attribution.Frame.Height,
-                _attribution.Frame.Width,
-                _attribution.Frame.Height);
+            _attributionPanel.Frame = new CGRect(
+                frame.Width - _attributionPanel.Frame.Width, 
+                frame.Height - _attributionPanel.Frame.Height,
+                _attributionPanel.Frame.Width,
+                _attributionPanel.Frame.Height);
         }
 
         public void Initialize()
@@ -73,7 +71,7 @@ namespace Mapsui.UI.iOS
             _canvas.ClipsToBounds = true;           
             AddSubview(_canvas);
 
-            AddSubview(_attribution);
+            AddSubview(_attributionPanel);
 
             InitializeViewport();
             
@@ -232,7 +230,7 @@ namespace Mapsui.UI.iOS
                     temp.PropertyChanged -= MapPropertyChanged;
                     temp.RefreshGraphics -= MapRefreshGraphics;
                     temp.Dispose();
-                    _attribution.Clear();
+                    _attributionPanel.Clear();
                 }
 
                 _map = value;
@@ -243,7 +241,7 @@ namespace Mapsui.UI.iOS
                     _map.PropertyChanged += MapPropertyChanged;
                     _map.RefreshGraphics += MapRefreshGraphics;
                     _map.ViewChanged(true);
-                    _attribution.Populate(Map.Layers);
+                    _attributionPanel.Populate(Map.Layers);
                 }
 
                 RefreshGraphics();
@@ -257,24 +255,18 @@ namespace Mapsui.UI.iOS
 
         private void MapPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-			if (e.PropertyName == "Enabled")
-			{
-				RefreshGraphics();
-			}
-			else if (e.PropertyName == "Opacity")
-			{
-				RefreshGraphics();
-			}
-			else if (e.PropertyName == nameof(_map.Envelope))
-			{
-				InitializeViewport();
-				_map.ViewChanged(true);
-			}
-			else if (e.PropertyName == nameof(_map.Viewport.Rotation)) 
-			{
-				RefreshGraphics();
-				_map.ViewChanged(true);
-			}
+            if (e.PropertyName == nameof(Layers.Layer.Enabled))
+            {
+                RefreshGraphics();
+            }
+            else if (e.PropertyName == nameof(Layers.Layer.Opacity))
+            {
+                RefreshGraphics();
+            }
+            else if (e.PropertyName == nameof(Map.Layers))
+            {
+                _attributionPanel.Populate(Map.Layers);
+            }
         }
 
         private void MapDataChanged(object sender, DataChangedEventArgs e)

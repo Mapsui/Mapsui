@@ -7,6 +7,7 @@ using Android.Util;
 using Android.Views;
 using Java.Lang;
 using Mapsui.Fetcher;
+using Mapsui.Layers;
 using SkiaSharp;
 using SkiaSharp.Views.Android;
 using Math = System.Math;
@@ -32,9 +33,6 @@ namespace Mapsui.UI.Android
         public MapControl(Context context, IAttributeSet attrs) :
             base(context, attrs)
         {
-            //var a = context.ObtainStyledAttributes(attrs, Resource.Styleable.start_with_openstreetmap_style);
-            //var startWithOpenStreetMap = a.GetBoolean(Resource.Attribute.start_with_openstreetmap, false);
-            
             Initialize();
         }
 
@@ -208,9 +206,18 @@ namespace Mapsui.UI.Android
 
         private void MapPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName != "Envelope") return;
-            InitializeViewport();
-            _map.ViewChanged(true);
+            if (e.PropertyName == nameof(Layer.Enabled))
+            {
+                RefreshGraphics();
+            }
+            else if (e.PropertyName == nameof(Layer.Opacity))
+            {
+                RefreshGraphics();
+            }
+            else if (e.PropertyName == nameof(Map.Layers))
+            {
+                //todo: _attributionPanel.Populate(Map.Layers);
+            }
         }
 
         public void MapDataChanged(object sender, DataChangedEventArgs e)

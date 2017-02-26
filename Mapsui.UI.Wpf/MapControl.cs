@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Net;
 using System.Windows;
 using System.Windows.Controls;
@@ -212,23 +213,13 @@ namespace Mapsui.UI.Wpf
             if (!Dispatcher.CheckAccess()) Dispatcher.BeginInvoke(new Action(() => MapPropertyChanged(sender, e)));
             else
             {
-                if (e.PropertyName == "Enabled")
+                if (e.PropertyName == nameof(Layer.Enabled))
                 {
                     RefreshGraphics();
                 }
-                else if (e.PropertyName == "Opacity")
+                else if (e.PropertyName == nameof(Layer.Opacity))
                 {
                     RefreshGraphics();
-                }
-                else if (e.PropertyName == nameof(Map.Envelope))
-                {
-                    InitializeViewport();
-                    _map.ViewChanged(true);
-                }
-                else if (e.PropertyName == "Rotation")
-                {
-                    _map.ViewChanged(true);
-                    OnViewChanged();
                 }
                 else if (e.PropertyName == nameof(Map.Layers))
                 {

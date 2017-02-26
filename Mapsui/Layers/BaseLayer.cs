@@ -43,7 +43,7 @@ namespace Mapsui.Layers
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public int Id { get; private set; }
+        public int Id { get; }
 
         /// <summary>
         /// Gets or sets an arbitrary object value that can be used to store custom information about this element
@@ -54,7 +54,7 @@ namespace Mapsui.Layers
             set
             { 
                 _tag = value; 
-                OnPropertyChanged("Tag"); 
+                OnPropertyChanged(nameof(Tag)); 
             }
         }
 
@@ -67,7 +67,7 @@ namespace Mapsui.Layers
             set
             {
                 _minVisible = value;
-                OnPropertyChanged("MinVisible");
+                OnPropertyChanged(nameof(MinVisible));
             }
         }
 
@@ -80,7 +80,7 @@ namespace Mapsui.Layers
             set
             {
                 _maxVisible = value;
-                OnPropertyChanged("MaxVisible");
+                OnPropertyChanged(nameof(MaxVisible));
             }
         }
 
@@ -94,7 +94,7 @@ namespace Mapsui.Layers
             {
                 if (_enabled == value) return;
                 _enabled = value;
-                OnPropertyChanged("Enabled");
+                OnPropertyChanged(nameof(Enabled));
             }
         }
 
@@ -107,7 +107,7 @@ namespace Mapsui.Layers
             set
             {
                 _name = value;
-                OnPropertyChanged("Name");
+                OnPropertyChanged(nameof(Name));
             }
         }
 
@@ -120,7 +120,7 @@ namespace Mapsui.Layers
             set
             {
                 _crs = value;
-                OnPropertyChanged("CRS");
+                OnPropertyChanged(nameof(CRS));
             }
         }
 
@@ -130,7 +130,7 @@ namespace Mapsui.Layers
             set
             {
                 _exclusive = value;
-                OnPropertyChanged("Exclusive");
+                OnPropertyChanged(nameof(Exclusive));
             }
         }
 
@@ -140,7 +140,7 @@ namespace Mapsui.Layers
             set
             {
                 _opacity = value;
-                OnPropertyChanged("Opacity");
+                OnPropertyChanged(nameof(Opacity));
             }
         }
 
@@ -150,7 +150,7 @@ namespace Mapsui.Layers
             set
             {
                 _busy = value;
-                OnPropertyChanged("Busy");
+                OnPropertyChanged(nameof(Busy));
             }
         }
 
@@ -163,7 +163,7 @@ namespace Mapsui.Layers
             set
             {
                 _style = value;
-                OnPropertyChanged("Style");
+                OnPropertyChanged(nameof(Style));
             }
         }
 
@@ -176,7 +176,7 @@ namespace Mapsui.Layers
             set
             {
                 _transformation = value;
-                OnPropertyChanged("Transformation");
+                OnPropertyChanged(nameof(Transformation));
             }
         }
 
@@ -207,26 +207,19 @@ namespace Mapsui.Layers
 
         protected void OnPropertyChanged(string name)
         {
-            var handler = PropertyChanged;
-            if (handler != null)
-            {
-                handler(this, new PropertyChangedEventArgs(name));
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
 
         protected void OnDataChanged(DataChangedEventArgs args)
         {
-            var handler = DataChanged;
-            if (handler != null)
-            {
-                handler(this, args);
-            }
+            DataChanged?.Invoke(this, args);
         }
 
         public static IEnumerable<IStyle> GetLayerStyles(ILayer layer)
         {
             if (layer == null) return new IStyle[0];
-            return layer.Style is StyleCollection ? (layer.Style as StyleCollection).ToArray() : new[] { layer.Style };
+            var style = layer.Style as StyleCollection;
+            return style != null ? style.ToArray() : new[] { layer.Style };
         }
 
         public Attribution Attribution { get; } = new Attribution();

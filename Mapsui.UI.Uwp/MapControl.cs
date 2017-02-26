@@ -31,9 +31,9 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Shapes;
 using Mapsui.Fetcher;
+using Mapsui.Layers;
 using Mapsui.Rendering;
 using Mapsui.Rendering.Skia;
-using Mapsui.Utilities;
 using SkiaSharp.Views.UWP;
 using Point = Windows.Foundation.Point;
 
@@ -167,10 +167,13 @@ namespace Mapsui.UI.Uwp
 
         private void MapPropertyChanged(PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(Map.Envelope))
+            if (e.PropertyName == nameof(Layer.Enabled))
             {
-                InitializeViewport();
-                _map.ViewChanged(true);
+                RefreshGraphics();
+            }
+            else if (e.PropertyName == nameof(Layer.Opacity))
+            {
+                RefreshGraphics();
             }
             else if (e.PropertyName == nameof(Map.Layers))
             {
