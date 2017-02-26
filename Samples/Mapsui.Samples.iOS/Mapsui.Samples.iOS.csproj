@@ -139,11 +139,11 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SkiaSharp, Version=1.56.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\SkiaSharp.1.56.0\lib\XamariniOS\SkiaSharp.dll</HintPath>
+      <HintPath>..\..\packages\SkiaSharp.1.56.1\lib\XamariniOS\SkiaSharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="SkiaSharp.Views.iOS, Version=1.56.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\SkiaSharp.Views.1.56.0\lib\XamariniOS\SkiaSharp.Views.iOS.dll</HintPath>
+      <HintPath>..\..\packages\SkiaSharp.Views.1.56.1\lib\XamariniOS\SkiaSharp.Views.iOS.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
