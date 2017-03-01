@@ -8,7 +8,7 @@ using XamlColors = System.Windows.Media.Colors;
 
 namespace Mapsui.Rendering.Xaml
 {
-    internal static class PointRenderer
+    public static class PointRenderer
     {
         public static XamlShapes.Shape RenderPoint(Point point, IStyle style, IViewport viewport,
             BrushCache brushCache = null)
