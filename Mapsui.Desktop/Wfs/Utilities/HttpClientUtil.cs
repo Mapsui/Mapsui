@@ -77,7 +77,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         public Stream GetDataStream()
         {
             if (string.IsNullOrEmpty(_url))
-                throw new ArgumentNullException("_url");
+                throw new Exception($"Property {nameof(Url)} was not set");
 
             // Free all resources of the previous request, if it hasn't been done yet...
             Close();

@@ -1,18 +1,18 @@
 // Copyright 2008 - Paul den Dulk (Geodan)
 // 
-// This file is part of Mapsui.
+// This file is part of SharpMap.
 // Mapsui is free software; you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation; either version 2 of the License, or
 // (at your option) any later version.
 // 
-// Mapsui is distributed in the hope that it will be useful,
+// SharpMap is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
 
 // You should have received a copy of the GNU Lesser General Public License
-// along with Mapsui; if not, write to the Free Software
+// along with SharpMap; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
 using System.Threading.Tasks;
@@ -74,24 +74,29 @@ namespace Mapsui.Layers
         {
             if (_tileSource != null)
             {
-                _tileFetcher.AbortFetch();
+                // Is causing thread leak _tileFetcher.AbortFetch();
                 _tileFetcher.DataChanged -= TileFetcherDataChanged;
                 _tileFetcher.PropertyChanged -= TileFetcherOnPropertyChanged;
                 _tileFetcher = null;
                 _memoryCache.Clear();
             }
+
             _tileSource = source;
 
-            if (source == null) return;
-            _tileFetcher = new TileFetcher(source, _memoryCache, _maxRetries, _maxThreads, _fetchStrategy);
-            _tileFetcher.DataChanged += TileFetcherDataChanged;
-            _tileFetcher.PropertyChanged += TileFetcherOnPropertyChanged;
-            OnPropertyChanged("Envelope");
+            if (_tileSource != null)
+            {
+                Attribution.Text = _tileSource.Attribution.Text;
+                Attribution.Url = _tileSource.Attribution.Url;
+                _tileFetcher = new TileFetcher(source, _memoryCache, _maxRetries, _maxThreads, _fetchStrategy);
+                _tileFetcher.DataChanged += TileFetcherDataChanged;
+                _tileFetcher.PropertyChanged += TileFetcherOnPropertyChanged;
+                OnPropertyChanged(nameof(Envelope));
+            }
         }
 
         private void TileFetcherOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
-            if (propertyChangedEventArgs.PropertyName == "Busy")
+            if (propertyChangedEventArgs.PropertyName == nameof(Busy))
             {
                 if (_tileFetcher != null) Busy = _tileFetcher.Busy;
             }
@@ -103,17 +108,11 @@ namespace Mapsui.Layers
             set
             {
                 SetTileSource(value);
-                OnPropertyChanged("TileSource");
+                OnPropertyChanged(nameof(TileSource));
             }
         }
 
-        public override BoundingBox Envelope
-        {
-            get
-            {
-                return Schema == null ? null : Schema.Extent.ToBoundingBox();
-            }
-        }
+        public override BoundingBox Envelope => Schema?.Extent.ToBoundingBox();
 
         public override void ViewChanged(bool majorChange, BoundingBox extent, double resolution)
         {
@@ -132,45 +131,23 @@ namespace Mapsui.Layers
             _memoryCache.MaxTiles = _numberTilesNeeded + _maxExtraTiles;
         }
 
-        /// <summary>
-        /// Aborts the fetch of data that is currently in progress.
-        /// With new ViewChanged calls the fetch will start again. 
-        /// Call this method to speed up garbage collection
-        /// </summary>
-        public override void AbortFetch()
-        {
-            if (_tileFetcher != null)
-            {
-                _tileFetcher.AbortFetch();
-            }
-        }
-
         public override void ClearCache()
         {
-            AbortFetch();
             _memoryCache.Clear();
         }
 
-        
-        public ITileSchema Schema
-        {
-            // TODO: 
-            // investigate whether we can do without this public Schema. 
-            // Its primary use is in the Renderer which recursively searches for
-            // available tiles. Perhaps this recursive search can be done within
-            // this class. I would be nice though if there was some flexibility into
-            // the specific search strategy. Perhaps it is possible to pass a search 
-            // to some GetTiles method.
-            // Update. Schema is not used in the Renderer anymore and TileSource is now a public property
-            get { return _tileSource != null ? _tileSource.Schema : null; }
-        }
+        // TODO: 
+        // investigate whether we can do without this public Schema. 
+        // Its primary use is in the Renderer which recursively searches for
+        // available tiles. Perhaps this recursive search can be done within
+        // this class. I would be nice though if there was some flexibility into
+        // the specific search strategy. Perhaps it is possible to pass a search 
+        // to some GetTiles method.
+        // Update. Schema is not used in the Renderer anymore and TileSource is now a public property
+        public ITileSchema Schema => _tileSource?.Schema;
 
-        public MemoryCache<Feature> MemoryCache
-        {
-            get { return _memoryCache; }
-        }
+        public MemoryCache<Feature> MemoryCache => _memoryCache;
 
-        
         private void TileFetcherDataChanged(object sender, DataChangedEventArgs e)
         {
             OnDataChanged(e);
@@ -185,14 +162,19 @@ namespace Mapsui.Layers
 
         public override bool? IsCrsSupported(string crs)
         {
-            return (String.Equals(ToSimpleEpsgCode(), crs, StringComparison.CurrentCultureIgnoreCase));
+            return (string.Equals(ToSimpleEpsgCode(), crs, StringComparison.CurrentCultureIgnoreCase));
         }
 
-        private string ToSimpleEpsgCode()
+        string ToSimpleEpsgCode()
         {
             var startEpsgCode = TileSource.Schema.Srs.IndexOf("EPSG:", StringComparison.Ordinal);
             if (startEpsgCode < 0) return TileSource.Schema.Srs;
             return TileSource.Schema.Srs.Substring(startEpsgCode).Replace("::", ":").Trim();
+        }
+
+        public override void AbortFetch()
+        {
+            // to nothing for now
         }
     }
 }

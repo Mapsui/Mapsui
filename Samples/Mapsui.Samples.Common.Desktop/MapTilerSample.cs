@@ -1,35 +1,27 @@
-﻿// Copyright 2008 - Paul den Dulk (Geodan)
-// 
-// This file is part of Mapsui.
-// Mapsui is free software; you can redistribute it and/or modify
-// it under the terms of the GNU Lesser General Public License as published by
-// the Free Software Foundation; either version 2 of the License, or
-// (at your option) any later version.
-// 
-// Mapsui is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU Lesser General Public License for more details.
-
-// You should have received a copy of the GNU Lesser General Public License
-// along with Mapsui; if not, write to the Free Software
-// Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
-
-using BruTile;
+﻿using BruTile;
 using BruTile.Cache;
 using BruTile.FileSystem;
 using BruTile.Predefined;
 using Mapsui.Layers;
+using Attribution = BruTile.Attribution;
 
 namespace Mapsui.Samples.Common.Desktop
 {
     public static class MapTilerSample
     {
+        public static Map CreateMap()
+        {
+            var map = new Map();
+            map.Layers.Add(CreateLayer());
+            return map;
+        }
+
         public static ILayer CreateLayer()
         {
             return new TileLayer(new MapTilerTileSource()) {Name = "True Marble in MapTiler"};
         }
     }
+
     public class MapTilerTileSource : ITileSource
     {
         public MapTilerTileSource()
@@ -41,6 +33,7 @@ namespace Mapsui.Samples.Common.Desktop
 
         public ITileSchema Schema { get; }
         public string Name { get; }
+        public Attribution Attribution { get; } = new Attribution();
         public ITileProvider Provider { get; }
 
         public byte[] GetTile(TileInfo tileInfo)

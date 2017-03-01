@@ -32,6 +32,7 @@ namespace Mapsui.Styles
 
         public bool Equals(Pen pen)
         {
+            // ReSharper disable once CompareOfFloatsByEqualityOperator
             if (Width != pen.Width)
             {
                 return false;

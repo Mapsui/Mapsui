@@ -93,11 +93,14 @@ namespace Mapsui.Utilities
                 };
                 lock (_syncRoot)
                 {
-                    if (due > 0)
-                        _delay = Task.Delay(due, _tokenSource.Token);
-                    else
-                        _delay = CompletedTask;
-                    _delay.ContinueWith(t => tick(), _tokenSource.Token);
+                    if (_tokenSource != null)
+                    {
+                        if (due > 0)
+                            _delay = Task.Delay(due, _tokenSource.Token);
+                        else
+                            _delay = CompletedTask;
+                        _delay.ContinueWith(t => tick(), _tokenSource.Token);
+                    }
                 }
             }
         }

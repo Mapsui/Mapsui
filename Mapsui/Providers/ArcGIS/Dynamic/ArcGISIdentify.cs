@@ -4,6 +4,7 @@ using System.Globalization;
 using System.IO;
 using System.Net;
 using BruTile.Extensions;
+using Mapsui.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -64,7 +65,8 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
             var layersString = CreateLayersString(layers);
             var mapExtend = string.Format(CultureInfo.InvariantCulture, "{0},{1},{2},{3}", extendXmin, extendYmin, extendXmax, extendYmax);
             var imageDisplay = string.Format(CultureInfo.InvariantCulture, "{0},{1},{2}", mapWidth, mapHeight, mapDpi);
-            var requestUrl = string.Format("{0}/identify?f=pjson&geometryType=esriGeometryPoint&geometry={1}&tolerance={2}{3}&mapExtent={4}&imageDisplay={5}&returnGeometry={6}{7}", url, pointGeom, tolerance, layersString, mapExtend, imageDisplay, returnGeometry, sr != int.MinValue ? string.Format("&sr={0}", sr) : "");
+            var requestUrl =
+                $"{url}/identify?f=pjson&geometryType=esriGeometryPoint&geometry={pointGeom}&tolerance={tolerance}{layersString}&mapExtent={mapExtend}&imageDisplay={imageDisplay}&returnGeometry={returnGeometry}{(sr != int.MinValue ? $"&sr={sr}" : "")}";
 
             _webRequest = (HttpWebRequest)WebRequest.Create(requestUrl);
             if (credentials == null)
@@ -127,8 +129,9 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
                 _webRequest.EndGetResponse(result);
                 OnIdentifyFinished();
             }
-            catch (WebException)
+            catch (WebException ex)
             {
+                Logger.Log(LogLevel.Warning, ex.Message, ex);
                 OnIdentifyFailed();
             }
         }

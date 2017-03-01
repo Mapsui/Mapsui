@@ -1,18 +1,18 @@
 // Copyright 2005, 2006 - Morten Nielsen (www.iter.dk)
 //
-// This file is part of Mapsui.
+// This file is part of SharpMap.
 // Mapsui is free software; you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation; either version 2 of the License, or
 // (at your option) any later version.
 // 
-// Mapsui is distributed in the hope that it will be useful,
+// SharpMap is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
 
 // You should have received a copy of the GNU Lesser General Public License
-// along with Mapsui; if not, write to the Free Software
+// along with SharpMap; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
 using Mapsui.Fetcher;
@@ -21,7 +21,6 @@ using Mapsui.Providers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using Mapsui.Utilities;
 
@@ -85,6 +84,7 @@ namespace Mapsui.Layers
         void StartFetchTimerElapsed(object state)
         {
             if (NewExtent == null) return;
+            if (double.IsNaN(NewResolution)) return;
             StartNewFetch(NewExtent, NewResolution);
             StartFetchTimer.Dispose();
         }
@@ -139,15 +139,17 @@ namespace Mapsui.Layers
         {
             IsFetching = true;
             NeedsUpdate = false;
+
+            var newExtent = new BoundingBox(extent);
             
             if (Transformation != null && !string.IsNullOrWhiteSpace(CRS)) DataSource.CRS = CRS;
 
             if (ProjectionHelper.NeedsTransform(Transformation, CRS, DataSource.CRS))
-                if (Transformation.IsProjectionSupported(CRS, DataSource.CRS) == true)
-                    extent = Transformation.Transform(CRS, DataSource.CRS, extent);
+                if (Transformation != null && Transformation.IsProjectionSupported(CRS, DataSource.CRS) == true)
+                    newExtent = Transformation.Transform(CRS, DataSource.CRS, extent);
                 
 
-            var fetcher = new FeatureFetcher(extent, resolution, DataSource, DataArrived, DateTime.Now.Ticks);
+            var fetcher = new FeatureFetcher(newExtent, resolution, DataSource, DataArrived, DateTime.Now.Ticks);
             Task.Run(() => fetcher.FetchOnThread());
         }
 
@@ -157,23 +159,31 @@ namespace Mapsui.Layers
             if (features == null) throw new ArgumentException("argument features may not be null");
 
             features = features.ToList();
-            if (ProjectionHelper.NeedsTransform(Transformation, CRS, DataSource.CRS))
+			// We can get 0 features if some error was occured up call stack
+			// We should not add new FeatureSets if we have not any feature
+
+			IsFetching = false;
+
+			if (features.Count() > 0)
             {
-                foreach (var feature in features.Where(feature => !(feature.Geometry is Raster)))
+                features = features.ToList();
+                if (ProjectionHelper.NeedsTransform(Transformation, CRS, DataSource.CRS))
                 {
-                    feature.Geometry = Transformation.Transform(DataSource.CRS, CRS, feature.Geometry);
+                    foreach (var feature in features.Where(feature => !(feature.Geometry is Raster)))
+                    {
+                        feature.Geometry = Transformation.Transform(DataSource.CRS, CRS, feature.Geometry);
+                    }
                 }
-            }
 
-            Sets.Add(new FeatureSets { TimeRequested = (long)state, Features = features });
+                Sets.Add(new FeatureSets { TimeRequested = (long)state, Features = features });
 
-            //Keep only two most recent sets. The older ones will be removed
-            Sets = Sets.OrderByDescending(c => c.TimeRequested).Take(NumberOfFeaturesReturned).ToList();
+                //Keep only two most recent sets. The older ones will be removed
+                Sets = Sets.OrderByDescending(c => c.TimeRequested).Take(NumberOfFeaturesReturned).ToList();
 
-            IsFetching = false;
-            OnDataChanged(new DataChangedEventArgs(null, false, null, Name));
+				OnDataChanged(new DataChangedEventArgs(null, false, null, Name));
+			}
 
-            if (NeedsUpdate)
+			if (NeedsUpdate)
             {
                 StartNewFetch(NewExtent, NewResolution);
             }

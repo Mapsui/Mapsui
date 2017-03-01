@@ -1,18 +1,18 @@
 // Copyright 2005, 2006 - Morten Nielsen (www.iter.dk)
 //
-// This file is part of Mapsui.
+// This file is part of SharpMap.
 // Mapsui is free software; you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation; either version 2 of the License, or
 // (at your option) any later version.
 // 
-// Mapsui is distributed in the hope that it will be useful,
+// SharpMap is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
 
 // You should have received a copy of the GNU Lesser General Public License
-// along with Mapsui; if not, write to the Free Software
+// along with SharpMap; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
 // Note:
@@ -23,7 +23,7 @@ using System.Data;
 using System.Globalization;
 using System.IO;
 using System.Text;
-using Mapsui.Utilities.Indexing;
+using Mapsui.Providers.Shapefile.Indexing;
 
 namespace Mapsui.Providers.Shapefile
 {
@@ -40,8 +40,8 @@ namespace Mapsui.Providers.Shapefile
 
         private DateTime _lastUpdate;
         private int _numberOfRecords;
-        private Int16 _headerLength;
-        private Int16 _recordLength;
+        private short _headerLength;
+        private short _recordLength;
         private readonly string _filename;
         private DbaseField[] _dbaseColumns;
         private FileStream _fs;
@@ -215,6 +215,7 @@ namespace Mapsui.Providers.Shapefile
             _headerIsParsed = true;
         }
 
+        // ReSharper disable once CyclomaticComplexity // It's a switch statement!
         private static Encoding GetDbaseLanguageDriver(byte dbasecode)
         {
             switch (dbasecode)

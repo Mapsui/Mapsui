@@ -86,8 +86,6 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// </summary>
         internal abstract Collection<Geometry> CreateGeometries(Features features);
         
-        
-        
         /// <summary>
         /// This method parses a coordinates or posList(from 'GetFeature' response). 
         /// </summary>
@@ -193,12 +191,12 @@ namespace Mapsui.Providers.Wfs.Utilities
         private void CreateReader(HttpClientUtil httpClientUtil)
         {
             var xmlReaderSettings = new XmlReaderSettings
-                {
-                    IgnoreComments = true,
-                    IgnoreProcessingInstructions = true,
-                    IgnoreWhitespace = true,
-                    DtdProcessing = DtdProcessing.Prohibit
-                };
+            {
+                IgnoreComments = true,
+                IgnoreProcessingInstructions = true,
+                IgnoreWhitespace = true,
+                DtdProcessing = DtdProcessing.Prohibit
+            };
             XmlReader = XmlReader.Create(httpClientUtil.GetDataStream(), xmlReaderSettings);
         }
 
@@ -531,8 +529,11 @@ namespace Mapsui.Providers.Wfs.Utilities
                         GeometryFactory geomFactory = new PointFactory(GeomReader, FeatureTypeInfo);
                         Collection<Geometry> points = geomFactory.CreateGeometries(features);
 
-                        foreach (Point point in points)
+                        foreach (var geometry in points)
+                        {
+                            var point = (Point) geometry;
                             multiPoint.Points.Add(point);
+                        }
 
                         Geoms.Add(multiPoint);
                         geomFound = true;
@@ -610,8 +611,11 @@ namespace Mapsui.Providers.Wfs.Utilities
                         GeometryFactory geomFactory = new LineStringFactory(GeomReader, FeatureTypeInfo);
                         Collection<Geometry> lineStrings = geomFactory.CreateGeometries(features);
 
-                        foreach (LineString lineString in lineStrings)
+                        foreach (var geometry in lineStrings)
+                        {
+                            var lineString = (LineString) geometry;
                             multiLineString.LineStrings.Add(lineString);
+                        }
 
                         Geoms.Add(multiLineString);
                         geomFound = true;
@@ -658,8 +662,6 @@ namespace Mapsui.Providers.Wfs.Utilities
         {
         }
 
-        
-        
         /// <summary>
         /// This method produces instances of type <see cref="Mapsui.Geometries.MultiPolygon"/>.
         /// </summary>
@@ -689,8 +691,11 @@ namespace Mapsui.Providers.Wfs.Utilities
                         GeometryFactory geomFactory = new PolygonFactory(GeomReader, FeatureTypeInfo);
                         Collection<Geometry> polygons = geomFactory.CreateGeometries(features);
 
-                        foreach (Polygon polygon in polygons)
+                        foreach (var geometry in polygons)
+                        {
+                            var polygon = (Polygon) geometry;
                             multiPolygon.Polygons.Add(polygon);
+                        }
 
                         Geoms.Add(multiPolygon);
                         geomFound = true;
@@ -715,7 +720,7 @@ namespace Mapsui.Providers.Wfs.Utilities
     /// Therefore it works a bit slower than the other factories. Specify the geometry type manually,
     /// if it isn't specified in 'DescribeFeatureType'.
     /// </summary>
-    internal class UnspecifiedGeometryFactory_WFS1_0_0_GML2 : GeometryFactory
+    internal class UnspecifiedGeometryFactoryWfs100Gml2 : GeometryFactory
     {
         
         private readonly HttpClientUtil _httpClientUtil;
@@ -725,13 +730,13 @@ namespace Mapsui.Providers.Wfs.Utilities
         
         
         /// <summary>
-        /// Initializes a new instance of the <see cref="UnspecifiedGeometryFactory_WFS1_0_0_GML2"/> class.
+        /// Initializes a new instance of the <see cref="UnspecifiedGeometryFactoryWfs100Gml2"/> class.
         /// </summary>
         /// <param name="httpClientUtil">A configured <see cref="HttpClientUtil"/> instance for performing web requests</param>
         /// <param name="featureTypeInfo">A <see cref="WfsFeatureTypeInfo"/> instance providing metadata of the featuretype to query</param>
         /// <param name="multiGeometries">A boolean value specifying whether multi-geometries should be created</param>
         /// <param name="quickGeometries">A boolean value specifying whether the factory should create geometries quickly, but without validation</param>
-        internal UnspecifiedGeometryFactory_WFS1_0_0_GML2(HttpClientUtil httpClientUtil,
+        internal UnspecifiedGeometryFactoryWfs100Gml2(HttpClientUtil httpClientUtil,
                                                           WfsFeatureTypeInfo featureTypeInfo, bool multiGeometries,
                                                           bool quickGeometries)
             : base(httpClientUtil, featureTypeInfo)
@@ -826,6 +831,5 @@ namespace Mapsui.Providers.Wfs.Utilities
             geomFactory.CreateGeometries(features);
             return Geoms;
         }
-
-            }
+    }
 }

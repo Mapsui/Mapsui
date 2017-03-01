@@ -1,18 +1,18 @@
 // Copyright 2005, 2006 - Morten Nielsen (www.iter.dk)
 //
-// This file is part of Mapsui.
+// This file is part of SharpMap.
 // Mapsui is free software; you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation; either version 2 of the License, or
 // (at your option) any later version.
 // 
-// Mapsui is distributed in the hope that it will be useful,
+// SharpMap is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
 
 // You should have received a copy of the GNU Lesser General Public License
-// along with Mapsui; if not, write to the Free Software
+// along with SharpMap; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
 using System;
@@ -23,7 +23,9 @@ using Mapsui.Fetcher;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Projection;
+using Mapsui.Providers;
 using Mapsui.Styles;
+using Mapsui.UI;
 using Mapsui.Utilities;
 
 namespace Mapsui
@@ -35,6 +37,7 @@ namespace Mapsui
     {
         private LayerCollection _layers = new LayerCollection();
         private bool _lock;
+		private Color _backColor = Color.White;
 
         /// <summary>
         /// Initializes a new map
@@ -46,7 +49,6 @@ namespace Mapsui
             Viewport =  new Viewport { Center = { X = double.NaN, Y = double.NaN }, Resolution = double.NaN };
         }
 
-
         /// <summary>
         /// When Lock is true the map view will not respond to touch input.
         /// </summary>
@@ -57,7 +59,7 @@ namespace Mapsui
             {
                 if (_lock == value) return;
                 _lock = value;
-                OnPropertyChanged("Lock");
+                OnPropertyChanged(nameof(Lock));
             }
         }
 
@@ -87,6 +89,10 @@ namespace Mapsui
                 _layers.LayerRemoved += LayersLayerRemoved;
             }
         }
+        
+        public IList<ILayer> InfoLayers { get; private set; } = new List<ILayer>();
+
+        public IList<ILayer> HoverInfoLayers { get; private set; } = new List<ILayer>();
 
         public Viewport Viewport { get; }
 
@@ -132,7 +138,17 @@ namespace Mapsui
         /// <summary>
         /// Map background color (defaults to transparent)
         ///  </summary>
-        public Color BackColor { get; set; } 
+        public Color BackColor
+		{
+			get { return _backColor; }
+			set
+			{
+				if (_backColor == value)
+					return;
+				_backColor = value;
+				OnRefreshGraphics();
+			}
+		} 
 
         /// <summary>
         /// Gets the extents of the map based on the extents of all the layers in the layers collection
@@ -180,40 +196,51 @@ namespace Mapsui
         /// </summary>
         public event DataChangedEventHandler DataChanged;
         public event EventHandler RefreshGraphics;
+        public event EventHandler<MouseInfoEventArgs> Info;
 
-        void LayersLayerRemoved(ILayer layer)
+        private void LayersLayerRemoved(ILayer layer)
         {
             layer.AbortFetch();
+
             layer.DataChanged -= LayerDataChanged;
             layer.PropertyChanged -= LayerPropertyChanged;
+
+            OnPropertyChanged(nameof(Layers));
         }
 
-        void LayersLayerAdded(ILayer layer)
+        public void InvokeInfo(Point screenPosition)
+        {
+            if (Info == null) return;
+            var eventArgs = InfoHelper.GetInfoEventArgs(this, screenPosition, InfoLayers);
+            if (eventArgs != null) Info?.Invoke(this, eventArgs);
+        }
+
+        private void LayersLayerAdded(ILayer layer)
         {
             layer.DataChanged += LayerDataChanged;
             layer.PropertyChanged += LayerPropertyChanged;
+
             layer.Transformation = Transformation;
             layer.CRS = CRS;
+            OnPropertyChanged(nameof(Layers));
         }
-        
-        void LayerPropertyChanged(object sender, PropertyChangedEventArgs e)
+
+        private void LayerPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             OnPropertyChanged(sender, e.PropertyName);
         }
 
-        protected virtual void OnRefreshGraphics()
+        private void OnRefreshGraphics()
         {
-            var handler = RefreshGraphics;
-            if (handler != null) handler(this, EventArgs.Empty);
+            RefreshGraphics?.Invoke(this, EventArgs.Empty);
         }
 
-        protected virtual void OnPropertyChanged(object sender, string propertyName)
+        private void OnPropertyChanged(object sender, string propertyName)
         {
-            var handler = PropertyChanged;
-            if (handler != null) handler(sender, new PropertyChangedEventArgs(propertyName));
+            PropertyChanged?.Invoke(sender, new PropertyChangedEventArgs(propertyName));
         }
 
-        protected void OnPropertyChanged(string name)
+        private void OnPropertyChanged(string name)
         {
             OnPropertyChanged(this, name);
         }
@@ -225,8 +252,7 @@ namespace Mapsui
         
         private void OnDataChanged(object sender, DataChangedEventArgs e)
         {
-            var handler = DataChanged;
-            if (handler != null) handler(sender, e);
+            DataChanged?.Invoke(sender, e);
         }
 
         public void AbortFetch()
@@ -237,11 +263,11 @@ namespace Mapsui
             }
         }
 
-        public void ViewChanged(bool changeEnd)
+        public void ViewChanged(bool majorChange)
         {
             foreach (var layer in _layers.ToList())
             {
-                layer.ViewChanged(changeEnd, Viewport.Extent, Viewport.RenderResolution);
+                layer.ViewChanged(majorChange, Viewport.Extent, Viewport.RenderResolution);
             }
         }
 

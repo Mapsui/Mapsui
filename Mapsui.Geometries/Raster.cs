@@ -1,13 +1,13 @@
 using System;
 using System.IO;
+using Mapsui.Geometries.WellKnownBinary;
+using Mapsui.Geometries.WellKnownText;
 
 namespace Mapsui.Geometries
 {
-    public class Raster : IRaster
+    public class Raster : Geometry, IRaster
     {
-        readonly BoundingBox _boundingBox;
-        public MemoryStream Data { get; private set; }
-        public long TickFetched { get; private set; }
+        private readonly BoundingBox _boundingBox;
 
         public Raster(MemoryStream data, BoundingBox box)
         {
@@ -16,95 +16,52 @@ namespace Mapsui.Geometries
             TickFetched = DateTime.Now.Ticks;
         }
 
-        public BoundingBox GetBoundingBox()
+        public MemoryStream Data { get; }
+        public long TickFetched { get; }
+
+        public override BoundingBox GetBoundingBox()
         {
             return _boundingBox;
         }
 
+        public new string AsText()
+        {
+            return GeometryToWKT.Write(Envelope());
+        }
+
+        public new byte[] AsBinary()
+        {
+            return GeometryToWKB.Write(Envelope());
+        }
+
+        public override bool IsEmpty()
+        {
+            return _boundingBox.Width*_boundingBox.Height <= 0;
+        }
+
+        public new Geometry Clone()
+        {
+            var copy = new MemoryStream();
+            Data.Position = 0;
+            Data.CopyTo(copy);
+            return new Raster(copy, _boundingBox.Clone());
+        }
         
-        public int Dimension
+        public override double Distance(Point point)
         {
-            get { return 2; }
+            var geometry = Envelope();
+            return geometry.Distance(point);
         }
 
-        public Geometry Envelope()
+        public override bool Contains(Point point)
         {
-            throw new NotImplementedException();
+            return Envelope().Contains(point);
         }
 
-        public string AsText()
+        public override int GetHashCode()
         {
-            throw new NotImplementedException();
-        }
-
-        public byte[] AsBinary()
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool IsEmpty()
-        {
-            return _boundingBox.Width * _boundingBox.Height <= 0;
-        }
-
-        public Geometry Boundary()
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Relate(Geometry other, string intersectionPattern)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Equals(Geometry geom)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Disjoint(Geometry geom)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Intersects(Geometry geom)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Touches(Geometry geom)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Crosses(Geometry geom)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Within(Geometry geom)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Contains(Geometry geom)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Overlaps(Geometry geom)
-        {
-            throw new NotImplementedException();
-        }
-
-        public double Distance(Geometry geom)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Geometry Intersection(Geometry geom)
-        {
-            throw new NotImplementedException();
+            // todo: check performance of MemoryStream.GetHashCode
+            return Envelope().GetHashCode()*Data.GetHashCode(); 
         }
     }
 }

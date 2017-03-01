@@ -1,5 +1,5 @@
-﻿using NUnit.Framework;
-using Mapsui.Utilities;
+﻿using Mapsui.Utilities;
+using NUnit.Framework;
 
 namespace Mapsui.Tests.Utilities
 {

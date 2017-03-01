@@ -1,33 +1,31 @@
-﻿using Mapsui.Data.Providers;
-using Mapsui.Layers;
+﻿using Mapsui.Layers;
 using Mapsui.Providers;
-using Mapsui.Rendering;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
-using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using Mapsui.Providers.Shapefile;
 
 namespace Mapsui.Samples.Common.Desktop
 {
     public static class ShapefileSample
     {
-        public static IEnumerable<ILayer> CreateLayers()
+        public static Map CreateMap()
         {
-            var layers = new List<ILayer>();
+            var map = new Map();
 
-            var countrySource = new ShapeFile(GetAppDir() + "\\GeoData\\World\\countries.shp", true) { CRS = "EPSG:3785" };
-            var citySource = new ShapeFile(GetAppDir() + "\\GeoData\\World\\cities.shp", true) { CRS = "EPSG:3785" };
+            var countrySource = new ShapeFile(GetAppDir() + "\\GeoData\\World\\countries.shp", true) {CRS = "EPSG:3785"};
+            var citySource = new ShapeFile(GetAppDir() + "\\GeoData\\World\\cities.shp", true) {CRS = "EPSG:3785"};
 
-            layers.Add(new RasterizingLayer(CreateCountryLayer(countrySource)));
-            layers.Add(new RasterizingLayer(CreateCityLayer(citySource)));
-            layers.Add(new RasterizingLayer(CreateCountryLabelLayer(countrySource)));
-            layers.Add(new RasterizingLayer(CreateCityLabelLayer(citySource)));
+            map.Layers.Add(new RasterizingLayer(CreateCountryLayer(countrySource)));
+            map.Layers.Add(new RasterizingLayer(CreateCityLayer(citySource)));
+            map.Layers.Add(new RasterizingLayer(CreateCountryLabelLayer(countrySource)));
+            map.Layers.Add(new RasterizingLayer(CreateCityLabelLayer(citySource)));
 
-            return layers;
+            return map;
         }
 
-        public static ILayer CreateCountryLayer(IProvider countrySource)
+        private static ILayer CreateCountryLayer(IProvider countrySource)
         {
             return new Layer
             {
@@ -37,7 +35,7 @@ namespace Mapsui.Samples.Common.Desktop
             };
         }
 
-        public static ILayer CreateCityLayer(IProvider citySource)
+        private static ILayer CreateCityLayer(IProvider citySource)
         {
             return new Layer
             {
@@ -49,27 +47,23 @@ namespace Mapsui.Samples.Common.Desktop
 
         private static ILayer CreateCountryLabelLayer(IProvider countryProvider)
         {
-            return new LabelLayer("Country labels")
+            return new Layer("Country labels")
             {
                 DataSource = countryProvider,
                 Enabled = true,
-                LabelColumn = "NAME",
                 MaxVisible = double.MaxValue,
                 MinVisible = double.MinValue,
-                MultipartGeometryBehaviour = LabelLayer.MultipartGeometryBehaviourEnum.Largest,
                 Style = CreateCountryLabelTheme()
             };
         }
 
         private static ILayer CreateCityLabelLayer(IProvider citiesProvider)
         {
-            return new LabelLayer("City labels")
+            return new Layer("City labels")
             {
                 DataSource = citiesProvider,
                 Enabled = true,
-                LabelColumn = "NAME",
-                Style = CreateCityLabelTheme(),
-                LabelFilter = LabelCollisionDetection.ThoroughCollisionDetection
+                Style = CreateCityLabelStyle()
             };
         }
 
@@ -78,11 +72,11 @@ namespace Mapsui.Samples.Common.Desktop
             // Scaling city icons based on city population.
             // Cities below 1.000.000 gets the smallest symbol.
             // Cities with more than 5.000.000 the largest symbol.
-            var localAssembly = Assembly.GetAssembly(typeof (ShapefileSample));
+            var localAssembly = Assembly.GetAssembly(typeof(ShapefileSample));
             var bitmapStream = localAssembly.GetManifestResourceStream("Mapsui.Samples.Common.Desktop.Images.icon.png");
             var bitmapId = BitmapRegistry.Instance.Register(bitmapStream);
-            var citymin = new SymbolStyle { BitmapId = bitmapId, SymbolScale = 0.5f };
-            var citymax = new SymbolStyle { BitmapId = bitmapId, SymbolScale = 1f };
+            var citymin = new SymbolStyle {BitmapId = bitmapId, SymbolScale = 0.5f};
+            var citymax = new SymbolStyle {BitmapId = bitmapId, SymbolScale = 1f};
             return new GradientTheme("Population", 1000000, 5000000, citymin, citymax);
         }
 
@@ -93,46 +87,48 @@ namespace Mapsui.Samples.Common.Desktop
             //In this case we will just use the default values and override the fill-colors
             //using a colorblender. If different line-widths, line- and fill-colors where used
             //in the min and max styles, these would automatically get linearly interpolated.
-            var min = new VectorStyle { Outline = new Pen { Color = Color.Black } };
-            var max = new VectorStyle { Outline = new Pen { Color = Color.Black } };
+            var min = new VectorStyle {Outline = new Pen {Color = Color.Black}};
+            var max = new VectorStyle {Outline = new Pen {Color = Color.Black}};
 
             //Create theme using a density from 0 (min) to 400 (max)
-            return new GradientTheme("PopDens", 0, 400, min, max) { FillColorBlend = ColorBlend.Rainbow5 };
+            return new GradientTheme("PopDens", 0, 400, min, max) {FillColorBlend = ColorBlend.Rainbow5};
         }
 
-        private static LabelStyle CreateCityLabelTheme()
+        private static LabelStyle CreateCityLabelStyle()
         {
             return new LabelStyle
             {
                 ForeColor = Color.Black,
-                BackColor = new Brush { Color = Color.Orange },
-                Font = new Font { FontFamily = "GenericSerif", Size = 11 },
+                BackColor = new Brush {Color = Color.Orange},
+                Font = new Font {FontFamily = "GenericSerif", Size = 11},
                 HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center,
                 VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Center,
-                Offset = new Offset { X = 0, Y = 0 },
-                Halo = new Pen { Color = Color.Yellow, Width = 2 },
-                CollisionDetection = true
+                Offset = new Offset {X = 0, Y = 0},
+                Halo = new Pen {Color = Color.Yellow, Width = 2},
+                CollisionDetection = true, 
+                LabelColumn = "NAME"
             };
         }
 
         private static GradientTheme CreateCountryLabelTheme()
         {
             //Lets scale the labels so that big countries have larger texts as well
-            var backColor = new Brush { Color = new Color { A = 128, R = 255, G = 255, B = 255 } };
+            var backColor = new Brush {Color = new Color {A = 128, R = 255, G = 255, B = 255}};
 
             var lblMin = new LabelStyle
             {
                 ForeColor = Color.Black,
                 BackColor = backColor,
-                Font = new Font { FontFamily = "GenericSerif", Size = 6 }
-
+                Font = new Font {FontFamily = "GenericSerif", Size = 6},
+                LabelColumn = "NAME"
             };
 
             var lblMax = new LabelStyle
             {
                 ForeColor = Color.Blue,
                 BackColor = backColor,
-                Font = new Font { FontFamily = "GenericSerif", Size = 9 }
+                Font = new Font {FontFamily = "GenericSerif", Size = 9},
+                LabelColumn= "NAME"
             };
 
             return new GradientTheme("PopDens", 0, 400, lblMin, lblMax);

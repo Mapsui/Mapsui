@@ -16,11 +16,37 @@
     <language>en-US</language>
     <dependencies>
       <!-- [ or ] is including, ( or ) is excluding -->
-      <dependency id="BruTile" version="[0.18,0.19)"/>
-      <dependency id="Newtonsoft.json" version="[8.0,8.1)"/>
+      <group>
+        <dependency id="BruTile" version="[0.19,0.20)"/>
+        <dependency id="Newtonsoft.json" version="[9.0,10.0)"/>
+        <dependency id="SkiaSharp" version="[1.56.0,1.57)"/>
+      </group>
+      <group targetFramework="net45">
+        <dependency id="BruTile" version="[0.19,0.20)"/>
+        <dependency id="Newtonsoft.json" version="[9.0,10.0)"/>
+        <dependency id="SkiaSharp" version="[1.56.0,1.57)"/>
+        <dependency id="SkiaSharp.Views" version="[1.56.0,1.57)"/>
+      </group>
+      <group targetFramework="uap">
+        <dependency id="BruTile" version="[0.19,0.20)"/>
+        <dependency id="Newtonsoft.json" version="[9.0,10.0)"/>
+        <dependency id="SkiaSharp" version="[1.56.0,1.57)"/>
+        <dependency id="SkiaSharp.Views" version="[1.56.0,1.57)"/>
+      </group>
+      <group targetFramework="MonoAndroid">
+        <dependency id="BruTile" version="[0.19,0.20)"/>
+        <dependency id="Newtonsoft.json" version="[9.0,10.0)"/>
+        <dependency id="SkiaSharp" version="[1.56.0,1.57)"/>
+        <dependency id="SkiaSharp.Views" version="[1.56.0,1.57)"/>
+      </group>
+      <group targetFramework="Xamarin.iOS">
+        <dependency id="BruTile" version="[0.19,0.20)"/>
+        <dependency id="Newtonsoft.json" version="[9.0,10.0)"/>
+        <dependency id="SkiaSharp" version="[1.56.0,1.57)"/>
+        <dependency id="SkiaSharp.Views" version="[1.56.0,1.57)"/>
+      </group>
     </dependencies>
   </metadata>
-  
   <files>
     <file src="..\Release\Portable\Mapsui.Geometries.dll" target="lib\portable-net45+win+WindowsPhoneApp81+Xamarin.iOS10+MonoAndroid10+MonoTouch10\Mapsui.Geometries.dll" />
     <file src="..\Release\Portable\Mapsui.dll" target="lib\portable-net45+win+WindowsPhoneApp81+Xamarin.iOS10+MonoAndroid10+MonoTouch10\Mapsui.dll" />
@@ -28,23 +54,22 @@
     <file src="..\Release\v4.5\Mapsui.Geometries.dll" target="lib\net45\Mapsui.Geometries.dll" />
     <file src="..\Release\v4.5\Mapsui.dll" target="lib\net45\Mapsui.dll" />
     <file src="..\Release\v4.5\Mapsui.Rendering.Xaml.dll" target="lib\net45\Mapsui.Rendering.Xaml.dll" />
-    <file src="..\Release\v4.5\Mapsui.UI.Xaml.dll" target="lib\net45\Mapsui.UI.Xaml.dll" />
+    <file src="..\Release\v4.5\Mapsui.Rendering.Skia.dll" target="lib\net45\Mapsui.Rendering.Skia.dll" />
+    <file src="..\Release\v4.5\Mapsui.UI.Wpf.dll" target="lib\net45\Mapsui.UI.Wpf.dll" />
 
-    <file src="..\Release\W8\Mapsui.Geometries.dll" target="lib\win8\Mapsui.Geometries.dll" />
-    <file src="..\Release\W8\Mapsui.dll" target="lib\win8\Mapsui.dll" />
-    <file src="..\Release\W8\Mapsui.Rendering.Xaml.dll" target="lib\win8\Mapsui.Rendering.Xaml.dll" />
-    <file src="..\Release\W8\Mapsui.UI.Xaml.dll" target="lib\win8\Mapsui.UI.Xaml.dll" />
+    <file src="..\Release\UWP\Mapsui.Geometries.dll" target="lib\uap\Mapsui.Geometries.dll" />
+    <file src="..\Release\UWP\Mapsui.dll" target="lib\uap\Mapsui.dll" />
+    <file src="..\Release\UWP\Mapsui.Rendering.Skia.dll" target="lib\uap\Mapsui.Rendering.Skia.dll" />
+    <file src="..\Release\UWP\Mapsui.UI.Uwp.dll" target="lib\uap\Mapsui.UI.Uwp.dll" />
 
     <file src="..\Release\Xamarin.Android\Mapsui.Geometries.dll" target="lib\MonoAndroid\Mapsui.Geometries.dll" />
     <file src="..\Release\Xamarin.Android\Mapsui.dll" target="lib\MonoAndroid\Mapsui.dll" />
-    <file src="..\Release\Xamarin.Android\Mapsui.Rendering.Android.dll" target="lib\MonoAndroid\Mapsui.Rendering.Android.dll" />
-    <file src="..\Release\Xamarin.Android\Mapsui.Rendering.OpenTK.dll" target="lib\MonoAndroid\Mapsui.Rendering.OpenTK.dll" />
+    <file src="..\Release\Xamarin.Android\Mapsui.Rendering.Skia.dll" target="lib\MonoAndroid\Mapsui.Rendering.Skia.dll" />
     <file src="..\Release\Xamarin.Android\Mapsui.UI.Android.dll" target="lib\MonoAndroid\Mapsui.UI.Android.dll" />
 
     <file src="..\Release\Xamarin.iOS\Mapsui.Geometries.dll" target="lib\Xamarin.iOS\Mapsui.Geometries.dll" />
     <file src="..\Release\Xamarin.iOS\Mapsui.dll" target="lib\Xamarin.iOS\Mapsui.dll" />
-    <file src="..\Release\Xamarin.iOS\Mapsui.Rendering.iOS.dll" target="lib\Xamarin.iOS\Mapsui.Rendering.iOS.dll" />
-    <file src="..\Release\Xamarin.iOS\Mapsui.Rendering.OpenTK.dll" target="lib\Xamarin.iOS\Mapsui.Rendering.OpenTK.dll" />
+    <file src="..\Release\Xamarin.iOS\Mapsui.Rendering.Skia.dll" target="lib\Xamarin.iOS\Mapsui.Rendering.Skia.dll" />
     <file src="..\Release\Xamarin.iOS\Mapsui.UI.iOS.dll" target="lib\Xamarin.iOS\Mapsui.UI.iOS.dll" />
 
   </files>

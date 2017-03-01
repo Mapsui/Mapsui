@@ -1,6 +1,7 @@
 // WFS provider by Peter Robineau (peter.robineau@gmx.at)
 // This file can be redistributed and/or modified under the terms of the GNU Lesser General Public License.
 
+// ReSharper disable InconsistentNaming
 namespace Mapsui.Providers.Wfs.Utilities
 {
     public class WFS_XPathTextResourcesBase

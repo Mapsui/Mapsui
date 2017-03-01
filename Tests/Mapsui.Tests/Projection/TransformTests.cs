@@ -1,7 +1,7 @@
-﻿using Mapsui.Converters.WellKnownText;
-using Mapsui.Projection;
+﻿using Mapsui.Projection;
 using NUnit.Framework;
 using System.Linq;
+using Mapsui.Geometries.WellKnownText;
 
 namespace Mapsui.Tests.Projection
 {

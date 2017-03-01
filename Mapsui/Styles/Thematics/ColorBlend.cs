@@ -1,18 +1,18 @@
 // Copyright 2006 - Morten Nielsen (www.iter.dk)
 //
-// This file is part of Mapsui.
+// This file is part of SharpMap.
 // Mapsui is free software; you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation; either version 2 of the License, or
 // (at your option) any later version.
 // 
-// Mapsui is distributed in the hope that it will be useful,
+// SharpMap is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
 
 // You should have received a copy of the GNU Lesser General Public License
-// along with Mapsui; if not, write to the Free Software
+// along with SharpMap; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
 using System;
@@ -66,13 +66,15 @@ namespace Mapsui.Styles.Thematics
 		public Color GetColor(double pos)
 		{
 			if (Colors.Length != Positions.Length)
-				throw (new ArgumentException("Colors and Positions arrays must be of equal length"));
+				throw new ArgumentException("Colors and Positions arrays must be of equal length");
 			if (Colors.Length < 2)
-				throw (new ArgumentException("At least two colors must be defined in the ColorBlend"));
+				throw new ArgumentException("At least two colors must be defined in the ColorBlend");
+		    // ReSharper disable once CompareOfFloatsByEqualityOperator
 			if (Positions[0] != 0f)
-				throw (new ArgumentException("First position value must be 0.0f"));
+				throw new ArgumentException("First position value must be 0.0f");
+		    // ReSharper disable once CompareOfFloatsByEqualityOperator
 			if (Positions[Positions.Length - 1] != 1f)
-				throw (new ArgumentException("Last position value must be 1.0f"));
+				throw new ArgumentException("Last position value must be 1.0f");
 			if (pos > 1 || pos < 0) pos -= Math.Floor(pos);
 			int i = 1;
 			while (i < Positions.Length && Positions[i] < pos)
@@ -117,9 +119,8 @@ namespace Mapsui.Styles.Thematics
         {
             get
             {
-                var cb = new ColorBlend();
-                cb.Positions = new double[7];
-                int i = 0;
+                var cb = new ColorBlend {Positions = new double[7]};
+                var i = 0;
                 for (double f = 0; f <= 1; f += 1.0f / 6)
                     cb.Positions[i++] = f;
                 cb.Colors = new[] { 

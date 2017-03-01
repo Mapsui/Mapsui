@@ -1,18 +1,18 @@
 // Copyright 2008 - Paul den Dulk (Geodan)
 // 
-// This file is part of Mapsui.
+// This file is part of SharpMap.
 // Mapsui is free software; you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation; either version 2 of the License, or
 // (at your option) any later version.
 
-// Mapsui is distributed in the hope that it will be useful,
+// SharpMap is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
 
 // You should have received a copy of the GNU Lesser General Public License
-// along with Mapsui; if not, write to the Free Software
+// along with SharpMap; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
 using System;
@@ -31,6 +31,8 @@ namespace Mapsui.Fetcher
 {
     public class TileFetcher : INotifyPropertyChanged
     {
+        public const int DefaultMaxThreads = 2;
+        public const int DefaultMaxAttempts = 2;
         private readonly MemoryCache<Feature> _memoryCache;
         private readonly ITileSource _tileSource;
         private BoundingBox _extent;
@@ -44,8 +46,6 @@ namespace Mapsui.Fetcher
         private readonly int _maxAttempts;
         private volatile bool _isThreadRunning;
         private volatile bool _isViewChanged;
-        public const int DefaultMaxThreads = 2;
-        public const int DefaultMaxAttempts = 2;
         private bool _busy;
         private int _numberTilesNeeded;
 
@@ -66,7 +66,7 @@ namespace Mapsui.Fetcher
         public bool Busy
         {
             get { return _busy; }
-            set
+            private set
             {
                 if (_busy == value) return; // prevent notify              
                 _busy = value;
@@ -74,10 +74,7 @@ namespace Mapsui.Fetcher
             }
         }
 
-        public int NumberTilesNeeded
-        {
-            get { return _numberTilesNeeded; }
-        }
+        public int NumberTilesNeeded => _numberTilesNeeded;
 
 
         public void ViewChanged(BoundingBox newExtent, double newResolution)
@@ -200,9 +197,9 @@ namespace Mapsui.Fetcher
                 if (e.Error == null && e.Cancelled == false && _isThreadRunning && e.Image != null)
                 {
                     var feature = new Feature
-                        {
-                            Geometry = new Raster(new MemoryStream(e.Image), e.TileInfo.Extent.ToBoundingBox())
-                        };
+                    {
+                        Geometry = new Raster(new MemoryStream(e.Image), e.TileInfo.Extent.ToBoundingBox())
+                    };
                     _memoryCache.Add(e.TileInfo.Index, feature);
                 }
             }
@@ -221,8 +218,7 @@ namespace Mapsui.Fetcher
                 _waitHandle.Set();
             }
 
-            if (DataChanged != null)
-                DataChanged(this, new DataChangedEventArgs(e.Error, e.Cancelled, e.TileInfo));
+            DataChanged?.Invoke(this, new DataChangedEventArgs(e.Error, e.Cancelled, e.TileInfo));
         }
 
                 /// <summary>
@@ -269,10 +265,10 @@ namespace Mapsui.Fetcher
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged(string propertyName)
+        private void OnPropertyChanged(string propertyName)
         {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+            var handler = PropertyChanged;
+            handler?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

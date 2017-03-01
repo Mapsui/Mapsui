@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 
 namespace Mapsui.Providers.ArcGIS.Image
 {
@@ -14,7 +13,7 @@ namespace Mapsui.Providers.ArcGIS.Image
         {
             get
             {
-                return timeExtent.Count() == 2 ? ConvertUnixTimeStamp(timeExtent[0]) : ConvertUnixTimeStamp(0);
+                return timeExtent.Length == 2 ? ConvertUnixTimeStamp(timeExtent[0]) : ConvertUnixTimeStamp(0);
             }
         }
 
@@ -22,7 +21,7 @@ namespace Mapsui.Providers.ArcGIS.Image
         {
             get
             {
-                return timeExtent.Count() == 2 ? ConvertUnixTimeStamp(timeExtent[1]) : ConvertUnixTimeStamp(0);
+                return timeExtent.Length == 2 ? ConvertUnixTimeStamp(timeExtent[1]) : ConvertUnixTimeStamp(0);
             }
         }
 

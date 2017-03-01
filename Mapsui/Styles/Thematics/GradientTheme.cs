@@ -1,18 +1,18 @@
 // Copyright 2005, 2006 - Morten Nielsen (www.iter.dk)
 //
-// This file is part of Mapsui.
+// This file is part of SharpMap.
 // Mapsui is free software; you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation; either version 2 of the License, or
 // (at your option) any later version.
 // 
-// Mapsui is distributed in the hope that it will be useful,
+// SharpMap is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
 
 // You should have received a copy of the GNU Lesser General Public License
-// along with Mapsui; if not, write to the Free Software
+// along with SharpMap; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
 using System;
@@ -174,6 +174,7 @@ namespace Mapsui.Styles.Thematics
         {
             style.CollisionDetection = min.CollisionDetection;
             style.Enabled = InterpolateBool(min.Enabled, max.Enabled, value);
+            style.LabelColumn = InterpolateString(min.LabelColumn, max.LabelColumn, value);
 
             double fontSize = InterpolateDouble(min.Font.Size, max.Font.Size, value);
             style.Font = new Font { FontFamily = min.Font.FontFamily, Size = fontSize };
@@ -191,6 +192,7 @@ namespace Mapsui.Styles.Thematics
             var x = InterpolateDouble(min.Offset.X, max.Offset.X, value);
             var y = InterpolateDouble(min.Offset.Y, max.Offset.Y, value);
             style.Offset = new Offset { X = x, Y = y };
+            style.LabelColumn = min.LabelColumn;
         }
 
         private double Fraction(double attr)
@@ -202,9 +204,14 @@ namespace Mapsui.Styles.Thematics
 
         private bool InterpolateBool(bool min, bool max, double attr)
         {
-            double frac = Fraction(attr);
-            if (frac > 0.5) return max;
-            return min;
+            var frac = Fraction(attr);
+            return frac > 0.5 ? max : min;
+        }
+
+        private string InterpolateString(string min, string max, double attr)
+        {
+            var frac = Fraction(attr);
+            return frac > 0.5 ? max : min;
         }
 
         private double InterpolateDouble(double min, double max, double attr)

@@ -1,10 +1,6 @@
 using System;
-using Mapsui.Utilities;
-#if !NETFX_CORE
+using Mapsui.Geometries.Utilities;
 using System.Windows.Media;
-#else
-using Windows.UI.Xaml.Media;
-#endif
 
 namespace Mapsui.Rendering.Xaml
 {

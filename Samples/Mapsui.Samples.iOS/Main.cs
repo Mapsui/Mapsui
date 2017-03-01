@@ -1,20 +1,15 @@
-using System;
-using System.Linq;
-using BruTile.Predefined;
-using CoreGraphics;
-using Foundation;
-using UIKit;
+﻿using UIKit;
 
 namespace Mapsui.Samples.iOS
 {
-	public class Application
-	{
-		// This is the main entry point of the application.
-		static void Main (string[] args)
-		{
-			// if you want to use a different Application Delegate class from "AppDelegate"
-			// you can specify it here.
-			UIApplication.Main (args);
-		}
-	}
+    public class Application
+    {
+        // This is the main entry point of the application.
+        static void Main(string[] args)
+        {
+            // if you want to use a different Application Delegate class from "AppDelegate"
+            // you can specify it here.
+            UIApplication.Main(args, null, "AppDelegate");
+        }
+    }
 }

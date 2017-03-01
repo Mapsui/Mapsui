@@ -11,10 +11,7 @@ namespace Mapsui.Styles
         private BitmapRegistry() {}
         private int _counter;
 
-        public static BitmapRegistry Instance
-        {
-            get { return _instance ?? (_instance = new BitmapRegistry()); }
-        }
+        public static BitmapRegistry Instance => _instance ?? (_instance = new BitmapRegistry());
 
         public int Register(Stream bitmapData)
         {

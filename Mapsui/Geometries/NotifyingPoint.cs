@@ -26,10 +26,22 @@ namespace Mapsui.Geometries
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected virtual void OnPropertyChanged(string propertyName)
+        private void OnPropertyChanged(string propertyName)
         {
             var handler = PropertyChanged;
-            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+            handler?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        /// <summary>
+        ///     Checks whether this instance is spatially equal to the Point 'o'
+        /// </summary>
+        /// <param name="p">Point to compare to</param>
+        /// <returns></returns>
+        public override bool Equals(Point p)
+        {
+            // ReSharper disable CompareOfFloatsByEqualityOperator
+            return (p != null) && (p.X == X) && (p.Y == Y) && (IsEmpty() == p.IsEmpty());
+            // ReSharper restore CompareOfFloatsByEqualityOperator
         }
     }
 }

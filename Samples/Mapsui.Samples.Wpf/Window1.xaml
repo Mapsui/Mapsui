@@ -1,53 +1,67 @@
 ﻿<Window x:Class="Mapsui.Samples.Wpf.Window1"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:wpf="clr-namespace:Mapsui.Samples.Wpf"
-        xmlns:xaml="clr-namespace:Mapsui.UI.Xaml;assembly=Mapsui.UI.Xaml"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:wpf="clr-namespace:Mapsui.Samples.Wpf"
+        xmlns:wpf1="clr-namespace:Mapsui.UI.Wpf;assembly=Mapsui.UI.Wpf"
         mc:Ignorable="d"
-    d:DesignWidth="644.572" d:DesignHeight="333.913" Width="800" Height="600"
-    Title="Mapsui.Samples.Wpf" SizeToContent="Manual">
-    <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="Gray">
-        <xaml:MapControl x:Name="MapControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
-        <Border BorderBrush="White" Opacity="0.75" Margin="10" Background="White" BorderThickness="6" CornerRadius="2" VerticalAlignment="Top" HorizontalAlignment="Left">
-            <StackPanel Width="Auto">
-                <RadioButton IsChecked="True" FontSize="16" Content="OSM" Margin="4,4,4,4" Click="OsmClick"/>
-                <RadioButton FontSize="16" Content="PointSymbols" Margin="4,4,4,4" Click="PointSymbolsClick"/>
-                <RadioButton FontSize="16" Content="Points with labels" Margin="4,4,4,4" Click="PointsWithLabelsClick"/>
-                <RadioButton FontSize="16" Content="Points with stacked labels" Margin="4,4,4,4" Click="RandomPointWithStackLabelClick"/>
-                <RadioButton FontSize="16" Content="Points with feature info" Margin="4,4,4,4" Click="RandomPointsWithFeatureInfoClick"/>
-                <RadioButton FontSize="16" Content="Points with animation" Margin="4,4,4,4" Click="AnimatedPointsClick"/>
-                <RadioButton FontSize="16" Content="Projected Point" Margin="4,4,4,4" Click="ProjectedPointClick"/>
-                <RadioButton FontSize="16" Content="Bing Maps" Margin="4,4,4,4" Click="BingMapsClick"/>
-                <RadioButton FontSize="16" Content="WMS - tiled requests" Margin="4,4,4,4" Click="GeodanWmsClick"/>
-                <RadioButton FontSize="16" Content="TMS" Margin="4,4,4,4" Click="GeodanTmsClick"/>
-                <RadioButton FontSize="16" Content="WMS-C"  Margin="4,4,4,4" Click="GeodanWmscClick"/>
-                <RadioButton FontSize="16" Content="Shapefile"  Margin="4,4,4,4" Click="ShapefileClick" />
-                <RadioButton FontSize="16" Content="MapTiler"  Margin="4,4,4,4" Click="MapTilerClick" />
-                <RadioButton FontSize="16" Content="WMS"  Margin="4,4,4,4" Click="WmsClick" />
-                <RadioButton FontSize="16" Content="ArcGISImageService"  Margin="4,4,4,4" Click="ArcGISImageServiceClick" />
-                <RadioButton FontSize="16" Content="WMTS"  Margin="4,4,4,4" Click="WmtsClick" />
-            </StackPanel>
-        </Border>
-        <Border BorderBrush="White" Opacity="0.75" Margin="10" Background="White" BorderThickness="6" CornerRadius="2" VerticalAlignment="Top" HorizontalAlignment="Right">
-            <wpf:LayerList x:Name="LayerList"></wpf:LayerList>
-        </Border>
-        <Border BorderBrush="White" Opacity="0.75" Margin="10" Background="White" BorderThickness="6" CornerRadius="2" VerticalAlignment="Bottom" HorizontalAlignment="Left">
-            <Slider x:Name="RotationSlider" Width="205" ValueChanged="RotationSliderChanged" />
-        </Border>
-        <Border x:Name="Statistics" BorderBrush="White" Opacity="0.75" Margin="10" Background="White" BorderThickness="6" CornerRadius="2" HorizontalAlignment="Center" VerticalAlignment="Top">
-            <StackPanel  Orientation="Vertical" HorizontalAlignment="Center"  >
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Fps:  "/>
-                    <TextBlock x:Name="Fps"/>
+        d:DesignWidth="644.572"
+        d:DesignHeight="333.913"
+        Width="1000"
+        Height="800"
+        Title="Mapsui.Samples.Wpf"
+        SizeToContent="Manual">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="30" />
+        </Grid.RowDefinitions>
+        <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <wpf1:MapControl x:Name="MapControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+            <Border BorderBrush="White" Opacity="0.65" Background="White" BorderThickness="6" MinWidth="140"
+                    MinHeight="30"
+                    VerticalAlignment="Top" HorizontalAlignment="Left">
+                <StackPanel>
+                    <ComboBox Name="RenderMode" Margin="0,0, 0, 10">
+                        <ComboBoxItem IsSelected="True">Wpf renderer</ComboBoxItem>
+                        <ComboBoxItem>Skia renderer</ComboBoxItem>
+                    </ComboBox>
+                    <ComboBox Name="SampleSet" Margin="0,0, 0, 10">
+                        <ComboBoxItem IsSelected="True">Demo samples</ComboBoxItem>
+                        <ComboBoxItem>Test samples</ComboBoxItem>
+                    </ComboBox>
+                    <StackPanel Name="SampleList" Width="Auto" />
                 </StackPanel>
-            </StackPanel>
-        </Border>
-        <Border x:Name="ErrorBorder" BorderBrush="White" Opacity="0" Margin="10" Background="White" BorderThickness="6" CornerRadius="2" VerticalAlignment="Bottom" HorizontalAlignment="Right">
-            <StackPanel Orientation="Horizontal" >
-                <TextBlock Text="Error:  "/>
-                <TextBlock x:Name="Error" Text="No Error"/>
-            </StackPanel>
-        </Border>
+            </Border>
+            <Border BorderBrush="White" Opacity="0.65" Background="White" BorderThickness="6"
+                    VerticalAlignment="Top" HorizontalAlignment="Right" MinWidth="140" MinHeight="30">
+                <StackPanel>
+                <wpf:LayerList x:Name="LayerList" />
+                    <Slider x:Name="RotationSlider" MinWidth="140" ValueChanged="RotationSliderChanged" />
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="White" Opacity="0.65" Background="White" BorderThickness="6"
+                    VerticalAlignment="Center" HorizontalAlignment="Right">
+                <TextBlock Name="FeatureInfo" TextWrapping="Wrap"/>
+            </Border>
+            <Border x:Name="Statistics" BorderBrush="White" Opacity="0.65" Background="White"
+                    BorderThickness="6" HorizontalAlignment="Center" VerticalAlignment="Top">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Fps:  " />
+                        <TextBlock x:Name="Fps" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="White" Opacity="0.65" Background="White" BorderThickness="6"
+                    VerticalAlignment="Bottom" HorizontalAlignment="Center" MinWidth="40" MinHeight="30">
+                <TextBlock x:Name="MouseCoordinates" Text="0, 0" />
+            </Border>
+        </Grid>
+        <StackPanel Name="LogPanel" Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Stretch"
+                    HorizontalAlignment="Stretch">
+            <TextBlock Name="LogTextBox" />
+        </StackPanel>
     </Grid>
 </Window>

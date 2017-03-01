@@ -24,8 +24,10 @@ namespace Mapsui.Styles
 
         public Color Color { get; set; }
 
-        public Color Background { get; set; }        
-
+        // todo: 
+        // Perhaps rename to something like SecondaryColor. The 'Color' 
+        // field is itself a background in many cases. This is confusing
+        public Color Background { get; set; } 
 
         /// <summary>
         /// This identifies bitmap in the BitmapRegistry
@@ -75,7 +77,7 @@ namespace Mapsui.Styles
 
         public override int GetHashCode()
         {            
-            return (Color == null) ? 0 : Color.GetHashCode();
+            return Color == null ? 0 : Color.GetHashCode();
         }
 
         public static bool operator ==(Brush brush1, Brush brush2)

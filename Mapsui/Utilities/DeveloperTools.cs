@@ -2,6 +2,7 @@ namespace Mapsui.Utilities
 {
     public static class DeveloperTools
     {
-        public static bool DeveloperMode; 
+        // ReSharper disable once UnassignedField.Global
+        public static bool DeveloperMode;
     }
 }

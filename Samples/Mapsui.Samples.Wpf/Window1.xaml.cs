@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
-using Mapsui.Projection;
-using Mapsui.Providers;
-using Mapsui.Samples.Common;
+using System.Windows.Input;
+using Mapsui.Logging;
 using Mapsui.Samples.Common.Desktop;
-using Mapsui.UI.Xaml;
+using Mapsui.Tests.Common;
+using Mapsui.UI;
 
 namespace Mapsui.Samples.Wpf
 {
@@ -19,239 +20,152 @@ namespace Mapsui.Samples.Wpf
             InitializeComponent();
             MapControl.ErrorMessageChanged += MapErrorMessageChanged;
             MapControl.FeatureInfo += MapControlFeatureInfo;
+            MapControl.Map.Info += MapControlOnInfo;
+            MapControl.MouseMove += MapControlOnMouseMove;
+            MapControl.HoverInfo += MapControlOnHoverInfo;
+
             Fps.SetBinding(TextBlock.TextProperty, new Binding("Fps"));
             Fps.DataContext = MapControl.FpsCounter;
 
-            OsmClick(this, null);
+            Logger.LogDelegate += LogMethod;
+
+            FillComboBoxWithDemoSamples();
+
+            SampleSet.SelectionChanged += SampleSetOnSelectionChanged;
+            RenderMode.SelectionChanged += RenderModeOnSelectionChanged;
+            var firstRadioButton = (RadioButton) SampleList.Children[0];
+            firstRadioButton.IsChecked = true;
+            firstRadioButton.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
         }
 
-        static void MapControlFeatureInfo(object sender, FeatureInfoEventArgs e)
+        private void MapControlOnHoverInfo(object sender, MouseInfoEventArgs e)
         {
-            MessageBox.Show(FeaturesToString(e.FeatureInfo));
+            FeatureInfo.Text = e.Leaving ? "" : $"Hover Info:{Environment.NewLine}{e.Feature.ToDisplayText()}";
         }
 
-        static string FeaturesToString(IEnumerable<KeyValuePair<string, IEnumerable<IFeature>>> featureInfos)
+        private void RenderModeOnSelectionChanged(object sender, SelectionChangedEventArgs selectionChangedEventArgs)
         {
-            var result = string.Empty;
+            var selectedValue = ((ComboBoxItem) ((ComboBox) sender).SelectedItem).Content.ToString();
 
-            foreach (var layer in featureInfos)
+            if (selectedValue.ToLower().Contains("wpf"))
+                MapControl.RenderMode = UI.Wpf.RenderMode.Wpf;
+            else if (selectedValue.ToLower().Contains("skia"))
+                MapControl.RenderMode = UI.Wpf.RenderMode.Skia;
+            else
+                throw new Exception("Unknown ComboBox item");
+        }
+
+        private void MapControlOnMouseMove(object sender, MouseEventArgs e)
+        {
+            var screenPosition = e.GetPosition(MapControl);
+            var worldPosition = MapControl.Map.Viewport.ScreenToWorld(screenPosition.X, screenPosition.Y);
+            MouseCoordinates.Text = $"{worldPosition.X:F0}, {worldPosition.Y:F0}";
+        }
+
+        private void FillComboBoxWithDemoSamples()
+        {
+            SampleList.Children.Clear();
+            foreach (var sample in DemoSamples().ToList())
             {
-                result += layer.Key + "\n";
-                foreach (var feature in layer.Value)
-                {
-                    foreach (var field in feature.Fields)
-                    {
-                        result += field + ":" + feature[field] + ".";
-                    }
-                    result += "\n";
-                }
-                result += "\n";
+                SampleList.Children.Add(CreateRadioButton(sample));
+            }
+        }
+
+        private void FillComboBoxWithTestSamples()
+        {
+            SampleList.Children.Clear();
+            foreach (var sample in TestSamples().ToList())
+            {
+                SampleList.Children.Add(CreateRadioButton(sample));
+            }
+        }
+
+        private void SampleSetOnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var selectedValue = ((ComboBoxItem) ((ComboBox) sender).SelectedItem).Content.ToString();
+
+            if (selectedValue == "Demo samples")
+                FillComboBoxWithDemoSamples();
+            else if (selectedValue == "Test samples")
+                FillComboBoxWithTestSamples();
+            else
+                throw new Exception("Unknown ComboBox item");
+        }
+
+        private Dictionary<string, Func<Map>> TestSamples()
+        {
+            var result = new Dictionary<string, Func<Map>>();
+            var i = 0;
+            foreach (var sample in AllSamples.CreateList())
+            {
+                result[i.ToString()] = sample;
+                i++;
             }
             return result;
         }
 
+        private static Dictionary<string, Func<Map>> DemoSamples()
+        {
+            var allSamples = Common.AllSamples.CreateList();
+            // Append samples from Mapsui.Desktop
+            allSamples["Shapefile (Desktop)"] = ShapefileSample.CreateMap;
+            allSamples["Tiles on disk (Desktop)"] = MapTilerSample.CreateMap;
+            allSamples["WMS (Desktop)"] = WmsSample.CreateMap;
+            return allSamples;
+        }
+
+        private UIElement CreateRadioButton(KeyValuePair<string, Func<Map>> sample)
+        {
+            var radioButton = new RadioButton
+            {
+                FontSize = 16,
+                Content = sample.Key,
+                Margin = new Thickness(4)
+            };
+
+            radioButton.Click += (s, a) =>
+            {
+                MapControl.Map.Layers.Clear();
+                MapControl.Map = sample.Value();
+                MapControl.Map.Info += MapControlOnInfo;
+                LayerList.Initialize(MapControl.Map.Layers);
+                MapControl.Refresh();
+                
+            };
+            return radioButton;
+        }
+
+        private void MapOnInfo(object sender, MouseInfoEventArgs mouseInfoEventArgs)
+        {
+            
+        }
+
+        private void LogMethod(LogLevel logLevel, string s, Exception exception)
+        {
+            Dispatcher.Invoke(() => LogTextBox.Text = $"{logLevel} {s}");
+        }
+
+        private static void MapControlFeatureInfo(object sender, FeatureInfoEventArgs e)
+        {
+            MessageBox.Show(e.FeatureInfo.ToDisplayText());
+        }
+
         private void MapErrorMessageChanged(object sender, EventArgs e)
         {
-            Error.Text = MapControl.ErrorMessage;
-            Utilities.AnimateOpacity(ErrorBorder, 0.75, 0, 8000);
+            LogTextBox.Text = MapControl.ErrorMessage; // todo: keep history
         }
 
         private void RotationSliderChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            var percent = RotationSlider.Value / (RotationSlider.Maximum - RotationSlider.Minimum);
-            MapControl.Map.Viewport.Rotation = percent * 360;
+            var percent = RotationSlider.Value/(RotationSlider.Maximum - RotationSlider.Minimum);
+            MapControl.Map.Viewport.Rotation = percent*360;
             MapControl.Refresh();
         }
-        private static void MapControlOnMouseInfoDown(object sender, MouseInfoEventArgs mouseInfoEventArgs)
+
+        private void MapControlOnInfo(object sender, MouseInfoEventArgs mouseInfoEventArgs)
         {
             if (mouseInfoEventArgs.Feature != null)
-            {
-                MessageBox.Show(mouseInfoEventArgs.Feature["Label"].ToString());
-            }
-        }
-        
-        // ************************************ start click events ******************************************
-
-        private void OsmClick(object sender, RoutedEventArgs e)
-        {
-            MapControl.Map.Layers.Clear();
-            MapControl.Map.Layers.Add(OsmSample.CreateLayer());
-
-            LayerList.Initialize(MapControl.Map.Layers);
-            MapControl.ZoomToFullEnvelope();
-            MapControl.Refresh();
-        }
-
-        private void ProjectedPointClick(object sender, RoutedEventArgs e)
-        {
-            MapControl.Map.Layers.Clear();
-            MapControl.Map.Transformation = new MinimalTransformation();
-            MapControl.Map.CRS = "EPSG:3857";
-            MapControl.Map.Layers.Add(OsmSample.CreateLayer());
-            MapControl.Map.Layers.Add(PointsInWgs84Sample.CreateLayer());
-
-            LayerList.Initialize(MapControl.Map.Layers);
-            MapControl.ZoomToFullEnvelope();
-            MapControl.Refresh();
-        }
-
-        private void AnimatedPointsClick(object sender, RoutedEventArgs e)
-        {
-            MapControl.Map.Layers.Clear();
-            MapControl.Map.Layers.Add(OsmSample.CreateLayer());
-            MapControl.Map.Layers.Add(AnimatedPointsSample.CreateLayer());
-
-            LayerList.Initialize(MapControl.Map.Layers);
-            MapControl.ZoomToFullEnvelope();
-            MapControl.Refresh();
-        }
-
-        private void RandomPointWithStackLabelClick(object sender, RoutedEventArgs e)
-        {
-            MapControl.Map.Layers.Clear();
-            MapControl.Map.Layers.Add(OsmSample.CreateLayer());
-            var provider = PointsSample.CreateRandomPointsProvider(MapControl.Map.Envelope);
-            MapControl.Map.Layers.Add(PointsWithStackedLabelsSample.CreateLayer(provider));
-            MapControl.Map.Layers.Add(PointsSample.CreateRandomPointLayer(provider));
-
-            LayerList.Initialize(MapControl.Map.Layers);
-            MapControl.ZoomToFullEnvelope();
-            MapControl.Refresh();
-        }
-
-        private void RandomPointsWithFeatureInfoClick(object server, RoutedEventArgs e)
-        {
-            MapControl.Map.Layers.Clear();
-            MapControl.Map.Layers.Add(OsmSample.CreateLayer());
-            MapControl.Map.Layers.Add(PointsWithFeatureInfoSample.CreateLayer(MapControl.Map.Envelope));
-
-            MapControl.MouseInfoUp += MapControlOnMouseInfoDown;
-            MapControl.MouseInfoUpLayers.Add(MapControl.Map.Layers.FindLayer("Points with feature info").First());
-
-            LayerList.Initialize(MapControl.Map.Layers);
-            MapControl.ZoomToFullEnvelope();
-            MapControl.Refresh();
-        }
-
-
-        private void GeodanWmsClick(object sender, RoutedEventArgs e)
-        {
-            MapControl.Map.Layers.Clear();
-            MapControl.Map.Layers.Add(TiledWmsSample.CreateLayer());
-
-            LayerList.Initialize(MapControl.Map.Layers);
-            MapControl.ZoomToFullEnvelope();
-            MapControl.Refresh();
-        }
-
-        private void GeodanTmsClick(object sender, RoutedEventArgs e)
-        {
-            MapControl.Map.Layers.Clear();
-            MapControl.Map.Layers.Add(TmsSample.CreateLayer());
-
-            LayerList.Initialize(MapControl.Map.Layers);
-            MapControl.ZoomToFullEnvelope();
-            MapControl.Refresh();
-        }
-
-        private void BingMapsClick(object sender, RoutedEventArgs e)
-        {
-            MapControl.Map.Layers.Clear();
-            MapControl.Map.Layers.Add(BingSample.CreateLayer());
-
-            LayerList.Initialize(MapControl.Map.Layers);
-            MapControl.ZoomToFullEnvelope();
-            MapControl.Refresh();
-        }
-
-        private void GeodanWmscClick(object sender, RoutedEventArgs e)
-        {
-            MapControl.Map.Layers.Clear();
-            MapControl.Map.Layers.Add(WmscSample.CreateLayer());
-
-            LayerList.Initialize(MapControl.Map.Layers);
-            MapControl.ZoomToFullEnvelope();
-            MapControl.Refresh();
-        }
-
-        private void ShapefileClick(object sender, RoutedEventArgs e)
-        {
-            MapControl.Map.Layers.Clear();
-            foreach (var layer in ShapefileSample.CreateLayers())
-            {
-                MapControl.Map.Layers.Add(layer);
-            }
-            
-            LayerList.Initialize(MapControl.Map.Layers);
-            MapControl.ZoomToFullEnvelope();
-            MapControl.Refresh();
-        }
-
-        private void MapTilerClick(object sender, RoutedEventArgs e)
-        {
-            MapControl.Map.Layers.Clear();
-            MapControl.Map.Layers.Add(MapTilerSample.CreateLayer());
-
-            LayerList.Initialize(MapControl.Map.Layers);
-            MapControl.ZoomToFullEnvelope();
-            MapControl.Refresh();
-        }
-
-        private void PointSymbolsClick(object sender, RoutedEventArgs e)
-        {
-            MapControl.Map.Layers.Clear();
-            MapControl.Map.Layers.Add(OsmSample.CreateLayer());
-            MapControl.Map.Layers.Add(PointsSample.Create());
-            MapControl.Map.Layers.Add(PointsWithSymbolsInWorldUnitsSample.CreateLayer());
-
-            LayerList.Initialize(MapControl.Map.Layers);
-            MapControl.ZoomToFullEnvelope();
-            MapControl.Refresh();
-        }
-
-        private void WmsClick(object sender, RoutedEventArgs e)
-        {
-            MapControl.Map.Layers.Clear();
-            MapControl.Map.CRS = "EPSG:28992";
-            MapControl.Map.Layers.Add(WmsSample.Create());
-
-            LayerList.Initialize(MapControl.Map.Layers);
-            
-            MapControl.ZoomToFullEnvelope(); 
-            MapControl.Refresh();
-        }
-
-        private void ArcGISImageServiceClick(object sender, RoutedEventArgs e)
-        {
-            MapControl.Map.Layers.Clear();
-            MapControl.Map.Layers.Add(ArcGISImageServiceSample.CreateLayer());
-
-            LayerList.Initialize(MapControl.Map.Layers);
-            MapControl.ZoomToFullEnvelope();
-            MapControl.Refresh();
-        }
-
-        private void WmtsClick(object sender, RoutedEventArgs e)
-        {
-            MapControl.Map.Layers.Clear();
-            MapControl.Map.Layers.Add(WmtsSample.CreateLayer());
-            MapControl.Map.Layers.Add(GeodanOfficesSample.CreateLayer());
-
-            LayerList.Initialize(MapControl.Map.Layers);
-            MapControl.ZoomToFullEnvelope();
-            MapControl.Refresh();
-        }
-
-        private void PointsWithLabelsClick(object sender, RoutedEventArgs e)
-        {
-            MapControl.Map.Layers.Clear();
-            MapControl.Map.Layers.Add(OsmSample.CreateLayer());
-            MapControl.Map.Layers.Add(PointsSample.CreatePointLayerWithLabels());
-
-            LayerList.Initialize(MapControl.Map.Layers);
-            MapControl.ZoomToFullEnvelope();
-            MapControl.Refresh();
+                FeatureInfo.Text = $"Click Info:{Environment.NewLine}{mouseInfoEventArgs.Feature.ToDisplayText()}";
         }
     }
 }
-

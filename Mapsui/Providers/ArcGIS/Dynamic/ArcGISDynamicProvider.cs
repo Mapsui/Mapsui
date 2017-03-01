@@ -7,6 +7,7 @@ using System.Net;
 using System.Text;
 using BruTile.Extensions;
 using Mapsui.Geometries;
+using Mapsui.Logging;
 using Mapsui.Utilities;
 
 namespace Mapsui.Providers.ArcGIS.Dynamic
@@ -137,9 +138,9 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
                 width = Convert.ToInt32(viewport.Width);
                 height = Convert.ToInt32(viewport.Height);
             }
-            catch (OverflowException)
+            catch (OverflowException ex)
             {
-                Debug.WriteLine("Could not conver double to int (ExportMap size)");
+                Logger.Log(LogLevel.Error, "Error: Could not conver double to int (ExportMap size)", ex);
                 return false;
             }
            
@@ -157,13 +158,14 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
 
                 var bytes = BruTile.Utilities.ReadFully(myWebResponse.GetResponseStream());
                 raster = new Raster(new MemoryStream(bytes), viewport.Extent);
-                if (dataStream != null) dataStream.Dispose();
+                dataStream?.Dispose();
 
                 myWebResponse.Dispose();
                 return true;
             }
-            catch
+            catch (Exception ex)
             {
+                Logger.Log(LogLevel.Error, ex.Message, ex);
                 return false;
             }
         }

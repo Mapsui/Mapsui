@@ -16,83 +16,84 @@ namespace XamarinRendering
 {
 	static class LabelRenderer
 	{
-		public static List<IFeature> RenderStackedLabelLayer(IViewport viewport, LabelLayer layer)
-		{
-			var renderedFeatures = new List<IFeature> ();
-			var canvas = new CALayer ();
-			canvas.Opacity = (float)layer.Opacity;
+        // todo: delete the code below if you don't know what it was supposed to do
+		//public static List<IFeature> RenderStackedLabelLayer(IViewport viewport, LabelLayer layer)
+		//{
+		//	var renderedFeatures = new List<IFeature> ();
+		//	var canvas = new CALayer ();
+		//	canvas.Opacity = (float)layer.Opacity;
 
-			//todo: take into account the priority 
-			var features = layer.GetFeaturesInView(viewport.Extent, viewport.Resolution);
-			var margin = viewport.Resolution * 50;
+		//	//todo: take into account the priority 
+		//	var features = layer.GetFeaturesInView(viewport.Extent, viewport.Resolution);
+		//	var margin = viewport.Resolution * 50;
 
-			if(layer.Style != null)
-			{
-				var clusters = new List<Cluster>();
-				//todo: repeat until there are no more merges
-				ClusterFeatures(clusters, features, margin, layer.Style, viewport.Resolution);
+		//	if(layer.Style != null)
+		//	{
+		//		var clusters = new List<Cluster>();
+		//		//todo: repeat until there are no more merges
+		//		ClusterFeatures(clusters, features, margin, layer.Style, viewport.Resolution);
 
-				foreach (var cluster in clusters)
-				{
-					var feature = cluster.Features.OrderBy(f => f.Geometry.GetBoundingBox().GetCentroid().Y).FirstOrDefault();
-					//SetFeatureOutline (feature, layer.Name, cluster.Features.Count);
-					//var bb = RenderBox(cluster.Box, viewport);
+		//		foreach (var cluster in clusters)
+		//		{
+		//			var feature = cluster.Features.OrderBy(f => f.Geometry.GetBoundingBox().GetCentroid().Y).FirstOrDefault();
+		//			//SetFeatureOutline (feature, layer.Name, cluster.Features.Count);
+		//			//var bb = RenderBox(cluster.Box, viewport);
 
-					//Zorg dat dit ALTIJD decimal zelfde ISet als ViewChanged is
-					//var feature = cluster.Features.FirstOrDefault ();
+		//			//Zorg dat dit ALTIJD decimal zelfde ISet als ViewChanged is
+		//			//var feature = cluster.Features.FirstOrDefault ();
 
-					var styles = feature.Styles ?? Enumerable.Empty<IStyle>();
-					foreach (var style in styles)
-					{
-						if (feature.Styles != null && style.Enabled)
-						{
-							var styleKey = layer.Name; //feature.GetHashCode ().ToString ();
-							var renderedGeometry = (feature[styleKey] != null) ? (CALayer)feature[styleKey] : null;
-							var labelText = layer.GetLabelText(feature);
+		//			var styles = feature.Styles ?? Enumerable.Empty<IStyle>();
+		//			foreach (var style in styles)
+		//			{
+		//				if (feature.Styles != null && style.Enabled)
+		//				{
+		//					var styleKey = layer.Name; //feature.GetHashCode ().ToString ();
+		//					var renderedGeometry = (feature[styleKey] != null) ? (CALayer)feature[styleKey] : null;
+		//					var labelText = layer.GetLabelText(feature);
 
-							if (renderedGeometry == null) {
-							//Mapsui.Geometries.Point point, Offset stackOffset, LabelStyle style, IFeature feature, IViewport viewport, string text)
-								renderedGeometry = RenderLabel(feature.Geometry as Mapsui.Geometries.Point,
-								                               style as LabelStyle, feature, viewport, labelText);
+		//					if (renderedGeometry == null) {
+		//					//Mapsui.Geometries.Point point, Offset stackOffset, LabelStyle style, IFeature feature, IViewport viewport, string text)
+		//						renderedGeometry = RenderLabel(feature.Geometry as Mapsui.Geometries.Point,
+		//						                               style as LabelStyle, feature, viewport, labelText);
 
-								feature [styleKey] = renderedGeometry;
-								feature ["first"] = true;
+		//						feature [styleKey] = renderedGeometry;
+		//						feature ["first"] = true;
 
-							} else {
-								feature ["first"] = false;
-							}
-						}
-					}
-					renderedFeatures.Add (feature);
+		//					} else {
+		//						feature ["first"] = false;
+		//					}
+		//				}
+		//			}
+		//			renderedFeatures.Add (feature);
 
-					/*
-					Offset stackOffset = null;
+		//			/*
+		//			Offset stackOffset = null;
 
-					foreach (var feature in cluster.Features.OrderBy(f => f.Geometry.GetBoundingBox().GetCentroid().Y))
-					{
-						if (layerStyle is IThemeStyle) style = (layerStyle as IThemeStyle).GetStyle(feature);
-						if ((style == null) || (style.Enabled == false) || (style.MinVisible > viewport.Resolution) || (style.MaxVisible < viewport.Resolution)) continue;
+		//			foreach (var feature in cluster.Features.OrderBy(f => f.Geometry.GetBoundingBox().GetCentroid().Y))
+		//			{
+		//				if (layerStyle is IThemeStyle) style = (layerStyle as IThemeStyle).GetStyle(feature);
+		//				if ((style == null) || (style.Enabled == false) || (style.MinVisible > viewport.Resolution) || (style.MaxVisible < viewport.Resolution)) continue;
 
-						if (stackOffset == null) //first time
-						{
-							stackOffset = new Offset();
-							if (cluster.Features.Count > 1)
-								canvas.AddSublayer (RenderBox(cluster.Box, viewport));
-						}
-						else stackOffset.Y += 18; //todo: get size from text, (or just pass stack nr)
+		//				if (stackOffset == null) //first time
+		//				{
+		//					stackOffset = new Offset();
+		//					if (cluster.Features.Count > 1)
+		//						canvas.AddSublayer (RenderBox(cluster.Box, viewport));
+		//				}
+		//				else stackOffset.Y += 18; //todo: get size from text, (or just pass stack nr)
 
-						if (!(style is LabelStyle)) throw new Exception("Style of label is not a LabelStyle");
-						var labelStyle = style as LabelStyle;
-						string labelText = layer.GetLabel(feature);
-						var position = new Mapsui.Geometries.Point(cluster.Box.GetCentroid().X, cluster.Box.Bottom);
-						canvas.AddSublayer(RenderLabel(position, stackOffset, labelStyle, feature, viewport, labelText));
-					}
-					*/
-				}
-			}
+		//				if (!(style is LabelStyle)) throw new Exception("Style of label is not a LabelStyle");
+		//				var labelStyle = style as LabelStyle;
+		//				string labelText = layer.GetLabel(feature);
+		//				var position = new Mapsui.Geometries.Point(cluster.Box.GetCentroid().X, cluster.Box.Bottom);
+		//				canvas.AddSublayer(RenderLabel(position, stackOffset, labelStyle, feature, viewport, labelText));
+		//			}
+		//			*/
+		//		}
+		//	}
 
-			return renderedFeatures;
-		}
+		//	return renderedFeatures;
+		//}
 
 		private static CALayer RenderBox(BoundingBox box, IViewport viewport)
 		{
@@ -113,36 +114,37 @@ namespace XamarinRendering
 		    return canvas;
 		}
 
-		public static CALayer RenderLabelLayer(IViewport viewport, LabelLayer layer, List<IFeature> features)
-		{
-			var canvas = new CALayer();
-			canvas.Opacity = (float)layer.Opacity;
+        // todo: delete code below if you don't know what it was supposed to do
+		//public static CALayer RenderLabelLayer(IViewport viewport, LabelLayer layer, List<IFeature> features)
+		//{
+		//	var canvas = new CALayer();
+		//	canvas.Opacity = (float)layer.Opacity;
 
-			//todo: take into account the priority 
-			var stackOffset = new Offset();
+		//	//todo: take into account the priority 
+		//	var stackOffset = new Offset();
 
-			if (layer.Style != null)
-			{
-				var style = layer.Style;
+		//	if (layer.Style != null)
+		//	{
+		//		var style = layer.Style;
 
-				foreach (var feature in features)
-				{
-					if (style is IThemeStyle) style = (style as IThemeStyle).GetStyle(feature);
+		//		foreach (var feature in features)
+		//		{
+		//			if (style is IThemeStyle) style = (style as IThemeStyle).GetStyle(feature);
 
-					if ((style == null) || (style.Enabled == false) || (style.MinVisible > viewport.Resolution) || (style.MaxVisible < viewport.Resolution)) continue;
-					if (!(style is LabelStyle)) throw new Exception("Style of label is not a LabelStyle");
-					//var labelStyle = style as LabelStyle;
-					string labelText = layer.GetLabelText(feature);
+		//			if ((style == null) || (style.Enabled == false) || (style.MinVisible > viewport.Resolution) || (style.MaxVisible < viewport.Resolution)) continue;
+		//			if (!(style is LabelStyle)) throw new Exception("Style of label is not a LabelStyle");
+		//			//var labelStyle = style as LabelStyle;
+		//			string labelText = layer.GetLabelText(feature);
 
-					var label = RenderLabel (feature.Geometry as Mapsui.Geometries.Point,
-					                         style as LabelStyle, feature, viewport, labelText);
+		//			var label = RenderLabel (feature.Geometry as Mapsui.Geometries.Point,
+		//			                         style as LabelStyle, feature, viewport, labelText);
 
-					canvas.AddSublayer(label);
-				}
-			}
+		//			canvas.AddSublayer(label);
+		//		}
+		//	}
 
-			return canvas;
-		}
+		//	return canvas;
+		//}
 
 		private static void ClusterFeatures(
 			IList<Cluster> clusters, 

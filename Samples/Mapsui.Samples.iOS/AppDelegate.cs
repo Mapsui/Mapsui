@@ -1,43 +1,59 @@
-using BruTile.Predefined;
-using CoreGraphics;
-using Foundation;
+﻿using Foundation;
 using UIKit;
 
 namespace Mapsui.Samples.iOS
 {
-	// The name AppDelegate is referenced in the MainWindow.xib file.
-	public partial class OpenGLESSampleAppDelegate : UIApplicationDelegate
-	{
-		// This method is invoked when the application has loaded its UI and its ready to run
-		public override bool FinishedLaunching(UIApplication app, NSDictionary options)
-		{
-			// If you have defined a view, add it here:
-			// window.AddSubview (navigationController.View);
+    // The UIApplicationDelegate for the application. This class is responsible for launching the 
+    // User Interface of the application, as well as listening (and optionally responding) to 
+    // application events from iOS.
+    [Register("AppDelegate")]
+    public class AppDelegate : UIApplicationDelegate
+    {
+        // class-level declarations
 
-			glView.Map.Layers.Add(new Layers.TileLayer(KnownTileSources.Create()));
+        public override UIWindow Window
+        {
+            get;
+            set;
+        }
 
-			glView.Run(60.0);
+        public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
+        {
+            // Override point for customization after application launch.
+            // If not required for your application you can safely delete this method
 
-			var width = window.Frame.Width;
-			var height = window.Frame.Height;
-			glView.Frame = new CGRect(0, 0, width, height);
-			window.MakeKeyAndVisible();
+            return true;
+        }
 
-			return true;
-		}
+        public override void OnResignActivation(UIApplication application)
+        {
+            // Invoked when the application is about to move from active to inactive state.
+            // This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) 
+            // or when the user quits the application and it begins the transition to the background state.
+            // Games should use this method to pause the game.
+        }
 
-		public override void OnResignActivation(UIApplication application)
-		{
-			glView.Stop();
-			glView.Run(5.0);
-		}
+        public override void DidEnterBackground(UIApplication application)
+        {
+            // Use this method to release shared resources, save user data, invalidate timers and store the application state.
+            // If your application supports background exection this method is called instead of WillTerminate when the user quits.
+        }
 
-		// This method is required in iPhoneOS 3.0
-		public override void OnActivated(UIApplication application)
-		{
-			glView.Stop();
-			glView.Run(60.0);
-		}
-	}
+        public override void WillEnterForeground(UIApplication application)
+        {
+            // Called as part of the transiton from background to active state.
+            // Here you can undo many of the changes made on entering the background.
+        }
+
+        public override void OnActivated(UIApplication application)
+        {
+            // Restart any tasks that were paused (or not yet started) while the application was inactive. 
+            // If the application was previously in the background, optionally refresh the user interface.
+        }
+
+        public override void WillTerminate(UIApplication application)
+        {
+            // Called when the application is about to terminate. Save data, if needed. See also DidEnterBackground.
+        }
+    }
 }
-

@@ -1,12 +1,11 @@
-﻿using System.Windows.Controls;
-using Mapsui;
+﻿using Mapsui.Layers;
 
 namespace Mapsui.Samples.Wpf
 {
     /// <summary>
     /// Interaction logic for LayerList.xaml
     /// </summary>
-    public partial class LayerList : UserControl
+    public partial class LayerList
     {
         public LayerList()
         {
@@ -15,7 +14,7 @@ namespace Mapsui.Samples.Wpf
         
         public void Initialize(LayerCollection layers)
         {
-            items.Children.Clear();
+            Items.Children.Clear();
 
             foreach (var layer in layers)
             {
@@ -23,7 +22,7 @@ namespace Mapsui.Samples.Wpf
                 item.Enabled = layer.Enabled;
                 item.LayerOpacity = layer.Opacity;
                 item.Layer = layer;
-                items.Children.Add(item);
+                Items.Children.Add(item);
             }
         }
     }

@@ -1,4 +1,5 @@
 ﻿using Mapsui.Layers;
+using Mapsui.Logging;
 using Mapsui.Providers.ArcGIS;
 using Mapsui.Providers.ArcGIS.Image;
 
@@ -9,6 +10,16 @@ namespace Mapsui.Samples.Common.Desktop
         public static ILayer CreateLayer()
         {
             return new ImageLayer("ArcGISImageServiceLayer") { DataSource = CreateProvider() };
+        }
+
+        public static Map CreateMap()
+        {
+            var map = new Map();
+            map.Layers.Add(CreateLayer());
+            map.Viewport.Resolution = 1;
+            map.Viewport.Center.X = 0;
+            map.Viewport.Center.Y = 0;
+            return map;
         }
 
         private static ArcGISImageServiceProvider CreateProvider()
@@ -29,12 +40,12 @@ namespace Mapsui.Samples.Common.Desktop
 
         private static void capabilitiesHelper_CapabilitiesFailed(object sender, System.EventArgs e)
         {
-            throw new System.NotImplementedException();
+            Logger.Log(LogLevel.Warning, "ArcGISImageService capabilities request failed");
         }
 
         private static void CapabilitiesReceived(object sender, System.EventArgs e)
         {
-            var capabilities = sender as ArcGISImageCapabilities;
+            //todo: make use of: var capabilities = sender as ArcGISImageCapabilities;
         }
     }
 }

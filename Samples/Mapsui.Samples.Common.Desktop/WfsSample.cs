@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using Mapsui.Layers;
+using Mapsui.Logging;
 using Mapsui.Providers.Wfs;
 using Mapsui.Providers.Wfs.Utilities;
 using Mapsui.Styles;
@@ -41,6 +42,7 @@ namespace Mapsui.Samples.Common.Desktop
             }
             catch (WebException ex)
             {
+                Logger.Log(LogLevel.Warning, ex.Message, ex);
                 if ((ex.Message.Contains("(502) Bad Gateway")) ||
                     (ex.Message.Contains("Unable to connect to the remote server")))
                 {
@@ -57,19 +59,20 @@ namespace Mapsui.Samples.Common.Desktop
             var statesProvider = CreateStatesProvider(getCapabilitiesUri);
 
             return new Layer("States")
-                {
-                    Style = new VectorStyle {Fill = new Brush {Color = Color.Red}},
-                    DataSource = statesProvider
-                };
+            {
+                Style = new VectorStyle {Fill = new Brush {Color = Color.Red}},
+                DataSource = statesProvider
+            };
         }
 
         private static WFSProvider CreateStatesProvider(string getCapabilitiesUri)
         {
-            var statesProvider = new WFSProvider(getCapabilitiesUri, "topp", "states", WFSProvider.WFSVersionEnum.WFS_1_0_0)
-                {
-                    QuickGeometries = false,
-                    GetFeatureGetRequest = true,
-                };
+            var statesProvider = new WFSProvider(getCapabilitiesUri, "topp", "states",
+                WFSProvider.WFSVersionEnum.WFS_1_0_0)
+            {
+                QuickGeometries = false,
+                GetFeatureGetRequest = true,
+            };
             return statesProvider;
         }
 
@@ -77,67 +80,70 @@ namespace Mapsui.Samples.Common.Desktop
         {
             var statesAndHouseholdsProvider = new WFSProvider(getCapabilitiesUri, "topp", "states",
                 WFSProvider.WFSVersionEnum.WFS_1_1_0)
-                {
-                    OgcFilter = CreateStatesAndHouseholdsFilter(),
-                    QuickGeometries = true
-                };
+            {
+                OgcFilter = CreateStatesAndHouseholdsFilter(),
+                QuickGeometries = true
+            };
 
             return new Layer("SelectedStatesAndHousholds")
-                {
-                    Style = new VectorStyle { Fill = new Brush { Color = Color.Green } },
-                    DataSource = statesAndHouseholdsProvider
-                };
+            {
+                Style = new VectorStyle {Fill = new Brush {Color = Color.Green}},
+                DataSource = statesAndHouseholdsProvider
+            };
         }
 
         private static Layer CreateStatesWithFilterLayer(string serviceUri)
         {
-            var newStarProvider = new WFSProvider(serviceUri, "topp", "http://www.openplans.org/topp", "states", "the_geom",
+            var newStarProvider = new WFSProvider(serviceUri, "topp", "http://www.openplans.org/topp", "states",
+                "the_geom",
                 GeometryTypeEnum.MultiSurfacePropertyType, WFSProvider.WFSVersionEnum.WFS_1_1_0)
-                {
-                    OgcFilter = new PropertyIsLikeFilter_FE1_1_0("STATE_NAME", "New*")
-                };
+            {
+                OgcFilter = new PropertyIsLikeFilter_FE1_1_0("STATE_NAME", "New*")
+            };
 
             return new Layer("New*")
-                {
-                    Style = new VectorStyle { Fill = new Brush { Color = Color.Yellow } },
-                    DataSource = newStarProvider
-                };
+            {
+                Style = new VectorStyle {Fill = new Brush {Color = Color.Yellow}},
+                DataSource = newStarProvider
+            };
         }
 
         private static ILayer CreateLandmarksLayer(string getCapabilitiesUri)
         {
-            var landmarksProvider = new WFSProvider(getCapabilitiesUri, "tiger", "poly_landmarks", WFSProvider.WFSVersionEnum.WFS_1_0_0)
+            var landmarksProvider = new WFSProvider(getCapabilitiesUri, "tiger", "poly_landmarks",
+                WFSProvider.WFSVersionEnum.WFS_1_0_0)
             {
                 QuickGeometries = true
             };
 
             return new Layer("Landmarks")
             {
-                Style = new VectorStyle { Fill = new Brush { Color = Color.Blue } },
+                Style = new VectorStyle {Fill = new Brush {Color = Color.Blue}},
                 DataSource = landmarksProvider
             };
         }
 
         private static Layer CreateRoadsLayer(string getCapabilitiesUri)
         {
-            var roadsProvider = new WFSProvider(getCapabilitiesUri, "tiger", "tiger_roads", WFSProvider.WFSVersionEnum.WFS_1_0_0)
-                {
-                    QuickGeometries = true,
-                    MultiGeometries = false
-                };
-            return new Layer("Roads") { DataSource = roadsProvider };
+            var roadsProvider = new WFSProvider(getCapabilitiesUri, "tiger", "tiger_roads",
+                WFSProvider.WFSVersionEnum.WFS_1_0_0)
+            {
+                QuickGeometries = true,
+                MultiGeometries = false
+            };
+            return new Layer("Roads") {DataSource = roadsProvider};
         }
 
         private static ILayer CreatePoiLayer(string getCapabilitiesUri)
         {
-            return new Layer("Poi") 
-                { 
-                    DataSource = new WFSProvider(getCapabilitiesUri, "tiger", "poi", 
-                            WFSProvider.WFSVersionEnum.WFS_1_0_0)
-                        {
-                            QuickGeometries = true
-                        } 
-                };
+            return new Layer("Poi")
+            {
+                DataSource = new WFSProvider(getCapabilitiesUri, "tiger", "poi",
+                    WFSProvider.WFSVersionEnum.WFS_1_0_0)
+                {
+                    QuickGeometries = true
+                }
+            };
         }
 
         private static ILayer CreateLabelLayer(string getCapabilitiesUri)
@@ -150,20 +156,19 @@ namespace Mapsui.Samples.Common.Desktop
             var provider = CreateStatesProvider(getCapabilitiesUri);
             provider.Label = labelField;
 
-            return new LabelLayer("labels")
+            return new Layer("labels")
+            {
+                DataSource = provider,
+                MaxVisible = 90,
+                Style = new LabelStyle
                 {
-                    DataSource = provider,
-                    LabelColumn = labelField,
-                    MaxVisible = 90,
-                    Style = new LabelStyle
-                        {
-                            CollisionDetection = false,
-                            CollisionBuffer = new Size {Width = 5, Height = 5},
-                            ForeColor = Color.Black,
-                            Font = new Font {FontFamily = "GenericSerif", Size = 10},
-                            HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center
-                        }
-                };
+                    CollisionDetection = false,
+                    ForeColor = Color.Black,
+                    Font = new Font {FontFamily = "GenericSerif", Size = 10},
+                    HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center,
+                    LabelColumn = labelField
+                }
+            };
         }
 
         private static OGCFilterCollection CreateStatesAndHouseholdsFilter()

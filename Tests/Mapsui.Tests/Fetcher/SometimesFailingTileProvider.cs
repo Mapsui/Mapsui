@@ -5,18 +5,18 @@ namespace Mapsui.Tests.Fetcher
 {
     class SometimesFailingTileProvider : ITileProvider
     {
-        private readonly double _probabilityFail;
         private readonly Random _random = new Random(DateTime.Now.Millisecond);
-
-        public SometimesFailingTileProvider(double probabilityFail = 0.5)
-        {
-            _probabilityFail = probabilityFail;
-        }
-
+        
         public byte[] GetTile(TileInfo tileInfo)
         {
-            if (_random.NextDouble() < _probabilityFail) throw new Exception("this provider sometimes fails");
+            if (_random.NextDouble() < 0.5)
+            {
+                if (_random.NextDouble() < 0.5)
+                    throw new Exception("this provider sometimes fails");
+                return null; // This means the tile is not available in the source
+            }
 
+            System.Threading.Thread.Sleep(10);
             return new byte[0];
         }
     }

@@ -1,16 +1,8 @@
-using System;
-using System.Linq;
-
 namespace Mapsui.Styles
 {
-    //created this class as port of GDI's PointF, but I am not at all sure if we really need it. 
-    //I prefer to use an offsetX and offsetY. PDD.
     public class Offset
     {
-        public double X { get; set; }
-        public double Y { get; set; }
-
-        public Offset(){}
+        public Offset() {}
 
         public Offset(Offset offset)
         {
@@ -18,19 +10,21 @@ namespace Mapsui.Styles
             Y = offset.Y;
         }
 
-        
+        public double X { get; set; }
+        public double Y { get; set; }
+
         public override bool Equals(object obj)
         {
             if (!(obj is Offset))
-            {
                 return false;
-            }
-            return Equals((Offset)obj);
+            return Equals((Offset) obj);
         }
 
         public bool Equals(Offset offset)
         {
+            // ReSharper disable once CompareOfFloatsByEqualityOperator
             if (X != offset.X) return false;
+            // ReSharper disable once CompareOfFloatsByEqualityOperator
             if (Y != offset.Y) return false;
             return true;
         }
@@ -49,6 +43,5 @@ namespace Mapsui.Styles
         {
             return !Equals(offset1, offset2);
         }
-
-            }
+    }
 }

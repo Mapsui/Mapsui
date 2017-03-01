@@ -1,29 +1,29 @@
 // Copyright 2005, 2006 - Morten Nielsen (www.iter.dk)
 //
-// This file is part of Mapsui.
+// This file is part of SharpMap.
 // Mapsui is free software; you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation; either version 2 of the License, or
 // (at your option) any later version.
 // 
-// Mapsui is distributed in the hope that it will be useful,
+// SharpMap is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
 
 // You should have received a copy of the GNU Lesser General Public License
-// along with Mapsui; if not, write to the Free Software
+// along with SharpMap; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
 using System;
-using Mapsui.Geometries;
+using System.Collections.Generic;
 
-namespace Mapsui.Utilities
+namespace Mapsui.Geometries.Utilities
 {
     public static class Algorithms
     {
         /// <summary>
-        /// Gets the euclidean distance between two points.
+        ///     Gets the euclidean distance between two points.
         /// </summary>
         /// <param name="x1">The first point's X coordinate.</param>
         /// <param name="y1">The first point's Y coordinate.</param>
@@ -36,17 +36,17 @@ namespace Mapsui.Utilities
         }
 
         /// <summary>
-        /// Converts the specified angle from degrees to radians
+        ///     Converts the specified angle from degrees to radians
         /// </summary>
         /// <param name="degrees">Angle to convert (degrees)</param>
         /// <returns>Returns the angle in radians</returns>
         public static double DegreesToRadians(double degrees)
         {
-            return degrees * Math.PI / 180.0;
+            return degrees*Math.PI/180.0;
         }
 
         /// <summary>
-        /// Rotates the specified point clockwise about the origin
+        ///     Rotates the specified point clockwise about the origin
         /// </summary>
         /// <param name="x">X coordinate to rotate</param>
         /// <param name="y">Y coordinate to rotate</param>
@@ -60,7 +60,7 @@ namespace Mapsui.Utilities
         }
 
         /// <summary>
-        /// Rotates the specified point clockwise about the origin
+        ///     Rotates the specified point clockwise about the origin
         /// </summary>
         /// <param name="x">X coordinate to rotate</param>
         /// <param name="y">Y coordinate to rotate</param>
@@ -70,8 +70,8 @@ namespace Mapsui.Utilities
         {
             var cos = Math.Cos(-radians);
             var sin = Math.Sin(-radians);
-            var newX = x * cos - y * sin;
-            var newY = x * sin + y * cos;
+            var newX = x*cos - y*sin;
+            var newY = x*sin + y*cos;
 
             return new Point(newX, newY);
         }
@@ -97,21 +97,21 @@ namespace Mapsui.Utilities
 		 */
 
         /// <summary>
-        /// Tests whether a ring is oriented counter-clockwise.
+        ///     Tests whether a ring is oriented counter-clockwise.
         /// </summary>
         /// <param name="ring">Ring to test.</param>
         /// <returns>Returns true if ring is oriented counter-clockwise.</returns>
         public static bool IsCCW(LinearRing ring)
         {
             // Check if the ring has enough vertices to be a ring
-            if (ring.Vertices.Count < 3) throw (new ArgumentException("Invalid LinearRing"));
+            if (ring.Vertices.Count < 3) throw new ArgumentException("Invalid LinearRing");
 
             // find the point with the largest Y coordinate
-            Point hip = ring.Vertices[0];
-            int hii = 0;
-            for (int i = 1; i < ring.Vertices.Count; i++)
+            var hip = ring.Vertices[0];
+            var hii = 0;
+            for (var i = 1; i < ring.Vertices.Count; i++)
             {
-                Point p = ring.Vertices[i];
+                var p = ring.Vertices[i];
                 if (p.Y > hip.Y)
                 {
                     hip = p;
@@ -119,25 +119,25 @@ namespace Mapsui.Utilities
                 }
             }
             // Point left to Hip
-            int iPrev = hii - 1;
+            var iPrev = hii - 1;
             if (iPrev < 0) iPrev = ring.Vertices.Count - 2;
             // Point right to Hip
-            int iNext = hii + 1;
+            var iNext = hii + 1;
             if (iNext >= ring.Vertices.Count) iNext = 1;
-            Point prevPoint = ring.Vertices[iPrev];
-            Point nextPoint = ring.Vertices[iNext];
+            var prevPoint = ring.Vertices[iPrev];
+            var nextPoint = ring.Vertices[iNext];
 
             // translate so that hip is at the origin.
             // This will not affect the area calculation, and will avoid
             // finite-accuracy errors (i.e very small vectors with very large coordinates)
             // This also simplifies the discriminant calculation.
-            double prev2X = prevPoint.X - hip.X;
-            double prev2Y = prevPoint.Y - hip.Y;
-            double next2X = nextPoint.X - hip.X;
-            double next2Y = nextPoint.Y - hip.Y;
+            var prev2X = prevPoint.X - hip.X;
+            var prev2Y = prevPoint.Y - hip.Y;
+            var next2X = nextPoint.X - hip.X;
+            var next2Y = nextPoint.Y - hip.Y;
             // compute cross-product of vectors hip->next and hip->prev
             // (e.g. area of parallelogram they enclose)
-            double disc = next2X*prev2Y - next2Y*prev2X;
+            var disc = next2X*prev2Y - next2Y*prev2X;
             // If disc is exactly 0, lines are collinear.  There are two possible cases:
             //	(1) the lines lie along the x axis in opposite directions
             //	(2) the line lie on top of one another
@@ -145,13 +145,40 @@ namespace Mapsui.Utilities
             //	(Might want to assert this)
             //  (1) is handled by checking if next is left of prev ==> CCW
 
+            // ReSharper disable once CompareOfFloatsByEqualityOperator
             if (disc == 0.0)
-            {
-                // poly is CCW if prev x is right of next x
-                return (prevPoint.X > nextPoint.X);
-            }
+                return prevPoint.X > nextPoint.X;
             // if area is positive, points are ordered CCW
-            return (disc > 0.0);
+            return disc > 0.0;
+        }
+
+        public static bool PointInPolygon(List<Point> ring, Point point)
+        {
+            // taken from: http://stackoverflow.com/a/2922778/85325
+            var result = false;
+            
+            for (int i = 0, j = ring.Count - 1; i < ring.Count; j = i++)
+            {
+                if ((ring[i].Y > point.Y != ring[j].Y > point.Y) &&
+                    (point.X < (ring[j].X - ring[i].X)*(point.Y - ring[i].Y)/(ring[j].Y - ring[i].Y) + ring[i].X))
+                    result = !result;
+            }
+
+            return result;
+        }
+
+        public static double DistanceToLine(Point point, List<Point> points)
+        {
+            var minDist = Double.MaxValue;
+
+            for (var i = 0; i < points.Count - 1; i++)
+            {
+                var dist = CGAlgorithms.DistancePointLine(point, points[i], points[i + 1]);
+                if (dist < minDist)
+                    minDist = dist;
+            }
+
+            return minDist;
         }
     }
 }

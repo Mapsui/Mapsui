@@ -1,18 +1,18 @@
 // Copyright 2005, 2006 - Morten Nielsen (www.iter.dk)
 //
-// This file is part of Mapsui.
+// This file is part of SharpMap.
 // Mapsui is free software; you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation; either version 2 of the License, or
 // (at your option) any later version.
 // 
-// Mapsui is distributed in the hope that it will be useful,
+// SharpMap is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
 
 // You should have received a copy of the GNU Lesser General Public License
-// along with Mapsui; if not, write to the Free Software
+// along with SharpMap; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
 using System;
@@ -28,7 +28,6 @@ using System.Threading.Tasks;
 using System.Xml;
 using Mapsui.Geometries;
 using Mapsui.Rendering;
-using Mapsui.Web.Wms;
 
 namespace Mapsui.Providers.Wms
 {
@@ -43,7 +42,7 @@ namespace Mapsui.Providers.Wms
     /// </remarks>
     public class WmsProvider : IProjectingProvider
     {
-        private string _mimeType = "";
+        private string _mimeType;
         private readonly Client _wmsClient;
         private Func<string, Task<Stream>> _getStreamAsync;
 
@@ -324,13 +323,13 @@ namespace Mapsui.Providers.Wms
 
             try
             {
-                using (var task = _getStreamAsync(url))
-                {
-                    // PDD: This could be more efficient
-                    var bytes = BruTile.Utilities.ReadFully(task.Result);                    
-                    raster = new Raster(new MemoryStream(bytes), viewport.Extent);
-                    task.Result.Close();
-                }
+				using (var task = _getStreamAsync(url))
+				using (var result = task.Result)    // We should correctly dispose the stream even if exception will thrown
+				{
+					// PDD: This could be more efficient
+					var bytes = BruTile.Utilities.ReadFully(result);
+					raster = new Raster(new MemoryStream(bytes), viewport.Extent);	// This can throw exception
+				}
                 return true;
             }
             catch (WebException webEx)
@@ -505,7 +504,11 @@ namespace Mapsui.Providers.Wms
                 webRequest.Credentials = Credentials ?? CredentialCache.DefaultCredentials;
 
                 var webResponse = (HttpWebResponse)webRequest.GetResponse();
-                source.SetResult(webResponse.GetResponseStream());               
+                if (webResponse.ContentType != _mimeType)
+                { 
+                    throw new Exception($"Unexpected WMS response content type. Expected - {_mimeType}, getted - {webResponse.ContentType}");
+                }
+                source.SetResult(webResponse.GetResponseStream());
             }
             catch (Exception ex)
             {

@@ -28,7 +28,7 @@ namespace Mapsui.Fetcher
             lock (_provider)
             {
                 var features = _provider.GetFeaturesInView(_extent, _resolution);
-                if (_dataArrived != null) _dataArrived(features, _timeOfRequest);
+                _dataArrived?.Invoke(features, _timeOfRequest);
             }
         }
     }

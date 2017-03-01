@@ -1,24 +1,20 @@
 // Copyright 2005, 2006 - Morten Nielsen (www.iter.dk)
 //
-// This file is part of Mapsui.
+// This file is part of SharpMap.
 // Mapsui is free software; you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation; either version 2 of the License, or
 // (at your option) any later version.
 // 
-// Mapsui is distributed in the hope that it will be useful,
+// SharpMap is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
 
 // You should have received a copy of the GNU Lesser General Public License
-// along with Mapsui; if not, write to the Free Software
+// along with SharpMap; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
-using Mapsui.Geometries;
-using Mapsui.Providers;
-using Mapsui.Providers.Shapefile;
-using Mapsui.Utilities.SpatialIndexing;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -27,8 +23,10 @@ using System.IO;
 using System.Text;
 using System.Web;
 using System.Web.Caching;
+using Mapsui.Geometries;
+using Mapsui.Providers.Shapefile.Indexing;
 
-namespace Mapsui.Data.Providers
+namespace Mapsui.Providers.Shapefile
 {
     /// <summary>
     /// Shapefile geometry type.
@@ -147,20 +145,15 @@ namespace Mapsui.Data.Providers
     /// </example>
     public class ShapeFile : IProvider, IDisposable
     {
-        
         /// <summary>
         /// Filter Delegate Method
         /// </summary>
         /// <remarks>
         /// The FilterMethod delegate is used for applying a method that filters data from the dataset.
         /// The method should return 'true' if the feature should be included and false if not.
-        /// <para>See the <see cref="FilterDelegate"/> property for more info</para>
         /// </remarks>
-        /// <seealso cref="FilterDelegate"/>
-        /// <param name="dr"><see cref="Mapsui.Data.FeatureDataRow"/> to test on</param>
         /// <returns>true if this feature should be included, false if it should be filtered</returns>
         public delegate bool FilterMethod(IFeature dr);
-
         
         private BoundingBox _envelope;
         private int _featureCount;
@@ -182,15 +175,6 @@ namespace Mapsui.Data.Providers
         private QuadTree _tree;
 
         /// <summary>
-        /// Initializes a ShapeFile DataProvider without a file-based spatial index.
-        /// </summary>
-        /// <param name="filename">Path to shape file</param>
-        public ShapeFile(string filename)
-            : this(filename, false)
-        {
-        }
-
-        /// <summary>
         /// Initializes a ShapeFile DataProvider.
         /// </summary>
         /// <remarks>
@@ -202,7 +186,7 @@ namespace Mapsui.Data.Providers
         /// </remarks>
         /// <param name="filename">Path to shape file</param>
         /// <param name="fileBasedIndex">Use file-based spatial index</param>
-        public ShapeFile(string filename, bool fileBasedIndex)
+        public ShapeFile(string filename, bool fileBasedIndex = false)
         {
             _filename = filename;
             _fileBasedIndex = (fileBasedIndex) && File.Exists(Path.ChangeExtension(filename, ".shx"));
@@ -219,7 +203,7 @@ namespace Mapsui.Data.Providers
         }
 
         /// <summary>
-        /// Gets the <see cref="Mapsui.Data.Providers.ShapeType">shape geometry type</see> in this shapefile.
+        /// Gets the <see cref="Shapefile.ShapeType">shape geometry type</see> in this shapefile.
         /// </summary>
         /// <remarks>
         /// The property isn't set until the first time the datasource has been opened,
@@ -244,7 +228,9 @@ namespace Mapsui.Data.Providers
             {
                 if (value != _filename)
                 {
-                    _filename = value;
+                    lock (_syncRoot) {
+                        _filename = value;
+                    }
                     if (_isOpen)
                         throw new ApplicationException("Cannot change filename while datasource is open");
 
@@ -361,18 +347,13 @@ namespace Mapsui.Data.Providers
         {
             if (!_disposed)
             {
-                //TODO: (ConnectionPooling)
-                /*	if (connector != null)
-					{ Pooling.ConnectorPool.ConnectorPoolManager.Release...()
-				}*/
                 if (_isOpen)
                 {
                     _brShapeFile.Close();
                     _fsShapeFile.Close();
                     _brShapeIndex.Close();
                     _fsShapeIndex.Close();
-                    if (_dbaseFile != null)
-                        _dbaseFile.Close();
+                    _dbaseFile?.Close();
                     _isOpen = false;
                 }
             }
@@ -534,8 +515,10 @@ namespace Mapsui.Data.Providers
             {
                 try
                 {
-                    var wkt = File.ReadAllText(projfile);
-                    //TODO: Automatically parse coordinate system: CoordinateSystemWktReader.Parse(wkt);
+                    // todo: Automatically parse coordinate system: 
+                    // var wkt = File.ReadAllText(projfile);
+                    // CoordinateSystemWktReader.Parse(wkt);
+
                 }
                 catch (Exception ex)
                 {
@@ -623,17 +606,17 @@ namespace Mapsui.Data.Providers
                 if (!double.IsNaN(box.Left) && !double.IsNaN(box.Right) && !double.IsNaN(box.Bottom) &&
                     !double.IsNaN(box.Top))
                 {
-                    var g = new QuadTree.BoxObjects { box = box, ID = i };
+                    var g = new QuadTree.BoxObjects { Box = box, Id = i };
                     objList.Add(g);
                     i++;
                 }
             }
 
             Heuristic heur;
-            heur.maxdepth = (int)Math.Ceiling(Math.Log(GetFeatureCount(), 2));
-            heur.minerror = 10;
-            heur.tartricnt = 5;
-            heur.mintricnt = 2;
+            heur.Maxdepth = (int)Math.Ceiling(Math.Log(GetFeatureCount(), 2));
+            heur.Minerror = 10;
+            heur.Tartricnt = 5;
+            heur.Mintricnt = 2;
             return new QuadTree(objList, 0, heur);
         }
 
@@ -734,6 +717,7 @@ namespace Mapsui.Data.Providers
         /// <remarks><see cref="FilterDelegate">Filtering</see> is not applied to this method</remarks>
         /// <param name="oid">Object ID</param>
         /// <returns>geometry</returns>
+        // ReSharper disable once CyclomaticComplexity // Fix when changes need to be made here
         private Geometry ReadGeometry(uint oid)
         {
             _brShapeFile.BaseStream.Seek(GetShapeIndex(oid) + 8, 0); //Skip record number and content length
@@ -840,22 +824,12 @@ namespace Mapsui.Data.Providers
         }
 
         /// <summary>
-        /// Gets a datarow from the datasource at the specified index
-        /// </summary>
-        /// <param name="rowId"></param>
-        /// <returns></returns>
-        public IFeature GetFeature(uint rowId)
-        {
-            return GetFeature(rowId, null);
-        }
-
-        /// <summary>
         /// Gets a datarow from the datasource at the specified index belonging to the specified datatable
         /// </summary>
         /// <param name="rowId"></param>
-        /// <param name="dt">Datatable to feature should belong to.</param>
+        /// <param name="feature">Datatable to feature should belong to.</param>
         /// <returns></returns>
-        public IFeature GetFeature(uint rowId, IFeatures dt)
+        public IFeature GetFeature(uint rowId, IFeatures feature = null)
         {
             lock (_syncRoot)
             {
@@ -863,7 +837,7 @@ namespace Mapsui.Data.Providers
 
                 try
                 {
-                    return GetFeaturePrivate(rowId, dt);
+                    return GetFeaturePrivate(rowId, feature);
                 }
                 finally
                 {

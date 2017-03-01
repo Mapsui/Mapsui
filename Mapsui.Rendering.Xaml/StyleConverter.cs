@@ -1,18 +1,10 @@
-#if !NETFX_CORE
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using XamlBrush = System.Windows.Media.Brush;
 using XamlColor = System.Windows.Media.Color;
 using System.Windows;
-using System.Collections;
 using System.Collections.Generic;
-using XamlMedia = System.Windows.Media;
-#else
-using XamlBrush = Windows.UI.Xaml.Media.Brush;
-using Windows.UI.Xaml.Media;
-using XamlMedia = Windows.UI.Xaml.Media;
-#endif
 using Mapsui.Styles;
 
 namespace Mapsui.Rendering.Xaml
@@ -50,7 +42,7 @@ namespace Mapsui.Rendering.Xaml
 
         public static XamlBrush MapsuiBrushToXaml(Styles.Brush brush, BrushCache brushCache = null)
         {
-#if !SILVERLIGHT && !NETFX_CORE
+            if (brush == null) return null;
             switch (brush.FillStyle)
             {
                 case FillStyle.Cross:
@@ -66,7 +58,7 @@ namespace Mapsui.Rendering.Xaml
                 case FillStyle.ForwardDiagonal:
                     return CreateHatchBrush(brush, 10, 10, new List<Geometry> { Geometry.Parse("M -1 9 l 10 10"), Geometry.Parse("M 0 0 l 10 10"), Geometry.Parse("M 9 -1 l 10 10") });
                 case FillStyle.Hollow:
-                    return new SolidColorBrush(Colors.Transparent);;
+                    return new SolidColorBrush(Colors.Transparent);
                 case FillStyle.Horizontal:
                     return CreateHatchBrush(brush, 10, 10, new List<Geometry> { Geometry.Parse("M 0 5 h 10") });
                 case FillStyle.Solid:
@@ -74,13 +66,10 @@ namespace Mapsui.Rendering.Xaml
                 case FillStyle.Vertical:
                     return CreateHatchBrush(brush, 10, 10, new List<Geometry> { Geometry.Parse("M 5 0 l 0 10") });
                 default:
-                    return new SolidColorBrush(brush.Color.ToXaml());
+                    return (brush.Color != null) ? new SolidColorBrush(brush.Color.ToXaml()) : null;
             }
-#endif
-            return new SolidColorBrush(brush.Color.ToXaml());
         }
 
-#if !SILVERLIGHT && !NETFX_CORE
         private static XamlColor GetColor(Styles.Color color)
         {
             return color == null ? Colors.Black : color.ToXaml();
@@ -114,7 +103,7 @@ namespace Mapsui.Rendering.Xaml
             return brushCache != null ? brushCache.GetImageBrush(brush.BitmapId, CreateImageBrush) : CreateImageBrush(BitmapRegistry.Instance.Get(brush.BitmapId));
         }
 
-        private static XamlMedia.ImageBrush CreateImageBrush(System.IO.Stream stream)
+        private static ImageBrush CreateImageBrush(System.IO.Stream stream)
         {
             var bmp = stream.CreateBitmapImage();
 
@@ -179,6 +168,5 @@ namespace Mapsui.Rendering.Xaml
             canvas.Arrange(new Rect(0, 0, viewbox, viewbox));
             return visualBrush;
         }
-#endif
     }
 }

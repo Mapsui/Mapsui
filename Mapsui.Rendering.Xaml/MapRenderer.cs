@@ -1,5 +1,4 @@
 using System.IO;
-using System.Threading;
 using Mapsui.Providers;
 using Mapsui.Geometries;
 using Mapsui.Layers;
@@ -8,154 +7,85 @@ using Mapsui.Styles.Thematics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Mapsui.Logging;
+using Color = Mapsui.Styles.Color;
 using Polygon = Mapsui.Geometries.Polygon;
-#if !NETFX_CORE
+using System.Threading;
+using Mapsui.Utilities;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Shapes;
-using System.Globalization;
 using XamlMedia = System.Windows.Media;
-#else
-using Windows.UI.Xaml.Controls;
-using Windows.Foundation;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Shapes;
-using XamlMedia = Windows.UI.Xaml.Media;
-#endif
 
 namespace Mapsui.Rendering.Xaml
 {
     public class MapRenderer : IRenderer
     {
-        private readonly Canvas _target;
-#if !NETFX_CORE
-        private static int _mainThreadId;
-#endif
-
         static MapRenderer()
         {
-#if !NETFX_CORE
-            _mainThreadId = Thread.CurrentThread.ManagedThreadId;
-#endif
             DefaultRendererFactory.Create = () => new MapRenderer();
         }
 
-        public MapRenderer()
+        public void Render(object target, IViewport viewport, IEnumerable<ILayer> layers, Color background)
         {
+            Render((Canvas) target, viewport, layers, background, false);
         }
 
-        public MapRenderer(Canvas target)
+        private static void Render(Canvas target, IViewport viewport, IEnumerable<ILayer> layers,
+            Color background, bool rasterizing)
         {
-            _target = target;
-        }
-
-        public void Render(IViewport viewport, IEnumerable<ILayer> layers)
-        {
-            Render(_target, viewport, layers, false);
-        }
-
-        public static void Render(Canvas target, IViewport viewport, IEnumerable<ILayer> layers, bool rasterizing)
-        {
-#if !SILVERLIGHT &&  !NETFX_CORE
             target.BeginInit();
-#endif
+
+            target.Background = background == null ? null : new XamlMedia.SolidColorBrush {Color = background.ToXaml()};
+
             target.Visibility = Visibility.Collapsed;
+
             foreach (var child in target.Children)
             {
-                if (child is Canvas)
-                {
-                    (child as Canvas).Children.Clear();
-                }
+                (child as Canvas)?.Children.Clear();
             }
+
             target.Children.Clear();
+
+            layers = layers.ToList();
 
             foreach (var layer in layers)
             {
                 if (!layer.Enabled) continue;
                 if (layer.MinVisible > viewport.Resolution) continue;
-                if(layer.MaxVisible < viewport.Resolution) continue;                
+                if (layer.MaxVisible < viewport.Resolution) continue;
 
                 RenderLayer(target, viewport, layer, rasterizing);
-
             }
             target.Arrange(new Rect(0, 0, viewport.Width, viewport.Height));
             target.Visibility = Visibility.Visible;
-
-            //DrawDebugInfo(target, layers);
-
-#if !SILVERLIGHT &&  !NETFX_CORE
-            target.EndInit();
-#endif
-        }
-
-#if !SILVERLIGHT &&  !NETFX_CORE && !WINDOWS_PHONE
-        private static void DrawDebugInfo(Canvas canvas, IEnumerable<ILayer> layers)
-        {
-            var lineCounter = 1;
-            const float tabWidth = 40f;
-            const float lineHeight = 40f;
-
-            foreach (var layer in layers)
+            
+            if (DeveloperTools.DeveloperMode)
             {
-                var textBox = AddTextBox(layer.ToString(), tabWidth, lineHeight*(lineCounter++));
-                canvas.Children.Add(textBox);
-
-                if (layer is ITileLayer)
-                {
-                    var text = "Tiles in memory: " + (layer as ITileLayer).MemoryCache.TileCount.ToString(CultureInfo.InvariantCulture);
-                    canvas.Children.Add(AddTextBox(text, tabWidth, lineHeight*(lineCounter++)));
-                }
+                DrawDebugInfo(target, layers);
             }
+
+            target.EndInit();
         }
 
-        private static TextBox AddTextBox(string text, float x, float y)
+        public MemoryStream RenderToBitmapStream(IViewport viewport, IEnumerable<ILayer> layers, Color background = null)
         {
-            var textBox = new TextBox {Text = text};
-            Canvas.SetLeft(textBox, x);
-            Canvas.SetTop(textBox, y);
-            return textBox;
-        }
-#endif
-        public MemoryStream RenderToBitmapStream(IViewport viewport, IEnumerable<ILayer> layers)
-        {
-#if WINDOWS_PHONE || NETFX_CORE
-            throw new NotImplementedException();
-#elif SILVERLIGHT
             MemoryStream bitmapStream = null;
-            var waitHandle = new AutoResetEvent(false);
-            RunOnUIThread(() =>
-            {
-                bitmapStream = RenderToBitmapStreamStatic(viewport, layers);
-                waitHandle.Set();
-            });
-            waitHandle.WaitOne(60000);
+            RunMethodOnStaThread(() => bitmapStream = RenderToBitmapStreamStatic(viewport, layers, background));
             return bitmapStream;
-#else
-            MemoryStream bitmapStream = null;
-            RunMethodOnStaThread(() => bitmapStream = RenderToBitmapStreamStatic(viewport, layers));
-            return bitmapStream;
-#endif
         }
-
-#if !WINDOWS_PHONE && !NETFX_CORE
-        private static MemoryStream RenderToBitmapStreamStatic(IViewport viewport, IEnumerable<ILayer> layers)
+        
+        private static MemoryStream RenderToBitmapStreamStatic(IViewport viewport, IEnumerable<ILayer> layers, Color background)
         {
             var canvas = new Canvas();
-            Render(canvas, viewport, layers, true);
+            Render(canvas, viewport, layers, background, true);
             var bitmapStream = BitmapRendering.BitmapConverter.ToBitmapStream(canvas, (int)viewport.Width, (int)viewport.Height);
             canvas.Children.Clear();
+            canvas.Dispatcher.InvokeShutdown();
             return bitmapStream;
         }
-#endif
 
-#if SILVERLIGHT && !WINDOWS_PHONE
-        private void RunOnUIThread(Action method)
-        {
-            Deployment.Current.Dispatcher.BeginInvoke(method);
-        }
-#endif
-
-#if !SILVERLIGHT && !WINDOWS_PHONE && !NETFX_CORE
         private static void RunMethodOnStaThread(ThreadStart operation)
         {
             var thread = new Thread(operation);
@@ -164,23 +94,12 @@ namespace Mapsui.Rendering.Xaml
             thread.Start();
             thread.Join();
         }
-#endif
 
         public static void RenderLayer(Canvas target, IViewport viewport, ILayer layer, bool rasterizing = false)
         {
             if (layer.Enabled == false) return;
 
-            if (layer is LabelLayer)
-            {
-                var labelLayer = layer as LabelLayer;
-                target.Children.Add(labelLayer.UseLabelStacking
-                    ? StackedLabelLayerRenderer.Render(viewport, labelLayer)
-                    : LabelRenderer.RenderLabelLayer(viewport, labelLayer));
-            }
-            else
-            {
-                target.Children.Add(RenderVectorLayer(viewport, layer, rasterizing));
-            }
+            target.Children.Add(RenderVectorLayer(viewport, layer, rasterizing));
         }
 
         private static Canvas RenderVectorLayer(IViewport viewport, ILayer layer, bool rasterizing = false)
@@ -188,14 +107,14 @@ namespace Mapsui.Rendering.Xaml
             // todo:
             // find solution for try catch. Sometimes this method will throw an exception
             // when clearing and adding features to a layer while rendering
+            var canvas = new Canvas
+            {
+                Opacity = layer.Opacity,
+                IsHitTestVisible = false
+            };
+
             try
             {
-                var canvas = new Canvas
-                {
-                    Opacity = layer.Opacity,
-                    IsHitTestVisible = false
-                };
-
                 var features = layer.GetFeaturesInView(viewport.Extent, viewport.RenderResolution).ToList();
                 var layerStyles = BaseLayer.GetLayerStyles(layer);
                 var brushCache = new BrushCache();
@@ -207,7 +126,8 @@ namespace Mapsui.Rendering.Xaml
                     foreach (var feature in features)
                     {
                         if (layerStyle is IThemeStyle) style = (layerStyle as IThemeStyle).GetStyle(feature);
-                        if ((style == null) || (style.Enabled == false) || (style.MinVisible > viewport.Resolution) || (style.MaxVisible < viewport.Resolution)) continue;
+                        if ((style == null) || (style.Enabled == false) || (style.MinVisible > viewport.Resolution) ||
+                            (style.MaxVisible < viewport.Resolution)) continue;
 
                         RenderFeature(viewport, canvas, feature, style, rasterizing, brushCache);
                     }
@@ -217,32 +137,42 @@ namespace Mapsui.Rendering.Xaml
                 {
                     var styles = feature.Styles ?? Enumerable.Empty<IStyle>();
                     foreach (var style in styles)
-                    {
-                        if (feature.Styles != null && style.Enabled)
-                        {
+                        if ((feature.Styles != null) && style.Enabled)
                             RenderFeature(viewport, canvas, feature, style, rasterizing, brushCache);
-                        }
-                    }
                 }
 
                 return canvas;
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                return new Canvas { IsHitTestVisible = false };
+                Logger.Log(LogLevel.Error, "Unexpected error in renderer", ex);
+                return canvas;
+                // If exception happens inside RenderFeature function after 
+                // at -least one child has been added to the canvas,
+                // returning new canvas will leave the previously created (but 
+                // not yet added to parent canvas) canvas abandoned, that will 
+                // cause the exception when resuing RenderedGeometry object, because 
+                // at -least one RenderedGeometry was attached to that abandoned canvas.
+                // returning the same canvas will solve this error, as it will 
+                // be clear this canvas childs on next render call.
+                // return new Canvas { IsHitTestVisible = false };
             }
         }
 
-        private static void RenderFeature(IViewport viewport, Canvas canvas, IFeature feature, IStyle style, bool rasterizing, BrushCache brushCache = null)
+        private static void RenderFeature(IViewport viewport, Canvas canvas, IFeature feature, IStyle style,
+            bool rasterizing, BrushCache brushCache = null)
         {
             if (style is LabelStyle)
             {
                 var labelStyle = (LabelStyle) style;
-                canvas.Children.Add(SingleLabelRenderer.RenderLabel(feature.Geometry.GetBoundingBox().GetCentroid(), labelStyle, viewport, labelStyle.GetLabelText(feature)));
+                canvas.Children.Add(SingleLabelRenderer.RenderLabel(feature.Geometry.GetBoundingBox().GetCentroid(),
+                    labelStyle, viewport, labelStyle.GetLabelText(feature)));
             }
             else
             {
-                var renderedGeometry = feature.RenderedGeometry.ContainsKey(style) ? feature.RenderedGeometry[style] as Shape : null;
+                var renderedGeometry = feature.RenderedGeometry.ContainsKey(style)
+                    ? feature.RenderedGeometry[style] as Shape
+                    : null;
                 if (renderedGeometry == null)
                 {
                     renderedGeometry = RenderGeometry(viewport, style, feature, brushCache);
@@ -253,25 +183,27 @@ namespace Mapsui.Rendering.Xaml
                     PositionGeometry(renderedGeometry, viewport, style, feature);
                 }
 
-                if (!canvas.Children.Contains(renderedGeometry)) // Adding twice can happen when a single feature has two identical styles
+                if (!canvas.Children.Contains(renderedGeometry))
+                    // Adding twice can happen when a single feature has two identical styles
                     canvas.Children.Add(renderedGeometry);
             }
         }
 
-        private static Shape RenderGeometry(IViewport viewport, IStyle style, IFeature feature, BrushCache brushCache = null)
+        private static Shape RenderGeometry(IViewport viewport, IStyle style, IFeature feature,
+            BrushCache brushCache = null)
         {
             if (feature.Geometry is Geometries.Point)
-                return GeometryRenderer.RenderPoint(feature.Geometry as Geometries.Point, style, viewport, brushCache);
+                return PointRenderer.RenderPoint(feature.Geometry as Geometries.Point, style, viewport, brushCache);
             if (feature.Geometry is MultiPoint)
                 return GeometryRenderer.RenderMultiPoint(feature.Geometry as MultiPoint, style, viewport);
             if (feature.Geometry is LineString)
-                return GeometryRenderer.RenderLineString(feature.Geometry as LineString, style, viewport);
+                return LineStringRenderer.RenderLineString(feature.Geometry as LineString, style, viewport);
             if (feature.Geometry is MultiLineString)
-                return GeometryRenderer.RenderMultiLineString(feature.Geometry as MultiLineString, style, viewport);
+                return MultiLineStringRenderer.Render(feature.Geometry as MultiLineString, style, viewport);
             if (feature.Geometry is Polygon)
-                return GeometryRenderer.RenderPolygon(feature.Geometry as Polygon, style, viewport, brushCache);
+                return PolygonRenderer.RenderPolygon(feature.Geometry as Polygon, style, viewport, brushCache);
             if (feature.Geometry is MultiPolygon)
-                return GeometryRenderer.RenderMultiPolygon(feature.Geometry as MultiPolygon, style, viewport);
+                return MultiPolygonRenderer.RenderMultiPolygon(feature.Geometry as MultiPolygon, style, viewport);
             if (feature.Geometry is IRaster)
                 return GeometryRenderer.RenderRaster(feature.Geometry as IRaster, style, viewport);
             return null;
@@ -280,7 +212,7 @@ namespace Mapsui.Rendering.Xaml
         private static void PositionGeometry(Shape renderedGeometry, IViewport viewport, IStyle style, IFeature feature)
         {
             if (feature.Geometry is Geometries.Point)
-                GeometryRenderer.PositionPoint(renderedGeometry, feature.Geometry as Geometries.Point, style, viewport);
+                PointRenderer.PositionPoint(renderedGeometry, feature.Geometry as Geometries.Point, style, viewport);
             else if (feature.Geometry is MultiPoint)
                 GeometryRenderer.PositionGeometry(renderedGeometry, viewport);
             else if (feature.Geometry is LineString)
@@ -293,6 +225,33 @@ namespace Mapsui.Rendering.Xaml
                 GeometryRenderer.PositionGeometry(renderedGeometry, viewport);
             else if (feature.Geometry is IRaster)
                 GeometryRenderer.PositionRaster(renderedGeometry, feature.Geometry.GetBoundingBox(), viewport);
+        }
+
+        private static void DrawDebugInfo(Canvas canvas, IEnumerable<ILayer> layers)
+        {
+            var lineCounter = 1;
+            const float tabWidth = 40f;
+            const float lineHeight = 40f;
+
+            foreach (var layer in layers)
+            {
+                var textBox = AddTextBox(layer.ToString(), tabWidth, lineHeight * (lineCounter++));
+                canvas.Children.Add(textBox);
+
+                if (layer is ITileLayer)
+                {
+                    var text = "Tiles in memory: " + (layer as ITileLayer).MemoryCache.TileCount.ToString(CultureInfo.InvariantCulture);
+                    canvas.Children.Add(AddTextBox(text, tabWidth, lineHeight * lineCounter++));
+                }
+            }
+        }
+
+        private static TextBox AddTextBox(string text, float x, float y)
+        {
+            var textBox = new TextBox { Text = text };
+            Canvas.SetLeft(textBox, x);
+            Canvas.SetTop(textBox, y);
+            return textBox;
         }
     }
 }

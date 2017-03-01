@@ -44,23 +44,30 @@
     <EmbeddedResource Include="Images\netherlands.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BingSample.cs" />
-    <Compile Include="OsmSample.cs" />
-    <Compile Include="PointsInWgs84Sample.cs" />
-    <Compile Include="PointsWithFeatureInfoSample.cs" />
-    <Compile Include="PointsWithStackedLabelsSample.cs" />
-    <Compile Include="PolygonSample.cs" />
-    <Compile Include="AnimatedPointsSample.cs" />
-    <Compile Include="GeodanOfficesSample.cs" />
-    <Compile Include="TmsSample.cs" />
-    <Compile Include="WmscSample.cs" />
-    <Compile Include="TiledWmsSample.cs" />
-    <Compile Include="LineStringSample.cs" />
-    <Compile Include="PointsSample.cs" />
-    <Compile Include="PointsWithSymbolsInWorldUnitsSample.cs" />
+    <Compile Include="AllSamples.cs" />
+    <Compile Include="Maps\BingSample.cs" />
+    <Compile Include="Maps\CenterOnLocationSample.cs" />
+    <Compile Include="Maps\LabelsSample.cs" />
+    <Compile Include="Maps\MutatingTriangleSample.cs" />
+    <Compile Include="Maps\OsmSample.cs" />
+    <Compile Include="Maps\InfoLayersSample.cs" />
+    <Compile Include="Maps\RasterizingLayerSample.cs" />
+    <Compile Include="Maps\EmptyMapSample.cs" />
+    <Compile Include="Maps\VariousSample.cs" />
+    <Compile Include="Maps\StackedLabelsSample.cs" />
+    <Compile Include="Maps\PolygonSample.cs" />
+    <Compile Include="Maps\AnimatedPointsSample.cs" />
+    <Compile Include="Maps\GeodanOfficesSample.cs" />
+    <Compile Include="Maps\ProjectionSample.cs" />
+    <Compile Include="Maps\TmsSample.cs" />
+    <Compile Include="Maps\WmscSample.cs" />
+    <Compile Include="Maps\TiledWmsSample.cs" />
+    <Compile Include="Maps\LineStringSample.cs" />
+    <Compile Include="Maps\PointsSample.cs" />
+    <Compile Include="Maps\SymbolsInWorldUnitsSample.cs" />
+    <Compile Include="PeriodicTask.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StyleSamples.cs" />
-    <Compile Include="WmtsSample.cs" />
+    <Compile Include="Maps\WmtsSample.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Mapsui.Geometries\Mapsui.Geometries.csproj">
@@ -82,17 +89,12 @@
     <EmbeddedResource Include="Images\location.png" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="BruTile, Version=0.18.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\BruTile.0.18.2\lib\portable-net45+win+WindowsPhoneApp81+Xamarin.iOS10+MonoAndroid10+MonoTouch10\BruTile.dll</HintPath>
+    <Reference Include="BruTile, Version=0.20.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\BruTile.0.20.0\lib\portable-net45+win+WindowsPhoneApp81+Xamarin.iOS10+MonoAndroid10+MonoTouch10\BruTile.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="BruTile.MbTiles, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\BruTile.0.18.2\lib\portable-net45+win+WindowsPhoneApp81+Xamarin.iOS10+MonoAndroid10+MonoTouch10\BruTile.MbTiles.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="SQLite.Net, Version=3.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\SQLite.Net.Core-PCL.3.1.0\lib\portable-win8+net45+wp8+wpa81+MonoAndroid1+MonoTouch1\SQLite.Net.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="SQLite.Net">
+      <HintPath>..\..\packages\SQLite.Net-PCL.3.1.1\lib\portable-win8+net45+wp8+wpa81+MonoAndroid1+MonoTouch1\SQLite.Net.dll</HintPath>
     </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

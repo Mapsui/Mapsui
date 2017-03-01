@@ -65,14 +65,14 @@ namespace XamarinRendering
 					return layer.Name;
 				}
 			}
-			else*/ if (layer is LabelLayer) {
+			else if (layer is LabelLayer) {
 				var renderedFeatures = LabelRenderer.RenderStackedLabelLayer (viewport, layer as LabelLayer);
 
 				if (renderedFeatures != null && renderedFeatures.Count > 0){
 					renderQueue.PutLayer (layer.Name, renderedFeatures);
 					return layer.Name;
 				}
-			} else {
+			} else*/ {
 				var renderedFeatures = RenderVectorLayerFeatures (viewport, layer);// new List<CALayer> ();
 
 				if (renderedFeatures != null && renderedFeatures.Count > 0){

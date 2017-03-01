@@ -1,5 +1,5 @@
 using System;
-using System.IO;
+using Mapsui.Utilities;
 
 namespace Mapsui.Styles
 {
@@ -17,7 +17,9 @@ namespace Mapsui.Styles
 
     public class SymbolStyle : VectorStyle
     {
-        private Bitmap _bitmap;
+        public static double DefaultWidth { get; set; } = 32;
+
+        public static double DefaultHeight { get; set; } = 32;
 
         public SymbolStyle()
         {
@@ -28,49 +30,40 @@ namespace Mapsui.Styles
         }
 
         /// <summary>
-        /// Symbol used for rendering points
+        ///     Symbol used for rendering points
         /// </summary>
-        [Obsolete("use BitmapID and BitmapRegistry instead")]
+        [Obsolete("Use BitmapID and BitmapRegistry instead", true)]
         public Bitmap Symbol
         {
-            get { return _bitmap; }
-            set
-            {
-                _bitmap = value;
-                // The code below is to make sure existing bitmap initialization still works (for now)
-                if (_bitmap != null && _bitmap.Data != null) BitmapId = BitmapRegistry.Instance.Register(_bitmap.Data);
-                if (_bitmap != null) _bitmap.BitmapDataAddedEventHandler += (sender, args) => Register(_bitmap.Data);
-            }
-        }
-
-        private void Register(Stream data)
-        {
-            if (data != null) BitmapId = BitmapRegistry.Instance.Register(data);
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
         }
 
         /// <summary>
-        /// This identifies bitmap in the BitmapRegistry. 
+        ///     This identifies bitmap in the BitmapRegistry.
         /// </summary>
         public int BitmapId { get; set; }
 
         /// <summary>
-        /// Scale of the symbol (defaults to 1)
+        ///     Scale of the symbol (defaults to 1)
         /// </summary>
         /// <remarks>
-        /// Setting the symbolscale to '2.0' doubles the size of the symbol, where a scale of 0.5 makes the scale half the size of the original image
+        ///     Setting the symbolscale to '2.0' doubles the size of the symbol, where a scale of 0.5 makes the scale half the size
+        ///     of the original image
         /// </remarks>
         public double SymbolScale { get; set; }
 
         /// <summary>
-        /// Gets or sets the offset in pixels of the symbol.
+        ///     Gets or sets the offset in pixels of the symbol.
         /// </summary>
         /// <remarks>
-        /// The symbol offset is scaled with the <see cref="SymbolScale"/> property and refers to the offset af <see cref="SymbolScale"/>=1.0.
+        ///     The symbol offset is scaled with the <see cref="SymbolScale" /> property and refers to the offset af
+        ///     <see cref="SymbolScale" />=1.0.
         /// </remarks>
         public Offset SymbolOffset { get; set; }
 
         /// <summary>
-        /// Gets or sets the rotation of the symbol in degrees (clockwise is positive)
+        ///     Gets or sets the rotation of the symbol in degrees (clockwise is positive)
         /// </summary>
         public double SymbolRotation { get; set; }
 
@@ -80,75 +73,56 @@ namespace Mapsui.Styles
 
         public double Opacity { get; set; }
 
-        public const double DefaultWidth = 32;
-
-        public const double DefaultHeight = 32;
-
         public override bool Equals(object obj)
         {
             if (!(obj is SymbolStyle))
-            {
                 return false;
-            }
-            return Equals((SymbolStyle)obj);
+            return Equals((SymbolStyle) obj);
         }
 
         public bool Equals(SymbolStyle symbolStyle)
         {
             if (!base.Equals(symbolStyle))
-            {
                 return false;
-            }
 
             if (BitmapId != symbolStyle.BitmapId)
-            {
                 return false;
-            }
 
             if (!SymbolScale.Equals(SymbolScale))
-            {
                 return false;
-            }
 
             if ((SymbolOffset == null) ^ (symbolStyle.SymbolOffset == null))
-            {
                 return false;
-            }
 
-            if ((SymbolOffset != null) && (!SymbolOffset.Equals(symbolStyle.SymbolOffset)))
-            {
+            if ((SymbolOffset != null) && !SymbolOffset.Equals(symbolStyle.SymbolOffset))
                 return false;
-            }
 
-            if (Math.Abs(SymbolRotation - symbolStyle.SymbolRotation) > Utilities.Constants.Epsilon)
-            {
+            if (Math.Abs(SymbolRotation - symbolStyle.SymbolRotation) > Constants.Epsilon)
                 return false;
-            }
 
             if (UnitType != symbolStyle.UnitType)
-            {
                 return false;
-            }
 
             if (SymbolType != symbolStyle.SymbolType)
-            {
                 return false;
-            }
 
-            if (Math.Abs(Opacity - symbolStyle.Opacity) > Utilities.Constants.Epsilon)
-            {
+            if (Math.Abs(Opacity - symbolStyle.Opacity) > Constants.Epsilon)
                 return false;
-            }
 
             return true;
         }
 
         public override int GetHashCode()
         {
-            return BitmapId.GetHashCode() ^
-                SymbolScale.GetHashCode() ^ SymbolOffset.GetHashCode() ^
-                SymbolRotation.GetHashCode() ^ UnitType.GetHashCode() ^ SymbolType.GetHashCode() ^
-                Opacity.GetHashCode() ^ base.GetHashCode();
+            return
+                BitmapId.GetHashCode() ^
+                SymbolScale.GetHashCode() ^
+                SymbolOffset.GetHashCode() ^
+                SymbolRotation.GetHashCode() ^
+                UnitType.GetHashCode() ^
+                SymbolType.GetHashCode() ^
+                Opacity.GetHashCode() ^
+                base.GetHashCode();
         }
 
         public static bool operator ==(SymbolStyle symbolStyle1, SymbolStyle symbolStyle2)
@@ -160,6 +134,5 @@ namespace Mapsui.Styles
         {
             return !Equals(symbolStyle1, symbolStyle2);
         }
-
     }
 }

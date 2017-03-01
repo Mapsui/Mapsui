@@ -30,3 +30,10 @@ packages/
 .vs/
 
 Release/
+
+*.ncrunchproject
+
+*.ncrunchsolution
+/Tests/Mapsui.Rendering.Skia.Tests/Resources/Images/Generated
+*.user
+*.cache
