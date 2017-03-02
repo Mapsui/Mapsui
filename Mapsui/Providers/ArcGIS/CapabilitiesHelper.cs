@@ -1,7 +1,9 @@
 using System;
 using System.IO;
 using System.Net;
+using System.Net.Http;
 using System.Runtime.Serialization.Json;
+using System.Threading.Tasks;
 using BruTile;
 using BruTile.Extensions;
 using Mapsui.Logging;
@@ -18,7 +20,6 @@ namespace Mapsui.Providers.ArcGIS
 
     public class CapabilitiesHelper
     {        
-        private HttpWebRequest _webRequest { get; set; }
         private IArcGISCapabilities _arcGisCapabilities { get; set; }
         private CapabilitiesType _capabilitiesType;
         private int _timeOut { get; set; }
@@ -87,20 +88,65 @@ namespace Mapsui.Providers.ArcGIS
 
         private void ExecuteRequest(string url, CapabilitiesType capabilitiesType, ICredentials credentials = null, string token = null)
         {
-            _capabilitiesType = capabilitiesType;
-            _url = RemoveTrailingSlash(url);
+            Task.Run(async () =>
+            {
+                _capabilitiesType = capabilitiesType;
+                _url = RemoveTrailingSlash(url);
 
-            var requestUri = $"{_url}?f=json";
-            if (!string.IsNullOrEmpty(token))
-                requestUri = $"{requestUri}&token={token}";
+                var requestUri = $"{_url}?f=json";
+                if (!string.IsNullOrEmpty(token))
+                    requestUri = $"{requestUri}&token={token}";
 
-            _webRequest = (HttpWebRequest)WebRequest.Create(requestUri);
-            if (credentials == null)
-                _webRequest.UseDefaultCredentials = true;
-            else
-                _webRequest.Credentials = credentials;
+                var handler = new HttpClientHandler {Credentials = credentials ?? CredentialCache.DefaultCredentials};
+                var client = new HttpClient(handler) {Timeout = TimeSpan.FromMilliseconds(TimeOut)};
+                var response = await client.GetAsync(requestUri);
 
-            _webRequest.BeginGetResponse(FinishWebRequest, null);
+                if (!response.IsSuccessStatusCode)
+                {
+                    OnCapabilitiesFailed(new EventArgs());
+                    return;
+                }
+
+                try
+                {
+                    var dataStream = CopyAndClose(await response.Content.ReadAsStreamAsync());
+
+                    DataContractJsonSerializer serializer = null;
+                    if (_capabilitiesType == CapabilitiesType.DynamicServiceCapabilities)
+                        serializer = new DataContractJsonSerializer(typeof(ArcGISDynamicCapabilities));
+                    else if (_capabilitiesType == CapabilitiesType.ImageServiceCapabilities)
+                        serializer = new DataContractJsonSerializer(typeof(ArcGISImageCapabilities));
+
+                    if (dataStream != null)
+                    {
+                        _arcGisCapabilities = (IArcGISCapabilities) serializer.ReadObject(dataStream);
+                        dataStream.Position = 0;
+                    }
+                    _arcGisCapabilities.ServiceUrl = _url;
+
+                    //Hack because ArcGIS Server doesn't always return a normal StatusCode
+                    if (dataStream != null)
+                    {
+                        using (var reader = new StreamReader(dataStream))
+                        {
+                            var contentString = reader.ReadToEnd();
+                            if (contentString.Contains("{\"error\":{\""))
+                            {
+                                OnCapabilitiesFailed(EventArgs.Empty);
+                                return;
+                            }
+                        }
+                    }
+
+                    dataStream?.Dispose();
+                    OnFinished(EventArgs.Empty);
+                }
+                catch (Exception ex)
+                {
+                    Logger.Log(LogLevel.Error, ex.Message, ex);
+                    OnCapabilitiesFailed(EventArgs.Empty);
+                }
+            });
         }
 
         private string RemoveTrailingSlash(string url)
@@ -111,52 +157,6 @@ namespace Mapsui.Providers.ArcGIS
             return url;
         }
 
-        private void FinishWebRequest(IAsyncResult result)
-        {
-            try
-            {
-                var response = _webRequest.GetSyncResponse(_timeOut);
-                var dataStream = CopyAndClose(response.GetResponseStream());
-
-                DataContractJsonSerializer serializer = null;
-                if(_capabilitiesType == CapabilitiesType.DynamicServiceCapabilities)
-                    serializer = new DataContractJsonSerializer(typeof(ArcGISDynamicCapabilities));
-                else if (_capabilitiesType == CapabilitiesType.ImageServiceCapabilities)
-                    serializer = new DataContractJsonSerializer(typeof(ArcGISImageCapabilities));
-
-                if (dataStream != null)
-                {
-                    _arcGisCapabilities = (IArcGISCapabilities)serializer.ReadObject(dataStream);
-                    dataStream.Position = 0;
-                }
-                _arcGisCapabilities.ServiceUrl = _url;
-
-                //Hack because ArcGIS Server doesn't return a normal StatusCode
-                if (dataStream != null)
-                {
-                    using (var reader = new StreamReader(dataStream))
-                    {
-                        var contentString = reader.ReadToEnd();
-                        if (contentString.Contains("{\"error\":{\""))
-                        {
-                            OnCapabilitiesFailed(EventArgs.Empty);
-                            return;
-                        }
-                    }
-                }
-
-                if (dataStream != null) dataStream.Dispose();
-                response.Dispose();
-
-                _webRequest.EndGetResponse(result);
-                OnFinished(EventArgs.Empty);
-            }
-            catch (Exception ex)
-            {
-                Logger.Log(LogLevel.Error, ex.Message, ex);
-                OnCapabilitiesFailed(EventArgs.Empty);
-            }
-        }
 
         private static Stream CopyAndClose(Stream inputStream)
         {
@@ -177,14 +177,12 @@ namespace Mapsui.Providers.ArcGIS
 
         protected virtual void OnFinished(EventArgs e)
         {
-            var handler = CapabilitiesReceived;
-            if (handler != null) handler(_arcGisCapabilities, e);
+            CapabilitiesReceived?.Invoke(_arcGisCapabilities, e);
         }
 
         protected virtual void OnCapabilitiesFailed(EventArgs e)
         {
-            var handler = CapabilitiesFailed;
-            if (handler != null) handler(null, e);
+            CapabilitiesFailed?.Invoke(null, e);
         }
 
         /// <summary>
