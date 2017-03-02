@@ -85,8 +85,8 @@ namespace Mapsui.Layers
 
             if (_tileSource != null)
             {
-                Attribution.Text = _tileSource.Attribution.Text;
-                Attribution.Url = _tileSource.Attribution.Url;
+                Attribution.Text = _tileSource.Attribution?.Text;
+                Attribution.Url = _tileSource.Attribution?.Url;
                 _tileFetcher = new TileFetcher(source, _memoryCache, _maxRetries, _maxThreads, _fetchStrategy);
                 _tileFetcher.DataChanged += TileFetcherDataChanged;
                 _tileFetcher.PropertyChanged += TileFetcherOnPropertyChanged;
