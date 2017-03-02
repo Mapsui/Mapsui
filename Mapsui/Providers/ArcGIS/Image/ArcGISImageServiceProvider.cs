@@ -4,6 +4,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Text;
 using BruTile.Extensions;
 using Mapsui.Geometries;
@@ -124,18 +125,13 @@ namespace Mapsui.Providers.ArcGIS.Image
             }
 
             var uri = new Uri(GetRequestUrl(viewport.Extent, width, height));
-            var webRequest =  (HttpWebRequest)WebRequest.Create(uri);
-
-            if (Credentials == null)
-                webRequest.UseDefaultCredentials = true;
-            else
-                webRequest.Credentials = Credentials;
+            var handler = new HttpClientHandler { Credentials = Credentials ?? CredentialCache.DefaultCredentials };
+            var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(_timeOut) };
 
             try
             {
-                var myWebResponse = webRequest.GetSyncResponse(_timeOut);
-
-               using (var dataStream = myWebResponse.GetResponseStream())
+               var response = client.GetAsync(uri).Result;
+               using (var dataStream = response.Content.ReadAsStreamAsync().Result)
                {
                    try
                    {

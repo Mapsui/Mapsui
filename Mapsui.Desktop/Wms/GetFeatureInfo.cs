@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Net;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -90,25 +91,19 @@ namespace Mapsui.Providers.Wms
             thread.Start();
         }
 
-        private Task<Stream> GetStreamAsync(string url)
+        private async Task<Stream> GetStreamAsync(string url)
         {
-            var source = new TaskCompletionSource<Stream>();
+            var handler = new HttpClientHandler { Credentials = Credentials ?? CredentialCache.DefaultCredentials };
+            var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(TimeOut) };
+            var req = new HttpRequestMessage(HttpMethod.Get, url);
+            var response = await client.SendAsync(req);
 
-            try
+            if (!response.IsSuccessStatusCode)
             {
-                var webRequest = WebRequest.Create(url);
-                webRequest.Timeout = TimeOut;
-                webRequest.Credentials = Credentials;
-
-                var webResponse = (HttpWebResponse) webRequest.GetResponse();
-                source.SetResult(webResponse.GetResponseStream());
-            }
-            catch (Exception ex)
-            {
-                source.SetException(ex);
+                throw new Exception($"Unexpected response code: {response.StatusCode}");
             }
 
-            return source.Task;
+            return await response.Content.ReadAsStreamAsync();
         }
 
         private string CreateRequestUrl(string baseUrl, string wmsVersion, string infoFormat, string srs, string layer, double extendXmin, double extendYmin, double extendXmax, double extendYmax, double x, double y, double mapWidth, double mapHeight)
