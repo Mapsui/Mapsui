@@ -14,7 +14,7 @@ using Math = System.Math;
 
 namespace Mapsui.UI.Android
 {
-    public class MapControl : SKCanvasView, IMapControl
+    public class MapControl : ViewGroup, IMapControl
     {
         private const int None = 0;
         private const int Dragging = 1;
@@ -26,6 +26,7 @@ namespace Mapsui.UI.Android
         private float _oldDist = 1f;
         private bool _viewportInitialized;
         private Rendering.Skia.MapRenderer _renderer;
+        private SKCanvasView _canvas;
         private Map _map;
         
         public event EventHandler ViewportInitialized;
@@ -48,6 +49,19 @@ namespace Mapsui.UI.Android
             _renderer = new Rendering.Skia.MapRenderer();
             InitializeViewport();
             Touch += MapView_Touch;
+            _canvas = new SKCanvasView(Context);
+            _canvas.PaintSurface += CanvasOnPaintSurface;
+            AddView(_canvas);
+        }
+
+        private void CanvasOnPaintSurface(object sender, SKPaintSurfaceEventArgs skPaintSurfaceEventArgs)
+        {
+            if (!_viewportInitialized)
+                InitializeViewport();
+            if (!_viewportInitialized)
+                return;
+
+            _renderer.Render(skPaintSurfaceEventArgs.Surface.Canvas, _map.Viewport, _map.Layers, _map.BackColor);
         }
 
         private void InitializeViewport()
@@ -238,16 +252,12 @@ namespace Mapsui.UI.Android
             PostInvalidate();
         }
 
-        protected override void OnDraw(SKSurface surface, SKImageInfo info)
+        protected override void OnLayout(bool changed, int l, int t, int r, int b)
         {
-            base.OnDraw(surface, info);
-
-            if (!_viewportInitialized)
-                InitializeViewport();
-            if (!_viewportInitialized)
-                return;
-
-            _renderer.Render(surface.Canvas, _map.Viewport, _map.Layers, _map.BackColor);
+            _canvas.Left = l;
+            _canvas.Top = t;
+            _canvas.Right = r;
+            _canvas.Bottom = b;
         }
     }
 }
