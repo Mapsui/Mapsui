@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Net;
+using System.Net.Http;
 using System.Text;
 using BruTile.Extensions;
 using Mapsui.Geometries;
@@ -145,22 +146,15 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
             }
            
             var uri = new Uri(GetRequestUrl(viewport.Extent, width, height));
-            var request = (HttpWebRequest)WebRequest.Create(uri);
-            if (Credentials == null)
-                request.UseDefaultCredentials = true;
-            else
-                request.Credentials = Credentials;
-
+            var handler = new HttpClientHandler { Credentials = Credentials ?? CredentialCache.DefaultCredentials };
+            var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(_timeOut) };
+           
             try
             {
-                var myWebResponse = request.GetSyncResponse(_timeOut);
-                var dataStream = myWebResponse.GetResponseStream();
-
-                var bytes = BruTile.Utilities.ReadFully(myWebResponse.GetResponseStream());
+                var response = client.GetAsync(uri).Result;
+                var bytes = BruTile.Utilities.ReadFully(response.Content.ReadAsStreamAsync().Result);
                 raster = new Raster(new MemoryStream(bytes), viewport.Extent);
-                dataStream?.Dispose();
-
-                myWebResponse.Dispose();
+                response.Dispose();
                 return true;
             }
             catch (Exception ex)

@@ -3,8 +3,12 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Net;
+using System.Net.Http;
+using System.Runtime.Serialization.Json;
+using System.Threading.Tasks;
 using BruTile.Extensions;
 using Mapsui.Logging;
+using Mapsui.Providers.ArcGIS.Image;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -57,29 +61,69 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
         /// <param name="sr">sr code of input geometry</param>
         public void Request(string url, double x, double y, int tolerance, string[] layers, double extendXmin, double extendYmin, double extendXmax, double extendYmax, double mapWidth, double mapHeight, double mapDpi, bool returnGeometry, ICredentials credentials = null, int sr = int.MinValue)
         {
-            //remove trailing slash from url
-            if (url.Length > 0 && url[url.Length - 1].Equals('/'))
-                url = url.Remove(url.Length - 1, 1);
+            Task.Run(async () =>
+            {
+                //remove trailing slash from url
+                if (url.Length > 0 && url[url.Length - 1].Equals('/'))
+                    url = url.Remove(url.Length - 1, 1);
 
-            var pointGeom = string.Format(CultureInfo.InvariantCulture, "{0},{1}", x, y);
-            var layersString = CreateLayersString(layers);
-            var mapExtend = string.Format(CultureInfo.InvariantCulture, "{0},{1},{2},{3}", extendXmin, extendYmin, extendXmax, extendYmax);
-            var imageDisplay = string.Format(CultureInfo.InvariantCulture, "{0},{1},{2}", mapWidth, mapHeight, mapDpi);
-            var requestUrl =
-                $"{url}/identify?f=pjson&geometryType=esriGeometryPoint&geometry={pointGeom}&tolerance={tolerance}{layersString}&mapExtent={mapExtend}&imageDisplay={imageDisplay}&returnGeometry={returnGeometry}{(sr != int.MinValue ? $"&sr={sr}" : "")}";
+                var pointGeom = string.Format(CultureInfo.InvariantCulture, "{0},{1}", x, y);
+                var layersString = CreateLayersString(layers);
+                var mapExtend = string.Format(CultureInfo.InvariantCulture, "{0},{1},{2},{3}", extendXmin, extendYmin, extendXmax, extendYmax);
+                var imageDisplay = string.Format(CultureInfo.InvariantCulture, "{0},{1},{2}", mapWidth, mapHeight, mapDpi);
+                var requestUrl =
+                    $"{url}/identify?f=pjson&geometryType=esriGeometryPoint&geometry={pointGeom}&tolerance={tolerance}{layersString}&mapExtent={mapExtend}&imageDisplay={imageDisplay}&returnGeometry={returnGeometry}{(sr != int.MinValue ? $"&sr={sr}" : "")}";
 
-            _webRequest = (HttpWebRequest)WebRequest.Create(requestUrl);
-            if (credentials == null)
-                _webRequest.UseDefaultCredentials = true;
-            else
-                _webRequest.Credentials = credentials;
+                var handler = new HttpClientHandler { Credentials = credentials ?? CredentialCache.DefaultCredentials };
+                var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(TimeOut) };
+                var response = await client.GetAsync(requestUrl);
 
-            _webRequest.BeginGetResponse(FinishWebRequest, null);
+                if (!response.IsSuccessStatusCode)
+                {
+                    OnIdentifyFailed();
+                    return;
+                }
+
+                try
+                {
+                    var dataStream = CopyAndClose(await response.Content.ReadAsStreamAsync());
+
+                    if (dataStream != null)
+                    {
+                        var sReader = new StreamReader(dataStream);
+                        var jsonString = sReader.ReadToEnd();
+
+                        var serializer = new JsonSerializer();
+                        var jToken = JObject.Parse(jsonString);
+                        _featureInfo = (ArcGISFeatureInfo)serializer.Deserialize(new JTokenReader(jToken), typeof(ArcGISFeatureInfo));
+
+                        dataStream.Position = 0;
+
+                        using (var reader = new StreamReader(dataStream))
+                        {
+                            var contentString = reader.ReadToEnd();
+                            if (contentString.Contains("{\"error\":{\""))
+                            {
+                                OnIdentifyFailed();
+                                return;
+                            }
+                        }
+                        dataStream.Dispose();
+                    }
+
+                    OnIdentifyFinished();
+                }
+                catch (WebException ex)
+                {
+                    Logger.Log(LogLevel.Warning, ex.Message, ex);
+                    OnIdentifyFailed();
+                }
+            });
         }
 
         private static string CreateLayersString(IList<string> layers)
         {
-            if (layers.Count == 0)//if no layers defined request all layers
+            if (layers.Count == 0) //if no layers defined request all layers
                 return "";
 
             var layerString = "&layers=all:";
@@ -93,47 +137,6 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
             }
 
             return layerString;
-        }
-
-        private void FinishWebRequest(IAsyncResult result)
-        {
-            try
-            {
-                var response = _webRequest.GetSyncResponse(_timeOut);
-                var dataStream = CopyAndClose(response.GetResponseStream());
-
-                if (dataStream != null)
-                {
-                    var sReader = new StreamReader(dataStream);
-                    var jsonString = sReader.ReadToEnd();
-
-                    var serializer = new JsonSerializer();
-                    var jToken = JObject.Parse(jsonString);
-                    _featureInfo = (ArcGISFeatureInfo)serializer.Deserialize(new JTokenReader(jToken), typeof(ArcGISFeatureInfo));
-
-                    dataStream.Position = 0;
-
-                    using (var reader = new StreamReader(dataStream))
-                    {
-                        var contentString = reader.ReadToEnd();
-                        if (contentString.Contains("{\"error\":{\""))
-                        {
-                            OnIdentifyFailed();
-                            return;
-                        }
-                    }
-                    dataStream.Dispose();
-                }
-
-                response.Dispose();
-                _webRequest.EndGetResponse(result);
-                OnIdentifyFinished();
-            }
-            catch (WebException ex)
-            {
-                Logger.Log(LogLevel.Warning, ex.Message, ex);
-                OnIdentifyFailed();
-            }
         }
 
         private static Stream CopyAndClose(Stream inputStream)

@@ -23,6 +23,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
@@ -492,30 +493,24 @@ namespace Mapsui.Providers.Wms
             return features;
         }
 
-        private Task<Stream> GetStreamAsync(string url)
+        private async Task<Stream> GetStreamAsync(string url)
         {
-            var source = new TaskCompletionSource<Stream>();
+            var handler = new HttpClientHandler {Credentials = Credentials ?? CredentialCache.DefaultCredentials};
+            var client = new HttpClient(handler) {Timeout = TimeSpan.FromMilliseconds(TimeOut)};
+            var req = new HttpRequestMessage(new HttpMethod(GetPreferredMethod().Type), url);
+            var response = await client.SendAsync(req);
 
-            try
+            if (!response.IsSuccessStatusCode)
             {
-                var webRequest = WebRequest.Create(url);
-                webRequest.Method = GetPreferredMethod().Type;
-                webRequest.Timeout = TimeOut;
-                webRequest.Credentials = Credentials ?? CredentialCache.DefaultCredentials;
-
-                var webResponse = (HttpWebResponse)webRequest.GetResponse();
-                if (webResponse.ContentType != _mimeType)
-                { 
-                    throw new Exception($"Unexpected WMS response content type. Expected - {_mimeType}, getted - {webResponse.ContentType}");
-                }
-                source.SetResult(webResponse.GetResponseStream());
-            }
-            catch (Exception ex)
-            {
-                source.SetException(ex);
+                throw new Exception($"Unexpected WMS response code: {response.StatusCode}");
             }
 
-            return source.Task;
+            if (response.Content.Headers.ContentType.ToString().ToLower() != _mimeType)
+            { 
+                throw new Exception($"Unexpected WMS response content type. Expected - {_mimeType}, getted - {response.Content.Headers.ContentType}");
+            }
+       
+            return await response.Content.ReadAsStreamAsync();
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
 using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
@@ -239,22 +240,17 @@ namespace Mapsui.Providers.Wms
             _getStreamAsync = getStreamAsync ?? GetStreamAsync;
         }
 
-        private Task<Stream> GetStreamAsync(string url)
+        private async Task<Stream> GetStreamAsync(string url)
         {
-            var source = new TaskCompletionSource<Stream>();
+            var client = new HttpClient();
+            var response = await client.GetAsync(url);
 
-            try
+            if (!response.IsSuccessStatusCode)
             {
-                var webRequest = WebRequest.Create(url);
-                var webResponse = (HttpWebResponse) webRequest.GetResponse();
-                source.SetResult(webResponse.GetResponseStream());             
-            }
-            catch (Exception ex)
-            {
-                source.SetException(ex);
+                throw new Exception($"Unexpected response code: {response.StatusCode}");
             }
 
-            return source.Task;
+            return await response.Content.ReadAsStreamAsync();
         }
 
         /// <summary>
