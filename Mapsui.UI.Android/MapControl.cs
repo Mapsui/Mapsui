@@ -8,7 +8,6 @@ using Android.Views;
 using Java.Lang;
 using Mapsui.Fetcher;
 using Mapsui.Layers;
-using SkiaSharp;
 using SkiaSharp.Views.Android;
 using Math = System.Math;
 
