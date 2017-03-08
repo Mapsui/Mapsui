@@ -18,12 +18,14 @@
 using System;
 using Mapsui.Geometries;
 using Mapsui.Utilities;
+using System.Runtime.CompilerServices;
+using System.ComponentModel;
 
 namespace Mapsui
 {
     public class Viewport : IViewport
     {
-        public event EventHandler ViewportChanged;
+        public event PropertyChangedEventHandler ViewportChanged;
 
         private readonly BoundingBox _extent;
         private Quad _windowExtent;
@@ -57,10 +59,10 @@ namespace Mapsui
             RenderResolutionMultiplier = viewport.RenderResolutionMultiplier;
         }
 
-        private void OnViewportChanged()
+        private void OnViewportChanged([CallerMemberName] string propertyName = null)
         {
             _modified = true;
-            ViewportChanged?.Invoke(this, new EventArgs());
+            ViewportChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         public double RenderResolutionMultiplier { get; set; }
