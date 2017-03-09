@@ -57,12 +57,13 @@ namespace Mapsui.Rendering.Skia
 
         public static void RenderRaster(SKCanvas canvas, SKBitmap bitmap, SKRect rect, float opacity = 1f)
         {
-            // Better for quality. Helps to compare to WPF
-            var color = new SKColor(255, 255, 255, (byte)(255 * opacity));
-            var paint = new SKPaint { Color = color, FilterQuality = SKFilterQuality.High };
-            canvas.DrawBitmap(bitmap, rect, paint);
+            // todo: Add some way to select one method or the other.
+            // Method 1) Better for quality. Helps to compare to WPF
+            //var color = new SKColor(255, 255, 255, (byte)(255 * opacity));
+            //var paint = new SKPaint { Color = color, FilterQuality = SKFilterQuality.High };
+            //canvas.DrawBitmap(bitmap, rect, paint);
 
-            // Better for performance:
+            // Method 2) Better for performance:
             canvas.DrawBitmap(bitmap, rect);
         }
 
