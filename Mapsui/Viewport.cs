@@ -41,7 +41,7 @@ namespace Mapsui
             RenderResolutionMultiplier = 1;
             _extent = new BoundingBox(0, 0, 0, 0);
             _windowExtent = new Quad();
-            _center.PropertyChanged += (sender, args) => OnViewportChanged();
+			_center.PropertyChanged += (sender, args) => OnViewportChanged(nameof(Center));
         }
         
         public Viewport(Viewport viewport) : this()
@@ -217,7 +217,6 @@ namespace Mapsui
             
             Center.X = newX - scaleCorrectionX;
             Center.Y = newY - scaleCorrectionY;
-            OnViewportChanged();
         }
 
         private void UpdateExtent()
