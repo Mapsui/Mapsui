@@ -205,8 +205,8 @@ namespace Mapsui
             var previous = ScreenToWorld(previousScreenX, previousScreenY);
             var current = ScreenToWorld(screenX, screenY);
 
-            var newX = Center.X + previous.X - current.X;
-            var newY = Center.Y + previous.Y - current.Y;
+            var newX = _center.X + previous.X - current.X;
+            var newY = _center.Y + previous.Y - current.Y;
 
             Resolution = Resolution / deltaScale;
 
@@ -215,8 +215,8 @@ namespace Mapsui
             var scaleCorrectionX = (1 - deltaScale) * (current.X - Center.X);
             var scaleCorrectionY = (1 - deltaScale) * (current.Y - Center.Y);
             
-            Center.X = newX - scaleCorrectionX;
-            Center.Y = newY - scaleCorrectionY;
+            _center.X = newX - scaleCorrectionX;
+            _center.Y = newY - scaleCorrectionY;
         }
 
         private void UpdateExtent()
