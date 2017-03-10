@@ -64,7 +64,14 @@ namespace Mapsui.UI.Android
             _renderer = new Rendering.Skia.MapRenderer();
             InitializeViewport();
             Touch += MapView_Touch;
+        }
 
+        protected override void OnSizeChanged(int w, int h, int oldw, int oldh)
+        {
+            Map.Viewport.Width = Width / _scale;
+            Map.Viewport.Height = Height / _scale;
+
+            base.OnSizeChanged(w, h, oldw, oldh);
         }
 
         private void CanvasOnPaintSurface(object sender, SKPaintSurfaceEventArgs args)
