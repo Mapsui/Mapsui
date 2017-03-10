@@ -28,7 +28,7 @@ namespace Mapsui.UI.Android
         private Rendering.Skia.MapRenderer _renderer;
         private SKCanvasView _canvas;
         private Map _map;
-        private LinearLayout _attributionPanel;
+        private AttributionPanel _attributionPanel;
         private float _scale;
         
         public event EventHandler ViewportInitialized;
@@ -52,13 +52,8 @@ namespace Mapsui.UI.Android
             _canvas = new SKCanvasView(Context);
             _canvas.PaintSurface += CanvasOnPaintSurface;
             AddView(_canvas);
-            
-            _attributionPanel = new LinearLayout(Context)
-            {
-                LayoutParameters = new LayoutParams(LayoutParams.WrapContent, LayoutParams.WrapContent),
-                Orientation = Orientation.Vertical
-            };
-            AddView(_attributionPanel);
+
+            AddView(_attributionPanel = new AttributionPanel(Context));
             
             Map = new Map();
             _renderer = new Rendering.Skia.MapRenderer();
@@ -214,6 +209,7 @@ namespace Mapsui.UI.Android
                     temp.PropertyChanged -= MapPropertyChanged;
                     temp.RefreshGraphics -= MapRefreshGraphics;
                     temp.Dispose();
+                    _attributionPanel.Clear();
                 }
 
                 _map = value;
@@ -224,7 +220,7 @@ namespace Mapsui.UI.Android
                     _map.PropertyChanged += MapPropertyChanged;
                     _map.RefreshGraphics += MapRefreshGraphics;
                     _map.ViewChanged(true);
-                    PopulateAttribution();
+                    _attributionPanel.Populate(Map.Layers);
                 }
 
                 RefreshGraphics();
@@ -248,25 +244,7 @@ namespace Mapsui.UI.Android
             }
             else if (e.PropertyName == nameof(Map.Layers))
             {
-                PopulateAttribution();
-            }
-        }
-
-        private void PopulateAttribution()
-        {
-            if (_attributionPanel.ChildCount > 0)
-                _attributionPanel.RemoveAllViews();
-
-            foreach (var layer in Map.Layers)
-            {
-                if (!string.IsNullOrEmpty(layer.Attribution?.Text))
-                {
-                    var textView = new TextView(Context) {Text = layer.Attribution.Text + " " + layer.Attribution.Url};
-                    textView.LayoutParameters = new LayoutParams(LayoutParams.WrapContent, LayoutParams.WrapContent);
-                    textView.SetTextColor(Color.Black);
-                    UpdateSize(textView);
-                    _attributionPanel.AddView(textView);
-                }
+                _attributionPanel.Populate(Map.Layers);
             }
         }
 
