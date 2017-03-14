@@ -26,24 +26,18 @@ namespace Mapsui.Styles
             SymbolOffset = new Offset();
             SymbolScale = 1f;
             Opacity = 1f;
-            BitmapId = -1;
         }
 
         /// <summary>
         ///     Symbol used for rendering points
         /// </summary>
-        [Obsolete("Use BitmapID and BitmapRegistry instead", true)]
+        [Obsolete("Use BitmapStyle's BitmapID and BitmapRegistry instead", true)]
         public Bitmap Symbol
         {
             get { throw new NotImplementedException(); }
             set { throw new NotImplementedException(); }
         }
-
-        /// <summary>
-        ///     This identifies bitmap in the BitmapRegistry.
-        /// </summary>
-        public int BitmapId { get; set; }
-
+        
         /// <summary>
         ///     Scale of the symbol (defaults to 1)
         /// </summary>
@@ -85,16 +79,13 @@ namespace Mapsui.Styles
             if (!base.Equals(symbolStyle))
                 return false;
 
-            if (BitmapId != symbolStyle.BitmapId)
-                return false;
-
             if (!SymbolScale.Equals(SymbolScale))
                 return false;
 
             if ((SymbolOffset == null) ^ (symbolStyle.SymbolOffset == null))
                 return false;
 
-            if ((SymbolOffset != null) && !SymbolOffset.Equals(symbolStyle.SymbolOffset))
+            if (SymbolOffset != null && !SymbolOffset.Equals(symbolStyle.SymbolOffset))
                 return false;
 
             if (Math.Abs(SymbolRotation - symbolStyle.SymbolRotation) > Constants.Epsilon)
@@ -115,7 +106,6 @@ namespace Mapsui.Styles
         public override int GetHashCode()
         {
             return
-                BitmapId.GetHashCode() ^
                 SymbolScale.GetHashCode() ^
                 SymbolOffset.GetHashCode() ^
                 SymbolRotation.GetHashCode() ^
