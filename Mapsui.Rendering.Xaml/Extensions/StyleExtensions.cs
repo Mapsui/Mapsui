@@ -20,9 +20,9 @@ namespace Mapsui.Rendering.Xaml
             return WinColor.FromArgb((byte)color.A, (byte)color.R, (byte)color.G, (byte)color.B);
         }
         
-        public static Media.Brush ToXaml(this Brush brush, BrushCache brushCache = null)
+        public static Media.Brush ToXaml(this Brush brush, SymbolCache symbolCache = null)
         {
-            return StyleConverter.MapsuiBrushToXaml(brush, brushCache);
+            return StyleConverter.MapsuiBrushToXaml(brush, symbolCache);
         }
 
         public static WinPoint ToXaml(this Offset offset)

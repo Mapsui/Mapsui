@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Mapsui.Geometries;
 using Mapsui.Providers;
 using Mapsui.Styles;
@@ -13,7 +12,7 @@ namespace Mapsui.Rendering.Skia
         // try to remove the feature argument. LabelStyle should already contain the feature specific text
         // The visible feature iterator should create this LabelStyle
         public static void Draw(SKCanvas canvas, IViewport viewport, IStyle style, IFeature feature, 
-            IGeometry geometry, IDictionary<int, SKBitmapInfo> symbolBitmapCache)
+            IGeometry geometry, SymbolCache symbolCache)
         {
             var point = geometry as Point;
             var destination = viewport.WorldToScreen(point);
@@ -28,7 +27,7 @@ namespace Mapsui.Rendering.Skia
 
                 if ( symbolStyle.BitmapId >= 0)   // case 2) Bitmap Style
                 {
-                    DrawPointWithBitmapStyle(canvas, symbolStyle, destination, symbolBitmapCache);
+                    DrawPointWithBitmapStyle(canvas, symbolStyle, destination, symbolCache);
                 }
                 else                              // case 3) SymbolStyle without bitmap
                 {
@@ -112,22 +111,11 @@ namespace Mapsui.Rendering.Skia
         }
 
         private static void DrawPointWithBitmapStyle(SKCanvas canvas, SymbolStyle symbolStyle, Point destination,
-            IDictionary<int, SKBitmapInfo> symbolBitmapCache)
+            SymbolCache symbolCache)
         {
-            var stream = BitmapRegistry.Instance.Get(symbolStyle.BitmapId);
-            stream.Position = 0;
-            SKBitmapInfo textureInfo;
-            if (!symbolBitmapCache.Keys.Contains(symbolStyle.BitmapId))
-            {
-                textureInfo = BitmapHelper.LoadTexture(BitmapRegistry.Instance.Get(symbolStyle.BitmapId));
-                symbolBitmapCache[symbolStyle.BitmapId] = textureInfo;
-            }
-            else
-            {
-                textureInfo = symbolBitmapCache[symbolStyle.BitmapId];
-            }
+            var bitmap = symbolCache.Get(symbolStyle.BitmapId);
 
-            BitmapHelper.RenderTexture(canvas, textureInfo.Bitmap,
+            BitmapHelper.RenderBitmap(canvas, bitmap.Bitmap,
                 (float) destination.X, (float) destination.Y,
                 (float) symbolStyle.SymbolRotation,
                 (float) symbolStyle.SymbolOffset.X, (float) symbolStyle.SymbolOffset.Y,

@@ -440,7 +440,7 @@ namespace Mapsui.UI.Uwp
         {
             _previousPosition = default(Point);
             Refresh();
-            Map.InvokeInfo(e.Position.ToMapsui());
+            Map.InvokeInfo(e.Position.ToMapsui(), _renderer.SymbolCache);
         }
 
         private void InitializeViewport()

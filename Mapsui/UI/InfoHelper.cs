@@ -3,35 +3,40 @@ using System.Linq;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
+using Mapsui.Rendering;
 using Mapsui.Styles;
 
 namespace Mapsui.UI
 {
-    public class InfoHelper
+    public static class InfoHelper
     {
-        public static MouseInfoEventArgs GetInfoEventArgs(Map map, Point screenPosition, IEnumerable<ILayer> infoLayers)
+        public static MouseInfoEventArgs GetInfoEventArgs(Map map, Point screenPosition, IEnumerable<ILayer> infoLayers,
+            ISymbolCache symbolCache)
         {
             var worldPosition = map.Viewport.ScreenToWorld(new Point(screenPosition.X, screenPosition.Y));
 
-            var feature = GetFeatureInfo(infoLayers, worldPosition, map.Viewport.Resolution);
+            var feature = GetFeatureInfo(infoLayers, worldPosition, map.Viewport.Resolution, symbolCache);
 
             if (feature == null) return null;
 
             return new MouseInfoEventArgs { LayerName = "", Feature = feature };
         }
 
-        private static IFeature GetFeatureInfo(IEnumerable<ILayer> layers, Point point, double resolution)
+        private static IFeature GetFeatureInfo(IEnumerable<ILayer> layers, Point point, double resolution,
+            ISymbolCache symbolCache)
         {
-            
             foreach (var layer in layers)
             {
                 if (layer.Enabled == false) continue;
                 
-                var feature = layer.GetFeaturesInView(layer.Envelope, resolution)
-                    .Where(f => IsTouchingTakingIntoAccountSymbolStyles(point, f, layer.Style, resolution))
-                    .OrderBy(f => f.Geometry.GetBoundingBox().GetCentroid().Distance(point))
-                    .FirstOrDefault();
+                var allFeatures = layer.GetFeaturesInView(layer.Envelope, resolution);
+                
+                var features = allFeatures.Where(f => 
+                    IsTouchingTakingIntoAccountSymbolStyles(point, f, layer.Style, resolution)).ToList();
 
+                var feature = features.OrderBy(f => f.Geometry.GetBoundingBox().GetCentroid().Distance(point))
+                    .FirstOrDefault();
+                
                 if (feature != null)
                 {
                     return feature;
@@ -53,8 +58,8 @@ namespace Mapsui.UI
                 }
                 var marginX = SymbolStyle.DefaultWidth * 0.5 * resolution * scale;
                 var marginY = SymbolStyle.DefaultHeight * 0.5 * resolution * scale;
-                return feature.Geometry.Touches(point, marginX, marginY);
 
+                return feature.Geometry.Touches(point, marginX, marginY);
             }
             return feature.Geometry.Touches(point);
         }

@@ -9,5 +9,6 @@ namespace Mapsui.Rendering
     {
         void Render(object target, IViewport viewport, IEnumerable<ILayer> layers, Color background = null);
         MemoryStream RenderToBitmapStream(IViewport viewport, IEnumerable<ILayer> layers, Color background = null);
+        ISymbolCache SymbolCache { get; }
     }
 }

@@ -6,14 +6,14 @@ namespace Mapsui.Rendering.Skia
 {
     public static class BitmapHelper
     {
-        public static SKBitmapInfo LoadTexture(Stream bitmapStream)
+        public static BitmapInfo LoadBitmap(Stream bitmapStream)
         {
             bitmapStream.Position = 0;
             var stream = new SKManagedStream(bitmapStream);
-            return new SKBitmapInfo {Bitmap = SKBitmap.Decode(stream)};
+            return new BitmapInfo {Bitmap = SKBitmap.Decode(stream)};
         }
 
-        public static void RenderTexture(SKCanvas canvas, SKBitmap bitmap, float x, float y, float orientation = 0,
+        public static void RenderBitmap(SKCanvas canvas, SKBitmap bitmap, float x, float y, float orientation = 0,
             float offsetX = 0, float offsetY = 0,
             LabelStyle.HorizontalAlignmentEnum horizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center,
             LabelStyle.VerticalAlignmentEnum verticalAlignment = LabelStyle.VerticalAlignmentEnum.Center,
@@ -23,7 +23,7 @@ namespace Mapsui.Rendering.Skia
             canvas.Save();
 
             canvas.Translate(x, y);
-            canvas.RotateDegrees(orientation, 0, 0); // todo: or degrees?
+            canvas.RotateDegrees(orientation, 0, 0); // todo: degrees or radians?
             canvas.Scale(scale, scale);
 
             x = offsetX + DetermineHorizontalAlignmentCorrection(horizontalAlignment, bitmap.Width);
@@ -34,7 +34,7 @@ namespace Mapsui.Rendering.Skia
 
             var rect = new SKRect(x - halfWidth, y - halfHeight, x + halfWidth, y + halfHeight);
 
-            RenderTexture(canvas, bitmap, rect, opacity);
+            RenderBitmap(canvas, bitmap, rect, opacity);
 
             canvas.Restore();
         }
@@ -67,7 +67,7 @@ namespace Mapsui.Rendering.Skia
             canvas.DrawBitmap(bitmap, rect);
         }
 
-        public static void RenderTexture(SKCanvas canvas, SKBitmap bitmap, SKRect rect, float opacity = 1f)
+        public static void RenderBitmap(SKCanvas canvas, SKBitmap bitmap, SKRect rect, float opacity = 1f)
         {
             var color = new SKColor(255, 255, 255, (byte) (255*opacity));
             var paint = new SKPaint {Color = color, FilterQuality = SKFilterQuality.High};

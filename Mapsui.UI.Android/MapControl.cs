@@ -111,7 +111,7 @@ namespace Mapsui.UI.Android
                     Invalidate();
                     _mode = None;
                     _map.ViewChanged(true);
-                    Map.InvokeInfo(GetPosition(args.Event).ToMapsui());
+                    Map.InvokeInfo(GetPosition(args.Event).ToMapsui(), _renderer.SymbolCache);
                     break;
                 case MotionEventActions.Pointer2Down:
                     _previousMap = null;

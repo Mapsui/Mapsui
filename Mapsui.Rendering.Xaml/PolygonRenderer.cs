@@ -6,12 +6,12 @@ namespace Mapsui.Rendering.Xaml
 {
     public static class PolygonRenderer
     {
-        public static System.Windows.Shapes.Shape RenderPolygon(Polygon polygon, IStyle style, IViewport viewport, BrushCache brushCache = null)
+        public static System.Windows.Shapes.Shape RenderPolygon(Polygon polygon, IStyle style, IViewport viewport, SymbolCache symbolCache)
         {
             if (!(style is VectorStyle)) throw new ArgumentException("Style is not of type VectorStyle");
             var vectorStyle = style as VectorStyle;
 
-            System.Windows.Shapes.Path path = CreatePolygonPath(vectorStyle, viewport.Resolution, brushCache);
+            System.Windows.Shapes.Path path = CreatePolygonPath(vectorStyle, viewport.Resolution, symbolCache);
             path.Data = polygon.ToXaml();
 
             var matrixTransform = new System.Windows.Media.MatrixTransform { Matrix = GeometryRenderer.CreateTransformMatrix1(viewport) };
@@ -23,7 +23,7 @@ namespace Mapsui.Rendering.Xaml
             return path;
         }
 
-        public static System.Windows.Shapes.Path CreatePolygonPath(VectorStyle style, double resolution, BrushCache brushCache = null)
+        public static System.Windows.Shapes.Path CreatePolygonPath(VectorStyle style, double resolution, SymbolCache symbolCache)
         {
             var path = new System.Windows.Shapes.Path();
 
@@ -35,7 +35,7 @@ namespace Mapsui.Rendering.Xaml
                 path.Tag = style.Outline.Width; // see #linewidthhack
             }
 
-            path.Fill = style.Fill.ToXaml(brushCache);
+            path.Fill = style.Fill.ToXaml(symbolCache);
             path.IsHitTestVisible = false;
             return path;
         }

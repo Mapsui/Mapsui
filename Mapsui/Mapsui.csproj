@@ -102,6 +102,7 @@
     <Compile Include="Layers\TileLayer.cs" />
     <Compile Include="NotifyingViewport.cs" />
     <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="Rendering\ISymbolCache.cs" />
     <Compile Include="Rendering\MinimalRenderGetStrategy.cs" />
     <Compile Include="Rendering\DefaultRendererFactory.cs" />
     <Compile Include="Rendering\RenderGetStrategy.cs" />
@@ -122,7 +123,6 @@
     <Compile Include="Rendering\RenderExceptions.cs" />
     <Compile Include="Styles\Bitmap.cs" />
     <Compile Include="Styles\BitmapRegistry.cs" />
-    <Compile Include="Styles\BitmapStyle.cs" />
     <Compile Include="Styles\Brush.cs" />
     <Compile Include="Styles\Color.cs" />
     <Compile Include="Styles\FillStyle.cs" />

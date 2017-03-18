@@ -40,7 +40,7 @@ namespace Mapsui.Rendering.Xaml
             return null;
         }
 
-        public static XamlBrush MapsuiBrushToXaml(Styles.Brush brush, BrushCache brushCache = null)
+        public static XamlBrush MapsuiBrushToXaml(Styles.Brush brush, SymbolCache symbolCache = null)
         {
             if (brush == null) return null;
             switch (brush.FillStyle)
@@ -50,7 +50,7 @@ namespace Mapsui.Rendering.Xaml
                 case FillStyle.BackwardDiagonal:
                     return CreateHatchBrush(brush, 10, 10, new List<Geometry> { Geometry.Parse("M 0 10 l 10 -10"), Geometry.Parse("M -0.5 0.5 l 10 -10"), Geometry.Parse("M 8 12 l 10 -10") });                    
                 case FillStyle.Bitmap:
-                    return CreateImageBrush(brush, brushCache);
+                    return ToTiledImageBrush(brush, symbolCache);
                 case FillStyle.Dotted:
                     return DottedBrush(brush);
                 case FillStyle.DiagonalCross:
@@ -77,7 +77,7 @@ namespace Mapsui.Rendering.Xaml
 
         private static VisualBrush CreateHatchBrush(Styles.Brush brush, int viewbox, int viewport, IEnumerable<Geometry> geometries)
         {
-            var elements = new List<UIElement>();           
+            var elements = new List<UIElement>();
             if (brush.Background != null)
                 elements.Add(CreateBackground(brush.Background, viewbox));
 
@@ -98,27 +98,13 @@ namespace Mapsui.Rendering.Xaml
             return CreatePatternVisual(elements, viewport, viewbox);
         }
 
-        private static ImageBrush CreateImageBrush(Styles.Brush brush, BrushCache brushCache = null)
+        private static ImageBrush ToTiledImageBrush(Styles.Brush brush, SymbolCache symbolCache = null)
         {
-            return brushCache != null ? brushCache.GetImageBrush(brush.BitmapId, CreateImageBrush) : CreateImageBrush(BitmapRegistry.Instance.Get(brush.BitmapId));
+            return symbolCache != null ? 
+                symbolCache.GetTiledImageBrush(brush.BitmapId) : 
+                BitmapRegistry.Instance.Get(brush.BitmapId).ToTiledImageBrush();
         }
-
-        private static ImageBrush CreateImageBrush(System.IO.Stream stream)
-        {
-            var bmp = stream.CreateBitmapImage();
-
-            var imageBrush = new ImageBrush(bmp)
-            {
-                Viewbox = new Rect(0, 0, bmp.PixelWidth, bmp.PixelHeight),
-                Viewport = new Rect(0, 0, bmp.PixelWidth, bmp.PixelHeight),
-                ViewportUnits = BrushMappingMode.Absolute,
-                ViewboxUnits = BrushMappingMode.Absolute,
-                TileMode = TileMode.Tile
-            };
-
-            return imageBrush;
-        }
-
+        
         private static VisualBrush DottedBrush(Styles.Brush brush)
         {
             const int viewboxSize = 12;

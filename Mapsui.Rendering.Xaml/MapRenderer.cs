@@ -22,6 +22,9 @@ namespace Mapsui.Rendering.Xaml
 {
     public class MapRenderer : IRenderer
     {
+        private readonly SymbolCache _symbolCache = new SymbolCache();
+        public ISymbolCache SymbolCache => _symbolCache;
+
         static MapRenderer()
         {
             DefaultRendererFactory.Create = () => new MapRenderer();
@@ -29,11 +32,11 @@ namespace Mapsui.Rendering.Xaml
 
         public void Render(object target, IViewport viewport, IEnumerable<ILayer> layers, Color background)
         {
-            Render((Canvas) target, viewport, layers, background, false);
+            Render((Canvas) target, viewport, layers, background, _symbolCache, false);
         }
 
         private static void Render(Canvas target, IViewport viewport, IEnumerable<ILayer> layers,
-            Color background, bool rasterizing)
+            Color background, SymbolCache symbolCache, bool rasterizing)
         {
             target.BeginInit();
 
@@ -56,7 +59,7 @@ namespace Mapsui.Rendering.Xaml
                 if (layer.MinVisible > viewport.Resolution) continue;
                 if (layer.MaxVisible < viewport.Resolution) continue;
 
-                RenderLayer(target, viewport, layer, rasterizing);
+                RenderLayer(target, viewport, layer, symbolCache, rasterizing);
             }
             target.Arrange(new Rect(0, 0, viewport.Width, viewport.Height));
             target.Visibility = Visibility.Visible;
@@ -72,14 +75,15 @@ namespace Mapsui.Rendering.Xaml
         public MemoryStream RenderToBitmapStream(IViewport viewport, IEnumerable<ILayer> layers, Color background = null)
         {
             MemoryStream bitmapStream = null;
-            RunMethodOnStaThread(() => bitmapStream = RenderToBitmapStreamStatic(viewport, layers, background));
+            RunMethodOnStaThread(() => bitmapStream = RenderToBitmapStreamStatic(viewport, layers, _symbolCache, background));
             return bitmapStream;
         }
         
-        private static MemoryStream RenderToBitmapStreamStatic(IViewport viewport, IEnumerable<ILayer> layers, Color background)
+        private static MemoryStream RenderToBitmapStreamStatic(IViewport viewport, IEnumerable<ILayer> layers, SymbolCache symbolCache,
+            Color background)
         {
             var canvas = new Canvas();
-            Render(canvas, viewport, layers, background, true);
+            Render(canvas, viewport, layers, background, symbolCache, true);
             var bitmapStream = BitmapRendering.BitmapConverter.ToBitmapStream(canvas, (int)viewport.Width, (int)viewport.Height);
             canvas.Children.Clear();
             canvas.Dispatcher.InvokeShutdown();
@@ -95,14 +99,14 @@ namespace Mapsui.Rendering.Xaml
             thread.Join();
         }
 
-        public static void RenderLayer(Canvas target, IViewport viewport, ILayer layer, bool rasterizing = false)
+        public static void RenderLayer(Canvas target, IViewport viewport, ILayer layer, SymbolCache symbolCache, bool rasterizing = false)
         {
             if (layer.Enabled == false) return;
 
-            target.Children.Add(RenderVectorLayer(viewport, layer, rasterizing));
+            target.Children.Add(RenderVectorLayer(viewport, layer, symbolCache, rasterizing));
         }
 
-        private static Canvas RenderVectorLayer(IViewport viewport, ILayer layer, bool rasterizing = false)
+        private static Canvas RenderVectorLayer(IViewport viewport, ILayer layer, SymbolCache symbolCache, bool rasterizing = false)
         {
             // todo:
             // find solution for try catch. Sometimes this method will throw an exception
@@ -117,8 +121,7 @@ namespace Mapsui.Rendering.Xaml
             {
                 var features = layer.GetFeaturesInView(viewport.Extent, viewport.RenderResolution).ToList();
                 var layerStyles = BaseLayer.GetLayerStyles(layer);
-                var brushCache = new BrushCache();
-
+                
                 foreach (var layerStyle in layerStyles)
                 {
                     var style = layerStyle; // This is the default that could be overridden by an IThemeStyle
@@ -129,7 +132,7 @@ namespace Mapsui.Rendering.Xaml
                         if ((style == null) || (style.Enabled == false) || (style.MinVisible > viewport.Resolution) ||
                             (style.MaxVisible < viewport.Resolution)) continue;
 
-                        RenderFeature(viewport, canvas, feature, style, rasterizing, brushCache);
+                        RenderFeature(viewport, canvas, feature, style, rasterizing, symbolCache);
                     }
                 }
 
@@ -138,7 +141,7 @@ namespace Mapsui.Rendering.Xaml
                     var styles = feature.Styles ?? Enumerable.Empty<IStyle>();
                     foreach (var style in styles)
                         if ((feature.Styles != null) && style.Enabled)
-                            RenderFeature(viewport, canvas, feature, style, rasterizing, brushCache);
+                            RenderFeature(viewport, canvas, feature, style, rasterizing, symbolCache);
                 }
 
                 return canvas;
@@ -160,7 +163,7 @@ namespace Mapsui.Rendering.Xaml
         }
 
         private static void RenderFeature(IViewport viewport, Canvas canvas, IFeature feature, IStyle style,
-            bool rasterizing, BrushCache brushCache = null)
+            bool rasterizing, SymbolCache symbolCache)
         {
             if (style is LabelStyle)
             {
@@ -175,7 +178,7 @@ namespace Mapsui.Rendering.Xaml
                     : null;
                 if (renderedGeometry == null)
                 {
-                    renderedGeometry = RenderGeometry(viewport, style, feature, brushCache);
+                    renderedGeometry = RenderGeometry(viewport, style, feature, symbolCache);
                     if (!rasterizing) feature.RenderedGeometry[style] = renderedGeometry;
                 }
                 else
@@ -190,20 +193,20 @@ namespace Mapsui.Rendering.Xaml
         }
 
         private static Shape RenderGeometry(IViewport viewport, IStyle style, IFeature feature,
-            BrushCache brushCache = null)
+            SymbolCache symbolCache)
         {
             if (feature.Geometry is Geometries.Point)
-                return PointRenderer.RenderPoint(feature.Geometry as Geometries.Point, style, viewport, brushCache);
+                return PointRenderer.RenderPoint(feature.Geometry as Geometries.Point, style, viewport, symbolCache);
             if (feature.Geometry is MultiPoint)
-                return GeometryRenderer.RenderMultiPoint(feature.Geometry as MultiPoint, style, viewport);
+                return GeometryRenderer.RenderMultiPoint(feature.Geometry as MultiPoint, style, viewport, symbolCache);
             if (feature.Geometry is LineString)
                 return LineStringRenderer.RenderLineString(feature.Geometry as LineString, style, viewport);
             if (feature.Geometry is MultiLineString)
                 return MultiLineStringRenderer.Render(feature.Geometry as MultiLineString, style, viewport);
             if (feature.Geometry is Polygon)
-                return PolygonRenderer.RenderPolygon(feature.Geometry as Polygon, style, viewport, brushCache);
+                return PolygonRenderer.RenderPolygon(feature.Geometry as Polygon, style, viewport, symbolCache);
             if (feature.Geometry is MultiPolygon)
-                return MultiPolygonRenderer.RenderMultiPolygon(feature.Geometry as MultiPolygon, style, viewport);
+                return MultiPolygonRenderer.RenderMultiPolygon(feature.Geometry as MultiPolygon, style, viewport, symbolCache);
             if (feature.Geometry is IRaster)
                 return GeometryRenderer.RenderRaster(feature.Geometry as IRaster, style, viewport);
             return null;

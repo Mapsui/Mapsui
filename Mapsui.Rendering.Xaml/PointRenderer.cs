@@ -11,7 +11,7 @@ namespace Mapsui.Rendering.Xaml
     public static class PointRenderer
     {
         public static XamlShapes.Shape RenderPoint(Point point, IStyle style, IViewport viewport,
-            BrushCache brushCache = null)
+            SymbolCache symbolCache)
         {
             XamlShapes.Shape symbol;
             var matrix = XamlMedia.Matrix.Identity;
@@ -23,7 +23,7 @@ namespace Mapsui.Rendering.Xaml
                 if (symbolStyle.BitmapId < 0)
                     symbol = CreateSymbolFromVectorStyle(symbolStyle, symbolStyle.Opacity, symbolStyle.SymbolType);
                 else
-                    symbol = CreateSymbolFromBitmap(symbolStyle.BitmapId, symbolStyle.Opacity, brushCache);
+                    symbol = CreateSymbolFromBitmap(symbolStyle.BitmapId, symbolStyle.Opacity, symbolCache);
                 matrix = CreatePointSymbolMatrix(viewport.Resolution, symbolStyle);
             }
             else
@@ -93,22 +93,11 @@ namespace Mapsui.Rendering.Xaml
             return matrix;
         }
 
-        private static XamlShapes.Shape CreateSymbolFromBitmap(int bmpId, double opacity, BrushCache brushCache = null)
+        private static XamlShapes.Shape CreateSymbolFromBitmap(int bitmapId, double opacity, SymbolCache symbolCache)
         {
-            XamlMedia.ImageBrush imageBrush;
+            var imageBrush = symbolCache.GetImageBrush(bitmapId);
 
-            if (brushCache == null)
-            {
-                var data = BitmapRegistry.Instance.Get(bmpId);
-                var bitmapImage = data.CreateBitmapImage();
-                imageBrush = new XamlMedia.ImageBrush {ImageSource = bitmapImage};
-            }
-            else
-            {
-                imageBrush = brushCache.GetImageBrush(bmpId);
-            }
-
-            // note: It probably makes more sense to use PixelWith here:
+            // note: It probably makes more sense to use PixelWidth here:
             var width = imageBrush.ImageSource.Width;
             var height = imageBrush.ImageSource.Height;
 

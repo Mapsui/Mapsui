@@ -63,7 +63,7 @@ namespace Mapsui.Rendering.Xaml
             }
             else
             {
-                BitmapImage bitmapImage = BitmapRegistry.Instance.Get(style.BitmapId).CreateBitmapImage();
+                BitmapImage bitmapImage = BitmapRegistry.Instance.Get(style.BitmapId).ToBitmapImage();
 
                 path.Fill = new XamlMedia.ImageBrush { ImageSource = bitmapImage };
 
@@ -93,7 +93,7 @@ namespace Mapsui.Rendering.Xaml
             var rect = new XamlMedia.RectangleGeometry();
             if (style.BitmapId >= 0)
             {
-                var bitmapImage = BitmapRegistry.Instance.Get(style.BitmapId).CreateBitmapImage();
+                var bitmapImage = BitmapRegistry.Instance.Get(style.BitmapId).ToBitmapImage();
                 var width = bitmapImage.PixelWidth * style.SymbolScale;
                 var height = bitmapImage.PixelHeight * style.SymbolScale;
                 rect.Rect = new Rect(p.X - width * 0.5, p.Y - height * 0.5, width, height);
@@ -102,12 +102,14 @@ namespace Mapsui.Rendering.Xaml
             return rect;
         }
 
-        public static XamlShapes.Shape RenderMultiPoint(MultiPoint multiPoint, IStyle style, IViewport viewport)
+        public static XamlShapes.Shape RenderMultiPoint(MultiPoint multiPoint, IStyle style, IViewport viewport, 
+            SymbolCache symbolCache)
         {
             // This method needs a test
+            // This methode should re-use PointRenderer
             if (!(style is SymbolStyle)) throw new ArgumentException("Style is not of type SymboStyle");
             var symbolStyle = style as SymbolStyle;
-            XamlShapes.Path path = CreatePointPath(symbolStyle);
+            var path = CreatePointPath(symbolStyle);
             path.Data = ConvertMultiPoint(multiPoint, symbolStyle, viewport);
             path.RenderTransform = new XamlMedia.MatrixTransform { Matrix = CreateTransformMatrix1(viewport) };
             return path;

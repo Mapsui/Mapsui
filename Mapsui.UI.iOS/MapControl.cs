@@ -205,7 +205,7 @@ namespace Mapsui.UI.iOS
             var touch = touches.FirstOrDefault() as UITouch;
             if (touch == null) return;
             var screenPosition = touch.LocationInView(this);
-            Map.InvokeInfo(screenPosition.ToMapsui());
+            Map.InvokeInfo(screenPosition.ToMapsui(), _renderer.SymbolCache);
         }
 
         public void Refresh()

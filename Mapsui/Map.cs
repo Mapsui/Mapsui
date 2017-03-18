@@ -23,7 +23,7 @@ using Mapsui.Fetcher;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Projection;
-using Mapsui.Providers;
+using Mapsui.Rendering;
 using Mapsui.Styles;
 using Mapsui.UI;
 using Mapsui.Utilities;
@@ -208,10 +208,10 @@ namespace Mapsui
             OnPropertyChanged(nameof(Layers));
         }
 
-        public void InvokeInfo(Point screenPosition)
+        public void InvokeInfo(Point screenPosition, ISymbolCache symbolCache)
         {
             if (Info == null) return;
-            var eventArgs = InfoHelper.GetInfoEventArgs(this, screenPosition, InfoLayers);
+            var eventArgs = InfoHelper.GetInfoEventArgs(this, screenPosition, InfoLayers, symbolCache);
             if (eventArgs != null) Info?.Invoke(this, eventArgs);
         }
 
