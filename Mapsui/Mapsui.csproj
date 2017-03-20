@@ -102,6 +102,7 @@
     <Compile Include="Layers\TileLayer.cs" />
     <Compile Include="NotifyingViewport.cs" />
     <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="Rendering\ISymbolCache.cs" />
     <Compile Include="Rendering\MinimalRenderGetStrategy.cs" />
     <Compile Include="Rendering\DefaultRendererFactory.cs" />
     <Compile Include="Rendering\RenderGetStrategy.cs" />

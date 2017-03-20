@@ -5,16 +5,16 @@ using Android.Content;
 using Android.Graphics;
 using Android.Util;
 using Android.Views;
+using Android.Widget;
 using Java.Lang;
 using Mapsui.Fetcher;
 using Mapsui.Layers;
-using SkiaSharp;
 using SkiaSharp.Views.Android;
 using Math = System.Math;
 
 namespace Mapsui.UI.Android
 {
-    public class MapControl : SKCanvasView, IMapControl
+    public class MapControl : ViewGroup, IMapControl
     {
         private const int None = 0;
         private const int Dragging = 1;
@@ -26,7 +26,10 @@ namespace Mapsui.UI.Android
         private float _oldDist = 1f;
         private bool _viewportInitialized;
         private Rendering.Skia.MapRenderer _renderer;
+        private SKCanvasView _canvas;
         private Map _map;
+        private AttributionPanel _attributionPanel;
+        private float _scale;
         
         public event EventHandler ViewportInitialized;
 
@@ -44,15 +47,43 @@ namespace Mapsui.UI.Android
 
         public void Initialize()
         {
+            _scale = Resources.DisplayMetrics.Density;
+
+            _canvas = new SKCanvasView(Context);
+            _canvas.PaintSurface += CanvasOnPaintSurface;
+            AddView(_canvas);
+
+            AddView(_attributionPanel = new AttributionPanel(Context));
+            
             Map = new Map();
             _renderer = new Rendering.Skia.MapRenderer();
             InitializeViewport();
             Touch += MapView_Touch;
         }
 
+        protected override void OnSizeChanged(int w, int h, int oldw, int oldh)
+        {
+            Map.Viewport.Width = Width / _scale;
+            Map.Viewport.Height = Height / _scale;
+
+            base.OnSizeChanged(w, h, oldw, oldh);
+        }
+
+        private void CanvasOnPaintSurface(object sender, SKPaintSurfaceEventArgs args)
+        {
+            if (!_viewportInitialized)
+                InitializeViewport();
+            if (!_viewportInitialized)
+                return;
+
+            args.Surface.Canvas.Scale(_scale, _scale);
+
+            _renderer.Render(args.Surface.Canvas, _map.Viewport, _map.Layers, _map.BackColor);
+        }
+
         private void InitializeViewport()
         {
-            if (ViewportHelper.TryInitializeViewport(_map, Width, Height))
+            if (ViewportHelper.TryInitializeViewport(_map, Width / _scale, Height / _scale))
             {
                 _viewportInitialized = true;
                 Map.ViewChanged(true);
@@ -80,7 +111,7 @@ namespace Mapsui.UI.Android
                     Invalidate();
                     _mode = None;
                     _map.ViewChanged(true);
-                    Map.InvokeInfo(GetPosition(args.Event).ToMapsui());
+                    Map.InvokeInfo(GetPosition(args.Event).ToMapsui(), _renderer.SymbolCache);
                     break;
                 case MotionEventActions.Pointer2Down:
                     _previousMap = null;
@@ -102,10 +133,10 @@ namespace Mapsui.UI.Android
                             if (_previousMap != null)
                             {
                                 _map.Viewport.Transform(
-                                    _currentMap.X,
-                                    _currentMap.Y,
-                                    _previousMap.X,
-                                    _previousMap.Y);
+                                    _currentMap.X  / _scale,
+                                    _currentMap.Y / _scale,
+                                    _previousMap.X / _scale,
+                                    _previousMap.Y / _scale);
                                 Invalidate();
                             }
                             _previousMap = _currentMap;
@@ -121,18 +152,13 @@ namespace Mapsui.UI.Android
                                 _oldDist = Spacing(args.Event);
                                 _previousMid = new PointF(_currentMid.X, _currentMid.Y);
                                 MidPoint(_currentMid, args.Event);
-                                _map.Viewport.Center = _map.Viewport.ScreenToWorld(
-                                    _currentMid.X,
-                                    _currentMid.Y);
-                                _map.Viewport.Resolution = _map.Viewport.Resolution / scale;
-                                _map.Viewport.Center = _map.Viewport.ScreenToWorld(
-                                    (_map.Viewport.Width - _currentMid.X),
-                                    (_map.Viewport.Height - _currentMid.Y));
+
                                 _map.Viewport.Transform(
-                                    _currentMid.X,
-                                    _currentMid.Y,
-                                    _previousMid.X,
-                                    _previousMid.Y);
+                                    _currentMid.X / _scale,
+                                    _currentMid.Y / _scale,
+                                    _previousMid.X / _scale,
+                                    _previousMid.Y / _scale,
+                                    scale);
                                 Invalidate();
                             }
                             break;
@@ -183,6 +209,7 @@ namespace Mapsui.UI.Android
                     temp.PropertyChanged -= MapPropertyChanged;
                     temp.RefreshGraphics -= MapRefreshGraphics;
                     temp.Dispose();
+                    _attributionPanel.Clear();
                 }
 
                 _map = value;
@@ -193,6 +220,7 @@ namespace Mapsui.UI.Android
                     _map.PropertyChanged += MapPropertyChanged;
                     _map.RefreshGraphics += MapRefreshGraphics;
                     _map.ViewChanged(true);
+                    _attributionPanel.Populate(Map.Layers);
                 }
 
                 RefreshGraphics();
@@ -216,7 +244,7 @@ namespace Mapsui.UI.Android
             }
             else if (e.PropertyName == nameof(Map.Layers))
             {
-                //todo: _attributionPanel.Populate(Map.Layers);
+                _attributionPanel.Populate(Map.Layers);
             }
         }
 
@@ -225,7 +253,7 @@ namespace Mapsui.UI.Android
             if (e.Cancelled || e.Error != null)
             {
                 // todo: test code below:
-                // ((Activity)Context).RunOnUiThread(new Runnable(Toast.MakeText(Context, GetErrorMessage(e), ToastLength.Short).Show));
+                ((Activity)Context).RunOnUiThread(new Runnable(Toast.MakeText(Context, e.Error.Message, ToastLength.Short).Show));
             }
             else // no problems
             {
@@ -238,16 +266,32 @@ namespace Mapsui.UI.Android
             PostInvalidate();
         }
 
-        protected override void OnDraw(SKSurface surface, SKImageInfo info)
+        protected override void OnLayout(bool changed, int l, int t, int r, int b)
         {
-            base.OnDraw(surface, info);
+            Position(_canvas, l, t, r, b);
+            UpdateSize(_attributionPanel);
+            PositionBottomRight(_attributionPanel);
+        }
 
-            if (!_viewportInitialized)
-                InitializeViewport();
-            if (!_viewportInitialized)
-                return;
+        private void Position(View view, int l, int t, int r, int b)
+        {
+            view.Top = t;
+            view.Bottom = b;
+            view.Left = l;
+            view.Right = r;
+        }
 
-            _renderer.Render(surface.Canvas, _map.Viewport, _map.Layers, _map.BackColor);
+        private void PositionBottomRight(View view)
+        {
+            Position(view, Right - view.Width, Bottom - view.Height, Right, Bottom);
+        }
+
+        private static void UpdateSize(View view)
+        {
+            // I created this method because I don't understand what I'm doing
+            view.Measure(0, 0);
+            view.Right = view.Left + view.MeasuredWidth;
+            view.Bottom = view.Top + view.MeasuredHeight;
         }
     }
 }

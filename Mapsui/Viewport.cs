@@ -18,12 +18,14 @@
 using System;
 using Mapsui.Geometries;
 using Mapsui.Utilities;
+using System.Runtime.CompilerServices;
+using System.ComponentModel;
 
 namespace Mapsui
 {
     public class Viewport : IViewport
     {
-        public event EventHandler ViewportChanged;
+        public event PropertyChangedEventHandler ViewportChanged;
 
         private readonly BoundingBox _extent;
         private Quad _windowExtent;
@@ -39,7 +41,7 @@ namespace Mapsui
             RenderResolutionMultiplier = 1;
             _extent = new BoundingBox(0, 0, 0, 0);
             _windowExtent = new Quad();
-            _center.PropertyChanged += (sender, args) => OnViewportChanged();
+			_center.PropertyChanged += (sender, args) => OnViewportChanged(nameof(Center));
         }
         
         public Viewport(Viewport viewport) : this()
@@ -57,10 +59,10 @@ namespace Mapsui
             RenderResolutionMultiplier = viewport.RenderResolutionMultiplier;
         }
 
-        private void OnViewportChanged()
+        private void OnViewportChanged([CallerMemberName] string propertyName = null)
         {
             _modified = true;
-            ViewportChanged?.Invoke(this, new EventArgs());
+            ViewportChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         public double RenderResolutionMultiplier { get; set; }
@@ -203,8 +205,8 @@ namespace Mapsui
             var previous = ScreenToWorld(previousScreenX, previousScreenY);
             var current = ScreenToWorld(screenX, screenY);
 
-            var newX = Center.X + previous.X - current.X;
-            var newY = Center.Y + previous.Y - current.Y;
+            var newX = _center.X + previous.X - current.X;
+            var newY = _center.Y + previous.Y - current.Y;
 
             Resolution = Resolution / deltaScale;
 
@@ -213,9 +215,8 @@ namespace Mapsui
             var scaleCorrectionX = (1 - deltaScale) * (current.X - Center.X);
             var scaleCorrectionY = (1 - deltaScale) * (current.Y - Center.Y);
             
-            Center.X = newX - scaleCorrectionX;
-            Center.Y = newY - scaleCorrectionY;
-            OnViewportChanged();
+            _center.X = newX - scaleCorrectionX;
+            _center.Y = newY - scaleCorrectionY;
         }
 
         private void UpdateExtent()

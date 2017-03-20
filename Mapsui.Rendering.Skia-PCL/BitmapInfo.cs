@@ -3,9 +3,11 @@
 namespace Mapsui.Rendering.Skia
 {
     // ReSharper disable once InconsistentNaming
-    public class SKBitmapInfo 
+    public class BitmapInfo 
     {
         public SKBitmap Bitmap { get; set; }
         public long IterationUsed { get; set; }
+        public int Width => Bitmap.Width;
+        public int Height => Bitmap.Height;
     }
 }

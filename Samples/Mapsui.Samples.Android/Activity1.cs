@@ -1,16 +1,17 @@
-﻿using System;
-using Android.App;
+﻿using Android.App;
 using Android.Content.PM;
 using Android.OS;
-using Android.Widget;
-using Java.Lang;
 using Mapsui.Samples.Common.Maps;
-using Mapsui.UI;
 using Mapsui.UI.Android;
 
 namespace Mapsui.Samples.Android
 {
-    [Activity(Label = "Mapsui.Samples.Android", MainLauncher = true, Icon = "@drawable/icon", ScreenOrientation = ScreenOrientation.Nosensor)]
+    [Activity(
+        Label = "Mapsui.Samples.Android", 
+        MainLauncher = true, 
+        Icon = "@drawable/icon", 
+        ScreenOrientation = ScreenOrientation.Sensor, 
+        ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class Activity1 : Activity
     {
         protected override void OnCreate(Bundle bundle)

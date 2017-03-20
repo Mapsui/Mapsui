@@ -77,7 +77,7 @@ namespace Mapsui.Styles
         {
             if (!(obj is SymbolStyle))
                 return false;
-            return Equals((SymbolStyle) obj);
+            return Equals((SymbolStyle)obj);
         }
 
         public bool Equals(SymbolStyle symbolStyle)

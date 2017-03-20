@@ -8,8 +8,8 @@ namespace Mapsui.Rendering.Skia
 {
     public static class LabelRenderer
     {
-        private static readonly IDictionary<string, SKBitmapInfo> LabelBitmapCache =
-            new Dictionary<string, SKBitmapInfo>();
+        private static readonly IDictionary<string, BitmapInfo> LabelCache =
+            new Dictionary<string, BitmapInfo>();
 
         public static void DrawAsBitmap(SKCanvas canvas, LabelStyle style, IFeature feature, float x, float y)
         {
@@ -18,12 +18,12 @@ namespace Mapsui.Rendering.Skia
             var key = text + "_" + style.Font.FontFamily + "_" + style.Font.Size + "_" + (float)style.Font.Size + "_" +
                       style.BackColor + "_" + style.ForeColor;
 
-            if (!LabelBitmapCache.Keys.Contains(key))
-                LabelBitmapCache[key] = new SKBitmapInfo { Bitmap = CreateLabelAsBitmap(style, text) };
+            if (!LabelCache.Keys.Contains(key))
+                LabelCache[key] = new BitmapInfo { Bitmap = CreateLabelAsBitmap(style, text) };
 
-            var info = LabelBitmapCache[key];
+            var info = LabelCache[key];
 
-            BitmapHelper.RenderTexture(canvas, info.Bitmap, (int)Math.Round(x), (int)Math.Round(y),
+            BitmapHelper.RenderBitmap(canvas, info.Bitmap, (int)Math.Round(x), (int)Math.Round(y),
                 offsetX: (float)style.Offset.X, offsetY: (float)-style.Offset.Y,
                 horizontalAlignment: style.HorizontalAlignment, verticalAlignment: style.VerticalAlignment);
         }
@@ -96,11 +96,11 @@ namespace Mapsui.Rendering.Skia
             throw new ArgumentException(); 
         }
 
-        private static float CalcVerticalAlignment(LabelStyle.VerticalAlignmentEnum VerticalAligment)
+        private static float CalcVerticalAlignment(LabelStyle.VerticalAlignmentEnum verticalAligment)
         {
-            if (VerticalAligment == LabelStyle.VerticalAlignmentEnum.Center) return 0.5f;
-            if (VerticalAligment == LabelStyle.VerticalAlignmentEnum.Top) return 0f;
-            if (VerticalAligment == LabelStyle.VerticalAlignmentEnum.Bottom) return 1f;
+            if (verticalAligment == LabelStyle.VerticalAlignmentEnum.Center) return 0.5f;
+            if (verticalAligment == LabelStyle.VerticalAlignmentEnum.Top) return 0f;
+            if (verticalAligment == LabelStyle.VerticalAlignmentEnum.Bottom) return 1f;
             throw new ArgumentException();
         }
 

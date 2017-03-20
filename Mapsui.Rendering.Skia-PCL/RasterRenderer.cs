@@ -11,28 +11,28 @@ namespace Mapsui.Rendering.Skia
     public static class RasterRenderer
     {
         public static void Draw(SKCanvas canvas, IViewport viewport, IStyle style, IFeature feature,
-            IDictionary<object, SKBitmapInfo> skBitmapCache, long currentIteration)
+            IDictionary<object, BitmapInfo> tileCache, long currentIteration)
         {
             try
             {
                 var raster = (IRaster)feature.Geometry;
 
-                SKBitmapInfo textureInfo;
+                BitmapInfo bitmapInfo;
 
-                if (!skBitmapCache.Keys.Contains(raster))
+                if (!tileCache.Keys.Contains(raster))
                 {
-                    textureInfo = BitmapHelper.LoadTexture(raster.Data);
-                    skBitmapCache[raster] = textureInfo;
+                    bitmapInfo = BitmapHelper.LoadBitmap(raster.Data);
+                    tileCache[raster] = bitmapInfo;
                 }
                 else
                 {
-                    textureInfo = skBitmapCache[raster];
+                    bitmapInfo = tileCache[raster];
                 }
 
-                textureInfo.IterationUsed = currentIteration;
-                skBitmapCache[raster] = textureInfo;
+                bitmapInfo.IterationUsed = currentIteration;
+                tileCache[raster] = bitmapInfo;
                 var destination = WorldToScreen(viewport, feature.Geometry.GetBoundingBox());
-                BitmapHelper.RenderRaster(canvas, textureInfo.Bitmap, RoundToPixel(destination).ToSkia());
+                BitmapHelper.RenderRaster(canvas, bitmapInfo.Bitmap, RoundToPixel(destination).ToSkia());
             }
             catch (Exception ex)
             {

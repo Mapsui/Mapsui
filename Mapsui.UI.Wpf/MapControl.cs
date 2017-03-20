@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using System.Net;
 using System.Windows;
 using System.Windows.Controls;
@@ -443,7 +442,7 @@ namespace Mapsui.UI.Wpf
             else
             {
                 HandleFeatureInfo(e);
-                Map.InvokeInfo(e.GetPosition(this).ToMapsui());
+                Map.InvokeInfo(e.GetPosition(this).ToMapsui(), Renderer.SymbolCache);
             }
 
             _map.ViewChanged(true);
@@ -501,7 +500,7 @@ namespace Mapsui.UI.Wpf
 
         private void RaiseHoverInfoEvents(Point mousePosition)
         {
-            var hoverInfoEventArgs = InfoHelper.GetInfoEventArgs(Map, mousePosition.ToMapsui(), Map.HoverInfoLayers);
+            var hoverInfoEventArgs = InfoHelper.GetInfoEventArgs(Map, mousePosition.ToMapsui(), Map.HoverInfoLayers, Renderer.SymbolCache);
 
             if (HasChanged(_previousHoverInfoEventArgs, hoverInfoEventArgs))
             {

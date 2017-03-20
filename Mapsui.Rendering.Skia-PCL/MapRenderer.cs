@@ -14,12 +14,14 @@ namespace Mapsui.Rendering.Skia
     public class MapRenderer : IRenderer
     {
         private const int TilesToKeepMultiplier = 3;
-        private readonly IDictionary<int, SKBitmapInfo> _symbolTextureCache = new Dictionary<int, SKBitmapInfo>();
+        private readonly SymbolCache _symbolCache = new SymbolCache();
 
-        private readonly IDictionary<object, SKBitmapInfo> _tileTextureCache =
-            new Dictionary<object, SKBitmapInfo>(new IdentityComparer<object>());
+        private readonly IDictionary<object, BitmapInfo> _tileCache =
+            new Dictionary<object, BitmapInfo>(new IdentityComparer<object>());
 
         private long _currentIteration;
+
+        public ISymbolCache SymbolCache => _symbolCache;
 
         static MapRenderer()
         {
@@ -81,32 +83,12 @@ namespace Mapsui.Rendering.Skia
             _currentIteration++;
         }
 
-        public void DeleteAllBoundTextures()
-        {
-            DeleteAllTileTextures();
-            DeleteAllSymbolTextures();
-        }
-
-        private void DeleteAllSymbolTextures()
-        {
-            foreach (var key in _symbolTextureCache.Keys)
-                _symbolTextureCache[key].Bitmap.Dispose();
-            _symbolTextureCache.Clear();
-        }
-
-        private void DeleteAllTileTextures()
-        {
-            foreach (var key in _tileTextureCache.Keys)
-                _tileTextureCache[key].Bitmap.Dispose();
-            _tileTextureCache.Clear();
-        }
-
         private void RemoveUnusedTextureInfos()
         {
             var numberOfTilesUsedInCurrentIteration =
-                _tileTextureCache.Values.Count(i => i.IterationUsed == _currentIteration);
+                _tileCache.Values.Count(i => i.IterationUsed == _currentIteration);
 
-            var orderedKeys = _tileTextureCache.OrderBy(kvp => kvp.Value.IterationUsed).Select(kvp => kvp.Key).ToList();
+            var orderedKeys = _tileCache.OrderBy(kvp => kvp.Value.IterationUsed).Select(kvp => kvp.Key).ToList();
 
             var counter = 0;
             var tilesToKeep = orderedKeys.Count*TilesToKeepMultiplier;
@@ -115,8 +97,8 @@ namespace Mapsui.Rendering.Skia
             {
                 if (counter > numberToRemove)
                     break;
-                var textureInfo = _tileTextureCache[key];
-                _tileTextureCache.Remove(key);
+                var textureInfo = _tileCache[key];
+                _tileCache.Remove(key);
                 textureInfo.Bitmap.Dispose();
                 counter++;
             }
@@ -124,20 +106,20 @@ namespace Mapsui.Rendering.Skia
 
         private void SetAllTextureInfosToUnused()
         {
-            foreach (var key in _tileTextureCache.Keys.ToList())
+            foreach (var key in _tileCache.Keys.ToList())
             {
-                var textureInfo = _tileTextureCache[key];
+                var textureInfo = _tileCache[key];
                 textureInfo.IterationUsed = _currentIteration;
-                _tileTextureCache[key] = textureInfo;
+                _tileCache[key] = textureInfo;
             }
         }
 
         private void RenderFeature(SKCanvas canvas, IViewport viewport, IStyle style, IFeature feature)
         {
             if (feature.Geometry is Point)
-                PointRenderer.Draw(canvas, viewport, style, feature, feature.Geometry, _symbolTextureCache);
+                PointRenderer.Draw(canvas, viewport, style, feature, feature.Geometry, _symbolCache);
             else if (feature.Geometry is MultiPoint)
-                MultiPointRenderer.Draw(canvas, viewport, style, feature, feature.Geometry, _symbolTextureCache);
+                MultiPointRenderer.Draw(canvas, viewport, style, feature, feature.Geometry, _symbolCache);
             else if (feature.Geometry is LineString)
                 LineStringRenderer.Draw(canvas, viewport, style, feature, feature.Geometry);
             else if (feature.Geometry is MultiLineString)
@@ -147,7 +129,7 @@ namespace Mapsui.Rendering.Skia
             else if (feature.Geometry is MultiPolygon)
                 MultiPolygonRenderer.Draw(canvas, viewport, style, feature, feature.Geometry);
             else if (feature.Geometry is IRaster)
-                RasterRenderer.Draw(canvas, viewport, style, feature, _tileTextureCache, _currentIteration);
+                RasterRenderer.Draw(canvas, viewport, style, feature, _tileCache, _currentIteration);
         }
     }
 
