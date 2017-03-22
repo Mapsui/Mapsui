@@ -2,6 +2,7 @@
 using System.Linq;
 using Mapsui.Geometries;
 using Mapsui.Layers;
+using Mapsui.Logging;
 using Mapsui.Providers;
 using Mapsui.Rendering;
 using Mapsui.Styles;
@@ -32,7 +33,7 @@ namespace Mapsui.UI
                 var allFeatures = layer.GetFeaturesInView(layer.Envelope, resolution);
                 
                 var features = allFeatures.Where(f => 
-                    IsTouchingTakingIntoAccountSymbolStyles(point, f, layer.Style, resolution)).ToList();
+                    IsTouchingTakingIntoAccountSymbolStyles(point, f, layer.Style, resolution, symbolCache)).ToList();
 
                 var feature = features.OrderBy(f => f.Geometry.GetBoundingBox().GetCentroid().Distance(point))
                     .FirstOrDefault();
@@ -46,20 +47,35 @@ namespace Mapsui.UI
         }
 
         private static bool IsTouchingTakingIntoAccountSymbolStyles(
-            Point point, IFeature feature, IStyle layerStyle, double resolution)
+            Point point, IFeature feature, IStyle layerStyle, double resolution, ISymbolCache symbolCache)
         {
             if (feature.Geometry is Point)
             {
-                var scale = 1.0;
-                var style = layerStyle as SymbolStyle;
-                if (style != null)
-                {
-                    scale = style.SymbolScale;
-                }
-                var marginX = SymbolStyle.DefaultWidth * 0.5 * resolution * scale;
-                var marginY = SymbolStyle.DefaultHeight * 0.5 * resolution * scale;
+                var styles = new List<IStyle>();
+                if (layerStyle != null) styles.Add(layerStyle);
+                styles.AddRange(feature.Styles);
 
-                return feature.Geometry.Touches(point, marginX, marginY);
+                foreach (var style in styles)
+                {
+                    var symbolStyle = style as SymbolStyle;
+
+                    if (symbolStyle == null)
+                    {
+                        Logger.Log(LogLevel.Warning, $"Feature info no supported for {style.GetType()}");
+                        continue; //todo: add support for other types
+                    }
+
+                    var scale = symbolStyle.SymbolScale;
+
+                    var size = symbolStyle.BitmapId >= 0
+                        ? symbolCache.GetSize(symbolStyle.BitmapId)
+                        : new Size(SymbolStyle.DefaultWidth, SymbolStyle.DefaultHeight);
+                    
+                    var marginX = size.Width * 0.5 * resolution * scale;
+                    var marginY = size.Height * 0.5 * resolution * scale;
+             
+                    if (feature.Geometry.Touches(point, marginX, marginY)) return true;
+                }
             }
             return feature.Geometry.Touches(point);
         }

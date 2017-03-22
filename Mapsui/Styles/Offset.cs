@@ -4,6 +4,12 @@ namespace Mapsui.Styles
     {
         public Offset() {}
 
+        public Offset(double x, double y)
+        {
+            X = x;
+            Y = y;
+        }
+
         public Offset(Offset offset)
         {
             X = offset.X;
