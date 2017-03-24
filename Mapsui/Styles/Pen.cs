@@ -12,7 +12,7 @@ namespace Mapsui.Styles
             Width = width;
         }
 
-        public double Width { get; set; }
+        public double Width { get; set; } = 1;
         public Color Color { get; set; }
 
         public PenStyle PenStyle
