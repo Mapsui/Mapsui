@@ -48,8 +48,9 @@ namespace Mapsui.Rendering.Skia
             Point destination, SymbolType symbolType = SymbolType.Ellipse)
         {
             canvas.Save();
-            canvas.Translate((float)destination.X,(float)destination.Y);
+            canvas.Translate((float)destination.X, (float)destination.Y);
             canvas.Scale((float)style.SymbolScale, (float)style.SymbolScale);
+            canvas.Translate((float) style.SymbolOffset.X, (float) -style.SymbolOffset.Y);
             DrawPointWithVectorStyle(canvas, style, symbolType);
             canvas.Restore();
         }
