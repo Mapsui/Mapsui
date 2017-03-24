@@ -19,6 +19,7 @@ namespace Mapsui.Samples.Common
                 ["Center on location"] = () => CenterOnLocationSample.CreateMap(),
                 ["Projected point"] = () => ProjectionSample.CreateMap(),
                 ["Stacked labels"] = () => StackedLabelsSample.CreateMap(),
+                ["Symbols"] = () => SymbolsSample.CreateMap(),
                 ["Info"] = () => InfoLayersSample.CreateMap(),
                 ["Animated point movement"] = () => AnimatedPointsSample.CreateMap(),
                 ["TileSources: WMTS"] = () => WmtsSample.CreateMap(),
