@@ -70,14 +70,18 @@ namespace Mapsui.UI
                     var size = symbolStyle.BitmapId >= 0
                         ? symbolCache.GetSize(symbolStyle.BitmapId)
                         : new Size(SymbolStyle.DefaultWidth, SymbolStyle.DefaultHeight);
-                    
-                    var marginX = size.Width * 0.5 * resolution * scale;
-                    var marginY = size.Height * 0.5 * resolution * scale;
-             
-                    if (feature.Geometry.Touches(point, marginX, marginY)) return true;
+
+                    var factor = resolution * scale;
+                    var marginX = size.Width * 0.5 * factor;
+                    var marginY = size.Height * 0.5 * factor;
+
+                    var box = feature.Geometry.GetBoundingBox();
+                    box = box.Grow(marginX, marginY);
+                    box.Offset(symbolStyle.SymbolOffset.X * factor, symbolStyle.SymbolOffset.Y * factor);
+                    if (box.Contains(point)) return true;
                 }
             }
-            return feature.Geometry.Touches(point);
+            return feature.Geometry.Contains(point);
         }
     }
 }

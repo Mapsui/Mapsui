@@ -162,19 +162,7 @@ namespace Mapsui.Geometries
         {
             return AsBinary().GetHashCode();
         }
-
-        public bool Touches(Point point, double marginX = 0, double marginY = 0)
-        {
-            var box = GetBoundingBox();
-            if (this is Point)
-            {
-                box = box.Grow(marginX, marginY);
-                return box.Contains(point);
-            }
-            if (!box.Contains(point)) return false; // First do a check on the box for performance
-            return Contains(point);
-        }
-
+        
         public abstract bool Contains(Point point);
     }
 }
