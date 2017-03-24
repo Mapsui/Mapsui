@@ -70,20 +70,9 @@ namespace Mapsui.Rendering.Skia
             var halfWidth = (float)SymbolStyle.DefaultWidth / 2;
             var halfHeight = (float)SymbolStyle.DefaultHeight / 2;
 
-            var fillPaint = new SKPaint
-            {
-                Color = vectorStyle.Fill.Color.ToSkia(),
-                Style = SKPaintStyle.Fill,
-                IsAntialias = true
-            };
+            var fillPaint = CreateFillPaint(vectorStyle.Fill);
 
-            var linePaint = (vectorStyle.Outline == null) ? null : new SKPaint
-            {
-                Color = vectorStyle.Outline.Color.ToSkia(),
-                StrokeWidth = (float) vectorStyle.Outline.Width,
-                Style = SKPaintStyle.Stroke,
-                IsAntialias = true
-            };
+            var linePaint = CreateLinePaint(vectorStyle.Outline);
 
             if (symbolType == SymbolType.Rectangle)
             {
@@ -96,12 +85,37 @@ namespace Mapsui.Rendering.Skia
                 DrawCircle(canvas, 0, 0, halfWidth, fillPaint, linePaint);
             }
         }
-        
+
+        private static SKPaint CreateLinePaint(Pen outline)
+        {
+            if (outline == null) return null;
+
+            return new SKPaint
+            {
+                Color = outline.Color.ToSkia(),
+                StrokeWidth = (float) outline.Width,
+                Style = SKPaintStyle.Stroke,
+                IsAntialias = true
+            };
+        }
+
+        private static SKPaint CreateFillPaint(Brush fill)
+        {
+            if (fill == null) return null;
+
+            return new SKPaint
+            {
+                Color = fill.Color.ToSkia(),
+                Style = SKPaintStyle.Fill,
+                IsAntialias = true
+            };
+        }
+
         private static void DrawCircle(SKCanvas canvas, float x, float y, float radius, SKPaint fillColor,
             SKPaint lineColor)
         {
-            if ((fillColor != null) && fillColor.Color.Alpha != 0) canvas.DrawCircle(x, y, radius, fillColor);
-            if ((lineColor != null) && lineColor.Color.Alpha != 0) canvas.DrawCircle(x, y, radius, lineColor);
+            if (fillColor != null && fillColor.Color.Alpha != 0) canvas.DrawCircle(x, y, radius, fillColor);
+            if (lineColor != null && lineColor.Color.Alpha != 0) canvas.DrawCircle(x, y, radius, lineColor);
         }
 
         private static void DrawRect(SKCanvas canvas, SKRect rect, SKPaint fillColor, SKPaint lineColor)
