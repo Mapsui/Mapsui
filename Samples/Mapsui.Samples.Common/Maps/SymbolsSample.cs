@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Mapsui.Geometries;
@@ -27,8 +26,9 @@ namespace Mapsui.Samples.Common.Maps
 
         private static ILayer CreateStylesLayer(BoundingBox envelope)
         {
-            return new Layer(StylesLayerName)
+            return new MemoryLayer
             {
+                Name = StylesLayerName,
                 DataSource = CreateMemoryProviderWithDiverseSymbols(envelope, 25),
                 Style = null
             };
