@@ -61,7 +61,7 @@ namespace Mapsui.UI
 
                     if (symbolStyle == null)
                     {
-                        Logger.Log(LogLevel.Warning, $"Feature info no supported for {style.GetType()}");
+                        Logger.Log(LogLevel.Warning, $"Feature info not supported for {style.GetType()}");
                         continue; //todo: add support for other types
                     }
 
