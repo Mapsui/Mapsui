@@ -38,7 +38,6 @@ namespace Mapsui
 
         public Viewport()
         {
-            RenderResolutionMultiplier = 1;
             _extent = new BoundingBox(0, 0, 0, 0);
             _windowExtent = new Quad();
 			_center.PropertyChanged += (sender, args) => OnViewportChanged(nameof(Center));
@@ -56,7 +55,6 @@ namespace Mapsui
             if (viewport.WindowExtent != null) _windowExtent = new Quad(
                 viewport.WindowExtent.BottomLeft, viewport.WindowExtent.TopLeft,
                 viewport.WindowExtent.TopRight, viewport.WindowExtent.BottomRight);
-            RenderResolutionMultiplier = viewport.RenderResolutionMultiplier;
         }
 
         private void OnViewportChanged([CallerMemberName] string propertyName = null)
@@ -64,10 +62,6 @@ namespace Mapsui
             _modified = true;
             ViewportChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
-        public double RenderResolutionMultiplier { get; set; }
-
-        public double RenderResolution => Resolution * RenderResolutionMultiplier;
 
         public Point Center
         {

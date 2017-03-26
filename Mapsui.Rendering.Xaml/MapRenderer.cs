@@ -119,7 +119,7 @@ namespace Mapsui.Rendering.Xaml
 
             try
             {
-                var features = layer.GetFeaturesInView(viewport.Extent, viewport.RenderResolution).ToList();
+                var features = layer.GetFeaturesInView(viewport.Extent, viewport.Resolution).ToList();
                 var layerStyles = BaseLayer.GetLayerStyles(layer);
                 
                 foreach (var layerStyle in layerStyles)

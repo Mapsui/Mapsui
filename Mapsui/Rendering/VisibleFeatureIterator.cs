@@ -16,8 +16,8 @@ namespace Mapsui.Rendering
             foreach (var layer in layers)
             {
                 if (layer.Enabled == false) continue;
-                if (layer.MinVisible > viewport.RenderResolution) continue;
-                if (layer.MaxVisible < viewport.RenderResolution) continue;
+                if (layer.MinVisible > viewport.Resolution) continue;
+                if (layer.MaxVisible < viewport.Resolution) continue;
 
                 IterateLayer(viewport, layer, callback);
             }
@@ -26,7 +26,7 @@ namespace Mapsui.Rendering
         private static void IterateLayer(IViewport viewport, ILayer layer,
             Action<IViewport, IStyle, IFeature> callback)
         {
-            var features = layer.GetFeaturesInView(viewport.Extent, viewport.RenderResolution).ToList();
+            var features = layer.GetFeaturesInView(viewport.Extent, viewport.Resolution).ToList();
 
             var layerStyles = layer.Style is StyleCollection ? (layer.Style as StyleCollection).ToArray() : new [] {layer.Style};
             foreach (var layerStyle in layerStyles)
@@ -36,7 +36,7 @@ namespace Mapsui.Rendering
                 foreach (var feature in features)
                 {
                     if (layerStyle is IThemeStyle) style = (layerStyle as IThemeStyle).GetStyle(feature);
-                    if ((style == null) || (style.Enabled == false) || (style.MinVisible > viewport.RenderResolution) || (style.MaxVisible < viewport.RenderResolution)) continue;
+                    if ((style == null) || (style.Enabled == false) || (style.MinVisible > viewport.Resolution) || (style.MaxVisible < viewport.Resolution)) continue;
 
                     callback(viewport, style, feature);
                 }

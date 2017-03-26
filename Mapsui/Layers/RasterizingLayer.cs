@@ -158,7 +158,7 @@ namespace Mapsui.Layers
             if (!_onlyRerasterizeIfOutsideOverscan ||
                 (_currentViewport == null) ||
                 // ReSharper disable once CompareOfFloatsByEqualityOperator
-                (_currentViewport.RenderResolution != newViewport.Resolution) ||
+                (_currentViewport.Resolution != newViewport.Resolution) ||
                 !_currentViewport.Extent.Contains(newViewport.Extent))
             {
                 _extent = extent;
