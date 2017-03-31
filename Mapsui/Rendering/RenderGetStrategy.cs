@@ -46,7 +46,10 @@ namespace Mapsui.Rendering
             {
                 var feature = cache.Find(tileInfo.Index);
 
-                if (feature == null)
+                // Geometry can be null for some tile sources to indicate the tile is not present.
+                // It is stored in the tile cache to prevent retries. It should not be returned to the 
+                // renderer.
+                if (feature?.Geometry == null)
                 {
                     // only continue the recursive search if this tile is within the extent
                     if (tileInfo.Extent.Intersects(extent))
