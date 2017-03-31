@@ -10,9 +10,7 @@ namespace Mapsui.Samples.Common.Maps
         public static Map CreateMap()
         {
             var map = new Map();
-            map.Layers.Add(PointsSample.CreateRandomPointLayer(new GlobalSphericalMercator().Extent.ToBoundingBox()));
-
-            const string path = @".\MbTiles\torrejon-de-ardoz.mbtiles";
+            const string path = @".\MbTiles\test.mbtiles";
             var mbTilesTileSource = new MbTilesTileSource(new SQLiteConnectionString(path, true));
             map.Layers.Add(new TileLayer(mbTilesTileSource));
             return map;
