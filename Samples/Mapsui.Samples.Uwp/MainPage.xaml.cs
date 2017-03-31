@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Mapsui.UI;
 using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Uwp
@@ -19,6 +20,12 @@ namespace Mapsui.Samples.Uwp
             FillComboBoxWithDemoSamples();
 
             SampleSet.SelectionChanged += SampleSet_SelectionChanged;
+        }
+
+        private void MapOnInfo(object sender, MouseInfoEventArgs mouseInfoEventArgs)
+        {
+            if (mouseInfoEventArgs.Feature != null)
+                FeatureInfo.Text = $"Click Info:{Environment.NewLine}{mouseInfoEventArgs.Feature.ToDisplayText()}";
         }
 
         private void FillComboBoxWithDemoSamples()
@@ -87,6 +94,7 @@ namespace Mapsui.Samples.Uwp
             {
                 MapControl.Map.Layers.Clear();
                 MapControl.Map = sample.Value();
+                MapControl.Map.Info += MapOnInfo;
                 MapControl.Refresh();
             };
 
