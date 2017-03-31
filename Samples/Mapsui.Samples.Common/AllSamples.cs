@@ -10,7 +10,6 @@ namespace Mapsui.Samples.Common
         {
             return new Dictionary<string, Func<Map>>
             {
-                ["MbTiles"] =() => MbTilesSample.CreateMap(),
                 ["OpenStreetMap"] = () => OsmSample.CreateMap(),
                 ["Simple Points"] = () => PointsSample.CreateMap(),
                 ["Simple LineStrings"] = () => LineStringSample.CreateMap(),
@@ -22,6 +21,7 @@ namespace Mapsui.Samples.Common
                 ["Stacked labels"] = () => StackedLabelsSample.CreateMap(),
                 ["Symbols"] = () => SymbolsSample.CreateMap(),
                 ["Info"] = () => InfoLayersSample.CreateMap(),
+                ["MbTiles"] = () => MbTilesSample.CreateMap(),
                 ["Animated point movement"] = () => AnimatedPointsSample.CreateMap(),
                 ["TileSources: WMTS"] = () => WmtsSample.CreateMap(),
                 ["TileSources: Bing maps"] = () => BingSample.CreateMap(),

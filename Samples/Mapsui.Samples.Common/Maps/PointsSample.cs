@@ -52,7 +52,7 @@ namespace Mapsui.Samples.Common.Maps
             return features;
         }
 
-        private static ILayer CreateRandomPointLayer(BoundingBox envelope, int count = 25, IStyle style = null)
+        public static ILayer CreateRandomPointLayer(BoundingBox envelope, int count = 25, IStyle style = null)
         {
             return new Layer
             {

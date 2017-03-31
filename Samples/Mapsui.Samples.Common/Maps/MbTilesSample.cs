@@ -10,7 +10,8 @@ namespace Mapsui.Samples.Common.Maps
         public static Map CreateMap()
         {
             var map = new Map();
-            map.Layers.Add(new TileLayer(KnownTileSources.Create(KnownTileSource.BingAerial)) { Name = "Bing Aerial" });
+            map.Layers.Add(PointsSample.CreateRandomPointLayer(new GlobalSphericalMercator().Extent.ToBoundingBox()));
+
             const string path = @".\MbTiles\torrejon-de-ardoz.mbtiles";
             var mbTilesTileSource = new MbTilesTileSource(new SQLiteConnectionString(path, true));
             map.Layers.Add(new TileLayer(mbTilesTileSource));
