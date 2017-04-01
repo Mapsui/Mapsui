@@ -17,30 +17,30 @@
     <dependencies>
       <!-- [ or ] is including, ( or ) is excluding -->
       <group>
-        <dependency id="BruTile" version="[0.20,0.21)"/>
+        <dependency id="BruTile" version="[0.21,0.22)"/>
         <dependency id="Newtonsoft.json" version="[9.0,10.0)"/>
         <dependency id="SkiaSharp" version="[1.56.0,1.57)"/>
       </group>
       <group targetFramework="net45">
-        <dependency id="BruTile" version="[0.20,0.21)"/>
+        <dependency id="BruTile" version="[0.21,0.22)"/>
         <dependency id="Newtonsoft.json" version="[9.0,10.0)"/>
         <dependency id="SkiaSharp" version="[1.56.0,1.57)"/>
         <dependency id="SkiaSharp.Views" version="[1.56.0,1.57)"/>
       </group>
       <group targetFramework="uap">
-        <dependency id="BruTile" version="[0.20,0.21)"/>
+        <dependency id="BruTile" version="[0.21,0.22)"/>
         <dependency id="Newtonsoft.json" version="[9.0,10.0)"/>
         <dependency id="SkiaSharp" version="[1.56.0,1.57)"/>
         <dependency id="SkiaSharp.Views" version="[1.56.0,1.57)"/>
       </group>
       <group targetFramework="MonoAndroid">
-        <dependency id="BruTile" version="[0.20,0.21)"/>
+        <dependency id="BruTile" version="[0.21,0.22)"/>
         <dependency id="Newtonsoft.json" version="[9.0,10.0)"/>
         <dependency id="SkiaSharp" version="[1.56.0,1.57)"/>
         <dependency id="SkiaSharp.Views" version="[1.56.0,1.57)"/>
       </group>
       <group targetFramework="Xamarin.iOS">
-        <dependency id="BruTile" version="[0.20,0.21)"/>
+        <dependency id="BruTile" version="[0.21,0.22)"/>
         <dependency id="Newtonsoft.json" version="[9.0,10.0)"/>
         <dependency id="SkiaSharp" version="[1.56.0,1.57)"/>
         <dependency id="SkiaSharp.Views" version="[1.56.0,1.57)"/>
