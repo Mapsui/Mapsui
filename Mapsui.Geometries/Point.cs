@@ -342,5 +342,12 @@ namespace Mapsui.Geometries
         {
             return false;
         }
+        
+        public override bool Equals(Geometry geom)
+        {
+            var point = geom as Point;
+            if (point == null) return false;
+            return Equals(point);
+        }
     }
 }

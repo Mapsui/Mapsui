@@ -203,5 +203,12 @@ namespace Mapsui.Geometries
             }
             return false;
         }
+
+        public override bool Equals(Geometry geom)
+        {
+            var geometryCollection = geom as GeometryCollection;
+            if (geometryCollection == null) return false;
+            return Equals(geometryCollection);
+        }
     }
 }

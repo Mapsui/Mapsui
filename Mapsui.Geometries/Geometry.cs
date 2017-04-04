@@ -38,17 +38,6 @@ namespace Mapsui.Geometries
     /// </remarks>
     public abstract class Geometry : IGeometry, IEquatable<Geometry>
     {
-        // The following are methods that should be implemented on a geometry object according to
-        // the OpenGIS Simple Features Specification
-
-        /// <summary>
-        ///     Returns 'true' if this Geometry is 'spatially equal' to anotherGeometry
-        /// </summary>
-        public virtual bool Equals(Geometry other)
-        {
-            return Equals(this, other);
-        }
-
         /// <summary>
         ///     The minimum bounding box for this <see cref="Geometry" />, returned as a <see cref="Geometry" />. The
         ///     polygon is defined by the corner points of the bounding box ((MINX, MINY), (MAXX, MINY), (MAXX,
@@ -141,19 +130,6 @@ namespace Mapsui.Geometries
         }
 
         /// <summary>
-        ///     Determines whether the specified <see cref="Object" /> is equal to the current <see cref="Object" />.
-        /// </summary>
-        /// <param name="obj">The <see cref="Object" /> to compare with the current <see cref="Object" />.</param>
-        /// <returns>true if the specified <see cref="Object" /> is equal to the current <see cref="Object" />; otherwise, false</returns>
-        public override bool Equals(object obj)
-        {
-            var geometry = obj as Geometry;
-            if (geometry == null)
-                return false;
-            return Equals(geometry);
-        }
-
-        /// <summary>
         ///     Serves as a hash function for a particular type. <see cref="GetHashCode" /> is suitable for use
         ///     in hashing algorithms and data structures like a hash table.
         /// </summary>
@@ -164,5 +140,11 @@ namespace Mapsui.Geometries
         }
         
         public abstract bool Contains(Point point);
+        public abstract bool Equals(Geometry geom);
+
+        bool IEquatable<Geometry>.Equals(Geometry other)
+        {
+            return Equals(other);
+        }
     }
 }

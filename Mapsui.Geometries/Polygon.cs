@@ -197,5 +197,12 @@ namespace Mapsui.Geometries
             return GetBoundingBox().Contains(point) && // First check bounds for performance
                 Algorithms.PointInPolygon(ExteriorRing.Vertices, point);
         }
+        
+        public override bool Equals(Geometry geom)
+        {
+            var polygon = geom as Polygon;
+            if (polygon == null) return false;
+            return Equals(polygon);
+        }
     }
 }

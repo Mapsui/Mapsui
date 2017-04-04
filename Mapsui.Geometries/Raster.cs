@@ -63,5 +63,12 @@ namespace Mapsui.Geometries
             // todo: check performance of MemoryStream.GetHashCode
             return Envelope().GetHashCode()*Data.GetHashCode(); 
         }
+        
+        public override bool Equals(Geometry geom)
+        {
+            var raster = geom as Raster;
+            if (raster == null) return false;
+            return Equals(raster);
+        }
     }
 }

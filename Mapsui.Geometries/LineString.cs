@@ -233,5 +233,12 @@ namespace Mapsui.Geometries
         {
             return false;
         }
+        
+        public override bool Equals(Geometry geom)
+        {
+            var lineString = geom as LineString;
+            if (lineString == null) return false;
+            return Equals(lineString);
+        }
     }
 }
