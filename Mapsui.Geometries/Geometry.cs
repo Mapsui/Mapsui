@@ -141,10 +141,5 @@ namespace Mapsui.Geometries
         
         public abstract bool Contains(Point point);
         public abstract bool Equals(Geometry geom);
-
-        bool IEquatable<Geometry>.Equals(Geometry other)
-        {
-            return Equals(other);
-        }
     }
 }
