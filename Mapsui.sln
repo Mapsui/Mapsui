@@ -68,6 +68,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Desktop.Tests", "Tes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.UI.Wpf", "Mapsui.UI.Wpf\Mapsui.UI.Wpf.csproj", "{AE693902-FEDA-4034-A7C5-9AA9872F7878}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Geometries.Tests", "Tests\Mapsui.Geometries.Tests\Mapsui.Geometries.Tests.csproj", "{46519792-2F00-4FB7-99EF-1465AC7B8994}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|AnyCPU = Debug|AnyCPU
@@ -321,6 +323,18 @@ Global
 		{AE693902-FEDA-4034-A7C5-9AA9872F7878}.Release|iPhone.Build.0 = Release|Any CPU
 		{AE693902-FEDA-4034-A7C5-9AA9872F7878}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{AE693902-FEDA-4034-A7C5-9AA9872F7878}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{46519792-2F00-4FB7-99EF-1465AC7B8994}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
+		{46519792-2F00-4FB7-99EF-1465AC7B8994}.Debug|AnyCPU.Build.0 = Debug|Any CPU
+		{46519792-2F00-4FB7-99EF-1465AC7B8994}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{46519792-2F00-4FB7-99EF-1465AC7B8994}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{46519792-2F00-4FB7-99EF-1465AC7B8994}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{46519792-2F00-4FB7-99EF-1465AC7B8994}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{46519792-2F00-4FB7-99EF-1465AC7B8994}.Release|AnyCPU.ActiveCfg = Release|Any CPU
+		{46519792-2F00-4FB7-99EF-1465AC7B8994}.Release|AnyCPU.Build.0 = Release|Any CPU
+		{46519792-2F00-4FB7-99EF-1465AC7B8994}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{46519792-2F00-4FB7-99EF-1465AC7B8994}.Release|iPhone.Build.0 = Release|Any CPU
+		{46519792-2F00-4FB7-99EF-1465AC7B8994}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{46519792-2F00-4FB7-99EF-1465AC7B8994}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -337,6 +351,7 @@ Global
 		{53A4E033-F814-46CC-8105-DAC289524455} = {F7130D3D-4E62-4EB3-B74C-1E819E017048}
 		{5C1F0E76-BF98-4C6E-8AAB-CDB7E3735A9C} = {969DB691-49FB-4785-98F4-2112CC1BA7C4}
 		{FF1A03F0-8C0C-4FAB-A229-42AD625B5456} = {F7130D3D-4E62-4EB3-B74C-1E819E017048}
+		{46519792-2F00-4FB7-99EF-1465AC7B8994} = {F7130D3D-4E62-4EB3-B74C-1E819E017048}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		Policies = $0
