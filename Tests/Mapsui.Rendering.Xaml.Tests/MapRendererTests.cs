@@ -4,9 +4,7 @@ using System.IO;
 using System.Threading;
 using Mapsui.Tests.Common.Maps;
 using NUnit.Framework;
-#if OPENTK
-using Mapsui.Rendering.OpenTK;
-#elif SKIA
+#if SKIA
 using Mapsui.Rendering.Skia;
 #elif MONOGAME
 using Mapsui.Rendering.MonoGame;
