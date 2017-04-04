@@ -13,14 +13,11 @@ namespace Mapsui.Rendering.Skia
             return _cache[bitmapId] = BitmapHelper.LoadBitmap(BitmapRegistry.Instance.Get(bitmapId));
         }
 
-        public double GetWidth(int bitmapId)
+        public Size GetSize(int bitmapId)
         {
-            return Get(bitmapId).Width;
+            var bitmap = Get(bitmapId);
+            return new Size(bitmap.Width, bitmap.Height);
         }
 
-        public double GetHeight(int bitmapId)
-        {
-            return Get(bitmapId).Height;
-        }
     }
 }

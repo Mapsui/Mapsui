@@ -10,7 +10,7 @@ namespace Mapsui.Samples.Common.Maps
 {
     public static class PointsSample
     {
-        private static readonly Random Random = new Random(0);
+        private static Random _random = new Random(0);
 
         public static Map CreateMap()
         {
@@ -25,15 +25,17 @@ namespace Mapsui.Samples.Common.Maps
             return new MemoryProvider(CreateFeatures(GenerateRandomPoints(envelope, count)));
         }
 
-        public static IEnumerable<IGeometry> GenerateRandomPoints(BoundingBox envelope, int count = 25)
+        public static IEnumerable<IGeometry> GenerateRandomPoints(BoundingBox envelope, int count = 25, int? randomSeed = null)
         {
+            if (randomSeed != null) _random = new Random(randomSeed.Value);
+
             var result = new List<IGeometry>();
 
             for (var i = 0; i < count; i++)
             {
                 result.Add(new Point(
-                    Random.NextDouble()*envelope.Width + envelope.Left,
-                    Random.NextDouble()*envelope.Height + envelope.Bottom));
+                    _random.NextDouble()*envelope.Width + envelope.Left,
+                    _random.NextDouble()*envelope.Height + envelope.Bottom));
             }
 
             return result;
@@ -50,7 +52,7 @@ namespace Mapsui.Samples.Common.Maps
             return features;
         }
 
-        private static ILayer CreateRandomPointLayer(BoundingBox envelope, int count = 25, IStyle style = null)
+        public static ILayer CreateRandomPointLayer(BoundingBox envelope, int count = 25, IStyle style = null)
         {
             return new Layer
             {

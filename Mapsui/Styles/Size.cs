@@ -7,6 +7,12 @@ namespace Mapsui.Styles
 
         public Size() {}
 
+        public Size(double width, double height)
+        {
+            Width = width;
+            Height = height;
+        }
+
         public Size(Size size)
         {
             Width = size.Width;

@@ -5,6 +5,7 @@ using Mapsui.Providers;
 using Mapsui.Rendering;
 using NUnit.Framework;
 using System.Globalization;
+using Mapsui.Geometries;
 
 namespace Mapsui.Tests.Rendering
 {
@@ -38,7 +39,7 @@ namespace Mapsui.Tests.Rendering
                 {
                     if ((tile.Index.Col + tile.Index.Row) % 2 == 0) // Add only 50% of the tiles with the arbitrary rule.
                     {
-                        cache.Add(tile.Index, new Feature());
+                        cache.Add(tile.Index, new Feature { Geometry = new Point()});
                     }
                 }
             }

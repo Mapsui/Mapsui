@@ -3,6 +3,7 @@ using Mapsui.Geometries;
 using Mapsui.Providers;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Mapsui.Styles;
 
 namespace Mapsui.Layers
 {
@@ -12,7 +13,8 @@ namespace Mapsui.Layers
 
         public override IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
         {
-            return DataSource.GetFeaturesInView(box, resolution);
+            var biggerBox = box.Grow(SymbolStyle.DefaultWidth * 2 * resolution, SymbolStyle.DefaultHeight * 2 * resolution);
+            return DataSource.GetFeaturesInView(biggerBox, resolution);
         }
 
         public override BoundingBox Envelope => DataSource?.GetExtents();

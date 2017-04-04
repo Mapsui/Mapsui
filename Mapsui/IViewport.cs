@@ -31,8 +31,6 @@ namespace Mapsui
             double deltaScale = 1);
         Point Center { get; set; }
         double Resolution { get; set; }
-        double RenderResolution { get; }
-        double RenderResolutionMultiplier { set; }
         BoundingBox Extent { get; }
         Quad WindowExtent { get; }
         double Width { get; set; }

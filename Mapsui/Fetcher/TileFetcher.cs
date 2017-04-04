@@ -194,12 +194,10 @@ namespace Mapsui.Fetcher
             //todo remove object sender
             try
             {
-                if (e.Error == null && e.Cancelled == false && _isThreadRunning && e.Image != null)
+                if (e.Error == null && e.Cancelled == false && _isThreadRunning)
                 {
-                    var feature = new Feature
-                    {
-                        Geometry = new Raster(new MemoryStream(e.Image), e.TileInfo.Extent.ToBoundingBox())
-                    };
+                    var geometry = CreateTileGeometry(e);
+                    var feature = new Feature { Geometry = geometry };
                     _memoryCache.Add(e.TileInfo.Index, feature);
                 }
             }
@@ -221,7 +219,23 @@ namespace Mapsui.Fetcher
             DataChanged?.Invoke(this, new DataChangedEventArgs(e.Error, e.Cancelled, e.TileInfo));
         }
 
-                /// <summary>
+        private static Raster CreateTileGeometry(FetchTileCompletedEventArgs e)
+        {
+            // A TileSource may return an byte array that is null. This is currently only implemented
+            // for MbTilesTileSource. It is to indicate that the tile is not present in the source,
+            // although it should be given the tile schema. It does not mean the tile could not
+            // be accessed because of some temporary reason. In that case it will throw an exception.
+            // For Mapsui this is important because it will not try again and again to fetch it. 
+            // Here we return the geometry as null so that it will be added to the tile cache. 
+            // TileLayer.GetFeatureInView will have to return only the non null geometries.
+
+            if (e.Image == null) return null;
+
+            return new Raster(new MemoryStream(e.Image), e.TileInfo.Extent.ToBoundingBox());
+        }
+        
+
+        /// <summary>
         /// Keeps track of retries per tile. This class doesn't do much interesting work
         /// but makes the rest of the code a bit easier to read.
         /// </summary>

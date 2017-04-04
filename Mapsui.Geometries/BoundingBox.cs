@@ -198,6 +198,14 @@ namespace Mapsui.Geometries
             Max += vector;
         }
 
+        public void Offset(double x, double y)
+        {
+            Min.X += x;
+            Min.Y += y;
+            Max.X += x;
+            Max.Y += y;
+        }
+
         /// <summary>
         ///     Checks whether min values are actually smaller than max values and in that case swaps them.
         /// </summary>

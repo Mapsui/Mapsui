@@ -1,8 +1,9 @@
-﻿namespace Mapsui.Rendering
+﻿using Mapsui.Styles;
+
+namespace Mapsui.Rendering
 {
     public interface ISymbolCache
     {
-        double GetWidth(int bitmapId);
-        double GetHeight(int bitmapId);
+        Size GetSize(int bitmapId); // perhaps use a tuble in C#7
     }
 }

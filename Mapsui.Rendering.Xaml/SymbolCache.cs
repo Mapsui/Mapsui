@@ -39,5 +39,11 @@ namespace Mapsui.Rendering.Xaml
             // This creates a regular symbol and not the tile one. This could be incorrect
             return GetImageBrush(bitmapId).ImageSource.Height;
         }
+
+        public Size GetSize(int bitmapId)
+        {
+            var brush = GetImageBrush(bitmapId);
+            return new Size(brush.ImageSource.Width, brush.ImageSource.Height);
+        }
     }
 }

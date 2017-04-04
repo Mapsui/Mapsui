@@ -103,10 +103,10 @@ namespace Mapsui.Rendering.Xaml
         {
             if (layer.Enabled == false) return;
 
-            target.Children.Add(RenderVectorLayer(viewport, layer, symbolCache, rasterizing));
+            target.Children.Add(RenderLayerStatic(viewport, layer, symbolCache, rasterizing));
         }
 
-        private static Canvas RenderVectorLayer(IViewport viewport, ILayer layer, SymbolCache symbolCache, bool rasterizing = false)
+        private static Canvas RenderLayerStatic(IViewport viewport, ILayer layer, SymbolCache symbolCache, bool rasterizing = false)
         {
             // todo:
             // find solution for try catch. Sometimes this method will throw an exception
@@ -119,7 +119,7 @@ namespace Mapsui.Rendering.Xaml
 
             try
             {
-                var features = layer.GetFeaturesInView(viewport.Extent, viewport.RenderResolution).ToList();
+                var features = layer.GetFeaturesInView(viewport.Extent, viewport.Resolution).ToList();
                 var layerStyles = BaseLayer.GetLayerStyles(layer);
                 
                 foreach (var layerStyle in layerStyles)

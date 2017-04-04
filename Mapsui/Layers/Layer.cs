@@ -30,6 +30,7 @@ namespace Mapsui.Layers
     public class Layer : BaseLayer
     {
         private IProvider _dataSource;
+        private object _syncRoot = new object();
         protected IEnumerable<IFeature> Cache;
         protected bool IsFetching;
         protected bool NeedsUpdate = true;
@@ -69,11 +70,9 @@ namespace Mapsui.Layers
         {
             get
             {
-                if (DataSource == null) return null;
-
-                lock (DataSource)
+                lock (_syncRoot)
                 {
-                    var extent = DataSource.GetExtents();
+                    var extent = DataSource?.GetExtents();
                     if (extent == null) return null;
                     if (ProjectionHelper.NeedsTransform(Transformation, CRS, DataSource.CRS))
                         return Transformation.Transform(DataSource.CRS, CRS, extent.Copy());

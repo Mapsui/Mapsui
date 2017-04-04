@@ -1,6 +1,8 @@
 using Mapsui.Geometries;
 using Mapsui.Providers;
 using System.Collections.Generic;
+using System.Linq;
+using Mapsui.Styles;
 
 namespace Mapsui.Fetcher
 {
@@ -17,7 +19,8 @@ namespace Mapsui.Fetcher
         public FeatureFetcher(BoundingBox extent, double resolution, IProvider provider, DataArrivedDelegate dataArrived, long timeOfRequest = default(long))
         {
             _dataArrived = dataArrived;
-            _extent = extent;
+            var biggerBox = extent.Grow(SymbolStyle.DefaultWidth * 2 * resolution, SymbolStyle.DefaultHeight * 2 * resolution);
+            _extent = biggerBox;
             _provider = provider;
             _resolution = resolution;
             _timeOfRequest = timeOfRequest;
@@ -27,7 +30,7 @@ namespace Mapsui.Fetcher
         {
             lock (_provider)
             {
-                var features = _provider.GetFeaturesInView(_extent, _resolution);
+                var features = _provider.GetFeaturesInView(_extent, _resolution).ToList();
                 _dataArrived?.Invoke(features, _timeOfRequest);
             }
         }
