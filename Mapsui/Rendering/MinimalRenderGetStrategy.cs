@@ -8,9 +8,9 @@ namespace Mapsui.Rendering
 {
     public class MinimalRenderGetStrategy : IRenderGetStrategy
     {
-        public IList<IFeature> GetFeatures(BoundingBox box, double resolution, ITileSchema schema, ITileCache<Feature> memoryCache)
+        public IList<IFeature> GetFeatures(BoundingBox extent, double resolution, ITileSchema schema, ITileCache<Feature> memoryCache)
         {
-            var tiles = schema.GetTileInfos(box.ToExtent(), resolution);
+            var tiles = schema.GetTileInfos(extent.ToExtent(), resolution);
             var result = new List<IFeature>();
             foreach (var tileInfo in tiles)
             {

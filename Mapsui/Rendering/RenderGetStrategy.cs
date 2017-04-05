@@ -9,11 +9,11 @@ namespace Mapsui.Rendering
 {
     public class RenderGetStrategy : IRenderGetStrategy
     {
-        public IList<IFeature> GetFeatures(BoundingBox box, double resolution, ITileSchema schema, ITileCache<Feature> memoryCache)
+        public IList<IFeature> GetFeatures(BoundingBox extent, double resolution, ITileSchema schema, ITileCache<Feature> memoryCache)
         {
             var dictionary = new Dictionary<TileIndex, IFeature>();
             var levelId = BruTile.Utilities.GetNearestLevel(schema.Resolutions, resolution);
-            GetRecursive(dictionary, schema, memoryCache, box.ToExtent(), levelId);
+            GetRecursive(dictionary, schema, memoryCache, extent.ToExtent(), levelId);
             var sortedFeatures = dictionary.OrderByDescending(t => schema.Resolutions[t.Key.Level].UnitsPerPixel);
             return sortedFeatures.ToDictionary(pair => pair.Key, pair => pair.Value).Values.ToList();
         }
