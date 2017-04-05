@@ -78,12 +78,19 @@ namespace Mapsui.UI.Uwp
             ManipulationDelta += OnManipulationDelta;
             ManipulationCompleted += OnManipulationCompleted;
             ManipulationInertiaStarting += OnManipulationInertiaStarting;
+
+            this.Tapped += OnTapped;
             
             var orientationSensor = SimpleOrientationSensor.GetDefault();
             if (orientationSensor != null)
                 orientationSensor.OrientationChanged += (sender, args) =>
                     Task.Run(() => Dispatcher.RunAsync(CoreDispatcherPriority.Normal, Refresh))
                         .ConfigureAwait(false);
+        }
+
+        private void OnTapped(object sender, TappedRoutedEventArgs e)
+        {
+            Map.InvokeInfo(e.GetPosition(this).ToMapsui(), _renderer.SymbolCache);
         }
 
         private static Rectangle CreateSelectRectangle()
@@ -440,7 +447,6 @@ namespace Mapsui.UI.Uwp
         {
             _previousPosition = default(Point);
             Refresh();
-            Map.InvokeInfo(e.Position.ToMapsui(), _renderer.SymbolCache);
         }
 
         private void InitializeViewport()
