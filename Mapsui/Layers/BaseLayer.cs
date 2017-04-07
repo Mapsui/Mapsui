@@ -223,5 +223,7 @@ namespace Mapsui.Layers
         }
 
         public Attribution Attribution { get; } = new Attribution();
+
+        public virtual IReadOnlyList<double> Resolutions { get; } = new List<double>();
     }
 }

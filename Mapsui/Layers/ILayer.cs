@@ -96,5 +96,7 @@ namespace Mapsui.Layers
         bool? IsCrsSupported(string crs);
 
         Attribution Attribution { get; }
+
+        IReadOnlyList<double> Resolutions { get; }
     }
 }

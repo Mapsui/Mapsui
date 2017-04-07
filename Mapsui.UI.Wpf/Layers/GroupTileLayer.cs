@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 
 namespace Mapsui.UI.Wpf.Layers
 {
-    public class GroupTileLayer : BaseLayer, ITileLayer
+    public class GroupTileLayer : BaseLayer
     {
         private readonly MemoryCache<Feature> _memoryCache = new MemoryCache<Feature>(200, 300);
         
@@ -176,5 +176,7 @@ namespace Mapsui.UI.Wpf.Layers
             var sortedDictionary = (from entry in dictionary orderby entry.Key ascending select entry).ToDictionary(pair => pair.Key, pair => pair.Value);
             return sortedDictionary.Values;
         }
+
+        public override IReadOnlyList<double> Resolutions => Schema?.Resolutions.Select(r => r.Value.UnitsPerPixel).ToList();
     }
 }

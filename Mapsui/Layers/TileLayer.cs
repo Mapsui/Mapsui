@@ -30,13 +30,7 @@ using System.Linq;
 
 namespace Mapsui.Layers
 {
-    public interface ITileLayer 
-    {
-        ITileSchema Schema { get; }
-        MemoryCache<Feature> MemoryCache { get; }
-    }
-
-    public class TileLayer : BaseLayer, ITileLayer
+    public class TileLayer : BaseLayer
     {
         private TileFetcher _tileFetcher;
         private ITileSource _tileSource;
@@ -49,7 +43,7 @@ namespace Mapsui.Layers
         private int _numberTilesNeeded;
 
         readonly MemoryCache<Feature> _memoryCache;
-
+        
         public TileLayer(Func<ITileSource> tileSourceInitializer) : this()
         {
             Task.Factory.StartNew(() => TileSource = tileSourceInitializer());
@@ -70,7 +64,7 @@ namespace Mapsui.Layers
             SetTileSource(source);
         }
 
-        protected void SetTileSource(ITileSource source)
+        private void SetTileSource(ITileSource source)
         {
             if (_tileSource != null)
             {
@@ -176,5 +170,7 @@ namespace Mapsui.Layers
         {
             // to nothing for now
         }
+
+        public override IReadOnlyList<double> Resolutions => Schema?.Resolutions.Select(r => r.Value.UnitsPerPixel).ToList();
     }
 }

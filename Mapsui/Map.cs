@@ -169,16 +169,8 @@ namespace Mapsui
             }
         }
 
-        public IList<double> Resolutions 
-        {
-            get 
-            { 
-                var baseLayer = Layers.FirstOrDefault(l => l.Enabled && l is ITileLayer) as ITileLayer;
-                if (baseLayer?.Schema == null) return new List<double>();
-                return baseLayer.Schema.Resolutions.Select(r => r.Value.UnitsPerPixel).ToList();
-            }
-        }
-
+        public IReadOnlyList<double> Resolutions { get; private set; }
+    
         /// <summary>
         /// Disposes 
         /// the map object
@@ -205,6 +197,8 @@ namespace Mapsui
             layer.DataChanged -= LayerDataChanged;
             layer.PropertyChanged -= LayerPropertyChanged;
 
+            Resolutions = DetermineResolutions(Layers);
+
             OnPropertyChanged(nameof(Layers));
         }
 
@@ -222,7 +216,15 @@ namespace Mapsui
 
             layer.Transformation = Transformation;
             layer.CRS = CRS;
+            Resolutions = DetermineResolutions(Layers);
             OnPropertyChanged(nameof(Layers));
+        }
+
+        private static IReadOnlyList<double> DetermineResolutions(LayerCollection layers)
+        {
+            var baseLayer = layers.FirstOrDefault(l => l.Enabled && l.Resolutions != null && l.Resolutions.Count > 0);
+            if (baseLayer == null) return new List<double>();
+            return baseLayer.Resolutions;
         }
 
         private void LayerPropertyChanged(object sender, PropertyChangedEventArgs e)

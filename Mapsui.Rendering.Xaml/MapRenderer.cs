@@ -11,8 +11,6 @@ using Mapsui.Logging;
 using Color = Mapsui.Styles.Color;
 using Polygon = Mapsui.Geometries.Polygon;
 using System.Threading;
-using Mapsui.Utilities;
-using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Shapes;
@@ -63,11 +61,6 @@ namespace Mapsui.Rendering.Xaml
             }
             target.Arrange(new Rect(0, 0, viewport.Width, viewport.Height));
             target.Visibility = Visibility.Visible;
-            
-            if (DeveloperTools.DeveloperMode)
-            {
-                DrawDebugInfo(target, layers);
-            }
 
             target.EndInit();
         }
@@ -228,33 +221,6 @@ namespace Mapsui.Rendering.Xaml
                 GeometryRenderer.PositionGeometry(renderedGeometry, viewport);
             else if (feature.Geometry is IRaster)
                 GeometryRenderer.PositionRaster(renderedGeometry, feature.Geometry.GetBoundingBox(), viewport);
-        }
-
-        private static void DrawDebugInfo(Canvas canvas, IEnumerable<ILayer> layers)
-        {
-            var lineCounter = 1;
-            const float tabWidth = 40f;
-            const float lineHeight = 40f;
-
-            foreach (var layer in layers)
-            {
-                var textBox = AddTextBox(layer.ToString(), tabWidth, lineHeight * (lineCounter++));
-                canvas.Children.Add(textBox);
-
-                if (layer is ITileLayer)
-                {
-                    var text = "Tiles in memory: " + (layer as ITileLayer).MemoryCache.TileCount.ToString(CultureInfo.InvariantCulture);
-                    canvas.Children.Add(AddTextBox(text, tabWidth, lineHeight * lineCounter++));
-                }
-            }
-        }
-
-        private static TextBox AddTextBox(string text, float x, float y)
-        {
-            var textBox = new TextBox { Text = text };
-            Canvas.SetLeft(textBox, x);
-            Canvas.SetTop(textBox, y);
-            return textBox;
         }
     }
 }
