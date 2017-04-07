@@ -106,7 +106,7 @@ namespace Mapsui.Layers
             }
         }
 
-        public override BoundingBox Envelope => Schema?.Extent.ToBoundingBox();
+        public override BoundingBox Envelope => _tileSource?.Schema?.Extent.ToBoundingBox();
 
         public override void ViewChanged(bool majorChange, BoundingBox extent, double resolution)
         {
@@ -149,9 +149,9 @@ namespace Mapsui.Layers
 
         public override IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
         {
-            if (Schema == null) return Enumerable.Empty<IFeature>();
+            if (_tileSource?.Schema == null) return Enumerable.Empty<IFeature>();
             UpdateMemoryCacheMinAndMax();
-            return _renderStrategy.GetFeatures(box, resolution, Schema, _memoryCache);
+            return _renderStrategy.GetFeatures(box, resolution, _tileSource?.Schema, _memoryCache);
         }
 
         public override bool? IsCrsSupported(string crs)
@@ -161,9 +161,9 @@ namespace Mapsui.Layers
 
         string ToSimpleEpsgCode()
         {
-            var startEpsgCode = TileSource.Schema.Srs.IndexOf("EPSG:", StringComparison.Ordinal);
-            if (startEpsgCode < 0) return TileSource.Schema.Srs;
-            return TileSource.Schema.Srs.Substring(startEpsgCode).Replace("::", ":").Trim();
+            var startEpsgCode = _tileSource.Schema.Srs.IndexOf("EPSG:", StringComparison.Ordinal);
+            if (startEpsgCode < 0) return _tileSource.Schema.Srs;
+            return _tileSource.Schema.Srs.Substring(startEpsgCode).Replace("::", ":").Trim();
         }
 
         public override void AbortFetch()
@@ -171,6 +171,6 @@ namespace Mapsui.Layers
             // to nothing for now
         }
 
-        public override IReadOnlyList<double> Resolutions => Schema?.Resolutions.Select(r => r.Value.UnitsPerPixel).ToList();
+        public override IReadOnlyList<double> Resolutions => _tileSource?.Schema?.Resolutions.Select(r => r.Value.UnitsPerPixel).ToList();
     }
 }
