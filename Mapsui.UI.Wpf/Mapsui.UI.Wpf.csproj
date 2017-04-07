@@ -65,7 +65,6 @@
     <Compile Include="AttributionPanel.cs" />
     <Compile Include="ExtensionMethods\PointExtensions.cs" />
     <Compile Include="FpsCounter.cs" />
-    <Compile Include="Layers\GroupTileLayer.cs" />
     <Compile Include="MapControl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -90,6 +89,9 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Layers\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\SkiaSharp.1.56.2\build\net45\SkiaSharp.targets" Condition="Exists('..\packages\SkiaSharp.1.56.2\build\net45\SkiaSharp.targets')" />

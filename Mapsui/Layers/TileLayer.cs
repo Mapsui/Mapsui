@@ -130,16 +130,6 @@ namespace Mapsui.Layers
             _memoryCache.Clear();
         }
 
-        // TODO: 
-        // investigate whether we can do without this public Schema. 
-        // Its primary use is in the Renderer which recursively searches for
-        // available tiles. Perhaps this recursive search can be done within
-        // this class. I would be nice though if there was some flexibility into
-        // the specific search strategy. Perhaps it is possible to pass a search 
-        // to some GetTiles method.
-        // Update. Schema is not used in the Renderer anymore and TileSource is now a public property
-        public ITileSchema Schema => _tileSource?.Schema;
-
         public MemoryCache<Feature> MemoryCache => _memoryCache;
 
         private void TileFetcherDataChanged(object sender, DataChangedEventArgs e)
