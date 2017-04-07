@@ -22,7 +22,7 @@ using Mapsui.Geometries.Utilities;
 
 namespace Mapsui.Fetcher
 {
-    class FetchStrategy : IFetchStrategy
+    public class FetchStrategy : IFetchStrategy
     {
         public IList<TileInfo> GetTilesWanted(ITileSchema schema, Extent extent, string levelId)
         {
