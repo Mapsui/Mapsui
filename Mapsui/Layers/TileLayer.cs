@@ -43,7 +43,7 @@ namespace Mapsui.Layers
         private readonly int _maxRetries;
         private readonly int _maxThreads;
         private readonly IFetchStrategy _fetchStrategy;
-        private readonly IRenderGetStrategy _renderFetchStrategy;
+        private readonly IRenderGetStrategy _renderStrategy;
         private readonly int _minExtraTiles;
         private readonly int _maxExtraTiles;
         private int _numberTilesNeeded;
@@ -64,7 +64,7 @@ namespace Mapsui.Layers
             _maxRetries = maxRetries;
             _maxThreads = maxThreads;
             _fetchStrategy = fetchStrategy ?? new FetchStrategy();
-            _renderFetchStrategy = renderFetchStrategy ?? new RenderGetStrategy();
+            _renderStrategy = renderFetchStrategy ?? new RenderGetStrategy();
             _minExtraTiles = minExtraTiles;
             _maxExtraTiles = maxExtraTiles;
             SetTileSource(source);
@@ -157,7 +157,7 @@ namespace Mapsui.Layers
         {
             if (Schema == null) return Enumerable.Empty<IFeature>();
             UpdateMemoryCacheMinAndMax();
-            return _renderFetchStrategy.GetFeatures(box, resolution, Schema, _memoryCache);
+            return _renderStrategy.GetFeatures(box, resolution, Schema, _memoryCache);
         }
 
         public override bool? IsCrsSupported(string crs)
