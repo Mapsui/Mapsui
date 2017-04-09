@@ -21,7 +21,7 @@ namespace Mapsui.Layers
         private readonly double _renderResolutionMultiplier;
         private readonly object _syncLock = new object();
         private readonly Timer _timer;
-        private bool _buzy;
+        private bool _busy;
         private Viewport _currentViewport;
         private BoundingBox _extent;
         private bool _modified;
@@ -72,7 +72,7 @@ namespace Mapsui.Layers
         private void LayerOnDataChanged(object sender, DataChangedEventArgs dataChangedEventArgs)
         {
             _modified = true;
-            if (_buzy) return;
+            if (_busy) return;
             RestartTimer();
         }
 
@@ -84,8 +84,8 @@ namespace Mapsui.Layers
         private void Rasterize()
         {
             if (!Enabled) return;
-            if (_buzy) return;
-            _buzy = true;
+            if (_busy) return;
+            _busy = true;
             _modified = false;
 
             lock (_syncLock)
@@ -111,7 +111,7 @@ namespace Mapsui.Layers
                 }
                 finally
                 {
-                    _buzy = false;
+                    _busy = false;
                 }
             }
         }
