@@ -1,6 +1,6 @@
 ﻿{
   "dependencies": {
-    "BruTile": "0.21.0",
+    "BruTile": "0.21.1",
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2",
     "SkiaSharp": "1.56.2",
     "SkiaSharp.Views": "1.56.2",
