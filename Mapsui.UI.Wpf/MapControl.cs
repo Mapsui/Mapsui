@@ -45,7 +45,6 @@ namespace Mapsui.UI.Wpf
         private bool _invalid = true;
         private Map _map;
         private bool _mouseDown;
-        private MouseInfoEventArgs _previousHoverInfoEventArgs;
         private Point _previousMousePosition;
         private RenderMode _renderMode;
         private Geometries.Point _skiaScale;
@@ -102,14 +101,6 @@ namespace Mapsui.UI.Wpf
         public IRenderer Renderer { get; set; } = new MapRenderer();
 
         private bool IsInBoxZoomMode { get; set; }
-
-        [Obsolete("Use Map.HoverInfoLayers", true)]
-        // ReSharper disable once UnassignedGetOnlyAutoProperty // This is here just to help upgraders
-        public IList<ILayer> MouseInfoOverLayers { get; }
-
-        [Obsolete("Use Map.InfoLayers", true)]
-        // ReSharper disable once UnassignedGetOnlyAutoProperty // This is here just to help upgraders
-        public IList<ILayer> MouseInfoUpLayers { get; }
 
         public bool ZoomToBoxMode { get; set; }
 
@@ -198,7 +189,6 @@ namespace Mapsui.UI.Wpf
 
         public event EventHandler ErrorMessageChanged;
         public event EventHandler<ViewChangedEventArgs> ViewChanged;
-        public event EventHandler<MouseInfoEventArgs> HoverInfo;
         public event EventHandler<FeatureInfoEventArgs> FeatureInfo;
         public event EventHandler ViewportInitialized;
 
@@ -496,23 +486,6 @@ namespace Mapsui.UI.Wpf
                 OnViewChanged(true);
                 RefreshGraphics();
             }
-        }
-
-        private void RaiseHoverInfoEvents(Point mousePosition)
-        {
-            // Why is this neccecary? why not use the map invoke.
-
-            //var hoverInfoEventArgs = InfoHelper.GetInfoEventArgs(Map.Viewport, mousePosition.ToMapsui(), Map.HoverInfoLayers, Renderer.SymbolCache);
-
-            //if (HasChanged(_previousHoverInfoEventArgs, hoverInfoEventArgs))
-            //{
-            //    if (hoverInfoEventArgs != null) // Don't raise new event when nothing changed.
-            //        OnMouseHoverInfo(hoverInfoEventArgs);
-            //    else if (_previousHoverInfoEventArgs != null)
-            //        OnMouseHoverInfoLeave();
-            //}
-
-            //_previousHoverInfoEventArgs = hoverInfoEventArgs;
         }
 
         private static bool HasChanged(MouseInfoEventArgs previousInfoEventArgs, MouseInfoEventArgs infoEventArgs)

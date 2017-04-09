@@ -19,7 +19,7 @@ namespace Mapsui.Samples.Common.Maps
 
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
             map.Layers.Add(CreateStylesLayer(map.Envelope));
-            map.HoverInfoLayers.Add(map.Layers.First(l => l.Name == StylesLayerName));
+            map.HoverLayers.Add(map.Layers.First(l => l.Name == StylesLayerName));
 
             return map;
         }

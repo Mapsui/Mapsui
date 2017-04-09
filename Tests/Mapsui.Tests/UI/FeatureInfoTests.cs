@@ -59,7 +59,7 @@ namespace Mapsui.Tests.UI
             map.Viewport.Width = 10;
             map.Viewport.Height = 10;
             map.Viewport.Center = new Point(0, 5);
-            map.HoverInfoLayers.Add(layer);
+            map.HoverLayers.Add(layer);
 
             var screenPositionHit = map.Viewport.WorldToScreen(2, 2);
             var screenPositionHit2 = map.Viewport.WorldToScreen(3, 3);

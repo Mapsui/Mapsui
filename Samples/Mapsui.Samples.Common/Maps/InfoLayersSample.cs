@@ -10,7 +10,7 @@ namespace Mapsui.Samples.Common.Maps
     public static class InfoLayersSample
     {
         private const string InfoLayerName = "Info Layer";
-        private const string HoverInfoLayerName = "Hover Info Layer";
+        private const string HoverLayerName = "Hover Layer";
         private const string PolygonLayerName = "Polygon Layer";
 
         public static Map CreateMap()
@@ -19,12 +19,12 @@ namespace Mapsui.Samples.Common.Maps
 
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
             map.Layers.Add(CreateInfoLayer(map.Envelope));
-            map.Layers.Add(CreateHoverInfoLayer(map.Envelope));
+            map.Layers.Add(CreateHoverLayer(map.Envelope));
             map.Layers.Add(CreatePolygonLayer());
 
             map.InfoLayers.Add(map.Layers.First(l => l.Name == InfoLayerName));
             map.InfoLayers.Add(map.Layers.First(l => l.Name == PolygonLayerName));
-            map.HoverInfoLayers.Add(map.Layers.First(l => l.Name == HoverInfoLayerName));
+            map.HoverLayers.Add(map.Layers.First(l => l.Name == HoverLayerName));
 
             return map;
         }
@@ -59,9 +59,9 @@ namespace Mapsui.Samples.Common.Maps
             };
         }
 
-        private static ILayer CreateHoverInfoLayer(BoundingBox envelope)
+        private static ILayer CreateHoverLayer(BoundingBox envelope)
         {
-            return new Layer(HoverInfoLayerName)
+            return new Layer(HoverLayerName)
             {
                 DataSource = PointsSample.CreateProviderWithRandomPoints(envelope, 25),
                 Style = CreateHoverSymbolStyle()

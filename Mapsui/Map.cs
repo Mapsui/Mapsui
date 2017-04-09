@@ -92,7 +92,7 @@ namespace Mapsui
         
         public IList<ILayer> InfoLayers { get; private set; } = new List<ILayer>();
 
-        public IList<ILayer> HoverInfoLayers { get; private set; } = new List<ILayer>();
+        public IList<ILayer> HoverLayers { get; private set; } = new List<ILayer>();
 
         public Viewport Viewport { get; }
 
@@ -215,8 +215,8 @@ namespace Mapsui
         public void InvokeHover(Point screenPosition, ISymbolCache symbolCache)
         {
             if (Hover== null) return;
-            if (HoverInfoLayers.Count == 0) return;
-            var hoverEventArgs = InfoHelper.GetInfoEventArgs(Viewport, screenPosition, HoverInfoLayers, symbolCache);
+            if (HoverLayers.Count == 0) return;
+            var hoverEventArgs = InfoHelper.GetInfoEventArgs(Viewport, screenPosition, HoverLayers, symbolCache);
             if (hoverEventArgs?.Feature != _previousHoverEventArgs?.Feature) // only notify when the feature changes
             {
                 _previousHoverEventArgs = hoverEventArgs;
