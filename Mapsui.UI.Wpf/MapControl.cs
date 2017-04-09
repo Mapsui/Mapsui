@@ -481,7 +481,7 @@ namespace Mapsui.UI.Wpf
                 return;
             }
 
-            if (!_mouseDown) RaiseHoverInfoEvents(e.GetPosition(this));
+            if (!_mouseDown) Map.InvokeHover(e.GetPosition(this).ToMapsui(), Renderer.SymbolCache);
 
             if (_mouseDown)
             {
@@ -500,33 +500,25 @@ namespace Mapsui.UI.Wpf
 
         private void RaiseHoverInfoEvents(Point mousePosition)
         {
-            var hoverInfoEventArgs = InfoHelper.GetInfoEventArgs(Map, mousePosition.ToMapsui(), Map.HoverInfoLayers, Renderer.SymbolCache);
+            // Why is this neccecary? why not use the map invoke.
 
-            if (HasChanged(_previousHoverInfoEventArgs, hoverInfoEventArgs))
-            {
-                if (hoverInfoEventArgs != null) // Don't raise new event when nothing changed.
-                    OnMouseHoverInfo(hoverInfoEventArgs);
-                else if (_previousHoverInfoEventArgs != null)
-                    OnMouseHoverInfoLeave();
-            }
+            //var hoverInfoEventArgs = InfoHelper.GetInfoEventArgs(Map.Viewport, mousePosition.ToMapsui(), Map.HoverInfoLayers, Renderer.SymbolCache);
 
-            _previousHoverInfoEventArgs = hoverInfoEventArgs;
+            //if (HasChanged(_previousHoverInfoEventArgs, hoverInfoEventArgs))
+            //{
+            //    if (hoverInfoEventArgs != null) // Don't raise new event when nothing changed.
+            //        OnMouseHoverInfo(hoverInfoEventArgs);
+            //    else if (_previousHoverInfoEventArgs != null)
+            //        OnMouseHoverInfoLeave();
+            //}
+
+            //_previousHoverInfoEventArgs = hoverInfoEventArgs;
         }
 
         private static bool HasChanged(MouseInfoEventArgs previousInfoEventArgs, MouseInfoEventArgs infoEventArgs)
         {
             if (previousInfoEventArgs == null) return true;
             return previousInfoEventArgs.Feature != infoEventArgs?.Feature;
-        }
-        
-        private void OnMouseHoverInfoLeave()
-        {
-            HoverInfo?.Invoke(this, new MouseInfoEventArgs {Leaving = true});
-        }
-
-        private void OnMouseHoverInfo(MouseInfoEventArgs e)
-        {
-            HoverInfo?.Invoke(this, e);
         }
 
         private void InitializeViewport()

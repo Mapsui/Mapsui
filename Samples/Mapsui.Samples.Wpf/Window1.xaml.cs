@@ -20,10 +20,8 @@ namespace Mapsui.Samples.Wpf
             InitializeComponent();
             MapControl.ErrorMessageChanged += MapErrorMessageChanged;
             MapControl.FeatureInfo += MapControlFeatureInfo;
-            MapControl.Map.Info += MapControlOnInfo;
             MapControl.MouseMove += MapControlOnMouseMove;
-            MapControl.HoverInfo += MapControlOnHoverInfo;
-
+            
             Fps.SetBinding(TextBlock.TextProperty, new Binding("Fps"));
             Fps.DataContext = MapControl.FpsCounter;
 
@@ -38,9 +36,9 @@ namespace Mapsui.Samples.Wpf
             firstRadioButton.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
         }
 
-        private void MapControlOnHoverInfo(object sender, MouseInfoEventArgs e)
+        private void MapControlOnHover(object sender, MouseInfoEventArgs e)
         {
-            FeatureInfo.Text = e.Leaving ? "" : $"Hover Info:{Environment.NewLine}{e.Feature.ToDisplayText()}";
+            FeatureInfo.Text = e.Feature == null ? "" : $"Hover Info:{Environment.NewLine}{e.Feature.ToDisplayText()}";
         }
 
         private void RenderModeOnSelectionChanged(object sender, SelectionChangedEventArgs selectionChangedEventArgs)
@@ -128,6 +126,7 @@ namespace Mapsui.Samples.Wpf
                 MapControl.Map.Layers.Clear();
                 MapControl.Map = sample.Value();
                 MapControl.Map.Info += MapControlOnInfo;
+                MapControl.Map.Hover += MapControlOnHover;
                 LayerList.Initialize(MapControl.Map.Layers);
                 MapControl.Refresh();
                 

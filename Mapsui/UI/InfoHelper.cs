@@ -11,19 +11,14 @@ namespace Mapsui.UI
 {
     public static class InfoHelper
     {
-        public static MouseInfoEventArgs GetInfoEventArgs(Map map, Point screenPosition, IEnumerable<ILayer> infoLayers,
+        public static MouseInfoEventArgs GetInfoEventArgs(IViewport viewport, Point screenPosition, IEnumerable<ILayer> layers,
             ISymbolCache symbolCache)
         {
-            var worldPosition = map.Viewport.ScreenToWorld(new Point(screenPosition.X, screenPosition.Y));
-
-            var feature = GetFeatureInfo(infoLayers, worldPosition, map.Viewport.Resolution, symbolCache);
-
-            if (feature == null) return null;
-
-            return new MouseInfoEventArgs { LayerName = "", Feature = feature };
+            var worldPosition = viewport.ScreenToWorld(new Point(screenPosition.X, screenPosition.Y));
+            return GetInfoEventArgs(layers, worldPosition, viewport.Resolution, symbolCache);
         }
 
-        private static IFeature GetFeatureInfo(IEnumerable<ILayer> layers, Point point, double resolution,
+        private static MouseInfoEventArgs GetInfoEventArgs(IEnumerable<ILayer> layers, Point position, double resolution,
             ISymbolCache symbolCache)
         {
             foreach (var layer in layers)
@@ -33,17 +28,17 @@ namespace Mapsui.UI
                 var allFeatures = layer.GetFeaturesInView(layer.Envelope, resolution);
                 
                 var features = allFeatures.Where(f => 
-                    IsTouchingTakingIntoAccountSymbolStyles(point, f, layer.Style, resolution, symbolCache)).ToList();
+                    IsTouchingTakingIntoAccountSymbolStyles(position, f, layer.Style, resolution, symbolCache)).ToList();
 
-                var feature = features.OrderBy(f => f.Geometry.GetBoundingBox().GetCentroid().Distance(point))
+                var feature = features.OrderBy(f => f.Geometry.GetBoundingBox().GetCentroid().Distance(position))
                     .FirstOrDefault();
                 
                 if (feature != null)
                 {
-                    return feature;
+                    return new MouseInfoEventArgs {Feature = feature, Layer = layer, WorldPosition = position};
                 }
             }
-            return null;
+            return new MouseInfoEventArgs { WorldPosition = position};
         }
 
         private static bool IsTouchingTakingIntoAccountSymbolStyles(
