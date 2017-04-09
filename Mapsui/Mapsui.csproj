@@ -143,7 +143,7 @@
     <Compile Include="Styles\VectorStyle.cs" />
     <Compile Include="UI\FeatureInfoEventArgs.cs" />
     <Compile Include="UI\InfoHelper.cs" />
-    <Compile Include="UI\MouseInfoEventArgs.cs" />
+    <Compile Include="UI\InfoEventArgs.cs" />
     <Compile Include="UI\ViewChangedEventArgs.cs" />
     <Compile Include="UI\IMapControl.cs" />
     <Compile Include="UI\ViewportHelper.cs" />

@@ -188,8 +188,8 @@ namespace Mapsui
         /// </summary>
         public event DataChangedEventHandler DataChanged;
         public event EventHandler RefreshGraphics;
-        public event EventHandler<MouseInfoEventArgs> Info;
-        public event EventHandler<MouseInfoEventArgs> Hover;
+        public event EventHandler<InfoEventArgs> Info;
+        public event EventHandler<InfoEventArgs> Hover;
 
         private void LayersLayerRemoved(ILayer layer)
         {
@@ -210,7 +210,7 @@ namespace Mapsui
             if (eventArgs != null) Info?.Invoke(this, eventArgs);
         }
 
-        private MouseInfoEventArgs _previousHoverEventArgs;
+        private InfoEventArgs _previousHoverEventArgs;
 
         public void InvokeHover(Point screenPosition, ISymbolCache symbolCache)
         {

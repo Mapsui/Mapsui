@@ -36,7 +36,7 @@ namespace Mapsui.Samples.Wpf
             firstRadioButton.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
         }
 
-        private void MapControlOnHover(object sender, MouseInfoEventArgs e)
+        private void MapControlOnHover(object sender, InfoEventArgs e)
         {
             FeatureInfo.Text = e.Feature == null ? "" : $"Hover Info:{Environment.NewLine}{e.Feature.ToDisplayText()}";
         }
@@ -134,7 +134,7 @@ namespace Mapsui.Samples.Wpf
             return radioButton;
         }
 
-        private void MapOnInfo(object sender, MouseInfoEventArgs mouseInfoEventArgs)
+        private void MapOnInfo(object sender, InfoEventArgs infoEventArgs)
         {
             
         }
@@ -161,10 +161,10 @@ namespace Mapsui.Samples.Wpf
             MapControl.Refresh();
         }
 
-        private void MapControlOnInfo(object sender, MouseInfoEventArgs mouseInfoEventArgs)
+        private void MapControlOnInfo(object sender, InfoEventArgs infoEventArgs)
         {
-            if (mouseInfoEventArgs.Feature != null)
-                FeatureInfo.Text = $"Click Info:{Environment.NewLine}{mouseInfoEventArgs.Feature.ToDisplayText()}";
+            if (infoEventArgs.Feature != null)
+                FeatureInfo.Text = $"Click Info:{Environment.NewLine}{infoEventArgs.Feature.ToDisplayText()}";
         }
     }
 }

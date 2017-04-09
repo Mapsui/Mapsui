@@ -11,14 +11,14 @@ namespace Mapsui.UI
 {
     public static class InfoHelper
     {
-        public static MouseInfoEventArgs GetInfoEventArgs(IViewport viewport, Point screenPosition, IEnumerable<ILayer> layers,
+        public static InfoEventArgs GetInfoEventArgs(IViewport viewport, Point screenPosition, IEnumerable<ILayer> layers,
             ISymbolCache symbolCache)
         {
             var worldPosition = viewport.ScreenToWorld(new Point(screenPosition.X, screenPosition.Y));
             return GetInfoEventArgs(layers, worldPosition, viewport.Resolution, symbolCache);
         }
 
-        private static MouseInfoEventArgs GetInfoEventArgs(IEnumerable<ILayer> layers, Point position, double resolution,
+        private static InfoEventArgs GetInfoEventArgs(IEnumerable<ILayer> layers, Point position, double resolution,
             ISymbolCache symbolCache)
         {
             foreach (var layer in layers)
@@ -35,10 +35,10 @@ namespace Mapsui.UI
                 
                 if (feature != null)
                 {
-                    return new MouseInfoEventArgs {Feature = feature, Layer = layer, WorldPosition = position};
+                    return new InfoEventArgs {Feature = feature, Layer = layer, WorldPosition = position};
                 }
             }
-            return new MouseInfoEventArgs { WorldPosition = position};
+            return new InfoEventArgs { WorldPosition = position};
         }
 
         private static bool IsTouchingTakingIntoAccountSymbolStyles(

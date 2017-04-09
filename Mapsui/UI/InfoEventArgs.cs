@@ -5,7 +5,7 @@ using Mapsui.Providers;
 
 namespace Mapsui.UI
 {
-    public class MouseInfoEventArgs : EventArgs
+    public class InfoEventArgs : EventArgs
     {
         public ILayer Layer { get; set; }
         public IFeature Feature { get; set; }
