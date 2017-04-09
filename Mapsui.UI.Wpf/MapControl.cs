@@ -479,7 +479,7 @@ namespace Mapsui.UI.Wpf
                     return; // It turns out that sometimes MouseMove+Pressed is called before MouseDown
 
                 _currentMousePosition = e.GetPosition(this); //Needed for both MouseMove and MouseWheel event
-                Map.Viewport.Transform(_currentMousePosition.X, _currentMousePosition.Y, _previousMousePosition.X,
+                _map.Viewport.Transform(_currentMousePosition.X, _currentMousePosition.Y, _previousMousePosition.X,
                     _previousMousePosition.Y);
                 _previousMousePosition = _currentMousePosition;
                 _map.ViewChanged(false);
