@@ -125,8 +125,6 @@ namespace Mapsui.UI.iOS
 
         private void PinchGesture(UIPinchGestureRecognizer recognizer)
         {
-			if (_map.Lock) return;
-
             if ((int)recognizer.NumberOfTouches < 2)
                 return;
 
@@ -170,8 +168,6 @@ namespace Mapsui.UI.iOS
 
         public override void TouchesMoved(NSSet touches, UIEvent evt)
         {
-			if (_map.Lock) return;
-
             if ((uint)touches.Count == 1)
             {
                 var touch = touches.AnyObject as UITouch;

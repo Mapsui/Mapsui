@@ -36,7 +36,6 @@ namespace Mapsui
     public class Map : IDisposable, INotifyPropertyChanged
     {
         private LayerCollection _layers = new LayerCollection();
-        private bool _lock;
 		private Color _backColor = Color.White;
 
         /// <summary>
@@ -47,20 +46,6 @@ namespace Mapsui
             BackColor = Color.White;
             Layers = new LayerCollection();
             Viewport =  new Viewport { Center = { X = double.NaN, Y = double.NaN }, Resolution = double.NaN };
-        }
-
-        /// <summary>
-        /// When Lock is true the map view will not respond to manipulation
-        /// </summary>
-        public bool Lock
-        {
-            get { return _lock; }
-            set
-            {
-                if (_lock == value) return;
-                _lock = value;
-                OnPropertyChanged(nameof(Lock));
-            }
         }
 
         public string CRS { get; set; }
