@@ -488,12 +488,6 @@ namespace Mapsui.UI.Wpf
             }
         }
 
-        private static bool HasChanged(MouseInfoEventArgs previousInfoEventArgs, MouseInfoEventArgs infoEventArgs)
-        {
-            if (previousInfoEventArgs == null) return true;
-            return previousInfoEventArgs.Feature != infoEventArgs?.Feature;
-        }
-
         private void InitializeViewport()
         {
             if (ViewportHelper.TryInitializeViewport(_map, ActualWidth, ActualHeight))

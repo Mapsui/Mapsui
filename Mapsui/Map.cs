@@ -50,7 +50,7 @@ namespace Mapsui
         }
 
         /// <summary>
-        /// When Lock is true the map view will not respond to touch input.
+        /// When Lock is true the map view will not respond to manipulation
         /// </summary>
         public bool Lock
         {
@@ -90,9 +90,9 @@ namespace Mapsui
             }
         }
         
-        public IList<ILayer> InfoLayers { get; private set; } = new List<ILayer>();
+        public IList<ILayer> InfoLayers { get; } = new List<ILayer>();
 
-        public IList<ILayer> HoverLayers { get; private set; } = new List<ILayer>();
+        public IList<ILayer> HoverLayers { get; } = new List<ILayer>();
 
         public Viewport Viewport { get; }
 

@@ -39,6 +39,8 @@ namespace Mapsui
         {
             _extent = new BoundingBox(0, 0, 0, 0);
             _windowExtent = new Quad();
+            // ReSharper disable once ExplicitCallerInfoArgument
+            // In this case we don't want to caller to be passed (the Viewport constructor) but just the Center
 			_center.PropertyChanged += (sender, args) => OnViewportChanged(nameof(Center));
         }
         
