@@ -1,6 +1,7 @@
 ﻿using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
+using Mapsui.Styles;
 using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Common.Maps
@@ -19,7 +20,13 @@ namespace Mapsui.Samples.Common.Maps
         {
             return new Layer("Polygons")
             {
-                DataSource = new MemoryProvider(CreatePolygon())
+                DataSource = new MemoryProvider(CreatePolygon()),
+                Style = new VectorStyle
+                {
+                    Fill = new Brush(new Color(150, 150, 30, 128)),
+                    Outline = new Pen(Color.Orange, 2),
+                    
+                }
             };
         }
 
