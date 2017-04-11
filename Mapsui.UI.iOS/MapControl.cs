@@ -7,6 +7,7 @@ using System;
 using System.ComponentModel;
 using System.Linq;
 using CoreGraphics;
+using Mapsui.Geometries.Utilities;
 using SkiaSharp.Views.iOS;
 
 namespace Mapsui.UI.iOS
@@ -14,15 +15,15 @@ namespace Mapsui.UI.iOS
     [Register("MapControl"), DesignTimeVisible(true)]
     public class MapControl : UIStackView, IMapControl
     {
-        private CGPoint _previousMid;
-        private CGPoint _currentMid;
-        private float _oldDist = 1f;
         private Map _map;
         private readonly MapRenderer _renderer = new MapRenderer();
         private readonly SKCanvasView _canvas = new SKCanvasView();
         private readonly AttributionView _attributionPanel = new AttributionView();
-
+        private nuint _previousTouchCount = 0;
         private bool _viewportInitialized;
+        private nfloat _previousX;
+        private nfloat _previousY;
+        private double _previousRadius;
 
         private float Width => (float)Frame.Width;
         private float Height => (float)Frame.Height;
@@ -40,7 +41,7 @@ namespace Mapsui.UI.iOS
         {
             Initialize();
         }
-        
+
         public override CGRect Frame
         {
             get { return base.Frame; }
@@ -55,7 +56,7 @@ namespace Mapsui.UI.iOS
         {
             _canvas.Frame = frame;
             _attributionPanel.Frame = new CGRect(
-                frame.Width - _attributionPanel.Frame.Width, 
+                frame.Width - _attributionPanel.Frame.Width,
                 frame.Height - _attributionPanel.Frame.Height,
                 _attributionPanel.Frame.Width,
                 _attributionPanel.Frame.Height);
@@ -66,19 +67,20 @@ namespace Mapsui.UI.iOS
             Map = new Map();
             BackgroundColor = UIColor.White;
 
-            Axis = UILayoutConstraintAxis.Vertical;    
-            
-            _canvas.ClipsToBounds = true;           
+            Axis = UILayoutConstraintAxis.Vertical;
+
+            _canvas.ClipsToBounds = true;
+            _canvas.MultipleTouchEnabled = true;
             AddSubview(_canvas);
 
             AddSubview(_attributionPanel);
 
             InitializeViewport();
-            
+
             ClipsToBounds = true;
 
-            var pinchGesture = new UIPinchGestureRecognizer(PinchGesture) { Enabled = true };
-            AddGestureRecognizer(pinchGesture);
+            MultipleTouchEnabled = true;
+            UserInteractionEnabled = true;
 
             _canvas.PaintSurface += OnPaintSurface;
         }
@@ -117,58 +119,18 @@ namespace Mapsui.UI.iOS
                 OnViewportInitialized();
             }
         }
-        
+
         private void OnViewportInitialized()
         {
             ViewportInitialized?.Invoke(this, EventArgs.Empty);
         }
 
-        private void PinchGesture(UIPinchGestureRecognizer recognizer)
-        {
-            if ((int)recognizer.NumberOfTouches < 2)
-                return;
-
-            if (recognizer.State == UIGestureRecognizerState.Began)
-            {
-                _oldDist = 1;
-                _currentMid = recognizer.LocationInView(this);
-            }
-
-            var scale = 1 - (_oldDist - (float)recognizer.Scale);
-
-            if (scale > 0.5 && scale < 1.5)
-            {
-                if (_oldDist != (float)recognizer.Scale)
-                {
-                    _oldDist = (float)recognizer.Scale;
-                    _currentMid = recognizer.LocationInView(this);
-                    _previousMid = new CGPoint(_currentMid.X, _currentMid.Y);
-
-                    _map.Viewport.Center = _map.Viewport.ScreenToWorld(
-                        _currentMid.X,
-                        _currentMid.Y);
-                    _map.Viewport.Resolution = _map.Viewport.Resolution / scale;
-                    _map.Viewport.Center = _map.Viewport.ScreenToWorld(
-                        (_map.Viewport.Width - _currentMid.X),
-                        (_map.Viewport.Height - _currentMid.Y));
-                }
-
-                _map.Viewport.Transform(
-                    _currentMid.X,
-                    _currentMid.Y,
-                    _previousMid.X,
-                    _previousMid.Y);
-
-                RefreshGraphics();
-            }
-
-            var majorChange = recognizer.State == UIGestureRecognizerState.Ended;
-            _map.ViewChanged(majorChange);
-        }
-
         public override void TouchesMoved(NSSet touches, UIEvent evt)
         {
-            if ((uint)touches.Count == 1)
+            base.TouchesMoved(touches, evt);
+
+            
+            if (touches.Count == 1)
             {
                 var touch = touches.AnyObject as UITouch;
                 if (touch != null)
@@ -181,12 +143,42 @@ namespace Mapsui.UI.iOS
 
                     if (!cRect.IntersectsWith(pRect))
                     {
-                        _map.Viewport.Transform(currentPos.X, currentPos.Y, previousPos.X, previousPos.Y);
-
-                        RefreshGraphics();
+                        if (_previousTouchCount == touches.Count)
+                        {
+                            _map.Viewport.Transform(currentPos.X, currentPos.Y, previousPos.X, previousPos.Y);
+                            RefreshGraphics();
+                        }
                     }
                 }
             }
+            else if (touches.Count == 2)
+            {
+                nfloat centerX = 0;
+                nfloat centerY = 0;
+
+                var locations = touches.Select(t => ((UITouch) t).LocationInView(this)).ToList();
+
+                foreach (var location in locations)
+                {
+                    centerX += location.X;
+                    centerY += location.Y;
+                }
+
+                centerX = centerX / touches.Count;
+                centerY = centerY / touches.Count;
+                var radius = Algorithms.Distance(centerX, centerY, locations[0].X, locations[0].Y);
+
+                if (_previousTouchCount == touches.Count)
+                {
+                    _map.Viewport.Transform(centerX, centerY, _previousX, _previousY, radius / _previousRadius);
+                    RefreshGraphics();
+                }
+
+                _previousX = centerX;
+                _previousY = centerY;
+                _previousRadius = radius;
+            }
+            _previousTouchCount = touches.Count;
         }
 
         public override void TouchesEnded(NSSet touches, UIEvent e)
