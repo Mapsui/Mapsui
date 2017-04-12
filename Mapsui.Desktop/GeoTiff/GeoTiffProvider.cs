@@ -180,12 +180,12 @@ namespace Mapsui.Providers.GeoTiff
             WorldProperties worldProperties;
             using (TextReader reader = File.OpenText(location))
             {
-                worldProperties.PixelSizeX = Convert.ToDouble(reader.ReadLine().Replace(',', '.'), CultureInfo.InvariantCulture);
-                worldProperties.RotationAroundYAxis = Convert.ToDouble(reader.ReadLine().Replace(',', '.'), CultureInfo.InvariantCulture);
-                worldProperties.RotationAroundXAxis = Convert.ToDouble(reader.ReadLine().Replace(',', '.'), CultureInfo.InvariantCulture);
-                worldProperties.PixelSizeY = Convert.ToDouble(reader.ReadLine().Replace(',', '.'), CultureInfo.InvariantCulture);
-                worldProperties.XCenterOfUpperLeftPixel = Convert.ToDouble(reader.ReadLine().Replace(',', '.'), CultureInfo.InvariantCulture);
-                worldProperties.YCenterOfUpperLeftPixel = Convert.ToDouble(reader.ReadLine().Replace(',', '.'), CultureInfo.InvariantCulture);
+                worldProperties.PixelSizeX = Convert.ToDouble(reader.ReadLine()?.Replace(',', '.'), CultureInfo.InvariantCulture);
+                worldProperties.RotationAroundYAxis = Convert.ToDouble(reader.ReadLine()?.Replace(',', '.'), CultureInfo.InvariantCulture);
+                worldProperties.RotationAroundXAxis = Convert.ToDouble(reader.ReadLine()?.Replace(',', '.'), CultureInfo.InvariantCulture);
+                worldProperties.PixelSizeY = Convert.ToDouble(reader.ReadLine()?.Replace(',', '.'), CultureInfo.InvariantCulture);
+                worldProperties.XCenterOfUpperLeftPixel = Convert.ToDouble(reader.ReadLine()?.Replace(',', '.'), CultureInfo.InvariantCulture);
+                worldProperties.YCenterOfUpperLeftPixel = Convert.ToDouble(reader.ReadLine()?.Replace(',', '.'), CultureInfo.InvariantCulture);
             }
             return worldProperties;
         }
