@@ -28,21 +28,20 @@ namespace Mapsui.Layers
 {
     public class ImageLayer : BaseLayer
     {
-        protected class FeatureSets
+        private class FeatureSets
         {
             public long TimeRequested { get; set; }
             public IEnumerable<IFeature> Features { get; set; }
         }
 
-        protected bool IsFetching;
-        protected bool NeedsUpdate = true;
-        protected double NewResolution;
-        protected BoundingBox NewExtent;
-        protected List<FeatureSets> Sets = new List<FeatureSets>();
-        protected Timer StartFetchTimer;
+        private bool _isFetching;
+        private bool _needsUpdate = true;
+        private double _newResolution;
+        private BoundingBox _newExtent;
+        private List<FeatureSets> _sets = new List<FeatureSets>();
+        private readonly Timer _startFetchTimer;
         private IProvider _dataSource;
-        public int NumberOfFeaturesReturned { get; set; }
-
+        private readonly int _numberOfFeaturesReturned;
 
         public IProvider DataSource
         {
@@ -77,22 +76,22 @@ namespace Mapsui.Layers
         public ImageLayer(string layername)
         {
             Name = layername;
-            StartFetchTimer = new Timer(StartFetchTimerElapsed, null, 500, int.MaxValue);
-            NumberOfFeaturesReturned = 1;
+            _startFetchTimer = new Timer(StartFetchTimerElapsed, 500, int.MaxValue);
+            _numberOfFeaturesReturned = 1;
         }
 
         void StartFetchTimerElapsed(object state)
         {
-            if (NewExtent == null) return;
-            if (double.IsNaN(NewResolution)) return;
-            StartNewFetch(NewExtent, NewResolution);
-            StartFetchTimer.Dispose();
+            if (_newExtent == null) return;
+            if (double.IsNaN(_newResolution)) return;
+            StartNewFetch(_newExtent, _newResolution);
+            _startFetchTimer.Dispose();
         }
 
         public override IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
         {
             var result = new List<IFeature>();
-            foreach (var featureSet in Sets.OrderBy(c => c.TimeRequested))
+            foreach (var featureSet in _sets.OrderBy(c => c.TimeRequested))
             {
                 result.AddRange(GetFeaturesInView(box, featureSet.Features));
             }
@@ -123,22 +122,22 @@ namespace Mapsui.Layers
             if (DataSource == null) return;
             if (!majorChange) return;
 
-            NewExtent = extent;
-            NewResolution = resolution;
+            _newExtent = extent;
+            _newResolution = resolution;
 
-            if (IsFetching)
+            if (_isFetching)
             {
-                NeedsUpdate = true;
+                _needsUpdate = true;
                 return;
             }
-            StartFetchTimer.Dispose();
-            StartFetchTimer = new Timer(StartFetchTimerElapsed, null, 500, int.MaxValue);
+
+            _startFetchTimer.Restart();
         }
 
-        protected void StartNewFetch(BoundingBox extent, double resolution)
+        private void StartNewFetch(BoundingBox extent, double resolution)
         {
-            IsFetching = true;
-            NeedsUpdate = false;
+            _isFetching = true;
+            _needsUpdate = false;
 
             var newExtent = new BoundingBox(extent);
             
@@ -153,7 +152,7 @@ namespace Mapsui.Layers
             Task.Run(() => fetcher.FetchOnThread());
         }
 
-        protected virtual void DataArrived(IEnumerable<IFeature> features, object state)
+        private void DataArrived(IEnumerable<IFeature> features, object state)
         {
             //the data in the cache is stored in the map projection so it projected only once.
             if (features == null) throw new ArgumentException("argument features may not be null");
@@ -162,9 +161,9 @@ namespace Mapsui.Layers
 			// We can get 0 features if some error was occured up call stack
 			// We should not add new FeatureSets if we have not any feature
 
-			IsFetching = false;
+			_isFetching = false;
 
-			if (features.Count() > 0)
+			if (features.Any())
             {
                 features = features.ToList();
                 if (ProjectionHelper.NeedsTransform(Transformation, CRS, DataSource.CRS))
@@ -175,23 +174,23 @@ namespace Mapsui.Layers
                     }
                 }
 
-                Sets.Add(new FeatureSets { TimeRequested = (long)state, Features = features });
+                _sets.Add(new FeatureSets { TimeRequested = (long)state, Features = features });
 
                 //Keep only two most recent sets. The older ones will be removed
-                Sets = Sets.OrderByDescending(c => c.TimeRequested).Take(NumberOfFeaturesReturned).ToList();
+                _sets = _sets.OrderByDescending(c => c.TimeRequested).Take(_numberOfFeaturesReturned).ToList();
 
 				OnDataChanged(new DataChangedEventArgs(null, false, null, Name));
 			}
 
-			if (NeedsUpdate)
+			if (_needsUpdate)
             {
-                StartNewFetch(NewExtent, NewResolution);
+                StartNewFetch(_newExtent, _newResolution);
             }
         }
 
         public override void ClearCache()
         {
-            foreach (var cache in Sets)
+            foreach (var cache in _sets)
             {
                 cache.Features = new Features();
             }

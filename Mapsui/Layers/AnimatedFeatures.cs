@@ -4,7 +4,6 @@ using Mapsui.Providers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Timers;
 using Mapsui.Utilities;
 
 namespace Mapsui.Layers
@@ -17,9 +16,10 @@ namespace Mapsui.Layers
 
     public class AnimatedFeatures
     {
-        private Timer _animation;
+        private Timer _animationTimer;
         private List<AnimatedItem> _cache = new List<AnimatedItem>();
         private long _startTimeAnimation;
+        private readonly int _millisecondsBetweenUpdates;
 
         /// <summary>
         /// When the distane between the current and the previous position is larger
@@ -28,17 +28,17 @@ namespace Mapsui.Layers
         /// </summary>
         public double DistanceThreshold { get; set; }
 
-        public AnimatedFeatures()
+        public AnimatedFeatures(int millisecondsBetweenUpdates = 16)
         {
-            MillisecondsBetweenUpdates = 16;
+            _millisecondsBetweenUpdates = millisecondsBetweenUpdates;
             AnimationDuration = 1000;
             IdField = "ID";
             Function = EasingFunction.CubicEaseOut;
-            DistanceThreshold = Double.MaxValue;
+            DistanceThreshold = double.MaxValue;
+            _animationTimer = new Timer(AnimationCallback, _millisecondsBetweenUpdates, this);
         }
 
         public string IdField { get; set; }
-        public int MillisecondsBetweenUpdates { get; set; }
         public int AnimationDuration { get; set; }
         public EasingFunction Function { get; set; }
 
@@ -47,10 +47,10 @@ namespace Mapsui.Layers
         public void AddFeatures(IEnumerable<IFeature> features)
         {
             var previousCache = _cache;
-            _cache = ConvertToAnimatedItems(features.ToList(), previousCache, IdField);
+ 
+           _cache = ConvertToAnimatedItems(features.ToList(), previousCache, IdField);
             _startTimeAnimation = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
-            if (_animation != null) StopAnimation();
-            _animation = new Timer(AnimationCallback, this, 0, MillisecondsBetweenUpdates);
+            _animationTimer.Restart();
             _first = true;
         }
 
@@ -60,15 +60,8 @@ namespace Mapsui.Layers
 
             var progress = CalculateProgress(_startTimeAnimation, AnimationDuration, Function);
             if (!Completed(progress)) InterpolateAnimatedPosition(_cache, progress, DistanceThreshold);
-            else if (_animation != null) StopAnimation();
+            else _animationTimer.Cancel();
             return _cache.Select(f => f.Feature);
-        }
-
-        private void StopAnimation()
-        {
-            _animation.Stop();
-            _animation.Dispose();
-            _animation = null;
         }
 
         private static bool Completed(double progress)
@@ -164,9 +157,7 @@ namespace Mapsui.Layers
         private static Point FindPreviousPoint(IEnumerable<AnimatedItem> previousItems, IFeature feature,
             string idField)
         {
-            if (previousItems == null) return null;
-            var previousItem = previousItems.FirstOrDefault(f => f.Feature[idField].Equals(feature[idField]));
-            return previousItem == null ? null : previousItem.CurrentPoint;
+            return previousItems?.FirstOrDefault(f => f.Feature[idField].Equals(feature[idField]))?.CurrentPoint;
         }
 
         private static double CalculateProgress(long startTime, int animationDuration, EasingFunction function)

@@ -1,7 +1,6 @@
 using System.Linq;
 using System;
 using System.Collections.Generic;
-using System.Threading.Timers;
 using Mapsui.Fetcher;
 using Mapsui.Geometries;
 using Mapsui.Logging;
@@ -42,8 +41,13 @@ namespace Mapsui.Layers
         ///     every viewport change. true will trigger a Rerasterisation only if the viewport moves outside the existing
         ///     rasterisation.
         /// </param>
-        public RasterizingLayer(ILayer layer, int delayBeforeRasterize = 500, double renderResolutionMultiplier = 1,
-            IRenderer rasterizer = null, double overscanRatio = 1, bool onlyRerasterizeIfOutsideOverscan = false)
+        public RasterizingLayer(
+            ILayer layer, 
+            int delayBeforeRasterize = 500, 
+            double renderResolutionMultiplier = 1,
+            IRenderer rasterizer = null, 
+            double overscanRatio = 1, 
+            bool onlyRerasterizeIfOutsideOverscan = false)
         {
             if (overscanRatio < 1)
                 throw new ArgumentException($"{nameof(overscanRatio)} must be >= 1", nameof(overscanRatio));
@@ -53,19 +57,19 @@ namespace Mapsui.Layers
             _delayBeforeRasterize = delayBeforeRasterize;
             _renderResolutionMultiplier = renderResolutionMultiplier;
             _rasterizer = rasterizer;
-            _timer = new Timer(TimerElapsed, null, _delayBeforeRasterize, int.MaxValue);
-            _timer.Stop();
-            _layer.DataChanged += LayerOnDataChanged;
             _cache = new MemoryProvider();
             _overscan = overscanRatio;
             _onlyRerasterizeIfOutsideOverscan = onlyRerasterizeIfOutsideOverscan;
+            _layer.DataChanged += LayerOnDataChanged;
+            _timer = new Timer(TimerElapsed, _delayBeforeRasterize);
+            _timer.Start();
         }
 
         public override BoundingBox Envelope => _layer.Envelope;
 
         private void TimerElapsed(object state)
         {
-            _timer.Stop();
+            _timer.Cancel();
             Rasterize();
         }
 
@@ -78,7 +82,7 @@ namespace Mapsui.Layers
 
         private void RestartTimer()
         {
-            _timer.Change(_delayBeforeRasterize, _delayBeforeRasterize);
+            _timer.Restart(_delayBeforeRasterize);
         }
 
         private void Rasterize()

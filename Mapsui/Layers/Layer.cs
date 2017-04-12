@@ -32,12 +32,11 @@ namespace Mapsui.Layers
         private IProvider _dataSource;
         private object _syncRoot = new object();
         protected IEnumerable<IFeature> Cache;
-        protected bool IsFetching;
         protected bool NeedsUpdate = true;
         protected BoundingBox NewExtent;
         protected double NewResolution;
-        protected Timer StartFetchTimer;
-
+        protected Timer FetchDelayTimer;
+        
         public Layer() : this("Layer")
         {
         }
@@ -45,7 +44,7 @@ namespace Mapsui.Layers
         public Layer(string layername) : base(layername)
         {
             Cache = new List<IFeature>();
-            FetchingPostponedInMilliseconds = 500;
+            FetchDelayTimer = new Timer(FetchDelayTimerElapsed, FetchingPostponedInMilliseconds, int.MaxValue);
         }
 
         public IProvider DataSource
@@ -57,10 +56,11 @@ namespace Mapsui.Layers
                 _dataSource = value;
                 OnPropertyChanged(nameof(DataSource));
                 OnPropertyChanged(nameof(Envelope));
+                if (_dataSource != null) FetchDelayTimer.Start();
             }
         }
 
-        public int FetchingPostponedInMilliseconds { get; set; }
+        public int FetchingPostponedInMilliseconds { get; set; } = 500;
 
         /// <summary>
         ///     Returns the extent of the layer
@@ -99,26 +99,25 @@ namespace Mapsui.Layers
             NewExtent = extent;
             NewResolution = resolution;
 
-            if (IsFetching)
+            if (Busy)
             {
                 NeedsUpdate = true;
                 return;
             }
-
-            StartFetchTimer?.Dispose();
-            StartFetchTimer = new Timer(StartFetchTimerElapsed, null, FetchingPostponedInMilliseconds, int.MaxValue);
+            
+            FetchDelayTimer.Restart();
         }
 
-        private void StartFetchTimerElapsed(object state)
+        private void FetchDelayTimerElapsed(object state)
         {
             if (NewExtent == null) return;
+            FetchDelayTimer.Cancel();
             StartNewFetch(NewExtent, NewResolution);
-            StartFetchTimer.Dispose();
         }
 
         protected void StartNewFetch(BoundingBox extent, double resolution)
         {
-            IsFetching = true;
+            Busy = true;
             NeedsUpdate = false;
 
             extent = Transform(extent);
@@ -136,7 +135,7 @@ namespace Mapsui.Layers
                 Cache = Transform(features);
                 OnDataChanged(new DataChangedEventArgs(null, false, null, Name));
 
-                IsFetching = false;
+                Busy = false;
                 if (NeedsUpdate) StartNewFetch(NewExtent, NewResolution);
             }
             catch (InvalidOperationException ex)

@@ -60,5 +60,7 @@ namespace Mapsui.Tests.Fetcher
 
             Assert.Pass("The fetcher did not go into an infinite loop");
         }
+
+
     }
 }
