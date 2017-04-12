@@ -79,7 +79,7 @@ namespace Mapsui.UI.Uwp
             ManipulationCompleted += OnManipulationCompleted;
             ManipulationInertiaStarting += OnManipulationInertiaStarting;
 
-            this.Tapped += OnTapped;
+            Tapped += OnTapped;
             
             var orientationSensor = SimpleOrientationSensor.GetDefault();
             if (orientationSensor != null)

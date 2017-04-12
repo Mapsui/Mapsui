@@ -134,11 +134,6 @@ namespace Mapsui.Samples.Wpf
             return radioButton;
         }
 
-        private void MapOnInfo(object sender, InfoEventArgs infoEventArgs)
-        {
-            
-        }
-
         private void LogMethod(LogLevel logLevel, string s, Exception exception)
         {
             Dispatcher.Invoke(() => LogTextBox.Text = $"{logLevel} {s}");

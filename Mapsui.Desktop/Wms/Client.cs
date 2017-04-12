@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
-using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -159,10 +158,7 @@ namespace Mapsui.Providers.Wms
         /// <summary>
         /// Gets the service description
         /// </summary>
-        public Capabilities.WmsServiceDescription ServiceDescription
-        {
-            get { return _serviceDescription; }
-        }
+        public Capabilities.WmsServiceDescription ServiceDescription => _serviceDescription;
 
         /// <summary>
         /// Gets the version of the WMS server (ex. "1.3.0")
@@ -182,10 +178,7 @@ namespace Mapsui.Providers.Wms
         /// <summary>
         /// Gets a list of available exception mime type formats
         /// </summary>
-        public string[] ExceptionFormats
-        {
-            get { return _exceptionFormats; }
-        }
+        public string[] ExceptionFormats => _exceptionFormats;
 
         /// <summary>
         /// Gets the available GetMap request methods and Online Resource URI
@@ -257,11 +250,7 @@ namespace Mapsui.Providers.Wms
         /// Exposes the capabilitie's VendorSpecificCapabilities as XmlNode object. External modules 
         /// could use this to parse the vendor specific capabilities for their specific purpose.
         /// </summary>
-        public XmlNode VendorSpecificCapabilities
-        {
-            get { return _vendorSpecificCapabilities; }
-        }
-
+        public XmlNode VendorSpecificCapabilities => _vendorSpecificCapabilities;
 
         /// <summary>
         /// Downloads servicedescription from WMS service
@@ -293,7 +282,6 @@ namespace Mapsui.Providers.Wms
                 throw new ApplicationException(message, ex);
             }
         }
-
 
         /// <summary>
         /// Parses a servicedescription and stores the data in the ServiceDescription property

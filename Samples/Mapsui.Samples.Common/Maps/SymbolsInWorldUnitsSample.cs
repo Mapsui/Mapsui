@@ -85,7 +85,5 @@ namespace Mapsui.Samples.Common.Maps
 
             return feature;
         }
-
-     
     }
 }

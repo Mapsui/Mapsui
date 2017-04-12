@@ -19,7 +19,6 @@ namespace Mapsui.Layers
         private Timer _animationTimer;
         private List<AnimatedItem> _cache = new List<AnimatedItem>();
         private long _startTimeAnimation;
-        private readonly int _millisecondsBetweenUpdates;
 
         /// <summary>
         /// When the distane between the current and the previous position is larger
@@ -30,12 +29,11 @@ namespace Mapsui.Layers
 
         public AnimatedFeatures(int millisecondsBetweenUpdates = 16)
         {
-            _millisecondsBetweenUpdates = millisecondsBetweenUpdates;
             AnimationDuration = 1000;
             IdField = "ID";
             Function = EasingFunction.CubicEaseOut;
             DistanceThreshold = double.MaxValue;
-            _animationTimer = new Timer(AnimationCallback, _millisecondsBetweenUpdates, this);
+            _animationTimer = new Timer(AnimationCallback, millisecondsBetweenUpdates, this);
         }
 
         public string IdField { get; set; }

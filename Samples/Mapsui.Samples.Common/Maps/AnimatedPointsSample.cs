@@ -23,7 +23,7 @@ namespace Mapsui.Samples.Common.Maps
 
     public class AnimatedPointsWithAutoUpdateLayer : AnimatedPointLayer
     {
-        private Timer _timer;
+        private readonly Timer _timer;
 
         public AnimatedPointsWithAutoUpdateLayer()
             : base(new DynamicMemoryProvider())
