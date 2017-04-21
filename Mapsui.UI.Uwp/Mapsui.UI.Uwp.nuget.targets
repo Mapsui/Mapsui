@@ -8,6 +8,5 @@
     <Import Project="$(NuGetPackageRoot)\Microsoft.Net.Native.SharedLibrary-arm\1.6.0\build\Microsoft.Net.Native.SharedLibrary-arm.targets" Condition="Exists('$(NuGetPackageRoot)\Microsoft.Net.Native.SharedLibrary-arm\1.6.0\build\Microsoft.Net.Native.SharedLibrary-arm.targets')" />
     <Import Project="$(NuGetPackageRoot)\Microsoft.Net.Native.SharedLibrary-x64\1.6.0\build\Microsoft.Net.Native.SharedLibrary-x64.targets" Condition="Exists('$(NuGetPackageRoot)\Microsoft.Net.Native.SharedLibrary-x64\1.6.0\build\Microsoft.Net.Native.SharedLibrary-x64.targets')" />
     <Import Project="$(NuGetPackageRoot)\Microsoft.Net.Native.SharedLibrary-x86\1.6.0\build\Microsoft.Net.Native.SharedLibrary-x86.targets" Condition="Exists('$(NuGetPackageRoot)\Microsoft.Net.Native.SharedLibrary-x86\1.6.0\build\Microsoft.Net.Native.SharedLibrary-x86.targets')" />
-    <Import Project="$(NuGetPackageRoot)\SQLitePCLRaw.lib.e_sqlite3.v140\1.1.2\build\SQLitePCLRaw.lib.e_sqlite3.v140.targets" Condition="Exists('$(NuGetPackageRoot)\SQLitePCLRaw.lib.e_sqlite3.v140\1.1.2\build\SQLitePCLRaw.lib.e_sqlite3.v140.targets')" />
   </ImportGroup>
 </Project>
