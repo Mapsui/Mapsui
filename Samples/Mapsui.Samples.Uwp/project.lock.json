@@ -1,5 +1,4 @@
 {
-  "locked": false,
   "version": 1,
   "targets": {
     "UAP,Version=v10.0": {
@@ -22546,5 +22545,8 @@
       "SkiaSharp.Views >= 1.56.2"
     ],
     "UAP,Version=v10.0": []
+  },
+  "packageFolders": {
+    "C:\\Users\\paul\\.nuget\\packages\\": {}
   }
 }
