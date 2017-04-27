@@ -6,6 +6,8 @@
 
 Mapsui is library for apps that need a map
 
+<img src="https://www.dekagebak.nl/artikelen/352594_3.png?height=380&width=380&mode=crop"><br/>
+
 - Is meant for apps
 - Designed to be fast and responsive (see [architecture](https://github.com/pauldendulk/Mapsui/wiki/Async-Fetching))
 - Cross platform (WPF, UWP, Android, iOS)
