@@ -15,11 +15,11 @@ namespace Mapsui.UI
             ISymbolCache symbolCache)
         {
             var worldPosition = viewport.ScreenToWorld(new Point(screenPosition.X, screenPosition.Y));
-            return GetInfoEventArgs(layers, worldPosition, viewport.Resolution, symbolCache);
+            return GetInfoEventArgs(layers, worldPosition, screenPosition, viewport.Resolution, symbolCache);
         }
 
-        private static InfoEventArgs GetInfoEventArgs(IEnumerable<ILayer> layers, Point position, double resolution,
-            ISymbolCache symbolCache)
+        private static InfoEventArgs GetInfoEventArgs(IEnumerable<ILayer> layers, Point worldPosition, Point screenPosition,
+            double resolution, ISymbolCache symbolCache)
         {
             foreach (var layer in layers)
             {
@@ -30,17 +30,23 @@ namespace Mapsui.UI
                 var allFeatures = layer.GetFeaturesInView(layer.Envelope, resolution);
                 
                 var features = allFeatures.Where(f => 
-                    IsTouchingTakingIntoAccountSymbolStyles(position, f, layer.Style, resolution, symbolCache)).ToList();
+                    IsTouchingTakingIntoAccountSymbolStyles(worldPosition, f, layer.Style, resolution, symbolCache)).ToList();
 
-                var feature = features.OrderBy(f => f.Geometry.GetBoundingBox().GetCentroid().Distance(position))
+                var feature = features.OrderBy(f => f.Geometry.GetBoundingBox().GetCentroid().Distance(worldPosition))
                     .FirstOrDefault();
                 
                 if (feature != null)
                 {
-                    return new InfoEventArgs {Feature = feature, Layer = layer, WorldPosition = position};
+                    return new InfoEventArgs
+                    {
+                        Feature = feature,
+                        Layer = layer,
+                        WorldPosition = worldPosition,
+                        ScreenPosition = screenPosition
+                    };
                 }
             }
-            return new InfoEventArgs { WorldPosition = position};
+            return new InfoEventArgs { WorldPosition = worldPosition};
         }
 
         private static bool IsTouchingTakingIntoAccountSymbolStyles(
