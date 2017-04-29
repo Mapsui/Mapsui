@@ -24,6 +24,8 @@ namespace Mapsui.UI
             foreach (var layer in layers)
             {
                 if (layer.Enabled == false) continue;
+                if (layer.MinVisible > resolution) continue;
+                if (layer.MaxVisible < resolution) continue;
                 
                 var allFeatures = layer.GetFeaturesInView(layer.Envelope, resolution);
                 
