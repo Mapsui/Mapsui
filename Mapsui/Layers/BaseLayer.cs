@@ -149,6 +149,7 @@ namespace Mapsui.Layers
             get { return _busy; }
             set
             {
+                if (_busy == value) return;
                 _busy = value;
                 OnPropertyChanged(nameof(Busy));
             }

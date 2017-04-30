@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Threading.Tasks;
 using Mapsui.Geometries;
 using Mapsui.Layers;
@@ -23,17 +24,27 @@ namespace Mapsui.Tests.Fetcher
             };
 
             // act
-            layer.ViewChanged(true, extent, 1);   
+            layer.ViewChanged(true, extent, 1);
+            var notifications = new List<bool>();
+
+            layer.PropertyChanged += (sender, args) =>
+            {
+                if (args.PropertyName == nameof(Layer.Busy))
+                {
+                    notifications.Add(layer.Busy);
+                }
+            };
 
             // assert
             Task.Run(() => 
             {
-                while (!layer.Busy)
+                while (notifications.Count < 2)
                 {
-                    Assert.IsFalse(layer.Busy); 
+                    // just wait until we have two
                 }
             }).GetAwaiter().GetResult();
-            Assert.IsTrue(layer.Busy);
+            Assert.IsTrue(notifications[0]);
+            Assert.IsFalse(notifications[1]);
         }
 
         private static IEnumerable<IGeometry> GenerateRandomPoints(BoundingBox envelope, int count)
