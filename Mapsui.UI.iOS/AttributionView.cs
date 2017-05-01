@@ -6,8 +6,13 @@ using CoreGraphics;
 
 namespace Mapsui.UI.iOS
 {
-    public class AttributionView : UITextView
+    public sealed class AttributionView : UITextView
     {
+        public AttributionView()
+        {
+            Editable = false;
+        }
+
         public void Populate(IEnumerable<ILayer> layers)
         {
             Text = ToAttributionText(layers);
