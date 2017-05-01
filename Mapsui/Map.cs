@@ -183,8 +183,10 @@ namespace Mapsui
             layer.DataChanged -= LayerDataChanged;
             layer.PropertyChanged -= LayerPropertyChanged;
 
-            Resolutions = DetermineResolutions(Layers);
+            InfoLayers.Remove(layer);
 
+            Resolutions = DetermineResolutions(Layers);
+            
             OnPropertyChanged(nameof(Layers));
         }
 
