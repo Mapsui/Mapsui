@@ -104,7 +104,7 @@ namespace Mapsui.UI.iOS
             if (Width != _map.Viewport.Width) _map.Viewport.Width = Width;
             if (Height != _map.Viewport.Height) _map.Viewport.Height = Height;
 
-            var scaleFactor = 2; // todo: figure out how to get this value programatically
+            var scaleFactor = (float)UIScreen.MainScreen.Scale;
             skPaintSurfaceEventArgs.Surface.Canvas.Scale(scaleFactor, scaleFactor);
 
             _renderer.Render(skPaintSurfaceEventArgs.Surface.Canvas, _map.Viewport, _map.Layers, _map.BackColor);
@@ -128,7 +128,6 @@ namespace Mapsui.UI.iOS
         public override void TouchesMoved(NSSet touches, UIEvent evt)
         {
             base.TouchesMoved(touches, evt);
-
             
             if (touches.Count == 1)
             {
