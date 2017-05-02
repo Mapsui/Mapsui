@@ -16,8 +16,8 @@ namespace Mapsui.UI.iOS
 
         public void Populate(ICollection<ILayer> layers, CGRect parentFrame)
         {
-            Hidden = !layers.Any();
             Text = ToAttributionText(layers);
+            Hidden = Text.Length == 0; // If there is no text make the AttributionView hidden
             DataDetectorTypes = UIDataDetectorType.Link;
             BackgroundColor = UIColor.FromRGBA(255, 255, 255, 191);
             Frame = new CGRect(); // set to 0, 0, 0, 0 or otherwize SizeToFit will have no effect
