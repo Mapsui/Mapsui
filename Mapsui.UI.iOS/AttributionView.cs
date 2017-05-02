@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Mapsui.Layers;
 using UIKit;
 using CoreGraphics;
@@ -13,13 +14,29 @@ namespace Mapsui.UI.iOS
             Editable = false;
         }
 
-        public void Populate(IEnumerable<ILayer> layers)
+        public void Populate(ICollection<ILayer> layers, CGRect parentFrame)
         {
+            Hidden = !layers.Any();
             Text = ToAttributionText(layers);
             DataDetectorTypes = UIDataDetectorType.Link;
             BackgroundColor = UIColor.FromRGBA(255, 255, 255, 191);
             Frame = new CGRect(); // set to 0, 0, 0, 0 or otherwize SizeToFit will have no effect
             SizeToFit();
+            ToBottomRight(parentFrame);
+        }
+
+        public void ToBottomRight(CGRect parentFrame)
+        {
+            Frame = ToBottomRight(parentFrame, Frame);
+        }
+
+        private static CGRect ToBottomRight(CGRect parentFrame, CGRect childFrame)
+        {
+            return new CGRect(
+                parentFrame.Width - childFrame.Width,
+                parentFrame.Height - childFrame.Height,
+                childFrame.Width,
+                childFrame.Height);
         }
 
         public void Clear()

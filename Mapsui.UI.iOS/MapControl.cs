@@ -55,11 +55,8 @@ namespace Mapsui.UI.iOS
         private void Resize(CGRect frame)
         {
             _canvas.Frame = frame;
-            _attributionPanel.Frame = new CGRect(
-                frame.Width - _attributionPanel.Frame.Width,
-                frame.Height - _attributionPanel.Frame.Height,
-                _attributionPanel.Frame.Width,
-                _attributionPanel.Frame.Height);
+
+            _attributionPanel.ToBottomRight(frame);
         }
 
         public void Initialize()
@@ -228,7 +225,7 @@ namespace Mapsui.UI.iOS
                     _map.PropertyChanged += MapPropertyChanged;
                     _map.RefreshGraphics += MapRefreshGraphics;
                     _map.ViewChanged(true);
-                    _attributionPanel.Populate(Map.Layers);
+                    _attributionPanel.Populate(Map.Layers, Frame);
                 }
 
                 RefreshGraphics();
@@ -252,7 +249,7 @@ namespace Mapsui.UI.iOS
             }
             else if (e.PropertyName == nameof(Map.Layers))
             {
-                _attributionPanel.Populate(Map.Layers);
+                _attributionPanel.Populate(Map.Layers, Frame);
             }
         }
 
