@@ -46,7 +46,7 @@ namespace Mapsui.UI
                     };
                 }
             }
-            return new InfoEventArgs { WorldPosition = worldPosition};
+            return new InfoEventArgs { WorldPosition = worldPosition, ScreenPosition = screenPosition};
         }
 
         private static bool IsTouchingTakingIntoAccountSymbolStyles(
