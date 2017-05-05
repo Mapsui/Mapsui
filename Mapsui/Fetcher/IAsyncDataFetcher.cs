@@ -61,9 +61,9 @@ namespace Mapsui.Fetcher
             LayerName = layerName;
         }
 
-        public Exception Error { get; private set; }
-        public bool Cancelled { get; private set; }
-        public TileInfo TileInfo { get; private set; }
-        public string LayerName { get; private set; }
+        public Exception Error { get; }
+        public bool Cancelled { get; }
+        public TileInfo TileInfo { get; } // todo: remove
+        public string LayerName { get; }
     }
 }
