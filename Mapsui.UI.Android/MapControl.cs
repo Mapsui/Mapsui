@@ -112,7 +112,7 @@ namespace Mapsui.UI.Android
                     _canvas.Invalidate();
                     _mode = None;
                     _map.ViewChanged(true);
-                    Map.InvokeInfo(GetPosition(args.Event).ToMapsui(), _renderer.SymbolCache);
+                    Map.InvokeInfo(GetPosition(args.Event, _scale).ToMapsui(), _renderer.SymbolCache);
                     break;
                 case MotionEventActions.Pointer2Down:
                     _previousMap = null;
@@ -189,9 +189,9 @@ namespace Mapsui.UI.Android
             return new PointF(motionEvent.GetX(0) + motionEvent.GetX(1), motionEvent.GetY(0) + motionEvent.GetY(1));
         }
 
-        private static PointF GetPosition(MotionEvent motionEvent)
+        private static PointF GetPosition(MotionEvent motionEvent, float scale)
         {
-            return new PointF(motionEvent.GetX(0) , motionEvent.GetY(0));
+            return new PointF(motionEvent.GetX(0) / scale, motionEvent.GetY(0) / scale);
         }
 
         public Map Map

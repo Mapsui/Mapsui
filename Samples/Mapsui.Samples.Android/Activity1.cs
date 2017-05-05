@@ -3,7 +3,11 @@ using System.IO;
 using Android.App;
 using Android.Content.PM;
 using Android.OS;
+using Android.Widget;
+using Java.Lang;
+using Mapsui.Providers;
 using Mapsui.Samples.Common.Maps;
+using Mapsui.UI;
 using Mapsui.UI.Android;
 
 namespace Mapsui.Samples.Android
@@ -26,7 +30,28 @@ namespace Mapsui.Samples.Android
             MbTilesSample.MbTilesLocation = MbTilesLocationOnAndroid;
             
             var mapControl = FindViewById<MapControl>(Resource.Id.mapcontrol);
-            mapControl.Map = MbTilesSample.CreateMap();
+            mapControl.Map = InfoLayersSample.CreateMap();
+            mapControl.Map.Info+= MapOnInfo;
+        }
+
+        private void MapOnInfo(object sender, InfoEventArgs infoEventArgs)
+        {
+            if (infoEventArgs.Feature != null)
+            {
+                RunOnUiThread(new Runnable(Toast.MakeText(
+                    ApplicationContext, 
+                    ToDisplayText(infoEventArgs.Feature), 
+                    ToastLength.Short).Show));
+            }
+        }
+
+        private static string ToDisplayText(IFeature feature)
+        {
+            var result = new StringBuilder();
+            foreach (var field in feature.Fields)
+                result.Append($"{field}:{feature[field]} - ");
+            var str = result.ToString();
+            return str.Substring(0, result.Length() - 3);
         }
 
         private void DeployMbTilesFile()
