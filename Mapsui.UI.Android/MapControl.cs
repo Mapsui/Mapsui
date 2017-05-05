@@ -5,6 +5,7 @@ using Android.Content;
 using Android.Graphics;
 using Android.Util;
 using Android.Views;
+using Android.Views.Animations;
 using Android.Widget;
 using Java.Lang;
 using Mapsui.Fetcher;
@@ -47,6 +48,7 @@ namespace Mapsui.UI.Android
 
         public void Initialize()
         {
+            SetBackgroundColor(Color.Transparent);
             _scale = Resources.DisplayMetrics.Density;
 
             _canvas = new SKCanvasView(Context);
@@ -259,6 +261,12 @@ namespace Mapsui.UI.Android
             {
                 ((Activity)Context).RunOnUiThread(new Runnable(RefreshGraphics));
             }
+        }
+
+        protected override void OnDraw(Canvas canvas)
+        {
+            Invalidate();
+            base.OnDraw(canvas);
         }
 
         public void RefreshGraphics()
