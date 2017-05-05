@@ -108,7 +108,7 @@ namespace Mapsui.UI.Android
                     break;
                 case MotionEventActions.Up:
                     _previousMap = null;
-                    Invalidate();
+                    _canvas.Invalidate();
                     _mode = None;
                     _map.ViewChanged(true);
                     Map.InvokeInfo(GetPosition(args.Event).ToMapsui(), _renderer.SymbolCache);
@@ -137,7 +137,7 @@ namespace Mapsui.UI.Android
                                     _currentMap.Y / _scale,
                                     _previousMap.X / _scale,
                                     _previousMap.Y / _scale);
-                                Invalidate();
+                                _canvas.Invalidate();
                             }
                             _previousMap = _currentMap;
                             break;
@@ -159,7 +159,7 @@ namespace Mapsui.UI.Android
                                     _previousMid.X / _scale,
                                     _previousMid.Y / _scale,
                                     scale);
-                                Invalidate();
+                                _canvas.Invalidate();
                             }
                             break;
                     }
@@ -263,7 +263,7 @@ namespace Mapsui.UI.Android
 
         public void RefreshGraphics()
         {
-            PostInvalidate();
+            _canvas.PostInvalidate();
         }
 
         protected override void OnLayout(bool changed, int l, int t, int r, int b)
