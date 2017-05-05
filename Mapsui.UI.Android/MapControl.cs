@@ -5,11 +5,10 @@ using Android.Content;
 using Android.Graphics;
 using Android.Util;
 using Android.Views;
-using Android.Views.Animations;
-using Android.Widget;
 using Java.Lang;
 using Mapsui.Fetcher;
 using Mapsui.Layers;
+using Mapsui.Logging;
 using SkiaSharp.Views.Android;
 using Math = System.Math;
 
@@ -250,16 +249,19 @@ namespace Mapsui.UI.Android
             }
         }
 
-        public void MapDataChanged(object sender, DataChangedEventArgs e)
+        private void MapDataChanged(object sender, DataChangedEventArgs e)
         {
             if (e.Cancelled || e.Error != null)
             {
-                // todo: test code below:
-                ((Activity)Context).RunOnUiThread(new Runnable(Toast.MakeText(Context, e.Error.Message, ToastLength.Short).Show));
+                Logger.Log(LogLevel.Warning, "An error occurred while fetching data", e.Error);
+            }
+            else if (e.Cancelled)
+            {
+                Logger.Log(LogLevel.Warning, "Fetching data was cancelled", e.Error);
             }
             else // no problems
             {
-                ((Activity)Context).RunOnUiThread(new Runnable(RefreshGraphics));
+                RefreshGraphics();
             }
         }
 
