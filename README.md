@@ -28,19 +28,6 @@ PM> Install-Package Mapsui
 - **Android** - Xamarin.Android on API Level 19 (v4.4 - Kit Kat)
 - **iOS** - Xamarin.iOS
 
-## Components
-
-If you install the NuGet package into your app these assemblies are added:
-
-- Mapsui.UI.{platform} - Platform specific UI. Contains the MapControl
-- Mapsui.Rendering.Skia \*
-- Mapsui \*
-- Mapsui.Geometries \*
-- On Windows dekstop Mapsui.Rendering.Xaml is added.
-- A number of nuget dependencies
-
-\* A PCL with Profile111. Targets: .Net Framework 4.5, ASP.NET Core 5.0, Windows 8, Windows Phone 8.1, Xamarin.Android, Xamarin.iOS, Xamarin.iOS (Classic)
-
 ## Wiki
 Please take a look at the [wiki](https://github.com/pauldendulk/Mapsui/wiki). Let us know what information you are missing for your projects. 
 
