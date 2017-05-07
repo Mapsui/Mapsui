@@ -4,11 +4,10 @@
 
 ## Mapsui (pronounced map-su-wii)
 
-Mapsui is library for apps that need a map
+Mapsui is a C# map component for apps
 
-- Is meant for apps
+- Supported platforms: WPF, UWP, Android, iOS
 - Designed to be fast and responsive (see [architecture](https://github.com/pauldendulk/Mapsui/wiki/Async-Fetching))
-- Cross platform (WPF, UWP, Android, iOS)
 - Based on a modified version of SharpMap
 - Uses BruTile to access tile services
 
