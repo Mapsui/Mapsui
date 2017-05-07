@@ -11,6 +11,10 @@ Mapsui is a C# map component for apps
 - Based on a modified version of SharpMap
 - Uses BruTile to access tile services
 
+## News
+- April 25: Mapsui 1.0 has been released! Read the [announcement](https://github.com/pauldendulk/Mapsui/releases/tag/1.0.0) 
+- May 7: First app using Mapsui 1.0 hits the store. Take a look at Breath Companion on [iOS](https://itunes.apple.com/us/app/botw-map/id1218936949) and [Android](https://play.google.com/store/apps/details?id=com.SoftwareNotion.BreathCompanion). It demonstrates offline maps with MBTiles, feature info, layer activation depending on resolution and shows Mapsui can be used in Xamarin.Forms.
+
 ## Getting Started
 
 Look [here](https://github.com/pauldendulk/Mapsui/wiki/Getting-Started-with-Mapsui)
