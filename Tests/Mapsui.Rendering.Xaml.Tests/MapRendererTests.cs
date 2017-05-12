@@ -149,7 +149,7 @@ namespace Mapsui.Rendering.Xaml.Tests
             File.WriteToGeneratedFolder(fileName, bitmap);
 
             // assert
-            Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 2));
+            Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 2, 0.99));
         }
 
         [Test]

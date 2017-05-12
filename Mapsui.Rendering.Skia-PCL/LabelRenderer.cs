@@ -34,7 +34,7 @@ namespace Mapsui.Rendering.Skia
             DrawLabel(canvas, x, y, style, text);
         }
 
-        private static SKBitmap CreateLabelAsBitmap(LabelStyle style, string text)
+        private static SKImage CreateLabelAsBitmap(LabelStyle style, string text)
         {
             using (var paint = CreatePaint(style))
             {
@@ -42,16 +42,19 @@ namespace Mapsui.Rendering.Skia
             }
         }
 
-        private static SKBitmap CreateLabelAsBitmap(LabelStyle style, string text, SKPaint paint)
+        private static SKImage CreateLabelAsBitmap(LabelStyle style, string text, SKPaint paint)
         {
             var rect = new SKRect();
             paint.MeasureText(text, ref rect);
 
             var backRect = new SKRect(0, 0, rect.Width + 6, rect.Height + 6);
 
-            var bitmap = new SKBitmap((int)backRect.Width, (int)backRect.Height);
+            var skImageInfo = new SKImageInfo((int)backRect.Width, (int)backRect.Height);
 
-            using (var target = new SKCanvas(bitmap))
+            var bitmap = SKImage.Create(skImageInfo);
+
+            // todo: Construct SKCanvas with SKImage once this option becomes available
+            using (var target = new SKCanvas(SKBitmap.FromImage(bitmap)))
             {
                 target.Clear();
 

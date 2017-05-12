@@ -9,11 +9,11 @@ namespace Mapsui.Rendering.Skia
         public static BitmapInfo LoadBitmap(Stream bitmapStream)
         {
             bitmapStream.Position = 0;
-            var stream = new SKManagedStream(bitmapStream);
-            return new BitmapInfo {Bitmap = SKBitmap.Decode(stream)};
+            var image = SKImage.FromEncodedData(SKData.CreateCopy(bitmapStream.ToBytes()));
+            return new BitmapInfo { Bitmap = image};
         }
 
-        public static void RenderBitmap(SKCanvas canvas, SKBitmap bitmap, float x, float y, float orientation = 0,
+        public static void RenderBitmap(SKCanvas canvas, SKImage bitmap, float x, float y, float orientation = 0,
             float offsetX = 0, float offsetY = 0,
             LabelStyle.HorizontalAlignmentEnum horizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center,
             LabelStyle.VerticalAlignmentEnum verticalAlignment = LabelStyle.VerticalAlignmentEnum.Center,
@@ -55,7 +55,7 @@ namespace Mapsui.Rendering.Skia
             return 0; // center
         }
 
-        public static void RenderRaster(SKCanvas canvas, SKBitmap bitmap, SKRect rect, float opacity = 1f)
+        public static void RenderRaster(SKCanvas canvas, SKImage bitmap, SKRect rect, float opacity = 1f)
         {
             // todo: Add some way to select one method or the other.
             // Method 1) Better for quality. Helps to compare to WPF
@@ -64,14 +64,14 @@ namespace Mapsui.Rendering.Skia
             //canvas.DrawBitmap(bitmap, rect, paint);
 
             // Method 2) Better for performance:
-            canvas.DrawBitmap(bitmap, rect);
+            canvas.DrawImage(bitmap, rect);
         }
 
-        public static void RenderBitmap(SKCanvas canvas, SKBitmap bitmap, SKRect rect, float opacity = 1f)
+        public static void RenderBitmap(SKCanvas canvas, SKImage bitmap, SKRect rect, float opacity = 1f)
         {
             var color = new SKColor(255, 255, 255, (byte) (255*opacity));
             var paint = new SKPaint {Color = color, FilterQuality = SKFilterQuality.High};
-            canvas.DrawBitmap(bitmap, rect, paint);
+            canvas.DrawImage(bitmap, rect, paint);
         }
     }
 }
