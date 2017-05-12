@@ -44,6 +44,7 @@
     <Compile Include="ExtensionMethods\ExtentExtensions.cs" />
     <Compile Include="ExtensionMethods\FeatureExtensions.cs" />
     <Compile Include="ExtensionMethods\GeometryExtensions.cs" />
+    <Compile Include="ExtensionMethods\StreamExtensions.cs" />
     <Compile Include="Fetcher\FeatureFetcher.cs" />
     <Compile Include="Fetcher\FetchOnThread.cs" />
     <Compile Include="Fetcher\FetchStrategy.cs" />
