@@ -112,7 +112,7 @@ namespace Mapsui.Layers
 
         public ITileSource TileSource
         {
-            get => _tileSource;
+            get { return _tileSource; }
             set
             {
                 SetTileSource(value);

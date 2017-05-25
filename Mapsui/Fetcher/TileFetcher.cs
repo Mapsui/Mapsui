@@ -53,8 +53,11 @@ namespace Mapsui.Fetcher
 
         public TileFetcher(ITileSource tileSource, MemoryCache<Feature> memoryCache, int maxAttempts = DefaultMaxAttempts, int maxThreads = DefaultMaxThreads, IFetchStrategy strategy = null)
         {
-            _tileSource = tileSource ?? throw new ArgumentException("TileProvider can not be null");
-            _memoryCache = memoryCache ?? throw new ArgumentException("MemoryCache can not be null");
+            if (tileSource == null) throw new ArgumentException("TileProvider can not be null");
+            if (memoryCache == null) throw new ArgumentException("MemoryCache can not be null");
+
+            _tileSource = tileSource;
+            _memoryCache = memoryCache;
             _maxAttempts = maxAttempts;
             _maxThreads = maxThreads;
             _strategy = strategy ?? new FetchStrategy();
@@ -62,7 +65,7 @@ namespace Mapsui.Fetcher
 
         public bool Busy
         {
-            get => _busy;
+            get { return _busy; }
             private set
             {
                 if (_busy == value) return; // prevent notify              
