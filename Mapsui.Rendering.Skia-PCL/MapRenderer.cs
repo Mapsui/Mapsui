@@ -14,6 +14,7 @@ namespace Mapsui.Rendering.Skia
     public class MapRenderer : IRenderer
     {
         private const int TilesToKeepMultiplier = 3;
+        private const int MinimumTilesToKeep = 32;
         private readonly SymbolCache _symbolCache = new SymbolCache();
 
         private readonly IDictionary<object, BitmapInfo> _tileCache =
@@ -74,43 +75,35 @@ namespace Mapsui.Rendering.Skia
   
             layers = layers.ToList();
 
-            SetAllTextureInfosToUnused();
-
             VisibleFeatureIterator.IterateLayers(viewport, layers, (v, l, s) => { RenderFeature(canvas, v, l, s); });
 
-            RemoveUnusedTextureInfos();
+            RemovedUnusedBitmapsFromCache();
 
             _currentIteration++;
         }
 
-        private void RemoveUnusedTextureInfos()
+        private void RemovedUnusedBitmapsFromCache()
         {
-            var numberOfTilesUsedInCurrentIteration =
+            var tilesUsedInCurrentIteration =
                 _tileCache.Values.Count(i => i.IterationUsed == _currentIteration);
-
-            var orderedKeys = _tileCache.OrderBy(kvp => kvp.Value.IterationUsed).Select(kvp => kvp.Key).ToList();
-
-            var counter = 0;
-            var tilesToKeep = orderedKeys.Count*TilesToKeepMultiplier;
-            var numberToRemove = numberOfTilesUsedInCurrentIteration - tilesToKeep;
-            foreach (var key in orderedKeys)
-            {
-                if (counter > numberToRemove)
-                    break;
-                var textureInfo = _tileCache[key];
-                _tileCache.Remove(key);
-                textureInfo.Bitmap.Dispose();
-                counter++;
-            }
+            var tilesToKeep = tilesUsedInCurrentIteration * TilesToKeepMultiplier;
+            tilesToKeep = Math.Max(tilesToKeep, MinimumTilesToKeep);
+            var tilesToRemove = _tileCache.Keys.Count - tilesToKeep;
+            
+            if (tilesToRemove > 0) RemoveOldBitmaps(_tileCache, tilesToRemove);
         }
 
-        private void SetAllTextureInfosToUnused()
+        private static void RemoveOldBitmaps(IDictionary<object, BitmapInfo> tileCache, int numberToRemove)
         {
-            foreach (var key in _tileCache.Keys.ToList())
+            var counter = 0;
+            var orderedKeys = tileCache.OrderBy(kvp => kvp.Value.IterationUsed).Select(kvp => kvp.Key).ToList();
+            foreach (var key in orderedKeys)
             {
-                var textureInfo = _tileCache[key];
-                textureInfo.IterationUsed = _currentIteration;
-                _tileCache[key] = textureInfo;
+                if (counter >= numberToRemove) break;
+                var textureInfo = tileCache[key];
+                tileCache.Remove(key);
+                textureInfo.Bitmap.Dispose();
+                counter++;
             }
         }
 
