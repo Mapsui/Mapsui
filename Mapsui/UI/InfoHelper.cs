@@ -21,7 +21,8 @@ namespace Mapsui.UI
         private static InfoEventArgs GetInfoEventArgs(IEnumerable<ILayer> layers, Point worldPosition, Point screenPosition,
             double resolution, ISymbolCache symbolCache)
         {
-            foreach (var layer in layers)
+            var reversedLayer = layers.Reverse();
+            foreach (var layer in reversedLayer)
             {
                 if (layer.Enabled == false) continue;
                 if (layer.MinVisible > resolution) continue;
