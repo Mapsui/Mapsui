@@ -68,10 +68,7 @@ namespace Mapsui.Layers
         {
             if (_tileSource != null)
             {
-                // Is causing thread leak _tileFetcher.AbortFetch();
-                _tileFetcher.DataChanged -= TileFetcherDataChanged;
-                _tileFetcher.PropertyChanged -= TileFetcherOnPropertyChanged;
-                _tileFetcher = null;
+                AbortFetcher();
                 _memoryCache.Clear();
             }
 
@@ -81,11 +78,28 @@ namespace Mapsui.Layers
             {
                 Attribution.Text = _tileSource.Attribution?.Text;
                 Attribution.Url = _tileSource.Attribution?.Url;
-                _tileFetcher = new TileFetcher(source, _memoryCache, _maxRetries, _maxThreads, _fetchStrategy);
-                _tileFetcher.DataChanged += TileFetcherDataChanged;
-                _tileFetcher.PropertyChanged += TileFetcherOnPropertyChanged;
+
+                CreateFetcher(source);
+
                 OnPropertyChanged(nameof(Envelope));
             }
+        }
+
+        private void CreateFetcher(ITileSource source)
+        {
+            _tileFetcher = new TileFetcher(source, _memoryCache, _maxRetries, _maxThreads, _fetchStrategy);
+            _tileFetcher.DataChanged += TileFetcherDataChanged;
+            _tileFetcher.PropertyChanged += TileFetcherOnPropertyChanged;
+        }
+
+        private void AbortFetcher()
+        {
+            if (_tileFetcher == null) return;
+            var tileFetcher = _tileFetcher;
+            _tileFetcher = null;
+            tileFetcher.AbortFetch();
+            tileFetcher.DataChanged -= TileFetcherDataChanged;
+            tileFetcher.PropertyChanged -= TileFetcherOnPropertyChanged;
         }
 
         private void TileFetcherOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
@@ -98,7 +112,7 @@ namespace Mapsui.Layers
 
         public ITileSource TileSource
         {
-            get { return _tileSource; }
+            get => _tileSource;
             set
             {
                 SetTileSource(value);
@@ -156,9 +170,12 @@ namespace Mapsui.Layers
             return _tileSource.Schema.Srs.Substring(startEpsgCode).Replace("::", ":").Trim();
         }
 
+        // Aborts the tile fetch thread. When the fetcher thread is still running
+        // the layer will not be disposed. Call this method only if the layer is 
+        // not used anymore
         public override void AbortFetch()
         {
-            // to nothing for now
+            AbortFetcher();
         }
 
         public override IReadOnlyList<double> Resolutions => _tileSource?.Schema?.Resolutions.Select(r => r.Value.UnitsPerPixel).ToList();
