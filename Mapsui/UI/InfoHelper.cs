@@ -27,13 +27,10 @@ namespace Mapsui.UI
                 if (layer.MinVisible > resolution) continue;
                 if (layer.MaxVisible < resolution) continue;
                 
-                var allFeatures = layer.GetFeaturesInView(layer.Envelope, resolution);
+                var features = layer.GetFeaturesInView(layer.Envelope, resolution);
                 
-                var features = allFeatures.Where(f => 
-                    IsTouchingTakingIntoAccountSymbolStyles(worldPosition, f, layer.Style, resolution, symbolCache)).ToList();
-
-                var feature = features.OrderBy(f => f.Geometry.GetBoundingBox().GetCentroid().Distance(worldPosition))
-                    .FirstOrDefault();
+                var feature = features
+                    .LastOrDefault(f => IsTouchingTakingIntoAccountSymbolStyles(worldPosition, f, layer.Style, resolution, symbolCache));
                 
                 if (feature != null)
                 {
@@ -46,6 +43,7 @@ namespace Mapsui.UI
                     };
                 }
             }
+            // return InfoEventArgs without feature if none was found. Can be usefull to create features
             return new InfoEventArgs { WorldPosition = worldPosition, ScreenPosition = screenPosition};
         }
 
