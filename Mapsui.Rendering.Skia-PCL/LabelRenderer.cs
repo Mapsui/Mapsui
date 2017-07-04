@@ -75,15 +75,17 @@ namespace Mapsui.Rendering.Skia
             var horizontalAlign = CalcHorizontalAlignment(style.HorizontalAlignment);
             var verticalAlign = CalcVerticalAlignment(style.VerticalAlignment);
                         
+            /* This actually produces invalid values. We only want width/height.
             var backRectXOffset = -rect.Left;
             var backRectYOffset = rect.Bottom;
+            */
 
             rect.Offset(
                 x - rect.Width * horizontalAlign + (float)style.Offset.X,
                 y + rect.Height * verticalAlign + (float)style.Offset.Y);
 
             var backRect = rect; // copy
-            rect.Offset(-backRectXOffset, -backRectYOffset); // correct for text specific offset returned paint.Measure
+//            rect.Offset(-backRectXOffset, -backRectYOffset); // correct for text specific offset returned paint.Measure
 
             backRect.Inflate(3, 3);
             DrawBackground(style, backRect, target);
