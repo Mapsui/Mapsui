@@ -290,7 +290,9 @@ namespace Mapsui.UI.Uwp
             _zoomAnimation.EasingFunction = new QuarticEase();
             Storyboard.SetTarget(_zoomAnimation, this);
             Storyboard.SetTargetProperty(_zoomAnimation, nameof(Map.Viewport.Resolution));
-            _zoomStoryBoard.Children.Add(_zoomAnimation);
+
+            if (!_zoomStoryBoard.Children.Contains(_zoomAnimation))
+                _zoomStoryBoard.Children.Add(_zoomAnimation);
         }
 
         private void MapControlSizeChanged(object sender, SizeChangedEventArgs e)
