@@ -24,8 +24,19 @@ namespace Mapsui.Rendering.Xaml
                 Foreground = new SolidColorBrush(labelStyle.ForeColor.ToXaml()),
                 FontFamily = new FontFamily(labelStyle.Font.FontFamily),
                 FontSize = labelStyle.Font.Size,
-                Margin = new Thickness(witdhMargin, heightMargin, witdhMargin, heightMargin)
+                Margin = new Thickness(witdhMargin, heightMargin, witdhMargin, heightMargin),
             };
+
+            // TODO: Halo is not supported by WPF, but we CAN do an outer glow-like effect...
+            if (labelStyle.Halo != null)
+            {
+                System.Windows.Media.Effects.DropShadowEffect haloEffect = new System.Windows.Media.Effects.DropShadowEffect();
+                haloEffect.ShadowDepth = 0;
+                haloEffect.Color = labelStyle.Halo.Color.ToXaml();
+                haloEffect.Opacity = haloEffect.Color.A / 255.0;
+                haloEffect.BlurRadius = labelStyle.Halo.Width * 2;
+                textblock.Effect = haloEffect;
+            }
 
             var border = new Border
             {
