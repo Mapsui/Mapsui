@@ -75,18 +75,37 @@ namespace Mapsui.Rendering.Skia
             var horizontalAlign = CalcHorizontalAlignment(style.HorizontalAlignment);
             var verticalAlign = CalcVerticalAlignment(style.VerticalAlignment);
                         
+            /* This actually produces invalid values. We only want width/height.
             var backRectXOffset = -rect.Left;
             var backRectYOffset = rect.Bottom;
+            */
 
             rect.Offset(
                 x - rect.Width * horizontalAlign + (float)style.Offset.X,
                 y + rect.Height * verticalAlign + (float)style.Offset.Y);
 
             var backRect = rect; // copy
-            rect.Offset(-backRectXOffset, -backRectYOffset); // correct for text specific offset returned paint.Measure
+//            rect.Offset(-backRectXOffset, -backRectYOffset); // correct for text specific offset returned paint.Measure
 
             backRect.Inflate(3, 3);
             DrawBackground(style, backRect, target);
+
+            if (style.Halo != null)
+            {
+                var haloPaint = CreatePaint(style);
+                haloPaint.Style = SKPaintStyle.StrokeAndFill;
+                haloPaint.Color = style.Halo.Color.ToSkia();
+
+                // TODO: PenStyle
+                /*
+                float[] intervals = { 10.0f, 5.0f, 2.0f, 5.0f };
+                haloPaint.SetPathEffect(SkDashPathEffect::Make(intervals, count, 0.0f));
+                */
+
+                haloPaint.StrokeWidth = (float)style.Halo.Width * 2;
+
+                target.DrawText(text, rect.Left, rect.Bottom, haloPaint);
+            }
 
             target.DrawText(text, rect.Left, rect.Bottom, paint);
         }
