@@ -52,7 +52,7 @@ namespace Mapsui.Rendering.Skia
             var skImageInfo = new SKImageInfo((int)backRect.Width, (int)backRect.Height);
 
             var bitmap = SKImage.Create(skImageInfo);
-
+            
             // todo: Construct SKCanvas with SKImage once this option becomes available
             using (var target = new SKCanvas(SKBitmap.FromImage(bitmap)))
             {
@@ -75,7 +75,7 @@ namespace Mapsui.Rendering.Skia
             var horizontalAlign = CalcHorizontalAlignment(style.HorizontalAlignment);
             var verticalAlign = CalcVerticalAlignment(style.VerticalAlignment);
                         
-            var backRectXOffset = -rect.Left;
+            var backRectXOffset = rect.Left;
             var backRectYOffset = rect.Bottom;
 
             rect.Offset(
