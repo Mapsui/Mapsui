@@ -88,6 +88,23 @@ namespace Mapsui.Rendering.Skia
             backRect.Inflate(3, 3);
             DrawBackground(style, backRect, target);
 
+            if (style.Halo != null)
+            {
+                var haloPaint = CreatePaint(style);
+                haloPaint.Style = SKPaintStyle.StrokeAndFill;
+                haloPaint.Color = style.Halo.Color.ToSkia();
+
+                // TODO: PenStyle
+                /*
+                float[] intervals = { 10.0f, 5.0f, 2.0f, 5.0f };
+                haloPaint.SetPathEffect(SkDashPathEffect::Make(intervals, count, 0.0f));
+                */
+
+                haloPaint.StrokeWidth = (float)style.Halo.Width * 2;
+
+                target.DrawText(text, rect.Left, rect.Bottom, haloPaint);
+            }
+
             target.DrawText(text, rect.Left, rect.Bottom, paint);
         }
 
