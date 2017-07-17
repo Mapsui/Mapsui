@@ -175,12 +175,14 @@
     <Compile Include="LayerListItem.xaml.cs">
       <DependentUpon>LayerListItem.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utilities\LimitedQueue.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Utilities.cs" />
+    <Compile Include="Utilities\Animation.cs" />
+    <Compile Include="Utilities\LogModel.cs" />
     <Compile Include="Window1.xaml.cs">
       <DependentUpon>Window1.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -235,6 +237,7 @@
       <Name>Mapsui.Samples.Common</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -8,6 +9,7 @@ using System.Windows.Data;
 using System.Windows.Input;
 using Mapsui.Logging;
 using Mapsui.Samples.Common.Desktop;
+using Mapsui.Samples.Wpf.Utilities;
 using Mapsui.Tests.Common;
 using Mapsui.UI;
 
@@ -134,9 +136,24 @@ namespace Mapsui.Samples.Wpf
             return radioButton;
         }
 
-        private void LogMethod(LogLevel logLevel, string s, Exception exception)
+        readonly LimitedQueue<LogModel> _logMessage = new LimitedQueue<LogModel>(10); 
+
+        private void LogMethod(LogLevel logLevel, string message, Exception exception)
         {
-            Dispatcher.Invoke(() => LogTextBox.Text = $"{logLevel} {s}");
+            _logMessage.Enqueue(new LogModel{Exception = exception, LogLevel = logLevel, Message = message});
+            Dispatcher.Invoke(() => LogTextBox.Text = ToMultiLineString(_logMessage));
+        }
+
+        private string ToMultiLineString(LimitedQueue<LogModel> logMessages)
+        {
+            var result = new StringBuilder();
+
+            foreach (var logMessage in logMessages)
+            {
+                result.Append($"{logMessage.LogLevel} {logMessage.Message}{Environment.NewLine}");
+            }
+
+            return result.ToString();
         }
 
         private static void MapControlFeatureInfo(object sender, FeatureInfoEventArgs e)
