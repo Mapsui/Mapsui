@@ -13,21 +13,17 @@ using SkiaSharp.Views.iOS;
 namespace Mapsui.UI.iOS
 {
     [Register("MapControl"), DesignTimeVisible(true)]
-    public class MapControl : UIStackView, IMapControl
+    public class MapControl : UIView, IMapControl
     {
         private Map _map;
         private readonly MapRenderer _renderer = new MapRenderer();
         private readonly SKCanvasView _canvas = new SKCanvasView();
-        private readonly AttributionView _attributionPanel = new AttributionView();
         private nuint _previousTouchCount = 0;
         private bool _viewportInitialized;
         private nfloat _previousX;
         private nfloat _previousY;
         private double _previousRadius;
 		private double _previousRotation;
-
-        private float Width => (float)Frame.Width;
-        private float Height => (float)Frame.Height;
 
         public event EventHandler ViewportInitialized;
 
@@ -43,35 +39,24 @@ namespace Mapsui.UI.iOS
             Initialize();
         }
 
-        public override CGRect Frame
-        {
-            get { return base.Frame; }
-            set
-            {
-                Resize(value);
-                base.Frame = value;
-            }
-        }
-
-        private void Resize(CGRect frame)
-        {
-            _canvas.Frame = frame;
-
-            _attributionPanel.ToBottomRight(frame);
-        }
-
         public void Initialize()
         {
             Map = new Map();
             BackgroundColor = UIColor.White;
 
-            Axis = UILayoutConstraintAxis.Vertical;
+			_canvas.TranslatesAutoresizingMaskIntoConstraints = false;
 
             _canvas.ClipsToBounds = true;
             _canvas.MultipleTouchEnabled = true;
+
             AddSubview(_canvas);
 
-            AddSubview(_attributionPanel);
+			AddConstraints(new NSLayoutConstraint [] {
+				NSLayoutConstraint.Create(this, NSLayoutAttribute.Leading, NSLayoutRelation.Equal, _canvas, NSLayoutAttribute.Leading, 1.0f, 0.0f),
+				NSLayoutConstraint.Create(this, NSLayoutAttribute.Trailing, NSLayoutRelation.Equal, _canvas, NSLayoutAttribute.Trailing, 1.0f, 0.0f),
+				NSLayoutConstraint.Create(this, NSLayoutAttribute.Top, NSLayoutRelation.Equal, _canvas, NSLayoutAttribute.Top, 1.0f, 0.0f),
+				NSLayoutConstraint.Create(this, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, _canvas, NSLayoutAttribute.Bottom, 1.0f, 0.0f)
+			});
 
             InitializeViewport();
 
@@ -83,24 +68,13 @@ namespace Mapsui.UI.iOS
             _canvas.PaintSurface += OnPaintSurface;
         }
 
-        public override void LayoutMarginsDidChange()
-        {
-            if (_canvas == null) return;
-
-            var frame = _canvas.Frame;
-            frame.Size = frame.Size;
-            _canvas.Frame = frame;
-
-            base.LayoutMarginsDidChange();
-        }
-
-        private void OnPaintSurface(object sender, SKPaintSurfaceEventArgs skPaintSurfaceEventArgs)
+		private void OnPaintSurface(object sender, SKPaintSurfaceEventArgs skPaintSurfaceEventArgs)
         {
             if (!_viewportInitialized) InitializeViewport();
             if (!_viewportInitialized) return;
 
-            if (Width != _map.Viewport.Width) _map.Viewport.Width = Width;
-            if (Height != _map.Viewport.Height) _map.Viewport.Height = Height;
+			_map.Viewport.Width = _canvas.Frame.Width;
+			_map.Viewport.Height = _canvas.Frame.Height;
 
             var scaleFactor = (float)UIScreen.MainScreen.Scale;
             skPaintSurfaceEventArgs.Surface.Canvas.Scale(scaleFactor, scaleFactor);
@@ -110,7 +84,7 @@ namespace Mapsui.UI.iOS
 
         private void InitializeViewport()
         {
-            if (ViewportHelper.TryInitializeViewport(_map, Width, Height))
+            if (ViewportHelper.TryInitializeViewport(_map, _canvas.Frame.Width, _canvas.Frame.Height))
             {
                 _viewportInitialized = true;
                 Map.ViewChanged(true);
@@ -219,7 +193,6 @@ namespace Mapsui.UI.iOS
                     temp.PropertyChanged -= MapPropertyChanged;
                     temp.RefreshGraphics -= MapRefreshGraphics;
                     temp.Dispose();
-                    _attributionPanel.Clear();
                 }
 
                 _map = value;
@@ -230,7 +203,6 @@ namespace Mapsui.UI.iOS
                     _map.PropertyChanged += MapPropertyChanged;
                     _map.RefreshGraphics += MapRefreshGraphics;
                     _map.ViewChanged(true);
-                    _attributionPanel.Populate(Map.Layers, Frame);
                 }
 
                 RefreshGraphics();
@@ -251,10 +223,6 @@ namespace Mapsui.UI.iOS
             else if (e.PropertyName == nameof(Layers.Layer.Opacity))
             {
                 RefreshGraphics();
-            }
-            else if (e.PropertyName == nameof(Map.Layers))
-            {
-                _attributionPanel.Populate(Map.Layers, Frame);
             }
         }
 
