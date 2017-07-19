@@ -1,5 +1,6 @@
 using System.IO;
 using System.Windows;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace Mapsui.Rendering.Xaml
@@ -18,20 +19,23 @@ namespace Mapsui.Rendering.Xaml
             return bitmapImage;
         }
 
-        public static System.Windows.Media.ImageBrush ToTiledImageBrush(this Stream stream)
+        public static ImageBrush ToTiledImageBrush(this Stream stream)
         {
             var bitmap = stream.ToBitmapImage();
 
-            var imageBrush = new System.Windows.Media.ImageBrush(bitmap)
+            return new ImageBrush(bitmap)
             {
                 Viewbox = new Rect(0, 0, bitmap.PixelWidth, bitmap.PixelHeight),
                 Viewport = new Rect(0, 0, bitmap.PixelWidth, bitmap.PixelHeight),
-                ViewportUnits = System.Windows.Media.BrushMappingMode.Absolute,
-                ViewboxUnits = System.Windows.Media.BrushMappingMode.Absolute,
-                TileMode = System.Windows.Media.TileMode.Tile
+                ViewportUnits = BrushMappingMode.Absolute,
+                ViewboxUnits = BrushMappingMode.Absolute,
+                TileMode = TileMode.Tile
             };
-
-            return imageBrush;
         }
-    }  
+
+        public static ImageBrush ToImageBrush(this Stream stream)
+        {
+            return new ImageBrush { ImageSource = stream.ToBitmapImage() };
+        }
+    }
 }
