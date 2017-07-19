@@ -222,12 +222,8 @@ namespace Mapsui.Rendering.Xaml
             // is scaled along with the rest. We want the outline to have a fixed
             // width independent of the scale. So here we counter scale using
             // the orginal width stored in the Tag.
-            if (renderedGeometry is XamlShapes.Path)
-            {
-                var path = renderedGeometry as XamlShapes.Path;
-                if (path.Tag is double?)
-                    path.StrokeThickness = (path.Tag as double?).Value * resolution;
-            }
+            var path = renderedGeometry as XamlShapes.Path;
+            if (path?.Tag is double) path.StrokeThickness = (path.Tag as double?).Value * resolution;
         }
     }
 }
