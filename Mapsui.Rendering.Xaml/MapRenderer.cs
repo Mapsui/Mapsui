@@ -171,7 +171,7 @@ namespace Mapsui.Rendering.Xaml
                     : null;
                 if (renderedGeometry == null)
                 {
-                    renderedGeometry = RenderGeometry(viewport, style, feature, symbolCache);
+                    renderedGeometry = RenderGeometry(viewport, style, feature, symbolCache, rasterizing);
                     if (!rasterizing) feature.RenderedGeometry[style] = renderedGeometry;
                 }
                 else
@@ -186,10 +186,10 @@ namespace Mapsui.Rendering.Xaml
         }
 
         private static Shape RenderGeometry(IViewport viewport, IStyle style, IFeature feature,
-            SymbolCache symbolCache)
+            SymbolCache symbolCache, bool rasterizing)
         {
             if (feature.Geometry is Geometries.Point)
-                return PointRenderer.RenderPoint(feature.Geometry as Geometries.Point, style, viewport, symbolCache);
+                return PointRenderer.RenderPoint(feature.Geometry as Geometries.Point, style, viewport, symbolCache, rasterizing);
             if (feature.Geometry is MultiPoint)
                 return GeometryRenderer.RenderMultiPoint(feature.Geometry as MultiPoint, style, viewport, symbolCache);
             if (feature.Geometry is LineString)

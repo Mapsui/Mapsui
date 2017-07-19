@@ -148,8 +148,10 @@ namespace Mapsui.Samples.Wpf
         {
             var result = new StringBuilder();
 
-            foreach (var logMessage in logMessages)
+            var copy = logMessages.ToList();
+            foreach (var logMessage in copy)
             {
+                if (logMessage == null) continue;
                 result.Append($"{logMessage.LogLevel} {logMessage.Message}{Environment.NewLine}");
             }
 

@@ -128,7 +128,7 @@ namespace Mapsui.Rendering.Skia
         private static void DrawPointWithBitmapStyle(SKCanvas canvas, SymbolStyle symbolStyle, Point destination,
             SymbolCache symbolCache)
         {
-            var bitmap = symbolCache.Get(symbolStyle.BitmapId);
+            var bitmap = symbolCache.GetOrCreate(symbolStyle.BitmapId);
 
             BitmapHelper.RenderBitmap(canvas, bitmap.Bitmap,
                 (float) destination.X, (float) destination.Y,
@@ -136,5 +136,7 @@ namespace Mapsui.Rendering.Skia
                 (float) symbolStyle.SymbolOffset.X, (float) symbolStyle.SymbolOffset.Y,
                 opacity: (float) symbolStyle.Opacity, scale: (float) symbolStyle.SymbolScale);
         }
+
+        
     }
 }

@@ -7,7 +7,7 @@ namespace Mapsui.Rendering.Skia
     {
         private readonly IDictionary<int, BitmapInfo> _cache = new Dictionary<int, BitmapInfo>();
 
-        public BitmapInfo Get(int bitmapId)
+        public BitmapInfo GetOrCreate(int bitmapId)
         {
             if (_cache.Keys.Contains(bitmapId)) return _cache[bitmapId];
             return _cache[bitmapId] = BitmapHelper.LoadBitmap(BitmapRegistry.Instance.Get(bitmapId));
@@ -15,9 +15,8 @@ namespace Mapsui.Rendering.Skia
 
         public Size GetSize(int bitmapId)
         {
-            var bitmap = Get(bitmapId);
+            var bitmap = GetOrCreate(bitmapId);
             return new Size(bitmap.Width, bitmap.Height);
         }
-
     }
 }

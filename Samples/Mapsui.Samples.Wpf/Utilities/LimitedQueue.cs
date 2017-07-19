@@ -1,20 +1,23 @@
 ﻿using System.Collections.Generic;
 
-public class LimitedQueue<T> : Queue<T>
+namespace Mapsui.Samples.Wpf.Utilities
 {
-    public int Limit { get; set; }
-
-    public LimitedQueue(int limit) : base(limit)
+    public class LimitedQueue<T> : Queue<T>
     {
-        Limit = limit;
-    }
+        public int Limit { get; set; }
 
-    public new void Enqueue(T item)
-    {
-        while (Count >= Limit)
+        public LimitedQueue(int limit) : base(limit)
         {
-            Dequeue();
+            Limit = limit;
         }
-        base.Enqueue(item);
+
+        public new void Enqueue(T item)
+        {
+            while (Count >= Limit)
+            {
+                Dequeue();
+            }
+            base.Enqueue(item);
+        }
     }
 }
