@@ -11,7 +11,7 @@ namespace Mapsui.Rendering.Xaml
     public static class PointRenderer
     {
         public static XamlShapes.Shape RenderPoint(Point point, IStyle style, IViewport viewport,
-            SymbolCache symbolCache, bool rasterizing)
+            SymbolCache symbolCache)
         {
             XamlShapes.Shape symbol;
             var matrix = XamlMedia.Matrix.Identity;
@@ -23,7 +23,7 @@ namespace Mapsui.Rendering.Xaml
                 if (symbolStyle.BitmapId < 0)
                     symbol = CreateSymbolFromVectorStyle(symbolStyle, symbolStyle.Opacity, symbolStyle.SymbolType);
                 else
-                    symbol = CreateSymbolFromBitmap(symbolStyle.BitmapId, symbolStyle.Opacity, symbolCache, rasterizing);
+                    symbol = CreateSymbolFromBitmap(symbolStyle.BitmapId, symbolStyle.Opacity, symbolCache);
                 matrix = CreatePointSymbolMatrix(viewport.Resolution, symbolStyle);
             }
             else
@@ -93,11 +93,9 @@ namespace Mapsui.Rendering.Xaml
             return matrix;
         }
 
-        private static XamlShapes.Shape CreateSymbolFromBitmap(int bitmapId, double opacity, SymbolCache symbolCache, bool rasterizing)
+        private static XamlShapes.Shape CreateSymbolFromBitmap(int bitmapId, double opacity, SymbolCache symbolCache)
         {
-            var imageBrush = rasterizing ?
-                BitmapRegistry.Instance.Get(bitmapId).ToBitmapImage().ToImageBrush() :
-                symbolCache.GetOrCreate(bitmapId).ToImageBrush();
+            var imageBrush = symbolCache.GetOrCreate(bitmapId).ToImageBrush();
 
             // note: It probably makes more sense to use PixelWidth here:
             var width = imageBrush.ImageSource.Width;
