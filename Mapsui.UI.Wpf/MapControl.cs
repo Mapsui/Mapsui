@@ -50,6 +50,7 @@ namespace Mapsui.UI.Wpf
         private Geometries.Point _skiaScale;
         private double _toResolution = double.NaN;
         private bool _viewportInitialized;
+        private bool _hasBeenManipulated;
         private readonly AttributionPanel _attributionPanel = CreateAttributionPanel();
 
         public MapControl()
@@ -68,12 +69,15 @@ namespace Mapsui.UI.Wpf
             MouseLeftButtonDown += MapControlMouseLeftButtonDown;
             MouseLeftButtonUp += MapControlMouseLeftButtonUp;
 
+            TouchUp += MapControlTouchUp;
+
             MouseMove += MapControlMouseMove;
             MouseLeave += MapControlMouseLeave;
             MouseWheel += MapControlMouseWheel;
 
             SizeChanged += MapControlSizeChanged;
 
+            ManipulationStarted += OnManipulationStarted;
             ManipulationDelta += OnManipulationDelta;
             ManipulationCompleted += OnManipulationCompleted;
             ManipulationInertiaStarting += OnManipulationInertiaStarting;
@@ -439,6 +443,12 @@ namespace Mapsui.UI.Wpf
             ReleaseMouseCapture();
         }
 
+        private void MapControlTouchUp(object sender, TouchEventArgs e)
+        {
+            if (!_hasBeenManipulated)
+                Map.InvokeInfo(e.GetTouchPoint(this).Position.ToMapsui(), Renderer.SymbolCache);
+        }
+
         private void HandleFeatureInfo(MouseButtonEventArgs e)
         {
             if (FeatureInfo == null) return; // don't fetch if you the call back is not set.
@@ -595,8 +605,16 @@ namespace Mapsui.UI.Wpf
             e.TranslationBehavior.DesiredDeceleration = 25*96.0/(1000.0*1000.0);
         }
 
+        private void OnManipulationStarted(object sender, ManipulationStartedEventArgs e)
+        {
+            _hasBeenManipulated = false;
+        }
+
         private void OnManipulationDelta(object sender, ManipulationDeltaEventArgs e)
         {
+            _hasBeenManipulated |= Math.Abs(e.DeltaManipulation.Translation.X) > SystemParameters.MinimumHorizontalDragDistance
+                     || Math.Abs(e.DeltaManipulation.Translation.Y) > SystemParameters.MinimumVerticalDragDistance;
+
             var previousX = e.ManipulationOrigin.X;
             var previousY = e.ManipulationOrigin.Y;
             var currentX = e.ManipulationOrigin.X + e.DeltaManipulation.Translation.X;
