@@ -34,18 +34,26 @@ namespace Mapsui.Rendering.Skia
 
 		        var boundingBox = feature.Geometry.GetBoundingBox();
 
-		        var priorMatrix = canvas.TotalMatrix;
+		        if (viewport.IsRotated)
+		        {
+		            var priorMatrix = canvas.TotalMatrix;
 
-		        var matrix = CreateRotationMatrix(viewport, boundingBox, priorMatrix);
+		            var matrix = CreateRotationMatrix(viewport, boundingBox, priorMatrix);
 
-		        canvas.SetMatrix(matrix);
+		            canvas.SetMatrix(matrix);
 
-		        var destination = new BoundingBox(0.0, 0.0, boundingBox.Width, boundingBox.Height);
+		            var destination = new BoundingBox(0.0, 0.0, boundingBox.Width, boundingBox.Height);
 
-		        BitmapHelper.RenderRaster(canvas, bitmapInfo.Bitmap, destination.ToSkia());
+		            BitmapHelper.RenderRaster(canvas, bitmapInfo.Bitmap, destination.ToSkia());
 
-		        canvas.SetMatrix(priorMatrix);
-            }
+		            canvas.SetMatrix(priorMatrix);
+		        }
+		        else
+		        {
+		            var destination = WorldToScreen(viewport, feature.Geometry.GetBoundingBox());
+		            BitmapHelper.RenderRaster(canvas, bitmapInfo.Bitmap, RoundToPixel(destination).ToSkia());
+                }
+		    }
 			catch (Exception ex)
 			{
 				Logger.Log (LogLevel.Error, ex.Message, ex);
@@ -56,11 +64,11 @@ namespace Mapsui.Rendering.Skia
         {
             SKMatrix matrix;
 
-            //The front-end sets up the canvas with a matrix based on screen scaling (e.g. retina).
-            //We need to retain that effect by combining our matrix with the incoming matrix.
+            // The front-end sets up the canvas with a matrix based on screen scaling (e.g. retina).
+            // We need to retain that effect by combining our matrix with the incoming matrix.
 
-            //We'll create four matrices in addition to the incoming matrix. They perform the
-            //zoom scale, focal point offset, user rotation and finally, centering in the screen.
+            // We'll create four matrices in addition to the incoming matrix. They perform the
+            // zoom scale, focal point offset, user rotation and finally, centering in the screen.
 
             var userRotation = SKMatrix.MakeRotationDegrees((float) viewport.Rotation);
             var focalPointOffset = SKMatrix.MakeTranslation(
@@ -69,7 +77,7 @@ namespace Mapsui.Rendering.Skia
             var zoomScale = SKMatrix.MakeScale((float) (1.0 / viewport.Resolution), (float) (1.0 / viewport.Resolution));
             var centerInScreen = SKMatrix.MakeTranslation((float) (viewport.Width / 2.0), (float) (viewport.Height / 2.0));
 
-            //We'll concatenate them like so: incomingMatrix * centerInScreen * userRotation * zoomScale * focalPointOffset
+            // We'll concatenate them like so: incomingMatrix * centerInScreen * userRotation * zoomScale * focalPointOffset
 
             SKMatrix.Concat(ref matrix, zoomScale, focalPointOffset);
             SKMatrix.Concat(ref matrix, userRotation, matrix);
@@ -77,6 +85,28 @@ namespace Mapsui.Rendering.Skia
             SKMatrix.Concat(ref matrix, priorMatrix, matrix);
 
             return matrix;
+        }
+
+        private static BoundingBox WorldToScreen(IViewport viewport, BoundingBox boundingBox)
+        {
+            var first = viewport.WorldToScreen(boundingBox.Min);
+            var second = viewport.WorldToScreen(boundingBox.Max);
+            return new BoundingBox
+            (
+                Math.Min(first.X, second.X),
+                Math.Min(first.Y, second.Y),
+                Math.Max(first.X, second.X),
+                Math.Max(first.Y, second.Y)
+            );
+        }
+
+        private static BoundingBox RoundToPixel(BoundingBox boundingBox)
+        {
+            return new BoundingBox(
+                (float)Math.Round(boundingBox.Left),
+                (float)Math.Round(Math.Min(boundingBox.Top, boundingBox.Bottom)),
+                (float)Math.Round(boundingBox.Right),
+                (float)Math.Round(Math.Max(boundingBox.Top, boundingBox.Bottom)));
         }
     }
 }
