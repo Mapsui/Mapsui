@@ -24,6 +24,7 @@ namespace Mapsui.UI.iOS
         private nfloat _previousX;
         private nfloat _previousY;
         private double _previousRadius;
+		private double _previousRotation;
 
         private float Width => (float)Frame.Width;
         private float Height => (float)Frame.Height;
@@ -162,17 +163,21 @@ namespace Mapsui.UI.iOS
 
                 centerX = centerX / touches.Count;
                 centerY = centerY / touches.Count;
+
                 var radius = Algorithms.Distance(centerX, centerY, locations[0].X, locations[0].Y);
+				var rotation = Math.Atan2 (locations [1].Y - locations [0].Y, locations [1].X - locations [0].X) * 180.0 / Math.PI;
 
                 if (_previousTouchCount == touches.Count)
                 {
                     _map.Viewport.Transform(centerX, centerY, _previousX, _previousY, radius / _previousRadius);
+					_map.Viewport.Rotation += rotation - _previousRotation;
                     RefreshGraphics();
                 }
 
                 _previousX = centerX;
                 _previousY = centerY;
                 _previousRadius = radius;
+				_previousRotation = rotation;
             }
             _previousTouchCount = touches.Count;
         }
