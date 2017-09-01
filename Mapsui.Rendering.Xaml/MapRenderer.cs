@@ -114,6 +114,11 @@ namespace Mapsui.Rendering.Xaml
             {
                 var features = layer.GetFeaturesInView(viewport.Extent, viewport.Resolution).ToList();
                 var layerStyles = BaseLayer.GetLayerStyles(layer);
+
+                // If rasterizing (which is usually on a background thread) create a new SymbolCache 
+                // just for this rendering because cross thread access is not allowed in WPF.
+
+                if (rasterizing) symbolCache = new SymbolCache();
                 
                 foreach (var layerStyle in layerStyles)
                 {
@@ -125,7 +130,7 @@ namespace Mapsui.Rendering.Xaml
                         if ((style == null) || (style.Enabled == false) || (style.MinVisible > viewport.Resolution) ||
                             (style.MaxVisible < viewport.Resolution)) continue;
 
-                        RenderFeature(viewport, canvas, feature, style, rasterizing, symbolCache);
+                        RenderFeature(viewport, canvas, feature, style, symbolCache, rasterizing);
                     }
                 }
 
@@ -134,7 +139,7 @@ namespace Mapsui.Rendering.Xaml
                     var styles = feature.Styles ?? Enumerable.Empty<IStyle>();
                     foreach (var style in styles)
                         if ((feature.Styles != null) && style.Enabled)
-                            RenderFeature(viewport, canvas, feature, style, rasterizing, symbolCache);
+                            RenderFeature(viewport, canvas, feature, style, symbolCache, rasterizing);
                 }
 
                 return canvas;
@@ -155,8 +160,7 @@ namespace Mapsui.Rendering.Xaml
             }
         }
 
-        private static void RenderFeature(IViewport viewport, Canvas canvas, IFeature feature, IStyle style,
-            bool rasterizing, SymbolCache symbolCache)
+        private static void RenderFeature(IViewport viewport, Canvas canvas, IFeature feature, IStyle style, SymbolCache symbolCache, bool rasterizing)
         {
             if (style is LabelStyle)
             {

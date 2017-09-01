@@ -2,9 +2,9 @@
 using System.Windows;
 using System.Windows.Media.Animation;
 
-namespace Mapsui.Samples.Wpf
+namespace Mapsui.Samples.Wpf.Utilities
 {
-    public static class Utilities
+    public static class Animation
     {
         public static void AnimateOpacity(UIElement target, double from, double to, int duration)
         {

@@ -51,6 +51,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\BitmapImageExtensions.cs" />
     <Compile Include="SymbolCache.cs" />
     <Compile Include="Extensions\GeometryExtensions.cs" />
     <Compile Include="GeometryRenderer.cs" />

@@ -5,6 +5,7 @@ using XamlBrush = System.Windows.Media.Brush;
 using XamlColor = System.Windows.Media.Color;
 using System.Windows;
 using System.Collections.Generic;
+using System.Windows.Media.Imaging;
 using Mapsui.Styles;
 
 namespace Mapsui.Rendering.Xaml
@@ -50,7 +51,7 @@ namespace Mapsui.Rendering.Xaml
                 case FillStyle.BackwardDiagonal:
                     return CreateHatchBrush(brush, 10, 10, new List<Geometry> { Geometry.Parse("M 0 10 l 10 -10"), Geometry.Parse("M -0.5 0.5 l 10 -10"), Geometry.Parse("M 8 12 l 10 -10") });                    
                 case FillStyle.Bitmap:
-                    return ToTiledImageBrush(brush, symbolCache);
+                    return GetOrCreateBitmapImage(brush, symbolCache).ToTiledImageBrush();
                 case FillStyle.Dotted:
                     return DottedBrush(brush);
                 case FillStyle.DiagonalCross:
@@ -98,11 +99,11 @@ namespace Mapsui.Rendering.Xaml
             return CreatePatternVisual(elements, viewport, viewbox);
         }
 
-        private static ImageBrush ToTiledImageBrush(Styles.Brush brush, SymbolCache symbolCache = null)
+        private static BitmapImage GetOrCreateBitmapImage(Styles.Brush brush, SymbolCache symbolCache = null)
         {
             return symbolCache != null ? 
-                symbolCache.GetTiledImageBrush(brush.BitmapId) : 
-                BitmapRegistry.Instance.Get(brush.BitmapId).ToTiledImageBrush();
+                symbolCache.GetOrCreate(brush.BitmapId): 
+                BitmapRegistry.Instance.Get(brush.BitmapId).ToBitmapImage();
         }
         
         private static VisualBrush DottedBrush(Styles.Brush brush)

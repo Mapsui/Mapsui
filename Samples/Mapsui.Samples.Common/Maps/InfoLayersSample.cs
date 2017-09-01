@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
@@ -25,7 +26,7 @@ namespace Mapsui.Samples.Common.Maps
             map.InfoLayers.Add(map.Layers.First(l => l.Name == InfoLayerName));
             map.InfoLayers.Add(map.Layers.First(l => l.Name == PolygonLayerName));
             map.HoverLayers.Add(map.Layers.First(l => l.Name == HoverLayerName));
-
+            
             return map;
         }
 
@@ -33,21 +34,72 @@ namespace Mapsui.Samples.Common.Maps
         {
             var layer = new MemoryLayer {Name = PolygonLayerName};
             var provider = new MemoryProvider();
+            provider.Features.Add(CreatePolygonFeature());
+            provider.Features.Add(CreateMultiPolygonFeature());
+            layer.DataSource = provider;
+            layer.Style = null;
+            return layer;
+        }
+
+        private static Feature CreateMultiPolygonFeature()
+        {
             var feature = new Feature
             {
-                Geometry = new Polygon(new LinearRing(new[]
-                {
-                    new Point(1000000, 1000000),
-                    new Point(1000000, -1000000),
-                    new Point(-1000000, -1000000),
-                    new Point(-1000000, 1000000),
-                    new Point(1000000, 1000000)
-                })),
+                Geometry = CreateMultiPolygon(),
+                ["Name"] = "Multipolygon 1"
+            };
+            feature.Styles.Add(new VectorStyle { Fill = new Brush(Color.Black), Outline = new Pen(Color.White, 1)});
+            return feature;
+        }
+
+        private static Feature CreatePolygonFeature()
+        {
+            var feature = new Feature
+            {
+                Geometry = CreatePolygon(),
                 ["Name"] = "Polygon 1"
             };
-            provider.Features.Add(feature);
-            layer.DataSource = provider;
-            return layer;
+            feature.Styles.Add(new VectorStyle());
+            return feature;
+        }
+
+        private static MultiPolygon CreateMultiPolygon()
+        {
+            return new MultiPolygon
+            {
+                Polygons = new List<Polygon>
+                {
+                    new Polygon(new LinearRing(new[]
+                    {
+                        new Point(4000000, 3000000),
+                        new Point(4000000, 2000000),
+                        new Point(3000000, 2000000),
+                        new Point(3000000, 3000000),
+                        new Point(4000000, 3000000)
+                    })),
+
+                    new Polygon(new LinearRing(new[]
+                    {
+                        new Point(4000000, 5000000),
+                        new Point(4000000, 4000000),
+                        new Point(3000000, 4000000),
+                        new Point(3000000, 5000000),
+                        new Point(4000000, 5000000)
+                    }))
+                }
+            };
+        }
+
+        private static Polygon CreatePolygon()
+        {
+            return new Polygon(new LinearRing(new[]
+            {
+                new Point(1000000, 1000000),
+                new Point(1000000, -1000000),
+                new Point(-1000000, -1000000),
+                new Point(-1000000, 1000000),
+                new Point(1000000, 1000000)
+            }));
         }
 
         private static ILayer CreateInfoLayer(BoundingBox envelope)

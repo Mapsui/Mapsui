@@ -95,7 +95,7 @@ namespace Mapsui.Rendering.Xaml
 
         private static XamlShapes.Shape CreateSymbolFromBitmap(int bitmapId, double opacity, SymbolCache symbolCache)
         {
-            var imageBrush = symbolCache.GetImageBrush(bitmapId);
+            var imageBrush = symbolCache.GetOrCreate(bitmapId).ToImageBrush();
 
             // note: It probably makes more sense to use PixelWidth here:
             var width = imageBrush.ImageSource.Width;

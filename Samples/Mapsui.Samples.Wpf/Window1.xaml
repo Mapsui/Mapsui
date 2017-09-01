@@ -12,11 +12,6 @@
         Height="800"
         Title="Mapsui.Samples.Wpf"
         SizeToContent="Manual">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="30" />
-        </Grid.RowDefinitions>
         <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
             <wpf1:MapControl x:Name="MapControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
             <Border BorderBrush="White" Opacity="0.65" Background="White" BorderThickness="6" MinWidth="140"
@@ -58,10 +53,9 @@
                     VerticalAlignment="Bottom" HorizontalAlignment="Center" MinWidth="40" MinHeight="30">
                 <TextBlock x:Name="MouseCoordinates" Text="0, 0" />
             </Border>
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Margin="8"
+                        HorizontalAlignment="Right" IsHitTestVisible="False">
+                <TextBlock Name="LogTextBox" />
+            </StackPanel>
         </Grid>
-        <StackPanel Name="LogPanel" Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Stretch"
-                    HorizontalAlignment="Stretch">
-            <TextBlock Name="LogTextBox" />
-        </StackPanel>
-    </Grid>
 </Window>

@@ -74,16 +74,5 @@ namespace Mapsui.Samples.Common.Maps
             var bitmapDataStream = assembly.GetManifestResourceStream(resource);
             return bitmapDataStream;
         }
-        
-        private static Feature CreatePointWithDefaultStyle()
-        {
-            var feature = new Feature { Geometry = new Point(0, 0) };
-
-            feature.Styles.Add(new SymbolStyle());
-            feature.Styles.Add(new LabelStyle { Text = "Default Style",
-                HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Left });
-
-            return feature;
-        }
     }
 }
