@@ -38,23 +38,17 @@ namespace Mapsui.Rendering.Skia
         {
             try
             {
-                using (
-                    var bitmap = new SKBitmap((int) viewport.Width, (int) viewport.Height, SKColorType.Bgra8888,
-                        SKAlphaType.Unpremul))
+                using (var surface = SKSurface.Create(
+                    (int)viewport.Width, (int)viewport.Height, SKImageInfo.PlatformColorType, SKAlphaType.Unpremul))
                 {
-                    using (var canvas = new SKCanvas(bitmap))
+                    Render(surface.Canvas, viewport, layers, background);
+                    using (var image = surface.Snapshot())
                     {
-                        
-                        Render(canvas, viewport, layers, background);
-                        using (var image = SKImage.FromBitmap(bitmap))
+                        using (var data = image.Encode())
                         {
-                            using (var data = image.Encode())
-                            {
-                                var memoryStream = new MemoryStream();
-                                data.SaveTo(memoryStream);
-                                //System.IO.File.WriteAllBytes($"c:/temp/{layers.First().Name}.png", memoryStream.ToArray());
-                                return memoryStream;
-                            }
+                            var memoryStream = new MemoryStream();
+                            data.SaveTo(memoryStream);
+                            return memoryStream;
                         }
                     }
                 }
