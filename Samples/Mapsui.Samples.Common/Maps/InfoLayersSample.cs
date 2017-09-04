@@ -48,7 +48,7 @@ namespace Mapsui.Samples.Common.Maps
                 Geometry = CreateMultiPolygon(),
                 ["Name"] = "Multipolygon 1"
             };
-            feature.Styles.Add(new VectorStyle { Fill = new Brush(Color.Black), Outline = new Pen(Color.White, 1)});
+            feature.Styles.Add(new VectorStyle { Fill = new Brush(Color.Gray), Outline = new Pen(Color.Black)});
             return feature;
         }
 
