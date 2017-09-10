@@ -16,10 +16,10 @@ namespace Mapsui.Samples.Common.Maps
             // OSM uses spherical mercator coordinates. So transform the lon lat coordinates to spherical mercator
             var sphericalMercatorCoordinate = SphericalMercator.FromLonLat(centerOfLondonOntario.X, centerOfLondonOntario.Y);
             // Set the center of the viewport to the coordinate. The UI will refresh automatically
-            map.Viewport.Center = sphericalMercatorCoordinate;
+            map.NavigateTo(sphericalMercatorCoordinate);
             // Additionally you might want to set the resolution, this could depend on your specific purpose
-            map.Viewport.Resolution = map.Resolutions[9];
-
+            map.NavigateTo(map.Resolutions[9]);
+            
             return map;
         }
     }
