@@ -22,6 +22,7 @@ namespace Mapsui.UI.Android
         private int _mode = None;
         private PointF _previousMap, _currentMap;
         private PointF _previousMid = new PointF();
+        private double _previousAngle;
         private readonly PointF _currentMid = new PointF();
         private float _oldDist = 1f;
         private bool _viewportInitialized;
@@ -119,6 +120,7 @@ namespace Mapsui.UI.Android
                     _oldDist = Spacing(args.Event);
                     MidPoint(_currentMid, args.Event);
                     _previousMid = _currentMid;
+                    _previousAngle = Angle (args.Event);
                     _mode = Zoom;
                     break;
                 case MotionEventActions.Pointer2Up:
@@ -154,18 +156,33 @@ namespace Mapsui.UI.Android
                                 _previousMid = new PointF(_currentMid.X, _currentMid.Y);
                                 MidPoint(_currentMid, args.Event);
 
+                                var angle = Angle (args.Event);
+
                                 _map.Viewport.Transform(
                                     _currentMid.X / _scale,
                                     _currentMid.Y / _scale,
                                     _previousMid.X / _scale,
                                     _previousMid.Y / _scale,
                                     scale);
+                                _map.Viewport.Rotation += angle - _previousAngle;
                                 _canvas.Invalidate();
+
+                                _previousAngle = angle;
                             }
                             break;
                     }
                     break;
             }
+        }
+
+        private static double Angle (MotionEvent me)
+        {
+            if (me.PointerCount < 2)
+                throw new ArgumentException ();
+            var x = me.GetX (0) - me.GetX (1);
+            var y = me.GetY (0) - me.GetY (1);
+            var rotation = Math.Atan2 (me.GetY (1) - me.GetY (0), me.GetX (1) - me.GetX (0)) * 180.0 / Math.PI;  
+            return rotation;
         }
 
         private static float Spacing(MotionEvent me)
