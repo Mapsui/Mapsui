@@ -58,6 +58,7 @@
     <Compile Include="Providers\FeaturesTests.cs" />
     <Compile Include="Rendering\RenderGetStrategyTests.cs" />
     <Compile Include="UI\FeatureInfoTests.cs" />
+    <Compile Include="UI\ViewportLimiterTests.cs" />
     <Compile Include="Utilities\VersionTests.cs" />
   </ItemGroup>
   <ItemGroup>
