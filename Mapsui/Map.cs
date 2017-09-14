@@ -163,7 +163,6 @@ namespace Mapsui
         public void Dispose()
         {
             AbortFetch();
-            _layers.Clear();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
