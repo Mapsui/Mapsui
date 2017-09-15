@@ -65,12 +65,8 @@ namespace Mapsui.Layers
         }
 
         private void SetTileSource(ITileSource source)
-        {
-            if (_tileSource != null)
-            {
-                AbortFetcher();
-                _memoryCache.Clear();
-            }
+		{
+			_memoryCache.Clear ();
 
             _tileSource = source;
 
@@ -79,27 +75,19 @@ namespace Mapsui.Layers
                 Attribution.Text = _tileSource.Attribution?.Text;
                 Attribution.Url = _tileSource.Attribution?.Url;
 
-                CreateFetcher(source);
+				if (_tileFetcher != null)
+				{
+					_tileFetcher.AbortFetch ();
+					_tileFetcher.DataChanged -= TileFetcherDataChanged;
+					_tileFetcher.PropertyChanged -= TileFetcherOnPropertyChanged;
+				}
+
+				_tileFetcher = new TileFetcher (source, _memoryCache, _maxRetries, _maxThreads, _fetchStrategy);
+				_tileFetcher.DataChanged += TileFetcherDataChanged;
+				_tileFetcher.PropertyChanged += TileFetcherOnPropertyChanged;
 
                 OnPropertyChanged(nameof(Envelope));
             }
-        }
-
-        private void CreateFetcher(ITileSource source)
-        {
-            _tileFetcher = new TileFetcher(source, _memoryCache, _maxRetries, _maxThreads, _fetchStrategy);
-            _tileFetcher.DataChanged += TileFetcherDataChanged;
-            _tileFetcher.PropertyChanged += TileFetcherOnPropertyChanged;
-        }
-
-        private void AbortFetcher()
-        {
-            if (_tileFetcher == null) return;
-            var tileFetcher = _tileFetcher;
-            _tileFetcher = null;
-            tileFetcher.AbortFetch();
-            tileFetcher.DataChanged -= TileFetcherDataChanged;
-            tileFetcher.PropertyChanged -= TileFetcherOnPropertyChanged;
         }
 
         private void TileFetcherOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
@@ -175,7 +163,7 @@ namespace Mapsui.Layers
         // not used anymore
         public override void AbortFetch()
         {
-            AbortFetcher();
+			_tileFetcher?.AbortFetch ();
         }
 
         public override IReadOnlyList<double> Resolutions => _tileSource?.Schema?.Resolutions.Select(r => r.Value.UnitsPerPixel).ToList();

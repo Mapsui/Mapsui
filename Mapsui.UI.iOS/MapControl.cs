@@ -214,6 +214,7 @@ namespace Mapsui.UI.iOS
 					temp.DataChanged -= MapDataChanged;
 					temp.PropertyChanged -= MapPropertyChanged;
 					temp.RefreshGraphics -= MapRefreshGraphics;
+					temp.AbortFetch ();
 					_attributionPanel.Clear ();
 				}
 
