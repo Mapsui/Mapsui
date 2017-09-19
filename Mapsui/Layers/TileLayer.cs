@@ -35,7 +35,6 @@ namespace Mapsui.Layers
         private TileFetcher _tileFetcher;
         private ITileSource _tileSource;
         private readonly int _maxRetries;
-        private readonly int _maxThreads;
         private readonly IFetchStrategy _fetchStrategy;
         private readonly IRenderGetStrategy _renderStrategy;
         private readonly int _minExtraTiles;
@@ -49,14 +48,12 @@ namespace Mapsui.Layers
             Task.Factory.StartNew(() => TileSource = tileSourceInitializer());
         }
 
-        public TileLayer(ITileSource source = null, int minTiles = 200, int maxTiles = 300, int maxRetries = TileFetcher.DefaultMaxAttempts,
-            int maxThreads = TileFetcher.DefaultMaxThreads, IFetchStrategy fetchStrategy = null,
+        public TileLayer(ITileSource source = null, int minTiles = 200, int maxTiles = 300, int maxRetries = TileFetcher.DefaultMaxAttempts, IFetchStrategy fetchStrategy = null,
             IRenderGetStrategy renderFetchStrategy = null, int minExtraTiles = -1, int maxExtraTiles = -1)
         {
             _memoryCache = new MemoryCache<Feature>(minTiles, maxTiles);
             Style = new VectorStyle { Outline = { Color = Color.FromArgb(0, 0, 0, 0) } }; // initialize with transparent outline
             _maxRetries = maxRetries;
-            _maxThreads = maxThreads;
             _fetchStrategy = fetchStrategy ?? new FetchStrategy();
             _renderStrategy = renderFetchStrategy ?? new RenderGetStrategy();
             _minExtraTiles = minExtraTiles;
@@ -82,7 +79,7 @@ namespace Mapsui.Layers
 					_tileFetcher.PropertyChanged -= TileFetcherOnPropertyChanged;
 				}
 
-				_tileFetcher = new TileFetcher (source, _memoryCache, _maxRetries, _maxThreads, _fetchStrategy);
+				_tileFetcher = new TileFetcher (source, _memoryCache, _maxRetries, _fetchStrategy);
 				_tileFetcher.DataChanged += TileFetcherDataChanged;
 				_tileFetcher.PropertyChanged += TileFetcherOnPropertyChanged;
 

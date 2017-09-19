@@ -17,6 +17,7 @@
 
 using System;
 using BruTile;
+using System.Threading;
 
 namespace Mapsui.Fetcher
 {
@@ -27,12 +28,14 @@ namespace Mapsui.Fetcher
         readonly ITileProvider _tileProvider;
         readonly TileInfo _tileInfo;
         readonly FetchTileCompletedEventHandler _fetchTileCompleted;
+		readonly CancellationToken _cancellationToken;
 
-        public FetchOnThread(ITileProvider tileProvider, TileInfo tileInfo, FetchTileCompletedEventHandler fetchTileCompleted)
+		public FetchOnThread(ITileProvider tileProvider, TileInfo tileInfo, FetchTileCompletedEventHandler fetchTileCompleted, CancellationToken cancellationToken)
         {
             _tileProvider = tileProvider;
             _tileInfo = tileInfo;
             _fetchTileCompleted = fetchTileCompleted;
+			_cancellationToken = cancellationToken;
         }
 
         public void FetchTile()
