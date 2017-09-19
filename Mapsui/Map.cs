@@ -47,6 +47,22 @@ namespace Mapsui
             Layers = new LayerCollection();
             Viewport =  new Viewport { Center = { X = double.NaN, Y = double.NaN }, Resolution = double.NaN };
         }
+        public PanMode PanMode { get; set; } = PanMode.KeepCenterWithinExtents;
+
+        public ZoomMode ZoomMode { get; set; } = ZoomMode.KeepWithinResolutions;
+
+        /// <summary>
+        /// Set this property in combination KeepCenterWithinExtents or KeepViewportWithinExtents.
+        /// If PanLimits is not set Map.Extent will be used as restricted extent.
+        /// </summary>
+        public BoundingBox PanLimits { get; set; }
+
+        /// <summary>
+        /// Pair of the limits for the resolutions (smallest and biggest). The resolution is kept between these values.
+        /// </summary>
+        public MinMax ZoomLimits { get; set; }
+
+        private MinMax _resolutionExtremes;
 
         public string CRS { get; set; }
 
@@ -186,7 +202,9 @@ namespace Mapsui
             InfoLayers.Remove(layer);
 
             Resolutions = DetermineResolutions(Layers);
-            
+            _resolutionExtremes = ViewportLimiter.GetExtremes(Resolutions); 
+
+
             OnPropertyChanged(nameof(Layers));
         }
 
@@ -219,6 +237,7 @@ namespace Mapsui
             layer.Transformation = Transformation;
             layer.CRS = CRS;
             Resolutions = DetermineResolutions(Layers);
+            _resolutionExtremes = ViewportLimiter.GetExtremes(Resolutions);
             OnPropertyChanged(nameof(Layers));
         }
 

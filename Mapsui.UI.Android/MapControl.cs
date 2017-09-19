@@ -102,6 +102,7 @@ namespace Mapsui.UI.Android
         {
             var x = (int)args.Event.RawX;
             var y = (int)args.Event.RawY;
+
             switch (args.Event.Action)
             {
                 case MotionEventActions.Down:
@@ -140,6 +141,10 @@ namespace Mapsui.UI.Android
                                     _currentMap.Y / _scale,
                                     _previousMap.X / _scale,
                                     _previousMap.Y / _scale);
+
+                                ViewportLimiter.LimitExtent(_map.Viewport,
+                                    _map.PanMode, _map.PanLimits, _map.Envelope);
+
                                 _canvas.Invalidate();
                             }
                             _previousMap = _currentMap;
@@ -164,7 +169,13 @@ namespace Mapsui.UI.Android
                                     _previousMid.X / _scale,
                                     _previousMid.Y / _scale,
                                     scale);
+
                                 _map.Viewport.Rotation += angle - _previousAngle;
+
+                                ViewportLimiter.Limit(_map.Viewport,
+                                    _map.ZoomMode, _map.ZoomLimits, _map.Resolutions, 
+                                    _map.PanMode, _map.PanLimits, _map.Envelope);
+
                                 _canvas.Invalidate();
 
                                 _previousAngle = angle;
