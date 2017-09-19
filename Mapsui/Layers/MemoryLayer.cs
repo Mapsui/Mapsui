@@ -13,6 +13,9 @@ namespace Mapsui.Layers
 
         public override IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
         {
+            // Safeguard in case BoundingBox is null, most likely due to no features in layer
+            if (box == null) { return new List<IFeature>(); }
+
             var biggerBox = box.Grow(SymbolStyle.DefaultWidth * 2 * resolution, SymbolStyle.DefaultHeight * 2 * resolution);
             return DataSource.GetFeaturesInView(biggerBox, resolution);
         }
