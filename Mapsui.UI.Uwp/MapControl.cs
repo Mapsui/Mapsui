@@ -233,7 +233,7 @@ namespace Mapsui.UI.Uwp
 
         public void Refresh()
         {
-            _map.ViewChanged(true);
+            RefreshData();
             RefreshGraphics();
         }
 
@@ -245,6 +245,13 @@ namespace Mapsui.UI.Uwp
             _renderTarget.InvalidateMeasure();
             _invalid = true;
         }
+
+        public void RefreshData()
+        {
+            _map.ViewChanged(true);
+        }
+
+        public bool AllowPinchRotation { get; set; }
 
         public void Clear()
         {

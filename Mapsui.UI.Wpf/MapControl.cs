@@ -230,7 +230,7 @@ namespace Mapsui.UI.Wpf
 
         public void Refresh()
         {
-            _map.ViewChanged(true);
+            RefreshData();
             RefreshGraphics();
         }
 
@@ -239,6 +239,13 @@ namespace Mapsui.UI.Wpf
             _invalid = true;
             Dispatcher.BeginInvoke(new Action(InvalidateVisual));
         }
+
+        public void RefreshData()
+        {
+            _map.ViewChanged(true);
+        }
+
+        public bool AllowPinchRotation { get; set; }
 
         public void Clear()
         {

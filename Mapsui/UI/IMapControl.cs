@@ -9,5 +9,11 @@ namespace Mapsui.UI
         event EventHandler ViewportInitialized;
 
         void RefreshGraphics();
+
+        void RefreshData();
+
+        void Refresh();
+
+        bool AllowPinchRotation { get; set; }
     }
 }

@@ -121,7 +121,10 @@ namespace Mapsui.UI.Android
                     _oldDist = Spacing(args.Event);
                     MidPoint(_currentMid, args.Event);
                     _previousMid = _currentMid;
-                    _previousAngle = Angle (args.Event);
+                    if (AllowPinchRotation)
+                    {
+                        _previousAngle = Angle(args.Event);
+                    }
                     _mode = Zoom;
                     break;
                 case MotionEventActions.Pointer2Up:
@@ -161,8 +164,7 @@ namespace Mapsui.UI.Android
                                 _previousMid = new PointF(_currentMid.X, _currentMid.Y);
                                 MidPoint(_currentMid, args.Event);
 
-                                var angle = Angle (args.Event);
-
+                                
                                 _map.Viewport.Transform(
                                     _currentMid.X / _scale,
                                     _currentMid.Y / _scale,
@@ -170,7 +172,12 @@ namespace Mapsui.UI.Android
                                     _previousMid.Y / _scale,
                                     scale);
 
-                                _map.Viewport.Rotation += angle - _previousAngle;
+                                if (AllowPinchRotation)
+                                {
+                                    var angle = Angle(args.Event);
+                                    _map.Viewport.Rotation += angle - _previousAngle;
+                                    _previousAngle = angle;
+                                }
 
                                 ViewportLimiter.Limit(_map.Viewport,
                                     _map.ZoomMode, _map.ZoomLimits, _map.Resolutions, 
@@ -178,7 +185,6 @@ namespace Mapsui.UI.Android
 
                                 _canvas.Invalidate();
 
-                                _previousAngle = angle;
                             }
                             break;
                     }
@@ -190,9 +196,9 @@ namespace Mapsui.UI.Android
         {
             if (me.PointerCount < 2)
                 throw new ArgumentException ();
-            var x = me.GetX (0) - me.GetX (1);
-            var y = me.GetY (0) - me.GetY (1);
-            var rotation = Math.Atan2 (me.GetY (1) - me.GetY (0), me.GetX (1) - me.GetX (0)) * 180.0 / Math.PI;  
+            var x = me.GetX (1) - me.GetX (0);
+            var y = me.GetY (1) - me.GetY (0);
+            var rotation = Math.Atan2 (y, x) * 180.0 / Math.PI;  
             return rotation;
         }
 
@@ -303,6 +309,19 @@ namespace Mapsui.UI.Android
         {
             _canvas.PostInvalidate();
         }
+
+        public void RefreshData()
+        {
+            _map.ViewChanged(true);
+        }
+
+        public void Refresh()
+        {
+            RefreshData();
+            RefreshGraphics();
+        }
+
+        public bool AllowPinchRotation { get; set; }
 
         protected override void OnLayout(bool changed, int l, int t, int r, int b)
         {
