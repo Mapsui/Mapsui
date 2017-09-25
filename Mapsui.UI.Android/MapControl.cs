@@ -65,11 +65,18 @@ namespace Mapsui.UI.Android
 
         protected override void OnSizeChanged(int w, int h, int oldw, int oldh)
         {
-            Map.Viewport.Width = Width / _scale;
-            Map.Viewport.Height = Height / _scale;
-
-            base.OnSizeChanged(w, h, oldw, oldh);
+			base.OnSizeChanged (w, h, oldw, oldh);
+			PushSizeOntoViewport ();
         }
+
+		void PushSizeOntoViewport ()
+		{
+			if (Map != null)
+			{
+				Map.Viewport.Width = Width / _scale;
+				Map.Viewport.Height = Height / _scale;
+			}
+		}
 
         private void CanvasOnPaintSurface(object sender, SKPaintSurfaceEventArgs args)
         {
@@ -239,6 +246,7 @@ namespace Mapsui.UI.Android
                     _map.RefreshGraphics += MapRefreshGraphics;
                     _map.ViewChanged(true);
                     _attributionPanel.Populate(Map.Layers);
+					PushSizeOntoViewport ();
                 }
 
                 RefreshGraphics();
