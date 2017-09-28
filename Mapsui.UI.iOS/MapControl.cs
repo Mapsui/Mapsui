@@ -98,7 +98,7 @@ namespace Mapsui.UI.iOS
 			_map.Viewport.Width = _canvas.Frame.Width;
 			_map.Viewport.Height = _canvas.Frame.Height;
 
-			var scaleFactor = (float)UIScreen.MainScreen.Scale;
+			var scaleFactor = (float)_canvas.ContentScaleFactor;
 			skPaintSurfaceEventArgs.Surface.Canvas.Scale (scaleFactor, scaleFactor);
 
 			_renderer.Render (skPaintSurfaceEventArgs.Surface.Canvas, _map.Viewport, _map.Layers, _map.BackColor);
