@@ -1,14 +1,18 @@
 ﻿using System;
+using System.ComponentModel;
 using System.IO;
 using Android.App;
 using Android.Content.PM;
+using Android.Graphics;
 using Android.OS;
+using Android.Views;
 using Android.Widget;
 using Java.Lang;
 using Mapsui.Providers;
 using Mapsui.Samples.Common.Maps;
 using Mapsui.UI;
 using Mapsui.UI.Android;
+using Path = System.IO.Path;
 
 namespace Mapsui.Samples.Android
 {
@@ -21,6 +25,8 @@ namespace Mapsui.Samples.Android
 
     public class Activity1 : Activity
     {
+        private LinearLayout _popup;
+
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
@@ -32,6 +38,39 @@ namespace Mapsui.Samples.Android
             var mapControl = FindViewById<MapControl>(Resource.Id.mapcontrol);
             mapControl.Map = InfoLayersSample.CreateMap();
             mapControl.Map.Info+= MapOnInfo;
+            mapControl.Map.Viewport.ViewportChanged += ViewportOnViewportChanged;
+
+            FindViewById<RelativeLayout>(Resource.Id.mainLayout).AddView(_popup = CreatePopup());
+        }
+
+        private void ViewportOnViewportChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
+        {
+            _popup.Visibility = ViewStates.Gone;
+        }
+
+        private LinearLayout CreatePopup()
+        {
+            var linearLayout = new LinearLayout(this);
+            linearLayout.AddView(CreateTextView());
+            linearLayout.SetPadding(3,3,3,3);
+            linearLayout.SetBackgroundColor(Color.DarkGray);
+            return linearLayout;
+        }
+
+        private TextView CreateTextView()
+        {
+            var textView = new TextView(this)
+            {
+                TextSize = 16,
+                
+                Text = "Native Android pop-up",
+                LayoutParameters = new RelativeLayout.LayoutParams(
+                    ViewGroup.LayoutParams.WrapContent,
+                    ViewGroup.LayoutParams.WrapContent)
+            };
+            textView.SetPadding(4, 4, 4, 4);
+            textView.SetBackgroundColor(Color.DarkOrange);
+            return textView;
         }
 
         private void MapOnInfo(object sender, InfoEventArgs infoEventArgs)
@@ -39,10 +78,19 @@ namespace Mapsui.Samples.Android
             if (infoEventArgs.Feature != null)
             {
                 RunOnUiThread(new Runnable(Toast.MakeText(
-                    ApplicationContext, 
-                    ToDisplayText(infoEventArgs.Feature), 
+                    ApplicationContext,
+                    ToDisplayText(infoEventArgs.Feature),
                     ToastLength.Short).Show));
+
+                ShowPopup(infoEventArgs);
             }
+        }
+
+        private void ShowPopup(InfoEventArgs infoEventArgs)
+        {
+            _popup.Visibility = ViewStates.Visible;
+            _popup.SetX((float) infoEventArgs.ScreenPosition.X);
+            _popup.SetY((float) infoEventArgs.ScreenPosition.Y);
         }
 
         private static string ToDisplayText(IFeature feature)
