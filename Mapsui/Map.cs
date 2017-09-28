@@ -208,20 +208,20 @@ namespace Mapsui
             OnPropertyChanged(nameof(Layers));
         }
 
-        public void InvokeInfo(Point screenPosition, ISymbolCache symbolCache)
+        public void InvokeInfo(Point screenPosition, float scale, ISymbolCache symbolCache)
         {
             if (Info == null) return;
-            var eventArgs = InfoHelper.GetInfoEventArgs(Viewport, screenPosition, InfoLayers, symbolCache);
+            var eventArgs = InfoHelper.GetInfoEventArgs(Viewport, screenPosition, scale, InfoLayers, symbolCache);
             if (eventArgs != null) Info?.Invoke(this, eventArgs);
         }
 
         private InfoEventArgs _previousHoverEventArgs;
 
-        public void InvokeHover(Point screenPosition, ISymbolCache symbolCache)
+        public void InvokeHover(Point screenPosition, float scale, ISymbolCache symbolCache)
         {
             if (Hover== null) return;
             if (HoverLayers.Count == 0) return;
-            var hoverEventArgs = InfoHelper.GetInfoEventArgs(Viewport, screenPosition, HoverLayers, symbolCache);
+            var hoverEventArgs = InfoHelper.GetInfoEventArgs(Viewport, screenPosition, scale, HoverLayers, symbolCache);
             if (hoverEventArgs?.Feature != _previousHoverEventArgs?.Feature) // only notify when the feature changes
             {
                 _previousHoverEventArgs = hoverEventArgs;

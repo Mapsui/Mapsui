@@ -439,7 +439,7 @@ namespace Mapsui.UI.Wpf
             else
             {
                 HandleFeatureInfo(e);
-                Map.InvokeInfo(e.GetPosition(this).ToMapsui(), Renderer.SymbolCache);
+                Map.InvokeInfo(e.GetPosition(this).ToMapsui(), 1, Renderer.SymbolCache);
             }
 
             _map.ViewChanged(true);
@@ -453,7 +453,7 @@ namespace Mapsui.UI.Wpf
         private void MapControlTouchUp(object sender, TouchEventArgs e)
         {
             if (!_hasBeenManipulated)
-                Map.InvokeInfo(e.GetTouchPoint(this).Position.ToMapsui(), Renderer.SymbolCache);
+                Map.InvokeInfo(e.GetTouchPoint(this).Position.ToMapsui(), 1, Renderer.SymbolCache);
         }
 
         private void HandleFeatureInfo(MouseButtonEventArgs e)
@@ -482,7 +482,7 @@ namespace Mapsui.UI.Wpf
                 return;
             }
 
-            if (!_mouseDown) Map.InvokeHover(e.GetPosition(this).ToMapsui(), Renderer.SymbolCache);
+            if (!_mouseDown) Map.InvokeHover(e.GetPosition(this).ToMapsui(), 1, Renderer.SymbolCache);
 
             if (_mouseDown)
             {

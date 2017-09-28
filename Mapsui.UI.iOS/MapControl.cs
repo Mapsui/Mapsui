@@ -25,6 +25,7 @@ namespace Mapsui.UI.iOS
 		private nfloat _previousY;
 		private double _previousRadius;
 		private double _previousRotation;
+	    private float _scale;
 
 		public event EventHandler ViewportInitialized;
 
@@ -98,8 +99,8 @@ namespace Mapsui.UI.iOS
 			_map.Viewport.Width = _canvas.Frame.Width;
 			_map.Viewport.Height = _canvas.Frame.Height;
 
-			var scaleFactor = (float)UIScreen.MainScreen.Scale;
-			skPaintSurfaceEventArgs.Surface.Canvas.Scale (scaleFactor, scaleFactor);
+			_scale = (float)UIScreen.MainScreen.Scale;
+			skPaintSurfaceEventArgs.Surface.Canvas.Scale (_scale, _scale);
 
 			_renderer.Render (skPaintSurfaceEventArgs.Surface.Canvas, _map.Viewport, _map.Layers, _map.BackColor);
 		}
@@ -196,7 +197,7 @@ namespace Mapsui.UI.iOS
 			var touch = touches.FirstOrDefault () as UITouch;
 			if (touch == null) return;
 			var screenPosition = touch.LocationInView (this);
-			Map.InvokeInfo (screenPosition.ToMapsui (), _renderer.SymbolCache);
+			Map.InvokeInfo (screenPosition.ToMapsui (), _scale, _renderer.SymbolCache);
 		}
 
 		public void Refresh ()

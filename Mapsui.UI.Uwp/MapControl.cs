@@ -90,7 +90,7 @@ namespace Mapsui.UI.Uwp
 
         private void OnTapped(object sender, TappedRoutedEventArgs e)
         {
-            Map.InvokeInfo(e.GetPosition(this).ToMapsui(), _renderer.SymbolCache);
+            Map.InvokeInfo(e.GetPosition(this).ToMapsui(), 1, _renderer.SymbolCache);
         }
 
         private static Rectangle CreateSelectRectangle()
