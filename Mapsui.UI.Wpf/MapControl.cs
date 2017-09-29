@@ -120,7 +120,6 @@ namespace Mapsui.UI.Wpf
                     temp.DataChanged -= MapDataChanged;
                     temp.PropertyChanged -= MapPropertyChanged;
                     temp.RefreshGraphics -= MapRefreshGraphics;
-                    temp.Dispose();
                 }
 
                 _map = value;
@@ -537,7 +536,6 @@ namespace Mapsui.UI.Wpf
         private void DispatcherShutdownStarted(object sender, EventArgs e)
         {
             CompositionTarget.Rendering -= CompositionTargetRendering;
-            _map?.Dispose();
         }
 
         public void ZoomToBox(Geometries.Point beginPoint, Geometries.Point endPoint)

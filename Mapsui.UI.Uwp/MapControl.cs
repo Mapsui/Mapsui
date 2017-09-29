@@ -142,7 +142,6 @@ namespace Mapsui.UI.Uwp
                     _map = null;
                     temp.DataChanged -= MapDataChanged;
                     temp.PropertyChanged -= MapPropertyChanged;
-                    temp.Dispose();
                 }
 
                 _map = value;
