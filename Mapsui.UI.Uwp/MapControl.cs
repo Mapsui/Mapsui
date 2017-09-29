@@ -90,7 +90,7 @@ namespace Mapsui.UI.Uwp
 
         private void OnTapped(object sender, TappedRoutedEventArgs e)
         {
-            Map.InvokeInfo(e.GetPosition(this).ToMapsui(), _renderer.SymbolCache);
+            Map.InvokeInfo(e.GetPosition(this).ToMapsui(), 1, _renderer.SymbolCache);
         }
 
         private static Rectangle CreateSelectRectangle()
@@ -233,7 +233,7 @@ namespace Mapsui.UI.Uwp
 
         public void Refresh()
         {
-            _map.ViewChanged(true);
+            RefreshData();
             RefreshGraphics();
         }
 
@@ -245,6 +245,13 @@ namespace Mapsui.UI.Uwp
             _renderTarget.InvalidateMeasure();
             _invalid = true;
         }
+
+        public void RefreshData()
+        {
+            _map.ViewChanged(true);
+        }
+
+        public bool AllowPinchRotation { get; set; }
 
         public void Clear()
         {
@@ -470,6 +477,16 @@ namespace Mapsui.UI.Uwp
         {
             var scaleFactor = DisplayInformation.GetForCurrentView().RawPixelsPerViewPixel;
             return new Geometries.Point(scaleFactor, scaleFactor);
+        }
+
+        public Geometries.Point WorldToScreen(Geometries.Point worldPosition)
+        {
+            return SharedMapControl.WorldToScreen(Map.Viewport, (float)_skiaScale.X, worldPosition);
+        }
+
+        public Geometries.Point ScreenToWorld(Geometries.Point screenPosition)
+        {
+            return SharedMapControl.ScreenToWorld(Map.Viewport, (float)_skiaScale.Y, screenPosition);
         }
     }
 }

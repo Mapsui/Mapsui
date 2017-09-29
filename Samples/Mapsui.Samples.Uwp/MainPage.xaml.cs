@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Mapsui.Samples.Common.Maps;
 using Mapsui.UI;
 using Mapsui.Utilities;
 
@@ -14,6 +18,9 @@ namespace Mapsui.Samples.Uwp
         public MainPage()
         {
             InitializeComponent();
+
+            DeployMbTilesFile();
+            MbTilesSample.MbTilesLocation = MbTilesLocationOnUwp;
 
             MapControl.Map.Layers.Add(OpenStreetMap.CreateTileLayer());
 
@@ -100,5 +107,30 @@ namespace Mapsui.Samples.Uwp
 
             return radioButton;
         }
+
+        private void DeployMbTilesFile()
+        {
+            var path = "Mapsui.Samples.Common.EmbeddedResources.world.mbtiles";
+            var assembly = typeof(PointsSample).GetTypeInfo().Assembly;
+            using (var image = assembly.GetManifestResourceStream(path))
+            {
+                if (image == null) throw new ArgumentException("EmbeddedResource not found");
+                using (var dest = File.Create(MbTilesLocationOnUwp))
+                {
+                    image.CopyTo(dest);
+                }
+            }
+        }
+
+        private static string MbTilesLocationOnUwp
+        {
+            get
+            {
+                var folder = ApplicationData.Current.LocalFolder.Path;
+                var path = Path.Combine(folder, "world.mbtiles");
+                return path;
+            }
+        }
+
     }
 }

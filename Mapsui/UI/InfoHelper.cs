@@ -11,10 +11,10 @@ namespace Mapsui.UI
 {
     public static class InfoHelper
     {
-        public static InfoEventArgs GetInfoEventArgs(IViewport viewport, Point screenPosition, IEnumerable<ILayer> layers,
+        public static InfoEventArgs GetInfoEventArgs(IViewport viewport, Point screenPosition, float scale, IEnumerable<ILayer> layers,
             ISymbolCache symbolCache)
         {
-            var worldPosition = viewport.ScreenToWorld(new Point(screenPosition.X, screenPosition.Y));
+            var worldPosition = viewport.ScreenToWorld(new Point(screenPosition.X / scale, screenPosition.Y / scale));
             return GetInfoEventArgs(layers, worldPosition, screenPosition, viewport.Resolution, symbolCache);
         }
 
