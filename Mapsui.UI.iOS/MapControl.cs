@@ -25,7 +25,7 @@ namespace Mapsui.UI.iOS
 		private nfloat _previousY;
 		private double _previousRadius;
 		private double _previousRotation;
-	    private float _scale;
+	    private float _skiaScale;
 
 		public event EventHandler ViewportInitialized;
 
@@ -99,8 +99,8 @@ namespace Mapsui.UI.iOS
 			_map.Viewport.Width = _canvas.Frame.Width;
 			_map.Viewport.Height = _canvas.Frame.Height;
 
-			_scale = (float)UIScreen.MainScreen.Scale;
-			skPaintSurfaceEventArgs.Surface.Canvas.Scale (_scale, _scale);
+			_skiaScale = (float)UIScreen.MainScreen.Scale;
+			skPaintSurfaceEventArgs.Surface.Canvas.Scale (_skiaScale, _skiaScale);
 
 			_renderer.Render (skPaintSurfaceEventArgs.Surface.Canvas, _map.Viewport, _map.Layers, _map.BackColor);
 		}
@@ -197,7 +197,7 @@ namespace Mapsui.UI.iOS
 			var touch = touches.FirstOrDefault () as UITouch;
 			if (touch == null) return;
 			var screenPosition = touch.LocationInView (this);
-			Map.InvokeInfo (screenPosition.ToMapsui (), _scale, _renderer.SymbolCache);
+			Map.InvokeInfo (screenPosition.ToMapsui (), _skiaScale, _renderer.SymbolCache);
 		}
 
 		public void Refresh ()
@@ -304,5 +304,15 @@ namespace Mapsui.UI.iOS
         }
 
 	    public bool AllowPinchRotation { get; set; }
-	}
+
+	    public Geometries.Point WorldToScreen(Geometries.Point worldPosition)
+	    {
+	        return SharedMapControl.WorldToScreen(Map.Viewport, _skiaScale, worldPosition);
+	    }
+
+	    public Geometries.Point ScreenToWorld(Geometries.Point screenPosition)
+	    {
+	        return SharedMapControl.ScreenToWorld(Map.Viewport, _skiaScale, screenPosition);
+	    }
+    }
 }

@@ -350,5 +350,15 @@ namespace Mapsui.UI.Android
             view.Right = view.Left + view.MeasuredWidth;
             view.Bottom = view.Top + view.MeasuredHeight;
         }
+
+        public Geometries.Point WorldToScreen(Geometries.Point worldPosition)
+        {
+            return SharedMapControl.WorldToScreen(Map.Viewport, _scale, worldPosition);
+        }
+
+        public Geometries.Point ScreenToWorld(Geometries.Point screenPosition)
+        {
+            return SharedMapControl.ScreenToWorld(Map.Viewport, _scale, screenPosition);
+        }
     }
 }

@@ -52,7 +52,7 @@ namespace Mapsui.Samples.Android
         {
             var linearLayout = new LinearLayout(this);
             linearLayout.AddView(CreateTextView());
-            linearLayout.SetPadding(3,3,3,3);
+            linearLayout.SetPadding(5,5,5,5);
             linearLayout.SetBackgroundColor(Color.DarkGray);
             return linearLayout;
         }
@@ -68,8 +68,8 @@ namespace Mapsui.Samples.Android
                     ViewGroup.LayoutParams.WrapContent,
                     ViewGroup.LayoutParams.WrapContent)
             };
-            textView.SetPadding(4, 4, 4, 4);
-            textView.SetBackgroundColor(Color.DarkOrange);
+            textView.SetPadding(3, 3, 3, 3);
+            //textView.SetBackgroundColor(Color.DarkOrange);
             return textView;
         }
 
@@ -88,9 +88,13 @@ namespace Mapsui.Samples.Android
 
         private void ShowPopup(InfoEventArgs infoEventArgs)
         {
+            var mapControl = FindViewById<MapControl>(Resource.Id.mapcontrol);
+            var screenPosition = mapControl.WorldToScreen(infoEventArgs.Feature.Geometry.GetBoundingBox().GetCentroid());
+            
+            _popup.SetX((float) (screenPosition.X - _popup.MeasuredWidth * 0.5));
+            _popup.SetY((float) screenPosition.Y + 48);
+
             _popup.Visibility = ViewStates.Visible;
-            _popup.SetX((float) infoEventArgs.ScreenPosition.X);
-            _popup.SetY((float) infoEventArgs.ScreenPosition.Y);
         }
 
         private static string ToDisplayText(IFeature feature)

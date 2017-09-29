@@ -1,4 +1,5 @@
 ﻿using System;
+using Mapsui.Geometries;
 
 namespace Mapsui.UI
 {
@@ -15,5 +16,9 @@ namespace Mapsui.UI
         void Refresh();
 
         bool AllowPinchRotation { get; set; }
+
+        Point WorldToScreen(Point worldPosition);
+        
+        Point ScreenToWorld(Point screenPosition);
     }
 }

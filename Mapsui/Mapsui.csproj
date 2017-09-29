@@ -57,6 +57,7 @@
     <Compile Include="Layers\Attribution.cs" />
     <Compile Include="Layers\TmsTileSourceBuilder.cs" />
     <Compile Include="Logging\Logger.cs" />
+    <Compile Include="UI\SharedMapControl.cs" />
     <Compile Include="UI\ViewportLimiter.cs" />
     <Compile Include="Projection\BoundingBoxIterator.cs" />
     <Compile Include="Projection\Mercator.cs" />

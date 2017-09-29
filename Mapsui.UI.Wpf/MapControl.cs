@@ -696,5 +696,15 @@ namespace Mapsui.UI.Wpf
                 HorizontalAlignment = HorizontalAlignment.Right
             };
         }
+
+        public Geometries.Point WorldToScreen(Geometries.Point worldPosition)
+        {
+            return SharedMapControl.WorldToScreen(Map.Viewport, (float)_skiaScale.X, worldPosition);
+        }
+
+        public Geometries.Point ScreenToWorld(Geometries.Point screenPosition)
+        {
+            return SharedMapControl.ScreenToWorld(Map.Viewport, (float)_skiaScale.Y, screenPosition);
+        }
     }
 }

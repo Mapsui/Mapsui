@@ -478,5 +478,15 @@ namespace Mapsui.UI.Uwp
             var scaleFactor = DisplayInformation.GetForCurrentView().RawPixelsPerViewPixel;
             return new Geometries.Point(scaleFactor, scaleFactor);
         }
+
+        public Geometries.Point WorldToScreen(Geometries.Point worldPosition)
+        {
+            return SharedMapControl.WorldToScreen(Map.Viewport, (float)_skiaScale.X, worldPosition);
+        }
+
+        public Geometries.Point ScreenToWorld(Geometries.Point screenPosition)
+        {
+            return SharedMapControl.ScreenToWorld(Map.Viewport, (float)_skiaScale.Y, screenPosition);
+        }
     }
 }
