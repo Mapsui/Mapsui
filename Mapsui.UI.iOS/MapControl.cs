@@ -99,10 +99,10 @@ namespace Mapsui.UI.iOS
 			_map.Viewport.Width = _canvas.Frame.Width;
 			_map.Viewport.Height = _canvas.Frame.Height;
 
-			_skiaScale = (float)UIScreen.MainScreen.Scale;
+			_skiaScale = (float)_canvas.ContentScaleFactor;
 			skPaintSurfaceEventArgs.Surface.Canvas.Scale (_skiaScale, _skiaScale);
 
-			_renderer.Render (skPaintSurfaceEventArgs.Surface.Canvas, _map.Viewport, _map.Layers, _map.BackColor);
+      _renderer.Render (skPaintSurfaceEventArgs.Surface.Canvas, _map.Viewport, _map.Layers, _map.BackColor);
 		}
 
 		private void InitializeViewport ()
@@ -221,7 +221,7 @@ namespace Mapsui.UI.iOS
 					temp.DataChanged -= MapDataChanged;
 					temp.PropertyChanged -= MapPropertyChanged;
 					temp.RefreshGraphics -= MapRefreshGraphics;
-					temp.Dispose ();
+					temp.AbortFetch ();
 					_attributionPanel.Clear ();
 				}
 

@@ -33,7 +33,7 @@ namespace Mapsui
     /// <summary>
     /// Map class
     /// </summary>
-    public class Map : IDisposable, INotifyPropertyChanged
+    public class Map : INotifyPropertyChanged
     {
         private LayerCollection _layers = new LayerCollection();
 		private Color _backColor = Color.White;
@@ -172,16 +172,6 @@ namespace Mapsui
 
         public IReadOnlyList<double> Resolutions { get; private set; }
     
-        /// <summary>
-        /// Disposes 
-        /// the map object
-        /// </summary>
-        public void Dispose()
-        {
-            AbortFetch();
-            _layers.Clear();
-        }
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>

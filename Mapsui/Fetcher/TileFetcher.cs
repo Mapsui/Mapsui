@@ -19,6 +19,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using BruTile;
@@ -31,37 +32,34 @@ namespace Mapsui.Fetcher
 {
     public class TileFetcher : INotifyPropertyChanged
     {
-        public const int DefaultMaxThreads = 2;
         public const int DefaultMaxAttempts = 2;
         private readonly MemoryCache<Feature> _memoryCache;
         private readonly ITileSource _tileSource;
         private BoundingBox _extent;
         private double _resolution;
         private readonly IList<TileIndex> _tilesInProgress = new List<TileIndex>();
-        private IList<TileInfo> _missingTiles = new List<TileInfo>();
-        private readonly int _maxThreads;
-        private int _threadCount;
-        private readonly AutoResetEvent _waitHandle = new AutoResetEvent(true);
         private readonly IFetchStrategy _strategy;
         private readonly int _maxAttempts;
-        private volatile bool _isThreadRunning;
         private volatile bool _isViewChanged;
         private bool _busy;
         private int _numberTilesNeeded;
 
+		readonly object transitionLock = new object ();
+		Task fetchLoopTask;
+		CancellationTokenSource fetchLoopCancellationTokenSource;
+
         public event DataChangedEventHandler DataChanged;
 
-        public TileFetcher(ITileSource tileSource, MemoryCache<Feature> memoryCache, int maxAttempts = DefaultMaxAttempts, int maxThreads = DefaultMaxThreads, IFetchStrategy strategy = null)
-        {
-            if (tileSource == null) throw new ArgumentException("TileProvider can not be null");
-            if (memoryCache == null) throw new ArgumentException("MemoryCache can not be null");
+		public TileFetcher (ITileSource tileSource, MemoryCache<Feature> memoryCache, int maxAttempts = DefaultMaxAttempts, IFetchStrategy strategy = null)
+		{
+			if (tileSource == null) throw new ArgumentException ("TileProvider can not be null");
+			if (memoryCache == null) throw new ArgumentException ("MemoryCache can not be null");
 
-            _tileSource = tileSource;
-            _memoryCache = memoryCache;
-            _maxAttempts = maxAttempts;
-            _maxThreads = maxThreads;
-            _strategy = strategy ?? new FetchStrategy();
-        }
+			_tileSource = tileSource;
+			_memoryCache = memoryCache;
+			_maxAttempts = maxAttempts;
+			_strategy = strategy ?? new FetchStrategy ();
+		}
 
         public bool Busy
         {
@@ -76,117 +74,86 @@ namespace Mapsui.Fetcher
 
         public int NumberTilesNeeded => _numberTilesNeeded;
 
-
         public void ViewChanged(BoundingBox newExtent, double newResolution)
         {
             _extent = newExtent;
             _resolution = newResolution;
             _isViewChanged = true;
-            _waitHandle.Set();
 
-            if (!_isThreadRunning)
-            {
-                StartLoopThread();
-                Busy = true;
-            }
+			lock (transitionLock)
+			{
+				if (fetchLoopTask == null || fetchLoopTask.IsCompleted || fetchLoopCancellationTokenSource.IsCancellationRequested)
+				{
+					Busy = true;
+					fetchLoopCancellationTokenSource = new CancellationTokenSource ();
+					var cancellationToken = fetchLoopCancellationTokenSource.Token;
+					fetchLoopTask = Task.Run (() => TileFetchLoop (fetchLoopCancellationTokenSource, cancellationToken), cancellationToken);
+				}
+			}
         }
 
-        private void StartLoopThread()
-        {
-            _isThreadRunning = true;
-            Task.Run(() => TileFetchLoop());
+		public void AbortFetch ()
+		{
+			lock (transitionLock)
+			{
+				fetchLoopCancellationTokenSource?.Cancel ();
+			}
         }
 
-        public void AbortFetch()
-        {
-            _isThreadRunning = false;
-            _waitHandle.Set();
-        }
+		void TileFetchLoop(CancellationTokenSource cancellationTokenSource, CancellationToken cancellationToken)
+		{
+            var retries = new Retries(_maxAttempts);
 
-        private void TileFetchLoop()
-        {
-            try
-            {
-                var retries = new Retries(_maxAttempts);
+			IEnumerable<TileInfo> missingTiles = Enumerable.Empty<TileInfo> ();
 
-                while (_isThreadRunning)
-                {
-                    if (_tileSource.Schema == null) _waitHandle.Reset();
+			while (!cancellationToken.IsCancellationRequested)
+			{
 
-                    _waitHandle.WaitOne();
-                    Busy = true;
+				if (_isViewChanged && (_tileSource.Schema != null))
+				{
+					var levelId = BruTile.Utilities.GetNearestLevel (_tileSource.Schema.Resolutions, _resolution);
+					missingTiles = _strategy.GetTilesWanted (_tileSource.Schema, _extent.ToExtent (), levelId);
+					_numberTilesNeeded = missingTiles.Count();
+					retries.Clear ();
+					_isViewChanged = false;
+				}
 
-                    if (_isViewChanged && (_tileSource.Schema != null))
-                    {
-                        var levelId = BruTile.Utilities.GetNearestLevel(_tileSource.Schema.Resolutions, _resolution);
-                        _missingTiles = _strategy.GetTilesWanted(_tileSource.Schema, _extent.ToExtent(), levelId);
-                        _numberTilesNeeded = _missingTiles.Count;
-                        retries.Clear();
-                        _isViewChanged = false;
-                    }
+				lock (transitionLock)
+				{
+					var missingTilesBuilder = new List<TileInfo> ();
 
-                    _missingTiles = GetTilesMissing(_missingTiles, _memoryCache, retries);
+					foreach (var info in missingTiles)
+					{
+						if (retries.ReachedMax (info.Index)) continue;
+						if (_memoryCache.Find (info.Index) == null) missingTilesBuilder.Add (info);
+					}
 
-                    FetchTiles(retries);
+					missingTiles = missingTilesBuilder;
 
-                    if (_missingTiles.Count == 0)
-                    {
-                        Busy = false;
-                        _waitHandle.Reset();
-                    }
+					_numberTilesNeeded = missingTilesBuilder.Count();
 
-                    if (_threadCount >= _maxThreads) { _waitHandle.Reset(); }
-                }
-            }
-            finally
-            {
-                _isThreadRunning = false;
-            }
-        }
+					if (missingTiles.Any () == false) {
+						cancellationTokenSource.Cancel ();
+						Busy = false;
+					}
+				}
 
-        private IList<TileInfo> GetTilesMissing(IEnumerable<TileInfo> tileInfos, MemoryCache<Feature> memoryCache, 
-            Retries retries)
-        {
-            var result = new List<TileInfo>();
+	            foreach (var info in missingTiles)
+	            {
+		            if (retries.ReachedMax(info.Index)) return;
+		            
+		            lock (_tilesInProgress)
+		            {
+		                if (_tilesInProgress.Contains(info.Index)) return;
+		                _tilesInProgress.Add(info.Index);
+		            }
 
-            foreach (var info in tileInfos)
-            {
-                if (retries.ReachedMax(info.Index)) continue;
-                if (memoryCache.Find(info.Index) == null) result.Add(info);
-            }
+		            retries.PlusOne(info.Index);
 
-            return result;
-        }
-
-        private void FetchTiles(Retries retries)
-        {
-            foreach (var info in _missingTiles)
-            {
-                if (_threadCount >= _maxThreads) break;
-                FetchTile(info, retries);
-            }
-        }
-
-        private void FetchTile(TileInfo info, Retries retries)
-        {
-            if (retries.ReachedMax(info.Index)) return;
-            
-            lock (_tilesInProgress)
-            {
-                if (_tilesInProgress.Contains(info.Index)) return;
-                _tilesInProgress.Add(info.Index);
-            }
-
-            retries.PlusOne(info.Index);
-            _threadCount++;
-
-            StartFetchOnThread(info);
-        }
-
-        private void StartFetchOnThread(TileInfo info)
-        {
-            var fetchOnThread = new FetchOnThread(_tileSource, info, LocalFetchCompleted);
-            Task.Run(() => fetchOnThread.FetchTile());
+					var fetchOnThread = new FetchOnThread (_tileSource, info, LocalFetchCompleted, cancellationToken);
+					Task.Run (() => fetchOnThread.FetchTile (), cancellationToken);
+	            }
+			}
         }
 
         private void LocalFetchCompleted(object sender, FetchTileCompletedEventArgs e)
@@ -194,7 +161,7 @@ namespace Mapsui.Fetcher
             //todo remove object sender
             try
             {
-                if (e.Error == null && e.Cancelled == false && _isThreadRunning)
+                if (e.Error == null && e.Cancelled == false)
                 {
                     var geometry = CreateTileGeometry(e);
                     var feature = new Feature { Geometry = geometry };
@@ -207,13 +174,11 @@ namespace Mapsui.Fetcher
             }
             finally
             {
-                _threadCount--;
                 lock (_tilesInProgress)
                 {
                     if (_tilesInProgress.Contains(e.TileInfo.Index))
                         _tilesInProgress.Remove(e.TileInfo.Index);
                 }
-                _waitHandle.Set();
             }
 
             DataChanged?.Invoke(this, new DataChangedEventArgs(e.Error, e.Cancelled, e.TileInfo));
