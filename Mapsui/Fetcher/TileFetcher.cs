@@ -39,31 +39,28 @@ namespace Mapsui.Fetcher
         private double _resolution;
         private readonly IList<TileIndex> _tilesInProgress = new List<TileIndex>();
         private readonly IFetchStrategy _strategy;
-        private readonly int _maxAttempts;
-        private volatile bool _isViewChanged;
+        private volatile bool _viewportChanged;
         private bool _busy;
         private int _numberTilesNeeded;
-
-		readonly object transitionLock = new object ();
-		Task fetchLoopTask;
-		CancellationTokenSource fetchLoopCancellationTokenSource;
+		private Task _fetchLoopTask;
+        private CancellationTokenSource _fetchLoopCancellationTokenSource;
+        private readonly int _maxRequests = 32;
+        private int _currentRequests;
+        //private readonly EventWaitHandle _maxRequestsWaitHandle = new AutoResetEvent(true);
+   
 
         public event DataChangedEventHandler DataChanged;
 
-		public TileFetcher (ITileSource tileSource, MemoryCache<Feature> memoryCache, int maxAttempts = DefaultMaxAttempts, IFetchStrategy strategy = null)
+		public TileFetcher (ITileSource tileSource, MemoryCache<Feature> memoryCache, int maxRetries, IFetchStrategy strategy = null)
 		{
-			if (tileSource == null) throw new ArgumentException ("TileProvider can not be null");
-			if (memoryCache == null) throw new ArgumentException ("MemoryCache can not be null");
-
-			_tileSource = tileSource;
-			_memoryCache = memoryCache;
-			_maxAttempts = maxAttempts;
-			_strategy = strategy ?? new FetchStrategy ();
+		    _tileSource = tileSource ?? throw new ArgumentException ("TileProvider can not be null");
+			_memoryCache = memoryCache ?? throw new ArgumentException ("MemoryCache can not be null");
+			_strategy = strategy ?? new FetchStrategy();
 		}
 
         public bool Busy
         {
-            get { return _busy; }
+            get => _busy;
             private set
             {
                 if (_busy == value) return; // prevent notify              
@@ -78,115 +75,140 @@ namespace Mapsui.Fetcher
         {
             _extent = newExtent;
             _resolution = newResolution;
-            _isViewChanged = true;
+            _viewportChanged = true;
 
-			lock (transitionLock)
+			if (_fetchLoopTask == null || _fetchLoopTask.IsCompleted || _fetchLoopCancellationTokenSource.IsCancellationRequested)
 			{
-				if (fetchLoopTask == null || fetchLoopTask.IsCompleted || fetchLoopCancellationTokenSource.IsCancellationRequested)
-				{
-					Busy = true;
-					fetchLoopCancellationTokenSource = new CancellationTokenSource ();
-					var cancellationToken = fetchLoopCancellationTokenSource.Token;
-					fetchLoopTask = Task.Run (() => TileFetchLoop (fetchLoopCancellationTokenSource, cancellationToken), cancellationToken);
-				}
+				Busy = true;
+				_fetchLoopCancellationTokenSource = new CancellationTokenSource();
+				var fetchLoopCancellationToken = _fetchLoopCancellationTokenSource.Token;
+				_fetchLoopTask = Task.Run (() => TileFetchLoop(fetchLoopCancellationToken), fetchLoopCancellationToken);
 			}
         }
 
-		public void AbortFetch ()
+		public void AbortFetch()
 		{
-			lock (transitionLock)
-			{
-				fetchLoopCancellationTokenSource?.Cancel ();
-			}
+			_fetchLoopCancellationTokenSource?.Cancel();
         }
 
-		void TileFetchLoop(CancellationTokenSource cancellationTokenSource, CancellationToken cancellationToken)
+		void TileFetchLoop(CancellationToken globalCancellationToken)
 		{
-            var retries = new Retries(_maxAttempts);
+		    var tilesNeeded = GetTilesNeeded();
+		    _viewportChanged = false;
 
-			IEnumerable<TileInfo> missingTiles = Enumerable.Empty<TileInfo> ();
+            if (_tileSource.Schema == null) Busy = false;
 
-			while (!cancellationToken.IsCancellationRequested)
-			{
+		    while (Busy && !globalCancellationToken.IsCancellationRequested)
+		    {
+		        // 1) If the viewport is changed you need to calculate the needed tiles again.
+		        if (_viewportChanged)
+		        {
+		            tilesNeeded = GetTilesNeeded();
+		            _viewportChanged = false;
+		        }
 
-				if (_isViewChanged && (_tileSource.Schema != null))
-				{
-					var levelId = BruTile.Utilities.GetNearestLevel (_tileSource.Schema.Resolutions, _resolution);
-					missingTiles = _strategy.GetTilesWanted (_tileSource.Schema, _extent.ToExtent (), levelId);
-					_numberTilesNeeded = missingTiles.Count();
-					retries.Clear ();
-					_isViewChanged = false;
-				}
+		        // 2) From the needed tiles get those that are still missing
+		        var missingTiles = GetMissingTiles(tilesNeeded);
 
-				lock (transitionLock)
-				{
-					var missingTilesBuilder = new List<TileInfo> ();
+		        // 3) Check if we are done
+		        if (!missingTiles.Any()) { Busy = false; }
+                
+                // 4) Actually fetch the tiles missing.
+                if (_currentRequests <  _maxRequests)
+		            FetchMissingTiles(missingTiles);
+		    }
+		}
 
-					foreach (var info in missingTiles)
-					{
-						if (retries.ReachedMax (info.Index)) continue;
-						if (_memoryCache.Find (info.Index) == null) missingTilesBuilder.Add (info);
-					}
-
-					missingTiles = missingTilesBuilder;
-
-					_numberTilesNeeded = missingTilesBuilder.Count();
-
-					if (missingTiles.Any () == false) {
-						cancellationTokenSource.Cancel ();
-						Busy = false;
-					}
-				}
-
-	            foreach (var info in missingTiles)
-	            {
-		            if (retries.ReachedMax(info.Index)) return;
-		            
-		            lock (_tilesInProgress)
-		            {
-		                if (_tilesInProgress.Contains(info.Index)) return;
-		                _tilesInProgress.Add(info.Index);
-		            }
-
-		            retries.PlusOne(info.Index);
-
-					var fetchOnThread = new FetchOnThread (_tileSource, info, LocalFetchCompleted, cancellationToken);
-					Task.Run (() => fetchOnThread.FetchTile (), cancellationToken);
-	            }
-			}
-        }
-
-        private void LocalFetchCompleted(object sender, FetchTileCompletedEventArgs e)
+        private void FetchMissingTiles(List<TileInfo> missingTiles)
         {
-            //todo remove object sender
+            foreach (var info in missingTiles)
+            {
+                if (_currentRequests >= _maxRequests)
+                {
+                    //_maxRequestsWaitHandle.Stop();
+                    //_maxRequestsWaitHandle.WaitOne();
+                }
+                lock (_tilesInProgress)
+                {
+                    if (_tilesInProgress.Contains(info.Index)) return;
+                    _tilesInProgress.Add(info.Index);
+                }
+
+                _currentRequests++;
+                // Not passing the cancellation token to Task.Run. 
+                // Cancelling because of a viewport change can be ineffective because most of the tiles
+                // will still be useful, even if they are outside of the viewport at that moment.
+                // When abort is called we would like to cancel.
+                Task.Run(() => FetchTile(info));
+                if (_viewportChanged) return;
+            }
+        }
+
+        private List<TileInfo> GetMissingTiles(List<TileInfo> tilesNeeded)
+        {
+            var missingTiles = new List<TileInfo>();
+
+            foreach (var info in tilesNeeded)
+            {
+                if (_memoryCache.Find(info.Index) == null) missingTiles.Add(info);
+            }
+            return missingTiles;
+        }
+
+        private List<TileInfo> GetTilesNeeded()
+        {
+            var levelId = BruTile.Utilities.GetNearestLevel(_tileSource.Schema.Resolutions, _resolution);
+            var tilesNeeded = _strategy.GetTilesWanted(_tileSource.Schema, _extent.ToExtent(), levelId).ToList();
+            _numberTilesNeeded = tilesNeeded.Count;
+            return tilesNeeded;
+        }
+
+        //private void FetchTile(TileInfo tileInfo)
+        //{
+        //    Exception error = null;
+        //    byte[] tileData = null;
+
+        //    try
+        //    {
+
+        //    }
+        //    catch (Exception ex) // On this worker thread exceptions will not fall through to the caller so catch and pass in callback  
+        //    {
+        //        error = ex;
+        //    }
+        //    FetchCompleted(error, false, tileInfo, tileData);
+        //}
+
+        private void FetchTile(TileInfo tileInfo)
+        {
             try
             {
-                if (e.Error == null && e.Cancelled == false)
-                {
-                    var geometry = CreateTileGeometry(e);
-                    var feature = new Feature { Geometry = geometry };
-                    _memoryCache.Add(e.TileInfo.Index, feature);
-                }
+                var tileData = _tileSource.GetTile(tileInfo);
+                var geometry = CreateTileGeometry(tileInfo, tileData);
+                var feature = new Feature {Geometry = geometry};
+                _memoryCache.Add(tileInfo.Index, feature);
+                DataChanged?.Invoke(this, new DataChangedEventArgs(null, false, null));
             }
             catch (Exception ex)
             {
-                e.Error = ex;
+                DataChanged?.Invoke(this, new DataChangedEventArgs(ex, false, null));
             }
             finally
             {
                 lock (_tilesInProgress)
                 {
-                    if (_tilesInProgress.Contains(e.TileInfo.Index))
-                        _tilesInProgress.Remove(e.TileInfo.Index);
+                    if (_tilesInProgress.Contains(tileInfo.Index))
+                        _tilesInProgress.Remove(tileInfo.Index);
                 }
+                _currentRequests--;
+                //if (_currentRequests < _maxRequests) _maxRequestsWaitHandle.Go();
             }
 
-            DataChanged?.Invoke(this, new DataChangedEventArgs(e.Error, e.Cancelled, e.TileInfo));
         }
 
-        private static Raster CreateTileGeometry(FetchTileCompletedEventArgs e)
+        private static Raster CreateTileGeometry(TileInfo tileInfo, byte[] tileData)
         {
-            // A TileSource may return an byte array that is null. This is currently only implemented
+            // A TileSource may return a byte array that is null. This is currently only implemented
             // for MbTilesTileSource. It is to indicate that the tile is not present in the source,
             // although it should be given the tile schema. It does not mean the tile could not
             // be accessed because of some temporary reason. In that case it will throw an exception.
@@ -194,53 +216,11 @@ namespace Mapsui.Fetcher
             // Here we return the geometry as null so that it will be added to the tile cache. 
             // TileLayer.GetFeatureInView will have to return only the non null geometries.
 
-            if (e.Image == null) return null;
+            if (tileData == null) return null;
 
-            return new Raster(new MemoryStream(e.Image), e.TileInfo.Extent.ToBoundingBox());
+            return new Raster(new MemoryStream(tileData), tileInfo.Extent.ToBoundingBox());
         }
         
-
-        /// <summary>
-        /// Keeps track of retries per tile. This class doesn't do much interesting work
-        /// but makes the rest of the code a bit easier to read.
-        /// </summary>
-        class Retries
-        {
-            private readonly IDictionary<TileIndex, int> _retries = new Dictionary<TileIndex, int>();
-            private readonly int _maxRetries;
-            private readonly int _threadId;
-            private const string CrossThreadExceptionMessage = "Cross thread access not allowed on class Retries";
-
-            public Retries(int maxRetries)
-            {
-                _maxRetries = maxRetries;
-                _threadId = Environment.CurrentManagedThreadId;
-            }
-
-            public bool ReachedMax(TileIndex index)
-            {
-                if (_threadId != Environment.CurrentManagedThreadId) throw new Exception(CrossThreadExceptionMessage);
-
-                var retryCount = (!_retries.Keys.Contains(index)) ? 0 : _retries[index];
-                return retryCount > _maxRetries;
-            }
-
-            public void PlusOne(TileIndex index)
-            {
-                if (_threadId != Environment.CurrentManagedThreadId) throw new Exception(CrossThreadExceptionMessage);
-
-                if (!_retries.Keys.Contains(index)) _retries.Add(index, 0);
-                else _retries[index]++;
-            }
-
-            public void Clear()
-            {
-                if (_threadId != Environment.CurrentManagedThreadId) throw new Exception(CrossThreadExceptionMessage);
-
-                _retries.Clear();
-            }
-        }
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]

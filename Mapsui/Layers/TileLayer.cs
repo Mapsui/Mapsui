@@ -79,7 +79,7 @@ namespace Mapsui.Layers
 					_tileFetcher.PropertyChanged -= TileFetcherOnPropertyChanged;
 				}
 
-				_tileFetcher = new TileFetcher (source, _memoryCache, _maxRetries, _fetchStrategy);
+				_tileFetcher = new TileFetcher (source, _memoryCache, 2, _fetchStrategy);
 				_tileFetcher.DataChanged += TileFetcherDataChanged;
 				_tileFetcher.PropertyChanged += TileFetcherOnPropertyChanged;
 
