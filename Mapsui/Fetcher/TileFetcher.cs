@@ -94,9 +94,8 @@ namespace Mapsui.Fetcher
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         void TileFetchLoop(CancellationToken globalCancellationToken)
-		{
-		    var tilesNeeded = GetTilesNeeded();
-		    _viewportChanged = false;
+        {
+            List<TileInfo> tilesMissing = null;
 
             if (_tileSource.Schema == null) Busy = false;
 
@@ -105,19 +104,22 @@ namespace Mapsui.Fetcher
 		        // 1) If the viewport is changed you need to calculate the needed tiles again.
 		        if (_viewportChanged)
 		        {
-		            tilesNeeded = GetTilesNeeded();
-		            _viewportChanged = false;
+		            var tilesNeeded = GetTilesNeeded();
+                    // assign needed tiles to missing tiles and over every iteration
+                    // missing tiles will be smaller. This has a big impact on performance.
+		            tilesMissing = tilesNeeded;
+                    _viewportChanged = false;
 		        }
 
 		        // 2) From the needed tiles get those that are still missing
-		        var missingTiles = GetMissingTiles(tilesNeeded);
+		        tilesMissing = GetMissingTiles(tilesMissing);
 
 		        // 3) Check if we are done
-		        if (!missingTiles.Any()) { Busy = false; }
+		        if (!tilesMissing.Any()) { Busy = false; }
                 
                 // 4) Actually fetch the tiles missing.
                 if (_currentRequests <  _maxRequests)
-		            FetchMissingTiles(missingTiles, globalCancellationToken);
+		            FetchMissingTiles(tilesMissing, globalCancellationToken);
 		    }
 		}
 
