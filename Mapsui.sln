@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.16
+VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui", "Mapsui\Mapsui.csproj", "{D74C052A-C07E-4B37-A898-134218ACA5C9}"
 EndProject
@@ -71,6 +71,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Geometries.Tests", "Tests\Mapsui.Geometries.Tests\Mapsui.Geometries.Tests.csproj", "{46519792-2F00-4FB7-99EF-1465AC7B8994}"
 EndProject
 Global
+	GlobalSection(Performance) = preSolution
+		HasPerformanceSessions = true
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|AnyCPU = Debug|AnyCPU
 		Release|AnyCPU = Release|AnyCPU
@@ -180,6 +183,9 @@ Global
 		{5C1F0E76-BF98-4C6E-8AAB-CDB7E3735A9C} = {969DB691-49FB-4785-98F4-2112CC1BA7C4}
 		{FF1A03F0-8C0C-4FAB-A229-42AD625B5456} = {F7130D3D-4E62-4EB3-B74C-1E819E017048}
 		{46519792-2F00-4FB7-99EF-1465AC7B8994} = {F7130D3D-4E62-4EB3-B74C-1E819E017048}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {22D684C3-0BD3-4D8A-AB23-748FB5527F6F}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		Policies = $0

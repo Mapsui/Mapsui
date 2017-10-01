@@ -20,6 +20,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using BruTile;
@@ -51,7 +52,7 @@ namespace Mapsui.Fetcher
 
         public event DataChangedEventHandler DataChanged;
 
-		public TileFetcher (ITileSource tileSource, MemoryCache<Feature> memoryCache, int maxRetries, IFetchStrategy strategy = null)
+		public TileFetcher (ITileSource tileSource, MemoryCache<Feature> memoryCache, int maxRetries, int maxThreads, IFetchStrategy strategy = null)
 		{
 		    _tileSource = tileSource ?? throw new ArgumentException ("TileProvider can not be null");
 			_memoryCache = memoryCache ?? throw new ArgumentException ("MemoryCache can not be null");
@@ -91,7 +92,8 @@ namespace Mapsui.Fetcher
 			_fetchLoopCancellationTokenSource?.Cancel();
         }
 
-		void TileFetchLoop(CancellationToken globalCancellationToken)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        void TileFetchLoop(CancellationToken globalCancellationToken)
 		{
 		    var tilesNeeded = GetTilesNeeded();
 		    _viewportChanged = false;
@@ -115,11 +117,12 @@ namespace Mapsui.Fetcher
                 
                 // 4) Actually fetch the tiles missing.
                 if (_currentRequests <  _maxRequests)
-		            FetchMissingTiles(missingTiles);
+		            FetchMissingTiles(missingTiles, globalCancellationToken);
 		    }
 		}
 
-        private void FetchMissingTiles(List<TileInfo> missingTiles)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private void FetchMissingTiles(List<TileInfo> missingTiles, CancellationToken globalCancellationToken)
         {
             foreach (var info in missingTiles)
             {
@@ -139,11 +142,12 @@ namespace Mapsui.Fetcher
                 // Cancelling because of a viewport change can be ineffective because most of the tiles
                 // will still be useful, even if they are outside of the viewport at that moment.
                 // When abort is called we would like to cancel.
-                Task.Run(() => FetchTile(info));
+                Task.Run(() => FetchTile(info), globalCancellationToken);
                 if (_viewportChanged) return;
             }
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private List<TileInfo> GetMissingTiles(List<TileInfo> tilesNeeded)
         {
             var missingTiles = new List<TileInfo>();
@@ -155,6 +159,7 @@ namespace Mapsui.Fetcher
             return missingTiles;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private List<TileInfo> GetTilesNeeded()
         {
             var levelId = BruTile.Utilities.GetNearestLevel(_tileSource.Schema.Resolutions, _resolution);
@@ -163,22 +168,7 @@ namespace Mapsui.Fetcher
             return tilesNeeded;
         }
 
-        //private void FetchTile(TileInfo tileInfo)
-        //{
-        //    Exception error = null;
-        //    byte[] tileData = null;
-
-        //    try
-        //    {
-
-        //    }
-        //    catch (Exception ex) // On this worker thread exceptions will not fall through to the caller so catch and pass in callback  
-        //    {
-        //        error = ex;
-        //    }
-        //    FetchCompleted(error, false, tileInfo, tileData);
-        //}
-
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void FetchTile(TileInfo tileInfo)
         {
             try
