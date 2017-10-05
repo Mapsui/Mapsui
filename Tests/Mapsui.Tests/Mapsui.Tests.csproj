@@ -47,6 +47,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Fetcher\CountingTileProvider.cs" />
     <Compile Include="Fetcher\FeatureFetcherTests.cs" />
     <Compile Include="Fetcher\NullTileProvidery.cs" />
     <Compile Include="Fetcher\FailingTileProvider.cs" />
