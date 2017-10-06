@@ -60,7 +60,7 @@ namespace Mapsui.Tests.Fetcher
         }
 
         [Test]
-        public void TileFetcherIterationCounterTest()
+        public void TileFetcherShouldRequestAllTilesJustOnes()
         {
             // Arrange
             var tileProvider = new CountingTileProvider();
@@ -76,15 +76,10 @@ namespace Mapsui.Tests.Fetcher
             
             // Assert
             while (tileFetcher.Busy) { }
-
-            Assert.AreEqual(1, tileFetcher.NumberOfTimesLoopStarted);
-    
+   
             Assert.AreEqual(expextedTiles, tileProvider.CountByTile.Keys.Count);
             Assert.AreEqual(expextedTiles, tileProvider.CountByTile.Values.Sum());
             Assert.AreEqual(expextedTiles, tileProvider.TotalCount);
-
-            Assert.AreEqual(1, tileProvider.CountByTile[new TileIndex(0, 0, level)]);
-            //!!!Assert.AreEqual(1, tileFetcher.IterationsInLoop); // This should not fail
 
             Assert.Pass("The fetcher did not go into an infinite loop");
         }
