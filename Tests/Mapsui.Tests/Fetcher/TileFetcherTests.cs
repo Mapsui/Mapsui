@@ -83,5 +83,28 @@ namespace Mapsui.Tests.Fetcher
 
             Assert.Pass("The fetcher did not go into an infinite loop");
         }
+
+        [Test]
+        public void TileFetcherShouldNotLoopWithoutNeed()
+        {
+            // Arrange
+            var tileProvider = new CountingTileProvider();
+            var tileSchema = new GlobalSphericalMercator();
+            var tileSource = new TileSource(tileProvider, tileSchema);
+            var tileFetcher = new TileFetcher(tileSource, new MemoryCache<Feature>(), 2, 8, new MinimalFetchStrategy());
+            var level = "4";
+
+            // Act
+            // Get all tiles of level 3
+            tileFetcher.ViewChanged(tileSchema.Extent.ToBoundingBox(), tileSchema.Resolutions[level].UnitsPerPixel);
+
+            // Assert
+            while (tileFetcher.Busy) { }
+
+            Assert.AreEqual(1, tileFetcher.NumberOfTimesLoopStarted);
+            // This should not faile Assert.Greater(100, tileFetcher.IterationsInLoop); 
+
+            Assert.Pass("The fetcher did not go into an infinite loop");
+        }
     }
 }
