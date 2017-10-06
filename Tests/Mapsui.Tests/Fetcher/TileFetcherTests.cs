@@ -102,7 +102,7 @@ namespace Mapsui.Tests.Fetcher
             while (tileFetcher.Busy) { }
 
             Assert.AreEqual(1, tileFetcher.NumberOfTimesLoopStarted);
-            // This should not faile Assert.Greater(100, tileFetcher.IterationsInLoop); 
+            // This should not fail Assert.Greater(100, tileFetcher.IterationsInLoop); 
 
             Assert.Pass("The fetcher did not go into an infinite loop");
         }
