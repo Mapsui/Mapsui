@@ -106,7 +106,7 @@ namespace Mapsui.Fetcher
 
             foreach (var info in tilesNeeded)
             {
-                if (_memoryCache.Find(info.Index) == null) missingTiles.Add(info);
+                if (_memoryCache.Find(info.Index) == null && !_tilesInProgress.Contains(info.Index)) missingTiles.Add(info);
             }
             return missingTiles;
         }
@@ -220,7 +220,7 @@ namespace Mapsui.Fetcher
                 tilesMissing = GetTilesNotInCache(tilesMissing);
            
                 // 3) Check if we are done
-                if (!tilesMissing.Any())
+                if (!tilesMissing.Any() && _tilesInProgress.Count == 0)
                 {
                     Busy = false;
                     globalCancellationTokenSource.Cancel();

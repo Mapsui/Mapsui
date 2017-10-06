@@ -48,6 +48,7 @@
     <Compile Include="ExtensionMethods\StreamExtensions.cs" />
     <Compile Include="Fetcher\FeatureFetcher.cs" />
     <Compile Include="Fetcher\FetchRetries.cs" />
+    <Compile Include="Fetcher\FetchState.cs" />
     <Compile Include="Fetcher\FetchStrategy.cs" />
     <Compile Include="Fetcher\IAsyncDataFetcher.cs" />
     <Compile Include="Fetcher\IFetchStrategy.cs" />
