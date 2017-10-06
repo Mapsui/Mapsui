@@ -9,18 +9,14 @@ namespace Mapsui.Tests.Fetcher
     {
         readonly Random _random = new Random(32435);
         public ConcurrentDictionary<TileIndex, long> CountByTile { get; } = new ConcurrentDictionary<TileIndex, long>();
-        public long TotalCount { get; private set; }
-
-        public object syncRoot= new object();
+        public long TotalCount;
 
         public byte[] GetTile(TileInfo tileInfo)
         {
             Thread.Sleep((int)(_random.NextDouble() * 10));
+
             CountByTile.AddOrUpdate(tileInfo.Index, 1, (index, count) => ++count);
-            lock (syncRoot)
-            {
-                TotalCount++;
-            }
+            Interlocked.Increment(ref TotalCount);
 
             return new byte[0];
         }
