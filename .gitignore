@@ -38,3 +38,4 @@ Release/
 *.user
 *.cache
 /Mapsui.Samples.Wpf.psess
+/_NCrunch_Mapsui/StoredText
