@@ -49,9 +49,10 @@
   <ItemGroup>
     <Compile Include="Fetcher\CountingTileProvider.cs" />
     <Compile Include="Fetcher\FeatureFetcherTests.cs" />
-    <Compile Include="Fetcher\NullTileProvidery.cs" />
-    <Compile Include="Fetcher\FailingTileProvider.cs" />
+    <Compile Include="Fetcher\NullTileProvider.cs" />
     <Compile Include="Fetcher\SometimesFailingTileProvider.cs" />
+    <Compile Include="Fetcher\FailingTileProvider.cs" />
+    <Compile Include="Fetcher\FetchMachineTests.cs" />
     <Compile Include="Fetcher\TileFetcherTests.cs" />
     <Compile Include="Layers\RasterizingLayerTests.cs" />
     <Compile Include="Projection\TransformTests.cs" />

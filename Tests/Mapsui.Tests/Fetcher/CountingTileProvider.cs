@@ -11,7 +11,7 @@ namespace Mapsui.Tests.Fetcher
         public ConcurrentDictionary<TileIndex, long> CountByTile { get; } = new ConcurrentDictionary<TileIndex, long>();
         public long TotalCount;
 
-        public byte[] GetTile(TileInfo tileInfo)
+        public virtual byte[] GetTile(TileInfo tileInfo)
         {
             Thread.Sleep((int)(_random.NextDouble() * 10));
 

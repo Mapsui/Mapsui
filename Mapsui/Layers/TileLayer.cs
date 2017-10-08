@@ -32,14 +32,14 @@ namespace Mapsui.Layers
 {
     public class TileLayer : BaseLayer
     {
-        private TileFetcher _tileFetcher;
         private ITileSource _tileSource;
-        private readonly int _maxRetries;
         private readonly IFetchStrategy _fetchStrategy;
         private readonly IRenderGetStrategy _renderStrategy;
         private readonly int _minExtraTiles;
         private readonly int _maxExtraTiles;
         private int _numberTilesNeeded;
+        private IFetchDispatcher _fetchDispatcher;
+        private FetchMachine _fetchMachine;
 
         readonly MemoryCache<Feature> _memoryCache;
         
@@ -53,7 +53,6 @@ namespace Mapsui.Layers
         {
             _memoryCache = new MemoryCache<Feature>(minTiles, maxTiles);
             Style = new VectorStyle { Outline = { Color = Color.FromArgb(0, 0, 0, 0) } }; // initialize with transparent outline
-            _maxRetries = maxRetries;
             _fetchStrategy = fetchStrategy ?? new FetchStrategy();
             _renderStrategy = renderFetchStrategy ?? new RenderGetStrategy();
             _minExtraTiles = minExtraTiles;
@@ -72,16 +71,17 @@ namespace Mapsui.Layers
                 Attribution.Text = _tileSource.Attribution?.Text;
                 Attribution.Url = _tileSource.Attribution?.Url;
 
-				if (_tileFetcher != null)
+				if (_fetchDispatcher != null)
 				{
-					_tileFetcher.AbortFetch ();
-					_tileFetcher.DataChanged -= TileFetcherDataChanged;
-					_tileFetcher.PropertyChanged -= TileFetcherOnPropertyChanged;
+				    _fetchDispatcher.DataChanged -= TileFetcherDataChanged;
+				    _fetchDispatcher.PropertyChanged -= TileFetcherOnPropertyChanged;
 				}
 
-				_tileFetcher = new TileFetcher (source, _memoryCache, 2, 2, _fetchStrategy);
-				_tileFetcher.DataChanged += TileFetcherDataChanged;
-				_tileFetcher.PropertyChanged += TileFetcherOnPropertyChanged;
+				_fetchDispatcher = new FetchDispatcher(_memoryCache, source, _fetchStrategy);
+                _fetchMachine = new FetchMachine(_fetchDispatcher);
+
+                _fetchDispatcher.DataChanged += TileFetcherDataChanged;
+                _fetchDispatcher.PropertyChanged += TileFetcherOnPropertyChanged;
 
                 OnPropertyChanged(nameof(Envelope));
             }
@@ -91,13 +91,13 @@ namespace Mapsui.Layers
         {
             if (propertyChangedEventArgs.PropertyName == nameof(Busy))
             {
-                if (_tileFetcher != null) Busy = _tileFetcher.Busy;
+                if (_fetchDispatcher != null) Busy = _fetchDispatcher.Busy;
             }
         }
 
         public ITileSource TileSource
         {
-            get { return _tileSource; }
+            get => _tileSource;
             set
             {
                 SetTileSource(value);
@@ -109,17 +109,18 @@ namespace Mapsui.Layers
 
         public override void ViewChanged(bool majorChange, BoundingBox extent, double resolution)
         {
-            if (Enabled && extent.GetArea() > 0 && _tileFetcher != null && MaxVisible > resolution && MinVisible < resolution)
+            if (Enabled && extent.GetArea() > 0 && _fetchDispatcher != null && MaxVisible > resolution && MinVisible < resolution)
             {
-                _tileFetcher.ViewChanged(extent, resolution);
+                _fetchDispatcher.ViewportChanged(extent, resolution);
+                _fetchMachine.Start();
             }
         }
 
         private void UpdateMemoryCacheMinAndMax()
         {
             if (_minExtraTiles < 0 || _maxExtraTiles < 0 
-                || _numberTilesNeeded == _tileFetcher.NumberTilesNeeded) return;
-            _numberTilesNeeded = _tileFetcher.NumberTilesNeeded;
+                || _numberTilesNeeded == _fetchDispatcher.NumberTilesNeeded) return;
+            _numberTilesNeeded = _fetchDispatcher.NumberTilesNeeded;
             _memoryCache.MinTiles = _numberTilesNeeded + _minExtraTiles;
             _memoryCache.MaxTiles = _numberTilesNeeded + _maxExtraTiles;
         }
@@ -160,7 +161,7 @@ namespace Mapsui.Layers
         // not used anymore
         public override void AbortFetch()
         {
-			_tileFetcher?.AbortFetch ();
+            _fetchMachine?.Stop();
         }
 
         public override IReadOnlyList<double> Resolutions => _tileSource?.Schema?.Resolutions.Select(r => r.Value.UnitsPerPixel).ToList();
