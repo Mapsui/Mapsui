@@ -7,7 +7,7 @@ namespace Mapsui.Fetcher
 {
     interface IFetchDispatcher
     {
-        Action TakeFetchOrder();
+        bool TryTake(ref Action method);
         void SetViewport(BoundingBox newExtent, double newResolution);
 
         bool Busy { get; }
@@ -15,6 +15,5 @@ namespace Mapsui.Fetcher
 
         event DataChangedEventHandler DataChanged;
         event PropertyChangedEventHandler PropertyChanged;
-
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Mapsui.Fetcher
@@ -33,14 +34,15 @@ namespace Mapsui.Fetcher
         {
             while (!cancellationTokenSource.Token.IsCancellationRequested)
             {
-                var executeOrder = _fetchDispatcher.TakeFetchOrder();
-                if (executeOrder == null)
+                Action method = null;
+                ;
+                if (_fetchDispatcher.TryTake(ref method))
                 {
-                    cancellationTokenSource.Cancel();
+                    method();
                 }
                 else
                 {
-                    executeOrder();
+                    cancellationTokenSource.Cancel();
                 }
             }
         }
