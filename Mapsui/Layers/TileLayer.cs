@@ -111,7 +111,7 @@ namespace Mapsui.Layers
         {
             if (Enabled && extent.GetArea() > 0 && _fetchDispatcher != null && MaxVisible > resolution && MinVisible < resolution)
             {
-                _fetchDispatcher.ViewportChanged(extent, resolution);
+                _fetchDispatcher.SetViewport(extent, resolution);
                 _fetchMachine.Start();
             }
         }

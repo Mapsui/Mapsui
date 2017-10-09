@@ -9,7 +9,7 @@ namespace Mapsui.Fetcher
     {
         FetchOrder TakeFetchOrder();
         void CompleteFetchOrder(TileInfo tileInfo, byte[] tileData, Exception exception);
-        void ViewportChanged(BoundingBox newExtent, double newResolution);
+        void SetViewport(BoundingBox newExtent, double newResolution);
 
         bool Busy { get; }
         int NumberTilesNeeded { get; }

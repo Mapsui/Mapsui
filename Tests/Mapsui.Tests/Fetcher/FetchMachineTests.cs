@@ -27,7 +27,7 @@ namespace Mapsui.Tests.Fetcher
 
             // Act
             // Get all tiles of level 3
-            fetchDispatcher.ViewportChanged(tileSchema.Extent.ToBoundingBox(), tileSchema.Resolutions[level].UnitsPerPixel);
+            fetchDispatcher.SetViewport(tileSchema.Extent.ToBoundingBox(), tileSchema.Resolutions[level].UnitsPerPixel);
             tileMachine.Start();
             // Assert
             while (fetchDispatcher.Busy) { }
@@ -51,11 +51,11 @@ namespace Mapsui.Tests.Fetcher
             var tilesInLevel = 64;
 
             // Act
-            fetchDispatcher.ViewportChanged(tileSchema.Extent.ToBoundingBox(), tileSchema.Resolutions[level].UnitsPerPixel);
+            fetchDispatcher.SetViewport(tileSchema.Extent.ToBoundingBox(), tileSchema.Resolutions[level].UnitsPerPixel);
             tileMachine.Start();
             while (fetchDispatcher.Busy) { }
             // do it again
-            fetchDispatcher.ViewportChanged(tileSchema.Extent.ToBoundingBox(), tileSchema.Resolutions[level].UnitsPerPixel);
+            fetchDispatcher.SetViewport(tileSchema.Extent.ToBoundingBox(), tileSchema.Resolutions[level].UnitsPerPixel);
             tileMachine.Start();
             while (fetchDispatcher.Busy) { Thread.Sleep(1); }
 
@@ -77,11 +77,11 @@ namespace Mapsui.Tests.Fetcher
             var tilesInLevel = 64;
 
             // Act
-            fetchDispatcher.ViewportChanged(tileSchema.Extent.ToBoundingBox(), tileSchema.Resolutions[level].UnitsPerPixel);
+            fetchDispatcher.SetViewport(tileSchema.Extent.ToBoundingBox(), tileSchema.Resolutions[level].UnitsPerPixel);
             tileMachine.Start();
             while (fetchDispatcher.Busy) { }
             // do it again
-            fetchDispatcher.ViewportChanged(tileSchema.Extent.ToBoundingBox(), tileSchema.Resolutions[level].UnitsPerPixel);
+            fetchDispatcher.SetViewport(tileSchema.Extent.ToBoundingBox(), tileSchema.Resolutions[level].UnitsPerPixel);
             tileMachine.Start();
             while (fetchDispatcher.Busy) { }
 
@@ -105,7 +105,7 @@ namespace Mapsui.Tests.Fetcher
             // Act
             for (int i = 0; i < numberOfRestarts; i++)
             {
-                fetchDispatcher.ViewportChanged(tileSchema.Extent.ToBoundingBox(), tileSchema.Resolutions["3"].UnitsPerPixel);
+                fetchDispatcher.SetViewport(tileSchema.Extent.ToBoundingBox(), tileSchema.Resolutions["3"].UnitsPerPixel);
                 tileMachine.Start();
                 while (fetchDispatcher.Busy) { }
             }

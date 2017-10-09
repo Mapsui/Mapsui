@@ -38,7 +38,7 @@ namespace Mapsui.Fetcher
         public int NumberTilesNeeded => _numberTilesNeeded;
 
 
-        public void ViewportChanged(BoundingBox newExtent, double newResolution)
+        public void SetViewport(BoundingBox newExtent, double newResolution)
         {
             lock (_lockRoot)
             {
