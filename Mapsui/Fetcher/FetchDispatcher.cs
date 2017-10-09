@@ -92,7 +92,7 @@ namespace Mapsui.Fetcher
             }
         }
 
-        public void CompleteFetchOrder(TileInfo tileInfo, byte[] tileData, Exception exception)
+        private void CompleteFetchOrder(TileInfo tileInfo, byte[] tileData, Exception exception)
         {
             lock (_lockRoot)
             {
