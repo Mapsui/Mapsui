@@ -15,7 +15,6 @@ namespace Mapsui.Fetcher
     {
         private readonly ITileCache<Feature> _tileCache;
         private readonly ITileSource _tileSource;
-
         private readonly IFetchStrategy _fetchStrategy;
         private bool _modified;
         private BoundingBox _extent;
@@ -28,6 +27,7 @@ namespace Mapsui.Fetcher
         
         public FetchDispatcher(ITileCache<Feature> tileCache, ITileSource tileSource, IFetchStrategy fetchStrategy = null)
         {
+            
             _tileCache = tileCache;
             _tileSource = tileSource;
             _fetchStrategy = fetchStrategy ?? new MinimalFetchStrategy();
@@ -60,12 +60,26 @@ namespace Mapsui.Fetcher
                 if (success)
                 {
                     _tilesInProgress.Add(tileInfo.Index);
-                    return new FetchOrder {TileInfo = tileInfo, TileSource = _tileSource};
+                    return new FetchOrder {ExecuteOrder = () => ExecuteOrder(tileInfo)};
                 }
 
                 Busy = _tilesInProgress.Count > 0 || _tilesMissing.Count > 0;
                 // else the queue is empty, we are done.
                 return null; // return null to indicate we are done.
+            }
+        }
+
+        private void ExecuteOrder(TileInfo tileInfo)
+        {
+            byte[] tileData = null;
+            try
+            {
+                tileData = _tileSource.GetTile(tileInfo);
+                CompleteFetchOrder(tileInfo, tileData, null);
+            }
+            catch (Exception exception)
+            {
+                CompleteFetchOrder(tileInfo, tileData, exception);
             }
         }
 

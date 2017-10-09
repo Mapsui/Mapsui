@@ -1,10 +1,10 @@
-﻿using BruTile;
+﻿using System;
+using BruTile;
 
 namespace Mapsui.Fetcher
 {
     class FetchOrder
     {
-        public TileInfo TileInfo { get; set; }
-        public ITileSource TileSource { get; set; }
+        public Action ExecuteOrder { get; set; }
     }
 }

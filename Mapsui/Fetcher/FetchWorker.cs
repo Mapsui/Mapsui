@@ -41,16 +41,7 @@ namespace Mapsui.Fetcher
                 }
                 else
                 {
-                    byte[] tileData = null;
-                    try
-                    {
-                        tileData = fetchOrder.TileSource.GetTile(fetchOrder.TileInfo);
-                        _fetchDispatcher.CompleteFetchOrder(fetchOrder.TileInfo, tileData, null);
-                    }
-                    catch (Exception exception)
-                    {
-                        _fetchDispatcher.CompleteFetchOrder(fetchOrder.TileInfo, tileData, exception);
-                    }
+                    fetchOrder.ExecuteOrder();
                 }
             }
         }
