@@ -49,7 +49,7 @@ namespace Mapsui.Fetcher
             }
         }
 
-        public FetchOrder TakeFetchOrder()
+        public Action TakeFetchOrder()
         {
             lock (_lockRoot)
             {
@@ -60,7 +60,7 @@ namespace Mapsui.Fetcher
                 if (success)
                 {
                     _tilesInProgress.Add(tileInfo.Index);
-                    return new FetchOrder {ExecuteOrder = () => ExecuteOrder(tileInfo)};
+                    return () => ExecuteOrder(tileInfo);
                 }
 
                 Busy = _tilesInProgress.Count > 0 || _tilesMissing.Count > 0;

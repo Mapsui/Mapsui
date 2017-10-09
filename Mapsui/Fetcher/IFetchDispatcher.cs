@@ -7,7 +7,7 @@ namespace Mapsui.Fetcher
 {
     interface IFetchDispatcher
     {
-        FetchOrder TakeFetchOrder();
+        Action TakeFetchOrder();
         void CompleteFetchOrder(TileInfo tileInfo, byte[] tileData, Exception exception);
         void SetViewport(BoundingBox newExtent, double newResolution);
 
