@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-using BruTile;
 using Mapsui.Geometries;
 
 namespace Mapsui.Fetcher
