@@ -38,7 +38,7 @@ namespace Mapsui.Layers
         private readonly int _minExtraTiles;
         private readonly int _maxExtraTiles;
         private int _numberTilesNeeded;
-        private IFetchDispatcher _fetchDispatcher;
+        private FetchDispatcher _fetchDispatcher;
         private FetchMachine _fetchMachine;
 
         readonly MemoryCache<Feature> _memoryCache;

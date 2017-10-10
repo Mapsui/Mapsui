@@ -13,21 +13,20 @@ namespace Mapsui.Fetcher
 {
     class FetchDispatcher : IFetchDispatcher, INotifyPropertyChanged
     {
-        private readonly ITileCache<Feature> _tileCache;
-        private readonly ITileSource _tileSource;
-        private readonly IFetchStrategy _fetchStrategy;
-        private bool _modified;
         private BoundingBox _extent;
         private double _resolution;
-        private ConcurrentQueue<TileInfo> _tilesMissing = new ConcurrentQueue<TileInfo>();
-        private readonly ConcurrentHashSet<TileIndex> _tilesInProgress = new ConcurrentHashSet<TileIndex>();
         private readonly object _lockRoot = new object();
         private bool _busy;
         private int _numberTilesNeeded;
+        private bool _modified;
+        private readonly ITileCache<Feature> _tileCache;
+        private readonly ITileSource _tileSource;
+        private readonly IFetchStrategy _fetchStrategy;
+        private ConcurrentQueue<TileInfo> _tilesMissing = new ConcurrentQueue<TileInfo>();
+        private readonly ConcurrentHashSet<TileIndex> _tilesInProgress = new ConcurrentHashSet<TileIndex>();
         
         public FetchDispatcher(ITileCache<Feature> tileCache, ITileSource tileSource, IFetchStrategy fetchStrategy = null)
         {
-            
             _tileCache = tileCache;
             _tileSource = tileSource;
             _fetchStrategy = fetchStrategy ?? new MinimalFetchStrategy();
