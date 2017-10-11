@@ -4,6 +4,10 @@ using System.Collections.Generic;
 
 namespace Mapsui.Projection
 {
+    /// <summary>
+    /// A very minimal implementation of ITransformation. It is only capable of projecting between
+    /// SphericalMercator and WGS84.
+    /// </summary>
     public class MinimalTransformation : ITransformation
     {
         private readonly IDictionary<string, Func<double, double, Point>> _toLatLon = new Dictionary<string, Func<double, double, Point>>();
