@@ -62,7 +62,7 @@ namespace Mapsui.Layers
 
         private void SetTileSource(ITileSource source)
 		{
-			_memoryCache.Clear ();
+			_memoryCache.Clear(); // todo: perhaps clear after fetchmachine has stopped?
 
             _tileSource = source;
 
@@ -73,21 +73,21 @@ namespace Mapsui.Layers
 
 				if (_fetchDispatcher != null)
 				{
-				    _fetchDispatcher.DataChanged -= TileFetcherDataChanged;
-				    _fetchDispatcher.PropertyChanged -= TileFetcherOnPropertyChanged;
+				    _fetchDispatcher.DataChanged -= FetchDispatcherOnDataChanged;
+				    _fetchDispatcher.PropertyChanged -= FetchDispatcherOnPropertyChanged;
 				}
 
 				_fetchDispatcher = new FetchDispatcher(_memoryCache, source, _fetchStrategy);
                 _fetchMachine = new FetchMachine(_fetchDispatcher);
 
-                _fetchDispatcher.DataChanged += TileFetcherDataChanged;
-                _fetchDispatcher.PropertyChanged += TileFetcherOnPropertyChanged;
+                _fetchDispatcher.DataChanged += FetchDispatcherOnDataChanged;
+                _fetchDispatcher.PropertyChanged += FetchDispatcherOnPropertyChanged;
 
                 OnPropertyChanged(nameof(Envelope));
             }
         }
 
-        private void TileFetcherOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
+        private void FetchDispatcherOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
             if (propertyChangedEventArgs.PropertyName == nameof(Busy))
             {
@@ -132,7 +132,7 @@ namespace Mapsui.Layers
 
         public MemoryCache<Feature> MemoryCache => _memoryCache;
 
-        private void TileFetcherDataChanged(object sender, DataChangedEventArgs e)
+        private void FetchDispatcherOnDataChanged(object sender, DataChangedEventArgs e)
         {
             OnDataChanged(e);
         }
