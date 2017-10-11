@@ -23,6 +23,7 @@ namespace Mapsui.Layers
         private IStyle _style;
         private object _tag;
         private ITransformation _transformation;
+        private readonly Transformer _transformer = new Transformer();
 
         protected BaseLayer()
         {
@@ -120,6 +121,7 @@ namespace Mapsui.Layers
             set
             {
                 _crs = value;
+                _transformer.ToCrs = CRS;
                 OnPropertyChanged(nameof(CRS));
             }
         }
@@ -177,8 +179,14 @@ namespace Mapsui.Layers
             set
             {
                 _transformation = value;
+                _transformer.Transformation = _transformation;
                 OnPropertyChanged(nameof(Transformation));
             }
+        }
+
+        public Transformer Transformer
+        {
+            get => _transformer;
         }
 
         /// <summary>
