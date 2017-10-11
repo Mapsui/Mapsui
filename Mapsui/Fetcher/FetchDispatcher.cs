@@ -37,12 +37,12 @@ namespace Mapsui.Fetcher
         public int NumberTilesNeeded => _numberTilesNeeded;
 
 
-        public void SetViewport(BoundingBox newExtent, double newResolution)
+        public void SetViewport(BoundingBox extent, double resolution)
         {
             lock (_lockRoot)
             {
-                _extent = newExtent;
-                _resolution = newResolution;
+                _extent = extent;
+                _resolution = resolution;
                 Busy = true;
                 _modified = true;
             }
@@ -59,7 +59,7 @@ namespace Mapsui.Fetcher
                 if (success)
                 {
                     _tilesInProgress.Add(tileInfo.Index);
-                    method = () => ExecuteOrder(tileInfo);
+                    method = () => FetchOnThread(tileInfo);
                     return true;
                 }
 
@@ -69,17 +69,16 @@ namespace Mapsui.Fetcher
             }
         }
 
-        private void ExecuteOrder(TileInfo tileInfo)
+        private void FetchOnThread(TileInfo tileInfo)
         {
-            byte[] tileData = null;
             try
             {
-                tileData = _tileSource.GetTile(tileInfo);
-                CompleteFetchOrder(tileInfo, tileData, null);
+                var tileData = _tileSource.GetTile(tileInfo);
+                FetchCompleted(tileInfo, tileData, null);
             }
             catch (Exception exception)
             {
-                CompleteFetchOrder(tileInfo, tileData, exception);
+                FetchCompleted(tileInfo, null, exception);
             }
         }
 
@@ -92,7 +91,7 @@ namespace Mapsui.Fetcher
             }
         }
 
-        private void CompleteFetchOrder(TileInfo tileInfo, byte[] tileData, Exception exception)
+        private void FetchCompleted(TileInfo tileInfo, byte[] tileData, Exception exception)
         {
             lock (_lockRoot)
             {
@@ -104,7 +103,7 @@ namespace Mapsui.Fetcher
 
                 Busy = _tilesInProgress.Count > 0 || _tilesMissing.Count > 0;
 
-                DataChanged?.Invoke(this, new DataChangedEventArgs(null, false, null));
+                DataChanged?.Invoke(this, new DataChangedEventArgs(exception, false, null));
             }
         }
 
