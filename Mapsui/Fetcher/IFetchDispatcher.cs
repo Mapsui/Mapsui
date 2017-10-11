@@ -7,7 +7,7 @@ namespace Mapsui.Fetcher
     interface IFetchDispatcher
     {
         bool TryTake(ref Action method);
-        void SetViewport(BoundingBox newExtent, double newResolution);
+        void SetViewport(BoundingBox extent, double resolution);
 
         bool Busy { get; }
         
