@@ -16,23 +16,21 @@ namespace Mapsui.Fetcher
         private readonly object _lockRoot = new object();
         private bool _busy;
         private readonly MemoryProvider _cache;
-        private IProvider _dataSource;
         private readonly Transformer _transformer;
         private bool _modified;
 
-        // todo: Check wether busy and modified state are set correctly in all stages
+        // todo: Check whether busy and modified state are set correctly in all stages
 
-        public FeatureFetchDispatcher(MemoryProvider cache, IProvider dataSource, Transformer transformer)
+        public FeatureFetchDispatcher(MemoryProvider cache, Transformer transformer)
         {
             _cache = cache;
-            _dataSource = dataSource;
             _transformer = transformer;
         }
 
         public bool TryTake(ref Action method)
         {
             if (!_modified) return false;
-            if (_dataSource == null) return false; 
+            if (DataSource == null) return false; 
 
             method = () => FetchOnThread(_extent.Copy(), _resolution);
             _modified = false;
@@ -43,7 +41,7 @@ namespace Mapsui.Fetcher
         {
             try
             {
-                var features = _dataSource.GetFeaturesInView(extent, resolution).ToList();
+                var features = DataSource.GetFeaturesInView(extent, resolution).ToList();
                 FetchCompleted(features, null);
             }
             catch (Exception exception)
@@ -64,7 +62,6 @@ namespace Mapsui.Fetcher
                     {
                         _cache.Features.Add(feature);
                     }
-                    
                 }
                 
                 Busy = _modified;
@@ -78,6 +75,8 @@ namespace Mapsui.Fetcher
             lock (_lockRoot)
             {
                 var transformedExtent = _transformer.TransformBack(extent);
+                // Fetch a bigger extent to include partially visible symbols. 
+                // todo: Take into account the maximum symbol size of the layer
                 var grownExtent = transformedExtent.Grow(
                     SymbolStyle.DefaultWidth * 2 * resolution, 
                     SymbolStyle.DefaultHeight * 2 * resolution);
@@ -88,11 +87,7 @@ namespace Mapsui.Fetcher
             }
         }
 
-        public IProvider DataSource
-        {
-            get { return _dataSource; }
-            set { _dataSource = value; }
-        }
+        public IProvider DataSource { get; set; }
 
         public bool Busy
         {
