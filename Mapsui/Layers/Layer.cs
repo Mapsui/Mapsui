@@ -40,7 +40,7 @@ namespace Mapsui.Layers
 
         public Layer(string layername) : base(layername)
         {
-            _fetchDispatcher = new FeatureFetchDispatcher(_cache, _dataSource, Transformer);
+            _fetchDispatcher = new FeatureFetchDispatcher(_cache, Transformer);
             _fetchDispatcher.DataChanged += FetchDispatcherOnDataChanged;
             _fetchDispatcher.PropertyChanged += FetchDispatcherOnPropertyChanged;
 
