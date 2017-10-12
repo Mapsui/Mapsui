@@ -33,19 +33,18 @@ namespace Mapsui.Layers
     public class TileLayer : BaseLayer
     {
         private ITileSource _tileSource;
-        private readonly IFetchStrategy _fetchStrategy;
         private readonly IRenderGetStrategy _renderStrategy;
         private readonly int _minExtraTiles;
         private readonly int _maxExtraTiles;
         private int _numberTilesNeeded;
-        private FetchDispatcher _fetchDispatcher;
-        private FetchMachine _fetchMachine;
+        private readonly FetchDispatcher _fetchDispatcher;
+        private readonly FetchMachine _fetchMachine;
 
         readonly MemoryCache<Feature> _memoryCache;
         
         public TileLayer(Func<ITileSource> tileSourceInitializer) : this()
         {
-            Task.Factory.StartNew(() => TileSource = tileSourceInitializer());
+            Task.Run(() => SetTileSource(tileSourceInitializer()));
         }
 
         public TileLayer(ITileSource source = null, int minTiles = 200, int maxTiles = 300, int maxRetries = TileFetcher.DefaultMaxAttempts, IFetchStrategy fetchStrategy = null,
@@ -53,37 +52,29 @@ namespace Mapsui.Layers
         {
             _memoryCache = new MemoryCache<Feature>(minTiles, maxTiles);
             Style = new VectorStyle { Outline = { Color = Color.FromArgb(0, 0, 0, 0) } }; // initialize with transparent outline
-            _fetchStrategy = fetchStrategy ?? new FetchStrategy();
+            var fetchStrategy1 = fetchStrategy ?? new MinimalFetchStrategy();
             _renderStrategy = renderFetchStrategy ?? new RenderGetStrategy();
             _minExtraTiles = minExtraTiles;
             _maxExtraTiles = maxExtraTiles;
+            _fetchDispatcher = new FetchDispatcher(_memoryCache, fetchStrategy1);
+            _fetchDispatcher.DataChanged += FetchDispatcherOnDataChanged;
+            _fetchDispatcher.PropertyChanged += FetchDispatcherOnPropertyChanged;
+            _fetchMachine = new FetchMachine(_fetchDispatcher);
             SetTileSource(source);
         }
-
-        private void SetTileSource(ITileSource source)
+        
+        private void SetTileSource(ITileSource tileSource)
 		{
-			_memoryCache.Clear(); // todo: perhaps clear after fetchmachine has stopped?
-
-            _tileSource = source;
+            _fetchMachine.Stop();
+			_memoryCache.Clear();
+		    _fetchDispatcher.TileSource = tileSource;
+            _tileSource = tileSource;
+		    OnPropertyChanged(nameof(Envelope));
 
             if (_tileSource != null)
             {
                 Attribution.Text = _tileSource.Attribution?.Text;
                 Attribution.Url = _tileSource.Attribution?.Url;
-
-				if (_fetchDispatcher != null)
-				{
-				    _fetchDispatcher.DataChanged -= FetchDispatcherOnDataChanged;
-				    _fetchDispatcher.PropertyChanged -= FetchDispatcherOnPropertyChanged;
-				}
-
-				_fetchDispatcher = new FetchDispatcher(_memoryCache, source, _fetchStrategy);
-                _fetchMachine = new FetchMachine(_fetchDispatcher);
-
-                _fetchDispatcher.DataChanged += FetchDispatcherOnDataChanged;
-                _fetchDispatcher.PropertyChanged += FetchDispatcherOnPropertyChanged;
-
-                OnPropertyChanged(nameof(Envelope));
             }
         }
 
@@ -149,16 +140,17 @@ namespace Mapsui.Layers
             return (string.Equals(ToSimpleEpsgCode(), crs, StringComparison.CurrentCultureIgnoreCase));
         }
 
-        string ToSimpleEpsgCode()
+        private string ToSimpleEpsgCode()
         {
             var startEpsgCode = _tileSource.Schema.Srs.IndexOf("EPSG:", StringComparison.Ordinal);
             if (startEpsgCode < 0) return _tileSource.Schema.Srs;
             return _tileSource.Schema.Srs.Substring(startEpsgCode).Replace("::", ":").Trim();
         }
 
-        // Aborts the tile fetch thread. When the fetcher thread is still running
-        // the layer will not be disposed. Call this method only if the layer is 
-        // not used anymore
+        /// <summary>
+        /// Aborts the tile fetches that are in progress. If this method is not called
+        /// the threads will terminate naturally. It will just take a little longer.
+        /// </summary>
         public override void AbortFetch()
         {
             _fetchMachine?.Stop();

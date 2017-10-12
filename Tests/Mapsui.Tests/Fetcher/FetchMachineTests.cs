@@ -20,7 +20,7 @@ namespace Mapsui.Tests.Fetcher
             var tileSchema = new GlobalSphericalMercator();
             var tileSource = new TileSource(tileProvider, tileSchema);
             var cache = new MemoryCache<Feature>();
-            var fetchDispatcher = new FetchDispatcher(cache, tileSource);
+            var fetchDispatcher = new FetchDispatcher(cache) {TileSource = tileSource};
             var tileMachine = new FetchMachine(fetchDispatcher);
             var level = "4";
             var expextedTiles = 256;
@@ -45,7 +45,7 @@ namespace Mapsui.Tests.Fetcher
             var tileSchema = new GlobalSphericalMercator();
             var tileSource = new TileSource(tileProvider, tileSchema);
             var cache = new MemoryCache<Feature>();
-            var fetchDispatcher = new FetchDispatcher(cache, tileSource);
+            var fetchDispatcher = new FetchDispatcher(cache) {TileSource = tileSource};
             var tileMachine = new FetchMachine(fetchDispatcher);
             var level = "3";
             var tilesInLevel = 64;
@@ -71,7 +71,7 @@ namespace Mapsui.Tests.Fetcher
             var tileSchema = new GlobalSphericalMercator();
             var tileSource = new TileSource(tileProvider, tileSchema);
             var cache = new MemoryCache<Feature>();
-            var fetchDispatcher = new FetchDispatcher(cache, tileSource);
+            var fetchDispatcher = new FetchDispatcher(cache) {TileSource = tileSource};
             var tileMachine = new FetchMachine(fetchDispatcher);
             var level = "3";
             var tilesInLevel = 64;
@@ -97,7 +97,7 @@ namespace Mapsui.Tests.Fetcher
             var tileSchema = new GlobalSphericalMercator();
             var tileSource = new TileSource(tileProvider, tileSchema);
             var cache = new MemoryCache<Feature>();
-            var fetchDispatcher = new FetchDispatcher(cache, tileSource);
+            var fetchDispatcher = new FetchDispatcher(cache) { TileSource = tileSource };
             var tileMachine = new FetchMachine(fetchDispatcher);
             var numberOfWorkers = 8;
             var numberOfRestarts = 3;
