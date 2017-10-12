@@ -46,6 +46,8 @@
     <Compile Include="ExtensionMethods\FeatureExtensions.cs" />
     <Compile Include="ExtensionMethods\GeometryExtensions.cs" />
     <Compile Include="ExtensionMethods\StreamExtensions.cs" />
+    <Compile Include="Fetcher\Delayer.cs" />
+    <Compile Include="Fetcher\FeatureFetchDispatcher.cs" />
     <Compile Include="Fetcher\FeatureFetcher.cs" />
     <Compile Include="Fetcher\FetchMachine.cs" />
     <Compile Include="Fetcher\FetchWorker.cs" />
@@ -64,6 +66,7 @@
     <Compile Include="Layers\Attribution.cs" />
     <Compile Include="Layers\TmsTileSourceBuilder.cs" />
     <Compile Include="Logging\Logger.cs" />
+    <Compile Include="Projection\Transformer.cs" />
     <Compile Include="UI\SharedMapControl.cs" />
     <Compile Include="UI\ViewportLimiter.cs" />
     <Compile Include="Projection\BoundingBoxIterator.cs" />
