@@ -37,7 +37,7 @@ namespace Mapsui.Layers
         private readonly int _minExtraTiles;
         private readonly int _maxExtraTiles;
         private int _numberTilesNeeded;
-        private readonly FetchDispatcher _fetchDispatcher;
+        private readonly TileFetchDispatcher _tileFetchDispatcher;
         private readonly FetchMachine _fetchMachine;
 
         readonly MemoryCache<Feature> _memoryCache;
@@ -56,10 +56,10 @@ namespace Mapsui.Layers
             _renderStrategy = renderFetchStrategy ?? new RenderGetStrategy();
             _minExtraTiles = minExtraTiles;
             _maxExtraTiles = maxExtraTiles;
-            _fetchDispatcher = new FetchDispatcher(_memoryCache, fetchStrategy1);
-            _fetchDispatcher.DataChanged += FetchDispatcherOnDataChanged;
-            _fetchDispatcher.PropertyChanged += FetchDispatcherOnPropertyChanged;
-            _fetchMachine = new FetchMachine(_fetchDispatcher);
+            _tileFetchDispatcher = new TileFetchDispatcher(_memoryCache, fetchStrategy1);
+            _tileFetchDispatcher.DataChanged += TileFetchDispatcherOnDataChanged;
+            _tileFetchDispatcher.PropertyChanged += TileFetchDispatcherOnPropertyChanged;
+            _fetchMachine = new FetchMachine(_tileFetchDispatcher);
             SetTileSource(source);
         }
         
@@ -67,7 +67,7 @@ namespace Mapsui.Layers
 		{
             _fetchMachine.Stop();
 			_memoryCache.Clear();
-		    _fetchDispatcher.TileSource = tileSource;
+		    _tileFetchDispatcher.TileSource = tileSource;
             _tileSource = tileSource;
 		    OnPropertyChanged(nameof(Envelope));
 
@@ -78,11 +78,11 @@ namespace Mapsui.Layers
             }
         }
 
-        private void FetchDispatcherOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
+        private void TileFetchDispatcherOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
             if (propertyChangedEventArgs.PropertyName == nameof(Busy))
             {
-                if (_fetchDispatcher != null) Busy = _fetchDispatcher.Busy;
+                if (_tileFetchDispatcher != null) Busy = _tileFetchDispatcher.Busy;
             }
         }
 
@@ -100,9 +100,9 @@ namespace Mapsui.Layers
 
         public override void ViewChanged(bool majorChange, BoundingBox extent, double resolution)
         {
-            if (Enabled && extent.GetArea() > 0 && _fetchDispatcher != null && MaxVisible > resolution && MinVisible < resolution)
+            if (Enabled && extent.GetArea() > 0 && _tileFetchDispatcher != null && MaxVisible > resolution && MinVisible < resolution)
             {
-                _fetchDispatcher.SetViewport(extent, resolution);
+                _tileFetchDispatcher.SetViewport(extent, resolution);
                 _fetchMachine.Start();
             }
         }
@@ -110,8 +110,8 @@ namespace Mapsui.Layers
         private void UpdateMemoryCacheMinAndMax()
         {
             if (_minExtraTiles < 0 || _maxExtraTiles < 0 
-                || _numberTilesNeeded == _fetchDispatcher.NumberTilesNeeded) return;
-            _numberTilesNeeded = _fetchDispatcher.NumberTilesNeeded;
+                || _numberTilesNeeded == _tileFetchDispatcher.NumberTilesNeeded) return;
+            _numberTilesNeeded = _tileFetchDispatcher.NumberTilesNeeded;
             _memoryCache.MinTiles = _numberTilesNeeded + _minExtraTiles;
             _memoryCache.MaxTiles = _numberTilesNeeded + _maxExtraTiles;
         }
@@ -123,7 +123,7 @@ namespace Mapsui.Layers
 
         public MemoryCache<Feature> MemoryCache => _memoryCache;
 
-        private void FetchDispatcherOnDataChanged(object sender, DataChangedEventArgs e)
+        private void TileFetchDispatcherOnDataChanged(object sender, DataChangedEventArgs e)
         {
             OnDataChanged(e);
         }

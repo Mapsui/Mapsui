@@ -58,7 +58,7 @@
     <Compile Include="Fetcher\IFetchDispatcher.cs" />
     <Compile Include="Fetcher\IFetchStrategy.cs" />
     <Compile Include="Fetcher\MinimalFetchStrategy.cs" />
-    <Compile Include="Fetcher\FetchDispatcher.cs" />
+    <Compile Include="Fetcher\TileFetchDispatcher.cs" />
     <Compile Include="Fetcher\TileFetcher.cs" />
     <Compile Include="Geometries\NotifyingPoint.cs" />
     <Compile Include="Layers\AnimatedFeatures.cs" />

@@ -11,7 +11,7 @@ using Mapsui.Providers;
 
 namespace Mapsui.Fetcher
 {
-    class FetchDispatcher : IFetchDispatcher, INotifyPropertyChanged
+    class TileFetchDispatcher : IFetchDispatcher, INotifyPropertyChanged
     {
         private BoundingBox _extent;
         private double _resolution;
@@ -25,7 +25,7 @@ namespace Mapsui.Fetcher
         private readonly ConcurrentHashSet<TileIndex> _tilesInProgress = new ConcurrentHashSet<TileIndex>();
         private ITileSource _tileSource;
 
-        public FetchDispatcher(ITileCache<Feature> tileCache, IFetchStrategy fetchStrategy = null)
+        public TileFetchDispatcher(ITileCache<Feature> tileCache, IFetchStrategy fetchStrategy = null)
         {
             _tileCache = tileCache;
             _fetchStrategy = fetchStrategy ?? new MinimalFetchStrategy();
