@@ -2,7 +2,7 @@
   "version": 3,
   "targets": {
     "UAP,Version=v10.0.10586": {
-      "BruTile/0.22.0": {
+      "BruTile/0.22.1": {
         "type": "package",
         "compile": {
           "lib/portable-net45+win+WindowsPhoneApp81+Xamarin.iOS10+MonoAndroid10+MonoTouch10/BruTile.dll": {}
@@ -2482,7 +2482,7 @@
       }
     },
     "UAP,Version=v10.0.10586/win10-arm": {
-      "BruTile/0.22.0": {
+      "BruTile/0.22.1": {
         "type": "package",
         "compile": {
           "lib/portable-net45+win+WindowsPhoneApp81+Xamarin.iOS10+MonoAndroid10+MonoTouch10/BruTile.dll": {}
@@ -5002,7 +5002,7 @@
       }
     },
     "UAP,Version=v10.0.10586/win10-arm-aot": {
-      "BruTile/0.22.0": {
+      "BruTile/0.22.1": {
         "type": "package",
         "compile": {
           "lib/portable-net45+win+WindowsPhoneApp81+Xamarin.iOS10+MonoAndroid10+MonoTouch10/BruTile.dll": {}
@@ -7558,7 +7558,7 @@
       }
     },
     "UAP,Version=v10.0.10586/win10-x64": {
-      "BruTile/0.22.0": {
+      "BruTile/0.22.1": {
         "type": "package",
         "compile": {
           "lib/portable-net45+win+WindowsPhoneApp81+Xamarin.iOS10+MonoAndroid10+MonoTouch10/BruTile.dll": {}
@@ -10087,7 +10087,7 @@
       }
     },
     "UAP,Version=v10.0.10586/win10-x64-aot": {
-      "BruTile/0.22.0": {
+      "BruTile/0.22.1": {
         "type": "package",
         "compile": {
           "lib/portable-net45+win+WindowsPhoneApp81+Xamarin.iOS10+MonoAndroid10+MonoTouch10/BruTile.dll": {}
@@ -12652,7 +12652,7 @@
       }
     },
     "UAP,Version=v10.0.10586/win10-x86": {
-      "BruTile/0.22.0": {
+      "BruTile/0.22.1": {
         "type": "package",
         "compile": {
           "lib/portable-net45+win+WindowsPhoneApp81+Xamarin.iOS10+MonoAndroid10+MonoTouch10/BruTile.dll": {}
@@ -15181,7 +15181,7 @@
       }
     },
     "UAP,Version=v10.0.10586/win10-x86-aot": {
-      "BruTile/0.22.0": {
+      "BruTile/0.22.1": {
         "type": "package",
         "compile": {
           "lib/portable-net45+win+WindowsPhoneApp81+Xamarin.iOS10+MonoAndroid10+MonoTouch10/BruTile.dll": {}
@@ -17747,12 +17747,12 @@
     }
   },
   "libraries": {
-    "BruTile/0.22.0": {
-      "sha512": "qDagW8aZfDj59zW4RaYSI1o7nAkLdjrpATfyujIBHGaKX178y92qhEm0CfoH3t5C/w59l0A5AaFiL/pKhX3HAg==",
+    "BruTile/0.22.1": {
+      "sha512": "19H+PW/4ASgLJVABc7v9xxjMAOIVvU0TW4nnkaRKB1h6c+2ZxDxkkyQv0l2dEHRoSNoZNdcuRTl9gGoCWYCHXA==",
       "type": "package",
-      "path": "brutile/0.22.0",
+      "path": "brutile/0.22.1",
       "files": [
-        "brutile.0.22.0.nupkg.sha512",
+        "brutile.0.22.1.nupkg.sha512",
         "brutile.nuspec",
         "lib/portable-net45+win+WindowsPhoneApp81+Xamarin.iOS10+MonoAndroid10+MonoTouch10/BruTile.dll"
       ]
@@ -27626,7 +27626,7 @@
   },
   "projectFileDependencyGroups": {
     "": [
-      "BruTile >= 0.22.0",
+      "BruTile >= 0.22.1",
       "Microsoft.NETCore.UniversalWindowsPlatform >= 6.0.1",
       "SQLitePCLRaw.bundle_green >= 1.1.8",
       "SkiaSharp >= 1.59.1",
@@ -27646,6 +27646,7 @@
       "packagesPath": "C:\\Users\\paul\\.nuget\\packages\\",
       "outputPath": "C:\\code\\github\\Mapsui\\Samples\\Mapsui.Samples.Uwp\\obj\\",
       "projectStyle": "ProjectJson",
+      "validateRuntimeAssets": true,
       "configFilePaths": [
         "C:\\Users\\paul\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
@@ -27680,7 +27681,7 @@
       }
     },
     "dependencies": {
-      "BruTile": "0.22.0",
+      "BruTile": "0.22.1",
       "Microsoft.NETCore.UniversalWindowsPlatform": "6.0.1",
       "SkiaSharp": "1.59.1",
       "SkiaSharp.Views": "1.59.1.1",
