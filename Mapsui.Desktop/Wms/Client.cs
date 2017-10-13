@@ -235,15 +235,15 @@ namespace Mapsui.Providers.Wms
 
         private async Task<Stream> GetStreamAsync(string url)
         {
-            var httpClient = new HttpClient();
-            return await httpClient.GetStreamAsync("https://geodata.nationaalgeoregister.nl/windkaart/wms?request=GetCapabilities&SERVICE=WMS").ConfigureAwait(false);
+            var client = new HttpClient();
+            var response = await client.GetAsync(url).ConfigureAwait(false);
 
-            //if (!response.IsSuccessStatusCode)
-            //{
-            //    throw new Exception($"Unexpected response code: {response.StatusCode}");
-            //}
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception($"Unexpected response code: {response.StatusCode}");
+            }
 
-            //return await response.Content.ReadAsStreamAsync();
+            return await response.Content.ReadAsStreamAsync();
         }
 
         /// <summary>
