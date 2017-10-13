@@ -45,14 +45,13 @@ namespace Mapsui.Layers
 
         public IProvider DataSource
         {
-            get { return _dataSource; }
+            get => _dataSource;
             set
             {
                 if (_dataSource == value) return;
                 _dataSource = value;
                 OnPropertyChanged("DataSource");
                 OnPropertyChanged("Envelope");
-
             }
         }
 
@@ -155,9 +154,8 @@ namespace Mapsui.Layers
         private void DataArrived(IEnumerable<IFeature> features, object state)
         {
             //the data in the cache is stored in the map projection so it projected only once.
-            if (features == null) throw new ArgumentException("argument features may not be null");
+            features = features?.ToList() ?? throw new ArgumentException("argument features may not be null");
 
-            features = features.ToList();
 			// We can get 0 features if some error was occured up call stack
 			// We should not add new FeatureSets if we have not any feature
 
