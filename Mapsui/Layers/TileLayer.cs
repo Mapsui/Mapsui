@@ -27,6 +27,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using Mapsui.Logging;
 
 namespace Mapsui.Layers
 {
@@ -44,7 +45,17 @@ namespace Mapsui.Layers
         
         public TileLayer(Func<ITileSource> tileSourceInitializer) : this()
         {
-            Task.Run(() => SetTileSource(tileSourceInitializer()));
+            Task.Run(() =>
+            {
+                try
+                {
+                    SetTileSource(tileSourceInitializer());
+                }
+                catch (Exception e)
+                {
+                    Logger.Log(LogLevel.Debug, $"Initialization of layer {Name} failed: {e.Message}");
+                }
+            });
         }
 
         public TileLayer(ITileSource source = null, int minTiles = 200, int maxTiles = 300, int maxRetries = TileFetcher.DefaultMaxAttempts, IFetchStrategy fetchStrategy = null,
