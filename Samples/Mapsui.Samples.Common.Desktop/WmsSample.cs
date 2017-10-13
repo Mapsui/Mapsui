@@ -15,13 +15,12 @@ namespace Mapsui.Samples.Common.Desktop
 
         public static ILayer CreateLayer()
         {
-            return new ImageLayer("WMS Layer") {DataSource = CreateWmsProvider()};
+            return new ImageLayer("Windsnelheden (PDOK)") {DataSource = CreateWmsProvider()};
         }
 
         private static WmsProvider CreateWmsProvider()
         {
-            const string wmsUrl =
-                "http://geodata.nationaalgeoregister.nl/ahn25m/wms?service=wms&request=getcapabilities";
+            const string wmsUrl = "https://geodata.nationaalgeoregister.nl/windkaart/wms?request=GetCapabilities";
 
             var provider = new WmsProvider(wmsUrl)
             {
@@ -30,7 +29,7 @@ namespace Mapsui.Samples.Common.Desktop
                 CRS = "EPSG:28992"
             };
 
-            provider.AddLayer("ahn25m");
+            provider.AddLayer("windsnelheden100m");
             provider.SetImageFormat(provider.OutputFormats[0]);
             return provider;
         }
