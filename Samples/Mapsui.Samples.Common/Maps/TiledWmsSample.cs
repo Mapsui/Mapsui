@@ -23,7 +23,7 @@ namespace Mapsui.Samples.Common.Maps
 
         public static ILayer CreateLayer()
         {
-            return new TileLayer(new GeodanWorldWmsTileSource()) {Name = "WMS called as WMS-C"};
+            return new TileLayer(new GeodanWorldWmsTileSource()) {Name = "Omgevingswarmte (PDOK)"};
         }
     }
 
@@ -31,8 +31,11 @@ namespace Mapsui.Samples.Common.Maps
     {
         public GeodanWorldWmsTileSource()
         {
-            var schema = new WkstNederlandSchema {Srs = "EPSG:28992"};
-            schema.Format = "image/png";
+            var schema = new WkstNederlandSchema
+            {
+                Srs = "EPSG:28992",
+                Format = "image/png"
+            };
             Provider = new HttpTileProvider(CreateWmsRequest(schema));
             Schema = schema;
         }

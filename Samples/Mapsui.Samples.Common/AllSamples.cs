@@ -26,7 +26,7 @@ namespace Mapsui.Samples.Common
                 ["TileSources: WMTS"] = () => WmtsSample.CreateMap(),
                 ["TileSources: Bing maps"] = () => BingSample.CreateMap(),
                 ["TileSources: TMS"] = () => TmsSample.CreateMap(),
-                ["TileSources: WMS-C"] = () => WmscSample.CreateMap(),
+                // todo: find a WMS-C that is stil in service ["TileSources: WMS-C"] = () => WmscSample.CreateMap(),
                 ["TileSources: regular WMS"] = () => TiledWmsSample.CreateMap(),
                 ["Rasterizing Layer"] = () => RasterizingLayerSample.CreateMap(),
                 ["Empty Map"] = () => EmptyMapSample.CreateMap(),
