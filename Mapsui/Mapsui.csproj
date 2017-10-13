@@ -50,6 +50,7 @@
     <Compile Include="Fetcher\FeatureFetchDispatcher.cs" />
     <Compile Include="Fetcher\FeatureFetcher.cs" />
     <Compile Include="Fetcher\FetchMachine.cs" />
+    <Compile Include="Fetcher\FetchOnThread.cs" />
     <Compile Include="Fetcher\FetchWorker.cs" />
     <Compile Include="Fetcher\FetchRetries.cs" />
     <Compile Include="Fetcher\FetchState.cs" />
