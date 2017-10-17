@@ -1,10 +1,10 @@
-﻿using System.Linq;
-using BruTile;
+﻿using BruTile;
 using BruTile.Cache;
 using BruTile.Predefined;
 using Mapsui.Fetcher;
 using Mapsui.Providers;
 using NUnit.Framework;
+#pragma warning disable 618
 
 namespace Mapsui.Tests.Fetcher
 {
