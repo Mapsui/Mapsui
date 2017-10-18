@@ -34,7 +34,7 @@ namespace Mapsui.Layers
     public class TileLayer : BaseLayer
     {
         private ITileSource _tileSource;
-        private readonly IRenderGetStrategy _renderStrategy;
+        private readonly IRenderGetStrategy<Feature> _renderStrategy;
         private readonly int _minExtraTiles;
         private readonly int _maxExtraTiles;
         private int _numberTilesNeeded;
@@ -59,12 +59,12 @@ namespace Mapsui.Layers
         }
 
         public TileLayer(ITileSource source = null, int minTiles = 200, int maxTiles = 300, int maxRetries = 2, IFetchStrategy fetchStrategy = null,
-            IRenderGetStrategy renderFetchStrategy = null, int minExtraTiles = -1, int maxExtraTiles = -1)
+            IRenderGetStrategy<Feature> renderFetchStrategy = null, int minExtraTiles = -1, int maxExtraTiles = -1)
         {
             _memoryCache = new MemoryCache<Feature>(minTiles, maxTiles);
             Style = new VectorStyle { Outline = { Color = Color.FromArgb(0, 0, 0, 0) } }; // initialize with transparent outline
             var fetchStrategy1 = fetchStrategy ?? new MinimalFetchStrategy();
-            _renderStrategy = renderFetchStrategy ?? new RenderGetStrategy();
+            _renderStrategy = renderFetchStrategy ?? new RenderGetStrategy<Feature>();
             _minExtraTiles = minExtraTiles;
             _maxExtraTiles = maxExtraTiles;
             _tileFetchDispatcher = new TileFetchDispatcher(_memoryCache, fetchStrategy1);

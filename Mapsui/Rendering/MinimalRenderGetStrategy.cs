@@ -2,16 +2,15 @@ using System.Collections.Generic;
 using BruTile;
 using BruTile.Cache;
 using Mapsui.Geometries;
-using Mapsui.Providers;
 
 namespace Mapsui.Rendering
 {
-    public class MinimalRenderGetStrategy : IRenderGetStrategy
+    public class MinimalRenderGetStrategy<T> : IRenderGetStrategy<T>
     {
-        public IList<IFeature> GetFeatures(BoundingBox extent, double resolution, ITileSchema schema, ITileCache<Feature> memoryCache)
+        public IList<T> GetFeatures(BoundingBox extent, double resolution, ITileSchema schema, ITileCache<T> memoryCache)
         {
             var tiles = schema.GetTileInfos(extent.ToExtent(), resolution);
-            var result = new List<IFeature>();
+            var result = new List<T>();
             foreach (var tileInfo in tiles)
             {
                 var feature = memoryCache.Find(tileInfo.Index);

@@ -2,11 +2,10 @@ using System.Collections.Generic;
 using BruTile;
 using BruTile.Cache;
 using Mapsui.Geometries;
-using Mapsui.Providers;
 
 namespace Mapsui.Rendering
 {
-    public interface IRenderGetStrategy
+    public interface IRenderGetStrategy<T>
     {
         /// <summary>
         /// Given the current extent and resolution it determines which tiles should
@@ -17,7 +16,7 @@ namespace Mapsui.Rendering
         /// <param name="schema">The tile schema of the tile source</param>
         /// <param name="memoryCache">The cached features from which to select</param>
         /// <returns></returns>
-        IList<IFeature> GetFeatures(BoundingBox extent, double resolution, ITileSchema schema,
-            ITileCache<Feature> memoryCache);
+        IList<T> GetFeatures(BoundingBox extent, double resolution, ITileSchema schema,
+            ITileCache<T> memoryCache);
     }
 }
