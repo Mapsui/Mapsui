@@ -31,19 +31,33 @@ using Mapsui.Logging;
 
 namespace Mapsui.Layers
 {
-    public class TileLayer : BaseLayer
+    public class TileLayer : GenericTileLayer<TileParser>
+    {
+        public TileLayer(Func<ITileSource> tileSourceInitializer) : base(tileSourceInitializer) { }
+
+        public TileLayer(ITileSource source = null, int minTiles = 200, int maxTiles = 300, int maxRetries = 2,
+            IFetchStrategy fetchStrategy = null,
+            ITileRenderStrategy tileRenderStrategy = null, int minExtraTiles = -1, int maxExtraTiles = -1) :
+            base(source, minTiles, maxTiles, maxRetries, fetchStrategy, tileRenderStrategy, minExtraTiles,
+                maxExtraTiles)
+        { }
+
+    }
+
+    public class GenericTileLayer<TParser> : BaseLayer
+        where TParser: ITileParser, new()
     {
         private ITileSource _tileSource;
-        private readonly ITileRenderStrategy<Feature> _tileRenderStrategy;
+        private readonly ITileRenderStrategy _tileRenderStrategy;
         private readonly int _minExtraTiles;
         private readonly int _maxExtraTiles;
         private int _numberTilesNeeded;
-        private readonly TileFetchDispatcher _tileFetchDispatcher;
+        private readonly TileFetchDispatcher<TParser> _tileFetchDispatcher;
         private readonly FetchMachine _fetchMachine;
 
-        readonly MemoryCache<Feature> _memoryCache;
+        readonly MemoryCache<IEnumerable<Feature>> _memoryCache;
         
-        public TileLayer(Func<ITileSource> tileSourceInitializer) : this()
+        public GenericTileLayer(Func<ITileSource> tileSourceInitializer) : this()
         {
             Task.Run(() =>
             {
@@ -58,16 +72,16 @@ namespace Mapsui.Layers
             });
         }
 
-        public TileLayer(ITileSource source = null, int minTiles = 200, int maxTiles = 300, int maxRetries = 2, IFetchStrategy fetchStrategy = null,
-            ITileRenderStrategy<Feature> tileRenderStrategy = null, int minExtraTiles = -1, int maxExtraTiles = -1)
+        public GenericTileLayer(ITileSource source = null, int minTiles = 200, int maxTiles = 300, int maxRetries = 2, IFetchStrategy fetchStrategy = null,
+            ITileRenderStrategy tileRenderStrategy = null, int minExtraTiles = -1, int maxExtraTiles = -1)
         {
-            _memoryCache = new MemoryCache<Feature>(minTiles, maxTiles);
+            _memoryCache = new MemoryCache<IEnumerable<Feature>>(minTiles, maxTiles);
             Style = new VectorStyle { Outline = { Color = Color.FromArgb(0, 0, 0, 0) } }; // initialize with transparent outline
             var fetchStrategy1 = fetchStrategy ?? new MinimalFetchStrategy();
-            _tileRenderStrategy = tileRenderStrategy ?? new TileRenderStrategy<Feature>();
+            _tileRenderStrategy = tileRenderStrategy ?? new TileRenderStrategy();
             _minExtraTiles = minExtraTiles;
             _maxExtraTiles = maxExtraTiles;
-            _tileFetchDispatcher = new TileFetchDispatcher(_memoryCache, fetchStrategy1);
+            _tileFetchDispatcher = new TileFetchDispatcher<TParser>(_memoryCache, fetchStrategy1);
             _tileFetchDispatcher.DataChanged += TileFetchDispatcherOnDataChanged;
             _tileFetchDispatcher.PropertyChanged += TileFetchDispatcherOnPropertyChanged;
             _fetchMachine = new FetchMachine(_tileFetchDispatcher);
@@ -132,7 +146,7 @@ namespace Mapsui.Layers
             _memoryCache.Clear();
         }
 
-        public MemoryCache<Feature> MemoryCache => _memoryCache;
+        public MemoryCache<IEnumerable<Feature>> MemoryCache => _memoryCache;
 
         private void TileFetchDispatcherOnDataChanged(object sender, DataChangedEventArgs e)
         {

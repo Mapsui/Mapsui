@@ -1,4 +1,5 @@
-﻿using BruTile;
+﻿using System.Collections.Generic;
+using BruTile;
 using BruTile.Cache;
 using BruTile.Predefined;
 using Mapsui.Providers;
@@ -20,8 +21,8 @@ namespace Mapsui.Tests.Rendering
             var box = schema.Extent.ToBoundingBox();
             const int levelId = 3;
             var resolution = schema.Resolutions[levelId.ToString(CultureInfo.InvariantCulture)];
-            var memoryCache = PopulateMemoryCache(schema, new MemoryCache<Feature>(), levelId);
-            var renderGetStrategy = new TileRenderStrategy<Feature>();
+            var memoryCache = PopulateMemoryCache(schema, new MemoryCache<IEnumerable<Feature>>(), levelId);
+            var renderGetStrategy = new TileRenderStrategy();
 
             // act
             var tiles = renderGetStrategy.GetFeatures(box, resolution.UnitsPerPixel, schema, memoryCache);
@@ -30,7 +31,7 @@ namespace Mapsui.Tests.Rendering
             Assert.True(tiles.Count == 43);
         }
 
-        private static ITileCache<Feature> PopulateMemoryCache(GlobalSphericalMercator schema, MemoryCache<Feature> cache, int levelId)
+        private static ITileCache<IEnumerable<Feature>> PopulateMemoryCache(GlobalSphericalMercator schema, MemoryCache<IEnumerable<Feature>> cache, int levelId)
         {
             for (var i = levelId; i >= 0; i--)
             {
@@ -39,7 +40,7 @@ namespace Mapsui.Tests.Rendering
                 {
                     if ((tile.Index.Col + tile.Index.Row) % 2 == 0) // Add only 50% of the tiles with the arbitrary rule.
                     {
-                        cache.Add(tile.Index, new Feature { Geometry = new Point()});
+                        cache.Add(tile.Index, new List<Feature> { new Feature { Geometry = new Point()}});
                     }
                 }
             }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.ComponentModel;
-using System.IO;
 using System.Linq;
 using BruTile;
 using BruTile.Cache;
@@ -11,7 +11,8 @@ using Mapsui.Providers;
 
 namespace Mapsui.Fetcher
 {
-    class TileFetchDispatcher : IFetchDispatcher, INotifyPropertyChanged
+    class TileFetchDispatcher<TParser> : IFetchDispatcher, INotifyPropertyChanged
+        where TParser:ITileParser, new()
     {
         private BoundingBox _extent;
         private double _resolution;
@@ -19,13 +20,14 @@ namespace Mapsui.Fetcher
         private bool _busy;
         private int _numberTilesNeeded;
         private bool _modified;
-        private readonly ITileCache<Feature> _tileCache;
+        private readonly ITileCache<IEnumerable<Feature>> _tileCache;
         private readonly IFetchStrategy _fetchStrategy;
         private ConcurrentQueue<TileInfo> _tilesMissing = new ConcurrentQueue<TileInfo>();
         private readonly ConcurrentHashSet<TileIndex> _tilesInProgress = new ConcurrentHashSet<TileIndex>();
         private ITileSource _tileSource;
+        private ITileParser _tileParse = new TParser();
 
-        public TileFetchDispatcher(ITileCache<Feature> tileCache, IFetchStrategy fetchStrategy = null)
+        public TileFetchDispatcher(ITileCache<IEnumerable<Feature>> tileCache, IFetchStrategy fetchStrategy = null)
         {
             _tileCache = tileCache;
             _fetchStrategy = fetchStrategy ?? new MinimalFetchStrategy();
@@ -104,7 +106,7 @@ namespace Mapsui.Fetcher
             {
                 if (exception == null)
                 {
-                    _tileCache.Add(tileInfo.Index, ToFeature(tileInfo, tileData));
+                    _tileCache.Add(tileInfo.Index, _tileParse.Parse(tileInfo, tileData));
                 }
                 _tilesInProgress.TryRemove(tileInfo.Index);
 
@@ -147,25 +149,6 @@ namespace Mapsui.Fetcher
             _tilesMissing =  new ConcurrentQueue<TileInfo>(tileNeededNotInCacheOrInProgress.ToList());
             if (_tilesMissing.Count > 0) Busy = true;
         }
-
-        private static Feature ToFeature(TileInfo tileInfo, byte[] tileData)
-        {
-            return new Feature { Geometry = ToGeometry(tileInfo, tileData) };
-        }
-
-        private static Raster ToGeometry(TileInfo tileInfo, byte[] tileData)
-        {
-            // A TileSource may return a byte array that is null. This is currently only implemented
-            // for MbTilesTileSource. It is to indicate that the tile is not present in the source,
-            // although it should be given the tile schema. It does not mean the tile could not
-            // be accessed because of some temporary reason. In that case it will throw an exception.
-            // For Mapsui this is important because it will not try again and again to fetch it. 
-            // Here we return the geometry as null so that it will be added to the tile cache. 
-            // TileLayer.GetFeatureInView will have to return only the non null geometries.
-
-            if (tileData == null) return null;
-
-            return new Raster(new MemoryStream(tileData), tileInfo.Extent.ToBoundingBox());
-        }
+        
     }
 }

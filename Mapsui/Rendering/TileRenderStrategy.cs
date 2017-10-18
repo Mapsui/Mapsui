@@ -1,24 +1,26 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using BruTile;
 using BruTile.Cache;
 using Mapsui.Geometries;
+using Mapsui.Providers;
 
 namespace Mapsui.Rendering
 {
-    public class TileRenderStrategy<T> : ITileRenderStrategy<T>
+    public class TileRenderStrategy : ITileRenderStrategy
     {
-        public IList<T> GetFeatures(BoundingBox extent, double resolution, ITileSchema schema, ITileCache<T> memoryCache)
+        public List<Feature> GetFeatures(BoundingBox extent, double resolution, ITileSchema schema, ITileCache<IEnumerable<Feature>> memoryCache)
         {
-            var dictionary = new Dictionary<TileIndex, T>();
+            var dictionary = new Dictionary<TileIndex, IEnumerable<Feature>>();
             var levelId = BruTile.Utilities.GetNearestLevel(schema.Resolutions, resolution);
             GetRecursive(dictionary, schema, memoryCache, extent.ToExtent(), levelId);
             var sortedFeatures = dictionary.OrderByDescending(t => schema.Resolutions[t.Key.Level].UnitsPerPixel);
-            return sortedFeatures.ToDictionary(pair => pair.Key, pair => pair.Value).Values.ToList();
+            return sortedFeatures.ToDictionary(pair => pair.Key, pair => pair.Value).Values.SelectMany(x => x).ToList();
         }
 
-        public static void GetRecursive(IDictionary<TileIndex, T> resultTiles, ITileSchema schema,
-            ITileCache<T> cache, Extent extent, string levelId)
+        public static void GetRecursive(IDictionary<TileIndex, IEnumerable<Feature>> resultTiles, ITileSchema schema,
+            ITileCache<IEnumerable<Feature>> cache, Extent extent, string levelId)
         {
             // to improve performance, convert the resolutions to a list so they can be walked up by
             // simply decrementing an index when the level index needs to change
@@ -33,8 +35,8 @@ namespace Mapsui.Rendering
             }
         }
 
-        private static void GetRecursive(IDictionary<TileIndex, T> resultTiles, ITileSchema schema,
-            ITileCache<T> cache, Extent extent, IList<KeyValuePair<string, Resolution>> resolutions, int resolutionIndex)
+        private static void GetRecursive(IDictionary<TileIndex, IEnumerable<Feature>> resultTiles, ITileSchema schema,
+            ITileCache<IEnumerable<Feature>> cache, Extent extent, IList<KeyValuePair<string, Resolution>> resolutions, int resolutionIndex)
         {
             if (resolutionIndex < 0 || resolutionIndex >= resolutions.Count)
                 return;
