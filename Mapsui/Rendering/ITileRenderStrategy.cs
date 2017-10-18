@@ -5,7 +5,7 @@ using Mapsui.Geometries;
 
 namespace Mapsui.Rendering
 {
-    public interface IRenderGetStrategy<T>
+    public interface ITileRenderStrategy<T>
     {
         /// <summary>
         /// Given the current extent and resolution it determines which tiles should

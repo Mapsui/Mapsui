@@ -101,7 +101,7 @@
     <Compile Include="Providers\ArcGIS\TimeInfo.cs" />
     <Compile Include="Providers\IProjectingProvider.cs" />
     <Compile Include="Providers\StackedLabelProvider.cs" />
-    <Compile Include="Rendering\IRenderGetStrategy.cs" />
+    <Compile Include="Rendering\ITileRenderStrategy.cs" />
     <Compile Include="IViewport.cs" />
     <Compile Include="Layers\BaseLayer.cs" />
     <Compile Include="Layers\IFeatureInfo.cs" />
@@ -115,9 +115,9 @@
     <Compile Include="Layers\TileLayer.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Rendering\ISymbolCache.cs" />
-    <Compile Include="Rendering\MinimalRenderGetStrategy.cs" />
+    <Compile Include="Rendering\MinimalTileRenderStrategy.cs" />
     <Compile Include="Rendering\DefaultRendererFactory.cs" />
-    <Compile Include="Rendering\RenderGetStrategy.cs" />
+    <Compile Include="Rendering\TileRenderStrategy.cs" />
     <Compile Include="Rendering\VisibleFeatureIterator.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="Projection\GeometryIterator.cs" />

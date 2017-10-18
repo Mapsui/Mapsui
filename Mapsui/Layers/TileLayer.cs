@@ -34,7 +34,7 @@ namespace Mapsui.Layers
     public class TileLayer : BaseLayer
     {
         private ITileSource _tileSource;
-        private readonly IRenderGetStrategy<Feature> _renderStrategy;
+        private readonly ITileRenderStrategy<Feature> _tileRenderStrategy;
         private readonly int _minExtraTiles;
         private readonly int _maxExtraTiles;
         private int _numberTilesNeeded;
@@ -59,12 +59,12 @@ namespace Mapsui.Layers
         }
 
         public TileLayer(ITileSource source = null, int minTiles = 200, int maxTiles = 300, int maxRetries = 2, IFetchStrategy fetchStrategy = null,
-            IRenderGetStrategy<Feature> renderFetchStrategy = null, int minExtraTiles = -1, int maxExtraTiles = -1)
+            ITileRenderStrategy<Feature> tileRenderStrategy = null, int minExtraTiles = -1, int maxExtraTiles = -1)
         {
             _memoryCache = new MemoryCache<Feature>(minTiles, maxTiles);
             Style = new VectorStyle { Outline = { Color = Color.FromArgb(0, 0, 0, 0) } }; // initialize with transparent outline
             var fetchStrategy1 = fetchStrategy ?? new MinimalFetchStrategy();
-            _renderStrategy = renderFetchStrategy ?? new RenderGetStrategy<Feature>();
+            _tileRenderStrategy = tileRenderStrategy ?? new TileRenderStrategy<Feature>();
             _minExtraTiles = minExtraTiles;
             _maxExtraTiles = maxExtraTiles;
             _tileFetchDispatcher = new TileFetchDispatcher(_memoryCache, fetchStrategy1);
@@ -143,7 +143,7 @@ namespace Mapsui.Layers
         {
             if (_tileSource?.Schema == null) return Enumerable.Empty<IFeature>();
             UpdateMemoryCacheMinAndMax();
-            return _renderStrategy.GetFeatures(box, resolution, _tileSource?.Schema, _memoryCache);
+            return _tileRenderStrategy.GetFeatures(box, resolution, _tileSource?.Schema, _memoryCache);
         }
 
         public override bool? IsCrsSupported(string crs)

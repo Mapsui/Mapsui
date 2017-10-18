@@ -5,7 +5,7 @@ using Mapsui.Geometries;
 
 namespace Mapsui.Rendering
 {
-    public class MinimalRenderGetStrategy<T> : IRenderGetStrategy<T>
+    public class MinimalTileRenderStrategy<T> : ITileRenderStrategy<T>
     {
         public IList<T> GetFeatures(BoundingBox extent, double resolution, ITileSchema schema, ITileCache<T> memoryCache)
         {
