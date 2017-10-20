@@ -13,7 +13,7 @@ Mapsui is a C# map component for apps
 - Uses BruTile to access tile services
 
 ## News
-- Oktober 13: Mapsui 1.1 has been [release](https://github.com/pauldendulk/Mapsui/releases/tag/1.1.0), with map rotation on Android and iOS. 
+- Oktober 13: Mapsui 1.1 has been [released](https://github.com/pauldendulk/Mapsui/releases/tag/1.1.0) with map rotation on Android and iOS. 
 
 ## Getting Started
 
