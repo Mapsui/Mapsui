@@ -123,8 +123,7 @@ namespace Mapsui
 
         public void NavigateTo(double x, double y)
         {
-            Viewport.Center.X = x;
-            Viewport.Center.Y = y;
+            Viewport.Center = new Point(x, y);
             OnRefreshGraphics();
             ViewChanged(true);
         }

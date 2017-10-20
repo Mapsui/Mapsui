@@ -142,6 +142,7 @@ namespace Mapsui.UI.Uwp
                     _map = null;
                     temp.DataChanged -= MapDataChanged;
                     temp.PropertyChanged -= MapPropertyChanged;
+                    temp.RefreshGraphics -= MapOnRefreshGraphics;
                 }
 
                 _map = value;
@@ -151,12 +152,19 @@ namespace Mapsui.UI.Uwp
                     _viewportInitialized = false;
                     _map.DataChanged += MapDataChanged;
                     _map.PropertyChanged += MapPropertyChanged;
+                    _map.RefreshGraphics += MapOnRefreshGraphics;
+
                     _map.ViewChanged(true);
                     _attributionPanel.Populate(Map.Layers);
                 }
 
                 RefreshGraphics();
             }
+        }
+
+        private void MapOnRefreshGraphics(object o, EventArgs eventArgs)
+        {
+            RefreshGraphics();
         }
 
         public string ErrorMessage { get; private set; }

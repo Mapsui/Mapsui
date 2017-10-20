@@ -26146,14 +26146,13 @@
   },
   "project": {
     "restore": {
-      "projectUniqueName": "C:\\code\\github\\Mapsui\\Mapsui.UI.Uwp\\Mapsui.UI.Uwp.csproj",
+      "projectUniqueName": "C:\\code\\github\\mapsui-forks\\Mapsui\\Mapsui.UI.Uwp\\Mapsui.UI.Uwp.csproj",
       "projectName": "Mapsui.UI.Uwp",
-      "projectPath": "C:\\code\\github\\Mapsui\\Mapsui.UI.Uwp\\Mapsui.UI.Uwp.csproj",
-      "projectJsonPath": "C:\\code\\github\\Mapsui\\Mapsui.UI.Uwp\\project.json",
+      "projectPath": "C:\\code\\github\\mapsui-forks\\Mapsui\\Mapsui.UI.Uwp\\Mapsui.UI.Uwp.csproj",
+      "projectJsonPath": "C:\\code\\github\\mapsui-forks\\Mapsui\\Mapsui.UI.Uwp\\project.json",
       "packagesPath": "C:\\Users\\paul\\.nuget\\packages\\",
-      "outputPath": "C:\\code\\github\\Mapsui\\Mapsui.UI.Uwp\\obj\\",
+      "outputPath": "C:\\code\\github\\mapsui-forks\\Mapsui\\Mapsui.UI.Uwp\\obj\\",
       "projectStyle": "ProjectJson",
-      "validateRuntimeAssets": true,
       "configFilePaths": [
         "C:\\Users\\paul\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
@@ -26165,14 +26164,14 @@
       "frameworks": {
         "uap10.0.10586": {
           "projectReferences": {
-            "C:\\code\\github\\Mapsui\\Mapsui.Geometries\\Mapsui.Geometries.csproj": {
-              "projectPath": "C:\\code\\github\\Mapsui\\Mapsui.Geometries\\Mapsui.Geometries.csproj"
+            "C:\\code\\github\\mapsui-forks\\Mapsui\\Mapsui.Geometries\\Mapsui.Geometries.csproj": {
+              "projectPath": "C:\\code\\github\\mapsui-forks\\Mapsui\\Mapsui.Geometries\\Mapsui.Geometries.csproj"
             },
-            "C:\\code\\github\\Mapsui\\Mapsui.Rendering.Skia-PCL\\Mapsui.Rendering.Skia-PCL.csproj": {
-              "projectPath": "C:\\code\\github\\Mapsui\\Mapsui.Rendering.Skia-PCL\\Mapsui.Rendering.Skia-PCL.csproj"
+            "C:\\code\\github\\mapsui-forks\\Mapsui\\Mapsui.Rendering.Skia-PCL\\Mapsui.Rendering.Skia-PCL.csproj": {
+              "projectPath": "C:\\code\\github\\mapsui-forks\\Mapsui\\Mapsui.Rendering.Skia-PCL\\Mapsui.Rendering.Skia-PCL.csproj"
             },
-            "C:\\code\\github\\Mapsui\\Mapsui\\Mapsui.csproj": {
-              "projectPath": "C:\\code\\github\\Mapsui\\Mapsui\\Mapsui.csproj"
+            "C:\\code\\github\\mapsui-forks\\Mapsui\\Mapsui\\Mapsui.csproj": {
+              "projectPath": "C:\\code\\github\\mapsui-forks\\Mapsui\\Mapsui\\Mapsui.csproj"
             }
           }
         }
