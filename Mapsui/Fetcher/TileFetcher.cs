@@ -29,6 +29,7 @@ using Mapsui.Providers;
 
 namespace Mapsui.Fetcher
 {
+    [Obsolete("Use TileFetchDispatcher and FetchMachine")]
     public class TileFetcher : INotifyPropertyChanged
     {
         public const int DefaultMaxThreads = 2;
@@ -144,7 +145,7 @@ namespace Mapsui.Fetcher
             }
         }
 
-        private IList<TileInfo> GetTilesMissing(IEnumerable<TileInfo> tileInfos, MemoryCache<Feature> memoryCache, 
+        private IList<TileInfo> GetTilesMissing(IEnumerable<TileInfo> tileInfos, MemoryCache<Feature> memoryCache,
             Retries retries)
         {
             var result = new List<TileInfo>();
@@ -170,7 +171,7 @@ namespace Mapsui.Fetcher
         private void FetchTile(TileInfo info, Retries retries)
         {
             if (retries.ReachedMax(info.Index)) return;
-            
+
             lock (_tilesInProgress)
             {
                 if (_tilesInProgress.Contains(info.Index)) return;
@@ -233,7 +234,7 @@ namespace Mapsui.Fetcher
 
             return new Raster(new MemoryStream(e.Image), e.TileInfo.Extent.ToBoundingBox());
         }
-        
+
 
         /// <summary>
         /// Keeps track of retries per tile. This class doesn't do much interesting work

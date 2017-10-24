@@ -3,11 +3,12 @@ using BruTile;
 
 namespace Mapsui.Tests.Fetcher
 {
-    public class FailingTileProvider : ITileProvider
+    class FailingTileProvider : CountingTileProvider
     {
-        public byte[] GetTile(TileInfo tileInfo)
+        public override byte[] GetTile(TileInfo tileInfo)
         {
-            throw new Exception("this provider always fails");
+            base.GetTile(tileInfo); // Just for counting
+            throw new Exception("this provider sometimes fails");
         }
     }
 }

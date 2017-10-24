@@ -1,6 +1,9 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Mapsui.Geometries;
 using Mapsui.Projection;
+using Mapsui.Providers;
 
 namespace Mapsui.Utilities
 {
@@ -46,7 +49,7 @@ namespace Mapsui.Utilities
 
         public static bool NeedsTransform(ITransformation transformation, string fromCRS, string toCRS)
         {
-            return (transformation != null && !string.IsNullOrWhiteSpace(fromCRS) && !string.IsNullOrWhiteSpace(toCRS) && fromCRS != toCRS);
+            return transformation != null && !string.IsNullOrWhiteSpace(fromCRS) && !string.IsNullOrWhiteSpace(toCRS) && fromCRS != toCRS;
         }
 
         public static BoundingBox GetTransformedBoundingBox(ITransformation transformatiom, BoundingBox extent, string fromCRS, string toCRS)
@@ -77,6 +80,29 @@ namespace Mapsui.Utilities
         private static bool IsTransformationSupported(ITransformation transformation, string fromCRS, string toCRS)
         {
             return transformation.IsProjectionSupported(fromCRS, toCRS) == true;
+        }
+
+        public static BoundingBox Transform(BoundingBox extent,
+            ITransformation transformation, string fromCRS, string toCRS)
+        {
+            if (extent == null) return null;
+            if (NeedsTransform(transformation, fromCRS, toCRS))
+                return transformation.Transform(fromCRS, toCRS, extent.Copy());
+            return extent;
+        }
+
+        public static IEnumerable<IFeature> Transform(IEnumerable<IFeature> features,
+            ITransformation transformation, string fromCRS, string toCRS)
+        {
+            if (!NeedsTransform(transformation, fromCRS, toCRS)) return features;
+
+            var copiedFeatures = features.Copy().ToList();
+            foreach (var feature in copiedFeatures)
+            {
+                if (feature.Geometry is Raster) continue;
+                feature.Geometry = transformation.Transform(fromCRS, toCRS, feature.Geometry.Copy());
+            }
+            return copiedFeatures;
         }
     }
 }

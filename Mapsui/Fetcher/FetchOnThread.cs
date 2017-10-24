@@ -1,4 +1,4 @@
-// Copyright 2010 - Paul den Dulk (Geodan)
+﻿// Copyright 2010 - Paul den Dulk (Geodan)
 //
 // This file is part of SharpMap.
 // Mapsui is free software; you can redistribute it and/or modify
@@ -20,6 +20,7 @@ using BruTile;
 
 namespace Mapsui.Fetcher
 {
+    [Obsolete("Use TileFetchDispatcher and FetchMachine")]
     class FetchOnThread
         //This class is needed because in CF one can only pass arguments to a thread using a class constructor.
         //Once support for CF is dropped (replaced by SL on WinMo?) this class should be removed.

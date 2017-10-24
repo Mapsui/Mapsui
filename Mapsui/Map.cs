@@ -33,7 +33,7 @@ namespace Mapsui
     /// <summary>
     /// Map class
     /// </summary>
-    public class Map : IDisposable, INotifyPropertyChanged
+    public class Map : INotifyPropertyChanged
     {
         private LayerCollection _layers = new LayerCollection();
 		private Color _backColor = Color.White;
@@ -47,6 +47,22 @@ namespace Mapsui
             Layers = new LayerCollection();
             Viewport =  new Viewport { Center = { X = double.NaN, Y = double.NaN }, Resolution = double.NaN };
         }
+        public PanMode PanMode { get; set; } = PanMode.KeepCenterWithinExtents;
+
+        public ZoomMode ZoomMode { get; set; } = ZoomMode.KeepWithinResolutions;
+
+        /// <summary>
+        /// Set this property in combination KeepCenterWithinExtents or KeepViewportWithinExtents.
+        /// If PanLimits is not set Map.Extent will be used as restricted extent.
+        /// </summary>
+        public BoundingBox PanLimits { get; set; }
+
+        /// <summary>
+        /// Pair of the limits for the resolutions (smallest and biggest). The resolution is kept between these values.
+        /// </summary>
+        public MinMax ZoomLimits { get; set; }
+
+        private MinMax _resolutionExtremes;
 
         public string CRS { get; set; }
 
@@ -107,8 +123,7 @@ namespace Mapsui
 
         public void NavigateTo(double x, double y)
         {
-            Viewport.Center.X = x;
-            Viewport.Center.Y = y;
+            Viewport.Center = new Point(x, y);
             OnRefreshGraphics();
             ViewChanged(true);
         }
@@ -156,16 +171,6 @@ namespace Mapsui
 
         public IReadOnlyList<double> Resolutions { get; private set; }
     
-        /// <summary>
-        /// Disposes 
-        /// the map object
-        /// </summary>
-        public void Dispose()
-        {
-            AbortFetch();
-            _layers.Clear();
-        }
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
@@ -186,24 +191,26 @@ namespace Mapsui
             InfoLayers.Remove(layer);
 
             Resolutions = DetermineResolutions(Layers);
-            
+            _resolutionExtremes = ViewportLimiter.GetExtremes(Resolutions); 
+
+
             OnPropertyChanged(nameof(Layers));
         }
 
-        public void InvokeInfo(Point screenPosition, ISymbolCache symbolCache)
+        public void InvokeInfo(Point screenPosition, float scale, ISymbolCache symbolCache)
         {
             if (Info == null) return;
-            var eventArgs = InfoHelper.GetInfoEventArgs(Viewport, screenPosition, InfoLayers, symbolCache);
+            var eventArgs = InfoHelper.GetInfoEventArgs(Viewport, screenPosition, scale, InfoLayers, symbolCache);
             if (eventArgs != null) Info?.Invoke(this, eventArgs);
         }
 
         private InfoEventArgs _previousHoverEventArgs;
 
-        public void InvokeHover(Point screenPosition, ISymbolCache symbolCache)
+        public void InvokeHover(Point screenPosition, float scale, ISymbolCache symbolCache)
         {
             if (Hover== null) return;
             if (HoverLayers.Count == 0) return;
-            var hoverEventArgs = InfoHelper.GetInfoEventArgs(Viewport, screenPosition, HoverLayers, symbolCache);
+            var hoverEventArgs = InfoHelper.GetInfoEventArgs(Viewport, screenPosition, scale, HoverLayers, symbolCache);
             if (hoverEventArgs?.Feature != _previousHoverEventArgs?.Feature) // only notify when the feature changes
             {
                 _previousHoverEventArgs = hoverEventArgs;
@@ -219,6 +226,7 @@ namespace Mapsui
             layer.Transformation = Transformation;
             layer.CRS = CRS;
             Resolutions = DetermineResolutions(Layers);
+            _resolutionExtremes = ViewportLimiter.GetExtremes(Resolutions);
             OnPropertyChanged(nameof(Layers));
         }
 

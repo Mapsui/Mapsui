@@ -25,6 +25,7 @@ namespace Mapsui.UI.iOS
 		private nfloat _previousY;
 		private double _previousRadius;
 		private double _previousRotation;
+	    private float _skiaScale;
 
 		public event EventHandler ViewportInitialized;
 
@@ -54,7 +55,7 @@ namespace Mapsui.UI.iOS
 			AddSubview (_canvas);
 			AddSubview (_attributionPanel);
 
-			AddConstraints (new NSLayoutConstraint [] {
+			AddConstraints (new [] {
 				NSLayoutConstraint.Create(this, NSLayoutAttribute.Leading, NSLayoutRelation.Equal, _canvas, NSLayoutAttribute.Leading, 1.0f, 0.0f),
 				NSLayoutConstraint.Create(this, NSLayoutAttribute.Trailing, NSLayoutRelation.Equal, _canvas, NSLayoutAttribute.Trailing, 1.0f, 0.0f),
 				NSLayoutConstraint.Create(this, NSLayoutAttribute.Top, NSLayoutRelation.Equal, _canvas, NSLayoutAttribute.Top, 1.0f, 0.0f),
@@ -98,10 +99,10 @@ namespace Mapsui.UI.iOS
 			_map.Viewport.Width = _canvas.Frame.Width;
 			_map.Viewport.Height = _canvas.Frame.Height;
 
-			var scaleFactor = (float)UIScreen.MainScreen.Scale;
-			skPaintSurfaceEventArgs.Surface.Canvas.Scale (scaleFactor, scaleFactor);
+			_skiaScale = (float)_canvas.ContentScaleFactor;
+			skPaintSurfaceEventArgs.Surface.Canvas.Scale (_skiaScale, _skiaScale);
 
-			_renderer.Render (skPaintSurfaceEventArgs.Surface.Canvas, _map.Viewport, _map.Layers, _map.BackColor);
+      _renderer.Render (skPaintSurfaceEventArgs.Surface.Canvas, _map.Viewport, _map.Layers, _map.BackColor);
 		}
 
 		private void InitializeViewport ()
@@ -161,19 +162,25 @@ namespace Mapsui.UI.iOS
 				centerY = centerY / touches.Count;
 
 				var radius = Algorithms.Distance (centerX, centerY, locations [0].X, locations [0].Y);
-				var rotation = Math.Atan2 (locations [1].Y - locations [0].Y, locations [1].X - locations [0].X) * 180.0 / Math.PI;
-
+				
 				if (_previousTouchCount == touches.Count)
 				{
 					_map.Viewport.Transform (centerX, centerY, _previousX, _previousY, radius / _previousRadius);
-					_map.Viewport.Rotation += rotation - _previousRotation;
-					RefreshGraphics ();
+
+				    if (AllowPinchRotation)
+				    {
+				        var rotation = Math.Atan2(locations[1].Y - locations[0].Y, 
+                            locations[1].X - locations[0].X) * 180.0 / Math.PI;
+				        _map.Viewport.Rotation += rotation - _previousRotation;
+				        _previousRotation = rotation;
+				    }
+
+				    RefreshGraphics();
 				}
 
 				_previousX = centerX;
 				_previousY = centerY;
 				_previousRadius = radius;
-				_previousRotation = rotation;
 			}
 			_previousTouchCount = touches.Count;
 		}
@@ -190,13 +197,13 @@ namespace Mapsui.UI.iOS
 			var touch = touches.FirstOrDefault () as UITouch;
 			if (touch == null) return;
 			var screenPosition = touch.LocationInView (this);
-			Map.InvokeInfo (screenPosition.ToMapsui (), _renderer.SymbolCache);
+			Map.InvokeInfo (screenPosition.ToMapsui (), _skiaScale, _renderer.SymbolCache);
 		}
 
 		public void Refresh ()
 		{
-			RefreshGraphics ();
-			_map.ViewChanged (true);
+			RefreshGraphics();
+			RefreshData();
 		}
 
 		public Map Map
@@ -214,7 +221,7 @@ namespace Mapsui.UI.iOS
 					temp.DataChanged -= MapDataChanged;
 					temp.PropertyChanged -= MapPropertyChanged;
 					temp.RefreshGraphics -= MapRefreshGraphics;
-					temp.Dispose ();
+					temp.AbortFetch ();
 					_attributionPanel.Clear ();
 				}
 
@@ -290,5 +297,22 @@ namespace Mapsui.UI.iOS
 			SetNeedsDisplay ();
 			_canvas?.SetNeedsDisplay ();
 		}
-	}
+
+	    public void RefreshData()
+	    {
+	        _map.ViewChanged(true);
+        }
+
+	    public bool AllowPinchRotation { get; set; }
+
+	    public Geometries.Point WorldToScreen(Geometries.Point worldPosition)
+	    {
+	        return SharedMapControl.WorldToScreen(Map.Viewport, _skiaScale, worldPosition);
+	    }
+
+	    public Geometries.Point ScreenToWorld(Geometries.Point screenPosition)
+	    {
+	        return SharedMapControl.ScreenToWorld(Map.Viewport, _skiaScale, screenPosition);
+	    }
+    }
 }

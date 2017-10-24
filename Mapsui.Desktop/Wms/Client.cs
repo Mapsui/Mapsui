@@ -236,7 +236,7 @@ namespace Mapsui.Providers.Wms
         private async Task<Stream> GetStreamAsync(string url)
         {
             var client = new HttpClient();
-            var response = await client.GetAsync(url);
+            var response = await client.GetAsync(url).ConfigureAwait(false);
 
             if (!response.IsSuccessStatusCode)
             {

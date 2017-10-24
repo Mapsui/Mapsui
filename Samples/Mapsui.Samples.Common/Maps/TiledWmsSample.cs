@@ -23,7 +23,7 @@ namespace Mapsui.Samples.Common.Maps
 
         public static ILayer CreateLayer()
         {
-            return new TileLayer(new GeodanWorldWmsTileSource()) {Name = "WMS called as WMS-C"};
+            return new TileLayer(new GeodanWorldWmsTileSource()) {Name = "Omgevingswarmte (PDOK)"};
         }
     }
 
@@ -31,7 +31,11 @@ namespace Mapsui.Samples.Common.Maps
     {
         public GeodanWorldWmsTileSource()
         {
-            var schema = new GlobalSphericalMercator(YAxis.TMS) {Srs = "EPSG:900913"};
+            var schema = new WkstNederlandSchema
+            {
+                Srs = "EPSG:28992",
+                Format = "image/png"
+            };
             Provider = new HttpTileProvider(CreateWmsRequest(schema));
             Schema = schema;
         }
@@ -43,14 +47,14 @@ namespace Mapsui.Samples.Common.Maps
 
         private static WmscRequest CreateWmsRequest(ITileSchema schema)
         {
-            const string url = "http://geoserver.nl/world/mapserv.cgi?map=world/world.map&VERSION=1.1.1";
-            return new WmscRequest(new Uri(url), schema, new[] {"world"}.ToList(), new string[0].ToList());
+            const string url = "http://geodata.nationaalgeoregister.nl/omgevingswarmte/wms?SERVICE=WMS&VERSION=1.1.1";
+            return new WmscRequest(new Uri(url), schema, new[] { "koudegeslotenwkobuurt" }.ToList(), new string[0].ToList());
         }
 
         public ITileProvider Provider { get; }
         public ITileSchema Schema { get; }
 
-        public string Name => "GeodanWorldWmsTileSource";
+        public string Name => "Potentiele Koude Gesloten WKO Buurt (PDOK)";
         public Attribution Attribution { get; } = new Attribution();
     }
 }

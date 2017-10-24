@@ -120,7 +120,6 @@ namespace Mapsui.UI.Wpf
                     temp.DataChanged -= MapDataChanged;
                     temp.PropertyChanged -= MapPropertyChanged;
                     temp.RefreshGraphics -= MapRefreshGraphics;
-                    temp.Dispose();
                 }
 
                 _map = value;
@@ -230,7 +229,7 @@ namespace Mapsui.UI.Wpf
 
         public void Refresh()
         {
-            _map.ViewChanged(true);
+            RefreshData();
             RefreshGraphics();
         }
 
@@ -239,6 +238,13 @@ namespace Mapsui.UI.Wpf
             _invalid = true;
             Dispatcher.BeginInvoke(new Action(InvalidateVisual));
         }
+
+        public void RefreshData()
+        {
+            _map.ViewChanged(true);
+        }
+
+        public bool AllowPinchRotation { get; set; }
 
         public void Clear()
         {
@@ -432,7 +438,7 @@ namespace Mapsui.UI.Wpf
             else
             {
                 HandleFeatureInfo(e);
-                Map.InvokeInfo(e.GetPosition(this).ToMapsui(), Renderer.SymbolCache);
+                Map.InvokeInfo(e.GetPosition(this).ToMapsui(), 1, Renderer.SymbolCache);
             }
 
             _map.ViewChanged(true);
@@ -446,7 +452,7 @@ namespace Mapsui.UI.Wpf
         private void MapControlTouchUp(object sender, TouchEventArgs e)
         {
             if (!_hasBeenManipulated)
-                Map.InvokeInfo(e.GetTouchPoint(this).Position.ToMapsui(), Renderer.SymbolCache);
+                Map.InvokeInfo(e.GetTouchPoint(this).Position.ToMapsui(), 1, Renderer.SymbolCache);
         }
 
         private void HandleFeatureInfo(MouseButtonEventArgs e)
@@ -475,7 +481,7 @@ namespace Mapsui.UI.Wpf
                 return;
             }
 
-            if (!_mouseDown) Map.InvokeHover(e.GetPosition(this).ToMapsui(), Renderer.SymbolCache);
+            if (!_mouseDown) Map.InvokeHover(e.GetPosition(this).ToMapsui(), 1, Renderer.SymbolCache);
 
             if (_mouseDown)
             {
@@ -530,7 +536,6 @@ namespace Mapsui.UI.Wpf
         private void DispatcherShutdownStarted(object sender, EventArgs e)
         {
             CompositionTarget.Rendering -= CompositionTargetRendering;
-            _map?.Dispose();
         }
 
         public void ZoomToBox(Geometries.Point beginPoint, Geometries.Point endPoint)
@@ -688,6 +693,16 @@ namespace Mapsui.UI.Wpf
                 VerticalAlignment = VerticalAlignment.Bottom,
                 HorizontalAlignment = HorizontalAlignment.Right
             };
+        }
+
+        public Geometries.Point WorldToScreen(Geometries.Point worldPosition)
+        {
+            return SharedMapControl.WorldToScreen(Map.Viewport, (float)_skiaScale.X, worldPosition);
+        }
+
+        public Geometries.Point ScreenToWorld(Geometries.Point screenPosition)
+        {
+            return SharedMapControl.ScreenToWorld(Map.Viewport, (float)_skiaScale.Y, screenPosition);
         }
     }
 }
