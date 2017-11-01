@@ -189,8 +189,6 @@ namespace Mapsui
             InfoLayers.Remove(layer);
 
             Resolutions = DetermineResolutions(Layers);
-            _resolutionExtremes = ViewportLimiter.GetExtremes(Resolutions); 
-
 
             OnPropertyChanged(nameof(Layers));
         }
@@ -224,7 +222,6 @@ namespace Mapsui
             layer.Transformation = Transformation;
             layer.CRS = CRS;
             Resolutions = DetermineResolutions(Layers);
-            _resolutionExtremes = ViewportLimiter.GetExtremes(Resolutions);
             OnPropertyChanged(nameof(Layers));
         }
 
