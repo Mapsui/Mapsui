@@ -62,8 +62,6 @@ namespace Mapsui
         /// </summary>
         public MinMax ZoomLimits { get; set; }
 
-        private MinMax _resolutionExtremes;
-
         public string CRS { get; set; }
 
         /// <summary>
