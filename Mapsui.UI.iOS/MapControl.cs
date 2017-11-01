@@ -323,5 +323,23 @@ namespace Mapsui.UI.iOS
 	    {
 	        return SharedMapControl.ScreenToWorld(Map.Viewport, _skiaScale, screenPosition);
 	    }
+
+	    public override CGRect Frame
+	    {
+	        get => base.Frame;
+	        set
+	        {
+	            _canvas.Frame = value; // The canvas should get an update of the size change
+                base.Frame = value;
+	        }
+	    }
+
+	    public override void LayoutMarginsDidChange()
+	    {
+	        if (_canvas == null) return;
+
+	        _canvas.Frame = _canvas.Frame;
+	        base.LayoutMarginsDidChange();
+	    }
     }
 }
