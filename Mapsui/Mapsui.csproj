@@ -63,7 +63,6 @@
     <Compile Include="Fetcher\TileFetchDispatcher.cs" />
     <Compile Include="Fetcher\TileFetcher.cs" />
     <Compile Include="Fetcher\TileParser.cs" />
-    <Compile Include="Fetcher\VectorTileParser.cs" />
     <Compile Include="Geometries\NotifyingPoint.cs" />
     <Compile Include="Layers\AnimatedFeatures.cs" />
     <Compile Include="Layers\AnimatedPointLayer.cs" />
