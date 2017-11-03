@@ -8,7 +8,7 @@ using Polygon = GeoJSON.Net.Geometry.Polygon;
 
 namespace Mapsui.VectorTiles.Extensions
 {
-    static class GeoJSONObjectExtensions
+    static class GeometryObjectExtensions
     {
         public static Geometry ToMapsui(this IGeometryObject geoJsonObject)
         {

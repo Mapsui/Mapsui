@@ -60,6 +60,46 @@ namespace Mapsui.Rendering.Skia
             }
         }
 
+        public MemoryStream RenderToBitmapStream(IViewport viewport, IEnumerable<Feature> features, Color background = null)
+        {
+            try
+            {
+                using (var surface = SKSurface.Create(
+                    (int)viewport.Width, (int)viewport.Height, SKImageInfo.PlatformColorType, SKAlphaType.Unpremul))
+                {
+                    Render(surface.Canvas, viewport, features, background);
+                    using (var image = surface.Snapshot())
+                    {
+                        using (var data = image.Encode())
+                        {
+                            var memoryStream = new MemoryStream();
+                            data.SaveTo(memoryStream);
+                            return memoryStream;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Log(LogLevel.Error, ex.Message);
+                return null;
+            }
+        }
+
+        private void Render(SKCanvas canvas, IViewport viewport, IEnumerable<IFeature> features, Color background)
+        {
+            if (background != null)
+            {
+                canvas.Clear(background.ToSkia());
+            }
+            
+            VisibleFeatureIterator.IterateFeatures(viewport, features, new Style(), (v, l, s) => { RenderFeature(canvas, v, l, s); });
+
+            RemovedUnusedBitmapsFromCache();
+
+            _currentIteration++;
+        }
+
         private void Render(SKCanvas canvas, IViewport viewport, IEnumerable<ILayer> layers, Color background)
         {
             if (background != null)

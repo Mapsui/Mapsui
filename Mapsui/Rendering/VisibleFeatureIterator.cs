@@ -19,17 +19,18 @@ namespace Mapsui.Rendering
                 if (layer.MinVisible > viewport.Resolution) continue;
                 if (layer.MaxVisible < viewport.Resolution) continue;
 
-                IterateLayer(viewport, layer, callback);
+                var features = layer.GetFeaturesInView(viewport.Extent, viewport.Resolution);
+                IterateFeatures(viewport, features, layer.Style, callback);
             }
         }
 
-        private static void IterateLayer(IViewport viewport, ILayer layer,
+        public static void IterateFeatures(IViewport viewport, IEnumerable<IFeature> features, IStyle stylex,
             Action<IViewport, IStyle, IFeature> callback)
         {
-            var features = layer.GetFeaturesInView(viewport.Extent, viewport.Resolution).ToList();
+            var styleArray = (stylex as StyleCollection)?.ToArray() ?? new [] { stylex };
+            features = features.ToList();
 
-            var layerStyles = layer.Style is StyleCollection ? (layer.Style as StyleCollection).ToArray() : new [] {layer.Style};
-            foreach (var layerStyle in layerStyles)
+            foreach (var layerStyle in styleArray)
             {
                 var style = layerStyle; // This is the default that could be overridden by an IThemeStyle
 

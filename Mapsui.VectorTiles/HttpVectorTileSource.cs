@@ -7,7 +7,11 @@ using System.Net.Http;
 using BruTile;
 using BruTile.Cache;
 using BruTile.Web;
+using GeoJSON.Net.Feature;
 using Mapbox.Vector.Tile;
+using Mapsui.Geometries;
+using Mapsui.Rendering.Skia;
+using Mapsui.VectorTiles.Extensions;
 
 namespace Mapsui.VectorTiles
 {
@@ -30,25 +34,34 @@ namespace Mapsui.VectorTiles
         public override byte[] GetTile(TileInfo tileInfo)
         {
             var bytes = base.GetTile(tileInfo);
-            var index = tileInfo.Index;
-            var layerInfos = Mapbox.Vector.Tile.VectorTileParser.Parse(new MemoryStream(bytes));
+            var geoJsonFeatures = ToGeoJsonFeatures(tileInfo.Index, bytes);
+            return ToImageTile(tileInfo, geoJsonFeatures);
+        }
+
+        private byte[] ToImageTile(TileInfo tileInfo, IEnumerable<FeatureCollection> geoJsonFeatures)
+        {
             var tileWidth = Schema.GetTileWidth(tileInfo.Index.Level);
             var tileHeight = Schema.GetTileHeight(tileInfo.Index.Level);
-            var geoJSONRenderer = GetGeoJsonRenderer(tileInfo, tileWidth, tileHeight);
-            return geoJSONRenderer.Render(layerInfos.Select(i => i.ToGeoJSON(index.Col, index.Row, int.Parse(index.Level))));
+            var viewport = ToViewport(tileWidth, tileHeight, tileInfo.Extent.ToBoundingBox());
+            return new MapRenderer().RenderToBitmapStream(viewport, geoJsonFeatures.ToMapsui().ToList()).ToArray();
         }
 
-        private IGeoJsonRenderer GetGeoJsonRenderer(TileInfo tileInfo, int tileWidth, int tileHeight)
+        private static IEnumerable<FeatureCollection> ToGeoJsonFeatures(TileIndex tileIndex, byte[] bytes)
         {
-             return new GeoJsonToSkiaRenderer(tileWidth, tileHeight, ToGeoJSONArray(tileInfo.Extent));
+            var layerInfos = Mapbox.Vector.Tile.VectorTileParser.Parse(new MemoryStream(bytes));
+            var geoJsonFeatures = layerInfos.Select(i => i.ToGeoJSON(tileIndex.Col, tileIndex.Row, int.Parse(tileIndex.Level)));
+            return geoJsonFeatures;
         }
 
-        private static double[] ToGeoJSONArray(Extent extent)
+        private static Viewport ToViewport(int canvasWidth, int canvasHeight, BoundingBox boundingBox)
         {
-            // GeoJSON.NET has no class for bounding boxes. It just holds them in a double array. 
-            // The spec says it should first the lowest and then all the highest values for all axes:
-            // http://geojson.org/geojson-spec.html#bounding-boxes
-            return new [] {extent.MinX, extent.MinY, extent.MaxX, extent.MaxY };
+            return new Viewport
+            {
+                Width = canvasWidth,
+                Height = canvasHeight,
+                Center = boundingBox.GetCentroid(),
+                Resolution = boundingBox.Width / canvasWidth
+            };
         }
     }
 }
