@@ -22,8 +22,7 @@ namespace Mapsui.VectorTiles.Extensions
             }
             return null;
         }
-
-
+        
         private static Geometry ToMapsuiMultiPolygon(MultiPolygon multiPolygon)
         {
             var mapsuiPolygon = new Geometries.MultiPolygon();

@@ -49,7 +49,6 @@ namespace Mapsui.VectorTiles
             // The spec says it should first the lowest and then all the highest values for all axes:
             // http://geojson.org/geojson-spec.html#bounding-boxes
             return new [] {extent.MinX, extent.MinY, extent.MaxX, extent.MaxY };
-
         }
     }
 }

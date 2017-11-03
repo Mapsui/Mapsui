@@ -16,18 +16,17 @@ namespace Mapsui.VectorTiles
             IFetchStrategy fetchStrategy = null,
             ITileRenderStrategy tileRenderStrategy = null, int minExtraTiles = -1, int maxExtraTiles = -1) :
             base(source, minTiles, maxTiles, maxRetries, fetchStrategy, tileRenderStrategy, minExtraTiles,
-                maxExtraTiles) { }
-
-
+                maxExtraTiles)
+        {
+        }
 
         public static byte[] FetchTile(Uri url)
         {
-            var gzipWebClient = new HttpClient(new HttpClientHandler()
+            var gzipWebClient = new HttpClient(new HttpClientHandler
             {
                 AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
             });
             return gzipWebClient.GetByteArrayAsync(url).Result;
         }
-
     }
 }
