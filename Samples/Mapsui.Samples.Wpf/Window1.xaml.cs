@@ -108,6 +108,7 @@ namespace Mapsui.Samples.Wpf
         {
             var allSamples = Common.AllSamples.CreateList();
             // Append samples from Mapsui.Desktop
+            allSamples["Vector Tiles (.NET Standard)"] = VectorTileSample.CreateMap;
             allSamples["Shapefile (Desktop)"] = ShapefileSample.CreateMap;
             allSamples["Tiles on disk (Desktop)"] = MapTilerSample.CreateMap;
             allSamples["WMS (Desktop)"] = WmsSample.CreateMap;

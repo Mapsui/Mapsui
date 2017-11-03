@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Mapsui.Samples.Common.Desktop</RootNamespace>
     <AssemblyName>Mapsui.Samples.Common.Desktop</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
@@ -55,6 +55,7 @@
     <Compile Include="MapTilerSample.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShapefileSample.cs" />
+    <Compile Include="VectorTileSample.cs" />
     <Compile Include="WfsSample.cs" />
     <Compile Include="WmsSample.cs" />
   </ItemGroup>
@@ -133,6 +134,10 @@
     <ProjectReference Include="..\..\Mapsui.Geometries\Mapsui.Geometries.csproj">
       <Project>{ee55b62d-ffa2-4c24-a4ad-7a47ace55ce5}</Project>
       <Name>Mapsui.Geometries</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Mapsui.VectorTiles\Mapsui.VectorTiles.csproj">
+      <Project>{2b876837-fc0e-4b35-92e1-9b2934bc3ebf}</Project>
+      <Name>Mapsui.VectorTiles</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Mapsui\Mapsui.csproj">
       <Project>{D74C052A-C07E-4B37-A898-134218ACA5C9}</Project>

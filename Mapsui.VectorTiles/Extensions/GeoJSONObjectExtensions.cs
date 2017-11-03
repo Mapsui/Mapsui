@@ -56,11 +56,9 @@ namespace Mapsui.VectorTiles.Extensions
 
         private static LinearRing ToLinearRing(LineString lineString)
         {
-            return new LinearRing(lineString.Coordinates.Select(c =>
+            return new LinearRing(lineString.Coordinates.Select(position =>
             {
-                var position = (GeographicPosition)c;
-                var sphericalPosition =
-                    Projection.SphericalMercator.FromLonLat(position.Longitude, position.Latitude);
+                var sphericalPosition = Projection.SphericalMercator.FromLonLat(position.Longitude, position.Latitude);
                 return new[] { sphericalPosition.X, sphericalPosition.Y };
             }));
         }

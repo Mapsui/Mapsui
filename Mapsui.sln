@@ -70,7 +70,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.UI.Wpf", "Mapsui.UI.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Geometries.Tests", "Tests\Mapsui.Geometries.Tests\Mapsui.Geometries.Tests.csproj", "{46519792-2F00-4FB7-99EF-1465AC7B8994}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.VectorTiles", "Mapsui.VectorTiles\Mapsui.VectorTiles.csproj", "{FCEBD894-9C0F-458C-A6D5-DF623FCEA6EC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.VectorTiles", "Mapsui.VectorTiles\Mapsui.VectorTiles.csproj", "{2B876837-FC0E-4B35-92E1-9B2934BC3EBF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -165,10 +165,10 @@ Global
 		{46519792-2F00-4FB7-99EF-1465AC7B8994}.Debug|AnyCPU.Build.0 = Debug|Any CPU
 		{46519792-2F00-4FB7-99EF-1465AC7B8994}.Release|AnyCPU.ActiveCfg = Release|Any CPU
 		{46519792-2F00-4FB7-99EF-1465AC7B8994}.Release|AnyCPU.Build.0 = Release|Any CPU
-		{FCEBD894-9C0F-458C-A6D5-DF623FCEA6EC}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
-		{FCEBD894-9C0F-458C-A6D5-DF623FCEA6EC}.Debug|AnyCPU.Build.0 = Debug|Any CPU
-		{FCEBD894-9C0F-458C-A6D5-DF623FCEA6EC}.Release|AnyCPU.ActiveCfg = Release|Any CPU
-		{FCEBD894-9C0F-458C-A6D5-DF623FCEA6EC}.Release|AnyCPU.Build.0 = Release|Any CPU
+		{2B876837-FC0E-4B35-92E1-9B2934BC3EBF}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
+		{2B876837-FC0E-4B35-92E1-9B2934BC3EBF}.Debug|AnyCPU.Build.0 = Debug|Any CPU
+		{2B876837-FC0E-4B35-92E1-9B2934BC3EBF}.Release|AnyCPU.ActiveCfg = Release|Any CPU
+		{2B876837-FC0E-4B35-92E1-9B2934BC3EBF}.Release|AnyCPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

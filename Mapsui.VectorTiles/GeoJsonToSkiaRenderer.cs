@@ -86,7 +86,7 @@ namespace Mapsui.VectorTiles
 
             foreach (var coordinate in lineString.Coordinates)
             {
-                var position = (GeographicPosition)coordinate;
+                var position = coordinate;
                 var sphericalPoint = SphericalMercator.FromLonLat(position.Longitude, position.Latitude);
 
                 if (result.Points.Length == 0)
