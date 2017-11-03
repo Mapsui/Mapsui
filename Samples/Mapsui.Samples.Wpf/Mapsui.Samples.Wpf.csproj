@@ -219,6 +219,10 @@
       <Project>{ae693902-feda-4034-a7c5-9aa9872f7878}</Project>
       <Name>Mapsui.UI.Wpf</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Mapsui.VectorTiles\Mapsui.VectorTiles.csproj">
+      <Project>{fcebd894-9c0f-458c-a6d5-df623fcea6ec}</Project>
+      <Name>Mapsui.VectorTiles</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Mapsui\Mapsui.csproj">
       <Project>{d74c052a-c07e-4b37-a898-134218aca5c9}</Project>
       <Name>Mapsui</Name>
