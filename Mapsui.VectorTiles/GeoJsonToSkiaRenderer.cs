@@ -31,6 +31,7 @@ namespace Mapsui.VectorTiles
 
         public byte[] Render(IEnumerable<FeatureCollection> featureCollections)
         {
+            // todo: use IRenderer to bitmap functionality
             using (var surface = SKSurface.Create(
                 _canvasWidth, _canvasHeight, SKImageInfo.PlatformColorType, SKAlphaType.Unpremul))
             {
