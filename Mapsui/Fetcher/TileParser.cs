@@ -8,7 +8,7 @@ namespace Mapsui.Fetcher
 {
     public class TileParser : ITileParser
     {
-        public IEnumerable<Feature> Parse(TileInfo tileInfo, byte[] tileData)
+        public IEnumerable<Feature> ToFeatures(TileInfo tileInfo, byte[] tileData)
         {
             return new List<Feature> {new Feature {Geometry = ToGeometry(tileInfo, tileData)}};
         }

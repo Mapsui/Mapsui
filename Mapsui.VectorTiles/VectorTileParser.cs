@@ -11,10 +11,10 @@ namespace Mapsui.VectorTiles
 {
     public class VectorTileParser : ITileParser
     {
-        public IEnumerable<Feature> Parse(TileInfo tileInfo, byte[] tileData)
+        public IEnumerable<Feature> ToFeatures(TileInfo tileInfo, byte[] tileData)
         {
-            var layerInfos = Mapbox.Vector.Tile.VectorTileParser.Parse(new MemoryStream(tileData));
-            var featureCollection = layerInfos.Select(i => 
+            var vectorTileLayer = Mapbox.Vector.Tile.VectorTileParser.Parse(new MemoryStream(tileData));
+            var featureCollection = vectorTileLayer.Select(i => 
                 i.ToGeoJSON(tileInfo.Index.Col, tileInfo.Index.Row, int.Parse(tileInfo.Index.Level)));
             return featureCollection.ToMapsui();
         }

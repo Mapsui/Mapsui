@@ -106,7 +106,7 @@ namespace Mapsui.Fetcher
             {
                 if (exception == null)
                 {
-                    _tileCache.Add(tileInfo.Index, _tileParse.Parse(tileInfo, tileData));
+                    _tileCache.Add(tileInfo.Index, _tileParse.ToFeatures(tileInfo, tileData));
                 }
                 _tilesInProgress.TryRemove(tileInfo.Index);
 

@@ -6,6 +6,6 @@ namespace Mapsui.Fetcher
 {
     public interface ITileParser
     {
-        IEnumerable<Feature> Parse(TileInfo tileInfo, byte[] tileData);
+        IEnumerable<Feature> ToFeatures(TileInfo tileInfo, byte[] tileData);
     }
 }
