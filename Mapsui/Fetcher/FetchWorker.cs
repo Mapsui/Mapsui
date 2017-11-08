@@ -28,6 +28,7 @@ namespace Mapsui.Fetcher
         public void Stop()
         {
             _fetchLoopCancellationTokenSource?.Cancel();
+            _fetchLoopCancellationTokenSource = null;
         }
 
         private void Fetch(CancellationTokenSource cancellationTokenSource)
