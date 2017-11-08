@@ -192,6 +192,8 @@ namespace Mapsui.UI.iOS
 		{
 			Refresh ();
 			HandleInfo (e.AllTouches);
+		    _previousTouchCount = 0;
+
 		}
 
 		private void HandleInfo (NSSet touches)
