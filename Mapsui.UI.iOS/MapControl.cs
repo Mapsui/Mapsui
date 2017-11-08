@@ -62,18 +62,20 @@ namespace Mapsui.UI.iOS
 				NSLayoutConstraint.Create(this, NSLayoutAttribute.Top, NSLayoutRelation.Equal, _canvas, NSLayoutAttribute.Top, 1.0f, 0.0f),
 				NSLayoutConstraint.Create(this, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, _canvas, NSLayoutAttribute.Bottom, 1.0f, 0.0f),
 
-				NSLayoutConstraint.Create(_attributionPanel, NSLayoutAttribute.Left, NSLayoutRelation.GreaterThanOrEqual, this, NSLayoutAttribute.Left, 1.0f, 0.0f),
-				NSLayoutConstraint.Create(_attributionPanel, NSLayoutAttribute.Top, NSLayoutRelation.GreaterThanOrEqual, this, NSLayoutAttribute.Top, 1.0f, 0.0f),
-				NSLayoutConstraint.Create(_attributionPanel, NSLayoutAttribute.Right, NSLayoutRelation.Equal, this, NSLayoutAttribute.Right, 1.0f, -8.0f),
-				NSLayoutConstraint.Create(_attributionPanel, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, this, NSLayoutAttribute.Bottom, 1.0f, -8.0f)
+				NSLayoutConstraint.Create(_attributionPanel, NSLayoutAttribute.Left, NSLayoutRelation.Equal, this, NSLayoutAttribute.Left, 1.0f, 0.0f),
+				NSLayoutConstraint.Create(_attributionPanel, NSLayoutAttribute.Top, NSLayoutRelation.Equal, this, NSLayoutAttribute.Top, 1.0f, 26.0f),
+				NSLayoutConstraint.Create(_attributionPanel, NSLayoutAttribute.Right, NSLayoutRelation.Equal, this, NSLayoutAttribute.Right, 1.0f, 0.0f),
+				NSLayoutConstraint.Create(_attributionPanel, NSLayoutAttribute.Bottom, NSLayoutRelation.LessThanOrEqual, this, NSLayoutAttribute.Bottom, 1.0f, 0.0f)
 			});
 
 			_attributionPanel.ClipsToBounds = true;
-
 			_attributionPanel.BackgroundColor = UIColor.FromRGBA(255, 255, 255, 191);
 			_attributionPanel.TintColor = UIColor.Black;
+		    _attributionPanel.Layer.CornerRadius = 8.0f;
+		    _attributionPanel.Layer.MasksToBounds = true;
+		    _attributionPanel.LayoutIfNeeded();
 
-			InitializeViewport ();
+            InitializeViewport ();
 
 			ClipsToBounds = true;
 
@@ -217,11 +219,8 @@ namespace Mapsui.UI.iOS
 
 		public Map Map
 		{
-			get
-			{
-				return _map;
-			}
-			set
+			get => _map;
+		    set
 			{
 				if (_map != null)
 				{
@@ -309,7 +308,7 @@ namespace Mapsui.UI.iOS
 
 	    public void RefreshData()
 	    {
-	        _map.ViewChanged(true);
+	        _map?.ViewChanged(true);
         }
 
 	    public bool AllowPinchRotation { get; set; }
@@ -329,7 +328,9 @@ namespace Mapsui.UI.iOS
 	        get => base.Frame;
 	        set
 	        {
-	            _canvas.Frame = value; // The canvas should get an update of the size change
+	            _canvas.Frame = value;
+                Refresh();
+
                 base.Frame = value;
 	        }
 	    }
@@ -339,7 +340,9 @@ namespace Mapsui.UI.iOS
 	        if (_canvas == null) return;
 
 	        _canvas.Frame = _canvas.Frame;
-	        base.LayoutMarginsDidChange();
+	        Refresh();
+
+            base.LayoutMarginsDidChange();
 	    }
     }
 }

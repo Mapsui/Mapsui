@@ -1,5 +1,4 @@
 using System;
-using System.Text;
 using System.Collections.Generic;
 using Mapsui.Layers;
 using UIKit;
@@ -10,23 +9,25 @@ namespace Mapsui.UI.iOS
 {
 	public sealed class AttributionView: UIView
 	{
-		readonly UIStackView stackView;
+		readonly UIStackView _stackView;
 
 		public AttributionView ()
 		{
-			stackView = new UIStackView ();
-			stackView.TranslatesAutoresizingMaskIntoConstraints = false;
-			stackView.Axis = UILayoutConstraintAxis.Vertical;
-			stackView.Alignment = UIStackViewAlignment.Fill;
-			stackView.Distribution = UIStackViewDistribution.Fill;
+		    _stackView = new UIStackView
+		    {
+		        TranslatesAutoresizingMaskIntoConstraints = false,
+		        Axis = UILayoutConstraintAxis.Vertical,
+		        Alignment = UIStackViewAlignment.Fill,
+		        Distribution = UIStackViewDistribution.Fill
+		    };
 
-			AddSubview (stackView);
+		    AddSubview (_stackView);
 
-			AddConstraints (new NSLayoutConstraint [] {
-				NSLayoutConstraint.Create(this, NSLayoutAttribute.Left, NSLayoutRelation.Equal, stackView, NSLayoutAttribute.Left, 1.0f, -4.0f),
-				NSLayoutConstraint.Create(this, NSLayoutAttribute.Right, NSLayoutRelation.Equal, stackView, NSLayoutAttribute.Right, 1.0f, 4.0f),
-				NSLayoutConstraint.Create(this, NSLayoutAttribute.Top, NSLayoutRelation.Equal, stackView, NSLayoutAttribute.Top, 1.0f, -4.0f),
-				NSLayoutConstraint.Create(this, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, stackView, NSLayoutAttribute.Bottom, 1.0f, 4.0f),
+			AddConstraints (new [] {
+				NSLayoutConstraint.Create(this, NSLayoutAttribute.Left, NSLayoutRelation.Equal, _stackView, NSLayoutAttribute.Left, 1.0f, -1.0f),
+				NSLayoutConstraint.Create(this, NSLayoutAttribute.Right, NSLayoutRelation.Equal, _stackView, NSLayoutAttribute.Right, 1.0f, 1.0f),
+				NSLayoutConstraint.Create(this, NSLayoutAttribute.Top, NSLayoutRelation.Equal, _stackView, NSLayoutAttribute.Top, 1.0f, -1.0f),
+				NSLayoutConstraint.Create(this, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, _stackView, NSLayoutAttribute.Bottom, 1.0f, 1.0f),
 			});
 
 			Font = UIFont.PreferredFootnote;
@@ -36,7 +37,7 @@ namespace Mapsui.UI.iOS
 
 		public void Populate (ICollection<ILayer> layers, CGRect parentFrame)
 		{
-			Clear ();
+			Clear();
 			foreach (var layer in layers)
 			{
 				if (!string.IsNullOrEmpty (layer.Attribution.Text))
@@ -53,32 +54,36 @@ namespace Mapsui.UI.iOS
 					UIView rowView;
 					if (url == null || string.IsNullOrEmpty(layer.Attribution.Url))
 					{
-						var label = new UILabel ();
-						label.BackgroundColor = UIColor.Clear;
-						label.TranslatesAutoresizingMaskIntoConstraints = false;
-						label.Text = layer.Attribution.Text;
-						label.Font = Font;
-						rowView = label;
+					    var label = new UILabel
+					    {
+					        BackgroundColor = UIColor.Clear,
+					        TranslatesAutoresizingMaskIntoConstraints = false,
+					        Text = layer.Attribution.Text,
+					        Font = Font
+                        };
+                        rowView = label;
 					}
 					else
 					{
-						var button = new UIButton (UIButtonType.Custom);
-						button.TranslatesAutoresizingMaskIntoConstraints = false;
-						button.TouchUpInside += (sender, e) => UIApplication.SharedApplication.OpenUrl(url);
-						button.SetTitle (string.Format ("{0} ({1})", layer.Attribution.Text, layer.Attribution.Url), UIControlState.Normal);
+					    var button = new UIButton(UIButtonType.Custom)
+					    {
+					        TranslatesAutoresizingMaskIntoConstraints = false,
+                            Font = Font
+                        };
+					    button.TouchUpInside += (sender, e) => UIApplication.SharedApplication.OpenUrl(url);
+						button.SetTitle ($"{layer.Attribution.Text}", UIControlState.Normal);
 						button.SetTitleColor (TintColor, UIControlState.Normal);
-						button.Font = Font;
 						rowView = button;
 					}
-					stackView.AddArrangedSubview (rowView);
+					_stackView.AddArrangedSubview (rowView);
 				}
 			}
-			Hidden = stackView.Subviews.Length == 0;
+			Hidden = _stackView.Subviews.Length == 0;
 		}
 
 		public void Clear ()
 		{
-			foreach (var subview in stackView.Subviews)
+			foreach (var subview in _stackView.Subviews)
 			{
 				subview.RemoveFromSuperview ();
 			}
