@@ -26153,6 +26153,7 @@
       "packagesPath": "C:\\Users\\paul\\.nuget\\packages\\",
       "outputPath": "C:\\code\\github\\mapsui-forks\\Mapsui\\Mapsui.UI.Uwp\\obj\\",
       "projectStyle": "ProjectJson",
+      "validateRuntimeAssets": true,
       "configFilePaths": [
         "C:\\Users\\paul\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
@@ -26179,10 +26180,7 @@
     },
     "dependencies": {
       "Microsoft.NETCore.UniversalWindowsPlatform": "6.0.1",
-      "SkiaSharp.Views": {
-        "target": "Package",
-        "version": "[1.59.2, )"
-      }
+      "SkiaSharp.Views": "1.59.2"
     },
     "frameworks": {
       "uap10.0.10586": {}

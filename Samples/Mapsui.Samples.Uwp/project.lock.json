@@ -27646,6 +27646,7 @@
       "packagesPath": "C:\\Users\\paul\\.nuget\\packages\\",
       "outputPath": "C:\\code\\github\\mapsui-forks\\Mapsui\\Samples\\Mapsui.Samples.Uwp\\obj\\",
       "projectStyle": "ProjectJson",
+      "validateRuntimeAssets": true,
       "configFilePaths": [
         "C:\\Users\\paul\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
