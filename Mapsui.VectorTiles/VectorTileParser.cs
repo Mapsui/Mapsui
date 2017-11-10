@@ -2,10 +2,9 @@
 using System.IO;
 using System.Linq;
 using BruTile;
-using Mapbox.Vector.Tile;
 using Mapsui.Fetcher;
+using Mapsui.Providers;
 using Mapsui.VectorTiles.Extensions;
-using Feature = Mapsui.Providers.Feature;
 
 namespace Mapsui.VectorTiles
 {
@@ -13,10 +12,10 @@ namespace Mapsui.VectorTiles
     {
         public IEnumerable<Feature> ToFeatures(TileInfo tileInfo, byte[] tileData)
         {
-            var vectorTileLayer = Mapbox.Vector.Tile.VectorTileParser.Parse(new MemoryStream(tileData));
-            var featureCollection = vectorTileLayer.Select(i => 
-                i.ToGeoJSON(tileInfo.Index.Col, tileInfo.Index.Row, int.Parse(tileInfo.Index.Level)));
-            return featureCollection.ToMapsui();
+            var vectorTileLayers = Mapbox.Vector.Tile.VectorTileParser.Parse(new MemoryStream(tileData));
+            var featureCollection = vectorTileLayers.Select(i => 
+                i.ToMapsui(tileInfo.Index.Col, tileInfo.Index.Row, int.Parse(tileInfo.Index.Level)));
+            return featureCollection.SelectMany(i => i);
         }
     }
 }

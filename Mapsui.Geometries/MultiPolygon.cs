@@ -37,6 +37,14 @@ namespace Mapsui.Geometries
         }
 
         /// <summary>
+        ///     Instantiates a MultiPolygon
+        /// </summary>
+        public MultiPolygon(IList<Polygon> polygons)
+        {
+            Polygons = polygons;
+        }
+
+        /// <summary>
         ///     Collection of polygons in the multipolygon
         /// </summary>
         public IList<Polygon> Polygons { get; set; }

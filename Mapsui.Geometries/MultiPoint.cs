@@ -48,6 +48,18 @@ namespace Mapsui.Geometries
         }
 
         /// <summary>
+        ///     Initializes a new MultiPoint collection
+        /// </summary>
+        public MultiPoint(IEnumerable<Point> points)
+        {
+            Points = new Collection<Point>();
+            foreach (var point in points)
+            {
+                Points.Add(point);
+            }
+        }
+
+        /// <summary>
         ///     Gets the n'th point in the MultiPoint collection
         /// </summary>
         /// <param name="n">Index in collection</param>

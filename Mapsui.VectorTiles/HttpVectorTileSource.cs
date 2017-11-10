@@ -7,6 +7,7 @@ using BruTile.Cache;
 using BruTile.Web;
 using Mapsui.Geometries;
 using Mapsui.Rendering.Skia;
+using Mapsui.Styles;
 
 namespace Mapsui.VectorTiles
 {
@@ -17,6 +18,8 @@ namespace Mapsui.VectorTiles
             : base(tileSchema, urlFormatter, serverNodes, apiKey, name, persistentCache, FetchTile)
         {
         }
+
+        public IStyle Style { get; set; }
 
         private static byte[] FetchTile(Uri url)
         {
@@ -40,7 +43,7 @@ namespace Mapsui.VectorTiles
             var tileWidth = Schema.GetTileWidth(tileInfo.Index.Level);
             var tileHeight = Schema.GetTileHeight(tileInfo.Index.Level);
             var viewport = ToViewport(tileWidth, tileHeight, tileInfo.Extent.ToBoundingBox());
-            return new MapRenderer().RenderToBitmapStream(viewport, features).ToArray();
+            return new MapRenderer().RenderToBitmapStream(viewport, features, Style).ToArray();
         }
 
         private static Viewport ToViewport(int tileWidth, int tileHeight, BoundingBox boundingBox)

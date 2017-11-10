@@ -36,8 +36,8 @@ namespace Mapsui.Layers
         public TileLayer(Func<ITileSource> tileSourceInitializer) : base(tileSourceInitializer) { }
 
         public TileLayer(ITileSource source = null, int minTiles = 200, int maxTiles = 300, int maxRetries = 2,
-            IFetchStrategy fetchStrategy = null,
-            ITileRenderStrategy tileRenderStrategy = null, int minExtraTiles = -1, int maxExtraTiles = -1) :
+            IFetchStrategy fetchStrategy = null, ITileRenderStrategy tileRenderStrategy = null, int minExtraTiles = -1, 
+            int maxExtraTiles = -1) :
             base(source, minTiles, maxTiles, maxRetries, fetchStrategy, tileRenderStrategy, minExtraTiles,
                 maxExtraTiles)
         { }
