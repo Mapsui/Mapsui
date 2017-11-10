@@ -39,3 +39,5 @@ Release/
 *.cache
 /Mapsui.Samples.Wpf.psess
 /_NCrunch_Mapsui/StoredText
+
+project.lock.json
