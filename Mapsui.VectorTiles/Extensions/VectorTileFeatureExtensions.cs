@@ -126,7 +126,7 @@ namespace Mapsui.VectorTiles.Extensions
             return result;
         }
 
-        public static Feature ToMapsui(this VectorTileFeature vectortileFeature, int x, int y, int z)
+        public static Feature ToMapsui(this VectorTileFeature vectortileFeature, string name, int x, int y, int z)
         {
             IGeometry geom = null;
 
@@ -153,6 +153,7 @@ namespace Mapsui.VectorTiles.Extensions
             var result = new Feature
             {
                 Geometry = geom,
+                ["layer-name"] = name, // added to allow feature specific style through mapbox style specification: https://www.mapbox.com/mapbox-gl-js/style-spec/
                 ["id"] = vectortileFeature.Id,
             };
 

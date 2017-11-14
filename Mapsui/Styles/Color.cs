@@ -76,5 +76,10 @@ namespace Mapsui.Styles
         {
             return !Equals(color1, color2);
         }
+
+        public override string ToString()
+        {
+            return $"rgba({R}, {G}, {B}, {A})";
+        }
     }
 }

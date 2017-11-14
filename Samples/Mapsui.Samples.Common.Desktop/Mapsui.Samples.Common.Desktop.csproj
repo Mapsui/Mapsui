@@ -41,6 +41,9 @@
     <Reference Include="BruTile.Desktop, Version=0.22.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\BruTile.Desktop.0.22.1\lib\net45\BruTile.Desktop.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net" />
@@ -147,7 +150,7 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
-    <None Include="Resources\vector-tile-style.json" />
+    <EmbeddedResource Include="Resources\vector-tile-style.json" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

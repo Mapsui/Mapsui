@@ -70,7 +70,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.UI.Wpf", "Mapsui.UI.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Geometries.Tests", "Tests\Mapsui.Geometries.Tests\Mapsui.Geometries.Tests.csproj", "{46519792-2F00-4FB7-99EF-1465AC7B8994}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.VectorTiles", "Mapsui.VectorTiles\Mapsui.VectorTiles.csproj", "{2B876837-FC0E-4B35-92E1-9B2934BC3EBF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.VectorTiles", "Mapsui.VectorTiles\Mapsui.VectorTiles.csproj", "{2B876837-FC0E-4B35-92E1-9B2934BC3EBF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.VectorTiles.Tests", "Mapsui.VectorTiles.Tests\Mapsui.VectorTiles.Tests.csproj", "{652481C6-64E0-4EE9-82E3-7862C6C15808}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -169,6 +171,10 @@ Global
 		{2B876837-FC0E-4B35-92E1-9B2934BC3EBF}.Debug|AnyCPU.Build.0 = Debug|Any CPU
 		{2B876837-FC0E-4B35-92E1-9B2934BC3EBF}.Release|AnyCPU.ActiveCfg = Release|Any CPU
 		{2B876837-FC0E-4B35-92E1-9B2934BC3EBF}.Release|AnyCPU.Build.0 = Release|Any CPU
+		{652481C6-64E0-4EE9-82E3-7862C6C15808}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
+		{652481C6-64E0-4EE9-82E3-7862C6C15808}.Debug|AnyCPU.Build.0 = Debug|Any CPU
+		{652481C6-64E0-4EE9-82E3-7862C6C15808}.Release|AnyCPU.ActiveCfg = Release|Any CPU
+		{652481C6-64E0-4EE9-82E3-7862C6C15808}.Release|AnyCPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -186,6 +192,7 @@ Global
 		{5C1F0E76-BF98-4C6E-8AAB-CDB7E3735A9C} = {969DB691-49FB-4785-98F4-2112CC1BA7C4}
 		{FF1A03F0-8C0C-4FAB-A229-42AD625B5456} = {F7130D3D-4E62-4EB3-B74C-1E819E017048}
 		{46519792-2F00-4FB7-99EF-1465AC7B8994} = {F7130D3D-4E62-4EB3-B74C-1E819E017048}
+		{652481C6-64E0-4EE9-82E3-7862C6C15808} = {F7130D3D-4E62-4EB3-B74C-1E819E017048}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {22D684C3-0BD3-4D8A-AB23-748FB5527F6F}

@@ -14,7 +14,7 @@ namespace Mapsui.VectorTiles
         {
             var vectorTileLayers = Mapbox.Vector.Tile.VectorTileParser.Parse(new MemoryStream(tileData));
             var featureCollection = vectorTileLayers.Select(i => 
-                i.ToMapsui(tileInfo.Index.Col, tileInfo.Index.Row, int.Parse(tileInfo.Index.Level)));
+                i.ToMapsui(i.Name, tileInfo.Index.Col, tileInfo.Index.Row, int.Parse(tileInfo.Index.Level)));
             return featureCollection.SelectMany(i => i);
         }
     }

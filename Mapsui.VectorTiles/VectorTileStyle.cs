@@ -1,9 +1,11 @@
-﻿namespace Mapsui.VectorTiles
+﻿using Newtonsoft.Json;
+
+namespace Mapsui.VectorTiles
 {
     /// <summary>
     ///  Generated with paste special in Visual Studion
     /// </summary>
-    public class Rootobject
+    public class VectorTileStyle
     {
         public int version { get; set; }
         public string name { get; set; }
@@ -56,6 +58,7 @@
     public class Paint
     {
         public string backgroundcolor { get; set; }
+        [JsonProperty("fill-color")]
         public string fillcolor { get; set; }
         public object fillopacity { get; set; }
         public string linecolor { get; set; }
