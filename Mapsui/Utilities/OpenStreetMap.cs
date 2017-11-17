@@ -11,10 +11,15 @@ namespace Mapsui.Utilities
 
         public static TileLayer CreateTileLayer()
         {
-            return new TileLayer(new HttpTileSource(new GlobalSphericalMercator(0, 18),
-                        "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-                        new[] { "a", "b", "c" }, name: "OpenStreetMap",
-                        attribution: OpenStreetMapAttribution));
+            return new TileLayer(CreateTileSource()) { Name = "OpenStreetMap" };
+        }
+
+        private static HttpTileSource CreateTileSource()
+        {
+            return new HttpTileSource(new GlobalSphericalMercator(0, 18),
+                "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                new[] { "a", "b", "c" }, name: "OpenStreetMap",
+                attribution: OpenStreetMapAttribution);
         }
     }
 }
