@@ -98,10 +98,10 @@ namespace Mapsui.UI.iOS
 			if (!_viewportInitialized) InitializeViewport ();
 			if (!_viewportInitialized) return;
 
-			_map.Viewport.Width = _canvas.Frame.Width;
-			_map.Viewport.Height = _canvas.Frame.Height;
+		    _map.Viewport.Width = _canvas.Frame.Width;
+		    _map.Viewport.Height = _canvas.Frame.Height;
 
-			_skiaScale = (float)_canvas.ContentScaleFactor;
+            _skiaScale = (float)_canvas.ContentScaleFactor;
 			skPaintSurfaceEventArgs.Surface.Canvas.Scale(_skiaScale, _skiaScale);
 
             _renderer.Render(skPaintSurfaceEventArgs.Surface.Canvas, _map.Viewport, _map.Layers, _map.BackColor);
@@ -330,20 +330,30 @@ namespace Mapsui.UI.iOS
 	        set
 	        {
 	            _canvas.Frame = value;
-                Refresh();
-
                 base.Frame = value;
-	        }
-	    }
 
-	    public override void LayoutMarginsDidChange()
+	            if (_map?.Viewport == null) return; 
+
+	            _map.Viewport.Width = _canvas.Frame.Width;
+	            _map.Viewport.Height = _canvas.Frame.Height;
+
+                Refresh();
+            }
+        }
+
+        public override void LayoutMarginsDidChange()
 	    {
 	        if (_canvas == null) return;
 
 	        _canvas.Frame = _canvas.Frame;
-	        Refresh();
-
             base.LayoutMarginsDidChange();
-	    }
+
+	        if (_map?.Viewport == null) return;
+
+            _map.Viewport.Width = _canvas.Frame.Width;
+	        _map.Viewport.Height = _canvas.Frame.Height;
+
+            Refresh();
+        }
     }
 }
