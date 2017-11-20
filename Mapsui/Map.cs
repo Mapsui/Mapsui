@@ -95,6 +95,8 @@ namespace Mapsui
 
         public Viewport Viewport { get; }
 
+        public readonly AttributionPlacement AttributionPlacement = new AttributionPlacement();
+
         public void NavigateTo(BoundingBox extent, ScaleMethod scaleMethod = ScaleMethod.Fit)
         {
             Viewport.Resolution = ZoomHelper.DetermineResolution(
