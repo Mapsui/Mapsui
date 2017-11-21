@@ -33,7 +33,7 @@ namespace Mapsui.Fetcher
 
         private void Fetch(CancellationTokenSource cancellationTokenSource)
         {
-            while (!cancellationTokenSource.Token.IsCancellationRequested)
+            while (cancellationTokenSource != null && !cancellationTokenSource.Token.IsCancellationRequested)
             {
                 Action method = null;
                 
