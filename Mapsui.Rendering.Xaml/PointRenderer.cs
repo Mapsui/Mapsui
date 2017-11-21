@@ -16,15 +16,14 @@ namespace Mapsui.Rendering.Xaml
             XamlShapes.Shape symbol;
             var matrix = XamlMedia.Matrix.Identity;
 
-            if (style is SymbolStyle)
+            var symbolStyle = style as SymbolStyle;
+            if (symbolStyle != null)
             {
-                var symbolStyle = style as SymbolStyle;
-
                 if (symbolStyle.BitmapId < 0)
                     symbol = CreateSymbolFromVectorStyle(symbolStyle, symbolStyle.Opacity, symbolStyle.SymbolType);
                 else
                     symbol = CreateSymbolFromBitmap(symbolStyle.BitmapId, symbolStyle.Opacity, symbolCache);
-                matrix = CreatePointSymbolMatrix(viewport.Resolution, symbolStyle);
+                matrix = CreatePointSymbolMatrix(viewport.Resolution, viewport.Rotation, symbolStyle);
             }
             else
             {
@@ -34,7 +33,7 @@ namespace Mapsui.Rendering.Xaml
 
             MatrixHelper.Append(ref matrix, GeometryRenderer.CreateTransformMatrix(point, viewport));
 
-            symbol.RenderTransform = new XamlMedia.MatrixTransform {Matrix = matrix};
+            symbol.RenderTransform = new XamlMedia.MatrixTransform { Matrix = matrix };
             symbol.IsHitTestVisible = false;
 
             return symbol;
@@ -73,8 +72,7 @@ namespace Mapsui.Rendering.Xaml
                 brush.ToXaml() : new XamlMedia.SolidColorBrush(XamlColors.Transparent);
         }
 
-
-        private static XamlMedia.Matrix CreatePointSymbolMatrix(double resolution, SymbolStyle symbolStyle)
+        private static XamlMedia.Matrix CreatePointSymbolMatrix(double resolution, double mapRotation, SymbolStyle symbolStyle)
         {
             var matrix = XamlMedia.Matrix.Identity;
             MatrixHelper.InvertY(ref matrix);
@@ -88,7 +86,8 @@ namespace Mapsui.Rendering.Xaml
             //for point symbols we want the size to be independent from the resolution. We do this by counter scaling first.
             if (symbolStyle.UnitType != UnitType.WorldUnit)
                 MatrixHelper.ScaleAt(ref matrix, resolution, resolution);
-            MatrixHelper.RotateAt(ref matrix, -symbolStyle.SymbolRotation);
+
+            MatrixHelper.RotateAt(ref matrix, mapRotation - symbolStyle.SymbolRotation);
 
             return matrix;
         }
@@ -105,7 +104,7 @@ namespace Mapsui.Rendering.Xaml
             {
                 Data = new XamlMedia.RectangleGeometry
                 {
-                    Rect = new Rect(-width*0.5, -height*0.5, width, height)
+                    Rect = new Rect(-width * 0.5, -height * 0.5, width, height)
                 },
                 Fill = imageBrush,
                 Opacity = opacity
@@ -119,8 +118,8 @@ namespace Mapsui.Rendering.Xaml
             return new XamlMedia.EllipseGeometry
             {
                 Center = new XamlPoint(0, 0),
-                RadiusX = width*0.5,
-                RadiusY = height*0.5
+                RadiusX = width * 0.5,
+                RadiusY = height * 0.5
             };
         }
 
@@ -128,18 +127,18 @@ namespace Mapsui.Rendering.Xaml
         {
             return new XamlMedia.RectangleGeometry
             {
-                Rect = new Rect(width*-0.5, height*-0.5, width, height)
+                Rect = new Rect(width * -0.5, height * -0.5, width, height)
             };
         }
 
         public static void PositionPoint(UIElement renderedGeometry, Point point, IStyle style, IViewport viewport)
         {
             var matrix = XamlMedia.Matrix.Identity;
-            if (style is SymbolStyle) matrix = CreatePointSymbolMatrix(viewport.Resolution, style as SymbolStyle);
+            var symbolStyle = style as SymbolStyle;
+            if (symbolStyle != null) matrix = CreatePointSymbolMatrix(viewport.Resolution, viewport.Rotation, symbolStyle);
             else MatrixHelper.ScaleAt(ref matrix, viewport.Resolution, viewport.Resolution);
             MatrixHelper.Append(ref matrix, GeometryRenderer.CreateTransformMatrix(point, viewport));
             renderedGeometry.RenderTransform = new XamlMedia.MatrixTransform { Matrix = matrix };
         }
-
     }
 }
