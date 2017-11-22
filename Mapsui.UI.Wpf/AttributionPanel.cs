@@ -15,7 +15,7 @@ namespace Mapsui.UI.Wpf
             Children.Clear();
             foreach (var layer in layers)
             {
-                if (string.IsNullOrEmpty(layer.Attribution.Text)) continue;
+                if (string.IsNullOrEmpty(layer?.Attribution.Text)) continue;
                 var attribution = new StackPanel {Orientation = Orientation.Horizontal};
                 var textBlock = new TextBlock();
                 if (string.IsNullOrEmpty(layer.Attribution.Url))

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
@@ -18,16 +19,34 @@ namespace Mapsui.Samples.Common.Maps
         {
             var map = new Map();
 
-            map.Layers.Add(OpenStreetMap.CreateTileLayer());
+            var t = OpenStreetMap.CreateTileLayer();
+            var p = CreatePolygonLayer();
+            map.Layers.Add(t);
             map.Layers.Add(CreateInfoLayer(map.Envelope));
             map.Layers.Add(CreateHoverLayer(map.Envelope));
-            map.Layers.Add(CreatePolygonLayer());
+            map.Layers.Add(p);
 
             map.InfoLayers.Add(map.Layers.First(l => l.Name == InfoLayerName));
             map.InfoLayers.Add(map.Layers.First(l => l.Name == PolygonLayerName));
             map.HoverLayers.Add(map.Layers.First(l => l.Name == HoverLayerName));
-            
+
+            StartTimerToRemoveAndAddLayer(map,t, p);
+
             return map;
+        }
+
+        private static void StartTimerToRemoveAndAddLayer(Map map, ILayer t, ILayer p)
+        {
+            Task.Run(() =>
+            {
+                Task.Delay(5000).Wait();
+
+                map.Layers.Clear();
+                map.Layers.Add(t);
+                map.Layers.Add(CreateInfoLayer(map.Envelope));
+                map.Layers.Add(CreateHoverLayer(map.Envelope));
+                map.Layers.Add(p);
+            });
         }
 
         private static ILayer CreatePolygonLayer()
