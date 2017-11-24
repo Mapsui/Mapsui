@@ -13,18 +13,16 @@ Mapsui is a C# map component for apps
 - Uses BruTile to access tile services
 
 ## News
-- Oktober 13: Mapsui 1.1 has been [released](https://github.com/pauldendulk/Mapsui/releases/tag/1.1.0) with map rotation on Android and iOS. 
+- Oktober 13: Mapsui 1.1 has been [released](https://github.com/pauldendulk/Mapsui/releases/tag/1.1.0) with pinch rotation of the map on Android and iOS. 
 
 ## Getting Started
 [Here](https://github.com/pauldendulk/Mapsui/wiki/Getting-Started-with-Mapsui) is a getting started for WPF.
 
-## Wiki
-Please take a look at the [wiki](https://github.com/pauldendulk/Mapsui/wiki). Let us know what information you are missing for your projects. 
+## Documentation
+There is limited documentation, please take a look at the [wiki](https://github.com/pauldendulk/Mapsui/wiki). Let us know what information you are missing for your projects. 
 
-## Get it from NuGet 
-```
-PM> Install-Package Mapsui
-```
+## Samples
+The best way to get going with Mapsui is by using the Samples. If you clone the project there is a Samples folder with a Mapsui.Samples.Wpf project with the list of samples. The accompanying code can be found [here](https://github.com/pauldendulk/Mapsui/tree/master/Samples/Mapsui.Samples.Common/Maps).
 
 ## Questions
 If you have a question please submit an issue [here](https://github.com/pauldendulk/Mapsui/issues)
