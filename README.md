@@ -9,8 +9,7 @@ Mapsui is a C# map component for apps
 - Supported platforms: WPF, UWP, Android, iOS
 - The core PCL is Profile 111
 - Designed to be fast and responsive (see [architecture](https://github.com/pauldendulk/Mapsui/wiki/Async-Fetching))
-- Based on a modified version of SharpMap
-- Uses BruTile to access tile services
+- Started as a fork of SharpMap
 
 ## News
 - Oktober 13: Mapsui 1.1 has been [released](https://github.com/pauldendulk/Mapsui/releases/tag/1.1.0) with pinch rotation of the map on Android and iOS. 
