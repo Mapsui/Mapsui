@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Net;
@@ -62,8 +63,8 @@ namespace Mapsui.UI.Wpf
             Children.Add(_bboxRect);
 
             RenderElement.PaintSurface += SKElementOnPaintSurface;
-            CompositionTarget.Rendering += CompositionTargetRendering;
-
+            RenderingWeakEventManager.AddHandler(CompositionTargetRendering);
+            
             Map = new Map();
 
             Loaded += MapControlLoaded;
@@ -82,7 +83,7 @@ namespace Mapsui.UI.Wpf
             ManipulationDelta += OnManipulationDelta;
             ManipulationCompleted += OnManipulationCompleted;
             ManipulationInertiaStarting += OnManipulationInertiaStarting;
-            Dispatcher.ShutdownStarted += DispatcherShutdownStarted;
+            //!!!Dispatcher.ShutdownStarted += DispatcherShutdownStarted;
             IsManipulationEnabled = true;
         }
 
@@ -534,11 +535,6 @@ namespace Mapsui.UI.Wpf
                 if (DeveloperTools.DeveloperMode) FpsCounter.FramePlusOne();}
         }
 
-        private void DispatcherShutdownStarted(object sender, EventArgs e)
-        {
-            CompositionTarget.Rendering -= CompositionTargetRendering;
-        }
-
         public void ZoomToBox(Geometries.Point beginPoint, Geometries.Point endPoint)
         {
             double x, y, resolution;
@@ -704,6 +700,12 @@ namespace Mapsui.UI.Wpf
         public Geometries.Point ScreenToWorld(Geometries.Point screenPosition)
         {
             return SharedMapControl.ScreenToWorld(Map.Viewport, (float)_skiaScale.Y, screenPosition);
+        }
+
+        ~MapControl()
+        {
+            // Because we use weak events the finalizer will be called even while the event is still registered.
+            RenderingWeakEventManager.RemoveHandler(CompositionTargetRendering);
         }
     }
 }
