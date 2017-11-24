@@ -16,26 +16,25 @@ Mapsui is a C# map component for apps
 - Oktober 13: Mapsui 1.1 has been [released](https://github.com/pauldendulk/Mapsui/releases/tag/1.1.0) with map rotation on Android and iOS. 
 
 ## Getting Started
+[Here](https://github.com/pauldendulk/Mapsui/wiki/Getting-Started-with-Mapsui) is a getting started for WPF.
 
-Look [here](https://github.com/pauldendulk/Mapsui/wiki/Getting-Started-with-Mapsui)
+## Wiki
+Please take a look at the [wiki](https://github.com/pauldendulk/Mapsui/wiki). Let us know what information you are missing for your projects. 
 
 ## Get it from NuGet 
 ```
 PM> Install-Package Mapsui
 ```
 
-## Platforms Supported
+## Questions
+If you have a question please submit an issue [here](https://github.com/pauldendulk/Mapsui/issues)
+
+## Supported Platforms
 
 - **WPF** - Windows Desktop on .NET 4.5.2
 - **UWP** - Windows Store on Windows 10 build 10586
 - **Android** - Xamarin.Android on API Level 19 (v4.4 - Kit Kat)
 - **iOS** - Xamarin.iOS
-
-## Wiki
-Please take a look at the [wiki](https://github.com/pauldendulk/Mapsui/wiki). Let us know what information you are missing for your projects. 
-
-## Questions
-If you have a question please submit an [issue](https://github.com/pauldendulk/Mapsui/issues) or post a question on stackoverflow with the 'mapsui' tag (I will get a notification).
 
 ## License 
 
