@@ -170,17 +170,17 @@ namespace Mapsui.Rendering.Xaml
             }
             else
             {
-                var renderedGeometry = feature.RenderedGeometry.ContainsKey(style)
-                    ? feature.RenderedGeometry[style] as Shape
-                    : null;
-                if (renderedGeometry == null)
+                Shape renderedGeometry;
+                object cachedObject;
+                if (feature.RenderedGeometry.TryGetValue(style, out cachedObject))
                 {
-                    renderedGeometry = RenderGeometry(viewport, style, feature, symbolCache);
-                    if (!rasterizing) feature.RenderedGeometry[style] = renderedGeometry;
+                    renderedGeometry = (Shape)cachedObject; // Has to be Shape
+                    PositionGeometry(renderedGeometry, viewport, style, feature);
                 }
                 else
                 {
-                    PositionGeometry(renderedGeometry, viewport, style, feature);
+                    renderedGeometry = RenderGeometry(viewport, style, feature, symbolCache);
+                    if (!rasterizing) feature.RenderedGeometry[style] = renderedGeometry;
                 }
 
                 if (!canvas.Children.Contains(renderedGeometry))
