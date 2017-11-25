@@ -9,35 +9,29 @@ Mapsui is a C# map component for apps
 - Supported platforms: WPF, UWP, Android, iOS
 - The core PCL is Profile 111
 - Designed to be fast and responsive (see [architecture](https://github.com/pauldendulk/Mapsui/wiki/Async-Fetching))
-- Based on a modified version of SharpMap
-- Uses BruTile to access tile services
+- Started as a fork of SharpMap
 
 ## News
-- April 25: Mapsui 1.0 has been released! Read the [announcement](https://github.com/pauldendulk/Mapsui/releases/tag/1.0.0) 
-- May 7: First app using Mapsui 1.0 hits the store. Take a look at Breath Companion on [iOS](https://itunes.apple.com/us/app/botw-map/id1218936949) and [Android](https://play.google.com/store/apps/details?id=com.SoftwareNotion.BreathCompanion). It demonstrates offline maps with MBTiles, feature info, layer activation depending on resolution and shows Mapsui can be used in Xamarin.Forms.
-- May 25: Sebastian Kruse [blogs](https://development-blog.eu/an-own-map-with-mapsui-in-xamarin-forms-entwurf/) about how to use Mapsui in Xamarin.Forms
+- Oktober 13: Mapsui 1.1 has been [released](https://github.com/pauldendulk/Mapsui/releases/tag/1.1.0) with pinch rotation of the map on Android and iOS. 
 
 ## Getting Started
+[Here](https://github.com/pauldendulk/Mapsui/wiki/Getting-Started-with-Mapsui) is a getting started for WPF.
 
-Look [here](https://github.com/pauldendulk/Mapsui/wiki/Getting-Started-with-Mapsui)
+## Documentation
+There is limited documentation, please take a look at the [wiki](https://github.com/pauldendulk/Mapsui/wiki). Let us know what information you are missing for your projects. 
 
-## Get it from NuGet 
-```
-PM> Install-Package Mapsui
-```
+## Samples
+The best way to get going with Mapsui is by using the Samples. If you clone the project there is a Samples folder with a Mapsui.Samples.Wpf project with the list of samples. The accompanying code can be found [here](https://github.com/pauldendulk/Mapsui/tree/master/Samples/Mapsui.Samples.Common/Maps).
 
-## Platforms Supported
+## Questions
+If you have a question please submit an issue [here](https://github.com/pauldendulk/Mapsui/issues)
+
+## Supported Platforms
 
 - **WPF** - Windows Desktop on .NET 4.5.2
 - **UWP** - Windows Store on Windows 10 build 10586
 - **Android** - Xamarin.Android on API Level 19 (v4.4 - Kit Kat)
 - **iOS** - Xamarin.iOS
-
-## Wiki
-Please take a look at the [wiki](https://github.com/pauldendulk/Mapsui/wiki). Let us know what information you are missing for your projects. 
-
-## Questions
-If you have a question please submit an [issue](https://github.com/pauldendulk/Mapsui/issues) or post a question on stackoverflow with the 'mapsui' tag (I will get a notification).
 
 ## License 
 
