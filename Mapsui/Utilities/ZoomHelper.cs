@@ -24,7 +24,7 @@ namespace Mapsui.Utilities
     {
         public static double ZoomIn(IReadOnlyList<double> resolutions, double resolution)
         {
-            if (resolutions.Count == 0) return resolution/2.0;
+            if (resolutions == null || resolutions.Count == 0) return resolution / 2.0;
 
             // smaller than smallest
             if (resolutions[resolutions.Count - 1] > resolution) return resolutions[resolutions.Count - 1];
@@ -49,7 +49,7 @@ namespace Mapsui.Utilities
 
         public static double ZoomOut(IReadOnlyList<double> resolutions, double resolution)
         {
-            if (resolutions.Count == 0) return resolution*2.0;
+            if (resolutions == null || resolutions.Count == 0) return resolution * 2.0;
 
             //bigger than biggest
             if (resolutions[0] < resolution) return resolutions[0];
