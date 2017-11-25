@@ -8,7 +8,7 @@ namespace Mapsui.UI.Wpf
     {
         // based on: https://docs.microsoft.com/en-us/dotnet/framework/wpf/advanced/weak-event-patterns
 
-        // chose Weak event instead of Unsubscribe (The user needs to keep track of this) 
+        // chose weak events instead of Unsubscribe (The user needs to keep track of this) 
         // or Dispose (it breaks the contract https://stackoverflow.com/a/452294/85325).
 
         private RenderingWeakEventManager()
