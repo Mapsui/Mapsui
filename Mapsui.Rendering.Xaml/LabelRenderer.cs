@@ -6,7 +6,7 @@ using System.Windows;
 
 namespace Mapsui.Rendering.Xaml
 {
-    internal static class SingleLabelRenderer
+    internal static class LabelRenderer
     {
         public static UIElement RenderLabel(Geometries.Point position, LabelStyle labelStyle, IViewport viewport, 
             string labelText)

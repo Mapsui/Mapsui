@@ -17,11 +17,10 @@ namespace Mapsui.UI.iOS
 	public class MapControl: UIView, IMapControl
 	{
 		private Map _map;
-		private readonly MapRenderer _renderer = new MapRenderer ();
+		private readonly MapRenderer _renderer = new MapRenderer();
 		private readonly AttributionView _attributionPanel = new AttributionView ();
 		private readonly SKGLView _canvas = new SKGLView ();
 		private nuint _previousTouchCount = 0;
-		private bool _viewportInitialized;
 		private nfloat _previousX;
 		private nfloat _previousY;
 		private double _previousRadius;
@@ -74,7 +73,7 @@ namespace Mapsui.UI.iOS
 		    _attributionPanel.Layer.MasksToBounds = true;
 		    _attributionPanel.LayoutIfNeeded();
 
-            InitializeViewport ();
+            TryInitializeViewport ();
 
 			ClipsToBounds = true;
 
@@ -95,8 +94,8 @@ namespace Mapsui.UI.iOS
 
 		void OnPaintSurface (object sender, SKPaintGLSurfaceEventArgs skPaintSurfaceEventArgs)
 		{
-			if (!_viewportInitialized) InitializeViewport ();
-			if (!_viewportInitialized) return;
+			TryInitializeViewport();
+			if (!_map.Viewport.Initialized) return;
 
 		    _map.Viewport.Width = _canvas.Frame.Width;
 		    _map.Viewport.Height = _canvas.Frame.Height;
@@ -104,14 +103,16 @@ namespace Mapsui.UI.iOS
             _skiaScale = (float)_canvas.ContentScaleFactor;
 			skPaintSurfaceEventArgs.Surface.Canvas.Scale(_skiaScale, _skiaScale);
 
-            _renderer.Render(skPaintSurfaceEventArgs.Surface.Canvas, _map.Viewport, _map.Layers, _map.BackColor);
+            _renderer.Render(skPaintSurfaceEventArgs.Surface.Canvas, 
+                _map.Viewport, _map.Layers, _map.Widgets, _map.BackColor);
 		}
 
-		private void InitializeViewport ()
+		private void TryInitializeViewport()
 		{
-			if (ViewportHelper.TryInitializeViewport (_map, _canvas.Frame.Width, _canvas.Frame.Height))
+		    if (_map.Viewport.Initialized) return;
+
+			if (_map.Viewport.TryInitializeViewport (_map, _canvas.Frame.Width, _canvas.Frame.Height))
 			{
-				_viewportInitialized = true;
 				Map.ViewChanged (true);
 				OnViewportInitialized ();
 			}

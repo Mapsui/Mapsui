@@ -22,6 +22,7 @@ using Mapsui.Geometries;
 using Mapsui.Projection;
 using Mapsui.Providers;
 using Mapsui.Styles;
+using Mapsui.Widgets;
 
 namespace Mapsui.Layers
 {
@@ -95,7 +96,7 @@ namespace Mapsui.Layers
         /// <returns>True if is does, false if it does not, null if it is unknown</returns>
         bool? IsCrsSupported(string crs);
 
-        Attribution Attribution { get; }
+        Hyperlink Attribution { get; }
 
         IReadOnlyList<double> Resolutions { get; }
     }

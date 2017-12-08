@@ -27,6 +27,7 @@ using Mapsui.Rendering;
 using Mapsui.Styles;
 using Mapsui.UI;
 using Mapsui.Utilities;
+using Mapsui.Widgets;
 
 namespace Mapsui
 {
@@ -47,6 +48,9 @@ namespace Mapsui
             Layers = new LayerCollection();
             Viewport =  new Viewport { Center = { X = double.NaN, Y = double.NaN }, Resolution = double.NaN };
         }
+
+        public List<Widget> Widgets { get; } = new List<Widget>();
+
         public PanMode PanMode { get; set; } = PanMode.KeepCenterWithinExtents;
 
         public ZoomMode ZoomMode { get; set; } = ZoomMode.KeepWithinResolutions;
@@ -94,8 +98,6 @@ namespace Mapsui
         public IList<ILayer> HoverLayers { get; } = new List<ILayer>();
 
         public Viewport Viewport { get; }
-
-        public readonly AttributionPlacement AttributionPlacement = new AttributionPlacement();
 
         public void NavigateTo(BoundingBox extent, ScaleMethod scaleMethod = ScaleMethod.Fit)
         {

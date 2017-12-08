@@ -6,6 +6,7 @@ using Mapsui.Geometries;
 using Mapsui.Projection;
 using Mapsui.Providers;
 using Mapsui.Styles;
+using Mapsui.Widgets;
 
 namespace Mapsui.Layers
 {
@@ -231,7 +232,7 @@ namespace Mapsui.Layers
             return style?.ToArray() ?? new[] { layer.Style };
         }
 
-        public Attribution Attribution { get; } = new Attribution();
+        public Hyperlink Attribution { get; } = new Hyperlink{ BackColor = Color.Orange};
 
         public virtual IReadOnlyList<double> Resolutions { get; } = new List<double>();
     }

@@ -50,7 +50,6 @@ namespace Mapsui.UI.Uwp
         private bool _invalid;
         private Map _map;
         private Point _previousPosition;
-        private bool _viewportInitialized;
         private Geometries.Point _skiaScale;
 
         public event EventHandler ViewportInitialized;
@@ -133,7 +132,7 @@ namespace Mapsui.UI.Uwp
         
         public Map Map
         {
-            get { return _map; }
+            get => _map;
             set
             {
                 if (_map != null)
@@ -149,7 +148,6 @@ namespace Mapsui.UI.Uwp
 
                 if (_map != null)
                 {
-                    _viewportInitialized = false;
                     _map.DataChanged += MapDataChanged;
                     _map.PropertyChanged += MapPropertyChanged;
                     _map.RefreshGraphics += MapOnRefreshGraphics;
@@ -198,7 +196,7 @@ namespace Mapsui.UI.Uwp
         private void MapControl_PointerWheelChanged(object sender, PointerRoutedEventArgs e)
         {
             if (ZoomLocked) return;
-            if (!_viewportInitialized) return;
+            if (!_map.Viewport.Initialized) return;
 
             var currentPoint = e.GetCurrentPoint(this);
             //Needed for both MouseMove and MouseWheel event for mousewheel event
@@ -269,7 +267,7 @@ namespace Mapsui.UI.Uwp
         public void ZoomIn()
         {
             if (ZoomLocked) return;
-            if (!_viewportInitialized) return;
+            if (!_map.Viewport.Initialized) return;
 
             Map.Viewport.Resolution = ZoomHelper.ZoomIn(_map.Resolutions, Map.Viewport.Resolution);
 
@@ -279,7 +277,7 @@ namespace Mapsui.UI.Uwp
         public void ZoomOut()
         {
             if (ZoomLocked) return;
-            if (!_viewportInitialized) return;
+            if (!_map.Viewport.Initialized) return;
 
             Map.Viewport.Resolution = ZoomHelper.ZoomOut(_map.Resolutions, Map.Viewport.Resolution);
 
@@ -293,7 +291,7 @@ namespace Mapsui.UI.Uwp
 
         private void MapControlLoaded(object sender, RoutedEventArgs e)
         {
-            if (!_viewportInitialized) InitializeViewport();
+            TryInitializeViewport();
             UpdateSize();
             InitAnimation();
         }
@@ -311,7 +309,7 @@ namespace Mapsui.UI.Uwp
 
         private void MapControlSizeChanged(object sender, SizeChangedEventArgs e)
         {
-            if (!_viewportInitialized) InitializeViewport();
+            TryInitializeViewport();
             Clip = new RectangleGeometry { Rect = new Rect(0, 0, ActualWidth, ActualHeight) };
             UpdateSize();
             _map.ViewChanged(true);
@@ -366,18 +364,19 @@ namespace Mapsui.UI.Uwp
 
         private void _renderTarget_PaintSurface(object sender, SKPaintSurfaceEventArgs e)
         {
-            if (!_viewportInitialized) InitializeViewport();
-            if (!_viewportInitialized) return; //stop if the line above failed. 
+            if (_renderer == null) return;
+            if (_map == null) return;
             if (!_invalid) return;
 
-            if ((_renderer != null) && (_map != null))
-            {
-                if (_skiaScale == null) _skiaScale = GetSkiaScale();
-                e.Surface.Canvas.Scale((float)_skiaScale.X, (float)_skiaScale.Y);
-                _renderer.Render(e.Surface.Canvas, Map.Viewport, _map.Layers, _map.BackColor);
-                _renderTarget.Arrange(new Rect(0, 0, Map.Viewport.Width, Map.Viewport.Height));
-                _invalid = false;
-            }
+            TryInitializeViewport();
+            if (!_map.Viewport.Initialized) return; 
+            
+            if (_skiaScale == null) _skiaScale = GetSkiaScale();
+            e.Surface.Canvas.Scale((float)_skiaScale.X, (float)_skiaScale.Y);
+            _renderer.Render(e.Surface.Canvas, Map.Viewport, _map.Layers, _map.Widgets, _map.BackColor);
+            _renderTarget.Arrange(new Rect(0, 0, Map.Viewport.Width, Map.Viewport.Height));
+            _invalid = false;
+ 
         }
 
         public void ZoomToBox(Geometries.Point beginPoint, Geometries.Point endPoint)
@@ -465,11 +464,12 @@ namespace Mapsui.UI.Uwp
             Refresh();
         }
 
-        private void InitializeViewport()
+        private void TryInitializeViewport()
         {
-            if (ViewportHelper.TryInitializeViewport(_map, ActualWidth, ActualHeight))
+            if (_map.Viewport.Initialized) return;
+
+            if (_map.Viewport.TryInitializeViewport(_map, ActualWidth, ActualHeight))
             {
-                _viewportInitialized = true;
                 Map.ViewChanged(true);
                 OnViewportInitialized();
             }

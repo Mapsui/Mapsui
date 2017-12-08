@@ -15,6 +15,7 @@
 // along with SharpMap; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
+using System;
 using Mapsui.Geometries;
 using Mapsui.Utilities;
 using System.Runtime.CompilerServices;
@@ -25,6 +26,7 @@ namespace Mapsui
     public class Viewport : IViewport
     {
         public event PropertyChangedEventHandler ViewportChanged;
+        public bool Initialized { get; private set; }
 
         private readonly BoundingBox _extent;
         private Quad _windowExtent;
@@ -34,6 +36,7 @@ namespace Mapsui
         private double _rotation;
         private readonly NotifyingPoint _center = new NotifyingPoint();
         private bool _modified = true;
+        
 
         public Viewport()
         {
@@ -66,7 +69,7 @@ namespace Mapsui
 
         public Point Center
         {
-            get { return _center; }
+            get => _center;
             set
             {
                 _center.X = value.X;
@@ -77,7 +80,7 @@ namespace Mapsui
 
         public double Resolution
         {
-            get { return _resolution; }
+            get => _resolution;
             set
             {
                 _resolution = value;
@@ -87,7 +90,7 @@ namespace Mapsui
 
         public double Width
         {
-            get { return _width; }
+            get => _width;
             set
             {
                 _width = value;
@@ -97,7 +100,7 @@ namespace Mapsui
 
         public double Height
         {
-            get { return _height; }
+            get => _height;
             set
             {
                 _height = value;
@@ -107,7 +110,7 @@ namespace Mapsui
 
         public double Rotation
         {
-            get { return _rotation; }
+            get => _rotation;
             set
             {
                 // normalize the value to be [0, 360)
@@ -252,6 +255,39 @@ namespace Mapsui
             }
 
             _modified = false;
+        }
+
+        public bool TryInitializeViewport(Map map, double screenWidth, double screenHeight)
+        {
+            if (screenWidth.IsNanOrZero()) return false;
+            if (screenHeight.IsNanOrZero()) return false;
+
+            if (double.IsNaN(map.Viewport.Resolution)) // only when not set yet
+            {
+                if (!map.Envelope.IsInitialized()) return false;
+                if (map.Envelope.GetCentroid() == null) return false;
+
+                if (Math.Abs(map.Envelope.Width) > Constants.Epsilon)
+                    map.Viewport.Resolution = map.Envelope.Width / screenWidth;
+                else
+                    // An envelope width of zero can happen when there is no data in the Maps' layers (yet).
+                    // It should be possible to start with an empty map.
+                    map.Viewport.Resolution = Constants.DefaultResolution;
+            }
+
+            if (double.IsNaN(map.Viewport.Center.X) || double.IsNaN(map.Viewport.Center.Y)) // only when not set yet
+            {
+                if (!map.Envelope.IsInitialized()) return false;
+                if (map.Envelope.GetCentroid() == null) return false;
+
+                map.Viewport.Center = map.Envelope.GetCentroid();
+            }
+
+            map.Viewport.Width = screenWidth;
+            map.Viewport.Height = screenHeight;
+            
+            Initialized = true;
+            return true;
         }
     }
 }

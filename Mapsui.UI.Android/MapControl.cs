@@ -25,7 +25,6 @@ namespace Mapsui.UI.Android
         private double _previousAngle;
         private readonly PointF _currentMid = new PointF();
         private float _oldDist = 1f;
-        private bool _viewportInitialized;
         private Rendering.Skia.MapRenderer _renderer;
         private SKCanvasView _canvas;
         private Map _map;
@@ -59,7 +58,7 @@ namespace Mapsui.UI.Android
             
             Map = new Map();
             _renderer = new Rendering.Skia.MapRenderer();
-            InitializeViewport();
+            TryInitializeViewport();
             Touch += MapView_Touch;
         }
 
@@ -80,21 +79,20 @@ namespace Mapsui.UI.Android
 
         private void CanvasOnPaintSurface(object sender, SKPaintSurfaceEventArgs args)
         {
-            if (!_viewportInitialized)
-                InitializeViewport();
-            if (!_viewportInitialized)
-                return;
+            TryInitializeViewport();
+            if (!_map.Viewport.Initialized) return;
 
             args.Surface.Canvas.Scale(_scale, _scale);
 
-            _renderer.Render(args.Surface.Canvas, _map.Viewport, _map.Layers, _map.BackColor);
+            _renderer.Render(args.Surface.Canvas, _map.Viewport, _map.Layers, _map.Widgets, _map.BackColor);
         }
 
-        private void InitializeViewport()
+        private void TryInitializeViewport()
         {
-            if (ViewportHelper.TryInitializeViewport(_map, Width / _scale, Height / _scale))
+            if (_map.Viewport.Initialized) return;
+
+            if (_map.Viewport.TryInitializeViewport(_map, Width / _scale, Height / _scale))
             {
-                _viewportInitialized = true;
                 Map.ViewChanged(true);
                 OnViewportInitialized();
             }
