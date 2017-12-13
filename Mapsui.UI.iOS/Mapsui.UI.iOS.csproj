@@ -34,7 +34,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ExtensionMethods\CGPointExtensions.cs" />
-    <Compile Include="FpsCounter.cs" />
     <Compile Include="MapControl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
