@@ -35,6 +35,7 @@ using Mapsui.Fetcher;
 using Mapsui.Layers;
 using Mapsui.Rendering;
 using Mapsui.Rendering.Skia;
+using Mapsui.Utilities;
 using Mapsui.Widgets;
 using SkiaSharp.Views.UWP;
 using HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment;
@@ -376,9 +377,11 @@ namespace Mapsui.UI.Uwp
             if (width <= 0) return;
             if (height <= 0) return;
 
-            ZoomHelper.ZoomToBoudingbox(beginPoint.X, beginPoint.Y, endPoint.X, endPoint.Y, ActualWidth, out x, out y,
-                out resolution);
-            resolution = ZoomHelper.ClipToExtremes(_map.Resolutions, resolution);
+            ZoomHelper.ZoomToBoudingbox(
+                beginPoint.X, beginPoint.Y, endPoint.X, endPoint.Y, 
+                Map.Viewport.Width, Map.Viewport.Height, 
+                out x, out y, out resolution);
+            resolution = ZoomHelper.ClipResolutionToExtremes(_map.Resolutions, resolution);
 
             Map.Viewport.Center = new Geometries.Point(x, y);
             Map.Viewport.Resolution = resolution;

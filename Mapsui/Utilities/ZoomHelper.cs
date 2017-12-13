@@ -116,7 +116,7 @@ namespace Mapsui.Utilities
 
             viewport.Resolution = resolution;
         }
-
+        
         private static void Swap(ref double xMin, ref double xMax)
         {
             var tempX = xMin;
