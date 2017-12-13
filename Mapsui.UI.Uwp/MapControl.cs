@@ -48,7 +48,6 @@ namespace Mapsui.UI.Uwp
         private readonly IRenderer _renderer;
         private readonly Rectangle _bboxRect = CreateSelectRectangle();
         private readonly SKXamlCanvas _renderTarget = CreateRenderTarget();
-        private readonly AttributionPanel _attributionPanel = CreateAttributionPanel();
         private readonly DoubleAnimation _zoomAnimation = new DoubleAnimation();
         private readonly Storyboard _zoomStoryBoard = new Storyboard();
         private bool _invalid;
@@ -64,8 +63,7 @@ namespace Mapsui.UI.Uwp
 
             Children.Add(_renderTarget);
             Children.Add(_bboxRect);
-            Children.Add(_attributionPanel);
-
+    
             _renderTarget.PaintSurface += _renderTarget_PaintSurface;
                         
             Map = new Map();
@@ -113,16 +111,7 @@ namespace Mapsui.UI.Uwp
                 Visibility = Visibility.Collapsed
             };
         }
-
-        private static AttributionPanel CreateAttributionPanel()
-        {
-            return new AttributionPanel
-            {
-                VerticalAlignment = VerticalAlignment.Bottom,
-                HorizontalAlignment = HorizontalAlignment.Right
-            };
-        }
-
+        
         private static SKXamlCanvas CreateRenderTarget()
         {
             return new SKXamlCanvas
@@ -158,7 +147,6 @@ namespace Mapsui.UI.Uwp
                     _map.RefreshGraphics += MapOnRefreshGraphics;
 
                     _map.ViewChanged(true);
-                    _attributionPanel.Populate(Map.Layers);
                 }
 
                 RefreshGraphics();
@@ -191,10 +179,6 @@ namespace Mapsui.UI.Uwp
             else if (e.PropertyName == nameof(Layer.Opacity))
             {
                 RefreshGraphics();
-            }
-            else if (e.PropertyName == nameof(Map.Layers))
-            {
-                _attributionPanel.Populate(Map.Layers);
             }
         }
 
