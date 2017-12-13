@@ -34,9 +34,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ExtensionMethods\BoundingBoxExtensions.cs" />
+    <Compile Include="ExtensionMethods\SKRectExtensions.cs" />
     <Compile Include="SymbolCache.cs" />
     <Compile Include="BitmapHelper.cs" />
-    <Compile Include="ExtensionMethods\SkiaExtensions.cs" />
+    <Compile Include="ExtensionMethods\ColorExtensions.cs" />
     <Compile Include="LabelRenderer.cs" />
     <Compile Include="LineStringRenderer.cs" />
     <Compile Include="MapRenderer.cs" />

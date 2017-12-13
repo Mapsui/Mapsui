@@ -22,6 +22,7 @@ using System.Threading.Tasks;
 using Windows.Devices.Sensors;
 using Windows.Foundation;
 using Windows.Graphics.Display;
+using Windows.System;
 using Windows.UI;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
@@ -34,8 +35,11 @@ using Mapsui.Fetcher;
 using Mapsui.Layers;
 using Mapsui.Rendering;
 using Mapsui.Rendering.Skia;
+using Mapsui.Widgets;
 using SkiaSharp.Views.UWP;
+using HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment;
 using Point = Windows.Foundation.Point;
+using VerticalAlignment = Windows.UI.Xaml.VerticalAlignment;
 
 namespace Mapsui.UI.Uwp
 {
@@ -89,7 +93,8 @@ namespace Mapsui.UI.Uwp
 
         private void OnTapped(object sender, TappedRoutedEventArgs e)
         {
-            Map.InvokeInfo(e.GetPosition(this).ToMapsui(), 1, _renderer.SymbolCache);
+            var tabPosition = e.GetPosition(this).ToMapsui();
+            Map.InvokeInfo(tabPosition, tabPosition, 1, _renderer.SymbolCache, WidgetTouch);
         }
 
         private static Rectangle CreateSelectRectangle()
@@ -494,6 +499,11 @@ namespace Mapsui.UI.Uwp
         public Geometries.Point ScreenToWorld(Geometries.Point screenPosition)
         {
             return SharedMapControl.ScreenToWorld(Map.Viewport, (float)_skiaScale.Y, screenPosition);
+        }
+
+        private void WidgetTouch(IWidget widget)
+        {
+            Launcher.LaunchUriAsync(new Uri(((Hyperlink)widget).Url));
         }
     }
 }

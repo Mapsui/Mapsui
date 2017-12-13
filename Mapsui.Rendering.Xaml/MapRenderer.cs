@@ -30,12 +30,14 @@ namespace Mapsui.Rendering.Xaml
         }
 
         public void Render(object target, IViewport viewport, IEnumerable<ILayer> layers,
-            IEnumerable<Widget> widgets, Color background = null)
+            IEnumerable<IWidget> widgets, Color background = null)
         {
-            Render((Canvas) target, viewport, layers, widgets, background);
+            var allWidgets = layers.Select(l => l.Attribution).ToList().Concat(widgets);
+
+            Render((Canvas) target, viewport, layers, allWidgets, background);
         }
         private void Render(Canvas canvas, IViewport viewport, IEnumerable<ILayer> layers, 
-            IEnumerable<Widget> widgets, Color background = null)
+            IEnumerable<IWidget> widgets, Color background = null)
         {
             Clear(canvas, background);
             if (viewport.Initialized) Render(canvas, viewport, layers);
@@ -47,7 +49,7 @@ namespace Mapsui.Rendering.Xaml
             Render(target, viewport, layers,  _symbolCache, false);
         }
 
-        private void Render(object target, IEnumerable<Widget> widgets)
+        private void Render(object target, IEnumerable<IWidget> widgets)
         {
             WidgetRenderer.Render(target, widgets);
         }

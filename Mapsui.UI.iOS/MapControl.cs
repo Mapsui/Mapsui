@@ -9,6 +9,7 @@ using System.Linq;
 using CoreGraphics;
 using Mapsui.Geometries;
 using Mapsui.Geometries.Utilities;
+using Mapsui.Widgets;
 using SkiaSharp.Views.iOS;
 
 namespace Mapsui.UI.iOS
@@ -200,7 +201,8 @@ namespace Mapsui.UI.iOS
 		{
 		    var screenPosition = GetScreenPosition(touches);
 		    if (screenPosition == null) return;
-		    Map.InvokeInfo(screenPosition, _skiaScale, _renderer.SymbolCache);  
+            // todo: Pass down position
+		    Map.InvokeInfo(screenPosition, screenPosition, _skiaScale, _renderer.SymbolCache, WidgetTouch);  
 		}
 
         /// <returns>The screen position as Mapsui point. Can be null.</returns>
@@ -356,5 +358,10 @@ namespace Mapsui.UI.iOS
 
             Refresh();
         }
+
+	    private static void WidgetTouch(IWidget widget)
+	    {
+	        if (widget is Hyperlink) System.Diagnostics.Process.Start(((Hyperlink)widget).Url);
+	    }
     }
 }

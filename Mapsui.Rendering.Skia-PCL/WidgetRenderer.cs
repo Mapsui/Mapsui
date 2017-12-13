@@ -8,16 +8,16 @@ namespace Mapsui.Rendering.Skia
 {
     public static class WidgetRenderer
     {
-        public static void Render(object target, double screenWidth, double screenHeight, IEnumerable<Widget> widgets)
+        public static void Render(object target, double screenWidth, double screenHeight, IEnumerable<IWidget> widgets)
         {
             var canvas = (SKCanvas)target;
             foreach (var widget in widgets)
             {
-                if (widget is TextBox) DrawAttribution(canvas, screenWidth, screenHeight, widget as TextBox);
+                if (widget is Hyperlink) DrawHyperlink(canvas, screenWidth, screenHeight, widget as Hyperlink);
             }
         }
 
-        private static void DrawAttribution(SKCanvas canvas, double screenWidth, double screenHeight, TextBox textBox)
+        private static void DrawHyperlink(SKCanvas canvas, double screenWidth, double screenHeight, Hyperlink textBox)
         {
             if (textBox.Text == null) return; // todo: fix this for widgets without text
             var textPaint = new SKPaint { Color = textBox.TextColor.ToSkia(), IsAntialias = true };
@@ -35,6 +35,7 @@ namespace Mapsui.Rendering.Skia
             var offsetY = GetOffsetY(backRect.Height, textBox.MarginY, textBox.VerticalAlignment, screenHeight);
             backRect.Offset(offsetX, offsetY);
             canvas.DrawRoundRect(backRect, textBox.CornerRadius, textBox.CornerRadius, backPaint);
+            textBox.Envelope = backRect.ToMapsui();
             // To position the text within the backRect correct using the textRect's offset.
             canvas.DrawText(textBox.Text,
                 offsetX - textRect.Left + textBox.PaddingX,

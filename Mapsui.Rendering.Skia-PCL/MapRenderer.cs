@@ -30,13 +30,14 @@ namespace Mapsui.Rendering.Skia
             DefaultRendererFactory.Create = () => new MapRenderer();
         }
         public void Render(object target, IViewport viewport, IEnumerable<ILayer> layers,
-            IEnumerable<Widget> widgets, Color background = null)
+            IEnumerable<IWidget> widgets, Color background = null)
         {
-            Render((SKCanvas)target, viewport, layers, widgets, background);
+            var allWidgets = layers.Select(l => l.Attribution).ToList().Concat(widgets);
+            Render((SKCanvas)target, viewport, layers, allWidgets, background);
         }
 
         private void Render(SKCanvas canvas, IViewport viewport, IEnumerable<ILayer> layers,
-            IEnumerable<Widget> widgets, Color background = null)
+            IEnumerable<IWidget> widgets, Color background = null)
         {
             if (background != null) canvas.Clear(background.ToSkia());
             if (viewport.Initialized) Render(canvas, viewport, layers);
@@ -126,7 +127,7 @@ namespace Mapsui.Rendering.Skia
                 RasterRenderer.Draw(canvas, viewport, style, feature, _tileCache, _currentIteration);
         }
 
-        private void Render(object canvas, IViewport viewport, IEnumerable<Widget> widgets)
+        private void Render(object canvas, IViewport viewport, IEnumerable<IWidget> widgets)
         {
             WidgetRenderer.Render(canvas, viewport.Width, viewport.Height, widgets);
         }

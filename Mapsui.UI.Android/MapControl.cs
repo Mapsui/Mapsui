@@ -9,6 +9,7 @@ using Java.Lang;
 using Mapsui.Fetcher;
 using Mapsui.Layers;
 using Mapsui.Logging;
+using Mapsui.Widgets;
 using SkiaSharp.Views.Android;
 using Math = System.Math;
 
@@ -20,10 +21,12 @@ namespace Mapsui.UI.Android
         private const int Dragging = 1;
         private const int Zoom = 2;
         private int _mode = None;
-        private PointF _previousMap, _currentMap;
-        private PointF _previousMid = new PointF();
+        private PointF _touchPosition;
+        private PointF _previousTouchPosition;
+        private PointF _touchCenter = new PointF();
+        private PointF _previousTouchCenter = new PointF();
+        private PointF _touchDownPosition = new PointF();
         private double _previousAngle;
-        private readonly PointF _currentMid = new PointF();
         private float _oldDist = 1f;
         private Rendering.Skia.MapRenderer _renderer;
         private SKCanvasView _canvas;
@@ -111,51 +114,53 @@ namespace Mapsui.UI.Android
             switch (args.Event.Action)
             {
                 case MotionEventActions.Down:
-                    _previousMap = null;
+                    _previousTouchPosition = null;
+                    _touchDownPosition = new PointF(x, y);
                     _mode = Dragging;
                     break;
                 case MotionEventActions.Up:
-                    _previousMap = null;
                     _canvas.Invalidate();
                     _mode = None;
                     _map.ViewChanged(true);
-                    Map.InvokeInfo(GetScreenPosition(args.Event), _scale, _renderer.SymbolCache);
+                    var position = GetScreenPosition(args.Event);
+                    Map.InvokeInfo(position, _touchDownPosition.ToMapsui(), _scale, _renderer.SymbolCache, WidgetTouch);
                     break;
                 case MotionEventActions.Pointer2Down:
-                    _previousMap = null;
+                    _previousTouchPosition = null;
                     _oldDist = Spacing(args.Event);
-                    MidPoint(_currentMid, args.Event);
-                    _previousMid = _currentMid;
+                    _touchCenter = GetTouchCenter(args.Event);
+                    _previousTouchCenter = _touchCenter;
                     if (AllowPinchRotation)
                     {
                         _previousAngle = Angle(args.Event);
                     }
+                    _touchDownPosition = _touchCenter;
                     _mode = Zoom;
                     break;
                 case MotionEventActions.Pointer2Up:
-                    _previousMap = null;
-                    _previousMid = null;
+                    _previousTouchPosition = null;
+                    _previousTouchCenter = null;
                     _mode = Dragging;
                     break;
                 case MotionEventActions.Move:
                     switch (_mode)
                     {
                         case Dragging:
-                            _currentMap = new PointF(x, y);
-                            if (_previousMap != null)
+                            _touchPosition = new PointF(x, y);
+                            if (_previousTouchPosition != null)
                             {
                                 _map.Viewport.Transform(
-                                    _currentMap.X  / _scale,
-                                    _currentMap.Y / _scale,
-                                    _previousMap.X / _scale,
-                                    _previousMap.Y / _scale);
+                                    _touchPosition.X  / _scale,
+                                    _touchPosition.Y / _scale,
+                                    _previousTouchPosition.X / _scale,
+                                    _previousTouchPosition.Y / _scale);
 
                                 ViewportLimiter.LimitExtent(_map.Viewport,
                                     _map.PanMode, _map.PanLimits, _map.Envelope);
 
                                 _canvas.Invalidate();
                             }
-                            _previousMap = _currentMap;
+                            _previousTouchPosition = _touchPosition;
                             break;
                         case Zoom:
                             {
@@ -166,15 +171,15 @@ namespace Mapsui.UI.Android
                                 var scale = newDist / _oldDist;
 
                                 _oldDist = Spacing(args.Event);
-                                _previousMid = new PointF(_currentMid.X, _currentMid.Y);
-                                MidPoint(_currentMid, args.Event);
+                                _previousTouchCenter = new PointF(_touchCenter.X, _touchCenter.Y);
+                                _touchCenter = GetTouchCenter(args.Event);
 
                                 
                                 _map.Viewport.Transform(
-                                    _currentMid.X / _scale,
-                                    _currentMid.Y / _scale,
-                                    _previousMid.X / _scale,
-                                    _previousMid.Y / _scale,
+                                    _touchCenter.X / _scale,
+                                    _touchCenter.Y / _scale,
+                                    _previousTouchCenter.X / _scale,
+                                    _previousTouchCenter.Y / _scale,
                                     scale);
 
                                 if (AllowPinchRotation)
@@ -217,17 +222,13 @@ namespace Mapsui.UI.Android
             return (float)Math.Sqrt(x * x + y * y);
         }
 
-        private static void MidPoint(PointF point, MotionEvent motionEvent)
+        private static PointF GetTouchCenter(MotionEvent motionEvent)
         {
-            var position = GetPosition2(motionEvent);
-            point.Set(position.X / 2, position.Y / 2);
+            return new PointF(
+                motionEvent.GetX(0) + motionEvent.GetX(1) / 2,
+                motionEvent.GetY(0) + motionEvent.GetY(1) / 2);
         }
         
-        private static PointF GetPosition2(MotionEvent motionEvent)
-        {
-            return new PointF(motionEvent.GetX(0) + motionEvent.GetX(1), motionEvent.GetY(0) + motionEvent.GetY(1));
-        }
-
         private static Geometries.Point GetScreenPosition(MotionEvent motionEvent)
         {
             return new PointF(motionEvent.GetX(0), motionEvent.GetY(0)).ToMapsui();
@@ -365,6 +366,12 @@ namespace Mapsui.UI.Android
         public Geometries.Point ScreenToWorld(Geometries.Point screenPosition)
         {
             return SharedMapControl.ScreenToWorld(Map.Viewport, _scale, screenPosition);
+        }
+
+
+        private void WidgetTouch(IWidget widget)
+        {
+            if (widget is Hyperlink) System.Diagnostics.Process.Start(((Hyperlink)widget).Url);
         }
     }
 }

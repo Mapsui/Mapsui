@@ -2,7 +2,7 @@
 
 namespace Mapsui.Widgets
 {
-    public class TextBox : Widget
+    public abstract class TextBox : Widget // abstract for now, since there is no renderer.
     {
         public int PaddingX { get; set; }
         public int PaddingY { get; set; }

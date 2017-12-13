@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Net;
 using System.Windows;
 using System.Windows.Controls;
@@ -49,13 +48,12 @@ namespace Mapsui.UI.Wpf
         private Geometries.Point _skiaScale;
         private double _toResolution = double.NaN;
         private bool _hasBeenManipulated;
-        private readonly AttributionPanel _attributionPanel = CreateAttributionPanel();
+        private float _scale = 1; // scale is always 1 in WPF
 
         public MapControl()
         {
             Children.Add(RenderCanvas);
             Children.Add(RenderElement);
-            Children.Add(_attributionPanel);
             Children.Add(_bboxRect);
 
             RenderElement.PaintSurface += SKElementOnPaintSurface;
@@ -79,6 +77,7 @@ namespace Mapsui.UI.Wpf
             ManipulationDelta += OnManipulationDelta;
             ManipulationCompleted += OnManipulationCompleted;
             ManipulationInertiaStarting += OnManipulationInertiaStarting;
+            
             IsManipulationEnabled = true;
         }
 
@@ -127,7 +126,6 @@ namespace Mapsui.UI.Wpf
                     _map.PropertyChanged += MapPropertyChanged;
                     _map.RefreshGraphics += MapRefreshGraphics;
                     _map.ViewChanged(true);
-                    _attributionPanel.Populate(Map.Layers);
                 }
 
                 RefreshGraphics();
@@ -208,10 +206,6 @@ namespace Mapsui.UI.Wpf
                 else if (e.PropertyName == nameof(Layer.Opacity))
                 {
                     RefreshGraphics();
-                }
-                else if (e.PropertyName == nameof(Map.Layers))
-                {
-                    _attributionPanel.Populate(Map.Layers.ToList());
                 }
             }
         }
@@ -415,8 +409,9 @@ namespace Mapsui.UI.Wpf
 
         private void MapControlMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            _previousMousePosition = e.GetPosition(this);
-            _downMousePosition = e.GetPosition(this);
+            var touchPosition = e.GetPosition(this);
+            _previousMousePosition = touchPosition;
+            _downMousePosition = touchPosition;
             _mouseDown = true;
             CaptureMouse();
             IsInBoxZoomMode = Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl);
@@ -424,17 +419,20 @@ namespace Mapsui.UI.Wpf
 
         private void MapControlMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
+            var mousePosition = e.GetPosition(this).ToMapsui();
+
             if (IsInBoxZoomMode || ZoomToBoxMode)
             {
                 ZoomToBoxMode = false;
                 var previous = Map.Viewport.ScreenToWorld(_previousMousePosition.X, _previousMousePosition.Y);
-                var current = Map.Viewport.ScreenToWorld(e.GetPosition(this).X, e.GetPosition(this).Y);
+                var current = Map.Viewport.ScreenToWorld(mousePosition);
                 ZoomToBox(previous, current);
             }
             else
             {
                 HandleFeatureInfo(e);
-                Map.InvokeInfo(e.GetPosition(this).ToMapsui(), 1, Renderer.SymbolCache);
+                Map.InvokeInfo(mousePosition, _downMousePosition.ToMapsui(), _scale, 
+                    Renderer.SymbolCache, WidgetTouch);
             }
 
             _map.ViewChanged(true);
@@ -448,8 +446,19 @@ namespace Mapsui.UI.Wpf
         private void MapControlTouchUp(object sender, TouchEventArgs e)
         {
             if (!_hasBeenManipulated)
-                Map.InvokeInfo(e.GetTouchPoint(this).Position.ToMapsui(), 1, Renderer.SymbolCache);
+            {
+                var touchPosition = e.GetTouchPoint(this).Position.ToMapsui();
+                // todo: Pass the touchDown position. It needs to be set at touch down.
+                Map.InvokeInfo(touchPosition, touchPosition, _scale, Renderer.SymbolCache, WidgetTouch);
+            }
         }
+
+        private void WidgetTouch(Widgets.IWidget widget)
+        {
+            if (widget is Widgets.Hyperlink)
+                System.Diagnostics.Process.Start(((Widgets.Hyperlink)widget).Url); 
+        }
+
 
         private void HandleFeatureInfo(MouseButtonEventArgs e)
         {
@@ -674,14 +683,6 @@ namespace Mapsui.UI.Wpf
             _invalid = false;
         }
 
-        private static AttributionPanel CreateAttributionPanel()
-        {
-            return new AttributionPanel
-            {
-                VerticalAlignment = VerticalAlignment.Bottom,
-                HorizontalAlignment = HorizontalAlignment.Right
-            };
-        }
 
         public Geometries.Point WorldToScreen(Geometries.Point worldPosition)
         {
