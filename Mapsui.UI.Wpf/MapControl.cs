@@ -131,9 +131,7 @@ namespace Mapsui.UI.Wpf
                 RefreshGraphics();
             }
         }
-
-        public FpsCounter FpsCounter { get; } = new FpsCounter();
-
+        
         public string ErrorMessage { get; private set; }
 
         public bool ZoomLocked { get; set; }
@@ -538,8 +536,6 @@ namespace Mapsui.UI.Wpf
             Renderer.Render(RenderCanvas, Map.Viewport, _map.Layers, Map.Widgets, _map.BackColor);
 
             _invalid = false;
-
-            if (DeveloperTools.DeveloperMode) FpsCounter.FramePlusOne();
         }
 
         public void ZoomToBox(Geometries.Point beginPoint, Geometries.Point endPoint)
