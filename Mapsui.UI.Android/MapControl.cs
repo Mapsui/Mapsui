@@ -31,7 +31,6 @@ namespace Mapsui.UI.Android
         private Rendering.Skia.MapRenderer _renderer;
         private SKCanvasView _canvas;
         private Map _map;
-        private AttributionPanel _attributionPanel;
         private float _scale;
         
         public event EventHandler ViewportInitialized;
@@ -56,9 +55,7 @@ namespace Mapsui.UI.Android
             _canvas = new SKCanvasView(Context);
             _canvas.PaintSurface += CanvasOnPaintSurface;
             AddView(_canvas);
-
-            AddView(_attributionPanel = new AttributionPanel(Context));
-            
+           
             Map = new Map();
             _renderer = new Rendering.Skia.MapRenderer();
             TryInitializeViewport();
@@ -250,7 +247,6 @@ namespace Mapsui.UI.Android
                     temp.PropertyChanged -= MapPropertyChanged;
                     temp.RefreshGraphics -= MapRefreshGraphics;
                     temp.AbortFetch ();
-                    _attributionPanel.Clear();
                 }
 
                 _map = value;
@@ -261,7 +257,6 @@ namespace Mapsui.UI.Android
                     _map.PropertyChanged += MapPropertyChanged;
                     _map.RefreshGraphics += MapRefreshGraphics;
                     _map.ViewChanged(true);
-                    _attributionPanel.Populate(Map.Layers);
 					PushSizeOntoViewport ();
                 }
 
@@ -283,10 +278,6 @@ namespace Mapsui.UI.Android
             else if (e.PropertyName == nameof(Layer.Opacity))
             {
                 RefreshGraphics();
-            }
-            else if (e.PropertyName == nameof(Map.Layers))
-            {
-                _attributionPanel.Populate(Map.Layers);
             }
         }
 
@@ -333,8 +324,6 @@ namespace Mapsui.UI.Android
         protected override void OnLayout(bool changed, int l, int t, int r, int b)
         {
             Position(_canvas, l, t, r, b);
-            UpdateSize(_attributionPanel);
-            PositionBottomRight(_attributionPanel);
         }
 
         private void Position(View view, int l, int t, int r, int b)
