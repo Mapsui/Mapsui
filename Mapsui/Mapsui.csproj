@@ -39,7 +39,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AttributionPlacement.cs" />
     <Compile Include="ExtensionMethods\BoundingBoxExtensions.cs" />
     <Compile Include="ExtensionMethods\DoubleExtensions.cs" />
     <Compile Include="ExtensionMethods\EventWaitHandleExtensions.cs" />
