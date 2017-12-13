@@ -50,12 +50,12 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Extensions\RectExtensions.cs" />
-    <Compile Include="Extensions\VerticalAlignment.cs" />
-    <Compile Include="Extensions\HorizontalAlignment.cs" />
-    <Compile Include="Extensions\BitmapImageExtensions.cs" />
+    <Compile Include="ExtensionMethods\RectExtensions.cs" />
+    <Compile Include="ExtensionMethods\VerticalAlignment.cs" />
+    <Compile Include="ExtensionMethods\HorizontalAlignment.cs" />
+    <Compile Include="ExtensionMethods\BitmapImageExtensions.cs" />
     <Compile Include="SymbolCache.cs" />
-    <Compile Include="Extensions\GeometryExtensions.cs" />
+    <Compile Include="ExtensionMethods\GeometryExtensions.cs" />
     <Compile Include="GeometryRenderer.cs" />
     <Compile Include="LineStringRenderer.cs" />
     <Compile Include="MapRenderer.cs" />
@@ -68,9 +68,9 @@
     <Compile Include="RasterizingProvider.cs" />
     <Compile Include="StackedLabelLayerRenderer.cs" />
     <Compile Include="LabelRenderer.cs" />
-    <Compile Include="Extensions\StreamExtensions.cs" />
+    <Compile Include="ExtensionMethods\StreamExtensions.cs" />
     <Compile Include="StyleConverter.cs" />
-    <Compile Include="Extensions\StyleExtensions.cs" />
+    <Compile Include="ExtensionMethods\StyleExtensions.cs" />
     <Compile Include="BitmapRendering\BitmapConverter.cs" />
     <Compile Include="WidgetRenderer.cs" />
   </ItemGroup>
