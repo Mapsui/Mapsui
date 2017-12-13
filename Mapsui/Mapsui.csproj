@@ -65,7 +65,6 @@
     <Compile Include="Geometries\NotifyingPoint.cs" />
     <Compile Include="Layers\AnimatedFeatures.cs" />
     <Compile Include="Layers\AnimatedPointLayer.cs" />
-    <Compile Include="UI\WidgetEventArgs.cs" />
     <Compile Include="Widgets\Hyperlink.cs" />
     <Compile Include="Widgets\IWidget.cs" />
     <Compile Include="Widgets\TextBox.cs" />
