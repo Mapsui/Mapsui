@@ -108,12 +108,8 @@ namespace Mapsui.Utilities
             double screenWidth, double screenHeight,
             ScaleMethod scaleMethod = ScaleMethod.Fit)
         {
-            double centerX;
-            double centerY;
-            double resolution;
-
             ZoomToBoudingbox(x1, y1, x2, y2, screenWidth, screenHeight,
-                out centerX, out centerY, out resolution, scaleMethod);
+                out var centerX, out var centerY, out var resolution, scaleMethod);
 
             viewport.Center.X = centerX;
             viewport.Center.Y = centerY;
