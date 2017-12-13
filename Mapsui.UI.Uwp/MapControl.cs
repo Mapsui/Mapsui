@@ -371,7 +371,6 @@ namespace Mapsui.UI.Uwp
 
         public void ZoomToBox(Geometries.Point beginPoint, Geometries.Point endPoint)
         {
-            double x, y, resolution;
             var width = Math.Abs(endPoint.X - beginPoint.X);
             var height = Math.Abs(endPoint.Y - beginPoint.Y);
             if (width <= 0) return;
@@ -380,7 +379,7 @@ namespace Mapsui.UI.Uwp
             ZoomHelper.ZoomToBoudingbox(
                 beginPoint.X, beginPoint.Y, endPoint.X, endPoint.Y, 
                 Map.Viewport.Width, Map.Viewport.Height, 
-                out x, out y, out resolution);
+                out var x, out var y, out var resolution);
             resolution = ZoomHelper.ClipResolutionToExtremes(_map.Resolutions, resolution);
 
             Map.Viewport.Center = new Geometries.Point(x, y);
