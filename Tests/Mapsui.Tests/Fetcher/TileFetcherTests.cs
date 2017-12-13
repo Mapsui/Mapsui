@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using BruTile;
+﻿using BruTile;
 using BruTile.Cache;
 using BruTile.Predefined;
 using Mapsui.Fetcher;
