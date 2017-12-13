@@ -51,7 +51,7 @@ namespace Mapsui.Utilities
         {
             if (resolutions == null || resolutions.Count == 0) return resolution * 2.0;
 
-            //bigger than biggest
+            // bigger than biggest
             if (resolutions[0] < resolution) return resolutions[0];
 
             for (var i = resolutions.Count - 1; i >= 0; i--)
