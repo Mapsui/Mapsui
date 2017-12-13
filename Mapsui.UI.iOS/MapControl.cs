@@ -19,7 +19,6 @@ namespace Mapsui.UI.iOS
 	{
 		private Map _map;
 		private readonly MapRenderer _renderer = new MapRenderer();
-		private readonly AttributionView _attributionPanel = new AttributionView ();
 		private readonly SKGLView _canvas = new SKGLView ();
 		private nuint _previousTouchCount = 0;
 		private nfloat _previousX;
@@ -51,29 +50,15 @@ namespace Mapsui.UI.iOS
 			_canvas.ClipsToBounds = true;
 			_canvas.MultipleTouchEnabled = true;
 
-			_attributionPanel.TranslatesAutoresizingMaskIntoConstraints = false;
-
-			AddSubview (_canvas);
-			AddSubview (_attributionPanel);
-
+		    AddSubview (_canvas);
+			
 			AddConstraints (new [] {
 				NSLayoutConstraint.Create(this, NSLayoutAttribute.Leading, NSLayoutRelation.Equal, _canvas, NSLayoutAttribute.Leading, 1.0f, 0.0f),
 				NSLayoutConstraint.Create(this, NSLayoutAttribute.Trailing, NSLayoutRelation.Equal, _canvas, NSLayoutAttribute.Trailing, 1.0f, 0.0f),
 				NSLayoutConstraint.Create(this, NSLayoutAttribute.Top, NSLayoutRelation.Equal, _canvas, NSLayoutAttribute.Top, 1.0f, 0.0f),
-				NSLayoutConstraint.Create(this, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, _canvas, NSLayoutAttribute.Bottom, 1.0f, 0.0f),
-
-				NSLayoutConstraint.Create(_attributionPanel, NSLayoutAttribute.CenterX, NSLayoutRelation.Equal, this, NSLayoutAttribute.CenterX, 1.0f, 0.0f),
-				NSLayoutConstraint.Create(_attributionPanel, NSLayoutAttribute.Top, NSLayoutRelation.Equal, this, NSLayoutAttribute.Top, 1.0f, 28.0f),
-				NSLayoutConstraint.Create(_attributionPanel, NSLayoutAttribute.Bottom, NSLayoutRelation.LessThanOrEqual, this, NSLayoutAttribute.Bottom, 1.0f, 0.0f)
+				NSLayoutConstraint.Create(this, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, _canvas, NSLayoutAttribute.Bottom, 1.0f, 0.0f)
 			});
-
-			_attributionPanel.ClipsToBounds = true;
-			_attributionPanel.BackgroundColor = UIColor.FromRGBA(255, 255, 255, 191);
-			_attributionPanel.TintColor = UIColor.Black;
-		    _attributionPanel.Layer.CornerRadius = 8.0f;
-		    _attributionPanel.Layer.MasksToBounds = true;
-		    _attributionPanel.LayoutIfNeeded();
-
+            
             TryInitializeViewport ();
 
 			ClipsToBounds = true;
@@ -82,15 +67,6 @@ namespace Mapsui.UI.iOS
 			UserInteractionEnabled = true;
 
 			_canvas.PaintSurface += OnPaintSurface;
-		}
-
-		public override void AddSubview (UIView view)
-		{
-			base.AddSubview (view);
-			if (_attributionPanel != null && Subviews.Contains(_attributionPanel))
-			{
-				BringSubviewToFront (_attributionPanel);
-			}
 		}
 
 		void OnPaintSurface (object sender, SKPaintGLSurfaceEventArgs skPaintSurfaceEventArgs)
@@ -234,7 +210,6 @@ namespace Mapsui.UI.iOS
 					temp.PropertyChanged -= MapPropertyChanged;
 					temp.RefreshGraphics -= MapRefreshGraphics;
 					temp.AbortFetch ();
-					_attributionPanel.Clear ();
 				}
 
 				_map = value;
@@ -245,7 +220,6 @@ namespace Mapsui.UI.iOS
 					_map.PropertyChanged += MapPropertyChanged;
 					_map.RefreshGraphics += MapRefreshGraphics;
 					_map.ViewChanged (true);
-					_attributionPanel.Populate (Map.Layers, Frame);
 				}
 
 				RefreshGraphics ();
@@ -267,10 +241,6 @@ namespace Mapsui.UI.iOS
 			{
 				RefreshGraphics ();
 			}
-            else if (e.PropertyName == nameof (Map.Layers))
-            {
-                _attributionPanel.Populate(Map.Layers, Frame);
-            }
 		}
 
 		private void MapDataChanged (object sender, DataChangedEventArgs e)

@@ -334,19 +334,6 @@ namespace Mapsui.UI.Android
             view.Right = r;
         }
 
-        private void PositionBottomRight(View view)
-        {
-            Position(view, Right - view.Width, Bottom - view.Height, Right, Bottom);
-        }
-
-        private static void UpdateSize(View view)
-        {
-            // I created this method because I don't understand what I'm doing
-            view.Measure(0, 0);
-            view.Right = view.Left + view.MeasuredWidth;
-            view.Bottom = view.Top + view.MeasuredHeight;
-        }
-
         public Geometries.Point WorldToScreen(Geometries.Point worldPosition)
         {
             return SharedMapControl.WorldToScreen(Map.Viewport, _scale, worldPosition);
@@ -356,7 +343,6 @@ namespace Mapsui.UI.Android
         {
             return SharedMapControl.ScreenToWorld(Map.Viewport, _scale, screenPosition);
         }
-
 
         private void WidgetTouch(IWidget widget)
         {

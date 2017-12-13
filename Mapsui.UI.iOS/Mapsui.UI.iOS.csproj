@@ -33,7 +33,6 @@
     <CodesignKey>iPhone Developer</CodesignKey>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="AttributionView.cs" />
     <Compile Include="ExtensionMethods\CGPointExtensions.cs" />
     <Compile Include="FpsCounter.cs" />
     <Compile Include="MapControl.cs" />
