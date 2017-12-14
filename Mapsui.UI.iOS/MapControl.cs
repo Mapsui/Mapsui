@@ -26,6 +26,7 @@ namespace Mapsui.UI.iOS
 		private double _previousRadius;
 		private double _previousRotation;
 	    private float _skiaScale;
+	    private Point _touchDown = new Point();
 
 		public event EventHandler ViewportInitialized;
 
@@ -100,7 +101,13 @@ namespace Mapsui.UI.iOS
 			ViewportInitialized?.Invoke (this, EventArgs.Empty);
 		}
 
-		public override void TouchesMoved (NSSet touches, UIEvent evt)
+	    public override void TouchesBegan(NSSet touches, UIEvent evt)
+	    {
+	        _touchDown = GetScreenPosition(touches);
+	        base.TouchesBegan(touches, evt);
+	    }
+        
+	    public override void TouchesMoved (NSSet touches, UIEvent evt)
 		{
 			base.TouchesMoved (touches, evt);
 
@@ -170,15 +177,13 @@ namespace Mapsui.UI.iOS
 			Refresh ();
 			HandleInfo (e.AllTouches);
 		    _previousTouchCount = 0;
-
 		}
 
 		private void HandleInfo (NSSet touches)
 		{
 		    var screenPosition = GetScreenPosition(touches);
 		    if (screenPosition == null) return;
-            // todo: Pass down position
-		    Map.InvokeInfo(screenPosition, screenPosition, _skiaScale, _renderer.SymbolCache, WidgetTouch);  
+     	    Map.InvokeInfo(screenPosition, _touchDown, _skiaScale, _renderer.SymbolCache, WidgetTouch);  
 		}
 
         /// <returns>The screen position as Mapsui point. Can be null.</returns>
