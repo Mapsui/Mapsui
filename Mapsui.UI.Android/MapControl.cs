@@ -105,8 +105,8 @@ namespace Mapsui.UI.Android
 
         public void MapView_Touch(object sender, TouchEventArgs args)
         {
-            var x = (int)args.Event.RawX;
-            var y = (int)args.Event.RawY;
+            var x = (int)args.Event.GetX(0);
+            var y = (int)args.Event.GetY(0);
 
             switch (args.Event.Action)
             {
@@ -346,7 +346,17 @@ namespace Mapsui.UI.Android
 
         private void WidgetTouch(IWidget widget)
         {
-            if (widget is Hyperlink) System.Diagnostics.Process.Start(((Hyperlink)widget).Url);
+            if (widget is Hyperlink)
+            {
+                var hyperlink = (Hyperlink) widget;
+                global::Android.Net.Uri uri = global::Android.Net.Uri.Parse(hyperlink.Url);
+                Intent intent = new Intent(Intent.ActionView);
+                intent.SetData(uri);
+
+                Intent chooser = Intent.CreateChooser(intent, "Open with");
+
+                Context.StartActivity(chooser);
+            }
         }
     }
 }

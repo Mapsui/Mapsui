@@ -200,10 +200,10 @@ namespace Mapsui
         public void InvokeInfo(Point screenPosition, Point startScreenPosition, float scale, ISymbolCache symbolCache,
             Action<IWidget> widgetCallback)
         {
-            var allWidgets = Layers.Select(l => l.Attribution).ToList().Concat(Widgets);
+            var allWidgets = Layers.Select(l => l.Attribution).Where(a => a != null).ToList().Concat(Widgets);
             
             // First check if a Widget is clicked. In the current design they are always on top of the map.
-            var widget = WidgetTouch.GetWidget(screenPosition, startScreenPosition, allWidgets);
+            var widget = WidgetTouch.GetWidget(screenPosition, startScreenPosition, scale, allWidgets);
             if (widget != null)
             {
                 widgetCallback(widget);

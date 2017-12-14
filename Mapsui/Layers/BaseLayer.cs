@@ -232,7 +232,7 @@ namespace Mapsui.Layers
             return style?.ToArray() ?? new[] { layer.Style };
         }
 
-        public Hyperlink Attribution { get; } = new Hyperlink{ BackColor = Color.Orange};
+        public Hyperlink Attribution { get; set; }
 
         public virtual IReadOnlyList<double> Resolutions { get; } = new List<double>();
     }
