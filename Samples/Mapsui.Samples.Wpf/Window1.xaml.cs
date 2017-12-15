@@ -126,8 +126,6 @@ namespace Mapsui.Samples.Wpf
                 MapControl.Map.Info += MapControlOnInfo;
                 MapControl.Map.Hover += MapControlOnHover;
                 LayerList.Initialize(MapControl.Map.Layers);
-                MapControl.Refresh();
-                
             };
             return radioButton;
         }
