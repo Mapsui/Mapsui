@@ -6,7 +6,7 @@ using Mapsui.Styles;
 
 namespace Mapsui.Tests.Common.Maps
 {
-    public static class CircleAndSquareSymbolSample
+    public static class SymbolTypesSample
     {
         public static Map CreateMap()
         {
@@ -24,7 +24,7 @@ namespace Mapsui.Tests.Common.Maps
             map.Layers.Add(new MemoryLayer
             {
                 DataSource = new MemoryProvider(CreateFeatures()),
-                Name = "Circle and square symbols"
+                Name = "Symbol Types"
             });
             return map;
         }
@@ -56,6 +56,19 @@ namespace Mapsui.Tests.Common.Maps
                             Fill = new Brush {Color = Color.Gray},
                             Outline = new Pen(Color.Black),
                             SymbolType = SymbolType.Rectangle
+                        }
+                    }
+                },
+                new Feature
+                {
+                    Geometry = new Point(-20, 20),
+                    Styles = new List<IStyle>
+                    {
+                        new SymbolStyle
+                        {
+                            Fill = new Brush {Color = Color.Gray},
+                            Outline = new Pen(Color.Black),
+                            SymbolType = SymbolType.Triangle
                         }
                     }
                 }
