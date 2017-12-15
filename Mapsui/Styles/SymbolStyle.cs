@@ -6,7 +6,8 @@ namespace Mapsui.Styles
     public enum SymbolType
     {
         Ellipse,
-        Rectangle
+        Rectangle,
+        Triangle,
     }
 
     public enum UnitType
