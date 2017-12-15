@@ -24,7 +24,8 @@ namespace Mapsui.Tests.Common.Maps
             map.Layers.Add(new MemoryLayer
             {
                 DataSource = new MemoryProvider(CreateFeatures()),
-                Name = "Symbol Types"
+                Name = "Symbol Types",
+                Style = null
             });
             return map;
         }
