@@ -58,6 +58,19 @@ namespace Mapsui.Tests.Common.Maps
                             SymbolType = SymbolType.Rectangle
                         }
                     }
+                },
+                new Feature
+                {
+                    Geometry = new Point(-20, 20),
+                    Styles = new List<IStyle>
+                    {
+                        new SymbolStyle
+                        {
+                            Fill = new Brush {Color = Color.Gray},
+                            Outline = new Pen(Color.Black),
+                            SymbolType = SymbolType.Triangle
+                        }
+                    }
                 }
             };
         }
