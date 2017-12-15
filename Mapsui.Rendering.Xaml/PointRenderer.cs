@@ -1,5 +1,6 @@
 ﻿using Mapsui.Styles;
 using Point = Mapsui.Geometries.Point;
+using System;
 using System.Windows;
 using XamlMedia = System.Windows.Media;
 using XamlShapes = System.Windows.Shapes;
@@ -56,10 +57,20 @@ namespace Mapsui.Rendering.Xaml
                 path.StrokeDashArray = style.Outline.PenStyle.ToXaml();
             }
 
-            if (symbolType == SymbolType.Ellipse)
-                path.Data = CreateEllipse(SymbolStyle.DefaultWidth, SymbolStyle.DefaultHeight);
-            else
-                path.Data = CreateRectangle(SymbolStyle.DefaultWidth, SymbolStyle.DefaultHeight);
+            switch (symbolType)
+            {
+                case SymbolType.Ellipse:
+                    path.Data = CreateEllipse(SymbolStyle.DefaultWidth, SymbolStyle.DefaultHeight);
+                    break;
+                case SymbolType.Rectangle:
+                    path.Data = CreateRectangle(SymbolStyle.DefaultWidth, SymbolStyle.DefaultHeight);
+                    break;
+                case SymbolType.Triangle:
+                    path.Data = CreateTriangle(SymbolStyle.DefaultWidth);
+                    break;
+                default: // Invalid value
+                    throw new ArgumentOutOfRangeException();
+            }                
 
             path.Opacity = opacity;
 
@@ -128,6 +139,32 @@ namespace Mapsui.Rendering.Xaml
             return new XamlMedia.RectangleGeometry
             {
                 Rect = new Rect(width * -0.5, height * -0.5, width, height)
+            };
+        }
+
+        /// <summary>
+        /// Equilateral triangle of side 'sideLength', centered on the same point as if a circle of diameter 'sideLength' was there
+        /// </summary>
+        private static XamlMedia.PathGeometry CreateTriangle(double sideLength)
+        {
+            var altitude = Math.Sqrt(3) / 2.0 * sideLength;
+            var inradius = altitude / 3.0;
+            var circumradius = 2.0 * inradius;
+
+            var top = new XamlPoint(0, -circumradius);
+            var left = new XamlPoint(sideLength * -0.5, inradius);
+            var right = new XamlPoint(sideLength * 0.5, inradius);
+
+            var segments = new XamlMedia.PathSegmentCollection();
+            segments.Add(new XamlMedia.LineSegment(left, true));
+            segments.Add(new XamlMedia.LineSegment(right, true));
+            var figure = new XamlMedia.PathFigure(top, segments, true);
+            var figures = new XamlMedia.PathFigureCollection();
+            figures.Add(figure);
+
+            return new XamlMedia.PathGeometry
+            {
+                Figures = figures
             };
         }
 
