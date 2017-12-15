@@ -1,7 +1,7 @@
 @ECHO OFF
 SETLOCAL
 SET VERSION=%1
-SET NUGET=.\tools\nuget\nuget.exe
+SET NUGET=nuget.exe
 
 CALL Scripts\buildpack %VERSION%
 ECHO buildpack done
