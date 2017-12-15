@@ -489,7 +489,7 @@ namespace Mapsui.UI.Uwp
 
         private void WidgetTouch(IWidget widget)
         {
-            Launcher.LaunchUriAsync(new Uri(((Hyperlink)widget).Url));
+            Task.Run(() => Launcher.LaunchUriAsync(new Uri(((Hyperlink)widget).Url)));
         }
     }
 }
