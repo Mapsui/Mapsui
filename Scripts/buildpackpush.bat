@@ -3,7 +3,7 @@ SETLOCAL
 SET VERSION=%1
 SET NUGET=.\tools\nuget\nuget.exe
 
-CALL Scripts\buildpack %VERSION%
+CALL Scripts\buildpack %VERSION%-beta
 ECHO buildpack done
 %NUGET% push .\Release\Mapsui.%VERSION%-beta.nupkg -source nuget.org
 ECHO nuget push done
