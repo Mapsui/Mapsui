@@ -85,7 +85,7 @@ namespace Mapsui.Rendering.Skia
                     DrawRect(canvas, rect, fillPaint, linePaint);
                     break;
                 case SymbolType.Triangle:
-                    DrawTriangle(canvas, width, fillPaint, linePaint);
+                    DrawTriangle(canvas, 0, 0, width, fillPaint, linePaint);
                     break;
                 default: // Invalid value
                     throw new ArgumentOutOfRangeException();
@@ -133,15 +133,15 @@ namespace Mapsui.Rendering.Skia
         /// <summary>
         /// Equilateral triangle of side 'sideLength', centered on the same point as if a circle of diameter 'sideLength' was there
         /// </summary>
-        private static void DrawTriangle(SKCanvas canvas, float sideLength, SKPaint fillColor, SKPaint lineColor)
+        private static void DrawTriangle(SKCanvas canvas, float x, float y, float sideLength, SKPaint fillColor, SKPaint lineColor)
         {
             var altitude = Math.Sqrt(3) / 2.0 * sideLength;
             var inradius = altitude / 3.0;
             var circumradius = 2.0 * inradius;
 
-            var top = new Point(0, -circumradius);
-            var left = new Point(sideLength * -0.5, inradius);
-            var right = new Point(sideLength * 0.5, inradius);
+            var top = new Point(x, y - circumradius);
+            var left = new Point(x + sideLength * -0.5, y + inradius);
+            var right = new Point(x + sideLength * 0.5, y + inradius);
 
             var path = new SKPath();
             path.MoveTo((float)top.X, (float)top.Y);
