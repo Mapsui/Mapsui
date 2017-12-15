@@ -71,7 +71,7 @@ namespace Mapsui.Rendering.Xaml.Tests
         public void RenderPointsWithDifferentSymbolTypes()
         {
             // arrange
-            var map = CircleAndSquareSymbolSample.CreateMap();
+            var map = SymbolTypesSample.CreateMap();
             const string fileName = "vector_symbol_symboltype.png";
             
             // act
