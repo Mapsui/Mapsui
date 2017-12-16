@@ -336,7 +336,7 @@ namespace Mapsui.UI.iOS
 
 	    private static void WidgetTouch(IWidget widget)
 	    {
-	        if (widget is Hyperlink) System.Diagnostics.Process.Start(((Hyperlink)widget).Url);
-	    }
+	        if (widget is Hyperlink) UIApplication.SharedApplication.OpenUrl(new NSUrl(((Hyperlink)widget).Url));
+        }
     }
 }
