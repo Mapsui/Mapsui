@@ -23,7 +23,7 @@
     <FileUpdate Files="@(AssemblyFiles)"
         Multiline="true"
         Singleline="false"
-        Regex="(AssemblyFileVersion)\(&quot;(.*?)?&quot;\)"
+        Regex="(AssemblyVersion|AssemblyFileVersionAttribute|AssemblyFileVersion)\(&quot;(.*?)?&quot;\)"
         ReplacementText="$1(&quot;$(AsmVersion)&quot;)" />
 </Target>
 </Project>
