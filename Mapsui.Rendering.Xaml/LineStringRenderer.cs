@@ -27,6 +27,7 @@ namespace Mapsui.Rendering.Xaml
             }
             path.Stroke = new System.Windows.Media.SolidColorBrush(style.Line.Color.ToXaml());
             path.StrokeDashArray = style.Line.PenStyle.ToXaml();
+            path.StrokeEndLineCap = style.Line.PenStrokeCap.ToXaml();
             path.Tag = style.Line.Width; // see #linewidthhack
             path.IsHitTestVisible = false;
             return path;

@@ -35,6 +35,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ExtensionMethods\BoundingBoxExtensions.cs" />
+    <Compile Include="ExtensionMethods\PenStrokeCapExtensions.cs" />
     <Compile Include="ExtensionMethods\SKRectExtensions.cs" />
     <Compile Include="SymbolCache.cs" />
     <Compile Include="BitmapHelper.cs" />

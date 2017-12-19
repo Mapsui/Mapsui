@@ -3,6 +3,7 @@ namespace Mapsui.Styles
     public class Pen
     {
         private PenStyle _penStyle = PenStyle.Solid;
+        private PenStrokeCap _penStrokeCap = PenStrokeCap.Butt;
 
         public Pen() {}
 
@@ -19,6 +20,12 @@ namespace Mapsui.Styles
         {
             get { return _penStyle; }
             set { _penStyle = value; }
+        }
+
+        public PenStrokeCap PenStrokeCap
+        {
+            get { return _penStrokeCap; }
+            set { _penStrokeCap = value; }
         }
 
         public override bool Equals(object obj)
