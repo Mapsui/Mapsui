@@ -28,6 +28,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using Mapsui.Logging;
+using Mapsui.Widgets;
 
 namespace Mapsui.Layers
 {
@@ -84,6 +85,7 @@ namespace Mapsui.Layers
 
             if (_tileSource != null)
             {
+                if (Attribution == null) Attribution = new Hyperlink();
                 Attribution.Text = _tileSource.Attribution?.Text;
                 Attribution.Url = _tileSource.Attribution?.Url;
             }

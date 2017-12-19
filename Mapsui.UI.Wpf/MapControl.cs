@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
 using System.Net;
 using System.Windows;
 using System.Windows.Controls;
@@ -15,7 +14,6 @@ using Mapsui.Providers;
 using Mapsui.Rendering;
 using Mapsui.Rendering.Xaml;
 using Mapsui.Utilities;
-using SkiaSharp;
 using SkiaSharp.Views.Desktop;
 using SkiaSharp.Views.WPF;
 using Point = System.Windows.Point;
@@ -49,20 +47,18 @@ namespace Mapsui.UI.Wpf
         private RenderMode _renderMode;
         private Geometries.Point _skiaScale;
         private double _toResolution = double.NaN;
-        private bool _viewportInitialized;
         private bool _hasBeenManipulated;
-        private readonly AttributionPanel _attributionPanel = CreateAttributionPanel();
+        private float _scale = 1; // scale is always 1 in WPF
 
         public MapControl()
         {
             Children.Add(RenderCanvas);
             Children.Add(RenderElement);
-            Children.Add(_attributionPanel);
             Children.Add(_bboxRect);
 
             RenderElement.PaintSurface += SKElementOnPaintSurface;
-            CompositionTarget.Rendering += CompositionTargetRendering;
-
+            RenderingWeakEventManager.AddHandler(CompositionTargetRendering);
+            
             Map = new Map();
 
             Loaded += MapControlLoaded;
@@ -81,7 +77,7 @@ namespace Mapsui.UI.Wpf
             ManipulationDelta += OnManipulationDelta;
             ManipulationCompleted += OnManipulationCompleted;
             ManipulationInertiaStarting += OnManipulationInertiaStarting;
-            Dispatcher.ShutdownStarted += DispatcherShutdownStarted;
+            
             IsManipulationEnabled = true;
         }
 
@@ -110,7 +106,7 @@ namespace Mapsui.UI.Wpf
 
         public Map Map
         {
-            get { return _map; }
+            get => _map;
             set
             {
                 if (_map != null)
@@ -126,20 +122,16 @@ namespace Mapsui.UI.Wpf
 
                 if (_map != null)
                 {
-                    _viewportInitialized = false;
                     _map.DataChanged += MapDataChanged;
                     _map.PropertyChanged += MapPropertyChanged;
                     _map.RefreshGraphics += MapRefreshGraphics;
                     _map.ViewChanged(true);
-                    _attributionPanel.Populate(Map.Layers);
                 }
 
                 RefreshGraphics();
             }
         }
-
-        public FpsCounter FpsCounter { get; } = new FpsCounter();
-
+        
         public string ErrorMessage { get; private set; }
 
         public bool ZoomLocked { get; set; }
@@ -150,7 +142,7 @@ namespace Mapsui.UI.Wpf
 
         public RenderMode RenderMode
         {
-            get { return _renderMode; }
+            get => _renderMode;
             set
             {
                 if (value == RenderMode.Skia)
@@ -212,10 +204,6 @@ namespace Mapsui.UI.Wpf
                 else if (e.PropertyName == nameof(Layer.Opacity))
                 {
                     RefreshGraphics();
-                }
-                else if (e.PropertyName == nameof(Map.Layers))
-                {
-                    _attributionPanel.Populate(Map.Layers);
                 }
             }
         }
@@ -303,7 +291,7 @@ namespace Mapsui.UI.Wpf
 
         private void MapControlLoaded(object sender, RoutedEventArgs e)
         {
-            if (!_viewportInitialized) InitializeViewport();
+            TryInitializeViewport();
             UpdateSize();
             InitAnimation();
             Focusable = true;
@@ -320,7 +308,7 @@ namespace Mapsui.UI.Wpf
 
         private void MapControlMouseWheel(object sender, MouseWheelEventArgs e)
         {
-            if (!_viewportInitialized) return;
+            if (!_map.Viewport.Initialized) return;
             if (ZoomLocked) return;
 
             _currentMousePosition = e.GetPosition(this);
@@ -359,7 +347,7 @@ namespace Mapsui.UI.Wpf
 
         private void MapControlSizeChanged(object sender, SizeChangedEventArgs e)
         {
-            if (!_viewportInitialized) InitializeViewport();
+            TryInitializeViewport();
             Clip = new RectangleGeometry {Rect = new Rect(0, 0, ActualWidth, ActualHeight)};
             UpdateSize();
             _map.ViewChanged(true);
@@ -419,8 +407,9 @@ namespace Mapsui.UI.Wpf
 
         private void MapControlMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            _previousMousePosition = e.GetPosition(this);
-            _downMousePosition = e.GetPosition(this);
+            var touchPosition = e.GetPosition(this);
+            _previousMousePosition = touchPosition;
+            _downMousePosition = touchPosition;
             _mouseDown = true;
             CaptureMouse();
             IsInBoxZoomMode = Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl);
@@ -428,17 +417,20 @@ namespace Mapsui.UI.Wpf
 
         private void MapControlMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
+            var mousePosition = e.GetPosition(this).ToMapsui();
+
             if (IsInBoxZoomMode || ZoomToBoxMode)
             {
                 ZoomToBoxMode = false;
                 var previous = Map.Viewport.ScreenToWorld(_previousMousePosition.X, _previousMousePosition.Y);
-                var current = Map.Viewport.ScreenToWorld(e.GetPosition(this).X, e.GetPosition(this).Y);
+                var current = Map.Viewport.ScreenToWorld(mousePosition);
                 ZoomToBox(previous, current);
             }
             else
             {
                 HandleFeatureInfo(e);
-                Map.InvokeInfo(e.GetPosition(this).ToMapsui(), 1, Renderer.SymbolCache);
+                Map.InvokeInfo(mousePosition, _downMousePosition.ToMapsui(), _scale, 
+                    Renderer.SymbolCache, WidgetTouch);
             }
 
             _map.ViewChanged(true);
@@ -452,8 +444,19 @@ namespace Mapsui.UI.Wpf
         private void MapControlTouchUp(object sender, TouchEventArgs e)
         {
             if (!_hasBeenManipulated)
-                Map.InvokeInfo(e.GetTouchPoint(this).Position.ToMapsui(), 1, Renderer.SymbolCache);
+            {
+                var touchPosition = e.GetTouchPoint(this).Position.ToMapsui();
+                // todo: Pass the touchDown position. It needs to be set at touch down.
+                Map.InvokeInfo(touchPosition, touchPosition, _scale, Renderer.SymbolCache, WidgetTouch);
+            }
         }
+
+        private void WidgetTouch(Widgets.IWidget widget)
+        {
+            if (widget is Widgets.Hyperlink)
+                System.Diagnostics.Process.Start(((Widgets.Hyperlink)widget).Url); 
+        }
+
 
         private void HandleFeatureInfo(MouseButtonEventArgs e)
         {
@@ -498,11 +501,12 @@ namespace Mapsui.UI.Wpf
             }
         }
 
-        private void InitializeViewport()
+        private void TryInitializeViewport()
         {
-            if (ViewportHelper.TryInitializeViewport(_map, ActualWidth, ActualHeight))
+            if (_map.Viewport.Initialized) return;
+
+            if (_map.Viewport.TryInitializeViewport(_map, ActualWidth, ActualHeight))
             {
-                _viewportInitialized = true;
                 Map.ViewChanged(true);
                 OnViewportInitialized();
             }
@@ -515,8 +519,6 @@ namespace Mapsui.UI.Wpf
 
         private void CompositionTargetRendering(object sender, EventArgs e)
         {
-            if (!_viewportInitialized) InitializeViewport();
-            if (!_viewportInitialized) return; // Stop if the line above failed.
             if (!_invalid) return; // Don't render when nothing has changed
 
             if (RenderMode == RenderMode.Wpf) RenderWpf();
@@ -525,17 +527,15 @@ namespace Mapsui.UI.Wpf
 
         private void RenderWpf()
         {
-            if (Renderer != null && _map != null)
-            {
-                Renderer.Render(RenderCanvas, Map.Viewport, _map.Layers, _map.BackColor);
-                _invalid = false;
+            if (Renderer == null) return;
+            if (_map == null) return;
+            if (double.IsNaN(ActualWidth) || ActualWidth == 0 || double.IsNaN(ActualHeight) || ActualHeight == 0) return;
+            
+            TryInitializeViewport();
 
-                if (DeveloperTools.DeveloperMode) FpsCounter.FramePlusOne();}
-        }
+            Renderer.Render(RenderCanvas, Map.Viewport, _map.Layers, Map.Widgets, _map.BackColor);
 
-        private void DispatcherShutdownStarted(object sender, EventArgs e)
-        {
-            CompositionTarget.Rendering -= CompositionTargetRendering;
+            _invalid = false;
         }
 
         public void ZoomToBox(Geometries.Point beginPoint, Geometries.Point endPoint)
@@ -647,19 +647,6 @@ namespace Mapsui.UI.Wpf
         {
             Refresh();
         }
-
-        [SuppressMessage("ReSharper", "UnusedParameter.Local")]
-        private void OnPaintSurface(SKCanvas canvas, int width, int height)
-        {
-            if (double.IsNaN(Map.Viewport.Resolution)) return;
-
-            Map.Viewport.Width = ActualWidth;
-            Map.Viewport.Height = ActualHeight;
-
-            Renderer.Render(canvas, Map.Viewport, Map.Layers, Map.BackColor);
-            _invalid = false;
-        }
-
         private Geometries.Point GetSkiaScale()
         {
             var presentationSource = PresentationSource.FromVisual(this);
@@ -677,23 +664,21 @@ namespace Mapsui.UI.Wpf
 
         private void SKElementOnPaintSurface(object sender, SKPaintSurfaceEventArgs e)
         {
-            if (!_viewportInitialized) InitializeViewport();
-            if (!_viewportInitialized) return; // Stop if the line above failed. 
             if (!_invalid) return; // Don't render when nothing has changed
+            if (double.IsNaN(ActualWidth) || ActualWidth == 0 || double.IsNaN(ActualHeight) || ActualHeight == 0) return;
 
             if (_skiaScale == null) _skiaScale = GetSkiaScale();
             e.Surface.Canvas.Scale((float) _skiaScale.X, (float) _skiaScale.Y);
-            OnPaintSurface(e.Surface.Canvas, e.Info.Width, e.Info.Height);
+
+            Map.Viewport.Width = ActualWidth;
+            Map.Viewport.Height = ActualHeight;
+
+            TryInitializeViewport();
+            Renderer.Render(e.Surface.Canvas, Map.Viewport, Map.Layers, Map.Widgets, Map.BackColor);
+
+            _invalid = false;
         }
 
-        private static AttributionPanel CreateAttributionPanel()
-        {
-            return new AttributionPanel
-            {
-                VerticalAlignment = VerticalAlignment.Bottom,
-                HorizontalAlignment = HorizontalAlignment.Right
-            };
-        }
 
         public Geometries.Point WorldToScreen(Geometries.Point worldPosition)
         {
@@ -703,6 +688,12 @@ namespace Mapsui.UI.Wpf
         public Geometries.Point ScreenToWorld(Geometries.Point screenPosition)
         {
             return SharedMapControl.ScreenToWorld(Map.Viewport, (float)_skiaScale.Y, screenPosition);
+        }
+
+        ~MapControl()
+        {
+            // Because we use weak events the finalizer will be called even while the event is still registered.
+            RenderingWeakEventManager.RemoveHandler(CompositionTargetRendering);
         }
     }
 }

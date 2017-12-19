@@ -6,7 +6,7 @@ namespace Mapsui.UI
 {
     public class ViewportHelper
     {
-        public static bool TryInitializeViewport(Map map, double screenWidth, double screenHeight)
+        private static bool TryInitializeViewport(Map map, double screenWidth, double screenHeight)
         {
             if (screenWidth.IsNanOrZero()) return false;
             if (screenHeight.IsNanOrZero()) return false;

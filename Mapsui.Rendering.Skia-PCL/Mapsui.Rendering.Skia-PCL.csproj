@@ -34,9 +34,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ExtensionMethods\BoundingBoxExtensions.cs" />
+    <Compile Include="ExtensionMethods\SKRectExtensions.cs" />
     <Compile Include="SymbolCache.cs" />
     <Compile Include="BitmapHelper.cs" />
-    <Compile Include="ExtensionMethods\SkiaExtensions.cs" />
+    <Compile Include="ExtensionMethods\ColorExtensions.cs" />
     <Compile Include="LabelRenderer.cs" />
     <Compile Include="LineStringRenderer.cs" />
     <Compile Include="MapRenderer.cs" />
@@ -48,6 +50,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RasterRenderer.cs" />
     <Compile Include="BitmapInfo.cs" />
+    <Compile Include="WidgetRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Mapsui.Geometries\Mapsui.Geometries.csproj">
@@ -61,7 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SkiaSharp, Version=1.59.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
-      <HintPath>..\packages\SkiaSharp.1.59.1\lib\portable-net45+win8+wpa81+wp8\SkiaSharp.dll</HintPath>
+      <HintPath>..\packages\SkiaSharp.1.59.2\lib\portable-net45+win8+wpa81+wp8\SkiaSharp.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

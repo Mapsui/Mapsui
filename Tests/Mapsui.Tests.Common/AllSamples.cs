@@ -12,7 +12,7 @@ namespace Mapsui.Tests.Common
             {
                 StackedLabelsSample.CreateMap,
                 VectorStyleSample.CreateMap,
-                CircleAndSquareSymbolSample.CreateMap,
+                SymbolTypesSample.CreateMap,
                 BitmapSymbolSample.CreateMap,
                 BitmapSymbolWithRotationAndOffsetSample.CreateMap,
                 PointInWorldUnits.CreateMap,

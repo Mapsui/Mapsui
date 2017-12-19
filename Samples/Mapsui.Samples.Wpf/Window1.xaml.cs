@@ -5,7 +5,6 @@ using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Data;
 using System.Windows.Input;
 using Mapsui.Logging;
 using Mapsui.Samples.Common.Desktop;
@@ -23,10 +22,7 @@ namespace Mapsui.Samples.Wpf
             MapControl.ErrorMessageChanged += MapErrorMessageChanged;
             MapControl.FeatureInfo += MapControlFeatureInfo;
             MapControl.MouseMove += MapControlOnMouseMove;
-            
-            Fps.SetBinding(TextBlock.TextProperty, new Binding("Fps"));
-            Fps.DataContext = MapControl.FpsCounter;
-
+  
             Logger.LogDelegate += LogMethod;
 
             FillComboBoxWithDemoSamples();
@@ -130,8 +126,6 @@ namespace Mapsui.Samples.Wpf
                 MapControl.Map.Info += MapControlOnInfo;
                 MapControl.Map.Hover += MapControlOnHover;
                 LayerList.Initialize(MapControl.Map.Layers);
-                MapControl.Refresh();
-                
             };
             return radioButton;
         }

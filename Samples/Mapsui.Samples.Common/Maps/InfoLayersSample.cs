@@ -26,13 +26,13 @@ namespace Mapsui.Samples.Common.Maps
             map.InfoLayers.Add(map.Layers.First(l => l.Name == InfoLayerName));
             map.InfoLayers.Add(map.Layers.First(l => l.Name == PolygonLayerName));
             map.HoverLayers.Add(map.Layers.First(l => l.Name == HoverLayerName));
-            
+
             return map;
         }
 
         private static ILayer CreatePolygonLayer()
         {
-            var layer = new MemoryLayer {Name = PolygonLayerName};
+            var layer = new MemoryLayer { Name = PolygonLayerName };
             var provider = new MemoryProvider();
             provider.Features.Add(CreatePolygonFeature());
             provider.Features.Add(CreateMultiPolygonFeature());
@@ -48,7 +48,7 @@ namespace Mapsui.Samples.Common.Maps
                 Geometry = CreateMultiPolygon(),
                 ["Name"] = "Multipolygon 1"
             };
-            feature.Styles.Add(new VectorStyle { Fill = new Brush(Color.Gray), Outline = new Pen(Color.Black)});
+            feature.Styles.Add(new VectorStyle { Fill = new Brush(Color.Gray), Outline = new Pen(Color.Black) });
             return feature;
         }
 
@@ -126,7 +126,7 @@ namespace Mapsui.Samples.Common.Maps
             {
                 SymbolScale = 0.8,
                 Fill = new Brush(new Color(251, 236, 215)),
-                Outline = {Color = Color.Gray, Width = 1}
+                Outline = { Color = Color.Gray, Width = 1 }
             };
         }
 
@@ -136,7 +136,7 @@ namespace Mapsui.Samples.Common.Maps
             {
                 SymbolScale = 0.8,
                 Fill = new Brush(new Color(213, 234, 194)),
-                Outline = {Color = Color.Gray, Width = 1}
+                Outline = { Color = Color.Gray, Width = 1 }
             };
         }
     }

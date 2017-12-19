@@ -27,6 +27,7 @@ using Mapsui.Rendering;
 using Mapsui.Styles;
 using Mapsui.UI;
 using Mapsui.Utilities;
+using Mapsui.Widgets;
 
 namespace Mapsui
 {
@@ -36,7 +37,7 @@ namespace Mapsui
     public class Map : INotifyPropertyChanged
     {
         private LayerCollection _layers = new LayerCollection();
-		private Color _backColor = Color.White;
+        private Color _backColor = Color.White;
 
         /// <summary>
         /// Initializes a new map
@@ -45,8 +46,11 @@ namespace Mapsui
         {
             BackColor = Color.White;
             Layers = new LayerCollection();
-            Viewport =  new Viewport { Center = { X = double.NaN, Y = double.NaN }, Resolution = double.NaN };
+            Viewport = new Viewport { Center = { X = double.NaN, Y = double.NaN }, Resolution = double.NaN };
         }
+
+        public List<IWidget> Widgets { get; } = new List<IWidget>();
+
         public PanMode PanMode { get; set; } = PanMode.KeepCenterWithinExtents;
 
         public ZoomMode ZoomMode { get; set; } = ZoomMode.KeepWithinResolutions;
@@ -61,8 +65,6 @@ namespace Mapsui
         /// Pair of the limits for the resolutions (smallest and biggest). The resolution is kept between these values.
         /// </summary>
         public MinMax ZoomLimits { get; set; }
-
-        private MinMax _resolutionExtremes;
 
         public string CRS { get; set; }
 
@@ -90,7 +92,7 @@ namespace Mapsui
                 _layers.LayerRemoved += LayersLayerRemoved;
             }
         }
-        
+
         public IList<ILayer> InfoLayers { get; } = new List<ILayer>();
 
         public IList<ILayer> HoverLayers { get; } = new List<ILayer>();
@@ -139,16 +141,16 @@ namespace Mapsui
         /// Map background color (defaults to transparent)
         ///  </summary>
         public Color BackColor
-		{
-			get { return _backColor; }
-			set
-			{
-				if (_backColor == value)
-					return;
-				_backColor = value;
-				OnRefreshGraphics();
-			}
-		} 
+        {
+            get { return _backColor; }
+            set
+            {
+                if (_backColor == value)
+                    return;
+                _backColor = value;
+                OnRefreshGraphics();
+            }
+        }
 
         /// <summary>
         /// Gets the extents of the map based on the extents of all the layers in the layers collection
@@ -170,7 +172,7 @@ namespace Mapsui
         }
 
         public IReadOnlyList<double> Resolutions { get; private set; }
-    
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
@@ -191,14 +193,23 @@ namespace Mapsui
             InfoLayers.Remove(layer);
 
             Resolutions = DetermineResolutions(Layers);
-            _resolutionExtremes = ViewportLimiter.GetExtremes(Resolutions); 
-
 
             OnPropertyChanged(nameof(Layers));
         }
 
-        public void InvokeInfo(Point screenPosition, float scale, ISymbolCache symbolCache)
+        public void InvokeInfo(Point screenPosition, Point startScreenPosition, float scale, ISymbolCache symbolCache,
+            Action<IWidget> widgetCallback)
         {
+            var allWidgets = Layers.Select(l => l.Attribution).Where(a => a != null).ToList().Concat(Widgets);
+            
+            // First check if a Widget is clicked. In the current design they are always on top of the map.
+            var widget = WidgetTouch.GetWidget(screenPosition, startScreenPosition, scale, allWidgets);
+            if (widget != null)
+            {
+                widgetCallback(widget);
+                return;
+            }
+
             if (Info == null) return;
             var eventArgs = InfoHelper.GetInfoEventArgs(Viewport, screenPosition, scale, InfoLayers, symbolCache);
             if (eventArgs != null) Info?.Invoke(this, eventArgs);
@@ -208,7 +219,7 @@ namespace Mapsui
 
         public void InvokeHover(Point screenPosition, float scale, ISymbolCache symbolCache)
         {
-            if (Hover== null) return;
+            if (Hover == null) return;
             if (HoverLayers.Count == 0) return;
             var hoverEventArgs = InfoHelper.GetInfoEventArgs(Viewport, screenPosition, scale, HoverLayers, symbolCache);
             if (hoverEventArgs?.Feature != _previousHoverEventArgs?.Feature) // only notify when the feature changes
@@ -226,7 +237,6 @@ namespace Mapsui
             layer.Transformation = Transformation;
             layer.CRS = CRS;
             Resolutions = DetermineResolutions(Layers);
-            _resolutionExtremes = ViewportLimiter.GetExtremes(Resolutions);
             OnPropertyChanged(nameof(Layers));
         }
 
@@ -261,7 +271,7 @@ namespace Mapsui
         {
             OnDataChanged(sender, e);
         }
-        
+
         private void OnDataChanged(object sender, DataChangedEventArgs e)
         {
             DataChanged?.Invoke(sender, e);

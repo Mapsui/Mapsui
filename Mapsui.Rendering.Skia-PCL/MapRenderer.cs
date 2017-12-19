@@ -7,6 +7,7 @@ using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.Providers;
 using Mapsui.Styles;
+using Mapsui.Widgets;
 using SkiaSharp;
 
 namespace Mapsui.Rendering.Skia
@@ -28,10 +29,19 @@ namespace Mapsui.Rendering.Skia
         {
             DefaultRendererFactory.Create = () => new MapRenderer();
         }
-
-        public void Render(object target, IViewport viewport, IEnumerable<ILayer> layers, Color background = null)
+        public void Render(object target, IViewport viewport, IEnumerable<ILayer> layers,
+            IEnumerable<IWidget> widgets, Color background = null)
         {
-            Render((SKCanvas) target, viewport, layers, background);
+            var allWidgets = layers.Select(l => l.Attribution).ToList().Concat(widgets);
+            Render((SKCanvas)target, viewport, layers, allWidgets, background);
+        }
+
+        private void Render(SKCanvas canvas, IViewport viewport, IEnumerable<ILayer> layers,
+            IEnumerable<IWidget> widgets, Color background = null)
+        {
+            if (background != null) canvas.Clear(background.ToSkia());
+            if (viewport.Initialized) Render(canvas, viewport, layers);
+            Render(canvas, viewport, widgets);
         }
 
         public MemoryStream RenderToBitmapStream(IViewport viewport, IEnumerable<ILayer> layers, Color background = null)
@@ -41,7 +51,10 @@ namespace Mapsui.Rendering.Skia
                 using (var surface = SKSurface.Create(
                     (int)viewport.Width, (int)viewport.Height, SKImageInfo.PlatformColorType, SKAlphaType.Unpremul))
                 {
-                    Render(surface.Canvas, viewport, layers, background);
+                    // Not sure if this is needed here:
+                    if (background != null) surface.Canvas.Clear(background.ToSkia());
+
+                    Render(surface.Canvas, viewport, layers);
                     using (var image = surface.Snapshot())
                     {
                         using (var data = image.Encode())
@@ -60,13 +73,8 @@ namespace Mapsui.Rendering.Skia
             }
         }
 
-        private void Render(SKCanvas canvas, IViewport viewport, IEnumerable<ILayer> layers, Color background)
+        private void Render(SKCanvas canvas, IViewport viewport, IEnumerable<ILayer> layers)
         {
-            if (background != null)
-            {
-                canvas.Clear(background.ToSkia());
-            }
-  
             layers = layers.ToList();
 
             VisibleFeatureIterator.IterateLayers(viewport, layers, (v, l, s) => { RenderFeature(canvas, v, l, s); });
@@ -83,7 +91,7 @@ namespace Mapsui.Rendering.Skia
             var tilesToKeep = tilesUsedInCurrentIteration * TilesToKeepMultiplier;
             tilesToKeep = Math.Max(tilesToKeep, MinimumTilesToKeep);
             var tilesToRemove = _tileCache.Keys.Count - tilesToKeep;
-            
+
             if (tilesToRemove > 0) RemoveOldBitmaps(_tileCache, tilesToRemove);
         }
 
@@ -117,6 +125,11 @@ namespace Mapsui.Rendering.Skia
                 MultiPolygonRenderer.Draw(canvas, viewport, style, feature, feature.Geometry);
             else if (feature.Geometry is IRaster)
                 RasterRenderer.Draw(canvas, viewport, style, feature, _tileCache, _currentIteration);
+        }
+
+        private void Render(object canvas, IViewport viewport, IEnumerable<IWidget> widgets)
+        {
+            WidgetRenderer.Render(canvas, viewport.Width, viewport.Height, widgets);
         }
     }
 

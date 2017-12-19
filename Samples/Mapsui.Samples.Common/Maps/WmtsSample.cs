@@ -1,6 +1,5 @@
 ﻿using System.Linq;
-using System.Net;
-using BruTile.Extensions;
+using System.Net.Http;
 using BruTile.Wmts;
 using Mapsui.Layers;
 
@@ -12,21 +11,18 @@ namespace Mapsui.Samples.Common.Maps
         {
             var map = new Map();
             map.Layers.Add(CreateLayer());
-            map.Layers.Add(GeodanOfficesSample.CreateLayer()); // As reference layer
+            map.Layers.Add(GeodanOfficesSample.CreateLayer());
             return map;
         }
 
         public static ILayer CreateLayer()
         {
-            var webRequest = (HttpWebRequest) WebRequest.Create(
-                "http://geodata.nationaalgeoregister.nl/wmts/top10nl?VERSION=1.0.0&request=GetCapabilities");
-            var webResponse = webRequest.GetSyncResponse(10000);
-            if (webResponse == null) throw new WebException("An error occurred while fetching tile", null);
-            using (var responseStream = webResponse.GetResponseStream())
+            using (var httpClient = new HttpClient())
+            using (var response = httpClient.GetStreamAsync("http://geodata.nationaalgeoregister.nl/wmts/top10nl?VERSION=1.0.0&request=GetCapabilities").Result)
             {
-                var tileSources = WmtsParser.Parse(responseStream);
-                var natura2000 = tileSources.First(t => t.Name.ToLower().Contains("natura2000"));
-                return new TileLayer(natura2000) {Name = "Natura 2000"};
+                var tileSources = WmtsParser.Parse(response);
+                var nature2000TileSource = tileSources.First(t => t.Name == "natura2000");
+                return new TileLayer(nature2000TileSource) { Name = nature2000TileSource.Name };
             }
         }
     }

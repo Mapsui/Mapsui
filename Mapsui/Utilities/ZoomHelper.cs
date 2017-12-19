@@ -24,7 +24,7 @@ namespace Mapsui.Utilities
     {
         public static double ZoomIn(IReadOnlyList<double> resolutions, double resolution)
         {
-            if (resolutions.Count == 0) return resolution/2.0;
+            if (resolutions == null || resolutions.Count == 0) return resolution / 2.0;
 
             // smaller than smallest
             if (resolutions[resolutions.Count - 1] > resolution) return resolutions[resolutions.Count - 1];
@@ -49,9 +49,9 @@ namespace Mapsui.Utilities
 
         public static double ZoomOut(IReadOnlyList<double> resolutions, double resolution)
         {
-            if (resolutions.Count == 0) return resolution*2.0;
+            if (resolutions == null || resolutions.Count == 0) return resolution * 2.0;
 
-            //bigger than biggest
+            // bigger than biggest
             if (resolutions[0] < resolution) return resolutions[0];
 
             for (var i = resolutions.Count - 1; i >= 0; i--)
@@ -108,19 +108,15 @@ namespace Mapsui.Utilities
             double screenWidth, double screenHeight,
             ScaleMethod scaleMethod = ScaleMethod.Fit)
         {
-            double centerX;
-            double centerY;
-            double resolution;
-
             ZoomToBoudingbox(x1, y1, x2, y2, screenWidth, screenHeight,
-                out centerX, out centerY, out resolution, scaleMethod);
+                out var centerX, out var centerY, out var resolution, scaleMethod);
 
             viewport.Center.X = centerX;
             viewport.Center.Y = centerY;
 
             viewport.Resolution = resolution;
         }
-
+        
         private static void Swap(ref double xMin, ref double xMax)
         {
             var tempX = xMin;

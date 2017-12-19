@@ -41,5 +41,6 @@ namespace Mapsui
         /// </summary>
         double Rotation { get; set; }
         bool IsRotated { get; }
+        bool Initialized { get; }
     }
 }

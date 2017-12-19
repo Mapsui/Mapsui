@@ -46,7 +46,7 @@
     <Compile Include="AllSamples.cs" />
     <Compile Include="Maps\BitmapSymbolSample.cs" />
     <Compile Include="Maps\BitmapSymbolWithRotationAndOffsetSample.cs" />
-    <Compile Include="Maps\CircleAndSquareSymbolSample.cs" />
+    <Compile Include="Maps\SymbolTypesSample.cs" />
     <Compile Include="Maps\EmptySample.cs" />
     <Compile Include="Maps\LabelSample.cs" />
     <Compile Include="Maps\LineSample.cs" />

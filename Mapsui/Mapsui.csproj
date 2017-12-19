@@ -64,7 +64,9 @@
     <Compile Include="Geometries\NotifyingPoint.cs" />
     <Compile Include="Layers\AnimatedFeatures.cs" />
     <Compile Include="Layers\AnimatedPointLayer.cs" />
-    <Compile Include="Layers\Attribution.cs" />
+    <Compile Include="Widgets\Hyperlink.cs" />
+    <Compile Include="Widgets\IWidget.cs" />
+    <Compile Include="Widgets\TextBox.cs" />
     <Compile Include="Layers\TmsTileSourceBuilder.cs" />
     <Compile Include="Logging\Logger.cs" />
     <Compile Include="Projection\Transformer.cs" />
@@ -169,6 +171,10 @@
     <Compile Include="Utilities\Version.cs" />
     <Compile Include="Utilities\ZoomHelper.cs" />
     <Compile Include="Viewport.cs" />
+    <Compile Include="Widgets\HorizontalAlignment.cs" />
+    <Compile Include="Widgets\VerticalAlignment.cs" />
+    <Compile Include="Widgets\Widget.cs" />
+    <Compile Include="Widgets\WidgetTouch.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="BruTile, Version=0.22.1.0, Culture=neutral, processorArchitecture=MSIL">

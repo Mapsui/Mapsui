@@ -22,7 +22,7 @@ namespace Mapsui.Rendering.Xaml
             var matrix = XamlMedia.Matrix.Identity;
             var mapCenterX = viewport.Width * 0.5;
             var mapCenterY = viewport.Height * 0.5;
-            
+
             var pointOffsetFromViewPortCenterX = point.X - viewport.Center.X;
             var pointOffsetFromViewPortCenterY = point.Y - viewport.Center.Y;
 
@@ -46,7 +46,7 @@ namespace Mapsui.Rendering.Xaml
         {
             return CreateTransformMatrix(new Point(0, 0), viewport);
         }
-        
+
         private static XamlShapes.Path CreatePointPath(SymbolStyle style)
         {
             // todo: use this:
@@ -85,7 +85,7 @@ namespace Mapsui.Rendering.Xaml
             path.IsHitTestVisible = false;
             return path;
         }
-     
+
         private static XamlMedia.Geometry ConvertSymbol(Point point, SymbolStyle style, IViewport viewport)
         {
             Point p = viewport.WorldToScreen(point);
@@ -102,7 +102,7 @@ namespace Mapsui.Rendering.Xaml
             return rect;
         }
 
-        public static XamlShapes.Shape RenderMultiPoint(MultiPoint multiPoint, IStyle style, IViewport viewport, 
+        public static XamlShapes.Shape RenderMultiPoint(MultiPoint multiPoint, IStyle style, IViewport viewport,
             SymbolCache symbolCache)
         {
             // This method needs a test
@@ -120,7 +120,7 @@ namespace Mapsui.Rendering.Xaml
             var group = new XamlMedia.GeometryGroup();
             foreach (var geometry in multiPoint)
             {
-                var point = (Point) geometry;
+                var point = (Point)geometry;
                 group.Children.Add(ConvertSymbol(point, style, viewport));
             }
             return group;
@@ -151,7 +151,7 @@ namespace Mapsui.Rendering.Xaml
                 Fill = new XamlMedia.ImageBrush { ImageSource = bitmapImage },
                 IsHitTestVisible = false,
                 SnapsToDevicePixels = true
-                 
+
             };
 
             if (Utilities.DeveloperTools.DeveloperMode)
@@ -159,8 +159,8 @@ namespace Mapsui.Rendering.Xaml
                 var color = (style as VectorStyle)?.Line.Color.ToXaml();
                 if (color.HasValue && color.Value.A > 0)
                 {
-                    path.Stroke = new XamlMedia.SolidColorBrush {Color = color.Value};
-                    path.StrokeThickness = ((VectorStyle) style).Line.Width;
+                    path.Stroke = new XamlMedia.SolidColorBrush { Color = color.Value };
+                    path.StrokeThickness = ((VectorStyle)style).Line.Width;
                 }
             }
 
@@ -179,7 +179,7 @@ namespace Mapsui.Rendering.Xaml
                 Math.Round(dest.Bottom) - Math.Round(dest.Top));
             return dest;
         }
-        
+
         public static void PositionRaster(UIElement renderedGeometry, BoundingBox boundingBox, IViewport viewport)
         {
             UpdateRenderTransform(renderedGeometry, viewport);
@@ -208,7 +208,7 @@ namespace Mapsui.Rendering.Xaml
         public static void PositionGeometry(XamlShapes.Shape renderedGeometry, IViewport viewport)
         {
             CounterScaleLineWidth(renderedGeometry, viewport.Resolution);
-            var matrixTransform = new XamlMedia.MatrixTransform {Matrix = CreateTransformMatrix1(viewport)};
+            var matrixTransform = new XamlMedia.MatrixTransform { Matrix = CreateTransformMatrix1(viewport) };
             renderedGeometry.RenderTransform = matrixTransform;
 
             if (renderedGeometry.Fill != null)

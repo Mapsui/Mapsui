@@ -7,7 +7,9 @@ using System;
 using System.ComponentModel;
 using System.Linq;
 using CoreGraphics;
+using Mapsui.Geometries;
 using Mapsui.Geometries.Utilities;
+using Mapsui.Widgets;
 using SkiaSharp.Views.iOS;
 
 namespace Mapsui.UI.iOS
@@ -16,16 +18,15 @@ namespace Mapsui.UI.iOS
 	public class MapControl: UIView, IMapControl
 	{
 		private Map _map;
-		private readonly MapRenderer _renderer = new MapRenderer ();
-		private readonly AttributionView _attributionPanel = new AttributionView ();
+		private readonly MapRenderer _renderer = new MapRenderer();
 		private readonly SKGLView _canvas = new SKGLView ();
 		private nuint _previousTouchCount = 0;
-		private bool _viewportInitialized;
 		private nfloat _previousX;
 		private nfloat _previousY;
 		private double _previousRadius;
 		private double _previousRotation;
 	    private float _skiaScale;
+	    private Point _touchDown = new Point();
 
 		public event EventHandler ViewportInitialized;
 
@@ -50,29 +51,16 @@ namespace Mapsui.UI.iOS
 			_canvas.ClipsToBounds = true;
 			_canvas.MultipleTouchEnabled = true;
 
-			_attributionPanel.TranslatesAutoresizingMaskIntoConstraints = false;
-
-			AddSubview (_canvas);
-			AddSubview (_attributionPanel);
-
+		    AddSubview (_canvas);
+			
 			AddConstraints (new [] {
 				NSLayoutConstraint.Create(this, NSLayoutAttribute.Leading, NSLayoutRelation.Equal, _canvas, NSLayoutAttribute.Leading, 1.0f, 0.0f),
 				NSLayoutConstraint.Create(this, NSLayoutAttribute.Trailing, NSLayoutRelation.Equal, _canvas, NSLayoutAttribute.Trailing, 1.0f, 0.0f),
 				NSLayoutConstraint.Create(this, NSLayoutAttribute.Top, NSLayoutRelation.Equal, _canvas, NSLayoutAttribute.Top, 1.0f, 0.0f),
-				NSLayoutConstraint.Create(this, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, _canvas, NSLayoutAttribute.Bottom, 1.0f, 0.0f),
-
-				NSLayoutConstraint.Create(_attributionPanel, NSLayoutAttribute.Left, NSLayoutRelation.GreaterThanOrEqual, this, NSLayoutAttribute.Left, 1.0f, 0.0f),
-				NSLayoutConstraint.Create(_attributionPanel, NSLayoutAttribute.Top, NSLayoutRelation.GreaterThanOrEqual, this, NSLayoutAttribute.Top, 1.0f, 0.0f),
-				NSLayoutConstraint.Create(_attributionPanel, NSLayoutAttribute.Right, NSLayoutRelation.Equal, this, NSLayoutAttribute.Right, 1.0f, -8.0f),
-				NSLayoutConstraint.Create(_attributionPanel, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, this, NSLayoutAttribute.Bottom, 1.0f, -8.0f)
+				NSLayoutConstraint.Create(this, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, _canvas, NSLayoutAttribute.Bottom, 1.0f, 0.0f)
 			});
-
-			_attributionPanel.ClipsToBounds = true;
-
-			_attributionPanel.BackgroundColor = UIColor.FromRGBA(255, 255, 255, 191);
-			_attributionPanel.TintColor = UIColor.Black;
-
-			InitializeViewport ();
+            
+            TryInitializeViewport ();
 
 			ClipsToBounds = true;
 
@@ -82,34 +70,27 @@ namespace Mapsui.UI.iOS
 			_canvas.PaintSurface += OnPaintSurface;
 		}
 
-		public override void AddSubview (UIView view)
-		{
-			base.AddSubview (view);
-			if (_attributionPanel != null && Subviews.Contains(_attributionPanel))
-			{
-				BringSubviewToFront (_attributionPanel);
-			}
-		}
-
 		void OnPaintSurface (object sender, SKPaintGLSurfaceEventArgs skPaintSurfaceEventArgs)
 		{
-			if (!_viewportInitialized) InitializeViewport ();
-			if (!_viewportInitialized) return;
+			TryInitializeViewport();
+			if (!_map.Viewport.Initialized) return;
 
-			_map.Viewport.Width = _canvas.Frame.Width;
-			_map.Viewport.Height = _canvas.Frame.Height;
+		    _map.Viewport.Width = _canvas.Frame.Width;
+		    _map.Viewport.Height = _canvas.Frame.Height;
 
-			_skiaScale = (float)_canvas.ContentScaleFactor;
-			skPaintSurfaceEventArgs.Surface.Canvas.Scale (_skiaScale, _skiaScale);
+            _skiaScale = (float)_canvas.ContentScaleFactor;
+			skPaintSurfaceEventArgs.Surface.Canvas.Scale(_skiaScale, _skiaScale);
 
-      _renderer.Render (skPaintSurfaceEventArgs.Surface.Canvas, _map.Viewport, _map.Layers, _map.BackColor);
+            _renderer.Render(skPaintSurfaceEventArgs.Surface.Canvas, 
+                _map.Viewport, _map.Layers, _map.Widgets, _map.BackColor);
 		}
 
-		private void InitializeViewport ()
+		private void TryInitializeViewport()
 		{
-			if (ViewportHelper.TryInitializeViewport (_map, _canvas.Frame.Width, _canvas.Frame.Height))
+		    if (_map.Viewport.Initialized) return;
+
+			if (_map.Viewport.TryInitializeViewport (_map, _canvas.Frame.Width, _canvas.Frame.Height))
 			{
-				_viewportInitialized = true;
 				Map.ViewChanged (true);
 				OnViewportInitialized ();
 			}
@@ -120,7 +101,13 @@ namespace Mapsui.UI.iOS
 			ViewportInitialized?.Invoke (this, EventArgs.Empty);
 		}
 
-		public override void TouchesMoved (NSSet touches, UIEvent evt)
+	    public override void TouchesBegan(NSSet touches, UIEvent evt)
+	    {
+	        _touchDown = GetScreenPosition(touches);
+	        base.TouchesBegan(touches, evt);
+	    }
+        
+	    public override void TouchesMoved (NSSet touches, UIEvent evt)
 		{
 			base.TouchesMoved (touches, evt);
 
@@ -189,18 +176,27 @@ namespace Mapsui.UI.iOS
 		{
 			Refresh ();
 			HandleInfo (e.AllTouches);
+		    _previousTouchCount = 0;
 		}
 
 		private void HandleInfo (NSSet touches)
 		{
-			if (touches.Count != 1) return;
-			var touch = touches.FirstOrDefault () as UITouch;
-			if (touch == null) return;
-			var screenPosition = touch.LocationInView (this);
-			Map.InvokeInfo (screenPosition.ToMapsui (), _skiaScale, _renderer.SymbolCache);
+		    var screenPosition = GetScreenPosition(touches);
+		    if (screenPosition == null) return;
+     	    Map.InvokeInfo(screenPosition, _touchDown, _skiaScale, _renderer.SymbolCache, WidgetTouch);  
 		}
 
-		public void Refresh ()
+        /// <returns>The screen position as Mapsui point. Can be null.</returns>
+	    private Point GetScreenPosition(NSSet touches)
+	    {
+	        if (touches.Count != 1) return null;
+	        var touch = touches.FirstOrDefault() as UITouch;
+	        var mapsuiPoint = touch?.LocationInView(this).ToMapsui();
+	        if (mapsuiPoint == null) return null;
+	        return new Point(mapsuiPoint.X * _skiaScale, mapsuiPoint.Y * _skiaScale);
+	    }
+
+	    public void Refresh ()
 		{
 			RefreshGraphics();
 			RefreshData();
@@ -208,11 +204,8 @@ namespace Mapsui.UI.iOS
 
 		public Map Map
 		{
-			get
-			{
-				return _map;
-			}
-			set
+			get => _map;
+		    set
 			{
 				if (_map != null)
 				{
@@ -222,7 +215,6 @@ namespace Mapsui.UI.iOS
 					temp.PropertyChanged -= MapPropertyChanged;
 					temp.RefreshGraphics -= MapRefreshGraphics;
 					temp.AbortFetch ();
-					_attributionPanel.Clear ();
 				}
 
 				_map = value;
@@ -233,7 +225,6 @@ namespace Mapsui.UI.iOS
 					_map.PropertyChanged += MapPropertyChanged;
 					_map.RefreshGraphics += MapRefreshGraphics;
 					_map.ViewChanged (true);
-					_attributionPanel.Populate (Map.Layers, Frame);
 				}
 
 				RefreshGraphics ();
@@ -255,10 +246,6 @@ namespace Mapsui.UI.iOS
 			{
 				RefreshGraphics ();
 			}
-            else if (e.PropertyName == nameof (Map.Layers))
-            {
-                _attributionPanel.Populate(Map.Layers, Frame);
-            }
 		}
 
 		private void MapDataChanged (object sender, DataChangedEventArgs e)
@@ -300,19 +287,56 @@ namespace Mapsui.UI.iOS
 
 	    public void RefreshData()
 	    {
-	        _map.ViewChanged(true);
+	        _map?.ViewChanged(true);
         }
 
 	    public bool AllowPinchRotation { get; set; }
 
-	    public Geometries.Point WorldToScreen(Geometries.Point worldPosition)
+	    public Point WorldToScreen(Point worldPosition)
 	    {
 	        return SharedMapControl.WorldToScreen(Map.Viewport, _skiaScale, worldPosition);
 	    }
 
-	    public Geometries.Point ScreenToWorld(Geometries.Point screenPosition)
+	    public Point ScreenToWorld(Point screenPosition)
 	    {
 	        return SharedMapControl.ScreenToWorld(Map.Viewport, _skiaScale, screenPosition);
 	    }
+
+	    public override CGRect Frame
+	    {
+	        get => base.Frame;
+	        set
+	        {
+	            _canvas.Frame = value;
+                base.Frame = value;
+
+	            if (_map?.Viewport == null) return; 
+
+	            _map.Viewport.Width = _canvas.Frame.Width;
+	            _map.Viewport.Height = _canvas.Frame.Height;
+
+                Refresh();
+            }
+        }
+
+        public override void LayoutMarginsDidChange()
+	    {
+	        if (_canvas == null) return;
+
+	        _canvas.Frame = _canvas.Frame;
+            base.LayoutMarginsDidChange();
+
+	        if (_map?.Viewport == null) return;
+
+            _map.Viewport.Width = _canvas.Frame.Width;
+	        _map.Viewport.Height = _canvas.Frame.Height;
+
+            Refresh();
+        }
+
+	    private static void WidgetTouch(IWidget widget)
+	    {
+	        if (widget is Hyperlink) UIApplication.SharedApplication.OpenUrl(new NSUrl(((Hyperlink)widget).Url));
+        }
     }
 }
