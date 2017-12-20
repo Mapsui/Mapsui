@@ -186,7 +186,13 @@ namespace Mapsui.UI.Android
                                 {
                                     var angle = Angle(args.Event);
                                     _innerRotation += angle - _previousAngle;
+
                                     _innerRotation %= 360;
+                                    
+                                    if (_innerRotation > 180)
+                                        _innerRotation -= 360;
+                                    else if (_innerRotation < -180)
+                                        _innerRotation += 360;
 
                                     if (_map.Viewport.Rotation == 0 && Math.Abs(_innerRotation) >= Math.Abs(UnSnapRotationDegrees))
                                         _map.Viewport.Rotation = _innerRotation;

@@ -164,7 +164,13 @@ namespace Mapsui.UI.iOS
                     if (AllowPinchRotation)
                     {
                         _innerRotation += rotation - _previousRotation;
+                        
                         _innerRotation %= 360;
+
+                        if (_innerRotation > 180)
+                            _innerRotation -= 360;
+                        else if (_innerRotation < -180)
+                            _innerRotation += 360;
 
                         if (_map.Viewport.Rotation == 0 && Math.Abs(_innerRotation) >= Math.Abs(UnSnapRotationDegrees))
                             _map.Viewport.Rotation = _innerRotation;
