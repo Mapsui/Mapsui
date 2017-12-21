@@ -243,8 +243,8 @@ namespace Mapsui.UI.Android
         private static PointF GetTouchCenter(MotionEvent motionEvent)
         {
             return new PointF(
-                motionEvent.GetX(0) + motionEvent.GetX(1) / 2,
-                motionEvent.GetY(0) + motionEvent.GetY(1) / 2);
+                (motionEvent.GetX(0) + motionEvent.GetX(1)) / 2,
+                (motionEvent.GetY(0) + motionEvent.GetY(1)) / 2);
         }
 
         private static Geometries.Point GetScreenPosition(MotionEvent motionEvent)
