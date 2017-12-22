@@ -1,0 +1,13 @@
+# Configuration file for Bumpy
+
+# Usage: <file glob pattern> = <regular expression>
+# Note that the regular expression must contain a named group 'version' which contains the actual version information
+
+# Example: Searches for version information of the format a.b.c.d (e.g. 1.22.7.50) in all AssemblyInfo.cs files
+# AssemblyInfo.cs = (?<version>\d+\.\d+\.\d+\.\d+)
+
+# Example: The default read/write encoding is UTF-8 without BOM, but you can change this behaviour (e.g. UTF-8 with BOM)
+# AssemblyInfo.cs | UTF-8 = (?<version>\d+\.\d+\.\d+\.\d+)
+
+# Example: Search for all .nuspec files in the NuSpec directory
+# NuSpec\**\*.nuspec = <version>(?<version>\d+(\.\d+)+)
