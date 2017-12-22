@@ -5,6 +5,7 @@ SET VERSION=%1
 rmdir obj /s /q
 rmdir Release /s /q
 choco install bumpy.portable
-msbuild Scripts\updateversionnumber.proj /p:AsmVersion=%VERSION%  
-msbuild Scripts\build.proj
-nuget pack Scripts\Mapsui.nuspec -Version %VERSION% -outputdirectory Release
+bumpy write %VERSION%  
+REM msbuild Scripts\updateversionnumber.proj /p:AsmVersion=%VERSION%  
+REM msbuild Scripts\build.proj
+REM nuget pack NuSpec\Mapsui.nuspec -Version %VERSION% -outputdirectory Release
