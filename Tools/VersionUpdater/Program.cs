@@ -19,14 +19,14 @@ namespace VersionUpdater
             Console.WriteLine($"{nameof(arguments.Patch)} {arguments.Patch}");
             Console.WriteLine($"{nameof(arguments.Prerelease)} {arguments.Prerelease}");
 
-            var files = GetFiles();
+            var files = GetFiles().ToList();
             UpdateFiles(arguments, files);
         }
 
         public static IEnumerable<string> GetFiles()
         {
             foreach (string file in Directory.EnumerateFiles(
-                ".", "*.csproj", SearchOption.AllDirectories))
+                Directory.GetCurrentDirectory(), "AssemblyInfo.cs", SearchOption.AllDirectories))
             {
                 yield return file;
             }
@@ -34,12 +34,13 @@ namespace VersionUpdater
 
         public static void UpdateFiles(VersionUpdaterArguments arguments, IEnumerable<string> files)
         {
-            var regex = new Regex("(AssemblyVersion|AssemblyFileVersionAttribute|AssemblyFileVersion)\\(&quot;(.*?)?&quot;\\)");
+            var regex = new Regex("AssemblyVersion((.*?)?)");
             foreach (var file in files)
             {
-                string text = File.ReadAllText(file);
-                text = regex.Replace(text, $"{arguments.Major}.{arguments.Minor}.{arguments.Patch}");
-                File.WriteAllText(file, text);
+                var text = File.ReadAllText(file);
+                text = regex.Replace(text, $"\"{arguments.Major}.{arguments.Minor}.{arguments.Patch}\"");
+                Encoding utf8WithBom = new UTF8Encoding(true);
+                File.WriteAllText(file, text, utf8WithBom);
             }
         }
     }
