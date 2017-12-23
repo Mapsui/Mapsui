@@ -43,7 +43,7 @@ namespace VersionUpdater
                 var assemblyFileVersionRegex = new Regex("AssemblyFileVersion[(](.*?)?[)]");
                 text = assemblyFileVersionRegex.Replace(text, $"AssemblyFileVersion(\"{arguments.Major}.{arguments.Minor}.{arguments.Patch}\")");
                 var assemblyInformationalVersionRegex = new Regex("AssemblyInformationalVersion[(](.*?)?[)]");
-                text = assemblyInformationalVersionRegex.Replace(text, $"AssemblyInformationalVersion(\"{arguments.Major}.{arguments.Minor}.{arguments.Patch}\")");
+                text = assemblyInformationalVersionRegex.Replace(text, $"AssemblyInformationalVersion(\"{arguments.Major}.{arguments.Minor}.{arguments.Patch}{arguments.Prerelease}\")");
                 Encoding utf8WithBom = new UTF8Encoding(true);
                 File.WriteAllText(file, text, utf8WithBom);
             }
