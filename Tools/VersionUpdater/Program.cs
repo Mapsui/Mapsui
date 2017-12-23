@@ -34,11 +34,16 @@ namespace VersionUpdater
 
         public static void UpdateFiles(VersionUpdaterArguments arguments, IEnumerable<string> files)
         {
-            var regex = new Regex("AssemblyVersion((.*?)?)");
+
             foreach (var file in files)
             {
                 var text = File.ReadAllText(file);
-                text = regex.Replace(text, $"\"{arguments.Major}.{arguments.Minor}.{arguments.Patch}\"");
+                var assemblyVersionRegex = new Regex("AssemblyVersion[(](.*?)?[)]");
+                text = assemblyVersionRegex.Replace(text, $"AssemblyVersion(\"{arguments.Major}.{arguments.Minor}.{arguments.Patch}\")");
+                var assemblyFileVersionRegex = new Regex("AssemblyFileVersion[(](.*?)?[)]");
+                text = assemblyFileVersionRegex.Replace(text, $"AssemblyFileVersion(\"{arguments.Major}.{arguments.Minor}.{arguments.Patch}\")");
+                var assemblyInformationalVersionRegex = new Regex("AssemblyInformationalVersion[(](.*?)?[)]");
+                text = assemblyInformationalVersionRegex.Replace(text, $"AssemblyInformationalVersion(\"{arguments.Major}.{arguments.Minor}.{arguments.Patch}\")");
                 Encoding utf8WithBom = new UTF8Encoding(true);
                 File.WriteAllText(file, text, utf8WithBom);
             }
