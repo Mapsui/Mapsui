@@ -1,41 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CmdLine;
+﻿using CmdLine;
+using System;
 
 namespace VersionUpdater
 {
-
     [CommandLineArguments(Program = "VersionUpdater")]
     class VersionUpdaterArguments
     {
-        private string _version;
-
         public int Major { get; private set; }
         public int Minor { get; private set; }
         public int Patch { get; private set; }
-        public string PrereleaseString { get; private set; }
+        public string Prerelease { get; private set; }
 
         [CommandLineParameter(Command = "version", Default = "", Description = "The version number to set",
             Required = true)]
-        public string Version
-
-        {
-            get => _version;
-            set
-            {
-
-                _version = value;
-
-            }
-        }
+        public string Version { get; set; }
 
         private (int, int, int, string) ParseVersion(string version)
         {
-            var elements = version.Split('.');
-            
+            var parts = version.Trim().Split(new[] {'-', ' '});
+
+            if (parts.Length > 2) throw new Exception("Only one dash or one space is allowed.");
+
+            var elements = parts[0].Split('.');
+
             if (elements.Length > 4) throw new Exception("Version can only have 4 or less elements");
             
             return (
@@ -47,7 +34,7 @@ namespace VersionUpdater
 
         public void ParseVersion()
         {
-            (Major, Minor, Patch, PrereleaseString) = ParseVersion(_version);
+            (Major, Minor, Patch, Prerelease) = ParseVersion(Version);
         }
 
 
