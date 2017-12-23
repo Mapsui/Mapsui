@@ -24,7 +24,7 @@ namespace VersionUpdater
         public static IEnumerable<string> GetFiles()
         {
             foreach (string file in Directory.EnumerateFiles(
-                Directory.GetCurrentDirectory(), "AssemblyInfo.cs", SearchOption.AllDirectories))
+                Environment.CurrentDirectory, "AssemblyInfo.cs", SearchOption.AllDirectories))
             {
                 yield return file;
             }
