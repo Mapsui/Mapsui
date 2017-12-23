@@ -4,14 +4,12 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using CmdLine;
 
 namespace VersionUpdater
 {
     static class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             var arguments = VersionUpdaterArguments.Parse();
             Console.WriteLine($"{nameof(arguments.Major)}  {arguments.Major}");
