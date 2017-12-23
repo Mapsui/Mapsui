@@ -75,6 +75,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuSpec", "NuSpec", "{D90027
 		NuSpec\Mapsui.nuspec = NuSpec\Mapsui.nuspec
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{CB6BE9F9-5ECF-471B-9D93-605E2BD6825D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VersionUpdater", "Tools\VersionUpdater\VersionUpdater.csproj", "{A6D5A694-454C-432B-BB24-AB784876E8E1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|AnyCPU = Debug|AnyCPU
@@ -168,6 +172,10 @@ Global
 		{46519792-2F00-4FB7-99EF-1465AC7B8994}.Debug|AnyCPU.Build.0 = Debug|Any CPU
 		{46519792-2F00-4FB7-99EF-1465AC7B8994}.Release|AnyCPU.ActiveCfg = Release|Any CPU
 		{46519792-2F00-4FB7-99EF-1465AC7B8994}.Release|AnyCPU.Build.0 = Release|Any CPU
+		{A6D5A694-454C-432B-BB24-AB784876E8E1}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
+		{A6D5A694-454C-432B-BB24-AB784876E8E1}.Debug|AnyCPU.Build.0 = Debug|Any CPU
+		{A6D5A694-454C-432B-BB24-AB784876E8E1}.Release|AnyCPU.ActiveCfg = Release|Any CPU
+		{A6D5A694-454C-432B-BB24-AB784876E8E1}.Release|AnyCPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -185,6 +193,7 @@ Global
 		{5C1F0E76-BF98-4C6E-8AAB-CDB7E3735A9C} = {969DB691-49FB-4785-98F4-2112CC1BA7C4}
 		{FF1A03F0-8C0C-4FAB-A229-42AD625B5456} = {F7130D3D-4E62-4EB3-B74C-1E819E017048}
 		{46519792-2F00-4FB7-99EF-1465AC7B8994} = {F7130D3D-4E62-4EB3-B74C-1E819E017048}
+		{A6D5A694-454C-432B-BB24-AB784876E8E1} = {CB6BE9F9-5ECF-471B-9D93-605E2BD6825D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {22D684C3-0BD3-4D8A-AB23-748FB5527F6F}
