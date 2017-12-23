@@ -17,11 +17,15 @@ namespace VersionUpdater
 
         private (int, int, int, string) ParseVersion(string version)
         {
-            var parts = version.Trim().Split(new[] {'-', ' '});
+            var startPrerelease = version.Trim().IndexOfAny(new[] {'-', ' '});
 
-            if (parts.Length > 2) throw new Exception("Only one dash or one space is allowed.");
+            if (startPrerelease > 0)
+            {
+                Prerelease = version.Substring(startPrerelease);
+                version = version.Substring(0, startPrerelease);
+            }
 
-            var elements = parts[0].Split('.');
+            var elements = version.Split('.');
 
             if (elements.Length > 4) throw new Exception("Version can only have 4 or less elements");
             
@@ -29,7 +33,7 @@ namespace VersionUpdater
                 int.Parse(elements[0]),
                 elements.Length > 1 ? int.Parse(elements[1]) : 0,
                 elements.Length > 2 ? int.Parse(elements[2]) : 0,
-                elements.Length > 3 ? elements[3] : "");
+                Prerelease);
         }
 
         public void ParseVersion()
