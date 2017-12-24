@@ -42,3 +42,6 @@ Release/
 
 project.lock.json
 *.nuget.props
+/Tools/VersionUpdater.pdb
+/Tools/VersionUpdater.exe.config
+/Tools/VersionUpdater.exe
