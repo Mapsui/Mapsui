@@ -194,14 +194,15 @@ namespace Mapsui.Rendering.Xaml
             if (style is LabelStyle)
             {
                 var labelStyle = (LabelStyle) style;
+                var labelText = labelStyle.GetLabelText(feature);
+                if (string.IsNullOrEmpty(labelText)) return;
                 canvas.Children.Add(LabelRenderer.RenderLabel(feature.Geometry.GetBoundingBox().GetCentroid(),
-                    labelStyle, viewport, labelStyle.GetLabelText(feature)));
+                    labelStyle, viewport, labelText));
             }
             else
             {
                 Shape renderedGeometry;
-                object cachedObject;
-                if (feature.RenderedGeometry.TryGetValue(style, out cachedObject))
+                if (feature.RenderedGeometry.TryGetValue(style, out var cachedObject))
                 {
                     renderedGeometry = (Shape)cachedObject; // Has to be Shape
                     PositionGeometry(renderedGeometry, viewport, style, feature);

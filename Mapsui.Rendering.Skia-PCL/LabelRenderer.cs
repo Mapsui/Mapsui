@@ -31,6 +31,7 @@ namespace Mapsui.Rendering.Skia
         public static void Draw(SKCanvas canvas, LabelStyle style, IFeature feature, float x, float y)
         {
             var text = style.GetLabelText(feature);
+            if (string.IsNullOrEmpty(text)) return;
             DrawLabel(canvas, x, y, style, text);
         }
 

@@ -45,10 +45,7 @@ namespace Mapsui.Rendering.Xaml
                 Child = textblock
             };
 
-            double textWidth;
-            double textHeight;
-
-            DetermineTextWidthAndHeightWpf(out textWidth, out textHeight, labelStyle, labelText);
+            DetermineTextWidthAndHeightWpf(out var textWidth, out var textHeight, labelStyle, labelText);
 
             border.SetValue(Canvas.LeftProperty, windowsPosition.X + labelStyle.Offset.X
                 - (textWidth + 2 * witdhMargin) * (short)labelStyle.HorizontalAlignment * 0.5f);

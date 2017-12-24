@@ -71,6 +71,20 @@ namespace Mapsui.Tests.Common.Maps
                                 BackColor = null
                             }
                         }
+                },
+                new Feature
+                {
+                    Geometry = new Point(50, -50),
+                    Styles = new[]
+                    {
+                        new LabelStyle
+                        {
+                            Text = string.Empty,
+                            BackColor = new Brush(Color.Black),
+                            ForeColor = Color.White,
+                            LabelMethod = f => null
+                        }
+                    }
                 }
             };
             var provider = new MemoryProvider(features);
