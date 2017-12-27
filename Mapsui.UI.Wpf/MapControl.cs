@@ -35,7 +35,7 @@ namespace Mapsui.UI.Wpf
                 "Resolution", typeof(double), typeof(MapControl),
                 new PropertyMetadata(OnResolutionChanged));
 
-        private readonly Rectangle _bboxRect = CreateSelectRectangle();
+        private readonly Rectangle _selectRectangle = CreateSelectRectangle();
         private readonly DoubleAnimation _zoomAnimation = new DoubleAnimation();
         private readonly Storyboard _zoomStoryBoard = new Storyboard();
         private Point _currentMousePosition;
@@ -54,7 +54,7 @@ namespace Mapsui.UI.Wpf
         {
             Children.Add(RenderCanvas);
             Children.Add(RenderElement);
-            Children.Add(_bboxRect);
+            Children.Add(_selectRectangle);
 
             RenderElement.PaintSurface += SKElementOnPaintSurface;
             RenderingWeakEventManager.AddHandler(CompositionTargetRendering);
@@ -94,7 +94,7 @@ namespace Mapsui.UI.Wpf
                 Opacity = 0.3,
                 VerticalAlignment = VerticalAlignment.Top,
                 HorizontalAlignment = HorizontalAlignment.Left,
-                Visibility = Visibility.Visible
+                Visibility = Visibility.Collapsed
             };
         }
 
@@ -540,14 +540,13 @@ namespace Mapsui.UI.Wpf
 
         public void ZoomToBox(Geometries.Point beginPoint, Geometries.Point endPoint)
         {
-            double x, y, resolution;
             var width = Math.Abs(endPoint.X - beginPoint.X);
             var height = Math.Abs(endPoint.Y - beginPoint.Y);
             if (width <= 0) return;
             if (height <= 0) return;
 
             ZoomHelper.ZoomToBoudingbox(beginPoint.X, beginPoint.Y, endPoint.X, endPoint.Y,
-                ActualWidth, ActualHeight, out x, out y, out resolution);
+                ActualWidth, ActualHeight, out var x, out var y, out var resolution);
             resolution = ZoomHelper.ClipResolutionToExtremes(_map.Resolutions, resolution);
 
             Map.Viewport.Center = new Geometries.Point(x, y);
@@ -564,9 +563,7 @@ namespace Mapsui.UI.Wpf
         {
             Dispatcher.BeginInvoke(new Action(() =>
             {
-                _bboxRect.Margin = new Thickness(0, 0, 0, 0);
-                _bboxRect.Width = 0;
-                _bboxRect.Height = 0;
+                _selectRectangle.Visibility = Visibility.Collapsed;
             }));
         }
 
@@ -590,10 +587,11 @@ namespace Mapsui.UI.Wpf
                     from.Y = to.Y;
                     to.Y = temp.Y;
                 }
-
-                _bboxRect.Width = to.X - from.X;
-                _bboxRect.Height = to.Y - from.Y;
-                _bboxRect.Margin = new Thickness(from.X, from.Y, 0, 0);
+                
+                _selectRectangle.Width = to.X - from.X;
+                _selectRectangle.Height = to.Y - from.Y;
+                _selectRectangle.Margin = new Thickness(from.X, from.Y, 0, 0);
+                _selectRectangle.Visibility = Visibility.Visible;
             }
         }
 
