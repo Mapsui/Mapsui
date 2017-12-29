@@ -183,6 +183,7 @@ namespace Mapsui.UI.iOS
 		{
 		    var screenPosition = GetScreenPosition(touches);
 		    if (screenPosition == null) return;
+		    if (_touchDown == null) return;
      	    Map.InvokeInfo(screenPosition, _touchDown, _skiaScale, _renderer.SymbolCache, WidgetTouch);  
 		}
 
