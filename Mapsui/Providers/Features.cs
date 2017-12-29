@@ -81,10 +81,24 @@ namespace Mapsui.Providers
 
         public void Delete(object id)
         {
-            if (string.IsNullOrEmpty(PrimaryKey)) throw new Exception("Primary key of Features was not set");
+            if (string.IsNullOrEmpty(PrimaryKey)) throw new Exception($"You need to set the {nameof(PrimaryKey)} to use the id");
             _features.Remove(_features.First(f => f[PrimaryKey].Equals(id)));
         }
 
+        public void Delete(IFeature feature, Func<IFeature, IFeature, bool> compare = null)
+        {
+            if (compare == null)
+            {
+                if (!_features.Remove(feature)) throw new Exception("Feature not found");
+            }
+            else
+            {
+                var fea = _features.FirstOrDefault(f => compare(f, feature));
+                if (!_features.Remove(fea))
+                    throw new Exception("Feature not found");
+            }
+        }
+        
         public void Clear()
         {
             _features.Clear();
