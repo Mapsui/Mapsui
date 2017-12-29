@@ -286,6 +286,9 @@ namespace Mapsui.UI.Wpf
 
             Map.Viewport.Transform(current.X, current.Y, current.X, current.Y, Map.Viewport.Resolution/resolution);
 
+            ViewportLimiter.Limit(_map.Viewport, _map.ZoomMode, _map.ZoomLimits, _map.Resolutions,
+                _map.PanMode, _map.PanLimits, _map.Envelope);
+
             _map.ViewChanged(true);
             OnViewChanged();
             RefreshGraphics();
@@ -380,6 +383,9 @@ namespace Mapsui.UI.Wpf
             {
                 Map.Viewport.Width = ActualWidth;
                 Map.Viewport.Height = ActualHeight;
+
+                ViewportLimiter.Limit(_map.Viewport, _map.ZoomMode, _map.ZoomLimits, _map.Resolutions,
+                    _map.PanMode, _map.PanLimits, _map.Envelope);
             }
         }
 
@@ -511,8 +517,13 @@ namespace Mapsui.UI.Wpf
                     return; // It turns out that sometimes MouseMove+Pressed is called before MouseDown
 
                 _currentMousePosition = e.GetPosition(this); //Needed for both MouseMove and MouseWheel event
+
                 _map.Viewport.Transform(_currentMousePosition.X, _currentMousePosition.Y, _previousMousePosition.X,
                     _previousMousePosition.Y);
+
+                ViewportLimiter.Limit(_map.Viewport, _map.ZoomMode, _map.ZoomLimits, _map.Resolutions,
+                    _map.PanMode, _map.PanLimits, _map.Envelope);
+
                 _previousMousePosition = _currentMousePosition;
                 _map.ViewChanged(false);
                 OnViewChanged(true);
@@ -526,6 +537,9 @@ namespace Mapsui.UI.Wpf
 
             if (_map.Viewport.TryInitializeViewport(_map, ActualWidth, ActualHeight))
             {
+                ViewportLimiter.Limit(_map.Viewport, _map.ZoomMode, _map.ZoomLimits, _map.Resolutions,
+                    _map.PanMode, _map.PanLimits, _map.Envelope);
+
                 Map.ViewChanged(true);
                 OnViewportInitialized();
             }
@@ -647,6 +661,9 @@ namespace Mapsui.UI.Wpf
             var deltaScale = GetDeltaScale(e.DeltaManipulation.Scale);
 
             Map.Viewport.Transform(currentX, currentY, previousX, previousY, deltaScale);
+
+            ViewportLimiter.Limit(_map.Viewport, _map.ZoomMode, _map.ZoomLimits, _map.Resolutions,
+                _map.PanMode, _map.PanLimits, _map.Envelope);
 
             _invalid = true;
             OnViewChanged(true);
