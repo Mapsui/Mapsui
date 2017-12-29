@@ -113,8 +113,7 @@ namespace Mapsui.UI.iOS
 
 			if (touches.Count == 1)
 			{
-				var touch = touches.AnyObject as UITouch;
-				if (touch != null)
+			    if (touches.AnyObject is UITouch touch)
 				{
 					var currentPos = touch.LocationInView (this);
 					var previousPos = touch.PreviousLocationInView (this);
