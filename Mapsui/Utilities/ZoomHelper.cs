@@ -26,33 +26,14 @@ namespace Mapsui.Utilities
         {
             if (resolutions == null || resolutions.Count == 0) return resolution / 2.0;
 
-            // smaller than smallest
-            if (resolutions[resolutions.Count - 1] > resolution) return resolutions[resolutions.Count - 1];
-
-            foreach (var resolutionOfLevel in resolutions)
-                if (resolutionOfLevel < resolution) return resolutionOfLevel;
+            foreach (var r in resolutions)
+                if (r < resolution) return r;
             return resolutions[resolutions.Count - 1];
         }
-
-        public static double ClipResolutionToExtremes(IReadOnlyList<double> resolutions, double resolution)
-        {
-            if (resolutions.Count == 0) return resolution;
-
-            // smaller than smallest
-            if (resolutions[resolutions.Count - 1] > resolution) return resolutions[resolutions.Count - 1];
-
-            // bigger than biggest
-            if (resolutions[0] < resolution) return resolutions[0];
-
-            return resolution;
-        }
-
+        
         public static double ZoomOut(IReadOnlyList<double> resolutions, double resolution)
         {
             if (resolutions == null || resolutions.Count == 0) return resolution * 2.0;
-
-            // bigger than biggest
-            if (resolutions[0] < resolution) return resolutions[0];
 
             for (var i = resolutions.Count - 1; i >= 0; i--)
                 if (resolutions[i] > resolution) return resolutions[i];

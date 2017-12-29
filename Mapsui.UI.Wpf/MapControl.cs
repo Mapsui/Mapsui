@@ -248,7 +248,11 @@ namespace Mapsui.UI.Wpf
             if (double.IsNaN(_toResolution))
                 _toResolution = Map.Viewport.Resolution;
 
-            _toResolution = ZoomHelper.ZoomIn(_map.Resolutions, _toResolution);
+            var resolution = ZoomHelper.ZoomIn(_map.Resolutions, _toResolution);
+
+            _toResolution = ViewportLimiter.LimitResolution(resolution, _map.Viewport.Width, _map.Viewport.Height,
+                _map.ZoomMode, _map.ZoomLimits, _map.Resolutions, _map.Envelope);
+            
             ZoomMiddle();
         }
 
@@ -257,7 +261,11 @@ namespace Mapsui.UI.Wpf
             if (double.IsNaN(_toResolution))
                 _toResolution = Map.Viewport.Resolution;
 
-            _toResolution = ZoomHelper.ZoomOut(_map.Resolutions, _toResolution);
+            var resolution = ZoomHelper.ZoomOut(_map.Resolutions, _toResolution);
+
+            _toResolution = ViewportLimiter.LimitResolution(resolution, _map.Viewport.Width, _map.Viewport.Height,
+                _map.ZoomMode, _map.ZoomLimits, _map.Resolutions, _map.Envelope);
+
             ZoomMiddle();
         }
 
@@ -318,9 +326,20 @@ namespace Mapsui.UI.Wpf
                 _toResolution = Map.Viewport.Resolution;
 
             if (e.Delta > Constants.Epsilon)
-                _toResolution = ZoomHelper.ZoomIn(_map.Resolutions, _toResolution);
+            {
+                var resolution = ZoomHelper.ZoomIn(_map.Resolutions, _toResolution);
+
+                _toResolution = ViewportLimiter.LimitResolution(resolution, _map.Viewport.Width, _map.Viewport.Height,
+                    _map.ZoomMode, _map.ZoomLimits, _map.Resolutions, _map.Envelope);
+
+            }
             else if (e.Delta < Constants.Epsilon)
-                _toResolution = ZoomHelper.ZoomOut(_map.Resolutions, _toResolution);
+            {
+                var resolution = ZoomHelper.ZoomOut(_map.Resolutions, _toResolution);
+
+                _toResolution = ViewportLimiter.LimitResolution(resolution, _map.Viewport.Width, _map.Viewport.Height,
+                    _map.ZoomMode, _map.ZoomLimits, _map.Resolutions, _map.Envelope);
+            }
 
             e.Handled = true; //so that the scroll event is not sent to the html page.
 
@@ -547,11 +566,14 @@ namespace Mapsui.UI.Wpf
 
             ZoomHelper.ZoomToBoudingbox(beginPoint.X, beginPoint.Y, endPoint.X, endPoint.Y,
                 ActualWidth, ActualHeight, out var x, out var y, out var resolution);
-            resolution = ZoomHelper.ClipResolutionToExtremes(_map.Resolutions, resolution);
+            
+            resolution = ViewportLimiter.LimitResolution(resolution, _map.Viewport.Width, _map.Viewport.Height, 
+                _map.ZoomMode, _map.ZoomLimits, _map.Resolutions, _map.Envelope);
 
+            _map.Viewport.Resolution = resolution;
             Map.Viewport.Center = new Geometries.Point(x, y);
-            Map.Viewport.Resolution = resolution;
-            _toResolution = resolution;
+
+            _toResolution = resolution; // for animation
 
             _map.ViewChanged(true);
             OnViewChanged(true);

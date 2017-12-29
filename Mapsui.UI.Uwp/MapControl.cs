@@ -215,8 +215,20 @@ namespace Mapsui.UI.Uwp
 
         private double DetermineNewResolution(int mouseWheelDelta, double currentResolution)
         {
-            if (mouseWheelDelta > 0) return ZoomHelper.ZoomIn(_map.Resolutions, currentResolution);
-            if (mouseWheelDelta < 0) return ZoomHelper.ZoomOut(_map.Resolutions, currentResolution);
+            if (mouseWheelDelta > 0)
+            {
+                var resolution = ZoomHelper.ZoomIn(_map.Resolutions, currentResolution);
+
+                return ViewportLimiter.LimitResolution(resolution, _map.Viewport.Width, _map.Viewport.Height, 
+                    _map.ZoomMode, _map.ZoomLimits, _map.Resolutions, _map.Envelope);
+            }
+            if (mouseWheelDelta < 0)
+            {
+                var resolution = ZoomHelper.ZoomOut(_map.Resolutions, currentResolution);
+
+                return ViewportLimiter.LimitResolution(resolution, _map.Viewport.Width, _map.Viewport.Height,
+                    _map.ZoomMode, _map.ZoomLimits, _map.Resolutions, _map.Envelope);
+            }
             return currentResolution;
         }
 
@@ -380,10 +392,14 @@ namespace Mapsui.UI.Uwp
                 beginPoint.X, beginPoint.Y, endPoint.X, endPoint.Y, 
                 Map.Viewport.Width, Map.Viewport.Height, 
                 out var x, out var y, out var resolution);
-            resolution = ZoomHelper.ClipResolutionToExtremes(_map.Resolutions, resolution);
 
-            Map.Viewport.Center = new Geometries.Point(x, y);
-            Map.Viewport.Resolution = resolution;
+            resolution = ViewportLimiter.LimitResolution(resolution, _map.Viewport.Width, _map.Viewport.Height, _map.ZoomMode, _map.ZoomLimits,
+                _map.Resolutions, _map.Envelope);
+
+            _map.Viewport.Resolution = resolution;
+
+            _map.Viewport.Center = new Geometries.Point(x, y);
+
 
             _map.ViewChanged(true);
             OnViewChanged();

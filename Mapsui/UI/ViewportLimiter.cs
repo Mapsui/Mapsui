@@ -60,44 +60,51 @@ namespace Mapsui.UI
             ZoomMode zoomMode, MinMax zoomLimits, IReadOnlyList<double> mapResolutions, 
             PanMode panMode, BoundingBox panExtents, BoundingBox mapEnvelope)
         {
-            LimitResolution(viewport, zoomMode, zoomLimits, mapResolutions, mapEnvelope);
+            viewport.Resolution = LimitResolution(viewport.Resolution, viewport.Width, viewport.Height, zoomMode, zoomLimits, mapResolutions, mapEnvelope);
             LimitExtent(viewport, panMode, panExtents, mapEnvelope);
         }
 
-        public static void LimitResolution(IViewport viewport, ZoomMode zoomMode, MinMax zoomLimits, 
+        public static double LimitResolution(double resolution, double screenWidth, double screenHeight, ZoomMode zoomMode, MinMax zoomLimits, 
             IReadOnlyList<double> mapResolutions, BoundingBox mapEnvelope)
         {
-            if (zoomMode == ZoomMode.None) return;
+            if (zoomMode == ZoomMode.None) return resolution;
 
             var resolutionExtremes = zoomLimits ?? GetExtremes(mapResolutions);
-            if (resolutionExtremes == null) return;
+            if (resolutionExtremes == null) return resolution;
 
             if (zoomMode == ZoomMode.KeepWithinResolutions)
             {
-                if (resolutionExtremes.Min > viewport.Resolution) viewport.Resolution = resolutionExtremes.Min;
-                if (resolutionExtremes.Max < viewport.Resolution) viewport.Resolution = resolutionExtremes.Max;
+                if (resolutionExtremes.Min > resolution) return resolutionExtremes.Min;
+                if (resolutionExtremes.Max < resolution) return resolutionExtremes.Max;
             }
             else if (zoomMode == ZoomMode.KeepWithinResolutionsAndAlwaysFillViewport)
             {
-                if (resolutionExtremes.Min > viewport.Resolution) viewport.Resolution = resolutionExtremes.Min;
+                if (resolutionExtremes.Min > resolution)return resolutionExtremes.Min;
                 
                 // This is the ...AndAlwaysFillViewport part
-                var viewportFillingResolution = CalculateResolutionAtWhichMapFillsViewport(viewport, mapEnvelope);
-                if (viewportFillingResolution < resolutionExtremes.Min) viewport.Resolution = viewport.Resolution; // Mission impossible. Can't adhere to both restrictions
+                var viewportFillingResolution = CalculateResolutionAtWhichMapFillsViewport(screenWidth, screenHeight, mapEnvelope);
+                if (viewportFillingResolution < resolutionExtremes.Min) return resolution; // Mission impossible. Can't adhere to both restrictions
                 var limit = Math.Min(resolutionExtremes.Max, viewportFillingResolution);
-                if (limit < viewport.Resolution) viewport.Resolution = limit;
+                if (limit < resolution) return limit;
             }
+
+            return resolution;
         }
 
-        private static double CalculateResolutionAtWhichMapFillsViewport(IViewport viewport, BoundingBox mapEnvelope)
+        private static double CalculateResolutionAtWhichMapFillsViewport(double screenWidth, double screenHeight, BoundingBox mapEnvelope)
         {
-            return Math.Min(mapEnvelope.Width / viewport.Width, mapEnvelope.Height / viewport.Height);
+            return Math.Min(mapEnvelope.Width / screenWidth, mapEnvelope.Height / screenHeight);
         }
 
         public static void LimitExtent(IViewport viewport, PanMode panMode, BoundingBox panLimits, BoundingBox mapEnvelope)
         {
             var maxExtent = panLimits ?? mapEnvelope;
-            if (maxExtent == null) return; // Can be null because both panLimits and Map.Extent can be null. The Map.Extent can be null if the extent of all layers is null
+            if (maxExtent == null)
+            {
+                // Can be null because both panLimits and Map.Extent can be null. 
+                // The Map.Extent can be null if the extent of all layers is null
+                return; 
+            }
 
             if (panMode == PanMode.KeepCenterWithinExtents)
             {
@@ -111,7 +118,8 @@ namespace Mapsui.UI
                 var cos = Math.Abs(Math.Cos(viewport.Rotation * Utilities.Constants.DegreesToRadians));
                 var sin = Math.Abs(Math.Sin(viewport.Rotation * Utilities.Constants.DegreesToRadians));
 
-                var window = viewport.WindowExtent.ToBoundingBox();
+                // todo: take into account rotation
+                // var window = viewport.WindowExtent.ToBoundingBox();
 
                 if (MapWidthSpansViewport(maxExtent.Width, viewport.Width, viewport.Resolution)) // if it does't fit don't restrict
                 {
