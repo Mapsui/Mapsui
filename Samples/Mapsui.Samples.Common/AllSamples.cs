@@ -23,6 +23,7 @@ namespace Mapsui.Samples.Common
                 ["Info"] = InfoLayersSample.CreateMap,
                 ["MbTiles"] = MbTilesSample.CreateMap,
                 ["Keep Within Extents"] = KeepWithinExtentsSample.CreateMap,
+                ["Pen Stroke Cap"] = PenStrokeCapSample.CreateMap,
                 ["Animated point movement"] = AnimatedPointsSample.CreateMap,
                 ["TileSources: WMTS"] = WmtsSample.CreateMap,
                 ["TileSources: Bing maps"] = BingSample.CreateMap,

@@ -66,6 +66,7 @@
     <Compile Include="Maps\MutatingTriangleSample.cs" />
     <Compile Include="Maps\OsmSample.cs" />
     <Compile Include="Maps\InfoLayersSample.cs" />
+    <Compile Include="Maps\PenStrokeCapSample.cs" />
     <Compile Include="Maps\RasterizingLayerSample.cs" />
     <Compile Include="Maps\EmptyMapSample.cs" />
     <Compile Include="Maps\WidgetSample.cs" />
