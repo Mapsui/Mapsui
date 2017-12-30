@@ -83,23 +83,6 @@ namespace Mapsui.Samples.Common.Maps
                             Line = new Pen(Color.Gray, PenWidth) {PenStrokeCap = PenStrokeCap.Square}
                         }
                     },
-                },
-                new Feature
-                {
-                    Geometry = new LineString(new[]
-                    {
-                        new Point(-1 * PolygonSize, -1 * PolygonSize),
-                        new Point(-1 * PolygonSize, -2 * PolygonSize),
-                        new Point(-2 * PolygonSize, -2 * PolygonSize),
-                        new Point(-2 * PolygonSize, -1 * PolygonSize)
-                    }),
-                    Styles = new[]
-                    {
-                        new VectorStyle
-                        {
-                            Line = new Pen(Color.Gray, PenWidth) {PenStrokeCap = PenStrokeCap.Triangle}
-                        }
-                    },
                 }
             };
         }

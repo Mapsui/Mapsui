@@ -52,8 +52,6 @@ namespace Mapsui.Rendering.Xaml
                     return PenLineCap.Round;
                 case PenStrokeCap.Square:
                     return PenLineCap.Square;
-                case PenStrokeCap.Triangle:
-                    return PenLineCap.Triangle;
                 default:
                     return PenLineCap.Flat;
             }

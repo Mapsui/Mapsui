@@ -4,7 +4,6 @@
     {
         Butt = 0,
         Round = 1,
-        Square = 2,
-        Triangle = 3,
+        Square = 2
     }
 }
