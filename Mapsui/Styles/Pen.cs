@@ -2,9 +2,6 @@ namespace Mapsui.Styles
 {
     public class Pen
     {
-        private PenStyle _penStyle = PenStyle.Solid;
-        private PenStrokeCap _penStrokeCap = PenStrokeCap.Butt;
-
         public Pen() {}
 
         public Pen(Color color, double width = 1)
@@ -16,17 +13,9 @@ namespace Mapsui.Styles
         public double Width { get; set; } = 1;
         public Color Color { get; set; }
 
-        public PenStyle PenStyle
-        {
-            get { return _penStyle; }
-            set { _penStyle = value; }
-        }
+        public PenStyle PenStyle { get; set; } = PenStyle.Solid;
 
-        public PenStrokeCap PenStrokeCap
-        {
-            get { return _penStrokeCap; }
-            set { _penStrokeCap = value; }
-        }
+        public PenStrokeCap PenStrokeCap { get; set; } = PenStrokeCap.Butt;
 
         public override bool Equals(object obj)
         {
@@ -40,20 +29,17 @@ namespace Mapsui.Styles
         public bool Equals(Pen pen)
         {
             // ReSharper disable once CompareOfFloatsByEqualityOperator
-            if (Width != pen.Width)
-            {
-                return false;
-            }
+            if (Width != pen.Width) return false;
+            
+            //if one or the other is null then they are not equal, but not when they are both null
+            if ((Color == null) ^ (pen.Color == null)) return false;
 
-            if ((Color == null) ^ (pen.Color == null)) //if one or the other is null then they are not equal, but not when they are both null
-            {
-                return false;
-            }
+            if (Color != null && !Color.Equals(pen.Color)) return false;
 
-            if (Color != null && !Color.Equals(pen.Color))
-            {
-                return false;
-            }
+            if (PenStyle != pen.PenStyle) return false;
+
+            if (PenStrokeCap != pen.PenStrokeCap) return false;
+
 
             return true;
         }
