@@ -26,6 +26,9 @@ The best way to get going with Mapsui is by using the Samples. If you clone the 
 ## Questions
 If you have a question please submit an issue [here](https://github.com/pauldendulk/Mapsui/issues)
 
+## Donations
+So far I do most of my testing in the Simulator because I do not have a iPhone/iPad at home. So if you have an old iPad/iPhone lying around I'd be very interesed. A cracked screen is not a problem :). Contact me at pauldendulk@gmail.com.
+
 ## Supported Platforms
 
 - **WPF** - Windows Desktop on .NET 4.5.2
