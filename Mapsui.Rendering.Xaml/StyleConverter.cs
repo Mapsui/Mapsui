@@ -7,6 +7,7 @@ using System.Windows;
 using System.Collections.Generic;
 using System.Windows.Media.Imaging;
 using Mapsui.Styles;
+using System;
 
 namespace Mapsui.Rendering.Xaml
 {
@@ -39,6 +40,23 @@ namespace Mapsui.Rendering.Xaml
             }
 
             return null;
+        }
+
+        public static PenLineCap MapsuiStrokeCaptoPenLineCap(PenStrokeCap penStrokeCap)
+        {
+            switch(penStrokeCap)
+            {
+                case PenStrokeCap.Butt:
+                    return PenLineCap.Flat;
+                case PenStrokeCap.Round:
+                    return PenLineCap.Round;
+                case PenStrokeCap.Square:
+                    return PenLineCap.Square;
+                case PenStrokeCap.Triangle:
+                    return PenLineCap.Triangle;
+                default:
+                    return PenLineCap.Flat;
+            }
         }
 
         public static XamlBrush MapsuiBrushToXaml(Styles.Brush brush, SymbolCache symbolCache = null)

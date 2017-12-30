@@ -4,6 +4,7 @@ using Color = Mapsui.Styles.Color;
 using Media = System.Windows.Media;
 using WinPoint = System.Windows.Point;
 using WinColor = System.Windows.Media.Color;
+using System.Windows.Media;
 
 namespace Mapsui.Rendering.Xaml
 {
@@ -12,6 +13,11 @@ namespace Mapsui.Rendering.Xaml
         public static Media.DoubleCollection ToXaml(this PenStyle penStyle)
         {
             return StyleConverter.MapsuiPentoXaml(penStyle);
+        }
+
+        public static PenLineCap ToXaml(this PenStrokeCap penStrokeCap)
+        {
+            return StyleConverter.MapsuiStrokeCaptoPenLineCap(penStrokeCap);
         }
 
         public static WinColor ToXaml(this Color color)
