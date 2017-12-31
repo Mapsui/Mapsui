@@ -47,7 +47,7 @@ namespace Mapsui.UI.iOS
             Map = new Map();
             BackgroundColor = UIColor.White;
 
-            _canvas.TranslatesAutoresizingMaskIntoConstraints = false;
+            _canvas.TranslatesAutoresizingMaskIntoConstraints = true;
             _canvas.ClipsToBounds = true;
             _canvas.MultipleTouchEnabled = true;
 
