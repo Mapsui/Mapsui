@@ -27,7 +27,7 @@ namespace Mapsui.UI.Android
         private PointF _previousTouchCenter = new PointF();
         private PointF _touchDownPosition = new PointF();
         private double _previousAngle;
-        private float _oldDist = 1f;
+        private float _previousDistance = 1f;
         private Rendering.Skia.MapRenderer _renderer;
         private SKCanvasView _canvas;
         private Map _map;
@@ -64,11 +64,11 @@ namespace Mapsui.UI.Android
 
         protected override void OnSizeChanged(int w, int h, int oldw, int oldh)
         {
-			base.OnSizeChanged (w, h, oldw, oldh);
-			PushSizeOntoViewport ();
+			base.OnSizeChanged(w, h, oldw, oldh);
+			PushSizeOntoViewport();
         }
 
-		void PushSizeOntoViewport ()
+		void PushSizeOntoViewport()
 		{
 			if (Map != null)
 			{
@@ -124,7 +124,7 @@ namespace Mapsui.UI.Android
                     break;
                 case MotionEventActions.Pointer2Down:
                     _previousTouchPosition = null;
-                    _oldDist = Spacing(args.Event);
+                    _previousDistance = DistanceBetweenTouches(args.Event);
                     _touchCenter = GetTouchCenter(args.Event);
                     _previousTouchCenter = _touchCenter;
                     if (AllowPinchRotation)
@@ -161,16 +161,14 @@ namespace Mapsui.UI.Android
                             break;
                         case Zoom:
                             {
-                                if (args.Event.PointerCount < 2)
-                                    return;
+                                if (args.Event.PointerCount < 2) return;
 
-                                var newDist = Spacing(args.Event);
-                                var scale = newDist / _oldDist;
+                                var distance = DistanceBetweenTouches(args.Event);
+                                var scale = distance / _previousDistance;
+                                _previousDistance = distance;
 
-                                _oldDist = Spacing(args.Event);
                                 _previousTouchCenter = new PointF(_touchCenter.X, _touchCenter.Y);
                                 _touchCenter = GetTouchCenter(args.Event);
-
                                 
                                 _map.Viewport.Transform(
                                     _touchCenter.X / _scale,
@@ -191,7 +189,6 @@ namespace Mapsui.UI.Android
                                     _map.PanMode, _map.PanLimits, _map.Envelope);
 
                                 _canvas.Invalidate();
-
                             }
                             break;
                     }
@@ -199,17 +196,17 @@ namespace Mapsui.UI.Android
             }
         }
 
-        private static double Angle (MotionEvent me)
+        private static double Angle(MotionEvent me)
         {
             if (me.PointerCount < 2)
-                throw new ArgumentException ();
+                throw new ArgumentException();
             var x = me.GetX (1) - me.GetX (0);
             var y = me.GetY (1) - me.GetY (0);
             var rotation = Math.Atan2 (y, x) * 180.0 / Math.PI;  
             return rotation;
         }
 
-        private static float Spacing(MotionEvent me)
+        private static float DistanceBetweenTouches(MotionEvent me)
         {
             if (me.PointerCount < 2)
                 throw new ArgumentException();
@@ -222,8 +219,8 @@ namespace Mapsui.UI.Android
         private static PointF GetTouchCenter(MotionEvent motionEvent)
         {
             return new PointF(
-                motionEvent.GetX(0) + motionEvent.GetX(1) / 2,
-                motionEvent.GetY(0) + motionEvent.GetY(1) / 2);
+                (motionEvent.GetX(0) + motionEvent.GetX(1)) / 2,
+                (motionEvent.GetY(0) + motionEvent.GetY(1)) / 2);
         }
         
         private static Geometries.Point GetScreenPosition(MotionEvent motionEvent)
