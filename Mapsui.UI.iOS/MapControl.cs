@@ -19,7 +19,7 @@ namespace Mapsui.UI.iOS
     {
         private Map _map;
         private readonly MapRenderer _renderer = new MapRenderer();
-        private readonly SKGLView _canvas = new SKGLView();
+        private readonly SKCanvasView _canvas = new SKCanvasView();
         private nuint _previousTouchCount = 0;
         private nfloat _previousX;
         private nfloat _previousY;
@@ -47,7 +47,6 @@ namespace Mapsui.UI.iOS
             Map = new Map();
             BackgroundColor = UIColor.White;
 
-            _canvas.TranslatesAutoresizingMaskIntoConstraints = true;
             _canvas.ClipsToBounds = true;
             _canvas.MultipleTouchEnabled = true;
 
@@ -60,10 +59,14 @@ namespace Mapsui.UI.iOS
             MultipleTouchEnabled = true;
             UserInteractionEnabled = true;
 
-            _canvas.PaintSurface += OnPaintSurface;
+            //_canvas.PaintSurface += OnPaintSurface;
+            _canvas.PaintSurface +=OnPaintSurface;
         }
 
-        void OnPaintSurface(object sender, SKPaintGLSurfaceEventArgs skPaintSurfaceEventArgs)
+
+
+
+        void OnPaintSurface(object sender, SKPaintSurfaceEventArgs skPaintSurfaceEventArgs)
         {
             TryInitializeViewport();
             if (!_map.Viewport.Initialized) return;
