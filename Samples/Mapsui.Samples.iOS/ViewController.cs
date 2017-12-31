@@ -23,7 +23,8 @@ namespace Mapsui.Samples.iOS
         {
             return new MapControl(bounds)
             {
-                Map = Common.Maps.InfoLayersSample.CreateMap()
+                Map = Common.Maps.InfoLayersSample.CreateMap(),
+                AllowPinchRotation = true
             };                        
         }
     }

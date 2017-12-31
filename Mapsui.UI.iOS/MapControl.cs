@@ -24,9 +24,9 @@ namespace Mapsui.UI.iOS
 		private nfloat _previousX;
 		private nfloat _previousY;
 		private double _previousRadius;
-		private double _previousRotation;
 	    private float _skiaScale;
 	    private Point _touchDown = new Point();
+	    private double _previousRotation;
 
 		public event EventHandler ViewportInitialized;
 
@@ -96,7 +96,8 @@ namespace Mapsui.UI.iOS
 
 	    public override void TouchesBegan(NSSet touches, UIEvent evt)
 	    {
-	        _touchDown = GetScreenPosition(touches);
+	        _previousRotation = double.NaN;
+            _touchDown = GetScreenPosition(touches);
 	        base.TouchesBegan(touches, evt);
 	    }
         
@@ -150,8 +151,12 @@ namespace Mapsui.UI.iOS
 				    {
 				        var rotation = Math.Atan2(locations[1].Y - locations[0].Y, 
                             locations[1].X - locations[0].X) * 180.0 / Math.PI;
-				        _map.Viewport.Rotation += rotation - _previousRotation;
-				        _previousRotation = rotation;
+
+				        if (!double.IsNaN(_previousRotation)) // only rotate relative to the previous rotation
+				        {
+				            _map.Viewport.Rotation += rotation - _previousRotation;
+				        }
+				        _previousRotation =  rotation;
 				    }
 
 				    RefreshGraphics();
