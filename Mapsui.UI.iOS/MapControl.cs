@@ -30,7 +30,9 @@ namespace Mapsui.UI.iOS
 
 		public event EventHandler ViewportInitialized;
 
-		public MapControl (CGRect frame)
+        private double _innerRotation = 0;
+
+        public MapControl (CGRect frame)
 			: base (frame)
 		{
 			Initialize ();
@@ -95,8 +97,10 @@ namespace Mapsui.UI.iOS
 		}
 
 	    public override void TouchesBegan(NSSet touches, UIEvent evt)
-	    {
-	        _touchDown = GetScreenPosition(touches);
+        {
+            _innerRotation = _map.Viewport.Rotation;
+
+            _touchDown = GetScreenPosition(touches);
 	        base.TouchesBegan(touches, evt);
 	    }
         
@@ -141,26 +145,44 @@ namespace Mapsui.UI.iOS
 				centerY = centerY / touches.Count;
 
 				var radius = Algorithms.Distance (centerX, centerY, locations [0].X, locations [0].Y);
-				
-				if (_previousTouchCount == touches.Count)
-				{
-					_map.Viewport.Transform (centerX, centerY, _previousX, _previousY, radius / _previousRadius);
 
-				    if (AllowPinchRotation)
-				    {
-				        var rotation = Math.Atan2(locations[1].Y - locations[0].Y, 
-                            locations[1].X - locations[0].X) * 180.0 / Math.PI;
-				        _map.Viewport.Rotation += rotation - _previousRotation;
-				        _previousRotation = rotation;
-				    }
+                var rotation = Math.Atan2(locations[1].Y - locations[0].Y,
+                    locations[1].X - locations[0].X) * 180.0 / Math.PI;
 
-				    RefreshGraphics();
-				}
+                if (_previousTouchCount == touches.Count)
+                {
+                    _map.Viewport.Transform(centerX, centerY, _previousX, _previousY, radius / _previousRadius);
 
-				_previousX = centerX;
+                    if (AllowPinchRotation)
+                    {
+                        _innerRotation += rotation - _previousRotation;
+                        
+                        _innerRotation %= 360;
+
+                        if (_innerRotation > 180)
+                            _innerRotation -= 360;
+                        else if (_innerRotation < -180)
+                            _innerRotation += 360;
+
+                        if (_map.Viewport.Rotation == 0 && Math.Abs(_innerRotation) >= Math.Abs(UnSnapRotationDegrees))
+                            _map.Viewport.Rotation = _innerRotation;
+                        else if (_map.Viewport.Rotation != 0)
+                        {
+                            if (Math.Abs(_innerRotation) <= Math.Abs(ReSnapRotationDegrees))
+                                _map.Viewport.Rotation = 0;
+                            else
+                                _map.Viewport.Rotation = _innerRotation;
+                        }
+                    }
+
+                    RefreshGraphics();
+                }
+
+                _previousX = centerX;
 				_previousY = centerY;
 				_previousRadius = radius;
-			}
+                _previousRotation = rotation;
+            }
 			_previousTouchCount = touches.Count;
 		}
 
@@ -169,7 +191,7 @@ namespace Mapsui.UI.iOS
 			Refresh ();
 			HandleInfo (e.AllTouches);
 		    _previousTouchCount = 0;
-		}
+        }
 
 		private void HandleInfo (NSSet touches)
 		{
@@ -284,8 +306,10 @@ namespace Mapsui.UI.iOS
         }
 
 	    public bool AllowPinchRotation { get; set; }
+        public double UnSnapRotationDegrees { get; set; }
+        public double ReSnapRotationDegrees { get; set; }
 
-	    public Point WorldToScreen(Point worldPosition)
+        public Point WorldToScreen(Point worldPosition)
 	    {
 	        return SharedMapControl.WorldToScreen(Map.Viewport, _skiaScale, worldPosition);
 	    }

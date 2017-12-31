@@ -32,7 +32,9 @@ namespace Mapsui.UI.Android
         private SKCanvasView _canvas;
         private Map _map;
         private float _scale;
-        
+
+        private double _innerRotation = 0;
+
         public event EventHandler ViewportInitialized;
 
         public MapControl(Context context, IAttributeSet attrs) :
@@ -55,7 +57,7 @@ namespace Mapsui.UI.Android
             _canvas = new SKCanvasView(Context);
             _canvas.PaintSurface += CanvasOnPaintSurface;
             AddView(_canvas);
-           
+
             Map = new Map();
             _renderer = new Rendering.Skia.MapRenderer();
             TryInitializeViewport();
@@ -64,18 +66,18 @@ namespace Mapsui.UI.Android
 
         protected override void OnSizeChanged(int w, int h, int oldw, int oldh)
         {
-			base.OnSizeChanged (w, h, oldw, oldh);
-			PushSizeOntoViewport ();
+            base.OnSizeChanged (w, h, oldw, oldh);
+            PushSizeOntoViewport ();
         }
 
-		void PushSizeOntoViewport ()
-		{
-			if (Map != null)
-			{
-				Map.Viewport.Width = Width / _scale;
-				Map.Viewport.Height = Height / _scale;
-			}
-		}
+        void PushSizeOntoViewport ()
+        {
+            if (Map != null)
+            {
+                Map.Viewport.Width = Width / _scale;
+                Map.Viewport.Height = Height / _scale;
+            }
+        }
 
         private void CanvasOnPaintSurface(object sender, SKPaintSurfaceEventArgs args)
         {
@@ -133,6 +135,7 @@ namespace Mapsui.UI.Android
                     }
                     _touchDownPosition = _touchCenter;
                     _mode = Zoom;
+                    _innerRotation = _map.Viewport.Rotation;
                     break;
                 case MotionEventActions.Pointer2Up:
                     _previousTouchPosition = null;
@@ -171,7 +174,7 @@ namespace Mapsui.UI.Android
                                 _previousTouchCenter = new PointF(_touchCenter.X, _touchCenter.Y);
                                 _touchCenter = GetTouchCenter(args.Event);
 
-                                
+
                                 _map.Viewport.Transform(
                                     _touchCenter.X / _scale,
                                     _touchCenter.Y / _scale,
@@ -182,12 +185,30 @@ namespace Mapsui.UI.Android
                                 if (AllowPinchRotation)
                                 {
                                     var angle = Angle(args.Event);
-                                    _map.Viewport.Rotation += angle - _previousAngle;
+                                    _innerRotation += angle - _previousAngle;
+
+                                    _innerRotation %= 360;
+                                    
+                                    if (_innerRotation > 180)
+                                        _innerRotation -= 360;
+                                    else if (_innerRotation < -180)
+                                        _innerRotation += 360;
+
+                                    if (_map.Viewport.Rotation == 0 && Math.Abs(_innerRotation) >= Math.Abs(UnSnapRotationDegrees))
+                                        _map.Viewport.Rotation = _innerRotation;
+                                    else if (_map.Viewport.Rotation != 0)
+                                    {
+                                        if (Math.Abs(_innerRotation) <= Math.Abs(ReSnapRotationDegrees))
+                                            _map.Viewport.Rotation = 0;
+                                        else
+                                            _map.Viewport.Rotation = _innerRotation;
+                                    }
+
                                     _previousAngle = angle;
                                 }
 
                                 ViewportLimiter.Limit(_map.Viewport,
-                                    _map.ZoomMode, _map.ZoomLimits, _map.Resolutions, 
+                                    _map.ZoomMode, _map.ZoomLimits, _map.Resolutions,
                                     _map.PanMode, _map.PanLimits, _map.Envelope);
 
                                 _canvas.Invalidate();
@@ -205,7 +226,7 @@ namespace Mapsui.UI.Android
                 throw new ArgumentException ();
             var x = me.GetX (1) - me.GetX (0);
             var y = me.GetY (1) - me.GetY (0);
-            var rotation = Math.Atan2 (y, x) * 180.0 / Math.PI;  
+            var rotation = Math.Atan2 (y, x) * 180.0 / Math.PI;
             return rotation;
         }
 
@@ -222,10 +243,10 @@ namespace Mapsui.UI.Android
         private static PointF GetTouchCenter(MotionEvent motionEvent)
         {
             return new PointF(
-                motionEvent.GetX(0) + motionEvent.GetX(1) / 2,
-                motionEvent.GetY(0) + motionEvent.GetY(1) / 2);
+                (motionEvent.GetX(0) + motionEvent.GetX(1)) / 2,
+                (motionEvent.GetY(0) + motionEvent.GetY(1)) / 2);
         }
-        
+
         private static Geometries.Point GetScreenPosition(MotionEvent motionEvent)
         {
             return new PointF(motionEvent.GetX(0), motionEvent.GetY(0)).ToMapsui();
@@ -257,7 +278,7 @@ namespace Mapsui.UI.Android
                     _map.PropertyChanged += MapPropertyChanged;
                     _map.RefreshGraphics += MapRefreshGraphics;
                     _map.ViewChanged(true);
-					PushSizeOntoViewport ();
+                    PushSizeOntoViewport ();
                 }
 
                 RefreshGraphics();
@@ -320,6 +341,8 @@ namespace Mapsui.UI.Android
         }
 
         public bool AllowPinchRotation { get; set; }
+        public double UnSnapRotationDegrees { get; set; }
+        public double ReSnapRotationDegrees { get; set; }
 
         protected override void OnLayout(bool changed, int l, int t, int r, int b)
         {

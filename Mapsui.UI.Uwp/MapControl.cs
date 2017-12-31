@@ -259,6 +259,8 @@ namespace Mapsui.UI.Uwp
         }
 
         public bool AllowPinchRotation { get; set; }
+        public double UnSnapRotationDegrees { get; set; }
+        public double ReSnapRotationDegrees { get; set; }
 
         public void Clear()
         {
