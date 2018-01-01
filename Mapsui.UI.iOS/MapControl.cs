@@ -62,9 +62,6 @@ namespace Mapsui.UI.iOS
             _canvas.PaintSurface +=OnPaintSurface;
         }
 
-
-
-
         void OnPaintSurface(object sender, SKPaintGLSurfaceEventArgs skPaintSurfaceEventArgs)
         {
             TryInitializeViewport();
