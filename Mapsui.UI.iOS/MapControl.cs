@@ -47,19 +47,16 @@ namespace Mapsui.UI.iOS
             Map = new Map();
             BackgroundColor = UIColor.White;
 
-            _canvas.ClipsToBounds = true;
             _canvas.MultipleTouchEnabled = true;
-
             AddSubview(_canvas);
 
             TryInitializeViewport();
 
             ClipsToBounds = true;
-
             MultipleTouchEnabled = true;
             UserInteractionEnabled = true;
 
-            _canvas.PaintSurface +=OnPaintSurface;
+            _canvas.PaintSurface += OnPaintSurface;
         }
 
         void OnPaintSurface(object sender, SKPaintGLSurfaceEventArgs skPaintSurfaceEventArgs)
@@ -320,7 +317,6 @@ namespace Mapsui.UI.iOS
         {
             if (_canvas == null) return;
 
-            _canvas.Frame = _canvas.Frame;
             base.LayoutMarginsDidChange();
 
             if (_map?.Viewport == null) return;
