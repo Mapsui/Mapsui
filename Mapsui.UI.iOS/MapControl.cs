@@ -19,7 +19,7 @@ namespace Mapsui.UI.iOS
     {
         private Map _map;
         private readonly MapRenderer _renderer = new MapRenderer();
-        private readonly SKCanvasView _canvas = new SKCanvasView();
+        private readonly SKGLView _canvas = new SKGLView();
         private nuint _previousTouchCount = 0;
         private nfloat _previousX;
         private nfloat _previousY;
@@ -59,14 +59,13 @@ namespace Mapsui.UI.iOS
             MultipleTouchEnabled = true;
             UserInteractionEnabled = true;
 
-            //_canvas.PaintSurface += OnPaintSurface;
             _canvas.PaintSurface +=OnPaintSurface;
         }
 
 
 
 
-        void OnPaintSurface(object sender, SKPaintSurfaceEventArgs skPaintSurfaceEventArgs)
+        void OnPaintSurface(object sender, SKPaintGLSurfaceEventArgs skPaintSurfaceEventArgs)
         {
             TryInitializeViewport();
             if (!_map.Viewport.Initialized) return;
