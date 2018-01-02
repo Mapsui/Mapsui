@@ -156,10 +156,10 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SkiaSharp, Version=1.59.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\SkiaSharp.1.59.2\lib\XamariniOS\SkiaSharp.dll</HintPath>
+      <HintPath>..\..\packages\SkiaSharp.1.59.3\lib\XamariniOS\SkiaSharp.dll</HintPath>
     </Reference>
     <Reference Include="SkiaSharp.Views.iOS, Version=1.59.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\SkiaSharp.Views.1.59.2\lib\XamariniOS\SkiaSharp.Views.iOS.dll</HintPath>
+      <HintPath>..\..\packages\SkiaSharp.Views.1.59.3\lib\XamariniOS\SkiaSharp.Views.iOS.dll</HintPath>
     </Reference>
     <Reference Include="SQLitePCLRaw.core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1488e028ca7ab535, processorArchitecture=MSIL">
       <HintPath>..\..\packages\SQLitePCLRaw.core.1.1.9\lib\Xamarin.iOS10\SQLitePCLRaw.core.dll</HintPath>

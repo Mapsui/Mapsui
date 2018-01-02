@@ -65,7 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SkiaSharp, Version=1.59.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
-      <HintPath>..\packages\SkiaSharp.1.59.2\lib\portable-net45+win8+wpa81+wp8\SkiaSharp.dll</HintPath>
+      <HintPath>..\packages\SkiaSharp.1.59.3\lib\portable-net45+win8+wpa81+wp8\SkiaSharp.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

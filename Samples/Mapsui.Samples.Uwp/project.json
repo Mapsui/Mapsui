@@ -1,9 +1,9 @@
 ﻿{
   "dependencies": {
-    "BruTile": "0.22.1",
+    "BruTile": "0.22.2",
     "Microsoft.NETCore.UniversalWindowsPlatform": "6.0.5",
-    "SkiaSharp": "1.59.2",
-    "SkiaSharp.Views": "1.59.2",
+    "SkiaSharp": "1.59.3",
+    "SkiaSharp.Views": "1.59.3",
     "SQLitePCLRaw.bundle_green": "1.1.9"
   },
   "frameworks": {
