@@ -40,6 +40,20 @@ namespace Mapsui.Utilities
             return resolutions[0];
         }
 
+        [Obsolete("Use ViewportLimiter.LimitExtent instead")]
+        public static double ClipResolutionToExtremes(IReadOnlyList<double> resolutions, double resolution)
+        {
+            if (resolutions.Count == 0) return resolution;
+
+            // smaller than smallest
+            if (resolutions[resolutions.Count - 1] > resolution) return resolutions[resolutions.Count - 1];
+
+            // bigger than biggest
+            if (resolutions[0] < resolution) return resolutions[0];
+
+            return resolution;
+        }
+
         public static double DetermineResolution(double worldWidth, double worldHeight, double screenWidth,
             double screenHeight, ScaleMethod scaleMethod = ScaleMethod.Fit)
         {
