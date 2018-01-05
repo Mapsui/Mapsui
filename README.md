@@ -38,4 +38,4 @@ So far I do most of my testing in the simulator because I do not have an iPhone/
 
 ## License 
 
-LGPL
+[LGPL](https://raw.githubusercontent.com/pauldendulk/Mapsui/master/LICENSE.md)
