@@ -203,21 +203,15 @@ namespace Mapsui.UI.iOS
             {
                 if (_map != null)
                 {
-                    var temp = _map;
+                    UnsubscribeFromMapEvents(_map);
                     _map = null;
-                    temp.DataChanged -= MapDataChanged;
-                    temp.PropertyChanged -= MapPropertyChanged;
-                    temp.RefreshGraphics -= MapRefreshGraphics;
-                    temp.AbortFetch();
                 }
 
                 _map = value;
 
                 if (_map != null)
                 {
-                    _map.DataChanged += MapDataChanged;
-                    _map.PropertyChanged += MapPropertyChanged;
-                    _map.RefreshGraphics += MapRefreshGraphics;
+                    SubscribeToMapEvents(_map);
                     _map.ViewChanged(true);
                 }
 
@@ -330,6 +324,35 @@ namespace Mapsui.UI.iOS
         private static void WidgetTouch(IWidget widget)
         {
             if (widget is Hyperlink) UIApplication.SharedApplication.OpenUrl(new NSUrl(((Hyperlink)widget).Url));
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            Unsubscribe();
+            base.Dispose(disposing);
+        }
+
+        public void Unsubscribe()
+        {
+            UnsubscribeFromMapEvents(_map);
+        }
+        private void SubscribeToMapEvents(Map map)
+        {
+            map.DataChanged += MapDataChanged;
+            map.PropertyChanged += MapPropertyChanged;
+            map.RefreshGraphics += MapRefreshGraphics;
+        }
+
+        private void UnsubscribeFromMapEvents(Map map)
+        {
+            var temp = map;
+            if (temp != null)
+            {
+                temp.DataChanged -= MapDataChanged;
+                temp.PropertyChanged -= MapPropertyChanged;
+                temp.RefreshGraphics -= MapRefreshGraphics;
+                temp.AbortFetch();
+            }
         }
     }
 }

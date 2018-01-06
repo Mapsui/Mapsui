@@ -132,20 +132,16 @@ namespace Mapsui.UI.Uwp
             {
                 if (_map != null)
                 {
-                    var temp = _map;
+                    UnsubscribeFromMapEvents(_map);
                     _map = null;
-                    temp.DataChanged -= MapDataChanged;
-                    temp.PropertyChanged -= MapPropertyChanged;
-                    temp.RefreshGraphics -= MapOnRefreshGraphics;
+                   
                 }
 
                 _map = value;
 
                 if (_map != null)
                 {
-                    _map.DataChanged += MapDataChanged;
-                    _map.PropertyChanged += MapPropertyChanged;
-                    _map.RefreshGraphics += MapOnRefreshGraphics;
+                    SubscribeToMapEvents(_map);
 
                     _map.ViewChanged(true);
                 }
@@ -154,7 +150,7 @@ namespace Mapsui.UI.Uwp
             }
         }
 
-        private void MapOnRefreshGraphics(object o, EventArgs eventArgs)
+        private void MapRefreshGraphics(object o, EventArgs eventArgs)
         {
             RefreshGraphics();
         }
@@ -506,6 +502,30 @@ namespace Mapsui.UI.Uwp
         private void WidgetTouch(IWidget widget)
         {
             Task.Run(() => Launcher.LaunchUriAsync(new Uri(((Hyperlink)widget).Url)));
+        }
+
+        public void Unsubscribe()
+        {
+            UnsubscribeFromMapEvents(_map);
+        }
+
+        private void SubscribeToMapEvents(Map map)
+        {
+            map.DataChanged += MapDataChanged;
+            map.PropertyChanged += MapPropertyChanged;
+            map.RefreshGraphics += MapRefreshGraphics;
+        }
+
+        private void UnsubscribeFromMapEvents(Map map)
+        {
+            var temp = map;
+            if (temp != null)
+            {
+                temp.DataChanged -= MapDataChanged;
+                temp.PropertyChanged -= MapPropertyChanged;
+                temp.RefreshGraphics -= MapRefreshGraphics;
+                temp.AbortFetch();
+            }
         }
     }
 }

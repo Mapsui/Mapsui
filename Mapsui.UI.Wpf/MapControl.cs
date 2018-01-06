@@ -111,20 +111,15 @@ namespace Mapsui.UI.Wpf
             {
                 if (_map != null)
                 {
-                    var temp = _map;
+                    UnsubscribeFromMapEvents(_map);
                     _map = null;
-                    temp.DataChanged -= MapDataChanged;
-                    temp.PropertyChanged -= MapPropertyChanged;
-                    temp.RefreshGraphics -= MapRefreshGraphics;
                 }
 
                 _map = value;
 
                 if (_map != null)
                 {
-                    _map.DataChanged += MapDataChanged;
-                    _map.PropertyChanged += MapPropertyChanged;
-                    _map.RefreshGraphics += MapRefreshGraphics;
+                    SubscribeToMapEvents(_map);
                     _map.ViewChanged(true);
                 }
 
@@ -731,6 +726,30 @@ namespace Mapsui.UI.Wpf
         {
             // Because we use weak events the finalizer will be called even while the event is still registered.
             RenderingWeakEventManager.RemoveHandler(CompositionTargetRendering);
+        }
+
+        public void Unsubscribe()
+        {
+            UnsubscribeFromMapEvents(_map);
+        }
+
+        private void SubscribeToMapEvents(Map map)
+        {
+            map.DataChanged += MapDataChanged;
+            map.PropertyChanged += MapPropertyChanged;
+            map.RefreshGraphics += MapRefreshGraphics;
+        }
+
+        private void UnsubscribeFromMapEvents(Map map)
+        {
+            var temp = map;
+            if (temp != null)
+            {
+                temp.DataChanged -= MapDataChanged;
+                temp.PropertyChanged -= MapPropertyChanged;
+                temp.RefreshGraphics -= MapRefreshGraphics;
+                temp.AbortFetch();
+            }
         }
     }
 }

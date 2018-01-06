@@ -7,7 +7,7 @@ namespace Mapsui.UI
         public static Point WorldToScreen(IViewport viewport, float scale, Point worldPosition)
         {
             var screenPosition = viewport.WorldToScreen(worldPosition);
-            return new Geometries.Point(screenPosition.X * scale, screenPosition.Y * scale);
+            return new Point(screenPosition.X * scale, screenPosition.Y * scale);
         }
 
         public static Point ScreenToWorld(IViewport viewport, float scale, Point screenPosition)
@@ -15,5 +15,7 @@ namespace Mapsui.UI
             var worldPosition = viewport.ScreenToWorld(screenPosition.X * scale, screenPosition.Y * scale);
             return new Point(worldPosition.X, worldPosition.Y);
         }
+
+
     }
 }

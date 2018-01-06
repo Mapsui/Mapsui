@@ -20,5 +20,7 @@ namespace Mapsui.UI
         Point WorldToScreen(Point worldPosition);
         
         Point ScreenToWorld(Point screenPosition);
+
+        void Unsubscribe();
     }
 }
