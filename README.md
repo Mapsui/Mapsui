@@ -12,7 +12,7 @@ Mapsui is a C# map component for apps
 - Started as a fork of SharpMap
 
 ## News
-- Oktober 13: Mapsui 1.1 has been [released](https://github.com/pauldendulk/Mapsui/releases/tag/1.1.0) with pinch rotation of the map on Android and iOS. 
+- December 2: Mapsui 1.3 has been [released](https://github.com/pauldendulk/Mapsui/releases/tag/1.3.0). It is pretty stable. 
 
 ## Getting Started
 [Here](https://github.com/pauldendulk/Mapsui/wiki/Getting-Started-with-Mapsui) is a getting started for WPF.
