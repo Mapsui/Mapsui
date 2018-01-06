@@ -35,8 +35,8 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BruTile, Version=0.22.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\BruTile.0.22.2\lib\portable-net45+win+WindowsPhoneApp81+Xamarin.iOS10+MonoAndroid10+MonoTouch10\BruTile.dll</HintPath>
+    <Reference Include="BruTile, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\BruTile.1.0.0\lib\portable-net45+win+WindowsPhoneApp81+Xamarin.iOS10+MonoAndroid10+MonoTouch10\BruTile.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework, Version=3.9.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
       <HintPath>..\..\packages\NUnit.3.9.0\lib\net45\nunit.framework.dll</HintPath>
