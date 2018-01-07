@@ -4,6 +4,7 @@ using CoreFoundation;
 using Foundation;
 using UIKit;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using CoreGraphics;
@@ -92,7 +93,8 @@ namespace Mapsui.UI.iOS
 
         public override void TouchesBegan(NSSet touches, UIEvent evt)
         {
-            _previousRotation = double.NaN;
+            var locations = touches.Select(t => ((UITouch)t).LocationInView(this)).ToList();
+            _previousRotation = GetRotation(locations);
             _touchDown = GetScreenPosition(touches);
             base.TouchesBegan(touches, evt);
         }
@@ -145,13 +147,8 @@ namespace Mapsui.UI.iOS
 
                     if (AllowPinchRotation)
                     {
-                        var rotation = Math.Atan2(locations[1].Y - locations[0].Y,
-                            locations[1].X - locations[0].X) * 180.0 / Math.PI;
-
-                        if (!double.IsNaN(_previousRotation)) // only rotate relative to the previous rotation
-                        {
-                            _map.Viewport.Rotation += rotation - _previousRotation;
-                        }
+                        var rotation = GetRotation(locations);
+                        _map.Viewport.Rotation += rotation - _previousRotation;
                         _previousRotation = rotation;
                     }
 
@@ -163,6 +160,11 @@ namespace Mapsui.UI.iOS
                 _previousRadius = radius;
             }
             _previousTouchCount = touches.Count;
+        }
+
+        private static double GetRotation(List<CGPoint> locations)
+        {
+            return Math.Atan2(locations[1].Y - locations[0].Y, locations[1].X - locations[0].X) * 180.0 / Math.PI;
         }
 
         public override void TouchesEnded(NSSet touches, UIEvent e)
