@@ -32,6 +32,7 @@ namespace Mapsui.UI.Android
         private SKCanvasView _canvas;
         private Map _map;
         private float _scale;
+        private double _innerRotation;
 
         public event EventHandler ViewportInitialized;
 
@@ -130,6 +131,7 @@ namespace Mapsui.UI.Android
                     if (AllowPinchRotation)
                     {
                         _previousAngle = Angle(args.Event);
+                        _innerRotation = _map.Viewport.Rotation;
                     }
                     _touchDownPosition = _touchCenter;
                     _mode = Zoom;
@@ -180,7 +182,24 @@ namespace Mapsui.UI.Android
                                 if (AllowPinchRotation)
                                 {
                                     var angle = Angle(args.Event);
-                                    _map.Viewport.Rotation += angle - _previousAngle;
+                                    _innerRotation += angle - _previousAngle;
+                                    _innerRotation %= 360;
+
+                                    if (_innerRotation > 180)
+                                        _innerRotation -= 360;
+                                    else if (_innerRotation < -180)
+                                        _innerRotation += 360;
+
+                                    if (_map.Viewport.Rotation == 0 && Math.Abs(_innerRotation) >= Math.Abs(UnSnapRotationDegrees))
+                                        _map.Viewport.Rotation = _innerRotation;
+                                    else if (_map.Viewport.Rotation != 0)
+                                    {
+                                        if (Math.Abs(_innerRotation) <= Math.Abs(ReSnapRotationDegrees))
+                                            _map.Viewport.Rotation = 0;
+                                        else
+                                            _map.Viewport.Rotation = _innerRotation;
+                                    }
+
                                     _previousAngle = angle;
                                 }
 
@@ -308,6 +327,8 @@ namespace Mapsui.UI.Android
         }
 
         public bool AllowPinchRotation { get; set; }
+        public double UnSnapRotationDegrees { get; set; } 
+        public double ReSnapRotationDegrees { get; set; }
 
         protected override void OnLayout(bool changed, int l, int t, int r, int b)
         {
