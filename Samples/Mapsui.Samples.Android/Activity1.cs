@@ -41,7 +41,7 @@ namespace Mapsui.Samples.Android
             mapControl.Map.Viewport.ViewportChanged += ViewportOnViewportChanged;
             mapControl.AllowPinchRotation = true;
 
-            FindViewById<RelativeLayout>(Resource.Id.mainLayout).AddView(_popup = CreatePopup());
+            FindViewById<LinearLayout>(Resource.Id.mainLayout).AddView(_popup = CreatePopup());
         }
 
         private void ViewportOnViewportChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
