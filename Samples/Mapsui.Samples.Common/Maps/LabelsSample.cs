@@ -34,7 +34,6 @@ namespace Mapsui.Samples.Common.Maps
             });
             memoryProvider.Features.Add(featureWithRightAlignedStyle);
 
-
             var featureWithBottomAlignedStyle = new Feature { Geometry = new Point(0, -4000000) };
             featureWithBottomAlignedStyle.Styles.Add(new LabelStyle
             {
@@ -43,7 +42,15 @@ namespace Mapsui.Samples.Common.Maps
                 VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Bottom
             });
             memoryProvider.Features.Add(featureWithBottomAlignedStyle);
-
+            
+            var polygon = new Feature { Geometry = Geometry.GeomFromText("POLYGON((-1000000 -10000000, 1000000 -10000000, 1000000 -8000000, -1000000 -8000000, -1000000 -10000000))") };
+            polygon.Styles.Add(new LabelStyle
+            {
+                Text = "Polygon",
+                BackColor = new Brush(Color.Gray),
+                HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center
+            });
+            memoryProvider.Features.Add(polygon);
 
             var featureWithColors = new Feature {Geometry = new Point(0, -6000000)};
             featureWithColors.Styles.Add(CreateColoredLabelStyle());
