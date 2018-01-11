@@ -94,9 +94,9 @@ namespace Mapsui.UI.iOS
 
         public override void TouchesBegan(NSSet touches, UIEvent evt)
         {
-            var locations = touches.Select(t => ((UITouch)t).LocationInView(this)).ToList();
-            if (AllowPinchRotation && touches.Count == 2)
+            if (touches.Count == 2)
             {
+                var locations = touches.Select(t => ((UITouch) t).LocationInView(this)).ToList();
                 _previousRotation = GetRotation(locations);
                 _innerRotation = _map.Viewport.Rotation;
             }

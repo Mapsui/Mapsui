@@ -10,10 +10,11 @@ namespace Mapsui.Rendering.Skia
     {
         public static void Draw(SKCanvas canvas, IViewport viewport, IStyle style, IFeature feature, IGeometry geometry)
         {
-            if (style is LabelStyle)
+            if (style is LabelStyle labelStyle)
             {
-                var center = geometry.GetBoundingBox().GetCentroid();
-                LabelRenderer.Draw(canvas, (LabelStyle) style, feature, (float) center.X, (float) center.Y);
+                var worldCenter = geometry.GetBoundingBox().GetCentroid();
+                var center = viewport.WorldToScreen(worldCenter);
+                LabelRenderer.Draw(canvas, labelStyle, feature, (float) center.X, (float) center.Y);
             }
             else
             {
