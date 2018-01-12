@@ -27,13 +27,13 @@ namespace Mapsui.Rendering.Xaml
             }
         }
 
-        private static void DrawHyperlink(Grid canvas, Hyperlink textBox)
+        private static void DrawHyperlink(Grid canvas, Hyperlink hyperlink)
         {
-            if (textBox.Text == null) return;
-            var border = CreateBorder(textBox);
+            if (string.IsNullOrEmpty(hyperlink.Text)) return;
+            var border = CreateBorder(hyperlink);
             canvas.Children.Add(border);
             border.UpdateLayout(); // to calculate the boundingbox
-            textBox.Envelope = BoundsRelativeTo(border, canvas).ToMapsui();
+            hyperlink.Envelope = BoundsRelativeTo(border, canvas).ToMapsui();
         }
 
         private static Rect BoundsRelativeTo(this FrameworkElement element,

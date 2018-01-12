@@ -17,29 +17,29 @@ namespace Mapsui.Rendering.Skia
             }
         }
 
-        private static void DrawHyperlink(SKCanvas canvas, double screenWidth, double screenHeight, Hyperlink textBox)
+        private static void DrawHyperlink(SKCanvas canvas, double screenWidth, double screenHeight, Hyperlink hyperlink)
         {
-            if (textBox.Text == null) return; // todo: fix this for widgets without text
-            var textPaint = new SKPaint { Color = textBox.TextColor.ToSkia(), IsAntialias = true };
-            var backPaint = new SKPaint { Color = textBox.BackColor.ToSkia(), };
+            if (string.IsNullOrEmpty(hyperlink.Text)) return; 
+            var textPaint = new SKPaint { Color = hyperlink.TextColor.ToSkia(), IsAntialias = true };
+            var backPaint = new SKPaint { Color = hyperlink.BackColor.ToSkia(), };
             // The textRect has an offset which can be confusing. 
             // This is because DrawText's origin is the baseline of the text, not the bottom.
             // Read more here: https://developer.xamarin.com/guides/xamarin-forms/advanced/skiasharp/basics/text/
             var textRect = new SKRect();
-            textPaint.MeasureText(textBox.Text, ref textRect);
+            textPaint.MeasureText(hyperlink.Text, ref textRect);
             // The backRect is straight forward. It is leading for our purpose.
             var backRect = new SKRect(0, 0,
-                textRect.Width + textBox.PaddingX * 2,
-                textPaint.TextSize + textBox.PaddingY * 2); // Use the font's TextSize for consistency
-            var offsetX = GetOffsetX(backRect.Width, textBox.MarginX, textBox.HorizontalAlignment, screenWidth);
-            var offsetY = GetOffsetY(backRect.Height, textBox.MarginY, textBox.VerticalAlignment, screenHeight);
+                textRect.Width + hyperlink.PaddingX * 2,
+                textPaint.TextSize + hyperlink.PaddingY * 2); // Use the font's TextSize for consistency
+            var offsetX = GetOffsetX(backRect.Width, hyperlink.MarginX, hyperlink.HorizontalAlignment, screenWidth);
+            var offsetY = GetOffsetY(backRect.Height, hyperlink.MarginY, hyperlink.VerticalAlignment, screenHeight);
             backRect.Offset(offsetX, offsetY);
-            canvas.DrawRoundRect(backRect, textBox.CornerRadius, textBox.CornerRadius, backPaint);
-            textBox.Envelope = backRect.ToMapsui();
+            canvas.DrawRoundRect(backRect, hyperlink.CornerRadius, hyperlink.CornerRadius, backPaint);
+            hyperlink.Envelope = backRect.ToMapsui();
             // To position the text within the backRect correct using the textRect's offset.
-            canvas.DrawText(textBox.Text,
-                offsetX - textRect.Left + textBox.PaddingX,
-                offsetY - textRect.Top + textBox.PaddingY, textPaint);
+            canvas.DrawText(hyperlink.Text,
+                offsetX - textRect.Left + hyperlink.PaddingX,
+                offsetY - textRect.Top + hyperlink.PaddingY, textPaint);
         }
 
         private static float GetOffsetX(float width, float offsetX, HorizontalAlignment horizontalAlignment, double screenWidth)
