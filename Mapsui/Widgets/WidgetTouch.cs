@@ -20,7 +20,8 @@ namespace Mapsui.Widgets
             foreach (var widget in widgets)
             {
                 // Also check for start position because it shoudl be click on the widget, not a drag that ends above the widget.
-                if (widget.Envelope.Contains(scaledScreenPosition) && 
+                if (widget.Envelope != null &&
+                    widget.Envelope.Contains(scaledScreenPosition) && 
                     widget.Envelope.Contains(scaledStartScreenPosition))
                     return widget;
             }
