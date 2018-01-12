@@ -29,6 +29,7 @@ namespace Mapsui.Rendering.Xaml
 
         private static void DrawHyperlink(Grid canvas, Hyperlink textBox)
         {
+            if (textBox.Text == null) return;
             var border = CreateBorder(textBox);
             canvas.Children.Add(border);
             border.UpdateLayout(); // to calculate the boundingbox
