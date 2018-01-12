@@ -67,7 +67,7 @@ namespace Mapsui.Tests.Common.Maps
                             {
                                 Text = "Black Halo",
                                 ForeColor = Color.White,
-                                Halo = new Pen(Color.Red),
+                                Halo = new Pen(Color.Black),
                                 BackColor = null
                             }
                         }
