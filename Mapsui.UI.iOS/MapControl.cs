@@ -10,6 +10,7 @@ using System.Linq;
 using CoreGraphics;
 using Mapsui.Geometries;
 using Mapsui.Geometries.Utilities;
+using Mapsui.Logging;
 using Mapsui.Widgets;
 using SkiaSharp.Views.iOS;
 
@@ -96,7 +97,7 @@ namespace Mapsui.UI.iOS
         {
             if (touches.Count == 2)
             {
-                var locations = touches.Select(t => ((UITouch) t).LocationInView(this)).ToList();
+                var locations = touches.Select(t => ((UITouch)t).LocationInView(this)).ToList();
                 _previousRotation = GetRotation(locations);
                 _innerRotation = _map.Viewport.Rotation;
             }
@@ -267,28 +268,36 @@ namespace Mapsui.UI.iOS
 
             DispatchQueue.MainQueue.DispatchAsync(delegate
             {
-                if (e == null)
+                try
                 {
-                    errorMessage = "MapDataChanged Unexpected error: DataChangedEventArgs can not be null";
-                    Console.WriteLine(errorMessage);
-                }
-                else if (e.Cancelled)
-                {
-                    errorMessage = "MapDataChanged: Cancelled";
-                    System.Diagnostics.Debug.WriteLine(errorMessage);
-                }
-                else if (e.Error is System.Net.WebException)
-                {
-                    errorMessage = "MapDataChanged WebException: " + e.Error.Message;
-                    Console.WriteLine(errorMessage);
-                }
-                else if (e.Error != null)
-                {
-                    errorMessage = "MapDataChanged errorMessage: " + e.Error.GetType() + ": " + e.Error.Message;
-                    Console.WriteLine(errorMessage);
-                }
+                    if (e == null)
+                    {
+                        errorMessage = "MapDataChanged Unexpected error: DataChangedEventArgs can not be null";
+                        Console.WriteLine(errorMessage);
+                    }
+                    else if (e.Cancelled)
+                    {
+                        errorMessage = "MapDataChanged: Cancelled";
+                        System.Diagnostics.Debug.WriteLine(errorMessage);
+                    }
+                    else if (e.Error is System.Net.WebException)
+                    {
+                        errorMessage = "MapDataChanged WebException: " + e.Error.Message;
+                        Console.WriteLine(errorMessage);
+                    }
+                    else if (e.Error != null)
+                    {
+                        errorMessage = "MapDataChanged errorMessage: " + e.Error.GetType() + ": " + e.Error.Message;
+                        Console.WriteLine(errorMessage);
+                    }
 
-                RefreshGraphics();
+                    RefreshGraphics();
+                }
+                catch (Exception exception)
+                {
+                    Logger.Log(LogLevel.Warning, "Unexpected exception in MapDataChanged", exception);
+                    throw;
+                }
             });
         }
 
