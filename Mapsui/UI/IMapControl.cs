@@ -17,6 +17,10 @@ namespace Mapsui.UI
 
         bool AllowPinchRotation { get; set; }
 
+        double UnSnapRotationDegrees { get; set; }
+
+        double ReSnapRotationDegrees { get; set; }
+
         Point WorldToScreen(Point worldPosition);
         
         Point ScreenToWorld(Point screenPosition);

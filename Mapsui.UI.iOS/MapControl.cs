@@ -28,6 +28,7 @@ namespace Mapsui.UI.iOS
         private float _skiaScale;
         private Point _touchDown = new Point();
         private double _previousRotation;
+        private double _innerRotation;
 
         public event EventHandler ViewportInitialized;
 
@@ -97,6 +98,7 @@ namespace Mapsui.UI.iOS
             {
                 var locations = touches.Select(t => ((UITouch) t).LocationInView(this)).ToList();
                 _previousRotation = GetRotation(locations);
+                _innerRotation = _map.Viewport.Rotation;
             }
             _touchDown = GetScreenPosition(touches);
             base.TouchesBegan(touches, evt);
@@ -151,7 +153,25 @@ namespace Mapsui.UI.iOS
                     if (AllowPinchRotation)
                     {
                         var rotation = GetRotation(locations);
-                        _map.Viewport.Rotation += rotation - _previousRotation;
+
+                        _innerRotation += rotation - _previousRotation;
+                        _innerRotation %= 360;
+
+                        if (_innerRotation > 180)
+                            _innerRotation -= 360;
+                        else if (_innerRotation < -180)
+                            _innerRotation += 360;
+
+                        if (_map.Viewport.Rotation == 0 && Math.Abs(_innerRotation) >= Math.Abs(UnSnapRotationDegrees))
+                            _map.Viewport.Rotation = _innerRotation;
+                        else if (_map.Viewport.Rotation != 0)
+                        {
+                            if (Math.Abs(_innerRotation) <= Math.Abs(ReSnapRotationDegrees))
+                                _map.Viewport.Rotation = 0;
+                            else
+                                _map.Viewport.Rotation = _innerRotation;
+                        }
+
                         _previousRotation = rotation;
                     }
 
@@ -284,6 +304,8 @@ namespace Mapsui.UI.iOS
         }
 
         public bool AllowPinchRotation { get; set; }
+        public double UnSnapRotationDegrees { get; set; }
+        public double ReSnapRotationDegrees { get; set; }
 
         public Point WorldToScreen(Point worldPosition)
         {

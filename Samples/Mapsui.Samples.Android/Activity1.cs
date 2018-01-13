@@ -40,6 +40,8 @@ namespace Mapsui.Samples.Android
             mapControl.Map.Info+= MapOnInfo;
             mapControl.Map.Viewport.ViewportChanged += ViewportOnViewportChanged;
             mapControl.AllowPinchRotation = true;
+            mapControl.UnSnapRotationDegrees = 30;
+            mapControl.ReSnapRotationDegrees = 5;
 
             FindViewById<LinearLayout>(Resource.Id.mainLayout).AddView(_popup = CreatePopup());
         }
