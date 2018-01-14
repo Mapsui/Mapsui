@@ -27,6 +27,9 @@ The best way to get going with Mapsui is by using the Samples. If you clone the 
 ## Questions
 If you have a question please submit an issue [here](https://github.com/pauldendulk/Mapsui/issues)
 
+## Contributing
+See the [guidelines](CONTRIBUTING.md)
+
 ## Supported Platforms
 
 - **WPF** - Windows Desktop on .NET 4.5.2
