@@ -37,6 +37,9 @@ If you have a question please submit an issue [here](https://github.com/pauldend
 ## Donations
 So far I do most of my testing in the simulator because I do not have an iPhone/iPad at home. So if you have an old iPad/iPhone lying around I'd be very interested. A cracked screen is not a problem :). Contact me at pauldendulk@gmail.com.
 
+## Contributions
+Ask me
+
 ## License 
 
 [LGPL](https://raw.githubusercontent.com/pauldendulk/Mapsui/master/LICENSE.md)
