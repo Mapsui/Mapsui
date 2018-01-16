@@ -43,8 +43,7 @@ namespace Mapsui.Providers
         private static List<Feature> GetFeaturesInView(double resolution, LabelStyle labelStyle,
             IEnumerable<IFeature> features, Pen line, Brush fill)
         {
-
-            var margin = resolution*50;
+            var margin = resolution * 50;
             var clusters = new List<Cluster>();
             // todo: repeat until there are no more merges
             ClusterFeatures(clusters, features, margin, labelStyle, resolution);

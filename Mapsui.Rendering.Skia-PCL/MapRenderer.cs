@@ -39,9 +39,9 @@ namespace Mapsui.Rendering.Skia
         private void Render(SKCanvas canvas, IViewport viewport, IEnumerable<ILayer> layers,
             IEnumerable<IWidget> widgets, Color background = null)
         {
-            if (background != null) canvas.Clear(background.ToSkia());
+            if (background != null) canvas.Clear(background.ToSkia(1));
             if (viewport.Initialized) Render(canvas, viewport, layers);
-            Render(canvas, viewport, widgets);
+            Render(canvas, viewport, widgets, 1);
         }
 
         public MemoryStream RenderToBitmapStream(IViewport viewport, IEnumerable<ILayer> layers, Color background = null)
@@ -52,7 +52,7 @@ namespace Mapsui.Rendering.Skia
                     (int)viewport.Width, (int)viewport.Height, SKImageInfo.PlatformColorType, SKAlphaType.Unpremul))
                 {
                     // Not sure if this is needed here:
-                    if (background != null) surface.Canvas.Clear(background.ToSkia());
+                    if (background != null) surface.Canvas.Clear(background.ToSkia(1));
 
                     Render(surface.Canvas, viewport, layers);
                     using (var image = surface.Snapshot())
@@ -112,24 +112,24 @@ namespace Mapsui.Rendering.Skia
         private void RenderFeature(SKCanvas canvas, IViewport viewport, IStyle style, IFeature feature, float layerOpacity)
         {
             if (feature.Geometry is Point)
-                PointRenderer.Draw(canvas, viewport, style, feature, feature.Geometry, _symbolCache);
+                PointRenderer.Draw(canvas, viewport, style, feature, feature.Geometry, _symbolCache, layerOpacity);
             else if (feature.Geometry is MultiPoint)
-                MultiPointRenderer.Draw(canvas, viewport, style, feature, feature.Geometry, _symbolCache);
+                MultiPointRenderer.Draw(canvas, viewport, style, feature, feature.Geometry, _symbolCache, layerOpacity);
             else if (feature.Geometry is LineString)
-                LineStringRenderer.Draw(canvas, viewport, style, feature, feature.Geometry);
+                LineStringRenderer.Draw(canvas, viewport, style, feature, feature.Geometry, layerOpacity);
             else if (feature.Geometry is MultiLineString)
-                MultiLineStringRenderer.Draw(canvas, viewport, style, feature, feature.Geometry);
+                MultiLineStringRenderer.Draw(canvas, viewport, style, feature, feature.Geometry, layerOpacity);
             else if (feature.Geometry is Polygon)
-                PolygonRenderer.Draw(canvas, viewport, style, feature, feature.Geometry);
+                PolygonRenderer.Draw(canvas, viewport, style, feature, feature.Geometry, layerOpacity);
             else if (feature.Geometry is MultiPolygon)
-                MultiPolygonRenderer.Draw(canvas, viewport, style, feature, feature.Geometry);
+                MultiPolygonRenderer.Draw(canvas, viewport, style, feature, feature.Geometry, layerOpacity);
             else if (feature.Geometry is IRaster)
                 RasterRenderer.Draw(canvas, viewport, style, feature, layerOpacity, _tileCache, _currentIteration);
         }
 
-        private void Render(object canvas, IViewport viewport, IEnumerable<IWidget> widgets)
+        private void Render(object canvas, IViewport viewport, IEnumerable<IWidget> widgets, float layerOpacity)
         {
-            WidgetRenderer.Render(canvas, viewport.Width, viewport.Height, widgets);
+            WidgetRenderer.Render(canvas, viewport.Width, viewport.Height, widgets, layerOpacity);
         }
     }
 

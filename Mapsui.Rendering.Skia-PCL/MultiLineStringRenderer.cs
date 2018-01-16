@@ -7,13 +7,14 @@ namespace Mapsui.Rendering.Skia
 {
     public static class MultiLineStringRenderer
     {
-        public static void Draw(SKCanvas canvas, IViewport viewport, IStyle style, IFeature feature, IGeometry geometry)
+        public static void Draw(SKCanvas canvas, IViewport viewport, IStyle style, IFeature feature, IGeometry geometry,
+            float layerOpacity)
         {
             var multiLineString = (MultiLineString) geometry;
 
             foreach (var lineString in multiLineString)
             {
-                LineStringRenderer.Draw(canvas, viewport, style, feature, lineString);
+                LineStringRenderer.Draw(canvas, viewport, style, feature, lineString, layerOpacity);
             }
         }
     }

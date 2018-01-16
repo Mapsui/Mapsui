@@ -21,7 +21,7 @@ namespace Mapsui.Samples.Common.Maps
         {
             return new MemoryLayer
             {
-                DataSource = new MemoryProvider(new Feature { Styles = new List<IStyle> { style }, Geometry = 
+                DataSource = new MemoryProvider(new Feature {Geometry = 
                     
                         new LineString(new[]
                             {

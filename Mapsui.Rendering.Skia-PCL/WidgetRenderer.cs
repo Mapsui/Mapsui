@@ -8,20 +8,22 @@ namespace Mapsui.Rendering.Skia
 {
     public static class WidgetRenderer
     {
-        public static void Render(object target, double screenWidth, double screenHeight, IEnumerable<IWidget> widgets)
+        public static void Render(object target, double screenWidth, double screenHeight, IEnumerable<IWidget> widgets,
+            float layerOpacity)
         {
             var canvas = (SKCanvas)target;
             foreach (var widget in widgets)
             {
-                if (widget is Hyperlink) DrawHyperlink(canvas, screenWidth, screenHeight, widget as Hyperlink);
+                if (widget is Hyperlink) DrawHyperlink(canvas, screenWidth, screenHeight, widget as Hyperlink, layerOpacity);
             }
         }
 
-        private static void DrawHyperlink(SKCanvas canvas, double screenWidth, double screenHeight, Hyperlink hyperlink)
+        private static void DrawHyperlink(SKCanvas canvas, double screenWidth, double screenHeight, Hyperlink hyperlink,
+            float layerOpacity)
         {
             if (string.IsNullOrEmpty(hyperlink.Text)) return; 
-            var textPaint = new SKPaint { Color = hyperlink.TextColor.ToSkia(), IsAntialias = true };
-            var backPaint = new SKPaint { Color = hyperlink.BackColor.ToSkia(), };
+            var textPaint = new SKPaint { Color = hyperlink.TextColor.ToSkia(layerOpacity), IsAntialias = true };
+            var backPaint = new SKPaint { Color = hyperlink.BackColor.ToSkia(layerOpacity), };
             // The textRect has an offset which can be confusing. 
             // This is because DrawText's origin is the baseline of the text, not the bottom.
             // Read more here: https://developer.xamarin.com/guides/xamarin-forms/advanced/skiasharp/basics/text/

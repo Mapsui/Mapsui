@@ -7,13 +7,14 @@ namespace Mapsui.Rendering.Skia
 {
     internal static class PolygonRenderer
     {
-        public static void Draw(SKCanvas canvas, IViewport viewport, IStyle style, IFeature feature, IGeometry geometry)
+        public static void Draw(SKCanvas canvas, IViewport viewport, IStyle style, IFeature feature, IGeometry geometry,
+            float layerOpacity)
         {
             if (style is LabelStyle)
             {
                 var worldCenter = geometry.GetBoundingBox().GetCentroid();
                 var center = viewport.WorldToScreen(worldCenter);
-                LabelRenderer.Draw(canvas, (LabelStyle)style, feature, (float)center.X, (float)center.Y);
+                LabelRenderer.Draw(canvas, (LabelStyle)style, feature, (float)center.X, (float)center.Y, layerOpacity);
             }
             else
             {
@@ -40,10 +41,10 @@ namespace Mapsui.Rendering.Skia
                         paint.StrokeWidth = lineWidth;
 
                         paint.Style = SKPaintStyle.Fill;
-                        paint.Color = fillColor.ToSkia();
+                        paint.Color = fillColor.ToSkia(layerOpacity);
                         canvas.DrawPath(path, paint);
                         paint.Style = SKPaintStyle.Stroke;
-                        paint.Color = lineColor.ToSkia();
+                        paint.Color = lineColor.ToSkia(layerOpacity);
                         canvas.DrawPath(path, paint);
                     }
                 }

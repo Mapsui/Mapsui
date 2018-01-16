@@ -8,13 +8,14 @@ namespace Mapsui.Rendering.Skia
 {
     public static class LineStringRenderer
     {
-        public static void Draw(SKCanvas canvas, IViewport viewport, IStyle style, IFeature feature, IGeometry geometry)
+        public static void Draw(SKCanvas canvas, IViewport viewport, IStyle style, IFeature feature, IGeometry geometry,
+            float layerOpacity)
         {
             if (style is LabelStyle labelStyle)
             {
                 var worldCenter = geometry.GetBoundingBox().GetCentroid();
                 var center = viewport.WorldToScreen(worldCenter);
-                LabelRenderer.Draw(canvas, labelStyle, feature, (float) center.X, (float) center.Y);
+                LabelRenderer.Draw(canvas, labelStyle, feature, (float) center.X, (float) center.Y, layerOpacity);
             }
             else
             {
@@ -41,7 +42,7 @@ namespace Mapsui.Rendering.Skia
                 {
                     paint.IsStroke = true;
                     paint.StrokeWidth = lineWidth;
-                    paint.Color = lineColor.ToSkia();
+                    paint.Color = lineColor.ToSkia(layerOpacity);
                     paint.StrokeJoin = SKStrokeJoin.Round;
                     paint.StrokeCap = strokeCap.ToSkia();
 

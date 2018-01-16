@@ -113,7 +113,7 @@ namespace Mapsui.Samples.Common.Desktop
         private static GradientTheme CreateCountryLabelTheme()
         {
             //Lets scale the labels so that big countries have larger texts as well
-            var backColor = new Brush {Color = new Color {A = 128, R = 255, G = 255, B = 255}};
+            var backColor = new Brush {Color = new Color (255, 255, 255, 128)};
 
             var lblMin = new LabelStyle
             {

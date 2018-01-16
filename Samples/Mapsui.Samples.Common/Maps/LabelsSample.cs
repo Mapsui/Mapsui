@@ -20,11 +20,44 @@ namespace Mapsui.Samples.Common.Maps
         {
             var memoryProvider = new MemoryProvider();
 
+            memoryProvider.Features.Add(CreateFeatureWithDefaultStyle());
+            memoryProvider.Features.Add(CreateFeatureWithRightAlignedStyle());
+            memoryProvider.Features.Add(CreateFeatureWithBottomAlignedStyle());
+            memoryProvider.Features.Add(CreateFeatureWithColors());
+            memoryProvider.Features.Add(CreatePolygonWithLabel());
+            memoryProvider.Features.Add(CreateFeatureWithHalo());
+
+            return new MemoryLayer {Name = "Points with labels", DataSource = memoryProvider};
+        }
+
+        private static Feature CreateFeatureWithDefaultStyle()
+        {
             var featureWithDefaultStyle = new Feature {Geometry = new Point(0, 0)};
-            featureWithDefaultStyle.Styles.Add(new LabelStyle { Text = "Default Label" });
-            memoryProvider.Features.Add(featureWithDefaultStyle);
+            featureWithDefaultStyle.Styles.Add(new LabelStyle {Text = "Default Label"});
+            return featureWithDefaultStyle;
+        }
 
+        private static Feature CreateFeatureWithColors()
+        {
+            var featureWithColors = new Feature {Geometry = new Point(0, -6000000)};
+            featureWithColors.Styles.Add(CreateColoredLabelStyle());
+            return featureWithColors;
+        }
 
+        private static Feature CreateFeatureWithBottomAlignedStyle()
+        {
+            var featureWithBottomAlignedStyle = new Feature {Geometry = new Point(0, -4000000)};
+            featureWithBottomAlignedStyle.Styles.Add(new LabelStyle
+            {
+                Text = "Right Aligned",
+                BackColor = new Brush(Color.Gray),
+                VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Bottom
+            });
+            return featureWithBottomAlignedStyle;
+        }
+
+        private static Feature CreateFeatureWithRightAlignedStyle()
+        {
             var featureWithRightAlignedStyle = new Feature {Geometry = new Point(0, -2000000)};
             featureWithRightAlignedStyle.Styles.Add(new LabelStyle
             {
@@ -32,31 +65,23 @@ namespace Mapsui.Samples.Common.Maps
                 BackColor = new Brush(Color.Gray),
                 HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Right
             });
-            memoryProvider.Features.Add(featureWithRightAlignedStyle);
+            return featureWithRightAlignedStyle;
+        }
 
-            var featureWithBottomAlignedStyle = new Feature { Geometry = new Point(0, -4000000) };
-            featureWithBottomAlignedStyle.Styles.Add(new LabelStyle
+        private static Feature CreatePolygonWithLabel()
+        {
+            var polygon = new Feature
             {
-                Text = "Right Aligned",
-                BackColor = new Brush(Color.Gray),
-                VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Bottom
-            });
-            memoryProvider.Features.Add(featureWithBottomAlignedStyle);
-            
-            var polygon = new Feature { Geometry = Geometry.GeomFromText("POLYGON((-1000000 -10000000, 1000000 -10000000, 1000000 -8000000, -1000000 -8000000, -1000000 -10000000))") };
+                Geometry = Geometry.GeomFromText(
+                    "POLYGON((-1000000 -10000000, 1000000 -10000000, 1000000 -8000000, -1000000 -8000000, -1000000 -10000000))")
+            };
             polygon.Styles.Add(new LabelStyle
             {
                 Text = "Polygon",
                 BackColor = new Brush(Color.Gray),
                 HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center
             });
-            memoryProvider.Features.Add(polygon);
-
-            var featureWithColors = new Feature {Geometry = new Point(0, -6000000)};
-            featureWithColors.Styles.Add(CreateColoredLabelStyle());
-            memoryProvider.Features.Add(featureWithColors);
-
-            return new MemoryLayer {Name = "Points with labels", DataSource = memoryProvider};
+            return polygon;
         }
 
         private static IStyle CreateColoredLabelStyle()
@@ -65,9 +90,21 @@ namespace Mapsui.Samples.Common.Maps
             {
                 Text = "Colors",
                 BackColor = new Brush(Color.Blue),
-                ForeColor = Color.White,
-                Halo = new Pen(Color.Red, 4)
+                ForeColor = Color.White
             };
+        }
+
+        private static IFeature CreateFeatureWithHalo()
+        {
+            var featureWithColors = new Feature { Geometry = new Point(0, -12000000) };
+            featureWithColors.Styles.Add(new LabelStyle
+            {
+                Text = "Halo Halo Halo",
+                BackColor = new Brush(Color.Transparent),
+                ForeColor = Color.White,
+                Halo = new Pen(Color.Black, 2)
+            });
+            return featureWithColors;
         }
     }
 }

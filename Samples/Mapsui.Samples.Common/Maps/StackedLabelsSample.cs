@@ -23,14 +23,15 @@ namespace Mapsui.Samples.Common.Maps
         {
             return new MemoryLayer
             {
+                Name = "StackedLabelLayer",
+                Style = null,
                 DataSource = new StackedLabelProvider(provider, new LabelStyle
                 {
                     BackColor = new Brush {Color = new Color(240, 240, 240, 128)},
                     ForeColor = new Color(50, 50, 50),
                     LabelColumn = labelColumn,
                     Font = new Font {  FontFamily = "Cambria", Size = 14}
-                }),
-                Style = null
+                })
             };
         }
 

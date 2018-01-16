@@ -11,7 +11,7 @@ namespace Mapsui.Rendering.Skia
         private static readonly IDictionary<string, BitmapInfo> LabelCache =
             new Dictionary<string, BitmapInfo>();
 
-        public static void DrawAsBitmap(SKCanvas canvas, LabelStyle style, IFeature feature, float x, float y)
+        public static void DrawAsBitmap(SKCanvas canvas, LabelStyle style, IFeature feature, float x, float y, float layerOpacity)
         {
             var text = style.GetLabelText(feature);
 
@@ -19,7 +19,7 @@ namespace Mapsui.Rendering.Skia
                       style.BackColor + "_" + style.ForeColor;
 
             if (!LabelCache.Keys.Contains(key))
-                LabelCache[key] = new BitmapInfo { Bitmap = CreateLabelAsBitmap(style, text) };
+                LabelCache[key] = new BitmapInfo { Bitmap = CreateLabelAsBitmap(style, text, layerOpacity) };
 
             var info = LabelCache[key];
 
@@ -28,22 +28,23 @@ namespace Mapsui.Rendering.Skia
                 horizontalAlignment: style.HorizontalAlignment, verticalAlignment: style.VerticalAlignment);
         }
 
-        public static void Draw(SKCanvas canvas, LabelStyle style, IFeature feature, float x, float y)
+        public static void Draw(SKCanvas canvas, LabelStyle style, IFeature feature, float x, float y,
+            float layerOpacity)
         {
             var text = style.GetLabelText(feature);
             if (string.IsNullOrEmpty(text)) return;
-            DrawLabel(canvas, x, y, style, text);
+            DrawLabel(canvas, x, y, style, text, layerOpacity);
         }
 
-        private static SKImage CreateLabelAsBitmap(LabelStyle style, string text)
+        private static SKImage CreateLabelAsBitmap(LabelStyle style, string text, float layerOpacity)
         {
-            using (var paint = CreatePaint(style))
+            using (var paint = CreatePaint(style, layerOpacity))
             {
-                return CreateLabelAsBitmap(style, text, paint);
+                return CreateLabelAsBitmap(style, text, paint, layerOpacity);
             }
         }
 
-        private static SKImage CreateLabelAsBitmap(LabelStyle style, string text, SKPaint paint)
+        private static SKImage CreateLabelAsBitmap(LabelStyle style, string text, SKPaint paint, float  layerOpacity)
         {
             var rect = new SKRect();
             paint.MeasureText(text, ref rect);
@@ -59,15 +60,15 @@ namespace Mapsui.Rendering.Skia
             {
                 target.Clear();
 
-                DrawBackground(style, backRect, target);
+                DrawBackground(style, backRect, target, layerOpacity);
                 target.DrawText(text, -rect.Left + 3, -rect.Top +3, paint);
                 return bitmap;
             }
         }
 
-        private static void DrawLabel(SKCanvas target, float x, float y, LabelStyle style, string text)
+        private static void DrawLabel(SKCanvas target, float x, float y, LabelStyle style, string text, float layerOpacity)
         {
-            var paint = CreatePaint(style);
+            var paint = CreatePaint(style, layerOpacity);
 
             var rect = new SKRect();
 
@@ -87,13 +88,13 @@ namespace Mapsui.Rendering.Skia
             rect.Offset(-backRectXOffset, -backRectYOffset); // correct for text specific offset returned paint.Measure
 
             backRect.Inflate(3, 3);
-            DrawBackground(style, backRect, target);
+            DrawBackground(style, backRect, target, layerOpacity);
 
             if (style.Halo != null)
             {
-                var haloPaint = CreatePaint(style);
+                var haloPaint = CreatePaint(style, layerOpacity);
                 haloPaint.Style = SKPaintStyle.StrokeAndFill;
-                haloPaint.Color = style.Halo.Color.ToSkia();
+                haloPaint.Color = style.Halo.Color.ToSkia(layerOpacity);
 
                 // TODO: PenStyle
                 /*
@@ -125,11 +126,11 @@ namespace Mapsui.Rendering.Skia
             throw new ArgumentException();
         }
 
-        private static void DrawBackground(LabelStyle style, SKRect rect, SKCanvas target)
+        private static void DrawBackground(LabelStyle style, SKRect rect, SKCanvas target, float layerOpacity)
         {
             if (style.BackColor != null)
             {
-                var color = style.BackColor?.Color?.ToSkia();
+                var color = style.BackColor?.Color?.ToSkia(layerOpacity);
                 if (color.HasValue)
                 {
                     var rounding = 6;
@@ -141,13 +142,13 @@ namespace Mapsui.Rendering.Skia
             }
         }
 
-        private static SKPaint CreatePaint(LabelStyle style)
+        private static SKPaint CreatePaint(LabelStyle style, float layerOpacity)
         {
             return new SKPaint
             {
                 TextSize = (float) style.Font.Size,
                 IsAntialias = true,
-                Color = style.ForeColor.ToSkia(),
+                Color = style.ForeColor.ToSkia(layerOpacity),
                 Typeface = SKTypeface.FromFamilyName(style.Font.FontFamily),
                 IsStroke = false,
                 FakeBoldText = false,

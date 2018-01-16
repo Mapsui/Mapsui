@@ -58,7 +58,7 @@ namespace Mapsui.Rendering.Skia
             return 0; // center
         }
         
-        public static void RenderRaster(SKCanvas canvas, SKImage bitmap, SKRect rect, float opacity)
+        public static void RenderRaster(SKCanvas canvas, SKImage bitmap, SKRect rect, float layerOpacity)
         {
             // todo: Add some way to select one method or the other.
             // Method 1) Better for quality. Helps to compare to WPF
@@ -67,9 +67,9 @@ namespace Mapsui.Rendering.Skia
             //canvas.DrawBitmap(bitmap, rect, paint);
 
             // Method 2) Better for performance:
-            if (Math.Abs(opacity) > Utilities.Constants.Epsilon)
+            if (Math.Abs(layerOpacity - 1) >  Utilities.Constants.Epsilon)
             {
-                Paint.Color = new SKColor(255, 255, 255, (byte) (255 * opacity));
+                Paint.Color = new SKColor(255, 255, 255, (byte) (255 * layerOpacity));
                 canvas.DrawImage(bitmap, rect, Paint);
             }
             else

@@ -8,13 +8,13 @@ namespace Mapsui.Rendering.Skia
     public static class MultiPointRenderer
     {
         public static void Draw(SKCanvas canvas, IViewport viewport, IStyle style, IFeature feature,
-            IGeometry geometry, SymbolCache symbolCache)
+            IGeometry geometry, SymbolCache symbolCache, float layerOpacity)
         {
             var multiPoint = (MultiPoint) geometry;
 
             foreach (var point in multiPoint)
             {
-                PointRenderer.Draw(canvas, viewport, style, feature, point, symbolCache);
+                PointRenderer.Draw(canvas, viewport, style, feature, point, symbolCache, layerOpacity);
             }
         }
     }
