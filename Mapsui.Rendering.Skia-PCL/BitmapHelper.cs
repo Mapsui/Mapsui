@@ -7,6 +7,8 @@ namespace Mapsui.Rendering.Skia
 {
     public static class BitmapHelper
     {
+        private static readonly SKPaint Paint = new SKPaint(); // Reuse for performance. Only for opacity
+
         public static BitmapInfo LoadBitmap(Stream bitmapStream)
         {
             bitmapStream.Position = 0;
@@ -55,9 +57,7 @@ namespace Mapsui.Rendering.Skia
             if (verticalAlignment == LabelStyle.VerticalAlignmentEnum.Bottom) return height/2;
             return 0; // center
         }
-
-        private static SKPaint _paint = new SKPaint();
-
+        
         public static void RenderRaster(SKCanvas canvas, SKImage bitmap, SKRect rect, float opacity)
         {
             // todo: Add some way to select one method or the other.
@@ -69,8 +69,8 @@ namespace Mapsui.Rendering.Skia
             // Method 2) Better for performance:
             if (Math.Abs(opacity) > Utilities.Constants.Epsilon)
             {
-                _paint.Color = new SKColor(255, 255, 255, (byte) (255 * opacity));
-                canvas.DrawImage(bitmap, rect, _paint);
+                Paint.Color = new SKColor(255, 255, 255, (byte) (255 * opacity));
+                canvas.DrawImage(bitmap, rect, Paint);
             }
             else
             {
