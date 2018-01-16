@@ -11,7 +11,7 @@ namespace Mapsui.Rendering.Skia
     public static class RasterRenderer
     {
 		public static void Draw (SKCanvas canvas, IViewport viewport, IStyle style, IFeature feature,
-			IDictionary<object, BitmapInfo> tileCache, long currentIteration)
+            float layerOpacity, IDictionary<object, BitmapInfo> tileCache, long currentIteration)
 		{
 		    try
 		    {
@@ -44,14 +44,14 @@ namespace Mapsui.Rendering.Skia
 
 		            var destination = new BoundingBox(0.0, 0.0, boundingBox.Width, boundingBox.Height);
 
-		            BitmapHelper.RenderRaster(canvas, bitmapInfo.Bitmap, destination.ToSkia());
+		            BitmapHelper.RenderRaster(canvas, bitmapInfo.Bitmap, destination.ToSkia(), layerOpacity);
 
 		            canvas.SetMatrix(priorMatrix);
 		        }
 		        else
 		        {
 		            var destination = WorldToScreen(viewport, feature.Geometry.GetBoundingBox());
-		            BitmapHelper.RenderRaster(canvas, bitmapInfo.Bitmap, RoundToPixel(destination).ToSkia());
+		            BitmapHelper.RenderRaster(canvas, bitmapInfo.Bitmap, RoundToPixel(destination).ToSkia(), layerOpacity);
                 }
 		    }
 			catch (Exception ex)

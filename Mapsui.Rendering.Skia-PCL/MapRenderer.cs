@@ -77,7 +77,7 @@ namespace Mapsui.Rendering.Skia
         {
             layers = layers.ToList();
 
-            VisibleFeatureIterator.IterateLayers(viewport, layers, (v, l, s) => { RenderFeature(canvas, v, l, s); });
+            VisibleFeatureIterator.IterateLayers(viewport, layers, (v, l, s, o) => { RenderFeature(canvas, v, l, s, o); });
 
             RemovedUnusedBitmapsFromCache();
 
@@ -109,7 +109,7 @@ namespace Mapsui.Rendering.Skia
             }
         }
 
-        private void RenderFeature(SKCanvas canvas, IViewport viewport, IStyle style, IFeature feature)
+        private void RenderFeature(SKCanvas canvas, IViewport viewport, IStyle style, IFeature feature, float layerOpacity)
         {
             if (feature.Geometry is Point)
                 PointRenderer.Draw(canvas, viewport, style, feature, feature.Geometry, _symbolCache);
@@ -124,7 +124,7 @@ namespace Mapsui.Rendering.Skia
             else if (feature.Geometry is MultiPolygon)
                 MultiPolygonRenderer.Draw(canvas, viewport, style, feature, feature.Geometry);
             else if (feature.Geometry is IRaster)
-                RasterRenderer.Draw(canvas, viewport, style, feature, _tileCache, _currentIteration);
+                RasterRenderer.Draw(canvas, viewport, style, feature, layerOpacity, _tileCache, _currentIteration);
         }
 
         private void Render(object canvas, IViewport viewport, IEnumerable<IWidget> widgets)
