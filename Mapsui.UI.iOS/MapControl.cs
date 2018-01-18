@@ -60,6 +60,14 @@ namespace Mapsui.UI.iOS
             UserInteractionEnabled = true;
 
             _canvas.PaintSurface += OnPaintSurface;
+
+            var tapGestureRecognizer = new UITapGestureRecognizer(HandleInfo)
+            {
+                NumberOfTapsRequired = 1,
+                CancelsTouchesInView = false,
+            };
+
+            AddGestureRecognizer(tapGestureRecognizer);
         }
 
         void OnPaintSurface(object sender, SKPaintGLSurfaceEventArgs skPaintSurfaceEventArgs)
@@ -95,125 +103,101 @@ namespace Mapsui.UI.iOS
 
         public override void TouchesBegan(NSSet touches, UIEvent evt)
         {
-            if (touches.Count == 2)
-            {
-                var locations = touches.Select(t => ((UITouch)t).LocationInView(this)).ToList();
-                _previousRotation = GetRotation(locations);
-                _innerRotation = _map.Viewport.Rotation;
-            }
-            _touchDown = GetScreenPosition(touches);
             base.TouchesBegan(touches, evt);
         }
 
         public override void TouchesMoved(NSSet touches, UIEvent evt)
         {
             base.TouchesMoved(touches, evt);
-
-            if (touches.Count == 1)
+            
+            if (evt.AllTouches.Count == 1)
             {
                 if (touches.AnyObject is UITouch touch)
                 {
                     var currentPos = touch.LocationInView(this);
                     var previousPos = touch.PreviousLocationInView(this);
-
-                    var cRect = new CGRect(new CGPoint((int)currentPos.X, (int)currentPos.Y), new CGSize(5, 5));
-                    var pRect = new CGRect(new CGPoint((int)previousPos.X, (int)previousPos.Y), new CGSize(5, 5));
-
-                    if (!cRect.IntersectsWith(pRect))
-                    {
-                        if (_previousTouchCount == touches.Count)
-                        {
-                            _map.Viewport.Transform(currentPos.X, currentPos.Y, previousPos.X, previousPos.Y);
-                            RefreshGraphics();
-                        }
-                    }
-                }
-            }
-            else if (touches.Count == 2)
-            {
-                nfloat centerX = 0;
-                nfloat centerY = 0;
-
-                var locations = touches.Select(t => ((UITouch)t).LocationInView(this)).ToList();
-
-                foreach (var location in locations)
-                {
-                    centerX += location.X;
-                    centerY += location.Y;
-                }
-
-                centerX = centerX / touches.Count;
-                centerY = centerY / touches.Count;
-
-                var radius = Algorithms.Distance(centerX, centerY, locations[0].X, locations[0].Y);
-
-                if (_previousTouchCount == touches.Count)
-                {
-                    _map.Viewport.Transform(centerX, centerY, _previousX, _previousY, radius / _previousRadius);
-
-                    if (AllowPinchRotation)
-                    {
-                        var rotation = GetRotation(locations);
-
-                        _innerRotation += rotation - _previousRotation;
-                        _innerRotation %= 360;
-
-                        if (_innerRotation > 180)
-                            _innerRotation -= 360;
-                        else if (_innerRotation < -180)
-                            _innerRotation += 360;
-
-                        if (_map.Viewport.Rotation == 0 && Math.Abs(_innerRotation) >= Math.Abs(UnSnapRotationDegrees))
-                            _map.Viewport.Rotation = _innerRotation;
-                        else if (_map.Viewport.Rotation != 0)
-                        {
-                            if (Math.Abs(_innerRotation) <= Math.Abs(ReSnapRotationDegrees))
-                                _map.Viewport.Rotation = 0;
-                            else
-                                _map.Viewport.Rotation = _innerRotation;
-                        }
-
-                        _previousRotation = rotation;
-                    }
-
+                    
+                    _map.Viewport.Transform(currentPos.X, currentPos.Y, previousPos.X, previousPos.Y);
                     RefreshGraphics();
                 }
-
-                _previousX = centerX;
-                _previousY = centerY;
-                _previousRadius = radius;
             }
-            _previousTouchCount = touches.Count;
+            else if (evt.AllTouches.Count == 2)
+            {
+                var prevLocations = evt.AllTouches.Select(t => ((UITouch)t).PreviousLocationInView(this))
+                                           .Select(p => new Point(p.X, p.Y)).ToList();
+                
+                var locations = evt.AllTouches.Select(t => ((UITouch)t).LocationInView(this))
+                                        .Select(p => new Point(p.X, p.Y)).ToList();
+
+                var (prevCenter, prevRadius, prevAngle) = GetPinchValues(prevLocations);
+                var (center, radius, angle) = GetPinchValues(locations);
+
+                _map.Viewport.Transform(center.X, center.Y, prevCenter.X, prevCenter.Y, radius / prevRadius);
+
+                if (AllowPinchRotation)
+                {
+                    _innerRotation += angle - prevAngle;
+                    _innerRotation %= 360;
+
+                    if (_innerRotation > 180)
+                        _innerRotation -= 360;
+                    else if (_innerRotation < -180)
+                        _innerRotation += 360;
+
+                    if (_map.Viewport.Rotation == 0 && Math.Abs(_innerRotation) >= Math.Abs(UnSnapRotationDegrees))
+                        _map.Viewport.Rotation = _innerRotation;
+                    else if (_map.Viewport.Rotation != 0)
+                    {
+                        if (Math.Abs(_innerRotation) <= Math.Abs(ReSnapRotationDegrees))
+                            _map.Viewport.Rotation = 0;
+                        else
+                            _map.Viewport.Rotation = _innerRotation;
+                    }
+                }
+
+                RefreshGraphics();
+            }
         }
 
-        private static double GetRotation(List<CGPoint> locations)
+        private static (Point centre, double radius, double angle) GetPinchValues(List<Point> locations)
         {
-            return Math.Atan2(locations[1].Y - locations[0].Y, locations[1].X - locations[0].X) * 180.0 / Math.PI;
+            if (locations.Count < 2)
+                throw new ArgumentException();
+
+            double centerX = 0;
+            double centerY = 0;
+
+            foreach (var location in locations)
+            {
+                centerX += location.X;
+                centerY += location.Y;
+            }
+
+            centerX = centerX / locations.Count;
+            centerY = centerY / locations.Count;
+
+            var radius = Algorithms.Distance(centerX, centerY, locations[0].X, locations[0].Y);
+
+            var angle = Math.Atan2(locations[1].Y - locations[0].Y, locations[1].X - locations[0].X) * 180.0 / Math.PI;
+
+            return (new Point(centerX, centerY), radius, angle);
         }
 
         public override void TouchesEnded(NSSet touches, UIEvent e)
         {
             Refresh();
-            HandleInfo(e.AllTouches);
-            _previousTouchCount = 0;
         }
 
-        private void HandleInfo(NSSet touches)
+        private void HandleInfo(UITapGestureRecognizer gesture)
         {
-            var screenPosition = GetScreenPosition(touches);
-            if (screenPosition == null) return;
-            if (_touchDown == null) return;
-            Map.InvokeInfo(screenPosition, _touchDown, _skiaScale, _renderer.SymbolCache, WidgetTouch);
-        }
+            var screenPosition = GetScreenPosition(gesture.LocationInView(this));
 
-        /// <returns>The screen position as Mapsui point. Can be null.</returns>
-	    private Point GetScreenPosition(NSSet touches)
+            Map.InvokeInfo(screenPosition, screenPosition, _skiaScale, _renderer.SymbolCache, WidgetTouch);
+        }
+        
+        private Point GetScreenPosition(CGPoint point)
         {
-            if (touches.Count != 1) return null;
-            var touch = touches.FirstOrDefault() as UITouch;
-            var mapsuiPoint = touch?.LocationInView(this).ToMapsui();
-            if (mapsuiPoint == null) return null;
-            return new Point(mapsuiPoint.X * _skiaScale, mapsuiPoint.Y * _skiaScale);
+            return new Point(point.X * _skiaScale, point.Y * _skiaScale);
         }
 
         public void Refresh()
