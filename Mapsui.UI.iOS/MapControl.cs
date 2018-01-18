@@ -118,10 +118,13 @@ namespace Mapsui.UI.iOS
                     var previousPos = touch.PreviousLocationInView(this);
                     
                     _map.Viewport.Transform(currentPos.X, currentPos.Y, previousPos.X, previousPos.Y);
+
+                    ViewportLimiter.LimitExtent(_map.Viewport, _map.PanMode, _map.PanLimits, _map.Envelope);
+
                     RefreshGraphics();
                 }
             }
-            else if (evt.AllTouches.Count == 2)
+            else if (evt.AllTouches.Count >= 2)
             {
                 var prevLocations = evt.AllTouches.Select(t => ((UITouch)t).PreviousLocationInView(this))
                                            .Select(p => new Point(p.X, p.Y)).ToList();
@@ -154,6 +157,10 @@ namespace Mapsui.UI.iOS
                             _map.Viewport.Rotation = _innerRotation;
                     }
                 }
+
+                ViewportLimiter.Limit(_map.Viewport,
+                    _map.ZoomMode, _map.ZoomLimits, _map.Resolutions,
+                    _map.PanMode, _map.PanLimits, _map.Envelope);
 
                 RefreshGraphics();
             }
