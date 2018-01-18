@@ -63,17 +63,16 @@ namespace Mapsui.UI.Android
             Touch += MapView_Touch;
             
             _gestureDetector = new GestureDetector(Context, new GestureDetector.SimpleOnGestureListener());
-            _gestureDetector.SingleTapConfirmed += _gestureDetector_SingleTapConfirmed;
-            _gestureDetector.DoubleTap += _gestureDetector_DoubleTap;
+            _gestureDetector.SingleTapConfirmed += TapGestureHandler;
+            _gestureDetector.DoubleTap += TapGestureHandler;
         }
 
-        private void _gestureDetector_DoubleTap(object sender, GestureDetector.DoubleTapEventArgs e)
+        private void TapGestureHandler(object sender, GestureDetector.DoubleTapEventArgs e)
         {
             var position = GetScreenPosition(e.Event, this);
             Map.InvokeInfo(position, position, _scale, _renderer.SymbolCache, WidgetTouch);
         }
-
-        private void _gestureDetector_SingleTapConfirmed(object sender, GestureDetector.SingleTapConfirmedEventArgs e)
+        private void TapGestureHandler(object sender, GestureDetector.SingleTapConfirmedEventArgs e)
         {
             var position = GetScreenPosition(e.Event, this);
             Map.InvokeInfo(position, position, _scale, _renderer.SymbolCache, WidgetTouch);

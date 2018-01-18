@@ -61,13 +61,20 @@ namespace Mapsui.UI.iOS
 
             _canvas.PaintSurface += OnPaintSurface;
 
-            var tapGestureRecognizer = new UITapGestureRecognizer(HandleInfo)
+            var tapGestureRecognizer = new UITapGestureRecognizer(TapGestureHandler)
             {
                 NumberOfTapsRequired = 1,
                 CancelsTouchesInView = false,
             };
 
             AddGestureRecognizer(tapGestureRecognizer);
+        }
+
+        private void TapGestureHandler(UITapGestureRecognizer gesture)
+        {
+            var screenPosition = GetScreenPosition(gesture.LocationInView(this));
+
+            Map.InvokeInfo(screenPosition, screenPosition, _skiaScale, _renderer.SymbolCache, WidgetTouch);
         }
 
         void OnPaintSurface(object sender, SKPaintGLSurfaceEventArgs skPaintSurfaceEventArgs)
@@ -166,6 +173,11 @@ namespace Mapsui.UI.iOS
             }
         }
 
+        public override void TouchesEnded(NSSet touches, UIEvent e)
+        {
+            Refresh();
+        }
+
         private static (Point centre, double radius, double angle) GetPinchValues(List<Point> locations)
         {
             if (locations.Count < 2)
@@ -188,18 +200,6 @@ namespace Mapsui.UI.iOS
             var angle = Math.Atan2(locations[1].Y - locations[0].Y, locations[1].X - locations[0].X) * 180.0 / Math.PI;
 
             return (new Point(centerX, centerY), radius, angle);
-        }
-
-        public override void TouchesEnded(NSSet touches, UIEvent e)
-        {
-            Refresh();
-        }
-
-        private void HandleInfo(UITapGestureRecognizer gesture)
-        {
-            var screenPosition = GetScreenPosition(gesture.LocationInView(this));
-
-            Map.InvokeInfo(screenPosition, screenPosition, _skiaScale, _renderer.SymbolCache, WidgetTouch);
         }
         
         private Point GetScreenPosition(CGPoint point)
