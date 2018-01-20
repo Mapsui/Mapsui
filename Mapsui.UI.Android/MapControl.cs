@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using Android.App;
 using Android.Content;
 using Android.Graphics;
@@ -7,6 +9,7 @@ using Android.Util;
 using Android.Views;
 using Java.Lang;
 using Mapsui.Fetcher;
+using Mapsui.Geometries.Utilities;
 using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.Widgets;
@@ -21,18 +24,15 @@ namespace Mapsui.UI.Android
         private const int Dragging = 1;
         private const int Zoom = 2;
         private int _mode = None;
-        private Geometries.Point _touchPosition;
-        private Geometries.Point _previousTouchPosition;
-        private Geometries.Point _touchCenter = new Geometries.Point();
-        private Geometries.Point _previousTouchCenter = new Geometries.Point();
-        private Geometries.Point _touchDownPosition = new Geometries.Point();
-        private double _previousAngle;
-        private float _previousDistance = 1f;
+        private Geometries.Point _previousCenter = new Geometries.Point();
+        private double _previousAngle = 0f;
+        private double _previousRadius = 1f;
         private Rendering.Skia.MapRenderer _renderer;
         private SKCanvasView _canvas;
         private Map _map;
         private float _scale;
-        private double _innerRotation;
+        private double _innerRotation = 0f;
+        private GestureDetector _gestureDetector;
 
         public event EventHandler ViewportInitialized;
 
@@ -61,7 +61,16 @@ namespace Mapsui.UI.Android
             _renderer = new Rendering.Skia.MapRenderer();
             TryInitializeViewport();
             Touch += MapView_Touch;
+            
+            _gestureDetector = new GestureDetector(Context, new GestureDetector.SimpleOnGestureListener());
+            _gestureDetector.SingleTapConfirmed += TapGestureHandler;
         }
+        
+        private void TapGestureHandler(object sender, GestureDetector.SingleTapConfirmedEventArgs e)
+        {
+            var position = GetScreenPosition(e.Event, this);
+            Map.InvokeInfo(position, position, _scale, _renderer.SymbolCache, WidgetTouch);
+        }        
 
         protected override void OnSizeChanged(int w, int h, int oldw, int oldh)
         {
@@ -106,80 +115,86 @@ namespace Mapsui.UI.Android
 
         public void MapView_Touch(object sender, TouchEventArgs args)
         {
-           switch (args.Event.Action)
+            if (_gestureDetector.OnTouchEvent(args.Event))
+                return;
+
+            var touchPoints = GetMapPositions(args.Event, this);
+
+            switch (args.Event.Action)
             {
-                case MotionEventActions.Down:
-                    _previousTouchPosition = null;
-                    _touchDownPosition = GetScreenPosition(args.Event, this);
-                    _mode = Dragging;
-                    break;
                 case MotionEventActions.Up:
                     _canvas.Invalidate();
                     _mode = None;
                     _map.ViewChanged(true);
-                    var position = GetScreenPosition(args.Event, this);
-                    Map.InvokeInfo(position, _touchDownPosition, _scale, _renderer.SymbolCache, WidgetTouch);
                     break;
+                case MotionEventActions.Down:
+                case MotionEventActions.Pointer1Down:
                 case MotionEventActions.Pointer2Down:
-                    _previousTouchPosition = null;
-                    _previousDistance = DistanceBetweenTouches(args.Event);
-                    _touchCenter = GetTouchCenter(args.Event, this);
-                    _previousTouchCenter = _touchCenter;
-                    if (AllowPinchRotation)
+                case MotionEventActions.Pointer3Down:
+                    if (touchPoints.Count >= 2)
                     {
-                        _previousAngle = Angle(args.Event);
+                        (_previousCenter, _previousRadius, _previousAngle) = GetPinchValues(touchPoints);
+                        _mode = Zoom;
                         _innerRotation = _map.Viewport.Rotation;
                     }
-                    _touchDownPosition = _touchCenter;
-                    _mode = Zoom;
+                    else
+                    {
+                        _mode = Dragging;
+                        _previousCenter = touchPoints.First();
+                    }
                     break;
+                case MotionEventActions.Pointer1Up:
                 case MotionEventActions.Pointer2Up:
-                    _previousTouchPosition = null;
-                    _previousTouchCenter = null;
-                    _mode = Dragging;
+                case MotionEventActions.Pointer3Up:
+                    // Remove the touchPoint that was released from the locations to reset the
+                    // starting points of the move and rotation
+                    touchPoints.RemoveAt(args.Event.ActionIndex);           
+
+                    if (touchPoints.Count >= 2)
+                    {
+                        (_previousCenter, _previousRadius, _previousAngle) = GetPinchValues(touchPoints);
+                        _mode = Zoom;
+                        _innerRotation = _map.Viewport.Rotation;
+                    }
+                    else
+                    {
+                        _mode = Dragging;
+                        _previousCenter = touchPoints.First();
+                    }
                     break;
                 case MotionEventActions.Move:
                     switch (_mode)
                     {
                         case Dragging:
-                            _touchPosition = GetScreenPosition(args.Event, this);
-                            if (_previousTouchPosition != null)
                             {
-                                _map.Viewport.Transform(
-                                    _touchPosition.X / _scale,
-                                    _touchPosition.Y / _scale,
-                                    _previousTouchPosition.X / _scale,
-                                    _previousTouchPosition.Y / _scale);
+                                if (touchPoints.Count != 1)
+                                    return;
 
-                                ViewportLimiter.LimitExtent(_map.Viewport,
-                                    _map.PanMode, _map.PanLimits, _map.Envelope);
+                                var touchPosition = touchPoints.First();
+                                if (_previousCenter != null && !_previousCenter.IsEmpty())
+                                {
+                                    _map.Viewport.Transform(touchPosition.X, touchPosition.Y, _previousCenter.X, _previousCenter.Y);
 
-                                _canvas.Invalidate();
+                                    ViewportLimiter.LimitExtent(_map.Viewport, _map.PanMode, _map.PanLimits, _map.Envelope);
+
+                                    _canvas.Invalidate();
+                                }
+                                _previousCenter = touchPosition;
                             }
-                            _previousTouchPosition = _touchPosition;
                             break;
                         case Zoom:
                             {
-                                if (args.Event.PointerCount < 2) return;
+                                if (touchPoints.Count < 2)
+                                    return;
 
-                                var distance = DistanceBetweenTouches(args.Event);
-                                var scale = distance / _previousDistance;
-                                _previousDistance = distance;
+                                var (prevCenter, prevRadius, prevAngle) = (_previousCenter, _previousRadius, _previousAngle);
+                                var (center, radius, angle ) = GetPinchValues(touchPoints);
 
-                                _previousTouchCenter = _touchCenter;
-                                _touchCenter = GetTouchCenter(args.Event, this);
-
-                                _map.Viewport.Transform(
-                                    _touchCenter.X / _scale,
-                                    _touchCenter.Y / _scale,
-                                    _previousTouchCenter.X / _scale,
-                                    _previousTouchCenter.Y / _scale,
-                                    scale);
+                                _map.Viewport.Transform(center.X, center.Y, prevCenter.X, prevCenter.Y, radius / prevRadius);
 
                                 if (AllowPinchRotation)
                                 {
-                                    var angle = Angle(args.Event);
-                                    _innerRotation += angle - _previousAngle;
+                                    _innerRotation += angle - prevAngle;
                                     _innerRotation %= 360;
 
                                     if (_innerRotation > 180)
@@ -196,11 +211,11 @@ namespace Mapsui.UI.Android
                                         else
                                             _map.Viewport.Rotation = _innerRotation;
                                     }
-
-                                    _previousAngle = angle;
                                 }
 
-                                ViewportLimiter.Limit(_map.Viewport,
+                                (_previousCenter, _previousRadius, _previousAngle) = (center, radius, angle);
+
+                                ViewportLimiter.Limit(_map.Viewport, 
                                     _map.ZoomMode, _map.ZoomLimits, _map.Resolutions,
                                     _map.PanMode, _map.PanLimits, _map.Envelope);
 
@@ -212,31 +227,38 @@ namespace Mapsui.UI.Android
             }
         }
 
-        private static double Angle(MotionEvent me)
+        private List<Geometries.Point> GetMapPositions(MotionEvent me, View view)
         {
-            if (me.PointerCount < 2)
-                throw new ArgumentException();
-            var x = me.GetX(1) - me.GetX(0);
-            var y = me.GetY(1) - me.GetY(0);
-            var rotation = Math.Atan2(y, x) * 180.0 / Math.PI;
-            return rotation;
+            var result = new List<Geometries.Point>();
+            for (var i = 0; i < me.PointerCount; i++)
+            {
+                result.Add(new Geometries.Point((me.GetX(i) - view.Left) / _scale, (me.GetY(i) - view.Top) / _scale));
+            }
+            return result;
         }
 
-        private float DistanceBetweenTouches(MotionEvent me)
+        private static (Geometries.Point centre, double radius, double angle) GetPinchValues(List<Geometries.Point> locations)
         {
-            if (me.PointerCount < 2)
+            if (locations.Count < 2)
                 throw new ArgumentException();
 
-            var x = me.GetX(0) - me.GetX(1);
-            var y = me.GetY(0) - me.GetY(1);
-            return (float)Math.Sqrt(x * x + y * y);
-        }
+            double centerX = 0;
+            double centerY = 0;
 
-        private static Geometries.Point GetTouchCenter(MotionEvent motionEvent, View view)
-        {
-            return new PointF(
-                (motionEvent.GetX(0) + motionEvent.GetX(1)) / 2 - view.Left,
-                (motionEvent.GetY(0) + motionEvent.GetY(1)) / 2 - view.Top).ToMapsui();
+            foreach (var location in locations)
+            {
+                centerX += location.X;
+                centerY += location.Y;
+            }
+
+            centerX = centerX / locations.Count;
+            centerY = centerY / locations.Count;
+
+            var radius = Algorithms.Distance(centerX, centerY, locations[0].X, locations[0].Y);
+
+            var angle = Math.Atan2(locations[1].Y - locations[0].Y, locations[1].X - locations[0].X) * 180.0 / Math.PI;
+
+            return (new Geometries.Point(centerX, centerY), radius, angle);
         }
 
         private static Geometries.Point GetScreenPosition(MotionEvent motionEvent, View view)
