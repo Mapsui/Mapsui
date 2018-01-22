@@ -25,13 +25,13 @@ namespace Mapsui.UI.Android
         private const int Zoom = 2;
         private int _mode = None;
         private Geometries.Point _previousCenter = new Geometries.Point();
-        private double _previousAngle = 0f;
+        private double _previousAngle;
         private double _previousRadius = 1f;
         private Rendering.Skia.MapRenderer _renderer;
         private SKCanvasView _canvas;
         private Map _map;
         private float _scale;
-        private double _innerRotation = 0f;
+        private double _innerRotation;
         private GestureDetector _gestureDetector;
 
         public event EventHandler ViewportInitialized;
