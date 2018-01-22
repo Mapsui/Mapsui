@@ -59,11 +59,12 @@ namespace Mapsui.Providers
     public class MemoryProvider : IProvider
     {
         private readonly object _syncRoot = new object();
+        private IFeatures _features;
 
         /// <summary>
         /// Gets or sets the geometries this datasource contains
         /// </summary>
-        public IFeatures Features { get; set; }
+        public IEnumerable<IFeature> Features => _features;
 
         public double SymbolSize { get; set; }
 
@@ -75,7 +76,7 @@ namespace Mapsui.Providers
         public MemoryProvider()
         {
             CRS = "";
-            Features = new Features();
+            _features = new Features();
         }
 
         /// <summary>
@@ -85,13 +86,14 @@ namespace Mapsui.Providers
         public MemoryProvider(IEnumerable<IGeometry> geometries)
         {
             CRS = "";
-            Features = new Features();
+            var features = new Features();
             foreach (IGeometry geometry in geometries)
             {
-                IFeature feature = Features.New();
+                IFeature feature = features.New();
                 feature.Geometry = geometry;
-                Features.Add(feature);
+                features.Add(feature);
             }
+            _features = features;
         }
 
         /// <summary>
@@ -101,7 +103,7 @@ namespace Mapsui.Providers
         public MemoryProvider(IFeature feature)
         {
             CRS = "";
-            Features = new Features {feature};
+            _features = new Features {feature};
         }
 
         /// <summary>
@@ -120,8 +122,9 @@ namespace Mapsui.Providers
         public MemoryProvider(IEnumerable<IFeature> features)
         {
             CRS = "";
-            Features = new Features();
-            foreach (var feature in features) Features.Add(feature);
+            var localFeatures = new Features();
+            foreach (var feature in features) localFeatures.Add(feature);
+            _features = localFeatures;
         }
 
         /// <summary>
@@ -131,7 +134,7 @@ namespace Mapsui.Providers
         public MemoryProvider(IFeatures features)
         {
             CRS = "";
-            Features = features;
+            _features = features;
         }
 
         /// <summary>
@@ -141,10 +144,12 @@ namespace Mapsui.Providers
         public MemoryProvider(Geometry geometry)
         {
             CRS = "";
-            Features = new Features();
-            IFeature feature = Features.New();
+            var features = new Features();
+            IFeature feature = features.New();
             feature.Geometry = geometry;
-            Features.Add(feature);
+            features.Add(feature);
+            _features = features;
+
             SymbolSize = 64;
         }
 
@@ -186,8 +191,8 @@ namespace Mapsui.Providers
         {
             lock (_syncRoot)
             {
-                if (string.IsNullOrEmpty(Features.PrimaryKey)) throw new Exception("ID Field was not set");
-                return Find(value, Features.PrimaryKey);
+                if (string.IsNullOrEmpty(_features.PrimaryKey)) throw new Exception("ID Field was not set");
+                return Find(value, _features.PrimaryKey);
             }
         }
 
@@ -195,7 +200,7 @@ namespace Mapsui.Providers
         {
             lock (_syncRoot)
             {
-                return Features.FirstOrDefault(f => ((f[primaryKey] != null) && (value != null)) &&
+                return Features.FirstOrDefault(f => f[primaryKey] != null && value != null &&
                     f[primaryKey].Equals(value));
             }
         }
@@ -224,8 +229,25 @@ namespace Mapsui.Providers
         {
             lock (_syncRoot)
             {
-                Features.Clear();
+                _features.Clear();
             }
         }
+
+        public void ReplaceFeatures(Features features)
+        {
+            lock (_syncRoot)
+            {
+                _features = features;
+            }
+        }
+
+        public void ReplaceFeatures(IEnumerable<IFeature> features)
+        {
+            lock (_syncRoot)
+            {
+                _features = new Features(features);
+            }
+        }
+
     }
 }

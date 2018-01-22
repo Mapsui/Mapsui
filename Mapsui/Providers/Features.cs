@@ -44,6 +44,14 @@ namespace Mapsui.Providers
             // to specify the name and type of the columns
         }
 
+        public Features(IEnumerable<IFeature> features)
+        {
+            foreach (var feature in features)
+            {
+                Add(feature);
+            }
+        }
+
         public Features(string primaryKey)
         {
             PrimaryKey = primaryKey;

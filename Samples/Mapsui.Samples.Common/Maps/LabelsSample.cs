@@ -18,14 +18,17 @@ namespace Mapsui.Samples.Common.Maps
 
         public static ILayer CreateLayer()
         {
-            var memoryProvider = new MemoryProvider();
+            var features = new Features
+            {
+                CreateFeatureWithDefaultStyle(),
+                CreateFeatureWithRightAlignedStyle(),
+                CreateFeatureWithBottomAlignedStyle(),
+                CreateFeatureWithColors(),
+                CreatePolygonWithLabel(),
+                CreateFeatureWithHalo()
+            };
 
-            memoryProvider.Features.Add(CreateFeatureWithDefaultStyle());
-            memoryProvider.Features.Add(CreateFeatureWithRightAlignedStyle());
-            memoryProvider.Features.Add(CreateFeatureWithBottomAlignedStyle());
-            memoryProvider.Features.Add(CreateFeatureWithColors());
-            memoryProvider.Features.Add(CreatePolygonWithLabel());
-            memoryProvider.Features.Add(CreateFeatureWithHalo());
+            var memoryProvider = new MemoryProvider(features);
 
             return new MemoryLayer {Name = "Points with labels", DataSource = memoryProvider};
         }

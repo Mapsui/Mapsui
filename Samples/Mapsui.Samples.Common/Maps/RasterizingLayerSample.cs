@@ -17,16 +17,18 @@ namespace Mapsui.Samples.Common.Maps
 
         private static MemoryLayer CreateRandomPointLayer()
         {
-            var provider = new MemoryProvider();
             var rnd = new Random();
+            var features = new Features();
             for (var i = 0; i < 100; i++)
             {
                 var feature = new Feature
                 {
                     Geometry = new Geometries.Point(rnd.Next(0, 5000000), rnd.Next(0, 5000000))
                 };
-                provider.Features.Add(feature);
+                features.Add(feature);
             }
+            var provider = new MemoryProvider(features);
+
             var layer = new MemoryLayer {DataSource = provider};
             return layer;
         }

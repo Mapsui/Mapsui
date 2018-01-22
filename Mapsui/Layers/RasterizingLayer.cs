@@ -105,7 +105,7 @@ namespace Mapsui.Layers
 
                     var bitmapStream = _rasterizer.RenderToBitmapStream(viewport, new[] {_layer});
                     RemoveExistingFeatures();
-                    _cache.Features = new Features {new Feature {Geometry = new Raster(bitmapStream, viewport.Extent)}};
+                    _cache.ReplaceFeatures(new Features {new Feature {Geometry = new Raster(bitmapStream, viewport.Extent)}});
 
                     Logger.Log(LogLevel.Debug, $"Memory after rasterizing layer {GC.GetTotalMemory(true):N0}");
 

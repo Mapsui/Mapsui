@@ -32,12 +32,16 @@ namespace Mapsui.Samples.Common.Maps
 
         private static ILayer CreatePolygonLayer()
         {
-            var layer = new MemoryLayer { Name = PolygonLayerName };
-            var provider = new MemoryProvider();
-            provider.Features.Add(CreatePolygonFeature());
-            provider.Features.Add(CreateMultiPolygonFeature());
-            layer.DataSource = provider;
-            layer.Style = null;
+            var features = new Features {CreatePolygonFeature(), CreateMultiPolygonFeature()};
+            var provider = new MemoryProvider(features);
+
+            var layer = new MemoryLayer
+            {
+                Name = PolygonLayerName,
+                DataSource = provider,
+                Style = null
+            };
+
             return layer;
         }
 

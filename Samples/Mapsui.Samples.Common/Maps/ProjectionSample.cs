@@ -28,9 +28,13 @@ namespace Mapsui.Samples.Common.Maps
 
         public static Layer CreateWgs84PointLayer()
         {
-            var dataSource = new MemoryProvider {CRS = "EPSG:4326"};
-            dataSource.Features.Add(new Feature { Geometry = SomeWhereNearHaarlem});
-            dataSource.Features.Add(new Feature { Geometry = GeometryFromWKT.Parse(WktOfAmsterdam) });
+            var features = new Features
+            {
+                new Feature {Geometry = SomeWhereNearHaarlem},
+                new Feature {Geometry = GeometryFromWKT.Parse(WktOfAmsterdam)}
+            };
+            var dataSource = new MemoryProvider(features) { CRS = "EPSG:4326" };
+
             return new Layer
             {
                 DataSource = dataSource,

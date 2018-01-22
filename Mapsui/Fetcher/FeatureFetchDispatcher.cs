@@ -56,12 +56,7 @@ namespace Mapsui.Fetcher
             {
                 if (exception == null)
                 {
-                    _cache.Features.Clear();
-                    var transformedFeatures = _transformer.Transform(features);
-                    foreach (var feature in transformedFeatures)
-                    {
-                        _cache.Features.Add(feature);
-                    }
+                    _cache.ReplaceFeatures(_transformer.Transform(features));
                 }
                 
                 Busy = _modified;

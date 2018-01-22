@@ -32,8 +32,7 @@ namespace Mapsui.Tests.Common.Maps
 
         public static MemoryProvider CreatePolygonProvider()
         {
-            var provider = new MemoryProvider(new Features());
-
+            
             var feature = new Feature
             {
                 Geometry = Geometry.GeomFromText(
@@ -48,7 +47,7 @@ namespace Mapsui.Tests.Common.Maps
                 Line = null
             });
 
-            provider.Features.Add(feature);
+            var provider = new MemoryProvider(new Features(new [] { feature }));
 
             return provider;
         }
