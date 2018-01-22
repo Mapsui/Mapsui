@@ -79,7 +79,7 @@ namespace Mapsui.UI
             }
             else if (zoomMode == ZoomMode.KeepWithinResolutionsAndAlwaysFillViewport)
             {
-                if (resolutionExtremes.Min > resolution)return resolutionExtremes.Min;
+                if (resolutionExtremes.Min > resolution) return resolutionExtremes.Min;
                 
                 // This is the ...AndAlwaysFillViewport part
                 var viewportFillingResolution = CalculateResolutionAtWhichMapFillsViewport(screenWidth, screenHeight, mapEnvelope);
