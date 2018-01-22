@@ -142,7 +142,7 @@ namespace Mapsui.UI.iOS
                 var (prevCenter, prevRadius, prevAngle) = GetPinchValues(prevLocations);
                 var (center, radius, angle) = GetPinchValues(locations);
 
-                _map.Viewport.Transform(center.X, center.Y, prevCenter.X, prevCenter.Y, radius / prevRadius);
+                double rotationDelta = 0;
 
                 if (AllowPinchRotation)
                 {
@@ -155,15 +155,17 @@ namespace Mapsui.UI.iOS
                         _innerRotation += 360;
 
                     if (_map.Viewport.Rotation == 0 && Math.Abs(_innerRotation) >= Math.Abs(UnSnapRotationDegrees))
-                        _map.Viewport.Rotation = _innerRotation;
+                        rotationDelta = _innerRotation;
                     else if (_map.Viewport.Rotation != 0)
                     {
                         if (Math.Abs(_innerRotation) <= Math.Abs(ReSnapRotationDegrees))
-                            _map.Viewport.Rotation = 0;
+                            rotationDelta = -_map.Viewport.Rotation;
                         else
-                            _map.Viewport.Rotation = _innerRotation;
+                            rotationDelta = _innerRotation - _map.Viewport.Rotation;
                     }
                 }
+
+                _map.Viewport.Transform(center.X, center.Y, prevCenter.X, prevCenter.Y, radius / prevRadius, rotationDelta);
 
                 ViewportLimiter.Limit(_map.Viewport,
                     _map.ZoomMode, _map.ZoomLimits, _map.Resolutions,

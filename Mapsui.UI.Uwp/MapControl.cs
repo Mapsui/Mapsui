@@ -55,6 +55,7 @@ namespace Mapsui.UI.Uwp
         private Map _map;
         private Point _previousPosition;
         private Geometries.Point _skiaScale;
+        private double _innerRotation = 0f;
 
         public event EventHandler ViewportInitialized;
 
@@ -76,7 +77,7 @@ namespace Mapsui.UI.Uwp
             _renderer = new MapRenderer();
             PointerWheelChanged += MapControl_PointerWheelChanged;
 
-            ManipulationMode = ManipulationModes.Scale | ManipulationModes.TranslateX | ManipulationModes.TranslateY;
+            ManipulationMode = ManipulationModes.Scale | ManipulationModes.TranslateX | ManipulationModes.TranslateY | ManipulationModes.Rotate;
             ManipulationDelta += OnManipulationDelta;
             ManipulationCompleted += OnManipulationCompleted;
             ManipulationInertiaStarting += OnManipulationInertiaStarting;
@@ -427,40 +428,39 @@ namespace Mapsui.UI.Uwp
             e.TranslationBehavior.DesiredDeceleration = 25 * 96.0 / (1000.0 * 1000.0);
         }
 
+
         private void OnManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
-        {
-            if (_previousPosition == default(Point) || double.IsNaN(_previousPosition.X))
+        {            
+            var (center, radius, angle) = (e.Position.ToMapsui(), e.Delta.Scale, e.Delta.Rotation);
+            var (prevCenter, prevRadius, prevAngle) = (new Geometries.Point(center.X - e.Delta.Translation.X, center.Y - e.Delta.Translation.Y), 1f, 0f);
+            
+            double rotationDelta = 0;
+
+            if (AllowPinchRotation)
             {
-                _previousPosition = e.Position;
-                return;
+                _innerRotation += angle - prevAngle;
+                _innerRotation %= 360;
+
+                if (_innerRotation > 180)
+                    _innerRotation -= 360;
+                else if (_innerRotation < -180)
+                    _innerRotation += 360;
+
+                if (_map.Viewport.Rotation == 0 && Math.Abs(_innerRotation) >= Math.Abs(UnSnapRotationDegrees))
+                    rotationDelta = _innerRotation;
+                else if (_map.Viewport.Rotation != 0)
+                {
+                    if (Math.Abs(_innerRotation) <= Math.Abs(ReSnapRotationDegrees))
+                        rotationDelta = -_map.Viewport.Rotation;
+                    else
+                        rotationDelta = _innerRotation - _map.Viewport.Rotation;
+                }
             }
 
-            // The problem: When you are pinch zooming and you are lifting your hand
-            // it is very likely that one finger will leave before the other. The moment after
-            // the first finger leaves the center of the pinch suddenly jumps to the position
-            // of the last touching finger. Causing a sudden change of the map center.
-            // The solution: This hacked up workaround below. When the distance is high
-            // but the velocity is low, do not move the map.
-
-            if (Distance(e.Position.X, e.Position.Y, _previousPosition.X, _previousPosition.Y) > 50
-                && Math.Sqrt(Math.Pow(e.Velocities.Linear.X, 2.0) + Math.Pow(e.Velocities.Linear.Y, 2.0)) < 1)
-            {
-                _previousPosition = default(Point);
-                return;
-            }
-
-            Map.Viewport.Transform(e.Position.X, e.Position.Y, _previousPosition.X, _previousPosition.Y, e.Delta.Scale);
-
-            _previousPosition = e.Position;
+            _map.Viewport.Transform(center.X, center.Y, prevCenter.X, prevCenter.Y, radius / prevRadius, rotationDelta);
 
             _invalid = true;
-
             OnViewChanged(true);
-        }
-
-        public static double Distance(double x1, double y1, double x2, double y2)
-        {
-            return Math.Sqrt(Math.Pow(x1 - x2, 2.0) + Math.Pow(y1 - y2, 2.0));
         }
 
         private void OnManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
