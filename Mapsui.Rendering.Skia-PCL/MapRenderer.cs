@@ -75,13 +75,20 @@ namespace Mapsui.Rendering.Skia
 
         private void Render(SKCanvas canvas, IViewport viewport, IEnumerable<ILayer> layers)
         {
-            layers = layers.ToList();
+            try
+            {
+                layers = layers.ToList();
 
-            VisibleFeatureIterator.IterateLayers(viewport, layers, (v, l, s, o) => { RenderFeature(canvas, v, l, s, o); });
+                VisibleFeatureIterator.IterateLayers(viewport, layers, (v, l, s, o) => { RenderFeature(canvas, v, l, s, o); });
 
-            RemovedUnusedBitmapsFromCache();
+                RemovedUnusedBitmapsFromCache();
 
-            _currentIteration++;
+                _currentIteration++;
+            }
+            catch (Exception exception)
+            {
+                Logger.Log(LogLevel.Error, "Unexpected error in skia renderer", exception);
+            }
         }
 
         private void RemovedUnusedBitmapsFromCache()
