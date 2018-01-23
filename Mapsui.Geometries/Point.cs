@@ -338,6 +338,17 @@ namespace Mapsui.Geometries
             return Rotate(degrees, center.X, center.Y);
         }
 
+        /// <summary>
+        ///     Calculates a new point by translating this point by the specified offset
+        /// </summary>
+        /// <param name="offsetX">Offset to translate in X axis</param>
+        /// <param name="offsetY">Offset to translate in Y axis</param>
+        /// <returns>Returns the offset point</returns>
+        public Point Offset(double offsetX, double offsetY)
+        {
+            return new Point(X + offsetX, Y + offsetY);
+        }
+
         public override bool Contains(Point point)
         {
             return false;
