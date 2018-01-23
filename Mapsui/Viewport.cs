@@ -198,7 +198,7 @@ namespace Mapsui
             return new Point(worldX, worldY);
         }
 
-        public void Transform(double screenX, double screenY, double previousScreenX, double previousScreenY, double deltaScale = 1)
+        public void Transform(double screenX, double screenY, double previousScreenX, double previousScreenY, double deltaScale = 1, double deltaRotation = 0)
         {
             var previous = ScreenToWorld(previousScreenX, previousScreenY);
             var current = ScreenToWorld(screenX, screenY);
@@ -206,15 +206,30 @@ namespace Mapsui
             var newX = _center.X + previous.X - current.X;
             var newY = _center.Y + previous.Y - current.Y;
 
-            Resolution = Resolution / deltaScale;
+            if (deltaScale != 1)
+            {
+                Resolution = Resolution / deltaScale;
 
-            current = ScreenToWorld(screenX, screenY); // calculate current position again with adjusted resolution
-            // Zooming should be centered on the place where the map is touched. This is done with the scale correction.
-            var scaleCorrectionX = (1 - deltaScale) * (current.X - Center.X);
-            var scaleCorrectionY = (1 - deltaScale) * (current.Y - Center.Y);
-            
-            _center.X = newX - scaleCorrectionX;
-            _center.Y = newY - scaleCorrectionY;
+                current = ScreenToWorld(screenX, screenY); // calculate current position again with adjusted resolution
+                                                           // Zooming should be centered on the place where the map is touched. This is done with the scale correction.
+                var scaleCorrectionX = (1 - deltaScale) * (current.X - Center.X);
+                var scaleCorrectionY = (1 - deltaScale) * (current.Y - Center.Y);
+
+                newX -= scaleCorrectionX;
+                newY -= scaleCorrectionY;
+            }           
+            _center.X = newX;
+            _center.Y = newY;
+
+            if (deltaRotation != 0)
+            {
+                current = ScreenToWorld(screenX, screenY); // calculate current position again with adjusted resolution
+                Rotation += deltaRotation;
+                var postRotation = ScreenToWorld(screenX, screenY); // calculate current position again with adjusted resolution
+
+                _center.X -= postRotation.X - current.X;
+                _center.Y -= postRotation.Y - current.Y;
+            }
         }
 
         private void UpdateExtent()

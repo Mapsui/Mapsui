@@ -190,7 +190,7 @@ namespace Mapsui.UI.Android
                                 var (prevCenter, prevRadius, prevAngle) = (_previousCenter, _previousRadius, _previousAngle);
                                 var (center, radius, angle ) = GetPinchValues(touchPoints);
 
-                                _map.Viewport.Transform(center.X, center.Y, prevCenter.X, prevCenter.Y, radius / prevRadius);
+                                double rotationDelta = 0;
 
                                 if (AllowPinchRotation)
                                 {
@@ -203,15 +203,17 @@ namespace Mapsui.UI.Android
                                         _innerRotation += 360;
 
                                     if (_map.Viewport.Rotation == 0 && Math.Abs(_innerRotation) >= Math.Abs(UnSnapRotationDegrees))
-                                        _map.Viewport.Rotation = _innerRotation;
+                                        rotationDelta = _innerRotation;
                                     else if (_map.Viewport.Rotation != 0)
                                     {
                                         if (Math.Abs(_innerRotation) <= Math.Abs(ReSnapRotationDegrees))
-                                            _map.Viewport.Rotation = 0;
+                                            rotationDelta = -_map.Viewport.Rotation;
                                         else
-                                            _map.Viewport.Rotation = _innerRotation;
+                                            rotationDelta = _innerRotation - _map.Viewport.Rotation;
                                     }
                                 }
+
+                                _map.Viewport.Transform(center.X, center.Y, prevCenter.X, prevCenter.Y, radius / prevRadius, rotationDelta);
 
                                 (_previousCenter, _previousRadius, _previousAngle) = (center, radius, angle);
 

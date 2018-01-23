@@ -4,7 +4,8 @@
     "Microsoft.NETCore.UniversalWindowsPlatform": "6.0.5",
     "SkiaSharp": "1.59.3",
     "SkiaSharp.Views": "1.59.3",
-    "SQLitePCLRaw.bundle_green": "1.1.9"
+    "SQLitePCLRaw.bundle_green": "1.1.9",
+    "System.ValueTuple": "4.4.0"
   },
   "frameworks": {
     "uap10.0.10586": {}
