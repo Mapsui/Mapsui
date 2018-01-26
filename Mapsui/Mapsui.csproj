@@ -65,8 +65,15 @@
     <Compile Include="Layers\AnimatedFeatures.cs" />
     <Compile Include="Layers\AnimatedPointLayer.cs" />
     <Compile Include="Styles\PenStrokeCap.cs" />
+    <Compile Include="Widgets\Alignment.cs" />
     <Compile Include="Widgets\Hyperlink.cs" />
     <Compile Include="Widgets\IWidget.cs" />
+    <Compile Include="Widgets\ScaleBar\ImperialUnitConverter.cs" />
+    <Compile Include="Widgets\ScaleBar\IUnitConverter.cs" />
+    <Compile Include="Widgets\ScaleBar\MetricUnitConverter.cs" />
+    <Compile Include="Widgets\ScaleBar\NauticalUnitConverter.cs" />
+    <Compile Include="Widgets\ScaleBar\ScaleBarWidget.cs" />
+    <Compile Include="Widgets\ScaleBar\ScaleBarMode.cs" />
     <Compile Include="Widgets\TextBox.cs" />
     <Compile Include="Layers\TmsTileSourceBuilder.cs" />
     <Compile Include="Logging\Logger.cs" />
@@ -186,6 +193,9 @@
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\portable-net45+win8+wp8+wpa81\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.4.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

@@ -1,10 +1,9 @@
 ﻿namespace Mapsui.Widgets
 {
-    public enum HorizontalAlignment
+    public enum Alignment
     {
         Left,
         Center,
         Right,
-        Position
     }
 }
