@@ -432,7 +432,7 @@ namespace Mapsui.UI.Uwp
         private void OnManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {            
             var (center, radius, angle) = (e.Position.ToMapsui(), e.Delta.Scale, e.Delta.Rotation);
-            var (prevCenter, prevRadius, prevAngle) = (new Geometries.Point(center.X - e.Delta.Translation.X, center.Y - e.Delta.Translation.Y), 1f, 0f);
+            var (prevCenter, prevRadius, prevAngle) = (e.Position.ToMapsui().Offset(-e.Delta.Translation.X, -e.Delta.Translation.Y), 1f, 0f);
             
             double rotationDelta = 0;
 
@@ -459,8 +459,12 @@ namespace Mapsui.UI.Uwp
 
             _map.Viewport.Transform(center.X, center.Y, prevCenter.X, prevCenter.Y, radius / prevRadius, rotationDelta);
 
+            ViewportLimiter.Limit(_map.Viewport, _map.ZoomMode, _map.ZoomLimits, _map.Resolutions,
+                _map.PanMode, _map.PanLimits, _map.Envelope);
+
             _invalid = true;
             OnViewChanged(true);
+            e.Handled = true;
         }
 
         private void OnManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
