@@ -22,14 +22,34 @@ namespace Mapsui.Rendering.Skia
                 return;
 
             // Things aren't correct anymore, so create them new
-            paintScaleBar = CreateScaleBarPaint(scaleBar.TextColor.ToSkia(layerOpacity), strokeInternal, SKPaintStyle.Fill, scaleBar.Scale);
-            paintScaleBarStroke = CreateScaleBarPaint(scaleBar.BackColor.ToSkia(layerOpacity), strokeExternal, SKPaintStyle.Stroke, scaleBar.Scale);
-            paintScaleText = CreateTextPaint(scaleBar.TextColor.ToSkia(layerOpacity), 2, SKPaintStyle.Fill, scaleBar.Scale);
-            paintScaleTextStroke = CreateTextPaint(scaleBar.BackColor.ToSkia(layerOpacity), 2, SKPaintStyle.Stroke, scaleBar.Scale);
-
-            // TODO: Remove
-            // Draw a rect around the scale bar for testing
-            var tempPaint = new SKPaint() { StrokeWidth = 1, Color = SKColors.Blue, IsStroke = true };
+            if (paintScaleBar == null)
+            {
+                paintScaleBar = CreateScaleBarPaint(scaleBar.TextColor.ToSkia(layerOpacity), strokeInternal, SKPaintStyle.Fill, scaleBar.Scale);
+                paintScaleBarStroke = CreateScaleBarPaint(scaleBar.BackColor.ToSkia(layerOpacity), strokeExternal, SKPaintStyle.Stroke, scaleBar.Scale);
+                paintScaleText = CreateTextPaint(scaleBar.TextColor.ToSkia(layerOpacity), 2, SKPaintStyle.Fill, scaleBar.Scale);
+                paintScaleTextStroke = CreateTextPaint(scaleBar.BackColor.ToSkia(layerOpacity), 2, SKPaintStyle.Stroke, scaleBar.Scale);
+            }
+            else
+            {
+                paintScaleBar.Color = scaleBar.TextColor.ToSkia(layerOpacity);
+                paintScaleBar.StrokeWidth = strokeInternal * scaleBar.Scale;
+                paintScaleBarStroke.Color = scaleBar.BackColor.ToSkia(layerOpacity);
+                paintScaleBarStroke.StrokeWidth = strokeExternal * scaleBar.Scale;
+                paintScaleText.Color = scaleBar.TextColor.ToSkia(layerOpacity);
+                paintScaleText.StrokeWidth = strokeInternal * scaleBar.Scale;
+                if (scaleBar.Font != null)
+                {
+                    paintScaleText.Typeface = SKTypeface.FromFamilyName(scaleBar.Font.FontFamily, SKTypefaceStyle.Bold);
+                    paintScaleText.TextSize = (float)scaleBar.Font.Size * scaleBar.Scale;
+                }
+                paintScaleTextStroke.Color = scaleBar.BackColor.ToSkia(layerOpacity);
+                paintScaleTextStroke.StrokeWidth = strokeInternal * scaleBar.Scale;
+                if (scaleBar.Font != null)
+                {
+                    paintScaleTextStroke.Typeface = SKTypeface.FromFamilyName(scaleBar.Font.FontFamily, SKTypefaceStyle.Bold);
+                    paintScaleTextStroke.TextSize = (float)scaleBar.Font.Size * scaleBar.Scale;
+                }
+            }
 
             float scaleBarLength1;
             int mapScaleLength1;
@@ -41,7 +61,7 @@ namespace Mapsui.Rendering.Skia
             int mapScaleLength2;
             string mapScaleText2;
 
-            if (scaleBar.ScaleBarMode == ScaleBarMode.Both)
+            if (scaleBar.ScaleBarMode == ScaleBarMode.Both && scaleBar.SecondaryUnitConverter != null)
             {
                 (scaleBarLength2, mapScaleLength2, mapScaleText2) = scaleBar.CalculateScaleBarLengthAndValue(scaleBar.Viewport, scaleBar.MaxWidth, scaleBar.SecondaryUnitConverter);
             }
@@ -58,7 +78,7 @@ namespace Mapsui.Rendering.Skia
 
             var scaleBarHeight = textSize.Height + (scaleBar.TickLength + strokeExternal * 0.5f + scaleBar.TextMargin) * scaleBar.Scale;
 
-            if (scaleBar.ScaleBarMode == ScaleBarMode.Both)
+            if (scaleBar.ScaleBarMode == ScaleBarMode.Both && scaleBar.SecondaryUnitConverter != null)
             {
                 scaleBarHeight *= 2;
             }
@@ -70,7 +90,7 @@ namespace Mapsui.Rendering.Skia
             scaleBar.Height = scaleBarHeight;
 
             // Get lines for scale bar
-            var points = scaleBar.DrawScaleBar(scaleBarLength1, scaleBarLength2, strokeExternal);
+            var points = scaleBar.DrawLines(scaleBarLength1, scaleBarLength2, strokeExternal);
 
             // BoundingBox for scale bar
             BoundingBox bb = new BoundingBox();
@@ -118,9 +138,9 @@ namespace Mapsui.Rendering.Skia
 
             bb = bb.Join(new BoundingBox(posX1, posY1, posX1 + textSize1.Width, posY1 + textSize1.Height));
 
-            if (scaleBar.ScaleBarMode == ScaleBarMode.Both)
+            if (scaleBar.ScaleBarMode == ScaleBarMode.Both && scaleBar.SecondaryUnitConverter != null)
             {
-                // Now draw text
+                // Now draw second text
                 canvas.DrawText(mapScaleText2, posX2, posY2 - textSize2.Top, paintScaleTextStroke);
                 canvas.DrawText(mapScaleText2, posX2, posY2 - textSize2.Top, paintScaleText);
 
@@ -129,8 +149,12 @@ namespace Mapsui.Rendering.Skia
 
             scaleBar.Envelope = bb;
 
-            // TODO: Remove
-            canvas.DrawRect(new SKRect((float)bb.MinX, (float)bb.MinY, (float)bb.MaxX, (float)bb.MaxY), tempPaint);
+            if (scaleBar.ShowEnvelop)
+            {
+                // Draw a rect around the scale bar for testing
+                var tempPaint = new SKPaint() { StrokeWidth = 1, Color = SKColors.Blue, IsStroke = true };
+                canvas.DrawRect(new SKRect((float)bb.MinX, (float)bb.MinY, (float)bb.MaxX, (float)bb.MaxY), tempPaint);
+            }
         }
 
         private static SKPaint CreateScaleBarPaint(SKColor color, float strokeWidth, SKPaintStyle style, float scale)

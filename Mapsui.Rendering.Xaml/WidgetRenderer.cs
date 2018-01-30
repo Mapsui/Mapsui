@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Media;
 using Mapsui.Widgets;
+using Mapsui.Widgets.ScaleBar;
 using TextBox = Mapsui.Widgets.TextBox;
 
 namespace Mapsui.Rendering.Xaml
@@ -13,7 +14,7 @@ namespace Mapsui.Rendering.Xaml
         public static void Render(object target, IEnumerable<IWidget> widgets)
         {
             var canvas = (Canvas)target;
-            var widgetCanvas = new Grid
+            var widgetCanvas = new Canvas
             {
                 Width = canvas.ActualWidth,
                 Height = canvas.ActualHeight,
@@ -23,43 +24,9 @@ namespace Mapsui.Rendering.Xaml
             canvas.Children.Add(widgetCanvas);
             foreach (var widget in widgets)
             {
-                if (widget is Hyperlink) DrawHyperlink(widgetCanvas, widget as Hyperlink);
+                if (widget is Hyperlink) HyperlinkWidgetRenderer.Draw(widgetCanvas, widget as Hyperlink);
+                if (widget is ScaleBarWidget) ScaleBarWidgetRenderer.Draw(widgetCanvas, widget as ScaleBarWidget);
             }
-        }
-
-        private static void DrawHyperlink(Grid canvas, Hyperlink hyperlink)
-        {
-            if (string.IsNullOrEmpty(hyperlink.Text)) return;
-            var border = CreateBorder(hyperlink);
-            canvas.Children.Add(border);
-            border.UpdateLayout(); // to calculate the boundingbox
-            hyperlink.Envelope = BoundsRelativeTo(border, canvas).ToMapsui();
-        }
-
-        private static Rect BoundsRelativeTo(this FrameworkElement element,
-            Visual relativeTo)
-        {   
-            return
-                element.TransformToVisual(relativeTo)
-                    .TransformBounds(LayoutInformation.GetLayoutSlot(element));
-        }
-
-        private static Border CreateBorder(TextBox textBox)
-        {
-            return new Border
-            {
-                Padding = new Thickness(textBox.PaddingX, textBox.PaddingY, textBox.PaddingX, textBox.PaddingY),
-                HorizontalAlignment = textBox.HorizontalAlignment.ToXaml(),
-                VerticalAlignment = textBox.VerticalAlignment.ToXaml(),
-                Background = new SolidColorBrush(textBox.BackColor.ToXaml()),
-                Margin = new Thickness(textBox.MarginX, textBox.MarginY, textBox.MarginX, textBox.MarginY),
-                CornerRadius = new CornerRadius(textBox.CornerRadius),
-                Child = new TextBlock
-                {
-                    Text = textBox.Text,
-                    Foreground = new SolidColorBrush(textBox.TextColor.ToXaml())
-                }
-            };
         }
     }
 }

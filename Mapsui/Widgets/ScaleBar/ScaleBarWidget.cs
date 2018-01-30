@@ -22,17 +22,14 @@ namespace Mapsui.Widgets.ScaleBar
         private static readonly Alignment DefaultScaleBarAlignment = Alignment.Left;
         private static readonly ScaleBarMode DefaultScaleBarMode = ScaleBarMode.Single;
 
-        //static readonly double LatitudeRedrawThreshold = 0.2;
-
         protected IUnitConverter unitConverter;
         protected IUnitConverter secondaryUnitConverter;
-        protected bool refreshNeeded;
         protected ScaleBarMode scaleBarMode;
         Color textColor = new Color(0, 0, 0);
         Color backColor = new Color(255, 255, 255);
         float maxWidth;
         float height;
-        Alignment alignment;
+        Alignment textAlignment;
         double lastResolution = double.MaxValue;
 
         public ScaleBarWidget()
@@ -42,11 +39,12 @@ namespace Mapsui.Widgets.ScaleBar
 
             maxWidth = 100;
             height = 100;
-            alignment = DefaultScaleBarAlignment;
+            textAlignment = DefaultScaleBarAlignment;
             scaleBarMode = DefaultScaleBarMode;
 
             unitConverter = MetricUnitConverter.Instance;
-            refreshNeeded = true;
+
+            Font = new Font { FontFamily = "Arial", Size = 10 };
         }
 
         public Viewport Viewport { get; set; } = null;
@@ -54,24 +52,25 @@ namespace Mapsui.Widgets.ScaleBar
         /// <summary>
         /// Alignment of text of scale bar
         /// </summary>
-        public Alignment Alignment
+        public Alignment TextAlignment
         {
             get
             {
-                return alignment;
+                return textAlignment;
             }
             set
             {
-                if (alignment == value)
+                if (textAlignment == value)
                     return;
 
-                alignment = value;
-                recalcEnvelop();
-                refreshNeeded = true;
+                textAlignment = value;
                 OnPropertyChanged();
             }
         }
 
+        /// <summary>
+        /// Maximum width of scale bar
+        /// </summary>
         public float MaxWidth
         {
             get
@@ -84,11 +83,13 @@ namespace Mapsui.Widgets.ScaleBar
                     return;
 
                 maxWidth = value;
-                recalcEnvelop();
                 OnPropertyChanged();
             }
         }
 
+        /// <summary>
+        /// Real height of scale bar. Depends on unit converters.
+        /// </summary>
         public float Height
         {
             get
@@ -101,11 +102,13 @@ namespace Mapsui.Widgets.ScaleBar
                     return;
 
                 height = value;
-                recalcEnvelop();
                 OnPropertyChanged();
             }
         }
 
+        /// <summary>
+        /// Foreground color of scale bar and text
+        /// </summary>
         public Color TextColor
         {
             get
@@ -117,11 +120,13 @@ namespace Mapsui.Widgets.ScaleBar
                 if (textColor == value)
                     return;
                 textColor = value;
-                refreshNeeded = true;
                 OnPropertyChanged();
             }
         }
 
+        /// <summary>
+        /// Background color of scale bar and text
+        /// </summary>
         public Color BackColor
         {
             get
@@ -133,17 +138,30 @@ namespace Mapsui.Widgets.ScaleBar
                 if (backColor == value)
                     return;
                 backColor = value;
-                refreshNeeded = true;
                 OnPropertyChanged();
             }
         }
 
         public float Scale { get; set; } = 1;
 
+        /// <summary>
+        /// Length of the ticks
+        /// </summary>
         public float TickLength { get; set; } = 3;
 
+        /// <summary>
+        /// Margin between end of tick and text
+        /// </summary>
         public float TextMargin { get; set; } = 1;
 
+        /// <summary>
+        /// Font to use for drawing text
+        /// </summary>
+        public Font Font { get; set; }
+
+        /// <summary>
+        /// Normal unit converter for upper text. Default is MetricUnitConverter.
+        /// </summary>
         public IUnitConverter UnitConverter
         {
             get { return unitConverter; }
@@ -159,12 +177,18 @@ namespace Mapsui.Widgets.ScaleBar
                 }
 
                 unitConverter = value;
-                recalcEnvelop();
-                refreshNeeded = true;
                 OnPropertyChanged();
             }
         }
 
+        /// <summary>
+        /// Draw a rectangle around the scale bar for testing
+        /// </summary>
+        public bool ShowEnvelop { get; set; } = false;
+
+        /// <summary>
+        /// Secondary unit converter for lower text if ScaleBarMode is Both. Default is ImperialUnitConverter.
+        /// </summary>
         public IUnitConverter SecondaryUnitConverter
         {
             get { return secondaryUnitConverter; }
@@ -176,12 +200,13 @@ namespace Mapsui.Widgets.ScaleBar
                 }
 
                 secondaryUnitConverter = value;
-                recalcEnvelop();
-                refreshNeeded = true;
                 OnPropertyChanged();
             }
         }
 
+        /// <summary>
+        /// ScaleBarMode of scale bar. Could be Single to show only one or Both for showing two units.
+        /// </summary>
         public ScaleBarMode ScaleBarMode
         {
             get
@@ -196,44 +221,7 @@ namespace Mapsui.Widgets.ScaleBar
                 }
 
                 scaleBarMode = value;
-                recalcEnvelop();
-                refreshNeeded = true;
                 OnPropertyChanged();
-            }
-        }
-
-        /**
-		 * Determines if a redraw is necessary or not
-		 *
-		 * @return true if redraw is necessary, false otherwise
-		 */
-        public bool RefreshNeeded
-        {
-            get
-            {
-                return refreshNeeded;
-            }
-            //		if (this.redrawNeeded || this.prevMapPosition == null)
-            //		{
-            //			return true;
-            //		}
-
-            //		this.map.getMapPosition(this.currentMapPosition);
-            //		if (this.currentMapPosition.getScale() != this.prevMapPosition.getScale())
-            //		{
-            //			return true;
-            //		}
-
-            //		double latitudeDiff = Math.abs(this.currentMapPosition.getLatitude() - this.prevMapPosition.getLatitude());
-            //		return latitudeDiff > LatitudeRedrawThreshold;
-            set
-            {
-                if (refreshNeeded == value)
-                {
-                    return;
-                }
-
-                refreshNeeded = value;
             }
         }
 
@@ -324,9 +312,11 @@ namespace Mapsui.Widgets.ScaleBar
             return CalculateScaleBarLengthAndValue(viewport, width, UnitConverter);
         }
 
-        public Point[] DrawScaleBar(float scaleBarLength1, float scaleBarLength2, float stroke)
+        public Point[] DrawLines(float scaleBarLength1, float scaleBarLength2, float stroke)
         {
             Point[] points = null;
+
+            bool drawNoSecondScaleBar = ScaleBarMode == ScaleBarMode.Single || (ScaleBarMode == ScaleBarMode.Both && SecondaryUnitConverter == null);
 
             float maxScaleBarLength = Math.Max(scaleBarLength1, scaleBarLength2);
 
@@ -338,12 +328,12 @@ namespace Mapsui.Widgets.ScaleBar
             float center1 = posX + (maxWidth - scaleBarLength1) / 2;
             float center2 = posX + (maxWidth - scaleBarLength2) / 2;
             // Top position is Y in the middle of scale bar line
-            float top = posY + (ScaleBarMode == ScaleBarMode.Single ? height - stroke * 0.5f * Scale : height * 0.5f);
+            float top = posY + (drawNoSecondScaleBar ? height - stroke * 0.5f * Scale : height * 0.5f);
 
-            switch (Alignment)
+            switch (TextAlignment)
             {
                 case Alignment.Center:
-                    if (ScaleBarMode == ScaleBarMode.Single)
+                    if (drawNoSecondScaleBar)
                     {
                         points = new Point[6];
                         points[0] = new Point(center1, top - TickLength * Scale);
@@ -369,7 +359,7 @@ namespace Mapsui.Widgets.ScaleBar
                     }
                     break;
                 case Alignment.Left:
-                    if (ScaleBarMode == ScaleBarMode.Single)
+                    if (drawNoSecondScaleBar)
                     {
                         points = new Point[6];
                         points[0] = new Point(left, top);
@@ -393,7 +383,7 @@ namespace Mapsui.Widgets.ScaleBar
                     }
                     break;
                 case Alignment.Right:
-                    if (ScaleBarMode == ScaleBarMode.Single)
+                    if (drawNoSecondScaleBar)
                     {
                         points = new Point[6];
                         points[0] = new Point(right, top);
@@ -423,6 +413,8 @@ namespace Mapsui.Widgets.ScaleBar
 
         public (float posX1, float posY1, float posX2, float posY2) DrawText(BoundingBox textSize, BoundingBox textSize1, BoundingBox textSize2, float stroke)
         {
+            bool drawNoSecondScaleBar = ScaleBarMode == ScaleBarMode.Single || (ScaleBarMode == ScaleBarMode.Both && SecondaryUnitConverter == null);
+
             float posX = CalculatePositionX(0, (int)Viewport.Width, maxWidth);
             float posY = CalculatePositionY(0, (int)Viewport.Height, height);
 
@@ -432,10 +424,10 @@ namespace Mapsui.Widgets.ScaleBar
             float top = posY;
             float bottom = posY + height - (float)textSize2.Height;
 
-            switch (Alignment)
+            switch (TextAlignment)
             {
                 case Alignment.Center:
-                    if (ScaleBarMode == ScaleBarMode.Single)
+                    if (drawNoSecondScaleBar)
                     {
                         return (posX + (stroke + TextMargin) * Scale + (MaxWidth - 2.0f * (stroke + TextMargin) * Scale - (float)textSize1.Width) / 2.0f, 
                             top,
@@ -450,7 +442,7 @@ namespace Mapsui.Widgets.ScaleBar
                                 bottom);
                     }
                 case Alignment.Left:
-                    if (ScaleBarMode == ScaleBarMode.Single)
+                    if (drawNoSecondScaleBar)
                     {
                         return (left, top, 0, 0);
                     }
@@ -459,7 +451,7 @@ namespace Mapsui.Widgets.ScaleBar
                         return (left, top, left, bottom);
                     }
                 case Alignment.Right:
-                    if (ScaleBarMode == ScaleBarMode.Single)
+                    if (drawNoSecondScaleBar)
                     {
                         return (right1, top, 0, 0);
                     }
@@ -478,22 +470,13 @@ namespace Mapsui.Widgets.ScaleBar
             if (lastResolution != resolution)
             {
                 lastResolution = resolution;
-                refreshNeeded = true;
             }
-
-            // TODO
-            // If Center changes for more than 0.2 degrees, we need a redraw
         }
 
         internal void OnPropertyChanged([CallerMemberName] string name = "")
         {
             var handler = PropertyChanged;
             handler?.Invoke(this, new PropertyChangedEventArgs(name));
-        }
-
-        private void recalcEnvelop()
-        {
-            //throw new NotImplementedException();
         }
     }
 }

@@ -41,6 +41,7 @@
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -54,6 +55,9 @@
     <Compile Include="ExtensionMethods\VerticalAlignment.cs" />
     <Compile Include="ExtensionMethods\HorizontalAlignment.cs" />
     <Compile Include="ExtensionMethods\BitmapImageExtensions.cs" />
+    <Compile Include="HyperlinkWidgetRenderer.cs" />
+    <Compile Include="OutlinedTextBlock.cs" />
+    <Compile Include="ScaleBarWidgetRenderer.cs" />
     <Compile Include="SymbolCache.cs" />
     <Compile Include="ExtensionMethods\GeometryExtensions.cs" />
     <Compile Include="GeometryRenderer.cs" />

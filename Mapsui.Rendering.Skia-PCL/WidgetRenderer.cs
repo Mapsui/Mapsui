@@ -13,7 +13,7 @@ namespace Mapsui.Rendering.Skia
             float layerOpacity)
         {
             var canvas = (SKCanvas)target;
-            System.Diagnostics.Debug.WriteLine("WidgetRenderer");
+
             foreach (var widget in widgets)
             {
                 if (widget is Hyperlink) HyperlinkWidgetRenderer.Draw(canvas, screenWidth, screenHeight, widget as Hyperlink, layerOpacity);
