@@ -75,7 +75,6 @@ namespace Mapsui.Rendering.Xaml
                 HorizontalAlignment = textBox.HorizontalAlignment.ToXaml(),
                 VerticalAlignment = textBox.VerticalAlignment.ToXaml(),
                 Background = new SolidColorBrush(textBox.BackColor.ToXaml()),
-                Margin = new Thickness(textBox.MarginX, textBox.MarginY, textBox.MarginX, textBox.MarginY),
                 CornerRadius = new CornerRadius(textBox.CornerRadius),
                 Child = new TextBlock
                 {
