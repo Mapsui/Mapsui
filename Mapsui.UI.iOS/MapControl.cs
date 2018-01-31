@@ -289,7 +289,6 @@ namespace Mapsui.UI.iOS
                 catch (Exception exception)
                 {
                     Logger.Log(LogLevel.Warning, "Unexpected exception in MapDataChanged", exception);
-                    throw;
                 }
             });
         }

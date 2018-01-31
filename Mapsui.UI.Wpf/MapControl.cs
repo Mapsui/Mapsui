@@ -49,6 +49,7 @@ namespace Mapsui.UI.Wpf
         private double _toResolution = double.NaN;
         private bool _hasBeenManipulated;
         private float _scale = 1; // scale is always 1 in WPF
+        private double _innerRotation = 0f;
 
         public MapControl()
         {
@@ -66,7 +67,7 @@ namespace Mapsui.UI.Wpf
             MouseLeftButtonUp += MapControlMouseLeftButtonUp;
 
             TouchUp += MapControlTouchUp;
-
+            
             MouseMove += MapControlMouseMove;
             MouseLeave += MapControlMouseLeave;
             MouseWheel += MapControlMouseWheel;
@@ -650,16 +651,36 @@ namespace Mapsui.UI.Wpf
 
         private void OnManipulationDelta(object sender, ManipulationDeltaEventArgs e)
         {
+            var (center, radius, angle) = (e.ManipulationOrigin.ToMapsui().Offset(e.DeltaManipulation.Translation.X, e.DeltaManipulation.Translation.Y), GetDeltaScale(e.DeltaManipulation.Scale), e.DeltaManipulation.Rotation);
+            var (prevCenter, prevRadius, prevAngle) = (e.ManipulationOrigin.ToMapsui(), 1f, 0f);
+            
             _hasBeenManipulated |= Math.Abs(e.DeltaManipulation.Translation.X) > SystemParameters.MinimumHorizontalDragDistance
                      || Math.Abs(e.DeltaManipulation.Translation.Y) > SystemParameters.MinimumVerticalDragDistance;
 
-            var previousX = e.ManipulationOrigin.X;
-            var previousY = e.ManipulationOrigin.Y;
-            var currentX = e.ManipulationOrigin.X + e.DeltaManipulation.Translation.X;
-            var currentY = e.ManipulationOrigin.Y + e.DeltaManipulation.Translation.Y;
-            var deltaScale = GetDeltaScale(e.DeltaManipulation.Scale);
+            double rotationDelta = 0;
 
-            Map.Viewport.Transform(currentX, currentY, previousX, previousY, deltaScale);
+            if (AllowPinchRotation)
+            {
+                _innerRotation += angle - prevAngle;
+                _innerRotation %= 360;
+
+                if (_innerRotation > 180)
+                    _innerRotation -= 360;
+                else if (_innerRotation < -180)
+                    _innerRotation += 360;
+
+                if (_map.Viewport.Rotation == 0 && Math.Abs(_innerRotation) >= Math.Abs(UnSnapRotationDegrees))
+                    rotationDelta = _innerRotation;
+                else if (_map.Viewport.Rotation != 0)
+                {
+                    if (Math.Abs(_innerRotation) <= Math.Abs(ReSnapRotationDegrees))
+                        rotationDelta = -_map.Viewport.Rotation;
+                    else
+                        rotationDelta = _innerRotation - _map.Viewport.Rotation;
+                }
+            }
+
+            _map.Viewport.Transform(center.X, center.Y, prevCenter.X, prevCenter.Y, radius / prevRadius, rotationDelta);
 
             ViewportLimiter.Limit(_map.Viewport, _map.ZoomMode, _map.ZoomLimits, _map.Resolutions,
                 _map.PanMode, _map.PanLimits, _map.Envelope);
