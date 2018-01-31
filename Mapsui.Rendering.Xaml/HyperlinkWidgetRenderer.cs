@@ -56,6 +56,7 @@ namespace Mapsui.Rendering.Xaml
             Canvas.SetTop(border, posY);
 
             hyperlink.Envelope = BoundsRelativeTo(border, canvas).ToMapsui();
+            hyperlink.Envelope.Offset(posX, posY);
         }
 
         private static Rect BoundsRelativeTo(this FrameworkElement element,
