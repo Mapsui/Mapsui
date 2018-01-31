@@ -36,12 +36,10 @@ namespace Mapsui.Rendering.Xaml
             hyperlink.Envelope = BoundsRelativeTo(border, canvas).ToMapsui();
         }
 
-        private static Rect BoundsRelativeTo(this FrameworkElement element,
-            Visual relativeTo)
-        {   
-            return
-                element.TransformToVisual(relativeTo)
-                    .TransformBounds(LayoutInformation.GetLayoutSlot(element));
+        public static Rect BoundsRelativeTo(this FrameworkElement child, Visual parent)
+        {
+            GeneralTransform gt = child.TransformToAncestor(parent);
+            return gt.TransformBounds(new Rect(0, 0, child.ActualWidth, child.ActualHeight));
         }
 
         private static Border CreateBorder(TextBox textBox)
