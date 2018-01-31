@@ -1,6 +1,5 @@
 ﻿using Mapsui.Geometries;
 using Mapsui.Widgets.ScaleBar;
-using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -25,9 +24,9 @@ namespace Mapsui.Rendering.Xaml
                 return;
 
             brushScaleBar = new SolidColorBrush(scaleBar.TextColor.ToXaml());
-            brushScaleBarStroke = new SolidColorBrush(scaleBar.BackColor.ToXaml());
+            brushScaleBarStroke = new SolidColorBrush(scaleBar.Halo.ToXaml());
             brushScaleText = new SolidColorBrush(scaleBar.TextColor.ToXaml());
-            brushScaleTextStroke = new SolidColorBrush(scaleBar.BackColor.ToXaml());
+            brushScaleTextStroke = new SolidColorBrush(scaleBar.Halo.ToXaml());
 
             var textBlock = new OutlinedTextBlock();
 
@@ -40,23 +39,11 @@ namespace Mapsui.Rendering.Xaml
             textBlock.FontWeight = FontWeights.Bold;
 
             float scaleBarLength1;
-            int mapScaleLength1;
-            string mapScaleText1;
-
-            (scaleBarLength1, mapScaleLength1, mapScaleText1) = scaleBar.CalculateScaleBarLengthAndValue(scaleBar.Viewport, scaleBar.MaxWidth);
-
+            string scaleBarText1;
             float scaleBarLength2;
-            int mapScaleLength2;
-            string mapScaleText2;
+            string scaleBarText2;
 
-            if (scaleBar.ScaleBarMode == ScaleBarMode.Both && scaleBar.SecondaryUnitConverter != null)
-            {
-                (scaleBarLength2, mapScaleLength2, mapScaleText2) = scaleBar.CalculateScaleBarLengthAndValue(scaleBar.Viewport, scaleBar.MaxWidth, scaleBar.SecondaryUnitConverter);
-            }
-            else
-            {
-                (scaleBarLength2, mapScaleLength2, mapScaleText2) = (0, 0, null);
-            }
+            (scaleBarLength1, scaleBarText1, scaleBarLength2, scaleBarText2) = scaleBar.GetScaleBarLengthAndText();
 
             // Calc height of scale bar
             Size textSize;
@@ -77,15 +64,17 @@ namespace Mapsui.Rendering.Xaml
 
             scaleBar.Height = (float)scaleBarHeight;
 
+            // Draw lines
+
             // Get lines for scale bar
-            var points = scaleBar.DrawLines(scaleBarLength1, scaleBarLength2, strokeExternal);
+            var points = scaleBar.GetScaleBarLinePositions(scaleBarLength1, scaleBarLength2, strokeExternal);
 
             // BoundingBox for scale bar
-            BoundingBox bb = new BoundingBox();
+            BoundingBox envelop = new BoundingBox();
 
             if (points != null)
             {
-                // Draw outline of scale bar
+                // Draw outline of lines
                 for (int i = 0; i < points.Length; i += 2)
                 {
                     var line = new Line();
@@ -100,7 +89,7 @@ namespace Mapsui.Rendering.Xaml
                     canvas.Children.Add(line);
                 }
 
-                // Draw scale bar
+                // Draw lines
                 for (int i = 0; i < points.Length; i += 2)
                 {
                     var line = new Line();
@@ -115,38 +104,39 @@ namespace Mapsui.Rendering.Xaml
                     canvas.Children.Add(line);
                 }
 
-                bb = points[0].GetBoundingBox();
+                envelop = points[0].GetBoundingBox();
 
                 for (int i = 1; i < points.Length; i++)
                 {
-                    bb = bb.Join(points[i].GetBoundingBox());
+                    envelop = envelop.Join(points[i].GetBoundingBox());
                 }
 
-                bb = bb.Grow(strokeExternal * 0.5f * scaleBar.Scale);
+                envelop = envelop.Grow(strokeExternal * 0.5f * scaleBar.Scale);
             }
 
             // Draw text
+
             // Calc text height
             Size textSize1;
             Size textSize2;
 
-            mapScaleText1 = mapScaleText1 ?? string.Empty;
-            mapScaleText2 = mapScaleText2 ?? string.Empty;
+            scaleBarText1 = scaleBarText1 ?? string.Empty;
+            scaleBarText2 = scaleBarText2 ?? string.Empty;
 
-            textBlock.Text = mapScaleText1;
+            textBlock.Text = scaleBarText1;
             textSize1 = textBlock.MeasureText();
 
-            textBlock.Text = mapScaleText2;
+            textBlock.Text = scaleBarText2;
             textSize2 = textBlock.MeasureText();
 
             var boundingBoxText = new BoundingBox(0, 0, textSize.Width, textSize.Height);
             var boundingBoxText1 = new BoundingBox(0, 0, textSize1.Width, textSize1.Height);
             var boundingBoxText2 = new BoundingBox(0, 0, textSize2.Width, textSize2.Height);
 
-            var (posX1, posY1, posX2, posY2) = scaleBar.DrawText(boundingBoxText, boundingBoxText1, boundingBoxText2, strokeExternal);
+            var (posX1, posY1, posX2, posY2) = scaleBar.GetScaleBarTextPositions(boundingBoxText, boundingBoxText1, boundingBoxText2, strokeExternal);
 
             // Now draw text
-            textBlock.Text = mapScaleText1;
+            textBlock.Text = scaleBarText1;
             textBlock.Width = textSize1.Width;
             textBlock.Height = textSize1.Height;
 
@@ -155,7 +145,7 @@ namespace Mapsui.Rendering.Xaml
 
             canvas.Children.Add(textBlock);
 
-            bb = bb.Join(new BoundingBox(posX1, posY1, posX1 + textSize1.Width, posY1 + textSize1.Height));
+            envelop = envelop.Join(new BoundingBox(posX1, posY1, posX1 + textSize1.Width, posY1 + textSize1.Height));
 
             if (scaleBar.ScaleBarMode == ScaleBarMode.Both && scaleBar.SecondaryUnitConverter != null)
             {
@@ -168,7 +158,7 @@ namespace Mapsui.Rendering.Xaml
                 textBlock.FontSize = scaleBar.Font.Size;
                 textBlock.FontWeight = FontWeights.Bold;
 
-                textBlock.Text = mapScaleText2;
+                textBlock.Text = scaleBarText2;
                 textBlock.Width = textSize2.Width;
                 textBlock.Height = textSize2.Height;
 
@@ -177,21 +167,21 @@ namespace Mapsui.Rendering.Xaml
 
                 canvas.Children.Add(textBlock);
 
-                bb = bb.Join(new BoundingBox(posX2, posY2, posX2 + textSize2.Width, posY2 + textSize2.Height));
+                envelop = envelop.Join(new BoundingBox(posX2, posY2, posX2 + textSize2.Width, posY2 + textSize2.Height));
             }
 
-            scaleBar.Envelope = bb;
+            scaleBar.Envelope = envelop;
 
             if (scaleBar.ShowEnvelop)
             {
                 // Draw a rect around the scale bar for testing
                 var rect = new Rectangle();
-                rect.Width = bb.MaxX - bb.MinX;
-                rect.Height = bb.MaxY - bb.MinY;
+                rect.Width = envelop.MaxX - envelop.MinX;
+                rect.Height = envelop.MaxY - envelop.MinY;
                 rect.Stroke = new SolidColorBrush(Colors.Blue);
                 rect.StrokeThickness = 1;
-                Canvas.SetLeft(rect, bb.MinX);
-                Canvas.SetTop(rect, bb.MinY);
+                Canvas.SetLeft(rect, envelop.MinX);
+                Canvas.SetTop(rect, envelop.MinY);
                 canvas.Children.Add(rect);
             }
         }
