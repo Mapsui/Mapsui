@@ -53,6 +53,6 @@ namespace Mapsui.Widgets
             throw new ArgumentException("Unknown vertical alignment: " + VerticalAlignment);
         }
 
-
+        public abstract void HandleWidgetTouched(Point position);
     }
 }

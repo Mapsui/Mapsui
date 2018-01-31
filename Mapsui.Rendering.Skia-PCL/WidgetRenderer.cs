@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using Mapsui.Layers;
+﻿using System.Collections.Generic;
 using Mapsui.Widgets;
 using Mapsui.Widgets.ScaleBar;
+using Mapsui.Widgets.Zoom;
 using SkiaSharp;
 
 namespace Mapsui.Rendering.Skia
@@ -18,6 +17,7 @@ namespace Mapsui.Rendering.Skia
             {
                 if (widget is Hyperlink) HyperlinkWidgetRenderer.Draw(canvas, screenWidth, screenHeight, widget as Hyperlink, layerOpacity);
                 if (widget is ScaleBarWidget) ScaleBarWidgetRenderer.Draw(canvas, screenWidth, screenHeight, widget as ScaleBarWidget, layerOpacity);
+                if (widget is ZoomInOutWidget) ZoomInOutWidgetRenderer.Draw(canvas, screenWidth, screenHeight, widget as ZoomInOutWidget, layerOpacity);
             }
         }
 

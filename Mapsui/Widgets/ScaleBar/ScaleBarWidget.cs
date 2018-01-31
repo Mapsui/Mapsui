@@ -476,6 +476,10 @@ namespace Mapsui.Widgets.ScaleBar
             }
         }
 
+        public override void HandleWidgetTouched(Point position)
+        {
+        }
+
         internal void OnPropertyChanged([CallerMemberName] string name = "")
         {
             var handler = PropertyChanged;

@@ -57,6 +57,7 @@
     <Compile Include="ExtensionMethods\BitmapImageExtensions.cs" />
     <Compile Include="HyperlinkWidgetRenderer.cs" />
     <Compile Include="OutlinedTextBlock.cs" />
+    <Compile Include="ZoomInOutWidgetRenderer.cs" />
     <Compile Include="ScaleBarWidgetRenderer.cs" />
     <Compile Include="SymbolCache.cs" />
     <Compile Include="ExtensionMethods\GeometryExtensions.cs" />

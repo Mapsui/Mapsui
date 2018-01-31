@@ -5,6 +5,7 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Media;
 using Mapsui.Widgets;
 using Mapsui.Widgets.ScaleBar;
+using Mapsui.Widgets.Zoom;
 using TextBox = Mapsui.Widgets.TextBox;
 
 namespace Mapsui.Rendering.Xaml
@@ -26,6 +27,7 @@ namespace Mapsui.Rendering.Xaml
             {
                 if (widget is Hyperlink) HyperlinkWidgetRenderer.Draw(widgetCanvas, widget as Hyperlink);
                 if (widget is ScaleBarWidget) ScaleBarWidgetRenderer.Draw(widgetCanvas, widget as ScaleBarWidget);
+                if (widget is ZoomInOutWidget) ZoomInOutWidgetRenderer.Draw(widgetCanvas, widget as ZoomInOutWidget);
             }
         }
     }

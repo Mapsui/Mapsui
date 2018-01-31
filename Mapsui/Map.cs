@@ -198,7 +198,7 @@ namespace Mapsui
         }
 
         public void InvokeInfo(Point screenPosition, Point startScreenPosition, float scale, ISymbolCache symbolCache,
-            Action<IWidget> widgetCallback)
+            Action<IWidget, Point> widgetCallback)
         {
             var allWidgets = Layers.Select(l => l.Attribution).Where(a => a != null).Concat(Widgets).ToList();
             
@@ -206,7 +206,7 @@ namespace Mapsui
             var widget = WidgetTouch.GetWidget(screenPosition, startScreenPosition, scale, allWidgets);
             if (widget != null)
             {
-                widgetCallback(widget);
+                widgetCallback(widget, screenPosition);
                 return;
             }
 

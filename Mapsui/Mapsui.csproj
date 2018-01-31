@@ -183,6 +183,9 @@
     <Compile Include="Widgets\VerticalAlignment.cs" />
     <Compile Include="Widgets\Widget.cs" />
     <Compile Include="Widgets\WidgetTouch.cs" />
+    <Compile Include="Widgets\WidgetTouchedEventArgs.cs" />
+    <Compile Include="Widgets\Zoom\Orientation.cs" />
+    <Compile Include="Widgets\Zoom\ZoomInOutWidget.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="BruTile, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
