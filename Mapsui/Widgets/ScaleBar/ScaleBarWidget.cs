@@ -13,7 +13,7 @@ namespace Mapsui.Widgets.ScaleBar
     /// Usage
     /// To show a ScaleBarWidget, add a instance of the ScaleBarWidget to Map.Widgets by
     /// 
-    ///   map.Widgets.Add(new ScaleBarWidget(map.Viewport));
+    ///   map.Widgets.Add(new ScaleBarWidget(map));
     ///   
     /// Customize
     /// ScaleBarMode: Determins, how much scalebars are shown. Could be Single or Both.
@@ -42,9 +42,9 @@ namespace Mapsui.Widgets.ScaleBar
         private static readonly ScaleBarMode DefaultScaleBarMode = ScaleBarMode.Single;
         private static readonly Font DefaultFont = new Font { FontFamily = "Arial", Size = 10 };
 
-        public ScaleBarWidget(Viewport viewport)
+        public ScaleBarWidget(Map map)
         {
-            Viewport = viewport;
+            Map = map;
 
             HorizontalAlignment = DefaultScaleBarHorizontalAlignment;
             VerticalAlignment = DefaultScaleBarVerticalAlignment;
@@ -62,7 +62,7 @@ namespace Mapsui.Widgets.ScaleBar
         /// <summary>
         /// Viewport to use for all calculations
         /// </summary>
-        public Viewport Viewport { get; } = null;
+        public Map Map { get; } = null;
 
         float maxWidth;
 
@@ -285,19 +285,19 @@ namespace Mapsui.Widgets.ScaleBar
         /// </returns>
         public (float scaleBarLength1, string scaleBarText1, float scaleBarLength2, string scaleBarText2) GetScaleBarLengthAndText()
         {
-            if (Viewport == null)
+            if (Map == null)
                 return (0, null, 0, null);
 
             float length1;
             string text1;
 
-            (length1, text1) = CalculateScaleBarLengthAndValue(Viewport, MaxWidth, UnitConverter);
+            (length1, text1) = CalculateScaleBarLengthAndValue(Map.Viewport, MaxWidth, UnitConverter);
 
             float length2;
             string text2;
 
             if (SecondaryUnitConverter != null)
-                (length2, text2) = CalculateScaleBarLengthAndValue(Viewport, MaxWidth, SecondaryUnitConverter);
+                (length2, text2) = CalculateScaleBarLengthAndValue(Map.Viewport, MaxWidth, SecondaryUnitConverter);
             else
                 (length2, text2) = (0, null);
 
@@ -319,8 +319,8 @@ namespace Mapsui.Widgets.ScaleBar
 
             float maxScaleBarLength = Math.Max(scaleBarLength1, scaleBarLength2);
 
-            var posX = CalculatePositionX(0, (int)Viewport.Width, maxWidth);
-            var posY = CalculatePositionY(0, (int)Viewport.Height, height);
+            var posX = CalculatePositionX(0, (int)Map.Viewport.Width, maxWidth);
+            var posY = CalculatePositionY(0, (int)Map.Viewport.Height, height);
 
             float left = posX + stroke * 0.5f * Scale;
             float right = posX + maxWidth - stroke * 0.5f * Scale;
@@ -427,8 +427,8 @@ namespace Mapsui.Widgets.ScaleBar
         {
             bool drawNoSecondScaleBar = ScaleBarMode == ScaleBarMode.Single || (ScaleBarMode == ScaleBarMode.Both && SecondaryUnitConverter == null);
 
-            float posX = CalculatePositionX(0, (int)Viewport.Width, maxWidth);
-            float posY = CalculatePositionY(0, (int)Viewport.Height, height);
+            float posX = CalculatePositionX(0, (int)Map.Viewport.Width, maxWidth);
+            float posY = CalculatePositionY(0, (int)Map.Viewport.Height, height);
 
             float left = posX + (stroke + TextMargin) * Scale;
             float right1 = posX + maxWidth - (stroke + TextMargin) * Scale - (float)textSize1.Width;

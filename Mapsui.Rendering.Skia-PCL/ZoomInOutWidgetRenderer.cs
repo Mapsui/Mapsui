@@ -16,7 +16,7 @@ namespace Mapsui.Rendering.Skia
             float layerOpacity)
         {
             // If this widget belongs to no viewport, than stop drawing
-            if (zoomInOut.Viewport == null)
+            if (zoomInOut.Map == null)
                 return;
 
             // If this is the first time, we call this renderer, ...

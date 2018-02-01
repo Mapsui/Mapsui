@@ -18,7 +18,7 @@ namespace Mapsui.Rendering.Skia
             float layerOpacity)
         {
             // If this widget belongs to no viewport, than stop drawing
-            if (scaleBar.Viewport == null)
+            if (scaleBar.Map == null)
                 return;
 
             // If this is the first time, we call this renderer, ...

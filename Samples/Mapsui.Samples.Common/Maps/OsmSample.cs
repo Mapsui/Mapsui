@@ -8,7 +8,7 @@ namespace Mapsui.Samples.Common.Maps
         {
             var map = new Map();
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
-            map.Widgets.Add(new Widgets.Zoom.ZoomInOutWidget(map.Viewport) { MarginX = 20, MarginY = 40 });
+            map.Widgets.Add(new Widgets.Zoom.ZoomInOutWidget(map) { MarginX = 20, MarginY = 40 });
             return map;
         }
     }

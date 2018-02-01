@@ -13,7 +13,7 @@ namespace Mapsui.Widgets.Zoom
     /// Usage
     /// To show a ZoomInOutWidget, add a instance of the ZoomInOutWidget to Map.Widgets by
     /// 
-    ///   map.Widgets.Add(new ZoomInOutWidget(map.Viewport));
+    ///   map.Widgets.Add(new ZoomInOutWidget(map));
     ///   
     /// Customize
     /// Size: Height and Width of the buttons
@@ -26,9 +26,9 @@ namespace Mapsui.Widgets.Zoom
     /// </summary>
     public class ZoomInOutWidget : Widget, INotifyPropertyChanged
     {
-        public ZoomInOutWidget(Viewport viewport)
+        public ZoomInOutWidget(Map map)
         {
-            Viewport = viewport;
+            Map = map;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -43,7 +43,7 @@ namespace Mapsui.Widgets.Zoom
         /// <summary>
         /// Viewport to use for all calculations
         /// </summary>
-        public Viewport Viewport { get; } = null;
+        public Map Map { get; } = null;
 
         public float size { get; set; } = 40;
 
@@ -184,12 +184,20 @@ namespace Mapsui.Widgets.Zoom
                 (Orientation == Orientation.Horizontal && position.X < Envelope.MinX + Envelope.Width * 0.5))
             {
                 // Zoom in
-                Viewport.Resolution /= ZoomFactor;
+                var resolution = Map.Viewport.Resolution;
+                resolution /= ZoomFactor;
+                if (Map.ZoomLimits != null && resolution < Map.ZoomLimits.Min)
+                    resolution = Map.ZoomLimits.Min;
+                Map.NavigateTo(resolution);
             }
             else
             {
                 // Zoom out
-                Viewport.Resolution *= ZoomFactor;
+                var resolution = Map.Viewport.Resolution;
+                resolution *= ZoomFactor;
+                if (Map.ZoomLimits != null && resolution > Map.ZoomLimits.Max)
+                    resolution = Map.ZoomLimits.Max;
+                Map.NavigateTo(resolution);
             }
         }
 

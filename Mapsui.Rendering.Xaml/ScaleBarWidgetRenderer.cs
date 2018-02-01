@@ -20,7 +20,7 @@ namespace Mapsui.Rendering.Xaml
         public static void Draw(Canvas canvas, ScaleBarWidget scaleBar)
         {
             // If this widget belongs to no viewport, than stop drawing
-            if (scaleBar.Viewport == null)
+            if (scaleBar.Map == null)
                 return;
 
             brushScaleBar = new SolidColorBrush(scaleBar.TextColor.ToXaml());

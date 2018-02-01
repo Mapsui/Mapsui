@@ -19,7 +19,7 @@ namespace Mapsui.Rendering.Xaml
         public static void Draw(Canvas canvas, ZoomInOutWidget zoomInOut)
         {
             // If this widget belongs to no viewport, than stop drawing
-            if (zoomInOut.Viewport == null)
+            if (zoomInOut.Map == null)
                 return;
 
             brushStroke = new SolidColorBrush(zoomInOut.StrokeColor.ToXaml());
