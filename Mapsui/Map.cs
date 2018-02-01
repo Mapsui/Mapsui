@@ -206,7 +206,7 @@ namespace Mapsui
             var widget = WidgetTouch.GetWidget(screenPosition, startScreenPosition, scale, allWidgets);
             if (widget != null)
             {
-                widgetCallback(widget, screenPosition);
+                widgetCallback(widget, new Point(screenPosition.X / scale, screenPosition.Y / scale));
                 return;
             }
 
