@@ -6,14 +6,14 @@ using System.Runtime.CompilerServices;
 
 namespace Mapsui.Widgets.ScaleBar
 {
-    ///
+    /// <summary>
     /// A ScaleBarWidget displays the ratio of a distance on the map to the corresponding distance on the ground.
     /// It uses always the center of a given Viewport to calc this ratio.
     ///
     /// Usage
     /// To show a ScaleBarWidget, add a instance of the ScaleBarWidget to Map.Widgets by
     /// 
-    ///   map.Widgets.Add(new ScaleBarWidget(map.Viewport);
+    ///   map.Widgets.Add(new ScaleBarWidget(map.Viewport));
     ///   
     /// Customize
     /// ScaleBarMode: Determins, how much scalebars are shown. Could be Single or Both.
@@ -30,7 +30,7 @@ namespace Mapsui.Widgets.ScaleBar
     /// TextMargin: Space between text and lines of scalebar
     /// Font: Font which is used to draw text
     /// TickLength: Length of the ticks at scalebar
-    /// 
+    /// </summary>
     public class ScaleBarWidget : Widget, INotifyPropertyChanged
     {
         ///

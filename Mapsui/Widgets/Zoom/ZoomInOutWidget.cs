@@ -6,6 +6,24 @@ using System.Runtime.CompilerServices;
 
 namespace Mapsui.Widgets.Zoom
 {
+    /// <summary>
+    /// Widget which shows two buttons (horizontal or vertical) with a "+" and a "-" sign.
+    /// With this, the user could zoom the map in and out.
+    /// 
+    /// Usage
+    /// To show a ZoomInOutWidget, add a instance of the ZoomInOutWidget to Map.Widgets by
+    /// 
+    ///   map.Widgets.Add(new ZoomInOutWidget(map.Viewport));
+    ///   
+    /// Customize
+    /// Size: Height and Width of the buttons
+    /// Orientation: Orientation of the buttons. Could be Horizontal or Vertical. Vertical is default.
+    /// StrokeColor: Color of button frames
+    /// TextColor: Color of "+" and "-" signs
+    /// BackColor: Color of button background
+    /// Opacity: Opacity of buttons
+    /// ZoomFactor: Factor for changing Resolution. Default is 2;
+    /// </summary>
     public class ZoomInOutWidget : Widget, INotifyPropertyChanged
     {
         public ZoomInOutWidget(Viewport viewport)
@@ -14,6 +32,12 @@ namespace Mapsui.Widgets.Zoom
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        /// Event handler which is called, when buttons are touched. If there
+        /// isn't one, than the default handler is used, which change the Resolution
+        /// of Viewport.
+        /// </summary>
         public event EventHandler<WidgetTouchedEventArgs> WidgetTouched;
 
         /// <summary>
@@ -23,6 +47,9 @@ namespace Mapsui.Widgets.Zoom
 
         public float size { get; set; } = 40;
 
+        /// <summary>
+        /// Width and height of buttons
+        /// </summary>
         public float Size
         {
             get
@@ -40,6 +67,9 @@ namespace Mapsui.Widgets.Zoom
 
         private Orientation orientation = Orientation.Vertical;
 
+        /// <summary>
+        /// Orientation of buttons
+        /// </summary>
         public Orientation Orientation
         {
             get
@@ -57,6 +87,9 @@ namespace Mapsui.Widgets.Zoom
 
         private Color strokeColor = new Color(192, 192, 192);
 
+        /// <summary>
+        /// Color of button frames
+        /// </summary>
         public Color StrokeColor
         {
             get
@@ -74,6 +107,9 @@ namespace Mapsui.Widgets.Zoom
 
         private Color textColor = new Color(192, 192, 192);
 
+        /// <summary>
+        /// Color of "+" and "-" sign
+        /// </summary>
         public Color TextColor
         {
             get
@@ -91,6 +127,9 @@ namespace Mapsui.Widgets.Zoom
 
         private Color backColor = new Color(224, 224, 224);
 
+        /// <summary>
+        /// Color of background
+        /// </summary>
         public Color BackColor
         {
             get
@@ -106,7 +145,30 @@ namespace Mapsui.Widgets.Zoom
             }
         }
 
-        public float Opacity { get; set; } = 0.8f;
+        private float opacity = 0.8f;
+
+        /// <summary>
+        /// Opacity of background, frame and signs
+        /// </summary>
+        public float Opacity
+        {
+            get
+            {
+                return opacity;
+            }
+            set
+            {
+                if (opacity == value)
+                    return;
+                opacity = value;
+                OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// Factor for changing Resolution
+        /// </summary>
+        public float ZoomFactor { get; set; } = 2.0f;
 
         public override void HandleWidgetTouched(Point position)
         {
@@ -122,12 +184,12 @@ namespace Mapsui.Widgets.Zoom
                 (Orientation == Orientation.Horizontal && position.X < Envelope.MinX + Envelope.Width * 0.5))
             {
                 // Zoom in
-                Viewport.Resolution *= 0.5;
+                Viewport.Resolution /= ZoomFactor;
             }
             else
             {
                 // Zoom out
-                Viewport.Resolution *= 2;
+                Viewport.Resolution *= ZoomFactor;
             }
         }
 
