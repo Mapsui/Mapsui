@@ -133,7 +133,7 @@ namespace Mapsui.Samples.Wpf
             return radioButton;
         }
 
-        readonly LimitedQueue<LogModel> _logMessage = new LimitedQueue<LogModel>(10); 
+        readonly LimitedQueue<LogModel> _logMessage = new LimitedQueue<LogModel>(6); 
 
         private void LogMethod(LogLevel logLevel, string message, Exception exception)
         {
