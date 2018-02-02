@@ -94,7 +94,7 @@ namespace Mapsui.UI.Uwp
         private void OnTapped(object sender, TappedRoutedEventArgs e)
         {
             var tabPosition = e.GetPosition(this).ToMapsui();
-            Map.InvokeInfo(tabPosition, tabPosition, 1, _renderer.SymbolCache, WidgetTouch);
+            Map.InvokeInfo(tabPosition, tabPosition, 1, _renderer.SymbolCache, WidgetTouched);
         }
 
         private static Rectangle CreateSelectRectangle()
@@ -505,9 +505,11 @@ namespace Mapsui.UI.Uwp
             return SharedMapControl.ScreenToWorld(Map.Viewport, (float)_skiaScale.Y, screenPosition);
         }
 
-        private void WidgetTouch(IWidget widget)
+        private void WidgetTouched(IWidget widget, Mapsui.Geometries.Point screenPosition)
         {
             Task.Run(() => Launcher.LaunchUriAsync(new Uri(((Hyperlink)widget).Url)));
+
+            widget.HandleWidgetTouched(screenPosition);
         }
 
         public void Unsubscribe()

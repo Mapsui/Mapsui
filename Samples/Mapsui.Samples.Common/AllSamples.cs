@@ -34,7 +34,8 @@ namespace Mapsui.Samples.Common
                 ["Empty Map"] = EmptyMapSample.CreateMap,
                 ["Mutating triangle"] = MutatingTriangleSample.CreateMap,
                 ["Symbols in World Units"] = SymbolsInWorldUnitsSample.CreateMap,
-                ["Widgets"] = WidgetSample.CreateMap
+                ["Widgets"] = WidgetSample.CreateMap,
+                ["ScaleBar"] = ScaleBarSample.CreateMap
             };
         }
     }

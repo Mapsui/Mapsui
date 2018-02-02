@@ -4,6 +4,7 @@
     {
         Top,
         Center,
-        Bottom
+        Bottom,
+        Position
     }
 }

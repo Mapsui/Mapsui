@@ -74,7 +74,7 @@ namespace Mapsui.UI.iOS
         {
             var screenPosition = GetScreenPosition(gesture.LocationInView(this));
 
-            Map.InvokeInfo(screenPosition, screenPosition, _skiaScale, _renderer.SymbolCache, WidgetTouch);
+            Map.InvokeInfo(screenPosition, screenPosition, _skiaScale, _renderer.SymbolCache, WidgetTouched);
         }
 
         void OnPaintSurface(object sender, SKPaintGLSurfaceEventArgs skPaintSurfaceEventArgs)
@@ -349,9 +349,11 @@ namespace Mapsui.UI.iOS
             Refresh();
         }
 
-        private static void WidgetTouch(IWidget widget)
+        private static void WidgetTouched(IWidget widget, Point screenPosition)
         {
             if (widget is Hyperlink) UIApplication.SharedApplication.OpenUrl(new NSUrl(((Hyperlink)widget).Url));
+
+            widget.HandleWidgetTouched(screenPosition);
         }
 
         protected override void Dispose(bool disposing)

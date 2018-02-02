@@ -8,6 +8,8 @@ namespace Mapsui.Samples.Common.Maps
         {
             var map = new Map();
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
+            map.Widgets.Add(new Widgets.ScaleBar.ScaleBarWidget(map) { TextAlignment=Widgets.Alignment.Center, HorizontalAlignment = Widgets.HorizontalAlignment.Center, VerticalAlignment = Widgets.VerticalAlignment.Top });
+            map.Widgets.Add(new Widgets.Zoom.ZoomInOutWidget(map) { MarginX = 20, MarginY = 40 });
             return map;
         }
     }

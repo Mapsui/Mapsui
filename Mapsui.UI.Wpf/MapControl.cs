@@ -453,7 +453,7 @@ namespace Mapsui.UI.Wpf
             {
                 HandleFeatureInfo(e);
                 Map.InvokeInfo(mousePosition, _downMousePosition.ToMapsui(), _scale, 
-                    Renderer.SymbolCache, WidgetTouch);
+                    Renderer.SymbolCache, OnWidgetTouched);
             }
 
             _map.ViewChanged(true);
@@ -470,14 +470,16 @@ namespace Mapsui.UI.Wpf
             {
                 var touchPosition = e.GetTouchPoint(this).Position.ToMapsui();
                 // todo: Pass the touchDown position. It needs to be set at touch down.
-                Map.InvokeInfo(touchPosition, touchPosition, _scale, Renderer.SymbolCache, WidgetTouch);
+                Map.InvokeInfo(touchPosition, touchPosition, _scale, Renderer.SymbolCache, OnWidgetTouched);
             }
         }
 
-        private void WidgetTouch(Widgets.IWidget widget)
+        private void OnWidgetTouched(Widgets.IWidget widget, Mapsui.Geometries.Point screenPosition)
         {
             if (widget is Widgets.Hyperlink)
-                System.Diagnostics.Process.Start(((Widgets.Hyperlink)widget).Url); 
+                System.Diagnostics.Process.Start(((Widgets.Hyperlink)widget).Url);
+
+            widget.HandleWidgetTouched(screenPosition);
         }
 
 
