@@ -9,13 +9,13 @@ namespace Mapsui.Rendering.Xaml
 {
     public static class ScaleBarWidgetRenderer
     {
-        private const float strokeExternal = 4;
-        private const float strokeInternal = 2;
+        private const float StrokeExternal = 4;
+        private const float StrokeInternal = 2;
 
-        private static Brush brushScaleBar;
-        private static Brush brushScaleBarStroke;
-        private static Brush brushScaleText;
-        private static Brush brushScaleTextStroke;
+        private static Brush _brushScaleBar;
+        private static Brush _brushScaleBarStroke;
+        private static Brush _brushScaleText;
+        private static Brush _brushScaleTextStroke;
 
         public static void Draw(Canvas canvas, ScaleBarWidget scaleBar)
         {
@@ -23,17 +23,17 @@ namespace Mapsui.Rendering.Xaml
             if (scaleBar.Map == null)
                 return;
 
-            brushScaleBar = new SolidColorBrush(scaleBar.TextColor.ToXaml());
-            brushScaleBarStroke = new SolidColorBrush(scaleBar.Halo.ToXaml());
-            brushScaleText = new SolidColorBrush(scaleBar.TextColor.ToXaml());
-            brushScaleTextStroke = new SolidColorBrush(scaleBar.Halo.ToXaml());
+            _brushScaleBar = new SolidColorBrush(scaleBar.TextColor.ToXaml());
+            _brushScaleBarStroke = new SolidColorBrush(scaleBar.Halo.ToXaml());
+            _brushScaleText = new SolidColorBrush(scaleBar.TextColor.ToXaml());
+            _brushScaleTextStroke = new SolidColorBrush(scaleBar.Halo.ToXaml());
 
             var textBlock = new OutlinedTextBlock();
 
             textBlock.Text = "9999 m";
-            textBlock.Fill = brushScaleText;
-            textBlock.Stroke = brushScaleTextStroke;
-            textBlock.StrokeThickness = strokeExternal - strokeInternal + 1;
+            textBlock.Fill = _brushScaleText;
+            textBlock.Stroke = _brushScaleTextStroke;
+            textBlock.StrokeThickness = StrokeExternal - StrokeInternal + 1;
             textBlock.FontFamily = new FontFamily(scaleBar.Font.FontFamily);
             textBlock.FontSize = scaleBar.Font.Size;
             textBlock.FontWeight = FontWeights.Bold;
@@ -51,7 +51,7 @@ namespace Mapsui.Rendering.Xaml
             // Do this, because height of text changes sometimes (e.g. from 2 m to 1 m)
             textSize = textBlock.MeasureText();
 
-            var scaleBarHeight = textSize.Height + (scaleBar.TickLength + strokeExternal * 0.5f + scaleBar.TextMargin) * scaleBar.Scale;
+            var scaleBarHeight = textSize.Height + (scaleBar.TickLength + StrokeExternal * 0.5f + scaleBar.TextMargin) * scaleBar.Scale;
 
             if (scaleBar.ScaleBarMode == ScaleBarMode.Both && scaleBar.SecondaryUnitConverter != null)
             {
@@ -59,7 +59,7 @@ namespace Mapsui.Rendering.Xaml
             }
             else
             {
-                scaleBarHeight += strokeExternal * 0.5f * scaleBar.Scale;
+                scaleBarHeight += StrokeExternal * 0.5f * scaleBar.Scale;
             }
 
             scaleBar.Height = (float)scaleBarHeight;
@@ -67,7 +67,7 @@ namespace Mapsui.Rendering.Xaml
             // Draw lines
 
             // Get lines for scale bar
-            var points = scaleBar.GetScaleBarLinePositions(scaleBarLength1, scaleBarLength2, strokeExternal);
+            var points = scaleBar.GetScaleBarLinePositions(scaleBarLength1, scaleBarLength2, StrokeExternal);
 
             // BoundingBox for scale bar
             BoundingBox envelop = new BoundingBox();
@@ -82,8 +82,8 @@ namespace Mapsui.Rendering.Xaml
                     line.Y1 = points[i].Y;
                     line.X2 = points[i + 1].X;
                     line.Y2 = points[i + 1].Y;
-                    line.Stroke = brushScaleBarStroke;
-                    line.StrokeThickness = strokeExternal;
+                    line.Stroke = _brushScaleBarStroke;
+                    line.StrokeThickness = StrokeExternal;
                     line.StrokeStartLineCap = PenLineCap.Square;
                     line.StrokeEndLineCap = PenLineCap.Square;
                     canvas.Children.Add(line);
@@ -97,8 +97,8 @@ namespace Mapsui.Rendering.Xaml
                     line.Y1 = points[i].Y;
                     line.X2 = points[i + 1].X;
                     line.Y2 = points[i + 1].Y;
-                    line.Stroke = brushScaleBar;
-                    line.StrokeThickness = strokeInternal;
+                    line.Stroke = _brushScaleBar;
+                    line.StrokeThickness = StrokeInternal;
                     line.StrokeStartLineCap = PenLineCap.Square;
                     line.StrokeEndLineCap = PenLineCap.Square;
                     canvas.Children.Add(line);
@@ -111,7 +111,7 @@ namespace Mapsui.Rendering.Xaml
                     envelop = envelop.Join(points[i].GetBoundingBox());
                 }
 
-                envelop = envelop.Grow(strokeExternal * 0.5f * scaleBar.Scale);
+                envelop = envelop.Grow(StrokeExternal * 0.5f * scaleBar.Scale);
             }
 
             // Draw text
@@ -133,7 +133,7 @@ namespace Mapsui.Rendering.Xaml
             var boundingBoxText1 = new BoundingBox(0, 0, textSize1.Width, textSize1.Height);
             var boundingBoxText2 = new BoundingBox(0, 0, textSize2.Width, textSize2.Height);
 
-            var (posX1, posY1, posX2, posY2) = scaleBar.GetScaleBarTextPositions(boundingBoxText, boundingBoxText1, boundingBoxText2, strokeExternal);
+            var (posX1, posY1, posX2, posY2) = scaleBar.GetScaleBarTextPositions(boundingBoxText, boundingBoxText1, boundingBoxText2, StrokeExternal);
 
             // Now draw text
             textBlock.Text = scaleBarText1;
@@ -151,9 +151,9 @@ namespace Mapsui.Rendering.Xaml
             {
                 textBlock = new OutlinedTextBlock();
 
-                textBlock.Fill = brushScaleText;
-                textBlock.Stroke = brushScaleTextStroke;
-                textBlock.StrokeThickness = strokeExternal - strokeInternal + 1;
+                textBlock.Fill = _brushScaleText;
+                textBlock.Stroke = _brushScaleTextStroke;
+                textBlock.StrokeThickness = StrokeExternal - StrokeInternal + 1;
                 textBlock.FontFamily = new FontFamily(scaleBar.Font.FontFamily);
                 textBlock.FontSize = scaleBar.Font.Size;
                 textBlock.FontWeight = FontWeights.Bold;
@@ -178,7 +178,7 @@ namespace Mapsui.Rendering.Xaml
                 var rect = new Rectangle();
                 rect.Width = envelop.MaxX - envelop.MinX;
                 rect.Height = envelop.MaxY - envelop.MinY;
-                rect.Stroke = brushScaleTextStroke;
+                rect.Stroke = _brushScaleTextStroke;
                 rect.StrokeThickness = 1;
                 Canvas.SetLeft(rect, envelop.MinX);
                 Canvas.SetTop(rect, envelop.MinY);
