@@ -4,7 +4,7 @@
     {
         Left,
         Center,
-        Right,
-        Position
+        Right
+
     }
 }

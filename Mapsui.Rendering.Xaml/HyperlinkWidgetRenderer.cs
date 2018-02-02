@@ -29,9 +29,6 @@ namespace Mapsui.Rendering.Xaml
                 case Widgets.HorizontalAlignment.Right:
                     posX = (canvas.Width - border.ActualWidth - hyperlink.MarginX);
                     break;
-                case Widgets.HorizontalAlignment.Position:
-                    posX = hyperlink.PositionX;
-                    break;
             }
 
             // Get position in x direction
@@ -47,9 +44,9 @@ namespace Mapsui.Rendering.Xaml
                 case Widgets.VerticalAlignment.Bottom:
                     posY = (canvas.Height - border.ActualHeight - hyperlink.MarginY);
                     break;
-                case Widgets.VerticalAlignment.Position:
-                    posY = hyperlink.PositionY;
-                    break;
+                //case Widgets.VerticalAlignment.Position:
+                //    posY = hyperlink.PositionY;
+                //    break;
             }
 
             Canvas.SetLeft(border, posX);
