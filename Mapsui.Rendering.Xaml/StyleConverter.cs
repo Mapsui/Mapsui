@@ -7,7 +7,6 @@ using System.Windows;
 using System.Collections.Generic;
 using System.Windows.Media.Imaging;
 using Mapsui.Styles;
-using System;
 
 namespace Mapsui.Rendering.Xaml
 {

@@ -39,7 +39,6 @@ using Mapsui.Utilities;
 using Mapsui.Widgets;
 using SkiaSharp.Views.UWP;
 using HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment;
-using Point = Windows.Foundation.Point;
 using VerticalAlignment = Windows.UI.Xaml.VerticalAlignment;
 
 namespace Mapsui.UI.Uwp
@@ -53,9 +52,8 @@ namespace Mapsui.UI.Uwp
         private readonly Storyboard _zoomStoryBoard = new Storyboard();
         private bool _invalid;
         private Map _map;
-        private Point _previousPosition;
         private Geometries.Point _skiaScale;
-        private double _innerRotation = 0f;
+        private double _innerRotation;
 
         public event EventHandler ViewportInitialized;
 
@@ -469,7 +467,6 @@ namespace Mapsui.UI.Uwp
 
         private void OnManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
         {
-            _previousPosition = default(Point);
             Refresh();
         }
 
@@ -505,7 +502,7 @@ namespace Mapsui.UI.Uwp
             return SharedMapControl.ScreenToWorld(Map.Viewport, (float)_skiaScale.Y, screenPosition);
         }
 
-        private void WidgetTouched(IWidget widget, Mapsui.Geometries.Point screenPosition)
+        private void WidgetTouched(IWidget widget, Geometries.Point screenPosition)
         {
             Task.Run(() => Launcher.LaunchUriAsync(new Uri(((Hyperlink)widget).Url)));
 

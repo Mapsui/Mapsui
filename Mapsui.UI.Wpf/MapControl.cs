@@ -49,7 +49,7 @@ namespace Mapsui.UI.Wpf
         private double _toResolution = double.NaN;
         private bool _hasBeenManipulated;
         private float _scale = 1; // scale is always 1 in WPF
-        private double _innerRotation = 0f;
+        private double _innerRotation;
 
         public MapControl()
         {
@@ -474,7 +474,7 @@ namespace Mapsui.UI.Wpf
             }
         }
 
-        private void OnWidgetTouched(Widgets.IWidget widget, Mapsui.Geometries.Point screenPosition)
+        private void OnWidgetTouched(Widgets.IWidget widget, Geometries.Point screenPosition)
         {
             if (widget is Widgets.Hyperlink)
                 System.Diagnostics.Process.Start(((Widgets.Hyperlink)widget).Url);

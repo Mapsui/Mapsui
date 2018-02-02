@@ -49,12 +49,12 @@ namespace Mapsui.Widgets.ScaleBar
             HorizontalAlignment = DefaultScaleBarHorizontalAlignment;
             VerticalAlignment = DefaultScaleBarVerticalAlignment;
 
-            maxWidth = 100;
-            height = 100;
-            textAlignment = DefaultScaleBarAlignment;
-            scaleBarMode = DefaultScaleBarMode;
+            _maxWidth = 100;
+            _height = 100;
+            _textAlignment = DefaultScaleBarAlignment;
+            _scaleBarMode = DefaultScaleBarMode;
 
-            unitConverter = MetricUnitConverter.Instance;
+            _unitConverter = MetricUnitConverter.Instance;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -62,9 +62,9 @@ namespace Mapsui.Widgets.ScaleBar
         /// <summary>
         /// Viewport to use for all calculations
         /// </summary>
-        public Map Map { get; } = null;
+        public Map Map { get; }
 
-        float maxWidth;
+        float _maxWidth;
 
         /// <summary>
         /// Maximum usable width for scalebar. The real used width could be less, because we 
@@ -72,21 +72,19 @@ namespace Mapsui.Widgets.ScaleBar
         /// </summary>
         public float MaxWidth
         {
-            get
-            {
-                return maxWidth;
-            }
+            get => _maxWidth;
             set
             {
-                if (maxWidth == value)
+                // ReSharper disable once CompareOfFloatsByEqualityOperator
+                if (_maxWidth == value)
                     return;
 
-                maxWidth = value;
+                _maxWidth = value;
                 OnPropertyChanged();
             }
         }
 
-        float height;
+        float _height;
 
         /// <summary>
         /// Real height of scalebar. Depends on number of unit converters and text size.
@@ -94,84 +92,73 @@ namespace Mapsui.Widgets.ScaleBar
         /// </summary>
         public float Height
         {
-            get
-            {
-                return height;
-            }
+            get => _height;
             set
             {
-                if (height == value)
+                // ReSharper disable once CompareOfFloatsByEqualityOperator
+                if (_height == value)
                     return;
 
-                height = value;
+                _height = value;
                 OnPropertyChanged();
             }
         }
 
-        Color textColor = new Color(0, 0, 0);
+        Color _textColor = new Color(0, 0, 0);
 
         /// <summary>
         /// Foreground color of scalebar and text
         /// </summary>
         public Color TextColor
         {
-            get
-            {
-                return textColor;
-            }
+            get => _textColor;
             set
             {
-                if (textColor == value)
+                if (_textColor == value)
                     return;
-                textColor = value;
+                _textColor = value;
                 OnPropertyChanged();
             }
         }
 
-        Color haloColor = new Color(255, 255, 255);
+        Color _haloColor = new Color(255, 255, 255);
 
         /// <summary>
         /// Halo color of scalebar and text, so that it is better visible
         /// </summary>
         public Color Halo
         {
-            get
-            {
-                return haloColor;
-            }
+            get => _haloColor;
             set
             {
-                if (haloColor == value)
+                if (_haloColor == value)
                     return;
-                haloColor = value;
+                _haloColor = value;
                 OnPropertyChanged();
             }
         }
 
-        public float Scale { get; set; } = 1;
+        public float Scale { get; } = 1;
 
         /// <summary>
         /// Length of the ticks
         /// </summary>
         public float TickLength { get; set; } = 3;
 
-        Alignment textAlignment;
+        Alignment _textAlignment;
 
         /// <summary>
         /// Alignment of text of scalebar
         /// </summary>
         public Alignment TextAlignment
         {
-            get
-            {
-                return textAlignment;
-            }
+            get => _textAlignment;
             set
             {
-                if (textAlignment == value)
+                if (_textAlignment == value)
                     return;
 
-                textAlignment = value;
+                _textAlignment = value;
                 OnPropertyChanged();
             }
         }
@@ -179,92 +166,86 @@ namespace Mapsui.Widgets.ScaleBar
         /// <summary>
         /// Margin between end of tick and text
         /// </summary>
-        public float TextMargin { get; set; } = 1;
+        public float TextMargin { get; } = 1;
 
-        private Font font = DefaultFont;
+        private Font _font = DefaultFont;
 
         /// <summary>
         /// Font to use for drawing text
         /// </summary>
         public Font Font
         {
-            get
-            {
-                return font ?? DefaultFont;
-            }
+            get => _font ?? DefaultFont;
             set
             {
-                if (font == value)
+                if (_font == value)
                     return;
 
-                font = value;
+                _font = value;
                 OnPropertyChanged();
             }
         }
 
-        protected IUnitConverter unitConverter;
+        private IUnitConverter _unitConverter;
 
         /// <summary>
         /// Normal unit converter for upper text. Default is MetricUnitConverter.
         /// </summary>
         public IUnitConverter UnitConverter
         {
-            get { return unitConverter; }
+            get => _unitConverter;
             set
             {
                 if (value == null)
                 {
-                    throw new ArgumentNullException("UnitConverter must not be null");
+                    throw new ArgumentNullException($"{nameof(UnitConverter)} must not be null");
                 }
-                if (unitConverter == value)
+                if (_unitConverter == value)
                 {
                     return;
                 }
 
-                unitConverter = value;
+                _unitConverter = value;
                 OnPropertyChanged();
             }
         }
 
-        protected IUnitConverter secondaryUnitConverter;
+        private IUnitConverter _secondaryUnitConverter;
         
         /// <summary>
         /// Secondary unit converter for lower text if ScaleBarMode is Both. Default is ImperialUnitConverter.
         /// </summary>
         public IUnitConverter SecondaryUnitConverter
         {
-            get { return secondaryUnitConverter; }
+            get => _secondaryUnitConverter;
             set
             {
-                if (secondaryUnitConverter == value)
+                if (_secondaryUnitConverter == value)
                 {
                     return;
                 }
 
-                secondaryUnitConverter = value;
+                _secondaryUnitConverter = value;
                 OnPropertyChanged();
             }
         }
 
-        protected ScaleBarMode scaleBarMode;
+        private ScaleBarMode _scaleBarMode;
 
         /// <summary>
         /// ScaleBarMode of scalebar. Could be Single to show only one or Both for showing two units.
         /// </summary>
         public ScaleBarMode ScaleBarMode
         {
-            get
-            {
-                return scaleBarMode;
-            }
+            get => _scaleBarMode;
             set
             {
-                if (scaleBarMode == value)
+                if (_scaleBarMode == value)
                 {
                     return;
                 }
 
-                scaleBarMode = value;
+                _scaleBarMode = value;
                 OnPropertyChanged();
             }
         }
@@ -272,7 +253,7 @@ namespace Mapsui.Widgets.ScaleBar
         /// <summary>
         /// Draw a rectangle around the scale bar for testing
         /// </summary>
-        public bool ShowEnvelop { get; set; } = false;
+        public bool ShowEnvelop { get; set; }
 
         /// <summary>
         /// Calculates the length and text for both scalebars
@@ -319,15 +300,15 @@ namespace Mapsui.Widgets.ScaleBar
 
             float maxScaleBarLength = Math.Max(scaleBarLength1, scaleBarLength2);
 
-            var posX = CalculatePositionX(0, (int)Map.Viewport.Width, maxWidth);
-            var posY = CalculatePositionY(0, (int)Map.Viewport.Height, height);
+            var posX = CalculatePositionX(0, (int)Map.Viewport.Width, _maxWidth);
+            var posY = CalculatePositionY(0, (int)Map.Viewport.Height, _height);
 
             float left = posX + stroke * 0.5f * Scale;
-            float right = posX + maxWidth - stroke * 0.5f * Scale;
-            float center1 = posX + (maxWidth - scaleBarLength1) / 2;
-            float center2 = posX + (maxWidth - scaleBarLength2) / 2;
+            float right = posX + _maxWidth - stroke * 0.5f * Scale;
+            float center1 = posX + (_maxWidth - scaleBarLength1) / 2;
+            float center2 = posX + (_maxWidth - scaleBarLength2) / 2;
             // Top position is Y in the middle of scale bar line
-            float top = posY + (drawNoSecondScaleBar ? height - stroke * 0.5f * Scale : height * 0.5f);
+            float top = posY + (drawNoSecondScaleBar ? _height - stroke * 0.5f * Scale : _height * 0.5f);
 
             switch (TextAlignment)
             {
@@ -427,14 +408,14 @@ namespace Mapsui.Widgets.ScaleBar
         {
             bool drawNoSecondScaleBar = ScaleBarMode == ScaleBarMode.Single || (ScaleBarMode == ScaleBarMode.Both && SecondaryUnitConverter == null);
 
-            float posX = CalculatePositionX(0, (int)Map.Viewport.Width, maxWidth);
-            float posY = CalculatePositionY(0, (int)Map.Viewport.Height, height);
+            float posX = CalculatePositionX(0, (int)Map.Viewport.Width, _maxWidth);
+            float posY = CalculatePositionY(0, (int)Map.Viewport.Height, _height);
 
             float left = posX + (stroke + TextMargin) * Scale;
-            float right1 = posX + maxWidth - (stroke + TextMargin) * Scale - (float)textSize1.Width;
-            float right2 = posX + maxWidth - (stroke + TextMargin) * Scale - (float)textSize2.Width;
+            float right1 = posX + _maxWidth - (stroke + TextMargin) * Scale - (float)textSize1.Width;
+            float right2 = posX + _maxWidth - (stroke + TextMargin) * Scale - (float)textSize2.Width;
             float top = posY;
-            float bottom = posY + height - (float)textSize2.Height;
+            float bottom = posY + _height - (float)textSize2.Height;
 
             switch (TextAlignment)
             {
@@ -521,16 +502,6 @@ namespace Mapsui.Widgets.ScaleBar
             var scaleBarText = unitConverter.GetScaleText(scaleBarValue);
 
             return (scaleBarLength, scaleBarText);
-        }
-
-        /**
-		 * Calculates the required length and value of the scalebar using the current {@link DistanceUnitAdapter}
-		 *
-		 * @return a {@link ScaleBarLengthAndValue} object containing the required scaleBarLength and scaleBarValue
-		 */
-        private (float scaleBarLength, string scaleBarText) CalculateScaleBarLengthAndValue(IViewport viewport, float width)
-        {
-            return CalculateScaleBarLengthAndValue(viewport, width, UnitConverter);
         }
     }
 }

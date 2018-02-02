@@ -1,7 +1,5 @@
 ﻿using Mapsui.Geometries;
-using Mapsui.Widgets.ScaleBar;
 using Mapsui.Widgets.Zoom;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;

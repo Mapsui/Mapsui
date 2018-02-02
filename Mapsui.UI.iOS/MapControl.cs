@@ -22,13 +22,7 @@ namespace Mapsui.UI.iOS
         private Map _map;
         private readonly MapRenderer _renderer = new MapRenderer();
         private readonly SKGLView _canvas = new SKGLView();
-        private nuint _previousTouchCount = 0;
-        private nfloat _previousX;
-        private nfloat _previousY;
-        private double _previousRadius;
         private float _skiaScale;
-        private Point _touchDown = new Point();
-        private double _previousRotation;
         private double _innerRotation;
 
         public event EventHandler ViewportInitialized;
@@ -106,11 +100,6 @@ namespace Mapsui.UI.iOS
         private void OnViewportInitialized()
         {
             ViewportInitialized?.Invoke(this, EventArgs.Empty);
-        }
-
-        public override void TouchesBegan(NSSet touches, UIEvent evt)
-        {
-            base.TouchesBegan(touches, evt);
         }
 
         public override void TouchesMoved(NSSet touches, UIEvent evt)

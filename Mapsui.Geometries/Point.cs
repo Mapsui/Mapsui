@@ -18,6 +18,7 @@
 using System;
 using Mapsui.Geometries.Utilities;
 
+// ReSharper disable NonReadonlyMemberInGetHashCode // todo: Fix this real issue
 namespace Mapsui.Geometries
 {
     /// <summary>

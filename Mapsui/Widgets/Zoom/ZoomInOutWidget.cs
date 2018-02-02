@@ -43,7 +43,7 @@ namespace Mapsui.Widgets.Zoom
         /// <summary>
         /// Viewport to use for all calculations
         /// </summary>
-        public Map Map { get; } = null;
+        public Map Map { get; }
 
         public float size { get; set; } = 40;
 

@@ -376,7 +376,7 @@ namespace Mapsui.UI.Android
             return SharedMapControl.ScreenToWorld(Map.Viewport, _scale, screenPosition);
         }
 
-        private void WidgetTouched(IWidget widget, Mapsui.Geometries.Point screenPosition)
+        private void WidgetTouched(IWidget widget, Geometries.Point screenPosition)
         {
             if (widget is Hyperlink)
             {

@@ -170,7 +170,6 @@
     <Compile Include="UI\InfoEventArgs.cs" />
     <Compile Include="UI\ViewChangedEventArgs.cs" />
     <Compile Include="UI\IMapControl.cs" />
-    <Compile Include="UI\ViewportHelper.cs" />
     <Compile Include="Utilities\Constants.cs" />
     <Compile Include="Utilities\DeveloperTools.cs" />
     <Compile Include="Utilities\EmbeddedResourceLoader.cs" />

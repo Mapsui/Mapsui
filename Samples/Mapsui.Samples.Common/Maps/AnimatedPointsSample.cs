@@ -23,6 +23,7 @@ namespace Mapsui.Samples.Common.Maps
 
     public class AnimatedPointsWithAutoUpdateLayer : AnimatedPointLayer
     {
+        // ReSharper disable once PrivateFieldCanBeConvertedToLocalVariable
         private readonly Timer _timer;
 
         public AnimatedPointsWithAutoUpdateLayer()
