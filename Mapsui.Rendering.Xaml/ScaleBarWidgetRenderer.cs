@@ -178,7 +178,7 @@ namespace Mapsui.Rendering.Xaml
                 var rect = new Rectangle();
                 rect.Width = envelop.MaxX - envelop.MinX;
                 rect.Height = envelop.MaxY - envelop.MinY;
-                rect.Stroke = new SolidColorBrush(Colors.Blue);
+                rect.Stroke = brushScaleTextStroke;
                 rect.StrokeThickness = 1;
                 Canvas.SetLeft(rect, envelop.MinX);
                 Canvas.SetTop(rect, envelop.MinY);

@@ -139,7 +139,7 @@ namespace Mapsui.Rendering.Skia
             if (scaleBar.ShowEnvelop)
             {
                 // Draw a rect around the scale bar for testing
-                var tempPaint = new SKPaint() { StrokeWidth = 1, Color = SKColors.Blue, IsStroke = true };
+                var tempPaint = paintScaleTextStroke;
                 canvas.DrawRect(new SKRect((float)envelop.MinX, (float)envelop.MinY, (float)envelop.MaxX, (float)envelop.MaxY), tempPaint);
             }
         }
