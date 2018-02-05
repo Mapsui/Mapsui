@@ -39,7 +39,6 @@ using Mapsui.Utilities;
 using Mapsui.Widgets;
 using SkiaSharp.Views.UWP;
 using HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment;
-using Point = Windows.Foundation.Point;
 using VerticalAlignment = Windows.UI.Xaml.VerticalAlignment;
 
 namespace Mapsui.UI.Uwp
@@ -53,9 +52,8 @@ namespace Mapsui.UI.Uwp
         private readonly Storyboard _zoomStoryBoard = new Storyboard();
         private bool _invalid;
         private Map _map;
-        private Point _previousPosition;
         private Geometries.Point _skiaScale;
-        private double _innerRotation = 0f;
+        private double _innerRotation;
 
         public event EventHandler ViewportInitialized;
 
@@ -101,7 +99,7 @@ namespace Mapsui.UI.Uwp
         private void OnSingleTapped(object sender, TappedRoutedEventArgs e)
         {
             var tabPosition = e.GetPosition(this).ToMapsui();
-            Map.InvokeInfo(tabPosition, tabPosition, 1, _renderer.SymbolCache, WidgetTouch);
+            Map.InvokeInfo(tabPosition, tabPosition, 1, _renderer.SymbolCache, WidgetTouched);
         }
 
         private static Rectangle CreateSelectRectangle()
@@ -439,7 +437,7 @@ namespace Mapsui.UI.Uwp
         private void OnManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {            
             var (center, radius, angle) = (e.Position.ToMapsui(), e.Delta.Scale, e.Delta.Rotation);
-            var (prevCenter, prevRadius, prevAngle) = (new Geometries.Point(center.X - e.Delta.Translation.X, center.Y - e.Delta.Translation.Y), 1f, 0f);
+            var (prevCenter, prevRadius, prevAngle) = (e.Position.ToMapsui().Offset(-e.Delta.Translation.X, -e.Delta.Translation.Y), 1f, 0f);
             
             double rotationDelta = 0;
 
@@ -466,13 +464,16 @@ namespace Mapsui.UI.Uwp
 
             _map.Viewport.Transform(center.X, center.Y, prevCenter.X, prevCenter.Y, radius / prevRadius, rotationDelta);
 
+            ViewportLimiter.Limit(_map.Viewport, _map.ZoomMode, _map.ZoomLimits, _map.Resolutions,
+                _map.PanMode, _map.PanLimits, _map.Envelope);
+
             _invalid = true;
             OnViewChanged(true);
+            e.Handled = true;
         }
 
         private void OnManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
         {
-            _previousPosition = default(Point);
             Refresh();
         }
 
@@ -508,9 +509,11 @@ namespace Mapsui.UI.Uwp
             return SharedMapControl.ScreenToWorld(Map.Viewport, (float)_skiaScale.Y, screenPosition);
         }
 
-        private void WidgetTouch(IWidget widget)
+        private void WidgetTouched(IWidget widget, Geometries.Point screenPosition)
         {
             Task.Run(() => Launcher.LaunchUriAsync(new Uri(((Hyperlink)widget).Url)));
+
+            widget.HandleWidgetTouched(screenPosition);
         }
 
         public void Unsubscribe()

@@ -35,6 +35,7 @@ namespace Mapsui.Providers.Shapefile
             public Type DataType;
             public int Decimals;
             public int Length;
+            // ReSharper disable once NotAccessedField.Local
             public int Address;
         }
 

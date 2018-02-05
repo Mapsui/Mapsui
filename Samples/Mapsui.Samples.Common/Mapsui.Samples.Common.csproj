@@ -64,6 +64,7 @@
     <Compile Include="Maps\LabelsSample.cs" />
     <Compile Include="Maps\MbTilesSample.cs" />
     <Compile Include="Maps\MutatingTriangleSample.cs" />
+    <Compile Include="Maps\ScaleBarSample.cs" />
     <Compile Include="Maps\OsmSample.cs" />
     <Compile Include="Maps\InfoLayersSample.cs" />
     <Compile Include="Maps\PenStrokeCapSample.cs" />

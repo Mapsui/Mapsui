@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Mapsui.Geometries;
 
 namespace Mapsui.Widgets
@@ -17,7 +18,7 @@ namespace Mapsui.Widgets
                 startScreenPosition.X / scale, 
                 startScreenPosition.Y / scale);
 
-            foreach (var widget in widgets)
+            foreach (var widget in widgets.Reverse())
             {
                 // Also check for start position because it shoudl be click on the widget, not a drag that ends above the widget.
                 if (widget.Envelope != null &&

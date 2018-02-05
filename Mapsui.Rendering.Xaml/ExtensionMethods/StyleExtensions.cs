@@ -10,7 +10,7 @@ namespace Mapsui.Rendering.Xaml
 {
     static class StyleExtensions
     {
-        public static Media.DoubleCollection ToXaml(this PenStyle penStyle)
+        public static DoubleCollection ToXaml(this PenStyle penStyle)
         {
             return StyleConverter.MapsuiPentoXaml(penStyle);
         }

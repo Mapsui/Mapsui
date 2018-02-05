@@ -51,9 +51,9 @@
                             VerticalAlignment="Bottom" HorizontalAlignment="Center" MinWidth="40" MinHeight="30">
                         <TextBlock x:Name="MouseCoordinates" Text="0, 0" />
                     </Border>
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Margin="8"
-                                HorizontalAlignment="Right" IsHitTestVisible="False">
-                        <TextBlock Name="LogTextBox" />
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Margin="32"
+                                HorizontalAlignment="Stretch" IsHitTestVisible="False">
+                        <TextBlock Name="LogTextBox" Foreground="#a0000000" />
                     </StackPanel>
                 </Grid> 
             </DockPanel>

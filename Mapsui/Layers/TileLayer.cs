@@ -59,6 +59,7 @@ namespace Mapsui.Layers
             });
         }
 
+        // ReSharper disable once UnusedParameter.Local // Is public and won't break this now
         public TileLayer(ITileSource source = null, int minTiles = 200, int maxTiles = 300, int maxRetries = 2, IFetchStrategy fetchStrategy = null,
             IRenderGetStrategy renderFetchStrategy = null, int minExtraTiles = -1, int maxExtraTiles = -1)
         {

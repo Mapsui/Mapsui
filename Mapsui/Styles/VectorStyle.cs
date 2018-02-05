@@ -1,3 +1,4 @@
+// ReSharper disable NonReadonlyMemberInGetHashCode // todo: Fix this real issue
 namespace Mapsui.Styles
 {
     public class VectorStyle : Style
