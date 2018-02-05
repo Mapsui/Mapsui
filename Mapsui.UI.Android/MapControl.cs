@@ -70,7 +70,7 @@ namespace Mapsui.UI.Android
         private void OnDoubleTapped(object sender, GestureDetector.DoubleTapEventArgs e)
         {
             var position = GetScreenPosition(e.Event, this);
-            Map.InvokeInfo(position, position, _scale, _renderer.SymbolCache, WidgetTouch);
+            Map.InvokeInfo(position, position, _scale, _renderer.SymbolCache, WidgetTouched);
         }
         
         private void OnSingleTapped(object sender, GestureDetector.SingleTapConfirmedEventArgs e)

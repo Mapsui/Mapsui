@@ -75,7 +75,7 @@ namespace Mapsui.UI.iOS
         {
             var screenPosition = GetScreenPosition(gesture.LocationInView(this));
 
-            Map.InvokeInfo(screenPosition, screenPosition, _skiaScale, _renderer.SymbolCache, WidgetTouch);
+            Map.InvokeInfo(screenPosition, screenPosition, _skiaScale, _renderer.SymbolCache, WidgetTouched);
         }
 
         private void OnSingleTapped(UITapGestureRecognizer gesture)
