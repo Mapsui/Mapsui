@@ -61,16 +61,30 @@ namespace Mapsui.UI.iOS
 
             _canvas.PaintSurface += OnPaintSurface;
 
-            var tapGestureRecognizer = new UITapGestureRecognizer(TapGestureHandler)
+            var doubleTapGestureRecognizer = new UITapGestureRecognizer(OnDoubleTapped)
+            {
+                NumberOfTapsRequired = 2,
+                CancelsTouchesInView = false,
+            };
+            AddGestureRecognizer(doubleTapGestureRecognizer);
+
+            var tapGestureRecognizer = new UITapGestureRecognizer(OnSingleTapped)
             {
                 NumberOfTapsRequired = 1,
                 CancelsTouchesInView = false,
             };
-
+            tapGestureRecognizer.RequireGestureRecognizerToFail(doubleTapGestureRecognizer);
             AddGestureRecognizer(tapGestureRecognizer);
         }
 
-        private void TapGestureHandler(UITapGestureRecognizer gesture)
+        private void OnDoubleTapped(UITapGestureRecognizer gesture)
+        {
+            var screenPosition = GetScreenPosition(gesture.LocationInView(this));
+
+            Map.InvokeInfo(screenPosition, screenPosition, _skiaScale, _renderer.SymbolCache, WidgetTouch);
+        }
+
+        private void OnSingleTapped(UITapGestureRecognizer gesture)
         {
             var screenPosition = GetScreenPosition(gesture.LocationInView(this));
 
