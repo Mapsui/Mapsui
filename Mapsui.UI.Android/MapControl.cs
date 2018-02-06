@@ -70,13 +70,13 @@ namespace Mapsui.UI.Android
         private void OnDoubleTapped(object sender, GestureDetector.DoubleTapEventArgs e)
         {
             var position = GetScreenPosition(e.Event, this);
-            Map.InvokeInfo(position, position, _scale, _renderer.SymbolCache, WidgetTouched);
+            Map.InvokeInfo(position, position, _scale, _renderer.SymbolCache, WidgetTouched, 2);
         }
         
         private void OnSingleTapped(object sender, GestureDetector.SingleTapConfirmedEventArgs e)
         {
             var position = GetScreenPosition(e.Event, this);
-            Map.InvokeInfo(position, position, _scale, _renderer.SymbolCache, WidgetTouched);
+            Map.InvokeInfo(position, position, _scale, _renderer.SymbolCache, WidgetTouched, 1);
         }        
 
         protected override void OnSizeChanged(int w, int h, int oldw, int oldh)

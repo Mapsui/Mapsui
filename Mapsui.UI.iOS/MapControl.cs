@@ -75,14 +75,20 @@ namespace Mapsui.UI.iOS
         {
             var screenPosition = GetScreenPosition(gesture.LocationInView(this));
 
-            Map.InvokeInfo(screenPosition, screenPosition, _skiaScale, _renderer.SymbolCache, WidgetTouched);
+            var tapWasHandled = Map.InvokeInfo(screenPosition, screenPosition, _skiaScale, _renderer.SymbolCache, WidgetTouched, 2);
+
+            if (!tapWasHandled)
+            {
+                // TODO 
+                // double tap zoom here
+            }
         }
 
         private void OnSingleTapped(UITapGestureRecognizer gesture)
         {
             var screenPosition = GetScreenPosition(gesture.LocationInView(this));
 
-            Map.InvokeInfo(screenPosition, screenPosition, _skiaScale, _renderer.SymbolCache, WidgetTouched);
+            Map.InvokeInfo(screenPosition, screenPosition, _skiaScale, _renderer.SymbolCache, WidgetTouched, 1);
         }
 
         void OnPaintSurface(object sender, SKPaintGLSurfaceEventArgs skPaintSurfaceEventArgs)

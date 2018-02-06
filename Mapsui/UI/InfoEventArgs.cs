@@ -23,5 +23,13 @@ namespace Mapsui.UI
         /// Screen position of the place the user touched
         /// </summary>
         public Point ScreenPosition { get; set; }
+        /// <summary>
+        /// Number of times the user tapped the location
+        /// </summary>
+        public int NumTaps { get; set; }
+        /// <summary>
+        /// If the interaction was handled but the event subscriber
+        /// </summary>
+        public bool Handled { get; set; }
     }
 }
