@@ -28,7 +28,7 @@ namespace Mapsui.UI
         /// </summary>
         public int NumTaps { get; set; }
         /// <summary>
-        /// If the interaction was handled but the event subscriber
+        /// If the interaction was handled by the event subscriber
         /// </summary>
         public bool Handled { get; set; }
     }
