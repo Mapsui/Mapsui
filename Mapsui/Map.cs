@@ -197,8 +197,8 @@ namespace Mapsui
             OnPropertyChanged(nameof(Layers));
         }
 
-        public void InvokeInfo(Point screenPosition, Point startScreenPosition, float scale, ISymbolCache symbolCache,
-            Action<IWidget, Point> widgetCallback)
+        public bool InvokeInfo(Point screenPosition, Point startScreenPosition, float scale, ISymbolCache symbolCache,
+            Action<IWidget, Point> widgetCallback, int numTaps)
         {
             var allWidgets = Layers.Select(l => l.Attribution).Where(a => a != null).Concat(Widgets).ToList();
             
@@ -206,13 +206,26 @@ namespace Mapsui
             var widget = WidgetTouch.GetWidget(screenPosition, startScreenPosition, scale, allWidgets);
             if (widget != null)
             {
+                // TODO how should widgetCallback have a handled type thing?
+                // Widgets should be iterated through rather than getting a single widget, 
+                // based on Z index and then called until handled = true; Ordered By highest Z
+
                 widgetCallback(widget, new Point(screenPosition.X / scale, screenPosition.Y / scale));
-                return;
+                return true; 
             }
 
-            if (Info == null) return;
-            var eventArgs = InfoHelper.GetInfoEventArgs(Viewport, screenPosition, scale, InfoLayers, symbolCache);
-            if (eventArgs != null) Info?.Invoke(this, eventArgs);
+            if (Info == null) return false;
+            var eventArgs = InfoHelper.GetInfoEventArgs(Viewport, screenPosition, scale, InfoLayers, symbolCache, numTaps);
+            if (eventArgs != null)
+            {
+                // TODO Info items should be iterated through rather than getting a single item, 
+                // based on Z index and then called until handled = true; Ordered By highest Z
+
+                Info?.Invoke(this, eventArgs);
+                return eventArgs.Handled;
+            }
+
+            return false;
         }
 
         private InfoEventArgs _previousHoverEventArgs;
@@ -221,7 +234,7 @@ namespace Mapsui
         {
             if (Hover == null) return;
             if (HoverLayers.Count == 0) return;
-            var hoverEventArgs = InfoHelper.GetInfoEventArgs(Viewport, screenPosition, scale, HoverLayers, symbolCache);
+            var hoverEventArgs = InfoHelper.GetInfoEventArgs(Viewport, screenPosition, scale, HoverLayers, symbolCache, 0);
             if (hoverEventArgs?.Feature != _previousHoverEventArgs?.Feature) // only notify when the feature changes
             {
                 _previousHoverEventArgs = hoverEventArgs;

@@ -441,7 +441,7 @@ namespace Mapsui.UI.Wpf
         private void MapControlMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             var mousePosition = e.GetPosition(this).ToMapsui();
-
+            
             if (IsInBoxZoomMode || ZoomToBoxMode)
             {
                 ZoomToBoxMode = false;
@@ -452,8 +452,7 @@ namespace Mapsui.UI.Wpf
             else
             {
                 HandleFeatureInfo(e);
-                Map.InvokeInfo(mousePosition, _downMousePosition.ToMapsui(), _scale, 
-                    Renderer.SymbolCache, OnWidgetTouched);
+                Map.InvokeInfo(mousePosition, _downMousePosition.ToMapsui(), _scale, Renderer.SymbolCache, OnWidgetTouched, e.ClickCount);
             }
 
             _map.ViewChanged(true);
@@ -470,7 +469,9 @@ namespace Mapsui.UI.Wpf
             {
                 var touchPosition = e.GetTouchPoint(this).Position.ToMapsui();
                 // todo: Pass the touchDown position. It needs to be set at touch down.
-                Map.InvokeInfo(touchPosition, touchPosition, _scale, Renderer.SymbolCache, OnWidgetTouched);
+                
+                // TODO Figure out how to do a number of taps for WPF
+                Map.InvokeInfo(touchPosition, touchPosition, _scale, Renderer.SymbolCache, OnWidgetTouched, 1);
             }
         }
 

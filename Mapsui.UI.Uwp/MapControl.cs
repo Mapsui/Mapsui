@@ -80,7 +80,8 @@ namespace Mapsui.UI.Uwp
             ManipulationCompleted += OnManipulationCompleted;
             ManipulationInertiaStarting += OnManipulationInertiaStarting;
 
-            Tapped += OnTapped;
+            Tapped += OnSingleTapped;
+            DoubleTapped += OnDoubleTapped;
             
             var orientationSensor = SimpleOrientationSensor.GetDefault();
             if (orientationSensor != null)
@@ -89,10 +90,16 @@ namespace Mapsui.UI.Uwp
                         .ConfigureAwait(false);
         }
 
-        private void OnTapped(object sender, TappedRoutedEventArgs e)
+        private void OnDoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
             var tabPosition = e.GetPosition(this).ToMapsui();
-            Map.InvokeInfo(tabPosition, tabPosition, 1, _renderer.SymbolCache, WidgetTouched);
+            Map.InvokeInfo(tabPosition, tabPosition, 1, _renderer.SymbolCache, WidgetTouched, 2);
+        }
+
+        private void OnSingleTapped(object sender, TappedRoutedEventArgs e)
+        {
+            var tabPosition = e.GetPosition(this).ToMapsui();
+            Map.InvokeInfo(tabPosition, tabPosition, 1, _renderer.SymbolCache, WidgetTouched, 1);
         }
 
         private static Rectangle CreateSelectRectangle()
