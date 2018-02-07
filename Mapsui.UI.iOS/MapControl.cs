@@ -122,6 +122,13 @@ namespace Mapsui.UI.iOS
             ViewportInitialized?.Invoke(this, EventArgs.Empty);
         }
 
+        public override void TouchesBegan(NSSet touches, UIEvent evt)
+        {
+            base.TouchesBegan(touches, evt);
+
+            _innerRotation = _map.Viewport.Rotation;
+        }
+
         public override void TouchesMoved(NSSet touches, UIEvent evt)
         {
             base.TouchesMoved(touches, evt);
@@ -138,6 +145,8 @@ namespace Mapsui.UI.iOS
                     ViewportLimiter.LimitExtent(_map.Viewport, _map.PanMode, _map.PanLimits, _map.Envelope);
 
                     RefreshGraphics();
+
+                    _innerRotation = _map.Viewport.Rotation;
                 }
             }
             else if (evt.AllTouches.Count >= 2)
