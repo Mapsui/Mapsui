@@ -484,7 +484,7 @@ namespace Mapsui.Widgets.ScaleBar
             // Convert in units of UnitConverter
             groundResolution = groundResolution / unitConverter.MeterRatio;
 
-            int[] scaleBarValues = unitConverter.ScaleBarValues;
+            var scaleBarValues = unitConverter.ScaleBarValues;
 
             float scaleBarLength = 0;
             int scaleBarValue = 0;
@@ -493,7 +493,7 @@ namespace Mapsui.Widgets.ScaleBar
             {
                 scaleBarValue = value;
                 scaleBarLength = (float)(scaleBarValue / groundResolution);
-                if (scaleBarLength < (width - 10))
+                if (scaleBarLength < width - 10)
                 {
                     break;
                 }

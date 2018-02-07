@@ -45,27 +45,24 @@ namespace Mapsui.Widgets.Zoom
         /// </summary>
         public Map Map { get; }
 
-        public float size { get; set; } = 40;
+        private float _size = 40;
 
         /// <summary>
         /// Width and height of buttons
         /// </summary>
         public float Size
         {
-            get
-            {
-                return size;
-            }
+            get => _size;
             set
             {
-                if (size == value)
+                if (_size == value)
                     return;
-                size = value;
+                _size = value;
                 OnPropertyChanged();
             }
         }
 
-        private Orientation orientation = Orientation.Vertical;
+        private Orientation _orientation = Orientation.Vertical;
 
         /// <summary>
         /// Orientation of buttons
@@ -74,18 +71,18 @@ namespace Mapsui.Widgets.Zoom
         {
             get
             {
-                return orientation;
+                return _orientation;
             }
             set
             {
-                if (orientation == value)
+                if (_orientation == value)
                     return;
-                orientation = value;
+                _orientation = value;
                 OnPropertyChanged();
             }
         }
 
-        private Color strokeColor = new Color(192, 192, 192);
+        private Color _strokeColor = new Color(192, 192, 192);
 
         /// <summary>
         /// Color of button frames
@@ -94,18 +91,18 @@ namespace Mapsui.Widgets.Zoom
         {
             get
             {
-                return strokeColor;
+                return _strokeColor;
             }
             set
             {
-                if (strokeColor == value)
+                if (_strokeColor == value)
                     return;
-                strokeColor = value;
+                _strokeColor = value;
                 OnPropertyChanged();
             }
         }
 
-        private Color textColor = new Color(192, 192, 192);
+        private Color _textColor = new Color(192, 192, 192);
 
         /// <summary>
         /// Color of "+" and "-" sign
@@ -114,18 +111,18 @@ namespace Mapsui.Widgets.Zoom
         {
             get
             {
-                return textColor;
+                return _textColor;
             }
             set
             {
-                if (textColor == value)
+                if (_textColor == value)
                     return;
-                textColor = value;
+                _textColor = value;
                 OnPropertyChanged();
             }
         }
 
-        private Color backColor = new Color(224, 224, 224);
+        private Color _backColor = new Color(224, 224, 224);
 
         /// <summary>
         /// Color of background
@@ -134,18 +131,18 @@ namespace Mapsui.Widgets.Zoom
         {
             get
             {
-                return backColor;
+                return _backColor;
             }
             set
             {
-                if (backColor == value)
+                if (_backColor == value)
                     return;
-                backColor = value;
+                _backColor = value;
                 OnPropertyChanged();
             }
         }
 
-        private float opacity = 0.8f;
+        private float _opacity = 0.8f;
 
         /// <summary>
         /// Opacity of background, frame and signs
@@ -154,13 +151,13 @@ namespace Mapsui.Widgets.Zoom
         {
             get
             {
-                return opacity;
+                return _opacity;
             }
             set
             {
-                if (opacity == value)
+                if (_opacity == value)
                     return;
-                opacity = value;
+                _opacity = value;
                 OnPropertyChanged();
             }
         }
