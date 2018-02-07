@@ -12,15 +12,15 @@ namespace Mapsui.UI
     public static class InfoHelper
     {
         public static InfoEventArgs GetInfoEventArgs(IViewport viewport, Point screenPosition, 
-            float scale, IEnumerable<ILayer> layers, ISymbolCache symbolCache)
+            float scale, IEnumerable<ILayer> layers, ISymbolCache symbolCache, int numTaps)
         {
             var worldPosition = viewport.ScreenToWorld(
                 new Point(screenPosition.X / scale, screenPosition.Y / scale));
-            return GetInfoEventArgs(layers, worldPosition, screenPosition, viewport.Resolution, symbolCache);
+            return GetInfoEventArgs(layers, worldPosition, screenPosition, viewport.Resolution, symbolCache, numTaps);
         }
 
         private static InfoEventArgs GetInfoEventArgs(IEnumerable<ILayer> layers, Point worldPosition, Point screenPosition,
-            double resolution, ISymbolCache symbolCache)
+            double resolution, ISymbolCache symbolCache, int numTaps)
         {
             var reversedLayer = layers.Reverse();
             foreach (var layer in reversedLayer)
@@ -41,12 +41,14 @@ namespace Mapsui.UI
                         Feature = feature,
                         Layer = layer,
                         WorldPosition = worldPosition,
-                        ScreenPosition = screenPosition
+                        ScreenPosition = screenPosition,
+                        NumTaps = numTaps,
+                        Handled = false,
                     };
                 }
             }
             // return InfoEventArgs without feature if none was found. Can be usefull to create features
-            return new InfoEventArgs { WorldPosition = worldPosition, ScreenPosition = screenPosition};
+            return new InfoEventArgs { WorldPosition = worldPosition, ScreenPosition = screenPosition, NumTaps = numTaps, Handled = false};
         }
 
         private static bool IsTouchingTakingIntoAccountSymbolStyles(

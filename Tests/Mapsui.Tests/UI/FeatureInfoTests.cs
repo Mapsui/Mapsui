@@ -33,8 +33,8 @@ namespace Mapsui.Tests.UI
             var scale = 1;
 
             // act
-            var argsHit = InfoHelper.GetInfoEventArgs(map.Viewport, screenPositionHit, scale, map.InfoLayers, null);
-            var argsMis = InfoHelper.GetInfoEventArgs(map.Viewport, screenPositionMiss, scale, map.InfoLayers, null);
+            var argsHit = InfoHelper.GetInfoEventArgs(map.Viewport, screenPositionHit, scale, map.InfoLayers, null, 1);
+            var argsMis = InfoHelper.GetInfoEventArgs(map.Viewport, screenPositionMiss, scale, map.InfoLayers, null, 1);
 
             // assert;
             Assert.IsTrue(argsHit.Feature.Geometry != null);
@@ -121,7 +121,7 @@ namespace Mapsui.Tests.UI
             var scale = 1;
 
             // act
-            var argsHit = InfoHelper.GetInfoEventArgs(map.Viewport, screenPositionHit, scale, map.InfoLayers, null);
+            var argsHit = InfoHelper.GetInfoEventArgs(map.Viewport, screenPositionHit, scale, map.InfoLayers, null, 1);
            
             // assert;
             Assert.IsTrue(argsHit.Feature == null);
@@ -162,7 +162,7 @@ namespace Mapsui.Tests.UI
             var scale = 1;
 
             // act
-            var argsHit = InfoHelper.GetInfoEventArgs(map.Viewport, screenPositionHit, scale, map.InfoLayers, null);
+            var argsHit = InfoHelper.GetInfoEventArgs(map.Viewport, screenPositionHit, scale, map.InfoLayers, null, 1);
 
             // assert;
             Assert.IsTrue(argsHit.Feature == null);
