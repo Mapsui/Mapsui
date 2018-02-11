@@ -145,10 +145,6 @@
       <Project>{b4f5cdc7-8d34-4b7e-be62-206fc716d4ff}</Project>
       <Name>Mapsui.Rendering.Skia-PCL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Mapsui.UI.Forms\Mapsui.UI.Forms.csproj">
-      <Project>{cd1dc52e-f73f-411a-9682-66827fc8010c}</Project>
-      <Name>Mapsui.UI.Forms</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\Mapsui\Mapsui.csproj">
       <Project>{d74c052a-c07e-4b37-a898-134218aca5c9}</Project>
       <Name>Mapsui</Name>

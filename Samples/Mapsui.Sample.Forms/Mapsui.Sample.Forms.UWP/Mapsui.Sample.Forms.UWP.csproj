@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{EAAB7EDF-7955-40CF-A8FB-A9B501CFF012}</ProjectGuid>
+    <ProjectGuid>{28848162-20B7-46F1-8364-8B41B0393CD4}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Mapsui.Sample.Forms.UWP</RootNamespace>
@@ -148,6 +148,15 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="BruTile">
+      <Version>1.0.2</Version>
+    </PackageReference>
+    <PackageReference Include="SkiaSharp">
+      <Version>1.59.3</Version>
+    </PackageReference>
+    <PackageReference Include="SkiaSharp.Views">
+      <Version>1.59.3</Version>
+    </PackageReference>
     <PackageReference Include="SkiaSharp.Views.Forms">
       <Version>1.59.3</Version>
     </PackageReference>
@@ -162,6 +171,10 @@
     <ProjectReference Include="..\..\..\Mapsui.Rendering.Skia-PCL\Mapsui.Rendering.Skia-PCL.csproj">
       <Project>{b4f5cdc7-8d34-4b7e-be62-206fc716d4ff}</Project>
       <Name>Mapsui.Rendering.Skia-PCL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Mapsui.UI.Forms\Mapsui.UI.Forms.csproj">
+      <Project>{cd1dc52e-f73f-411a-9682-66827fc8010c}</Project>
+      <Name>Mapsui.UI.Forms</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Mapsui\Mapsui.csproj">
       <Project>{d74c052a-c07e-4b37-a898-134218aca5c9}</Project>

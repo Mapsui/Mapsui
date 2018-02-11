@@ -99,7 +99,8 @@ namespace Mapsui.UI.Forms
                     // If yes, stop it and increment _numOfTaps
                     if (_doubleTapTestTimer != null)
                     {
-                        _doubleTapTestTimer.Dispose();
+                        _doubleTapTestTimer.Cancel();
+                        _doubleTapTestTimer = null;
                         _numOfTaps++;
                     }
                     OnTouchStart(_touches.Select(t => t.Value.Location).ToList());
@@ -366,7 +367,7 @@ namespace Mapsui.UI.Forms
                     if (e == null)
                     {
                         errorMessage = "MapDataChanged Unexpected error: DataChangedEventArgs can not be null";
-                        Console.WriteLine(errorMessage);
+                        System.Diagnostics.Debug.WriteLine(errorMessage);
                     }
                     else if (e.Cancelled)
                     {
@@ -376,12 +377,12 @@ namespace Mapsui.UI.Forms
                     else if (e.Error is System.Net.WebException)
                     {
                         errorMessage = "MapDataChanged WebException: " + e.Error.Message;
-                        Console.WriteLine(errorMessage);
+                        System.Diagnostics.Debug.WriteLine(errorMessage);
                     }
                     else if (e.Error != null)
                     {
                         errorMessage = "MapDataChanged errorMessage: " + e.Error.GetType() + ": " + e.Error.Message;
-                        Console.WriteLine(errorMessage);
+                        System.Diagnostics.Debug.WriteLine(errorMessage);
                     }
 
                     RefreshGraphics();
