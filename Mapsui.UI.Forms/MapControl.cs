@@ -36,6 +36,7 @@ namespace Mapsui.UI.Forms
         private const int Dragging = 1;
         private const int Zoom = 2;
         private const int shortTap = 125;
+        private const int delayTap = 180;
         private const int longTap = 500;
 
         private Map _map;
@@ -126,7 +127,7 @@ namespace Mapsui.UI.Forms
                 // Do we have a tap event
                 if (_touches[e.Id].Location.Equals(location) && ticks - _touches[e.Id].Tick < shortTap * 10000)
                 {
-                    // Start a timer with timeout 180 ms. If than isn't arrived another tap, than it is a single
+                    // Start a timer with timeout delayTap ms. If than isn't arrived another tap, than it is a single
                     _doubleTapTestTimer = new Timer((l) =>
                     {
                         if (_numOfTaps > 1)
@@ -137,7 +138,7 @@ namespace Mapsui.UI.Forms
                             OnSingleTapped((Geometries.Point)l);
                         _numOfTaps = 1;
                         _doubleTapTestTimer = null;
-                    }, location, 180, Timeout.Infinite);
+                    }, location, delayTap, Timeout.Infinite);
                 }
                 else if (_touches[e.Id].Location.Equals(location) && ticks - _touches[e.Id].Tick < longTap * 10000)
                 {
