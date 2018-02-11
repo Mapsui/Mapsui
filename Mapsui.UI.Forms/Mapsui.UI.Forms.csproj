@@ -63,6 +63,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EventArgs\SwipeEventArgs.cs" />
     <Compile Include="MapControl.cs" />
     <Compile Include="Utils\PCLTimer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

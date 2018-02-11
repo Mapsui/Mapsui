@@ -57,6 +57,8 @@ namespace Mapsui.UI.Forms
         public event EventHandler<TouchEventArgs> TouchEnded;
         public event EventHandler<TouchEventArgs> TouchMoved;
         public event EventHandler<HoverEventArgs> Hovered;
+        public event EventHandler<SwipeEventArgs> Swiped;
+        public event EventHandler<SwipeEventArgs> Flinged;
         public event EventHandler<TapEventArgs> SingleTapped;
         public event EventHandler<TapEventArgs> LongTapped;
         public event EventHandler<TapEventArgs> DoubleTapped;
@@ -122,7 +124,13 @@ namespace Mapsui.UI.Forms
 
                 (velocityX, velocityY) = _velocityTracker.CalcVelocity(e.Id, ticks);
 
-                System.Diagnostics.Debug.WriteLine($"Velocity X = {velocityX}, Velocity Y = {velocityY}");
+                // Is this a fling or swipe?
+                if (velocityX > 10000 || velocityY > 10000)
+                {
+                    System.Diagnostics.Debug.WriteLine($"Velocity X = {velocityX}, Velocity Y = {velocityY}");
+
+                    e.Handled = OnFlinged(velocityX, velocityY);
+                }
 
                 // Do we have a tap event
                 if (_touches[e.Id].Location.Equals(location) && ticks - _touches[e.Id].Tick < shortTap * 10000)
@@ -132,22 +140,26 @@ namespace Mapsui.UI.Forms
                     {
                         if (_numOfTaps > 1)
                         {
-                            OnDoubleTapped(location, _numOfTaps);
+                            if (!e.Handled)
+                                e.Handled = OnDoubleTapped(location, _numOfTaps);
                         }
                         else
-                            OnSingleTapped((Geometries.Point)l);
+                            if (!e.Handled)
+                                e.Handled = OnSingleTapped((Geometries.Point)l);
                         _numOfTaps = 1;
                         _doubleTapTestTimer = null;
                     }, location, delayTap, Timeout.Infinite);
                 }
                 else if (_touches[e.Id].Location.Equals(location) && ticks - _touches[e.Id].Tick < longTap * 10000)
                 {
-                    OnLongTapped(location);
+                    if (!e.Handled)
+                        e.Handled = OnLongTapped(location);
                 }
                 var releasedTouch = _touches[e.Id];
                 _touches.Remove(e.Id);
 
-                OnTouchEnded(_touches.Select(t => t.Value.Location).ToList(), new Geometries.Point((releasedTouch.Location.X - Bounds.Left) / _skiaScale, (releasedTouch.Location.Y - Bounds.Top) / _skiaScale));
+                if (!e.Handled)
+                    e.Handled = OnTouchEnded(_touches.Select(t => t.Value.Location).ToList(), new Geometries.Point((releasedTouch.Location.X - Bounds.Left) / _skiaScale, (releasedTouch.Location.Y - Bounds.Top) / _skiaScale));
             }
             if (e.ActionType == SKTouchAction.Moved)
             {
@@ -156,10 +168,10 @@ namespace Mapsui.UI.Forms
                 if (e.InContact)
                     _velocityTracker.AddEvent(e.Id, location, ticks);
 
-                if (e.InContact)
-                    OnTouchMoved(_touches.Select(t => t.Value.Location).ToList());
+                if (e.InContact && !e.Handled)
+                    e.Handled = OnTouchMoved(_touches.Select(t => t.Value.Location).ToList());
                 else
-                    OnHover(_touches.Select(t => t.Value.Location).FirstOrDefault());
+                    e.Handled = OnHover(_touches.Select(t => t.Value.Location).FirstOrDefault());
             }
 
             e.Handled = true;
@@ -203,6 +215,32 @@ namespace Mapsui.UI.Forms
             var eventArgs = new HoverEventArgs(location, false);
 
             handler?.Invoke(this, eventArgs);
+
+            return eventArgs.Handled;
+        }
+
+        private bool OnSwiped(double velocityX, double velocityY)
+        {
+            var handler = Swiped;
+            var eventArgs = new SwipeEventArgs(velocityX, velocityY, false);
+
+            handler?.Invoke(this, eventArgs);
+
+            // TODO
+            // Perform standard behavior
+
+            return eventArgs.Handled;
+        }
+
+        private bool OnFlinged(double velocityX, double velocityY)
+        {
+            var handler = Flinged;
+            var eventArgs = new SwipeEventArgs(velocityX, velocityY, false);
+
+            handler?.Invoke(this, eventArgs);
+
+            // TODO
+            // Perform standard behavior
 
             return eventArgs.Handled;
         }
