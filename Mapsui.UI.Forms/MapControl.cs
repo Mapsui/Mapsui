@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using Mapsui.Geometries;
 using Mapsui.Geometries.Utilities;
 using Mapsui.Logging;
 using Mapsui.Widgets;
@@ -13,6 +12,7 @@ using Xamarin.Forms;
 using SkiaSharp;
 using System.Threading;
 using Mapsui.UI.Forms.Utils;
+using Mapsui.Rendering;
 
 namespace Mapsui.UI.Forms
 {
@@ -69,6 +69,22 @@ namespace Mapsui.UI.Forms
             Initialize();
         }
 
+        public float SkiaScale
+        {
+            get
+            {
+                return _skiaScale;
+            }
+        }
+
+        public ISymbolCache SymbolCache
+        {
+            get
+            {
+                return _renderer.SymbolCache;
+            }
+        }
+
         public void Initialize()
         {
             Map = new Map();
@@ -98,7 +114,7 @@ namespace Mapsui.UI.Forms
             // Save time, when the event occures
             long ticks = DateTime.Now.Ticks;
 
-            var location = new Geometries.Point((e.Location.X - Bounds.Left) / _skiaScale, (e.Location.Y - Bounds.Top) / _skiaScale);
+            var location = GetScreenPosition(e.Location);
 
             if (e.ActionType == SKTouchAction.Pressed)
             {
@@ -159,7 +175,7 @@ namespace Mapsui.UI.Forms
                 _touches.Remove(e.Id);
 
                 if (!e.Handled)
-                    e.Handled = OnTouchEnded(_touches.Select(t => t.Value.Location).ToList(), new Geometries.Point((releasedTouch.Location.X - Bounds.Left) / _skiaScale, (releasedTouch.Location.Y - Bounds.Top) / _skiaScale));
+                    e.Handled = OnTouchEnded(_touches.Select(t => t.Value.Location).ToList(), releasedTouch.Location);
             }
             if (e.ActionType == SKTouchAction.Moved)
             {
@@ -173,8 +189,6 @@ namespace Mapsui.UI.Forms
                 else
                     e.Handled = OnHover(_touches.Select(t => t.Value.Location).FirstOrDefault());
             }
-
-            e.Handled = true;
         }
 
         private bool OnZoomedOut(Geometries.Point location)
