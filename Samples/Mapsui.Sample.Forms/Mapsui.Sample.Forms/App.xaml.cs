@@ -13,7 +13,7 @@ namespace Mapsui.Sample.Forms
 		{
 			InitializeComponent();
 
-			MainPage = new Mapsui.Sample.Forms.MainPage();
+			MainPage = new NavigationPage(new Mapsui.Sample.Forms.MainPage());
 		}
 
 		protected override void OnStart ()

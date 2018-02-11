@@ -6,17 +6,9 @@
              x:Class="Mapsui.Sample.Forms.MainPage">
 
     <StackLayout Orientation="Vertical" BackgroundColor="LightGray" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-
-        <Label Text="Welcome toMapsui!" 
-           VerticalOptions="Center" 
-           HorizontalOptions="Center" />
-
-        <mapsui:MapControl x:Name="mapView"
-		  VerticalOptions="FillAndExpand"
-          HorizontalOptions="Fill"
-		  BackgroundColor="Gray" 
-		  Margin="10" />
-
+        <ListView x:Name="listView"
+           VerticalOptions="FillAndExpand" 
+           HorizontalOptions="FillAndExpand"
+           ItemSelected="OnSelection"/>
     </StackLayout>
-
 </ContentPage>
