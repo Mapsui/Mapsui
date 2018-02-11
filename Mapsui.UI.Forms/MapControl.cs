@@ -12,6 +12,7 @@ using SkiaSharp.Views.Forms;
 using Xamarin.Forms;
 using SkiaSharp;
 using System.Threading;
+using Mapsui.UI.Forms.Utils;
 
 namespace Mapsui.UI.Forms
 {
@@ -48,6 +49,7 @@ namespace Mapsui.UI.Forms
         private Dictionary<long, TouchEvent> _touches = new Dictionary<long, TouchEvent>();
         private Timer _doubleTapTestTimer;
         private int _numOfTaps = 0;
+        private VelocityTracker _velocityTracker = new VelocityTracker();
 
         public event EventHandler ViewportInitialized;
         public event EventHandler<TouchEventArgs> TouchStarted;
@@ -99,6 +101,8 @@ namespace Mapsui.UI.Forms
             {
                 _touches[e.Id] = new TouchEvent(e.Id, location, ticks);
 
+                _velocityTracker.Clear();
+
                 // Do we have a doubleTapTestTimer running?
                 // If yes, stop it and increment _numOfTaps
                 if (_doubleTapTestTimer != null)
@@ -107,10 +111,18 @@ namespace Mapsui.UI.Forms
                     _doubleTapTestTimer = null;
                     _numOfTaps++;
                 }
-                OnTouchStarted(_touches.Select(t => t.Value.Location).ToList());
+
+                e.Handled = OnTouchStarted(_touches.Select(t => t.Value.Location).ToList());
             }
             if (e.ActionType == SKTouchAction.Released)
             {
+                double velocityX;
+                double velocityY;
+
+                (velocityX, velocityY) = _velocityTracker.CalcVelocity(e.Id, ticks);
+
+                System.Diagnostics.Debug.WriteLine($"Velocity X = {velocityX}, Velocity Y = {velocityY}");
+
                 // Do we have a tap event
                 if (_touches[e.Id].Location.Equals(location) && ticks - _touches[e.Id].Tick < shortTap * 10000)
                 {
@@ -138,7 +150,10 @@ namespace Mapsui.UI.Forms
             }
             if (e.ActionType == SKTouchAction.Moved)
             {
-                _touches[e.Id] = new TouchEvent(e.Id, location, DateTime.Now.Ticks);
+                _touches[e.Id] = new TouchEvent(e.Id, location, ticks);
+
+                if (e.InContact)
+                    _velocityTracker.AddEvent(e.Id, location, ticks);
 
                 if (e.InContact)
                     OnTouchMoved(_touches.Select(t => t.Value.Location).ToList());

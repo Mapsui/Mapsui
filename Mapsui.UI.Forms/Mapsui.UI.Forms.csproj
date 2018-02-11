@@ -71,6 +71,7 @@
     <Compile Include="EventArgs\ZoomEventArgs.cs" />
     <Compile Include="EventArgs\TouchEventArgs.cs" />
     <Compile Include="Enums\ZoomDirection.cs" />
+    <Compile Include="Utils\VelocityTracker.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Mapsui.Geometries\Mapsui.Geometries.csproj">
