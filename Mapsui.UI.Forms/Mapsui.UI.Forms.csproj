@@ -64,13 +64,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MapControl.cs" />
-    <Compile Include="PCLTimer.cs" />
+    <Compile Include="Utils\PCLTimer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="HoverEventArgs.cs" />
-    <Compile Include="TapEventArgs.cs" />
-    <Compile Include="ZoomEventArgs.cs" />
-    <Compile Include="TouchEventArgs.cs" />
-    <Compile Include="ZoomDirection.cs" />
+    <Compile Include="EventArgs\HoverEventArgs.cs" />
+    <Compile Include="EventArgs\TapEventArgs.cs" />
+    <Compile Include="EventArgs\ZoomEventArgs.cs" />
+    <Compile Include="EventArgs\TouchEventArgs.cs" />
+    <Compile Include="Enums\ZoomDirection.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Mapsui.Geometries\Mapsui.Geometries.csproj">
