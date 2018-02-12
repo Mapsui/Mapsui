@@ -4,13 +4,13 @@ namespace Mapsui.UI
 {
     public class ZoomEventArgs : EventArgs
     {
-        public Geometries.Point Location { get; }
+        public Geometries.Point ScreenPosition { get; }
         public ZoomDirection Direction { get; }
         public bool Handled { get; set; }
 
-        public ZoomEventArgs(Geometries.Point location, ZoomDirection direction, bool handled)
+        public ZoomEventArgs(Geometries.Point screenPosition, ZoomDirection direction, bool handled)
         {
-            Location = location;
+            ScreenPosition = screenPosition;
             Direction = direction;
             Handled = Handled;
         }

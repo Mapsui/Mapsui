@@ -10,25 +10,64 @@ namespace Mapsui.UI
         /// Events
         /// </summary>
         
+        /// <summary>
+        /// TouchStart is called, when user press a mouse button or touch the display
+        /// </summary>
         public event EventHandler<TouchEventArgs> TouchStart;
+
+        /// <summary>
+        /// TouchEnd is called, when user release a mouse button or doesn't touch display anymore
+        /// </summary>
         public event EventHandler<TouchEventArgs> TouchEnd;
+
+        /// <summary>
+        /// TouchMove is called, when user move mouse over map (independent from mouse button state) or move finger on display
+        /// </summary>
         public event EventHandler<TouchEventArgs> TouchMove;
+
+        /// <summary>
+        /// Hover is called, when user move mouse over map without pressing mouse button
+        /// </summary>
         public event EventHandler<HoverEventArgs> Hover;
+
+        /// <summary>
+        /// Swipe is called, when user release mouse button or lift finger while moving with a certain speed 
+        /// </summary>
         public event EventHandler<SwipeEventArgs> Swipe;
+
+        /// <summary>
+        /// Fling is called, when user release mouse button or lift finger while moving with a certain speed, higher than speed of swipe 
+        /// </summary>
         public event EventHandler<SwipeEventArgs> Fling;
+
+        /// <summary>
+        /// SingleTap is called, when user clicks with a mouse button or tap with a finger on map 
+        /// </summary>
         public event EventHandler<TapEventArgs> SingleTap;
+
+        /// <summary>
+        /// LongTap is called, when user clicks with a mouse button or tap with a finger on map for 500 ms
+        /// </summary>
         public event EventHandler<TapEventArgs> LongTap;
+
+        /// <summary>
+        /// DoubleTap is called, when user clicks with a mouse button or tap with a finger two or more times on map
+        /// </summary>
         public event EventHandler<TapEventArgs> DoubleTap;
+
+        /// <summary>
+        /// Zoom is called, when map should be zoomed
+        /// </summary>
         public event EventHandler<ZoomEventArgs> Zoom;
 
         /// <summary>
         /// Event handlers
         /// </summary>
 
-        private bool HandleZoomOut(Geometries.Point location)
+        private bool HandleZoomOut(Geometries.Point screenPosition)
         {
             var handler = Zoom;
-            var eventArgs = new ZoomEventArgs(location, ZoomDirection.ZoomOut, false);
+            var eventArgs = new ZoomEventArgs(screenPosition, ZoomDirection.ZoomOut, false);
 
             handler?.Invoke(this, eventArgs);
 
@@ -41,10 +80,10 @@ namespace Mapsui.UI
             return true;
         }
 
-        private bool HandleZoomIn(Geometries.Point location)
+        private bool HandleZoomIn(Geometries.Point screenPosition)
         {
             var handler = Zoom;
-            var eventArgs = new ZoomEventArgs(location, ZoomDirection.ZoomIn, false);
+            var eventArgs = new ZoomEventArgs(screenPosition, ZoomDirection.ZoomIn, false);
 
             handler?.Invoke(this, eventArgs);
 
@@ -57,10 +96,10 @@ namespace Mapsui.UI
             return true;
         }
 
-        private bool HandleHover(Geometries.Point location)
+        private bool HandleHover(Geometries.Point screenPosition)
         {
             var handler = Hover;
-            var eventArgs = new HoverEventArgs(location, false);
+            var eventArgs = new HoverEventArgs(screenPosition, false);
 
             handler?.Invoke(this, eventArgs);
 
@@ -213,44 +252,44 @@ namespace Mapsui.UI
             return true;
         }
 
-        private bool HandleDoubleTap(Geometries.Point location, int numOfTaps)
+        private bool HandleDoubleTap(Geometries.Point screenPosition, int numOfTaps)
         {
             var handler = DoubleTap;
-            var eventArgs = new TapEventArgs(location, numOfTaps, false);
+            var eventArgs = new TapEventArgs(screenPosition, numOfTaps, false);
 
             handler?.Invoke(this, eventArgs);
 
             if (eventArgs.Handled)
                 return true;
 
-            var tapWasHandled = Map.InvokeInfo(location, location, _skiaScale, _renderer.SymbolCache, WidgetTouched, numOfTaps);
+            var tapWasHandled = Map.InvokeInfo(screenPosition, screenPosition, _skiaScale, _renderer.SymbolCache, WidgetTouched, numOfTaps);
 
             if (!tapWasHandled)
             {
                 // Double tap as zoom
-                return HandleZoomIn(location);
+                return HandleZoomIn(screenPosition);
             }
 
             return false;
         }
 
-        private bool HandleSingleTap(Geometries.Point location)
+        private bool HandleSingleTap(Geometries.Point screenPosition)
         {
             var handler = SingleTap;
-            var eventArgs = new TapEventArgs(location, 1, false);
+            var eventArgs = new TapEventArgs(screenPosition, 1, false);
 
             handler?.Invoke(this, eventArgs);
 
             if (eventArgs.Handled)
                 return true;
 
-            return Map.InvokeInfo(location, location, _skiaScale, _renderer.SymbolCache, WidgetTouched, 1);
+            return Map.InvokeInfo(screenPosition, screenPosition, _skiaScale, _renderer.SymbolCache, WidgetTouched, 1);
         }
 
-        private bool HandleLongTap(Geometries.Point location)
+        private bool HandleLongTap(Geometries.Point screenPosition)
         {
             var handler = LongTap;
-            var eventArgs = new TapEventArgs(location, 1, false);
+            var eventArgs = new TapEventArgs(screenPosition, 1, false);
 
             handler?.Invoke(this, eventArgs);
 

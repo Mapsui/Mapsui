@@ -24,10 +24,10 @@ namespace Mapsui.UI
             public Geometries.Point Location { get; }
             public long Tick { get; }
 
-            public TouchEvent(long id, Geometries.Point location, long tick)
+            public TouchEvent(long id, Geometries.Point screenPosition, long tick)
             {
                 Id = id;
-                Location = location;
+                Location = screenPosition;
                 Tick = tick;
             }
         }
