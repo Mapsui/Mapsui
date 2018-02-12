@@ -7,14 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 namespace Mapsui.Sample.Forms
 {
-	public partial class MainPage : ContentPage
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class MainPage : ContentPage
 	{
         Dictionary<string, Func<Map>> allSamples;
 
-		public MainPage()
+        public MainPage()
 		{
 			InitializeComponent();
 
