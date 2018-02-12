@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Mapsui.UI;
-using Mapsui;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Mapsui.UI.Forms;
 
 namespace Mapsui.Sample.Forms
 {
@@ -22,33 +17,21 @@ namespace Mapsui.Sample.Forms
         {
             InitializeComponent();
 
-            //mapView.ErrorMessageChanged += MapErrorMessageChanged;
-            //mapView.FeatureInfo += MapControlFeatureInfo;
-            //mapView.TouchMoved += MapControlOnMouseMove;
-
-            mapView.SingleTap += OnSingleTapped;
-
             mapView.AllowPinchRotation = true;
             mapView.UnSnapRotationDegrees = 30;
             mapView.ReSnapRotationDegrees = 5;
 
-            mapView.Map = call();
+            mapView.PinClicked += OnPinClicked;
 
-            mapView.Map.Info += OnInfo;
+            mapView.Map = call();
         }
 
-        private void OnInfo(object sender, InfoEventArgs e)
+        private void OnPinClicked(object sender, PinClickedEventArgs e)
         {
-            if (e.Feature != null)
-                DisplayAlert("Feature tapped", e.Feature.Geometry.AsText(), "Ok");
+            if (e.Pin != null)
+                DisplayAlert($"Pin {e.Pin.Label}", $"Is at position {e.Pin.Position}", "Ok");
 
             e.Handled = true;
-        }
-
-        private void OnSingleTapped(object sender, TapEventArgs e)
-        {
-            if (mapView.Map != null)
-                e.Handled = mapView.Map.InvokeInfo(e.Location, e.Location, mapView.SkiaScale, mapView.SymbolCache, null, 1);
         }
     }
 }
