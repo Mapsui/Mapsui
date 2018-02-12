@@ -4,14 +4,13 @@ namespace Mapsui.UI
 {
     public class TapEventArgs : EventArgs
     {
-        public Geometries.Point Location { get; }
+        public Geometries.Point ScreenPosition { get; }
         public int NumOfTaps { get; }
-        public bool Handled { get; set; }
+        public bool Handled { get; set; } = false;
 
-        public TapEventArgs(Geometries.Point location, int numOfTaps, bool handled)
+        public TapEventArgs(Geometries.Point screenPosition, int numOfTaps)
         {
-            Location = location;
-            Handled = handled;
+            ScreenPosition = screenPosition;
         }
     }
 }

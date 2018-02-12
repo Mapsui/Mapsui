@@ -5,13 +5,12 @@ namespace Mapsui.UI
 {
     public class TouchEventArgs : EventArgs
     {
-        public List<Geometries.Point> TouchPoints { get; }
-        public bool Handled { get; set; }
+        public List<Geometries.Point> ScreenPoints { get; }
+        public bool Handled { get; set; } = false;
 
-        public TouchEventArgs(List<Geometries.Point> touchPoints, bool handled)
+        public TouchEventArgs(List<Geometries.Point> screenPoints)
         {
-            TouchPoints = touchPoints;
-            Handled = Handled;
+            ScreenPoints = screenPoints;
         }
     }
 }

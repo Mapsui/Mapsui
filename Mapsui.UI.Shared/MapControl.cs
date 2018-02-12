@@ -68,7 +68,7 @@ namespace Mapsui.UI
         private bool HandleZoomOut(Geometries.Point screenPosition)
         {
             var handler = Zoom;
-            var eventArgs = new ZoomEventArgs(screenPosition, ZoomDirection.ZoomOut, false);
+            var eventArgs = new ZoomEventArgs(screenPosition, ZoomDirection.ZoomOut);
 
             handler?.Invoke(this, eventArgs);
 
@@ -84,7 +84,7 @@ namespace Mapsui.UI
         private bool HandleZoomIn(Geometries.Point screenPosition)
         {
             var handler = Zoom;
-            var eventArgs = new ZoomEventArgs(screenPosition, ZoomDirection.ZoomIn, false);
+            var eventArgs = new ZoomEventArgs(screenPosition, ZoomDirection.ZoomIn);
 
             handler?.Invoke(this, eventArgs);
 
@@ -100,7 +100,7 @@ namespace Mapsui.UI
         private bool HandleHover(Geometries.Point screenPosition)
         {
             var handler = Hover;
-            var eventArgs = new HoverEventArgs(screenPosition, false);
+            var eventArgs = new HoverEventArgs(screenPosition);
 
             handler?.Invoke(this, eventArgs);
 
@@ -110,7 +110,7 @@ namespace Mapsui.UI
         private bool HandleSwipe(double velocityX, double velocityY)
         {
             var handler = Swipe;
-            var eventArgs = new SwipeEventArgs(velocityX, velocityY, false);
+            var eventArgs = new SwipeEventArgs(velocityX, velocityY);
 
             handler?.Invoke(this, eventArgs);
 
@@ -123,7 +123,7 @@ namespace Mapsui.UI
         private bool HandleFling(double velocityX, double velocityY)
         {
             var handler = Fling;
-            var eventArgs = new SwipeEventArgs(velocityX, velocityY, false);
+            var eventArgs = new SwipeEventArgs(velocityX, velocityY);
 
             handler?.Invoke(this, eventArgs);
 
@@ -136,7 +136,7 @@ namespace Mapsui.UI
         private bool HandleTouchStart(List<Geometries.Point> touchPoints)
         {
             var handler = TouchStart;
-            var eventArgs = new TouchEventArgs(touchPoints, false);
+            var eventArgs = new TouchEventArgs(touchPoints);
 
             handler?.Invoke(this, eventArgs);
 
@@ -161,7 +161,7 @@ namespace Mapsui.UI
         private bool HandleTouchEnd(List<Geometries.Point> touchPoints, Geometries.Point releasedPoint)
         {
             var handler = TouchEnd;
-            var eventArgs = new TouchEventArgs(touchPoints, false);
+            var eventArgs = new TouchEventArgs(touchPoints);
 
             handler?.Invoke(this, eventArgs);
 
@@ -179,7 +179,7 @@ namespace Mapsui.UI
         private bool HandleTouchMove(List<Geometries.Point> touchPoints)
         {
             var handler = TouchMove;
-            var eventArgs = new TouchEventArgs(touchPoints, false);
+            var eventArgs = new TouchEventArgs(touchPoints);
 
             handler?.Invoke(this, eventArgs);
 
@@ -256,7 +256,7 @@ namespace Mapsui.UI
         private bool HandleDoubleTap(Geometries.Point screenPosition, int numOfTaps)
         {
             var handler = DoubleTap;
-            var eventArgs = new TapEventArgs(screenPosition, numOfTaps, false);
+            var eventArgs = new TapEventArgs(screenPosition, numOfTaps);
 
             handler?.Invoke(this, eventArgs);
 
@@ -277,7 +277,7 @@ namespace Mapsui.UI
         private bool HandleSingleTap(Geometries.Point screenPosition)
         {
             var handler = SingleTap;
-            var eventArgs = new TapEventArgs(screenPosition, 1, false);
+            var eventArgs = new TapEventArgs(screenPosition, 1);
 
             handler?.Invoke(this, eventArgs);
 
@@ -290,7 +290,7 @@ namespace Mapsui.UI
         private bool HandleLongTap(Geometries.Point screenPosition)
         {
             var handler = LongTap;
-            var eventArgs = new TapEventArgs(screenPosition, 1, false);
+            var eventArgs = new TapEventArgs(screenPosition, 1);
 
             handler?.Invoke(this, eventArgs);
 

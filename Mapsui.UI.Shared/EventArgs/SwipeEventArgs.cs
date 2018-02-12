@@ -6,13 +6,12 @@ namespace Mapsui.UI
     {
         public double VelocityX { get; } // Velocity in pixel/second
         public double  VelocityY { get; } // Velocity in pixel/second
-        public bool Handled { get; set; }
+        public bool Handled { get; set; } = false;
 
-        public SwipeEventArgs(double velocityX, double velocityY, bool handled)
+        public SwipeEventArgs(double velocityX, double velocityY)
         {
             VelocityX = velocityX;
             VelocityY = velocityY;
-            Handled = Handled;
         }
     }
 }

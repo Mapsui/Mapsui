@@ -6,13 +6,12 @@ namespace Mapsui.UI
     {
         public Geometries.Point ScreenPosition { get; }
         public ZoomDirection Direction { get; }
-        public bool Handled { get; set; }
+        public bool Handled { get; set; } = false;
 
-        public ZoomEventArgs(Geometries.Point screenPosition, ZoomDirection direction, bool handled)
+        public ZoomEventArgs(Geometries.Point screenPosition, ZoomDirection direction)
         {
             ScreenPosition = screenPosition;
             Direction = direction;
-            Handled = Handled;
         }
     }
 }
