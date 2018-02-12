@@ -85,7 +85,7 @@ namespace Mapsui.UI
             EnableTouchEvents = true;
 
             PaintSurface += OnPaintSurface;
-            Touch += OnTouch;
+            Touch += HandleTouch;
         }
 
         private void TryInitializeViewport()
@@ -99,7 +99,7 @@ namespace Mapsui.UI
             }
         }
 
-        private void OnTouch(object sender, SKTouchEventArgs e)
+        private void HandleTouch(object sender, SKTouchEventArgs e)
         {
             // Save time, when the event occures
             long ticks = DateTime.Now.Ticks;
@@ -201,30 +201,6 @@ namespace Mapsui.UI
             ViewportInitialized?.Invoke(this, EventArgs.Empty);
         }
 
-        private static (Geometries.Point centre, double radius, double angle) GetPinchValues(List<Geometries.Point> locations)
-        {
-            if (locations.Count < 2)
-                throw new ArgumentException();
-
-            double centerX = 0;
-            double centerY = 0;
-
-            foreach (var location in locations)
-            {
-                centerX += location.X;
-                centerY += location.Y;
-            }
-
-            centerX = centerX / locations.Count;
-            centerY = centerY / locations.Count;
-
-            var radius = Algorithms.Distance(centerX, centerY, locations[0].X, locations[0].Y);
-
-            var angle = Math.Atan2(locations[1].Y - locations[0].Y, locations[1].X - locations[0].X) * 180.0 / Math.PI;
-
-            return (new Geometries.Point(centerX, centerY), radius, angle);
-        }
-        
         private Geometries.Point GetScreenPosition(SKPoint point)
         {
             return new Geometries.Point(point.X * _skiaScale, point.Y * _skiaScale);
@@ -341,35 +317,6 @@ namespace Mapsui.UI
         private static void WidgetTouched(IWidget widget, Geometries.Point screenPosition)
         {
             widget.HandleWidgetTouched(screenPosition);
-        }
-
-        public void Dispose()
-        {
-            Unsubscribe();
-        }
-
-        public void Unsubscribe()
-        {
-            UnsubscribeFromMapEvents(_map);
-        }
-
-        private void SubscribeToMapEvents(Map map)
-        {
-            map.DataChanged += MapDataChanged;
-            map.PropertyChanged += MapPropertyChanged;
-            map.RefreshGraphics += MapRefreshGraphics;
-        }
-
-        private void UnsubscribeFromMapEvents(Map map)
-        {
-            var temp = map;
-            if (temp != null)
-            {
-                temp.DataChanged -= MapDataChanged;
-                temp.PropertyChanged -= MapPropertyChanged;
-                temp.RefreshGraphics -= MapRefreshGraphics;
-                temp.AbortFetch();
-            }
         }
     }
 }

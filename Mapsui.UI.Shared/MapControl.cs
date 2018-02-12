@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Mapsui.Geometries.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -295,5 +296,85 @@ namespace Mapsui.UI
 
             return eventArgs.Handled;
         }
+
+        /// <summary>
+        /// Public functions
+        /// </summary>
+        
+        public void Dispose()
+        {
+            Unsubscribe();
+        }
+
+        public void Unsubscribe()
+        {
+            UnsubscribeFromMapEvents(_map);
+        }
+
+        /// <summary>
+        /// Private functions
+        /// </summary>
+
+        /// <summary>
+        /// Subscribe to map events
+        /// </summary>
+        /// <param name="map">Map, to which events to subscribe</param>
+        private void SubscribeToMapEvents(Map map)
+        {
+            map.DataChanged += MapDataChanged;
+            map.PropertyChanged += MapPropertyChanged;
+            map.RefreshGraphics += MapRefreshGraphics;
+        }
+
+        /// <summary>
+        /// Unsubcribe from map events
+        /// </summary>
+        /// <param name="map">Map, to which events to unsubscribe</param>
+        private void UnsubscribeFromMapEvents(Map map)
+        {
+            var temp = map;
+            if (temp != null)
+            {
+                temp.DataChanged -= MapDataChanged;
+                temp.PropertyChanged -= MapPropertyChanged;
+                temp.RefreshGraphics -= MapRefreshGraphics;
+                temp.AbortFetch();
+            }
+        }
+
+        /// <summary>
+        /// Calculates center, radius and angle from a list of points
+        /// </summary>
+        /// <param name="screenPositions">List of points, normally touch points on display</param>
+        /// <returns>
+        /// center: Center of all points
+        /// radius: Distance from center to first point of list
+        /// angle: between first and second point of list
+        /// </returns>
+        private static (Geometries.Point centre, double radius, double angle) GetPinchValues(List<Geometries.Point> screenPositions)
+        {
+            if (screenPositions.Count < 2)
+                throw new ArgumentException();
+
+            double centerX = 0;
+            double centerY = 0;
+
+            foreach (var location in screenPositions)
+            {
+                centerX += location.X;
+                centerY += location.Y;
+            }
+
+            centerX = centerX / screenPositions.Count;
+            centerY = centerY / screenPositions.Count;
+
+            var radius = Algorithms.Distance(centerX, centerY, screenPositions[0].X, screenPositions[0].Y);
+
+            var angle = Math.Atan2(screenPositions[1].Y - screenPositions[0].Y, screenPositions[1].X - screenPositions[0].X) * 180.0 / Math.PI;
+
+            return (new Geometries.Point(centerX, centerY), radius, angle);
+        }
+
+
     }
 }
