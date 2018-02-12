@@ -30,8 +30,8 @@ namespace Mapsui.UI.Objects
 
             foreach (T item in Collection)
             {
-                if (box.Contains(item.GetFeature().Geometry.GetBoundingBox()))
-                    list.Add(item.GetFeature());
+                if (item.IsVisible && box.Contains(item.Feature.Geometry.GetBoundingBox()))
+                    list.Add(item.Feature);
             }
 
             return list;
@@ -42,11 +42,11 @@ namespace Mapsui.UI.Objects
             if (Collection == null || Collection.Count == 0)
                 return null;
 
-            BoundingBox extend = new BoundingBox(Collection[0].GetFeature().Geometry.GetBoundingBox());
+            BoundingBox extend = new BoundingBox(Collection[0].Feature.Geometry.GetBoundingBox());
 
             foreach(T item in Collection)
             {
-                extend.Join(item.GetFeature().Geometry.GetBoundingBox());
+                extend.Join(item.Feature.Geometry.GetBoundingBox());
             }
 
             return extend;

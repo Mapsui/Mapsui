@@ -4,6 +4,7 @@ namespace Mapsui.UI.Objects
 {
     public interface IFeatureProvider
     {
-        Feature GetFeature();
+        Feature Feature { get; }
+        bool IsVisible { get; }
     }
 }

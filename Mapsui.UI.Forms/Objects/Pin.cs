@@ -114,6 +114,8 @@ namespace Mapsui.UI.Forms
 
         public object NativeObject { get; internal set; }
 
+        public Feature Feature => (Feature) NativeObject;
+
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj))
@@ -150,11 +152,6 @@ namespace Mapsui.UI.Forms
         bool Equals(Pin other)
         {
             return string.Equals(Label, other.Label) && Equals(Position, other.Position) && Type == other.Type && string.Equals(Address, other.Address);
-        }
-
-        public Feature GetFeature()
-        {
-            return (Feature)NativeObject;
         }
     }
 }
