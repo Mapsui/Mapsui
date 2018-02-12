@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 /// Found at https://gist.github.com/YARG/681f426b78af6d77baab
 /// </summary>
 
-namespace Mapsui.UI.Forms
+namespace Mapsui.UI
 {
     internal delegate void TimerCallback(object state);
 

@@ -1,14 +1,13 @@
 ﻿using System;
 
-namespace Mapsui.UI.Forms
+namespace Mapsui.UI
 {
-    public class TapEventArgs : EventArgs
+    public class HoverEventArgs : EventArgs
     {
         public Geometries.Point Location { get; }
-        public int NumOfTaps { get; }
         public bool Handled { get; set; }
 
-        public TapEventArgs(Geometries.Point location, int numOfTaps, bool handled)
+        public HoverEventArgs(Geometries.Point location, bool handled)
         {
             Location = location;
             Handled = handled;

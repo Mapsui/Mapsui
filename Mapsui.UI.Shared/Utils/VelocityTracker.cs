@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Mapsui.UI.Forms.Utils
+namespace Mapsui.UI.Utils
 {
     public class VelocityTracker
     {

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-			 xmlns:mapsui="clr-namespace:Mapsui.UI.Forms;assembly=Mapsui.UI.Forms"
+			 xmlns:mapsui="clr-namespace:Mapsui.UI;assembly=Mapsui.UI"
              x:Class="Mapsui.Sample.Forms.MapPage">
     <ContentPage.Content>
         <StackLayout>

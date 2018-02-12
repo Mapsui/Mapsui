@@ -1,4 +1,4 @@
-﻿namespace Mapsui.UI.Forms
+﻿namespace Mapsui.UI
 {
     public enum ZoomDirection
     {

@@ -91,11 +91,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Sample.Forms.UWP", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.UI.Forms", "Mapsui.UI.Forms\Mapsui.UI.Forms.csproj", "{CD1DC52E-F73F-411A-9682-66827FC8010C}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Mapsui.UI.Shared", "Mapsui.UI.Shared\Mapsui.UI.Shared.shproj", "{239F2B0D-13CB-4BCF-83BF-F52D696A47B7}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Mapsui.UI.Shared\Mapsui.UI.Shared.projitems*{239f2b0d-13cb-4bcf-83bf-f52d696a47b7}*SharedItemsImports = 13
 		Samples\Mapsui.Sample.Forms\Mapsui.Sample.Forms\Mapsui.Sample.Forms.projitems*{28848162-20b7-46f1-8364-8b41b0393cd4}*SharedItemsImports = 4
 		Samples\Mapsui.Sample.Forms\Mapsui.Sample.Forms\Mapsui.Sample.Forms.projitems*{71353a7e-bfa9-4680-a345-ea19bf69f60e}*SharedItemsImports = 4
 		Samples\Mapsui.Sample.Forms\Mapsui.Sample.Forms\Mapsui.Sample.Forms.projitems*{73fcb5f4-abaf-4279-acc2-4c9c8d9f5c40}*SharedItemsImports = 13
+		Mapsui.UI.Shared\Mapsui.UI.Shared.projitems*{cd1dc52e-f73f-411a-9682-66827fc8010c}*SharedItemsImports = 4
 		Samples\Mapsui.Sample.Forms\Mapsui.Sample.Forms\Mapsui.Sample.Forms.projitems*{de3b0cbf-cc20-4457-884b-2e5150b45a01}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

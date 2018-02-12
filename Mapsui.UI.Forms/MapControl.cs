@@ -11,12 +11,12 @@ using SkiaSharp.Views.Forms;
 using Xamarin.Forms;
 using SkiaSharp;
 using System.Threading;
-using Mapsui.UI.Forms.Utils;
+using Mapsui.UI.Utils;
 using Mapsui.Rendering;
 
-namespace Mapsui.UI.Forms
+namespace Mapsui.UI
 {
-    public class MapControl : SKCanvasView, IMapControl, IDisposable
+    public partial class MapControl : SKCanvasView, IMapControl, IDisposable
     {
         class TouchEvent
         {
@@ -34,7 +34,7 @@ namespace Mapsui.UI.Forms
 
         private const int None = 0;
         private const int Dragging = 1;
-        private const int Zoom = 2;
+        private const int Zooming = 2;
         private const int shortTap = 125;
         private const int delayTap = 180;
         private const int longTap = 500;
@@ -53,16 +53,6 @@ namespace Mapsui.UI.Forms
         private VelocityTracker _velocityTracker = new VelocityTracker();
 
         public event EventHandler ViewportInitialized;
-        public event EventHandler<TouchEventArgs> TouchStarted;
-        public event EventHandler<TouchEventArgs> TouchEnded;
-        public event EventHandler<TouchEventArgs> TouchMoved;
-        public event EventHandler<HoverEventArgs> Hovered;
-        public event EventHandler<SwipeEventArgs> Swiped;
-        public event EventHandler<SwipeEventArgs> Flinged;
-        public event EventHandler<TapEventArgs> SingleTapped;
-        public event EventHandler<TapEventArgs> LongTapped;
-        public event EventHandler<TapEventArgs> DoubleTapped;
-        public event EventHandler<ZoomEventArgs> Zoomed;
 
         public MapControl()
         {
@@ -131,7 +121,7 @@ namespace Mapsui.UI.Forms
                     _numOfTaps++;
                 }
 
-                e.Handled = OnTouchStarted(_touches.Select(t => t.Value.Location).ToList());
+                e.Handled = HandleTouchStart(_touches.Select(t => t.Value.Location).ToList());
             }
             if (e.ActionType == SKTouchAction.Released)
             {
@@ -145,7 +135,7 @@ namespace Mapsui.UI.Forms
                 {
                     System.Diagnostics.Debug.WriteLine($"Velocity X = {velocityX}, Velocity Y = {velocityY}");
 
-                    e.Handled = OnFlinged(velocityX, velocityY);
+                    e.Handled = HandleFling(velocityX, velocityY);
                 }
 
                 // Do we have a tap event
@@ -157,11 +147,11 @@ namespace Mapsui.UI.Forms
                         if (_numOfTaps > 1)
                         {
                             if (!e.Handled)
-                                e.Handled = OnDoubleTapped(location, _numOfTaps);
+                                e.Handled = HandleDoubleTap(location, _numOfTaps);
                         }
                         else
                             if (!e.Handled)
-                                e.Handled = OnSingleTapped((Geometries.Point)l);
+                                e.Handled = HandleSingleTap((Geometries.Point)l);
                         _numOfTaps = 1;
                         _doubleTapTestTimer = null;
                     }, location, delayTap, Timeout.Infinite);
@@ -169,13 +159,13 @@ namespace Mapsui.UI.Forms
                 else if (_touches[e.Id].Location.Equals(location) && ticks - _touches[e.Id].Tick < longTap * 10000)
                 {
                     if (!e.Handled)
-                        e.Handled = OnLongTapped(location);
+                        e.Handled = HandleLongTap(location);
                 }
                 var releasedTouch = _touches[e.Id];
                 _touches.Remove(e.Id);
 
                 if (!e.Handled)
-                    e.Handled = OnTouchEnded(_touches.Select(t => t.Value.Location).ToList(), releasedTouch.Location);
+                    e.Handled = HandleTouchEnd(_touches.Select(t => t.Value.Location).ToList(), releasedTouch.Location);
             }
             if (e.ActionType == SKTouchAction.Moved)
             {
@@ -185,242 +175,10 @@ namespace Mapsui.UI.Forms
                     _velocityTracker.AddEvent(e.Id, location, ticks);
 
                 if (e.InContact && !e.Handled)
-                    e.Handled = OnTouchMoved(_touches.Select(t => t.Value.Location).ToList());
+                    e.Handled = HandleTouchMove(_touches.Select(t => t.Value.Location).ToList());
                 else
-                    e.Handled = OnHover(_touches.Select(t => t.Value.Location).FirstOrDefault());
+                    e.Handled = HandleHover(_touches.Select(t => t.Value.Location).FirstOrDefault());
             }
-        }
-
-        private bool OnZoomedOut(Geometries.Point location)
-        {
-            var handler = Zoomed;
-            var eventArgs = new ZoomEventArgs(location, ZoomDirection.ZoomOut, false);
-
-            handler?.Invoke(this, eventArgs);
-
-            if (eventArgs.Handled)
-                return true;
-
-            // TODO
-            // Perform standard behavior
-
-            return true;
-        }
-
-        private bool OnZoomedIn(Geometries.Point location)
-        {
-            var handler = Zoomed;
-            var eventArgs = new ZoomEventArgs(location, ZoomDirection.ZoomIn, false);
-
-            handler?.Invoke(this, eventArgs);
-
-            if (eventArgs.Handled)
-                return true;
-
-            // TODO
-            // Perform standard behavior
-
-            return true;
-        }
-
-        private bool OnHover(Geometries.Point location)
-        {
-            var handler = Hovered;
-            var eventArgs = new HoverEventArgs(location, false);
-
-            handler?.Invoke(this, eventArgs);
-
-            return eventArgs.Handled;
-        }
-
-        private bool OnSwiped(double velocityX, double velocityY)
-        {
-            var handler = Swiped;
-            var eventArgs = new SwipeEventArgs(velocityX, velocityY, false);
-
-            handler?.Invoke(this, eventArgs);
-
-            // TODO
-            // Perform standard behavior
-
-            return eventArgs.Handled;
-        }
-
-        private bool OnFlinged(double velocityX, double velocityY)
-        {
-            var handler = Flinged;
-            var eventArgs = new SwipeEventArgs(velocityX, velocityY, false);
-
-            handler?.Invoke(this, eventArgs);
-
-            // TODO
-            // Perform standard behavior
-
-            return eventArgs.Handled;
-        }
-
-        private bool OnTouchStarted(List<Geometries.Point> touchPoints)
-        {
-            var handler = TouchStarted;
-            var eventArgs = new TouchEventArgs(touchPoints, false);
-
-            handler?.Invoke(this, eventArgs);
-
-            if (eventArgs.Handled)
-                return true;
-
-            if (touchPoints.Count >= 2)
-            {
-                (_previousCenter, _previousRadius, _previousAngle) = GetPinchValues(touchPoints);
-                _mode = Zoom;
-                _innerRotation = _map.Viewport.Rotation;
-            }
-            else
-            {
-                _mode = Dragging;
-                _previousCenter = touchPoints.First();
-            }
-
-            return true;
-        }
-
-        private bool OnTouchEnded(List<Geometries.Point> touchPoints, Geometries.Point releasedPoint)
-        {
-            var handler = TouchEnded;
-            var eventArgs = new TouchEventArgs(touchPoints, false);
-
-            handler?.Invoke(this, eventArgs);
-
-            // Last touch released
-            if (touchPoints.Count == 0)
-            {
-                InvalidateSurface();
-                _mode = None;
-                _map.ViewChanged(true);
-            }
-
-            return eventArgs.Handled;
-        }
-
-        private bool OnTouchMoved(List<Geometries.Point> touchPoints)
-        {
-            var handler = TouchMoved;
-            var eventArgs = new TouchEventArgs(touchPoints, false);
-
-            handler?.Invoke(this, eventArgs);
-
-            if (eventArgs.Handled)
-                return true;
-
-            switch (_mode)
-            {
-                case Dragging:
-                    {
-                        if (touchPoints.Count != 1)
-                            return false;
-
-                        var touchPosition = touchPoints.First();
-
-                        if (_previousCenter != null && !_previousCenter.IsEmpty())
-                        {
-                            _map.Viewport.Transform(touchPosition.X, touchPosition.Y, _previousCenter.X, _previousCenter.Y);
-
-                            ViewportLimiter.LimitExtent(_map.Viewport, _map.PanMode, _map.PanLimits, _map.Envelope);
-
-                            InvalidateSurface();
-                        }
-                        _previousCenter = touchPosition;
-                    }
-                    break;
-                case Zoom:
-                    {
-                        if (touchPoints.Count < 2)
-                            return false;
-
-                        var (prevCenter, prevRadius, prevAngle) = (_previousCenter, _previousRadius, _previousAngle);
-                        var (center, radius, angle) = GetPinchValues(touchPoints);
-
-                        double rotationDelta = 0;
-
-                        if (AllowPinchRotation)
-                        {
-                            _innerRotation += angle - prevAngle;
-                            _innerRotation %= 360;
-
-                            if (_innerRotation > 180)
-                                _innerRotation -= 360;
-                            else if (_innerRotation < -180)
-                                _innerRotation += 360;
-
-                            if (_map.Viewport.Rotation == 0 && Math.Abs(_innerRotation) >= Math.Abs(UnSnapRotationDegrees))
-                                rotationDelta = _innerRotation;
-                            else if (_map.Viewport.Rotation != 0)
-                            {
-                                if (Math.Abs(_innerRotation) <= Math.Abs(ReSnapRotationDegrees))
-                                    rotationDelta = -_map.Viewport.Rotation;
-                                else
-                                    rotationDelta = _innerRotation - _map.Viewport.Rotation;
-                            }
-                        }
-
-                        _map.Viewport.Transform(center.X, center.Y, prevCenter.X, prevCenter.Y, radius / prevRadius, rotationDelta);
-
-                        (_previousCenter, _previousRadius, _previousAngle) = (center, radius, angle);
-
-                        ViewportLimiter.Limit(_map.Viewport,
-                            _map.ZoomMode, _map.ZoomLimits, _map.Resolutions,
-                            _map.PanMode, _map.PanLimits, _map.Envelope);
-
-                        InvalidateSurface();
-                    }
-                    break;
-            }
-
-            return true;
-        }
-
-        private bool OnDoubleTapped(Geometries.Point location, int numOfTaps)
-        {
-            var handler = DoubleTapped;
-            var eventArgs = new TapEventArgs(location, numOfTaps, false);
-
-            handler?.Invoke(this, eventArgs);
-
-            if (eventArgs.Handled)
-                return true;
-
-            var tapWasHandled = Map.InvokeInfo(location, location, _skiaScale, _renderer.SymbolCache, WidgetTouched, numOfTaps);
-
-            if (!tapWasHandled)
-            {
-                // Double tap as zoom
-                return OnZoomedIn(location);
-            }
-
-            return false;
-        }
-
-        private bool OnSingleTapped(Geometries.Point location)
-        {
-            var handler = SingleTapped;
-            var eventArgs = new TapEventArgs(location, 1, false);
-
-            handler?.Invoke(this, eventArgs);
-
-            if (eventArgs.Handled)
-                return true;
-
-            return Map.InvokeInfo(location, location, _skiaScale, _renderer.SymbolCache, WidgetTouched, 1);
-        }
-
-        private bool OnLongTapped(Geometries.Point location)
-        {
-            var handler = LongTapped;
-            var eventArgs = new TapEventArgs(location, 1, false);
-
-            handler?.Invoke(this, eventArgs);
-
-            return eventArgs.Handled;
         }
 
         void OnPaintSurface(object sender, SKPaintSurfaceEventArgs skPaintSurfaceEventArgs)

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Mapsui.UI;
-using Mapsui.UI.Forms;
+using Mapsui;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -26,7 +26,7 @@ namespace Mapsui.Sample.Forms
             //mapView.FeatureInfo += MapControlFeatureInfo;
             //mapView.TouchMoved += MapControlOnMouseMove;
 
-            mapView.SingleTapped += OnSingleTapped;
+            mapView.SingleTap += OnSingleTapped;
 
             mapView.AllowPinchRotation = true;
             mapView.UnSnapRotationDegrees = 30;

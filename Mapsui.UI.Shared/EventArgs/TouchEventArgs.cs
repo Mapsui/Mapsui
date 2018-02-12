@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Mapsui.UI.Forms
+namespace Mapsui.UI
 {
     public class TouchEventArgs : EventArgs
     {

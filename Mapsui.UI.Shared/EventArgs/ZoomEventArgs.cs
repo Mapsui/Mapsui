@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Mapsui.UI.Forms
+namespace Mapsui.UI
 {
     public class ZoomEventArgs : EventArgs
     {
