@@ -2,9 +2,13 @@
 {
     public enum PinType
     {
-        Generic,
-        Place,
-        SavedPin,
-        SearchResult
+        Pin,
+        PinRed,
+        PinDarkBlue,
+        PinBlue,
+        PinLightBlue,
+        PinPink,
+        PinGreen,
+        Icon
     }
 }

@@ -203,6 +203,7 @@ namespace Mapsui.UI
 
                             InvalidateSurface();
                         }
+
                         _previousCenter = touchPosition;
                     }
                     break;
@@ -374,7 +375,5 @@ namespace Mapsui.UI
 
             return (new Geometries.Point(centerX, centerY), radius, angle);
         }
-
-
     }
 }

@@ -3,6 +3,7 @@ using Mapsui.UI.Forms;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -12,6 +13,8 @@ namespace Mapsui.Sample.Forms
     public partial class MainPageLarge : ContentPage
     {
         Dictionary<string, Func<Map>> allSamples;
+        int markerNum = 1;
+        Random rnd = new Random();
 
         public MainPageLarge()
         {
@@ -26,6 +29,14 @@ namespace Mapsui.Sample.Forms
             mapView.ReSnapRotationDegrees = 5;
 
             mapView.PinClicked += OnPinClicked;
+            mapView.MapClicked += OnMapClicked;
+        }
+
+        private void OnMapClicked(object sender, MapClickedEventArgs e)
+        {
+            //var assembly = typeof(MainPageLarge).GetTypeInfo().Assembly;
+            //var image = assembly.GetManifestResourceStream("").ToBytes();
+            mapView.Pins.Add(new Pin { Label = $"Marker {markerNum++}", Position = e.Point, Type = PinType.Pin, Color = new Color(rnd.Next(0, 255) / 255.0, rnd.Next(0, 255) / 255.0, rnd.Next(0, 255) / 255.0) });
         }
 
         void OnSelection(object sender, SelectedItemChangedEventArgs e)
@@ -39,14 +50,19 @@ namespace Mapsui.Sample.Forms
             var call = allSamples[sample];
 
             mapView.Map = call();
-            mapView.Pins.Add(new Pin { Label = "Test1", Position = new Position(48, 9) });
-            mapView.Pins.Add(new Pin { Label = "Test2", Position = new Position(50, 0) });
         }
 
         private void OnPinClicked(object sender, PinClickedEventArgs e)
         {
             if (e.Pin != null)
-                DisplayAlert($"Pin {e.Pin.Label}", $"Is at position {e.Pin.Position}", "Ok");
+            {
+                if (e.NumOfTaps == 2)
+                {
+                    // Hide Pin when double click
+                    //DisplayAlert($"Pin {e.Pin.Label}", $"Is at position {e.Pin.Position}", "Ok");
+                    e.Pin.IsVisible = false;
+                }
+            }
 
             e.Handled = true;
         }

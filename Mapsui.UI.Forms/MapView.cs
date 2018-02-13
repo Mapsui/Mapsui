@@ -4,6 +4,7 @@ using Mapsui.Styles;
 using Mapsui.UI.Forms.Extensions;
 using Mapsui.UI.Objects;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -14,7 +15,7 @@ using Xamarin.Forms;
 
 namespace Mapsui.UI.Forms
 {
-    public class MapView : ContentView, INotifyPropertyChanged
+    public class MapView : ContentView, INotifyPropertyChanged, IEnumerable<Pin>
     {
         private const string PinLayerName = "Pins";
 
@@ -30,8 +31,10 @@ namespace Mapsui.UI.Forms
             _mapPinLayer = new Layer(PinLayerName);
 
             // Add some events to _mapControl
-            _mapControl.SingleTap += HandlerSingleTap;
+            _mapControl.SingleTap += HandlerTap;
+            _mapControl.DoubleTap += HandlerTap;
             _mapControl.LongTap += HandlerLongTap;
+            _mapControl.Hover += HandlerHover;
 
             AbsoluteLayout.SetLayoutBounds(_mapControl, new Rectangle(0, 0, 1, 1));
             AbsoluteLayout.SetLayoutFlags(_mapControl, AbsoluteLayoutFlags.All);
@@ -52,7 +55,7 @@ namespace Mapsui.UI.Forms
             _pins.CollectionChanged += HandlerPinsOnCollectionChanged;
 
             _mapPinLayer.DataSource = new ObservableCollectionProvider<Pin>(_pins);
-            _mapPinLayer.Style = new SymbolStyle { SymbolScale = 0.8, Fill = new Brush(new Styles.Color(213, 234, 194)), Outline = { Color = Styles.Color.Gray, Width = 1 } };
+            _mapPinLayer.Style = null;  // We don't want a global style for this layer
         }
 
         /// <summary>
@@ -140,6 +143,16 @@ namespace Mapsui.UI.Forms
             set { SetValue(ReSnapRotationDegreesProperty, value); }
         }
 
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
+        public IEnumerator<Pin> GetEnumerator()
+        {
+            return _pins.GetEnumerator();
+        }
+
         protected override void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
             base.OnPropertyChanged(propertyName);
@@ -154,6 +167,10 @@ namespace Mapsui.UI.Forms
                 _mapControl.ReSnapRotationDegrees = ReSnapRotationDegrees;
         }
 
+        private void HandlerHover(object sender, HoverEventArgs e)
+        {
+        }
+
         private void HandlerPinsOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.NewItems != null && e.NewItems.Cast<Pin>().Any(pin => pin.Label == null))
@@ -166,10 +183,12 @@ namespace Mapsui.UI.Forms
                     // Remove old features from map
                     var pin = item as Pin;
 
-                    if (pin.NativeObject != null)
-                    {
-                        // Do nothing but a refresh of the map
-                    }
+                    pin.PropertyChanged -= HandlerPinPropertyChanged;
+
+                    if (SelectedPin.Equals(pin))
+                        SelectedPin = null;
+
+                    pin.Feature = null;
                 }
             }
 
@@ -178,13 +197,7 @@ namespace Mapsui.UI.Forms
                 // Add new features to layer
                 var pin = item as Pin;
 
-                var feature = new Feature
-                {
-                    Geometry = pin.Position.ToMapsui(),
-                    ["Label"] = pin.Label
-                };
-
-                pin.NativeObject = feature;
+                pin.PropertyChanged += HandlerPinPropertyChanged;
             }
         }
 
@@ -192,10 +205,10 @@ namespace Mapsui.UI.Forms
         {
             // Click on pin?
             Pin clickedPin = null;
-
+            
             foreach(var pin in _pins)
             {
-                if (pin.NativeObject.Equals(e.Feature))
+                if (pin.IsVisible && pin.Feature.Equals(e.Feature))
                 {
                     clickedPin = pin;
                     break;
@@ -204,7 +217,9 @@ namespace Mapsui.UI.Forms
 
             if (clickedPin != null)
             {
-                var args = new PinClickedEventArgs(clickedPin, Map.Viewport.ScreenToWorld(e.ScreenPosition).ToForms());
+                SelectedPin = clickedPin;
+
+                var args = new PinClickedEventArgs(clickedPin, Map.Viewport.ScreenToWorld(e.ScreenPosition).ToForms(), e.NumTaps);
                 var handler = PinClicked;
 
                 handler?.Invoke(this, args);
@@ -231,9 +246,18 @@ namespace Mapsui.UI.Forms
             }
         }
 
-        private void HandlerSingleTap(object sender, TapEventArgs e)
+        private void HandlerTap(object sender, TapEventArgs e)
         {
-            var args = new MapClickedEventArgs(Map.Viewport.ScreenToWorld(e.ScreenPosition).ToForms());
+            // Check, if we hit a widget or feature
+            // Is there a widget at this position
+            // Is there a feature at this position
+            if (Map != null)
+                e.Handled = Map.InvokeInfo(e.ScreenPosition, e.ScreenPosition, _mapControl.SkiaScale, _mapControl.SymbolCache, null, 1);
+
+            if (e.Handled)
+                return;
+
+            var args = new MapClickedEventArgs(Map.Viewport.ScreenToWorld(e.ScreenPosition).ToForms(), e.NumOfTaps);
             var handler = MapClicked;
 
             handler?.Invoke(this, args);
@@ -246,11 +270,17 @@ namespace Mapsui.UI.Forms
 
             // Event isn't handled up to now.
             // Than look, what we could do.
+        }
 
-            // Is there a widget at this position
-            // Is there a feature at this position
-            if (Map != null)
-                e.Handled = Map.InvokeInfo(e.ScreenPosition, e.ScreenPosition, _mapControl.SkiaScale, _mapControl.SymbolCache, null, 1);
+        private void HandlerPinPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            var pin = sender as Pin;
+
+            if (e.PropertyName.Equals(nameof(Pin.IsVisible)))
+            {
+                //((Feature)pin.NativeObject)
+                _mapControl.Refresh();
+            }
         }
     }
 }

@@ -7,12 +7,14 @@ namespace Mapsui.UI.Forms
     {
         public Pin Pin { get; }
         public Position Point { get; }
+        public int NumOfTaps { get; }
         public bool Handled { get; set; } = false;
 
-        internal PinClickedEventArgs(Pin pin, Position point)
+        internal PinClickedEventArgs(Pin pin, Position point, int numOfTaps)
         {
             Pin = pin;
             Point = point;
+            NumOfTaps = numOfTaps;
         }
     }
 }

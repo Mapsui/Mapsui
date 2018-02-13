@@ -26,7 +26,7 @@ namespace Mapsui.Styles
 
         public void Unregister(int id)
         {
-            _register.Keys.Remove(id);
+            _register.Remove(id);
         }
 
         public Stream Get(int id)

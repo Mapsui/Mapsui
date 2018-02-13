@@ -1,12 +1,7 @@
 ﻿using Mapsui.Geometries;
 using Mapsui.Providers;
-using Mapsui.UI.Forms;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Mapsui.UI.Objects
 {
@@ -23,10 +18,10 @@ namespace Mapsui.UI.Objects
 
         public IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
         {
-            if (Collection == null || Collection.Count == 0)
-                return null;
-
             var list = new List<IFeature>();
+
+            if (Collection == null || Collection.Count == 0)
+                return list;
 
             foreach (T item in Collection)
             {
@@ -42,14 +37,20 @@ namespace Mapsui.UI.Objects
             if (Collection == null || Collection.Count == 0)
                 return null;
 
-            BoundingBox extend = new BoundingBox(Collection[0].Feature.Geometry.GetBoundingBox());
+            BoundingBox extents = null;
 
             foreach(T item in Collection)
             {
-                extend.Join(item.Feature.Geometry.GetBoundingBox());
+                if (item.Feature != null)
+                {
+                    if (extents == null)
+                        extents = new BoundingBox(item.Feature.Geometry.GetBoundingBox());
+                    else
+                        extents = extents.Join(item.Feature.Geometry.GetBoundingBox());
+                }
             }
 
-            return extend;
+            return extents;
         }
     }
 }

@@ -107,7 +107,7 @@ namespace Mapsui.UI
             long ticks = DateTime.Now.Ticks;
 
             var location = GetScreenPosition(e.Location);
-
+            System.Diagnostics.Debug.WriteLine($"Screen {location}");
             if (e.ActionType == SKTouchAction.Pressed)
             {
                 _firstTouch = location;
@@ -207,7 +207,7 @@ namespace Mapsui.UI
 
         private Geometries.Point GetScreenPosition(SKPoint point)
         {
-            return new Geometries.Point(point.X * _skiaScale, point.Y * _skiaScale);
+            return new Geometries.Point(point.X / _skiaScale, point.Y / _skiaScale);
         }
 
         public void Refresh()
