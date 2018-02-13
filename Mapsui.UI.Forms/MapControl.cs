@@ -36,6 +36,7 @@ namespace Mapsui.UI
         private const int Dragging = 1;
         private const int Zooming = 2;
         private const int shortTap = 125;
+        private const int shortClick = 250;
         private const int delayTap = 180;
         private const int longTap = 500;
 
@@ -48,6 +49,7 @@ namespace Mapsui.UI
         private double _previousAngle;
         private double _previousRadius = 1f;
         private Dictionary<long, TouchEvent> _touches = new Dictionary<long, TouchEvent>();
+        private Geometries.Point _firstTouch;
         private Timer _doubleTapTestTimer;
         private int _numOfTaps = 0;
         private VelocityTracker _velocityTracker = new VelocityTracker();
@@ -108,6 +110,8 @@ namespace Mapsui.UI
 
             if (e.ActionType == SKTouchAction.Pressed)
             {
+                _firstTouch = location;
+
                 _touches[e.Id] = new TouchEvent(e.Id, location, ticks);
 
                 _velocityTracker.Clear();
@@ -139,7 +143,7 @@ namespace Mapsui.UI
                 }
 
                 // Do we have a tap event
-                if (_touches[e.Id].Location.Equals(location) && ticks - _touches[e.Id].Tick < shortTap * 10000)
+                if (_touches[e.Id].Location.Equals(_firstTouch) && ticks - _touches[e.Id].Tick < (e.DeviceType == SKTouchDeviceType.Mouse ? shortClick : shortTap) * 10000)
                 {
                     // Start a timer with timeout delayTap ms. If than isn't arrived another tap, than it is a single
                     _doubleTapTestTimer = new Timer((l) =>
@@ -156,7 +160,7 @@ namespace Mapsui.UI
                         _doubleTapTestTimer = null;
                     }, location, delayTap, Timeout.Infinite);
                 }
-                else if (_touches[e.Id].Location.Equals(location) && ticks - _touches[e.Id].Tick < longTap * 10000)
+                else if (_touches[e.Id].Location.Equals(_firstTouch) && ticks - _touches[e.Id].Tick < longTap * 10000)
                 {
                     if (!e.Handled)
                         e.Handled = HandleLongTap(location);
