@@ -1,6 +1,8 @@
 ﻿using Mapsui.UI.Forms;
+using Mapsui.UI.Objects;
 using System;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using Xamarin.Forms;
 
@@ -11,7 +13,30 @@ namespace Mapsui.Samples.Forms
         static int markerNum = 1;
         static Random rnd = new Random();
 
-        public static bool HandlerMapClicked(MapView mapView, MapClickedEventArgs e)
+        public static void DrawPolylines(MapView mapView, MapClickedEventArgs e)
+        {
+            IFeatureProvider f;
+
+            lock (mapView.Features)
+            {
+                if (mapView.Features.Count == 0)
+                {
+                    f = new Polyline { StrokeWidth = 4, StrokeColor = Color.Red };
+                    mapView.Features.Add(f);
+                }
+                else
+                {
+                    f = mapView.Features.First();
+                }
+
+                if (f is Polyline)
+                {
+                    ((Polyline)f).Positions.Add(e.Point);
+                }
+            }
+        }
+
+        public static bool SetPins(MapView mapView, MapClickedEventArgs e)
         {
             var assembly = typeof(MainPageLarge).GetTypeInfo().Assembly;
             foreach (var str in assembly.GetManifestResourceNames())

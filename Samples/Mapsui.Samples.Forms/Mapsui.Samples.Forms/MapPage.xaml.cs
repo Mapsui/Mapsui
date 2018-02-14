@@ -32,7 +32,8 @@ namespace Mapsui.Samples.Forms
 
         private void OnMapClicked(object sender, MapClickedEventArgs e)
         {
-            Samples.HandlerMapClicked(mapView, e);
+            Samples.SetPins(mapView, e);
+            //Samples.DrawPolylines(mapView, e);
         }
 
         private void OnPinClicked(object sender, PinClickedEventArgs e)

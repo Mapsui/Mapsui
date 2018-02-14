@@ -70,6 +70,7 @@
     <Compile Include="EventArgs\MapClickedEventArgs.cs" />
     <Compile Include="EventArgs\MapLongClickedEventArgs.cs" />
     <Compile Include="EventArgs\SelectedPinChangedEventArgs.cs" />
+    <Compile Include="Extensions\ColorExtensions.cs" />
     <Compile Include="Extensions\PositionExtensions.cs" />
     <Compile Include="MapControl.cs" />
     <Compile Include="MapView.cs" />
@@ -79,6 +80,7 @@
     <Compile Include="Objects\ObservableCollectionProvider.cs" />
     <Compile Include="Objects\Pin.cs" />
     <Compile Include="Objects\PinType.cs" />
+    <Compile Include="Objects\Polyline.cs" />
     <Compile Include="Objects\Position.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

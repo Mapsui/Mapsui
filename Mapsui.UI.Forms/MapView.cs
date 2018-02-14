@@ -1,4 +1,5 @@
-﻿using Mapsui.Layers;
+﻿using Mapsui.Geometries;
+using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Styles;
 using Mapsui.UI.Forms.Extensions;
@@ -18,17 +19,21 @@ namespace Mapsui.UI.Forms
     public class MapView : ContentView, INotifyPropertyChanged, IEnumerable<Pin>
     {
         private const string PinLayerName = "Pins";
+        private const string FeaturesLayerName = "Features";
 
         private MapControl _mapControl;
         private Layer _mapPinLayer;
+        private Layer _mapFeaturesLayer;
         private BoxView _mapButtons;
 
         readonly ObservableCollection<Pin> _pins = new ObservableCollection<Pin>();
+        readonly ObservableCollection<IFeatureProvider> _features = new ObservableCollection<IFeatureProvider>();
 
         public MapView()
         {
             _mapControl = new MapControl();
             _mapPinLayer = new Layer(PinLayerName);
+            _mapFeaturesLayer = new Layer(FeaturesLayerName);
 
             // Add some events to _mapControl
             _mapControl.SingleTap += HandlerTap;
@@ -53,9 +58,13 @@ namespace Mapsui.UI.Forms
             };
 
             _pins.CollectionChanged += HandlerPinsOnCollectionChanged;
+            _features.CollectionChanged += HandlerFeaturesOnCollectionChanged;
 
             _mapPinLayer.DataSource = new ObservableCollectionProvider<Pin>(_pins);
             _mapPinLayer.Style = null;  // We don't want a global style for this layer
+
+            _mapFeaturesLayer.DataSource = new ObservableCollectionProvider<IFeatureProvider>(_features);
+            _mapFeaturesLayer.Style = null;  // We don't want a global style for this layer
         }
 
         /// <summary>
@@ -72,11 +81,8 @@ namespace Mapsui.UI.Forms
         /// </summary>
 
         public static readonly BindableProperty SelectedPinProperty = BindableProperty.Create(nameof(SelectedPin), typeof(Pin), typeof(Map), default(Pin), defaultBindingMode: BindingMode.TwoWay);
-
         public static readonly BindableProperty AllowPinchRotationProperty = BindableProperty.Create(nameof(AllowPinchRotationProperty), typeof(bool), typeof(MapView), default(bool));
-
         public static readonly BindableProperty UnSnapRotationDegreesProperty = BindableProperty.Create(nameof(UnSnapRotationDegreesProperty), typeof(double), typeof(MapView), default(double));
-
         public static readonly BindableProperty ReSnapRotationDegreesProperty = BindableProperty.Create(nameof(ReSnapRotationDegreesProperty), typeof(double), typeof(MapView), default(double));
         
         ///<summary>
@@ -99,6 +105,7 @@ namespace Mapsui.UI.Forms
                     _mapControl.Map.Info -= HandlerInfo;
                     _mapControl.Map.InfoLayers.Remove(_mapPinLayer);
                     _mapControl.Map.Layers.Remove(_mapPinLayer);
+                    _mapControl.Map.Layers.Remove(_mapFeaturesLayer);
                 }
 
                 _mapControl.Map = value;
@@ -108,6 +115,7 @@ namespace Mapsui.UI.Forms
                     _mapControl.Map.Info += HandlerInfo;
                     _mapControl.Map.Layers.Add(_mapPinLayer);
                     _mapControl.Map.InfoLayers.Add(_mapPinLayer);
+                    _mapControl.Map.Layers.Add(_mapFeaturesLayer);
                 }
 
                 OnPropertyChanged();
@@ -123,6 +131,11 @@ namespace Mapsui.UI.Forms
         {
             get { return (Pin)GetValue(SelectedPinProperty); }
             set { SetValue(SelectedPinProperty, value); }
+        }
+
+        public IList<IFeatureProvider> Features
+        {
+            get { return _features; }
         }
 
         public bool AllowPinchRotation
@@ -141,6 +154,11 @@ namespace Mapsui.UI.Forms
         {
             get { return (double)GetValue(ReSnapRotationDegreesProperty); }
             set { SetValue(ReSnapRotationDegreesProperty, value); }
+        }
+
+        public void Refresh()
+        {
+            _mapControl.RefreshGraphics();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -180,24 +198,45 @@ namespace Mapsui.UI.Forms
             {
                 foreach (var item in e.OldItems)
                 {
-                    // Remove old features from map
+                    // Remove old pins from layer
                     var pin = item as Pin;
 
                     pin.PropertyChanged -= HandlerPinPropertyChanged;
 
                     if (SelectedPin.Equals(pin))
                         SelectedPin = null;
+                }
+            }
 
-                    pin.Feature = null;
+            foreach (var item in e.NewItems)
+            {
+                // Add new pins to layer
+                var pin = item as Pin;
+
+                pin.PropertyChanged += HandlerPinPropertyChanged;
+            }
+        }
+
+        private void HandlerFeaturesOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            // TODO: Do we need any information about this?
+            if (e.OldItems != null)
+            {
+                foreach (var item in e.OldItems)
+                {
+                    // Remove old features from layer
+                    var feature = item as INotifyPropertyChanged;
+
+                    feature.PropertyChanged -= HandlerFeaturePropertyChanged;
                 }
             }
 
             foreach (var item in e.NewItems)
             {
                 // Add new features to layer
-                var pin = item as Pin;
+                var feature = item as INotifyPropertyChanged;
 
-                pin.PropertyChanged += HandlerPinPropertyChanged;
+                feature.PropertyChanged += HandlerFeaturePropertyChanged;
             }
         }
 
@@ -274,13 +313,18 @@ namespace Mapsui.UI.Forms
 
         private void HandlerPinPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            var pin = sender as Pin;
+            //var pin = sender as Pin;
 
-            if (e.PropertyName.Equals(nameof(Pin.IsVisible)))
-            {
-                //((Feature)pin.NativeObject)
-                _mapControl.Refresh();
-            }
+            //if (e.PropertyName.Equals(nameof(Pin.IsVisible)))
+            //{
+            //    //((Feature)pin.NativeObject)
+            //    //_mapControl.Refresh();
+            //}
+        }
+
+        private void HandlerFeaturePropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            Map.ViewChanged(false);
         }
     }
 }

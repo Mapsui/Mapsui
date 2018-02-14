@@ -25,7 +25,7 @@ namespace Mapsui.UI.Objects
 
             foreach (T item in Collection)
             {
-                if (item.IsVisible && box.Contains(item.Feature.Geometry.GetBoundingBox()))
+                if (box.Intersects(item.Feature.Geometry.GetBoundingBox()))
                     list.Add(item.Feature);
             }
 
