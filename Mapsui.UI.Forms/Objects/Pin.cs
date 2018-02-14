@@ -39,6 +39,10 @@ namespace Mapsui.UI.Forms
 
         public static readonly BindableProperty IsVisibleProperty = BindableProperty.Create(nameof(IsVisible), typeof(bool), typeof(Pin), true);
 
+        public static readonly BindableProperty WidthProperty = BindableProperty.Create(nameof(Width), typeof(double), typeof(Pin), -1.0, BindingMode.OneWayToSource);
+
+        public static readonly BindableProperty HeightProperty = BindableProperty.Create(nameof(Height), typeof(double), typeof(Pin), -1.0);
+
         public static readonly BindableProperty AnchorProperty = BindableProperty.Create(nameof(Anchor), typeof(Point), typeof(Pin), new Point(0, 28));
 
         public static readonly BindableProperty InfoWindowAnchorProperty = BindableProperty.Create(nameof(InfoWindowAnchor), typeof(Point), typeof(Pin), new Point(0.5d, 1.0d));
@@ -138,6 +142,24 @@ namespace Mapsui.UI.Forms
         {
             get { return (bool)GetValue(IsVisibleProperty); }
             set { SetValue(IsVisibleProperty, value); }
+        }
+
+        /// <summary>
+        /// Width of the bitmap after scaling, if there is one, if not, than -1
+        /// </summary>
+        public double Width
+        {
+            get { return (double)GetValue(WidthProperty); }
+            private set { SetValue(WidthProperty, value); }
+        }
+
+        /// <summary>
+        /// Height of the bitmap after scaling, if there is one, if not, than -1
+        /// </summary>
+        public double Height
+        {
+            get { return (double)GetValue(HeightProperty); }
+            private set { SetValue(HeightProperty, value); }
         }
 
         /// <summary>
@@ -304,6 +326,8 @@ namespace Mapsui.UI.Forms
                         if (stream == null)
                             return;
                         svg.Load(stream);
+                        Width = svg.CanvasSize.Width * Scale;
+                        Height = svg.CanvasSize.Height * Scale;
                         // Create bitmap to hold canvas
                         var info = new SKImageInfo((int)svg.CanvasSize.Width, (int)svg.CanvasSize.Height) { AlphaType = SKAlphaType.Premul };
                         var bitmap = new SKBitmap(info);
@@ -327,7 +351,14 @@ namespace Mapsui.UI.Forms
                         break;
                     case PinType.Icon:
                         if (Icon != null)
-                            bitmapId = BitmapRegistry.Instance.Register(new MemoryStream(Icon));
+                        {
+                            using (var image = SKBitmap.Decode(Icon))
+                            {
+                                Width = image.Width * Scale;
+                                Height = image.Height * Scale;
+                                bitmapId = BitmapRegistry.Instance.Register(new MemoryStream(Icon));
+                            }
+                        }
                         break;
                 }
                 // If we have a bitmapId (and we should have one), than draw bitmap, otherwise nothing

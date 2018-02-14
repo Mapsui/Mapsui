@@ -13,7 +13,7 @@ namespace Mapsui.Samples.Forms
 
         public static bool HandlerMapClicked(MapView mapView, MapClickedEventArgs e)
         {
-            if (e.NumOfTaps == 0)
+            if (e.NumOfTaps == 2)
             {
                 var assembly = typeof(MainPageLarge).GetTypeInfo().Assembly;
                 foreach (var str in assembly.GetManifestResourceNames())

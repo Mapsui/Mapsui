@@ -11,6 +11,7 @@ namespace Mapsui.UI
         public TapEventArgs(Geometries.Point screenPosition, int numOfTaps)
         {
             ScreenPosition = screenPosition;
+            NumOfTaps = numOfTaps;
         }
     }
 }
