@@ -252,7 +252,7 @@ namespace Mapsui.UI.Forms
             // Is there a widget at this position
             // Is there a feature at this position
             if (Map != null)
-                e.Handled = Map.InvokeInfo(e.ScreenPosition, e.ScreenPosition, _mapControl.SkiaScale, _mapControl.SymbolCache, null, 1);
+                e.Handled = Map.InvokeInfo(e.ScreenPosition, e.ScreenPosition, _mapControl.SkiaScale, _mapControl.SymbolCache, null, e.NumOfTaps);
 
             if (e.Handled)
                 return;

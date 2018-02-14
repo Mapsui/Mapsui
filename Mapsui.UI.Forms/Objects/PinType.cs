@@ -3,12 +3,7 @@
     public enum PinType
     {
         Pin,
-        PinRed,
-        PinDarkBlue,
-        PinBlue,
-        PinLightBlue,
-        PinPink,
-        PinGreen,
-        Icon
+        Icon,
+        Svg
     }
 }
