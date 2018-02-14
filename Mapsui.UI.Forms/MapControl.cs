@@ -107,7 +107,7 @@ namespace Mapsui.UI
             long ticks = DateTime.Now.Ticks;
 
             var location = GetScreenPosition(e.Location);
-            System.Diagnostics.Debug.WriteLine($"Screen {location}");
+
             if (e.ActionType == SKTouchAction.Pressed)
             {
                 _firstTouch = location;

@@ -44,4 +44,7 @@
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Images\Ghostscript_Tiger.svg" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Images\loc.png" />
+  </ItemGroup>
 </Project>
