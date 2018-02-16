@@ -1,6 +1,7 @@
 ﻿using System;
 using Mapsui.Geometries;
 using Mapsui.Providers;
+using Mapsui.Rendering.Skia.ExtensionMethods;
 using Mapsui.Styles;
 using SkiaSharp;
 
@@ -98,6 +99,8 @@ namespace Mapsui.Rendering.Skia
             {
                 Color = outline.Color.ToSkia(layerOpacity),
                 StrokeWidth = (float) outline.Width,
+                StrokeCap = outline.PenStrokeCap.ToSkia(),
+                PathEffect = outline.PenStyle.ToSkia((float)outline.Width),
                 Style = SKPaintStyle.Stroke,
                 IsAntialias = true
             };

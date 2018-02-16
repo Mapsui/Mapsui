@@ -54,12 +54,10 @@ namespace Mapsui.Samples.Common.Maps
 
         public static ILayer CreateRandomPointLayer(BoundingBox envelope, int count = 25, IStyle style = null)
         {
-            var color = Color.White;
-            color.A = 127;
             return new Layer
             {
                 DataSource = new MemoryProvider(GenerateRandomPoints(envelope, count)),
-                Style = style ?? new VectorStyle { Fill = new Brush(color) }
+                Style = style ?? new VectorStyle { Fill = new Brush(Color.White), Outline = new Pen { Color = Color.Black, PenStyle = PenStyle.Dash } }
             };
         }
     }
