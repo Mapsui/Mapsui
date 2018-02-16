@@ -19,6 +19,7 @@ namespace Mapsui.Samples.Forms
         public const string AddPin = "Forms: Add Pin";
         public const string DrawPolyline = "Forms: Add Polyline";
         public const string DrawPolygon = "Forms: Add Polygon";
+        public const string DrawCircle = "Forms: Add Circle";
 
         public static Dictionary<string, Func<Map>> CreateList()
         {
@@ -28,6 +29,7 @@ namespace Mapsui.Samples.Forms
             allSamples.Add(AddPin, OsmSample.CreateMap);
             allSamples.Add(DrawPolyline, OsmSample.CreateMap);
             allSamples.Add(DrawPolygon, OsmSample.CreateMap);
+            allSamples.Add(DrawCircle, OsmSample.CreateMap);
 
             commonSamples.ToList().ForEach(x => allSamples.Add(x.Key, x.Value));
 
@@ -45,9 +47,26 @@ namespace Mapsui.Samples.Forms
                     return Samples.DrawPolylines;
                 case Samples.DrawPolygon:
                     return Samples.DrawPolygons;
+                case Samples.DrawCircle:
+                    return Samples.DrawCircles;
             }
 
             return null;
+        }
+
+        public static bool DrawCircles(MapView mapView, MapClickedEventArgs e)
+        {
+            var circle = new Circle
+            {
+                Center = e.Point,
+                Radius = Distance.FromMeters(rnd.Next(0,100)),
+                StrokeColor = new Color(rnd.Next(0, 255) / 255.0, rnd.Next(0, 255) / 255.0, rnd.Next(0, 255) / 255.0),
+                FillColor = new Color(rnd.Next(0, 255) / 255.0, rnd.Next(0, 255) / 255.0, rnd.Next(0, 255) / 255.0, rnd.Next(0,255) / 255.0)
+            };
+
+            mapView.Features.Add(circle);
+
+            return true;
         }
 
         public static bool DrawPolygons(MapView mapView, MapClickedEventArgs e)
@@ -63,6 +82,14 @@ namespace Mapsui.Samples.Forms
             polygon.Positions.Add(new Position(center.Latitude + diffY, center.Longitude - diffX));
             polygon.Positions.Add(new Position(center.Latitude + diffY, center.Longitude + diffX));
             polygon.Positions.Add(new Position(center.Latitude - diffY, center.Longitude + diffX));
+
+            // Be carefull: holes should have other direction of Positions.
+            // If Positions is clockwise, than Holes should all be counter clockwise and the other way round.
+            polygon.Holes.Add(new Position[] {
+                new Position(center.Latitude - diffY * 0.3, center.Longitude - diffX * 0.3),
+                new Position(center.Latitude + diffY * 0.3, center.Longitude + diffX * 0.3),
+                new Position(center.Latitude + diffY * 0.3, center.Longitude - diffX * 0.3),
+            });
 
             mapView.Features.Add(polygon);
 

@@ -1,7 +1,4 @@
-﻿using Mapsui.Geometries;
-using Mapsui.Layers;
-using Mapsui.Providers;
-using Mapsui.Styles;
+﻿using Mapsui.Layers;
 using Mapsui.UI.Forms.Extensions;
 using Mapsui.UI.Objects;
 using System;

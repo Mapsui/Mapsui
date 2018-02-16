@@ -74,6 +74,7 @@
     <Compile Include="Extensions\PositionExtensions.cs" />
     <Compile Include="MapControl.cs" />
     <Compile Include="MapView.cs" />
+    <Compile Include="Objects\Circle.cs" />
     <Compile Include="Objects\Distance.cs" />
     <Compile Include="Objects\IFeatureProvider.cs" />
     <Compile Include="Objects\MapSpan.cs" />
