@@ -57,7 +57,7 @@ namespace Mapsui.Samples.Common.Maps
             return new Layer
             {
                 DataSource = new MemoryProvider(GenerateRandomPoints(envelope, count)),
-                Style = style ?? new VectorStyle { Fill = new Brush(Color.White) }
+                Style = style ?? new VectorStyle { Fill = new Brush(Color.White), Outline = new Pen { Color = Color.Black, PenStyle = PenStyle.Dash } }
             };
         }
     }

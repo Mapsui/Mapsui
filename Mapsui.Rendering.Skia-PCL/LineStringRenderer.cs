@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Mapsui.Geometries;
 using Mapsui.Providers;
+using Mapsui.Rendering.Skia.ExtensionMethods;
 using Mapsui.Styles;
 using SkiaSharp;
 
@@ -27,12 +28,14 @@ namespace Mapsui.Rendering.Skia
 
                 var vectorStyle = style as VectorStyle;
                 var strokeCap = PenStrokeCap.Butt;
+                var strokeStyle = PenStyle.Solid;
 
                 if (vectorStyle != null)
                 {
                     lineWidth = (float) vectorStyle.Line.Width;
                     lineColor = vectorStyle.Line.Color;
                     strokeCap = vectorStyle.Line.PenStrokeCap;
+                    strokeStyle = vectorStyle.Line.PenStyle;
                 }
 
                 var line = WorldToScreen(viewport, lineString);
@@ -45,7 +48,8 @@ namespace Mapsui.Rendering.Skia
                     paint.Color = lineColor.ToSkia(layerOpacity);
                     paint.StrokeJoin = SKStrokeJoin.Round;
                     paint.StrokeCap = strokeCap.ToSkia();
-
+                    if (strokeStyle != PenStyle.Solid)
+                        paint.PathEffect = strokeStyle.ToSkia(lineWidth);
                     canvas.DrawPath(path, paint);
                 }
             }
