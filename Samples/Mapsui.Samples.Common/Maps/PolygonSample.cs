@@ -24,8 +24,13 @@ namespace Mapsui.Samples.Common.Maps
                 Style = new VectorStyle
                 {
                     Fill = new Brush(new Color(150, 150, 30, 128)),
-                    Outline = new Pen(Color.Orange, 2),
-                    
+                    Outline = new Pen
+                    {
+                        Color = Color.Orange,
+                        Width = 2,
+                        PenStyle = PenStyle.Solid,
+                        PenStrokeCap = PenStrokeCap.Round
+                    }
                 }
             };
         }
