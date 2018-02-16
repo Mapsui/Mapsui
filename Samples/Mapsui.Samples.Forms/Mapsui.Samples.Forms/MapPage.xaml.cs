@@ -10,13 +10,14 @@ namespace Mapsui.Samples.Forms
 	{
         int markerNum = 1;
         Random rnd = new Random();
+        Func<MapView, MapClickedEventArgs, bool> clicker;
 
         public MapPage ()
 		{
 			InitializeComponent ();
 		}
 
-        public MapPage(Func<Map> call)
+        public MapPage(Func<Map> call, Func<MapView, MapClickedEventArgs, bool> c = null)
         {
             InitializeComponent();
 
@@ -28,11 +29,14 @@ namespace Mapsui.Samples.Forms
             mapView.MapClicked += OnMapClicked;
 
             mapView.Map = call();
+
+            clicker = c;
         }
 
         private void OnMapClicked(object sender, MapClickedEventArgs e)
         {
-            Samples.SetPins(mapView, e);
+            e.Handled = (bool)clicker?.Invoke(sender as MapView, e);
+            //Samples.SetPins(mapView, e);
             //Samples.DrawPolylines(mapView, e);
         }
 

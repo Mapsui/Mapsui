@@ -80,6 +80,7 @@
     <Compile Include="Objects\ObservableCollectionProvider.cs" />
     <Compile Include="Objects\Pin.cs" />
     <Compile Include="Objects\PinType.cs" />
+    <Compile Include="Objects\Polygon.cs" />
     <Compile Include="Objects\Polyline.cs" />
     <Compile Include="Objects\Position.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

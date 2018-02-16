@@ -13,19 +13,25 @@ using Xamarin.Forms;
 
 namespace Mapsui.UI.Forms
 {
-    public sealed class Polyline : BindableObject, IFeatureProvider
+    public sealed class Polygon : BindableObject, IFeatureProvider
     {
         public static readonly BindableProperty LabelProperty = BindableProperty.Create(nameof(Label), typeof(string), typeof(Pin), default(string));
-        public static readonly BindableProperty StrokeWidthProperty = BindableProperty.Create(nameof(StrokeWidth), typeof(float), typeof(Polyline), 1f);
-        public static readonly BindableProperty StrokeColorProperty = BindableProperty.Create(nameof(StrokeColor), typeof(Xamarin.Forms.Color), typeof(Polyline), Xamarin.Forms.Color.Black);
-        public static readonly BindableProperty IsClickableProperty = BindableProperty.Create(nameof(IsClickable), typeof(bool), typeof(Polyline), false);
-        public static readonly BindableProperty ZIndexProperty = BindableProperty.Create(nameof(ZIndex), typeof(int), typeof(Polyline), 0);
+        public static readonly BindableProperty StrokeWidthProperty = BindableProperty.Create(nameof(StrokeWidth), typeof(float), typeof(Polygon), 1f);
+        public static readonly BindableProperty StrokeColorProperty = BindableProperty.Create(nameof(StrokeColor), typeof(Xamarin.Forms.Color), typeof(Polygon), Xamarin.Forms.Color.Black);
+        public static readonly BindableProperty FillColorProperty = BindableProperty.Create(nameof(FillColor), typeof(Xamarin.Forms.Color), typeof(Polygon), Xamarin.Forms.Color.DarkGray);
+        public static readonly BindableProperty IsClickableProperty = BindableProperty.Create(nameof(IsClickable), typeof(bool), typeof(Polygon), false);
+        public static readonly BindableProperty ZIndexProperty = BindableProperty.Create(nameof(ZIndex), typeof(int), typeof(Polygon), 0);
 
         private readonly ObservableCollection<Position> _positions = new ObservableCollection<Position>();
+        private readonly ObservableCollection<Position[]> _holes = new ObservableCollection<Position[]>();
 
-        public Polyline()
+        private Action<Polygon, NotifyCollectionChangedEventArgs> _positionsChangedHandler = null;
+        private Action<Polygon, NotifyCollectionChangedEventArgs> _holesChangedHandler = null;
+
+        public Polygon()
         {
-            _positions.CollectionChanged += OnCollectionChanged;
+            _positions.CollectionChanged += OnPositionsCollectionChanged;
+            _holes.CollectionChanged += OnHolesCollectionChanged;
 
             CreateFeature();
         }
@@ -50,6 +56,11 @@ namespace Mapsui.UI.Forms
             get { return (Xamarin.Forms.Color)GetValue(StrokeColorProperty); }
             set { SetValue(StrokeColorProperty, value); }
         }
+        public Xamarin.Forms.Color FillColor
+        {
+            get { return (Xamarin.Forms.Color)GetValue(FillColorProperty); }
+            set { SetValue(FillColorProperty, value); }
+        }
 
         public bool IsClickable
         {
@@ -66,6 +77,11 @@ namespace Mapsui.UI.Forms
         public IList<Position> Positions
         {
             get { return _positions; }
+        }
+
+        public IList<Position[]> Holes
+        {
+            get { return _holes; }
         }
 
         public object Tag { get; set; }
@@ -104,7 +120,10 @@ namespace Mapsui.UI.Forms
             switch (propertyName)
             {
                 case nameof(Positions):
-                    feature.Geometry = new LineString(Positions.Select(p => p.ToMapsui()).ToList());
+                    ((Mapsui.Geometries.Polygon)feature.Geometry).ExteriorRing = new LinearRing(Positions.Select(p => p.ToMapsui()).ToList());
+                    break;
+                case nameof(Holes):
+                    ((Mapsui.Geometries.Polygon)feature.Geometry).InteriorRings = Holes.Select(h => new LinearRing(h.Select(p => p.ToMapsui()).ToList())).ToList();
                     break;
                 case nameof(StrokeWidth):
                     ((VectorStyle)feature.Styles.First()).Line.Width = StrokeWidth;
@@ -112,12 +131,20 @@ namespace Mapsui.UI.Forms
                 case nameof(StrokeColor):
                     ((VectorStyle)feature.Styles.First()).Line.Color = StrokeColor.ToMapsui();
                     break;
+                case nameof(FillColor):
+                    ((VectorStyle)feature.Styles.First()).Fill = new Brush(FillColor.ToMapsui());
+                    break;
             }
         }
 
-        void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        void OnPositionsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             OnPropertyChanged(nameof(Positions));
+        }
+
+        void OnHolesCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            OnPropertyChanged(nameof(Holes));
         }
 
         private object sync = new object();
@@ -131,14 +158,14 @@ namespace Mapsui.UI.Forms
                     // Create a new one
                     feature = new Feature
                     {
-                        Geometry = new LineString(Positions.Select(p => p.ToMapsui()).ToList()),
+                        Geometry = new Mapsui.Geometries.Polygon(), 
                         ["Label"] = Label,
                     };
                     feature.Styles.Clear();
                     feature.Styles.Add(new VectorStyle
                     {
-                        Line = new Pen { Width = StrokeWidth, Color = StrokeColor.ToMapsui()},
-                        
+                        Line = new Pen { Width = StrokeWidth, Color = StrokeColor.ToMapsui() },
+                        Fill = new Brush { Color = FillColor.ToMapsui() }
                     });
                 }
             }

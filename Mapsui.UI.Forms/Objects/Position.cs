@@ -13,6 +13,12 @@ namespace Mapsui.UI.Forms
             Longitude = Math.Min(Math.Max(longitude, -180.0), 180.0);
         }
 
+        public Position(Position point)
+        {
+            Latitude = point.Latitude;
+            Longitude = point.Longitude;
+        }
+
         /// <summary>
         /// Latitude of position
         /// </summary>

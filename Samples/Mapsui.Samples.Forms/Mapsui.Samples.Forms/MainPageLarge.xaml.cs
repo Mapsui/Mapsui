@@ -1,4 +1,5 @@
 ﻿using Mapsui.Samples.Common;
+using Mapsui.Samples.Common.Maps;
 using Mapsui.UI.Forms;
 using System;
 using System.Collections.Generic;
@@ -14,12 +15,13 @@ namespace Mapsui.Samples.Forms
     public partial class MainPageLarge : ContentPage
     {
         Dictionary<string, Func<Map>> allSamples;
+        Func<MapView, MapClickedEventArgs, bool> clicker;
 
         public MainPageLarge()
         {
             InitializeComponent();
 
-            allSamples = AllSamples.CreateList();
+            allSamples = Samples.CreateList();
 
             listView.ItemsSource = allSamples.Select(k => k.Key).ToList();
 
@@ -33,8 +35,9 @@ namespace Mapsui.Samples.Forms
 
         private void OnMapClicked(object sender, MapClickedEventArgs e)
         {
+            e.Handled = (bool)clicker?.Invoke(sender as MapView, e);
             //Samples.SetPins(mapView, e);
-            Samples.DrawPolylines(mapView, e);
+            //Samples.DrawPolylines(mapView, e);
         }
 
         void OnSelection(object sender, SelectedItemChangedEventArgs e)
@@ -48,6 +51,10 @@ namespace Mapsui.Samples.Forms
             var call = allSamples[sample];
 
             mapView.Map = call();
+
+            clicker = Samples.GetClicker(sample);
+
+            listView.SelectedItem = null;
         }
 
         private void OnPinClicked(object sender, PinClickedEventArgs e)

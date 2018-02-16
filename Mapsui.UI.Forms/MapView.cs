@@ -320,6 +320,7 @@ namespace Mapsui.UI.Forms
             //    //((Feature)pin.NativeObject)
             //    //_mapControl.Refresh();
             //}
+            Map.ViewChanged(false);
         }
 
         private void HandlerFeaturePropertyChanged(object sender, PropertyChangedEventArgs e)

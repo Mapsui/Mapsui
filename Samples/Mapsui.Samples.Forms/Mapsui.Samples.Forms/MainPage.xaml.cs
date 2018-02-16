@@ -20,7 +20,7 @@ namespace Mapsui.Samples.Forms
 		{
 			InitializeComponent();
 
-            allSamples = AllSamples.CreateList();
+            allSamples = Samples.CreateList();
 
             listView.ItemsSource = allSamples.Select(k => k.Key).ToList();
         }
@@ -35,7 +35,9 @@ namespace Mapsui.Samples.Forms
             var sample = e.SelectedItem.ToString();
             var call = allSamples[sample];
 
-            ((NavigationPage)Application.Current.MainPage).PushAsync(new MapPage(call));
+            ((NavigationPage)Application.Current.MainPage).PushAsync(new MapPage(call, Samples.GetClicker(sample)));
+
+            listView.SelectedItem = null;
         }
     }
 }
