@@ -50,7 +50,7 @@ namespace Mapsui.Rendering.Skia
             canvas.Translate((float)destination.X, (float)destination.Y);
             canvas.Scale((float)style.SymbolScale, (float)style.SymbolScale);
             canvas.Translate((float) style.SymbolOffset.X, (float) -style.SymbolOffset.Y);
-            DrawPointWithVectorStyle(canvas, style, layerOpacity, symbolType);
+            DrawPointWithVectorStyle(canvas, style, layerOpacity * (float)style.Opacity, symbolType);
             canvas.Restore();
         }
 
