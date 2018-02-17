@@ -20,6 +20,7 @@ namespace Mapsui.Samples.Forms
         public const string DrawPolyline = "Forms: Add Polyline";
         public const string DrawPolygon = "Forms: Add Polygon";
         public const string DrawCircle = "Forms: Add Circle";
+        public const string MyLocation = "Forms: MyLocation";
 
         public static Dictionary<string, Func<Map>> CreateList()
         {
@@ -30,6 +31,7 @@ namespace Mapsui.Samples.Forms
             allSamples.Add(DrawPolyline, OsmSample.CreateMap);
             allSamples.Add(DrawPolygon, OsmSample.CreateMap);
             allSamples.Add(DrawCircle, OsmSample.CreateMap);
+            allSamples.Add(MyLocation, OsmSample.CreateMap);
 
             commonSamples.ToList().ForEach(x => allSamples.Add(x.Key, x.Value));
 
@@ -49,9 +51,23 @@ namespace Mapsui.Samples.Forms
                     return Samples.DrawPolygons;
                 case Samples.DrawCircle:
                     return Samples.DrawCircles;
+                case Samples.MyLocation:
+                    return Samples.MyLocationSample;
             }
 
             return null;
+        }
+
+        public static bool MyLocationSample(MapView mapView, MapClickedEventArgs e)
+        {
+            if (mapView.MyLocationEnabled == true)
+            {
+                mapView.UpdateMyLocation(new Position(48, 9), 30, 100);
+            }
+            else
+                mapView.MyLocationEnabled = true;
+
+            return true;
         }
 
         public static bool DrawCircles(MapView mapView, MapClickedEventArgs e)

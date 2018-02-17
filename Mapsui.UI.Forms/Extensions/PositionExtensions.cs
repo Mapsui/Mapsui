@@ -13,15 +13,5 @@
 
             return new Position(latLon.Y, latLon.X);
         }
-
-        /// <summary>
-        /// Convert Xamarin.Forms.Maps.Position to Mapsui.Geometries.Point
-        /// </summary>
-        /// <param name="position">Point in Xamarin.Forms.Maps.Position format</param>
-        /// <returns>Position in Mapsui format</returns>
-        public static Mapsui.Geometries.Point ToMapsui(this Position position)
-        {
-            return Mapsui.Projection.SphericalMercator.FromLonLat(position.Longitude, position.Latitude);
-        }
     }
 }

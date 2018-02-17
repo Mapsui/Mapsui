@@ -3,7 +3,7 @@
 namespace Mapsui.UI.Forms
 {
     /// <summary>
-    /// Structure holding latitude and longitude of a position in spherical coordinat system
+    /// Structure holding latitude and longitude of a position in spherical coordinate system
     /// </summary>
     public struct Position
     {
@@ -28,6 +28,16 @@ namespace Mapsui.UI.Forms
         /// Longitude of position
         /// </summary>
         public double Longitude { get; }
+
+        /// <summary>
+        /// Convert Xamarin.Forms.Maps.Position to Mapsui.Geometries.Point
+        /// </summary>
+        /// <param name="position">Point in Xamarin.Forms.Maps.Position format</param>
+        /// <returns>Position in Mapsui format</returns>
+        public Mapsui.Geometries.Point ToMapsui()
+        {
+            return Mapsui.Projection.SphericalMercator.FromLonLat(Longitude, Latitude);
+        }
 
         public override bool Equals(object obj)
         {

@@ -81,6 +81,7 @@
     <Compile Include="Objects\Drawable.cs" />
     <Compile Include="Objects\IFeatureProvider.cs" />
     <Compile Include="Objects\MapSpan.cs" />
+    <Compile Include="Objects\MyLocationLayer.cs" />
     <Compile Include="Objects\ObservableCollectionProvider.cs" />
     <Compile Include="Objects\Pin.cs" />
     <Compile Include="Objects\PinType.cs" />
@@ -109,6 +110,10 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Images\Pin.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\MyLocationMoving.svg" />
+    <EmbeddedResource Include="Images\MyLocationStill.svg" />
   </ItemGroup>
   <Import Project="..\Mapsui.UI.Shared\Mapsui.UI.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

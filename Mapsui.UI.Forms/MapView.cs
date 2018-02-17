@@ -15,10 +15,12 @@ namespace Mapsui.UI.Forms
 {
     public class MapView : ContentView, INotifyPropertyChanged, IEnumerable<Pin>
     {
+        private const string MyLocationLayerName = "MyLocation";
         private const string PinLayerName = "Pins";
         private const string DrawableLayerName = "Drawables";
 
         private MapControl _mapControl;
+        private MyLocationLayer _mapMyLocationLayer;
         private Layer _mapPinLayer;
         private Layer _mapDrawableLayer;
         private BoxView _mapButtons;
@@ -28,7 +30,11 @@ namespace Mapsui.UI.Forms
 
         public MapView()
         {
+            MyLocationEnabled = false;
+            MyLocationFollow = true;
+
             _mapControl = new MapControl();
+            _mapMyLocationLayer = new MyLocationLayer();
             _mapPinLayer = new Layer(PinLayerName);
             _mapDrawableLayer = new Layer(DrawableLayerName);
 
@@ -37,6 +43,7 @@ namespace Mapsui.UI.Forms
             _mapControl.DoubleTap += HandlerTap;
             _mapControl.LongTap += HandlerLongTap;
             _mapControl.Hover += HandlerHover;
+            _mapControl.TouchMove += (s, e) => MyLocationFollow = false;
 
             AbsoluteLayout.SetLayoutBounds(_mapControl, new Rectangle(0, 0, 1, 1));
             AbsoluteLayout.SetLayoutFlags(_mapControl, AbsoluteLayoutFlags.All);
@@ -77,7 +84,9 @@ namespace Mapsui.UI.Forms
         /// Bindings
         /// </summary>
 
-        public static readonly BindableProperty SelectedPinProperty = BindableProperty.Create(nameof(SelectedPin), typeof(Pin), typeof(Map), default(Pin), defaultBindingMode: BindingMode.TwoWay);
+        public static readonly BindableProperty SelectedPinProperty = BindableProperty.Create(nameof(SelectedPin), typeof(Pin), typeof(MapView), default(Pin), defaultBindingMode: BindingMode.TwoWay);
+        public static readonly BindableProperty MyLocationEnabledProperty = BindableProperty.Create(nameof(MyLocationEnabled), typeof(bool), typeof(MapView), false, defaultBindingMode: BindingMode.TwoWay);
+        public static readonly BindableProperty MyLocationFollowProperty = BindableProperty.Create(nameof(MyLocationFollow), typeof(bool), typeof(MapView), false, defaultBindingMode: BindingMode.TwoWay);
         public static readonly BindableProperty AllowPinchRotationProperty = BindableProperty.Create(nameof(AllowPinchRotationProperty), typeof(bool), typeof(MapView), default(bool));
         public static readonly BindableProperty UnSnapRotationDegreesProperty = BindableProperty.Create(nameof(UnSnapRotationDegreesProperty), typeof(double), typeof(MapView), default(double));
         public static readonly BindableProperty ReSnapRotationDegreesProperty = BindableProperty.Create(nameof(ReSnapRotationDegreesProperty), typeof(double), typeof(MapView), default(double));
@@ -107,6 +116,7 @@ namespace Mapsui.UI.Forms
                     _mapControl.Map.InfoLayers.Remove(_mapDrawableLayer);
                     _mapControl.Map.Layers.Remove(_mapPinLayer);
                     _mapControl.Map.Layers.Remove(_mapDrawableLayer);
+                    _mapControl.Map.Layers.Remove(_mapMyLocationLayer);
                 }
 
                 _mapControl.Map = value;
@@ -114,6 +124,8 @@ namespace Mapsui.UI.Forms
                 if (_mapControl.Map != null)
                 {
                     _mapControl.Map.Info += HandlerInfo;
+                    // Add layer for MyLocation
+                    _mapControl.Map.Layers.Add(_mapMyLocationLayer);
                     // Draw drawables first
                     _mapControl.Map.Layers.Add(_mapDrawableLayer);
                     _mapControl.Map.InfoLayers.Add(_mapDrawableLayer);
@@ -124,6 +136,24 @@ namespace Mapsui.UI.Forms
 
                 OnPropertyChanged();
             }
+        }
+
+        /// <summary>
+        /// Should my location be visible on map
+        /// </summary>
+        public bool MyLocationEnabled
+        {
+            get { return (bool)GetValue(MyLocationEnabledProperty); }
+            set { SetValue(MyLocationEnabledProperty, value); }
+        }
+
+        /// <summary>
+        /// Should center of map follow my location
+        /// </summary>
+        public bool MyLocationFollow
+        {
+            get { return (bool)GetValue(MyLocationFollowProperty); }
+            set { SetValue(MyLocationFollowProperty, value); }
         }
 
         /// <summary>
@@ -183,6 +213,17 @@ namespace Mapsui.UI.Forms
             _mapControl.RefreshGraphics();
         }
 
+        public void UpdateMyLocation(Position newLocation, double newDirection, double newSpeed)
+        {
+            var modified = _mapMyLocationLayer.UpdateMyLocation(newLocation, newDirection, newSpeed);
+
+            if (modified && MyLocationFollow && MyLocationEnabled)
+                Map.Viewport.Center = newLocation.ToMapsui();
+
+            if (MyLocationEnabled && modified)
+                Map.ViewChanged(false);
+        }
+
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
@@ -196,6 +237,12 @@ namespace Mapsui.UI.Forms
         protected override void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
             base.OnPropertyChanged(propertyName);
+
+            if (propertyName.Equals(nameof(MyLocationEnabled)))
+            {
+                _mapMyLocationLayer.Enabled = MyLocationEnabled;
+                Map.ViewChanged(true);
+            }
 
             if (propertyName.Equals(nameof(AllowPinchRotation)))
                 _mapControl.AllowPinchRotation = AllowPinchRotation;
