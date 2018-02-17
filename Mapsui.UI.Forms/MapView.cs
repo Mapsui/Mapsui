@@ -16,21 +16,21 @@ namespace Mapsui.UI.Forms
     public class MapView : ContentView, INotifyPropertyChanged, IEnumerable<Pin>
     {
         private const string PinLayerName = "Pins";
-        private const string FeaturesLayerName = "Features";
+        private const string DrawableLayerName = "Drawables";
 
         private MapControl _mapControl;
         private Layer _mapPinLayer;
-        private Layer _mapFeaturesLayer;
+        private Layer _mapDrawableLayer;
         private BoxView _mapButtons;
 
         readonly ObservableCollection<Pin> _pins = new ObservableCollection<Pin>();
-        readonly ObservableCollection<IFeatureProvider> _features = new ObservableCollection<IFeatureProvider>();
+        readonly ObservableCollection<Drawable> _drawable = new ObservableCollection<Drawable>();
 
         public MapView()
         {
             _mapControl = new MapControl();
             _mapPinLayer = new Layer(PinLayerName);
-            _mapFeaturesLayer = new Layer(FeaturesLayerName);
+            _mapDrawableLayer = new Layer(DrawableLayerName);
 
             // Add some events to _mapControl
             _mapControl.SingleTap += HandlerTap;
@@ -55,13 +55,13 @@ namespace Mapsui.UI.Forms
             };
 
             _pins.CollectionChanged += HandlerPinsOnCollectionChanged;
-            _features.CollectionChanged += HandlerFeaturesOnCollectionChanged;
+            _drawable.CollectionChanged += HandlerDrawablesOnCollectionChanged;
 
             _mapPinLayer.DataSource = new ObservableCollectionProvider<Pin>(_pins);
             _mapPinLayer.Style = null;  // We don't want a global style for this layer
 
-            _mapFeaturesLayer.DataSource = new ObservableCollectionProvider<IFeatureProvider>(_features);
-            _mapFeaturesLayer.Style = null;  // We don't want a global style for this layer
+            _mapDrawableLayer.DataSource = new ObservableCollectionProvider<Drawable>(_drawable);
+            _mapDrawableLayer.Style = null;  // We don't want a global style for this layer
         }
 
         /// <summary>
@@ -86,6 +86,9 @@ namespace Mapsui.UI.Forms
         /// Properties
         ///</summary>
 
+        ///<summary>
+        /// Native Mapsui Map object
+        ///</summary>
         public Map Map
         {
             get
@@ -101,8 +104,9 @@ namespace Mapsui.UI.Forms
                 {
                     _mapControl.Map.Info -= HandlerInfo;
                     _mapControl.Map.InfoLayers.Remove(_mapPinLayer);
+                    _mapControl.Map.InfoLayers.Remove(_mapDrawableLayer);
                     _mapControl.Map.Layers.Remove(_mapPinLayer);
-                    _mapControl.Map.Layers.Remove(_mapFeaturesLayer);
+                    _mapControl.Map.Layers.Remove(_mapDrawableLayer);
                 }
 
                 _mapControl.Map = value;
@@ -110,43 +114,64 @@ namespace Mapsui.UI.Forms
                 if (_mapControl.Map != null)
                 {
                     _mapControl.Map.Info += HandlerInfo;
+                    // Draw drawables first
+                    _mapControl.Map.Layers.Add(_mapDrawableLayer);
+                    _mapControl.Map.InfoLayers.Add(_mapDrawableLayer);
+                    // Draw pins on top of drawables
                     _mapControl.Map.Layers.Add(_mapPinLayer);
                     _mapControl.Map.InfoLayers.Add(_mapPinLayer);
-                    _mapControl.Map.Layers.Add(_mapFeaturesLayer);
                 }
 
                 OnPropertyChanged();
             }
         }
 
+        /// <summary>
+        /// Pins on map
+        /// </summary>
         public IList<Pin> Pins
         {
             get { return _pins; }
         }
 
+        /// <summary>
+        /// Selected pin
+        /// </summary>
         public Pin SelectedPin
         {
             get { return (Pin)GetValue(SelectedPinProperty); }
             set { SetValue(SelectedPinProperty, value); }
         }
 
-        public IList<IFeatureProvider> Features
+        /// <summary>
+        /// List of drawables like polyline and polygon
+        /// </summary>
+        public IList<Drawable> Drawables
         {
-            get { return _features; }
+            get { return _drawable; }
         }
 
+        /// <summary>
+        /// Enable rotation with pinch gesture
+        /// </summary>
         public bool AllowPinchRotation
         {
             get { return (bool)GetValue(AllowPinchRotationProperty); }
             set { SetValue(AllowPinchRotationProperty, value); }
         }
 
+        /// <summary>
+        /// Number of degrees, before the rotation starts
+        /// </summary>
         public double UnSnapRotationDegrees
         {
             get { return (double)GetValue(UnSnapRotationDegreesProperty); }
             set { SetValue(UnSnapRotationDegreesProperty, value); }
         }
 
+        /// <summary>
+        /// Number of degrees, when map shows to north
+        /// </summary>
         public double ReSnapRotationDegrees
         {
             get { return (double)GetValue(ReSnapRotationDegreesProperty); }
@@ -182,6 +207,10 @@ namespace Mapsui.UI.Forms
                 _mapControl.ReSnapRotationDegrees = ReSnapRotationDegrees;
         }
 
+        /// <summary>
+        /// Handlers
+        /// </summary>
+        
         private void HandlerHover(object sender, HoverEventArgs e)
         {
         }
@@ -214,26 +243,26 @@ namespace Mapsui.UI.Forms
             }
         }
 
-        private void HandlerFeaturesOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private void HandlerDrawablesOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             // TODO: Do we need any information about this?
             if (e.OldItems != null)
             {
                 foreach (var item in e.OldItems)
                 {
-                    // Remove old features from layer
-                    var feature = item as INotifyPropertyChanged;
+                    // Remove old drawables from layer
+                    var drawable = item as INotifyPropertyChanged;
 
-                    feature.PropertyChanged -= HandlerFeaturePropertyChanged;
+                    drawable.PropertyChanged -= HandlerDrawablePropertyChanged;
                 }
             }
 
             foreach (var item in e.NewItems)
             {
-                // Add new features to layer
-                var feature = item as INotifyPropertyChanged;
+                // Add new drawables to layer
+                var drawable = item as INotifyPropertyChanged;
 
-                feature.PropertyChanged += HandlerFeaturePropertyChanged;
+                drawable.PropertyChanged += HandlerDrawablePropertyChanged;
             }
         }
 
@@ -255,12 +284,30 @@ namespace Mapsui.UI.Forms
             {
                 SelectedPin = clickedPin;
 
-                var args = new PinClickedEventArgs(clickedPin, Map.Viewport.ScreenToWorld(e.ScreenPosition).ToForms(), e.NumTaps);
-                var handler = PinClicked;
+                SelectedPinChanged?.Invoke(this, new SelectedPinChangedEventArgs(SelectedPin));
 
-                handler?.Invoke(this, args);
+                var pinArgs = new PinClickedEventArgs(clickedPin, Map.Viewport.ScreenToWorld(e.ScreenPosition).ToForms(), e.NumTaps);
 
-                if (args.Handled)
+                PinClicked?.Invoke(this, pinArgs);
+
+                if (pinArgs.Handled)
+                {
+                    e.Handled = true;
+                    return;
+                }
+            }
+
+            // Check for clicked drawables
+            var drawables = GetDrawablesAt(Map.Viewport.ScreenToWorld(e.ScreenPosition), _mapDrawableLayer);
+
+            var drawableArgs = new DrawableClickedEventArgs(Map.Viewport.ScreenToWorld(e.ScreenPosition).ToForms(), new Xamarin.Forms.Point(e.ScreenPosition.X, e.ScreenPosition.Y), e.NumTaps);
+
+            // Now check each drawable until one handles the event
+            foreach (var drawable in drawables)
+            {
+                drawable.HandleClicked(drawableArgs);
+
+                if (drawableArgs.Handled)
                 {
                     e.Handled = true;
                     return;
@@ -271,9 +318,8 @@ namespace Mapsui.UI.Forms
         private void HandlerLongTap(object sender, TapEventArgs e)
         {
             var args = new MapLongClickedEventArgs(Map.Viewport.ScreenToWorld(e.ScreenPosition).ToForms());
-            var handler = MapLongClicked;
 
-            handler?.Invoke(this, args);
+            MapLongClicked?.Invoke(this, args);
 
             if (args.Handled)
             {
@@ -284,9 +330,9 @@ namespace Mapsui.UI.Forms
 
         private void HandlerTap(object sender, TapEventArgs e)
         {
-            // Check, if we hit a widget or feature
+            // Check, if we hit a widget or drawable
             // Is there a widget at this position
-            // Is there a feature at this position
+            // Is there a drawable at this position
             if (Map != null)
                 e.Handled = Map.InvokeInfo(e.ScreenPosition, e.ScreenPosition, _mapControl.SkiaScale, _mapControl.SymbolCache, null, e.NumOfTaps);
 
@@ -294,9 +340,8 @@ namespace Mapsui.UI.Forms
                 return;
 
             var args = new MapClickedEventArgs(Map.Viewport.ScreenToWorld(e.ScreenPosition).ToForms(), e.NumOfTaps);
-            var handler = MapClicked;
 
-            handler?.Invoke(this, args);
+            MapClicked?.Invoke(this, args);
 
             if (args.Handled)
             {
@@ -310,19 +355,47 @@ namespace Mapsui.UI.Forms
 
         private void HandlerPinPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            //var pin = sender as Pin;
-
-            //if (e.PropertyName.Equals(nameof(Pin.IsVisible)))
-            //{
-            //    //((Feature)pin.NativeObject)
-            //    //_mapControl.Refresh();
-            //}
             Map.ViewChanged(false);
         }
 
-        private void HandlerFeaturePropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void HandlerDrawablePropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             Map.ViewChanged(false);
+        }
+
+        /// <summary>
+        /// Get all drawables of layer that contain given point
+        /// </summary>
+        /// <param name="point">Point to search for in world coordinates</param>
+        /// <param name="layer">Layer to search for drawables</param>
+        /// <returns></returns>
+        private IList<Drawable> GetDrawablesAt(Geometries.Point point, Layer layer)
+        {
+            List<Drawable> drawables = new List<Drawable>();
+
+            if (layer.Enabled == false) return drawables;
+            if (layer.MinVisible > Map.Viewport.Resolution) return drawables;
+            if (layer.MaxVisible < Map.Viewport.Resolution) return drawables;
+
+            var allFeatures = layer.GetFeaturesInView(layer.Envelope, Map.Viewport.Resolution);
+
+            // Now check all features, if they are clicked and clickable
+            foreach (var feature in allFeatures)
+            {
+                if (feature.Geometry.Contains(point))
+                {
+                    var drawable = _drawable.Where(f => f.Feature == feature).First();
+                    // Take only the clickable object
+                    if (drawable.IsClickable)
+                        drawables.Add(drawable);
+                }
+            }
+
+            // If there more than one drawables found, than reverse, because the top most should be the first
+            if (drawables.Count > 1)
+                drawables.Reverse();
+
+            return drawables;
         }
     }
 }

@@ -64,7 +64,7 @@ namespace Mapsui.Samples.Forms
                 FillColor = new Color(rnd.Next(0, 255) / 255.0, rnd.Next(0, 255) / 255.0, rnd.Next(0, 255) / 255.0, rnd.Next(0,255) / 255.0)
             };
 
-            mapView.Features.Add(circle);
+            mapView.Drawables.Add(circle);
 
             return true;
         }
@@ -91,25 +91,32 @@ namespace Mapsui.Samples.Forms
                 new Position(center.Latitude + diffY * 0.3, center.Longitude - diffX * 0.3),
             });
 
-            mapView.Features.Add(polygon);
+            polygon.IsClickable = true;
+            polygon.Clicked += (s, args) =>
+            {
+                ((Polygon)s).FillColor = new Color(rnd.Next(0, 255) / 255.0, rnd.Next(0, 255) / 255.0, rnd.Next(0, 255) / 255.0);
+                args.Handled = true;
+            };
+
+            mapView.Drawables.Add(polygon);
 
             return true;
         }
 
         public static bool DrawPolylines(MapView mapView, MapClickedEventArgs e)
         {
-            IFeatureProvider f;
+            Drawable f;
 
-            lock (mapView.Features)
+            lock (mapView.Drawables)
             {
-                if (mapView.Features.Count == 0)
+                if (mapView.Drawables.Count == 0)
                 {
                     f = new Polyline { StrokeWidth = 4, StrokeColor = Color.Red };
-                    mapView.Features.Add(f);
+                    mapView.Drawables.Add(f);
                 }
                 else
                 {
-                    f = mapView.Features.First();
+                    f = mapView.Drawables.First();
                 }
 
                 if (f is Polyline)

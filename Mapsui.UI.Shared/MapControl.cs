@@ -67,12 +67,11 @@ namespace Mapsui.UI
 
         private bool HandleZoomOut(Geometries.Point screenPosition)
         {
-            var handler = Zoom;
-            var eventArgs = new ZoomEventArgs(screenPosition, ZoomDirection.ZoomOut);
+            var args = new ZoomEventArgs(screenPosition, ZoomDirection.ZoomOut);
 
-            handler?.Invoke(this, eventArgs);
+            Zoom?.Invoke(this, args);
 
-            if (eventArgs.Handled)
+            if (args.Handled)
                 return true;
 
             // TODO
@@ -83,12 +82,11 @@ namespace Mapsui.UI
 
         private bool HandleZoomIn(Geometries.Point screenPosition)
         {
-            var handler = Zoom;
-            var eventArgs = new ZoomEventArgs(screenPosition, ZoomDirection.ZoomIn);
+            var args = new ZoomEventArgs(screenPosition, ZoomDirection.ZoomIn);
 
-            handler?.Invoke(this, eventArgs);
+            Zoom?.Invoke(this, args);
 
-            if (eventArgs.Handled)
+            if (args.Handled)
                 return true;
 
             // TODO
@@ -99,48 +97,44 @@ namespace Mapsui.UI
 
         private bool HandleHover(Geometries.Point screenPosition)
         {
-            var handler = Hover;
-            var eventArgs = new HoverEventArgs(screenPosition);
+            var args = new HoverEventArgs(screenPosition);
 
-            handler?.Invoke(this, eventArgs);
+            Hover?.Invoke(this, args);
 
-            return eventArgs.Handled;
+            return args.Handled;
         }
 
         private bool HandleSwipe(double velocityX, double velocityY)
         {
-            var handler = Swipe;
-            var eventArgs = new SwipeEventArgs(velocityX, velocityY);
+            var args = new SwipeEventArgs(velocityX, velocityY);
 
-            handler?.Invoke(this, eventArgs);
+            Swipe?.Invoke(this, args);
 
             // TODO
             // Perform standard behavior
 
-            return eventArgs.Handled;
+            return args.Handled;
         }
 
         private bool HandleFling(double velocityX, double velocityY)
         {
-            var handler = Fling;
-            var eventArgs = new SwipeEventArgs(velocityX, velocityY);
+            var args = new SwipeEventArgs(velocityX, velocityY);
 
-            handler?.Invoke(this, eventArgs);
+            Fling?.Invoke(this, args);
 
             // TODO
             // Perform standard behavior
 
-            return eventArgs.Handled;
+            return args.Handled;
         }
 
         private bool HandleTouchStart(List<Geometries.Point> touchPoints)
         {
-            var handler = TouchStart;
-            var eventArgs = new TouchEventArgs(touchPoints);
+            var args = new TouchEventArgs(touchPoints);
 
-            handler?.Invoke(this, eventArgs);
+            TouchStart?.Invoke(this, args);
 
-            if (eventArgs.Handled)
+            if (args.Handled)
                 return true;
 
             if (touchPoints.Count >= 2)
@@ -160,10 +154,9 @@ namespace Mapsui.UI
 
         private bool HandleTouchEnd(List<Geometries.Point> touchPoints, Geometries.Point releasedPoint)
         {
-            var handler = TouchEnd;
-            var eventArgs = new TouchEventArgs(touchPoints);
+            var args = new TouchEventArgs(touchPoints);
 
-            handler?.Invoke(this, eventArgs);
+            TouchEnd?.Invoke(this, args);
 
             // Last touch released
             if (touchPoints.Count == 0)
@@ -173,17 +166,16 @@ namespace Mapsui.UI
                 _map.ViewChanged(true);
             }
 
-            return eventArgs.Handled;
+            return args.Handled;
         }
 
         private bool HandleTouchMove(List<Geometries.Point> touchPoints)
         {
-            var handler = TouchMove;
-            var eventArgs = new TouchEventArgs(touchPoints);
+            var args = new TouchEventArgs(touchPoints);
 
-            handler?.Invoke(this, eventArgs);
+            TouchMove?.Invoke(this, args);
 
-            if (eventArgs.Handled)
+            if (args.Handled)
                 return true;
 
             switch (_mode)
@@ -256,12 +248,11 @@ namespace Mapsui.UI
 
         private bool HandleDoubleTap(Geometries.Point screenPosition, int numOfTaps)
         {
-            var handler = DoubleTap;
-            var eventArgs = new TapEventArgs(screenPosition, numOfTaps);
+            var args = new TapEventArgs(screenPosition, numOfTaps);
 
-            handler?.Invoke(this, eventArgs);
+            DoubleTap?.Invoke(this, args);
 
-            if (eventArgs.Handled)
+            if (args.Handled)
                 return true;
 
             var tapWasHandled = Map.InvokeInfo(screenPosition, screenPosition, _skiaScale, _renderer.SymbolCache, WidgetTouched, numOfTaps);
@@ -277,12 +268,11 @@ namespace Mapsui.UI
 
         private bool HandleSingleTap(Geometries.Point screenPosition)
         {
-            var handler = SingleTap;
-            var eventArgs = new TapEventArgs(screenPosition, 1);
+            var args = new TapEventArgs(screenPosition, 1);
 
-            handler?.Invoke(this, eventArgs);
+            SingleTap?.Invoke(this, args);
 
-            if (eventArgs.Handled)
+            if (args.Handled)
                 return true;
 
             return Map.InvokeInfo(screenPosition, screenPosition, _skiaScale, _renderer.SymbolCache, WidgetTouched, 1);
@@ -290,12 +280,11 @@ namespace Mapsui.UI
 
         private bool HandleLongTap(Geometries.Point screenPosition)
         {
-            var handler = LongTap;
-            var eventArgs = new TapEventArgs(screenPosition, 1);
+            var args = new TapEventArgs(screenPosition, 1);
 
-            handler?.Invoke(this, eventArgs);
+            LongTap?.Invoke(this, args);
 
-            return eventArgs.Handled;
+            return args.Handled;
         }
 
         /// <summary>

@@ -66,6 +66,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EventArgs\DrawableClickedEventArgs.cs" />
     <Compile Include="EventArgs\PinClickedEventArgs.cs" />
     <Compile Include="EventArgs\MapClickedEventArgs.cs" />
     <Compile Include="EventArgs\MapLongClickedEventArgs.cs" />
@@ -76,6 +77,8 @@
     <Compile Include="MapView.cs" />
     <Compile Include="Objects\Circle.cs" />
     <Compile Include="Objects\Distance.cs" />
+    <Compile Include="Objects\IClickable.cs" />
+    <Compile Include="Objects\Drawable.cs" />
     <Compile Include="Objects\IFeatureProvider.cs" />
     <Compile Include="Objects\MapSpan.cs" />
     <Compile Include="Objects\ObservableCollectionProvider.cs" />
@@ -101,6 +104,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="LICENSE.md" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

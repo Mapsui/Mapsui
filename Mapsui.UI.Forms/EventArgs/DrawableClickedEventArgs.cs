@@ -1,18 +1,19 @@
 ﻿using System;
+using Xamarin.Forms;
 
 namespace Mapsui.UI.Forms
 {
-    public sealed class PinClickedEventArgs : EventArgs
+    public sealed class DrawableClickedEventArgs : EventArgs
     {
-        public Pin Pin { get; }
         public Position Point { get; }
+        public Point ScreenPoint { get; }
         public int NumOfTaps { get; }
         public bool Handled { get; set; } = false;
 
-        internal PinClickedEventArgs(Pin pin, Position point, int numOfTaps)
+        internal DrawableClickedEventArgs(Position point, Point screenPoint, int numOfTaps)
         {
-            Pin = pin;
             Point = point;
+            ScreenPoint = screenPoint;
             NumOfTaps = numOfTaps;
         }
     }
