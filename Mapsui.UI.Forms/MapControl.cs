@@ -35,9 +35,10 @@ namespace Mapsui.UI
         private const int None = 0;
         private const int Dragging = 1;
         private const int Zooming = 2;
+        // See http://grepcode.com/file/repository.grepcode.com/java/ext/com.google.android/android/4.0.4_r2.1/android/view/ViewConfiguration.java#ViewConfiguration.0PRESSED_STATE_DURATION for values
         private const int shortTap = 125;
         private const int shortClick = 250;
-        private const int delayTap = 180;
+        private const int delayTap = 300;
         private const int longTap = 500;
 
         private Map _map;
@@ -143,7 +144,7 @@ namespace Mapsui.UI
                 }
 
                 // Do we have a tap event
-                if (_touches[e.Id].Location.Equals(_firstTouch) && ticks - _touches[e.Id].Tick < (e.DeviceType == SKTouchDeviceType.Mouse ? shortClick : shortTap) * 10000)
+                if (_touches[e.Id].Location.Equals(_firstTouch) && ticks - _touches[e.Id].Tick < (e.DeviceType == SKTouchDeviceType.Mouse ? shortClick : longTap) * 10000)
                 {
                     // Start a timer with timeout delayTap ms. If than isn't arrived another tap, than it is a single
                     _doubleTapTestTimer = new Timer((l) =>
@@ -160,7 +161,7 @@ namespace Mapsui.UI
                         _doubleTapTestTimer = null;
                     }, location, delayTap, Timeout.Infinite);
                 }
-                else if (_touches[e.Id].Location.Equals(_firstTouch) && ticks - _touches[e.Id].Tick < longTap * 10000)
+                else if (_touches[e.Id].Location.Equals(_firstTouch) && ticks - _touches[e.Id].Tick >= longTap * 10000)
                 {
                     if (!e.Handled)
                         e.Handled = HandleLongTap(location);
