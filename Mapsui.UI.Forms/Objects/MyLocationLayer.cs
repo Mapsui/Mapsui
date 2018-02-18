@@ -18,12 +18,38 @@ namespace Mapsui.UI.Objects
 {
     public class MyLocationLayer : Layer
     {
-        Feature moving;
-        Feature still;
+        MapView mapView;
+        Feature feature;
         byte[] bitmapMoving;
         byte[] bitmapStill;
         int bitmapMovingId = -1;
         int bitmapStillId = -1;
+
+        private const string animationMyLocationName = "animationMyLocationPosition";
+        private const string animationMyDirectionName = "animationMyDirectionPosition";
+        private Position animationMyLocationStart;
+        private Position animationMyLocationEnd;
+
+        private bool isMoving = false;
+
+        /// <summary>
+        /// Should be moving arrow or round circle displayed
+        /// </summary>
+        public bool IsMoving
+        {
+            get
+            {
+                return isMoving;
+            }
+            set
+            {
+                if (isMoving != value)
+                {
+                    isMoving = value;
+                    ((SymbolStyle)feature.Styles.First()).BitmapId = isMoving ? bitmapMovingId : bitmapStillId;
+                }
+            }
+        }
 
         Position myLocation = new Position(0, 0);
 
@@ -39,8 +65,13 @@ namespace Mapsui.UI.Objects
         public double Speed { get; } = 0.0;
         public double Scale { get; set; } = 1.0;
 
-        public MyLocationLayer()
+        public MyLocationLayer(MapView view)
         {
+            if (view == null)
+                throw new ArgumentNullException("View shouldn't be null");
+
+            mapView = view;
+
             Enabled = false;
 
             bitmapMoving = CreateImage("MyLocationMoving");
@@ -59,31 +90,14 @@ namespace Mapsui.UI.Objects
                 bitmapStillId = BitmapRegistry.Instance.Register(new MemoryStream(bitmapStill));
             }
 
-            moving = new Feature
+            feature = new Feature
             {
                 Geometry = myLocation.ToMapsui(),
                 ["Label"] = "MyLocation moving",
             };
 
-            moving.Styles.Clear();
-            moving.Styles.Add(new SymbolStyle
-            {
-                Enabled = false,
-                BitmapId = bitmapMovingId,
-                SymbolScale = Scale,
-                SymbolRotation = Direction,
-                SymbolOffset = new Offset(16, 16),
-                Opacity = 1,
-            });
-
-            still = new Feature
-            {
-                Geometry = myLocation.ToMapsui(),
-                ["Label"] = "MyLocation still",
-            };
-
-            still.Styles.Clear();
-            still.Styles.Add(new SymbolStyle
+            feature.Styles.Clear();
+            feature.Styles.Add(new SymbolStyle
             {
                 Enabled = true,
                 BitmapId = bitmapStillId,
@@ -93,39 +107,95 @@ namespace Mapsui.UI.Objects
                 Opacity = 1,
             });
 
-            DataSource = new MemoryProvider(new List<Feature> { moving, still });
+            DataSource = new MemoryProvider(new List<Feature> { feature });
             Style = null;
         }
 
-        public bool UpdateMyLocation(Position newLocation, double newDirection, double newSpeed)
+        // Update my location
+        public void UpdateMyLocation(Position newLocation)
+        {
+            if (!MyLocation.Equals(newLocation))
+            {
+                // We have a location update, so abort last animation
+                if (mapView.AnimationIsRunning(animationMyLocationName))
+                    mapView.AbortAnimation(animationMyLocationName);
+
+                // Save values for new animation
+                animationMyLocationStart = MyLocation;
+                animationMyLocationEnd = newLocation;
+
+                var animation = new Animation((v) =>
+                {
+                    var deltaLat = (animationMyLocationEnd.Latitude - animationMyLocationStart.Latitude) * v;
+                    var deltaLon = (animationMyLocationEnd.Longitude - animationMyLocationStart.Longitude) * v;
+                    var modified = InternalUpdateMyLocation(new Position(animationMyLocationStart.Latitude + deltaLat, animationMyLocationStart.Longitude + deltaLon));
+                    // Update viewport
+                    if (modified && mapView.MyLocationFollow && mapView.MyLocationEnabled)
+                        mapView.Map.Viewport.Center = MyLocation.ToMapsui();
+                    // Refresh map
+                    if (mapView.MyLocationEnabled && modified)
+                        mapView.Refresh();
+                }, 0.0, 1.0);
+
+                // At the end, update viewport
+                animation.Commit(mapView, animationMyLocationName, 100, 3000, finished: (s, v) => mapView.Map.ViewChanged(true));
+            }
+        }
+
+        public void UpdateMyDirection(double newDirection, double newViewportRotation)
+        {
+            var newRotation = newDirection - newViewportRotation;
+            var oldRotation = ((SymbolStyle)feature.Styles.First()).SymbolRotation;
+
+            if (newRotation != oldRotation)
+            {
+                Direction = newDirection;
+
+                // We have a direction update, so abort last animation
+                if (mapView.AnimationIsRunning(animationMyDirectionName))
+                    mapView.AbortAnimation(animationMyDirectionName);
+
+                var animation = new Animation((v) =>
+                {
+                    if (v != ((SymbolStyle)feature.Styles.First()).SymbolRotation)
+                    {
+                        ((SymbolStyle)feature.Styles.First()).SymbolRotation = v;
+                        mapView.Refresh();
+                    }
+                }, oldRotation, newRotation);
+
+                animation.Commit(mapView, animationMyDirectionName, 50, 500);
+            }
+        }
+
+        public void UpdateMySpeed(double newSpeed)
+        {
+            var modified = false;
+
+            if (newSpeed > 0 && !IsMoving)
+            {
+                IsMoving = true;
+                modified = true;
+            }
+
+            if (newSpeed <= 0 && IsMoving)
+            {
+                IsMoving = false;
+                modified = true;
+            }
+
+            if (modified)
+                mapView.Refresh();
+        }
+
+        private bool InternalUpdateMyLocation(Position newLocation)
         {
             var modified = false;
 
             if (!myLocation.Equals(newLocation))
             {
                 myLocation = newLocation;
-                moving.Geometry = myLocation.ToMapsui();
-                modified = true;
-            }
-
-            if (!Direction.Equals(newDirection))
-            {
-                Direction = newDirection;
-                ((SymbolStyle)moving.Styles.First()).SymbolRotation = Direction;
-                modified = true;
-            }
-
-            if (newSpeed > 0 && !((SymbolStyle)moving.Styles.First()).Enabled)
-            {
-                ((SymbolStyle)moving.Styles.First()).Enabled = true;
-                ((SymbolStyle)still.Styles.First()).Enabled = false;
-                modified = true;
-            }
-
-            if (newSpeed == 0 && !((SymbolStyle)still.Styles.First()).Enabled)
-            {
-                ((SymbolStyle)moving.Styles.First()).Enabled = false;
-                ((SymbolStyle)still.Styles.First()).Enabled = true;
+                feature.Geometry = myLocation.ToMapsui();
                 modified = true;
             }
 

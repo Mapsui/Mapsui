@@ -1,6 +1,8 @@
 ﻿using Mapsui.Layers;
 using Mapsui.UI.Forms.Extensions;
 using Mapsui.UI.Objects;
+using Plugin.Geolocator;
+using Plugin.Geolocator.Abstractions;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -19,6 +21,7 @@ namespace Mapsui.UI.Forms
         private const string PinLayerName = "Pins";
         private const string DrawableLayerName = "Drawables";
 
+        private bool _gpsAvailable = false;
         private MapControl _mapControl;
         private MyLocationLayer _mapMyLocationLayer;
         private Layer _mapPinLayer;
@@ -33,8 +36,22 @@ namespace Mapsui.UI.Forms
             MyLocationEnabled = false;
             MyLocationFollow = true;
 
+            // Check for GPS
+            if (!CrossGeolocator.IsSupported)
+                _gpsAvailable =  false;
+            else 
+                _gpsAvailable = CrossGeolocator.Current.IsGeolocationAvailable;
+
+            //var _gpsAvailable = Utils.CheckPermissions(Permission.Location);
+
+            if (_gpsAvailable)
+            {
+                CrossGeolocator.Current.PositionChanged += MyLocationPositionChanged;
+                CrossGeolocator.Current.PositionError += MyLocationPositionError;
+            }
+
             _mapControl = new MapControl();
-            _mapMyLocationLayer = new MyLocationLayer();
+            _mapMyLocationLayer = new MyLocationLayer(this);
             _mapPinLayer = new Layer(PinLayerName);
             _mapDrawableLayer = new Layer(DrawableLayerName);
 
@@ -111,6 +128,7 @@ namespace Mapsui.UI.Forms
 
                 if (_mapControl.Map != null)
                 {
+                    _mapControl.Map.Viewport.ViewportChanged -= HandlerViewportChanged;
                     _mapControl.Map.Info -= HandlerInfo;
                     _mapControl.Map.InfoLayers.Remove(_mapPinLayer);
                     _mapControl.Map.InfoLayers.Remove(_mapDrawableLayer);
@@ -123,6 +141,8 @@ namespace Mapsui.UI.Forms
 
                 if (_mapControl.Map != null)
                 {
+                    // Get updates of Viewport
+                    _mapControl.Map.Viewport.ViewportChanged += HandlerViewportChanged;
                     _mapControl.Map.Info += HandlerInfo;
                     // Add layer for MyLocation
                     _mapControl.Map.Layers.Add(_mapMyLocationLayer);
@@ -136,6 +156,14 @@ namespace Mapsui.UI.Forms
 
                 OnPropertyChanged();
             }
+        }
+
+        /// <summary>
+        /// MyLocation layer
+        /// </summary>
+        public MyLocationLayer MyLocationLayer
+        {
+            get { return _mapMyLocationLayer; }
         }
 
         /// <summary>
@@ -208,20 +236,12 @@ namespace Mapsui.UI.Forms
             set { SetValue(ReSnapRotationDegreesProperty, value); }
         }
 
+        /// <summary>
+        /// Refresh screen
+        /// </summary>
         public void Refresh()
         {
-            _mapControl.RefreshGraphics();
-        }
-
-        public void UpdateMyLocation(Position newLocation, double newDirection, double newSpeed)
-        {
-            var modified = _mapMyLocationLayer.UpdateMyLocation(newLocation, newDirection, newSpeed);
-
-            if (modified && MyLocationFollow && MyLocationEnabled)
-                Map.Viewport.Center = newLocation.ToMapsui();
-
-            if (MyLocationEnabled && modified)
-                Map.ViewChanged(false);
+            _mapControl.InvalidateSurface();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -234,13 +254,44 @@ namespace Mapsui.UI.Forms
             return _pins.GetEnumerator();
         }
 
-        protected override void OnPropertyChanged([CallerMemberName] string propertyName = "")
+        protected override async void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
             base.OnPropertyChanged(propertyName);
 
             if (propertyName.Equals(nameof(MyLocationEnabled)))
             {
-                _mapMyLocationLayer.Enabled = MyLocationEnabled;
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    _mapMyLocationLayer.Enabled = MyLocationEnabled;
+                });
+
+                if (_gpsAvailable && MyLocationEnabled)
+                {
+                    // Start GPS
+                    await CrossGeolocator.Current.StartListeningAsync(TimeSpan.FromSeconds(1),
+                        1,
+                        true,
+                        new ListenerSettings
+                        {
+                            ActivityType = ActivityType.Fitness,
+                            AllowBackgroundUpdates = false,
+                            DeferLocationUpdates = true,
+                            DeferralDistanceMeters = 1,
+                            DeferralTime = TimeSpan.FromSeconds(0.2),
+                            ListenForSignificantChanges = false,
+                            PauseLocationUpdatesAutomatically = true
+                        });
+
+                }
+                else
+                {
+                    // Stop GPS
+                    if (_gpsAvailable && CrossGeolocator.Current.IsListening)
+                    {
+                        await CrossGeolocator.Current.StopListeningAsync();
+                    }
+                }
+
                 Map.ViewChanged(true);
             }
 
@@ -257,7 +308,20 @@ namespace Mapsui.UI.Forms
         /// <summary>
         /// Handlers
         /// </summary>
-        
+
+        /// <summary>
+        /// Viewport of map has changed
+        /// </summary>
+        /// <param name="sender">Viewport of this event</param>
+        /// <param name="e">Event arguments containing what changed</param>
+        private void HandlerViewportChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName.Equals(nameof(Viewport.Rotation)))
+            {
+                _mapMyLocationLayer.UpdateMyDirection(_mapMyLocationLayer.Direction, Map.Viewport.Rotation);
+            }
+        }
+
         private void HandlerHover(object sender, HoverEventArgs e)
         {
         }
@@ -415,7 +479,7 @@ namespace Mapsui.UI.Forms
         /// </summary>
         /// <param name="point">Point to search for in world coordinates</param>
         /// <param name="layer">Layer to search for drawables</param>
-        /// <returns></returns>
+        /// <returns>List with all drawables at point, which are clickable</returns>
         private IList<Drawable> GetDrawablesAt(Geometries.Point point, Layer layer)
         {
             List<Drawable> drawables = new List<Drawable>();
@@ -443,6 +507,30 @@ namespace Mapsui.UI.Forms
                 drawables.Reverse();
 
             return drawables;
+        }
+
+        /// <summary>
+        /// If there was an error while getting GPS coordinates
+        /// </summary>
+        /// <param name="sender">Geolocator</param>
+        /// <param name="e">Event arguments for position error</param>
+        private void MyLocationPositionError(object sender, PositionErrorEventArgs e)
+        {
+        }
+
+        /// <summary>
+        /// New informations from Geolocator arrived
+        /// </summary>
+        /// <param name="sender">Geolocator</param>
+        /// <param name="e">Event arguments for new position</param>
+        private void MyLocationPositionChanged(object sender, PositionEventArgs e)
+        {
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                _mapMyLocationLayer.UpdateMyLocation(new Position(e.Position.Latitude, e.Position.Longitude));
+                _mapMyLocationLayer.UpdateMyDirection(e.Position.Heading, Map.Viewport.Rotation);
+                _mapMyLocationLayer.UpdateMySpeed(e.Position.Speed);
+            });
         }
     }
 }

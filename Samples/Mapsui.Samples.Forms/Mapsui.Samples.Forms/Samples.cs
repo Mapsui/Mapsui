@@ -60,12 +60,8 @@ namespace Mapsui.Samples.Forms
 
         public static bool MyLocationSample(MapView mapView, MapClickedEventArgs e)
         {
-            if (mapView.MyLocationEnabled == true)
-            {
-                mapView.UpdateMyLocation(new Position(48, 9), 30, 100);
-            }
-            else
-                mapView.MyLocationEnabled = true;
+            mapView.MyLocationLayer.IsMoving = mapView.MyLocationEnabled;
+            mapView.MyLocationEnabled = true;
 
             return true;
         }
