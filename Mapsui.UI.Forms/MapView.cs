@@ -292,7 +292,7 @@ namespace Mapsui.UI.Forms
                     }
                 }
 
-                Map.ViewChanged(true);
+                Refresh();
             }
 
             if (propertyName.Equals(nameof(AllowPinchRotation)))
