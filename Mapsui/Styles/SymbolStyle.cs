@@ -27,7 +27,6 @@ namespace Mapsui.Styles
         {
             SymbolOffset = new Offset();
             SymbolScale = 1f;
-            Opacity = 1f;
             BitmapId = -1;
         }
 
@@ -62,8 +61,6 @@ namespace Mapsui.Styles
         public UnitType UnitType { get; set; }
 
         public SymbolType SymbolType { get; set; }
-
-        public double Opacity { get; set; }
 
         public override bool Equals(object obj)
         {
@@ -113,7 +110,6 @@ namespace Mapsui.Styles
                 SymbolRotation.GetHashCode() ^
                 UnitType.GetHashCode() ^
                 SymbolType.GetHashCode() ^
-                Opacity.GetHashCode() ^
                 base.GetHashCode();
         }
 

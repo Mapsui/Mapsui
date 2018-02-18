@@ -28,6 +28,7 @@ namespace Mapsui.Styles
             MinVisible = 0;
             MaxVisible = double.MaxValue;
             Enabled = true;
+            Opacity = 1f;
         }
 
         /// <summary>
@@ -45,6 +46,10 @@ namespace Mapsui.Styles
         /// </summary>
         public bool Enabled { get; set; }
 
+        /// <summary>
+        ///     Gets or sets the objects base opacity
+        /// </summary>
+        public float Opacity { get; set; }
 
         public override bool Equals(object obj)
         {
@@ -71,7 +76,7 @@ namespace Mapsui.Styles
 
         public override int GetHashCode()
         {
-            return MinVisible.GetHashCode() ^ MaxVisible.GetHashCode() ^ Enabled.GetHashCode();
+            return MinVisible.GetHashCode() ^ MaxVisible.GetHashCode() ^ Enabled.GetHashCode() ^ Opacity.GetHashCode();
         }
 
         public static bool operator ==(Style style1, Style style2)

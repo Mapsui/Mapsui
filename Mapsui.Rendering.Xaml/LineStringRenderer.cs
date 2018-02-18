@@ -21,7 +21,7 @@ namespace Mapsui.Rendering.Xaml
 
         public static System.Windows.Shapes.Path CreateLineStringPath(VectorStyle style)
         {
-            var path = new System.Windows.Shapes.Path();
+            var path = new System.Windows.Shapes.Path { Opacity = style.Opacity };
             if (style.Outline != null)
             {
                 //todo: render an outline around the line. 
