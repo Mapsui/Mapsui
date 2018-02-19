@@ -47,9 +47,12 @@ namespace Mapsui.Rendering.Xaml
 
             DetermineTextWidthAndHeightWpf(out var textWidth, out var textHeight, labelStyle, labelText);
 
-            border.SetValue(Canvas.LeftProperty, windowsPosition.X + labelStyle.Offset.X
+            var offsetX = labelStyle.Offset.IsRelative ? textWidth * labelStyle.Offset.X : labelStyle.Offset.X;
+            var offsetY = labelStyle.Offset.IsRelative ? textHeight * labelStyle.Offset.Y : labelStyle.Offset.Y;
+
+            border.SetValue(Canvas.LeftProperty, windowsPosition.X + offsetX
                 - (textWidth + 2 * witdhMargin) * (short)labelStyle.HorizontalAlignment * 0.5f);
-            border.SetValue(Canvas.TopProperty, windowsPosition.Y + labelStyle.Offset.Y
+            border.SetValue(Canvas.TopProperty, windowsPosition.Y + offsetY
                 - (textHeight + 2 * heightMargin) * (short)labelStyle.VerticalAlignment * 0.5f);
 
             return border;

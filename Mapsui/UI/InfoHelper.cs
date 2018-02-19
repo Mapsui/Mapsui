@@ -76,13 +76,17 @@ namespace Mapsui.UI
                         ? symbolCache.GetSize(symbolStyle.BitmapId)
                         : new Size(SymbolStyle.DefaultWidth, SymbolStyle.DefaultHeight);
 
+                    // Symbols allways drawn around the center (* 0.5 instead of / 2)
                     var factor = resolution * scale;
                     var marginX = size.Width * 0.5 * factor;
                     var marginY = size.Height * 0.5 * factor;
 
                     var box = feature.Geometry.GetBoundingBox();
                     box = box.Grow(marginX, marginY);
-                    box.Offset(symbolStyle.SymbolOffset.X * factor, symbolStyle.SymbolOffset.Y * factor);
+                    if (symbolStyle.SymbolOffset.IsRelative)
+                        box.Offset(size.Width * symbolStyle.SymbolOffset.X * factor, size.Height * symbolStyle.SymbolOffset.Y * factor);
+                    else
+                        box.Offset(symbolStyle.SymbolOffset.X * factor, symbolStyle.SymbolOffset.Y * factor);
                     if (box.Contains(point)) return true;
                 }
             }

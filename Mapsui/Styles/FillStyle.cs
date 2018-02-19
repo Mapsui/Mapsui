@@ -11,6 +11,7 @@ namespace Mapsui.Styles
         Hollow,
         Horizontal,        
         Vertical,
-        Bitmap
+        Bitmap,
+        Svg
     }
 }
