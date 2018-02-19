@@ -111,7 +111,7 @@ namespace Mapsui.Rendering.Xaml
 
         private static XamlShapes.Shape CreateSymbolFromBitmap(int bitmapId, double opacity, SymbolCache symbolCache)
         {
-            var imageBrush = symbolCache.GetOrCreate(bitmapId).ToImageBrush();
+            var imageBrush = ((XamlMedia.Imaging.BitmapImage)symbolCache.GetOrCreate(bitmapId)).ToImageBrush();
 
             // note: It probably makes more sense to use PixelWidth here:
             var width = imageBrush.ImageSource.Width;
@@ -132,16 +132,16 @@ namespace Mapsui.Rendering.Xaml
 
         private static XamlShapes.Shape CreateSymbolFromSvg(int bitmapId, double opacity, SymbolCache symbolCache)
         {
-            var imageBrush = symbolCache.GetOrCreate(bitmapId).ToImageBrush();
+            var image = ((XamlMedia.DrawingImage)symbolCache.GetOrCreate(bitmapId)); //.ToImageBrush();
 
             double width = 0;
             double height = 0;
 
-            if (imageBrush != null && imageBrush.ImageSource != null)
+            if (image != null)
             {
                 // note: It probably makes more sense to use PixelWidth here:
-                width = imageBrush.ImageSource.Width;
-                height = imageBrush.ImageSource.Height;
+                width = image.Width;
+                height = image.Height;
             }
 
             var path = new XamlShapes.Path
@@ -150,8 +150,10 @@ namespace Mapsui.Rendering.Xaml
                 {
                     Rect = new Rect(-width * 0.5, -height * 0.5, width, height)
                 },
-                Fill = imageBrush,
-                Opacity = opacity
+                Fill = new XamlMedia.DrawingBrush { Drawing = image.Drawing },
+                Opacity = opacity,
+                Width = width,
+                Height = height,
             };
 
             return path;

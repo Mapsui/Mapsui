@@ -84,8 +84,8 @@ namespace Mapsui.Samples.Common.Maps
                 CreateBitmapStyle("Mapsui.Samples.Common.Images.ic_place_black_24dp.png", 1.0),
                 CreateSvgStyle("Mapsui.Samples.Common.Images.Pin.svg", 0.7),
                 CreateSvgStyle("Mapsui.Samples.Common.Images.Pin.svg", 0.8),
-                CreateSvgStyle("Mapsui.Samples.Common.Images.Pin.svg", 0.9),
-                CreateSvgStyle("Mapsui.Samples.Common.Images.Pin.svg", 1.0),
+                CreateSvgStyle("Mapsui.Samples.Common.Images.Ghostscript_Tiger.svg", 0.05),
+                CreateSvgStyle("Mapsui.Samples.Common.Images.Ghostscript_Tiger.svg", 0.1),
             };
         }
 

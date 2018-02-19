@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using Mapsui.Styles;
 using System.Windows.Media.Imaging;
+using System.Windows.Media;
 
 namespace Mapsui.Rendering.Xaml
 {
     public class SymbolCache : Dictionary<int, BitmapImage>, ISymbolCache
     {
-        public BitmapImage GetOrCreate(int bitmapId)
+        public ImageSource GetOrCreate(int bitmapId)
         {
             if (ContainsKey(bitmapId)) return this[bitmapId];
 
@@ -20,7 +21,10 @@ namespace Mapsui.Rendering.Xaml
             {
                 // TODO: Convert Svg to Bitmap with Skia?
                 stream.Position = 0;
-                return null;
+                var image = Svg2Xaml.SvgReader.Load(stream);
+                // Freeze the DrawingImage for performance benefits.
+                image.Freeze();
+                return image;
             }
             else
                 return this[bitmapId] = stream.ToBitmapImage();

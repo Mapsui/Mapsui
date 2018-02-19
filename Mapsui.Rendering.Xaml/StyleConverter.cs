@@ -119,7 +119,7 @@ namespace Mapsui.Rendering.Xaml
         private static BitmapImage GetOrCreateBitmapImage(Styles.Brush brush, SymbolCache symbolCache = null, bool isSvg = false)
         {
             return symbolCache != null ? 
-                symbolCache.GetOrCreate(brush.BitmapId): 
+                (BitmapImage)symbolCache.GetOrCreate(brush.BitmapId): 
                 BitmapRegistry.Instance.Get(brush.BitmapId).ToBitmapImage();
         }
         
