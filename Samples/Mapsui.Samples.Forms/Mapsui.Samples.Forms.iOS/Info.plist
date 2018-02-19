@@ -50,5 +50,7 @@
 	<string>LaunchScreen</string>
 	<key>CFBundleName</key>
 	<string>Mapsui.Samples.Forms</string>
+	<key>NSLocationUsageDescription</key>
+	<string>Need GPS</string>
 </dict>
 </plist>

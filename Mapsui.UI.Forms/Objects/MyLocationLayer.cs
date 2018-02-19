@@ -1,17 +1,13 @@
-﻿using Mapsui.Geometries;
-using Mapsui.Layers;
+﻿using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Styles;
 using Mapsui.UI.Forms;
-using Mapsui.UI.Forms.Extensions;
 using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Mapsui.UI.Objects
@@ -68,7 +64,7 @@ namespace Mapsui.UI.Objects
         public MyLocationLayer(MapView view)
         {
             if (view == null)
-                throw new ArgumentNullException("View shouldn't be null");
+                throw new ArgumentNullException("MapView shouldn't be null");
 
             mapView = view;
 

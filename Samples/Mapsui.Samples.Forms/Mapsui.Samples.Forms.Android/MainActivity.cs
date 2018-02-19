@@ -1,6 +1,7 @@
 ﻿using System;
 using Plugin.Permissions;
 using Plugin.Permissions.Abstractions;
+using Plugin.Geolocator.Abstractions;
 using Android.App;
 using Android.Content.PM;
 using Android.Runtime;

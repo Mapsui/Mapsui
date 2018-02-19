@@ -2,6 +2,8 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Mapsui.UI.Forms;
+using Plugin.Geolocator;
+using Plugin.Geolocator.Abstractions;
 
 namespace Mapsui.Samples.Forms
 {
@@ -28,6 +30,10 @@ namespace Mapsui.Samples.Forms
             mapView.PinClicked += OnPinClicked;
             mapView.MapClicked += OnMapClicked;
 
+            mapView.MyLocationLayer.UpdateMyLocation(new UI.Forms.Position());
+
+            StartGPS();
+
             mapView.Map = call();
 
             clicker = c;
@@ -53,6 +59,59 @@ namespace Mapsui.Samples.Forms
             }
 
             e.Handled = true;
+        }
+        public async void StartGPS()
+        {
+            // Start GPS
+            await CrossGeolocator.Current.StartListeningAsync(TimeSpan.FromSeconds(1),
+                    1,
+                    true,
+                    new ListenerSettings
+                    {
+                        ActivityType = ActivityType.Fitness,
+                        AllowBackgroundUpdates = false,
+                        DeferLocationUpdates = true,
+                        DeferralDistanceMeters = 1,
+                        DeferralTime = TimeSpan.FromSeconds(0.2),
+                        ListenForSignificantChanges = false,
+                        PauseLocationUpdatesAutomatically = true
+                    });
+
+            CrossGeolocator.Current.PositionChanged += MyLocationPositionChanged;
+            CrossGeolocator.Current.PositionError += MyLocationPositionError;
+        }
+
+        public async void StopGPS()
+        {
+            // Stop GPS
+            if (CrossGeolocator.Current.IsListening)
+            {
+                await CrossGeolocator.Current.StopListeningAsync();
+            }
+        }
+
+        /// <summary>
+        /// If there was an error while getting GPS coordinates
+        /// </summary>
+        /// <param name="sender">Geolocator</param>
+        /// <param name="e">Event arguments for position error</param>
+        private void MyLocationPositionError(object sender, PositionErrorEventArgs e)
+        {
+        }
+
+        /// <summary>
+        /// New informations from Geolocator arrived
+        /// </summary>
+        /// <param name="sender">Geolocator</param>
+        /// <param name="e">Event arguments for new position</param>
+        private void MyLocationPositionChanged(object sender, PositionEventArgs e)
+        {
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                mapView.MyLocationLayer.UpdateMyLocation(new UI.Forms.Position(e.Position.Latitude, e.Position.Longitude));
+                mapView.MyLocationLayer.UpdateMyDirection(e.Position.Heading, mapView.Map.Viewport.Rotation);
+                mapView.MyLocationLayer.UpdateMySpeed(e.Position.Speed);
+            });
         }
     }
 }
