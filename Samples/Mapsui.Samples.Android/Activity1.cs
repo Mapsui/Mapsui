@@ -36,7 +36,7 @@ namespace Mapsui.Samples.Android
             MbTilesSample.MbTilesLocation = MbTilesLocationOnAndroid;
             
             var mapControl = FindViewById<MapControl>(Resource.Id.mapcontrol);
-            mapControl.Map = OpacityStyleSample.CreateMap();
+            mapControl.Map = SvgSample.CreateMap();
             mapControl.Map.Info+= MapOnInfo;
             mapControl.Map.Viewport.ViewportChanged += ViewportOnViewportChanged;
             mapControl.AllowPinchRotation = true;
