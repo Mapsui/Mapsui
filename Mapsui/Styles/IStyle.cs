@@ -36,5 +36,10 @@ namespace Mapsui.Styles
 		/// Gets or sets whether objects in this style is rendered or not
 		/// </summary>
 		bool Enabled { get; set; }
+
+        /// <summary>
+		/// Gets or sets the objects overall opacity
+		/// </summary>
+		float Opacity { get; set; }
     }
 }

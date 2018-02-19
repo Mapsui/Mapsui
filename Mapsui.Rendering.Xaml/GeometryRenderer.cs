@@ -55,7 +55,7 @@ namespace Mapsui.Rendering.Xaml
             // style.SymbolOffset.Convert();
             // style.SymbolRotation;
 
-            var path = new XamlShapes.Path();
+            var path = new XamlShapes.Path { Opacity = style.Opacity };
 
             if (style.BitmapId < 0)
             {

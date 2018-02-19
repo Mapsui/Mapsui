@@ -19,7 +19,6 @@ namespace Mapsui.Rendering.Xaml
 
             if (System.Text.Encoding.UTF8.GetString(buffer).ToLower().Equals("<svg"))
             {
-                // TODO: Convert Svg to Bitmap with Skia?
                 stream.Position = 0;
                 var image = Svg2Xaml.SvgReader.Load(stream);
                 // Freeze the DrawingImage for performance benefits.
@@ -33,10 +32,6 @@ namespace Mapsui.Rendering.Xaml
         public Size GetSize(int bitmapId)
         {
             var brush = GetOrCreate(bitmapId);
-
-            // TODO: Remove this, if Svg is implemented
-            if (brush == null)
-                return new Size();
 
             return new Size(brush.Width, brush.Height);
         }

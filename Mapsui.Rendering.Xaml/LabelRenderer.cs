@@ -42,7 +42,8 @@ namespace Mapsui.Rendering.Xaml
             {
                 Background = labelStyle.BackColor.ToXaml(),
                 CornerRadius = new CornerRadius(4),
-                Child = textblock
+                Child = textblock,
+                Opacity = labelStyle.Opacity,
             };
 
             DetermineTextWidthAndHeightWpf(out var textWidth, out var textHeight, labelStyle, labelText);
