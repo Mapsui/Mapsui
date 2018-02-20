@@ -47,8 +47,8 @@ namespace Mapsui.Samples.Common.Maps
             {
                 var feature = new Feature { Geometry = point, ["Label"] = counter.ToString() };
 
-                feature.Styles.Add(CreateSvgStyle("Mapsui.Samples.Common.Images.Ghostscript_Tiger.svg", 0.05));
-                //feature.Styles.Add(CreateBitmapStyle("Mapsui.Samples.Common.Images.Ghostscript_Tiger.png", 0.05));
+                //feature.Styles.Add(CreateSvgStyle("Mapsui.Samples.Common.Images.Ghostscript_Tiger.svg", 0.05));
+                feature.Styles.Add(CreateBitmapStyle("Mapsui.Samples.Common.Images.Ghostscript_Tiger.png", 0.05));
                 features.Add(feature);
                 counter++;
             }
