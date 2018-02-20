@@ -29,7 +29,7 @@ namespace Mapsui.Samples.Common.Maps
             return new MemoryLayer
             {
                 Name = SvgLayerName,
-                DataSource = CreateMemoryProviderWithDiverseSymbols(envelope, 200),
+                DataSource = CreateMemoryProviderWithDiverseSymbols(envelope, 2000),
                 Style = null
             };
         }
@@ -48,7 +48,11 @@ namespace Mapsui.Samples.Common.Maps
                 var feature = new Feature { Geometry = point, ["Label"] = counter.ToString() };
 
                 //feature.Styles.Add(CreateSvgStyle("Mapsui.Samples.Common.Images.Ghostscript_Tiger.svg", 0.05));
-                feature.Styles.Add(CreateBitmapStyle("Mapsui.Samples.Common.Images.Ghostscript_Tiger.png", 0.05));
+                //feature.Styles.Add(CreateBitmapStyle("Mapsui.Samples.Common.Images.Ghostscript_Tiger.png", 0.05));
+
+                feature.Styles.Add(CreateSvgStyle("Mapsui.Samples.Common.Images.Pin.svg", 0.5));
+                //feature.Styles.Add(CreateBitmapStyle("Mapsui.Samples.Common.Images.ic_place_black_24dp.png", 0.5));
+
                 features.Add(feature);
                 counter++;
             }
