@@ -48,6 +48,7 @@ namespace Mapsui.Samples.Common.Maps
                 var feature = new Feature { Geometry = point, ["Label"] = counter.ToString() };
 
                 feature.Styles.Add(CreateSvgStyle("Mapsui.Samples.Common.Images.Ghostscript_Tiger.svg", 0.05));
+                //feature.Styles.Add(CreateBitmapStyle("Mapsui.Samples.Common.Images.Ghostscript_Tiger.png", 0.05));
                 features.Add(feature);
                 counter++;
             }
@@ -86,7 +87,7 @@ namespace Mapsui.Samples.Common.Maps
         private static SymbolStyle CreateBitmapStyle(string embeddedResourcePath, double scale)
         {
             var bitmapId = GetBitmapIdForEmbeddedResource(embeddedResourcePath);
-            return new SymbolStyle { BitmapId = bitmapId, SymbolScale = scale, SymbolOffset = new Offset(0, 32) };
+            return new SymbolStyle { BitmapId = bitmapId, SymbolScale = scale, SymbolOffset = new Offset(0.0, 0.5, true) };
         }
 
         private static SymbolStyle CreateSvgStyle(string embeddedResourcePath, double scale)

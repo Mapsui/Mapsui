@@ -35,8 +35,6 @@ namespace Mapsui.Samples.Android
             DeployMbTilesFile();
             MbTilesSample.MbTilesLocation = MbTilesLocationOnAndroid;
 
-            var ticksStart = DateTime.Now.Ticks;
-
             var mapControl = FindViewById<MapControl>(Resource.Id.mapcontrol);
             mapControl.Map = SvgSample.CreateMap();
             mapControl.Map.Info+= MapOnInfo;
@@ -44,18 +42,6 @@ namespace Mapsui.Samples.Android
             mapControl.AllowPinchRotation = true;
             mapControl.UnSnapRotationDegrees = 30;
             mapControl.ReSnapRotationDegrees = 5;
-
-            var ticksEnd = DateTime.Now.Ticks;
-
-            System.Diagnostics.Debug.WriteLine(string.Format("Start time elapsed: {0} ms", TimeSpan.FromTicks(ticksEnd-ticksStart).TotalMilliseconds));
-
-            ticksStart = ticksEnd;
-
-            mapControl.Map.NavigateTo(200, 200);
-
-            ticksEnd = DateTime.Now.Ticks;
-
-            System.Diagnostics.Debug.WriteLine(string.Format("Refresh time elapsed: {0} ms", TimeSpan.FromTicks(ticksEnd - ticksStart).TotalMilliseconds));
 
             FindViewById<LinearLayout>(Resource.Id.mainLayout).AddView(_popup = CreatePopup());
         }
