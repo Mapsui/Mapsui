@@ -11,7 +11,7 @@ namespace Mapsui.Rendering.Xaml
             if (!(style is VectorStyle)) throw new ArgumentException("Style is not of type VectorStyle");
             var vectorStyle = style as VectorStyle;
 
-            System.Windows.Shapes.Path path = CreatePolygonPath(vectorStyle, viewport.Resolution, symbolCache);
+            var path = CreatePolygonPath(vectorStyle, viewport.Resolution, symbolCache);
             path.Data = polygon.ToXaml();
 
             var matrixTransform = new System.Windows.Media.MatrixTransform { Matrix = GeometryRenderer.CreateTransformMatrix1(viewport) };

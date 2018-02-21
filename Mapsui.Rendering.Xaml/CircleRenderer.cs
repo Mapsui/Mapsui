@@ -1,7 +1,5 @@
 ﻿using Mapsui.Styles;
-using Point = Mapsui.Geometries.Point;
 using System;
-using System.Windows;
 using XamlMedia = System.Windows.Media;
 using XamlShapes = System.Windows.Shapes;
 using XamlPoint = System.Windows.Point;
@@ -15,16 +13,14 @@ namespace Mapsui.Rendering.Xaml
         public static XamlShapes.Shape RenderCircle(Circle circle, IStyle style, IViewport viewport,
             SymbolCache symbolCache)
         {
-            XamlShapes.Shape path;
-            var matrix = XamlMedia.Matrix.Identity;
+            var path = CreateCirclePath(viewport, circle, style as VectorStyle ?? new VectorStyle());
+            var matrixTransform = new XamlMedia.MatrixTransform { Matrix = GeometryRenderer.CreateTransformMatrix1(viewport) };
+            path.RenderTransform = matrixTransform;
+            
+            if (path.Fill != null)
+                path.Fill.Transform = matrixTransform.Inverse as XamlMedia.MatrixTransform;
 
-            path = CreateCirclePath(viewport, circle, (style as VectorStyle) ?? new VectorStyle());
-            path.RenderTransform = new XamlMedia.MatrixTransform { Matrix = GeometryRenderer.CreateTransformMatrix1(viewport) };
-
-            //MatrixHelper.ScaleAt(ref matrix, viewport.Resolution, viewport.Resolution);
-            //MatrixHelper.Append(ref matrix, GeometryRenderer.CreateTransformMatrix(new Point(circle.X, circle.Y), viewport));
-            //path.RenderTransform = new XamlMedia.MatrixTransform { Matrix = matrix };
-
+            path.UseLayoutRounding = true;
             path.IsHitTestVisible = false;
 
             return path;
@@ -35,7 +31,7 @@ namespace Mapsui.Rendering.Xaml
             // The SL StrokeThickness default is 1 which causes blurry bitmaps
             var path = new XamlShapes.Path
             {
-                StrokeThickness = 0,
+                StrokeThickness = 2,
                 Fill = ToXaml(style.Fill)
             };
 
@@ -43,14 +39,15 @@ namespace Mapsui.Rendering.Xaml
             {
                 path.Stroke = new XamlMedia.SolidColorBrush(style.Outline.Color.ToXaml());
                 path.StrokeThickness = style.Outline.Width;
-                path.StrokeDashArray = style.Outline.PenStyle.ToXaml();
+                //!!!path.StrokeDashArray = style.Outline.PenStyle.ToXaml();
+                path.Tag = style.Outline.Width; // see #linewidthhack
             }
 
             // Get current position
             var position = Projection.SphericalMercator.ToLonLat(circle.X, circle.Y);
 
             // Calc ground resolution in meters per pixel of viewport for this latitude
-            double groundResolution = viewport.Resolution * Math.Cos(position.Y / 180.0 * Math.PI);
+            double groundResolution = Math.Cos(position.Y / 180.0 * Math.PI);
 
             // Now we can calc the radius of circle
             var radius = circle.Radius / groundResolution;
