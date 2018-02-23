@@ -160,5 +160,21 @@ namespace Mapsui.Geometries
             }
             return c;
         }
+
+        public LinearRing Rotate(double degrees, Point center)
+        {
+            var rotatedLinearRing = this.Clone();
+            for (var i = 0; i < Vertices.Count; i++)
+            {
+                rotatedLinearRing.Vertices[i] = Vertices[i].Rotate(degrees, center);
+            }
+
+            return rotatedLinearRing;
+        }
+
+        public LinearRing Rotate(double degrees)
+        {
+            return this.Rotate(degrees, new Point(0, 0));
+        }
     }
 }
