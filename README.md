@@ -45,9 +45,6 @@ See the [guidelines](CONTRIBUTING.md)
 - **Android** - Xamarin.Android on API Level 19 (v4.4 - Kit Kat)
 - **iOS** - Xamarin.iOS
 
-## Donations
-So far I do most of my testing in the simulator because I do not have an iPhone/iPad at home. So if you have an old iPad/iPhone lying around I'd be very interested. A cracked screen is not a problem :). Contact me at pauldendulk@gmail.com.
-
 ## License 
 
 [LGPL](https://raw.githubusercontent.com/pauldendulk/Mapsui/master/LICENSE.md)
