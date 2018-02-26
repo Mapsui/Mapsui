@@ -39,7 +39,7 @@ namespace Mapsui.Rendering.Xaml
             {
                 path.Stroke = new XamlMedia.SolidColorBrush(style.Outline.Color.ToXaml());
                 path.StrokeThickness = style.Outline.Width;
-                //!!!path.StrokeDashArray = style.Outline.PenStyle.ToXaml();
+                path.StrokeDashArray = style.Outline.PenStyle.ToXaml();
                 path.Tag = style.Outline.Width; // see #linewidthhack
             }
 

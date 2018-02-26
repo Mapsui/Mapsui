@@ -19,7 +19,7 @@ namespace Mapsui.Samples.Common.Maps
             map.Layers.Add(new Layer
             {
                 DataSource = CreateProviderWithRandomPoints(map.Envelope),
-                Style = new VectorStyle { Fill = new Brush(Color.White), Outline = new Pen { Color = Color.Black, PenStyle = PenStyle.Dash } },
+                Style = new VectorStyle { Fill = new Brush(Color.White), Outline = new Pen { Color = Color.Black } },
             });
             return map;
         }
@@ -51,7 +51,7 @@ namespace Mapsui.Samples.Common.Maps
             var counter = 0;
             foreach (var point in randomPoints)
             {
-                var circle = new Circle(((Point)point).X, ((Point)point).Y, 1000000);
+                var circle = new Circle(((Point)point).X, ((Point)point).Y, 200000);
                 features.Add(new Feature { Geometry = circle, ["Label"] = counter++.ToString() });
             }
             return features;

@@ -31,7 +31,7 @@ namespace Mapsui.Rendering.Skia
                 canvas.Save();
                 canvas.Translate((float)destination.X, (float)destination.Y);
 
-                var halfWidth = (float)radius / 2f;
+                var halfWidth = (float)radius;
                 var halfHeight = halfWidth;
 
                 var fillPaint = CreateFillPaint(vectorStyle.Fill, layerOpacity);
