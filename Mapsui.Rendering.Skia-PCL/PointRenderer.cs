@@ -1,6 +1,7 @@
 ﻿using System;
 using Mapsui.Geometries;
 using Mapsui.Providers;
+using Mapsui.Rendering.Skia.ExtensionMethods;
 using Mapsui.Styles;
 using SkiaSharp;
 
@@ -9,7 +10,7 @@ namespace Mapsui.Rendering.Skia
     static class PointRenderer
     {
         public static void Draw(SKCanvas canvas, IViewport viewport, IStyle style, IFeature feature, 
-            IGeometry geometry, SymbolCache symbolCache, float opacity)
+            IGeometry geometry, SymbolCache symbolCache, float layerOpacity)
         {
             var point = geometry as Point;
             var destination = viewport.WorldToScreen(point);
@@ -17,7 +18,7 @@ namespace Mapsui.Rendering.Skia
             if (style is LabelStyle labelStyle)    // case 1) LabelStyle
             {
                 LabelRenderer.Draw(canvas, labelStyle, feature, (float) destination.X, (float) destination.Y, 
-                    opacity);
+                    layerOpacity);
             }
             else if (style is SymbolStyle)
             {
@@ -25,19 +26,16 @@ namespace Mapsui.Rendering.Skia
 
                 if ( symbolStyle.BitmapId >= 0)   // case 2) Bitmap Style
                 {
-                    if (symbolStyle.SymbolType == SymbolType.Svg)
-                        DrawPointWithSvgStyle(canvas, symbolStyle, destination, symbolCache, opacity);
-                    else
-                        DrawPointWithBitmapStyle(canvas, symbolStyle, destination, symbolCache, opacity);
+                    DrawPointWithBitmapStyle(canvas, symbolStyle, destination, symbolCache, layerOpacity);
                 }
                 else                              // case 3) SymbolStyle without bitmap
                 {
-                    DrawPointWithSymbolStyle(canvas, symbolStyle, destination, opacity, symbolStyle.SymbolType);
+                    DrawPointWithSymbolStyle(canvas, symbolStyle, destination, layerOpacity, symbolStyle.SymbolType);
                 }
             }
             else if (style is VectorStyle)        // case 4) VectorStyle
             {
-                DrawPointWithVectorStyle(canvas, (VectorStyle) style, destination, opacity);
+                DrawPointWithVectorStyle(canvas, (VectorStyle) style, destination, layerOpacity);
             }
             else
             {
@@ -46,38 +44,35 @@ namespace Mapsui.Rendering.Skia
         }
 
         private static void DrawPointWithSymbolStyle(SKCanvas canvas, SymbolStyle style,
-            Point destination, float opacity, SymbolType symbolType = SymbolType.Ellipse)
+            Point destination, float layerOpacity, SymbolType symbolType = SymbolType.Ellipse)
         {
             canvas.Save();
             canvas.Translate((float)destination.X, (float)destination.Y);
             canvas.Scale((float)style.SymbolScale, (float)style.SymbolScale);
-            if (style.SymbolOffset.IsRelative)
-                canvas.Translate((float)(SymbolStyle.DefaultWidth * style.SymbolOffset.X), (float)(-SymbolStyle.DefaultWidth * style.SymbolOffset.Y));
-            else
-                canvas.Translate((float) style.SymbolOffset.X, (float) -style.SymbolOffset.Y);
-            DrawPointWithVectorStyle(canvas, style, opacity, symbolType);
+            canvas.Translate((float) style.SymbolOffset.X, (float) -style.SymbolOffset.Y);
+            DrawPointWithVectorStyle(canvas, style, layerOpacity * (float)style.Opacity, symbolType);
             canvas.Restore();
         }
 
         private static void DrawPointWithVectorStyle(SKCanvas canvas, VectorStyle vectorStyle,
-            Point destination, float opacity, SymbolType symbolType = SymbolType.Ellipse)
+            Point destination, float layerOpacity, SymbolType symbolType = SymbolType.Ellipse)
         {
             canvas.Save();
             canvas.Translate((float)destination.X, (float)destination.Y);
-            DrawPointWithVectorStyle(canvas, vectorStyle, opacity, symbolType);
+            DrawPointWithVectorStyle(canvas, vectorStyle, layerOpacity, symbolType);
             canvas.Restore();
         }
 
         private static void DrawPointWithVectorStyle(SKCanvas canvas, VectorStyle vectorStyle,
-            float opacity, SymbolType symbolType = SymbolType.Ellipse)
+            float layerOpacity, SymbolType symbolType = SymbolType.Ellipse)
         {
             var width = (float)SymbolStyle.DefaultWidth;
             var halfWidth = width / 2;
             var halfHeight = (float)SymbolStyle.DefaultHeight / 2;
 
-            var fillPaint = CreateFillPaint(vectorStyle.Fill, opacity);
+            var fillPaint = CreateFillPaint(vectorStyle.Fill, layerOpacity);
 
-            var linePaint = CreateLinePaint(vectorStyle.Outline, opacity);
+            var linePaint = CreateLinePaint(vectorStyle.Outline, layerOpacity);
 
             switch (symbolType)
             {
@@ -96,13 +91,13 @@ namespace Mapsui.Rendering.Skia
             }
         }
 
-        private static SKPaint CreateLinePaint(Pen outline, float opacity)
+        private static SKPaint CreateLinePaint(Pen outline, float layerOpacity)
         {
             if (outline == null) return null;
 
             return new SKPaint
             {
-                Color = outline.Color.ToSkia(opacity),
+                Color = outline.Color.ToSkia(layerOpacity),
                 StrokeWidth = (float) outline.Width,
                 StrokeCap = outline.PenStrokeCap.ToSkia(),
                 PathEffect = outline.PenStyle.ToSkia((float)outline.Width),
@@ -111,13 +106,13 @@ namespace Mapsui.Rendering.Skia
             };
         }
 
-        private static SKPaint CreateFillPaint(Brush fill, float opacity)
+        private static SKPaint CreateFillPaint(Brush fill, float layerOpacity)
         {
             if (fill == null) return null;
 
             return new SKPaint
             {
-                Color = fill.Color.ToSkia(opacity),
+                Color = fill.Color.ToSkia(layerOpacity),
                 Style = SKPaintStyle.Fill,
                 IsAntialias = true
             };
@@ -160,35 +155,17 @@ namespace Mapsui.Rendering.Skia
         }
 
         private static void DrawPointWithBitmapStyle(SKCanvas canvas, SymbolStyle symbolStyle, Point destination,
-            SymbolCache symbolCache, float opacity)
+            SymbolCache symbolCache, float layerOpacity)
         {
-            var bitmap = symbolCache.GetOrCreate(symbolStyle.BitmapId, false);
-
-            // Calc offset (relative or absolut)
-            var offsetX = symbolStyle.SymbolOffset.IsRelative ? bitmap.Width * symbolStyle.SymbolOffset.X : symbolStyle.SymbolOffset.X;
-            var offsetY = symbolStyle.SymbolOffset.IsRelative ? bitmap.Height * symbolStyle.SymbolOffset.Y : symbolStyle.SymbolOffset.Y;
+            var bitmap = symbolCache.GetOrCreate(symbolStyle.BitmapId);
 
             BitmapHelper.RenderBitmap(canvas, bitmap.Bitmap,
                 (float) destination.X, (float) destination.Y,
                 (float) symbolStyle.SymbolRotation,
-                (float) offsetX, (float) offsetY,
-                opacity: opacity, scale: (float) symbolStyle.SymbolScale);
+                (float) symbolStyle.SymbolOffset.X, (float) symbolStyle.SymbolOffset.Y,
+                opacity: (float) symbolStyle.Opacity * layerOpacity, scale: (float) symbolStyle.SymbolScale);
         }
 
-        private static void DrawPointWithSvgStyle(SKCanvas canvas, SymbolStyle symbolStyle, Point destination,
-            SymbolCache symbolCache, float opacity)
-        {
-            var bitmap = symbolCache.GetOrCreate(symbolStyle.BitmapId, true);
-
-            // Calc offset (relative or absolut)
-            var offsetX = symbolStyle.SymbolOffset.IsRelative ? bitmap.Svg.CanvasSize.Width * symbolStyle.SymbolOffset.X : symbolStyle.SymbolOffset.X;
-            var offsetY = symbolStyle.SymbolOffset.IsRelative ? bitmap.Svg.CanvasSize.Height * symbolStyle.SymbolOffset.Y : symbolStyle.SymbolOffset.Y;
-
-            BitmapHelper.RenderSvg(canvas, bitmap.Svg,
-                (float)destination.X, (float)destination.Y,
-                (float)symbolStyle.SymbolRotation,
-                (float)offsetX, (float)offsetY,
-                opacity: opacity, scale: (float)symbolStyle.SymbolScale);
-        }
+        
     }
 }

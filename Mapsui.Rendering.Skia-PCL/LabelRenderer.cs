@@ -22,11 +22,9 @@ namespace Mapsui.Rendering.Skia
                 LabelCache[key] = new BitmapInfo { Bitmap = CreateLabelAsBitmap(style, text, layerOpacity) };
 
             var info = LabelCache[key];
-            var offsetX = style.Offset.IsRelative ? info.Width * style.Offset.X : style.Offset.X;
-            var offsetY = style.Offset.IsRelative ? info.Height * style.Offset.Y : style.Offset.Y;
 
             BitmapHelper.RenderBitmap(canvas, info.Bitmap, (int)Math.Round(x), (int)Math.Round(y),
-                offsetX: (float)offsetX, offsetY: (float)-offsetY,
+                offsetX: (float)style.Offset.X, offsetY: (float)-style.Offset.Y,
                 horizontalAlignment: style.HorizontalAlignment, verticalAlignment: style.VerticalAlignment);
         }
 
@@ -81,12 +79,10 @@ namespace Mapsui.Rendering.Skia
                         
             var backRectXOffset = rect.Left;
             var backRectYOffset = rect.Bottom;
-            var offsetX = style.Offset.IsRelative ? rect.Width * style.Offset.X : style.Offset.X;
-            var offsetY = style.Offset.IsRelative ? rect.Height * style.Offset.Y : style.Offset.Y;
 
             rect.Offset(
-                x - rect.Width * horizontalAlign + (float)offsetX,
-                y + rect.Height * verticalAlign + (float)offsetY);
+                x - rect.Width * horizontalAlign + (float)style.Offset.X,
+                y + rect.Height * verticalAlign + (float)style.Offset.Y);
 
             var backRect = rect; // copy
             rect.Offset(-backRectXOffset, -backRectYOffset); // correct for text specific offset returned paint.Measure

@@ -9,8 +9,6 @@ namespace Mapsui.Styles
         Ellipse,
         Rectangle,
         Triangle,
-        Bitmap,
-        Svg
     }
 
     public enum UnitType
@@ -50,7 +48,7 @@ namespace Mapsui.Styles
         ///     Gets or sets the offset in pixels of the symbol.
         /// </summary>
         /// <remarks>
-        ///     The symbol offset is scaled with the <see cref="SymbolScale" /> property and refers to the offset of
+        ///     The symbol offset is scaled with the <see cref="SymbolScale" /> property and refers to the offset af
         ///     <see cref="SymbolScale" />=1.0.
         /// </remarks>
         public Offset SymbolOffset { get; set; }
