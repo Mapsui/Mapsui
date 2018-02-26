@@ -1,7 +1,7 @@
 ﻿using System;
 using Mapsui.Geometries;
 using Mapsui.Providers;
-using Mapsui.Rendering.Skia.ExtensionMethods;
+using Mapsui.Rendering.Skia;
 using Mapsui.Styles;
 using SkiaSharp;
 
