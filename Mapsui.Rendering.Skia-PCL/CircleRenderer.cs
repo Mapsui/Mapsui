@@ -10,7 +10,7 @@ namespace Mapsui.Rendering.Skia
     static class CircleRenderer
     {
         public static void Draw(SKCanvas canvas, IViewport viewport, IStyle style, IFeature feature, 
-            IGeometry geometry, SymbolCache symbolCache, float layerOpacity)
+            IGeometry geometry, SymbolCache symbolCache, float opacity)
         {
             var circle = geometry as Circle;
             var destination = viewport.WorldToScreen(new Point(circle.X, circle.Y));
@@ -34,8 +34,8 @@ namespace Mapsui.Rendering.Skia
                 var halfWidth = (float)radius;
                 var halfHeight = halfWidth;
 
-                var fillPaint = CreateFillPaint(vectorStyle.Fill, layerOpacity);
-                var linePaint = CreateLinePaint(vectorStyle.Outline, layerOpacity);
+                var fillPaint = CreateFillPaint(vectorStyle.Fill, opacity);
+                var linePaint = CreateLinePaint(vectorStyle.Outline, opacity);
 
                 DrawCircle(canvas, 0, 0, halfWidth, fillPaint, linePaint);
 
@@ -47,13 +47,13 @@ namespace Mapsui.Rendering.Skia
             }
         }
 
-        private static SKPaint CreateLinePaint(Pen outline, float layerOpacity)
+        private static SKPaint CreateLinePaint(Pen outline, float opacity)
         {
             if (outline == null) return null;
 
             return new SKPaint
             {
-                Color = outline.Color.ToSkia(layerOpacity),
+                Color = outline.Color.ToSkia(opacity),
                 StrokeWidth = (float) outline.Width,
                 StrokeCap = outline.PenStrokeCap.ToSkia(),
                 PathEffect = outline.PenStyle.ToSkia((float)outline.Width),
@@ -62,13 +62,13 @@ namespace Mapsui.Rendering.Skia
             };
         }
 
-        private static SKPaint CreateFillPaint(Brush fill, float layerOpacity)
+        private static SKPaint CreateFillPaint(Brush fill, float opacity)
         {
             if (fill == null) return null;
 
             return new SKPaint
             {
-                Color = fill.Color.ToSkia(layerOpacity),
+                Color = fill.Color.ToSkia(opacity),
                 Style = SKPaintStyle.Fill,
                 IsAntialias = true
             };
