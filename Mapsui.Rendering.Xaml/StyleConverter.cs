@@ -56,6 +56,21 @@ namespace Mapsui.Rendering.Xaml
             }
         }
 
+        public static PenLineJoin MapsuiStrokeJointoPenLineJoin(PenStrokeJoin penStrokeJoin)
+        {
+            switch (penStrokeJoin)
+            {
+                case PenStrokeJoin.Miter:
+                    return PenLineJoin.Miter;
+                case PenStrokeJoin.Round:
+                    return PenLineJoin.Round;
+                case PenStrokeJoin.Bevel:
+                    return PenLineJoin.Bevel;
+                default:
+                    return PenLineJoin.Miter;
+            }
+        }
+
         public static XamlBrush MapsuiBrushToXaml(Styles.Brush brush, SymbolCache symbolCache = null)
         {
             if (brush == null) return null;

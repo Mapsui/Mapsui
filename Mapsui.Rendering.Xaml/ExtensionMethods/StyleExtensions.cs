@@ -20,6 +20,11 @@ namespace Mapsui.Rendering.Xaml
             return StyleConverter.MapsuiStrokeCaptoPenLineCap(penStrokeCap);
         }
 
+        public static PenLineJoin ToXaml(this PenStrokeJoin penStrokeJoin)
+        {
+            return StyleConverter.MapsuiStrokeJointoPenLineJoin(penStrokeJoin);
+        }
+
         public static WinColor ToXaml(this Color color)
         {
             if (color == null) return WinColor.FromArgb(0, 255, 255, 255);

@@ -18,6 +18,8 @@ namespace Mapsui.Styles
 
         public PenStrokeCap PenStrokeCap { get; set; } = PenStrokeCap.Butt;
 
+        public PenStrokeJoin PenStrokeJoin { get; set; } = PenStrokeJoin.Miter;
+
         public override bool Equals(object obj)
         {
             if (!(obj is Pen))
@@ -41,6 +43,7 @@ namespace Mapsui.Styles
 
             if (PenStrokeCap != pen.PenStrokeCap) return false;
 
+            if (PenStrokeJoin != pen.PenStrokeJoin) return false;
 
             return true;
         }
