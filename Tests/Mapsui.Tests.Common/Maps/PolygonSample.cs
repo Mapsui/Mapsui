@@ -49,7 +49,7 @@ namespace Mapsui.Tests.Common.Maps
             feature.Styles.Add(new VectorStyle
             {
                 Enabled = true,
-                Fill = CreateBrush(new Color(255,0,0, 120) , FillStyle.Bitmap, bitmapId),
+                Fill = CreateBrush(new Color(255,0,0, 120) , FillStyle.DiagonalCross), //FillStyle.Bitmap, bitmapId),
                 Outline = CreatePen(new Color(255, 255, 0), 2, PenStyle.DashDot),
                 Line = null
             });
