@@ -32,7 +32,7 @@ namespace Mapsui.Rendering.Xaml
             path.StrokeEndLineCap = penStrokeCap;
             path.StrokeStartLineCap = penStrokeCap;
             path.StrokeLineJoin = style.Line.PenStrokeJoin.ToXaml();
-            // To make similar to skia: path.StrokeLineJoin = PenLineJoin.Round;
+            path.StrokeMiterLimit = style.Line.PenStrokeMiterLimit;
             path.Tag = style.Line.Width; // see #linewidthhack
             path.IsHitTestVisible = false;
             return path;

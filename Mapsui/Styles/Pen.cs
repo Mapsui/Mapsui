@@ -20,6 +20,8 @@ namespace Mapsui.Styles
 
         public PenStrokeJoin PenStrokeJoin { get; set; } = PenStrokeJoin.Miter;
 
+        public float PenStrokeMiterLimit { get; set; } = 4f;
+
         public override bool Equals(object obj)
         {
             if (!(obj is Pen))

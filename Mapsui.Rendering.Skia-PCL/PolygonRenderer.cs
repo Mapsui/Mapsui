@@ -25,6 +25,7 @@ namespace Mapsui.Rendering.Skia
                 var fillColor = Color.Gray; // default
                 var strokeCap = PenStrokeCap.Butt; // default
                 var strokeJoin = PenStrokeJoin.Miter; // default
+                var strokeMiterLimit = 4f; // default
                 var strokeStyle = PenStyle.Solid; // default
 
                 var vectorStyle = style as VectorStyle;
@@ -35,6 +36,7 @@ namespace Mapsui.Rendering.Skia
                     lineColor = vectorStyle.Outline.Color;
                     strokeCap = vectorStyle.Outline.PenStrokeCap;
                     strokeJoin = vectorStyle.Outline.PenStrokeJoin;
+                    strokeMiterLimit = vectorStyle.Outline.PenStrokeMiterLimit;
                     strokeStyle = vectorStyle.Outline.PenStyle;
 
                     fillColor = vectorStyle.Fill?.Color;
@@ -54,6 +56,7 @@ namespace Mapsui.Rendering.Skia
                         paint.Color = lineColor.ToSkia(opacity);
                         paint.StrokeCap = strokeCap.ToSkia();
                         paint.StrokeJoin = strokeJoin.ToSkia();
+                        paint.StrokeMiter = strokeMiterLimit;
                         if (strokeStyle != PenStyle.Solid)
                             paint.PathEffect = strokeStyle.ToSkia(lineWidth);
                         canvas.DrawPath(path, paint);
