@@ -18,9 +18,9 @@ namespace Mapsui.Styles
 
         public PenStrokeCap PenStrokeCap { get; set; } = PenStrokeCap.Butt;
 
-        public PenStrokeJoin PenStrokeJoin { get; set; } = PenStrokeJoin.Miter;
+        public StrokeJoin StrokeJoin { get; set; } = StrokeJoin.Miter;
 
-        public float PenStrokeMiterLimit { get; set; } = 10f; // Default on Wpf, on Skia, it is 4f
+        public float StrokeMiterLimit { get; set; } = 10f; // Default on Wpf, on Skia, it is 4f
 
         public override bool Equals(object obj)
         {
@@ -45,9 +45,9 @@ namespace Mapsui.Styles
 
             if (PenStrokeCap != pen.PenStrokeCap) return false;
 
-            if (PenStrokeJoin != pen.PenStrokeJoin) return false;
+            if (StrokeJoin != pen.StrokeJoin) return false;
 
-            if (PenStrokeMiterLimit != pen.PenStrokeMiterLimit) return false;
+            if (StrokeMiterLimit != pen.StrokeMiterLimit) return false;
 
             return true;
         }

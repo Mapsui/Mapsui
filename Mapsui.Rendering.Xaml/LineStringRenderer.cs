@@ -31,8 +31,8 @@ namespace Mapsui.Rendering.Xaml
             var penStrokeCap = style.Line.PenStrokeCap.ToXaml();
             path.StrokeEndLineCap = penStrokeCap;
             path.StrokeStartLineCap = penStrokeCap;
-            path.StrokeLineJoin = style.Line.PenStrokeJoin.ToXaml();
-            path.StrokeMiterLimit = style.Line.PenStrokeMiterLimit;
+            path.StrokeLineJoin = style.Line.StrokeJoin.ToXaml();
+            path.StrokeMiterLimit = style.Line.StrokeMiterLimit;
             path.Tag = style.Line.Width; // see #linewidthhack
             path.IsHitTestVisible = false;
             return path;

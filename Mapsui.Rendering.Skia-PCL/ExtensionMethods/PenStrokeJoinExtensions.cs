@@ -5,15 +5,15 @@ namespace Mapsui.Rendering.Skia
 {
     public static class PenStrokeJoinExtensions
     {
-        public static SKStrokeJoin ToSkia(this PenStrokeJoin penStrokeJoin)
+        public static SKStrokeJoin ToSkia(this StrokeJoin penStrokeJoin)
         {
             switch (penStrokeJoin)
             {
-                case PenStrokeJoin.Miter:
+                case StrokeJoin.Miter:
                     return SKStrokeJoin.Miter;
-                case PenStrokeJoin.Round:
+                case StrokeJoin.Round:
                     return SKStrokeJoin.Round;
-                case PenStrokeJoin.Bevel:
+                case StrokeJoin.Bevel:
                     return SKStrokeJoin.Bevel;
                 default:
                     return SKStrokeJoin.Miter;

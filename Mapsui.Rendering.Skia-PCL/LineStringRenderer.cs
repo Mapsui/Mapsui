@@ -27,7 +27,7 @@ namespace Mapsui.Rendering.Skia
 
                 var vectorStyle = style as VectorStyle;
                 var strokeCap = PenStrokeCap.Butt;
-                var strokeJoin = PenStrokeJoin.Miter;
+                var strokeJoin = StrokeJoin.Miter;
                 var strokeMiterLimit = 4f;
                 var strokeStyle = PenStyle.Solid;
 
@@ -36,8 +36,8 @@ namespace Mapsui.Rendering.Skia
                     lineWidth = (float) vectorStyle.Line.Width;
                     lineColor = vectorStyle.Line.Color;
                     strokeCap = vectorStyle.Line.PenStrokeCap;
-                    strokeJoin = vectorStyle.Line.PenStrokeJoin;
-                    strokeMiterLimit = vectorStyle.Line.PenStrokeMiterLimit;
+                    strokeJoin = vectorStyle.Line.StrokeJoin;
+                    strokeMiterLimit = vectorStyle.Line.StrokeMiterLimit;
                     strokeStyle = vectorStyle.Line.PenStyle;
                 }
 

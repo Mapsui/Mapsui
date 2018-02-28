@@ -56,15 +56,15 @@ namespace Mapsui.Rendering.Xaml
             }
         }
 
-        public static PenLineJoin MapsuiStrokeJointoPenLineJoin(PenStrokeJoin penStrokeJoin)
+        public static PenLineJoin MapsuiStrokeJointoPenLineJoin(StrokeJoin penStrokeJoin)
         {
             switch (penStrokeJoin)
             {
-                case PenStrokeJoin.Miter:
+                case StrokeJoin.Miter:
                     return PenLineJoin.Miter;
-                case PenStrokeJoin.Round:
+                case StrokeJoin.Round:
                     return PenLineJoin.Round;
-                case PenStrokeJoin.Bevel:
+                case StrokeJoin.Bevel:
                     return PenLineJoin.Bevel;
                 default:
                     return PenLineJoin.Miter;
