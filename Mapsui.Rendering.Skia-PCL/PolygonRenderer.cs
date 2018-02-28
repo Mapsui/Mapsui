@@ -8,7 +8,7 @@ namespace Mapsui.Rendering.Skia
     internal static class PolygonRenderer
     {
         public static void Draw(SKCanvas canvas, IViewport viewport, IStyle style, IFeature feature, IGeometry geometry,
-            float opacity)
+            float opacity, SymbolCache symbolCache = null)
         {
             if (style is LabelStyle)
             {
@@ -43,12 +43,84 @@ namespace Mapsui.Rendering.Skia
                     using (var paint = new SKPaint())
                     {
                         paint.IsAntialias = true;
-                        paint.StrokeWidth = lineWidth;
 
-                        paint.Style = SKPaintStyle.Fill;
-                        paint.Color = fillColor.ToSkia(opacity);
-                        canvas.DrawPath(path, paint);
+                        // Is there a FillStyle?
+                        if (vectorStyle.Fill?.FillStyle == FillStyle.Solid)
+                        {
+                            paint.StrokeWidth = lineWidth;
+                            paint.Style = SKPaintStyle.Fill;
+                            paint.Color = fillColor.ToSkia(opacity);
+                            canvas.DrawPath(path, paint);
+                        }
+                        else
+                        {
+                            paint.StrokeWidth = 1;
+                            paint.Style = SKPaintStyle.Stroke;
+                            paint.Color = fillColor.ToSkia(opacity);
+                            float scale = 10.0f;
+                            SKPath fillPath = new SKPath();
+                            SKMatrix matrix = SKMatrix.MakeScale(scale, scale);
+
+                            switch (vectorStyle.Fill?.FillStyle)
+                            {
+                                case FillStyle.Cross:
+                                    fillPath.MoveTo(scale * 0.8f, scale * 0.8f);
+                                    fillPath.LineTo(0, 0);
+                                    fillPath.MoveTo(0, scale * 0.8f);
+                                    fillPath.LineTo(scale * 0.8f, 0);
+                                    paint.PathEffect = SKPathEffect.Create2DPath(matrix, fillPath);
+                                    break;
+                                case FillStyle.DiagonalCross:
+                                    fillPath.MoveTo(scale, scale);
+                                    fillPath.LineTo(0, 0);
+                                    fillPath.MoveTo(0, scale);
+                                    fillPath.LineTo(scale, 0);
+                                    paint.PathEffect = SKPathEffect.Create2DPath(matrix, fillPath);
+                                    break;
+                                case FillStyle.BackwardDiagonal:
+                                    fillPath.MoveTo(0, scale);
+                                    fillPath.LineTo(scale, 0);
+                                    paint.PathEffect = SKPathEffect.Create2DPath(matrix, fillPath);
+                                    break;
+                                case FillStyle.ForwardDiagonal:
+                                    fillPath.MoveTo(scale, scale);
+                                    fillPath.LineTo(0, 0);
+                                    paint.PathEffect = SKPathEffect.Create2DPath(matrix, fillPath);
+                                    break;
+                                case FillStyle.Dotted:
+                                    paint.Style = SKPaintStyle.StrokeAndFill;
+                                    fillPath.AddCircle(scale * 0.5f, scale * 0.5f, scale * 0.4f);
+                                    paint.PathEffect = SKPathEffect.Create2DPath(matrix, fillPath);
+                                    break;
+                                case FillStyle.Horizontal:
+                                    fillPath.MoveTo(0, scale * 0.5f);
+                                    fillPath.LineTo(scale, scale * 0.5f);
+                                    paint.PathEffect = SKPathEffect.Create2DPath(matrix, fillPath);
+                                    break;
+                                case FillStyle.Vertical:
+                                    fillPath.MoveTo(scale * 0.5f, 0);
+                                    fillPath.LineTo(scale * 0.5f, scale);
+                                    paint.PathEffect = SKPathEffect.Create2DPath(matrix, fillPath);
+                                    break;
+                                case FillStyle.Bitmap:
+                                    paint.Style = SKPaintStyle.Fill;
+                                    paint.Shader = symbolCache.GetOrCreate(vectorStyle.Fill.BitmapId).Bitmap.ToShader(SKShaderTileMode.Repeat, SKShaderTileMode.Repeat);
+                                    break;
+                            }
+
+                            // Do this, because if not, path isn't filled complete
+                            canvas.ClipPath(path);
+                            var bounds = path.Bounds;
+                            bounds.Inflate(path.Bounds.Width * 0.1f, path.Bounds.Height * 0.1f);
+                            canvas.DrawRect(bounds, paint);
+                        }
+                    }
+
+                    using (var paint = new SKPaint())
+                    {
+                        paint.IsAntialias = true;
                         paint.Style = SKPaintStyle.Stroke;
+                        paint.StrokeWidth = lineWidth;
                         paint.Color = lineColor.ToSkia(opacity);
                         paint.StrokeCap = strokeCap.ToSkia();
                         if (strokeStyle != PenStyle.Solid)
