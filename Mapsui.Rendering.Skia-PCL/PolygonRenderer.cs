@@ -106,6 +106,13 @@ namespace Mapsui.Rendering.Skia
                                     paint.Style = SKPaintStyle.Fill;
                                     paint.Shader = symbolCache.GetOrCreate(vectorStyle.Fill.BitmapId).Bitmap.ToShader(SKShaderTileMode.Repeat, SKShaderTileMode.Repeat);
                                     break;
+                                case FillStyle.BitmapRotated:
+                                    paint.Style = SKPaintStyle.Fill;
+                                    SKImage bitmap = symbolCache.GetOrCreate(vectorStyle.Fill.BitmapId).Bitmap;
+                                    paint.Shader = bitmap.ToShader(SKShaderTileMode.Repeat, 
+                                        SKShaderTileMode.Repeat, 
+                                        SKMatrix.MakeRotation((float)(viewport.Rotation * System.Math.PI / 180.0f), bitmap.Width >> 1, bitmap.Height >> 1));
+                                    break;
                             }
 
                             // Do this, because if not, path isn't filled complete

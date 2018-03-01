@@ -50,7 +50,7 @@ namespace Mapsui.Tests.Common.Maps
             feature.Styles.Add(new VectorStyle
             {
                 Enabled = true,
-                Fill = CreateBrush(new Color(255,0,0, 120) , FillStyle.Bitmap, bitmapId),
+                Fill = CreateBrush(new Color(255,0,0, 120) , FillStyle.BitmapRotated, bitmapId),
                 Outline = CreatePen(new Color(255, 255, 0), 2, PenStyle.DashDot),
                 Line = null
             });
@@ -180,7 +180,7 @@ namespace Mapsui.Tests.Common.Maps
 
         private static Brush CreateBrush(Color color, FillStyle fillStyle, int ?imageId = null)
         {
-            if (imageId.HasValue)
+            if (imageId.HasValue && !(fillStyle == FillStyle.Bitmap || fillStyle == FillStyle.BitmapRotated))
                 fillStyle = FillStyle.Bitmap;
 
             return new Brush { FillStyle = fillStyle, BitmapId = imageId ?? -1, Color = color };
