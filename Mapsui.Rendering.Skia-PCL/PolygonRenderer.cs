@@ -89,7 +89,7 @@ namespace Mapsui.Rendering.Skia
                                     break;
                                 case FillStyle.Dotted:
                                     paint.Style = SKPaintStyle.StrokeAndFill;
-                                    fillPath.AddCircle(scale * 0.5f, scale * 0.5f, scale * 0.4f);
+                                    fillPath.AddCircle(scale * 0.5f, scale * 0.5f, scale * 0.35f);
                                     paint.PathEffect = SKPathEffect.Create2DPath(matrix, fillPath);
                                     break;
                                 case FillStyle.Horizontal:
@@ -109,10 +109,16 @@ namespace Mapsui.Rendering.Skia
                             }
 
                             // Do this, because if not, path isn't filled complete
-                            canvas.ClipPath(path);
-                            var bounds = path.Bounds;
-                            bounds.Inflate(path.Bounds.Width * 0.1f, path.Bounds.Height * 0.1f);
-                            canvas.DrawRect(bounds, paint);
+                            using (new SKAutoCanvasRestore(canvas))
+                            {
+                                canvas.ClipPath(path);
+                                var bounds = path.Bounds;
+                                // Make sure, that the brush starts with the correct position
+                                var inflate = ((int)path.Bounds.Width * 0.3f / scale) * scale;
+                                bounds.Inflate(inflate, inflate);
+                                // Draw rect with bigger size, which is clipped by path
+                                canvas.DrawRect(bounds, paint);
+                            }
                         }
                     }
 
