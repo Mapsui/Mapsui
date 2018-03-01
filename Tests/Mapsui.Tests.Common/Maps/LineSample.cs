@@ -42,6 +42,44 @@ namespace Mapsui.Tests.Common.Maps
             };
             feature.Styles.Add(new VectorStyle {Line = new Pen(Color.Violet, 5)});
             features.Add(feature);
+            // Add some dashed lines
+            feature = new Feature { Geometry = Geometry.GeomFromText("LINESTRING (-7000000 15000000, 7000000 15000000)") };
+            feature.Styles.Add(new VectorStyle { Line = new Pen(Color.Red, 1) { PenStyle = PenStyle.Dash } });
+            features.Add(feature);
+            feature = new Feature { Geometry = Geometry.GeomFromText("LINESTRING (8000000 15000000, 22000000 15000000)") };
+            feature.Styles.Add(new VectorStyle { Line = new Pen(Color.Green, 1) { PenStyle = PenStyle.DashDot } });
+            features.Add(feature);
+            feature = new Feature { Geometry = Geometry.GeomFromText("LINESTRING (-7000000 14000000, 7000000 14000000)") };
+            feature.Styles.Add(new VectorStyle { Line = new Pen(Color.Red, 1) { PenStyle = PenStyle.DashDotDot } });
+            features.Add(feature);
+            feature = new Feature { Geometry = Geometry.GeomFromText("LINESTRING (8000000 14000000, 22000000 14000000)") };
+            feature.Styles.Add(new VectorStyle { Line = new Pen(Color.Green, 1) { PenStyle = PenStyle.Dot } });
+            features.Add(feature);
+            feature = new Feature { Geometry = Geometry.GeomFromText("LINESTRING (-7000000 13000000, 7000000 13000000)") };
+            feature.Styles.Add(new VectorStyle { Line = new Pen(Color.Red, 1) { PenStyle = PenStyle.LongDash } });
+            features.Add(feature);
+            feature = new Feature { Geometry = Geometry.GeomFromText("LINESTRING (8000000 13000000, 22000000 13000000)") };
+            feature.Styles.Add(new VectorStyle { Line = new Pen(Color.Green, 1) { PenStyle = PenStyle.LongDashDot } });
+            features.Add(feature);
+            feature = new Feature { Geometry = Geometry.GeomFromText("LINESTRING (-7000000 12000000, 7000000 12000000)") };
+            feature.Styles.Add(new VectorStyle { Line = new Pen(Color.Red, 1) { PenStyle = PenStyle.ShortDash } });
+            features.Add(feature);
+            feature = new Feature { Geometry = Geometry.GeomFromText("LINESTRING (8000000 12000000, 22000000 12000000)") };
+            feature.Styles.Add(new VectorStyle { Line = new Pen(Color.Green, 1) { PenStyle = PenStyle.ShortDashDot } });
+            features.Add(feature);
+            feature = new Feature { Geometry = Geometry.GeomFromText("LINESTRING (-7000000 11000000, 7000000 11000000)") };
+            feature.Styles.Add(new VectorStyle { Line = new Pen(Color.Red, 1) { PenStyle = PenStyle.ShortDashDotDot } });
+            features.Add(feature);
+            feature = new Feature { Geometry = Geometry.GeomFromText("LINESTRING (8000000 11000000, 22000000 11000000)") };
+            feature.Styles.Add(new VectorStyle { Line = new Pen(Color.Green, 1) { PenStyle = PenStyle.ShortDot } });
+            features.Add(feature);
+            feature = new Feature { Geometry = Geometry.GeomFromText("LINESTRING (-7000000 10000000, 7000000 10000000)") };
+            feature.Styles.Add(new VectorStyle { Line = new Pen(Color.Blue, 1) { PenStyle = PenStyle.UserDefined, DashArray = new float[] { 6, 4, 12, 4, 2, 4, 12, 4 } } });
+            features.Add(feature);
+            feature = new Feature { Geometry = Geometry.GeomFromText("LINESTRING (8000000 10000000, 22000000 10000000)") };
+            feature.Styles.Add(new VectorStyle { Line = new Pen(Color.Green, 1) { PenStyle = PenStyle.Solid } });
+            features.Add(feature);
+
             var provider = new MemoryProvider(features);
 
             return provider;

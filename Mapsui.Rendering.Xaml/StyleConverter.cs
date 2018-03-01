@@ -12,10 +12,19 @@ namespace Mapsui.Rendering.Xaml
 {
     public static class StyleConverter
     {
-        public static DoubleCollection MapsuiPentoXaml(PenStyle penStyle)
+        public static DoubleCollection MapsuiPentoXaml(PenStyle penStyle, float[] dashArray = null)
         {
             switch (penStyle)
             {
+                case PenStyle.UserDefined:
+                    if (dashArray == null || dashArray.Length == 0 || dashArray.Length % 2 != 0)
+                        return new DoubleCollection { 1, 0 };
+                    var dash = new DoubleCollection(dashArray.Length);
+                    for (var i = 0; i < dashArray.Length; i++)
+                    {
+                        dash.Add(dashArray[i]);
+                    }
+                    return dash;
                 case PenStyle.Dash:
                     return new DoubleCollection {2, 2};
                 case PenStyle.DashDot:

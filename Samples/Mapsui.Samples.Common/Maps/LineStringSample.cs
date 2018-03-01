@@ -49,7 +49,7 @@ namespace Mapsui.Samples.Common.Maps
             {
                 Fill = null,
                 Outline = null,
-                Line = {Color = Color.Red, Width = 4}
+                Line = {Color = Color.Red, Width = 4, PenStyle = PenStyle.UserDefined, DashArray = new float[] { 6, 4, 12, 4 } }
             };
         }
     }

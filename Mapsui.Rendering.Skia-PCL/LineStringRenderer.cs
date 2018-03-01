@@ -30,6 +30,7 @@ namespace Mapsui.Rendering.Skia
                 var strokeJoin = StrokeJoin.Miter;
                 var strokeMiterLimit = 4f;
                 var strokeStyle = PenStyle.Solid;
+                float[] dashArray = null;
 
                 if (vectorStyle != null)
                 {
@@ -39,6 +40,7 @@ namespace Mapsui.Rendering.Skia
                     strokeJoin = vectorStyle.Line.StrokeJoin;
                     strokeMiterLimit = vectorStyle.Line.StrokeMiterLimit;
                     strokeStyle = vectorStyle.Line.PenStyle;
+                    dashArray = vectorStyle.Line.DashArray;
                 }
 
                 var line = WorldToScreen(viewport, lineString);
@@ -53,7 +55,7 @@ namespace Mapsui.Rendering.Skia
                     paint.StrokeJoin = strokeJoin.ToSkia();
                     paint.StrokeMiter = strokeMiterLimit;
                     if (strokeStyle != PenStyle.Solid)
-                        paint.PathEffect = strokeStyle.ToSkia(lineWidth);
+                        paint.PathEffect = strokeStyle.ToSkia(lineWidth, dashArray);
                     canvas.DrawPath(path, paint);
                 }
             }
