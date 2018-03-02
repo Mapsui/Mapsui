@@ -19,7 +19,8 @@ namespace Mapsui.UI.Forms
         private const string PinLayerName = "Pins";
         private const string DrawableLayerName = "Drawables";
 
-        private MapControl _mapControl;
+        internal MapControl _mapControl;
+
         private MyLocationLayer _mapMyLocationLayer;
         private Layer _mapPinLayer;
         private Layer _mapDrawableLayer;
@@ -27,11 +28,14 @@ namespace Mapsui.UI.Forms
 
         readonly ObservableCollection<Pin> _pins = new ObservableCollection<Pin>();
         readonly ObservableCollection<Drawable> _drawable = new ObservableCollection<Drawable>();
+        readonly ObservableCollection<InfoWindow> _infoWindows = new ObservableCollection<InfoWindow>();
 
         public MapView()
         {
             MyLocationEnabled = false;
             MyLocationFollow = true;
+
+            IsClippedToBounds = true;
 
             _mapControl = new MapControl();
             _mapMyLocationLayer = new MyLocationLayer(this);
@@ -230,6 +234,66 @@ namespace Mapsui.UI.Forms
             _mapControl.InvalidateSurface();
         }
 
+        private InfoWindow info;
+
+        public InfoWindow CreateInfoWindow(Position position)
+        {
+            if (position == null)
+                return null;
+
+            Device.BeginInvokeOnMainThread(() => {
+                info = new InfoWindow(_mapControl)
+                {
+                    Anchor = position,
+                };
+            });
+
+            while (info == null) ;
+
+            var result = info;
+            info = null;
+
+            return result;
+        }
+
+        public void ShowInfoWindow(InfoWindow infoWindow)
+        {
+            if (infoWindow == null)
+                return;
+
+            // Set absolute layout constrains
+            AbsoluteLayout.SetLayoutFlags(infoWindow, AbsoluteLayoutFlags.None);
+
+            // Add it to MapView
+            if (!((AbsoluteLayout)Content).Children.Contains(infoWindow))
+                Device.BeginInvokeOnMainThread(() => ((AbsoluteLayout)Content).Children.Add(infoWindow));
+
+            // Add it to list of active InfoWindows
+            _infoWindows.Add(infoWindow);
+
+            // When InfoWindow is closed by close button
+            infoWindow.InfoWindowClosed += (s, e) => HideInfoWindow((InfoWindow)s);
+
+            // Inform InfoWindow
+            infoWindow.Show();
+        }
+
+        public void HideInfoWindow(InfoWindow infoWindow)
+        {
+            if (infoWindow == null)
+                return;
+
+            // Inform InfoWindow
+            infoWindow.Hide();
+
+            // Remove it from list of active InfoWindows
+            _infoWindows.Remove(infoWindow);
+
+            // Remove it from MapView
+            if (((AbsoluteLayout)Content).Children.Contains(infoWindow))
+                Device.BeginInvokeOnMainThread(() => ((AbsoluteLayout)Content).Children.Remove(infoWindow));
+        }
+
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
@@ -275,6 +339,9 @@ namespace Mapsui.UI.Forms
             {
                 _mapMyLocationLayer.UpdateMyDirection(_mapMyLocationLayer.Direction, Map.Viewport.Rotation);
             }
+            if (e.PropertyName.Equals(nameof(Viewport.Center)))
+            {
+            }
         }
 
         private void HandlerHover(object sender, HoverEventArgs e)
@@ -292,6 +359,9 @@ namespace Mapsui.UI.Forms
                 {
                     // Remove old pins from layer
                     var pin = item as Pin;
+
+                    HideInfoWindow(pin.InfoWindow);
+                    pin.InfoWindow = null;
 
                     pin.PropertyChanged -= HandlerPinPropertyChanged;
 
@@ -396,11 +466,30 @@ namespace Mapsui.UI.Forms
 
         private void HandlerTap(object sender, TapEventArgs e)
         {
+            // Close all closable InfoWindows
+            var list = _infoWindows.ToList();
+
+            // First check all InfoWindows, that belong to a pin
+            foreach (var pin in _pins)
+            {
+                if (pin.InfoWindow != null)
+                {
+                    if (pin.InfoWindow.IsClosableByClick)
+                        pin.IsInfoWindowVisible = false;
+                    list.Remove(pin.InfoWindow);
+                }
+            }
+
+            // Now check the rest, InfoWindows not belonging to a pin
+            foreach (var infoWindow in list)
+                if (infoWindow.IsClosableByClick)
+                    HideInfoWindow(infoWindow);
+
             // Check, if we hit a widget or drawable
             // Is there a widget at this position
             // Is there a drawable at this position
             if (Map != null)
-                e.Handled = Map.InvokeInfo(e.ScreenPosition, e.ScreenPosition, _mapControl.SkiaScale, _mapControl.SymbolCache, null, e.NumOfTaps);
+                e.Handled = Map.InvokeInfo(e.ScreenPosition * _mapControl.SkiaScale, e.ScreenPosition * _mapControl.SkiaScale, _mapControl.SkiaScale, _mapControl.SymbolCache, null, e.NumOfTaps);
 
             if (e.Handled)
                 return;

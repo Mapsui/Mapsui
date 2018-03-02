@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -18,6 +19,7 @@ namespace Mapsui.UI.Forms
     {
         private int bitmapId = -1;
         private byte[] bitmapData;
+        private MapView _mapView;
 
         public static readonly BindableProperty TypeProperty = BindableProperty.Create(nameof(Type), typeof(PinType), typeof(Pin), default(PinType));
         public static readonly BindableProperty ColorProperty = BindableProperty.Create(nameof(Color), typeof(Xamarin.Forms.Color), typeof(Pin), SKColors.Red.ToFormsColor());
@@ -32,11 +34,14 @@ namespace Mapsui.UI.Forms
         public static readonly BindableProperty WidthProperty = BindableProperty.Create(nameof(Width), typeof(double), typeof(Pin), -1.0, BindingMode.OneWayToSource);
         public static readonly BindableProperty HeightProperty = BindableProperty.Create(nameof(Height), typeof(double), typeof(Pin), -1.0);
         public static readonly BindableProperty AnchorProperty = BindableProperty.Create(nameof(Anchor), typeof(Point), typeof(Pin), new Point(0, 28));
-        public static readonly BindableProperty InfoWindowAnchorProperty = BindableProperty.Create(nameof(InfoWindowAnchor), typeof(Point), typeof(Pin), new Point(0.5d, 1.0d));
+        public static readonly BindableProperty InfoWindowAnchorProperty = BindableProperty.Create(nameof(InfoWindowAnchor), typeof(Point), typeof(Pin), new Point(0.5, 1.0));
+        public static readonly BindableProperty IsInfoWindowVisibleProperty = BindableProperty.Create(nameof(IsInfoWindowVisible), typeof(bool), typeof(Pin), default(bool));
         public static readonly BindableProperty TransparencyProperty = BindableProperty.Create(nameof(Transparency), typeof(float), typeof(Pin), 0f);
 
-        public Pin()
+        public Pin(MapView mapView)
         {
+            _mapView = mapView;
+
             CreateFeature();
         }
 
@@ -149,7 +154,7 @@ namespace Mapsui.UI.Forms
         }
 
         /// <summary>
-        /// Anchor of the bitmap in pixel
+        /// Anchor of bitmap in pixel
         /// </summary>
         public Point Anchor
         {
@@ -157,10 +162,22 @@ namespace Mapsui.UI.Forms
             set { SetValue(AnchorProperty, value); }
         }
 
+        /// <summary>
+        /// Anchor of InfoWindow in pixel
+        /// </summary>
         public Point InfoWindowAnchor
         {
             get { return (Point)GetValue(InfoWindowAnchorProperty); }
             set { SetValue(InfoWindowAnchorProperty, value); }
+        }
+
+        /// <summary>
+        /// Determins, if InfoWindow is visible
+        /// </summary>
+        public bool IsInfoWindowVisible
+        {
+            get { return (bool)GetValue(IsInfoWindowVisibleProperty); }
+            set { SetValue(IsInfoWindowVisibleProperty, value); }
         }
 
         /// <summary>
@@ -184,6 +201,40 @@ namespace Mapsui.UI.Forms
             get
             {
                 return feature;
+            }
+        }
+
+        private InfoWindow infoWindow;
+
+        public InfoWindow InfoWindow
+        {
+            get
+            {
+                // Show a new InfoWindow
+                if (infoWindow == null)
+                {
+                    // Create a default pin
+                    infoWindow = _mapView.CreateInfoWindow(Position);
+                    if (string.IsNullOrWhiteSpace(Address))
+                    {
+                        infoWindow.Type = InfoWindowType.Single;
+                        infoWindow.Text = Label;
+                    }
+                    else
+                    {
+                        infoWindow.Type = InfoWindowType.Detail;
+                        infoWindow.Text = Label;
+                        infoWindow.Detail = Address;
+                    }
+                }
+                UpdateInfoWindowPosition();
+
+                return infoWindow;
+            }
+            internal set
+            {
+                if (infoWindow != value)
+                    infoWindow = value;
             }
         }
 
@@ -233,6 +284,8 @@ namespace Mapsui.UI.Forms
             {
                 case nameof(Position):
                     feature.Geometry = Position.ToMapsui();
+                    if (infoWindow != null)
+                        UpdateInfoWindowPosition();
                     break;
                 case nameof(Label):
                     feature["Label"] = Label;
@@ -242,6 +295,10 @@ namespace Mapsui.UI.Forms
                     break;
                 case nameof(Anchor):
                     ((SymbolStyle)feature.Styles.First()).SymbolOffset = new Offset(Anchor.X, Anchor.Y);
+                    break;
+                case nameof(InfoWindowAnchor):
+                    if (infoWindow != null)
+                        UpdateInfoWindowPosition();
                     break;
                 case nameof(Rotation):
                     ((SymbolStyle)feature.Styles.First()).SymbolRotation = Rotation;
@@ -263,6 +320,18 @@ namespace Mapsui.UI.Forms
                 case nameof(Svg):
                     if (Type == PinType.Svg)
                         CreateFeature();
+                    break;
+                case nameof(IsInfoWindowVisible):
+                    if (IsInfoWindowVisible)
+                    {
+                        _mapView.ShowInfoWindow(InfoWindow);
+                    }
+                    else
+                    {
+                        // Hide InfoWindow of pin, but don't destroy it. 
+                        // Destroy it later, when pin is removed from pins list.
+                        _mapView.HideInfoWindow(InfoWindow);
+                    }
                     break;
             }
         }
@@ -360,6 +429,18 @@ namespace Mapsui.UI.Forms
                     });
                 }
             }
+        }
+
+        /// <summary>
+        /// Set new position for InfoWindow, if there is one
+        /// </summary>
+        private void UpdateInfoWindowPosition()
+        {
+            if (infoWindow == null)
+                return;
+
+            var screen = _mapView.Map.Viewport.WorldToScreen(Position.ToMapsui());
+            infoWindow.Anchor = _mapView.Map.Viewport.ScreenToWorld(new Geometries.Point(screen.X - InfoWindowAnchor.X, screen.Y - InfoWindowAnchor.Y)).ToForms();
         }
     }
 }

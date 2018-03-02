@@ -150,21 +150,30 @@ namespace Mapsui.Samples.Forms
             switch (e.NumOfTaps)
             {
                 case 1:
-                    mapView.Pins.Add(new Pin
+                    var pin = new Pin(mapView)
                     {
                         Label = $"PinType.Pin {markerNum++}",
+                        Address = e.Point.ToString(),
                         Position = e.Point,
                         Type = PinType.Pin,
                         Color = new Color(rnd.Next(0, 255) / 255.0, rnd.Next(0, 255) / 255.0, rnd.Next(0, 255) / 255.0),
                         Transparency = 0.5f,
                         Scale = rnd.Next(50, 130) / 100f,
-                    });
+                        InfoWindowAnchor = new Point(0, 50),
+                    };
+                    pin.InfoWindow.RectRadius = rnd.Next(0, 20);
+                    pin.InfoWindow.ArrowHeight = rnd.Next(0, 20);
+                    pin.InfoWindow.ArrowWidth = rnd.Next(0, 20);
+                    pin.InfoWindow.ArrowLocation = (ArrowLocationType)rnd.Next(0, 4);
+                    pin.InfoWindow.ArrowPosition = rnd.Next(0, 100) / 100;
+                    pin.InfoWindow.DetailLabel.LineBreakMode = LineBreakMode.NoWrap;
+                    mapView.Pins.Add(pin);
                     break;
                 case 2:
                     var stream = assembly.GetManifestResourceStream($"Mapsui.Samples.Forms.{device}.Images.Ghostscript_Tiger.svg");
                     StreamReader reader = new StreamReader(stream);
                     string svgString = reader.ReadToEnd();
-                    mapView.Pins.Add(new Pin
+                    mapView.Pins.Add(new Pin(mapView)
                     {
                         Label = $"PinType.Svg {markerNum++}",
                         Position = e.Point,
@@ -175,7 +184,7 @@ namespace Mapsui.Samples.Forms
                     break;
                 case 3:
                     var icon = assembly.GetManifestResourceStream($"Mapsui.Samples.Forms.{device}.Images.loc.png").ToBytes();
-                    mapView.Pins.Add(new Pin
+                    mapView.Pins.Add(new Pin(mapView)
                     {
                         Label = $"PinType.Icon {markerNum++}",
                         Position = e.Point,

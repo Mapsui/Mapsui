@@ -16,7 +16,7 @@ using Mapsui.Rendering;
 
 namespace Mapsui.UI
 {
-    public partial class MapControl : SKCanvasView, IMapControl, IDisposable
+    public partial class MapControl : SKGLView, IMapControl, IDisposable
     {
         class TouchEvent
         {
@@ -89,16 +89,28 @@ namespace Mapsui.UI
 
             PaintSurface += OnPaintSurface;
             Touch += HandleTouch;
+            SizeChanged += HandleSizeChanged; 
         }
 
         private void TryInitializeViewport()
         {
             if (_map.Viewport.Initialized) return;
 
-            if (_map.Viewport.TryInitializeViewport(_map, CanvasSize.Width, CanvasSize.Height))
+            _skiaScale = (float)(CanvasSize.Width / Width);
+
+            if (_map.Viewport.TryInitializeViewport(_map, CanvasSize.Width / _skiaScale, CanvasSize.Height / _skiaScale))
             {
                 Map.ViewChanged(true);
                 OnViewportInitialized();
+            }
+        }
+
+        private void HandleSizeChanged(object sender, EventArgs e)
+        {
+            if (Map != null)
+            {
+                Map.Viewport.Width = Width;
+                Map.Viewport.Height = Height;
             }
         }
 
@@ -186,7 +198,7 @@ namespace Mapsui.UI
             }
         }
 
-        void OnPaintSurface(object sender, SKPaintSurfaceEventArgs skPaintSurfaceEventArgs)
+        void OnPaintSurface(object sender, SKPaintGLSurfaceEventArgs skPaintSurfaceEventArgs)
         {
             TryInitializeViewport();
             if (!_map.Viewport.Initialized) return;
@@ -194,7 +206,6 @@ namespace Mapsui.UI
             _map.Viewport.Width = Width;
             _map.Viewport.Height = Height;
 
-            _skiaScale = (float)(CanvasSize.Width / Width);
             skPaintSurfaceEventArgs.Surface.Canvas.Scale(_skiaScale, _skiaScale);
 
             _renderer.Render(skPaintSurfaceEventArgs.Surface.Canvas,
@@ -311,12 +322,12 @@ namespace Mapsui.UI
 
         public Geometries.Point WorldToScreen(Geometries.Point worldPosition)
         {
-            return SharedMapControl.WorldToScreen(Map.Viewport, _skiaScale, worldPosition);
+            return WorldToScreen(Map.Viewport, _skiaScale, worldPosition);
         }
 
         public Geometries.Point ScreenToWorld(Geometries.Point screenPosition)
         {
-            return SharedMapControl.ScreenToWorld(Map.Viewport, _skiaScale, screenPosition);
+            return ScreenToWorld(Map.Viewport, _skiaScale, screenPosition);
         }
 
         private static void WidgetTouched(IWidget widget, Geometries.Point screenPosition)

@@ -56,6 +56,8 @@ namespace Mapsui.Samples.Forms
                     //DisplayAlert($"Pin {e.Pin.Label}", $"Is at position {e.Pin.Position}", "Ok");
                     e.Pin.IsVisible = false;
                 }
+                if (e.NumOfTaps == 1)
+                    e.Pin.IsInfoWindowVisible = !e.Pin.IsInfoWindowVisible;
             }
 
             e.Handled = true;

@@ -1,6 +1,7 @@
 ﻿using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Maps;
 using Mapsui.UI.Forms;
+using Mapsui.UI.Objects;
 using Plugin.Geolocator;
 using Plugin.Geolocator.Abstractions;
 using System;
@@ -39,7 +40,7 @@ namespace Mapsui.Samples.Forms
 
         private void OnMapClicked(object sender, MapClickedEventArgs e)
         {
-            e.Handled = (bool)clicker?.Invoke(sender as MapView, e);
+            e.Handled = clicker == null ? false : (bool)clicker?.Invoke(sender as MapView, e);
             //Samples.SetPins(mapView, e);
             //Samples.DrawPolylines(mapView, e);
         }
@@ -71,6 +72,8 @@ namespace Mapsui.Samples.Forms
                     //DisplayAlert($"Pin {e.Pin.Label}", $"Is at position {e.Pin.Position}", "Ok");
                     e.Pin.IsVisible = false;
                 }
+                if (e.NumOfTaps == 1)
+                    e.Pin.IsInfoWindowVisible = !e.Pin.IsInfoWindowVisible;
             }
 
             e.Handled = true;

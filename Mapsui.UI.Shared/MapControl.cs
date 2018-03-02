@@ -1,4 +1,5 @@
-﻿using Mapsui.Geometries.Utilities;
+﻿using Mapsui.Geometries;
+using Mapsui.Geometries.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -299,6 +300,32 @@ namespace Mapsui.UI
         public void Unsubscribe()
         {
             UnsubscribeFromMapEvents(_map);
+        }
+
+        /// <summary>
+        /// Converting function for world to screen respecting scale
+        /// </summary>
+        /// <param name="viewport">Viewport</param>
+        /// <param name="scale">Scale</param>
+        /// <param name="worldPosition">Position in world coordinates</param>
+        /// <returns></returns>
+        public Point WorldToScreen(IViewport viewport, float scale, Point worldPosition)
+        {
+            var screenPosition = viewport.WorldToScreen(worldPosition);
+            return new Point(screenPosition.X * scale, screenPosition.Y * scale);
+        }
+
+        /// <summary>
+        /// Converting function for screen to world respecting scale
+        /// </summary>
+        /// <param name="viewport">Viewport</param>
+        /// <param name="scale">Scale</param>
+        /// <param name="screenPosition">Position in screen coordinates</param>
+        /// <returns></returns>
+        public Point ScreenToWorld(IViewport viewport, float scale, Point screenPosition)
+        {
+            var worldPosition = viewport.ScreenToWorld(screenPosition.X * scale, screenPosition.Y * scale);
+            return new Point(worldPosition.X, worldPosition.Y);
         }
 
         /// <summary>
