@@ -51,7 +51,20 @@ namespace Mapsui.Samples.Common.Maps
             var counter = 0;
             foreach (var point in randomPoints)
             {
-                var circle = new Circle(((Point)point).X, ((Point)point).Y, 200000);
+                // Calc radius for point
+                // Be carefull, this only works, because OSM use spherical mercator projection in this case.
+                // So we could use meters (200000) in example.
+
+                // Get current position
+                var position = Projection.SphericalMercator.ToLonLat(((Point)point).X, ((Point)point).Y);
+
+                // Calc ground resolution in meters. One pixel of viewport for this latitude
+                double groundResolution = Math.Cos(position.Y / 180.0 * Math.PI);
+
+                // Now we can calc the radius of circle
+                var radius = 200000 / groundResolution;
+
+                var circle = new Circle(((Point)point).X, ((Point)point).Y, radius);
                 features.Add(new Feature { Geometry = circle, ["Label"] = counter++.ToString() });
             }
             return features;

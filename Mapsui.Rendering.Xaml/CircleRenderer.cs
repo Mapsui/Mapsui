@@ -43,20 +43,11 @@ namespace Mapsui.Rendering.Xaml
                 path.Tag = style.Outline.Width; // see #linewidthhack
             }
 
-            // Get current position
-            var position = Projection.SphericalMercator.ToLonLat(circle.X, circle.Y);
-
-            // Calc ground resolution in meters per pixel of viewport for this latitude
-            double groundResolution = Math.Cos(position.Y / 180.0 * Math.PI);
-
-            // Now we can calc the radius of circle
-            var radius = circle.Radius / groundResolution;
-
             path.Data = new XamlMedia.EllipseGeometry
             {
                 Center = new XamlPoint(circle.X, circle.Y),
-                RadiusX = radius,
-                RadiusY = radius
+                RadiusX = circle.Radius,
+                RadiusY = circle.Radius,
             };
 
             path.Opacity = 1;

@@ -14,15 +14,7 @@ namespace Mapsui.Rendering.Skia
         {
             var circle = geometry as Circle;
             var destination = viewport.WorldToScreen(new Point(circle.X, circle.Y));
-
-            // Get current position
-            var position = Projection.SphericalMercator.ToLonLat(circle.X, circle.Y);
-
-            // Calc ground resolution in meters per pixel of viewport for this latitude
-            double groundResolution = viewport.Resolution * Math.Cos(position.Y / 180.0 * Math.PI);
-
-            // Now we can calc the radius of circle
-            var radius = circle.Radius / groundResolution;
+            var radius = Math.Abs(destination.X - viewport.WorldToScreen(new Point(circle.X + circle.Radius, circle.Y)).X);
 
             if (style is VectorStyle)
             {
