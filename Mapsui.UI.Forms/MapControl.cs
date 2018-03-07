@@ -155,6 +155,8 @@ namespace Mapsui.UI
                     _doubleTapTestTimer = null;
                     _numOfTaps++;
                 }
+                else
+                    _numOfTaps = 1;
 
                 e.Handled = HandleTouchStart(_touches.Select(t => t.Value.Location).ToList());
             }
