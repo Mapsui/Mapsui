@@ -1,4 +1,5 @@
 ﻿using Mapsui.Geometries;
+using Mapsui.Layers;
 using Mapsui.Styles;
 using System;
 using System.ComponentModel;
@@ -45,6 +46,9 @@ namespace Mapsui.Widgets.ScaleBar
         public ScaleBarWidget(Map map)
         {
             Map = map;
+
+            if (Map.Transformation.IsProjectionSupported(Map.CRS, "EPSG:4326") != true)
+                throw new ArgumentException("projection isn't supported");
 
             HorizontalAlignment = DefaultScaleBarHorizontalAlignment;
             VerticalAlignment = DefaultScaleBarVerticalAlignment;
@@ -475,8 +479,10 @@ namespace Mapsui.Widgets.ScaleBar
         /// @return scaleBarLength and scaleBarText
         private (float scaleBarLength, string scaleBarText) CalculateScaleBarLengthAndValue(IViewport viewport, float width, IUnitConverter unitConverter)
         {
-            // Get current position
-            var position = Projection.SphericalMercator.ToLonLat(viewport.Center.X, viewport.Center.Y);
+            // We have to calc the angle difference to the equator (angle = 0), 
+            // because EPSG:3857 is only there 1 m. At othere angles, we
+            // should calculate the correct length.
+            var position = (Point)Map.Transformation.Transform(Map.CRS, "EPSG:4326", viewport.Center);
 
             // Calc ground resolution in meters per pixel of viewport for this latitude
             double groundResolution = viewport.Resolution * Math.Cos(position.Y / 180.0 * Math.PI);
