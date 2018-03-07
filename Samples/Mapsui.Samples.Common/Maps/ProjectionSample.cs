@@ -18,7 +18,6 @@ namespace Mapsui.Samples.Common.Maps
             var map = new Map
             {
                 Transformation = new MinimalTransformation(),
-                CRS = "EPSG:3857",
                 BackColor = Color.Gray
             };
             map.Layers.Add(OpenStreetMap.CreateTileLayer());

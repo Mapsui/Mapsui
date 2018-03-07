@@ -7,7 +7,7 @@ namespace Mapsui.Samples.Common.Desktop
     {
         public static Map CreateMap()
         {
-            var map = new Map {CRS = "EPSG:28992"};
+            var map = new Map();
             // The WMS request needs a CRS
             map.Layers.Add(CreateLayer());
             return map;

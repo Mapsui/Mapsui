@@ -66,12 +66,17 @@ namespace Mapsui
         /// </summary>
         public MinMax ZoomLimits { get; set; }
 
-        public string CRS { get; set; }
+        /// <summary>
+        /// Map uses a EPSG:3857 as coordinate system. It couldn't be changed.
+        /// </summary>
+        public string CRS { get; } = "EPSG:3857";
 
         /// <summary>
-        /// The maps coordinate system
+        /// Maps default coordinate transformation system
+        /// MinimalTransformation could be used for transformations 
+        /// from EPSG:3857 (web mercator) to EPSG:4326 (WGS84) and vice versa.
         /// </summary>
-        public ITransformation Transformation { get; set; }
+        public ITransformation Transformation { get; set; } = new MinimalTransformation();
 
         /// <summary>
         /// A collection of layers. The first layer in the list is drawn first, the last one on top.
@@ -246,9 +251,9 @@ namespace Mapsui
         {
             layer.DataChanged += LayerDataChanged;
             layer.PropertyChanged += LayerPropertyChanged;
-
-            layer.Transformation = Transformation;
-            layer.CRS = CRS;
+            // If layer hasn't a Transformation, use MinimalTransformation from Map
+            if (layer.Transformation == null)
+                layer.Transformation = Transformation;
             Resolutions = DetermineResolutions(Layers);
             OnPropertyChanged(nameof(Layers));
         }

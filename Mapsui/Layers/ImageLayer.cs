@@ -139,8 +139,15 @@ namespace Mapsui.Layers
             _needsUpdate = false;
 
             var newExtent = new BoundingBox(extent);
-            
-            if (Transformation != null && !string.IsNullOrWhiteSpace(CRS)) DataSource.CRS = CRS;
+
+            // TODO: It seems, that this isn't correct. 
+            // Why should DataSource.CRS set to CRS and later (next line) start 
+            // a transformation from DataSource.CRS to CRS?
+            // Perhaps this line should check, if DataSource isn't empty and if 
+            // still, than set it to CRS.
+            // if (Transformation != null && !string.IsNullOrWhiteSpace(CRS)) DataSource.CRS = CRS;
+            if (Transformation != null && string.IsNullOrWhiteSpace(DataSource.CRS) && !string.IsNullOrWhiteSpace(CRS))
+                DataSource.CRS = CRS;
 
             if (ProjectionHelper.NeedsTransform(Transformation, CRS, DataSource.CRS))
                 if (Transformation != null && Transformation.IsProjectionSupported(CRS, DataSource.CRS) == true)
