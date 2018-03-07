@@ -53,7 +53,7 @@ namespace Mapsui.UI
         private Geometries.Point _firstTouch;
         private Timer _doubleTapTestTimer;
         private int _numOfTaps = 0;
-        private List<long> _fingers = new List<long>(10);
+        private Dictionary<long, int> _fingers = new Dictionary<long, int>(20);
         private VelocityTracker _velocityTracker = new VelocityTracker();
 
         public event EventHandler ViewportInitialized;
@@ -123,21 +123,13 @@ namespace Mapsui.UI
             var location = GetScreenPosition(e.Location);
 
             // Get finger/handler for this event
-            long id;
-            if (!_fingers.Contains(e.Id))
+            if (!_fingers.Keys.Contains(e.Id))
                 if (_fingers.Count < 10)
                 {
-                    _fingers.Add(e.Id);
-                    id = _fingers.Count - 1;
+                    _fingers.Add(e.Id, _fingers.Count);
                 }
-                else
-                {
-                    id = -1;
-                }
-            else
-            {
-                id = _fingers.FindIndex((l) => l == e.Id);
-            }
+
+            var id = _fingers[e.Id];
 
             if (e.ActionType == SKTouchAction.Pressed)
             {
@@ -164,7 +156,7 @@ namespace Mapsui.UI
             {
                 // Delete e.Id from _fingers, because finger is released
                 
-                _fingers.RemoveAt((int)id);
+                _fingers.Remove(e.Id);
 
                 double velocityX;
                 double velocityY;
@@ -180,6 +172,7 @@ namespace Mapsui.UI
                 }
 
                 // Do we have a tap event
+                var temp = _touches[id];
                 if (_touches[id].Location.Equals(_firstTouch) && ticks - _touches[id].Tick < (e.DeviceType == SKTouchDeviceType.Mouse ? shortClick : longTap) * 10000)
                 {
                     // Start a timer with timeout delayTap ms. If than isn't arrived another tap, than it is a single
