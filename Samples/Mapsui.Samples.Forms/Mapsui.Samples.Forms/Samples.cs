@@ -159,8 +159,8 @@ namespace Mapsui.Samples.Forms
                         Color = new Color(rnd.Next(0, 255) / 255.0, rnd.Next(0, 255) / 255.0, rnd.Next(0, 255) / 255.0),
                         Transparency = 0.5f,
                         Scale = rnd.Next(50, 130) / 100f,
-                        InfoWindowAnchor = new Point(0, 50),
                     };
+                    pin.InfoWindowAnchor = new Point(0, pin.Height * pin.Scale);
                     pin.InfoWindow.RectRadius = rnd.Next(0, 20);
                     pin.InfoWindow.ArrowHeight = rnd.Next(0, 20);
                     pin.InfoWindow.ArrowWidth = rnd.Next(0, 20);

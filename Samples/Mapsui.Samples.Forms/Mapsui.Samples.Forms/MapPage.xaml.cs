@@ -62,6 +62,7 @@ namespace Mapsui.Samples.Forms
 
             e.Handled = true;
         }
+
         public async void StartGPS()
         {
             // Start GPS

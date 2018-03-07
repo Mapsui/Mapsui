@@ -118,8 +118,11 @@ namespace Mapsui.UI.Objects
                 Source = ImageSource.FromResource("Mapsui.UI.Images.Close.png", typeof(InfoWindow).GetTypeInfo().Assembly),
                 BackgroundColor = Color.Transparent,
                 Margin = new Thickness(4),
-                HorizontalOptions = LayoutOptions.End,
-                VerticalOptions = LayoutOptions.End,
+                WidthRequest = 16,
+                HeightRequest = 16,
+                HorizontalOptions = LayoutOptions.EndAndExpand,
+                VerticalOptions = LayoutOptions.EndAndExpand,
+                Aspect = Aspect.AspectFit,
             };
 
             // Use image as button

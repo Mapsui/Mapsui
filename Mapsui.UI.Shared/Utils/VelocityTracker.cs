@@ -58,7 +58,7 @@ namespace Mapsui.UI.Utils
             int start = 0;
             int pos = 0;
 
-            if (id >= 0 || id < 10)
+            if (id >= 0 && id < 10)
             {
                 long[] ticks = new long[maxSize - 1];
                 double[] vx = new double[maxSize - 1];

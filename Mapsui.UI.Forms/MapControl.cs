@@ -53,6 +53,7 @@ namespace Mapsui.UI
         private Geometries.Point _firstTouch;
         private Timer _doubleTapTestTimer;
         private int _numOfTaps = 0;
+        private List<long> _fingers = new List<long>(10);
         private VelocityTracker _velocityTracker = new VelocityTracker();
 
         public event EventHandler ViewportInitialized;
@@ -121,11 +122,28 @@ namespace Mapsui.UI
 
             var location = GetScreenPosition(e.Location);
 
+            // Get finger/handler for this event
+            long id;
+            if (!_fingers.Contains(e.Id))
+                if (_fingers.Count < 10)
+                {
+                    _fingers.Add(e.Id);
+                    id = _fingers.Count - 1;
+                }
+                else
+                {
+                    id = -1;
+                }
+            else
+            {
+                id = _fingers.FindIndex((l) => l == e.Id);
+            }
+
             if (e.ActionType == SKTouchAction.Pressed)
             {
                 _firstTouch = location;
 
-                _touches[e.Id] = new TouchEvent(e.Id, location, ticks);
+                _touches[id] = new TouchEvent(id, location, ticks);
 
                 _velocityTracker.Clear();
 
@@ -142,10 +160,14 @@ namespace Mapsui.UI
             }
             if (e.ActionType == SKTouchAction.Released)
             {
+                // Delete e.Id from _fingers, because finger is released
+                
+                _fingers.RemoveAt((int)id);
+
                 double velocityX;
                 double velocityY;
 
-                (velocityX, velocityY) = _velocityTracker.CalcVelocity(e.Id, ticks);
+                (velocityX, velocityY) = _velocityTracker.CalcVelocity(id, ticks);
 
                 // Is this a fling or swipe?
                 if (velocityX > 10000 || velocityY > 10000)
@@ -156,7 +178,7 @@ namespace Mapsui.UI
                 }
 
                 // Do we have a tap event
-                if (_touches[e.Id].Location.Equals(_firstTouch) && ticks - _touches[e.Id].Tick < (e.DeviceType == SKTouchDeviceType.Mouse ? shortClick : longTap) * 10000)
+                if (_touches[id].Location.Equals(_firstTouch) && ticks - _touches[id].Tick < (e.DeviceType == SKTouchDeviceType.Mouse ? shortClick : longTap) * 10000)
                 {
                     // Start a timer with timeout delayTap ms. If than isn't arrived another tap, than it is a single
                     _doubleTapTestTimer = new Timer((l) =>
@@ -173,23 +195,23 @@ namespace Mapsui.UI
                         _doubleTapTestTimer = null;
                     }, location, delayTap, Timeout.Infinite);
                 }
-                else if (_touches[e.Id].Location.Equals(_firstTouch) && ticks - _touches[e.Id].Tick >= longTap * 10000)
+                else if (_touches[id].Location.Equals(_firstTouch) && ticks - _touches[id].Tick >= longTap * 10000)
                 {
                     if (!e.Handled)
                         e.Handled = HandleLongTap(location);
                 }
-                var releasedTouch = _touches[e.Id];
-                _touches.Remove(e.Id);
+                var releasedTouch = _touches[id];
+                _touches.Remove(id);
 
                 if (!e.Handled)
                     e.Handled = HandleTouchEnd(_touches.Select(t => t.Value.Location).ToList(), releasedTouch.Location);
             }
             if (e.ActionType == SKTouchAction.Moved)
             {
-                _touches[e.Id] = new TouchEvent(e.Id, location, ticks);
+                _touches[id] = new TouchEvent(id, location, ticks);
 
                 if (e.InContact)
-                    _velocityTracker.AddEvent(e.Id, location, ticks);
+                    _velocityTracker.AddEvent(id, location, ticks);
 
                 if (e.InContact && !e.Handled)
                     e.Handled = HandleTouchMove(_touches.Select(t => t.Value.Location).ToList());

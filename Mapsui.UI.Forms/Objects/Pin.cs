@@ -289,6 +289,12 @@ namespace Mapsui.UI.Forms
                     break;
                 case nameof(Label):
                     feature["Label"] = Label;
+                    if (infoWindow != null)
+                        infoWindow.Text = Label;
+                    break;
+                case nameof(Address):
+                    if (infoWindow != null)
+                        infoWindow.Detail = Address;
                     break;
                 case nameof(Transparency):
                     ((SymbolStyle)feature.Styles.First()).Opacity = 1 - Transparency;
