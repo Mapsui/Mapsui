@@ -51,6 +51,7 @@ namespace Mapsui.UI.Objects
         private Point _offset;
 
         public event EventHandler<EventArgs> CalloutClosed;
+        public event EventHandler<EventArgs> CalloutClicked;
 
         public static readonly BindableProperty TypeProperty = BindableProperty.Create(nameof(Type), typeof(CalloutType), typeof(MapView), default(CalloutType));
         public static readonly BindableProperty AnchorProperty = BindableProperty.Create(nameof(Anchor), typeof(Position), typeof(MapView), default(Position));
@@ -86,7 +87,7 @@ namespace Mapsui.UI.Objects
                 BackgroundColor = Color.Transparent,
             };
 
-            _background.PaintSurface += PaintSurface;
+            _background.PaintSurface += HandlePaintSurface;
 
             AbsoluteLayout.SetLayoutBounds(_background, new Rectangle(0, 0, 1.0, 1.0));
             AbsoluteLayout.SetLayoutFlags(_background, AbsoluteLayoutFlags.SizeProportional);
@@ -159,6 +160,10 @@ namespace Mapsui.UI.Objects
                     _content,
                 }
             };
+
+            var tapGestureRecognizer = new TapGestureRecognizer();
+            tapGestureRecognizer.Tapped += (s, e) => HandleCalloutClicked(s, e);
+            GestureRecognizers.Add(tapGestureRecognizer);
 
             SizeChanged += CalloutSizeChanged;
 
@@ -420,11 +425,21 @@ namespace Mapsui.UI.Objects
         }
 
         /// <summary>
-        /// Paint bubble in background
+        /// Callout is touched
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">SKTouchEventArgs</param>
+        private void HandleCalloutClicked(object sender, EventArgs e)
+        {
+            CalloutClicked?.Invoke(this, e);
+        }
+
+        /// <summary>
+        /// Create callout outline in background
         /// </summary>
         /// <param name="sender">Sender</param>
         /// <param name="e">Event arguments</param>
-        private void PaintSurface(object sender, SKPaintSurfaceEventArgs e)
+        private void HandlePaintSurface(object sender, SKPaintSurfaceEventArgs e)
         {
             var canvas = e.Surface.Canvas;
 
