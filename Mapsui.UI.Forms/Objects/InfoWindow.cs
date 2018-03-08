@@ -115,13 +115,11 @@ namespace Mapsui.UI.Objects
 
             _close = new Image
             {
-                Source = ImageSource.FromResource("Mapsui.UI.Images.Close.png", typeof(InfoWindow).GetTypeInfo().Assembly),
                 BackgroundColor = Color.Transparent,
-                Margin = new Thickness(4),
                 WidthRequest = 16,
                 HeightRequest = 16,
                 HorizontalOptions = LayoutOptions.EndAndExpand,
-                VerticalOptions = LayoutOptions.EndAndExpand,
+                VerticalOptions = LayoutOptions.StartAndExpand,
                 Aspect = Aspect.AspectFit,
             };
 
@@ -133,13 +131,13 @@ namespace Mapsui.UI.Objects
 
             _header = new Label
             {
-                Text = "Test", //string.Empty,
+                Text = string.Empty,
                 LineBreakMode = LineBreakMode.NoWrap,
                 FontFamily = "Arial",
                 FontSize = 16,
                 FontAttributes = FontAttributes.Bold,
                 BackgroundColor = Color.Transparent,
-                HorizontalTextAlignment = TextAlignment.Center,
+                HorizontalTextAlignment = TextAlignment.Start,
                 VerticalTextAlignment = TextAlignment.Start,
             };
 
@@ -452,6 +450,15 @@ namespace Mapsui.UI.Objects
             canvas.Clear(SKColors.Transparent);
             canvas.DrawPath(_path, fill);
             canvas.DrawPath(_path, stroke);
+
+            // Draw close button
+            if (IsCloseVisible)
+            {
+                var paint = new SKPaint { IsAntialias = true, Style = SKPaintStyle.Stroke, Color = SKColors.Black, StrokeWidth = 2 };
+                var pos = _close.Bounds.Offset(_grid.Bounds.Left, _grid.Bounds.Top).Inflate(-4, -4);
+                canvas.DrawLine((float)pos.Left, (float)pos.Top, (float)pos.Right, (float)pos.Bottom, paint);
+                canvas.DrawLine((float)pos.Left, (float)pos.Bottom, (float)pos.Right, (float)pos.Top, paint);
+            }
         }
 
         /// <summary>

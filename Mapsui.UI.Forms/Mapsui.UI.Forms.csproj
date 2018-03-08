@@ -115,9 +115,6 @@
     <EmbeddedResource Include="Images\MyLocationMoving.svg" />
     <EmbeddedResource Include="Images\MyLocationStill.svg" />
   </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Images\Close.png" />
-  </ItemGroup>
   <Import Project="..\Mapsui.UI.Shared\Mapsui.UI.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\SkiaSharp.1.59.3\build\net45\SkiaSharp.targets" Condition="Exists('..\packages\SkiaSharp.1.59.3\build\net45\SkiaSharp.targets')" />
