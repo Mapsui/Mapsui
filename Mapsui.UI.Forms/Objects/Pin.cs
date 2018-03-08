@@ -34,8 +34,8 @@ namespace Mapsui.UI.Forms
         public static readonly BindableProperty WidthProperty = BindableProperty.Create(nameof(Width), typeof(double), typeof(Pin), -1.0, BindingMode.OneWayToSource);
         public static readonly BindableProperty HeightProperty = BindableProperty.Create(nameof(Height), typeof(double), typeof(Pin), -1.0);
         public static readonly BindableProperty AnchorProperty = BindableProperty.Create(nameof(Anchor), typeof(Point), typeof(Pin), new Point(0, 28));
-        public static readonly BindableProperty InfoWindowAnchorProperty = BindableProperty.Create(nameof(InfoWindowAnchor), typeof(Point), typeof(Pin), new Point(0.5, 1.0));
-        public static readonly BindableProperty IsInfoWindowVisibleProperty = BindableProperty.Create(nameof(IsInfoWindowVisible), typeof(bool), typeof(Pin), default(bool));
+        public static readonly BindableProperty CalloutAnchorProperty = BindableProperty.Create(nameof(CalloutAnchor), typeof(Point), typeof(Pin), new Point(0.5, 1.0));
+        public static readonly BindableProperty IsCalloutVisibleProperty = BindableProperty.Create(nameof(IsCalloutVisible), typeof(bool), typeof(Pin), default(bool));
         public static readonly BindableProperty TransparencyProperty = BindableProperty.Create(nameof(Transparency), typeof(float), typeof(Pin), 0f);
 
         public Pin(MapView mapView)
@@ -163,21 +163,21 @@ namespace Mapsui.UI.Forms
         }
 
         /// <summary>
-        /// Anchor of InfoWindow in pixel
+        /// Anchor of Callout in pixel
         /// </summary>
-        public Point InfoWindowAnchor
+        public Point CalloutAnchor
         {
-            get { return (Point)GetValue(InfoWindowAnchorProperty); }
-            set { SetValue(InfoWindowAnchorProperty, value); }
+            get { return (Point)GetValue(CalloutAnchorProperty); }
+            set { SetValue(CalloutAnchorProperty, value); }
         }
 
         /// <summary>
-        /// Determins, if InfoWindow is visible
+        /// Determins, if Callout is visible
         /// </summary>
-        public bool IsInfoWindowVisible
+        public bool IsCalloutVisible
         {
-            get { return (bool)GetValue(IsInfoWindowVisibleProperty); }
-            set { SetValue(IsInfoWindowVisibleProperty, value); }
+            get { return (bool)GetValue(IsCalloutVisibleProperty); }
+            set { SetValue(IsCalloutVisibleProperty, value); }
         }
 
         /// <summary>
@@ -204,37 +204,37 @@ namespace Mapsui.UI.Forms
             }
         }
 
-        private InfoWindow infoWindow;
+        private Callout callout;
 
-        public InfoWindow InfoWindow
+        public Callout Callout
         {
             get
             {
-                // Show a new InfoWindow
-                if (infoWindow == null)
+                // Show a new Callout
+                if (callout == null)
                 {
                     // Create a default pin
-                    infoWindow = _mapView.CreateInfoWindow(Position);
+                    callout = _mapView.CreateCallout(Position);
                     if (string.IsNullOrWhiteSpace(Address))
                     {
-                        infoWindow.Type = InfoWindowType.Single;
-                        infoWindow.Text = Label;
+                        callout.Type = CalloutType.Single;
+                        callout.Title = Label;
                     }
                     else
                     {
-                        infoWindow.Type = InfoWindowType.Detail;
-                        infoWindow.Text = Label;
-                        infoWindow.Detail = Address;
+                        callout.Type = CalloutType.Detail;
+                        callout.Title = Label;
+                        callout.Subtitle = Address;
                     }
                 }
-                UpdateInfoWindowPosition();
+                UpdateCalloutPosition();
 
-                return infoWindow;
+                return callout;
             }
             internal set
             {
-                if (infoWindow != value)
-                    infoWindow = value;
+                if (callout != value)
+                    callout = value;
             }
         }
 
@@ -284,17 +284,17 @@ namespace Mapsui.UI.Forms
             {
                 case nameof(Position):
                     feature.Geometry = Position.ToMapsui();
-                    if (infoWindow != null)
-                        UpdateInfoWindowPosition();
+                    if (callout != null)
+                        UpdateCalloutPosition();
                     break;
                 case nameof(Label):
                     feature["Label"] = Label;
-                    if (infoWindow != null)
-                        infoWindow.Text = Label;
+                    if (callout != null)
+                        callout.Title = Label;
                     break;
                 case nameof(Address):
-                    if (infoWindow != null)
-                        infoWindow.Detail = Address;
+                    if (callout != null)
+                        callout.Subtitle = Address;
                     break;
                 case nameof(Transparency):
                     ((SymbolStyle)feature.Styles.First()).Opacity = 1 - Transparency;
@@ -302,9 +302,9 @@ namespace Mapsui.UI.Forms
                 case nameof(Anchor):
                     ((SymbolStyle)feature.Styles.First()).SymbolOffset = new Offset(Anchor.X, Anchor.Y);
                     break;
-                case nameof(InfoWindowAnchor):
-                    if (infoWindow != null)
-                        UpdateInfoWindowPosition();
+                case nameof(CalloutAnchor):
+                    if (callout != null)
+                        UpdateCalloutPosition();
                     break;
                 case nameof(Rotation):
                     ((SymbolStyle)feature.Styles.First()).SymbolRotation = Rotation;
@@ -327,16 +327,16 @@ namespace Mapsui.UI.Forms
                     if (Type == PinType.Svg)
                         CreateFeature();
                     break;
-                case nameof(IsInfoWindowVisible):
-                    if (IsInfoWindowVisible)
+                case nameof(IsCalloutVisible):
+                    if (IsCalloutVisible)
                     {
-                        _mapView.ShowInfoWindow(InfoWindow);
+                        _mapView.ShowCallout(Callout);
                     }
                     else
                     {
-                        // Hide InfoWindow of pin, but don't destroy it. 
+                        // Hide Callout of pin, but don't destroy it. 
                         // Destroy it later, when pin is removed from pins list.
-                        _mapView.HideInfoWindow(InfoWindow);
+                        _mapView.HideCallout(Callout);
                     }
                     break;
             }
@@ -438,15 +438,15 @@ namespace Mapsui.UI.Forms
         }
 
         /// <summary>
-        /// Set new position for InfoWindow, if there is one
+        /// Set new position for Callout, if there is one
         /// </summary>
-        private void UpdateInfoWindowPosition()
+        private void UpdateCalloutPosition()
         {
-            if (infoWindow == null)
+            if (callout == null)
                 return;
 
             var screen = _mapView.Map.Viewport.WorldToScreen(Position.ToMapsui());
-            infoWindow.Anchor = _mapView.Map.Viewport.ScreenToWorld(new Geometries.Point(screen.X - InfoWindowAnchor.X, screen.Y - InfoWindowAnchor.Y)).ToForms();
+            callout.Anchor = _mapView.Map.Viewport.ScreenToWorld(new Geometries.Point(screen.X - CalloutAnchor.X, screen.Y - CalloutAnchor.Y)).ToForms();
         }
     }
 }

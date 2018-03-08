@@ -79,7 +79,7 @@
     <Compile Include="Objects\IClickable.cs" />
     <Compile Include="Objects\Drawable.cs" />
     <Compile Include="Objects\IFeatureProvider.cs" />
-    <Compile Include="Objects\InfoWindow.cs" />
+    <Compile Include="Objects\Callout.cs" />
     <Compile Include="Objects\MapSpan.cs" />
     <Compile Include="Objects\MyLocationLayer.cs" />
     <Compile Include="Objects\ObservableCollectionProvider.cs" />

@@ -28,7 +28,7 @@ namespace Mapsui.UI.Forms
 
         readonly ObservableCollection<Pin> _pins = new ObservableCollection<Pin>();
         readonly ObservableCollection<Drawable> _drawable = new ObservableCollection<Drawable>();
-        readonly ObservableCollection<InfoWindow> _infoWindows = new ObservableCollection<InfoWindow>();
+        readonly ObservableCollection<Callout> _callouts = new ObservableCollection<Callout>();
 
         public MapView()
         {
@@ -234,15 +234,15 @@ namespace Mapsui.UI.Forms
             _mapControl.InvalidateSurface();
         }
 
-        private InfoWindow info;
+        private Callout info;
 
-        public InfoWindow CreateInfoWindow(Position position)
+        public Callout CreateCallout(Position position)
         {
             if (position == null)
                 return null;
 
             Device.BeginInvokeOnMainThread(() => {
-                info = new InfoWindow(_mapControl)
+                info = new Callout(_mapControl)
                 {
                     Anchor = position,
                 };
@@ -256,42 +256,42 @@ namespace Mapsui.UI.Forms
             return result;
         }
 
-        public void ShowInfoWindow(InfoWindow infoWindow)
+        public void ShowCallout(Callout callout)
         {
-            if (infoWindow == null)
+            if (callout == null)
                 return;
 
             // Set absolute layout constrains
-            AbsoluteLayout.SetLayoutFlags(infoWindow, AbsoluteLayoutFlags.None);
+            AbsoluteLayout.SetLayoutFlags(callout, AbsoluteLayoutFlags.None);
 
             // Add it to MapView
-            if (!((AbsoluteLayout)Content).Children.Contains(infoWindow))
-                Device.BeginInvokeOnMainThread(() => ((AbsoluteLayout)Content).Children.Add(infoWindow));
+            if (!((AbsoluteLayout)Content).Children.Contains(callout))
+                Device.BeginInvokeOnMainThread(() => ((AbsoluteLayout)Content).Children.Add(callout));
 
-            // Add it to list of active InfoWindows
-            _infoWindows.Add(infoWindow);
+            // Add it to list of active Callouts
+            _callouts.Add(callout);
 
-            // When InfoWindow is closed by close button
-            infoWindow.InfoWindowClosed += (s, e) => HideInfoWindow((InfoWindow)s);
+            // When Callout is closed by close button
+            callout.CalloutClosed += (s, e) => HideCallout((Callout)s);
 
-            // Inform InfoWindow
-            infoWindow.Show();
+            // Inform Callout
+            callout.Show();
         }
 
-        public void HideInfoWindow(InfoWindow infoWindow)
+        public void HideCallout(Callout callout)
         {
-            if (infoWindow == null)
+            if (callout == null)
                 return;
 
-            // Inform InfoWindow
-            infoWindow.Hide();
+            // Inform Callout
+            callout.Hide();
 
-            // Remove it from list of active InfoWindows
-            _infoWindows.Remove(infoWindow);
+            // Remove it from list of active Callouts
+            _callouts.Remove(callout);
 
             // Remove it from MapView
-            if (((AbsoluteLayout)Content).Children.Contains(infoWindow))
-                Device.BeginInvokeOnMainThread(() => ((AbsoluteLayout)Content).Children.Remove(infoWindow));
+            if (((AbsoluteLayout)Content).Children.Contains(callout))
+                Device.BeginInvokeOnMainThread(() => ((AbsoluteLayout)Content).Children.Remove(callout));
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -360,8 +360,8 @@ namespace Mapsui.UI.Forms
                     // Remove old pins from layer
                     var pin = item as Pin;
 
-                    HideInfoWindow(pin.InfoWindow);
-                    pin.InfoWindow = null;
+                    HideCallout(pin.Callout);
+                    pin.Callout = null;
 
                     pin.PropertyChanged -= HandlerPinPropertyChanged;
 
@@ -466,24 +466,24 @@ namespace Mapsui.UI.Forms
 
         private void HandlerTap(object sender, TapEventArgs e)
         {
-            // Close all closable InfoWindows
-            var list = _infoWindows.ToList();
+            // Close all closable Callouts
+            var list = _callouts.ToList();
 
-            // First check all InfoWindows, that belong to a pin
+            // First check all Callouts, that belong to a pin
             foreach (var pin in _pins)
             {
-                if (pin.InfoWindow != null)
+                if (pin.Callout != null)
                 {
-                    if (pin.InfoWindow.IsClosableByClick)
-                        pin.IsInfoWindowVisible = false;
-                    list.Remove(pin.InfoWindow);
+                    if (pin.Callout.IsClosableByClick)
+                        pin.IsCalloutVisible = false;
+                    list.Remove(pin.Callout);
                 }
             }
 
-            // Now check the rest, InfoWindows not belonging to a pin
-            foreach (var infoWindow in list)
-                if (infoWindow.IsClosableByClick)
-                    HideInfoWindow(infoWindow);
+            // Now check the rest, Callouts not belonging to a pin
+            foreach (var callout in list)
+                if (callout.IsClosableByClick)
+                    HideCallout(callout);
 
             // Check, if we hit a widget or drawable
             // Is there a widget at this position

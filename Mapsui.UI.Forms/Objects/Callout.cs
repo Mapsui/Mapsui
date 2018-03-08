@@ -9,9 +9,9 @@ using Xamarin.Forms;
 namespace Mapsui.UI.Objects
 {
     /// <summary>
-    /// Type of InfoWindow
+    /// Type of Callout
     /// </summary>
-    public enum InfoWindowType
+    public enum CalloutType
     {
         /// <summary>
         /// Only one line is shown
@@ -30,7 +30,7 @@ namespace Mapsui.UI.Objects
     /// <summary>
     /// Determins, where the pointer is
     /// </summary>
-    public enum ArrowLocationType
+    public enum ArrowAlignment
     {
         Bottom,
         Left,
@@ -38,23 +38,23 @@ namespace Mapsui.UI.Objects
         Right,
     }
 
-    public class InfoWindow : ContentView
+    public class Callout : ContentView
     {
         private MapControl _mapControl;
         private SKCanvasView _background;
         private Grid _grid;
-        private Label _header;
-        private Label _detail;
+        private Label _title;
+        private Label _subtitle;
         private ContentView _content;
-        private Image _close;
+        private Button _close;
         private SKPath _path;
         private Point _offset;
 
-        public event EventHandler<EventArgs> InfoWindowClosed;
+        public event EventHandler<EventArgs> CalloutClosed;
 
-        public static readonly BindableProperty TypeProperty = BindableProperty.Create(nameof(Type), typeof(InfoWindowType), typeof(MapView), default(InfoWindowType));
+        public static readonly BindableProperty TypeProperty = BindableProperty.Create(nameof(Type), typeof(CalloutType), typeof(MapView), default(CalloutType));
         public static readonly BindableProperty AnchorProperty = BindableProperty.Create(nameof(Anchor), typeof(Position), typeof(MapView), default(Position));
-        public static readonly BindableProperty ArrowLocationProperty = BindableProperty.Create(nameof(ArrowLocation), typeof(ArrowLocationType), typeof(MapView), default(ArrowLocationType), defaultBindingMode: BindingMode.TwoWay);
+        public static readonly BindableProperty ArrowAlignmentProperty = BindableProperty.Create(nameof(ArrowAlignment), typeof(ArrowAlignment), typeof(MapView), default(ArrowAlignment), defaultBindingMode: BindingMode.TwoWay);
         public static readonly BindableProperty ArrowWidthProperty = BindableProperty.Create(nameof(ArrowWidth), typeof(float), typeof(MapView), 12f);
         public static readonly BindableProperty ArrowHeightProperty = BindableProperty.Create(nameof(ArrowHeight), typeof(float), typeof(MapView), 16f);
         public static readonly BindableProperty ArrowPositionProperty = BindableProperty.Create(nameof(ArrowPosition), typeof(float), typeof(MapView), 0.5f);
@@ -67,10 +67,10 @@ namespace Mapsui.UI.Objects
         public static readonly BindableProperty IsCloseVisibleProperty = BindableProperty.Create(nameof(IsCloseVisible), typeof(bool), typeof(MapView), true);
         public static readonly BindableProperty IsClosableByClickProperty = BindableProperty.Create(nameof(IsClosableByClick), typeof(bool), typeof(MapView), true);
         public static readonly new BindableProperty ContentProperty = BindableProperty.Create(nameof(Content), typeof(ContentView), typeof(MapView), null);
-        public static readonly BindableProperty TextProperty = BindableProperty.Create(nameof(Text), typeof(string), typeof(MapView), default(string));
-        public static readonly BindableProperty DetailProperty = BindableProperty.Create(nameof(Detail), typeof(string), typeof(MapView), default(string));
+        public static readonly BindableProperty TitleProperty = BindableProperty.Create(nameof(Title), typeof(string), typeof(MapView), default(string));
+        public static readonly BindableProperty SubtitleProperty = BindableProperty.Create(nameof(Subtitle), typeof(string), typeof(MapView), default(string));
 
-        public InfoWindow(MapControl mapControl)
+        public Callout(MapControl mapControl)
         {
             _mapControl = mapControl ?? throw new ArgumentNullException("MapControl shouldn't be null");
 
@@ -108,28 +108,17 @@ namespace Mapsui.UI.Objects
             AbsoluteLayout.SetLayoutBounds(_grid, new Rectangle(0, 0, 1.0, 1.0));
             AbsoluteLayout.SetLayoutFlags(_grid, AbsoluteLayoutFlags.SizeProportional);
 
-            // TODO: Remove
-            var assembly = typeof(InfoWindow).GetTypeInfo().Assembly;
-            foreach (var s in assembly.GetManifestResourceNames())
-                System.Diagnostics.Debug.WriteLine(s);
-
-            _close = new Image
+            _close = new Button
             {
                 BackgroundColor = Color.Transparent,
                 WidthRequest = 16,
                 HeightRequest = 16,
                 HorizontalOptions = LayoutOptions.EndAndExpand,
                 VerticalOptions = LayoutOptions.StartAndExpand,
-                Aspect = Aspect.AspectFit,
+                Command = new Command(() => CloseCalloutClicked(this, new EventArgs())),
             };
 
-            // Use image as button
-            _close.GestureRecognizers.Add(new TapGestureRecognizer()
-            {
-                Command = new Command(() => CloseInfoWindowClicked(this, new EventArgs()))
-            });
-
-            _header = new Label
+            _title = new Label
             {
                 Text = string.Empty,
                 LineBreakMode = LineBreakMode.NoWrap,
@@ -141,7 +130,7 @@ namespace Mapsui.UI.Objects
                 VerticalTextAlignment = TextAlignment.Start,
             };
 
-            _detail = new Label
+            _subtitle = new Label
             {
                 Text = string.Empty,
                 HorizontalOptions = LayoutOptions.CenterAndExpand,
@@ -153,9 +142,9 @@ namespace Mapsui.UI.Objects
             };
 
             _grid.Children.Add(_close, 1, 0);
-            _grid.Children.Add(_header, 0, 0);
-            _grid.Children.Add(_detail, 0, 1);
-            Grid.SetColumnSpan(_detail, 2);
+            _grid.Children.Add(_title, 0, 0);
+            _grid.Children.Add(_subtitle, 0, 1);
+            Grid.SetColumnSpan(_subtitle, 2);
 
             _content = new ContentView
             {
@@ -171,7 +160,7 @@ namespace Mapsui.UI.Objects
                 }
             };
 
-            SizeChanged += InfoWindowSizeChanged;
+            SizeChanged += CalloutSizeChanged;
 
             UpdateGridSize();
             UpdatePath();
@@ -181,16 +170,16 @@ namespace Mapsui.UI.Objects
         // TODO: Remove events when disposing
 
         /// <summary>
-        /// Type of InfoWindow
+        /// Type of Callout
         /// </summary>
-        public InfoWindowType Type
+        public CalloutType Type
         {
-            get { return (InfoWindowType)GetValue(TypeProperty); }
+            get { return (CalloutType)GetValue(TypeProperty); }
             set { SetValue(TypeProperty, value); }
         }
 
         /// <summary>
-        /// Anchor position of InfoWindow
+        /// Anchor position of Callout
         /// </summary>
         public Position Anchor
         {
@@ -199,16 +188,16 @@ namespace Mapsui.UI.Objects
         }
 
         /// <summary>
-        /// Anchor position of InfoWindow
+        /// Anchor position of Callout
         /// </summary>
-        public ArrowLocationType ArrowLocation
+        public ArrowAlignment ArrowAlignment
         {
-            get { return (ArrowLocationType)GetValue(ArrowLocationProperty); }
-            set { SetValue(ArrowLocationProperty, value); }
+            get { return (ArrowAlignment)GetValue(ArrowAlignmentProperty); }
+            set { SetValue(ArrowAlignmentProperty, value); }
         }
 
         /// <summary>
-        /// Width of opening of anchor of InfoWindow
+        /// Width of opening of anchor of Callout
         /// </summary>
         public float ArrowWidth
         {
@@ -217,7 +206,7 @@ namespace Mapsui.UI.Objects
         }
 
         /// <summary>
-        /// Height of anchor of InfoWindow
+        /// Height of anchor of Callout
         /// </summary>
         public float ArrowHeight
         {
@@ -226,7 +215,7 @@ namespace Mapsui.UI.Objects
         }
 
         /// <summary>
-        /// Relative position of anchor of InfoWindow on the side given by AnchorType
+        /// Relative position of anchor of Callout on the side given by AnchorType
         /// </summary>
         public float ArrowPosition
         {
@@ -235,7 +224,7 @@ namespace Mapsui.UI.Objects
         }
 
         /// <summary>
-        /// Color of stroke around InfoWindow
+        /// Color of stroke around Callout
         /// </summary>
         public Color Color
         {
@@ -244,7 +233,7 @@ namespace Mapsui.UI.Objects
         }
 
         /// <summary>
-        /// BackgroundColor of InfoWindow
+        /// BackgroundColor of Callout
         /// </summary>
         public new Color BackgroundColor
         {
@@ -253,7 +242,7 @@ namespace Mapsui.UI.Objects
         }
 
         /// <summary>
-        /// Stroke width of frame around InfoWindow
+        /// Stroke width of frame around Callout
         /// </summary>
         public float StrokeWidth
         {
@@ -262,7 +251,7 @@ namespace Mapsui.UI.Objects
         }
 
         /// <summary>
-        /// Radius of rounded corners of InfoWindow
+        /// Radius of rounded corners of Callout
         /// </summary>
         public float RectRadius
         {
@@ -271,7 +260,7 @@ namespace Mapsui.UI.Objects
         }
 
         /// <summary>
-        /// Radius of rounded corners of InfoWindow
+        /// Padding around content of Callout
         /// </summary>
         public new Thickness Padding
         {
@@ -280,7 +269,7 @@ namespace Mapsui.UI.Objects
         }
 
         /// <summary>
-        /// Is InfoWindow visible on map
+        /// Is Callout visible on map
         /// </summary>
         public new bool IsVisible
         {
@@ -289,7 +278,7 @@ namespace Mapsui.UI.Objects
         }
 
         /// <summary>
-        /// Is close button to hide InfoWindow visible
+        /// Is close button to hide Callout visible
         /// </summary>
         public bool IsCloseVisible
         {
@@ -298,7 +287,7 @@ namespace Mapsui.UI.Objects
         }
 
         /// <summary>
-        /// Closes InfoWindow by clicking some else on the MapView
+        /// Closes Callout by clicking somewhere else on the MapView
         /// </summary>
         public bool IsClosableByClick
         {
@@ -307,7 +296,7 @@ namespace Mapsui.UI.Objects
         }
 
         /// <summary>
-        /// Content of InfoWindow
+        /// Content of Callout
         /// </summary>
         public new ContentView Content
         {
@@ -318,35 +307,35 @@ namespace Mapsui.UI.Objects
         /// <summary>
         /// Label for header
         /// </summary>
-        public Label TextLabel
+        public Label TitleLabel
         {
-            get { return _header; }
+            get { return _title; }
         }
 
         /// <summary>
         /// Label for detail
         /// </summary>
-        public Label DetailLabel
+        public Label SubtitleLabel
         {
-            get { return _detail; }
+            get { return _subtitle; }
         }
 
         /// <summary>
-        /// Content of InfoWindow header
+        /// Content of Callout header
         /// </summary>
-        public string Text
+        public string Title
         {
-            get { return (string)GetValue(TextProperty); }
-            set { SetValue(TextProperty, value); }
+            get { return (string)GetValue(TitleProperty); }
+            set { SetValue(TitleProperty, value); }
         }
 
         /// <summary>
-        /// Content of InfoWindow detail label
+        /// Content of Callout detail label
         /// </summary>
-        public string Detail
+        public string Subtitle
         {
-            get { return (string)GetValue(DetailProperty); }
-            set { SetValue(DetailProperty, value); }
+            get { return (string)GetValue(SubtitleProperty); }
+            set { SetValue(SubtitleProperty, value); }
         }
 
         internal void Show()
@@ -373,14 +362,14 @@ namespace Mapsui.UI.Objects
         {
             Device.BeginInvokeOnMainThread(() => base.OnPropertyChanged(propertyName));
 
-            if (propertyName.Equals(nameof(Text)))
+            if (propertyName.Equals(nameof(Title)))
             {
-                _header.Text = Text;
+                _title.Text = Title;
             }
 
-            if (propertyName.Equals(nameof(Detail)))
+            if (propertyName.Equals(nameof(Subtitle)))
             {
-                _detail.Text = Detail;
+                _subtitle.Text = Subtitle;
             }
 
             if (propertyName.Equals(nameof(Content)))
@@ -398,7 +387,7 @@ namespace Mapsui.UI.Objects
                 UpdateContent();
             }
 
-            if (propertyName.Equals(nameof(ArrowLocation))
+            if (propertyName.Equals(nameof(ArrowAlignment))
                 || propertyName.Equals(nameof(ArrowWidth))
                 || propertyName.Equals(nameof(ArrowHeight))
                 || propertyName.Equals(nameof(ArrowPosition))
@@ -477,7 +466,7 @@ namespace Mapsui.UI.Objects
         }
 
         /// <summary>
-        /// Checks type of InfoWindow and activates correct content
+        /// Checks type of Callout and activates correct content
         /// </summary>
         private void UpdateContent()
         {
@@ -485,22 +474,22 @@ namespace Mapsui.UI.Objects
 
             switch (Type)
             {
-                case InfoWindowType.Single:
+                case CalloutType.Single:
                     _grid.IsVisible = true;
-                    _detail.IsVisible = false;
+                    _subtitle.IsVisible = false;
                     _content.IsVisible = false;
-                    Grid.SetColumnSpan(_header, IsCloseVisible ? 1 : 2);
-                    Grid.SetRowSpan(_header, 2);
+                    Grid.SetColumnSpan(_title, IsCloseVisible ? 1 : 2);
+                    Grid.SetRowSpan(_title, 2);
                     break;
-                case InfoWindowType.Detail:
+                case CalloutType.Detail:
                     _grid.IsVisible = true;
-                    _detail.IsVisible = true;
+                    _subtitle.IsVisible = true;
                     _content.IsVisible = false;
-                    Grid.SetColumnSpan(_header, IsCloseVisible ? 1 : 2);
-                    Grid.SetColumnSpan(_detail, 2);
-                    Grid.SetRowSpan(_header, 1);
+                    Grid.SetColumnSpan(_title, IsCloseVisible ? 1 : 2);
+                    Grid.SetColumnSpan(_subtitle, 2);
+                    Grid.SetRowSpan(_title, 1);
                     break;
-                case InfoWindowType.Custom:
+                case CalloutType.Custom:
                     if (_content != Content)
                     {
                         if (Content == null)
@@ -528,20 +517,20 @@ namespace Mapsui.UI.Objects
         }
 
         /// <summary>
-        /// Resize the InfoWindow, that grid is complete visible
+        /// Resize the Callout, that grid is complete visible
         /// </summary>
         private void UpdateGridSize()
         {
             SizeRequest size;
 
-            if (Type == InfoWindowType.Custom)
+            if (Type == CalloutType.Custom)
                 size = _content.Measure(double.PositiveInfinity, double.PositiveInfinity, MeasureFlags.None);
             else
                 size = _grid.Measure(double.PositiveInfinity, double.PositiveInfinity, MeasureFlags.None);
 
             // Calc new size of info window to hold the complete content. Add some extra amount to be sure, that it is big enough.
-            var width = size.Request.Width + Padding.Left + Padding.Right + ((ArrowLocation == ArrowLocationType.Left || ArrowLocation == ArrowLocationType.Right) ? ArrowHeight : 0) + 4;
-            var height = size.Request.Height + Padding.Top + Padding.Bottom + ((ArrowLocation == ArrowLocationType.Top || ArrowLocation == ArrowLocationType.Bottom) ? ArrowHeight : 0) + 4;
+            var width = size.Request.Width + Padding.Left + Padding.Right + ((ArrowAlignment == ArrowAlignment.Left || ArrowAlignment == ArrowAlignment.Right) ? ArrowHeight : 0) + 4;
+            var height = size.Request.Height + Padding.Top + Padding.Bottom + ((ArrowAlignment == ArrowAlignment.Top || ArrowAlignment == ArrowAlignment.Bottom) ? ArrowHeight : 0) + 4;
 
             AbsoluteLayout.SetLayoutBounds(this, new Rectangle(X, Y, width, height));
 
@@ -556,18 +545,18 @@ namespace Mapsui.UI.Objects
         {
             var margin = Padding;
 
-            switch (ArrowLocation)
+            switch (ArrowAlignment)
             {
-                case ArrowLocationType.Bottom:
+                case ArrowAlignment.Bottom:
                     margin.Bottom += ArrowHeight;
                     break;
-                case ArrowLocationType.Top:
+                case ArrowAlignment.Top:
                     margin.Top += ArrowHeight;
                     break;
-                case ArrowLocationType.Left:
+                case ArrowAlignment.Left:
                     margin.Left += ArrowHeight;
                     break;
-                case ArrowLocationType.Right:
+                case ArrowAlignment.Right:
                     margin.Right += ArrowHeight;
                     break;
             }
@@ -603,27 +592,27 @@ namespace Mapsui.UI.Objects
             if (halfHeight + ArrowWidth * 0.5 > Height - RectRadius)
                 halfHeight = Height - ArrowWidth * 0.5 - RectRadius;
             
-            switch (ArrowLocation)
+            switch (ArrowAlignment)
             {
-                case ArrowLocationType.Bottom:
+                case ArrowAlignment.Bottom:
                     start = new Point(halfWidth - ArrowWidth * 0.5, Height - ArrowHeight);
                     center = new Point(halfWidth, Height);
                     end = new Point(halfWidth + ArrowWidth * 0.5, Height - ArrowHeight);
                     bottom -= ArrowHeight;
                     break;
-                case ArrowLocationType.Top:
+                case ArrowAlignment.Top:
                     start = new Point(halfWidth + ArrowWidth * 0.5, ArrowHeight);
                     center = new Point(halfWidth, 0);
                     end = new Point(halfWidth - ArrowWidth * 0.5, ArrowHeight);
                     top += ArrowHeight;
                     break;
-                case ArrowLocationType.Left:
+                case ArrowAlignment.Left:
                     start = new Point(ArrowHeight, halfHeight - ArrowWidth * 0.5);
                     center = new Point(0, halfHeight);
                     end = new Point(ArrowHeight, halfHeight + ArrowWidth * 0.5);
                     left += ArrowHeight;
                     break;
-                case ArrowLocationType.Right:
+                case ArrowAlignment.Right:
                     start = new Point(Width - ArrowHeight, halfHeight + ArrowWidth * 0.5);
                     center = new Point(Width, halfHeight);
                     end = new Point(Width - ArrowHeight, halfHeight - ArrowWidth * 0.5);
@@ -659,7 +648,7 @@ namespace Mapsui.UI.Objects
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void InfoWindowSizeChanged(object sender, EventArgs e)
+        private void CalloutSizeChanged(object sender, EventArgs e)
         {
             UpdateMargin();
             UpdatePath();
@@ -687,13 +676,13 @@ namespace Mapsui.UI.Objects
         }
 
         /// <summary>
-        /// Called, when InfoWindow close button is pressed
+        /// Called, when Callout close button is pressed
         /// </summary>
         /// <param name="sender">Sender</param>
         /// <param name="e">Event arguments</param>
-        private void CloseInfoWindowClicked(object sender, EventArgs e)
+        private void CloseCalloutClicked(object sender, EventArgs e)
         {
-            InfoWindowClosed?.Invoke(this, new EventArgs());
+            CalloutClosed?.Invoke(this, new EventArgs());
         }
     }
 }

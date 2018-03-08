@@ -174,13 +174,13 @@ namespace Mapsui.Samples.Forms
                         Transparency = 0.5f,
                         Scale = rnd.Next(50, 130) / 100f,
                     };
-                    pin.InfoWindowAnchor = new Point(0, pin.Height * pin.Scale);
-                    pin.InfoWindow.RectRadius = rnd.Next(0, 20);
-                    pin.InfoWindow.ArrowHeight = rnd.Next(0, 20);
-                    pin.InfoWindow.ArrowWidth = rnd.Next(0, 20);
-                    pin.InfoWindow.ArrowLocation = (ArrowLocationType)rnd.Next(0, 4);
-                    pin.InfoWindow.ArrowPosition = rnd.Next(0, 100) / 100;
-                    pin.InfoWindow.DetailLabel.LineBreakMode = LineBreakMode.NoWrap;
+                    pin.CalloutAnchor = new Point(0, pin.Height * pin.Scale);
+                    pin.Callout.RectRadius = rnd.Next(0, 20);
+                    pin.Callout.ArrowHeight = rnd.Next(0, 20);
+                    pin.Callout.ArrowWidth = rnd.Next(0, 20);
+                    pin.Callout.ArrowAlignment = (ArrowAlignment)rnd.Next(0, 4);
+                    pin.Callout.ArrowPosition = rnd.Next(0, 100) / 100;
+                    pin.Callout.SubtitleLabel.LineBreakMode = LineBreakMode.NoWrap;
                     mapView.Pins.Add(pin);
                     break;
                 case 2:
