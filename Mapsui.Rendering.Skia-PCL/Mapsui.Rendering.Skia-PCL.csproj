@@ -35,6 +35,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ExtensionMethods\BoundingBoxExtensions.cs" />
+    <Compile Include="ExtensionMethods\PenStrokeJoinExtensions.cs" />
     <Compile Include="ExtensionMethods\PenStrokeCapExtensions.cs" />
     <Compile Include="ExtensionMethods\PenStyleExtension.cs" />
     <Compile Include="ExtensionMethods\SKRectExtensions.cs" />

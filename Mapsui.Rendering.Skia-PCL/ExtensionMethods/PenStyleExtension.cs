@@ -5,10 +5,21 @@ namespace Mapsui.Rendering.Skia
 {
     public static class PenStyleExtension
     {
-        public static SKPathEffect ToSkia(this PenStyle penStyle, float width)
+        public static SKPathEffect ToSkia(this PenStyle penStyle, float width, float[] dashArray = null)
         {
             switch (penStyle)
             {
+                case PenStyle.UserDefined:
+                    // If dashArray is empty or not even, create sold dash
+                    if (dashArray == null || dashArray.Length == 0 || dashArray.Length % 2 != 0)
+                        return SKPathEffect.CreateDash(new float[0], 0);
+                    // Multiply each dash entry with line width
+                    float[] dash = new float[dashArray.Length];
+                    for (var i = 0; i < dashArray.Length; i++)
+                    {
+                        dash[i] = dashArray[i] * width;
+                    }
+                    return SKPathEffect.CreateDash(dash, 0);
                 case PenStyle.Dash:
                     return SKPathEffect.CreateDash(new [] { width * 4f, width * 3f }, 0);
                 case PenStyle.Dot:

@@ -10,14 +10,19 @@ namespace Mapsui.Rendering.Xaml
 {
     static class StyleExtensions
     {
-        public static DoubleCollection ToXaml(this PenStyle penStyle)
+        public static DoubleCollection ToXaml(this PenStyle penStyle, float[] dashArray = null)
         {
-            return StyleConverter.MapsuiPentoXaml(penStyle);
+            return StyleConverter.MapsuiPentoXaml(penStyle, dashArray);
         }
 
         public static PenLineCap ToXaml(this PenStrokeCap penStrokeCap)
         {
             return StyleConverter.MapsuiStrokeCaptoPenLineCap(penStrokeCap);
+        }
+
+        public static PenLineJoin ToXaml(this StrokeJoin penStrokeJoin)
+        {
+            return StyleConverter.MapsuiStrokeJointoPenLineJoin(penStrokeJoin);
         }
 
         public static WinColor ToXaml(this Color color)

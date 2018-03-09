@@ -12,6 +12,7 @@ namespace Mapsui.Styles
         ShortDash,
         ShortDashDot,
         ShortDashDotDot,
-        ShortDot
+        ShortDot,
+        UserDefined
     }
 }

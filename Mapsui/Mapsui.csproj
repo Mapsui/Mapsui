@@ -65,6 +65,7 @@
     <Compile Include="Geometries\NotifyingPoint.cs" />
     <Compile Include="Layers\AnimatedFeatures.cs" />
     <Compile Include="Layers\AnimatedPointLayer.cs" />
+    <Compile Include="Styles\StrokeJoin.cs" />
     <Compile Include="Styles\PenStrokeCap.cs" />
     <Compile Include="Widgets\Alignment.cs" />
     <Compile Include="Widgets\Hyperlink.cs" />
