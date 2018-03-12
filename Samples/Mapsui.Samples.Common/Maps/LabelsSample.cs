@@ -52,7 +52,7 @@ namespace Mapsui.Samples.Common.Maps
             var featureWithBottomAlignedStyle = new Feature {Geometry = new Point(0, -4000000)};
             featureWithBottomAlignedStyle.Styles.Add(new LabelStyle
             {
-                Text = "Right Aligned",
+                Text = "Bottom\nAligned",
                 BackColor = new Brush(Color.Gray),
                 VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Bottom
             });

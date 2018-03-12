@@ -12,10 +12,19 @@ namespace Mapsui.Rendering.Xaml
 {
     public static class StyleConverter
     {
-        public static DoubleCollection MapsuiPentoXaml(PenStyle penStyle)
+        public static DoubleCollection MapsuiPentoXaml(PenStyle penStyle, float[] dashArray = null)
         {
             switch (penStyle)
             {
+                case PenStyle.UserDefined:
+                    if (dashArray == null || dashArray.Length == 0 || dashArray.Length % 2 != 0)
+                        return new DoubleCollection { 1, 0 };
+                    var dash = new DoubleCollection(dashArray.Length);
+                    for (var i = 0; i < dashArray.Length; i++)
+                    {
+                        dash.Add(dashArray[i]);
+                    }
+                    return dash;
                 case PenStyle.Dash:
                     return new DoubleCollection {2, 2};
                 case PenStyle.DashDot:
@@ -56,7 +65,22 @@ namespace Mapsui.Rendering.Xaml
             }
         }
 
-        public static XamlBrush MapsuiBrushToXaml(Styles.Brush brush, SymbolCache symbolCache = null, float rotate = 0f)
+        public static PenLineJoin MapsuiStrokeJointoPenLineJoin(StrokeJoin penStrokeJoin)
+        {
+            switch (penStrokeJoin)
+            {
+                case StrokeJoin.Miter:
+                    return PenLineJoin.Miter;
+                case StrokeJoin.Round:
+                    return PenLineJoin.Round;
+                case StrokeJoin.Bevel:
+                    return PenLineJoin.Bevel;
+                default:
+                    return PenLineJoin.Miter;
+            }
+        }
+
+        public static XamlBrush MapsuiBrushToXaml(Styles.Brush brush, SymbolCache symbolCache = null)
         {
             if (brush == null) return null;
             switch (brush.FillStyle)
