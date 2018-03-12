@@ -1,6 +1,5 @@
 ﻿using Mapsui.Geometries;
 using Mapsui.Providers;
-using Mapsui.Rendering.Skia.ExtensionMethods;
 using Mapsui.Styles;
 using SkiaSharp;
 
@@ -25,7 +24,10 @@ namespace Mapsui.Rendering.Skia
                 var lineColor = Color.Black; // default
                 var fillColor = Color.Gray; // default
                 var strokeCap = PenStrokeCap.Butt; // default
+                var strokeJoin = StrokeJoin.Miter; // default
+                var strokeMiterLimit = 4f; // default
                 var strokeStyle = PenStyle.Solid; // default
+                float[] dashArray = null; // default
 
                 var vectorStyle = style as VectorStyle;
 
@@ -34,7 +36,10 @@ namespace Mapsui.Rendering.Skia
                     lineWidth = (float)vectorStyle.Outline.Width;
                     lineColor = vectorStyle.Outline.Color;
                     strokeCap = vectorStyle.Outline.PenStrokeCap;
+                    strokeJoin = vectorStyle.Outline.StrokeJoin;
+                    strokeMiterLimit = vectorStyle.Outline.StrokeMiterLimit;
                     strokeStyle = vectorStyle.Outline.PenStyle;
+                    dashArray = vectorStyle.Outline.DashArray;
 
                     fillColor = vectorStyle.Fill?.Color;
                 }
@@ -52,8 +57,10 @@ namespace Mapsui.Rendering.Skia
                         paint.Style = SKPaintStyle.Stroke;
                         paint.Color = lineColor.ToSkia(opacity);
                         paint.StrokeCap = strokeCap.ToSkia();
+                        paint.StrokeJoin = strokeJoin.ToSkia();
+                        paint.StrokeMiter = strokeMiterLimit;
                         if (strokeStyle != PenStyle.Solid)
-                            paint.PathEffect = strokeStyle.ToSkia(lineWidth);
+                            paint.PathEffect = strokeStyle.ToSkia(lineWidth, dashArray);
                         canvas.DrawPath(path, paint);
                     }
                 }

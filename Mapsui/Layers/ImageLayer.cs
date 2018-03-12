@@ -22,6 +22,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Mapsui.Logging;
 using Mapsui.Utilities;
 
 namespace Mapsui.Layers
@@ -42,6 +43,12 @@ namespace Mapsui.Layers
         private readonly Timer _startFetchTimer;
         private IProvider _dataSource;
         private readonly int _numberOfFeaturesReturned;
+
+        /// <summary>
+        /// Delay before fetching a new wms image from the server
+        /// after the view has changed. Specified in milliseconds.
+        /// </summary>
+        public int FetchDelay { get; set; } = 1000;
 
         public IProvider DataSource
         {
@@ -75,7 +82,7 @@ namespace Mapsui.Layers
         public ImageLayer(string layername)
         {
             Name = layername;
-            _startFetchTimer = new Timer(StartFetchTimerElapsed, 500, int.MaxValue);
+            _startFetchTimer = new Timer(StartFetchTimerElapsed, int.MaxValue);
             _numberOfFeaturesReturned = 1;
         }
 
@@ -130,7 +137,7 @@ namespace Mapsui.Layers
                 return;
             }
 
-            _startFetchTimer.Restart();
+            _startFetchTimer.Restart(FetchDelay);
         }
 
         private void StartNewFetch(BoundingBox extent, double resolution)
@@ -146,8 +153,10 @@ namespace Mapsui.Layers
                 if (Transformation != null && Transformation.IsProjectionSupported(CRS, DataSource.CRS) == true)
                     newExtent = Transformation.Transform(CRS, DataSource.CRS, extent);
                 
-
             var fetcher = new FeatureFetcher(newExtent, resolution, DataSource, DataArrived, DateTime.Now.Ticks);
+
+            Logger.Log(LogLevel.Debug, $"Starting new fetch at {DateTime.Now.TimeOfDay}");
+
             Task.Run(() => fetcher.FetchOnThread());
         }
 
