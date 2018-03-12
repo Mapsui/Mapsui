@@ -234,7 +234,7 @@ namespace Mapsui.UI.Forms
             _mapControl.InvalidateSurface();
         }
 
-        private Callout info;
+        private Callout callout;
 
         public Callout CreateCallout(Position position)
         {
@@ -242,16 +242,16 @@ namespace Mapsui.UI.Forms
                 return null;
 
             Device.BeginInvokeOnMainThread(() => {
-                info = new Callout(_mapControl)
+                callout = new Callout(_mapControl)
                 {
                     Anchor = position,
                 };
             });
 
-            while (info == null) ;
+            while (callout == null) ;
 
-            var result = info;
-            info = null;
+            var result = callout;
+            callout = null;
 
             return result;
         }
@@ -338,6 +338,24 @@ namespace Mapsui.UI.Forms
             if (e.PropertyName.Equals(nameof(Viewport.Rotation)))
             {
                 _mapMyLocationLayer.UpdateMyDirection(_mapMyLocationLayer.Direction, Map.Viewport.Rotation);
+
+                // Check all callout positions
+                var list = _callouts.ToList();
+
+                // First check all Callouts, that belong to a pin
+                foreach (var pin in _pins)
+                {
+                    if (pin.Callout != null)
+                    {
+                        pin.UpdateCalloutPosition();
+                        list.Remove(pin.Callout);
+                    }
+                }
+
+                // Now check the rest, Callouts not belonging to a pin
+                foreach (var callout in list)
+                    callout.UpdateScreenPosition();
+
             }
             if (e.PropertyName.Equals(nameof(Viewport.Center)))
             {

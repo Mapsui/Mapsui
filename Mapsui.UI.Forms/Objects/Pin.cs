@@ -440,7 +440,7 @@ namespace Mapsui.UI.Forms
         /// <summary>
         /// Set new position for Callout, if there is one
         /// </summary>
-        private void UpdateCalloutPosition()
+        internal void UpdateCalloutPosition()
         {
             if (callout == null)
                 return;

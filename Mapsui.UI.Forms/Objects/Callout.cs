@@ -49,6 +49,7 @@ namespace Mapsui.UI.Objects
         private Button _close;
         private SKPath _path;
         private Point _offset;
+        private float _shadowWidth = 2;
 
         public event EventHandler<EventArgs> CalloutClosed;
         public event EventHandler<EventArgs> CalloutClicked;
@@ -445,6 +446,7 @@ namespace Mapsui.UI.Objects
 
             canvas.Scale(_mapControl.SkiaScale, _mapControl.SkiaScale);
 
+            var shadow = new SKPaint { IsAntialias = true, Style = SKPaintStyle.Stroke, StrokeWidth = 1.5f, Color = SKColors.Gray, MaskFilter = SKMaskFilter.CreateBlur(SKBlurStyle.Normal, _shadowWidth)};
             var fill = new SKPaint { IsAntialias = true, Style = SKPaintStyle.Fill, Color = BackgroundColor.ToSKColor() };
             var stroke = new SKPaint { IsAntialias = true, Style = SKPaintStyle.Stroke, Color = Color.ToSKColor(), StrokeWidth = StrokeWidth };
 
@@ -452,13 +454,14 @@ namespace Mapsui.UI.Objects
                 UpdatePath();
 
             canvas.Clear(SKColors.Transparent);
+            canvas.DrawPath(_path, shadow);
             canvas.DrawPath(_path, fill);
             canvas.DrawPath(_path, stroke);
 
             // Draw close button
             if (IsCloseVisible)
             {
-                var paint = new SKPaint { IsAntialias = true, Style = SKPaintStyle.Stroke, Color = SKColors.Black, StrokeWidth = 2 };
+                var paint = new SKPaint { IsAntialias = true, Style = SKPaintStyle.Stroke, Color = SKColors.DarkGray, StrokeWidth = 2 };
                 var pos = _close.Bounds.Offset(_grid.Bounds.Left, _grid.Bounds.Top).Inflate(-4, -4);
                 canvas.DrawLine((float)pos.Left, (float)pos.Top, (float)pos.Right, (float)pos.Bottom, paint);
                 canvas.DrawLine((float)pos.Left, (float)pos.Bottom, (float)pos.Right, (float)pos.Top, paint);
@@ -468,7 +471,7 @@ namespace Mapsui.UI.Objects
         /// <summary>
         /// Something outside changed, so update screen position
         /// </summary>
-        private void UpdateScreenPosition()
+        internal void UpdateScreenPosition()
         {
             // Don't update screen position, if there isn't a layer
             if (_mapControl.Map.Layers.Count == 0)
@@ -543,9 +546,10 @@ namespace Mapsui.UI.Objects
             else
                 size = _grid.Measure(double.PositiveInfinity, double.PositiveInfinity, MeasureFlags.None);
 
-            // Calc new size of info window to hold the complete content. Add some extra amount to be sure, that it is big enough.
-            var width = size.Request.Width + Padding.Left + Padding.Right + ((ArrowAlignment == ArrowAlignment.Left || ArrowAlignment == ArrowAlignment.Right) ? ArrowHeight : 0) + 4;
-            var height = size.Request.Height + Padding.Top + Padding.Bottom + ((ArrowAlignment == ArrowAlignment.Top || ArrowAlignment == ArrowAlignment.Bottom) ? ArrowHeight : 0) + 4;
+            // Calc new size of info window to hold the complete content. 
+            // Add some extra amount to be sure, that it is big enough.
+            var width = size.Request.Width + Padding.Left + Padding.Right + ((ArrowAlignment == ArrowAlignment.Left || ArrowAlignment == ArrowAlignment.Right) ? ArrowHeight : 0) + _shadowWidth * 2 + 4;
+            var height = size.Request.Height + Padding.Top + Padding.Bottom + ((ArrowAlignment == ArrowAlignment.Top || ArrowAlignment == ArrowAlignment.Bottom) ? ArrowHeight : 0) + _shadowWidth * 2 + 4;
 
             AbsoluteLayout.SetLayoutBounds(this, new Rectangle(X, Y, width, height));
 
@@ -576,6 +580,11 @@ namespace Mapsui.UI.Objects
                     break;
             }
 
+            margin.Left += _shadowWidth;
+            margin.Top += _shadowWidth;
+            margin.Right += _shadowWidth;
+            margin.Bottom += _shadowWidth;
+
             _grid.Margin = margin;
             _content.Margin = margin;
 
@@ -587,12 +596,14 @@ namespace Mapsui.UI.Objects
         /// </summary>
         private void UpdatePath()
         {
-            var halfWidth = Width * ArrowPosition;
-            var halfHeight = Height * ArrowPosition;
-            var bottom = (float)Height;
-            var left = 0.0f;
-            var top = 0.0f;
-            var right = (float)Width;
+            var width = Width - _shadowWidth * 2;
+            var height = Height - _shadowWidth * 2;
+            var halfWidth = width * ArrowPosition;
+            var halfHeight = height * ArrowPosition;
+            var bottom = (float)height - _shadowWidth;
+            var left = _shadowWidth;
+            var top = _shadowWidth;
+            var right = (float)width - _shadowWidth;
             var start = new Point();
             var center = new Point();
             var end = new Point();
@@ -600,55 +611,75 @@ namespace Mapsui.UI.Objects
             // Check, if we are to near of the corners
             if (halfWidth - ArrowWidth * 0.5 < RectRadius)
                 halfWidth = ArrowWidth * 0.5 + RectRadius;
-            if (halfWidth + ArrowWidth * 0.5 > Width - RectRadius)
-                halfWidth = Width - ArrowWidth * 0.5 - RectRadius;
+            if (halfWidth + ArrowWidth * 0.5 > width - RectRadius)
+                halfWidth = width - ArrowWidth * 0.5 - RectRadius;
             if (halfHeight - ArrowWidth * 0.5 < RectRadius)
                 halfHeight = ArrowWidth * 0.5 + RectRadius;
-            if (halfHeight + ArrowWidth * 0.5 > Height - RectRadius)
-                halfHeight = Height - ArrowWidth * 0.5 - RectRadius;
+            if (halfHeight + ArrowWidth * 0.5 > height - RectRadius)
+                halfHeight = height - ArrowWidth * 0.5 - RectRadius;
             
             switch (ArrowAlignment)
             {
                 case ArrowAlignment.Bottom:
-                    start = new Point(halfWidth - ArrowWidth * 0.5, Height - ArrowHeight);
-                    center = new Point(halfWidth, Height);
-                    end = new Point(halfWidth + ArrowWidth * 0.5, Height - ArrowHeight);
+                    start = new Point(halfWidth + ArrowWidth * 0.5, bottom - ArrowHeight);
+                    center = new Point(halfWidth, bottom);
+                    end = new Point(halfWidth - ArrowWidth * 0.5, bottom - ArrowHeight);
                     bottom -= ArrowHeight;
                     break;
                 case ArrowAlignment.Top:
-                    start = new Point(halfWidth + ArrowWidth * 0.5, ArrowHeight);
-                    center = new Point(halfWidth, 0);
-                    end = new Point(halfWidth - ArrowWidth * 0.5, ArrowHeight);
+                    start = new Point(halfWidth - ArrowWidth * 0.5, top + ArrowHeight);
+                    center = new Point(halfWidth, top);
+                    end = new Point(halfWidth + ArrowWidth * 0.5, top + ArrowHeight);
                     top += ArrowHeight;
                     break;
                 case ArrowAlignment.Left:
-                    start = new Point(ArrowHeight, halfHeight - ArrowWidth * 0.5);
-                    center = new Point(0, halfHeight);
-                    end = new Point(ArrowHeight, halfHeight + ArrowWidth * 0.5);
+                    start = new Point(left + ArrowHeight, halfHeight + ArrowWidth * 0.5);
+                    center = new Point(left, halfHeight);
+                    end = new Point(left + ArrowHeight, halfHeight - ArrowWidth * 0.5);
                     left += ArrowHeight;
                     break;
                 case ArrowAlignment.Right:
-                    start = new Point(Width - ArrowHeight, halfHeight + ArrowWidth * 0.5);
-                    center = new Point(Width, halfHeight);
-                    end = new Point(Width - ArrowHeight, halfHeight - ArrowWidth * 0.5);
+                    start = new Point(right - ArrowHeight, halfHeight - ArrowWidth * 0.5);
+                    center = new Point(right, halfHeight);
+                    end = new Point(right - ArrowHeight, halfHeight + ArrowWidth * 0.5);
                     right -= ArrowHeight;
                     break;
             }
 
-            // Create path for rectangle
-            var rect = new SKPath();
-            rect.AddRoundedRect(new SKRect(left, top, right, bottom), RectRadius, RectRadius, SKPathDirection.CounterClockwise);
-            rect.Close();
-
             // Create path
             _path = new SKPath();
 
-            _path.MoveTo(start.ToSKPoint());
-            _path.LineTo(center.ToSKPoint());
-            _path.LineTo(end.ToSKPoint());
+            // Move to start point at left/top
+            _path.MoveTo(left + RectRadius, top);
 
-            // Combine both path
-            _path.Op(rect, SKPathOp.Union, _path);
+            // Top horizontal line
+            if (ArrowAlignment == ArrowAlignment.Top)
+                DrawArrow(start, center, end);
+
+            // Top right arc
+            _path.ArcTo(new SKRect(right - RectRadius, top, right, top + RectRadius), 270, 90, false);
+
+            // Right vertical line
+            if (ArrowAlignment == ArrowAlignment.Right)
+                DrawArrow(start, center, end);
+
+            // Bottom right arc
+            _path.ArcTo(new SKRect(right - RectRadius, bottom - RectRadius, right, bottom), 0, 90, false);
+
+            // Bottom horizontal line
+            if (ArrowAlignment == ArrowAlignment.Bottom)
+                DrawArrow(start, center, end);
+
+            // Bottom left arc
+            _path.ArcTo(new SKRect(left, bottom - RectRadius, left + RectRadius, bottom), 90, 90, false);
+
+            // Left vertical line
+            if (ArrowAlignment == ArrowAlignment.Left)
+                DrawArrow(start, center, end);
+
+            // Top left arc
+            _path.ArcTo(new SKRect(left, top, left + RectRadius, top + RectRadius), 180, 90, false);
+
             _path.Close();
 
             // Set center as new anchor point
@@ -656,6 +687,19 @@ namespace Mapsui.UI.Objects
 
             // We changed so much, so update screen position
             UpdateScreenPosition();
+        }
+
+        /// <summary>
+        /// Draw arrow to path
+        /// </summary>
+        /// <param name="start">Start of arrow at bubble</param>
+        /// <param name="center">Center of arrow</param>
+        /// <param name="end">End of arrow at bubble</param>
+        private void DrawArrow(Point start, Point center, Point end)
+        {
+            _path.LineTo(start.ToSKPoint());
+            _path.LineTo(center.ToSKPoint());
+            _path.LineTo(end.ToSKPoint());
         }
 
         /// <summary>
