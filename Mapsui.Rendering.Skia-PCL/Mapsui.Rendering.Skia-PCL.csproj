@@ -40,7 +40,6 @@
     <Compile Include="ExtensionMethods\PenStyleExtension.cs" />
     <Compile Include="ExtensionMethods\SKRectExtensions.cs" />
     <Compile Include="HyperlinkWidgetRenderer.cs" />
-    <Compile Include="CircleRenderer.cs" />
     <Compile Include="ZoomInOutWidgetRenderer.cs" />
     <Compile Include="ScaleBarWidgetRenderer.cs" />
     <Compile Include="SymbolCache.cs" />

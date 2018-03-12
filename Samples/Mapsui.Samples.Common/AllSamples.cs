@@ -14,7 +14,6 @@ namespace Mapsui.Samples.Common
                 ["Simple Points"] = PointsSample.CreateMap,
                 ["Simple LineStrings"] = LineStringSample.CreateMap,
                 ["Simple Polygons"] = PolygonSample.CreateMap,
-                ["Simple Circles"] = CirclesSample.CreateMap,
                 ["Various"] = VariousSample.CreateMap,
                 ["Labels"] = LabelsSample.CreateMap,
                 ["Center on location"] = CenterOnLocationSample.CreateMap,

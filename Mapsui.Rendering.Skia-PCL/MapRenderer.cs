@@ -120,8 +120,6 @@ namespace Mapsui.Rendering.Skia
         {
             if (feature.Geometry is Point)
                 PointRenderer.Draw(canvas, viewport, style, feature, feature.Geometry, _symbolCache, layerOpacity * style.Opacity);
-            else if (feature.Geometry is Circle)
-                CircleRenderer.Draw(canvas, viewport, style, feature, feature.Geometry, _symbolCache, layerOpacity * style.Opacity);
             else if (feature.Geometry is MultiPoint)
                 MultiPointRenderer.Draw(canvas, viewport, style, feature, feature.Geometry, _symbolCache, layerOpacity * style.Opacity);
             else if (feature.Geometry is LineString)

@@ -58,7 +58,6 @@
     <Compile Include="MultiLineString.cs" />
     <Compile Include="MultiPoint.cs" />
     <Compile Include="MultiPolygon.cs" />
-    <Compile Include="Circle.cs" />
     <Compile Include="Point.cs" />
     <Compile Include="Polygon.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
