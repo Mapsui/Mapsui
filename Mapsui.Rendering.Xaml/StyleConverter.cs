@@ -80,7 +80,7 @@ namespace Mapsui.Rendering.Xaml
             }
         }
 
-        public static XamlBrush MapsuiBrushToXaml(Styles.Brush brush, SymbolCache symbolCache = null)
+        public static XamlBrush MapsuiBrushToXaml(Styles.Brush brush, SymbolCache symbolCache = null, double rotate = 0)
         {
             if (brush == null) return null;
             switch (brush.FillStyle)
