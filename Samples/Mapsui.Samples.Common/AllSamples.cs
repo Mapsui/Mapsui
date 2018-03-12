@@ -35,7 +35,8 @@ namespace Mapsui.Samples.Common
                 ["Mutating triangle"] = MutatingTriangleSample.CreateMap,
                 ["Symbols in World Units"] = SymbolsInWorldUnitsSample.CreateMap,
                 ["Widgets"] = WidgetSample.CreateMap,
-                ["ScaleBar"] = ScaleBarSample.CreateMap
+                ["ScaleBar"] = ScaleBarSample.CreateMap,
+                ["OpacityStyle"] = OpacityStyleSample.CreateMap
             };
         }
     }

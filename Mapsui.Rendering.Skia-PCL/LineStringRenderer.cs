@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using Mapsui.Geometries;
 using Mapsui.Providers;
-using Mapsui.Rendering.Skia.ExtensionMethods;
 using Mapsui.Styles;
 using SkiaSharp;
 
@@ -10,13 +9,13 @@ namespace Mapsui.Rendering.Skia
     public static class LineStringRenderer
     {
         public static void Draw(SKCanvas canvas, IViewport viewport, IStyle style, IFeature feature, IGeometry geometry,
-            float layerOpacity)
+            float opacity)
         {
             if (style is LabelStyle labelStyle)
             {
                 var worldCenter = geometry.GetBoundingBox().GetCentroid();
                 var center = viewport.WorldToScreen(worldCenter);
-                LabelRenderer.Draw(canvas, labelStyle, feature, (float) center.X, (float) center.Y, layerOpacity);
+                LabelRenderer.Draw(canvas, labelStyle, feature, (float) center.X, (float) center.Y, opacity);
             }
             else
             {
@@ -45,7 +44,7 @@ namespace Mapsui.Rendering.Skia
                 {
                     paint.IsStroke = true;
                     paint.StrokeWidth = lineWidth;
-                    paint.Color = lineColor.ToSkia(layerOpacity);
+                    paint.Color = lineColor.ToSkia(opacity);
                     paint.StrokeJoin = SKStrokeJoin.Round;
                     paint.StrokeCap = strokeCap.ToSkia();
                     if (strokeStyle != PenStyle.Solid)

@@ -1,6 +1,5 @@
 ﻿using Mapsui.Geometries;
 using Mapsui.Providers;
-using Mapsui.Rendering.Skia.ExtensionMethods;
 using Mapsui.Styles;
 using SkiaSharp;
 
@@ -9,13 +8,13 @@ namespace Mapsui.Rendering.Skia
     internal static class PolygonRenderer
     {
         public static void Draw(SKCanvas canvas, IViewport viewport, IStyle style, IFeature feature, IGeometry geometry,
-            float layerOpacity)
+            float opacity)
         {
             if (style is LabelStyle)
             {
                 var worldCenter = geometry.GetBoundingBox().GetCentroid();
                 var center = viewport.WorldToScreen(worldCenter);
-                LabelRenderer.Draw(canvas, (LabelStyle)style, feature, (float)center.X, (float)center.Y, layerOpacity);
+                LabelRenderer.Draw(canvas, (LabelStyle)style, feature, (float)center.X, (float)center.Y, opacity);
             }
             else
             {
@@ -47,10 +46,10 @@ namespace Mapsui.Rendering.Skia
                         paint.StrokeWidth = lineWidth;
 
                         paint.Style = SKPaintStyle.Fill;
-                        paint.Color = fillColor.ToSkia(layerOpacity);
+                        paint.Color = fillColor.ToSkia(opacity);
                         canvas.DrawPath(path, paint);
                         paint.Style = SKPaintStyle.Stroke;
-                        paint.Color = lineColor.ToSkia(layerOpacity);
+                        paint.Color = lineColor.ToSkia(opacity);
                         paint.StrokeCap = strokeCap.ToSkia();
                         if (strokeStyle != PenStyle.Solid)
                             paint.PathEffect = strokeStyle.ToSkia(lineWidth);

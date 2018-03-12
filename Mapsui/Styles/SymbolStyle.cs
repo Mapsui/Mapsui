@@ -27,18 +27,7 @@ namespace Mapsui.Styles
         {
             SymbolOffset = new Offset();
             SymbolScale = 1f;
-            Opacity = 1f;
             BitmapId = -1;
-        }
-
-        /// <summary>
-        ///     Symbol used for rendering points
-        /// </summary>
-        [Obsolete("Use BitmapID and BitmapRegistry instead", true)]
-        public Bitmap Symbol
-        {
-            get { throw new NotImplementedException(); }
-            set { throw new NotImplementedException(); }
         }
 
         /// <summary>
@@ -72,8 +61,6 @@ namespace Mapsui.Styles
         public UnitType UnitType { get; set; }
 
         public SymbolType SymbolType { get; set; }
-
-        public double Opacity { get; set; }
 
         public override bool Equals(object obj)
         {
@@ -123,7 +110,6 @@ namespace Mapsui.Styles
                 SymbolRotation.GetHashCode() ^
                 UnitType.GetHashCode() ^
                 SymbolType.GetHashCode() ^
-                Opacity.GetHashCode() ^
                 base.GetHashCode();
         }
 
