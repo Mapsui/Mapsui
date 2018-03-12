@@ -60,6 +60,7 @@
     <Compile Include="AllSamples.cs" />
     <Compile Include="Maps\BingSample.cs" />
     <Compile Include="Maps\CenterOnLocationSample.cs" />
+    <Compile Include="Maps\CirclesSample.cs" />
     <Compile Include="Maps\KeepWithinExtentsSample.cs" />
     <Compile Include="Maps\LabelsSample.cs" />
     <Compile Include="Maps\MbTilesSample.cs" />
