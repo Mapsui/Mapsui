@@ -39,7 +39,7 @@ namespace Mapsui.Styles
             set
             {
                 _bitmapId = value;
-                if(_bitmapId != -1)
+                if(_bitmapId != -1 && !(FillStyle == FillStyle.Bitmap || FillStyle == FillStyle.BitmapRotated))
                     FillStyle = FillStyle.Bitmap;
             }
         }

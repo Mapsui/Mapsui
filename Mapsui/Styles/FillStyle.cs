@@ -12,6 +12,7 @@ namespace Mapsui.Styles
         Horizontal,        
         Vertical,
         Bitmap,
+        BitmapRotated,
         Svg
     }
 }
