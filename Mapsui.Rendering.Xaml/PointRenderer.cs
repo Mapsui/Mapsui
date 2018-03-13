@@ -21,14 +21,14 @@ namespace Mapsui.Rendering.Xaml
             if (symbolStyle != null)
             {
                 if (symbolStyle.BitmapId < 0)
-                    symbol = CreateSymbolFromVectorStyle(symbolStyle, symbolStyle.Opacity, symbolStyle.SymbolType);
+                    symbol = CreateSymbolFromVectorStyle(symbolStyle, symbolStyle.Opacity, symbolStyle.SymbolType, symbolCache, (float)viewport.Rotation);
                 else
                     symbol = CreateSymbolFromBitmap(symbolStyle.BitmapId, symbolStyle.Opacity, symbolCache);
                 matrix = CreatePointSymbolMatrix(viewport.Resolution, viewport.Rotation, symbolStyle);
             }
             else
             {
-                symbol = CreateSymbolFromVectorStyle((style as VectorStyle) ?? new VectorStyle());
+                symbol = CreateSymbolFromVectorStyle((style as VectorStyle) ?? new VectorStyle(), symbolCache: symbolCache, rotate: (float)viewport.Rotation);
                 MatrixHelper.ScaleAt(ref matrix, viewport.Resolution, viewport.Resolution);
             }
 
@@ -41,13 +41,13 @@ namespace Mapsui.Rendering.Xaml
         }
 
         private static XamlShapes.Shape CreateSymbolFromVectorStyle(VectorStyle style, double opacity = 1,
-            SymbolType symbolType = SymbolType.Ellipse)
+            SymbolType symbolType = SymbolType.Ellipse, SymbolCache symbolCache = null, float rotate = 0f)
         {
             // The SL StrokeThickness default is 1 which causes blurry bitmaps
             var path = new XamlShapes.Path
             {
                 StrokeThickness = 0,
-                Fill = ToXaml(style.Fill)
+                Fill = ToXaml(style.Fill, symbolCache, rotate)
             };
 
             if (style.Outline != null)
@@ -77,10 +77,10 @@ namespace Mapsui.Rendering.Xaml
             return path;
         }
 
-        private static XamlMedia.Brush ToXaml(Brush brush)
+        private static XamlMedia.Brush ToXaml(Brush brush, SymbolCache symbolCache, float rotate = 0f)
         {
             return brush != null && (brush.Color != null || brush.BitmapId != -1) ?
-                brush.ToXaml() : new XamlMedia.SolidColorBrush(XamlColors.Transparent);
+                brush.ToXaml(symbolCache, rotate) : new XamlMedia.SolidColorBrush(XamlColors.Transparent);
         }
 
         private static XamlMedia.Matrix CreatePointSymbolMatrix(double resolution, double mapRotation, SymbolStyle symbolStyle)

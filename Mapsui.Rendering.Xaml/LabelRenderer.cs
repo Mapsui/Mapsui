@@ -40,7 +40,8 @@ namespace Mapsui.Rendering.Xaml
 
             var border = new Border
             {
-                Background = labelStyle.BackColor.ToXaml(),
+                // TODO: We have no SymbolCache, so we get problems, if there is a bitmap as background
+                Background = labelStyle.BackColor.ToXaml(rotate: (float)viewport.Rotation),
                 CornerRadius = new CornerRadius(4),
                 Child = textblock,
                 Opacity = labelStyle.Opacity,
