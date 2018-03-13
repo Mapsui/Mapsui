@@ -181,8 +181,8 @@ namespace Mapsui.Rendering.Skia
             var bitmap = symbolCache.GetOrCreate(symbolStyle.BitmapId, true);
 
             // Calc offset (relative or absolut)
-            var offsetX = symbolStyle.SymbolOffset.IsRelative ? bitmap.Svg.CanvasSize.Width * symbolStyle.SymbolOffset.X : symbolStyle.SymbolOffset.X;
-            var offsetY = symbolStyle.SymbolOffset.IsRelative ? bitmap.Svg.CanvasSize.Height * symbolStyle.SymbolOffset.Y : symbolStyle.SymbolOffset.Y;
+            var offsetX = symbolStyle.SymbolOffset.IsRelative ? bitmap.Width * symbolStyle.SymbolOffset.X : symbolStyle.SymbolOffset.X;
+            var offsetY = symbolStyle.SymbolOffset.IsRelative ? bitmap.Height * symbolStyle.SymbolOffset.Y : symbolStyle.SymbolOffset.Y;
 
             BitmapHelper.RenderSvg(canvas, bitmap.Svg,
                 (float)destination.X, (float)destination.Y,

@@ -72,8 +72,8 @@ namespace Mapsui.Rendering.Skia
 
             var rect = new SKRect(- halfWidth, - halfHeight, + halfWidth, + halfHeight);
 
-            var color = new SKColor(255, 255, 255, (byte)(255 * opacity));
-            var paint = new SKPaint { Color = color, FilterQuality = SKFilterQuality.High };
+            //var color = new SKColor(255, 255, 255, (byte)(255 * opacity));
+            //var paint = new SKPaint { Color = color, FilterQuality = SKFilterQuality.High };
 
             canvas.DrawPicture(svg.Picture, null);
 
