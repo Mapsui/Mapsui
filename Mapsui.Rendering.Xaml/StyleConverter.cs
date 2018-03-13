@@ -99,6 +99,8 @@ namespace Mapsui.Rendering.Xaml
                     var b = GetOrCreateBitmapImage(brush, symbolCache).ToTiledImageBrush();
                     b.RelativeTransform = aRotateTransform;
                     return b;
+                case FillStyle.Svg:
+                    return null;
                 case FillStyle.Dotted:
                     return DottedBrush(brush);
                 case FillStyle.DiagonalCross:
@@ -146,10 +148,10 @@ namespace Mapsui.Rendering.Xaml
             return CreatePatternVisual(elements, viewport, viewbox);
         }
 
-        private static BitmapImage GetOrCreateBitmapImage(Styles.Brush brush, SymbolCache symbolCache = null)
+        private static BitmapImage GetOrCreateBitmapImage(Styles.Brush brush, SymbolCache symbolCache = null, bool isSvg = false)
         {
             return symbolCache != null ? 
-                symbolCache.GetOrCreate(brush.BitmapId): 
+                (BitmapImage)symbolCache.GetOrCreate(brush.BitmapId): 
                 BitmapRegistry.Instance.Get(brush.BitmapId).ToBitmapImage();
         }
         

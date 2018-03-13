@@ -34,9 +34,9 @@ namespace Mapsui.Samples.Android
 
             DeployMbTilesFile();
             MbTilesSample.MbTilesLocation = MbTilesLocationOnAndroid;
-            
+
             var mapControl = FindViewById<MapControl>(Resource.Id.mapcontrol);
-            mapControl.Map = OpacityStyleSample.CreateMap();
+            mapControl.Map = SvgSample.CreateMap();
             mapControl.Map.Info+= MapOnInfo;
             mapControl.Map.Viewport.ViewportChanged += ViewportOnViewportChanged;
             mapControl.AllowPinchRotation = true;
@@ -48,7 +48,8 @@ namespace Mapsui.Samples.Android
 
         private void ViewportOnViewportChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
-            _popup.Visibility = ViewStates.Gone;
+            if (_popup != null)
+                _popup.Visibility = ViewStates.Gone;
         }
 
         private LinearLayout CreatePopup()
