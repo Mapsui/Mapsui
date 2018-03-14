@@ -35,6 +35,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ExtensionMethods\BoundingBoxExtensions.cs" />
+    <Compile Include="ExtensionMethods\PenStrokeJoinExtensions.cs" />
     <Compile Include="ExtensionMethods\PenStrokeCapExtensions.cs" />
     <Compile Include="ExtensionMethods\PenStyleExtension.cs" />
     <Compile Include="ExtensionMethods\SKRectExtensions.cs" />
@@ -70,6 +71,9 @@
   <ItemGroup>
     <Reference Include="SkiaSharp, Version=1.59.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
       <HintPath>..\packages\SkiaSharp.1.59.3\lib\portable-net45+win8+wpa81+wp8\SkiaSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="SkiaSharp.Svg, Version=1.59.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\packages\SkiaSharp.Svg.1.59.1\lib\portable-net45+win8+wpa81+wp8\SkiaSharp.Svg.dll</HintPath>
     </Reference>
     <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.4.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>

@@ -46,7 +46,24 @@ namespace Mapsui.Samples.Common.Maps
                     {
                         new VectorStyle
                         {
-                            Line = new Pen(Color.Gray, PenWidth) {PenStrokeCap = PenStrokeCap.Butt}
+                            Line = new Pen(Color.Gray, PenWidth) {PenStrokeCap = PenStrokeCap.Butt, StrokeJoin = StrokeJoin.Miter}
+                        }
+                    },
+                },
+                new Feature
+                {
+                    Geometry = new LineString(new[]
+                    {
+                        new Point(1 * PolygonSize, 1 * PolygonSize),
+                        new Point(1 * PolygonSize, 2 * PolygonSize),
+                        new Point(2 * PolygonSize, 2 * PolygonSize),
+                        new Point(2 * PolygonSize, 1 * PolygonSize)
+                    }),
+                    Styles = new[]
+                    {
+                        new VectorStyle
+                        {
+                            Line = new Pen(Color.Red, 1) {PenStrokeCap = PenStrokeCap.Square}
                         }
                     },
                 },
@@ -63,7 +80,24 @@ namespace Mapsui.Samples.Common.Maps
                     {
                         new VectorStyle
                         {
-                            Line = new Pen(Color.Gray, PenWidth) {PenStrokeCap = PenStrokeCap.Round}
+                            Line = new Pen(Color.Gray, PenWidth) {PenStrokeCap = PenStrokeCap.Round, StrokeJoin = StrokeJoin.Round}
+                        }
+                    },
+                },
+                new Feature
+                {
+                    Geometry = new LineString(new[]
+                    {
+                        new Point(1 * PolygonSize, -1 * PolygonSize),
+                        new Point(1 * PolygonSize, -2 * PolygonSize),
+                        new Point(2 * PolygonSize, -2 * PolygonSize),
+                        new Point(2 * PolygonSize, -1 * PolygonSize)
+                    }),
+                    Styles = new[]
+                    {
+                        new VectorStyle
+                        {
+                            Line = new Pen(Color.Red, 1) {PenStrokeCap = PenStrokeCap.Square}
                         }
                     },
                 },
@@ -80,7 +114,24 @@ namespace Mapsui.Samples.Common.Maps
                     {
                         new VectorStyle
                         {
-                            Line = new Pen(Color.Gray, PenWidth) {PenStrokeCap = PenStrokeCap.Square}
+                            Line = new Pen(Color.Gray, PenWidth) {PenStrokeCap = PenStrokeCap.Square, StrokeJoin = StrokeJoin.Bevel}
+                        }
+                    },
+                },
+                new Feature
+                {
+                    Geometry = new LineString(new[]
+                    {
+                        new Point(-1 * PolygonSize, 1 * PolygonSize),
+                        new Point(-1 * PolygonSize, 2 * PolygonSize),
+                        new Point(-2 * PolygonSize, 2 * PolygonSize),
+                        new Point(-2 * PolygonSize, 1 * PolygonSize)
+                    }),
+                    Styles = new[]
+                    {
+                        new VectorStyle
+                        {
+                            Line = new Pen(Color.Red, 1) {PenStrokeCap = PenStrokeCap.Square}
                         }
                     },
                 }

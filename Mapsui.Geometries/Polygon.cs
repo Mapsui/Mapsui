@@ -205,5 +205,22 @@ namespace Mapsui.Geometries
             if (polygon == null) return false;
             return Equals(polygon);
         }
+
+        public Polygon Rotate(double degrees, Point center)
+        {
+            var rotatedPolygon = this.Clone();
+            rotatedPolygon.ExteriorRing = ExteriorRing.Rotate(degrees, center);
+            for (var i = 0; i < InteriorRings.Count; i++)
+            {
+                rotatedPolygon.InteriorRings[i] = InteriorRings[i].Rotate(degrees, center);
+            }
+
+            return rotatedPolygon;
+        }
+
+        public Polygon Rotate(double degrees)
+        {
+            return this.Rotate(degrees, new Point(0, 0));
+        }
     }
 }

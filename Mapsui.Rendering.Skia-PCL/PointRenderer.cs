@@ -25,7 +25,10 @@ namespace Mapsui.Rendering.Skia
 
                 if ( symbolStyle.BitmapId >= 0)   // case 2) Bitmap Style
                 {
-                    DrawPointWithBitmapStyle(canvas, symbolStyle, destination, symbolCache, opacity);
+                    if (symbolStyle.SymbolType == SymbolType.Svg)
+                        DrawPointWithSvgStyle(canvas, symbolStyle, destination, symbolCache, opacity);
+                    else
+                        DrawPointWithBitmapStyle(canvas, symbolStyle, destination, symbolCache, opacity);
                 }
                 else                              // case 3) SymbolStyle without bitmap
                 {
@@ -48,7 +51,10 @@ namespace Mapsui.Rendering.Skia
             canvas.Save();
             canvas.Translate((float)destination.X, (float)destination.Y);
             canvas.Scale((float)style.SymbolScale, (float)style.SymbolScale);
-            canvas.Translate((float) style.SymbolOffset.X, (float) -style.SymbolOffset.Y);
+            if (style.SymbolOffset.IsRelative)
+                canvas.Translate((float)(SymbolStyle.DefaultWidth * style.SymbolOffset.X), (float)(-SymbolStyle.DefaultWidth * style.SymbolOffset.Y));
+            else
+                canvas.Translate((float) style.SymbolOffset.X, (float) -style.SymbolOffset.Y);
             DrawPointWithVectorStyle(canvas, style, opacity, symbolType);
             canvas.Restore();
         }
@@ -156,15 +162,33 @@ namespace Mapsui.Rendering.Skia
         private static void DrawPointWithBitmapStyle(SKCanvas canvas, SymbolStyle symbolStyle, Point destination,
             SymbolCache symbolCache, float opacity)
         {
-            var bitmap = symbolCache.GetOrCreate(symbolStyle.BitmapId);
+            var bitmap = symbolCache.GetOrCreate(symbolStyle.BitmapId, false);
+
+            // Calc offset (relative or absolut)
+            var offsetX = symbolStyle.SymbolOffset.IsRelative ? bitmap.Width * symbolStyle.SymbolOffset.X : symbolStyle.SymbolOffset.X;
+            var offsetY = symbolStyle.SymbolOffset.IsRelative ? bitmap.Height * symbolStyle.SymbolOffset.Y : symbolStyle.SymbolOffset.Y;
 
             BitmapHelper.RenderBitmap(canvas, bitmap.Bitmap,
                 (float) destination.X, (float) destination.Y,
                 (float) symbolStyle.SymbolRotation,
-                (float) symbolStyle.SymbolOffset.X, (float) symbolStyle.SymbolOffset.Y,
+                (float) offsetX, (float) offsetY,
                 opacity: opacity, scale: (float) symbolStyle.SymbolScale);
         }
 
-        
+        private static void DrawPointWithSvgStyle(SKCanvas canvas, SymbolStyle symbolStyle, Point destination,
+            SymbolCache symbolCache, float opacity)
+        {
+            var bitmap = symbolCache.GetOrCreate(symbolStyle.BitmapId, true);
+
+            // Calc offset (relative or absolut)
+            var offsetX = symbolStyle.SymbolOffset.IsRelative ? bitmap.Width * symbolStyle.SymbolOffset.X : symbolStyle.SymbolOffset.X;
+            var offsetY = symbolStyle.SymbolOffset.IsRelative ? bitmap.Height * symbolStyle.SymbolOffset.Y : symbolStyle.SymbolOffset.Y;
+
+            BitmapHelper.RenderSvg(canvas, bitmap.Svg,
+                (float)destination.X, (float)destination.Y,
+                (float)symbolStyle.SymbolRotation,
+                (float)offsetX, (float)offsetY,
+                opacity: opacity, scale: (float)symbolStyle.SymbolScale);
+        }
     }
 }

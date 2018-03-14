@@ -183,7 +183,7 @@ namespace Mapsui.Rendering.Xaml.Tests
             // The bitmaps in WPF can slightly differ from test to test. No idea why. So introduced proportion correct.
 
             // use this if you want to know where the unit test framework writes the new files.
-            // var path = System.AppDomain.CurrentDomain.BaseDirectory;
+             var path = System.AppDomain.CurrentDomain.BaseDirectory;
 
             bitmapStream1.Position = 0;
             bitmapStream2.Position = 0;
