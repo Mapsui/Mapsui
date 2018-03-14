@@ -6,6 +6,7 @@ using Mapsui.Logging;
 using Mapsui.Providers;
 using Mapsui.Rendering;
 using Mapsui.Styles;
+using Mapsui.Styles.Thematics;
 
 namespace Mapsui.UI
 {
@@ -63,7 +64,9 @@ namespace Mapsui.UI
             
                 foreach (var style in styles)
                 {
-                    if (style is SymbolStyle symbolStyle)
+                    var localStyle = HandleThemeStyle(feature, style);
+
+                    if (localStyle is SymbolStyle symbolStyle)
                     {
                         var scale = symbolStyle.SymbolScale;
 
@@ -86,7 +89,7 @@ namespace Mapsui.UI
                             box.Offset(symbolStyle.SymbolOffset.X * factor, symbolStyle.SymbolOffset.Y * factor);
                         if (box.Contains(point)) return true;
                     }
-                    else if (style is VectorStyle)
+                    else if (localStyle is VectorStyle)
                     {
                         var marginX = SymbolStyle.DefaultWidth * 0.5 * resolution;
                         var marginY = SymbolStyle.DefaultHeight * 0.5 * resolution;
@@ -97,7 +100,7 @@ namespace Mapsui.UI
                     }
                     else
                     {
-                        Logger.Log(LogLevel.Warning, $"Feature info not supported for {style.GetType()}");
+                        Logger.Log(LogLevel.Warning, $"Feature info not supported for {localStyle.GetType()}");
                         //todo: add support for other types
                     }
                 }
@@ -105,6 +108,11 @@ namespace Mapsui.UI
             return feature.Geometry.Contains(point);
         }
 
+        private static IStyle HandleThemeStyle(IFeature feature, IStyle style)
+        {
+            if (style is IThemeStyle themeStyle) return themeStyle.GetStyle(feature);
+            return style;
+        }
 
         private static ICollection<IStyle> ToCollection(IStyle style)
         {
