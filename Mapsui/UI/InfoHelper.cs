@@ -57,9 +57,10 @@ namespace Mapsui.UI
             if (feature.Geometry is Point)
             {
                 var styles = new List<IStyle>();
-                if (layerStyle != null) styles.Add(layerStyle);
-                styles.AddRange(feature.Styles);
 
+                styles.AddRange(ToCollection(layerStyle));
+                styles.AddRange(feature.Styles);
+            
                 foreach (var style in styles)
                 {
                     if (style is SymbolStyle symbolStyle)
@@ -102,6 +103,12 @@ namespace Mapsui.UI
                 }
             }
             return feature.Geometry.Contains(point);
+        }
+
+
+        private static ICollection<IStyle> ToCollection(IStyle style)
+        {
+            return (style as StyleCollection)?.ToArray() ?? new[] { style };
         }
     }
 }
