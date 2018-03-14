@@ -80,7 +80,7 @@ namespace Mapsui.Rendering.Xaml
             }
         }
 
-        public static XamlBrush MapsuiBrushToXaml(Styles.Brush brush, SymbolCache symbolCache = null)
+        public static XamlBrush MapsuiBrushToXaml(Styles.Brush brush, SymbolCache symbolCache = null, double rotate = 0)
         {
             if (brush == null) return null;
             switch (brush.FillStyle)
@@ -91,6 +91,16 @@ namespace Mapsui.Rendering.Xaml
                     return CreateHatchBrush(brush, 10, 10, new List<Geometry> { Geometry.Parse("M 0 10 l 10 -10"), Geometry.Parse("M -0.5 0.5 l 10 -10"), Geometry.Parse("M 8 12 l 10 -10") });                    
                 case FillStyle.Bitmap:
                     return GetOrCreateBitmapImage(brush, symbolCache).ToTiledImageBrush();
+                case FillStyle.BitmapRotated:
+                    RotateTransform aRotateTransform = new RotateTransform();
+                    aRotateTransform.CenterX = 0.5;
+                    aRotateTransform.CenterY = 0.5;
+                    aRotateTransform.Angle = rotate;
+                    var b = GetOrCreateBitmapImage(brush, symbolCache).ToTiledImageBrush();
+                    b.RelativeTransform = aRotateTransform;
+                    return b;
+                case FillStyle.Svg:
+                    return null;
                 case FillStyle.Dotted:
                     return DottedBrush(brush);
                 case FillStyle.DiagonalCross:
@@ -138,10 +148,10 @@ namespace Mapsui.Rendering.Xaml
             return CreatePatternVisual(elements, viewport, viewbox);
         }
 
-        private static BitmapImage GetOrCreateBitmapImage(Styles.Brush brush, SymbolCache symbolCache = null)
+        private static BitmapImage GetOrCreateBitmapImage(Styles.Brush brush, SymbolCache symbolCache = null, bool isSvg = false)
         {
             return symbolCache != null ? 
-                symbolCache.GetOrCreate(brush.BitmapId): 
+                (BitmapImage)symbolCache.GetOrCreate(brush.BitmapId): 
                 BitmapRegistry.Instance.Get(brush.BitmapId).ToBitmapImage();
         }
         

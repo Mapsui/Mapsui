@@ -9,54 +9,53 @@ using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public static class SymbolsSample
+    public static class SvgSample
     {
-        private const string StylesLayerName = "Styles Layer";
+        private const string SvgLayerName = "Svg Layer";
         
         public static Map CreateMap()
         {
             var map = new Map();
 
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
-            map.Layers.Add(CreateStylesLayer(map.Envelope));
-            map.HoverLayers.Add(map.Layers.First(l => l.Name == StylesLayerName));
+            map.Layers.Add(CreateSvgLayer(map.Envelope));
+            map.HoverLayers.Add(map.Layers.First(l => l.Name == SvgLayerName));
 
             return map;
         }
 
-        private static ILayer CreateStylesLayer(BoundingBox envelope)
+        private static ILayer CreateSvgLayer(BoundingBox envelope)
         {
             return new MemoryLayer
             {
-                Name = StylesLayerName,
-                DataSource = CreateMemoryProviderWithDiverseSymbols(envelope, 25),
+                Name = SvgLayerName,
+                DataSource = CreateMemoryProviderWithDiverseSymbols(envelope, 2000),
                 Style = null
             };
         }
 
         public static MemoryProvider CreateMemoryProviderWithDiverseSymbols(BoundingBox envelope, int count = 100)
         {
-            
-            return new MemoryProvider(CreateDiverseFeatures(PointsSample.GenerateRandomPoints(envelope, count, 3)));
+            return new MemoryProvider(CreateSvgFeatures(PointsSample.GenerateRandomPoints(envelope, count, 3)));
         }
 
-        private static Features CreateDiverseFeatures(IEnumerable<IGeometry> randomPoints)
+        private static Features CreateSvgFeatures(IEnumerable<IGeometry> randomPoints)
         {
             var features = new Features();
             var counter = 0;
-            var styles = CreateDiverseStyles().ToList();
             foreach (var point in randomPoints)
             {
                 var feature = new Feature { Geometry = point, ["Label"] = counter.ToString() };
 
-                feature.Styles.Add(styles[counter]);
-                feature.Styles.Add(SmalleDot());
+                //feature.Styles.Add(CreateSvgStyle("Mapsui.Samples.Common.Images.Ghostscript_Tiger.svg", 0.05));
+                //feature.Styles.Add(CreateBitmapStyle("Mapsui.Samples.Common.Images.Ghostscript_Tiger.png", 0.05));
+
+                feature.Styles.Add(CreateSvgStyle("Mapsui.Samples.Common.Images.Pin.svg", 0.5));
+                //feature.Styles.Add(CreateBitmapStyle("Mapsui.Samples.Common.Images.ic_place_black_24dp.png", 0.5));
+
                 features.Add(feature);
                 counter++;
-                if (counter == styles.Count) counter = 0;
-
             }
-            features.Add(CreatePointWithStackedStyles());
             return features;
         }
 
@@ -92,7 +91,7 @@ namespace Mapsui.Samples.Common.Maps
         private static SymbolStyle CreateBitmapStyle(string embeddedResourcePath, double scale)
         {
             var bitmapId = GetBitmapIdForEmbeddedResource(embeddedResourcePath);
-            return new SymbolStyle { BitmapId = bitmapId, SymbolScale = scale, SymbolOffset = new Offset(0, 32) };
+            return new SymbolStyle { BitmapId = bitmapId, SymbolScale = scale, SymbolOffset = new Offset(0.0, 0.5, true) };
         }
 
         private static SymbolStyle CreateSvgStyle(string embeddedResourcePath, double scale)

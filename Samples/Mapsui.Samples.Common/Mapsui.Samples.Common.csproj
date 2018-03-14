@@ -71,6 +71,7 @@
     <Compile Include="Maps\PenStrokeCapSample.cs" />
     <Compile Include="Maps\RasterizingLayerSample.cs" />
     <Compile Include="Maps\EmptyMapSample.cs" />
+    <Compile Include="Maps\SvgSample.cs" />
     <Compile Include="Maps\WidgetSample.cs" />
     <Compile Include="Maps\SymbolsSample.cs" />
     <Compile Include="Maps\VariousSample.cs" />
@@ -130,6 +131,15 @@
     <Reference Include="SQLitePCLRaw.core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1488e028ca7ab535, processorArchitecture=MSIL">
       <HintPath>..\..\packages\SQLitePCLRaw.core.1.1.9\lib\portable-net45+netcore45+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\SQLitePCLRaw.core.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\Pin.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\Ghostscript_Tiger.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\Ghostscript_Tiger.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
