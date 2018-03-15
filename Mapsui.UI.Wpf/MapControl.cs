@@ -64,7 +64,7 @@ namespace Mapsui.UI.Wpf
 
             Loaded += MapControlLoaded;
             MouseLeftButtonDown += MapControlMouseLeftButtonDown;
-            MouseLeftButtonUp += MapControlMouseLeftButtonUp;
+            MouseLeftButtonDown += MapControlMouseLeftButtonUp;
 
             TouchUp += MapControlTouchUp;
 
@@ -451,8 +451,16 @@ namespace Mapsui.UI.Wpf
             }
             else
             {
+                if (e.ClickCount > 1)
+                {
+                    Console.WriteLine("hoi");
+                }
                 if (IsClick(_currentMousePosition, _downMousePosition))
                 {
+                    if (e.ClickCount > 1)
+                    {
+                        Console.WriteLine("hoi");
+                    }
                     HandleFeatureInfo(e);
                     Map.InvokeInfo(mousePosition, _downMousePosition.ToMapsui(), _scale, Renderer.SymbolCache,
                         OnWidgetTouched, e.ClickCount);
