@@ -121,7 +121,7 @@ namespace Mapsui.UI.Wpf
         /// <summary>
         /// Allow a rotation with a pinch gesture
         /// </summary>
-        public bool AllowPinchRotation { get; set; }
+        public bool RotationLock { get; set; }
 
         /// <summary>
         /// After how many degrees start rotation to take place
@@ -316,7 +316,7 @@ namespace Mapsui.UI.Wpf
 
                         double rotationDelta = 0;
 
-                        if (AllowPinchRotation)
+                        if (RotationLock)
                         {
                             _innerRotation += angle - prevAngle;
                             _innerRotation %= 360;

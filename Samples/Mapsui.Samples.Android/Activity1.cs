@@ -39,7 +39,7 @@ namespace Mapsui.Samples.Android
             mapControl.Map = SvgSample.CreateMap();
             mapControl.Map.Info+= MapOnInfo;
             mapControl.Map.Viewport.ViewportChanged += ViewportOnViewportChanged;
-            mapControl.AllowPinchRotation = true;
+            mapControl.RotationLock = true;
             mapControl.UnSnapRotationDegrees = 30;
             mapControl.ReSnapRotationDegrees = 5;
 

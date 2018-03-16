@@ -690,7 +690,7 @@ namespace Mapsui.UI.Wpf
 
             double rotationDelta = 0;
 
-            if (AllowPinchRotation)
+            if (RotationLock)
             {
                 _innerRotation += angle - prevAngle;
                 _innerRotation %= 360;

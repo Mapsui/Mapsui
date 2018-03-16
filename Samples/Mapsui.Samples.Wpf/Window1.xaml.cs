@@ -22,7 +22,7 @@ namespace Mapsui.Samples.Wpf
             MapControl.ErrorMessageChanged += MapErrorMessageChanged;
             MapControl.FeatureInfo += MapControlFeatureInfo;
             MapControl.MouseMove += MapControlOnMouseMove;
-            MapControl.AllowPinchRotation = true;
+            MapControl.RotationLock = true;
             MapControl.UnSnapRotationDegrees = 30;
             MapControl.ReSnapRotationDegrees = 5;
   
