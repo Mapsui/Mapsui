@@ -540,7 +540,7 @@ namespace Mapsui.UI.Wpf
 
             if (!_mouseDown) Map.InvokeHover(e.GetPosition(this).ToMapsui(), 1, Renderer.SymbolCache);
 
-            if (_mouseDown)
+            if (_mouseDown && !PanLock)
             {
                 if (_previousMousePosition == default(Point))
                     return; // It turns out that sometimes MouseMove+Pressed is called before MouseDown

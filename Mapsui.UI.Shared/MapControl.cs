@@ -112,7 +112,12 @@ namespace Mapsui.UI.Wpf
         /// <summary>
         /// Properties
         /// </summary>
-        
+
+        /// <summary>
+        /// Allow a rotation with a pinch gesture
+        /// </summary>
+        public bool PanLock { get; set; }
+
         /// <summary>
         /// Allow a rotation with a pinch gesture
         /// </summary>
