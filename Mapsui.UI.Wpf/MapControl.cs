@@ -64,7 +64,7 @@ namespace Mapsui.UI.Wpf
 
             Loaded += MapControlLoaded;
             MouseLeftButtonDown += MapControlMouseLeftButtonDown;
-            MouseLeftButtonDown += MapControlMouseLeftButtonUp;
+            MouseLeftButtonUp += MapControlMouseLeftButtonUp;
 
             TouchUp += MapControlTouchUp;
 
@@ -436,20 +436,8 @@ namespace Mapsui.UI.Wpf
             _mouseDown = true;
             CaptureMouse();
             IsInBoxZoomMode = Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl);
-        }
 
-        private void MapControlMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            var mousePosition = e.GetPosition(this).ToMapsui();
-
-            if (IsInBoxZoomMode || ZoomToBoxMode)
-            {
-                ZoomToBoxMode = false;
-                var previous = Map.Viewport.ScreenToWorld(_previousMousePosition.X, _previousMousePosition.Y);
-                var current = Map.Viewport.ScreenToWorld(mousePosition);
-                ZoomToBox(previous, current);
-            }
-            else
+            if (!IsInBoxZoomMode && !ZoomToBoxMode)
             {
                 if (e.ClickCount > 1)
                 {
@@ -462,9 +450,22 @@ namespace Mapsui.UI.Wpf
                         Console.WriteLine("hoi");
                     }
                     HandleFeatureInfo(e);
-                    Map.InvokeInfo(mousePosition, _downMousePosition.ToMapsui(), _scale, Renderer.SymbolCache,
+                    Map.InvokeInfo(touchPosition.ToMapsui(), _downMousePosition.ToMapsui(), _scale, Renderer.SymbolCache,
                         OnWidgetTouched, e.ClickCount);
                 }
+            }
+        }
+
+        private void MapControlMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            var mousePosition = e.GetPosition(this).ToMapsui();
+
+            if (IsInBoxZoomMode || ZoomToBoxMode)
+            {
+                ZoomToBoxMode = false;
+                var previous = Map.Viewport.ScreenToWorld(_previousMousePosition.X, _previousMousePosition.Y);
+                var current = Map.Viewport.ScreenToWorld(mousePosition);
+                ZoomToBox(previous, current);
             }
 
             _map.ViewChanged(true);
