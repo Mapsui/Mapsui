@@ -13,6 +13,7 @@ namespace Mapsui.Samples.Common.Maps
         private const string InfoLayerName = "Info Layer";
         private const string HoverLayerName = "Hover Layer";
         private const string PolygonLayerName = "Polygon Layer";
+        private const string LineLayerName = "Line Layer";
 
         public static Map CreateMap()
         {
@@ -22,17 +23,19 @@ namespace Mapsui.Samples.Common.Maps
             map.Layers.Add(CreateInfoLayer(map.Envelope));
             map.Layers.Add(CreateHoverLayer(map.Envelope));
             map.Layers.Add(CreatePolygonLayer());
+            map.Layers.Add(CreateLineLayer());
 
-            map.InfoLayers.Add(map.Layers.First(l => l.Name == InfoLayerName));
+            //map.InfoLayers.Add(map.Layers.First(l => l.Name == InfoLayerName));
             map.InfoLayers.Add(map.Layers.First(l => l.Name == PolygonLayerName));
-            map.HoverLayers.Add(map.Layers.First(l => l.Name == HoverLayerName));
+            map.InfoLayers.Add(map.Layers.First(l => l.Name == LineLayerName));
+            //!!!map.HoverLayers.Add(map.Layers.First(l => l.Name == HoverLayerName));
 
             return map;
         }
 
         private static ILayer CreatePolygonLayer()
         {
-            var features = new Features {CreatePolygonFeature(), CreateMultiPolygonFeature()};
+            var features = new Features { CreatePolygonFeature(), CreateMultiPolygonFeature() };
             var provider = new MemoryProvider(features);
 
             var layer = new MemoryLayer
@@ -43,6 +46,16 @@ namespace Mapsui.Samples.Common.Maps
             };
 
             return layer;
+        }
+
+        private static ILayer CreateLineLayer()
+        {
+            return new MemoryLayer
+            {
+                Name = LineLayerName,
+                DataSource = new MemoryProvider(CreateLineFeature()),
+                Style = null
+            };
         }
 
         private static Feature CreateMultiPolygonFeature()
@@ -65,6 +78,16 @@ namespace Mapsui.Samples.Common.Maps
             };
             feature.Styles.Add(new VectorStyle());
             return feature;
+        }
+
+        private static Feature CreateLineFeature()
+        {
+            return new Feature
+            {
+                Geometry = CreateLine(),
+                ["Name"] = "Line 1",
+                Styles = new List<IStyle> { new VectorStyle{ Line = new Pen(Color.Violet, 6)}}
+            };
         }
 
         private static MultiPolygon CreateMultiPolygon()
@@ -104,6 +127,22 @@ namespace Mapsui.Samples.Common.Maps
                 new Point(-1000000, 1000000),
                 new Point(1000000, 1000000)
             }));
+        }
+
+        private static LineString CreateLine()
+        {
+            var offsetX = -2000000;
+            var offsetY = -2000000;
+            var stepSize = -2000000;
+
+            return new LineString(new[]
+            {
+                new Point(offsetX + stepSize,      offsetY + stepSize),
+                new Point(offsetX + stepSize * 2,  offsetY + stepSize),
+                new Point(offsetX + stepSize * 2,  offsetY + stepSize * 2),
+                new Point(offsetX + stepSize * 3,  offsetY + stepSize * 2),
+                new Point(offsetX + stepSize * 3,  offsetY + stepSize * 3)
+            });
         }
 
         private static ILayer CreateInfoLayer(BoundingBox envelope)

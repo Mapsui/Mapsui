@@ -446,6 +446,24 @@ namespace Mapsui.UI.Wpf
             _mouseDown = true;
             CaptureMouse();
             IsInBoxZoomMode = Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl);
+
+            if (!IsInBoxZoomMode && !ZoomToBoxMode)
+            {
+                if (e.ClickCount > 1)
+                {
+                    Console.WriteLine("hoi");
+                }
+                if (IsClick(_currentMousePosition, _downMousePosition))
+                {
+                    if (e.ClickCount > 1)
+                    {
+                        Console.WriteLine("hoi");
+                    }
+                    HandleFeatureInfo(e);
+                    Map.InvokeInfo(touchPosition.ToMapsui(), _downMousePosition.ToMapsui(), _scale, Renderer.SymbolCache,
+                        OnWidgetTouched, e.ClickCount);
+                }
+            }
         }
 
         private void MapControlMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
