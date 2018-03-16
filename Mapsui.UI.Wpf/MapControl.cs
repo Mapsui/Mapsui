@@ -135,9 +135,7 @@ namespace Mapsui.UI.Wpf
         }
 
         public string ErrorMessage { get; private set; }
-
-        public bool ZoomLocked { get; set; }
-
+        
         public Canvas RenderCanvas { get; } = CreateWpfRenderCanvas();
 
         private SKElement RenderElement { get; } = CreateSkiaRenderElement();
@@ -249,7 +247,7 @@ namespace Mapsui.UI.Wpf
 
         public void ZoomIn()
         {
-            if (ZoomLocked)
+            if (ZoomLock)
                 return;
 
             if (double.IsNaN(_toResolution))
@@ -327,7 +325,7 @@ namespace Mapsui.UI.Wpf
         private void MapControlMouseWheel(object sender, MouseWheelEventArgs e)
         {
             if (!_map.Viewport.Initialized) return;
-            if (ZoomLocked) return;
+            if (ZoomLock) return;
 
             _currentMousePosition = e.GetPosition(this);
             //Needed for both MouseMove and MouseWheel event for mousewheel event
@@ -723,7 +721,7 @@ namespace Mapsui.UI.Wpf
 
         private double GetDeltaScale(XamlVector scale)
         {
-            if (ZoomLocked) return 1;
+            if (ZoomLock) return 1;
             var deltaScale = (scale.X + scale.Y) / 2;
             if (Math.Abs(deltaScale) < Constants.Epsilon)
                 return 1; // If there is no scaling the deltaScale will be 0.0 in Windows Phone (while it is 1.0 in wpf)

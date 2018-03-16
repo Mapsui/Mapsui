@@ -114,7 +114,7 @@ namespace Mapsui.UI.Wpf
         /// </summary>
 
         /// <summary>
-        /// Allow a rotation with a pinch gesture
+        /// Allow map panning through touch or mouse
         /// </summary>
         public bool PanLock { get; set; }
 
@@ -123,6 +123,11 @@ namespace Mapsui.UI.Wpf
         /// </summary>
         public bool RotationLock { get; set; }
 
+        /// <summary>
+        /// Allow zooming though touch or mouse
+        /// </summary>
+        public bool ZoomLock { get; set; }
+        
         /// <summary>
         /// After how many degrees start rotation to take place
         /// </summary>
