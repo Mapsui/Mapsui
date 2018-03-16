@@ -68,4 +68,5 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />
+  <Import Project="..\Mapsui.UI.Shared\Mapsui.UI.Shared.projitems" Label="Shared" />
 </Project>
