@@ -55,13 +55,12 @@ namespace Mapsui.UI
         private static bool IsTouchingTakingIntoAccountSymbolStyles(
             Point point, IFeature feature, IStyle layerStyle, double resolution, ISymbolCache symbolCache)
         {
+            var styles = new List<IStyle>();
+            styles.AddRange(ToCollection(layerStyle));
+            styles.AddRange(feature.Styles);
+            
             if (feature.Geometry is Point)
             {
-                var styles = new List<IStyle>();
-
-                styles.AddRange(ToCollection(layerStyle));
-                styles.AddRange(feature.Styles);
-            
                 foreach (var style in styles)
                 {
                     var localStyle = HandleThemeStyle(feature, style);
@@ -100,9 +99,30 @@ namespace Mapsui.UI
                     }
                     else
                     {
-                        Logger.Log(LogLevel.Warning, $"Feature info not supported for {localStyle.GetType()}");
-                        //todo: add support for other types
+                        if (!(localStyle is LabelStyle)) // I don't intend to support label click, so don't warn
+                        {
+                            Logger.Log(LogLevel.Warning, $"Feature info not supported for points with {localStyle.GetType()}");
+                        }
                     }
+                }
+            }
+            else if (feature.Geometry is LineString || feature.Geometry is MultiLineString)
+            {
+                foreach (var style in styles)
+                {
+                    var localStyle = HandleThemeStyle(feature, style);
+
+                    if (localStyle is VectorStyle symbolStyle)
+                    {
+                        var screenDistance = symbolStyle.Line.Width * resolution * 0.5;
+
+                        if (screenDistance > feature.Geometry.Distance(point)) return true;
+                    }
+                    else
+                    {
+                        Logger.Log(LogLevel.Warning, $"Feature info not supported for lines with {localStyle.GetType()}");
+                    }
+
                 }
             }
             return feature.Geometry.Contains(point);
@@ -116,6 +136,7 @@ namespace Mapsui.UI
 
         private static ICollection<IStyle> ToCollection(IStyle style)
         {
+            if (style == null) return new List<IStyle>();
             return (style as StyleCollection)?.ToArray() ?? new[] { style };
         }
     }
