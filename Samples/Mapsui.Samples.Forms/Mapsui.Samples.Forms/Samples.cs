@@ -157,7 +157,7 @@ namespace Mapsui.Samples.Forms
                     device = "iOS";
                     break;
                 default:
-                    device = $"{Device.Platform}.Images";
+                    device = $"{Device.RuntimePlatform}.Images";
                     break;
             }
 

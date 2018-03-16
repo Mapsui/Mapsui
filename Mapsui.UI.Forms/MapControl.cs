@@ -14,7 +14,7 @@ using System.Threading;
 using Mapsui.UI.Utils;
 using Mapsui.Rendering;
 
-namespace Mapsui.UI
+namespace Mapsui.UI.Forms
 {
     public partial class MapControl : SKGLView, IMapControl, IDisposable
     {
@@ -44,11 +44,7 @@ namespace Mapsui.UI
         private Map _map;
         private readonly MapRenderer _renderer = new MapRenderer();
         private float _skiaScale;
-        private int _mode = None;
         private double _innerRotation;
-        private Geometries.Point _previousCenter = new Geometries.Point();
-        private double _previousAngle;
-        private double _previousRadius = 1f;
         private Dictionary<long, TouchEvent> _touches = new Dictionary<long, TouchEvent>();
         private Geometries.Point _firstTouch;
         private Timer _doubleTapTestTimer;
@@ -150,7 +146,7 @@ namespace Mapsui.UI
                 else
                     _numOfTaps = 1;
 
-                e.Handled = HandleTouchStart(_touches.Select(t => t.Value.Location).ToList());
+                e.Handled = OnTouchStart(_touches.Select(t => t.Value.Location).ToList());
             }
             if (e.ActionType == SKTouchAction.Released)
             {
@@ -168,7 +164,7 @@ namespace Mapsui.UI
                 {
                     System.Diagnostics.Debug.WriteLine($"Velocity X = {velocityX}, Velocity Y = {velocityY}");
 
-                    e.Handled = HandleFling(velocityX, velocityY);
+                    e.Handled = OnFlinged(velocityX, velocityY);
                 }
 
                 // Do we have a tap event
@@ -181,11 +177,11 @@ namespace Mapsui.UI
                         if (_numOfTaps > 1)
                         {
                             if (!e.Handled)
-                                e.Handled = HandleDoubleTap(location, _numOfTaps);
+                                e.Handled = OnDoubleTapped(location, _numOfTaps);
                         }
                         else
                             if (!e.Handled)
-                                e.Handled = HandleSingleTap((Geometries.Point)l);
+                                e.Handled = OnSingleTapped((Geometries.Point)l);
                         _numOfTaps = 1;
                         _doubleTapTestTimer = null;
                     }, location, delayTap, Timeout.Infinite);
@@ -193,13 +189,13 @@ namespace Mapsui.UI
                 else if (_touches[id].Location.Equals(_firstTouch) && ticks - _touches[id].Tick >= longTap * 10000)
                 {
                     if (!e.Handled)
-                        e.Handled = HandleLongTap(location);
+                        e.Handled = OnLongTapped(location);
                 }
                 var releasedTouch = _touches[id];
                 _touches.Remove(id);
 
                 if (!e.Handled)
-                    e.Handled = HandleTouchEnd(_touches.Select(t => t.Value.Location).ToList(), releasedTouch.Location);
+                    e.Handled = OnTouchEnd(_touches.Select(t => t.Value.Location).ToList(), releasedTouch.Location);
             }
             if (e.ActionType == SKTouchAction.Moved)
             {
@@ -209,9 +205,9 @@ namespace Mapsui.UI
                     _velocityTracker.AddEvent(id, location, ticks);
 
                 if (e.InContact && !e.Handled)
-                    e.Handled = HandleTouchMove(_touches.Select(t => t.Value.Location).ToList());
+                    e.Handled = OnTouchMove(_touches.Select(t => t.Value.Location).ToList());
                 else
-                    e.Handled = HandleHover(_touches.Select(t => t.Value.Location).FirstOrDefault());
+                    e.Handled = OnHovered(_touches.Select(t => t.Value.Location).FirstOrDefault());
             }
         }
 
@@ -325,7 +321,7 @@ namespace Mapsui.UI
 
         public void RefreshGraphics()
         {
-            InvalidateSurface();
+            InvalidateCanvas();
         }
 
         public void RefreshData()
@@ -333,18 +329,9 @@ namespace Mapsui.UI
             _map?.ViewChanged(true);
         }
 
-        public bool AllowPinchRotation { get; set; }
-        public double UnSnapRotationDegrees { get; set; }
-        public double ReSnapRotationDegrees { get; set; }
-
-        public Geometries.Point WorldToScreen(Geometries.Point worldPosition)
+        internal void InvalidateCanvas()
         {
-            return WorldToScreen(Map.Viewport, _skiaScale, worldPosition);
-        }
-
-        public Geometries.Point ScreenToWorld(Geometries.Point screenPosition)
-        {
-            return ScreenToWorld(Map.Viewport, _skiaScale, screenPosition);
+            InvalidateSurface();
         }
 
         private static void WidgetTouched(IWidget widget, Geometries.Point screenPosition)

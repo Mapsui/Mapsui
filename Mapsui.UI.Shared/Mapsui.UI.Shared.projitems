@@ -9,12 +9,13 @@
     <Import_RootNamespace>Mapsui.UI.Shared</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Enums\TouchMode.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Enums\ZoomDirection.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)EventArgs\HoverEventArgs.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)EventArgs\SwipeEventArgs.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)EventArgs\TapEventArgs.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)EventArgs\TouchEventArgs.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)EventArgs\ZoomEventArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EventArgs\HoveredEventArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EventArgs\SwipedEventArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EventArgs\TappedEventArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EventArgs\TouchedEventArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EventArgs\ZoomedEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapControl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\PCLTimer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\VelocityTracker.cs" />

@@ -46,7 +46,7 @@ namespace Mapsui.UI.Forms
             _mapControl.SingleTap += HandlerTap;
             _mapControl.DoubleTap += HandlerTap;
             _mapControl.LongTap += HandlerLongTap;
-            _mapControl.Hover += HandlerHover;
+            _mapControl.Hovered += HandlerHover;
             _mapControl.TouchMove += (s, e) => MyLocationFollow = false;
 
             AbsoluteLayout.SetLayoutBounds(_mapControl, new Rectangle(0, 0, 1, 1));
@@ -362,7 +362,7 @@ namespace Mapsui.UI.Forms
             }
         }
 
-        private void HandlerHover(object sender, HoverEventArgs e)
+        private void HandlerHover(object sender, HoveredEventArgs e)
         {
         }
 
@@ -469,7 +469,7 @@ namespace Mapsui.UI.Forms
             }
         }
 
-        private void HandlerLongTap(object sender, TapEventArgs e)
+        private void HandlerLongTap(object sender, TappedEventArgs e)
         {
             var args = new MapLongClickedEventArgs(Map.Viewport.ScreenToWorld(e.ScreenPosition).ToForms());
 
@@ -482,7 +482,7 @@ namespace Mapsui.UI.Forms
             }
         }
 
-        private void HandlerTap(object sender, TapEventArgs e)
+        private void HandlerTap(object sender, TappedEventArgs e)
         {
             // Close all closable Callouts
             var list = _callouts.ToList();

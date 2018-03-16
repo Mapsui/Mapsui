@@ -4,73 +4,143 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Mapsui.UI
+#if __ANDROID__
+namespace Mapsui.UI.Android
+#elif __IOS__
+namespace Mapsui.UI.iOS
+#elif __UWP__
+namespace Mapsui.UI.Uwp
+#elif __FORMS__
+namespace Mapsui.UI.Forms
+#else
+namespace Mapsui.UI.Wpf
+#endif
 {
     public partial class MapControl
     {
         /// <summary>
-        /// Events
+        /// Private global variables
         /// </summary>
         
         /// <summary>
+        /// Display scale for converting screen position to real position
+        /// </summary>
+        private float _scale;
+
+        /// <summary>
+        /// Mode of a touched move event
+        /// </summary>
+        private TouchMode _mode = TouchMode.None;
+
+        /// <summary>
+        /// Saver for center before last pinch movement
+        /// </summary>
+        private Geometries.Point _previousCenter = new Geometries.Point();
+
+        /// <summary>
+        /// Saver for angle before last pinch movement
+        /// </summary>
+        private double _previousAngle;
+
+        /// <summary>
+        /// Saver for radius before last pinch movement
+        /// </summary>
+        private double _previousRadius = 1f;
+
+        /// <summary>
+        /// Events
+        /// </summary>
+
+        /// <summary>
         /// TouchStart is called, when user press a mouse button or touch the display
         /// </summary>
-        public event EventHandler<TouchEventArgs> TouchStart;
+        public event EventHandler<TouchedEventArgs> TouchStarted;
 
         /// <summary>
         /// TouchEnd is called, when user release a mouse button or doesn't touch display anymore
         /// </summary>
-        public event EventHandler<TouchEventArgs> TouchEnd;
+        public event EventHandler<TouchedEventArgs> TouchEnded;
 
         /// <summary>
         /// TouchMove is called, when user move mouse over map (independent from mouse button state) or move finger on display
         /// </summary>
-        public event EventHandler<TouchEventArgs> TouchMove;
+#if __WPF__
+        public new event EventHandler<TouchedEventArgs> TouchMove;
+#else
+        public event EventHandler<TouchedEventArgs> TouchMove;
+#endif
 
         /// <summary>
         /// Hover is called, when user move mouse over map without pressing mouse button
         /// </summary>
-        public event EventHandler<HoverEventArgs> Hover;
+#if __ANDROID__
+        public new event EventHandler<HoveredEventArgs> Hovered;
+#else
+        public event EventHandler<HoveredEventArgs> Hovered;
+#endif
 
         /// <summary>
         /// Swipe is called, when user release mouse button or lift finger while moving with a certain speed 
         /// </summary>
-        public event EventHandler<SwipeEventArgs> Swipe;
+        public event EventHandler<SwipedEventArgs> Swipe;
 
         /// <summary>
         /// Fling is called, when user release mouse button or lift finger while moving with a certain speed, higher than speed of swipe 
         /// </summary>
-        public event EventHandler<SwipeEventArgs> Fling;
+        public event EventHandler<SwipedEventArgs> Fling;
 
         /// <summary>
         /// SingleTap is called, when user clicks with a mouse button or tap with a finger on map 
         /// </summary>
-        public event EventHandler<TapEventArgs> SingleTap;
+        public event EventHandler<TappedEventArgs> SingleTap;
 
         /// <summary>
         /// LongTap is called, when user clicks with a mouse button or tap with a finger on map for 500 ms
         /// </summary>
-        public event EventHandler<TapEventArgs> LongTap;
+        public event EventHandler<TappedEventArgs> LongTap;
 
         /// <summary>
         /// DoubleTap is called, when user clicks with a mouse button or tap with a finger two or more times on map
         /// </summary>
-        public event EventHandler<TapEventArgs> DoubleTap;
+        public event EventHandler<TappedEventArgs> DoubleTap;
 
         /// <summary>
         /// Zoom is called, when map should be zoomed
         /// </summary>
-        public event EventHandler<ZoomEventArgs> Zoom;
+        public event EventHandler<ZoomedEventArgs> Zoomed;
+
+        /// <summary>
+        /// Properties
+        /// </summary>
+        
+        /// <summary>
+        /// Allow a rotation with a pinch gesture
+        /// </summary>
+        public bool AllowPinchRotation { get; set; }
+
+        /// <summary>
+        /// After how many degrees start rotation to take place
+        /// </summary>
+        public double UnSnapRotationDegrees { get; set; }
+
+        /// <summary>
+        /// With how many degrees from 0 should map snap to 0 degrees
+        /// </summary>
+        public double ReSnapRotationDegrees { get; set; }
 
         /// <summary>
         /// Event handlers
         /// </summary>
 
-        private bool HandleZoomOut(Geometries.Point screenPosition)
+        /// <summary>
+        /// Called, when map should zoom out
+        /// </summary>
+        /// <param name="screenPosition">Center of zoom out event</param>
+        private bool OnZoomOut(Geometries.Point screenPosition)
         {
-            var args = new ZoomEventArgs(screenPosition, ZoomDirection.ZoomOut);
+            var args = new ZoomedEventArgs(screenPosition, ZoomDirection.ZoomOut);
 
-            Zoom?.Invoke(this, args);
+            Zoomed?.Invoke(this, args);
 
             if (args.Handled)
                 return true;
@@ -81,11 +151,15 @@ namespace Mapsui.UI
             return true;
         }
 
-        private bool HandleZoomIn(Geometries.Point screenPosition)
+        /// <summary>
+        /// Called, when map should zoom in
+        /// </summary>
+        /// <param name="screenPosition">Center of zoom in event</param>
+        private bool OnZoomIn(Geometries.Point screenPosition)
         {
-            var args = new ZoomEventArgs(screenPosition, ZoomDirection.ZoomIn);
+            var args = new ZoomedEventArgs(screenPosition, ZoomDirection.ZoomIn);
 
-            Zoom?.Invoke(this, args);
+            Zoomed?.Invoke(this, args);
 
             if (args.Handled)
                 return true;
@@ -96,18 +170,27 @@ namespace Mapsui.UI
             return true;
         }
 
-        private bool HandleHover(Geometries.Point screenPosition)
+        /// <summary>
+        /// Called, when mouse/finger/pen hovers around
+        /// </summary>
+        /// <param name="screenPosition">Actual position of mouse/finger/pen</param>
+        private bool OnHovered(Geometries.Point screenPosition)
         {
-            var args = new HoverEventArgs(screenPosition);
+            var args = new HoveredEventArgs(screenPosition);
 
-            Hover?.Invoke(this, args);
+            Hovered?.Invoke(this, args);
 
             return args.Handled;
         }
 
-        private bool HandleSwipe(double velocityX, double velocityY)
+        /// <summary>
+        /// Called, when mouse/finger/pen swiped over map
+        /// </summary>
+        /// <param name="velocityX">Velocity in x direction in pixel/second</param>
+        /// <param name="velocityY">Velocity in y direction in pixel/second</param>
+        private bool OnSwiped(double velocityX, double velocityY)
         {
-            var args = new SwipeEventArgs(velocityX, velocityY);
+            var args = new SwipedEventArgs(velocityX, velocityY);
 
             Swipe?.Invoke(this, args);
 
@@ -117,9 +200,14 @@ namespace Mapsui.UI
             return args.Handled;
         }
 
-        private bool HandleFling(double velocityX, double velocityY)
+        /// <summary>
+        /// Called, when mouse/finger/pen flinged over map
+        /// </summary>
+        /// <param name="velocityX">Velocity in x direction in pixel/second</param>
+        /// <param name="velocityY">Velocity in y direction in pixel/second</param>
+        private bool OnFlinged(double velocityX, double velocityY)
         {
-            var args = new SwipeEventArgs(velocityX, velocityY);
+            var args = new SwipedEventArgs(velocityX, velocityY);
 
             Fling?.Invoke(this, args);
 
@@ -129,11 +217,15 @@ namespace Mapsui.UI
             return args.Handled;
         }
 
-        private bool HandleTouchStart(List<Geometries.Point> touchPoints)
+        /// <summary>
+        /// Called, when mouse/finger/pen click/touch map
+        /// </summary>
+        /// <param name="touchPoints">List of all touched points</param>
+        private bool OnTouchStart(List<Geometries.Point> touchPoints)
         {
-            var args = new TouchEventArgs(touchPoints);
+            var args = new TouchedEventArgs(touchPoints);
 
-            TouchStart?.Invoke(this, args);
+            TouchStarted?.Invoke(this, args);
 
             if (args.Handled)
                 return true;
@@ -141,38 +233,47 @@ namespace Mapsui.UI
             if (touchPoints.Count >= 2)
             {
                 (_previousCenter, _previousRadius, _previousAngle) = GetPinchValues(touchPoints);
-                _mode = Zooming;
+                _mode = TouchMode.Zooming;
                 _innerRotation = _map.Viewport.Rotation;
             }
             else
             {
-                _mode = Dragging;
+                _mode = TouchMode.Dragging;
                 _previousCenter = touchPoints.First();
             }
 
             return true;
         }
 
-        private bool HandleTouchEnd(List<Geometries.Point> touchPoints, Geometries.Point releasedPoint)
+        /// <summary>
+        /// Called, when mouse/finger/pen anymore click/touch map
+        /// </summary>
+        /// <param name="touchPoints">List of all touched points</param>
+        /// <param name="releasedPoint">Released point, which was touched before</param>
+        private bool OnTouchEnd(List<Geometries.Point> touchPoints, Geometries.Point releasedPoint)
         {
-            var args = new TouchEventArgs(touchPoints);
+            var args = new TouchedEventArgs(touchPoints);
 
-            TouchEnd?.Invoke(this, args);
+            TouchEnded?.Invoke(this, args);
 
             // Last touch released
             if (touchPoints.Count == 0)
             {
-                InvalidateSurface();
-                _mode = None;
+                InvalidateCanvas();
+                _mode = TouchMode.None;
                 _map.ViewChanged(true);
             }
 
             return args.Handled;
         }
 
-        private bool HandleTouchMove(List<Geometries.Point> touchPoints)
+        /// <summary>
+        /// Called, when mouse/finger/pen moves over map
+        /// </summary>
+        /// <param name="touchPoints">List of all touched points</param>
+        private bool OnTouchMove(List<Geometries.Point> touchPoints)
         {
-            var args = new TouchEventArgs(touchPoints);
+            var args = new TouchedEventArgs(touchPoints);
 
             TouchMove?.Invoke(this, args);
 
@@ -181,7 +282,7 @@ namespace Mapsui.UI
 
             switch (_mode)
             {
-                case Dragging:
+                case TouchMode.Dragging:
                     {
                         if (touchPoints.Count != 1)
                             return false;
@@ -194,13 +295,13 @@ namespace Mapsui.UI
 
                             ViewportLimiter.LimitExtent(_map.Viewport, _map.PanMode, _map.PanLimits, _map.Envelope);
 
-                            InvalidateSurface();
+                            InvalidateCanvas();
                         }
 
                         _previousCenter = touchPosition;
                     }
                     break;
-                case Zooming:
+                case TouchMode.Zooming:
                     {
                         if (touchPoints.Count < 2)
                             return false;
@@ -239,7 +340,7 @@ namespace Mapsui.UI
                             _map.ZoomMode, _map.ZoomLimits, _map.Resolutions,
                             _map.PanMode, _map.PanLimits, _map.Envelope);
 
-                        InvalidateSurface();
+                        InvalidateCanvas();
                     }
                     break;
             }
@@ -247,41 +348,54 @@ namespace Mapsui.UI
             return true;
         }
 
-        private bool HandleDoubleTap(Geometries.Point screenPosition, int numOfTaps)
+        /// <summary>
+        /// Called, when mouse/finger/pen tapped on map 2 or more times
+        /// </summary>
+        /// <param name="screenPosition">First clicked/touched position on screen</param>
+        /// <param name="numOfTaps">Number of taps on map (2 is a double click/tap)</param>
+        private bool OnDoubleTapped(Geometries.Point screenPosition, int numOfTaps)
         {
-            var args = new TapEventArgs(screenPosition, numOfTaps);
+            var args = new TappedEventArgs(screenPosition, numOfTaps);
 
             DoubleTap?.Invoke(this, args);
 
             if (args.Handled)
                 return true;
 
-            var tapWasHandled = Map.InvokeInfo(screenPosition, screenPosition, _skiaScale, _renderer.SymbolCache, WidgetTouched, numOfTaps);
+            var tapWasHandled = Map.InvokeInfo(screenPosition, screenPosition, _scale, _renderer.SymbolCache, WidgetTouched, numOfTaps);
 
             if (!tapWasHandled)
             {
                 // Double tap as zoom
-                return HandleZoomIn(screenPosition);
+                return OnZoomIn(screenPosition);
             }
 
             return false;
         }
 
-        private bool HandleSingleTap(Geometries.Point screenPosition)
+        /// <summary>
+        /// Called, when mouse/finger/pen tapped on map one time
+        /// </summary>
+        /// <param name="screenPosition">Clicked/touched position on screen</param>
+        private bool OnSingleTapped(Geometries.Point screenPosition)
         {
-            var args = new TapEventArgs(screenPosition, 1);
+            var args = new TappedEventArgs(screenPosition, 1);
 
             SingleTap?.Invoke(this, args);
 
             if (args.Handled)
                 return true;
 
-            return Map.InvokeInfo(screenPosition, screenPosition, _skiaScale, _renderer.SymbolCache, WidgetTouched, 1);
+            return Map.InvokeInfo(screenPosition, screenPosition, _scale, _renderer.SymbolCache, WidgetTouched, 1);
         }
 
-        private bool HandleLongTap(Geometries.Point screenPosition)
+        /// <summary>
+        /// Called, when mouse/finger/pen tapped long on map
+        /// </summary>
+        /// <param name="screenPosition">Clicked/touched position on screen</param>
+        private bool OnLongTapped(Geometries.Point screenPosition)
         {
-            var args = new TapEventArgs(screenPosition, 1);
+            var args = new TappedEventArgs(screenPosition, 1);
 
             LongTap?.Invoke(this, args);
 
@@ -291,15 +405,55 @@ namespace Mapsui.UI
         /// <summary>
         /// Public functions
         /// </summary>
-        
+
+#if __ANDROID__ && __IOS__
+        public new void Dispose()
+        {
+            Unsubscribe();
+            base.Dispose();
+        }
+#endif
+
+#if __FORMS__
         public void Dispose()
         {
             Unsubscribe();
         }
+#endif
 
+#if !__FORMS__
+        protected override void Dispose(bool disposing)
+        {
+            Unsubscribe();
+            base.Dispose(disposing);
+        }
+#endif
+
+        /// <summary>
+        /// Unsubscribe from map events </summary>
         public void Unsubscribe()
         {
             UnsubscribeFromMapEvents(_map);
+        }
+
+        /// <summary>
+        /// Converting function for world to screen
+        /// </summary>
+        /// <param name="worldPosition">Position in world coordinates</param>
+        /// <returns>Position in screen coordinates</returns>
+        public Geometries.Point WorldToScreen(Geometries.Point worldPosition)
+        {
+            return WorldToScreen(Map.Viewport, _scale, worldPosition);
+        }
+
+        /// <summary>
+        /// Converting function for screen to world
+        /// </summary>
+        /// <param name="screenPosition">Position in screen coordinates</param>
+        /// <returns>Position in world coordinates</returns>
+        public Geometries.Point ScreenToWorld(Geometries.Point screenPosition)
+        {
+            return ScreenToWorld(Map.Viewport, _scale, screenPosition);
         }
 
         /// <summary>
@@ -308,7 +462,7 @@ namespace Mapsui.UI
         /// <param name="viewport">Viewport</param>
         /// <param name="scale">Scale</param>
         /// <param name="worldPosition">Position in world coordinates</param>
-        /// <returns></returns>
+        /// <returns>Position in screen coordinates</returns>
         public Point WorldToScreen(IViewport viewport, float scale, Point worldPosition)
         {
             var screenPosition = viewport.WorldToScreen(worldPosition);
@@ -321,11 +475,39 @@ namespace Mapsui.UI
         /// <param name="viewport">Viewport</param>
         /// <param name="scale">Scale</param>
         /// <param name="screenPosition">Position in screen coordinates</param>
-        /// <returns></returns>
+        /// <returns>Position in world coordinates</returns>
         public Point ScreenToWorld(IViewport viewport, float scale, Point screenPosition)
         {
             var worldPosition = viewport.ScreenToWorld(screenPosition.X * scale, screenPosition.Y * scale);
             return new Point(worldPosition.X, worldPosition.Y);
+        }
+
+        /// <summary>
+        /// Private static functions
+        /// </summary>
+        
+        private static (Geometries.Point centre, double radius, double angle) GetPinchValues(List<Geometries.Point> locations)
+        {
+            if (locations.Count < 2)
+                throw new ArgumentException();
+
+            double centerX = 0;
+            double centerY = 0;
+
+            foreach (var location in locations)
+            {
+                centerX += location.X;
+                centerY += location.Y;
+            }
+
+            centerX = centerX / locations.Count;
+            centerY = centerY / locations.Count;
+
+            var radius = Algorithms.Distance(centerX, centerY, locations[0].X, locations[0].Y);
+
+            var angle = Math.Atan2(locations[1].Y - locations[0].Y, locations[1].X - locations[0].X) * 180.0 / Math.PI;
+
+            return (new Geometries.Point(centerX, centerY), radius, angle);
         }
 
         /// <summary>
@@ -357,39 +539,6 @@ namespace Mapsui.UI
                 temp.RefreshGraphics -= MapRefreshGraphics;
                 temp.AbortFetch();
             }
-        }
-
-        /// <summary>
-        /// Calculates center, radius and angle from a list of points
-        /// </summary>
-        /// <param name="screenPositions">List of points, normally touch points on display</param>
-        /// <returns>
-        /// center: Center of all points
-        /// radius: Distance from center to first point of list
-        /// angle: between first and second point of list
-        /// </returns>
-        private static (Geometries.Point centre, double radius, double angle) GetPinchValues(List<Geometries.Point> screenPositions)
-        {
-            if (screenPositions.Count < 2)
-                throw new ArgumentException();
-
-            double centerX = 0;
-            double centerY = 0;
-
-            foreach (var location in screenPositions)
-            {
-                centerX += location.X;
-                centerY += location.Y;
-            }
-
-            centerX = centerX / screenPositions.Count;
-            centerY = centerY / screenPositions.Count;
-
-            var radius = Algorithms.Distance(centerX, centerY, screenPositions[0].X, screenPositions[0].Y);
-
-            var angle = Math.Atan2(screenPositions[1].Y - screenPositions[0].Y, screenPositions[1].X - screenPositions[0].X) * 180.0 / Math.PI;
-
-            return (new Geometries.Point(centerX, centerY), radius, angle);
         }
     }
 }

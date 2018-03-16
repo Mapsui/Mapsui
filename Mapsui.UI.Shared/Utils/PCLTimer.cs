@@ -2,9 +2,11 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-/// <summary>
+#pragma warning disable 1587
+/// <remark>
 /// Found at https://gist.github.com/YARG/681f426b78af6d77baab
-/// </summary>
+/// </remark>
+#pragma warning restore 1587
 
 namespace Mapsui.UI
 {
@@ -22,7 +24,9 @@ namespace Mapsui.UI
                 {
                     if (IsCancellationRequested)
                         break;
+#pragma warning disable CS4014 // Missing await #pragma directive
                     Task.Run(() => tuple.Item1(tuple.Item2));
+#pragma warning restore CS4014 // Missing await #pragma directive
                     await Task.Delay(period);
                 }
 
