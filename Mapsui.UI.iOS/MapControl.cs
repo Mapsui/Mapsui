@@ -17,12 +17,11 @@ using SkiaSharp.Views.iOS;
 namespace Mapsui.UI.iOS
 {
     [Register("MapControl"), DesignTimeVisible(true)]
-    public class MapControl : UIView, IMapControl
+    public partial class MapControl : UIView, IMapControl
     {
         private Map _map;
         private readonly MapRenderer _renderer = new MapRenderer();
         private readonly SKGLView _canvas = new SKGLView();
-        private float _skiaScale;
         private double _innerRotation;
 
         public event EventHandler ViewportInitialized;
@@ -84,7 +83,7 @@ namespace Mapsui.UI.iOS
         {
             var screenPosition = GetScreenPosition(gesture.LocationInView(this));
 
-            var tapWasHandled = Map.InvokeInfo(screenPosition, screenPosition, _skiaScale, _renderer.SymbolCache, WidgetTouched, 2);
+            var tapWasHandled = Map.InvokeInfo(screenPosition, screenPosition, _scale, _renderer.SymbolCache, WidgetTouched, 2);
 
             if (!tapWasHandled)
             {
@@ -97,7 +96,7 @@ namespace Mapsui.UI.iOS
         {
             var screenPosition = GetScreenPosition(gesture.LocationInView(this));
 
-            Map.InvokeInfo(screenPosition, screenPosition, _skiaScale, _renderer.SymbolCache, WidgetTouched, 1);
+            Map.InvokeInfo(screenPosition, screenPosition, _scale, _renderer.SymbolCache, WidgetTouched, 1);
         }
 
         void OnPaintSurface(object sender, SKPaintGLSurfaceEventArgs skPaintSurfaceEventArgs)
@@ -108,8 +107,8 @@ namespace Mapsui.UI.iOS
             _map.Viewport.Width = _canvas.Frame.Width;
             _map.Viewport.Height = _canvas.Frame.Height;
 
-            _skiaScale = (float)_canvas.ContentScaleFactor;
-            skPaintSurfaceEventArgs.Surface.Canvas.Scale(_skiaScale, _skiaScale);
+            _scale = (float)_canvas.ContentScaleFactor;
+            skPaintSurfaceEventArgs.Surface.Canvas.Scale(_scale, _scale);
 
             _renderer.Render(skPaintSurfaceEventArgs.Surface.Canvas,
                 _map.Viewport, _map.Layers, _map.Widgets, _map.BackColor);
@@ -207,33 +206,9 @@ namespace Mapsui.UI.iOS
             Refresh();
         }
 
-        private static (Point centre, double radius, double angle) GetPinchValues(List<Point> locations)
-        {
-            if (locations.Count < 2)
-                throw new ArgumentException();
-
-            double centerX = 0;
-            double centerY = 0;
-
-            foreach (var location in locations)
-            {
-                centerX += location.X;
-                centerY += location.Y;
-            }
-
-            centerX = centerX / locations.Count;
-            centerY = centerY / locations.Count;
-
-            var radius = Algorithms.Distance(centerX, centerY, locations[0].X, locations[0].Y);
-
-            var angle = Math.Atan2(locations[1].Y - locations[0].Y, locations[1].X - locations[0].X) * 180.0 / Math.PI;
-
-            return (new Point(centerX, centerY), radius, angle);
-        }
-        
         private Point GetScreenPosition(CGPoint point)
         {
-            return new Point(point.X * _skiaScale, point.Y * _skiaScale);
+            return new Point(point.X * _scale, point.Y * _scale);
         }
 
         public void Refresh()
@@ -323,7 +298,7 @@ namespace Mapsui.UI.iOS
         public void RefreshGraphics()
         {
             SetNeedsDisplay();
-            _canvas?.SetNeedsDisplay();
+            InvalidateCanvas();
         }
 
         public void RefreshData()
@@ -331,18 +306,9 @@ namespace Mapsui.UI.iOS
             _map?.ViewChanged(true);
         }
 
-        public bool AllowPinchRotation { get; set; }
-        public double UnSnapRotationDegrees { get; set; }
-        public double ReSnapRotationDegrees { get; set; }
-
-        public Point WorldToScreen(Point worldPosition)
+        internal void InvalidateCanvas()
         {
-            return SharedMapControl.WorldToScreen(Map.Viewport, _skiaScale, worldPosition);
-        }
-
-        public Point ScreenToWorld(Point screenPosition)
-        {
-            return SharedMapControl.ScreenToWorld(Map.Viewport, _skiaScale, screenPosition);
+            _canvas?.SetNeedsDisplay();
         }
 
         public override CGRect Frame
@@ -381,35 +347,6 @@ namespace Mapsui.UI.iOS
             if (widget is Hyperlink) UIApplication.SharedApplication.OpenUrl(new NSUrl(((Hyperlink)widget).Url));
 
             widget.HandleWidgetTouched(screenPosition);
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            Unsubscribe();
-            base.Dispose(disposing);
-        }
-
-        public void Unsubscribe()
-        {
-            UnsubscribeFromMapEvents(_map);
-        }
-        private void SubscribeToMapEvents(Map map)
-        {
-            map.DataChanged += MapDataChanged;
-            map.PropertyChanged += MapPropertyChanged;
-            map.RefreshGraphics += MapRefreshGraphics;
-        }
-
-        private void UnsubscribeFromMapEvents(Map map)
-        {
-            var temp = map;
-            if (temp != null)
-            {
-                temp.DataChanged -= MapDataChanged;
-                temp.PropertyChanged -= MapPropertyChanged;
-                temp.RefreshGraphics -= MapRefreshGraphics;
-                temp.AbortFetch();
-            }
         }
     }
 }
