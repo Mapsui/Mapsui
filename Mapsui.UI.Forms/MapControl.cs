@@ -4,15 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using Mapsui.Geometries.Utilities;
 using Mapsui.Logging;
 using Mapsui.Widgets;
 using SkiaSharp.Views.Forms;
 using Xamarin.Forms;
 using SkiaSharp;
-using System.Threading;
-using Mapsui.UI.Utils;
 using Mapsui.Rendering;
+using Mapsui.UI.Utils;
 
 namespace Mapsui.UI.Forms
 {
@@ -47,7 +45,7 @@ namespace Mapsui.UI.Forms
         private double _innerRotation;
         private Dictionary<long, TouchEvent> _touches = new Dictionary<long, TouchEvent>();
         private Geometries.Point _firstTouch;
-        private Timer _doubleTapTestTimer;
+        private Mapsui.Utilities.Timer _doubleTapTestTimer;
         private int _numOfTaps = 0;
         private Dictionary<long, int> _fingers = new Dictionary<long, int>(20);
         private VelocityTracker _velocityTracker = new VelocityTracker();
@@ -172,7 +170,7 @@ namespace Mapsui.UI.Forms
                 if (_touches[id].Location.Equals(_firstTouch) && ticks - _touches[id].Tick < (e.DeviceType == SKTouchDeviceType.Mouse ? shortClick : longTap) * 10000)
                 {
                     // Start a timer with timeout delayTap ms. If than isn't arrived another tap, than it is a single
-                    _doubleTapTestTimer = new Timer((l) =>
+                    _doubleTapTestTimer = new Mapsui.Utilities.Timer((l) =>
                     {
                         if (_numOfTaps > 1)
                         {
@@ -184,7 +182,7 @@ namespace Mapsui.UI.Forms
                                 e.Handled = OnSingleTapped((Geometries.Point)l);
                         _numOfTaps = 1;
                         _doubleTapTestTimer = null;
-                    }, location, delayTap, Timeout.Infinite);
+                    }, delayTap, location);
                 }
                 else if (_touches[id].Location.Equals(_firstTouch) && ticks - _touches[id].Tick >= longTap * 10000)
                 {
