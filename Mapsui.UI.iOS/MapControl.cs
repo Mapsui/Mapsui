@@ -17,7 +17,7 @@ using SkiaSharp.Views.iOS;
 namespace Mapsui.UI.iOS
 {
     [Register("MapControl"), DesignTimeVisible(true)]
-    public partial class MapControl : UIStackView, IMapControl
+    public partial class MapControl : UIView, IMapControl
     {
         private Map _map;
         private readonly MapRenderer _renderer = new MapRenderer();
