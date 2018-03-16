@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Mapsui.Samples.Forms.Droid</RootNamespace>
     <AssemblyName>Mapsui.Samples.Forms.Android</AssemblyName>
-    <TargetFrameworkVersion>v8.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v8.1</TargetFrameworkVersion>
     <AndroidApplication>True</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
     <AndroidResgenClass>Resource</AndroidResgenClass>

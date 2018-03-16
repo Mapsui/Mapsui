@@ -5,6 +5,8 @@
 
 *.zip
 
+*.bak
+
 *.stamp
 
 *.mdb
