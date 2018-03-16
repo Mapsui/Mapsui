@@ -45,7 +45,6 @@ namespace Mapsui.UI.Wpf
         private bool _mouseDown;
         private Point _previousMousePosition;
         private RenderMode _renderMode;
-        private Geometries.Point _skiaScale;
         private double _toResolution = double.NaN;
         private bool _hasBeenManipulated;
         private double _innerRotation;
@@ -461,7 +460,7 @@ namespace Mapsui.UI.Wpf
                     }
                     HandleFeatureInfo(e);
                     Map.InvokeInfo(touchPosition.ToMapsui(), _downMousePosition.ToMapsui(), _scale, Renderer.SymbolCache,
-                        OnWidgetTouched, e.ClickCount);
+                        WidgetTouched, e.ClickCount);
                 }
             }
         }
