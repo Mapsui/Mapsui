@@ -459,15 +459,6 @@ namespace Mapsui.UI.Wpf
                 var current = Map.Viewport.ScreenToWorld(mousePosition);
                 ZoomToBox(previous, current);
             }
-            else
-            {
-                if (IsClick(_currentMousePosition, _downMousePosition))
-                {
-                    HandleFeatureInfo(e);
-                    Map.InvokeInfo(mousePosition, _downMousePosition.ToMapsui(), _scale, Renderer.SymbolCache,
-                        WidgetTouched, e.ClickCount);
-                }
-            }
 
             _map.ViewChanged(true);
             OnViewChanged(true);
