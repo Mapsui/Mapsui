@@ -446,16 +446,8 @@ namespace Mapsui.UI.Wpf
 
             if (!IsInBoxZoomMode && !ZoomToBoxMode)
             {
-                if (e.ClickCount > 1)
-                {
-                    Console.WriteLine("hoi");
-                }
                 if (IsClick(_currentMousePosition, _downMousePosition))
                 {
-                    if (e.ClickCount > 1)
-                    {
-                        Console.WriteLine("hoi");
-                    }
                     HandleFeatureInfo(e);
                     Map.InvokeInfo(touchPosition.ToMapsui(), _downMousePosition.ToMapsui(), _scale, Renderer.SymbolCache,
                         WidgetTouched, e.ClickCount);
