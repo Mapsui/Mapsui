@@ -772,5 +772,10 @@ namespace Mapsui.UI.Wpf
             // Because we use weak events the finalizer will be called even while the event is still registered.
             RenderingWeakEventManager.RemoveHandler(CompositionTargetRendering);
         }
+
+        public InfoEventArgs GetMapInfo(Geometries.Point screenPosition, int numTabs)
+        {
+            return InfoHelper.GetInfoEventArgs(Map.Viewport, screenPosition, _scale, Map.InfoLayers, Renderer.SymbolCache,  numTabs);
+        }
     }
 }
