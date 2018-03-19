@@ -36,40 +36,45 @@ namespace Mapsui.Samples.Common.Desktop
             {
                 Name = "Countries",
                 DataSource = countrySource,
-                Style = new ThemeStyle(f =>
-                {
-                    if (f.Geometry is Point)
-                        return null;
-
-                    VectorStyle style = new VectorStyle();
-
-                    switch (f["NAME"].ToString().ToLower())
-                    {
-                        case "brazil": //If country name is Denmark, fill it with green
-                            style.Fill = new Brush(Color.Green);
-                            style.Outline = new Pen(Color.Black);
-                            break;
-                        case "united states": //If country name is USA, fill it with Blue and add a red outline
-                            style.Fill = new Brush(Color.Violet);
-                            style.Outline = new Pen(Color.Black);
-                            break;
-                        case "china": //If country name is China, fill it with red
-                            style.Fill = new Brush(Color.Orange);
-                            style.Outline = new Pen(Color.Black);
-                            break;
-                        case "japan": //If country name is China, fill it with red
-                            style.Fill = new Brush(Color.Cyan);
-                            style.Outline = new Pen(Color.Black);
-                            break;
-                        default:
-                            style.Fill = new Brush(Color.Gray);
-                            style.Outline = new Pen(Color.FromArgb(0, 64, 64, 64), 1);
-                            break;
-                    }
-                    style.Outline = new Pen(Color.FromArgb(0, 64, 64, 64), 1);
-                    return style;
-                })
+                Style = CreateThemeStyle()
             };
+        }
+
+        private static ThemeStyle CreateThemeStyle()
+        {
+            return new ThemeStyle(f =>
+            {
+                if (f.Geometry is Point)
+                    return null;
+
+                VectorStyle style = new VectorStyle();
+
+                switch (f["NAME"].ToString().ToLower())
+                {
+                    case "brazil": //If country name is Denmark, fill it with green
+                        style.Fill = new Brush(Color.Green);
+                        style.Outline = new Pen(Color.Black);
+                        break;
+                    case "united states": //If country name is USA, fill it with Blue and add a red outline
+                        style.Fill = new Brush(Color.Violet);
+                        style.Outline = new Pen(Color.Black);
+                        break;
+                    case "china": //If country name is China, fill it with red
+                        style.Fill = new Brush(Color.Orange);
+                        style.Outline = new Pen(Color.Black);
+                        break;
+                    case "japan": //If country name is China, fill it with red
+                        style.Fill = new Brush(Color.Cyan);
+                        style.Outline = new Pen(Color.Black);
+                        break;
+                    default:
+                        style.Fill = new Brush(Color.Gray);
+                        style.Outline = new Pen(Color.FromArgb(0, 64, 64, 64), 1);
+                        break;
+                }
+                style.Outline = new Pen(Color.FromArgb(0, 64, 64, 64), 1);
+                return style;
+            });
         }
 
         public static ILayer CreateCityHoverPoints()
