@@ -35,6 +35,11 @@ namespace Mapsui.Geometries.Utilities
             return Math.Sqrt(Math.Pow(x1 - x2, 2.0) + Math.Pow(y1 - y2, 2.0));
         }
 
+        public static double Distance(Point a, Point b)
+        {
+            return Math.Sqrt(Math.Pow(a.X - b.X, 2.0) + Math.Pow(a.Y - b.Y, 2.0));
+        }
+
         /// <summary>
         ///     Converts the specified angle from degrees to radians
         /// </summary>
