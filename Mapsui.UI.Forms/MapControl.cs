@@ -83,8 +83,8 @@ namespace Mapsui.UI.Forms
             EnableTouchEvents = true;
 
             PaintSurface += OnPaintSurface;
-            Touch += HandleTouch;
-            SizeChanged += HandleSizeChanged; 
+            Touch += OnTouch;
+            SizeChanged += OnSizeChanged; 
         }
 
         private void TryInitializeViewport()
@@ -100,7 +100,7 @@ namespace Mapsui.UI.Forms
             }
         }
 
-        private void HandleSizeChanged(object sender, EventArgs e)
+        private void OnSizeChanged(object sender, EventArgs e)
         {
             if (Map != null)
             {
@@ -109,7 +109,7 @@ namespace Mapsui.UI.Forms
             }
         }
 
-        private void HandleTouch(object sender, SKTouchEventArgs e)
+        private void OnTouch(object sender, SKTouchEventArgs e)
         {
             // Save time, when the event occures
             long ticks = DateTime.Now.Ticks;

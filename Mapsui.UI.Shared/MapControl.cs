@@ -21,7 +21,7 @@ namespace Mapsui.UI.Wpf
         /// <summary>
         /// Private global variables
         /// </summary>
-        
+
         /// <summary>
         /// Display scale for converting screen position to real position
         /// </summary>
@@ -112,11 +112,21 @@ namespace Mapsui.UI.Wpf
         /// <summary>
         /// Properties
         /// </summary>
-        
+
+        /// <summary>
+        /// Allow map panning through touch or mouse
+        /// </summary>
+        public bool PanLock { get; set; }
+
         /// <summary>
         /// Allow a rotation with a pinch gesture
         /// </summary>
-        public bool AllowPinchRotation { get; set; }
+        public bool RotationLock { get; set; }
+
+        /// <summary>
+        /// Allow zooming though touch or mouse
+        /// </summary>
+        public bool ZoomLock { get; set; }
 
         /// <summary>
         /// After how many degrees start rotation to take place
@@ -311,7 +321,7 @@ namespace Mapsui.UI.Wpf
 
                         double rotationDelta = 0;
 
-                        if (AllowPinchRotation)
+                        if (RotationLock)
                         {
                             _innerRotation += angle - prevAngle;
                             _innerRotation %= 360;
@@ -406,22 +416,13 @@ namespace Mapsui.UI.Wpf
         /// Public functions
         /// </summary>
 
-#if __ANDROID__ && __IOS__
+#if !__WPF__ && !__UWP__
         public new void Dispose()
         {
             Unsubscribe();
             base.Dispose();
         }
-#endif
 
-#if __FORMS__
-        public void Dispose()
-        {
-            Unsubscribe();
-        }
-#endif
-
-#if !__FORMS__
         protected override void Dispose(bool disposing)
         {
             Unsubscribe();
@@ -485,7 +486,7 @@ namespace Mapsui.UI.Wpf
         /// <summary>
         /// Private static functions
         /// </summary>
-        
+
         private static (Geometries.Point centre, double radius, double angle) GetPinchValues(List<Geometries.Point> locations)
         {
             if (locations.Count < 2)
