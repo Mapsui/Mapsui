@@ -24,7 +24,7 @@ namespace Mapsui.Samples.iOS
             return new MapControl(bounds)
             {
                 Map = Common.Maps.OsmSample.CreateMap(),
-                AllowPinchRotation = true,
+                RotationLock = true,
                 UnSnapRotationDegrees = 30,
                 ReSnapRotationDegrees = 5,
             };                        

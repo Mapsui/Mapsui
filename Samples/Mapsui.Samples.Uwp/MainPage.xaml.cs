@@ -23,7 +23,7 @@ namespace Mapsui.Samples.Uwp
             MbTilesSample.MbTilesLocation = MbTilesLocationOnUwp;
 
             MapControl.Map.Layers.Add(OpenStreetMap.CreateTileLayer());
-            MapControl.AllowPinchRotation = true;
+            MapControl.RotationLock = true;
             MapControl.UnSnapRotationDegrees = 30;
             MapControl.ReSnapRotationDegrees = 5;
 

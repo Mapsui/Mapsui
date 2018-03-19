@@ -17,6 +17,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)EventArgs\TouchedEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EventArgs\ZoomedEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapControl.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\PCLTimer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\VelocityTracker.cs" />
   </ItemGroup>
 </Project>

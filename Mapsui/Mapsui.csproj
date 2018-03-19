@@ -65,6 +65,7 @@
     <Compile Include="Geometries\NotifyingPoint.cs" />
     <Compile Include="Layers\AnimatedFeatures.cs" />
     <Compile Include="Layers\AnimatedPointLayer.cs" />
+    <Compile Include="Layers\WritableLayer.cs" />
     <Compile Include="Styles\StrokeJoin.cs" />
     <Compile Include="Styles\PenStrokeCap.cs" />
     <Compile Include="Widgets\Alignment.cs" />
@@ -80,7 +81,6 @@
     <Compile Include="Layers\TmsTileSourceBuilder.cs" />
     <Compile Include="Logging\Logger.cs" />
     <Compile Include="Projection\Transformer.cs" />
-    <Compile Include="UI\SharedMapControl.cs" />
     <Compile Include="UI\ViewportLimiter.cs" />
     <Compile Include="Projection\BoundingBoxIterator.cs" />
     <Compile Include="Projection\Mercator.cs" />

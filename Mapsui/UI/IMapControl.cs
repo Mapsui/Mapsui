@@ -15,7 +15,7 @@ namespace Mapsui.UI
 
         void Refresh();
 
-        bool AllowPinchRotation { get; set; }
+        bool RotationLock { get; set; }
 
         double UnSnapRotationDegrees { get; set; }
 
