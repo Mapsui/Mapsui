@@ -28,7 +28,7 @@ namespace Mapsui.Samples.Common.Maps
                     {
                         Color = Color.Orange,
                         Width = 2,
-                        PenStyle = PenStyle.Solid,
+                        PenStyle = PenStyle.DashDotDot, //.Solid,
                         PenStrokeCap = PenStrokeCap.Round
                     }
                 }
