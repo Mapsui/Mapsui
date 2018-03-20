@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Mapsui.Geometries;
 using SkiaSharp;
 
@@ -7,7 +9,7 @@ namespace Mapsui.Rendering.Skia
     public static class ClippingExtension
     {
         /// <summary>
-        /// Converts a list of Mapsui points in screen coordinates to a Skia path
+        /// Converts a LineString (list of Mapsui points) in world coordinates to a Skia path
         /// </summary>
         /// <param name="lineString">List of points in Mapsui world coordinates</param>
         /// <param name="viewport">Viewport implementation</param>
@@ -18,7 +20,7 @@ namespace Mapsui.Rendering.Skia
             // First convert List<Points> to screen coordinates
             var vertices = WorldToScreen(viewport, lineString);
 
-            var points = new SKPath();
+            var path = new SKPath();
             SKPoint lastPoint;
 
             for (var i = 1; i < vertices.Count; i++)
@@ -29,14 +31,125 @@ namespace Mapsui.Rendering.Skia
                 {
                     if (lastPoint.IsEmpty || !lastPoint.Equals(intersectionPoint1))
                     {
-                        points.MoveTo(intersectionPoint1);
+                        path.MoveTo(intersectionPoint1);
                     }
-                    points.LineTo(intersectionPoint2);
+                    path.LineTo(intersectionPoint2);
 
                     lastPoint = intersectionPoint2;
                 }
             }
-            return points;
+            return path;
+        }
+
+        /// <summary>
+        /// Converts a Polygon into a SKPath, that is clipped to cliptRect, where exterior is bigger than interior
+        /// See https://en.wikipedia.org/wiki/Sutherland%E2%80%93Hodgman_algorithm
+        /// </summary>
+        /// <param name="polygon">Polygon to convert</param>
+        /// <param name="viewport">Viewport implementation</param>
+        /// <param name="clipRect">Rectangle to clip to. All lines outside aren't drawn.</param>
+        /// <param name="strokeWidth">StrokeWidth for inflating cliptRect</param>
+        /// <returns></returns>
+        public static SKPath ToSkiaPath(this Polygon polygon, IViewport viewport, SKRect clipRect, float strokeWidth)
+        {
+            // Inflate clipRect, so that we could be sure, nothing of stroke is visible on screen
+            var exterior = ReducePointsToClipRect(polygon.ExteriorRing.Vertices, viewport, SKRect.Inflate(clipRect, strokeWidth * 2, strokeWidth * 2));
+
+            var path = new SKPath();
+
+            if (exterior.Count == 0)
+                return path;
+
+            path.MoveTo(exterior[0]);
+
+            for (var i = 1; i < exterior.Count; i++)
+            {
+                path.LineTo(exterior[i]);
+            }
+            path.Close();
+
+            foreach (var interiorRing in polygon.InteriorRings)
+            {
+                // note: For Skia inner rings need to be clockwise and outer rings
+                // need to be counter clockwise (if this is the other way around it also
+                // seems to work)
+                // this is not a requirement of the OGC polygon.
+                var interior = ReducePointsToClipRect(interiorRing.Vertices, viewport, SKRect.Inflate(clipRect, strokeWidth, strokeWidth));
+
+                if (interior.Count == 0)
+                    continue;
+
+                path.MoveTo(interior[0]);
+
+                for (var i = 1; i < interior.Count; i++)
+                {
+                    path.LineTo(interior[i]);
+                }
+            }
+            path.Close();
+
+            return path;
+        }
+
+        private static Func<SKPoint, SKRect, bool>[] comparer = new Func<SKPoint, SKRect, bool>[]
+        {
+            (point, rect) => point.X > rect.Left, // Left edge of rect
+            (point, rect) => point.Y > rect.Top, // Top edge of rect
+            (point, rect) => point.X < rect.Right, // Right edge of rect
+            (point, rect) => point.Y < rect.Bottom, // Bottom edge of rect
+        };
+
+        private static Func<SKPoint, SKPoint, SKRect, SKPoint>[] intersecter = new Func<SKPoint, SKPoint, SKRect, SKPoint>[]
+        {
+            (pointStart, pointEnd, rect) => new SKPoint(rect.Left, pointStart.Y + (rect.Left-pointStart.X)/(pointEnd.X-pointStart.X)*(pointEnd.Y-pointStart.Y)), // Left edge of rect
+            (pointStart, pointEnd, rect) => new SKPoint(pointStart.X + (rect.Top-pointStart.Y)/(pointEnd.Y-pointStart.Y)*(pointEnd.X-pointStart.X), rect.Top),   // Top edge of rect
+            (pointStart, pointEnd, rect) => new SKPoint(rect.Right, pointEnd.Y + (rect.Right-pointEnd.X)/(pointStart.X-pointEnd.X)*(pointStart.Y-pointEnd.Y)),   // Right edge of rect
+            (pointStart, pointEnd, rect) => new SKPoint(pointEnd.X + (rect.Bottom-pointEnd.Y)/(pointStart.Y-pointEnd.Y)*(pointStart.X-pointEnd.X), rect.Bottom), // Bottom edge of rect
+        };
+
+        /// <summary>
+        /// Reduce list of points, so that all are inside of cliptRect
+        /// </summary>
+        /// <param name="points">List of points to reduce</param>
+        /// <param name="viewport">Viewport implementation</param>
+        /// <param name="clipRect">Rectangle to clip to. All points outside aren't drawn.</param>
+        /// <returns></returns>
+        private static List<SKPoint> ReducePointsToClipRect(IEnumerable<Point> points, IViewport viewport, SKRect clipRect)
+        {
+            var output = WorldToScreen(viewport, points);
+
+            for (var j = 0; j < 4; j++)
+            {
+                if (output == null || output.Count == 0)
+                    return new List<SKPoint>();
+
+                var input = new List<SKPoint>(output);
+
+                output.Clear();
+
+                var pointStart = input.Last();
+
+                foreach (var pointEnd in input)
+                {
+                    if (comparer[j](pointEnd, clipRect))
+                    {
+                        if (!comparer[j](pointStart, clipRect))
+                        {
+                            output.Add(intersecter[j](pointStart, pointEnd, clipRect));
+                        }
+
+                        output.Add(pointEnd);
+                    }
+                    else if (comparer[j](pointStart, clipRect))
+                    {
+                        output.Add(intersecter[j](pointStart, pointEnd, clipRect));
+                    }
+
+                    pointStart = pointEnd;
+                }
+            }
+
+            return output;
         }
 
         /// <summary>

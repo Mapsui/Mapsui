@@ -9,13 +9,9 @@ namespace Mapsui.Rendering.Skia
 {
     public static class LineStringRenderer
     {
-        //private static SKPaint paint = new SKPaint();
-
         public static void Draw(SKCanvas canvas, IViewport viewport, IStyle style, IFeature feature, IGeometry geometry,
             float opacity)
         {
-            var time = DateTime.Now.TimeOfDay;
-
             if (style is LabelStyle labelStyle)
             {
                 var worldCenter = geometry.GetBoundingBox().GetCentroid();
@@ -63,8 +59,6 @@ namespace Mapsui.Rendering.Skia
                     canvas.DrawPath(path, paint);
                 }
             }
-
-            System.Diagnostics.Debug.WriteLine(DateTime.Now.TimeOfDay-time);
         }
     }
 }
