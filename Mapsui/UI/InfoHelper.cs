@@ -12,16 +12,16 @@ namespace Mapsui.UI
 {
     public static class InfoHelper
     {
-        public static MapInfoEventArgs GetInfoEventArgs(IViewport viewport, Point screenPosition,
-            float scale, IEnumerable<ILayer> layers, ISymbolCache symbolCache, int numTaps)
+        public static MapInfo GetMapInfo(IViewport viewport, Point screenPosition,
+            float scale, IEnumerable<ILayer> layers, ISymbolCache symbolCache)
         {
             var worldPosition = viewport.ScreenToWorld(
                 new Point(screenPosition.X / scale, screenPosition.Y / scale));
-            return GetInfoEventArgs(layers, worldPosition, screenPosition, viewport.Resolution, symbolCache, numTaps);
+            return GetMapInfo(layers, worldPosition, screenPosition, viewport.Resolution, symbolCache);
         }
 
-        private static MapInfoEventArgs GetInfoEventArgs(IEnumerable<ILayer> layers, Point worldPosition,
-            Point screenPosition, double resolution, ISymbolCache symbolCache, int numTaps)
+        private static MapInfo GetMapInfo(IEnumerable<ILayer> layers, Point worldPosition,
+            Point screenPosition, double resolution, ISymbolCache symbolCache)
         {
             var reversedLayer = layers.Reverse();
             foreach (var layer in reversedLayer)
@@ -37,31 +37,21 @@ namespace Mapsui.UI
 
                 if (feature != null)
                 {
-                    return new MapInfoEventArgs
+                    return new MapInfo
                     {
-                        MapInfo = new MapInfo
-                        {
-                            Feature = feature,
-                            Layer = layer,
-                            WorldPosition = worldPosition,
-                            ScreenPosition = screenPosition
-                        },
-                        NumTaps = numTaps,
-                        Handled = false
+                        Feature = feature,
+                        Layer = layer,
+                        WorldPosition = worldPosition,
+                        ScreenPosition = screenPosition
                     };
                 }
             }
 
             // return MapInfoEventArgs without feature if none was found. Can be usefull to create features
-            return new MapInfoEventArgs
+            return new MapInfo
             {
-                MapInfo = new MapInfo
-                {
-                    WorldPosition = worldPosition,
-                    ScreenPosition = screenPosition
-                },
-                NumTaps = numTaps,
-                Handled = false
+                WorldPosition = worldPosition,
+                ScreenPosition = screenPosition
             };
         }
 

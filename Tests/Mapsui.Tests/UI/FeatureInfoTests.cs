@@ -33,18 +33,18 @@ namespace Mapsui.Tests.UI
             var scale = 1;
 
             // act
-            var argsHit = InfoHelper.GetInfoEventArgs(map.Viewport, screenPositionHit, scale, map.InfoLayers, null, 1);
-            var argsMis = InfoHelper.GetInfoEventArgs(map.Viewport, screenPositionMiss, scale, map.InfoLayers, null, 1);
+            var argsHit = InfoHelper.GetMapInfo(map.Viewport, screenPositionHit, scale, map.InfoLayers, null);
+            var argsMis = InfoHelper.GetMapInfo(map.Viewport, screenPositionMiss, scale, map.InfoLayers, null);
 
             // assert;
-            Assert.IsTrue(argsHit.MapInfo.Feature.Geometry != null);
-            Assert.IsTrue(argsHit.MapInfo.Layer.Name == "TestLayer");
-            Assert.IsTrue(argsHit.MapInfo.WorldPosition.Equals(new Point(2, 2)));
+            Assert.IsTrue(argsHit.Feature.Geometry != null);
+            Assert.IsTrue(argsHit.Layer.Name == "TestLayer");
+            Assert.IsTrue(argsHit.WorldPosition.Equals(new Point(2, 2)));
 
             // If not on feature still return args with world position.
-            Assert.IsTrue(argsMis.MapInfo.Feature?.Geometry == null);
-            Assert.IsTrue(argsMis.MapInfo.Layer == null);
-            Assert.IsTrue(argsMis.MapInfo.WorldPosition.Equals(new Point(9, 9)));
+            Assert.IsTrue(argsMis.Feature?.Geometry == null);
+            Assert.IsTrue(argsMis.Layer == null);
+            Assert.IsTrue(argsMis.WorldPosition.Equals(new Point(9, 9)));
         }
 
         [Test]
@@ -121,12 +121,12 @@ namespace Mapsui.Tests.UI
             var scale = 1;
 
             // act
-            var argsHit = InfoHelper.GetInfoEventArgs(map.Viewport, screenPositionHit, scale, map.InfoLayers, null, 1);
+            var argsHit = InfoHelper.GetMapInfo(map.Viewport, screenPositionHit, scale, map.InfoLayers, null);
            
             // assert;
-            Assert.IsTrue(argsHit.MapInfo.Feature == null);
-            Assert.IsTrue(argsHit.MapInfo.Layer == null);
-            Assert.IsTrue(argsHit.MapInfo.WorldPosition.Equals(new Point(2, 2)));
+            Assert.IsTrue(argsHit.Feature == null);
+            Assert.IsTrue(argsHit.Layer == null);
+            Assert.IsTrue(argsHit.WorldPosition.Equals(new Point(2, 2)));
         }
 
         [Test]
@@ -162,12 +162,12 @@ namespace Mapsui.Tests.UI
             var scale = 1;
 
             // act
-            var argsHit = InfoHelper.GetInfoEventArgs(map.Viewport, screenPositionHit, scale, map.InfoLayers, null, 1);
+            var argsHit = InfoHelper.GetMapInfo(map.Viewport, screenPositionHit, scale, map.InfoLayers, null);
 
             // assert;
-            Assert.IsTrue(argsHit.MapInfo.Feature == null);
-            Assert.IsTrue(argsHit.MapInfo.Layer == null);
-            Assert.IsTrue(argsHit.MapInfo.WorldPosition.Equals(new Point(2, 2)));
+            Assert.IsTrue(argsHit.Feature == null);
+            Assert.IsTrue(argsHit.Layer == null);
+            Assert.IsTrue(argsHit.WorldPosition.Equals(new Point(2, 2)));
         }
     }
 }

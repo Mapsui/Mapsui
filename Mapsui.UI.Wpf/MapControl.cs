@@ -765,9 +765,9 @@ namespace Mapsui.UI.Wpf
             RenderingWeakEventManager.RemoveHandler(CompositionTargetRendering);
         }
 
-        public MapInfoEventArgs GetMapInfo(Geometries.Point screenPosition, int numTabs)
+        public MapInfo GetMapInfo(Geometries.Point screenPosition)
         {
-            return InfoHelper.GetInfoEventArgs(Map.Viewport, screenPosition, _scale, Map.InfoLayers, Renderer.SymbolCache,  numTabs);
+            return InfoHelper.GetMapInfo(Map.Viewport, screenPosition, _scale, Map.InfoLayers, Renderer.SymbolCache);
         }
     }
 }
