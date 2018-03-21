@@ -61,7 +61,7 @@ namespace Mapsui.Geometries
         /// <summary>
         ///     Gets or sets the collection of vertices in this Geometry
         /// </summary>
-        public List<Point> Vertices { get; set; }
+        public IList<Point> Vertices { get; set; }
 
         /// <summary>
         ///     Returns the vertice where this Geometry begins
