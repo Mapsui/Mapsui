@@ -180,8 +180,8 @@ namespace Mapsui
         /// </summary>
         public event DataChangedEventHandler DataChanged;
         public event EventHandler RefreshGraphics;
-        public event EventHandler<InfoEventArgs> Info;
-        public event EventHandler<InfoEventArgs> Hover;
+        public event EventHandler<MapInfoEventArgs> Info;
+        public event EventHandler<MapInfoEventArgs> Hover;
 
         private void LayersLayerRemoved(ILayer layer)
         {
@@ -228,14 +228,14 @@ namespace Mapsui
             return false;
         }
 
-        private InfoEventArgs _previousHoverEventArgs;
+        private MapInfoEventArgs _previousHoverEventArgs;
 
         public void InvokeHover(Point screenPosition, float scale, ISymbolCache symbolCache)
         {
             if (Hover == null) return;
             if (HoverLayers.Count == 0) return;
             var hoverEventArgs = InfoHelper.GetInfoEventArgs(Viewport, screenPosition, scale, HoverLayers, symbolCache, 0);
-            if (hoverEventArgs?.Feature != _previousHoverEventArgs?.Feature) // only notify when the feature changes
+            if (hoverEventArgs?.MapInfo.Feature != _previousHoverEventArgs?.MapInfo.Feature) // only notify when the feature changes
             {
                 _previousHoverEventArgs = hoverEventArgs;
                 Hover?.Invoke(this, hoverEventArgs);

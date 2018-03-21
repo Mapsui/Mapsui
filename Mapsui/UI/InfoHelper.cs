@@ -12,7 +12,7 @@ namespace Mapsui.UI
 {
     public static class InfoHelper
     {
-        public static InfoEventArgs GetInfoEventArgs(IViewport viewport, Point screenPosition, 
+        public static MapInfoEventArgs GetInfoEventArgs(IViewport viewport, Point screenPosition,
             float scale, IEnumerable<ILayer> layers, ISymbolCache symbolCache, int numTaps)
         {
             var worldPosition = viewport.ScreenToWorld(
@@ -20,8 +20,8 @@ namespace Mapsui.UI
             return GetInfoEventArgs(layers, worldPosition, screenPosition, viewport.Resolution, symbolCache, numTaps);
         }
 
-        private static InfoEventArgs GetInfoEventArgs(IEnumerable<ILayer> layers, Point worldPosition, Point screenPosition,
-            double resolution, ISymbolCache symbolCache, int numTaps)
+        private static MapInfoEventArgs GetInfoEventArgs(IEnumerable<ILayer> layers, Point worldPosition,
+            Point screenPosition, double resolution, ISymbolCache symbolCache, int numTaps)
         {
             var reversedLayer = layers.Reverse();
             foreach (var layer in reversedLayer)
@@ -29,27 +29,40 @@ namespace Mapsui.UI
                 if (layer.Enabled == false) continue;
                 if (layer.MinVisible > resolution) continue;
                 if (layer.MaxVisible < resolution) continue;
-                
+
                 var features = layer.GetFeaturesInView(layer.Envelope, resolution);
-                
+
                 var feature = features
                     .LastOrDefault(f => IsTouchingTakingIntoAccountSymbolStyles(worldPosition, f, layer.Style, resolution, symbolCache));
-                
+
                 if (feature != null)
                 {
-                    return new InfoEventArgs
+                    return new MapInfoEventArgs
                     {
-                        Feature = feature,
-                        Layer = layer,
-                        WorldPosition = worldPosition,
-                        ScreenPosition = screenPosition,
+                        MapInfo = new MapInfo
+                        {
+                            Feature = feature,
+                            Layer = layer,
+                            WorldPosition = worldPosition,
+                            ScreenPosition = screenPosition
+                        },
                         NumTaps = numTaps,
-                        Handled = false,
+                        Handled = false
                     };
                 }
             }
-            // return InfoEventArgs without feature if none was found. Can be usefull to create features
-            return new InfoEventArgs { WorldPosition = worldPosition, ScreenPosition = screenPosition, NumTaps = numTaps, Handled = false};
+
+            // return MapInfoEventArgs without feature if none was found. Can be usefull to create features
+            return new MapInfoEventArgs
+            {
+                MapInfo = new MapInfo
+                {
+                    WorldPosition = worldPosition,
+                    ScreenPosition = screenPosition
+                },
+                NumTaps = numTaps,
+                Handled = false
+            };
         }
 
         private static bool IsTouchingTakingIntoAccountSymbolStyles(
@@ -58,7 +71,7 @@ namespace Mapsui.UI
             var styles = new List<IStyle>();
             styles.AddRange(ToCollection(layerStyle));
             styles.AddRange(feature.Styles);
-            
+
             if (feature.Geometry is Point)
             {
                 foreach (var style in styles)

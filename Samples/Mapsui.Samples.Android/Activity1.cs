@@ -77,23 +77,23 @@ namespace Mapsui.Samples.Android
             return textView;
         }
 
-        private void MapOnInfo(object sender, InfoEventArgs infoEventArgs)
+        private void MapOnInfo(object sender, MapInfoEventArgs args)
         {
-            if (infoEventArgs.Feature != null)
+            if (args.MapInfo.Feature != null)
             {
                 RunOnUiThread(new Runnable(Toast.MakeText(
                     ApplicationContext,
-                    ToDisplayText(infoEventArgs.Feature),
+                    ToDisplayText(args.MapInfo.Feature),
                     ToastLength.Short).Show));
 
-                ShowPopup(infoEventArgs);
+                ShowPopup(args);
             }
         }
 
-        private void ShowPopup(InfoEventArgs infoEventArgs)
+        private void ShowPopup(MapInfoEventArgs args)
         {
             var mapControl = FindViewById<MapControl>(Resource.Id.mapcontrol);
-            var screenPosition = mapControl.WorldToScreen(infoEventArgs.Feature.Geometry.GetBoundingBox().GetCentroid());
+            var screenPosition = mapControl.WorldToScreen(args.MapInfo.Feature.Geometry.GetBoundingBox().GetCentroid());
             
             _popup.SetX((float) (screenPosition.X - _popup.MeasuredWidth * 0.5));
             _popup.SetY((float) screenPosition.Y + 48);
