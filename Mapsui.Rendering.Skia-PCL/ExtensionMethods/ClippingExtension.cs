@@ -25,16 +25,21 @@ namespace Mapsui.Rendering.Skia
 
             for (var i = 1; i < vertices.Count; i++)
             {
+                // Check each part of LineString, if it is inside or intersects the clipping rectangle
                 var intersect = LiangBarskyClip(vertices[i - 1], vertices[i], clipRect, out var intersectionPoint1, out var intersectionPoint2);
 
                 if (intersect != Intersection.CompleteOutside)
                 {
+                    // If the last point isn't the same as actuall starting point ...
                     if (lastPoint.IsEmpty || !lastPoint.Equals(intersectionPoint1))
                     {
+                        // ... than move to this point
                         path.MoveTo(intersectionPoint1);
                     }
+                    // Draw line
                     path.LineTo(intersectionPoint2);
 
+                    // Save last end point for later use
                     lastPoint = intersectionPoint2;
                 }
             }
@@ -43,7 +48,6 @@ namespace Mapsui.Rendering.Skia
 
         /// <summary>
         /// Converts a Polygon into a SKPath, that is clipped to cliptRect, where exterior is bigger than interior
-        /// See https://en.wikipedia.org/wiki/Sutherland%E2%80%93Hodgman_algorithm
         /// </summary>
         /// <param name="polygon">Polygon to convert</param>
         /// <param name="viewport">Viewport implementation</param>
@@ -52,20 +56,25 @@ namespace Mapsui.Rendering.Skia
         /// <returns></returns>
         public static SKPath ToSkiaPath(this Polygon polygon, IViewport viewport, SKRect clipRect, float strokeWidth)
         {
+            // Reduce exterior ring to parts, that are visible in clipping rectangle
             // Inflate clipRect, so that we could be sure, nothing of stroke is visible on screen
             var exterior = ReducePointsToClipRect(polygon.ExteriorRing.Vertices, viewport, SKRect.Inflate(clipRect, strokeWidth * 2, strokeWidth * 2));
 
+            // Create path for exterior and interior parts
             var path = new SKPath();
 
             if (exterior.Count == 0)
                 return path;
 
+            // Draw exterior path
             path.MoveTo(exterior[0]);
 
             for (var i = 1; i < exterior.Count; i++)
             {
                 path.LineTo(exterior[i]);
             }
+
+            // Close exterior path
             path.Close();
 
             foreach (var interiorRing in polygon.InteriorRings)
@@ -74,11 +83,14 @@ namespace Mapsui.Rendering.Skia
                 // need to be counter clockwise (if this is the other way around it also
                 // seems to work)
                 // this is not a requirement of the OGC polygon.
+
+                // Reduce interior ring to parts, that are visible in clipping rectangle
                 var interior = ReducePointsToClipRect(interiorRing.Vertices, viewport, SKRect.Inflate(clipRect, strokeWidth, strokeWidth));
 
                 if (interior.Count == 0)
                     continue;
 
+                // Draw interior pathes
                 path.MoveTo(interior[0]);
 
                 for (var i = 1; i < interior.Count; i++)
@@ -86,12 +98,19 @@ namespace Mapsui.Rendering.Skia
                     path.LineTo(interior[i]);
                 }
             }
+
+            // Close interior pathes
             path.Close();
 
             return path;
         }
 
-        private static Func<SKPoint, SKRect, bool>[] comparer = new Func<SKPoint, SKRect, bool>[]
+        /// <summary>
+        /// Comparer for each side of the clipping rectangle to check, if a point 
+        /// is inside or outside of this edge.
+        /// There are 4 edges (left, top, right, bottom).
+        /// </summary>
+        private static readonly Func<SKPoint, SKRect, bool>[] Comparer = new Func<SKPoint, SKRect, bool>[]
         {
             (point, rect) => point.X > rect.Left, // Left edge of rect
             (point, rect) => point.Y > rect.Top, // Top edge of rect
@@ -99,7 +118,12 @@ namespace Mapsui.Rendering.Skia
             (point, rect) => point.Y < rect.Bottom, // Bottom edge of rect
         };
 
-        private static Func<SKPoint, SKPoint, SKRect, SKPoint>[] intersecter = new Func<SKPoint, SKPoint, SKRect, SKPoint>[]
+        /// <summary>
+        /// Calculates the intersection point of line between pointStart and pointEnd 
+        /// and the edge.
+        /// There are 4 edges (left, top, right, bottom).
+        /// </summary>
+        private static readonly Func<SKPoint, SKPoint, SKRect, SKPoint>[] Intersecter = new Func<SKPoint, SKPoint, SKRect, SKPoint>[]
         {
             (pointStart, pointEnd, rect) => new SKPoint(rect.Left, pointStart.Y + (rect.Left-pointStart.X)/(pointEnd.X-pointStart.X)*(pointEnd.Y-pointStart.Y)), // Left edge of rect
             (pointStart, pointEnd, rect) => new SKPoint(pointStart.X + (rect.Top-pointStart.Y)/(pointEnd.Y-pointStart.Y)*(pointEnd.X-pointStart.X), rect.Top),   // Top edge of rect
@@ -109,6 +133,7 @@ namespace Mapsui.Rendering.Skia
 
         /// <summary>
         /// Reduce list of points, so that all are inside of cliptRect
+        /// See https://en.wikipedia.org/wiki/Sutherland%E2%80%93Hodgman_algorithm
         /// </summary>
         /// <param name="points">List of points to reduce</param>
         /// <param name="viewport">Viewport implementation</param>
@@ -118,11 +143,14 @@ namespace Mapsui.Rendering.Skia
         {
             var output = WorldToScreen(viewport, points);
 
+            // Do this for the 4 edges (left, top, right, bottom) of clipping rectangle
             for (var j = 0; j < 4; j++)
             {
+                // If there aren't any points to reduce
                 if (output == null || output.Count == 0)
                     return new List<SKPoint>();
 
+                // New input list is the last output list of points
                 var input = new List<SKPoint>(output);
 
                 output.Clear();
@@ -131,20 +159,26 @@ namespace Mapsui.Rendering.Skia
 
                 foreach (var pointEnd in input)
                 {
-                    if (comparer[j](pointEnd, clipRect))
+                    // Is pointEnd inside of clipping rectangle regarding this edge
+                    if (Comparer[j](pointEnd, clipRect))
                     {
-                        if (!comparer[j](pointStart, clipRect))
+                        // Is pointStart outside of clipping rectangle regarding this edge
+                        if (!Comparer[j](pointStart, clipRect))
                         {
-                            output.Add(intersecter[j](pointStart, pointEnd, clipRect));
+                            // Yes, than line is coming from outside to inside, so calculate intersection
+                            output.Add(Intersecter[j](pointStart, pointEnd, clipRect));
                         }
-
+                        // pointEnd is inside, so add it to points list
                         output.Add(pointEnd);
                     }
-                    else if (comparer[j](pointStart, clipRect))
+                    // Is pointStart inside of clipping rectangle regarding this edge
+                    else if (Comparer[j](pointStart, clipRect))
                     {
-                        output.Add(intersecter[j](pointStart, pointEnd, clipRect));
+                        // Yes, than line is coming from inside to outside, so calculate intersection
+                        output.Add(Intersecter[j](pointStart, pointEnd, clipRect));
                     }
 
+                    // Set next pointStart
                     pointStart = pointEnd;
                 }
             }
@@ -189,18 +223,22 @@ namespace Mapsui.Rendering.Skia
             var u1 = float.NegativeInfinity;
             var u2 = float.PositiveInfinity;
 
+            // Up to now both points are inside the clipping rectangle
             intersectionPoint1 = point1;
             intersectionPoint2 = point2;
 
+            // Check, if points are complete outside
             for (int i = 0; i < 4; i++)
             {
                 if (p[i] == 0)
                 {
+                    // Line is parallel to one side
                     if (q[i] < 0)
                         return Intersection.CompleteOutside;
                 }
                 else
                 {
+                    // Calculate intersection points
                     var t = q[i] / p[i];
                     if (p[i] < 0 && u1 < t)
                         u1 = t;
@@ -209,14 +247,17 @@ namespace Mapsui.Rendering.Skia
                 }
             }
 
+            // Are both points outside and don't intersect?
             if (u1 > u2)
                 return Intersection.CompleteOutside;
 
+            // Are both points inside and don't intersect?
             if (u1 < 0 && u2 > 1)
             {
                 return Intersection.CompleteInside;
             }
 
+            // Are both points outside, but intersect on both sides?
             if (u1 > 0 && u2 < 1)
             {
                 intersectionPoint1.X = point1.X + u1 * vx;
@@ -227,6 +268,7 @@ namespace Mapsui.Rendering.Skia
                 return Intersection.Both;
             }
 
+            // Is the first point outside and the second point inside?
             if (u1 > 0 && u1 < 1)
             {
                 intersectionPoint1.X = point1.X + u1 * vx;
@@ -235,6 +277,7 @@ namespace Mapsui.Rendering.Skia
                 return Intersection.SecondInside;
             }
 
+            // Is the first point inside and the second point outside?
             if (u2 > 0 && u2 < 1)
             {
                 intersectionPoint2.X = point1.X + u2 * vx;
@@ -247,6 +290,9 @@ namespace Mapsui.Rendering.Skia
         }
     }
 
+    /// <summary>
+    /// Type of intersection
+    /// </summary>
     public enum Intersection
     {
         CompleteInside,
