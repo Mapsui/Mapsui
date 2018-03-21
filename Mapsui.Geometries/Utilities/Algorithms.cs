@@ -152,7 +152,7 @@ namespace Mapsui.Geometries.Utilities
             return disc > 0.0;
         }
 
-        public static bool PointInPolygon(List<Point> ring, Point point)
+        public static bool PointInPolygon(IList<Point> ring, Point point)
         {
             // taken from: http://stackoverflow.com/a/2922778/85325
             var result = false;
@@ -167,7 +167,7 @@ namespace Mapsui.Geometries.Utilities
             return result;
         }
 
-        public static double DistanceToLine(Point point, List<Point> points)
+        public static double DistanceToLine(Point point, IList<Point> points)
         {
             var minDist = Double.MaxValue;
 
