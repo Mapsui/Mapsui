@@ -48,7 +48,7 @@ namespace Mapsui.UI.Wpf
         private double _toResolution = double.NaN;
         private bool _hasBeenManipulated;
         private double _innerRotation;
-
+        
         public MapControl()
         {
             _scale = 1; // Scale is always 1 in WPF
@@ -65,7 +65,7 @@ namespace Mapsui.UI.Wpf
             Loaded += MapControlLoaded;
             MouseLeftButtonDown += MapControlMouseLeftButtonDown;
             MouseLeftButtonUp += MapControlMouseLeftButtonUp;
-
+            
             TouchUp += MapControlTouchUp;
 
             MouseMove += MapControlMouseMove;
@@ -765,9 +765,9 @@ namespace Mapsui.UI.Wpf
             RenderingWeakEventManager.RemoveHandler(CompositionTargetRendering);
         }
 
-        public MapInfo GetMapInfo(Geometries.Point screenPosition)
+        public MapInfo GetMapInfo(Geometries.Point screenPosition, int margin = 0)
         {
-            return InfoHelper.GetMapInfo(Map.Viewport, screenPosition, _scale, Map.InfoLayers, Renderer.SymbolCache);
+            return InfoHelper.GetMapInfo(Map.Viewport, screenPosition, _scale, Map.InfoLayers, Renderer.SymbolCache, margin);
         }
     }
 }

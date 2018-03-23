@@ -12,16 +12,27 @@ namespace Mapsui.UI
 {
     public static class InfoHelper
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="viewport"></param>
+        /// <param name="screenPosition"></param>
+        /// <param name="scale"></param>
+        /// <param name="layers"></param>
+        /// <param name="symbolCache"></param>
+        /// <param name="margin">Margin of error in pixels. If the distance between screen position and geometry 
+        /// is smaller than the margin it is seen as a hit.</param>
+        /// <returns></returns>
         public static MapInfo GetMapInfo(IViewport viewport, Point screenPosition,
-            float scale, IEnumerable<ILayer> layers, ISymbolCache symbolCache)
+            float scale, IEnumerable<ILayer> layers, ISymbolCache symbolCache, int margin = 0)
         {
             var worldPosition = viewport.ScreenToWorld(
                 new Point(screenPosition.X / scale, screenPosition.Y / scale));
-            return GetMapInfo(layers, worldPosition, screenPosition, viewport.Resolution, symbolCache);
+            return GetMapInfo(layers, worldPosition, screenPosition, viewport.Resolution, symbolCache, margin);
         }
 
         private static MapInfo GetMapInfo(IEnumerable<ILayer> layers, Point worldPosition,
-            Point screenPosition, double resolution, ISymbolCache symbolCache)
+            Point screenPosition, double resolution, ISymbolCache symbolCache, int margin = 0)
         {
             var reversedLayer = layers.Reverse();
             foreach (var layer in reversedLayer)
@@ -32,8 +43,8 @@ namespace Mapsui.UI
 
                 var features = layer.GetFeaturesInView(layer.Envelope, resolution);
 
-                var feature = features
-                    .LastOrDefault(f => IsTouchingTakingIntoAccountSymbolStyles(worldPosition, f, layer.Style, resolution, symbolCache));
+                var feature = features.LastOrDefault(f => 
+                    IsTouchingTakingIntoAccountSymbolStyles(worldPosition, f, layer.Style, resolution, symbolCache, margin));
 
                 if (feature != null)
                 {
@@ -55,12 +66,14 @@ namespace Mapsui.UI
             };
         }
 
-        private static bool IsTouchingTakingIntoAccountSymbolStyles(
-            Point point, IFeature feature, IStyle layerStyle, double resolution, ISymbolCache symbolCache)
+        private static bool IsTouchingTakingIntoAccountSymbolStyles(Point point, IFeature feature, IStyle layerStyle, 
+            double resolution, ISymbolCache symbolCache, int margin = 0)
         {
             var styles = new List<IStyle>();
             styles.AddRange(ToCollection(layerStyle));
             styles.AddRange(feature.Styles);
+
+            var marginInWorldUnits = margin * resolution;
 
             if (feature.Geometry is Point)
             {
@@ -89,7 +102,7 @@ namespace Mapsui.UI
                                 size.Height * symbolStyle.SymbolOffset.Y * factor);
                         else
                             box.Offset(symbolStyle.SymbolOffset.X * factor, symbolStyle.SymbolOffset.Y * factor);
-                        if (box.Contains(point)) return true;
+                        if (box.Distance(point) <= marginInWorldUnits) return true;
                     }
                     else if (localStyle is VectorStyle)
                     {
@@ -98,7 +111,7 @@ namespace Mapsui.UI
 
                         var box = feature.Geometry.GetBoundingBox();
                         box = box.Grow(marginX, marginY);
-                        if (box.Contains(point)) return true;
+                        if (box.Distance(point) <= marginInWorldUnits) return true;
                     }
                     else
                     {
@@ -117,9 +130,9 @@ namespace Mapsui.UI
 
                     if (localStyle is VectorStyle symbolStyle)
                     {
-                        var screenDistance = symbolStyle.Line.Width * resolution * 0.5;
+                        var distanceInWorldUnits = symbolStyle.Line.Width * resolution * 0.5;
 
-                        if (screenDistance > feature.Geometry.Distance(point)) return true;
+                        if (feature.Geometry.Distance(point) <= distanceInWorldUnits + marginInWorldUnits) return true;
                     }
                     else
                     {
@@ -128,7 +141,11 @@ namespace Mapsui.UI
 
                 }
             }
-            return feature.Geometry.Contains(point);
+            else
+            {
+                return feature.Geometry.Distance(point) <= marginInWorldUnits;
+            }
+            return false;
         }
 
         private static IStyle HandleThemeStyle(IFeature feature, IStyle style)
