@@ -180,5 +180,30 @@ namespace Mapsui.Geometries.Utilities
 
             return minDist;
         }
+
+        /// <summary>
+        /// Returns the shortest distance to a line and also the index of the segment 
+        /// with that shortest distance. Segments count from zero to vertex count - 1.
+        /// </summary>
+        /// <param name="point"></param>
+        /// <param name="points"></param>
+        /// <returns></returns>
+        public static (double Distance, int Segment ) GetDistanceAndSegmentIndex(Point point, IList<Point> points)
+        {
+            var minDist = Double.MaxValue;
+            int segment = 0;
+
+            for (var i = 0; i < points.Count - 1; i++)
+            {
+                var dist = CGAlgorithms.DistancePointLine(point, points[i], points[i + 1]);
+                if (dist < minDist)
+                {
+                    minDist = dist;
+                    segment = i;
+                }
+            }
+
+            return (minDist, segment);
+        }
     }
 }
