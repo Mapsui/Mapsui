@@ -12,7 +12,7 @@ namespace Mapsui.Projection
 
         public static IEnumerable<Point> GetCornerVertices(this BoundingBox boundingBox)
         {
-            return new[] { boundingBox.BottomLeft, boundingBox.BottomRight, boundingBox.TopRight, boundingBox.TopLeft };
+            return new[] { boundingBox.BottomLeft, boundingBox.TopLeft, boundingBox.TopRight, boundingBox.BottomRight};
         }
     }
 }
