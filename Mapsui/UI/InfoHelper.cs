@@ -130,9 +130,9 @@ namespace Mapsui.UI
 
                     if (localStyle is VectorStyle symbolStyle)
                     {
-                        var distanceInWorldUnits = symbolStyle.Line.Width * resolution * 0.5;
+                        var lineWidthInWorldUnits = symbolStyle.Line.Width * resolution * 0.5;
 
-                        if (feature.Geometry.Distance(point) <= distanceInWorldUnits + marginInWorldUnits) return true;
+                        if (feature.Geometry.Distance(point) <= lineWidthInWorldUnits + marginInWorldUnits) return true;
                     }
                     else
                     {
