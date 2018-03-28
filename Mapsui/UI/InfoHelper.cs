@@ -53,7 +53,8 @@ namespace Mapsui.UI
                         Feature = feature,
                         Layer = layer,
                         WorldPosition = worldPosition,
-                        ScreenPosition = screenPosition
+                        ScreenPosition = screenPosition,
+                        Resolution = resolution
                     };
                 }
             }

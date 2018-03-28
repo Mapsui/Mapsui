@@ -22,5 +22,12 @@ namespace Mapsui.UI
         /// Screen position of the place the user touched
         /// </summary>
         public Point ScreenPosition { get; set; }
+
+        /// <summary>
+        /// The resolution at which the info was retrieved. This can
+        /// be useful to calculate screen distances, which are needed
+        /// for editing functionality.
+        /// </summary>
+        public double Resolution { get; set; }
     }
 }
