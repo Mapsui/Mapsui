@@ -125,6 +125,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\Images\Original\bitmap_atlas.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Images\Original\bitmap_symbol.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

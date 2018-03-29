@@ -38,6 +38,7 @@ namespace Mapsui.Samples.Common
                 ["ScaleBar"] = ScaleBarSample.CreateMap,
                 ["OpacityStyle"] = OpacityStyleSample.CreateMap,
                 ["Svg"] = SvgSample.CreateMap,
+                ["Atlas"] = AtlasSample.CreateMap,
             };
         }
     }

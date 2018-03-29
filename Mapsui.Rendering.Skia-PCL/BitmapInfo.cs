@@ -1,24 +1,34 @@
-﻿using SkiaSharp;
-using SkiaSharp.Extended.Svg;
+﻿using Mapsui.Styles;
+using SkiaSharp;
 
 namespace Mapsui.Rendering.Skia
 {
-    // ReSharper disable once InconsistentNaming
+    public enum BitmapType
+    {
+        Bitmap,
+        Svg,
+        Atlas
+    }
+
     public class BitmapInfo
     {
-        private object image;
-        private bool isBitmap;
+        private object data;
+
+        public BitmapType Type { get; private set; }
 
         public SKImage Bitmap
         {
             get
             {
-                return (SKImage)image;
+                if (Type == BitmapType.Bitmap)
+                    return (SKImage) data;
+                else
+                    return null;
             }
             set
             {
-                image = value;
-                isBitmap = true;
+                data = value;
+                Type = BitmapType.Bitmap;
             }
         }
 
@@ -26,12 +36,31 @@ namespace Mapsui.Rendering.Skia
         {
             get
             {
-                return (SkiaSharp.Extended.Svg.SKSvg)image;
+                if (Type == BitmapType.Svg)
+                    return (SkiaSharp.Extended.Svg.SKSvg) data;
+                else
+                    return null;
             }
             set
             {
-                image = value;
-                isBitmap = false;
+                data = value;
+                Type = BitmapType.Svg;
+            }
+        }
+
+        public Atlas Atlas
+        {
+            get
+            {
+                if (Type == BitmapType.Atlas)
+                    return (Atlas)data;
+                else
+                    return null;
+            }
+            set
+            {
+                data = value;
+                Type = BitmapType.Atlas;
             }
         }
 
@@ -41,10 +70,17 @@ namespace Mapsui.Rendering.Skia
         {
             get
             {
-                if (isBitmap)
-                    return Bitmap.Width;
-                else
-                    return Svg.CanvasSize.Width;
+                switch (Type)
+                {
+                    case BitmapType.Bitmap:
+                        return Bitmap.Width;
+                    case BitmapType.Svg:
+                        return Svg.CanvasSize.Width;
+                    case BitmapType.Atlas:
+                        return ((Atlas) data).Width;
+                    default:
+                        return 0;
+                }
             }
         }
 
@@ -52,10 +88,17 @@ namespace Mapsui.Rendering.Skia
         {
             get
             {
-                if (isBitmap)
-                    return Bitmap.Height;
-                else
-                    return Svg.CanvasSize.Height;
+                switch (Type)
+                {
+                    case BitmapType.Bitmap:
+                        return Bitmap.Height;
+                    case BitmapType.Svg:
+                        return Svg.CanvasSize.Height;
+                    case BitmapType.Atlas:
+                        return ((Atlas) data).Height;
+                    default:
+                        return 0;
+                }
             }
         }
     }

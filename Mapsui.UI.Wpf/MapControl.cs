@@ -150,7 +150,6 @@ namespace Mapsui.UI.Wpf
                     RenderCanvas.Visibility = Visibility.Collapsed;
                     RenderElement.Visibility = Visibility.Visible;
                     Renderer = new Rendering.Skia.MapRenderer();
-                    _scale = GetSkiaScale();
                     Refresh();
                 }
                 else
@@ -158,7 +157,6 @@ namespace Mapsui.UI.Wpf
                     RenderElement.Visibility = Visibility.Collapsed;
                     RenderCanvas.Visibility = Visibility.Visible;
                     Renderer = new MapRenderer();
-                    _scale = 1; // Scale is always 1 in WPF
                     Refresh();
                 }
                 _renderMode = value;
@@ -380,6 +378,15 @@ namespace Mapsui.UI.Wpf
             _map.ViewChanged(true);
             OnViewChanged();
             Refresh();
+
+            if (RenderMode == RenderMode.Skia)
+            {
+                _scale = GetSkiaScale();
+            }
+            else
+            {
+                _scale = 1; // Scale is always 1 in WPF
+            }
         }
 
         private void UpdateSize()

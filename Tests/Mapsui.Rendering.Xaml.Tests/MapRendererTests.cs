@@ -48,6 +48,23 @@ namespace Mapsui.Rendering.Xaml.Tests
         }
 
         [Test]
+        public void RenderBitmapAtlas()
+        {
+            // arrange
+            var map = BitmapSample.CreateMap();
+            const string fileName = "bitmap_atlas.png";
+
+            // act
+            var bitmap = new MapRenderer().RenderToBitmapStream(map.Viewport, map.Layers, map.BackColor);
+
+            // aside
+            File.WriteToGeneratedFolder(fileName, bitmap);
+
+            // assert
+            Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
+        }
+
+        [Test]
         public void RenderRotatedBitmapSymbolWithOffset()
         {
             // arrange

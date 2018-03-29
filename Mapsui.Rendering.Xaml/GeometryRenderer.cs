@@ -63,7 +63,7 @@ namespace Mapsui.Rendering.Xaml
             }
             else
             {
-                BitmapImage bitmapImage = BitmapRegistry.Instance.Get(style.BitmapId).ToBitmapImage();
+                BitmapImage bitmapImage = ((System.IO.Stream)BitmapRegistry.Instance.Get(style.BitmapId)).ToBitmapImage();
 
                 path.Fill = new XamlMedia.ImageBrush { ImageSource = bitmapImage };
 
@@ -93,7 +93,7 @@ namespace Mapsui.Rendering.Xaml
             var rect = new XamlMedia.RectangleGeometry();
             if (style.BitmapId >= 0)
             {
-                var bitmapImage = BitmapRegistry.Instance.Get(style.BitmapId).ToBitmapImage();
+                var bitmapImage = ((Stream)BitmapRegistry.Instance.Get(style.BitmapId)).ToBitmapImage();
                 var width = bitmapImage.PixelWidth * style.SymbolScale;
                 var height = bitmapImage.PixelHeight * style.SymbolScale;
                 rect.Rect = new Rect(p.X - width * 0.5, p.Y - height * 0.5, width, height);

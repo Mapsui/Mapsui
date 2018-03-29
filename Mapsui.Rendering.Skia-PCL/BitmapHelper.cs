@@ -10,19 +10,34 @@ namespace Mapsui.Rendering.Skia
     {
         private static readonly SKPaint Paint = new SKPaint(); // Reuse for performance. Only for opacity
 
-        public static BitmapInfo LoadBitmap(Stream bitmapStream, bool isSvg = false)
+        public static BitmapInfo LoadBitmap(object bitmapStream)
         {
-            bitmapStream.Position = 0;
-            if (isSvg)
+            if (bitmapStream is Stream stream)
             {
-                var svg = new SkiaSharp.Extended.Svg.SKSvg();
-                svg.Load(bitmapStream);
+                byte[] buffer = new byte[4];
 
-                return new BitmapInfo { Svg = svg };
+                stream.Position = 0;
+                stream.Read(buffer, 0, 4);
+                stream.Position = 0;
+
+                if (System.Text.Encoding.UTF8.GetString(buffer, 0, 4).ToLower().Equals("<svg"))
+                {
+                    var svg = new SkiaSharp.Extended.Svg.SKSvg();
+                    svg.Load(stream);
+
+                    return new BitmapInfo {Svg = svg};
+                }
+
+                var image = SKImage.FromEncodedData(SKData.CreateCopy(stream.ToBytes()));
+                return new BitmapInfo {Bitmap = image};
             }
 
-            var image = SKImage.FromEncodedData(SKData.CreateCopy(bitmapStream.ToBytes()));
-            return new BitmapInfo { Bitmap = image };
+            if (bitmapStream is Atlas atlas)
+            {
+                return new BitmapInfo() {Atlas = atlas};
+            }
+
+            return null;
         }
 
         public static void RenderBitmap(SKCanvas canvas, SKImage bitmap, float x, float y, float orientation = 0,
