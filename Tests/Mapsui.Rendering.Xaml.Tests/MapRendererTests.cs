@@ -6,9 +6,6 @@ using Mapsui.Tests.Common.Maps;
 using NUnit.Framework;
 #if SKIA
 using Mapsui.Rendering.Skia;
-#elif MONOGAME
-using Mapsui.Rendering.MonoGame;
-using Mapsui.Rendering.MonoGame.Tests_W8;
 #endif
 
 namespace Mapsui.Rendering.Xaml.Tests

@@ -1,11 +1,10 @@
-﻿using System;
-using Mapsui.Geometries;
+﻿using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
 
 namespace Mapsui.UI
 {
-    public class InfoEventArgs : EventArgs
+    public class MapInfo
     {
         /// <summary>
         /// The layer to which the touched feature belongs
@@ -23,13 +22,12 @@ namespace Mapsui.UI
         /// Screen position of the place the user touched
         /// </summary>
         public Point ScreenPosition { get; set; }
+
         /// <summary>
-        /// Number of times the user tapped the location
+        /// The resolution at which the info was retrieved. This can
+        /// be useful to calculate screen distances, which are needed
+        /// for editing functionality.
         /// </summary>
-        public int NumTaps { get; set; }
-        /// <summary>
-        /// If the interaction was handled by the event subscriber
-        /// </summary>
-        public bool Handled { get; set; }
+        public double Resolution { get; set; }
     }
 }

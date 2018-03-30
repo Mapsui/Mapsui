@@ -32,10 +32,10 @@ namespace Mapsui.Samples.Uwp
             SampleSet.SelectionChanged += SampleSet_SelectionChanged;
         }
 
-        private void MapOnInfo(object sender, InfoEventArgs infoEventArgs)
+        private void MapOnInfo(object sender, MapInfoEventArgs args)
         {
-            if (infoEventArgs.Feature != null)
-                FeatureInfo.Text = $"Click Info:{Environment.NewLine}{infoEventArgs.Feature.ToDisplayText()}";
+            if (args.MapInfo.Feature != null)
+                FeatureInfo.Text = $"Click Info:{Environment.NewLine}{args.MapInfo.Feature.ToDisplayText()}";
         }
 
         private void FillComboBoxWithDemoSamples()

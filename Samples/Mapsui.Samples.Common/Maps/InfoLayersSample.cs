@@ -25,10 +25,10 @@ namespace Mapsui.Samples.Common.Maps
             map.Layers.Add(CreatePolygonLayer());
             map.Layers.Add(CreateLineLayer());
 
-            //map.InfoLayers.Add(map.Layers.First(l => l.Name == InfoLayerName));
+            map.InfoLayers.Add(map.Layers.First(l => l.Name == InfoLayerName));
             map.InfoLayers.Add(map.Layers.First(l => l.Name == PolygonLayerName));
             map.InfoLayers.Add(map.Layers.First(l => l.Name == LineLayerName));
-            //!!!map.HoverLayers.Add(map.Layers.First(l => l.Name == HoverLayerName));
+            map.HoverLayers.Add(map.Layers.First(l => l.Name == HoverLayerName));
 
             return map;
         }
