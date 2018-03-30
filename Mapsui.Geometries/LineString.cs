@@ -241,5 +241,23 @@ namespace Mapsui.Geometries
             if (lineString == null) return false;
             return Equals(lineString);
         }
+
+
+        /// <summary>
+        ///     Returns a list of line string segments
+        /// </summary>
+        /// <returns>List of LineString</returns>
+        public List<LineString> GetSegments()
+        {
+            List<LineString> segments = new List<LineString>();
+            for (int i = 0; i < this.Vertices.Count - 1; i++)
+            {
+                LineString tmp = new LineString();
+                tmp.Vertices.Add(Vertices[i]);
+                tmp.Vertices.Add(Vertices[i + 1]);
+                segments.Add(tmp);
+            }
+            return segments;
+        }
     }
 }
