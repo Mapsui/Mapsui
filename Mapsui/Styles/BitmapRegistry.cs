@@ -18,6 +18,14 @@ namespace Mapsui.Styles
             if (bitmapData == null) throw new ArgumentException(
                 "The bitmap data that is registered is null. Was the image loaded correctly?");
 
+            if (bitmapData is Atlas atlas)
+            {
+                if (atlas.BitmapId < 0 || !_register.ContainsKey(atlas.BitmapId))
+                {
+                    throw new ArgumentException("Atlas has no corresponding atlas bitmap.");
+                }
+            }
+
             var id = _counter;
             _counter++;
             _register[id] = bitmapData;
