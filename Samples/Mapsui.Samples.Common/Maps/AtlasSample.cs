@@ -35,7 +35,7 @@ namespace Mapsui.Samples.Common.Maps
             return new MemoryLayer
             {
                 Name = AtlasLayerName,
-                DataSource = CreateMemoryProviderWithDiverseSymbols(envelope, 400),
+                DataSource = CreateMemoryProviderWithDiverseSymbols(envelope, 1000),
                 Style = null
             };
         }

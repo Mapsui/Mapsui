@@ -50,14 +50,18 @@ namespace Mapsui.Rendering.Skia
             canvas.Save();
 
             canvas.Translate(x, y);
-            canvas.RotateDegrees(orientation, 0, 0); // todo: degrees or radians?
+            if (orientation != 0)
+                canvas.RotateDegrees(orientation, 0, 0); // todo: degrees or radians?
             canvas.Scale(scale, scale);
 
-            x = offsetX + DetermineHorizontalAlignmentCorrection(horizontalAlignment, bitmap.Width);
-            y = -offsetY + DetermineVerticalAlignmentCorrection(verticalAlignment, bitmap.Height);
+            var width = bitmap.Width;
+            var height = bitmap.Height;
 
-            var halfWidth = bitmap.Width/2;
-            var halfHeight = bitmap.Height/2;
+            x = offsetX + DetermineHorizontalAlignmentCorrection(horizontalAlignment, width);
+            y = -offsetY + DetermineVerticalAlignmentCorrection(verticalAlignment, height);
+
+            var halfWidth = width >> 1;
+            var halfHeight = height >> 1;
 
             var rect = new SKRect(x - halfWidth, y - halfHeight, x + halfWidth, y + halfHeight);
 
@@ -98,8 +102,8 @@ namespace Mapsui.Rendering.Skia
         private static int DetermineHorizontalAlignmentCorrection(
             LabelStyle.HorizontalAlignmentEnum horizontalAlignment, int width)
         {
-            if (horizontalAlignment == LabelStyle.HorizontalAlignmentEnum.Left) return width/2;
-            if (horizontalAlignment == LabelStyle.HorizontalAlignmentEnum.Right) return -width/2;
+            if (horizontalAlignment == LabelStyle.HorizontalAlignmentEnum.Left) return width >> 1;
+            if (horizontalAlignment == LabelStyle.HorizontalAlignmentEnum.Right) return -(width >> 1);
             return 0; // center
         }
 
@@ -114,8 +118,8 @@ namespace Mapsui.Rendering.Skia
         private static int DetermineVerticalAlignmentCorrection(
             LabelStyle.VerticalAlignmentEnum verticalAlignment, int height)
         {
-            if (verticalAlignment == LabelStyle.VerticalAlignmentEnum.Top) return -height/2;
-            if (verticalAlignment == LabelStyle.VerticalAlignmentEnum.Bottom) return height/2;
+            if (verticalAlignment == LabelStyle.VerticalAlignmentEnum.Top) return -(height >> 1);
+            if (verticalAlignment == LabelStyle.VerticalAlignmentEnum.Bottom) return height >> 1;
             return 0; // center
         }
 
@@ -148,11 +152,12 @@ namespace Mapsui.Rendering.Skia
             
         }
 
+        private static readonly SKPaint PaintBitmap = new SKPaint() {FilterQuality = SKFilterQuality.High};
+
         public static void RenderBitmap(SKCanvas canvas, SKImage bitmap, SKRect rect, float opacity = 1f)
         {
-            var color = new SKColor(255, 255, 255, (byte) (255*opacity));
-            var paint = new SKPaint {Color = color, FilterQuality = SKFilterQuality.High};
-            canvas.DrawImage(bitmap, rect, paint);
+            PaintBitmap.Color = opacity == 1 ? SKColors.White : new SKColor(255, 255, 255, (byte)(255 * opacity));
+            canvas.DrawImage(bitmap, rect, PaintBitmap);
         }
     }
 }
