@@ -9,6 +9,7 @@ namespace Mapsui.Rendering.Skia
     public static class BitmapHelper
     {
         private static readonly SKPaint Paint = new SKPaint(); // Reuse for performance. Only for opacity
+        private static readonly SKPaint QualityPaint = new SKPaint() { FilterQuality = SKFilterQuality.Low }; // Only for high/med/low quality resizing of tiles
 
         public static BitmapInfo LoadBitmap(Stream bitmapStream, bool isSvg = false)
         {
@@ -128,7 +129,7 @@ namespace Mapsui.Rendering.Skia
             }
             else
             {
-                canvas.DrawImage(bitmap, rect);
+                canvas.DrawImage(bitmap, rect, QualityPaint);
             }
             
         }
