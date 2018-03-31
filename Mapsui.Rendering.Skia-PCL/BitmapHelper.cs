@@ -116,21 +116,21 @@ namespace Mapsui.Rendering.Skia
         {
             // todo: Add some way to select one method or the other.
             // Method 1) Better for quality. Helps to compare to WPF
-            //var color = new SKColor(255, 255, 255, (byte)(255 * opacity));
+            //var color = new SKColor(255, 255, 255, (byte)(255 * layerOpacity));
             //var paint = new SKPaint { Color = color, FilterQuality = SKFilterQuality.High };
-            //canvas.DrawBitmap(bitmap, rect, paint);
+            //canvas.DrawImage(bitmap, rect, paint);
 
-            // Method 2) Better for performance:
-            if (Math.Abs(layerOpacity - 1) >  Utilities.Constants.Epsilon)
+            //// Method 2) Better for performance:
+            if (Math.Abs(layerOpacity - 1) > Utilities.Constants.Epsilon)
             {
-                Paint.Color = new SKColor(255, 255, 255, (byte) (255 * layerOpacity));
+                Paint.Color = new SKColor(255, 255, 255, (byte)(255 * layerOpacity));
                 canvas.DrawImage(bitmap, rect, Paint);
             }
             else
             {
                 canvas.DrawImage(bitmap, rect);
             }
-            
+
         }
 
         public static void RenderBitmap(SKCanvas canvas, SKImage bitmap, SKRect rect, float opacity = 1f)
