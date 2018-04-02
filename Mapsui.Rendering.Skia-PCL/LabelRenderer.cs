@@ -146,14 +146,22 @@ namespace Mapsui.Rendering.Skia
             }
         }
 
+        private static readonly Dictionary<string, SKTypeface> CacheTypeface = new Dictionary<string, SKTypeface>();
+
         private static SKPaint CreatePaint(LabelStyle style, float layerOpacity)
         {
+            if (!CacheTypeface.TryGetValue(style.Font.FontFamily, out SKTypeface typeface))
+            {
+                typeface = SKTypeface.FromFamilyName(style.Font.FontFamily);
+                CacheTypeface[style.Font.FontFamily] = typeface;
+            }
+
             return new SKPaint
             {
                 TextSize = (float) style.Font.Size,
                 IsAntialias = true,
                 Color = style.ForeColor.ToSkia(layerOpacity),
-                Typeface = SKTypeface.FromFamilyName(style.Font.FontFamily),
+                Typeface = typeface,
                 IsStroke = false,
                 FakeBoldText = false,
                 IsEmbeddedBitmapText = true
