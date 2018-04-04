@@ -182,14 +182,14 @@ namespace Mapsui.Rendering.Xaml.Tests
         {
             // The bitmaps in WPF can slightly differ from test to test. No idea why. So introduced proportion correct.
 
-            bitmapStream1.Position = 0;
-            bitmapStream2.Position = 0;
-
             long trueCount = 0;
             long falseCount = 0;
 
+            bitmapStream1.Position = 0;
+            bitmapStream2.Position = 0;
+
             var bitmap1 = SKBitmap.FromImage(SKImage.FromEncodedData(SKData.Create(bitmapStream1)));
-            var bitmap2 = SKBitmap.FromImage(SKImage.FromEncodedData(SKData.Create(bitmapStream1)));
+            var bitmap2 = SKBitmap.FromImage(SKImage.FromEncodedData(SKData.Create(bitmapStream2)));
 
             for (var x = 0; x < bitmap1.Width; x++)
             {
