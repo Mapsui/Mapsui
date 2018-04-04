@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Threading;
-using Mapsui.Styles;
 using Mapsui.Tests.Common.Maps;
 using NUnit.Framework;
 using SkiaSharp;
@@ -148,7 +147,7 @@ namespace Mapsui.Rendering.Xaml.Tests
             File.WriteToGeneratedFolder(fileName, bitmap);
 
             // assert
-            Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 2, 0.99));
+            Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
         }
 
         [Test]
@@ -165,7 +164,7 @@ namespace Mapsui.Rendering.Xaml.Tests
             File.WriteToGeneratedFolder(fileName, bitmap);
 
             // assert
-            Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.97));
+            Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
         }
 
         private static bool CompareColors(SKColor color1, SKColor color2, int allowedColorDistance)
