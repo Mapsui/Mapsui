@@ -19,10 +19,10 @@ namespace Mapsui.Rendering.Xaml.Tests
             // arrange
             var map = VectorStyleSample.CreateMap();
             const string fileName = "vector_symbol.png";
-            
+
             // act
             var bitmap = new MapRenderer().RenderToBitmapStream(map.Viewport, map.Layers, map.BackColor);
-            
+
             // aside
             File.WriteToGeneratedFolder(fileName, bitmap);
 
@@ -36,10 +36,10 @@ namespace Mapsui.Rendering.Xaml.Tests
             // arrange
             var map = BitmapSymbolSample.CreateMap();
             const string fileName = "points_with_symbolstyle.png";
-            
+
             // act
             var bitmap = new MapRenderer().RenderToBitmapStream(map.Viewport, map.Layers, map.BackColor);
-            
+
             // aside
             File.WriteToGeneratedFolder(fileName, bitmap);
 
@@ -59,7 +59,7 @@ namespace Mapsui.Rendering.Xaml.Tests
 
             // aside
             File.WriteToGeneratedFolder(fileName, bitmap);
-            
+
             // assert
             Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
         }
@@ -70,7 +70,7 @@ namespace Mapsui.Rendering.Xaml.Tests
             // arrange
             var map = SymbolTypesSample.CreateMap();
             const string fileName = "vector_symbol_symboltype.png";
-            
+
             // act
             var bitmap = new MapRenderer().RenderToBitmapStream(map.Viewport, map.Layers, map.BackColor);
 
@@ -87,7 +87,7 @@ namespace Mapsui.Rendering.Xaml.Tests
             // arrange
             var map = PointInWorldUnits.CreateMap();
             const string fileName = "vector_symbol_unittype.png";
-            
+
             // act
             var bitmap = new MapRenderer().RenderToBitmapStream(map.Viewport, map.Layers, map.BackColor);
 
@@ -121,7 +121,7 @@ namespace Mapsui.Rendering.Xaml.Tests
             // arrange
             var map = LineSample.CreateMap();
             const string fileName = "line.png";
-            
+
             // act
             var bitmap = new MapRenderer().RenderToBitmapStream(map.Viewport, map.Layers, map.BackColor);
 
@@ -168,6 +168,7 @@ namespace Mapsui.Rendering.Xaml.Tests
 
         private static bool CompareColors(Color color1, Color color2, int allowedColorDistance)
         {
+            if (color1.A == 0 && color2.A == 0) return true; // If both are transparent all colors are ignored
             if (Math.Abs(color1.A - color2.A) > allowedColorDistance) return false;
             if (Math.Abs(color1.R - color2.R) > allowedColorDistance) return false;
             if (Math.Abs(color1.G - color2.G) > allowedColorDistance) return false;
@@ -180,7 +181,7 @@ namespace Mapsui.Rendering.Xaml.Tests
             // The bitmaps in WPF can slightly differ from test to test. No idea why. So introduced proportion correct.
 
             // use this if you want to know where the unit test framework writes the new files.
-             var path = System.AppDomain.CurrentDomain.BaseDirectory;
+            var path = System.AppDomain.CurrentDomain.BaseDirectory;
 
             bitmapStream1.Position = 0;
             bitmapStream2.Position = 0;
@@ -209,7 +210,7 @@ namespace Mapsui.Rendering.Xaml.Tests
                 }
             }
 
-            var propertion = (double) (trueCount - falseCount) / trueCount;
+            var propertion = (double)(trueCount - falseCount) / trueCount;
             return proportionCorrect <= propertion;
         }
     }
