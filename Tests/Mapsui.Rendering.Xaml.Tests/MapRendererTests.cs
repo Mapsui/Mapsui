@@ -1,9 +1,11 @@
 ﻿using System;
-using System.Drawing;
 using System.IO;
 using System.Threading;
+using Mapsui.Styles;
 using Mapsui.Tests.Common.Maps;
 using NUnit.Framework;
+using SkiaSharp;
+
 #if SKIA
 using Mapsui.Rendering.Skia;
 #endif
@@ -166,13 +168,13 @@ namespace Mapsui.Rendering.Xaml.Tests
             Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.97));
         }
 
-        private static bool CompareColors(Color color1, Color color2, int allowedColorDistance)
+        private static bool CompareColors(SKColor color1, SKColor color2, int allowedColorDistance)
         {
-            if (color1.A == 0 && color2.A == 0) return true; // If both are transparent all colors are ignored
-            if (Math.Abs(color1.A - color2.A) > allowedColorDistance) return false;
-            if (Math.Abs(color1.R - color2.R) > allowedColorDistance) return false;
-            if (Math.Abs(color1.G - color2.G) > allowedColorDistance) return false;
-            if (Math.Abs(color1.B - color2.B) > allowedColorDistance) return false;
+            if (color1.Alpha == 0 && color2.Alpha == 0) return true; // If both are transparent all colors are ignored
+            if (Math.Abs(color1.Alpha - color2.Alpha) > allowedColorDistance) return false;
+            if (Math.Abs(color1.Red - color2.Red) > allowedColorDistance) return false;
+            if (Math.Abs(color1.Green- color2.Green) > allowedColorDistance) return false;
+            if (Math.Abs(color1.Blue - color2.Blue) > allowedColorDistance) return false;
             return true;
         }
 
@@ -180,17 +182,14 @@ namespace Mapsui.Rendering.Xaml.Tests
         {
             // The bitmaps in WPF can slightly differ from test to test. No idea why. So introduced proportion correct.
 
-            // use this if you want to know where the unit test framework writes the new files.
-            var path = System.AppDomain.CurrentDomain.BaseDirectory;
-
             bitmapStream1.Position = 0;
             bitmapStream2.Position = 0;
 
             long trueCount = 0;
             long falseCount = 0;
 
-            var bitmap1 = (Bitmap)Image.FromStream(bitmapStream1);
-            var bitmap2 = (Bitmap)Image.FromStream(bitmapStream2);
+            var bitmap1 = SKBitmap.FromImage(SKImage.FromEncodedData(SKData.Create(bitmapStream1)));
+            var bitmap2 = SKBitmap.FromImage(SKImage.FromEncodedData(SKData.Create(bitmapStream1)));
 
             for (var x = 0; x < bitmap1.Width; x++)
             {
