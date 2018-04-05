@@ -25,7 +25,13 @@ namespace Mapsui.Samples.Common.Maps
                 CreateFeatureWithBottomAlignedStyle(),
                 CreateFeatureWithColors(),
                 CreatePolygonWithLabel(),
-                CreateFeatureWithHalo()
+                CreateFeatureWithHalo(),
+                CreateFeatureWithTailTruncation(),
+                CreateFeatureWithMiddleTruncation(),
+                CreateFeatureWithHeadTruncation(),
+                CreateFeatureWithWordWrapLeft(),
+                CreateFeatureWithWordWrapCenter(),
+                CreateFeatureWithWordWrapRight(),
             };
 
             var memoryProvider = new MemoryProvider(features);
@@ -97,6 +103,103 @@ namespace Mapsui.Samples.Common.Maps
             };
         }
 
+        private static IFeature CreateFeatureWithTailTruncation()
+        {
+            var featureWithColors = new Feature { Geometry = new Point(8000000, 2000000) };
+            featureWithColors.Styles.Add(new LabelStyle
+            {
+                Text = "Long line break mode test",
+                BackColor = new Brush(Color.Transparent),
+                ForeColor = Color.White,
+                Halo = new Pen(Color.Black, 2),
+                HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Left,
+                MaxWidth = 10,
+                WordWrap = LabelStyle.LineBreakMode.TailTruncation
+            });
+            return featureWithColors;
+        }
+
+        private static IFeature CreateFeatureWithHeadTruncation()
+        {
+            var featureWithColors = new Feature { Geometry = new Point(-8000000, 2000000) };
+            featureWithColors.Styles.Add(new LabelStyle
+            {
+                Text = "Long line break mode test",
+                BackColor = new Brush(Color.Transparent),
+                ForeColor = Color.White,
+                Halo = new Pen(Color.Black, 2),
+                HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Right,
+                MaxWidth = 10,
+                WordWrap = LabelStyle.LineBreakMode.HeadTruncation
+            });
+            return featureWithColors;
+        }
+
+        private static IFeature CreateFeatureWithMiddleTruncation()
+        {
+            var featureWithColors = new Feature { Geometry = new Point(0, 2000000) };
+            featureWithColors.Styles.Add(new LabelStyle
+            {
+                Text = "Long line break mode test",
+                BackColor = new Brush(Color.Transparent),
+                ForeColor = Color.White,
+                Halo = new Pen(Color.Black, 2),
+                HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center,
+                MaxWidth = 10,
+                WordWrap = LabelStyle.LineBreakMode.MiddleTruncation
+            });
+            return featureWithColors;
+        }
+
+        private static IFeature CreateFeatureWithWordWrapLeft()
+        {
+            var featureWithColors = new Feature { Geometry = new Point(-8000000, 6000000) };
+            featureWithColors.Styles.Add(new LabelStyle
+            {
+                Text = "Long line break mode test",
+                BackColor = new Brush(Color.Gray),
+                ForeColor = Color.White,
+                Halo = new Pen(Color.Black, 2),
+                MaxWidth = 10,
+                WordWrap = LabelStyle.LineBreakMode.WordWrap,
+                HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Left,
+                VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Top,
+            });
+            return featureWithColors;
+        }
+
+        private static IFeature CreateFeatureWithWordWrapCenter()
+        {
+            var featureWithColors = new Feature { Geometry = new Point(0, 6000000) };
+            featureWithColors.Styles.Add(new LabelStyle
+            {
+                Text = "Long line break mode test",
+                BackColor = new Brush(Color.Transparent),
+                ForeColor = Color.White,
+                Halo = new Pen(Color.Black, 2),
+                MaxWidth = 10,
+                WordWrap = LabelStyle.LineBreakMode.WordWrap,
+                HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center,
+                VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Center,
+            });
+            return featureWithColors;
+        }
+
+        private static IFeature CreateFeatureWithWordWrapRight()
+        {
+            var featureWithColors = new Feature { Geometry = new Point(8000000, 6000000) };
+            featureWithColors.Styles.Add(new LabelStyle
+            {
+                Text = "Long line break mode test",
+                BackColor = new Brush(Color.Gray),
+                ForeColor = Color.White,
+                MaxWidth = 12,
+                WordWrap = LabelStyle.LineBreakMode.WordWrap,
+                HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Right,
+                VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Bottom,
+            });
+            return featureWithColors;
+        }
         private static IFeature CreateFeatureWithHalo()
         {
             var featureWithColors = new Feature { Geometry = new Point(0, -12000000) };

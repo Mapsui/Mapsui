@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using Mapsui.Providers;
 using Mapsui.Styles;
 using SkiaSharp;
@@ -74,24 +76,93 @@ namespace Mapsui.Rendering.Skia
 
             var rect = new SKRect();
 
+            Line[] lines = null;
+
+            float emWidth = 0;
+            float emHeight = 0;
+
+            if (style.MaxWidth > 0)
+            {
+                paint.MeasureText("M", ref rect);
+                emWidth = rect.Width;
+                emHeight = paint.FontSpacing;
+            }
+
             paint.MeasureText(text, ref rect);
+
+            var baseline = -rect.Top;
+
+            var drawRect = new SKRect(0, 0, rect.Right - rect.Left, rect.Bottom - rect.Top);
+
+            if (style.MaxWidth > 0 && style.WordWrap != LabelStyle.LineBreakMode.NoWrap && drawRect.Width > style.MaxWidth * emWidth)
+            {
+                float maxWidth = (float)style.MaxWidth * emWidth;
+
+                // Text is to long, so shorten or wrap it
+                if (style.WordWrap == LabelStyle.LineBreakMode.WordWrap)
+                {
+                    lines = SplitLines(text, paint, maxWidth);
+                    var width = 0f;
+                    for (var i = 0; i < lines.Length; i++)
+                    {
+                        lines[i].Baseline = baseline + (float)(style.LineHeight * emHeight * i);
+                        width = Math.Max(lines[i].Width, width);
+                    }
+
+                    drawRect = new SKRect(0, 0, width, (float)(drawRect.Height + style.LineHeight * emHeight * (lines.Length - 1)));
+                }
+
+                if (style.WordWrap == LabelStyle.LineBreakMode.HeadTruncation)
+                {
+                    var result = text.Substring(text.Length - (int) style.MaxWidth - 2);
+                    while (result.Length > 1 && paint.MeasureText("..." + result) > maxWidth)
+                        result = result.Substring(1);
+                    text = "..." + result;
+                    paint.MeasureText(text, ref rect);
+                    drawRect = new SKRect(0, 0, rect.Right - rect.Left, rect.Bottom - rect.Top);
+                }
+
+                if (style.WordWrap == LabelStyle.LineBreakMode.TailTruncation)
+                {
+                    var result = text.Substring(0, (int)style.MaxWidth + 2);
+                    while (result.Length > 1 && paint.MeasureText(result + "...") > maxWidth)
+                        result = result.Substring(0, result.Length - 1);
+                    text = result + "...";
+                    paint.MeasureText(text, ref rect);
+                    drawRect = new SKRect(0, 0, rect.Right - rect.Left, rect.Bottom - rect.Top);
+                }
+
+                if (style.WordWrap == LabelStyle.LineBreakMode.MiddleTruncation)
+                {
+                    var result1 = text.Substring(0, (int)(style.MaxWidth/2) + 1);
+                    var result2 = text.Substring(text.Length - (int)(style.MaxWidth/2) - 1);
+                    while (result1.Length > 1 && result2.Length > 1 &&
+                           paint.MeasureText(result1 + "..." + result2) > maxWidth)
+                    {
+                        result1 = result1.Substring(0, result1.Length - 1);
+                        result2 = result2.Substring(1);
+                    }
+
+                    text = result1 + "..." + result2;
+                    paint.MeasureText(text, ref rect);
+                    drawRect = new SKRect(0, 0, rect.Right - rect.Left, rect.Bottom - rect.Top);
+                }
+            }
 
             var horizontalAlign = CalcHorizontalAlignment(style.HorizontalAlignment);
             var verticalAlign = CalcVerticalAlignment(style.VerticalAlignment);
                         
-            var backRectXOffset = rect.Left;
-            var backRectYOffset = rect.Bottom;
-            var offsetX = style.Offset.IsRelative ? rect.Width * style.Offset.X : style.Offset.X;
-            var offsetY = style.Offset.IsRelative ? rect.Height * style.Offset.Y : style.Offset.Y;
+            var offsetX = style.Offset.IsRelative ? drawRect.Width * style.Offset.X : style.Offset.X;
+            var offsetY = style.Offset.IsRelative ? drawRect.Height * style.Offset.Y : style.Offset.Y;
 
-            rect.Offset(
-                x - rect.Width * horizontalAlign + (float)offsetX,
-                y + rect.Height * verticalAlign + (float)offsetY);
+            drawRect.Offset(
+                x - drawRect.Width * horizontalAlign + (float)offsetX,
+                y - drawRect.Height * verticalAlign + (float)offsetY);
 
-            var backRect = rect; // copy
-            rect.Offset(-backRectXOffset, -backRectYOffset); // correct for text specific offset returned paint.Measure
+            var backRect = drawRect; // copy
 
             backRect.Inflate(3, 3);
+
             DrawBackground(style, backRect, target, layerOpacity);
 
             if (style.Halo != null)
@@ -108,10 +179,38 @@ namespace Mapsui.Rendering.Skia
 
                 haloPaint.StrokeWidth = (float)style.Halo.Width * 2;
 
-                target.DrawText(text, rect.Left, rect.Bottom, haloPaint);
+                if (lines != null)
+                {
+                    var left = drawRect.Left;
+                    foreach (var line in lines)
+                    {
+                        if (style.HorizontalAlignment == LabelStyle.HorizontalAlignmentEnum.Center)
+                            target.DrawText(line.Value, (float)(left + (drawRect.Width - line.Width) * 0.5), drawRect.Top + line.Baseline, haloPaint);
+                        else if (style.HorizontalAlignment == LabelStyle.HorizontalAlignmentEnum.Right)
+                            target.DrawText(line.Value, left + drawRect.Width - line.Width, drawRect.Top + line.Baseline, haloPaint);
+                        else
+                            target.DrawText(line.Value, left, drawRect.Top + line.Baseline, haloPaint);
+                    }
+                }
+                else
+                    target.DrawText(text, drawRect.Left, drawRect.Top + baseline, haloPaint);
             }
 
-            target.DrawText(text, rect.Left, rect.Bottom, paint);
+            if (lines != null)
+            {
+                var left = drawRect.Left;
+                foreach (var line in lines)
+                {
+                    if (style.HorizontalAlignment == LabelStyle.HorizontalAlignmentEnum.Center)
+                        target.DrawText(line.Value, (float)(left + (drawRect.Width - line.Width) * 0.5), drawRect.Top + line.Baseline, paint);
+                    else if (style.HorizontalAlignment == LabelStyle.HorizontalAlignmentEnum.Right)
+                        target.DrawText(line.Value, left + drawRect.Width - line.Width, drawRect.Top + line.Baseline, paint);
+                    else
+                        target.DrawText(line.Value, left, drawRect.Top + line.Baseline, paint);
+                }
+            }
+            else
+                target.DrawText(text, drawRect.Left, drawRect.Top + baseline, paint);
         }
 
         private static float CalcHorizontalAlignment(LabelStyle.HorizontalAlignmentEnum horizontalAligment)
@@ -166,6 +265,51 @@ namespace Mapsui.Rendering.Skia
                 FakeBoldText = false,
                 IsEmbeddedBitmapText = true
             };
+        }
+
+        private class Line
+        {
+            public string Value { get; set; }
+            public float Width { get; set; }
+            public float Baseline { get; set; }
+        }
+
+        private static Line[] SplitLines(string text, SKPaint paint, float maxWidth)
+        {
+            var spaceWidth = paint.MeasureText(" ");
+            var lines = text.Split('\n');
+
+            return lines.SelectMany((line) =>
+            {
+                var result = new List<Line>();
+
+                var words = line.Split(new[] { " " }, StringSplitOptions.None);
+
+                var lineResult = new StringBuilder();
+                float width = 0;
+                foreach (var word in words)
+                {
+                    var wordWidth = paint.MeasureText(word);
+                    var wordWithSpaceWidth = wordWidth + spaceWidth;
+                    var wordWithSpace = word + " ";
+
+                    if (width + wordWidth > maxWidth)
+                    {
+                        result.Add(new Line() { Value = lineResult.ToString(), Width = width });
+                        lineResult = new StringBuilder(wordWithSpace);
+                        width = wordWithSpaceWidth;
+                    }
+                    else
+                    {
+                        lineResult.Append(wordWithSpace);
+                        width += wordWithSpaceWidth;
+                    }
+                }
+
+                result.Add(new Line() { Value = lineResult.ToString(), Width = width });
+
+                return result.ToArray();
+            }).ToArray();
         }
     }
 }
