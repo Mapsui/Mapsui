@@ -85,7 +85,21 @@ namespace Mapsui.Tests.Common.Maps
                             LabelMethod = f => null
                         }
                     }
-                }
+                },
+                new Feature
+                {
+                    Geometry = new Point(100, 100),
+                    Styles = new[]
+                    {
+                        new LabelStyle
+                        {
+                            Text = "Multiline\nText",
+                            BackColor = new Brush(Color.Gray),
+                            ForeColor = Color.Black,
+                            HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center,
+                        }
+                    }
+                },
             };
             var provider = new MemoryProvider(features);
             return provider;
