@@ -1,4 +1,5 @@
-﻿using Mapsui.Geometries;
+﻿using System;
+using Mapsui.Geometries;
 using Mapsui.Providers;
 using Mapsui.Styles;
 using SkiaSharp;
@@ -44,7 +45,11 @@ namespace Mapsui.Rendering.Skia
                     fillColor = vectorStyle.Fill?.Color;
                 }
 
-                using (var path = ToSkia(viewport, polygon))
+                var priorMatrix = canvas.TotalMatrix;
+                
+                canvas.SetMatrix(viewport.ToSKMatrix());
+
+                using (var path = ToSkia(polygon))
                 {
                     using (var paint = new SKPaint())
                     {
@@ -53,7 +58,7 @@ namespace Mapsui.Rendering.Skia
                         // Is there a FillStyle?
                         if (vectorStyle.Fill?.FillStyle == FillStyle.Solid)
                         {
-                            paint.StrokeWidth = lineWidth;
+                            paint.StrokeWidth = lineWidth * (float)viewport.Resolution;
                             paint.Style = SKPaintStyle.Fill;
                             paint.Color = fillColor.ToSkia(opacity);
                             canvas.DrawPath(path, paint);
@@ -115,9 +120,9 @@ namespace Mapsui.Rendering.Skia
                                 case FillStyle.BitmapRotated:
                                     paint.Style = SKPaintStyle.Fill;
                                     SKImage bitmap = symbolCache.GetOrCreate(vectorStyle.Fill.BitmapId).Bitmap;
-                                    paint.Shader = bitmap.ToShader(SKShaderTileMode.Repeat, 
-                                        SKShaderTileMode.Repeat, 
-                                        SKMatrix.MakeRotation((float)(viewport.Rotation * System.Math.PI / 180.0f), bitmap.Width >> 1, bitmap.Height >> 1));
+                                    paint.Shader = bitmap.ToShader(SKShaderTileMode.Repeat,
+                                        SKShaderTileMode.Repeat,
+                                        SKMatrix.MakeRotation((float)(viewport.Rotation * Math.PI / 180.0f), bitmap.Width >> 1, bitmap.Height >> 1));
                                     break;
                             }
 
@@ -139,7 +144,7 @@ namespace Mapsui.Rendering.Skia
                     {
                         paint.IsAntialias = true;
                         paint.Style = SKPaintStyle.Stroke;
-                        paint.StrokeWidth = lineWidth;
+                        paint.StrokeWidth = lineWidth * (float)viewport.Resolution;
                         paint.Color = lineColor.ToSkia(opacity);
                         paint.StrokeCap = strokeCap.ToSkia();
                         paint.StrokeJoin = strokeJoin.ToSkia();
@@ -149,36 +154,35 @@ namespace Mapsui.Rendering.Skia
                         canvas.DrawPath(path, paint);
                     }
                 }
+
+                canvas.SetMatrix(priorMatrix);
             }
         }
 
-        private static SKPath ToSkia(IViewport viewport, Polygon polygon)
+        private static SKPath ToSkia(Polygon polygon)
         {
             var vertices = polygon.ExteriorRing.Vertices;
+
             var path = new SKPath();
             {
-                // todo: use transform matrix
-                var first = viewport.WorldToScreen(vertices[0].X, vertices[0].Y);
-                path.MoveTo((float)first.X, (float) first.Y);
+                path.MoveTo((float)vertices[0].X, (float)vertices[0].Y);
 
                 for (var i = 1; i < vertices.Count; i++)
                 {
-                   var point = viewport.WorldToScreen(vertices[i].X, vertices[i].Y);
-                    path.LineTo((float) point.X, (float) point.Y);
+                    path.LineTo((float)vertices[i].X, (float)vertices[i].Y);
                 }
                 path.Close();
+
                 foreach (var interiorRing in polygon.InteriorRings)
                 {
                     // note: For Skia inner rings need to be clockwise and outer rings
                     // need to be counter clockwise (if this is the other way around it also
                     // seems to work)
                     // this is not a requirement of the OGC polygon.
-                    var firstInner = viewport.WorldToScreen(interiorRing.Vertices[0].X, interiorRing.Vertices[0].Y);
-                    path.MoveTo((float)firstInner.X, (float)firstInner.Y);
+                    path.MoveTo((float)interiorRing.Vertices[0].X, (float)interiorRing.Vertices[0].Y);
                     for (var i = 1; i < interiorRing.Vertices.Count; i++)
                     {
-                        var point = viewport.WorldToScreen(interiorRing.Vertices[i].X, interiorRing.Vertices[i].Y);
-                        path.LineTo((float)point.X, (float)point.Y);
+                        path.LineTo((float)interiorRing.Vertices[i].X, (float)interiorRing.Vertices[i].Y);
                     }
                 }
                 path.Close();
