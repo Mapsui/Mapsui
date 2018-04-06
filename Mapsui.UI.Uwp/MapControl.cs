@@ -29,7 +29,6 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Shapes;
 using Mapsui.Fetcher;
 using Mapsui.Layers;
@@ -49,8 +48,6 @@ namespace Mapsui.UI.Uwp
         private readonly IRenderer _renderer;
         private readonly Rectangle _bboxRect = CreateSelectRectangle();
         private readonly SKXamlCanvas _renderTarget = CreateRenderTarget();
-        private readonly DoubleAnimation _zoomAnimation = new DoubleAnimation();
-        private readonly Storyboard _zoomStoryBoard = new Storyboard();
         private bool _invalid;
         private Map _map;
         private double _innerRotation;
@@ -303,20 +300,8 @@ namespace Mapsui.UI.Uwp
         {
             TryInitializeViewport();
             UpdateSize();
-            InitAnimation();
         }
-
-        private void InitAnimation()
-        {
-            _zoomAnimation.Duration = new Duration(new TimeSpan(0, 0, 0, 0, 1000));
-            _zoomAnimation.EasingFunction = new QuarticEase();
-            Storyboard.SetTarget(_zoomAnimation, this);
-            Storyboard.SetTargetProperty(_zoomAnimation, nameof(Map.Viewport.Resolution));
-
-            if (!_zoomStoryBoard.Children.Contains(_zoomAnimation))
-                _zoomStoryBoard.Children.Add(_zoomAnimation);
-        }
-
+        
         private void MapControlSizeChanged(object sender, SizeChangedEventArgs e)
         {
             TryInitializeViewport();
