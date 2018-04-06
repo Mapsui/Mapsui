@@ -14,7 +14,7 @@ namespace Mapsui.Rendering.Xaml
             System.Windows.Shapes.Path path = CreatePolygonPath(vectorStyle, viewport.Resolution, symbolCache, (float)viewport.Rotation);
             path.Data = polygon.ToXaml();
 
-            var matrixTransform = new System.Windows.Media.MatrixTransform { Matrix = GeometryRenderer.CreateTransformMatrix1(viewport) };
+            var matrixTransform = new System.Windows.Media.MatrixTransform { Matrix = GeometryRenderer.CreateTransformMatrix(viewport) };
             path.RenderTransform = matrixTransform;
 
             if (path.Fill != null)
