@@ -58,7 +58,7 @@ namespace Mapsui.Rendering.Skia
                         // Is there a FillStyle?
                         if (vectorStyle.Fill?.FillStyle == FillStyle.Solid)
                         {
-                            paint.StrokeWidth = lineWidth * (float)viewport.Resolution;
+                            paint.StrokeWidth = lineWidth * (float)viewport.Resolution; // Is this necessary? Is it faster without?
                             paint.Style = SKPaintStyle.Fill;
                             paint.Color = fillColor.ToSkia(opacity);
                             canvas.DrawPath(path, paint);
