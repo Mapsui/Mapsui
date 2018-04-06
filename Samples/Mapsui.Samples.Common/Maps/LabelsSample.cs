@@ -32,6 +32,7 @@ namespace Mapsui.Samples.Common.Maps
                 CreateFeatureWithWordWrapLeft(),
                 CreateFeatureWithWordWrapCenter(),
                 CreateFeatureWithWordWrapRight(),
+                CreateFeatureWithCharacterWrap(),
             };
 
             var memoryProvider = new MemoryProvider(features);
@@ -48,14 +49,14 @@ namespace Mapsui.Samples.Common.Maps
 
         private static Feature CreateFeatureWithColors()
         {
-            var featureWithColors = new Feature {Geometry = new Point(0, -6000000)};
+            var featureWithColors = new Feature {Geometry = new Point(0, -7000000)};
             featureWithColors.Styles.Add(CreateColoredLabelStyle());
             return featureWithColors;
         }
 
         private static Feature CreateFeatureWithBottomAlignedStyle()
         {
-            var featureWithBottomAlignedStyle = new Feature {Geometry = new Point(0, -4000000)};
+            var featureWithBottomAlignedStyle = new Feature {Geometry = new Point(0, -5000000)};
             featureWithBottomAlignedStyle.Styles.Add(new LabelStyle
             {
                 Text = "Bottom\nAligned",
@@ -178,6 +179,7 @@ namespace Mapsui.Samples.Common.Maps
                 ForeColor = Color.White,
                 Halo = new Pen(Color.Black, 2),
                 MaxWidth = 10,
+                LineHeight = 1.2,
                 WordWrap = LabelStyle.LineBreakMode.WordWrap,
                 HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center,
                 VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Center,
@@ -200,6 +202,23 @@ namespace Mapsui.Samples.Common.Maps
             });
             return featureWithColors;
         }
+
+        private static IFeature CreateFeatureWithCharacterWrap()
+        {
+            var featureWithColors = new Feature { Geometry = new Point(0, 10000000) };
+            featureWithColors.Styles.Add(new LabelStyle
+            {
+                Text = "Long line break mode test",
+                BackColor = null,
+                ForeColor = Color.Black,
+                MaxWidth = 6,
+                WordWrap = LabelStyle.LineBreakMode.CharacterWrap,
+                HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center,
+                VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Center,
+            });
+            return featureWithColors;
+        }
+
         private static IFeature CreateFeatureWithHalo()
         {
             var featureWithColors = new Feature { Geometry = new Point(0, -12000000) };

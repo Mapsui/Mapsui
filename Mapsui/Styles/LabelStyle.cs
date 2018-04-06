@@ -101,7 +101,7 @@ namespace Mapsui.Styles
             HorizontalAlignment = HorizontalAlignmentEnum.Center;
             VerticalAlignment = VerticalAlignmentEnum.Center;
             MaxWidth = 0;
-            LineHeight = 1.2;
+            LineHeight = 1.0;
             WordWrap = LineBreakMode.NoWrap;
         }
 
