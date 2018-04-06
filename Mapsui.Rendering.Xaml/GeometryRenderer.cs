@@ -19,22 +19,17 @@ namespace Mapsui.Rendering.Xaml
     {
         public static XamlMedia.Matrix CreateTransformMatrix(IViewport viewport, Point point)
         {
-            var matrix = XamlMedia.Matrix.Identity;
-
             var pointOffsetFromViewPortCenterX = point.X - viewport.Center.X;
             var pointOffsetFromViewPortCenterY = point.Y - viewport.Center.Y;
-
-            MatrixHelper.Translate(ref matrix, pointOffsetFromViewPortCenterX, pointOffsetFromViewPortCenterY);
-            if (viewport.IsRotated) { MatrixHelper.Rotate(ref matrix, -viewport.Rotation); }
-
             var mapCenterX = viewport.Width * 0.5;
             var mapCenterY = viewport.Height * 0.5;
 
-            //MatrixHelper.Translate(ref matrix, mapCenterX, mapCenterY);
+            var matrix = XamlMedia.Matrix.Identity;
+            MatrixHelper.Translate(ref matrix, pointOffsetFromViewPortCenterX, pointOffsetFromViewPortCenterY);
+            if (viewport.IsRotated) { MatrixHelper.Rotate(ref matrix, -viewport.Rotation); }
+            MatrixHelper.Translate(ref matrix, mapCenterX, mapCenterY);
             MatrixHelper.ScaleAt(ref matrix, 1 / viewport.Resolution, 1 / viewport.Resolution, mapCenterX, mapCenterY);
-
-            // This will invert the Y axis, but will also put images upside down
-            MatrixHelper.InvertY(ref matrix, mapCenterY);
+            MatrixHelper.InvertY(ref matrix, mapCenterY); // To invert Y axis, but also puts images upside down
             return matrix;
         }
         
