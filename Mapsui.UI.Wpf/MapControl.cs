@@ -727,20 +727,10 @@ namespace Mapsui.UI.Wpf
         }
         private float GetSkiaScale()
         {
-            var presentationSource = PresentationSource.FromVisual(this);
-            if (presentationSource == null) throw new Exception("PresentationSource is null");
-            var compositionTarget = presentationSource.CompositionTarget;
-            if (compositionTarget == null) throw new Exception("CompositionTarget is null");
-
-            var m = compositionTarget.TransformToDevice;
-
-            var dpiX = m.M11;
-            var dpiY = m.M22;
-
-            if (dpiX != dpiY)
-                throw new ArgumentException();
-
-            return (float)dpiX;
+            // Apparenly it should be something like this but there is an issue with
+            // initialization. Since it always returns 1 I replaced it with just return 1
+            // https://gist.github.com/pauldendulk/bceb790607660471b2b674e92721504a
+            return 1;
         }
 
         private void SKElementOnPaintSurface(object sender, SKPaintSurfaceEventArgs e)
