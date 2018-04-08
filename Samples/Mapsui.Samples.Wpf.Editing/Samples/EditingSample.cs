@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using Mapsui.Samples.Wpf.Editing.Layers;
-using Mapsui;
 using Mapsui.Geometries.WellKnownText;
 using Mapsui.Projection;
 using Mapsui.Providers;
@@ -23,10 +22,7 @@ namespace Mapsui.Samples.Wpf.Editing.Samples
             var editLayer = CreateEditLayer();
             map.Layers.Add(editLayer);
             map.Layers.Add(new VertexOnlyLayer(editLayer) {Name = "VertexLayer"});
-
             map.InfoLayers.Add(map.Layers.First(l => l.Name == "EditLayer"));
-            NavigateToPoland(map);
-
             return map;
         }
 
@@ -89,16 +85,11 @@ namespace Mapsui.Samples.Wpf.Editing.Samples
 
         private static WritableLayer CreatePointLayer()
         {
-            var pointLayer = new WritableLayer
+            return new WritableLayer
             {
                 Name = "PointLayer",
                 Style = CreatePointStyle()
             };
-
-            var dgt = new Feature { Geometry = SphericalMercator.FromLonLat(18.568066, 54.277201) };
-            pointLayer.Add(dgt);
-
-            return pointLayer;
         }
 
         private static WritableLayer CreateLineLayer()
@@ -156,13 +147,6 @@ namespace Mapsui.Samples.Wpf.Editing.Samples
                 Line = new Pen(PolygonLayerColor, 3),
                 Outline = new Pen(PolygonLayerColor, 3)
             };
-        }
-
-        private static void NavigateToPoland(Map map)
-        {
-            map.NavigateTo(map.Resolutions[6]);
-            var centerPoland = SphericalMercator.FromLonLat(19.226, 52.039);
-            map.NavigateTo(centerPoland);
         }
     }
 }
