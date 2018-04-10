@@ -185,7 +185,7 @@ namespace Mapsui.Geometries
         
         public LinearRing Rotate(double degrees, Point center)
         {
-            var rotatedLinearRing = this.Clone();
+            var rotatedLinearRing = Clone();
             for (var i = 0; i < Vertices.Count; i++)
             {
                 rotatedLinearRing.Vertices[i] = Vertices[i].Rotate(degrees, center);

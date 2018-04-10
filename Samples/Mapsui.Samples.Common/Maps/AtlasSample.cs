@@ -13,13 +13,13 @@ namespace Mapsui.Samples.Common.Maps
     public static class AtlasSample
     {
         private const string AtlasLayerName = "Atlas Layer";
-        private static int atlasBitmapId;
+        private static int _atlasBitmapId;
         private static Random rnd = new Random();
 
 
         public static Map CreateMap()
         {
-            atlasBitmapId = BitmapRegistry.Instance.Register(typeof(AtlasSample).GetTypeInfo().Assembly.GetManifestResourceStream("Mapsui.Samples.Common.Images.osm-liberty.png"));
+            _atlasBitmapId = BitmapRegistry.Instance.Register(typeof(AtlasSample).GetTypeInfo().Assembly.GetManifestResourceStream("Mapsui.Samples.Common.Images.osm-liberty.png"));
 
             var map = new Map();
 
@@ -55,7 +55,7 @@ namespace Mapsui.Samples.Common.Maps
 
                 var x = 0 + rnd.Next(0, 12) * 21;
                 var y = 64 + rnd.Next(0, 6) * 21;
-                var bitmapId = BitmapRegistry.Instance.Register(new Atlas(atlasBitmapId, x, y, 21, 21, 1));
+                var bitmapId = BitmapRegistry.Instance.Register(new Atlas(_atlasBitmapId, x, y, 21, 21, 1));
                 feature.Styles.Add(new SymbolStyle { BitmapId = bitmapId });
 
                 features.Add(feature);

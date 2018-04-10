@@ -54,7 +54,7 @@ namespace Mapsui.Rendering.Xaml
             }
             else
             {
-                BitmapImage bitmapImage = ((System.IO.Stream)BitmapRegistry.Instance.Get(style.BitmapId)).ToBitmapImage();
+                BitmapImage bitmapImage = ((Stream)BitmapRegistry.Instance.Get(style.BitmapId)).ToBitmapImage();
 
                 path.Fill = new XamlMedia.ImageBrush { ImageSource = bitmapImage };
 

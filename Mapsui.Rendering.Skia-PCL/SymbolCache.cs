@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.IO;
 using Mapsui.Styles;
 
 namespace Mapsui.Rendering.Skia

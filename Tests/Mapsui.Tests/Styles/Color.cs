@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using Mapsui.Styles;
+﻿using Mapsui.Styles;
 using NUnit.Framework;
 
 namespace Mapsui.Tests.Styles
@@ -11,7 +9,7 @@ namespace Mapsui.Tests.Styles
         [Test]
         public static void ColorCreator()
         {
-            var color = new Color(64, 128, 192, 255);
+            var color = new Color(64, 128, 192);
 
             Assert.True(color.R == 64);
             Assert.True(color.G == 128);

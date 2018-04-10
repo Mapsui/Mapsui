@@ -250,7 +250,7 @@ namespace Mapsui.Geometries
         public List<LineString> GetSegments()
         {
             List<LineString> segments = new List<LineString>();
-            for (int i = 0; i < this.Vertices.Count - 1; i++)
+            for (int i = 0; i < Vertices.Count - 1; i++)
             {
                 LineString tmp = new LineString();
                 tmp.Vertices.Add(Vertices[i]);

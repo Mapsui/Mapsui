@@ -9,18 +9,16 @@ using System.Windows.Input;
 using Mapsui.Samples.Wpf.Editing.Editing;
 using Mapsui.Samples.Wpf.Editing.Layers;
 using Mapsui.Samples.Wpf.Editing.Utilities;
-using Mapsui;
 using Mapsui.Logging;
 using Mapsui.Providers;
 using Mapsui.UI.Wpf;
-using Point = Mapsui.Geometries.Point;
 
 namespace Mapsui.Samples.Wpf.Editing
 {
     public partial class MainWindow
     {
         private WritableLayer _targetLayer;
-        private IEnumerable<IFeature> _tempFeatures = null;
+        private IEnumerable<IFeature> _tempFeatures;
         private readonly EditManager _editManager = new EditManager();
         private readonly EditManipulation _editManipulation = new EditManipulation();
         private bool _selectMode;
@@ -67,9 +65,9 @@ namespace Mapsui.Samples.Wpf.Editing
             var selectedValue = ((ComboBoxItem)((ComboBox)sender).SelectedItem).Content.ToString();
 
             if (selectedValue.ToLower().Contains("wpf"))
-                MapControl.RenderMode = Mapsui.UI.Wpf.RenderMode.Wpf;
+                MapControl.RenderMode = UI.Wpf.RenderMode.Wpf;
             else if (selectedValue.ToLower().Contains("skia"))
-                MapControl.RenderMode = Mapsui.UI.Wpf.RenderMode.Skia;
+                MapControl.RenderMode = UI.Wpf.RenderMode.Skia;
             else
                 throw new Exception("Unknown ComboBox item");
         }

@@ -298,7 +298,7 @@ namespace Mapsui.Rendering.Skia
             return lines.SelectMany((line) =>
             {
                 var result = new List<Line>();
-                string[] words = null;
+                string[] words;
 
                 if (splitCharacter == string.Empty)
                 {

@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using Mapsui.Geometries;
 using Mapsui.Providers;
 using Mapsui.Styles;

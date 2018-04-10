@@ -2,7 +2,6 @@ using System;
 using System.IO;
 using Mapsui.Styles;
 using SkiaSharp;
-using SkiaSharp.Extended.Svg;
 
 namespace Mapsui.Rendering.Skia
 {
@@ -95,7 +94,7 @@ namespace Mapsui.Rendering.Skia
             //var color = new SKColor(255, 255, 255, (byte)(255 * opacity));
             //var paint = new SKPaint { Color = color, FilterQuality = SKFilterQuality.High };
 
-            canvas.DrawPicture(svg.Picture, null);
+            canvas.DrawPicture(svg.Picture);
 
             canvas.Restore();
         }

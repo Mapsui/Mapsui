@@ -218,8 +218,8 @@ namespace Mapsui.Rendering.Skia
         {
             var vx = point2.X - point1.X;
             var vy = point2.Y - point1.Y;
-            var p = new float[] { -vx, vx, -vy, vy };
-            var q = new float[] { point1.X - clipRect.Left, clipRect.Right - point1.X, point1.Y - clipRect.Top, clipRect.Bottom - point1.Y };
+            var p = new [] { -vx, vx, -vy, vy };
+            var q = new [] { point1.X - clipRect.Left, clipRect.Right - point1.X, point1.Y - clipRect.Top, clipRect.Bottom - point1.Y };
             var u1 = float.NegativeInfinity;
             var u2 = float.PositiveInfinity;
 
