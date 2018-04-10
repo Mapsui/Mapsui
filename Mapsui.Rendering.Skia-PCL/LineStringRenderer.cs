@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Mapsui.Geometries;
 using Mapsui.Providers;
@@ -43,9 +44,8 @@ namespace Mapsui.Rendering.Skia
                     dashArray = vectorStyle.Line.DashArray;
                 }
 
-                var line = WorldToScreen(viewport, lineString);
-                var path = ToSkia(line);
-                
+                var path = lineString.ToSkiaPath(viewport, canvas.LocalClipBounds);
+
                 using (var paint = new SKPaint())
                 {
                     paint.IsStroke = true;
@@ -59,34 +59,6 @@ namespace Mapsui.Rendering.Skia
                     canvas.DrawPath(path, paint);
                 }
             }
-        }
-
-        private static SKPath ToSkia(List<Point> vertices)
-        {
-            var points = new SKPath();
-
-            for (var i = 0; i < vertices.Count; i++)
-            {
-                if (i == 0)
-                {
-                    points.MoveTo((float)vertices[i].X, (float)vertices[i].Y);
-                }
-                else
-                {
-                    points.LineTo((float)vertices[i].X, (float)vertices[i].Y);
-                }
-            }
-            return points;
-        }
-
-        private static List<Point> WorldToScreen(IViewport viewport, IEnumerable<Point> points)
-        {
-            var result = new List<Point>();
-            foreach (var point in points)
-            {
-                result.Add(viewport.WorldToScreen(point.X, point.Y));
-            }
-            return result;
         }
     }
 }
