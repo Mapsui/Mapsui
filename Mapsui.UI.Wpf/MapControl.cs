@@ -52,13 +52,12 @@ namespace Mapsui.UI.Wpf
         public MapControl()
         {
             _scale = 1; // Scale is always 1 in WPF
-            RenderMode = RenderMode.Skia;
-
-            Children.Add(RenderCanvas);
-            Children.Add(RenderElement);
+            
+            Children.Add(WpfCanvas);
+            Children.Add(SkiaCanvas);
             Children.Add(_selectRectangle);
 
-            RenderElement.PaintSurface += SKElementOnPaintSurface;
+            SkiaCanvas.PaintSurface += SKElementOnPaintSurface;
             RenderingWeakEventManager.AddHandler(CompositionTargetRendering);
 
             Map = new Map();
@@ -81,6 +80,8 @@ namespace Mapsui.UI.Wpf
             ManipulationInertiaStarting += OnManipulationInertiaStarting;
 
             IsManipulationEnabled = true;
+
+            RenderMode = RenderMode.Skia;
         }
 
         private static Rectangle CreateSelectRectangle()
@@ -137,9 +138,9 @@ namespace Mapsui.UI.Wpf
 
         public string ErrorMessage { get; private set; }
         
-        public Canvas RenderCanvas { get; } = CreateWpfRenderCanvas();
+        public Canvas WpfCanvas { get; } = CreateWpfRenderCanvas();
 
-        private SKElement RenderElement { get; } = CreateSkiaRenderElement();
+        private SKElement SkiaCanvas { get; } = CreateSkiaRenderElement();
 
         public RenderMode RenderMode
         {
@@ -148,15 +149,15 @@ namespace Mapsui.UI.Wpf
             {
                 if (value == RenderMode.Skia)
                 {
-                    RenderCanvas.Visibility = Visibility.Collapsed;
-                    RenderElement.Visibility = Visibility.Visible;
+                    WpfCanvas.Visibility = Visibility.Collapsed;
+                    SkiaCanvas.Visibility = Visibility.Visible;
                     Renderer = new Rendering.Skia.MapRenderer();
                     Refresh();
                 }
                 else
                 {
-                    RenderElement.Visibility = Visibility.Collapsed;
-                    RenderCanvas.Visibility = Visibility.Visible;
+                    SkiaCanvas.Visibility = Visibility.Collapsed;
+                    WpfCanvas.Visibility = Visibility.Visible;
                     Renderer = new MapRenderer();
                     Refresh();
                 }
@@ -584,7 +585,7 @@ namespace Mapsui.UI.Wpf
             if (!_invalid) return; // Don't render when nothing has changed
 
             if (RenderMode == RenderMode.Wpf) RenderWpf();
-            else RenderElement.InvalidateVisual();
+            else SkiaCanvas.InvalidateVisual();
         }
 
         private void RenderWpf()
@@ -595,7 +596,7 @@ namespace Mapsui.UI.Wpf
 
             TryInitializeViewport();
 
-            Renderer.Render(RenderCanvas, Map.Viewport, _map.Layers, Map.Widgets, _map.BackColor);
+            Renderer.Render(WpfCanvas, Map.Viewport, _map.Layers, Map.Widgets, _map.BackColor);
 
             _invalid = false;
         }
