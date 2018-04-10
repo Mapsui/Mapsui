@@ -18,9 +18,12 @@ namespace Mapsui.Rendering.Xaml
             };
         }
 
-        public static ImageBrush ToImageBrush(this BitmapImage bitmapImage)
+        public static Brush ToImageBrush(this ImageSource bitmapImage)
         {
-            return new ImageBrush { ImageSource = bitmapImage };
+            if (bitmapImage is DrawingImage image)
+                return new DrawingBrush {Drawing = image.Drawing};
+            else
+                return new ImageBrush { ImageSource = bitmapImage };
         }
     }
 }

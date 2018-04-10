@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using Mapsui.Styles;
 
 namespace Mapsui.Rendering.Skia
@@ -7,10 +8,10 @@ namespace Mapsui.Rendering.Skia
     {
         private readonly IDictionary<int, BitmapInfo> _cache = new Dictionary<int, BitmapInfo>();
 
-        public BitmapInfo GetOrCreate(int bitmapId, bool isSvg = false)
+        public BitmapInfo GetOrCreate(int bitmapId)
         {
             if (_cache.Keys.Contains(bitmapId)) return _cache[bitmapId];
-            return _cache[bitmapId] = BitmapHelper.LoadBitmap(BitmapRegistry.Instance.Get(bitmapId), isSvg);
+            return _cache[bitmapId] = BitmapHelper.LoadBitmap(BitmapRegistry.Instance.Get(bitmapId));
         }
 
         public Size GetSize(int bitmapId)

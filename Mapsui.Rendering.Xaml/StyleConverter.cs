@@ -152,7 +152,7 @@ namespace Mapsui.Rendering.Xaml
         {
             return symbolCache != null ? 
                 (BitmapImage)symbolCache.GetOrCreate(brush.BitmapId): 
-                BitmapRegistry.Instance.Get(brush.BitmapId).ToBitmapImage();
+                ((System.IO.Stream)BitmapRegistry.Instance.Get(brush.BitmapId)).ToBitmapImage();
         }
         
         private static VisualBrush DottedBrush(Styles.Brush brush)

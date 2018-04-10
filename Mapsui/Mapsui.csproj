@@ -66,6 +66,7 @@
     <Compile Include="Layers\AnimatedFeatures.cs" />
     <Compile Include="Layers\AnimatedPointLayer.cs" />
     <Compile Include="Layers\WritableLayer.cs" />
+    <Compile Include="Styles\Atlas.cs" />
     <Compile Include="Styles\StrokeJoin.cs" />
     <Compile Include="Styles\PenStrokeCap.cs" />
     <Compile Include="UI\MapInfo.cs" />
