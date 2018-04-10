@@ -13,7 +13,7 @@ namespace Mapsui.Rendering.Xaml
             var vectorStyle = (VectorStyle) style;
             var path = PolygonRenderer.CreatePolygonPath(vectorStyle, viewport.Resolution, symbolCache);
             path.Data = geometry.ToXaml();
-            var matrixTransform = new System.Windows.Media.MatrixTransform { Matrix = GeometryRenderer.CreateTransformMatrix1(viewport) };
+            var matrixTransform = new System.Windows.Media.MatrixTransform { Matrix = GeometryRenderer.CreateTransformMatrix(viewport) };
             path.RenderTransform = matrixTransform;
 
             if (path.Fill != null)

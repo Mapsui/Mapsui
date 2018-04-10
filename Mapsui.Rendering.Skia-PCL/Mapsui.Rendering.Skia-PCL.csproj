@@ -35,10 +35,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ExtensionMethods\BoundingBoxExtensions.cs" />
+    <Compile Include="ExtensionMethods\ClippingExtension.cs" />
     <Compile Include="ExtensionMethods\PenStrokeJoinExtensions.cs" />
     <Compile Include="ExtensionMethods\PenStrokeCapExtensions.cs" />
     <Compile Include="ExtensionMethods\PenStyleExtension.cs" />
     <Compile Include="ExtensionMethods\SKRectExtensions.cs" />
+    <Compile Include="ExtensionMethods\ViewportExtensions.cs" />
     <Compile Include="HyperlinkWidgetRenderer.cs" />
     <Compile Include="ZoomInOutWidgetRenderer.cs" />
     <Compile Include="ScaleBarWidgetRenderer.cs" />

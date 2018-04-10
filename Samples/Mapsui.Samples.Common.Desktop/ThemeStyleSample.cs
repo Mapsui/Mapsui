@@ -13,7 +13,7 @@ using Mapsui.Samples.Common.Maps;
 
 namespace Mapsui.Samples.Common.Desktop
 {
-    public static class ShapefileHoverInfoSample
+    public static class ThemeStyleSample
     {
         public static Map CreateMap()
         {
@@ -47,7 +47,7 @@ namespace Mapsui.Samples.Common.Desktop
                 if (f.Geometry is Point)
                     return null;
 
-                VectorStyle style = new VectorStyle();
+                var style = new VectorStyle();
 
                 switch (f["NAME"].ToString().ToLower())
                 {
@@ -69,10 +69,10 @@ namespace Mapsui.Samples.Common.Desktop
                         break;
                     default:
                         style.Fill = new Brush(Color.Gray);
-                        style.Outline = new Pen(Color.FromArgb(0, 64, 64, 64), 1);
+                        style.Outline = new Pen(Color.FromArgb(0, 64, 64, 64));
                         break;
                 }
-                style.Outline = new Pen(Color.FromArgb(0, 64, 64, 64), 1);
+                style.Outline = new Pen(Color.FromArgb(0, 64, 64, 64));
                 return style;
             });
         }
@@ -102,7 +102,6 @@ namespace Mapsui.Samples.Common.Desktop
         {
             return Path.GetDirectoryName(Assembly.GetEntryAssembly().GetModules()[0].FullyQualifiedName);
         }
-
 
         private static Features GenenerateTop100MajorCitiesFeatures()
         {
@@ -208,18 +207,15 @@ namespace Mapsui.Samples.Common.Desktop
             c.Add(new City { CityName = "Johannesburg", Lat = -26.17, Long = 28.03, Population = 2730735, Country = "South Africa" });
             c.Add(new City { CityName = "Durban", Lat = -29.87, Long = 30.98, Population = 2729000, Country = "South Africa" });
 
-
             var features = new Features();
             foreach (City item in c)
             {
-                var geo = new Geometries.Point(item.Long, item.Lat);
+                var geo = new Point(item.Long, item.Lat);
                 features.Add(new Feature { Geometry = geo, ["NAME"] = item.CityName, ["COUNTRY"] = item.Country, ["POPULATION"] = item.Population });
             }
 
             return features;
         }
-
-
     }
 
     public class City
@@ -230,6 +226,4 @@ namespace Mapsui.Samples.Common.Desktop
         public long Population { get; set; }
         public string Country { get; set; }
     }
-
-
 }

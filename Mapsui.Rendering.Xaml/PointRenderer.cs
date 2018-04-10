@@ -34,7 +34,7 @@ namespace Mapsui.Rendering.Xaml
                 MatrixHelper.ScaleAt(ref matrix, viewport.Resolution, viewport.Resolution);
             }
 
-            MatrixHelper.Append(ref matrix, GeometryRenderer.CreateTransformMatrix(point, viewport));
+            MatrixHelper.Append(ref matrix, GeometryRenderer.CreateTransformMatrix(viewport, point));
 
             symbol.RenderTransform = new XamlMedia.MatrixTransform { Matrix = matrix };
             symbol.IsHitTestVisible = false;
@@ -179,7 +179,7 @@ namespace Mapsui.Rendering.Xaml
             var symbolStyle = style as SymbolStyle;
             if (symbolStyle != null) matrix = CreatePointSymbolMatrix(viewport.Resolution, viewport.Rotation, symbolStyle, renderedGeometry.RenderSize.Width, renderedGeometry.RenderSize.Height);
             else MatrixHelper.ScaleAt(ref matrix, viewport.Resolution, viewport.Resolution);
-            MatrixHelper.Append(ref matrix, GeometryRenderer.CreateTransformMatrix(point, viewport));
+            MatrixHelper.Append(ref matrix, GeometryRenderer.CreateTransformMatrix(viewport, point));
             renderedGeometry.RenderTransform = new XamlMedia.MatrixTransform { Matrix = matrix };
         }
     }

@@ -54,7 +54,7 @@
     <Compile Include="ArcGISImageServiceSample.cs" />
     <Compile Include="MapTilerSample.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ShapefileHoverInfoSample.cs" />
+    <Compile Include="ThemeStyleSample.cs" />
     <Compile Include="ShapefileSample.cs" />
     <Compile Include="WfsSample.cs" />
     <Compile Include="WmsSample.cs" />
