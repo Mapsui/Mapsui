@@ -23,8 +23,8 @@ namespace Mapsui.UI.Wpf
 {
     public enum RenderMode
     {
-        Wpf,
-        Skia
+        Skia,
+        Wpf
     }
 
     public partial class MapControl : Grid, IMapControl
@@ -52,6 +52,7 @@ namespace Mapsui.UI.Wpf
         public MapControl()
         {
             _scale = 1; // Scale is always 1 in WPF
+            RenderMode = RenderMode.Skia;
 
             Children.Add(RenderCanvas);
             Children.Add(RenderElement);
@@ -234,7 +235,7 @@ namespace Mapsui.UI.Wpf
 
         public void RefreshData()
         {
-            _map.ViewChanged(true);
+            _map?.ViewChanged(true);
         }
 
         public void Clear()
