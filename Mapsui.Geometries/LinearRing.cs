@@ -70,9 +70,7 @@ namespace Mapsui.Geometries
                 return Math.Abs(-sum/2);
             }
         }
-
-        public new static bool IsClosed => true; // LinearRing is closed by definition
-
+        
         /// <summary>
         ///     Return a copy of this geometry
         /// </summary>

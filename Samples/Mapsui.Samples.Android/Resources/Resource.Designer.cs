@@ -26,11 +26,6 @@ namespace Mapsui.Samples.Android
 		
 		public static void UpdateIdValues()
 		{
-			global::Mapsui.UI.Android.Resource.Attribute.start_with_openstreetmap = global::Mapsui.Samples.Android.Resource.Attribute.start_with_openstreetmap;
-			global::Mapsui.UI.Android.Resource.String.ApplicationName = global::Mapsui.Samples.Android.Resource.String.ApplicationName;
-			global::Mapsui.UI.Android.Resource.String.Hello = global::Mapsui.Samples.Android.Resource.String.Hello;
-			global::Mapsui.UI.Android.Resource.Styleable.start_with_openstreetmap_style = global::Mapsui.Samples.Android.Resource.Styleable.start_with_openstreetmap_style;
-			global::Mapsui.UI.Android.Resource.Styleable.start_with_openstreetmap_style_start_with_openstreetmap = global::Mapsui.Samples.Android.Resource.Styleable.start_with_openstreetmap_style_start_with_openstreetmap;
 		}
 		
 		public partial class Attribute

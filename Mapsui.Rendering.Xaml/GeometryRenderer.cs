@@ -17,34 +17,25 @@ namespace Mapsui.Rendering.Xaml
     // all .net framework classes related to Xaml, even if they are not.
     public static class GeometryRenderer
     {
-        public static XamlMedia.Matrix CreateTransformMatrix(Point point, IViewport viewport)
+        public static XamlMedia.Matrix CreateTransformMatrix(IViewport viewport, Point point)
         {
-            var matrix = XamlMedia.Matrix.Identity;
+            var pointOffsetFromViewPortCenterX = point.X - viewport.Center.X;
+            var pointOffsetFromViewPortCenterY = point.Y - viewport.Center.Y;
             var mapCenterX = viewport.Width * 0.5;
             var mapCenterY = viewport.Height * 0.5;
 
-            var pointOffsetFromViewPortCenterX = point.X - viewport.Center.X;
-            var pointOffsetFromViewPortCenterY = point.Y - viewport.Center.Y;
-
+            var matrix = XamlMedia.Matrix.Identity;
             MatrixHelper.Translate(ref matrix, pointOffsetFromViewPortCenterX, pointOffsetFromViewPortCenterY);
-
-            if (viewport.IsRotated)
-            {
-                MatrixHelper.Rotate(ref matrix, -viewport.Rotation);
-            }
-
-
+            if (viewport.IsRotated) { MatrixHelper.Rotate(ref matrix, -viewport.Rotation); }
             MatrixHelper.Translate(ref matrix, mapCenterX, mapCenterY);
             MatrixHelper.ScaleAt(ref matrix, 1 / viewport.Resolution, 1 / viewport.Resolution, mapCenterX, mapCenterY);
-
-            // This will invert the Y axis, but will also put images upside down
-            MatrixHelper.InvertY(ref matrix, mapCenterY);
+            MatrixHelper.InvertY(ref matrix, mapCenterY); // To invert Y axis, but also puts images upside down
             return matrix;
         }
-
-        public static XamlMedia.Matrix CreateTransformMatrix1(IViewport viewport)
+        
+        public static XamlMedia.Matrix CreateTransformMatrix(IViewport viewport)
         {
-            return CreateTransformMatrix(new Point(0, 0), viewport);
+            return CreateTransformMatrix(viewport, new Point(0, 0));
         }
 
         private static XamlShapes.Path CreatePointPath(SymbolStyle style)
@@ -111,7 +102,7 @@ namespace Mapsui.Rendering.Xaml
             var symbolStyle = style as SymbolStyle;
             var path = CreatePointPath(symbolStyle);
             path.Data = ConvertMultiPoint(multiPoint, symbolStyle, viewport);
-            path.RenderTransform = new XamlMedia.MatrixTransform { Matrix = CreateTransformMatrix1(viewport) };
+            path.RenderTransform = new XamlMedia.MatrixTransform { Matrix = CreateTransformMatrix(viewport) };
             return path;
         }
 
@@ -208,7 +199,7 @@ namespace Mapsui.Rendering.Xaml
         public static void PositionGeometry(XamlShapes.Shape renderedGeometry, IViewport viewport)
         {
             CounterScaleLineWidth(renderedGeometry, viewport.Resolution);
-            var matrixTransform = new XamlMedia.MatrixTransform { Matrix = CreateTransformMatrix1(viewport) };
+            var matrixTransform = new XamlMedia.MatrixTransform { Matrix = CreateTransformMatrix(viewport) };
             renderedGeometry.RenderTransform = matrixTransform;
 
             if (renderedGeometry.Fill != null)

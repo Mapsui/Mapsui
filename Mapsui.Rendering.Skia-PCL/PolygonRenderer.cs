@@ -115,8 +115,8 @@ namespace Mapsui.Rendering.Skia
                                 case FillStyle.BitmapRotated:
                                     paint.Style = SKPaintStyle.Fill;
                                     SKImage bitmap = symbolCache.GetOrCreate(vectorStyle.Fill.BitmapId).Bitmap;
-                                    paint.Shader = bitmap.ToShader(SKShaderTileMode.Repeat, 
-                                        SKShaderTileMode.Repeat, 
+                                    paint.Shader = bitmap.ToShader(SKShaderTileMode.Repeat,
+                                        SKShaderTileMode.Repeat,
                                         SKMatrix.MakeRotation((float)(viewport.Rotation * System.Math.PI / 180.0f), bitmap.Width >> 1, bitmap.Height >> 1));
                                     break;
                             }

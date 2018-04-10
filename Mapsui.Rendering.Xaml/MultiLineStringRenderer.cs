@@ -13,7 +13,7 @@ namespace Mapsui.Rendering.Xaml
 
             System.Windows.Shapes.Path path = LineStringRenderer.CreateLineStringPath(vectorStyle);
             path.Data = multiLineString.ToXaml();
-            path.RenderTransform = new System.Windows.Media.MatrixTransform { Matrix = GeometryRenderer.CreateTransformMatrix1(viewport) };
+            path.RenderTransform = new System.Windows.Media.MatrixTransform { Matrix = GeometryRenderer.CreateTransformMatrix(viewport) };
             GeometryRenderer.CounterScaleLineWidth(path, viewport.Resolution);
             return path;
         }

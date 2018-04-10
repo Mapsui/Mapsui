@@ -14,7 +14,7 @@ namespace Mapsui.Rendering.Xaml
 
             System.Windows.Shapes.Path path = CreateLineStringPath(vectorStyle);
             path.Data = lineString.ToXaml();
-            path.RenderTransform = new MatrixTransform { Matrix = GeometryRenderer.CreateTransformMatrix1(viewport) };
+            path.RenderTransform = new MatrixTransform { Matrix = GeometryRenderer.CreateTransformMatrix(viewport) };
             GeometryRenderer.CounterScaleLineWidth(path, viewport.Resolution);
             return path;
         }

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2024
+VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui", "Mapsui\Mapsui.csproj", "{D74C052A-C07E-4B37-A898-134218ACA5C9}"
 EndProject
@@ -40,6 +40,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{B2DB
 		Scripts\buildpackpush.bat = Scripts\buildpackpush.bat
 		Scripts\readme.txt = Scripts\readme.txt
 		Scripts\rename.ps1 = Scripts\rename.ps1
+		Scripts\test-image-copier.cmd = Scripts\test-image-copier.cmd
 		Scripts\updateversionnumber.proj = Scripts\updateversionnumber.proj
 	EndProjectSection
 EndProject
@@ -81,6 +82,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.UI.Uwp", "Mapsui.UI.Uwp\Mapsui.UI.Uwp.csproj", "{29E628D1-8E8A-49C5-B0F9-555C0F68572A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Samples.Uwp", "Samples\Mapsui.Samples.Uwp\Mapsui.Samples.Uwp.csproj", "{CA0C7AF3-03ED-42D0-A001-001E8EE095E6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Samples.Wpf.Editing", "Samples\Mapsui.Samples.Wpf.Editing\Mapsui.Samples.Wpf.Editing.csproj", "{16D71D4F-1D3F-483E-9C6C-A3A25B6A20A9}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
@@ -465,6 +468,22 @@ Global
 		{CA0C7AF3-03ED-42D0-A001-001E8EE095E6}.Release|x86.ActiveCfg = Release|x86
 		{CA0C7AF3-03ED-42D0-A001-001E8EE095E6}.Release|x86.Build.0 = Release|x86
 		{CA0C7AF3-03ED-42D0-A001-001E8EE095E6}.Release|x86.Deploy.0 = Release|x86
+		{16D71D4F-1D3F-483E-9C6C-A3A25B6A20A9}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
+		{16D71D4F-1D3F-483E-9C6C-A3A25B6A20A9}.Debug|AnyCPU.Build.0 = Debug|Any CPU
+		{16D71D4F-1D3F-483E-9C6C-A3A25B6A20A9}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{16D71D4F-1D3F-483E-9C6C-A3A25B6A20A9}.Debug|ARM.Build.0 = Debug|Any CPU
+		{16D71D4F-1D3F-483E-9C6C-A3A25B6A20A9}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{16D71D4F-1D3F-483E-9C6C-A3A25B6A20A9}.Debug|x64.Build.0 = Debug|Any CPU
+		{16D71D4F-1D3F-483E-9C6C-A3A25B6A20A9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{16D71D4F-1D3F-483E-9C6C-A3A25B6A20A9}.Debug|x86.Build.0 = Debug|Any CPU
+		{16D71D4F-1D3F-483E-9C6C-A3A25B6A20A9}.Release|AnyCPU.ActiveCfg = Release|Any CPU
+		{16D71D4F-1D3F-483E-9C6C-A3A25B6A20A9}.Release|AnyCPU.Build.0 = Release|Any CPU
+		{16D71D4F-1D3F-483E-9C6C-A3A25B6A20A9}.Release|ARM.ActiveCfg = Release|Any CPU
+		{16D71D4F-1D3F-483E-9C6C-A3A25B6A20A9}.Release|ARM.Build.0 = Release|Any CPU
+		{16D71D4F-1D3F-483E-9C6C-A3A25B6A20A9}.Release|x64.ActiveCfg = Release|Any CPU
+		{16D71D4F-1D3F-483E-9C6C-A3A25B6A20A9}.Release|x64.Build.0 = Release|Any CPU
+		{16D71D4F-1D3F-483E-9C6C-A3A25B6A20A9}.Release|x86.ActiveCfg = Release|Any CPU
+		{16D71D4F-1D3F-483E-9C6C-A3A25B6A20A9}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -483,6 +502,7 @@ Global
 		{46519792-2F00-4FB7-99EF-1465AC7B8994} = {F7130D3D-4E62-4EB3-B74C-1E819E017048}
 		{A6D5A694-454C-432B-BB24-AB784876E8E1} = {CB6BE9F9-5ECF-471B-9D93-605E2BD6825D}
 		{CA0C7AF3-03ED-42D0-A001-001E8EE095E6} = {969DB691-49FB-4785-98F4-2112CC1BA7C4}
+		{16D71D4F-1D3F-483E-9C6C-A3A25B6A20A9} = {969DB691-49FB-4785-98F4-2112CC1BA7C4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {22D684C3-0BD3-4D8A-AB23-748FB5527F6F}
