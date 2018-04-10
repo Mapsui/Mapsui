@@ -71,6 +71,7 @@
     <Compile Include="Maps\PenStrokeCapSample.cs" />
     <Compile Include="Maps\RasterizingLayerSample.cs" />
     <Compile Include="Maps\EmptyMapSample.cs" />
+    <Compile Include="Maps\AtlasSample.cs" />
     <Compile Include="Maps\SvgSample.cs" />
     <Compile Include="Maps\WidgetSample.cs" />
     <Compile Include="Maps\SymbolsSample.cs" />
@@ -140,6 +141,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Images\Ghostscript_Tiger.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\osm-liberty.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

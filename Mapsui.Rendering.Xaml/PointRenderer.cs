@@ -24,10 +24,7 @@ namespace Mapsui.Rendering.Xaml
                     symbol = CreateSymbolFromVectorStyle(symbolStyle, symbolStyle.Opacity, symbolStyle.SymbolType, symbolCache, (float)viewport.Rotation);
                 else
                 {
-                    if (symbolStyle.SymbolType == SymbolType.Svg)
-                        symbol = CreateSymbolFromSvg(symbolStyle.BitmapId, symbolStyle.Opacity, symbolCache);
-                    else
-                        symbol = CreateSymbolFromBitmap(symbolStyle.BitmapId, symbolStyle.Opacity, symbolCache);
+                    symbol = CreateSymbolFromBitmap(symbolStyle.BitmapId, symbolStyle.Opacity, symbolCache);
                 }
                 matrix = CreatePointSymbolMatrix(viewport.Resolution, viewport.Rotation, symbolStyle, symbol.Width, symbol.Height);
             }
@@ -111,11 +108,13 @@ namespace Mapsui.Rendering.Xaml
 
         private static XamlShapes.Shape CreateSymbolFromBitmap(int bitmapId, double opacity, SymbolCache symbolCache)
         {
-            var imageBrush = ((XamlMedia.Imaging.BitmapImage)symbolCache.GetOrCreate(bitmapId)).ToImageBrush();
+            var imageBrush = symbolCache.GetOrCreate(bitmapId).ToImageBrush();
+
+            var size = symbolCache.GetSize(bitmapId);
 
             // note: It probably makes more sense to use PixelWidth here:
-            var width = imageBrush.ImageSource.Width;
-            var height = imageBrush.ImageSource.Height;
+            var width = size.Width;
+            var height = size.Height;
 
             var path = new XamlShapes.Path
             {
@@ -125,35 +124,6 @@ namespace Mapsui.Rendering.Xaml
                 },
                 Fill = imageBrush,
                 Opacity = opacity
-            };
-
-            return path;
-        }
-
-        private static XamlShapes.Shape CreateSymbolFromSvg(int bitmapId, double opacity, SymbolCache symbolCache)
-        {
-            var image = ((XamlMedia.DrawingImage)symbolCache.GetOrCreate(bitmapId)); //.ToImageBrush();
-
-            double width = 0;
-            double height = 0;
-
-            if (image != null)
-            {
-                // note: It probably makes more sense to use PixelWidth here:
-                width = image.Width;
-                height = image.Height;
-            }
-
-            var path = new XamlShapes.Path
-            {
-                Data = new XamlMedia.RectangleGeometry
-                {
-                    Rect = new Rect(-width * 0.5, -height * 0.5, width, height)
-                },
-                Fill = new XamlMedia.DrawingBrush { Drawing = image.Drawing },
-                Opacity = opacity,
-                Width = width,
-                Height = height,
             };
 
             return path;

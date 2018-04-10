@@ -25,10 +25,7 @@ namespace Mapsui.Rendering.Skia
 
                 if ( symbolStyle.BitmapId >= 0)   // case 2) Bitmap Style
                 {
-                    if (symbolStyle.SymbolType == SymbolType.Svg)
-                        DrawPointWithSvgStyle(canvas, symbolStyle, destination, symbolCache, opacity);
-                    else
-                        DrawPointWithBitmapStyle(canvas, symbolStyle, destination, symbolCache, opacity);
+                    DrawPointWithBitmapStyle(canvas, symbolStyle, destination, symbolCache, opacity);
                 }
                 else                              // case 3) SymbolStyle without bitmap
                 {
@@ -162,33 +159,43 @@ namespace Mapsui.Rendering.Skia
         private static void DrawPointWithBitmapStyle(SKCanvas canvas, SymbolStyle symbolStyle, Point destination,
             SymbolCache symbolCache, float opacity)
         {
-            var bitmap = symbolCache.GetOrCreate(symbolStyle.BitmapId, false);
+            var bitmap = symbolCache.GetOrCreate(symbolStyle.BitmapId);
 
             // Calc offset (relative or absolut)
             var offsetX = symbolStyle.SymbolOffset.IsRelative ? bitmap.Width * symbolStyle.SymbolOffset.X : symbolStyle.SymbolOffset.X;
             var offsetY = symbolStyle.SymbolOffset.IsRelative ? bitmap.Height * symbolStyle.SymbolOffset.Y : symbolStyle.SymbolOffset.Y;
 
-            BitmapHelper.RenderBitmap(canvas, bitmap.Bitmap,
-                (float) destination.X, (float) destination.Y,
-                (float) symbolStyle.SymbolRotation,
-                (float) offsetX, (float) offsetY,
-                opacity: opacity, scale: (float) symbolStyle.SymbolScale);
-        }
-
-        private static void DrawPointWithSvgStyle(SKCanvas canvas, SymbolStyle symbolStyle, Point destination,
-            SymbolCache symbolCache, float opacity)
-        {
-            var bitmap = symbolCache.GetOrCreate(symbolStyle.BitmapId, true);
-
-            // Calc offset (relative or absolut)
-            var offsetX = symbolStyle.SymbolOffset.IsRelative ? bitmap.Width * symbolStyle.SymbolOffset.X : symbolStyle.SymbolOffset.X;
-            var offsetY = symbolStyle.SymbolOffset.IsRelative ? bitmap.Height * symbolStyle.SymbolOffset.Y : symbolStyle.SymbolOffset.Y;
-
-            BitmapHelper.RenderSvg(canvas, bitmap.Svg,
-                (float)destination.X, (float)destination.Y,
-                (float)symbolStyle.SymbolRotation,
-                (float)offsetX, (float)offsetY,
-                opacity: opacity, scale: (float)symbolStyle.SymbolScale);
+            switch (bitmap.Type)
+            {
+                case BitmapType.Bitmap:
+                    BitmapHelper.RenderBitmap(canvas, bitmap.Bitmap,
+                        (float) destination.X, (float) destination.Y,
+                        (float) symbolStyle.SymbolRotation,
+                        (float) offsetX, (float) offsetY,
+                        opacity: opacity, scale: (float) symbolStyle.SymbolScale);
+                    break;
+                case BitmapType.Svg:
+                    BitmapHelper.RenderSvg(canvas, bitmap.Svg,
+                        (float)destination.X, (float)destination.Y,
+                        (float)symbolStyle.SymbolRotation,
+                        (float)offsetX, (float)offsetY,
+                        opacity: opacity, scale: (float)symbolStyle.SymbolScale);
+                    break;
+                case BitmapType.Atlas:
+                    var atlas = bitmap.Atlas;
+                    if (atlas.Data == null)
+                    {
+                        var bitmapAtlas = symbolCache.GetOrCreate(atlas.BitmapId);
+                        atlas.Data = bitmapAtlas.Bitmap.Subset(new SKRectI(atlas.X, atlas.Y, atlas.X + atlas.Width,
+                            atlas.Y + atlas.Height));
+                    }
+                    BitmapHelper.RenderBitmap(canvas, (SKImage)atlas.Data,
+                        (float)destination.X, (float)destination.Y,
+                        (float)symbolStyle.SymbolRotation,
+                        (float)offsetX, (float)offsetY,
+                        opacity: opacity, scale: (float)symbolStyle.SymbolScale);
+                    break;
+            }
         }
     }
 }
