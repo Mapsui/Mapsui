@@ -4,6 +4,7 @@ using System.Reflection;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
+using Mapsui.Samples.Common.Helpers;
 using Mapsui.Styles;
 using Mapsui.Utilities;
 
@@ -37,7 +38,7 @@ namespace Mapsui.Samples.Common.Maps
         public static MemoryProvider CreateMemoryProviderWithDiverseSymbols(BoundingBox envelope, int count = 100)
         {
             
-            return new MemoryProvider(CreateDiverseFeatures(PointsSample.GenerateRandomPoints(envelope, count, 3)));
+            return new MemoryProvider(CreateDiverseFeatures(RandomPointHelper.GenerateRandomPoints(envelope, count)));
         }
 
         private static Features CreateDiverseFeatures(IEnumerable<IGeometry> randomPoints)

@@ -39,6 +39,8 @@
     <EmbeddedResource Include="EmbeddedResources\countries-hires.json" />
     <EmbeddedResource Include="EmbeddedResources\el-molar.mbtiles" />
     <EmbeddedResource Include="EmbeddedResources\torrejon-de-ardoz.mbtiles" />
+    <EmbeddedResource Include="EmbeddedResources\cities.geojson" />
+    <EmbeddedResource Include="EmbeddedResources\cities.json" />
     <None Include="MbTiles\el-molar.mbtiles">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -61,6 +63,7 @@
   <ItemGroup>
     <Compile Include="AllSamples.cs" />
     <Compile Include="Helpers\MbTilesHelper.cs" />
+    <Compile Include="Helpers\RandomPointHelper.cs" />
     <Compile Include="Maps\BingSample.cs" />
     <Compile Include="Maps\CenterOnLocationSample.cs" />
     <Compile Include="Maps\KeepWithinExtentsSample.cs" />

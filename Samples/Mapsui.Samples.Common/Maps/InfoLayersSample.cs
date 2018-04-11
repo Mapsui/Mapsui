@@ -3,6 +3,7 @@ using System.Linq;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
+using Mapsui.Samples.Common.Helpers;
 using Mapsui.Styles;
 using Mapsui.Utilities;
 
@@ -149,7 +150,7 @@ namespace Mapsui.Samples.Common.Maps
         {
             return new Layer(InfoLayerName)
             {
-                DataSource = PointsSample.CreateProviderWithRandomPoints(envelope, 25),
+                DataSource = RandomPointHelper.CreateProviderWithRandomPoints(envelope, 25),
                 Style = CreateSymbolStyle()
             };
         }
@@ -158,7 +159,7 @@ namespace Mapsui.Samples.Common.Maps
         {
             return new Layer(HoverLayerName)
             {
-                DataSource = PointsSample.CreateProviderWithRandomPoints(envelope, 25),
+                DataSource = RandomPointHelper.CreateProviderWithRandomPoints(envelope),
                 Style = CreateHoverSymbolStyle()
             };
         }

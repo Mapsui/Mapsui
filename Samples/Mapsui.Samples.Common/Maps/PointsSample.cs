@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Reflection;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
+using Mapsui.Samples.Common.Helpers;
 using Mapsui.Styles;
 using Mapsui.Utilities;
 
@@ -10,8 +10,6 @@ namespace Mapsui.Samples.Common.Maps
 {
     public static class PointsSample
     {
-        private static Random _random = new Random(0);
-
         public static Map CreateMap()
         {
             var map = new Map();
@@ -19,46 +17,31 @@ namespace Mapsui.Samples.Common.Maps
             map.Layers.Add(CreateRandomPointLayer(map.Envelope));
             return map;
         }
-
-        public static MemoryProvider CreateProviderWithRandomPoints(BoundingBox envelope, int count = 100)
+        
+        public static ILayer CreateRandomPointLayer(BoundingBox envelope)
         {
-            return new MemoryProvider(CreateFeatures(GenerateRandomPoints(envelope, count)));
-        }
-
-        public static IEnumerable<IGeometry> GenerateRandomPoints(BoundingBox envelope, int count = 25, int? randomSeed = null)
-        {
-            if (randomSeed != null) _random = new Random(randomSeed.Value);
-
-            var result = new List<IGeometry>();
-
-            for (var i = 0; i < count; i++)
+            return new MemoryLayer
             {
-                result.Add(new Point(
-                    _random.NextDouble()*envelope.Width + envelope.Left,
-                    _random.NextDouble()*envelope.Height + envelope.Bottom));
-            }
-
-            return result;
-        }
-
-        private static Features CreateFeatures(IEnumerable<IGeometry> randomPoints)
-        {
-            var features = new Features();
-            var counter = 0;
-            foreach (var point in randomPoints)
-            {
-                features.Add(new Feature { Geometry = point, ["Label"] = counter++.ToString() });
-            }
-            return features;
-        }
-
-        public static ILayer CreateRandomPointLayer(BoundingBox envelope, int count = 25, IStyle style = null)
-        {
-            return new Layer
-            {
-                DataSource = new MemoryProvider(GenerateRandomPoints(envelope, count)),
-                Style = style ?? new VectorStyle { Fill = new Brush(Color.White), Outline = new Pen { Color = Color.Black, PenStyle = PenStyle.Dash } }
+                DataSource = new MemoryProvider(RandomPointHelper.GenerateRandomPoints(envelope)),
+                Style = CreateBitmapStyle()
             };
+        }
+        
+        private static SymbolStyle CreateBitmapStyle()
+        {
+            // For this sample we get the bitmap from an embedded resouce
+            // but you could get the data stream from the web or anywhere
+            // else.
+            var path = "Mapsui.Samples.Common.Images.ic_place_black_24dp.png";
+            var bitmapId = GetBitmapIdForEmbeddedResource(path);
+            return new SymbolStyle { BitmapId = bitmapId, SymbolScale = 0.75 };
+        }
+
+        private static int GetBitmapIdForEmbeddedResource(string imagePath)
+        {
+            var assembly = typeof(PointsSample).GetTypeInfo().Assembly;
+            var image = assembly.GetManifestResourceStream(imagePath);
+            return BitmapRegistry.Instance.Register(image);
         }
     }
 }
