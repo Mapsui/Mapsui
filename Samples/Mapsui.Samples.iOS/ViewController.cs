@@ -1,7 +1,10 @@
 ﻿using System;
+using System.IO;
 using Mapsui.UI.iOS;
 using UIKit;
 using CoreGraphics;
+using Mapsui.Samples.Common.Helpers;
+using Mapsui.Samples.Common.Maps;
 
 namespace Mapsui.Samples.iOS
 {
@@ -15,6 +18,11 @@ namespace Mapsui.Samples.iOS
         {
             base.ViewDidLoad();
 
+            // Hack to tell the platform independent samples where the files can be found on iOS.
+            MbTilesSample.MbTilesLocation = MbTilesLocationOnIos;
+            // Never tested this. PDD.
+            MbTilesHelper.DeployMbTilesFile(s => File.Create(Path.Combine(MbTilesLocationOnIos, s)));
+
             View = CreateMap(View.Bounds);
         }
 
@@ -23,11 +31,14 @@ namespace Mapsui.Samples.iOS
         {
             return new MapControl(bounds)
             {
-                Map = Common.Maps.OsmSample.CreateMap(),
+                Map = OsmSample.CreateMap(),
                 RotationLock = true,
                 UnSnapRotationDegrees = 30,
-                ReSnapRotationDegrees = 5,
+                ReSnapRotationDegrees = 5
             };                        
         }
+
+        private static string MbTilesLocationOnIos => Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+
     }
 }

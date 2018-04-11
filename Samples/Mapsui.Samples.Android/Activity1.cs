@@ -9,6 +9,7 @@ using Android.Views;
 using Android.Widget;
 using Java.Lang;
 using Mapsui.Providers;
+using Mapsui.Samples.Common.Helpers;
 using Mapsui.Samples.Common.Maps;
 using Mapsui.UI;
 using Mapsui.UI.Android;
@@ -32,7 +33,9 @@ namespace Mapsui.Samples.Android
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Main);
 
-            DeployMbTilesFile();
+            // Hack to tell the platform independent samples where the files can be found on Android.
+            MbTilesSample.MbTilesLocation = MbTilesLocationOnAndroid;
+            MbTilesHelper.DeployMbTilesFile(s => File.Create(Path.Combine(MbTilesLocationOnAndroid, s)));
             
             var mapControl = FindViewById<MapControl>(Resource.Id.mapcontrol);
             mapControl.Map = PolygonSample.CreateMap();
@@ -108,39 +111,7 @@ namespace Mapsui.Samples.Android
             var str = result.ToString();
             return str.Substring(0, result.Length() - 3);
         }
-
-        private void DeployMbTilesFile()
-        {
-            // So what is this all about?
-            // I don't know how to access the file as part of the apk (let me know if there is a simple way)
-            // So I store them as embbeded resources and copy them to disk on startup.
-            // (Is there a way to access sqlite files directly as memory stream?).
-            
-            // Hack to tell the platform independent samples where the files can be found on Android.
-            MbTilesSample.MbTilesLocation = MbTilesLocationOnAndroid;
-
-            var embeddedResourcesPath = "Mapsui.Samples.Common.EmbeddedResources.";
-            var mbTileFiles = new [] { "world.mbtiles", "el-molar.mbtiles", "torrejon-de-ardoz.mbtiles" };
-
-            foreach (var mbTileFile in mbTileFiles)
-            {
-                CopyToAndroidStorage(embeddedResourcesPath, mbTileFile);
-            }
-        }
-
-        private static void CopyToAndroidStorage(string embeddedResourcesPath, string mbTilesFile)
-        {
-            var assembly = typeof(PointsSample).Assembly;
-            using (var image = assembly.GetManifestResourceStream(embeddedResourcesPath + mbTilesFile))
-            {
-                if (image == null) throw new ArgumentException("EmbeddedResource not found");
-                using (var dest = File.Create(Path.Combine(MbTilesLocationOnAndroid, mbTilesFile)))
-                {
-                    image.CopyTo(dest);
-                }
-            }
-        }
-
+        
         private static string MbTilesLocationOnAndroid => System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
     }
 }
