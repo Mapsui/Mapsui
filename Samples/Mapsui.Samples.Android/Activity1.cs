@@ -33,8 +33,7 @@ namespace Mapsui.Samples.Android
             SetContentView(Resource.Layout.Main);
 
             DeployMbTilesFile();
-            MbTilesSample.MbTilesLocation = MbTilesLocationOnAndroid;
-
+            
             var mapControl = FindViewById<MapControl>(Resource.Id.mapcontrol);
             mapControl.Map = PolygonSample.CreateMap();
             mapControl.Map.Info+= MapOnInfo;
@@ -112,6 +111,14 @@ namespace Mapsui.Samples.Android
 
         private void DeployMbTilesFile()
         {
+            // So what is this all about?
+            // I don't know how to access the file as part of the apk (let me know if there is a simple way)
+            // So I store them as embbeded resources and copy them to disk on startup.
+            // (Is there a way to access sqlite files directly as memory stream?).
+            
+            // Hack to tell the platform independent samples where the files can be found on Android.
+            MbTilesSample.MbTilesLocation = MbTilesLocationOnAndroid;
+
             var embeddedResourcesPath = "Mapsui.Samples.Common.EmbeddedResources.";
             var mbTileFiles = new [] { "world.mbtiles", "el-molar.mbtiles", "torrejon-de-ardoz.mbtiles" };
 
