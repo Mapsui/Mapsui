@@ -64,8 +64,7 @@ namespace Mapsui.Samples.Common.Maps
         {
             var assembly = typeof(PointsSample).GetTypeInfo().Assembly;
             var image = assembly.GetManifestResourceStream(imagePath);
-            var bitmapId = BitmapRegistry.Instance.Register(image);
-            return bitmapId;
+            return BitmapRegistry.Instance.Register(image);
         }
     }
 }
