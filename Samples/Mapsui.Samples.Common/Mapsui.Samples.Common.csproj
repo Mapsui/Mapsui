@@ -41,6 +41,7 @@
     <EmbeddedResource Include="EmbeddedResources\torrejon-de-ardoz.mbtiles" />
     <EmbeddedResource Include="EmbeddedResources\cities.geojson" />
     <EmbeddedResource Include="EmbeddedResources\cities.json" />
+    <EmbeddedResource Include="EmbeddedResources\congo.json" />
     <None Include="MbTiles\el-molar.mbtiles">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -151,6 +152,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Images\osm-liberty.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\home.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
