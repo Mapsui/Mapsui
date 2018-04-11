@@ -112,26 +112,28 @@ namespace Mapsui.Samples.Android
 
         private void DeployMbTilesFile()
         {
-            var path = "Mapsui.Samples.Common.EmbeddedResources.world.mbtiles";
+            var embeddedResourcesPath = "Mapsui.Samples.Common.EmbeddedResources.";
+            var mbTileFiles = new [] { "world.mbtiles", "el-molar.mbtiles", "torrejon-de-ardoz.mbtiles" };
+
+            foreach (var mbTileFile in mbTileFiles)
+            {
+                CopyToAndroidStorage(embeddedResourcesPath, mbTileFile);
+            }
+        }
+
+        private static void CopyToAndroidStorage(string embeddedResourcesPath, string mbTilesFile)
+        {
             var assembly = typeof(PointsSample).Assembly;
-            using (var image = assembly.GetManifestResourceStream(path))
+            using (var image = assembly.GetManifestResourceStream(embeddedResourcesPath + mbTilesFile))
             {
                 if (image == null) throw new ArgumentException("EmbeddedResource not found");
-                using (var dest = File.Create(MbTilesLocationOnAndroid))
+                using (var dest = File.Create(Path.Combine(MbTilesLocationOnAndroid, mbTilesFile)))
                 {
                     image.CopyTo(dest);
                 }
             }
         }
 
-        private static string MbTilesLocationOnAndroid
-        {
-            get
-            {
-                var folder = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
-                var path = Path.Combine(folder, "world.mbtiles");
-                return path;
-            }
-        }
+        private static string MbTilesLocationOnAndroid => System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
     }
 }

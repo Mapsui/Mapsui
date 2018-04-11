@@ -37,6 +37,8 @@
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
     <EmbeddedResource Include="EmbeddedResources\countries-hires.json" />
+    <EmbeddedResource Include="EmbeddedResources\el-molar.mbtiles" />
+    <EmbeddedResource Include="EmbeddedResources\torrejon-de-ardoz.mbtiles" />
     <None Include="MbTiles\el-molar.mbtiles">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -62,6 +64,7 @@
     <Compile Include="Maps\CenterOnLocationSample.cs" />
     <Compile Include="Maps\KeepWithinExtentsSample.cs" />
     <Compile Include="Maps\LabelsSample.cs" />
+    <Compile Include="Maps\MbTilesOverlaySample.cs" />
     <Compile Include="Maps\MbTilesSample.cs" />
     <Compile Include="Maps\MutatingTriangleSample.cs" />
     <Compile Include="Maps\OpacityStyleSample.cs" />

@@ -23,6 +23,7 @@ namespace Mapsui.Samples.Common
                 ["Symbols"] = SymbolsSample.CreateMap,
                 ["Info"] = InfoLayersSample.CreateMap,
                 ["MbTiles"] = MbTilesSample.CreateMap,
+                ["MbTiles Overlay"] = MbTilesOverlaySample.CreateMap,
                 ["Keep Within Extents"] = KeepWithinExtentsSample.CreateMap,
                 ["Pen Stroke Cap"] = PenStrokeCapSample.CreateMap,
                 ["Animated point movement"] = AnimatedPointsSample.CreateMap,
