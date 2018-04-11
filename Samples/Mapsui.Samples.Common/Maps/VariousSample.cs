@@ -47,7 +47,7 @@ namespace Mapsui.Samples.Common.Maps
         private static IEnumerable<IFeature> GenerateRandomFeatures(BoundingBox envelope, int count, IStyle style)
         {
             var result = new List<Feature>();
-            var points = RandomPointHelper.GenerateRandomPoints(envelope, count);
+            var points = RandomPointHelper.GenerateRandomPoints(envelope, count, 123);
             foreach (var point in points)
             {
                 result.Add(new Feature { Geometry = point, Styles = new List<IStyle> { style } });

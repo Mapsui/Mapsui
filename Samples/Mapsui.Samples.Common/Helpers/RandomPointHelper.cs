@@ -21,9 +21,9 @@ namespace Mapsui.Samples.Common.Helpers
             return randomPoints.Select(p => new Feature { Geometry = p, ["Label"] = counter++.ToString() });
         }
 
-        public static IEnumerable<IGeometry> GenerateRandomPoints(BoundingBox envelope, int count = 25)
+        public static IEnumerable<IGeometry> GenerateRandomPoints(BoundingBox envelope, int count = 25, int seed = 192)
         {
-            _random = new Random(356);
+            _random = new Random(seed);
 
             var result = new List<IGeometry>();
 
