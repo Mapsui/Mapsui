@@ -4,7 +4,6 @@ using System.IO;
 using Android.App;
 using Android.Content.PM;
 using Android.Graphics;
-using Android.OS;
 using Android.Views;
 using Android.Widget;
 using Java.Lang;
@@ -28,7 +27,7 @@ namespace Mapsui.Samples.Android
     {
         private LinearLayout _popup;
 
-        protected override void OnCreate(Bundle bundle)
+        protected override void OnCreate(global::Android.OS.Bundle bundle)
         {
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Main);
@@ -112,6 +111,6 @@ namespace Mapsui.Samples.Android
             return str.Substring(0, result.Length() - 3);
         }
         
-        private static string MbTilesLocationOnAndroid => System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
+        private static string MbTilesLocationOnAndroid => Environment.GetFolderPath(Environment.SpecialFolder.Personal);
     }
 }
