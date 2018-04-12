@@ -44,7 +44,8 @@ namespace Mapsui.Rendering
 
             foreach (var feature in features)
             {
-                var featureStyles = feature.Styles ?? Enumerable.Empty<IStyle>();
+                var featureStyles = feature.Styles ?? Enumerable.Empty<IStyle>(); // null check
+                featureStyles = featureStyles.SelectMany(ToArray); // account for StyleCollections
                 foreach (var featureStyle in featureStyles)
                 {
                     if (feature.Styles != null && featureStyle.Enabled)
@@ -53,6 +54,11 @@ namespace Mapsui.Rendering
                     }
                 }
             }
+        }
+
+        private static IStyle[] ToArray(IStyle style)
+        {
+            return (style as StyleCollection)?.ToArray() ?? new[] { style };
         }
 
         private static IStyle[] ToArray(ILayer layer)
