@@ -35,7 +35,8 @@ namespace Mapsui.Samples.Common.Maps
             // else.
             var path = "Mapsui.Samples.Common.Images.home.png"; // Designed by Freepik http://www.freepik.com
             var bitmapId = GetBitmapIdForEmbeddedResource(path);
-            return new SymbolStyle { BitmapId = bitmapId, SymbolScale = 0.20, SymbolOffset = new Offset(0, 80)};
+            var bitmapHeight = 176;
+            return new SymbolStyle { BitmapId = bitmapId, SymbolScale = 0.20, SymbolOffset = new Offset(0, bitmapHeight * 0.5) };
         }
 
         private static IEnumerable<IFeature> GetCitiesFromEmbeddedResource()
