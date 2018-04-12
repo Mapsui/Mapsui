@@ -46,7 +46,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="MbTiles\world.mbtiles">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="MbTiles\torrejon-de-ardoz.mbtiles">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
