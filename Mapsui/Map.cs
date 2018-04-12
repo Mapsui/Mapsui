@@ -180,8 +180,8 @@ namespace Mapsui
         /// </summary>
         public event DataChangedEventHandler DataChanged;
         public event EventHandler RefreshGraphics;
-        public event EventHandler<InfoEventArgs> Info;
-        public event EventHandler<InfoEventArgs> Hover;
+        public event EventHandler<MapInfoEventArgs> Info;
+        public event EventHandler<MapInfoEventArgs> Hover;
 
         private void LayersLayerRemoved(ILayer layer)
         {
@@ -215,30 +215,44 @@ namespace Mapsui
             }
 
             if (Info == null) return false;
-            var eventArgs = InfoHelper.GetInfoEventArgs(Viewport, screenPosition, scale, InfoLayers, symbolCache, numTaps);
-            if (eventArgs != null)
+            var mapInfo = InfoHelper.GetMapInfo(Viewport, screenPosition, scale, InfoLayers, symbolCache);
+
+            if (mapInfo != null)
             {
                 // TODO Info items should be iterated through rather than getting a single item, 
                 // based on Z index and then called until handled = true; Ordered By highest Z
-
-                Info?.Invoke(this, eventArgs);
-                return eventArgs.Handled;
+                var mapInfoEventArgs = new MapInfoEventArgs
+                {
+                    MapInfo = mapInfo,
+                    NumTaps = numTaps,
+                    Handled = false
+                };
+                Info?.Invoke(this, mapInfoEventArgs);
+                return mapInfoEventArgs.Handled;
             }
 
             return false;
         }
 
-        private InfoEventArgs _previousHoverEventArgs;
+        private MapInfoEventArgs _previousHoverEventArgs;
 
         public void InvokeHover(Point screenPosition, float scale, ISymbolCache symbolCache)
         {
             if (Hover == null) return;
             if (HoverLayers.Count == 0) return;
-            var hoverEventArgs = InfoHelper.GetInfoEventArgs(Viewport, screenPosition, scale, HoverLayers, symbolCache, 0);
-            if (hoverEventArgs?.Feature != _previousHoverEventArgs?.Feature) // only notify when the feature changes
+            var mapInfo = InfoHelper.GetMapInfo(Viewport, screenPosition, scale, HoverLayers, symbolCache);
+
+            if (mapInfo?.Feature != _previousHoverEventArgs?.MapInfo.Feature) // only notify when the feature changes
             {
-                _previousHoverEventArgs = hoverEventArgs;
-                Hover?.Invoke(this, hoverEventArgs);
+                var mapInfoEventArgs = new MapInfoEventArgs
+                {
+                    MapInfo = mapInfo,
+                    NumTaps = 0,
+                    Handled = false
+                };
+                
+                _previousHoverEventArgs = mapInfoEventArgs;
+                Hover?.Invoke(this, mapInfoEventArgs);
             }
         }
 

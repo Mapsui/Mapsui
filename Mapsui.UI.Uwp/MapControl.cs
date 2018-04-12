@@ -29,10 +29,10 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Shapes;
 using Mapsui.Fetcher;
 using Mapsui.Layers;
+using Mapsui.Logging;
 using Mapsui.Rendering;
 using Mapsui.Rendering.Skia;
 using Mapsui.Utilities;
@@ -43,16 +43,13 @@ using VerticalAlignment = Windows.UI.Xaml.VerticalAlignment;
 
 namespace Mapsui.UI.Uwp
 {
-    public class MapControl : Grid, IMapControl
+    public partial class MapControl : Grid, IMapControl
     {
         private readonly IRenderer _renderer;
         private readonly Rectangle _bboxRect = CreateSelectRectangle();
         private readonly SKXamlCanvas _renderTarget = CreateRenderTarget();
-        private readonly DoubleAnimation _zoomAnimation = new DoubleAnimation();
-        private readonly Storyboard _zoomStoryBoard = new Storyboard();
         private bool _invalid;
         private Map _map;
-        private Geometries.Point _skiaScale;
         private double _innerRotation;
 
         public event EventHandler ViewportInitialized;
@@ -63,16 +60,19 @@ namespace Mapsui.UI.Uwp
 
             Children.Add(_renderTarget);
             Children.Add(_bboxRect);
-    
+
             _renderTarget.PaintSurface += _renderTarget_PaintSurface;
-                        
+
             Map = new Map();
 
             Loaded += MapControlLoaded;
 
             SizeChanged += MapControlSizeChanged;
             CompositionTarget.Rendering += CompositionTarget_Rendering;
+
             _renderer = new MapRenderer();
+            _scale = GetSkiaScale();
+
             PointerWheelChanged += MapControl_PointerWheelChanged;
 
             ManipulationMode = ManipulationModes.Scale | ManipulationModes.TranslateX | ManipulationModes.TranslateY | ManipulationModes.Rotate;
@@ -82,7 +82,7 @@ namespace Mapsui.UI.Uwp
 
             Tapped += OnSingleTapped;
             DoubleTapped += OnDoubleTapped;
-            
+
             var orientationSensor = SimpleOrientationSensor.GetDefault();
             if (orientationSensor != null)
                 orientationSensor.OrientationChanged += (sender, args) =>
@@ -93,13 +93,13 @@ namespace Mapsui.UI.Uwp
         private void OnDoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
             var tabPosition = e.GetPosition(this).ToMapsui();
-            Map.InvokeInfo(tabPosition, tabPosition, 1, _renderer.SymbolCache, WidgetTouched, 2);
+            Map.InvokeInfo(tabPosition, tabPosition, _scale, _renderer.SymbolCache, WidgetTouched, 2);
         }
 
         private void OnSingleTapped(object sender, TappedRoutedEventArgs e)
         {
             var tabPosition = e.GetPosition(this).ToMapsui();
-            Map.InvokeInfo(tabPosition, tabPosition, 1, _renderer.SymbolCache, WidgetTouched, 1);
+            Map.InvokeInfo(tabPosition, tabPosition, _scale, _renderer.SymbolCache, WidgetTouched, 1);
         }
 
         private static Rectangle CreateSelectRectangle()
@@ -118,7 +118,7 @@ namespace Mapsui.UI.Uwp
                 Visibility = Visibility.Collapsed
             };
         }
-        
+
         private static SKXamlCanvas CreateRenderTarget()
         {
             return new SKXamlCanvas
@@ -130,7 +130,7 @@ namespace Mapsui.UI.Uwp
         }
 
         public bool ZoomToBoxMode { get; set; }
-        
+
         public Map Map
         {
             get => _map;
@@ -140,7 +140,7 @@ namespace Mapsui.UI.Uwp
                 {
                     UnsubscribeFromMapEvents(_map);
                     _map = null;
-                   
+
                 }
 
                 _map = value;
@@ -221,7 +221,7 @@ namespace Mapsui.UI.Uwp
             {
                 var resolution = ZoomHelper.ZoomIn(_map.Resolutions, currentResolution);
 
-                return ViewportLimiter.LimitResolution(resolution, _map.Viewport.Width, _map.Viewport.Height, 
+                return ViewportLimiter.LimitResolution(resolution, _map.Viewport.Width, _map.Viewport.Height,
                     _map.ZoomMode, _map.ZoomLimits, _map.Resolutions, _map.Envelope);
             }
             if (mouseWheelDelta < 0)
@@ -248,10 +248,7 @@ namespace Mapsui.UI.Uwp
 
         public void RefreshGraphics()
         {
-            InvalidateArrange();
-            InvalidateMeasure();
-            _renderTarget.InvalidateArrange();
-            _renderTarget.InvalidateMeasure();
+            InvalidateCanvas();
             _invalid = true;
         }
 
@@ -260,9 +257,13 @@ namespace Mapsui.UI.Uwp
             _map.ViewChanged(true);
         }
 
-        public bool AllowPinchRotation { get; set; }
-        public double UnSnapRotationDegrees { get; set; }
-        public double ReSnapRotationDegrees { get; set; }
+        internal void InvalidateCanvas()
+        {
+            InvalidateArrange();
+            InvalidateMeasure();
+            _renderTarget.InvalidateArrange();
+            _renderTarget.InvalidateMeasure();
+        }
 
         public void Clear()
         {
@@ -299,20 +300,8 @@ namespace Mapsui.UI.Uwp
         {
             TryInitializeViewport();
             UpdateSize();
-            InitAnimation();
         }
-
-        private void InitAnimation()
-        {
-            _zoomAnimation.Duration = new Duration(new TimeSpan(0, 0, 0, 0, 1000));
-            _zoomAnimation.EasingFunction = new QuarticEase();
-            Storyboard.SetTarget(_zoomAnimation, this);
-            Storyboard.SetTargetProperty(_zoomAnimation, nameof(Map.Viewport.Resolution));
-
-            if (!_zoomStoryBoard.Children.Contains(_zoomAnimation))
-                _zoomStoryBoard.Children.Add(_zoomAnimation);
-        }
-
+        
         private void MapControlSizeChanged(object sender, SizeChangedEventArgs e)
         {
             TryInitializeViewport();
@@ -340,24 +329,31 @@ namespace Mapsui.UI.Uwp
             }
             else
             {
-                if (e.Cancelled)
+                try
                 {
-                    ErrorMessage = "Cancelled";
-                    OnErrorMessageChanged(EventArgs.Empty);
+                    if (e.Cancelled)
+                    {
+                        ErrorMessage = "Cancelled";
+                        OnErrorMessageChanged(EventArgs.Empty);
+                    }
+                    else if (e.Error is WebException)
+                    {
+                        ErrorMessage = "WebException: " + e.Error.Message;
+                        OnErrorMessageChanged(EventArgs.Empty);
+                    }
+                    else if (e.Error != null)
+                    {
+                        ErrorMessage = e.Error.GetType() + ": " + e.Error.Message;
+                        OnErrorMessageChanged(EventArgs.Empty);
+                    }
+                    else // no problems
+                    {
+                        RefreshGraphics();
+                    }
                 }
-                else if (e.Error is WebException)
+                catch (Exception exception)
                 {
-                    ErrorMessage = "WebException: " + e.Error.Message;
-                    OnErrorMessageChanged(EventArgs.Empty);
-                }
-                else if (e.Error != null)
-                {
-                    ErrorMessage = e.Error.GetType() + ": " + e.Error.Message;
-                    OnErrorMessageChanged(EventArgs.Empty);
-                }
-                else // no problems
-                {
-                    RefreshGraphics();
+                    Logger.Log(LogLevel.Warning, "Unexpected exception in MapDataChanged", exception);
                 }
             }
         }
@@ -367,7 +363,6 @@ namespace Mapsui.UI.Uwp
             _renderTarget.Invalidate();
         }
 
-
         private void _renderTarget_PaintSurface(object sender, SKPaintSurfaceEventArgs e)
         {
             if (_renderer == null) return;
@@ -375,14 +370,13 @@ namespace Mapsui.UI.Uwp
             if (!_invalid) return;
 
             TryInitializeViewport();
-            if (!_map.Viewport.Initialized) return; 
-            
-            if (_skiaScale == null) _skiaScale = GetSkiaScale();
-            e.Surface.Canvas.Scale((float)_skiaScale.X, (float)_skiaScale.Y);
+            if (!_map.Viewport.Initialized) return;
+
+            e.Surface.Canvas.Scale(_scale, _scale);
             _renderer.Render(e.Surface.Canvas, Map.Viewport, _map.Layers, _map.Widgets, _map.BackColor);
             _renderTarget.Arrange(new Rect(0, 0, Map.Viewport.Width, Map.Viewport.Height));
             _invalid = false;
- 
+
         }
 
         public void ZoomToBox(Geometries.Point beginPoint, Geometries.Point endPoint)
@@ -393,8 +387,8 @@ namespace Mapsui.UI.Uwp
             if (height <= 0) return;
 
             ZoomHelper.ZoomToBoudingbox(
-                beginPoint.X, beginPoint.Y, endPoint.X, endPoint.Y, 
-                Map.Viewport.Width, Map.Viewport.Height, 
+                beginPoint.X, beginPoint.Y, endPoint.X, endPoint.Y,
+                Map.Viewport.Width, Map.Viewport.Height,
                 out var x, out var y, out var resolution);
 
             resolution = ViewportLimiter.LimitResolution(resolution, _map.Viewport.Width, _map.Viewport.Height, _map.ZoomMode, _map.ZoomLimits,
@@ -435,13 +429,13 @@ namespace Mapsui.UI.Uwp
 
 
         private void OnManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
-        {            
+        {
             var (center, radius, angle) = (e.Position.ToMapsui(), e.Delta.Scale, e.Delta.Rotation);
             var (prevCenter, prevRadius, prevAngle) = (e.Position.ToMapsui().Offset(-e.Delta.Translation.X, -e.Delta.Translation.Y), 1f, 0f);
-            
+
             double rotationDelta = 0;
 
-            if (AllowPinchRotation)
+            if (RotationLock)
             {
                 _innerRotation += angle - prevAngle;
                 _innerRotation %= 360;
@@ -493,20 +487,10 @@ namespace Mapsui.UI.Uwp
             ViewportInitialized?.Invoke(this, EventArgs.Empty);
         }
 
-        private Geometries.Point GetSkiaScale()
+        private float GetSkiaScale()
         {
             var scaleFactor = DisplayInformation.GetForCurrentView().RawPixelsPerViewPixel;
-            return new Geometries.Point(scaleFactor, scaleFactor);
-        }
-
-        public Geometries.Point WorldToScreen(Geometries.Point worldPosition)
-        {
-            return SharedMapControl.WorldToScreen(Map.Viewport, (float)_skiaScale.X, worldPosition);
-        }
-
-        public Geometries.Point ScreenToWorld(Geometries.Point screenPosition)
-        {
-            return SharedMapControl.ScreenToWorld(Map.Viewport, (float)_skiaScale.Y, screenPosition);
+            return (float)scaleFactor;
         }
 
         private void WidgetTouched(IWidget widget, Geometries.Point screenPosition)
@@ -514,30 +498,6 @@ namespace Mapsui.UI.Uwp
             Task.Run(() => Launcher.LaunchUriAsync(new Uri(((Hyperlink)widget).Url)));
 
             widget.HandleWidgetTouched(screenPosition);
-        }
-
-        public void Unsubscribe()
-        {
-            UnsubscribeFromMapEvents(_map);
-        }
-
-        private void SubscribeToMapEvents(Map map)
-        {
-            map.DataChanged += MapDataChanged;
-            map.PropertyChanged += MapPropertyChanged;
-            map.RefreshGraphics += MapRefreshGraphics;
-        }
-
-        private void UnsubscribeFromMapEvents(Map map)
-        {
-            var temp = map;
-            if (temp != null)
-            {
-                temp.DataChanged -= MapDataChanged;
-                temp.PropertyChanged -= MapPropertyChanged;
-                temp.RefreshGraphics -= MapRefreshGraphics;
-                temp.AbortFetch();
-            }
         }
     }
 }

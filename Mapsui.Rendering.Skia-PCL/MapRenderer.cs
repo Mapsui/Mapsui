@@ -53,7 +53,6 @@ namespace Mapsui.Rendering.Skia
                 {
                     // Not sure if this is needed here:
                     if (background != null) surface.Canvas.Clear(background.ToSkia(1));
-
                     Render(surface.Canvas, viewport, layers);
                     using (var image = surface.Snapshot())
                     {
@@ -127,9 +126,9 @@ namespace Mapsui.Rendering.Skia
             else if (feature.Geometry is MultiLineString)
                 MultiLineStringRenderer.Draw(canvas, viewport, style, feature, feature.Geometry, layerOpacity * style.Opacity);
             else if (feature.Geometry is Polygon)
-                PolygonRenderer.Draw(canvas, viewport, style, feature, feature.Geometry, layerOpacity * style.Opacity);
+                PolygonRenderer.Draw(canvas, viewport, style, feature, feature.Geometry, layerOpacity * style.Opacity, _symbolCache);
             else if (feature.Geometry is MultiPolygon)
-                MultiPolygonRenderer.Draw(canvas, viewport, style, feature, feature.Geometry, layerOpacity * style.Opacity);
+                MultiPolygonRenderer.Draw(canvas, viewport, style, feature, feature.Geometry, layerOpacity * style.Opacity, _symbolCache);
             else if (feature.Geometry is IRaster)
                 RasterRenderer.Draw(canvas, viewport, style, feature, layerOpacity * style.Opacity, _tileCache, _currentIteration);
         }

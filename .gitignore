@@ -3,6 +3,8 @@
 
 *.dll
 
+*.bak
+
 *.zip
 
 *.stamp

@@ -14,7 +14,7 @@ namespace Mapsui.Rendering.Xaml
 
             System.Windows.Shapes.Path path = CreateLineStringPath(vectorStyle);
             path.Data = lineString.ToXaml();
-            path.RenderTransform = new MatrixTransform { Matrix = GeometryRenderer.CreateTransformMatrix1(viewport) };
+            path.RenderTransform = new MatrixTransform { Matrix = GeometryRenderer.CreateTransformMatrix(viewport) };
             GeometryRenderer.CounterScaleLineWidth(path, viewport.Resolution);
             return path;
         }
@@ -27,11 +27,12 @@ namespace Mapsui.Rendering.Xaml
                 //todo: render an outline around the line. 
             }
             path.Stroke = new SolidColorBrush(style.Line.Color.ToXaml());
-            path.StrokeDashArray = style.Line.PenStyle.ToXaml();
+            path.StrokeDashArray = style.Line.PenStyle.ToXaml(style.Line.DashArray);
             var penStrokeCap = style.Line.PenStrokeCap.ToXaml();
             path.StrokeEndLineCap = penStrokeCap;
             path.StrokeStartLineCap = penStrokeCap;
-            // To make similar to skia: path.StrokeLineJoin = PenLineJoin.Round;
+            path.StrokeLineJoin = style.Line.StrokeJoin.ToXaml();
+            path.StrokeMiterLimit = style.Line.StrokeMiterLimit;
             path.Tag = style.Line.Width; // see #linewidthhack
             path.IsHitTestVisible = false;
             return path;

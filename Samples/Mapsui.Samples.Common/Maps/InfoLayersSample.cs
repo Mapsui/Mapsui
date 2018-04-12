@@ -3,6 +3,7 @@ using System.Linq;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
+using Mapsui.Samples.Common.Helpers;
 using Mapsui.Styles;
 using Mapsui.Utilities;
 
@@ -13,6 +14,7 @@ namespace Mapsui.Samples.Common.Maps
         private const string InfoLayerName = "Info Layer";
         private const string HoverLayerName = "Hover Layer";
         private const string PolygonLayerName = "Polygon Layer";
+        private const string LineLayerName = "Line Layer";
 
         public static Map CreateMap()
         {
@@ -22,9 +24,11 @@ namespace Mapsui.Samples.Common.Maps
             map.Layers.Add(CreateInfoLayer(map.Envelope));
             map.Layers.Add(CreateHoverLayer(map.Envelope));
             map.Layers.Add(CreatePolygonLayer());
+            map.Layers.Add(CreateLineLayer());
 
             map.InfoLayers.Add(map.Layers.First(l => l.Name == InfoLayerName));
             map.InfoLayers.Add(map.Layers.First(l => l.Name == PolygonLayerName));
+            map.InfoLayers.Add(map.Layers.First(l => l.Name == LineLayerName));
             map.HoverLayers.Add(map.Layers.First(l => l.Name == HoverLayerName));
 
             return map;
@@ -32,7 +36,7 @@ namespace Mapsui.Samples.Common.Maps
 
         private static ILayer CreatePolygonLayer()
         {
-            var features = new Features {CreatePolygonFeature(), CreateMultiPolygonFeature()};
+            var features = new Features { CreatePolygonFeature(), CreateMultiPolygonFeature() };
             var provider = new MemoryProvider(features);
 
             var layer = new MemoryLayer
@@ -43,6 +47,16 @@ namespace Mapsui.Samples.Common.Maps
             };
 
             return layer;
+        }
+
+        private static ILayer CreateLineLayer()
+        {
+            return new MemoryLayer
+            {
+                Name = LineLayerName,
+                DataSource = new MemoryProvider(CreateLineFeature()),
+                Style = null
+            };
         }
 
         private static Feature CreateMultiPolygonFeature()
@@ -65,6 +79,16 @@ namespace Mapsui.Samples.Common.Maps
             };
             feature.Styles.Add(new VectorStyle());
             return feature;
+        }
+
+        private static Feature CreateLineFeature()
+        {
+            return new Feature
+            {
+                Geometry = CreateLine(),
+                ["Name"] = "Line 1",
+                Styles = new List<IStyle> { new VectorStyle{ Line = new Pen(Color.Violet, 6)}}
+            };
         }
 
         private static MultiPolygon CreateMultiPolygon()
@@ -106,11 +130,27 @@ namespace Mapsui.Samples.Common.Maps
             }));
         }
 
+        private static LineString CreateLine()
+        {
+            var offsetX = -2000000;
+            var offsetY = -2000000;
+            var stepSize = -2000000;
+
+            return new LineString(new[]
+            {
+                new Point(offsetX + stepSize,      offsetY + stepSize),
+                new Point(offsetX + stepSize * 2,  offsetY + stepSize),
+                new Point(offsetX + stepSize * 2,  offsetY + stepSize * 2),
+                new Point(offsetX + stepSize * 3,  offsetY + stepSize * 2),
+                new Point(offsetX + stepSize * 3,  offsetY + stepSize * 3)
+            });
+        }
+
         private static ILayer CreateInfoLayer(BoundingBox envelope)
         {
             return new Layer(InfoLayerName)
             {
-                DataSource = PointsSample.CreateProviderWithRandomPoints(envelope, 25),
+                DataSource = RandomPointHelper.CreateProviderWithRandomPoints(envelope, 25),
                 Style = CreateSymbolStyle()
             };
         }
@@ -119,7 +159,7 @@ namespace Mapsui.Samples.Common.Maps
         {
             return new Layer(HoverLayerName)
             {
-                DataSource = PointsSample.CreateProviderWithRandomPoints(envelope, 25),
+                DataSource = RandomPointHelper.CreateProviderWithRandomPoints(envelope),
                 Style = CreateHoverSymbolStyle()
             };
         }

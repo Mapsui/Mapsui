@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui", "Mapsui\Mapsui.csproj", "{D74C052A-C07E-4B37-A898-134218ACA5C9}"
 EndProject
@@ -45,6 +45,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Rendering.Skia.Tests", "Tests\Mapsui.Rendering.Skia.Tests\Mapsui.Rendering.Skia.Tests.csproj", "{53A4E033-F814-46CC-8105-DAC289524455}"
 EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Mapsui.UI.Shared\Mapsui.UI.Shared.projitems*{f783f99b-aafa-4fb5-80f6-871d679bdb19}*SharedItemsImports = 4
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Addins debug|Any CPU = Addins debug|Any CPU
 		Addins debug|ARM = Addins debug|ARM
@@ -1485,6 +1488,9 @@ Global
 		{5C1F0E76-BF98-4C6E-8AAB-CDB7E3735A9C} = {969DB691-49FB-4785-98F4-2112CC1BA7C4}
 		{81BB36D2-4D01-44E3-9024-E7CBD10DA316} = {F7130D3D-4E62-4EB3-B74C-1E819E017048}
 		{53A4E033-F814-46CC-8105-DAC289524455} = {F7130D3D-4E62-4EB3-B74C-1E819E017048}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {81D8C216-9447-48B9-8D59-3FA1F8E91C85}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		Policies = $0

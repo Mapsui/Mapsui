@@ -19,7 +19,8 @@ namespace Mapsui.Tests.Common
                 PolygonSample.CreateMap,
                 LineSample.CreateMap,
                 TilesSample.CreateMap,
-                LabelSample.CreateMap
+                LabelSample.CreateMap,
+                BitmapSample.CreateMap
             };
         }
     }

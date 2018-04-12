@@ -10,14 +10,19 @@ namespace Mapsui.Rendering.Xaml
 {
     static class StyleExtensions
     {
-        public static DoubleCollection ToXaml(this PenStyle penStyle)
+        public static DoubleCollection ToXaml(this PenStyle penStyle, float[] dashArray = null)
         {
-            return StyleConverter.MapsuiPentoXaml(penStyle);
+            return StyleConverter.MapsuiPentoXaml(penStyle, dashArray);
         }
 
         public static PenLineCap ToXaml(this PenStrokeCap penStrokeCap)
         {
             return StyleConverter.MapsuiStrokeCaptoPenLineCap(penStrokeCap);
+        }
+
+        public static PenLineJoin ToXaml(this StrokeJoin penStrokeJoin)
+        {
+            return StyleConverter.MapsuiStrokeJointoPenLineJoin(penStrokeJoin);
         }
 
         public static WinColor ToXaml(this Color color)
@@ -26,9 +31,9 @@ namespace Mapsui.Rendering.Xaml
             return WinColor.FromArgb((byte)color.A, (byte)color.R, (byte)color.G, (byte)color.B);
         }
         
-        public static Media.Brush ToXaml(this Brush brush, SymbolCache symbolCache = null)
+        public static Media.Brush ToXaml(this Brush brush, SymbolCache symbolCache = null, float rotate = 0)
         {
-            return StyleConverter.MapsuiBrushToXaml(brush, symbolCache);
+            return StyleConverter.MapsuiBrushToXaml(brush, symbolCache, rotate);
         }
 
         public static WinPoint ToXaml(this Offset offset)

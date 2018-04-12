@@ -4,11 +4,11 @@ using System.IO;
 using Android.App;
 using Android.Content.PM;
 using Android.Graphics;
-using Android.OS;
 using Android.Views;
 using Android.Widget;
 using Java.Lang;
 using Mapsui.Providers;
+using Mapsui.Samples.Common.Helpers;
 using Mapsui.Samples.Common.Maps;
 using Mapsui.UI;
 using Mapsui.UI.Android;
@@ -27,19 +27,20 @@ namespace Mapsui.Samples.Android
     {
         private LinearLayout _popup;
 
-        protected override void OnCreate(Bundle bundle)
+        protected override void OnCreate(global::Android.OS.Bundle bundle)
         {
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Main);
 
-            DeployMbTilesFile();
+            // Hack to tell the platform independent samples where the files can be found on Android.
             MbTilesSample.MbTilesLocation = MbTilesLocationOnAndroid;
+            MbTilesHelper.DeployMbTilesFile(s => File.Create(Path.Combine(MbTilesLocationOnAndroid, s)));
             
             var mapControl = FindViewById<MapControl>(Resource.Id.mapcontrol);
-            mapControl.Map = OpacityStyleSample.CreateMap();
+            mapControl.Map = PolygonSample.CreateMap();
             mapControl.Map.Info+= MapOnInfo;
             mapControl.Map.Viewport.ViewportChanged += ViewportOnViewportChanged;
-            mapControl.AllowPinchRotation = true;
+            mapControl.RotationLock = true;
             mapControl.UnSnapRotationDegrees = 30;
             mapControl.ReSnapRotationDegrees = 5;
 
@@ -48,7 +49,8 @@ namespace Mapsui.Samples.Android
 
         private void ViewportOnViewportChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
-            _popup.Visibility = ViewStates.Gone;
+            if (_popup != null)
+                _popup.Visibility = ViewStates.Gone;
         }
 
         private LinearLayout CreatePopup()
@@ -76,23 +78,23 @@ namespace Mapsui.Samples.Android
             return textView;
         }
 
-        private void MapOnInfo(object sender, InfoEventArgs infoEventArgs)
+        private void MapOnInfo(object sender, MapInfoEventArgs args)
         {
-            if (infoEventArgs.Feature != null)
+            if (args.MapInfo.Feature != null)
             {
                 RunOnUiThread(new Runnable(Toast.MakeText(
                     ApplicationContext,
-                    ToDisplayText(infoEventArgs.Feature),
+                    ToDisplayText(args.MapInfo.Feature),
                     ToastLength.Short).Show));
 
-                ShowPopup(infoEventArgs);
+                ShowPopup(args);
             }
         }
 
-        private void ShowPopup(InfoEventArgs infoEventArgs)
+        private void ShowPopup(MapInfoEventArgs args)
         {
             var mapControl = FindViewById<MapControl>(Resource.Id.mapcontrol);
-            var screenPosition = mapControl.WorldToScreen(infoEventArgs.Feature.Geometry.GetBoundingBox().GetCentroid());
+            var screenPosition = mapControl.WorldToScreen(args.MapInfo.Feature.Geometry.GetBoundingBox().GetCentroid());
             
             _popup.SetX((float) (screenPosition.X - _popup.MeasuredWidth * 0.5));
             _popup.SetY((float) screenPosition.Y + 48);
@@ -108,29 +110,7 @@ namespace Mapsui.Samples.Android
             var str = result.ToString();
             return str.Substring(0, result.Length() - 3);
         }
-
-        private void DeployMbTilesFile()
-        {
-            var path = "Mapsui.Samples.Common.EmbeddedResources.world.mbtiles";
-            var assembly = typeof(PointsSample).Assembly;
-            using (var image = assembly.GetManifestResourceStream(path))
-            {
-                if (image == null) throw new ArgumentException("EmbeddedResource not found");
-                using (var dest = File.Create(MbTilesLocationOnAndroid))
-                {
-                    image.CopyTo(dest);
-                }
-            }
-        }
-
-        private static string MbTilesLocationOnAndroid
-        {
-            get
-            {
-                var folder = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
-                var path = Path.Combine(folder, "world.mbtiles");
-                return path;
-            }
-        }
+        
+        private static string MbTilesLocationOnAndroid => Environment.GetFolderPath(Environment.SpecialFolder.Personal);
     }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using Mapsui.Geometries;
 using Mapsui.Styles;
 
@@ -20,8 +21,9 @@ namespace Mapsui.Providers
         public Feature(IFeature feature)
         {
             Geometry = feature.Geometry;
-            RenderedGeometry = feature.RenderedGeometry;
-            Styles = feature.Styles;
+            RenderedGeometry = feature.RenderedGeometry.ToDictionary(entry => entry.Key,
+                entry => entry.Value);
+            Styles = feature.Styles.ToList();
             foreach (var field in feature.Fields)
             {
                 this[field] = feature[field];

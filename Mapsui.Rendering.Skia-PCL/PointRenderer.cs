@@ -48,7 +48,10 @@ namespace Mapsui.Rendering.Skia
             canvas.Save();
             canvas.Translate((float)destination.X, (float)destination.Y);
             canvas.Scale((float)style.SymbolScale, (float)style.SymbolScale);
-            canvas.Translate((float) style.SymbolOffset.X, (float) -style.SymbolOffset.Y);
+            if (style.SymbolOffset.IsRelative)
+                canvas.Translate((float)(SymbolStyle.DefaultWidth * style.SymbolOffset.X), (float)(-SymbolStyle.DefaultWidth * style.SymbolOffset.Y));
+            else
+                canvas.Translate((float) style.SymbolOffset.X, (float) -style.SymbolOffset.Y);
             DrawPointWithVectorStyle(canvas, style, opacity, symbolType);
             canvas.Restore();
         }
@@ -158,13 +161,41 @@ namespace Mapsui.Rendering.Skia
         {
             var bitmap = symbolCache.GetOrCreate(symbolStyle.BitmapId);
 
-            BitmapHelper.RenderBitmap(canvas, bitmap.Bitmap,
-                (float) destination.X, (float) destination.Y,
-                (float) symbolStyle.SymbolRotation,
-                (float) symbolStyle.SymbolOffset.X, (float) symbolStyle.SymbolOffset.Y,
-                opacity: opacity, scale: (float) symbolStyle.SymbolScale);
-        }
+            // Calc offset (relative or absolut)
+            var offsetX = symbolStyle.SymbolOffset.IsRelative ? bitmap.Width * symbolStyle.SymbolOffset.X : symbolStyle.SymbolOffset.X;
+            var offsetY = symbolStyle.SymbolOffset.IsRelative ? bitmap.Height * symbolStyle.SymbolOffset.Y : symbolStyle.SymbolOffset.Y;
 
-        
+            switch (bitmap.Type)
+            {
+                case BitmapType.Bitmap:
+                    BitmapHelper.RenderBitmap(canvas, bitmap.Bitmap,
+                        (float) destination.X, (float) destination.Y,
+                        (float) symbolStyle.SymbolRotation,
+                        (float) offsetX, (float) offsetY,
+                        opacity: opacity, scale: (float) symbolStyle.SymbolScale);
+                    break;
+                case BitmapType.Svg:
+                    BitmapHelper.RenderSvg(canvas, bitmap.Svg,
+                        (float)destination.X, (float)destination.Y,
+                        (float)symbolStyle.SymbolRotation,
+                        (float)offsetX, (float)offsetY,
+                        opacity: opacity, scale: (float)symbolStyle.SymbolScale);
+                    break;
+                case BitmapType.Atlas:
+                    var atlas = bitmap.Atlas;
+                    if (atlas.Data == null)
+                    {
+                        var bitmapAtlas = symbolCache.GetOrCreate(atlas.BitmapId);
+                        atlas.Data = bitmapAtlas.Bitmap.Subset(new SKRectI(atlas.X, atlas.Y, atlas.X + atlas.Width,
+                            atlas.Y + atlas.Height));
+                    }
+                    BitmapHelper.RenderBitmap(canvas, (SKImage)atlas.Data,
+                        (float)destination.X, (float)destination.Y,
+                        (float)symbolStyle.SymbolRotation,
+                        (float)offsetX, (float)offsetY,
+                        opacity: opacity, scale: (float)symbolStyle.SymbolScale);
+                    break;
+            }
+        }
     }
 }

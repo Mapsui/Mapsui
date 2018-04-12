@@ -1,64 +1,86 @@
-﻿using System;
-using System.Collections.Generic;
-using Mapsui.Geometries;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Reflection;
 using Mapsui.Layers;
+using Mapsui.Projection;
 using Mapsui.Providers;
 using Mapsui.Styles;
 using Mapsui.Utilities;
+using Newtonsoft.Json;
 
 namespace Mapsui.Samples.Common.Maps
 {
     public static class PointsSample
     {
-        private static Random _random = new Random(0);
-
         public static Map CreateMap()
         {
             var map = new Map();
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
-            map.Layers.Add(CreateRandomPointLayer(map.Envelope));
+            map.Layers.Add(new MemoryLayer
+            {
+                Name = "Points",
+                DataSource = new MemoryProvider(GetCitiesFromEmbeddedResource()),
+                Style = CreateBitmapStyle()
+            });
+            map.Viewport.Center = map.Layers[1].Envelope.GetCentroid();
+            map.Viewport.Resolution = map.Resolutions[5];
             return map;
         }
 
-        public static MemoryProvider CreateProviderWithRandomPoints(BoundingBox envelope, int count = 100)
+        private static SymbolStyle CreateBitmapStyle()
         {
-            return new MemoryProvider(CreateFeatures(GenerateRandomPoints(envelope, count)));
+            // For this sample we get the bitmap from an embedded resouce
+            // but you could get the data stream from the web or anywhere
+            // else.
+            var path = "Mapsui.Samples.Common.Images.home.png"; // Designed by Freepik http://www.freepik.com
+            var bitmapId = GetBitmapIdForEmbeddedResource(path);
+            var bitmapHeight = 176;
+            return new SymbolStyle { BitmapId = bitmapId, SymbolScale = 0.20, SymbolOffset = new Offset(0, bitmapHeight * 0.5) };
         }
 
-        public static IEnumerable<IGeometry> GenerateRandomPoints(BoundingBox envelope, int count = 25, int? randomSeed = null)
+        private static IEnumerable<IFeature> GetCitiesFromEmbeddedResource()
         {
-            if (randomSeed != null) _random = new Random(randomSeed.Value);
-
-            var result = new List<IGeometry>();
-
-            for (var i = 0; i < count; i++)
+            var path = "Mapsui.Samples.Common.EmbeddedResources.congo.json";
+            var assembly = typeof(PointsSample).GetTypeInfo().Assembly;
+            var stream = assembly.GetManifestResourceStream(path);
+            var cities = DeserializeFromStream<City>(stream);
+            
+            return cities.Select(c =>
             {
-                result.Add(new Point(
-                    _random.NextDouble()*envelope.Width + envelope.Left,
-                    _random.NextDouble()*envelope.Height + envelope.Bottom));
+                var feature = new Feature();
+                var point = SphericalMercator.FromLonLat(c.Lng, c.Lat);
+                feature.Geometry = point;
+                feature["name"] = c.Name;
+                feature["country"] = c.Country;
+                return feature;
+            });
+        }
+
+        public static IEnumerable<T> DeserializeFromStream<T>(Stream stream)
+        {
+            var serializer = new JsonSerializer();
+
+            using (var sr = new StreamReader(stream))
+            using (var jsonTextReader = new JsonTextReader(sr))
+            {
+                return serializer.Deserialize<List<T>>(jsonTextReader);
             }
-
-            return result;
         }
 
-        private static Features CreateFeatures(IEnumerable<IGeometry> randomPoints)
+        private static int GetBitmapIdForEmbeddedResource(string imagePath)
         {
-            var features = new Features();
-            var counter = 0;
-            foreach (var point in randomPoints)
-            {
-                features.Add(new Feature { Geometry = point, ["Label"] = counter++.ToString() });
-            }
-            return features;
+            var assembly = typeof(PointsSample).GetTypeInfo().Assembly;
+            var image = assembly.GetManifestResourceStream(imagePath);
+            return BitmapRegistry.Instance.Register(image);
         }
 
-        public static ILayer CreateRandomPointLayer(BoundingBox envelope, int count = 25, IStyle style = null)
+        private class City
         {
-            return new Layer
-            {
-                DataSource = new MemoryProvider(GenerateRandomPoints(envelope, count)),
-                Style = style ?? new VectorStyle { Fill = new Brush(Color.White), Outline = new Pen { Color = Color.Black, PenStyle = PenStyle.Dash } }
-            };
+            public string Country { get; set; }
+            public string Name { get; set; }
+            public double Lat { get; set; }
+            public double Lng { get; set; }
         }
     }
 }

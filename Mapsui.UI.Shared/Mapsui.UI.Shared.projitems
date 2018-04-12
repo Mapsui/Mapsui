@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>239f2b0d-13cb-4bcf-83bf-f52d696a47b7</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Mapsui.UI.Shared</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Enums\TouchMode.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Enums\ZoomDirection.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EventArgs\HoveredEventArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EventArgs\SwipedEventArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EventArgs\TappedEventArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EventArgs\TouchedEventArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EventArgs\ZoomedEventArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapControl.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\PCLTimer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\VelocityTracker.cs" />
+  </ItemGroup>
+</Project>

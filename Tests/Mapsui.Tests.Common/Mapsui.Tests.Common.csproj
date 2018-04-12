@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AllSamples.cs" />
+    <Compile Include="Maps\BitmapSample.cs" />
     <Compile Include="Maps\BitmapSymbolSample.cs" />
     <Compile Include="Maps\BitmapSymbolWithRotationAndOffsetSample.cs" />
     <Compile Include="Maps\SymbolTypesSample.cs" />
@@ -92,6 +93,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Images\osm-liberty.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Images\Ghostscript_Tiger.svg" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

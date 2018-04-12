@@ -65,7 +65,11 @@
     <Compile Include="Geometries\NotifyingPoint.cs" />
     <Compile Include="Layers\AnimatedFeatures.cs" />
     <Compile Include="Layers\AnimatedPointLayer.cs" />
+    <Compile Include="Layers\WritableLayer.cs" />
+    <Compile Include="Styles\Atlas.cs" />
+    <Compile Include="Styles\StrokeJoin.cs" />
     <Compile Include="Styles\PenStrokeCap.cs" />
+    <Compile Include="UI\MapInfo.cs" />
     <Compile Include="Widgets\Alignment.cs" />
     <Compile Include="Widgets\Hyperlink.cs" />
     <Compile Include="Widgets\IWidget.cs" />
@@ -79,7 +83,6 @@
     <Compile Include="Layers\TmsTileSourceBuilder.cs" />
     <Compile Include="Logging\Logger.cs" />
     <Compile Include="Projection\Transformer.cs" />
-    <Compile Include="UI\SharedMapControl.cs" />
     <Compile Include="UI\ViewportLimiter.cs" />
     <Compile Include="Projection\BoundingBoxIterator.cs" />
     <Compile Include="Projection\Mercator.cs" />
@@ -167,7 +170,7 @@
     <Compile Include="Styles\VectorStyle.cs" />
     <Compile Include="UI\FeatureInfoEventArgs.cs" />
     <Compile Include="UI\InfoHelper.cs" />
-    <Compile Include="UI\InfoEventArgs.cs" />
+    <Compile Include="UI\MapInfoEventArgs.cs" />
     <Compile Include="UI\ViewChangedEventArgs.cs" />
     <Compile Include="UI\IMapControl.cs" />
     <Compile Include="Utilities\Constants.cs" />
