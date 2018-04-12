@@ -16,6 +16,13 @@ namespace Mapsui.Rendering.Skia
                 var center = viewport.WorldToScreen(worldCenter);
                 LabelRenderer.Draw(canvas, labelStyle, feature, (float) center.X, (float) center.Y, opacity);
             }
+            else if (style is StyleCollection styleCollection)
+            {
+                foreach (var s in styleCollection)
+                {
+                    Draw(canvas, viewport, s, feature, geometry, opacity);
+                }
+            }
             else
             {
 
