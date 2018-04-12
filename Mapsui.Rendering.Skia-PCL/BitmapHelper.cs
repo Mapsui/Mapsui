@@ -32,9 +32,9 @@ namespace Mapsui.Rendering.Skia
                 return new BitmapInfo {Bitmap = image};
             }
 
-            if (bitmapStream is Atlas atlas)
+            if (bitmapStream is Sprite sprite)
             {
-                return new BitmapInfo() {Atlas = atlas};
+                return new BitmapInfo() {Sprite = sprite};
             }
 
             return null;

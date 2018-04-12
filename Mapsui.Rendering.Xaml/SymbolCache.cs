@@ -15,13 +15,13 @@ namespace Mapsui.Rendering.Xaml
 
             var obj = BitmapRegistry.Instance.Get(bitmapId);
 
-            if (obj is Atlas atlas)
+            if (obj is Sprite sprite)
             {
-                if (GetOrCreate(atlas.BitmapId) == null)
+                if (GetOrCreate(sprite.Atlas) == null)
                     throw new AccessViolationException("Atlas bitmap unknown");
 
-                var bitmapSource = new CroppedBitmap((BitmapImage)GetOrCreate(atlas.BitmapId),
-                    new System.Windows.Int32Rect(atlas.X, atlas.Y, atlas.Width, atlas.Height));
+                var bitmapSource = new CroppedBitmap((BitmapImage)GetOrCreate(sprite.Atlas),
+                    new System.Windows.Int32Rect(sprite.X, sprite.Y, sprite.Width, sprite.Height));
 
                 var encoder = new PngBitmapEncoder();
                 var memoryStream = new MemoryStream();
