@@ -7,7 +7,7 @@ namespace Mapsui.Rendering.Skia
     {
         Bitmap,
         Svg,
-        Atlas
+        Sprite
     }
 
     public class BitmapInfo
@@ -48,19 +48,19 @@ namespace Mapsui.Rendering.Skia
             }
         }
 
-        public Atlas Atlas
+        public Sprite Sprite
         {
             get
             {
-                if (Type == BitmapType.Atlas)
-                    return (Atlas)data;
+                if (Type == BitmapType.Sprite)
+                    return (Sprite)data;
                 else
                     return null;
             }
             set
             {
                 data = value;
-                Type = BitmapType.Atlas;
+                Type = BitmapType.Sprite;
             }
         }
 
@@ -76,8 +76,8 @@ namespace Mapsui.Rendering.Skia
                         return Bitmap.Width;
                     case BitmapType.Svg:
                         return Svg.CanvasSize.Width;
-                    case BitmapType.Atlas:
-                        return ((Atlas) data).Width;
+                    case BitmapType.Sprite:
+                        return ((Sprite) data).Width;
                     default:
                         return 0;
                 }
@@ -94,8 +94,8 @@ namespace Mapsui.Rendering.Skia
                         return Bitmap.Height;
                     case BitmapType.Svg:
                         return Svg.CanvasSize.Height;
-                    case BitmapType.Atlas:
-                        return ((Atlas) data).Height;
+                    case BitmapType.Sprite:
+                        return ((Sprite) data).Height;
                     default:
                         return 0;
                 }

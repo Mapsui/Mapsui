@@ -32,11 +32,11 @@ namespace Mapsui.Tests.Common.Maps
 
         public static Features CreateFeatures()
         {
-            var atlasBitmapId = LoadBitmap("Mapsui.Tests.Common.Resources.Images.osm-liberty.png");
-            var atlasAmusementPark15 = new Atlas(atlasBitmapId, 106, 0, 21, 21, 1);
-            var atlasClothingStore15 = new Atlas(atlasBitmapId, 84, 106, 21, 21, 1);
-            var atlasDentist15 = new Atlas(atlasBitmapId, 147, 64, 21, 21, 1);
-            var atlasPedestrianPolygon = new Atlas(atlasBitmapId, 0, 0, 64, 64, 1);
+            var atlas = LoadBitmap("Mapsui.Tests.Common.Resources.Images.osm-liberty.png");
+            var spriteAmusementPark15 = new Sprite(atlas, 106, 0, 21, 21, 1);
+            var spriteClothingStore15 = new Sprite(atlas, 84, 106, 21, 21, 1);
+            var spriteDentist15 = new Sprite(atlas, 147, 64, 21, 21, 1);
+            var spritePedestrianPolygon = new Sprite(atlas, 0, 0, 64, 64, 1);
             var svgTigerBitmapId = LoadBitmap("Mapsui.Tests.Common.Resources.Images.Ghostscript_Tiger.svg");
 
             return new Features
@@ -44,27 +44,27 @@ namespace Mapsui.Tests.Common.Maps
                 new Feature
                 {
                     Geometry = new Point(256, 124),
-                    Styles = new[] {new SymbolStyle {BitmapId = atlasBitmapId}}
+                    Styles = new[] {new SymbolStyle {BitmapId = atlas}}
                 },
                 new Feature
                 {
                     Geometry = new Point(20, 280),
-                    Styles = new[] {new SymbolStyle {BitmapId = BitmapRegistry.Instance.Register(atlasAmusementPark15)} }
+                    Styles = new[] {new SymbolStyle {BitmapId = BitmapRegistry.Instance.Register(spriteAmusementPark15)} }
                 },
                 new Feature
                 {
                     Geometry = new Point(60, 280),
-                    Styles = new[] {new SymbolStyle {BitmapId = BitmapRegistry.Instance.Register(atlasClothingStore15)} }
+                    Styles = new[] {new SymbolStyle {BitmapId = BitmapRegistry.Instance.Register(spriteClothingStore15)} }
                 },
                 new Feature
                 {
                     Geometry = new Point(100, 280),
-                    Styles = new[] {new SymbolStyle {BitmapId = BitmapRegistry.Instance.Register(atlasDentist15)} }
+                    Styles = new[] {new SymbolStyle {BitmapId = BitmapRegistry.Instance.Register(spriteDentist15)} }
                 },
                 new Feature
                 {
                     Geometry = new Point(180, 300),
-                    Styles = new[] {new SymbolStyle {BitmapId = BitmapRegistry.Instance.Register(atlasPedestrianPolygon)} }
+                    Styles = new[] {new SymbolStyle {BitmapId = BitmapRegistry.Instance.Register(spritePedestrianPolygon)} }
                 },
                 new Feature
                 {

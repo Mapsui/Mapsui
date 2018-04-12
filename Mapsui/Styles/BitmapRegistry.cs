@@ -18,11 +18,11 @@ namespace Mapsui.Styles
             if (bitmapData == null) throw new ArgumentException(
                 "The bitmap data that is registered is null. Was the image loaded correctly?");
 
-            if (bitmapData is Atlas atlas)
+            if (bitmapData is Sprite sprite)
             {
-                if (atlas.BitmapId < 0 || !_register.ContainsKey(atlas.BitmapId))
+                if (sprite.Atlas < 0 || !_register.ContainsKey(sprite.Atlas))
                 {
-                    throw new ArgumentException("Atlas has no corresponding atlas bitmap.");
+                    throw new ArgumentException("Sprite has no corresponding atlas bitmap.");
                 }
             }
 

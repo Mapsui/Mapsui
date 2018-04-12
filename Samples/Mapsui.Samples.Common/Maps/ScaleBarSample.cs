@@ -1,4 +1,5 @@
-﻿using Mapsui.Styles;
+﻿using Mapsui.Projection;
+using Mapsui.Styles;
 using Mapsui.Utilities;
 using Mapsui.Widgets.ScaleBar;
 
@@ -8,7 +9,11 @@ namespace Mapsui.Samples.Common.Maps
     {
         public static Map CreateMap()
         {
-            var map = new Map();
+            var map = new Map
+            {
+                CRS = "EPSG:3857",
+                Transformation = new MinimalTransformation()
+            };
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
             
             // Add many different ScaleBarWidgets to Viewport of Map

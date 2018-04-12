@@ -181,15 +181,15 @@ namespace Mapsui.Rendering.Skia
                         (float)offsetX, (float)offsetY,
                         opacity: opacity, scale: (float)symbolStyle.SymbolScale);
                     break;
-                case BitmapType.Atlas:
-                    var atlas = bitmap.Atlas;
-                    if (atlas.Data == null)
+                case BitmapType.Sprite:
+                    var sprite = bitmap.Sprite;
+                    if (sprite.Data == null)
                     {
-                        var bitmapAtlas = symbolCache.GetOrCreate(atlas.BitmapId);
-                        atlas.Data = bitmapAtlas.Bitmap.Subset(new SKRectI(atlas.X, atlas.Y, atlas.X + atlas.Width,
-                            atlas.Y + atlas.Height));
+                        var bitmapAtlas = symbolCache.GetOrCreate(sprite.Atlas);
+                        sprite.Data = bitmapAtlas.Bitmap.Subset(new SKRectI(sprite.X, sprite.Y, sprite.X + sprite.Width,
+                            sprite.Y + sprite.Height));
                     }
-                    BitmapHelper.RenderBitmap(canvas, (SKImage)atlas.Data,
+                    BitmapHelper.RenderBitmap(canvas, (SKImage)sprite.Data,
                         (float)destination.X, (float)destination.Y,
                         (float)symbolStyle.SymbolRotation,
                         (float)offsetX, (float)offsetY,

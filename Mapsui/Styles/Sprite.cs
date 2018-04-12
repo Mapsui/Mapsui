@@ -2,9 +2,9 @@
 
 namespace Mapsui.Styles
 {
-    public class Atlas
+    public class Sprite
     {
-        public int BitmapId { get; }
+        public int Atlas { get; }
         public int X { get; }
         public int Y { get; }
         public int Width { get; }
@@ -12,9 +12,9 @@ namespace Mapsui.Styles
         public float PixelRatio { get; }
         public object Data { get; set; }
 
-        public Atlas(int bitmapId, int x, int y, int width, int height, float pixelRatio)
+        public Sprite(int atlas, int x, int y, int width, int height, float pixelRatio)
         {
-            BitmapId = bitmapId;
+            Atlas = atlas;
             X = x;
             Y = y;
             Width = width;
@@ -22,7 +22,7 @@ namespace Mapsui.Styles
             PixelRatio = pixelRatio;
         }
 
-        public Atlas(int bitmapId, Point p, Size s, float pixelRatio) : this(bitmapId, (int)p.X, (int)p.Y, (int)s.Width, (int)s.Height, pixelRatio)
+        public Sprite(int atlas, Point p, Size s, float pixelRatio) : this(atlas, (int)p.X, (int)p.Y, (int)s.Width, (int)s.Height, pixelRatio)
         {
         }
 
