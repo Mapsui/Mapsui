@@ -38,14 +38,23 @@ namespace Mapsui.Rendering
                     if (layerStyle is IThemeStyle) style = (layerStyle as IThemeStyle).GetStyle(feature);
                     if (style == null || style.Enabled == false || style.MinVisible > viewport.Resolution || style.MaxVisible < viewport.Resolution) continue;
 
-                    callback(viewport, style, feature, (float)layer.Opacity);
+                    if (style is StyleCollection styles) // The ThemeStyle can again return a StyleCollection
+                    {
+                        foreach (var s in styles)
+                        {
+                            callback(viewport, s, feature, (float)layer.Opacity);
+                        }
+                    }
+                    else
+                    {
+                        callback(viewport, style, feature, (float)layer.Opacity);
+                    }
                 }
             }
 
             foreach (var feature in features)
             {
                 var featureStyles = feature.Styles ?? Enumerable.Empty<IStyle>(); // null check
-                featureStyles = featureStyles.SelectMany(ToArray); // account for StyleCollections
                 foreach (var featureStyle in featureStyles)
                 {
                     if (feature.Styles != null && featureStyle.Enabled)
