@@ -9,6 +9,8 @@ using Mapsui.Styles;
 using Mapsui.Utilities;
 using Newtonsoft.Json;
 
+// ReSharper disable UnusedAutoPropertyAccessor.Local
+
 namespace Mapsui.Samples.Common.Maps
 {
     public static class PointsSample
@@ -16,27 +18,24 @@ namespace Mapsui.Samples.Common.Maps
         public static Map CreateMap()
         {
             var map = new Map();
+
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
-            map.Layers.Add(new MemoryLayer
+            map.Layers.Add(CreatePointLayer());
+
+            map.Viewport.Center = map.Layers[1].Envelope.GetCentroid();
+            map.Viewport.Resolution = map.Resolutions[5];
+
+            return map;
+        }
+
+        private static MemoryLayer CreatePointLayer()
+        {
+            return new MemoryLayer
             {
                 Name = "Points",
                 DataSource = new MemoryProvider(GetCitiesFromEmbeddedResource()),
                 Style = CreateBitmapStyle()
-            });
-            map.Viewport.Center = map.Layers[1].Envelope.GetCentroid();
-            map.Viewport.Resolution = map.Resolutions[5];
-            return map;
-        }
-
-        private static SymbolStyle CreateBitmapStyle()
-        {
-            // For this sample we get the bitmap from an embedded resouce
-            // but you could get the data stream from the web or anywhere
-            // else.
-            var path = "Mapsui.Samples.Common.Images.home.png"; // Designed by Freepik http://www.freepik.com
-            var bitmapId = GetBitmapIdForEmbeddedResource(path);
-            var bitmapHeight = 176;
-            return new SymbolStyle { BitmapId = bitmapId, SymbolScale = 0.20, SymbolOffset = new Offset(0, bitmapHeight * 0.5) };
+            };
         }
 
         private static IEnumerable<IFeature> GetCitiesFromEmbeddedResource()
@@ -57,6 +56,14 @@ namespace Mapsui.Samples.Common.Maps
             });
         }
 
+        private class City
+        {
+            public string Country { get; set; }
+            public string Name { get; set; }
+            public double Lat { get; set; }
+            public double Lng { get; set; }
+        }
+
         public static IEnumerable<T> DeserializeFromStream<T>(Stream stream)
         {
             var serializer = new JsonSerializer();
@@ -68,19 +75,22 @@ namespace Mapsui.Samples.Common.Maps
             }
         }
 
+        private static SymbolStyle CreateBitmapStyle()
+        {
+            // For this sample we get the bitmap from an embedded resouce
+            // but you could get the data stream from the web or anywhere
+            // else.
+            var path = "Mapsui.Samples.Common.Images.home.png"; // Designed by Freepik http://www.freepik.com
+            var bitmapId = GetBitmapIdForEmbeddedResource(path);
+            var bitmapHeight = 176; // To set the offset correct we need to know the bitmap height
+            return new SymbolStyle { BitmapId = bitmapId, SymbolScale = 0.20, SymbolOffset = new Offset(0, bitmapHeight * 0.5) };
+        }
+
         private static int GetBitmapIdForEmbeddedResource(string imagePath)
         {
             var assembly = typeof(PointsSample).GetTypeInfo().Assembly;
             var image = assembly.GetManifestResourceStream(imagePath);
             return BitmapRegistry.Instance.Register(image);
-        }
-
-        private class City
-        {
-            public string Country { get; set; }
-            public string Name { get; set; }
-            public double Lat { get; set; }
-            public double Lng { get; set; }
         }
     }
 }
