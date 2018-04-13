@@ -298,7 +298,7 @@ namespace Mapsui
                 }
             }
 
-            return items.Select(i => i.Value).ToList();
+            return items.Select(i => i.Value).OrderByDescending(i => i).ToList();
         }
 
         private void LayerPropertyChanged(object sender, PropertyChangedEventArgs e)
