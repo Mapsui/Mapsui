@@ -267,7 +267,7 @@ namespace Mapsui
             OnPropertyChanged(nameof(Layers));
         }
 
-        private static IReadOnlyList<double> DetermineResolutions(LayerCollection layers)
+        private static IReadOnlyList<double> DetermineResolutions(IEnumerable<ILayer> layers)
         {
             var items = new Dictionary<double, double>();
             const float normalizedDistanceThreshold = 0.75f;
