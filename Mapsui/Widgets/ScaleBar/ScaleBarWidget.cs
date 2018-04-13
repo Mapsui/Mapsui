@@ -1,10 +1,8 @@
 ﻿using Mapsui.Geometries;
-using Mapsui.Layers;
 using Mapsui.Styles;
 using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using Mapsui.Projection;
 
 namespace Mapsui.Widgets.ScaleBar
 {
@@ -44,27 +42,10 @@ namespace Mapsui.Widgets.ScaleBar
         private static readonly ScaleBarMode DefaultScaleBarMode = ScaleBarMode.Single;
         private static readonly Font DefaultFont = new Font { FontFamily = "Arial", Size = 10 };
 
-        private ITransformation _transformer;
-
         public ScaleBarWidget(Map map)
         {
             Map = map;
-
-            if (Map.Layers.Count == 0)
-                throw new Exception("ScaleBarWidget needs a layer to work");
-
-            if (Map.CRS == null)
-                throw new Exception("Map needs a CRS");
-
-            if (map.Transformation?.IsProjectionSupported(Map.CRS, "EPSG:4326") == true)
-                _transformer = map.Transformation;
-
-            if (map.Layers[0].Transformation?.IsProjectionSupported(Map.CRS, "EPSG:4326") != true)
-                _transformer = map.Transformation;
-
-            if (_transformer == null)
-                throw new Exception("projection isn't supported");
-
+            
             HorizontalAlignment = DefaultScaleBarHorizontalAlignment;
             VerticalAlignment = DefaultScaleBarVerticalAlignment;
 
@@ -290,7 +271,7 @@ namespace Mapsui.Widgets.ScaleBar
 
             float length1;
             string text1;
-
+            
             (length1, text1) = CalculateScaleBarLengthAndValue(Map.Viewport, MaxWidth, UnitConverter);
 
             float length2;
@@ -497,7 +478,7 @@ namespace Mapsui.Widgets.ScaleBar
             // We have to calc the angle difference to the equator (angle = 0), 
             // because EPSG:3857 is only there 1 m. At othere angles, we
             // should calculate the correct length.
-            var position = (Point)_transformer.Transform(Map.CRS, "EPSG:4326", viewport.Center);
+            var position = (Point)Map.Transformation.Transform(Map.CRS, "EPSG:4326", viewport.Center.Clone()); // clone or else you will transform the orginal viewport center
 
             // Calc ground resolution in meters per pixel of viewport for this latitude
             double groundResolution = viewport.Resolution * Math.Cos(position.Y / 180.0 * Math.PI);
