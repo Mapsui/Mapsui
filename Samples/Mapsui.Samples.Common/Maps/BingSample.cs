@@ -13,7 +13,7 @@ namespace Mapsui.Samples.Common.Maps
             {
                 Name = "Bing Aerial"
             });
-            map.NavigateTo(4.7773142678234581);
+            map.NavigateTo(map.Resolutions[14]);
             map.NavigateTo(1059114.80157058, 5179580.75916194);
             return map;
         }
