@@ -270,12 +270,21 @@ namespace Mapsui
         private static IReadOnlyList<double> DetermineResolutions(LayerCollection layers)
         {
             var items = new Dictionary<double, double>();
-
+            const float normalizedDistanceThreshold = 0.75f;
             foreach (var layer in layers)
             {
                 if (!layer.Enabled || layer.Resolutions == null) continue;
+
                 foreach (var resolution in layer.Resolutions)
                 {
+                    // About normalization:
+                    // Resolutions don't have equal distances because they 
+                    // are multiplied by two at every step. Distances on the 
+                    // lower zoom levels have very different meaning than on the
+                    // higher zoom levels. So we work with a normalized resolution
+                    // to determine if another resolution adds value. If a resolution
+                    // is a factor of 2 of another resolution. The normalized distance
+                    // is one.
                     var normalized = Math.Pow(resolution, 2);
                     if (items.Count == 0)
                     {
@@ -283,8 +292,8 @@ namespace Mapsui
                     }
                     else
                     {
-                        var distance = items.Keys.Min(k => Math.Abs(k - normalized));
-                        if (distance > 0.75) items[normalized] = resolution;
+                        var normalizedDistance = items.Keys.Min(k => Math.Abs(k - normalized));
+                        if (normalizedDistance > normalizedDistanceThreshold) items[normalized] = resolution;
                     }
                 }
             }
