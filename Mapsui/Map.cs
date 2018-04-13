@@ -269,9 +269,27 @@ namespace Mapsui
 
         private static IReadOnlyList<double> DetermineResolutions(LayerCollection layers)
         {
-            var baseLayer = layers.FirstOrDefault(l => l.Enabled && l.Resolutions != null && l.Resolutions.Count > 0);
-            if (baseLayer == null) return new List<double>();
-            return baseLayer.Resolutions;
+            var items = new Dictionary<double, double>();
+
+            foreach (var layer in layers)
+            {
+                if (!layer.Enabled || layer.Resolutions == null) continue;
+                foreach (var resolution in layer.Resolutions)
+                {
+                    var normalized = Math.Pow(resolution, 2);
+                    if (items.Count == 0)
+                    {
+                        items[normalized] = resolution;
+                    }
+                    else
+                    {
+                        var distance = items.Keys.Min(k => Math.Abs(k - normalized));
+                        if (distance > 0.75) items[normalized] = resolution;
+                    }
+                }
+            }
+
+            return items.Select(i => i.Value).ToList();
         }
 
         private void LayerPropertyChanged(object sender, PropertyChangedEventArgs e)
