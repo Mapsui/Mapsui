@@ -195,11 +195,37 @@ namespace Mapsui.Rendering.Skia
         private static List<SKPoint> WorldToScreen(IViewport viewport, IEnumerable<Point> points)
         {
             var result = new List<SKPoint>();
+            var screenCenterX = viewport.Width * 0.5;
+            var screenCenterY = viewport.Height * 0.5;
+            var centerX = viewport.Center.X;
+            var centerY = viewport.Center.Y;
+            var resolution = 1.0 / viewport.Resolution;
+            var rotation = viewport.Rotation / 180f * Math.PI;
+            var sin = Math.Sin(rotation);
+            var cos = Math.Cos(rotation);
+
+            var screenX = 0.0;
+            var screenY = 0.0;
+
             foreach (var point in points)
             {
-                var screenPoint = viewport.WorldToScreen(point.X, point.Y);
-                result.Add(new SKPoint((float)screenPoint.X, (float)screenPoint.Y));
+                screenX = (point.X - centerX) * resolution;
+                screenY = (centerY - point.Y) * resolution;
+
+                if (viewport.IsRotated)
+                {
+                    var newX = screenX * cos - screenY * sin;
+                    var newY = screenX * sin + screenY * cos;
+                    screenX = newX;
+                    screenY = newY;
+                }
+
+                screenX += screenCenterX;
+                screenY += screenCenterY;
+
+                result.Add(new SKPoint((float)screenX, (float)screenY));
             }
+
             return result;
         }
 

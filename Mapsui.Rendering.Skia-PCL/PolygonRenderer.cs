@@ -55,7 +55,7 @@ namespace Mapsui.Rendering.Skia
                     fillColor = vectorStyle.Fill?.Color;
                 }
 
-                using (var path = ToSkia(viewport, polygon))
+                using (var path = polygon.ToSkiaPath(viewport, canvas.LocalClipBounds, lineWidth))
                 {
                     // Is there a FillStyle?
                     if (vectorStyle.Fill?.FillStyle == FillStyle.Solid)
@@ -184,115 +184,6 @@ namespace Mapsui.Rendering.Skia
             }
 
             return null;
-        }
-
-        private static SKPath ToSkia(IViewport viewport, Polygon polygon)
-        {
-            if (polygon.ExteriorRing.Vertices.Count == 0)
-                return new SKPath();
-
-            var path = new SKPath();
-
-            var screenCenterX = viewport.Width * 0.5;
-            var screenCenterY = viewport.Height * 0.5;
-            var centerX = viewport.Center.X;
-            var centerY = viewport.Center.Y;
-            var resolution = 1.0 / viewport.Resolution;
-            var rotation = viewport.Rotation / 180f * Math.PI;
-            var sin = Math.Sin(rotation);
-            var cos = Math.Cos(rotation);
-
-            var vertices = polygon.ExteriorRing.Vertices;
-
-            var vertice = vertices[0];
-            var screenX = (vertice.X - centerX) * resolution;
-            var screenY = (centerY - vertice.Y) * resolution;
-
-            if (viewport.IsRotated)
-            {
-                var newX = screenX * cos - screenY * sin;
-                var newY = screenX * sin + screenY * cos;
-                screenX = newX;
-                screenY = newY;
-            }
-
-            screenX += screenCenterX;
-            screenY += screenCenterY;
-
-            path.MoveTo((float)screenX, (float)screenY);
-
-            for (var i = 1; i < vertices.Count; i++)
-            {
-                vertice = vertices[i];
-                screenX = (vertice.X - centerX) * resolution;
-                screenY = (centerY - vertice.Y) * resolution;
-
-                if (viewport.IsRotated)
-                {
-                    var newX = screenX * cos - screenY * sin;
-                    var newY = screenX * sin + screenY * cos;
-                    screenX = newX;
-                    screenY = newY;
-                }
-
-                screenX += screenCenterX;
-                screenY += screenCenterY;
-
-                path.LineTo((float)screenX, (float)screenY);
-            }
-
-            path.Close();
-
-            foreach (var interiorRing in polygon.InteriorRings)
-            {
-                // note: For Skia inner rings need to be clockwise and outer rings
-                // need to be counter clockwise (if this is the other way around it also
-                // seems to work)
-                // this is not a requirement of the OGC polygon.
-
-                vertices = interiorRing.Vertices;
-
-                vertice = vertices[0];
-                screenX = (vertice.X - centerX) * resolution;
-                screenY = (centerY - vertice.Y) * resolution;
-
-                if (viewport.IsRotated)
-                {
-                    var newX = screenX * cos - screenY * sin;
-                    var newY = screenX * sin + screenY * cos;
-                    screenX = newX;
-                    screenY = newY;
-                }
-
-                screenX += screenCenterX;
-                screenY += screenCenterY;
-
-                path.MoveTo((float)screenX, (float)screenY);
-
-                for (var i = 1; i < vertices.Count; i++)
-                {
-                    vertice = vertices[i];
-                    screenX = (vertice.X - centerX) * resolution;
-                    screenY = (centerY - vertice.Y) * resolution;
-
-                    if (viewport.IsRotated)
-                    {
-                        var newX = screenX * cos - screenY * sin;
-                        var newY = screenX * sin + screenY * cos;
-                        screenX = newX;
-                        screenY = newY;
-                    }
-
-                    screenX += screenCenterX;
-                    screenY += screenCenterY;
-
-                    path.LineTo((float)screenX, (float)screenY);
-                }
-            }
-
-            path.Close();
-
-            return path;
         }
     }
 }
