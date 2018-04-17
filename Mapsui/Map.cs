@@ -285,7 +285,7 @@ namespace Mapsui
                     // to determine if another resolution adds value. If a resolution
                     // is a factor of 2 of another resolution. The normalized distance
                     // is one.
-                    var normalized = Math.Pow(resolution, 2);
+                    var normalized = Math.Log(resolution, 2);
                     if (items.Count == 0)
                     {
                         items[normalized] = resolution;
