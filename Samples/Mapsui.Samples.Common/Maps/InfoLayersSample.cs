@@ -150,7 +150,7 @@ namespace Mapsui.Samples.Common.Maps
         {
             return new Layer(InfoLayerName)
             {
-                DataSource = RandomPointHelper.CreateProviderWithRandomPoints(envelope, 25),
+                DataSource = RandomPointHelper.CreateProviderWithRandomPoints(envelope, 25, 7),
                 Style = CreateSymbolStyle()
             };
         }
@@ -159,7 +159,7 @@ namespace Mapsui.Samples.Common.Maps
         {
             return new Layer(HoverLayerName)
             {
-                DataSource = RandomPointHelper.CreateProviderWithRandomPoints(envelope),
+                DataSource = RandomPointHelper.CreateProviderWithRandomPoints(envelope, 25, 8),
                 Style = CreateHoverSymbolStyle()
             };
         }
