@@ -40,12 +40,23 @@ namespace Mapsui.Rendering.Skia
                 horizontalAlignment: style.HorizontalAlignment, verticalAlignment: style.VerticalAlignment);
         }
 
-        public static void Draw(SKCanvas canvas, LabelStyle style, IFeature feature, float x, float y,
+        public static void Draw(SKCanvas canvas, IStyle style, IFeature feature, float x, float y,
             float layerOpacity)
         {
-            var text = style.GetLabelText(feature);
+            if (style is StyleCollection styleCollection)
+            {
+                foreach (var s in styleCollection)
+                {
+                    Draw(canvas, s, feature, x, y, layerOpacity);
+                }
+            }
+            else if (!(style is LabelStyle))
+            {
+                return;
+            }
+            var text = ((LabelStyle)style).GetLabelText(feature);
             if (string.IsNullOrEmpty(text)) return;
-            DrawLabel(canvas, x, y, style, text, layerOpacity);
+            DrawLabel(canvas, x, y, (LabelStyle)style, text, layerOpacity);
         }
 
         private static SKImage CreateLabelAsBitmap(LabelStyle style, string text, float layerOpacity)
