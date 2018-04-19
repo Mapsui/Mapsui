@@ -54,6 +54,8 @@ namespace Mapsui.Rendering.Skia
                     paint.StrokeMiter = strokeMiterLimit;
                     if (strokeStyle != PenStyle.Solid)
                         paint.PathEffect = strokeStyle.ToSkia(lineWidth, dashArray);
+                    else
+                        paint.PathEffect = null;
                     canvas.DrawPath(path, paint);
                 }
             }
