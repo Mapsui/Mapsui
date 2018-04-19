@@ -745,7 +745,7 @@ namespace Mapsui.UI.Wpf
             if (!_invalid) return; // Don't render when nothing has changed
             if (double.IsNaN(ActualWidth) || ActualWidth == 0 || double.IsNaN(ActualHeight) || ActualHeight == 0) return;
 
-            e.Surface.Canvas.Scale((float)_scale, (float)_scale);
+            e.Surface.Canvas.Scale(_scale, _scale);
 
             Map.Viewport.Width = ActualWidth;
             Map.Viewport.Height = ActualHeight;
