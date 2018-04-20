@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui", "Mapsui\Mapsui.csproj", "{D74C052A-C07E-4B37-A898-134218ACA5C9}"
 EndProject
@@ -53,6 +53,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Samples.Forms.iOS", "Samples\Mapsui.Samples.Forms\Mapsui.Samples.Forms.iOS\Mapsui.Samples.Forms.iOS.csproj", "{DE3B0CBF-CC20-4457-884B-2E5150B45A01}"
 EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Mapsui.UI.Shared\Mapsui.UI.Shared.projitems*{f783f99b-aafa-4fb5-80f6-871d679bdb19}*SharedItemsImports = 4
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Addins debug|Any CPU = Addins debug|Any CPU
 		Addins debug|ARM = Addins debug|ARM
@@ -1832,6 +1835,9 @@ Global
 		{73FCB5F4-ABAF-4279-ACC2-4C9C8D9F5C40} = {1D7A8A7C-2AB7-4803-8F29-585E9B303A0C}
 		{1D7A8A7C-2AB7-4803-8F29-585E9B303A0C} = {969DB691-49FB-4785-98F4-2112CC1BA7C4}
 		{DE3B0CBF-CC20-4457-884B-2E5150B45A01} = {1D7A8A7C-2AB7-4803-8F29-585E9B303A0C}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {81D8C216-9447-48B9-8D59-3FA1F8E91C85}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		Policies = $0

@@ -3,6 +3,7 @@ using System.Linq;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
+using Mapsui.Samples.Common.Helpers;
 using Mapsui.Styles;
 using Mapsui.Utilities;
 
@@ -25,10 +26,10 @@ namespace Mapsui.Samples.Common.Maps
             map.Layers.Add(CreatePolygonLayer());
             map.Layers.Add(CreateLineLayer());
 
-            //map.InfoLayers.Add(map.Layers.First(l => l.Name == InfoLayerName));
+            map.InfoLayers.Add(map.Layers.First(l => l.Name == InfoLayerName));
             map.InfoLayers.Add(map.Layers.First(l => l.Name == PolygonLayerName));
             map.InfoLayers.Add(map.Layers.First(l => l.Name == LineLayerName));
-            //!!!map.HoverLayers.Add(map.Layers.First(l => l.Name == HoverLayerName));
+            map.HoverLayers.Add(map.Layers.First(l => l.Name == HoverLayerName));
 
             return map;
         }
@@ -149,7 +150,7 @@ namespace Mapsui.Samples.Common.Maps
         {
             return new Layer(InfoLayerName)
             {
-                DataSource = PointsSample.CreateProviderWithRandomPoints(envelope, 25),
+                DataSource = RandomPointHelper.CreateProviderWithRandomPoints(envelope, 25),
                 Style = CreateSymbolStyle()
             };
         }
@@ -158,7 +159,7 @@ namespace Mapsui.Samples.Common.Maps
         {
             return new Layer(HoverLayerName)
             {
-                DataSource = PointsSample.CreateProviderWithRandomPoints(envelope, 25),
+                DataSource = RandomPointHelper.CreateProviderWithRandomPoints(envelope),
                 Style = CreateHoverSymbolStyle()
             };
         }

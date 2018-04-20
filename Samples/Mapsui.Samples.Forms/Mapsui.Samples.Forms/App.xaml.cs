@@ -11,15 +11,12 @@ namespace Mapsui.Samples.Forms
 	{
 		public App ()
 		{
-			InitializeComponent();
+            InitializeComponent();
 
-            if (Device.Idiom == TargetIdiom.Phone)
-			    MainPage = new NavigationPage(new Mapsui.Samples.Forms.MainPage());
-            else
-                MainPage = new Mapsui.Samples.Forms.MainPageLarge();
-        }
+            MainPage = new Mapsui.Samples.Forms.MainPage();
+		}
 
-        protected override void OnStart ()
+		protected override void OnStart ()
 		{
 			// Handle when your app starts
 		}

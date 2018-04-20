@@ -2,27 +2,42 @@ using System;
 using System.IO;
 using Mapsui.Styles;
 using SkiaSharp;
-using SkiaSharp.Extended.Svg;
 
 namespace Mapsui.Rendering.Skia
 {
     public static class BitmapHelper
     {
         private static readonly SKPaint Paint = new SKPaint(); // Reuse for performance. Only for opacity
+        private static readonly SKPaint QualityPaint = new SKPaint() { FilterQuality = SKFilterQuality.Low }; // Only for high/med/low quality resizing of tiles
 
-        public static BitmapInfo LoadBitmap(Stream bitmapStream, bool isSvg = false)
+        public static BitmapInfo LoadBitmap(object bitmapStream)
         {
-            bitmapStream.Position = 0;
-            if (isSvg)
+            if (bitmapStream is Stream stream)
             {
-                var svg = new SkiaSharp.Extended.Svg.SKSvg();
-                svg.Load(bitmapStream);
+                byte[] buffer = new byte[4];
 
-                return new BitmapInfo { Svg = svg };
+                stream.Position = 0;
+                stream.Read(buffer, 0, 4);
+                stream.Position = 0;
+
+                if (System.Text.Encoding.UTF8.GetString(buffer, 0, 4).ToLower().Equals("<svg"))
+                {
+                    var svg = new SkiaSharp.Extended.Svg.SKSvg();
+                    svg.Load(stream);
+
+                    return new BitmapInfo {Svg = svg};
+                }
+
+                var image = SKImage.FromEncodedData(SKData.CreateCopy(stream.ToBytes()));
+                return new BitmapInfo {Bitmap = image};
             }
 
-            var image = SKImage.FromEncodedData(SKData.CreateCopy(bitmapStream.ToBytes()));
-            return new BitmapInfo { Bitmap = image };
+            if (bitmapStream is Sprite sprite)
+            {
+                return new BitmapInfo() {Sprite = sprite};
+            }
+
+            return null;
         }
 
         public static void RenderBitmap(SKCanvas canvas, SKImage bitmap, float x, float y, float orientation = 0,
@@ -35,14 +50,18 @@ namespace Mapsui.Rendering.Skia
             canvas.Save();
 
             canvas.Translate(x, y);
-            canvas.RotateDegrees(orientation, 0, 0); // todo: degrees or radians?
+            if (orientation != 0)
+                canvas.RotateDegrees(orientation, 0, 0); // todo: degrees or radians?
             canvas.Scale(scale, scale);
 
-            x = offsetX + DetermineHorizontalAlignmentCorrection(horizontalAlignment, bitmap.Width);
-            y = -offsetY + DetermineVerticalAlignmentCorrection(verticalAlignment, bitmap.Height);
+            var width = bitmap.Width;
+            var height = bitmap.Height;
 
-            var halfWidth = bitmap.Width/2;
-            var halfHeight = bitmap.Height/2;
+            x = offsetX + DetermineHorizontalAlignmentCorrection(horizontalAlignment, width);
+            y = -offsetY + DetermineVerticalAlignmentCorrection(verticalAlignment, height);
+
+            var halfWidth = width >> 1;
+            var halfHeight = height >> 1;
 
             var rect = new SKRect(x - halfWidth, y - halfHeight, x + halfWidth, y + halfHeight);
 
@@ -75,7 +94,7 @@ namespace Mapsui.Rendering.Skia
             //var color = new SKColor(255, 255, 255, (byte)(255 * opacity));
             //var paint = new SKPaint { Color = color, FilterQuality = SKFilterQuality.High };
 
-            canvas.DrawPicture(svg.Picture, null);
+            canvas.DrawPicture(svg.Picture);
 
             canvas.Restore();
         }
@@ -83,8 +102,8 @@ namespace Mapsui.Rendering.Skia
         private static int DetermineHorizontalAlignmentCorrection(
             LabelStyle.HorizontalAlignmentEnum horizontalAlignment, int width)
         {
-            if (horizontalAlignment == LabelStyle.HorizontalAlignmentEnum.Left) return width/2;
-            if (horizontalAlignment == LabelStyle.HorizontalAlignmentEnum.Right) return -width/2;
+            if (horizontalAlignment == LabelStyle.HorizontalAlignmentEnum.Left) return width >> 1;
+            if (horizontalAlignment == LabelStyle.HorizontalAlignmentEnum.Right) return -(width >> 1);
             return 0; // center
         }
 
@@ -99,8 +118,8 @@ namespace Mapsui.Rendering.Skia
         private static int DetermineVerticalAlignmentCorrection(
             LabelStyle.VerticalAlignmentEnum verticalAlignment, int height)
         {
-            if (verticalAlignment == LabelStyle.VerticalAlignmentEnum.Top) return -height/2;
-            if (verticalAlignment == LabelStyle.VerticalAlignmentEnum.Bottom) return height/2;
+            if (verticalAlignment == LabelStyle.VerticalAlignmentEnum.Top) return -(height >> 1);
+            if (verticalAlignment == LabelStyle.VerticalAlignmentEnum.Bottom) return height >> 1;
             return 0; // center
         }
 
@@ -116,28 +135,29 @@ namespace Mapsui.Rendering.Skia
         {
             // todo: Add some way to select one method or the other.
             // Method 1) Better for quality. Helps to compare to WPF
-            //var color = new SKColor(255, 255, 255, (byte)(255 * opacity));
+            //var color = new SKColor(255, 255, 255, (byte)(255 * layerOpacity));
             //var paint = new SKPaint { Color = color, FilterQuality = SKFilterQuality.High };
-            //canvas.DrawBitmap(bitmap, rect, paint);
+            //canvas.DrawImage(bitmap, rect, paint);
 
-            // Method 2) Better for performance:
-            if (Math.Abs(layerOpacity - 1) >  Utilities.Constants.Epsilon)
+            //// Method 2) Better for performance:
+            if (Math.Abs(layerOpacity - 1) > Utilities.Constants.Epsilon)
             {
-                Paint.Color = new SKColor(255, 255, 255, (byte) (255 * layerOpacity));
+                Paint.Color = new SKColor(255, 255, 255, (byte)(255 * layerOpacity));
                 canvas.DrawImage(bitmap, rect, Paint);
             }
             else
             {
-                canvas.DrawImage(bitmap, rect);
+                canvas.DrawImage(bitmap, rect, QualityPaint);
             }
-            
+
         }
+
+        private static readonly SKPaint PaintBitmap = new SKPaint() {FilterQuality = SKFilterQuality.High};
 
         public static void RenderBitmap(SKCanvas canvas, SKImage bitmap, SKRect rect, float opacity = 1f)
         {
-            var color = new SKColor(255, 255, 255, (byte) (255*opacity));
-            var paint = new SKPaint {Color = color, FilterQuality = SKFilterQuality.High};
-            canvas.DrawImage(bitmap, rect, paint);
+            PaintBitmap.Color = opacity == 1 ? SKColors.White : new SKColor(255, 255, 255, (byte)(255 * opacity));
+            canvas.DrawImage(bitmap, rect, PaintBitmap);
         }
     }
 }

@@ -37,11 +37,16 @@
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
     <EmbeddedResource Include="EmbeddedResources\countries-hires.json" />
+    <EmbeddedResource Include="EmbeddedResources\el-molar.mbtiles" />
+    <EmbeddedResource Include="EmbeddedResources\torrejon-de-ardoz.mbtiles" />
+    <EmbeddedResource Include="EmbeddedResources\cities.geojson" />
+    <EmbeddedResource Include="EmbeddedResources\cities.json" />
+    <EmbeddedResource Include="EmbeddedResources\congo.json" />
     <None Include="MbTiles\el-molar.mbtiles">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="MbTiles\world.mbtiles">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="MbTiles\torrejon-de-ardoz.mbtiles">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -58,10 +63,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AllSamples.cs" />
+    <Compile Include="Helpers\MbTilesHelper.cs" />
+    <Compile Include="Helpers\RandomPointHelper.cs" />
     <Compile Include="Maps\BingSample.cs" />
     <Compile Include="Maps\CenterOnLocationSample.cs" />
     <Compile Include="Maps\KeepWithinExtentsSample.cs" />
     <Compile Include="Maps\LabelsSample.cs" />
+    <Compile Include="Maps\MbTilesOverlaySample.cs" />
     <Compile Include="Maps\MbTilesSample.cs" />
     <Compile Include="Maps\MutatingTriangleSample.cs" />
     <Compile Include="Maps\OpacityStyleSample.cs" />
@@ -71,6 +79,7 @@
     <Compile Include="Maps\PenStrokeCapSample.cs" />
     <Compile Include="Maps\RasterizingLayerSample.cs" />
     <Compile Include="Maps\EmptyMapSample.cs" />
+    <Compile Include="Maps\AtlasSample.cs" />
     <Compile Include="Maps\SvgSample.cs" />
     <Compile Include="Maps\WidgetSample.cs" />
     <Compile Include="Maps\SymbolsSample.cs" />
@@ -140,6 +149,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Images\Ghostscript_Tiger.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\osm-liberty.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\home.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

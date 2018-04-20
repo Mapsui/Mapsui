@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Mapsui.Geometries
 {
@@ -69,7 +70,7 @@ namespace Mapsui.Geometries
                 return Math.Abs(-sum/2);
             }
         }
-
+        
         /// <summary>
         ///     Return a copy of this geometry
         /// </summary>
@@ -161,9 +162,30 @@ namespace Mapsui.Geometries
             return c;
         }
 
+        /// <summary>
+        ///     Returns a clone of the LinearRing as LineString
+        /// </summary>
+        /// <returns>LineString</returns>
+        public LineString GetLineString()
+        {
+            // Make deep copy
+            var tmpLineString = Clone();
+
+            // Check if first vertex is approximately equal to last vertex
+            if (Math.Abs(tmpLineString.StartPoint.X - tmpLineString.EndPoint.X) > Double.Epsilon ||
+                Math.Abs(tmpLineString.StartPoint.Y - tmpLineString.EndPoint.Y) > Double.Epsilon)
+            {
+                tmpLineString.Vertices.Add(tmpLineString.Vertices.First());
+            }
+
+            return tmpLineString;
+        }
+
+
+        
         public LinearRing Rotate(double degrees, Point center)
         {
-            var rotatedLinearRing = this.Clone();
+            var rotatedLinearRing = Clone();
             for (var i = 0; i < Vertices.Count; i++)
             {
                 rotatedLinearRing.Vertices[i] = Vertices[i].Rotate(degrees, center);

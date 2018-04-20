@@ -8,13 +8,13 @@ namespace Mapsui.Tests.Common.Maps
 {
     public static class PolygonSample
     {
-        static int bitmapId;
+        static int _bitmapId;
 
         public static Map CreateMap()
         {
             var assembly = typeof(PolygonSample).GetTypeInfo().Assembly;
             var image = assembly.GetManifestResourceStream("Mapsui.Tests.Common.Resources.Images.avion_silhouette.png");
-            bitmapId = BitmapRegistry.Instance.Register(image);
+            _bitmapId = BitmapRegistry.Instance.Register(image);
 
             var map = new Map
             {
@@ -50,7 +50,7 @@ namespace Mapsui.Tests.Common.Maps
             feature.Styles.Add(new VectorStyle
             {
                 Enabled = true,
-                Fill = CreateBrush(new Color(255,0,0, 120) , FillStyle.BitmapRotated, bitmapId),
+                Fill = CreateBrush(new Color(255,0,0, 120) , FillStyle.BitmapRotated, _bitmapId),
                 Outline = CreatePen(new Color(255, 255, 0), 2, PenStyle.DashDot),
                 Line = null
             });

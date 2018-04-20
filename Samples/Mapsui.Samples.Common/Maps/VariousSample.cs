@@ -3,6 +3,7 @@ using System.Reflection;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
+using Mapsui.Samples.Common.Helpers;
 using Mapsui.Styles;
 using Mapsui.Utilities;
 
@@ -20,8 +21,6 @@ namespace Mapsui.Samples.Common.Maps
             map.Layers.Add(CreateLayerWithStyleOnLayer(map.Envelope, 10));
             map.Layers.Add(CreateLayerWithStyleOnFeature(map.Envelope, 10));
 
-            //map.Viewport.RenderResolutionMultiplier = 2;
-
             return map;
         }
 
@@ -29,7 +28,7 @@ namespace Mapsui.Samples.Common.Maps
         {
             return new Layer("Style on Layer")
             {
-                DataSource = new MemoryProvider(PointsSample.GenerateRandomPoints(envelope, count)),
+                DataSource = new MemoryProvider(RandomPointHelper.GenerateRandomPoints(envelope, count)),
                 Style = CreateBitmapStyle("Mapsui.Samples.Common.Images.ic_place_black_24dp.png")
             };
         }
@@ -48,7 +47,7 @@ namespace Mapsui.Samples.Common.Maps
         private static IEnumerable<IFeature> GenerateRandomFeatures(BoundingBox envelope, int count, IStyle style)
         {
             var result = new List<Feature>();
-            var points = PointsSample.GenerateRandomPoints(envelope, count);
+            var points = RandomPointHelper.GenerateRandomPoints(envelope, count, 123);
             foreach (var point in points)
             {
                 result.Add(new Feature { Geometry = point, Styles = new List<IStyle> { style } });

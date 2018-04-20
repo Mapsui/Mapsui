@@ -53,7 +53,6 @@ namespace Mapsui.Rendering.Skia
                 {
                     // Not sure if this is needed here:
                     if (background != null) surface.Canvas.Clear(background.ToSkia(1));
-
                     Render(surface.Canvas, viewport, layers);
                     using (var image = surface.Snapshot())
                     {

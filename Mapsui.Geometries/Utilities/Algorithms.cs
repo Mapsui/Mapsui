@@ -35,6 +35,11 @@ namespace Mapsui.Geometries.Utilities
             return Math.Sqrt(Math.Pow(x1 - x2, 2.0) + Math.Pow(y1 - y2, 2.0));
         }
 
+        public static double Distance(Point a, Point b)
+        {
+            return Math.Sqrt(Math.Pow(a.X - b.X, 2.0) + Math.Pow(a.Y - b.Y, 2.0));
+        }
+
         /// <summary>
         ///     Converts the specified angle from degrees to radians
         /// </summary>
@@ -152,7 +157,7 @@ namespace Mapsui.Geometries.Utilities
             return disc > 0.0;
         }
 
-        public static bool PointInPolygon(List<Point> ring, Point point)
+        public static bool PointInPolygon(IList<Point> ring, Point point)
         {
             // taken from: http://stackoverflow.com/a/2922778/85325
             var result = false;
@@ -167,7 +172,7 @@ namespace Mapsui.Geometries.Utilities
             return result;
         }
 
-        public static double DistanceToLine(Point point, List<Point> points)
+        public static double DistanceToLine(Point point, IList<Point> points)
         {
             var minDist = Double.MaxValue;
 
@@ -179,6 +184,31 @@ namespace Mapsui.Geometries.Utilities
             }
 
             return minDist;
+        }
+
+        /// <summary>
+        /// Returns the shortest distance to a line and also the index of the segment 
+        /// with that shortest distance. Segments count from zero to vertex count - 1.
+        /// </summary>
+        /// <param name="point"></param>
+        /// <param name="points"></param>
+        /// <returns></returns>
+        public static (double Distance, int Segment ) GetDistanceAndSegmentIndex(Point point, IList<Point> points)
+        {
+            var minDist = Double.MaxValue;
+            int segment = 0;
+
+            for (var i = 0; i < points.Count - 1; i++)
+            {
+                var dist = CGAlgorithms.DistancePointLine(point, points[i], points[i + 1]);
+                if (dist < minDist)
+                {
+                    minDist = dist;
+                    segment = i;
+                }
+            }
+
+            return (minDist, segment);
         }
     }
 }

@@ -63,7 +63,7 @@ namespace Mapsui.Samples.Common.Maps
                     {
                         new VectorStyle
                         {
-                            Line = new Pen(Color.Red, 1) {PenStrokeCap = PenStrokeCap.Square}
+                            Line = new Pen(Color.Red) {PenStrokeCap = PenStrokeCap.Square}
                         }
                     },
                 },
@@ -97,7 +97,7 @@ namespace Mapsui.Samples.Common.Maps
                     {
                         new VectorStyle
                         {
-                            Line = new Pen(Color.Red, 1) {PenStrokeCap = PenStrokeCap.Square}
+                            Line = new Pen(Color.Red) {PenStrokeCap = PenStrokeCap.Square}
                         }
                     },
                 },
@@ -131,7 +131,7 @@ namespace Mapsui.Samples.Common.Maps
                     {
                         new VectorStyle
                         {
-                            Line = new Pen(Color.Red, 1) {PenStrokeCap = PenStrokeCap.Square}
+                            Line = new Pen(Color.Red) {PenStrokeCap = PenStrokeCap.Square}
                         }
                     },
                 }

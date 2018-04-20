@@ -420,13 +420,11 @@ namespace Mapsui.UI.Wpf
         public new void Dispose()
         {
             Unsubscribe();
-            base.Dispose();
         }
 
-        protected override void Dispose(bool disposing)
+        protected new void Dispose(bool disposing)
         {
             Unsubscribe();
-            base.Dispose(disposing);
         }
 #endif
 

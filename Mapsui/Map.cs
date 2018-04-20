@@ -180,8 +180,8 @@ namespace Mapsui
         /// </summary>
         public event DataChangedEventHandler DataChanged;
         public event EventHandler RefreshGraphics;
-        public event EventHandler<InfoEventArgs> Info;
-        public event EventHandler<InfoEventArgs> Hover;
+        public event EventHandler<MapInfoEventArgs> Info;
+        public event EventHandler<MapInfoEventArgs> Hover;
 
         private void LayersLayerRemoved(ILayer layer)
         {
@@ -215,30 +215,44 @@ namespace Mapsui
             }
 
             if (Info == null) return false;
-            var eventArgs = InfoHelper.GetInfoEventArgs(Viewport, screenPosition, scale, InfoLayers, symbolCache, numTaps);
-            if (eventArgs != null)
+            var mapInfo = InfoHelper.GetMapInfo(Viewport, screenPosition, scale, InfoLayers, symbolCache);
+
+            if (mapInfo != null)
             {
                 // TODO Info items should be iterated through rather than getting a single item, 
                 // based on Z index and then called until handled = true; Ordered By highest Z
-
-                Info?.Invoke(this, eventArgs);
-                return eventArgs.Handled;
+                var mapInfoEventArgs = new MapInfoEventArgs
+                {
+                    MapInfo = mapInfo,
+                    NumTaps = numTaps,
+                    Handled = false
+                };
+                Info?.Invoke(this, mapInfoEventArgs);
+                return mapInfoEventArgs.Handled;
             }
 
             return false;
         }
 
-        private InfoEventArgs _previousHoverEventArgs;
+        private MapInfoEventArgs _previousHoverEventArgs;
 
         public void InvokeHover(Point screenPosition, float scale, ISymbolCache symbolCache)
         {
             if (Hover == null) return;
             if (HoverLayers.Count == 0) return;
-            var hoverEventArgs = InfoHelper.GetInfoEventArgs(Viewport, screenPosition, scale, HoverLayers, symbolCache, 0);
-            if (hoverEventArgs?.Feature != _previousHoverEventArgs?.Feature) // only notify when the feature changes
+            var mapInfo = InfoHelper.GetMapInfo(Viewport, screenPosition, scale, HoverLayers, symbolCache);
+
+            if (mapInfo?.Feature != _previousHoverEventArgs?.MapInfo.Feature) // only notify when the feature changes
             {
-                _previousHoverEventArgs = hoverEventArgs;
-                Hover?.Invoke(this, hoverEventArgs);
+                var mapInfoEventArgs = new MapInfoEventArgs
+                {
+                    MapInfo = mapInfo,
+                    NumTaps = 0,
+                    Handled = false
+                };
+                
+                _previousHoverEventArgs = mapInfoEventArgs;
+                Hover?.Invoke(this, mapInfoEventArgs);
             }
         }
 
@@ -253,11 +267,38 @@ namespace Mapsui
             OnPropertyChanged(nameof(Layers));
         }
 
-        private static IReadOnlyList<double> DetermineResolutions(LayerCollection layers)
+        private static IReadOnlyList<double> DetermineResolutions(IEnumerable<ILayer> layers)
         {
-            var baseLayer = layers.FirstOrDefault(l => l.Enabled && l.Resolutions != null && l.Resolutions.Count > 0);
-            if (baseLayer == null) return new List<double>();
-            return baseLayer.Resolutions;
+            var items = new Dictionary<double, double>();
+            const float normalizedDistanceThreshold = 0.75f;
+            foreach (var layer in layers)
+            {
+                if (!layer.Enabled || layer.Resolutions == null) continue;
+
+                foreach (var resolution in layer.Resolutions)
+                {
+                    // About normalization:
+                    // Resolutions don't have equal distances because they 
+                    // are multiplied by two at every step. Distances on the 
+                    // lower zoom levels have very different meaning than on the
+                    // higher zoom levels. So we work with a normalized resolution
+                    // to determine if another resolution adds value. If a resolution
+                    // is a factor of 2 of another resolution. The normalized distance
+                    // is one.
+                    var normalized = Math.Pow(resolution, 2);
+                    if (items.Count == 0)
+                    {
+                        items[normalized] = resolution;
+                    }
+                    else
+                    {
+                        var normalizedDistance = items.Keys.Min(k => Math.Abs(k - normalized));
+                        if (normalizedDistance > normalizedDistanceThreshold) items[normalized] = resolution;
+                    }
+                }
+            }
+
+            return items.Select(i => i.Value).OrderByDescending(i => i).ToList();
         }
 
         private void LayerPropertyChanged(object sender, PropertyChangedEventArgs e)

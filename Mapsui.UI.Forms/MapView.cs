@@ -315,7 +315,7 @@ namespace Mapsui.UI.Forms
             }
 
             if (propertyName.Equals(nameof(AllowPinchRotation)))
-                _mapControl.AllowPinchRotation = AllowPinchRotation;
+                _mapControl.RotationLock = AllowPinchRotation;
 
             if (propertyName.Equals(nameof(UnSnapRotationDegrees)))
                 _mapControl.UnSnapRotationDegrees = UnSnapRotationDegrees;
@@ -420,14 +420,14 @@ namespace Mapsui.UI.Forms
             }
         }
 
-        private void HandlerInfo(object sender, InfoEventArgs e)
+        private void HandlerInfo(object sender, MapInfoEventArgs e)
         {
             // Click on pin?
             Pin clickedPin = null;
             
             foreach(var pin in _pins)
             {
-                if (pin.IsVisible && pin.Feature.Equals(e.Feature))
+                if (pin.IsVisible && pin.Feature.Equals(e.MapInfo.Feature))
                 {
                     clickedPin = pin;
                     break;
@@ -440,7 +440,7 @@ namespace Mapsui.UI.Forms
 
                 SelectedPinChanged?.Invoke(this, new SelectedPinChangedEventArgs(SelectedPin));
 
-                var pinArgs = new PinClickedEventArgs(clickedPin, Map.Viewport.ScreenToWorld(e.ScreenPosition).ToForms(), e.NumTaps);
+                var pinArgs = new PinClickedEventArgs(clickedPin, Map.Viewport.ScreenToWorld(e.MapInfo.ScreenPosition).ToForms(), e.NumTaps);
 
                 PinClicked?.Invoke(this, pinArgs);
 
@@ -452,9 +452,9 @@ namespace Mapsui.UI.Forms
             }
 
             // Check for clicked drawables
-            var drawables = GetDrawablesAt(Map.Viewport.ScreenToWorld(e.ScreenPosition), _mapDrawableLayer);
+            var drawables = GetDrawablesAt(Map.Viewport.ScreenToWorld(e.MapInfo.ScreenPosition), _mapDrawableLayer);
 
-            var drawableArgs = new DrawableClickedEventArgs(Map.Viewport.ScreenToWorld(e.ScreenPosition).ToForms(), new Xamarin.Forms.Point(e.ScreenPosition.X, e.ScreenPosition.Y), e.NumTaps);
+            var drawableArgs = new DrawableClickedEventArgs(Map.Viewport.ScreenToWorld(e.MapInfo.ScreenPosition).ToForms(), new Xamarin.Forms.Point(e.MapInfo.ScreenPosition.X, e.MapInfo.ScreenPosition.Y), e.NumTaps);
 
             // Now check each drawable until one handles the event
             foreach (var drawable in drawables)

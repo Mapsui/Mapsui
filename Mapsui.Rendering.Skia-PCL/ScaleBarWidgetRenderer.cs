@@ -18,8 +18,9 @@ namespace Mapsui.Rendering.Skia
             float layerOpacity)
         {
             // If this widget belongs to no viewport, than stop drawing
-            if (scaleBar.Map == null)
-                return;
+            if (scaleBar.Map?.CRS == null) return;
+            if (scaleBar.Map.Transformation == null) return;
+            if (scaleBar.Map.Transformation.IsProjectionSupported(scaleBar.Map.CRS, "EPSG:4326") != true) return;
 
             // If this is the first time, we call this renderer, ...
             if (_paintScaleBar == null)
@@ -46,7 +47,7 @@ namespace Mapsui.Rendering.Skia
                 _paintScaleTextStroke.Typeface = SKTypeface.FromFamilyName(scaleBar.Font.FontFamily, SKTypefaceStyle.Bold);
                 _paintScaleTextStroke.TextSize = (float)scaleBar.Font.Size * scaleBar.Scale;
             }
-
+            
             float scaleBarLength1;
             string scaleBarText1;
             float scaleBarLength2;

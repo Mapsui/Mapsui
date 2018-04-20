@@ -208,7 +208,7 @@ namespace Mapsui.Geometries
 
         public Polygon Rotate(double degrees, Point center)
         {
-            var rotatedPolygon = this.Clone();
+            var rotatedPolygon = Clone();
             rotatedPolygon.ExteriorRing = ExteriorRing.Rotate(degrees, center);
             for (var i = 0; i < InteriorRings.Count; i++)
             {

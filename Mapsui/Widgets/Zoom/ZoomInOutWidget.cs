@@ -3,6 +3,7 @@ using Mapsui.Styles;
 using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using Mapsui.Utilities;
 
 namespace Mapsui.Widgets.Zoom
 {
@@ -162,11 +163,6 @@ namespace Mapsui.Widgets.Zoom
             }
         }
 
-        /// <summary>
-        /// Factor for changing Resolution
-        /// </summary>
-        public float ZoomFactor { get; set; } = 2.0f;
-
         public override void HandleWidgetTouched(Point position)
         {
             var handler = WidgetTouched;
@@ -181,19 +177,17 @@ namespace Mapsui.Widgets.Zoom
                 (Orientation == Orientation.Horizontal && position.X < Envelope.MinX + Envelope.Width * 0.5))
             {
                 // Zoom in
-                var resolution = Map.Viewport.Resolution;
-                resolution /= ZoomFactor;
+                var resolution = ZoomHelper.ZoomIn(Map.Resolutions, Map.Viewport.Resolution);
                 if (Map.ZoomLimits != null && resolution < Map.ZoomLimits.Min)
-                    resolution = Map.ZoomLimits.Min;
+                    resolution = Map.ZoomLimits.Min; // todo: put this in a more central place, like ZoomHelper, or put ZoomIn in Viewport
                 Map.NavigateTo(resolution);
             }
             else
             {
                 // Zoom out
-                var resolution = Map.Viewport.Resolution;
-                resolution *= ZoomFactor;
+                var resolution = ZoomHelper.ZoomOut(Map.Resolutions, Map.Viewport.Resolution);
                 if (Map.ZoomLimits != null && resolution > Map.ZoomLimits.Max)
-                    resolution = Map.ZoomLimits.Max;
+                    resolution = Map.ZoomLimits.Max; // todo: see remark about ZoomLimits.min
                 Map.NavigateTo(resolution);
             }
         }
