@@ -16,8 +16,8 @@ namespace Mapsui.Samples.Forms
 
         public MapPage ()
 		{
-			InitializeComponent ();
-		}
+            InitializeComponent();
+        }
 
         public MapPage(Func<Map> call, Func<MapView, MapClickedEventArgs, bool> c = null)
         {
