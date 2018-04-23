@@ -4,7 +4,6 @@ using System.Globalization;
 using System.IO;
 using System.Net;
 using System.Net.Http;
-using System.Runtime.Serialization.Json;
 using System.Threading.Tasks;
 using BruTile.Extensions;
 using Mapsui.Logging;

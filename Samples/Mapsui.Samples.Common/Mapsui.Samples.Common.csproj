@@ -1,167 +1,70 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <MinimumVisualStudioVersion>10.0</MinimumVisualStudioVersion>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{508AE811-A03A-4138-8CCC-ABDE03C67010}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Mapsui.Samples.Common</RootNamespace>
-    <AssemblyName>Mapsui.Samples.Common</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Profile111</TargetFrameworkProfile>
-    <FileAlignment>512</FileAlignment>
-    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
-    <RestorePackages>true</RestorePackages>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <TargetFramework>netstandard1.1</TargetFramework>
+    <Authors>Mapsui Contributers</Authors>
   </PropertyGroup>
   <ItemGroup>
-    <!-- A reference to the entire .NET Framework is automatically included -->
-    <EmbeddedResource Include="EmbeddedResources\countries-hires.json" />
-    <EmbeddedResource Include="EmbeddedResources\el-molar.mbtiles" />
-    <EmbeddedResource Include="EmbeddedResources\torrejon-de-ardoz.mbtiles" />
+    <None Remove="EmbeddedResources\cities.geojson" />
+    <None Remove="EmbeddedResources\cities.json" />
+    <None Remove="EmbeddedResources\congo.json" />
+    <None Remove="EmbeddedResources\countries-hires.json" />
+    <None Remove="EmbeddedResources\el-molar.mbtiles" />
+    <None Remove="EmbeddedResources\torrejon-de-ardoz.mbtiles" />
+    <None Remove="EmbeddedResources\world.mbtiles" />
+    <None Remove="Images\arrow.png" />
+    <None Remove="Images\Ghostscript_Tiger.png" />
+    <None Remove="Images\Ghostscript_Tiger.svg" />
+    <None Remove="Images\home.png" />
+    <None Remove="Images\ic_place_black_24dp.png" />
+    <None Remove="Images\loc.png" />
+    <None Remove="Images\location.png" />
+    <None Remove="Images\netherlands.jpg" />
+    <None Remove="Images\osm-liberty.png" />
+    <None Remove="Images\Pin.svg" />
+    <None Remove="MbTiles\el-molar.mbtiles" />
+    <None Remove="MbTiles\torrejon-de-ardoz.mbtiles" />
+    <None Remove="MbTiles\world.mbtiles" />
+  </ItemGroup>
+  <ItemGroup>
     <EmbeddedResource Include="EmbeddedResources\cities.geojson" />
     <EmbeddedResource Include="EmbeddedResources\cities.json" />
     <EmbeddedResource Include="EmbeddedResources\congo.json" />
-    <None Include="MbTiles\el-molar.mbtiles">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="MbTiles\world.mbtiles">
+    <EmbeddedResource Include="EmbeddedResources\countries-hires.json" />
+    <EmbeddedResource Include="EmbeddedResources\el-molar.mbtiles" />
+    <EmbeddedResource Include="EmbeddedResources\torrejon-de-ardoz.mbtiles">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="MbTiles\torrejon-de-ardoz.mbtiles">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <EmbeddedResource Include="EmbeddedResources\world.mbtiles">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <!-- A reference to the entire .NET Framework is automatically included -->
+    <EmbeddedResource Include="EmbeddedResources\world.mbtiles">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Images\arrow.png" />
-    <EmbeddedResource Include="Images\netherlands.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="AllSamples.cs" />
-    <Compile Include="Helpers\MbTilesHelper.cs" />
-    <Compile Include="Helpers\RandomPointHelper.cs" />
-    <Compile Include="Maps\BingSample.cs" />
-    <Compile Include="Maps\CenterOnLocationSample.cs" />
-    <Compile Include="Maps\KeepWithinExtentsSample.cs" />
-    <Compile Include="Maps\LabelsSample.cs" />
-    <Compile Include="Maps\MbTilesOverlaySample.cs" />
-    <Compile Include="Maps\MbTilesSample.cs" />
-    <Compile Include="Maps\MutatingTriangleSample.cs" />
-    <Compile Include="Maps\OpacityStyleSample.cs" />
-    <Compile Include="Maps\ScaleBarSample.cs" />
-    <Compile Include="Maps\OsmSample.cs" />
-    <Compile Include="Maps\InfoLayersSample.cs" />
-    <Compile Include="Maps\PenStrokeCapSample.cs" />
-    <Compile Include="Maps\RasterizingLayerSample.cs" />
-    <Compile Include="Maps\EmptyMapSample.cs" />
-    <Compile Include="Maps\AtlasSample.cs" />
-    <Compile Include="Maps\SvgSample.cs" />
-    <Compile Include="Maps\WidgetSample.cs" />
-    <Compile Include="Maps\SymbolsSample.cs" />
-    <Compile Include="Maps\VariousSample.cs" />
-    <Compile Include="Maps\StackedLabelsSample.cs" />
-    <Compile Include="Maps\PolygonSample.cs" />
-    <Compile Include="Maps\AnimatedPointsSample.cs" />
-    <Compile Include="Maps\GeodanOfficesSample.cs" />
-    <Compile Include="Maps\ProjectionSample.cs" />
-    <Compile Include="Maps\TmsSample.cs" />
-    <Compile Include="Maps\WmscSample.cs" />
-    <Compile Include="Maps\TiledWmsSample.cs" />
-    <Compile Include="Maps\LineStringSample.cs" />
-    <Compile Include="Maps\PointsSample.cs" />
-    <Compile Include="Maps\SymbolsInWorldUnitsSample.cs" />
-    <Compile Include="PeriodicTask.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Maps\WmtsSample.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Mapsui.Geometries\Mapsui.Geometries.csproj">
-      <Project>{EE55B62D-FFA2-4C24-A4AD-7A47ACE55CE5}</Project>
-      <Name>Mapsui.Geometries</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Mapsui\Mapsui.csproj">
-      <Project>{D74C052A-C07E-4B37-A898-134218ACA5C9}</Project>
-      <Name>Mapsui</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Images\loc.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Images\ic_place_black_24dp.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Images\location.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="BruTile, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\BruTile.1.0.0\lib\portable-net45+win+WindowsPhoneApp81+Xamarin.iOS10+MonoAndroid10+MonoTouch10\BruTile.dll</HintPath>
-    </Reference>
-    <Reference Include="BruTile.MbTiles, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\BruTile.MbTiles.1.0.0\lib\portable-net45+win+WindowsPhoneApp81+Xamarin.iOS10+MonoAndroid10+MonoTouch10\BruTile.MbTiles.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Newtonsoft.Json.10.0.3\lib\portable-net45+win8+wp8+wpa81\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="SQLite-net, Version=1.4.118.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\sqlite-net-pcl.1.4.118\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10\SQLite-net.dll</HintPath>
-    </Reference>
-    <Reference Include="SQLitePCLRaw.batteries_green, Version=1.0.0.0, Culture=neutral, PublicKeyToken=a84b7dcfb1391f7f, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\SQLitePCLRaw.bundle_green.1.1.9\lib\portable-net45+netcore45+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\SQLitePCLRaw.batteries_green.dll</HintPath>
-    </Reference>
-    <Reference Include="SQLitePCLRaw.batteries_v2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=8226ea5df37bcae9, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\SQLitePCLRaw.bundle_green.1.1.9\lib\portable-net45+netcore45+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\SQLitePCLRaw.batteries_v2.dll</HintPath>
-    </Reference>
-    <Reference Include="SQLitePCLRaw.core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1488e028ca7ab535, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\SQLitePCLRaw.core.1.1.9\lib\portable-net45+netcore45+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\SQLitePCLRaw.core.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Images\Pin.svg" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Images\Ghostscript_Tiger.svg" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Images\Ghostscript_Tiger.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Images\osm-liberty.png" />
-  </ItemGroup>
-  <ItemGroup>
+    <EmbeddedResource Include="Images\Ghostscript_Tiger.svg" />
     <EmbeddedResource Include="Images\home.png" />
+    <EmbeddedResource Include="Images\ic_place_black_24dp.png" />
+    <EmbeddedResource Include="Images\loc.png" />
+    <EmbeddedResource Include="Images\location.png" />
+    <EmbeddedResource Include="Images\netherlands.jpg" />
+    <EmbeddedResource Include="Images\osm-liberty.png" />
+    <EmbeddedResource Include="Images\Pin.svg" />
+    <Content Include="MbTiles\el-molar.mbtiles" />
+    <Content Include="MbTiles\torrejon-de-ardoz.mbtiles" />
+    <Content Include="MbTiles\world.mbtiles" />
   </ItemGroup>
-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+
+  <ItemGroup><!--<PackageReference Include="" Version=""/>-->
+  
+    <Folder Include="Properties\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BruTile" Version="2.0.0" />
+    <PackageReference Include="BruTile.MbTiles" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Mapsui.Geometries\Mapsui.Geometries.csproj" />
+    <ProjectReference Include="..\..\Mapsui\Mapsui.csproj" />
+  </ItemGroup>
+
 </Project>
