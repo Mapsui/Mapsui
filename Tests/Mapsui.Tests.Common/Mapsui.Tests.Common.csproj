@@ -1,111 +1,39 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <MinimumVisualStudioVersion>10.0</MinimumVisualStudioVersion>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{81BB36D2-4D01-44E3-9024-E7CBD10DA316}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Mapsui.Tests.Common</RootNamespace>
-    <AssemblyName>Mapsui.Tests.Common</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Profile111</TargetFrameworkProfile>
-    <FileAlignment>512</FileAlignment>
-    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
-    <RestorePackages>true</RestorePackages>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <TargetFramework>netstandard1.1</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <!-- A reference to the entire .NET Framework is automatically included -->
+    <None Remove="Resources\Images\avion_silhouette.png" />
+    <None Remove="Resources\Images\checkered.png" />
+    <None Remove="Resources\Images\circle.png" />
+    <None Remove="Resources\Images\Ghostscript_Tiger.svg" />
+    <None Remove="Resources\Images\iconthatneedsoffset.png" />
+    <None Remove="Resources\Images\osm-liberty.png" />
+    <None Remove="Resources\SampleTiles\0_0_0.png" />
+    <None Remove="Resources\SampleTiles\1_0_0.png" />
+    <None Remove="Resources\SampleTiles\1_0_1.png" />
+    <None Remove="Resources\SampleTiles\1_1_0.png" />
+    <None Remove="Resources\SampleTiles\1_1_1.png" />
+  </ItemGroup>
+  <ItemGroup>
     <EmbeddedResource Include="Resources\Images\avion_silhouette.png" />
     <EmbeddedResource Include="Resources\Images\checkered.png" />
     <EmbeddedResource Include="Resources\Images\circle.png" />
+    <EmbeddedResource Include="Resources\Images\Ghostscript_Tiger.svg" />
     <EmbeddedResource Include="Resources\Images\iconthatneedsoffset.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="AllSamples.cs" />
-    <Compile Include="Maps\BitmapSample.cs" />
-    <Compile Include="Maps\BitmapSymbolSample.cs" />
-    <Compile Include="Maps\BitmapSymbolWithRotationAndOffsetSample.cs" />
-    <Compile Include="Maps\SymbolTypesSample.cs" />
-    <Compile Include="Maps\EmptySample.cs" />
-    <Compile Include="Maps\LabelSample.cs" />
-    <Compile Include="Maps\LineSample.cs" />
-    <Compile Include="Maps\PointInWorldUnits.cs" />
-    <Compile Include="Maps\PolygonSample.cs" />
-    <Compile Include="Maps\StackedLabelsSample.cs" />
-    <Compile Include="Maps\TilesSample.cs" />
-    <Compile Include="Maps\VectorStyleSample.cs" />
-    <Compile Include="SampleTileProvider.cs" />
-    <Compile Include="SampleTileSource.cs" />
-    <Compile Include="Utilities.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Mapsui.Geometries\Mapsui.Geometries.csproj">
-      <Project>{EE55B62D-FFA2-4C24-A4AD-7A47ACE55CE5}</Project>
-      <Name>Mapsui.Geometries</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Mapsui\Mapsui.csproj">
-      <Project>{D74C052A-C07E-4B37-A898-134218ACA5C9}</Project>
-      <Name>Mapsui</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
+    <EmbeddedResource Include="Resources\Images\osm-liberty.png" />
     <EmbeddedResource Include="Resources\SampleTiles\0_0_0.png" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Resources\SampleTiles\1_0_0.png" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Resources\SampleTiles\1_0_1.png" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Resources\SampleTiles\1_1_0.png" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Resources\SampleTiles\1_1_1.png" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="BruTile, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\BruTile.1.0.0\lib\portable-net45+win+WindowsPhoneApp81+Xamarin.iOS10+MonoAndroid10+MonoTouch10\BruTile.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\..\Mapsui.Geometries\Mapsui.Geometries.csproj" />
+    <ProjectReference Include="..\..\Mapsui\Mapsui.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <Folder Include="Properties\" />
   </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Images\osm-liberty.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Images\Ghostscript_Tiger.svg" />
-  </ItemGroup>
-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+
 </Project>
