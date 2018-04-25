@@ -10,9 +10,9 @@ namespace Mapsui.Samples.Common.Helpers
     {
         private static Random _random = new Random(0);
 
-        public static MemoryProvider CreateProviderWithRandomPoints(BoundingBox envelope, int count = 25)
+        public static MemoryProvider CreateProviderWithRandomPoints(BoundingBox envelope, int count = 25, int seed = 123)
         {
-            return new MemoryProvider(CreateFeatures(GenerateRandomPoints(envelope, count)));
+            return new MemoryProvider(CreateFeatures(GenerateRandomPoints(envelope, count, seed)));
         }
         
         private static IEnumerable<IFeature> CreateFeatures(IEnumerable<IGeometry> randomPoints)

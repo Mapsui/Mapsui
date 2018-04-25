@@ -208,7 +208,7 @@ namespace Mapsui.UI.iOS
 
         private Point GetScreenPosition(CGPoint point)
         {
-            return new Point(point.X * _scale, point.Y * _scale);
+            return new Point(point.X, point.Y);
         }
 
         public void Refresh()

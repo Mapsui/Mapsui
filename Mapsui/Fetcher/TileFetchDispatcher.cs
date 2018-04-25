@@ -8,7 +8,9 @@ using BruTile.Cache;
 using ConcurrentCollections;
 using Mapsui.Geometries;
 using Mapsui.Providers;
+using System.Runtime.CompilerServices;
 
+[assembly: InternalsVisibleTo("Mapsui.Tests")]
 namespace Mapsui.Fetcher
 {
     class TileFetchDispatcher : IFetchDispatcher, INotifyPropertyChanged

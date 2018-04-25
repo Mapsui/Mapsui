@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+using System.Reflection;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Geodan")]
 [assembly: AssemblyProduct("Mapsui.Rendering.Xaml")]
-[assembly: AssemblyCopyright("Copyright © Geodan 2012")]
+[assembly: AssemblyCopyright("Copyright C Geodan 2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

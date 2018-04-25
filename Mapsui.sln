@@ -2,7 +2,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui", "Mapsui\Mapsui.csproj", "{D74C052A-C07E-4B37-A898-134218ACA5C9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui", "Mapsui\Mapsui.csproj", "{D74C052A-C07E-4B37-A898-134218ACA5C9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{969DB691-49FB-4785-98F4-2112CC1BA7C4}"
 EndProject
@@ -30,7 +30,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.UI.iOS", "Mapsui.UI.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Rendering.Xaml", "Mapsui.Rendering.Xaml\Mapsui.Rendering.Xaml.csproj", "{5DC32B05-0B6E-478F-A9FB-57762AA2F814}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Geometries", "Mapsui.Geometries\Mapsui.Geometries.csproj", "{EE55B62D-FFA2-4C24-A4AD-7A47ACE55CE5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Geometries", "Mapsui.Geometries\Mapsui.Geometries.csproj", "{EE55B62D-FFA2-4C24-A4AD-7A47ACE55CE5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{B2DB6CAC-1C30-42C9-B628-BACEBF790AB9}"
 	ProjectSection(SolutionItems) = preProject
@@ -56,8 +56,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Mapsui.sln.DotSettings = Mapsui.sln.DotSettings
 		README.md = README.md
 	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Rendering.Skia-PCL", "Mapsui.Rendering.Skia-PCL\Mapsui.Rendering.Skia-PCL.csproj", "{B4F5CDC7-8D34-4B7E-BE62-206FC716D4FF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Samples.iOS", "Samples\Mapsui.Samples.iOS\Mapsui.Samples.iOS.csproj", "{5C1F0E76-BF98-4C6E-8AAB-CDB7E3735A9C}"
 EndProject
@@ -95,6 +93,7 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Samples.Forms.iOS", "Samples\Mapsui.Samples.Forms\Mapsui.Samples.Forms.iOS\Mapsui.Samples.Forms.iOS.csproj", "{DE3B0CBF-CC20-4457-884B-2E5150B45A01}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Samples.Forms.UWP", "Samples\Mapsui.Samples.Forms\Mapsui.Samples.Forms.UWP\Mapsui.Samples.Forms.UWP.csproj", "{28848162-20B7-46F1-8364-8B41B0393CD4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Rendering.Skia", "Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj", "{AE632270-38CA-4203-93A5-8612629CD944}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
@@ -1488,6 +1487,22 @@ Global
 		{28848162-20B7-46F1-8364-8B41B0393CD4}.Release|x86.ActiveCfg = Release|x86
 		{28848162-20B7-46F1-8364-8B41B0393CD4}.Release|x86.Build.0 = Release|x86
 		{28848162-20B7-46F1-8364-8B41B0393CD4}.Release|x86.Deploy.0 = Release|x86
+		{AE632270-38CA-4203-93A5-8612629CD944}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
+		{AE632270-38CA-4203-93A5-8612629CD944}.Debug|AnyCPU.Build.0 = Debug|Any CPU
+		{AE632270-38CA-4203-93A5-8612629CD944}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{AE632270-38CA-4203-93A5-8612629CD944}.Debug|ARM.Build.0 = Debug|Any CPU
+		{AE632270-38CA-4203-93A5-8612629CD944}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{AE632270-38CA-4203-93A5-8612629CD944}.Debug|x64.Build.0 = Debug|Any CPU
+		{AE632270-38CA-4203-93A5-8612629CD944}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{AE632270-38CA-4203-93A5-8612629CD944}.Debug|x86.Build.0 = Debug|Any CPU
+		{AE632270-38CA-4203-93A5-8612629CD944}.Release|AnyCPU.ActiveCfg = Release|Any CPU
+		{AE632270-38CA-4203-93A5-8612629CD944}.Release|AnyCPU.Build.0 = Release|Any CPU
+		{AE632270-38CA-4203-93A5-8612629CD944}.Release|ARM.ActiveCfg = Release|Any CPU
+		{AE632270-38CA-4203-93A5-8612629CD944}.Release|ARM.Build.0 = Release|Any CPU
+		{AE632270-38CA-4203-93A5-8612629CD944}.Release|x64.ActiveCfg = Release|Any CPU
+		{AE632270-38CA-4203-93A5-8612629CD944}.Release|x64.Build.0 = Release|Any CPU
+		{AE632270-38CA-4203-93A5-8612629CD944}.Release|x86.ActiveCfg = Release|Any CPU
+		{AE632270-38CA-4203-93A5-8612629CD944}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

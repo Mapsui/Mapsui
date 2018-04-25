@@ -348,9 +348,7 @@ namespace Mapsui.UI.Wpf
                 _toResolution = ViewportLimiter.LimitResolution(resolution, _map.Viewport.Width, _map.Viewport.Height,
                     _map.ZoomMode, _map.ZoomLimits, _map.Resolutions, _map.Envelope);
             }
-
-            e.Handled = true; //so that the scroll event is not sent to the html page.
-
+            
             // Some cheating for personal gain. This workaround could be ommitted if the zoom animations was on CenterX, CenterY and Resolution, not Resolution alone.
             Map.Viewport.Center.X += 0.000000001;
             Map.Viewport.Center.Y += 0.000000001;
@@ -747,7 +745,7 @@ namespace Mapsui.UI.Wpf
             if (!_invalid) return; // Don't render when nothing has changed
             if (double.IsNaN(ActualWidth) || ActualWidth == 0 || double.IsNaN(ActualHeight) || ActualHeight == 0) return;
 
-            e.Surface.Canvas.Scale((float)_scale, (float)_scale);
+            e.Surface.Canvas.Scale(_scale, _scale);
 
             Map.Viewport.Width = ActualWidth;
             Map.Viewport.Height = ActualHeight;

@@ -37,20 +37,20 @@ namespace Mapsui.Samples.Android
             MbTilesHelper.DeployMbTilesFile(s => File.Create(Path.Combine(MbTilesLocationOnAndroid, s)));
             
             var mapControl = FindViewById<MapControl>(Resource.Id.mapcontrol);
-            mapControl.Map = PolygonSample.CreateMap();
+            mapControl.Map = InfoLayersSample.CreateMap();
             mapControl.Map.Info+= MapOnInfo;
             mapControl.Map.Viewport.ViewportChanged += ViewportOnViewportChanged;
             mapControl.RotationLock = true;
             mapControl.UnSnapRotationDegrees = 30;
             mapControl.ReSnapRotationDegrees = 5;
 
-            FindViewById<LinearLayout>(Resource.Id.mainLayout).AddView(_popup = CreatePopup());
+            FindViewById<RelativeLayout>(Resource.Id.mainLayout).AddView(_popup = CreatePopup());
         }
 
         private void ViewportOnViewportChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
-            if (_popup != null)
-                _popup.Visibility = ViewStates.Gone;
+            //if (_popup != null)
+            //    _popup.Visibility = ViewStates.Gone;
         }
 
         private LinearLayout CreatePopup()
@@ -96,8 +96,8 @@ namespace Mapsui.Samples.Android
             var mapControl = FindViewById<MapControl>(Resource.Id.mapcontrol);
             var screenPosition = mapControl.WorldToScreen(args.MapInfo.Feature.Geometry.GetBoundingBox().GetCentroid());
             
-            _popup.SetX((float) (screenPosition.X - _popup.MeasuredWidth * 0.5));
-            _popup.SetY((float) screenPosition.Y + 48);
+            _popup.SetX((float)args.MapInfo.ScreenPosition.X);
+            _popup.SetY((float)args.MapInfo.ScreenPosition.Y);
 
             _popup.Visibility = ViewStates.Visible;
         }
