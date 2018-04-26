@@ -65,6 +65,9 @@ namespace Mapsui.Samples.Forms
 
         public async void StartGPS()
         {
+            if (CrossGeolocator.Current.IsListening)
+                return;
+
             // Start GPS
             await CrossGeolocator.Current.StartListeningAsync(TimeSpan.FromSeconds(1),
                     1,
