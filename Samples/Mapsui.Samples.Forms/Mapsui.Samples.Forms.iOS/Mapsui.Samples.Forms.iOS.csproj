@@ -164,6 +164,6 @@
       <Name>Mapsui.Samples.Common</Name>
     </ProjectReference>
   </ItemGroup>
-  <Import Project="..\Mapsui.Samples.Forms\Mapsui.Samples.Forms.projitems" Label="Shared" />
+  <Import Project="..\Mapsui.Samples.Forms.Shared\Mapsui.Samples.Forms.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
