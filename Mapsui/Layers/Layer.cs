@@ -36,8 +36,15 @@ namespace Mapsui.Layers
         private readonly FetchMachine _fetchMachine;
         private readonly Delayer _delayer = new Delayer();
 
+        /// <summary>
+        /// Create a new layer
+        /// </summary>
         public Layer() : this("Layer") {}
 
+        /// <summary>
+        /// Create layer with name
+        /// </summary>
+        /// <param name="layername"></param>
         public Layer(string layername) : base(layername)
         {
             _fetchDispatcher = new FeatureFetchDispatcher(_cache, Transformer);
@@ -46,6 +53,7 @@ namespace Mapsui.Layers
 
             _fetchMachine = new FetchMachine(_fetchDispatcher);
         }
+
         public int FetchingPostponedInMilliseconds { get; set; } = 500;
 
         public IProvider DataSource
@@ -85,7 +93,7 @@ namespace Mapsui.Layers
         }
         
         /// <summary>
-        ///     Returns the extent of the layer
+        /// Returns the extent of the layer
         /// </summary>
         /// <returns>Bounding box corresponding to the extent of the features in the layer</returns>
         public override BoundingBox Envelope
@@ -99,16 +107,25 @@ namespace Mapsui.Layers
             }
         }
 
+        /// <inheritdoc />
         public override IEnumerable<IFeature> GetFeaturesInView(BoundingBox extent, double resolution)
         {
             return _cache.Features;
         }
 
+        /// <inheritdoc />
         public override void AbortFetch()
         {
             _fetchMachine.Stop();
         }
 
+        /// <inheritdoc />
+        public override void ClearCache()
+        {
+            _cache.Clear();
+        }
+
+        /// <inheritdoc />
         public override void ViewChanged(bool majorChange, BoundingBox extent, double resolution)
         {
             if (!Enabled) return;
@@ -118,11 +135,7 @@ namespace Mapsui.Layers
             _delayer.ExecuteDelayed(() => DelayedFetch(extent.Copy(), resolution), FetchingPostponedInMilliseconds);
         }
 
-        public override void ClearCache()
-        {
-            _cache.Clear();
-        }
-
+        /// <inheritdoc />
         public override bool? IsCrsSupported(string crs)
         {
             if (Transformation == null) return null;
