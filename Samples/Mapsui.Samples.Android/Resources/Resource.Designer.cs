@@ -26,10 +26,18 @@ namespace Mapsui.Samples.Android
 		
 		public static void UpdateIdValues()
 		{
+			global::Mapsui.UI.Android.Resource.Attribute.start_with_openstreetmap = global::Mapsui.Samples.Android.Resource.Attribute.start_with_openstreetmap;
+			global::Mapsui.UI.Android.Resource.String.ApplicationName = global::Mapsui.Samples.Android.Resource.String.ApplicationName;
+			global::Mapsui.UI.Android.Resource.String.Hello = global::Mapsui.Samples.Android.Resource.String.Hello;
+			global::Mapsui.UI.Android.Resource.Styleable.start_with_openstreetmap_style = global::Mapsui.Samples.Android.Resource.Styleable.start_with_openstreetmap_style;
+			global::Mapsui.UI.Android.Resource.Styleable.start_with_openstreetmap_style_start_with_openstreetmap = global::Mapsui.Samples.Android.Resource.Styleable.start_with_openstreetmap_style_start_with_openstreetmap;
 		}
 		
 		public partial class Attribute
 		{
+			
+			// aapt resource value: 0x7f010000
+			public const int start_with_openstreetmap = 2130771968;
 			
 			static Attribute()
 			{
@@ -63,11 +71,8 @@ namespace Mapsui.Samples.Android
 			// aapt resource value: 0x7f050000
 			public const int mainLayout = 2131034112;
 			
-			// aapt resource value: 0x7f050002
-			public const int mapcontrol = 2131034114;
-			
 			// aapt resource value: 0x7f050001
-			public const int textView1 = 2131034113;
+			public const int mapcontrol = 2131034113;
 			
 			static Id()
 			{
@@ -110,6 +115,25 @@ namespace Mapsui.Samples.Android
 			}
 			
 			private String()
+			{
+			}
+		}
+		
+		public partial class Styleable
+		{
+			
+			public static int[] start_with_openstreetmap_style = new int[] {
+					2130771968};
+			
+			// aapt resource value: 0
+			public const int start_with_openstreetmap_style_start_with_openstreetmap = 0;
+			
+			static Styleable()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Styleable()
 			{
 			}
 		}

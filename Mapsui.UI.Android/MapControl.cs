@@ -102,7 +102,7 @@ namespace Mapsui.UI.Android
 
             if (_map.Viewport.TryInitializeViewport(_map, Width / _scale, Height / _scale))
             {
-                Map.ViewChanged(true);
+                Map.Viewport.ViewChanged(true);
                 OnViewportInitialized();
             }
         }
@@ -124,7 +124,7 @@ namespace Mapsui.UI.Android
                 case MotionEventActions.Up:
                     InvalidateCanvas();
                     _mode = TouchMode.None;
-                    _map.ViewChanged(true);
+                    _map.Viewport.ViewChanged(true);
                     break;
                 case MotionEventActions.Down:
                 case MotionEventActions.Pointer1Down:
@@ -261,7 +261,7 @@ namespace Mapsui.UI.Android
                 if (_map != null)
                 {
                     SubscribeToMapEvents(_map);
-                    _map.ViewChanged(true);
+                    _map.Viewport.ViewChanged(true);
                     PushSizeOntoViewport();
                 }
 
@@ -315,7 +315,7 @@ namespace Mapsui.UI.Android
 
         public void RefreshData()
         {
-            _map.ViewChanged(true);
+            _map.Viewport.ViewChanged(true);
         }
 
         public void Refresh()

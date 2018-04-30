@@ -1,3 +1,5 @@
+// TODO: There are parts talking about SharpMap
+
 // Copyright 2012 - Paul den Dulk (Geodan)
 // 
 // This file is part of SharpMap.
@@ -23,11 +25,18 @@ using System.ComponentModel;
 
 namespace Mapsui
 {
+    /// <summary>
+    /// Viewport holds all informations about the visible part of the map.
+    /// </summary>
+    /// <remarks>
+    /// Viewport is the connection between Map and MapControl. It tells MapControl,
+    /// which part of Map should be displayed on screen.
+    /// </remarks>
     public class Viewport : IViewport
     {
         public event PropertyChangedEventHandler ViewportChanged;
-        public bool Initialized { get; private set; }
 
+        private Map _map;
         private readonly BoundingBox _extent;
         private Quad _windowExtent;
         private double _height;
@@ -36,8 +45,10 @@ namespace Mapsui
         private double _rotation;
         private readonly NotifyingPoint _center = new NotifyingPoint();
         private bool _modified = true;
-        
 
+        /// <summary>
+        /// Create a new viewport
+        /// </summary>
         public Viewport()
         {
             _extent = new BoundingBox(0, 0, 0, 0);
@@ -47,6 +58,10 @@ namespace Mapsui
 			_center.PropertyChanged += (sender, args) => OnViewportChanged(nameof(Center));
         }
         
+        /// <summary>
+        /// Create a new viewport from another viewport
+        /// </summary>
+        /// <param name="viewport">Viewport from which to copy all values</param>
         public Viewport(Viewport viewport) : this()
         {
             _resolution = viewport._resolution;
@@ -61,12 +76,14 @@ namespace Mapsui
                 viewport.WindowExtent.TopRight, viewport.WindowExtent.BottomRight);
         }
 
-        private void OnViewportChanged([CallerMemberName] string propertyName = null)
-        {
-            _modified = true;
-            ViewportChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        /// <summary>
+        /// Viewport is initialized and ready to use
+        /// </summary>
+        public bool Initialized { get; private set; }
 
+        /// <summary>
+        /// Coordinate of center of viewport in map coordinates
+        /// </summary>
         public Point Center
         {
             get => _center;
@@ -78,6 +95,16 @@ namespace Mapsui
             }
         }
 
+        /// <summary>
+        /// Resolution of the viewport in units per pixel
+        /// </summary>
+        /// <remarks>
+        /// Resolution is Mapsuis form of zoom level. Because Mapsui is projection independent, there 
+        /// aren't any zoom levels as other map libraries have. If your map has EPSG:3857 as projection
+        /// and you want to calculate the zoom, you should use the following equation
+        /// 
+        ///     var zoom = (float)Math.Log(78271.51696401953125 / resolution, 2);
+        /// </remarks>
         public double Resolution
         {
             get => _resolution;
@@ -88,6 +115,9 @@ namespace Mapsui
             }
         }
 
+        /// <summary>
+        /// Width of viewport in screen pixels
+        /// </summary>
         public double Width
         {
             get => _width;
@@ -98,6 +128,9 @@ namespace Mapsui
             }
         }
 
+        /// <summary>
+        /// Height of viewport in screen pixels
+        /// </summary>
         public double Height
         {
             get => _height;
@@ -108,6 +141,9 @@ namespace Mapsui
             }
         }
 
+        /// <summary>
+        /// Rotation of map in degrees
+        /// </summary>
         public double Rotation
         {
             get => _rotation;
@@ -121,9 +157,19 @@ namespace Mapsui
             }
         }
 
+        /// <summary>
+        /// IsRotated is true, when viewport displays map rotated
+        /// </summary>
         public bool IsRotated => 
             !double.IsNaN(_rotation) && _rotation > Constants.Epsilon && _rotation < 360 - Constants.Epsilon;
 
+        /// <summary>
+        /// BoundingBox of viewport in map coordinates respection Rotation
+        /// </summary>
+        /// <remarks>
+        /// This BoundingBox is horizontally and vertically aligned, even if the viewport
+        /// is rotated. So this BoundingBox perhaps contain parts, that are not visible.
+        /// </remarks>
         public BoundingBox Extent
         {
             get
@@ -133,6 +179,13 @@ namespace Mapsui
             }
         }
 
+        /// <summary>
+        /// WindowExtend gives the four corner points of viewport in map coordinates
+        /// </summary>
+        /// <remarks>
+        /// If viewport is rotated, this corner points are not horizontally or vertically
+        /// aligned.
+        /// </remarks>
         public Quad WindowExtent
         {
             get
@@ -142,21 +195,100 @@ namespace Mapsui
             }
         }
 
+        /// <summary>
+        /// Navigate center of viewport to center of extent and change resolution
+        /// </summary>
+        /// <param name="extent">New extent for viewport to show</param>
+        /// <param name="scaleMethod">Scale method to use to determin resolution</param>
+        public void NavigateTo(BoundingBox extent, ScaleMethod scaleMethod = ScaleMethod.Fit)
+        {
+            Resolution = ZoomHelper.DetermineResolution(extent.Width, extent.Height, Width, Height, scaleMethod);
+            Center = extent.GetCentroid();
+            _map.OnRefreshGraphics();
+            ViewChanged(true);
+        }
+
+        /// <summary>
+        /// Change resolution of viewport
+        /// </summary>
+        /// <param name="resolution">New resolution to use</param>
+        public void NavigateTo(double resolution)
+        {
+            Resolution = resolution;
+            _map.OnRefreshGraphics();
+            ViewChanged(true);
+        }
+
+        /// <summary>
+        /// Change center of viewport
+        /// </summary>
+        /// <param name="center">New center point of viewport</param>
+        public void NavigateTo(Point center)
+        {
+            Center = center;
+            _map.OnRefreshGraphics();
+            ViewChanged(true);
+        }
+
+        /// <summary>
+        /// Change center of viewport to X/Y coordinates
+        /// </summary>
+        /// <param name="x">X value of the new center</param>
+        /// <param name="y">Y value of the new center</param>
+        public void NavigateTo(double x, double y)
+        {
+            Center = new Point(x, y);
+            _map.OnRefreshGraphics();
+            ViewChanged(true);
+        }
+
+        /// <summary>
+        /// Change rotation of viewport
+        /// </summary>
+        /// <param name="rotation"New rotation in degrees of viewport></param>
+        public void RotateTo(double rotation)
+        {
+            Rotation = rotation;
+            _map.OnRefreshGraphics();
+            ViewChanged(true);
+        }
+
+        /// <summary>
+        /// Converts a point in map units to one in screen pixels, respecting rotation
+        /// </summary>
+        /// <param name="worldPosition">Coordinate in map units</param>
+        /// <returns>Point in screen pixels</returns>
         public Point WorldToScreen(Point worldPosition)
         {
             return WorldToScreen(worldPosition.X, worldPosition.Y);
         }
 
+        /// <summary>
+        /// Converts a point in map units to one in screen pixels, not respecting rotation
+        /// </summary>
+        /// <param name="worldPosition">Coordinate in map units</param>
+        /// <returns>Point in screen pixels</returns>
         public Point WorldToScreenUnrotated(Point worldPosition)
         {
             return WorldToScreenUnrotated(worldPosition.X, worldPosition.Y);
         }
 
+        /// <summary>
+        /// Converts a point in screen pixels to one in map units, respecting rotation
+        /// </summary>
+        /// <param name="worldPosition">Coordinate in map units</param>
+        /// <returns>Point in map units</returns>
         public Point ScreenToWorld(Point screenPosition)
         {
             return ScreenToWorld(screenPosition.X, screenPosition.Y);
         }
 
+        /// <summary>
+        /// Converts X/Y in map units to a point in screen pixels, respecting rotation
+        /// </summary>
+        /// <param name="worldX">X coordinate in map units</param>
+        /// <param name="worldY">Y coordinate in map units</param>
+        /// <returns>Point in screen pixels</returns>
         public Point WorldToScreen(double worldX, double worldY)
         {
             var p = WorldToScreenUnrotated(worldX, worldY);
@@ -171,6 +303,12 @@ namespace Mapsui
             return p;
         }
 
+        /// <summary>
+        /// Converts X/Y in map units to a point in screen pixels, not respecting rotation
+        /// </summary>
+        /// <param name="worldX">X coordinate in map units</param>
+        /// <param name="worldY">Y coordinate in map units</param>
+        /// <returns>Point in screen pixels</returns>
         public Point WorldToScreenUnrotated(double worldX, double worldY)
         {
             var screenCenterX = Width / 2.0;
@@ -181,6 +319,11 @@ namespace Mapsui
             return new Point(screenX, screenY);
         }
 
+        /// <summary>
+        /// Converts X/Y in screen pixels to a point in map units, respecting rotation
+        /// </summary>
+        /// <param name="worldPosition">Coordinate in map units</param>
+        /// <returns>Point in map units</returns>
         public Point ScreenToWorld(double screenX, double screenY)
         {
             var screenCenterX = Width / 2.0;
@@ -198,6 +341,15 @@ namespace Mapsui
             return new Point(worldX, worldY);
         }
 
+        /// <summary>
+        /// Moving the position of viewport to a new one
+        /// </summary>
+        /// <param name="screenX">New X position of point</param>
+        /// <param name="screenY">New Y position of point</param>
+        /// <param name="previousScreenX">Old X position of point</param>
+        /// <param name="previousScreenY">Old Y position of point</param>
+        /// <param name="deltaScale">Change of resolution for transformation (<1: zoom out, >1: zoom in)</param>
+        /// <param name="deltaRotation">Change of rotation</param>
         public void Transform(double screenX, double screenY, double previousScreenX, double previousScreenY, double deltaScale = 1, double deltaRotation = 0)
         {
             var previous = ScreenToWorld(previousScreenX, previousScreenY);
@@ -232,6 +384,64 @@ namespace Mapsui
             }
         }
 
+        /// <summary>
+        /// Initialize viewport for given map and screen extension in pixels
+        /// </summary>
+        /// <param name="map">Map for this viewport</param>
+        /// <param name="screenWidth">Width of this viewport in screen pixels</param>
+        /// <param name="screenHeight">Heigh of this viewport in screen pixels</param>
+        /// <returns>True, if viewport is correct initialized</returns>
+        public bool TryInitializeViewport(Map map, double screenWidth, double screenHeight)
+        {
+            if (screenWidth.IsNanOrZero()) return false;
+            if (screenHeight.IsNanOrZero()) return false;
+
+            if (double.IsNaN(map.Viewport.Resolution)) // only when not set yet
+            {
+                if (!map.Envelope.IsInitialized()) return false;
+                if (map.Envelope.GetCentroid() == null) return false;
+
+                if (Math.Abs(map.Envelope.Width) > Constants.Epsilon)
+                    map.Viewport.Resolution = map.Envelope.Width / screenWidth;
+                else
+                    // An envelope width of zero can happen when there is no data in the Maps' layers (yet).
+                    // It should be possible to start with an empty map.
+                    map.Viewport.Resolution = Constants.DefaultResolution;
+            }
+
+            if (double.IsNaN(map.Viewport.Center.X) || double.IsNaN(map.Viewport.Center.Y)) // only when not set yet
+            {
+                if (!map.Envelope.IsInitialized()) return false;
+                if (map.Envelope.GetCentroid() == null) return false;
+
+                map.Viewport.Center = map.Envelope.GetCentroid();
+            }
+
+            map.Viewport.Width = screenWidth;
+            map.Viewport.Height = screenHeight;
+
+            _map = map;
+
+            Initialized = true;
+
+            return true;
+        }
+
+        /// <summary>
+        /// Something changed on Viewport
+        /// </summary>
+        /// <param name="majorChange">True, when the change is a major change</param>
+        public void ViewChanged(bool majorChange)
+        {
+            foreach (var layer in _map.Layers)
+            {
+                layer.ViewChanged(majorChange, _extent, _resolution);
+            }
+        }
+
+        /// <summary>
+        /// Recalculates extents for viewport
+        /// </summary>
         private void UpdateExtent()
         {
             if (double.IsNaN(_center.X)) return;
@@ -272,37 +482,14 @@ namespace Mapsui
             _modified = false;
         }
 
-        public bool TryInitializeViewport(Map map, double screenWidth, double screenHeight)
+        /// <summary>
+        /// Property change event
+        /// </summary>
+        /// <param name="propertyName">Name of property that changed</param>
+        private void OnViewportChanged([CallerMemberName] string propertyName = null)
         {
-            if (screenWidth.IsNanOrZero()) return false;
-            if (screenHeight.IsNanOrZero()) return false;
-
-            if (double.IsNaN(map.Viewport.Resolution)) // only when not set yet
-            {
-                if (!map.Envelope.IsInitialized()) return false;
-                if (map.Envelope.GetCentroid() == null) return false;
-
-                if (Math.Abs(map.Envelope.Width) > Constants.Epsilon)
-                    map.Viewport.Resolution = map.Envelope.Width / screenWidth;
-                else
-                    // An envelope width of zero can happen when there is no data in the Maps' layers (yet).
-                    // It should be possible to start with an empty map.
-                    map.Viewport.Resolution = Constants.DefaultResolution;
-            }
-
-            if (double.IsNaN(map.Viewport.Center.X) || double.IsNaN(map.Viewport.Center.Y)) // only when not set yet
-            {
-                if (!map.Envelope.IsInitialized()) return false;
-                if (map.Envelope.GetCentroid() == null) return false;
-
-                map.Viewport.Center = map.Envelope.GetCentroid();
-            }
-
-            map.Viewport.Width = screenWidth;
-            map.Viewport.Height = screenHeight;
-            
-            Initialized = true;
-            return true;
+            _modified = true;
+            ViewportChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

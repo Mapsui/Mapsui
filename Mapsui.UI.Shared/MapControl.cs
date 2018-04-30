@@ -271,7 +271,7 @@ namespace Mapsui.UI.Wpf
             {
                 InvalidateCanvas();
                 _mode = TouchMode.None;
-                _map.ViewChanged(true);
+                _map.Viewport.ViewChanged(true);
             }
 
             return args.Handled;
