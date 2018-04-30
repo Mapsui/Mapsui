@@ -76,14 +76,10 @@ namespace Mapsui
                 viewport.WindowExtent.TopRight, viewport.WindowExtent.BottomRight);
         }
 
-        /// <summary>
-        /// Viewport is initialized and ready to use
-        /// </summary>
+        /// <inheritdoc />
         public bool Initialized { get; private set; }
 
-        /// <summary>
-        /// Coordinate of center of viewport in map coordinates
-        /// </summary>
+        /// <inheritdoc />
         public Point Center
         {
             get => _center;
@@ -95,16 +91,7 @@ namespace Mapsui
             }
         }
 
-        /// <summary>
-        /// Resolution of the viewport in units per pixel
-        /// </summary>
-        /// <remarks>
-        /// Resolution is Mapsuis form of zoom level. Because Mapsui is projection independent, there 
-        /// aren't any zoom levels as other map libraries have. If your map has EPSG:3857 as projection
-        /// and you want to calculate the zoom, you should use the following equation
-        /// 
-        ///     var zoom = (float)Math.Log(78271.51696401953125 / resolution, 2);
-        /// </remarks>
+        /// <inheritdoc />
         public double Resolution
         {
             get => _resolution;
@@ -115,9 +102,7 @@ namespace Mapsui
             }
         }
 
-        /// <summary>
-        /// Width of viewport in screen pixels
-        /// </summary>
+        /// <inheritdoc />
         public double Width
         {
             get => _width;
@@ -128,9 +113,7 @@ namespace Mapsui
             }
         }
 
-        /// <summary>
-        /// Height of viewport in screen pixels
-        /// </summary>
+        /// <inheritdoc />
         public double Height
         {
             get => _height;
@@ -141,9 +124,7 @@ namespace Mapsui
             }
         }
 
-        /// <summary>
-        /// Rotation of map in degrees
-        /// </summary>
+        /// <inheritdoc />
         public double Rotation
         {
             get => _rotation;
@@ -157,19 +138,11 @@ namespace Mapsui
             }
         }
 
-        /// <summary>
-        /// IsRotated is true, when viewport displays map rotated
-        /// </summary>
+        /// <inheritdoc />
         public bool IsRotated => 
             !double.IsNaN(_rotation) && _rotation > Constants.Epsilon && _rotation < 360 - Constants.Epsilon;
 
-        /// <summary>
-        /// BoundingBox of viewport in map coordinates respection Rotation
-        /// </summary>
-        /// <remarks>
-        /// This BoundingBox is horizontally and vertically aligned, even if the viewport
-        /// is rotated. So this BoundingBox perhaps contain parts, that are not visible.
-        /// </remarks>
+        /// <inheritdoc />
         public BoundingBox Extent
         {
             get
@@ -179,13 +152,7 @@ namespace Mapsui
             }
         }
 
-        /// <summary>
-        /// WindowExtend gives the four corner points of viewport in map coordinates
-        /// </summary>
-        /// <remarks>
-        /// If viewport is rotated, this corner points are not horizontally or vertically
-        /// aligned.
-        /// </remarks>
+        /// <inheritdoc />
         public Quad WindowExtent
         {
             get
@@ -253,42 +220,25 @@ namespace Mapsui
             ViewChanged(true);
         }
 
-        /// <summary>
-        /// Converts a point in map units to one in screen pixels, respecting rotation
-        /// </summary>
-        /// <param name="worldPosition">Coordinate in map units</param>
-        /// <returns>Point in screen pixels</returns>
+        /// <inheritdoc />
         public Point WorldToScreen(Point worldPosition)
         {
             return WorldToScreen(worldPosition.X, worldPosition.Y);
         }
 
-        /// <summary>
-        /// Converts a point in map units to one in screen pixels, not respecting rotation
-        /// </summary>
-        /// <param name="worldPosition">Coordinate in map units</param>
-        /// <returns>Point in screen pixels</returns>
+        /// <inheritdoc />
         public Point WorldToScreenUnrotated(Point worldPosition)
         {
             return WorldToScreenUnrotated(worldPosition.X, worldPosition.Y);
         }
 
-        /// <summary>
-        /// Converts a point in screen pixels to one in map units, respecting rotation
-        /// </summary>
-        /// <param name="worldPosition">Coordinate in map units</param>
-        /// <returns>Point in map units</returns>
+        /// <inheritdoc />
         public Point ScreenToWorld(Point screenPosition)
         {
             return ScreenToWorld(screenPosition.X, screenPosition.Y);
         }
 
-        /// <summary>
-        /// Converts X/Y in map units to a point in screen pixels, respecting rotation
-        /// </summary>
-        /// <param name="worldX">X coordinate in map units</param>
-        /// <param name="worldY">Y coordinate in map units</param>
-        /// <returns>Point in screen pixels</returns>
+        /// <inheritdoc />
         public Point WorldToScreen(double worldX, double worldY)
         {
             var p = WorldToScreenUnrotated(worldX, worldY);
@@ -303,12 +253,7 @@ namespace Mapsui
             return p;
         }
 
-        /// <summary>
-        /// Converts X/Y in map units to a point in screen pixels, not respecting rotation
-        /// </summary>
-        /// <param name="worldX">X coordinate in map units</param>
-        /// <param name="worldY">Y coordinate in map units</param>
-        /// <returns>Point in screen pixels</returns>
+        /// <inheritdoc />
         public Point WorldToScreenUnrotated(double worldX, double worldY)
         {
             var screenCenterX = Width / 2.0;
@@ -319,11 +264,7 @@ namespace Mapsui
             return new Point(screenX, screenY);
         }
 
-        /// <summary>
-        /// Converts X/Y in screen pixels to a point in map units, respecting rotation
-        /// </summary>
-        /// <param name="worldPosition">Coordinate in map units</param>
-        /// <returns>Point in map units</returns>
+        /// <inheritdoc />
         public Point ScreenToWorld(double screenX, double screenY)
         {
             var screenCenterX = Width / 2.0;
@@ -341,15 +282,7 @@ namespace Mapsui
             return new Point(worldX, worldY);
         }
 
-        /// <summary>
-        /// Moving the position of viewport to a new one
-        /// </summary>
-        /// <param name="screenX">New X position of point</param>
-        /// <param name="screenY">New Y position of point</param>
-        /// <param name="previousScreenX">Old X position of point</param>
-        /// <param name="previousScreenY">Old Y position of point</param>
-        /// <param name="deltaScale">Change of resolution for transformation (<1: zoom out, >1: zoom in)</param>
-        /// <param name="deltaRotation">Change of rotation</param>
+        /// <inheritdoc />
         public void Transform(double screenX, double screenY, double previousScreenX, double previousScreenY, double deltaScale = 1, double deltaRotation = 0)
         {
             var previous = ScreenToWorld(previousScreenX, previousScreenY);
