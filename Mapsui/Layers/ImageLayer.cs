@@ -20,6 +20,7 @@ using Mapsui.Geometries;
 using Mapsui.Providers;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Mapsui.Logging;
@@ -43,6 +44,7 @@ namespace Mapsui.Layers
         private readonly Timer _startFetchTimer;
         private IProvider _dataSource;
         private readonly int _numberOfFeaturesReturned;
+        private BoundingBox _envelope;
 
         /// <summary>
         /// Delay before fetching a new wms image from the server
@@ -56,9 +58,12 @@ namespace Mapsui.Layers
             set
             {
                 if (_dataSource == value) return;
+
                 _dataSource = value;
-                OnPropertyChanged("DataSource");
-                OnPropertyChanged("Envelope");
+                _envelope = ProjectionHelper.GetTransformedBoundingBox(Transformation, DataSource.GetExtents(), DataSource.CRS, CRS);
+
+                OnPropertyChanged(nameof(DataSource));
+                OnPropertyChanged(nameof(Envelope));
             }
         }
 
@@ -66,24 +71,24 @@ namespace Mapsui.Layers
         /// Returns the extent of the layer
         /// </summary>
         /// <returns>Bounding box corresponding to the extent of the features in the layer</returns>
-        public override BoundingBox Envelope
-        {
-            get
-            {
-                if (DataSource == null) return null;
-
-                lock (DataSource)
-                {
-                    return ProjectionHelper.GetTransformedBoundingBox(Transformation, DataSource.GetExtents(), DataSource.CRS, CRS);                   
-                }
-            }
-        }
+        public override BoundingBox Envelope => _envelope;
 
         public ImageLayer(string layername)
         {
             Name = layername;
             _startFetchTimer = new Timer(StartFetchTimerElapsed, int.MaxValue);
             _numberOfFeaturesReturned = 1;
+            PropertyChanged += OnPropertyChanged;
+        }
+
+        private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(CRS) ||
+                e.PropertyName == nameof(DataSource) ||
+                e.PropertyName == nameof(Transformation))
+            {
+                _envelope = ProjectionHelper.GetTransformedBoundingBox(Transformation, DataSource.GetExtents(), DataSource.CRS, CRS);
+            }
         }
 
         void StartFetchTimerElapsed(object state)
@@ -155,9 +160,12 @@ namespace Mapsui.Layers
                 
             var fetcher = new FeatureFetcher(newExtent, resolution, DataSource, DataArrived, DateTime.Now.Ticks);
 
-            Logger.Log(LogLevel.Debug, $"Starting new fetch at {DateTime.Now.TimeOfDay}");
-
-            Task.Run(() => fetcher.FetchOnThread());
+            Task.Run(() =>
+            {
+                Logger.Log(LogLevel.Debug, $"Start image fetch at {DateTime.Now.TimeOfDay}");
+                fetcher.FetchOnThread();
+                Logger.Log(LogLevel.Debug, $"Finished image fetch at {DateTime.Now.TimeOfDay}");
+            });
         }
 
         private void DataArrived(IEnumerable<IFeature> features, object state)
