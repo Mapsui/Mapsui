@@ -44,7 +44,6 @@ namespace Mapsui.Layers
         private readonly Timer _startFetchTimer;
         private IProvider _dataSource;
         private readonly int _numberOfFeaturesReturned;
-        private BoundingBox _envelope;
 
         /// <summary>
         /// Delay before fetching a new wms image from the server
@@ -57,21 +56,10 @@ namespace Mapsui.Layers
             get => _dataSource;
             set
             {
-                if (_dataSource == value) return;
-
                 _dataSource = value;
-                _envelope = ProjectionHelper.GetTransformedBoundingBox(Transformation, DataSource.GetExtents(), DataSource.CRS, CRS);
-
                 OnPropertyChanged(nameof(DataSource));
-                OnPropertyChanged(nameof(Envelope));
             }
         }
-
-        /// <summary>
-        /// Returns the extent of the layer
-        /// </summary>
-        /// <returns>Bounding box corresponding to the extent of the features in the layer</returns>
-        public override BoundingBox Envelope => _envelope;
 
         public ImageLayer(string layername)
         {
@@ -81,13 +69,18 @@ namespace Mapsui.Layers
             PropertyChanged += OnPropertyChanged;
         }
 
-        private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        protected void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(CRS) ||
                 e.PropertyName == nameof(DataSource) ||
                 e.PropertyName == nameof(Transformation))
             {
-                _envelope = ProjectionHelper.GetTransformedBoundingBox(Transformation, DataSource.GetExtents(), DataSource.CRS, CRS);
+                Task.Run(() => // Run in background because it could take time.
+                {
+                    var sourceExtent = DataSource.GetExtents(); // This method could involve database access or a web request
+                    Envelope = ProjectionHelper.GetTransformedBoundingBox(
+                        Transformation, sourceExtent, DataSource.CRS, CRS);
+                });
             }
         }
 
@@ -151,13 +144,13 @@ namespace Mapsui.Layers
             _needsUpdate = false;
 
             var newExtent = new BoundingBox(extent);
-            
+
             if (Transformation != null && !string.IsNullOrWhiteSpace(CRS)) DataSource.CRS = CRS;
 
             if (ProjectionHelper.NeedsTransform(Transformation, CRS, DataSource.CRS))
                 if (Transformation != null && Transformation.IsProjectionSupported(CRS, DataSource.CRS) == true)
                     newExtent = Transformation.Transform(CRS, DataSource.CRS, extent);
-                
+
             var fetcher = new FeatureFetcher(newExtent, resolution, DataSource, DataArrived, DateTime.Now.Ticks);
 
             Task.Run(() =>
@@ -173,12 +166,12 @@ namespace Mapsui.Layers
             //the data in the cache is stored in the map projection so it projected only once.
             features = features?.ToList() ?? throw new ArgumentException("argument features may not be null");
 
-			// We can get 0 features if some error was occured up call stack
-			// We should not add new FeatureSets if we have not any feature
+            // We can get 0 features if some error was occured up call stack
+            // We should not add new FeatureSets if we have not any feature
 
-			_isFetching = false;
+            _isFetching = false;
 
-			if (features.Any())
+            if (features.Any())
             {
                 features = features.ToList();
                 if (ProjectionHelper.NeedsTransform(Transformation, CRS, DataSource.CRS))
@@ -194,10 +187,10 @@ namespace Mapsui.Layers
                 //Keep only two most recent sets. The older ones will be removed
                 _sets = _sets.OrderByDescending(c => c.TimeRequested).Take(_numberOfFeaturesReturned).ToList();
 
-				OnDataChanged(new DataChangedEventArgs(null, false, null, Name));
-			}
+                OnDataChanged(new DataChangedEventArgs(null, false, null, Name));
+            }
 
-			if (_needsUpdate)
+            if (_needsUpdate)
             {
                 StartNewFetch(_newExtent, _newResolution);
             }

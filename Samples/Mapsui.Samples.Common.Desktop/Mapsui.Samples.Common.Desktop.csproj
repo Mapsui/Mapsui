@@ -57,6 +57,7 @@
     <Compile Include="ThemeStyleSample.cs" />
     <Compile Include="ShapefileSample.cs" />
     <Compile Include="WfsSample.cs" />
+    <Compile Include="SlowWmsSample.cs" />
     <Compile Include="WmsSample.cs" />
   </ItemGroup>
   <ItemGroup>
