@@ -48,11 +48,11 @@ namespace Mapsui.UI.Wpf
         private double _toResolution = double.NaN;
         private bool _hasBeenManipulated;
         private double _innerRotation;
-        
+
         public MapControl()
         {
             _scale = 1; // Scale is always 1 in WPF
-            
+
             Children.Add(WpfCanvas);
             Children.Add(SkiaCanvas);
             Children.Add(_selectRectangle);
@@ -65,7 +65,7 @@ namespace Mapsui.UI.Wpf
             Loaded += MapControlLoaded;
             MouseLeftButtonDown += MapControlMouseLeftButtonDown;
             MouseLeftButtonUp += MapControlMouseLeftButtonUp;
-            
+
             TouchUp += MapControlTouchUp;
 
             MouseMove += MapControlMouseMove;
@@ -137,7 +137,7 @@ namespace Mapsui.UI.Wpf
         }
 
         public string ErrorMessage { get; private set; }
-        
+
         public Canvas WpfCanvas { get; } = CreateWpfRenderCanvas();
 
         private SKElement SkiaCanvas { get; } = CreateSkiaRenderElement();
@@ -307,6 +307,7 @@ namespace Mapsui.UI.Wpf
 
         private void MapControlLoaded(object sender, RoutedEventArgs e)
         {
+            _scale = GetScale();
             TryInitializeViewport();
             UpdateSize();
             InitAnimation();
@@ -348,7 +349,7 @@ namespace Mapsui.UI.Wpf
                 _toResolution = ViewportLimiter.LimitResolution(resolution, _map.Viewport.Width, _map.Viewport.Height,
                     _map.ZoomMode, _map.ZoomLimits, _map.Resolutions, _map.Envelope);
             }
-            
+
             // Some cheating for personal gain. This workaround could be ommitted if the zoom animations was on CenterX, CenterY and Resolution, not Resolution alone.
             Map.Viewport.Center.X += 0.000000001;
             Map.Viewport.Center.Y += 0.000000001;
@@ -379,14 +380,16 @@ namespace Mapsui.UI.Wpf
             OnViewChanged();
             Refresh();
 
+            _scale = GetScale();
+        }
+
+        private float GetScale()
+        {
             if (RenderMode == RenderMode.Skia)
             {
-                _scale = GetSkiaScale();
+                return GetSkiaScale();
             }
-            else
-            {
-                _scale = 1; // Scale is always 1 in WPF
-            }
+            return 1; // Scale is always 1 in WPF
         }
 
         private void UpdateSize()
@@ -732,12 +735,23 @@ namespace Mapsui.UI.Wpf
         {
             Refresh();
         }
+
         private float GetSkiaScale()
         {
-            // Apparenly it should be something like this but there is an issue with
-            // initialization. Since it always returns 1 I replaced it with just return 1
-            // https://gist.github.com/pauldendulk/bceb790607660471b2b674e92721504a
-            return 1;
+            var presentationSource = PresentationSource.FromVisual(this);
+            if (presentationSource == null) throw new Exception("PresentationSource is null");
+            var compositionTarget = presentationSource.CompositionTarget;
+            if (compositionTarget == null) throw new Exception("CompositionTarget is null");
+
+            var m = compositionTarget.TransformToDevice;
+
+            var dpiX = m.M11;
+            var dpiY = m.M22;
+
+            if (dpiX != dpiY)
+                throw new ArgumentException();
+
+            return (float)dpiX;
         }
 
         private void SKElementOnPaintSurface(object sender, SKPaintSurfaceEventArgs e)
