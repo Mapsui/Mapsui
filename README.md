@@ -1,3 +1,5 @@
+<p align="left"><img src="Docs/Images/logo/icon.png" alt="Mapsui" height="180px"></p>
+
 | What  | Status  | 
 | ------------- |:-------------:|
 | Nuget   | [![NuGet Status](http://img.shields.io/nuget/v/Mapsui.svg?style=flat)](https://www.nuget.org/packages/Mapsui/) |
