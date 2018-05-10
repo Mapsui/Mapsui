@@ -5,51 +5,10 @@
     <Authors>Mapsui Contributers</Authors>
   </PropertyGroup>
 
-  <ItemGroup><!--<PackageReference Include="" Version=""/>-->
-  
+  <ItemGroup>
+    <!--<PackageReference Include="" Version=""/>-->
+
     <Folder Include="Properties\" />
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="BruTile, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\BruTile.1.0.0\lib\portable-net45+win+WindowsPhoneApp81+Xamarin.iOS10+MonoAndroid10+MonoTouch10\BruTile.dll</HintPath>
-    </Reference>
-    <Reference Include="BruTile.Desktop, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\BruTile.Desktop.1.0.0\lib\net45\BruTile.Desktop.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Net" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="ArcGISImageServiceSample.cs" />
-    <Compile Include="MapTilerSample.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ThemeStyleSample.cs" />
-    <Compile Include="ShapefileSample.cs" />
-    <Compile Include="WfsSample.cs" />
-    <Compile Include="SlowWmsSample.cs" />
-    <Compile Include="WmsSample.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -72,7 +31,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  
+
   <ItemGroup>
     <Content Include="GeoData\World\cities.DBF">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -120,13 +79,13 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  
+
   <ItemGroup>
     <PackageReference Include="BruTile" Version="2.0.0" />
     <PackageReference Include="BruTile.Desktop" Version="2.0.0" />
     <PackageReference Include="System.Net.Http" Version="4.3.3" />
   </ItemGroup>
-  
+
   <ItemGroup>
     <ProjectReference Include="..\..\Mapsui.Desktop\Mapsui.Desktop.csproj" />
     <ProjectReference Include="..\..\Mapsui.Geometries\Mapsui.Geometries.csproj" />
