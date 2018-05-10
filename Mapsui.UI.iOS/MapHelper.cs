@@ -2,9 +2,9 @@ using Mapsui.Geometries;
 
 namespace Mapsui.UI.iOS
 {
-    public delegate void MapControlLongPressEventHandler(MonoTouch.UIKit.UILongPressGestureRecognizer recognizer);
-    public delegate void MapControlTappedEventHandler(MonoTouch.UIKit.UITapGestureRecognizer recognizer);
-    public delegate void MapControlTouchEventHandler(MonoTouch.Foundation.NSSet touches, MonoTouch.UIKit.UIEvent evt);
+    public delegate void MapControlLongPressEventHandler(UIKit.UILongPressGestureRecognizer recognizer);
+    public delegate void MapControlTappedEventHandler(UIKit.UITapGestureRecognizer recognizer);
+    public delegate void MapControlTouchEventHandler(Foundation.NSSet touches, UIKit.UIEvent evt);
     //public delegate void MapControlClickedEventHandler(System.Windows.Input.MouseButtonEventArgs e);
 
     public static class MapHelper
@@ -26,37 +26,37 @@ namespace Mapsui.UI.iOS
         }
         */
 
-        public static void OnMapLongPress(MonoTouch.UIKit.UILongPressGestureRecognizer recognizer)
+        public static void OnMapLongPress(UIKit.UILongPressGestureRecognizer recognizer)
         {
             var handler = MapLongPress;
             if (handler != null) handler(recognizer);
         }
 
-        public static void OnMapSingleTapped(MonoTouch.UIKit.UITapGestureRecognizer recognizer)
+        public static void OnMapSingleTapped(UIKit.UITapGestureRecognizer recognizer)
         {
             var handler = MapSingleTapped;
             if (handler != null) handler(recognizer);
         }
 
-        public static void OnMapDoubleTapped(MonoTouch.UIKit.UITapGestureRecognizer recognizer)
+        public static void OnMapDoubleTapped(UIKit.UITapGestureRecognizer recognizer)
         {
             var handler = MapDoubleTapped;
             if (handler != null) handler(recognizer);
         }
 
-        public static void OnTouchDown(MonoTouch.Foundation.NSSet touches, MonoTouch.UIKit.UIEvent evt)
+        public static void OnTouchDown(Foundation.NSSet touches, UIKit.UIEvent evt)
         {
             var handler = TouchDown;
             if (handler != null) handler(touches, evt);
         }
 
-        public static void OnTouchMoved(MonoTouch.Foundation.NSSet touches, MonoTouch.UIKit.UIEvent evt)
+        public static void OnTouchMoved(Foundation.NSSet touches, UIKit.UIEvent evt)
         {
             var handler = TouchMoved;
             if (handler != null) handler(touches, evt);
         }
 
-        public static void OnTouchUp(MonoTouch.Foundation.NSSet touches, MonoTouch.UIKit.UIEvent evt)
+        public static void OnTouchUp(Foundation.NSSet touches, UIKit.UIEvent evt)
         {
             var handler = TouchUp;
             if (handler != null) handler(touches, evt);
