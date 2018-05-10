@@ -31,6 +31,9 @@ If you have a question please submit an issue [here](https://github.com/pauldend
 ## Contributing
 See the [guidelines](CONTRIBUTING.md)
 
+## Thanks go to
+- ReSharper for providing free open source licenses for Mapsui
+
 ## Supported Platforms
 
 - **WPF** - Windows Desktop on .NET 4.5.2
