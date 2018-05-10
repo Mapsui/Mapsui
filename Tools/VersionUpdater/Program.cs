@@ -19,14 +19,14 @@ namespace VersionUpdater
 
             var files = GetAssemblyInfoFiles().ToList();
             UpdateAssemblyInfoFiles(arguments, files);
-            UpdateCommonPropsFile(arguments, "..");
+            UpdateCommonPropsFile(arguments, "Mapsui.common.props");
         }
 
         private static void UpdateCommonPropsFile(VersionUpdaterArguments arguments, string file)
         {
             var text = File.ReadAllText(file);
             var assemblyVersionRegex = new Regex("<Version>(.*?)</Version>");
-            text = assemblyVersionRegex.Replace(text, $"<Version>{arguments.Major}.{arguments.Minor}.{arguments.Patch}</Version>");
+            text = assemblyVersionRegex.Replace(text, $"<Version>{arguments.Version}</Version>");
             Encoding utf8WithBom = new UTF8Encoding(true);
             File.WriteAllText(file, text, utf8WithBom);
         }
