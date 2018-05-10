@@ -51,8 +51,6 @@ namespace Mapsui.UI.Wpf
 
         public MapControl()
         {
-            _scale = 1; // Scale is always 1 in WPF
-
             Children.Add(WpfCanvas);
             Children.Add(SkiaCanvas);
             Children.Add(_selectRectangle);
