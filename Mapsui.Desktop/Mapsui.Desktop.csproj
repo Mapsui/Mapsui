@@ -1,12 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="$(SolutionDir)Mapsui.Common.props" />
   <PropertyGroup>
     <TargetFramework>net452</TargetFramework>
-    <Authors>Mapsui Contributers</Authors>
-    <Version>2.0.0</Version>
   </PropertyGroup>
 
-  <ItemGroup><!--<PackageReference Include="" Version=""/>-->
-  
+  <ItemGroup>
     <Folder Include="Properties\" />
   </ItemGroup>
 
