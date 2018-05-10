@@ -1,3 +1,5 @@
+<p align="left"><img src="Docs/Images/logo/icon.png" alt="Mapsui" height="180px"></p>
+
 | What  | Status  | 
 | ------------- |:-------------:|
 | Nuget   | [![NuGet Status](http://img.shields.io/nuget/v/Mapsui.svg?style=flat)](https://www.nuget.org/packages/Mapsui/) |
@@ -30,6 +32,9 @@ If you have a question please submit an issue [here](https://github.com/pauldend
 
 ## Contributing
 See the [guidelines](CONTRIBUTING.md)
+
+## Thanks go to
+- ReSharper for providing free open source licenses for Mapsui
 
 ## Supported Platforms
 
