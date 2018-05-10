@@ -42,7 +42,7 @@ namespace Mapsui.Rendering.Skia
 
                 var vectorStyle = style as VectorStyle;
 
-                if (vectorStyle != null)
+                if (vectorStyle != null && vectorStyle.Outline != null)
                 {
                     lineWidth = (float)vectorStyle.Outline.Width;
                     lineColor = vectorStyle.Outline.Color;
@@ -51,7 +51,10 @@ namespace Mapsui.Rendering.Skia
                     strokeMiterLimit = vectorStyle.Outline.StrokeMiterLimit;
                     strokeStyle = vectorStyle.Outline.PenStyle;
                     dashArray = vectorStyle.Outline.DashArray;
+                }
 
+                if (vectorStyle != null && vectorStyle.Fill != null)
+                {
                     fillColor = vectorStyle.Fill?.Color;
                 }
 
@@ -60,7 +63,7 @@ namespace Mapsui.Rendering.Skia
                     // Is there a FillStyle?
                     if (vectorStyle.Fill?.FillStyle == FillStyle.Solid)
                     {
-                        PaintFill.StrokeWidth = lineWidth;
+                        PaintFill.StrokeWidth = 0;
                         PaintFill.Style = SKPaintStyle.Fill;
                         PaintFill.PathEffect = null;
                         PaintFill.Shader = null;
@@ -150,18 +153,21 @@ namespace Mapsui.Rendering.Skia
                         }
                     }
 
-                    PaintStroke.Style = SKPaintStyle.Stroke;
-                    PaintStroke.StrokeWidth = lineWidth;
-                    PaintStroke.Color = lineColor.ToSkia(opacity);
-                    PaintStroke.StrokeCap = strokeCap.ToSkia();
-                    PaintStroke.StrokeJoin = strokeJoin.ToSkia();
-                    PaintStroke.StrokeMiter = strokeMiterLimit;
-                    if (strokeStyle != PenStyle.Solid)
-                        PaintStroke.PathEffect = strokeStyle.ToSkia(lineWidth, dashArray);
-                    else
-                        PaintStroke.PathEffect = null;
+                    if (vectorStyle.Outline != null)
+                    {
+                        PaintStroke.Style = SKPaintStyle.Stroke;
+                        PaintStroke.StrokeWidth = lineWidth;
+                        PaintStroke.Color = lineColor.ToSkia(opacity);
+                        PaintStroke.StrokeCap = strokeCap.ToSkia();
+                        PaintStroke.StrokeJoin = strokeJoin.ToSkia();
+                        PaintStroke.StrokeMiter = strokeMiterLimit;
+                        if (strokeStyle != PenStyle.Solid)
+                            PaintStroke.PathEffect = strokeStyle.ToSkia(lineWidth, dashArray);
+                        else
+                            PaintStroke.PathEffect = null;
 
-                    canvas.DrawPath(path, PaintStroke);
+                        canvas.DrawPath(path, PaintStroke);
+                    }
                 }
             }
         }

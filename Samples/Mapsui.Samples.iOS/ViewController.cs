@@ -31,7 +31,7 @@ namespace Mapsui.Samples.iOS
         {
             return new MapControl(bounds)
             {
-                Map = OsmSample.CreateMap(),
+                Map = InfoLayersSample.CreateMap(),
                 RotationLock = true,
                 UnSnapRotationDegrees = 30,
                 ReSnapRotationDegrees = 5

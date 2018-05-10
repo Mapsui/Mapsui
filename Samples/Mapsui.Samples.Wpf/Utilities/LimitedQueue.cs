@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections.Concurrent;
 
 namespace Mapsui.Samples.Wpf.Utilities
 {
-    public class LimitedQueue<T> : Queue<T>
+    public class LimitedQueue<T> : ConcurrentQueue<T>
     {
         public int Limit { get; set; }
 
-        public LimitedQueue(int limit) : base(limit)
+        public LimitedQueue(int limit) 
         {
             Limit = limit;
         }
@@ -15,7 +15,7 @@ namespace Mapsui.Samples.Wpf.Utilities
         {
             while (Count >= Limit)
             {
-                Dequeue();
+                TryDequeue(out _); 
             }
             base.Enqueue(item);
         }

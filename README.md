@@ -1,3 +1,5 @@
+<p align="left"><img src="Docs/Images/logo/icon.png" alt="Mapsui" height="180px"></p>
+
 | What  | Status  | 
 | ------------- |:-------------:|
 | Nuget   | [![NuGet Status](http://img.shields.io/nuget/v/Mapsui.svg?style=flat)](https://www.nuget.org/packages/Mapsui/) |
@@ -14,7 +16,7 @@ Mapsui is a C# map component for apps
 - Started as a fork of SharpMap
 
 ## News
-- 2018 May 24: Mapsui 1.3.2 has been [released](https://github.com/pauldendulk/Mapsui/releases/tag/1.3.2), with zoom in/out widgets, scalebar, rotation snapping and better touch manipulation. 
+- 2018 April 21: Moved the repository from pauldendulk/Mapsui to Mapsui/Mapsui. 
 
 ## Getting Started
 [Here](https://github.com/pauldendulk/Mapsui/wiki/Getting-Started-with-Mapsui) is a getting started for WPF.
@@ -30,6 +32,9 @@ If you have a question please submit an issue [here](https://github.com/pauldend
 
 ## Contributing
 See the [guidelines](CONTRIBUTING.md)
+
+## Thanks go to
+- ReSharper for providing free open source licenses for Mapsui
 
 ## Supported Platforms
 
