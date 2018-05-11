@@ -1,5 +1,4 @@
-# Introduction
-## [Home](Home.md)
+# [Introduction](Home.md)
 ## [Getting Started](Getting-Started-with-Mapsui.md)
 ## [How-to-work-with-Mapsui](How-to-work-with-Mapsui.md)
 ## [Roadmap](Roadmap.md)
