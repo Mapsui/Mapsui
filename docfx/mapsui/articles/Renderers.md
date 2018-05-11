@@ -1,10 +1,10 @@
-## Renderers
+# Renderers
 
 Mapsui has two renderers:
 - **Xaml** in the Mapsui.Rendering.Xaml assembly. Used only in WPF. Stable and most complete. 
 - **WPF** in the Mapsui.Rendering.Skia assembly. Used in all supported platforms. Newer.
 
-### Differences
+## Differences
 Skia is nearly equivalent to WPF but there are some differences:
 1. There is a difference in the way halo symbolization is implemented. 
 1. Skia vector rendering is somewhat faster
@@ -13,5 +13,5 @@ Skia is nearly equivalent to WPF but there are some differences:
 1. Wpf supports multiline labels. Skia does not.
 1. There are probably some more differences I missed.
 
-### Check it out
+## Check it out
 The project Mapsui.Samples.Wpf has a dropdown on the top left to select between skia and WPF rendering.

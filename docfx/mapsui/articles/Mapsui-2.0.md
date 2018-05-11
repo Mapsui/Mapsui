@@ -1,3 +1,5 @@
+# Mapsui 2.0
+
 At the moment of writing (15 march 2018) there is no work going on for a Mapsui 2.0, but here are some ideas of changes that could go into 2.0.
 
 - Go to .NET Standard

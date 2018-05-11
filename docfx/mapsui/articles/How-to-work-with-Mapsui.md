@@ -1,3 +1,5 @@
+# How to Work with Mapsui
+
 Mapsui is growing towards a stable component. At all times:
 - All projects should compile
 - The unit tests should succeed

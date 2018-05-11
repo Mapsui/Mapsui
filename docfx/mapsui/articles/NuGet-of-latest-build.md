@@ -1,3 +1,5 @@
+# NuGet of Latest Build
+
 Every commit triggers the build server which publishes a NuGet package of the latest version followed by a build number.
 
 There are three ways you can add this:

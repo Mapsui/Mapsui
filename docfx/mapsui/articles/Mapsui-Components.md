@@ -1,4 +1,4 @@
-## Mapsui Components
+# Mapsui Components
 
 If you install the NuGet package into your app these assemblies are added:
 
