@@ -12,7 +12,7 @@
           "hash": "hB0gv9NkBuI4FwJkAP61Rg=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -39,7 +39,7 @@
           "hash": "/kRH1SQFyoH46Ie7gaFgGQ=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -51,7 +51,7 @@
           "hash": "Hze7cLx7fq21wAekvb9izw=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -63,7 +63,7 @@
           "hash": "WvjqnWBrjJH+WEmXnyprqQ=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -75,7 +75,7 @@
           "hash": "RKQiE0eSh+Gf7gDEMRzs/Q=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -87,7 +87,7 @@
           "hash": "gXkEqj1zuhXpsx88wjGD3g=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -99,7 +99,7 @@
           "hash": "NQXW/cLZBzKOzhg+TWvmqg=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -111,7 +111,7 @@
           "hash": "fTIXOCJukMy1+qd3WYcciw=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -123,7 +123,7 @@
           "hash": "4y64vkJ20vafZ6nOqjk+Mw=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -135,7 +135,7 @@
           "hash": "cgm+lpIiHkno2jVcnMdjGg=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -147,7 +147,7 @@
           "hash": "m2uKWTjroDkFjoL1RnOpIw=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -159,7 +159,7 @@
           "hash": "vhHxJDsnMk9wQniKX2nJPg=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -171,7 +171,7 @@
           "hash": "tLD85Fz7EEgL9vfinlLfAw=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -206,7 +206,7 @@
           "hash": "wM/fz4SVtA1XDU+INTI+MA=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -225,8 +225,7 @@
   "incremental_info": [
     {
       "status": {
-        "can_incremental": false,
-        "details": "Cannot build incrementally because config changed.",
+        "can_incremental": true,
         "incrementalPhase": "build"
       },
       "processors": {
@@ -241,7 +240,7 @@
           "incrementalPhase": "build"
         },
         "ConceptualDocumentProcessor": {
-          "can_incremental": false,
+          "can_incremental": true,
           "incrementalPhase": "build"
         }
       }
