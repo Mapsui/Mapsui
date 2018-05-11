@@ -3,6 +3,9 @@
   <PropertyGroup>
     <TargetFramework>netstandard1.3</TargetFramework>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="BruTile" Version="2.0.0" />
     <PackageReference Include="ConcurrentHashSet" Version="1.0.2" />

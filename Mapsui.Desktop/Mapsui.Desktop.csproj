@@ -3,6 +3,9 @@
   <PropertyGroup>
     <TargetFramework>net47</TargetFramework>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
 
   <ItemGroup>
     <Folder Include="Properties\" />
