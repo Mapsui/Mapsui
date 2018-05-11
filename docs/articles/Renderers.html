@@ -75,13 +75,10 @@
 <li><strong>WPF</strong> in the Mapsui.Rendering.Skia assembly. Used in all supported platforms. Newer.</li>
 </ul>
 <h2 id="differences">Differences</h2>
-<p>Skia is nearly equivalent to WPF but there are some differences:</p>
+<p>Skia is nearly equivalent to WPF but there are still some differences (This list has grown shorter over last year):</p>
 <ol>
-<li>There is a difference in the way halo symbolization is implemented. </li>
-<li>Skia vector rendering is somewhat faster</li>
-<li>Skia raster rendering is somewhat blockier (higher quality is available in skia but slower in the software renderer currently used). </li>
-<li>Skia does not have the option to displayed symbols in world units (scale with the map). This is an exotic feature.</li>
-<li>Wpf supports multiline labels. Skia does not.</li>
+<li>There is a difference in the way halo symbolization is implemented. We will match WPF to Skia (not the other way around). We have used the right technique for labels.</li>
+<li>Skia does not have the option to displayed symbols in world units. The means the icon will grow bigger if you zoom in. This is unlike regular icon but like regular polgons. This is an exotic feature, you will probably not need this. </li>
 <li>There are probably some more differences I missed.</li>
 </ol>
 <h2 id="check-it-out">Check it out</h2>

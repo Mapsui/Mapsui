@@ -12,7 +12,7 @@
           "hash": "4EQfOp7rKz5NKsax09FImA=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -144,7 +144,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/Renderers.html",
-          "hash": "byW85Xp4A33ZPnS3g/Q5ZQ=="
+          "hash": "PTDRVKDk0qY+n4yPHmYk7w=="
         }
       },
       "is_incremental": false,
@@ -156,7 +156,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/Rendering-Tests.html",
-          "hash": "8m7+6TUVzO+vP/WQ2dpSoA=="
+          "hash": "h0Wys/Ce0ceHLGkrwAiM3Q=="
         }
       },
       "is_incremental": false,
@@ -180,7 +180,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/toc.html",
-          "hash": "k1PsPjtua8eE6YBw5lxykg=="
+          "hash": "bpD3i0HmLW8SAs21P52bEg=="
         }
       },
       "is_incremental": false,
@@ -217,7 +217,7 @@
           "hash": "aGdvLQillG7DyS7m8+s6og=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -236,8 +236,7 @@
   "incremental_info": [
     {
       "status": {
-        "can_incremental": false,
-        "details": "Cannot build incrementally because config changed.",
+        "can_incremental": true,
         "incrementalPhase": "build"
       },
       "processors": {
@@ -252,7 +251,7 @@
           "incrementalPhase": "build"
         },
         "ConceptualDocumentProcessor": {
-          "can_incremental": false,
+          "can_incremental": true,
           "incrementalPhase": "build"
         }
       }
