@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Some background </title>
+    <title>Asynchronous Data Fetching </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Some background ">
+    <meta name="title" content="Asynchronous Data Fetching ">
     <meta name="generator" content="docfx 2.29.1.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
@@ -67,8 +67,9 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h2 id="some-background">Some background</h2>
+<h1 id="asynchronous-data-fetching">Asynchronous Data Fetching</h1>
 
+<h2 id="some-background">Some background</h2>
 <p>In most mapping clients drawing a map means first gathering data from disk, database or web and after that a map is drawn. Because gathering data takes time the user has to wait for this process to complete. During this process sometimes a white map is shown and the user cannot interact with the map. </p>
 <p>This experience can be improved by drawing a buffer of the previous image during pan and zoom. But this results in white space along the edged. This can again be countered by other optimizations but there are limits to what can be done along this design path and it tends to lead to hacked up solutions.</p>
 <p>In Mapsui we completely seperated drawing from fetching data. The renderer only renders the data it has available in memory at that instant. The fetcher runs on a background thread receives messages from the UI thread telling it what to fetch.</p>
