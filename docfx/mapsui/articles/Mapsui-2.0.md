@@ -1,6 +1,6 @@
 # Mapsui 2.0
 
-At the moment of writing (15 march 2018) there is no work going on for a Mapsui 2.0, but here are some ideas of changes that could go into 2.0.
+At the moment of writing (11 may 2018) a first beta of Mapsui v2 has been released. It has .NET Standard core libraries instead of PCLs. Other then that is is equivalent to 1.4.1 but some further changes are planned. Here  are some ideas of changes that could go into 2.0.
 
 - Go to .NET Standard
 - Rename Map.ViewChanged to Map.RefreshData
