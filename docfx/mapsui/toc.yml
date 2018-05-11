@@ -1,5 +1,5 @@
-- name: Articles
-  href: articles/
-- name: Api Documentation
+- name: Documentation
+  href: documentation/
+- name: Api
   href: api/
   homepage: api/index.md
