@@ -9,10 +9,10 @@
       "output": {
         ".html": {
           "relative_path": "api/index.html",
-          "hash": "hB0gv9NkBuI4FwJkAP61Rg=="
+          "hash": "yKzMI6OnzBQP3eB4qTU3Mg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -36,10 +36,10 @@
       "output": {
         ".html": {
           "relative_path": "articles/Async-Fetching.html",
-          "hash": "/kRH1SQFyoH46Ie7gaFgGQ=="
+          "hash": "l4ca4xeflroWVITLOW8YZw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -48,10 +48,10 @@
       "output": {
         ".html": {
           "relative_path": "articles/Contributors-Guidelines.html",
-          "hash": "Hze7cLx7fq21wAekvb9izw=="
+          "hash": "CmDqhA3kK6t1Eo97MNsz9g=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -60,10 +60,10 @@
       "output": {
         ".html": {
           "relative_path": "articles/Development-constraints.html",
-          "hash": "WvjqnWBrjJH+WEmXnyprqQ=="
+          "hash": "iHH5/fLGBRxPMk1dR85m0w=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -72,10 +72,10 @@
       "output": {
         ".html": {
           "relative_path": "articles/Getting-Started-with-Mapsui.html",
-          "hash": "RKQiE0eSh+Gf7gDEMRzs/Q=="
+          "hash": "4msascMC3i1ddtshR375lg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -84,10 +84,10 @@
       "output": {
         ".html": {
           "relative_path": "articles/Home.html",
-          "hash": "gXkEqj1zuhXpsx88wjGD3g=="
+          "hash": "waTlH/iTS1dTHrhgN6aKeQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -96,10 +96,10 @@
       "output": {
         ".html": {
           "relative_path": "articles/How-to-work-with-Mapsui.html",
-          "hash": "NQXW/cLZBzKOzhg+TWvmqg=="
+          "hash": "JfJMjYMqGPss/ynNBVlr0Q=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -108,10 +108,10 @@
       "output": {
         ".html": {
           "relative_path": "articles/Mapsui-2.0.html",
-          "hash": "fTIXOCJukMy1+qd3WYcciw=="
+          "hash": "MjHemuROBpll9mgDrDoSog=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -120,10 +120,10 @@
       "output": {
         ".html": {
           "relative_path": "articles/Mapsui-Components.html",
-          "hash": "4y64vkJ20vafZ6nOqjk+Mw=="
+          "hash": "8EmdddhvC4PKmeZuQdzzuw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -132,10 +132,10 @@
       "output": {
         ".html": {
           "relative_path": "articles/NuGet-of-latest-build.html",
-          "hash": "cgm+lpIiHkno2jVcnMdjGg=="
+          "hash": "44uyjWbGU3z/Ad6btHLwaw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -144,10 +144,10 @@
       "output": {
         ".html": {
           "relative_path": "articles/Renderers.html",
-          "hash": "m2uKWTjroDkFjoL1RnOpIw=="
+          "hash": "pMv2o8tUjIvnT07Li4reAQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -156,10 +156,10 @@
       "output": {
         ".html": {
           "relative_path": "articles/Rendering-Tests.html",
-          "hash": "vhHxJDsnMk9wQniKX2nJPg=="
+          "hash": "prFAPOkbO0svB5Xh4HU+Lw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -168,10 +168,10 @@
       "output": {
         ".html": {
           "relative_path": "articles/Roadmap.html",
-          "hash": "tLD85Fz7EEgL9vfinlLfAw=="
+          "hash": "l+tVeVP6ppTMd+gZ/YzJ1g=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -203,10 +203,10 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "wM/fz4SVtA1XDU+INTI+MA=="
+          "hash": "FH7UP2OVLHvt7EepKcak2g=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -225,7 +225,8 @@
   "incremental_info": [
     {
       "status": {
-        "can_incremental": true,
+        "can_incremental": false,
+        "details": "Cannot build incrementally because config changed.",
         "incrementalPhase": "build"
       },
       "processors": {
@@ -240,7 +241,7 @@
           "incrementalPhase": "build"
         },
         "ConceptualDocumentProcessor": {
-          "can_incremental": true,
+          "can_incremental": false,
           "incrementalPhase": "build"
         }
       }
