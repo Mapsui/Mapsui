@@ -1,4 +1,4 @@
-# Unit Tests for Rendering]
+# Unit Tests for Rendering
 
 Testing the renderers in done in two ways.
 
