@@ -1,4 +1,8 @@
-Mapsui is mapping component. This page will show the steps to add a Mapsui map to your WPF application.
+# Getting Started 
+
+## Mapsui WPF getting started
+
+This page will show the steps to add a Mapsui map to your WPF application.
 
 ### Step 1
 Start a new WPF application in Visual Studio.
