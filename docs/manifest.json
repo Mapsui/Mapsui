@@ -9,10 +9,10 @@
       "output": {
         ".html": {
           "relative_path": "api/index.html",
-          "hash": "hB0gv9NkBuI4FwJkAP61Rg=="
+          "hash": "4EQfOp7rKz5NKsax09FImA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -36,10 +36,10 @@
       "output": {
         ".html": {
           "relative_path": "articles/Async-Fetching.html",
-          "hash": "3H4cxbkXtgv+MHGrH2zfxw=="
+          "hash": "A/GhRgOUTU29SEpHGst2Tw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -48,10 +48,10 @@
       "output": {
         ".html": {
           "relative_path": "articles/Contributors-Guidelines.html",
-          "hash": "Hze7cLx7fq21wAekvb9izw=="
+          "hash": "KXdwmFsDnkzmsWBMRDsFzw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -60,10 +60,10 @@
       "output": {
         ".html": {
           "relative_path": "articles/Development-constraints.html",
-          "hash": "WvjqnWBrjJH+WEmXnyprqQ=="
+          "hash": "BxjDChfRRJUQ9M4Knzqo0g=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -72,10 +72,10 @@
       "output": {
         ".html": {
           "relative_path": "articles/Getting-Started-with-Mapsui.html",
-          "hash": "uo9Ek95ySAbPl1gDdDGWjA=="
+          "hash": "2WRUG9HYF+asglT7boUNjg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -84,7 +84,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/Home.html",
-          "hash": "aAPcgXRuHHgEXMH+d8BcsA=="
+          "hash": "YXfT+LuqqvITztzFjcrHLA=="
         }
       },
       "is_incremental": false,
@@ -96,10 +96,10 @@
       "output": {
         ".html": {
           "relative_path": "articles/How-to-work-with-Mapsui.html",
-          "hash": "zMzA3fcG1gd+Ofzfov+o1w=="
+          "hash": "0T7ErE+la8Iss1u60yAuwg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -108,7 +108,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/Mapsui-2.0.html",
-          "hash": "MtXGMcZyo6pSNz/gskj0mQ=="
+          "hash": "2E+ZpeP5WqVGikyCGNA1CQ=="
         }
       },
       "is_incremental": false,
@@ -120,10 +120,10 @@
       "output": {
         ".html": {
           "relative_path": "articles/Mapsui-Components.html",
-          "hash": "D79I/sska2UeZI3bPgG4nA=="
+          "hash": "mLCy8Kry1dCqBRgbEu2ydA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -132,10 +132,10 @@
       "output": {
         ".html": {
           "relative_path": "articles/NuGet-of-latest-build.html",
-          "hash": "CTlm8iynrSRAenEoDHEw0A=="
+          "hash": "+/hz72hhVPZWB07tFBePwA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -144,10 +144,10 @@
       "output": {
         ".html": {
           "relative_path": "articles/Renderers.html",
-          "hash": "daX/z1zFSDRMGS26lxHAAg=="
+          "hash": "byW85Xp4A33ZPnS3g/Q5ZQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -156,10 +156,10 @@
       "output": {
         ".html": {
           "relative_path": "articles/Rendering-Tests.html",
-          "hash": "p7u+QOU3e6ihYurPDORqtg=="
+          "hash": "8m7+6TUVzO+vP/WQ2dpSoA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -168,10 +168,10 @@
       "output": {
         ".html": {
           "relative_path": "articles/Roadmap.html",
-          "hash": "tLD85Fz7EEgL9vfinlLfAw=="
+          "hash": "kWUuLqQaz01uw0/vqF/T6g=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -181,6 +181,17 @@
         ".html": {
           "relative_path": "articles/toc.html",
           "hash": "k1PsPjtua8eE6YBw5lxykg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/favicon.ico",
+      "output": {
+        "resource": {
+          "relative_path": "images/favicon.ico"
         }
       },
       "is_incremental": false,
@@ -203,10 +214,10 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "wM/fz4SVtA1XDU+INTI+MA=="
+          "hash": "aGdvLQillG7DyS7m8+s6og=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -225,22 +236,23 @@
   "incremental_info": [
     {
       "status": {
-        "can_incremental": true,
+        "can_incremental": false,
+        "details": "Cannot build incrementally because config changed.",
         "incrementalPhase": "build"
       },
       "processors": {
-        "TocDocumentProcessor": {
-          "can_incremental": false,
-          "details": "Processor TocDocumentProcessor cannot suppport incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
-          "incrementalPhase": "build"
-        },
         "ResourceDocumentProcessor": {
           "can_incremental": false,
           "details": "Processor ResourceDocumentProcessor cannot suppport incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build"
         },
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot suppport incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build"
+        },
         "ConceptualDocumentProcessor": {
-          "can_incremental": true,
+          "can_incremental": false,
           "incrementalPhase": "build"
         }
       }
