@@ -32,11 +32,11 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "articles/Async-Fetching.md",
+      "source_relative_path": "documentation/Async-Fetching.md",
       "output": {
         ".html": {
-          "relative_path": "articles/Async-Fetching.html",
-          "hash": "A/GhRgOUTU29SEpHGst2Tw=="
+          "relative_path": "documentation/Async-Fetching.html",
+          "hash": "sWgtXr5skWZmdGMeRJcI3A=="
         }
       },
       "is_incremental": false,
@@ -44,11 +44,11 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "articles/Contributors-Guidelines.md",
+      "source_relative_path": "documentation/Contributors-Guidelines.md",
       "output": {
         ".html": {
-          "relative_path": "articles/Contributors-Guidelines.html",
-          "hash": "KXdwmFsDnkzmsWBMRDsFzw=="
+          "relative_path": "documentation/Contributors-Guidelines.html",
+          "hash": "g1VgwcIVPBK2OZ8Vl9JSbA=="
         }
       },
       "is_incremental": false,
@@ -56,11 +56,11 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "articles/Development-constraints.md",
+      "source_relative_path": "documentation/Development-constraints.md",
       "output": {
         ".html": {
-          "relative_path": "articles/Development-constraints.html",
-          "hash": "BxjDChfRRJUQ9M4Knzqo0g=="
+          "relative_path": "documentation/Development-constraints.html",
+          "hash": "jUpEpFsNCCndPUR8ctpCtQ=="
         }
       },
       "is_incremental": false,
@@ -68,11 +68,11 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "articles/Getting-Started-with-Mapsui.md",
+      "source_relative_path": "documentation/Getting-Started-with-Mapsui.md",
       "output": {
         ".html": {
-          "relative_path": "articles/Getting-Started-with-Mapsui.html",
-          "hash": "2WRUG9HYF+asglT7boUNjg=="
+          "relative_path": "documentation/Getting-Started-with-Mapsui.html",
+          "hash": "qsNs7WFyvRh4uC/5FCQv3g=="
         }
       },
       "is_incremental": false,
@@ -80,11 +80,11 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "articles/Home.md",
+      "source_relative_path": "documentation/Home.md",
       "output": {
         ".html": {
-          "relative_path": "articles/Home.html",
-          "hash": "YXfT+LuqqvITztzFjcrHLA=="
+          "relative_path": "documentation/Home.html",
+          "hash": "vu6ZM0DZINMqXuJJhbGHhw=="
         }
       },
       "is_incremental": false,
@@ -92,11 +92,11 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "articles/How-to-work-with-Mapsui.md",
+      "source_relative_path": "documentation/How-to-work-with-Mapsui.md",
       "output": {
         ".html": {
-          "relative_path": "articles/How-to-work-with-Mapsui.html",
-          "hash": "0T7ErE+la8Iss1u60yAuwg=="
+          "relative_path": "documentation/How-to-work-with-Mapsui.html",
+          "hash": "6gNhel2xO7+BrqvwIm7G9w=="
         }
       },
       "is_incremental": false,
@@ -104,11 +104,11 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "articles/Mapsui-2.0.md",
+      "source_relative_path": "documentation/Mapsui-2.0.md",
       "output": {
         ".html": {
-          "relative_path": "articles/Mapsui-2.0.html",
-          "hash": "2E+ZpeP5WqVGikyCGNA1CQ=="
+          "relative_path": "documentation/Mapsui-2.0.html",
+          "hash": "2i23EPhEQg0pHw3N4T9cTQ=="
         }
       },
       "is_incremental": false,
@@ -116,11 +116,11 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "articles/Mapsui-Components.md",
+      "source_relative_path": "documentation/Mapsui-Components.md",
       "output": {
         ".html": {
-          "relative_path": "articles/Mapsui-Components.html",
-          "hash": "mLCy8Kry1dCqBRgbEu2ydA=="
+          "relative_path": "documentation/Mapsui-Components.html",
+          "hash": "BsGgLBkAJ639NNRdRpWMXA=="
         }
       },
       "is_incremental": false,
@@ -128,11 +128,11 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "articles/NuGet-of-latest-build.md",
+      "source_relative_path": "documentation/NuGet-of-latest-build.md",
       "output": {
         ".html": {
-          "relative_path": "articles/NuGet-of-latest-build.html",
-          "hash": "+/hz72hhVPZWB07tFBePwA=="
+          "relative_path": "documentation/NuGet-of-latest-build.html",
+          "hash": "AXtBdTRLXkAC0ngUHv7hCQ=="
         }
       },
       "is_incremental": false,
@@ -140,11 +140,11 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "articles/Renderers.md",
+      "source_relative_path": "documentation/Renderers.md",
       "output": {
         ".html": {
-          "relative_path": "articles/Renderers.html",
-          "hash": "PTDRVKDk0qY+n4yPHmYk7w=="
+          "relative_path": "documentation/Renderers.html",
+          "hash": "h9QbBWt19YhR0NCMKWRf4Q=="
         }
       },
       "is_incremental": false,
@@ -152,11 +152,11 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "articles/Rendering-Tests.md",
+      "source_relative_path": "documentation/Rendering-Tests.md",
       "output": {
         ".html": {
-          "relative_path": "articles/Rendering-Tests.html",
-          "hash": "h0Wys/Ce0ceHLGkrwAiM3Q=="
+          "relative_path": "documentation/Rendering-Tests.html",
+          "hash": "uFzW1s8FzIYVOFtmY9DjFg=="
         }
       },
       "is_incremental": false,
@@ -164,11 +164,11 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "articles/Roadmap.md",
+      "source_relative_path": "documentation/Roadmap.md",
       "output": {
         ".html": {
-          "relative_path": "articles/Roadmap.html",
-          "hash": "kWUuLqQaz01uw0/vqF/T6g=="
+          "relative_path": "documentation/Roadmap.html",
+          "hash": "QN+DaOtv+FENmDG+2xJ4qQ=="
         }
       },
       "is_incremental": false,
@@ -176,10 +176,10 @@
     },
     {
       "type": "Toc",
-      "source_relative_path": "articles/toc.md",
+      "source_relative_path": "documentation/toc.md",
       "output": {
         ".html": {
-          "relative_path": "articles/toc.html",
+          "relative_path": "documentation/toc.html",
           "hash": "bpD3i0HmLW8SAs21P52bEg=="
         }
       },
@@ -226,7 +226,7 @@
       "output": {
         ".html": {
           "relative_path": "toc.html",
-          "hash": "Uqj1hGkVhgJLbKjKlGsKBg=="
+          "hash": "CB4N5NepM/P3wQuaCYyn1g=="
         }
       },
       "is_incremental": false,
@@ -240,14 +240,14 @@
         "incrementalPhase": "build"
       },
       "processors": {
-        "ResourceDocumentProcessor": {
-          "can_incremental": false,
-          "details": "Processor ResourceDocumentProcessor cannot suppport incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
-          "incrementalPhase": "build"
-        },
         "TocDocumentProcessor": {
           "can_incremental": false,
           "details": "Processor TocDocumentProcessor cannot suppport incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build"
+        },
+        "ResourceDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor ResourceDocumentProcessor cannot suppport incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build"
         },
         "ConceptualDocumentProcessor": {
