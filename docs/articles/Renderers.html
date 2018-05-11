@@ -5,16 +5,16 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Welcome to the Mapsui documentation. </title>
+    <title>Renderers </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Welcome to the Mapsui documentation. ">
+    <meta name="title" content="Renderers ">
     <meta name="generator" content="docfx 2.29.1.0">
     
-    <link rel="shortcut icon" href="favicon.ico">
-    <link rel="stylesheet" href="styles/docfx.vendor.css">
-    <link rel="stylesheet" href="styles/docfx.css">
-    <link rel="stylesheet" href="styles/main.css">
-    <meta property="docfx:navrel" content="toc.html">
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
     <meta property="docfx:tocrel" content="toc.html">
     
     
@@ -34,8 +34,8 @@
                 <span class="icon-bar"></span>
               </button>
               
-              <a class="navbar-brand" href="index.html">
-                <img id="logo" class="svg" src="./images/logo.svg" alt="">
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src=".././images/logo.svg" alt="">
               </a>
             </div>
             <div class="collapse navbar-collapse" id="navbar">
@@ -57,11 +57,35 @@
         </div>
       </header>
       <div role="main" class="container body-content hide-when-search">
-        <div class="article row grid">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h1 id="welcome-to-the-mapsui-documentation">Welcome to the <strong>Mapsui</strong> documentation.</h1>
+<h2 id="renderers">Renderers</h2>
 
+<p>Mapsui has two renderers:</p>
+<ul>
+<li><strong>Xaml</strong> in the Mapsui.Rendering.Xaml assembly. Used only in WPF. Stable and most complete. </li>
+<li><strong>WPF</strong> in the Mapsui.Rendering.Skia assembly. Used in all supported platforms. Newer.</li>
+</ul>
+<h3 id="differences">Differences</h3>
+<p>Skia is nearly equivalent to WPF but there are some differences:</p>
+<ol>
+<li>There is a difference in the way halo symbolization is implemented. </li>
+<li>Skia vector rendering is somewhat faster</li>
+<li>Skia raster rendering is somewhat blockier (higher quality is available in skia but slower in the software renderer currently used). </li>
+<li>Skia does not have the option to displayed symbols in world units (scale with the map). This is an exotic feature.</li>
+<li>Wpf supports multiline labels. Skia does not.</li>
+<li>There are probably some more differences I missed.</li>
+</ol>
+<h3 id="check-it-out">Check it out</h3>
+<p>The project Mapsui.Samples.Wpf has a dropdown on the top left to select between skia and WPF rendering.</p>
 </article>
           </div>
           
@@ -70,7 +94,7 @@
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/Mapsui/Mapsui/blob/master/docfx/mapsui/index.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/Mapsui/Mapsui/blob/master/docfx/mapsui/articles/Renderers.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>
@@ -96,8 +120,8 @@
       </footer>
     </div>
     
-    <script type="text/javascript" src="styles/docfx.vendor.js"></script>
-    <script type="text/javascript" src="styles/docfx.js"></script>
-    <script type="text/javascript" src="styles/main.js"></script>
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
   </body>
 </html>
