@@ -29,7 +29,6 @@
           "toc.yml",
           "*.md"
         ],
-        "src": "api",
         "exclude": [
           "obj/**",
           "_site/**"
