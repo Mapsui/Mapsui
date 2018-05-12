@@ -3,8 +3,9 @@
     {
       "src": [
         {
+          "cwd":  "../../",
           "files": [
-            "src/**.csproj"
+            "Tools/VersionUpdater/VersionUpdater.csproj"
           ],
           "exclude": [
             "**/obj/**",
@@ -28,6 +29,7 @@
           "toc.yml",
           "*.md"
         ],
+        "src": "api",
         "exclude": [
           "obj/**",
           "_site/**"
