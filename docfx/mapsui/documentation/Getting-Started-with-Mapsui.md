@@ -13,20 +13,6 @@ In the package manager console type:
 PM> Install-Package Mapsui
 ```
 
-These assemblies are added to your project:
-- BruTile
-- ConcurrentHashSet
-- Mapsui - The core assembly.
-- Mapsui.Geometries
-- Mapsui.Rendering.Skia - The alternative renderer used by the MapControl
-- Mapsui.Rendering.Xaml - The renderer used by the MapControl
-- Mapsui.UI.Wpf
-- Newtonsoft.Json
-- SkiaSharp
-- SkiaSharp.Svg
-- SkiaSharp.Views.Desktop
-- SkiaSharp.Views.Wpf
-
 ### Step 3
 In WpfApplication1.MainWindow.xaml add this in the Grid element:
 ```
