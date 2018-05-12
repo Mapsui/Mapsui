@@ -9,7 +9,7 @@
       "output": {
         ".html": {
           "relative_path": "api/index.html",
-          "hash": "4EQfOp7rKz5NKsax09FImA=="
+          "hash": "VWdrFQWH9AsvQ0mwOMt1iQ=="
         }
       },
       "is_incremental": true,
@@ -36,7 +36,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/Async-Fetching.html",
-          "hash": "sWgtXr5skWZmdGMeRJcI3A=="
+          "hash": "QmQ5bmmD8j1vlV5CeZvjVg=="
         }
       },
       "is_incremental": true,
@@ -48,7 +48,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/Contributors-Guidelines.html",
-          "hash": "g1VgwcIVPBK2OZ8Vl9JSbA=="
+          "hash": "9zTjKZ51kMReTbzCKM9TEQ=="
         }
       },
       "is_incremental": true,
@@ -60,7 +60,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/Development-constraints.html",
-          "hash": "jUpEpFsNCCndPUR8ctpCtQ=="
+          "hash": "XADcBpedmN+uy+dAx3dwjw=="
         }
       },
       "is_incremental": true,
@@ -72,7 +72,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/Getting-Started-with-Mapsui.html",
-          "hash": "qsNs7WFyvRh4uC/5FCQv3g=="
+          "hash": "gxRJL8fZCZpYZOqjTvieDA=="
         }
       },
       "is_incremental": true,
@@ -84,7 +84,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/Home.html",
-          "hash": "vu6ZM0DZINMqXuJJhbGHhw=="
+          "hash": "HbRXziSz17kwXJX2nhH21Q=="
         }
       },
       "is_incremental": true,
@@ -96,7 +96,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/How-to-work-with-Mapsui.html",
-          "hash": "6gNhel2xO7+BrqvwIm7G9w=="
+          "hash": "sGpHGgFEvCXu/NEYRFeXOw=="
         }
       },
       "is_incremental": true,
@@ -108,7 +108,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/Mapsui-2.0.html",
-          "hash": "2i23EPhEQg0pHw3N4T9cTQ=="
+          "hash": "aPpwfyTzTrEBOVucq+p7uA=="
         }
       },
       "is_incremental": true,
@@ -120,7 +120,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/Mapsui-Components.html",
-          "hash": "BsGgLBkAJ639NNRdRpWMXA=="
+          "hash": "9u+7yEjgvelKn2luZIMtdQ=="
         }
       },
       "is_incremental": true,
@@ -132,7 +132,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/NuGet-of-latest-build.html",
-          "hash": "AXtBdTRLXkAC0ngUHv7hCQ=="
+          "hash": "WtgrxxKmz7iTJgyuT9mGAw=="
         }
       },
       "is_incremental": true,
@@ -144,7 +144,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/Renderers.html",
-          "hash": "h9QbBWt19YhR0NCMKWRf4Q=="
+          "hash": "rjBmWsiSiJyyRJV+xBj84A=="
         }
       },
       "is_incremental": true,
@@ -156,7 +156,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/Rendering-Tests.html",
-          "hash": "uFzW1s8FzIYVOFtmY9DjFg=="
+          "hash": "MbmUF0Js8C9RVN47/+Zphw=="
         }
       },
       "is_incremental": true,
@@ -168,7 +168,31 @@
       "output": {
         ".html": {
           "relative_path": "documentation/Roadmap.html",
-          "hash": "QN+DaOtv+FENmDG+2xJ4qQ=="
+          "hash": "CbC2Gsy9q/lKV0n/9cV9TA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "documentation/getting-started-android.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/getting-started-android.html",
+          "hash": "pe92wpemMMB0wOm/r9zfPA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "documentation/getting-started-wpf.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/getting-started-wpf.html",
+          "hash": "FbCywBLHlU/gk+DvF9762g=="
         }
       },
       "is_incremental": true,
@@ -180,7 +204,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/toc.html",
-          "hash": "bpD3i0HmLW8SAs21P52bEg=="
+          "hash": "eX+WGKB92q0LDEgvLrmkqQ=="
         }
       },
       "is_incremental": false,
@@ -214,7 +238,7 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "aGdvLQillG7DyS7m8+s6og=="
+          "hash": "HBeVscuhl15dZpzVCPpGWg=="
         }
       },
       "is_incremental": true,
@@ -245,13 +269,13 @@
           "details": "Processor TocDocumentProcessor cannot suppport incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build"
         },
+        "ConceptualDocumentProcessor": {
+          "can_incremental": true,
+          "incrementalPhase": "build"
+        },
         "ResourceDocumentProcessor": {
           "can_incremental": false,
           "details": "Processor ResourceDocumentProcessor cannot suppport incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
-          "incrementalPhase": "build"
-        },
-        "ConceptualDocumentProcessor": {
-          "can_incremental": true,
           "incrementalPhase": "build"
         }
       }
