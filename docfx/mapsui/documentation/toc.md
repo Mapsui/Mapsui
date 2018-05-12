@@ -1,6 +1,7 @@
 # [Introduction](Home.md)
 ## [Getting Started](Getting-Started-with-Mapsui.md)
-## [How to Work with Mapsui](How-to-work-with-Mapsui.md)
+### [Quick Start WPF](getting-started-wpf.md)
+### [Quick Start Android](getting-started-android.md)
 ## [Roadmap](Roadmap.md)
 ## [Mapsui 2.0](Mapsui-2.0.md)
 # How Things Work
