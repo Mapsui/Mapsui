@@ -12,5 +12,6 @@
 ## [Contributors Guidelines](Contributors-Guidelines.md)
 ## [Development Constraints](Development-constraints.md)
 ## [Unit Tests for Rendering](Rendering-Tests.md)
+## [Documentation](documentation.md)
 # Tips
 ## [NuGet of Latest Build](NuGet-of-latest-build.md)
