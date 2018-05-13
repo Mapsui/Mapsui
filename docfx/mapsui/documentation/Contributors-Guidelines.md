@@ -1,5 +1,9 @@
 # Mapsui Contributor Guidelines
 
+### CLA
+To contribute you need to sign our CLA 
+
+[![CLA assistant](https://cla-assistant.io/readme/badge/Mapsui/Mapsui)](https://cla-assistant.io/Mapsui/Mapsui)
 ## Complexity
 Complexity is the biggest problem in software development. The primary effort should be to keep the complexity low. Complexity can be caused by clueless spaghetti code but also by [astronaut architectures](https://www.joelonsoftware.com/2008/05/01/architecture-astronauts-take-over/). Keeping things simple is [not easy](https://www.infoq.com/presentations/Simple-Made-Easy) but hard work. It involves thinking up several solutions to your problem weighing the pros and cons and moving it around and upside down to look for even better (simpler) solutions. 
 
