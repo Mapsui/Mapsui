@@ -27,7 +27,6 @@ namespace Mapsui.Layers
         private readonly Transformer _transformer = new Transformer();
         private BoundingBox _envelope;
 
-
         /// <summary>
         /// Get a layer's styles
         /// </summary>

@@ -54,8 +54,14 @@ namespace Mapsui.Layers
             _fetchMachine = new FetchMachine(_fetchDispatcher);
         }
 
+        /// <summary>
+        /// Time to wait before fetiching data
+        /// </summary>
         public int FetchingPostponedInMilliseconds { get; set; } = 500;
 
+        /// <summary>
+        /// Data source for this layer
+        /// </summary>
         public IProvider DataSource
         {
             get => _dataSource;
