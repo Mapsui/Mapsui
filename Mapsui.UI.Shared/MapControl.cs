@@ -417,17 +417,18 @@ namespace Mapsui.UI.Wpf
         /// </summary>
 
 #if !__WPF__ && !__UWP__
-        public new void Dispose()
-        {
-            Unsubscribe();
-            base.Dispose();
-        }
+        // PDD: Disabled to get a compile
+        //public new void Dispose()
+        //{
+        //    Unsubscribe();
+        //    base.Dispose();
+        //}
 
-        protected override void Dispose(bool disposing)
-        {
-            Unsubscribe();
-            base.Dispose(disposing);
-        }
+        //protected override void Dispose(bool disposing)
+        //{
+        //    Unsubscribe();
+        //    base.Dispose(disposing);
+        //}
 #endif
 
         /// <summary>

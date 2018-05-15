@@ -1,0 +1,310 @@
+{
+  "homepages": [],
+  "source_base_path": "C:/code/github/Mapsui/docfx/mapsui",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "Conceptual",
+      "source_relative_path": "api/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "api/index.html",
+          "hash": "VWdrFQWH9AsvQ0mwOMt1iQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "EmptyTocItemName"
+      ],
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html",
+          "hash": "3HHd9h8E8GY9MArlTOC9JA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "documentation/Async-Fetching.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/Async-Fetching.html",
+          "hash": "QmQ5bmmD8j1vlV5CeZvjVg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "documentation/Contributors-Guidelines.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/Contributors-Guidelines.html",
+          "hash": "Ywu1yabUX+DrBkA3uXbQAg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "documentation/Development-constraints.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/Development-constraints.html",
+          "hash": "XADcBpedmN+uy+dAx3dwjw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "documentation/Getting-Started-with-Mapsui.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/Getting-Started-with-Mapsui.html",
+          "hash": "GCK7ViJueEuGfCMqe9Ofag=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "documentation/Home.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/Home.html",
+          "hash": "HbRXziSz17kwXJX2nhH21Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "documentation/How-to-work-with-Mapsui.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/How-to-work-with-Mapsui.html",
+          "hash": "sGpHGgFEvCXu/NEYRFeXOw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "documentation/Mapsui-2.0.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/Mapsui-2.0.html",
+          "hash": "aPpwfyTzTrEBOVucq+p7uA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "documentation/Mapsui-Components.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/Mapsui-Components.html",
+          "hash": "9u+7yEjgvelKn2luZIMtdQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "documentation/NuGet-of-latest-build.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/NuGet-of-latest-build.html",
+          "hash": "WtgrxxKmz7iTJgyuT9mGAw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "documentation/Renderers.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/Renderers.html",
+          "hash": "rjBmWsiSiJyyRJV+xBj84A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "documentation/Rendering-Tests.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/Rendering-Tests.html",
+          "hash": "MbmUF0Js8C9RVN47/+Zphw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "documentation/Roadmap.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/Roadmap.html",
+          "hash": "CbC2Gsy9q/lKV0n/9cV9TA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "documentation/documentation.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/documentation.html",
+          "hash": "N7w79udhU4xF39o89w00eg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "documentation/getting-started-android.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/getting-started-android.html",
+          "hash": "aAOp/dxP/3lsnjA18Cr1Ew=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "documentation/getting-started-wpf.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/getting-started-wpf.html",
+          "hash": "FbCywBLHlU/gk+DvF9762g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "documentation/toc.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/toc.html",
+          "hash": "3LOCzKqjWeKKPngdh4qWlw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/favicon.ico",
+      "output": {
+        "resource": {
+          "relative_path": "images/favicon.ico"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/logo.svg",
+      "output": {
+        "resource": {
+          "relative_path": "images/logo.svg"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html",
+          "hash": "HBeVscuhl15dZpzVCPpGWg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html",
+          "hash": "CB4N5NepM/P3wQuaCYyn1g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    }
+  ],
+  "incremental_info": [
+    {
+      "status": {
+        "can_incremental": true,
+        "incrementalPhase": "build"
+      },
+      "processors": {
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot suppport incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build"
+        },
+        "ResourceDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor ResourceDocumentProcessor cannot suppport incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build"
+        },
+        "ConceptualDocumentProcessor": {
+          "can_incremental": true,
+          "incrementalPhase": "build"
+        }
+      }
+    },
+    {
+      "status": {
+        "can_incremental": true,
+        "details": "Can support incremental post processing.",
+        "incrementalPhase": "postProcessing"
+      },
+      "processors": {}
+    }
+  ],
+  "version_info": {},
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}

@@ -25,6 +25,7 @@ namespace Mapsui.Layers
         private object _tag;
         private ITransformation _transformation;
         private readonly Transformer _transformer = new Transformer();
+        private BoundingBox _envelope;
 
 
         /// <summary>
@@ -206,8 +207,18 @@ namespace Mapsui.Layers
             get => _transformer;
         }
 
-        /// <inheritdoc />
-        public abstract BoundingBox Envelope { get; }
+        /// <summary>
+        /// Returns the envelope of all avaiable data in the layer
+        /// </summary>
+        public virtual BoundingBox Envelope
+        {
+            get => _envelope;
+            protected set
+            {
+                _envelope = value;
+                OnPropertyChanged(nameof(Envelope));
+            }
+        }
 
         /// <inheritdoc />
         public Hyperlink Attribution { get; set; }
@@ -247,7 +258,7 @@ namespace Mapsui.Layers
             return Name;
         }
 
-        protected void OnPropertyChanged(string name)
+        protected virtual void OnPropertyChanged(string name)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }

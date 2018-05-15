@@ -1,12 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net452</TargetFramework>
+    <TargetFramework>net47</TargetFramework>
     <Version>2.0.0</Version>
     <Authors>Mapsui Contributers</Authors>
   </PropertyGroup>
 
-  <ItemGroup><!--<PackageReference Include="" Version=""/>-->
-  
+  <ItemGroup>
+    <!--<PackageReference Include="" Version=""/>-->
+
     <Folder Include="Properties\" />
   </ItemGroup>
 
@@ -30,7 +31,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  
+
   <ItemGroup>
     <Content Include="GeoData\World\cities.DBF">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -78,13 +79,13 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  
+
   <ItemGroup>
     <PackageReference Include="BruTile" Version="2.0.0" />
     <PackageReference Include="BruTile.Desktop" Version="2.0.0" />
     <PackageReference Include="System.Net.Http" Version="4.3.3" />
   </ItemGroup>
-  
+
   <ItemGroup>
     <ProjectReference Include="..\..\Mapsui.Desktop\Mapsui.Desktop.csproj" />
     <ProjectReference Include="..\..\Mapsui.Geometries\Mapsui.Geometries.csproj" />

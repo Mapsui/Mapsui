@@ -1,0 +1,147 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Mapsui Components </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Mapsui Components ">
+    <meta name="generator" content="docfx 2.29.1.0">
+    
+    <link rel="shortcut icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="mapsui-components">Mapsui Components</h1>
+
+<p>If you install the NuGet package into your app these assemblies are added:</p>
+<ul>
+<li>Mapsui.UI.{platform} - Platform specific UI. Contains the MapControl</li>
+<li>Mapsui.Rendering.Skia *</li>
+<li>Mapsui *</li>
+<li>Mapsui.Geometries *</li>
+<li>On Windows desktop Mapsui.Rendering.Xaml is added.</li>
+<li>A number of nuget dependencies</li>
+</ul>
+<p>* A PCL with Profile111. Targets: .Net Framework 4.5, ASP.NET Core 5.0, Windows 8, Windows Phone 8.1, Xamarin.Android, Xamarin.iOS, Xamarin.iOS (Classic)</p>
+<h2 id="mapsui-parts">Mapsui Parts</h2>
+<p>Mapsui consists of 3 major object.</p>
+<h3 id="map">Map</h3>
+<p>Holds all information about the map like projection, layers, widgets and so on.</p>
+<h3 id="viewport">Viewport</h3>
+<p>Holds all information about the part of the map, that is visible on the screen like center, extent, rotation, resolution and so on. It is created automatically when Map is created. You could access it Map.Viewport.</p>
+<h4 id="properties">Properties</h4>
+<h5 id="center">Center</h5>
+<p>Center of the visible map as Mapsui.Geometries.Point</p>
+<h5 id="resolution">Resolution</h5>
+<p>Resolution of the visible part of the map. With this, you could zoom in and out.</p>
+<h5 id="rotation">Rotation</h5>
+<p>Rotation of the visible part of the map in degrees</p>
+<h5 id="isrotated">IsRotated</h5>
+<p>Flag, if the map visible map is oriented to north</p>
+<h5 id="extent">Extent</h5>
+<p>Extent of the visible map as Mapsui.Geometries.BoundingBox</p>
+<h4 id="methods">Methods</h4>
+<h5 id="screentoworld">ScreenToWorld</h5>
+<p>Convert viewport coordinates to world coordinates</p>
+<h5 id="worldtoscreen">WorldToScreen</h5>
+<p>Convert world coordinates to viewport coordinates</p>
+<h4 id="events">Events</h4>
+<h5 id="viewportchanged">ViewportChanged</h5>
+<p>Event, we is risen, if anything changes in the viewport</p>
+<h3 id="mapcontrol">MapControl</h3>
+<p>Holds all information to display the viewport on the screen and to react on user actions like touches and taps. It holds a instance of the renderer too.</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/Mapsui/Mapsui/blob/master/docfx/mapsui/articles/Mapsui-Components.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Copyright © 2015-2017 Microsoft<br>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

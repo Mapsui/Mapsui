@@ -20,6 +20,7 @@ using Mapsui.Geometries;
 using Mapsui.Providers;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Mapsui.Logging;
@@ -55,27 +56,8 @@ namespace Mapsui.Layers
             get => _dataSource;
             set
             {
-                if (_dataSource == value) return;
                 _dataSource = value;
-                OnPropertyChanged("DataSource");
-                OnPropertyChanged("Envelope");
-            }
-        }
-
-        /// <summary>
-        /// Returns the extent of the layer
-        /// </summary>
-        /// <returns>Bounding box corresponding to the extent of the features in the layer</returns>
-        public override BoundingBox Envelope
-        {
-            get
-            {
-                if (DataSource == null) return null;
-
-                lock (DataSource)
-                {
-                    return ProjectionHelper.GetTransformedBoundingBox(Transformation, DataSource.GetExtents(), DataSource.CRS, CRS);                   
-                }
+                OnPropertyChanged(nameof(DataSource));
             }
         }
 
@@ -84,6 +66,22 @@ namespace Mapsui.Layers
             Name = layername;
             _startFetchTimer = new Timer(StartFetchTimerElapsed, int.MaxValue);
             _numberOfFeaturesReturned = 1;
+            PropertyChanged += OnPropertyChanged;
+        }
+
+        protected void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(CRS) ||
+                e.PropertyName == nameof(DataSource) ||
+                e.PropertyName == nameof(Transformation))
+            {
+                Task.Run(() => // Run in background because it could take time.
+                {
+                    var sourceExtent = DataSource.GetExtents(); // This method could involve database access or a web request
+                    Envelope = ProjectionHelper.GetTransformedBoundingBox(
+                        Transformation, sourceExtent, DataSource.CRS, CRS);
+                });
+            }
         }
 
         void StartFetchTimerElapsed(object state)
@@ -146,18 +144,21 @@ namespace Mapsui.Layers
             _needsUpdate = false;
 
             var newExtent = new BoundingBox(extent);
-            
+
             if (Transformation != null && !string.IsNullOrWhiteSpace(CRS)) DataSource.CRS = CRS;
 
             if (ProjectionHelper.NeedsTransform(Transformation, CRS, DataSource.CRS))
                 if (Transformation != null && Transformation.IsProjectionSupported(CRS, DataSource.CRS) == true)
                     newExtent = Transformation.Transform(CRS, DataSource.CRS, extent);
-                
+
             var fetcher = new FeatureFetcher(newExtent, resolution, DataSource, DataArrived, DateTime.Now.Ticks);
 
-            Logger.Log(LogLevel.Debug, $"Starting new fetch at {DateTime.Now.TimeOfDay}");
-
-            Task.Run(() => fetcher.FetchOnThread());
+            Task.Run(() =>
+            {
+                Logger.Log(LogLevel.Debug, $"Start image fetch at {DateTime.Now.TimeOfDay}");
+                fetcher.FetchOnThread();
+                Logger.Log(LogLevel.Debug, $"Finished image fetch at {DateTime.Now.TimeOfDay}");
+            });
         }
 
         private void DataArrived(IEnumerable<IFeature> features, object state)
@@ -165,12 +166,12 @@ namespace Mapsui.Layers
             //the data in the cache is stored in the map projection so it projected only once.
             features = features?.ToList() ?? throw new ArgumentException("argument features may not be null");
 
-			// We can get 0 features if some error was occured up call stack
-			// We should not add new FeatureSets if we have not any feature
+            // We can get 0 features if some error was occured up call stack
+            // We should not add new FeatureSets if we have not any feature
 
-			_isFetching = false;
+            _isFetching = false;
 
-			if (features.Any())
+            if (features.Any())
             {
                 features = features.ToList();
                 if (ProjectionHelper.NeedsTransform(Transformation, CRS, DataSource.CRS))
@@ -186,10 +187,10 @@ namespace Mapsui.Layers
                 //Keep only two most recent sets. The older ones will be removed
                 _sets = _sets.OrderByDescending(c => c.TimeRequested).Take(_numberOfFeaturesReturned).ToList();
 
-				OnDataChanged(new DataChangedEventArgs(null, false, null, Name));
-			}
+                OnDataChanged(new DataChangedEventArgs(null, false, null, Name));
+            }
 
-			if (_needsUpdate)
+            if (_needsUpdate)
             {
                 StartNewFetch(_newExtent, _newResolution);
             }

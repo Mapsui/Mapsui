@@ -152,7 +152,7 @@ namespace Mapsui.Rendering.Skia
 
         }
 
-        private static readonly SKPaint PaintBitmap = new SKPaint() {FilterQuality = SKFilterQuality.High};
+        private static readonly SKPaint PaintBitmap = new SKPaint {FilterQuality = SKFilterQuality.Low};
 
         public static void RenderBitmap(SKCanvas canvas, SKImage bitmap, SKRect rect, float opacity = 1f)
         {

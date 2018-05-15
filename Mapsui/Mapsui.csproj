@@ -1,10 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="../Mapsui.Common.props" />
   <PropertyGroup>
-    <TargetFramework>netstandard1.1</TargetFramework>
-    <Version>2.0.0</Version>
-    <Authors>Mapsui Contributers</Authors>
-    <Company>Mapsui</Company>
-    <Copyright>Mapsui Contributers</Copyright>
+    <TargetFramework>netstandard1.3</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="BruTile" Version="2.0.0" />
@@ -14,10 +14,4 @@
   <ItemGroup>
     <ProjectReference Include="..\Mapsui.Geometries\Mapsui.Geometries.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Reference Include="System.Runtime.Serialization.Json">
-      <HintPath>..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETPortable\v4.5\Profile\Profile111\System.Runtime.Serialization.Json.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
 </Project>

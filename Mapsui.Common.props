@@ -1,25 +1,16 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project>
   
   <!--- Package information, Version -->
   <PropertyGroup>
-    <Version>2.0.0</Version>
+    <Version>2.0.0-beta.2</Version>
     <NeutralLanguage>en</NeutralLanguage>
-    <Copyright>Copyright C Mapsui Developers Team 2018</Copyright>
-    <PackageLicenseUrl>https://raw.githubusercontent.com/Mapsui/Mapsui/master/license.txt</PackageLicenseUrl>
+    <Copyright>Copyright © Mapsui Developers 2018</Copyright>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/Mapsui/Mapsui/master/LICENSE.md</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/Mapsui/Mapsui</PackageProjectUrl>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/Mapsui/Mapsui</RepositoryUrl>
-    <PackageIconUrl>https://avatars2.githubusercontent.com/u/9279219?s=200&amp;v=4</PackageIconUrl>
-    <Authors>Paul den Dulk</Authors>
-    <Company>Mapsui Developers Team</Company>
+    <Authors>Mapsui Developers</Authors>
+    <Company>Mapsui Developers</Company>
   </PropertyGroup>
-
-  <!--- Compiler settings -->
-  <PropertyGroup>
-    <OutputPath>$(SolutionDir)$(Configuration)\$(ProjectName)</OutputPath>
-    <DocumentationFile>$(OutputPath)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
-    <NoWarn>1701;1702;1705;1591</NoWarn>
-  </PropertyGroup>
-
 </Project>
