@@ -70,24 +70,15 @@
       "version": ""
     },
     {
-      "type": "Conceptual",
-      "source_relative_path": "documentation/Getting-Started-with-Mapsui.md",
-      "output": {
-        ".html": {
-          "relative_path": "documentation/Getting-Started-with-Mapsui.html",
-          "hash": "GCK7ViJueEuGfCMqe9Ofag=="
-        }
-      },
-      "is_incremental": true,
-      "version": ""
-    },
-    {
+      "log_codes": [
+        "InvalidFileLink"
+      ],
       "type": "Conceptual",
       "source_relative_path": "documentation/Home.md",
       "output": {
         ".html": {
           "relative_path": "documentation/Home.html",
-          "hash": "HbRXziSz17kwXJX2nhH21Q=="
+          "hash": "C409GA7vNLDWN+yO9WHijQ=="
         }
       },
       "is_incremental": true,
@@ -214,12 +205,24 @@
       "version": ""
     },
     {
+      "type": "Conceptual",
+      "source_relative_path": "documentation/samples.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/samples.html",
+          "hash": "g3IS+ovIGiy6uxxfMo9lEg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
       "type": "Toc",
       "source_relative_path": "documentation/toc.md",
       "output": {
         ".html": {
           "relative_path": "documentation/toc.html",
-          "hash": "3LOCzKqjWeKKPngdh4qWlw=="
+          "hash": "MyN0wMZrzXQbqqEc/AR32g=="
         }
       },
       "is_incremental": false,
