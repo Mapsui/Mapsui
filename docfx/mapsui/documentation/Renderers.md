@@ -1,8 +1,8 @@
 # Renderers
 
 Mapsui has two renderers:
-- **Xaml** in the Mapsui.Rendering.Xaml assembly. Used only in WPF. Stable and most complete. 
-- **WPF** in the Mapsui.Rendering.Skia assembly. Used in all supported platforms. Newer.
+- **Xaml** in the Mapsui.Rendering.Xaml assembly. Used only in WPF. Older and stable. 
+- **Skia** in the Mapsui.Rendering.Skia assembly. Used in all supported platforms. Newer.
 
 ## Differences
 Skia is nearly equivalent to WPF but there are still some differences (This list has grown shorter over last year):
@@ -10,5 +10,5 @@ Skia is nearly equivalent to WPF but there are still some differences (This list
 1. Skia does not have the option to displayed symbols in world units. The means the icon will grow bigger if you zoom in. This is unlike regular icon but like regular polgons. This is an exotic feature, you will probably not need this. 
 1. There are probably some more differences I missed.
 
-## Check it out
-The project Mapsui.Samples.Wpf has a dropdown on the top left to select between skia and WPF rendering.
+## Xaml and Skia side by side in Mapsui.Samples.Wpf
+The project Mapsui.Samples.Wpf has a dropdown on the top left to select between skia and WPF rendering. This is allows you to compare them.
