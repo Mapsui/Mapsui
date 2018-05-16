@@ -70,18 +70,15 @@
       "version": ""
     },
     {
-      "log_codes": [
-        "InvalidFileLink"
-      ],
       "type": "Conceptual",
       "source_relative_path": "documentation/Home.md",
       "output": {
         ".html": {
           "relative_path": "documentation/Home.html",
-          "hash": "C409GA7vNLDWN+yO9WHijQ=="
+          "hash": "yiOaaKnmqpGtqEyHpF9aQA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
