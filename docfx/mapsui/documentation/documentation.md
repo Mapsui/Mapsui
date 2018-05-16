@@ -15,4 +15,4 @@
 - All the headers in the toc should be equal to the header one in the file it points to.
 - Mapsui is cased as Mapsui not MapsUI.
 - We should iteratively improve the documentation. If questions are asked in the issues we should search for the answer in the documentation. Update the documentation when it is missing and answer the issue with a url to the documentation.
-- Writing documentation is not only useful to inform the user but also as a sanity check for the developer. If what you have to tell becomes complicated and hard to grasp this could mean the software is not well designed. Writing documentation early should be uses as a part of the software development process. 
+- Writing documentation is not only useful to inform the user but also as a sanity check for the developer. If what you have to tell becomes complicated and hard to grasp this could mean the software is not well designed. Writing documentation early should be used as a part of the software development process.
