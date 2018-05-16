@@ -31,12 +31,15 @@
       "version": ""
     },
     {
+      "log_codes": [
+        "InvalidFileLink"
+      ],
       "type": "Conceptual",
       "source_relative_path": "documentation/Async-Fetching.md",
       "output": {
         ".html": {
           "relative_path": "documentation/Async-Fetching.html",
-          "hash": "QmQ5bmmD8j1vlV5CeZvjVg=="
+          "hash": "JEuTQe6hb4/Wyzt86STUQQ=="
         }
       },
       "is_incremental": false,
@@ -51,7 +54,7 @@
           "hash": "Ywu1yabUX+DrBkA3uXbQAg=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -63,7 +66,7 @@
           "hash": "XADcBpedmN+uy+dAx3dwjw=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -75,7 +78,7 @@
           "hash": "GCK7ViJueEuGfCMqe9Ofag=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -87,7 +90,7 @@
           "hash": "HbRXziSz17kwXJX2nhH21Q=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -99,7 +102,7 @@
           "hash": "sGpHGgFEvCXu/NEYRFeXOw=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -111,7 +114,7 @@
           "hash": "aPpwfyTzTrEBOVucq+p7uA=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -123,7 +126,7 @@
           "hash": "9u+7yEjgvelKn2luZIMtdQ=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -135,7 +138,7 @@
           "hash": "WtgrxxKmz7iTJgyuT9mGAw=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -147,7 +150,7 @@
           "hash": "rjBmWsiSiJyyRJV+xBj84A=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -159,7 +162,7 @@
           "hash": "MbmUF0Js8C9RVN47/+Zphw=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -171,7 +174,7 @@
           "hash": "CbC2Gsy9q/lKV0n/9cV9TA=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -183,7 +186,7 @@
           "hash": "N7w79udhU4xF39o89w00eg=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -195,7 +198,7 @@
           "hash": "aAOp/dxP/3lsnjA18Cr1Ew=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -207,7 +210,7 @@
           "hash": "FbCywBLHlU/gk+DvF9762g=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -276,14 +279,14 @@
         "incrementalPhase": "build"
       },
       "processors": {
-        "TocDocumentProcessor": {
-          "can_incremental": false,
-          "details": "Processor TocDocumentProcessor cannot suppport incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
-          "incrementalPhase": "build"
-        },
         "ResourceDocumentProcessor": {
           "can_incremental": false,
           "details": "Processor ResourceDocumentProcessor cannot suppport incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build"
+        },
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot suppport incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build"
         },
         "ConceptualDocumentProcessor": {
