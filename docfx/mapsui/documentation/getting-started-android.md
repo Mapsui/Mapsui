@@ -48,6 +48,7 @@ protected override void OnCreate(Bundle savedInstanceState)
 Add the following using statements:
 
 ```
+using Mapsui;
 using Mapsui.Utilities;
 using Mapsui.UI.Android;
 ```
