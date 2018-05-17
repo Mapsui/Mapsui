@@ -24,6 +24,14 @@ In Resources/layout/Main.axml add Mapsui.UI.Android.MapControl:
            android:layout_height="match_parent" />
 </LinearLayout>
 ```
+
+Add the following using statements:
+
+```
+using Mapsui.Utilities;
+using Mapsui.UI.Android;
+```
+
 ### Step 4
 
 In MainActivity.cs add MapControl after SetContentView(Resource.Layout.Main):
