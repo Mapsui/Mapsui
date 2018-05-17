@@ -69,13 +69,13 @@ namespace Mapsui.Fetcher
         {
             lock (_lockRoot)
             {
-                var transformedExtent = _transformer.TransformBack(extent);
                 // Fetch a bigger extent to include partially visible symbols. 
                 // todo: Take into account the maximum symbol size of the layer
-                var grownExtent = transformedExtent.Grow(
-                    SymbolStyle.DefaultWidth * 2 * resolution, 
+                var grownExtent = extent.Grow(
+                    SymbolStyle.DefaultWidth * 2 * resolution,
                     SymbolStyle.DefaultHeight * 2 * resolution);
-                _extent = grownExtent;
+                var transformedExtent = _transformer.TransformBack(grownExtent);
+                _extent = transformedExtent;
                 _resolution = resolution;
                 _modified = true;
                 Busy = true;
