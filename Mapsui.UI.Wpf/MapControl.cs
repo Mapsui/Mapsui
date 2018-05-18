@@ -305,7 +305,7 @@ namespace Mapsui.UI.Wpf
 
         private void MapControlLoaded(object sender, RoutedEventArgs e)
         {
-            _scale = GetScale();
+            _scale = DetermineScale();
             TryInitializeViewport();
             UpdateSize();
             InitAnimation();
@@ -378,14 +378,14 @@ namespace Mapsui.UI.Wpf
             OnViewChanged();
             Refresh();
 
-            _scale = GetScale();
+            _scale = DetermineScale();
         }
 
-        private float GetScale()
+        private float DetermineScale()
         {
             if (RenderMode == RenderMode.Skia)
             {
-                return GetSkiaScale();
+                return DetermineSkiaScale();
             }
             return 1; // Scale is always 1 in WPF
         }
@@ -734,7 +734,7 @@ namespace Mapsui.UI.Wpf
             Refresh();
         }
 
-        private float GetSkiaScale()
+        private float DetermineSkiaScale()
         {
             var presentationSource = PresentationSource.FromVisual(this);
             if (presentationSource == null) throw new Exception("PresentationSource is null");

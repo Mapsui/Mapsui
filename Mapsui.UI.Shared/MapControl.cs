@@ -21,7 +21,7 @@ namespace Mapsui.UI.Wpf
         /// <summary>
         /// Private global variables
         /// </summary>
-        
+
         /// <summary>
         /// Display scale for converting screen position to real position
         /// </summary>
@@ -127,7 +127,7 @@ namespace Mapsui.UI.Wpf
         /// Allow zooming though touch or mouse
         /// </summary>
         public bool ZoomLock { get; set; }
-        
+
         /// <summary>
         /// After how many degrees start rotation to take place
         /// </summary>
@@ -417,17 +417,18 @@ namespace Mapsui.UI.Wpf
         /// </summary>
 
 #if !__WPF__ && !__UWP__
-        public new void Dispose()
-        {
-            Unsubscribe();
-            base.Dispose();
-        }
+        // PDD: Disabled to get a compile
+        //public new void Dispose()
+        //{
+        //    Unsubscribe();
+        //    base.Dispose();
+        //}
 
-        protected override void Dispose(bool disposing)
-        {
-            Unsubscribe();
-            base.Dispose(disposing);
-        }
+        //protected override void Dispose(bool disposing)
+        //{
+        //    Unsubscribe();
+        //    base.Dispose(disposing);
+        //}
 #endif
 
         /// <summary>
@@ -486,7 +487,7 @@ namespace Mapsui.UI.Wpf
         /// <summary>
         /// Private static functions
         /// </summary>
-        
+
         private static (Geometries.Point centre, double radius, double angle) GetPinchValues(List<Geometries.Point> locations)
         {
             if (locations.Count < 2)
@@ -539,6 +540,35 @@ namespace Mapsui.UI.Wpf
                 temp.PropertyChanged -= MapPropertyChanged;
                 temp.RefreshGraphics -= MapRefreshGraphics;
                 temp.AbortFetch();
+            }
+        }
+
+        /// <summary>
+        /// The canvas scale can only be set in the render loop. Before that
+        /// it's width will be 0. So we use this method instead.
+        /// </summary>
+        /// <returns>The width that the canvas will have after initialization</returns>
+        private float GetCanvasWidth()
+        {
+            return (float)Width / _scale;
+        }
+
+        /// <summary>
+        /// The canvas scale can only be set in the render loop. Before that
+        /// it's height will be 0. So we use this method instead.
+        /// </summary>
+        /// <returns>The height that the canvas will have after initialization</returns>
+        private float GetCanvasHeight()
+        {
+            return (float)Height / _scale;
+        }
+
+        void PushSizeOntoViewport()
+        {
+            if (Map != null)
+            {
+                Map.Viewport.Width = GetCanvasWidth();
+                Map.Viewport.Height = GetCanvasHeight();
             }
         }
     }
