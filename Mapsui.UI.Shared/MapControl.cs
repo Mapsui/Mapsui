@@ -35,7 +35,7 @@ namespace Mapsui.UI.Wpf
         /// <summary>
         /// Saver for center before last pinch movement
         /// </summary>
-        private Geometries.Point _previousCenter = new Geometries.Point();
+        private Point _previousCenter = new Point();
 
         /// <summary>
         /// Saver for angle before last pinch movement
@@ -165,7 +165,7 @@ namespace Mapsui.UI.Wpf
         /// Called, when map should zoom in
         /// </summary>
         /// <param name="screenPosition">Center of zoom in event</param>
-        private bool OnZoomIn(Geometries.Point screenPosition)
+        private bool OnZoomIn(Point screenPosition)
         {
             var args = new ZoomedEventArgs(screenPosition, ZoomDirection.ZoomIn);
 
@@ -184,7 +184,7 @@ namespace Mapsui.UI.Wpf
         /// Called, when mouse/finger/pen hovers around
         /// </summary>
         /// <param name="screenPosition">Actual position of mouse/finger/pen</param>
-        private bool OnHovered(Geometries.Point screenPosition)
+        private bool OnHovered(Point screenPosition)
         {
             var args = new HoveredEventArgs(screenPosition);
 
@@ -231,7 +231,7 @@ namespace Mapsui.UI.Wpf
         /// Called, when mouse/finger/pen click/touch map
         /// </summary>
         /// <param name="touchPoints">List of all touched points</param>
-        private bool OnTouchStart(List<Geometries.Point> touchPoints)
+        private bool OnTouchStart(List<Point> touchPoints)
         {
             var args = new TouchedEventArgs(touchPoints);
 
@@ -260,7 +260,7 @@ namespace Mapsui.UI.Wpf
         /// </summary>
         /// <param name="touchPoints">List of all touched points</param>
         /// <param name="releasedPoint">Released point, which was touched before</param>
-        private bool OnTouchEnd(List<Geometries.Point> touchPoints, Geometries.Point releasedPoint)
+        private bool OnTouchEnd(List<Point> touchPoints, Point releasedPoint)
         {
             var args = new TouchedEventArgs(touchPoints);
 
@@ -281,7 +281,7 @@ namespace Mapsui.UI.Wpf
         /// Called, when mouse/finger/pen moves over map
         /// </summary>
         /// <param name="touchPoints">List of all touched points</param>
-        private bool OnTouchMove(List<Geometries.Point> touchPoints)
+        private bool OnTouchMove(List<Point> touchPoints)
         {
             var args = new TouchedEventArgs(touchPoints);
 
@@ -363,7 +363,7 @@ namespace Mapsui.UI.Wpf
         /// </summary>
         /// <param name="screenPosition">First clicked/touched position on screen</param>
         /// <param name="numOfTaps">Number of taps on map (2 is a double click/tap)</param>
-        private bool OnDoubleTapped(Geometries.Point screenPosition, int numOfTaps)
+        private bool OnDoubleTapped(Point screenPosition, int numOfTaps)
         {
             var args = new TappedEventArgs(screenPosition, numOfTaps);
 
@@ -387,7 +387,7 @@ namespace Mapsui.UI.Wpf
         /// Called, when mouse/finger/pen tapped on map one time
         /// </summary>
         /// <param name="screenPosition">Clicked/touched position on screen</param>
-        private bool OnSingleTapped(Geometries.Point screenPosition)
+        private bool OnSingleTapped(Point screenPosition)
         {
             var args = new TappedEventArgs(screenPosition, 1);
 
@@ -403,7 +403,7 @@ namespace Mapsui.UI.Wpf
         /// Called, when mouse/finger/pen tapped long on map
         /// </summary>
         /// <param name="screenPosition">Clicked/touched position on screen</param>
-        private bool OnLongTapped(Geometries.Point screenPosition)
+        private bool OnLongTapped(Point screenPosition)
         {
             var args = new TappedEventArgs(screenPosition, 1);
 
@@ -453,7 +453,7 @@ namespace Mapsui.UI.Wpf
         /// </summary>
         /// <param name="screenPosition">Position in screen coordinates</param>
         /// <returns>Position in world coordinates</returns>
-        public Geometries.Point ScreenToWorld(Geometries.Point screenPosition)
+        public Point ScreenToWorld(Point screenPosition)
         {
             return ScreenToWorld(Map.Viewport, _scale, screenPosition);
         }
@@ -488,7 +488,7 @@ namespace Mapsui.UI.Wpf
         /// Private static functions
         /// </summary>
 
-        private static (Geometries.Point centre, double radius, double angle) GetPinchValues(List<Geometries.Point> locations)
+        private static (Point centre, double radius, double angle) GetPinchValues(List<Geometries.Point> locations)
         {
             if (locations.Count < 2)
                 throw new ArgumentException();
@@ -509,7 +509,7 @@ namespace Mapsui.UI.Wpf
 
             var angle = Math.Atan2(locations[1].Y - locations[0].Y, locations[1].X - locations[0].X) * 180.0 / Math.PI;
 
-            return (new Geometries.Point(centerX, centerY), radius, angle);
+            return (new Point(centerX, centerY), radius, angle);
         }
 
         /// <summary>
