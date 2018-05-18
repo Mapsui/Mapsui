@@ -15,5 +15,5 @@ We take skia scale into account on a number of places in our code:
 - We initialze the viewport width and height tot he skia width and height (on TryInitializeViewport).
 - We set the viewport width and height to the skia width and height whenever the containing parent's size changes.
 - We set the skia scale on the skia surface. This needs to be done in the render loop because this is the only place where we have access to the surface
-- We pass the skia scale along if we request map info. Why not correct for scale before the call? Because we want to return the original click position as part of the response.
+- We pass the skia scale along if we request map info. Why not directly correct the position for scale at the call? Because we want to return the original click position as part of the response. This position can be usefull and we don't want to user to correct for skia scale (in fact we don't want the user to have access to it).
 - When requesting the touch positions when manipulating the map.
