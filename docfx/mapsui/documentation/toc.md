@@ -8,6 +8,7 @@
 ## [Mapsui Components](Mapsui-Components.md)
 ## [Renderers](Renderers.md)
 ## [Asynchronous Data Fetching](Async-Fetching.md)
+## [Skia Scale][skia-scale.md]
 # Developing Mapsui
 ## [Contributors Guidelines](Contributors-Guidelines.md)
 ## [Development Constraints](Development-constraints.md)
