@@ -9,7 +9,7 @@ Modern devices have a very high resolution. If we would draw onto the skia canva
 The skia surface has it's own scale. We set this to an appropriate scale factor. As a result the coordinates of the skia surface are different than that of it's parent container. We have to correct for this on a number of points, like in rendering, requesting map info and manipulation.
 
 ## What do we do
-We take this into account on a number of places in our code:
+We take skia scale into account on a number of places in our code:
 
 - We determine the skia scale while initializing (or when switching from wpf to skia rendering)
 - We initialze the viewport width and height tot he skia width and height (on TryInitializeViewport).
