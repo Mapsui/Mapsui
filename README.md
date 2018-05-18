@@ -35,6 +35,7 @@ See the [guidelines](CONTRIBUTING.md)
 
 ## Thanks go to
 - ReSharper for providing free open source licenses for Mapsui
+- [realinfo](https://github.com/reallinfo) for providing the logo
 
 ## Supported Platforms
 
