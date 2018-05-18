@@ -11,7 +11,7 @@ The skia surface has it's own scale. We set this to an appropriate scale factor.
 ## What do we do
 We take this into account on a number of places in our code:
 
-- We determine the skia scale while initializing (or when have switched to the skia renderer)
+- We determine the skia scale while initializing (or when switching from wpf to skia rendering)
 - We set the skia scale on the surface. This needs to be done in the render loop because this is the only place where we have access to the surface
 - We set the viewport width and height to the skia width and height. We do this when:
   - initializing (TryInitializeViewport) and
