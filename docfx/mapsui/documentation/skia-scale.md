@@ -3,7 +3,7 @@
 We have a separate page about this topic because skia scale has caused some confusion in the past and bugs as a consequence. 
 
 ## Why skia scale?
-Modern devices have a very high resolution. If we would draw onto the skia canvas using device pixels as coordinates the fonts would become tiny and unreadable and lines would become very thin. To correct for this we use a scale factor. We get the scale factor from the operating system.
+Modern devices have a very high resolution. If we would draw onto the skia canvas using device pixels as coordinates the fonts would become tiny and unreadable and lines would become very thin. To correct for this we use a scale factor. We determine the scale factor using information about the current device.
 
 ## How does it work?
 The skia surface has it's own scale. We set this to an appropriate scale factor. As a result the coordinates of the skia surface are different than that of it's parent container. We have to correct for this on a number of points, like in rendering, requesting map info and manipulation.
