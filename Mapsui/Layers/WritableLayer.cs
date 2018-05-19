@@ -83,6 +83,10 @@ namespace Mapsui.Layers
             return _cache.FirstOrDefault(f => f == feature);
         }
 
+        /// <summary>
+        /// Signals to listeners that data has changed. This is necessary for situations where
+        /// an individual geometry is edited. The layer itself can not know about it's change.
+        /// </summary>
         public void SignalDataChanged()
         {
             OnDataChanged(new DataChangedEventArgs());
