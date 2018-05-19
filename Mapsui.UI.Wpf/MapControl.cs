@@ -305,11 +305,39 @@ namespace Mapsui.UI.Wpf
 
         private void MapControlLoaded(object sender, RoutedEventArgs e)
         {
-            _scale = GetScale();
+            _scale = DetermineScale();
             TryInitializeViewport();
             UpdateSize();
             InitAnimation();
             Focusable = true;
+        }
+
+        private float DetermineScale()
+        {
+    
+            if (RenderMode == RenderMode.Skia)
+            {
+                return DetermineSkiaScale();
+            }
+            return 1; // Scale is always 1 in WPF
+        }
+
+        private float DetermineSkiaScale()
+        {
+            var presentationSource = PresentationSource.FromVisual(this);
+            if (presentationSource == null) throw new Exception("PresentationSource is null");
+            var compositionTarget = presentationSource.CompositionTarget;
+            if (compositionTarget == null) throw new Exception("CompositionTarget is null");
+
+            var m = compositionTarget.TransformToDevice;
+
+            var dpiX = m.M11;
+            var dpiY = m.M22;
+
+            if (dpiX != dpiY)
+                throw new ArgumentException();
+
+            return (float)dpiX;
         }
 
         private void InitAnimation()
@@ -378,16 +406,7 @@ namespace Mapsui.UI.Wpf
             OnViewChanged();
             Refresh();
 
-            _scale = GetScale();
-        }
-
-        private float GetScale()
-        {
-            if (RenderMode == RenderMode.Skia)
-            {
-                return GetSkiaScale();
-            }
-            return 1; // Scale is always 1 in WPF
+            PushSizeOntoViewport((float)ActualWidth, (float)ActualHeight);
         }
 
         private void UpdateSize()
@@ -562,9 +581,10 @@ namespace Mapsui.UI.Wpf
 
         private void TryInitializeViewport()
         {
+            if (_map?.Viewport == null) return;
             if (_map.Viewport.Initialized) return;
 
-            if (_map.Viewport.TryInitializeViewport(_map, ActualWidth, ActualHeight))
+            if (_map.Viewport.TryInitializeViewport(_map, GetCanvasWidth((float)ActualWidth), GetCanvasHeight((float)ActualHeight)))
             {
                 ViewportLimiter.Limit(_map.Viewport, _map.ZoomMode, _map.ZoomLimits, _map.Resolutions,
                     _map.PanMode, _map.PanLimits, _map.Envelope);
@@ -591,9 +611,9 @@ namespace Mapsui.UI.Wpf
         {
             if (Renderer == null) return;
             if (_map == null) return;
-            if (double.IsNaN(ActualWidth) || ActualWidth == 0 || double.IsNaN(ActualHeight) || ActualHeight == 0) return;
 
             TryInitializeViewport();
+            if (!_map.Viewport.Initialized) return;
 
             Renderer.Render(WpfCanvas, Map.Viewport, _map.Layers, Map.Widgets, _map.BackColor);
 
@@ -734,36 +754,15 @@ namespace Mapsui.UI.Wpf
             Refresh();
         }
 
-        private float GetSkiaScale()
-        {
-            var presentationSource = PresentationSource.FromVisual(this);
-            if (presentationSource == null) throw new Exception("PresentationSource is null");
-            var compositionTarget = presentationSource.CompositionTarget;
-            if (compositionTarget == null) throw new Exception("CompositionTarget is null");
-
-            var m = compositionTarget.TransformToDevice;
-
-            var dpiX = m.M11;
-            var dpiY = m.M22;
-
-            if (dpiX != dpiY)
-                throw new ArgumentException();
-
-            return (float)dpiX;
-        }
-
-        private void SKElementOnPaintSurface(object sender, SKPaintSurfaceEventArgs e)
+        private void SKElementOnPaintSurface(object sender, SKPaintSurfaceEventArgs args)
         {
             if (!_invalid) return; // Don't render when nothing has changed
-            if (double.IsNaN(ActualWidth) || ActualWidth == 0 || double.IsNaN(ActualHeight) || ActualHeight == 0) return;
-
-            e.Surface.Canvas.Scale(_scale, _scale);
-
-            Map.Viewport.Width = ActualWidth;
-            Map.Viewport.Height = ActualHeight;
 
             TryInitializeViewport();
-            Renderer.Render(e.Surface.Canvas, Map.Viewport, Map.Layers, Map.Widgets, Map.BackColor);
+            if (!_map.Viewport.Initialized) return;
+
+            args.Surface.Canvas.Scale(_scale, _scale);
+            Renderer.Render(args.Surface.Canvas, Map.Viewport, Map.Layers, Map.Widgets, Map.BackColor);
 
             _invalid = false;
         }

@@ -41,6 +41,8 @@ namespace Mapsui.UI.iOS
             Map = new Map();
             BackgroundColor = UIColor.White;
 
+            _scale = DetermineSkiaScale();
+
             _canvas.TranslatesAutoresizingMaskIntoConstraints = false;
             _canvas.MultipleTouchEnabled = true;
 
@@ -77,11 +79,15 @@ namespace Mapsui.UI.iOS
             AddGestureRecognizer(tapGestureRecognizer);
         }
 
+        private float DetermineSkiaScale()
+        {
+            return (float)_canvas.ContentScaleFactor;
+        }
+
         private void OnDoubleTapped(UITapGestureRecognizer gesture)
         {
-            var screenPosition = GetScreenPosition(gesture.LocationInView(this));
-
-            var tapWasHandled = Map.InvokeInfo(screenPosition, screenPosition, _scale, _renderer.SymbolCache, WidgetTouched, 2);
+            var position = GetScreenPosition(gesture.LocationInView(this));
+            var tapWasHandled = Map.InvokeInfo(position, position, _scale, _renderer.SymbolCache, WidgetTouched, 2);
 
             if (!tapWasHandled)
             {
@@ -92,31 +98,27 @@ namespace Mapsui.UI.iOS
 
         private void OnSingleTapped(UITapGestureRecognizer gesture)
         {
-            var screenPosition = GetScreenPosition(gesture.LocationInView(this));
-
-            Map.InvokeInfo(screenPosition, screenPosition, _scale, _renderer.SymbolCache, WidgetTouched, 1);
+            var position = GetScreenPosition(gesture.LocationInView(this));
+            Map.InvokeInfo(position, position, _scale, _renderer.SymbolCache, WidgetTouched, 1);
         }
 
-        void OnPaintSurface(object sender, SKPaintGLSurfaceEventArgs skPaintSurfaceEventArgs)
+        void OnPaintSurface(object sender, SKPaintGLSurfaceEventArgs args)
         {
             TryInitializeViewport();
             if (!_map.Viewport.Initialized) return;
 
-            _map.Viewport.Width = _canvas.Frame.Width;
-            _map.Viewport.Height = _canvas.Frame.Height;
+            PushSizeOntoViewport((float)Frame.Width, (float)Frame.Height); // This should not be necessary here if it is done on all events where size changes. todo: test without
 
-            _scale = (float)_canvas.ContentScaleFactor;
-            skPaintSurfaceEventArgs.Surface.Canvas.Scale(_scale, _scale);
+            args.Surface.Canvas.Scale(_scale, _scale);  // we can only set the scale in the render loop
 
-            _renderer.Render(skPaintSurfaceEventArgs.Surface.Canvas,
-                _map.Viewport, _map.Layers, _map.Widgets, _map.BackColor);
+            _renderer.Render(args.Surface.Canvas, _map.Viewport, _map.Layers, _map.Widgets, _map.BackColor);
         }
 
         private void TryInitializeViewport()
         {
             if (_map.Viewport.Initialized) return;
 
-            if (_map.Viewport.TryInitializeViewport(_map, _canvas.Frame.Width, _canvas.Frame.Height))
+            if (_map.Viewport.TryInitializeViewport(_map, GetCanvasWidth((float)Frame.Width), GetCanvasHeight((float)Frame.Height)))
             {
                 Map.ViewChanged(true);
                 OnViewportInitialized();
@@ -138,14 +140,14 @@ namespace Mapsui.UI.iOS
         public override void TouchesMoved(NSSet touches, UIEvent evt)
         {
             base.TouchesMoved(touches, evt);
-            
+
             if (evt.AllTouches.Count == 1)
             {
                 if (touches.AnyObject is UITouch touch)
                 {
                     var currentPos = touch.LocationInView(this);
                     var previousPos = touch.PreviousLocationInView(this);
-                    
+
                     _map.Viewport.Transform(currentPos.X, currentPos.Y, previousPos.X, previousPos.Y);
 
                     ViewportLimiter.LimitExtent(_map.Viewport, _map.PanMode, _map.PanLimits, _map.Envelope);
@@ -159,7 +161,7 @@ namespace Mapsui.UI.iOS
             {
                 var prevLocations = evt.AllTouches.Select(t => ((UITouch)t).PreviousLocationInView(this))
                                            .Select(p => new Point(p.X, p.Y)).ToList();
-                
+
                 var locations = evt.AllTouches.Select(t => ((UITouch)t).LocationInView(this))
                                         .Select(p => new Point(p.X, p.Y)).ToList();
 
@@ -319,8 +321,7 @@ namespace Mapsui.UI.iOS
 
                 if (_map?.Viewport == null) return;
 
-                _map.Viewport.Width = _canvas.Frame.Width;
-                _map.Viewport.Height = _canvas.Frame.Height;
+                PushSizeOntoViewport((float)Frame.Width, (float)Frame.Height);
 
                 Refresh();
             }
@@ -334,15 +335,17 @@ namespace Mapsui.UI.iOS
 
             if (_map?.Viewport == null) return;
 
-            _map.Viewport.Width = _canvas.Frame.Width;
-            _map.Viewport.Height = _canvas.Frame.Height;
+            PushSizeOntoViewport((float)Frame.Width, (float)Frame.Height);
 
             Refresh();
         }
 
         private static void WidgetTouched(IWidget widget, Point screenPosition)
         {
-            if (widget is Hyperlink) UIApplication.SharedApplication.OpenUrl(new NSUrl(((Hyperlink)widget).Url));
+            if (widget is Hyperlink hyperlink)
+            {
+                UIApplication.SharedApplication.OpenUrl(new NSUrl(hyperlink.Url));
+            }
 
             widget.HandleWidgetTouched(screenPosition);
         }
