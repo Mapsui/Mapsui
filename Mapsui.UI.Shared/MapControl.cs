@@ -548,9 +548,9 @@ namespace Mapsui.UI.Wpf
         /// it's width will be 0. So we use this method instead.
         /// </summary>
         /// <returns>The width that the canvas will have after initialization</returns>
-        private float GetCanvasWidth()
+        private float GetCanvasWidth(float width)
         {
-            return (float)Width / _scale;
+            return width / _scale;
         }
 
         /// <summary>
@@ -558,17 +558,17 @@ namespace Mapsui.UI.Wpf
         /// it's height will be 0. So we use this method instead.
         /// </summary>
         /// <returns>The height that the canvas will have after initialization</returns>
-        private float GetCanvasHeight()
+        private float GetCanvasHeight(float height)
         {
-            return (float)Height / _scale;
+            return height / _scale;
         }
 
-        void PushSizeOntoViewport()
+        void PushSizeOntoViewport(float mapControlWidth, float mapControlHeight)
         {
             if (Map != null)
             {
-                Map.Viewport.Width = GetCanvasWidth();
-                Map.Viewport.Height = GetCanvasHeight();
+                Map.Viewport.Width = GetCanvasWidth(mapControlWidth);
+                Map.Viewport.Height = GetCanvasHeight(mapControlHeight);
             }
         }
     }

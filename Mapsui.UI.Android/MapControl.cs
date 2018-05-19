@@ -74,10 +74,10 @@ namespace Mapsui.UI.Android
             Map.InvokeInfo(position, position, _scale, _renderer.SymbolCache, WidgetTouched, 1);
         }
 
-        protected override void OnSizeChanged(int w, int h, int oldw, int oldh)
+        protected override void OnSizeChanged(int width, int height, int oldWidth, int oldHeight)
         {
-            base.OnSizeChanged(w, h, oldw, oldh);
-            PushSizeOntoViewport();
+            base.OnSizeChanged(width, height, oldWidth, oldHeight);
+            PushSizeOntoViewport(width, height);
         }
 
         private void CanvasOnPaintSurface(object sender, SKPaintSurfaceEventArgs args)
@@ -94,7 +94,7 @@ namespace Mapsui.UI.Android
         {
             if (_map.Viewport.Initialized) return;
 
-            if (_map.Viewport.TryInitializeViewport(_map, GetCanvasWidth(), GetCanvasHeight()))
+            if (_map.Viewport.TryInitializeViewport(_map, GetCanvasWidth(Width), GetCanvasHeight(Height)))
             {
                 Map.ViewChanged(true);
                 OnViewportInitialized();
@@ -256,7 +256,7 @@ namespace Mapsui.UI.Android
                 {
                     SubscribeToMapEvents(_map);
                     _map.ViewChanged(true);
-                    PushSizeOntoViewport();
+                    PushSizeOntoViewport(Width, Height);
                 }
 
                 RefreshGraphics();
