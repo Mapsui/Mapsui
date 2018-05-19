@@ -443,7 +443,7 @@ namespace Mapsui.UI.Wpf
         /// </summary>
         /// <param name="worldPosition">Position in world coordinates</param>
         /// <returns>Position in screen coordinates</returns>
-        public Geometries.Point WorldToScreen(Geometries.Point worldPosition)
+        public Point WorldToScreen(Point worldPosition)
         {
             return WorldToScreen(Map.Viewport, _scale, worldPosition);
         }
