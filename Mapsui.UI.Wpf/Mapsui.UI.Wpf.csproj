@@ -18,6 +18,12 @@
     <PackageReference Include="BruTile" Version="2.0.0" />
     <PackageReference Include="SkiaSharp" Version="1.60.0" />
     <PackageReference Include="SkiaSharp.Views" Version="1.60.0" />
+    <Compile Include="ExtensionMethods\MouseButtonEventArgsExtensions.cs" />
+    <Compile Include="ExtensionMethods\PointExtensions.cs" />
+    <Compile Include="ExtensionMethods\WindowsPointExtensions.cs" />
+    <Compile Include="MapControl.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RenderingWeakEventManager.cs" />
   </ItemGroup>
 
   <ItemGroup>
