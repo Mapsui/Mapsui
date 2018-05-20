@@ -8,4 +8,5 @@ skip_commits:
     - '**/*.csproj'
     - '**/*.sln'
     - docs/*
+    - 'appveyor.yml'
     
