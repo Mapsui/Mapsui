@@ -4,7 +4,7 @@ build:
 
 skip_commits:
   files:
-    - **/*.cs
-    - **/*.csproj
-    - **/*.sln
+    - '**/*.cs'
+    - '**/*.csproj'
+    - '**/*.sln'
     
