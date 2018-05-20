@@ -1,6 +1,6 @@
 version: 1.0.{build}
-build:
-  verbosity: minimal
+build_script:
+- cmd: docfx\build-site.cmd
 
 skip_commits:
   files:
