@@ -36,7 +36,7 @@ deploy:
   skip_symbols: true
   artifact: mapsuipackage-nu-even-niet
 
-  skip_commits:
+skip_commits:
   files:
     - docs/*
     - docsfx/*
