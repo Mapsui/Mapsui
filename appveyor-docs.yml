@@ -7,4 +7,5 @@ skip_commits:
     - '**/*.cs'
     - '**/*.csproj'
     - '**/*.sln'
+    - docs/*
     
