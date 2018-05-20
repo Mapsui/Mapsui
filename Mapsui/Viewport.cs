@@ -37,7 +37,6 @@ namespace Mapsui
         private readonly NotifyingPoint _center = new NotifyingPoint();
         private bool _modified = true;
         
-
         public Viewport()
         {
             _extent = new BoundingBox(0, 0, 0, 0);
