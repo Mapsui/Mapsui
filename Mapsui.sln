@@ -87,6 +87,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Rendering.Skia", "Ma
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.UI.iOS", "Mapsui.UI.iOS\Mapsui.UI.iOS.csproj", "{E71F3053-056C-4381-9638-048ED73BDFF6}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docfx", "docfx", "{97458DE1-C297-4DED-AECB-5FEFED2B5610}"
+	ProjectSection(SolutionItems) = preProject
+		docfx\build-site.cmd = docfx\build-site.cmd
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Mapsui.UI.Shared\Mapsui.UI.Shared.projitems*{239f2b0d-13cb-4bcf-83bf-f52d696a47b7}*SharedItemsImports = 13
