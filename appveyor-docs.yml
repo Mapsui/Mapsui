@@ -21,6 +21,6 @@ on_success:
   - git config --global user.email "pauldendulk@gmail.com"
   - git config --global user.name "pauldendulk"
   - git add -A 
-  - git commit -m "Generating site"
+  - git commit -a -m "Generating site"
   - git push
     
