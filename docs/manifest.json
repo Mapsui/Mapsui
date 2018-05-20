@@ -1,6 +1,6 @@
 {
   "homepages": [],
-  "source_base_path": "C:/code/github/Mapsui/docfx/mapsui",
+  "source_base_path": "C:/projects/mapsui-373p1/docfx/mapsui",
   "xrefmap": "xrefmap.yml",
   "files": [
     {
@@ -9,22 +9,7 @@
       "output": {
         ".html": {
           "relative_path": "api/index.html",
-          "hash": "VWdrFQWH9AsvQ0mwOMt1iQ=="
-        }
-      },
-      "is_incremental": true,
-      "version": ""
-    },
-    {
-      "log_codes": [
-        "EmptyTocItemName"
-      ],
-      "type": "Toc",
-      "source_relative_path": "api/toc.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/toc.html",
-          "hash": "3HHd9h8E8GY9MArlTOC9JA=="
+          "hash": "paqT+HqlnRC1fMOjhwj82Q=="
         }
       },
       "is_incremental": false,
@@ -39,10 +24,10 @@
       "output": {
         ".html": {
           "relative_path": "documentation/Async-Fetching.html",
-          "hash": "JEuTQe6hb4/Wyzt86STUQQ=="
+          "hash": "KdCeUuqOevaT66bGcVCXyw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -51,10 +36,10 @@
       "output": {
         ".html": {
           "relative_path": "documentation/Contributors-Guidelines.html",
-          "hash": "Ywu1yabUX+DrBkA3uXbQAg=="
+          "hash": "u9jLfk/uzS2/k8fXyoELbg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -63,10 +48,10 @@
       "output": {
         ".html": {
           "relative_path": "documentation/Development-constraints.html",
-          "hash": "XADcBpedmN+uy+dAx3dwjw=="
+          "hash": "DPex9VlkY1VgQRJ4pkM0xg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -75,10 +60,10 @@
       "output": {
         ".html": {
           "relative_path": "documentation/Home.html",
-          "hash": "yiOaaKnmqpGtqEyHpF9aQA=="
+          "hash": "rXfuJBZ7DAukHPVj1Ls+Ig=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -87,10 +72,10 @@
       "output": {
         ".html": {
           "relative_path": "documentation/How-to-work-with-Mapsui.html",
-          "hash": "sGpHGgFEvCXu/NEYRFeXOw=="
+          "hash": "KDgjGwRO7QjJTocULSL08Q=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -99,10 +84,10 @@
       "output": {
         ".html": {
           "relative_path": "documentation/Mapsui-2.0.html",
-          "hash": "979k8292RcAsV1uxMDoH5w=="
+          "hash": "wcEgPb8XPHIltwv8knuIbQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -111,10 +96,10 @@
       "output": {
         ".html": {
           "relative_path": "documentation/Mapsui-Components.html",
-          "hash": "9u+7yEjgvelKn2luZIMtdQ=="
+          "hash": "bKLAGum0my4EzvKuwlIWVw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -123,10 +108,10 @@
       "output": {
         ".html": {
           "relative_path": "documentation/NuGet-of-latest-build.html",
-          "hash": "WtgrxxKmz7iTJgyuT9mGAw=="
+          "hash": "60AoRSZBEqDoT4PA6WrkOg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -135,10 +120,10 @@
       "output": {
         ".html": {
           "relative_path": "documentation/Renderers.html",
-          "hash": "C2pHA7TU6/ntDD0ZvNcgnQ=="
+          "hash": "vEt4YZ/V8xS5ihqgv5PQPA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -147,10 +132,10 @@
       "output": {
         ".html": {
           "relative_path": "documentation/Rendering-Tests.html",
-          "hash": "MbmUF0Js8C9RVN47/+Zphw=="
+          "hash": "4SMUFBGyEwSGAUuDkJpRJg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -159,10 +144,10 @@
       "output": {
         ".html": {
           "relative_path": "documentation/Roadmap.html",
-          "hash": "CbC2Gsy9q/lKV0n/9cV9TA=="
+          "hash": "BNDv6xwsjQfBccErtcdAOA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -171,10 +156,10 @@
       "output": {
         ".html": {
           "relative_path": "documentation/documentation.html",
-          "hash": "/3cMBoVBfJTb3cDrZQPjag=="
+          "hash": "LysJei89cQQJLV6JaqbyIA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -183,10 +168,10 @@
       "output": {
         ".html": {
           "relative_path": "documentation/getting-started-android.html",
-          "hash": "dl4YVWz93dBj3zDh4Sz6zA=="
+          "hash": "Nj/vHz6gpS2bp7SQhA77OA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -195,10 +180,10 @@
       "output": {
         ".html": {
           "relative_path": "documentation/getting-started-wpf.html",
-          "hash": "FbCywBLHlU/gk+DvF9762g=="
+          "hash": "axwdhI4PBO3kVm/ZyUrRSw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -207,10 +192,10 @@
       "output": {
         ".html": {
           "relative_path": "documentation/samples.html",
-          "hash": "g3IS+ovIGiy6uxxfMo9lEg=="
+          "hash": "hpntw38ssiuVuU6eKmso4g=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -219,10 +204,10 @@
       "output": {
         ".html": {
           "relative_path": "documentation/skia-scale.html",
-          "hash": "jygvGeDY6Sb1Ct/rYjc4mA=="
+          "hash": "MXkEj6c5DwfvFd0qMdTB4g=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -243,10 +228,10 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "HBeVscuhl15dZpzVCPpGWg=="
+          "hash": "QHksF9WNAwpWoPrug+jgew=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -255,7 +240,7 @@
       "output": {
         ".html": {
           "relative_path": "toc.html",
-          "hash": "CB4N5NepM/P3wQuaCYyn1g=="
+          "hash": "Nz01Z24OqM2F35/0a98VDA=="
         }
       },
       "is_incremental": false,
@@ -265,25 +250,26 @@
   "incremental_info": [
     {
       "status": {
-        "can_incremental": true,
+        "can_incremental": false,
+        "details": "Cannot build incrementally because last build info is missing.",
         "incrementalPhase": "build"
       },
       "processors": {
         "TocDocumentProcessor": {
           "can_incremental": false,
-          "details": "Processor TocDocumentProcessor cannot suppport incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build"
         },
         "ConceptualDocumentProcessor": {
-          "can_incremental": true,
+          "can_incremental": false,
           "incrementalPhase": "build"
         }
       }
     },
     {
       "status": {
-        "can_incremental": true,
-        "details": "Can support incremental post processing.",
+        "can_incremental": false,
+        "details": "Cannot support incremental post processing, the reason is: last post processor info is null.",
         "incrementalPhase": "postProcessing"
       },
       "processors": {}
