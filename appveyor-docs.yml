@@ -1,5 +1,6 @@
 version: 1.0.{build}
 build_script:
+- cmd: git checkout master
 - cmd: docfx\build-site.cmd
 
 skip_commits:
