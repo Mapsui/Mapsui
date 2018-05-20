@@ -3,7 +3,7 @@ skip_commits:
     - '**/*.cs'
     - '**/*.csproj'
     - '**/*.sln'
-    - docs/*
+    - docs/**/*
     - 'appveyor.yml'
 
 version: 1.0.{build}
