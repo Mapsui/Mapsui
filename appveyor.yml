@@ -1,3 +1,5 @@
+version: '{build}'
+
 skip_commits:
   files:
     - docs/**/*
@@ -5,7 +7,6 @@ skip_commits:
     - logo/**/*
     - 'appveyor-docs.yml'
 
-version: '{build}'
 image: Visual Studio 2017
 assembly_info:
   patch: true

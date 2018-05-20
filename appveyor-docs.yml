@@ -1,3 +1,5 @@
+version: 1.0.{build}
+
 skip_commits:
   files:
     - '**/*.cs'
@@ -6,7 +8,6 @@ skip_commits:
     - docs/**/*
     - 'appveyor.yml'
 
-version: 1.0.{build}
 build_script:
 - cmd: git checkout master
 - cmd: docfx\build-site.cmd
