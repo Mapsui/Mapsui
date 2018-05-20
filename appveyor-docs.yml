@@ -1,8 +1,3 @@
-version: 1.0.{build}
-build_script:
-- cmd: git checkout master
-- cmd: docfx\build-site.cmd
-
 skip_commits:
   files:
     - '**/*.cs'
@@ -10,6 +5,12 @@ skip_commits:
     - '**/*.sln'
     - docs/*
     - 'appveyor.yml'
+
+version: 1.0.{build}
+build_script:
+- cmd: git checkout master
+- cmd: docfx\build-site.cmd
+
 
 environment:
   access_token:

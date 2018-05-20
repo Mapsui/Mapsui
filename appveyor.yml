@@ -1,3 +1,10 @@
+skip_commits:
+  files:
+    - docs/*
+    - docsfx/*
+    - logo/*
+    - 'appveyor-docs.yml'
+
 version: '{build}'
 image: Visual Studio 2017
 assembly_info:
@@ -36,9 +43,3 @@ deploy:
   skip_symbols: true
   artifact: mapsuipackage-nu-even-niet
 
-skip_commits:
-  files:
-    - docs/*
-    - docsfx/*
-    - logo/*
-    - 'appveyor-docs.yml'
