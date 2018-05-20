@@ -38,6 +38,6 @@ deploy:
 
   skip_commits:
   files:
-    - 'docs/*'
-    - 'docsfx/*'
-    - 'logo/*'
+    - docs/*
+    - docsfx/*
+    - logo/*
