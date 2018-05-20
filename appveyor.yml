@@ -35,3 +35,9 @@ deploy:
     secure: RI7FmOMHYqZPtJNhuBD/dxzizoFBECO++GnXPQVBqMmIIkL4ZYCPMGGFP3hTQC2Q
   skip_symbols: true
   artifact: mapsuipackage-nu-even-niet
+
+  skip_commits:
+  files:
+    - docs/*
+    - docsfx/*
+    - logo/*

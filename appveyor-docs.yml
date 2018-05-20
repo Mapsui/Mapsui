@@ -1,3 +1,10 @@
 version: 1.0.{build}
 build:
   verbosity: minimal
+
+skip_commits:
+  files:
+    - **/*.cs
+    - **/*.csproj
+    - **/*.sln
+    
