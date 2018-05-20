@@ -1,7 +1,7 @@
 skip_commits:
   files:
-    - docs/*
-    - docsfx/*
+    - docs/**/*
+    - docsfx/**/*
     - logo/*
     - 'appveyor-docs.yml'
 
