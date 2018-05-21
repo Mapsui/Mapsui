@@ -20,7 +20,8 @@ Mapsui is a C# map component for apps
 - 2018 April 21: Moved the repository from pauldendulk/Mapsui to Mapsui/Mapsui. 
 
 ## Quickstart
-Quickly get a sample running in [WPF](http://mapsui.github.io/Mapsui/documentation/getting-started-wpf.html) or [Android] (http://mapsui.github.io/Mapsui/documentation/getting-started-android.html).
+Quickly get a sample running in [WPF](http://mapsui.github.io/Mapsui/documentation/getting-started-wpf.html) or 
+[Android](http://mapsui.github.io/Mapsui/documentation/getting-started-android.html).
 
 ## Documentation
 There documentation can be found [here](http://mapsui.github.io/Mapsui). Let us know what kind of information you are missing.
