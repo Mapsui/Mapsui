@@ -5,6 +5,7 @@
 | Nuget   | [![NuGet Status](http://img.shields.io/nuget/v/Mapsui.svg?style=flat)](https://www.nuget.org/packages/Mapsui/) |
 | Build on Windows    | [![Build status](https://ci.appveyor.com/api/projects/status/p20w43qv4ixkkftp?svg=true)](https://ci.appveyor.com/project/pauldendulk/mapsui) |
 | Build on Mac | [![Build Status](https://www.bitrise.io/app/119dabd1302841a1/status.svg?token=KH9mbi7R6uLBz0iUZjbvJw&branch=master)](https://www.bitrise.io/app/119dabd1302841a1) |
+| Build docs | [![Build status](https://ci.appveyor.com/api/projects/status/c8hcfeoafmf51gin/branch/master?svg=true)](https://ci.appveyor.com/project/pauldendulk/mapsui-373p1/branch/master) |
 
 ## Mapsui (pronounced map-su-wii)
 
@@ -18,8 +19,9 @@ Mapsui is a C# map component for apps
 ## News
 - 2018 April 21: Moved the repository from pauldendulk/Mapsui to Mapsui/Mapsui. 
 
-## Getting Started
-[Here](http://mapsui.github.io/Mapsui/documentation/Getting-Started-with-Mapsui.html) is a getting started for WPF and Android.
+## Quickstart
+Quickly get a sample running in [WPF](http://mapsui.github.io/Mapsui/documentation/getting-started-wpf.html) or 
+[Android](http://mapsui.github.io/Mapsui/documentation/getting-started-android.html).
 
 ## Documentation
 There documentation can be found [here](http://mapsui.github.io/Mapsui). Let us know what kind of information you are missing.
