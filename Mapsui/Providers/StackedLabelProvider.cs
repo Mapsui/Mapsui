@@ -157,7 +157,8 @@ namespace Mapsui.Providers
             // todo: This method should repeated several times until there are no more merges
             foreach (var feature in features.OrderBy(f => f.Geometry.GetBoundingBox().GetCentroid().Y))
             {
-                if (layerStyle is IThemeStyle) style = (layerStyle as IThemeStyle).GetStyle(feature);
+                if (layerStyle is IThemeStyle themeStyle)
+                    style = themeStyle.GetStyle(feature);
 
                 if ((style == null) ||
                     (style.Enabled == false) ||
