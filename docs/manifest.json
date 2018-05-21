@@ -1,6 +1,6 @@
 {
   "homepages": [],
-  "source_base_path": "C:/code/github/Mapsui/docfx/mapsui",
+  "source_base_path": "C:/projects/mapsui-373p1/docfx/mapsui",
   "xrefmap": "xrefmap.yml",
   "files": [
     {
@@ -9,22 +9,7 @@
       "output": {
         ".html": {
           "relative_path": "api/index.html",
-          "hash": "eXhfQrWJRhECelJEG0tS5g=="
-        }
-      },
-      "is_incremental": true,
-      "version": ""
-    },
-    {
-      "log_codes": [
-        "EmptyTocItemName"
-      ],
-      "type": "Toc",
-      "source_relative_path": "api/toc.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/toc.html",
-          "hash": "3HHd9h8E8GY9MArlTOC9JA=="
+          "hash": "paqT+HqlnRC1fMOjhwj82Q=="
         }
       },
       "is_incremental": false,
@@ -42,7 +27,7 @@
           "hash": "KdCeUuqOevaT66bGcVCXyw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -54,7 +39,7 @@
           "hash": "u9jLfk/uzS2/k8fXyoELbg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -66,7 +51,7 @@
           "hash": "DPex9VlkY1VgQRJ4pkM0xg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -78,7 +63,7 @@
           "hash": "rXfuJBZ7DAukHPVj1Ls+Ig=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -90,7 +75,7 @@
           "hash": "KDgjGwRO7QjJTocULSL08Q=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -102,7 +87,7 @@
           "hash": "wcEgPb8XPHIltwv8knuIbQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -114,7 +99,7 @@
           "hash": "bKLAGum0my4EzvKuwlIWVw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -126,7 +111,7 @@
           "hash": "60AoRSZBEqDoT4PA6WrkOg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -138,7 +123,7 @@
           "hash": "vEt4YZ/V8xS5ihqgv5PQPA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -150,7 +135,7 @@
           "hash": "4SMUFBGyEwSGAUuDkJpRJg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -162,7 +147,7 @@
           "hash": "BNDv6xwsjQfBccErtcdAOA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -174,7 +159,7 @@
           "hash": "LysJei89cQQJLV6JaqbyIA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -186,7 +171,7 @@
           "hash": "Nj/vHz6gpS2bp7SQhA77OA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -198,7 +183,7 @@
           "hash": "axwdhI4PBO3kVm/ZyUrRSw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -222,7 +207,7 @@
           "hash": "MXkEj6c5DwfvFd0qMdTB4g=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -246,7 +231,7 @@
           "hash": "QHksF9WNAwpWoPrug+jgew=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -255,7 +240,7 @@
       "output": {
         ".html": {
           "relative_path": "toc.html",
-          "hash": "CB4N5NepM/P3wQuaCYyn1g=="
+          "hash": "Nz01Z24OqM2F35/0a98VDA=="
         }
       },
       "is_incremental": false,
@@ -265,7 +250,8 @@
   "incremental_info": [
     {
       "status": {
-        "can_incremental": true,
+        "can_incremental": false,
+        "details": "Cannot build incrementally because last build info is missing.",
         "incrementalPhase": "build"
       },
       "processors": {
@@ -275,15 +261,15 @@
           "incrementalPhase": "build"
         },
         "ConceptualDocumentProcessor": {
-          "can_incremental": true,
+          "can_incremental": false,
           "incrementalPhase": "build"
         }
       }
     },
     {
       "status": {
-        "can_incremental": true,
-        "details": "Can support incremental post processing.",
+        "can_incremental": false,
+        "details": "Cannot support incremental post processing, the reason is: last post processor info is null.",
         "incrementalPhase": "postProcessing"
       },
       "processors": {}
