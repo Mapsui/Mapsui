@@ -1,17 +1,12 @@
 version: 1.0.{build}
 
-skip_commits:
+only_commits:
   files:
-    - '**/*.cs'
-    - '**/*.csproj'
-    - '**/*.sln'
-    - docs/**/*
-    - 'appveyor.yml'
+    - docfx/**/*
 
 build_script:
 - cmd: git checkout master
 - cmd: docfx\build-site.cmd
-
 
 environment:
   access_token:
@@ -24,5 +19,4 @@ on_success:
   - git config --global user.name "pauldendulk"
   - git add -A 
   - git commit -a -m "Generating site"
-  - git push
-    
+  - git push  
