@@ -1,6 +1,6 @@
 {
   "homepages": [],
-  "source_base_path": "C:/projects/mapsui-373p1/docfx/mapsui",
+  "source_base_path": "C:/code/github/Mapsui/docfx/mapsui",
   "xrefmap": "xrefmap.yml",
   "files": [
     {
@@ -9,7 +9,22 @@
       "output": {
         ".html": {
           "relative_path": "api/index.html",
-          "hash": "paqT+HqlnRC1fMOjhwj82Q=="
+          "hash": "eXhfQrWJRhECelJEG0tS5g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "EmptyTocItemName"
+      ],
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html",
+          "hash": "3HHd9h8E8GY9MArlTOC9JA=="
         }
       },
       "is_incremental": false,
@@ -240,7 +255,7 @@
       "output": {
         ".html": {
           "relative_path": "toc.html",
-          "hash": "Nz01Z24OqM2F35/0a98VDA=="
+          "hash": "CB4N5NepM/P3wQuaCYyn1g=="
         }
       },
       "is_incremental": false,
@@ -251,7 +266,7 @@
     {
       "status": {
         "can_incremental": false,
-        "details": "Cannot build incrementally because last build info is missing.",
+        "details": "Cannot build incrementally because docfx version changed from 2.35.4.0 to 2.36.0.0.",
         "incrementalPhase": "build"
       },
       "processors": {
@@ -268,8 +283,8 @@
     },
     {
       "status": {
-        "can_incremental": false,
-        "details": "Cannot support incremental post processing, the reason is: last post processor info is null.",
+        "can_incremental": true,
+        "details": "Can support incremental post processing.",
         "incrementalPhase": "postProcessing"
       },
       "processors": {}
