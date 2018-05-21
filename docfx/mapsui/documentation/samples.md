@@ -1,5 +1,5 @@
 # Samples
-There are quite a few samples in Mapsui. They are the primary way to find you way around in Mapsui
+The best way to get started with mapsui is to go through the samples.
 
 ## The code samples
 The code for each sample can be found in the folder: [Samples\Mapsui\Mapsui.Samples.Common\Maps](https://github.com/pauldendulk/Mapsui/tree/master/Samples/Mapsui.Samples.Common/Maps).
