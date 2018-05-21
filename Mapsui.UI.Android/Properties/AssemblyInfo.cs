@@ -25,10 +25,10 @@ using Android.App;
  
 
 
-[assembly: AssemblyVersion("1.4.1")]
-[assembly: AssemblyFileVersion("1.4.1")]
+[assembly: AssemblyVersion("1.4.2")]
+[assembly: AssemblyFileVersion("1.4.2")]
 
 // Add some common permissions, these can be removed if not needed
 [assembly: UsesPermission(Android.Manifest.Permission.Internet)]
 [assembly: UsesPermission(Android.Manifest.Permission.WriteExternalStorage)]
-[assembly: AssemblyInformationalVersion("1.4.1")]
+[assembly: AssemblyInformationalVersion("1.4.2-beta.1")]

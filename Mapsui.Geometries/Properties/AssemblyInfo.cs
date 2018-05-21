@@ -26,6 +26,6 @@ using System.Resources;
 
 
 
-[assembly: AssemblyVersion("1.4.1")]
-[assembly: AssemblyFileVersion("1.4.1")]
-[assembly: AssemblyInformationalVersion("1.4.1")]
+[assembly: AssemblyVersion("1.4.2")]
+[assembly: AssemblyFileVersion("1.4.2")]
+[assembly: AssemblyInformationalVersion("1.4.2-beta.1")]
