@@ -1,6 +1,6 @@
 # NuGet of Latest Build
 
-On every commit the build server is triggered which publishes a NuGet package of that build. It's version number is the current version of the master branch followed by a dash and the build number. There are three ways to add this package to you project.
+On every commit the build server is triggered which publishes a NuGet package of that build. It's version number is the current version of the master branch followed by a dot and the build number. The package is not published to nuget.org but to a AppVeyor feed. There are three ways to add this package to you project.
 
 ## Package Manager Console
 
