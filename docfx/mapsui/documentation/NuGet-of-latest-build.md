@@ -1,8 +1,6 @@
 # NuGet of Latest Build
 
-Every commit triggers the build server which publishes a NuGet package of the latest version followed by a build number.
-
-There are three ways you can add this:
+On every commit the build server is triggered which publishes a NuGet package of that build. It's version number is the current version of the master branch followed by a dash and the build number. There are three ways to add this package to you project.
 
 ## Package Manager Console
 
