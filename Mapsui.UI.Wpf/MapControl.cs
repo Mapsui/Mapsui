@@ -577,7 +577,6 @@ namespace Mapsui.UI.Wpf
         {
             if (_map?.Viewport == null) return;
             if (_map.Viewport.Initialized) return;
-            if (_scale <= 0) return;
 
             if (_map.Viewport.TryInitializeViewport(_map.Envelope, ActualWidth, ActualHeight))
             {
