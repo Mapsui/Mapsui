@@ -11,10 +11,10 @@ using System.Windows.Shapes;
 using Mapsui.Fetcher;
 using Mapsui.Layers;
 using Mapsui.Providers;
-using Mapsui.Rendering;
 using Mapsui.Rendering.Xaml;
 using Mapsui.Utilities;
 using Mapsui.Widgets;
+using SkiaSharp;
 using SkiaSharp.Views.Desktop;
 using SkiaSharp.Views.WPF;
 using HorizontalAlignment = System.Windows.HorizontalAlignment;
@@ -101,15 +101,7 @@ namespace Mapsui.UI.Wpf
                 Visibility = Visibility.Collapsed
             };
         }
-
-        private IRenderer _renderer = new MapRenderer();
-
-        public IRenderer Renderer
-        {
-            get => _renderer;
-            set => _renderer = value;
-        }
-
+        
         private bool IsInBoxZoomMode { get; set; }
 
         public bool ZoomToBoxMode { get; set; }
@@ -171,7 +163,8 @@ namespace Mapsui.UI.Wpf
             return new Canvas
             {
                 VerticalAlignment = VerticalAlignment.Stretch,
-                HorizontalAlignment = HorizontalAlignment.Stretch
+                HorizontalAlignment = HorizontalAlignment.Stretch,
+                Visibility = Visibility.Collapsed
             };
         }
 
@@ -180,8 +173,7 @@ namespace Mapsui.UI.Wpf
             return new SKElement
             {
                 VerticalAlignment = VerticalAlignment.Stretch,
-                HorizontalAlignment = HorizontalAlignment.Stretch,
-                Visibility = Visibility.Collapsed
+                HorizontalAlignment = HorizontalAlignment.Stretch
             };
         }
 
@@ -288,7 +280,7 @@ namespace Mapsui.UI.Wpf
 
         private void ZoomToResolution(double resolution)
         {
-            var current = _currentMousePosition.ApplyScale(_scale);
+            var current = _currentMousePosition;
 
             Map.Viewport.Transform(current.X, current.Y, current.X, current.Y, Map.Viewport.Resolution / resolution);
 
@@ -317,7 +309,6 @@ namespace Mapsui.UI.Wpf
 
         private float DetermineScale()
         {
-
             if (RenderMode == RenderMode.Skia)
             {
                 return DetermineSkiaScale();
@@ -407,15 +398,14 @@ namespace Mapsui.UI.Wpf
             _map.ViewChanged(true);
             OnViewChanged();
             Refresh();
-
-            PushSizeOntoViewport((float)ActualWidth, (float)ActualHeight);
         }
 
         private void UpdateSize()
         {
             if (Map.Viewport != null)
             {
-                PushSizeOntoViewport((float)ActualWidth, (float)ActualHeight);
+                Map.Viewport.Width = ActualWidth;
+                Map.Viewport.Height = ActualHeight;
 
                 ViewportLimiter.Limit(_map.Viewport, _map.ZoomMode, _map.ZoomLimits, _map.Resolutions,
                     _map.PanMode, _map.PanLimits, _map.Envelope);
@@ -477,7 +467,7 @@ namespace Mapsui.UI.Wpf
                 if (IsClick(_currentMousePosition, _downMousePosition))
                 {
                     HandleFeatureInfo(e);
-                    Map.InvokeInfo(touchPosition, _downMousePosition, _scale, Renderer.SymbolCache,
+                    Map.InvokeInfo(touchPosition, _downMousePosition, 1, Renderer.SymbolCache,
                         WidgetTouched, e.ClickCount);
                 }
             }
@@ -490,12 +480,6 @@ namespace Mapsui.UI.Wpf
             if (IsInBoxZoomMode || ZoomToBoxMode)
             {
                 ZoomToBoxMode = false;
-
-                _previousMousePosition.X = _previousMousePosition.X / _scale;
-                _previousMousePosition.Y = _previousMousePosition.Y / _scale;
-                mousePosition.X = mousePosition.X / _scale;
-                mousePosition.Y = mousePosition.Y / _scale;
-
                 
                 var previous = Map.Viewport.ScreenToWorld(_previousMousePosition.X, _previousMousePosition.Y);
                 var current = Map.Viewport.ScreenToWorld(mousePosition.X, mousePosition.Y);
@@ -525,7 +509,7 @@ namespace Mapsui.UI.Wpf
                 // todo: Pass the touchDown position. It needs to be set at touch down.
 
                 // TODO Figure out how to do a number of taps for WPF
-                Map.InvokeInfo(touchPosition, touchPosition, _scale, Renderer.SymbolCache, WidgetTouched, 1);
+                Map.InvokeInfo(touchPosition, touchPosition, 1, Renderer.SymbolCache, WidgetTouched, 1);
             }
         }
 
@@ -594,7 +578,7 @@ namespace Mapsui.UI.Wpf
             if (_map?.Viewport == null) return;
             if (_map.Viewport.Initialized) return;
 
-            if (_map.Viewport.TryInitializeViewport(_map, GetCanvasWidth((float)ActualWidth), GetCanvasHeight((float)ActualHeight)))
+            if (_map.Viewport.TryInitializeViewport(_map.Envelope, ActualWidth, ActualHeight))
             {
                 ViewportLimiter.Limit(_map.Viewport, _map.ZoomMode, _map.ZoomLimits, _map.Resolutions,
                     _map.PanMode, _map.PanLimits, _map.Envelope);
@@ -711,10 +695,10 @@ namespace Mapsui.UI.Wpf
         private void OnManipulationDelta(object sender, ManipulationDeltaEventArgs e)
         {
             var translation = e.DeltaManipulation.Translation;
-            var center = e.ManipulationOrigin.ToMapsui().Offset(translation.X, translation.Y).ApplyScale(_scale);
+            var center = e.ManipulationOrigin.ToMapsui().Offset(translation.X, translation.Y);
             var radius = GetDeltaScale(e.DeltaManipulation.Scale);
             var angle = e.DeltaManipulation.Rotation;
-            var prevCenter = e.ManipulationOrigin.ToMapsui().ApplyScale(_scale);
+            var prevCenter = e.ManipulationOrigin.ToMapsui();
             var prevRadius = 1f;
             var prevAngle = 0f;
 
@@ -775,10 +759,8 @@ namespace Mapsui.UI.Wpf
 
             TryInitializeViewport();
             if (!_map.Viewport.Initialized) return;
-
-            args.Surface.Canvas.Scale(_scale, _scale);
+            args.Surface.Canvas.SetMatrix(SKMatrix.MakeScale(_scale, _scale));
             Renderer.Render(args.Surface.Canvas, Map.Viewport, Map.Layers, Map.Widgets, Map.BackColor);
-
             _invalid = false;
         }
 
@@ -790,7 +772,7 @@ namespace Mapsui.UI.Wpf
 
         public MapInfo GetMapInfo(Geometries.Point screenPosition, int margin = 0)
         {
-            return InfoHelper.GetMapInfo(Map.Viewport, screenPosition, _scale, Map.InfoLayers, Renderer.SymbolCache, margin);
+            return InfoHelper.GetMapInfo(Map.Viewport, screenPosition, 1, Map.InfoLayers, Renderer.SymbolCache, margin);
         }
     }
 }

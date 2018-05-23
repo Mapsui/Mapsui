@@ -55,9 +55,10 @@ namespace Mapsui
             _center.X = viewport._center.X;
             _center.Y = viewport._center.Y;
             if (viewport.Extent!= null) _extent = new BoundingBox(viewport.Extent);
-            if (viewport.WindowExtent != null) _windowExtent = new Quad(
-                viewport.WindowExtent.BottomLeft, viewport.WindowExtent.TopLeft,
-                viewport.WindowExtent.TopRight, viewport.WindowExtent.BottomRight);
+            if (viewport.WindowExtent != null) _windowExtent = new Quad(viewport.WindowExtent);
+            Initialized = viewport.Initialized;
+
+            UpdateExtent();
         }
 
         private void OnViewportChanged([CallerMemberName] string propertyName = null)
@@ -271,34 +272,34 @@ namespace Mapsui
             _modified = false;
         }
 
-        public bool TryInitializeViewport(Map map, double screenWidth, double screenHeight)
+        public bool TryInitializeViewport(BoundingBox envelope, double screenWidth, double screenHeight)
         {
             if (screenWidth.IsNanOrZero()) return false;
             if (screenHeight.IsNanOrZero()) return false;
 
-            if (double.IsNaN(map.Viewport.Resolution)) // only when not set yet
+            if (double.IsNaN(Resolution)) // only when not set yet
             {
-                if (!map.Envelope.IsInitialized()) return false;
-                if (map.Envelope.GetCentroid() == null) return false;
+                if (!envelope.IsInitialized()) return false;
+                if (envelope.GetCentroid() == null) return false;
 
-                if (Math.Abs(map.Envelope.Width) > Constants.Epsilon)
-                    map.Viewport.Resolution = map.Envelope.Width / screenWidth;
+                if (Math.Abs(envelope.Width) > Constants.Epsilon)
+                    Resolution = envelope.Width / screenWidth;
                 else
                     // An envelope width of zero can happen when there is no data in the Maps' layers (yet).
                     // It should be possible to start with an empty map.
-                    map.Viewport.Resolution = Constants.DefaultResolution;
+                    Resolution = Constants.DefaultResolution;
             }
 
-            if (double.IsNaN(map.Viewport.Center.X) || double.IsNaN(map.Viewport.Center.Y)) // only when not set yet
+            if (double.IsNaN(Center.X) || double.IsNaN(Center.Y)) // only when not set yet
             {
-                if (!map.Envelope.IsInitialized()) return false;
-                if (map.Envelope.GetCentroid() == null) return false;
+                if (!envelope.IsInitialized()) return false;
+                if (envelope.GetCentroid() == null) return false;
 
-                map.Viewport.Center = map.Envelope.GetCentroid();
+                Center = envelope.GetCentroid();
             }
 
-            map.Viewport.Width = screenWidth;
-            map.Viewport.Height = screenHeight;
+            Width = screenWidth;
+            Height = screenHeight;
             
             Initialized = true;
             return true;

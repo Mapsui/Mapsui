@@ -33,8 +33,6 @@ using Windows.UI.Xaml.Shapes;
 using Mapsui.Fetcher;
 using Mapsui.Layers;
 using Mapsui.Logging;
-using Mapsui.Rendering;
-using Mapsui.Rendering.Skia;
 using Mapsui.Utilities;
 using Mapsui.Widgets;
 using SkiaSharp.Views.UWP;
@@ -45,7 +43,6 @@ namespace Mapsui.UI.Uwp
 {
     public partial class MapControl : Grid, IMapControl
     {
-        private readonly IRenderer _renderer;
         private readonly Rectangle _bboxRect = CreateSelectRectangle();
         private readonly SKXamlCanvas _renderTarget = CreateRenderTarget();
         private bool _invalid;
@@ -70,7 +67,6 @@ namespace Mapsui.UI.Uwp
             SizeChanged += MapControlSizeChanged;
             CompositionTarget.Rendering += CompositionTarget_Rendering;
 
-            _renderer = new MapRenderer();
             _scale = GetSkiaScale();
 
             PointerWheelChanged += MapControl_PointerWheelChanged;
@@ -93,13 +89,13 @@ namespace Mapsui.UI.Uwp
         private void OnDoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
             var tabPosition = e.GetPosition(this).ToMapsui();
-            Map.InvokeInfo(tabPosition, tabPosition, _scale, _renderer.SymbolCache, WidgetTouched, 2);
+            Map.InvokeInfo(tabPosition, tabPosition, 1, Renderer.SymbolCache, WidgetTouched, 2);
         }
 
         private void OnSingleTapped(object sender, TappedRoutedEventArgs e)
         {
             var tabPosition = e.GetPosition(this).ToMapsui();
-            Map.InvokeInfo(tabPosition, tabPosition, _scale, _renderer.SymbolCache, WidgetTouched, 1);
+            Map.InvokeInfo(tabPosition, tabPosition, 1, Renderer.SymbolCache, WidgetTouched, 1);
         }
 
         private static Rectangle CreateSelectRectangle()
@@ -365,7 +361,7 @@ namespace Mapsui.UI.Uwp
 
         private void _renderTarget_PaintSurface(object sender, SKPaintSurfaceEventArgs e)
         {
-            if (_renderer == null) return;
+            if (Renderer == null) return;
             if (_map == null) return;
             if (!_invalid) return;
 
@@ -373,7 +369,7 @@ namespace Mapsui.UI.Uwp
             if (!_map.Viewport.Initialized) return;
 
             e.Surface.Canvas.Scale(_scale, _scale);
-            _renderer.Render(e.Surface.Canvas, Map.Viewport, _map.Layers, _map.Widgets, _map.BackColor);
+            Renderer.Render(e.Surface.Canvas, Map.Viewport, _map.Layers, _map.Widgets, _map.BackColor);
             _renderTarget.Arrange(new Rect(0, 0, Map.Viewport.Width, Map.Viewport.Height));
             _invalid = false;
 
@@ -475,7 +471,7 @@ namespace Mapsui.UI.Uwp
         {
             if (_map.Viewport.Initialized) return;
 
-            if (_map.Viewport.TryInitializeViewport(_map, ActualWidth, ActualHeight))
+            if (_map.Viewport.TryInitializeViewport(_map.Envelope, ActualWidth, ActualHeight))
             {
                 Map.ViewChanged(true);
                 OnViewportInitialized();
