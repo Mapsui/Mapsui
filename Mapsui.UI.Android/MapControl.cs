@@ -19,7 +19,6 @@ namespace Mapsui.UI.Android
 {
     public partial class MapControl : ViewGroup, IMapControl
     {
-        private Rendering.Skia.MapRenderer _renderer;
         private SKCanvasView _canvas;
         private Map _map;
         private double _innerRotation;
@@ -48,7 +47,6 @@ namespace Mapsui.UI.Android
             AddView(_canvas);
 
             Map = new Map();
-            _renderer = new Rendering.Skia.MapRenderer();
             TryInitializeViewport();
             Touch += MapView_Touch;
 
@@ -65,13 +63,13 @@ namespace Mapsui.UI.Android
         private void OnDoubleTapped(object sender, GestureDetector.DoubleTapEventArgs e)
         {
             var position = GetScreenPosition(e.Event, this);
-            Map.InvokeInfo(position, position, _scale, _renderer.SymbolCache, WidgetTouched, 2);
+            Map.InvokeInfo(position, position, _scale, Renderer.SymbolCache, WidgetTouched, 2);
         }
 
         private void OnSingleTapped(object sender, GestureDetector.SingleTapConfirmedEventArgs e)
         {
             var position = GetScreenPosition(e.Event, this);
-            Map.InvokeInfo(position, position, _scale, _renderer.SymbolCache, WidgetTouched, 1);
+            Map.InvokeInfo(position, position, _scale, Renderer.SymbolCache, WidgetTouched, 1);
         }
 
         protected override void OnSizeChanged(int width, int height, int oldWidth, int oldHeight)
@@ -87,14 +85,14 @@ namespace Mapsui.UI.Android
 
             args.Surface.Canvas.Scale(_scale, _scale); // we can only set the scale in the render loop
 
-            _renderer.Render(args.Surface.Canvas, _map.Viewport, _map.Layers, _map.Widgets, _map.BackColor);
+            Renderer.Render(args.Surface.Canvas, _map.Viewport, _map.Layers, _map.Widgets, _map.BackColor);
         }
 
         private void TryInitializeViewport()
         {
             if (_map.Viewport.Initialized) return;
 
-            if (_map.Viewport.TryInitializeViewport(_map, GetCanvasWidth(Width), GetCanvasHeight(Height)))
+            if (_map.Viewport.TryInitializeViewport(_map.Envelope, GetCanvasWidth(Width), GetCanvasHeight(Height)))
             {
                 Map.ViewChanged(true);
                 OnViewportInitialized();

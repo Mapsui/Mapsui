@@ -3,6 +3,8 @@ using Mapsui.Geometries.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Mapsui.Rendering;
+using Mapsui.Rendering.Skia;
 
 #if __ANDROID__
 namespace Mapsui.UI.Android
@@ -137,6 +139,9 @@ namespace Mapsui.UI.Wpf
         /// With how many degrees from 0 should map snap to 0 degrees
         /// </summary>
         public double ReSnapRotationDegrees { get; set; }
+
+
+        public IRenderer Renderer { get; set; } = new MapRenderer();
 
         /// <summary>
         /// Event handlers
@@ -372,7 +377,7 @@ namespace Mapsui.UI.Wpf
             if (args.Handled)
                 return true;
 
-            var tapWasHandled = Map.InvokeInfo(screenPosition, screenPosition, _scale, _renderer.SymbolCache, WidgetTouched, numOfTaps);
+            var tapWasHandled = Map.InvokeInfo(screenPosition, screenPosition, _scale, Renderer.SymbolCache, WidgetTouched, numOfTaps);
 
             if (!tapWasHandled)
             {
@@ -396,7 +401,7 @@ namespace Mapsui.UI.Wpf
             if (args.Handled)
                 return true;
 
-            return Map.InvokeInfo(screenPosition, screenPosition, _scale, _renderer.SymbolCache, WidgetTouched, 1);
+            return Map.InvokeInfo(screenPosition, screenPosition, _scale, Renderer.SymbolCache, WidgetTouched, 1);
         }
 
         /// <summary>
@@ -564,7 +569,7 @@ namespace Mapsui.UI.Wpf
         }
 
         void PushSizeOntoViewport(float mapControlWidth, float mapControlHeight)
-        {
+        {   // Don't call the method from wpf
             if (Map != null)
             {
                 Map.Viewport.Width = GetCanvasWidth(mapControlWidth);
