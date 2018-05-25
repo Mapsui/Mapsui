@@ -105,8 +105,6 @@ namespace Mapsui.UI.iOS
             TryInitializeViewport();
             if (!_map.Viewport.Initialized) return;
 
-            PushSizeOntoViewport((float)Frame.Width, (float)Frame.Height); // This should not be necessary here if it is done on all events where size changes. todo: test without
-
             args.Surface.Canvas.Scale(_scale, _scale);  // we can only set the scale in the render loop
 
             Renderer.Render(args.Surface.Canvas, _map.Viewport, _map.Layers, _map.Widgets, _map.BackColor);
@@ -116,7 +114,7 @@ namespace Mapsui.UI.iOS
         {
             if (_map.Viewport.Initialized) return;
 
-            if (_map.Viewport.TryInitializeViewport(_map.Envelope, GetCanvasWidth((float)Frame.Width), GetCanvasHeight((float)Frame.Height)))
+            if (_map.Viewport.TryInitializeViewport(_map.Envelope, (float)Frame.Width, (float)Frame.Height))
             {
                 Map.ViewChanged(true);
                 OnViewportInitialized();
@@ -319,7 +317,8 @@ namespace Mapsui.UI.iOS
 
                 if (_map?.Viewport == null) return;
 
-                PushSizeOntoViewport((float)Frame.Width, (float)Frame.Height);
+                _map.Viewport.Width = _canvas.Frame.Width;
+                _map.Viewport.Height = _canvas.Frame.Height;
 
                 Refresh();
             }
@@ -333,7 +332,8 @@ namespace Mapsui.UI.iOS
 
             if (_map?.Viewport == null) return;
 
-            PushSizeOntoViewport((float)Frame.Width, (float)Frame.Height);
+            _map.Viewport.Width = _canvas.Frame.Width;
+            _map.Viewport.Height = _canvas.Frame.Height;
 
             Refresh();
         }
