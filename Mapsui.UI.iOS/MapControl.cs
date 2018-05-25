@@ -85,7 +85,7 @@ namespace Mapsui.UI.iOS
         private void OnDoubleTapped(UITapGestureRecognizer gesture)
         {
             var position = GetScreenPosition(gesture.LocationInView(this));
-            var tapWasHandled = Map.InvokeInfo(position, position, _scale, Renderer.SymbolCache, WidgetTouched, 2);
+            var tapWasHandled = Map.InvokeInfo(position, position, 1, Renderer.SymbolCache, WidgetTouched, 2);
 
             if (!tapWasHandled)
             {
@@ -97,15 +97,13 @@ namespace Mapsui.UI.iOS
         private void OnSingleTapped(UITapGestureRecognizer gesture)
         {
             var position = GetScreenPosition(gesture.LocationInView(this));
-            Map.InvokeInfo(position, position, _scale, Renderer.SymbolCache, WidgetTouched, 1);
+            Map.InvokeInfo(position, position, 1, Renderer.SymbolCache, WidgetTouched, 1);
         }
 
         void OnPaintSurface(object sender, SKPaintGLSurfaceEventArgs args)
         {
             TryInitializeViewport();
             if (!_map.Viewport.Initialized) return;
-
-            PushSizeOntoViewport((float)Frame.Width, (float)Frame.Height); // This should not be necessary here if it is done on all events where size changes. todo: test without
 
             args.Surface.Canvas.Scale(_scale, _scale);  // we can only set the scale in the render loop
 
@@ -116,7 +114,7 @@ namespace Mapsui.UI.iOS
         {
             if (_map.Viewport.Initialized) return;
 
-            if (_map.Viewport.TryInitializeViewport(_map.Envelope, GetCanvasWidth((float)Frame.Width), GetCanvasHeight((float)Frame.Height)))
+            if (_map.Viewport.TryInitializeViewport(_map.Envelope, (float)_canvas.Frame.Width, (float)_canvas.Frame.Height))
             {
                 Map.ViewChanged(true);
                 OnViewportInitialized();
@@ -168,7 +166,7 @@ namespace Mapsui.UI.iOS
 
                 double rotationDelta = 0;
 
-                if (RotationLock)
+                if (!RotationLock)
                 {
                     _innerRotation += angle - prevAngle;
                     _innerRotation %= 360;
@@ -319,7 +317,8 @@ namespace Mapsui.UI.iOS
 
                 if (_map?.Viewport == null) return;
 
-                PushSizeOntoViewport((float)Frame.Width, (float)Frame.Height);
+                _map.Viewport.Width = _canvas.Frame.Width;
+                _map.Viewport.Height = _canvas.Frame.Height;
 
                 Refresh();
             }
@@ -333,7 +332,8 @@ namespace Mapsui.UI.iOS
 
             if (_map?.Viewport == null) return;
 
-            PushSizeOntoViewport((float)Frame.Width, (float)Frame.Height);
+            _map.Viewport.Width = _canvas.Frame.Width;
+            _map.Viewport.Height = _canvas.Frame.Height;
 
             Refresh();
         }
