@@ -40,7 +40,7 @@ namespace Mapsui.Samples.Android
             mapControl.Map = InfoLayersSample.CreateMap();
             mapControl.Map.Info+= MapOnInfo;
             mapControl.Map.Viewport.ViewportChanged += ViewportOnViewportChanged;
-            mapControl.RotationLock = true;
+            mapControl.RotationLock = false;
             mapControl.UnSnapRotationDegrees = 30;
             mapControl.ReSnapRotationDegrees = 5;
 

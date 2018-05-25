@@ -168,7 +168,7 @@ namespace Mapsui.UI.iOS
 
                 double rotationDelta = 0;
 
-                if (RotationLock)
+                if (!RotationLock)
                 {
                     _innerRotation += angle - prevAngle;
                     _innerRotation %= 360;
