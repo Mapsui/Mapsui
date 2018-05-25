@@ -85,7 +85,7 @@ namespace Mapsui.UI.iOS
         private void OnDoubleTapped(UITapGestureRecognizer gesture)
         {
             var position = GetScreenPosition(gesture.LocationInView(this));
-            var tapWasHandled = Map.InvokeInfo(position, position, _scale, Renderer.SymbolCache, WidgetTouched, 2);
+            var tapWasHandled = Map.InvokeInfo(position, position, 1, Renderer.SymbolCache, WidgetTouched, 2);
 
             if (!tapWasHandled)
             {
@@ -97,7 +97,7 @@ namespace Mapsui.UI.iOS
         private void OnSingleTapped(UITapGestureRecognizer gesture)
         {
             var position = GetScreenPosition(gesture.LocationInView(this));
-            Map.InvokeInfo(position, position, _scale, Renderer.SymbolCache, WidgetTouched, 1);
+            Map.InvokeInfo(position, position, 1, Renderer.SymbolCache, WidgetTouched, 1);
         }
 
         void OnPaintSurface(object sender, SKPaintGLSurfaceEventArgs args)
@@ -114,7 +114,7 @@ namespace Mapsui.UI.iOS
         {
             if (_map.Viewport.Initialized) return;
 
-            if (_map.Viewport.TryInitializeViewport(_map.Envelope, (float)Frame.Width, (float)Frame.Height))
+            if (_map.Viewport.TryInitializeViewport(_map.Envelope, (float)_canvas.Frame.Width, (float)_canvas.Frame.Height))
             {
                 Map.ViewChanged(true);
                 OnViewportInitialized();
