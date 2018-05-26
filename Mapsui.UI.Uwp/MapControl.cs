@@ -491,7 +491,10 @@ namespace Mapsui.UI.Uwp
 
         private void WidgetTouched(IWidget widget, Geometries.Point screenPosition)
         {
-            Task.Run(() => Launcher.LaunchUriAsync(new Uri(((Hyperlink)widget).Url)));
+            if (widget is Hyperlink hyperlink)
+            {
+                Task.Run(() => Launcher.LaunchUriAsync(new Uri(hyperlink.Url)));
+            }
 
             widget.HandleWidgetTouched(screenPosition);
         }
