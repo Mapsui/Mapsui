@@ -47,9 +47,15 @@
     <EmbeddedResource Include="Images\netherlands.jpg" />
     <EmbeddedResource Include="Images\osm-liberty.png" />
     <EmbeddedResource Include="Images\Pin.svg" />
-    <Content Include="MbTiles\el-molar.mbtiles" />
-    <Content Include="MbTiles\torrejon-de-ardoz.mbtiles" />
-    <Content Include="MbTiles\world.mbtiles" />
+    <Content Include="MbTiles\el-molar.mbtiles">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="MbTiles\torrejon-de-ardoz.mbtiles">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="MbTiles\world.mbtiles">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup><!--<PackageReference Include="" Version=""/>-->
