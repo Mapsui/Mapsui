@@ -7,8 +7,7 @@ namespace Mapsui.Rendering.Skia
 {
     public static class BitmapHelper
     {
-        private static readonly SKPaint OpacityPaint = new SKPaint{ FilterQuality = SKFilterQuality.Low }; // Reuse for performance. Only for opacity
-        private static readonly SKPaint Paint = new SKPaint{ FilterQuality = SKFilterQuality.Low };
+        private static readonly SKPaint Paint = new SKPaint { FilterQuality = SKFilterQuality.Low }; // Should never be mutated
 
         public static BitmapInfo LoadBitmap(object bitmapStream)
         {
@@ -25,16 +24,16 @@ namespace Mapsui.Rendering.Skia
                     var svg = new SkiaSharp.Extended.Svg.SKSvg();
                     svg.Load(stream);
 
-                    return new BitmapInfo {Svg = svg};
+                    return new BitmapInfo { Svg = svg };
                 }
 
                 var image = SKImage.FromEncodedData(SKData.CreateCopy(stream.ToBytes()));
-                return new BitmapInfo {Bitmap = image};
+                return new BitmapInfo { Bitmap = image };
             }
 
             if (bitmapStream is Sprite sprite)
             {
-                return new BitmapInfo() {Sprite = sprite};
+                return new BitmapInfo() { Sprite = sprite };
             }
 
             return null;
@@ -112,21 +111,31 @@ namespace Mapsui.Rendering.Skia
 
         public static void RenderRaster(SKCanvas canvas, SKImage bitmap, SKRect rect, float layerOpacity)
         {
-            if (Math.Abs(layerOpacity - 1) > Utilities.Constants.Epsilon)
-            {
-                OpacityPaint.Color = new SKColor(255, 255, 255, (byte)(255 * layerOpacity));
-                canvas.DrawImage(bitmap, rect, OpacityPaint);
-            }
+            if (IsTransparent(layerOpacity))
+                using (var opacityPaint = CreateOpacityPaint(layerOpacity))
+                    canvas.DrawImage(bitmap, rect, opacityPaint);
             else
-            {
                 canvas.DrawImage(bitmap, rect, Paint);
-            }
         }
 
-        public static void RenderBitmap(SKCanvas canvas, SKImage bitmap, SKRect rect, float opacity = 1f)
+        private static bool IsTransparent(float layerOpacity)
         {
-            Paint.Color = opacity == 1 ? SKColors.White : new SKColor(255, 255, 255, (byte)(255 * opacity));
-            canvas.DrawImage(bitmap, rect, Paint);
+            return Math.Abs(layerOpacity - 1) > Utilities.Constants.Epsilon;
+        }
+
+        private static SKPaint CreateOpacityPaint(float layerOpacity)
+        {
+            return new SKPaint { FilterQuality = SKFilterQuality.Low,
+                Color = new SKColor(255, 255, 255, (byte)(255 * layerOpacity))};
+        }
+
+        public static void RenderBitmap(SKCanvas canvas, SKImage bitmap, SKRect rect, float layerOpacity = 1f)
+        {
+            if (IsTransparent(layerOpacity))
+                using (var opacityPaint = CreateOpacityPaint(layerOpacity))
+                    canvas.DrawImage(bitmap, rect, opacityPaint);
+            else
+                canvas.DrawImage(bitmap, rect, Paint);
         }
     }
 }
