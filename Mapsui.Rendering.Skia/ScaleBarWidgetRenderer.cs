@@ -8,7 +8,6 @@ namespace Mapsui.Rendering.Skia
     {
         private const float StrokeExternal = 4;
         private const float StrokeInternal = 2;
-
         private static SKPaint _paintScaleBar;
         private static SKPaint _paintScaleBarStroke;
         private static SKPaint _paintScaleText;
@@ -17,10 +16,7 @@ namespace Mapsui.Rendering.Skia
         public static void Draw(SKCanvas canvas, double screenWidth, double screenHeight, ScaleBarWidget scaleBar,
             float layerOpacity)
         {
-            // If this widget belongs to no viewport, than stop drawing
-            if (scaleBar.Map?.CRS == null) return;
-            if (scaleBar.Map.Transformation == null) return;
-            if (scaleBar.Map.Transformation.IsProjectionSupported(scaleBar.Map.CRS, "EPSG:4326") != true) return;
+            if (!scaleBar.CanTransform()) return;
 
             // If this is the first time, we call this renderer, ...
             if (_paintScaleBar == null)

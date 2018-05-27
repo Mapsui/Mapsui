@@ -3,6 +3,7 @@ using Mapsui.Styles;
 using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using Mapsui.Logging;
 
 namespace Mapsui.Widgets.ScaleBar
 {
@@ -44,7 +45,7 @@ namespace Mapsui.Widgets.ScaleBar
 
         public ScaleBarWidget(Map map)
         {
-            Map = map;
+            Map = map; // todo: Use Transformer instead of Map to limit the dependencies
             
             HorizontalAlignment = DefaultScaleBarHorizontalAlignment;
             VerticalAlignment = DefaultScaleBarVerticalAlignment;
@@ -460,6 +461,29 @@ namespace Mapsui.Widgets.ScaleBar
         public override void HandleWidgetTouched(Point position)
         {
         }
+
+        public bool CanTransform()
+        {
+            if (Map?.CRS == null) 
+            {
+                Logger.Log(LogLevel.Warning, $"ScaleBarWidget can not draw because the {nameof(Map)}.{nameof(Map.CRS)} is not set");
+                return false;
+            }
+
+            if (Map.Transformation == null)
+            {
+                Logger.Log(LogLevel.Warning, $"ScaleBarWidget can not draw because the {nameof(Map)}.{nameof(Map.Transformation)} is not set");
+                return false;
+            }
+
+            if (Map.Transformation.IsProjectionSupported(Map.CRS, "EPSG:4326") != true)
+            {
+                Logger.Log(LogLevel.Warning, $"ScaleBarWidget can not draw because the projection between {Map.CRS} and EPSG:4326 is not supported");
+                return false;
+            }
+            return true;
+        }
+
 
         internal void OnPropertyChanged([CallerMemberName] string name = "")
         {
