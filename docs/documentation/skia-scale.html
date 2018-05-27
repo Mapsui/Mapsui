@@ -71,13 +71,19 @@
 
 <p>We have a separate page about this topic because skia scale has caused some confusion in the past and bugs as a consequence. </p>
 <h2 id="why-skia-scale">Why skia scale?</h2>
-<p>Modern devices have a very high resolution. If we would draw onto the skia canvas using device pixels as coordinates the fonts would become tiny and unreadable and lines would become very thin. To correct for this we use a scale factor. We determine the scale factor using information about the current device.</p>
+<p>Modern devices have a very high resolution. If we would draw onto the skia canvas using device pixels as coordinates the fonts would become tiny and unreadable and lines would become very thin. To correct for this a skale factor is used. Those scaled-up coordinates are called logical pixels. SkiaSharp uses this scale factor an Mapsui needs to take this into account. This is why we need to request the scale factor from the system.</p>
 <h2 id="how-does-it-work">How does it work?</h2>
 <p>The skia surface has it&#39;s own scale. We set this to an appropriate scale factor. As a result the coordinates of the skia surface are different than that of it&#39;s parent container. We have to correct for this on a number of points, like in rendering, requesting map info and manipulation.</p>
 <h2 id="what-do-we-do">What do we do?</h2>
 <p>We take skia scale into account on a number of places in our code:</p>
+<p>On iOS, WPF and UWP:</p>
 <ul>
-<li>We determine the skia scale while initializing (or when switching from wpf to skia rendering)</li>
+<li>We determine the skia scale while initializing (or when switching from wpf to skia rendering)ent&#39;s size changes.</li>
+<li>We set the skia scale on the skia surface. This needs to be done in the render loop because this is the only place where we have access to the surface</li>
+</ul>
+<p>On Android:</p>
+<ul>
+<li>We determine the skia scale while initializing</li>
 <li>We initialze the viewport width and height to the skia width and height (on TryInitializeViewport).</li>
 <li>We set the viewport width and height to the skia width and height whenever the containing parent&#39;s size changes.</li>
 <li>We set the skia scale on the skia surface. This needs to be done in the render loop because this is the only place where we have access to the surface</li>
