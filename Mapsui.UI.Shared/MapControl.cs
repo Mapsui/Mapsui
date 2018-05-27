@@ -547,34 +547,5 @@ namespace Mapsui.UI.Wpf
                 temp.AbortFetch();
             }
         }
-
-        /// <summary>
-        /// The canvas scale can only be set in the render loop. Before that
-        /// it's width will be 0. So we use this method instead.
-        /// </summary>
-        /// <returns>The width that the canvas will have after initialization</returns>
-        private float GetCanvasWidth(float width)
-        {
-            return width / _scale;
-        }
-
-        /// <summary>
-        /// The canvas scale can only be set in the render loop. Before that
-        /// it's height will be 0. So we use this method instead.
-        /// </summary>
-        /// <returns>The height that the canvas will have after initialization</returns>
-        private float GetCanvasHeight(float height)
-        {
-            return height / _scale;
-        }
-
-        void PushSizeOntoViewport(float mapControlWidth, float mapControlHeight)
-        {   // Don't call the method from wpf
-            if (Map != null)
-            {
-                Map.Viewport.Width = GetCanvasWidth(mapControlWidth);
-                Map.Viewport.Height = GetCanvasHeight(mapControlHeight);
-            }
-        }
     }
 }

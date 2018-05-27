@@ -92,7 +92,7 @@ namespace Mapsui.UI.Android
         {
             if (_map.Viewport.Initialized) return;
 
-            if (_map.Viewport.TryInitializeViewport(_map.Envelope, GetCanvasWidth(Width), GetCanvasHeight(Height)))
+            if (_map.Viewport.TryInitializeViewport(_map.Envelope, ToLogicalPixels(Width), ToLogicalPixels(Height)))
             {
                 Map.ViewChanged(true);
                 OnViewportInitialized();
@@ -225,7 +225,9 @@ namespace Mapsui.UI.Android
             var result = new List<Geometries.Point>();
             for (var i = 0; i < me.PointerCount; i++)
             {
-                result.Add(new Geometries.Point((me.GetX(i) - view.Left) / _scale, (me.GetY(i) - view.Top) / _scale));
+                result.Add(new Geometries.Point(
+                    ToLogicalPixels(me.GetX(i) - view.Left), 
+                    ToLogicalPixels(me.GetY(i) - view.Top)));
             }
             return result;
         }
@@ -348,6 +350,26 @@ namespace Mapsui.UI.Android
             }
 
             widget.HandleWidgetTouched(screenPosition);
+        }
+
+        /// <summary>
+        /// In native Android touch positions are in device pixels whereas the canvas needs
+        /// to be drawn in logical pixels (otherwise labels on raster tiles will be unreadable
+        /// and symbols will be too small). This method converts device pixels to logical pixels.
+        /// </summary>
+        /// <returns>The device pixels given as input translated to device pixels.</returns>
+        private float ToLogicalPixels(float devicePixels)
+        {
+            return devicePixels / _scale;
+        }
+
+        void PushSizeOntoViewport(float mapControlWidth, float mapControlHeight)
+        {
+            if (Map != null)
+            {
+                Map.Viewport.Width = ToLogicalPixels(mapControlWidth);
+                Map.Viewport.Height = ToLogicalPixels(mapControlHeight);
+            }
         }
     }
 }
