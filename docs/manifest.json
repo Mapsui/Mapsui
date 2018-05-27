@@ -9,7 +9,7 @@
       "output": {
         ".html": {
           "relative_path": "api/index.html",
-          "hash": "paqT+HqlnRC1fMOjhwj82Q=="
+          "hash": "Kq35YwpQ9yd+SSeTkYNXHQ=="
         }
       },
       "is_incremental": false,
@@ -24,7 +24,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/Async-Fetching.html",
-          "hash": "KdCeUuqOevaT66bGcVCXyw=="
+          "hash": "fmxMgh4JNa4Vcj3Gotntpg=="
         }
       },
       "is_incremental": false,
@@ -36,7 +36,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/Contributors-Guidelines.html",
-          "hash": "u9jLfk/uzS2/k8fXyoELbg=="
+          "hash": "z7ch2idiPVG4XaPaCEVEZA=="
         }
       },
       "is_incremental": false,
@@ -48,7 +48,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/Development-constraints.html",
-          "hash": "DPex9VlkY1VgQRJ4pkM0xg=="
+          "hash": "xwbI/RyXndLlyC+7OMEN8A=="
         }
       },
       "is_incremental": false,
@@ -60,7 +60,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/Home.html",
-          "hash": "rXfuJBZ7DAukHPVj1Ls+Ig=="
+          "hash": "WtKzYMYZ9vlM7pKbqCFyxw=="
         }
       },
       "is_incremental": false,
@@ -72,7 +72,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/How-to-work-with-Mapsui.html",
-          "hash": "KDgjGwRO7QjJTocULSL08Q=="
+          "hash": "GlN3wX7oLZBFsUM7Vy3+QA=="
         }
       },
       "is_incremental": false,
@@ -84,7 +84,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/Mapsui-2.0.html",
-          "hash": "wcEgPb8XPHIltwv8knuIbQ=="
+          "hash": "WCBd9ovdPl/ifkobxn4Img=="
         }
       },
       "is_incremental": false,
@@ -96,7 +96,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/Mapsui-Components.html",
-          "hash": "bKLAGum0my4EzvKuwlIWVw=="
+          "hash": "Zvxrdozpvw5APuG/rwqK+g=="
         }
       },
       "is_incremental": false,
@@ -108,7 +108,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/NuGet-of-latest-build.html",
-          "hash": "oSmfFZczTmnvAE1U1iOPmw=="
+          "hash": "2rWSwWxbky8PXC7evMieYA=="
         }
       },
       "is_incremental": false,
@@ -120,7 +120,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/Renderers.html",
-          "hash": "vEt4YZ/V8xS5ihqgv5PQPA=="
+          "hash": "ZpqkbTWJlN69Jv1f8RJS9w=="
         }
       },
       "is_incremental": false,
@@ -132,7 +132,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/Rendering-Tests.html",
-          "hash": "4SMUFBGyEwSGAUuDkJpRJg=="
+          "hash": "RoGLfBCXflXddg2Uvirw5A=="
         }
       },
       "is_incremental": false,
@@ -144,7 +144,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/Roadmap.html",
-          "hash": "BNDv6xwsjQfBccErtcdAOA=="
+          "hash": "2glWlW8qOe0FsYjeEkxhXg=="
         }
       },
       "is_incremental": false,
@@ -156,7 +156,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/documentation.html",
-          "hash": "LysJei89cQQJLV6JaqbyIA=="
+          "hash": "VdgUKyUH+9olBBBEwSXYJw=="
         }
       },
       "is_incremental": false,
@@ -168,7 +168,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/getting-started-android.html",
-          "hash": "Nj/vHz6gpS2bp7SQhA77OA=="
+          "hash": "PkhCvzg/lyi+NpqAIz3PuQ=="
         }
       },
       "is_incremental": false,
@@ -180,7 +180,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/getting-started-wpf.html",
-          "hash": "axwdhI4PBO3kVm/ZyUrRSw=="
+          "hash": "p07iIKagOcil9g1kRLoRNA=="
         }
       },
       "is_incremental": false,
@@ -192,7 +192,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/samples.html",
-          "hash": "241G2Ko2ImmnklPC9eibOQ=="
+          "hash": "xDeGhR3R7FDEuZSuvtPNBg=="
         }
       },
       "is_incremental": false,
@@ -204,7 +204,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/skia-scale.html",
-          "hash": "MXkEj6c5DwfvFd0qMdTB4g=="
+          "hash": "Pt7SRXezCZMj/f35aSkkXw=="
         }
       },
       "is_incremental": false,
@@ -228,7 +228,7 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "QHksF9WNAwpWoPrug+jgew=="
+          "hash": "TnfzGgF0OL7zxGug/etglw=="
         }
       },
       "is_incremental": false,
