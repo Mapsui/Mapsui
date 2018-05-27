@@ -39,7 +39,7 @@
     "resource": [
       {
         "files": [
-          "documentation/images/**"
+          "images/**"
         ],
         "exclude": [
           "obj/**",
