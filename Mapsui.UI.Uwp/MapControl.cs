@@ -82,8 +82,7 @@ namespace Mapsui.UI.Uwp
             var orientationSensor = SimpleOrientationSensor.GetDefault();
             if (orientationSensor != null)
                 orientationSensor.OrientationChanged += (sender, args) =>
-                    Task.Run(() => Dispatcher.RunAsync(CoreDispatcherPriority.Normal, Refresh))
-                        .ConfigureAwait(false);
+                    Task.Run(() => Dispatcher.RunAsync(CoreDispatcherPriority.Normal, Refresh));
         }
 
         private void OnDoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
@@ -314,14 +313,13 @@ namespace Mapsui.UI.Uwp
             Map.Viewport.Width = ActualWidth;
             Map.Viewport.Height = ActualHeight;
         }
-
+        
         public void MapDataChanged(object sender, DataChangedEventArgs e)
         {
             if (!Dispatcher.HasThreadAccess)
             {
                 Task.Run(() => Dispatcher.RunAsync(
-                    CoreDispatcherPriority.Normal, () => MapDataChanged(sender, e)))
-                    .ConfigureAwait(false);
+                    CoreDispatcherPriority.Normal, () => MapDataChanged(sender, e)));
             }
             else
             {
