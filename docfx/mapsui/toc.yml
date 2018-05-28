@@ -1,5 +1,5 @@
 - name: Documentation
   href: documentation/
-- name: Api
+- name: Mapsui Api
   href: api/
   homepage: api/index.md
