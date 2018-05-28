@@ -212,7 +212,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/skia-scale.html",
-          "hash": "vQzSYcp4fWeG9MP6iBvxdg=="
+          "hash": "rAlvmz4IcVakge0v2ppQTg=="
         }
       },
       "is_incremental": false,
@@ -301,13 +301,13 @@
           "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build"
         },
-        "ConceptualDocumentProcessor": {
-          "can_incremental": false,
-          "incrementalPhase": "build"
-        },
         "ResourceDocumentProcessor": {
           "can_incremental": false,
           "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build"
+        },
+        "ConceptualDocumentProcessor": {
+          "can_incremental": false,
           "incrementalPhase": "build"
         }
       }
