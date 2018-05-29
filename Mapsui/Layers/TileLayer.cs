@@ -1,3 +1,5 @@
+// TODO: There are parts talking about SharpMap
+
 // Copyright 2008 - Paul den Dulk (Geodan)
 // 
 // This file is part of SharpMap.
@@ -32,6 +34,9 @@ using Mapsui.Widgets;
 
 namespace Mapsui.Layers
 {
+    /// <summary>
+    /// Layer, which displays a map consisting of individual tiles
+    /// </summary>
     public class TileLayer : BaseLayer
     {
         private ITileSource _tileSource;
@@ -42,8 +47,10 @@ namespace Mapsui.Layers
         private readonly TileFetchDispatcher _tileFetchDispatcher;
         private readonly FetchMachine _fetchMachine;
 
-        readonly MemoryCache<Feature> _memoryCache;
-        
+        /// <summary>
+        /// Create tile layer from tile source initializer function
+        /// </summary>
+        /// <param name="tileSourceInitializer">Initializer to create a tile layer source</param>
         public TileLayer(Func<ITileSource> tileSourceInitializer) : this()
         {
             Task.Run(() =>
@@ -59,27 +66,101 @@ namespace Mapsui.Layers
             });
         }
 
+        /// <summary>
+        /// Create tile layer for given tile source
+        /// </summary>
+        /// <param name="source">Tile source to use for this layer</param>
+        /// <param name="minTiles">Minimum number of tiles to cache</param>
+        /// <param name="maxTiles">Maximum number of tiles to cache</param>
+        /// <param name="maxRetries">Unused</param>
+        /// <param name="fetchStrategy">Strategy to get list of tiles for given extent</param>
+        /// <param name="renderFetchStrategy"></param>
+        /// <param name="minExtraTiles">Number of minimum extra tiles for memory cache</param>
+        /// <param name="maxExtraTiles">Number of maximum extra tiles for memory cache</param>
         // ReSharper disable once UnusedParameter.Local // Is public and won't break this now
         public TileLayer(ITileSource source = null, int minTiles = 200, int maxTiles = 300, int maxRetries = 2, IFetchStrategy fetchStrategy = null,
             IRenderGetStrategy renderFetchStrategy = null, int minExtraTiles = -1, int maxExtraTiles = -1)
         {
-            _memoryCache = new MemoryCache<Feature>(minTiles, maxTiles);
+            MemoryCache = new MemoryCache<Feature>(minTiles, maxTiles);
             Style = new VectorStyle { Outline = { Color = Color.FromArgb(0, 0, 0, 0) } }; // initialize with transparent outline
             var fetchStrategy1 = fetchStrategy ?? new MinimalFetchStrategy();
             _renderStrategy = renderFetchStrategy ?? new RenderGetStrategy();
             _minExtraTiles = minExtraTiles;
             _maxExtraTiles = maxExtraTiles;
-            _tileFetchDispatcher = new TileFetchDispatcher(_memoryCache, fetchStrategy1);
+            _tileFetchDispatcher = new TileFetchDispatcher(MemoryCache, fetchStrategy1);
             _tileFetchDispatcher.DataChanged += TileFetchDispatcherOnDataChanged;
             _tileFetchDispatcher.PropertyChanged += TileFetchDispatcherOnPropertyChanged;
             _fetchMachine = new FetchMachine(_tileFetchDispatcher);
             SetTileSource(source);
         }
-        
+
+        /// <summary>
+        /// Tile source for this layer
+        /// </summary>
+        public ITileSource TileSource
+        {
+            get => _tileSource;
+            set
+            {
+                SetTileSource(value);
+                OnPropertyChanged(nameof(TileSource));
+            }
+        }
+
+        /// <summary>
+        /// Memory cache for this layer
+        /// </summary>
+        public MemoryCache<Feature> MemoryCache { get; }
+
+        /// <inheritdoc />
+        public override IReadOnlyList<double> Resolutions => _tileSource?.Schema?.Resolutions.Select(r => r.Value.UnitsPerPixel).ToList();
+
+        /// <inheritdoc />
+        public override BoundingBox Envelope => _tileSource?.Schema?.Extent.ToBoundingBox();
+
+        /// <inheritdoc />
+        public override IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
+        {
+            if (_tileSource?.Schema == null) return Enumerable.Empty<IFeature>();
+            UpdateMemoryCacheMinAndMax();
+            return _renderStrategy.GetFeatures(box, resolution, _tileSource?.Schema, MemoryCache);
+        }
+
+        /// <summary>
+        /// Aborts the tile fetches that are in progress. If this method is not called
+        /// the threads will terminate naturally. It will just take a little longer.
+        /// </summary>
+        public override void AbortFetch()
+        {
+            _fetchMachine?.Stop();
+        }
+
+        /// <inheritdoc />
+        public override void ClearCache()
+        {
+            MemoryCache.Clear();
+        }
+
+        /// <inheritdoc />
+        public override void ViewChanged(bool majorChange, BoundingBox extent, double resolution)
+        {
+            if (Enabled && extent.GetArea() > 0 && _tileFetchDispatcher != null && MaxVisible > resolution && MinVisible < resolution)
+            {
+                _tileFetchDispatcher.SetViewport(extent, resolution);
+                _fetchMachine.Start();
+            }
+        }
+
+        /// <inheritdoc />
+        public override bool? IsCrsSupported(string crs)
+        {
+            return (string.Equals(ToSimpleEpsgCode(), crs, StringComparison.CurrentCultureIgnoreCase));
+        }
+
         private void SetTileSource(ITileSource tileSource)
 		{
             _fetchMachine.Stop();
-			_memoryCache.Clear();
+			MemoryCache.Clear();
 		    _tileFetchDispatcher.TileSource = tileSource;
             _tileSource = tileSource;
 		    OnPropertyChanged(nameof(Envelope));
@@ -100,58 +181,18 @@ namespace Mapsui.Layers
             }
         }
 
-        public ITileSource TileSource
-        {
-            get => _tileSource;
-            set
-            {
-                SetTileSource(value);
-                OnPropertyChanged(nameof(TileSource));
-            }
-        }
-
-        public override BoundingBox Envelope => _tileSource?.Schema?.Extent.ToBoundingBox();
-
-        public override void ViewChanged(bool majorChange, BoundingBox extent, double resolution)
-        {
-            if (Enabled && extent.GetArea() > 0 && _tileFetchDispatcher != null && MaxVisible > resolution && MinVisible < resolution)
-            {
-                _tileFetchDispatcher.SetViewport(extent, resolution);
-                _fetchMachine.Start();
-            }
-        }
-
         private void UpdateMemoryCacheMinAndMax()
         {
             if (_minExtraTiles < 0 || _maxExtraTiles < 0 
                 || _numberTilesNeeded == _tileFetchDispatcher.NumberTilesNeeded) return;
             _numberTilesNeeded = _tileFetchDispatcher.NumberTilesNeeded;
-            _memoryCache.MinTiles = _numberTilesNeeded + _minExtraTiles;
-            _memoryCache.MaxTiles = _numberTilesNeeded + _maxExtraTiles;
+            MemoryCache.MinTiles = _numberTilesNeeded + _minExtraTiles;
+            MemoryCache.MaxTiles = _numberTilesNeeded + _maxExtraTiles;
         }
-
-        public override void ClearCache()
-        {
-            _memoryCache.Clear();
-        }
-
-        public MemoryCache<Feature> MemoryCache => _memoryCache;
 
         private void TileFetchDispatcherOnDataChanged(object sender, DataChangedEventArgs e)
         {
             OnDataChanged(e);
-        }
-
-        public override IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
-        {
-            if (_tileSource?.Schema == null) return Enumerable.Empty<IFeature>();
-            UpdateMemoryCacheMinAndMax();
-            return _renderStrategy.GetFeatures(box, resolution, _tileSource?.Schema, _memoryCache);
-        }
-
-        public override bool? IsCrsSupported(string crs)
-        {
-            return (string.Equals(ToSimpleEpsgCode(), crs, StringComparison.CurrentCultureIgnoreCase));
         }
 
         private string ToSimpleEpsgCode()
@@ -160,16 +201,5 @@ namespace Mapsui.Layers
             if (startEpsgCode < 0) return _tileSource.Schema.Srs;
             return _tileSource.Schema.Srs.Substring(startEpsgCode).Replace("::", ":").Trim();
         }
-
-        /// <summary>
-        /// Aborts the tile fetches that are in progress. If this method is not called
-        /// the threads will terminate naturally. It will just take a little longer.
-        /// </summary>
-        public override void AbortFetch()
-        {
-            _fetchMachine?.Stop();
-        }
-
-        public override IReadOnlyList<double> Resolutions => _tileSource?.Schema?.Resolutions.Select(r => r.Value.UnitsPerPixel).ToList();
     }
 }

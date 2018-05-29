@@ -1,3 +1,5 @@
+// TODO: There are parts talking about SharpMap
+
 // Copyright 2005, 2006 - Morten Nielsen (www.iter.dk)
 //
 // This file is part of SharpMap.
@@ -44,7 +46,7 @@ namespace Mapsui.Layers
         /// <summary>
         /// Create layer with name
         /// </summary>
-        /// <param name="layername"></param>
+        /// <param name="layername">Name to use for layer</param>
         public Layer(string layername) : base(layername)
         {
             _fetchDispatcher = new FeatureFetchDispatcher(_cache, Transformer);
