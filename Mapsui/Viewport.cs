@@ -71,9 +71,10 @@ namespace Mapsui
             _center.X = viewport._center.X;
             _center.Y = viewport._center.Y;
             if (viewport.Extent!= null) _extent = new BoundingBox(viewport.Extent);
-            if (viewport.WindowExtent != null) _windowExtent = new Quad(
-                viewport.WindowExtent.BottomLeft, viewport.WindowExtent.TopLeft,
-                viewport.WindowExtent.TopRight, viewport.WindowExtent.BottomRight);
+            if (viewport.WindowExtent != null) _windowExtent = new Quad(viewport.WindowExtent);
+            Initialized = viewport.Initialized;
+
+            UpdateExtent();
         }
 
         /// <inheritdoc />
@@ -415,14 +416,37 @@ namespace Mapsui
             _modified = false;
         }
 
-        /// <summary>
-        /// Property change event
-        /// </summary>
-        /// <param name="propertyName">Name of property that changed</param>
-        private void OnViewportChanged([CallerMemberName] string propertyName = null)
+        public bool TryInitializeViewport(BoundingBox envelope, double screenWidth, double screenHeight)
         {
-            _modified = true;
-            ViewportChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            if (screenWidth.IsNanOrZero()) return false;
+            if (screenHeight.IsNanOrZero()) return false;
+
+            if (double.IsNaN(Resolution)) // only when not set yet
+            {
+                if (!envelope.IsInitialized()) return false;
+                if (envelope.GetCentroid() == null) return false;
+
+                if (Math.Abs(envelope.Width) > Constants.Epsilon)
+                    Resolution = envelope.Width / screenWidth;
+                else
+                    // An envelope width of zero can happen when there is no data in the Maps' layers (yet).
+                    // It should be possible to start with an empty map.
+                    Resolution = Constants.DefaultResolution;
+            }
+
+            if (double.IsNaN(Center.X) || double.IsNaN(Center.Y)) // only when not set yet
+            {
+                if (!envelope.IsInitialized()) return false;
+                if (envelope.GetCentroid() == null) return false;
+
+                Center = envelope.GetCentroid();
+            }
+
+            Width = screenWidth;
+            Height = screenHeight;
+            
+            Initialized = true;
+            return true;
         }
     }
 }

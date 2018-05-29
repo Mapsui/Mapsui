@@ -5,10 +5,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Mapsui Contributor Guidelines </title>
+    <title>Skia Scale </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Mapsui Contributor Guidelines ">
-    <meta name="generator" content="docfx 2.29.1.0">
+    <meta name="title" content="Skia Scale ">
+    <meta name="generator" content="docfx 2.36.1.0">
     
     <link rel="shortcut icon" href="../images/favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -20,7 +20,7 @@
     
     
   </head>
-  <body data-spy="scroll" data-target="#affix">
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
         
@@ -67,16 +67,29 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h1 id="mapsui-contributor-guidelines">Mapsui Contributor Guidelines</h1>
+<h1 id="skia-scale">Skia Scale</h1>
 
-<h2 id="complexity">Complexity</h2>
-<p>Complexity is the biggest problem in software development. The primary effort should be to keep the complexity low. Complexity can be caused by clueless spaghetti code but also by <a href="https://www.joelonsoftware.com/2008/05/01/architecture-astronauts-take-over/">astronaut architectures</a>. Keeping things simple is <a href="https://www.infoq.com/presentations/Simple-Made-Easy">not easy</a> but hard work. It involves thinking up several solutions to your problem weighing the pros and cons and moving it around and upside down to look for even better (simpler) solutions. </p>
-<h2 id="continuous-refactoring">Continuous Refactoring</h2>
-<p>Mapsui has some older code in it. Don&#39;t despair. We continuously improve or replace older code. It is a gradual process. We do it step by step. We have made major changes in the past; From WinForms to WPF, From GDI+ to SL rendering. From .NET Framework to PCL. From WPF rendering to SkiaSharp. We are working toward the next steps: From PCL to .NET Standard, support for full Xamarin.Forms. Taking these steps will cause breaking changes. We should be aware of this and clearly communicate it with the user. We should use <a href="http://semver.org">semver</a> (although we still violate it now and then).</p>
-<h2 id="issue-first">Issue first</h2>
-<p>Submit an issue before a pull request co we can discuss the possible solutions to the problem.</p>
-<h2 id="use-resharper">Use ReSharper</h2>
-<p>Mapsui uses the resharper team settings by committing the DotSettings to git, so that all developers can use the same settings. We should have zero warnings. Suggestions should be treated as actual suggestions, use them only when you think it improves the code.</p>
+<p>We have a separate page about this topic because skia scale has caused some confusion in the past and bugs as a consequence. </p>
+<h2 id="why-skia-scale">Why skia scale?</h2>
+<p>Modern devices have a very high resolution. If we would draw onto the skia canvas using device pixels as coordinates the fonts would become tiny and unreadable and lines would become very thin. To correct for this a skale factor is used. Those scaled-up coordinates are called device independen units. SkiaSharp uses this scale factor and Mapsui needs to take this into account. This is why we need to request the scale factor from the system.</p>
+<h2 id="how-does-it-work">How does it work?</h2>
+<p>The skia surface has it&#39;s own scale. We set this to an appropriate scale factor. As a result the coordinates of the skia surface are different than that of it&#39;s parent container. We have to correct for this on a number of points, like in rendering, requesting map info and manipulation.</p>
+<h2 id="what-do-we-do">What do we do?</h2>
+<p>We take skia scale into account on a number of places in our code:</p>
+<p>On iOS, WPF and UWP:</p>
+<ul>
+<li>We determine the skia scale while initializing (or when switching from wpf to skia rendering)ent&#39;s size changes.</li>
+<li>We set the skia scale on the skia surface. This needs to be done in the render loop because this is the only place where we have access to the surface</li>
+</ul>
+<p>On Android:</p>
+<ul>
+<li>We determine the skia scale while initializing</li>
+<li>We initialze the viewport width and height to the skia width and height (on TryInitializeViewport).</li>
+<li>We set the viewport width and height to the skia width and height whenever the containing parent&#39;s size changes.</li>
+<li>We set the skia scale on the skia surface. This needs to be done in the render loop because this is the only place where we have access to the surface</li>
+<li>We pass the skia scale along if we request map info. Why not directly correct the position for scale at the call? Because we want to return the original click position as part of the response. This position can be usefull and we don&#39;t want to user to correct for skia scale (in fact we don&#39;t want the user to have access to it).</li>
+<li>When requesting the touch positions when manipulating the map.</li>
+</ul>
 </article>
           </div>
           
@@ -85,7 +98,7 @@
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/Mapsui/Mapsui/blob/master/docfx/mapsui/articles/Contributors-Guidelines.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/Mapsui/Mapsui/blob/master/docfx/mapsui/documentation/skia-scale.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>
@@ -105,7 +118,7 @@
               <a href="#top">Back to top</a>
             </span>
             
-            <span>Copyright © 2015-2017 Microsoft<br>Generated by <strong>DocFX</strong></span>
+            <span>Generated by <strong>DocFX</strong></span>
           </div>
         </div>
       </footer>

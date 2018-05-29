@@ -1,7 +1,6 @@
 # Introduction
+Mapsui is a .NET Map component for WPF, UWP and Xamarin Android and iOS.
 
-Hi! Welcome to the Mapsui documentation
 
-Please take a look at the [getting started page](Getting-Started-with-Mapsui.md).
 
 

@@ -9,7 +9,7 @@ This experience can be improved by drawing a buffer of the previous image during
 In Mapsui we completely seperated drawing from fetching data. The renderer only renders the data it has available in memory at that instant. The fetcher runs on a background thread receives messages from the UI thread telling it what to fetch.
 
 
-![mapsui async fetching architecture](https://raw.githubusercontent.com/pauldendulk/Mapsui/master/Docs/Images/brutile_fetcher.png)
+![mapsui async fetching architecture](images/brutile_fetcher.png)
 ## The async data fetcher architecture
 
 The diagram above shows how Mapsui's data fetcher works. The data fetcher runs on a background thread. The UI and Fetcher communicate through non blocking messages. Whenever the user pans or zooms a View Changed message is sent to the Fetcher. Whenever new data arrives a Data Changed message is sent to the UI so that it knows it should redraw the map. The fetcher dumps incoming data into a cache. The UI renderer retrieves whatever is needed from that cache when rendering.

@@ -1,13 +1,14 @@
 # [Introduction](Home.md)
-## [Getting Started](Getting-Started-with-Mapsui.md)
-### [Quick Start WPF](getting-started-wpf.md)
-### [Quick Start Android](getting-started-android.md)
+## [Quickstart WPF](getting-started-wpf.md)
+## [Quickstart Android](getting-started-android.md)
+## [Samples](samples.md)
 ## [Roadmap](Roadmap.md)
 ## [Mapsui 2.0](Mapsui-2.0.md)
 # How Things Work
 ## [Mapsui Components](Mapsui-Components.md)
 ## [Renderers](Renderers.md)
 ## [Asynchronous Data Fetching](Async-Fetching.md)
+## [Skia Scale](skia-scale.md)
 # Developing Mapsui
 ## [Contributors Guidelines](Contributors-Guidelines.md)
 ## [Development Constraints](Development-constraints.md)

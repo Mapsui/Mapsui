@@ -8,7 +8,7 @@
     <title>NuGet of Latest Build </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="NuGet of Latest Build ">
-    <meta name="generator" content="docfx 2.35.4.0">
+    <meta name="generator" content="docfx 2.36.1.0">
     
     <link rel="shortcut icon" href="../images/favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -69,8 +69,7 @@
             <article class="content wrap" id="_content" data-uid="">
 <h1 id="nuget-of-latest-build">NuGet of Latest Build</h1>
 
-<p>Every commit triggers the build server which publishes a NuGet package of the latest version followed by a build number.</p>
-<p>There are three ways you can add this:</p>
+<p>On every commit the build server is triggered which publishes a NuGet package of that build. It&#39;s version number is the current version of the master branch followed by a dot and the build number. The package is not published to nuget.org but to a AppVeyor feed. You need to add this feed to be able to install the package to your project. There are three ways to add this feed to your environment.</p>
 <h2 id="package-manager-console">Package Manager Console</h2>
 <pre><code>nuget install-package mapsui -source https://ci.appveyor.com/nuget/mapsui -pre
 </code></pre><h2 id="add-the-feed-in-visual-studio">Add the feed in Visual Studio</h2>

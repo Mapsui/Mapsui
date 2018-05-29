@@ -26,6 +26,7 @@
           "api/index.md",
           "documentation/**.md",
           "documentation/**/toc.md",
+          "documentation/**.png",
           "toc.yml",
           "*.md"
         ],
@@ -38,7 +39,8 @@
     "resource": [
       {
         "files": [
-          "images/**"
+          "images/**",
+		  "documentation/images/**"
         ],
         "exclude": [
           "obj/**",

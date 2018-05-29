@@ -19,11 +19,7 @@ namespace Mapsui.Rendering.Xaml
 
         public static void Draw(Canvas canvas, ScaleBarWidget scaleBar)
         {
-            // If this widget belongs to no viewport, than stop drawing
-            if (scaleBar.Map?.CRS == null) return;
-            if (scaleBar.Map.Transformation == null) return;
-            if (scaleBar.Map.Transformation.IsProjectionSupported(scaleBar.Map.CRS, "EPSG:4326") != true) return;
-
+            if (!scaleBar.CanTransform()) return;
 
             _brushScaleBar = new SolidColorBrush(scaleBar.TextColor.ToXaml());
             _brushScaleBarStroke = new SolidColorBrush(scaleBar.Halo.ToXaml());

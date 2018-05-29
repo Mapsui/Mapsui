@@ -33,6 +33,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Geometries", "Mapsui
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{B2DB6CAC-1C30-42C9-B628-BACEBF790AB9}"
 	ProjectSection(SolutionItems) = preProject
+		appveyor-docs.yml = appveyor-docs.yml
+		appveyor.yml = appveyor.yml
 		Scripts\buildpack.bat = Scripts\buildpack.bat
 		Scripts\buildpackpush.bat = Scripts\buildpackpush.bat
 		Scripts\readme.txt = Scripts\readme.txt
@@ -49,6 +51,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.clabot = .clabot
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
+		appveyor-docs.yml = appveyor-docs.yml
+		appveyor.yml = appveyor.yml
 		licence.txt = licence.txt
 		Mapsui.Common.props = Mapsui.Common.props
 		Mapsui.ncrunchsolution = Mapsui.ncrunchsolution
@@ -84,6 +88,34 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Rendering.Skia", "Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj", "{AE632270-38CA-4203-93A5-8612629CD944}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.UI.iOS", "Mapsui.UI.iOS\Mapsui.UI.iOS.csproj", "{E71F3053-056C-4381-9638-048ED73BDFF6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docfx", "docfx", "{97458DE1-C297-4DED-AECB-5FEFED2B5610}"
+	ProjectSection(SolutionItems) = preProject
+		docfx\build-site.cmd = docfx\build-site.cmd
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "mapsui", "mapsui", "{F9644AFA-4A28-42D3-AC64-4718D037CC59}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "documentation", "documentation", "{6F159183-6CC2-4D97-A0D6-55FC6F630FD5}"
+	ProjectSection(SolutionItems) = preProject
+		docfx\mapsui\documentation\Async-Fetching.md = docfx\mapsui\documentation\Async-Fetching.md
+		docfx\mapsui\documentation\Contributors-Guidelines.md = docfx\mapsui\documentation\Contributors-Guidelines.md
+		docfx\mapsui\documentation\Development-constraints.md = docfx\mapsui\documentation\Development-constraints.md
+		docfx\mapsui\documentation\documentation.md = docfx\mapsui\documentation\documentation.md
+		docfx\mapsui\documentation\getting-started-android.md = docfx\mapsui\documentation\getting-started-android.md
+		docfx\mapsui\documentation\getting-started-wpf.md = docfx\mapsui\documentation\getting-started-wpf.md
+		docfx\mapsui\documentation\Home.md = docfx\mapsui\documentation\Home.md
+		docfx\mapsui\documentation\How-to-work-with-Mapsui.md = docfx\mapsui\documentation\How-to-work-with-Mapsui.md
+		docfx\mapsui\documentation\Mapsui-2.0.md = docfx\mapsui\documentation\Mapsui-2.0.md
+		docfx\mapsui\documentation\Mapsui-Components.md = docfx\mapsui\documentation\Mapsui-Components.md
+		docfx\mapsui\documentation\NuGet-of-latest-build.md = docfx\mapsui\documentation\NuGet-of-latest-build.md
+		docfx\mapsui\documentation\Renderers.md = docfx\mapsui\documentation\Renderers.md
+		docfx\mapsui\documentation\Rendering-Tests.md = docfx\mapsui\documentation\Rendering-Tests.md
+		docfx\mapsui\documentation\Roadmap.md = docfx\mapsui\documentation\Roadmap.md
+		docfx\mapsui\documentation\samples.md = docfx\mapsui\documentation\samples.md
+		docfx\mapsui\documentation\skia-scale.md = docfx\mapsui\documentation\skia-scale.md
+		docfx\mapsui\documentation\toc.md = docfx\mapsui\documentation\toc.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
@@ -505,6 +537,8 @@ Global
 		{A6D5A694-454C-432B-BB24-AB784876E8E1} = {CB6BE9F9-5ECF-471B-9D93-605E2BD6825D}
 		{CA0C7AF3-03ED-42D0-A001-001E8EE095E6} = {969DB691-49FB-4785-98F4-2112CC1BA7C4}
 		{16D71D4F-1D3F-483E-9C6C-A3A25B6A20A9} = {969DB691-49FB-4785-98F4-2112CC1BA7C4}
+		{F9644AFA-4A28-42D3-AC64-4718D037CC59} = {97458DE1-C297-4DED-AECB-5FEFED2B5610}
+		{6F159183-6CC2-4D97-A0D6-55FC6F630FD5} = {F9644AFA-4A28-42D3-AC64-4718D037CC59}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {22D684C3-0BD3-4D8A-AB23-748FB5527F6F}

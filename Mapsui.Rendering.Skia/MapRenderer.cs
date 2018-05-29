@@ -29,6 +29,7 @@ namespace Mapsui.Rendering.Skia
         {
             DefaultRendererFactory.Create = () => new MapRenderer();
         }
+
         public void Render(object target, IViewport viewport, IEnumerable<ILayer> layers,
             IEnumerable<IWidget> widgets, Color background = null)
         {
