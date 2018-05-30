@@ -64,15 +64,6 @@ namespace Mapsui.UI.Wpf
         public event EventHandler<TouchedEventArgs> TouchEnded;
 
         /// <summary>
-        /// TouchMove is called, when user move mouse over map (independent from mouse button state) or move finger on display
-        /// </summary>
-#if __WPF__
-        public new event EventHandler<TouchedEventArgs> TouchMove;
-#else
-        public event EventHandler<TouchedEventArgs> TouchMove;
-#endif
-
-        /// <summary>
         /// Zoom is called, when map should be zoomed
         /// </summary>
         public event EventHandler<ZoomedEventArgs> Zoomed;
@@ -199,87 +190,6 @@ namespace Mapsui.UI.Wpf
             }
 
             return args.Handled;
-        }
-
-        /// <summary>
-        /// Called, when mouse/finger/pen moves over map
-        /// </summary>
-        /// <param name="touchPoints">List of all touched points</param>
-        private bool OnTouchMove(List<Point> touchPoints)
-        {
-            var args = new TouchedEventArgs(touchPoints);
-
-            TouchMove?.Invoke(this, args);
-
-            if (args.Handled)
-                return true;
-
-            switch (_mode)
-            {
-                case TouchMode.Dragging:
-                    {
-                        if (touchPoints.Count != 1)
-                            return false;
-
-                        var touchPosition = touchPoints.First();
-
-                        if (_previousCenter != null && !_previousCenter.IsEmpty())
-                        {
-                            _map.Viewport.Transform(touchPosition.X, touchPosition.Y, _previousCenter.X, _previousCenter.Y);
-
-                            ViewportLimiter.LimitExtent(_map.Viewport, _map.PanMode, _map.PanLimits, _map.Envelope);
-
-                            InvalidateCanvas();
-                        }
-
-                        _previousCenter = touchPosition;
-                    }
-                    break;
-                case TouchMode.Zooming:
-                    {
-                        if (touchPoints.Count < 2)
-                            return false;
-
-                        var (prevCenter, prevRadius, prevAngle) = (_previousCenter, _previousRadius, _previousAngle);
-                        var (center, radius, angle) = GetPinchValues(touchPoints);
-
-                        double rotationDelta = 0;
-
-                        if (!RotationLock)
-                        {
-                            _innerRotation += angle - prevAngle;
-                            _innerRotation %= 360;
-
-                            if (_innerRotation > 180)
-                                _innerRotation -= 360;
-                            else if (_innerRotation < -180)
-                                _innerRotation += 360;
-
-                            if (_map.Viewport.Rotation == 0 && Math.Abs(_innerRotation) >= Math.Abs(UnSnapRotationDegrees))
-                                rotationDelta = _innerRotation;
-                            else if (_map.Viewport.Rotation != 0)
-                            {
-                                if (Math.Abs(_innerRotation) <= Math.Abs(ReSnapRotationDegrees))
-                                    rotationDelta = -_map.Viewport.Rotation;
-                                else
-                                    rotationDelta = _innerRotation - _map.Viewport.Rotation;
-                            }
-                        }
-
-                        _map.Viewport.Transform(center.X, center.Y, prevCenter.X, prevCenter.Y, radius / prevRadius, rotationDelta);
-
-                        (_previousCenter, _previousRadius, _previousAngle) = (center, radius, angle);
-
-                        ViewportLimiter.Limit(_map.Viewport,
-                            _map.ZoomMode, _map.ZoomLimits, _map.Resolutions,
-                            _map.PanMode, _map.PanLimits, _map.Envelope);
-
-                        InvalidateCanvas();
-                    }
-                    break;
-            }
-
-            return true;
         }
         
         /// <summary>
