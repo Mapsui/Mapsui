@@ -79,6 +79,7 @@ namespace Mapsui.UI.Uwp
             ManipulationMode = ManipulationModes.Scale | ManipulationModes.TranslateX | ManipulationModes.TranslateY | ManipulationModes.Rotate;
             ManipulationDelta += OnManipulationDelta;
             ManipulationCompleted += OnManipulationCompleted;
+            //see event handler for how to force re-draw while manipulation is occuring
             ManipulationStarted += OnManipulationStarted;
             ManipulationInertiaStarting += OnManipulationInertiaStarting;
 
