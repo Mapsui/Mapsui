@@ -262,10 +262,11 @@ namespace Mapsui.UI.Uwp
 
         internal void InvalidateCanvas()
         {
-            InvalidateArrange();
-            InvalidateMeasure();
-            _renderTarget.InvalidateArrange();
-            _renderTarget.InvalidateMeasure();
+            //simplify the re-draw
+            //InvalidateArrange();
+            //InvalidateMeasure();
+            //_renderTarget.InvalidateArrange();
+            //_renderTarget.InvalidateMeasure();
 
             //make sure skia re-draws
             _renderTarget.Invalidate();
