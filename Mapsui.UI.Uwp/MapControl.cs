@@ -68,7 +68,8 @@ namespace Mapsui.UI.Uwp
             Loaded += MapControlLoaded;
 
             SizeChanged += MapControlSizeChanged;
-            CompositionTarget.Rendering += CompositionTarget_Rendering;
+            //This event will fire @ +30Hz, so it causes lots of uneccesary re-draws when the app should be "idle"
+            //CompositionTarget.Rendering += CompositionTarget_Rendering;
 
             _renderer = new MapRenderer();
             _scale = GetSkiaScale();
@@ -78,6 +79,7 @@ namespace Mapsui.UI.Uwp
             ManipulationMode = ManipulationModes.Scale | ManipulationModes.TranslateX | ManipulationModes.TranslateY | ManipulationModes.Rotate;
             ManipulationDelta += OnManipulationDelta;
             ManipulationCompleted += OnManipulationCompleted;
+            ManipulationStarted += OnManipulationStarted;
             ManipulationInertiaStarting += OnManipulationInertiaStarting;
 
             Tapped += OnSingleTapped;
@@ -263,6 +265,9 @@ namespace Mapsui.UI.Uwp
             InvalidateMeasure();
             _renderTarget.InvalidateArrange();
             _renderTarget.InvalidateMeasure();
+
+            //make sure skia re-draws
+            _renderTarget.Invalidate();
         }
 
         public void Clear()
@@ -360,6 +365,7 @@ namespace Mapsui.UI.Uwp
 
         private void CompositionTarget_Rendering(object sender, object e)
         {
+            //force Skia to re-draw
             _renderTarget.Invalidate();
         }
 
@@ -466,9 +472,24 @@ namespace Mapsui.UI.Uwp
             e.Handled = true;
         }
 
+        private void OnManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e)
+        {
+            //this causes a Skia re-draw when Manipulation (i.e. a drag, etc) completes
+            Refresh();
+
+            //make sure redraws occur while dragging, etc.
+            //could also do it in OnManipulationDelta, but that appears to be less efficient for some reason.  
+            //Probably OnViewChanged() is doing some of the same work, just not invalidating the Skia view?
+            CompositionTarget.Rendering += CompositionTarget_Rendering;
+        }
+
         private void OnManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
         {
+            //this causes a Skia re-draw when Manipulation (i.e. a drag, etc) completes
             Refresh();
+
+            //stop forcing redraws triggered by low-level DX timer.
+            CompositionTarget.Rendering -= CompositionTarget_Rendering;
         }
 
         private void TryInitializeViewport()

@@ -53,7 +53,7 @@ namespace Mapsui.Samples.Uwp
             foreach (var sample in TestSamples().ToList())
                 SampleList.Children.Add(CreateRadioButton(sample));
         }
-
+  
         private Dictionary<string, Func<Map>> TestSamples()
         {
             var result = new Dictionary<string, Func<Map>>();
