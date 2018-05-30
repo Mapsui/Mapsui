@@ -97,16 +97,6 @@ namespace Mapsui.UI.Wpf
         public event EventHandler<TappedEventArgs> SingleTap;
 
         /// <summary>
-        /// LongTap is called, when user clicks with a mouse button or tap with a finger on map for 500 ms
-        /// </summary>
-        public event EventHandler<TappedEventArgs> LongTap;
-
-        /// <summary>
-        /// DoubleTap is called, when user clicks with a mouse button or tap with a finger two or more times on map
-        /// </summary>
-        public event EventHandler<TappedEventArgs> DoubleTap;
-
-        /// <summary>
         /// Zoom is called, when map should be zoomed
         /// </summary>
         public event EventHandler<ZoomedEventArgs> Zoomed;
@@ -362,32 +352,7 @@ namespace Mapsui.UI.Wpf
 
             return true;
         }
-
-        /// <summary>
-        /// Called, when mouse/finger/pen tapped on map 2 or more times
-        /// </summary>
-        /// <param name="screenPosition">First clicked/touched position on screen</param>
-        /// <param name="numOfTaps">Number of taps on map (2 is a double click/tap)</param>
-        private bool OnDoubleTapped(Point screenPosition, int numOfTaps)
-        {
-            var args = new TappedEventArgs(screenPosition, numOfTaps);
-
-            DoubleTap?.Invoke(this, args);
-
-            if (args.Handled)
-                return true;
-
-            var tapWasHandled = Map.InvokeInfo(screenPosition, screenPosition, _scale, Renderer.SymbolCache, WidgetTouched, numOfTaps);
-
-            if (!tapWasHandled)
-            {
-                // Double tap as zoom
-                return OnZoomIn(screenPosition);
-            }
-
-            return false;
-        }
-
+        
         /// <summary>
         /// Called, when mouse/finger/pen tapped on map one time
         /// </summary>
@@ -403,20 +368,7 @@ namespace Mapsui.UI.Wpf
 
             return Map.InvokeInfo(screenPosition, screenPosition, _scale, Renderer.SymbolCache, WidgetTouched, 1);
         }
-
-        /// <summary>
-        /// Called, when mouse/finger/pen tapped long on map
-        /// </summary>
-        /// <param name="screenPosition">Clicked/touched position on screen</param>
-        private bool OnLongTapped(Point screenPosition)
-        {
-            var args = new TappedEventArgs(screenPosition, 1);
-
-            LongTap?.Invoke(this, args);
-
-            return args.Handled;
-        }
-
+        
         /// <summary>
         /// Public functions
         /// </summary>
