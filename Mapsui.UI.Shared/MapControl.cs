@@ -2,7 +2,6 @@
 using Mapsui.Geometries.Utilities;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Mapsui.Rendering;
 using Mapsui.Rendering.Skia;
 
@@ -38,40 +37,7 @@ namespace Mapsui.UI.Wpf
         /// Saver for center before last pinch movement
         /// </summary>
         private Point _previousCenter = new Point();
-
-        /// <summary>
-        /// Saver for angle before last pinch movement
-        /// </summary>
-        private double _previousAngle;
-
-        /// <summary>
-        /// Saver for radius before last pinch movement
-        /// </summary>
-        private double _previousRadius = 1f;
-
-        /// <summary>
-        /// Events
-        /// </summary>
-
-        /// <summary>
-        /// TouchStart is called, when user press a mouse button or touch the display
-        /// </summary>
-        public event EventHandler<TouchedEventArgs> TouchStarted;
-
-        /// <summary>
-        /// TouchEnd is called, when user release a mouse button or doesn't touch display anymore
-        /// </summary>
-        public event EventHandler<TouchedEventArgs> TouchEnded;
-
-        /// <summary>
-        /// Zoom is called, when map should be zoomed
-        /// </summary>
-        public event EventHandler<ZoomedEventArgs> Zoomed;
-
-        /// <summary>
-        /// Properties
-        /// </summary>
-
+        
         /// <summary>
         /// Allow map panning through touch or mouse
         /// </summary>
@@ -99,98 +65,6 @@ namespace Mapsui.UI.Wpf
 
 
         public IRenderer Renderer { get; set; } = new MapRenderer();
-
-        /// <summary>
-        /// Event handlers
-        /// </summary>
-
-        /// <summary>
-        /// Called, when map should zoom out
-        /// </summary>
-        /// <param name="screenPosition">Center of zoom out event</param>
-        private bool OnZoomOut(Geometries.Point screenPosition)
-        {
-            var args = new ZoomedEventArgs(screenPosition, ZoomDirection.ZoomOut);
-
-            Zoomed?.Invoke(this, args);
-
-            if (args.Handled)
-                return true;
-
-            // TODO
-            // Perform standard behavior
-
-            return true;
-        }
-
-        /// <summary>
-        /// Called, when map should zoom in
-        /// </summary>
-        /// <param name="screenPosition">Center of zoom in event</param>
-        private bool OnZoomIn(Point screenPosition)
-        {
-            var args = new ZoomedEventArgs(screenPosition, ZoomDirection.ZoomIn);
-
-            Zoomed?.Invoke(this, args);
-
-            if (args.Handled)
-                return true;
-
-            // TODO
-            // Perform standard behavior
-
-            return true;
-        }
-        
-        /// <summary>
-        /// Called, when mouse/finger/pen click/touch map
-        /// </summary>
-        /// <param name="touchPoints">List of all touched points</param>
-        private bool OnTouchStart(List<Point> touchPoints)
-        {
-            var args = new TouchedEventArgs(touchPoints);
-
-            TouchStarted?.Invoke(this, args);
-
-            if (args.Handled)
-                return true;
-
-            if (touchPoints.Count >= 2)
-            {
-                (_previousCenter, _previousRadius, _previousAngle) = GetPinchValues(touchPoints);
-                _mode = TouchMode.Zooming;
-                _innerRotation = _map.Viewport.Rotation;
-            }
-            else
-            {
-                _mode = TouchMode.Dragging;
-                _previousCenter = touchPoints.First();
-            }
-
-            return true;
-        }
-
-        /// <summary>
-        /// Called, when mouse/finger/pen anymore click/touch map
-        /// </summary>
-        /// <param name="touchPoints">List of all touched points</param>
-        /// <param name="releasedPoint">Released point, which was touched before</param>
-        private bool OnTouchEnd(List<Point> touchPoints, Point releasedPoint)
-        {
-            var args = new TouchedEventArgs(touchPoints);
-
-            TouchEnded?.Invoke(this, args);
-
-            // Last touch released
-            if (touchPoints.Count == 0)
-            {
-                InvalidateCanvas();
-                _mode = TouchMode.None;
-                _map.ViewChanged(true);
-            }
-
-            return args.Handled;
-        }
         
         /// <summary>
         /// Public functions
@@ -268,7 +142,7 @@ namespace Mapsui.UI.Wpf
         /// Private static functions
         /// </summary>
 
-        private static (Point centre, double radius, double angle) GetPinchValues(List<Geometries.Point> locations)
+        private static (Point centre, double radius, double angle) GetPinchValues(List<Point> locations)
         {
             if (locations.Count < 2)
                 throw new ArgumentException();

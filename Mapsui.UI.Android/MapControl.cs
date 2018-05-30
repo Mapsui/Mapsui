@@ -23,7 +23,9 @@ namespace Mapsui.UI.Android
         private Map _map;
         private double _innerRotation;
         private GestureDetector _gestureDetector;
-
+        private double _previousAngle;
+        private double _previousRadius = 1f;
+        
         public event EventHandler ViewportInitialized;
 
         public MapControl(Context context, IAttributeSet attrs) :
