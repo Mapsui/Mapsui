@@ -72,11 +72,6 @@ namespace Mapsui.UI.Wpf
         public event EventHandler<TouchedEventArgs> TouchMove;
 #endif
         /// <summary>
-        /// Fling is called, when user release mouse button or lift finger while moving with a certain speed, higher than speed of swipe 
-        /// </summary>
-        public event EventHandler<SwipedEventArgs> Fling;
-
-        /// <summary>
         /// SingleTap is called, when user clicks with a mouse button or tap with a finger on map 
         /// </summary>
         public event EventHandler<TappedEventArgs> SingleTap;
@@ -159,24 +154,7 @@ namespace Mapsui.UI.Wpf
 
             return true;
         }
-
-        /// <summary>
-        /// Called, when mouse/finger/pen flinged over map
-        /// </summary>
-        /// <param name="velocityX">Velocity in x direction in pixel/second</param>
-        /// <param name="velocityY">Velocity in y direction in pixel/second</param>
-        private bool OnFlinged(double velocityX, double velocityY)
-        {
-            var args = new SwipedEventArgs(velocityX, velocityY);
-
-            Fling?.Invoke(this, args);
-
-            // TODO
-            // Perform standard behavior
-
-            return args.Handled;
-        }
-
+        
         /// <summary>
         /// Called, when mouse/finger/pen click/touch map
         /// </summary>
