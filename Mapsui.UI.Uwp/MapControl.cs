@@ -79,6 +79,7 @@ namespace Mapsui.UI.Uwp
             ManipulationMode = ManipulationModes.Scale | ManipulationModes.TranslateX | ManipulationModes.TranslateY | ManipulationModes.Rotate;
             ManipulationDelta += OnManipulationDelta;
             ManipulationCompleted += OnManipulationCompleted;
+            //see event handler for how to force re-draw while manipulation is occuring
             ManipulationStarted += OnManipulationStarted;
             ManipulationInertiaStarting += OnManipulationInertiaStarting;
 
@@ -261,10 +262,11 @@ namespace Mapsui.UI.Uwp
 
         internal void InvalidateCanvas()
         {
-            InvalidateArrange();
-            InvalidateMeasure();
-            _renderTarget.InvalidateArrange();
-            _renderTarget.InvalidateMeasure();
+            //simplify the re-draw
+            //InvalidateArrange();
+            //InvalidateMeasure();
+            //_renderTarget.InvalidateArrange();
+            //_renderTarget.InvalidateMeasure();
 
             //make sure skia re-draws
             _renderTarget.Invalidate();
