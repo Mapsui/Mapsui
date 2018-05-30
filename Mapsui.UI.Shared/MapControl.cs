@@ -71,12 +71,6 @@ namespace Mapsui.UI.Wpf
 #else
         public event EventHandler<TouchedEventArgs> TouchMove;
 #endif
-        
-        /// <summary>
-        /// Swipe is called, when user release mouse button or lift finger while moving with a certain speed 
-        /// </summary>
-        public event EventHandler<SwipedEventArgs> Swipe;
-
         /// <summary>
         /// Fling is called, when user release mouse button or lift finger while moving with a certain speed, higher than speed of swipe 
         /// </summary>
@@ -164,23 +158,6 @@ namespace Mapsui.UI.Wpf
             // Perform standard behavior
 
             return true;
-        }
-
-        /// <summary>
-        /// Called, when mouse/finger/pen swiped over map
-        /// </summary>
-        /// <param name="velocityX">Velocity in x direction in pixel/second</param>
-        /// <param name="velocityY">Velocity in y direction in pixel/second</param>
-        private bool OnSwiped(double velocityX, double velocityY)
-        {
-            var args = new SwipedEventArgs(velocityX, velocityY);
-
-            Swipe?.Invoke(this, args);
-
-            // TODO
-            // Perform standard behavior
-
-            return args.Handled;
         }
 
         /// <summary>
