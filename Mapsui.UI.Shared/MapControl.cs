@@ -71,16 +71,7 @@ namespace Mapsui.UI.Wpf
 #else
         public event EventHandler<TouchedEventArgs> TouchMove;
 #endif
-
-        /// <summary>
-        /// Hover is called, when user move mouse over map without pressing mouse button
-        /// </summary>
-#if __ANDROID__
-        public new event EventHandler<HoveredEventArgs> Hovered;
-#else
-        public event EventHandler<HoveredEventArgs> Hovered;
-#endif
-
+        
         /// <summary>
         /// Swipe is called, when user release mouse button or lift finger while moving with a certain speed 
         /// </summary>
@@ -173,19 +164,6 @@ namespace Mapsui.UI.Wpf
             // Perform standard behavior
 
             return true;
-        }
-
-        /// <summary>
-        /// Called, when mouse/finger/pen hovers around
-        /// </summary>
-        /// <param name="screenPosition">Actual position of mouse/finger/pen</param>
-        private bool OnHovered(Point screenPosition)
-        {
-            var args = new HoveredEventArgs(screenPosition);
-
-            Hovered?.Invoke(this, args);
-
-            return args.Handled;
         }
 
         /// <summary>
