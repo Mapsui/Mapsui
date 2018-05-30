@@ -272,6 +272,13 @@ namespace Mapsui.UI.Uwp
             _renderTarget.Invalidate();
         }
 
+
+        private void CompositionTarget_Rendering(object sender, object e)
+        {
+            //force Skia to re-draw
+            InvalidateCanvas();
+        }
+
         public void Clear()
         {
             _map?.ClearCache();
@@ -363,12 +370,6 @@ namespace Mapsui.UI.Uwp
                     Logger.Log(LogLevel.Warning, "Unexpected exception in MapDataChanged", exception);
                 }
             }
-        }
-
-        private void CompositionTarget_Rendering(object sender, object e)
-        {
-            //force Skia to re-draw
-            _renderTarget.Invalidate();
         }
 
         private void _renderTarget_PaintSurface(object sender, SKPaintSurfaceEventArgs e)
