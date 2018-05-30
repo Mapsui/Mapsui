@@ -71,10 +71,6 @@ namespace Mapsui.UI.Wpf
 #else
         public event EventHandler<TouchedEventArgs> TouchMove;
 #endif
-        /// <summary>
-        /// SingleTap is called, when user clicks with a mouse button or tap with a finger on map 
-        /// </summary>
-        public event EventHandler<TappedEventArgs> SingleTap;
 
         /// <summary>
         /// Zoom is called, when map should be zoomed
@@ -284,22 +280,6 @@ namespace Mapsui.UI.Wpf
             }
 
             return true;
-        }
-        
-        /// <summary>
-        /// Called, when mouse/finger/pen tapped on map one time
-        /// </summary>
-        /// <param name="screenPosition">Clicked/touched position on screen</param>
-        private bool OnSingleTapped(Point screenPosition)
-        {
-            var args = new TappedEventArgs(screenPosition, 1);
-
-            SingleTap?.Invoke(this, args);
-
-            if (args.Handled)
-                return true;
-
-            return Map.InvokeInfo(screenPosition, screenPosition, _scale, Renderer.SymbolCache, WidgetTouched, 1);
         }
         
         /// <summary>
