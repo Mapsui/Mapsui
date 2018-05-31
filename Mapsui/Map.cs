@@ -183,6 +183,21 @@ namespace Mapsui
         public event EventHandler<MapInfoEventArgs> Info;
         public event EventHandler<MapInfoEventArgs> Hover;
 
+
+        private void LayersLayerAdded(ILayer layer)
+        {
+            layer.DataChanged += LayerDataChanged;
+            layer.PropertyChanged += LayerPropertyChanged;
+
+            layer.Transformation = Transformation;
+            layer.CRS = CRS;
+            Resolutions = DetermineResolutions(Layers);
+            OnPropertyChanged(nameof(Layers));
+
+            //make sure screen updates to show layer change
+            OnRefreshGraphics();
+        }
+
         private void LayersLayerRemoved(ILayer layer)
         {
             layer.AbortFetch();
@@ -195,6 +210,9 @@ namespace Mapsui
             Resolutions = DetermineResolutions(Layers);
 
             OnPropertyChanged(nameof(Layers));
+
+            //make sure screen updates to show layer change
+            OnRefreshGraphics();
         }
 
         public bool InvokeInfo(Point screenPosition, Point startScreenPosition, float scale, ISymbolCache symbolCache,
@@ -256,16 +274,7 @@ namespace Mapsui
             }
         }
 
-        private void LayersLayerAdded(ILayer layer)
-        {
-            layer.DataChanged += LayerDataChanged;
-            layer.PropertyChanged += LayerPropertyChanged;
 
-            layer.Transformation = Transformation;
-            layer.CRS = CRS;
-            Resolutions = DetermineResolutions(Layers);
-            OnPropertyChanged(nameof(Layers));
-        }
 
         private static IReadOnlyList<double> DetermineResolutions(IEnumerable<ILayer> layers)
         {
