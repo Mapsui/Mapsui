@@ -194,7 +194,7 @@ namespace Mapsui
             Resolutions = DetermineResolutions(Layers);
             OnPropertyChanged(nameof(Layers));
 
-            //make sure screen updaes to show layer change
+            //make sure screen updates to show layer change
             OnRefreshGraphics();
         }
 
@@ -211,7 +211,7 @@ namespace Mapsui
 
             OnPropertyChanged(nameof(Layers));
 
-            //make sure screen updaes to show layer change
+            //make sure screen updates to show layer change
             OnRefreshGraphics();
         }
 
