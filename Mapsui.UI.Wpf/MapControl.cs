@@ -122,7 +122,7 @@ namespace Mapsui.UI.Wpf
                 if (_map != null)
                 {
                     SubscribeToMapEvents(_map);
-                    _map.Viewport.ViewChanged(true);
+                    _map.ViewChanged(true);
                 }
 
                 RefreshGraphics();
@@ -229,7 +229,7 @@ namespace Mapsui.UI.Wpf
 
         public void RefreshData()
         {
-            _map?.Viewport.ViewChanged(true);
+            _map?.ViewChanged(true);
         }
 
         public void Clear()
@@ -287,7 +287,7 @@ namespace Mapsui.UI.Wpf
             ViewportLimiter.Limit(_map.Viewport, _map.ZoomMode, _map.ZoomLimits, _map.Resolutions,
                 _map.PanMode, _map.PanLimits, _map.Envelope);
 
-            _map.Viewport.ViewChanged(true);
+            _map.ViewChanged(true);
             OnViewChanged();
             RefreshGraphics();
         }
@@ -395,7 +395,7 @@ namespace Mapsui.UI.Wpf
             TryInitializeViewport();
             Clip = new RectangleGeometry { Rect = new Rect(0, 0, ActualWidth, ActualHeight) };
             UpdateSize();
-            _map.Viewport.ViewChanged(true);
+            _map.ViewChanged(true);
             OnViewChanged();
             Refresh();
         }
@@ -486,7 +486,7 @@ namespace Mapsui.UI.Wpf
                 ZoomToBox(previous, current);
             }
 
-            _map.Viewport.ViewChanged(true);
+            _map.ViewChanged(true);
             OnViewChanged(true);
             _mouseDown = false;
 
@@ -566,7 +566,7 @@ namespace Mapsui.UI.Wpf
                     _map.PanMode, _map.PanLimits, _map.Envelope);
 
                 _previousMousePosition = _currentMousePosition;
-                _map.Viewport.ViewChanged(false);
+                _map.ViewChanged(false);
                 OnViewChanged(true);
                 RefreshGraphics();
 
@@ -583,7 +583,7 @@ namespace Mapsui.UI.Wpf
                 ViewportLimiter.Limit(_map.Viewport, _map.ZoomMode, _map.ZoomLimits, _map.Resolutions,
                     _map.PanMode, _map.PanLimits, _map.Envelope);
 
-                Map.Viewport.ViewChanged(true);
+                Map.ViewChanged(true);
                 OnViewportInitialized();
             }
         }
@@ -632,7 +632,7 @@ namespace Mapsui.UI.Wpf
 
             _toResolution = resolution; // for animation
 
-            _map.Viewport.ViewChanged(true);
+            _map.ViewChanged(true);
             OnViewChanged(true);
             RefreshGraphics();
             ClearBBoxDrawing();

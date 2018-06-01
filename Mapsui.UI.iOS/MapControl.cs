@@ -116,7 +116,7 @@ namespace Mapsui.UI.iOS
 
             if (_map.Viewport.TryInitializeViewport(_map.Envelope, (float)_canvas.Frame.Width, (float)_canvas.Frame.Height))
             {
-                Map.Viewport.ViewChanged(true);
+                Map.ViewChanged(true);
                 OnViewportInitialized();
             }
         }
@@ -229,7 +229,7 @@ namespace Mapsui.UI.iOS
                 if (_map != null)
                 {
                     SubscribeToMapEvents(_map);
-                    _map.Viewport.ViewChanged(true);
+                    _map.ViewChanged(true);
                 }
 
                 RefreshGraphics();
@@ -299,7 +299,7 @@ namespace Mapsui.UI.iOS
 
         public void RefreshData()
         {
-            _map?.Viewport.ViewChanged(true);
+            _map?.ViewChanged(true);
         }
 
         internal void InvalidateCanvas()

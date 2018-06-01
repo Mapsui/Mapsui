@@ -1,5 +1,3 @@
-// TODO: There are parts talking about SharpMap
-
 // Copyright 2012 - Paul den Dulk (Geodan)
 // 
 // This file is part of SharpMap.
@@ -36,7 +34,6 @@ namespace Mapsui
     {
         public event PropertyChangedEventHandler ViewportChanged;
 
-        private Map _map;
         private readonly BoundingBox _extent;
         private Quad _windowExtent;
         private double _height;
@@ -172,8 +169,7 @@ namespace Mapsui
         {
             Resolution = ZoomHelper.DetermineResolution(extent.Width, extent.Height, Width, Height, scaleMethod);
             Center = extent.GetCentroid();
-            _map.OnRefreshGraphics();
-            ViewChanged(true);
+            OnViewportChanged();
         }
 
         /// <summary>
@@ -183,8 +179,7 @@ namespace Mapsui
         public void NavigateTo(double resolution)
         {
             Resolution = resolution;
-            _map.OnRefreshGraphics();
-            ViewChanged(true);
+            OnViewportChanged();
         }
 
         /// <summary>
@@ -194,8 +189,7 @@ namespace Mapsui
         public void NavigateTo(Point center)
         {
             Center = center;
-            _map.OnRefreshGraphics();
-            ViewChanged(true);
+            OnViewportChanged();
         }
 
         /// <summary>
@@ -206,8 +200,7 @@ namespace Mapsui
         public void NavigateTo(double x, double y)
         {
             Center = new Point(x, y);
-            _map.OnRefreshGraphics();
-            ViewChanged(true);
+            OnViewportChanged();
         }
 
         /// <summary>
@@ -217,8 +210,7 @@ namespace Mapsui
         public void RotateTo(double rotation)
         {
             Rotation = rotation;
-            _map.OnRefreshGraphics();
-            ViewChanged(true);
+            OnViewportChanged();
         }
 
         /// <inheritdoc />
@@ -315,61 +307,6 @@ namespace Mapsui
 
                 _center.X -= postRotation.X - current.X;
                 _center.Y -= postRotation.Y - current.Y;
-            }
-        }
-
-        /// <summary>
-        /// Initialize viewport for given map and screen extension in pixels
-        /// </summary>
-        /// <param name="map">Map for this viewport</param>
-        /// <param name="screenWidth">Width of this viewport in screen pixels</param>
-        /// <param name="screenHeight">Heigh of this viewport in screen pixels</param>
-        /// <returns>True, if viewport is correct initialized</returns>
-        public bool TryInitializeViewport(Map map, double screenWidth, double screenHeight)
-        {
-            if (screenWidth.IsNanOrZero()) return false;
-            if (screenHeight.IsNanOrZero()) return false;
-
-            if (double.IsNaN(map.Viewport.Resolution)) // only when not set yet
-            {
-                if (!map.Envelope.IsInitialized()) return false;
-                if (map.Envelope.GetCentroid() == null) return false;
-
-                if (Math.Abs(map.Envelope.Width) > Constants.Epsilon)
-                    map.Viewport.Resolution = map.Envelope.Width / screenWidth;
-                else
-                    // An envelope width of zero can happen when there is no data in the Maps' layers (yet).
-                    // It should be possible to start with an empty map.
-                    map.Viewport.Resolution = Constants.DefaultResolution;
-            }
-
-            if (double.IsNaN(map.Viewport.Center.X) || double.IsNaN(map.Viewport.Center.Y)) // only when not set yet
-            {
-                if (!map.Envelope.IsInitialized()) return false;
-                if (map.Envelope.GetCentroid() == null) return false;
-
-                map.Viewport.Center = map.Envelope.GetCentroid();
-            }
-
-            map.Viewport.Width = screenWidth;
-            map.Viewport.Height = screenHeight;
-
-            _map = map;
-
-            Initialized = true;
-
-            return true;
-        }
-
-        /// <summary>
-        /// Something changed on Viewport
-        /// </summary>
-        /// <param name="majorChange">True, when the change is a major change</param>
-        public void ViewChanged(bool majorChange)
-        {
-            foreach (var layer in _map.Layers)
-            {
-                layer.ViewChanged(majorChange, _extent, _resolution);
             }
         }
 

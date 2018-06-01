@@ -316,10 +316,12 @@ namespace Mapsui
             }
         }
 
-        [Obsolete("Use Viewport.ViewChanged()")]
         public void ViewChanged(bool majorChange)
         {
-            Viewport.ViewChanged(majorChange);
+            foreach (var layer in _layers.ToList())
+            {
+                layer.ViewChanged(majorChange, Viewport.Extent, Viewport.Resolution);
+            }
         }
 
         private void LayersLayerAdded(ILayer layer)
