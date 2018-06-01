@@ -316,7 +316,7 @@ namespace Mapsui
             }
         }
 
-        public void ViewChanged(bool majorChange)
+        public void RefreshData(bool majorChange)
         {
             foreach (var layer in _layers.ToList())
             {

@@ -141,7 +141,7 @@ namespace Mapsui.UI.Uwp
                 {
                     SubscribeToMapEvents(_map);
 
-                    _map.ViewChanged(true);
+                    _map.RefreshData(true);
                 }
 
                 RefreshGraphics();
@@ -203,7 +203,7 @@ namespace Mapsui.UI.Uwp
             e.Handled = true;
 
             RefreshGraphics();
-            _map.ViewChanged(true);
+            _map.RefreshData(true);
             OnViewChanged(true);
         }
 
@@ -245,7 +245,7 @@ namespace Mapsui.UI.Uwp
 
         public void RefreshData()
         {
-            _map.ViewChanged(true);
+            _map.RefreshData(true);
         }
 
         public void Clear()
@@ -290,7 +290,7 @@ namespace Mapsui.UI.Uwp
             TryInitializeViewport();
             Clip = new RectangleGeometry { Rect = new Rect(0, 0, ActualWidth, ActualHeight) };
             UpdateSize();
-            _map.ViewChanged(true);
+            _map.RefreshData(true);
             OnViewChanged();
             Refresh();
         }
@@ -372,7 +372,7 @@ namespace Mapsui.UI.Uwp
             _map.Viewport.Center = new Geometries.Point(x, y);
 
 
-            _map.ViewChanged(true);
+            _map.RefreshData(true);
             OnViewChanged();
             RefreshGraphics();
             ClearBBoxDrawing();
@@ -445,7 +445,7 @@ namespace Mapsui.UI.Uwp
 
             if (_map.Viewport.TryInitializeViewport(_map.Envelope, ActualWidth, ActualHeight))
             {
-                Map.ViewChanged(true);
+                Map.RefreshData(true);
                 OnViewportInitialized();
             }
         }
