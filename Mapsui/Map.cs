@@ -331,6 +331,8 @@ namespace Mapsui
             layer.CRS = CRS;
             Resolutions = DetermineResolutions(Layers);
             OnPropertyChanged(nameof(Layers));
+
+            OnRefreshGraphics();
         }
 
         private void LayersLayerRemoved(ILayer layer)
@@ -345,6 +347,8 @@ namespace Mapsui
             Resolutions = DetermineResolutions(Layers);
 
             OnPropertyChanged(nameof(Layers));
+
+            OnRefreshGraphics();
         }
 
         private static IReadOnlyList<double> DetermineResolutions(IEnumerable<ILayer> layers)
