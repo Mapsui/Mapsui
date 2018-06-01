@@ -30,7 +30,7 @@ namespace Mapsui.Samples.Common.Maps
         private void DoStuff()
         {
             var routerDb = new RouterDb();
-            using (var stream = new FileInfo(@"/path/to/some/osmfile.osm.pbf").OpenRead())
+            using (var stream = new FileInfo(@"/Resources/luxembourg-latest.osm.pbf").OpenRead())
             {
                 //!!!routerDb.LoadOsmData(stream, Vehicle.Car); // create the network for cars only.
             }
