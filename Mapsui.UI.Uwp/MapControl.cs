@@ -44,8 +44,7 @@ namespace Mapsui.UI.Uwp
     public partial class MapControl : Grid, IMapControl
     {
         private readonly Rectangle _bboxRect = CreateSelectRectangle();
-        private readonly SKXamlCanvas _renderTarget = CreateRenderTarget();
-        private bool _invalid;
+        private readonly SKXamlCanvas _canvas = CreateRenderTarget();
         private Map _map;
         private double _innerRotation;
 
@@ -55,18 +54,16 @@ namespace Mapsui.UI.Uwp
         {
             Background = new SolidColorBrush(Colors.White); // DON'T REMOVE! Touch events do not work without a background
 
-            Children.Add(_renderTarget);
+            Children.Add(_canvas);
             Children.Add(_bboxRect);
 
-            _renderTarget.PaintSurface += _renderTarget_PaintSurface;
+            _canvas.PaintSurface += Canvas_PaintSurface;
 
             Map = new Map();
 
             Loaded += MapControlLoaded;
 
             SizeChanged += MapControlSizeChanged;
-            //This event will fire @ +30Hz, so it causes lots of uneccesary re-draws when the app should be "idle"
-            //CompositionTarget.Rendering += CompositionTarget_Rendering;
 
             _scale = GetSkiaScale();
 
@@ -74,9 +71,6 @@ namespace Mapsui.UI.Uwp
 
             ManipulationMode = ManipulationModes.Scale | ManipulationModes.TranslateX | ManipulationModes.TranslateY | ManipulationModes.Rotate;
             ManipulationDelta += OnManipulationDelta;
-            ManipulationCompleted += OnManipulationCompleted;
-            //see event handler for how to force re-draw while manipulation is occuring
-            ManipulationStarted += OnManipulationStarted;
             ManipulationInertiaStarting += OnManipulationInertiaStarting;
 
             Tapped += OnSingleTapped;
@@ -246,32 +240,12 @@ namespace Mapsui.UI.Uwp
 
         public void RefreshGraphics()
         {
-            InvalidateCanvas();
-            _invalid = true;
+            _canvas.Invalidate();
         }
 
         public void RefreshData()
         {
             _map.ViewChanged(true);
-        }
-
-        internal void InvalidateCanvas()
-        {
-            //simplify the re-draw
-            //InvalidateArrange();
-            //InvalidateMeasure();
-            //_renderTarget.InvalidateArrange();
-            //_renderTarget.InvalidateMeasure();
-
-            //make sure skia re-draws
-            _renderTarget.Invalidate();
-        }
-
-
-        private void CompositionTarget_Rendering(object sender, object e)
-        {
-            //force Skia to re-draw
-            InvalidateCanvas();
         }
 
         public void Clear()
@@ -366,20 +340,16 @@ namespace Mapsui.UI.Uwp
             }
         }
 
-        private void _renderTarget_PaintSurface(object sender, SKPaintSurfaceEventArgs e)
+        private void Canvas_PaintSurface(object sender, SKPaintSurfaceEventArgs e)
         {
             if (Renderer == null) return;
             if (_map == null) return;
-            if (!_invalid) return;
 
             TryInitializeViewport();
             if (!_map.Viewport.Initialized) return;
 
             e.Surface.Canvas.Scale(_scale, _scale);
             Renderer.Render(e.Surface.Canvas, Map.Viewport, _map.Layers, _map.Widgets, _map.BackColor);
-            _renderTarget.Arrange(new Rect(0, 0, Map.Viewport.Width, Map.Viewport.Height));
-            _invalid = false;
-
         }
 
         public void ZoomToBox(Geometries.Point beginPoint, Geometries.Point endPoint)
@@ -463,30 +433,10 @@ namespace Mapsui.UI.Uwp
 
             ViewportLimiter.Limit(_map.Viewport, _map.ZoomMode, _map.ZoomLimits, _map.Resolutions,
                 _map.PanMode, _map.PanLimits, _map.Envelope);
-
-            _invalid = true;
+            RefreshGraphics();
             OnViewChanged(true);
+
             e.Handled = true;
-        }
-
-        private void OnManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e)
-        {
-            //this causes a Skia re-draw when Manipulation (i.e. a drag, etc) completes
-            Refresh();
-
-            //make sure redraws occur while dragging, etc.
-            //could also do it in OnManipulationDelta, but that appears to be less efficient for some reason.  
-            //Probably OnViewChanged() is doing some of the same work, just not invalidating the Skia view?
-            CompositionTarget.Rendering += CompositionTarget_Rendering;
-        }
-
-        private void OnManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
-        {
-            //this causes a Skia re-draw when Manipulation (i.e. a drag, etc) completes
-            Refresh();
-
-            //stop forcing redraws triggered by low-level DX timer.
-            CompositionTarget.Rendering -= CompositionTarget_Rendering;
         }
 
         private void TryInitializeViewport()
