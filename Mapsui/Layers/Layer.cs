@@ -1,3 +1,5 @@
+// TODO: There are parts talking about SharpMap
+
 // Copyright 2005, 2006 - Morten Nielsen (www.iter.dk)
 //
 // This file is part of SharpMap.
@@ -36,8 +38,15 @@ namespace Mapsui.Layers
         private readonly FetchMachine _fetchMachine;
         private readonly Delayer _delayer = new Delayer();
 
+        /// <summary>
+        /// Create a new layer
+        /// </summary>
         public Layer() : this("Layer") {}
 
+        /// <summary>
+        /// Create layer with name
+        /// </summary>
+        /// <param name="layername">Name to use for layer</param>
         public Layer(string layername) : base(layername)
         {
             _fetchDispatcher = new FeatureFetchDispatcher(_cache, Transformer);
@@ -46,8 +55,15 @@ namespace Mapsui.Layers
 
             _fetchMachine = new FetchMachine(_fetchDispatcher);
         }
+
+        /// <summary>
+        /// Time to wait before fetiching data
+        /// </summary>
         public int FetchingPostponedInMilliseconds { get; set; } = 500;
 
+        /// <summary>
+        /// Data source for this layer
+        /// </summary>
         public IProvider DataSource
         {
             get => _dataSource;
@@ -85,7 +101,7 @@ namespace Mapsui.Layers
         }
         
         /// <summary>
-        ///     Returns the extent of the layer
+        /// Returns the extent of the layer
         /// </summary>
         /// <returns>Bounding box corresponding to the extent of the features in the layer</returns>
         public override BoundingBox Envelope
@@ -99,16 +115,25 @@ namespace Mapsui.Layers
             }
         }
 
+        /// <inheritdoc />
         public override IEnumerable<IFeature> GetFeaturesInView(BoundingBox extent, double resolution)
         {
             return _cache.Features;
         }
 
+        /// <inheritdoc />
         public override void AbortFetch()
         {
             _fetchMachine.Stop();
         }
 
+        /// <inheritdoc />
+        public override void ClearCache()
+        {
+            _cache.Clear();
+        }
+
+        /// <inheritdoc />
         public override void ViewChanged(bool majorChange, BoundingBox extent, double resolution)
         {
             if (!Enabled) return;
@@ -118,11 +143,7 @@ namespace Mapsui.Layers
             _delayer.ExecuteDelayed(() => DelayedFetch(extent.Copy(), resolution), FetchingPostponedInMilliseconds);
         }
 
-        public override void ClearCache()
-        {
-            _cache.Clear();
-        }
-
+        /// <inheritdoc />
         public override bool? IsCrsSupported(string crs)
         {
             if (Transformation == null) return null;
