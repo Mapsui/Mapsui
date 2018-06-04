@@ -349,5 +349,18 @@ namespace Mapsui.UI.Android
 
             widget.HandleWidgetTouched(screenPosition);
         }
+        
+        public new void Dispose()
+        {
+            Unsubscribe();
+            base.Dispose();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            Unsubscribe();
+            base.Dispose(disposing);
+        }
+
     }
 }
