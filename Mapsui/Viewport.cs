@@ -158,60 +158,7 @@ namespace Mapsui
                 if (_modified) UpdateExtent();
                 return _windowExtent;
             }
-        }
-
-        /// <summary>
-        /// Navigate center of viewport to center of extent and change resolution
-        /// </summary>
-        /// <param name="extent">New extent for viewport to show</param>
-        /// <param name="scaleMethod">Scale method to use to determin resolution</param>
-        public void NavigateTo(BoundingBox extent, ScaleMethod scaleMethod = ScaleMethod.Fit)
-        {
-            Resolution = ZoomHelper.DetermineResolution(extent.Width, extent.Height, Width, Height, scaleMethod);
-            Center = extent.GetCentroid();
-            OnViewportChanged();
-        }
-
-        /// <summary>
-        /// Change resolution of viewport
-        /// </summary>
-        /// <param name="resolution">New resolution to use</param>
-        public void NavigateTo(double resolution)
-        {
-            Resolution = resolution;
-            OnViewportChanged();
-        }
-
-        /// <summary>
-        /// Change center of viewport
-        /// </summary>
-        /// <param name="center">New center point of viewport</param>
-        public void NavigateTo(Point center)
-        {
-            Center = center;
-            OnViewportChanged();
-        }
-
-        /// <summary>
-        /// Change center of viewport to X/Y coordinates
-        /// </summary>
-        /// <param name="x">X value of the new center</param>
-        /// <param name="y">Y value of the new center</param>
-        public void NavigateTo(double x, double y)
-        {
-            Center = new Point(x, y);
-            OnViewportChanged();
-        }
-
-        /// <summary>
-        /// Change rotation of viewport
-        /// </summary>
-        /// <param name="rotation"New rotation in degrees of viewport></param>
-        public void RotateTo(double rotation)
-        {
-            Rotation = rotation;
-            OnViewportChanged();
-        }
+        } 
 
         /// <inheritdoc />
         public Point WorldToScreen(Point worldPosition)

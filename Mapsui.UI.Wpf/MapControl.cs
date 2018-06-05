@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Net;
 using System.Windows;
 using System.Windows.Controls;
@@ -59,7 +60,6 @@ namespace Mapsui.UI.Wpf
             Children.Add(_selectRectangle);
 
             SkiaCanvas.PaintSurface += SKElementOnPaintSurface;
-            RenderingWeakEventManager.AddHandler(CompositionTargetRendering);
 
             Map = new Map();
 
@@ -83,6 +83,13 @@ namespace Mapsui.UI.Wpf
             IsManipulationEnabled = true;
 
             RenderMode = RenderMode.Skia;
+        }
+
+        protected override void OnRender(DrawingContext dc)
+        {
+            Debug.WriteLine(DateTime.Now.Ticks);
+            if (RenderMode == RenderMode.Wpf) RenderWpf();
+            base.OnRender(dc);
         }
 
         private static Rectangle CreateSelectRectangle()
@@ -145,14 +152,14 @@ namespace Mapsui.UI.Wpf
                     WpfCanvas.Visibility = Visibility.Collapsed;
                     SkiaCanvas.Visibility = Visibility.Visible;
                     Renderer = new Rendering.Skia.MapRenderer();
-                    Refresh();
+                    RefreshGraphics();
                 }
                 else
                 {
                     SkiaCanvas.Visibility = Visibility.Collapsed;
                     WpfCanvas.Visibility = Visibility.Visible;
                     Renderer = new MapRenderer();
-                    Refresh();
+                    RefreshGraphics();
                 }
                 _renderMode = value;
             }
@@ -163,8 +170,7 @@ namespace Mapsui.UI.Wpf
             return new Canvas
             {
                 VerticalAlignment = VerticalAlignment.Stretch,
-                HorizontalAlignment = HorizontalAlignment.Stretch,
-                Visibility = Visibility.Collapsed
+                HorizontalAlignment = HorizontalAlignment.Stretch
             };
         }
 
@@ -219,12 +225,14 @@ namespace Mapsui.UI.Wpf
         public void RefreshGraphics()
         {
             _invalid = true;
-            InvalidateCanvas();
+            Dispatcher.BeginInvoke(new Action(InvalidateCanvas));
         }
 
         internal void InvalidateCanvas()
         {
-            Dispatcher.BeginInvoke(new Action(InvalidateVisual));
+            if (RenderMode == RenderMode.Wpf) InvalidateVisual(); // To trigger OnRender of this MapControl
+            else SkiaCanvas.InvalidateVisual();
+
         }
 
         public void RefreshData()
@@ -517,7 +525,7 @@ namespace Mapsui.UI.Wpf
         {
             if (widget is Hyperlink hyperlink)
             {
-                System.Diagnostics.Process.Start(hyperlink.Url);
+                Process.Start(hyperlink.Url);
             }
 
             widget.HandleWidgetTouched(screenPosition);
@@ -593,18 +601,11 @@ namespace Mapsui.UI.Wpf
             ViewportInitialized?.Invoke(this, EventArgs.Empty);
         }
 
-        private void CompositionTargetRendering(object sender, EventArgs e)
-        {
-            if (!_invalid) return; // Don't render when nothing has changed
-
-            if (RenderMode == RenderMode.Wpf) RenderWpf();
-            else SkiaCanvas.InvalidateVisual();
-        }
-
         private void RenderWpf()
         {
             if (Renderer == null) return;
             if (_map == null) return;
+            if (!_invalid) return;
 
             TryInitializeViewport();
             if (!_map.Viewport.Initialized) return;
@@ -762,12 +763,6 @@ namespace Mapsui.UI.Wpf
             args.Surface.Canvas.SetMatrix(SKMatrix.MakeScale(_scale, _scale));
             Renderer.Render(args.Surface.Canvas, Map.Viewport, Map.Layers, Map.Widgets, Map.BackColor);
             _invalid = false;
-        }
-
-        ~MapControl()
-        {
-            // Because we use weak events the finalizer will be called even while the event is still registered.
-            RenderingWeakEventManager.RemoveHandler(CompositionTargetRendering);
         }
 
         public MapInfo GetMapInfo(Geometries.Point screenPosition, int margin = 0)

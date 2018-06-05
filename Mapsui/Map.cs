@@ -124,34 +124,63 @@ namespace Mapsui
         /// </summary>
         public Viewport Viewport { get; }
 
-        [Obsolete("Use Viewport.NavigateTo()")]
+        /// <summary>
+        /// Navigate center of viewport to center of extent and change resolution
+        /// </summary>
+        /// <param name="extent">New extent for viewport to show</param>
+        /// <param name="scaleMethod">Scale method to use to determin resolution</param>
         public void NavigateTo(BoundingBox extent, ScaleMethod scaleMethod = ScaleMethod.Fit)
         {
-            Viewport.NavigateTo(extent, scaleMethod);
+            Viewport.Resolution = ZoomHelper.DetermineResolution(
+                extent.Width, extent.Height, Viewport.Width, Viewport.Height, scaleMethod);
+            Viewport.Center = extent.GetCentroid();
+            OnRefreshGraphics();
+            RefreshData(true);
         }
 
-        [Obsolete("Use Viewport.NavigateTo()")]
+        /// <summary>
+        /// Change resolution of viewport
+        /// </summary>
+        /// <param name="resolution">New resolution to use</param>
         public void NavigateTo(double resolution)
         {
-            Viewport.NavigateTo(resolution);
+            Viewport.Resolution = resolution;
+            OnRefreshGraphics();
+            RefreshData(true);
         }
 
-        [Obsolete("Use Viewport.NavigateTo()")]
+        /// <summary>
+        /// Change center of viewport
+        /// </summary>
+        /// <param name="center">New center point of viewport</param>
         public void NavigateTo(Point center)
         {
-            Viewport.NavigateTo(center);
+            Viewport.Center = center;
+            OnRefreshGraphics();
+            RefreshData(true);
         }
 
-        [Obsolete("Use Viewport.NavigateTo()")]
+        /// <summary>
+        /// Change center of viewport to X/Y coordinates
+        /// </summary>
+        /// <param name="x">X value of the new center</param>
+        /// <param name="y">Y value of the new center</param>
         public void NavigateTo(double x, double y)
         {
-            Viewport.NavigateTo(x, y);
+            Viewport.Center = new Point(x, y);
+            OnRefreshGraphics();
+            RefreshData(true);
         }
 
-        [Obsolete("Use Viewport.NavigateTo()")]
+        /// <summary>
+        /// Change rotation of viewport
+        /// </summary>
+        /// <param name="rotation">New rotation in degrees of viewport></param>
         public void RotateTo(double rotation)
         {
-            Viewport.RotateTo(rotation);
+            Viewport.Rotation = rotation;
+            OnRefreshGraphics();
+            RefreshData(true);
         }
 
         /// <summary>
