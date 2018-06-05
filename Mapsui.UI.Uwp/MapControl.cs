@@ -356,6 +356,8 @@ namespace Mapsui.UI.Uwp
 
         private void CompositionTarget_Rendering(object sender, object e)
         {
+            if (!_invalid) return; 
+
             _renderTarget.Invalidate();
         }
 
