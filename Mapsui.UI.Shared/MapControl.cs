@@ -62,28 +62,8 @@ namespace Mapsui.UI.Wpf
         /// With how many degrees from 0 should map snap to 0 degrees
         /// </summary>
         public double ReSnapRotationDegrees { get; set; }
-
-
-        public IRenderer Renderer { get; set; } = new MapRenderer();
         
-        /// <summary>
-        /// Public functions
-        /// </summary>
-
-#if !__WPF__ && !__UWP__
-        // PDD: Disabled to get a compile
-        //public new void Dispose()
-        //{
-        //    Unsubscribe();
-        //    base.Dispose();
-        //}
-
-        //protected override void Dispose(bool disposing)
-        //{
-        //    Unsubscribe();
-        //    base.Dispose(disposing);
-        //}
-#endif
+        public IRenderer Renderer { get; set; } = new MapRenderer();
 
         /// <summary>
         /// Unsubscribe from map events </summary>
@@ -137,10 +117,6 @@ namespace Mapsui.UI.Wpf
             var worldPosition = viewport.ScreenToWorld(screenPosition.X * scale, screenPosition.Y * scale);
             return new Point(worldPosition.X, worldPosition.Y);
         }
-
-        /// <summary>
-        /// Private static functions
-        /// </summary>
 
         private static (Point centre, double radius, double angle) GetPinchValues(List<Point> locations)
         {

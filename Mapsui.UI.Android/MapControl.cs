@@ -373,5 +373,17 @@ namespace Mapsui.UI.Android
                 Map.Viewport.Height = ToLogicalPixels(mapControlHeight);
             }
         }
+        
+        public new void Dispose()
+        {
+            Unsubscribe();
+            base.Dispose();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            Unsubscribe();
+            base.Dispose(disposing);
+        }
     }
 }
