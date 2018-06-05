@@ -25,7 +25,8 @@ namespace Mapsui.UI.Android
         private GestureDetector _gestureDetector;
         private double _previousAngle;
         private double _previousRadius = 1f;
-        
+        private TouchMode _mode = TouchMode.None;
+
         public event EventHandler ViewportInitialized;
 
         public MapControl(Context context, IAttributeSet attrs) :

@@ -29,11 +29,6 @@ namespace Mapsui.UI.Wpf
         private float _scale;
 
         /// <summary>
-        /// Mode of a touched move event
-        /// </summary>
-        private TouchMode _mode = TouchMode.None;
-
-        /// <summary>
         /// Saver for center before last pinch movement
         /// </summary>
         private Point _previousCenter = new Point();
