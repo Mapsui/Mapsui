@@ -64,7 +64,7 @@ namespace Mapsui.UI.Uwp
 
             SizeChanged += MapControlSizeChanged;
 
-            _scale = GetSkiaScale();
+            _scale = GetDeviceIndependentUnits();
 
             PointerWheelChanged += MapControl_PointerWheelChanged;
 
@@ -423,7 +423,7 @@ namespace Mapsui.UI.Uwp
             ViewportInitialized?.Invoke(this, EventArgs.Empty);
         }
 
-        private float GetSkiaScale()
+        public float GetDeviceIndependentUnits()
         {
             var scaleFactor = DisplayInformation.GetForCurrentView().RawPixelsPerViewPixel;
             return (float)scaleFactor;

@@ -275,14 +275,14 @@ namespace Mapsui.UI.Wpf
 
         private void MapControlLoaded(object sender, RoutedEventArgs e)
         {
-            _scale = DetermineScale();
+            _scale = GetDeviceIndependentUnits();
             TryInitializeViewport();
             UpdateSize();
             InitAnimation();
             Focusable = true;
         }
 
-        private float DetermineScale()
+        public float GetDeviceIndependentUnits()
         {
             if (RenderMode == RenderMode.Skia)
             {

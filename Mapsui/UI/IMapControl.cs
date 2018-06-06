@@ -26,5 +26,7 @@ namespace Mapsui.UI
         Point ScreenToWorld(Point screenPosition);
 
         void Unsubscribe();
+
+        float GetDeviceIndependentUnits();
     }
 }

@@ -38,7 +38,7 @@ namespace Mapsui.UI.iOS
             Map = new Map();
             BackgroundColor = UIColor.White;
 
-            _scale = DetermineSkiaScale();
+            _scale = GetDeviceIndependentUnits();
 
             _canvas.TranslatesAutoresizingMaskIntoConstraints = false;
             _canvas.MultipleTouchEnabled = true;
@@ -76,7 +76,7 @@ namespace Mapsui.UI.iOS
             AddGestureRecognizer(tapGestureRecognizer);
         }
 
-        private float DetermineSkiaScale()
+        public float GetDeviceIndependentUnits()
         {
             return (float)_canvas.ContentScaleFactor;
         }

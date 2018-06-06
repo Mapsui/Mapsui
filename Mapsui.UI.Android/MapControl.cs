@@ -43,7 +43,7 @@ namespace Mapsui.UI.Android
         public void Initialize()
         {
             SetBackgroundColor(Color.Transparent);
-            _scale = DetermineSkiaScale();
+            _scale = GetDeviceIndependentUnits();
             _canvas = new SKCanvasView(Context);
             _canvas.PaintSurface += CanvasOnPaintSurface;
             AddView(_canvas);
@@ -57,7 +57,7 @@ namespace Mapsui.UI.Android
             _gestureDetector.DoubleTap += OnDoubleTapped;
         }
 
-        private float DetermineSkiaScale()
+        public float GetDeviceIndependentUnits()
         {
             return Resources.DisplayMetrics.Density;
         }
