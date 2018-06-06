@@ -20,13 +20,11 @@ namespace Mapsui.UI.Wpf
     public partial class MapControl
     {
         /// <summary>
-        /// Private global variables
-        /// </summary>
-
-        /// <summary>
         /// Display scale for converting screen position to real position
         /// </summary>
         private float _scale;
+
+        private Map _map;
 
         /// <summary>
         /// Saver for center before last pinch movement
@@ -168,6 +166,29 @@ namespace Mapsui.UI.Wpf
         {
             RefreshData();
             RefreshGraphics();
+        }
+
+        public Map Map
+        {
+            get => _map;
+            set
+            {
+                if (_map != null)
+                {
+                    UnsubscribeFromMapEvents(_map);
+                    _map = null;
+                }
+
+                _map = value;
+
+                if (_map != null)
+                {
+                    SubscribeToMapEvents(_map);
+                    _map.RefreshData(true);
+                }
+
+                RefreshGraphics();
+            }
         }
     }
 }

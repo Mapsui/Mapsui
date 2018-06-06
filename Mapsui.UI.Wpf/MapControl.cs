@@ -43,7 +43,6 @@ namespace Mapsui.UI.Wpf
         private readonly Storyboard _zoomStoryBoard = new Storyboard();
         private Geometries.Point _currentMousePosition;
         private Geometries.Point _downMousePosition;
-        private Map _map;
         private bool _mouseDown;
         private Geometries.Point _previousMousePosition;
         private RenderMode _renderMode;
@@ -110,29 +109,6 @@ namespace Mapsui.UI.Wpf
         private bool IsInBoxZoomMode { get; set; }
 
         public bool ZoomToBoxMode { get; set; }
-
-        public Map Map
-        {
-            get => _map;
-            set
-            {
-                if (_map != null)
-                {
-                    UnsubscribeFromMapEvents(_map);
-                    _map = null;
-                }
-
-                _map = value;
-
-                if (_map != null)
-                {
-                    SubscribeToMapEvents(_map);
-                    _map.RefreshData(true);
-                }
-
-                RefreshGraphics();
-            }
-        }
 
         public string ErrorMessage { get; private set; }
 

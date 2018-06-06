@@ -16,7 +16,6 @@ namespace Mapsui.UI.iOS
     [Register("MapControl"), DesignTimeVisible(true)]
     public partial class MapControl : UIView, IMapControl
     {
-        private Map _map;
         private readonly SKGLView _canvas = new SKGLView();
         private double _innerRotation;
 
@@ -206,31 +205,6 @@ namespace Mapsui.UI.iOS
         {
             return new Point(point.X, point.Y);
         }
-
-
-        public Map Map
-        {
-            get => _map;
-            set
-            {
-                if (_map != null)
-                {
-                    UnsubscribeFromMapEvents(_map);
-                    _map = null;
-                }
-
-                _map = value;
-
-                if (_map != null)
-                {
-                    SubscribeToMapEvents(_map);
-                    _map.RefreshData(true);
-                }
-
-                RefreshGraphics();
-            }
-        }
-
         private void MapRefreshGraphics(object sender, EventArgs eventArgs)
         {
             RefreshGraphics();

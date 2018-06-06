@@ -45,7 +45,6 @@ namespace Mapsui.UI.Uwp
     {
         private readonly Rectangle _bboxRect = CreateSelectRectangle();
         private readonly SKXamlCanvas _canvas = CreateRenderTarget();
-        private Map _map;
         private double _innerRotation;
 
         public event EventHandler ViewportInitialized;
@@ -122,31 +121,6 @@ namespace Mapsui.UI.Uwp
         }
 
         public bool ZoomToBoxMode { get; set; }
-
-        public Map Map
-        {
-            get => _map;
-            set
-            {
-                if (_map != null)
-                {
-                    UnsubscribeFromMapEvents(_map);
-                    _map = null;
-
-                }
-
-                _map = value;
-
-                if (_map != null)
-                {
-                    SubscribeToMapEvents(_map);
-
-                    _map.RefreshData(true);
-                }
-
-                RefreshGraphics();
-            }
-        }
 
         private void MapRefreshGraphics(object o, EventArgs eventArgs)
         {

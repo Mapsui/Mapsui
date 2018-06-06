@@ -20,7 +20,6 @@ namespace Mapsui.UI.Android
     public partial class MapControl : ViewGroup, IMapControl
     {
         private SKCanvasView _canvas;
-        private Map _map;
         private double _innerRotation;
         private GestureDetector _gestureDetector;
         private double _previousAngle;
@@ -240,30 +239,6 @@ namespace Mapsui.UI.Android
             return new PointF(
                 motionEvent.GetX(0) - view.Left,
                 motionEvent.GetY(0) - view.Top).ToMapsui();
-        }
-
-        public Map Map
-        {
-            get => _map;
-            set
-            {
-                if (_map != null)
-                {
-                    UnsubscribeFromMapEvents(_map);
-                    _map = null;
-                }
-
-                _map = value;
-
-                if (_map != null)
-                {
-                    SubscribeToMapEvents(_map);
-                    _map.RefreshData(true);
-                    PushSizeOntoViewport(Width, Height);
-                }
-
-                RefreshGraphics();
-            }
         }
 
         private void MapRefreshGraphics(object sender, EventArgs eventArgs)
