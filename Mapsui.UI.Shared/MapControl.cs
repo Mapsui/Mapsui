@@ -138,10 +138,6 @@ namespace Mapsui.UI.Wpf
         }
 
         /// <summary>
-        /// Private functions
-        /// </summary>
-
-        /// <summary>
         /// Subscribe to map events
         /// </summary>
         /// <param name="map">Map, to which events to subscribe</param>
@@ -166,6 +162,12 @@ namespace Mapsui.UI.Wpf
                 temp.RefreshGraphics -= MapRefreshGraphics;
                 temp.AbortFetch();
             }
+        }
+
+        public void Refresh()
+        {
+            RefreshData();
+            RefreshGraphics();
         }
     }
 }

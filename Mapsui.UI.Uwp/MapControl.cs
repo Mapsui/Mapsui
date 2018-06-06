@@ -232,12 +232,6 @@ namespace Mapsui.UI.Uwp
                 ViewChanged?.Invoke(this, new ViewChangedEventArgs { Viewport = Map.Viewport, UserAction = userAction });
         }
 
-        public void Refresh()
-        {
-            RefreshData();
-            RefreshGraphics();
-        }
-
         public void RefreshGraphics()
         {
             _canvas.Invalidate();

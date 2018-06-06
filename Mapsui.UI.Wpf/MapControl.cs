@@ -214,12 +214,6 @@ namespace Mapsui.UI.Wpf
             ViewChanged?.Invoke(this, new ViewChangedEventArgs { Viewport = Map.Viewport, UserAction = userAction });
         }
 
-        public void Refresh()
-        {
-            RefreshData();
-            RefreshGraphics();
-        }
-
         public void RefreshGraphics()
         {
             Dispatcher.BeginInvoke(new Action(InvalidateCanvas));

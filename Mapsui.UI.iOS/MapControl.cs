@@ -207,11 +207,6 @@ namespace Mapsui.UI.iOS
             return new Point(point.X, point.Y);
         }
 
-        public void Refresh()
-        {
-            RefreshGraphics();
-            RefreshData();
-        }
 
         public Map Map
         {

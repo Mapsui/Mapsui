@@ -315,12 +315,6 @@ namespace Mapsui.UI.Android
             _map.RefreshData(true);
         }
 
-        public void Refresh()
-        {
-            RefreshData();
-            RefreshGraphics();
-        }
-
         internal void InvalidateCanvas()
         {
             _canvas?.Invalidate();
