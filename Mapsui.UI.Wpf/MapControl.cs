@@ -44,7 +44,6 @@ namespace Mapsui.UI.Wpf
         private readonly Storyboard _zoomStoryBoard = new Storyboard();
         private Geometries.Point _currentMousePosition;
         private Geometries.Point _downMousePosition;
-        private bool _invalid = true;
         private Map _map;
         private bool _mouseDown;
         private Geometries.Point _previousMousePosition;
@@ -87,8 +86,7 @@ namespace Mapsui.UI.Wpf
 
         protected override void OnRender(DrawingContext dc)
         {
-            Debug.WriteLine(DateTime.Now.Ticks);
-            if (RenderMode == RenderMode.Wpf) RenderWpf();
+            if (RenderMode == RenderMode.Wpf) PaintWpf();
             base.OnRender(dc);
         }
 
@@ -224,7 +222,6 @@ namespace Mapsui.UI.Wpf
 
         public void RefreshGraphics()
         {
-            _invalid = true;
             Dispatcher.BeginInvoke(new Action(InvalidateCanvas));
         }
 
@@ -601,20 +598,6 @@ namespace Mapsui.UI.Wpf
             ViewportInitialized?.Invoke(this, EventArgs.Empty);
         }
 
-        private void RenderWpf()
-        {
-            if (Renderer == null) return;
-            if (_map == null) return;
-            if (!_invalid) return;
-
-            TryInitializeViewport();
-            if (!_map.Viewport.Initialized) return;
-
-            Renderer.Render(WpfCanvas, Map.Viewport, _map.Layers, Map.Widgets, _map.BackColor);
-
-            _invalid = false;
-        }
-
         public void ZoomToBox(Geometries.Point beginPoint, Geometries.Point endPoint)
         {
             var width = Math.Abs(endPoint.X - beginPoint.X);
@@ -734,7 +717,6 @@ namespace Mapsui.UI.Wpf
             ViewportLimiter.Limit(_map.Viewport, _map.ZoomMode, _map.ZoomLimits, _map.Resolutions,
                 _map.PanMode, _map.PanLimits, _map.Envelope);
 
-            _invalid = true;
             OnViewChanged(true);
             e.Handled = true;
         }
@@ -754,20 +736,33 @@ namespace Mapsui.UI.Wpf
             Refresh();
         }
 
-        private void SKElementOnPaintSurface(object sender, SKPaintSurfaceEventArgs args)
-        {
-            if (!_invalid) return; // Don't render when nothing has changed
-
-            TryInitializeViewport();
-            if (!_map.Viewport.Initialized) return;
-            args.Surface.Canvas.SetMatrix(SKMatrix.MakeScale(_scale, _scale));
-            Renderer.Render(args.Surface.Canvas, Map.Viewport, Map.Layers, Map.Widgets, Map.BackColor);
-            _invalid = false;
-        }
-
         public MapInfo GetMapInfo(Geometries.Point screenPosition, int margin = 0)
         {
             return InfoHelper.GetMapInfo(Map.Viewport, screenPosition, 1, Map.InfoLayers, Renderer.SymbolCache, margin);
+        }
+
+        private void SKElementOnPaintSurface(object sender, SKPaintSurfaceEventArgs args)
+        {
+            if (Renderer == null) return;
+            if (_map == null) return;
+
+            Debug.WriteLine(DateTime.Now.Ticks);
+            TryInitializeViewport();
+            if (!_map.Viewport.Initialized) return;
+
+            args.Surface.Canvas.SetMatrix(SKMatrix.MakeScale(_scale, _scale));
+            Renderer.Render(args.Surface.Canvas, Map.Viewport, Map.Layers, Map.Widgets, Map.BackColor);
+        }
+        
+        private void PaintWpf()
+        {
+            if (Renderer == null) return;
+            if (_map == null) return;
+
+            TryInitializeViewport();
+            if (!_map.Viewport.Initialized) return;
+
+            Renderer.Render(WpfCanvas, Map.Viewport, _map.Layers, Map.Widgets, _map.BackColor);
         }
     }
 }
