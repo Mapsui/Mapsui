@@ -94,7 +94,7 @@ namespace Mapsui.UI.Android
         {
             if (_map.Viewport.Initialized) return;
 
-            if (_map.Viewport.TryInitializeViewport(_map.Envelope, ToLogicalPixels(Width), ToLogicalPixels(Height)))
+            if (_map.Viewport.TryInitializeViewport(_map.Envelope, ToDeviceIndependentUnits(Width), ToDeviceIndependentUnits(Height)))
             {
                 Map.RefreshData(true);
                 OnViewportInitialized();
@@ -228,8 +228,8 @@ namespace Mapsui.UI.Android
             for (var i = 0; i < me.PointerCount; i++)
             {
                 result.Add(new Geometries.Point(
-                    ToLogicalPixels(me.GetX(i) - view.Left), 
-                    ToLogicalPixels(me.GetY(i) - view.Top)));
+                    ToDeviceIndependentUnits(me.GetX(i) - view.Left), 
+                    ToDeviceIndependentUnits(me.GetY(i) - view.Top)));
             }
             return result;
         }
@@ -330,17 +330,17 @@ namespace Mapsui.UI.Android
         /// and symbols will be too small). This method converts device pixels to logical pixels.
         /// </summary>
         /// <returns>The device pixels given as input translated to device pixels.</returns>
-        private float ToLogicalPixels(float devicePixels)
+        private float ToDeviceIndependentUnits(float pixelCoordinate)
         {
-            return devicePixels / _scale;
+            return pixelCoordinate / _scale;
         }
 
         void PushSizeOntoViewport(float mapControlWidth, float mapControlHeight)
         {
             if (Map != null)
             {
-                Map.Viewport.Width = ToLogicalPixels(mapControlWidth);
-                Map.Viewport.Height = ToLogicalPixels(mapControlHeight);
+                Map.Viewport.Width = ToDeviceIndependentUnits(mapControlWidth);
+                Map.Viewport.Height = ToDeviceIndependentUnits(mapControlHeight);
             }
         }
         
