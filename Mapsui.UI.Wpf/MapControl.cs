@@ -15,7 +15,6 @@ using Mapsui.Providers;
 using Mapsui.Rendering.Xaml;
 using Mapsui.Utilities;
 using Mapsui.Widgets;
-using SkiaSharp;
 using SkiaSharp.Views.Desktop;
 using SkiaSharp.Views.WPF;
 using HorizontalAlignment = System.Windows.HorizontalAlignment;
@@ -58,6 +57,7 @@ namespace Mapsui.UI.Wpf
             Children.Add(SkiaCanvas);
             Children.Add(_selectRectangle);
 
+            SkiaCanvas.IgnorePixelScaling = true;
             SkiaCanvas.PaintSurface += SKElementOnPaintSurface;
 
             Map = new Map();
@@ -750,7 +750,6 @@ namespace Mapsui.UI.Wpf
             TryInitializeViewport();
             if (!_map.Viewport.Initialized) return;
 
-            args.Surface.Canvas.SetMatrix(SKMatrix.MakeScale(_scale, _scale));
             Renderer.Render(args.Surface.Canvas, Map.Viewport, Map.Layers, Map.Widgets, Map.BackColor);
         }
         
