@@ -1,10 +1,11 @@
 ﻿using Mapsui.Geometries;
+using Mapsui.Widgets;
 using Mapsui.Widgets.ScaleBar;
 using SkiaSharp;
 
-namespace Mapsui.Rendering.Skia
+namespace Mapsui.Rendering.Skia.Widgets
 {
-    public static class ScaleBarWidgetRenderer
+    public class ScaleBarWidgetRenderer : ISkiaWidgetRenderer
     {
         private const float StrokeExternal = 4;
         private const float StrokeInternal = 2;
@@ -13,9 +14,10 @@ namespace Mapsui.Rendering.Skia
         private static SKPaint _paintScaleText;
         private static SKPaint _paintScaleTextStroke;
 
-        public static void Draw(SKCanvas canvas, double screenWidth, double screenHeight, ScaleBarWidget scaleBar,
+        public void Draw(SKCanvas canvas, double screenWidth, double screenHeight,  IWidget widget,
             float layerOpacity)
         {
+            var scaleBar = (ScaleBarWidget) widget;
             if (!scaleBar.CanTransform()) return;
 
             // If this is the first time, we call this renderer, ...

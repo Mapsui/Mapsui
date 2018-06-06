@@ -1,10 +1,11 @@
 ﻿using Mapsui.Geometries;
+using Mapsui.Widgets;
 using Mapsui.Widgets.Zoom;
 using SkiaSharp;
 
-namespace Mapsui.Rendering.Skia
+namespace Mapsui.Rendering.Skia.Widgets
 {
-    public static class ZoomInOutWidgetRenderer
+    public class ZoomInOutWidgetRenderer : ISkiaWidgetRenderer
     {
         private const float Stroke = 3;
 
@@ -12,9 +13,10 @@ namespace Mapsui.Rendering.Skia
         private static SKPaint _paintBackground;
         private static SKPaint _paintText;
 
-        public static void Draw(SKCanvas canvas, double screenWidth, double screenHeight, ZoomInOutWidget zoomInOut,
+        public void Draw(SKCanvas canvas, double screenWidth, double screenHeight, IWidget widget,
             float layerOpacity)
         {
+            var zoomInOut = (ZoomInOutWidget)widget;
             // If this widget belongs to no viewport, than stop drawing
             if (zoomInOut.Map == null)
                 return;

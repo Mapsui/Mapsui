@@ -2,13 +2,14 @@
 using SkiaSharp;
 using System;
 
-namespace Mapsui.Rendering.Skia
+namespace Mapsui.Rendering.Skia.Widgets
 {
-    public static class HyperlinkWidgetRenderer
+    public class HyperlinkWidgetRenderer : ISkiaWidgetRenderer
     {
-        public static void Draw(SKCanvas canvas, double screenWidth, double screenHeight, Hyperlink hyperlink,
+        public void Draw(SKCanvas canvas, double screenWidth, double screenHeight, IWidget widget,
             float layerOpacity)
         {
+            var hyperlink = (Hyperlink) widget;
             if (string.IsNullOrEmpty(hyperlink.Text)) return;
             var textPaint = new SKPaint { Color = hyperlink.TextColor.ToSkia(layerOpacity), IsAntialias = true };
             var backPaint = new SKPaint { Color = hyperlink.BackColor.ToSkia(layerOpacity) };

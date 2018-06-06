@@ -6,8 +6,11 @@ using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.Providers;
+using Mapsui.Rendering.Skia.Widgets;
 using Mapsui.Styles;
 using Mapsui.Widgets;
+using Mapsui.Widgets.ScaleBar;
+using Mapsui.Widgets.Zoom;
 using SkiaSharp;
 
 namespace Mapsui.Rendering.Skia
@@ -25,9 +28,18 @@ namespace Mapsui.Rendering.Skia
 
         public ISymbolCache SymbolCache => _symbolCache;
 
+        public IDictionary<Type, ISkiaWidgetRenderer> WidgetRenders { get; } = new Dictionary<Type, ISkiaWidgetRenderer>();
+
         static MapRenderer()
         {
             DefaultRendererFactory.Create = () => new MapRenderer();
+        }
+
+        public MapRenderer()
+        {
+            WidgetRenders[typeof(Hyperlink)] = new HyperlinkWidgetRenderer();
+            WidgetRenders[typeof(ScaleBarWidget)] = new ScaleBarWidgetRenderer();
+            WidgetRenders[typeof(ZoomInOutWidget)] = new ZoomInOutWidgetRenderer();
         }
 
         public void Render(object target, IViewport viewport, IEnumerable<ILayer> layers,
@@ -136,7 +148,7 @@ namespace Mapsui.Rendering.Skia
 
         private void Render(object canvas, IViewport viewport, IEnumerable<IWidget> widgets, float layerOpacity)
         {
-            WidgetRenderer.Render(canvas, viewport.Width, viewport.Height, widgets, layerOpacity);
+            WidgetRenderer.Render(canvas, viewport.Width, viewport.Height, widgets, WidgetRenders, layerOpacity);
         }
     }
 
