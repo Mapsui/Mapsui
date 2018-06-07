@@ -116,7 +116,7 @@ namespace Mapsui.UI.Android
             switch (args.Event.Action)
             {
                 case MotionEventActions.Up:
-                    InvalidateCanvas();
+                    RefreshGraphics();
                     _mode = TouchMode.None;
                     _map.RefreshData(true);
                     break;
@@ -170,7 +170,7 @@ namespace Mapsui.UI.Android
 
                                     ViewportLimiter.LimitExtent(_map.Viewport, _map.PanMode, _map.PanLimits, _map.Envelope);
 
-                                    InvalidateCanvas();
+                                    RefreshGraphics();
                                 }
                                 _previousCenter = touchPosition;
                             }
@@ -214,7 +214,7 @@ namespace Mapsui.UI.Android
                                     _map.ZoomMode, _map.ZoomLimits, _map.Resolutions,
                                     _map.PanMode, _map.PanLimits, _map.Envelope);
 
-                                InvalidateCanvas();
+                                RefreshGraphics();
                             }
                             break;
                     }
@@ -282,17 +282,12 @@ namespace Mapsui.UI.Android
 
         public void RefreshGraphics()
         {
-            _canvas.PostInvalidate();
+            PostInvalidate();
         }
 
         public void RefreshData()
         {
             _map.RefreshData(true);
-        }
-
-        internal void InvalidateCanvas()
-        {
-            _canvas?.Invalidate();
         }
 
         protected override void OnLayout(bool changed, int l, int t, int r, int b)
