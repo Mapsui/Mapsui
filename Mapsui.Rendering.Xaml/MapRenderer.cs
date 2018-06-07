@@ -14,7 +14,10 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Shapes;
+using Mapsui.Rendering.Xaml.XamlWidgets;
 using Mapsui.Widgets;
+using Mapsui.Widgets.ScaleBar;
+using Mapsui.Widgets.Zoom;
 using XamlMedia = System.Windows.Media;
 
 namespace Mapsui.Rendering.Xaml
@@ -23,10 +26,18 @@ namespace Mapsui.Rendering.Xaml
     {
         private readonly SymbolCache _symbolCache = new SymbolCache();
         public ISymbolCache SymbolCache => _symbolCache;
+        public IDictionary<Type, IWidgetRenderer> WidgetRenders { get; } = new Dictionary<Type, IWidgetRenderer>();
 
         static MapRenderer()
         {
             DefaultRendererFactory.Create = () => new MapRenderer();
+        }
+
+        public MapRenderer()
+        {
+            WidgetRenders[typeof(Hyperlink)] = new HyperlinkWidgetRenderer();
+            WidgetRenders[typeof(ScaleBarWidget)] = new ScaleBarWidgetRenderer();
+            WidgetRenders[typeof(ZoomInOutWidget)] = new ZoomInOutWidgetRenderer();
         }
 
         public void Render(object target, IViewport viewport, IEnumerable<ILayer> layers,
@@ -51,7 +62,7 @@ namespace Mapsui.Rendering.Xaml
 
         private void Render(object target, IEnumerable<IWidget> widgets)
         {
-            WidgetRenderer.Render(target, widgets);
+            WidgetRenderer.Render(target, widgets, WidgetRenders);
         }
 
         private static void Render(Canvas canvas, IViewport viewport, IEnumerable<ILayer> layers,

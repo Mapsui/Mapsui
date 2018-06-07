@@ -12,7 +12,7 @@ using System.Windows.Shapes;
 using Mapsui.Fetcher;
 using Mapsui.Layers;
 using Mapsui.Providers;
-using Mapsui.Rendering.Xaml;
+using Mapsui.Rendering.Skia;
 using Mapsui.Utilities;
 using Mapsui.Widgets;
 using SkiaSharp.Views.Desktop;
@@ -125,14 +125,14 @@ namespace Mapsui.UI.Wpf
                 {
                     WpfCanvas.Visibility = Visibility.Collapsed;
                     SkiaCanvas.Visibility = Visibility.Visible;
-                    Renderer = new Rendering.Skia.MapRenderer();
+                    Renderer = new MapRenderer();
                     RefreshGraphics();
                 }
                 else
                 {
                     SkiaCanvas.Visibility = Visibility.Collapsed;
                     WpfCanvas.Visibility = Visibility.Visible;
-                    Renderer = new MapRenderer();
+                    Renderer = new Rendering.Xaml.MapRenderer();
                     RefreshGraphics();
                 }
                 _renderMode = value;

@@ -1,15 +1,16 @@
-﻿using Mapsui.Widgets;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Media;
+using Mapsui.Widgets;
 
-namespace Mapsui.Rendering.Xaml
+namespace Mapsui.Rendering.Xaml.XamlWidgets
 {
-    public static class HyperlinkWidgetRenderer
+    public class HyperlinkWidgetRenderer : IXamlWidgetRenderer
     {
-        public static void Draw(Canvas canvas, Hyperlink hyperlink)
+        public void Draw(Canvas canvas, IWidget widget)
         {
+            var hyperlink = (Hyperlink) widget;
             if (string.IsNullOrEmpty(hyperlink.Text)) return;
             var border = CreateBorder(hyperlink);
 
@@ -42,7 +43,7 @@ namespace Mapsui.Rendering.Xaml
                     posY = (canvas.Height - border.ActualHeight) * 0.5;
                     break;
                 case Widgets.VerticalAlignment.Bottom:
-                    posY = (canvas.Height - border.ActualHeight - hyperlink.MarginY);
+                    posY = canvas.Height - border.ActualHeight - hyperlink.MarginY;
                     break;
                 //case Widgets.VerticalAlignment.Position:
                 //    posY = hyperlink.PositionY;
@@ -56,7 +57,7 @@ namespace Mapsui.Rendering.Xaml
             hyperlink.Envelope.Offset(posX, posY);
         }
 
-        private static Rect BoundsRelativeTo(this FrameworkElement element,
+        private static Rect BoundsRelativeTo(FrameworkElement element,
             Visual relativeTo)
         {
             return

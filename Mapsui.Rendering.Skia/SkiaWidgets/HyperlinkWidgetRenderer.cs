@@ -1,8 +1,8 @@
-﻿using Mapsui.Widgets;
+﻿using System;
+using Mapsui.Widgets;
 using SkiaSharp;
-using System;
 
-namespace Mapsui.Rendering.Skia.Widgets
+namespace Mapsui.Rendering.Skia.SkiaWidgets
 {
     public class HyperlinkWidgetRenderer : ISkiaWidgetRenderer
     {

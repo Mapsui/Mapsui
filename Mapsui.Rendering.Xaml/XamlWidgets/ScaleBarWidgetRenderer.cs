@@ -1,13 +1,14 @@
-﻿using Mapsui.Geometries;
-using Mapsui.Widgets.ScaleBar;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using Mapsui.Geometries;
+using Mapsui.Widgets;
+using Mapsui.Widgets.ScaleBar;
 
-namespace Mapsui.Rendering.Xaml
+namespace Mapsui.Rendering.Xaml.XamlWidgets
 {
-    public static class ScaleBarWidgetRenderer
+    public class ScaleBarWidgetRenderer : IXamlWidgetRenderer
     {
         private const float StrokeExternal = 4;
         private const float StrokeInternal = 2;
@@ -17,8 +18,10 @@ namespace Mapsui.Rendering.Xaml
         private static Brush _brushScaleText;
         private static Brush _brushScaleTextStroke;
 
-        public static void Draw(Canvas canvas, ScaleBarWidget scaleBar)
+        public void Draw(Canvas canvas, IWidget widget)
         {
+            var scaleBar = (ScaleBarWidget) widget;
+
             if (!scaleBar.CanTransform()) return;
 
             _brushScaleBar = new SolidColorBrush(scaleBar.TextColor.ToXaml());

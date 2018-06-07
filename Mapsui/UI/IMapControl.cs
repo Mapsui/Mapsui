@@ -1,5 +1,6 @@
 ﻿using System;
 using Mapsui.Geometries;
+using Mapsui.Rendering;
 
 namespace Mapsui.UI
 {
@@ -28,5 +29,7 @@ namespace Mapsui.UI
         void Unsubscribe();
 
         float GetDeviceIndependentUnits();
+
+        IRenderer Renderer { get; }
     }
 }

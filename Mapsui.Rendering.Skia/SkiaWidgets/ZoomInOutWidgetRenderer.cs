@@ -3,7 +3,7 @@ using Mapsui.Widgets;
 using Mapsui.Widgets.Zoom;
 using SkiaSharp;
 
-namespace Mapsui.Rendering.Skia.Widgets
+namespace Mapsui.Rendering.Skia.SkiaWidgets
 {
     public class ZoomInOutWidgetRenderer : ISkiaWidgetRenderer
     {

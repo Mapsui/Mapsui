@@ -62,10 +62,11 @@
     <Compile Include="ExtensionMethods\VerticalAlignment.cs" />
     <Compile Include="ExtensionMethods\HorizontalAlignment.cs" />
     <Compile Include="ExtensionMethods\BitmapImageExtensions.cs" />
-    <Compile Include="HyperlinkWidgetRenderer.cs" />
+    <Compile Include="XamlWidgets\HyperlinkWidgetRenderer.cs" />
     <Compile Include="OutlinedTextBlock.cs" />
-    <Compile Include="ZoomInOutWidgetRenderer.cs" />
-    <Compile Include="ScaleBarWidgetRenderer.cs" />
+    <Compile Include="XamlWidgets\IXamlWidgetRenderer.cs" />
+    <Compile Include="XamlWidgets\ZoomInOutWidgetRenderer.cs" />
+    <Compile Include="XamlWidgets\ScaleBarWidgetRenderer.cs" />
     <Compile Include="SymbolCache.cs" />
     <Compile Include="ExtensionMethods\GeometryExtensions.cs" />
     <Compile Include="GeometryRenderer.cs" />
@@ -84,7 +85,7 @@
     <Compile Include="StyleConverter.cs" />
     <Compile Include="ExtensionMethods\StyleExtensions.cs" />
     <Compile Include="BitmapRendering\BitmapConverter.cs" />
-    <Compile Include="WidgetRenderer.cs" />
+    <Compile Include="XamlWidgets\WidgetRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Mapsui.Geometries\Mapsui.Geometries.csproj">

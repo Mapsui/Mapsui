@@ -3,7 +3,7 @@ using Mapsui.Widgets;
 using Mapsui.Widgets.ScaleBar;
 using SkiaSharp;
 
-namespace Mapsui.Rendering.Skia.Widgets
+namespace Mapsui.Rendering.Skia.SkiaWidgets
 {
     public class ScaleBarWidgetRenderer : ISkiaWidgetRenderer
     {

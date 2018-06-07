@@ -6,7 +6,7 @@ using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.Providers;
-using Mapsui.Rendering.Skia.Widgets;
+using Mapsui.Rendering.Skia.SkiaWidgets;
 using Mapsui.Styles;
 using Mapsui.Widgets;
 using Mapsui.Widgets.ScaleBar;
@@ -28,7 +28,7 @@ namespace Mapsui.Rendering.Skia
 
         public ISymbolCache SymbolCache => _symbolCache;
 
-        public IDictionary<Type, ISkiaWidgetRenderer> WidgetRenders { get; } = new Dictionary<Type, ISkiaWidgetRenderer>();
+        public IDictionary<Type, IWidgetRenderer> WidgetRenders { get; } = new Dictionary<Type, IWidgetRenderer>();
 
         static MapRenderer()
         {
