@@ -529,7 +529,12 @@ namespace Mapsui.UI.Wpf
             if (_mouseDown && !PanLock)
             {
                 if (_previousMousePosition == null || _previousMousePosition.IsEmpty())
-                    return; // It turns out that sometimes MouseMove+Pressed is called before MouseDown
+                {
+                    // Usually MapControlMouseLeftButton down initializes _previousMousePosition but in some
+                    // situations this can happen. So far I could only reproduce this by putting a breakpoint
+                    // and continuing.
+                    return; 
+                }
 
                 _currentMousePosition = e.GetPosition(this).ToMapsui(); //Needed for both MouseMove and MouseWheel event
 
