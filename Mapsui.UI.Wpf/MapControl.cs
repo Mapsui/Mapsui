@@ -528,7 +528,7 @@ namespace Mapsui.UI.Wpf
 
             if (_mouseDown && !PanLock)
             {
-                if (_previousMousePosition == default(Geometries.Point))
+                if (_previousMousePosition == null || _previousMousePosition.IsEmpty())
                     return; // It turns out that sometimes MouseMove+Pressed is called before MouseDown
 
                 _currentMousePosition = e.GetPosition(this).ToMapsui(); //Needed for both MouseMove and MouseWheel event
