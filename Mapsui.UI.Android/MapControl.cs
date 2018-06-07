@@ -2,12 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using Android.App;
 using Android.Content;
 using Android.Graphics;
 using Android.Util;
 using Android.Views;
-using Java.Lang;
 using Mapsui.Fetcher;
 using Mapsui.Layers;
 using Mapsui.Logging;
@@ -243,7 +241,7 @@ namespace Mapsui.UI.Android
 
         private void MapRefreshGraphics(object sender, EventArgs eventArgs)
         {
-            ((Activity)Context).RunOnUiThread(new Runnable(RefreshGraphics));
+            RefreshGraphics();
         }
 
         private void MapPropertyChanged(object sender, PropertyChangedEventArgs e)
