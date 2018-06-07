@@ -263,17 +263,12 @@ namespace Mapsui.UI.iOS
         public void RefreshGraphics()
         {
             SetNeedsDisplay();
-            InvalidateCanvas();
+            _canvas?.SetNeedsDisplay(); // todo: check if this is needed.
         }
 
         public void RefreshData()
         {
             _map?.RefreshData(true);
-        }
-
-        internal void InvalidateCanvas()
-        {
-            _canvas?.SetNeedsDisplay();
         }
 
         public override CGRect Frame
