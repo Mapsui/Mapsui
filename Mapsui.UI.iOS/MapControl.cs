@@ -79,7 +79,7 @@ namespace Mapsui.UI.iOS
 
         private float DetermineSkiaScale()
         {
-            return (float)_canvas.ContentScaleFactor;
+            return (float)ContentScaleFactor;
         }
 
         private void OnDoubleTapped(UITapGestureRecognizer gesture)
@@ -294,7 +294,6 @@ namespace Mapsui.UI.iOS
         public void RefreshGraphics()
         {
             SetNeedsDisplay();
-            InvalidateCanvas();
         }
 
         public void RefreshData()
@@ -304,7 +303,7 @@ namespace Mapsui.UI.iOS
 
         internal void InvalidateCanvas()
         {
-            _canvas?.SetNeedsDisplay();
+            SetNeedsDisplay();
         }
 
         public override CGRect Frame

@@ -302,7 +302,7 @@ namespace Mapsui.UI.Android
 
         public void RefreshGraphics()
         {
-            _canvas.PostInvalidate();
+            PostInvalidate();
         }
 
         public void RefreshData()
@@ -318,7 +318,7 @@ namespace Mapsui.UI.Android
 
         internal void InvalidateCanvas()
         {
-            _canvas?.Invalidate();
+            PostInvalidate();
         }
 
         protected override void OnLayout(bool changed, int l, int t, int r, int b)
