@@ -1,8 +1,8 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using System.Windows.Media;
 using Mapsui.Widgets;
+using TextBox = Mapsui.Widgets.TextBox;
 
 namespace Mapsui.Rendering.Xaml.XamlWidgets
 {
@@ -12,73 +12,45 @@ namespace Mapsui.Rendering.Xaml.XamlWidgets
         {
             var hyperlink = (Hyperlink) widget;
             if (string.IsNullOrEmpty(hyperlink.Text)) return;
-            var border = CreateBorder(hyperlink);
-
-            canvas.Children.Add(border);
-            border.UpdateLayout(); // to calculate the boundingbox
-
-            // Get position in x direction
-            double posX = 0;
-            switch(hyperlink.HorizontalAlignment)
-            {
-                case Widgets.HorizontalAlignment.Left:
-                    posX = hyperlink.MarginX;
-                    break;
-                case Widgets.HorizontalAlignment.Center:
-                    posX = (canvas.Width - border.ActualWidth) * 0.5;
-                    break;
-                case Widgets.HorizontalAlignment.Right:
-                    posX = (canvas.Width - border.ActualWidth - hyperlink.MarginX);
-                    break;
-            }
-
-            // Get position in x direction
-            double posY = 0;
-            switch (hyperlink.VerticalAlignment)
-            {
-                case Widgets.VerticalAlignment.Top:
-                    posY = hyperlink.MarginY;
-                    break;
-                case Widgets.VerticalAlignment.Center:
-                    posY = (canvas.Height - border.ActualHeight) * 0.5;
-                    break;
-                case Widgets.VerticalAlignment.Bottom:
-                    posY = canvas.Height - border.ActualHeight - hyperlink.MarginY;
-                    break;
-                //case Widgets.VerticalAlignment.Position:
-                //    posY = hyperlink.PositionY;
-                //    break;
-            }
-
-            Canvas.SetLeft(border, posX);
-            Canvas.SetTop(border, posY);
-
-            hyperlink.Envelope = BoundsRelativeTo(border, canvas).ToMapsui();
-            hyperlink.Envelope.Offset(posX, posY);
+            var border = ToBorder(hyperlink);
+            canvas.Children.Add(WrapInGrid(canvas.Width, canvas.Height, border));
         }
 
-        private static Rect BoundsRelativeTo(FrameworkElement element,
-            Visual relativeTo)
+        private static Grid WrapInGrid(double width, double height, Border border)
         {
-            return
-                element.TransformToVisual(relativeTo)
-                    .TransformBounds(LayoutInformation.GetLayoutSlot(element));
+            // Relative positioning is used in for the border. For this a Canvas won't
+            // work so we use a Grid here. It needs to have the size of the Canvas.
+            var grid = new Grid()
+            {
+                Width = width,
+                Height = height,
+                Background = null
+            };
+            grid.Children.Add(border);
+            return grid;
         }
 
-        private static Border CreateBorder(Widgets.TextBox textBox)
+        private static Border ToBorder(TextBox textBox)
         {
+
             return new Border
             {
                 Padding = new Thickness(textBox.PaddingX, textBox.PaddingY, textBox.PaddingX, textBox.PaddingY),
+                Margin = new Thickness(textBox.MarginX, textBox.MarginY, textBox.MarginX, textBox.MarginY),
+                Background = new SolidColorBrush(textBox.BackColor.ToXaml()),
                 HorizontalAlignment = textBox.HorizontalAlignment.ToXaml(),
                 VerticalAlignment = textBox.VerticalAlignment.ToXaml(),
-                Background = new SolidColorBrush(textBox.BackColor.ToXaml()),
                 CornerRadius = new CornerRadius(textBox.CornerRadius),
-                Child = new TextBlock
-                {
-                    Text = textBox.Text,
-                    Foreground = new SolidColorBrush(textBox.TextColor.ToXaml())
-                }
+                Child = ToTextBlock(textBox)
+            };
+        }
+
+        private static TextBlock ToTextBlock(TextBox textBox)
+        {
+            return new TextBlock
+            {
+                Text = textBox.Text,
+                Foreground = new SolidColorBrush(textBox.TextColor.ToXaml())
             };
         }
     }
