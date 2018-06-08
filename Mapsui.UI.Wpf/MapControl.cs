@@ -414,7 +414,7 @@ namespace Mapsui.UI.Wpf
 
         private void MapControlMouseLeave(object sender, MouseEventArgs e)
         {
-            _previousMousePosition = new Geometries.Point();
+            _previousMousePosition = null;
             ReleaseMouseCapture();
         }
 
@@ -490,7 +490,7 @@ namespace Mapsui.UI.Wpf
             OnViewChanged(true);
             _mouseDown = false;
 
-            _previousMousePosition = new Geometries.Point();
+            _previousMousePosition = null;
             ReleaseMouseCapture();
         }
 
@@ -553,8 +553,8 @@ namespace Mapsui.UI.Wpf
 
             if (_mouseDown && !PanLock)
             {
-                if (_previousMousePosition == default(Geometries.Point))
-                    return; // It turns out that sometimes MouseMove+Pressed is called before MouseDown
+                if (_previousMousePosition == null)
+                    return; // This can happen somehow. Perhaps only after a breakpoint is hit in debug.
 
                 _currentMousePosition = e.GetPosition(this).ToMapsui(); //Needed for both MouseMove and MouseWheel event
 
