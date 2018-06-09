@@ -263,7 +263,6 @@ namespace Mapsui.UI.iOS
         public void RefreshGraphics()
         {
             SetNeedsDisplay();
-            _canvas?.SetNeedsDisplay(); // todo: check if this is needed.
         }
 
         public void RefreshData()
