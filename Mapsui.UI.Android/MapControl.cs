@@ -280,7 +280,17 @@ namespace Mapsui.UI.Android
 
         public void RefreshGraphics()
         {
-            PostInvalidate();
+            try
+            {
+                PostInvalidate();
+            }
+            catch (ObjectDisposedException e)
+            {
+                // See issue: https://github.com/Mapsui/Mapsui/issues/433
+                // I assume explicit Dispose it called by the something in Xamarin. Perhaps the Activity wrapper.
+                // If the global MessageCenter is still triggering RefreshGraphics calls this can happen.
+                Logger.Log(LogLevel.Warning, "This can happen when the parent Activity is disposing.", e);
+            }
         }
 
         public void RefreshData()
