@@ -309,8 +309,9 @@ namespace Mapsui.UI.Android
             catch (ObjectDisposedException e)
             {
                 // See issue: https://github.com/Mapsui/Mapsui/issues/433
-                // I assume explicit Dispose it called by the something in Xamarin. Perhaps the Activity wrapper.
-                // If the global MessageCenter is still triggering RefreshGraphics calls this can happen.
+                // What seems to be happening. The Activity is Disposed. Appently it's children get Disposed
+                // explicitly by some in Xamarin. During this Dispose the MessageCenter, which is itself not
+                // disposed get another notification to call RefreshGraphics.
                 Logger.Log(LogLevel.Warning, "This can happen when the parent Activity is disposing.", e);
             }
         }
@@ -331,13 +332,13 @@ namespace Mapsui.UI.Android
             try
             {
                 PostInvalidate();
-
             }
             catch (ObjectDisposedException e)
             {
                 // See issue: https://github.com/Mapsui/Mapsui/issues/433
-                // I assume explicit Dispose it called by the something in Xamarin. Perhaps the Activity wrapper.
-                // If the global MessageCenter is still triggering RefreshGraphics calls this can happen.
+                // What seems to be happening. The Activity is Disposed. Appently it's children get Disposed
+                // explicitly by some in Xamarin. During this Dispose the MessageCenter, which is itself not
+                // disposed get another notification to call RefreshGraphics.
                 Logger.Log(LogLevel.Warning, "This can happen when the parent Activity is disposing.", e);
             }
         }
