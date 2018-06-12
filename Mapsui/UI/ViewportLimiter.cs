@@ -46,7 +46,7 @@ namespace Mapsui.UI
         /// <summary>
         /// Restricts zoom in no way
         /// </summary>
-        None,
+        Unlimited,
         /// <summary>
         /// Restricts zoom of the viewport to ZoomLimits and, if ZoomLimits isn't 
         /// set, to minimum and maxiumum of Resolutions
@@ -82,7 +82,7 @@ namespace Mapsui.UI
         public static double LimitResolution(double resolution, double screenWidth, double screenHeight, ZoomMode zoomMode, MinMax zoomLimits, 
             IReadOnlyList<double> mapResolutions, BoundingBox mapEnvelope)
         {
-            if (zoomMode == ZoomMode.None) return resolution;
+            if (zoomMode == ZoomMode.Unlimited) return resolution;
 
             var resolutionExtremes = zoomLimits ?? GetExtremes(mapResolutions);
             if (resolutionExtremes == null) return resolution;
