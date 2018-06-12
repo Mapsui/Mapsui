@@ -484,6 +484,12 @@ namespace Mapsui.Geometries
         /// </summary>
         public Point Centroid => (Min + Max) * .5;
 
+        [Obsolete("Use the Centroid field instead")]
+        public Point GetCentroid()
+        {
+            return Centroid;
+        }
+
         /// <summary>
         ///     Creates a copy of the BoundingBox
         /// </summary>
