@@ -67,7 +67,8 @@ namespace Mapsui.Geometries
         /// <returns>Returns 'true' if this Geometry is the empty geometry</returns>
         public override bool IsEmpty()
         {
-            if ((Polygons == null) || (Polygons.Count == 0)) return true;
+            if (Polygons == null || Polygons.Count == 0) return true;
+
             return Polygons.All(polygon => polygon.IsEmpty());
         }
 
@@ -111,6 +112,11 @@ namespace Mapsui.Geometries
             return Polygons[n];
         }
 
+        [Obsolete("Use the BoundingBox field instead", true)]
+        public new BoundingBox GetBoundingBox()
+        {
+            throw new NotImplementedException();
+        }
         /// <summary>
         ///     Returns the bounding box of the object
         /// </summary>

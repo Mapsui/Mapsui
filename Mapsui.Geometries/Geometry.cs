@@ -57,6 +57,12 @@ namespace Mapsui.Geometries
             return envelope;
         }
 
+        [Obsolete("Use the BoundingBox field instead", true)]
+        public BoundingBox GetBoundingBox()
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         ///     The minimum bounding box for this <see cref="Geometry" />, returned as a <see cref="Geometries.BoundingBox" />.
         /// </summary>
