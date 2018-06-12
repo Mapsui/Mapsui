@@ -14,7 +14,7 @@ At the moment of writing (11 may 2018) a first beta of Mapsui v2 has been releas
 - Go to .NET Standard
 - Rename Map.ViewChanged to Map.RefreshData
 - Remove WPFs MapControl.ErrorMessage
-- Remame PanMode.None and ZoomMode.None. See question 1: https://github.com/pauldendulk/Mapsui/issues/278
+- Rename PanMode.None and ZoomMode.None. See question 1: https://github.com/pauldendulk/Mapsui/issues/278
 - Rename BoundingBox.GetCentroid to Centroid
 - Rename IGeometry.GetBoundingBox to BoundingBox
 
