@@ -112,10 +112,10 @@ namespace Mapsui.Geometries
             return Polygons[n];
         }
 
-        [Obsolete("Use the BoundingBox field instead", true)]
+        [Obsolete("Use the BoundingBox field instead")]
         public new BoundingBox GetBoundingBox()
         {
-            throw new NotImplementedException();
+            return BoundingBox;
         }
         /// <summary>
         ///     Returns the bounding box of the object

@@ -57,10 +57,10 @@ namespace Mapsui.Geometries
             return envelope;
         }
 
-        [Obsolete("Use the BoundingBox field instead", true)]
+        [Obsolete("Use the BoundingBox field instead")]
         public BoundingBox GetBoundingBox()
         {
-            throw new NotImplementedException();
+            return BoundingBox;
         }
 
         /// <summary>
