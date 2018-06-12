@@ -4,9 +4,9 @@ using System.ComponentModel;
 using System.Linq;
 using Android.Content;
 using Android.Graphics;
+using Android.OS;
 using Android.Util;
 using Android.Views;
-using Mapsui.Fetcher;
 using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.Widgets;
@@ -76,6 +76,11 @@ namespace Mapsui.UI.Android
         {
             base.OnSizeChanged(width, height, oldWidth, oldHeight);
             PushSizeOntoViewport(width, height);
+        }
+
+        private void RunOnUIThread(Action action)
+        {
+            new Handler(Looper.MainLooper).Post(action);
         }
 
         private void CanvasOnPaintSurface(object sender, SKPaintSurfaceEventArgs args)
@@ -255,23 +260,7 @@ namespace Mapsui.UI.Android
                 RefreshGraphics();
             }
         }
-
-        private void MapDataChanged(object sender, DataChangedEventArgs e)
-        {
-            if (e.Cancelled || e.Error != null)
-            {
-                Logger.Log(LogLevel.Warning, "An error occurred while fetching data", e.Error);
-            }
-            else if (e.Cancelled)
-            {
-                Logger.Log(LogLevel.Warning, "Fetching data was cancelled", e.Error);
-            }
-            else // no problems
-            {
-                RefreshGraphics();
-            }
-        }
-
+        
         protected override void OnDraw(Canvas canvas)
         {
             Invalidate();

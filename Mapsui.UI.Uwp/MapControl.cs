@@ -269,43 +269,11 @@ namespace Mapsui.UI.Uwp
             Map.Viewport.Width = ActualWidth;
             Map.Viewport.Height = ActualHeight;
         }
-        
-        public void MapDataChanged(object sender, DataChangedEventArgs e)
+
+        private void RunOnUIThread(Action action)
         {
-            if (!Dispatcher.HasThreadAccess)
-            {
-                Task.Run(() => Dispatcher.RunAsync(
-                    CoreDispatcherPriority.Normal, () => MapDataChanged(sender, e)));
-            }
-            else
-            {
-                try
-                {
-                    if (e.Cancelled)
-                    {
-                        ErrorMessage = "Cancelled";
-                        OnErrorMessageChanged(EventArgs.Empty);
-                    }
-                    else if (e.Error is WebException)
-                    {
-                        ErrorMessage = "WebException: " + e.Error.Message;
-                        OnErrorMessageChanged(EventArgs.Empty);
-                    }
-                    else if (e.Error != null)
-                    {
-                        ErrorMessage = e.Error.GetType() + ": " + e.Error.Message;
-                        OnErrorMessageChanged(EventArgs.Empty);
-                    }
-                    else // no problems
-                    {
-                        RefreshGraphics();
-                    }
-                }
-                catch (Exception exception)
-                {
-                    Logger.Log(LogLevel.Warning, "Unexpected exception in MapDataChanged", exception);
-                }
-            }
+            Task.Run(() => Dispatcher.RunAsync(
+                CoreDispatcherPriority.Normal, () => action()));
         }
 
         private void Canvas_PaintSurface(object sender, SKPaintSurfaceEventArgs e)

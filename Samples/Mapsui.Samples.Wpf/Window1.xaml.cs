@@ -19,7 +19,6 @@ namespace Mapsui.Samples.Wpf
         public Window1()
         {
             InitializeComponent();
-            MapControl.ErrorMessageChanged += MapErrorMessageChanged;
             MapControl.FeatureInfo += MapControlFeatureInfo;
             MapControl.MouseMove += MapControlOnMouseMove;
             MapControl.RotationLock = false;
@@ -161,12 +160,7 @@ namespace Mapsui.Samples.Wpf
         {
             MessageBox.Show(e.FeatureInfo.ToDisplayText());
         }
-
-        private void MapErrorMessageChanged(object sender, EventArgs e)
-        {
-            LogTextBox.Text = MapControl.ErrorMessage; // todo: keep history
-        }
-
+        
         private void RotationSliderChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             var percent = RotationSlider.Value / (RotationSlider.Maximum - RotationSlider.Minimum);

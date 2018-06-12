@@ -1,4 +1,3 @@
-using Mapsui.Fetcher;
 using CoreFoundation;
 using Foundation;
 using UIKit;
@@ -7,7 +6,6 @@ using System.ComponentModel;
 using System.Linq;
 using CoreGraphics;
 using Mapsui.Geometries;
-using Mapsui.Logging;
 using Mapsui.Widgets;
 using SkiaSharp.Views.iOS;
 
@@ -222,44 +220,11 @@ namespace Mapsui.UI.iOS
             }
         }
 
-        private void MapDataChanged(object sender, DataChangedEventArgs e)
+        private void RunOnUIThread(Action action)
         {
-            string errorMessage;
-
-            DispatchQueue.MainQueue.DispatchAsync(delegate
-            {
-                try
-                {
-                    if (e == null)
-                    {
-                        errorMessage = "MapDataChanged Unexpected error: DataChangedEventArgs can not be null";
-                        Console.WriteLine(errorMessage);
-                    }
-                    else if (e.Cancelled)
-                    {
-                        errorMessage = "MapDataChanged: Cancelled";
-                        System.Diagnostics.Debug.WriteLine(errorMessage);
-                    }
-                    else if (e.Error is System.Net.WebException)
-                    {
-                        errorMessage = "MapDataChanged WebException: " + e.Error.Message;
-                        Console.WriteLine(errorMessage);
-                    }
-                    else if (e.Error != null)
-                    {
-                        errorMessage = "MapDataChanged errorMessage: " + e.Error.GetType() + ": " + e.Error.Message;
-                        Console.WriteLine(errorMessage);
-                    }
-
-                    RefreshGraphics();
-                }
-                catch (Exception exception)
-                {
-                    Logger.Log(LogLevel.Warning, "Unexpected exception in MapDataChanged", exception);
-                }
-            });
+            DispatchQueue.MainQueue.DispatchAsync(action);
         }
-
+        
         public void RefreshGraphics()
         {
             SetNeedsDisplay();
