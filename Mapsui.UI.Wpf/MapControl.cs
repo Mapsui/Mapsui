@@ -164,17 +164,13 @@ namespace Mapsui.UI.Wpf
 
         private void MapPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (!Dispatcher.CheckAccess()) Dispatcher.BeginInvoke(new Action(() => MapPropertyChanged(sender, e)));
-            else
+            if (e.PropertyName == nameof(Layer.Enabled))
             {
-                if (e.PropertyName == nameof(Layer.Enabled))
-                {
-                    RefreshGraphics();
-                }
-                else if (e.PropertyName == nameof(Layer.Opacity))
-                {
-                    RefreshGraphics();
-                }
+                RefreshGraphics();
+            }
+            else if (e.PropertyName == nameof(Layer.Opacity))
+            {
+                RefreshGraphics();
             }
         }
 
@@ -187,7 +183,7 @@ namespace Mapsui.UI.Wpf
 
         public void RefreshGraphics()
         {
-            Dispatcher.BeginInvoke(new Action(InvalidateCanvas));
+            RunOnUIThread(InvalidateCanvas);
         }
 
         internal void InvalidateCanvas()
@@ -566,10 +562,7 @@ namespace Mapsui.UI.Wpf
 
         private void ClearBBoxDrawing()
         {
-            Dispatcher.BeginInvoke(new Action(() =>
-            {
-                _selectRectangle.Visibility = Visibility.Collapsed;
-            }));
+            RunOnUIThread(() => _selectRectangle.Visibility = Visibility.Collapsed);
         }
 
         private void DrawBbox(Point newPos)

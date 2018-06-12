@@ -269,6 +269,11 @@ namespace Mapsui.UI.Android
 
         public void RefreshGraphics()
         {
+            RunOnUIThread(RefreshGraphicsWithTryCatch);
+        }
+
+        private void RefreshGraphicsWithTryCatch()
+        {
             try
             {
                 PostInvalidate();

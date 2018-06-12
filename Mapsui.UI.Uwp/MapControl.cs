@@ -17,7 +17,6 @@
 
 using System;
 using System.ComponentModel;
-using System.Net;
 using System.Threading.Tasks;
 using Windows.Devices.Sensors;
 using Windows.Foundation;
@@ -30,9 +29,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Shapes;
-using Mapsui.Fetcher;
 using Mapsui.Layers;
-using Mapsui.Logging;
 using Mapsui.Utilities;
 using Mapsui.Widgets;
 using SkiaSharp.Views.UWP;
@@ -77,8 +74,7 @@ namespace Mapsui.UI.Uwp
 
             var orientationSensor = SimpleOrientationSensor.GetDefault();
             if (orientationSensor != null)
-                orientationSensor.OrientationChanged += (sender, args) =>
-                    Task.Run(() => Dispatcher.RunAsync(CoreDispatcherPriority.Normal, Refresh));
+                orientationSensor.OrientationChanged += (sender, args) => RunOnUIThread(Refresh);
         }
 
         private void OnDoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
@@ -120,23 +116,19 @@ namespace Mapsui.UI.Uwp
             };
         }
 
-        public bool ZoomToBoxMode { get; set; }
-
         private void MapRefreshGraphics(object o, EventArgs eventArgs)
         {
             RefreshGraphics();
         }
-
-        public string ErrorMessage { get; private set; }
 
         public bool ZoomLocked { get; set; }
 
         public event EventHandler ErrorMessageChanged;
         public event EventHandler<ViewChangedEventArgs> ViewChanged;
 
-        private async void MapPropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void MapPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            await Dispatcher.RunAsync(CoreDispatcherPriority.Low, () => MapPropertyChanged(e));
+            RunOnUIThread(() => MapPropertyChanged(e));
         }
 
         private void MapPropertyChanged(PropertyChangedEventArgs e)
@@ -208,7 +200,7 @@ namespace Mapsui.UI.Uwp
 
         public void RefreshGraphics()
         {
-            _canvas.Invalidate();
+            RunOnUIThread(() => _canvas?.Invalidate());
         }
 
         public void RefreshData()
@@ -272,8 +264,7 @@ namespace Mapsui.UI.Uwp
 
         private void RunOnUIThread(Action action)
         {
-            Task.Run(() => Dispatcher.RunAsync(
-                CoreDispatcherPriority.Normal, () => action()));
+            Task.Run(() => Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => action()));
         }
 
         private void Canvas_PaintSurface(object sender, SKPaintSurfaceEventArgs e)

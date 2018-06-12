@@ -227,7 +227,7 @@ namespace Mapsui.UI.iOS
         
         public void RefreshGraphics()
         {
-            SetNeedsDisplay();
+            RunOnUIThread(SetNeedsDisplay);
         }
 
         public void RefreshData()
