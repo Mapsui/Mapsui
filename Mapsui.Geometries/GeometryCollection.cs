@@ -48,10 +48,7 @@ namespace Mapsui.Geometries
         /// </summary>
         /// <param name="index">Geometry index</param>
         /// <returns>Geometry</returns>
-        public Geometry this[int index]
-        {
-            get { return Collection[index]; }
-        }
+        public Geometry this[int index] => Collection[index];
 
         /// <summary>
         ///     Gets or sets the GeometryCollection
@@ -84,10 +81,7 @@ namespace Mapsui.Geometries
         /// <summary>
         ///     Gets the number of geometries in the collection.
         /// </summary>
-        public virtual int NumGeometries
-        {
-            get { return Collection.Count; }
-        }
+        public virtual int NumGeometries => Collection.Count;
 
         /// <summary>
         ///     Returns an indexed geometry in the collection
@@ -121,16 +115,20 @@ namespace Mapsui.Geometries
         ///     The minimum bounding box for this Geometry, returned as a BoundingBox.
         /// </summary>
         /// <returns></returns>
-        public override BoundingBox BoundingBox()
+        public override BoundingBox BoundingBox
         {
-            if (Collection.Count == 0)
-                return null;
-            var b = this[0].BoundingBox();
-            foreach (var geometry in Collection)
+            get
             {
-                b = b.Join(geometry.BoundingBox());
+                if (Collection.Count == 0)
+                    return null;
+                var b = this[0].BoundingBox;
+                foreach (var geometry in Collection)
+                {
+                    b = b.Join(geometry.BoundingBox);
+                }
+
+                return b;
             }
-            return b;
         }
 
         /// <summary>

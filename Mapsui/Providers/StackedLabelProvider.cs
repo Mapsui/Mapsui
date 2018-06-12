@@ -58,7 +58,7 @@ namespace Mapsui.Providers
 
                 var offsetY = double.NaN;
 
-                var orderedFeatures = cluster.Features.OrderBy(f => f.Geometry.BoundingBox().Centroid.Y);
+                var orderedFeatures = cluster.Features.OrderBy(f => f.Geometry.BoundingBox.Centroid.Y);
 
                 foreach (var pointFeature in orderedFeatures)
                 {
@@ -155,7 +155,7 @@ namespace Mapsui.Providers
             var style = layerStyle;
 
             // todo: This method should repeated several times until there are no more merges
-            foreach (var feature in features.OrderBy(f => f.Geometry.BoundingBox().Centroid.Y))
+            foreach (var feature in features.OrderBy(f => f.Geometry.BoundingBox.Centroid.Y))
             {
                 if (layerStyle is IThemeStyle themeStyle)
                     style = themeStyle.GetStyle(feature);
@@ -167,10 +167,10 @@ namespace Mapsui.Providers
 
                 var found = false;
                 foreach (var cluster in clusters)
-                    if (cluster.Box.Grow(minDistance).Contains(feature.Geometry.BoundingBox().Centroid))
+                    if (cluster.Box.Grow(minDistance).Contains(feature.Geometry.BoundingBox.Centroid))
                     {
                         cluster.Features.Add(feature);
-                        cluster.Box = cluster.Box.Join(feature.Geometry.BoundingBox());
+                        cluster.Box = cluster.Box.Join(feature.Geometry.BoundingBox);
                         found = true;
                         break;
                     }
@@ -179,7 +179,7 @@ namespace Mapsui.Providers
 
                 clusters.Add(new Cluster
                 {
-                    Box = feature.Geometry.BoundingBox().Clone(),
+                    Box = feature.Geometry.BoundingBox.Clone(),
                     Features = new List<IFeature> {feature}
                 });
             }

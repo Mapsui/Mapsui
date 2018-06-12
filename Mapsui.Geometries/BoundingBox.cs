@@ -68,7 +68,7 @@ namespace Mapsui.Geometries
         ///     Initializes a new Bounding Box based on the bounds from a set of geometries
         /// </summary>
         /// <param name="objects">list of objects</param>
-        public BoundingBox(IEnumerable<Geometry> objects) : this(objects.Select(o => o.BoundingBox())) {}
+        public BoundingBox(IEnumerable<Geometry> objects) : this(objects.Select(o => o.BoundingBox)) {}
 
         /// <summary>
         ///     Initializes a new Bounding Box based on the bounds from a set of bounding boxes

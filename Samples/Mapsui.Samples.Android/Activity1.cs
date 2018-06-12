@@ -94,7 +94,7 @@ namespace Mapsui.Samples.Android
         private void ShowPopup(MapInfoEventArgs args)
         {
             var mapControl = FindViewById<MapControl>(Resource.Id.mapcontrol);
-            var screenPosition = mapControl.WorldToScreen(args.MapInfo.Feature.Geometry.BoundingBox().Centroid);
+            var screenPosition = mapControl.WorldToScreen(args.MapInfo.Feature.Geometry.BoundingBox.Centroid);
             
             // todo use screenPosition to test WorldToScreen
             _popup.SetX((float)args.MapInfo.ScreenPosition.X);

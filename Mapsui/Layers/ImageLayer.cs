@@ -109,7 +109,7 @@ namespace Mapsui.Layers
                 if (feature.Geometry == null)
                     continue;
 
-                if (box.Intersects(feature.Geometry.BoundingBox()))
+                if (box.Intersects(feature.Geometry.BoundingBox))
                 {
                     yield return feature;
                 }

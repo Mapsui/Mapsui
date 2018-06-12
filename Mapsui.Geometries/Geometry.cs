@@ -47,7 +47,7 @@ namespace Mapsui.Geometries
         /// <seealso cref="BoundingBox" />
         public Geometry Envelope()
         {
-            var box = BoundingBox();
+            var box = BoundingBox;
             var envelope = new Polygon();
             envelope.ExteriorRing.Vertices.Add(box.Min); //minx miny
             envelope.ExteriorRing.Vertices.Add(new Point(box.Max.X, box.Min.Y)); //maxx minu
@@ -61,7 +61,7 @@ namespace Mapsui.Geometries
         ///     The minimum bounding box for this <see cref="Geometry" />, returned as a <see cref="Geometries.BoundingBox" />.
         /// </summary>
         /// <returns></returns>
-        public abstract BoundingBox BoundingBox();
+        public abstract BoundingBox BoundingBox { get; }
 
         /// <summary>
         ///     Exports this <see cref="Geometry" /> to a specific well-known text representation of <see cref="Geometry" />.

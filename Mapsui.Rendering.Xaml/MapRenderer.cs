@@ -207,7 +207,7 @@ namespace Mapsui.Rendering.Xaml
                 var labelStyle = (LabelStyle) style;
                 var labelText = labelStyle.GetLabelText(feature);
                 if (string.IsNullOrEmpty(labelText)) return;
-                canvas.Children.Add(LabelRenderer.RenderLabel(feature.Geometry.BoundingBox().Centroid,
+                canvas.Children.Add(LabelRenderer.RenderLabel(feature.Geometry.BoundingBox.Centroid,
                     labelStyle, viewport, labelText));
             }
             else
@@ -265,7 +265,7 @@ namespace Mapsui.Rendering.Xaml
             else if (feature.Geometry is MultiPolygon)
                 GeometryRenderer.PositionGeometry(renderedGeometry, viewport);
             else if (feature.Geometry is IRaster)
-                GeometryRenderer.PositionRaster(renderedGeometry, feature.Geometry.BoundingBox(), viewport);
+                GeometryRenderer.PositionRaster(renderedGeometry, feature.Geometry.BoundingBox, viewport);
         }
     }
 }
