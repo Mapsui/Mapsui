@@ -94,11 +94,11 @@ namespace Mapsui.Rendering.Skia.SkiaWidgets
                     canvas.DrawLine((float)points[i].X, (float)points[i].Y, (float)points[i + 1].X, (float)points[i + 1].Y, _paintScaleBar);
                 }
 
-                envelop = points[0].GetBoundingBox();
+                envelop = points[0].BoundingBox();
 
                 for (int i = 1; i < points.Length; i++)
                 {
-                    envelop = envelop.Join(points[i].GetBoundingBox());
+                    envelop = envelop.Join(points[i].BoundingBox());
                 }
 
                 envelop = envelop.Grow(StrokeExternal * 0.5f * scaleBar.Scale);

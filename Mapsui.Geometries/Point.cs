@@ -287,7 +287,7 @@ namespace Mapsui.Geometries
         }
 
         /// <summary>
-        ///     Returns the distance between this point and a <see cref="BoundingBox" />
+        ///     Returns the distance between this point and a <see cref="Geometries.BoundingBox" />
         /// </summary>
         /// <param name="box"></param>
         /// <returns></returns>
@@ -300,7 +300,7 @@ namespace Mapsui.Geometries
         ///     The minimum bounding box for this Geometry.
         /// </summary>
         /// <returns></returns>
-        public override BoundingBox GetBoundingBox()
+        public override BoundingBox BoundingBox()
         {
             return new BoundingBox(X, Y, X, Y);
         }

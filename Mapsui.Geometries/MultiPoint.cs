@@ -109,7 +109,7 @@ namespace Mapsui.Geometries
         ///     The minimum bounding box for this Geometry.
         /// </summary>
         /// <returns></returns>
-        public override BoundingBox GetBoundingBox()
+        public override BoundingBox BoundingBox()
         {
             if ((Points == null) || (Points.Count == 0))
                 return null;

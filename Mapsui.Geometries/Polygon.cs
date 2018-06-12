@@ -108,7 +108,7 @@ namespace Mapsui.Geometries
         ///     Returns the bounding box of the object
         /// </summary>
         /// <returns>bounding box</returns>
-        public override BoundingBox GetBoundingBox()
+        public override BoundingBox BoundingBox()
         {
             if ((ExteriorRing == null) || (ExteriorRing.Vertices.Count == 0)) return null;
             var bbox = new BoundingBox(ExteriorRing.Vertices[0], ExteriorRing.Vertices[0]);
@@ -195,7 +195,7 @@ namespace Mapsui.Geometries
 
         public override bool Contains(Point point)
         {
-            return GetBoundingBox().Contains(point) && // First check bounds for performance
+            return BoundingBox().Contains(point) && // First check bounds for performance
                 Algorithms.PointInPolygon(ExteriorRing.Vertices, point);
         }
         

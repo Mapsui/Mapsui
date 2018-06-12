@@ -115,14 +115,14 @@ namespace Mapsui.Geometries
         ///     Returns the bounding box of the object
         /// </summary>
         /// <returns>bounding box</returns>
-        public override BoundingBox GetBoundingBox()
+        public override BoundingBox BoundingBox()
         {
             if ((Polygons == null) || (Polygons.Count == 0))
                 return null;
-            var bbox = Polygons[0].GetBoundingBox();
+            var bbox = Polygons[0].BoundingBox();
             for (var i = 1; i < Polygons.Count; i++)
             {
-                bbox = bbox.Join(Polygons[i].GetBoundingBox());
+                bbox = bbox.Join(Polygons[i].BoundingBox());
             }
             return bbox;
         }

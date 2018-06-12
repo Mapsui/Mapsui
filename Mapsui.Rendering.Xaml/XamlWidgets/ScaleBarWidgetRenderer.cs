@@ -105,11 +105,11 @@ namespace Mapsui.Rendering.Xaml.XamlWidgets
                     canvas.Children.Add(line);
                 }
 
-                envelop = points[0].GetBoundingBox();
+                envelop = points[0].BoundingBox();
 
                 for (int i = 1; i < points.Length; i++)
                 {
-                    envelop = envelop.Join(points[i].GetBoundingBox());
+                    envelop = envelop.Join(points[i].BoundingBox());
                 }
 
                 envelop = envelop.Grow(StrokeExternal * 0.5f * scaleBar.Scale);

@@ -32,7 +32,7 @@ namespace Mapsui.Rendering.Skia
 		        bitmapInfo.IterationUsed = currentIteration;
 		        tileCache[raster] = bitmapInfo;
 
-		        var boundingBox = feature.Geometry.GetBoundingBox();
+		        var boundingBox = feature.Geometry.BoundingBox();
 
 		        if (viewport.IsRotated)
 		        {
@@ -50,7 +50,7 @@ namespace Mapsui.Rendering.Skia
 		        }
 		        else
 		        {
-		            var destination = WorldToScreen(viewport, feature.Geometry.GetBoundingBox());
+		            var destination = WorldToScreen(viewport, feature.Geometry.BoundingBox());
 		            BitmapHelper.RenderRaster(canvas, bitmapInfo.Bitmap, RoundToPixel(destination).ToSkia(), opacity);
                 }
 		    }

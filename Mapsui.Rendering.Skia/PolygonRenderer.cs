@@ -12,7 +12,7 @@ namespace Mapsui.Rendering.Skia
         {
             if (style is LabelStyle labelStyle)
             {
-                var worldCenter = geometry.GetBoundingBox().Centroid;
+                var worldCenter = geometry.BoundingBox().Centroid;
                 var center = viewport.WorldToScreen(worldCenter);
                 LabelRenderer.Draw(canvas, labelStyle, feature, (float)center.X, (float)center.Y, opacity);
             }

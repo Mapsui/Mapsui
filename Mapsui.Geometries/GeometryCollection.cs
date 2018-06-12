@@ -121,14 +121,14 @@ namespace Mapsui.Geometries
         ///     The minimum bounding box for this Geometry, returned as a BoundingBox.
         /// </summary>
         /// <returns></returns>
-        public override BoundingBox GetBoundingBox()
+        public override BoundingBox BoundingBox()
         {
             if (Collection.Count == 0)
                 return null;
-            var b = this[0].GetBoundingBox();
+            var b = this[0].BoundingBox();
             foreach (var geometry in Collection)
             {
-                b = b.Join(geometry.GetBoundingBox());
+                b = b.Join(geometry.BoundingBox());
             }
             return b;
         }

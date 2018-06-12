@@ -135,7 +135,7 @@ namespace Mapsui.Geometries
         ///     The minimum bounding box for this Geometry.
         /// </summary>
         /// <returns>BoundingBox for this geometry</returns>
-        public override BoundingBox GetBoundingBox()
+        public override BoundingBox BoundingBox()
         {
             if ((Vertices == null) || (Vertices.Count == 0))
                 return null;

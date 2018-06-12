@@ -30,10 +30,10 @@ namespace Mapsui.Geometries
         Geometry Envelope();
 
         /// <summary>
-        ///     The minimum <see cref="BoundingBox" /> for this <see cref="Geometry" />.
+        ///     The minimum <see cref="Geometries.BoundingBox" /> for this <see cref="Geometry" />.
         /// </summary>
-        /// <returns><see cref="BoundingBox" /> for this <see cref="Geometry" /></returns>
-        BoundingBox GetBoundingBox();
+        /// <returns><see cref="Geometries.BoundingBox" /> for this <see cref="Geometry" /></returns>
+        BoundingBox BoundingBox();
 
         /// <summary>
         ///     Exports this <see cref="Geometry" /> to a specific well-known text representation of <see cref="Geometry" />.

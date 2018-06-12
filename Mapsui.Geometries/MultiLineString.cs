@@ -142,14 +142,14 @@ namespace Mapsui.Geometries
         ///     The minimum bounding box for this Geometry.
         /// </summary>
         /// <returns></returns>
-        public override BoundingBox GetBoundingBox()
+        public override BoundingBox BoundingBox()
         {
             if ((LineStrings == null) || (LineStrings.Count == 0))
                 return null;
-            var bbox = LineStrings[0].GetBoundingBox();
+            var bbox = LineStrings[0].BoundingBox();
             for (var i = 1; i < LineStrings.Count; i++)
             {
-                bbox = bbox.Join(LineStrings[i].GetBoundingBox());
+                bbox = bbox.Join(LineStrings[i].BoundingBox());
             }
             return bbox;
         }
