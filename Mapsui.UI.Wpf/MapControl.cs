@@ -162,18 +162,6 @@ namespace Mapsui.UI.Wpf
             RefreshGraphics();
         }
 
-        private void MapPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == nameof(Layer.Enabled))
-            {
-                RefreshGraphics();
-            }
-            else if (e.PropertyName == nameof(Layer.Opacity))
-            {
-                RefreshGraphics();
-            }
-        }
-
         private void OnViewChanged(bool userAction = false)
         {
             if (_map == null) return;

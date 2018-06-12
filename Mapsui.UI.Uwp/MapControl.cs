@@ -16,7 +16,6 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA f
 
 using System;
-using System.ComponentModel;
 using System.Threading.Tasks;
 using Windows.Devices.Sensors;
 using Windows.Foundation;
@@ -29,7 +28,6 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Shapes;
-using Mapsui.Layers;
 using Mapsui.Utilities;
 using Mapsui.Widgets;
 using SkiaSharp.Views.UWP;
@@ -123,25 +121,7 @@ namespace Mapsui.UI.Uwp
 
         public bool ZoomLocked { get; set; }
 
-        public event EventHandler ErrorMessageChanged;
         public event EventHandler<ViewChangedEventArgs> ViewChanged;
-
-        private void MapPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            RunOnUIThread(() => MapPropertyChanged(e));
-        }
-
-        private void MapPropertyChanged(PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == nameof(Layer.Enabled))
-            {
-                RefreshGraphics();
-            }
-            else if (e.PropertyName == nameof(Layer.Opacity))
-            {
-                RefreshGraphics();
-            }
-        }
 
         private void MapControl_PointerWheelChanged(object sender, PointerRoutedEventArgs e)
         {
@@ -212,31 +192,6 @@ namespace Mapsui.UI.Uwp
         {
             _map?.ClearCache();
             RefreshGraphics();
-        }
-
-        public void ZoomIn()
-        {
-            if (ZoomLocked) return;
-            if (!_map.Viewport.Initialized) return;
-
-            Map.Viewport.Resolution = ZoomHelper.ZoomIn(_map.Resolutions, Map.Viewport.Resolution);
-
-            OnViewChanged();
-        }
-
-        public void ZoomOut()
-        {
-            if (ZoomLocked) return;
-            if (!_map.Viewport.Initialized) return;
-
-            Map.Viewport.Resolution = ZoomHelper.ZoomOut(_map.Resolutions, Map.Viewport.Resolution);
-
-            OnViewChanged();
-        }
-
-        protected void OnErrorMessageChanged(EventArgs e)
-        {
-            ErrorMessageChanged?.Invoke(this, e);
         }
 
         private void MapControlLoaded(object sender, RoutedEventArgs e)

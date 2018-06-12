@@ -2,6 +2,7 @@
 using Mapsui.Geometries.Utilities;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Net;
 using Mapsui.Fetcher;
 using Mapsui.Logging;
@@ -203,6 +204,18 @@ namespace Mapsui.UI.Wpf
                     Logger.Log(LogLevel.Warning, $"Unexpected exception in {nameof(MapDataChanged)}", exception);
                 }
             });
+        }
+
+        private void MapPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(Layers.Layer.Enabled))
+            {
+                RefreshGraphics();
+            }
+            else if (e.PropertyName == nameof(Layers.Layer.Opacity))
+            {
+                RefreshGraphics();
+            }
         }
 
         public Map Map

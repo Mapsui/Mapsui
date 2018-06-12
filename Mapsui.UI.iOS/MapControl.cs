@@ -207,19 +207,7 @@ namespace Mapsui.UI.iOS
         {
             RefreshGraphics();
         }
-
-        private void MapPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == nameof(Layers.Layer.Enabled))
-            {
-                RefreshGraphics();
-            }
-            else if (e.PropertyName == nameof(Layers.Layer.Opacity))
-            {
-                RefreshGraphics();
-            }
-        }
-
+        
         private void RunOnUIThread(Action action)
         {
             DispatchQueue.MainQueue.DispatchAsync(action);

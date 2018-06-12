@@ -1,13 +1,11 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using Android.Content;
 using Android.Graphics;
 using Android.OS;
 using Android.Util;
 using Android.Views;
-using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.Widgets;
 using SkiaSharp.Views.Android;
@@ -248,19 +246,7 @@ namespace Mapsui.UI.Android
         {
             RefreshGraphics();
         }
-
-        private void MapPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == nameof(Layer.Enabled))
-            {
-                RefreshGraphics();
-            }
-            else if (e.PropertyName == nameof(Layer.Opacity))
-            {
-                RefreshGraphics();
-            }
-        }
-        
+      
         protected override void OnDraw(Canvas canvas)
         {
             Invalidate();
