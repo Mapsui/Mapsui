@@ -402,6 +402,7 @@ namespace Mapsui.UI.Uwp
             ViewportLimiter.Limit(_map.Viewport, _map.ZoomMode, _map.ZoomLimits, _map.Resolutions,
                 _map.PanMode, _map.PanLimits, _map.Envelope);
             RefreshGraphics();
+            _map.RefreshData(false);
             OnViewChanged(true);
 
             e.Handled = true;
