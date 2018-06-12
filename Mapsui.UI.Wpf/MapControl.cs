@@ -586,7 +586,7 @@ namespace Mapsui.UI.Wpf
             if (Map.Envelope == null) return;
             if (ActualWidth.IsNanOrZero()) return;
             Map.Viewport.Resolution = Math.Max(Map.Envelope.Width / ActualWidth, Map.Envelope.Height / ActualHeight);
-            Map.Viewport.Center = Map.Envelope.GetCentroid();
+            Map.Viewport.Center = Map.Envelope.Centroid;
         }
 
         private static void OnManipulationInertiaStarting(object sender, ManipulationInertiaStartingEventArgs e)

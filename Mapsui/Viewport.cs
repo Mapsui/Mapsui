@@ -308,7 +308,7 @@ namespace Mapsui
             if (double.IsNaN(Resolution)) // only when not set yet
             {
                 if (!envelope.IsInitialized()) return false;
-                if (envelope.GetCentroid() == null) return false;
+                if (envelope.Centroid == null) return false;
 
                 if (Math.Abs(envelope.Width) > Constants.Epsilon)
                     Resolution = envelope.Width / screenWidth;
@@ -321,9 +321,9 @@ namespace Mapsui
             if (double.IsNaN(Center.X) || double.IsNaN(Center.Y)) // only when not set yet
             {
                 if (!envelope.IsInitialized()) return false;
-                if (envelope.GetCentroid() == null) return false;
+                if (envelope.Centroid == null) return false;
 
-                Center = envelope.GetCentroid();
+                Center = envelope.Centroid;
             }
 
             Width = screenWidth;

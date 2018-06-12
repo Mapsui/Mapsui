@@ -133,7 +133,7 @@ namespace Mapsui
         {
             Viewport.Resolution = ZoomHelper.DetermineResolution(
                 extent.Width, extent.Height, Viewport.Width, Viewport.Height, scaleMethod);
-            Viewport.Center = extent.GetCentroid();
+            Viewport.Center = extent.Centroid;
             OnRefreshGraphics();
             RefreshData(true);
         }

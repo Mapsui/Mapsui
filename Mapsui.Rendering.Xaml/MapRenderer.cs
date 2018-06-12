@@ -207,7 +207,7 @@ namespace Mapsui.Rendering.Xaml
                 var labelStyle = (LabelStyle) style;
                 var labelText = labelStyle.GetLabelText(feature);
                 if (string.IsNullOrEmpty(labelText)) return;
-                canvas.Children.Add(LabelRenderer.RenderLabel(feature.Geometry.GetBoundingBox().GetCentroid(),
+                canvas.Children.Add(LabelRenderer.RenderLabel(feature.Geometry.GetBoundingBox().Centroid,
                     labelStyle, viewport, labelText));
             }
             else

@@ -272,7 +272,7 @@ namespace Mapsui.UI.Uwp
             if (Map.Envelope == null) return;
             if (ActualWidth.IsNanOrZero()) return;
             Map.Viewport.Resolution = Map.Envelope.Width / ActualWidth;
-            Map.Viewport.Center = Map.Envelope.GetCentroid();
+            Map.Viewport.Center = Map.Envelope.Centroid;
 
             OnViewChanged();
         }

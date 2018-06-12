@@ -417,7 +417,7 @@ namespace Mapsui.Geometries
             var topRight = new Point(MaxX, MaxY);
             var bottomRight = new Point(MaxX, MinY);
             var quad = new Quad(bottomLeft, topLeft, topRight, bottomRight);
-            var center = GetCentroid();
+            var center = Centroid;
 
             return quad.Rotate(degrees, center.X, center.Y);
         }
@@ -482,10 +482,7 @@ namespace Mapsui.Geometries
         /// <summary>
         ///     Returns the center of the bounding box
         /// </summary>
-        public Point GetCentroid()
-        {
-            return (Min + Max)*.5;
-        }
+        public Point Centroid => (Min + Max) * .5;
 
         /// <summary>
         ///     Creates a copy of the BoundingBox
