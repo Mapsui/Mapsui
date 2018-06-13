@@ -125,31 +125,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "images", "images", "{52C84C
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "api", "api", "{5BB9C8BA-0FF4-40E7-BC36-8D671A951C82}"
-	ProjectSection(SolutionItems) = preProject
-		docfx\mapsui\documentation\Async-Fetching.md = docfx\mapsui\documentation\Async-Fetching.md
-		docfx\mapsui\documentation\Contributors-Guidelines.md = docfx\mapsui\documentation\Contributors-Guidelines.md
-		docfx\mapsui\documentation\Development-constraints.md = docfx\mapsui\documentation\Development-constraints.md
-		docfx\mapsui\documentation\documentation.md = docfx\mapsui\documentation\documentation.md
-		docfx\mapsui\documentation\getting-started-android.md = docfx\mapsui\documentation\getting-started-android.md
-		docfx\mapsui\documentation\getting-started-wpf.md = docfx\mapsui\documentation\getting-started-wpf.md
-		docfx\mapsui\documentation\Home.md = docfx\mapsui\documentation\Home.md
-		docfx\mapsui\documentation\How-to-work-with-Mapsui.md = docfx\mapsui\documentation\How-to-work-with-Mapsui.md
-		docfx\mapsui\documentation\Mapsui-2.0.md = docfx\mapsui\documentation\Mapsui-2.0.md
-		docfx\mapsui\documentation\Mapsui-Components.md = docfx\mapsui\documentation\Mapsui-Components.md
-		docfx\mapsui\documentation\NuGet-of-latest-build.md = docfx\mapsui\documentation\NuGet-of-latest-build.md
-		docfx\mapsui\documentation\projections.md = docfx\mapsui\documentation\projections.md
-		docfx\mapsui\documentation\Renderers.md = docfx\mapsui\documentation\Renderers.md
-		docfx\mapsui\documentation\Rendering-Tests.md = docfx\mapsui\documentation\Rendering-Tests.md
-		docfx\mapsui\documentation\Roadmap.md = docfx\mapsui\documentation\Roadmap.md
-		docfx\mapsui\documentation\samples.md = docfx\mapsui\documentation\samples.md
-		docfx\mapsui\documentation\skia-scale.md = docfx\mapsui\documentation\skia-scale.md
-		docfx\mapsui\documentation\toc.md = docfx\mapsui\documentation\toc.md
-		docfx\api\index.md = docfx\api\index.md
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Mapsui.UI.Shared\Mapsui.UI.Shared.projitems*{239f2b0d-13cb-4bcf-83bf-f52d696a47b7}*SharedItemsImports = 13
+		Mapsui.UI.Shared\Mapsui.UI.Shared.projitems*{29e628d1-8e8a-49c5-b0f9-555c0f68572a}*SharedItemsImports = 4
 		Mapsui.UI.Shared\Mapsui.UI.Shared.projitems*{a9ed0aa7-b6f0-4946-8a08-7c531e5cfa9b}*SharedItemsImports = 4
 		Mapsui.UI.Shared\Mapsui.UI.Shared.projitems*{ae693902-feda-4034-a7c5-9aa9872f7878}*SharedItemsImports = 4
 		Mapsui.UI.Shared\Mapsui.UI.Shared.projitems*{e71f3053-056c-4381-9638-048ed73bdff6}*SharedItemsImports = 4
