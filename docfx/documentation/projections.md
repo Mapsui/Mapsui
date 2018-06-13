@@ -6,20 +6,20 @@ know how this specific map component works. Many others are app developers that
 just happen to need a map for their current app. This makes it hard to explain
 things clear for everyone. Here are some basic concepts.
 
-## Some elements involved:
+## Some elements involved
 - **Map**: There is one Map. It is inevitably in some kind of projection.  
 - **Layers**: There are several layers that provider data. This data
 should be in the same projection as the Map. If not, different projections
 will be drawn on top of each other and things go wrong. 
-- **Providers**: Some Layers have a Provider. This Provider could contain
+- **Providers**: Some Layers have a DataSource (Provider). This DataSource could contain
 data in another projection. This data can be converted to the Map projection
 but a few things need to be set.
 
-## Configuration for Projections
+## Configure Mapsui for projections
 Three things need to be set to allow projection from DataSource to Map
 1. The CRS on the Map to know what to project to.
 2. The CRS on the DataSource to know what to project from.
-3. The Transformsion to transform from the DataSource CRS to
+3. The Transformsion on the Map to transform from the DataSource CRS to
 the Map CRS.
 
 ## Support for projections
@@ -27,7 +27,8 @@ Out of the box's Mapsui's support for projections is limited. The
 MinimalProjection class only projects between SphericalMercator 
 (EPSG:3857) and WGS83 (EPSG:4326). It is however possible to create
 your own Transformation. You need to implement the ITransformation
-interface.
+interface. Within this implementation you need to use some other 
+projection library. A recommende one is [ProjNet4GeoAPI](https://github.com/NetTopologySuite/ProjNet4GeoAPI).
 
 ## The most common scenario
 Most likely you will be fine if you use the same projection as Google 
