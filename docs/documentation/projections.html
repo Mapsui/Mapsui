@@ -74,22 +74,22 @@ variaty of backgrounds. Some are experienced GIS users that just need to
 know how this specific map component works. Many others are app developers that 
 just happen to need a map for their current app. This makes it hard to explain
 things clear for everyone. Here are some basic concepts.</p>
-<h2 id="some-elements-involved">Some elements involved:</h2>
+<h2 id="some-elements-involved">Some elements involved</h2>
 <ul>
 <li><strong>Map</strong>: There is one Map. It is inevitably in some kind of projection.  </li>
 <li><strong>Layers</strong>: There are several layers that provider data. This data
 should be in the same projection as the Map. If not, different projections
 will be drawn on top of each other and things go wrong. </li>
-<li><strong>Providers</strong>: Some Layers have a Provider. This Provider could contain
+<li><strong>Providers</strong>: Some Layers have a DataSource (Provider). This DataSource could contain
 data in another projection. This data can be converted to the Map projection
 but a few things need to be set.</li>
 </ul>
-<h2 id="configuration-for-projections">Configuration for Projections</h2>
+<h2 id="configure-mapsui-for-projections">Configure Mapsui for projections</h2>
 <p>Three things need to be set to allow projection from DataSource to Map</p>
 <ol>
 <li>The CRS on the Map to know what to project to.</li>
 <li>The CRS on the DataSource to know what to project from.</li>
-<li>The Transformsion to transform from the DataSource CRS to
+<li>The Transformsion on the Map to transform from the DataSource CRS to
 the Map CRS.</li>
 </ol>
 <h2 id="support-for-projections">Support for projections</h2>
@@ -97,7 +97,8 @@ the Map CRS.</li>
 MinimalProjection class only projects between SphericalMercator 
 (EPSG:3857) and WGS83 (EPSG:4326). It is however possible to create
 your own Transformation. You need to implement the ITransformation
-interface.</p>
+interface. Within this implementation you need to use some other 
+projection library. A recommende one is <a href="https://github.com/NetTopologySuite/ProjNet4GeoAPI">ProjNet4GeoAPI</a>.</p>
 <h2 id="the-most-common-scenario">The most common scenario</h2>
 <p>Most likely you will be fine if you use the same projection as Google 
 and OpenStreetMap. This projection is called SphericalMercator. The 
