@@ -1,5 +1,5 @@
 choco install docfx -y
 choco update docfx -y
-docfx docfx\mapsui\docfx.json
+docfx docfx\docfx.json
 del docs /s /q 
-xcopy docfx\mapsui\_site docs /E /Y
+xcopy docfx\_site docs /E /Y

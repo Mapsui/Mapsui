@@ -1,0 +1,85 @@
+{
+  "metadata": [
+    {
+      "src": [
+        {
+          "cwd": "../",
+          "files": [
+            "Mapsui/*.csproj",
+            "Mapsui.Geometries/*.csproj",
+            "Mapsui.Rendering.Skia/*.csproj",
+            "Mapsui.Rendering.Xaml/*.csproj",
+            "Mapsui.UI.Uwp/*.csproj",
+            "Mapsui.UI.Wpf/*.csproj",
+            "Mapsui.UI.iOS/*.csproj",
+            "Mapsui.UI.Android/*.csproj",
+            "Mapsui.Desktop/*.csproj"
+          ],
+          "exclude": [
+            "**/obj/**",
+            "**/bin/**",
+            "_site/**"
+          ]
+        }
+      ],
+      "dest": "api",
+      "disableGitFeatures": false,
+      "properties": {
+        "TargetFramework": "netstandard2.0"
+      }
+    }
+  ],
+  "build": {
+        "content": [
+          {
+            "files": [
+              "api/**.yml",
+              "api/index.md",
+              "documentation/**.md",
+              "documentation/**/toc.md",
+              "documentation/**.png",
+              "toc.yml",
+              "*.md"
+            ],
+            "exclude": [
+              "obj/**",
+              "_site/**"
+            ]
+          }
+        ],
+        "resource": [
+          {
+            "files": [
+              "images/**",
+              "documentation/images/**"
+            ],
+            "exclude": [
+              "obj/**",
+              "_site/**"
+            ]
+          }
+        ],
+        "overwrite": [
+          {
+            "files": [
+              "apidoc/**.md"
+            ],
+            "exclude": [
+              "obj/**",
+              "_site/**"
+            ]
+          }
+        ],
+        "dest": "_site",
+        "globalMetadataFiles": [ "metadata.json" ],
+        "fileMetadataFiles": [],
+        "template": [
+          "default"
+        ],
+        "postProcessors": [],
+        "noLangKeyword": false,
+        "keepFileLink": false,
+        "cleanupCacheHistory": false,
+        "disableGitFeatures": false
+      }
+    }

@@ -6,4 +6,6 @@
 /**/packages/
 /**/bin/
 /**/obj/
+api/*.yml
+api/.manifest
 _site
