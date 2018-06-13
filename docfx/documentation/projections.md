@@ -1,10 +1,10 @@
 # Projections
 
 Projections is a complicated topic. Users of Mapsui have a wide 
-variaty of backgrounds. Some are experienced GIS users that get started
-with this .NET map. Many others are app developers that just
-happen to need a map in their app. So here we split things op in
-different scenarios.
+variaty of backgrounds. Some are experienced GIS users that just need to
+know how this specific map component works. Many others are app developers that 
+just happen to need a map for their current app. This makes it hard to explain
+things clear for everyone. Here are some basic concepts.
 
 ## Some elements involved:
 - **Map**: There is one Map. It is inevitably in some kind of projection.  
