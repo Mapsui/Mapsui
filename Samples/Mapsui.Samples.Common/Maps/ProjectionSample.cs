@@ -15,10 +15,16 @@ namespace Mapsui.Samples.Common.Maps
 
         public static Map CreateMap()
         {
+            // For Projections to work three things need to be set:
+            // 1) The CRS on the Map to know what to project to.
+            // 2) The CRS on the DataSource to know what to project from.
+            // 3) The Transformsion to transform from the DataSource CRS to
+            // the Map CRS.
+
             var map = new Map
             {
-                Transformation = new MinimalTransformation(),
-                CRS = "EPSG:3857",
+                Transformation = new MinimalTransformation(), // The Transformation needs to be set.
+                CRS = "EPSG:3857", // The Map CRS needs to be set
                 BackColor = Color.Gray
             };
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
@@ -33,7 +39,10 @@ namespace Mapsui.Samples.Common.Maps
                 new Feature {Geometry = SomeWhereNearHaarlem},
                 new Feature {Geometry = GeometryFromWKT.Parse(WktOfAmsterdam)}
             };
-            var dataSource = new MemoryProvider(features) { CRS = "EPSG:4326" };
+            var dataSource = new MemoryProvider(features)
+            {
+                CRS = "EPSG:4326" // The DataSource CRS needs to be set
+            };
 
             return new Layer
             {
