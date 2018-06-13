@@ -25,7 +25,9 @@ the Map CRS.
 ## Support for projections
 Out of the box's Mapsui's support for projections is limited. The
 MinimalProjection class only projects between SphericalMercator 
-(EPSG:3857) and WGS83 (EPSG:4326).
+(EPSG:3857) and WGS83 (EPSG:4326). It is however possible to create
+your own Transformation. You need to implement the ITransformation
+interface.
 
 ## The most common scenario
 Most likely you will be fine if you use the same projection as Google 
