@@ -9,6 +9,7 @@
 ## [Renderers](Renderers.md)
 ## [Asynchronous Data Fetching](Async-Fetching.md)
 ## [Skia Scale](skia-scale.md)
+## [Projections](projections.md)
 # Developing Mapsui
 ## [Contributors Guidelines](Contributors-Guidelines.md)
 ## [Development Constraints](Development-constraints.md)
