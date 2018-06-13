@@ -70,21 +70,25 @@
 <h1 id="mapsui-20">Mapsui 2.0</h1>
 
 <p>At the moment of writing (11 may 2018) a first beta of Mapsui v2 has been released. It has .NET Standard core libraries instead of PCLs. Other then that is is equivalent to 1.4.1 but some further changes are planned. Here  are some ideas of changes that could go into 2.0.</p>
+<h3 id="todo">Todo</h3>
 <ul>
-<li>Go to .NET Standard</li>
-<li>Rename Map.ViewChanged to Map.RefreshData</li>
 <li>Replace ILayer.Style with an ILayer.Styles of type ICollection<ifeature> which is empty by default</ifeature></li>
 <li>Do not derive ILayer from IAsyncDataFetcher.</li>
-<li>Remove WPFs MapControl.ErrorMessage</li>
-<li>Rename BoundingBox.GetCentroid to Centroid</li>
-<li>Rename IGeometry.GetBoundingBox to BoundingBox</li>
 <li>The Info event should be moved from Map to MapControl</li>
 <li>Perhaps remove the InfoLayer list and add an InfoLayer boolean on ILayer</li>
-<li>Remame PanMode.None and ZoomMode.None. See question 1: <a href="https://github.com/pauldendulk/Mapsui/issues/278">https://github.com/pauldendulk/Mapsui/issues/278</a></li>
 <li>Remove the HoverLayer method. It is not crossplatform and can affect performance. Add a sample to show how you could implement it with the regular MouseMove method.</li>
 <li>Invert label alignment bottom/top.</li>
 </ul>
-<p>Later</p>
+<h3 id="done">Done</h3>
+<ul>
+<li>Go to .NET Standard</li>
+<li>Rename Map.ViewChanged to Map.RefreshData</li>
+<li>Remove WPFs MapControl.ErrorMessage</li>
+<li>Rename PanMode.None and ZoomMode.None. See question 1: <a href="https://github.com/pauldendulk/Mapsui/issues/278">https://github.com/pauldendulk/Mapsui/issues/278</a></li>
+<li>Rename BoundingBox.GetCentroid to Centroid</li>
+<li>Rename IGeometry.GetBoundingBox to BoundingBox</li>
+</ul>
+<h3 id="later">Later</h3>
 <ul>
 <li>Use NTS for Geometries</li>
 </ul>
