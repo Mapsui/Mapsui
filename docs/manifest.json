@@ -9,7 +9,7 @@
       "output": {
         ".html": {
           "relative_path": "api/index.html",
-          "hash": "Kq35YwpQ9yd+SSeTkYNXHQ=="
+          "hash": "HWzwvzfvSPDTk/FHgK7C6A=="
         }
       },
       "is_incremental": false,
@@ -21,7 +21,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/Async-Fetching.html",
-          "hash": "fmxMgh4JNa4Vcj3Gotntpg=="
+          "hash": "p+A0uuKOer9popaTHR4Huw=="
         }
       },
       "is_incremental": false,
@@ -33,7 +33,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/Contributors-Guidelines.html",
-          "hash": "z7ch2idiPVG4XaPaCEVEZA=="
+          "hash": "6XxtUhLiZwSqMtS+QVL0JQ=="
         }
       },
       "is_incremental": false,
@@ -45,7 +45,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/Development-constraints.html",
-          "hash": "xwbI/RyXndLlyC+7OMEN8A=="
+          "hash": "PCwBcuhY2UzmUyLojrp1cQ=="
         }
       },
       "is_incremental": false,
@@ -57,7 +57,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/Home.html",
-          "hash": "WtKzYMYZ9vlM7pKbqCFyxw=="
+          "hash": "tzD5/q4WgAXTEv6vdvpQoA=="
         }
       },
       "is_incremental": false,
@@ -69,7 +69,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/How-to-work-with-Mapsui.html",
-          "hash": "GlN3wX7oLZBFsUM7Vy3+QA=="
+          "hash": "If+PNnIGtok0HEdjdTkP+Q=="
         }
       },
       "is_incremental": false,
@@ -81,7 +81,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/Mapsui-2.0.html",
-          "hash": "xTz5y8ZHoLJ0JTT5feZydQ=="
+          "hash": "UFJQksLvI2tMVUaGfjtM0Q=="
         }
       },
       "is_incremental": false,
@@ -93,7 +93,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/Mapsui-Components.html",
-          "hash": "Zvxrdozpvw5APuG/rwqK+g=="
+          "hash": "/WDoriPWOwigCiOiRTfpdw=="
         }
       },
       "is_incremental": false,
@@ -105,7 +105,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/NuGet-of-latest-build.html",
-          "hash": "2rWSwWxbky8PXC7evMieYA=="
+          "hash": "ytcKfLrtt64moTowsUmu0w=="
         }
       },
       "is_incremental": false,
@@ -117,7 +117,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/Renderers.html",
-          "hash": "ZpqkbTWJlN69Jv1f8RJS9w=="
+          "hash": "kvGL/izliUOhFIMF+80ChA=="
         }
       },
       "is_incremental": false,
@@ -129,7 +129,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/Rendering-Tests.html",
-          "hash": "RoGLfBCXflXddg2Uvirw5A=="
+          "hash": "HJiBqr+gc0K8aTFyY8HUCQ=="
         }
       },
       "is_incremental": false,
@@ -141,7 +141,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/Roadmap.html",
-          "hash": "2glWlW8qOe0FsYjeEkxhXg=="
+          "hash": "6NBeMt3zF/dxulrp9Fvhgw=="
         }
       },
       "is_incremental": false,
@@ -153,7 +153,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/documentation.html",
-          "hash": "VdgUKyUH+9olBBBEwSXYJw=="
+          "hash": "f9oBfz3AfemZKXa1c7k3Dg=="
         }
       },
       "is_incremental": false,
@@ -165,7 +165,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/getting-started-android.html",
-          "hash": "PkhCvzg/lyi+NpqAIz3PuQ=="
+          "hash": "Ka7Crravxb6r2j3cvtHHBA=="
         }
       },
       "is_incremental": false,
@@ -177,7 +177,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/getting-started-wpf.html",
-          "hash": "p07iIKagOcil9g1kRLoRNA=="
+          "hash": "/nXdGFkso1hoDJuBZuKlfg=="
         }
       },
       "is_incremental": false,
@@ -196,11 +196,23 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "documentation/projections.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/projections.html",
+          "hash": "FkQnkhKu9Qi6SYDleFhz2g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "documentation/samples.md",
       "output": {
         ".html": {
           "relative_path": "documentation/samples.html",
-          "hash": "xDeGhR3R7FDEuZSuvtPNBg=="
+          "hash": "8lAl6J+CD7Nx1xcEPOZf/w=="
         }
       },
       "is_incremental": false,
@@ -212,7 +224,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/skia-scale.html",
-          "hash": "rAlvmz4IcVakge0v2ppQTg=="
+          "hash": "QclgRXSteYzGHEF2+8Ao8w=="
         }
       },
       "is_incremental": false,
@@ -224,7 +236,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/toc.html",
-          "hash": "i3NdWJvwB8nuHzDL8vEddQ=="
+          "hash": "90JgidEBTUsVIsgrEOW09g=="
         }
       },
       "is_incremental": false,
@@ -269,7 +281,7 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "TnfzGgF0OL7zxGug/etglw=="
+          "hash": "gMET6hkf3rJ5jsw2f4pfzQ=="
         }
       },
       "is_incremental": false,
@@ -296,6 +308,11 @@
         "incrementalPhase": "build"
       },
       "processors": {
+        "ResourceDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build"
+        },
         "TocDocumentProcessor": {
           "can_incremental": false,
           "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
@@ -303,11 +320,6 @@
         },
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
-          "incrementalPhase": "build"
-        },
-        "ResourceDocumentProcessor": {
-          "can_incremental": false,
-          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build"
         }
       }
