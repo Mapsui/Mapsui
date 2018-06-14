@@ -28,7 +28,7 @@ MinimalProjection class only projects between SphericalMercator
 (EPSG:3857) and WGS83 (EPSG:4326). It is however possible to create
 your own Transformation. You need to implement the ITransformation
 interface. Within this implementation you need to use some other 
-projection library. A recommende one is [ProjNet4GeoAPI](https://github.com/NetTopologySuite/ProjNet4GeoAPI).
+projection library. A recommended one is [ProjNet4GeoAPI](https://github.com/NetTopologySuite/ProjNet4GeoAPI).
 
 ## The most common scenario
 Most likely you will be fine if you use the same projection as Google 
