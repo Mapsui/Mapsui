@@ -118,8 +118,13 @@ ProjectionSample.cs.</li>
 </li>
 </ul>
 <h2 id="remarks">Remarks</h2>
-<p>A Layer has a CRS field. This field is used by Mapsui to set it to the 
-Map projection. It should not be set by the user. This is could be confusing.</p>
+<ul>
+<li>A Layer has a CRS field. This field is used by Mapsui to set it to the 
+Map projection. It should not be set by the user. This is could be confusing.</li>
+<li>Mapsui is not capable of transforming images. So no transformation of tiles 
+are rasters. No attempt will be made to transform and the CRS fields will be 
+ignored.</li>
+</ul>
 </article>
           </div>
           
