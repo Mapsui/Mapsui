@@ -1069,11 +1069,11 @@ references:
   fullName: Mapsui.Geometries.Geometry.Distance
   nameWithType: Geometry.Distance
 - uid: Mapsui.Geometries.Geometry.Envelope
-  name: Envelope()
+  name: Envelope
   href: api/Mapsui.Geometries.Geometry.html#Mapsui_Geometries_Geometry_Envelope
-  commentId: M:Mapsui.Geometries.Geometry.Envelope
-  fullName: Mapsui.Geometries.Geometry.Envelope()
-  nameWithType: Geometry.Envelope()
+  commentId: P:Mapsui.Geometries.Geometry.Envelope
+  fullName: Mapsui.Geometries.Geometry.Envelope
+  nameWithType: Geometry.Envelope
 - uid: Mapsui.Geometries.Geometry.Envelope*
   name: Envelope
   href: api/Mapsui.Geometries.Geometry.html#Mapsui_Geometries_Geometry_Envelope_
@@ -1476,11 +1476,11 @@ references:
   fullName: Mapsui.Geometries.IGeometry.Distance
   nameWithType: IGeometry.Distance
 - uid: Mapsui.Geometries.IGeometry.Envelope
-  name: Envelope()
+  name: Envelope
   href: api/Mapsui.Geometries.IGeometry.html#Mapsui_Geometries_IGeometry_Envelope
-  commentId: M:Mapsui.Geometries.IGeometry.Envelope
-  fullName: Mapsui.Geometries.IGeometry.Envelope()
-  nameWithType: IGeometry.Envelope()
+  commentId: P:Mapsui.Geometries.IGeometry.Envelope
+  fullName: Mapsui.Geometries.IGeometry.Envelope
+  nameWithType: IGeometry.Envelope
 - uid: Mapsui.Geometries.IGeometry.Envelope*
   name: Envelope
   href: api/Mapsui.Geometries.IGeometry.html#Mapsui_Geometries_IGeometry_Envelope_

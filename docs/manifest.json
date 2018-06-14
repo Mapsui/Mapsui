@@ -177,7 +177,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Geometries.Geometry.html",
-          "hash": "Ws8rqpTh+Lox0QFLYtHBQg=="
+          "hash": "6ykjRtAuEfK6/XWzcA/W/g=="
         }
       },
       "is_incremental": false,
@@ -189,7 +189,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Geometries.GeometryCollection.html",
-          "hash": "Ii3BxpItQ9zenmey1qQm/Q=="
+          "hash": "7Xz5uvAozy/OwnaoK1Zh3A=="
         }
       },
       "is_incremental": false,
@@ -213,7 +213,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Geometries.IGeometry.html",
-          "hash": "XvKxHsLw7c0Vyhyva+2d1w=="
+          "hash": "bs7dAn+v3rKELVQhY8x/JQ=="
         }
       },
       "is_incremental": false,
@@ -225,7 +225,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Geometries.IGeometryCollection.html",
-          "hash": "R4rGnUw+vb7MvCSw3ae8FA=="
+          "hash": "iikToqqTqypjAXGZAStirQ=="
         }
       },
       "is_incremental": false,
@@ -237,7 +237,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Geometries.IRaster.html",
-          "hash": "2uiv42VMRlmtal6V+/lU1g=="
+          "hash": "9BGcoYAdKVDwRSpOAHULiQ=="
         }
       },
       "is_incremental": false,
@@ -249,7 +249,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Geometries.LineString.html",
-          "hash": "0ltSgoB+Y6TTt/m2uQmi+w=="
+          "hash": "Ghg7YR6Wfrod2eLH4yCX9Q=="
         }
       },
       "is_incremental": false,
@@ -261,7 +261,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Geometries.LinearRing.html",
-          "hash": "4Bz4bDwXoLFxtgMGBbybIA=="
+          "hash": "jibloY+jl4FtgcDGb5klcQ=="
         }
       },
       "is_incremental": false,
@@ -273,7 +273,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Geometries.MultiLineString.html",
-          "hash": "WU1Kj0+EeobAy07qmplzuQ=="
+          "hash": "21jG14BsN/PEFaKScwhI2Q=="
         }
       },
       "is_incremental": false,
@@ -285,7 +285,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Geometries.MultiPoint.html",
-          "hash": "xaVA3vKLvl1/YlHGEBACmQ=="
+          "hash": "QKU5Gv/mQyTSv1Vi5w2BDg=="
         }
       },
       "is_incremental": false,
@@ -297,7 +297,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Geometries.MultiPolygon.html",
-          "hash": "5M14ppGJDJR0oR19q06phA=="
+          "hash": "K5ML/e73qLdStRV/Fp3Nbw=="
         }
       },
       "is_incremental": false,
@@ -309,7 +309,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Geometries.Point.html",
-          "hash": "yhaRmG/FJ4OLRfmzvqq+4A=="
+          "hash": "ynZMWtY2yuKTl5yobCE0Qw=="
         }
       },
       "is_incremental": false,
@@ -321,7 +321,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Geometries.Polygon.html",
-          "hash": "2j74Wls7u2lFOBWg5nJvCQ=="
+          "hash": "HA3UQlsels6mZxOIXyvRhg=="
         }
       },
       "is_incremental": false,
@@ -345,7 +345,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Geometries.Raster.html",
-          "hash": "mBhTWgUl4r3Ng6t7VRBD+Q=="
+          "hash": "hhzaBTl4ec12nfAMytPwjQ=="
         }
       },
       "is_incremental": false,

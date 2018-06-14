@@ -117,7 +117,7 @@
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Geometries_Geometry_BoundingBox.md&amp;value=---%0Auid%3A%20Mapsui.Geometries.Geometry.BoundingBox%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Geometries/Geometry.cs/#L70">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Geometries/Geometry.cs/#L73">View Source</a>
   </span>
   <a id="Mapsui_Geometries_Geometry_BoundingBox_" data-uid="Mapsui.Geometries.Geometry.BoundingBox*"></a>
   <h4 id="Mapsui_Geometries_Geometry_BoundingBox" data-uid="Mapsui.Geometries.Geometry.BoundingBox">BoundingBox</h4>
@@ -143,6 +143,46 @@
       </tr>
     </tbody>
   </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Geometries_Geometry_Envelope.md&amp;value=---%0Auid%3A%20Mapsui.Geometries.Geometry.Envelope%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Geometries/Geometry.cs/#L48">View Source</a>
+  </span>
+  <a id="Mapsui_Geometries_Geometry_Envelope_" data-uid="Mapsui.Geometries.Geometry.Envelope*"></a>
+  <h4 id="Mapsui_Geometries_Geometry_Envelope" data-uid="Mapsui.Geometries.Geometry.Envelope">Envelope</h4>
+  <div class="markdown level1 summary"><p>The minimum bounding box for this <a class="xref" href="Mapsui.Geometries.Geometry.html">Geometry</a>, returned as a <a class="xref" href="Mapsui.Geometries.Geometry.html">Geometry</a>. The
+polygon is defined by the corner points of the bounding box ((MINX, MINY), (MAXX, MINY), (MAXX,
+MAXY), (MINX, MAXY), (MINX, MINY)).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Geometry Envelope { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Geometries.Geometry.html">Geometry</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Mapsui_Geometries_Geometry_Envelope_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The envelope is actually the <a class="xref" href="Mapsui.Geometries.BoundingBox.html">BoundingBox</a> converted into a polygon.</p>
+</div>
+  <h5 id="Mapsui_Geometries_Geometry_Envelope_seealso">See Also</h5>
+  <div class="seealso">
+      <div><a class="xref" href="Mapsui.Geometries.Geometry.html#Mapsui_Geometries_Geometry_BoundingBox">BoundingBox</a></div>
+  </div>
   <h3 id="methods">Methods
   </h3>
   <span class="small pull-right mobile-hide">
@@ -150,7 +190,7 @@
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Geometries_Geometry_AsBinary.md&amp;value=---%0Auid%3A%20Mapsui.Geometries.Geometry.AsBinary%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Geometries/Geometry.cs/#L83">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Geometries/Geometry.cs/#L86">View Source</a>
   </span>
   <a id="Mapsui_Geometries_Geometry_AsBinary_" data-uid="Mapsui.Geometries.Geometry.AsBinary*"></a>
   <h4 id="Mapsui_Geometries_Geometry_AsBinary" data-uid="Mapsui.Geometries.Geometry.AsBinary">AsBinary()</h4>
@@ -181,7 +221,7 @@
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Geometries_Geometry_AsText.md&amp;value=---%0Auid%3A%20Mapsui.Geometries.Geometry.AsText%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Geometries/Geometry.cs/#L75">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Geometries/Geometry.cs/#L78">View Source</a>
   </span>
   <a id="Mapsui_Geometries_Geometry_AsText_" data-uid="Mapsui.Geometries.Geometry.AsText*"></a>
   <h4 id="Mapsui_Geometries_Geometry_AsText" data-uid="Mapsui.Geometries.Geometry.AsText">AsText()</h4>
@@ -212,7 +252,7 @@
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Geometries_Geometry_Clone.md&amp;value=---%0Auid%3A%20Mapsui.Geometries.Geometry.Clone%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Geometries/Geometry.cs/#L113">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Geometries/Geometry.cs/#L116">View Source</a>
   </span>
   <a id="Mapsui_Geometries_Geometry_Clone_" data-uid="Mapsui.Geometries.Geometry.Clone*"></a>
   <h4 id="Mapsui_Geometries_Geometry_Clone" data-uid="Mapsui.Geometries.Geometry.Clone">Clone()</h4>
@@ -244,7 +284,7 @@
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Geometries_Geometry_Contains_Mapsui_Geometries_Point_.md&amp;value=---%0Auid%3A%20Mapsui.Geometries.Geometry.Contains(Mapsui.Geometries.Point)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Geometries/Geometry.cs/#L148">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Geometries/Geometry.cs/#L151">View Source</a>
   </span>
   <a id="Mapsui_Geometries_Geometry_Contains_" data-uid="Mapsui.Geometries.Geometry.Contains*"></a>
   <h4 id="Mapsui_Geometries_Geometry_Contains_Mapsui_Geometries_Point_" data-uid="Mapsui.Geometries.Geometry.Contains(Mapsui.Geometries.Point)">Contains(Point)</h4>
@@ -291,7 +331,7 @@
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Geometries_Geometry_Distance_Mapsui_Geometries_Point_.md&amp;value=---%0Auid%3A%20Mapsui.Geometries.Geometry.Distance(Mapsui.Geometries.Point)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Geometries/Geometry.cs/#L107">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Geometries/Geometry.cs/#L110">View Source</a>
   </span>
   <a id="Mapsui_Geometries_Geometry_Distance_" data-uid="Mapsui.Geometries.Geometry.Distance*"></a>
   <h4 id="Mapsui_Geometries_Geometry_Distance_Mapsui_Geometries_Point_" data-uid="Mapsui.Geometries.Geometry.Distance(Mapsui.Geometries.Point)">Distance(Point)</h4>
@@ -337,50 +377,10 @@ as calculated in the spatial reference system of this Geometry.</p>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Geometries_Geometry_Envelope.md&amp;value=---%0Auid%3A%20Mapsui.Geometries.Geometry.Envelope%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Geometries/Geometry.cs/#L48">View Source</a>
-  </span>
-  <a id="Mapsui_Geometries_Geometry_Envelope_" data-uid="Mapsui.Geometries.Geometry.Envelope*"></a>
-  <h4 id="Mapsui_Geometries_Geometry_Envelope" data-uid="Mapsui.Geometries.Geometry.Envelope">Envelope()</h4>
-  <div class="markdown level1 summary"><p>The minimum bounding box for this <a class="xref" href="Mapsui.Geometries.Geometry.html">Geometry</a>, returned as a <a class="xref" href="Mapsui.Geometries.Geometry.html">Geometry</a>. The
-polygon is defined by the corner points of the bounding box ((MINX, MINY), (MAXX, MINY), (MAXX,
-MAXY), (MINX, MAXY), (MINX, MINY)).</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Geometry Envelope()</code></pre>
-  </div>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Mapsui.Geometries.Geometry.html">Geometry</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 id="Mapsui_Geometries_Geometry_Envelope_remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>The envelope is actually the <a class="xref" href="Mapsui.Geometries.BoundingBox.html">BoundingBox</a> converted into a polygon.</p>
-</div>
-  <h5 id="Mapsui_Geometries_Geometry_Envelope_seealso">See Also</h5>
-  <div class="seealso">
-      <div><a class="xref" href="Mapsui.Geometries.Geometry.html#Mapsui_Geometries_Geometry_BoundingBox">BoundingBox</a></div>
-  </div>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Geometries_Geometry_Equals_Mapsui_Geometries_Geometry_.md&amp;value=---%0Auid%3A%20Mapsui.Geometries.Geometry.Equals(Mapsui.Geometries.Geometry)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Geometries/Geometry.cs/#L149">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Geometries/Geometry.cs/#L152">View Source</a>
   </span>
   <a id="Mapsui_Geometries_Geometry_Equals_" data-uid="Mapsui.Geometries.Geometry.Equals*"></a>
   <h4 id="Mapsui_Geometries_Geometry_Equals_Mapsui_Geometries_Geometry_" data-uid="Mapsui.Geometries.Geometry.Equals(Mapsui.Geometries.Geometry)">Equals(Geometry)</h4>
@@ -427,7 +427,7 @@ MAXY), (MINX, MAXY), (MINX, MINY)).</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Geometries_Geometry_GeomFromText_System_String_.md&amp;value=---%0Auid%3A%20Mapsui.Geometries.Geometry.GeomFromText(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Geometries/Geometry.cs/#L123">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Geometries/Geometry.cs/#L126">View Source</a>
   </span>
   <a id="Mapsui_Geometries_Geometry_GeomFromText_" data-uid="Mapsui.Geometries.Geometry.GeomFromText*"></a>
   <h4 id="Mapsui_Geometries_Geometry_GeomFromText_System_String_" data-uid="Mapsui.Geometries.Geometry.GeomFromText(System.String)">GeomFromText(String)</h4>
@@ -476,7 +476,7 @@ MAXY), (MINX, MAXY), (MINX, MINY)).</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Geometries_Geometry_GeomFromWKB_System_Byte___.md&amp;value=---%0Auid%3A%20Mapsui.Geometries.Geometry.GeomFromWKB(System.Byte%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Geometries/Geometry.cs/#L133">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Geometries/Geometry.cs/#L136">View Source</a>
   </span>
   <a id="Mapsui_Geometries_Geometry_GeomFromWKB_" data-uid="Mapsui.Geometries.Geometry.GeomFromWKB*"></a>
   <h4 id="Mapsui_Geometries_Geometry_GeomFromWKB_System_Byte___" data-uid="Mapsui.Geometries.Geometry.GeomFromWKB(System.Byte[])">GeomFromWKB(Byte[])</h4>
@@ -525,7 +525,7 @@ MAXY), (MINX, MAXY), (MINX, MINY)).</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Geometries_Geometry_GetBoundingBox.md&amp;value=---%0Auid%3A%20Mapsui.Geometries.Geometry.GetBoundingBox%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Geometries/Geometry.cs/#L60">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Geometries/Geometry.cs/#L63">View Source</a>
   </span>
   <a id="Mapsui_Geometries_Geometry_GetBoundingBox_" data-uid="Mapsui.Geometries.Geometry.GetBoundingBox*"></a>
   <h4 id="Mapsui_Geometries_Geometry_GetBoundingBox" data-uid="Mapsui.Geometries.Geometry.GetBoundingBox">GetBoundingBox()</h4>
@@ -555,7 +555,7 @@ MAXY), (MINX, MAXY), (MINX, MINY)).</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Geometries_Geometry_GetHashCode.md&amp;value=---%0Auid%3A%20Mapsui.Geometries.Geometry.GetHashCode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Geometries/Geometry.cs/#L143">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Geometries/Geometry.cs/#L146">View Source</a>
   </span>
   <a id="Mapsui_Geometries_Geometry_GetHashCode_" data-uid="Mapsui.Geometries.Geometry.GetHashCode*"></a>
   <h4 id="Mapsui_Geometries_Geometry_GetHashCode" data-uid="Mapsui.Geometries.Geometry.GetHashCode">GetHashCode()</h4>
@@ -588,7 +588,7 @@ in hashing algorithms and data structures like a hash table.</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Geometries_Geometry_IsEmpty.md&amp;value=---%0Auid%3A%20Mapsui.Geometries.Geometry.IsEmpty%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Geometries/Geometry.cs/#L101">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Geometries/Geometry.cs/#L104">View Source</a>
   </span>
   <a id="Mapsui_Geometries_Geometry_IsEmpty_" data-uid="Mapsui.Geometries.Geometry.IsEmpty*"></a>
   <h4 id="Mapsui_Geometries_Geometry_IsEmpty" data-uid="Mapsui.Geometries.Geometry.IsEmpty">IsEmpty()</h4>
@@ -620,7 +620,7 @@ in hashing algorithms and data structures like a hash table.</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Geometries_Geometry_ToString.md&amp;value=---%0Auid%3A%20Mapsui.Geometries.Geometry.ToString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Geometries/Geometry.cs/#L92">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Geometries/Geometry.cs/#L95">View Source</a>
   </span>
   <a id="Mapsui_Geometries_Geometry_ToString_" data-uid="Mapsui.Geometries.Geometry.ToString*"></a>
   <h4 id="Mapsui_Geometries_Geometry_ToString" data-uid="Mapsui.Geometries.Geometry.ToString">ToString()</h4>
