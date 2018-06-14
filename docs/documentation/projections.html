@@ -1,0 +1,161 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Projections </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Projections ">
+    <meta name="generator" content="docfx 2.36.2.0">
+    
+    <link rel="shortcut icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="projections">Projections</h1>
+
+<p>Projections is a complicated topic. Users of Mapsui have a wide 
+variaty of backgrounds. Some are experienced GIS users that just need to
+know how this specific map component works. Many others are app developers that 
+just happen to need a map for their current app. This makes it hard to explain
+things clear for everyone. Here are some basic concepts.</p>
+<h2 id="some-elements-involved">Some elements involved</h2>
+<ul>
+<li><strong>Map</strong>: There is one Map. It is inevitably in some kind of projection.  </li>
+<li><strong>Layers</strong>: There are several layers that provider data. This data
+should be in the same projection as the Map. If not, different projections
+will be drawn on top of each other and things go wrong. </li>
+<li><strong>Providers</strong>: Some Layers have a DataSource (Provider). This DataSource could contain
+data in another projection. This data can be converted to the Map projection
+but a few things need to be set.</li>
+</ul>
+<h2 id="configure-mapsui-for-projections">Configure Mapsui for projections</h2>
+<p>Three things need to be set to allow projection from DataSource to Map</p>
+<ol>
+<li>The CRS on the Map to know what to project to.</li>
+<li>The CRS on the DataSource to know what to project from.</li>
+<li>The Transformsion on the Map to transform from the DataSource CRS to
+the Map CRS.</li>
+</ol>
+<h2 id="support-for-projections">Support for projections</h2>
+<p>Out of the box&#39;s Mapsui&#39;s support for projections is limited. The
+MinimalProjection class only projects between SphericalMercator 
+(EPSG:3857) and WGS83 (EPSG:4326). It is however possible to create
+your own Transformation. You need to implement the ITransformation
+interface. Within this implementation you need to use some other 
+projection library. A recommende one is <a href="https://github.com/NetTopologySuite/ProjNet4GeoAPI">ProjNet4GeoAPI</a>.</p>
+<h2 id="the-most-common-scenario">The most common scenario</h2>
+<p>Most likely you will be fine if you use the same projection as Google 
+and OpenStreetMap. This projection is called SphericalMercator. The 
+official code from the OGC for this projection is EPSG:3857. If you use
+the OpenStreetMap background layer you use EPSG:3857. Often you have 
+GPS locations or points of interests (POIs) in WGS84 or EPGS:4326. These
+points need to be transformed to EPSG:3857. There are two ways:</p>
+<ul>
+<li><ol>
+<li>Follow the configuration for projections mentioned above and in the 
+ProjectionSample.cs.</li>
+</ol>
+</li>
+<li><ol>
+<li>Use SphericalMercator.FromLonLat to do the transformation manually.</li>
+</ol>
+</li>
+</ul>
+<h2 id="remarks">Remarks</h2>
+<p>A Layer has a CRS field. This field is used by Mapsui to set it to the 
+Map projection. It should not be set by the user. This is could be confusing.</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/Mapsui/Mapsui/blob/master/docfx/documentation/projections.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

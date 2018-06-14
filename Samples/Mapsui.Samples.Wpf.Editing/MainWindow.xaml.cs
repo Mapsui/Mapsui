@@ -32,7 +32,7 @@ namespace Mapsui.Samples.Wpf.Editing
             MapControl.MouseLeftButtonDown += MapControlOnMouseLeftButtonDown;
             MapControl.MouseLeftButtonUp += MapControlOnMouseLeftButtonUp;
             
-            MapControl.RotationLock = true;
+            MapControl.RotationLock = false;
             MapControl.UnSnapRotationDegrees = 30;
             MapControl.ReSnapRotationDegrees = 5;
 

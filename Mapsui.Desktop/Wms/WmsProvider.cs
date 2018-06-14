@@ -483,7 +483,7 @@ namespace Mapsui.Providers.Wms
         {
             var features = new Features();
             IRaster raster = null;
-            var view = new Viewport { Resolution = resolution, Center = box.GetCentroid(), Width = (box.Width / resolution), Height = (box.Height / resolution) };
+            var view = new Viewport { Resolution = resolution, Center = box.Centroid, Width = (box.Width / resolution), Height = (box.Height / resolution) };
             if (TryGetMap(view, ref raster))
             {
                 var feature = features.New();

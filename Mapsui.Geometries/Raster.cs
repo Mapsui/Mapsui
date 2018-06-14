@@ -19,10 +19,7 @@ namespace Mapsui.Geometries
         public MemoryStream Data { get; }
         public long TickFetched { get; }
 
-        public override BoundingBox GetBoundingBox()
-        {
-            return _boundingBox;
-        }
+        public override BoundingBox BoundingBox => _boundingBox;
 
         public new string AsText()
         {

@@ -19,10 +19,9 @@ namespace Mapsui.Samples.Wpf
         public Window1()
         {
             InitializeComponent();
-            MapControl.ErrorMessageChanged += MapErrorMessageChanged;
             MapControl.FeatureInfo += MapControlFeatureInfo;
             MapControl.MouseMove += MapControlOnMouseMove;
-            MapControl.RotationLock = true;
+            MapControl.RotationLock = false;
             MapControl.UnSnapRotationDegrees = 30;
             MapControl.ReSnapRotationDegrees = 5;
 
@@ -111,6 +110,7 @@ namespace Mapsui.Samples.Wpf
             allSamples["ThemeStyle (Desktop)"] = ThemeStyleSample.CreateMap;
             allSamples["Tiles on disk (Desktop)"] = MapTilerSample.CreateMap;
             allSamples["WMS (Desktop)"] = WmsSample.CreateMap;
+            allSamples["Slow WMS (Desktop)"] = SlowWmsSample.CreateMap;
             return allSamples;
         }
 
@@ -160,12 +160,7 @@ namespace Mapsui.Samples.Wpf
         {
             MessageBox.Show(e.FeatureInfo.ToDisplayText());
         }
-
-        private void MapErrorMessageChanged(object sender, EventArgs e)
-        {
-            LogTextBox.Text = MapControl.ErrorMessage; // todo: keep history
-        }
-
+        
         private void RotationSliderChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             var percent = RotationSlider.Value / (RotationSlider.Maximum - RotationSlider.Minimum);

@@ -2,13 +2,13 @@ using System;
 using System.IO;
 using System.Net;
 using System.Net.Http;
-using System.Runtime.Serialization.Json;
 using System.Threading.Tasks;
 using BruTile;
 using BruTile.Extensions;
 using Mapsui.Logging;
 using Mapsui.Providers.ArcGIS.Dynamic;
 using Mapsui.Providers.ArcGIS.Image;
+using Newtonsoft.Json;
 
 namespace Mapsui.Providers.ArcGIS
 {
@@ -19,7 +19,7 @@ namespace Mapsui.Providers.ArcGIS
     }
 
     public class CapabilitiesHelper
-    {        
+    {
         private IArcGISCapabilities _arcGisCapabilities { get; set; }
         private CapabilitiesType _capabilitiesType;
         private int _timeOut { get; set; }
@@ -97,8 +97,8 @@ namespace Mapsui.Providers.ArcGIS
                 if (!string.IsNullOrEmpty(token))
                     requestUri = $"{requestUri}&token={token}";
 
-                var handler = new HttpClientHandler {Credentials = credentials ?? CredentialCache.DefaultCredentials};
-                var client = new HttpClient(handler) {Timeout = TimeSpan.FromMilliseconds(TimeOut)};
+                var handler = new HttpClientHandler { Credentials = credentials ?? CredentialCache.DefaultCredentials };
+                var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(TimeOut) };
                 var response = await client.GetAsync(requestUri);
 
                 if (!response.IsSuccessStatusCode)
@@ -109,36 +109,22 @@ namespace Mapsui.Providers.ArcGIS
 
                 try
                 {
-                    var dataStream = CopyAndClose(await response.Content.ReadAsStreamAsync());
+                    var dataStream = await response.Content.ReadAsStringAsync();
 
-                    DataContractJsonSerializer serializer = null;
                     if (_capabilitiesType == CapabilitiesType.DynamicServiceCapabilities)
-                        serializer = new DataContractJsonSerializer(typeof(ArcGISDynamicCapabilities));
+                        _arcGisCapabilities = JsonConvert.DeserializeObject<ArcGISDynamicCapabilities>(dataStream);
                     else if (_capabilitiesType == CapabilitiesType.ImageServiceCapabilities)
-                        serializer = new DataContractJsonSerializer(typeof(ArcGISImageCapabilities));
+                        _arcGisCapabilities = JsonConvert.DeserializeObject<ArcGISImageCapabilities>(dataStream);
 
-                    if (dataStream != null)
-                    {
-                        _arcGisCapabilities = (IArcGISCapabilities) serializer.ReadObject(dataStream);
-                        dataStream.Position = 0;
-                    }
                     _arcGisCapabilities.ServiceUrl = _url;
 
                     //Hack because ArcGIS Server doesn't always return a normal StatusCode
-                    if (dataStream != null)
+                    if (dataStream.Contains("{\"error\":{\""))
                     {
-                        using (var reader = new StreamReader(dataStream))
-                        {
-                            var contentString = reader.ReadToEnd();
-                            if (contentString.Contains("{\"error\":{\""))
-                            {
-                                OnCapabilitiesFailed(EventArgs.Empty);
-                                return;
-                            }
-                        }
+                        OnCapabilitiesFailed(EventArgs.Empty);
+                        return;
                     }
 
-                    dataStream?.Dispose();
                     OnFinished(EventArgs.Empty);
                 }
                 catch (Exception ex)
@@ -202,7 +188,7 @@ namespace Mapsui.Providers.ArcGIS
             foreach (var lod in arcGisDynamicCapabilities.tileInfo.lods)
             {
                 var levelId = count.ToString();
-                schema.Resolutions[levelId] = new Resolution (levelId, lod.resolution, 
+                schema.Resolutions[levelId] = new Resolution(levelId, lod.resolution,
                     arcGisDynamicCapabilities.tileInfo.cols,
                     arcGisDynamicCapabilities.tileInfo.rows);
                 count++;
@@ -213,7 +199,7 @@ namespace Mapsui.Providers.ArcGIS
             schema.OriginY = arcGisDynamicCapabilities.tileInfo.origin.y;
 
             schema.Name = "ESRI";
-            schema.Format = arcGisDynamicCapabilities.tileInfo.format;            
+            schema.Format = arcGisDynamicCapabilities.tileInfo.format;
             schema.YAxis = YAxis.OSM;
             schema.Srs = $"EPSG:{arcGisDynamicCapabilities.tileInfo.spatialReference.wkid}";
 

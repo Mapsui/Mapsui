@@ -25,7 +25,7 @@ namespace Mapsui.Samples.Uwp
             MbTilesHelper.DeployMbTilesFile(s => File.Create(Path.Combine(MbTilesLocationOnUwp, s)));
 
             MapControl.Map.Layers.Add(OpenStreetMap.CreateTileLayer());
-            MapControl.RotationLock = true;
+            MapControl.RotationLock = false;
             MapControl.UnSnapRotationDegrees = 30;
             MapControl.ReSnapRotationDegrees = 5;
 
@@ -53,7 +53,7 @@ namespace Mapsui.Samples.Uwp
             foreach (var sample in TestSamples().ToList())
                 SampleList.Children.Add(CreateRadioButton(sample));
         }
-
+  
         private Dictionary<string, Func<Map>> TestSamples()
         {
             var result = new Dictionary<string, Func<Map>>();

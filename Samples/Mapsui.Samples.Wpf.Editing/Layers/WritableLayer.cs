@@ -21,7 +21,7 @@ namespace Mapsui.Samples.Wpf.Editing.Layers
             if (box == null) { return new List<IFeature>(); }
             var cache = _cache;
             var biggerBox = box.Grow(SymbolStyle.DefaultWidth * 2 * resolution, SymbolStyle.DefaultHeight * 2 * resolution);
-            var result = cache.Where(f => biggerBox.Intersects(f.Geometry.GetBoundingBox()));
+            var result = cache.Where(f => biggerBox.Intersects(f.Geometry.BoundingBox));
             return result;
         }
 
@@ -31,10 +31,10 @@ namespace Mapsui.Samples.Wpf.Editing.Layers
             var cache = _cache.ToList();
             if (!cache.Any()) return null;
           
-            var minX = cache.Min(b => b.Geometry.GetBoundingBox().MinX);
-            var minY = cache.Min(b => b.Geometry.GetBoundingBox().MinY);
-            var maxX = cache.Max(b => b.Geometry.GetBoundingBox().MaxX);
-            var maxY = cache.Max(b => b.Geometry.GetBoundingBox().MaxY);
+            var minX = cache.Min(b => b.Geometry.BoundingBox.MinX);
+            var minY = cache.Min(b => b.Geometry.BoundingBox.MinY);
+            var maxX = cache.Max(b => b.Geometry.BoundingBox.MaxX);
+            var maxY = cache.Max(b => b.Geometry.BoundingBox.MaxY);
             return new BoundingBox(minX, minY, maxX, maxY);
         }
 

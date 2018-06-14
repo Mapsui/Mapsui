@@ -27,6 +27,9 @@ namespace Mapsui.UI
 
     public enum PanMode
     {
+        /// <summary>
+        /// Restricts viewport in no way
+        /// </summary>
         None,
         /// <summary>
         /// Restricts center of the viewport within Map.Extents or within MaxExtents when set
@@ -40,8 +43,20 @@ namespace Mapsui.UI
 
     public enum ZoomMode
     {
-        None,
+        /// <summary>
+        /// Restricts zoom in no way
+        /// </summary>
+        Unlimited,
+        /// <summary>
+        /// Restricts zoom of the viewport to ZoomLimits and, if ZoomLimits isn't 
+        /// set, to minimum and maxiumum of Resolutions
+        /// </summary>
         KeepWithinResolutions,
+        /// <summary>
+        /// Restricts zoom of the viewport to ZoomLimits and, if ZoomLimits isn't 
+        /// set, to minimum and maxiumum of Resolutions, but fills always the
+        /// complete viewport with map
+        /// </summary>
         KeepWithinResolutionsAndAlwaysFillViewport
     }
 
@@ -67,7 +82,7 @@ namespace Mapsui.UI
         public static double LimitResolution(double resolution, double screenWidth, double screenHeight, ZoomMode zoomMode, MinMax zoomLimits, 
             IReadOnlyList<double> mapResolutions, BoundingBox mapEnvelope)
         {
-            if (zoomMode == ZoomMode.None) return resolution;
+            if (zoomMode == ZoomMode.Unlimited) return resolution;
 
             var resolutionExtremes = zoomLimits ?? GetExtremes(mapResolutions);
             if (resolutionExtremes == null) return resolution;

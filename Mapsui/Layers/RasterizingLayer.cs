@@ -184,7 +184,7 @@ namespace Mapsui.Layers
             return new Viewport
             {
                 Resolution = renderResolution,
-                Center = extent.GetCentroid(),
+                Center = extent.Centroid,
                 Width = extent.Width*overscan/renderResolution,
                 Height = extent.Height*overscan/renderResolution
             };

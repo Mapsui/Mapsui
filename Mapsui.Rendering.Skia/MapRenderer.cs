@@ -6,8 +6,11 @@ using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.Providers;
+using Mapsui.Rendering.Skia.SkiaWidgets;
 using Mapsui.Styles;
 using Mapsui.Widgets;
+using Mapsui.Widgets.ScaleBar;
+using Mapsui.Widgets.Zoom;
 using SkiaSharp;
 
 namespace Mapsui.Rendering.Skia
@@ -25,14 +28,24 @@ namespace Mapsui.Rendering.Skia
 
         public ISymbolCache SymbolCache => _symbolCache;
 
+        public IDictionary<Type, IWidgetRenderer> WidgetRenders { get; } = new Dictionary<Type, IWidgetRenderer>();
+
         static MapRenderer()
         {
             DefaultRendererFactory.Create = () => new MapRenderer();
         }
+
+        public MapRenderer()
+        {
+            WidgetRenders[typeof(Hyperlink)] = new HyperlinkWidgetRenderer();
+            WidgetRenders[typeof(ScaleBarWidget)] = new ScaleBarWidgetRenderer();
+            WidgetRenders[typeof(ZoomInOutWidget)] = new ZoomInOutWidgetRenderer();
+        }
+
         public void Render(object target, IViewport viewport, IEnumerable<ILayer> layers,
             IEnumerable<IWidget> widgets, Color background = null)
         {
-            var allWidgets = layers.Select(l => l.Attribution).ToList().Concat(widgets);
+            var allWidgets = layers.Select(l => l.Attribution).Where(w => w != null).ToList().Concat(widgets);
             Render((SKCanvas)target, viewport, layers, allWidgets, background);
         }
 
@@ -135,7 +148,7 @@ namespace Mapsui.Rendering.Skia
 
         private void Render(object canvas, IViewport viewport, IEnumerable<IWidget> widgets, float layerOpacity)
         {
-            WidgetRenderer.Render(canvas, viewport.Width, viewport.Height, widgets, layerOpacity);
+            WidgetRenderer.Render(canvas, viewport.Width, viewport.Height, widgets, WidgetRenders, layerOpacity);
         }
     }
 

@@ -108,18 +108,23 @@ namespace Mapsui.Geometries
         ///     Returns the bounding box of the object
         /// </summary>
         /// <returns>bounding box</returns>
-        public override BoundingBox GetBoundingBox()
+        public override BoundingBox BoundingBox
         {
-            if ((ExteriorRing == null) || (ExteriorRing.Vertices.Count == 0)) return null;
-            var bbox = new BoundingBox(ExteriorRing.Vertices[0], ExteriorRing.Vertices[0]);
-            for (var i = 1; i < ExteriorRing.Vertices.Count; i++)
+            get
             {
-                bbox.Min.X = Math.Min(ExteriorRing.Vertices[i].X, bbox.Min.X);
-                bbox.Min.Y = Math.Min(ExteriorRing.Vertices[i].Y, bbox.Min.Y);
-                bbox.Max.X = Math.Max(ExteriorRing.Vertices[i].X, bbox.Max.X);
-                bbox.Max.Y = Math.Max(ExteriorRing.Vertices[i].Y, bbox.Max.Y);
+                if (ExteriorRing == null || ExteriorRing.Vertices.Count == 0) return null;
+
+                var bbox = new BoundingBox(ExteriorRing.Vertices[0], ExteriorRing.Vertices[0]);
+                for (var i = 1; i < ExteriorRing.Vertices.Count; i++)
+                {
+                    bbox.Min.X = Math.Min(ExteriorRing.Vertices[i].X, bbox.Min.X);
+                    bbox.Min.Y = Math.Min(ExteriorRing.Vertices[i].Y, bbox.Min.Y);
+                    bbox.Max.X = Math.Max(ExteriorRing.Vertices[i].X, bbox.Max.X);
+                    bbox.Max.Y = Math.Max(ExteriorRing.Vertices[i].Y, bbox.Max.Y);
+                }
+
+                return bbox;
             }
-            return bbox;
         }
 
         /// <summary>
@@ -195,7 +200,7 @@ namespace Mapsui.Geometries
 
         public override bool Contains(Point point)
         {
-            return GetBoundingBox().Contains(point) && // First check bounds for performance
+            return BoundingBox.Contains(point) && // First check bounds for performance
                 Algorithms.PointInPolygon(ExteriorRing.Vertices, point);
         }
         
@@ -220,7 +225,7 @@ namespace Mapsui.Geometries
 
         public Polygon Rotate(double degrees)
         {
-            return this.Rotate(degrees, new Point(0, 0));
+            return Rotate(degrees, new Point(0, 0));
         }
     }
 }

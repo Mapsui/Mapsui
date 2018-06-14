@@ -1,20 +1,18 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="../Mapsui.Common.props" />
   <PropertyGroup>
     <TargetFramework>netstandard1.3</TargetFramework>
-    <Version>2.0.0</Version>
-    <Authors>Mapsui Contributors</Authors>
-    <Copyright>Mapsui Contributors</Copyright>
-    <AssemblyName>Mapsui.Rendering.Skia</AssemblyName>
-    <RootNamespace>Mapsui.Rendering.Skia</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
-  <ItemGroup><!--<PackageReference Include="" Version=""/>-->
-  
+  <ItemGroup>
     <Folder Include="Properties\" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="SkiaSharp" Version="1.60.0" />
+    <PackageReference Include="SkiaSharp" Version="1.60.1" />
     <PackageReference Include="SkiaSharp.Svg" Version="1.60.0" />
   </ItemGroup>
 

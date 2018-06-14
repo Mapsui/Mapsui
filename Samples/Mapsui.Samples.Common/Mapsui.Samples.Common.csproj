@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netstandard1.1</TargetFramework>
+    <TargetFramework>netstandard1.3</TargetFramework>
     <Authors>Mapsui Contributers</Authors>
   </PropertyGroup>
   <ItemGroup>
@@ -47,9 +47,15 @@
     <EmbeddedResource Include="Images\netherlands.jpg" />
     <EmbeddedResource Include="Images\osm-liberty.png" />
     <EmbeddedResource Include="Images\Pin.svg" />
-    <Content Include="MbTiles\el-molar.mbtiles" />
-    <Content Include="MbTiles\torrejon-de-ardoz.mbtiles" />
-    <Content Include="MbTiles\world.mbtiles" />
+    <Content Include="MbTiles\el-molar.mbtiles">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="MbTiles\torrejon-de-ardoz.mbtiles">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="MbTiles\world.mbtiles">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup><!--<PackageReference Include="" Version=""/>-->
@@ -60,6 +66,8 @@
   <ItemGroup>
     <PackageReference Include="BruTile" Version="2.0.0" />
     <PackageReference Include="BruTile.MbTiles" Version="2.0.0" />
+    <PackageReference Include="itinero" Version="1.3.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
   </ItemGroup>
 
   <ItemGroup>

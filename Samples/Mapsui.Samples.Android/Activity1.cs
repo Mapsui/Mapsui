@@ -40,7 +40,7 @@ namespace Mapsui.Samples.Android
             mapControl.Map = InfoLayersSample.CreateMap();
             mapControl.Map.Info+= MapOnInfo;
             mapControl.Map.Viewport.ViewportChanged += ViewportOnViewportChanged;
-            mapControl.RotationLock = true;
+            mapControl.RotationLock = false;
             mapControl.UnSnapRotationDegrees = 30;
             mapControl.ReSnapRotationDegrees = 5;
 
@@ -94,8 +94,9 @@ namespace Mapsui.Samples.Android
         private void ShowPopup(MapInfoEventArgs args)
         {
             var mapControl = FindViewById<MapControl>(Resource.Id.mapcontrol);
-            var screenPosition = mapControl.WorldToScreen(args.MapInfo.Feature.Geometry.GetBoundingBox().GetCentroid());
+            var screenPosition = mapControl.WorldToScreen(args.MapInfo.Feature.Geometry.BoundingBox.Centroid);
             
+            // todo use screenPosition to test WorldToScreen
             _popup.SetX((float)args.MapInfo.ScreenPosition.X);
             _popup.SetY((float)args.MapInfo.ScreenPosition.Y);
 

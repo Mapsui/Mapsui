@@ -243,7 +243,7 @@ namespace Mapsui.Providers.Wms
                 throw new Exception($"Unexpected response code: {response.StatusCode}");
             }
 
-            return await response.Content.ReadAsStreamAsync();
+            return await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
         }
 
         /// <summary>

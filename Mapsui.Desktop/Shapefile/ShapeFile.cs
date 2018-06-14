@@ -877,7 +877,7 @@ namespace Mapsui.Providers.Shapefile
                         var feature = _dbaseFile.GetFeature(index, features);
                         feature.Geometry = ReadGeometry(index);
                         if (feature.Geometry == null) continue;
-                        if (!feature.Geometry.GetBoundingBox().Intersects(box)) continue;
+                        if (!feature.Geometry.BoundingBox.Intersects(box)) continue;
                         if (FilterDelegate != null && !FilterDelegate(feature)) continue;
                         features.Add(feature);
                     }
