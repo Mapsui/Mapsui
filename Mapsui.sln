@@ -111,6 +111,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "documentation", "documentat
 		docfx\documentation\Mapsui-2.0.md = docfx\documentation\Mapsui-2.0.md
 		docfx\documentation\Mapsui-Components.md = docfx\documentation\Mapsui-Components.md
 		docfx\documentation\NuGet-of-latest-build.md = docfx\documentation\NuGet-of-latest-build.md
+		docfx\documentation\projections.md = docfx\documentation\projections.md
 		docfx\documentation\Renderers.md = docfx\documentation\Renderers.md
 		docfx\documentation\Rendering-Tests.md = docfx\documentation\Rendering-Tests.md
 		docfx\documentation\Roadmap.md = docfx\documentation\Roadmap.md
