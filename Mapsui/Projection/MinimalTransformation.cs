@@ -10,21 +10,21 @@ namespace Mapsui.Projection
     /// </summary>
     public class MinimalTransformation : ITransformation
     {
-        private readonly IDictionary<string, Func<double, double, Point>> _toLatLon = new Dictionary<string, Func<double, double, Point>>();
-        private readonly IDictionary<string, Func<double, double, Point>> _fromLatLon = new Dictionary<string, Func<double, double, Point>>();
+        private readonly IDictionary<string, Func<double, double, Point>> _toLonLat = new Dictionary<string, Func<double, double, Point>>();
+        private readonly IDictionary<string, Func<double, double, Point>> _fromLonLat = new Dictionary<string, Func<double, double, Point>>();
 
         public MinimalTransformation()
         {
-            _toLatLon["EPSG:4326"] = (x, y) => new Point(x, y);
-            _fromLatLon["EPSG:4326"] = (x, y) => new Point(x, y);
-            _toLatLon["EPSG:3857"] = SphericalMercator.ToLonLat;
-            _fromLatLon["EPSG:3857"] = SphericalMercator.FromLonLat;
+            _toLonLat["EPSG:4326"] = (x, y) => new Point(x, y);
+            _fromLonLat["EPSG:4326"] = (x, y) => new Point(x, y);
+            _toLonLat["EPSG:3857"] = SphericalMercator.ToLonLat;
+            _fromLonLat["EPSG:3857"] = SphericalMercator.FromLonLat;
         }
 
         public IGeometry Transform(string fromCRS, string toCRS, IGeometry geometry)
         {
-            Transform(geometry.AllVertices(), _toLatLon[fromCRS]);
-            Transform(geometry.AllVertices(), _fromLatLon[toCRS]);
+            Transform(geometry.AllVertices(), _toLonLat[fromCRS]);
+            Transform(geometry.AllVertices(), _fromLonLat[toCRS]);
             return geometry; // this method should not have a return value
         }
 
@@ -40,15 +40,15 @@ namespace Mapsui.Projection
 
         public BoundingBox Transform(string fromCRS, string toCRS, BoundingBox boundingBox)
         {
-            Transform(boundingBox.AllVertices(), _toLatLon[fromCRS]);
-            Transform(boundingBox.AllVertices(), _fromLatLon[toCRS]);
+            Transform(boundingBox.AllVertices(), _toLonLat[fromCRS]);
+            Transform(boundingBox.AllVertices(), _fromLonLat[toCRS]);
             return boundingBox; // this method not have a return value
         }
 
         public bool? IsProjectionSupported(string fromCRS, string toCRS)
         {
-            if (!_toLatLon.ContainsKey(fromCRS)) return false;
-            if (!_fromLatLon.ContainsKey(toCRS)) return false;
+            if (!_toLonLat.ContainsKey(fromCRS)) return false;
+            if (!_fromLonLat.ContainsKey(toCRS)) return false;
             return true;
         }
     }
