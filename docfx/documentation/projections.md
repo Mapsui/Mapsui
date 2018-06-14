@@ -42,6 +42,9 @@ ProjectionSample.cs.
 - 2. Use SphericalMercator.FromLonLat to do the transformation manually.
 
 ## Remarks
-A Layer has a CRS field. This field is used by Mapsui to set it to the 
+- A Layer has a CRS field. This field is used by Mapsui to set it to the 
 Map projection. It should not be set by the user. This is could be confusing.
+- Mapsui is not capable of transforming images. So no transformation of tiles 
+are rasters. No attempt will be made to transform and the CRS fields will be 
+ignored.
 
