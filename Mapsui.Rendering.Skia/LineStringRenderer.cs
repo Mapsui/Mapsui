@@ -44,7 +44,7 @@ namespace Mapsui.Rendering.Skia
 
                 var path = lineString.ToSkiaPath(viewport, canvas.LocalClipBounds);
 
-                using (var paint = new SKPaint())
+                using (var paint = new SKPaint { IsAntialias = true })
                 {
                     paint.IsStroke = true;
                     paint.StrokeWidth = lineWidth;
