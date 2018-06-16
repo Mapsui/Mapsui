@@ -3,6 +3,7 @@ using Mapsui.Rendering.Skia;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Threading;
 using System.Linq;
 using Mapsui.Logging;
 using Mapsui.Widgets;
@@ -45,7 +46,7 @@ namespace Mapsui.UI.Forms
         private double _innerRotation;
         private Dictionary<long, TouchEvent> _touches = new Dictionary<long, TouchEvent>();
         private Geometries.Point _firstTouch;
-        private Mapsui.Utilities.Timer _doubleTapTestTimer;
+        private System.Threading.Timer _doubleTapTestTimer;
         private int _numOfTaps = 0;
         private Dictionary<long, int> _fingers = new Dictionary<long, int>(20);
         private VelocityTracker _velocityTracker = new VelocityTracker();
@@ -137,7 +138,7 @@ namespace Mapsui.UI.Forms
                 // If yes, stop it and increment _numOfTaps
                 if (_doubleTapTestTimer != null)
                 {
-                    _doubleTapTestTimer.Cancel();
+                    _doubleTapTestTimer.Dispose();
                     _doubleTapTestTimer = null;
                     _numOfTaps++;
                 }
@@ -170,7 +171,7 @@ namespace Mapsui.UI.Forms
                 if (_touches[id].Location.Equals(_firstTouch) && ticks - _touches[id].Tick < (e.DeviceType == SKTouchDeviceType.Mouse ? shortClick : longTap) * 10000)
                 {
                     // Start a timer with timeout delayTap ms. If than isn't arrived another tap, than it is a single
-                    _doubleTapTestTimer = new Mapsui.Utilities.Timer((l) =>
+                    _doubleTapTestTimer = new System.Threading.Timer((l) =>
                     {
                         if (_numOfTaps > 1)
                         {
@@ -181,9 +182,9 @@ namespace Mapsui.UI.Forms
                             if (!e.Handled)
                                 e.Handled = OnSingleTapped((Geometries.Point)l);
                         _numOfTaps = 1;
+                        _doubleTapTestTimer.Dispose();
                         _doubleTapTestTimer = null;
-                    }, delayTap, location);
-                    _doubleTapTestTimer.Start();
+                    }, location, delayTap, -1);
                 }
                 else if (_touches[id].Location.Equals(_firstTouch) && ticks - _touches[id].Tick >= longTap * 10000)
                 {

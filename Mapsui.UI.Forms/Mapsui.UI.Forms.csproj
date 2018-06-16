@@ -23,6 +23,18 @@
     <ProjectReference Include="..\Mapsui\Mapsui.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Images\Close.svg" />
+    <None Remove="Images\MyLocationMoving.svg" />
+    <None Remove="Images\MyLocationStill.svg" />
+    <None Remove="Images\Pin.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\Close.svg" />
+    <EmbeddedResource Include="Images\MyLocationMoving.svg" />
+    <EmbeddedResource Include="Images\MyLocationStill.svg" />
+    <EmbeddedResource Include="Images\Pin.svg" />
+  </ItemGroup>
   <Import Project="..\Mapsui.UI.Shared\Mapsui.UI.Shared.projitems" Label="Shared" />
 
 </Project>

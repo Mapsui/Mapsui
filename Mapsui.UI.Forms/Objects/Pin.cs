@@ -362,10 +362,9 @@ namespace Mapsui.UI.Forms
                 {
                     // There is already a registered bitmap, so delete it
                     BitmapRegistry.Instance.Unregister(bitmapId);
+                    // We don't have any bitmap up to now
+                    bitmapId = -1;
                 }
-
-                // We don't have any bitmap up to now
-                bitmapId = -1;
 
                 switch (Type)
                 {
@@ -378,7 +377,7 @@ namespace Mapsui.UI.Forms
                         // Load the SVG document
                         Stream stream = null;
                         if (Type == PinType.Pin)
-                            stream = assembly.GetManifestResourceStream($"Mapsui.UI.Images.Pin.svg");
+                            stream = assembly.GetManifestResourceStream($"Mapsui.UI.Forms.Images.Pin.svg");
                         else
                             if (!string.IsNullOrEmpty(Svg))
                                 stream = new MemoryStream(Encoding.UTF8.GetBytes(Svg));
