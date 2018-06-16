@@ -183,6 +183,7 @@ namespace Mapsui.UI.Forms
                         _numOfTaps = 1;
                         _doubleTapTestTimer = null;
                     }, delayTap, location);
+                    _doubleTapTestTimer.Start();
                 }
                 else if (_touches[id].Location.Equals(_firstTouch) && ticks - _touches[id].Tick >= longTap * 10000)
                 {
