@@ -55,7 +55,7 @@
       <Name>Mapsui.Geometries</Name>
     </ProjectReference>
     <ProjectReference Include="..\Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj">
-      <Project>{ae632270-38ca-4203-93a5-8612629cd944}</Project>
+      <Project>{E360A972-29E7-4F79-8179-677D88C3D439}</Project>
       <Name>Mapsui.Rendering.Skia</Name>
     </ProjectReference>
     <ProjectReference Include="..\Mapsui\Mapsui.csproj">

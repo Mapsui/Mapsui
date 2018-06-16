@@ -159,9 +159,6 @@
     <Reference Include="BruTile, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\BruTile.2.0.0\lib\netstandard1.1\BruTile.dll</HintPath>
     </Reference>
-    <Reference Include="BruTile.MbTiles, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\BruTile.MbTiles.2.0.0\lib\netstandard1.1\BruTile.MbTiles.dll</HintPath>
-    </Reference>
     <Reference Include="ConcurrentCollections, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\ConcurrentHashSet.1.0.2\lib\netstandard1.0\ConcurrentCollections.dll</HintPath>
     </Reference>
@@ -198,6 +195,9 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Xamarin.iOS" />
+    <Reference Include="BruTile.MbTiles, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\BruTile.MbTiles.2.0.0\lib\netstandard1.1\BruTile.MbTiles.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Entitlements.plist" />
@@ -208,7 +208,7 @@
       <Name>Mapsui.Geometries</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj">
-      <Project>{ae632270-38ca-4203-93a5-8612629cd944}</Project>
+      <Project>{E360A972-29E7-4F79-8179-677D88C3D439}</Project>
       <Name>Mapsui.Rendering.Skia</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Mapsui.UI.iOS\Mapsui.UI.iOS.csproj">
