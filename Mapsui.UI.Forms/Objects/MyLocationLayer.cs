@@ -111,7 +111,7 @@ namespace Mapsui.UI.Objects
             });
 
             DataSource = new MemoryProvider(new List<Feature> { feature });
-            //Style = null;
+            Style = null;
         }
 
         // Update my location

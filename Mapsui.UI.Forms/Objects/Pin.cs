@@ -366,21 +366,28 @@ namespace Mapsui.UI.Forms
                     bitmapId = -1;
                 }
 
+                Assembly assembly = typeof(Pin).GetTypeInfo().Assembly;
+                Stream stream = null;
+
                 switch (Type)
                 {
-                    case PinType.Pin:
                     case PinType.Svg:
-                        // First we have to create a bitmap from Svg code
-                        // Create a new SVG object
-                        var svg = new SkiaSharp.Extended.Svg.SKSvg();
-                        var assembly = typeof(Pin).GetTypeInfo().Assembly;
                         // Load the SVG document
-                        Stream stream = null;
                         if (Type == PinType.Pin)
                             stream = assembly.GetManifestResourceStream($"Mapsui.UI.Forms.Images.Pin.svg");
                         else
                             if (!string.IsNullOrEmpty(Svg))
                                 stream = new MemoryStream(Encoding.UTF8.GetBytes(Svg));
+                        if (stream == null)
+                            return;
+                        bitmapId = BitmapRegistry.Instance.Register(stream);
+                        break;
+                    case PinType.Pin:
+                        // First we have to create a bitmap from Svg code
+                        // Create a new SVG object
+                        var svg = new SkiaSharp.Extended.Svg.SKSvg();
+                        // Load the SVG document
+                        stream = assembly.GetManifestResourceStream($"Mapsui.UI.Forms.Images.Pin.svg");
                         if (stream == null)
                             return;
                         svg.Load(stream);
@@ -393,9 +400,8 @@ namespace Mapsui.UI.Forms
                         // Now draw Svg image to bitmap
                         using (var paint = new SKPaint())
                         {
-                            if (Type == PinType.Pin)
-                                // Replace color while drawing
-                                paint.ColorFilter = SKColorFilter.CreateBlendMode(Color.ToSKColor(), SKBlendMode.SrcIn); // use the source color
+                            // Replace color while drawing
+                            paint.ColorFilter = SKColorFilter.CreateBlendMode(Color.ToSKColor(), SKBlendMode.SrcIn); // use the source color
                             canvas.Clear();
                             canvas.DrawPicture(svg.Picture, paint);
                         }
