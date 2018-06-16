@@ -177,7 +177,7 @@ namespace Mapsui.Providers
                     if (feature.Geometry == null)
                         continue;
 
-                    var boundingBox = feature.Geometry.GetBoundingBox();
+                    var boundingBox = feature.Geometry.BoundingBox;
                     if (boundingBox!= null && grownBox.Intersects(boundingBox))
                     {
                         yield return feature;
@@ -218,8 +218,8 @@ namespace Mapsui.Providers
                 {
                     if (feature.Geometry.IsEmpty()) continue;
                     box = box == null
-                            ? feature.Geometry.GetBoundingBox()
-                            : box.Join(feature.Geometry.GetBoundingBox());
+                            ? feature.Geometry.BoundingBox
+                            : box.Join(feature.Geometry.BoundingBox);
                 }
                 return box;
             }

@@ -26,15 +26,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Desktop", "Mapsui.De
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.UI.Android", "Mapsui.UI.Android\Mapsui.UI.Android.csproj", "{A9ED0AA7-B6F0-4946-8A08-7C531E5CFA9B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.UI.iOS", "Mapsui.UI.iOS\Mapsui.UI.iOS.csproj", "{F783F99B-AAFA-4FB5-80F6-871D679BDB19}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Rendering.Xaml", "Mapsui.Rendering.Xaml\Mapsui.Rendering.Xaml.csproj", "{5DC32B05-0B6E-478F-A9FB-57762AA2F814}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Geometries", "Mapsui.Geometries\Mapsui.Geometries.csproj", "{EE55B62D-FFA2-4C24-A4AD-7A47ACE55CE5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{B2DB6CAC-1C30-42C9-B628-BACEBF790AB9}"
 	ProjectSection(SolutionItems) = preProject
-		Scripts\build.proj = Scripts\build.proj
+		appveyor-docs.yml = appveyor-docs.yml
+		appveyor.yml = appveyor.yml
 		Scripts\buildpack.bat = Scripts\buildpack.bat
 		Scripts\buildpackpush.bat = Scripts\buildpackpush.bat
 		Scripts\readme.txt = Scripts\readme.txt
@@ -51,7 +50,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.clabot = .clabot
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
+		appveyor-docs.yml = appveyor-docs.yml
+		appveyor.yml = appveyor.yml
 		licence.txt = licence.txt
+		Mapsui.Common.props = Mapsui.Common.props
 		Mapsui.ncrunchsolution = Mapsui.ncrunchsolution
 		Mapsui.sln.DotSettings = Mapsui.sln.DotSettings
 		README.md = README.md
@@ -95,6 +97,44 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Rendering.Skia", "Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj", "{AE632270-38CA-4203-93A5-8612629CD944}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Mapsui.Samples.Forms.Shared", "Samples\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\Mapsui.Samples.Forms.Shared.shproj", "{73FCB5F4-ABAF-4279-ACC2-4C9C8D9F5C40}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.UI.iOS", "Mapsui.UI.iOS\Mapsui.UI.iOS.csproj", "{E71F3053-056C-4381-9638-048ED73BDFF6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docfx", "docfx", "{97458DE1-C297-4DED-AECB-5FEFED2B5610}"
+	ProjectSection(SolutionItems) = preProject
+		docfx\build-site.cmd = docfx\build-site.cmd
+		docfx\docfx.json = docfx\docfx.json
+		docfx\index.md = docfx\index.md
+		docfx\metadata.json = docfx\metadata.json
+		docfx\toc.yml = docfx\toc.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "documentation", "documentation", "{7D976D37-0542-4A0D-99E6-6BAA180E7011}"
+	ProjectSection(SolutionItems) = preProject
+		docfx\documentation\Async-Fetching.md = docfx\documentation\Async-Fetching.md
+		docfx\documentation\Contributors-Guidelines.md = docfx\documentation\Contributors-Guidelines.md
+		docfx\documentation\Development-constraints.md = docfx\documentation\Development-constraints.md
+		docfx\documentation\documentation.md = docfx\documentation\documentation.md
+		docfx\documentation\getting-started-android.md = docfx\documentation\getting-started-android.md
+		docfx\documentation\getting-started-wpf.md = docfx\documentation\getting-started-wpf.md
+		docfx\documentation\Home.md = docfx\documentation\Home.md
+		docfx\documentation\How-to-work-with-Mapsui.md = docfx\documentation\How-to-work-with-Mapsui.md
+		docfx\documentation\Mapsui-2.0.md = docfx\documentation\Mapsui-2.0.md
+		docfx\documentation\Mapsui-Components.md = docfx\documentation\Mapsui-Components.md
+		docfx\documentation\NuGet-of-latest-build.md = docfx\documentation\NuGet-of-latest-build.md
+		docfx\documentation\Renderers.md = docfx\documentation\Renderers.md
+		docfx\documentation\Rendering-Tests.md = docfx\documentation\Rendering-Tests.md
+		docfx\documentation\Roadmap.md = docfx\documentation\Roadmap.md
+		docfx\documentation\samples.md = docfx\documentation\samples.md
+		docfx\documentation\skia-scale.md = docfx\documentation\skia-scale.md
+		docfx\documentation\toc.md = docfx\documentation\toc.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "images", "images", "{52C84C7C-1D60-454E-804A-1F9691BD61A3}"
+	ProjectSection(SolutionItems) = preProject
+		docfx\documentation\images\brutile_fetcher.png = docfx\documentation\images\brutile_fetcher.png
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "api", "api", "{5BB9C8BA-0FF4-40E7-BC36-8D671A951C82}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
@@ -107,6 +147,7 @@ Global
 		Mapsui.UI.Shared\Mapsui.UI.Shared.projitems*{cd1dc52e-f73f-411a-9682-66827fc8010c}*SharedItemsImports = 4
 		Samples\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\Mapsui.Samples.Forms.Shared.projitems*{de3b0cbf-cc20-4457-884b-2e5150b45a01}*SharedItemsImports = 4
 		Mapsui.UI.Shared\Mapsui.UI.Shared.projitems*{f783f99b-aafa-4fb5-80f6-871d679bdb19}*SharedItemsImports = 4
+		Mapsui.UI.Shared\Mapsui.UI.Shared.projitems*{e71f3053-056c-4381-9638-048ed73bdff6}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Ad-Hoc|AnyCPU = Ad-Hoc|AnyCPU
@@ -1216,6 +1257,8 @@ Global
 		{CA0C7AF3-03ED-42D0-A001-001E8EE095E6}.Debug|x86.Build.0 = Debug|x86
 		{CA0C7AF3-03ED-42D0-A001-001E8EE095E6}.Debug|x86.Deploy.0 = Debug|x86
 		{CA0C7AF3-03ED-42D0-A001-001E8EE095E6}.Release|AnyCPU.ActiveCfg = Release|x86
+		{CA0C7AF3-03ED-42D0-A001-001E8EE095E6}.Release|AnyCPU.Build.0 = Release|x86
+		{CA0C7AF3-03ED-42D0-A001-001E8EE095E6}.Release|AnyCPU.Deploy.0 = Release|x86
 		{CA0C7AF3-03ED-42D0-A001-001E8EE095E6}.Release|ARM.ActiveCfg = Release|ARM
 		{CA0C7AF3-03ED-42D0-A001-001E8EE095E6}.Release|ARM.Build.0 = Release|ARM
 		{CA0C7AF3-03ED-42D0-A001-001E8EE095E6}.Release|ARM.Deploy.0 = Release|ARM
@@ -1487,6 +1530,22 @@ Global
 		{AE632270-38CA-4203-93A5-8612629CD944}.Release|x64.Build.0 = Release|Any CPU
 		{AE632270-38CA-4203-93A5-8612629CD944}.Release|x86.ActiveCfg = Release|Any CPU
 		{AE632270-38CA-4203-93A5-8612629CD944}.Release|x86.Build.0 = Release|Any CPU
+		{E71F3053-056C-4381-9638-048ED73BDFF6}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
+		{E71F3053-056C-4381-9638-048ED73BDFF6}.Debug|AnyCPU.Build.0 = Debug|Any CPU
+		{E71F3053-056C-4381-9638-048ED73BDFF6}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{E71F3053-056C-4381-9638-048ED73BDFF6}.Debug|ARM.Build.0 = Debug|Any CPU
+		{E71F3053-056C-4381-9638-048ED73BDFF6}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E71F3053-056C-4381-9638-048ED73BDFF6}.Debug|x64.Build.0 = Debug|Any CPU
+		{E71F3053-056C-4381-9638-048ED73BDFF6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E71F3053-056C-4381-9638-048ED73BDFF6}.Debug|x86.Build.0 = Debug|Any CPU
+		{E71F3053-056C-4381-9638-048ED73BDFF6}.Release|AnyCPU.ActiveCfg = Release|Any CPU
+		{E71F3053-056C-4381-9638-048ED73BDFF6}.Release|AnyCPU.Build.0 = Release|Any CPU
+		{E71F3053-056C-4381-9638-048ED73BDFF6}.Release|ARM.ActiveCfg = Release|Any CPU
+		{E71F3053-056C-4381-9638-048ED73BDFF6}.Release|ARM.Build.0 = Release|Any CPU
+		{E71F3053-056C-4381-9638-048ED73BDFF6}.Release|x64.ActiveCfg = Release|Any CPU
+		{E71F3053-056C-4381-9638-048ED73BDFF6}.Release|x64.Build.0 = Release|Any CPU
+		{E71F3053-056C-4381-9638-048ED73BDFF6}.Release|x86.ActiveCfg = Release|Any CPU
+		{E71F3053-056C-4381-9638-048ED73BDFF6}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1511,6 +1570,9 @@ Global
 		{DE3B0CBF-CC20-4457-884B-2E5150B45A01} = {D911D425-7F2D-40D6-9472-FABBAC377802}
 		{28848162-20B7-46F1-8364-8B41B0393CD4} = {D911D425-7F2D-40D6-9472-FABBAC377802}
 		{73FCB5F4-ABAF-4279-ACC2-4C9C8D9F5C40} = {D911D425-7F2D-40D6-9472-FABBAC377802}
+		{7D976D37-0542-4A0D-99E6-6BAA180E7011} = {97458DE1-C297-4DED-AECB-5FEFED2B5610}
+		{52C84C7C-1D60-454E-804A-1F9691BD61A3} = {7D976D37-0542-4A0D-99E6-6BAA180E7011}
+		{5BB9C8BA-0FF4-40E7-BC36-8D671A951C82} = {97458DE1-C297-4DED-AECB-5FEFED2B5610}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {22D684C3-0BD3-4D8A-AB23-748FB5527F6F}

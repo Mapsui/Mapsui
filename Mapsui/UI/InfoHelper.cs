@@ -95,7 +95,7 @@ namespace Mapsui.UI
                         var marginX = size.Width * 0.5 * factor;
                         var marginY = size.Height * 0.5 * factor;
 
-                        var box = feature.Geometry.GetBoundingBox();
+                        var box = feature.Geometry.BoundingBox;
                         box = box.Grow(marginX, marginY);
                         if (symbolStyle.SymbolOffset.IsRelative)
                             box.Offset(
@@ -110,7 +110,7 @@ namespace Mapsui.UI
                         var marginX = SymbolStyle.DefaultWidth * 0.5 * resolution;
                         var marginY = SymbolStyle.DefaultHeight * 0.5 * resolution;
 
-                        var box = feature.Geometry.GetBoundingBox();
+                        var box = feature.Geometry.BoundingBox;
                         box = box.Grow(marginX, marginY);
                         if (box.Distance(point) <= marginInWorldUnits) return true;
                     }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using Mapsui.Layers;
@@ -11,5 +12,6 @@ namespace Mapsui.Rendering
         void Render(object target, IViewport viewport, IEnumerable<ILayer> layers, IEnumerable<IWidget> widgets, Color background = null);
         MemoryStream RenderToBitmapStream(IViewport viewport, IEnumerable<ILayer> layers, Color background = null);
         ISymbolCache SymbolCache { get; }
+        IDictionary<Type, IWidgetRenderer> WidgetRenders { get; } 
     }
 }

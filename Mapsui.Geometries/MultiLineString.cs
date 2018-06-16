@@ -82,10 +82,7 @@ namespace Mapsui.Geometries
         /// <summary>
         ///     Returns the number of geometries in the collection.
         /// </summary>
-        public override int NumGeometries
-        {
-            get { return LineStrings.Count; }
-        }
+        public override int NumGeometries => LineStrings.Count;
 
         /// <summary>
         ///     If true, then this Geometry represents the empty point set, Ø, for the coordinate space.
@@ -142,16 +139,20 @@ namespace Mapsui.Geometries
         ///     The minimum bounding box for this Geometry.
         /// </summary>
         /// <returns></returns>
-        public override BoundingBox GetBoundingBox()
+        public override BoundingBox BoundingBox
         {
-            if ((LineStrings == null) || (LineStrings.Count == 0))
-                return null;
-            var bbox = LineStrings[0].GetBoundingBox();
-            for (var i = 1; i < LineStrings.Count; i++)
+            get
             {
-                bbox = bbox.Join(LineStrings[i].GetBoundingBox());
+                if (LineStrings == null || LineStrings.Count == 0)
+                    return null;
+                var bbox = LineStrings[0].BoundingBox;
+                for (var i = 1; i < LineStrings.Count; i++)
+                {
+                    bbox = bbox.Join(LineStrings[i].BoundingBox);
+                }
+
+                return bbox;
             }
-            return bbox;
         }
 
         /// <summary>

@@ -1,5 +1,6 @@
 ﻿using System;
 using Mapsui.Geometries;
+using Mapsui.Rendering;
 
 namespace Mapsui.UI
 {
@@ -26,5 +27,9 @@ namespace Mapsui.UI
         Point ScreenToWorld(Point screenPosition);
 
         void Unsubscribe();
+
+        float GetDeviceIndependentUnits();
+
+        IRenderer Renderer { get; }
     }
 }

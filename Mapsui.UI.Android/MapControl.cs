@@ -1,16 +1,11 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using Android.App;
 using Android.Content;
 using Android.Graphics;
+using Android.OS;
 using Android.Util;
 using Android.Views;
-using Java.Lang;
-using Mapsui.Fetcher;
-using Mapsui.Geometries.Utilities;
-using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.Widgets;
 using SkiaSharp.Views.Android;
@@ -20,11 +15,12 @@ namespace Mapsui.UI.Android
 {
     public partial class MapControl : ViewGroup, IMapControl
     {
-        private Rendering.Skia.MapRenderer _renderer;
         private SKCanvasView _canvas;
-        private Map _map;
         private double _innerRotation;
         private GestureDetector _gestureDetector;
+        private double _previousAngle;
+        private double _previousRadius = 1f;
+        private TouchMode _mode = TouchMode.None;
 
         public event EventHandler ViewportInitialized;
 
@@ -43,47 +39,46 @@ namespace Mapsui.UI.Android
         public void Initialize()
         {
             SetBackgroundColor(Color.Transparent);
-            _scale = Resources.DisplayMetrics.Density;
-
+            _scale = GetDeviceIndependentUnits();
             _canvas = new SKCanvasView(Context);
             _canvas.PaintSurface += CanvasOnPaintSurface;
             AddView(_canvas);
 
             Map = new Map();
-            _renderer = new Rendering.Skia.MapRenderer();
             TryInitializeViewport();
             Touch += MapView_Touch;
-            
+
             _gestureDetector = new GestureDetector(Context, new GestureDetector.SimpleOnGestureListener());
             _gestureDetector.SingleTapConfirmed += OnSingleTapped;
             _gestureDetector.DoubleTap += OnDoubleTapped;
         }
 
+        public float GetDeviceIndependentUnits()
+        {
+            return Resources.DisplayMetrics.Density;
+        }
+
         private void OnDoubleTapped(object sender, GestureDetector.DoubleTapEventArgs e)
         {
             var position = GetScreenPosition(e.Event, this);
-            Map.InvokeInfo(position, position, _scale, _renderer.SymbolCache, WidgetTouched, 2);
+            Map.InvokeInfo(position, position, _scale, Renderer.SymbolCache, WidgetTouched, 2);
         }
-        
+
         private void OnSingleTapped(object sender, GestureDetector.SingleTapConfirmedEventArgs e)
         {
             var position = GetScreenPosition(e.Event, this);
-            Map.InvokeInfo(position, position, _scale, _renderer.SymbolCache, WidgetTouched, 1);
-        }        
-
-        protected override void OnSizeChanged(int w, int h, int oldw, int oldh)
-        {
-            base.OnSizeChanged(w, h, oldw, oldh);
-            PushSizeOntoViewport();
+            Map.InvokeInfo(position, position, _scale, Renderer.SymbolCache, WidgetTouched, 1);
         }
 
-        void PushSizeOntoViewport()
+        protected override void OnSizeChanged(int width, int height, int oldWidth, int oldHeight)
         {
-            if (Map != null)
-            {
-                Map.Viewport.Width = Width / _scale;
-                Map.Viewport.Height = Height / _scale;
-            }
+            base.OnSizeChanged(width, height, oldWidth, oldHeight);
+            PushSizeOntoViewport(width, height);
+        }
+
+        private void RunOnUIThread(Action action)
+        {
+            new Handler(Looper.MainLooper).Post(action);
         }
 
         private void CanvasOnPaintSurface(object sender, SKPaintSurfaceEventArgs args)
@@ -91,18 +86,18 @@ namespace Mapsui.UI.Android
             TryInitializeViewport();
             if (!_map.Viewport.Initialized) return;
 
-            args.Surface.Canvas.Scale(_scale, _scale);
+            args.Surface.Canvas.Scale(_scale, _scale); // we can only set the scale in the render loop
 
-            _renderer.Render(args.Surface.Canvas, _map.Viewport, _map.Layers, _map.Widgets, _map.BackColor);
+            Renderer.Render(args.Surface.Canvas, _map.Viewport, _map.Layers, _map.Widgets, _map.BackColor);
         }
 
         private void TryInitializeViewport()
         {
             if (_map.Viewport.Initialized) return;
 
-            if (_map.Viewport.TryInitializeViewport(_map, Width / _scale, Height / _scale))
+            if (_map.Viewport.TryInitializeViewport(_map.Envelope, ToDeviceIndependentUnits(Width), ToDeviceIndependentUnits(Height)))
             {
-                Map.ViewChanged(true);
+                Map.RefreshData(true);
                 OnViewportInitialized();
             }
         }
@@ -122,9 +117,9 @@ namespace Mapsui.UI.Android
             switch (args.Event.Action)
             {
                 case MotionEventActions.Up:
-                    InvalidateCanvas();
+                    RefreshGraphics();
                     _mode = TouchMode.None;
-                    _map.ViewChanged(true);
+                    _map.RefreshData(true);
                     break;
                 case MotionEventActions.Down:
                 case MotionEventActions.Pointer1Down:
@@ -147,7 +142,7 @@ namespace Mapsui.UI.Android
                 case MotionEventActions.Pointer3Up:
                     // Remove the touchPoint that was released from the locations to reset the
                     // starting points of the move and rotation
-                    touchPoints.RemoveAt(args.Event.ActionIndex);           
+                    touchPoints.RemoveAt(args.Event.ActionIndex);
 
                     if (touchPoints.Count >= 2)
                     {
@@ -176,7 +171,7 @@ namespace Mapsui.UI.Android
 
                                     ViewportLimiter.LimitExtent(_map.Viewport, _map.PanMode, _map.PanLimits, _map.Envelope);
 
-                                    InvalidateCanvas();
+                                    RefreshGraphics();
                                 }
                                 _previousCenter = touchPosition;
                             }
@@ -187,11 +182,11 @@ namespace Mapsui.UI.Android
                                     return;
 
                                 var (prevCenter, prevRadius, prevAngle) = (_previousCenter, _previousRadius, _previousAngle);
-                                var (center, radius, angle ) = GetPinchValues(touchPoints);
+                                var (center, radius, angle) = GetPinchValues(touchPoints);
 
                                 double rotationDelta = 0;
 
-                                if (RotationLock)
+                                if (!RotationLock)
                                 {
                                     _innerRotation += angle - prevAngle;
                                     _innerRotation %= 360;
@@ -216,11 +211,11 @@ namespace Mapsui.UI.Android
 
                                 (_previousCenter, _previousRadius, _previousAngle) = (center, radius, angle);
 
-                                ViewportLimiter.Limit(_map.Viewport, 
+                                ViewportLimiter.Limit(_map.Viewport,
                                     _map.ZoomMode, _map.ZoomLimits, _map.Resolutions,
                                     _map.PanMode, _map.PanLimits, _map.Envelope);
 
-                                InvalidateCanvas();
+                                RefreshGraphics();
                             }
                             break;
                     }
@@ -233,7 +228,9 @@ namespace Mapsui.UI.Android
             var result = new List<Geometries.Point>();
             for (var i = 0; i < me.PointerCount; i++)
             {
-                result.Add(new Geometries.Point((me.GetX(i) - view.Left) / _scale, (me.GetY(i) - view.Top) / _scale));
+                result.Add(new Geometries.Point(
+                    ToDeviceIndependentUnits(me.GetX(i) - view.Left), 
+                    ToDeviceIndependentUnits(me.GetY(i) - view.Top)));
             }
             return result;
         }
@@ -241,67 +238,15 @@ namespace Mapsui.UI.Android
         private static Geometries.Point GetScreenPosition(MotionEvent motionEvent, View view)
         {
             return new PointF(
-                motionEvent.GetX(0) - view.Left, 
+                motionEvent.GetX(0) - view.Left,
                 motionEvent.GetY(0) - view.Top).ToMapsui();
-        }
-
-        public Map Map
-        {
-            get => _map;
-            set
-            {
-                if (_map != null)
-                {
-                    UnsubscribeFromMapEvents(_map);
-                    _map = null;
-                }
-
-                _map = value;
-
-                if (_map != null)
-                {
-                    SubscribeToMapEvents(_map);
-                    _map.ViewChanged(true);
-                    PushSizeOntoViewport();
-                }
-
-                RefreshGraphics();
-            }
         }
 
         private void MapRefreshGraphics(object sender, EventArgs eventArgs)
         {
-            ((Activity)Context).RunOnUiThread(new Runnable(RefreshGraphics));
+            RefreshGraphics();
         }
-
-        private void MapPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == nameof(Layer.Enabled))
-            {
-                RefreshGraphics();
-            }
-            else if (e.PropertyName == nameof(Layer.Opacity))
-            {
-                RefreshGraphics();
-            }
-        }
-
-        private void MapDataChanged(object sender, DataChangedEventArgs e)
-        {
-            if (e.Cancelled || e.Error != null)
-            {
-                Logger.Log(LogLevel.Warning, "An error occurred while fetching data", e.Error);
-            }
-            else if (e.Cancelled)
-            {
-                Logger.Log(LogLevel.Warning, "Fetching data was cancelled", e.Error);
-            }
-            else // no problems
-            {
-                RefreshGraphics();
-            }
-        }
-
+      
         protected override void OnDraw(Canvas canvas)
         {
             Invalidate();
@@ -310,23 +255,28 @@ namespace Mapsui.UI.Android
 
         public void RefreshGraphics()
         {
-            _canvas.PostInvalidate();
+            RunOnUIThread(RefreshGraphicsWithTryCatch);
+        }
+
+        private void RefreshGraphicsWithTryCatch()
+        {
+            try
+            {
+                PostInvalidate();
+            }
+            catch (ObjectDisposedException e)
+            {
+                // See issue: https://github.com/Mapsui/Mapsui/issues/433
+                // What seems to be happening. The Activity is Disposed. Appently it's children get Disposed
+                // explicitly by some in Xamarin. During this Dispose the MessageCenter, which is itself not
+                // disposed get another notification to call RefreshGraphics.
+                Logger.Log(LogLevel.Warning, "This can happen when the parent Activity is disposing.", e);
+            }
         }
 
         public void RefreshData()
         {
-            _map.ViewChanged(true);
-        }
-
-        public void Refresh()
-        {
-            RefreshData();
-            RefreshGraphics();
-        }
-
-        internal void InvalidateCanvas()
-        {
-            _canvas?.Invalidate();
+            _map.RefreshData(true);
         }
 
         protected override void OnLayout(bool changed, int l, int t, int r, int b)
@@ -344,9 +294,8 @@ namespace Mapsui.UI.Android
 
         private void WidgetTouched(IWidget widget, Geometries.Point screenPosition)
         {
-            if (widget is Hyperlink)
+            if (widget is Hyperlink hyperlink)
             {
-                var hyperlink = (Hyperlink)widget;
                 global::Android.Net.Uri uri = global::Android.Net.Uri.Parse(hyperlink.Url);
                 Intent intent = new Intent(Intent.ActionView);
                 intent.SetData(uri);
@@ -357,6 +306,38 @@ namespace Mapsui.UI.Android
             }
 
             widget.HandleWidgetTouched(screenPosition);
+        }
+
+        /// <summary>
+        /// In native Android touch positions are in device pixels whereas the canvas needs
+        /// to be drawn in logical pixels (otherwise labels on raster tiles will be unreadable
+        /// and symbols will be too small). This method converts device pixels to logical pixels.
+        /// </summary>
+        /// <returns>The device pixels given as input translated to device pixels.</returns>
+        private float ToDeviceIndependentUnits(float pixelCoordinate)
+        {
+            return pixelCoordinate / _scale;
+        }
+
+        void PushSizeOntoViewport(float mapControlWidth, float mapControlHeight)
+        {
+            if (Map != null)
+            {
+                Map.Viewport.Width = ToDeviceIndependentUnits(mapControlWidth);
+                Map.Viewport.Height = ToDeviceIndependentUnits(mapControlHeight);
+            }
+        }
+        
+        public new void Dispose()
+        {
+            Unsubscribe();
+            base.Dispose();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            Unsubscribe();
+            base.Dispose(disposing);
         }
     }
 }

@@ -4,6 +4,6 @@
     {
         Left,
         Center,
-        Right,
+        Right
     }
 }

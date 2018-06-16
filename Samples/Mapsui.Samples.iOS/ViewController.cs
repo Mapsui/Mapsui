@@ -1,10 +1,14 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
+using System.Text;
 using Mapsui.UI.iOS;
 using UIKit;
 using CoreGraphics;
 using Mapsui.Samples.Common.Helpers;
 using Mapsui.Samples.Common.Maps;
+using Mapsui.UI;
+using Mapsui.Providers;
 
 namespace Mapsui.Samples.iOS
 {
@@ -23,16 +27,34 @@ namespace Mapsui.Samples.iOS
             // Never tested this. PDD.
             MbTilesHelper.DeployMbTilesFile(s => File.Create(Path.Combine(MbTilesLocationOnIos, s)));
 
-            View = CreateMap(View.Bounds);
+            var mapControl = CreateMap(View.Bounds);
+            mapControl.Map.Info += MapOnInfo;
+            View = mapControl;
         }
 
+        private void MapOnInfo(object sender, MapInfoEventArgs e)
+        {
+            Debug.WriteLine(ToString(e.MapInfo.Feature));
+        }
+
+        private string ToString(IFeature feature)
+        {
+            var result = new StringBuilder();
+            foreach (var field in feature.Fields)
+            {
+                result.Append($"{field}={feature[field]}, ");
+            }
+            
+            result.Append($"Geometry={feature.Geometry}");
+            return result.ToString();
+        }
 
         private static MapControl CreateMap(CGRect bounds)
         {
             return new MapControl(bounds)
             {
-                Map = OsmSample.CreateMap(),
-                RotationLock = true,
+                Map = InfoLayersSample.CreateMap(),
+                RotationLock = false,
                 UnSnapRotationDegrees = 30,
                 ReSnapRotationDegrees = 5
             };                        

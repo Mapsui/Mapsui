@@ -40,6 +40,14 @@ namespace Mapsui.Geometries
             BottomRight = new Point();
         }
 
+        public Quad(Quad quad)
+        {
+            BottomLeft = quad.BottomLeft;
+            TopLeft = quad.TopLeft;
+            TopRight = quad.TopRight;
+            BottomRight = quad.BottomRight;
+        }
+
         public Quad(Point bottomLeft, Point topLeft, Point topRight, Point bottomRight)
         {
             BottomLeft = bottomLeft;

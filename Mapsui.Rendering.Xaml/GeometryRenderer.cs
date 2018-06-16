@@ -121,7 +121,7 @@ namespace Mapsui.Rendering.Xaml
         {
             var path = CreateRasterPath(style, raster.Data);
             path.Data = new XamlMedia.RectangleGeometry();
-            PositionRaster(path, raster.GetBoundingBox(), viewport);
+            PositionRaster(path, raster.BoundingBox, viewport);
             return path;
         }
 

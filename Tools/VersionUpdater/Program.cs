@@ -17,11 +17,21 @@ namespace VersionUpdater
             Console.WriteLine($"{nameof(arguments.Patch)} {arguments.Patch}");
             Console.WriteLine($"{nameof(arguments.Prerelease)} {arguments.Prerelease}");
 
-            var files = GetFiles().ToList();
-            UpdateFiles(arguments, files);
+            var files = GetAssemblyInfoFiles().ToList();
+            UpdateAssemblyInfoFiles(arguments, files);
+            UpdateCommonPropsFile(arguments, "Mapsui.common.props");
         }
 
-        public static IEnumerable<string> GetFiles()
+        private static void UpdateCommonPropsFile(VersionUpdaterArguments arguments, string file)
+        {
+            var text = File.ReadAllText(file);
+            var assemblyVersionRegex = new Regex("<Version>(.*?)</Version>");
+            text = assemblyVersionRegex.Replace(text, $"<Version>{arguments.Version}</Version>");
+            Encoding utf8WithBom = new UTF8Encoding(true);
+            File.WriteAllText(file, text, utf8WithBom);
+        }
+
+        public static IEnumerable<string> GetAssemblyInfoFiles()
         {
             foreach (string file in Directory.EnumerateFiles(
                 Environment.CurrentDirectory, "AssemblyInfo.cs", SearchOption.AllDirectories))
@@ -30,9 +40,8 @@ namespace VersionUpdater
             }
         }
 
-        public static void UpdateFiles(VersionUpdaterArguments arguments, IEnumerable<string> files)
+        public static void UpdateAssemblyInfoFiles(VersionUpdaterArguments arguments, IEnumerable<string> files)
         {
-
             foreach (var file in files)
             {
                 var text = File.ReadAllText(file);

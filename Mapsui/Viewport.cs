@@ -23,10 +23,16 @@ using System.ComponentModel;
 
 namespace Mapsui
 {
+    /// <summary>
+    /// Viewport holds all informations about the visible part of the map.
+    /// </summary>
+    /// <remarks>
+    /// Viewport is the connection between Map and MapControl. It tells MapControl,
+    /// which part of Map should be displayed on screen.
+    /// </remarks>
     public class Viewport : IViewport
     {
         public event PropertyChangedEventHandler ViewportChanged;
-        public bool Initialized { get; private set; }
 
         private readonly BoundingBox _extent;
         private Quad _windowExtent;
@@ -36,8 +42,10 @@ namespace Mapsui
         private double _rotation;
         private readonly NotifyingPoint _center = new NotifyingPoint();
         private bool _modified = true;
-        
 
+        /// <summary>
+        /// Create a new viewport
+        /// </summary>
         public Viewport()
         {
             _extent = new BoundingBox(0, 0, 0, 0);
@@ -47,6 +55,10 @@ namespace Mapsui
 			_center.PropertyChanged += (sender, args) => OnViewportChanged(nameof(Center));
         }
         
+        /// <summary>
+        /// Create a new viewport from another viewport
+        /// </summary>
+        /// <param name="viewport">Viewport from which to copy all values</param>
         public Viewport(Viewport viewport) : this()
         {
             _resolution = viewport._resolution;
@@ -56,17 +68,16 @@ namespace Mapsui
             _center.X = viewport._center.X;
             _center.Y = viewport._center.Y;
             if (viewport.Extent!= null) _extent = new BoundingBox(viewport.Extent);
-            if (viewport.WindowExtent != null) _windowExtent = new Quad(
-                viewport.WindowExtent.BottomLeft, viewport.WindowExtent.TopLeft,
-                viewport.WindowExtent.TopRight, viewport.WindowExtent.BottomRight);
+            if (viewport.WindowExtent != null) _windowExtent = new Quad(viewport.WindowExtent);
+            Initialized = viewport.Initialized;
+
+            UpdateExtent();
         }
 
-        private void OnViewportChanged([CallerMemberName] string propertyName = null)
-        {
-            _modified = true;
-            ViewportChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        /// <inheritdoc />
+        public bool Initialized { get; private set; }
 
+        /// <inheritdoc />
         public Point Center
         {
             get => _center;
@@ -78,6 +89,7 @@ namespace Mapsui
             }
         }
 
+        /// <inheritdoc />
         public double Resolution
         {
             get => _resolution;
@@ -88,6 +100,7 @@ namespace Mapsui
             }
         }
 
+        /// <inheritdoc />
         public double Width
         {
             get => _width;
@@ -98,6 +111,7 @@ namespace Mapsui
             }
         }
 
+        /// <inheritdoc />
         public double Height
         {
             get => _height;
@@ -108,6 +122,7 @@ namespace Mapsui
             }
         }
 
+        /// <inheritdoc />
         public double Rotation
         {
             get => _rotation;
@@ -121,9 +136,11 @@ namespace Mapsui
             }
         }
 
+        /// <inheritdoc />
         public bool IsRotated => 
             !double.IsNaN(_rotation) && _rotation > Constants.Epsilon && _rotation < 360 - Constants.Epsilon;
 
+        /// <inheritdoc />
         public BoundingBox Extent
         {
             get
@@ -133,6 +150,7 @@ namespace Mapsui
             }
         }
 
+        /// <inheritdoc />
         public Quad WindowExtent
         {
             get
@@ -140,23 +158,27 @@ namespace Mapsui
                 if (_modified) UpdateExtent();
                 return _windowExtent;
             }
-        }
+        } 
 
+        /// <inheritdoc />
         public Point WorldToScreen(Point worldPosition)
         {
             return WorldToScreen(worldPosition.X, worldPosition.Y);
         }
 
+        /// <inheritdoc />
         public Point WorldToScreenUnrotated(Point worldPosition)
         {
             return WorldToScreenUnrotated(worldPosition.X, worldPosition.Y);
         }
 
+        /// <inheritdoc />
         public Point ScreenToWorld(Point screenPosition)
         {
             return ScreenToWorld(screenPosition.X, screenPosition.Y);
         }
 
+        /// <inheritdoc />
         public Point WorldToScreen(double worldX, double worldY)
         {
             var p = WorldToScreenUnrotated(worldX, worldY);
@@ -171,6 +193,7 @@ namespace Mapsui
             return p;
         }
 
+        /// <inheritdoc />
         public Point WorldToScreenUnrotated(double worldX, double worldY)
         {
             var screenCenterX = Width / 2.0;
@@ -181,6 +204,7 @@ namespace Mapsui
             return new Point(screenX, screenY);
         }
 
+        /// <inheritdoc />
         public Point ScreenToWorld(double screenX, double screenY)
         {
             var screenCenterX = Width / 2.0;
@@ -198,6 +222,7 @@ namespace Mapsui
             return new Point(worldX, worldY);
         }
 
+        /// <inheritdoc />
         public void Transform(double screenX, double screenY, double previousScreenX, double previousScreenY, double deltaScale = 1, double deltaRotation = 0)
         {
             var previous = ScreenToWorld(previousScreenX, previousScreenY);
@@ -232,6 +257,9 @@ namespace Mapsui
             }
         }
 
+        /// <summary>
+        /// Recalculates extents for viewport
+        /// </summary>
         private void UpdateExtent()
         {
             if (double.IsNaN(_center.X)) return;
@@ -272,37 +300,47 @@ namespace Mapsui
             _modified = false;
         }
 
-        public bool TryInitializeViewport(Map map, double screenWidth, double screenHeight)
+        public bool TryInitializeViewport(BoundingBox envelope, double screenWidth, double screenHeight)
         {
             if (screenWidth.IsNanOrZero()) return false;
             if (screenHeight.IsNanOrZero()) return false;
 
-            if (double.IsNaN(map.Viewport.Resolution)) // only when not set yet
+            if (double.IsNaN(Resolution)) // only when not set yet
             {
-                if (!map.Envelope.IsInitialized()) return false;
-                if (map.Envelope.GetCentroid() == null) return false;
+                if (!envelope.IsInitialized()) return false;
+                if (envelope.Centroid == null) return false;
 
-                if (Math.Abs(map.Envelope.Width) > Constants.Epsilon)
-                    map.Viewport.Resolution = map.Envelope.Width / screenWidth;
+                if (Math.Abs(envelope.Width) > Constants.Epsilon)
+                    Resolution = envelope.Width / screenWidth;
                 else
                     // An envelope width of zero can happen when there is no data in the Maps' layers (yet).
                     // It should be possible to start with an empty map.
-                    map.Viewport.Resolution = Constants.DefaultResolution;
+                    Resolution = Constants.DefaultResolution;
             }
 
-            if (double.IsNaN(map.Viewport.Center.X) || double.IsNaN(map.Viewport.Center.Y)) // only when not set yet
+            if (double.IsNaN(Center.X) || double.IsNaN(Center.Y)) // only when not set yet
             {
-                if (!map.Envelope.IsInitialized()) return false;
-                if (map.Envelope.GetCentroid() == null) return false;
+                if (!envelope.IsInitialized()) return false;
+                if (envelope.Centroid == null) return false;
 
-                map.Viewport.Center = map.Envelope.GetCentroid();
+                Center = envelope.Centroid;
             }
 
-            map.Viewport.Width = screenWidth;
-            map.Viewport.Height = screenHeight;
+            Width = screenWidth;
+            Height = screenHeight;
             
             Initialized = true;
             return true;
+        }
+
+        /// <summary>
+        /// Property change event
+        /// </summary>
+        /// <param name="propertyName">Name of property that changed</param>
+        private void OnViewportChanged([CallerMemberName] string propertyName = null)
+        {
+            _modified = true;
+            ViewportChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

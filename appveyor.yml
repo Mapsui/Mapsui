@@ -1,0 +1,46 @@
+version: '{build}'
+
+skip_commits:
+  files:
+    - docs/**/*
+    - docsfx/**/*
+    - logo/**/*
+    - '**/*.md'
+
+image: Visual Studio 2017
+assembly_info:
+  patch: true
+  file: '**\AssemblyInfo.*'
+  assembly_version: '{version}'
+  assembly_file_version: '{version}'
+  assembly_informational_version: '{version}'
+environment:
+  version-short: 2.0.0-beta.2
+nuget:
+  disable_publish_on_pr: true
+before_build:
+- cmd: nuget restore mapsui.sln
+build:
+  project: Mapsui.sln
+  verbosity: minimal
+before_package:
+- cmd: 
+after_build:
+- cmd: >-
+    Scripts\buildpack %version-short%
+
+    nuget pack NuSpec\Mapsui.nuspec -Version %version-short%.%APPVEYOR_BUILD_NUMBER% -outputdirectory Release
+
+    appveyor PushArtifact Release\Mapsui.%version-short%.%APPVEYOR_BUILD_NUMBER%.nupkg
+
+    docfx\build-site.cmd
+artifacts:
+- path: Release\*.*
+  name: mapsuipackage
+deploy:
+- provider: NuGet
+  api_key:
+    secure: RI7FmOMHYqZPtJNhuBD/dxzizoFBECO++GnXPQVBqMmIIkL4ZYCPMGGFP3hTQC2Q
+  skip_symbols: true
+  artifact: mapsuipackage-nu-even-niet
+
