@@ -16,10 +16,9 @@ namespace Mapsui.UI.Objects
     {
         MapView mapView;
         Feature feature;
-        byte[] bitmapMoving;
-        byte[] bitmapStill;
-        int bitmapMovingId = -1;
-        int bitmapStillId = -1;
+
+        private static int bitmapMovingId = -1;
+        private static int bitmapStillId = -1;
 
         private const string animationMyLocationName = "animationMyLocationPosition";
         private const string animationMyDirectionName = "animationMyDirectionPosition";
@@ -65,25 +64,33 @@ namespace Mapsui.UI.Objects
         {
             if (view == null)
                 throw new ArgumentNullException("MapView shouldn't be null");
-
+            
             mapView = view;
 
             Enabled = false;
 
-            bitmapMoving = CreateImage("MyLocationMoving");
+            var assembly = typeof(MyLocationLayer).GetTypeInfo().Assembly;
 
-            if (bitmapMoving != null)
+            if (bitmapMovingId == -1)
             {
-                // Register bitmap
-                bitmapMovingId = BitmapRegistry.Instance.Register(new MemoryStream(bitmapMoving));
+                var bitmapMoving = assembly.GetManifestResourceStream($"Mapsui.UI.Forms.Images.MyLocationMoving.svg");
+
+                if (bitmapMoving != null)
+                {
+                    // Register bitmap
+                    bitmapMovingId = BitmapRegistry.Instance.Register(bitmapMoving);
+                }
             }
 
-            bitmapStill = CreateImage("MyLocationStill");
-
-            if (bitmapStill != null)
+            if (bitmapStillId == -1)
             {
-                // Register bitmap
-                bitmapStillId = BitmapRegistry.Instance.Register(new MemoryStream(bitmapStill));
+                var bitmapStill = assembly.GetManifestResourceStream($"Mapsui.UI.Forms.Images.MyLocationStill.svg");
+
+                if (bitmapStill != null)
+                {
+                    // Register bitmap
+                    bitmapStillId = BitmapRegistry.Instance.Register(bitmapStill);
+                }
             }
 
             feature = new Feature
@@ -99,12 +106,12 @@ namespace Mapsui.UI.Objects
                 BitmapId = bitmapStillId,
                 SymbolScale = Scale,
                 SymbolRotation = Direction,
-                SymbolOffset = new Offset(16, 16),
+                SymbolOffset = new Offset(0, 0),
                 Opacity = 1,
             });
 
             DataSource = new MemoryProvider(new List<Feature> { feature });
-            Style = null;
+            //Style = null;
         }
 
         // Update my location
@@ -134,7 +141,7 @@ namespace Mapsui.UI.Objects
                 }, 0.0, 1.0);
 
                 // At the end, update viewport
-                animation.Commit(mapView, animationMyLocationName, 100, 3000, finished: (s, v) => mapView.Map.ViewChanged(true));
+                animation.Commit(mapView, animationMyLocationName, 100, 3000, finished: (s, v) => mapView.Map.RefreshData(true));
             }
         }
 
@@ -205,7 +212,7 @@ namespace Mapsui.UI.Objects
             var svg = new SkiaSharp.Extended.Svg.SKSvg();
             var assembly = typeof(Pin).GetTypeInfo().Assembly;
             // Load the SVG document
-            Stream stream = assembly.GetManifestResourceStream($"Mapsui.UI.Images.{resName}.svg");
+            Stream stream = assembly.GetManifestResourceStream($"Mapsui.UI.Forms.Images.{resName}.svg");
             if (stream == null)
                 return null;
             svg.Load(stream);

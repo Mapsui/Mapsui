@@ -528,12 +528,12 @@ namespace Mapsui.UI.Forms
 
         private void HandlerPinPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            Map.ViewChanged(false);
+            Map.RefreshData(false);
         }
 
         private void HandlerDrawablePropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            Map.ViewChanged(false);
+            Map.RefreshData(false);
         }
 
         /// <summary>
