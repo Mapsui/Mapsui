@@ -10,6 +10,7 @@
     <PackageReference Include="BruTile" Version="2.0.0" />
     <PackageReference Include="ConcurrentHashSet" Version="1.0.2" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="System.Runtime.Serialization.Json" Version="4.3.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Mapsui.Geometries\Mapsui.Geometries.csproj" />
