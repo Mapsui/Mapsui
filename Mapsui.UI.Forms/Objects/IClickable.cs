@@ -3,15 +3,26 @@ using System;
 
 namespace Mapsui.UI.Objects
 {
+    /// <summary>
+    /// Interface for objects that are clickable
+    /// </summary>
     interface IClickable
     {
-        // Is this object clickable?
+        /// <summary>
+        /// Gets a value indicating whether this <see cref="T:Mapsui.UI.Objects.IClickable"/> is clickable.
+        /// </summary>
+        /// <value><c>true</c> if is clickable; otherwise, <c>false</c>.</value>
         bool IsClickable { get; }
 
-        // Handle click event
+        /// <summary>
+        /// Handle click event
+        /// </summary>
+        /// <param name="e">Event args for drawable clicked</param>
         void HandleClicked(DrawableClickedEventArgs e);
 
-        // Get information, when this object is clicked
+        /// <summary>
+        /// Get information, when this object is clicked
+        /// </summary>
         event EventHandler<DrawableClickedEventArgs> Clicked;
     }
 }
