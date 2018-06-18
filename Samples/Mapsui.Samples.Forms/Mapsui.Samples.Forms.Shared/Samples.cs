@@ -71,7 +71,8 @@ namespace Mapsui.Samples.Forms
             var circle = new Circle
             {
                 Center = e.Point,
-                Radius = Distance.FromMeters(rnd.Next(0,100)),
+                Radius = Distance.FromMeters(rnd.Next(100000, 1000000)),
+                Quality = rnd.Next(0, 60),
                 StrokeColor = new Color(rnd.Next(0, 255) / 255.0, rnd.Next(0, 255) / 255.0, rnd.Next(0, 255) / 255.0),
                 FillColor = new Color(rnd.Next(0, 255) / 255.0, rnd.Next(0, 255) / 255.0, rnd.Next(0, 255) / 255.0, rnd.Next(0,255) / 255.0)
             };

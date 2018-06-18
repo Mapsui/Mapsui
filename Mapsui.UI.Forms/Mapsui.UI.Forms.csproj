@@ -1,9 +1,18 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard1.3</TargetFramework>
+    <PackOnBuild>true</PackOnBuild>
+    <PackageVersion>2.0</PackageVersion>
+    <Authors>Mapsui Contributors</Authors>
+    <PackageIconUrl>https://github.com/Mapsui/Mapsui/blob/master/logo/png/icon.png</PackageIconUrl>
+    <NeutralLanguage>en</NeutralLanguage>
+    <PackageProjectUrl>https://github.com/Mapsui/Mapsui</PackageProjectUrl>
+    <Summary>Xamarin.Forms implementation of Mapsui</Summary>
+    <PackageTags>Mapsui Xamarin.Forms</PackageTags>
+    <Description>Mapsui.Forms is a native Xamarin.Forms MapControl for using Mapsui with Xamarin.Forms without any platform dependent renderers.</Description>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DefineConstants>TRACE;DEBUG;NETSTANDARD1_3;__FORMS__</DefineConstants>
+    <DefineConstants>TRACE;__FORMS__;DEBUG;NETSTANDARD1_3</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup><!--<PackageReference Include="" Version=""/>-->
