@@ -15,6 +15,9 @@ namespace Mapsui.UI.Forms
     {
         private readonly ObservableCollection<Position> _positions = new ObservableCollection<Position>();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:Mapsui.UI.Forms.Polyline"/> class.
+        /// </summary>
         public Polyline()
         {
             _positions.CollectionChanged += OnCollectionChanged;

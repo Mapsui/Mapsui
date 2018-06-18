@@ -7,12 +7,21 @@ namespace Mapsui.UI.Forms
     /// </summary>
     public struct Position
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:Mapsui.UI.Forms.Position"/> from latitude and longitude
+        /// </summary>
+        /// <param name="latitude">Latitude of position</param>
+        /// <param name="longitude">Longitude of position</param>
         public Position(double latitude, double longitude)
         {
             Latitude = Math.Min(Math.Max(latitude, -90.0), 90.0);
             Longitude = Math.Min(Math.Max(longitude, -180.0), 180.0);
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:Mapsui.UI.Forms.Position"/> from position
+        /// </summary>
+        /// <param name="point">Position to use</param>
         public Position(Position point)
         {
             Latitude = point.Latitude;
@@ -32,7 +41,6 @@ namespace Mapsui.UI.Forms
         /// <summary>
         /// Convert Xamarin.Forms.Maps.Position to Mapsui.Geometries.Point
         /// </summary>
-        /// <param name="position">Point in Xamarin.Forms.Maps.Position format</param>
         /// <returns>Position in Mapsui format</returns>
         public Mapsui.Geometries.Point ToMapsui()
         {
@@ -59,11 +67,44 @@ namespace Mapsui.UI.Forms
             }
         }
 
+        /// <summary>
+        /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:Mapsui.UI.Forms.Position"/>
+        /// </summary>
+        /// <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:Mapsui.UI.Forms.Position"/></returns>
         public override string ToString()
         {
             return ToString("P DD° MM.mmm'|P DDD° MM.mmm'|N|S|E|W");
         }
 
+        /// <summary>
+        /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:Mapsui.UI.Forms.Position"/> in a given format
+        /// </summary>
+        /// <remarks>
+        /// <para>
+        /// Format string has 6 parts. This are separated by a "|" character. The first part is the 
+        /// format for the latitude, the second the format for the longitude part. Than follow shortcuts
+        /// for the orientations: north, south, east, west.
+        /// </para>
+        /// <para>
+        /// The parameters for the format for latitude and longitude are
+        /// - P: Cardinal direction like north or east
+        /// - D: Degrees as integer number. If there are more D than numbers, than there are trailing zeros. E.g. "DDD" and 13 is replaced as "013"
+        /// - d: Decimal degrees as numbers. Each d is replaced with a number, e.g. "ddd" and 13.5467 degrees gives "546"
+        /// - M: Minutes as integer number. If there are more M than numbers, than there are trailing zeros. E.g. "MM" and 5 is replaced as "05"
+        /// - m: Decimal minutes as numbers. Each m is replaced with a number, e.g. "mmm" and 13.5467 minutes gives "546"
+        /// - S: Seconds as integer number. If there are more S than numbers, than there are trailing zeros. E.g. "SS" and 5 is replaced as "05"
+        /// - s: Decimal seconds as numbers. Each s is replaced with a number, e.g. "sss" and 13.5467 minutes gives "546"
+        /// </para>
+        /// <para>
+        /// Examples
+        /// All following examples are for the position 38.959390°, -95.265483°.
+        /// - The format string "P DD° MM.mmm'|P DDD° MM.mmm'|N|S|E|W" gives N 38° 57.563' W 095° 15.928'.
+        /// - The format string "PDD° MM.mmm'|PDDD° MM.mmm'||-||-" gives 38° 57.563' -095° 15.928'.
+        /// - The format string "P DD° MM' SS.sss"|P DDD° MM' SS.sss"|North|South|East|West" gives North 38° 57' 33.804" West 095° 15' 55.739".
+        /// </para>
+        /// </remarks>
+        /// <returns>Position as string</returns>
+        /// <param name="format">Format string</param>
         public string ToString(string format)
         {
             var formats = format.Split(new char[] { '|' }, StringSplitOptions.None);
