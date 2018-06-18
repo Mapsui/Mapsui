@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
@@ -38,6 +36,10 @@ namespace Mapsui.UI.Forms
         public static readonly BindableProperty IsCalloutVisibleProperty = BindableProperty.Create(nameof(IsCalloutVisible), typeof(bool), typeof(Pin), default(bool));
         public static readonly BindableProperty TransparencyProperty = BindableProperty.Create(nameof(Transparency), typeof(float), typeof(Pin), 0f);
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:Mapsui.UI.Forms.Pin"/> class
+        /// </summary>
+        /// <param name="mapView">MapView to which this pin belongs</param>
         public Pin(MapView mapView)
         {
             _mapView = mapView;
@@ -64,7 +66,7 @@ namespace Mapsui.UI.Forms
         }
 
         /// <summary>
-        /// Scaling of pin, place where anchor is
+        /// Scaling of pin
         /// </summary>
         public float Scale
         {
@@ -196,6 +198,10 @@ namespace Mapsui.UI.Forms
 
         private Feature feature;
 
+        /// <summary>
+        /// Mapsui feature for this pin
+        /// </summary>
+        /// <value>Mapsui feature</value>
         public Feature Feature
         {
             get
@@ -206,6 +212,10 @@ namespace Mapsui.UI.Forms
 
         private Callout callout;
 
+        /// <summary>
+        /// Gets the callout
+        /// </summary>
+        /// <value>Callout for this pin</value>
         public Callout Callout
         {
             get
@@ -238,6 +248,12 @@ namespace Mapsui.UI.Forms
             }
         }
 
+        /// <summary>
+        /// Determines whether the specified <see cref="object"/> is equal to the current <see cref="T:Mapsui.UI.Forms.Pin"/>.
+        /// </summary>
+        /// <param name="obj">The <see cref="object"/> to compare with the current <see cref="T:Mapsui.UI.Forms.Pin"/>.</param>
+        /// <returns><c>true</c> if the specified <see cref="object"/> is equal to the current
+        /// <see cref="T:Mapsui.UI.Forms.Pin"/>; otherwise, <c>false</c>.</returns>
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj))

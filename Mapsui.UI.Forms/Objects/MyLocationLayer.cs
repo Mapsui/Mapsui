@@ -2,16 +2,21 @@
 using Mapsui.Providers;
 using Mapsui.Styles;
 using Mapsui.UI.Forms;
-using SkiaSharp;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Reflection;
 using Xamarin.Forms;
 
 namespace Mapsui.UI.Objects
 {
+    /// <summary>
+    /// A layer to display a symbol for own location
+    /// </summary>
+    /// <remarks>
+    /// There are two different symbols for own loaction: one is used when there isn't a change in position (still),
+    /// and one is used, if the position changes (moving).
+    /// </remarks>
     public class MyLocationLayer : Layer
     {
         MapView mapView;
@@ -48,6 +53,10 @@ namespace Mapsui.UI.Objects
 
         Position myLocation = new Position(0, 0);
 
+        /// <summary>
+        /// Position of location, that is displayed
+        /// </summary>
+        /// <value>Position of location</value>
         public Position MyLocation
         {
             get
@@ -56,10 +65,28 @@ namespace Mapsui.UI.Objects
             }
         }
 
+        /// <summary>
+        /// Direction of device at location
+        /// </summary>
+        /// <value>Direction at location</value>
         public double Direction { get; set; } = 0.0;
+
+        /// <summary>
+        /// Speed of moving
+        /// </summary>
+        /// <value>Speed of moving</value>
         public double Speed { get; } = 0.0;
+
+        /// <summary>
+        /// Scale of symbol
+        /// </summary>
+        /// <value>Scale of symbol</value>
         public double Scale { get; set; } = 1.0;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:Mapsui.UI.Objects.MyLocationLayer"/> class.
+        /// </summary>
+        /// <param name="view">MapView, to which this layer belongs</param>
         public MyLocationLayer(MapView view)
         {
             if (view == null)
@@ -114,7 +141,11 @@ namespace Mapsui.UI.Objects
             Style = null;
         }
 
-        // Update my location
+
+        /// <summary>
+        /// Updates my location
+        /// </summary>
+        /// <param name="newLocation">New location</param>
         public void UpdateMyLocation(Position newLocation)
         {
             if (!MyLocation.Equals(newLocation))
@@ -145,6 +176,11 @@ namespace Mapsui.UI.Objects
             }
         }
 
+        /// <summary>
+        /// Updates my direction
+        /// </summary>
+        /// <param name="newDirection">New direction</param>
+        /// <param name="newViewportRotation">New viewport rotation</param>
         public void UpdateMyDirection(double newDirection, double newViewportRotation)
         {
             var newRotation = newDirection - newViewportRotation;
@@ -171,6 +207,10 @@ namespace Mapsui.UI.Objects
             }
         }
 
+        /// <summary>
+        /// Updates my speed
+        /// </summary>
+        /// <param name="newSpeed">New speed</param>
         public void UpdateMySpeed(double newSpeed)
         {
             var modified = false;
@@ -203,41 +243,6 @@ namespace Mapsui.UI.Objects
             }
 
             return modified;
-        }
-
-        private byte[] CreateImage(string resName)
-        {
-            // First we have to create a bitmap from Svg code
-            // Create a new SVG object
-            var svg = new SkiaSharp.Extended.Svg.SKSvg();
-            var assembly = typeof(Pin).GetTypeInfo().Assembly;
-            // Load the SVG document
-            Stream stream = assembly.GetManifestResourceStream($"Mapsui.UI.Forms.Images.{resName}.svg");
-            if (stream == null)
-                return null;
-            svg.Load(stream);
-            // Create bitmap to hold canvas
-            var info = new SKImageInfo((int)svg.CanvasSize.Width, (int)svg.CanvasSize.Height) { AlphaType = SKAlphaType.Premul };
-            var bitmap = new SKBitmap(info);
-            var canvas = new SKCanvas(bitmap);
-            // Now draw Svg image to bitmap
-            using (var paint = new SKPaint())
-            {
-                // Replace color while drawing
-                //paint.ColorFilter = SKColorFilter.CreateBlendMode(Color.ToSKColor(), SKBlendMode.SrcIn); // use the source color
-                canvas.Clear();
-                canvas.DrawPicture(svg.Picture, paint);
-            }
-            // Now convert canvas to bitmap
-            byte[] bitmapData;
-
-            using (var image = SKImage.FromBitmap(bitmap))
-            using (var data = image.Encode(SKEncodedImageFormat.Png, 100))
-            {
-                bitmapData = data.ToArray();
-            }
-            
-            return bitmapData;
         }
     }
 }
