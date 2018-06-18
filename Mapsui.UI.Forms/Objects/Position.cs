@@ -98,9 +98,9 @@ namespace Mapsui.UI.Forms
         /// <para>
         /// Examples
         /// All following examples are for the position 38.959390°, -95.265483°.
-        /// - The format string "P DD° MM.mmm'|P DDD° MM.mmm'|N|S|E|W" gives N 38° 57.563' W 095° 15.928'.
-        /// - The format string "PDD° MM.mmm'|PDDD° MM.mmm'||-||-" gives 38° 57.563' -095° 15.928'.
-        /// - The format string "P DD° MM' SS.sss"|P DDD° MM' SS.sss"|North|South|East|West" gives North 38° 57' 33.804" West 095° 15' 55.739".
+        /// - The format string "P DD° MM.mmm'|P DDD° MM.mmm'|N|S|E|W" gives "N 38° 57.563' W 095° 15.928'".
+        /// - The format string "PDD° MM.mmm'|PDDD° MM.mmm'||-||-" gives "38° 57.563' -095° 15.928'".
+        /// - The format string "DD° MM' SS.sss" P|DDD° MM' SS.sss" P|North|South|East|West" gives "38° 57' 33.804" North 095° 15' 55.739" West".
         /// </para>
         /// </remarks>
         /// <returns>Position as string</returns>
