@@ -335,6 +335,11 @@ namespace Mapsui.UI.Forms
         /// <param name="screenPosition">Center of zoom out event</param>
         private bool OnZoomOut(Geometries.Point screenPosition)
         {
+            if (ZoomLock)
+            {
+                return true;
+            }
+
             var args = new ZoomedEventArgs(screenPosition, ZoomDirection.ZoomOut);
 
             Zoomed?.Invoke(this, args);
@@ -354,6 +359,11 @@ namespace Mapsui.UI.Forms
         /// <param name="screenPosition">Center of zoom in event</param>
         private bool OnZoomIn(Geometries.Point screenPosition)
         {
+            if (ZoomLock)
+            {
+                return true;
+            }
+
             var args = new ZoomedEventArgs(screenPosition, ZoomDirection.ZoomIn);
 
             Zoomed?.Invoke(this, args);
@@ -486,7 +496,7 @@ namespace Mapsui.UI.Forms
 
                         var touchPosition = touchPoints.First();
 
-                        if (_previousCenter != null && !_previousCenter.IsEmpty())
+                        if (!PanLock && _previousCenter != null && !_previousCenter.IsEmpty())
                         {
                             _map.Viewport.Transform(touchPosition.X, touchPosition.Y, _previousCenter.X, _previousCenter.Y);
 
@@ -508,7 +518,7 @@ namespace Mapsui.UI.Forms
 
                         double rotationDelta = 0;
 
-                        if (RotationLock)
+                        if (!RotationLock)
                         {
                             _innerRotation += angle - prevAngle;
                             _innerRotation %= 360;
@@ -529,7 +539,7 @@ namespace Mapsui.UI.Forms
                             }
                         }
 
-                        _map.Viewport.Transform(center.X, center.Y, prevCenter.X, prevCenter.Y, radius / prevRadius, rotationDelta);
+                        _map.Viewport.Transform(center.X, center.Y, prevCenter.X, prevCenter.Y, ZoomLock ? 1 : radius / prevRadius, rotationDelta);
 
                         (_previousCenter, _previousRadius, _previousAngle) = (center, radius, angle);
 

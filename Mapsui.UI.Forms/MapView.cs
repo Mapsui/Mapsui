@@ -112,7 +112,9 @@ namespace Mapsui.UI.Forms
         public static readonly BindableProperty AllowPinchRotationProperty = BindableProperty.Create(nameof(AllowPinchRotationProperty), typeof(bool), typeof(MapView), default(bool));
         public static readonly BindableProperty UnSnapRotationDegreesProperty = BindableProperty.Create(nameof(UnSnapRotationDegreesProperty), typeof(double), typeof(MapView), default(double));
         public static readonly BindableProperty ReSnapRotationDegreesProperty = BindableProperty.Create(nameof(ReSnapRotationDegreesProperty), typeof(double), typeof(MapView), default(double));
-        
+        public static readonly BindableProperty ZoomLockProperty = BindableProperty.Create(nameof(ZoomLockProperty), typeof(bool), typeof(MapView), default(bool));
+        public static readonly BindableProperty PanLockProperty = BindableProperty.Create(nameof(PanLockProperty), typeof(bool), typeof(MapView), default(bool));
+
         ///<summary>
         /// Properties
         ///</summary>
@@ -245,6 +247,24 @@ namespace Mapsui.UI.Forms
         }
 
         /// <summary>
+        /// Enable zooming
+        /// </summary>
+        public bool ZoomLock
+        {
+            get { return (bool)GetValue(ZoomLockProperty); }
+            set { SetValue(ZoomLockProperty, value); }
+        }
+
+        /// <summary>
+        /// Enable paning
+        /// </summary>
+        public bool PanLock
+        {
+            get { return (bool)GetValue(PanLockProperty); }
+            set { SetValue(PanLockProperty, value); }
+        }
+
+        /// <summary>
         /// Refresh screen
         /// </summary>
         public void Refresh()
@@ -339,20 +359,26 @@ namespace Mapsui.UI.Forms
         {
             base.OnPropertyChanged(propertyName);
 
-            if (propertyName.Equals(nameof(MyLocationEnabled)))
+            if (propertyName.Equals(nameof(MyLocationEnabledProperty)))
             {
                 _mapMyLocationLayer.Enabled = MyLocationEnabled;
                 Refresh();
             }
 
-            if (propertyName.Equals(nameof(AllowPinchRotation)))
+            if (propertyName.Equals(nameof(AllowPinchRotationProperty)))
                 _mapControl.RotationLock = AllowPinchRotation;
 
-            if (propertyName.Equals(nameof(UnSnapRotationDegrees)))
+            if (propertyName.Equals(nameof(UnSnapRotationDegreesProperty)))
                 _mapControl.UnSnapRotationDegrees = UnSnapRotationDegrees;
 
-            if (propertyName.Equals(nameof(ReSnapRotationDegrees)))
+            if (propertyName.Equals(nameof(ReSnapRotationDegreesProperty)))
                 _mapControl.ReSnapRotationDegrees = ReSnapRotationDegrees;
+            
+            if (propertyName.Equals(nameof(ZoomLockProperty)))
+                _mapControl.ZoomLock = ZoomLock;
+
+            if (propertyName.Equals(nameof(PanLockProperty)))
+                _mapControl.PanLock = PanLock;
         }
 
         /// <summary>
