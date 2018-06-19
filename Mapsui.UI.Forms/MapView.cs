@@ -109,9 +109,9 @@ namespace Mapsui.UI.Forms
         public static readonly BindableProperty SelectedPinProperty = BindableProperty.Create(nameof(SelectedPin), typeof(Pin), typeof(MapView), default(Pin), defaultBindingMode: BindingMode.TwoWay);
         public static readonly BindableProperty MyLocationEnabledProperty = BindableProperty.Create(nameof(MyLocationEnabled), typeof(bool), typeof(MapView), false, defaultBindingMode: BindingMode.TwoWay);
         public static readonly BindableProperty MyLocationFollowProperty = BindableProperty.Create(nameof(MyLocationFollow), typeof(bool), typeof(MapView), false, defaultBindingMode: BindingMode.TwoWay);
-        public static readonly BindableProperty AllowPinchRotationProperty = BindableProperty.Create(nameof(AllowPinchRotationProperty), typeof(bool), typeof(MapView), default(bool));
         public static readonly BindableProperty UnSnapRotationDegreesProperty = BindableProperty.Create(nameof(UnSnapRotationDegreesProperty), typeof(double), typeof(MapView), default(double));
         public static readonly BindableProperty ReSnapRotationDegreesProperty = BindableProperty.Create(nameof(ReSnapRotationDegreesProperty), typeof(double), typeof(MapView), default(double));
+        public static readonly BindableProperty RotationLockProperty = BindableProperty.Create(nameof(RotationLockProperty), typeof(bool), typeof(MapView), default(bool));
         public static readonly BindableProperty ZoomLockProperty = BindableProperty.Create(nameof(ZoomLockProperty), typeof(bool), typeof(MapView), default(bool));
         public static readonly BindableProperty PanLockProperty = BindableProperty.Create(nameof(PanLockProperty), typeof(bool), typeof(MapView), default(bool));
 
@@ -220,15 +220,6 @@ namespace Mapsui.UI.Forms
         }
 
         /// <summary>
-        /// Enable rotation with pinch gesture
-        /// </summary>
-        public bool AllowPinchRotation
-        {
-            get { return (bool)GetValue(AllowPinchRotationProperty); }
-            set { SetValue(AllowPinchRotationProperty, value); }
-        }
-
-        /// <summary>
         /// Number of degrees, before the rotation starts
         /// </summary>
         public double UnSnapRotationDegrees
@@ -244,6 +235,15 @@ namespace Mapsui.UI.Forms
         {
             get { return (double)GetValue(ReSnapRotationDegreesProperty); }
             set { SetValue(ReSnapRotationDegreesProperty, value); }
+        }
+
+        /// <summary>
+        /// Enable rotation with pinch gesture
+        /// </summary>
+        public bool RotationLock
+        {
+            get { return (bool)GetValue(RotationLockProperty); }
+            set { SetValue(RotationLockProperty, value); }
         }
 
         /// <summary>
@@ -365,15 +365,15 @@ namespace Mapsui.UI.Forms
                 Refresh();
             }
 
-            if (propertyName.Equals(nameof(AllowPinchRotationProperty)))
-                _mapControl.RotationLock = AllowPinchRotation;
-
             if (propertyName.Equals(nameof(UnSnapRotationDegreesProperty)))
                 _mapControl.UnSnapRotationDegrees = UnSnapRotationDegrees;
 
             if (propertyName.Equals(nameof(ReSnapRotationDegreesProperty)))
                 _mapControl.ReSnapRotationDegrees = ReSnapRotationDegrees;
             
+            if (propertyName.Equals(nameof(RotationLockProperty)))
+                _mapControl.RotationLock = RotationLock;
+
             if (propertyName.Equals(nameof(ZoomLockProperty)))
                 _mapControl.ZoomLock = ZoomLock;
 
