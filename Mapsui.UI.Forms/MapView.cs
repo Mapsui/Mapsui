@@ -30,6 +30,9 @@ namespace Mapsui.UI.Forms
         readonly ObservableCollection<Drawable> _drawable = new ObservableCollection<Drawable>();
         readonly ObservableCollection<Callout> _callouts = new ObservableCollection<Callout>();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:Mapsui.UI.Forms.MapView"/> class.
+        /// </summary>
         public MapView()
         {
             MyLocationEnabled = false;
@@ -79,9 +82,24 @@ namespace Mapsui.UI.Forms
         /// Events
         /// </summary>
 
+        ///<summary>
+        /// Occurs when a pin clicked
+        /// </summary>
         public event EventHandler<PinClickedEventArgs> PinClicked;
+
+        /// <summary>
+        /// Occurs when selected pin changed
+        /// </summary>
         public event EventHandler<SelectedPinChangedEventArgs> SelectedPinChanged;
+
+        /// <summary>
+        /// Occurs when map clicked
+        /// </summary>
         public event EventHandler<MapClickedEventArgs> MapClicked;
+
+        /// <summary>
+        /// Occurs when map long clicked
+        /// </summary>
         public event EventHandler<MapLongClickedEventArgs> MapLongClicked;
 
         /// <summary>
@@ -236,6 +254,11 @@ namespace Mapsui.UI.Forms
 
         private Callout callout;
 
+        /// <summary>
+        /// Creates a callout at the given position
+        /// </summary>
+        /// <returns>The callout</returns>
+        /// <param name="position">Position of callout</param>
         public Callout CreateCallout(Position position)
         {
             if (position == null)
@@ -256,6 +279,10 @@ namespace Mapsui.UI.Forms
             return result;
         }
 
+        /// <summary>
+        /// Shows given callout
+        /// </summary>
+        /// <param name="callout">Callout to show</param>
         public void ShowCallout(Callout callout)
         {
             if (callout == null)
@@ -278,6 +305,10 @@ namespace Mapsui.UI.Forms
             callout.Show();
         }
 
+        /// <summary>
+        /// Hides given callout
+        /// </summary>
+        /// <param name="callout">Callout to hide</param>
         public void HideCallout(Callout callout)
         {
             if (callout == null)
