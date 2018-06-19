@@ -24,52 +24,52 @@
         <dependency id="ConcurrentHashSet" version="[1.0.2,2.0.0)"/>
         <dependency id="Mapsui" version="[2.0.0,)"/>
         <dependency id="Newtonsoft.json" version="[11.0.1,)"/>
-        <dependency id="SkiaSharp" version="1.0.0" />
-        <dependency id="Xamarin.Forms" version="3.0.0.561731" />
+        <dependency id="SkiaSharp" version="[1.60.0,)" />
+        <dependency id="Xamarin.Forms" version="3.0.0.446417" />
       </group>
       <group targetFramework="MonoAndroid">
         <dependency id="BruTile" version="[2.0.0,3.0.0)"/>
         <dependency id="ConcurrentHashSet" version="[1.0.2,2.0.0)"/>
         <dependency id="Mapsui" version="[2.0.0,)"/>
         <dependency id="Newtonsoft.json" version="[11.0.1,)"/>
-        <dependency id="SkiaSharp" version="1.0.0" />
-        <dependency id="SkiaSharp.Views" version="1.0.0" />
-        <dependency id="SkiaSharp.Views.Forms" version="1.0.0" />
-        <dependency id="SkiaSharp.Svg" version="1.0.0" />
-        <dependency id="Xamarin.Forms" version="3.0.0.561731" />
+        <dependency id="SkiaSharp" version="[1.60.0,)" />
+        <dependency id="SkiaSharp.Views" version="[1.60.0,)" />
+        <dependency id="SkiaSharp.Views.Forms" version="[1.60.0,)" />
+        <dependency id="SkiaSharp.Svg" version="[1.60.0,)" />
+        <dependency id="Xamarin.Forms" version="3.0.0.446417" />
       </group>
       <group targetFramework="XamariniOS">
         <dependency id="BruTile" version="[2.0.0,3.0.0)"/>
         <dependency id="ConcurrentHashSet" version="[1.0.2,2.0.0)"/>
         <dependency id="Mapsui" version="[2.0.0,)"/>
         <dependency id="Newtonsoft.json" version="[11.0.1,)"/>
-        <dependency id="SkiaSharp" version="1.0.0" />
-        <dependency id="SkiaSharp.Views" version="1.0.0" />
-        <dependency id="SkiaSharp.Views.Forms" version="1.0.0" />
-        <dependency id="SkiaSharp.Svg" version="1.0.0" />
-        <dependency id="Xamarin.Forms" version="3.0.0.561731" />
+        <dependency id="SkiaSharp" version="[1.60.0,)" />
+        <dependency id="SkiaSharp.Views" version="[1.60.0,)" />
+        <dependency id="SkiaSharp.Views.Forms" version="[1.60.0,)" />
+        <dependency id="SkiaSharp.Svg" version="[1.60.0,)" />
+        <dependency id="Xamarin.Forms" version="3.0.0.446417" />
       </group>
       <group targetFramework="XamarinMac">
         <dependency id="BruTile" version="[2.0.0,3.0.0)"/>
         <dependency id="ConcurrentHashSet" version="[1.0.2,2.0.0)"/>
         <dependency id="Mapsui" version="[2.0.0,)"/>
         <dependency id="Newtonsoft.json" version="[11.0.1,)"/>
-        <dependency id="SkiaSharp" version="1.0.0" />
-        <dependency id="SkiaSharp.Views" version="1.0.0" />
-        <dependency id="SkiaSharp.Views.Forms" version="1.0.0" />
-        <dependency id="SkiaSharp.Svg" version="1.0.0" />
-        <dependency id="Xamarin.Forms" version="3.0.0.561731" />
+        <dependency id="SkiaSharp" version="[1.60.0,)" />
+        <dependency id="SkiaSharp.Views" version="[1.60.0,)" />
+        <dependency id="SkiaSharp.Views.Forms" version="[1.60.0,)" />
+        <dependency id="SkiaSharp.Svg" version="[1.60.0,)" />
+        <dependency id="Xamarin.Forms" version="3.0.0.446417" />
       </group>
       <group targetFramework="uap10.0">
         <dependency id="BruTile" version="[2.0.0,3.0.0)"/>
         <dependency id="ConcurrentHashSet" version="[1.0.2,2.0.0)"/>
         <dependency id="Mapsui" version="[2.0.0,)"/>
         <dependency id="Newtonsoft.json" version="[11.0.1,)"/>
-        <dependency id="SkiaSharp" version="1.0.0" />
-        <dependency id="SkiaSharp.Views" version="1.0.0" />
-        <dependency id="SkiaSharp.Views.Forms" version="1.0.0" />
-        <dependency id="SkiaSharp.Svg" version="1.0.0" />
-        <dependency id="Xamarin.Forms" version="3.0.0.561731" />
+        <dependency id="SkiaSharp" version="[1.60.0,)" />
+        <dependency id="SkiaSharp.Views" version="[1.60.0,)" />
+        <dependency id="SkiaSharp.Views.Forms" version="[1.60.0,)" />
+        <dependency id="SkiaSharp.Svg" version="[1.60.0,)" />
+        <dependency id="Xamarin.Forms" version="3.0.0.446417" />
       </group>
     </dependencies>
 
