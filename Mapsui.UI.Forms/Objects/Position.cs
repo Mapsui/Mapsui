@@ -121,6 +121,21 @@ namespace Mapsui.UI.Forms
                 + FormatNumber(Longitude, formatLongitude, textEast, textWest);
         }
 
+        /// <summary>
+        /// Format for coordinates with decimal degrees
+        /// </summary>
+        public const string DecimalDegrees = "P DD.ddd°|P DDD.ddd°|N|S|E|W";
+
+        /// <summary>
+        /// Format for coordinates with decimal minutes
+        /// </summary>
+        public const string DecimalMinutes = "P DD° MM.MMM'|P DDD° MM.MMM'|N|S|E|W";
+
+        /// <summary>
+        /// Format for coordinates with decimal seconds
+        /// </summary>
+        public const string DecimalSeconds = "P DD° MM' SS.sss\"|P DDD° MM' SS.sss\"|N|S|E|W";
+
         string FormatNumber(double value, string format, string positiveDirection, string negativDirection)
         {
             string direction = value > 0 ? positiveDirection : negativDirection;
