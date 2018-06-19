@@ -28,7 +28,7 @@ namespace Mapsui.Samples.Forms
 
             listView.ItemsSource = allSamples.Select(k => k.Key).ToList();
 
-            mapView.AllowPinchRotation = true;
+            mapView.RotationLock = false;
             mapView.UnSnapRotationDegrees = 30;
             mapView.ReSnapRotationDegrees = 5;
 

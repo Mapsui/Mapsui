@@ -23,7 +23,7 @@ namespace Mapsui.Samples.Forms
         {
             InitializeComponent();
 
-            mapView.AllowPinchRotation = true;
+            mapView.RotationLock = true;
             mapView.UnSnapRotationDegrees = 30;
             mapView.ReSnapRotationDegrees = 5;
 
