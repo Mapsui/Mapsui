@@ -3,16 +3,16 @@
   <metadata>
 
     <!-- package -->
-    <id>Mapsui.UI.Forms</id>
+    <id>Mapsui.Forms</id>
     <title>Mapsui for Xamarin.Forms</title>
     <version>2.0.0</version>
-    <description>Mapsui.UI.Forms - Library for mapping for Xamarin.Forms</description>
+    <description>Mapsui.Forms - Library for mapping for Xamarin.Forms</description>
     <projectUrl>https://github.com/Mapsui/Mapsui</projectUrl>
     <iconUrl>https://github.com/Mapsui/Mapsui/blob/master/logo/png/icon.png</iconUrl>
     <tags>mapsui xamarin.forms map maps mapping xamarin ios android windows uwp macos cross-platform</tags>
 
     <!-- legal -->
-    <licenseUrl>https://go.microsoft.com/fwlink/?linkid=868514</licenseUrl>
+    <licenseUrl>https://github.com/Mapsui/Mapsui/blob/master/LICENSE.md</licenseUrl>
     <authors>Dirk Weltz</authors>
     <owners>Mapsui Contributers</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -22,7 +22,6 @@
       <group>
         <dependency id="BruTile" version="[2.0.0,3.0.0)"/>
         <dependency id="ConcurrentHashSet" version="[1.0.2,2.0.0)"/>
-        <dependency id="Mapsui" version="[2.0.0,)"/>
         <dependency id="Newtonsoft.json" version="[11.0.1,)"/>
         <dependency id="SkiaSharp" version="[1.60.0,)" />
         <dependency id="Xamarin.Forms" version="3.0.0.446417" />
@@ -30,7 +29,6 @@
       <group targetFramework="MonoAndroid">
         <dependency id="BruTile" version="[2.0.0,3.0.0)"/>
         <dependency id="ConcurrentHashSet" version="[1.0.2,2.0.0)"/>
-        <dependency id="Mapsui" version="[2.0.0,)"/>
         <dependency id="Newtonsoft.json" version="[11.0.1,)"/>
         <dependency id="SkiaSharp" version="[1.60.0,)" />
         <dependency id="SkiaSharp.Views" version="[1.60.0,)" />
@@ -41,7 +39,6 @@
       <group targetFramework="XamariniOS">
         <dependency id="BruTile" version="[2.0.0,3.0.0)"/>
         <dependency id="ConcurrentHashSet" version="[1.0.2,2.0.0)"/>
-        <dependency id="Mapsui" version="[2.0.0,)"/>
         <dependency id="Newtonsoft.json" version="[11.0.1,)"/>
         <dependency id="SkiaSharp" version="[1.60.0,)" />
         <dependency id="SkiaSharp.Views" version="[1.60.0,)" />
@@ -52,7 +49,6 @@
       <group targetFramework="XamarinMac">
         <dependency id="BruTile" version="[2.0.0,3.0.0)"/>
         <dependency id="ConcurrentHashSet" version="[1.0.2,2.0.0)"/>
-        <dependency id="Mapsui" version="[2.0.0,)"/>
         <dependency id="Newtonsoft.json" version="[11.0.1,)"/>
         <dependency id="SkiaSharp" version="[1.60.0,)" />
         <dependency id="SkiaSharp.Views" version="[1.60.0,)" />
@@ -63,7 +59,6 @@
       <group targetFramework="uap10.0">
         <dependency id="BruTile" version="[2.0.0,3.0.0)"/>
         <dependency id="ConcurrentHashSet" version="[1.0.2,2.0.0)"/>
-        <dependency id="Mapsui" version="[2.0.0,)"/>
         <dependency id="Newtonsoft.json" version="[11.0.1,)"/>
         <dependency id="SkiaSharp" version="[1.60.0,)" />
         <dependency id="SkiaSharp.Views" version="[1.60.0,)" />
@@ -75,6 +70,9 @@
 
   </metadata>
   <files>
-    <file src="..\Mapsui.UI.Forms\bin\Release\netstandard1.3\Mapsui.UI.Forms.dll" target="lib\netstandard1.3\Mapsui.UI.Forms.dll" />
+    <file src="../Mapsui.UI.Forms/bin/Release/netstandard1.3/Mapsui.Geometries.dll" target="lib/netstandard1.3/" />
+    <file src="../Mapsui.UI.Forms/bin/Release/netstandard1.3/Mapsui.dll" target="lib/netstandard1.3/" />
+    <file src="../Mapsui.UI.Forms/bin/Release/netstandard1.3/Mapsui.Rendering.Skia.dll" target="lib/netstandard1.3/" />
+    <file src="../Mapsui.UI.Forms/bin/Release/netstandard1.3/Mapsui.UI.Forms.dll" target="lib/netstandard1.3/" />
   </files>
 </package>
