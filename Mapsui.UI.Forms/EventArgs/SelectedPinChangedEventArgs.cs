@@ -4,11 +4,10 @@ namespace Mapsui.UI.Forms
 {
     public sealed class SelectedPinChangedEventArgs : EventArgs
     {
-        public Pin SelectedPin
-        {
-            get;
-            private set;
-        }
+        /// <summary>
+        /// Pin that was selected
+        /// </summary>
+        public Pin SelectedPin { get; }
 
         internal SelectedPinChangedEventArgs(Pin selectedPin)
         {

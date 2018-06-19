@@ -8,19 +8,16 @@ namespace Mapsui.UI.Forms
         /// <summary>
         /// Point of click in EPSG:4326 coordinates
         /// </summary>
-        /// <value>The point.</value>
         public Position Point { get; }
 
         /// <summary>
         /// Point of click in screen coordinates
         /// </summary>
-        /// <value>The screen point.</value>
         public Point ScreenPoint { get; }
 
         /// <summary>
         /// Number of taps
         /// </summary>
-        /// <value>The number of taps.</value>
         public int NumOfTaps { get; }
 
         /// <summary>
