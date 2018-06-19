@@ -12,6 +12,3 @@ Skia is nearly equivalent to Xaml but there are still some differences (This lis
 
 ## Xaml and Skia side by side in Mapsui.Samples.Wpf
 The project Mapsui.Samples.Wpf has a dropdown on the top left to select between Skia and Wpf rendering. This is allows you to compare them.
-
-## Test
-[Test](mytest)
