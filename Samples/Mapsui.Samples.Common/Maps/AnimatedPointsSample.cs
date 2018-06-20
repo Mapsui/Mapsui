@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Threading;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
@@ -31,8 +32,7 @@ namespace Mapsui.Samples.Common.Maps
             : base(new DynamicMemoryProvider())
         {
             Style = new SymbolStyle {Fill = {Color = new Color(255, 215, 0, 200)}, SymbolScale = 0.9};
-            _timer = new Timer(arg => UpdateData(), 2000, this);
-            _timer.Start();
+            _timer = new Timer(arg => UpdateData(), this, 0, 2000);
         }
 
         private class DynamicMemoryProvider : MemoryProvider

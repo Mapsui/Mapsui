@@ -6,7 +6,7 @@ using Mapsui.Geometries;
 using Mapsui.Logging;
 using Mapsui.Providers;
 using Mapsui.Rendering;
-using Mapsui.Utilities;
+using System.Threading;
 
 namespace Mapsui.Layers
 {
@@ -61,15 +61,14 @@ namespace Mapsui.Layers
             _overscan = overscanRatio;
             _onlyRerasterizeIfOutsideOverscan = onlyRerasterizeIfOutsideOverscan;
             _layer.DataChanged += LayerOnDataChanged;
-            _timer = new Timer(TimerElapsed, _delayBeforeRasterize);
-            _timer.Start();
+            _timer = new Timer(TimerElapsed, null, _delayBeforeRasterize, Timeout.Infinite);
         }
 
         public override BoundingBox Envelope => _layer.Envelope;
 
         private void TimerElapsed(object state)
         {
-            _timer.Cancel();
+            _timer.Change(Timeout.Infinite, Timeout.Infinite);
             Rasterize();
         }
 
@@ -82,7 +81,7 @@ namespace Mapsui.Layers
 
         private void RestartTimer()
         {
-            _timer.Restart(_delayBeforeRasterize);
+            _timer.Change(_delayBeforeRasterize, Timeout.Infinite);
         }
 
         private void Rasterize()
