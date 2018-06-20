@@ -37,8 +37,6 @@ namespace Mapsui.UI.iOS
             Map = new Map();
             BackgroundColor = UIColor.White;
 
-            GetDeviceIndepententUnits();
-
             _canvas.TranslatesAutoresizingMaskIntoConstraints = false;
             _canvas.MultipleTouchEnabled = true;
             _canvas.PaintSurface += OnPaintSurface;
@@ -52,7 +50,7 @@ namespace Mapsui.UI.iOS
             });
 
             // Unfortunately the SKGLView does not have a IgnorePixelScaling property. We have to adjust with _scale.
-            _scale = GetDeviceIndepententUnits();
+            _scale = RawPixelsPerDeviceUnit;
 
             TryInitializeViewport();
 
@@ -76,10 +74,7 @@ namespace Mapsui.UI.iOS
             AddGestureRecognizer(tapGestureRecognizer);
         }
 
-        public float GetDeviceIndepententUnits()
-        {
-            return (float)_canvas.ContentScaleFactor;
-        }
+        public float RawPixelsPerDeviceUnit => (float) _canvas.ContentScaleFactor;
 
         private void OnDoubleTapped(UITapGestureRecognizer gesture)
         {

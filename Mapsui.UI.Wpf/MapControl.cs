@@ -248,20 +248,23 @@ namespace Mapsui.UI.Wpf
 
         private void MapControlLoaded(object sender, RoutedEventArgs e)
         {
-            GetDeviceIndepententUnits();
             TryInitializeViewport();
             UpdateSize();
             InitAnimation();
             Focusable = true;
         }
 
-        public float GetDeviceIndepententUnits()
+        public float RawPixelsPerDeviceUnit
         {
-            if (RenderMode == RenderMode.Skia)
+            get
             {
-                return DetermineSkiaScale();
+                if (RenderMode == RenderMode.Skia)
+                {
+                    return DetermineSkiaScale();
+                }
+
+                return 1; // Scale is always 1 in WPF
             }
-            return 1; // Scale is always 1 in WPF
         }
 
         private float DetermineSkiaScale()

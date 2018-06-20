@@ -219,8 +219,8 @@ namespace Mapsui.UI.Wpf
         public Point ToRawPixels(Point positionInDeviceUnits)
         {
             return new Point(
-                positionInDeviceUnits.X / GetDeviceIndepententUnits(),
-                positionInDeviceUnits.Y / GetDeviceIndepententUnits());
+                positionInDeviceUnits.X / RawPixelsPerDeviceUnit,
+                positionInDeviceUnits.Y / RawPixelsPerDeviceUnit);
         }
     }
 }
