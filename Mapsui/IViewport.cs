@@ -84,9 +84,9 @@ namespace Mapsui
         /// <summary>
         /// Converts a point in map units to one in screen pixels, respecting rotation
         /// </summary>
-        /// <param name="point">Coordinate in map units</param>
+        /// <param name="worldPosition">Coordinate in map units</param>
         /// <returns>Point in screen pixels</returns>
-        Point WorldToScreen(Point point);
+        Point WorldToScreen(Point worldPosition);
 
         /// <summary>
         /// Converts a point in map units to one in screen pixels, not respecting rotation
@@ -114,14 +114,15 @@ namespace Mapsui
         /// <summary>
         /// Converts a point in screen pixels to one in map units, respecting rotation
         /// </summary>
-        /// <param name="point">Coordinate in map units</param>
+        /// <param name="screenPosition">Coordinate in map units</param>
         /// <returns>Point in map units</returns>
-        Point ScreenToWorld(Point point);
+        Point ScreenToWorld(Point screenPosition);
 
         /// <summary>
         /// Converts X/Y in screen pixels to a point in map units, respecting rotation
         /// </summary>
-        /// <param name="worldPosition">Coordinate in map units</param>
+        /// <param name="x">Screen position x coordinate</param>
+        /// <param name="y">Screen position y coordinate</param>
         /// <returns>Point in map units</returns>
         Point ScreenToWorld(double x, double y);
 

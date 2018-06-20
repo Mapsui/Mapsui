@@ -248,14 +248,14 @@ namespace Mapsui.UI.Wpf
 
         private void MapControlLoaded(object sender, RoutedEventArgs e)
         {
-            _scale = GetDeviceIndependentUnits();
+            GetDeviceIndepententUnits();
             TryInitializeViewport();
             UpdateSize();
             InitAnimation();
             Focusable = true;
         }
 
-        public float GetDeviceIndependentUnits()
+        public float GetDeviceIndepententUnits()
         {
             if (RenderMode == RenderMode.Skia)
             {

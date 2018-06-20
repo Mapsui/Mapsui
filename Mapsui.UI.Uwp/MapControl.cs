@@ -51,6 +51,7 @@ namespace Mapsui.UI.Uwp
             Children.Add(_canvas);
             Children.Add(_bboxRect);
 
+            _canvas.IgnorePixelScaling = true;
             _canvas.PaintSurface += Canvas_PaintSurface;
 
             Map = new Map();
@@ -58,8 +59,6 @@ namespace Mapsui.UI.Uwp
             Loaded += MapControlLoaded;
 
             SizeChanged += MapControlSizeChanged;
-
-            _scale = GetDeviceIndependentUnits();
 
             PointerWheelChanged += MapControl_PointerWheelChanged;
 
@@ -230,7 +229,6 @@ namespace Mapsui.UI.Uwp
             TryInitializeViewport();
             if (!_map.Viewport.Initialized) return;
 
-            e.Surface.Canvas.Scale(_scale, _scale);
             Renderer.Render(e.Surface.Canvas, Map.Viewport, _map.Layers, _map.Widgets, _map.BackColor);
         }
 
@@ -338,7 +336,7 @@ namespace Mapsui.UI.Uwp
             ViewportInitialized?.Invoke(this, EventArgs.Empty);
         }
 
-        public float GetDeviceIndependentUnits()
+        public float GetDeviceIndepententUnits()
         {
             var scaleFactor = DisplayInformation.GetForCurrentView().RawPixelsPerViewPixel;
             return (float)scaleFactor;

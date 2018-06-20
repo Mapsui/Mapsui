@@ -16,6 +16,7 @@ namespace Mapsui.UI.iOS
     {
         private readonly SKGLView _canvas = new SKGLView();
         private double _innerRotation;
+        private float _scale;
 
         public event EventHandler ViewportInitialized;
 
@@ -36,11 +37,11 @@ namespace Mapsui.UI.iOS
             Map = new Map();
             BackgroundColor = UIColor.White;
 
-            _scale = GetDeviceIndependentUnits();
+            GetDeviceIndepententUnits();
 
             _canvas.TranslatesAutoresizingMaskIntoConstraints = false;
             _canvas.MultipleTouchEnabled = true;
-
+            _canvas.PaintSurface += OnPaintSurface;
             AddSubview(_canvas);
 
             AddConstraints(new[] {
@@ -50,14 +51,15 @@ namespace Mapsui.UI.iOS
                 NSLayoutConstraint.Create(this, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, _canvas, NSLayoutAttribute.Bottom, 1.0f, 0.0f)
             });
 
+            // Unfortunately the SKGLView does not have a IgnorePixelScaling property. We have to adjust with _scale.
+            _scale = GetDeviceIndepententUnits();
+
             TryInitializeViewport();
 
             ClipsToBounds = true;
             MultipleTouchEnabled = true;
             UserInteractionEnabled = true;
-
-            _canvas.PaintSurface += OnPaintSurface;
-
+            
             var doubleTapGestureRecognizer = new UITapGestureRecognizer(OnDoubleTapped)
             {
                 NumberOfTapsRequired = 2,
@@ -74,7 +76,7 @@ namespace Mapsui.UI.iOS
             AddGestureRecognizer(tapGestureRecognizer);
         }
 
-        public float GetDeviceIndependentUnits()
+        public float GetDeviceIndepententUnits()
         {
             return (float)_canvas.ContentScaleFactor;
         }

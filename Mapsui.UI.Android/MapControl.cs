@@ -21,6 +21,10 @@ namespace Mapsui.UI.Android
         private double _previousAngle;
         private double _previousRadius = 1f;
         private TouchMode _mode = TouchMode.None;
+        /// <summary>
+        /// Display scale for converting screen position to real position
+        /// </summary>
+        private float _scale;
 
         public event EventHandler ViewportInitialized;
 
@@ -39,8 +43,8 @@ namespace Mapsui.UI.Android
         public void Initialize()
         {
             SetBackgroundColor(Color.Transparent);
-            _scale = GetDeviceIndependentUnits();
-            _canvas = new SKCanvasView(Context);
+            _scale = GetDeviceIndepententUnits();
+            _canvas = new SKCanvasView(Context) { IgnorePixelScaling = true };
             _canvas.PaintSurface += CanvasOnPaintSurface;
             AddView(_canvas);
 
@@ -53,7 +57,7 @@ namespace Mapsui.UI.Android
             _gestureDetector.DoubleTap += OnDoubleTapped;
         }
 
-        public float GetDeviceIndependentUnits()
+        public float GetDeviceIndepententUnits()
         {
             return Resources.DisplayMetrics.Density;
         }
@@ -85,8 +89,6 @@ namespace Mapsui.UI.Android
         {
             TryInitializeViewport();
             if (!_map.Viewport.Initialized) return;
-
-            args.Surface.Canvas.Scale(_scale, _scale); // we can only set the scale in the render loop
 
             Renderer.Render(args.Surface.Canvas, _map.Viewport, _map.Layers, _map.Widgets, _map.BackColor);
         }
@@ -229,7 +231,7 @@ namespace Mapsui.UI.Android
             for (var i = 0; i < me.PointerCount; i++)
             {
                 result.Add(new Geometries.Point(
-                    ToDeviceIndependentUnits(me.GetX(i) - view.Left), 
+                    ToDeviceIndependentUnits(me.GetX(i) - view.Left),
                     ToDeviceIndependentUnits(me.GetY(i) - view.Top)));
             }
             return result;
@@ -246,7 +248,7 @@ namespace Mapsui.UI.Android
         {
             RefreshGraphics();
         }
-      
+
         protected override void OnDraw(Canvas canvas)
         {
             Invalidate();
@@ -327,7 +329,7 @@ namespace Mapsui.UI.Android
                 Map.Viewport.Height = ToDeviceIndependentUnits(mapControlHeight);
             }
         }
-        
+
         public new void Dispose()
         {
             Unsubscribe();
