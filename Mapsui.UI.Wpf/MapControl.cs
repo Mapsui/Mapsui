@@ -254,20 +254,9 @@ namespace Mapsui.UI.Wpf
             Focusable = true;
         }
 
-        public float RawPixelsPerDeviceUnit
-        {
-            get
-            {
-                if (RenderMode == RenderMode.Skia)
-                {
-                    return DetermineSkiaScale();
-                }
+        public float PixelsPerDeviceIndepententUnit => DetermineDeviceIndependentUnits();
 
-                return 1; // Scale is always 1 in WPF
-            }
-        }
-
-        private float DetermineSkiaScale()
+        private float DetermineDeviceIndependentUnits()
         {
             var presentationSource = PresentationSource.FromVisual(this);
             if (presentationSource == null) throw new Exception("PresentationSource is null");

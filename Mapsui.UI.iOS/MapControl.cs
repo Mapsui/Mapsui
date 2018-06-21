@@ -50,7 +50,7 @@ namespace Mapsui.UI.iOS
             });
 
             // Unfortunately the SKGLView does not have a IgnorePixelScaling property. We have to adjust with _scale.
-            _scale = RawPixelsPerDeviceUnit;
+            _scale = PixelsPerDeviceIndepententUnit;
 
             TryInitializeViewport();
 
@@ -74,7 +74,7 @@ namespace Mapsui.UI.iOS
             AddGestureRecognizer(tapGestureRecognizer);
         }
 
-        public float RawPixelsPerDeviceUnit => (float) _canvas.ContentScaleFactor;
+        public float PixelsPerDeviceIndepententUnit => (float) _canvas.ContentScaleFactor;
 
         private void OnDoubleTapped(UITapGestureRecognizer gesture)
         {

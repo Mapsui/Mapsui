@@ -43,7 +43,7 @@ namespace Mapsui.UI.Android
         public void Initialize()
         {
             SetBackgroundColor(Color.Transparent);
-            _scale = RawPixelsPerDeviceUnit;
+            _scale = PixelsPerDeviceIndepententUnit;
             _canvas = new SKCanvasView(Context) { IgnorePixelScaling = true };
             _canvas.PaintSurface += CanvasOnPaintSurface;
             AddView(_canvas);
@@ -57,7 +57,7 @@ namespace Mapsui.UI.Android
             _gestureDetector.DoubleTap += OnDoubleTapped;
         }
 
-        public float RawPixelsPerDeviceUnit => Resources.DisplayMetrics.Density;
+        public float PixelsPerDeviceIndepententUnit => Resources.DisplayMetrics.Density;
 
         private void OnDoubleTapped(object sender, GestureDetector.DoubleTapEventArgs e)
         {

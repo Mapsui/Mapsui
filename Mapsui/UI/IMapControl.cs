@@ -23,7 +23,7 @@ namespace Mapsui.UI
 
         void Unsubscribe();
 
-        float RawPixelsPerDeviceUnit { get; }
+        float PixelsPerDeviceIndepententUnit { get; }
 
         IRenderer Renderer { get; }
     }

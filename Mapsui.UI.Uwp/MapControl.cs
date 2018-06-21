@@ -336,7 +336,7 @@ namespace Mapsui.UI.Uwp
             ViewportInitialized?.Invoke(this, EventArgs.Empty);
         }
 
-        public float RawPixelsPerDeviceUnit => 
+        public float PixelsPerDeviceIndepententUnit => 
             (float)DisplayInformation.GetForCurrentView().RawPixelsPerViewPixel;
 
         private void WidgetTouched(IWidget widget, Geometries.Point screenPosition)
