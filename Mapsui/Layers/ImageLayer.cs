@@ -22,6 +22,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Mapsui.Logging;
 using Mapsui.Utilities;
@@ -64,7 +65,7 @@ namespace Mapsui.Layers
         public ImageLayer(string layername)
         {
             Name = layername;
-            _startFetchTimer = new Timer(StartFetchTimerElapsed, int.MaxValue);
+            _startFetchTimer = new Timer(StartFetchTimerElapsed, null, Timeout.Infinite, Timeout.Infinite);
             _numberOfFeaturesReturned = 1;
             PropertyChanged += OnPropertyChanged;
         }
@@ -135,7 +136,7 @@ namespace Mapsui.Layers
                 return;
             }
 
-            _startFetchTimer.Restart(FetchDelay);
+            _startFetchTimer.Change(FetchDelay, Timeout.Infinite);
         }
 
         private void StartNewFetch(BoundingBox extent, double resolution)
