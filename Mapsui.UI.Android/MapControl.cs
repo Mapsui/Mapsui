@@ -261,7 +261,10 @@ namespace Mapsui.UI.Android
         {
             try
             {
-                PostInvalidate();
+                // Invalidate _canvas instaed og MapControl. If not, than map in background isn't drawn. 
+                // See https://github.com/Mapsui/Mapsui/issues/455 
+                _canvas?.Invalidate();
+                //PostInvalidate();
             }
             catch (ObjectDisposedException e)
             {
