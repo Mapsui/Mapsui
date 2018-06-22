@@ -216,11 +216,11 @@ namespace Mapsui.UI.Wpf
             }
         }
 
-        public Point ToPixels(Point positionInDeviceIndependentUnits)
+        public Point ToPixels(Point deviceIndependentUnits)
         {
             return new Point(
-                positionInDeviceIndependentUnits.X / PixelsPerDeviceIndepententUnit,
-                positionInDeviceIndependentUnits.Y / PixelsPerDeviceIndepententUnit);
+                deviceIndependentUnits.X * PixelsPerDeviceIndepententUnit,
+                deviceIndependentUnits.Y * PixelsPerDeviceIndepententUnit);
         }
     }
 }
