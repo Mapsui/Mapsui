@@ -212,7 +212,7 @@ namespace Mapsui.UI.iOS
         
         public void RefreshGraphics()
         {
-            RunOnUIThread(SetNeedsDisplay);
+            RunOnUIThread(() => { _canvas?.SetNeedsDisplay(); });
         }
 
         public void RefreshData()
