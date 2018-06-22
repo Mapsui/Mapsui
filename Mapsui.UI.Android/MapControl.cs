@@ -96,7 +96,7 @@ namespace Mapsui.UI.Android
 
             if (_map.Viewport.TryInitializeViewport(_map.Envelope, ToDeviceIndependentUnits(Width), ToDeviceIndependentUnits(Height)))
             {
-                Map.RefreshData(true);
+                _map.RefreshData(true);
                 OnViewportInitialized();
             }
         }
@@ -261,7 +261,8 @@ namespace Mapsui.UI.Android
         {
             try
             {
-                PostInvalidate();
+                // Calling Invalite on the MapControl itself is not enough in some case (observed in XF).
+                _canvas?.Invalidate();
             }
             catch (ObjectDisposedException e)
             {
