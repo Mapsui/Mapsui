@@ -212,9 +212,7 @@ namespace Mapsui.UI.iOS
         
         public void RefreshGraphics()
         {
-            // Invalidate _canvas instaed og MapControl. If not, than map in background isn't drawn. 
-            // See https://github.com/Mapsui/Mapsui/issues/455 
-            RunOnUIThread(() => { _canvas?.SetNeedsDisplay(); });
+            RunOnUIThread(SetNeedsDisplay);
         }
 
         public void RefreshData()
