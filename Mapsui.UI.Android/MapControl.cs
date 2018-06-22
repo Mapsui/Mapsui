@@ -246,11 +246,6 @@ namespace Mapsui.UI.Android
             RefreshGraphics();
         }
 
-        protected override void OnDraw(Canvas canvas)
-        {
-            Invalidate();
-            base.OnDraw(canvas);
-        }
 
         public void RefreshGraphics()
         {
