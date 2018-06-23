@@ -256,6 +256,7 @@ namespace Mapsui.UI.Android
         {
             try
             {
+                Invalidate();
                 // Calling Invalite on the MapControl itself is not enough in some case (observed in XF).
                 _canvas?.Invalidate();
             }
