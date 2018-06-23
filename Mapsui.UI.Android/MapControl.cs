@@ -5,6 +5,7 @@ using System.Linq;
 using Android.App;
 using Android.Content;
 using Android.Graphics;
+using Android.OS;
 using Android.Util;
 using Android.Views;
 using Java.Lang;
@@ -302,9 +303,15 @@ namespace Mapsui.UI.Android
 
         public void RefreshGraphics()
         {
+            RunOnUIThread(RefreshGraphicsWithTryCatch);
+        }
+
+        private void RefreshGraphicsWithTryCatch()
+        {
             try
             {
-                PostInvalidate();
+                // Calling Invalite on the MapControl itself is not enough in some case (observed in XF).
+                _canvas?.Invalidate();
             }
             catch (ObjectDisposedException e)
             {
@@ -314,6 +321,11 @@ namespace Mapsui.UI.Android
                 // disposed get another notification to call RefreshGraphics.
                 Logger.Log(LogLevel.Warning, "This can happen when the parent Activity is disposing.", e);
             }
+        }
+
+        private void RunOnUIThread(Action action)
+        {
+            new Handler(Looper.MainLooper).Post(action);
         }
 
         public void RefreshData()

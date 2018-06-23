@@ -291,9 +291,14 @@ namespace Mapsui.UI.iOS
             });
         }
 
+        private void RunOnUIThread(Action action)
+        {
+            DispatchQueue.MainQueue.DispatchAsync(action);
+        }
+
         public void RefreshGraphics()
         {
-            SetNeedsDisplay();
+            RunOnUIThread(() => _canvas?.SetNeedsDisplay());
         }
 
         public void RefreshData()
