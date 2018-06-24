@@ -6,7 +6,7 @@ We have a separate page about this topic because skia scale has caused some conf
 Modern devices have a very high resolution. If something is drawn onto the canvas using raw pixels as coordinates the fonts would become tiny and unreadable and lines would become very thin. To correct for this a scale factor is used. Those scaled-up coordinates are called device independent units. Most of the time you deal with the device indepenten units.
 
 ### Coordinates in SkiaSharp
-Most (all?) views in SkiaSharp use pixels as coordinates but for our purposes we need to user device independent units, so we need to correct for this. There are two ways this can be done:
+Most (all?) views in SkiaSharp use pixels as coordinates by default but for our purposes we need to use device independent units, so we need to correct for this. There are two ways this can be done:
 - Set the skia view's IgnorePixelScaling.
 - Call the skia view's Scale factor with the appropriate scale. For this you need to request the scale factor from the system.
 
@@ -17,6 +17,7 @@ On WPF and UWP:
 - We set IgnorePixelScaling.
 
 On iOS:
+- The GL view we use has no IgnorePixelScaling unfortunately.
 - We determine the skia scale while initializing (or when switching from wpf to skia rendering)ent's size changes.
 - We set the skia scale on the skia surface. This needs to be done in the render loop because this is the only place where we have access to the surface.
 
