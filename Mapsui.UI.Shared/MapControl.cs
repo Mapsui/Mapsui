@@ -216,6 +216,11 @@ namespace Mapsui.UI.Wpf
             }
         }
 
+        /// <summary>
+        /// Converts coordinates in device independent units (or DIP or DP) to pixels.
+        /// </summary>
+        /// <param name="deviceIndependentUnits">Coordinate in device independent units (or DIP or DP)</param>
+        /// <returns>Coordinate in pixels</returns>
         public Point ToPixels(Point deviceIndependentUnits)
         {
             return new Point(
@@ -223,6 +228,11 @@ namespace Mapsui.UI.Wpf
                 deviceIndependentUnits.Y * PixelsPerDeviceIndepententUnit);
         }
 
+        /// <summary>
+        /// Converts coordinates in pixels to device independent units (or DIP or DP).
+        /// </summary>
+        /// <param name="pixels">Coordinate in pixels</param>
+        /// <returns>Coordinate in device independent units (or DIP or DP)</returns>
         public Point ToDeviceIndependentUnits(Point pixels)
         {
             return new Point(
