@@ -222,5 +222,12 @@ namespace Mapsui.UI.Wpf
                 deviceIndependentUnits.X * PixelsPerDeviceIndepententUnit,
                 deviceIndependentUnits.Y * PixelsPerDeviceIndepententUnit);
         }
+
+        public Point ToDeviceIndependentUnits(Point pixels)
+        {
+            return new Point(
+                pixels.X / PixelsPerDeviceIndepententUnit,
+                pixels.Y / PixelsPerDeviceIndepententUnit);
+        }
     }
 }
