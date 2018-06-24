@@ -77,13 +77,13 @@ namespace Mapsui.UI.Uwp
         private void OnDoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
             var tabPosition = e.GetPosition(this).ToMapsui();
-            Map.InvokeInfo(tabPosition, tabPosition, 1, Renderer.SymbolCache, WidgetTouched, 2);
+            Map.InvokeInfo(tabPosition, tabPosition, Renderer.SymbolCache, WidgetTouched, 2);
         }
 
         private void OnSingleTapped(object sender, TappedRoutedEventArgs e)
         {
             var tabPosition = e.GetPosition(this).ToMapsui();
-            Map.InvokeInfo(tabPosition, tabPosition, 1, Renderer.SymbolCache, WidgetTouched, 1);
+            Map.InvokeInfo(tabPosition, tabPosition, Renderer.SymbolCache, WidgetTouched, 1);
         }
 
         private static Rectangle CreateSelectRectangle()
@@ -336,7 +336,7 @@ namespace Mapsui.UI.Uwp
             ViewportInitialized?.Invoke(this, EventArgs.Empty);
         }
 
-        public float PixelsPerDeviceIndepententUnit => 
+        public float PixelsPerDeviceIndependentUnit => 
             (float)DisplayInformation.GetForCurrentView().RawPixelsPerViewPixel;
 
         private void WidgetTouched(IWidget widget, Geometries.Point screenPosition)

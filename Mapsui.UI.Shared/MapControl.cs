@@ -219,25 +219,25 @@ namespace Mapsui.UI.Wpf
         /// <summary>
         /// Converts coordinates in device independent units (or DIP or DP) to pixels.
         /// </summary>
-        /// <param name="deviceIndependentUnits">Coordinate in device independent units (or DIP or DP)</param>
+        /// <param name="coordinateInDeviceIndependentUnits">Coordinate in device independent units (or DIP or DP)</param>
         /// <returns>Coordinate in pixels</returns>
-        public Point ToPixels(Point deviceIndependentUnits)
+        public Point ToPixels(Point coordinateInDeviceIndependentUnits)
         {
             return new Point(
-                deviceIndependentUnits.X * PixelsPerDeviceIndepententUnit,
-                deviceIndependentUnits.Y * PixelsPerDeviceIndepententUnit);
+                coordinateInDeviceIndependentUnits.X * PixelsPerDeviceIndependentUnit,
+                coordinateInDeviceIndependentUnits.Y * PixelsPerDeviceIndependentUnit);
         }
 
         /// <summary>
         /// Converts coordinates in pixels to device independent units (or DIP or DP).
         /// </summary>
-        /// <param name="pixels">Coordinate in pixels</param>
+        /// <param name="coordinateInPixels">Coordinate in pixels</param>
         /// <returns>Coordinate in device independent units (or DIP or DP)</returns>
-        public Point ToDeviceIndependentUnits(Point pixels)
+        public Point ToDeviceIndependentUnits(Point coordinateInPixels)
         {
             return new Point(
-                pixels.X / PixelsPerDeviceIndepententUnit,
-                pixels.Y / PixelsPerDeviceIndepententUnit);
+                coordinateInPixels.X / PixelsPerDeviceIndependentUnit,
+                coordinateInPixels.Y / PixelsPerDeviceIndependentUnit);
         }
     }
 }

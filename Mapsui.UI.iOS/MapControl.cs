@@ -16,7 +16,10 @@ namespace Mapsui.UI.iOS
     {
         private readonly SKGLView _canvas = new SKGLView();
         private double _innerRotation;
-        private float _scale;
+        /// <summary>
+        /// The number of pixels per device independent unit
+        /// </summary>
+        private float _density;
 
         public event EventHandler ViewportInitialized;
 
@@ -50,7 +53,7 @@ namespace Mapsui.UI.iOS
             });
 
             // Unfortunately the SKGLView does not have a IgnorePixelScaling property. We have to adjust with _scale.
-            _scale = PixelsPerDeviceIndepententUnit;
+            _density = PixelsPerDeviceIndependentUnit;
 
             TryInitializeViewport();
 
@@ -74,12 +77,12 @@ namespace Mapsui.UI.iOS
             AddGestureRecognizer(tapGestureRecognizer);
         }
 
-        public float PixelsPerDeviceIndepententUnit => (float) _canvas.ContentScaleFactor;
+        public float PixelsPerDeviceIndependentUnit => (float) _canvas.ContentScaleFactor;
 
         private void OnDoubleTapped(UITapGestureRecognizer gesture)
         {
             var position = GetScreenPosition(gesture.LocationInView(this));
-            var tapWasHandled = Map.InvokeInfo(position, position, 1, Renderer.SymbolCache, WidgetTouched, 2);
+            var tapWasHandled = Map.InvokeInfo(position, position, Renderer.SymbolCache, WidgetTouched, 2);
 
             if (!tapWasHandled)
             {
@@ -91,7 +94,7 @@ namespace Mapsui.UI.iOS
         private void OnSingleTapped(UITapGestureRecognizer gesture)
         {
             var position = GetScreenPosition(gesture.LocationInView(this));
-            Map.InvokeInfo(position, position, 1, Renderer.SymbolCache, WidgetTouched, 1);
+            Map.InvokeInfo(position, position, Renderer.SymbolCache, WidgetTouched, 1);
         }
 
         void OnPaintSurface(object sender, SKPaintGLSurfaceEventArgs args)
@@ -99,7 +102,7 @@ namespace Mapsui.UI.iOS
             TryInitializeViewport();
             if (!_map.Viewport.Initialized) return;
 
-            args.Surface.Canvas.Scale(_scale, _scale);  // we can only set the scale in the render loop
+            args.Surface.Canvas.Scale(_density, _density);  // we can only set the scale in the render loop
 
             Renderer.Render(args.Surface.Canvas, _map.Viewport, _map.Layers, _map.Widgets, _map.BackColor);
         }
@@ -196,6 +199,12 @@ namespace Mapsui.UI.iOS
             Refresh();
         }
 
+
+        /// <summary>
+        /// Gets screen position in device independent units (or DIP or DP).
+        /// </summary>
+        /// <param name="point"></param>
+        /// <returns></returns>
         private Point GetScreenPosition(CGPoint point)
         {
             return new Point(point.X, point.Y);

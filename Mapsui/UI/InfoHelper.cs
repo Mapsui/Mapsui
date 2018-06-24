@@ -17,17 +17,15 @@ namespace Mapsui.UI
         /// </summary>
         /// <param name="viewport"></param>
         /// <param name="screenPosition"></param>
-        /// <param name="scale"></param>
         /// <param name="layers"></param>
         /// <param name="symbolCache"></param>
         /// <param name="margin">Margin of error in pixels. If the distance between screen position and geometry 
         /// is smaller than the margin it is seen as a hit.</param>
         /// <returns></returns>
         public static MapInfo GetMapInfo(IViewport viewport, Point screenPosition,
-            float scale, IEnumerable<ILayer> layers, ISymbolCache symbolCache, int margin = 0)
+            IEnumerable<ILayer> layers, ISymbolCache symbolCache, int margin = 0)
         {
-            var worldPosition = viewport.ScreenToWorld(
-                new Point(screenPosition.X / scale, screenPosition.Y / scale));
+            var worldPosition = viewport.ScreenToWorld(screenPosition);
             return GetMapInfo(layers, worldPosition, screenPosition, viewport.Resolution, symbolCache, margin);
         }
 
