@@ -125,6 +125,11 @@ namespace Mapsui.UI.Wpf
             map.RefreshGraphics += MapRefreshGraphics;
         }
 
+        private void MapRefreshGraphics(object sender, EventArgs eventArgs)
+        {
+            RefreshGraphics();
+        }
+
         /// <summary>
         /// Unsubcribe from map events
         /// </summary>

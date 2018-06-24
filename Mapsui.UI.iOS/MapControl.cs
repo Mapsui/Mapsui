@@ -199,7 +199,6 @@ namespace Mapsui.UI.iOS
             Refresh();
         }
 
-
         /// <summary>
         /// Gets screen position in device independent units (or DIP or DP).
         /// </summary>
@@ -209,11 +208,7 @@ namespace Mapsui.UI.iOS
         {
             return new Point(point.X, point.Y);
         }
-        private void MapRefreshGraphics(object sender, EventArgs eventArgs)
-        {
-            RefreshGraphics();
-        }
-        
+       
         private void RunOnUIThread(Action action)
         {
             DispatchQueue.MainQueue.DispatchAsync(action);

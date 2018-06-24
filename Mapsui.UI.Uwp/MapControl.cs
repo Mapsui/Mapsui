@@ -113,11 +113,6 @@ namespace Mapsui.UI.Uwp
             };
         }
 
-        private void MapRefreshGraphics(object o, EventArgs eventArgs)
-        {
-            RefreshGraphics();
-        }
-
         public bool ZoomLocked { get; set; }
 
         public event EventHandler<ViewChangedEventArgs> ViewChanged;

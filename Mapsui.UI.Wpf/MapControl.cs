@@ -156,11 +156,6 @@ namespace Mapsui.UI.Wpf
         public event EventHandler<FeatureInfoEventArgs> FeatureInfo;
         public event EventHandler ViewportInitialized;
 
-        private void MapRefreshGraphics(object sender, EventArgs eventArgs)
-        {
-            RefreshGraphics();
-        }
-
         private void OnViewChanged(bool userAction = false)
         {
             if (_map == null) return;

@@ -258,12 +258,6 @@ namespace Mapsui.UI.Android
                 motionEvent.GetY(0) - view.Top).ToMapsui();
         }
 
-        private void MapRefreshGraphics(object sender, EventArgs eventArgs)
-        {
-            RefreshGraphics();
-        }
-
-
         public void RefreshGraphics()
         {
             RunOnUIThread(RefreshGraphicsWithTryCatch);
