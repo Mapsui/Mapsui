@@ -473,7 +473,8 @@ aligned.</p>
       <tr>
         <td><a class="xref" href="Mapsui.Geometries.Point.html">Point</a></td>
         <td><span class="parametername">screenPosition</span></td>
-        <td></td>
+        <td><p>Coordinate in map units</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -556,7 +557,8 @@ aligned.</p>
   </span>
   <a id="Mapsui_Viewport_Transform_" data-uid="Mapsui.Viewport.Transform*"></a>
   <h4 id="Mapsui_Viewport_Transform_System_Double_System_Double_System_Double_System_Double_System_Double_System_Double_" data-uid="Mapsui.Viewport.Transform(System.Double,System.Double,System.Double,System.Double,System.Double,System.Double)">Transform(Double, Double, Double, Double, Double, Double)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Moving the position of viewport to a new one</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -575,32 +577,38 @@ aligned.</p>
       <tr>
         <td><span class="xref">System.Double</span></td>
         <td><span class="parametername">screenX</span></td>
-        <td></td>
+        <td><p>New X position of point</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.Double</span></td>
         <td><span class="parametername">screenY</span></td>
-        <td></td>
+        <td><p>New Y position of point</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.Double</span></td>
         <td><span class="parametername">previousScreenX</span></td>
-        <td></td>
+        <td><p>Old X position of point</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.Double</span></td>
         <td><span class="parametername">previousScreenY</span></td>
-        <td></td>
+        <td><p>Old Y position of point</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.Double</span></td>
         <td><span class="parametername">deltaScale</span></td>
-        <td></td>
+        <td><p>Change of resolution for transformation (&lt;1: zoom out, &gt;1: zoom in)</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.Double</span></td>
         <td><span class="parametername">deltaRotation</span></td>
-        <td></td>
+        <td><p>Change of rotation</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -670,7 +678,8 @@ aligned.</p>
   </span>
   <a id="Mapsui_Viewport_WorldToScreen_" data-uid="Mapsui.Viewport.WorldToScreen*"></a>
   <h4 id="Mapsui_Viewport_WorldToScreen_Mapsui_Geometries_Point_" data-uid="Mapsui.Viewport.WorldToScreen(Mapsui.Geometries.Point)">WorldToScreen(Point)</h4>
-  <div class="markdown level1 summary"><p>Converts a point in map units to one in screen pixels, respecting rotation</p>
+  <div class="markdown level1 summary"><p>Converts X/Y in map units to a point in device independent unit (or DIP or DP),
+respecting rotation</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -690,7 +699,8 @@ aligned.</p>
       <tr>
         <td><a class="xref" href="Mapsui.Geometries.Point.html">Point</a></td>
         <td><span class="parametername">worldPosition</span></td>
-        <td></td>
+        <td><p>Coordinate in map units</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -719,7 +729,8 @@ aligned.</p>
   </span>
   <a id="Mapsui_Viewport_WorldToScreen_" data-uid="Mapsui.Viewport.WorldToScreen*"></a>
   <h4 id="Mapsui_Viewport_WorldToScreen_System_Double_System_Double_" data-uid="Mapsui.Viewport.WorldToScreen(System.Double,System.Double)">WorldToScreen(Double, Double)</h4>
-  <div class="markdown level1 summary"><p>Converts X/Y in map units to a point in screen pixels, respecting rotation</p>
+  <div class="markdown level1 summary"><p>Converts X/Y in map units to a point in device independent units (or DIP or DP),
+respecting rotation</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -773,7 +784,8 @@ aligned.</p>
   </span>
   <a id="Mapsui_Viewport_WorldToScreenUnrotated_" data-uid="Mapsui.Viewport.WorldToScreenUnrotated*"></a>
   <h4 id="Mapsui_Viewport_WorldToScreenUnrotated_Mapsui_Geometries_Point_" data-uid="Mapsui.Viewport.WorldToScreenUnrotated(Mapsui.Geometries.Point)">WorldToScreenUnrotated(Point)</h4>
-  <div class="markdown level1 summary"><p>Converts a point in map units to one in screen pixels, not respecting rotation</p>
+  <div class="markdown level1 summary"><p>Converts X/Y in map units to a point in device independent units (or DIP or DP),
+respecting rotation</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -822,7 +834,8 @@ aligned.</p>
   </span>
   <a id="Mapsui_Viewport_WorldToScreenUnrotated_" data-uid="Mapsui.Viewport.WorldToScreenUnrotated*"></a>
   <h4 id="Mapsui_Viewport_WorldToScreenUnrotated_System_Double_System_Double_" data-uid="Mapsui.Viewport.WorldToScreenUnrotated(System.Double,System.Double)">WorldToScreenUnrotated(Double, Double)</h4>
-  <div class="markdown level1 summary"><p>Converts X/Y in map units to a point in screen pixels, not respecting rotation</p>
+  <div class="markdown level1 summary"><p>Converts X/Y in map units to a point in device independent units (or DIP or DP),
+respecting rotation</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
