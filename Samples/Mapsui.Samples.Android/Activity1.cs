@@ -49,8 +49,8 @@ namespace Mapsui.Samples.Android
 
         private void ViewportOnViewportChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
-            //if (_popup != null)
-            //    _popup.Visibility = ViewStates.Gone;
+            if (_popup != null)
+                _popup.Visibility = ViewStates.Gone;
         }
 
         private LinearLayout CreatePopup()
@@ -68,13 +68,12 @@ namespace Mapsui.Samples.Android
             {
                 TextSize = 16,
                 
-                Text = "Native Android pop-up",
+                Text = "Native Android",
                 LayoutParameters = new RelativeLayout.LayoutParams(
                     ViewGroup.LayoutParams.WrapContent,
                     ViewGroup.LayoutParams.WrapContent)
             };
             textView.SetPadding(3, 3, 3, 3);
-            //textView.SetBackgroundColor(Color.DarkOrange);
             return textView;
         }
 
@@ -93,8 +92,6 @@ namespace Mapsui.Samples.Android
 
         private void ShowPopup(MapInfoEventArgs args)
         {
-            
-
             // Position on click position:
             //var screenPositionInPixels = args.MapInfo.ScreenPosition;
             // Or position on feature position: 
