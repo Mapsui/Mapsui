@@ -2,18 +2,23 @@
 
 We have a separate page about this topic because skia scale has caused some confusion in the past and bugs as a consequence. 
 
-## Why skia scale?
-Modern devices have a very high resolution. If we would draw onto the skia canvas using device pixels as coordinates the fonts would become tiny and unreadable and lines would become very thin. To correct for this a skale factor is used. Those scaled-up coordinates are called device independen units. SkiaSharp uses this scale factor and Mapsui needs to take this into account. This is why we need to request the scale factor from the system.
+## Some context: Device Independent Units 
+Modern devices have a very high resolution. If something is drawn onto the canvas using raw pixels as coordinates the fonts would become tiny and unreadable and lines would become very thin. To correct for this a scale factor is used. Those scaled-up coordinates are called device independent units. Most of the time you deal with the device indepenten units.
 
-## How does it work?
-The skia surface has it's own scale. We set this to an appropriate scale factor. As a result the coordinates of the skia surface are different than that of it's parent container. We have to correct for this on a number of points, like in rendering, requesting map info and manipulation.
+### Coordinates in SkiaSharp
+Most (all?) views in SkiaSharp use pixels as coordinates but for our purposes we need to user device independent units, so we need to correct for this. There are two ways this can be done:
+- Set the skia view's IgnorePixelScaling.
+- Call the skia view's Scale factor with the appropriate scale. For this you need to request the scale factor from the system.
 
 ## What do we do?
 We take skia scale into account on a number of places in our code:
 
-On iOS, WPF and UWP:
+On WPF and UWP:
+- We set IgnorePixelScaling.
+
+On iOS:
 - We determine the skia scale while initializing (or when switching from wpf to skia rendering)ent's size changes.
-- We set the skia scale on the skia surface. This needs to be done in the render loop because this is the only place where we have access to the surface
+- We set the skia scale on the skia surface. This needs to be done in the render loop because this is the only place where we have access to the surface.
 
 On Android:
 - We determine the skia scale while initializing
