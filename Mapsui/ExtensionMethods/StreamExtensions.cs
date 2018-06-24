@@ -1,6 +1,5 @@
-﻿using System.IO;
-
-namespace Mapsui
+﻿// ReSharper disable once CheckNamespace
+namespace System.IO
 {
     public static class StreamExtensions
     {
