@@ -52,7 +52,7 @@ namespace Mapsui.UI.iOS
                 NSLayoutConstraint.Create(this, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, _canvas, NSLayoutAttribute.Bottom, 1.0f, 0.0f)
             });
 
-            // Unfortunately the SKGLView does not have a IgnorePixelScaling property. We have to adjust with _scale.
+            // Unfortunately the SKGLView does not have a IgnorePixelScaling property. We have to adjust for density with SKGLView.Scale.
             _density = PixelsPerDeviceIndependentUnit;
 
             TryInitializeViewport();
