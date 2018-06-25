@@ -1,5 +1,5 @@
 ﻿using System;
-using Mapsui.Utilities;
+using System.Threading;
 
 namespace Mapsui.Fetcher
 {
@@ -11,7 +11,7 @@ namespace Mapsui.Fetcher
 
         public Delayer()
         {
-            _timer = new Timer(FetchDelayTimerElapsed, int.MaxValue);
+            _timer = new Timer(FetchDelayTimerElapsed, null, Timeout.Infinite, Timeout.Infinite);
         }
 
         /// <summary>
@@ -34,12 +34,12 @@ namespace Mapsui.Fetcher
                 _first = false;
             }
 
-            _timer.Restart(dueTime);
+            _timer.Change(dueTime, Timeout.Infinite);
         }
         
         private void FetchDelayTimerElapsed(object state)
         {
-            _timer.Cancel();
+            _timer.Change(Timeout.Infinite, Timeout.Infinite);
             _method?.Invoke();
         }
     }

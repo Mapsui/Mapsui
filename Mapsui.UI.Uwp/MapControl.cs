@@ -51,6 +51,7 @@ namespace Mapsui.UI.Uwp
             Children.Add(_canvas);
             Children.Add(_bboxRect);
 
+            _canvas.IgnorePixelScaling = true;
             _canvas.PaintSurface += Canvas_PaintSurface;
 
             Map = new Map();
@@ -58,8 +59,6 @@ namespace Mapsui.UI.Uwp
             Loaded += MapControlLoaded;
 
             SizeChanged += MapControlSizeChanged;
-
-            _scale = GetDeviceIndependentUnits();
 
             PointerWheelChanged += MapControl_PointerWheelChanged;
 
@@ -78,13 +77,13 @@ namespace Mapsui.UI.Uwp
         private void OnDoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
             var tabPosition = e.GetPosition(this).ToMapsui();
-            Map.InvokeInfo(tabPosition, tabPosition, 1, Renderer.SymbolCache, WidgetTouched, 2);
+            Map.InvokeInfo(tabPosition, tabPosition, Renderer.SymbolCache, WidgetTouched, 2);
         }
 
         private void OnSingleTapped(object sender, TappedRoutedEventArgs e)
         {
             var tabPosition = e.GetPosition(this).ToMapsui();
-            Map.InvokeInfo(tabPosition, tabPosition, 1, Renderer.SymbolCache, WidgetTouched, 1);
+            Map.InvokeInfo(tabPosition, tabPosition, Renderer.SymbolCache, WidgetTouched, 1);
         }
 
         private static Rectangle CreateSelectRectangle()
@@ -230,7 +229,6 @@ namespace Mapsui.UI.Uwp
             TryInitializeViewport();
             if (!_map.Viewport.Initialized) return;
 
-            e.Surface.Canvas.Scale(_scale, _scale);
             Renderer.Render(e.Surface.Canvas, Map.Viewport, _map.Layers, _map.Widgets, _map.BackColor);
         }
 
@@ -338,11 +336,8 @@ namespace Mapsui.UI.Uwp
             ViewportInitialized?.Invoke(this, EventArgs.Empty);
         }
 
-        public float GetDeviceIndependentUnits()
-        {
-            var scaleFactor = DisplayInformation.GetForCurrentView().RawPixelsPerViewPixel;
-            return (float)scaleFactor;
-        }
+        public float PixelsPerDeviceIndependentUnit => 
+            (float)DisplayInformation.GetForCurrentView().RawPixelsPerViewPixel;
 
         private void WidgetTouched(IWidget widget, Geometries.Point screenPosition)
         {

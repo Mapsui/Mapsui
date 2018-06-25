@@ -23,11 +23,6 @@ namespace Mapsui.UI.Wpf
 {
     public partial class MapControl
     {
-        /// <summary>
-        /// Display scale for converting screen position to real position
-        /// </summary>
-        private float _scale;
-
         private Map _map;
 
         /// <summary>
@@ -68,27 +63,7 @@ namespace Mapsui.UI.Wpf
         {
             UnsubscribeFromMapEvents(_map);
         }
-
-        /// <summary>
-        /// Converting function for world to screen
-        /// </summary>
-        /// <param name="worldPosition">Position in world coordinates</param>
-        /// <returns>Position in screen coordinates</returns>
-        public Point WorldToScreen(Point worldPosition)
-        {
-            return WorldToScreen(Map.Viewport, _scale, worldPosition);
-        }
-
-        /// <summary>
-        /// Converting function for screen to world
-        /// </summary>
-        /// <param name="screenPosition">Position in screen coordinates</param>
-        /// <returns>Position in world coordinates</returns>
-        public Point ScreenToWorld(Point screenPosition)
-        {
-            return ScreenToWorld(Map.Viewport, _scale, screenPosition);
-        }
-
+        
         /// <summary>
         /// Converting function for world to screen respecting scale
         /// </summary>
@@ -239,6 +214,30 @@ namespace Mapsui.UI.Wpf
 
                 RefreshGraphics();
             }
+        }
+
+        /// <summary>
+        /// Converts coordinates in device independent units (or DIP or DP) to pixels.
+        /// </summary>
+        /// <param name="coordinateInDeviceIndependentUnits">Coordinate in device independent units (or DIP or DP)</param>
+        /// <returns>Coordinate in pixels</returns>
+        public Point ToPixels(Point coordinateInDeviceIndependentUnits)
+        {
+            return new Point(
+                coordinateInDeviceIndependentUnits.X * PixelsPerDeviceIndependentUnit,
+                coordinateInDeviceIndependentUnits.Y * PixelsPerDeviceIndependentUnit);
+        }
+
+        /// <summary>
+        /// Converts coordinates in pixels to device independent units (or DIP or DP).
+        /// </summary>
+        /// <param name="coordinateInPixels">Coordinate in pixels</param>
+        /// <returns>Coordinate in device independent units (or DIP or DP)</returns>
+        public Point ToDeviceIndependentUnits(Point coordinateInPixels)
+        {
+            return new Point(
+                coordinateInPixels.X / PixelsPerDeviceIndependentUnit,
+                coordinateInPixels.Y / PixelsPerDeviceIndependentUnit);
         }
     }
 }

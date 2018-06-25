@@ -28,7 +28,7 @@ MinimalProjection class only projects between SphericalMercator
 (EPSG:3857) and WGS83 (EPSG:4326). It is however possible to create
 your own Transformation. You need to implement the ITransformation
 interface. Within this implementation you need to use some other 
-projection library. A recommende one is [ProjNet4GeoAPI](https://github.com/NetTopologySuite/ProjNet4GeoAPI).
+projection library. A recommended one is [ProjNet4GeoAPI](https://github.com/NetTopologySuite/ProjNet4GeoAPI).
 
 ## The most common scenario
 Most likely you will be fine if you use the same projection as Google 
@@ -37,11 +37,14 @@ official code from the OGC for this projection is EPSG:3857. If you use
 the OpenStreetMap background layer you use EPSG:3857. Often you have 
 GPS locations or points of interests (POIs) in WGS84 or EPGS:4326. These
 points need to be transformed to EPSG:3857. There are two ways:
-- 1. Follow the configuration for projections mentioned above and in the 
+- Follow the configuration for projections mentioned above and in the 
 ProjectionSample.cs.
-- 2. Use SphericalMercator.FromLonLat to do the transformation manually.
+- Use SphericalMercator.FromLonLat to do the transformation manually.
 
 ## Remarks
-A Layer has a CRS field. This field is used by Mapsui to set it to the 
+- A Layer has a CRS field. This field is used by Mapsui to set it to the 
 Map projection. It should not be set by the user. This is could be confusing.
+- Mapsui is not capable of transforming images. So no transformation of tiles 
+are rasters. No attempt will be made to transform and the CRS fields will be 
+ignored.
 

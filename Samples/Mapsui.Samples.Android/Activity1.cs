@@ -6,7 +6,7 @@ using Android.Content.PM;
 using Android.Graphics;
 using Android.Views;
 using Android.Widget;
-using Java.Lang;
+using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Samples.Common.Helpers;
 using Mapsui.Samples.Common.Maps;
@@ -26,6 +26,8 @@ namespace Mapsui.Samples.Android
     public class Activity1 : Activity
     {
         private LinearLayout _popup;
+        private MapControl _mapControl;
+        private readonly WritableLayer _writableLayer = new WritableLayer();
 
         protected override void OnCreate(global::Android.OS.Bundle bundle)
         {
@@ -36,21 +38,21 @@ namespace Mapsui.Samples.Android
             MbTilesSample.MbTilesLocation = MbTilesLocationOnAndroid;
             MbTilesHelper.DeployMbTilesFile(s => File.Create(Path.Combine(MbTilesLocationOnAndroid, s)));
             
-            var mapControl = FindViewById<MapControl>(Resource.Id.mapcontrol);
-            mapControl.Map = InfoLayersSample.CreateMap();
-            mapControl.Map.Info+= MapOnInfo;
-            mapControl.Map.Viewport.ViewportChanged += ViewportOnViewportChanged;
-            mapControl.RotationLock = false;
-            mapControl.UnSnapRotationDegrees = 30;
-            mapControl.ReSnapRotationDegrees = 5;
+            _mapControl = FindViewById<MapControl>(Resource.Id.mapcontrol);
+            _mapControl.Map = InfoLayersSample.CreateMap();
+            _mapControl.Map.Info+= MapOnInfo;
+            _mapControl.Map.Viewport.ViewportChanged += ViewportOnViewportChanged;
+            _mapControl.RotationLock = false;
+            _mapControl.UnSnapRotationDegrees = 30;
+            _mapControl.ReSnapRotationDegrees = 5;
 
             FindViewById<RelativeLayout>(Resource.Id.mainLayout).AddView(_popup = CreatePopup());
         }
 
         private void ViewportOnViewportChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
-            //if (_popup != null)
-            //    _popup.Visibility = ViewStates.Gone;
+            if (_popup != null)
+                _popup.Visibility = ViewStates.Gone;
         }
 
         private LinearLayout CreatePopup()
@@ -68,13 +70,12 @@ namespace Mapsui.Samples.Android
             {
                 TextSize = 16,
                 
-                Text = "Native Android pop-up",
+                Text = "Native Android",
                 LayoutParameters = new RelativeLayout.LayoutParams(
                     ViewGroup.LayoutParams.WrapContent,
                     ViewGroup.LayoutParams.WrapContent)
             };
             textView.SetPadding(3, 3, 3, 3);
-            //textView.SetBackgroundColor(Color.DarkOrange);
             return textView;
         }
 
@@ -82,34 +83,36 @@ namespace Mapsui.Samples.Android
         {
             if (args.MapInfo.Feature != null)
             {
-                RunOnUiThread(new Runnable(Toast.MakeText(
-                    ApplicationContext,
-                    ToDisplayText(args.MapInfo.Feature),
-                    ToastLength.Short).Show));
-
                 ShowPopup(args);
             }
+            else
+            {
+                // Enable if you want to add points:
+                // AddPoint(args);
+            }
+        }
+
+        private void AddPoint(MapInfoEventArgs args)
+        {
+            // For the sample we add this WritableLayer. Usually you would have your own handle to the WritableLayer
+            if (!_mapControl.Map.Layers.Contains(_writableLayer)) _mapControl.Map.Layers.Add(_writableLayer);
+
+            _writableLayer.Add(new Feature {Geometry = args.MapInfo.WorldPosition});
         }
 
         private void ShowPopup(MapInfoEventArgs args)
         {
-            var mapControl = FindViewById<MapControl>(Resource.Id.mapcontrol);
-            var screenPosition = mapControl.WorldToScreen(args.MapInfo.Feature.Geometry.BoundingBox.Centroid);
+            // Position on click position:
+            // var screenPositionInPixels = args.MapInfo.ScreenPosition;
+
+            // Or position on feature position: 
+            var screenPosition = _mapControl.Map.Viewport.WorldToScreen(args.MapInfo.Feature.Geometry.BoundingBox.Centroid);
+            var screenPositionInPixels = _mapControl.ToPixels(screenPosition);
             
-            // todo use screenPosition to test WorldToScreen
-            _popup.SetX((float)args.MapInfo.ScreenPosition.X);
-            _popup.SetY((float)args.MapInfo.ScreenPosition.Y);
+            _popup.SetX((float)screenPositionInPixels.X);
+            _popup.SetY((float)screenPositionInPixels.Y);
 
             _popup.Visibility = ViewStates.Visible;
-        }
-
-        private static string ToDisplayText(IFeature feature)
-        {
-            var result = new StringBuilder();
-            foreach (var field in feature.Fields)
-                result.Append($"{field}:{feature[field]} - ");
-            var str = result.ToString();
-            return str.Substring(0, result.Length() - 3);
         }
         
         private static string MbTilesLocationOnAndroid => Environment.GetFolderPath(Environment.SpecialFolder.Personal);

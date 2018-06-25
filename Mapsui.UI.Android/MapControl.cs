@@ -21,6 +21,10 @@ namespace Mapsui.UI.Android
         private double _previousAngle;
         private double _previousRadius = 1f;
         private TouchMode _mode = TouchMode.None;
+        /// <summary>
+        /// The number of pixels per device independent unit
+        /// </summary>
+        private float _density;
 
         public event EventHandler ViewportInitialized;
 
@@ -39,8 +43,8 @@ namespace Mapsui.UI.Android
         public void Initialize()
         {
             SetBackgroundColor(Color.Transparent);
-            _scale = GetDeviceIndependentUnits();
-            _canvas = new SKCanvasView(Context);
+            _density = PixelsPerDeviceIndependentUnit;
+            _canvas = new SKCanvasView(Context) { IgnorePixelScaling = true };
             _canvas.PaintSurface += CanvasOnPaintSurface;
             AddView(_canvas);
 
@@ -53,21 +57,18 @@ namespace Mapsui.UI.Android
             _gestureDetector.DoubleTap += OnDoubleTapped;
         }
 
-        public float GetDeviceIndependentUnits()
-        {
-            return Resources.DisplayMetrics.Density;
-        }
+        public float PixelsPerDeviceIndependentUnit => Resources.DisplayMetrics.Density;
 
         private void OnDoubleTapped(object sender, GestureDetector.DoubleTapEventArgs e)
         {
             var position = GetScreenPosition(e.Event, this);
-            Map.InvokeInfo(position, position, _scale, Renderer.SymbolCache, WidgetTouched, 2);
+            Map.InvokeInfo(position, position, Renderer.SymbolCache, WidgetTouched, 2);
         }
 
         private void OnSingleTapped(object sender, GestureDetector.SingleTapConfirmedEventArgs e)
         {
             var position = GetScreenPosition(e.Event, this);
-            Map.InvokeInfo(position, position, _scale, Renderer.SymbolCache, WidgetTouched, 1);
+            Map.InvokeInfo(position, position, Renderer.SymbolCache, WidgetTouched, 1);
         }
 
         protected override void OnSizeChanged(int width, int height, int oldWidth, int oldHeight)
@@ -86,8 +87,6 @@ namespace Mapsui.UI.Android
             TryInitializeViewport();
             if (!_map.Viewport.Initialized) return;
 
-            args.Surface.Canvas.Scale(_scale, _scale); // we can only set the scale in the render loop
-
             Renderer.Render(args.Surface.Canvas, _map.Viewport, _map.Layers, _map.Widgets, _map.BackColor);
         }
 
@@ -97,7 +96,7 @@ namespace Mapsui.UI.Android
 
             if (_map.Viewport.TryInitializeViewport(_map.Envelope, ToDeviceIndependentUnits(Width), ToDeviceIndependentUnits(Height)))
             {
-                Map.RefreshData(true);
+                _map.RefreshData(true);
                 OnViewportInitialized();
             }
         }
@@ -112,7 +111,7 @@ namespace Mapsui.UI.Android
             if (_gestureDetector.OnTouchEvent(args.Event))
                 return;
 
-            var touchPoints = GetMapPositions(args.Event, this);
+            var touchPoints = GetScreenPositions(args.Event, this);
 
             switch (args.Event.Action)
             {
@@ -223,19 +222,36 @@ namespace Mapsui.UI.Android
             }
         }
 
-        private List<Geometries.Point> GetMapPositions(MotionEvent me, View view)
+        private List<Geometries.Point> GetScreenPositions(MotionEvent me, View view)
         {
             var result = new List<Geometries.Point>();
             for (var i = 0; i < me.PointerCount; i++)
             {
-                result.Add(new Geometries.Point(
-                    ToDeviceIndependentUnits(me.GetX(i) - view.Left), 
-                    ToDeviceIndependentUnits(me.GetY(i) - view.Top)));
+                result.Add(new Geometries.Point(me.GetX(i) - view.Left, me.GetY(i) - view.Top)
+                    .ToDeviceIndependentUnits(PixelsPerDeviceIndependentUnit));
             }
             return result;
         }
 
-        private static Geometries.Point GetScreenPosition(MotionEvent motionEvent, View view)
+        /// <summary>
+        /// Gets the screen position in device independent units relative to the MapControl.
+        /// </summary>
+        /// <param name="motionEvent"></param>
+        /// <param name="view"></param>
+        /// <returns></returns>
+        private Geometries.Point GetScreenPosition(MotionEvent motionEvent, View view)
+        {
+            return GetScreenPositionInPixels(motionEvent, view)
+                .ToDeviceIndependentUnits(PixelsPerDeviceIndependentUnit);
+        }
+
+        /// <summary>
+        /// Gets the screen position in pixels relative to the MapControl.
+        /// </summary>
+        /// <param name="motionEvent"></param>
+        /// <param name="view"></param>
+        /// <returns></returns>
+        private static Geometries.Point GetScreenPositionInPixels(MotionEvent motionEvent, View view)
         {
             return new PointF(
                 motionEvent.GetX(0) - view.Left,
@@ -246,12 +262,7 @@ namespace Mapsui.UI.Android
         {
             RefreshGraphics();
         }
-      
-        protected override void OnDraw(Canvas canvas)
-        {
-            Invalidate();
-            base.OnDraw(canvas);
-        }
+
 
         public void RefreshGraphics()
         {
@@ -262,7 +273,9 @@ namespace Mapsui.UI.Android
         {
             try
             {
-                PostInvalidate();
+                Invalidate();
+                // Calling Invalite on the MapControl itself is not enough in some case (observed in XF).
+                _canvas?.Invalidate();
             }
             catch (ObjectDisposedException e)
             {
@@ -316,7 +329,7 @@ namespace Mapsui.UI.Android
         /// <returns>The device pixels given as input translated to device pixels.</returns>
         private float ToDeviceIndependentUnits(float pixelCoordinate)
         {
-            return pixelCoordinate / _scale;
+            return pixelCoordinate / _density;
         }
 
         void PushSizeOntoViewport(float mapControlWidth, float mapControlHeight)
@@ -327,7 +340,7 @@ namespace Mapsui.UI.Android
                 Map.Viewport.Height = ToDeviceIndependentUnits(mapControlHeight);
             }
         }
-        
+
         public new void Dispose()
         {
             Unsubscribe();

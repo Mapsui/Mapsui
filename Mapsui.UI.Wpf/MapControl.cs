@@ -248,23 +248,15 @@ namespace Mapsui.UI.Wpf
 
         private void MapControlLoaded(object sender, RoutedEventArgs e)
         {
-            _scale = GetDeviceIndependentUnits();
             TryInitializeViewport();
             UpdateSize();
             InitAnimation();
             Focusable = true;
         }
 
-        public float GetDeviceIndependentUnits()
-        {
-            if (RenderMode == RenderMode.Skia)
-            {
-                return DetermineSkiaScale();
-            }
-            return 1; // Scale is always 1 in WPF
-        }
+        public float PixelsPerDeviceIndependentUnit => DetermineDeviceIndependentUnits();
 
-        private float DetermineSkiaScale()
+        private float DetermineDeviceIndependentUnits()
         {
             var presentationSource = PresentationSource.FromVisual(this);
             if (presentationSource == null) throw new Exception("PresentationSource is null");
@@ -392,7 +384,7 @@ namespace Mapsui.UI.Wpf
                 if (IsClick(_currentMousePosition, _downMousePosition))
                 {
                     HandleFeatureInfo(e);
-                    Map.InvokeInfo(touchPosition, _downMousePosition, 1, Renderer.SymbolCache,
+                    Map.InvokeInfo(touchPosition, _downMousePosition, Renderer.SymbolCache,
                         WidgetTouched, e.ClickCount);
                 }
             }
@@ -434,7 +426,7 @@ namespace Mapsui.UI.Wpf
                 // todo: Pass the touchDown position. It needs to be set at touch down.
 
                 // TODO Figure out how to do a number of taps for WPF
-                Map.InvokeInfo(touchPosition, touchPosition, 1, Renderer.SymbolCache, WidgetTouched, 1);
+                Map.InvokeInfo(touchPosition, touchPosition, Renderer.SymbolCache, WidgetTouched, 1);
             }
         }
 
@@ -474,7 +466,7 @@ namespace Mapsui.UI.Wpf
                 return;
             }
 
-            if (!_mouseDown) Map.InvokeHover(e.GetPosition(this).ToMapsui(), 1, Renderer.SymbolCache);
+            if (!_mouseDown) Map.InvokeHover(e.GetPosition(this).ToMapsui(), Renderer.SymbolCache);
 
             if (_mouseDown && !PanLock)
             {
@@ -660,7 +652,7 @@ namespace Mapsui.UI.Wpf
 
         public MapInfo GetMapInfo(Geometries.Point screenPosition, int margin = 0)
         {
-            return InfoHelper.GetMapInfo(Map.Viewport, screenPosition, 1, Map.InfoLayers, Renderer.SymbolCache, margin);
+            return InfoHelper.GetMapInfo(Map.Viewport, screenPosition, Map.InfoLayers, Renderer.SymbolCache, margin);
         }
 
         private void SKElementOnPaintSurface(object sender, SKPaintSurfaceEventArgs args)

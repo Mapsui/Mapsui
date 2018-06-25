@@ -4,7 +4,7 @@ using Mapsui.Providers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Mapsui.Utilities;
+using System.Threading;
 
 namespace Mapsui.Layers
 {
@@ -19,6 +19,7 @@ namespace Mapsui.Layers
         private Timer _animationTimer;
         private List<AnimatedItem> _cache = new List<AnimatedItem>();
         private long _startTimeAnimation;
+        private int _millisecondsBetweenUpdates;
 
         /// <summary>
         /// When the distane between the current and the previous position is larger
@@ -33,7 +34,8 @@ namespace Mapsui.Layers
             IdField = "ID";
             Function = EasingFunction.CubicEaseOut;
             DistanceThreshold = double.MaxValue;
-            _animationTimer = new Timer(AnimationCallback, millisecondsBetweenUpdates, this);
+            _millisecondsBetweenUpdates = millisecondsBetweenUpdates;
+            _animationTimer = new Timer(AnimationCallback, this, Timeout.Infinite, Timeout.Infinite);
         }
 
         public string IdField { get; set; }
@@ -48,7 +50,7 @@ namespace Mapsui.Layers
  
            _cache = ConvertToAnimatedItems(features.ToList(), previousCache, IdField);
             _startTimeAnimation = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
-            _animationTimer.Restart();
+            _animationTimer.Change(_millisecondsBetweenUpdates, _millisecondsBetweenUpdates);
             _first = true;
         }
 
@@ -58,7 +60,7 @@ namespace Mapsui.Layers
 
             var progress = CalculateProgress(_startTimeAnimation, AnimationDuration, Function);
             if (!Completed(progress)) InterpolateAnimatedPosition(_cache, progress, DistanceThreshold);
-            else _animationTimer.Cancel();
+            else _animationTimer.Change(Timeout.Infinite, Timeout.Infinite);
             return _cache.Select(f => f.Feature);
         }
 
@@ -69,8 +71,7 @@ namespace Mapsui.Layers
 
         protected virtual void OnAnimatedPositionChanged()
         {
-            var handler = AnimatedPositionChanged;
-            if (handler != null) handler(this, new EventArgs());
+            AnimatedPositionChanged?.Invoke(this, new EventArgs());
         }
 
         private static void AnimationCallback(object state)

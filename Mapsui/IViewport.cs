@@ -82,21 +82,24 @@ namespace Mapsui
         bool Initialized { get; }
 
         /// <summary>
-        /// Converts a point in map units to one in screen pixels, respecting rotation
+        /// Converts X/Y in map units to a point in device independent unit (or DIP or DP),
+        /// respecting rotation
         /// </summary>
-        /// <param name="point">Coordinate in map units</param>
+        /// <param name="worldPosition">Coordinate in map units</param>
         /// <returns>Point in screen pixels</returns>
-        Point WorldToScreen(Point point);
+        Point WorldToScreen(Point worldPosition);
 
         /// <summary>
-        /// Converts a point in map units to one in screen pixels, not respecting rotation
+        /// Converts X/Y in map units to a point in device independent units (or DIP or DP),
+        /// respecting rotation
         /// </summary>
         /// <param name="point">Coordinate in map units</param>
         /// <returns>Point in screen pixels</returns>
         Point WorldToScreenUnrotated(Point point);
 
         /// <summary>
-        /// Converts X/Y in map units to a point in screen pixels, respecting rotation
+        /// Converts X/Y in map units to a point in device independent units (or DIP or DP),
+        /// respecting rotation
         /// </summary>
         /// <param name="x">X coordinate in map units</param>
         /// <param name="y">Y coordinate in map units</param>
@@ -104,7 +107,8 @@ namespace Mapsui
         Point WorldToScreen(double x, double y);
 
         /// <summary>
-        /// Converts X/Y in map units to a point in screen pixels, not respecting rotation
+        /// Converts X/Y in map units to a point in device independent units (or DIP or DP),
+        /// respecting rotation
         /// </summary>
         /// <param name="x">X coordinate in map units</param>
         /// <param name="y">Y coordinate in map units</param>
@@ -114,14 +118,15 @@ namespace Mapsui
         /// <summary>
         /// Converts a point in screen pixels to one in map units, respecting rotation
         /// </summary>
-        /// <param name="point">Coordinate in map units</param>
+        /// <param name="screenPosition">Coordinate in map units</param>
         /// <returns>Point in map units</returns>
-        Point ScreenToWorld(Point point);
+        Point ScreenToWorld(Point screenPosition);
 
         /// <summary>
         /// Converts X/Y in screen pixels to a point in map units, respecting rotation
         /// </summary>
-        /// <param name="worldPosition">Coordinate in map units</param>
+        /// <param name="x">Screen position x coordinate</param>
+        /// <param name="y">Screen position y coordinate</param>
         /// <returns>Point in map units</returns>
         Point ScreenToWorld(double x, double y);
 
@@ -132,7 +137,7 @@ namespace Mapsui
         /// <param name="screenY">New Y position of point</param>
         /// <param name="previousScreenX">Old X position of point</param>
         /// <param name="previousScreenY">Old Y position of point</param>
-        /// <param name="deltaScale">Change of resolution for transformation (<1: zoom out, >1: zoom in)</param>
+        /// <param name="deltaScale">Change of resolution for transformation (&lt;1: zoom out, >1: zoom in)</param>
         /// <param name="deltaRotation">Change of rotation</param>
         void Transform(double screenX, double screenY, double previousScreenX, double previousScreenY, 
             double deltaScale = 1, double deltaRotation = 0);
