@@ -35,6 +35,8 @@ namespace Mapsui.Samples.Forms
             mapView.PinClicked += OnPinClicked;
             mapView.MapClicked += OnMapClicked;
 
+            mapView.MyLocationLayer.UpdateMyLocation(new UI.Forms.Position());
+
             StartGPS();
         }
 

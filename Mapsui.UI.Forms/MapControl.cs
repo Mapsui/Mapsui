@@ -164,7 +164,12 @@ namespace Mapsui.UI.Forms
                 }
 
                 // Do we have a tap event
-                var temp = _touches[id];
+                if (_touches.Count == 0 || _touches[id] == null)
+                {
+                    e.Handled = false;
+                    return;
+                }
+                
                 if (_touches[id].Location.Equals(_firstTouch) && ticks - _touches[id].Tick < (e.DeviceType == SKTouchDeviceType.Mouse ? shortClick : longTap) * 10000)
                 {
                     // Start a timer with timeout delayTap ms. If than isn't arrived another tap, than it is a single

@@ -24,7 +24,13 @@ namespace Mapsui.UI.Forms
         private MyLocationLayer _mapMyLocationLayer;
         private Layer _mapPinLayer;
         private Layer _mapDrawableLayer;
-        private BoxView _mapButtons;
+        private StackLayout _mapButtons;
+        private Image _mapZoomInButton;
+        private Image _mapZoomOutButton;
+        private Image _mapSpacingButton1;
+        private Image _mapMyLocationButton;
+        private Image _mapSpacingButton2;
+        private Image _mapNorthingButton;
 
         readonly ObservableCollection<Pin> _pins = new ObservableCollection<Pin>();
         readonly ObservableCollection<Drawable> _drawable = new ObservableCollection<Drawable>();
@@ -36,12 +42,12 @@ namespace Mapsui.UI.Forms
         public MapView()
         {
             MyLocationEnabled = false;
-            MyLocationFollow = true;
+            MyLocationFollow = false;
 
             IsClippedToBounds = true;
 
             _mapControl = new MapControl();
-            _mapMyLocationLayer = new MyLocationLayer(this);
+            _mapMyLocationLayer = new MyLocationLayer(this) { Enabled = true };
             _mapPinLayer = new Layer(PinLayerName);
             _mapDrawableLayer = new Layer(DrawableLayerName);
 
@@ -50,14 +56,52 @@ namespace Mapsui.UI.Forms
             _mapControl.DoubleTap += HandlerTap;
             _mapControl.LongTap += HandlerLongTap;
             _mapControl.Hovered += HandlerHover;
-            _mapControl.TouchMove += (s, e) => MyLocationFollow = false;
+            _mapControl.TouchMove += (s, e) =>
+            {
+                Device.BeginInvokeOnMainThread(() => MyLocationFollow = false);
+            };
 
             AbsoluteLayout.SetLayoutBounds(_mapControl, new Rectangle(0, 0, 1, 1));
             AbsoluteLayout.SetLayoutFlags(_mapControl, AbsoluteLayoutFlags.All);
 
-            _mapButtons = new BoxView { Color = Xamarin.Forms.Color.DarkGray, Opacity=0.8, IsVisible=true };
+            _mapZoomInButton = new Image { BackgroundColor = Color.Green, WidthRequest = 40, HeightRequest = 40 };
+            _mapZoomInButton.GestureRecognizers.Add(new TapGestureRecognizer
+            {
+                Command = new Command((object obj) => Device.BeginInvokeOnMainThread(() => _mapControl.Map.NavigateTo(_mapControl.Map.Viewport.Resolution /= 2)))
+            });
 
-            AbsoluteLayout.SetLayoutBounds(_mapButtons, new Rectangle(0.99, 0.5, 32, 96));
+            _mapZoomOutButton = new Image { BackgroundColor = Color.LightGreen, WidthRequest = 40, HeightRequest = 40 };
+            _mapZoomOutButton.GestureRecognizers.Add(new TapGestureRecognizer
+            {
+                Command = new Command((object obj) => Device.BeginInvokeOnMainThread(() => _mapControl.Map.NavigateTo(_mapControl.Map.Viewport.Resolution *= 2)))
+            });
+
+            _mapSpacingButton1 = new Image { BackgroundColor = Color.Transparent, WidthRequest = 40, HeightRequest = 8 };
+
+            _mapMyLocationButton = new Image { BackgroundColor = Color.Red, WidthRequest = 40, HeightRequest = 40 };
+            _mapMyLocationButton.GestureRecognizers.Add(new TapGestureRecognizer
+            {
+                Command = new Command((object obj) => Device.BeginInvokeOnMainThread(() => MyLocationFollow = true))
+            });
+
+            _mapSpacingButton2 = new Image { BackgroundColor = Color.Transparent, WidthRequest = 40, HeightRequest = 8 };
+
+            _mapNorthingButton = new Image { BackgroundColor = Color.Cyan, WidthRequest = 40, HeightRequest = 40 };
+            _mapNorthingButton.GestureRecognizers.Add(new TapGestureRecognizer
+            {
+                Command = new Command((object obj) => Device.BeginInvokeOnMainThread(() => _mapControl.Map.Viewport.Rotation = 0))
+            });
+
+            _mapButtons = new StackLayout { BackgroundColor = Color.Transparent, Opacity = 0.8, Spacing = 0, IsVisible = true };
+
+            _mapButtons.Children.Add(_mapZoomInButton);
+            _mapButtons.Children.Add(_mapZoomOutButton);
+            _mapButtons.Children.Add(_mapSpacingButton1);
+            _mapButtons.Children.Add(_mapMyLocationButton);
+            _mapButtons.Children.Add(_mapSpacingButton2);
+            _mapButtons.Children.Add(_mapNorthingButton);
+
+            AbsoluteLayout.SetLayoutBounds(_mapButtons, new Rectangle(0.95, 0.03, 40, 176));
             AbsoluteLayout.SetLayoutFlags(_mapButtons, AbsoluteLayoutFlags.PositionProportional);
 
             Content = new AbsoluteLayout
@@ -359,9 +403,21 @@ namespace Mapsui.UI.Forms
         {
             base.OnPropertyChanged(propertyName);
 
-            if (propertyName.Equals(nameof(MyLocationEnabledProperty)))
+            if (propertyName.Equals(nameof(MyLocationEnabled)))
             {
                 _mapMyLocationLayer.Enabled = MyLocationEnabled;
+                Refresh();
+            }
+
+            if (propertyName.Equals(nameof(MyLocationFollow)))
+            {
+                _mapMyLocationButton.IsEnabled = !MyLocationFollow;
+
+                if (MyLocationFollow)
+                {
+                    _mapControl.Map.NavigateTo(_mapMyLocationLayer.MyLocation.ToMapsui());    
+                }
+
                 Refresh();
             }
 

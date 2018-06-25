@@ -63,6 +63,7 @@ namespace Mapsui.Samples.Forms
             mapView.MyLocationLayer.IsMoving = mapView.MyLocationEnabled;
             mapView.MyLocationEnabled = true;
 
+
             return true;
         }
 

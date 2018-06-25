@@ -96,11 +96,9 @@ namespace Mapsui.UI.Objects
 
             Enabled = false;
 
-            var assembly = typeof(MyLocationLayer).GetTypeInfo().Assembly;
-
             if (bitmapMovingId == -1)
             {
-                var bitmapMoving = assembly.GetManifestResourceStream($"Mapsui.UI.Forms.Images.MyLocationMoving.svg");
+                var bitmapMoving = Mapsui.Utilities.EmbeddedResourceLoader.Load($"Images.MyLocationMoving.svg", typeof(MyLocationLayer));
 
                 if (bitmapMoving != null)
                 {
@@ -111,7 +109,7 @@ namespace Mapsui.UI.Objects
 
             if (bitmapStillId == -1)
             {
-                var bitmapStill = assembly.GetManifestResourceStream($"Mapsui.UI.Forms.Images.MyLocationStill.svg");
+                var bitmapStill = Mapsui.Utilities.EmbeddedResourceLoader.Load($"Images.MyLocationStill.svg", typeof(MyLocationLayer));
 
                 if (bitmapStill != null)
                 {
