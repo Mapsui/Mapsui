@@ -2,10 +2,12 @@ using CoreFoundation;
 using Foundation;
 using UIKit;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using CoreGraphics;
 using Mapsui.Geometries;
+using Mapsui.Geometries.Utilities;
 using Mapsui.Widgets;
 using SkiaSharp.Views.iOS;
 
@@ -257,6 +259,30 @@ namespace Mapsui.UI.iOS
         {
             Unsubscribe();
             base.Dispose(disposing);
+        }
+
+        private static (Point centre, double radius, double angle) GetPinchValues(List<Point> locations)
+        {
+            if (locations.Count < 2)
+                throw new ArgumentException();
+
+            double centerX = 0;
+            double centerY = 0;
+
+            foreach (var location in locations)
+            {
+                centerX += location.X;
+                centerY += location.Y;
+            }
+
+            centerX = centerX / locations.Count;
+            centerY = centerY / locations.Count;
+
+            var radius = Algorithms.Distance(centerX, centerY, locations[0].X, locations[0].Y);
+
+            var angle = Math.Atan2(locations[1].Y - locations[0].Y, locations[1].X - locations[0].X) * 180.0 / Math.PI;
+
+            return (new Point(centerX, centerY), radius, angle);
         }
     }
 }
