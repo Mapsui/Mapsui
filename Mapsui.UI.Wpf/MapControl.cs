@@ -243,7 +243,7 @@ namespace Mapsui.UI.Wpf
 
         private void MapControlLoaded(object sender, RoutedEventArgs e)
         {
-            TryInitializeViewport();
+            TryInitializeViewport(ActualWidth, ActualHeight);
             UpdateSize();
             InitAnimation();
             Focusable = true;
@@ -327,7 +327,7 @@ namespace Mapsui.UI.Wpf
 
         private void MapControlSizeChanged(object sender, SizeChangedEventArgs e)
         {
-            TryInitializeViewport();
+            TryInitializeViewport(ActualWidth, ActualHeight);
             Clip = new RectangleGeometry { Rect = new Rect(0, 0, ActualWidth, ActualHeight) };
             UpdateSize();
             _map.RefreshData(true);
@@ -490,21 +490,6 @@ namespace Mapsui.UI.Wpf
             }
         }
 
-        private void TryInitializeViewport()
-        {
-            if (_map?.Viewport == null) return;
-            if (_map.Viewport.Initialized) return;
-
-            if (_map.Viewport.TryInitializeViewport(_map.Envelope, ActualWidth, ActualHeight))
-            {
-                ViewportLimiter.Limit(_map.Viewport, _map.ZoomMode, _map.ZoomLimits, _map.Resolutions,
-                    _map.PanMode, _map.PanLimits, _map.Envelope);
-
-                Map.RefreshData(true);
-                OnViewportInitialized();
-            }
-        }
-
         private void OnViewportInitialized()
         {
             ViewportInitialized?.Invoke(this, EventArgs.Empty);
@@ -655,8 +640,7 @@ namespace Mapsui.UI.Wpf
             if (Renderer == null) return;
             if (_map == null) return;
 
-            Debug.WriteLine(DateTime.Now.Ticks);
-            TryInitializeViewport();
+            TryInitializeViewport(ActualWidth, ActualHeight);
             if (!_map.Viewport.Initialized) return;
 
             Renderer.Render(args.Surface.Canvas, Map.Viewport, Map.Layers, Map.Widgets, Map.BackColor);
@@ -667,7 +651,7 @@ namespace Mapsui.UI.Wpf
             if (Renderer == null) return;
             if (_map == null) return;
 
-            TryInitializeViewport();
+            TryInitializeViewport(ActualWidth, ActualHeight);
             if (!_map.Viewport.Initialized) return;
 
             Renderer.Render(WpfCanvas, Map.Viewport, _map.Layers, Map.Widgets, _map.BackColor);

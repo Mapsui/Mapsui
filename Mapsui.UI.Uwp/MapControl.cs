@@ -190,13 +190,13 @@ namespace Mapsui.UI.Uwp
 
         private void MapControlLoaded(object sender, RoutedEventArgs e)
         {
-            TryInitializeViewport();
+            TryInitializeViewport(ActualWidth, ActualHeight);
             UpdateSize();
         }
         
         private void MapControlSizeChanged(object sender, SizeChangedEventArgs e)
         {
-            TryInitializeViewport();
+            TryInitializeViewport(ActualWidth, ActualHeight);
             Clip = new RectangleGeometry { Rect = new Rect(0, 0, ActualWidth, ActualHeight) };
             UpdateSize();
             _map.RefreshData(true);
@@ -221,7 +221,7 @@ namespace Mapsui.UI.Uwp
             if (Renderer == null) return;
             if (_map == null) return;
 
-            TryInitializeViewport();
+            TryInitializeViewport(ActualWidth, ActualHeight);
             if (!_map.Viewport.Initialized) return;
 
             Renderer.Render(e.Surface.Canvas, Map.Viewport, _map.Layers, _map.Widgets, _map.BackColor);
@@ -313,17 +313,6 @@ namespace Mapsui.UI.Uwp
             OnViewChanged(true);
 
             e.Handled = true;
-        }
-
-        private void TryInitializeViewport()
-        {
-            if (_map.Viewport.Initialized) return;
-
-            if (_map.Viewport.TryInitializeViewport(_map.Envelope, ActualWidth, ActualHeight))
-            {
-                Map.RefreshData(true);
-                OnViewportInitialized();
-            }
         }
 
         private void OnViewportInitialized()

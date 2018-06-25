@@ -55,7 +55,7 @@ namespace Mapsui.UI.iOS
             // Unfortunately the SKGLView does not have a IgnorePixelScaling property. We have to adjust for density with SKGLView.Scale.
             _density = PixelsPerDeviceIndependentUnit;
 
-            TryInitializeViewport();
+            TryInitializeViewport(_canvas.Frame.Width, _canvas.Frame.Height);
 
             ClipsToBounds = true;
             MultipleTouchEnabled = true;
@@ -99,23 +99,12 @@ namespace Mapsui.UI.iOS
 
         void OnPaintSurface(object sender, SKPaintGLSurfaceEventArgs args)
         {
-            TryInitializeViewport();
+            TryInitializeViewport(_canvas.Frame.Width, _canvas.Frame.Height);
             if (!_map.Viewport.Initialized) return;
 
             args.Surface.Canvas.Scale(_density, _density);  // we can only set the scale in the render loop
 
             Renderer.Render(args.Surface.Canvas, _map.Viewport, _map.Layers, _map.Widgets, _map.BackColor);
-        }
-
-        private void TryInitializeViewport()
-        {
-            if (_map.Viewport.Initialized) return;
-
-            if (_map.Viewport.TryInitializeViewport(_map.Envelope, (float)_canvas.Frame.Width, (float)_canvas.Frame.Height))
-            {
-                Map.RefreshData(true);
-                OnViewportInitialized();
-            }
         }
 
         private void OnViewportInitialized()

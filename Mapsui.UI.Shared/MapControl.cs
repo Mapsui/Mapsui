@@ -244,5 +244,20 @@ namespace Mapsui.UI.Wpf
                 coordinateInPixels.X / PixelsPerDeviceIndependentUnit,
                 coordinateInPixels.Y / PixelsPerDeviceIndependentUnit);
         }
+
+        private void TryInitializeViewport(double screenWidth, double screenHeight)
+        {
+            if (_map?.Viewport?.Initialized != false) return;
+
+            if (_map.Viewport.TryInitializeViewport(_map.Envelope, screenWidth, screenHeight))
+            {
+                // limiter now only properly implemented in WPF.
+                ViewportLimiter.Limit(_map.Viewport, _map.ZoomMode, _map.ZoomLimits, _map.Resolutions,
+                    _map.PanMode, _map.PanLimits, _map.Envelope);
+
+                Map.RefreshData(true);
+                OnViewportInitialized();
+            }
+        }
     }
 }

@@ -49,7 +49,7 @@ namespace Mapsui.UI.Android
             AddView(_canvas);
 
             Map = new Map();
-            TryInitializeViewport();
+            TryInitializeViewport(ToDeviceIndependentUnits(Width), ToDeviceIndependentUnits(Height));
             Touch += MapView_Touch;
 
             _gestureDetector = new GestureDetector(Context, new GestureDetector.SimpleOnGestureListener());
@@ -74,7 +74,11 @@ namespace Mapsui.UI.Android
         protected override void OnSizeChanged(int width, int height, int oldWidth, int oldHeight)
         {
             base.OnSizeChanged(width, height, oldWidth, oldHeight);
-            PushSizeOntoViewport(width, height);
+
+            if (Map == null) return;
+
+            Map.Viewport.Width = ToDeviceIndependentUnits(width);
+            Map.Viewport.Height = ToDeviceIndependentUnits(height);
         }
 
         private void RunOnUIThread(Action action)
@@ -84,21 +88,10 @@ namespace Mapsui.UI.Android
 
         private void CanvasOnPaintSurface(object sender, SKPaintSurfaceEventArgs args)
         {
-            TryInitializeViewport();
+            TryInitializeViewport(ToDeviceIndependentUnits(Width), ToDeviceIndependentUnits(Height));
             if (!_map.Viewport.Initialized) return;
 
             Renderer.Render(args.Surface.Canvas, _map.Viewport, _map.Layers, _map.Widgets, _map.BackColor);
-        }
-
-        private void TryInitializeViewport()
-        {
-            if (_map.Viewport.Initialized) return;
-
-            if (_map.Viewport.TryInitializeViewport(_map.Envelope, ToDeviceIndependentUnits(Width), ToDeviceIndependentUnits(Height)))
-            {
-                _map.RefreshData(true);
-                OnViewportInitialized();
-            }
         }
 
         private void OnViewportInitialized()
@@ -324,15 +317,6 @@ namespace Mapsui.UI.Android
         private float ToDeviceIndependentUnits(float pixelCoordinate)
         {
             return pixelCoordinate / _density;
-        }
-
-        void PushSizeOntoViewport(float mapControlWidth, float mapControlHeight)
-        {
-            if (Map != null)
-            {
-                Map.Viewport.Width = ToDeviceIndependentUnits(mapControlWidth);
-                Map.Viewport.Height = ToDeviceIndependentUnits(mapControlHeight);
-            }
         }
 
         public new void Dispose()
