@@ -529,13 +529,8 @@ namespace Mapsui.UI.Wpf
             }
         }
 
-        public void NavigateToFullEnvelope()
-        {
-            if (Map.Envelope == null) return;
-            if (ActualWidth.IsNanOrZero()) return;
-            Map.Viewport.Resolution = Math.Max(Map.Envelope.Width / ActualWidth, Map.Envelope.Height / ActualHeight);
-            Map.Viewport.Center = Map.Envelope.Centroid;
-        }
+        public float ScreenWidth => (float)ActualWidth;
+        public float ScreenHeight => (float) ActualHeight;
 
         private static void OnManipulationInertiaStarting(object sender, ManipulationInertiaStartingEventArgs e)
         {

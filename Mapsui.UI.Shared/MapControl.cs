@@ -6,6 +6,7 @@ using Mapsui.Fetcher;
 using Mapsui.Logging;
 using Mapsui.Rendering;
 using Mapsui.Rendering.Skia;
+using Mapsui.Utilities;
 
 #if __ANDROID__
 namespace Mapsui.UI.Android
@@ -213,6 +214,11 @@ namespace Mapsui.UI.Wpf
         public void RefreshData()
         {
             _map?.RefreshData(true);
+        }
+
+        public void NavigateToFullEnvelope(ScaleMethod scaleMethod)
+        {
+            _map?.NavigateTo(_map.Envelope, scaleMethod);
         }
     }
 }

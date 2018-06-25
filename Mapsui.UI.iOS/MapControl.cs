@@ -55,7 +55,7 @@ namespace Mapsui.UI.iOS
             // Unfortunately the SKGLView does not have a IgnorePixelScaling property. We have to adjust for density with SKGLView.Scale.
             _density = PixelsPerDeviceIndependentUnit;
 
-            TryInitializeViewport(_canvas.Frame.Width, _canvas.Frame.Height);
+            TryInitializeViewport(ScreenWidth, ScreenHeight);
 
             ClipsToBounds = true;
             MultipleTouchEnabled = true;
@@ -99,7 +99,7 @@ namespace Mapsui.UI.iOS
 
         void OnPaintSurface(object sender, SKPaintGLSurfaceEventArgs args)
         {
-            TryInitializeViewport(_canvas.Frame.Width, _canvas.Frame.Height);
+            TryInitializeViewport(ScreenWidth, ScreenHeight);
             if (!_map.Viewport.Initialized) return;
 
             args.Surface.Canvas.Scale(_density, _density);  // we can only set the scale in the render loop
@@ -217,8 +217,8 @@ namespace Mapsui.UI.iOS
 
                 if (_map?.Viewport == null) return;
 
-                _map.Viewport.Width = _canvas.Frame.Width;
-                _map.Viewport.Height = _canvas.Frame.Height;
+                _map.Viewport.Width = ScreenWidth;
+                _map.Viewport.Height = ScreenHeight;
 
                 Refresh();
             }
@@ -232,8 +232,8 @@ namespace Mapsui.UI.iOS
 
             if (_map?.Viewport == null) return;
 
-            _map.Viewport.Width = _canvas.Frame.Width;
-            _map.Viewport.Height = _canvas.Frame.Height;
+            _map.Viewport.Width = ScreenWidth;
+            _map.Viewport.Height = ScreenHeight;
 
             Refresh();
         }
@@ -283,5 +283,8 @@ namespace Mapsui.UI.iOS
 
             return (new Point(centerX, centerY), radius, angle);
         }
+
+        public float ScreenWidth => (float)_canvas.Frame.Width; // todo: check if we need _canvas
+        public float ScreenHeight => (float)_canvas.Frame.Height; // todo: check if we need _canvas
     }
 }

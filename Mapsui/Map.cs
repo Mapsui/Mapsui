@@ -260,7 +260,7 @@ namespace Mapsui
         {
             var layerWidgets = Layers.Select(l => l.Attribution).Where(a => a != null);
             var allWidgets = layerWidgets.Concat(Widgets).ToList(); // Concat layer widgets and map widgets.
-            
+
             // First check if a Widget is clicked. In the current design they are always on top of the map.
             var widget = WidgetTouch.GetWidget(screenPosition, startScreenPosition, allWidgets);
             if (widget != null)
@@ -270,7 +270,7 @@ namespace Mapsui
                 // Widgets should be iterated through rather than getting a single widget, 
                 // based on Z index and then called until handled = true; Ordered By highest Z
                 widgetCallback(widget, screenPosition);
-                return true; 
+                return true;
             }
 
             if (Info == null) return false;
@@ -315,7 +315,7 @@ namespace Mapsui
                     NumTaps = 0,
                     Handled = false
                 };
-                
+
                 _previousHoverEventArgs = mapInfoEventArgs;
                 Hover?.Invoke(this, mapInfoEventArgs);
             }

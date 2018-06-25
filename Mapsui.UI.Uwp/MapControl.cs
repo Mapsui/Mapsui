@@ -242,14 +242,6 @@ namespace Mapsui.UI.Uwp
             _bboxRect.Height = 0;
         }
 
-        public void NavigateToFullEnvelope()
-        {
-            if (Map.Envelope == null) return;
-            if (ActualWidth.IsNanOrZero()) return;
-            Map.Viewport.Resolution = Map.Envelope.Width / ActualWidth;
-            Map.Viewport.Center = Map.Envelope.Centroid;
-        }
-
         private static void OnManipulationInertiaStarting(object sender, ManipulationInertiaStartingRoutedEventArgs e)
         {
             e.TranslationBehavior.DesiredDeceleration = 25 * 96.0 / (1000.0 * 1000.0);
@@ -304,5 +296,8 @@ namespace Mapsui.UI.Uwp
 
             widget.HandleWidgetTouched(screenPosition);
         }
+
+        public float ScreenWidth => (float)ActualWidth;
+        public float ScreenHeight => (float)ActualHeight;
     }
 }
