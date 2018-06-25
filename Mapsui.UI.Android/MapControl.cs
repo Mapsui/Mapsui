@@ -310,7 +310,8 @@ namespace Mapsui.UI.Android
         {
             try
             {
-                // Calling Invalite on the MapControl itself is not enough in some case (observed in XF).
+                // Calling Invalidate on the MapControl itself is not enough in some case (observed in XF).
+                Invalidate();
                 _canvas?.Invalidate();
             }
             catch (ObjectDisposedException e)
