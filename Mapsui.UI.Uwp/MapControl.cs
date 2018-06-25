@@ -140,7 +140,6 @@ namespace Mapsui.UI.Uwp
 
             RefreshGraphics();
             _map.RefreshData(true);
-            OnViewChanged(true);
         }
 
         private double DetermineNewResolution(int mouseWheelDelta, double currentResolution)
@@ -161,13 +160,7 @@ namespace Mapsui.UI.Uwp
             }
             return currentResolution;
         }
-
-        private void OnViewChanged(bool userAction = false)
-        {
-            if (_map != null)
-                ViewChanged?.Invoke(this, new ViewChangedEventArgs { Viewport = Map.Viewport, UserAction = userAction });
-        }
-
+        
         public void RefreshGraphics()
         {
             RunOnUIThread(() => _canvas?.Invalidate());
@@ -191,7 +184,6 @@ namespace Mapsui.UI.Uwp
             Clip = new RectangleGeometry { Rect = new Rect(0, 0, ActualWidth, ActualHeight) };
             UpdateSize();
             _map.RefreshData(true);
-            OnViewChanged();
             Refresh();
         }
 
@@ -239,7 +231,6 @@ namespace Mapsui.UI.Uwp
 
 
             _map.RefreshData(true);
-            OnViewChanged();
             RefreshGraphics();
             ClearBBoxDrawing();
         }
@@ -257,16 +248,13 @@ namespace Mapsui.UI.Uwp
             if (ActualWidth.IsNanOrZero()) return;
             Map.Viewport.Resolution = Map.Envelope.Width / ActualWidth;
             Map.Viewport.Center = Map.Envelope.Centroid;
-
-            OnViewChanged();
         }
 
         private static void OnManipulationInertiaStarting(object sender, ManipulationInertiaStartingRoutedEventArgs e)
         {
             e.TranslationBehavior.DesiredDeceleration = 25 * 96.0 / (1000.0 * 1000.0);
         }
-
-
+        
         private void OnManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
             var (center, radius, angle) = (e.Position.ToMapsui(), e.Delta.Scale, e.Delta.Rotation);
@@ -301,8 +289,6 @@ namespace Mapsui.UI.Uwp
                 _map.PanMode, _map.PanLimits, _map.Envelope);
             RefreshGraphics();
             _map.RefreshData(false);
-            OnViewChanged(true);
-
             e.Handled = true;
         }
 

@@ -155,13 +155,6 @@ namespace Mapsui.UI.Wpf
         public event EventHandler<ViewChangedEventArgs> ViewChanged;
         public event EventHandler<FeatureInfoEventArgs> FeatureInfo;
 
-        private void OnViewChanged(bool userAction = false)
-        {
-            if (_map == null) return;
-
-            ViewChanged?.Invoke(this, new ViewChangedEventArgs { Viewport = Map.Viewport, UserAction = userAction });
-        }
-
         public void RefreshGraphics()
         {
             RunOnUIThread(InvalidateCanvas);
@@ -225,7 +218,6 @@ namespace Mapsui.UI.Wpf
                 _map.PanMode, _map.PanLimits, _map.Envelope);
 
             _map.RefreshData(true);
-            OnViewChanged();
             RefreshGraphics();
         }
 
@@ -325,7 +317,6 @@ namespace Mapsui.UI.Wpf
             Clip = new RectangleGeometry { Rect = new Rect(0, 0, ActualWidth, ActualHeight) };
             UpdateSize();
             _map.RefreshData(true);
-            OnViewChanged();
             Refresh();
         }
 
@@ -393,7 +384,6 @@ namespace Mapsui.UI.Wpf
             }
 
             _map.RefreshData(true);
-            OnViewChanged(true);
             _mouseDown = false;
 
             _previousMousePosition = new Geometries.Point();
@@ -478,7 +468,6 @@ namespace Mapsui.UI.Wpf
 
                 _previousMousePosition = _currentMousePosition;
                 _map.RefreshData(false);
-                OnViewChanged(true);
                 RefreshGraphics();
 
             }
@@ -503,7 +492,6 @@ namespace Mapsui.UI.Wpf
             _toResolution = resolution; // for animation
 
             _map.RefreshData(true);
-            OnViewChanged(true);
             RefreshGraphics();
             ClearBBoxDrawing();
         }
@@ -600,7 +588,6 @@ namespace Mapsui.UI.Wpf
             ViewportLimiter.Limit(_map.Viewport, _map.ZoomMode, _map.ZoomLimits, _map.Resolutions,
                 _map.PanMode, _map.PanLimits, _map.Envelope);
 
-            OnViewChanged(true);
             e.Handled = true;
         }
 
