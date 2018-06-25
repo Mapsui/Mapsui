@@ -174,11 +174,6 @@ namespace Mapsui.UI.Wpf
 
         }
 
-        public void RefreshData()
-        {
-            _map?.RefreshData(true);
-        }
-
         public void Clear()
         {
             _map?.ClearCache();

@@ -30,7 +30,7 @@ namespace Mapsui.UI.Android
         /// <summary>
         /// Saver for center before last pinch movement
         /// </summary>
-        private Geometries.Point _previousCenter = new Geometries.Point();
+        private Point _previousCenter = new Point();
 
         public MapControl(Context context, IAttributeSet attrs) :
             base(context, attrs)
@@ -214,12 +214,18 @@ namespace Mapsui.UI.Android
             }
         }
 
-        private List<Geometries.Point> GetScreenPositions(MotionEvent me, View view)
+        /// <summary>
+        /// Gets the screen position in device independent units relative to the MapControl.
+        /// </summary>
+        /// <param name="motionEvent"></param>
+        /// <param name="view"></param>
+        /// <returns></returns>
+        private List<Point> GetScreenPositions(MotionEvent motionEvent, View view)
         {
-            var result = new List<Geometries.Point>();
-            for (var i = 0; i < me.PointerCount; i++)
+            var result = new List<Point>();
+            for (var i = 0; i < motionEvent.PointerCount; i++)
             {
-                result.Add(new Geometries.Point(me.GetX(i) - view.Left, me.GetY(i) - view.Top)
+                result.Add(new Point(motionEvent.GetX(i) - view.Left, motionEvent.GetY(i) - view.Top)
                     .ToDeviceIndependentUnits(PixelsPerDeviceIndependentUnit));
             }
             return result;
@@ -231,7 +237,7 @@ namespace Mapsui.UI.Android
         /// <param name="motionEvent"></param>
         /// <param name="view"></param>
         /// <returns></returns>
-        private Geometries.Point GetScreenPosition(MotionEvent motionEvent, View view)
+        private Point GetScreenPosition(MotionEvent motionEvent, View view)
         {
             return GetScreenPositionInPixels(motionEvent, view)
                 .ToDeviceIndependentUnits(PixelsPerDeviceIndependentUnit);
@@ -243,7 +249,7 @@ namespace Mapsui.UI.Android
         /// <param name="motionEvent"></param>
         /// <param name="view"></param>
         /// <returns></returns>
-        private static Geometries.Point GetScreenPositionInPixels(MotionEvent motionEvent, View view)
+        private static Point GetScreenPositionInPixels(MotionEvent motionEvent, View view)
         {
             return new PointF(
                 motionEvent.GetX(0) - view.Left,
@@ -259,23 +265,18 @@ namespace Mapsui.UI.Android
         {
             try
             {
+                // Bothe Invalidate and _canvas.Invalidate are necessary in different scenarios.
                 Invalidate();
-                // Calling Invalite on the MapControl itself is not enough in some case (observed in XF).
                 _canvas?.Invalidate();
             }
             catch (ObjectDisposedException e)
             {
                 // See issue: https://github.com/Mapsui/Mapsui/issues/433
                 // What seems to be happening. The Activity is Disposed. Appently it's children get Disposed
-                // explicitly by some in Xamarin. During this Dispose the MessageCenter, which is itself not
-                // disposed get another notification to call RefreshGraphics.
+                // explicitly by something in Xamarin. During this Dispose the MessageCenter, which is itself
+                // not disposed gets another notification to call RefreshGraphics.
                 Logger.Log(LogLevel.Warning, "This can happen when the parent Activity is disposing.", e);
             }
-        }
-
-        public void RefreshData()
-        {
-            _map.RefreshData(true);
         }
 
         protected override void OnLayout(bool changed, int l, int t, int r, int b)
@@ -291,7 +292,7 @@ namespace Mapsui.UI.Android
             view.Right = r;
         }
 
-        private void WidgetTouched(IWidget widget, Geometries.Point screenPosition)
+        private void WidgetTouched(IWidget widget, Point screenPosition)
         {
             if (widget is Hyperlink hyperlink)
             {

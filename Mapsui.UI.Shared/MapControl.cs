@@ -50,7 +50,7 @@ namespace Mapsui.UI.Wpf
         
         public IRenderer Renderer { get; set; } = new MapRenderer();
 
-        public event EventHandler ViewportInitialized;
+        public event EventHandler ViewportInitialized; //todo: Consider to use the Viewport PropertyChanged
 
         /// <summary>
         /// Unsubscribe from map events </summary>
@@ -208,6 +208,11 @@ namespace Mapsui.UI.Wpf
         private void OnViewportInitialized()
         {
             ViewportInitialized?.Invoke(this, EventArgs.Empty);
+        }
+
+        public void RefreshData()
+        {
+            _map?.RefreshData(true);
         }
     }
 }

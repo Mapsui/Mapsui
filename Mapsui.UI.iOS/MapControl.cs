@@ -200,12 +200,11 @@ namespace Mapsui.UI.iOS
         
         public void RefreshGraphics()
         {
-            RunOnUIThread(() => { _canvas?.SetNeedsDisplay(); });
-        }
-
-        public void RefreshData()
-        {
-            _map?.RefreshData(true);
+            RunOnUIThread(() =>
+            {
+                SetNeedsDisplay();
+                _canvas?.SetNeedsDisplay();
+            });
         }
 
         public override CGRect Frame

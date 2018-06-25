@@ -111,13 +111,11 @@ namespace Mapsui.UI.Uwp
             };
         }
 
-        public bool ZoomLocked { get; set; }
-
         public event EventHandler<ViewChangedEventArgs> ViewChanged;
 
         private void MapControl_PointerWheelChanged(object sender, PointerRoutedEventArgs e)
         {
-            if (ZoomLocked) return;
+            if (ZoomLock) return;
             if (!_map.Viewport.Initialized) return;
 
             var currentPoint = e.GetCurrentPoint(this);
@@ -173,11 +171,6 @@ namespace Mapsui.UI.Uwp
         public void RefreshGraphics()
         {
             RunOnUIThread(() => _canvas?.Invalidate());
-        }
-
-        public void RefreshData()
-        {
-            _map.RefreshData(true);
         }
 
         public void Clear()
