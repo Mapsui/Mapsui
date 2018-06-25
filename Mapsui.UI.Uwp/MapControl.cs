@@ -251,7 +251,7 @@ namespace Mapsui.UI.Uwp
             _bboxRect.Height = 0;
         }
 
-        public void ZoomToFullEnvelope()
+        public void NavigateToFullEnvelope()
         {
             if (Map.Envelope == null) return;
             if (ActualWidth.IsNanOrZero()) return;

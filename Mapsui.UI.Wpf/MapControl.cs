@@ -541,7 +541,7 @@ namespace Mapsui.UI.Wpf
             }
         }
 
-        public void ZoomToFullEnvelope()
+        public void NavigateToFullEnvelope()
         {
             if (Map.Envelope == null) return;
             if (ActualWidth.IsNanOrZero()) return;
