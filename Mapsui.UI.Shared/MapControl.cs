@@ -57,6 +57,9 @@ namespace Mapsui.UI.Wpf
         
         public IRenderer Renderer { get; set; } = new MapRenderer();
 
+
+        public event EventHandler ViewportInitialized;
+
         /// <summary>
         /// Unsubscribe from map events </summary>
         public void Unsubscribe()

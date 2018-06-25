@@ -26,8 +26,6 @@ namespace Mapsui.UI.Android
         /// </summary>
         private float _density;
 
-        public event EventHandler ViewportInitialized;
-
         public MapControl(Context context, IAttributeSet attrs) :
             base(context, attrs)
         {

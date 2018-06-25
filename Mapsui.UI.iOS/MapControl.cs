@@ -21,8 +21,6 @@ namespace Mapsui.UI.iOS
         /// </summary>
         private float _density;
 
-        public event EventHandler ViewportInitialized;
-
         public MapControl(CGRect frame)
             : base(frame)
         {

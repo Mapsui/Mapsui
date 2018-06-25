@@ -154,7 +154,6 @@ namespace Mapsui.UI.Wpf
 
         public event EventHandler<ViewChangedEventArgs> ViewChanged;
         public event EventHandler<FeatureInfoEventArgs> FeatureInfo;
-        public event EventHandler ViewportInitialized;
 
         private void OnViewChanged(bool userAction = false)
         {

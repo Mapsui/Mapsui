@@ -42,8 +42,6 @@ namespace Mapsui.UI.Uwp
         private readonly SKXamlCanvas _canvas = CreateRenderTarget();
         private double _innerRotation;
 
-        public event EventHandler ViewportInitialized;
-
         public MapControl()
         {
             Background = new SolidColorBrush(Colors.White); // DON'T REMOVE! Touch events do not work without a background
