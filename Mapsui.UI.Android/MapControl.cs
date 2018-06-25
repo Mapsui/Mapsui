@@ -25,6 +25,11 @@ namespace Mapsui.UI.Android
         /// The number of pixels per device independent unit
         /// </summary>
         private float _density;
+        /// <summary>
+        /// Saver for center before last pinch movement
+        /// </summary>
+        private Point _previousCenter = new Point();
+
 
         public MapControl(Context context, IAttributeSet attrs) :
             base(context, attrs)

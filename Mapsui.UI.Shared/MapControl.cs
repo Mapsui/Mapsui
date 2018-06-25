@@ -26,11 +26,6 @@ namespace Mapsui.UI.Wpf
         private Map _map;
 
         /// <summary>
-        /// Saver for center before last pinch movement
-        /// </summary>
-        private Point _previousCenter = new Point();
-        
-        /// <summary>
         /// Allow map panning through touch or mouse
         /// </summary>
         public bool PanLock { get; set; }
@@ -56,7 +51,6 @@ namespace Mapsui.UI.Wpf
         public double ReSnapRotationDegrees { get; set; }
         
         public IRenderer Renderer { get; set; } = new MapRenderer();
-
 
         public event EventHandler ViewportInitialized;
 
