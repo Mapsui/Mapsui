@@ -259,5 +259,10 @@ namespace Mapsui.UI.Wpf
                 OnViewportInitialized();
             }
         }
+
+        private void OnViewportInitialized()
+        {
+            ViewportInitialized?.Invoke(this, EventArgs.Empty);
+        }
     }
 }

@@ -315,11 +315,6 @@ namespace Mapsui.UI.Uwp
             e.Handled = true;
         }
 
-        private void OnViewportInitialized()
-        {
-            ViewportInitialized?.Invoke(this, EventArgs.Empty);
-        }
-
         public float PixelsPerDeviceIndependentUnit => 
             (float)DisplayInformation.GetForCurrentView().RawPixelsPerViewPixel;
 

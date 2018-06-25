@@ -490,11 +490,6 @@ namespace Mapsui.UI.Wpf
             }
         }
 
-        private void OnViewportInitialized()
-        {
-            ViewportInitialized?.Invoke(this, EventArgs.Empty);
-        }
-
         public void ZoomToBox(Geometries.Point beginPoint, Geometries.Point endPoint)
         {
             var width = Math.Abs(endPoint.X - beginPoint.X);
