@@ -55,7 +55,7 @@ namespace Mapsui.UI.Forms
             AbsoluteLayout.SetLayoutBounds(_mapControl, new Rectangle(0, 0, 1, 1));
             AbsoluteLayout.SetLayoutFlags(_mapControl, AbsoluteLayoutFlags.All);
 
-            _mapButtons = new BoxView { Color = Xamarin.Forms.Color.DarkGray, Opacity=0.8, IsVisible=false };
+            _mapButtons = new BoxView { Color = Xamarin.Forms.Color.DarkGray, Opacity=0.8, IsVisible=true };
 
             AbsoluteLayout.SetLayoutBounds(_mapButtons, new Rectangle(0.99, 0.5, 32, 96));
             AbsoluteLayout.SetLayoutFlags(_mapButtons, AbsoluteLayoutFlags.PositionProportional);
@@ -564,7 +564,7 @@ namespace Mapsui.UI.Forms
             // Is there a widget at this position
             // Is there a drawable at this position
             if (Map != null)
-                e.Handled = Map.InvokeInfo(e.ScreenPosition * _mapControl.SkiaScale, e.ScreenPosition * _mapControl.SkiaScale, _mapControl.SkiaScale, _mapControl.SymbolCache, null, e.NumOfTaps);
+                e.Handled = Map.InvokeInfo(e.ScreenPosition * _mapControl.SkiaScale, e.ScreenPosition * _mapControl.SkiaScale, _mapControl.SymbolCache, null, e.NumOfTaps);
 
             if (e.Handled)
                 return;

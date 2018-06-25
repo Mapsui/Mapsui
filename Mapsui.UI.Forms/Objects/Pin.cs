@@ -382,18 +382,14 @@ namespace Mapsui.UI.Forms
                     bitmapId = -1;
                 }
 
-                Assembly assembly = typeof(Pin).GetTypeInfo().Assembly;
                 Stream stream = null;
 
                 switch (Type)
                 {
                     case PinType.Svg:
                         // Load the SVG document
-                        if (Type == PinType.Pin)
-                            stream = assembly.GetManifestResourceStream($"Mapsui.UI.Forms.Images.Pin.svg");
-                        else
-                            if (!string.IsNullOrEmpty(Svg))
-                                stream = new MemoryStream(Encoding.UTF8.GetBytes(Svg));
+                        if (!string.IsNullOrEmpty(Svg))
+                            stream = new MemoryStream(Encoding.UTF8.GetBytes(Svg));
                         if (stream == null)
                             return;
                         bitmapId = BitmapRegistry.Instance.Register(stream);
@@ -403,7 +399,7 @@ namespace Mapsui.UI.Forms
                         // Create a new SVG object
                         var svg = new SkiaSharp.Extended.Svg.SKSvg();
                         // Load the SVG document
-                        stream = assembly.GetManifestResourceStream($"Mapsui.UI.Forms.Images.Pin.svg");
+                        stream = Mapsui.Utilities.EmbeddedResourceLoader.Load($"Images.Pin.svg", typeof(Pin));
                         if (stream == null)
                             return;
                         svg.Load(stream);
@@ -441,6 +437,7 @@ namespace Mapsui.UI.Forms
                         }
                         break;
                 }
+
                 // If we have a bitmapId (and we should have one), than draw bitmap, otherwise nothing
                 if (bitmapId != -1)
                 {

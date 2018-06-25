@@ -65,21 +65,11 @@ namespace Mapsui.UI.Forms
             Initialize();
         }
 
-        public float SkiaScale
-        {
-            get
-            {
-                return _skiaScale;
-            }
-        }
+        public float SkiaScale => _skiaScale;
 
-        public ISymbolCache SymbolCache
-        {
-            get
-            {
-                return _renderer.SymbolCache;
-            }
-        }
+        public ISymbolCache SymbolCache => _renderer.SymbolCache;
+
+        public float PixelsPerDeviceIndependentUnit => SkiaScale;
 
         public void Initialize()
         {
@@ -569,7 +559,7 @@ namespace Mapsui.UI.Forms
             if (args.Handled)
                 return true;
 
-            var tapWasHandled = Map.InvokeInfo(screenPosition, screenPosition, _scale, _renderer.SymbolCache, WidgetTouched, numOfTaps);
+            var tapWasHandled = Map.InvokeInfo(screenPosition, screenPosition, _renderer.SymbolCache, WidgetTouched, numOfTaps);
 
             if (!tapWasHandled)
             {
@@ -593,7 +583,7 @@ namespace Mapsui.UI.Forms
             if (args.Handled)
                 return true;
 
-            return Map.InvokeInfo(screenPosition, screenPosition, _scale, _renderer.SymbolCache, WidgetTouched, 1);
+            return Map.InvokeInfo(screenPosition, screenPosition, _renderer.SymbolCache, WidgetTouched, 1);
         }
 
         /// <summary>
@@ -623,16 +613,14 @@ namespace Mapsui.UI.Forms
             Device.BeginInvokeOnMainThread(action);
         }
 
-#if !__WPF__ && !__UWP__
-        public new void Dispose()
+        public void Dispose()
         {
             Unsubscribe();
         }
 
-        protected new void Dispose(bool disposing)
+        protected void Dispose(bool disposing)
         {
             Unsubscribe();
         }
-#endif
     }
 }
