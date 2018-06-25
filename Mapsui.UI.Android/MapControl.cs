@@ -28,8 +28,7 @@ namespace Mapsui.UI.Android
         /// <summary>
         /// Saver for center before last pinch movement
         /// </summary>
-        private Point _previousCenter = new Point();
-
+        private Geometries.Point _previousCenter = new Geometries.Point();
 
         public MapControl(Context context, IAttributeSet attrs) :
             base(context, attrs)
