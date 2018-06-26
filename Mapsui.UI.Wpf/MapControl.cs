@@ -237,9 +237,9 @@ namespace Mapsui.UI.Wpf
             Focusable = true;
         }
 
-        public float PixelsPerDeviceIndependentUnit => DetermineDeviceIndependentUnits();
+        public float PixelDensity => DeterminePixelDensity();
 
-        private float DetermineDeviceIndependentUnits()
+        private float DeterminePixelDensity()
         {
             var presentationSource = PresentationSource.FromVisual(this);
             if (presentationSource == null) throw new Exception("PresentationSource is null");

@@ -175,8 +175,8 @@ namespace Mapsui.UI.Wpf
         public Point ToPixels(Point coordinateInDeviceIndependentUnits)
         {
             return new Point(
-                coordinateInDeviceIndependentUnits.X * PixelsPerDeviceIndependentUnit,
-                coordinateInDeviceIndependentUnits.Y * PixelsPerDeviceIndependentUnit);
+                coordinateInDeviceIndependentUnits.X * PixelDensity,
+                coordinateInDeviceIndependentUnits.Y * PixelDensity);
         }
 
         /// <summary>
@@ -187,8 +187,8 @@ namespace Mapsui.UI.Wpf
         public Point ToDeviceIndependentUnits(Point coordinateInPixels)
         {
             return new Point(
-                coordinateInPixels.X / PixelsPerDeviceIndependentUnit,
-                coordinateInPixels.Y / PixelsPerDeviceIndependentUnit);
+                coordinateInPixels.X / PixelDensity,
+                coordinateInPixels.Y / PixelDensity);
         }
 
         private void TryInitializeViewport(double screenWidth, double screenHeight)

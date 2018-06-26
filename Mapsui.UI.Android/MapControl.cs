@@ -26,7 +26,7 @@ namespace Mapsui.UI.Android
         /// <summary>
         /// The number of pixels per device independent unit
         /// </summary>
-        private float _density;
+        private float _pixelDensity;
         /// <summary>
         /// Saver for center before last pinch movement
         /// </summary>
@@ -47,7 +47,7 @@ namespace Mapsui.UI.Android
         public void Initialize()
         {
             SetBackgroundColor(Color.Transparent);
-            _density = PixelsPerDeviceIndependentUnit;
+            _pixelDensity = PixelDensity;
             _canvas = new SKCanvasView(Context) { IgnorePixelScaling = true };
             _canvas.PaintSurface += CanvasOnPaintSurface;
             AddView(_canvas);
@@ -61,7 +61,7 @@ namespace Mapsui.UI.Android
             _gestureDetector.DoubleTap += OnDoubleTapped;
         }
 
-        public float PixelsPerDeviceIndependentUnit => Resources.DisplayMetrics.Density;
+        public float PixelDensity => Resources.DisplayMetrics.Density;
 
         private void OnDoubleTapped(object sender, GestureDetector.DoubleTapEventArgs e)
         {
@@ -226,7 +226,7 @@ namespace Mapsui.UI.Android
             for (var i = 0; i < motionEvent.PointerCount; i++)
             {
                 result.Add(new Point(motionEvent.GetX(i) - view.Left, motionEvent.GetY(i) - view.Top)
-                    .ToDeviceIndependentUnits(PixelsPerDeviceIndependentUnit));
+                    .ToDeviceIndependentUnits(PixelDensity));
             }
             return result;
         }
@@ -240,7 +240,7 @@ namespace Mapsui.UI.Android
         private Point GetScreenPosition(MotionEvent motionEvent, View view)
         {
             return GetScreenPositionInPixels(motionEvent, view)
-                .ToDeviceIndependentUnits(PixelsPerDeviceIndependentUnit);
+                .ToDeviceIndependentUnits(PixelDensity);
         }
 
         /// <summary>
@@ -316,7 +316,7 @@ namespace Mapsui.UI.Android
         /// <returns>The device pixels given as input translated to device pixels.</returns>
         private float ToDeviceIndependentUnits(float pixelCoordinate)
         {
-            return pixelCoordinate / _density;
+            return pixelCoordinate / _pixelDensity;
         }
 
         public new void Dispose()

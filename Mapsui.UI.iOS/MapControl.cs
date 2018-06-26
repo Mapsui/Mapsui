@@ -21,7 +21,7 @@ namespace Mapsui.UI.iOS
         /// <summary>
         /// The number of pixels per device independent unit
         /// </summary>
-        private float _density;
+        private float _pixelDensity;
 
         public MapControl(CGRect frame)
             : base(frame)
@@ -53,7 +53,7 @@ namespace Mapsui.UI.iOS
             });
 
             // Unfortunately the SKGLView does not have a IgnorePixelScaling property. We have to adjust for density with SKGLView.Scale.
-            _density = PixelsPerDeviceIndependentUnit;
+            _pixelDensity = PixelDensity;
 
             TryInitializeViewport(ScreenWidth, ScreenHeight);
 
@@ -77,7 +77,7 @@ namespace Mapsui.UI.iOS
             AddGestureRecognizer(tapGestureRecognizer);
         }
 
-        public float PixelsPerDeviceIndependentUnit => (float) _canvas.ContentScaleFactor;
+        public float PixelDensity => (float) _canvas.ContentScaleFactor; // todo: Check if I need canvas
 
         private void OnDoubleTapped(UITapGestureRecognizer gesture)
         {
@@ -102,7 +102,7 @@ namespace Mapsui.UI.iOS
             TryInitializeViewport(ScreenWidth, ScreenHeight);
             if (!_map.Viewport.Initialized) return;
 
-            args.Surface.Canvas.Scale(_density, _density);  // we can only set the scale in the render loop
+            args.Surface.Canvas.Scale(_pixelDensity, _pixelDensity);  // we can only set the scale in the render loop
 
             Renderer.Render(args.Surface.Canvas, _map.Viewport, _map.Layers, _map.Widgets, _map.BackColor);
         }
