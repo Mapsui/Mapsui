@@ -12,7 +12,7 @@
 Mapsui is a C# map component for apps
 
 - Supported platforms: WPF, UWP, Android, iOS
-- The core PCL is Profile 111
+- The Mapsui core assembly is .NET Standard 1.3
 - Designed to be fast and responsive
 - Started as a fork of SharpMap
 
