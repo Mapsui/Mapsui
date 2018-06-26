@@ -24,10 +24,6 @@ namespace Mapsui.UI.Android
         private double _previousRadius = 1f;
         private TouchMode _mode = TouchMode.None;
         /// <summary>
-        /// The number of pixels per device independent unit
-        /// </summary>
-        private float _pixelDensity;
-        /// <summary>
         /// Saver for center before last pinch movement
         /// </summary>
         private Point _previousCenter = new Point();
@@ -47,7 +43,6 @@ namespace Mapsui.UI.Android
         public void Initialize()
         {
             SetBackgroundColor(Color.Transparent);
-            _pixelDensity = PixelDensity;
             _canvas = new SKCanvasView(Context) { IgnorePixelScaling = true };
             _canvas.PaintSurface += CanvasOnPaintSurface;
             AddView(_canvas);
@@ -316,7 +311,7 @@ namespace Mapsui.UI.Android
         /// <returns>The device pixels given as input translated to device pixels.</returns>
         private float ToDeviceIndependentUnits(float pixelCoordinate)
         {
-            return pixelCoordinate / _pixelDensity;
+            return pixelCoordinate / PixelDensity;
         }
 
         public new void Dispose()

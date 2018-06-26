@@ -18,11 +18,7 @@ namespace Mapsui.UI.iOS
     {
         private readonly SKGLView _canvas = new SKGLView();
         private double _innerRotation;
-        /// <summary>
-        /// The number of pixels per device independent unit
-        /// </summary>
-        private float _pixelDensity;
-
+        
         public MapControl(CGRect frame)
             : base(frame)
         {
@@ -51,9 +47,6 @@ namespace Mapsui.UI.iOS
                 NSLayoutConstraint.Create(this, NSLayoutAttribute.Top, NSLayoutRelation.Equal, _canvas, NSLayoutAttribute.Top, 1.0f, 0.0f),
                 NSLayoutConstraint.Create(this, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, _canvas, NSLayoutAttribute.Bottom, 1.0f, 0.0f)
             });
-
-            // Unfortunately the SKGLView does not have a IgnorePixelScaling property. We have to adjust for density with SKGLView.Scale.
-            _pixelDensity = PixelDensity;
 
             TryInitializeViewport(ScreenWidth, ScreenHeight);
 
@@ -102,8 +95,11 @@ namespace Mapsui.UI.iOS
             TryInitializeViewport(ScreenWidth, ScreenHeight);
             if (!_map.Viewport.Initialized) return;
 
-            args.Surface.Canvas.Scale(_pixelDensity, _pixelDensity);  // we can only set the scale in the render loop
+            // Unfortunately the SKGLView does not have a IgnorePixelScaling property,
+            // so have to adjust for density with SKGLView.Scale.
+            // The Scale can only be set in the render loop
 
+            args.Surface.Canvas.Scale(PixelDensity, PixelDensity);  
             Renderer.Render(args.Surface.Canvas, _map.Viewport, _map.Layers, _map.Widgets, _map.BackColor);
         }
 
