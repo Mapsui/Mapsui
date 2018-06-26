@@ -6015,12 +6015,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.Map.InfoLayers
   nameWithType: Map.InfoLayers
-- uid: Mapsui.Map.InvokeHover(Mapsui.Geometries.Point,System.Single,Mapsui.Rendering.ISymbolCache)
-  name: InvokeHover(Point, Single, ISymbolCache)
-  href: api/Mapsui.Map.html#Mapsui_Map_InvokeHover_Mapsui_Geometries_Point_System_Single_Mapsui_Rendering_ISymbolCache_
-  commentId: M:Mapsui.Map.InvokeHover(Mapsui.Geometries.Point,System.Single,Mapsui.Rendering.ISymbolCache)
-  fullName: Mapsui.Map.InvokeHover(Mapsui.Geometries.Point, System.Single, Mapsui.Rendering.ISymbolCache)
-  nameWithType: Map.InvokeHover(Point, Single, ISymbolCache)
+- uid: Mapsui.Map.InvokeHover(Mapsui.Geometries.Point,Mapsui.Rendering.ISymbolCache)
+  name: InvokeHover(Point, ISymbolCache)
+  href: api/Mapsui.Map.html#Mapsui_Map_InvokeHover_Mapsui_Geometries_Point_Mapsui_Rendering_ISymbolCache_
+  commentId: M:Mapsui.Map.InvokeHover(Mapsui.Geometries.Point,Mapsui.Rendering.ISymbolCache)
+  fullName: Mapsui.Map.InvokeHover(Mapsui.Geometries.Point, Mapsui.Rendering.ISymbolCache)
+  nameWithType: Map.InvokeHover(Point, ISymbolCache)
 - uid: Mapsui.Map.InvokeHover*
   name: InvokeHover
   href: api/Mapsui.Map.html#Mapsui_Map_InvokeHover_
@@ -6028,15 +6028,15 @@ references:
   isSpec: "True"
   fullName: Mapsui.Map.InvokeHover
   nameWithType: Map.InvokeHover
-- uid: Mapsui.Map.InvokeInfo(Mapsui.Geometries.Point,Mapsui.Geometries.Point,System.Single,Mapsui.Rendering.ISymbolCache,Action{Mapsui.Widgets.IWidget,Mapsui.Geometries.Point},System.Int32)
-  name: InvokeInfo(Point, Point, Single, ISymbolCache, Action<IWidget, Point>, Int32)
-  href: api/Mapsui.Map.html#Mapsui_Map_InvokeInfo_Mapsui_Geometries_Point_Mapsui_Geometries_Point_System_Single_Mapsui_Rendering_ISymbolCache_Action_Mapsui_Widgets_IWidget_Mapsui_Geometries_Point__System_Int32_
-  commentId: M:Mapsui.Map.InvokeInfo(Mapsui.Geometries.Point,Mapsui.Geometries.Point,System.Single,Mapsui.Rendering.ISymbolCache,Action{Mapsui.Widgets.IWidget,Mapsui.Geometries.Point},System.Int32)
-  name.vb: InvokeInfo(Point, Point, Single, ISymbolCache, Action(Of IWidget, Point), Int32)
-  fullName: Mapsui.Map.InvokeInfo(Mapsui.Geometries.Point, Mapsui.Geometries.Point, System.Single, Mapsui.Rendering.ISymbolCache, Action<Mapsui.Widgets.IWidget, Mapsui.Geometries.Point>, System.Int32)
-  fullName.vb: Mapsui.Map.InvokeInfo(Mapsui.Geometries.Point, Mapsui.Geometries.Point, System.Single, Mapsui.Rendering.ISymbolCache, Action(Of Mapsui.Widgets.IWidget, Mapsui.Geometries.Point), System.Int32)
-  nameWithType: Map.InvokeInfo(Point, Point, Single, ISymbolCache, Action<IWidget, Point>, Int32)
-  nameWithType.vb: Map.InvokeInfo(Point, Point, Single, ISymbolCache, Action(Of IWidget, Point), Int32)
+- uid: Mapsui.Map.InvokeInfo(Mapsui.Geometries.Point,Mapsui.Geometries.Point,Mapsui.Rendering.ISymbolCache,Action{Mapsui.Widgets.IWidget,Mapsui.Geometries.Point},System.Int32)
+  name: InvokeInfo(Point, Point, ISymbolCache, Action<IWidget, Point>, Int32)
+  href: api/Mapsui.Map.html#Mapsui_Map_InvokeInfo_Mapsui_Geometries_Point_Mapsui_Geometries_Point_Mapsui_Rendering_ISymbolCache_Action_Mapsui_Widgets_IWidget_Mapsui_Geometries_Point__System_Int32_
+  commentId: M:Mapsui.Map.InvokeInfo(Mapsui.Geometries.Point,Mapsui.Geometries.Point,Mapsui.Rendering.ISymbolCache,Action{Mapsui.Widgets.IWidget,Mapsui.Geometries.Point},System.Int32)
+  name.vb: InvokeInfo(Point, Point, ISymbolCache, Action(Of IWidget, Point), Int32)
+  fullName: Mapsui.Map.InvokeInfo(Mapsui.Geometries.Point, Mapsui.Geometries.Point, Mapsui.Rendering.ISymbolCache, Action<Mapsui.Widgets.IWidget, Mapsui.Geometries.Point>, System.Int32)
+  fullName.vb: Mapsui.Map.InvokeInfo(Mapsui.Geometries.Point, Mapsui.Geometries.Point, Mapsui.Rendering.ISymbolCache, Action(Of Mapsui.Widgets.IWidget, Mapsui.Geometries.Point), System.Int32)
+  nameWithType: Map.InvokeInfo(Point, Point, ISymbolCache, Action<IWidget, Point>, Int32)
+  nameWithType.vb: Map.InvokeInfo(Point, Point, ISymbolCache, Action(Of IWidget, Point), Int32)
 - uid: Mapsui.Map.InvokeInfo*
   name: InvokeInfo
   href: api/Mapsui.Map.html#Mapsui_Map_InvokeInfo_
@@ -17444,25 +17444,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.Rendering.Xaml.XamlWidgets.ZoomInOutWidgetRenderer.Draw
   nameWithType: ZoomInOutWidgetRenderer.Draw
-- uid: Mapsui.StreamExtensions
-  name: StreamExtensions
-  href: api/Mapsui.StreamExtensions.html
-  commentId: T:Mapsui.StreamExtensions
-  fullName: Mapsui.StreamExtensions
-  nameWithType: StreamExtensions
-- uid: Mapsui.StreamExtensions.ToBytes(Stream)
-  name: ToBytes(Stream)
-  href: api/Mapsui.StreamExtensions.html#Mapsui_StreamExtensions_ToBytes_Stream_
-  commentId: M:Mapsui.StreamExtensions.ToBytes(Stream)
-  fullName: Mapsui.StreamExtensions.ToBytes(Stream)
-  nameWithType: StreamExtensions.ToBytes(Stream)
-- uid: Mapsui.StreamExtensions.ToBytes*
-  name: ToBytes
-  href: api/Mapsui.StreamExtensions.html#Mapsui_StreamExtensions_ToBytes_
-  commentId: Overload:Mapsui.StreamExtensions.ToBytes
-  isSpec: "True"
-  fullName: Mapsui.StreamExtensions.ToBytes
-  nameWithType: StreamExtensions.ToBytes
 - uid: Mapsui.Styles
   name: Mapsui.Styles
   href: api/Mapsui.Styles.html
@@ -20252,19 +20233,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Android.MapControl.Dispose
   nameWithType: MapControl.Dispose
-- uid: Mapsui.UI.Android.MapControl.GetDeviceIndependentUnits
-  name: GetDeviceIndependentUnits()
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_GetDeviceIndependentUnits
-  commentId: M:Mapsui.UI.Android.MapControl.GetDeviceIndependentUnits
-  fullName: Mapsui.UI.Android.MapControl.GetDeviceIndependentUnits()
-  nameWithType: MapControl.GetDeviceIndependentUnits()
-- uid: Mapsui.UI.Android.MapControl.GetDeviceIndependentUnits*
-  name: GetDeviceIndependentUnits
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_GetDeviceIndependentUnits_
-  commentId: Overload:Mapsui.UI.Android.MapControl.GetDeviceIndependentUnits
-  isSpec: "True"
-  fullName: Mapsui.UI.Android.MapControl.GetDeviceIndependentUnits
-  nameWithType: MapControl.GetDeviceIndependentUnits
 - uid: Mapsui.UI.Android.MapControl.Initialize
   name: Initialize()
   href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_Initialize
@@ -20304,19 +20272,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Android.MapControl.MapView_Touch
   nameWithType: MapControl.MapView_Touch
-- uid: Mapsui.UI.Android.MapControl.OnDraw(Canvas)
-  name: OnDraw(Canvas)
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_OnDraw_Canvas_
-  commentId: M:Mapsui.UI.Android.MapControl.OnDraw(Canvas)
-  fullName: Mapsui.UI.Android.MapControl.OnDraw(Canvas)
-  nameWithType: MapControl.OnDraw(Canvas)
-- uid: Mapsui.UI.Android.MapControl.OnDraw*
-  name: OnDraw
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_OnDraw_
-  commentId: Overload:Mapsui.UI.Android.MapControl.OnDraw
-  isSpec: "True"
-  fullName: Mapsui.UI.Android.MapControl.OnDraw
-  nameWithType: MapControl.OnDraw
 - uid: Mapsui.UI.Android.MapControl.OnLayout(System.Boolean,System.Int32,System.Int32,System.Int32,System.Int32)
   name: OnLayout(Boolean, Int32, Int32, Int32, Int32)
   href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_OnLayout_System_Boolean_System_Int32_System_Int32_System_Int32_System_Int32_
@@ -20356,6 +20311,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Android.MapControl.PanLock
   nameWithType: MapControl.PanLock
+- uid: Mapsui.UI.Android.MapControl.PixelsPerDeviceIndependentUnit
+  name: PixelsPerDeviceIndependentUnit
+  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_PixelsPerDeviceIndependentUnit
+  commentId: P:Mapsui.UI.Android.MapControl.PixelsPerDeviceIndependentUnit
+  fullName: Mapsui.UI.Android.MapControl.PixelsPerDeviceIndependentUnit
+  nameWithType: MapControl.PixelsPerDeviceIndependentUnit
+- uid: Mapsui.UI.Android.MapControl.PixelsPerDeviceIndependentUnit*
+  name: PixelsPerDeviceIndependentUnit
+  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_PixelsPerDeviceIndependentUnit_
+  commentId: Overload:Mapsui.UI.Android.MapControl.PixelsPerDeviceIndependentUnit
+  isSpec: "True"
+  fullName: Mapsui.UI.Android.MapControl.PixelsPerDeviceIndependentUnit
+  nameWithType: MapControl.PixelsPerDeviceIndependentUnit
 - uid: Mapsui.UI.Android.MapControl.Refresh
   name: Refresh()
   href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_Refresh
@@ -20434,12 +20402,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Android.MapControl.RotationLock
   nameWithType: MapControl.RotationLock
-- uid: Mapsui.UI.Android.MapControl.ScreenToWorld(Mapsui.Geometries.Point)
-  name: ScreenToWorld(Point)
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_ScreenToWorld_Mapsui_Geometries_Point_
-  commentId: M:Mapsui.UI.Android.MapControl.ScreenToWorld(Mapsui.Geometries.Point)
-  fullName: Mapsui.UI.Android.MapControl.ScreenToWorld(Mapsui.Geometries.Point)
-  nameWithType: MapControl.ScreenToWorld(Point)
 - uid: Mapsui.UI.Android.MapControl.ScreenToWorld(Mapsui.IViewport,System.Single,Mapsui.Geometries.Point)
   name: ScreenToWorld(IViewport, Single, Point)
   href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_ScreenToWorld_Mapsui_IViewport_System_Single_Mapsui_Geometries_Point_
@@ -20453,6 +20415,32 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Android.MapControl.ScreenToWorld
   nameWithType: MapControl.ScreenToWorld
+- uid: Mapsui.UI.Android.MapControl.ToDeviceIndependentUnits(Mapsui.Geometries.Point)
+  name: ToDeviceIndependentUnits(Point)
+  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_ToDeviceIndependentUnits_Mapsui_Geometries_Point_
+  commentId: M:Mapsui.UI.Android.MapControl.ToDeviceIndependentUnits(Mapsui.Geometries.Point)
+  fullName: Mapsui.UI.Android.MapControl.ToDeviceIndependentUnits(Mapsui.Geometries.Point)
+  nameWithType: MapControl.ToDeviceIndependentUnits(Point)
+- uid: Mapsui.UI.Android.MapControl.ToDeviceIndependentUnits*
+  name: ToDeviceIndependentUnits
+  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_ToDeviceIndependentUnits_
+  commentId: Overload:Mapsui.UI.Android.MapControl.ToDeviceIndependentUnits
+  isSpec: "True"
+  fullName: Mapsui.UI.Android.MapControl.ToDeviceIndependentUnits
+  nameWithType: MapControl.ToDeviceIndependentUnits
+- uid: Mapsui.UI.Android.MapControl.ToPixels(Mapsui.Geometries.Point)
+  name: ToPixels(Point)
+  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_ToPixels_Mapsui_Geometries_Point_
+  commentId: M:Mapsui.UI.Android.MapControl.ToPixels(Mapsui.Geometries.Point)
+  fullName: Mapsui.UI.Android.MapControl.ToPixels(Mapsui.Geometries.Point)
+  nameWithType: MapControl.ToPixels(Point)
+- uid: Mapsui.UI.Android.MapControl.ToPixels*
+  name: ToPixels
+  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_ToPixels_
+  commentId: Overload:Mapsui.UI.Android.MapControl.ToPixels
+  isSpec: "True"
+  fullName: Mapsui.UI.Android.MapControl.ToPixels
+  nameWithType: MapControl.ToPixels
 - uid: Mapsui.UI.Android.MapControl.UnSnapRotationDegrees
   name: UnSnapRotationDegrees
   href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_UnSnapRotationDegrees
@@ -20485,12 +20473,6 @@ references:
   commentId: E:Mapsui.UI.Android.MapControl.ViewportInitialized
   fullName: Mapsui.UI.Android.MapControl.ViewportInitialized
   nameWithType: MapControl.ViewportInitialized
-- uid: Mapsui.UI.Android.MapControl.WorldToScreen(Mapsui.Geometries.Point)
-  name: WorldToScreen(Point)
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_WorldToScreen_Mapsui_Geometries_Point_
-  commentId: M:Mapsui.UI.Android.MapControl.WorldToScreen(Mapsui.Geometries.Point)
-  fullName: Mapsui.UI.Android.MapControl.WorldToScreen(Mapsui.Geometries.Point)
-  nameWithType: MapControl.WorldToScreen(Point)
 - uid: Mapsui.UI.Android.MapControl.WorldToScreen(Mapsui.IViewport,System.Single,Mapsui.Geometries.Point)
   name: WorldToScreen(IViewport, Single, Point)
   href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_WorldToScreen_Mapsui_IViewport_System_Single_Mapsui_Geometries_Point_
@@ -20523,19 +20505,19 @@ references:
   commentId: T:Mapsui.UI.Android.PointExtensions
   fullName: Mapsui.UI.Android.PointExtensions
   nameWithType: PointExtensions
-- uid: Mapsui.UI.Android.PointExtensions.ToDip(Mapsui.Geometries.Point,System.Single)
-  name: ToDip(Point, Single)
-  href: api/Mapsui.UI.Android.PointExtensions.html#Mapsui_UI_Android_PointExtensions_ToDip_Mapsui_Geometries_Point_System_Single_
-  commentId: M:Mapsui.UI.Android.PointExtensions.ToDip(Mapsui.Geometries.Point,System.Single)
-  fullName: Mapsui.UI.Android.PointExtensions.ToDip(Mapsui.Geometries.Point, System.Single)
-  nameWithType: PointExtensions.ToDip(Point, Single)
-- uid: Mapsui.UI.Android.PointExtensions.ToDip*
-  name: ToDip
-  href: api/Mapsui.UI.Android.PointExtensions.html#Mapsui_UI_Android_PointExtensions_ToDip_
-  commentId: Overload:Mapsui.UI.Android.PointExtensions.ToDip
+- uid: Mapsui.UI.Android.PointExtensions.ToDeviceIndependentUnits(Mapsui.Geometries.Point,System.Single)
+  name: ToDeviceIndependentUnits(Point, Single)
+  href: api/Mapsui.UI.Android.PointExtensions.html#Mapsui_UI_Android_PointExtensions_ToDeviceIndependentUnits_Mapsui_Geometries_Point_System_Single_
+  commentId: M:Mapsui.UI.Android.PointExtensions.ToDeviceIndependentUnits(Mapsui.Geometries.Point,System.Single)
+  fullName: Mapsui.UI.Android.PointExtensions.ToDeviceIndependentUnits(Mapsui.Geometries.Point, System.Single)
+  nameWithType: PointExtensions.ToDeviceIndependentUnits(Point, Single)
+- uid: Mapsui.UI.Android.PointExtensions.ToDeviceIndependentUnits*
+  name: ToDeviceIndependentUnits
+  href: api/Mapsui.UI.Android.PointExtensions.html#Mapsui_UI_Android_PointExtensions_ToDeviceIndependentUnits_
+  commentId: Overload:Mapsui.UI.Android.PointExtensions.ToDeviceIndependentUnits
   isSpec: "True"
-  fullName: Mapsui.UI.Android.PointExtensions.ToDip
-  nameWithType: PointExtensions.ToDip
+  fullName: Mapsui.UI.Android.PointExtensions.ToDeviceIndependentUnits
+  nameWithType: PointExtensions.ToDeviceIndependentUnits
 - uid: Mapsui.UI.Android.Resource
   name: Resource
   href: api/Mapsui.UI.Android.Resource.html
@@ -20660,19 +20642,6 @@ references:
   commentId: T:Mapsui.UI.IMapControl
   fullName: Mapsui.UI.IMapControl
   nameWithType: IMapControl
-- uid: Mapsui.UI.IMapControl.GetDeviceIndependentUnits
-  name: GetDeviceIndependentUnits()
-  href: api/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_GetDeviceIndependentUnits
-  commentId: M:Mapsui.UI.IMapControl.GetDeviceIndependentUnits
-  fullName: Mapsui.UI.IMapControl.GetDeviceIndependentUnits()
-  nameWithType: IMapControl.GetDeviceIndependentUnits()
-- uid: Mapsui.UI.IMapControl.GetDeviceIndependentUnits*
-  name: GetDeviceIndependentUnits
-  href: api/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_GetDeviceIndependentUnits_
-  commentId: Overload:Mapsui.UI.IMapControl.GetDeviceIndependentUnits
-  isSpec: "True"
-  fullName: Mapsui.UI.IMapControl.GetDeviceIndependentUnits
-  nameWithType: IMapControl.GetDeviceIndependentUnits
 - uid: Mapsui.UI.IMapControl.Map
   name: Map
   href: api/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_Map
@@ -20686,6 +20655,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.IMapControl.Map
   nameWithType: IMapControl.Map
+- uid: Mapsui.UI.IMapControl.PixelsPerDeviceIndependentUnit
+  name: PixelsPerDeviceIndependentUnit
+  href: api/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_PixelsPerDeviceIndependentUnit
+  commentId: P:Mapsui.UI.IMapControl.PixelsPerDeviceIndependentUnit
+  fullName: Mapsui.UI.IMapControl.PixelsPerDeviceIndependentUnit
+  nameWithType: IMapControl.PixelsPerDeviceIndependentUnit
+- uid: Mapsui.UI.IMapControl.PixelsPerDeviceIndependentUnit*
+  name: PixelsPerDeviceIndependentUnit
+  href: api/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_PixelsPerDeviceIndependentUnit_
+  commentId: Overload:Mapsui.UI.IMapControl.PixelsPerDeviceIndependentUnit
+  isSpec: "True"
+  fullName: Mapsui.UI.IMapControl.PixelsPerDeviceIndependentUnit
+  nameWithType: IMapControl.PixelsPerDeviceIndependentUnit
 - uid: Mapsui.UI.IMapControl.Refresh
   name: Refresh()
   href: api/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_Refresh
@@ -20764,19 +20746,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.IMapControl.RotationLock
   nameWithType: IMapControl.RotationLock
-- uid: Mapsui.UI.IMapControl.ScreenToWorld(Mapsui.Geometries.Point)
-  name: ScreenToWorld(Point)
-  href: api/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_ScreenToWorld_Mapsui_Geometries_Point_
-  commentId: M:Mapsui.UI.IMapControl.ScreenToWorld(Mapsui.Geometries.Point)
-  fullName: Mapsui.UI.IMapControl.ScreenToWorld(Mapsui.Geometries.Point)
-  nameWithType: IMapControl.ScreenToWorld(Point)
-- uid: Mapsui.UI.IMapControl.ScreenToWorld*
-  name: ScreenToWorld
-  href: api/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_ScreenToWorld_
-  commentId: Overload:Mapsui.UI.IMapControl.ScreenToWorld
-  isSpec: "True"
-  fullName: Mapsui.UI.IMapControl.ScreenToWorld
-  nameWithType: IMapControl.ScreenToWorld
 - uid: Mapsui.UI.IMapControl.UnSnapRotationDegrees
   name: UnSnapRotationDegrees
   href: api/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_UnSnapRotationDegrees
@@ -20809,34 +20778,21 @@ references:
   commentId: E:Mapsui.UI.IMapControl.ViewportInitialized
   fullName: Mapsui.UI.IMapControl.ViewportInitialized
   nameWithType: IMapControl.ViewportInitialized
-- uid: Mapsui.UI.IMapControl.WorldToScreen(Mapsui.Geometries.Point)
-  name: WorldToScreen(Point)
-  href: api/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_WorldToScreen_Mapsui_Geometries_Point_
-  commentId: M:Mapsui.UI.IMapControl.WorldToScreen(Mapsui.Geometries.Point)
-  fullName: Mapsui.UI.IMapControl.WorldToScreen(Mapsui.Geometries.Point)
-  nameWithType: IMapControl.WorldToScreen(Point)
-- uid: Mapsui.UI.IMapControl.WorldToScreen*
-  name: WorldToScreen
-  href: api/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_WorldToScreen_
-  commentId: Overload:Mapsui.UI.IMapControl.WorldToScreen
-  isSpec: "True"
-  fullName: Mapsui.UI.IMapControl.WorldToScreen
-  nameWithType: IMapControl.WorldToScreen
 - uid: Mapsui.UI.InfoHelper
   name: InfoHelper
   href: api/Mapsui.UI.InfoHelper.html
   commentId: T:Mapsui.UI.InfoHelper
   fullName: Mapsui.UI.InfoHelper
   nameWithType: InfoHelper
-- uid: Mapsui.UI.InfoHelper.GetMapInfo(Mapsui.IViewport,Mapsui.Geometries.Point,System.Single,IEnumerable{Mapsui.Layers.ILayer},Mapsui.Rendering.ISymbolCache,System.Int32)
-  name: GetMapInfo(IViewport, Point, Single, IEnumerable<ILayer>, ISymbolCache, Int32)
-  href: api/Mapsui.UI.InfoHelper.html#Mapsui_UI_InfoHelper_GetMapInfo_Mapsui_IViewport_Mapsui_Geometries_Point_System_Single_IEnumerable_Mapsui_Layers_ILayer__Mapsui_Rendering_ISymbolCache_System_Int32_
-  commentId: M:Mapsui.UI.InfoHelper.GetMapInfo(Mapsui.IViewport,Mapsui.Geometries.Point,System.Single,IEnumerable{Mapsui.Layers.ILayer},Mapsui.Rendering.ISymbolCache,System.Int32)
-  name.vb: GetMapInfo(IViewport, Point, Single, IEnumerable(Of ILayer), ISymbolCache, Int32)
-  fullName: Mapsui.UI.InfoHelper.GetMapInfo(Mapsui.IViewport, Mapsui.Geometries.Point, System.Single, IEnumerable<Mapsui.Layers.ILayer>, Mapsui.Rendering.ISymbolCache, System.Int32)
-  fullName.vb: Mapsui.UI.InfoHelper.GetMapInfo(Mapsui.IViewport, Mapsui.Geometries.Point, System.Single, IEnumerable(Of Mapsui.Layers.ILayer), Mapsui.Rendering.ISymbolCache, System.Int32)
-  nameWithType: InfoHelper.GetMapInfo(IViewport, Point, Single, IEnumerable<ILayer>, ISymbolCache, Int32)
-  nameWithType.vb: InfoHelper.GetMapInfo(IViewport, Point, Single, IEnumerable(Of ILayer), ISymbolCache, Int32)
+- uid: Mapsui.UI.InfoHelper.GetMapInfo(Mapsui.IViewport,Mapsui.Geometries.Point,IEnumerable{Mapsui.Layers.ILayer},Mapsui.Rendering.ISymbolCache,System.Int32)
+  name: GetMapInfo(IViewport, Point, IEnumerable<ILayer>, ISymbolCache, Int32)
+  href: api/Mapsui.UI.InfoHelper.html#Mapsui_UI_InfoHelper_GetMapInfo_Mapsui_IViewport_Mapsui_Geometries_Point_IEnumerable_Mapsui_Layers_ILayer__Mapsui_Rendering_ISymbolCache_System_Int32_
+  commentId: M:Mapsui.UI.InfoHelper.GetMapInfo(Mapsui.IViewport,Mapsui.Geometries.Point,IEnumerable{Mapsui.Layers.ILayer},Mapsui.Rendering.ISymbolCache,System.Int32)
+  name.vb: GetMapInfo(IViewport, Point, IEnumerable(Of ILayer), ISymbolCache, Int32)
+  fullName: Mapsui.UI.InfoHelper.GetMapInfo(Mapsui.IViewport, Mapsui.Geometries.Point, IEnumerable<Mapsui.Layers.ILayer>, Mapsui.Rendering.ISymbolCache, System.Int32)
+  fullName.vb: Mapsui.UI.InfoHelper.GetMapInfo(Mapsui.IViewport, Mapsui.Geometries.Point, IEnumerable(Of Mapsui.Layers.ILayer), Mapsui.Rendering.ISymbolCache, System.Int32)
+  nameWithType: InfoHelper.GetMapInfo(IViewport, Point, IEnumerable<ILayer>, ISymbolCache, Int32)
+  nameWithType.vb: InfoHelper.GetMapInfo(IViewport, Point, IEnumerable(Of ILayer), ISymbolCache, Int32)
 - uid: Mapsui.UI.InfoHelper.GetMapInfo*
   name: GetMapInfo
   href: api/Mapsui.UI.InfoHelper.html#Mapsui_UI_InfoHelper_GetMapInfo_
@@ -20952,19 +20908,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.iOS.MapControl.Frame
   nameWithType: MapControl.Frame
-- uid: Mapsui.UI.iOS.MapControl.GetDeviceIndependentUnits
-  name: GetDeviceIndependentUnits()
-  href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_GetDeviceIndependentUnits
-  commentId: M:Mapsui.UI.iOS.MapControl.GetDeviceIndependentUnits
-  fullName: Mapsui.UI.iOS.MapControl.GetDeviceIndependentUnits()
-  nameWithType: MapControl.GetDeviceIndependentUnits()
-- uid: Mapsui.UI.iOS.MapControl.GetDeviceIndependentUnits*
-  name: GetDeviceIndependentUnits
-  href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_GetDeviceIndependentUnits_
-  commentId: Overload:Mapsui.UI.iOS.MapControl.GetDeviceIndependentUnits
-  isSpec: "True"
-  fullName: Mapsui.UI.iOS.MapControl.GetDeviceIndependentUnits
-  nameWithType: MapControl.GetDeviceIndependentUnits
 - uid: Mapsui.UI.iOS.MapControl.Initialize
   name: Initialize()
   href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_Initialize
@@ -21017,6 +20960,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.iOS.MapControl.PanLock
   nameWithType: MapControl.PanLock
+- uid: Mapsui.UI.iOS.MapControl.PixelsPerDeviceIndependentUnit
+  name: PixelsPerDeviceIndependentUnit
+  href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_PixelsPerDeviceIndependentUnit
+  commentId: P:Mapsui.UI.iOS.MapControl.PixelsPerDeviceIndependentUnit
+  fullName: Mapsui.UI.iOS.MapControl.PixelsPerDeviceIndependentUnit
+  nameWithType: MapControl.PixelsPerDeviceIndependentUnit
+- uid: Mapsui.UI.iOS.MapControl.PixelsPerDeviceIndependentUnit*
+  name: PixelsPerDeviceIndependentUnit
+  href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_PixelsPerDeviceIndependentUnit_
+  commentId: Overload:Mapsui.UI.iOS.MapControl.PixelsPerDeviceIndependentUnit
+  isSpec: "True"
+  fullName: Mapsui.UI.iOS.MapControl.PixelsPerDeviceIndependentUnit
+  nameWithType: MapControl.PixelsPerDeviceIndependentUnit
 - uid: Mapsui.UI.iOS.MapControl.Refresh
   name: Refresh()
   href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_Refresh
@@ -21095,12 +21051,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.iOS.MapControl.RotationLock
   nameWithType: MapControl.RotationLock
-- uid: Mapsui.UI.iOS.MapControl.ScreenToWorld(Mapsui.Geometries.Point)
-  name: ScreenToWorld(Point)
-  href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_ScreenToWorld_Mapsui_Geometries_Point_
-  commentId: M:Mapsui.UI.iOS.MapControl.ScreenToWorld(Mapsui.Geometries.Point)
-  fullName: Mapsui.UI.iOS.MapControl.ScreenToWorld(Mapsui.Geometries.Point)
-  nameWithType: MapControl.ScreenToWorld(Point)
 - uid: Mapsui.UI.iOS.MapControl.ScreenToWorld(Mapsui.IViewport,System.Single,Mapsui.Geometries.Point)
   name: ScreenToWorld(IViewport, Single, Point)
   href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_ScreenToWorld_Mapsui_IViewport_System_Single_Mapsui_Geometries_Point_
@@ -21114,6 +21064,32 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.iOS.MapControl.ScreenToWorld
   nameWithType: MapControl.ScreenToWorld
+- uid: Mapsui.UI.iOS.MapControl.ToDeviceIndependentUnits(Mapsui.Geometries.Point)
+  name: ToDeviceIndependentUnits(Point)
+  href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_ToDeviceIndependentUnits_Mapsui_Geometries_Point_
+  commentId: M:Mapsui.UI.iOS.MapControl.ToDeviceIndependentUnits(Mapsui.Geometries.Point)
+  fullName: Mapsui.UI.iOS.MapControl.ToDeviceIndependentUnits(Mapsui.Geometries.Point)
+  nameWithType: MapControl.ToDeviceIndependentUnits(Point)
+- uid: Mapsui.UI.iOS.MapControl.ToDeviceIndependentUnits*
+  name: ToDeviceIndependentUnits
+  href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_ToDeviceIndependentUnits_
+  commentId: Overload:Mapsui.UI.iOS.MapControl.ToDeviceIndependentUnits
+  isSpec: "True"
+  fullName: Mapsui.UI.iOS.MapControl.ToDeviceIndependentUnits
+  nameWithType: MapControl.ToDeviceIndependentUnits
+- uid: Mapsui.UI.iOS.MapControl.ToPixels(Mapsui.Geometries.Point)
+  name: ToPixels(Point)
+  href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_ToPixels_Mapsui_Geometries_Point_
+  commentId: M:Mapsui.UI.iOS.MapControl.ToPixels(Mapsui.Geometries.Point)
+  fullName: Mapsui.UI.iOS.MapControl.ToPixels(Mapsui.Geometries.Point)
+  nameWithType: MapControl.ToPixels(Point)
+- uid: Mapsui.UI.iOS.MapControl.ToPixels*
+  name: ToPixels
+  href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_ToPixels_
+  commentId: Overload:Mapsui.UI.iOS.MapControl.ToPixels
+  isSpec: "True"
+  fullName: Mapsui.UI.iOS.MapControl.ToPixels
+  nameWithType: MapControl.ToPixels
 - uid: Mapsui.UI.iOS.MapControl.TouchesBegan(NSSet,UIEvent)
   name: TouchesBegan(NSSet, UIEvent)
   href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_TouchesBegan_NSSet_UIEvent_
@@ -21185,12 +21161,6 @@ references:
   commentId: E:Mapsui.UI.iOS.MapControl.ViewportInitialized
   fullName: Mapsui.UI.iOS.MapControl.ViewportInitialized
   nameWithType: MapControl.ViewportInitialized
-- uid: Mapsui.UI.iOS.MapControl.WorldToScreen(Mapsui.Geometries.Point)
-  name: WorldToScreen(Point)
-  href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_WorldToScreen_Mapsui_Geometries_Point_
-  commentId: M:Mapsui.UI.iOS.MapControl.WorldToScreen(Mapsui.Geometries.Point)
-  fullName: Mapsui.UI.iOS.MapControl.WorldToScreen(Mapsui.Geometries.Point)
-  nameWithType: MapControl.WorldToScreen(Point)
 - uid: Mapsui.UI.iOS.MapControl.WorldToScreen(Mapsui.IViewport,System.Single,Mapsui.Geometries.Point)
   name: WorldToScreen(IViewport, Single, Point)
   href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_WorldToScreen_Mapsui_IViewport_System_Single_Mapsui_Geometries_Point_
@@ -22017,19 +21987,6 @@ references:
   commentId: E:Mapsui.UI.Wpf.MapControl.FeatureInfo
   fullName: Mapsui.UI.Wpf.MapControl.FeatureInfo
   nameWithType: MapControl.FeatureInfo
-- uid: Mapsui.UI.Wpf.MapControl.GetDeviceIndependentUnits
-  name: GetDeviceIndependentUnits()
-  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_GetDeviceIndependentUnits
-  commentId: M:Mapsui.UI.Wpf.MapControl.GetDeviceIndependentUnits
-  fullName: Mapsui.UI.Wpf.MapControl.GetDeviceIndependentUnits()
-  nameWithType: MapControl.GetDeviceIndependentUnits()
-- uid: Mapsui.UI.Wpf.MapControl.GetDeviceIndependentUnits*
-  name: GetDeviceIndependentUnits
-  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_GetDeviceIndependentUnits_
-  commentId: Overload:Mapsui.UI.Wpf.MapControl.GetDeviceIndependentUnits
-  isSpec: "True"
-  fullName: Mapsui.UI.Wpf.MapControl.GetDeviceIndependentUnits
-  nameWithType: MapControl.GetDeviceIndependentUnits
 - uid: Mapsui.UI.Wpf.MapControl.GetMapInfo(Mapsui.Geometries.Point,System.Int32)
   name: GetMapInfo(Point, Int32)
   href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_GetMapInfo_Mapsui_Geometries_Point_System_Int32_
@@ -22082,6 +22039,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Wpf.MapControl.PanLock
   nameWithType: MapControl.PanLock
+- uid: Mapsui.UI.Wpf.MapControl.PixelsPerDeviceIndependentUnit
+  name: PixelsPerDeviceIndependentUnit
+  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_PixelsPerDeviceIndependentUnit
+  commentId: P:Mapsui.UI.Wpf.MapControl.PixelsPerDeviceIndependentUnit
+  fullName: Mapsui.UI.Wpf.MapControl.PixelsPerDeviceIndependentUnit
+  nameWithType: MapControl.PixelsPerDeviceIndependentUnit
+- uid: Mapsui.UI.Wpf.MapControl.PixelsPerDeviceIndependentUnit*
+  name: PixelsPerDeviceIndependentUnit
+  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_PixelsPerDeviceIndependentUnit_
+  commentId: Overload:Mapsui.UI.Wpf.MapControl.PixelsPerDeviceIndependentUnit
+  isSpec: "True"
+  fullName: Mapsui.UI.Wpf.MapControl.PixelsPerDeviceIndependentUnit
+  nameWithType: MapControl.PixelsPerDeviceIndependentUnit
 - uid: Mapsui.UI.Wpf.MapControl.Refresh
   name: Refresh()
   href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_Refresh
@@ -22173,12 +22143,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Wpf.MapControl.RotationLock
   nameWithType: MapControl.RotationLock
-- uid: Mapsui.UI.Wpf.MapControl.ScreenToWorld(Mapsui.Geometries.Point)
-  name: ScreenToWorld(Point)
-  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_ScreenToWorld_Mapsui_Geometries_Point_
-  commentId: M:Mapsui.UI.Wpf.MapControl.ScreenToWorld(Mapsui.Geometries.Point)
-  fullName: Mapsui.UI.Wpf.MapControl.ScreenToWorld(Mapsui.Geometries.Point)
-  nameWithType: MapControl.ScreenToWorld(Point)
 - uid: Mapsui.UI.Wpf.MapControl.ScreenToWorld(Mapsui.IViewport,System.Single,Mapsui.Geometries.Point)
   name: ScreenToWorld(IViewport, Single, Point)
   href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_ScreenToWorld_Mapsui_IViewport_System_Single_Mapsui_Geometries_Point_
@@ -22192,6 +22156,32 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Wpf.MapControl.ScreenToWorld
   nameWithType: MapControl.ScreenToWorld
+- uid: Mapsui.UI.Wpf.MapControl.ToDeviceIndependentUnits(Mapsui.Geometries.Point)
+  name: ToDeviceIndependentUnits(Point)
+  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_ToDeviceIndependentUnits_Mapsui_Geometries_Point_
+  commentId: M:Mapsui.UI.Wpf.MapControl.ToDeviceIndependentUnits(Mapsui.Geometries.Point)
+  fullName: Mapsui.UI.Wpf.MapControl.ToDeviceIndependentUnits(Mapsui.Geometries.Point)
+  nameWithType: MapControl.ToDeviceIndependentUnits(Point)
+- uid: Mapsui.UI.Wpf.MapControl.ToDeviceIndependentUnits*
+  name: ToDeviceIndependentUnits
+  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_ToDeviceIndependentUnits_
+  commentId: Overload:Mapsui.UI.Wpf.MapControl.ToDeviceIndependentUnits
+  isSpec: "True"
+  fullName: Mapsui.UI.Wpf.MapControl.ToDeviceIndependentUnits
+  nameWithType: MapControl.ToDeviceIndependentUnits
+- uid: Mapsui.UI.Wpf.MapControl.ToPixels(Mapsui.Geometries.Point)
+  name: ToPixels(Point)
+  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_ToPixels_Mapsui_Geometries_Point_
+  commentId: M:Mapsui.UI.Wpf.MapControl.ToPixels(Mapsui.Geometries.Point)
+  fullName: Mapsui.UI.Wpf.MapControl.ToPixels(Mapsui.Geometries.Point)
+  nameWithType: MapControl.ToPixels(Point)
+- uid: Mapsui.UI.Wpf.MapControl.ToPixels*
+  name: ToPixels
+  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_ToPixels_
+  commentId: Overload:Mapsui.UI.Wpf.MapControl.ToPixels
+  isSpec: "True"
+  fullName: Mapsui.UI.Wpf.MapControl.ToPixels
+  nameWithType: MapControl.ToPixels
 - uid: Mapsui.UI.Wpf.MapControl.UnSnapRotationDegrees
   name: UnSnapRotationDegrees
   href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_UnSnapRotationDegrees
@@ -22230,12 +22220,6 @@ references:
   commentId: E:Mapsui.UI.Wpf.MapControl.ViewportInitialized
   fullName: Mapsui.UI.Wpf.MapControl.ViewportInitialized
   nameWithType: MapControl.ViewportInitialized
-- uid: Mapsui.UI.Wpf.MapControl.WorldToScreen(Mapsui.Geometries.Point)
-  name: WorldToScreen(Point)
-  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_WorldToScreen_Mapsui_Geometries_Point_
-  commentId: M:Mapsui.UI.Wpf.MapControl.WorldToScreen(Mapsui.Geometries.Point)
-  fullName: Mapsui.UI.Wpf.MapControl.WorldToScreen(Mapsui.Geometries.Point)
-  nameWithType: MapControl.WorldToScreen(Point)
 - uid: Mapsui.UI.Wpf.MapControl.WorldToScreen(Mapsui.IViewport,System.Single,Mapsui.Geometries.Point)
   name: WorldToScreen(IViewport, Single, Point)
   href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_WorldToScreen_Mapsui_IViewport_System_Single_Mapsui_Geometries_Point_
@@ -22760,96 +22744,6 @@ references:
   commentId: F:Mapsui.Utilities.ScaleMethod.FitWidth
   fullName: Mapsui.Utilities.ScaleMethod.FitWidth
   nameWithType: ScaleMethod.FitWidth
-- uid: Mapsui.Utilities.Timer
-  name: Timer
-  href: api/Mapsui.Utilities.Timer.html
-  commentId: T:Mapsui.Utilities.Timer
-  fullName: Mapsui.Utilities.Timer
-  nameWithType: Timer
-- uid: Mapsui.Utilities.Timer.#ctor(Mapsui.Utilities.TimerCallback,System.Int32,System.Object)
-  name: Timer(TimerCallback, Int32, Object)
-  href: api/Mapsui.Utilities.Timer.html#Mapsui_Utilities_Timer__ctor_Mapsui_Utilities_TimerCallback_System_Int32_System_Object_
-  commentId: M:Mapsui.Utilities.Timer.#ctor(Mapsui.Utilities.TimerCallback,System.Int32,System.Object)
-  fullName: Mapsui.Utilities.Timer.Timer(Mapsui.Utilities.TimerCallback, System.Int32, System.Object)
-  nameWithType: Timer.Timer(TimerCallback, Int32, Object)
-- uid: Mapsui.Utilities.Timer.#ctor*
-  name: Timer
-  href: api/Mapsui.Utilities.Timer.html#Mapsui_Utilities_Timer__ctor_
-  commentId: Overload:Mapsui.Utilities.Timer.#ctor
-  isSpec: "True"
-  fullName: Mapsui.Utilities.Timer.Timer
-  nameWithType: Timer.Timer
-- uid: Mapsui.Utilities.Timer.Cancel
-  name: Cancel()
-  href: api/Mapsui.Utilities.Timer.html#Mapsui_Utilities_Timer_Cancel
-  commentId: M:Mapsui.Utilities.Timer.Cancel
-  fullName: Mapsui.Utilities.Timer.Cancel()
-  nameWithType: Timer.Cancel()
-- uid: Mapsui.Utilities.Timer.Cancel*
-  name: Cancel
-  href: api/Mapsui.Utilities.Timer.html#Mapsui_Utilities_Timer_Cancel_
-  commentId: Overload:Mapsui.Utilities.Timer.Cancel
-  isSpec: "True"
-  fullName: Mapsui.Utilities.Timer.Cancel
-  nameWithType: Timer.Cancel
-- uid: Mapsui.Utilities.Timer.Dispose
-  name: Dispose()
-  href: api/Mapsui.Utilities.Timer.html#Mapsui_Utilities_Timer_Dispose
-  commentId: M:Mapsui.Utilities.Timer.Dispose
-  fullName: Mapsui.Utilities.Timer.Dispose()
-  nameWithType: Timer.Dispose()
-- uid: Mapsui.Utilities.Timer.Dispose*
-  name: Dispose
-  href: api/Mapsui.Utilities.Timer.html#Mapsui_Utilities_Timer_Dispose_
-  commentId: Overload:Mapsui.Utilities.Timer.Dispose
-  isSpec: "True"
-  fullName: Mapsui.Utilities.Timer.Dispose
-  nameWithType: Timer.Dispose
-- uid: Mapsui.Utilities.Timer.Finalize
-  name: Finalize()
-  href: api/Mapsui.Utilities.Timer.html#Mapsui_Utilities_Timer_Finalize
-  commentId: M:Mapsui.Utilities.Timer.Finalize
-  fullName: Mapsui.Utilities.Timer.Finalize()
-  nameWithType: Timer.Finalize()
-- uid: Mapsui.Utilities.Timer.Finalize*
-  name: Finalize
-  href: api/Mapsui.Utilities.Timer.html#Mapsui_Utilities_Timer_Finalize_
-  commentId: Overload:Mapsui.Utilities.Timer.Finalize
-  isSpec: "True"
-  fullName: Mapsui.Utilities.Timer.Finalize
-  nameWithType: Timer.Finalize
-- uid: Mapsui.Utilities.Timer.Restart(System.Int32)
-  name: Restart(Int32)
-  href: api/Mapsui.Utilities.Timer.html#Mapsui_Utilities_Timer_Restart_System_Int32_
-  commentId: M:Mapsui.Utilities.Timer.Restart(System.Int32)
-  fullName: Mapsui.Utilities.Timer.Restart(System.Int32)
-  nameWithType: Timer.Restart(Int32)
-- uid: Mapsui.Utilities.Timer.Restart*
-  name: Restart
-  href: api/Mapsui.Utilities.Timer.html#Mapsui_Utilities_Timer_Restart_
-  commentId: Overload:Mapsui.Utilities.Timer.Restart
-  isSpec: "True"
-  fullName: Mapsui.Utilities.Timer.Restart
-  nameWithType: Timer.Restart
-- uid: Mapsui.Utilities.Timer.Start(System.Int32)
-  name: Start(Int32)
-  href: api/Mapsui.Utilities.Timer.html#Mapsui_Utilities_Timer_Start_System_Int32_
-  commentId: M:Mapsui.Utilities.Timer.Start(System.Int32)
-  fullName: Mapsui.Utilities.Timer.Start(System.Int32)
-  nameWithType: Timer.Start(Int32)
-- uid: Mapsui.Utilities.Timer.Start*
-  name: Start
-  href: api/Mapsui.Utilities.Timer.html#Mapsui_Utilities_Timer_Start_
-  commentId: Overload:Mapsui.Utilities.Timer.Start
-  isSpec: "True"
-  fullName: Mapsui.Utilities.Timer.Start
-  nameWithType: Timer.Start
-- uid: Mapsui.Utilities.TimerCallback
-  name: TimerCallback
-  href: api/Mapsui.Utilities.TimerCallback.html
-  commentId: T:Mapsui.Utilities.TimerCallback
-  fullName: Mapsui.Utilities.TimerCallback
-  nameWithType: TimerCallback
 - uid: Mapsui.Utilities.Version
   name: Version
   href: api/Mapsui.Utilities.Version.html
@@ -24293,3 +24187,28 @@ references:
   isSpec: "True"
   fullName: System.DoubleExtensions.IsNanOrZero
   nameWithType: DoubleExtensions.IsNanOrZero
+- uid: System.IO
+  name: System.IO
+  href: api/System.IO.html
+  commentId: N:System.IO
+  fullName: System.IO
+  nameWithType: System.IO
+- uid: System.IO.StreamExtensions
+  name: StreamExtensions
+  href: api/System.IO.StreamExtensions.html
+  commentId: T:System.IO.StreamExtensions
+  fullName: System.IO.StreamExtensions
+  nameWithType: StreamExtensions
+- uid: System.IO.StreamExtensions.ToBytes(Stream)
+  name: ToBytes(Stream)
+  href: api/System.IO.StreamExtensions.html#System_IO_StreamExtensions_ToBytes_Stream_
+  commentId: M:System.IO.StreamExtensions.ToBytes(Stream)
+  fullName: System.IO.StreamExtensions.ToBytes(Stream)
+  nameWithType: StreamExtensions.ToBytes(Stream)
+- uid: System.IO.StreamExtensions.ToBytes*
+  name: ToBytes
+  href: api/System.IO.StreamExtensions.html#System_IO_StreamExtensions_ToBytes_
+  commentId: Overload:System.IO.StreamExtensions.ToBytes
+  isSpec: "True"
+  fullName: System.IO.StreamExtensions.ToBytes
+  nameWithType: StreamExtensions.ToBytes
