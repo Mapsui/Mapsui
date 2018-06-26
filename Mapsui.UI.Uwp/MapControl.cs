@@ -111,6 +111,8 @@ namespace Mapsui.UI.Uwp
             };
         }
 
+        
+        [Obsolete("Use Viewport.ViewportChanged", true)]
         public event EventHandler<ViewChangedEventArgs> ViewChanged;
 
         private void MapControl_PointerWheelChanged(object sender, PointerRoutedEventArgs e)

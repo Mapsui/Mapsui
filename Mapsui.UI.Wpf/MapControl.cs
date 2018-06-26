@@ -152,8 +152,10 @@ namespace Mapsui.UI.Wpf
             };
         }
 
+        [Obsolete("Use Viewport.ViewportChanged", true)]
         public event EventHandler<ViewChangedEventArgs> ViewChanged;
-        public event EventHandler<FeatureInfoEventArgs> FeatureInfo;
+
+        public event EventHandler<FeatureInfoEventArgs> FeatureInfo; // todo: Remove and add sample for alternative
 
         public void RefreshGraphics()
         {
@@ -217,7 +219,7 @@ namespace Mapsui.UI.Wpf
             ViewportLimiter.Limit(_map.Viewport, _map.ZoomMode, _map.ZoomLimits, _map.Resolutions,
                 _map.PanMode, _map.PanLimits, _map.Envelope);
 
-            _map.RefreshData(true);
+            _map.RefreshData(true); //todo: Check if this works properly with 'false' as argument
             RefreshGraphics();
         }
 
@@ -404,7 +406,7 @@ namespace Mapsui.UI.Wpf
                 var touchPosition = e.GetTouchPoint(this).Position.ToMapsui();
                 // todo: Pass the touchDown position. It needs to be set at touch down.
 
-                // TODO Figure out how to do a number of taps for WPF
+                // todo: Figure out how to do a number of taps for WPF
                 Map.InvokeInfo(touchPosition, touchPosition, Renderer.SymbolCache, WidgetTouched, 1);
             }
         }
