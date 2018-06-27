@@ -48,7 +48,6 @@ namespace Mapsui.UI.Android
             AddView(_canvas);
 
             Map = new Map();
-            TryInitializeViewport(ScreenWidth, ScreenHeight);
             Touch += MapView_Touch;
 
             _gestureDetector = new GestureDetector(Context, new GestureDetector.SimpleOnGestureListener());

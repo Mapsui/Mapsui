@@ -111,7 +111,6 @@ namespace Mapsui.UI.Uwp
             };
         }
 
-        
         [Obsolete("Use Viewport.ViewportChanged", true)]
         public event EventHandler<ViewChangedEventArgs> ViewChanged;
 
@@ -286,8 +285,7 @@ namespace Mapsui.UI.Uwp
             e.Handled = true;
         }
 
-        public float PixelDensity => 
-            (float)DisplayInformation.GetForCurrentView().RawPixelsPerViewPixel;
+        public float PixelDensity => (float)DisplayInformation.GetForCurrentView().RawPixelsPerViewPixel;
 
         private void WidgetTouched(IWidget widget, Geometries.Point screenPosition)
         {

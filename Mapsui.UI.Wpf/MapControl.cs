@@ -177,8 +177,7 @@ namespace Mapsui.UI.Wpf
 
         public void ZoomIn()
         {
-            if (ZoomLock)
-                return;
+            if (ZoomLock) return;
 
             if (double.IsNaN(_toResolution))
                 _toResolution = Map.Viewport.Resolution;
@@ -188,20 +187,21 @@ namespace Mapsui.UI.Wpf
             _toResolution = ViewportLimiter.LimitResolution(resolution, ActualWidth, ActualHeight,
                 _map.ZoomMode, _map.ZoomLimits, _map.Resolutions, _map.Envelope);
 
-            ZoomMiddle();
+            _currentMousePosition = new Geometries.Point(ActualWidth / 2, ActualHeight / 2);
+            StartZoomAnimation(Map.Viewport.Resolution, _toResolution); // todo: Perhaps 
         }
 
         public void ZoomOut()
         {
-            if (double.IsNaN(_toResolution))
-                _toResolution = Map.Viewport.Resolution;
+            if (double.IsNaN(_toResolution)) _toResolution = Map.Viewport.Resolution;
 
             var resolution = ZoomHelper.ZoomOut(_map.Resolutions, _toResolution);
 
             _toResolution = ViewportLimiter.LimitResolution(resolution, ActualWidth, ActualHeight,
                 _map.ZoomMode, _map.ZoomLimits, _map.Resolutions, _map.Envelope);
 
-            ZoomMiddle();
+            _currentMousePosition = new Geometries.Point(ActualWidth / 2, ActualHeight / 2);
+            StartZoomAnimation(Map.Viewport.Resolution, _toResolution);
         }
 
         private static void OnResolutionChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
@@ -223,15 +223,8 @@ namespace Mapsui.UI.Wpf
             RefreshGraphics();
         }
 
-        private void ZoomMiddle()
-        {
-            _currentMousePosition = new Geometries.Point(ActualWidth / 2, ActualHeight / 2);
-            StartZoomAnimation(Map.Viewport.Resolution, _toResolution);
-        }
-
         private void MapControlLoaded(object sender, RoutedEventArgs e)
         {
-            TryInitializeViewport(ActualWidth, ActualHeight);
             UpdateSize();
             InitAnimation();
             Focusable = true;
@@ -315,7 +308,6 @@ namespace Mapsui.UI.Wpf
 
         private void MapControlSizeChanged(object sender, SizeChangedEventArgs e)
         {
-            TryInitializeViewport(ActualWidth, ActualHeight);
             Clip = new RectangleGeometry { Rect = new Rect(0, 0, ActualWidth, ActualHeight) };
             UpdateSize();
             _map.RefreshData(true);

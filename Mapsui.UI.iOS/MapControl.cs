@@ -48,8 +48,6 @@ namespace Mapsui.UI.iOS
                 NSLayoutConstraint.Create(this, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, _canvas, NSLayoutAttribute.Bottom, 1.0f, 0.0f)
             });
 
-            TryInitializeViewport(ScreenWidth, ScreenHeight);
-
             ClipsToBounds = true;
             MultipleTouchEnabled = true;
             UserInteractionEnabled = true;
