@@ -49,6 +49,7 @@ namespace Mapsui
         {
             BackColor = Color.White;
             Layers = new LayerCollection();
+            DefaultExtent = () => Envelope;
             Viewport = new Viewport { Center = { X = double.NaN, Y = double.NaN }, Resolution = double.NaN };
         }
 
@@ -443,5 +444,11 @@ namespace Mapsui
         {
             DataChanged?.Invoke(sender, e);
         }
+
+        // todo:
+        // Evaluate if this works out. Perhaps we should pass a viewport and 
+        // let users set the viewport. Adding the navigate methods to the Viewport
+        // would make sense for that scenario.
+        public Func<BoundingBox> DefaultExtent { get; set; }
     }
 }
