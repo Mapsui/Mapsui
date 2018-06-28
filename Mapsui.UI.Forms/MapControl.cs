@@ -66,9 +66,9 @@ namespace Mapsui.UI.Forms
 
         public float SkiaScale => _skiaScale;
 
-        public float ScreenWidth => (float)Application.Current.MainPage.Width;
+        public float ScreenWidth => (float)this.Width;
 
-        public float ScreenHeight => (float)Application.Current.MainPage.Height;
+        public float ScreenHeight => (float)this.Height;
 
         public ISymbolCache SymbolCache => _renderer.SymbolCache;
 
