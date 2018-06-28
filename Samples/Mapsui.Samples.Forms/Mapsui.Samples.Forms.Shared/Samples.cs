@@ -63,6 +63,7 @@ namespace Mapsui.Samples.Forms
             mapView.MyLocationLayer.IsMoving = mapView.MyLocationEnabled;
             mapView.MyLocationEnabled = true;
 
+
             return true;
         }
 
@@ -71,7 +72,8 @@ namespace Mapsui.Samples.Forms
             var circle = new Circle
             {
                 Center = e.Point,
-                Radius = Distance.FromMeters(rnd.Next(0,100)),
+                Radius = Distance.FromMeters(rnd.Next(100000, 1000000)),
+                Quality = rnd.Next(0, 60),
                 StrokeColor = new Color(rnd.Next(0, 255) / 255.0, rnd.Next(0, 255) / 255.0, rnd.Next(0, 255) / 255.0),
                 FillColor = new Color(rnd.Next(0, 255) / 255.0, rnd.Next(0, 255) / 255.0, rnd.Next(0, 255) / 255.0, rnd.Next(0,255) / 255.0)
             };
@@ -184,7 +186,7 @@ namespace Mapsui.Samples.Forms
                     mapView.Pins.Add(pin);
                     break;
                 case 2:
-                    var stream = assembly.GetManifestResourceStream($"Mapsui.Samples.Forms.{device}.Ghostscript_Tiger.svg");
+                    var stream = assembly.GetManifestResourceStream($"Mapsui.Samples.Forms.{device}.Images.Ghostscript_Tiger.svg");
                     StreamReader reader = new StreamReader(stream);
                     string svgString = reader.ReadToEnd();
                     mapView.Pins.Add(new Pin(mapView)
@@ -197,7 +199,7 @@ namespace Mapsui.Samples.Forms
                     });
                     break;
                 case 3:
-                    var icon = assembly.GetManifestResourceStream($"Mapsui.Samples.Forms.{device}.loc.png").ToBytes();
+                    var icon = assembly.GetManifestResourceStream($"Mapsui.Samples.Forms.{device}.Images.loc.png").ToBytes();
                     mapView.Pins.Add(new Pin(mapView)
                     {
                         Label = $"PinType.Icon {markerNum++}",

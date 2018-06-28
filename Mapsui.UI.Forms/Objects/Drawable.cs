@@ -9,6 +9,9 @@ using Xamarin.Forms;
 
 namespace Mapsui.UI.Objects
 {
+    /// <summary>
+    /// Base class for all drawables like polyline, polygon and circle
+    /// </summary>
     public class Drawable : BindableObject, IClickable, IFeatureProvider
     {
         public static readonly BindableProperty LabelProperty = BindableProperty.Create(nameof(Label), typeof(string), typeof(Pin), default(string));
@@ -96,8 +99,7 @@ namespace Mapsui.UI.Objects
 
         internal void HandleClicked(DrawableClickedEventArgs e)
         {
-            var handler = Clicked;
-            handler?.Invoke(this, e);
+            Clicked?.Invoke(this, e);
         }
 
         protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)

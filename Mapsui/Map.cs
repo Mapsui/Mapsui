@@ -94,7 +94,7 @@ namespace Mapsui
         /// </summary>
         public LayerCollection Layers
         {
-            get { return _layers; }
+            get => _layers;
             private set
             {
                 var tempLayers = _layers;
@@ -188,11 +188,10 @@ namespace Mapsui
         ///  </summary>
         public Color BackColor
         {
-            get { return _backColor; }
+            get => _backColor;
             set
             {
-                if (_backColor == value)
-                    return;
+                if (_backColor == value) return;
                 _backColor = value;
                 OnRefreshGraphics();
             }
@@ -252,35 +251,35 @@ namespace Mapsui
         /// </summary>
         /// <param name="screenPosition">Screen position to check for widgets and features</param>
         /// <param name="startScreenPosition">Screen position of Viewport/MapControl</param>
-        /// <param name="scale">Scale of scrren. Normally is 1, but could be greater.</param>
         /// <param name="symbolCache">Cache for symbols to determin size</param>
         /// <param name="widgetCallback">Callback, which is called when Widget is hiten</param>
         /// <param name="numTaps">Number of clickes/taps</param>
         /// <returns>True, if something done </returns>
-        public bool InvokeInfo(Point screenPosition, Point startScreenPosition, float scale, ISymbolCache symbolCache,
+        public bool InvokeInfo(Point screenPosition, Point startScreenPosition, ISymbolCache symbolCache,
             Action<IWidget, Point> widgetCallback, int numTaps)
         {
             var layerWidgets = Layers.Select(l => l.Attribution).Where(a => a != null);
             var allWidgets = layerWidgets.Concat(Widgets).ToList(); // Concat layer widgets and map widgets.
-            
+
             // First check if a Widget is clicked. In the current design they are always on top of the map.
-            var widget = WidgetTouch.GetWidget(screenPosition, startScreenPosition, scale, allWidgets);
+            var widget = WidgetTouch.GetWidget(screenPosition, startScreenPosition, allWidgets);
             if (widget != null)
             {
-                // TODO how should widgetCallback have a handled type thing?
+                // todo:
+                // How should widgetCallback have a handled type thing?
                 // Widgets should be iterated through rather than getting a single widget, 
                 // based on Z index and then called until handled = true; Ordered By highest Z
-
-                widgetCallback(widget, new Point(screenPosition.X / scale, screenPosition.Y / scale));
-                return true; 
+                widgetCallback(widget, screenPosition);
+                return true;
             }
 
             if (Info == null) return false;
-            var mapInfo = InfoHelper.GetMapInfo(Viewport, screenPosition, scale, InfoLayers, symbolCache);
+            var mapInfo = InfoHelper.GetMapInfo(Viewport, screenPosition, InfoLayers, symbolCache);
 
             if (mapInfo != null)
             {
-                // TODO Info items should be iterated through rather than getting a single item, 
+                // todo:
+                // Info items should be iterated through rather than getting a single item, 
                 // based on Z index and then called until handled = true; Ordered By highest Z
                 var mapInfoEventArgs = new MapInfoEventArgs
                 {
@@ -301,13 +300,12 @@ namespace Mapsui
         ///  Check, if mouse is hovered over a feature at a given screen position
         /// </summary>
         /// <param name="screenPosition">Screen position to check for widgets and features</param>
-        /// <param name="scale">Scale of scrren. Normally is 1, but could be greater.</param>
         /// <param name="symbolCache">Cache for symbols to determin size</param>
-        public void InvokeHover(Point screenPosition, float scale, ISymbolCache symbolCache)
+        public void InvokeHover(Point screenPosition, ISymbolCache symbolCache)
         {
             if (Hover == null) return;
             if (HoverLayers.Count == 0) return;
-            var mapInfo = InfoHelper.GetMapInfo(Viewport, screenPosition, scale, HoverLayers, symbolCache);
+            var mapInfo = InfoHelper.GetMapInfo(Viewport, screenPosition, HoverLayers, symbolCache);
 
             if (mapInfo?.Feature != _previousHoverEventArgs?.MapInfo.Feature) // only notify when the feature changes
             {
@@ -317,7 +315,7 @@ namespace Mapsui
                     NumTaps = 0,
                     Handled = false
                 };
-                
+
                 _previousHoverEventArgs = mapInfoEventArgs;
                 Hover?.Invoke(this, mapInfoEventArgs);
             }

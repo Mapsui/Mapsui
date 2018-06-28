@@ -1,5 +1,4 @@
 ﻿using System;
-using Mapsui.Geometries;
 using Mapsui.Rendering;
 
 namespace Mapsui.UI
@@ -22,14 +21,20 @@ namespace Mapsui.UI
 
         double ReSnapRotationDegrees { get; set; }
 
-        Point WorldToScreen(Point worldPosition);
-        
-        Point ScreenToWorld(Point screenPosition);
-
         void Unsubscribe();
 
-        float GetDeviceIndependentUnits();
+        float PixelsPerDeviceIndependentUnit { get; }
 
         IRenderer Renderer { get; }
+
+        /// <summary>
+        /// The map's screen width in device independent units
+        /// </summary>
+        float ScreenWidth { get; }
+
+        /// <summary>
+        /// The map's screen height in device independent units
+        /// </summary>
+        float ScreenHeight { get; }
     }
 }

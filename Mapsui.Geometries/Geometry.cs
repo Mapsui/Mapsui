@@ -45,16 +45,19 @@ namespace Mapsui.Geometries
         /// </summary>
         /// <remarks>The envelope is actually the <see cref="Geometries.BoundingBox" /> converted into a polygon.</remarks>
         /// <seealso cref="BoundingBox" />
-        public Geometry Envelope()
+        public Geometry Envelope
         {
-            var box = BoundingBox;
-            var envelope = new Polygon();
-            envelope.ExteriorRing.Vertices.Add(box.Min); //minx miny
-            envelope.ExteriorRing.Vertices.Add(new Point(box.Max.X, box.Min.Y)); //maxx minu
-            envelope.ExteriorRing.Vertices.Add(box.Max); //maxx maxy
-            envelope.ExteriorRing.Vertices.Add(new Point(box.Min.X, box.Max.Y)); //minx maxy
-            envelope.ExteriorRing.Vertices.Add(envelope.ExteriorRing.StartPoint); //close ring
-            return envelope;
+            get
+            {
+                var box = BoundingBox;
+                var envelope = new Polygon();
+                envelope.ExteriorRing.Vertices.Add(box.Min); //minx miny
+                envelope.ExteriorRing.Vertices.Add(new Point(box.Max.X, box.Min.Y)); //maxx minu
+                envelope.ExteriorRing.Vertices.Add(box.Max); //maxx maxy
+                envelope.ExteriorRing.Vertices.Add(new Point(box.Min.X, box.Max.Y)); //minx maxy
+                envelope.ExteriorRing.Vertices.Add(envelope.ExteriorRing.StartPoint); //close ring
+                return envelope;
+            }
         }
 
         [Obsolete("Use the BoundingBox field instead")]

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
@@ -38,6 +36,10 @@ namespace Mapsui.UI.Forms
         public static readonly BindableProperty IsCalloutVisibleProperty = BindableProperty.Create(nameof(IsCalloutVisible), typeof(bool), typeof(Pin), default(bool));
         public static readonly BindableProperty TransparencyProperty = BindableProperty.Create(nameof(Transparency), typeof(float), typeof(Pin), 0f);
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:Mapsui.UI.Forms.Pin"/> class
+        /// </summary>
+        /// <param name="mapView">MapView to which this pin belongs</param>
         public Pin(MapView mapView)
         {
             _mapView = mapView;
@@ -64,7 +66,7 @@ namespace Mapsui.UI.Forms
         }
 
         /// <summary>
-        /// Scaling of pin, place where anchor is
+        /// Scaling of pin
         /// </summary>
         public float Scale
         {
@@ -196,6 +198,10 @@ namespace Mapsui.UI.Forms
 
         private Feature feature;
 
+        /// <summary>
+        /// Mapsui feature for this pin
+        /// </summary>
+        /// <value>Mapsui feature</value>
         public Feature Feature
         {
             get
@@ -206,6 +212,10 @@ namespace Mapsui.UI.Forms
 
         private Callout callout;
 
+        /// <summary>
+        /// Gets the callout
+        /// </summary>
+        /// <value>Callout for this pin</value>
         public Callout Callout
         {
             get
@@ -238,6 +248,12 @@ namespace Mapsui.UI.Forms
             }
         }
 
+        /// <summary>
+        /// Determines whether the specified <see cref="object"/> is equal to the current <see cref="T:Mapsui.UI.Forms.Pin"/>.
+        /// </summary>
+        /// <param name="obj">The <see cref="object"/> to compare with the current <see cref="T:Mapsui.UI.Forms.Pin"/>.</param>
+        /// <returns><c>true</c> if the specified <see cref="object"/> is equal to the current
+        /// <see cref="T:Mapsui.UI.Forms.Pin"/>; otherwise, <c>false</c>.</returns>
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj))
@@ -362,26 +378,28 @@ namespace Mapsui.UI.Forms
                 {
                     // There is already a registered bitmap, so delete it
                     BitmapRegistry.Instance.Unregister(bitmapId);
+                    // We don't have any bitmap up to now
+                    bitmapId = -1;
                 }
 
-                // We don't have any bitmap up to now
-                bitmapId = -1;
+                Stream stream = null;
 
                 switch (Type)
                 {
-                    case PinType.Pin:
                     case PinType.Svg:
+                        // Load the SVG document
+                        if (!string.IsNullOrEmpty(Svg))
+                            stream = new MemoryStream(Encoding.UTF8.GetBytes(Svg));
+                        if (stream == null)
+                            return;
+                        bitmapId = BitmapRegistry.Instance.Register(stream);
+                        break;
+                    case PinType.Pin:
                         // First we have to create a bitmap from Svg code
                         // Create a new SVG object
                         var svg = new SkiaSharp.Extended.Svg.SKSvg();
-                        var assembly = typeof(Pin).GetTypeInfo().Assembly;
                         // Load the SVG document
-                        Stream stream = null;
-                        if (Type == PinType.Pin)
-                            stream = assembly.GetManifestResourceStream($"Mapsui.UI.Images.Pin.svg");
-                        else
-                            if (!string.IsNullOrEmpty(Svg))
-                                stream = new MemoryStream(Encoding.UTF8.GetBytes(Svg));
+                        stream = Mapsui.Utilities.EmbeddedResourceLoader.Load($"Images.Pin.svg", typeof(Pin));
                         if (stream == null)
                             return;
                         svg.Load(stream);
@@ -394,9 +412,8 @@ namespace Mapsui.UI.Forms
                         // Now draw Svg image to bitmap
                         using (var paint = new SKPaint())
                         {
-                            if (Type == PinType.Pin)
-                                // Replace color while drawing
-                                paint.ColorFilter = SKColorFilter.CreateBlendMode(Color.ToSKColor(), SKBlendMode.SrcIn); // use the source color
+                            // Replace color while drawing
+                            paint.ColorFilter = SKColorFilter.CreateBlendMode(Color.ToSKColor(), SKBlendMode.SrcIn); // use the source color
                             canvas.Clear();
                             canvas.DrawPicture(svg.Picture, paint);
                         }
@@ -420,6 +437,7 @@ namespace Mapsui.UI.Forms
                         }
                         break;
                 }
+
                 // If we have a bitmapId (and we should have one), than draw bitmap, otherwise nothing
                 if (bitmapId != -1)
                 {

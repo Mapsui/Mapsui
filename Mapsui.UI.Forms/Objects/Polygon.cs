@@ -19,6 +19,9 @@ namespace Mapsui.UI.Forms
         private readonly ObservableCollection<Position> _positions = new ObservableCollection<Position>();
         private readonly ObservableCollection<Position[]> _holes = new ObservableCollection<Position[]>();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:Mapsui.UI.Forms.Polygon"/> class.
+        /// </summary>
         public Polygon()
         {
             _positions.CollectionChanged += OnPositionsCollectionChanged;

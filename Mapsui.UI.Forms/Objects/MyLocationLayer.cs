@@ -2,24 +2,28 @@
 using Mapsui.Providers;
 using Mapsui.Styles;
 using Mapsui.UI.Forms;
-using SkiaSharp;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Reflection;
 using Xamarin.Forms;
 
 namespace Mapsui.UI.Objects
 {
+    /// <summary>
+    /// A layer to display a symbol for own location
+    /// </summary>
+    /// <remarks>
+    /// There are two different symbols for own loaction: one is used when there isn't a change in position (still),
+    /// and one is used, if the position changes (moving).
+    /// </remarks>
     public class MyLocationLayer : Layer
     {
         MapView mapView;
         Feature feature;
-        byte[] bitmapMoving;
-        byte[] bitmapStill;
-        int bitmapMovingId = -1;
-        int bitmapStillId = -1;
+
+        private static int bitmapMovingId = -1;
+        private static int bitmapStillId = -1;
 
         private const string animationMyLocationName = "animationMyLocationPosition";
         private const string animationMyDirectionName = "animationMyDirectionPosition";
@@ -49,6 +53,10 @@ namespace Mapsui.UI.Objects
 
         Position myLocation = new Position(0, 0);
 
+        /// <summary>
+        /// Position of location, that is displayed
+        /// </summary>
+        /// <value>Position of location</value>
         public Position MyLocation
         {
             get
@@ -57,33 +65,57 @@ namespace Mapsui.UI.Objects
             }
         }
 
+        /// <summary>
+        /// Direction of device at location
+        /// </summary>
+        /// <value>Direction at location</value>
         public double Direction { get; set; } = 0.0;
+
+        /// <summary>
+        /// Speed of moving
+        /// </summary>
+        /// <value>Speed of moving</value>
         public double Speed { get; } = 0.0;
+
+        /// <summary>
+        /// Scale of symbol
+        /// </summary>
+        /// <value>Scale of symbol</value>
         public double Scale { get; set; } = 1.0;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:Mapsui.UI.Objects.MyLocationLayer"/> class.
+        /// </summary>
+        /// <param name="view">MapView, to which this layer belongs</param>
         public MyLocationLayer(MapView view)
         {
             if (view == null)
                 throw new ArgumentNullException("MapView shouldn't be null");
-
+            
             mapView = view;
 
             Enabled = false;
 
-            bitmapMoving = CreateImage("MyLocationMoving");
-
-            if (bitmapMoving != null)
+            if (bitmapMovingId == -1)
             {
-                // Register bitmap
-                bitmapMovingId = BitmapRegistry.Instance.Register(new MemoryStream(bitmapMoving));
+                var bitmapMoving = Mapsui.Utilities.EmbeddedResourceLoader.Load($"Images.MyLocationMoving.svg", typeof(MyLocationLayer));
+
+                if (bitmapMoving != null)
+                {
+                    // Register bitmap
+                    bitmapMovingId = BitmapRegistry.Instance.Register(bitmapMoving);
+                }
             }
 
-            bitmapStill = CreateImage("MyLocationStill");
-
-            if (bitmapStill != null)
+            if (bitmapStillId == -1)
             {
-                // Register bitmap
-                bitmapStillId = BitmapRegistry.Instance.Register(new MemoryStream(bitmapStill));
+                var bitmapStill = Mapsui.Utilities.EmbeddedResourceLoader.Load($"Images.MyLocationStill.svg", typeof(MyLocationLayer));
+
+                if (bitmapStill != null)
+                {
+                    // Register bitmap
+                    bitmapStillId = BitmapRegistry.Instance.Register(bitmapStill);
+                }
             }
 
             feature = new Feature
@@ -99,7 +131,7 @@ namespace Mapsui.UI.Objects
                 BitmapId = bitmapStillId,
                 SymbolScale = Scale,
                 SymbolRotation = Direction,
-                SymbolOffset = new Offset(16, 16),
+                SymbolOffset = new Offset(0, 0),
                 Opacity = 1,
             });
 
@@ -107,7 +139,11 @@ namespace Mapsui.UI.Objects
             Style = null;
         }
 
-        // Update my location
+
+        /// <summary>
+        /// Updates my location
+        /// </summary>
+        /// <param name="newLocation">New location</param>
         public void UpdateMyLocation(Position newLocation)
         {
             if (!MyLocation.Equals(newLocation))
@@ -134,14 +170,19 @@ namespace Mapsui.UI.Objects
                 }, 0.0, 1.0);
 
                 // At the end, update viewport
-                animation.Commit(mapView, animationMyLocationName, 100, 3000, finished: (s, v) => mapView.Map.ViewChanged(true));
+                animation.Commit(mapView, animationMyLocationName, 100, 3000, finished: (s, v) => mapView.Map.RefreshData(true));
             }
         }
 
+        /// <summary>
+        /// Updates my direction
+        /// </summary>
+        /// <param name="newDirection">New direction</param>
+        /// <param name="newViewportRotation">New viewport rotation</param>
         public void UpdateMyDirection(double newDirection, double newViewportRotation)
         {
-            var newRotation = newDirection - newViewportRotation;
-            var oldRotation = ((SymbolStyle)feature.Styles.First()).SymbolRotation;
+            var newRotation = (int)(newDirection - newViewportRotation);
+            var oldRotation = (int)((SymbolStyle)feature.Styles.First()).SymbolRotation;
 
             if (newRotation != oldRotation)
             {
@@ -151,11 +192,20 @@ namespace Mapsui.UI.Objects
                 if (mapView.AnimationIsRunning(animationMyDirectionName))
                     mapView.AbortAnimation(animationMyDirectionName);
 
+                if (newRotation < 90 && oldRotation > 270)
+                {
+                    newRotation += 360;
+                }
+                else if (newRotation > 270 && oldRotation < 90)
+                {
+                    oldRotation += 360;
+                }
+
                 var animation = new Animation((v) =>
                 {
-                    if (v != ((SymbolStyle)feature.Styles.First()).SymbolRotation)
+                    if ((int)v != (int)((SymbolStyle)feature.Styles.First()).SymbolRotation)
                     {
-                        ((SymbolStyle)feature.Styles.First()).SymbolRotation = v;
+                        ((SymbolStyle)feature.Styles.First()).SymbolRotation = (int)v % 360;
                         mapView.Refresh();
                     }
                 }, oldRotation, newRotation);
@@ -164,6 +214,10 @@ namespace Mapsui.UI.Objects
             }
         }
 
+        /// <summary>
+        /// Updates my speed
+        /// </summary>
+        /// <param name="newSpeed">New speed</param>
         public void UpdateMySpeed(double newSpeed)
         {
             var modified = false;
@@ -196,41 +250,6 @@ namespace Mapsui.UI.Objects
             }
 
             return modified;
-        }
-
-        private byte[] CreateImage(string resName)
-        {
-            // First we have to create a bitmap from Svg code
-            // Create a new SVG object
-            var svg = new SkiaSharp.Extended.Svg.SKSvg();
-            var assembly = typeof(Pin).GetTypeInfo().Assembly;
-            // Load the SVG document
-            Stream stream = assembly.GetManifestResourceStream($"Mapsui.UI.Images.{resName}.svg");
-            if (stream == null)
-                return null;
-            svg.Load(stream);
-            // Create bitmap to hold canvas
-            var info = new SKImageInfo((int)svg.CanvasSize.Width, (int)svg.CanvasSize.Height) { AlphaType = SKAlphaType.Premul };
-            var bitmap = new SKBitmap(info);
-            var canvas = new SKCanvas(bitmap);
-            // Now draw Svg image to bitmap
-            using (var paint = new SKPaint())
-            {
-                // Replace color while drawing
-                //paint.ColorFilter = SKColorFilter.CreateBlendMode(Color.ToSKColor(), SKBlendMode.SrcIn); // use the source color
-                canvas.Clear();
-                canvas.DrawPicture(svg.Picture, paint);
-            }
-            // Now convert canvas to bitmap
-            byte[] bitmapData;
-
-            using (var image = SKImage.FromBitmap(bitmap))
-            using (var data = image.Encode(SKEncodedImageFormat.Png, 100))
-            {
-                bitmapData = data.ToArray();
-            }
-            
-            return bitmapData;
         }
     }
 }

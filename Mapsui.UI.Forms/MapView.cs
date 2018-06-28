@@ -24,21 +24,30 @@ namespace Mapsui.UI.Forms
         private MyLocationLayer _mapMyLocationLayer;
         private Layer _mapPinLayer;
         private Layer _mapDrawableLayer;
-        private BoxView _mapButtons;
+        private StackLayout _mapButtons;
+        private Image _mapZoomInButton;
+        private Image _mapZoomOutButton;
+        private Image _mapSpacingButton1;
+        private Image _mapMyLocationButton;
+        private Image _mapSpacingButton2;
+        private Image _mapNorthingButton;
 
         readonly ObservableCollection<Pin> _pins = new ObservableCollection<Pin>();
         readonly ObservableCollection<Drawable> _drawable = new ObservableCollection<Drawable>();
         readonly ObservableCollection<Callout> _callouts = new ObservableCollection<Callout>();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:Mapsui.UI.Forms.MapView"/> class.
+        /// </summary>
         public MapView()
         {
             MyLocationEnabled = false;
-            MyLocationFollow = true;
+            MyLocationFollow = false;
 
             IsClippedToBounds = true;
 
             _mapControl = new MapControl();
-            _mapMyLocationLayer = new MyLocationLayer(this);
+            _mapMyLocationLayer = new MyLocationLayer(this) { Enabled = true };
             _mapPinLayer = new Layer(PinLayerName);
             _mapDrawableLayer = new Layer(DrawableLayerName);
 
@@ -47,14 +56,52 @@ namespace Mapsui.UI.Forms
             _mapControl.DoubleTap += HandlerTap;
             _mapControl.LongTap += HandlerLongTap;
             _mapControl.Hovered += HandlerHover;
-            _mapControl.TouchMove += (s, e) => MyLocationFollow = false;
+            _mapControl.TouchMove += (s, e) =>
+            {
+                Device.BeginInvokeOnMainThread(() => MyLocationFollow = false);
+            };
 
             AbsoluteLayout.SetLayoutBounds(_mapControl, new Rectangle(0, 0, 1, 1));
             AbsoluteLayout.SetLayoutFlags(_mapControl, AbsoluteLayoutFlags.All);
 
-            _mapButtons = new BoxView { Color = Xamarin.Forms.Color.DarkGray, Opacity=0.8, IsVisible=false };
+            _mapZoomInButton = new Image { BackgroundColor = Color.Green, WidthRequest = 40, HeightRequest = 40 };
+            _mapZoomInButton.GestureRecognizers.Add(new TapGestureRecognizer
+            {
+                Command = new Command((object obj) => Device.BeginInvokeOnMainThread(() => _mapControl.Map.NavigateTo(_mapControl.Map.Viewport.Resolution /= 2)))
+            });
 
-            AbsoluteLayout.SetLayoutBounds(_mapButtons, new Rectangle(0.99, 0.5, 32, 96));
+            _mapZoomOutButton = new Image { BackgroundColor = Color.LightGreen, WidthRequest = 40, HeightRequest = 40 };
+            _mapZoomOutButton.GestureRecognizers.Add(new TapGestureRecognizer
+            {
+                Command = new Command((object obj) => Device.BeginInvokeOnMainThread(() => _mapControl.Map.NavigateTo(_mapControl.Map.Viewport.Resolution *= 2)))
+            });
+
+            _mapSpacingButton1 = new Image { BackgroundColor = Color.Transparent, WidthRequest = 40, HeightRequest = 8 };
+
+            _mapMyLocationButton = new Image { BackgroundColor = Color.Red, WidthRequest = 40, HeightRequest = 40 };
+            _mapMyLocationButton.GestureRecognizers.Add(new TapGestureRecognizer
+            {
+                Command = new Command((object obj) => Device.BeginInvokeOnMainThread(() => MyLocationFollow = true))
+            });
+
+            _mapSpacingButton2 = new Image { BackgroundColor = Color.Transparent, WidthRequest = 40, HeightRequest = 8 };
+
+            _mapNorthingButton = new Image { BackgroundColor = Color.Cyan, WidthRequest = 40, HeightRequest = 40 };
+            _mapNorthingButton.GestureRecognizers.Add(new TapGestureRecognizer
+            {
+                Command = new Command((object obj) => Device.BeginInvokeOnMainThread(() => _mapControl.Map.Viewport.Rotation = 0))
+            });
+
+            _mapButtons = new StackLayout { BackgroundColor = Color.Transparent, Opacity = 0.8, Spacing = 0, IsVisible = true };
+
+            _mapButtons.Children.Add(_mapZoomInButton);
+            _mapButtons.Children.Add(_mapZoomOutButton);
+            _mapButtons.Children.Add(_mapSpacingButton1);
+            _mapButtons.Children.Add(_mapMyLocationButton);
+            _mapButtons.Children.Add(_mapSpacingButton2);
+            _mapButtons.Children.Add(_mapNorthingButton);
+
+            AbsoluteLayout.SetLayoutBounds(_mapButtons, new Rectangle(0.95, 0.03, 40, 176));
             AbsoluteLayout.SetLayoutFlags(_mapButtons, AbsoluteLayoutFlags.PositionProportional);
 
             Content = new AbsoluteLayout
@@ -79,9 +126,24 @@ namespace Mapsui.UI.Forms
         /// Events
         /// </summary>
 
+        ///<summary>
+        /// Occurs when a pin clicked
+        /// </summary>
         public event EventHandler<PinClickedEventArgs> PinClicked;
+
+        /// <summary>
+        /// Occurs when selected pin changed
+        /// </summary>
         public event EventHandler<SelectedPinChangedEventArgs> SelectedPinChanged;
+
+        /// <summary>
+        /// Occurs when map clicked
+        /// </summary>
         public event EventHandler<MapClickedEventArgs> MapClicked;
+
+        /// <summary>
+        /// Occurs when map long clicked
+        /// </summary>
         public event EventHandler<MapLongClickedEventArgs> MapLongClicked;
 
         /// <summary>
@@ -91,10 +153,12 @@ namespace Mapsui.UI.Forms
         public static readonly BindableProperty SelectedPinProperty = BindableProperty.Create(nameof(SelectedPin), typeof(Pin), typeof(MapView), default(Pin), defaultBindingMode: BindingMode.TwoWay);
         public static readonly BindableProperty MyLocationEnabledProperty = BindableProperty.Create(nameof(MyLocationEnabled), typeof(bool), typeof(MapView), false, defaultBindingMode: BindingMode.TwoWay);
         public static readonly BindableProperty MyLocationFollowProperty = BindableProperty.Create(nameof(MyLocationFollow), typeof(bool), typeof(MapView), false, defaultBindingMode: BindingMode.TwoWay);
-        public static readonly BindableProperty AllowPinchRotationProperty = BindableProperty.Create(nameof(AllowPinchRotationProperty), typeof(bool), typeof(MapView), default(bool));
         public static readonly BindableProperty UnSnapRotationDegreesProperty = BindableProperty.Create(nameof(UnSnapRotationDegreesProperty), typeof(double), typeof(MapView), default(double));
         public static readonly BindableProperty ReSnapRotationDegreesProperty = BindableProperty.Create(nameof(ReSnapRotationDegreesProperty), typeof(double), typeof(MapView), default(double));
-        
+        public static readonly BindableProperty RotationLockProperty = BindableProperty.Create(nameof(RotationLockProperty), typeof(bool), typeof(MapView), default(bool));
+        public static readonly BindableProperty ZoomLockProperty = BindableProperty.Create(nameof(ZoomLockProperty), typeof(bool), typeof(MapView), default(bool));
+        public static readonly BindableProperty PanLockProperty = BindableProperty.Create(nameof(PanLockProperty), typeof(bool), typeof(MapView), default(bool));
+
         ///<summary>
         /// Properties
         ///</summary>
@@ -200,15 +264,6 @@ namespace Mapsui.UI.Forms
         }
 
         /// <summary>
-        /// Enable rotation with pinch gesture
-        /// </summary>
-        public bool AllowPinchRotation
-        {
-            get { return (bool)GetValue(AllowPinchRotationProperty); }
-            set { SetValue(AllowPinchRotationProperty, value); }
-        }
-
-        /// <summary>
         /// Number of degrees, before the rotation starts
         /// </summary>
         public double UnSnapRotationDegrees
@@ -227,6 +282,33 @@ namespace Mapsui.UI.Forms
         }
 
         /// <summary>
+        /// Enable rotation with pinch gesture
+        /// </summary>
+        public bool RotationLock
+        {
+            get { return (bool)GetValue(RotationLockProperty); }
+            set { SetValue(RotationLockProperty, value); }
+        }
+
+        /// <summary>
+        /// Enable zooming
+        /// </summary>
+        public bool ZoomLock
+        {
+            get { return (bool)GetValue(ZoomLockProperty); }
+            set { SetValue(ZoomLockProperty, value); }
+        }
+
+        /// <summary>
+        /// Enable paning
+        /// </summary>
+        public bool PanLock
+        {
+            get { return (bool)GetValue(PanLockProperty); }
+            set { SetValue(PanLockProperty, value); }
+        }
+
+        /// <summary>
         /// Refresh screen
         /// </summary>
         public void Refresh()
@@ -236,6 +318,11 @@ namespace Mapsui.UI.Forms
 
         private Callout callout;
 
+        /// <summary>
+        /// Creates a callout at the given position
+        /// </summary>
+        /// <returns>The callout</returns>
+        /// <param name="position">Position of callout</param>
         public Callout CreateCallout(Position position)
         {
             if (position == null)
@@ -256,6 +343,10 @@ namespace Mapsui.UI.Forms
             return result;
         }
 
+        /// <summary>
+        /// Shows given callout
+        /// </summary>
+        /// <param name="callout">Callout to show</param>
         public void ShowCallout(Callout callout)
         {
             if (callout == null)
@@ -278,6 +369,10 @@ namespace Mapsui.UI.Forms
             callout.Show();
         }
 
+        /// <summary>
+        /// Hides given callout
+        /// </summary>
+        /// <param name="callout">Callout to hide</param>
         public void HideCallout(Callout callout)
         {
             if (callout == null)
@@ -314,14 +409,32 @@ namespace Mapsui.UI.Forms
                 Refresh();
             }
 
-            if (propertyName.Equals(nameof(AllowPinchRotation)))
-                _mapControl.RotationLock = AllowPinchRotation;
+            if (propertyName.Equals(nameof(MyLocationFollow)))
+            {
+                _mapMyLocationButton.IsEnabled = !MyLocationFollow;
 
-            if (propertyName.Equals(nameof(UnSnapRotationDegrees)))
+                if (MyLocationFollow)
+                {
+                    _mapControl.Map.NavigateTo(_mapMyLocationLayer.MyLocation.ToMapsui());    
+                }
+
+                Refresh();
+            }
+
+            if (propertyName.Equals(nameof(UnSnapRotationDegreesProperty)))
                 _mapControl.UnSnapRotationDegrees = UnSnapRotationDegrees;
 
-            if (propertyName.Equals(nameof(ReSnapRotationDegrees)))
+            if (propertyName.Equals(nameof(ReSnapRotationDegreesProperty)))
                 _mapControl.ReSnapRotationDegrees = ReSnapRotationDegrees;
+            
+            if (propertyName.Equals(nameof(RotationLockProperty)))
+                _mapControl.RotationLock = RotationLock;
+
+            if (propertyName.Equals(nameof(ZoomLockProperty)))
+                _mapControl.ZoomLock = ZoomLock;
+
+            if (propertyName.Equals(nameof(PanLockProperty)))
+                _mapControl.PanLock = PanLock;
         }
 
         /// <summary>
@@ -507,7 +620,7 @@ namespace Mapsui.UI.Forms
             // Is there a widget at this position
             // Is there a drawable at this position
             if (Map != null)
-                e.Handled = Map.InvokeInfo(e.ScreenPosition * _mapControl.SkiaScale, e.ScreenPosition * _mapControl.SkiaScale, _mapControl.SkiaScale, _mapControl.SymbolCache, null, e.NumOfTaps);
+                e.Handled = Map.InvokeInfo(e.ScreenPosition * _mapControl.SkiaScale, e.ScreenPosition * _mapControl.SkiaScale, _mapControl.SymbolCache, null, e.NumOfTaps);
 
             if (e.Handled)
                 return;
@@ -528,12 +641,12 @@ namespace Mapsui.UI.Forms
 
         private void HandlerPinPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            Map.ViewChanged(false);
+            Map.RefreshData(false);
         }
 
         private void HandlerDrawablePropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            Map.ViewChanged(false);
+            Map.RefreshData(false);
         }
 
         /// <summary>

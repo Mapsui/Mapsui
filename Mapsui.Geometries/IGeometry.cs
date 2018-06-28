@@ -29,7 +29,7 @@ namespace Mapsui.Geometries
         ///     polygon is defined by the corner points of the bounding box ((MINX, MINY), (MAXX, MINY), (MAXX,
         ///     MAXY), (MINX, MAXY), (MINX, MINY)).
         /// </summary>
-        Geometry Envelope();
+        Geometry Envelope { get; }
 
         /// <summary>
         ///     The minimum <see cref="Geometries.BoundingBox" /> for this <see cref="Geometry" />.

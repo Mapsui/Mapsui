@@ -25,7 +25,7 @@ namespace Mapsui.UI.Objects
 
             foreach (T item in Collection)
             {
-                if (box.Intersects(item.Feature.Geometry.GetBoundingBox()))
+                if (box.Intersects(item.Feature.Geometry.BoundingBox))
                     list.Add(item.Feature);
             }
 
@@ -44,9 +44,9 @@ namespace Mapsui.UI.Objects
                 if (item.Feature != null)
                 {
                     if (extents == null)
-                        extents = new BoundingBox(item.Feature.Geometry.GetBoundingBox());
+                        extents = new BoundingBox(item.Feature.Geometry.BoundingBox);
                     else
-                        extents = extents.Join(item.Feature.Geometry.GetBoundingBox());
+                        extents = extents.Join(item.Feature.Geometry.BoundingBox);
                 }
             }
 

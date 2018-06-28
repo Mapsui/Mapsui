@@ -4,22 +4,16 @@ namespace Mapsui.UI.Android
 {
     public static class PointExtensions
     {
-        public static Point ToDip(this Point point, float scale)
+        public static Point ToDeviceIndependentUnits(this Point point, float pixelsPerDeviceIndependentUnit)
         {
-            return new Point(ToDip(point.X, scale), ToDip(point.Y, scale));
+            return new Point(
+                ToDeviceIndependentUnits(point.X, pixelsPerDeviceIndependentUnit), 
+                ToDeviceIndependentUnits(point.Y, pixelsPerDeviceIndependentUnit));
         }
-
-
-        /// <summary>
-        /// This method converts device pixels to Device Independent Units.
-        /// When to use? In native Android touch positions are in device pixels
-        /// whereas the skia canvas needs to be drawn in device independent units.
-        /// If not labels on raster tiles will be unreadable  and symbols will be too small. 
-        /// </summary>
-        /// <returns>The devicePixels argument translated to Device Independent Units.</returns>
-        private static double ToDip(double devicePixels, float scale)
+        
+        private static double ToDeviceIndependentUnits(double devicePixels, float pixelsPerDeviceIndependentUnit)
         {
-            return devicePixels / scale;
+            return devicePixels / pixelsPerDeviceIndependentUnit;
         }
     }
 }

@@ -3,7 +3,7 @@
 When developing for Mapsui we take into account the following constraints.
 
 ### Not limited to certain coordinate system
-Mapsui's Map can be in any coordinate system. If you do not specify a coordinate system in the Map and Layers it assumes they are in the same coordinate system (whatever they are). In this case it only transforms these unspecified 'world-coordinates' to 'screen-coordinates' and nothing more. It is possible to setup a coordinate transformation system using Map.CRS, ILayer.CRS and ILayer.Transformation.
+Mapsui's Map can be in any coordinate system. If you do not specify a coordinate system in the Map and Layers it assumes they are in the same coordinate system (whatever they are). In this case it only transforms these unspecified 'world-coordinates' to 'screen-coordinates' and nothing more. It is also possible to setup a coordinate transformation system using Map.CRS, DataSource.CRS and Map.Transformation. See [projections](projections.md).
 
 ### Full implementation of the feature matrix
 These are some of the feature dimensions:

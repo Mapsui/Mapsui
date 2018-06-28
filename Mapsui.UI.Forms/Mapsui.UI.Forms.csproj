@@ -1,20 +1,32 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard1.3</TargetFramework>
+    <PackageVersion>2.0</PackageVersion>
+    <Authors>Mapsui Contributors</Authors>
+    <PackageIconUrl>https://github.com/Mapsui/Mapsui/blob/master/logo/png/icon.png</PackageIconUrl>
+    <NeutralLanguage>en</NeutralLanguage>
+    <PackageProjectUrl>https://github.com/Mapsui/Mapsui</PackageProjectUrl>
+    <Summary>Xamarin.Forms implementation of Mapsui</Summary>
+    <PackageTags>Mapsui Xamarin.Forms map maps mapping</PackageTags>
+    <Description>Mapsui.UI.Forms is a native Xamarin.Forms MapControl for Mapsui without any platform dependent renderers.</Description>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DefineConstants>TRACE;DEBUG;NETSTANDARD1_3;__FORMS__</DefineConstants>
+    <DefineConstants>TRACE;__FORMS__;DEBUG;NETSTANDARD1_3</DefineConstants>
   </PropertyGroup>
 
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType></DebugType>
+    <DefineConstants>TRACE;RELEASE;NETSTANDARD1_3;__FORMS__</DefineConstants>
+  </PropertyGroup>
   <ItemGroup><!--<PackageReference Include="" Version=""/>-->
   
     <Folder Include="Properties\" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="SkiaSharp" Version="1.60.0" />
-    <PackageReference Include="SkiaSharp.Views.Forms" Version="1.60.0" />
-    <PackageReference Include="Xamarin.Forms" Version="2.5.1.444934" />
+    <PackageReference Include="SkiaSharp" Version="1.60.1" />
+    <PackageReference Include="SkiaSharp.Views.Forms" Version="1.60.1" />
+    <PackageReference Include="Xamarin.Forms" Version="3.0.0.561731" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,6 +35,18 @@
     <ProjectReference Include="..\Mapsui\Mapsui.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Images\Close.svg" />
+    <None Remove="Images\MyLocationMoving.svg" />
+    <None Remove="Images\MyLocationStill.svg" />
+    <None Remove="Images\Pin.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\Close.svg" />
+    <EmbeddedResource Include="Images\MyLocationMoving.svg" />
+    <EmbeddedResource Include="Images\MyLocationStill.svg" />
+    <EmbeddedResource Include="Images\Pin.svg" />
+  </ItemGroup>
   <Import Project="..\Mapsui.UI.Shared\Mapsui.UI.Shared.projitems" Label="Shared" />
 
 </Project>

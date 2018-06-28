@@ -23,12 +23,12 @@ namespace Mapsui.Geometries
 
         public new string AsText()
         {
-            return GeometryToWKT.Write(Envelope());
+            return GeometryToWKT.Write(Envelope);
         }
 
         public new byte[] AsBinary()
         {
-            return GeometryToWKB.Write(Envelope());
+            return GeometryToWKB.Write(Envelope);
         }
 
         public override bool IsEmpty()
@@ -46,19 +46,19 @@ namespace Mapsui.Geometries
         
         public override double Distance(Point point)
         {
-            var geometry = Envelope();
+            var geometry = Envelope;
             return geometry.Distance(point);
         }
 
         public override bool Contains(Point point)
         {
-            return Envelope().Contains(point);
+            return Envelope.Contains(point);
         }
 
         public override int GetHashCode()
         {
             // todo: check performance of MemoryStream.GetHashCode
-            return Envelope().GetHashCode()*Data.GetHashCode(); 
+            return Envelope.GetHashCode()*Data.GetHashCode(); 
         }
         
         public override bool Equals(Geometry geom)

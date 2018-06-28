@@ -42,6 +42,7 @@ namespace Mapsui
         private double _rotation;
         private readonly NotifyingPoint _center = new NotifyingPoint();
         private bool _modified = true;
+        private bool _initialized;
 
         /// <summary>
         /// Create a new viewport
@@ -75,7 +76,15 @@ namespace Mapsui
         }
 
         /// <inheritdoc />
-        public bool Initialized { get; private set; }
+        public bool Initialized
+        {
+            get => _initialized;
+            private set
+            {
+                _initialized = value;
+                OnViewportChanged();
+            }
+        }
 
         /// <inheritdoc />
         public Point Center

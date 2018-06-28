@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 			 xmlns:mapsui="clr-namespace:Mapsui.UI.Forms;assembly=Mapsui.UI.Forms"
@@ -10,6 +10,9 @@
             HorizontalOptions="Fill"
 		    BackgroundColor="Gray" 
 		    Margin="10" />
+          <Label x:Name="info" 
+            HorizontalOptions="CenterAndExpand"
+            Text="unknown" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

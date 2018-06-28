@@ -30,11 +30,10 @@ namespace Mapsui.Tests.UI
 
             var screenPositionHit = map.Viewport.WorldToScreen(2, 2);
             var screenPositionMiss = map.Viewport.WorldToScreen(9, 9);
-            var scale = 1;
 
             // act
-            var argsHit = InfoHelper.GetMapInfo(map.Viewport, screenPositionHit, scale, map.InfoLayers, null);
-            var argsMis = InfoHelper.GetMapInfo(map.Viewport, screenPositionMiss, scale, map.InfoLayers, null);
+            var argsHit = InfoHelper.GetMapInfo(map.Viewport, screenPositionHit, map.InfoLayers, null);
+            var argsMis = InfoHelper.GetMapInfo(map.Viewport, screenPositionMiss, map.InfoLayers, null);
 
             // assert;
             Assert.IsTrue(argsHit.Feature.Geometry != null);
@@ -72,14 +71,13 @@ namespace Mapsui.Tests.UI
 
             var counter = 0;
             map.Hover += (sender, args) => counter++;
-            var scale = 1;
 
             // act
-            map.InvokeHover(screenPositionMiss, scale, null); //  no notfication
-            map.InvokeHover(screenPositionHit, scale, null); //   notification with feature, counter +1
-            map.InvokeHover(screenPositionHit2, scale, null); //  no notification because same feature
-            map.InvokeHover(screenPositionMiss, scale, null); //  notification without feature, counter + 1
-            map.InvokeHover(screenPositionMiss2, scale, null); // no notification because also no feature
+            map.InvokeHover(screenPositionMiss, null); //  no notfication
+            map.InvokeHover(screenPositionHit, null); //   notification with feature, counter +1
+            map.InvokeHover(screenPositionHit2, null); //  no notification because same feature
+            map.InvokeHover(screenPositionMiss, null); //  notification without feature, counter + 1
+            map.InvokeHover(screenPositionMiss2, null); // no notification because also no feature
 
             // assert;
             Assert.AreEqual(2, counter);
@@ -118,10 +116,9 @@ namespace Mapsui.Tests.UI
             map.InfoLayers.Add(disabledLayer);
 
             var screenPositionHit = map.Viewport.WorldToScreen(2, 2);
-            var scale = 1;
 
             // act
-            var argsHit = InfoHelper.GetMapInfo(map.Viewport, screenPositionHit, scale, map.InfoLayers, null);
+            var argsHit = InfoHelper.GetMapInfo(map.Viewport, screenPositionHit, map.InfoLayers, null);
            
             // assert;
             Assert.IsTrue(argsHit.Feature == null);
@@ -159,10 +156,9 @@ namespace Mapsui.Tests.UI
             map.InfoLayers.Add(layerAboveRange);
 
             var screenPositionHit = map.Viewport.WorldToScreen(2, 2);
-            var scale = 1;
 
             // act
-            var argsHit = InfoHelper.GetMapInfo(map.Viewport, screenPositionHit, scale, map.InfoLayers, null);
+            var argsHit = InfoHelper.GetMapInfo(map.Viewport, screenPositionHit, map.InfoLayers, null);
 
             // assert;
             Assert.IsTrue(argsHit.Feature == null);
