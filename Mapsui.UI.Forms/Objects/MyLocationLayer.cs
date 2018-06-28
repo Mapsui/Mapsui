@@ -181,8 +181,8 @@ namespace Mapsui.UI.Objects
         /// <param name="newViewportRotation">New viewport rotation</param>
         public void UpdateMyDirection(double newDirection, double newViewportRotation)
         {
-            var newRotation = newDirection - newViewportRotation;
-            var oldRotation = ((SymbolStyle)feature.Styles.First()).SymbolRotation;
+            var newRotation = (int)(newDirection - newViewportRotation);
+            var oldRotation = (int)((SymbolStyle)feature.Styles.First()).SymbolRotation;
 
             if (newRotation != oldRotation)
             {
@@ -192,11 +192,20 @@ namespace Mapsui.UI.Objects
                 if (mapView.AnimationIsRunning(animationMyDirectionName))
                     mapView.AbortAnimation(animationMyDirectionName);
 
+                if (newRotation < 90 && oldRotation > 270)
+                {
+                    newRotation += 360;
+                }
+                else if (newRotation > 270 && oldRotation < 90)
+                {
+                    oldRotation += 360;
+                }
+
                 var animation = new Animation((v) =>
                 {
-                    if (v != ((SymbolStyle)feature.Styles.First()).SymbolRotation)
+                    if ((int)v != (int)((SymbolStyle)feature.Styles.First()).SymbolRotation)
                     {
-                        ((SymbolStyle)feature.Styles.First()).SymbolRotation = v;
+                        ((SymbolStyle)feature.Styles.First()).SymbolRotation = (int)v % 360;
                         mapView.Refresh();
                     }
                 }, oldRotation, newRotation);

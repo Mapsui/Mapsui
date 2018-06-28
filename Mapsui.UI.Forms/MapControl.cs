@@ -45,6 +45,7 @@ namespace Mapsui.UI.Forms
         private int _numOfTaps = 0;
         private Dictionary<long, int> _fingers = new Dictionary<long, int>(20);
         private VelocityTracker _velocityTracker = new VelocityTracker();
+        private Geometries.Point _previousCenter;
 
         /// <summary>
         /// Saver for angle before last pinch movement
@@ -58,14 +59,16 @@ namespace Mapsui.UI.Forms
 
         private TouchMode _mode;
 
-        public event EventHandler ViewportInitialized;
-
         public MapControl()
         {
             Initialize();
         }
 
         public float SkiaScale => _skiaScale;
+
+        public float ScreenWidth => (float)Application.Current.MainPage.Width;
+
+        public float ScreenHeight => (float)Application.Current.MainPage.Height;
 
         public ISymbolCache SymbolCache => _renderer.SymbolCache;
 
@@ -227,29 +230,14 @@ namespace Mapsui.UI.Forms
                 _map.Viewport, _map.Layers, _map.Widgets, _map.BackColor);
         }
 
-        private void OnViewportInitialized()
-        {
-            ViewportInitialized?.Invoke(this, EventArgs.Empty);
-        }
-
         private Geometries.Point GetScreenPosition(SKPoint point)
         {
             return new Geometries.Point(point.X / _skiaScale, point.Y / _skiaScale);
         }
 
-        private void MapRefreshGraphics(object sender, EventArgs eventArgs)
-        {
-            RefreshGraphics();
-        }
-
         public void RefreshGraphics()
         {
             InvalidateCanvas();
-        }
-
-        public void RefreshData()
-        {
-            _map?.RefreshData(true);
         }
 
         internal void InvalidateCanvas()
@@ -602,6 +590,30 @@ namespace Mapsui.UI.Forms
             LongTap?.Invoke(this, args);
 
             return args.Handled;
+        }
+
+        private static (Geometries.Point centre, double radius, double angle) GetPinchValues(List<Geometries.Point> locations)
+        {
+            if (locations.Count < 2)
+                throw new ArgumentException();
+
+            double centerX = 0;
+            double centerY = 0;
+
+            foreach (var location in locations)
+            {
+                centerX += location.X;
+                centerY += location.Y;
+            }
+
+            centerX = centerX / locations.Count;
+            centerY = centerY / locations.Count;
+
+            var radius = Geometries.Utilities.Algorithms.Distance(centerX, centerY, locations[0].X, locations[0].Y);
+
+            var angle = Math.Atan2(locations[1].Y - locations[0].Y, locations[1].X - locations[0].X) * 180.0 / Math.PI;
+
+            return (new Geometries.Point(centerX, centerY), radius, angle);
         }
 
         /// <summary>
