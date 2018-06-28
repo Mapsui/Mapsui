@@ -42,8 +42,6 @@ namespace Mapsui.UI.Uwp
         private readonly SKXamlCanvas _canvas = CreateRenderTarget();
         private double _innerRotation;
 
-        public event EventHandler ViewportInitialized;
-
         public MapControl()
         {
             Background = new SolidColorBrush(Colors.White); // DON'T REMOVE! Touch events do not work without a background
@@ -113,18 +111,11 @@ namespace Mapsui.UI.Uwp
             };
         }
 
-        private void MapRefreshGraphics(object o, EventArgs eventArgs)
-        {
-            RefreshGraphics();
-        }
-
-        public bool ZoomLocked { get; set; }
-
         public event EventHandler<ViewChangedEventArgs> ViewChanged;
 
         private void MapControl_PointerWheelChanged(object sender, PointerRoutedEventArgs e)
         {
-            if (ZoomLocked) return;
+            if (ZoomLock) return;
             if (!_map.Viewport.Initialized) return;
 
             var currentPoint = e.GetCurrentPoint(this);
@@ -149,7 +140,6 @@ namespace Mapsui.UI.Uwp
 
             RefreshGraphics();
             _map.RefreshData(true);
-            OnViewChanged(true);
         }
 
         private double DetermineNewResolution(int mouseWheelDelta, double currentResolution)
@@ -170,21 +160,10 @@ namespace Mapsui.UI.Uwp
             }
             return currentResolution;
         }
-
-        private void OnViewChanged(bool userAction = false)
-        {
-            if (_map != null)
-                ViewChanged?.Invoke(this, new ViewChangedEventArgs { Viewport = Map.Viewport, UserAction = userAction });
-        }
-
+        
         public void RefreshGraphics()
         {
             RunOnUIThread(() => _canvas?.Invalidate());
-        }
-
-        public void RefreshData()
-        {
-            _map.RefreshData(true);
         }
 
         public void Clear()
@@ -195,17 +174,16 @@ namespace Mapsui.UI.Uwp
 
         private void MapControlLoaded(object sender, RoutedEventArgs e)
         {
-            TryInitializeViewport();
+            TryInitializeViewport(ActualWidth, ActualHeight);
             UpdateSize();
         }
         
         private void MapControlSizeChanged(object sender, SizeChangedEventArgs e)
         {
-            TryInitializeViewport();
+            TryInitializeViewport(ActualWidth, ActualHeight);
             Clip = new RectangleGeometry { Rect = new Rect(0, 0, ActualWidth, ActualHeight) };
             UpdateSize();
             _map.RefreshData(true);
-            OnViewChanged();
             Refresh();
         }
 
@@ -226,7 +204,7 @@ namespace Mapsui.UI.Uwp
             if (Renderer == null) return;
             if (_map == null) return;
 
-            TryInitializeViewport();
+            TryInitializeViewport(ActualWidth, ActualHeight);
             if (!_map.Viewport.Initialized) return;
 
             Renderer.Render(e.Surface.Canvas, Map.Viewport, _map.Layers, _map.Widgets, _map.BackColor);
@@ -253,7 +231,6 @@ namespace Mapsui.UI.Uwp
 
 
             _map.RefreshData(true);
-            OnViewChanged();
             RefreshGraphics();
             ClearBBoxDrawing();
         }
@@ -265,22 +242,11 @@ namespace Mapsui.UI.Uwp
             _bboxRect.Height = 0;
         }
 
-        public void ZoomToFullEnvelope()
-        {
-            if (Map.Envelope == null) return;
-            if (ActualWidth.IsNanOrZero()) return;
-            Map.Viewport.Resolution = Map.Envelope.Width / ActualWidth;
-            Map.Viewport.Center = Map.Envelope.Centroid;
-
-            OnViewChanged();
-        }
-
         private static void OnManipulationInertiaStarting(object sender, ManipulationInertiaStartingRoutedEventArgs e)
         {
             e.TranslationBehavior.DesiredDeceleration = 25 * 96.0 / (1000.0 * 1000.0);
         }
-
-
+        
         private void OnManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
             var (center, radius, angle) = (e.Position.ToMapsui(), e.Delta.Scale, e.Delta.Rotation);
@@ -315,25 +281,7 @@ namespace Mapsui.UI.Uwp
                 _map.PanMode, _map.PanLimits, _map.Envelope);
             RefreshGraphics();
             _map.RefreshData(false);
-            OnViewChanged(true);
-
             e.Handled = true;
-        }
-
-        private void TryInitializeViewport()
-        {
-            if (_map.Viewport.Initialized) return;
-
-            if (_map.Viewport.TryInitializeViewport(_map.Envelope, ActualWidth, ActualHeight))
-            {
-                Map.RefreshData(true);
-                OnViewportInitialized();
-            }
-        }
-
-        private void OnViewportInitialized()
-        {
-            ViewportInitialized?.Invoke(this, EventArgs.Empty);
         }
 
         public float PixelsPerDeviceIndependentUnit => 
@@ -348,5 +296,8 @@ namespace Mapsui.UI.Uwp
 
             widget.HandleWidgetTouched(screenPosition);
         }
+
+        public float ScreenWidth => (float)ActualWidth;
+        public float ScreenHeight => (float)ActualHeight;
     }
 }

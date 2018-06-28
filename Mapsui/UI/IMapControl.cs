@@ -26,5 +26,15 @@ namespace Mapsui.UI
         float PixelsPerDeviceIndependentUnit { get; }
 
         IRenderer Renderer { get; }
+
+        /// <summary>
+        /// The map's screen width in device independent units
+        /// </summary>
+        float ScreenWidth { get; }
+
+        /// <summary>
+        /// The map's screen height in device independent units
+        /// </summary>
+        float ScreenHeight { get; }
     }
 }

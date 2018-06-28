@@ -2,10 +2,12 @@ using CoreFoundation;
 using Foundation;
 using UIKit;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using CoreGraphics;
 using Mapsui.Geometries;
+using Mapsui.Geometries.Utilities;
 using Mapsui.Widgets;
 using SkiaSharp.Views.iOS;
 
@@ -20,8 +22,6 @@ namespace Mapsui.UI.iOS
         /// The number of pixels per device independent unit
         /// </summary>
         private float _density;
-
-        public event EventHandler ViewportInitialized;
 
         public MapControl(CGRect frame)
             : base(frame)
@@ -52,10 +52,10 @@ namespace Mapsui.UI.iOS
                 NSLayoutConstraint.Create(this, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, _canvas, NSLayoutAttribute.Bottom, 1.0f, 0.0f)
             });
 
-            // Unfortunately the SKGLView does not have a IgnorePixelScaling property. We have to adjust with _scale.
+            // Unfortunately the SKGLView does not have a IgnorePixelScaling property. We have to adjust for density with SKGLView.Scale.
             _density = PixelsPerDeviceIndependentUnit;
 
-            TryInitializeViewport();
+            TryInitializeViewport(ScreenWidth, ScreenHeight);
 
             ClipsToBounds = true;
             MultipleTouchEnabled = true;
@@ -99,28 +99,12 @@ namespace Mapsui.UI.iOS
 
         void OnPaintSurface(object sender, SKPaintGLSurfaceEventArgs args)
         {
-            TryInitializeViewport();
+            TryInitializeViewport(ScreenWidth, ScreenHeight);
             if (!_map.Viewport.Initialized) return;
 
             args.Surface.Canvas.Scale(_density, _density);  // we can only set the scale in the render loop
 
             Renderer.Render(args.Surface.Canvas, _map.Viewport, _map.Layers, _map.Widgets, _map.BackColor);
-        }
-
-        private void TryInitializeViewport()
-        {
-            if (_map.Viewport.Initialized) return;
-
-            if (_map.Viewport.TryInitializeViewport(_map.Envelope, (float)_canvas.Frame.Width, (float)_canvas.Frame.Height))
-            {
-                Map.RefreshData(true);
-                OnViewportInitialized();
-            }
-        }
-
-        private void OnViewportInitialized()
-        {
-            ViewportInitialized?.Invoke(this, EventArgs.Empty);
         }
 
         public override void TouchesBegan(NSSet touches, UIEvent evt)
@@ -199,7 +183,6 @@ namespace Mapsui.UI.iOS
             Refresh();
         }
 
-
         /// <summary>
         /// Gets screen position in device independent units (or DIP or DP).
         /// </summary>
@@ -209,11 +192,7 @@ namespace Mapsui.UI.iOS
         {
             return new Point(point.X, point.Y);
         }
-        private void MapRefreshGraphics(object sender, EventArgs eventArgs)
-        {
-            RefreshGraphics();
-        }
-        
+       
         private void RunOnUIThread(Action action)
         {
             DispatchQueue.MainQueue.DispatchAsync(action);
@@ -221,12 +200,11 @@ namespace Mapsui.UI.iOS
         
         public void RefreshGraphics()
         {
-            RunOnUIThread(() => { _canvas?.SetNeedsDisplay(); });
-        }
-
-        public void RefreshData()
-        {
-            _map?.RefreshData(true);
+            RunOnUIThread(() =>
+            {
+                SetNeedsDisplay();
+                _canvas?.SetNeedsDisplay();
+            });
         }
 
         public override CGRect Frame
@@ -239,8 +217,8 @@ namespace Mapsui.UI.iOS
 
                 if (_map?.Viewport == null) return;
 
-                _map.Viewport.Width = _canvas.Frame.Width;
-                _map.Viewport.Height = _canvas.Frame.Height;
+                _map.Viewport.Width = ScreenWidth;
+                _map.Viewport.Height = ScreenHeight;
 
                 Refresh();
             }
@@ -254,8 +232,8 @@ namespace Mapsui.UI.iOS
 
             if (_map?.Viewport == null) return;
 
-            _map.Viewport.Width = _canvas.Frame.Width;
-            _map.Viewport.Height = _canvas.Frame.Height;
+            _map.Viewport.Width = ScreenWidth;
+            _map.Viewport.Height = ScreenHeight;
 
             Refresh();
         }
@@ -281,5 +259,32 @@ namespace Mapsui.UI.iOS
             Unsubscribe();
             base.Dispose(disposing);
         }
+
+        private static (Point centre, double radius, double angle) GetPinchValues(List<Point> locations)
+        {
+            if (locations.Count < 2)
+                throw new ArgumentException();
+
+            double centerX = 0;
+            double centerY = 0;
+
+            foreach (var location in locations)
+            {
+                centerX += location.X;
+                centerY += location.Y;
+            }
+
+            centerX = centerX / locations.Count;
+            centerY = centerY / locations.Count;
+
+            var radius = Algorithms.Distance(centerX, centerY, locations[0].X, locations[0].Y);
+
+            var angle = Math.Atan2(locations[1].Y - locations[0].Y, locations[1].X - locations[0].X) * 180.0 / Math.PI;
+
+            return (new Point(centerX, centerY), radius, angle);
+        }
+
+        public float ScreenWidth => (float)_canvas.Frame.Width; // todo: check if we need _canvas
+        public float ScreenHeight => (float)_canvas.Frame.Height; // todo: check if we need _canvas
     }
 }

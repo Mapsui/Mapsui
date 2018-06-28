@@ -1,13 +1,12 @@
 ﻿using Mapsui.Geometries;
-using Mapsui.Geometries.Utilities;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Net;
 using Mapsui.Fetcher;
 using Mapsui.Logging;
 using Mapsui.Rendering;
 using Mapsui.Rendering.Skia;
+using Mapsui.Utilities;
 
 #if __ANDROID__
 namespace Mapsui.UI.Android
@@ -24,11 +23,6 @@ namespace Mapsui.UI.Wpf
     public partial class MapControl
     {
         private Map _map;
-
-        /// <summary>
-        /// Saver for center before last pinch movement
-        /// </summary>
-        private Point _previousCenter = new Point();
 
         /// <summary>
         /// Allow map panning through touch or mouse
@@ -54,64 +48,16 @@ namespace Mapsui.UI.Wpf
         /// With how many degrees from 0 should map snap to 0 degrees
         /// </summary>
         public double ReSnapRotationDegrees { get; set; }
-        
+
         public IRenderer Renderer { get; set; } = new MapRenderer();
+
+        public event EventHandler ViewportInitialized; //todo: Consider to use the Viewport PropertyChanged
 
         /// <summary>
         /// Unsubscribe from map events </summary>
         public void Unsubscribe()
         {
             UnsubscribeFromMapEvents(_map);
-        }
-        
-        /// <summary>
-        /// Converting function for world to screen respecting scale
-        /// </summary>
-        /// <param name="viewport">Viewport</param>
-        /// <param name="scale">Scale</param>
-        /// <param name="worldPosition">Position in world coordinates</param>
-        /// <returns>Position in screen coordinates</returns>
-        public Point WorldToScreen(IViewport viewport, float scale, Point worldPosition)
-        {
-            var screenPosition = viewport.WorldToScreen(worldPosition);
-            return new Point(screenPosition.X * scale, screenPosition.Y * scale);
-        }
-
-        /// <summary>
-        /// Converting function for screen to world respecting scale
-        /// </summary>
-        /// <param name="viewport">Viewport</param>
-        /// <param name="scale">Scale</param>
-        /// <param name="screenPosition">Position in screen coordinates</param>
-        /// <returns>Position in world coordinates</returns>
-        public Point ScreenToWorld(IViewport viewport, float scale, Point screenPosition)
-        {
-            var worldPosition = viewport.ScreenToWorld(screenPosition.X * scale, screenPosition.Y * scale);
-            return new Point(worldPosition.X, worldPosition.Y);
-        }
-
-        private static (Point centre, double radius, double angle) GetPinchValues(List<Point> locations)
-        {
-            if (locations.Count < 2)
-                throw new ArgumentException();
-
-            double centerX = 0;
-            double centerY = 0;
-
-            foreach (var location in locations)
-            {
-                centerX += location.X;
-                centerY += location.Y;
-            }
-
-            centerX = centerX / locations.Count;
-            centerY = centerY / locations.Count;
-
-            var radius = Algorithms.Distance(centerX, centerY, locations[0].X, locations[0].Y);
-
-            var angle = Math.Atan2(locations[1].Y - locations[0].Y, locations[1].X - locations[0].X) * 180.0 / Math.PI;
-
-            return (new Point(centerX, centerY), radius, angle);
         }
 
         /// <summary>
@@ -123,6 +69,11 @@ namespace Mapsui.UI.Wpf
             map.DataChanged += MapDataChanged;
             map.PropertyChanged += MapPropertyChanged;
             map.RefreshGraphics += MapRefreshGraphics;
+        }
+
+        private void MapRefreshGraphics(object sender, EventArgs eventArgs)
+        {
+            RefreshGraphics();
         }
 
         /// <summary>
@@ -238,6 +189,36 @@ namespace Mapsui.UI.Wpf
             return new Point(
                 coordinateInPixels.X / PixelsPerDeviceIndependentUnit,
                 coordinateInPixels.Y / PixelsPerDeviceIndependentUnit);
+        }
+
+        private void TryInitializeViewport(double screenWidth, double screenHeight)
+        {
+            if (_map?.Viewport?.Initialized != false) return;
+
+            if (_map.Viewport.TryInitializeViewport(_map.Envelope, screenWidth, screenHeight))
+            {
+                // limiter now only properly implemented in WPF.
+                ViewportLimiter.Limit(_map.Viewport, _map.ZoomMode, _map.ZoomLimits, _map.Resolutions,
+                    _map.PanMode, _map.PanLimits, _map.Envelope);
+
+                Map.RefreshData(true);
+                OnViewportInitialized();
+            }
+        }
+
+        private void OnViewportInitialized()
+        {
+            ViewportInitialized?.Invoke(this, EventArgs.Empty);
+        }
+
+        public void RefreshData()
+        {
+            _map?.RefreshData(true);
+        }
+
+        public void NavigateToFullEnvelope(ScaleMethod scaleMethod)
+        {
+            _map?.NavigateTo(_map.Envelope, scaleMethod);
         }
     }
 }

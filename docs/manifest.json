@@ -3417,7 +3417,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Android.MapControl.html",
-          "hash": "lfhe57tlTIGeIFVohZZe3w=="
+          "hash": "ziiNzKLrxp0rDk5umzdDeA=="
         }
       },
       "is_incremental": false,
@@ -3525,7 +3525,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.IMapControl.html",
-          "hash": "PUccHrMaNq0lmJr+KGeMSQ=="
+          "hash": "aTxL2KECWaaLVP8p7LVYQg=="
         }
       },
       "is_incremental": false,
@@ -3693,7 +3693,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Wpf.MapControl.html",
-          "hash": "PwMc1BCaDP94wJINJWhYUQ=="
+          "hash": "OOW5GKgfOMTSCsBNl+AfDg=="
         }
       },
       "is_incremental": false,
@@ -3813,7 +3813,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.iOS.MapControl.html",
-          "hash": "H410V2ryj3mce29UQewgkw=="
+          "hash": "tNt7rl/3FQW5VVtgYryroQ=="
         }
       },
       "is_incremental": false,
@@ -4017,7 +4017,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Viewport.html",
-          "hash": "lbiDRRimqfSjpO6yoVQHfQ=="
+          "hash": "/cPUSDSovSAIuQDfm3h1bw=="
         }
       },
       "is_incremental": false,
@@ -4289,6 +4289,18 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/System.FloatExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/System.FloatExtensions.html",
+          "hash": "diAnPEVCERi20TtiYObYgQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/System.IO.StreamExtensions.yml",
       "output": {
         ".html": {
@@ -4317,7 +4329,7 @@
       "output": {
         ".html": {
           "relative_path": "api/System.html",
-          "hash": "rf6aDEkdp4a9KT9IrImRVA=="
+          "hash": "s9RZznztMxygV5HIVY9pvw=="
         }
       },
       "is_incremental": false,
@@ -4341,7 +4353,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "IGtQD2zOz+CoTCNas6t9OA=="
+          "hash": "9eR136dlHyE9Jxh1+iXMyg=="
         }
       },
       "is_incremental": false,
@@ -4425,7 +4437,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/Mapsui-Components.html",
-          "hash": "yrvLQ7FsyVmF6pB9q20z3A=="
+          "hash": "AgJQ8to3rg9VUiOUrj6V6Q=="
         }
       },
       "is_incremental": false,
@@ -4563,12 +4575,24 @@
       "version": ""
     },
     {
+      "type": "Conceptual",
+      "source_relative_path": "documentation/test.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/test.html",
+          "hash": "Ni8rte4ei79odGROEcZjbw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
       "type": "Toc",
       "source_relative_path": "documentation/toc.md",
       "output": {
         ".html": {
           "relative_path": "documentation/toc.html",
-          "hash": "90JgidEBTUsVIsgrEOW09g=="
+          "hash": "rE+eUXlQD31JAV9a8xlr6g=="
         }
       },
       "is_incremental": false,
@@ -4645,13 +4669,13 @@
           "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build"
         },
+        "ConceptualDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build"
+        },
         "TocDocumentProcessor": {
           "can_incremental": false,
           "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
-          "incrementalPhase": "build"
-        },
-        "ConceptualDocumentProcessor": {
-          "can_incremental": false,
           "incrementalPhase": "build"
         },
         "ManagedReferenceDocumentProcessor": {
