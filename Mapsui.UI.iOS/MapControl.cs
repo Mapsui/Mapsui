@@ -71,7 +71,7 @@ namespace Mapsui.UI.iOS
             var tapGestureRecognizer = new UITapGestureRecognizer(OnSingleTapped)
             {
                 NumberOfTapsRequired = 1,
-                CancelsTouchesInView = false,
+                CancelsTouchesInView = false
             };
             tapGestureRecognizer.RequireGestureRecognizerToFail(doubleTapGestureRecognizer);
             AddGestureRecognizer(tapGestureRecognizer);

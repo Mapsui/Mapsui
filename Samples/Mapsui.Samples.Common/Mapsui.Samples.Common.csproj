@@ -73,6 +73,7 @@
     <Compile Include="Maps\MbTilesSample.cs" />
     <Compile Include="Maps\MutatingTriangleSample.cs" />
     <Compile Include="Maps\OpacityStyleSample.cs" />
+    <Compile Include="Maps\PolygonSampleWKT.cs" />
     <Compile Include="Maps\ScaleBarSample.cs" />
     <Compile Include="Maps\OsmSample.cs" />
     <Compile Include="Maps\InfoLayersSample.cs" />

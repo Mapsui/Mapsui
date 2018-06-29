@@ -51,55 +51,19 @@ namespace Mapsui.Rendering.Skia
         /// </summary>
         /// <param name="polygon">Polygon to convert</param>
         /// <param name="viewport">Viewport implementation</param>
-        /// <param name="clipRect">Rectangle to clip to. All lines outside aren't drawn.</param>
-        /// <param name="strokeWidth">StrokeWidth for inflating cliptRect</param>
         /// <returns></returns>
-        public static SKPath ToSkiaPath(this Polygon polygon, IViewport viewport, SKRect clipRect, float strokeWidth)
+        public static SKPath ToSkiaPath(this Polygon polygon, IViewport viewport)
         {
-            // Reduce exterior ring to parts, that are visible in clipping rectangle
-            // Inflate clipRect, so that we could be sure, nothing of stroke is visible on screen
-            var exterior = ReducePointsToClipRect(polygon.ExteriorRing.Vertices, viewport, SKRect.Inflate(clipRect, strokeWidth * 2, strokeWidth * 2));
-
-            // Create path for exterior and interior parts
+            var exterior =  WorldToScreen(viewport, polygon.ExteriorRing.Vertices);
             var path = new SKPath();
 
-            if (exterior.Count == 0)
-                return path;
-
-            // Draw exterior path
-            path.MoveTo(exterior[0]);
+            path.MoveTo(exterior[0].X, exterior[0].Y);
 
             for (var i = 1; i < exterior.Count; i++)
             {
-                path.LineTo(exterior[i]);
+                path.LineTo(exterior[i].X, exterior[i].Y);
             }
 
-            // Close exterior path
-            path.Close();
-
-            foreach (var interiorRing in polygon.InteriorRings)
-            {
-                // note: For Skia inner rings need to be clockwise and outer rings
-                // need to be counter clockwise (if this is the other way around it also
-                // seems to work)
-                // this is not a requirement of the OGC polygon.
-
-                // Reduce interior ring to parts, that are visible in clipping rectangle
-                var interior = ReducePointsToClipRect(interiorRing.Vertices, viewport, SKRect.Inflate(clipRect, strokeWidth, strokeWidth));
-
-                if (interior.Count == 0)
-                    continue;
-
-                // Draw interior pathes
-                path.MoveTo(interior[0]);
-
-                for (var i = 1; i < interior.Count; i++)
-                {
-                    path.LineTo(interior[i]);
-                }
-            }
-
-            // Close interior pathes
             path.Close();
 
             return path;

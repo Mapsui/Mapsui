@@ -16,7 +16,7 @@ namespace Mapsui.Utilities
 
         private static HttpTileSource CreateTileSource()
         {
-            return new HttpTileSource(new GlobalSphericalMercator(),
+            return new HttpTileSource(new GlobalSphericalMercator(0, 30),
                 "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
                 new[] { "a", "b", "c" }, name: "OpenStreetMap",
                 attribution: OpenStreetMapAttribution);

@@ -37,7 +37,7 @@ namespace Mapsui.Samples.Android
             MbTilesHelper.DeployMbTilesFile(s => File.Create(Path.Combine(MbTilesLocationOnAndroid, s)));
             
             var mapControl = FindViewById<MapControl>(Resource.Id.mapcontrol);
-            mapControl.Map = InfoLayersSample.CreateMap();
+            mapControl.Map = PolygonSampleWkt.CreateMap();
             mapControl.Map.Info+= MapOnInfo;
             mapControl.Map.Viewport.ViewportChanged += ViewportOnViewportChanged;
             mapControl.RotationLock = false;

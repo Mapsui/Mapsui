@@ -10,7 +10,7 @@ namespace Mapsui.Samples.Common
         {
             return new Dictionary<string, Func<Map>>
             {
-                ["OpenStreetMap"] = OsmSample.CreateMap,
+                ["OpenStreetMap"] = PolygonSampleWkt.CreateMap,
                 ["Virtual Earth"] = BingSample.CreateMap,
                 ["Simple Points"] = PointsSample.CreateMap,
                 ["Simple LineStrings"] = LineStringSample.CreateMap,

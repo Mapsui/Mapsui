@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Net;
 using System.Text;
 using Mapsui.UI.iOS;
 using UIKit;
@@ -34,6 +35,8 @@ namespace Mapsui.Samples.iOS
 
         private void MapOnInfo(object sender, MapInfoEventArgs e)
         {
+            if (e.MapInfo.Feature == null) return; 
+
             Debug.WriteLine(ToString(e.MapInfo.Feature));
         }
 
@@ -53,7 +56,7 @@ namespace Mapsui.Samples.iOS
         {
             return new MapControl(bounds)
             {
-                Map = InfoLayersSample.CreateMap(),
+                Map = PolygonSampleWkt.CreateMap(),
                 RotationLock = false,
                 UnSnapRotationDegrees = 30,
                 ReSnapRotationDegrees = 5
