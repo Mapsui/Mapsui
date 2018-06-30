@@ -20272,6 +20272,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Android.MapControl.MapView_Touch
   nameWithType: MapControl.MapView_Touch
+- uid: Mapsui.UI.Android.MapControl.NavigateToFullEnvelope(Mapsui.Utilities.ScaleMethod)
+  name: NavigateToFullEnvelope(ScaleMethod)
+  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_NavigateToFullEnvelope_Mapsui_Utilities_ScaleMethod_
+  commentId: M:Mapsui.UI.Android.MapControl.NavigateToFullEnvelope(Mapsui.Utilities.ScaleMethod)
+  fullName: Mapsui.UI.Android.MapControl.NavigateToFullEnvelope(Mapsui.Utilities.ScaleMethod)
+  nameWithType: MapControl.NavigateToFullEnvelope(ScaleMethod)
+- uid: Mapsui.UI.Android.MapControl.NavigateToFullEnvelope*
+  name: NavigateToFullEnvelope
+  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_NavigateToFullEnvelope_
+  commentId: Overload:Mapsui.UI.Android.MapControl.NavigateToFullEnvelope
+  isSpec: "True"
+  fullName: Mapsui.UI.Android.MapControl.NavigateToFullEnvelope
+  nameWithType: MapControl.NavigateToFullEnvelope
 - uid: Mapsui.UI.Android.MapControl.OnLayout(System.Boolean,System.Int32,System.Int32,System.Int32,System.Int32)
   name: OnLayout(Boolean, Int32, Int32, Int32, Int32)
   href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_OnLayout_System_Boolean_System_Int32_System_Int32_System_Int32_System_Int32_
@@ -20402,19 +20415,32 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Android.MapControl.RotationLock
   nameWithType: MapControl.RotationLock
-- uid: Mapsui.UI.Android.MapControl.ScreenToWorld(Mapsui.IViewport,System.Single,Mapsui.Geometries.Point)
-  name: ScreenToWorld(IViewport, Single, Point)
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_ScreenToWorld_Mapsui_IViewport_System_Single_Mapsui_Geometries_Point_
-  commentId: M:Mapsui.UI.Android.MapControl.ScreenToWorld(Mapsui.IViewport,System.Single,Mapsui.Geometries.Point)
-  fullName: Mapsui.UI.Android.MapControl.ScreenToWorld(Mapsui.IViewport, System.Single, Mapsui.Geometries.Point)
-  nameWithType: MapControl.ScreenToWorld(IViewport, Single, Point)
-- uid: Mapsui.UI.Android.MapControl.ScreenToWorld*
-  name: ScreenToWorld
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_ScreenToWorld_
-  commentId: Overload:Mapsui.UI.Android.MapControl.ScreenToWorld
+- uid: Mapsui.UI.Android.MapControl.ScreenHeight
+  name: ScreenHeight
+  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_ScreenHeight
+  commentId: P:Mapsui.UI.Android.MapControl.ScreenHeight
+  fullName: Mapsui.UI.Android.MapControl.ScreenHeight
+  nameWithType: MapControl.ScreenHeight
+- uid: Mapsui.UI.Android.MapControl.ScreenHeight*
+  name: ScreenHeight
+  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_ScreenHeight_
+  commentId: Overload:Mapsui.UI.Android.MapControl.ScreenHeight
   isSpec: "True"
-  fullName: Mapsui.UI.Android.MapControl.ScreenToWorld
-  nameWithType: MapControl.ScreenToWorld
+  fullName: Mapsui.UI.Android.MapControl.ScreenHeight
+  nameWithType: MapControl.ScreenHeight
+- uid: Mapsui.UI.Android.MapControl.ScreenWidth
+  name: ScreenWidth
+  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_ScreenWidth
+  commentId: P:Mapsui.UI.Android.MapControl.ScreenWidth
+  fullName: Mapsui.UI.Android.MapControl.ScreenWidth
+  nameWithType: MapControl.ScreenWidth
+- uid: Mapsui.UI.Android.MapControl.ScreenWidth*
+  name: ScreenWidth
+  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_ScreenWidth_
+  commentId: Overload:Mapsui.UI.Android.MapControl.ScreenWidth
+  isSpec: "True"
+  fullName: Mapsui.UI.Android.MapControl.ScreenWidth
+  nameWithType: MapControl.ScreenWidth
 - uid: Mapsui.UI.Android.MapControl.ToDeviceIndependentUnits(Mapsui.Geometries.Point)
   name: ToDeviceIndependentUnits(Point)
   href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_ToDeviceIndependentUnits_Mapsui_Geometries_Point_
@@ -20473,19 +20499,6 @@ references:
   commentId: E:Mapsui.UI.Android.MapControl.ViewportInitialized
   fullName: Mapsui.UI.Android.MapControl.ViewportInitialized
   nameWithType: MapControl.ViewportInitialized
-- uid: Mapsui.UI.Android.MapControl.WorldToScreen(Mapsui.IViewport,System.Single,Mapsui.Geometries.Point)
-  name: WorldToScreen(IViewport, Single, Point)
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_WorldToScreen_Mapsui_IViewport_System_Single_Mapsui_Geometries_Point_
-  commentId: M:Mapsui.UI.Android.MapControl.WorldToScreen(Mapsui.IViewport,System.Single,Mapsui.Geometries.Point)
-  fullName: Mapsui.UI.Android.MapControl.WorldToScreen(Mapsui.IViewport, System.Single, Mapsui.Geometries.Point)
-  nameWithType: MapControl.WorldToScreen(IViewport, Single, Point)
-- uid: Mapsui.UI.Android.MapControl.WorldToScreen*
-  name: WorldToScreen
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_WorldToScreen_
-  commentId: Overload:Mapsui.UI.Android.MapControl.WorldToScreen
-  isSpec: "True"
-  fullName: Mapsui.UI.Android.MapControl.WorldToScreen
-  nameWithType: MapControl.WorldToScreen
 - uid: Mapsui.UI.Android.MapControl.ZoomLock
   name: ZoomLock
   href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_ZoomLock
@@ -20746,6 +20759,32 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.IMapControl.RotationLock
   nameWithType: IMapControl.RotationLock
+- uid: Mapsui.UI.IMapControl.ScreenHeight
+  name: ScreenHeight
+  href: api/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_ScreenHeight
+  commentId: P:Mapsui.UI.IMapControl.ScreenHeight
+  fullName: Mapsui.UI.IMapControl.ScreenHeight
+  nameWithType: IMapControl.ScreenHeight
+- uid: Mapsui.UI.IMapControl.ScreenHeight*
+  name: ScreenHeight
+  href: api/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_ScreenHeight_
+  commentId: Overload:Mapsui.UI.IMapControl.ScreenHeight
+  isSpec: "True"
+  fullName: Mapsui.UI.IMapControl.ScreenHeight
+  nameWithType: IMapControl.ScreenHeight
+- uid: Mapsui.UI.IMapControl.ScreenWidth
+  name: ScreenWidth
+  href: api/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_ScreenWidth
+  commentId: P:Mapsui.UI.IMapControl.ScreenWidth
+  fullName: Mapsui.UI.IMapControl.ScreenWidth
+  nameWithType: IMapControl.ScreenWidth
+- uid: Mapsui.UI.IMapControl.ScreenWidth*
+  name: ScreenWidth
+  href: api/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_ScreenWidth_
+  commentId: Overload:Mapsui.UI.IMapControl.ScreenWidth
+  isSpec: "True"
+  fullName: Mapsui.UI.IMapControl.ScreenWidth
+  nameWithType: IMapControl.ScreenWidth
 - uid: Mapsui.UI.IMapControl.UnSnapRotationDegrees
   name: UnSnapRotationDegrees
   href: api/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_UnSnapRotationDegrees
@@ -20947,6 +20986,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.iOS.MapControl.Map
   nameWithType: MapControl.Map
+- uid: Mapsui.UI.iOS.MapControl.NavigateToFullEnvelope(Mapsui.Utilities.ScaleMethod)
+  name: NavigateToFullEnvelope(ScaleMethod)
+  href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_NavigateToFullEnvelope_Mapsui_Utilities_ScaleMethod_
+  commentId: M:Mapsui.UI.iOS.MapControl.NavigateToFullEnvelope(Mapsui.Utilities.ScaleMethod)
+  fullName: Mapsui.UI.iOS.MapControl.NavigateToFullEnvelope(Mapsui.Utilities.ScaleMethod)
+  nameWithType: MapControl.NavigateToFullEnvelope(ScaleMethod)
+- uid: Mapsui.UI.iOS.MapControl.NavigateToFullEnvelope*
+  name: NavigateToFullEnvelope
+  href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_NavigateToFullEnvelope_
+  commentId: Overload:Mapsui.UI.iOS.MapControl.NavigateToFullEnvelope
+  isSpec: "True"
+  fullName: Mapsui.UI.iOS.MapControl.NavigateToFullEnvelope
+  nameWithType: MapControl.NavigateToFullEnvelope
 - uid: Mapsui.UI.iOS.MapControl.PanLock
   name: PanLock
   href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_PanLock
@@ -21051,19 +21103,32 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.iOS.MapControl.RotationLock
   nameWithType: MapControl.RotationLock
-- uid: Mapsui.UI.iOS.MapControl.ScreenToWorld(Mapsui.IViewport,System.Single,Mapsui.Geometries.Point)
-  name: ScreenToWorld(IViewport, Single, Point)
-  href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_ScreenToWorld_Mapsui_IViewport_System_Single_Mapsui_Geometries_Point_
-  commentId: M:Mapsui.UI.iOS.MapControl.ScreenToWorld(Mapsui.IViewport,System.Single,Mapsui.Geometries.Point)
-  fullName: Mapsui.UI.iOS.MapControl.ScreenToWorld(Mapsui.IViewport, System.Single, Mapsui.Geometries.Point)
-  nameWithType: MapControl.ScreenToWorld(IViewport, Single, Point)
-- uid: Mapsui.UI.iOS.MapControl.ScreenToWorld*
-  name: ScreenToWorld
-  href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_ScreenToWorld_
-  commentId: Overload:Mapsui.UI.iOS.MapControl.ScreenToWorld
+- uid: Mapsui.UI.iOS.MapControl.ScreenHeight
+  name: ScreenHeight
+  href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_ScreenHeight
+  commentId: P:Mapsui.UI.iOS.MapControl.ScreenHeight
+  fullName: Mapsui.UI.iOS.MapControl.ScreenHeight
+  nameWithType: MapControl.ScreenHeight
+- uid: Mapsui.UI.iOS.MapControl.ScreenHeight*
+  name: ScreenHeight
+  href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_ScreenHeight_
+  commentId: Overload:Mapsui.UI.iOS.MapControl.ScreenHeight
   isSpec: "True"
-  fullName: Mapsui.UI.iOS.MapControl.ScreenToWorld
-  nameWithType: MapControl.ScreenToWorld
+  fullName: Mapsui.UI.iOS.MapControl.ScreenHeight
+  nameWithType: MapControl.ScreenHeight
+- uid: Mapsui.UI.iOS.MapControl.ScreenWidth
+  name: ScreenWidth
+  href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_ScreenWidth
+  commentId: P:Mapsui.UI.iOS.MapControl.ScreenWidth
+  fullName: Mapsui.UI.iOS.MapControl.ScreenWidth
+  nameWithType: MapControl.ScreenWidth
+- uid: Mapsui.UI.iOS.MapControl.ScreenWidth*
+  name: ScreenWidth
+  href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_ScreenWidth_
+  commentId: Overload:Mapsui.UI.iOS.MapControl.ScreenWidth
+  isSpec: "True"
+  fullName: Mapsui.UI.iOS.MapControl.ScreenWidth
+  nameWithType: MapControl.ScreenWidth
 - uid: Mapsui.UI.iOS.MapControl.ToDeviceIndependentUnits(Mapsui.Geometries.Point)
   name: ToDeviceIndependentUnits(Point)
   href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_ToDeviceIndependentUnits_Mapsui_Geometries_Point_
@@ -21161,19 +21226,6 @@ references:
   commentId: E:Mapsui.UI.iOS.MapControl.ViewportInitialized
   fullName: Mapsui.UI.iOS.MapControl.ViewportInitialized
   nameWithType: MapControl.ViewportInitialized
-- uid: Mapsui.UI.iOS.MapControl.WorldToScreen(Mapsui.IViewport,System.Single,Mapsui.Geometries.Point)
-  name: WorldToScreen(IViewport, Single, Point)
-  href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_WorldToScreen_Mapsui_IViewport_System_Single_Mapsui_Geometries_Point_
-  commentId: M:Mapsui.UI.iOS.MapControl.WorldToScreen(Mapsui.IViewport,System.Single,Mapsui.Geometries.Point)
-  fullName: Mapsui.UI.iOS.MapControl.WorldToScreen(Mapsui.IViewport, System.Single, Mapsui.Geometries.Point)
-  nameWithType: MapControl.WorldToScreen(IViewport, Single, Point)
-- uid: Mapsui.UI.iOS.MapControl.WorldToScreen*
-  name: WorldToScreen
-  href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_WorldToScreen_
-  commentId: Overload:Mapsui.UI.iOS.MapControl.WorldToScreen
-  isSpec: "True"
-  fullName: Mapsui.UI.iOS.MapControl.WorldToScreen
-  nameWithType: MapControl.WorldToScreen
 - uid: Mapsui.UI.iOS.MapControl.ZoomLock
   name: ZoomLock
   href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_ZoomLock
@@ -22013,6 +22065,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Wpf.MapControl.Map
   nameWithType: MapControl.Map
+- uid: Mapsui.UI.Wpf.MapControl.NavigateToFullEnvelope(Mapsui.Utilities.ScaleMethod)
+  name: NavigateToFullEnvelope(ScaleMethod)
+  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_NavigateToFullEnvelope_Mapsui_Utilities_ScaleMethod_
+  commentId: M:Mapsui.UI.Wpf.MapControl.NavigateToFullEnvelope(Mapsui.Utilities.ScaleMethod)
+  fullName: Mapsui.UI.Wpf.MapControl.NavigateToFullEnvelope(Mapsui.Utilities.ScaleMethod)
+  nameWithType: MapControl.NavigateToFullEnvelope(ScaleMethod)
+- uid: Mapsui.UI.Wpf.MapControl.NavigateToFullEnvelope*
+  name: NavigateToFullEnvelope
+  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_NavigateToFullEnvelope_
+  commentId: Overload:Mapsui.UI.Wpf.MapControl.NavigateToFullEnvelope
+  isSpec: "True"
+  fullName: Mapsui.UI.Wpf.MapControl.NavigateToFullEnvelope
+  nameWithType: MapControl.NavigateToFullEnvelope
 - uid: Mapsui.UI.Wpf.MapControl.OnRender(DrawingContext)
   name: OnRender(DrawingContext)
   href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_OnRender_DrawingContext_
@@ -22143,19 +22208,32 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Wpf.MapControl.RotationLock
   nameWithType: MapControl.RotationLock
-- uid: Mapsui.UI.Wpf.MapControl.ScreenToWorld(Mapsui.IViewport,System.Single,Mapsui.Geometries.Point)
-  name: ScreenToWorld(IViewport, Single, Point)
-  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_ScreenToWorld_Mapsui_IViewport_System_Single_Mapsui_Geometries_Point_
-  commentId: M:Mapsui.UI.Wpf.MapControl.ScreenToWorld(Mapsui.IViewport,System.Single,Mapsui.Geometries.Point)
-  fullName: Mapsui.UI.Wpf.MapControl.ScreenToWorld(Mapsui.IViewport, System.Single, Mapsui.Geometries.Point)
-  nameWithType: MapControl.ScreenToWorld(IViewport, Single, Point)
-- uid: Mapsui.UI.Wpf.MapControl.ScreenToWorld*
-  name: ScreenToWorld
-  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_ScreenToWorld_
-  commentId: Overload:Mapsui.UI.Wpf.MapControl.ScreenToWorld
+- uid: Mapsui.UI.Wpf.MapControl.ScreenHeight
+  name: ScreenHeight
+  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_ScreenHeight
+  commentId: P:Mapsui.UI.Wpf.MapControl.ScreenHeight
+  fullName: Mapsui.UI.Wpf.MapControl.ScreenHeight
+  nameWithType: MapControl.ScreenHeight
+- uid: Mapsui.UI.Wpf.MapControl.ScreenHeight*
+  name: ScreenHeight
+  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_ScreenHeight_
+  commentId: Overload:Mapsui.UI.Wpf.MapControl.ScreenHeight
   isSpec: "True"
-  fullName: Mapsui.UI.Wpf.MapControl.ScreenToWorld
-  nameWithType: MapControl.ScreenToWorld
+  fullName: Mapsui.UI.Wpf.MapControl.ScreenHeight
+  nameWithType: MapControl.ScreenHeight
+- uid: Mapsui.UI.Wpf.MapControl.ScreenWidth
+  name: ScreenWidth
+  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_ScreenWidth
+  commentId: P:Mapsui.UI.Wpf.MapControl.ScreenWidth
+  fullName: Mapsui.UI.Wpf.MapControl.ScreenWidth
+  nameWithType: MapControl.ScreenWidth
+- uid: Mapsui.UI.Wpf.MapControl.ScreenWidth*
+  name: ScreenWidth
+  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_ScreenWidth_
+  commentId: Overload:Mapsui.UI.Wpf.MapControl.ScreenWidth
+  isSpec: "True"
+  fullName: Mapsui.UI.Wpf.MapControl.ScreenWidth
+  nameWithType: MapControl.ScreenWidth
 - uid: Mapsui.UI.Wpf.MapControl.ToDeviceIndependentUnits(Mapsui.Geometries.Point)
   name: ToDeviceIndependentUnits(Point)
   href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_ToDeviceIndependentUnits_Mapsui_Geometries_Point_
@@ -22220,19 +22298,6 @@ references:
   commentId: E:Mapsui.UI.Wpf.MapControl.ViewportInitialized
   fullName: Mapsui.UI.Wpf.MapControl.ViewportInitialized
   nameWithType: MapControl.ViewportInitialized
-- uid: Mapsui.UI.Wpf.MapControl.WorldToScreen(Mapsui.IViewport,System.Single,Mapsui.Geometries.Point)
-  name: WorldToScreen(IViewport, Single, Point)
-  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_WorldToScreen_Mapsui_IViewport_System_Single_Mapsui_Geometries_Point_
-  commentId: M:Mapsui.UI.Wpf.MapControl.WorldToScreen(Mapsui.IViewport,System.Single,Mapsui.Geometries.Point)
-  fullName: Mapsui.UI.Wpf.MapControl.WorldToScreen(Mapsui.IViewport, System.Single, Mapsui.Geometries.Point)
-  nameWithType: MapControl.WorldToScreen(IViewport, Single, Point)
-- uid: Mapsui.UI.Wpf.MapControl.WorldToScreen*
-  name: WorldToScreen
-  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_WorldToScreen_
-  commentId: Overload:Mapsui.UI.Wpf.MapControl.WorldToScreen
-  isSpec: "True"
-  fullName: Mapsui.UI.Wpf.MapControl.WorldToScreen
-  nameWithType: MapControl.WorldToScreen
 - uid: Mapsui.UI.Wpf.MapControl.WpfCanvas
   name: WpfCanvas
   href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_WpfCanvas
@@ -22311,19 +22376,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Wpf.MapControl.ZoomToBoxMode
   nameWithType: MapControl.ZoomToBoxMode
-- uid: Mapsui.UI.Wpf.MapControl.ZoomToFullEnvelope
-  name: ZoomToFullEnvelope()
-  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_ZoomToFullEnvelope
-  commentId: M:Mapsui.UI.Wpf.MapControl.ZoomToFullEnvelope
-  fullName: Mapsui.UI.Wpf.MapControl.ZoomToFullEnvelope()
-  nameWithType: MapControl.ZoomToFullEnvelope()
-- uid: Mapsui.UI.Wpf.MapControl.ZoomToFullEnvelope*
-  name: ZoomToFullEnvelope
-  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_ZoomToFullEnvelope_
-  commentId: Overload:Mapsui.UI.Wpf.MapControl.ZoomToFullEnvelope
-  isSpec: "True"
-  fullName: Mapsui.UI.Wpf.MapControl.ZoomToFullEnvelope
-  nameWithType: MapControl.ZoomToFullEnvelope
 - uid: Mapsui.UI.Wpf.MouseButtonEventArgsExtensions
   name: MouseButtonEventArgsExtensions
   href: api/Mapsui.UI.Wpf.MouseButtonEventArgsExtensions.html
@@ -24187,6 +24239,25 @@ references:
   isSpec: "True"
   fullName: System.DoubleExtensions.IsNanOrZero
   nameWithType: DoubleExtensions.IsNanOrZero
+- uid: System.FloatExtensions
+  name: FloatExtensions
+  href: api/System.FloatExtensions.html
+  commentId: T:System.FloatExtensions
+  fullName: System.FloatExtensions
+  nameWithType: FloatExtensions
+- uid: System.FloatExtensions.IsNanOrZero(System.Single)
+  name: IsNanOrZero(Single)
+  href: api/System.FloatExtensions.html#System_FloatExtensions_IsNanOrZero_System_Single_
+  commentId: M:System.FloatExtensions.IsNanOrZero(System.Single)
+  fullName: System.FloatExtensions.IsNanOrZero(System.Single)
+  nameWithType: FloatExtensions.IsNanOrZero(Single)
+- uid: System.FloatExtensions.IsNanOrZero*
+  name: IsNanOrZero
+  href: api/System.FloatExtensions.html#System_FloatExtensions_IsNanOrZero_
+  commentId: Overload:System.FloatExtensions.IsNanOrZero
+  isSpec: "True"
+  fullName: System.FloatExtensions.IsNanOrZero
+  nameWithType: FloatExtensions.IsNanOrZero
 - uid: System.IO
   name: System.IO
   href: api/System.IO.html
