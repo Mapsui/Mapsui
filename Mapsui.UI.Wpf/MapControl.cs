@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -358,8 +359,8 @@ namespace Mapsui.UI.Wpf
                 if (IsClick(_currentMousePosition, _downMousePosition))
                 {
                     HandleFeatureInfo(e);
-                    Map.InvokeInfo(touchPosition, _downMousePosition, Renderer.SymbolCache,
-                        WidgetTouched, e.ClickCount);
+                    OnInfo(Map.InvokeInfo(Map.Layers.Where(l => l.IsMapInfoLayer), Map.Viewport, 
+                        touchPosition, _downMousePosition, Renderer.SymbolCache, WidgetTouched, e.ClickCount));
                 }
             }
         }
@@ -399,7 +400,9 @@ namespace Mapsui.UI.Wpf
                 // todo: Pass the touchDown position. It needs to be set at touch down.
 
                 // todo: Figure out how to do a number of taps for WPF
-                Map.InvokeInfo(touchPosition, touchPosition, Renderer.SymbolCache, WidgetTouched, 1);
+                OnInfo(Map.InvokeInfo(Map.Layers.Where(l => l.IsMapInfoLayer), Map.Viewport, 
+                    touchPosition, touchPosition, Renderer.SymbolCache, 
+                    WidgetTouched, 1));
             }
         }
 
@@ -597,7 +600,8 @@ namespace Mapsui.UI.Wpf
 
         public MapInfo GetMapInfo(Geometries.Point screenPosition, int margin = 0)
         {
-            return InfoHelper.GetMapInfo(Map.Viewport, screenPosition, Map.InfoLayers, Renderer.SymbolCache, margin);
+            return InfoHelper.GetMapInfo(Map.Layers.Where(l => l.IsMapInfoLayer), Map.Viewport, 
+                screenPosition,  Renderer.SymbolCache, margin);
         }
 
         private void SKElementOnPaintSurface(object sender, SKPaintSurfaceEventArgs args)

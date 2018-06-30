@@ -111,6 +111,7 @@ namespace Mapsui.Samples.Wpf
             allSamples["Tiles on disk (Desktop)"] = MapTilerSample.CreateMap;
             allSamples["WMS (Desktop)"] = WmsSample.CreateMap;
             allSamples["Slow WMS (Desktop)"] = SlowWmsSample.CreateMap;
+            allSamples["Hover (Desktop)"] = HoverSample.CreateMap;
             return allSamples;
         }
 
@@ -127,7 +128,7 @@ namespace Mapsui.Samples.Wpf
             {
                 MapControl.Map.Layers.Clear();
                 MapControl.Map = sample.Value();
-                MapControl.Map.Info += MapControlOnInfo;
+                MapControl.Info += MapControlOnInfo;
                 MapControl.Map.Hover += MapControlOnHover;
                 LayerList.Initialize(MapControl.Map.Layers);
             };

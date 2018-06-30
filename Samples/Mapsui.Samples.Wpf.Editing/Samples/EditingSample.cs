@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Mapsui.Samples.Wpf.Editing.Layers;
+﻿using Mapsui.Samples.Wpf.Editing.Layers;
 using Mapsui.Geometries.WellKnownText;
 using Mapsui.Providers;
 using Mapsui.Styles;
@@ -21,7 +20,6 @@ namespace Mapsui.Samples.Wpf.Editing.Samples
             var editLayer = CreateEditLayer();
             map.Layers.Add(editLayer);
             map.Layers.Add(new VertexOnlyLayer(editLayer) {Name = "VertexLayer"});
-            map.InfoLayers.Add(map.Layers.First(l => l.Name == "EditLayer"));
             return map;
         }
 
@@ -30,7 +28,8 @@ namespace Mapsui.Samples.Wpf.Editing.Samples
             return new WritableLayer
             {
                 Name = "EditLayer",
-                Style = CreateEditLayerStyle()
+                Style = CreateEditLayerStyle(),
+                IsMapInfoLayer = true
             };
         }
 

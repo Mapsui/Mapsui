@@ -123,5 +123,10 @@ namespace Mapsui.Layers
         /// List of native resolutions
         /// </summary>
         IReadOnlyList<double> Resolutions { get; }
+
+        /// <summary>
+        /// Indicates if the layer should be taken into account for the GetMapInfo request
+        /// </summary>
+        bool IsMapInfoLayer { get; set; }
     }
 }

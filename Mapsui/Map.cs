@@ -111,11 +111,6 @@ namespace Mapsui
         }
 
         /// <summary>
-        /// List of layers, that are respected when creating the info event
-        /// </summary>
-        public IList<ILayer> InfoLayers { get; } = new List<ILayer>();
-
-        /// <summary>
         /// List of layers, that are respected when creating the hover event
         /// </summary>
         public IList<ILayer> HoverLayers { get; } = new List<ILayer>();
@@ -238,11 +233,6 @@ namespace Mapsui
         public event EventHandler RefreshGraphics;
 
         /// <summary>
-        ///  Called whenever a feature in one of the layers in InfoLayers is hitten by a click 
-        /// </summary>
-        public event EventHandler<MapInfoEventArgs> Info;
-
-        /// <summary>
         /// Called whenever mouse is over a feature in one of the layers in HoverLayers
         /// </summary>
         public event EventHandler<MapInfoEventArgs> Hover;
@@ -256,10 +246,11 @@ namespace Mapsui
         /// <param name="widgetCallback">Callback, which is called when Widget is hiten</param>
         /// <param name="numTaps">Number of clickes/taps</param>
         /// <returns>True, if something done </returns>
-        public bool InvokeInfo(Point screenPosition, Point startScreenPosition, ISymbolCache symbolCache,
+        public MapInfoEventArgs InvokeInfo(IEnumerable<ILayer> layers, Viewport viewport, Point screenPosition, 
+            Point startScreenPosition, ISymbolCache symbolCache,
             Action<IWidget, Point> widgetCallback, int numTaps)
         {
-            var layerWidgets = Layers.Select(l => l.Attribution).Where(a => a != null);
+            var layerWidgets = layers.Select(l => l.Attribution).Where(a => a != null);
             var allWidgets = layerWidgets.Concat(Widgets).ToList(); // Concat layer widgets and map widgets.
 
             // First check if a Widget is clicked. In the current design they are always on top of the map.
@@ -271,11 +262,10 @@ namespace Mapsui
                 // Widgets should be iterated through rather than getting a single widget, 
                 // based on Z index and then called until handled = true; Ordered By highest Z
                 widgetCallback(widget, screenPosition);
-                return true;
+                return null;
             }
 
-            if (Info == null) return false;
-            var mapInfo = InfoHelper.GetMapInfo(Viewport, screenPosition, InfoLayers, symbolCache);
+            var mapInfo = InfoHelper.GetMapInfo(layers, viewport, screenPosition, symbolCache);
 
             if (mapInfo != null)
             {
@@ -288,11 +278,10 @@ namespace Mapsui
                     NumTaps = numTaps,
                     Handled = false
                 };
-                Info?.Invoke(this, mapInfoEventArgs);
-                return mapInfoEventArgs.Handled;
+                return mapInfoEventArgs;
             }
 
-            return false;
+            return null;
         }
 
         private MapInfoEventArgs _previousHoverEventArgs;
@@ -306,7 +295,7 @@ namespace Mapsui
         {
             if (Hover == null) return;
             if (HoverLayers.Count == 0) return;
-            var mapInfo = InfoHelper.GetMapInfo(Viewport, screenPosition, HoverLayers, symbolCache);
+            var mapInfo = InfoHelper.GetMapInfo(Layers, Viewport, screenPosition, symbolCache);
 
             if (mapInfo?.Feature != _previousHoverEventArgs?.MapInfo.Feature) // only notify when the feature changes
             {
@@ -371,8 +360,6 @@ namespace Mapsui
 
             layer.DataChanged -= LayerDataChanged;
             layer.PropertyChanged -= LayerPropertyChanged;
-
-            InfoLayers.Remove(layer);
 
             Resolutions = DetermineResolutions(Layers);
 

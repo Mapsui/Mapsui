@@ -17,13 +17,12 @@ namespace Mapsui.UI
         /// </summary>
         /// <param name="viewport"></param>
         /// <param name="screenPosition"></param>
-        /// <param name="layers"></param>
         /// <param name="symbolCache"></param>
         /// <param name="margin">Margin of error in pixels. If the distance between screen position and geometry 
         /// is smaller than the margin it is seen as a hit.</param>
         /// <returns></returns>
-        public static MapInfo GetMapInfo(IViewport viewport, Point screenPosition,
-            IEnumerable<ILayer> layers, ISymbolCache symbolCache, int margin = 0)
+        public static MapInfo GetMapInfo(IEnumerable<ILayer> layers, IViewport viewport, Point screenPosition,
+            ISymbolCache symbolCache, int margin = 0)
         {
             var worldPosition = viewport.ScreenToWorld(screenPosition);
             return GetMapInfo(layers, worldPosition, screenPosition, viewport.Resolution, symbolCache, margin);
@@ -35,7 +34,7 @@ namespace Mapsui.UI
             var reversedLayer = layers.Reverse();
             foreach (var layer in reversedLayer)
             {
-                if (layer.Enabled == false) continue;
+                if (!layer.Enabled) continue;
                 if (layer.MinVisible > resolution) continue;
                 if (layer.MaxVisible < resolution) continue;
 

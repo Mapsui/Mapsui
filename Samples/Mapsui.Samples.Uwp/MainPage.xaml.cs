@@ -106,7 +106,7 @@ namespace Mapsui.Samples.Uwp
             {
                 MapControl.Map.Layers.Clear();
                 MapControl.Map = sample.Value();
-                MapControl.Map.Info += MapOnInfo;
+                MapControl.Info += MapOnInfo;
                 MapControl.Refresh();
             };
 

@@ -226,6 +226,9 @@ namespace Mapsui.Layers
         public virtual IReadOnlyList<double> Resolutions { get; } = new List<double>();
 
         /// <inheritdoc />
+        public bool IsMapInfoLayer { get; set; }
+
+        /// <inheritdoc />
         public abstract IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution);
 
         /// <summary>

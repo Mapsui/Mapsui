@@ -24,7 +24,6 @@ namespace Mapsui.Samples.Common.Desktop
             map.Layers.Add(CreateCountryLayer(countrySource));
             map.Layers.Add(CreateCityHoverPoints());
 
-            map.InfoLayers.Add(map.Layers.FindLayer("Countries").First());
             map.HoverLayers.Add(map.Layers.First(l => l.Name == "Points"));
 
             return map;
@@ -36,7 +35,8 @@ namespace Mapsui.Samples.Common.Desktop
             {
                 Name = "Countries",
                 DataSource = countrySource,
-                Style = CreateThemeStyle()
+                Style = CreateThemeStyle(),
+                IsMapInfoLayer = true
             };
         }
 

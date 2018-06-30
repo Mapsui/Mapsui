@@ -54,6 +54,11 @@ namespace Mapsui.UI.Wpf
         public event EventHandler ViewportInitialized; //todo: Consider to use the Viewport PropertyChanged
 
         /// <summary>
+        ///  Called whenever a feature in one of the layers in InfoLayers is hitten by a click 
+        /// </summary>
+        public event EventHandler<MapInfoEventArgs> Info;
+
+        /// <summary>
         /// Unsubscribe from map events </summary>
         public void Unsubscribe()
         {
@@ -220,5 +225,13 @@ namespace Mapsui.UI.Wpf
         {
             _map?.NavigateTo(_map.Envelope, scaleMethod);
         }
+
+        private void OnInfo(MapInfoEventArgs mapInfoEventArgs)
+        {
+            if (mapInfoEventArgs == null) return;
+
+            Info?.Invoke(this, mapInfoEventArgs);
+        }
+
     }
 }
