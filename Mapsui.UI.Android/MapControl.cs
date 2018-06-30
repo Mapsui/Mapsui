@@ -77,8 +77,8 @@ namespace Mapsui.UI.Android
 
             if (Map == null) return;
 
-            Map.Viewport.Width = ScreenWidth;
-            Map.Viewport.Height = ScreenHeight;
+            Map.Viewport.Width = ViewportWidth;
+            Map.Viewport.Height = ViewportHeight;
         }
 
         private void RunOnUIThread(Action action)
@@ -88,7 +88,7 @@ namespace Mapsui.UI.Android
 
         private void CanvasOnPaintSurface(object sender, SKPaintSurfaceEventArgs args)
         {
-            TryInitializeViewport(ScreenWidth, ScreenHeight);
+            TryInitializeViewport(ViewportWidth, ViewportHeight);
             if (!_map.Viewport.Initialized) return;
 
             Renderer.Render(args.Surface.Canvas, _map.Viewport, _map.Layers, _map.Widgets, _map.BackColor);
@@ -351,7 +351,7 @@ namespace Mapsui.UI.Android
             return (new Point(centerX, centerY), radius, angle);
         }
 
-        public float ScreenWidth => ToDeviceIndependentUnits(Width);
-        public float ScreenHeight => ToDeviceIndependentUnits(Height);
+        public float ViewportWidth => ToDeviceIndependentUnits(Width);
+        public float ViewportHeight => ToDeviceIndependentUnits(Height);
     }
 }

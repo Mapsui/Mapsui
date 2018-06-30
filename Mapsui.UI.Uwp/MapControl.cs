@@ -300,7 +300,7 @@ namespace Mapsui.UI.Uwp
             widget.HandleWidgetTouched(screenPosition);
         }
 
-        public float ScreenWidth => (float)ActualWidth;
-        public float ScreenHeight => (float)ActualHeight;
+        public float ViewportWidth => (float)ActualWidth;
+        public float ViewportHeight => (float)ActualHeight;
     }
 }

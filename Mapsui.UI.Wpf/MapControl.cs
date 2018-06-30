@@ -524,8 +524,8 @@ namespace Mapsui.UI.Wpf
             }
         }
 
-        public float ScreenWidth => (float)ActualWidth;
-        public float ScreenHeight => (float) ActualHeight;
+        public float ViewportWidth => (float)ActualWidth;
+        public float ViewportHeight => (float) ActualHeight;
 
         private static void OnManipulationInertiaStarting(object sender, ManipulationInertiaStartingEventArgs e)
         {

@@ -86,7 +86,7 @@ namespace Mapsui.UI.iOS
        
         void OnPaintSurface(object sender, SKPaintGLSurfaceEventArgs args)
         {
-            TryInitializeViewport(ScreenWidth, ScreenHeight);
+            TryInitializeViewport(ViewportWidth, ViewportHeight);
             if (!_map.Viewport.Initialized) return;
 
             // Unfortunately the SKGLView does not have a IgnorePixelScaling property,
@@ -207,8 +207,8 @@ namespace Mapsui.UI.iOS
 
                 if (_map?.Viewport == null) return;
 
-                _map.Viewport.Width = ScreenWidth;
-                _map.Viewport.Height = ScreenHeight;
+                _map.Viewport.Width = ViewportWidth;
+                _map.Viewport.Height = ViewportHeight;
 
                 Refresh();
             }
@@ -222,8 +222,8 @@ namespace Mapsui.UI.iOS
 
             if (_map?.Viewport == null) return;
 
-            _map.Viewport.Width = ScreenWidth;
-            _map.Viewport.Height = ScreenHeight;
+            _map.Viewport.Width = ViewportWidth;
+            _map.Viewport.Height = ViewportHeight;
 
             Refresh();
         }
@@ -274,7 +274,7 @@ namespace Mapsui.UI.iOS
             return (new Point(centerX, centerY), radius, angle);
         }
 
-        public float ScreenWidth => (float)_canvas.Frame.Width; // todo: check if we need _canvas
-        public float ScreenHeight => (float)_canvas.Frame.Height; // todo: check if we need _canvas
+        public float ViewportWidth => (float)_canvas.Frame.Width; // todo: check if we need _canvas
+        public float ViewportHeight => (float)_canvas.Frame.Height; // todo: check if we need _canvas
     }
 }
