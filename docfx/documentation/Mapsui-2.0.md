@@ -6,9 +6,11 @@ At the moment of writing (11 may 2018) a first beta of Mapsui v2 has been releas
 - Replace ILayer.Style with an ILayer.Styles of type ICollection<IFeature> which is empty by default
 - Do not derive ILayer from IAsyncDataFetcher.
 - Invert label alignment bottom/top.
-- Remove Viewport from Map
-- Remove Navigate methods from Map
-- Add an Action<Viewport> field to the Map to zoom to 'home' viewport 
+- Remove Viewport from Map.
+- Remove Navigate methods from Map.
+- Add an Action<Viewport> field to the Map to zoom to 'home' viewport. 
+- Wrap Viewport in LimitingViewport which limits it to user settings.
+- Remove ZoomIn/ZoomOut from WPF MapControl and turn into Navigate method.
 
 ### Done
 - Go to .NET Standard
