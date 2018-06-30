@@ -8,7 +8,7 @@
     <title>Mapsui 2.0 </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Mapsui 2.0 ">
-    <meta name="generator" content="docfx 2.36.2.0">
+    <meta name="generator" content="docfx 2.37.0.0">
     
     <link rel="shortcut icon" href="../images/favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -74,10 +74,12 @@
 <ul>
 <li>Replace ILayer.Style with an ILayer.Styles of type ICollection<ifeature> which is empty by default</ifeature></li>
 <li>Do not derive ILayer from IAsyncDataFetcher.</li>
-<li>The Info event should be moved from Map to MapControl</li>
-<li>Perhaps remove the InfoLayer list and add an InfoLayer boolean on ILayer</li>
-<li>Remove the HoverLayer method. It is not crossplatform and can affect performance. Add a sample to show how you could implement it with the regular MouseMove method.</li>
 <li>Invert label alignment bottom/top.</li>
+<li>Remove Viewport from Map.</li>
+<li>Remove Navigate methods from Map.</li>
+<li>Add an Action<viewport> field to the Map to zoom to &#39;home&#39; viewport. </viewport></li>
+<li>Wrap Viewport in LimitingViewport which limits it to user settings.</li>
+<li>Remove ZoomIn/ZoomOut from WPF MapControl and turn into Navigate method.</li>
 </ul>
 <h3 id="done">Done</h3>
 <ul>
@@ -87,6 +89,9 @@
 <li>Rename PanMode.None and ZoomMode.None. See question 1: <a href="https://github.com/pauldendulk/Mapsui/issues/278">https://github.com/pauldendulk/Mapsui/issues/278</a></li>
 <li>Rename BoundingBox.GetCentroid to Centroid</li>
 <li>Rename IGeometry.GetBoundingBox to BoundingBox</li>
+<li>Move Info event from Map to MapControl</li>
+<li>Remove the InfoLayer list and add an InfoLayer boolean on ILayer</li>
+<li>Remove the HoverLayer method. It is not crossplatform and can affect performance. </li>
 </ul>
 <h3 id="later">Later</h3>
 <ul>
