@@ -43,7 +43,7 @@ namespace Mapsui.Rendering.Xaml
         public void Render(object target, IViewport viewport, IEnumerable<ILayer> layers,
             IEnumerable<IWidget> widgets, Color background = null)
         {
-            var allWidgets = layers.Select(l => l.Attribution).ToList().Concat(widgets);
+            var allWidgets = layers.Select(l => l.Attribution).ToList().Where(w => w != null).Concat(widgets).ToList();
 
             Render((Canvas) target, viewport, layers, allWidgets, background);
         }
