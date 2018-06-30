@@ -83,7 +83,7 @@ namespace Mapsui.Layers
         {
             MemoryCache = new MemoryCache<Feature>(minTiles, maxTiles);
             Style = new VectorStyle { Outline = { Color = Color.FromArgb(0, 0, 0, 0) } }; // initialize with transparent outline
-            var fetchStrategy1 = fetchStrategy ?? new MinimalFetchStrategy();
+            var fetchStrategy1 = fetchStrategy ?? new FetchStrategy(3);
             _renderStrategy = renderFetchStrategy ?? new RenderGetStrategy();
             _minExtraTiles = minExtraTiles;
             _maxExtraTiles = maxExtraTiles;
