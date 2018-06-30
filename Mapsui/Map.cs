@@ -110,9 +110,10 @@ namespace Mapsui
             }
         }
 
-        /// <summary>
-        /// List of layers, that are respected when creating the hover event
-        /// </summary>
+        [Obsolete("Use ILayer.IsMapInfoLayer instead", true)]
+        public IList<ILayer> InfoLayers { get; } = new List<ILayer>();
+
+        [Obsolete("Use your own hover event and call Map.GetMapInfo", true)]
         public IList<ILayer> HoverLayers { get; } = new List<ILayer>();
 
         /// <summary>
@@ -232,9 +233,10 @@ namespace Mapsui
         /// </summary>
         public event EventHandler RefreshGraphics;
 
-        /// <summary>
-        /// Called whenever mouse is over a feature in one of the layers in HoverLayers
-        /// </summary>
+        [Obsolete("Use MapControl.Info instead", true)]
+        public event EventHandler<MapInfoEventArgs> Info;
+
+        [Obsolete("Use your own hover event instead and call Map.GetMapInfo", true)]
         public event EventHandler<MapInfoEventArgs> Hover;
 
         /// <summary>
@@ -283,34 +285,7 @@ namespace Mapsui
 
             return null;
         }
-
-        private MapInfoEventArgs _previousHoverEventArgs;
-
-        /// <summary>
-        ///  Check, if mouse is hovered over a feature at a given screen position
-        /// </summary>
-        /// <param name="screenPosition">Screen position to check for widgets and features</param>
-        /// <param name="symbolCache">Cache for symbols to determin size</param>
-        public void InvokeHover(Point screenPosition, ISymbolCache symbolCache)
-        {
-            if (Hover == null) return;
-            if (HoverLayers.Count == 0) return;
-            var mapInfo = InfoHelper.GetMapInfo(Layers, Viewport, screenPosition, symbolCache);
-
-            if (mapInfo?.Feature != _previousHoverEventArgs?.MapInfo.Feature) // only notify when the feature changes
-            {
-                var mapInfoEventArgs = new MapInfoEventArgs
-                {
-                    MapInfo = mapInfo,
-                    NumTaps = 0,
-                    Handled = false
-                };
-
-                _previousHoverEventArgs = mapInfoEventArgs;
-                Hover?.Invoke(this, mapInfoEventArgs);
-            }
-        }
-
+        
         /// <summary>
         /// Abort fetching of all layers
         /// </summary>

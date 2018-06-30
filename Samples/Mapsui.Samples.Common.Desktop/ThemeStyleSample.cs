@@ -23,9 +23,7 @@ namespace Mapsui.Samples.Common.Desktop
 
             map.Layers.Add(CreateCountryLayer(countrySource));
             map.Layers.Add(CreateCityHoverPoints());
-
-            map.HoverLayers.Add(map.Layers.First(l => l.Name == "Points"));
-
+            
             return map;
         }
 
@@ -93,7 +91,8 @@ namespace Mapsui.Samples.Common.Desktop
                     SymbolScale = 0.25
                 },
                 CRS = "EPSG:28992",
-                Name = "Points"
+                Name = "Points",
+                IsMapInfoLayer = true
             };
             return layer;
         }

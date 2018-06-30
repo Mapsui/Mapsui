@@ -11,6 +11,7 @@ using Mapsui.Samples.Common.Desktop;
 using Mapsui.Samples.Wpf.Utilities;
 using Mapsui.Tests.Common;
 using Mapsui.UI;
+using Mapsui.UI.Wpf;
 
 namespace Mapsui.Samples.Wpf
 {
@@ -111,7 +112,6 @@ namespace Mapsui.Samples.Wpf
             allSamples["Tiles on disk (Desktop)"] = MapTilerSample.CreateMap;
             allSamples["WMS (Desktop)"] = WmsSample.CreateMap;
             allSamples["Slow WMS (Desktop)"] = SlowWmsSample.CreateMap;
-            allSamples["Hover (Desktop)"] = HoverSample.CreateMap;
             return allSamples;
         }
 
@@ -129,7 +129,6 @@ namespace Mapsui.Samples.Wpf
                 MapControl.Map.Layers.Clear();
                 MapControl.Map = sample.Value();
                 MapControl.Info += MapControlOnInfo;
-                MapControl.Map.Hover += MapControlOnHover;
                 LayerList.Initialize(MapControl.Map.Layers);
             };
             return radioButton;

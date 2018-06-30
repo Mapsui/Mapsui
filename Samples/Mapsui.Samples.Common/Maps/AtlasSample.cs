@@ -26,8 +26,7 @@ namespace Mapsui.Samples.Common.Maps
 
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
             map.Layers.Add(CreateAtlasLayer(map.Envelope));
-            map.HoverLayers.Add(map.Layers.First(l => l.Name == AtlasLayerName));
-
+           
             return map;
         }
 
@@ -37,7 +36,8 @@ namespace Mapsui.Samples.Common.Maps
             {
                 Name = AtlasLayerName,
                 DataSource = CreateMemoryProviderWithDiverseSymbols(envelope, 1000),
-                Style = null
+                Style = null,
+                IsMapInfoLayer = true
             };
         }
 

@@ -442,8 +442,6 @@ namespace Mapsui.UI.Wpf
                 return;
             }
 
-            if (!_mouseDown) Map.InvokeHover(e.GetPosition(this).ToMapsui(), Renderer.SymbolCache);
-
             if (_mouseDown && !PanLock)
             {
                 if (_previousMousePosition == null || _previousMousePosition.IsEmpty())

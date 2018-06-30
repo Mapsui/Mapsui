@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using Mapsui.Geometries;
 using Mapsui.Layers;
@@ -12,16 +11,13 @@ namespace Mapsui.Samples.Common.Maps
 {
     public static class SvgSample
     {
-        private const string SvgLayerName = "Svg Layer";
-        
         public static Map CreateMap()
         {
             var map = new Map();
 
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
             map.Layers.Add(CreateSvgLayer(map.Envelope));
-            map.HoverLayers.Add(map.Layers.First(l => l.Name == SvgLayerName));
-
+            
             return map;
         }
 
@@ -29,9 +25,10 @@ namespace Mapsui.Samples.Common.Maps
         {
             return new MemoryLayer
             {
-                Name = SvgLayerName,
+                Name = "Svg Layer",
                 DataSource = CreateMemoryProviderWithDiverseSymbols(envelope, 2000),
-                Style = null
+                Style = null,
+                IsMapInfoLayer = true
             };
         }
 

@@ -12,16 +12,13 @@ namespace Mapsui.Samples.Common.Maps
 {
     public static class SymbolsSample
     {
-        private const string StylesLayerName = "Styles Layer";
-        
         public static Map CreateMap()
         {
             var map = new Map();
 
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
             map.Layers.Add(CreateStylesLayer(map.Envelope));
-            map.HoverLayers.Add(map.Layers.First(l => l.Name == StylesLayerName));
-
+            
             return map;
         }
 
@@ -29,9 +26,10 @@ namespace Mapsui.Samples.Common.Maps
         {
             return new MemoryLayer
             {
-                Name = StylesLayerName,
+                Name = "Styles Layer",
                 DataSource = CreateMemoryProviderWithDiverseSymbols(envelope, 25),
-                Style = null
+                Style = null,
+                IsMapInfoLayer = true
             };
         }
 
