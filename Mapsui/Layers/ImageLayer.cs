@@ -90,7 +90,6 @@ namespace Mapsui.Layers
             if (_newExtent == null) return;
             if (double.IsNaN(_newResolution)) return;
             StartNewFetch(_newExtent, _newResolution);
-            _startFetchTimer.Dispose();
         }
 
         public override IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
