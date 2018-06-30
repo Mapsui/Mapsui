@@ -1,0 +1,73 @@
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="svg5213"
+   version="1.1"
+   viewBox="0 0 32 32"
+   height="32"
+   width="32"
+   sodipodi:docname="ZoomIn.svg"
+   inkscape:version="0.92.2 5c3e80d, 2017-08-06">
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1054"
+     inkscape:window-height="669"
+     id="namedview5973"
+     showgrid="false"
+     inkscape:zoom="7.375"
+     inkscape:cx="16"
+     inkscape:cy="16"
+     inkscape:window-x="151"
+     inkscape:window-y="286"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg5213" />
+  <defs
+     id="defs5207" />
+  <metadata
+     id="metadata5210">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <image
+     y="0"
+     x="0"
+     id="image5992"
+     xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAhCAYAAAC803lsAAAABHNCSVQICAgIfAhkiAAAAGpJREFU
+WIXtzqERwCAQRcFLBhEFM5jQCC1RFA5PYZjzcYl/DRDxt4I95pyvu9suMUartd7B3a21ti0yxrC1
+1nVuG4AipAgpQoqQIqQIKUKKkCKkCClCipAipAj9JhJyztZ73xZIKVkp5fkAtvAS/XkHlHgAAAAA
+SUVORK5CYII=
+"
+     style="image-rendering:optimizeSpeed"
+     preserveAspectRatio="none"
+     height="32"
+     width="33" />
+  <g
+     transform="translate(0,-288.53332)"
+     id="layer1">
+    <path
+       transform="matrix(1.0049428,0,0,1.005458,-0.0292632,-2.1151142)"
+       d="m 15.883757,296.91029 0.04269,7.98287 8.092814,0.0193 -7.98287,0.0427 -0.0193,8.09281 -0.04269,-7.98287 -8.0928131,-0.0193 7.9828701,-0.0427 z"
+       id="path5808"
+       style="opacity:0.8;fill:#ffffff;fill-opacity:1;stroke:#808080;stroke-width:3.97930622;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+  </g>
+</svg>

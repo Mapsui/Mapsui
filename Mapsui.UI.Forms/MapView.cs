@@ -1,6 +1,8 @@
 ﻿using Mapsui.Layers;
 using Mapsui.UI.Forms.Extensions;
 using Mapsui.UI.Objects;
+using SkiaSharp;
+using SkiaSharp.Views.Forms;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -25,12 +27,14 @@ namespace Mapsui.UI.Forms
         private Layer _mapPinLayer;
         private Layer _mapDrawableLayer;
         private StackLayout _mapButtons;
-        private Image _mapZoomInButton;
-        private Image _mapZoomOutButton;
+        private SvgButton _mapZoomInButton;
+        private SvgButton _mapZoomOutButton;
         private Image _mapSpacingButton1;
-        private Image _mapMyLocationButton;
+        private SvgButton _mapMyLocationButton;
         private Image _mapSpacingButton2;
-        private Image _mapNorthingButton;
+        private SvgButton _mapNorthingButton;
+        private SKPicture _pictMyLocationNoCenter;
+        private SKPicture _pictMyLocationCenter;
 
         readonly ObservableCollection<Pin> _pins = new ObservableCollection<Pin>();
         readonly ObservableCollection<Drawable> _drawable = new ObservableCollection<Drawable>();
@@ -64,33 +68,44 @@ namespace Mapsui.UI.Forms
             AbsoluteLayout.SetLayoutBounds(_mapControl, new Rectangle(0, 0, 1, 1));
             AbsoluteLayout.SetLayoutFlags(_mapControl, AbsoluteLayoutFlags.All);
 
-            _mapZoomInButton = new Image { BackgroundColor = Color.Green, WidthRequest = 40, HeightRequest = 40 };
-            _mapZoomInButton.GestureRecognizers.Add(new TapGestureRecognizer
-            {
-                Command = new Command((object obj) => Device.BeginInvokeOnMainThread(() => _mapControl.Map.NavigateTo(_mapControl.Map.Viewport.Resolution /= 2)))
-            });
+            _pictMyLocationNoCenter = (new SkiaSharp.Extended.Svg.SKSvg()).Load(Mapsui.Utilities.EmbeddedResourceLoader.Load("Images.LocationNoCenter.svg", typeof(MapView)));
+            _pictMyLocationCenter = (new SkiaSharp.Extended.Svg.SKSvg()).Load(Mapsui.Utilities.EmbeddedResourceLoader.Load("Images.LocationCenter.svg", typeof(MapView)));
 
-            _mapZoomOutButton = new Image { BackgroundColor = Color.LightGreen, WidthRequest = 40, HeightRequest = 40 };
-            _mapZoomOutButton.GestureRecognizers.Add(new TapGestureRecognizer
+            _mapZoomInButton = new SvgButton(Mapsui.Utilities.EmbeddedResourceLoader.Load("Images.ZoomIn.svg", typeof(MapView))) 
+            { 
+                BackgroundColor = Color.White, 
+                WidthRequest = 40, 
+                HeightRequest = 40,
+                Command = new Command((object obj) => _mapControl.Map.NavigateTo(_mapControl.Map.Viewport.Resolution /= 2)),
+            };
+
+            _mapZoomOutButton = new SvgButton(Mapsui.Utilities.EmbeddedResourceLoader.Load("Images.ZoomOut.svg", typeof(MapView)))
             {
-                Command = new Command((object obj) => Device.BeginInvokeOnMainThread(() => _mapControl.Map.NavigateTo(_mapControl.Map.Viewport.Resolution *= 2)))
-            });
+                BackgroundColor = Color.White,
+                WidthRequest = 40,
+                HeightRequest = 40,
+                Command = new Command((object obj) => _mapControl.Map.NavigateTo(_mapControl.Map.Viewport.Resolution *= 2)),
+            };
 
             _mapSpacingButton1 = new Image { BackgroundColor = Color.Transparent, WidthRequest = 40, HeightRequest = 8 };
 
-            _mapMyLocationButton = new Image { BackgroundColor = Color.Red, WidthRequest = 40, HeightRequest = 40 };
-            _mapMyLocationButton.GestureRecognizers.Add(new TapGestureRecognizer
+            _mapMyLocationButton = new SvgButton(_pictMyLocationNoCenter)
             {
-                Command = new Command((object obj) => Device.BeginInvokeOnMainThread(() => MyLocationFollow = true))
-            });
+                BackgroundColor = Color.White,
+                WidthRequest = 40,
+                HeightRequest = 40,
+                Command = new Command((object obj) => MyLocationFollow = !MyLocationFollow),
+            };
 
             _mapSpacingButton2 = new Image { BackgroundColor = Color.Transparent, WidthRequest = 40, HeightRequest = 8 };
 
-            _mapNorthingButton = new Image { BackgroundColor = Color.Cyan, WidthRequest = 40, HeightRequest = 40 };
-            _mapNorthingButton.GestureRecognizers.Add(new TapGestureRecognizer
-            {
-                Command = new Command((object obj) => Device.BeginInvokeOnMainThread(() => _mapControl.Map.Viewport.Rotation = 0))
-            });
+            _mapNorthingButton = new SvgButton(Mapsui.Utilities.EmbeddedResourceLoader.Load("Images.LocationNoCenter.svg", typeof(MapView))) 
+            { 
+                BackgroundColor = Color.Cyan, 
+                WidthRequest = 40, 
+                HeightRequest = 40,
+                Command = new Command((object obj) => Device.BeginInvokeOnMainThread(() => _mapControl.Map.Viewport.Rotation = 0)),
+            };
 
             _mapButtons = new StackLayout { BackgroundColor = Color.Transparent, Opacity = 0.8, Spacing = 0, IsVisible = true };
 
@@ -415,25 +430,30 @@ namespace Mapsui.UI.Forms
 
                 if (MyLocationFollow)
                 {
+                    _mapMyLocationButton.Picture = _pictMyLocationCenter;
                     _mapControl.Map.NavigateTo(_mapMyLocationLayer.MyLocation.ToMapsui());    
+                }
+                else
+                {
+                    _mapMyLocationButton.Picture = _pictMyLocationNoCenter;
                 }
 
                 Refresh();
             }
 
-            if (propertyName.Equals(nameof(UnSnapRotationDegreesProperty)))
+            if (propertyName.Equals(nameof(UnSnapRotationDegrees)))
                 _mapControl.UnSnapRotationDegrees = UnSnapRotationDegrees;
 
-            if (propertyName.Equals(nameof(ReSnapRotationDegreesProperty)))
+            if (propertyName.Equals(nameof(ReSnapRotationDegrees)))
                 _mapControl.ReSnapRotationDegrees = ReSnapRotationDegrees;
             
-            if (propertyName.Equals(nameof(RotationLockProperty)))
+            if (propertyName.Equals(nameof(RotationLock)))
                 _mapControl.RotationLock = RotationLock;
 
-            if (propertyName.Equals(nameof(ZoomLockProperty)))
+            if (propertyName.Equals(nameof(ZoomLock)))
                 _mapControl.ZoomLock = ZoomLock;
 
-            if (propertyName.Equals(nameof(PanLockProperty)))
+            if (propertyName.Equals(nameof(PanLock)))
                 _mapControl.PanLock = PanLock;
         }
 
@@ -472,6 +492,10 @@ namespace Mapsui.UI.Forms
             }
             if (e.PropertyName.Equals(nameof(Viewport.Center)))
             {
+                if (MyLocationFollow && _mapControl.Map.Viewport.Center != _mapMyLocationLayer.MyLocation.ToMapsui())
+                {
+                    //_mapControl.Map.NavigateTo(_mapMyLocationLayer.MyLocation.ToMapsui());
+                }
             }
         }
 
