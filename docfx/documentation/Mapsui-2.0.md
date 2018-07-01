@@ -9,6 +9,7 @@ At the moment of writing (11 may 2018) a first beta of Mapsui v2 has been releas
 - Replace ILayer.Style with an ILayer.Styles of type ICollection<IFeature> which is empty by default
 - Do not derive ILayer from IAsyncDataFetcher.
 - Invert label alignment bottom/top.
+- Perhaps add animation in an AnimatedViewport which wraps the actual Viewport.
 
 ### Done
 - Add an Action<Viewport> field to the Map to zoom to 'home' viewport. 
