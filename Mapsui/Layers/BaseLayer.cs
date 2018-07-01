@@ -247,7 +247,7 @@ namespace Mapsui.Layers
         /// <param name="majorChange">True, when the change is a major change</param>
         /// <param name="extent">Extent of viewport</param>
         /// <param name="resolution">Resolution of viewport</param>
-        public abstract void ViewChanged(bool majorChange, BoundingBox extent, double resolution);
+        public abstract void RefreshData(bool majorChange, BoundingBox extent, double resolution);
 
         /// <inheritdoc />
         public virtual bool? IsCrsSupported(string crs)
