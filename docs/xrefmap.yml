@@ -20356,6 +20356,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Android.MapControl.OnSizeChanged
   nameWithType: MapControl.OnSizeChanged
+- uid: Mapsui.UI.Android.MapControl.OpenBrowser(System.String)
+  name: OpenBrowser(String)
+  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_OpenBrowser_System_String_
+  commentId: M:Mapsui.UI.Android.MapControl.OpenBrowser(System.String)
+  fullName: Mapsui.UI.Android.MapControl.OpenBrowser(System.String)
+  nameWithType: MapControl.OpenBrowser(String)
+- uid: Mapsui.UI.Android.MapControl.OpenBrowser*
+  name: OpenBrowser
+  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_OpenBrowser_
+  commentId: Overload:Mapsui.UI.Android.MapControl.OpenBrowser
+  isSpec: "True"
+  fullName: Mapsui.UI.Android.MapControl.OpenBrowser
+  nameWithType: MapControl.OpenBrowser
 - uid: Mapsui.UI.Android.MapControl.PanLock
   name: PanLock
   href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_PanLock
@@ -20713,6 +20726,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.IMapControl.Map
   nameWithType: IMapControl.Map
+- uid: Mapsui.UI.IMapControl.OpenBrowser(System.String)
+  name: OpenBrowser(String)
+  href: api/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_OpenBrowser_System_String_
+  commentId: M:Mapsui.UI.IMapControl.OpenBrowser(System.String)
+  fullName: Mapsui.UI.IMapControl.OpenBrowser(System.String)
+  nameWithType: IMapControl.OpenBrowser(String)
+- uid: Mapsui.UI.IMapControl.OpenBrowser*
+  name: OpenBrowser
+  href: api/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_OpenBrowser_
+  commentId: Overload:Mapsui.UI.IMapControl.OpenBrowser
+  isSpec: "True"
+  fullName: Mapsui.UI.IMapControl.OpenBrowser
+  nameWithType: IMapControl.OpenBrowser
 - uid: Mapsui.UI.IMapControl.PixelDensity
   name: PixelDensity
   href: api/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_PixelDensity
@@ -20804,6 +20830,32 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.IMapControl.RotationLock
   nameWithType: IMapControl.RotationLock
+- uid: Mapsui.UI.IMapControl.ToDeviceIndependentUnits(Mapsui.Geometries.Point)
+  name: ToDeviceIndependentUnits(Point)
+  href: api/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_ToDeviceIndependentUnits_Mapsui_Geometries_Point_
+  commentId: M:Mapsui.UI.IMapControl.ToDeviceIndependentUnits(Mapsui.Geometries.Point)
+  fullName: Mapsui.UI.IMapControl.ToDeviceIndependentUnits(Mapsui.Geometries.Point)
+  nameWithType: IMapControl.ToDeviceIndependentUnits(Point)
+- uid: Mapsui.UI.IMapControl.ToDeviceIndependentUnits*
+  name: ToDeviceIndependentUnits
+  href: api/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_ToDeviceIndependentUnits_
+  commentId: Overload:Mapsui.UI.IMapControl.ToDeviceIndependentUnits
+  isSpec: "True"
+  fullName: Mapsui.UI.IMapControl.ToDeviceIndependentUnits
+  nameWithType: IMapControl.ToDeviceIndependentUnits
+- uid: Mapsui.UI.IMapControl.ToPixels(Mapsui.Geometries.Point)
+  name: ToPixels(Point)
+  href: api/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_ToPixels_Mapsui_Geometries_Point_
+  commentId: M:Mapsui.UI.IMapControl.ToPixels(Mapsui.Geometries.Point)
+  fullName: Mapsui.UI.IMapControl.ToPixels(Mapsui.Geometries.Point)
+  nameWithType: IMapControl.ToPixels(Point)
+- uid: Mapsui.UI.IMapControl.ToPixels*
+  name: ToPixels
+  href: api/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_ToPixels_
+  commentId: Overload:Mapsui.UI.IMapControl.ToPixels
+  isSpec: "True"
+  fullName: Mapsui.UI.IMapControl.ToPixels
+  nameWithType: IMapControl.ToPixels
 - uid: Mapsui.UI.IMapControl.UnSnapRotationDegrees
   name: UnSnapRotationDegrees
   href: api/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_UnSnapRotationDegrees
@@ -21050,6 +21102,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.iOS.MapControl.NavigateToFullEnvelope
   nameWithType: MapControl.NavigateToFullEnvelope
+- uid: Mapsui.UI.iOS.MapControl.OpenBrowser(System.String)
+  name: OpenBrowser(String)
+  href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_OpenBrowser_System_String_
+  commentId: M:Mapsui.UI.iOS.MapControl.OpenBrowser(System.String)
+  fullName: Mapsui.UI.iOS.MapControl.OpenBrowser(System.String)
+  nameWithType: MapControl.OpenBrowser(String)
+- uid: Mapsui.UI.iOS.MapControl.OpenBrowser*
+  name: OpenBrowser
+  href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_OpenBrowser_
+  commentId: Overload:Mapsui.UI.iOS.MapControl.OpenBrowser
+  isSpec: "True"
+  fullName: Mapsui.UI.iOS.MapControl.OpenBrowser
+  nameWithType: MapControl.OpenBrowser
 - uid: Mapsui.UI.iOS.MapControl.PanLock
   name: PanLock
   href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_PanLock
@@ -22148,6 +22213,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Wpf.MapControl.OnRender
   nameWithType: MapControl.OnRender
+- uid: Mapsui.UI.Wpf.MapControl.OpenBrowser(System.String)
+  name: OpenBrowser(String)
+  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_OpenBrowser_System_String_
+  commentId: M:Mapsui.UI.Wpf.MapControl.OpenBrowser(System.String)
+  fullName: Mapsui.UI.Wpf.MapControl.OpenBrowser(System.String)
+  nameWithType: MapControl.OpenBrowser(String)
+- uid: Mapsui.UI.Wpf.MapControl.OpenBrowser*
+  name: OpenBrowser
+  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_OpenBrowser_
+  commentId: Overload:Mapsui.UI.Wpf.MapControl.OpenBrowser
+  isSpec: "True"
+  fullName: Mapsui.UI.Wpf.MapControl.OpenBrowser
+  nameWithType: MapControl.OpenBrowser
 - uid: Mapsui.UI.Wpf.MapControl.PanLock
   name: PanLock
   href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_PanLock
