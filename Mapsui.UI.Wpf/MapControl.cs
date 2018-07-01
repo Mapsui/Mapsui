@@ -406,14 +406,9 @@ namespace Mapsui.UI.Wpf
             }
         }
 
-        private void WidgetTouched(IWidget widget, Geometries.Point screenPosition)
+        public void OpenBrowser(string url)
         {
-            if (widget is Hyperlink hyperlink)
-            {
-                Process.Start(hyperlink.Url);
-            }
-
-            widget.HandleWidgetTouched(screenPosition);
+            Process.Start(url);
         }
 
         private void HandleFeatureInfo(MouseButtonEventArgs e)

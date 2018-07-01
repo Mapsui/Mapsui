@@ -39,5 +39,7 @@ namespace Mapsui.UI
         /// The height of the map on screen in device independent units
         /// </summary>
         float ViewportHeight { get; }
+
+        void OpenBrowser(string url); //todo: remove when implemented an all platforms.
     }
 }

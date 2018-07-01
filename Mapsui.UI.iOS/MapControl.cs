@@ -228,16 +228,11 @@ namespace Mapsui.UI.iOS
             Refresh();
         }
 
-        private static void WidgetTouched(IWidget widget, Point screenPosition)
+        public void OpenBrowser(string url)
         {
-            if (widget is Hyperlink hyperlink)
-            {
-                UIApplication.SharedApplication.OpenUrl(new NSUrl(hyperlink.Url));
-            }
-
-            widget.HandleWidgetTouched(screenPosition);
+            UIApplication.SharedApplication.OpenUrl(new NSUrl(url));
         }
-        
+
         public new void Dispose()
         {
             Unsubscribe();

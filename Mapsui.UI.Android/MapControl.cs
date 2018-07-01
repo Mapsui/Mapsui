@@ -288,20 +288,15 @@ namespace Mapsui.UI.Android
             view.Right = r;
         }
 
-        private void WidgetTouched(IWidget widget, Point screenPosition)
+        public void OpenBrowser(string url)
         {
-            if (widget is Hyperlink hyperlink)
-            {
-                global::Android.Net.Uri uri = global::Android.Net.Uri.Parse(hyperlink.Url);
-                Intent intent = new Intent(Intent.ActionView);
-                intent.SetData(uri);
+            global::Android.Net.Uri uri = global::Android.Net.Uri.Parse(url);
+            Intent intent = new Intent(Intent.ActionView);
+            intent.SetData(uri);
 
-                Intent chooser = Intent.CreateChooser(intent, "Open with");
+            Intent chooser = Intent.CreateChooser(intent, "Open with");
 
-                Context.StartActivity(chooser);
-            }
-
-            widget.HandleWidgetTouched(screenPosition);
+            Context.StartActivity(chooser);
         }
 
         /// <summary>

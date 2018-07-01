@@ -290,14 +290,9 @@ namespace Mapsui.UI.Uwp
 
         public float PixelDensity => (float)DisplayInformation.GetForCurrentView().RawPixelsPerViewPixel;
 
-        private void WidgetTouched(IWidget widget, Geometries.Point screenPosition)
+        public void OpenBrowser(string url)
         {
-            if (widget is Hyperlink hyperlink)
-            {
-                Task.Run(() => Launcher.LaunchUriAsync(new Uri(hyperlink.Url)));
-            }
-
-            widget.HandleWidgetTouched(screenPosition);
+            Task.Run(() => Launcher.LaunchUriAsync(new Uri(url)));
         }
 
         public float ViewportWidth => (float)ActualWidth;

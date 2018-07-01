@@ -7,6 +7,7 @@ using Mapsui.Logging;
 using Mapsui.Rendering;
 using Mapsui.Rendering.Skia;
 using Mapsui.Utilities;
+using Mapsui.Widgets;
 
 #if __ANDROID__
 namespace Mapsui.UI.Android
@@ -233,5 +234,14 @@ namespace Mapsui.UI.Wpf
             Info?.Invoke(this, mapInfoEventArgs);
         }
 
+        private void WidgetTouched(IWidget widget, Point screenPosition)
+        {
+            if (widget is Hyperlink hyperlink)
+            {
+                OpenBrowser(hyperlink.Url);
+            }
+
+            widget.HandleWidgetTouched(screenPosition);
+        }
     }
 }
