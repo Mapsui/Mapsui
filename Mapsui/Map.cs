@@ -23,7 +23,6 @@ using Mapsui.Fetcher;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Projection;
-using Mapsui.Rendering;
 using Mapsui.Styles;
 using Mapsui.UI;
 using Mapsui.Utilities;
@@ -369,11 +368,5 @@ namespace Mapsui
         // let users set the viewport. Adding the navigate methods to the Viewport
         // would make sense for that scenario.
         public Func<BoundingBox> DefaultExtent { get; set; }
-
-        public MapInfo GetMapInfo(IEnumerable<ILayer> layers, IViewport viewport, Point screenPosition,
-            ISymbolCache symbolCache, int margin = 0)
-        {
-            return MapInfoHelper.GetMapInfo(layers, viewport, screenPosition, symbolCache);
-        }
     }
 }
