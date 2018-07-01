@@ -20,8 +20,8 @@ namespace Mapsui.Samples.Common.Maps
             map.Widgets.Add(CreateHyperlink("Top Left", VerticalAlignment.Top, HorizontalAlignment.Left));
             map.Widgets.Add(CreateHyperlink("Top Center", VerticalAlignment.Top, HorizontalAlignment.Center));
 
-            map.Widgets.Add(new ZoomInOutWidget(map) { MarginX = 20, MarginY = 20 });
-            map.Widgets.Add(new ZoomInOutWidget(map) { Orientation = Orientation.Horizontal, VerticalAlignment = VerticalAlignment.Center, HorizontalAlignment = HorizontalAlignment.Center });
+            map.Widgets.Add(new ZoomInOutWidget { MarginX = 20, MarginY = 20 });
+            map.Widgets.Add(new ZoomInOutWidget { Orientation = Orientation.Horizontal, VerticalAlignment = VerticalAlignment.Center, HorizontalAlignment = HorizontalAlignment.Center });
 
             return map;
         }

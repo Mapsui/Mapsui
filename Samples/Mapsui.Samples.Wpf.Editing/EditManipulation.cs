@@ -53,7 +53,7 @@ namespace Mapsui.Samples.Wpf.Editing
                             return editManager.TryInsertVertex(
                                 mapControl.GetMapInfo(screenPosition, editManager.VertexRadius));
                         }
-                        return editManager.AddVertex(mapControl.Map.Viewport.ScreenToWorld(screenPosition));
+                        return editManager.AddVertex(mapControl.Viewport.ScreenToWorld(screenPosition));
                     }
                     return false;
                 case MouseState.Down:

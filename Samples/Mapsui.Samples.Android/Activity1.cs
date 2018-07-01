@@ -41,7 +41,7 @@ namespace Mapsui.Samples.Android
             _mapControl = FindViewById<MapControl>(Resource.Id.mapcontrol);
             _mapControl.Map = InfoLayersSample.CreateMap();
             _mapControl.Info+= MapOnInfo;
-            _mapControl.Map.Viewport.ViewportChanged += ViewportOnViewportChanged;
+            _mapControl.Viewport.ViewportChanged += ViewportOnViewportChanged;
             _mapControl.RotationLock = false;
             _mapControl.UnSnapRotationDegrees = 30;
             _mapControl.ReSnapRotationDegrees = 5;
@@ -106,7 +106,7 @@ namespace Mapsui.Samples.Android
             // var screenPositionInPixels = args.MapInfo.ScreenPosition;
 
             // Or position on feature position: 
-            var screenPosition = _mapControl.Map.Viewport.WorldToScreen(args.MapInfo.Feature.Geometry.BoundingBox.Centroid);
+            var screenPosition = _mapControl.Viewport.WorldToScreen(args.MapInfo.Feature.Geometry.BoundingBox.Centroid);
             var screenPositionInPixels = _mapControl.ToPixels(screenPosition);
             
             _popup.SetX((float)screenPositionInPixels.X);

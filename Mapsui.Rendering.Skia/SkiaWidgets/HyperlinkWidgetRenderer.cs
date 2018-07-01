@@ -6,7 +6,7 @@ namespace Mapsui.Rendering.Skia.SkiaWidgets
 {
     public class HyperlinkWidgetRenderer : ISkiaWidgetRenderer
     {
-        public void Draw(SKCanvas canvas, double screenWidth, double screenHeight, IWidget widget,
+        public void Draw(SKCanvas canvas, Map map, IReadOnlyViewport viewport, IWidget widget,
             float layerOpacity)
         {
             var hyperlink = (Hyperlink) widget;
@@ -22,8 +22,8 @@ namespace Mapsui.Rendering.Skia.SkiaWidgets
             var backRect = new SKRect(0, 0,
                 textRect.Width + hyperlink.PaddingX * 2,
                 textPaint.TextSize + hyperlink.PaddingY * 2); // Use the font's TextSize for consistency
-            var offsetX = GetOffsetX(backRect.Width, hyperlink.MarginX, hyperlink.HorizontalAlignment, screenWidth);
-            var offsetY = GetOffsetY(backRect.Height, hyperlink.MarginY, hyperlink.VerticalAlignment, screenHeight);
+            var offsetX = GetOffsetX(backRect.Width, hyperlink.MarginX, hyperlink.HorizontalAlignment, viewport.Width);
+            var offsetY = GetOffsetY(backRect.Height, hyperlink.MarginY, hyperlink.VerticalAlignment, viewport.Height);
             backRect.Offset(offsetX, offsetY);
             canvas.DrawRoundRect(backRect, hyperlink.CornerRadius, hyperlink.CornerRadius, backPaint);
             hyperlink.Envelope = backRect.ToMapsui();

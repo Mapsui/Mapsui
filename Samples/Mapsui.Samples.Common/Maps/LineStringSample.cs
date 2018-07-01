@@ -16,8 +16,7 @@ namespace Mapsui.Samples.Common.Maps
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
             var lineStringLayer = CreateLineStringLayer(CreateLineStringStyle());
             map.Layers.Add(lineStringLayer);
-            map.Viewport.Center = lineStringLayer.Envelope.Centroid;
-            map.Viewport.Resolution = 200;
+            map.Home = n => n.NavigateTo(lineStringLayer.Envelope.Centroid, 200);
             return map;
         }
 

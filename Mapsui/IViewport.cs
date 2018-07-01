@@ -19,7 +19,7 @@ using Mapsui.Geometries;
 
 namespace Mapsui
 {
-    public interface IViewport
+    public interface IViewport : IReadOnlyViewport
     {
         /// <summary>
         /// Coordinate of center of viewport in map coordinates

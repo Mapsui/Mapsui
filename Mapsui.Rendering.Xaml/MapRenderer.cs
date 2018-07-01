@@ -40,19 +40,19 @@ namespace Mapsui.Rendering.Xaml
             WidgetRenders[typeof(ZoomInOutWidget)] = new ZoomInOutWidgetRenderer();
         }
 
-        public void Render(object target, IViewport viewport, IEnumerable<ILayer> layers,
+        public void Render(object target, Map map, IViewport viewport, IEnumerable<ILayer> layers,
             IEnumerable<IWidget> widgets, Color background = null)
         {
             var allWidgets = layers.Select(l => l.Attribution).ToList().Where(w => w != null).Concat(widgets).ToList();
 
-            Render((Canvas) target, viewport, layers, allWidgets, background);
+            RenderTypeSave((Canvas) target, map, viewport, layers, allWidgets, background);
         }
-        private void Render(Canvas canvas, IViewport viewport, IEnumerable<ILayer> layers, 
+        private void RenderTypeSave(Canvas canvas, Map map, IViewport viewport, IEnumerable<ILayer> layers, 
             IEnumerable<IWidget> widgets, Color background = null)
         {
             Clear(canvas, background);
             if (viewport.Initialized) Render(canvas, viewport, layers);
-            Render(canvas, widgets);
+            Render(canvas, map, viewport, widgets);
         }
 
         private void Render(Canvas target, IViewport viewport, IEnumerable<ILayer> layers)
@@ -60,9 +60,9 @@ namespace Mapsui.Rendering.Xaml
             Render(target, viewport, layers,  _symbolCache, false);
         }
 
-        private void Render(object target, IEnumerable<IWidget> widgets)
+        private void Render(object target, Map map, IReadOnlyViewport viewport, IEnumerable<IWidget> widgets)
         {
-            WidgetRenderer.Render(target, widgets, WidgetRenders);
+            WidgetRenderer.Render(target, map, viewport, widgets, WidgetRenders);
         }
 
         private static void Render(Canvas canvas, IViewport viewport, IEnumerable<ILayer> layers,

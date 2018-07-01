@@ -13,20 +13,16 @@ namespace Mapsui.Tests.Common.Maps
             var map = new Map
             {
                 BackColor = Color.Transparent,
-                Viewport =
-                {
-                    Center = new Point(0, 0),
-                    Width = 200,
-                    Height = 200,
-                    Resolution = 0.5
-                }
+                Home = n => n.NavigateTo(new Point(0, 0), 0.5)
             };
+
             map.Layers.Add(new MemoryLayer
             {
                 DataSource = new MemoryProvider(CreateFeatures()),
                 Name = "Symbol Types",
                 Style = null
             });
+
             return map;
         }
 

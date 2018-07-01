@@ -1,5 +1,6 @@
 ﻿using BruTile.Predefined;
 using Mapsui.Fetcher;
+using Mapsui.Geometries;
 using Mapsui.Layers;
 
 namespace Mapsui.Samples.Common.Maps
@@ -16,8 +17,7 @@ namespace Mapsui.Samples.Common.Maps
                 Name = "Bing Aerial",
                 
             });
-            map.NavigateTo(map.Resolutions[14]);
-            map.NavigateTo(1059114.80157058, 5179580.75916194);
+            map.Home = n => n.NavigateTo(new Point(1059114.80157058, 5179580.75916194), map.Resolutions[14]);
             return map;
         }
     }

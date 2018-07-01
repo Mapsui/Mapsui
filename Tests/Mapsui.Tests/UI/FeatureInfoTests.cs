@@ -14,10 +14,13 @@ namespace Mapsui.Tests.UI
         {
             // arrange
             var map = new Map();
-            map.Viewport.Resolution = 1;
-            map.Viewport.Width = 10;
-            map.Viewport.Height = 10;
-            map.Viewport.Center = new Point(5, 5);
+            var viewport = new Viewport
+            {
+                Resolution = 1,
+                Width = 10,
+                Height = 10,
+                Center = new Point(5, 5)
+            };
 
             map.Layers.Add(new MemoryLayer
             {
@@ -26,12 +29,12 @@ namespace Mapsui.Tests.UI
                 IsMapInfoLayer = true
             });
             
-            var screenPositionHit = map.Viewport.WorldToScreen(2, 2);
-            var screenPositionMiss = map.Viewport.WorldToScreen(9, 9);
+            var screenPositionHit = viewport.WorldToScreen(2, 2);
+            var screenPositionMiss = viewport.WorldToScreen(9, 9);
 
             // act
-            var argsHit = MapInfoHelper.GetMapInfo(map.Layers, map.Viewport, screenPositionHit, null);
-            var argsMis = MapInfoHelper.GetMapInfo(map.Layers, map.Viewport, screenPositionMiss,null);
+            var argsHit = MapInfoHelper.GetMapInfo(map.Layers, viewport, screenPositionHit, null);
+            var argsMis = MapInfoHelper.GetMapInfo(map.Layers, viewport, screenPositionMiss,null);
 
             // assert;
             Assert.IsTrue(argsHit.Feature.Geometry != null);
@@ -61,10 +64,13 @@ namespace Mapsui.Tests.UI
         {
             // arrange
             var map = new Map();
-            map.Viewport.Resolution = 1;
-            map.Viewport.Width = 10;
-            map.Viewport.Height = 10;
-            map.Viewport.Center = new Point(5, 5);
+            var viewport = new Viewport
+            {
+                Resolution = 1,
+                Width = 10,
+                Height = 10,
+                Center = new Point(5, 5)
+            };
 
             map.Layers.Add(new MemoryLayer
             {
@@ -74,10 +80,10 @@ namespace Mapsui.Tests.UI
                 IsMapInfoLayer = true
             });
 
-            var screenPositionHit = map.Viewport.WorldToScreen(2, 2);
+            var screenPositionHit = viewport.WorldToScreen(2, 2);
 
             // act
-            var argsHit = MapInfoHelper.GetMapInfo(map.Layers, map.Viewport, screenPositionHit, null);
+            var argsHit = MapInfoHelper.GetMapInfo(map.Layers, viewport, screenPositionHit, null);
            
             // assert;
             Assert.IsTrue(argsHit.Feature == null);
@@ -90,10 +96,13 @@ namespace Mapsui.Tests.UI
         {
             // arrange
             var map = new Map();
-            map.Viewport.Resolution = 1;
-            map.Viewport.Width = 10;
-            map.Viewport.Height = 10;
-            map.Viewport.Center = new Point(5, 5);
+            var viewport = new Viewport
+            {
+                Resolution = 1,
+                Width = 10,
+                Height = 10,
+                Center = new Point(5, 5)
+            };
 
             var layerBelowRange = new MemoryLayer
             {
@@ -114,10 +123,10 @@ namespace Mapsui.Tests.UI
             map.Layers.Add(layerBelowRange);
             map.Layers.Add(layerAboveRange);
             
-            var screenPositionHit = map.Viewport.WorldToScreen(2, 2);
+            var screenPositionHit = viewport.WorldToScreen(2, 2);
 
             // act
-            var argsHit = MapInfoHelper.GetMapInfo(map.Layers, map.Viewport, screenPositionHit, null);
+            var argsHit = MapInfoHelper.GetMapInfo(map.Layers, viewport, screenPositionHit, null);
 
             // assert;
             Assert.IsTrue(argsHit.Feature == null);

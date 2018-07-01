@@ -12,8 +12,7 @@ namespace Mapsui.Samples.Common.Desktop
             var map = new Map();
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
             map.Layers.Add(CreateLayer());
-            map.Viewport.Center = new Point(1031709.38634765, 7507541.80851409);
-            map.Viewport.Resolution = 10;
+            map.Home = n => n.NavigateTo(new Point(1031709.38634765, 7507541.80851409), 10);
             return map;
         }
 

@@ -22,7 +22,7 @@ namespace Mapsui.Samples.Common
                 ["Projected point"] = ProjectionSample.CreateMap,
                 ["Stacked labels"] = StackedLabelsSample.CreateMap,
                 ["Symbols"] = SymbolsSample.CreateMap,
-                ["Info"] = InfoLayersSample.CreateMap,
+                ["Map Info"] = InfoLayersSample.CreateMap,
                 ["MbTiles"] = MbTilesSample.CreateMap,
                 ["MbTiles Overlay"] = MbTilesOverlaySample.CreateMap,
                 ["Keep Within Extents"] = KeepWithinExtentsSample.CreateMap,

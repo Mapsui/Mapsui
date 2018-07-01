@@ -72,35 +72,35 @@ namespace Mapsui.UI.iOS
         private void OnDoubleTapped(UITapGestureRecognizer gesture)
         {
             var position = GetScreenPosition(gesture.LocationInView(this));
-            OnInfo(InvokeInfo(Map.Layers.Where(l => l.IsMapInfoLayer), Map.Widgets, Map.Viewport, 
+            OnInfo(InvokeInfo(Map.Layers.Where(l => l.IsMapInfoLayer), Map.Widgets, Viewport, 
                 position, position, Renderer.SymbolCache, WidgetTouched, 2));
         }
         
         private void OnSingleTapped(UITapGestureRecognizer gesture)
         {
             var position = GetScreenPosition(gesture.LocationInView(this));
-            OnInfo(InvokeInfo(Map.Layers.Where(l => l.IsMapInfoLayer), Map.Widgets, Map.Viewport, 
+            OnInfo(InvokeInfo(Map.Layers.Where(l => l.IsMapInfoLayer), Map.Widgets, Viewport, 
                 position, position, Renderer.SymbolCache, WidgetTouched, 1));
         }
        
         void OnPaintSurface(object sender, SKPaintGLSurfaceEventArgs args)
         {
             TryInitializeViewport(ViewportWidth, ViewportHeight);
-            if (!_map.Viewport.Initialized) return;
+            if (!Viewport.Initialized) return;
 
             // Unfortunately the SKGLView does not have a IgnorePixelScaling property,
             // so have to adjust for density with SKGLView.Scale.
             // The Scale can only be set in the render loop
 
             args.Surface.Canvas.Scale(PixelDensity, PixelDensity);  
-            Renderer.Render(args.Surface.Canvas, _map.Viewport, _map.Layers, _map.Widgets, _map.BackColor);
+            Renderer.Render(args.Surface.Canvas, Map, Viewport, _map.Layers, _map.Widgets, _map.BackColor);
         }
 
         public override void TouchesBegan(NSSet touches, UIEvent evt)
         {
             base.TouchesBegan(touches, evt);
 
-            _innerRotation = _map.Viewport.Rotation;
+            _innerRotation = Viewport.Rotation;
         }
 
         public override void TouchesMoved(NSSet touches, UIEvent evt)
@@ -114,13 +114,13 @@ namespace Mapsui.UI.iOS
                     var currentPos = touch.LocationInView(this);
                     var previousPos = touch.PreviousLocationInView(this);
 
-                    _map.Viewport.Transform(currentPos.X, currentPos.Y, previousPos.X, previousPos.Y);
+                    Viewport.Transform(currentPos.X, currentPos.Y, previousPos.X, previousPos.Y);
 
-                    ViewportLimiter.LimitExtent(_map.Viewport, _map.PanMode, _map.PanLimits, _map.Envelope);
+                    ViewportLimiter.LimitExtent(Viewport, _map.PanMode, _map.PanLimits, _map.Envelope);
 
                     RefreshGraphics();
 
-                    _innerRotation = _map.Viewport.Rotation;
+                    _innerRotation = Viewport.Rotation;
                 }
             }
             else if (evt.AllTouches.Count >= 2)
@@ -146,20 +146,20 @@ namespace Mapsui.UI.iOS
                     else if (_innerRotation < -180)
                         _innerRotation += 360;
 
-                    if (_map.Viewport.Rotation == 0 && Math.Abs(_innerRotation) >= Math.Abs(UnSnapRotationDegrees))
+                    if (Viewport.Rotation == 0 && Math.Abs(_innerRotation) >= Math.Abs(UnSnapRotationDegrees))
                         rotationDelta = _innerRotation;
-                    else if (_map.Viewport.Rotation != 0)
+                    else if (Viewport.Rotation != 0)
                     {
                         if (Math.Abs(_innerRotation) <= Math.Abs(ReSnapRotationDegrees))
-                            rotationDelta = -_map.Viewport.Rotation;
+                            rotationDelta = -Viewport.Rotation;
                         else
-                            rotationDelta = _innerRotation - _map.Viewport.Rotation;
+                            rotationDelta = _innerRotation - Viewport.Rotation;
                     }
                 }
 
-                _map.Viewport.Transform(center.X, center.Y, prevCenter.X, prevCenter.Y, radius / prevRadius, rotationDelta);
+                Viewport.Transform(center.X, center.Y, prevCenter.X, prevCenter.Y, radius / prevRadius, rotationDelta);
 
-                ViewportLimiter.Limit(_map.Viewport,
+                ViewportLimiter.Limit(Viewport,
                     _map.ZoomMode, _map.ZoomLimits, _map.Resolutions,
                     _map.PanMode, _map.PanLimits, _map.Envelope);
 
@@ -203,11 +203,9 @@ namespace Mapsui.UI.iOS
             {
                 _canvas.Frame = value;
                 base.Frame = value;
-
-                if (_map?.Viewport == null) return;
-
-                _map.Viewport.Width = ViewportWidth;
-                _map.Viewport.Height = ViewportHeight;
+                
+                Viewport.Width = ViewportWidth;
+                Viewport.Height = ViewportHeight;
 
                 Refresh();
             }
@@ -218,11 +216,9 @@ namespace Mapsui.UI.iOS
             if (_canvas == null) return;
 
             base.LayoutMarginsDidChange();
-
-            if (_map?.Viewport == null) return;
-
-            _map.Viewport.Width = ViewportWidth;
-            _map.Viewport.Height = ViewportHeight;
+            
+            Viewport.Width = ViewportWidth;
+            Viewport.Height = ViewportHeight;
 
             Refresh();
         }

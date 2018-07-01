@@ -75,14 +75,14 @@ namespace Mapsui.UI.Uwp
         private void OnDoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
             var tabPosition = e.GetPosition(this).ToMapsui();
-            OnInfo(InvokeInfo(Map.Layers.Where(l => l.IsMapInfoLayer), Map.Widgets, Map.Viewport, 
+            OnInfo(InvokeInfo(Map.Layers.Where(l => l.IsMapInfoLayer), Map.Widgets, Viewport, 
                 tabPosition, tabPosition, Renderer.SymbolCache, WidgetTouched, 2));
         }
 
         private void OnSingleTapped(object sender, TappedRoutedEventArgs e)
         {
             var tabPosition = e.GetPosition(this).ToMapsui();
-            OnInfo(InvokeInfo(Map.Layers.Where(l => l.IsMapInfoLayer), Map.Widgets, Map.Viewport, 
+            OnInfo(InvokeInfo(Map.Layers.Where(l => l.IsMapInfoLayer), Map.Widgets, Viewport, 
                 tabPosition, tabPosition, Renderer.SymbolCache, WidgetTouched, 1));
         }
 
@@ -121,30 +121,33 @@ namespace Mapsui.UI.Uwp
         private void MapControl_PointerWheelChanged(object sender, PointerRoutedEventArgs e)
         {
             if (ZoomLock) return;
-            if (!_map.Viewport.Initialized) return;
+            if (!Viewport.Initialized) return;
 
+            
             var currentPoint = e.GetCurrentPoint(this);
             //Needed for both MouseMove and MouseWheel event for mousewheel event
 
             var mousePosition = new Geometries.Point(currentPoint.RawPosition.X, currentPoint.RawPosition.Y);
 
-            var newResolution = DetermineNewResolution(currentPoint.Properties.MouseWheelDelta, Map.Viewport.Resolution);
+            var newResolution = DetermineNewResolution(currentPoint.Properties.MouseWheelDelta, Viewport.Resolution);
+
+            // todo: see if we can replace three steps below with Viewport.Transform
 
             // 1) Temporarily center on the mouse position
-            Map.Viewport.Center = Map.Viewport.ScreenToWorld(mousePosition.X, mousePosition.Y);
+            Viewport.Center = Viewport.ScreenToWorld(mousePosition.X, mousePosition.Y);
 
             // 2) Then zoom 
-            Map.Viewport.Resolution = newResolution;
+            Viewport.Resolution = newResolution;
 
             // 3) Then move the temporary center of the map back to the mouse position
-            Map.Viewport.Center = Map.Viewport.ScreenToWorld(
-                Map.Viewport.Width - mousePosition.X,
-                Map.Viewport.Height - mousePosition.Y);
+            Viewport.Center = Viewport.ScreenToWorld(
+                Viewport.Width - mousePosition.X,
+                Viewport.Height - mousePosition.Y);
 
             e.Handled = true;
 
             RefreshGraphics();
-            _map.RefreshData(true);
+            RefreshData();
         }
 
         private double DetermineNewResolution(int mouseWheelDelta, double currentResolution)
@@ -153,14 +156,14 @@ namespace Mapsui.UI.Uwp
             {
                 var resolution = ZoomHelper.ZoomIn(_map.Resolutions, currentResolution);
 
-                return ViewportLimiter.LimitResolution(resolution, _map.Viewport.Width, _map.Viewport.Height,
+                return ViewportLimiter.LimitResolution(resolution, Viewport.Width, Viewport.Height,
                     _map.ZoomMode, _map.ZoomLimits, _map.Resolutions, _map.Envelope);
             }
             if (mouseWheelDelta < 0)
             {
                 var resolution = ZoomHelper.ZoomOut(_map.Resolutions, currentResolution);
 
-                return ViewportLimiter.LimitResolution(resolution, _map.Viewport.Width, _map.Viewport.Height,
+                return ViewportLimiter.LimitResolution(resolution, Viewport.Width, Viewport.Height,
                     _map.ZoomMode, _map.ZoomLimits, _map.Resolutions, _map.Envelope);
             }
             return currentResolution;
@@ -188,15 +191,14 @@ namespace Mapsui.UI.Uwp
             TryInitializeViewport(ActualWidth, ActualHeight);
             Clip = new RectangleGeometry { Rect = new Rect(0, 0, ActualWidth, ActualHeight) };
             UpdateSize();
-            _map.RefreshData(true);
+            RefreshData();
             Refresh();
         }
 
         private void UpdateSize()
         {
-            if (Map.Viewport == null) return;
-            Map.Viewport.Width = ActualWidth;
-            Map.Viewport.Height = ActualHeight;
+            Viewport.Width = ActualWidth;
+            Viewport.Height = ActualHeight;
         }
 
         private void RunOnUIThread(Action action)
@@ -210,9 +212,9 @@ namespace Mapsui.UI.Uwp
             if (_map == null) return;
 
             TryInitializeViewport(ActualWidth, ActualHeight);
-            if (!_map.Viewport.Initialized) return;
+            if (!Viewport.Initialized) return;
 
-            Renderer.Render(e.Surface.Canvas, Map.Viewport, _map.Layers, _map.Widgets, _map.BackColor);
+            Renderer.Render(e.Surface.Canvas, Map, Viewport, _map.Layers, _map.Widgets, _map.BackColor);
         }
 
         public void ZoomToBox(Geometries.Point beginPoint, Geometries.Point endPoint)
@@ -224,18 +226,18 @@ namespace Mapsui.UI.Uwp
 
             ZoomHelper.ZoomToBoudingbox(
                 beginPoint.X, beginPoint.Y, endPoint.X, endPoint.Y,
-                Map.Viewport.Width, Map.Viewport.Height,
+                Viewport.Width, Viewport.Height,
                 out var x, out var y, out var resolution);
 
-            resolution = ViewportLimiter.LimitResolution(resolution, _map.Viewport.Width, _map.Viewport.Height, _map.ZoomMode, _map.ZoomLimits,
+            resolution = ViewportLimiter.LimitResolution(resolution, Viewport.Width, Viewport.Height, _map.ZoomMode, _map.ZoomLimits,
                 _map.Resolutions, _map.Envelope);
 
-            _map.Viewport.Resolution = resolution;
+            Viewport.Resolution = resolution;
 
-            _map.Viewport.Center = new Geometries.Point(x, y);
+            Viewport.Center = new Geometries.Point(x, y);
 
 
-            _map.RefreshData(true);
+            RefreshData();
             RefreshGraphics();
             ClearBBoxDrawing();
         }
@@ -269,23 +271,23 @@ namespace Mapsui.UI.Uwp
                 else if (_innerRotation < -180)
                     _innerRotation += 360;
 
-                if (_map.Viewport.Rotation == 0 && Math.Abs(_innerRotation) >= Math.Abs(UnSnapRotationDegrees))
+                if (Viewport.Rotation == 0 && Math.Abs(_innerRotation) >= Math.Abs(UnSnapRotationDegrees))
                     rotationDelta = _innerRotation;
-                else if (_map.Viewport.Rotation != 0)
+                else if (Viewport.Rotation != 0)
                 {
                     if (Math.Abs(_innerRotation) <= Math.Abs(ReSnapRotationDegrees))
-                        rotationDelta = -_map.Viewport.Rotation;
+                        rotationDelta = -Viewport.Rotation;
                     else
-                        rotationDelta = _innerRotation - _map.Viewport.Rotation;
+                        rotationDelta = _innerRotation - Viewport.Rotation;
                 }
             }
 
-            _map.Viewport.Transform(center.X, center.Y, prevCenter.X, prevCenter.Y, radius / prevRadius, rotationDelta);
+            Viewport.Transform(center.X, center.Y, prevCenter.X, prevCenter.Y, radius / prevRadius, rotationDelta);
 
-            ViewportLimiter.Limit(_map.Viewport, _map.ZoomMode, _map.ZoomLimits, _map.Resolutions,
+            ViewportLimiter.Limit(Viewport, _map.ZoomMode, _map.ZoomLimits, _map.Resolutions,
                 _map.PanMode, _map.PanLimits, _map.Envelope);
             RefreshGraphics();
-            _map.RefreshData(false);
+            RefreshData(false);
             e.Handled = true;
         }
 

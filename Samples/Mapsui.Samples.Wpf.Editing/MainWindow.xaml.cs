@@ -23,7 +23,7 @@ namespace Mapsui.Samples.Wpf.Editing
         private readonly EditManipulation _editManipulation = new EditManipulation();
         private bool _selectMode;
         private readonly LimitedQueue<LogModel> _logMessage = new LimitedQueue<LogModel>(6);
-
+        
         public MainWindow()
         {
             InitializeComponent();
@@ -148,13 +148,13 @@ namespace Mapsui.Samples.Wpf.Editing
         private void RotationSliderChanged(object sender, RoutedPropertyChangedEventArgs<double> args)
         {
             var percent = RotationSlider.Value / (RotationSlider.Maximum - RotationSlider.Minimum);
-            MapControl.Map.Viewport.Rotation = percent * 360;
+            MapControl.Viewport.Rotation = percent * 360;
             MapControl.Refresh();
         }
 
         private void ZoomSliderChanged(object sender, RoutedPropertyChangedEventArgs<double> args)
         {
-            MapControl.Map.NavigateTo(MapControl.Map.Resolutions[(int)args.NewValue]);
+            MapControl.Navigator.NavigateTo(MapControl.Map.Resolutions[(int)args.NewValue]);
         }
 
         private void InitializeEditSetup()
@@ -167,7 +167,10 @@ namespace Mapsui.Samples.Wpf.Editing
             _targetLayer.Clear();
 
             _editManager.EditMode = EditMode.Modify;
-            Loaded += (sender, args) => MapControl.Map.NavigateTo(_editManager.Layer.Envelope.Grow(_editManager.Layer.Envelope.Width * 0.2));
+            Loaded += (sender, args) =>
+            {
+                MapControl.Navigator.NavigateTo(_editManager.Layer.Envelope.Grow(_editManager.Layer.Envelope.Width * 0.2));
+            };
         }
 
         private void AddPoint_OnClick(object sender, RoutedEventArgs args)
@@ -295,7 +298,7 @@ namespace Mapsui.Samples.Wpf.Editing
         private void MapControlOnMouseMove(object sender, MouseEventArgs args)
         {
             var screenPosition = args.GetPosition(MapControl).ToMapsui();
-            var worldPosition = MapControl.Map.Viewport.ScreenToWorld(screenPosition);
+            var worldPosition = MapControl.Viewport.ScreenToWorld(screenPosition);
             MouseCoordinates.Text = $"{worldPosition.X:F0}, {worldPosition.Y:F0}";
 
             if (args.LeftButton == MouseButtonState.Pressed)

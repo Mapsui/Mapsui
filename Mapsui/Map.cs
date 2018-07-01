@@ -25,7 +25,6 @@ using Mapsui.Layers;
 using Mapsui.Projection;
 using Mapsui.Styles;
 using Mapsui.UI;
-using Mapsui.Utilities;
 using Mapsui.Widgets;
 
 namespace Mapsui
@@ -48,8 +47,6 @@ namespace Mapsui
         {
             BackColor = Color.White;
             Layers = new LayerCollection();
-            DefaultExtent = () => Envelope;
-            Viewport = new Viewport { Center = { X = double.NaN, Y = double.NaN }, Resolution = double.NaN };
         }
 
         /// <summary>
@@ -116,70 +113,6 @@ namespace Mapsui
         public IList<ILayer> HoverLayers { get; } = new List<ILayer>();
 
         /// <summary>
-        /// Viewport holding informations about visible part of the map
-        /// </summary>
-        public Viewport Viewport { get; }
-
-        /// <summary>
-        /// Navigate center of viewport to center of extent and change resolution
-        /// </summary>
-        /// <param name="extent">New extent for viewport to show</param>
-        /// <param name="scaleMethod">Scale method to use to determin resolution</param>
-        public void NavigateTo(BoundingBox extent, ScaleMethod scaleMethod = ScaleMethod.Fit)
-        {
-            Viewport.Resolution = ZoomHelper.DetermineResolution(
-                extent.Width, extent.Height, Viewport.Width, Viewport.Height, scaleMethod);
-            Viewport.Center = extent.Centroid;
-            OnRefreshGraphics();
-            RefreshData(true);
-        }
-
-        /// <summary>
-        /// Change resolution of viewport
-        /// </summary>
-        /// <param name="resolution">New resolution to use</param>
-        public void NavigateTo(double resolution)
-        {
-            Viewport.Resolution = resolution;
-            OnRefreshGraphics();
-            RefreshData(true);
-        }
-
-        /// <summary>
-        /// Change center of viewport
-        /// </summary>
-        /// <param name="center">New center point of viewport</param>
-        public void NavigateTo(Point center)
-        {
-            Viewport.Center = center;
-            OnRefreshGraphics();
-            RefreshData(true);
-        }
-
-        /// <summary>
-        /// Change center of viewport to X/Y coordinates
-        /// </summary>
-        /// <param name="x">X value of the new center</param>
-        /// <param name="y">Y value of the new center</param>
-        public void NavigateTo(double x, double y)
-        {
-            Viewport.Center = new Point(x, y);
-            OnRefreshGraphics();
-            RefreshData(true);
-        }
-
-        /// <summary>
-        /// Change rotation of viewport
-        /// </summary>
-        /// <param name="rotation">New rotation in degrees of viewport></param>
-        public void RotateTo(double rotation)
-        {
-            Viewport.Rotation = rotation;
-            OnRefreshGraphics();
-            RefreshData(true);
-        }
-
-        /// <summary>
         /// Map background color (defaults to transparent)
         ///  </summary>
         public Color BackColor
@@ -189,7 +122,7 @@ namespace Mapsui
             {
                 if (_backColor == value) return;
                 _backColor = value;
-                OnRefreshGraphics();
+                OnPropertyChanged(nameof(BackColor));
             }
         }
 
@@ -227,10 +160,10 @@ namespace Mapsui
         /// </summary>
         public event DataChangedEventHandler DataChanged;
 
-        /// <summary>
-        /// Called whenever visible map needs an update
-        /// </summary>
+#pragma warning disable 67
+        [Obsolete("Use PropertyChanged instead", true)]
         public event EventHandler RefreshGraphics;
+#pragma warning restore 67
 
         [Obsolete("Use MapControl.Info instead", true)]
 #pragma warning disable 67
@@ -264,11 +197,11 @@ namespace Mapsui
             }
         }
 
-        public void RefreshData(bool majorChange)
+        public void RefreshData(BoundingBox extent, double resolution, bool majorChange)
         {
             foreach (var layer in _layers.ToList())
             {
-                layer.RefreshData(Viewport.Extent, Viewport.Resolution, majorChange);
+                layer.RefreshData(extent, resolution, majorChange);
             }
         }
 
@@ -281,8 +214,6 @@ namespace Mapsui
             layer.CRS = CRS;
             Resolutions = DetermineResolutions(Layers);
             OnPropertyChanged(nameof(Layers));
-
-            OnRefreshGraphics();
         }
 
         private void LayersLayerRemoved(ILayer layer)
@@ -295,8 +226,6 @@ namespace Mapsui
             Resolutions = DetermineResolutions(Layers);
 
             OnPropertyChanged(nameof(Layers));
-
-            OnRefreshGraphics();
         }
 
         private static IReadOnlyList<double> DetermineResolutions(IEnumerable<ILayer> layers)
@@ -337,12 +266,7 @@ namespace Mapsui
         {
             OnPropertyChanged(sender, e.PropertyName);
         }
-
-        internal void OnRefreshGraphics()
-        {
-            RefreshGraphics?.Invoke(this, EventArgs.Empty);
-        }
-
+        
         private void OnPropertyChanged(object sender, string propertyName)
         {
             PropertyChanged?.Invoke(sender, new PropertyChangedEventArgs(propertyName));
@@ -363,10 +287,8 @@ namespace Mapsui
             DataChanged?.Invoke(sender, e);
         }
 
-        // todo:
-        // Evaluate if this works out. Perhaps we should pass a viewport and 
-        // let users set the viewport. Adding the navigate methods to the Viewport
-        // would make sense for that scenario.
-        public Func<BoundingBox> DefaultExtent { get; set; }
+        public Action<INavigator> Home { get; set; } = n => n.NavigateToFullEnvelope();
+
+
     }
 }

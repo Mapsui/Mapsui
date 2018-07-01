@@ -15,7 +15,7 @@ namespace Mapsui.Tests.Common.Maps
             var map = new Map
             {
                 BackColor = Color.Transparent,
-                Viewport = {Center = new Point(-7641856, 4804912), Width = 600, Height = 400, Resolution = 51116}
+                Home = n => n.NavigateTo(new Point(-7641856, 4804912), 51116)
             };
 
             var tileIndexes = new[]

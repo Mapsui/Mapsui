@@ -9,7 +9,6 @@ using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.Rendering;
 using Mapsui.Rendering.Skia;
-using Mapsui.Utilities;
 using Mapsui.Widgets;
 
 #if __ANDROID__
@@ -77,12 +76,6 @@ namespace Mapsui.UI.Wpf
         {
             map.DataChanged += MapDataChanged;
             map.PropertyChanged += MapPropertyChanged;
-            map.RefreshGraphics += MapRefreshGraphics;
-        }
-
-        private void MapRefreshGraphics(object sender, EventArgs eventArgs)
-        {
-            RefreshGraphics();
         }
 
         /// <summary>
@@ -96,7 +89,6 @@ namespace Mapsui.UI.Wpf
             {
                 temp.DataChanged -= MapDataChanged;
                 temp.PropertyChanged -= MapPropertyChanged;
-                temp.RefreshGraphics -= MapRefreshGraphics;
                 temp.AbortFetch();
             }
         }
@@ -151,6 +143,10 @@ namespace Mapsui.UI.Wpf
             {
                 RefreshGraphics();
             }
+            else if (e.PropertyName == nameof(Map.BackColor))
+            {
+                RefreshGraphics();
+            }
         }
 
         public Map Map
@@ -169,7 +165,9 @@ namespace Mapsui.UI.Wpf
                 if (_map != null)
                 {
                     SubscribeToMapEvents(_map);
-                    _map.RefreshData(true);
+                    Navigator = new Navigator(_map, Viewport);
+                    _map.Home(Navigator);
+                    RefreshData();
                 }
 
                 RefreshGraphics();
@@ -194,15 +192,16 @@ namespace Mapsui.UI.Wpf
 
         private void TryInitializeViewport(double screenWidth, double screenHeight)
         {
-            if (_map?.Viewport?.Initialized != false) return;
+            if (Viewport?.Initialized != false) return;
 
-            if (_map.Viewport.TryInitializeViewport(_map.Envelope, screenWidth, screenHeight))
+            if (Viewport.TryInitializeViewport(_map.Envelope, screenWidth, screenHeight))
             {
                 // limiter now only properly implemented in WPF.
-                ViewportLimiter.Limit(_map.Viewport, _map.ZoomMode, _map.ZoomLimits, _map.Resolutions,
+                ViewportLimiter.Limit(Viewport, _map.ZoomMode, _map.ZoomLimits, _map.Resolutions,
                     _map.PanMode, _map.PanLimits, _map.Envelope);
 
-                Map.RefreshData(true);
+                _map.Home(Navigator);
+                RefreshData();
                 OnViewportInitialized();
             }
         }
@@ -214,12 +213,17 @@ namespace Mapsui.UI.Wpf
 
         public void RefreshData()
         {
-            _map?.RefreshData(true);
+            _map?.RefreshData(Viewport.Extent, Viewport.Resolution, true);
         }
 
-        public void NavigateToFullEnvelope(ScaleMethod scaleMethod)
+        /// <summary>
+        /// Internally we want to call RefreshData with a minor change in some cases.
+        /// Users should just always call RefreshData without arguments
+        /// </summary>
+        /// <param name="majorChange"></param>
+        private void RefreshData(bool majorChange)
         {
-            _map?.NavigateTo(_map.Envelope, scaleMethod);
+            _map?.RefreshData(Viewport.Extent, Viewport.Resolution, majorChange);
         }
 
         private void OnInfo(MapInfoEventArgs mapInfoEventArgs)
@@ -236,20 +240,20 @@ namespace Mapsui.UI.Wpf
                 OpenBrowser(hyperlink.Url);
             }
 
-            widget.HandleWidgetTouched(screenPosition);
+            widget.HandleWidgetTouched(Navigator, screenPosition);
         }
 
         /// <inheritdoc />
         public MapInfo GetMapInfo(Point screenPosition, int margin = 0)
         {
-            return MapInfoHelper.GetMapInfo(Map.Layers.Where(l => l.IsMapInfoLayer), Map.Viewport,
+            return MapInfoHelper.GetMapInfo(Map.Layers.Where(l => l.IsMapInfoLayer), Viewport,
                 screenPosition, Renderer.SymbolCache, margin);
         }
 
         /// <inheritdoc />
         public MapInfo GetMapInfo(IEnumerable<ILayer> layers, Point screenPosition, int margin = 0)
         {
-            return MapInfoHelper.GetMapInfo(layers, Map.Viewport,
+            return MapInfoHelper.GetMapInfo(layers, Viewport,
                 screenPosition, Renderer.SymbolCache, margin);
         }
 
@@ -298,5 +302,13 @@ namespace Mapsui.UI.Wpf
 
             return null;
         }
+
+        /// <summary>
+        /// Viewport holding informations about visible part of the map. Viewport can never be null.
+        /// </summary>
+        public Viewport Viewport { get; } = new Viewport { Center = { X = double.NaN, Y = double.NaN }, Resolution = double.NaN };
+
+        public INavigator Navigator { get; private set; }
     }
 }
+

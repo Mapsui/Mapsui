@@ -42,19 +42,19 @@ namespace Mapsui.Rendering.Skia
             WidgetRenders[typeof(ZoomInOutWidget)] = new ZoomInOutWidgetRenderer();
         }
 
-        public void Render(object target, IViewport viewport, IEnumerable<ILayer> layers,
+        public void Render(object target, Map map, IViewport viewport, IEnumerable<ILayer> layers,
             IEnumerable<IWidget> widgets, Color background = null)
         {
             var allWidgets = layers.Select(l => l.Attribution).Where(w => w != null).ToList().Concat(widgets);
-            Render((SKCanvas)target, viewport, layers, allWidgets, background);
+            RenderTypeSave((SKCanvas)target, map, viewport, layers, allWidgets, background);
         }
 
-        private void Render(SKCanvas canvas, IViewport viewport, IEnumerable<ILayer> layers,
+        private void RenderTypeSave(SKCanvas canvas, Map map, IViewport viewport, IEnumerable<ILayer> layers,
             IEnumerable<IWidget> widgets, Color background = null)
         {
             if (background != null) canvas.Clear(background.ToSkia(1));
             if (viewport.Initialized) Render(canvas, viewport, layers);
-            Render(canvas, viewport, widgets, 1);
+            Render(canvas, map, viewport, widgets, 1);
         }
 
         public MemoryStream RenderToBitmapStream(IViewport viewport, IEnumerable<ILayer> layers, Color background = null)
@@ -146,9 +146,9 @@ namespace Mapsui.Rendering.Skia
                 RasterRenderer.Draw(canvas, viewport, style, feature, layerOpacity * style.Opacity, _tileCache, _currentIteration);
         }
 
-        private void Render(object canvas, IViewport viewport, IEnumerable<IWidget> widgets, float layerOpacity)
+        private void Render(object canvas, Map map, IReadOnlyViewport viewport, IEnumerable<IWidget> widgets, float layerOpacity)
         {
-            WidgetRenderer.Render(canvas, viewport.Width, viewport.Height, widgets, WidgetRenders, layerOpacity);
+            WidgetRenderer.Render(canvas, map, viewport, widgets, WidgetRenders, layerOpacity);
         }
     }
 

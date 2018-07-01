@@ -13,13 +13,7 @@ namespace Mapsui.Tests.Common.Maps
             var map = new Map
             {
                 BackColor = Color.Transparent,
-                Viewport =
-                {
-                    Center = new Point(80, 80),
-                    Width = 200,
-                    Height = 200,
-                    Resolution = 1
-                }
+                Home = n => n.NavigateTo(new Point(80, 80), 1)
             };
             var layer = new MemoryLayer
             {

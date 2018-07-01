@@ -1,4 +1,4 @@
-﻿using Mapsui.Utilities;
+﻿using Mapsui.Geometries;
 
 namespace Mapsui.Samples.Common.Maps
 {
@@ -6,9 +6,10 @@ namespace Mapsui.Samples.Common.Maps
     {
         public static Map CreateMap()
         {
-            var map = new Map();
-            ZoomHelper.ZoomToBoudingbox(map.Viewport, -180, -90, 180, 90, 1000, 800);
-            return map;
+            return new Map
+            {
+                Home = n => n.NavigateTo(new BoundingBox(-180, -90, 180, 90))
+            };
         }
     }
 }

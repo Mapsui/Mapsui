@@ -180,7 +180,7 @@ namespace Mapsui.UI.Wpf
             if (ZoomLock) return;
 
             if (double.IsNaN(_toResolution))
-                _toResolution = Map.Viewport.Resolution;
+                _toResolution = Viewport.Resolution;
 
             var resolution = ZoomHelper.ZoomIn(_map.Resolutions, _toResolution);
 
@@ -188,12 +188,12 @@ namespace Mapsui.UI.Wpf
                 _map.ZoomMode, _map.ZoomLimits, _map.Resolutions, _map.Envelope);
 
             _currentMousePosition = new Geometries.Point(ActualWidth / 2, ActualHeight / 2);
-            StartZoomAnimation(Map.Viewport.Resolution, _toResolution); // todo: Perhaps 
+            StartZoomAnimation(Viewport.Resolution, _toResolution); // todo: Perhaps 
         }
 
         public void ZoomOut()
         {
-            if (double.IsNaN(_toResolution)) _toResolution = Map.Viewport.Resolution;
+            if (double.IsNaN(_toResolution)) _toResolution = Viewport.Resolution;
 
             var resolution = ZoomHelper.ZoomOut(_map.Resolutions, _toResolution);
 
@@ -201,7 +201,7 @@ namespace Mapsui.UI.Wpf
                 _map.ZoomMode, _map.ZoomLimits, _map.Resolutions, _map.Envelope);
 
             _currentMousePosition = new Geometries.Point(ActualWidth / 2, ActualHeight / 2);
-            StartZoomAnimation(Map.Viewport.Resolution, _toResolution);
+            StartZoomAnimation(Viewport.Resolution, _toResolution);
         }
 
         private static void OnResolutionChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
@@ -214,12 +214,12 @@ namespace Mapsui.UI.Wpf
         {
             var current = _currentMousePosition;
 
-            Map.Viewport.Transform(current.X, current.Y, current.X, current.Y, Map.Viewport.Resolution / resolution);
+            Viewport.Transform(current.X, current.Y, current.X, current.Y, Viewport.Resolution / resolution);
 
-            ViewportLimiter.Limit(_map.Viewport, _map.ZoomMode, _map.ZoomLimits, _map.Resolutions,
+            ViewportLimiter.Limit(Viewport, _map.ZoomMode, _map.ZoomLimits, _map.Resolutions,
                 _map.PanMode, _map.PanLimits, _map.Envelope);
 
-            _map.RefreshData(true); //todo: Check if this works properly with 'false' as argument
+            RefreshData(true); 
             RefreshGraphics();
         }
 
@@ -260,14 +260,14 @@ namespace Mapsui.UI.Wpf
 
         private void MapControlMouseWheel(object sender, MouseWheelEventArgs e)
         {
-            if (!_map.Viewport.Initialized) return;
+            if (!Viewport.Initialized) return;
             if (ZoomLock) return;
 
             _currentMousePosition = e.GetPosition(this).ToMapsui();
             //Needed for both MouseMove and MouseWheel event for mousewheel event
 
             if (double.IsNaN(_toResolution))
-                _toResolution = Map.Viewport.Resolution;
+                _toResolution = Viewport.Resolution;
 
             if (e.Delta > Constants.Epsilon)
             {
@@ -286,10 +286,10 @@ namespace Mapsui.UI.Wpf
             }
 
             // Some cheating for personal gain. This workaround could be ommitted if the zoom animations was on CenterX, CenterY and Resolution, not Resolution alone.
-            Map.Viewport.Center.X += 0.000000001;
-            Map.Viewport.Center.Y += 0.000000001;
+            Viewport.Center.X += 0.000000001;
+            Viewport.Center.Y += 0.000000001;
 
-            StartZoomAnimation(Map.Viewport.Resolution, _toResolution);
+            StartZoomAnimation(Viewport.Resolution, _toResolution);
         }
 
         private void StartZoomAnimation(double begin, double end)
@@ -310,18 +310,18 @@ namespace Mapsui.UI.Wpf
         {
             Clip = new RectangleGeometry { Rect = new Rect(0, 0, ActualWidth, ActualHeight) };
             UpdateSize();
-            _map.RefreshData(true);
+            RefreshData();
             Refresh();
         }
 
         private void UpdateSize()
         {
-            if (Map.Viewport != null)
+            if (Viewport != null)
             {
-                Map.Viewport.Width = ActualWidth;
-                Map.Viewport.Height = ActualHeight;
+                Viewport.Width = ActualWidth;
+                Viewport.Height = ActualHeight;
 
-                ViewportLimiter.Limit(_map.Viewport, _map.ZoomMode, _map.ZoomLimits, _map.Resolutions,
+                ViewportLimiter.Limit(Viewport, _map.ZoomMode, _map.ZoomLimits, _map.Resolutions,
                     _map.PanMode, _map.PanLimits, _map.Envelope);
             }
         }
@@ -358,7 +358,7 @@ namespace Mapsui.UI.Wpf
                 if (IsClick(_currentMousePosition, _downMousePosition))
                 {
                     HandleFeatureInfo(e);
-                    OnInfo(InvokeInfo(Map.Layers.Where(l => l.IsMapInfoLayer), Map.Widgets, Map.Viewport, 
+                    OnInfo(InvokeInfo(Map.Layers.Where(l => l.IsMapInfoLayer), Map.Widgets, Viewport, 
                         touchPosition, _downMousePosition, Renderer.SymbolCache, WidgetTouched, e.ClickCount));
                 }
             }
@@ -372,12 +372,12 @@ namespace Mapsui.UI.Wpf
             {
                 ZoomToBoxMode = false;
                 
-                var previous = Map.Viewport.ScreenToWorld(_previousMousePosition.X, _previousMousePosition.Y);
-                var current = Map.Viewport.ScreenToWorld(mousePosition.X, mousePosition.Y);
+                var previous = Viewport.ScreenToWorld(_previousMousePosition.X, _previousMousePosition.Y);
+                var current = Viewport.ScreenToWorld(mousePosition.X, mousePosition.Y);
                 ZoomToBox(previous, current);
             }
 
-            _map.RefreshData(true);
+            RefreshData();
             _mouseDown = false;
 
             _previousMousePosition = new Geometries.Point();
@@ -399,7 +399,7 @@ namespace Mapsui.UI.Wpf
                 // todo: Pass the touchDown position. It needs to be set at touch down.
 
                 // todo: Figure out how to do a number of taps for WPF
-                OnInfo(InvokeInfo(Map.Layers.Where(l => l.IsMapInfoLayer), Map.Widgets, Map.Viewport, 
+                OnInfo(InvokeInfo(Map.Layers.Where(l => l.IsMapInfoLayer), Map.Widgets, Viewport, 
                     touchPosition, touchPosition, Renderer.SymbolCache, 
                     WidgetTouched, 1));
             }
@@ -418,7 +418,7 @@ namespace Mapsui.UI.Wpf
                 foreach (var layer in Map.Layers)
                 {
                     // ReSharper disable once SuspiciousTypeConversion.Global
-                    (layer as IFeatureInfo)?.GetFeatureInfo(Map.Viewport, _downMousePosition.X, _downMousePosition.Y,
+                    (layer as IFeatureInfo)?.GetFeatureInfo(Viewport, _downMousePosition.X, _downMousePosition.Y,
                         OnFeatureInfo);
                 }
         }
@@ -448,15 +448,15 @@ namespace Mapsui.UI.Wpf
 
                 _currentMousePosition = e.GetPosition(this).ToMapsui(); //Needed for both MouseMove and MouseWheel event
 
-                _map.Viewport.Transform(
+                Viewport.Transform(
                     _currentMousePosition.X, _currentMousePosition.Y,
                     _previousMousePosition.X, _previousMousePosition.Y);
 
-                ViewportLimiter.Limit(_map.Viewport, _map.ZoomMode, _map.ZoomLimits, _map.Resolutions,
+                ViewportLimiter.Limit(Viewport, _map.ZoomMode, _map.ZoomLimits, _map.Resolutions,
                     _map.PanMode, _map.PanLimits, _map.Envelope);
 
                 _previousMousePosition = _currentMousePosition;
-                _map.RefreshData(false);
+                RefreshData(false);
                 RefreshGraphics();
 
             }
@@ -472,15 +472,15 @@ namespace Mapsui.UI.Wpf
             ZoomHelper.ZoomToBoudingbox(beginPoint.X, beginPoint.Y, endPoint.X, endPoint.Y,
                 ActualWidth, ActualHeight, out var x, out var y, out var resolution);
 
-            resolution = ViewportLimiter.LimitResolution(resolution, _map.Viewport.Width, _map.Viewport.Height,
+            resolution = ViewportLimiter.LimitResolution(resolution, Viewport.Width, Viewport.Height,
                 _map.ZoomMode, _map.ZoomLimits, _map.Resolutions, _map.Envelope);
 
-            _map.Viewport.Resolution = resolution;
-            Map.Viewport.Center = new Geometries.Point(x, y);
+            Viewport.Resolution = resolution;
+            Viewport.Center = new Geometries.Point(x, y);
 
             _toResolution = resolution; // for animation
 
-            _map.RefreshData(true);
+            RefreshData();
             RefreshGraphics();
             ClearBBoxDrawing();
         }
@@ -556,20 +556,20 @@ namespace Mapsui.UI.Wpf
                 else if (_innerRotation < -180)
                     _innerRotation += 360;
 
-                if (_map.Viewport.Rotation == 0 && Math.Abs(_innerRotation) >= Math.Abs(UnSnapRotationDegrees))
+                if (Viewport.Rotation == 0 && Math.Abs(_innerRotation) >= Math.Abs(UnSnapRotationDegrees))
                     rotationDelta = _innerRotation;
-                else if (_map.Viewport.Rotation != 0)
+                else if (Viewport.Rotation != 0)
                 {
                     if (Math.Abs(_innerRotation) <= Math.Abs(ReSnapRotationDegrees))
-                        rotationDelta = -_map.Viewport.Rotation;
+                        rotationDelta = -Viewport.Rotation;
                     else
-                        rotationDelta = _innerRotation - _map.Viewport.Rotation;
+                        rotationDelta = _innerRotation - Viewport.Rotation;
                 }
             }
 
-            _map.Viewport.Transform(center.X, center.Y, prevCenter.X, prevCenter.Y, radius / prevRadius, rotationDelta);
+            Viewport.Transform(center.X, center.Y, prevCenter.X, prevCenter.Y, radius / prevRadius, rotationDelta);
 
-            ViewportLimiter.Limit(_map.Viewport, _map.ZoomMode, _map.ZoomLimits, _map.Resolutions,
+            ViewportLimiter.Limit(Viewport, _map.ZoomMode, _map.ZoomLimits, _map.Resolutions,
                 _map.PanMode, _map.PanLimits, _map.Envelope);
 
             e.Handled = true;
@@ -596,9 +596,9 @@ namespace Mapsui.UI.Wpf
             if (_map == null) return;
 
             TryInitializeViewport(ActualWidth, ActualHeight);
-            if (!_map.Viewport.Initialized) return;
+            if (!Viewport.Initialized) return;
 
-            Renderer.Render(args.Surface.Canvas, Map.Viewport, Map.Layers, Map.Widgets, Map.BackColor);
+            Renderer.Render(args.Surface.Canvas, Map, Viewport, Map.Layers, Map.Widgets, Map.BackColor);
         }
         
         private void PaintWpf()
@@ -607,9 +607,9 @@ namespace Mapsui.UI.Wpf
             if (_map == null) return;
 
             TryInitializeViewport(ActualWidth, ActualHeight);
-            if (!_map.Viewport.Initialized) return;
+            if (!Viewport.Initialized) return;
 
-            Renderer.Render(WpfCanvas, Map.Viewport, _map.Layers, Map.Widgets, _map.BackColor);
+            Renderer.Render(WpfCanvas, Map, Viewport, _map.Layers, Map.Widgets, _map.BackColor);
         }
     }
 }

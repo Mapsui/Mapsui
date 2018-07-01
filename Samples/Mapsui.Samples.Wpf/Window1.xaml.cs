@@ -57,7 +57,7 @@ namespace Mapsui.Samples.Wpf
         private void MapControlOnMouseMove(object sender, MouseEventArgs e)
         {
             var screenPosition = e.GetPosition(MapControl);
-            var worldPosition = MapControl.Map.Viewport.ScreenToWorld(screenPosition.X, screenPosition.Y);
+            var worldPosition = MapControl.Viewport.ScreenToWorld(screenPosition.X, screenPosition.Y);
             MouseCoordinates.Text = $"{worldPosition.X:F0}, {worldPosition.Y:F0}";
         }
 
@@ -164,7 +164,7 @@ namespace Mapsui.Samples.Wpf
         private void RotationSliderChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             var percent = RotationSlider.Value / (RotationSlider.Maximum - RotationSlider.Minimum);
-            MapControl.Map.Viewport.Rotation = percent * 360;
+            MapControl.Viewport.Rotation = percent * 360;
             MapControl.Refresh();
         }
 

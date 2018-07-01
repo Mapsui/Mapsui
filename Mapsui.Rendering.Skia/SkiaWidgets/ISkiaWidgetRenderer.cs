@@ -5,7 +5,7 @@ namespace Mapsui.Rendering.Skia.SkiaWidgets
 {
     public interface ISkiaWidgetRenderer : IWidgetRenderer
     {
-        void Draw(SKCanvas canvas, double screenWidth, double screenHeight, IWidget widget,
+        void Draw(SKCanvas canvas, Map map, IReadOnlyViewport viewport, IWidget widget,
             float layerOpacity);
     }
 }

@@ -10,6 +10,6 @@ namespace Mapsui.Widgets
         float MarginY { get; set; }
         BoundingBox Envelope { get; set; }
 
-        void HandleWidgetTouched(Point position);
+        void HandleWidgetTouched(INavigator navigator, Point position);
     }
 }

@@ -7,7 +7,7 @@ namespace Mapsui.Widgets
     {
         public string Url { get; set; }
 
-        public override void HandleWidgetTouched(Point position)
+        public override void HandleWidgetTouched(INavigator navigator, Point position)
         {
         }
     }
