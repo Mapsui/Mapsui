@@ -1,6 +1,6 @@
 # Mapsui 2.0
 
-At the moment of writing (11 may 2018) a first beta of Mapsui v2 has been released. It has .NET Standard core libraries instead of PCLs. Other then that is is equivalent to 1.4.1 but some further changes are planned. Here  are some ideas of changes that could go into 2.0.
+At the moment of writing (11 may 2018) a first beta of Mapsui v2 has been released. It has .NET Standard core libraries instead of PCLs. Other then that it is equivalent to 1.4.1 but some further changes are planned. Here  are some ideas of changes that could go into 2.0.
 
 ### Todo
 - Replace ILayer.Style with an ILayer.Styles of type ICollection<IFeature> which is empty by default
