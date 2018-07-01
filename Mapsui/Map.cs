@@ -268,7 +268,7 @@ namespace Mapsui
         {
             foreach (var layer in _layers.ToList())
             {
-                layer.RefreshData(majorChange, Viewport.Extent, Viewport.Resolution);
+                layer.RefreshData(Viewport.Extent, Viewport.Resolution, majorChange);
             }
         }
 

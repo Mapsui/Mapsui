@@ -142,7 +142,7 @@ namespace Mapsui.Layers
         }
 
         /// <inheritdoc />
-        public override void RefreshData(bool majorChange, BoundingBox extent, double resolution)
+        public override void RefreshData(BoundingBox extent, double resolution, bool majorChange)
         {
             if (Enabled && extent.GetArea() > 0 && _tileFetchDispatcher != null && MaxVisible > resolution && MinVisible < resolution)
             {

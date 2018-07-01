@@ -36,7 +36,7 @@ namespace Mapsui.Samples.Common.Maps
                 // Clear cache for change to show
                 feature.RenderedGeometry.Clear();
                 // Trigger DataChanged notification
-                layer.RefreshData(true, layer.Envelope, 1);
+                layer.RefreshData(layer.Envelope, 1, true);
             },
             TimeSpan.FromMilliseconds(1000));
 

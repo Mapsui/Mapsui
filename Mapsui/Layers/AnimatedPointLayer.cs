@@ -42,7 +42,7 @@ namespace Mapsui.Layers
         {
         }
 
-        public override void RefreshData(bool majorChange, BoundingBox extent, double resolution)
+        public override void RefreshData(BoundingBox extent, double resolution, bool majorChange)
         {
             _extent = extent;
             _resolution = resolution;

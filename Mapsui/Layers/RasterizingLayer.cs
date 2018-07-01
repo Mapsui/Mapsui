@@ -154,7 +154,7 @@ namespace Mapsui.Layers
             _layer.AbortFetch();
         }
 
-        public override void RefreshData(bool majorChange, BoundingBox extent, double resolution)
+        public override void RefreshData(BoundingBox extent, double resolution, bool majorChange)
         {
             var newViewport = CreateViewport(extent, resolution, _renderResolutionMultiplier, 1);
 
@@ -166,7 +166,7 @@ namespace Mapsui.Layers
             {
                 _extent = extent;
                 _resolution = resolution;
-                _layer.RefreshData(majorChange, extent, resolution);
+                _layer.RefreshData(extent, resolution, majorChange);
                 RestartTimer();
             }
         }
