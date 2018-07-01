@@ -8,7 +8,6 @@ using Android.Util;
 using Android.Views;
 using Mapsui.Geometries.Utilities;
 using Mapsui.Logging;
-using Mapsui.Widgets;
 using SkiaSharp.Views.Android;
 using Math = System.Math;
 using Point = Mapsui.Geometries.Point;
@@ -277,15 +276,10 @@ namespace Mapsui.UI.Android
 
         protected override void OnLayout(bool changed, int l, int t, int r, int b)
         {
-            Position(_canvas, l, t, r, b);
-        }
-
-        private void Position(View view, int l, int t, int r, int b)
-        {
-            view.Top = t;
-            view.Bottom = b;
-            view.Left = l;
-            view.Right = r;
+            _canvas.Top = t;
+            _canvas.Bottom = b;
+            _canvas.Left = l;
+            _canvas.Right = r;
         }
 
         public void OpenBrowser(string url)
@@ -297,17 +291,6 @@ namespace Mapsui.UI.Android
             Intent chooser = Intent.CreateChooser(intent, "Open with");
 
             Context.StartActivity(chooser);
-        }
-
-        /// <summary>
-        /// In native Android touch positions are in device pixels whereas the canvas needs
-        /// to be drawn in logical pixels (otherwise labels on raster tiles will be unreadable
-        /// and symbols will be too small). This method converts device pixels to logical pixels.
-        /// </summary>
-        /// <returns>The device pixels given as input translated to device pixels.</returns>
-        private float ToDeviceIndependentUnits(float pixelCoordinate)
-        {
-            return pixelCoordinate / PixelDensity;
         }
 
         public new void Dispose()
@@ -348,5 +331,16 @@ namespace Mapsui.UI.Android
 
         public float ViewportWidth => ToDeviceIndependentUnits(Width);
         public float ViewportHeight => ToDeviceIndependentUnits(Height);
+
+        /// <summary>
+        /// In native Android touch positions are in pixels whereas the canvas needs
+        /// to be drawn in device independent units (otherwise labels on raster tiles will be unreadable
+        /// and symbols will be too small). This method converts pixels to device independent units.
+        /// </summary>
+        /// <returns>The pixels given as input translated to device independent units.</returns>
+        private float ToDeviceIndependentUnits(float pixelCoordinate)
+        {
+            return pixelCoordinate / PixelDensity;
+        }
     }
 }
