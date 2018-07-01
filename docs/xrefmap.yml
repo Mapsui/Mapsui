@@ -3807,6 +3807,217 @@ references:
   isSpec: "True"
   fullName: Mapsui.Geometries.WellKnownText.GeometryToWKT.Write
   nameWithType: GeometryToWKT.Write
+- uid: Mapsui.INavigator
+  name: INavigator
+  href: api/Mapsui.INavigator.html
+  commentId: T:Mapsui.INavigator
+  fullName: Mapsui.INavigator
+  nameWithType: INavigator
+- uid: Mapsui.INavigator.NavigateTo(Mapsui.Geometries.BoundingBox,Mapsui.Utilities.ScaleMethod)
+  name: NavigateTo(BoundingBox, ScaleMethod)
+  href: api/Mapsui.INavigator.html#Mapsui_INavigator_NavigateTo_Mapsui_Geometries_BoundingBox_Mapsui_Utilities_ScaleMethod_
+  commentId: M:Mapsui.INavigator.NavigateTo(Mapsui.Geometries.BoundingBox,Mapsui.Utilities.ScaleMethod)
+  fullName: Mapsui.INavigator.NavigateTo(Mapsui.Geometries.BoundingBox, Mapsui.Utilities.ScaleMethod)
+  nameWithType: INavigator.NavigateTo(BoundingBox, ScaleMethod)
+- uid: Mapsui.INavigator.NavigateTo(Mapsui.Geometries.Point)
+  name: NavigateTo(Point)
+  href: api/Mapsui.INavigator.html#Mapsui_INavigator_NavigateTo_Mapsui_Geometries_Point_
+  commentId: M:Mapsui.INavigator.NavigateTo(Mapsui.Geometries.Point)
+  fullName: Mapsui.INavigator.NavigateTo(Mapsui.Geometries.Point)
+  nameWithType: INavigator.NavigateTo(Point)
+- uid: Mapsui.INavigator.NavigateTo(Mapsui.Geometries.Point,System.Double)
+  name: NavigateTo(Point, Double)
+  href: api/Mapsui.INavigator.html#Mapsui_INavigator_NavigateTo_Mapsui_Geometries_Point_System_Double_
+  commentId: M:Mapsui.INavigator.NavigateTo(Mapsui.Geometries.Point,System.Double)
+  fullName: Mapsui.INavigator.NavigateTo(Mapsui.Geometries.Point, System.Double)
+  nameWithType: INavigator.NavigateTo(Point, Double)
+- uid: Mapsui.INavigator.NavigateTo(System.Double)
+  name: NavigateTo(Double)
+  href: api/Mapsui.INavigator.html#Mapsui_INavigator_NavigateTo_System_Double_
+  commentId: M:Mapsui.INavigator.NavigateTo(System.Double)
+  fullName: Mapsui.INavigator.NavigateTo(System.Double)
+  nameWithType: INavigator.NavigateTo(Double)
+- uid: Mapsui.INavigator.NavigateTo(System.Double,System.Double)
+  name: NavigateTo(Double, Double)
+  href: api/Mapsui.INavigator.html#Mapsui_INavigator_NavigateTo_System_Double_System_Double_
+  commentId: M:Mapsui.INavigator.NavigateTo(System.Double,System.Double)
+  fullName: Mapsui.INavigator.NavigateTo(System.Double, System.Double)
+  nameWithType: INavigator.NavigateTo(Double, Double)
+- uid: Mapsui.INavigator.NavigateTo*
+  name: NavigateTo
+  href: api/Mapsui.INavigator.html#Mapsui_INavigator_NavigateTo_
+  commentId: Overload:Mapsui.INavigator.NavigateTo
+  isSpec: "True"
+  fullName: Mapsui.INavigator.NavigateTo
+  nameWithType: INavigator.NavigateTo
+- uid: Mapsui.INavigator.NavigateToFullEnvelope(Mapsui.Utilities.ScaleMethod)
+  name: NavigateToFullEnvelope(ScaleMethod)
+  href: api/Mapsui.INavigator.html#Mapsui_INavigator_NavigateToFullEnvelope_Mapsui_Utilities_ScaleMethod_
+  commentId: M:Mapsui.INavigator.NavigateToFullEnvelope(Mapsui.Utilities.ScaleMethod)
+  fullName: Mapsui.INavigator.NavigateToFullEnvelope(Mapsui.Utilities.ScaleMethod)
+  nameWithType: INavigator.NavigateToFullEnvelope(ScaleMethod)
+- uid: Mapsui.INavigator.NavigateToFullEnvelope*
+  name: NavigateToFullEnvelope
+  href: api/Mapsui.INavigator.html#Mapsui_INavigator_NavigateToFullEnvelope_
+  commentId: Overload:Mapsui.INavigator.NavigateToFullEnvelope
+  isSpec: "True"
+  fullName: Mapsui.INavigator.NavigateToFullEnvelope
+  nameWithType: INavigator.NavigateToFullEnvelope
+- uid: Mapsui.INavigator.RotateTo(System.Double)
+  name: RotateTo(Double)
+  href: api/Mapsui.INavigator.html#Mapsui_INavigator_RotateTo_System_Double_
+  commentId: M:Mapsui.INavigator.RotateTo(System.Double)
+  fullName: Mapsui.INavigator.RotateTo(System.Double)
+  nameWithType: INavigator.RotateTo(Double)
+- uid: Mapsui.INavigator.RotateTo*
+  name: RotateTo
+  href: api/Mapsui.INavigator.html#Mapsui_INavigator_RotateTo_
+  commentId: Overload:Mapsui.INavigator.RotateTo
+  isSpec: "True"
+  fullName: Mapsui.INavigator.RotateTo
+  nameWithType: INavigator.RotateTo
+- uid: Mapsui.INavigator.ZoomIn
+  name: ZoomIn()
+  href: api/Mapsui.INavigator.html#Mapsui_INavigator_ZoomIn
+  commentId: M:Mapsui.INavigator.ZoomIn
+  fullName: Mapsui.INavigator.ZoomIn()
+  nameWithType: INavigator.ZoomIn()
+- uid: Mapsui.INavigator.ZoomIn*
+  name: ZoomIn
+  href: api/Mapsui.INavigator.html#Mapsui_INavigator_ZoomIn_
+  commentId: Overload:Mapsui.INavigator.ZoomIn
+  isSpec: "True"
+  fullName: Mapsui.INavigator.ZoomIn
+  nameWithType: INavigator.ZoomIn
+- uid: Mapsui.INavigator.ZoomOut
+  name: ZoomOut()
+  href: api/Mapsui.INavigator.html#Mapsui_INavigator_ZoomOut
+  commentId: M:Mapsui.INavigator.ZoomOut
+  fullName: Mapsui.INavigator.ZoomOut()
+  nameWithType: INavigator.ZoomOut()
+- uid: Mapsui.INavigator.ZoomOut*
+  name: ZoomOut
+  href: api/Mapsui.INavigator.html#Mapsui_INavigator_ZoomOut_
+  commentId: Overload:Mapsui.INavigator.ZoomOut
+  isSpec: "True"
+  fullName: Mapsui.INavigator.ZoomOut
+  nameWithType: INavigator.ZoomOut
+- uid: Mapsui.IReadOnlyViewport
+  name: IReadOnlyViewport
+  href: api/Mapsui.IReadOnlyViewport.html
+  commentId: T:Mapsui.IReadOnlyViewport
+  fullName: Mapsui.IReadOnlyViewport
+  nameWithType: IReadOnlyViewport
+- uid: Mapsui.IReadOnlyViewport.Center
+  name: Center
+  href: api/Mapsui.IReadOnlyViewport.html#Mapsui_IReadOnlyViewport_Center
+  commentId: P:Mapsui.IReadOnlyViewport.Center
+  fullName: Mapsui.IReadOnlyViewport.Center
+  nameWithType: IReadOnlyViewport.Center
+- uid: Mapsui.IReadOnlyViewport.Center*
+  name: Center
+  href: api/Mapsui.IReadOnlyViewport.html#Mapsui_IReadOnlyViewport_Center_
+  commentId: Overload:Mapsui.IReadOnlyViewport.Center
+  isSpec: "True"
+  fullName: Mapsui.IReadOnlyViewport.Center
+  nameWithType: IReadOnlyViewport.Center
+- uid: Mapsui.IReadOnlyViewport.Extent
+  name: Extent
+  href: api/Mapsui.IReadOnlyViewport.html#Mapsui_IReadOnlyViewport_Extent
+  commentId: P:Mapsui.IReadOnlyViewport.Extent
+  fullName: Mapsui.IReadOnlyViewport.Extent
+  nameWithType: IReadOnlyViewport.Extent
+- uid: Mapsui.IReadOnlyViewport.Extent*
+  name: Extent
+  href: api/Mapsui.IReadOnlyViewport.html#Mapsui_IReadOnlyViewport_Extent_
+  commentId: Overload:Mapsui.IReadOnlyViewport.Extent
+  isSpec: "True"
+  fullName: Mapsui.IReadOnlyViewport.Extent
+  nameWithType: IReadOnlyViewport.Extent
+- uid: Mapsui.IReadOnlyViewport.Height
+  name: Height
+  href: api/Mapsui.IReadOnlyViewport.html#Mapsui_IReadOnlyViewport_Height
+  commentId: P:Mapsui.IReadOnlyViewport.Height
+  fullName: Mapsui.IReadOnlyViewport.Height
+  nameWithType: IReadOnlyViewport.Height
+- uid: Mapsui.IReadOnlyViewport.Height*
+  name: Height
+  href: api/Mapsui.IReadOnlyViewport.html#Mapsui_IReadOnlyViewport_Height_
+  commentId: Overload:Mapsui.IReadOnlyViewport.Height
+  isSpec: "True"
+  fullName: Mapsui.IReadOnlyViewport.Height
+  nameWithType: IReadOnlyViewport.Height
+- uid: Mapsui.IReadOnlyViewport.Resolution
+  name: Resolution
+  href: api/Mapsui.IReadOnlyViewport.html#Mapsui_IReadOnlyViewport_Resolution
+  commentId: P:Mapsui.IReadOnlyViewport.Resolution
+  fullName: Mapsui.IReadOnlyViewport.Resolution
+  nameWithType: IReadOnlyViewport.Resolution
+- uid: Mapsui.IReadOnlyViewport.Resolution*
+  name: Resolution
+  href: api/Mapsui.IReadOnlyViewport.html#Mapsui_IReadOnlyViewport_Resolution_
+  commentId: Overload:Mapsui.IReadOnlyViewport.Resolution
+  isSpec: "True"
+  fullName: Mapsui.IReadOnlyViewport.Resolution
+  nameWithType: IReadOnlyViewport.Resolution
+- uid: Mapsui.IReadOnlyViewport.Rotation
+  name: Rotation
+  href: api/Mapsui.IReadOnlyViewport.html#Mapsui_IReadOnlyViewport_Rotation
+  commentId: P:Mapsui.IReadOnlyViewport.Rotation
+  fullName: Mapsui.IReadOnlyViewport.Rotation
+  nameWithType: IReadOnlyViewport.Rotation
+- uid: Mapsui.IReadOnlyViewport.Rotation*
+  name: Rotation
+  href: api/Mapsui.IReadOnlyViewport.html#Mapsui_IReadOnlyViewport_Rotation_
+  commentId: Overload:Mapsui.IReadOnlyViewport.Rotation
+  isSpec: "True"
+  fullName: Mapsui.IReadOnlyViewport.Rotation
+  nameWithType: IReadOnlyViewport.Rotation
+- uid: Mapsui.IReadOnlyViewport.ScreenToWorld(Mapsui.Geometries.Point)
+  name: ScreenToWorld(Point)
+  href: api/Mapsui.IReadOnlyViewport.html#Mapsui_IReadOnlyViewport_ScreenToWorld_Mapsui_Geometries_Point_
+  commentId: M:Mapsui.IReadOnlyViewport.ScreenToWorld(Mapsui.Geometries.Point)
+  fullName: Mapsui.IReadOnlyViewport.ScreenToWorld(Mapsui.Geometries.Point)
+  nameWithType: IReadOnlyViewport.ScreenToWorld(Point)
+- uid: Mapsui.IReadOnlyViewport.ScreenToWorld(System.Double,System.Double)
+  name: ScreenToWorld(Double, Double)
+  href: api/Mapsui.IReadOnlyViewport.html#Mapsui_IReadOnlyViewport_ScreenToWorld_System_Double_System_Double_
+  commentId: M:Mapsui.IReadOnlyViewport.ScreenToWorld(System.Double,System.Double)
+  fullName: Mapsui.IReadOnlyViewport.ScreenToWorld(System.Double, System.Double)
+  nameWithType: IReadOnlyViewport.ScreenToWorld(Double, Double)
+- uid: Mapsui.IReadOnlyViewport.ScreenToWorld*
+  name: ScreenToWorld
+  href: api/Mapsui.IReadOnlyViewport.html#Mapsui_IReadOnlyViewport_ScreenToWorld_
+  commentId: Overload:Mapsui.IReadOnlyViewport.ScreenToWorld
+  isSpec: "True"
+  fullName: Mapsui.IReadOnlyViewport.ScreenToWorld
+  nameWithType: IReadOnlyViewport.ScreenToWorld
+- uid: Mapsui.IReadOnlyViewport.Transform(System.Double,System.Double,System.Double,System.Double,System.Double,System.Double)
+  name: Transform(Double, Double, Double, Double, Double, Double)
+  href: api/Mapsui.IReadOnlyViewport.html#Mapsui_IReadOnlyViewport_Transform_System_Double_System_Double_System_Double_System_Double_System_Double_System_Double_
+  commentId: M:Mapsui.IReadOnlyViewport.Transform(System.Double,System.Double,System.Double,System.Double,System.Double,System.Double)
+  fullName: Mapsui.IReadOnlyViewport.Transform(System.Double, System.Double, System.Double, System.Double, System.Double, System.Double)
+  nameWithType: IReadOnlyViewport.Transform(Double, Double, Double, Double, Double, Double)
+- uid: Mapsui.IReadOnlyViewport.Transform*
+  name: Transform
+  href: api/Mapsui.IReadOnlyViewport.html#Mapsui_IReadOnlyViewport_Transform_
+  commentId: Overload:Mapsui.IReadOnlyViewport.Transform
+  isSpec: "True"
+  fullName: Mapsui.IReadOnlyViewport.Transform
+  nameWithType: IReadOnlyViewport.Transform
+- uid: Mapsui.IReadOnlyViewport.Width
+  name: Width
+  href: api/Mapsui.IReadOnlyViewport.html#Mapsui_IReadOnlyViewport_Width
+  commentId: P:Mapsui.IReadOnlyViewport.Width
+  fullName: Mapsui.IReadOnlyViewport.Width
+  nameWithType: IReadOnlyViewport.Width
+- uid: Mapsui.IReadOnlyViewport.Width*
+  name: Width
+  href: api/Mapsui.IReadOnlyViewport.html#Mapsui_IReadOnlyViewport_Width_
+  commentId: Overload:Mapsui.IReadOnlyViewport.Width
+  isSpec: "True"
+  fullName: Mapsui.IReadOnlyViewport.Width
+  nameWithType: IReadOnlyViewport.Width
 - uid: Mapsui.IViewport
   name: IViewport
   href: api/Mapsui.IViewport.html
@@ -6003,19 +6214,6 @@ references:
   commentId: E:Mapsui.Map.DataChanged
   fullName: Mapsui.Map.DataChanged
   nameWithType: Map.DataChanged
-- uid: Mapsui.Map.DefaultExtent
-  name: DefaultExtent
-  href: api/Mapsui.Map.html#Mapsui_Map_DefaultExtent
-  commentId: P:Mapsui.Map.DefaultExtent
-  fullName: Mapsui.Map.DefaultExtent
-  nameWithType: Map.DefaultExtent
-- uid: Mapsui.Map.DefaultExtent*
-  name: DefaultExtent
-  href: api/Mapsui.Map.html#Mapsui_Map_DefaultExtent_
-  commentId: Overload:Mapsui.Map.DefaultExtent
-  isSpec: "True"
-  fullName: Mapsui.Map.DefaultExtent
-  nameWithType: Map.DefaultExtent
 - uid: Mapsui.Map.Envelope
   name: Envelope
   href: api/Mapsui.Map.html#Mapsui_Map_Envelope
@@ -6029,6 +6227,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.Map.Envelope
   nameWithType: Map.Envelope
+- uid: Mapsui.Map.Home
+  name: Home
+  href: api/Mapsui.Map.html#Mapsui_Map_Home
+  commentId: P:Mapsui.Map.Home
+  fullName: Mapsui.Map.Home
+  nameWithType: Map.Home
+- uid: Mapsui.Map.Home*
+  name: Home
+  href: api/Mapsui.Map.html#Mapsui_Map_Home_
+  commentId: Overload:Mapsui.Map.Home
+  isSpec: "True"
+  fullName: Mapsui.Map.Home
+  nameWithType: Map.Home
 - uid: Mapsui.Map.Hover
   name: Hover
   href: api/Mapsui.Map.html#Mapsui_Map_Hover
@@ -6080,37 +6291,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.Map.Layers
   nameWithType: Map.Layers
-- uid: Mapsui.Map.NavigateTo(Mapsui.Geometries.BoundingBox,Mapsui.Utilities.ScaleMethod)
-  name: NavigateTo(BoundingBox, ScaleMethod)
-  href: api/Mapsui.Map.html#Mapsui_Map_NavigateTo_Mapsui_Geometries_BoundingBox_Mapsui_Utilities_ScaleMethod_
-  commentId: M:Mapsui.Map.NavigateTo(Mapsui.Geometries.BoundingBox,Mapsui.Utilities.ScaleMethod)
-  fullName: Mapsui.Map.NavigateTo(Mapsui.Geometries.BoundingBox, Mapsui.Utilities.ScaleMethod)
-  nameWithType: Map.NavigateTo(BoundingBox, ScaleMethod)
-- uid: Mapsui.Map.NavigateTo(Mapsui.Geometries.Point)
-  name: NavigateTo(Point)
-  href: api/Mapsui.Map.html#Mapsui_Map_NavigateTo_Mapsui_Geometries_Point_
-  commentId: M:Mapsui.Map.NavigateTo(Mapsui.Geometries.Point)
-  fullName: Mapsui.Map.NavigateTo(Mapsui.Geometries.Point)
-  nameWithType: Map.NavigateTo(Point)
-- uid: Mapsui.Map.NavigateTo(System.Double)
-  name: NavigateTo(Double)
-  href: api/Mapsui.Map.html#Mapsui_Map_NavigateTo_System_Double_
-  commentId: M:Mapsui.Map.NavigateTo(System.Double)
-  fullName: Mapsui.Map.NavigateTo(System.Double)
-  nameWithType: Map.NavigateTo(Double)
-- uid: Mapsui.Map.NavigateTo(System.Double,System.Double)
-  name: NavigateTo(Double, Double)
-  href: api/Mapsui.Map.html#Mapsui_Map_NavigateTo_System_Double_System_Double_
-  commentId: M:Mapsui.Map.NavigateTo(System.Double,System.Double)
-  fullName: Mapsui.Map.NavigateTo(System.Double, System.Double)
-  nameWithType: Map.NavigateTo(Double, Double)
-- uid: Mapsui.Map.NavigateTo*
-  name: NavigateTo
-  href: api/Mapsui.Map.html#Mapsui_Map_NavigateTo_
-  commentId: Overload:Mapsui.Map.NavigateTo
-  isSpec: "True"
-  fullName: Mapsui.Map.NavigateTo
-  nameWithType: Map.NavigateTo
 - uid: Mapsui.Map.PanLimits
   name: PanLimits
   href: api/Mapsui.Map.html#Mapsui_Map_PanLimits
@@ -6143,12 +6323,12 @@ references:
   commentId: E:Mapsui.Map.PropertyChanged
   fullName: Mapsui.Map.PropertyChanged
   nameWithType: Map.PropertyChanged
-- uid: Mapsui.Map.RefreshData(System.Boolean)
-  name: RefreshData(Boolean)
-  href: api/Mapsui.Map.html#Mapsui_Map_RefreshData_System_Boolean_
-  commentId: M:Mapsui.Map.RefreshData(System.Boolean)
-  fullName: Mapsui.Map.RefreshData(System.Boolean)
-  nameWithType: Map.RefreshData(Boolean)
+- uid: Mapsui.Map.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,System.Boolean)
+  name: RefreshData(BoundingBox, Double, Boolean)
+  href: api/Mapsui.Map.html#Mapsui_Map_RefreshData_Mapsui_Geometries_BoundingBox_System_Double_System_Boolean_
+  commentId: M:Mapsui.Map.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,System.Boolean)
+  fullName: Mapsui.Map.RefreshData(Mapsui.Geometries.BoundingBox, System.Double, System.Boolean)
+  nameWithType: Map.RefreshData(BoundingBox, Double, Boolean)
 - uid: Mapsui.Map.RefreshData*
   name: RefreshData
   href: api/Mapsui.Map.html#Mapsui_Map_RefreshData_
@@ -6175,19 +6355,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.Map.Resolutions
   nameWithType: Map.Resolutions
-- uid: Mapsui.Map.RotateTo(System.Double)
-  name: RotateTo(Double)
-  href: api/Mapsui.Map.html#Mapsui_Map_RotateTo_System_Double_
-  commentId: M:Mapsui.Map.RotateTo(System.Double)
-  fullName: Mapsui.Map.RotateTo(System.Double)
-  nameWithType: Map.RotateTo(Double)
-- uid: Mapsui.Map.RotateTo*
-  name: RotateTo
-  href: api/Mapsui.Map.html#Mapsui_Map_RotateTo_
-  commentId: Overload:Mapsui.Map.RotateTo
-  isSpec: "True"
-  fullName: Mapsui.Map.RotateTo
-  nameWithType: Map.RotateTo
 - uid: Mapsui.Map.Transformation
   name: Transformation
   href: api/Mapsui.Map.html#Mapsui_Map_Transformation
@@ -6201,19 +6368,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.Map.Transformation
   nameWithType: Map.Transformation
-- uid: Mapsui.Map.Viewport
-  name: Viewport
-  href: api/Mapsui.Map.html#Mapsui_Map_Viewport
-  commentId: P:Mapsui.Map.Viewport
-  fullName: Mapsui.Map.Viewport
-  nameWithType: Map.Viewport
-- uid: Mapsui.Map.Viewport*
-  name: Viewport
-  href: api/Mapsui.Map.html#Mapsui_Map_Viewport_
-  commentId: Overload:Mapsui.Map.Viewport
-  isSpec: "True"
-  fullName: Mapsui.Map.Viewport
-  nameWithType: Map.Viewport
 - uid: Mapsui.Map.Widgets
   name: Widgets
   href: api/Mapsui.Map.html#Mapsui_Map_Widgets
@@ -6253,6 +6407,114 @@ references:
   isSpec: "True"
   fullName: Mapsui.Map.ZoomMode
   nameWithType: Map.ZoomMode
+- uid: Mapsui.Navigator
+  name: Navigator
+  href: api/Mapsui.Navigator.html
+  commentId: T:Mapsui.Navigator
+  fullName: Mapsui.Navigator
+  nameWithType: Navigator
+- uid: Mapsui.Navigator.#ctor(Mapsui.Map,Mapsui.IViewport)
+  name: Navigator(Map, IViewport)
+  href: api/Mapsui.Navigator.html#Mapsui_Navigator__ctor_Mapsui_Map_Mapsui_IViewport_
+  commentId: M:Mapsui.Navigator.#ctor(Mapsui.Map,Mapsui.IViewport)
+  fullName: Mapsui.Navigator.Navigator(Mapsui.Map, Mapsui.IViewport)
+  nameWithType: Navigator.Navigator(Map, IViewport)
+- uid: Mapsui.Navigator.#ctor*
+  name: Navigator
+  href: api/Mapsui.Navigator.html#Mapsui_Navigator__ctor_
+  commentId: Overload:Mapsui.Navigator.#ctor
+  isSpec: "True"
+  fullName: Mapsui.Navigator.Navigator
+  nameWithType: Navigator.Navigator
+- uid: Mapsui.Navigator.NavigateTo(Mapsui.Geometries.BoundingBox,Mapsui.Utilities.ScaleMethod)
+  name: NavigateTo(BoundingBox, ScaleMethod)
+  href: api/Mapsui.Navigator.html#Mapsui_Navigator_NavigateTo_Mapsui_Geometries_BoundingBox_Mapsui_Utilities_ScaleMethod_
+  commentId: M:Mapsui.Navigator.NavigateTo(Mapsui.Geometries.BoundingBox,Mapsui.Utilities.ScaleMethod)
+  fullName: Mapsui.Navigator.NavigateTo(Mapsui.Geometries.BoundingBox, Mapsui.Utilities.ScaleMethod)
+  nameWithType: Navigator.NavigateTo(BoundingBox, ScaleMethod)
+- uid: Mapsui.Navigator.NavigateTo(Mapsui.Geometries.Point)
+  name: NavigateTo(Point)
+  href: api/Mapsui.Navigator.html#Mapsui_Navigator_NavigateTo_Mapsui_Geometries_Point_
+  commentId: M:Mapsui.Navigator.NavigateTo(Mapsui.Geometries.Point)
+  fullName: Mapsui.Navigator.NavigateTo(Mapsui.Geometries.Point)
+  nameWithType: Navigator.NavigateTo(Point)
+- uid: Mapsui.Navigator.NavigateTo(Mapsui.Geometries.Point,System.Double)
+  name: NavigateTo(Point, Double)
+  href: api/Mapsui.Navigator.html#Mapsui_Navigator_NavigateTo_Mapsui_Geometries_Point_System_Double_
+  commentId: M:Mapsui.Navigator.NavigateTo(Mapsui.Geometries.Point,System.Double)
+  fullName: Mapsui.Navigator.NavigateTo(Mapsui.Geometries.Point, System.Double)
+  nameWithType: Navigator.NavigateTo(Point, Double)
+- uid: Mapsui.Navigator.NavigateTo(System.Double)
+  name: NavigateTo(Double)
+  href: api/Mapsui.Navigator.html#Mapsui_Navigator_NavigateTo_System_Double_
+  commentId: M:Mapsui.Navigator.NavigateTo(System.Double)
+  fullName: Mapsui.Navigator.NavigateTo(System.Double)
+  nameWithType: Navigator.NavigateTo(Double)
+- uid: Mapsui.Navigator.NavigateTo(System.Double,System.Double)
+  name: NavigateTo(Double, Double)
+  href: api/Mapsui.Navigator.html#Mapsui_Navigator_NavigateTo_System_Double_System_Double_
+  commentId: M:Mapsui.Navigator.NavigateTo(System.Double,System.Double)
+  fullName: Mapsui.Navigator.NavigateTo(System.Double, System.Double)
+  nameWithType: Navigator.NavigateTo(Double, Double)
+- uid: Mapsui.Navigator.NavigateTo*
+  name: NavigateTo
+  href: api/Mapsui.Navigator.html#Mapsui_Navigator_NavigateTo_
+  commentId: Overload:Mapsui.Navigator.NavigateTo
+  isSpec: "True"
+  fullName: Mapsui.Navigator.NavigateTo
+  nameWithType: Navigator.NavigateTo
+- uid: Mapsui.Navigator.NavigateToFullEnvelope(Mapsui.Utilities.ScaleMethod)
+  name: NavigateToFullEnvelope(ScaleMethod)
+  href: api/Mapsui.Navigator.html#Mapsui_Navigator_NavigateToFullEnvelope_Mapsui_Utilities_ScaleMethod_
+  commentId: M:Mapsui.Navigator.NavigateToFullEnvelope(Mapsui.Utilities.ScaleMethod)
+  fullName: Mapsui.Navigator.NavigateToFullEnvelope(Mapsui.Utilities.ScaleMethod)
+  nameWithType: Navigator.NavigateToFullEnvelope(ScaleMethod)
+- uid: Mapsui.Navigator.NavigateToFullEnvelope*
+  name: NavigateToFullEnvelope
+  href: api/Mapsui.Navigator.html#Mapsui_Navigator_NavigateToFullEnvelope_
+  commentId: Overload:Mapsui.Navigator.NavigateToFullEnvelope
+  isSpec: "True"
+  fullName: Mapsui.Navigator.NavigateToFullEnvelope
+  nameWithType: Navigator.NavigateToFullEnvelope
+- uid: Mapsui.Navigator.RotateTo(System.Double)
+  name: RotateTo(Double)
+  href: api/Mapsui.Navigator.html#Mapsui_Navigator_RotateTo_System_Double_
+  commentId: M:Mapsui.Navigator.RotateTo(System.Double)
+  fullName: Mapsui.Navigator.RotateTo(System.Double)
+  nameWithType: Navigator.RotateTo(Double)
+- uid: Mapsui.Navigator.RotateTo*
+  name: RotateTo
+  href: api/Mapsui.Navigator.html#Mapsui_Navigator_RotateTo_
+  commentId: Overload:Mapsui.Navigator.RotateTo
+  isSpec: "True"
+  fullName: Mapsui.Navigator.RotateTo
+  nameWithType: Navigator.RotateTo
+- uid: Mapsui.Navigator.ZoomIn
+  name: ZoomIn()
+  href: api/Mapsui.Navigator.html#Mapsui_Navigator_ZoomIn
+  commentId: M:Mapsui.Navigator.ZoomIn
+  fullName: Mapsui.Navigator.ZoomIn()
+  nameWithType: Navigator.ZoomIn()
+- uid: Mapsui.Navigator.ZoomIn*
+  name: ZoomIn
+  href: api/Mapsui.Navigator.html#Mapsui_Navigator_ZoomIn_
+  commentId: Overload:Mapsui.Navigator.ZoomIn
+  isSpec: "True"
+  fullName: Mapsui.Navigator.ZoomIn
+  nameWithType: Navigator.ZoomIn
+- uid: Mapsui.Navigator.ZoomOut
+  name: ZoomOut()
+  href: api/Mapsui.Navigator.html#Mapsui_Navigator_ZoomOut
+  commentId: M:Mapsui.Navigator.ZoomOut
+  fullName: Mapsui.Navigator.ZoomOut()
+  nameWithType: Navigator.ZoomOut()
+- uid: Mapsui.Navigator.ZoomOut*
+  name: ZoomOut
+  href: api/Mapsui.Navigator.html#Mapsui_Navigator_ZoomOut_
+  commentId: Overload:Mapsui.Navigator.ZoomOut
+  isSpec: "True"
+  fullName: Mapsui.Navigator.ZoomOut
+  nameWithType: Navigator.ZoomOut
 - uid: Mapsui.Projection
   name: Mapsui.Projection
   href: api/Mapsui.Projection.html
@@ -15356,15 +15618,15 @@ references:
   commentId: T:Mapsui.Rendering.IRenderer
   fullName: Mapsui.Rendering.IRenderer
   nameWithType: IRenderer
-- uid: Mapsui.Rendering.IRenderer.Render(System.Object,Mapsui.IViewport,IEnumerable{Mapsui.Layers.ILayer},IEnumerable{Mapsui.Widgets.IWidget},Mapsui.Styles.Color)
-  name: Render(Object, IViewport, IEnumerable<ILayer>, IEnumerable<IWidget>, Color)
-  href: api/Mapsui.Rendering.IRenderer.html#Mapsui_Rendering_IRenderer_Render_System_Object_Mapsui_IViewport_IEnumerable_Mapsui_Layers_ILayer__IEnumerable_Mapsui_Widgets_IWidget__Mapsui_Styles_Color_
-  commentId: M:Mapsui.Rendering.IRenderer.Render(System.Object,Mapsui.IViewport,IEnumerable{Mapsui.Layers.ILayer},IEnumerable{Mapsui.Widgets.IWidget},Mapsui.Styles.Color)
-  name.vb: Render(Object, IViewport, IEnumerable(Of ILayer), IEnumerable(Of IWidget), Color)
-  fullName: Mapsui.Rendering.IRenderer.Render(System.Object, Mapsui.IViewport, IEnumerable<Mapsui.Layers.ILayer>, IEnumerable<Mapsui.Widgets.IWidget>, Mapsui.Styles.Color)
-  fullName.vb: Mapsui.Rendering.IRenderer.Render(System.Object, Mapsui.IViewport, IEnumerable(Of Mapsui.Layers.ILayer), IEnumerable(Of Mapsui.Widgets.IWidget), Mapsui.Styles.Color)
-  nameWithType: IRenderer.Render(Object, IViewport, IEnumerable<ILayer>, IEnumerable<IWidget>, Color)
-  nameWithType.vb: IRenderer.Render(Object, IViewport, IEnumerable(Of ILayer), IEnumerable(Of IWidget), Color)
+- uid: Mapsui.Rendering.IRenderer.Render(System.Object,Mapsui.Map,Mapsui.IViewport,IEnumerable{Mapsui.Layers.ILayer},IEnumerable{Mapsui.Widgets.IWidget},Mapsui.Styles.Color)
+  name: Render(Object, Map, IViewport, IEnumerable<ILayer>, IEnumerable<IWidget>, Color)
+  href: api/Mapsui.Rendering.IRenderer.html#Mapsui_Rendering_IRenderer_Render_System_Object_Mapsui_Map_Mapsui_IViewport_IEnumerable_Mapsui_Layers_ILayer__IEnumerable_Mapsui_Widgets_IWidget__Mapsui_Styles_Color_
+  commentId: M:Mapsui.Rendering.IRenderer.Render(System.Object,Mapsui.Map,Mapsui.IViewport,IEnumerable{Mapsui.Layers.ILayer},IEnumerable{Mapsui.Widgets.IWidget},Mapsui.Styles.Color)
+  name.vb: Render(Object, Map, IViewport, IEnumerable(Of ILayer), IEnumerable(Of IWidget), Color)
+  fullName: Mapsui.Rendering.IRenderer.Render(System.Object, Mapsui.Map, Mapsui.IViewport, IEnumerable<Mapsui.Layers.ILayer>, IEnumerable<Mapsui.Widgets.IWidget>, Mapsui.Styles.Color)
+  fullName.vb: Mapsui.Rendering.IRenderer.Render(System.Object, Mapsui.Map, Mapsui.IViewport, IEnumerable(Of Mapsui.Layers.ILayer), IEnumerable(Of Mapsui.Widgets.IWidget), Mapsui.Styles.Color)
+  nameWithType: IRenderer.Render(Object, Map, IViewport, IEnumerable<ILayer>, IEnumerable<IWidget>, Color)
+  nameWithType.vb: IRenderer.Render(Object, Map, IViewport, IEnumerable(Of ILayer), IEnumerable(Of IWidget), Color)
 - uid: Mapsui.Rendering.IRenderer.Render*
   name: Render
   href: api/Mapsui.Rendering.IRenderer.html#Mapsui_Rendering_IRenderer_Render_
@@ -15920,15 +16182,15 @@ references:
   isSpec: "True"
   fullName: Mapsui.Rendering.Skia.MapRenderer.MapRenderer
   nameWithType: MapRenderer.MapRenderer
-- uid: Mapsui.Rendering.Skia.MapRenderer.Render(System.Object,Mapsui.IViewport,IEnumerable{Mapsui.Layers.ILayer},IEnumerable{Mapsui.Widgets.IWidget},Mapsui.Styles.Color)
-  name: Render(Object, IViewport, IEnumerable<ILayer>, IEnumerable<IWidget>, Color)
-  href: api/Mapsui.Rendering.Skia.MapRenderer.html#Mapsui_Rendering_Skia_MapRenderer_Render_System_Object_Mapsui_IViewport_IEnumerable_Mapsui_Layers_ILayer__IEnumerable_Mapsui_Widgets_IWidget__Mapsui_Styles_Color_
-  commentId: M:Mapsui.Rendering.Skia.MapRenderer.Render(System.Object,Mapsui.IViewport,IEnumerable{Mapsui.Layers.ILayer},IEnumerable{Mapsui.Widgets.IWidget},Mapsui.Styles.Color)
-  name.vb: Render(Object, IViewport, IEnumerable(Of ILayer), IEnumerable(Of IWidget), Color)
-  fullName: Mapsui.Rendering.Skia.MapRenderer.Render(System.Object, Mapsui.IViewport, IEnumerable<Mapsui.Layers.ILayer>, IEnumerable<Mapsui.Widgets.IWidget>, Mapsui.Styles.Color)
-  fullName.vb: Mapsui.Rendering.Skia.MapRenderer.Render(System.Object, Mapsui.IViewport, IEnumerable(Of Mapsui.Layers.ILayer), IEnumerable(Of Mapsui.Widgets.IWidget), Mapsui.Styles.Color)
-  nameWithType: MapRenderer.Render(Object, IViewport, IEnumerable<ILayer>, IEnumerable<IWidget>, Color)
-  nameWithType.vb: MapRenderer.Render(Object, IViewport, IEnumerable(Of ILayer), IEnumerable(Of IWidget), Color)
+- uid: Mapsui.Rendering.Skia.MapRenderer.Render(System.Object,Mapsui.Map,Mapsui.IViewport,IEnumerable{Mapsui.Layers.ILayer},IEnumerable{Mapsui.Widgets.IWidget},Mapsui.Styles.Color)
+  name: Render(Object, Map, IViewport, IEnumerable<ILayer>, IEnumerable<IWidget>, Color)
+  href: api/Mapsui.Rendering.Skia.MapRenderer.html#Mapsui_Rendering_Skia_MapRenderer_Render_System_Object_Mapsui_Map_Mapsui_IViewport_IEnumerable_Mapsui_Layers_ILayer__IEnumerable_Mapsui_Widgets_IWidget__Mapsui_Styles_Color_
+  commentId: M:Mapsui.Rendering.Skia.MapRenderer.Render(System.Object,Mapsui.Map,Mapsui.IViewport,IEnumerable{Mapsui.Layers.ILayer},IEnumerable{Mapsui.Widgets.IWidget},Mapsui.Styles.Color)
+  name.vb: Render(Object, Map, IViewport, IEnumerable(Of ILayer), IEnumerable(Of IWidget), Color)
+  fullName: Mapsui.Rendering.Skia.MapRenderer.Render(System.Object, Mapsui.Map, Mapsui.IViewport, IEnumerable<Mapsui.Layers.ILayer>, IEnumerable<Mapsui.Widgets.IWidget>, Mapsui.Styles.Color)
+  fullName.vb: Mapsui.Rendering.Skia.MapRenderer.Render(System.Object, Mapsui.Map, Mapsui.IViewport, IEnumerable(Of Mapsui.Layers.ILayer), IEnumerable(Of Mapsui.Widgets.IWidget), Mapsui.Styles.Color)
+  nameWithType: MapRenderer.Render(Object, Map, IViewport, IEnumerable<ILayer>, IEnumerable<IWidget>, Color)
+  nameWithType.vb: MapRenderer.Render(Object, Map, IViewport, IEnumerable(Of ILayer), IEnumerable(Of IWidget), Color)
 - uid: Mapsui.Rendering.Skia.MapRenderer.Render*
   name: Render
   href: api/Mapsui.Rendering.Skia.MapRenderer.html#Mapsui_Rendering_Skia_MapRenderer_Render_
@@ -16129,12 +16391,12 @@ references:
   commentId: T:Mapsui.Rendering.Skia.SkiaWidgets.HyperlinkWidgetRenderer
   fullName: Mapsui.Rendering.Skia.SkiaWidgets.HyperlinkWidgetRenderer
   nameWithType: HyperlinkWidgetRenderer
-- uid: Mapsui.Rendering.Skia.SkiaWidgets.HyperlinkWidgetRenderer.Draw(SKCanvas,System.Double,System.Double,Mapsui.Widgets.IWidget,System.Single)
-  name: Draw(SKCanvas, Double, Double, IWidget, Single)
-  href: api/Mapsui.Rendering.Skia.SkiaWidgets.HyperlinkWidgetRenderer.html#Mapsui_Rendering_Skia_SkiaWidgets_HyperlinkWidgetRenderer_Draw_SKCanvas_System_Double_System_Double_Mapsui_Widgets_IWidget_System_Single_
-  commentId: M:Mapsui.Rendering.Skia.SkiaWidgets.HyperlinkWidgetRenderer.Draw(SKCanvas,System.Double,System.Double,Mapsui.Widgets.IWidget,System.Single)
-  fullName: Mapsui.Rendering.Skia.SkiaWidgets.HyperlinkWidgetRenderer.Draw(SKCanvas, System.Double, System.Double, Mapsui.Widgets.IWidget, System.Single)
-  nameWithType: HyperlinkWidgetRenderer.Draw(SKCanvas, Double, Double, IWidget, Single)
+- uid: Mapsui.Rendering.Skia.SkiaWidgets.HyperlinkWidgetRenderer.Draw(SKCanvas,Mapsui.Map,Mapsui.IReadOnlyViewport,Mapsui.Widgets.IWidget,System.Single)
+  name: Draw(SKCanvas, Map, IReadOnlyViewport, IWidget, Single)
+  href: api/Mapsui.Rendering.Skia.SkiaWidgets.HyperlinkWidgetRenderer.html#Mapsui_Rendering_Skia_SkiaWidgets_HyperlinkWidgetRenderer_Draw_SKCanvas_Mapsui_Map_Mapsui_IReadOnlyViewport_Mapsui_Widgets_IWidget_System_Single_
+  commentId: M:Mapsui.Rendering.Skia.SkiaWidgets.HyperlinkWidgetRenderer.Draw(SKCanvas,Mapsui.Map,Mapsui.IReadOnlyViewport,Mapsui.Widgets.IWidget,System.Single)
+  fullName: Mapsui.Rendering.Skia.SkiaWidgets.HyperlinkWidgetRenderer.Draw(SKCanvas, Mapsui.Map, Mapsui.IReadOnlyViewport, Mapsui.Widgets.IWidget, System.Single)
+  nameWithType: HyperlinkWidgetRenderer.Draw(SKCanvas, Map, IReadOnlyViewport, IWidget, Single)
 - uid: Mapsui.Rendering.Skia.SkiaWidgets.HyperlinkWidgetRenderer.Draw*
   name: Draw
   href: api/Mapsui.Rendering.Skia.SkiaWidgets.HyperlinkWidgetRenderer.html#Mapsui_Rendering_Skia_SkiaWidgets_HyperlinkWidgetRenderer_Draw_
@@ -16148,12 +16410,12 @@ references:
   commentId: T:Mapsui.Rendering.Skia.SkiaWidgets.ISkiaWidgetRenderer
   fullName: Mapsui.Rendering.Skia.SkiaWidgets.ISkiaWidgetRenderer
   nameWithType: ISkiaWidgetRenderer
-- uid: Mapsui.Rendering.Skia.SkiaWidgets.ISkiaWidgetRenderer.Draw(SKCanvas,System.Double,System.Double,Mapsui.Widgets.IWidget,System.Single)
-  name: Draw(SKCanvas, Double, Double, IWidget, Single)
-  href: api/Mapsui.Rendering.Skia.SkiaWidgets.ISkiaWidgetRenderer.html#Mapsui_Rendering_Skia_SkiaWidgets_ISkiaWidgetRenderer_Draw_SKCanvas_System_Double_System_Double_Mapsui_Widgets_IWidget_System_Single_
-  commentId: M:Mapsui.Rendering.Skia.SkiaWidgets.ISkiaWidgetRenderer.Draw(SKCanvas,System.Double,System.Double,Mapsui.Widgets.IWidget,System.Single)
-  fullName: Mapsui.Rendering.Skia.SkiaWidgets.ISkiaWidgetRenderer.Draw(SKCanvas, System.Double, System.Double, Mapsui.Widgets.IWidget, System.Single)
-  nameWithType: ISkiaWidgetRenderer.Draw(SKCanvas, Double, Double, IWidget, Single)
+- uid: Mapsui.Rendering.Skia.SkiaWidgets.ISkiaWidgetRenderer.Draw(SKCanvas,Mapsui.Map,Mapsui.IReadOnlyViewport,Mapsui.Widgets.IWidget,System.Single)
+  name: Draw(SKCanvas, Map, IReadOnlyViewport, IWidget, Single)
+  href: api/Mapsui.Rendering.Skia.SkiaWidgets.ISkiaWidgetRenderer.html#Mapsui_Rendering_Skia_SkiaWidgets_ISkiaWidgetRenderer_Draw_SKCanvas_Mapsui_Map_Mapsui_IReadOnlyViewport_Mapsui_Widgets_IWidget_System_Single_
+  commentId: M:Mapsui.Rendering.Skia.SkiaWidgets.ISkiaWidgetRenderer.Draw(SKCanvas,Mapsui.Map,Mapsui.IReadOnlyViewport,Mapsui.Widgets.IWidget,System.Single)
+  fullName: Mapsui.Rendering.Skia.SkiaWidgets.ISkiaWidgetRenderer.Draw(SKCanvas, Mapsui.Map, Mapsui.IReadOnlyViewport, Mapsui.Widgets.IWidget, System.Single)
+  nameWithType: ISkiaWidgetRenderer.Draw(SKCanvas, Map, IReadOnlyViewport, IWidget, Single)
 - uid: Mapsui.Rendering.Skia.SkiaWidgets.ISkiaWidgetRenderer.Draw*
   name: Draw
   href: api/Mapsui.Rendering.Skia.SkiaWidgets.ISkiaWidgetRenderer.html#Mapsui_Rendering_Skia_SkiaWidgets_ISkiaWidgetRenderer_Draw_
@@ -16167,12 +16429,12 @@ references:
   commentId: T:Mapsui.Rendering.Skia.SkiaWidgets.ScaleBarWidgetRenderer
   fullName: Mapsui.Rendering.Skia.SkiaWidgets.ScaleBarWidgetRenderer
   nameWithType: ScaleBarWidgetRenderer
-- uid: Mapsui.Rendering.Skia.SkiaWidgets.ScaleBarWidgetRenderer.Draw(SKCanvas,System.Double,System.Double,Mapsui.Widgets.IWidget,System.Single)
-  name: Draw(SKCanvas, Double, Double, IWidget, Single)
-  href: api/Mapsui.Rendering.Skia.SkiaWidgets.ScaleBarWidgetRenderer.html#Mapsui_Rendering_Skia_SkiaWidgets_ScaleBarWidgetRenderer_Draw_SKCanvas_System_Double_System_Double_Mapsui_Widgets_IWidget_System_Single_
-  commentId: M:Mapsui.Rendering.Skia.SkiaWidgets.ScaleBarWidgetRenderer.Draw(SKCanvas,System.Double,System.Double,Mapsui.Widgets.IWidget,System.Single)
-  fullName: Mapsui.Rendering.Skia.SkiaWidgets.ScaleBarWidgetRenderer.Draw(SKCanvas, System.Double, System.Double, Mapsui.Widgets.IWidget, System.Single)
-  nameWithType: ScaleBarWidgetRenderer.Draw(SKCanvas, Double, Double, IWidget, Single)
+- uid: Mapsui.Rendering.Skia.SkiaWidgets.ScaleBarWidgetRenderer.Draw(SKCanvas,Mapsui.Map,Mapsui.IReadOnlyViewport,Mapsui.Widgets.IWidget,System.Single)
+  name: Draw(SKCanvas, Map, IReadOnlyViewport, IWidget, Single)
+  href: api/Mapsui.Rendering.Skia.SkiaWidgets.ScaleBarWidgetRenderer.html#Mapsui_Rendering_Skia_SkiaWidgets_ScaleBarWidgetRenderer_Draw_SKCanvas_Mapsui_Map_Mapsui_IReadOnlyViewport_Mapsui_Widgets_IWidget_System_Single_
+  commentId: M:Mapsui.Rendering.Skia.SkiaWidgets.ScaleBarWidgetRenderer.Draw(SKCanvas,Mapsui.Map,Mapsui.IReadOnlyViewport,Mapsui.Widgets.IWidget,System.Single)
+  fullName: Mapsui.Rendering.Skia.SkiaWidgets.ScaleBarWidgetRenderer.Draw(SKCanvas, Mapsui.Map, Mapsui.IReadOnlyViewport, Mapsui.Widgets.IWidget, System.Single)
+  nameWithType: ScaleBarWidgetRenderer.Draw(SKCanvas, Map, IReadOnlyViewport, IWidget, Single)
 - uid: Mapsui.Rendering.Skia.SkiaWidgets.ScaleBarWidgetRenderer.Draw*
   name: Draw
   href: api/Mapsui.Rendering.Skia.SkiaWidgets.ScaleBarWidgetRenderer.html#Mapsui_Rendering_Skia_SkiaWidgets_ScaleBarWidgetRenderer_Draw_
@@ -16186,15 +16448,15 @@ references:
   commentId: T:Mapsui.Rendering.Skia.SkiaWidgets.WidgetRenderer
   fullName: Mapsui.Rendering.Skia.SkiaWidgets.WidgetRenderer
   nameWithType: WidgetRenderer
-- uid: Mapsui.Rendering.Skia.SkiaWidgets.WidgetRenderer.Render(System.Object,System.Double,System.Double,IEnumerable{Mapsui.Widgets.IWidget},IDictionary{Type,Mapsui.Widgets.IWidgetRenderer},System.Single)
-  name: Render(Object, Double, Double, IEnumerable<IWidget>, IDictionary<Type, IWidgetRenderer>, Single)
-  href: api/Mapsui.Rendering.Skia.SkiaWidgets.WidgetRenderer.html#Mapsui_Rendering_Skia_SkiaWidgets_WidgetRenderer_Render_System_Object_System_Double_System_Double_IEnumerable_Mapsui_Widgets_IWidget__IDictionary_Type_Mapsui_Widgets_IWidgetRenderer__System_Single_
-  commentId: M:Mapsui.Rendering.Skia.SkiaWidgets.WidgetRenderer.Render(System.Object,System.Double,System.Double,IEnumerable{Mapsui.Widgets.IWidget},IDictionary{Type,Mapsui.Widgets.IWidgetRenderer},System.Single)
-  name.vb: Render(Object, Double, Double, IEnumerable(Of IWidget), IDictionary(Of Type, IWidgetRenderer), Single)
-  fullName: Mapsui.Rendering.Skia.SkiaWidgets.WidgetRenderer.Render(System.Object, System.Double, System.Double, IEnumerable<Mapsui.Widgets.IWidget>, IDictionary<Type, Mapsui.Widgets.IWidgetRenderer>, System.Single)
-  fullName.vb: Mapsui.Rendering.Skia.SkiaWidgets.WidgetRenderer.Render(System.Object, System.Double, System.Double, IEnumerable(Of Mapsui.Widgets.IWidget), IDictionary(Of Type, Mapsui.Widgets.IWidgetRenderer), System.Single)
-  nameWithType: WidgetRenderer.Render(Object, Double, Double, IEnumerable<IWidget>, IDictionary<Type, IWidgetRenderer>, Single)
-  nameWithType.vb: WidgetRenderer.Render(Object, Double, Double, IEnumerable(Of IWidget), IDictionary(Of Type, IWidgetRenderer), Single)
+- uid: Mapsui.Rendering.Skia.SkiaWidgets.WidgetRenderer.Render(System.Object,Mapsui.Map,Mapsui.IReadOnlyViewport,IEnumerable{Mapsui.Widgets.IWidget},IDictionary{Type,Mapsui.Widgets.IWidgetRenderer},System.Single)
+  name: Render(Object, Map, IReadOnlyViewport, IEnumerable<IWidget>, IDictionary<Type, IWidgetRenderer>, Single)
+  href: api/Mapsui.Rendering.Skia.SkiaWidgets.WidgetRenderer.html#Mapsui_Rendering_Skia_SkiaWidgets_WidgetRenderer_Render_System_Object_Mapsui_Map_Mapsui_IReadOnlyViewport_IEnumerable_Mapsui_Widgets_IWidget__IDictionary_Type_Mapsui_Widgets_IWidgetRenderer__System_Single_
+  commentId: M:Mapsui.Rendering.Skia.SkiaWidgets.WidgetRenderer.Render(System.Object,Mapsui.Map,Mapsui.IReadOnlyViewport,IEnumerable{Mapsui.Widgets.IWidget},IDictionary{Type,Mapsui.Widgets.IWidgetRenderer},System.Single)
+  name.vb: Render(Object, Map, IReadOnlyViewport, IEnumerable(Of IWidget), IDictionary(Of Type, IWidgetRenderer), Single)
+  fullName: Mapsui.Rendering.Skia.SkiaWidgets.WidgetRenderer.Render(System.Object, Mapsui.Map, Mapsui.IReadOnlyViewport, IEnumerable<Mapsui.Widgets.IWidget>, IDictionary<Type, Mapsui.Widgets.IWidgetRenderer>, System.Single)
+  fullName.vb: Mapsui.Rendering.Skia.SkiaWidgets.WidgetRenderer.Render(System.Object, Mapsui.Map, Mapsui.IReadOnlyViewport, IEnumerable(Of Mapsui.Widgets.IWidget), IDictionary(Of Type, Mapsui.Widgets.IWidgetRenderer), System.Single)
+  nameWithType: WidgetRenderer.Render(Object, Map, IReadOnlyViewport, IEnumerable<IWidget>, IDictionary<Type, IWidgetRenderer>, Single)
+  nameWithType.vb: WidgetRenderer.Render(Object, Map, IReadOnlyViewport, IEnumerable(Of IWidget), IDictionary(Of Type, IWidgetRenderer), Single)
 - uid: Mapsui.Rendering.Skia.SkiaWidgets.WidgetRenderer.Render*
   name: Render
   href: api/Mapsui.Rendering.Skia.SkiaWidgets.WidgetRenderer.html#Mapsui_Rendering_Skia_SkiaWidgets_WidgetRenderer_Render_
@@ -16208,12 +16470,12 @@ references:
   commentId: T:Mapsui.Rendering.Skia.SkiaWidgets.ZoomInOutWidgetRenderer
   fullName: Mapsui.Rendering.Skia.SkiaWidgets.ZoomInOutWidgetRenderer
   nameWithType: ZoomInOutWidgetRenderer
-- uid: Mapsui.Rendering.Skia.SkiaWidgets.ZoomInOutWidgetRenderer.Draw(SKCanvas,System.Double,System.Double,Mapsui.Widgets.IWidget,System.Single)
-  name: Draw(SKCanvas, Double, Double, IWidget, Single)
-  href: api/Mapsui.Rendering.Skia.SkiaWidgets.ZoomInOutWidgetRenderer.html#Mapsui_Rendering_Skia_SkiaWidgets_ZoomInOutWidgetRenderer_Draw_SKCanvas_System_Double_System_Double_Mapsui_Widgets_IWidget_System_Single_
-  commentId: M:Mapsui.Rendering.Skia.SkiaWidgets.ZoomInOutWidgetRenderer.Draw(SKCanvas,System.Double,System.Double,Mapsui.Widgets.IWidget,System.Single)
-  fullName: Mapsui.Rendering.Skia.SkiaWidgets.ZoomInOutWidgetRenderer.Draw(SKCanvas, System.Double, System.Double, Mapsui.Widgets.IWidget, System.Single)
-  nameWithType: ZoomInOutWidgetRenderer.Draw(SKCanvas, Double, Double, IWidget, Single)
+- uid: Mapsui.Rendering.Skia.SkiaWidgets.ZoomInOutWidgetRenderer.Draw(SKCanvas,Mapsui.Map,Mapsui.IReadOnlyViewport,Mapsui.Widgets.IWidget,System.Single)
+  name: Draw(SKCanvas, Map, IReadOnlyViewport, IWidget, Single)
+  href: api/Mapsui.Rendering.Skia.SkiaWidgets.ZoomInOutWidgetRenderer.html#Mapsui_Rendering_Skia_SkiaWidgets_ZoomInOutWidgetRenderer_Draw_SKCanvas_Mapsui_Map_Mapsui_IReadOnlyViewport_Mapsui_Widgets_IWidget_System_Single_
+  commentId: M:Mapsui.Rendering.Skia.SkiaWidgets.ZoomInOutWidgetRenderer.Draw(SKCanvas,Mapsui.Map,Mapsui.IReadOnlyViewport,Mapsui.Widgets.IWidget,System.Single)
+  fullName: Mapsui.Rendering.Skia.SkiaWidgets.ZoomInOutWidgetRenderer.Draw(SKCanvas, Mapsui.Map, Mapsui.IReadOnlyViewport, Mapsui.Widgets.IWidget, System.Single)
+  nameWithType: ZoomInOutWidgetRenderer.Draw(SKCanvas, Map, IReadOnlyViewport, IWidget, Single)
 - uid: Mapsui.Rendering.Skia.SkiaWidgets.ZoomInOutWidgetRenderer.Draw*
   name: Draw
   href: api/Mapsui.Rendering.Skia.SkiaWidgets.ZoomInOutWidgetRenderer.html#Mapsui_Rendering_Skia_SkiaWidgets_ZoomInOutWidgetRenderer_Draw_
@@ -16530,15 +16792,15 @@ references:
   isSpec: "True"
   fullName: Mapsui.Rendering.Xaml.MapRenderer.MapRenderer
   nameWithType: MapRenderer.MapRenderer
-- uid: Mapsui.Rendering.Xaml.MapRenderer.Render(System.Object,Mapsui.IViewport,IEnumerable{Mapsui.Layers.ILayer},IEnumerable{Mapsui.Widgets.IWidget},Mapsui.Styles.Color)
-  name: Render(Object, IViewport, IEnumerable<ILayer>, IEnumerable<IWidget>, Color)
-  href: api/Mapsui.Rendering.Xaml.MapRenderer.html#Mapsui_Rendering_Xaml_MapRenderer_Render_System_Object_Mapsui_IViewport_IEnumerable_Mapsui_Layers_ILayer__IEnumerable_Mapsui_Widgets_IWidget__Mapsui_Styles_Color_
-  commentId: M:Mapsui.Rendering.Xaml.MapRenderer.Render(System.Object,Mapsui.IViewport,IEnumerable{Mapsui.Layers.ILayer},IEnumerable{Mapsui.Widgets.IWidget},Mapsui.Styles.Color)
-  name.vb: Render(Object, IViewport, IEnumerable(Of ILayer), IEnumerable(Of IWidget), Color)
-  fullName: Mapsui.Rendering.Xaml.MapRenderer.Render(System.Object, Mapsui.IViewport, IEnumerable<Mapsui.Layers.ILayer>, IEnumerable<Mapsui.Widgets.IWidget>, Mapsui.Styles.Color)
-  fullName.vb: Mapsui.Rendering.Xaml.MapRenderer.Render(System.Object, Mapsui.IViewport, IEnumerable(Of Mapsui.Layers.ILayer), IEnumerable(Of Mapsui.Widgets.IWidget), Mapsui.Styles.Color)
-  nameWithType: MapRenderer.Render(Object, IViewport, IEnumerable<ILayer>, IEnumerable<IWidget>, Color)
-  nameWithType.vb: MapRenderer.Render(Object, IViewport, IEnumerable(Of ILayer), IEnumerable(Of IWidget), Color)
+- uid: Mapsui.Rendering.Xaml.MapRenderer.Render(System.Object,Mapsui.Map,Mapsui.IViewport,IEnumerable{Mapsui.Layers.ILayer},IEnumerable{Mapsui.Widgets.IWidget},Mapsui.Styles.Color)
+  name: Render(Object, Map, IViewport, IEnumerable<ILayer>, IEnumerable<IWidget>, Color)
+  href: api/Mapsui.Rendering.Xaml.MapRenderer.html#Mapsui_Rendering_Xaml_MapRenderer_Render_System_Object_Mapsui_Map_Mapsui_IViewport_IEnumerable_Mapsui_Layers_ILayer__IEnumerable_Mapsui_Widgets_IWidget__Mapsui_Styles_Color_
+  commentId: M:Mapsui.Rendering.Xaml.MapRenderer.Render(System.Object,Mapsui.Map,Mapsui.IViewport,IEnumerable{Mapsui.Layers.ILayer},IEnumerable{Mapsui.Widgets.IWidget},Mapsui.Styles.Color)
+  name.vb: Render(Object, Map, IViewport, IEnumerable(Of ILayer), IEnumerable(Of IWidget), Color)
+  fullName: Mapsui.Rendering.Xaml.MapRenderer.Render(System.Object, Mapsui.Map, Mapsui.IViewport, IEnumerable<Mapsui.Layers.ILayer>, IEnumerable<Mapsui.Widgets.IWidget>, Mapsui.Styles.Color)
+  fullName.vb: Mapsui.Rendering.Xaml.MapRenderer.Render(System.Object, Mapsui.Map, Mapsui.IViewport, IEnumerable(Of Mapsui.Layers.ILayer), IEnumerable(Of Mapsui.Widgets.IWidget), Mapsui.Styles.Color)
+  nameWithType: MapRenderer.Render(Object, Map, IViewport, IEnumerable<ILayer>, IEnumerable<IWidget>, Color)
+  nameWithType.vb: MapRenderer.Render(Object, Map, IViewport, IEnumerable(Of ILayer), IEnumerable(Of IWidget), Color)
 - uid: Mapsui.Rendering.Xaml.MapRenderer.Render*
   name: Render
   href: api/Mapsui.Rendering.Xaml.MapRenderer.html#Mapsui_Rendering_Xaml_MapRenderer_Render_
@@ -17394,12 +17656,12 @@ references:
   commentId: T:Mapsui.Rendering.Xaml.XamlWidgets.HyperlinkWidgetRenderer
   fullName: Mapsui.Rendering.Xaml.XamlWidgets.HyperlinkWidgetRenderer
   nameWithType: HyperlinkWidgetRenderer
-- uid: Mapsui.Rendering.Xaml.XamlWidgets.HyperlinkWidgetRenderer.Draw(Canvas,Mapsui.Widgets.IWidget)
-  name: Draw(Canvas, IWidget)
-  href: api/Mapsui.Rendering.Xaml.XamlWidgets.HyperlinkWidgetRenderer.html#Mapsui_Rendering_Xaml_XamlWidgets_HyperlinkWidgetRenderer_Draw_Canvas_Mapsui_Widgets_IWidget_
-  commentId: M:Mapsui.Rendering.Xaml.XamlWidgets.HyperlinkWidgetRenderer.Draw(Canvas,Mapsui.Widgets.IWidget)
-  fullName: Mapsui.Rendering.Xaml.XamlWidgets.HyperlinkWidgetRenderer.Draw(Canvas, Mapsui.Widgets.IWidget)
-  nameWithType: HyperlinkWidgetRenderer.Draw(Canvas, IWidget)
+- uid: Mapsui.Rendering.Xaml.XamlWidgets.HyperlinkWidgetRenderer.Draw(Canvas,Mapsui.Map,Mapsui.IReadOnlyViewport,Mapsui.Widgets.IWidget)
+  name: Draw(Canvas, Map, IReadOnlyViewport, IWidget)
+  href: api/Mapsui.Rendering.Xaml.XamlWidgets.HyperlinkWidgetRenderer.html#Mapsui_Rendering_Xaml_XamlWidgets_HyperlinkWidgetRenderer_Draw_Canvas_Mapsui_Map_Mapsui_IReadOnlyViewport_Mapsui_Widgets_IWidget_
+  commentId: M:Mapsui.Rendering.Xaml.XamlWidgets.HyperlinkWidgetRenderer.Draw(Canvas,Mapsui.Map,Mapsui.IReadOnlyViewport,Mapsui.Widgets.IWidget)
+  fullName: Mapsui.Rendering.Xaml.XamlWidgets.HyperlinkWidgetRenderer.Draw(Canvas, Mapsui.Map, Mapsui.IReadOnlyViewport, Mapsui.Widgets.IWidget)
+  nameWithType: HyperlinkWidgetRenderer.Draw(Canvas, Map, IReadOnlyViewport, IWidget)
 - uid: Mapsui.Rendering.Xaml.XamlWidgets.HyperlinkWidgetRenderer.Draw*
   name: Draw
   href: api/Mapsui.Rendering.Xaml.XamlWidgets.HyperlinkWidgetRenderer.html#Mapsui_Rendering_Xaml_XamlWidgets_HyperlinkWidgetRenderer_Draw_
@@ -17413,12 +17675,12 @@ references:
   commentId: T:Mapsui.Rendering.Xaml.XamlWidgets.ScaleBarWidgetRenderer
   fullName: Mapsui.Rendering.Xaml.XamlWidgets.ScaleBarWidgetRenderer
   nameWithType: ScaleBarWidgetRenderer
-- uid: Mapsui.Rendering.Xaml.XamlWidgets.ScaleBarWidgetRenderer.Draw(Canvas,Mapsui.Widgets.IWidget)
-  name: Draw(Canvas, IWidget)
-  href: api/Mapsui.Rendering.Xaml.XamlWidgets.ScaleBarWidgetRenderer.html#Mapsui_Rendering_Xaml_XamlWidgets_ScaleBarWidgetRenderer_Draw_Canvas_Mapsui_Widgets_IWidget_
-  commentId: M:Mapsui.Rendering.Xaml.XamlWidgets.ScaleBarWidgetRenderer.Draw(Canvas,Mapsui.Widgets.IWidget)
-  fullName: Mapsui.Rendering.Xaml.XamlWidgets.ScaleBarWidgetRenderer.Draw(Canvas, Mapsui.Widgets.IWidget)
-  nameWithType: ScaleBarWidgetRenderer.Draw(Canvas, IWidget)
+- uid: Mapsui.Rendering.Xaml.XamlWidgets.ScaleBarWidgetRenderer.Draw(Canvas,Mapsui.Map,Mapsui.IReadOnlyViewport,Mapsui.Widgets.IWidget)
+  name: Draw(Canvas, Map, IReadOnlyViewport, IWidget)
+  href: api/Mapsui.Rendering.Xaml.XamlWidgets.ScaleBarWidgetRenderer.html#Mapsui_Rendering_Xaml_XamlWidgets_ScaleBarWidgetRenderer_Draw_Canvas_Mapsui_Map_Mapsui_IReadOnlyViewport_Mapsui_Widgets_IWidget_
+  commentId: M:Mapsui.Rendering.Xaml.XamlWidgets.ScaleBarWidgetRenderer.Draw(Canvas,Mapsui.Map,Mapsui.IReadOnlyViewport,Mapsui.Widgets.IWidget)
+  fullName: Mapsui.Rendering.Xaml.XamlWidgets.ScaleBarWidgetRenderer.Draw(Canvas, Mapsui.Map, Mapsui.IReadOnlyViewport, Mapsui.Widgets.IWidget)
+  nameWithType: ScaleBarWidgetRenderer.Draw(Canvas, Map, IReadOnlyViewport, IWidget)
 - uid: Mapsui.Rendering.Xaml.XamlWidgets.ScaleBarWidgetRenderer.Draw*
   name: Draw
   href: api/Mapsui.Rendering.Xaml.XamlWidgets.ScaleBarWidgetRenderer.html#Mapsui_Rendering_Xaml_XamlWidgets_ScaleBarWidgetRenderer_Draw_
@@ -17432,15 +17694,15 @@ references:
   commentId: T:Mapsui.Rendering.Xaml.XamlWidgets.WidgetRenderer
   fullName: Mapsui.Rendering.Xaml.XamlWidgets.WidgetRenderer
   nameWithType: WidgetRenderer
-- uid: Mapsui.Rendering.Xaml.XamlWidgets.WidgetRenderer.Render(System.Object,IEnumerable{Mapsui.Widgets.IWidget},IDictionary{Type,Mapsui.Widgets.IWidgetRenderer})
-  name: Render(Object, IEnumerable<IWidget>, IDictionary<Type, IWidgetRenderer>)
-  href: api/Mapsui.Rendering.Xaml.XamlWidgets.WidgetRenderer.html#Mapsui_Rendering_Xaml_XamlWidgets_WidgetRenderer_Render_System_Object_IEnumerable_Mapsui_Widgets_IWidget__IDictionary_Type_Mapsui_Widgets_IWidgetRenderer__
-  commentId: M:Mapsui.Rendering.Xaml.XamlWidgets.WidgetRenderer.Render(System.Object,IEnumerable{Mapsui.Widgets.IWidget},IDictionary{Type,Mapsui.Widgets.IWidgetRenderer})
-  name.vb: Render(Object, IEnumerable(Of IWidget), IDictionary(Of Type, IWidgetRenderer))
-  fullName: Mapsui.Rendering.Xaml.XamlWidgets.WidgetRenderer.Render(System.Object, IEnumerable<Mapsui.Widgets.IWidget>, IDictionary<Type, Mapsui.Widgets.IWidgetRenderer>)
-  fullName.vb: Mapsui.Rendering.Xaml.XamlWidgets.WidgetRenderer.Render(System.Object, IEnumerable(Of Mapsui.Widgets.IWidget), IDictionary(Of Type, Mapsui.Widgets.IWidgetRenderer))
-  nameWithType: WidgetRenderer.Render(Object, IEnumerable<IWidget>, IDictionary<Type, IWidgetRenderer>)
-  nameWithType.vb: WidgetRenderer.Render(Object, IEnumerable(Of IWidget), IDictionary(Of Type, IWidgetRenderer))
+- uid: Mapsui.Rendering.Xaml.XamlWidgets.WidgetRenderer.Render(System.Object,Mapsui.Map,Mapsui.IReadOnlyViewport,IEnumerable{Mapsui.Widgets.IWidget},IDictionary{Type,Mapsui.Widgets.IWidgetRenderer})
+  name: Render(Object, Map, IReadOnlyViewport, IEnumerable<IWidget>, IDictionary<Type, IWidgetRenderer>)
+  href: api/Mapsui.Rendering.Xaml.XamlWidgets.WidgetRenderer.html#Mapsui_Rendering_Xaml_XamlWidgets_WidgetRenderer_Render_System_Object_Mapsui_Map_Mapsui_IReadOnlyViewport_IEnumerable_Mapsui_Widgets_IWidget__IDictionary_Type_Mapsui_Widgets_IWidgetRenderer__
+  commentId: M:Mapsui.Rendering.Xaml.XamlWidgets.WidgetRenderer.Render(System.Object,Mapsui.Map,Mapsui.IReadOnlyViewport,IEnumerable{Mapsui.Widgets.IWidget},IDictionary{Type,Mapsui.Widgets.IWidgetRenderer})
+  name.vb: Render(Object, Map, IReadOnlyViewport, IEnumerable(Of IWidget), IDictionary(Of Type, IWidgetRenderer))
+  fullName: Mapsui.Rendering.Xaml.XamlWidgets.WidgetRenderer.Render(System.Object, Mapsui.Map, Mapsui.IReadOnlyViewport, IEnumerable<Mapsui.Widgets.IWidget>, IDictionary<Type, Mapsui.Widgets.IWidgetRenderer>)
+  fullName.vb: Mapsui.Rendering.Xaml.XamlWidgets.WidgetRenderer.Render(System.Object, Mapsui.Map, Mapsui.IReadOnlyViewport, IEnumerable(Of Mapsui.Widgets.IWidget), IDictionary(Of Type, Mapsui.Widgets.IWidgetRenderer))
+  nameWithType: WidgetRenderer.Render(Object, Map, IReadOnlyViewport, IEnumerable<IWidget>, IDictionary<Type, IWidgetRenderer>)
+  nameWithType.vb: WidgetRenderer.Render(Object, Map, IReadOnlyViewport, IEnumerable(Of IWidget), IDictionary(Of Type, IWidgetRenderer))
 - uid: Mapsui.Rendering.Xaml.XamlWidgets.WidgetRenderer.Render*
   name: Render
   href: api/Mapsui.Rendering.Xaml.XamlWidgets.WidgetRenderer.html#Mapsui_Rendering_Xaml_XamlWidgets_WidgetRenderer_Render_
@@ -17454,12 +17716,12 @@ references:
   commentId: T:Mapsui.Rendering.Xaml.XamlWidgets.ZoomInOutWidgetRenderer
   fullName: Mapsui.Rendering.Xaml.XamlWidgets.ZoomInOutWidgetRenderer
   nameWithType: ZoomInOutWidgetRenderer
-- uid: Mapsui.Rendering.Xaml.XamlWidgets.ZoomInOutWidgetRenderer.Draw(Canvas,Mapsui.Widgets.IWidget)
-  name: Draw(Canvas, IWidget)
-  href: api/Mapsui.Rendering.Xaml.XamlWidgets.ZoomInOutWidgetRenderer.html#Mapsui_Rendering_Xaml_XamlWidgets_ZoomInOutWidgetRenderer_Draw_Canvas_Mapsui_Widgets_IWidget_
-  commentId: M:Mapsui.Rendering.Xaml.XamlWidgets.ZoomInOutWidgetRenderer.Draw(Canvas,Mapsui.Widgets.IWidget)
-  fullName: Mapsui.Rendering.Xaml.XamlWidgets.ZoomInOutWidgetRenderer.Draw(Canvas, Mapsui.Widgets.IWidget)
-  nameWithType: ZoomInOutWidgetRenderer.Draw(Canvas, IWidget)
+- uid: Mapsui.Rendering.Xaml.XamlWidgets.ZoomInOutWidgetRenderer.Draw(Canvas,Mapsui.Map,Mapsui.IReadOnlyViewport,Mapsui.Widgets.IWidget)
+  name: Draw(Canvas, Map, IReadOnlyViewport, IWidget)
+  href: api/Mapsui.Rendering.Xaml.XamlWidgets.ZoomInOutWidgetRenderer.html#Mapsui_Rendering_Xaml_XamlWidgets_ZoomInOutWidgetRenderer_Draw_Canvas_Mapsui_Map_Mapsui_IReadOnlyViewport_Mapsui_Widgets_IWidget_
+  commentId: M:Mapsui.Rendering.Xaml.XamlWidgets.ZoomInOutWidgetRenderer.Draw(Canvas,Mapsui.Map,Mapsui.IReadOnlyViewport,Mapsui.Widgets.IWidget)
+  fullName: Mapsui.Rendering.Xaml.XamlWidgets.ZoomInOutWidgetRenderer.Draw(Canvas, Mapsui.Map, Mapsui.IReadOnlyViewport, Mapsui.Widgets.IWidget)
+  nameWithType: ZoomInOutWidgetRenderer.Draw(Canvas, Map, IReadOnlyViewport, IWidget)
 - uid: Mapsui.Rendering.Xaml.XamlWidgets.ZoomInOutWidgetRenderer.Draw*
   name: Draw
   href: api/Mapsui.Rendering.Xaml.XamlWidgets.ZoomInOutWidgetRenderer.html#Mapsui_Rendering_Xaml_XamlWidgets_ZoomInOutWidgetRenderer_Draw_
@@ -20323,19 +20585,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Android.MapControl.MapView_Touch
   nameWithType: MapControl.MapView_Touch
-- uid: Mapsui.UI.Android.MapControl.NavigateToFullEnvelope(Mapsui.Utilities.ScaleMethod)
-  name: NavigateToFullEnvelope(ScaleMethod)
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_NavigateToFullEnvelope_Mapsui_Utilities_ScaleMethod_
-  commentId: M:Mapsui.UI.Android.MapControl.NavigateToFullEnvelope(Mapsui.Utilities.ScaleMethod)
-  fullName: Mapsui.UI.Android.MapControl.NavigateToFullEnvelope(Mapsui.Utilities.ScaleMethod)
-  nameWithType: MapControl.NavigateToFullEnvelope(ScaleMethod)
-- uid: Mapsui.UI.Android.MapControl.NavigateToFullEnvelope*
-  name: NavigateToFullEnvelope
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_NavigateToFullEnvelope_
-  commentId: Overload:Mapsui.UI.Android.MapControl.NavigateToFullEnvelope
+- uid: Mapsui.UI.Android.MapControl.Navigator
+  name: Navigator
+  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_Navigator
+  commentId: P:Mapsui.UI.Android.MapControl.Navigator
+  fullName: Mapsui.UI.Android.MapControl.Navigator
+  nameWithType: MapControl.Navigator
+- uid: Mapsui.UI.Android.MapControl.Navigator*
+  name: Navigator
+  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_Navigator_
+  commentId: Overload:Mapsui.UI.Android.MapControl.Navigator
   isSpec: "True"
-  fullName: Mapsui.UI.Android.MapControl.NavigateToFullEnvelope
-  nameWithType: MapControl.NavigateToFullEnvelope
+  fullName: Mapsui.UI.Android.MapControl.Navigator
+  nameWithType: MapControl.Navigator
 - uid: Mapsui.UI.Android.MapControl.OnLayout(System.Boolean,System.Int32,System.Int32,System.Int32,System.Int32)
   name: OnLayout(Boolean, Int32, Int32, Int32, Int32)
   href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_OnLayout_System_Boolean_System_Int32_System_Int32_System_Int32_System_Int32_
@@ -20531,6 +20793,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Android.MapControl.Unsubscribe
   nameWithType: MapControl.Unsubscribe
+- uid: Mapsui.UI.Android.MapControl.Viewport
+  name: Viewport
+  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_Viewport
+  commentId: P:Mapsui.UI.Android.MapControl.Viewport
+  fullName: Mapsui.UI.Android.MapControl.Viewport
+  nameWithType: MapControl.Viewport
+- uid: Mapsui.UI.Android.MapControl.Viewport*
+  name: Viewport
+  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_Viewport_
+  commentId: Overload:Mapsui.UI.Android.MapControl.Viewport
+  isSpec: "True"
+  fullName: Mapsui.UI.Android.MapControl.Viewport
+  nameWithType: MapControl.Viewport
 - uid: Mapsui.UI.Android.MapControl.ViewportHeight
   name: ViewportHeight
   href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_ViewportHeight
@@ -21117,19 +21392,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.iOS.MapControl.Map
   nameWithType: MapControl.Map
-- uid: Mapsui.UI.iOS.MapControl.NavigateToFullEnvelope(Mapsui.Utilities.ScaleMethod)
-  name: NavigateToFullEnvelope(ScaleMethod)
-  href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_NavigateToFullEnvelope_Mapsui_Utilities_ScaleMethod_
-  commentId: M:Mapsui.UI.iOS.MapControl.NavigateToFullEnvelope(Mapsui.Utilities.ScaleMethod)
-  fullName: Mapsui.UI.iOS.MapControl.NavigateToFullEnvelope(Mapsui.Utilities.ScaleMethod)
-  nameWithType: MapControl.NavigateToFullEnvelope(ScaleMethod)
-- uid: Mapsui.UI.iOS.MapControl.NavigateToFullEnvelope*
-  name: NavigateToFullEnvelope
-  href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_NavigateToFullEnvelope_
-  commentId: Overload:Mapsui.UI.iOS.MapControl.NavigateToFullEnvelope
+- uid: Mapsui.UI.iOS.MapControl.Navigator
+  name: Navigator
+  href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_Navigator
+  commentId: P:Mapsui.UI.iOS.MapControl.Navigator
+  fullName: Mapsui.UI.iOS.MapControl.Navigator
+  nameWithType: MapControl.Navigator
+- uid: Mapsui.UI.iOS.MapControl.Navigator*
+  name: Navigator
+  href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_Navigator_
+  commentId: Overload:Mapsui.UI.iOS.MapControl.Navigator
   isSpec: "True"
-  fullName: Mapsui.UI.iOS.MapControl.NavigateToFullEnvelope
-  nameWithType: MapControl.NavigateToFullEnvelope
+  fullName: Mapsui.UI.iOS.MapControl.Navigator
+  nameWithType: MapControl.Navigator
 - uid: Mapsui.UI.iOS.MapControl.OpenBrowser(System.String)
   name: OpenBrowser(String)
   href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_OpenBrowser_System_String_
@@ -21338,6 +21613,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.iOS.MapControl.Unsubscribe
   nameWithType: MapControl.Unsubscribe
+- uid: Mapsui.UI.iOS.MapControl.Viewport
+  name: Viewport
+  href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_Viewport
+  commentId: P:Mapsui.UI.iOS.MapControl.Viewport
+  fullName: Mapsui.UI.iOS.MapControl.Viewport
+  nameWithType: MapControl.Viewport
+- uid: Mapsui.UI.iOS.MapControl.Viewport*
+  name: Viewport
+  href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_Viewport_
+  commentId: Overload:Mapsui.UI.iOS.MapControl.Viewport
+  isSpec: "True"
+  fullName: Mapsui.UI.iOS.MapControl.Viewport
+  nameWithType: MapControl.Viewport
 - uid: Mapsui.UI.iOS.MapControl.ViewportHeight
   name: ViewportHeight
   href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_ViewportHeight
@@ -22246,19 +22534,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Wpf.MapControl.Map
   nameWithType: MapControl.Map
-- uid: Mapsui.UI.Wpf.MapControl.NavigateToFullEnvelope(Mapsui.Utilities.ScaleMethod)
-  name: NavigateToFullEnvelope(ScaleMethod)
-  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_NavigateToFullEnvelope_Mapsui_Utilities_ScaleMethod_
-  commentId: M:Mapsui.UI.Wpf.MapControl.NavigateToFullEnvelope(Mapsui.Utilities.ScaleMethod)
-  fullName: Mapsui.UI.Wpf.MapControl.NavigateToFullEnvelope(Mapsui.Utilities.ScaleMethod)
-  nameWithType: MapControl.NavigateToFullEnvelope(ScaleMethod)
-- uid: Mapsui.UI.Wpf.MapControl.NavigateToFullEnvelope*
-  name: NavigateToFullEnvelope
-  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_NavigateToFullEnvelope_
-  commentId: Overload:Mapsui.UI.Wpf.MapControl.NavigateToFullEnvelope
+- uid: Mapsui.UI.Wpf.MapControl.Navigator
+  name: Navigator
+  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_Navigator
+  commentId: P:Mapsui.UI.Wpf.MapControl.Navigator
+  fullName: Mapsui.UI.Wpf.MapControl.Navigator
+  nameWithType: MapControl.Navigator
+- uid: Mapsui.UI.Wpf.MapControl.Navigator*
+  name: Navigator
+  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_Navigator_
+  commentId: Overload:Mapsui.UI.Wpf.MapControl.Navigator
   isSpec: "True"
-  fullName: Mapsui.UI.Wpf.MapControl.NavigateToFullEnvelope
-  nameWithType: MapControl.NavigateToFullEnvelope
+  fullName: Mapsui.UI.Wpf.MapControl.Navigator
+  nameWithType: MapControl.Navigator
 - uid: Mapsui.UI.Wpf.MapControl.OnRender(DrawingContext)
   name: OnRender(DrawingContext)
   href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_OnRender_DrawingContext_
@@ -22460,6 +22748,19 @@ references:
   commentId: E:Mapsui.UI.Wpf.MapControl.ViewChanged
   fullName: Mapsui.UI.Wpf.MapControl.ViewChanged
   nameWithType: MapControl.ViewChanged
+- uid: Mapsui.UI.Wpf.MapControl.Viewport
+  name: Viewport
+  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_Viewport
+  commentId: P:Mapsui.UI.Wpf.MapControl.Viewport
+  fullName: Mapsui.UI.Wpf.MapControl.Viewport
+  nameWithType: MapControl.Viewport
+- uid: Mapsui.UI.Wpf.MapControl.Viewport*
+  name: Viewport
+  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_Viewport_
+  commentId: Overload:Mapsui.UI.Wpf.MapControl.Viewport
+  isSpec: "True"
+  fullName: Mapsui.UI.Wpf.MapControl.Viewport
+  nameWithType: MapControl.Viewport
 - uid: Mapsui.UI.Wpf.MapControl.ViewportHeight
   name: ViewportHeight
   href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_ViewportHeight
@@ -23389,12 +23690,12 @@ references:
   commentId: T:Mapsui.Widgets.Hyperlink
   fullName: Mapsui.Widgets.Hyperlink
   nameWithType: Hyperlink
-- uid: Mapsui.Widgets.Hyperlink.HandleWidgetTouched(Mapsui.Geometries.Point)
-  name: HandleWidgetTouched(Point)
-  href: api/Mapsui.Widgets.Hyperlink.html#Mapsui_Widgets_Hyperlink_HandleWidgetTouched_Mapsui_Geometries_Point_
-  commentId: M:Mapsui.Widgets.Hyperlink.HandleWidgetTouched(Mapsui.Geometries.Point)
-  fullName: Mapsui.Widgets.Hyperlink.HandleWidgetTouched(Mapsui.Geometries.Point)
-  nameWithType: Hyperlink.HandleWidgetTouched(Point)
+- uid: Mapsui.Widgets.Hyperlink.HandleWidgetTouched(Mapsui.INavigator,Mapsui.Geometries.Point)
+  name: HandleWidgetTouched(INavigator, Point)
+  href: api/Mapsui.Widgets.Hyperlink.html#Mapsui_Widgets_Hyperlink_HandleWidgetTouched_Mapsui_INavigator_Mapsui_Geometries_Point_
+  commentId: M:Mapsui.Widgets.Hyperlink.HandleWidgetTouched(Mapsui.INavigator,Mapsui.Geometries.Point)
+  fullName: Mapsui.Widgets.Hyperlink.HandleWidgetTouched(Mapsui.INavigator, Mapsui.Geometries.Point)
+  nameWithType: Hyperlink.HandleWidgetTouched(INavigator, Point)
 - uid: Mapsui.Widgets.Hyperlink.HandleWidgetTouched*
   name: HandleWidgetTouched
   href: api/Mapsui.Widgets.Hyperlink.html#Mapsui_Widgets_Hyperlink_HandleWidgetTouched_
@@ -23434,12 +23735,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.Widgets.IWidget.Envelope
   nameWithType: IWidget.Envelope
-- uid: Mapsui.Widgets.IWidget.HandleWidgetTouched(Mapsui.Geometries.Point)
-  name: HandleWidgetTouched(Point)
-  href: api/Mapsui.Widgets.IWidget.html#Mapsui_Widgets_IWidget_HandleWidgetTouched_Mapsui_Geometries_Point_
-  commentId: M:Mapsui.Widgets.IWidget.HandleWidgetTouched(Mapsui.Geometries.Point)
-  fullName: Mapsui.Widgets.IWidget.HandleWidgetTouched(Mapsui.Geometries.Point)
-  nameWithType: IWidget.HandleWidgetTouched(Point)
+- uid: Mapsui.Widgets.IWidget.HandleWidgetTouched(Mapsui.INavigator,Mapsui.Geometries.Point)
+  name: HandleWidgetTouched(INavigator, Point)
+  href: api/Mapsui.Widgets.IWidget.html#Mapsui_Widgets_IWidget_HandleWidgetTouched_Mapsui_INavigator_Mapsui_Geometries_Point_
+  commentId: M:Mapsui.Widgets.IWidget.HandleWidgetTouched(Mapsui.INavigator,Mapsui.Geometries.Point)
+  fullName: Mapsui.Widgets.IWidget.HandleWidgetTouched(Mapsui.INavigator, Mapsui.Geometries.Point)
+  nameWithType: IWidget.HandleWidgetTouched(INavigator, Point)
 - uid: Mapsui.Widgets.IWidget.HandleWidgetTouched*
   name: HandleWidgetTouched
   href: api/Mapsui.Widgets.IWidget.html#Mapsui_Widgets_IWidget_HandleWidgetTouched_
@@ -23733,12 +24034,12 @@ references:
   commentId: T:Mapsui.Widgets.ScaleBar.ScaleBarWidget
   fullName: Mapsui.Widgets.ScaleBar.ScaleBarWidget
   nameWithType: ScaleBarWidget
-- uid: Mapsui.Widgets.ScaleBar.ScaleBarWidget.#ctor(Mapsui.Map)
-  name: ScaleBarWidget(Map)
-  href: api/Mapsui.Widgets.ScaleBar.ScaleBarWidget.html#Mapsui_Widgets_ScaleBar_ScaleBarWidget__ctor_Mapsui_Map_
-  commentId: M:Mapsui.Widgets.ScaleBar.ScaleBarWidget.#ctor(Mapsui.Map)
-  fullName: Mapsui.Widgets.ScaleBar.ScaleBarWidget.ScaleBarWidget(Mapsui.Map)
-  nameWithType: ScaleBarWidget.ScaleBarWidget(Map)
+- uid: Mapsui.Widgets.ScaleBar.ScaleBarWidget.#ctor
+  name: ScaleBarWidget()
+  href: api/Mapsui.Widgets.ScaleBar.ScaleBarWidget.html#Mapsui_Widgets_ScaleBar_ScaleBarWidget__ctor
+  commentId: M:Mapsui.Widgets.ScaleBar.ScaleBarWidget.#ctor
+  fullName: Mapsui.Widgets.ScaleBar.ScaleBarWidget.ScaleBarWidget()
+  nameWithType: ScaleBarWidget.ScaleBarWidget()
 - uid: Mapsui.Widgets.ScaleBar.ScaleBarWidget.#ctor*
   name: ScaleBarWidget
   href: api/Mapsui.Widgets.ScaleBar.ScaleBarWidget.html#Mapsui_Widgets_ScaleBar_ScaleBarWidget__ctor_
@@ -23746,12 +24047,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.Widgets.ScaleBar.ScaleBarWidget.ScaleBarWidget
   nameWithType: ScaleBarWidget.ScaleBarWidget
-- uid: Mapsui.Widgets.ScaleBar.ScaleBarWidget.CanTransform
-  name: CanTransform()
-  href: api/Mapsui.Widgets.ScaleBar.ScaleBarWidget.html#Mapsui_Widgets_ScaleBar_ScaleBarWidget_CanTransform
-  commentId: M:Mapsui.Widgets.ScaleBar.ScaleBarWidget.CanTransform
-  fullName: Mapsui.Widgets.ScaleBar.ScaleBarWidget.CanTransform()
-  nameWithType: ScaleBarWidget.CanTransform()
+- uid: Mapsui.Widgets.ScaleBar.ScaleBarWidget.CanTransform(Mapsui.Map)
+  name: CanTransform(Map)
+  href: api/Mapsui.Widgets.ScaleBar.ScaleBarWidget.html#Mapsui_Widgets_ScaleBar_ScaleBarWidget_CanTransform_Mapsui_Map_
+  commentId: M:Mapsui.Widgets.ScaleBar.ScaleBarWidget.CanTransform(Mapsui.Map)
+  fullName: Mapsui.Widgets.ScaleBar.ScaleBarWidget.CanTransform(Mapsui.Map)
+  nameWithType: ScaleBarWidget.CanTransform(Map)
 - uid: Mapsui.Widgets.ScaleBar.ScaleBarWidget.CanTransform*
   name: CanTransform
   href: api/Mapsui.Widgets.ScaleBar.ScaleBarWidget.html#Mapsui_Widgets_ScaleBar_ScaleBarWidget_CanTransform_
@@ -23772,12 +24073,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.Widgets.ScaleBar.ScaleBarWidget.Font
   nameWithType: ScaleBarWidget.Font
-- uid: Mapsui.Widgets.ScaleBar.ScaleBarWidget.GetScaleBarLengthAndText
-  name: GetScaleBarLengthAndText()
-  href: api/Mapsui.Widgets.ScaleBar.ScaleBarWidget.html#Mapsui_Widgets_ScaleBar_ScaleBarWidget_GetScaleBarLengthAndText
-  commentId: M:Mapsui.Widgets.ScaleBar.ScaleBarWidget.GetScaleBarLengthAndText
-  fullName: Mapsui.Widgets.ScaleBar.ScaleBarWidget.GetScaleBarLengthAndText()
-  nameWithType: ScaleBarWidget.GetScaleBarLengthAndText()
+- uid: Mapsui.Widgets.ScaleBar.ScaleBarWidget.GetScaleBarLengthAndText(Mapsui.Map,Mapsui.IReadOnlyViewport)
+  name: GetScaleBarLengthAndText(Map, IReadOnlyViewport)
+  href: api/Mapsui.Widgets.ScaleBar.ScaleBarWidget.html#Mapsui_Widgets_ScaleBar_ScaleBarWidget_GetScaleBarLengthAndText_Mapsui_Map_Mapsui_IReadOnlyViewport_
+  commentId: M:Mapsui.Widgets.ScaleBar.ScaleBarWidget.GetScaleBarLengthAndText(Mapsui.Map,Mapsui.IReadOnlyViewport)
+  fullName: Mapsui.Widgets.ScaleBar.ScaleBarWidget.GetScaleBarLengthAndText(Mapsui.Map, Mapsui.IReadOnlyViewport)
+  nameWithType: ScaleBarWidget.GetScaleBarLengthAndText(Map, IReadOnlyViewport)
 - uid: Mapsui.Widgets.ScaleBar.ScaleBarWidget.GetScaleBarLengthAndText*
   name: GetScaleBarLengthAndText
   href: api/Mapsui.Widgets.ScaleBar.ScaleBarWidget.html#Mapsui_Widgets_ScaleBar_ScaleBarWidget_GetScaleBarLengthAndText_
@@ -23785,12 +24086,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.Widgets.ScaleBar.ScaleBarWidget.GetScaleBarLengthAndText
   nameWithType: ScaleBarWidget.GetScaleBarLengthAndText
-- uid: Mapsui.Widgets.ScaleBar.ScaleBarWidget.GetScaleBarLinePositions(System.Single,System.Single,System.Single)
-  name: GetScaleBarLinePositions(Single, Single, Single)
-  href: api/Mapsui.Widgets.ScaleBar.ScaleBarWidget.html#Mapsui_Widgets_ScaleBar_ScaleBarWidget_GetScaleBarLinePositions_System_Single_System_Single_System_Single_
-  commentId: M:Mapsui.Widgets.ScaleBar.ScaleBarWidget.GetScaleBarLinePositions(System.Single,System.Single,System.Single)
-  fullName: Mapsui.Widgets.ScaleBar.ScaleBarWidget.GetScaleBarLinePositions(System.Single, System.Single, System.Single)
-  nameWithType: ScaleBarWidget.GetScaleBarLinePositions(Single, Single, Single)
+- uid: Mapsui.Widgets.ScaleBar.ScaleBarWidget.GetScaleBarLinePositions(Mapsui.Map,Mapsui.IReadOnlyViewport,System.Single,System.Single,System.Single)
+  name: GetScaleBarLinePositions(Map, IReadOnlyViewport, Single, Single, Single)
+  href: api/Mapsui.Widgets.ScaleBar.ScaleBarWidget.html#Mapsui_Widgets_ScaleBar_ScaleBarWidget_GetScaleBarLinePositions_Mapsui_Map_Mapsui_IReadOnlyViewport_System_Single_System_Single_System_Single_
+  commentId: M:Mapsui.Widgets.ScaleBar.ScaleBarWidget.GetScaleBarLinePositions(Mapsui.Map,Mapsui.IReadOnlyViewport,System.Single,System.Single,System.Single)
+  fullName: Mapsui.Widgets.ScaleBar.ScaleBarWidget.GetScaleBarLinePositions(Mapsui.Map, Mapsui.IReadOnlyViewport, System.Single, System.Single, System.Single)
+  nameWithType: ScaleBarWidget.GetScaleBarLinePositions(Map, IReadOnlyViewport, Single, Single, Single)
 - uid: Mapsui.Widgets.ScaleBar.ScaleBarWidget.GetScaleBarLinePositions*
   name: GetScaleBarLinePositions
   href: api/Mapsui.Widgets.ScaleBar.ScaleBarWidget.html#Mapsui_Widgets_ScaleBar_ScaleBarWidget_GetScaleBarLinePositions_
@@ -23798,12 +24099,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.Widgets.ScaleBar.ScaleBarWidget.GetScaleBarLinePositions
   nameWithType: ScaleBarWidget.GetScaleBarLinePositions
-- uid: Mapsui.Widgets.ScaleBar.ScaleBarWidget.GetScaleBarTextPositions(Mapsui.Geometries.BoundingBox,Mapsui.Geometries.BoundingBox,Mapsui.Geometries.BoundingBox,System.Single)
-  name: GetScaleBarTextPositions(BoundingBox, BoundingBox, BoundingBox, Single)
-  href: api/Mapsui.Widgets.ScaleBar.ScaleBarWidget.html#Mapsui_Widgets_ScaleBar_ScaleBarWidget_GetScaleBarTextPositions_Mapsui_Geometries_BoundingBox_Mapsui_Geometries_BoundingBox_Mapsui_Geometries_BoundingBox_System_Single_
-  commentId: M:Mapsui.Widgets.ScaleBar.ScaleBarWidget.GetScaleBarTextPositions(Mapsui.Geometries.BoundingBox,Mapsui.Geometries.BoundingBox,Mapsui.Geometries.BoundingBox,System.Single)
-  fullName: Mapsui.Widgets.ScaleBar.ScaleBarWidget.GetScaleBarTextPositions(Mapsui.Geometries.BoundingBox, Mapsui.Geometries.BoundingBox, Mapsui.Geometries.BoundingBox, System.Single)
-  nameWithType: ScaleBarWidget.GetScaleBarTextPositions(BoundingBox, BoundingBox, BoundingBox, Single)
+- uid: Mapsui.Widgets.ScaleBar.ScaleBarWidget.GetScaleBarTextPositions(Mapsui.IReadOnlyViewport,Mapsui.Geometries.BoundingBox,Mapsui.Geometries.BoundingBox,Mapsui.Geometries.BoundingBox,System.Single)
+  name: GetScaleBarTextPositions(IReadOnlyViewport, BoundingBox, BoundingBox, BoundingBox, Single)
+  href: api/Mapsui.Widgets.ScaleBar.ScaleBarWidget.html#Mapsui_Widgets_ScaleBar_ScaleBarWidget_GetScaleBarTextPositions_Mapsui_IReadOnlyViewport_Mapsui_Geometries_BoundingBox_Mapsui_Geometries_BoundingBox_Mapsui_Geometries_BoundingBox_System_Single_
+  commentId: M:Mapsui.Widgets.ScaleBar.ScaleBarWidget.GetScaleBarTextPositions(Mapsui.IReadOnlyViewport,Mapsui.Geometries.BoundingBox,Mapsui.Geometries.BoundingBox,Mapsui.Geometries.BoundingBox,System.Single)
+  fullName: Mapsui.Widgets.ScaleBar.ScaleBarWidget.GetScaleBarTextPositions(Mapsui.IReadOnlyViewport, Mapsui.Geometries.BoundingBox, Mapsui.Geometries.BoundingBox, Mapsui.Geometries.BoundingBox, System.Single)
+  nameWithType: ScaleBarWidget.GetScaleBarTextPositions(IReadOnlyViewport, BoundingBox, BoundingBox, BoundingBox, Single)
 - uid: Mapsui.Widgets.ScaleBar.ScaleBarWidget.GetScaleBarTextPositions*
   name: GetScaleBarTextPositions
   href: api/Mapsui.Widgets.ScaleBar.ScaleBarWidget.html#Mapsui_Widgets_ScaleBar_ScaleBarWidget_GetScaleBarTextPositions_
@@ -23824,12 +24125,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.Widgets.ScaleBar.ScaleBarWidget.Halo
   nameWithType: ScaleBarWidget.Halo
-- uid: Mapsui.Widgets.ScaleBar.ScaleBarWidget.HandleWidgetTouched(Mapsui.Geometries.Point)
-  name: HandleWidgetTouched(Point)
-  href: api/Mapsui.Widgets.ScaleBar.ScaleBarWidget.html#Mapsui_Widgets_ScaleBar_ScaleBarWidget_HandleWidgetTouched_Mapsui_Geometries_Point_
-  commentId: M:Mapsui.Widgets.ScaleBar.ScaleBarWidget.HandleWidgetTouched(Mapsui.Geometries.Point)
-  fullName: Mapsui.Widgets.ScaleBar.ScaleBarWidget.HandleWidgetTouched(Mapsui.Geometries.Point)
-  nameWithType: ScaleBarWidget.HandleWidgetTouched(Point)
+- uid: Mapsui.Widgets.ScaleBar.ScaleBarWidget.HandleWidgetTouched(Mapsui.INavigator,Mapsui.Geometries.Point)
+  name: HandleWidgetTouched(INavigator, Point)
+  href: api/Mapsui.Widgets.ScaleBar.ScaleBarWidget.html#Mapsui_Widgets_ScaleBar_ScaleBarWidget_HandleWidgetTouched_Mapsui_INavigator_Mapsui_Geometries_Point_
+  commentId: M:Mapsui.Widgets.ScaleBar.ScaleBarWidget.HandleWidgetTouched(Mapsui.INavigator,Mapsui.Geometries.Point)
+  fullName: Mapsui.Widgets.ScaleBar.ScaleBarWidget.HandleWidgetTouched(Mapsui.INavigator, Mapsui.Geometries.Point)
+  nameWithType: ScaleBarWidget.HandleWidgetTouched(INavigator, Point)
 - uid: Mapsui.Widgets.ScaleBar.ScaleBarWidget.HandleWidgetTouched*
   name: HandleWidgetTouched
   href: api/Mapsui.Widgets.ScaleBar.ScaleBarWidget.html#Mapsui_Widgets_ScaleBar_ScaleBarWidget_HandleWidgetTouched_
@@ -23850,19 +24151,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.Widgets.ScaleBar.ScaleBarWidget.Height
   nameWithType: ScaleBarWidget.Height
-- uid: Mapsui.Widgets.ScaleBar.ScaleBarWidget.Map
-  name: Map
-  href: api/Mapsui.Widgets.ScaleBar.ScaleBarWidget.html#Mapsui_Widgets_ScaleBar_ScaleBarWidget_Map
-  commentId: P:Mapsui.Widgets.ScaleBar.ScaleBarWidget.Map
-  fullName: Mapsui.Widgets.ScaleBar.ScaleBarWidget.Map
-  nameWithType: ScaleBarWidget.Map
-- uid: Mapsui.Widgets.ScaleBar.ScaleBarWidget.Map*
-  name: Map
-  href: api/Mapsui.Widgets.ScaleBar.ScaleBarWidget.html#Mapsui_Widgets_ScaleBar_ScaleBarWidget_Map_
-  commentId: Overload:Mapsui.Widgets.ScaleBar.ScaleBarWidget.Map
-  isSpec: "True"
-  fullName: Mapsui.Widgets.ScaleBar.ScaleBarWidget.Map
-  nameWithType: ScaleBarWidget.Map
 - uid: Mapsui.Widgets.ScaleBar.ScaleBarWidget.MaxWidth
   name: MaxWidth
   href: api/Mapsui.Widgets.ScaleBar.ScaleBarWidget.html#Mapsui_Widgets_ScaleBar_ScaleBarWidget_MaxWidth
@@ -24152,12 +24440,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.Widgets.Widget.Envelope
   nameWithType: Widget.Envelope
-- uid: Mapsui.Widgets.Widget.HandleWidgetTouched(Mapsui.Geometries.Point)
-  name: HandleWidgetTouched(Point)
-  href: api/Mapsui.Widgets.Widget.html#Mapsui_Widgets_Widget_HandleWidgetTouched_Mapsui_Geometries_Point_
-  commentId: M:Mapsui.Widgets.Widget.HandleWidgetTouched(Mapsui.Geometries.Point)
-  fullName: Mapsui.Widgets.Widget.HandleWidgetTouched(Mapsui.Geometries.Point)
-  nameWithType: Widget.HandleWidgetTouched(Point)
+- uid: Mapsui.Widgets.Widget.HandleWidgetTouched(Mapsui.INavigator,Mapsui.Geometries.Point)
+  name: HandleWidgetTouched(INavigator, Point)
+  href: api/Mapsui.Widgets.Widget.html#Mapsui_Widgets_Widget_HandleWidgetTouched_Mapsui_INavigator_Mapsui_Geometries_Point_
+  commentId: M:Mapsui.Widgets.Widget.HandleWidgetTouched(Mapsui.INavigator,Mapsui.Geometries.Point)
+  fullName: Mapsui.Widgets.Widget.HandleWidgetTouched(Mapsui.INavigator, Mapsui.Geometries.Point)
+  nameWithType: Widget.HandleWidgetTouched(INavigator, Point)
 - uid: Mapsui.Widgets.Widget.HandleWidgetTouched*
   name: HandleWidgetTouched
   href: api/Mapsui.Widgets.Widget.html#Mapsui_Widgets_Widget_HandleWidgetTouched_
@@ -24301,19 +24589,6 @@ references:
   commentId: T:Mapsui.Widgets.Zoom.ZoomInOutWidget
   fullName: Mapsui.Widgets.Zoom.ZoomInOutWidget
   nameWithType: ZoomInOutWidget
-- uid: Mapsui.Widgets.Zoom.ZoomInOutWidget.#ctor(Mapsui.Map)
-  name: ZoomInOutWidget(Map)
-  href: api/Mapsui.Widgets.Zoom.ZoomInOutWidget.html#Mapsui_Widgets_Zoom_ZoomInOutWidget__ctor_Mapsui_Map_
-  commentId: M:Mapsui.Widgets.Zoom.ZoomInOutWidget.#ctor(Mapsui.Map)
-  fullName: Mapsui.Widgets.Zoom.ZoomInOutWidget.ZoomInOutWidget(Mapsui.Map)
-  nameWithType: ZoomInOutWidget.ZoomInOutWidget(Map)
-- uid: Mapsui.Widgets.Zoom.ZoomInOutWidget.#ctor*
-  name: ZoomInOutWidget
-  href: api/Mapsui.Widgets.Zoom.ZoomInOutWidget.html#Mapsui_Widgets_Zoom_ZoomInOutWidget__ctor_
-  commentId: Overload:Mapsui.Widgets.Zoom.ZoomInOutWidget.#ctor
-  isSpec: "True"
-  fullName: Mapsui.Widgets.Zoom.ZoomInOutWidget.ZoomInOutWidget
-  nameWithType: ZoomInOutWidget.ZoomInOutWidget
 - uid: Mapsui.Widgets.Zoom.ZoomInOutWidget.BackColor
   name: BackColor
   href: api/Mapsui.Widgets.Zoom.ZoomInOutWidget.html#Mapsui_Widgets_Zoom_ZoomInOutWidget_BackColor
@@ -24327,12 +24602,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.Widgets.Zoom.ZoomInOutWidget.BackColor
   nameWithType: ZoomInOutWidget.BackColor
-- uid: Mapsui.Widgets.Zoom.ZoomInOutWidget.HandleWidgetTouched(Mapsui.Geometries.Point)
-  name: HandleWidgetTouched(Point)
-  href: api/Mapsui.Widgets.Zoom.ZoomInOutWidget.html#Mapsui_Widgets_Zoom_ZoomInOutWidget_HandleWidgetTouched_Mapsui_Geometries_Point_
-  commentId: M:Mapsui.Widgets.Zoom.ZoomInOutWidget.HandleWidgetTouched(Mapsui.Geometries.Point)
-  fullName: Mapsui.Widgets.Zoom.ZoomInOutWidget.HandleWidgetTouched(Mapsui.Geometries.Point)
-  nameWithType: ZoomInOutWidget.HandleWidgetTouched(Point)
+- uid: Mapsui.Widgets.Zoom.ZoomInOutWidget.HandleWidgetTouched(Mapsui.INavigator,Mapsui.Geometries.Point)
+  name: HandleWidgetTouched(INavigator, Point)
+  href: api/Mapsui.Widgets.Zoom.ZoomInOutWidget.html#Mapsui_Widgets_Zoom_ZoomInOutWidget_HandleWidgetTouched_Mapsui_INavigator_Mapsui_Geometries_Point_
+  commentId: M:Mapsui.Widgets.Zoom.ZoomInOutWidget.HandleWidgetTouched(Mapsui.INavigator,Mapsui.Geometries.Point)
+  fullName: Mapsui.Widgets.Zoom.ZoomInOutWidget.HandleWidgetTouched(Mapsui.INavigator, Mapsui.Geometries.Point)
+  nameWithType: ZoomInOutWidget.HandleWidgetTouched(INavigator, Point)
 - uid: Mapsui.Widgets.Zoom.ZoomInOutWidget.HandleWidgetTouched*
   name: HandleWidgetTouched
   href: api/Mapsui.Widgets.Zoom.ZoomInOutWidget.html#Mapsui_Widgets_Zoom_ZoomInOutWidget_HandleWidgetTouched_
@@ -24340,19 +24615,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.Widgets.Zoom.ZoomInOutWidget.HandleWidgetTouched
   nameWithType: ZoomInOutWidget.HandleWidgetTouched
-- uid: Mapsui.Widgets.Zoom.ZoomInOutWidget.Map
-  name: Map
-  href: api/Mapsui.Widgets.Zoom.ZoomInOutWidget.html#Mapsui_Widgets_Zoom_ZoomInOutWidget_Map
-  commentId: P:Mapsui.Widgets.Zoom.ZoomInOutWidget.Map
-  fullName: Mapsui.Widgets.Zoom.ZoomInOutWidget.Map
-  nameWithType: ZoomInOutWidget.Map
-- uid: Mapsui.Widgets.Zoom.ZoomInOutWidget.Map*
-  name: Map
-  href: api/Mapsui.Widgets.Zoom.ZoomInOutWidget.html#Mapsui_Widgets_Zoom_ZoomInOutWidget_Map_
-  commentId: Overload:Mapsui.Widgets.Zoom.ZoomInOutWidget.Map
-  isSpec: "True"
-  fullName: Mapsui.Widgets.Zoom.ZoomInOutWidget.Map
-  nameWithType: ZoomInOutWidget.Map
 - uid: Mapsui.Widgets.Zoom.ZoomInOutWidget.Opacity
   name: Opacity
   href: api/Mapsui.Widgets.Zoom.ZoomInOutWidget.html#Mapsui_Widgets_Zoom_ZoomInOutWidget_Opacity
