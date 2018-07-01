@@ -143,11 +143,11 @@ namespace Mapsui.UI.Wpf
 
         private void MapPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(Layer.Enabled))
+            if (e.PropertyName == nameof(Layers.Layer.Enabled))
             {
                 RefreshGraphics();
             }
-            else if (e.PropertyName == nameof(Layer.Opacity))
+            else if (e.PropertyName == nameof(Layers.Layer.Opacity))
             {
                 RefreshGraphics();
             }
