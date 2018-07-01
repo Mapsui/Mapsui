@@ -11,7 +11,7 @@ namespace Mapsui.Rendering.Xaml
 {
     public static class PointRenderer
     {
-        public static XamlShapes.Shape RenderPoint(Point point, IStyle style, IViewport viewport,
+        public static XamlShapes.Shape RenderPoint(Point point, IStyle style, IReadOnlyViewport viewport,
             SymbolCache symbolCache)
         {
             XamlShapes.Shape symbol;
@@ -173,7 +173,7 @@ namespace Mapsui.Rendering.Xaml
             };
         }
 
-        public static void PositionPoint(UIElement renderedGeometry, Point point, IStyle style, IViewport viewport)
+        public static void PositionPoint(UIElement renderedGeometry, Point point, IStyle style, IReadOnlyViewport viewport)
         {
             var matrix = XamlMedia.Matrix.Identity;
             var symbolStyle = style as SymbolStyle;

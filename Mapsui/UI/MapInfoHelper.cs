@@ -22,7 +22,7 @@ namespace Mapsui.UI
         /// <param name="margin">Margin of error in pixels. If the distance between screen position and geometry 
         /// is smaller than the margin it is seen as a hit.</param>
         /// <returns></returns>
-        public static MapInfo GetMapInfo(IEnumerable<ILayer> layers, IViewport viewport, Point screenPosition,
+        public static MapInfo GetMapInfo(IEnumerable<ILayer> layers, IReadOnlyViewport viewport, Point screenPosition,
             ISymbolCache symbolCache, int margin = 0)
         {
             var worldPosition = viewport.ScreenToWorld(screenPosition);

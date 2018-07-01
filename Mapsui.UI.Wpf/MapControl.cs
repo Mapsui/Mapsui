@@ -216,7 +216,7 @@ namespace Mapsui.UI.Wpf
 
             Viewport.Transform(current.X, current.Y, current.X, current.Y, Viewport.Resolution / resolution);
 
-            ViewportLimiter.Limit(Viewport, _map.ZoomMode, _map.ZoomLimits, _map.Resolutions,
+            ViewportLimiter.Limit(_viewport, _map.ZoomMode, _map.ZoomLimits, _map.Resolutions,
                 _map.PanMode, _map.PanLimits, _map.Envelope);
 
             RefreshData(true); 
@@ -318,10 +318,10 @@ namespace Mapsui.UI.Wpf
         {
             if (Viewport != null)
             {
-                Viewport.Width = ActualWidth;
-                Viewport.Height = ActualHeight;
+                _viewport.Width = ActualWidth;
+                _viewport.Height = ActualHeight;
 
-                ViewportLimiter.Limit(Viewport, _map.ZoomMode, _map.ZoomLimits, _map.Resolutions,
+                ViewportLimiter.Limit(_viewport, _map.ZoomMode, _map.ZoomLimits, _map.Resolutions,
                     _map.PanMode, _map.PanLimits, _map.Envelope);
             }
         }
@@ -452,7 +452,7 @@ namespace Mapsui.UI.Wpf
                     _currentMousePosition.X, _currentMousePosition.Y,
                     _previousMousePosition.X, _previousMousePosition.Y);
 
-                ViewportLimiter.Limit(Viewport, _map.ZoomMode, _map.ZoomLimits, _map.Resolutions,
+                ViewportLimiter.Limit(_viewport, _map.ZoomMode, _map.ZoomLimits, _map.Resolutions,
                     _map.PanMode, _map.PanLimits, _map.Envelope);
 
                 _previousMousePosition = _currentMousePosition;
@@ -475,8 +475,8 @@ namespace Mapsui.UI.Wpf
             resolution = ViewportLimiter.LimitResolution(resolution, Viewport.Width, Viewport.Height,
                 _map.ZoomMode, _map.ZoomLimits, _map.Resolutions, _map.Envelope);
 
-            Viewport.Resolution = resolution;
-            Viewport.Center = new Geometries.Point(x, y);
+            _viewport.Resolution = resolution;
+            _viewport.Center = new Geometries.Point(x, y);
 
             _toResolution = resolution; // for animation
 
@@ -569,7 +569,7 @@ namespace Mapsui.UI.Wpf
 
             Viewport.Transform(center.X, center.Y, prevCenter.X, prevCenter.Y, radius / prevRadius, rotationDelta);
 
-            ViewportLimiter.Limit(Viewport, _map.ZoomMode, _map.ZoomLimits, _map.Resolutions,
+            ViewportLimiter.Limit(_viewport, _map.ZoomMode, _map.ZoomLimits, _map.Resolutions,
                 _map.PanMode, _map.PanLimits, _map.Envelope);
 
             e.Handled = true;

@@ -93,27 +93,11 @@ namespace Mapsui
         /// Converts X/Y in map units to a point in device independent units (or DIP or DP),
         /// respecting rotation
         /// </summary>
-        /// <param name="point">Coordinate in map units</param>
-        /// <returns>Point in screen pixels</returns>
-        Point WorldToScreenUnrotated(Point point);
-
-        /// <summary>
-        /// Converts X/Y in map units to a point in device independent units (or DIP or DP),
-        /// respecting rotation
-        /// </summary>
         /// <param name="x">X coordinate in map units</param>
         /// <param name="y">Y coordinate in map units</param>
         /// <returns>Point in screen pixels</returns>
         Point WorldToScreen(double x, double y);
 
-        /// <summary>
-        /// Converts X/Y in map units to a point in device independent units (or DIP or DP),
-        /// respecting rotation
-        /// </summary>
-        /// <param name="x">X coordinate in map units</param>
-        /// <param name="y">Y coordinate in map units</param>
-        /// <returns>Point in screen pixels</returns>
-        Point WorldToScreenUnrotated(double x, double y);
 
         /// <summary>
         /// Converts a point in screen pixels to one in map units, respecting rotation

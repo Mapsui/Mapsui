@@ -41,18 +41,11 @@ namespace Mapsui.Samples.Android
             _mapControl = FindViewById<MapControl>(Resource.Id.mapcontrol);
             _mapControl.Map = InfoLayersSample.CreateMap();
             _mapControl.Info+= MapOnInfo;
-            _mapControl.Viewport.ViewportChanged += ViewportOnViewportChanged;
             _mapControl.RotationLock = false;
             _mapControl.UnSnapRotationDegrees = 30;
             _mapControl.ReSnapRotationDegrees = 5;
 
             FindViewById<RelativeLayout>(Resource.Id.mainLayout).AddView(_popup = CreatePopup());
-        }
-
-        private void ViewportOnViewportChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
-        {
-            if (_popup != null)
-                _popup.Visibility = ViewStates.Gone;
         }
 
         private LinearLayout CreatePopup()
@@ -61,6 +54,7 @@ namespace Mapsui.Samples.Android
             linearLayout.AddView(CreateTextView());
             linearLayout.SetPadding(5,5,5,5);
             linearLayout.SetBackgroundColor(Color.DarkGray);
+            linearLayout.Visibility = ViewStates.Gone;
             return linearLayout;
         }
 
@@ -69,7 +63,6 @@ namespace Mapsui.Samples.Android
             var textView = new TextView(this)
             {
                 TextSize = 16,
-                
                 Text = "Native Android",
                 LayoutParameters = new RelativeLayout.LayoutParams(
                     ViewGroup.LayoutParams.WrapContent,
@@ -87,6 +80,9 @@ namespace Mapsui.Samples.Android
             }
             else
             {
+                if (_popup != null && _popup.Visibility != ViewStates.Gone)
+                    _popup.Visibility = ViewStates.Gone;
+
                 // Enable if you want to add points:
                 // AddPoint(args);
             }

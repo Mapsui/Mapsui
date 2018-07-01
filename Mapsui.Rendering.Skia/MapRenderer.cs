@@ -42,14 +42,14 @@ namespace Mapsui.Rendering.Skia
             WidgetRenders[typeof(ZoomInOutWidget)] = new ZoomInOutWidgetRenderer();
         }
 
-        public void Render(object target, Map map, IViewport viewport, IEnumerable<ILayer> layers,
+        public void Render(object target, Map map, IReadOnlyViewport viewport, IEnumerable<ILayer> layers,
             IEnumerable<IWidget> widgets, Color background = null)
         {
             var allWidgets = layers.Select(l => l.Attribution).Where(w => w != null).ToList().Concat(widgets);
             RenderTypeSave((SKCanvas)target, map, viewport, layers, allWidgets, background);
         }
 
-        private void RenderTypeSave(SKCanvas canvas, Map map, IViewport viewport, IEnumerable<ILayer> layers,
+        private void RenderTypeSave(SKCanvas canvas, Map map, IReadOnlyViewport viewport, IEnumerable<ILayer> layers,
             IEnumerable<IWidget> widgets, Color background = null)
         {
             if (background != null) canvas.Clear(background.ToSkia(1));
@@ -57,7 +57,7 @@ namespace Mapsui.Rendering.Skia
             Render(canvas, map, viewport, widgets, 1);
         }
 
-        public MemoryStream RenderToBitmapStream(IViewport viewport, IEnumerable<ILayer> layers, Color background = null)
+        public MemoryStream RenderToBitmapStream(IReadOnlyViewport viewport, IEnumerable<ILayer> layers, Color background = null)
         {
             try
             {
@@ -85,7 +85,7 @@ namespace Mapsui.Rendering.Skia
             }
         }
 
-        private void Render(SKCanvas canvas, IViewport viewport, IEnumerable<ILayer> layers)
+        private void Render(SKCanvas canvas, IReadOnlyViewport viewport, IEnumerable<ILayer> layers)
         {
             try
             {
@@ -128,7 +128,7 @@ namespace Mapsui.Rendering.Skia
             }
         }
 
-        private void RenderFeature(SKCanvas canvas, IViewport viewport, IStyle style, IFeature feature, float layerOpacity)
+        private void RenderFeature(SKCanvas canvas, IReadOnlyViewport viewport, IStyle style, IFeature feature, float layerOpacity)
         {
             if (feature.Geometry is Point)
                 PointRenderer.Draw(canvas, viewport, style, feature, feature.Geometry, _symbolCache, layerOpacity * style.Opacity);

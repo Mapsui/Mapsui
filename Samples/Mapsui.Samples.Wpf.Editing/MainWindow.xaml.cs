@@ -148,7 +148,7 @@ namespace Mapsui.Samples.Wpf.Editing
         private void RotationSliderChanged(object sender, RoutedPropertyChangedEventArgs<double> args)
         {
             var percent = RotationSlider.Value / (RotationSlider.Maximum - RotationSlider.Minimum);
-            MapControl.Viewport.Rotation = percent * 360;
+            MapControl.Navigator.RotateTo(percent * 360);
             MapControl.Refresh();
         }
 

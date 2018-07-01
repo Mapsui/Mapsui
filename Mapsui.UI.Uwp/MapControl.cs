@@ -134,13 +134,13 @@ namespace Mapsui.UI.Uwp
             // todo: see if we can replace three steps below with Viewport.Transform
 
             // 1) Temporarily center on the mouse position
-            Viewport.Center = Viewport.ScreenToWorld(mousePosition.X, mousePosition.Y);
+            _viewport.Center = Viewport.ScreenToWorld(mousePosition.X, mousePosition.Y);
 
             // 2) Then zoom 
-            Viewport.Resolution = newResolution;
+            _viewport.Resolution = newResolution;
 
             // 3) Then move the temporary center of the map back to the mouse position
-            Viewport.Center = Viewport.ScreenToWorld(
+            _viewport.Center = Viewport.ScreenToWorld(
                 Viewport.Width - mousePosition.X,
                 Viewport.Height - mousePosition.Y);
 
@@ -197,8 +197,8 @@ namespace Mapsui.UI.Uwp
 
         private void UpdateSize()
         {
-            Viewport.Width = ActualWidth;
-            Viewport.Height = ActualHeight;
+            _viewport.Width = ActualWidth;
+            _viewport.Height = ActualHeight;
         }
 
         private void RunOnUIThread(Action action)
@@ -232,9 +232,9 @@ namespace Mapsui.UI.Uwp
             resolution = ViewportLimiter.LimitResolution(resolution, Viewport.Width, Viewport.Height, _map.ZoomMode, _map.ZoomLimits,
                 _map.Resolutions, _map.Envelope);
 
-            Viewport.Resolution = resolution;
+            _viewport.Resolution = resolution;
 
-            Viewport.Center = new Geometries.Point(x, y);
+            _viewport.Center = new Geometries.Point(x, y);
 
 
             RefreshData();
@@ -284,7 +284,7 @@ namespace Mapsui.UI.Uwp
 
             Viewport.Transform(center.X, center.Y, prevCenter.X, prevCenter.Y, radius / prevRadius, rotationDelta);
 
-            ViewportLimiter.Limit(Viewport, _map.ZoomMode, _map.ZoomLimits, _map.Resolutions,
+            ViewportLimiter.Limit(_viewport, _map.ZoomMode, _map.ZoomLimits, _map.Resolutions,
                 _map.PanMode, _map.PanLimits, _map.Envelope);
             RefreshGraphics();
             RefreshData(false);

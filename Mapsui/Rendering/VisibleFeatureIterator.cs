@@ -10,8 +10,8 @@ namespace Mapsui.Rendering
 {
     public static class VisibleFeatureIterator
     {
-        public static void IterateLayers(IViewport viewport, IEnumerable<ILayer> layers,
-            Action<IViewport, IStyle, IFeature, float> callback)
+        public static void IterateLayers(IReadOnlyViewport viewport, IEnumerable<ILayer> layers,
+            Action<IReadOnlyViewport, IStyle, IFeature, float> callback)
         {
             foreach (var layer in layers)
             {
@@ -23,8 +23,8 @@ namespace Mapsui.Rendering
             }
         }
 
-        private static void IterateLayer(IViewport viewport, ILayer layer,
-            Action<IViewport, IStyle, IFeature, float> callback)
+        private static void IterateLayer(IReadOnlyViewport viewport, ILayer layer,
+            Action<IReadOnlyViewport, IStyle, IFeature, float> callback)
         {
             var features = layer.GetFeaturesInView(viewport.Extent, viewport.Resolution).ToList();
 

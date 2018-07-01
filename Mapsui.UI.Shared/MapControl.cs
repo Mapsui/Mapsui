@@ -165,7 +165,7 @@ namespace Mapsui.UI.Wpf
                 if (_map != null)
                 {
                     SubscribeToMapEvents(_map);
-                    Navigator = new Navigator(_map, Viewport);
+                    Navigator = new Navigator(_map, _viewport);
                     _map.Home(Navigator);
                     RefreshData();
                 }
@@ -194,10 +194,10 @@ namespace Mapsui.UI.Wpf
         {
             if (Viewport?.Initialized != false) return;
 
-            if (Viewport.TryInitializeViewport(_map.Envelope, screenWidth, screenHeight))
+            if (_viewport.TryInitializeViewport(_map.Envelope, screenWidth, screenHeight))
             {
                 // limiter now only properly implemented in WPF.
-                ViewportLimiter.Limit(Viewport, _map.ZoomMode, _map.ZoomLimits, _map.Resolutions,
+                ViewportLimiter.Limit(_viewport, _map.ZoomMode, _map.ZoomLimits, _map.Resolutions,
                     _map.PanMode, _map.PanLimits, _map.Envelope);
 
                 _map.Home(Navigator);
@@ -270,7 +270,7 @@ namespace Mapsui.UI.Wpf
         /// <param name="numTaps">Number of clickes/taps</param>
         /// <returns>True, if something done </returns>
         private static MapInfoEventArgs InvokeInfo(IEnumerable<ILayer> layers, IEnumerable<IWidget> widgets, 
-            Viewport viewport, Point screenPosition, Point startScreenPosition, ISymbolCache symbolCache,
+            IReadOnlyViewport viewport, Point screenPosition, Point startScreenPosition, ISymbolCache symbolCache,
             Action<IWidget, Point> widgetCallback, int numTaps)
         {
             var layerWidgets = layers.Select(l => l.Attribution).Where(a => a != null);
@@ -306,8 +306,9 @@ namespace Mapsui.UI.Wpf
         /// <summary>
         /// Viewport holding informations about visible part of the map. Viewport can never be null.
         /// </summary>
-        public Viewport Viewport { get; } = new Viewport { Center = { X = double.NaN, Y = double.NaN }, Resolution = double.NaN };
+        private Viewport _viewport { get; } = new Viewport { Center = { X = double.NaN, Y = double.NaN }, Resolution = double.NaN };
 
+        public IReadOnlyViewport Viewport => _viewport;
         public INavigator Navigator { get; private set; }
     }
 }

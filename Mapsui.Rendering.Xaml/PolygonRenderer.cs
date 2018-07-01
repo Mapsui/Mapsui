@@ -6,7 +6,7 @@ namespace Mapsui.Rendering.Xaml
 {
     public static class PolygonRenderer
     {
-        public static System.Windows.Shapes.Shape RenderPolygon(Polygon polygon, IStyle style, IViewport viewport, SymbolCache symbolCache)
+        public static System.Windows.Shapes.Shape RenderPolygon(Polygon polygon, IStyle style, IReadOnlyViewport viewport, SymbolCache symbolCache)
         {
             if (!(style is VectorStyle)) throw new ArgumentException("Style is not of type VectorStyle");
             var vectorStyle = style as VectorStyle;
