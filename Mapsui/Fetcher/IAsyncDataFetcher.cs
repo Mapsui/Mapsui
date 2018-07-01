@@ -26,15 +26,16 @@ namespace Mapsui.Fetcher
         void AbortFetch();
 
         /// <summary>
-        ///     Indicates that there has been a change in the view of the map
+        /// Indicates that there has been a change in the view of the map
         /// </summary>
         /// <param name="majorChange">
-        ///     If true an implementation should always refresh it's data. If false (minorChange) the
-        ///     implemenatation could ignore it.
+        /// If true an implementation should always refresh it's data. If false (minorChange) the
+        /// implemenatation could ignore it. Example: During dragging a map a WMS layer would not want
+        /// to fetch data, only on the drag end.
         /// </param>
         /// <param name="extent">The new extent of the visisble map</param>
         /// <param name="resolution">The new resolution of the visible map</param>
-        void ViewChanged(bool majorChange, BoundingBox extent, double resolution);
+        void RefreshData(bool majorChange, BoundingBox extent, double resolution);
 
         event DataChangedEventHandler DataChanged;
         void ClearCache();
