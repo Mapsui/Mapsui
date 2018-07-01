@@ -373,7 +373,7 @@ namespace Mapsui
         public MapInfo GetMapInfo(IEnumerable<ILayer> layers, IViewport viewport, Point screenPosition,
             ISymbolCache symbolCache, int margin = 0)
         {
-            return InfoHelper.GetMapInfo(layers, viewport, screenPosition, symbolCache);
+            return MapInfoHelper.GetMapInfo(layers, viewport, screenPosition, symbolCache);
         }
     }
 }

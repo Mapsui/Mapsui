@@ -30,8 +30,8 @@ namespace Mapsui.Tests.UI
             var screenPositionMiss = map.Viewport.WorldToScreen(9, 9);
 
             // act
-            var argsHit = InfoHelper.GetMapInfo(map.Layers, map.Viewport, screenPositionHit, null);
-            var argsMis = InfoHelper.GetMapInfo(map.Layers, map.Viewport, screenPositionMiss,null);
+            var argsHit = MapInfoHelper.GetMapInfo(map.Layers, map.Viewport, screenPositionHit, null);
+            var argsMis = MapInfoHelper.GetMapInfo(map.Layers, map.Viewport, screenPositionMiss,null);
 
             // assert;
             Assert.IsTrue(argsHit.Feature.Geometry != null);
@@ -77,7 +77,7 @@ namespace Mapsui.Tests.UI
             var screenPositionHit = map.Viewport.WorldToScreen(2, 2);
 
             // act
-            var argsHit = InfoHelper.GetMapInfo(map.Layers, map.Viewport, screenPositionHit, null);
+            var argsHit = MapInfoHelper.GetMapInfo(map.Layers, map.Viewport, screenPositionHit, null);
            
             // assert;
             Assert.IsTrue(argsHit.Feature == null);
@@ -117,7 +117,7 @@ namespace Mapsui.Tests.UI
             var screenPositionHit = map.Viewport.WorldToScreen(2, 2);
 
             // act
-            var argsHit = InfoHelper.GetMapInfo(map.Layers, map.Viewport, screenPositionHit, null);
+            var argsHit = MapInfoHelper.GetMapInfo(map.Layers, map.Viewport, screenPositionHit, null);
 
             // assert;
             Assert.IsTrue(argsHit.Feature == null);

@@ -242,14 +242,14 @@ namespace Mapsui.UI.Wpf
         /// <inheritdoc />
         public MapInfo GetMapInfo(Point screenPosition, int margin = 0)
         {
-            return InfoHelper.GetMapInfo(Map.Layers.Where(l => l.IsMapInfoLayer), Map.Viewport,
+            return MapInfoHelper.GetMapInfo(Map.Layers.Where(l => l.IsMapInfoLayer), Map.Viewport,
                 screenPosition, Renderer.SymbolCache, margin);
         }
 
         /// <inheritdoc />
         public MapInfo GetMapInfo(IEnumerable<ILayer> layers, Point screenPosition, int margin = 0)
         {
-            return InfoHelper.GetMapInfo(layers, Map.Viewport,
+            return MapInfoHelper.GetMapInfo(layers, Map.Viewport,
                 screenPosition, Renderer.SymbolCache, margin);
         }
 
@@ -284,7 +284,7 @@ namespace Mapsui.UI.Wpf
                 return null;
             }
 
-            var mapInfo = InfoHelper.GetMapInfo(layers, viewport, screenPosition, symbolCache);
+            var mapInfo = MapInfoHelper.GetMapInfo(layers, viewport, screenPosition, symbolCache);
 
             if (mapInfo != null)
             {
