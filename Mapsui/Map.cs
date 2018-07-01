@@ -113,7 +113,7 @@ namespace Mapsui
         [Obsolete("Use ILayer.IsMapInfoLayer instead", true)]
         public IList<ILayer> InfoLayers { get; } = new List<ILayer>();
 
-        [Obsolete("Use your own hover event and call Map.GetMapInfo", true)]
+        [Obsolete("Use your own hover event and call MapControl.GetMapInfo", true)]
         public IList<ILayer> HoverLayers { get; } = new List<ILayer>();
 
         /// <summary>
@@ -234,57 +234,14 @@ namespace Mapsui
         public event EventHandler RefreshGraphics;
 
         [Obsolete("Use MapControl.Info instead", true)]
+#pragma warning disable 67
         public event EventHandler<MapInfoEventArgs> Info;
+#pragma warning restore 67
 
-        [Obsolete("Use your own hover event instead and call Map.GetMapInfo", true)]
+        [Obsolete("Use your own hover event instead and call MapControl.GetMapInfo", true)]
+#pragma warning disable 67
         public event EventHandler<MapInfoEventArgs> Hover;
-
-        /// <summary>
-        /// Check, if a widget or feature at a given screen position is clicked/tapped
-        /// </summary>
-        /// <param name="screenPosition">Screen position to check for widgets and features</param>
-        /// <param name="startScreenPosition">Screen position of Viewport/MapControl</param>
-        /// <param name="symbolCache">Cache for symbols to determin size</param>
-        /// <param name="widgetCallback">Callback, which is called when Widget is hiten</param>
-        /// <param name="numTaps">Number of clickes/taps</param>
-        /// <returns>True, if something done </returns>
-        public MapInfoEventArgs InvokeInfo(IEnumerable<ILayer> layers, Viewport viewport, Point screenPosition, 
-            Point startScreenPosition, ISymbolCache symbolCache,
-            Action<IWidget, Point> widgetCallback, int numTaps)
-        {
-            var layerWidgets = layers.Select(l => l.Attribution).Where(a => a != null);
-            var allWidgets = layerWidgets.Concat(Widgets).ToList(); // Concat layer widgets and map widgets.
-
-            // First check if a Widget is clicked. In the current design they are always on top of the map.
-            var widget = WidgetTouch.GetWidget(screenPosition, startScreenPosition, allWidgets);
-            if (widget != null)
-            {
-                // todo:
-                // How should widgetCallback have a handled type thing?
-                // Widgets should be iterated through rather than getting a single widget, 
-                // based on Z index and then called until handled = true; Ordered By highest Z
-                widgetCallback(widget, screenPosition);
-                return null;
-            }
-
-            var mapInfo = InfoHelper.GetMapInfo(layers, viewport, screenPosition, symbolCache);
-
-            if (mapInfo != null)
-            {
-                // todo:
-                // Info items should be iterated through rather than getting a single item, 
-                // based on Z index and then called until handled = true; Ordered By highest Z
-                var mapInfoEventArgs = new MapInfoEventArgs
-                {
-                    MapInfo = mapInfo,
-                    NumTaps = numTaps,
-                    Handled = false
-                };
-                return mapInfoEventArgs;
-            }
-
-            return null;
-        }
+#pragma warning restore 67
         
         /// <summary>
         /// Abort fetching of all layers
@@ -412,5 +369,11 @@ namespace Mapsui
         // let users set the viewport. Adding the navigate methods to the Viewport
         // would make sense for that scenario.
         public Func<BoundingBox> DefaultExtent { get; set; }
+
+        public MapInfo GetMapInfo(IEnumerable<ILayer> layers, IViewport viewport, Point screenPosition,
+            ISymbolCache symbolCache, int margin = 0)
+        {
+            return InfoHelper.GetMapInfo(layers, viewport, screenPosition, symbolCache);
+        }
     }
 }

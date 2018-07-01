@@ -72,14 +72,14 @@ namespace Mapsui.UI.iOS
         private void OnDoubleTapped(UITapGestureRecognizer gesture)
         {
             var position = GetScreenPosition(gesture.LocationInView(this));
-            OnInfo(Map.InvokeInfo(Map.Layers.Where(l => l.IsMapInfoLayer), Map.Viewport, 
+            OnInfo(InvokeInfo(Map.Layers.Where(l => l.IsMapInfoLayer), Map.Widgets, Map.Viewport, 
                 position, position, Renderer.SymbolCache, WidgetTouched, 2));
         }
         
         private void OnSingleTapped(UITapGestureRecognizer gesture)
         {
             var position = GetScreenPosition(gesture.LocationInView(this));
-            OnInfo(Map.InvokeInfo(Map.Layers.Where(l => l.IsMapInfoLayer), Map.Viewport, 
+            OnInfo(InvokeInfo(Map.Layers.Where(l => l.IsMapInfoLayer), Map.Widgets, Map.Viewport, 
                 position, position, Renderer.SymbolCache, WidgetTouched, 1));
         }
        

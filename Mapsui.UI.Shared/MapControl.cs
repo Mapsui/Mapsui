@@ -1,8 +1,11 @@
 ﻿using Mapsui.Geometries;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Net;
 using Mapsui.Fetcher;
+using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.Rendering;
 using Mapsui.Rendering.Skia;
@@ -140,11 +143,11 @@ namespace Mapsui.UI.Wpf
 
         private void MapPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(Layers.Layer.Enabled))
+            if (e.PropertyName == nameof(Layer.Enabled))
             {
                 RefreshGraphics();
             }
-            else if (e.PropertyName == nameof(Layers.Layer.Opacity))
+            else if (e.PropertyName == nameof(Layer.Opacity))
             {
                 RefreshGraphics();
             }
@@ -234,6 +237,66 @@ namespace Mapsui.UI.Wpf
             }
 
             widget.HandleWidgetTouched(screenPosition);
+        }
+
+        /// <inheritdoc />
+        public MapInfo GetMapInfo(Point screenPosition, int margin = 0)
+        {
+            return InfoHelper.GetMapInfo(Map.Layers.Where(l => l.IsMapInfoLayer), Map.Viewport,
+                screenPosition, Renderer.SymbolCache, margin);
+        }
+
+        /// <inheritdoc />
+        public MapInfo GetMapInfo(IEnumerable<ILayer> layers, Point screenPosition, int margin = 0)
+        {
+            return InfoHelper.GetMapInfo(layers, Map.Viewport,
+                screenPosition, Renderer.SymbolCache, margin);
+        }
+
+        /// <summary>
+        /// Check, if a widget or feature at a given screen position is clicked/tapped
+        /// </summary>
+        /// <param name="layers">The layers to query for MapInfo</param>
+        /// <param name="widgets">The Map widgets</param>
+        /// <param name="viewport">The current Viewport</param>
+        /// <param name="screenPosition">Screen position to check for widgets and features</param>
+        /// <param name="startScreenPosition">Screen position of Viewport/MapControl</param>
+        /// <param name="symbolCache">Cache for symbols to determin size</param>
+        /// <param name="widgetCallback">Callback, which is called when Widget is hiten</param>
+        /// <param name="numTaps">Number of clickes/taps</param>
+        /// <returns>True, if something done </returns>
+        private static MapInfoEventArgs InvokeInfo(IEnumerable<ILayer> layers, IEnumerable<IWidget> widgets, 
+            Viewport viewport, Point screenPosition, Point startScreenPosition, ISymbolCache symbolCache,
+            Action<IWidget, Point> widgetCallback, int numTaps)
+        {
+            var layerWidgets = layers.Select(l => l.Attribution).Where(a => a != null);
+            var allWidgets = layerWidgets.Concat(widgets).ToList(); // Concat layer widgets and map widgets.
+
+            // First check if a Widget is clicked. In the current design they are always on top of the map.
+            var widget = WidgetTouch.GetTouchedWidget(screenPosition, startScreenPosition, allWidgets);
+            if (widget != null)
+            {
+                // todo:
+                // How should widgetCallback have a handled type thing?
+                // Widgets should be iterated through rather than getting a single widget, 
+                // based on Z index and then called until handled = true; Ordered By highest Z
+                widgetCallback(widget, screenPosition);
+                return null;
+            }
+
+            var mapInfo = InfoHelper.GetMapInfo(layers, viewport, screenPosition, symbolCache);
+
+            if (mapInfo != null)
+            {
+                return new MapInfoEventArgs
+                {
+                    MapInfo = mapInfo,
+                    NumTaps = numTaps,
+                    Handled = false
+                };
+            }
+
+            return null;
         }
     }
 }

@@ -75,14 +75,14 @@ namespace Mapsui.UI.Uwp
         private void OnDoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
             var tabPosition = e.GetPosition(this).ToMapsui();
-            OnInfo(Map.InvokeInfo(Map.Layers.Where(l => l.IsMapInfoLayer), Map.Viewport, 
+            OnInfo(InvokeInfo(Map.Layers.Where(l => l.IsMapInfoLayer), Map.Widgets, Map.Viewport, 
                 tabPosition, tabPosition, Renderer.SymbolCache, WidgetTouched, 2));
         }
 
         private void OnSingleTapped(object sender, TappedRoutedEventArgs e)
         {
             var tabPosition = e.GetPosition(this).ToMapsui();
-            OnInfo(Map.InvokeInfo(Map.Layers.Where(l => l.IsMapInfoLayer), Map.Viewport, 
+            OnInfo(InvokeInfo(Map.Layers.Where(l => l.IsMapInfoLayer), Map.Widgets, Map.Viewport, 
                 tabPosition, tabPosition, Renderer.SymbolCache, WidgetTouched, 1));
         }
 
@@ -114,7 +114,6 @@ namespace Mapsui.UI.Uwp
         }
 
         [Obsolete("Use Viewport.ViewportChanged", true)]
-        // ReSharper disable once UnusedMember.Global
 #pragma warning disable 67
         public event EventHandler<ViewChangedEventArgs> ViewChanged;
 #pragma warning restore 67

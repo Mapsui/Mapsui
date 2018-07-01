@@ -358,7 +358,7 @@ namespace Mapsui.UI.Wpf
                 if (IsClick(_currentMousePosition, _downMousePosition))
                 {
                     HandleFeatureInfo(e);
-                    OnInfo(Map.InvokeInfo(Map.Layers.Where(l => l.IsMapInfoLayer), Map.Viewport, 
+                    OnInfo(InvokeInfo(Map.Layers.Where(l => l.IsMapInfoLayer), Map.Widgets, Map.Viewport, 
                         touchPosition, _downMousePosition, Renderer.SymbolCache, WidgetTouched, e.ClickCount));
                 }
             }
@@ -399,7 +399,7 @@ namespace Mapsui.UI.Wpf
                 // todo: Pass the touchDown position. It needs to be set at touch down.
 
                 // todo: Figure out how to do a number of taps for WPF
-                OnInfo(Map.InvokeInfo(Map.Layers.Where(l => l.IsMapInfoLayer), Map.Viewport, 
+                OnInfo(InvokeInfo(Map.Layers.Where(l => l.IsMapInfoLayer), Map.Widgets, Map.Viewport, 
                     touchPosition, touchPosition, Renderer.SymbolCache, 
                     WidgetTouched, 1));
             }
@@ -588,12 +588,6 @@ namespace Mapsui.UI.Wpf
         private void OnManipulationCompleted(object sender, ManipulationCompletedEventArgs e)
         {
             Refresh();
-        }
-
-        public MapInfo GetMapInfo(Geometries.Point screenPosition, int margin = 0)
-        {
-            return InfoHelper.GetMapInfo(Map.Layers.Where(l => l.IsMapInfoLayer), Map.Viewport, 
-                screenPosition,  Renderer.SymbolCache, margin);
         }
 
         private void SKElementOnPaintSurface(object sender, SKPaintSurfaceEventArgs args)
