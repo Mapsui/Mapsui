@@ -114,7 +114,10 @@ namespace Mapsui.UI.Uwp
         }
 
         [Obsolete("Use Viewport.ViewportChanged", true)]
+        // ReSharper disable once UnusedMember.Global
+#pragma warning disable 67
         public event EventHandler<ViewChangedEventArgs> ViewChanged;
+#pragma warning restore 67
 
         private void MapControl_PointerWheelChanged(object sender, PointerRoutedEventArgs e)
         {

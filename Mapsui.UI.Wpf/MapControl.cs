@@ -12,7 +12,6 @@ using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Rendering.Skia;
 using Mapsui.Utilities;
-using Mapsui.Widgets;
 using SkiaSharp.Views.Desktop;
 using SkiaSharp.Views.WPF;
 using HorizontalAlignment = System.Windows.HorizontalAlignment;
