@@ -1,4 +1,5 @@
 ﻿using System;
+using Mapsui.Geometries;
 using Mapsui.Rendering;
 
 namespace Mapsui.UI
@@ -41,5 +42,19 @@ namespace Mapsui.UI
         float ViewportHeight { get; }
 
         void OpenBrowser(string url); //todo: remove when implemented an all platforms.
+
+        /// <summary>
+        /// Converts coordinates in pixels to device independent units (or DIP or DP).
+        /// </summary>
+        /// <param name="coordinateInPixels">Coordinate in pixels</param>
+        /// <returns>Coordinate in device independent units (or DIP or DP)</returns>
+        Point ToDeviceIndependentUnits(Point coordinateInPixels);
+
+        /// <summary>
+        /// Converts coordinates in device independent units (or DIP or DP) to pixels.
+        /// </summary>
+        /// <param name="coordinateInDeviceIndependentUnits">Coordinate in device independent units (or DIP or DP)</param>
+        /// <returns>Coordinate in pixels</returns>
+        Point ToPixels(Point coordinateInDeviceIndependentUnits);
     }
 }
