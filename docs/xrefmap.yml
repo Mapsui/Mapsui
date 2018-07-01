@@ -249,19 +249,19 @@ references:
   commentId: E:Mapsui.Fetcher.IAsyncDataFetcher.DataChanged
   fullName: Mapsui.Fetcher.IAsyncDataFetcher.DataChanged
   nameWithType: IAsyncDataFetcher.DataChanged
-- uid: Mapsui.Fetcher.IAsyncDataFetcher.ViewChanged(System.Boolean,Mapsui.Geometries.BoundingBox,System.Double)
-  name: ViewChanged(Boolean, BoundingBox, Double)
-  href: api/Mapsui.Fetcher.IAsyncDataFetcher.html#Mapsui_Fetcher_IAsyncDataFetcher_ViewChanged_System_Boolean_Mapsui_Geometries_BoundingBox_System_Double_
-  commentId: M:Mapsui.Fetcher.IAsyncDataFetcher.ViewChanged(System.Boolean,Mapsui.Geometries.BoundingBox,System.Double)
-  fullName: Mapsui.Fetcher.IAsyncDataFetcher.ViewChanged(System.Boolean, Mapsui.Geometries.BoundingBox, System.Double)
-  nameWithType: IAsyncDataFetcher.ViewChanged(Boolean, BoundingBox, Double)
-- uid: Mapsui.Fetcher.IAsyncDataFetcher.ViewChanged*
-  name: ViewChanged
-  href: api/Mapsui.Fetcher.IAsyncDataFetcher.html#Mapsui_Fetcher_IAsyncDataFetcher_ViewChanged_
-  commentId: Overload:Mapsui.Fetcher.IAsyncDataFetcher.ViewChanged
+- uid: Mapsui.Fetcher.IAsyncDataFetcher.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,System.Boolean)
+  name: RefreshData(BoundingBox, Double, Boolean)
+  href: api/Mapsui.Fetcher.IAsyncDataFetcher.html#Mapsui_Fetcher_IAsyncDataFetcher_RefreshData_Mapsui_Geometries_BoundingBox_System_Double_System_Boolean_
+  commentId: M:Mapsui.Fetcher.IAsyncDataFetcher.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,System.Boolean)
+  fullName: Mapsui.Fetcher.IAsyncDataFetcher.RefreshData(Mapsui.Geometries.BoundingBox, System.Double, System.Boolean)
+  nameWithType: IAsyncDataFetcher.RefreshData(BoundingBox, Double, Boolean)
+- uid: Mapsui.Fetcher.IAsyncDataFetcher.RefreshData*
+  name: RefreshData
+  href: api/Mapsui.Fetcher.IAsyncDataFetcher.html#Mapsui_Fetcher_IAsyncDataFetcher_RefreshData_
+  commentId: Overload:Mapsui.Fetcher.IAsyncDataFetcher.RefreshData
   isSpec: "True"
-  fullName: Mapsui.Fetcher.IAsyncDataFetcher.ViewChanged
-  nameWithType: IAsyncDataFetcher.ViewChanged
+  fullName: Mapsui.Fetcher.IAsyncDataFetcher.RefreshData
+  nameWithType: IAsyncDataFetcher.RefreshData
 - uid: Mapsui.Fetcher.IFetchStrategy
   name: IFetchStrategy
   href: api/Mapsui.Fetcher.IFetchStrategy.html
@@ -4196,6 +4196,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.Layers.AnimatedPointLayer.GetFeaturesInView
   nameWithType: AnimatedPointLayer.GetFeaturesInView
+- uid: Mapsui.Layers.AnimatedPointLayer.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,System.Boolean)
+  name: RefreshData(BoundingBox, Double, Boolean)
+  href: api/Mapsui.Layers.AnimatedPointLayer.html#Mapsui_Layers_AnimatedPointLayer_RefreshData_Mapsui_Geometries_BoundingBox_System_Double_System_Boolean_
+  commentId: M:Mapsui.Layers.AnimatedPointLayer.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,System.Boolean)
+  fullName: Mapsui.Layers.AnimatedPointLayer.RefreshData(Mapsui.Geometries.BoundingBox, System.Double, System.Boolean)
+  nameWithType: AnimatedPointLayer.RefreshData(BoundingBox, Double, Boolean)
+- uid: Mapsui.Layers.AnimatedPointLayer.RefreshData*
+  name: RefreshData
+  href: api/Mapsui.Layers.AnimatedPointLayer.html#Mapsui_Layers_AnimatedPointLayer_RefreshData_
+  commentId: Overload:Mapsui.Layers.AnimatedPointLayer.RefreshData
+  isSpec: "True"
+  fullName: Mapsui.Layers.AnimatedPointLayer.RefreshData
+  nameWithType: AnimatedPointLayer.RefreshData
 - uid: Mapsui.Layers.AnimatedPointLayer.UpdateData
   name: UpdateData()
   href: api/Mapsui.Layers.AnimatedPointLayer.html#Mapsui_Layers_AnimatedPointLayer_UpdateData
@@ -4209,19 +4222,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.Layers.AnimatedPointLayer.UpdateData
   nameWithType: AnimatedPointLayer.UpdateData
-- uid: Mapsui.Layers.AnimatedPointLayer.ViewChanged(System.Boolean,Mapsui.Geometries.BoundingBox,System.Double)
-  name: ViewChanged(Boolean, BoundingBox, Double)
-  href: api/Mapsui.Layers.AnimatedPointLayer.html#Mapsui_Layers_AnimatedPointLayer_ViewChanged_System_Boolean_Mapsui_Geometries_BoundingBox_System_Double_
-  commentId: M:Mapsui.Layers.AnimatedPointLayer.ViewChanged(System.Boolean,Mapsui.Geometries.BoundingBox,System.Double)
-  fullName: Mapsui.Layers.AnimatedPointLayer.ViewChanged(System.Boolean, Mapsui.Geometries.BoundingBox, System.Double)
-  nameWithType: AnimatedPointLayer.ViewChanged(Boolean, BoundingBox, Double)
-- uid: Mapsui.Layers.AnimatedPointLayer.ViewChanged*
-  name: ViewChanged
-  href: api/Mapsui.Layers.AnimatedPointLayer.html#Mapsui_Layers_AnimatedPointLayer_ViewChanged_
-  commentId: Overload:Mapsui.Layers.AnimatedPointLayer.ViewChanged
-  isSpec: "True"
-  fullName: Mapsui.Layers.AnimatedPointLayer.ViewChanged
-  nameWithType: AnimatedPointLayer.ViewChanged
 - uid: Mapsui.Layers.BaseLayer
   name: BaseLayer
   href: api/Mapsui.Layers.BaseLayer.html
@@ -4506,6 +4506,19 @@ references:
   commentId: E:Mapsui.Layers.BaseLayer.PropertyChanged
   fullName: Mapsui.Layers.BaseLayer.PropertyChanged
   nameWithType: BaseLayer.PropertyChanged
+- uid: Mapsui.Layers.BaseLayer.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,System.Boolean)
+  name: RefreshData(BoundingBox, Double, Boolean)
+  href: api/Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_RefreshData_Mapsui_Geometries_BoundingBox_System_Double_System_Boolean_
+  commentId: M:Mapsui.Layers.BaseLayer.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,System.Boolean)
+  fullName: Mapsui.Layers.BaseLayer.RefreshData(Mapsui.Geometries.BoundingBox, System.Double, System.Boolean)
+  nameWithType: BaseLayer.RefreshData(BoundingBox, Double, Boolean)
+- uid: Mapsui.Layers.BaseLayer.RefreshData*
+  name: RefreshData
+  href: api/Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_RefreshData_
+  commentId: Overload:Mapsui.Layers.BaseLayer.RefreshData
+  isSpec: "True"
+  fullName: Mapsui.Layers.BaseLayer.RefreshData
+  nameWithType: BaseLayer.RefreshData
 - uid: Mapsui.Layers.BaseLayer.Resolutions
   name: Resolutions
   href: api/Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Resolutions
@@ -4584,19 +4597,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.Layers.BaseLayer.Transformer
   nameWithType: BaseLayer.Transformer
-- uid: Mapsui.Layers.BaseLayer.ViewChanged(System.Boolean,Mapsui.Geometries.BoundingBox,System.Double)
-  name: ViewChanged(Boolean, BoundingBox, Double)
-  href: api/Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_ViewChanged_System_Boolean_Mapsui_Geometries_BoundingBox_System_Double_
-  commentId: M:Mapsui.Layers.BaseLayer.ViewChanged(System.Boolean,Mapsui.Geometries.BoundingBox,System.Double)
-  fullName: Mapsui.Layers.BaseLayer.ViewChanged(System.Boolean, Mapsui.Geometries.BoundingBox, System.Double)
-  nameWithType: BaseLayer.ViewChanged(Boolean, BoundingBox, Double)
-- uid: Mapsui.Layers.BaseLayer.ViewChanged*
-  name: ViewChanged
-  href: api/Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_ViewChanged_
-  commentId: Overload:Mapsui.Layers.BaseLayer.ViewChanged
-  isSpec: "True"
-  fullName: Mapsui.Layers.BaseLayer.ViewChanged
-  nameWithType: BaseLayer.ViewChanged
 - uid: Mapsui.Layers.EasingFunction
   name: EasingFunction
   href: api/Mapsui.Layers.EasingFunction.html
@@ -4987,19 +4987,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.Layers.ImageLayer.OnPropertyChanged
   nameWithType: ImageLayer.OnPropertyChanged
-- uid: Mapsui.Layers.ImageLayer.ViewChanged(System.Boolean,Mapsui.Geometries.BoundingBox,System.Double)
-  name: ViewChanged(Boolean, BoundingBox, Double)
-  href: api/Mapsui.Layers.ImageLayer.html#Mapsui_Layers_ImageLayer_ViewChanged_System_Boolean_Mapsui_Geometries_BoundingBox_System_Double_
-  commentId: M:Mapsui.Layers.ImageLayer.ViewChanged(System.Boolean,Mapsui.Geometries.BoundingBox,System.Double)
-  fullName: Mapsui.Layers.ImageLayer.ViewChanged(System.Boolean, Mapsui.Geometries.BoundingBox, System.Double)
-  nameWithType: ImageLayer.ViewChanged(Boolean, BoundingBox, Double)
-- uid: Mapsui.Layers.ImageLayer.ViewChanged*
-  name: ViewChanged
-  href: api/Mapsui.Layers.ImageLayer.html#Mapsui_Layers_ImageLayer_ViewChanged_
-  commentId: Overload:Mapsui.Layers.ImageLayer.ViewChanged
+- uid: Mapsui.Layers.ImageLayer.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,System.Boolean)
+  name: RefreshData(BoundingBox, Double, Boolean)
+  href: api/Mapsui.Layers.ImageLayer.html#Mapsui_Layers_ImageLayer_RefreshData_Mapsui_Geometries_BoundingBox_System_Double_System_Boolean_
+  commentId: M:Mapsui.Layers.ImageLayer.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,System.Boolean)
+  fullName: Mapsui.Layers.ImageLayer.RefreshData(Mapsui.Geometries.BoundingBox, System.Double, System.Boolean)
+  nameWithType: ImageLayer.RefreshData(BoundingBox, Double, Boolean)
+- uid: Mapsui.Layers.ImageLayer.RefreshData*
+  name: RefreshData
+  href: api/Mapsui.Layers.ImageLayer.html#Mapsui_Layers_ImageLayer_RefreshData_
+  commentId: Overload:Mapsui.Layers.ImageLayer.RefreshData
   isSpec: "True"
-  fullName: Mapsui.Layers.ImageLayer.ViewChanged
-  nameWithType: ImageLayer.ViewChanged
+  fullName: Mapsui.Layers.ImageLayer.RefreshData
+  nameWithType: ImageLayer.RefreshData
 - uid: Mapsui.Layers.LabelLayer
   name: LabelLayer
   href: api/Mapsui.Layers.LabelLayer.html
@@ -5122,19 +5122,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.Layers.Layer.IsCrsSupported
   nameWithType: Layer.IsCrsSupported
-- uid: Mapsui.Layers.Layer.ViewChanged(System.Boolean,Mapsui.Geometries.BoundingBox,System.Double)
-  name: ViewChanged(Boolean, BoundingBox, Double)
-  href: api/Mapsui.Layers.Layer.html#Mapsui_Layers_Layer_ViewChanged_System_Boolean_Mapsui_Geometries_BoundingBox_System_Double_
-  commentId: M:Mapsui.Layers.Layer.ViewChanged(System.Boolean,Mapsui.Geometries.BoundingBox,System.Double)
-  fullName: Mapsui.Layers.Layer.ViewChanged(System.Boolean, Mapsui.Geometries.BoundingBox, System.Double)
-  nameWithType: Layer.ViewChanged(Boolean, BoundingBox, Double)
-- uid: Mapsui.Layers.Layer.ViewChanged*
-  name: ViewChanged
-  href: api/Mapsui.Layers.Layer.html#Mapsui_Layers_Layer_ViewChanged_
-  commentId: Overload:Mapsui.Layers.Layer.ViewChanged
+- uid: Mapsui.Layers.Layer.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,System.Boolean)
+  name: RefreshData(BoundingBox, Double, Boolean)
+  href: api/Mapsui.Layers.Layer.html#Mapsui_Layers_Layer_RefreshData_Mapsui_Geometries_BoundingBox_System_Double_System_Boolean_
+  commentId: M:Mapsui.Layers.Layer.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,System.Boolean)
+  fullName: Mapsui.Layers.Layer.RefreshData(Mapsui.Geometries.BoundingBox, System.Double, System.Boolean)
+  nameWithType: Layer.RefreshData(BoundingBox, Double, Boolean)
+- uid: Mapsui.Layers.Layer.RefreshData*
+  name: RefreshData
+  href: api/Mapsui.Layers.Layer.html#Mapsui_Layers_Layer_RefreshData_
+  commentId: Overload:Mapsui.Layers.Layer.RefreshData
   isSpec: "True"
-  fullName: Mapsui.Layers.Layer.ViewChanged
-  nameWithType: Layer.ViewChanged
+  fullName: Mapsui.Layers.Layer.RefreshData
+  nameWithType: Layer.RefreshData
 - uid: Mapsui.Layers.LayerCollection
   name: LayerCollection
   href: api/Mapsui.Layers.LayerCollection.html
@@ -5410,19 +5410,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.Layers.MemoryLayer.GetFeaturesInView
   nameWithType: MemoryLayer.GetFeaturesInView
-- uid: Mapsui.Layers.MemoryLayer.ViewChanged(System.Boolean,Mapsui.Geometries.BoundingBox,System.Double)
-  name: ViewChanged(Boolean, BoundingBox, Double)
-  href: api/Mapsui.Layers.MemoryLayer.html#Mapsui_Layers_MemoryLayer_ViewChanged_System_Boolean_Mapsui_Geometries_BoundingBox_System_Double_
-  commentId: M:Mapsui.Layers.MemoryLayer.ViewChanged(System.Boolean,Mapsui.Geometries.BoundingBox,System.Double)
-  fullName: Mapsui.Layers.MemoryLayer.ViewChanged(System.Boolean, Mapsui.Geometries.BoundingBox, System.Double)
-  nameWithType: MemoryLayer.ViewChanged(Boolean, BoundingBox, Double)
-- uid: Mapsui.Layers.MemoryLayer.ViewChanged*
-  name: ViewChanged
-  href: api/Mapsui.Layers.MemoryLayer.html#Mapsui_Layers_MemoryLayer_ViewChanged_
-  commentId: Overload:Mapsui.Layers.MemoryLayer.ViewChanged
+- uid: Mapsui.Layers.MemoryLayer.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,System.Boolean)
+  name: RefreshData(BoundingBox, Double, Boolean)
+  href: api/Mapsui.Layers.MemoryLayer.html#Mapsui_Layers_MemoryLayer_RefreshData_Mapsui_Geometries_BoundingBox_System_Double_System_Boolean_
+  commentId: M:Mapsui.Layers.MemoryLayer.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,System.Boolean)
+  fullName: Mapsui.Layers.MemoryLayer.RefreshData(Mapsui.Geometries.BoundingBox, System.Double, System.Boolean)
+  nameWithType: MemoryLayer.RefreshData(BoundingBox, Double, Boolean)
+- uid: Mapsui.Layers.MemoryLayer.RefreshData*
+  name: RefreshData
+  href: api/Mapsui.Layers.MemoryLayer.html#Mapsui_Layers_MemoryLayer_RefreshData_
+  commentId: Overload:Mapsui.Layers.MemoryLayer.RefreshData
   isSpec: "True"
-  fullName: Mapsui.Layers.MemoryLayer.ViewChanged
-  nameWithType: MemoryLayer.ViewChanged
+  fullName: Mapsui.Layers.MemoryLayer.RefreshData
+  nameWithType: MemoryLayer.RefreshData
 - uid: Mapsui.Layers.RasterizingLayer
   name: RasterizingLayer
   href: api/Mapsui.Layers.RasterizingLayer.html
@@ -5494,19 +5494,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.Layers.RasterizingLayer.GetFeaturesInView
   nameWithType: RasterizingLayer.GetFeaturesInView
-- uid: Mapsui.Layers.RasterizingLayer.ViewChanged(System.Boolean,Mapsui.Geometries.BoundingBox,System.Double)
-  name: ViewChanged(Boolean, BoundingBox, Double)
-  href: api/Mapsui.Layers.RasterizingLayer.html#Mapsui_Layers_RasterizingLayer_ViewChanged_System_Boolean_Mapsui_Geometries_BoundingBox_System_Double_
-  commentId: M:Mapsui.Layers.RasterizingLayer.ViewChanged(System.Boolean,Mapsui.Geometries.BoundingBox,System.Double)
-  fullName: Mapsui.Layers.RasterizingLayer.ViewChanged(System.Boolean, Mapsui.Geometries.BoundingBox, System.Double)
-  nameWithType: RasterizingLayer.ViewChanged(Boolean, BoundingBox, Double)
-- uid: Mapsui.Layers.RasterizingLayer.ViewChanged*
-  name: ViewChanged
-  href: api/Mapsui.Layers.RasterizingLayer.html#Mapsui_Layers_RasterizingLayer_ViewChanged_
-  commentId: Overload:Mapsui.Layers.RasterizingLayer.ViewChanged
+- uid: Mapsui.Layers.RasterizingLayer.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,System.Boolean)
+  name: RefreshData(BoundingBox, Double, Boolean)
+  href: api/Mapsui.Layers.RasterizingLayer.html#Mapsui_Layers_RasterizingLayer_RefreshData_Mapsui_Geometries_BoundingBox_System_Double_System_Boolean_
+  commentId: M:Mapsui.Layers.RasterizingLayer.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,System.Boolean)
+  fullName: Mapsui.Layers.RasterizingLayer.RefreshData(Mapsui.Geometries.BoundingBox, System.Double, System.Boolean)
+  nameWithType: RasterizingLayer.RefreshData(BoundingBox, Double, Boolean)
+- uid: Mapsui.Layers.RasterizingLayer.RefreshData*
+  name: RefreshData
+  href: api/Mapsui.Layers.RasterizingLayer.html#Mapsui_Layers_RasterizingLayer_RefreshData_
+  commentId: Overload:Mapsui.Layers.RasterizingLayer.RefreshData
   isSpec: "True"
-  fullName: Mapsui.Layers.RasterizingLayer.ViewChanged
-  nameWithType: RasterizingLayer.ViewChanged
+  fullName: Mapsui.Layers.RasterizingLayer.RefreshData
+  nameWithType: RasterizingLayer.RefreshData
 - uid: Mapsui.Layers.TileLayer
   name: TileLayer
   href: api/Mapsui.Layers.TileLayer.html
@@ -5613,6 +5613,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.Layers.TileLayer.MemoryCache
   nameWithType: TileLayer.MemoryCache
+- uid: Mapsui.Layers.TileLayer.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,System.Boolean)
+  name: RefreshData(BoundingBox, Double, Boolean)
+  href: api/Mapsui.Layers.TileLayer.html#Mapsui_Layers_TileLayer_RefreshData_Mapsui_Geometries_BoundingBox_System_Double_System_Boolean_
+  commentId: M:Mapsui.Layers.TileLayer.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,System.Boolean)
+  fullName: Mapsui.Layers.TileLayer.RefreshData(Mapsui.Geometries.BoundingBox, System.Double, System.Boolean)
+  nameWithType: TileLayer.RefreshData(BoundingBox, Double, Boolean)
+- uid: Mapsui.Layers.TileLayer.RefreshData*
+  name: RefreshData
+  href: api/Mapsui.Layers.TileLayer.html#Mapsui_Layers_TileLayer_RefreshData_
+  commentId: Overload:Mapsui.Layers.TileLayer.RefreshData
+  isSpec: "True"
+  fullName: Mapsui.Layers.TileLayer.RefreshData
+  nameWithType: TileLayer.RefreshData
 - uid: Mapsui.Layers.TileLayer.Resolutions
   name: Resolutions
   href: api/Mapsui.Layers.TileLayer.html#Mapsui_Layers_TileLayer_Resolutions
@@ -5639,19 +5652,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.Layers.TileLayer.TileSource
   nameWithType: TileLayer.TileSource
-- uid: Mapsui.Layers.TileLayer.ViewChanged(System.Boolean,Mapsui.Geometries.BoundingBox,System.Double)
-  name: ViewChanged(Boolean, BoundingBox, Double)
-  href: api/Mapsui.Layers.TileLayer.html#Mapsui_Layers_TileLayer_ViewChanged_System_Boolean_Mapsui_Geometries_BoundingBox_System_Double_
-  commentId: M:Mapsui.Layers.TileLayer.ViewChanged(System.Boolean,Mapsui.Geometries.BoundingBox,System.Double)
-  fullName: Mapsui.Layers.TileLayer.ViewChanged(System.Boolean, Mapsui.Geometries.BoundingBox, System.Double)
-  nameWithType: TileLayer.ViewChanged(Boolean, BoundingBox, Double)
-- uid: Mapsui.Layers.TileLayer.ViewChanged*
-  name: ViewChanged
-  href: api/Mapsui.Layers.TileLayer.html#Mapsui_Layers_TileLayer_ViewChanged_
-  commentId: Overload:Mapsui.Layers.TileLayer.ViewChanged
-  isSpec: "True"
-  fullName: Mapsui.Layers.TileLayer.ViewChanged
-  nameWithType: TileLayer.ViewChanged
 - uid: Mapsui.Layers.TmsTileSourceBuilder
   name: TmsTileSourceBuilder
   href: api/Mapsui.Layers.TmsTileSourceBuilder.html
@@ -5810,6 +5810,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.Layers.WritableLayer.GetFeaturesInView
   nameWithType: WritableLayer.GetFeaturesInView
+- uid: Mapsui.Layers.WritableLayer.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,System.Boolean)
+  name: RefreshData(BoundingBox, Double, Boolean)
+  href: api/Mapsui.Layers.WritableLayer.html#Mapsui_Layers_WritableLayer_RefreshData_Mapsui_Geometries_BoundingBox_System_Double_System_Boolean_
+  commentId: M:Mapsui.Layers.WritableLayer.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,System.Boolean)
+  fullName: Mapsui.Layers.WritableLayer.RefreshData(Mapsui.Geometries.BoundingBox, System.Double, System.Boolean)
+  nameWithType: WritableLayer.RefreshData(BoundingBox, Double, Boolean)
+- uid: Mapsui.Layers.WritableLayer.RefreshData*
+  name: RefreshData
+  href: api/Mapsui.Layers.WritableLayer.html#Mapsui_Layers_WritableLayer_RefreshData_
+  commentId: Overload:Mapsui.Layers.WritableLayer.RefreshData
+  isSpec: "True"
+  fullName: Mapsui.Layers.WritableLayer.RefreshData
+  nameWithType: WritableLayer.RefreshData
 - uid: Mapsui.Layers.WritableLayer.SignalDataChanged
   name: SignalDataChanged()
   href: api/Mapsui.Layers.WritableLayer.html#Mapsui_Layers_WritableLayer_SignalDataChanged
@@ -5839,19 +5852,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.Layers.WritableLayer.TryRemove
   nameWithType: WritableLayer.TryRemove
-- uid: Mapsui.Layers.WritableLayer.ViewChanged(System.Boolean,Mapsui.Geometries.BoundingBox,System.Double)
-  name: ViewChanged(Boolean, BoundingBox, Double)
-  href: api/Mapsui.Layers.WritableLayer.html#Mapsui_Layers_WritableLayer_ViewChanged_System_Boolean_Mapsui_Geometries_BoundingBox_System_Double_
-  commentId: M:Mapsui.Layers.WritableLayer.ViewChanged(System.Boolean,Mapsui.Geometries.BoundingBox,System.Double)
-  fullName: Mapsui.Layers.WritableLayer.ViewChanged(System.Boolean, Mapsui.Geometries.BoundingBox, System.Double)
-  nameWithType: WritableLayer.ViewChanged(Boolean, BoundingBox, Double)
-- uid: Mapsui.Layers.WritableLayer.ViewChanged*
-  name: ViewChanged
-  href: api/Mapsui.Layers.WritableLayer.html#Mapsui_Layers_WritableLayer_ViewChanged_
-  commentId: Overload:Mapsui.Layers.WritableLayer.ViewChanged
-  isSpec: "True"
-  fullName: Mapsui.Layers.WritableLayer.ViewChanged
-  nameWithType: WritableLayer.ViewChanged
 - uid: Mapsui.Logging
   name: Mapsui.Logging
   href: api/Mapsui.Logging.html
@@ -6067,22 +6067,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.Map.InfoLayers
   nameWithType: Map.InfoLayers
-- uid: Mapsui.Map.InvokeInfo(IEnumerable{Mapsui.Layers.ILayer},Mapsui.Viewport,Mapsui.Geometries.Point,Mapsui.Geometries.Point,Mapsui.Rendering.ISymbolCache,Action{Mapsui.Widgets.IWidget,Mapsui.Geometries.Point},System.Int32)
-  name: InvokeInfo(IEnumerable<ILayer>, Viewport, Point, Point, ISymbolCache, Action<IWidget, Point>, Int32)
-  href: api/Mapsui.Map.html#Mapsui_Map_InvokeInfo_IEnumerable_Mapsui_Layers_ILayer__Mapsui_Viewport_Mapsui_Geometries_Point_Mapsui_Geometries_Point_Mapsui_Rendering_ISymbolCache_Action_Mapsui_Widgets_IWidget_Mapsui_Geometries_Point__System_Int32_
-  commentId: M:Mapsui.Map.InvokeInfo(IEnumerable{Mapsui.Layers.ILayer},Mapsui.Viewport,Mapsui.Geometries.Point,Mapsui.Geometries.Point,Mapsui.Rendering.ISymbolCache,Action{Mapsui.Widgets.IWidget,Mapsui.Geometries.Point},System.Int32)
-  name.vb: InvokeInfo(IEnumerable(Of ILayer), Viewport, Point, Point, ISymbolCache, Action(Of IWidget, Point), Int32)
-  fullName: Mapsui.Map.InvokeInfo(IEnumerable<Mapsui.Layers.ILayer>, Mapsui.Viewport, Mapsui.Geometries.Point, Mapsui.Geometries.Point, Mapsui.Rendering.ISymbolCache, Action<Mapsui.Widgets.IWidget, Mapsui.Geometries.Point>, System.Int32)
-  fullName.vb: Mapsui.Map.InvokeInfo(IEnumerable(Of Mapsui.Layers.ILayer), Mapsui.Viewport, Mapsui.Geometries.Point, Mapsui.Geometries.Point, Mapsui.Rendering.ISymbolCache, Action(Of Mapsui.Widgets.IWidget, Mapsui.Geometries.Point), System.Int32)
-  nameWithType: Map.InvokeInfo(IEnumerable<ILayer>, Viewport, Point, Point, ISymbolCache, Action<IWidget, Point>, Int32)
-  nameWithType.vb: Map.InvokeInfo(IEnumerable(Of ILayer), Viewport, Point, Point, ISymbolCache, Action(Of IWidget, Point), Int32)
-- uid: Mapsui.Map.InvokeInfo*
-  name: InvokeInfo
-  href: api/Mapsui.Map.html#Mapsui_Map_InvokeInfo_
-  commentId: Overload:Mapsui.Map.InvokeInfo
-  isSpec: "True"
-  fullName: Mapsui.Map.InvokeInfo
-  nameWithType: Map.InvokeInfo
 - uid: Mapsui.Map.Layers
   name: Layers
   href: api/Mapsui.Map.html#Mapsui_Map_Layers
@@ -20272,6 +20256,28 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Android.MapControl.Dispose
   nameWithType: MapControl.Dispose
+- uid: Mapsui.UI.Android.MapControl.GetMapInfo(IEnumerable{Mapsui.Layers.ILayer},Mapsui.Geometries.Point,System.Int32)
+  name: GetMapInfo(IEnumerable<ILayer>, Point, Int32)
+  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_GetMapInfo_IEnumerable_Mapsui_Layers_ILayer__Mapsui_Geometries_Point_System_Int32_
+  commentId: M:Mapsui.UI.Android.MapControl.GetMapInfo(IEnumerable{Mapsui.Layers.ILayer},Mapsui.Geometries.Point,System.Int32)
+  name.vb: GetMapInfo(IEnumerable(Of ILayer), Point, Int32)
+  fullName: Mapsui.UI.Android.MapControl.GetMapInfo(IEnumerable<Mapsui.Layers.ILayer>, Mapsui.Geometries.Point, System.Int32)
+  fullName.vb: Mapsui.UI.Android.MapControl.GetMapInfo(IEnumerable(Of Mapsui.Layers.ILayer), Mapsui.Geometries.Point, System.Int32)
+  nameWithType: MapControl.GetMapInfo(IEnumerable<ILayer>, Point, Int32)
+  nameWithType.vb: MapControl.GetMapInfo(IEnumerable(Of ILayer), Point, Int32)
+- uid: Mapsui.UI.Android.MapControl.GetMapInfo(Mapsui.Geometries.Point,System.Int32)
+  name: GetMapInfo(Point, Int32)
+  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_GetMapInfo_Mapsui_Geometries_Point_System_Int32_
+  commentId: M:Mapsui.UI.Android.MapControl.GetMapInfo(Mapsui.Geometries.Point,System.Int32)
+  fullName: Mapsui.UI.Android.MapControl.GetMapInfo(Mapsui.Geometries.Point, System.Int32)
+  nameWithType: MapControl.GetMapInfo(Point, Int32)
+- uid: Mapsui.UI.Android.MapControl.GetMapInfo*
+  name: GetMapInfo
+  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_GetMapInfo_
+  commentId: Overload:Mapsui.UI.Android.MapControl.GetMapInfo
+  isSpec: "True"
+  fullName: Mapsui.UI.Android.MapControl.GetMapInfo
+  nameWithType: MapControl.GetMapInfo
 - uid: Mapsui.UI.Android.MapControl.Info
   name: Info
   href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_Info
@@ -20713,6 +20719,28 @@ references:
   commentId: T:Mapsui.UI.IMapControl
   fullName: Mapsui.UI.IMapControl
   nameWithType: IMapControl
+- uid: Mapsui.UI.IMapControl.GetMapInfo(IEnumerable{Mapsui.Layers.ILayer},Mapsui.Geometries.Point,System.Int32)
+  name: GetMapInfo(IEnumerable<ILayer>, Point, Int32)
+  href: api/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_GetMapInfo_IEnumerable_Mapsui_Layers_ILayer__Mapsui_Geometries_Point_System_Int32_
+  commentId: M:Mapsui.UI.IMapControl.GetMapInfo(IEnumerable{Mapsui.Layers.ILayer},Mapsui.Geometries.Point,System.Int32)
+  name.vb: GetMapInfo(IEnumerable(Of ILayer), Point, Int32)
+  fullName: Mapsui.UI.IMapControl.GetMapInfo(IEnumerable<Mapsui.Layers.ILayer>, Mapsui.Geometries.Point, System.Int32)
+  fullName.vb: Mapsui.UI.IMapControl.GetMapInfo(IEnumerable(Of Mapsui.Layers.ILayer), Mapsui.Geometries.Point, System.Int32)
+  nameWithType: IMapControl.GetMapInfo(IEnumerable<ILayer>, Point, Int32)
+  nameWithType.vb: IMapControl.GetMapInfo(IEnumerable(Of ILayer), Point, Int32)
+- uid: Mapsui.UI.IMapControl.GetMapInfo(Mapsui.Geometries.Point,System.Int32)
+  name: GetMapInfo(Point, Int32)
+  href: api/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_GetMapInfo_Mapsui_Geometries_Point_System_Int32_
+  commentId: M:Mapsui.UI.IMapControl.GetMapInfo(Mapsui.Geometries.Point,System.Int32)
+  fullName: Mapsui.UI.IMapControl.GetMapInfo(Mapsui.Geometries.Point, System.Int32)
+  nameWithType: IMapControl.GetMapInfo(Point, Int32)
+- uid: Mapsui.UI.IMapControl.GetMapInfo*
+  name: GetMapInfo
+  href: api/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_GetMapInfo_
+  commentId: Overload:Mapsui.UI.IMapControl.GetMapInfo
+  isSpec: "True"
+  fullName: Mapsui.UI.IMapControl.GetMapInfo
+  nameWithType: IMapControl.GetMapInfo
 - uid: Mapsui.UI.IMapControl.Map
   name: Map
   href: api/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_Map
@@ -20914,28 +20942,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.IMapControl.ViewportWidth
   nameWithType: IMapControl.ViewportWidth
-- uid: Mapsui.UI.InfoHelper
-  name: InfoHelper
-  href: api/Mapsui.UI.InfoHelper.html
-  commentId: T:Mapsui.UI.InfoHelper
-  fullName: Mapsui.UI.InfoHelper
-  nameWithType: InfoHelper
-- uid: Mapsui.UI.InfoHelper.GetMapInfo(IEnumerable{Mapsui.Layers.ILayer},Mapsui.IViewport,Mapsui.Geometries.Point,Mapsui.Rendering.ISymbolCache,System.Int32)
-  name: GetMapInfo(IEnumerable<ILayer>, IViewport, Point, ISymbolCache, Int32)
-  href: api/Mapsui.UI.InfoHelper.html#Mapsui_UI_InfoHelper_GetMapInfo_IEnumerable_Mapsui_Layers_ILayer__Mapsui_IViewport_Mapsui_Geometries_Point_Mapsui_Rendering_ISymbolCache_System_Int32_
-  commentId: M:Mapsui.UI.InfoHelper.GetMapInfo(IEnumerable{Mapsui.Layers.ILayer},Mapsui.IViewport,Mapsui.Geometries.Point,Mapsui.Rendering.ISymbolCache,System.Int32)
-  name.vb: GetMapInfo(IEnumerable(Of ILayer), IViewport, Point, ISymbolCache, Int32)
-  fullName: Mapsui.UI.InfoHelper.GetMapInfo(IEnumerable<Mapsui.Layers.ILayer>, Mapsui.IViewport, Mapsui.Geometries.Point, Mapsui.Rendering.ISymbolCache, System.Int32)
-  fullName.vb: Mapsui.UI.InfoHelper.GetMapInfo(IEnumerable(Of Mapsui.Layers.ILayer), Mapsui.IViewport, Mapsui.Geometries.Point, Mapsui.Rendering.ISymbolCache, System.Int32)
-  nameWithType: InfoHelper.GetMapInfo(IEnumerable<ILayer>, IViewport, Point, ISymbolCache, Int32)
-  nameWithType.vb: InfoHelper.GetMapInfo(IEnumerable(Of ILayer), IViewport, Point, ISymbolCache, Int32)
-- uid: Mapsui.UI.InfoHelper.GetMapInfo*
-  name: GetMapInfo
-  href: api/Mapsui.UI.InfoHelper.html#Mapsui_UI_InfoHelper_GetMapInfo_
-  commentId: Overload:Mapsui.UI.InfoHelper.GetMapInfo
-  isSpec: "True"
-  fullName: Mapsui.UI.InfoHelper.GetMapInfo
-  nameWithType: InfoHelper.GetMapInfo
 - uid: Mapsui.UI.iOS
   name: Mapsui.UI.iOS
   href: api/Mapsui.UI.iOS.html
@@ -21044,6 +21050,28 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.iOS.MapControl.Frame
   nameWithType: MapControl.Frame
+- uid: Mapsui.UI.iOS.MapControl.GetMapInfo(IEnumerable{Mapsui.Layers.ILayer},Mapsui.Geometries.Point,System.Int32)
+  name: GetMapInfo(IEnumerable<ILayer>, Point, Int32)
+  href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_GetMapInfo_IEnumerable_Mapsui_Layers_ILayer__Mapsui_Geometries_Point_System_Int32_
+  commentId: M:Mapsui.UI.iOS.MapControl.GetMapInfo(IEnumerable{Mapsui.Layers.ILayer},Mapsui.Geometries.Point,System.Int32)
+  name.vb: GetMapInfo(IEnumerable(Of ILayer), Point, Int32)
+  fullName: Mapsui.UI.iOS.MapControl.GetMapInfo(IEnumerable<Mapsui.Layers.ILayer>, Mapsui.Geometries.Point, System.Int32)
+  fullName.vb: Mapsui.UI.iOS.MapControl.GetMapInfo(IEnumerable(Of Mapsui.Layers.ILayer), Mapsui.Geometries.Point, System.Int32)
+  nameWithType: MapControl.GetMapInfo(IEnumerable<ILayer>, Point, Int32)
+  nameWithType.vb: MapControl.GetMapInfo(IEnumerable(Of ILayer), Point, Int32)
+- uid: Mapsui.UI.iOS.MapControl.GetMapInfo(Mapsui.Geometries.Point,System.Int32)
+  name: GetMapInfo(Point, Int32)
+  href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_GetMapInfo_Mapsui_Geometries_Point_System_Int32_
+  commentId: M:Mapsui.UI.iOS.MapControl.GetMapInfo(Mapsui.Geometries.Point,System.Int32)
+  fullName: Mapsui.UI.iOS.MapControl.GetMapInfo(Mapsui.Geometries.Point, System.Int32)
+  nameWithType: MapControl.GetMapInfo(Point, Int32)
+- uid: Mapsui.UI.iOS.MapControl.GetMapInfo*
+  name: GetMapInfo
+  href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_GetMapInfo_
+  commentId: Overload:Mapsui.UI.iOS.MapControl.GetMapInfo
+  isSpec: "True"
+  fullName: Mapsui.UI.iOS.MapControl.GetMapInfo
+  nameWithType: MapControl.GetMapInfo
 - uid: Mapsui.UI.iOS.MapControl.Info
   name: Info
   href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_Info
@@ -21691,6 +21719,28 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.MapInfoEventArgs.NumTaps
   nameWithType: MapInfoEventArgs.NumTaps
+- uid: Mapsui.UI.MapInfoHelper
+  name: MapInfoHelper
+  href: api/Mapsui.UI.MapInfoHelper.html
+  commentId: T:Mapsui.UI.MapInfoHelper
+  fullName: Mapsui.UI.MapInfoHelper
+  nameWithType: MapInfoHelper
+- uid: Mapsui.UI.MapInfoHelper.GetMapInfo(IEnumerable{Mapsui.Layers.ILayer},Mapsui.IViewport,Mapsui.Geometries.Point,Mapsui.Rendering.ISymbolCache,System.Int32)
+  name: GetMapInfo(IEnumerable<ILayer>, IViewport, Point, ISymbolCache, Int32)
+  href: api/Mapsui.UI.MapInfoHelper.html#Mapsui_UI_MapInfoHelper_GetMapInfo_IEnumerable_Mapsui_Layers_ILayer__Mapsui_IViewport_Mapsui_Geometries_Point_Mapsui_Rendering_ISymbolCache_System_Int32_
+  commentId: M:Mapsui.UI.MapInfoHelper.GetMapInfo(IEnumerable{Mapsui.Layers.ILayer},Mapsui.IViewport,Mapsui.Geometries.Point,Mapsui.Rendering.ISymbolCache,System.Int32)
+  name.vb: GetMapInfo(IEnumerable(Of ILayer), IViewport, Point, ISymbolCache, Int32)
+  fullName: Mapsui.UI.MapInfoHelper.GetMapInfo(IEnumerable<Mapsui.Layers.ILayer>, Mapsui.IViewport, Mapsui.Geometries.Point, Mapsui.Rendering.ISymbolCache, System.Int32)
+  fullName.vb: Mapsui.UI.MapInfoHelper.GetMapInfo(IEnumerable(Of Mapsui.Layers.ILayer), Mapsui.IViewport, Mapsui.Geometries.Point, Mapsui.Rendering.ISymbolCache, System.Int32)
+  nameWithType: MapInfoHelper.GetMapInfo(IEnumerable<ILayer>, IViewport, Point, ISymbolCache, Int32)
+  nameWithType.vb: MapInfoHelper.GetMapInfo(IEnumerable(Of ILayer), IViewport, Point, ISymbolCache, Int32)
+- uid: Mapsui.UI.MapInfoHelper.GetMapInfo*
+  name: GetMapInfo
+  href: api/Mapsui.UI.MapInfoHelper.html#Mapsui_UI_MapInfoHelper_GetMapInfo_
+  commentId: Overload:Mapsui.UI.MapInfoHelper.GetMapInfo
+  isSpec: "True"
+  fullName: Mapsui.UI.MapInfoHelper.GetMapInfo
+  nameWithType: MapInfoHelper.GetMapInfo
 - uid: Mapsui.UI.MinMax
   name: MinMax
   href: api/Mapsui.UI.MinMax.html
@@ -22155,6 +22205,15 @@ references:
   commentId: E:Mapsui.UI.Wpf.MapControl.FeatureInfo
   fullName: Mapsui.UI.Wpf.MapControl.FeatureInfo
   nameWithType: MapControl.FeatureInfo
+- uid: Mapsui.UI.Wpf.MapControl.GetMapInfo(IEnumerable{Mapsui.Layers.ILayer},Mapsui.Geometries.Point,System.Int32)
+  name: GetMapInfo(IEnumerable<ILayer>, Point, Int32)
+  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_GetMapInfo_IEnumerable_Mapsui_Layers_ILayer__Mapsui_Geometries_Point_System_Int32_
+  commentId: M:Mapsui.UI.Wpf.MapControl.GetMapInfo(IEnumerable{Mapsui.Layers.ILayer},Mapsui.Geometries.Point,System.Int32)
+  name.vb: GetMapInfo(IEnumerable(Of ILayer), Point, Int32)
+  fullName: Mapsui.UI.Wpf.MapControl.GetMapInfo(IEnumerable<Mapsui.Layers.ILayer>, Mapsui.Geometries.Point, System.Int32)
+  fullName.vb: Mapsui.UI.Wpf.MapControl.GetMapInfo(IEnumerable(Of Mapsui.Layers.ILayer), Mapsui.Geometries.Point, System.Int32)
+  nameWithType: MapControl.GetMapInfo(IEnumerable<ILayer>, Point, Int32)
+  nameWithType.vb: MapControl.GetMapInfo(IEnumerable(Of ILayer), Point, Int32)
 - uid: Mapsui.UI.Wpf.MapControl.GetMapInfo(Mapsui.Geometries.Point,System.Int32)
   name: GetMapInfo(Point, Int32)
   href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_GetMapInfo_Mapsui_Geometries_Point_System_Int32_
@@ -24158,6 +24217,28 @@ references:
   isSpec: "True"
   fullName: Mapsui.Widgets.Widget.VerticalAlignment
   nameWithType: Widget.VerticalAlignment
+- uid: Mapsui.Widgets.WidgetTouch
+  name: WidgetTouch
+  href: api/Mapsui.Widgets.WidgetTouch.html
+  commentId: T:Mapsui.Widgets.WidgetTouch
+  fullName: Mapsui.Widgets.WidgetTouch
+  nameWithType: WidgetTouch
+- uid: Mapsui.Widgets.WidgetTouch.GetTouchedWidget(Mapsui.Geometries.Point,Mapsui.Geometries.Point,IEnumerable{Mapsui.Widgets.IWidget})
+  name: GetTouchedWidget(Point, Point, IEnumerable<IWidget>)
+  href: api/Mapsui.Widgets.WidgetTouch.html#Mapsui_Widgets_WidgetTouch_GetTouchedWidget_Mapsui_Geometries_Point_Mapsui_Geometries_Point_IEnumerable_Mapsui_Widgets_IWidget__
+  commentId: M:Mapsui.Widgets.WidgetTouch.GetTouchedWidget(Mapsui.Geometries.Point,Mapsui.Geometries.Point,IEnumerable{Mapsui.Widgets.IWidget})
+  name.vb: GetTouchedWidget(Point, Point, IEnumerable(Of IWidget))
+  fullName: Mapsui.Widgets.WidgetTouch.GetTouchedWidget(Mapsui.Geometries.Point, Mapsui.Geometries.Point, IEnumerable<Mapsui.Widgets.IWidget>)
+  fullName.vb: Mapsui.Widgets.WidgetTouch.GetTouchedWidget(Mapsui.Geometries.Point, Mapsui.Geometries.Point, IEnumerable(Of Mapsui.Widgets.IWidget))
+  nameWithType: WidgetTouch.GetTouchedWidget(Point, Point, IEnumerable<IWidget>)
+  nameWithType.vb: WidgetTouch.GetTouchedWidget(Point, Point, IEnumerable(Of IWidget))
+- uid: Mapsui.Widgets.WidgetTouch.GetTouchedWidget*
+  name: GetTouchedWidget
+  href: api/Mapsui.Widgets.WidgetTouch.html#Mapsui_Widgets_WidgetTouch_GetTouchedWidget_
+  commentId: Overload:Mapsui.Widgets.WidgetTouch.GetTouchedWidget
+  isSpec: "True"
+  fullName: Mapsui.Widgets.WidgetTouch.GetTouchedWidget
+  nameWithType: WidgetTouch.GetTouchedWidget
 - uid: Mapsui.Widgets.WidgetTouchedEventArgs
   name: WidgetTouchedEventArgs
   href: api/Mapsui.Widgets.WidgetTouchedEventArgs.html
