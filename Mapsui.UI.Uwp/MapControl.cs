@@ -125,12 +125,8 @@ namespace Mapsui.UI.Uwp
 
             
             var currentPoint = e.GetCurrentPoint(this);
-            //Needed for both MouseMove and MouseWheel event for mousewheel event
-
             var mousePosition = new Geometries.Point(currentPoint.RawPosition.X, currentPoint.RawPosition.Y);
-
             var newResolution = DetermineNewResolution(currentPoint.Properties.MouseWheelDelta, Viewport.Resolution);
-
             _viewport.Transform(mousePosition.X, mousePosition.Y, mousePosition.X, mousePosition.Y, Viewport.Resolution / newResolution);
 
             e.Handled = true;
