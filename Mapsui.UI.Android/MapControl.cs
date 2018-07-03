@@ -151,7 +151,7 @@ namespace Mapsui.UI.Android
                                 var touchPosition = touchPoints.First();
                                 if (_previousCenter != null && !_previousCenter.IsEmpty())
                                 {
-                                    Viewport.Transform(touchPosition.X, touchPosition.Y, _previousCenter.X, _previousCenter.Y);
+                                    _viewport.Transform(touchPosition.X, touchPosition.Y, _previousCenter.X, _previousCenter.Y);
 
                                     ViewportLimiter.LimitExtent(_viewport, _map.PanMode, _map.PanLimits, _map.Envelope);
 
@@ -191,7 +191,7 @@ namespace Mapsui.UI.Android
                                     }
                                 }
 
-                                Viewport.Transform(center.X, center.Y, prevCenter.X, prevCenter.Y, radius / prevRadius, rotationDelta);
+                                _viewport.Transform(center.X, center.Y, prevCenter.X, prevCenter.Y, radius / prevRadius, rotationDelta);
 
                                 (_previousCenter, _previousRadius, _previousAngle) = (center, radius, angle);
 

@@ -114,7 +114,7 @@ namespace Mapsui.UI.iOS
                     var currentPos = touch.LocationInView(this);
                     var previousPos = touch.PreviousLocationInView(this);
 
-                    Viewport.Transform(currentPos.X, currentPos.Y, previousPos.X, previousPos.Y);
+                    _viewport.Transform(currentPos.X, currentPos.Y, previousPos.X, previousPos.Y);
 
                     ViewportLimiter.LimitExtent(_viewport, _map.PanMode, _map.PanLimits, _map.Envelope);
 
@@ -157,7 +157,7 @@ namespace Mapsui.UI.iOS
                     }
                 }
 
-                Viewport.Transform(center.X, center.Y, prevCenter.X, prevCenter.Y, radius / prevRadius, rotationDelta);
+                _viewport.Transform(center.X, center.Y, prevCenter.X, prevCenter.Y, radius / prevRadius, rotationDelta);
 
                 ViewportLimiter.Limit(_viewport,
                     _map.ZoomMode, _map.ZoomLimits, _map.Resolutions,

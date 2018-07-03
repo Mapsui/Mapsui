@@ -131,18 +131,7 @@ namespace Mapsui.UI.Uwp
 
             var newResolution = DetermineNewResolution(currentPoint.Properties.MouseWheelDelta, Viewport.Resolution);
 
-            // todo: see if we can replace three steps below with Viewport.Transform
-
-            // 1) Temporarily center on the mouse position
-            _viewport.Center = Viewport.ScreenToWorld(mousePosition.X, mousePosition.Y);
-
-            // 2) Then zoom 
-            _viewport.Resolution = newResolution;
-
-            // 3) Then move the temporary center of the map back to the mouse position
-            _viewport.Center = Viewport.ScreenToWorld(
-                Viewport.Width - mousePosition.X,
-                Viewport.Height - mousePosition.Y);
+            _viewport.Transform(mousePosition.X, mousePosition.Y, mousePosition.X, mousePosition.Y, Viewport.Resolution / newResolution);
 
             e.Handled = true;
 
@@ -282,7 +271,7 @@ namespace Mapsui.UI.Uwp
                 }
             }
 
-            Viewport.Transform(center.X, center.Y, prevCenter.X, prevCenter.Y, radius / prevRadius, rotationDelta);
+            _viewport.Transform(center.X, center.Y, prevCenter.X, prevCenter.Y, radius / prevRadius, rotationDelta);
 
             ViewportLimiter.Limit(_viewport, _map.ZoomMode, _map.ZoomLimits, _map.Resolutions,
                 _map.PanMode, _map.PanLimits, _map.Envelope);

@@ -214,7 +214,7 @@ namespace Mapsui.UI.Wpf
         {
             var current = _currentMousePosition;
 
-            Viewport.Transform(current.X, current.Y, current.X, current.Y, Viewport.Resolution / resolution);
+            _viewport.Transform(current.X, current.Y, current.X, current.Y, Viewport.Resolution / resolution);
 
             ViewportLimiter.Limit(_viewport, _map.ZoomMode, _map.ZoomLimits, _map.Resolutions,
                 _map.PanMode, _map.PanLimits, _map.Envelope);
@@ -448,7 +448,7 @@ namespace Mapsui.UI.Wpf
 
                 _currentMousePosition = e.GetPosition(this).ToMapsui(); //Needed for both MouseMove and MouseWheel event
 
-                Viewport.Transform(
+                _viewport.Transform(
                     _currentMousePosition.X, _currentMousePosition.Y,
                     _previousMousePosition.X, _previousMousePosition.Y);
 
@@ -567,7 +567,7 @@ namespace Mapsui.UI.Wpf
                 }
             }
 
-            Viewport.Transform(center.X, center.Y, prevCenter.X, prevCenter.Y, radius / prevRadius, rotationDelta);
+            _viewport.Transform(center.X, center.Y, prevCenter.X, prevCenter.Y, radius / prevRadius, rotationDelta);
 
             ViewportLimiter.Limit(_viewport, _map.ZoomMode, _map.ZoomLimits, _map.Resolutions,
                 _map.PanMode, _map.PanLimits, _map.Envelope);

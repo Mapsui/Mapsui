@@ -33,7 +33,5 @@ namespace Mapsui
         /// <param name="point">Coordinate in map units</param>
         /// <returns>Point in screen pixels</returns>
         Point WorldToScreenUnrotated(Point point); // todo: Get rid of this method
-        void Transform(double screenX, double screenY, double previousScreenX, double previousScreenY,
-            double deltaScale = 1, double deltaRotation = 0);
     }
 }
