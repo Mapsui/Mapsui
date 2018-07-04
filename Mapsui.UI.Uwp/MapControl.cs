@@ -38,7 +38,7 @@ namespace Mapsui.UI.Uwp
 {
     public partial class MapControl : Grid, IMapControl
     {
-        private readonly Rectangle _bboxRect = CreateSelectRectangle();
+        private readonly Rectangle _selectRectangle = CreateSelectRectangle();
         private readonly SKXamlCanvas _canvas = CreateRenderTarget();
         private double _innerRotation;
 
@@ -47,7 +47,7 @@ namespace Mapsui.UI.Uwp
             Background = new SolidColorBrush(Colors.White); // DON'T REMOVE! Touch events do not work without a background
 
             Children.Add(_canvas);
-            Children.Add(_bboxRect);
+            Children.Add(_selectRectangle);
 
             _canvas.IgnorePixelScaling = true;
             _canvas.PaintSurface += Canvas_PaintSurface;
@@ -166,7 +166,6 @@ namespace Mapsui.UI.Uwp
 
         private void MapControlLoaded(object sender, RoutedEventArgs e)
         {
-            TryInitializeViewport(ActualWidth, ActualHeight);
             UpdateSize();
         }
         
@@ -201,37 +200,8 @@ namespace Mapsui.UI.Uwp
             Renderer.Render(e.Surface.Canvas, Map, Viewport, _map.Layers, _map.Widgets, _map.BackColor);
         }
 
-        public void ZoomToBox(Geometries.Point beginPoint, Geometries.Point endPoint)
-        {
-            var width = Math.Abs(endPoint.X - beginPoint.X);
-            var height = Math.Abs(endPoint.Y - beginPoint.Y);
-            if (width <= 0) return;
-            if (height <= 0) return;
-
-            ZoomHelper.ZoomToBoudingbox(
-                beginPoint.X, beginPoint.Y, endPoint.X, endPoint.Y,
-                Viewport.Width, Viewport.Height,
-                out var x, out var y, out var resolution);
-
-            resolution = ViewportLimiter.LimitResolution(resolution, Viewport.Width, Viewport.Height, _map.ZoomMode, _map.ZoomLimits,
-                _map.Resolutions, _map.Envelope);
-
-            _viewport.Resolution = resolution;
-
-            _viewport.Center = new Geometries.Point(x, y);
-
-
-            RefreshData();
-            RefreshGraphics();
-            ClearBBoxDrawing();
-        }
-
-        private void ClearBBoxDrawing()
-        {
-            _bboxRect.Margin = new Thickness(0, 0, 0, 0);
-            _bboxRect.Width = 0;
-            _bboxRect.Height = 0;
-        }
+        [Obsolete("Use MapControl.Navigate.NavigateTo instead", true)]
+        public void ZoomToBox(Geometries.Point beginPoint, Geometries.Point endPoint) { }
 
         private static void OnManipulationInertiaStarting(object sender, ManipulationInertiaStartingRoutedEventArgs e)
         {
