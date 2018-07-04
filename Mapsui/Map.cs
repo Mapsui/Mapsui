@@ -35,7 +35,7 @@ namespace Mapsui
     /// <remarks>
     /// Map holds all map related infos like transformation, layers, widgets and so on.
     /// </remarks>
-    public class Map : INotifyPropertyChanged
+    public class Map : INotifyPropertyChanged, IMap
     {
         private LayerCollection _layers = new LayerCollection();
         private Color _backColor = Color.White;

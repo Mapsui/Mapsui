@@ -197,7 +197,7 @@ namespace Mapsui.UI.Uwp
             TryInitializeViewport(ActualWidth, ActualHeight);
             if (!Viewport.Initialized) return;
 
-            Renderer.Render(e.Surface.Canvas, Map, Viewport, _map.Layers, _map.Widgets, _map.BackColor);
+            Renderer.Render(e.Surface.Canvas, Viewport, _map.Layers, _map.Widgets, _map.BackColor);
         }
 
         [Obsolete("Use MapControl.Navigate.NavigateTo instead", true)]

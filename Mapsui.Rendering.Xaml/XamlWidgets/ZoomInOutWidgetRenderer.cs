@@ -16,7 +16,7 @@ namespace Mapsui.Rendering.Xaml.XamlWidgets
     private static Brush _brushBackground;
     private static Brush _brushText;
 
-    public void Draw(Canvas canvas, Map map, IReadOnlyViewport viewport, IWidget widget)
+    public void Draw(Canvas canvas, IReadOnlyViewport viewport, IWidget widget)
     {
         var zoomInOut = (ZoomInOutWidget) widget;
 

@@ -18,11 +18,11 @@ namespace Mapsui.Rendering.Xaml.XamlWidgets
         private static Brush _brushScaleText;
         private static Brush _brushScaleTextStroke;
 
-        public void Draw(Canvas canvas, Map map, IReadOnlyViewport viewport, IWidget widget)
+        public void Draw(Canvas canvas, IReadOnlyViewport viewport, IWidget widget)
         {
             var scaleBar = (ScaleBarWidget) widget;
 
-            if (!scaleBar.CanTransform(map)) return;
+            if (!scaleBar.CanTransform()) return;
 
             _brushScaleBar = new SolidColorBrush(scaleBar.TextColor.ToXaml());
             _brushScaleBarStroke = new SolidColorBrush(scaleBar.Halo.ToXaml());
@@ -44,13 +44,10 @@ namespace Mapsui.Rendering.Xaml.XamlWidgets
             float scaleBarLength2;
             string scaleBarText2;
 
-            (scaleBarLength1, scaleBarText1, scaleBarLength2, scaleBarText2) = scaleBar.GetScaleBarLengthAndText(map, viewport);
-
-            // Calc height of scale bar
-            Size textSize;
+            (scaleBarLength1, scaleBarText1, scaleBarLength2, scaleBarText2) = scaleBar.GetScaleBarLengthAndText(viewport);
 
             // Do this, because height of text changes sometimes (e.g. from 2 m to 1 m)
-            textSize = textBlock.MeasureText();
+            var textSize = textBlock.MeasureText();
 
             var scaleBarHeight = textSize.Height + (scaleBar.TickLength + StrokeExternal * 0.5f + scaleBar.TextMargin) * scaleBar.Scale;
 
@@ -68,7 +65,7 @@ namespace Mapsui.Rendering.Xaml.XamlWidgets
             // Draw lines
 
             // Get lines for scale bar
-            var points = scaleBar.GetScaleBarLinePositions(map, viewport, scaleBarLength1, scaleBarLength2, StrokeExternal);
+            var points = scaleBar.GetScaleBarLinePositions(viewport, scaleBarLength1, scaleBarLength2, StrokeExternal);
 
             // BoundingBox for scale bar
             BoundingBox envelop = new BoundingBox();

@@ -598,7 +598,7 @@ namespace Mapsui.UI.Wpf
             TryInitializeViewport(ActualWidth, ActualHeight);
             if (!Viewport.Initialized) return;
 
-            Renderer.Render(args.Surface.Canvas, Map, Viewport, Map.Layers, Map.Widgets, Map.BackColor);
+            Renderer.Render(args.Surface.Canvas, Viewport, Map.Layers, Map.Widgets, Map.BackColor);
         }
         
         private void PaintWpf()
@@ -609,7 +609,7 @@ namespace Mapsui.UI.Wpf
             TryInitializeViewport(ActualWidth, ActualHeight);
             if (!Viewport.Initialized) return;
 
-            Renderer.Render(WpfCanvas, Map, Viewport, _map.Layers, Map.Widgets, _map.BackColor);
+            Renderer.Render(WpfCanvas, Viewport, _map.Layers, Map.Widgets, _map.BackColor);
         }
     }
 }

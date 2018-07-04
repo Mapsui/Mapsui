@@ -34,6 +34,8 @@ namespace Mapsui.Widgets.ScaleBar
     /// </summary>
     public class ScaleBarWidget : Widget, INotifyPropertyChanged
     {
+        private readonly Map _map;
+
         ///
         /// Default position of the scale bar.
         ///
@@ -43,8 +45,10 @@ namespace Mapsui.Widgets.ScaleBar
         private static readonly ScaleBarMode DefaultScaleBarMode = ScaleBarMode.Single;
         private static readonly Font DefaultFont = new Font { FontFamily = "Arial", Size = 10 };
 
-        public ScaleBarWidget()
+        public ScaleBarWidget(Map map)
         {
+            _map = map;
+
             HorizontalAlignment = DefaultScaleBarHorizontalAlignment;
             VerticalAlignment = DefaultScaleBarVerticalAlignment;
 
@@ -259,21 +263,20 @@ namespace Mapsui.Widgets.ScaleBar
         /// Text of lower scalebar
         /// </returns>
         public (float scaleBarLength1, string scaleBarText1, float scaleBarLength2, string scaleBarText2) 
-            GetScaleBarLengthAndText(Map map, IReadOnlyViewport viewport)
+            GetScaleBarLengthAndText(IReadOnlyViewport viewport)
         {
-            if (map == null)
-                return (0, null, 0, null);
+            if (_map == null) return (0, null, 0, null);
 
             float length1;
             string text1;
             
-            (length1, text1) = CalculateScaleBarLengthAndValue(map, viewport, MaxWidth, UnitConverter);
+            (length1, text1) = CalculateScaleBarLengthAndValue(_map, viewport, MaxWidth, UnitConverter);
 
             float length2;
             string text2;
 
             if (SecondaryUnitConverter != null)
-                (length2, text2) = CalculateScaleBarLengthAndValue(map, viewport, MaxWidth, SecondaryUnitConverter);
+                (length2, text2) = CalculateScaleBarLengthAndValue(_map, viewport, MaxWidth, SecondaryUnitConverter);
             else
                 (length2, text2) = (0, null);
 
@@ -287,7 +290,7 @@ namespace Mapsui.Widgets.ScaleBar
         /// <param name="scaleBarLength2">Length of lower scalebar</param>
         /// <param name="stroke">Width of line</param>
         /// <returns>Array with pairs of Points. First is always the start point, the second is the end point.</returns>
-        public Point[] GetScaleBarLinePositions(Map map, IReadOnlyViewport viewport, float scaleBarLength1, float scaleBarLength2, float stroke)
+        public Point[] GetScaleBarLinePositions(IReadOnlyViewport viewport, float scaleBarLength1, float scaleBarLength2, float stroke)
         {
             Point[] points = null;
 
@@ -457,23 +460,23 @@ namespace Mapsui.Widgets.ScaleBar
         {
         }
 
-        public bool CanTransform(Map map)
+        public bool CanTransform()
         {
-            if (map?.CRS == null) 
+            if (_map?.CRS == null) 
             {
                 Logger.Log(LogLevel.Warning, $"ScaleBarWidget can not draw because the {nameof(Map)}.{nameof(Map.CRS)} is not set");
                 return false;
             }
 
-            if (map.Transformation == null)
+            if (_map.Transformation == null)
             {
                 Logger.Log(LogLevel.Warning, $"ScaleBarWidget can not draw because the {nameof(Map)}.{nameof(Map.Transformation)} is not set");
                 return false;
             }
 
-            if (map.Transformation.IsProjectionSupported(map.CRS, "EPSG:4326") != true)
+            if (_map.Transformation.IsProjectionSupported(_map.CRS, "EPSG:4326") != true)
             {
-                Logger.Log(LogLevel.Warning, $"ScaleBarWidget can not draw because the projection between {map.CRS} and EPSG:4326 is not supported");
+                Logger.Log(LogLevel.Warning, $"ScaleBarWidget can not draw because the projection between {_map.CRS} and EPSG:4326 is not supported");
                 return false;
             }
             return true;
@@ -492,7 +495,8 @@ namespace Mapsui.Widgets.ScaleBar
         /// @param width of the scale bar in pixel to calculate for
         /// @param unitConverter the DistanceUnitConverter to calculate for
         /// @return scaleBarLength and scaleBarText
-        private (float scaleBarLength, string scaleBarText) CalculateScaleBarLengthAndValue(Map map, IReadOnlyViewport viewport, float width, IUnitConverter unitConverter)
+        private static (float scaleBarLength, string scaleBarText) CalculateScaleBarLengthAndValue(
+            Map map, IReadOnlyViewport viewport, float width, IUnitConverter unitConverter)
         {
             // We have to calc the angle difference to the equator (angle = 0), 
             // because EPSG:3857 is only there 1 m. At othere angles, we

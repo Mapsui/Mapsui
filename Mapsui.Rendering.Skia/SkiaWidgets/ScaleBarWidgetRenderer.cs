@@ -14,11 +14,11 @@ namespace Mapsui.Rendering.Skia.SkiaWidgets
         private static SKPaint _paintScaleText;
         private static SKPaint _paintScaleTextStroke;
 
-        public void Draw(SKCanvas canvas, Map map, IReadOnlyViewport viewport,  IWidget widget,
+        public void Draw(SKCanvas canvas, IReadOnlyViewport viewport,  IWidget widget,
             float layerOpacity)
         {
             var scaleBar = (ScaleBarWidget) widget;
-            if (!scaleBar.CanTransform(map)) return;
+            if (!scaleBar.CanTransform()) return;
 
             // If this is the first time, we call this renderer, ...
             if (_paintScaleBar == null)
@@ -51,7 +51,7 @@ namespace Mapsui.Rendering.Skia.SkiaWidgets
             float scaleBarLength2;
             string scaleBarText2;
 
-            (scaleBarLength1, scaleBarText1, scaleBarLength2, scaleBarText2) = scaleBar.GetScaleBarLengthAndText(map, viewport);
+            (scaleBarLength1, scaleBarText1, scaleBarLength2, scaleBarText2) = scaleBar.GetScaleBarLengthAndText(viewport);
 
             // Calc height of scale bar
             SKRect textSize = SKRect.Empty;
@@ -75,7 +75,7 @@ namespace Mapsui.Rendering.Skia.SkiaWidgets
             // Draw lines
 
             // Get lines for scale bar
-            var points = scaleBar.GetScaleBarLinePositions(map, viewport, scaleBarLength1, scaleBarLength2, StrokeExternal);
+            var points = scaleBar.GetScaleBarLinePositions(viewport, scaleBarLength1, scaleBarLength2, StrokeExternal);
 
             // BoundingBox for scale bar
             BoundingBox envelop = new BoundingBox();

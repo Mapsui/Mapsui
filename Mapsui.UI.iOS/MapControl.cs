@@ -93,7 +93,7 @@ namespace Mapsui.UI.iOS
             // The Scale can only be set in the render loop
 
             args.Surface.Canvas.Scale(PixelDensity, PixelDensity);  
-            Renderer.Render(args.Surface.Canvas, Map, Viewport, _map.Layers, _map.Widgets, _map.BackColor);
+            Renderer.Render(args.Surface.Canvas, Viewport, _map.Layers, _map.Widgets, _map.BackColor);
         }
 
         public override void TouchesBegan(NSSet touches, UIEvent evt)

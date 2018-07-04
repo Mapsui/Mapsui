@@ -13,7 +13,7 @@ namespace Mapsui.Rendering.Skia.SkiaWidgets
         private static SKPaint _paintBackground;
         private static SKPaint _paintText;
 
-        public void Draw(SKCanvas canvas, Map map, IReadOnlyViewport viewport, IWidget widget,
+        public void Draw(SKCanvas canvas, IReadOnlyViewport viewport, IWidget widget,
             float layerOpacity)
         {
             var zoomInOut = (ZoomInOutWidget)widget;

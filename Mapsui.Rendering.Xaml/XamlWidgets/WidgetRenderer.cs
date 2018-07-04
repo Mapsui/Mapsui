@@ -7,7 +7,7 @@ namespace Mapsui.Rendering.Xaml.XamlWidgets
 {
     public static class WidgetRenderer
     {
-        public static void Render(object target, Map map, IReadOnlyViewport viewport, 
+        public static void Render(object target, IReadOnlyViewport viewport, 
             IEnumerable<IWidget> widgets, IDictionary<Type, IWidgetRenderer> renderers)
         {
             var canvas = (Canvas)target;
@@ -21,7 +21,7 @@ namespace Mapsui.Rendering.Xaml.XamlWidgets
             canvas.Children.Add(widgetCanvas);
             foreach (var widget in widgets)
             {
-                ((IXamlWidgetRenderer)renderers[widget.GetType()]).Draw(widgetCanvas, map, viewport, widget);
+                ((IXamlWidgetRenderer)renderers[widget.GetType()]).Draw(widgetCanvas, viewport, widget);
             }
         }
     }

@@ -88,7 +88,7 @@ namespace Mapsui.UI.Android
             TryInitializeViewport(ViewportWidth, ViewportHeight);
             if (!Viewport.Initialized) return;
 
-            Renderer.Render(args.Surface.Canvas, Map, Viewport, _map.Layers, _map.Widgets, _map.BackColor);
+            Renderer.Render(args.Surface.Canvas, Viewport, _map.Layers, _map.Widgets, _map.BackColor);
         }
 
         public void MapView_Touch(object sender, TouchEventArgs args)
