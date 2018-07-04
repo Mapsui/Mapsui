@@ -122,10 +122,9 @@ namespace Mapsui.UI.Uwp
         {
             if (ZoomLock) return;
             if (!Viewport.Initialized) return;
-
             
             var currentPoint = e.GetCurrentPoint(this);
-            var mousePosition = new Geometries.Point(currentPoint.RawPosition.X, currentPoint.RawPosition.Y);
+            var mousePosition = currentPoint.RawPosition.ToMapsui();
             var newResolution = DetermineNewResolution(currentPoint.Properties.MouseWheelDelta, Viewport.Resolution);
             _viewport.Transform(mousePosition.X, mousePosition.Y, mousePosition.X, mousePosition.Y, Viewport.Resolution / newResolution);
 
