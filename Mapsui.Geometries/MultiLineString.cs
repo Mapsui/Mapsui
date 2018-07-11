@@ -66,7 +66,7 @@ namespace Mapsui.Geometries
         /// <summary>
         ///     The length of this MultiLineString which is equal to the sum of the lengths of the element LineStrings.
         /// </summary>
-        public double Length
+        public virtual double Length
         {
             get
             {
