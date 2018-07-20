@@ -15,11 +15,11 @@ will be drawn on top of each other and things go wrong.
 data in another projection. This data can be converted to the Map projection
 but a few things need to be set.
 
-## Configure Mapsui for projections
-Three things need to be set to allow projection from DataSource to Map
+## Configure Mapsui for automatic projections
+Currently only the *Layer* layer type can be set up to do automatic projetions from DataSource to Map. Three things need to be configured for this:
 1. The CRS on the Map to know what to project to.
 2. The CRS on the DataSource to know what to project from.
-3. The Transformsion on the Map to transform from the DataSource CRS to
+3. The Transformsion on the Map to calculate the projection from DataSource CRS to
 the Map CRS.
 
 ## Support for projections
