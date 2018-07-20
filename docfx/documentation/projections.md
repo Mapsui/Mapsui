@@ -4,9 +4,12 @@ Projections is a complicated topic. Users of Mapsui have a wide
 variaty of backgrounds. Some are experienced GIS users that just need to
 know how this specific map component works. Many others are app developers that 
 just happen to need a map for their current app. This makes it hard to explain
-things clear for everyone. Here are some basic concepts.
+things clear for everyone. Below are some basic concepts. I like [this](https://www.youtube.com/watch?v=kIID5FDi2JQ) video introduction to map projections.
 
-## Some elements involved
+## The most common scenario
+Often user deal with GPS coordinates. These are coordinates in a system called WGS84, or lat/long coordinates, or [EPSG:4326](https://epsg.io/4326). Most maps are in another coordinate to is better suited for display. The projection used in most online maps these days is SphericalMercator, or WebMercator, PseudoMercator or [EPSG:8756](https://epsg.io/3857). The OpenStreetMap tile layer that is used in many samples of Mapsui is also in SphericalMercator. If you use this map your coordinates also need to be in SphercialMercator. By default there is no automatic projection in Mapsui. The Mapsui helper methods for this are SphericalMerator.FromLonLat/ToLonLat.
+
+## Parts of Mapsui involved in projections
 - **Map**: There is one Map. It is inevitably in some kind of projection.  
 - **Layers**: There are several layers that provider data. This data
 should be in the same projection as the Map. If not, different projections
