@@ -73,8 +73,10 @@
 variaty of backgrounds. Some are experienced GIS users that just need to
 know how this specific map component works. Many others are app developers that 
 just happen to need a map for their current app. This makes it hard to explain
-things clear for everyone. Here are some basic concepts.</p>
-<h2 id="some-elements-involved">Some elements involved</h2>
+things clear for everyone. Below are some basic concepts. I like <a href="https://www.youtube.com/watch?v=kIID5FDi2JQ">this</a> video introduction to map projections.</p>
+<h2 id="the-most-common-scenario">The most common scenario</h2>
+<p>Often user deal with GPS coordinates. These are coordinates in a system called WGS84, or lat/long coordinates, or <a href="https://epsg.io/4326">EPSG:4326</a>. Most maps are in some another coordinate system which is better suited for display. The projection used in most online maps these days is SphericalMercator, or WebMercator, PseudoMercator or <a href="https://epsg.io/3857">EPSG:8756</a>. The OpenStreetMap tile layer that is used in many samples of Mapsui is also in SphericalMercator. If you use this map your coordinates also need to be in SphercialMercator. By default there is no automatic projection in Mapsui. The Mapsui helper methods for this are SphericalMerator.FromLonLat/ToLonLat.</p>
+<h2 id="parts-of-mapsui-involved-in-projections">Parts of Mapsui involved in projections</h2>
 <ul>
 <li><strong>Map</strong>: There is one Map. It is inevitably in some kind of projection.  </li>
 <li><strong>Layers</strong>: There are several layers that provider data. This data
@@ -99,7 +101,7 @@ MinimalProjection class only projects between SphericalMercator
 your own Transformation. You need to implement the ITransformation
 interface. Within this implementation you need to use some other 
 projection library. A recommended one is <a href="https://github.com/NetTopologySuite/ProjNet4GeoAPI">ProjNet4GeoAPI</a>.</p>
-<h2 id="the-most-common-scenario">The most common scenario</h2>
+<h2 id="the-most-common-scenario-1">The most common scenario</h2>
 <p>Most likely you will be fine if you use the same projection as Google 
 and OpenStreetMap. This projection is called SphericalMercator. The 
 official code from the OGC for this projection is EPSG:3857. If you use
