@@ -3807,6 +3807,167 @@ references:
   isSpec: "True"
   fullName: Mapsui.Geometries.WellKnownText.GeometryToWKT.Write
   nameWithType: GeometryToWKT.Write
+- uid: Mapsui.IMap
+  name: IMap
+  href: api/Mapsui.IMap.html
+  commentId: T:Mapsui.IMap
+  fullName: Mapsui.IMap
+  nameWithType: IMap
+- uid: Mapsui.IMap.AbortFetch
+  name: AbortFetch()
+  href: api/Mapsui.IMap.html#Mapsui_IMap_AbortFetch
+  commentId: M:Mapsui.IMap.AbortFetch
+  fullName: Mapsui.IMap.AbortFetch()
+  nameWithType: IMap.AbortFetch()
+- uid: Mapsui.IMap.AbortFetch*
+  name: AbortFetch
+  href: api/Mapsui.IMap.html#Mapsui_IMap_AbortFetch_
+  commentId: Overload:Mapsui.IMap.AbortFetch
+  isSpec: "True"
+  fullName: Mapsui.IMap.AbortFetch
+  nameWithType: IMap.AbortFetch
+- uid: Mapsui.IMap.BackColor
+  name: BackColor
+  href: api/Mapsui.IMap.html#Mapsui_IMap_BackColor
+  commentId: P:Mapsui.IMap.BackColor
+  fullName: Mapsui.IMap.BackColor
+  nameWithType: IMap.BackColor
+- uid: Mapsui.IMap.BackColor*
+  name: BackColor
+  href: api/Mapsui.IMap.html#Mapsui_IMap_BackColor_
+  commentId: Overload:Mapsui.IMap.BackColor
+  isSpec: "True"
+  fullName: Mapsui.IMap.BackColor
+  nameWithType: IMap.BackColor
+- uid: Mapsui.IMap.ClearCache
+  name: ClearCache()
+  href: api/Mapsui.IMap.html#Mapsui_IMap_ClearCache
+  commentId: M:Mapsui.IMap.ClearCache
+  fullName: Mapsui.IMap.ClearCache()
+  nameWithType: IMap.ClearCache()
+- uid: Mapsui.IMap.ClearCache*
+  name: ClearCache
+  href: api/Mapsui.IMap.html#Mapsui_IMap_ClearCache_
+  commentId: Overload:Mapsui.IMap.ClearCache
+  isSpec: "True"
+  fullName: Mapsui.IMap.ClearCache
+  nameWithType: IMap.ClearCache
+- uid: Mapsui.IMap.CRS
+  name: CRS
+  href: api/Mapsui.IMap.html#Mapsui_IMap_CRS
+  commentId: P:Mapsui.IMap.CRS
+  fullName: Mapsui.IMap.CRS
+  nameWithType: IMap.CRS
+- uid: Mapsui.IMap.CRS*
+  name: CRS
+  href: api/Mapsui.IMap.html#Mapsui_IMap_CRS_
+  commentId: Overload:Mapsui.IMap.CRS
+  isSpec: "True"
+  fullName: Mapsui.IMap.CRS
+  nameWithType: IMap.CRS
+- uid: Mapsui.IMap.DataChanged
+  name: DataChanged
+  href: api/Mapsui.IMap.html#Mapsui_IMap_DataChanged
+  commentId: E:Mapsui.IMap.DataChanged
+  fullName: Mapsui.IMap.DataChanged
+  nameWithType: IMap.DataChanged
+- uid: Mapsui.IMap.Envelope
+  name: Envelope
+  href: api/Mapsui.IMap.html#Mapsui_IMap_Envelope
+  commentId: P:Mapsui.IMap.Envelope
+  fullName: Mapsui.IMap.Envelope
+  nameWithType: IMap.Envelope
+- uid: Mapsui.IMap.Envelope*
+  name: Envelope
+  href: api/Mapsui.IMap.html#Mapsui_IMap_Envelope_
+  commentId: Overload:Mapsui.IMap.Envelope
+  isSpec: "True"
+  fullName: Mapsui.IMap.Envelope
+  nameWithType: IMap.Envelope
+- uid: Mapsui.IMap.Home
+  name: Home
+  href: api/Mapsui.IMap.html#Mapsui_IMap_Home
+  commentId: P:Mapsui.IMap.Home
+  fullName: Mapsui.IMap.Home
+  nameWithType: IMap.Home
+- uid: Mapsui.IMap.Home*
+  name: Home
+  href: api/Mapsui.IMap.html#Mapsui_IMap_Home_
+  commentId: Overload:Mapsui.IMap.Home
+  isSpec: "True"
+  fullName: Mapsui.IMap.Home
+  nameWithType: IMap.Home
+- uid: Mapsui.IMap.Layers
+  name: Layers
+  href: api/Mapsui.IMap.html#Mapsui_IMap_Layers
+  commentId: P:Mapsui.IMap.Layers
+  fullName: Mapsui.IMap.Layers
+  nameWithType: IMap.Layers
+- uid: Mapsui.IMap.Layers*
+  name: Layers
+  href: api/Mapsui.IMap.html#Mapsui_IMap_Layers_
+  commentId: Overload:Mapsui.IMap.Layers
+  isSpec: "True"
+  fullName: Mapsui.IMap.Layers
+  nameWithType: IMap.Layers
+- uid: Mapsui.IMap.PropertyChanged
+  name: PropertyChanged
+  href: api/Mapsui.IMap.html#Mapsui_IMap_PropertyChanged
+  commentId: E:Mapsui.IMap.PropertyChanged
+  fullName: Mapsui.IMap.PropertyChanged
+  nameWithType: IMap.PropertyChanged
+- uid: Mapsui.IMap.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,System.Boolean)
+  name: RefreshData(BoundingBox, Double, Boolean)
+  href: api/Mapsui.IMap.html#Mapsui_IMap_RefreshData_Mapsui_Geometries_BoundingBox_System_Double_System_Boolean_
+  commentId: M:Mapsui.IMap.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,System.Boolean)
+  fullName: Mapsui.IMap.RefreshData(Mapsui.Geometries.BoundingBox, System.Double, System.Boolean)
+  nameWithType: IMap.RefreshData(BoundingBox, Double, Boolean)
+- uid: Mapsui.IMap.RefreshData*
+  name: RefreshData
+  href: api/Mapsui.IMap.html#Mapsui_IMap_RefreshData_
+  commentId: Overload:Mapsui.IMap.RefreshData
+  isSpec: "True"
+  fullName: Mapsui.IMap.RefreshData
+  nameWithType: IMap.RefreshData
+- uid: Mapsui.IMap.Resolutions
+  name: Resolutions
+  href: api/Mapsui.IMap.html#Mapsui_IMap_Resolutions
+  commentId: P:Mapsui.IMap.Resolutions
+  fullName: Mapsui.IMap.Resolutions
+  nameWithType: IMap.Resolutions
+- uid: Mapsui.IMap.Resolutions*
+  name: Resolutions
+  href: api/Mapsui.IMap.html#Mapsui_IMap_Resolutions_
+  commentId: Overload:Mapsui.IMap.Resolutions
+  isSpec: "True"
+  fullName: Mapsui.IMap.Resolutions
+  nameWithType: IMap.Resolutions
+- uid: Mapsui.IMap.Transformation
+  name: Transformation
+  href: api/Mapsui.IMap.html#Mapsui_IMap_Transformation
+  commentId: P:Mapsui.IMap.Transformation
+  fullName: Mapsui.IMap.Transformation
+  nameWithType: IMap.Transformation
+- uid: Mapsui.IMap.Transformation*
+  name: Transformation
+  href: api/Mapsui.IMap.html#Mapsui_IMap_Transformation_
+  commentId: Overload:Mapsui.IMap.Transformation
+  isSpec: "True"
+  fullName: Mapsui.IMap.Transformation
+  nameWithType: IMap.Transformation
+- uid: Mapsui.IMap.Widgets
+  name: Widgets
+  href: api/Mapsui.IMap.html#Mapsui_IMap_Widgets
+  commentId: P:Mapsui.IMap.Widgets
+  fullName: Mapsui.IMap.Widgets
+  nameWithType: IMap.Widgets
+- uid: Mapsui.IMap.Widgets*
+  name: Widgets
+  href: api/Mapsui.IMap.html#Mapsui_IMap_Widgets_
+  commentId: Overload:Mapsui.IMap.Widgets
+  isSpec: "True"
+  fullName: Mapsui.IMap.Widgets
+  nameWithType: IMap.Widgets
 - uid: Mapsui.INavigator
   name: INavigator
   href: api/Mapsui.INavigator.html
@@ -3947,6 +4108,32 @@ references:
   isSpec: "True"
   fullName: Mapsui.IReadOnlyViewport.Height
   nameWithType: IReadOnlyViewport.Height
+- uid: Mapsui.IReadOnlyViewport.Initialized
+  name: Initialized
+  href: api/Mapsui.IReadOnlyViewport.html#Mapsui_IReadOnlyViewport_Initialized
+  commentId: P:Mapsui.IReadOnlyViewport.Initialized
+  fullName: Mapsui.IReadOnlyViewport.Initialized
+  nameWithType: IReadOnlyViewport.Initialized
+- uid: Mapsui.IReadOnlyViewport.Initialized*
+  name: Initialized
+  href: api/Mapsui.IReadOnlyViewport.html#Mapsui_IReadOnlyViewport_Initialized_
+  commentId: Overload:Mapsui.IReadOnlyViewport.Initialized
+  isSpec: "True"
+  fullName: Mapsui.IReadOnlyViewport.Initialized
+  nameWithType: IReadOnlyViewport.Initialized
+- uid: Mapsui.IReadOnlyViewport.IsRotated
+  name: IsRotated
+  href: api/Mapsui.IReadOnlyViewport.html#Mapsui_IReadOnlyViewport_IsRotated
+  commentId: P:Mapsui.IReadOnlyViewport.IsRotated
+  fullName: Mapsui.IReadOnlyViewport.IsRotated
+  nameWithType: IReadOnlyViewport.IsRotated
+- uid: Mapsui.IReadOnlyViewport.IsRotated*
+  name: IsRotated
+  href: api/Mapsui.IReadOnlyViewport.html#Mapsui_IReadOnlyViewport_IsRotated_
+  commentId: Overload:Mapsui.IReadOnlyViewport.IsRotated
+  isSpec: "True"
+  fullName: Mapsui.IReadOnlyViewport.IsRotated
+  nameWithType: IReadOnlyViewport.IsRotated
 - uid: Mapsui.IReadOnlyViewport.Resolution
   name: Resolution
   href: api/Mapsui.IReadOnlyViewport.html#Mapsui_IReadOnlyViewport_Resolution
@@ -3992,19 +4179,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.IReadOnlyViewport.ScreenToWorld
   nameWithType: IReadOnlyViewport.ScreenToWorld
-- uid: Mapsui.IReadOnlyViewport.Transform(System.Double,System.Double,System.Double,System.Double,System.Double,System.Double)
-  name: Transform(Double, Double, Double, Double, Double, Double)
-  href: api/Mapsui.IReadOnlyViewport.html#Mapsui_IReadOnlyViewport_Transform_System_Double_System_Double_System_Double_System_Double_System_Double_System_Double_
-  commentId: M:Mapsui.IReadOnlyViewport.Transform(System.Double,System.Double,System.Double,System.Double,System.Double,System.Double)
-  fullName: Mapsui.IReadOnlyViewport.Transform(System.Double, System.Double, System.Double, System.Double, System.Double, System.Double)
-  nameWithType: IReadOnlyViewport.Transform(Double, Double, Double, Double, Double, Double)
-- uid: Mapsui.IReadOnlyViewport.Transform*
-  name: Transform
-  href: api/Mapsui.IReadOnlyViewport.html#Mapsui_IReadOnlyViewport_Transform_
-  commentId: Overload:Mapsui.IReadOnlyViewport.Transform
-  isSpec: "True"
-  fullName: Mapsui.IReadOnlyViewport.Transform
-  nameWithType: IReadOnlyViewport.Transform
 - uid: Mapsui.IReadOnlyViewport.Width
   name: Width
   href: api/Mapsui.IReadOnlyViewport.html#Mapsui_IReadOnlyViewport_Width
@@ -4018,6 +4192,44 @@ references:
   isSpec: "True"
   fullName: Mapsui.IReadOnlyViewport.Width
   nameWithType: IReadOnlyViewport.Width
+- uid: Mapsui.IReadOnlyViewport.WorldToScreen(Mapsui.Geometries.Point)
+  name: WorldToScreen(Point)
+  href: api/Mapsui.IReadOnlyViewport.html#Mapsui_IReadOnlyViewport_WorldToScreen_Mapsui_Geometries_Point_
+  commentId: M:Mapsui.IReadOnlyViewport.WorldToScreen(Mapsui.Geometries.Point)
+  fullName: Mapsui.IReadOnlyViewport.WorldToScreen(Mapsui.Geometries.Point)
+  nameWithType: IReadOnlyViewport.WorldToScreen(Point)
+- uid: Mapsui.IReadOnlyViewport.WorldToScreen(System.Double,System.Double)
+  name: WorldToScreen(Double, Double)
+  href: api/Mapsui.IReadOnlyViewport.html#Mapsui_IReadOnlyViewport_WorldToScreen_System_Double_System_Double_
+  commentId: M:Mapsui.IReadOnlyViewport.WorldToScreen(System.Double,System.Double)
+  fullName: Mapsui.IReadOnlyViewport.WorldToScreen(System.Double, System.Double)
+  nameWithType: IReadOnlyViewport.WorldToScreen(Double, Double)
+- uid: Mapsui.IReadOnlyViewport.WorldToScreen*
+  name: WorldToScreen
+  href: api/Mapsui.IReadOnlyViewport.html#Mapsui_IReadOnlyViewport_WorldToScreen_
+  commentId: Overload:Mapsui.IReadOnlyViewport.WorldToScreen
+  isSpec: "True"
+  fullName: Mapsui.IReadOnlyViewport.WorldToScreen
+  nameWithType: IReadOnlyViewport.WorldToScreen
+- uid: Mapsui.IReadOnlyViewport.WorldToScreenUnrotated(Mapsui.Geometries.Point)
+  name: WorldToScreenUnrotated(Point)
+  href: api/Mapsui.IReadOnlyViewport.html#Mapsui_IReadOnlyViewport_WorldToScreenUnrotated_Mapsui_Geometries_Point_
+  commentId: M:Mapsui.IReadOnlyViewport.WorldToScreenUnrotated(Mapsui.Geometries.Point)
+  fullName: Mapsui.IReadOnlyViewport.WorldToScreenUnrotated(Mapsui.Geometries.Point)
+  nameWithType: IReadOnlyViewport.WorldToScreenUnrotated(Point)
+- uid: Mapsui.IReadOnlyViewport.WorldToScreenUnrotated(System.Double,System.Double)
+  name: WorldToScreenUnrotated(Double, Double)
+  href: api/Mapsui.IReadOnlyViewport.html#Mapsui_IReadOnlyViewport_WorldToScreenUnrotated_System_Double_System_Double_
+  commentId: M:Mapsui.IReadOnlyViewport.WorldToScreenUnrotated(System.Double,System.Double)
+  fullName: Mapsui.IReadOnlyViewport.WorldToScreenUnrotated(System.Double, System.Double)
+  nameWithType: IReadOnlyViewport.WorldToScreenUnrotated(Double, Double)
+- uid: Mapsui.IReadOnlyViewport.WorldToScreenUnrotated*
+  name: WorldToScreenUnrotated
+  href: api/Mapsui.IReadOnlyViewport.html#Mapsui_IReadOnlyViewport_WorldToScreenUnrotated_
+  commentId: Overload:Mapsui.IReadOnlyViewport.WorldToScreenUnrotated
+  isSpec: "True"
+  fullName: Mapsui.IReadOnlyViewport.WorldToScreenUnrotated
+  nameWithType: IReadOnlyViewport.WorldToScreenUnrotated
 - uid: Mapsui.IViewport
   name: IViewport
   href: api/Mapsui.IViewport.html
@@ -4192,25 +4404,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.IViewport.WorldToScreen
   nameWithType: IViewport.WorldToScreen
-- uid: Mapsui.IViewport.WorldToScreenUnrotated(Mapsui.Geometries.Point)
-  name: WorldToScreenUnrotated(Point)
-  href: api/Mapsui.IViewport.html#Mapsui_IViewport_WorldToScreenUnrotated_Mapsui_Geometries_Point_
-  commentId: M:Mapsui.IViewport.WorldToScreenUnrotated(Mapsui.Geometries.Point)
-  fullName: Mapsui.IViewport.WorldToScreenUnrotated(Mapsui.Geometries.Point)
-  nameWithType: IViewport.WorldToScreenUnrotated(Point)
-- uid: Mapsui.IViewport.WorldToScreenUnrotated(System.Double,System.Double)
-  name: WorldToScreenUnrotated(Double, Double)
-  href: api/Mapsui.IViewport.html#Mapsui_IViewport_WorldToScreenUnrotated_System_Double_System_Double_
-  commentId: M:Mapsui.IViewport.WorldToScreenUnrotated(System.Double,System.Double)
-  fullName: Mapsui.IViewport.WorldToScreenUnrotated(System.Double, System.Double)
-  nameWithType: IViewport.WorldToScreenUnrotated(Double, Double)
-- uid: Mapsui.IViewport.WorldToScreenUnrotated*
-  name: WorldToScreenUnrotated
-  href: api/Mapsui.IViewport.html#Mapsui_IViewport_WorldToScreenUnrotated_
-  commentId: Overload:Mapsui.IViewport.WorldToScreenUnrotated
-  isSpec: "True"
-  fullName: Mapsui.IViewport.WorldToScreenUnrotated
-  nameWithType: IViewport.WorldToScreenUnrotated
 - uid: Mapsui.Layers
   name: Mapsui.Layers
   href: api/Mapsui.Layers.html
@@ -4832,15 +5025,15 @@ references:
   commentId: T:Mapsui.Layers.IFeatureInfo
   fullName: Mapsui.Layers.IFeatureInfo
   nameWithType: IFeatureInfo
-- uid: Mapsui.Layers.IFeatureInfo.GetFeatureInfo(Mapsui.IViewport,System.Double,System.Double,Action{IDictionary{System.String,IEnumerable{Mapsui.Providers.IFeature}}})
-  name: GetFeatureInfo(IViewport, Double, Double, Action<IDictionary<String, IEnumerable<IFeature>>>)
-  href: api/Mapsui.Layers.IFeatureInfo.html#Mapsui_Layers_IFeatureInfo_GetFeatureInfo_Mapsui_IViewport_System_Double_System_Double_Action_IDictionary_System_String_IEnumerable_Mapsui_Providers_IFeature____
-  commentId: M:Mapsui.Layers.IFeatureInfo.GetFeatureInfo(Mapsui.IViewport,System.Double,System.Double,Action{IDictionary{System.String,IEnumerable{Mapsui.Providers.IFeature}}})
-  name.vb: GetFeatureInfo(IViewport, Double, Double, Action(Of IDictionary(Of String, IEnumerable(Of IFeature))))
-  fullName: Mapsui.Layers.IFeatureInfo.GetFeatureInfo(Mapsui.IViewport, System.Double, System.Double, Action<IDictionary<System.String, IEnumerable<Mapsui.Providers.IFeature>>>)
-  fullName.vb: Mapsui.Layers.IFeatureInfo.GetFeatureInfo(Mapsui.IViewport, System.Double, System.Double, Action(Of IDictionary(Of System.String, IEnumerable(Of Mapsui.Providers.IFeature))))
-  nameWithType: IFeatureInfo.GetFeatureInfo(IViewport, Double, Double, Action<IDictionary<String, IEnumerable<IFeature>>>)
-  nameWithType.vb: IFeatureInfo.GetFeatureInfo(IViewport, Double, Double, Action(Of IDictionary(Of String, IEnumerable(Of IFeature))))
+- uid: Mapsui.Layers.IFeatureInfo.GetFeatureInfo(Mapsui.IReadOnlyViewport,System.Double,System.Double,Action{IDictionary{System.String,IEnumerable{Mapsui.Providers.IFeature}}})
+  name: GetFeatureInfo(IReadOnlyViewport, Double, Double, Action<IDictionary<String, IEnumerable<IFeature>>>)
+  href: api/Mapsui.Layers.IFeatureInfo.html#Mapsui_Layers_IFeatureInfo_GetFeatureInfo_Mapsui_IReadOnlyViewport_System_Double_System_Double_Action_IDictionary_System_String_IEnumerable_Mapsui_Providers_IFeature____
+  commentId: M:Mapsui.Layers.IFeatureInfo.GetFeatureInfo(Mapsui.IReadOnlyViewport,System.Double,System.Double,Action{IDictionary{System.String,IEnumerable{Mapsui.Providers.IFeature}}})
+  name.vb: GetFeatureInfo(IReadOnlyViewport, Double, Double, Action(Of IDictionary(Of String, IEnumerable(Of IFeature))))
+  fullName: Mapsui.Layers.IFeatureInfo.GetFeatureInfo(Mapsui.IReadOnlyViewport, System.Double, System.Double, Action<IDictionary<System.String, IEnumerable<Mapsui.Providers.IFeature>>>)
+  fullName.vb: Mapsui.Layers.IFeatureInfo.GetFeatureInfo(Mapsui.IReadOnlyViewport, System.Double, System.Double, Action(Of IDictionary(Of System.String, IEnumerable(Of Mapsui.Providers.IFeature))))
+  nameWithType: IFeatureInfo.GetFeatureInfo(IReadOnlyViewport, Double, Double, Action<IDictionary<String, IEnumerable<IFeature>>>)
+  nameWithType.vb: IFeatureInfo.GetFeatureInfo(IReadOnlyViewport, Double, Double, Action(Of IDictionary(Of String, IEnumerable(Of IFeature))))
 - uid: Mapsui.Layers.IFeatureInfo.GetFeatureInfo*
   name: GetFeatureInfo
   href: api/Mapsui.Layers.IFeatureInfo.html#Mapsui_Layers_IFeatureInfo_GetFeatureInfo_
@@ -15618,15 +15811,15 @@ references:
   commentId: T:Mapsui.Rendering.IRenderer
   fullName: Mapsui.Rendering.IRenderer
   nameWithType: IRenderer
-- uid: Mapsui.Rendering.IRenderer.Render(System.Object,Mapsui.Map,Mapsui.IViewport,IEnumerable{Mapsui.Layers.ILayer},IEnumerable{Mapsui.Widgets.IWidget},Mapsui.Styles.Color)
-  name: Render(Object, Map, IViewport, IEnumerable<ILayer>, IEnumerable<IWidget>, Color)
-  href: api/Mapsui.Rendering.IRenderer.html#Mapsui_Rendering_IRenderer_Render_System_Object_Mapsui_Map_Mapsui_IViewport_IEnumerable_Mapsui_Layers_ILayer__IEnumerable_Mapsui_Widgets_IWidget__Mapsui_Styles_Color_
-  commentId: M:Mapsui.Rendering.IRenderer.Render(System.Object,Mapsui.Map,Mapsui.IViewport,IEnumerable{Mapsui.Layers.ILayer},IEnumerable{Mapsui.Widgets.IWidget},Mapsui.Styles.Color)
-  name.vb: Render(Object, Map, IViewport, IEnumerable(Of ILayer), IEnumerable(Of IWidget), Color)
-  fullName: Mapsui.Rendering.IRenderer.Render(System.Object, Mapsui.Map, Mapsui.IViewport, IEnumerable<Mapsui.Layers.ILayer>, IEnumerable<Mapsui.Widgets.IWidget>, Mapsui.Styles.Color)
-  fullName.vb: Mapsui.Rendering.IRenderer.Render(System.Object, Mapsui.Map, Mapsui.IViewport, IEnumerable(Of Mapsui.Layers.ILayer), IEnumerable(Of Mapsui.Widgets.IWidget), Mapsui.Styles.Color)
-  nameWithType: IRenderer.Render(Object, Map, IViewport, IEnumerable<ILayer>, IEnumerable<IWidget>, Color)
-  nameWithType.vb: IRenderer.Render(Object, Map, IViewport, IEnumerable(Of ILayer), IEnumerable(Of IWidget), Color)
+- uid: Mapsui.Rendering.IRenderer.Render(System.Object,Mapsui.IReadOnlyViewport,IEnumerable{Mapsui.Layers.ILayer},IEnumerable{Mapsui.Widgets.IWidget},Mapsui.Styles.Color)
+  name: Render(Object, IReadOnlyViewport, IEnumerable<ILayer>, IEnumerable<IWidget>, Color)
+  href: api/Mapsui.Rendering.IRenderer.html#Mapsui_Rendering_IRenderer_Render_System_Object_Mapsui_IReadOnlyViewport_IEnumerable_Mapsui_Layers_ILayer__IEnumerable_Mapsui_Widgets_IWidget__Mapsui_Styles_Color_
+  commentId: M:Mapsui.Rendering.IRenderer.Render(System.Object,Mapsui.IReadOnlyViewport,IEnumerable{Mapsui.Layers.ILayer},IEnumerable{Mapsui.Widgets.IWidget},Mapsui.Styles.Color)
+  name.vb: Render(Object, IReadOnlyViewport, IEnumerable(Of ILayer), IEnumerable(Of IWidget), Color)
+  fullName: Mapsui.Rendering.IRenderer.Render(System.Object, Mapsui.IReadOnlyViewport, IEnumerable<Mapsui.Layers.ILayer>, IEnumerable<Mapsui.Widgets.IWidget>, Mapsui.Styles.Color)
+  fullName.vb: Mapsui.Rendering.IRenderer.Render(System.Object, Mapsui.IReadOnlyViewport, IEnumerable(Of Mapsui.Layers.ILayer), IEnumerable(Of Mapsui.Widgets.IWidget), Mapsui.Styles.Color)
+  nameWithType: IRenderer.Render(Object, IReadOnlyViewport, IEnumerable<ILayer>, IEnumerable<IWidget>, Color)
+  nameWithType.vb: IRenderer.Render(Object, IReadOnlyViewport, IEnumerable(Of ILayer), IEnumerable(Of IWidget), Color)
 - uid: Mapsui.Rendering.IRenderer.Render*
   name: Render
   href: api/Mapsui.Rendering.IRenderer.html#Mapsui_Rendering_IRenderer_Render_
@@ -15634,15 +15827,15 @@ references:
   isSpec: "True"
   fullName: Mapsui.Rendering.IRenderer.Render
   nameWithType: IRenderer.Render
-- uid: Mapsui.Rendering.IRenderer.RenderToBitmapStream(Mapsui.IViewport,IEnumerable{Mapsui.Layers.ILayer},Mapsui.Styles.Color)
-  name: RenderToBitmapStream(IViewport, IEnumerable<ILayer>, Color)
-  href: api/Mapsui.Rendering.IRenderer.html#Mapsui_Rendering_IRenderer_RenderToBitmapStream_Mapsui_IViewport_IEnumerable_Mapsui_Layers_ILayer__Mapsui_Styles_Color_
-  commentId: M:Mapsui.Rendering.IRenderer.RenderToBitmapStream(Mapsui.IViewport,IEnumerable{Mapsui.Layers.ILayer},Mapsui.Styles.Color)
-  name.vb: RenderToBitmapStream(IViewport, IEnumerable(Of ILayer), Color)
-  fullName: Mapsui.Rendering.IRenderer.RenderToBitmapStream(Mapsui.IViewport, IEnumerable<Mapsui.Layers.ILayer>, Mapsui.Styles.Color)
-  fullName.vb: Mapsui.Rendering.IRenderer.RenderToBitmapStream(Mapsui.IViewport, IEnumerable(Of Mapsui.Layers.ILayer), Mapsui.Styles.Color)
-  nameWithType: IRenderer.RenderToBitmapStream(IViewport, IEnumerable<ILayer>, Color)
-  nameWithType.vb: IRenderer.RenderToBitmapStream(IViewport, IEnumerable(Of ILayer), Color)
+- uid: Mapsui.Rendering.IRenderer.RenderToBitmapStream(Mapsui.IReadOnlyViewport,IEnumerable{Mapsui.Layers.ILayer},Mapsui.Styles.Color)
+  name: RenderToBitmapStream(IReadOnlyViewport, IEnumerable<ILayer>, Color)
+  href: api/Mapsui.Rendering.IRenderer.html#Mapsui_Rendering_IRenderer_RenderToBitmapStream_Mapsui_IReadOnlyViewport_IEnumerable_Mapsui_Layers_ILayer__Mapsui_Styles_Color_
+  commentId: M:Mapsui.Rendering.IRenderer.RenderToBitmapStream(Mapsui.IReadOnlyViewport,IEnumerable{Mapsui.Layers.ILayer},Mapsui.Styles.Color)
+  name.vb: RenderToBitmapStream(IReadOnlyViewport, IEnumerable(Of ILayer), Color)
+  fullName: Mapsui.Rendering.IRenderer.RenderToBitmapStream(Mapsui.IReadOnlyViewport, IEnumerable<Mapsui.Layers.ILayer>, Mapsui.Styles.Color)
+  fullName.vb: Mapsui.Rendering.IRenderer.RenderToBitmapStream(Mapsui.IReadOnlyViewport, IEnumerable(Of Mapsui.Layers.ILayer), Mapsui.Styles.Color)
+  nameWithType: IRenderer.RenderToBitmapStream(IReadOnlyViewport, IEnumerable<ILayer>, Color)
+  nameWithType.vb: IRenderer.RenderToBitmapStream(IReadOnlyViewport, IEnumerable(Of ILayer), Color)
 - uid: Mapsui.Rendering.IRenderer.RenderToBitmapStream*
   name: RenderToBitmapStream
   href: api/Mapsui.Rendering.IRenderer.html#Mapsui_Rendering_IRenderer_RenderToBitmapStream_
@@ -16005,21 +16198,21 @@ references:
   commentId: T:Mapsui.Rendering.Skia.ClippingExtension
   fullName: Mapsui.Rendering.Skia.ClippingExtension
   nameWithType: ClippingExtension
-- uid: Mapsui.Rendering.Skia.ClippingExtension.ToSkiaPath(IEnumerable{Mapsui.Geometries.Point},Mapsui.IViewport,SKRect)
-  name: ToSkiaPath(IEnumerable<Point>, IViewport, SKRect)
-  href: api/Mapsui.Rendering.Skia.ClippingExtension.html#Mapsui_Rendering_Skia_ClippingExtension_ToSkiaPath_IEnumerable_Mapsui_Geometries_Point__Mapsui_IViewport_SKRect_
-  commentId: M:Mapsui.Rendering.Skia.ClippingExtension.ToSkiaPath(IEnumerable{Mapsui.Geometries.Point},Mapsui.IViewport,SKRect)
-  name.vb: ToSkiaPath(IEnumerable(Of Point), IViewport, SKRect)
-  fullName: Mapsui.Rendering.Skia.ClippingExtension.ToSkiaPath(IEnumerable<Mapsui.Geometries.Point>, Mapsui.IViewport, SKRect)
-  fullName.vb: Mapsui.Rendering.Skia.ClippingExtension.ToSkiaPath(IEnumerable(Of Mapsui.Geometries.Point), Mapsui.IViewport, SKRect)
-  nameWithType: ClippingExtension.ToSkiaPath(IEnumerable<Point>, IViewport, SKRect)
-  nameWithType.vb: ClippingExtension.ToSkiaPath(IEnumerable(Of Point), IViewport, SKRect)
-- uid: Mapsui.Rendering.Skia.ClippingExtension.ToSkiaPath(Mapsui.Geometries.Polygon,Mapsui.IViewport,SKRect,System.Single)
-  name: ToSkiaPath(Polygon, IViewport, SKRect, Single)
-  href: api/Mapsui.Rendering.Skia.ClippingExtension.html#Mapsui_Rendering_Skia_ClippingExtension_ToSkiaPath_Mapsui_Geometries_Polygon_Mapsui_IViewport_SKRect_System_Single_
-  commentId: M:Mapsui.Rendering.Skia.ClippingExtension.ToSkiaPath(Mapsui.Geometries.Polygon,Mapsui.IViewport,SKRect,System.Single)
-  fullName: Mapsui.Rendering.Skia.ClippingExtension.ToSkiaPath(Mapsui.Geometries.Polygon, Mapsui.IViewport, SKRect, System.Single)
-  nameWithType: ClippingExtension.ToSkiaPath(Polygon, IViewport, SKRect, Single)
+- uid: Mapsui.Rendering.Skia.ClippingExtension.ToSkiaPath(IEnumerable{Mapsui.Geometries.Point},Mapsui.IReadOnlyViewport,SKRect)
+  name: ToSkiaPath(IEnumerable<Point>, IReadOnlyViewport, SKRect)
+  href: api/Mapsui.Rendering.Skia.ClippingExtension.html#Mapsui_Rendering_Skia_ClippingExtension_ToSkiaPath_IEnumerable_Mapsui_Geometries_Point__Mapsui_IReadOnlyViewport_SKRect_
+  commentId: M:Mapsui.Rendering.Skia.ClippingExtension.ToSkiaPath(IEnumerable{Mapsui.Geometries.Point},Mapsui.IReadOnlyViewport,SKRect)
+  name.vb: ToSkiaPath(IEnumerable(Of Point), IReadOnlyViewport, SKRect)
+  fullName: Mapsui.Rendering.Skia.ClippingExtension.ToSkiaPath(IEnumerable<Mapsui.Geometries.Point>, Mapsui.IReadOnlyViewport, SKRect)
+  fullName.vb: Mapsui.Rendering.Skia.ClippingExtension.ToSkiaPath(IEnumerable(Of Mapsui.Geometries.Point), Mapsui.IReadOnlyViewport, SKRect)
+  nameWithType: ClippingExtension.ToSkiaPath(IEnumerable<Point>, IReadOnlyViewport, SKRect)
+  nameWithType.vb: ClippingExtension.ToSkiaPath(IEnumerable(Of Point), IReadOnlyViewport, SKRect)
+- uid: Mapsui.Rendering.Skia.ClippingExtension.ToSkiaPath(Mapsui.Geometries.Polygon,Mapsui.IReadOnlyViewport,SKRect,System.Single)
+  name: ToSkiaPath(Polygon, IReadOnlyViewport, SKRect, Single)
+  href: api/Mapsui.Rendering.Skia.ClippingExtension.html#Mapsui_Rendering_Skia_ClippingExtension_ToSkiaPath_Mapsui_Geometries_Polygon_Mapsui_IReadOnlyViewport_SKRect_System_Single_
+  commentId: M:Mapsui.Rendering.Skia.ClippingExtension.ToSkiaPath(Mapsui.Geometries.Polygon,Mapsui.IReadOnlyViewport,SKRect,System.Single)
+  fullName: Mapsui.Rendering.Skia.ClippingExtension.ToSkiaPath(Mapsui.Geometries.Polygon, Mapsui.IReadOnlyViewport, SKRect, System.Single)
+  nameWithType: ClippingExtension.ToSkiaPath(Polygon, IReadOnlyViewport, SKRect, Single)
 - uid: Mapsui.Rendering.Skia.ClippingExtension.ToSkiaPath*
   name: ToSkiaPath
   href: api/Mapsui.Rendering.Skia.ClippingExtension.html#Mapsui_Rendering_Skia_ClippingExtension_ToSkiaPath_
@@ -16150,12 +16343,12 @@ references:
   commentId: T:Mapsui.Rendering.Skia.LineStringRenderer
   fullName: Mapsui.Rendering.Skia.LineStringRenderer
   nameWithType: LineStringRenderer
-- uid: Mapsui.Rendering.Skia.LineStringRenderer.Draw(SKCanvas,Mapsui.IViewport,Mapsui.Styles.IStyle,Mapsui.Providers.IFeature,Mapsui.Geometries.IGeometry,System.Single)
-  name: Draw(SKCanvas, IViewport, IStyle, IFeature, IGeometry, Single)
-  href: api/Mapsui.Rendering.Skia.LineStringRenderer.html#Mapsui_Rendering_Skia_LineStringRenderer_Draw_SKCanvas_Mapsui_IViewport_Mapsui_Styles_IStyle_Mapsui_Providers_IFeature_Mapsui_Geometries_IGeometry_System_Single_
-  commentId: M:Mapsui.Rendering.Skia.LineStringRenderer.Draw(SKCanvas,Mapsui.IViewport,Mapsui.Styles.IStyle,Mapsui.Providers.IFeature,Mapsui.Geometries.IGeometry,System.Single)
-  fullName: Mapsui.Rendering.Skia.LineStringRenderer.Draw(SKCanvas, Mapsui.IViewport, Mapsui.Styles.IStyle, Mapsui.Providers.IFeature, Mapsui.Geometries.IGeometry, System.Single)
-  nameWithType: LineStringRenderer.Draw(SKCanvas, IViewport, IStyle, IFeature, IGeometry, Single)
+- uid: Mapsui.Rendering.Skia.LineStringRenderer.Draw(SKCanvas,Mapsui.IReadOnlyViewport,Mapsui.Styles.IStyle,Mapsui.Providers.IFeature,Mapsui.Geometries.IGeometry,System.Single)
+  name: Draw(SKCanvas, IReadOnlyViewport, IStyle, IFeature, IGeometry, Single)
+  href: api/Mapsui.Rendering.Skia.LineStringRenderer.html#Mapsui_Rendering_Skia_LineStringRenderer_Draw_SKCanvas_Mapsui_IReadOnlyViewport_Mapsui_Styles_IStyle_Mapsui_Providers_IFeature_Mapsui_Geometries_IGeometry_System_Single_
+  commentId: M:Mapsui.Rendering.Skia.LineStringRenderer.Draw(SKCanvas,Mapsui.IReadOnlyViewport,Mapsui.Styles.IStyle,Mapsui.Providers.IFeature,Mapsui.Geometries.IGeometry,System.Single)
+  fullName: Mapsui.Rendering.Skia.LineStringRenderer.Draw(SKCanvas, Mapsui.IReadOnlyViewport, Mapsui.Styles.IStyle, Mapsui.Providers.IFeature, Mapsui.Geometries.IGeometry, System.Single)
+  nameWithType: LineStringRenderer.Draw(SKCanvas, IReadOnlyViewport, IStyle, IFeature, IGeometry, Single)
 - uid: Mapsui.Rendering.Skia.LineStringRenderer.Draw*
   name: Draw
   href: api/Mapsui.Rendering.Skia.LineStringRenderer.html#Mapsui_Rendering_Skia_LineStringRenderer_Draw_
@@ -16182,15 +16375,15 @@ references:
   isSpec: "True"
   fullName: Mapsui.Rendering.Skia.MapRenderer.MapRenderer
   nameWithType: MapRenderer.MapRenderer
-- uid: Mapsui.Rendering.Skia.MapRenderer.Render(System.Object,Mapsui.Map,Mapsui.IViewport,IEnumerable{Mapsui.Layers.ILayer},IEnumerable{Mapsui.Widgets.IWidget},Mapsui.Styles.Color)
-  name: Render(Object, Map, IViewport, IEnumerable<ILayer>, IEnumerable<IWidget>, Color)
-  href: api/Mapsui.Rendering.Skia.MapRenderer.html#Mapsui_Rendering_Skia_MapRenderer_Render_System_Object_Mapsui_Map_Mapsui_IViewport_IEnumerable_Mapsui_Layers_ILayer__IEnumerable_Mapsui_Widgets_IWidget__Mapsui_Styles_Color_
-  commentId: M:Mapsui.Rendering.Skia.MapRenderer.Render(System.Object,Mapsui.Map,Mapsui.IViewport,IEnumerable{Mapsui.Layers.ILayer},IEnumerable{Mapsui.Widgets.IWidget},Mapsui.Styles.Color)
-  name.vb: Render(Object, Map, IViewport, IEnumerable(Of ILayer), IEnumerable(Of IWidget), Color)
-  fullName: Mapsui.Rendering.Skia.MapRenderer.Render(System.Object, Mapsui.Map, Mapsui.IViewport, IEnumerable<Mapsui.Layers.ILayer>, IEnumerable<Mapsui.Widgets.IWidget>, Mapsui.Styles.Color)
-  fullName.vb: Mapsui.Rendering.Skia.MapRenderer.Render(System.Object, Mapsui.Map, Mapsui.IViewport, IEnumerable(Of Mapsui.Layers.ILayer), IEnumerable(Of Mapsui.Widgets.IWidget), Mapsui.Styles.Color)
-  nameWithType: MapRenderer.Render(Object, Map, IViewport, IEnumerable<ILayer>, IEnumerable<IWidget>, Color)
-  nameWithType.vb: MapRenderer.Render(Object, Map, IViewport, IEnumerable(Of ILayer), IEnumerable(Of IWidget), Color)
+- uid: Mapsui.Rendering.Skia.MapRenderer.Render(System.Object,Mapsui.IReadOnlyViewport,IEnumerable{Mapsui.Layers.ILayer},IEnumerable{Mapsui.Widgets.IWidget},Mapsui.Styles.Color)
+  name: Render(Object, IReadOnlyViewport, IEnumerable<ILayer>, IEnumerable<IWidget>, Color)
+  href: api/Mapsui.Rendering.Skia.MapRenderer.html#Mapsui_Rendering_Skia_MapRenderer_Render_System_Object_Mapsui_IReadOnlyViewport_IEnumerable_Mapsui_Layers_ILayer__IEnumerable_Mapsui_Widgets_IWidget__Mapsui_Styles_Color_
+  commentId: M:Mapsui.Rendering.Skia.MapRenderer.Render(System.Object,Mapsui.IReadOnlyViewport,IEnumerable{Mapsui.Layers.ILayer},IEnumerable{Mapsui.Widgets.IWidget},Mapsui.Styles.Color)
+  name.vb: Render(Object, IReadOnlyViewport, IEnumerable(Of ILayer), IEnumerable(Of IWidget), Color)
+  fullName: Mapsui.Rendering.Skia.MapRenderer.Render(System.Object, Mapsui.IReadOnlyViewport, IEnumerable<Mapsui.Layers.ILayer>, IEnumerable<Mapsui.Widgets.IWidget>, Mapsui.Styles.Color)
+  fullName.vb: Mapsui.Rendering.Skia.MapRenderer.Render(System.Object, Mapsui.IReadOnlyViewport, IEnumerable(Of Mapsui.Layers.ILayer), IEnumerable(Of Mapsui.Widgets.IWidget), Mapsui.Styles.Color)
+  nameWithType: MapRenderer.Render(Object, IReadOnlyViewport, IEnumerable<ILayer>, IEnumerable<IWidget>, Color)
+  nameWithType.vb: MapRenderer.Render(Object, IReadOnlyViewport, IEnumerable(Of ILayer), IEnumerable(Of IWidget), Color)
 - uid: Mapsui.Rendering.Skia.MapRenderer.Render*
   name: Render
   href: api/Mapsui.Rendering.Skia.MapRenderer.html#Mapsui_Rendering_Skia_MapRenderer_Render_
@@ -16198,15 +16391,15 @@ references:
   isSpec: "True"
   fullName: Mapsui.Rendering.Skia.MapRenderer.Render
   nameWithType: MapRenderer.Render
-- uid: Mapsui.Rendering.Skia.MapRenderer.RenderToBitmapStream(Mapsui.IViewport,IEnumerable{Mapsui.Layers.ILayer},Mapsui.Styles.Color)
-  name: RenderToBitmapStream(IViewport, IEnumerable<ILayer>, Color)
-  href: api/Mapsui.Rendering.Skia.MapRenderer.html#Mapsui_Rendering_Skia_MapRenderer_RenderToBitmapStream_Mapsui_IViewport_IEnumerable_Mapsui_Layers_ILayer__Mapsui_Styles_Color_
-  commentId: M:Mapsui.Rendering.Skia.MapRenderer.RenderToBitmapStream(Mapsui.IViewport,IEnumerable{Mapsui.Layers.ILayer},Mapsui.Styles.Color)
-  name.vb: RenderToBitmapStream(IViewport, IEnumerable(Of ILayer), Color)
-  fullName: Mapsui.Rendering.Skia.MapRenderer.RenderToBitmapStream(Mapsui.IViewport, IEnumerable<Mapsui.Layers.ILayer>, Mapsui.Styles.Color)
-  fullName.vb: Mapsui.Rendering.Skia.MapRenderer.RenderToBitmapStream(Mapsui.IViewport, IEnumerable(Of Mapsui.Layers.ILayer), Mapsui.Styles.Color)
-  nameWithType: MapRenderer.RenderToBitmapStream(IViewport, IEnumerable<ILayer>, Color)
-  nameWithType.vb: MapRenderer.RenderToBitmapStream(IViewport, IEnumerable(Of ILayer), Color)
+- uid: Mapsui.Rendering.Skia.MapRenderer.RenderToBitmapStream(Mapsui.IReadOnlyViewport,IEnumerable{Mapsui.Layers.ILayer},Mapsui.Styles.Color)
+  name: RenderToBitmapStream(IReadOnlyViewport, IEnumerable<ILayer>, Color)
+  href: api/Mapsui.Rendering.Skia.MapRenderer.html#Mapsui_Rendering_Skia_MapRenderer_RenderToBitmapStream_Mapsui_IReadOnlyViewport_IEnumerable_Mapsui_Layers_ILayer__Mapsui_Styles_Color_
+  commentId: M:Mapsui.Rendering.Skia.MapRenderer.RenderToBitmapStream(Mapsui.IReadOnlyViewport,IEnumerable{Mapsui.Layers.ILayer},Mapsui.Styles.Color)
+  name.vb: RenderToBitmapStream(IReadOnlyViewport, IEnumerable(Of ILayer), Color)
+  fullName: Mapsui.Rendering.Skia.MapRenderer.RenderToBitmapStream(Mapsui.IReadOnlyViewport, IEnumerable<Mapsui.Layers.ILayer>, Mapsui.Styles.Color)
+  fullName.vb: Mapsui.Rendering.Skia.MapRenderer.RenderToBitmapStream(Mapsui.IReadOnlyViewport, IEnumerable(Of Mapsui.Layers.ILayer), Mapsui.Styles.Color)
+  nameWithType: MapRenderer.RenderToBitmapStream(IReadOnlyViewport, IEnumerable<ILayer>, Color)
+  nameWithType.vb: MapRenderer.RenderToBitmapStream(IReadOnlyViewport, IEnumerable(Of ILayer), Color)
 - uid: Mapsui.Rendering.Skia.MapRenderer.RenderToBitmapStream*
   name: RenderToBitmapStream
   href: api/Mapsui.Rendering.Skia.MapRenderer.html#Mapsui_Rendering_Skia_MapRenderer_RenderToBitmapStream_
@@ -16246,12 +16439,12 @@ references:
   commentId: T:Mapsui.Rendering.Skia.MultiLineStringRenderer
   fullName: Mapsui.Rendering.Skia.MultiLineStringRenderer
   nameWithType: MultiLineStringRenderer
-- uid: Mapsui.Rendering.Skia.MultiLineStringRenderer.Draw(SKCanvas,Mapsui.IViewport,Mapsui.Styles.IStyle,Mapsui.Providers.IFeature,Mapsui.Geometries.IGeometry,System.Single)
-  name: Draw(SKCanvas, IViewport, IStyle, IFeature, IGeometry, Single)
-  href: api/Mapsui.Rendering.Skia.MultiLineStringRenderer.html#Mapsui_Rendering_Skia_MultiLineStringRenderer_Draw_SKCanvas_Mapsui_IViewport_Mapsui_Styles_IStyle_Mapsui_Providers_IFeature_Mapsui_Geometries_IGeometry_System_Single_
-  commentId: M:Mapsui.Rendering.Skia.MultiLineStringRenderer.Draw(SKCanvas,Mapsui.IViewport,Mapsui.Styles.IStyle,Mapsui.Providers.IFeature,Mapsui.Geometries.IGeometry,System.Single)
-  fullName: Mapsui.Rendering.Skia.MultiLineStringRenderer.Draw(SKCanvas, Mapsui.IViewport, Mapsui.Styles.IStyle, Mapsui.Providers.IFeature, Mapsui.Geometries.IGeometry, System.Single)
-  nameWithType: MultiLineStringRenderer.Draw(SKCanvas, IViewport, IStyle, IFeature, IGeometry, Single)
+- uid: Mapsui.Rendering.Skia.MultiLineStringRenderer.Draw(SKCanvas,Mapsui.IReadOnlyViewport,Mapsui.Styles.IStyle,Mapsui.Providers.IFeature,Mapsui.Geometries.IGeometry,System.Single)
+  name: Draw(SKCanvas, IReadOnlyViewport, IStyle, IFeature, IGeometry, Single)
+  href: api/Mapsui.Rendering.Skia.MultiLineStringRenderer.html#Mapsui_Rendering_Skia_MultiLineStringRenderer_Draw_SKCanvas_Mapsui_IReadOnlyViewport_Mapsui_Styles_IStyle_Mapsui_Providers_IFeature_Mapsui_Geometries_IGeometry_System_Single_
+  commentId: M:Mapsui.Rendering.Skia.MultiLineStringRenderer.Draw(SKCanvas,Mapsui.IReadOnlyViewport,Mapsui.Styles.IStyle,Mapsui.Providers.IFeature,Mapsui.Geometries.IGeometry,System.Single)
+  fullName: Mapsui.Rendering.Skia.MultiLineStringRenderer.Draw(SKCanvas, Mapsui.IReadOnlyViewport, Mapsui.Styles.IStyle, Mapsui.Providers.IFeature, Mapsui.Geometries.IGeometry, System.Single)
+  nameWithType: MultiLineStringRenderer.Draw(SKCanvas, IReadOnlyViewport, IStyle, IFeature, IGeometry, Single)
 - uid: Mapsui.Rendering.Skia.MultiLineStringRenderer.Draw*
   name: Draw
   href: api/Mapsui.Rendering.Skia.MultiLineStringRenderer.html#Mapsui_Rendering_Skia_MultiLineStringRenderer_Draw_
@@ -16265,12 +16458,12 @@ references:
   commentId: T:Mapsui.Rendering.Skia.MultiPointRenderer
   fullName: Mapsui.Rendering.Skia.MultiPointRenderer
   nameWithType: MultiPointRenderer
-- uid: Mapsui.Rendering.Skia.MultiPointRenderer.Draw(SKCanvas,Mapsui.IViewport,Mapsui.Styles.IStyle,Mapsui.Providers.IFeature,Mapsui.Geometries.IGeometry,Mapsui.Rendering.Skia.SymbolCache,System.Single)
-  name: Draw(SKCanvas, IViewport, IStyle, IFeature, IGeometry, SymbolCache, Single)
-  href: api/Mapsui.Rendering.Skia.MultiPointRenderer.html#Mapsui_Rendering_Skia_MultiPointRenderer_Draw_SKCanvas_Mapsui_IViewport_Mapsui_Styles_IStyle_Mapsui_Providers_IFeature_Mapsui_Geometries_IGeometry_Mapsui_Rendering_Skia_SymbolCache_System_Single_
-  commentId: M:Mapsui.Rendering.Skia.MultiPointRenderer.Draw(SKCanvas,Mapsui.IViewport,Mapsui.Styles.IStyle,Mapsui.Providers.IFeature,Mapsui.Geometries.IGeometry,Mapsui.Rendering.Skia.SymbolCache,System.Single)
-  fullName: Mapsui.Rendering.Skia.MultiPointRenderer.Draw(SKCanvas, Mapsui.IViewport, Mapsui.Styles.IStyle, Mapsui.Providers.IFeature, Mapsui.Geometries.IGeometry, Mapsui.Rendering.Skia.SymbolCache, System.Single)
-  nameWithType: MultiPointRenderer.Draw(SKCanvas, IViewport, IStyle, IFeature, IGeometry, SymbolCache, Single)
+- uid: Mapsui.Rendering.Skia.MultiPointRenderer.Draw(SKCanvas,Mapsui.IReadOnlyViewport,Mapsui.Styles.IStyle,Mapsui.Providers.IFeature,Mapsui.Geometries.IGeometry,Mapsui.Rendering.Skia.SymbolCache,System.Single)
+  name: Draw(SKCanvas, IReadOnlyViewport, IStyle, IFeature, IGeometry, SymbolCache, Single)
+  href: api/Mapsui.Rendering.Skia.MultiPointRenderer.html#Mapsui_Rendering_Skia_MultiPointRenderer_Draw_SKCanvas_Mapsui_IReadOnlyViewport_Mapsui_Styles_IStyle_Mapsui_Providers_IFeature_Mapsui_Geometries_IGeometry_Mapsui_Rendering_Skia_SymbolCache_System_Single_
+  commentId: M:Mapsui.Rendering.Skia.MultiPointRenderer.Draw(SKCanvas,Mapsui.IReadOnlyViewport,Mapsui.Styles.IStyle,Mapsui.Providers.IFeature,Mapsui.Geometries.IGeometry,Mapsui.Rendering.Skia.SymbolCache,System.Single)
+  fullName: Mapsui.Rendering.Skia.MultiPointRenderer.Draw(SKCanvas, Mapsui.IReadOnlyViewport, Mapsui.Styles.IStyle, Mapsui.Providers.IFeature, Mapsui.Geometries.IGeometry, Mapsui.Rendering.Skia.SymbolCache, System.Single)
+  nameWithType: MultiPointRenderer.Draw(SKCanvas, IReadOnlyViewport, IStyle, IFeature, IGeometry, SymbolCache, Single)
 - uid: Mapsui.Rendering.Skia.MultiPointRenderer.Draw*
   name: Draw
   href: api/Mapsui.Rendering.Skia.MultiPointRenderer.html#Mapsui_Rendering_Skia_MultiPointRenderer_Draw_
@@ -16284,12 +16477,12 @@ references:
   commentId: T:Mapsui.Rendering.Skia.MultiPolygonRenderer
   fullName: Mapsui.Rendering.Skia.MultiPolygonRenderer
   nameWithType: MultiPolygonRenderer
-- uid: Mapsui.Rendering.Skia.MultiPolygonRenderer.Draw(SKCanvas,Mapsui.IViewport,Mapsui.Styles.IStyle,Mapsui.Providers.IFeature,Mapsui.Geometries.IGeometry,System.Single,Mapsui.Rendering.Skia.SymbolCache)
-  name: Draw(SKCanvas, IViewport, IStyle, IFeature, IGeometry, Single, SymbolCache)
-  href: api/Mapsui.Rendering.Skia.MultiPolygonRenderer.html#Mapsui_Rendering_Skia_MultiPolygonRenderer_Draw_SKCanvas_Mapsui_IViewport_Mapsui_Styles_IStyle_Mapsui_Providers_IFeature_Mapsui_Geometries_IGeometry_System_Single_Mapsui_Rendering_Skia_SymbolCache_
-  commentId: M:Mapsui.Rendering.Skia.MultiPolygonRenderer.Draw(SKCanvas,Mapsui.IViewport,Mapsui.Styles.IStyle,Mapsui.Providers.IFeature,Mapsui.Geometries.IGeometry,System.Single,Mapsui.Rendering.Skia.SymbolCache)
-  fullName: Mapsui.Rendering.Skia.MultiPolygonRenderer.Draw(SKCanvas, Mapsui.IViewport, Mapsui.Styles.IStyle, Mapsui.Providers.IFeature, Mapsui.Geometries.IGeometry, System.Single, Mapsui.Rendering.Skia.SymbolCache)
-  nameWithType: MultiPolygonRenderer.Draw(SKCanvas, IViewport, IStyle, IFeature, IGeometry, Single, SymbolCache)
+- uid: Mapsui.Rendering.Skia.MultiPolygonRenderer.Draw(SKCanvas,Mapsui.IReadOnlyViewport,Mapsui.Styles.IStyle,Mapsui.Providers.IFeature,Mapsui.Geometries.IGeometry,System.Single,Mapsui.Rendering.Skia.SymbolCache)
+  name: Draw(SKCanvas, IReadOnlyViewport, IStyle, IFeature, IGeometry, Single, SymbolCache)
+  href: api/Mapsui.Rendering.Skia.MultiPolygonRenderer.html#Mapsui_Rendering_Skia_MultiPolygonRenderer_Draw_SKCanvas_Mapsui_IReadOnlyViewport_Mapsui_Styles_IStyle_Mapsui_Providers_IFeature_Mapsui_Geometries_IGeometry_System_Single_Mapsui_Rendering_Skia_SymbolCache_
+  commentId: M:Mapsui.Rendering.Skia.MultiPolygonRenderer.Draw(SKCanvas,Mapsui.IReadOnlyViewport,Mapsui.Styles.IStyle,Mapsui.Providers.IFeature,Mapsui.Geometries.IGeometry,System.Single,Mapsui.Rendering.Skia.SymbolCache)
+  fullName: Mapsui.Rendering.Skia.MultiPolygonRenderer.Draw(SKCanvas, Mapsui.IReadOnlyViewport, Mapsui.Styles.IStyle, Mapsui.Providers.IFeature, Mapsui.Geometries.IGeometry, System.Single, Mapsui.Rendering.Skia.SymbolCache)
+  nameWithType: MultiPolygonRenderer.Draw(SKCanvas, IReadOnlyViewport, IStyle, IFeature, IGeometry, Single, SymbolCache)
 - uid: Mapsui.Rendering.Skia.MultiPolygonRenderer.Draw*
   name: Draw
   href: api/Mapsui.Rendering.Skia.MultiPolygonRenderer.html#Mapsui_Rendering_Skia_MultiPolygonRenderer_Draw_
@@ -16363,15 +16556,15 @@ references:
   commentId: T:Mapsui.Rendering.Skia.RasterRenderer
   fullName: Mapsui.Rendering.Skia.RasterRenderer
   nameWithType: RasterRenderer
-- uid: Mapsui.Rendering.Skia.RasterRenderer.Draw(SKCanvas,Mapsui.IViewport,Mapsui.Styles.IStyle,Mapsui.Providers.IFeature,System.Single,IDictionary{System.Object,Mapsui.Rendering.Skia.BitmapInfo},System.Int64)
-  name: Draw(SKCanvas, IViewport, IStyle, IFeature, Single, IDictionary<Object, BitmapInfo>, Int64)
-  href: api/Mapsui.Rendering.Skia.RasterRenderer.html#Mapsui_Rendering_Skia_RasterRenderer_Draw_SKCanvas_Mapsui_IViewport_Mapsui_Styles_IStyle_Mapsui_Providers_IFeature_System_Single_IDictionary_System_Object_Mapsui_Rendering_Skia_BitmapInfo__System_Int64_
-  commentId: M:Mapsui.Rendering.Skia.RasterRenderer.Draw(SKCanvas,Mapsui.IViewport,Mapsui.Styles.IStyle,Mapsui.Providers.IFeature,System.Single,IDictionary{System.Object,Mapsui.Rendering.Skia.BitmapInfo},System.Int64)
-  name.vb: Draw(SKCanvas, IViewport, IStyle, IFeature, Single, IDictionary(Of Object, BitmapInfo), Int64)
-  fullName: Mapsui.Rendering.Skia.RasterRenderer.Draw(SKCanvas, Mapsui.IViewport, Mapsui.Styles.IStyle, Mapsui.Providers.IFeature, System.Single, IDictionary<System.Object, Mapsui.Rendering.Skia.BitmapInfo>, System.Int64)
-  fullName.vb: Mapsui.Rendering.Skia.RasterRenderer.Draw(SKCanvas, Mapsui.IViewport, Mapsui.Styles.IStyle, Mapsui.Providers.IFeature, System.Single, IDictionary(Of System.Object, Mapsui.Rendering.Skia.BitmapInfo), System.Int64)
-  nameWithType: RasterRenderer.Draw(SKCanvas, IViewport, IStyle, IFeature, Single, IDictionary<Object, BitmapInfo>, Int64)
-  nameWithType.vb: RasterRenderer.Draw(SKCanvas, IViewport, IStyle, IFeature, Single, IDictionary(Of Object, BitmapInfo), Int64)
+- uid: Mapsui.Rendering.Skia.RasterRenderer.Draw(SKCanvas,Mapsui.IReadOnlyViewport,Mapsui.Styles.IStyle,Mapsui.Providers.IFeature,System.Single,IDictionary{System.Object,Mapsui.Rendering.Skia.BitmapInfo},System.Int64)
+  name: Draw(SKCanvas, IReadOnlyViewport, IStyle, IFeature, Single, IDictionary<Object, BitmapInfo>, Int64)
+  href: api/Mapsui.Rendering.Skia.RasterRenderer.html#Mapsui_Rendering_Skia_RasterRenderer_Draw_SKCanvas_Mapsui_IReadOnlyViewport_Mapsui_Styles_IStyle_Mapsui_Providers_IFeature_System_Single_IDictionary_System_Object_Mapsui_Rendering_Skia_BitmapInfo__System_Int64_
+  commentId: M:Mapsui.Rendering.Skia.RasterRenderer.Draw(SKCanvas,Mapsui.IReadOnlyViewport,Mapsui.Styles.IStyle,Mapsui.Providers.IFeature,System.Single,IDictionary{System.Object,Mapsui.Rendering.Skia.BitmapInfo},System.Int64)
+  name.vb: Draw(SKCanvas, IReadOnlyViewport, IStyle, IFeature, Single, IDictionary(Of Object, BitmapInfo), Int64)
+  fullName: Mapsui.Rendering.Skia.RasterRenderer.Draw(SKCanvas, Mapsui.IReadOnlyViewport, Mapsui.Styles.IStyle, Mapsui.Providers.IFeature, System.Single, IDictionary<System.Object, Mapsui.Rendering.Skia.BitmapInfo>, System.Int64)
+  fullName.vb: Mapsui.Rendering.Skia.RasterRenderer.Draw(SKCanvas, Mapsui.IReadOnlyViewport, Mapsui.Styles.IStyle, Mapsui.Providers.IFeature, System.Single, IDictionary(Of System.Object, Mapsui.Rendering.Skia.BitmapInfo), System.Int64)
+  nameWithType: RasterRenderer.Draw(SKCanvas, IReadOnlyViewport, IStyle, IFeature, Single, IDictionary<Object, BitmapInfo>, Int64)
+  nameWithType.vb: RasterRenderer.Draw(SKCanvas, IReadOnlyViewport, IStyle, IFeature, Single, IDictionary(Of Object, BitmapInfo), Int64)
 - uid: Mapsui.Rendering.Skia.RasterRenderer.Draw*
   name: Draw
   href: api/Mapsui.Rendering.Skia.RasterRenderer.html#Mapsui_Rendering_Skia_RasterRenderer_Draw_
@@ -16391,12 +16584,12 @@ references:
   commentId: T:Mapsui.Rendering.Skia.SkiaWidgets.HyperlinkWidgetRenderer
   fullName: Mapsui.Rendering.Skia.SkiaWidgets.HyperlinkWidgetRenderer
   nameWithType: HyperlinkWidgetRenderer
-- uid: Mapsui.Rendering.Skia.SkiaWidgets.HyperlinkWidgetRenderer.Draw(SKCanvas,Mapsui.Map,Mapsui.IReadOnlyViewport,Mapsui.Widgets.IWidget,System.Single)
-  name: Draw(SKCanvas, Map, IReadOnlyViewport, IWidget, Single)
-  href: api/Mapsui.Rendering.Skia.SkiaWidgets.HyperlinkWidgetRenderer.html#Mapsui_Rendering_Skia_SkiaWidgets_HyperlinkWidgetRenderer_Draw_SKCanvas_Mapsui_Map_Mapsui_IReadOnlyViewport_Mapsui_Widgets_IWidget_System_Single_
-  commentId: M:Mapsui.Rendering.Skia.SkiaWidgets.HyperlinkWidgetRenderer.Draw(SKCanvas,Mapsui.Map,Mapsui.IReadOnlyViewport,Mapsui.Widgets.IWidget,System.Single)
-  fullName: Mapsui.Rendering.Skia.SkiaWidgets.HyperlinkWidgetRenderer.Draw(SKCanvas, Mapsui.Map, Mapsui.IReadOnlyViewport, Mapsui.Widgets.IWidget, System.Single)
-  nameWithType: HyperlinkWidgetRenderer.Draw(SKCanvas, Map, IReadOnlyViewport, IWidget, Single)
+- uid: Mapsui.Rendering.Skia.SkiaWidgets.HyperlinkWidgetRenderer.Draw(SKCanvas,Mapsui.IReadOnlyViewport,Mapsui.Widgets.IWidget,System.Single)
+  name: Draw(SKCanvas, IReadOnlyViewport, IWidget, Single)
+  href: api/Mapsui.Rendering.Skia.SkiaWidgets.HyperlinkWidgetRenderer.html#Mapsui_Rendering_Skia_SkiaWidgets_HyperlinkWidgetRenderer_Draw_SKCanvas_Mapsui_IReadOnlyViewport_Mapsui_Widgets_IWidget_System_Single_
+  commentId: M:Mapsui.Rendering.Skia.SkiaWidgets.HyperlinkWidgetRenderer.Draw(SKCanvas,Mapsui.IReadOnlyViewport,Mapsui.Widgets.IWidget,System.Single)
+  fullName: Mapsui.Rendering.Skia.SkiaWidgets.HyperlinkWidgetRenderer.Draw(SKCanvas, Mapsui.IReadOnlyViewport, Mapsui.Widgets.IWidget, System.Single)
+  nameWithType: HyperlinkWidgetRenderer.Draw(SKCanvas, IReadOnlyViewport, IWidget, Single)
 - uid: Mapsui.Rendering.Skia.SkiaWidgets.HyperlinkWidgetRenderer.Draw*
   name: Draw
   href: api/Mapsui.Rendering.Skia.SkiaWidgets.HyperlinkWidgetRenderer.html#Mapsui_Rendering_Skia_SkiaWidgets_HyperlinkWidgetRenderer_Draw_
@@ -16410,12 +16603,12 @@ references:
   commentId: T:Mapsui.Rendering.Skia.SkiaWidgets.ISkiaWidgetRenderer
   fullName: Mapsui.Rendering.Skia.SkiaWidgets.ISkiaWidgetRenderer
   nameWithType: ISkiaWidgetRenderer
-- uid: Mapsui.Rendering.Skia.SkiaWidgets.ISkiaWidgetRenderer.Draw(SKCanvas,Mapsui.Map,Mapsui.IReadOnlyViewport,Mapsui.Widgets.IWidget,System.Single)
-  name: Draw(SKCanvas, Map, IReadOnlyViewport, IWidget, Single)
-  href: api/Mapsui.Rendering.Skia.SkiaWidgets.ISkiaWidgetRenderer.html#Mapsui_Rendering_Skia_SkiaWidgets_ISkiaWidgetRenderer_Draw_SKCanvas_Mapsui_Map_Mapsui_IReadOnlyViewport_Mapsui_Widgets_IWidget_System_Single_
-  commentId: M:Mapsui.Rendering.Skia.SkiaWidgets.ISkiaWidgetRenderer.Draw(SKCanvas,Mapsui.Map,Mapsui.IReadOnlyViewport,Mapsui.Widgets.IWidget,System.Single)
-  fullName: Mapsui.Rendering.Skia.SkiaWidgets.ISkiaWidgetRenderer.Draw(SKCanvas, Mapsui.Map, Mapsui.IReadOnlyViewport, Mapsui.Widgets.IWidget, System.Single)
-  nameWithType: ISkiaWidgetRenderer.Draw(SKCanvas, Map, IReadOnlyViewport, IWidget, Single)
+- uid: Mapsui.Rendering.Skia.SkiaWidgets.ISkiaWidgetRenderer.Draw(SKCanvas,Mapsui.IReadOnlyViewport,Mapsui.Widgets.IWidget,System.Single)
+  name: Draw(SKCanvas, IReadOnlyViewport, IWidget, Single)
+  href: api/Mapsui.Rendering.Skia.SkiaWidgets.ISkiaWidgetRenderer.html#Mapsui_Rendering_Skia_SkiaWidgets_ISkiaWidgetRenderer_Draw_SKCanvas_Mapsui_IReadOnlyViewport_Mapsui_Widgets_IWidget_System_Single_
+  commentId: M:Mapsui.Rendering.Skia.SkiaWidgets.ISkiaWidgetRenderer.Draw(SKCanvas,Mapsui.IReadOnlyViewport,Mapsui.Widgets.IWidget,System.Single)
+  fullName: Mapsui.Rendering.Skia.SkiaWidgets.ISkiaWidgetRenderer.Draw(SKCanvas, Mapsui.IReadOnlyViewport, Mapsui.Widgets.IWidget, System.Single)
+  nameWithType: ISkiaWidgetRenderer.Draw(SKCanvas, IReadOnlyViewport, IWidget, Single)
 - uid: Mapsui.Rendering.Skia.SkiaWidgets.ISkiaWidgetRenderer.Draw*
   name: Draw
   href: api/Mapsui.Rendering.Skia.SkiaWidgets.ISkiaWidgetRenderer.html#Mapsui_Rendering_Skia_SkiaWidgets_ISkiaWidgetRenderer_Draw_
@@ -16429,12 +16622,12 @@ references:
   commentId: T:Mapsui.Rendering.Skia.SkiaWidgets.ScaleBarWidgetRenderer
   fullName: Mapsui.Rendering.Skia.SkiaWidgets.ScaleBarWidgetRenderer
   nameWithType: ScaleBarWidgetRenderer
-- uid: Mapsui.Rendering.Skia.SkiaWidgets.ScaleBarWidgetRenderer.Draw(SKCanvas,Mapsui.Map,Mapsui.IReadOnlyViewport,Mapsui.Widgets.IWidget,System.Single)
-  name: Draw(SKCanvas, Map, IReadOnlyViewport, IWidget, Single)
-  href: api/Mapsui.Rendering.Skia.SkiaWidgets.ScaleBarWidgetRenderer.html#Mapsui_Rendering_Skia_SkiaWidgets_ScaleBarWidgetRenderer_Draw_SKCanvas_Mapsui_Map_Mapsui_IReadOnlyViewport_Mapsui_Widgets_IWidget_System_Single_
-  commentId: M:Mapsui.Rendering.Skia.SkiaWidgets.ScaleBarWidgetRenderer.Draw(SKCanvas,Mapsui.Map,Mapsui.IReadOnlyViewport,Mapsui.Widgets.IWidget,System.Single)
-  fullName: Mapsui.Rendering.Skia.SkiaWidgets.ScaleBarWidgetRenderer.Draw(SKCanvas, Mapsui.Map, Mapsui.IReadOnlyViewport, Mapsui.Widgets.IWidget, System.Single)
-  nameWithType: ScaleBarWidgetRenderer.Draw(SKCanvas, Map, IReadOnlyViewport, IWidget, Single)
+- uid: Mapsui.Rendering.Skia.SkiaWidgets.ScaleBarWidgetRenderer.Draw(SKCanvas,Mapsui.IReadOnlyViewport,Mapsui.Widgets.IWidget,System.Single)
+  name: Draw(SKCanvas, IReadOnlyViewport, IWidget, Single)
+  href: api/Mapsui.Rendering.Skia.SkiaWidgets.ScaleBarWidgetRenderer.html#Mapsui_Rendering_Skia_SkiaWidgets_ScaleBarWidgetRenderer_Draw_SKCanvas_Mapsui_IReadOnlyViewport_Mapsui_Widgets_IWidget_System_Single_
+  commentId: M:Mapsui.Rendering.Skia.SkiaWidgets.ScaleBarWidgetRenderer.Draw(SKCanvas,Mapsui.IReadOnlyViewport,Mapsui.Widgets.IWidget,System.Single)
+  fullName: Mapsui.Rendering.Skia.SkiaWidgets.ScaleBarWidgetRenderer.Draw(SKCanvas, Mapsui.IReadOnlyViewport, Mapsui.Widgets.IWidget, System.Single)
+  nameWithType: ScaleBarWidgetRenderer.Draw(SKCanvas, IReadOnlyViewport, IWidget, Single)
 - uid: Mapsui.Rendering.Skia.SkiaWidgets.ScaleBarWidgetRenderer.Draw*
   name: Draw
   href: api/Mapsui.Rendering.Skia.SkiaWidgets.ScaleBarWidgetRenderer.html#Mapsui_Rendering_Skia_SkiaWidgets_ScaleBarWidgetRenderer_Draw_
@@ -16448,15 +16641,15 @@ references:
   commentId: T:Mapsui.Rendering.Skia.SkiaWidgets.WidgetRenderer
   fullName: Mapsui.Rendering.Skia.SkiaWidgets.WidgetRenderer
   nameWithType: WidgetRenderer
-- uid: Mapsui.Rendering.Skia.SkiaWidgets.WidgetRenderer.Render(System.Object,Mapsui.Map,Mapsui.IReadOnlyViewport,IEnumerable{Mapsui.Widgets.IWidget},IDictionary{Type,Mapsui.Widgets.IWidgetRenderer},System.Single)
-  name: Render(Object, Map, IReadOnlyViewport, IEnumerable<IWidget>, IDictionary<Type, IWidgetRenderer>, Single)
-  href: api/Mapsui.Rendering.Skia.SkiaWidgets.WidgetRenderer.html#Mapsui_Rendering_Skia_SkiaWidgets_WidgetRenderer_Render_System_Object_Mapsui_Map_Mapsui_IReadOnlyViewport_IEnumerable_Mapsui_Widgets_IWidget__IDictionary_Type_Mapsui_Widgets_IWidgetRenderer__System_Single_
-  commentId: M:Mapsui.Rendering.Skia.SkiaWidgets.WidgetRenderer.Render(System.Object,Mapsui.Map,Mapsui.IReadOnlyViewport,IEnumerable{Mapsui.Widgets.IWidget},IDictionary{Type,Mapsui.Widgets.IWidgetRenderer},System.Single)
-  name.vb: Render(Object, Map, IReadOnlyViewport, IEnumerable(Of IWidget), IDictionary(Of Type, IWidgetRenderer), Single)
-  fullName: Mapsui.Rendering.Skia.SkiaWidgets.WidgetRenderer.Render(System.Object, Mapsui.Map, Mapsui.IReadOnlyViewport, IEnumerable<Mapsui.Widgets.IWidget>, IDictionary<Type, Mapsui.Widgets.IWidgetRenderer>, System.Single)
-  fullName.vb: Mapsui.Rendering.Skia.SkiaWidgets.WidgetRenderer.Render(System.Object, Mapsui.Map, Mapsui.IReadOnlyViewport, IEnumerable(Of Mapsui.Widgets.IWidget), IDictionary(Of Type, Mapsui.Widgets.IWidgetRenderer), System.Single)
-  nameWithType: WidgetRenderer.Render(Object, Map, IReadOnlyViewport, IEnumerable<IWidget>, IDictionary<Type, IWidgetRenderer>, Single)
-  nameWithType.vb: WidgetRenderer.Render(Object, Map, IReadOnlyViewport, IEnumerable(Of IWidget), IDictionary(Of Type, IWidgetRenderer), Single)
+- uid: Mapsui.Rendering.Skia.SkiaWidgets.WidgetRenderer.Render(System.Object,Mapsui.IReadOnlyViewport,IEnumerable{Mapsui.Widgets.IWidget},IDictionary{Type,Mapsui.Widgets.IWidgetRenderer},System.Single)
+  name: Render(Object, IReadOnlyViewport, IEnumerable<IWidget>, IDictionary<Type, IWidgetRenderer>, Single)
+  href: api/Mapsui.Rendering.Skia.SkiaWidgets.WidgetRenderer.html#Mapsui_Rendering_Skia_SkiaWidgets_WidgetRenderer_Render_System_Object_Mapsui_IReadOnlyViewport_IEnumerable_Mapsui_Widgets_IWidget__IDictionary_Type_Mapsui_Widgets_IWidgetRenderer__System_Single_
+  commentId: M:Mapsui.Rendering.Skia.SkiaWidgets.WidgetRenderer.Render(System.Object,Mapsui.IReadOnlyViewport,IEnumerable{Mapsui.Widgets.IWidget},IDictionary{Type,Mapsui.Widgets.IWidgetRenderer},System.Single)
+  name.vb: Render(Object, IReadOnlyViewport, IEnumerable(Of IWidget), IDictionary(Of Type, IWidgetRenderer), Single)
+  fullName: Mapsui.Rendering.Skia.SkiaWidgets.WidgetRenderer.Render(System.Object, Mapsui.IReadOnlyViewport, IEnumerable<Mapsui.Widgets.IWidget>, IDictionary<Type, Mapsui.Widgets.IWidgetRenderer>, System.Single)
+  fullName.vb: Mapsui.Rendering.Skia.SkiaWidgets.WidgetRenderer.Render(System.Object, Mapsui.IReadOnlyViewport, IEnumerable(Of Mapsui.Widgets.IWidget), IDictionary(Of Type, Mapsui.Widgets.IWidgetRenderer), System.Single)
+  nameWithType: WidgetRenderer.Render(Object, IReadOnlyViewport, IEnumerable<IWidget>, IDictionary<Type, IWidgetRenderer>, Single)
+  nameWithType.vb: WidgetRenderer.Render(Object, IReadOnlyViewport, IEnumerable(Of IWidget), IDictionary(Of Type, IWidgetRenderer), Single)
 - uid: Mapsui.Rendering.Skia.SkiaWidgets.WidgetRenderer.Render*
   name: Render
   href: api/Mapsui.Rendering.Skia.SkiaWidgets.WidgetRenderer.html#Mapsui_Rendering_Skia_SkiaWidgets_WidgetRenderer_Render_
@@ -16470,12 +16663,12 @@ references:
   commentId: T:Mapsui.Rendering.Skia.SkiaWidgets.ZoomInOutWidgetRenderer
   fullName: Mapsui.Rendering.Skia.SkiaWidgets.ZoomInOutWidgetRenderer
   nameWithType: ZoomInOutWidgetRenderer
-- uid: Mapsui.Rendering.Skia.SkiaWidgets.ZoomInOutWidgetRenderer.Draw(SKCanvas,Mapsui.Map,Mapsui.IReadOnlyViewport,Mapsui.Widgets.IWidget,System.Single)
-  name: Draw(SKCanvas, Map, IReadOnlyViewport, IWidget, Single)
-  href: api/Mapsui.Rendering.Skia.SkiaWidgets.ZoomInOutWidgetRenderer.html#Mapsui_Rendering_Skia_SkiaWidgets_ZoomInOutWidgetRenderer_Draw_SKCanvas_Mapsui_Map_Mapsui_IReadOnlyViewport_Mapsui_Widgets_IWidget_System_Single_
-  commentId: M:Mapsui.Rendering.Skia.SkiaWidgets.ZoomInOutWidgetRenderer.Draw(SKCanvas,Mapsui.Map,Mapsui.IReadOnlyViewport,Mapsui.Widgets.IWidget,System.Single)
-  fullName: Mapsui.Rendering.Skia.SkiaWidgets.ZoomInOutWidgetRenderer.Draw(SKCanvas, Mapsui.Map, Mapsui.IReadOnlyViewport, Mapsui.Widgets.IWidget, System.Single)
-  nameWithType: ZoomInOutWidgetRenderer.Draw(SKCanvas, Map, IReadOnlyViewport, IWidget, Single)
+- uid: Mapsui.Rendering.Skia.SkiaWidgets.ZoomInOutWidgetRenderer.Draw(SKCanvas,Mapsui.IReadOnlyViewport,Mapsui.Widgets.IWidget,System.Single)
+  name: Draw(SKCanvas, IReadOnlyViewport, IWidget, Single)
+  href: api/Mapsui.Rendering.Skia.SkiaWidgets.ZoomInOutWidgetRenderer.html#Mapsui_Rendering_Skia_SkiaWidgets_ZoomInOutWidgetRenderer_Draw_SKCanvas_Mapsui_IReadOnlyViewport_Mapsui_Widgets_IWidget_System_Single_
+  commentId: M:Mapsui.Rendering.Skia.SkiaWidgets.ZoomInOutWidgetRenderer.Draw(SKCanvas,Mapsui.IReadOnlyViewport,Mapsui.Widgets.IWidget,System.Single)
+  fullName: Mapsui.Rendering.Skia.SkiaWidgets.ZoomInOutWidgetRenderer.Draw(SKCanvas, Mapsui.IReadOnlyViewport, Mapsui.Widgets.IWidget, System.Single)
+  nameWithType: ZoomInOutWidgetRenderer.Draw(SKCanvas, IReadOnlyViewport, IWidget, Single)
 - uid: Mapsui.Rendering.Skia.SkiaWidgets.ZoomInOutWidgetRenderer.Draw*
   name: Draw
   href: api/Mapsui.Rendering.Skia.SkiaWidgets.ZoomInOutWidgetRenderer.html#Mapsui_Rendering_Skia_SkiaWidgets_ZoomInOutWidgetRenderer_Draw_
@@ -16540,15 +16733,15 @@ references:
   commentId: T:Mapsui.Rendering.VisibleFeatureIterator
   fullName: Mapsui.Rendering.VisibleFeatureIterator
   nameWithType: VisibleFeatureIterator
-- uid: Mapsui.Rendering.VisibleFeatureIterator.IterateLayers(Mapsui.IViewport,IEnumerable{Mapsui.Layers.ILayer},Action{Mapsui.IViewport,Mapsui.Styles.IStyle,Mapsui.Providers.IFeature,System.Single})
-  name: IterateLayers(IViewport, IEnumerable<ILayer>, Action<IViewport, IStyle, IFeature, Single>)
-  href: api/Mapsui.Rendering.VisibleFeatureIterator.html#Mapsui_Rendering_VisibleFeatureIterator_IterateLayers_Mapsui_IViewport_IEnumerable_Mapsui_Layers_ILayer__Action_Mapsui_IViewport_Mapsui_Styles_IStyle_Mapsui_Providers_IFeature_System_Single__
-  commentId: M:Mapsui.Rendering.VisibleFeatureIterator.IterateLayers(Mapsui.IViewport,IEnumerable{Mapsui.Layers.ILayer},Action{Mapsui.IViewport,Mapsui.Styles.IStyle,Mapsui.Providers.IFeature,System.Single})
-  name.vb: IterateLayers(IViewport, IEnumerable(Of ILayer), Action(Of IViewport, IStyle, IFeature, Single))
-  fullName: Mapsui.Rendering.VisibleFeatureIterator.IterateLayers(Mapsui.IViewport, IEnumerable<Mapsui.Layers.ILayer>, Action<Mapsui.IViewport, Mapsui.Styles.IStyle, Mapsui.Providers.IFeature, System.Single>)
-  fullName.vb: Mapsui.Rendering.VisibleFeatureIterator.IterateLayers(Mapsui.IViewport, IEnumerable(Of Mapsui.Layers.ILayer), Action(Of Mapsui.IViewport, Mapsui.Styles.IStyle, Mapsui.Providers.IFeature, System.Single))
-  nameWithType: VisibleFeatureIterator.IterateLayers(IViewport, IEnumerable<ILayer>, Action<IViewport, IStyle, IFeature, Single>)
-  nameWithType.vb: VisibleFeatureIterator.IterateLayers(IViewport, IEnumerable(Of ILayer), Action(Of IViewport, IStyle, IFeature, Single))
+- uid: Mapsui.Rendering.VisibleFeatureIterator.IterateLayers(Mapsui.IReadOnlyViewport,IEnumerable{Mapsui.Layers.ILayer},Action{Mapsui.IReadOnlyViewport,Mapsui.Styles.IStyle,Mapsui.Providers.IFeature,System.Single})
+  name: IterateLayers(IReadOnlyViewport, IEnumerable<ILayer>, Action<IReadOnlyViewport, IStyle, IFeature, Single>)
+  href: api/Mapsui.Rendering.VisibleFeatureIterator.html#Mapsui_Rendering_VisibleFeatureIterator_IterateLayers_Mapsui_IReadOnlyViewport_IEnumerable_Mapsui_Layers_ILayer__Action_Mapsui_IReadOnlyViewport_Mapsui_Styles_IStyle_Mapsui_Providers_IFeature_System_Single__
+  commentId: M:Mapsui.Rendering.VisibleFeatureIterator.IterateLayers(Mapsui.IReadOnlyViewport,IEnumerable{Mapsui.Layers.ILayer},Action{Mapsui.IReadOnlyViewport,Mapsui.Styles.IStyle,Mapsui.Providers.IFeature,System.Single})
+  name.vb: IterateLayers(IReadOnlyViewport, IEnumerable(Of ILayer), Action(Of IReadOnlyViewport, IStyle, IFeature, Single))
+  fullName: Mapsui.Rendering.VisibleFeatureIterator.IterateLayers(Mapsui.IReadOnlyViewport, IEnumerable<Mapsui.Layers.ILayer>, Action<Mapsui.IReadOnlyViewport, Mapsui.Styles.IStyle, Mapsui.Providers.IFeature, System.Single>)
+  fullName.vb: Mapsui.Rendering.VisibleFeatureIterator.IterateLayers(Mapsui.IReadOnlyViewport, IEnumerable(Of Mapsui.Layers.ILayer), Action(Of Mapsui.IReadOnlyViewport, Mapsui.Styles.IStyle, Mapsui.Providers.IFeature, System.Single))
+  nameWithType: VisibleFeatureIterator.IterateLayers(IReadOnlyViewport, IEnumerable<ILayer>, Action<IReadOnlyViewport, IStyle, IFeature, Single>)
+  nameWithType.vb: VisibleFeatureIterator.IterateLayers(IReadOnlyViewport, IEnumerable(Of ILayer), Action(Of IReadOnlyViewport, IStyle, IFeature, Single))
 - uid: Mapsui.Rendering.VisibleFeatureIterator.IterateLayers*
   name: IterateLayers
   href: api/Mapsui.Rendering.VisibleFeatureIterator.html#Mapsui_Rendering_VisibleFeatureIterator_IterateLayers_
@@ -16638,18 +16831,18 @@ references:
   isSpec: "True"
   fullName: Mapsui.Rendering.Xaml.GeometryRenderer.CounterScaleLineWidth
   nameWithType: GeometryRenderer.CounterScaleLineWidth
-- uid: Mapsui.Rendering.Xaml.GeometryRenderer.CreateTransformMatrix(Mapsui.IViewport)
-  name: CreateTransformMatrix(IViewport)
-  href: api/Mapsui.Rendering.Xaml.GeometryRenderer.html#Mapsui_Rendering_Xaml_GeometryRenderer_CreateTransformMatrix_Mapsui_IViewport_
-  commentId: M:Mapsui.Rendering.Xaml.GeometryRenderer.CreateTransformMatrix(Mapsui.IViewport)
-  fullName: Mapsui.Rendering.Xaml.GeometryRenderer.CreateTransformMatrix(Mapsui.IViewport)
-  nameWithType: GeometryRenderer.CreateTransformMatrix(IViewport)
-- uid: Mapsui.Rendering.Xaml.GeometryRenderer.CreateTransformMatrix(Mapsui.IViewport,Mapsui.Geometries.Point)
-  name: CreateTransformMatrix(IViewport, Point)
-  href: api/Mapsui.Rendering.Xaml.GeometryRenderer.html#Mapsui_Rendering_Xaml_GeometryRenderer_CreateTransformMatrix_Mapsui_IViewport_Mapsui_Geometries_Point_
-  commentId: M:Mapsui.Rendering.Xaml.GeometryRenderer.CreateTransformMatrix(Mapsui.IViewport,Mapsui.Geometries.Point)
-  fullName: Mapsui.Rendering.Xaml.GeometryRenderer.CreateTransformMatrix(Mapsui.IViewport, Mapsui.Geometries.Point)
-  nameWithType: GeometryRenderer.CreateTransformMatrix(IViewport, Point)
+- uid: Mapsui.Rendering.Xaml.GeometryRenderer.CreateTransformMatrix(Mapsui.IReadOnlyViewport)
+  name: CreateTransformMatrix(IReadOnlyViewport)
+  href: api/Mapsui.Rendering.Xaml.GeometryRenderer.html#Mapsui_Rendering_Xaml_GeometryRenderer_CreateTransformMatrix_Mapsui_IReadOnlyViewport_
+  commentId: M:Mapsui.Rendering.Xaml.GeometryRenderer.CreateTransformMatrix(Mapsui.IReadOnlyViewport)
+  fullName: Mapsui.Rendering.Xaml.GeometryRenderer.CreateTransformMatrix(Mapsui.IReadOnlyViewport)
+  nameWithType: GeometryRenderer.CreateTransformMatrix(IReadOnlyViewport)
+- uid: Mapsui.Rendering.Xaml.GeometryRenderer.CreateTransformMatrix(Mapsui.IReadOnlyViewport,Mapsui.Geometries.Point)
+  name: CreateTransformMatrix(IReadOnlyViewport, Point)
+  href: api/Mapsui.Rendering.Xaml.GeometryRenderer.html#Mapsui_Rendering_Xaml_GeometryRenderer_CreateTransformMatrix_Mapsui_IReadOnlyViewport_Mapsui_Geometries_Point_
+  commentId: M:Mapsui.Rendering.Xaml.GeometryRenderer.CreateTransformMatrix(Mapsui.IReadOnlyViewport,Mapsui.Geometries.Point)
+  fullName: Mapsui.Rendering.Xaml.GeometryRenderer.CreateTransformMatrix(Mapsui.IReadOnlyViewport, Mapsui.Geometries.Point)
+  nameWithType: GeometryRenderer.CreateTransformMatrix(IReadOnlyViewport, Point)
 - uid: Mapsui.Rendering.Xaml.GeometryRenderer.CreateTransformMatrix*
   name: CreateTransformMatrix
   href: api/Mapsui.Rendering.Xaml.GeometryRenderer.html#Mapsui_Rendering_Xaml_GeometryRenderer_CreateTransformMatrix_
@@ -16657,12 +16850,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.Rendering.Xaml.GeometryRenderer.CreateTransformMatrix
   nameWithType: GeometryRenderer.CreateTransformMatrix
-- uid: Mapsui.Rendering.Xaml.GeometryRenderer.PositionGeometry(System.Windows.Shapes.Shape,Mapsui.IViewport)
-  name: PositionGeometry(Windows.Shapes.Shape, IViewport)
-  href: api/Mapsui.Rendering.Xaml.GeometryRenderer.html#Mapsui_Rendering_Xaml_GeometryRenderer_PositionGeometry_System_Windows_Shapes_Shape_Mapsui_IViewport_
-  commentId: M:Mapsui.Rendering.Xaml.GeometryRenderer.PositionGeometry(System.Windows.Shapes.Shape,Mapsui.IViewport)
-  fullName: Mapsui.Rendering.Xaml.GeometryRenderer.PositionGeometry(System.Windows.Shapes.Shape, Mapsui.IViewport)
-  nameWithType: GeometryRenderer.PositionGeometry(Windows.Shapes.Shape, IViewport)
+- uid: Mapsui.Rendering.Xaml.GeometryRenderer.PositionGeometry(System.Windows.Shapes.Shape,Mapsui.IReadOnlyViewport)
+  name: PositionGeometry(Windows.Shapes.Shape, IReadOnlyViewport)
+  href: api/Mapsui.Rendering.Xaml.GeometryRenderer.html#Mapsui_Rendering_Xaml_GeometryRenderer_PositionGeometry_System_Windows_Shapes_Shape_Mapsui_IReadOnlyViewport_
+  commentId: M:Mapsui.Rendering.Xaml.GeometryRenderer.PositionGeometry(System.Windows.Shapes.Shape,Mapsui.IReadOnlyViewport)
+  fullName: Mapsui.Rendering.Xaml.GeometryRenderer.PositionGeometry(System.Windows.Shapes.Shape, Mapsui.IReadOnlyViewport)
+  nameWithType: GeometryRenderer.PositionGeometry(Windows.Shapes.Shape, IReadOnlyViewport)
 - uid: Mapsui.Rendering.Xaml.GeometryRenderer.PositionGeometry*
   name: PositionGeometry
   href: api/Mapsui.Rendering.Xaml.GeometryRenderer.html#Mapsui_Rendering_Xaml_GeometryRenderer_PositionGeometry_
@@ -16670,12 +16863,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.Rendering.Xaml.GeometryRenderer.PositionGeometry
   nameWithType: GeometryRenderer.PositionGeometry
-- uid: Mapsui.Rendering.Xaml.GeometryRenderer.PositionRaster(UIElement,Mapsui.Geometries.BoundingBox,Mapsui.IViewport)
-  name: PositionRaster(UIElement, BoundingBox, IViewport)
-  href: api/Mapsui.Rendering.Xaml.GeometryRenderer.html#Mapsui_Rendering_Xaml_GeometryRenderer_PositionRaster_UIElement_Mapsui_Geometries_BoundingBox_Mapsui_IViewport_
-  commentId: M:Mapsui.Rendering.Xaml.GeometryRenderer.PositionRaster(UIElement,Mapsui.Geometries.BoundingBox,Mapsui.IViewport)
-  fullName: Mapsui.Rendering.Xaml.GeometryRenderer.PositionRaster(UIElement, Mapsui.Geometries.BoundingBox, Mapsui.IViewport)
-  nameWithType: GeometryRenderer.PositionRaster(UIElement, BoundingBox, IViewport)
+- uid: Mapsui.Rendering.Xaml.GeometryRenderer.PositionRaster(UIElement,Mapsui.Geometries.BoundingBox,Mapsui.IReadOnlyViewport)
+  name: PositionRaster(UIElement, BoundingBox, IReadOnlyViewport)
+  href: api/Mapsui.Rendering.Xaml.GeometryRenderer.html#Mapsui_Rendering_Xaml_GeometryRenderer_PositionRaster_UIElement_Mapsui_Geometries_BoundingBox_Mapsui_IReadOnlyViewport_
+  commentId: M:Mapsui.Rendering.Xaml.GeometryRenderer.PositionRaster(UIElement,Mapsui.Geometries.BoundingBox,Mapsui.IReadOnlyViewport)
+  fullName: Mapsui.Rendering.Xaml.GeometryRenderer.PositionRaster(UIElement, Mapsui.Geometries.BoundingBox, Mapsui.IReadOnlyViewport)
+  nameWithType: GeometryRenderer.PositionRaster(UIElement, BoundingBox, IReadOnlyViewport)
 - uid: Mapsui.Rendering.Xaml.GeometryRenderer.PositionRaster*
   name: PositionRaster
   href: api/Mapsui.Rendering.Xaml.GeometryRenderer.html#Mapsui_Rendering_Xaml_GeometryRenderer_PositionRaster_
@@ -16683,12 +16876,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.Rendering.Xaml.GeometryRenderer.PositionRaster
   nameWithType: GeometryRenderer.PositionRaster
-- uid: Mapsui.Rendering.Xaml.GeometryRenderer.RenderMultiPoint(Mapsui.Geometries.MultiPoint,Mapsui.Styles.IStyle,Mapsui.IViewport,Mapsui.Rendering.Xaml.SymbolCache)
-  name: RenderMultiPoint(MultiPoint, IStyle, IViewport, SymbolCache)
-  href: api/Mapsui.Rendering.Xaml.GeometryRenderer.html#Mapsui_Rendering_Xaml_GeometryRenderer_RenderMultiPoint_Mapsui_Geometries_MultiPoint_Mapsui_Styles_IStyle_Mapsui_IViewport_Mapsui_Rendering_Xaml_SymbolCache_
-  commentId: M:Mapsui.Rendering.Xaml.GeometryRenderer.RenderMultiPoint(Mapsui.Geometries.MultiPoint,Mapsui.Styles.IStyle,Mapsui.IViewport,Mapsui.Rendering.Xaml.SymbolCache)
-  fullName: Mapsui.Rendering.Xaml.GeometryRenderer.RenderMultiPoint(Mapsui.Geometries.MultiPoint, Mapsui.Styles.IStyle, Mapsui.IViewport, Mapsui.Rendering.Xaml.SymbolCache)
-  nameWithType: GeometryRenderer.RenderMultiPoint(MultiPoint, IStyle, IViewport, SymbolCache)
+- uid: Mapsui.Rendering.Xaml.GeometryRenderer.RenderMultiPoint(Mapsui.Geometries.MultiPoint,Mapsui.Styles.IStyle,Mapsui.IReadOnlyViewport,Mapsui.Rendering.Xaml.SymbolCache)
+  name: RenderMultiPoint(MultiPoint, IStyle, IReadOnlyViewport, SymbolCache)
+  href: api/Mapsui.Rendering.Xaml.GeometryRenderer.html#Mapsui_Rendering_Xaml_GeometryRenderer_RenderMultiPoint_Mapsui_Geometries_MultiPoint_Mapsui_Styles_IStyle_Mapsui_IReadOnlyViewport_Mapsui_Rendering_Xaml_SymbolCache_
+  commentId: M:Mapsui.Rendering.Xaml.GeometryRenderer.RenderMultiPoint(Mapsui.Geometries.MultiPoint,Mapsui.Styles.IStyle,Mapsui.IReadOnlyViewport,Mapsui.Rendering.Xaml.SymbolCache)
+  fullName: Mapsui.Rendering.Xaml.GeometryRenderer.RenderMultiPoint(Mapsui.Geometries.MultiPoint, Mapsui.Styles.IStyle, Mapsui.IReadOnlyViewport, Mapsui.Rendering.Xaml.SymbolCache)
+  nameWithType: GeometryRenderer.RenderMultiPoint(MultiPoint, IStyle, IReadOnlyViewport, SymbolCache)
 - uid: Mapsui.Rendering.Xaml.GeometryRenderer.RenderMultiPoint*
   name: RenderMultiPoint
   href: api/Mapsui.Rendering.Xaml.GeometryRenderer.html#Mapsui_Rendering_Xaml_GeometryRenderer_RenderMultiPoint_
@@ -16696,12 +16889,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.Rendering.Xaml.GeometryRenderer.RenderMultiPoint
   nameWithType: GeometryRenderer.RenderMultiPoint
-- uid: Mapsui.Rendering.Xaml.GeometryRenderer.RenderRaster(Mapsui.Geometries.IRaster,Mapsui.Styles.IStyle,Mapsui.IViewport)
-  name: RenderRaster(IRaster, IStyle, IViewport)
-  href: api/Mapsui.Rendering.Xaml.GeometryRenderer.html#Mapsui_Rendering_Xaml_GeometryRenderer_RenderRaster_Mapsui_Geometries_IRaster_Mapsui_Styles_IStyle_Mapsui_IViewport_
-  commentId: M:Mapsui.Rendering.Xaml.GeometryRenderer.RenderRaster(Mapsui.Geometries.IRaster,Mapsui.Styles.IStyle,Mapsui.IViewport)
-  fullName: Mapsui.Rendering.Xaml.GeometryRenderer.RenderRaster(Mapsui.Geometries.IRaster, Mapsui.Styles.IStyle, Mapsui.IViewport)
-  nameWithType: GeometryRenderer.RenderRaster(IRaster, IStyle, IViewport)
+- uid: Mapsui.Rendering.Xaml.GeometryRenderer.RenderRaster(Mapsui.Geometries.IRaster,Mapsui.Styles.IStyle,Mapsui.IReadOnlyViewport)
+  name: RenderRaster(IRaster, IStyle, IReadOnlyViewport)
+  href: api/Mapsui.Rendering.Xaml.GeometryRenderer.html#Mapsui_Rendering_Xaml_GeometryRenderer_RenderRaster_Mapsui_Geometries_IRaster_Mapsui_Styles_IStyle_Mapsui_IReadOnlyViewport_
+  commentId: M:Mapsui.Rendering.Xaml.GeometryRenderer.RenderRaster(Mapsui.Geometries.IRaster,Mapsui.Styles.IStyle,Mapsui.IReadOnlyViewport)
+  fullName: Mapsui.Rendering.Xaml.GeometryRenderer.RenderRaster(Mapsui.Geometries.IRaster, Mapsui.Styles.IStyle, Mapsui.IReadOnlyViewport)
+  nameWithType: GeometryRenderer.RenderRaster(IRaster, IStyle, IReadOnlyViewport)
 - uid: Mapsui.Rendering.Xaml.GeometryRenderer.RenderRaster*
   name: RenderRaster
   href: api/Mapsui.Rendering.Xaml.GeometryRenderer.html#Mapsui_Rendering_Xaml_GeometryRenderer_RenderRaster_
@@ -16760,12 +16953,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.Rendering.Xaml.LineStringRenderer.CreateLineStringPath
   nameWithType: LineStringRenderer.CreateLineStringPath
-- uid: Mapsui.Rendering.Xaml.LineStringRenderer.RenderLineString(Mapsui.Geometries.LineString,Mapsui.Styles.IStyle,Mapsui.IViewport)
-  name: RenderLineString(LineString, IStyle, IViewport)
-  href: api/Mapsui.Rendering.Xaml.LineStringRenderer.html#Mapsui_Rendering_Xaml_LineStringRenderer_RenderLineString_Mapsui_Geometries_LineString_Mapsui_Styles_IStyle_Mapsui_IViewport_
-  commentId: M:Mapsui.Rendering.Xaml.LineStringRenderer.RenderLineString(Mapsui.Geometries.LineString,Mapsui.Styles.IStyle,Mapsui.IViewport)
-  fullName: Mapsui.Rendering.Xaml.LineStringRenderer.RenderLineString(Mapsui.Geometries.LineString, Mapsui.Styles.IStyle, Mapsui.IViewport)
-  nameWithType: LineStringRenderer.RenderLineString(LineString, IStyle, IViewport)
+- uid: Mapsui.Rendering.Xaml.LineStringRenderer.RenderLineString(Mapsui.Geometries.LineString,Mapsui.Styles.IStyle,Mapsui.IReadOnlyViewport)
+  name: RenderLineString(LineString, IStyle, IReadOnlyViewport)
+  href: api/Mapsui.Rendering.Xaml.LineStringRenderer.html#Mapsui_Rendering_Xaml_LineStringRenderer_RenderLineString_Mapsui_Geometries_LineString_Mapsui_Styles_IStyle_Mapsui_IReadOnlyViewport_
+  commentId: M:Mapsui.Rendering.Xaml.LineStringRenderer.RenderLineString(Mapsui.Geometries.LineString,Mapsui.Styles.IStyle,Mapsui.IReadOnlyViewport)
+  fullName: Mapsui.Rendering.Xaml.LineStringRenderer.RenderLineString(Mapsui.Geometries.LineString, Mapsui.Styles.IStyle, Mapsui.IReadOnlyViewport)
+  nameWithType: LineStringRenderer.RenderLineString(LineString, IStyle, IReadOnlyViewport)
 - uid: Mapsui.Rendering.Xaml.LineStringRenderer.RenderLineString*
   name: RenderLineString
   href: api/Mapsui.Rendering.Xaml.LineStringRenderer.html#Mapsui_Rendering_Xaml_LineStringRenderer_RenderLineString_
@@ -16792,15 +16985,15 @@ references:
   isSpec: "True"
   fullName: Mapsui.Rendering.Xaml.MapRenderer.MapRenderer
   nameWithType: MapRenderer.MapRenderer
-- uid: Mapsui.Rendering.Xaml.MapRenderer.Render(System.Object,Mapsui.Map,Mapsui.IViewport,IEnumerable{Mapsui.Layers.ILayer},IEnumerable{Mapsui.Widgets.IWidget},Mapsui.Styles.Color)
-  name: Render(Object, Map, IViewport, IEnumerable<ILayer>, IEnumerable<IWidget>, Color)
-  href: api/Mapsui.Rendering.Xaml.MapRenderer.html#Mapsui_Rendering_Xaml_MapRenderer_Render_System_Object_Mapsui_Map_Mapsui_IViewport_IEnumerable_Mapsui_Layers_ILayer__IEnumerable_Mapsui_Widgets_IWidget__Mapsui_Styles_Color_
-  commentId: M:Mapsui.Rendering.Xaml.MapRenderer.Render(System.Object,Mapsui.Map,Mapsui.IViewport,IEnumerable{Mapsui.Layers.ILayer},IEnumerable{Mapsui.Widgets.IWidget},Mapsui.Styles.Color)
-  name.vb: Render(Object, Map, IViewport, IEnumerable(Of ILayer), IEnumerable(Of IWidget), Color)
-  fullName: Mapsui.Rendering.Xaml.MapRenderer.Render(System.Object, Mapsui.Map, Mapsui.IViewport, IEnumerable<Mapsui.Layers.ILayer>, IEnumerable<Mapsui.Widgets.IWidget>, Mapsui.Styles.Color)
-  fullName.vb: Mapsui.Rendering.Xaml.MapRenderer.Render(System.Object, Mapsui.Map, Mapsui.IViewport, IEnumerable(Of Mapsui.Layers.ILayer), IEnumerable(Of Mapsui.Widgets.IWidget), Mapsui.Styles.Color)
-  nameWithType: MapRenderer.Render(Object, Map, IViewport, IEnumerable<ILayer>, IEnumerable<IWidget>, Color)
-  nameWithType.vb: MapRenderer.Render(Object, Map, IViewport, IEnumerable(Of ILayer), IEnumerable(Of IWidget), Color)
+- uid: Mapsui.Rendering.Xaml.MapRenderer.Render(System.Object,Mapsui.IReadOnlyViewport,IEnumerable{Mapsui.Layers.ILayer},IEnumerable{Mapsui.Widgets.IWidget},Mapsui.Styles.Color)
+  name: Render(Object, IReadOnlyViewport, IEnumerable<ILayer>, IEnumerable<IWidget>, Color)
+  href: api/Mapsui.Rendering.Xaml.MapRenderer.html#Mapsui_Rendering_Xaml_MapRenderer_Render_System_Object_Mapsui_IReadOnlyViewport_IEnumerable_Mapsui_Layers_ILayer__IEnumerable_Mapsui_Widgets_IWidget__Mapsui_Styles_Color_
+  commentId: M:Mapsui.Rendering.Xaml.MapRenderer.Render(System.Object,Mapsui.IReadOnlyViewport,IEnumerable{Mapsui.Layers.ILayer},IEnumerable{Mapsui.Widgets.IWidget},Mapsui.Styles.Color)
+  name.vb: Render(Object, IReadOnlyViewport, IEnumerable(Of ILayer), IEnumerable(Of IWidget), Color)
+  fullName: Mapsui.Rendering.Xaml.MapRenderer.Render(System.Object, Mapsui.IReadOnlyViewport, IEnumerable<Mapsui.Layers.ILayer>, IEnumerable<Mapsui.Widgets.IWidget>, Mapsui.Styles.Color)
+  fullName.vb: Mapsui.Rendering.Xaml.MapRenderer.Render(System.Object, Mapsui.IReadOnlyViewport, IEnumerable(Of Mapsui.Layers.ILayer), IEnumerable(Of Mapsui.Widgets.IWidget), Mapsui.Styles.Color)
+  nameWithType: MapRenderer.Render(Object, IReadOnlyViewport, IEnumerable<ILayer>, IEnumerable<IWidget>, Color)
+  nameWithType.vb: MapRenderer.Render(Object, IReadOnlyViewport, IEnumerable(Of ILayer), IEnumerable(Of IWidget), Color)
 - uid: Mapsui.Rendering.Xaml.MapRenderer.Render*
   name: Render
   href: api/Mapsui.Rendering.Xaml.MapRenderer.html#Mapsui_Rendering_Xaml_MapRenderer_Render_
@@ -16808,12 +17001,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.Rendering.Xaml.MapRenderer.Render
   nameWithType: MapRenderer.Render
-- uid: Mapsui.Rendering.Xaml.MapRenderer.RenderLayer(Canvas,Mapsui.IViewport,Mapsui.Layers.ILayer,Mapsui.Rendering.Xaml.SymbolCache,System.Boolean)
-  name: RenderLayer(Canvas, IViewport, ILayer, SymbolCache, Boolean)
-  href: api/Mapsui.Rendering.Xaml.MapRenderer.html#Mapsui_Rendering_Xaml_MapRenderer_RenderLayer_Canvas_Mapsui_IViewport_Mapsui_Layers_ILayer_Mapsui_Rendering_Xaml_SymbolCache_System_Boolean_
-  commentId: M:Mapsui.Rendering.Xaml.MapRenderer.RenderLayer(Canvas,Mapsui.IViewport,Mapsui.Layers.ILayer,Mapsui.Rendering.Xaml.SymbolCache,System.Boolean)
-  fullName: Mapsui.Rendering.Xaml.MapRenderer.RenderLayer(Canvas, Mapsui.IViewport, Mapsui.Layers.ILayer, Mapsui.Rendering.Xaml.SymbolCache, System.Boolean)
-  nameWithType: MapRenderer.RenderLayer(Canvas, IViewport, ILayer, SymbolCache, Boolean)
+- uid: Mapsui.Rendering.Xaml.MapRenderer.RenderLayer(Canvas,Mapsui.IReadOnlyViewport,Mapsui.Layers.ILayer,Mapsui.Rendering.Xaml.SymbolCache,System.Boolean)
+  name: RenderLayer(Canvas, IReadOnlyViewport, ILayer, SymbolCache, Boolean)
+  href: api/Mapsui.Rendering.Xaml.MapRenderer.html#Mapsui_Rendering_Xaml_MapRenderer_RenderLayer_Canvas_Mapsui_IReadOnlyViewport_Mapsui_Layers_ILayer_Mapsui_Rendering_Xaml_SymbolCache_System_Boolean_
+  commentId: M:Mapsui.Rendering.Xaml.MapRenderer.RenderLayer(Canvas,Mapsui.IReadOnlyViewport,Mapsui.Layers.ILayer,Mapsui.Rendering.Xaml.SymbolCache,System.Boolean)
+  fullName: Mapsui.Rendering.Xaml.MapRenderer.RenderLayer(Canvas, Mapsui.IReadOnlyViewport, Mapsui.Layers.ILayer, Mapsui.Rendering.Xaml.SymbolCache, System.Boolean)
+  nameWithType: MapRenderer.RenderLayer(Canvas, IReadOnlyViewport, ILayer, SymbolCache, Boolean)
 - uid: Mapsui.Rendering.Xaml.MapRenderer.RenderLayer*
   name: RenderLayer
   href: api/Mapsui.Rendering.Xaml.MapRenderer.html#Mapsui_Rendering_Xaml_MapRenderer_RenderLayer_
@@ -16821,15 +17014,15 @@ references:
   isSpec: "True"
   fullName: Mapsui.Rendering.Xaml.MapRenderer.RenderLayer
   nameWithType: MapRenderer.RenderLayer
-- uid: Mapsui.Rendering.Xaml.MapRenderer.RenderToBitmapStream(Mapsui.IViewport,IEnumerable{Mapsui.Layers.ILayer},Mapsui.Styles.Color)
-  name: RenderToBitmapStream(IViewport, IEnumerable<ILayer>, Color)
-  href: api/Mapsui.Rendering.Xaml.MapRenderer.html#Mapsui_Rendering_Xaml_MapRenderer_RenderToBitmapStream_Mapsui_IViewport_IEnumerable_Mapsui_Layers_ILayer__Mapsui_Styles_Color_
-  commentId: M:Mapsui.Rendering.Xaml.MapRenderer.RenderToBitmapStream(Mapsui.IViewport,IEnumerable{Mapsui.Layers.ILayer},Mapsui.Styles.Color)
-  name.vb: RenderToBitmapStream(IViewport, IEnumerable(Of ILayer), Color)
-  fullName: Mapsui.Rendering.Xaml.MapRenderer.RenderToBitmapStream(Mapsui.IViewport, IEnumerable<Mapsui.Layers.ILayer>, Mapsui.Styles.Color)
-  fullName.vb: Mapsui.Rendering.Xaml.MapRenderer.RenderToBitmapStream(Mapsui.IViewport, IEnumerable(Of Mapsui.Layers.ILayer), Mapsui.Styles.Color)
-  nameWithType: MapRenderer.RenderToBitmapStream(IViewport, IEnumerable<ILayer>, Color)
-  nameWithType.vb: MapRenderer.RenderToBitmapStream(IViewport, IEnumerable(Of ILayer), Color)
+- uid: Mapsui.Rendering.Xaml.MapRenderer.RenderToBitmapStream(Mapsui.IReadOnlyViewport,IEnumerable{Mapsui.Layers.ILayer},Mapsui.Styles.Color)
+  name: RenderToBitmapStream(IReadOnlyViewport, IEnumerable<ILayer>, Color)
+  href: api/Mapsui.Rendering.Xaml.MapRenderer.html#Mapsui_Rendering_Xaml_MapRenderer_RenderToBitmapStream_Mapsui_IReadOnlyViewport_IEnumerable_Mapsui_Layers_ILayer__Mapsui_Styles_Color_
+  commentId: M:Mapsui.Rendering.Xaml.MapRenderer.RenderToBitmapStream(Mapsui.IReadOnlyViewport,IEnumerable{Mapsui.Layers.ILayer},Mapsui.Styles.Color)
+  name.vb: RenderToBitmapStream(IReadOnlyViewport, IEnumerable(Of ILayer), Color)
+  fullName: Mapsui.Rendering.Xaml.MapRenderer.RenderToBitmapStream(Mapsui.IReadOnlyViewport, IEnumerable<Mapsui.Layers.ILayer>, Mapsui.Styles.Color)
+  fullName.vb: Mapsui.Rendering.Xaml.MapRenderer.RenderToBitmapStream(Mapsui.IReadOnlyViewport, IEnumerable(Of Mapsui.Layers.ILayer), Mapsui.Styles.Color)
+  nameWithType: MapRenderer.RenderToBitmapStream(IReadOnlyViewport, IEnumerable<ILayer>, Color)
+  nameWithType.vb: MapRenderer.RenderToBitmapStream(IReadOnlyViewport, IEnumerable(Of ILayer), Color)
 - uid: Mapsui.Rendering.Xaml.MapRenderer.RenderToBitmapStream*
   name: RenderToBitmapStream
   href: api/Mapsui.Rendering.Xaml.MapRenderer.html#Mapsui_Rendering_Xaml_MapRenderer_RenderToBitmapStream_
@@ -17016,12 +17209,12 @@ references:
   commentId: T:Mapsui.Rendering.Xaml.MultiLineStringRenderer
   fullName: Mapsui.Rendering.Xaml.MultiLineStringRenderer
   nameWithType: MultiLineStringRenderer
-- uid: Mapsui.Rendering.Xaml.MultiLineStringRenderer.Render(Mapsui.Geometries.MultiLineString,Mapsui.Styles.IStyle,Mapsui.IViewport)
-  name: Render(MultiLineString, IStyle, IViewport)
-  href: api/Mapsui.Rendering.Xaml.MultiLineStringRenderer.html#Mapsui_Rendering_Xaml_MultiLineStringRenderer_Render_Mapsui_Geometries_MultiLineString_Mapsui_Styles_IStyle_Mapsui_IViewport_
-  commentId: M:Mapsui.Rendering.Xaml.MultiLineStringRenderer.Render(Mapsui.Geometries.MultiLineString,Mapsui.Styles.IStyle,Mapsui.IViewport)
-  fullName: Mapsui.Rendering.Xaml.MultiLineStringRenderer.Render(Mapsui.Geometries.MultiLineString, Mapsui.Styles.IStyle, Mapsui.IViewport)
-  nameWithType: MultiLineStringRenderer.Render(MultiLineString, IStyle, IViewport)
+- uid: Mapsui.Rendering.Xaml.MultiLineStringRenderer.Render(Mapsui.Geometries.MultiLineString,Mapsui.Styles.IStyle,Mapsui.IReadOnlyViewport)
+  name: Render(MultiLineString, IStyle, IReadOnlyViewport)
+  href: api/Mapsui.Rendering.Xaml.MultiLineStringRenderer.html#Mapsui_Rendering_Xaml_MultiLineStringRenderer_Render_Mapsui_Geometries_MultiLineString_Mapsui_Styles_IStyle_Mapsui_IReadOnlyViewport_
+  commentId: M:Mapsui.Rendering.Xaml.MultiLineStringRenderer.Render(Mapsui.Geometries.MultiLineString,Mapsui.Styles.IStyle,Mapsui.IReadOnlyViewport)
+  fullName: Mapsui.Rendering.Xaml.MultiLineStringRenderer.Render(Mapsui.Geometries.MultiLineString, Mapsui.Styles.IStyle, Mapsui.IReadOnlyViewport)
+  nameWithType: MultiLineStringRenderer.Render(MultiLineString, IStyle, IReadOnlyViewport)
 - uid: Mapsui.Rendering.Xaml.MultiLineStringRenderer.Render*
   name: Render
   href: api/Mapsui.Rendering.Xaml.MultiLineStringRenderer.html#Mapsui_Rendering_Xaml_MultiLineStringRenderer_Render_
@@ -17035,12 +17228,12 @@ references:
   commentId: T:Mapsui.Rendering.Xaml.MultiPolygonRenderer
   fullName: Mapsui.Rendering.Xaml.MultiPolygonRenderer
   nameWithType: MultiPolygonRenderer
-- uid: Mapsui.Rendering.Xaml.MultiPolygonRenderer.RenderMultiPolygon(Mapsui.Geometries.MultiPolygon,Mapsui.Styles.IStyle,Mapsui.IViewport,Mapsui.Rendering.Xaml.SymbolCache)
-  name: RenderMultiPolygon(MultiPolygon, IStyle, IViewport, SymbolCache)
-  href: api/Mapsui.Rendering.Xaml.MultiPolygonRenderer.html#Mapsui_Rendering_Xaml_MultiPolygonRenderer_RenderMultiPolygon_Mapsui_Geometries_MultiPolygon_Mapsui_Styles_IStyle_Mapsui_IViewport_Mapsui_Rendering_Xaml_SymbolCache_
-  commentId: M:Mapsui.Rendering.Xaml.MultiPolygonRenderer.RenderMultiPolygon(Mapsui.Geometries.MultiPolygon,Mapsui.Styles.IStyle,Mapsui.IViewport,Mapsui.Rendering.Xaml.SymbolCache)
-  fullName: Mapsui.Rendering.Xaml.MultiPolygonRenderer.RenderMultiPolygon(Mapsui.Geometries.MultiPolygon, Mapsui.Styles.IStyle, Mapsui.IViewport, Mapsui.Rendering.Xaml.SymbolCache)
-  nameWithType: MultiPolygonRenderer.RenderMultiPolygon(MultiPolygon, IStyle, IViewport, SymbolCache)
+- uid: Mapsui.Rendering.Xaml.MultiPolygonRenderer.RenderMultiPolygon(Mapsui.Geometries.MultiPolygon,Mapsui.Styles.IStyle,Mapsui.IReadOnlyViewport,Mapsui.Rendering.Xaml.SymbolCache)
+  name: RenderMultiPolygon(MultiPolygon, IStyle, IReadOnlyViewport, SymbolCache)
+  href: api/Mapsui.Rendering.Xaml.MultiPolygonRenderer.html#Mapsui_Rendering_Xaml_MultiPolygonRenderer_RenderMultiPolygon_Mapsui_Geometries_MultiPolygon_Mapsui_Styles_IStyle_Mapsui_IReadOnlyViewport_Mapsui_Rendering_Xaml_SymbolCache_
+  commentId: M:Mapsui.Rendering.Xaml.MultiPolygonRenderer.RenderMultiPolygon(Mapsui.Geometries.MultiPolygon,Mapsui.Styles.IStyle,Mapsui.IReadOnlyViewport,Mapsui.Rendering.Xaml.SymbolCache)
+  fullName: Mapsui.Rendering.Xaml.MultiPolygonRenderer.RenderMultiPolygon(Mapsui.Geometries.MultiPolygon, Mapsui.Styles.IStyle, Mapsui.IReadOnlyViewport, Mapsui.Rendering.Xaml.SymbolCache)
+  nameWithType: MultiPolygonRenderer.RenderMultiPolygon(MultiPolygon, IStyle, IReadOnlyViewport, SymbolCache)
 - uid: Mapsui.Rendering.Xaml.MultiPolygonRenderer.RenderMultiPolygon*
   name: RenderMultiPolygon
   href: api/Mapsui.Rendering.Xaml.MultiPolygonRenderer.html#Mapsui_Rendering_Xaml_MultiPolygonRenderer_RenderMultiPolygon_
@@ -17372,12 +17565,12 @@ references:
   commentId: T:Mapsui.Rendering.Xaml.PointRenderer
   fullName: Mapsui.Rendering.Xaml.PointRenderer
   nameWithType: PointRenderer
-- uid: Mapsui.Rendering.Xaml.PointRenderer.PositionPoint(UIElement,Mapsui.Geometries.Point,Mapsui.Styles.IStyle,Mapsui.IViewport)
-  name: PositionPoint(UIElement, Point, IStyle, IViewport)
-  href: api/Mapsui.Rendering.Xaml.PointRenderer.html#Mapsui_Rendering_Xaml_PointRenderer_PositionPoint_UIElement_Mapsui_Geometries_Point_Mapsui_Styles_IStyle_Mapsui_IViewport_
-  commentId: M:Mapsui.Rendering.Xaml.PointRenderer.PositionPoint(UIElement,Mapsui.Geometries.Point,Mapsui.Styles.IStyle,Mapsui.IViewport)
-  fullName: Mapsui.Rendering.Xaml.PointRenderer.PositionPoint(UIElement, Mapsui.Geometries.Point, Mapsui.Styles.IStyle, Mapsui.IViewport)
-  nameWithType: PointRenderer.PositionPoint(UIElement, Point, IStyle, IViewport)
+- uid: Mapsui.Rendering.Xaml.PointRenderer.PositionPoint(UIElement,Mapsui.Geometries.Point,Mapsui.Styles.IStyle,Mapsui.IReadOnlyViewport)
+  name: PositionPoint(UIElement, Point, IStyle, IReadOnlyViewport)
+  href: api/Mapsui.Rendering.Xaml.PointRenderer.html#Mapsui_Rendering_Xaml_PointRenderer_PositionPoint_UIElement_Mapsui_Geometries_Point_Mapsui_Styles_IStyle_Mapsui_IReadOnlyViewport_
+  commentId: M:Mapsui.Rendering.Xaml.PointRenderer.PositionPoint(UIElement,Mapsui.Geometries.Point,Mapsui.Styles.IStyle,Mapsui.IReadOnlyViewport)
+  fullName: Mapsui.Rendering.Xaml.PointRenderer.PositionPoint(UIElement, Mapsui.Geometries.Point, Mapsui.Styles.IStyle, Mapsui.IReadOnlyViewport)
+  nameWithType: PointRenderer.PositionPoint(UIElement, Point, IStyle, IReadOnlyViewport)
 - uid: Mapsui.Rendering.Xaml.PointRenderer.PositionPoint*
   name: PositionPoint
   href: api/Mapsui.Rendering.Xaml.PointRenderer.html#Mapsui_Rendering_Xaml_PointRenderer_PositionPoint_
@@ -17385,12 +17578,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.Rendering.Xaml.PointRenderer.PositionPoint
   nameWithType: PointRenderer.PositionPoint
-- uid: Mapsui.Rendering.Xaml.PointRenderer.RenderPoint(Mapsui.Geometries.Point,Mapsui.Styles.IStyle,Mapsui.IViewport,Mapsui.Rendering.Xaml.SymbolCache)
-  name: RenderPoint(Point, IStyle, IViewport, SymbolCache)
-  href: api/Mapsui.Rendering.Xaml.PointRenderer.html#Mapsui_Rendering_Xaml_PointRenderer_RenderPoint_Mapsui_Geometries_Point_Mapsui_Styles_IStyle_Mapsui_IViewport_Mapsui_Rendering_Xaml_SymbolCache_
-  commentId: M:Mapsui.Rendering.Xaml.PointRenderer.RenderPoint(Mapsui.Geometries.Point,Mapsui.Styles.IStyle,Mapsui.IViewport,Mapsui.Rendering.Xaml.SymbolCache)
-  fullName: Mapsui.Rendering.Xaml.PointRenderer.RenderPoint(Mapsui.Geometries.Point, Mapsui.Styles.IStyle, Mapsui.IViewport, Mapsui.Rendering.Xaml.SymbolCache)
-  nameWithType: PointRenderer.RenderPoint(Point, IStyle, IViewport, SymbolCache)
+- uid: Mapsui.Rendering.Xaml.PointRenderer.RenderPoint(Mapsui.Geometries.Point,Mapsui.Styles.IStyle,Mapsui.IReadOnlyViewport,Mapsui.Rendering.Xaml.SymbolCache)
+  name: RenderPoint(Point, IStyle, IReadOnlyViewport, SymbolCache)
+  href: api/Mapsui.Rendering.Xaml.PointRenderer.html#Mapsui_Rendering_Xaml_PointRenderer_RenderPoint_Mapsui_Geometries_Point_Mapsui_Styles_IStyle_Mapsui_IReadOnlyViewport_Mapsui_Rendering_Xaml_SymbolCache_
+  commentId: M:Mapsui.Rendering.Xaml.PointRenderer.RenderPoint(Mapsui.Geometries.Point,Mapsui.Styles.IStyle,Mapsui.IReadOnlyViewport,Mapsui.Rendering.Xaml.SymbolCache)
+  fullName: Mapsui.Rendering.Xaml.PointRenderer.RenderPoint(Mapsui.Geometries.Point, Mapsui.Styles.IStyle, Mapsui.IReadOnlyViewport, Mapsui.Rendering.Xaml.SymbolCache)
+  nameWithType: PointRenderer.RenderPoint(Point, IStyle, IReadOnlyViewport, SymbolCache)
 - uid: Mapsui.Rendering.Xaml.PointRenderer.RenderPoint*
   name: RenderPoint
   href: api/Mapsui.Rendering.Xaml.PointRenderer.html#Mapsui_Rendering_Xaml_PointRenderer_RenderPoint_
@@ -17417,12 +17610,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.Rendering.Xaml.PolygonRenderer.CreatePolygonPath
   nameWithType: PolygonRenderer.CreatePolygonPath
-- uid: Mapsui.Rendering.Xaml.PolygonRenderer.RenderPolygon(Mapsui.Geometries.Polygon,Mapsui.Styles.IStyle,Mapsui.IViewport,Mapsui.Rendering.Xaml.SymbolCache)
-  name: RenderPolygon(Polygon, IStyle, IViewport, SymbolCache)
-  href: api/Mapsui.Rendering.Xaml.PolygonRenderer.html#Mapsui_Rendering_Xaml_PolygonRenderer_RenderPolygon_Mapsui_Geometries_Polygon_Mapsui_Styles_IStyle_Mapsui_IViewport_Mapsui_Rendering_Xaml_SymbolCache_
-  commentId: M:Mapsui.Rendering.Xaml.PolygonRenderer.RenderPolygon(Mapsui.Geometries.Polygon,Mapsui.Styles.IStyle,Mapsui.IViewport,Mapsui.Rendering.Xaml.SymbolCache)
-  fullName: Mapsui.Rendering.Xaml.PolygonRenderer.RenderPolygon(Mapsui.Geometries.Polygon, Mapsui.Styles.IStyle, Mapsui.IViewport, Mapsui.Rendering.Xaml.SymbolCache)
-  nameWithType: PolygonRenderer.RenderPolygon(Polygon, IStyle, IViewport, SymbolCache)
+- uid: Mapsui.Rendering.Xaml.PolygonRenderer.RenderPolygon(Mapsui.Geometries.Polygon,Mapsui.Styles.IStyle,Mapsui.IReadOnlyViewport,Mapsui.Rendering.Xaml.SymbolCache)
+  name: RenderPolygon(Polygon, IStyle, IReadOnlyViewport, SymbolCache)
+  href: api/Mapsui.Rendering.Xaml.PolygonRenderer.html#Mapsui_Rendering_Xaml_PolygonRenderer_RenderPolygon_Mapsui_Geometries_Polygon_Mapsui_Styles_IStyle_Mapsui_IReadOnlyViewport_Mapsui_Rendering_Xaml_SymbolCache_
+  commentId: M:Mapsui.Rendering.Xaml.PolygonRenderer.RenderPolygon(Mapsui.Geometries.Polygon,Mapsui.Styles.IStyle,Mapsui.IReadOnlyViewport,Mapsui.Rendering.Xaml.SymbolCache)
+  fullName: Mapsui.Rendering.Xaml.PolygonRenderer.RenderPolygon(Mapsui.Geometries.Polygon, Mapsui.Styles.IStyle, Mapsui.IReadOnlyViewport, Mapsui.Rendering.Xaml.SymbolCache)
+  nameWithType: PolygonRenderer.RenderPolygon(Polygon, IStyle, IReadOnlyViewport, SymbolCache)
 - uid: Mapsui.Rendering.Xaml.PolygonRenderer.RenderPolygon*
   name: RenderPolygon
   href: api/Mapsui.Rendering.Xaml.PolygonRenderer.html#Mapsui_Rendering_Xaml_PolygonRenderer_RenderPolygon_
@@ -17656,12 +17849,12 @@ references:
   commentId: T:Mapsui.Rendering.Xaml.XamlWidgets.HyperlinkWidgetRenderer
   fullName: Mapsui.Rendering.Xaml.XamlWidgets.HyperlinkWidgetRenderer
   nameWithType: HyperlinkWidgetRenderer
-- uid: Mapsui.Rendering.Xaml.XamlWidgets.HyperlinkWidgetRenderer.Draw(Canvas,Mapsui.Map,Mapsui.IReadOnlyViewport,Mapsui.Widgets.IWidget)
-  name: Draw(Canvas, Map, IReadOnlyViewport, IWidget)
-  href: api/Mapsui.Rendering.Xaml.XamlWidgets.HyperlinkWidgetRenderer.html#Mapsui_Rendering_Xaml_XamlWidgets_HyperlinkWidgetRenderer_Draw_Canvas_Mapsui_Map_Mapsui_IReadOnlyViewport_Mapsui_Widgets_IWidget_
-  commentId: M:Mapsui.Rendering.Xaml.XamlWidgets.HyperlinkWidgetRenderer.Draw(Canvas,Mapsui.Map,Mapsui.IReadOnlyViewport,Mapsui.Widgets.IWidget)
-  fullName: Mapsui.Rendering.Xaml.XamlWidgets.HyperlinkWidgetRenderer.Draw(Canvas, Mapsui.Map, Mapsui.IReadOnlyViewport, Mapsui.Widgets.IWidget)
-  nameWithType: HyperlinkWidgetRenderer.Draw(Canvas, Map, IReadOnlyViewport, IWidget)
+- uid: Mapsui.Rendering.Xaml.XamlWidgets.HyperlinkWidgetRenderer.Draw(Canvas,Mapsui.IReadOnlyViewport,Mapsui.Widgets.IWidget)
+  name: Draw(Canvas, IReadOnlyViewport, IWidget)
+  href: api/Mapsui.Rendering.Xaml.XamlWidgets.HyperlinkWidgetRenderer.html#Mapsui_Rendering_Xaml_XamlWidgets_HyperlinkWidgetRenderer_Draw_Canvas_Mapsui_IReadOnlyViewport_Mapsui_Widgets_IWidget_
+  commentId: M:Mapsui.Rendering.Xaml.XamlWidgets.HyperlinkWidgetRenderer.Draw(Canvas,Mapsui.IReadOnlyViewport,Mapsui.Widgets.IWidget)
+  fullName: Mapsui.Rendering.Xaml.XamlWidgets.HyperlinkWidgetRenderer.Draw(Canvas, Mapsui.IReadOnlyViewport, Mapsui.Widgets.IWidget)
+  nameWithType: HyperlinkWidgetRenderer.Draw(Canvas, IReadOnlyViewport, IWidget)
 - uid: Mapsui.Rendering.Xaml.XamlWidgets.HyperlinkWidgetRenderer.Draw*
   name: Draw
   href: api/Mapsui.Rendering.Xaml.XamlWidgets.HyperlinkWidgetRenderer.html#Mapsui_Rendering_Xaml_XamlWidgets_HyperlinkWidgetRenderer_Draw_
@@ -17675,12 +17868,12 @@ references:
   commentId: T:Mapsui.Rendering.Xaml.XamlWidgets.ScaleBarWidgetRenderer
   fullName: Mapsui.Rendering.Xaml.XamlWidgets.ScaleBarWidgetRenderer
   nameWithType: ScaleBarWidgetRenderer
-- uid: Mapsui.Rendering.Xaml.XamlWidgets.ScaleBarWidgetRenderer.Draw(Canvas,Mapsui.Map,Mapsui.IReadOnlyViewport,Mapsui.Widgets.IWidget)
-  name: Draw(Canvas, Map, IReadOnlyViewport, IWidget)
-  href: api/Mapsui.Rendering.Xaml.XamlWidgets.ScaleBarWidgetRenderer.html#Mapsui_Rendering_Xaml_XamlWidgets_ScaleBarWidgetRenderer_Draw_Canvas_Mapsui_Map_Mapsui_IReadOnlyViewport_Mapsui_Widgets_IWidget_
-  commentId: M:Mapsui.Rendering.Xaml.XamlWidgets.ScaleBarWidgetRenderer.Draw(Canvas,Mapsui.Map,Mapsui.IReadOnlyViewport,Mapsui.Widgets.IWidget)
-  fullName: Mapsui.Rendering.Xaml.XamlWidgets.ScaleBarWidgetRenderer.Draw(Canvas, Mapsui.Map, Mapsui.IReadOnlyViewport, Mapsui.Widgets.IWidget)
-  nameWithType: ScaleBarWidgetRenderer.Draw(Canvas, Map, IReadOnlyViewport, IWidget)
+- uid: Mapsui.Rendering.Xaml.XamlWidgets.ScaleBarWidgetRenderer.Draw(Canvas,Mapsui.IReadOnlyViewport,Mapsui.Widgets.IWidget)
+  name: Draw(Canvas, IReadOnlyViewport, IWidget)
+  href: api/Mapsui.Rendering.Xaml.XamlWidgets.ScaleBarWidgetRenderer.html#Mapsui_Rendering_Xaml_XamlWidgets_ScaleBarWidgetRenderer_Draw_Canvas_Mapsui_IReadOnlyViewport_Mapsui_Widgets_IWidget_
+  commentId: M:Mapsui.Rendering.Xaml.XamlWidgets.ScaleBarWidgetRenderer.Draw(Canvas,Mapsui.IReadOnlyViewport,Mapsui.Widgets.IWidget)
+  fullName: Mapsui.Rendering.Xaml.XamlWidgets.ScaleBarWidgetRenderer.Draw(Canvas, Mapsui.IReadOnlyViewport, Mapsui.Widgets.IWidget)
+  nameWithType: ScaleBarWidgetRenderer.Draw(Canvas, IReadOnlyViewport, IWidget)
 - uid: Mapsui.Rendering.Xaml.XamlWidgets.ScaleBarWidgetRenderer.Draw*
   name: Draw
   href: api/Mapsui.Rendering.Xaml.XamlWidgets.ScaleBarWidgetRenderer.html#Mapsui_Rendering_Xaml_XamlWidgets_ScaleBarWidgetRenderer_Draw_
@@ -17694,15 +17887,15 @@ references:
   commentId: T:Mapsui.Rendering.Xaml.XamlWidgets.WidgetRenderer
   fullName: Mapsui.Rendering.Xaml.XamlWidgets.WidgetRenderer
   nameWithType: WidgetRenderer
-- uid: Mapsui.Rendering.Xaml.XamlWidgets.WidgetRenderer.Render(System.Object,Mapsui.Map,Mapsui.IReadOnlyViewport,IEnumerable{Mapsui.Widgets.IWidget},IDictionary{Type,Mapsui.Widgets.IWidgetRenderer})
-  name: Render(Object, Map, IReadOnlyViewport, IEnumerable<IWidget>, IDictionary<Type, IWidgetRenderer>)
-  href: api/Mapsui.Rendering.Xaml.XamlWidgets.WidgetRenderer.html#Mapsui_Rendering_Xaml_XamlWidgets_WidgetRenderer_Render_System_Object_Mapsui_Map_Mapsui_IReadOnlyViewport_IEnumerable_Mapsui_Widgets_IWidget__IDictionary_Type_Mapsui_Widgets_IWidgetRenderer__
-  commentId: M:Mapsui.Rendering.Xaml.XamlWidgets.WidgetRenderer.Render(System.Object,Mapsui.Map,Mapsui.IReadOnlyViewport,IEnumerable{Mapsui.Widgets.IWidget},IDictionary{Type,Mapsui.Widgets.IWidgetRenderer})
-  name.vb: Render(Object, Map, IReadOnlyViewport, IEnumerable(Of IWidget), IDictionary(Of Type, IWidgetRenderer))
-  fullName: Mapsui.Rendering.Xaml.XamlWidgets.WidgetRenderer.Render(System.Object, Mapsui.Map, Mapsui.IReadOnlyViewport, IEnumerable<Mapsui.Widgets.IWidget>, IDictionary<Type, Mapsui.Widgets.IWidgetRenderer>)
-  fullName.vb: Mapsui.Rendering.Xaml.XamlWidgets.WidgetRenderer.Render(System.Object, Mapsui.Map, Mapsui.IReadOnlyViewport, IEnumerable(Of Mapsui.Widgets.IWidget), IDictionary(Of Type, Mapsui.Widgets.IWidgetRenderer))
-  nameWithType: WidgetRenderer.Render(Object, Map, IReadOnlyViewport, IEnumerable<IWidget>, IDictionary<Type, IWidgetRenderer>)
-  nameWithType.vb: WidgetRenderer.Render(Object, Map, IReadOnlyViewport, IEnumerable(Of IWidget), IDictionary(Of Type, IWidgetRenderer))
+- uid: Mapsui.Rendering.Xaml.XamlWidgets.WidgetRenderer.Render(System.Object,Mapsui.IReadOnlyViewport,IEnumerable{Mapsui.Widgets.IWidget},IDictionary{Type,Mapsui.Widgets.IWidgetRenderer})
+  name: Render(Object, IReadOnlyViewport, IEnumerable<IWidget>, IDictionary<Type, IWidgetRenderer>)
+  href: api/Mapsui.Rendering.Xaml.XamlWidgets.WidgetRenderer.html#Mapsui_Rendering_Xaml_XamlWidgets_WidgetRenderer_Render_System_Object_Mapsui_IReadOnlyViewport_IEnumerable_Mapsui_Widgets_IWidget__IDictionary_Type_Mapsui_Widgets_IWidgetRenderer__
+  commentId: M:Mapsui.Rendering.Xaml.XamlWidgets.WidgetRenderer.Render(System.Object,Mapsui.IReadOnlyViewport,IEnumerable{Mapsui.Widgets.IWidget},IDictionary{Type,Mapsui.Widgets.IWidgetRenderer})
+  name.vb: Render(Object, IReadOnlyViewport, IEnumerable(Of IWidget), IDictionary(Of Type, IWidgetRenderer))
+  fullName: Mapsui.Rendering.Xaml.XamlWidgets.WidgetRenderer.Render(System.Object, Mapsui.IReadOnlyViewport, IEnumerable<Mapsui.Widgets.IWidget>, IDictionary<Type, Mapsui.Widgets.IWidgetRenderer>)
+  fullName.vb: Mapsui.Rendering.Xaml.XamlWidgets.WidgetRenderer.Render(System.Object, Mapsui.IReadOnlyViewport, IEnumerable(Of Mapsui.Widgets.IWidget), IDictionary(Of Type, Mapsui.Widgets.IWidgetRenderer))
+  nameWithType: WidgetRenderer.Render(Object, IReadOnlyViewport, IEnumerable<IWidget>, IDictionary<Type, IWidgetRenderer>)
+  nameWithType.vb: WidgetRenderer.Render(Object, IReadOnlyViewport, IEnumerable(Of IWidget), IDictionary(Of Type, IWidgetRenderer))
 - uid: Mapsui.Rendering.Xaml.XamlWidgets.WidgetRenderer.Render*
   name: Render
   href: api/Mapsui.Rendering.Xaml.XamlWidgets.WidgetRenderer.html#Mapsui_Rendering_Xaml_XamlWidgets_WidgetRenderer_Render_
@@ -17716,12 +17909,12 @@ references:
   commentId: T:Mapsui.Rendering.Xaml.XamlWidgets.ZoomInOutWidgetRenderer
   fullName: Mapsui.Rendering.Xaml.XamlWidgets.ZoomInOutWidgetRenderer
   nameWithType: ZoomInOutWidgetRenderer
-- uid: Mapsui.Rendering.Xaml.XamlWidgets.ZoomInOutWidgetRenderer.Draw(Canvas,Mapsui.Map,Mapsui.IReadOnlyViewport,Mapsui.Widgets.IWidget)
-  name: Draw(Canvas, Map, IReadOnlyViewport, IWidget)
-  href: api/Mapsui.Rendering.Xaml.XamlWidgets.ZoomInOutWidgetRenderer.html#Mapsui_Rendering_Xaml_XamlWidgets_ZoomInOutWidgetRenderer_Draw_Canvas_Mapsui_Map_Mapsui_IReadOnlyViewport_Mapsui_Widgets_IWidget_
-  commentId: M:Mapsui.Rendering.Xaml.XamlWidgets.ZoomInOutWidgetRenderer.Draw(Canvas,Mapsui.Map,Mapsui.IReadOnlyViewport,Mapsui.Widgets.IWidget)
-  fullName: Mapsui.Rendering.Xaml.XamlWidgets.ZoomInOutWidgetRenderer.Draw(Canvas, Mapsui.Map, Mapsui.IReadOnlyViewport, Mapsui.Widgets.IWidget)
-  nameWithType: ZoomInOutWidgetRenderer.Draw(Canvas, Map, IReadOnlyViewport, IWidget)
+- uid: Mapsui.Rendering.Xaml.XamlWidgets.ZoomInOutWidgetRenderer.Draw(Canvas,Mapsui.IReadOnlyViewport,Mapsui.Widgets.IWidget)
+  name: Draw(Canvas, IReadOnlyViewport, IWidget)
+  href: api/Mapsui.Rendering.Xaml.XamlWidgets.ZoomInOutWidgetRenderer.html#Mapsui_Rendering_Xaml_XamlWidgets_ZoomInOutWidgetRenderer_Draw_Canvas_Mapsui_IReadOnlyViewport_Mapsui_Widgets_IWidget_
+  commentId: M:Mapsui.Rendering.Xaml.XamlWidgets.ZoomInOutWidgetRenderer.Draw(Canvas,Mapsui.IReadOnlyViewport,Mapsui.Widgets.IWidget)
+  fullName: Mapsui.Rendering.Xaml.XamlWidgets.ZoomInOutWidgetRenderer.Draw(Canvas, Mapsui.IReadOnlyViewport, Mapsui.Widgets.IWidget)
+  nameWithType: ZoomInOutWidgetRenderer.Draw(Canvas, IReadOnlyViewport, IWidget)
 - uid: Mapsui.Rendering.Xaml.XamlWidgets.ZoomInOutWidgetRenderer.Draw*
   name: Draw
   href: api/Mapsui.Rendering.Xaml.XamlWidgets.ZoomInOutWidgetRenderer.html#Mapsui_Rendering_Xaml_XamlWidgets_ZoomInOutWidgetRenderer_Draw_
@@ -22013,15 +22206,15 @@ references:
   commentId: T:Mapsui.UI.MapInfoHelper
   fullName: Mapsui.UI.MapInfoHelper
   nameWithType: MapInfoHelper
-- uid: Mapsui.UI.MapInfoHelper.GetMapInfo(IEnumerable{Mapsui.Layers.ILayer},Mapsui.IViewport,Mapsui.Geometries.Point,Mapsui.Rendering.ISymbolCache,System.Int32)
-  name: GetMapInfo(IEnumerable<ILayer>, IViewport, Point, ISymbolCache, Int32)
-  href: api/Mapsui.UI.MapInfoHelper.html#Mapsui_UI_MapInfoHelper_GetMapInfo_IEnumerable_Mapsui_Layers_ILayer__Mapsui_IViewport_Mapsui_Geometries_Point_Mapsui_Rendering_ISymbolCache_System_Int32_
-  commentId: M:Mapsui.UI.MapInfoHelper.GetMapInfo(IEnumerable{Mapsui.Layers.ILayer},Mapsui.IViewport,Mapsui.Geometries.Point,Mapsui.Rendering.ISymbolCache,System.Int32)
-  name.vb: GetMapInfo(IEnumerable(Of ILayer), IViewport, Point, ISymbolCache, Int32)
-  fullName: Mapsui.UI.MapInfoHelper.GetMapInfo(IEnumerable<Mapsui.Layers.ILayer>, Mapsui.IViewport, Mapsui.Geometries.Point, Mapsui.Rendering.ISymbolCache, System.Int32)
-  fullName.vb: Mapsui.UI.MapInfoHelper.GetMapInfo(IEnumerable(Of Mapsui.Layers.ILayer), Mapsui.IViewport, Mapsui.Geometries.Point, Mapsui.Rendering.ISymbolCache, System.Int32)
-  nameWithType: MapInfoHelper.GetMapInfo(IEnumerable<ILayer>, IViewport, Point, ISymbolCache, Int32)
-  nameWithType.vb: MapInfoHelper.GetMapInfo(IEnumerable(Of ILayer), IViewport, Point, ISymbolCache, Int32)
+- uid: Mapsui.UI.MapInfoHelper.GetMapInfo(IEnumerable{Mapsui.Layers.ILayer},Mapsui.IReadOnlyViewport,Mapsui.Geometries.Point,Mapsui.Rendering.ISymbolCache,System.Int32)
+  name: GetMapInfo(IEnumerable<ILayer>, IReadOnlyViewport, Point, ISymbolCache, Int32)
+  href: api/Mapsui.UI.MapInfoHelper.html#Mapsui_UI_MapInfoHelper_GetMapInfo_IEnumerable_Mapsui_Layers_ILayer__Mapsui_IReadOnlyViewport_Mapsui_Geometries_Point_Mapsui_Rendering_ISymbolCache_System_Int32_
+  commentId: M:Mapsui.UI.MapInfoHelper.GetMapInfo(IEnumerable{Mapsui.Layers.ILayer},Mapsui.IReadOnlyViewport,Mapsui.Geometries.Point,Mapsui.Rendering.ISymbolCache,System.Int32)
+  name.vb: GetMapInfo(IEnumerable(Of ILayer), IReadOnlyViewport, Point, ISymbolCache, Int32)
+  fullName: Mapsui.UI.MapInfoHelper.GetMapInfo(IEnumerable<Mapsui.Layers.ILayer>, Mapsui.IReadOnlyViewport, Mapsui.Geometries.Point, Mapsui.Rendering.ISymbolCache, System.Int32)
+  fullName.vb: Mapsui.UI.MapInfoHelper.GetMapInfo(IEnumerable(Of Mapsui.Layers.ILayer), Mapsui.IReadOnlyViewport, Mapsui.Geometries.Point, Mapsui.Rendering.ISymbolCache, System.Int32)
+  nameWithType: MapInfoHelper.GetMapInfo(IEnumerable<ILayer>, IReadOnlyViewport, Point, ISymbolCache, Int32)
+  nameWithType.vb: MapInfoHelper.GetMapInfo(IEnumerable(Of ILayer), IReadOnlyViewport, Point, ISymbolCache, Int32)
 - uid: Mapsui.UI.MapInfoHelper.GetMapInfo*
   name: GetMapInfo
   href: api/Mapsui.UI.MapInfoHelper.html#Mapsui_UI_MapInfoHelper_GetMapInfo_
@@ -24034,12 +24227,12 @@ references:
   commentId: T:Mapsui.Widgets.ScaleBar.ScaleBarWidget
   fullName: Mapsui.Widgets.ScaleBar.ScaleBarWidget
   nameWithType: ScaleBarWidget
-- uid: Mapsui.Widgets.ScaleBar.ScaleBarWidget.#ctor
-  name: ScaleBarWidget()
-  href: api/Mapsui.Widgets.ScaleBar.ScaleBarWidget.html#Mapsui_Widgets_ScaleBar_ScaleBarWidget__ctor
-  commentId: M:Mapsui.Widgets.ScaleBar.ScaleBarWidget.#ctor
-  fullName: Mapsui.Widgets.ScaleBar.ScaleBarWidget.ScaleBarWidget()
-  nameWithType: ScaleBarWidget.ScaleBarWidget()
+- uid: Mapsui.Widgets.ScaleBar.ScaleBarWidget.#ctor(Mapsui.Map)
+  name: ScaleBarWidget(Map)
+  href: api/Mapsui.Widgets.ScaleBar.ScaleBarWidget.html#Mapsui_Widgets_ScaleBar_ScaleBarWidget__ctor_Mapsui_Map_
+  commentId: M:Mapsui.Widgets.ScaleBar.ScaleBarWidget.#ctor(Mapsui.Map)
+  fullName: Mapsui.Widgets.ScaleBar.ScaleBarWidget.ScaleBarWidget(Mapsui.Map)
+  nameWithType: ScaleBarWidget.ScaleBarWidget(Map)
 - uid: Mapsui.Widgets.ScaleBar.ScaleBarWidget.#ctor*
   name: ScaleBarWidget
   href: api/Mapsui.Widgets.ScaleBar.ScaleBarWidget.html#Mapsui_Widgets_ScaleBar_ScaleBarWidget__ctor_
@@ -24047,12 +24240,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.Widgets.ScaleBar.ScaleBarWidget.ScaleBarWidget
   nameWithType: ScaleBarWidget.ScaleBarWidget
-- uid: Mapsui.Widgets.ScaleBar.ScaleBarWidget.CanTransform(Mapsui.Map)
-  name: CanTransform(Map)
-  href: api/Mapsui.Widgets.ScaleBar.ScaleBarWidget.html#Mapsui_Widgets_ScaleBar_ScaleBarWidget_CanTransform_Mapsui_Map_
-  commentId: M:Mapsui.Widgets.ScaleBar.ScaleBarWidget.CanTransform(Mapsui.Map)
-  fullName: Mapsui.Widgets.ScaleBar.ScaleBarWidget.CanTransform(Mapsui.Map)
-  nameWithType: ScaleBarWidget.CanTransform(Map)
+- uid: Mapsui.Widgets.ScaleBar.ScaleBarWidget.CanTransform
+  name: CanTransform()
+  href: api/Mapsui.Widgets.ScaleBar.ScaleBarWidget.html#Mapsui_Widgets_ScaleBar_ScaleBarWidget_CanTransform
+  commentId: M:Mapsui.Widgets.ScaleBar.ScaleBarWidget.CanTransform
+  fullName: Mapsui.Widgets.ScaleBar.ScaleBarWidget.CanTransform()
+  nameWithType: ScaleBarWidget.CanTransform()
 - uid: Mapsui.Widgets.ScaleBar.ScaleBarWidget.CanTransform*
   name: CanTransform
   href: api/Mapsui.Widgets.ScaleBar.ScaleBarWidget.html#Mapsui_Widgets_ScaleBar_ScaleBarWidget_CanTransform_
@@ -24073,12 +24266,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.Widgets.ScaleBar.ScaleBarWidget.Font
   nameWithType: ScaleBarWidget.Font
-- uid: Mapsui.Widgets.ScaleBar.ScaleBarWidget.GetScaleBarLengthAndText(Mapsui.Map,Mapsui.IReadOnlyViewport)
-  name: GetScaleBarLengthAndText(Map, IReadOnlyViewport)
-  href: api/Mapsui.Widgets.ScaleBar.ScaleBarWidget.html#Mapsui_Widgets_ScaleBar_ScaleBarWidget_GetScaleBarLengthAndText_Mapsui_Map_Mapsui_IReadOnlyViewport_
-  commentId: M:Mapsui.Widgets.ScaleBar.ScaleBarWidget.GetScaleBarLengthAndText(Mapsui.Map,Mapsui.IReadOnlyViewport)
-  fullName: Mapsui.Widgets.ScaleBar.ScaleBarWidget.GetScaleBarLengthAndText(Mapsui.Map, Mapsui.IReadOnlyViewport)
-  nameWithType: ScaleBarWidget.GetScaleBarLengthAndText(Map, IReadOnlyViewport)
+- uid: Mapsui.Widgets.ScaleBar.ScaleBarWidget.GetScaleBarLengthAndText(Mapsui.IReadOnlyViewport)
+  name: GetScaleBarLengthAndText(IReadOnlyViewport)
+  href: api/Mapsui.Widgets.ScaleBar.ScaleBarWidget.html#Mapsui_Widgets_ScaleBar_ScaleBarWidget_GetScaleBarLengthAndText_Mapsui_IReadOnlyViewport_
+  commentId: M:Mapsui.Widgets.ScaleBar.ScaleBarWidget.GetScaleBarLengthAndText(Mapsui.IReadOnlyViewport)
+  fullName: Mapsui.Widgets.ScaleBar.ScaleBarWidget.GetScaleBarLengthAndText(Mapsui.IReadOnlyViewport)
+  nameWithType: ScaleBarWidget.GetScaleBarLengthAndText(IReadOnlyViewport)
 - uid: Mapsui.Widgets.ScaleBar.ScaleBarWidget.GetScaleBarLengthAndText*
   name: GetScaleBarLengthAndText
   href: api/Mapsui.Widgets.ScaleBar.ScaleBarWidget.html#Mapsui_Widgets_ScaleBar_ScaleBarWidget_GetScaleBarLengthAndText_
@@ -24086,12 +24279,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.Widgets.ScaleBar.ScaleBarWidget.GetScaleBarLengthAndText
   nameWithType: ScaleBarWidget.GetScaleBarLengthAndText
-- uid: Mapsui.Widgets.ScaleBar.ScaleBarWidget.GetScaleBarLinePositions(Mapsui.Map,Mapsui.IReadOnlyViewport,System.Single,System.Single,System.Single)
-  name: GetScaleBarLinePositions(Map, IReadOnlyViewport, Single, Single, Single)
-  href: api/Mapsui.Widgets.ScaleBar.ScaleBarWidget.html#Mapsui_Widgets_ScaleBar_ScaleBarWidget_GetScaleBarLinePositions_Mapsui_Map_Mapsui_IReadOnlyViewport_System_Single_System_Single_System_Single_
-  commentId: M:Mapsui.Widgets.ScaleBar.ScaleBarWidget.GetScaleBarLinePositions(Mapsui.Map,Mapsui.IReadOnlyViewport,System.Single,System.Single,System.Single)
-  fullName: Mapsui.Widgets.ScaleBar.ScaleBarWidget.GetScaleBarLinePositions(Mapsui.Map, Mapsui.IReadOnlyViewport, System.Single, System.Single, System.Single)
-  nameWithType: ScaleBarWidget.GetScaleBarLinePositions(Map, IReadOnlyViewport, Single, Single, Single)
+- uid: Mapsui.Widgets.ScaleBar.ScaleBarWidget.GetScaleBarLinePositions(Mapsui.IReadOnlyViewport,System.Single,System.Single,System.Single)
+  name: GetScaleBarLinePositions(IReadOnlyViewport, Single, Single, Single)
+  href: api/Mapsui.Widgets.ScaleBar.ScaleBarWidget.html#Mapsui_Widgets_ScaleBar_ScaleBarWidget_GetScaleBarLinePositions_Mapsui_IReadOnlyViewport_System_Single_System_Single_System_Single_
+  commentId: M:Mapsui.Widgets.ScaleBar.ScaleBarWidget.GetScaleBarLinePositions(Mapsui.IReadOnlyViewport,System.Single,System.Single,System.Single)
+  fullName: Mapsui.Widgets.ScaleBar.ScaleBarWidget.GetScaleBarLinePositions(Mapsui.IReadOnlyViewport, System.Single, System.Single, System.Single)
+  nameWithType: ScaleBarWidget.GetScaleBarLinePositions(IReadOnlyViewport, Single, Single, Single)
 - uid: Mapsui.Widgets.ScaleBar.ScaleBarWidget.GetScaleBarLinePositions*
   name: GetScaleBarLinePositions
   href: api/Mapsui.Widgets.ScaleBar.ScaleBarWidget.html#Mapsui_Widgets_ScaleBar_ScaleBarWidget_GetScaleBarLinePositions_

@@ -84,12 +84,12 @@ will be drawn on top of each other and things go wrong. </li>
 data in another projection. This data can be converted to the Map projection
 but a few things need to be set.</li>
 </ul>
-<h2 id="configure-mapsui-for-projections">Configure Mapsui for projections</h2>
-<p>Three things need to be set to allow projection from DataSource to Map</p>
+<h2 id="configure-mapsui-for-automatic-projections">Configure Mapsui for automatic projections</h2>
+<p>Currently only the <em>Layer</em> layer type can be set up to do automatic projetions from DataSource to Map. Three things need to be configured for this:</p>
 <ol>
 <li>The CRS on the Map to know what to project to.</li>
 <li>The CRS on the DataSource to know what to project from.</li>
-<li>The Transformsion on the Map to transform from the DataSource CRS to
+<li>The Transformsion on the Map to calculate the projection from DataSource CRS to
 the Map CRS.</li>
 </ol>
 <h2 id="support-for-projections">Support for projections</h2>
