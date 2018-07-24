@@ -79,7 +79,10 @@ namespace Mapsui.UI.iOS
 
         private float DetermineSkiaScale()
         {
-            return (float)ContentScaleFactor;
+            {
+                // this.ContentScaleFactor returns 1.
+                return (float)_canvas.ContentScaleFactor;
+            }
         }
 
         private void OnDoubleTapped(UITapGestureRecognizer gesture)
