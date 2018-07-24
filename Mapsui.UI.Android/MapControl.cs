@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading;
 using Android.App;
 using Android.Content;
 using Android.Graphics;
@@ -24,6 +25,7 @@ namespace Mapsui.UI.Android
         private Map _map;
         private double _innerRotation;
         private GestureDetector _gestureDetector;
+        private Handler _mainLooperHandler;
 
         public event EventHandler ViewportInitialized;
 
@@ -46,6 +48,8 @@ namespace Mapsui.UI.Android
             _canvas = new SKCanvasView(Context);
             _canvas.PaintSurface += CanvasOnPaintSurface;
             AddView(_canvas);
+
+            _mainLooperHandler = new Handler(Looper.MainLooper);
 
             Map = new Map();
             TryInitializeViewport();
@@ -264,7 +268,7 @@ namespace Mapsui.UI.Android
 
         private void MapRefreshGraphics(object sender, EventArgs eventArgs)
         {
-            ((Activity)Context).RunOnUiThread(new Runnable(RefreshGraphics));
+            RefreshGraphics();
         }
 
         private void MapPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -326,7 +330,10 @@ namespace Mapsui.UI.Android
 
         private void RunOnUIThread(Action action)
         {
-            new Handler(Looper.MainLooper).Post(action);
+            if (SynchronizationContext.Current == null)
+                _mainLooperHandler.Post(action);
+            else
+                action();
         }
 
         public void RefreshData()
