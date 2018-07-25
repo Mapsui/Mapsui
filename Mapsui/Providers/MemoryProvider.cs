@@ -184,8 +184,8 @@ namespace Mapsui.Providers
             {
                 if (feature.Geometry.IsEmpty()) continue;
                 box = box == null
-                        ? feature.Geometry.BoundingBox
-                        : box.Join(feature.Geometry.BoundingBox);
+                    ? feature.Geometry.BoundingBox
+                    : box.Join(feature.Geometry.BoundingBox);
             }
             return box;
         }
