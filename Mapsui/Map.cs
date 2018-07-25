@@ -288,7 +288,5 @@ namespace Mapsui
         }
 
         public Action<INavigator> Home { get; set; } = n => n.NavigateToFullEnvelope();
-
-
     }
 }

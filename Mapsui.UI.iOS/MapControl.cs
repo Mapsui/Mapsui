@@ -65,6 +65,9 @@ namespace Mapsui.UI.iOS
             };
             tapGestureRecognizer.RequireGestureRecognizerToFail(doubleTapGestureRecognizer);
             AddGestureRecognizer(tapGestureRecognizer);
+
+            _viewport.SetSize(ViewportWidth, ViewportHeight);
+
         }
 
         public float PixelDensity => (float) _canvas.ContentScaleFactor; // todo: Check if I need canvas
@@ -85,13 +88,9 @@ namespace Mapsui.UI.iOS
        
         void OnPaintSurface(object sender, SKPaintGLSurfaceEventArgs args)
         {
-            TryInitializeViewport(ViewportWidth, ViewportHeight);
-            if (!Viewport.Initialized) return;
-
             // Unfortunately the SKGLView does not have a IgnorePixelScaling property,
             // so have to adjust for density with SKGLView.Scale.
             // The Scale can only be set in the render loop
-
             args.Surface.Canvas.Scale(PixelDensity, PixelDensity);  
             Renderer.Render(args.Surface.Canvas, Viewport, _map.Layers, _map.Widgets, _map.BackColor);
         }
@@ -203,10 +202,7 @@ namespace Mapsui.UI.iOS
             {
                 _canvas.Frame = value;
                 base.Frame = value;
-                
-                _viewport.Width = ViewportWidth;
-                _viewport.Height = ViewportHeight;
-
+                SetViewportSize();
                 Refresh();
             }
         }
@@ -216,10 +212,7 @@ namespace Mapsui.UI.iOS
             if (_canvas == null) return;
 
             base.LayoutMarginsDidChange();
-            
-            _viewport.Width = ViewportWidth;
-            _viewport.Height = ViewportHeight;
-
+            SetViewportSize();
             Refresh();
         }
 

@@ -121,8 +121,8 @@ namespace Mapsui.UI.Uwp
         private void MapControl_PointerWheelChanged(object sender, PointerRoutedEventArgs e)
         {
             if (ZoomLock) return;
-            if (!Viewport.Initialized) return;
-            
+            if (!_viewport.IsSizeInitialized()) return;
+
             var currentPoint = e.GetCurrentPoint(this);
             var mousePosition = currentPoint.RawPosition.ToMapsui();
             var newResolution = DetermineNewResolution(currentPoint.Properties.MouseWheelDelta, Viewport.Resolution);
@@ -166,22 +166,15 @@ namespace Mapsui.UI.Uwp
 
         private void MapControlLoaded(object sender, RoutedEventArgs e)
         {
-            UpdateSize();
-        }
-        
-        private void MapControlSizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            TryInitializeViewport(ActualWidth, ActualHeight);
-            Clip = new RectangleGeometry { Rect = new Rect(0, 0, ActualWidth, ActualHeight) };
-            UpdateSize();
-            RefreshData();
-            Refresh();
+            SetViewportSize();
         }
 
-        private void UpdateSize()
+        private void MapControlSizeChanged(object sender, SizeChangedEventArgs e)
         {
-            _viewport.Width = ActualWidth;
-            _viewport.Height = ActualHeight;
+            Clip = new RectangleGeometry { Rect = new Rect(0, 0, ActualWidth, ActualHeight) };
+            SetViewportSize();
+            RefreshData();
+            Refresh();
         }
 
         private void RunOnUIThread(Action action)
@@ -193,9 +186,7 @@ namespace Mapsui.UI.Uwp
         {
             if (Renderer == null) return;
             if (_map == null) return;
-
-            TryInitializeViewport(ActualWidth, ActualHeight);
-            if (!Viewport.Initialized) return;
+            if (!_viewport.IsSizeInitialized()) return;
 
             Renderer.Render(e.Surface.Canvas, Viewport, _map.Layers, _map.Widgets, _map.BackColor);
         }

@@ -3,18 +3,6 @@ using BruTile;
 // ReSharper disable CheckNamespace
 namespace Mapsui.Geometries
 {
-    public static class ViewportExtensions
-    {
-        public static IViewport ToScaledViewport(this Viewport viewport, float scale)
-        {
-            var result = new Viewport(viewport);
-            result.Width = result.Width * scale;
-            result.Height = result.Height * scale;
-            result.Resolution = result.Resolution / scale;
-            return result;
-        }
-    }
-
     public static class BoundingBoxExtensions
     {
         public static BoundingBox Copy(this BoundingBox original)
@@ -27,6 +15,7 @@ namespace Mapsui.Geometries
             if (box == null) return false;
             if (double.IsNaN(box.Width)) return false;
             if (double.IsNaN(box.Height)) return false;
+            if (box.Centroid == null) return false;
 
             return true;
         }

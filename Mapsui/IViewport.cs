@@ -75,12 +75,7 @@ namespace Mapsui
         /// IsRotated is true, when viewport displays map rotated
         /// </summary>
         bool IsRotated { get; }
-
-        /// <summary>
-        /// Viewport is initialized and ready to use
-        /// </summary>
-        bool Initialized { get; }
-
+        
         /// <summary>
         /// Converts X/Y in map units to a point in device independent unit (or DIP or DP),
         /// respecting rotation

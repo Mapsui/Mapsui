@@ -24,11 +24,11 @@ namespace Mapsui.Samples.Common.Helpers
 
             foreach (var mbTileFile in mbTileFiles)
             {
-                CopyToAndroidStorage(embeddedResourcesPath, mbTileFile, createFile);
+                CopyEmbeddedResourceToStorage(embeddedResourcesPath, mbTileFile, createFile);
             }
         }
 
-        private static void CopyToAndroidStorage(string embeddedResourcesPath, string mbTilesFile,
+        private static void CopyEmbeddedResourceToStorage(string embeddedResourcesPath, string mbTilesFile,
             Func<string, Stream> createFile)
         {
             var assembly = typeof(PointsSample).GetTypeInfo().Assembly;

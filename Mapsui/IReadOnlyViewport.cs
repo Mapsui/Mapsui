@@ -10,7 +10,7 @@ namespace Mapsui
         double Width { get; }
         double Height { get; }
         double Rotation { get; }
-        bool Initialized { get; }
+        bool IsSizeInitialized();
         bool IsRotated { get; }
         Point ScreenToWorld(Point screenPosition);
         Point ScreenToWorld(double x, double y);

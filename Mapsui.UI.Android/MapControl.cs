@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using Android.Content;
 using Android.Graphics;
 using Android.OS;
@@ -22,6 +23,7 @@ namespace Mapsui.UI.Android
         private double _previousAngle;
         private double _previousRadius = 1f;
         private TouchMode _mode = TouchMode.None;
+        private Handler _mainLooperHandler;
         /// <summary>
         /// Saver for center before last pinch movement
         /// </summary>
@@ -45,6 +47,10 @@ namespace Mapsui.UI.Android
             _canvas = new SKCanvasView(Context) { IgnorePixelScaling = true };
             _canvas.PaintSurface += CanvasOnPaintSurface;
             AddView(_canvas);
+
+            _mainLooperHandler = new Handler(Looper.MainLooper);
+
+            SetViewportSize(); // todo: check if size is available, perhaps we need a load event
 
             Map = new Map();
             Touch += MapView_Touch;
@@ -73,20 +79,20 @@ namespace Mapsui.UI.Android
         protected override void OnSizeChanged(int width, int height, int oldWidth, int oldHeight)
         {
             base.OnSizeChanged(width, height, oldWidth, oldHeight);
-
-            _viewport.Width = ViewportWidth;
-            _viewport.Height = ViewportHeight;
+            SetViewportSize();
         }
 
         private void RunOnUIThread(Action action)
         {
-            new Handler(Looper.MainLooper).Post(action);
+            if (SynchronizationContext.Current == null)
+                _mainLooperHandler.Post(action);
+            else
+                action();
         }
 
         private void CanvasOnPaintSurface(object sender, SKPaintSurfaceEventArgs args)
         {
-            TryInitializeViewport(ViewportWidth, ViewportHeight);
-            if (!Viewport.Initialized) return;
+            if (!_viewport.IsSizeInitialized()) return;
 
             Renderer.Render(args.Surface.Canvas, Viewport, _map.Layers, _map.Widgets, _map.BackColor);
         }

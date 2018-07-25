@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Net;
+using System.Threading;
 using Mapsui.Fetcher;
 using Mapsui.Layers;
 using Mapsui.Logging;
@@ -53,6 +54,15 @@ namespace Mapsui.UI.Wpf
         public double ReSnapRotationDegrees { get; set; }
         
         public IRenderer Renderer { get; set; } = new MapRenderer();
+
+
+        /// <summary>
+        /// Viewport holding informations about visible part of the map. Viewport can never be null.
+        /// </summary>
+        private readonly Viewport _viewport = new Viewport { Center = { X = double.NaN, Y = double.NaN }, Resolution = double.NaN };
+
+        public IReadOnlyViewport Viewport => _viewport;
+        public INavigator Navigator { get; private set; }
 
         public event EventHandler ViewportInitialized; //todo: Consider to use the Viewport PropertyChanged
 
@@ -185,25 +195,7 @@ namespace Mapsui.UI.Wpf
         /// <inheritdoc />
         public Point ToDeviceIndependentUnits(Point coordinateInPixels)
         {
-            return new Point(
-                coordinateInPixels.X / PixelDensity,
-                coordinateInPixels.Y / PixelDensity);
-        }
-
-        private void TryInitializeViewport(double screenWidth, double screenHeight)
-        {
-            if (Viewport?.Initialized != false) return;
-
-            if (_viewport.TryInitializeViewport(_map.Envelope, screenWidth, screenHeight))
-            {
-                // limiter now only properly implemented in WPF.
-                ViewportLimiter.Limit(_viewport, _map.ZoomMode, _map.ZoomLimits, _map.Resolutions,
-                    _map.PanMode, _map.PanLimits, _map.Envelope);
-
-                _map.Home(Navigator);
-                RefreshData();
-                OnViewportInitialized();
-            }
+            return new Point(coordinateInPixels.X / PixelDensity, coordinateInPixels.Y / PixelDensity);
         }
 
         private void OnViewportInitialized()
@@ -303,13 +295,19 @@ namespace Mapsui.UI.Wpf
             return null;
         }
 
-        /// <summary>
-        /// Viewport holding informations about visible part of the map. Viewport can never be null.
-        /// </summary>
-        private Viewport _viewport { get; } = new Viewport { Center = { X = double.NaN, Y = double.NaN }, Resolution = double.NaN };
+        private void SetViewportSize()
+        {
+            var wasSizeInitialized = _viewport.IsSizeInitialized();
+            _viewport.SetSize(ViewportWidth, ViewportHeight);
 
-        public IReadOnlyViewport Viewport => _viewport;
-        public INavigator Navigator { get; private set; }
+            if (!wasSizeInitialized && _viewport.IsSizeInitialized())
+            {
+                Map.Home(Navigator);
+                OnViewportInitialized();
+            }
+
+            Refresh();
+        }
     }
 }
 
