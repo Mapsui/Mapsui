@@ -15,7 +15,7 @@ namespace Mapsui.UI.iOS
     [Register("MapControl"), DesignTimeVisible(true)]
     public partial class MapControl : UIView, IMapControl
     {
-        private readonly SKGLView _canvas = new SKGLView();
+        private readonly SKCanvasView _canvas = new SKCanvasView();
         private double _innerRotation;
         
         public MapControl(CGRect frame)
@@ -86,7 +86,7 @@ namespace Mapsui.UI.iOS
                 position, position, Renderer.SymbolCache, WidgetTouched, 1));
         }
        
-        void OnPaintSurface(object sender, SKPaintGLSurfaceEventArgs args)
+        void OnPaintSurface(object sender, SKPaintSurfaceEventArgs args)
         {
             // Unfortunately the SKGLView does not have a IgnorePixelScaling property,
             // so have to adjust for density with SKGLView.Scale.
