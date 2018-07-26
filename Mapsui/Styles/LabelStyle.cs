@@ -52,11 +52,11 @@ namespace Mapsui.Styles
             /// <summary>
             /// Left oriented
             /// </summary>
-            Bottom = 0,
+            Bottom = 2,
             /// <summary>
             /// Right oriented
             /// </summary>
-            Top = 2,
+            Top = 0,
             /// <summary>
             /// Centered
             /// </summary>
