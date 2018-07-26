@@ -56,6 +56,7 @@ namespace Mapsui.Providers
     /// </code>
     /// </example>
     /// </remarks>
+    [Obsolete("Use MemoryProvider2 instead")]
     public class MemoryProvider : IProvider
     {
         private readonly object _syncRoot = new object();
