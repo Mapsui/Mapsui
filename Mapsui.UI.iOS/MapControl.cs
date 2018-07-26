@@ -17,7 +17,7 @@ namespace Mapsui.UI.iOS
     public partial class MapControl : UIView, IMapControl
     {
         private Map _map;
-        private readonly SKGLView _canvas = new SKGLView();
+        private readonly SKCanvasView _canvas = new SKCanvasView();
         private double _innerRotation;
 
         public event EventHandler ViewportInitialized;
@@ -103,7 +103,7 @@ namespace Mapsui.UI.iOS
             Map.InvokeInfo(position, position, 1, Renderer.SymbolCache, WidgetTouched, 1);
         }
 
-        void OnPaintSurface(object sender, SKPaintGLSurfaceEventArgs args)
+        void OnPaintSurface(object sender, SKPaintSurfaceEventArgs args)
         {
             TryInitializeViewport();
             if (!_map.Viewport.Initialized) return;
