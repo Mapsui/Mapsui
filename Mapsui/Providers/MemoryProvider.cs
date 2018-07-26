@@ -56,16 +56,15 @@ namespace Mapsui.Providers
     /// </code>
     /// </example>
     /// </remarks>
-    [Obsolete("Use MemoryProvider2 instead")]
     public class MemoryProvider : IProvider
     {
-        private readonly object _syncRoot = new object();
-        private IFeatures _features;
+        private IReadOnlyList<IFeature> _features;
 
         /// <summary>
         /// Gets or sets the geometries this datasource contains
         /// </summary>
         public IEnumerable<IFeature> Features => _features;
+
 
         public double SymbolSize { get; set; }
 
@@ -73,11 +72,14 @@ namespace Mapsui.Providers
         /// The spatial reference ID (CRS)
         /// </summary>
         public string CRS { get; set; }
-        
+
+        BoundingBox _boundingBox;
+
         public MemoryProvider()
         {
             CRS = "";
-            _features = new Features();
+            _features = new List<IFeature>();
+            _boundingBox = GetExtents(_features);
         }
 
         /// <summary>
@@ -87,14 +89,8 @@ namespace Mapsui.Providers
         public MemoryProvider(IEnumerable<IGeometry> geometries)
         {
             CRS = "";
-            var features = new Features();
-            foreach (IGeometry geometry in geometries)
-            {
-                IFeature feature = features.New();
-                feature.Geometry = geometry;
-                features.Add(feature);
-            }
-            _features = features;
+            _features = geometries.Select(g => new Feature { Geometry = g }).ToList();
+            _boundingBox = GetExtents(_features);
         }
 
         /// <summary>
@@ -104,7 +100,8 @@ namespace Mapsui.Providers
         public MemoryProvider(IFeature feature)
         {
             CRS = "";
-            _features = new Features {feature};
+            _features = new List<IFeature> { feature };
+            _boundingBox = GetExtents(_features);
         }
 
         /// <summary>
@@ -123,9 +120,8 @@ namespace Mapsui.Providers
         public MemoryProvider(IEnumerable<IFeature> features)
         {
             CRS = "";
-            var localFeatures = new Features();
-            foreach (var feature in features) localFeatures.Add(feature);
-            _features = localFeatures;
+            _features = features.ToList();
+            _boundingBox = GetExtents(_features);
         }
 
         /// <summary>
@@ -135,7 +131,8 @@ namespace Mapsui.Providers
         public MemoryProvider(IFeatures features)
         {
             CRS = "";
-            _features = features;
+            _features = features.ToList();
+            _boundingBox = GetExtents(_features);
         }
 
         /// <summary>
@@ -145,11 +142,15 @@ namespace Mapsui.Providers
         public MemoryProvider(Geometry geometry)
         {
             CRS = "";
-            var features = new Features();
-            IFeature feature = features.New();
-            feature.Geometry = geometry;
-            features.Add(feature);
-            _features = features;
+
+            _features = new List<IFeature>
+            {
+                new Feature
+                {
+                    Geometry = geometry
+                }
+            };
+            _boundingBox = GetExtents(_features);
 
             SymbolSize = 64;
         }
@@ -166,44 +167,18 @@ namespace Mapsui.Providers
         {
             if (box == null) throw new ArgumentNullException(nameof(box));
 
-            lock (_syncRoot)
-            {
-                var features = Features.ToList();
+            var features = Features.ToList();
 
-                // Use a larger extent so that symbols partially outside of the extent are included
-                var grownBox = box.Grow(resolution*SymbolSize*0.5);
+            // Use a larger extent so that symbols partially outside of the extent are included
+            var grownBox = box.Grow(resolution * SymbolSize * 0.5);
 
-                foreach (var feature in features)
-                {
-                    if (feature.Geometry == null)
-                        continue;
-
-                    var boundingBox = feature.Geometry.GetBoundingBox();
-                    if (boundingBox!= null && grownBox.Intersects(boundingBox))
-                    {
-                        yield return feature;
-                    }
-                }
-            }
-        }
-
-
-        public IFeature Find(object value)
-        {
-            lock (_syncRoot)
-            {
-                if (string.IsNullOrEmpty(_features.PrimaryKey)) throw new Exception("ID Field was not set");
-                return Find(value, _features.PrimaryKey);
-            }
+            return features.Where(f => f.Geometry != null && f.Geometry.GetBoundingBox().Intersects(grownBox)).ToList();
         }
 
         public IFeature Find(object value, string primaryKey)
         {
-            lock (_syncRoot)
-            {
-                return Features.FirstOrDefault(f => f[primaryKey] != null && value != null &&
-                    f[primaryKey].Equals(value));
-            }
+            return Features.FirstOrDefault(f => f[primaryKey] != null && value != null &&
+                f[primaryKey].Equals(value));
         }
 
         /// <summary>
@@ -212,42 +187,31 @@ namespace Mapsui.Providers
         /// <returns>boundingbox</returns>
         public BoundingBox GetExtents()
         {
-            lock (_syncRoot)
-            {
-                BoundingBox box = null;
-                foreach (IFeature feature in Features)
-                {
-                    if (feature.Geometry.IsEmpty()) continue;
-                    box = box == null
-                            ? feature.Geometry.GetBoundingBox()
-                            : box.Join(feature.Geometry.GetBoundingBox());
-                }
-                return box;
-            }
-        }
-        
-        public void Clear()
-        {
-            lock (_syncRoot)
-            {
-                _features.Clear();
-            }
+            return _boundingBox;
         }
 
-        public void ReplaceFeatures(Features features)
+        private static BoundingBox GetExtents(IReadOnlyList<IFeature> features)
         {
-            lock (_syncRoot)
+            BoundingBox box = null;
+            foreach (var feature in features)
             {
-                _features = features;
+                if (feature.Geometry.IsEmpty()) continue;
+                box = box == null
+                        ? feature.Geometry.GetBoundingBox()
+                        : box.Join(feature.Geometry.GetBoundingBox());
             }
+            return box;
+        }
+
+        public void Clear()
+        {
+            _features = new List<IFeature>();
         }
 
         public void ReplaceFeatures(IEnumerable<IFeature> features)
         {
-            lock (_syncRoot)
-            {
-                _features = new Features(features);
-            }
+            _features = features.ToList();
+            _boundingBox = GetExtents(_features);
         }
 
     }

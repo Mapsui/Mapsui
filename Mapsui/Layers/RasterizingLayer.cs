@@ -12,7 +12,7 @@ namespace Mapsui.Layers
 {
     public class RasterizingLayer : BaseLayer
     {
-        private readonly MemoryProvider2 _cache;
+        private readonly MemoryProvider _cache;
         private readonly int _delayBeforeRasterize;
         private readonly ILayer _layer;
         private readonly bool _onlyRerasterizeIfOutsideOverscan;
@@ -57,7 +57,7 @@ namespace Mapsui.Layers
             _delayBeforeRasterize = delayBeforeRasterize;
             _renderResolutionMultiplier = renderResolutionMultiplier;
             _rasterizer = rasterizer;
-            _cache = new MemoryProvider2();
+            _cache = new MemoryProvider();
             _overscan = overscanRatio;
             _onlyRerasterizeIfOutsideOverscan = onlyRerasterizeIfOutsideOverscan;
             _layer.DataChanged += LayerOnDataChanged;

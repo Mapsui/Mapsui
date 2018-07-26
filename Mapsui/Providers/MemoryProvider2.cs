@@ -56,6 +56,7 @@ namespace Mapsui.Providers
     /// </code>
     /// </example>
     /// </remarks>
+    [Obsolete("User MemoryProvider instead")]
     public class MemoryProvider2 : IProvider
     {
 
