@@ -274,7 +274,7 @@ namespace Mapsui.UI.Wpf
             // Last touch released
             if (touchPoints.Count == 0)
             {
-                InvalidateCanvas();
+                RefreshGraphics();
                 _mode = TouchMode.None;
                 _map.ViewChanged(true);
             }
@@ -310,7 +310,7 @@ namespace Mapsui.UI.Wpf
 
                             ViewportLimiter.LimitExtent(_map.Viewport, _map.PanMode, _map.PanLimits, _map.Envelope);
 
-                            InvalidateCanvas();
+                            RefreshGraphics();
                         }
 
                         _previousCenter = touchPosition;
@@ -355,7 +355,7 @@ namespace Mapsui.UI.Wpf
                             _map.ZoomMode, _map.ZoomLimits, _map.Resolutions,
                             _map.PanMode, _map.PanLimits, _map.Envelope);
 
-                        InvalidateCanvas();
+                        RefreshGraphics();
                     }
                     break;
             }

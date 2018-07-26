@@ -119,7 +119,7 @@ namespace Mapsui.UI.Android
             switch (args.Event.Action)
             {
                 case MotionEventActions.Up:
-                    InvalidateCanvas();
+                    RefreshGraphics();
                     _mode = TouchMode.None;
                     _map.ViewChanged(true);
                     break;
@@ -173,7 +173,7 @@ namespace Mapsui.UI.Android
 
                                     ViewportLimiter.LimitExtent(_map.Viewport, _map.PanMode, _map.PanLimits, _map.Envelope);
 
-                                    InvalidateCanvas();
+                                    RefreshGraphics();
                                 }
                                 _previousCenter = touchPosition;
                             }
@@ -217,7 +217,7 @@ namespace Mapsui.UI.Android
                                     _map.ZoomMode, _map.ZoomLimits, _map.Resolutions,
                                     _map.PanMode, _map.PanLimits, _map.Envelope);
 
-                                InvalidateCanvas();
+                                RefreshGraphics();
                             }
                             break;
                     }
@@ -345,22 +345,6 @@ namespace Mapsui.UI.Android
         {
             RefreshData();
             RefreshGraphics();
-        }
-
-        internal void InvalidateCanvas()
-        {
-            try
-            {
-                PostInvalidate();
-            }
-            catch (ObjectDisposedException e)
-            {
-                // See issue: https://github.com/Mapsui/Mapsui/issues/433
-                // What seems to be happening. The Activity is Disposed. Appently it's children get Disposed
-                // explicitly by some in Xamarin. During this Dispose the MessageCenter, which is itself not
-                // disposed get another notification to call RefreshGraphics.
-                Logger.Log(LogLevel.Warning, "This can happen when the parent Activity is disposing.", e);
-            }
         }
 
         protected override void OnLayout(bool changed, int l, int t, int r, int b)
