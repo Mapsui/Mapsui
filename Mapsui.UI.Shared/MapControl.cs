@@ -176,7 +176,7 @@ namespace Mapsui.UI.Wpf
                 {
                     SubscribeToMapEvents(_map);
                     Navigator = new Navigator(_map, _viewport);
-                    _map.Home(Navigator);
+                    if (_viewport.IsSizeInitialized()) _map.Home(Navigator); // If size is not initialized it will be called at set size. This is okay.
                     RefreshData();
                 }
 
@@ -302,7 +302,7 @@ namespace Mapsui.UI.Wpf
 
             if (!wasSizeInitialized && _viewport.IsSizeInitialized())
             {
-                Map.Home(Navigator);
+                Map?.Home(Navigator); // When Map is null here Home will be called on Map set. So this is okay.
                 OnViewportInitialized();
             }
 
