@@ -116,7 +116,8 @@ namespace Mapsui.UI.Wpf
             get => _renderMode;
             set
             {
-                if (value == RenderMode.Skia)
+                _renderMode = value;
+                if (_renderMode == RenderMode.Skia)
                 {
                     WpfCanvas.Visibility = Visibility.Collapsed;
                     SkiaCanvas.Visibility = Visibility.Visible;
@@ -130,7 +131,6 @@ namespace Mapsui.UI.Wpf
                     Renderer = new Rendering.Xaml.MapRenderer();
                     RefreshGraphics();
                 }
-                _renderMode = value;
             }
         }
 
