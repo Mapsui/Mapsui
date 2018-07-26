@@ -243,25 +243,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.Fetcher.IAsyncDataFetcher.ClearCache
   nameWithType: IAsyncDataFetcher.ClearCache
-- uid: Mapsui.Fetcher.IAsyncDataFetcher.DataChanged
-  name: DataChanged
-  href: api/Mapsui.Fetcher.IAsyncDataFetcher.html#Mapsui_Fetcher_IAsyncDataFetcher_DataChanged
-  commentId: E:Mapsui.Fetcher.IAsyncDataFetcher.DataChanged
-  fullName: Mapsui.Fetcher.IAsyncDataFetcher.DataChanged
-  nameWithType: IAsyncDataFetcher.DataChanged
-- uid: Mapsui.Fetcher.IAsyncDataFetcher.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,System.Boolean)
-  name: RefreshData(BoundingBox, Double, Boolean)
-  href: api/Mapsui.Fetcher.IAsyncDataFetcher.html#Mapsui_Fetcher_IAsyncDataFetcher_RefreshData_Mapsui_Geometries_BoundingBox_System_Double_System_Boolean_
-  commentId: M:Mapsui.Fetcher.IAsyncDataFetcher.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,System.Boolean)
-  fullName: Mapsui.Fetcher.IAsyncDataFetcher.RefreshData(Mapsui.Geometries.BoundingBox, System.Double, System.Boolean)
-  nameWithType: IAsyncDataFetcher.RefreshData(BoundingBox, Double, Boolean)
-- uid: Mapsui.Fetcher.IAsyncDataFetcher.RefreshData*
-  name: RefreshData
-  href: api/Mapsui.Fetcher.IAsyncDataFetcher.html#Mapsui_Fetcher_IAsyncDataFetcher_RefreshData_
-  commentId: Overload:Mapsui.Fetcher.IAsyncDataFetcher.RefreshData
-  isSpec: "True"
-  fullName: Mapsui.Fetcher.IAsyncDataFetcher.RefreshData
-  nameWithType: IAsyncDataFetcher.RefreshData
 - uid: Mapsui.Fetcher.IFetchStrategy
   name: IFetchStrategy
   href: api/Mapsui.Fetcher.IFetchStrategy.html
@@ -4516,32 +4497,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.Layers.AnimatedPointLayer.AnimatedPointLayer
   nameWithType: AnimatedPointLayer.AnimatedPointLayer
-- uid: Mapsui.Layers.AnimatedPointLayer.AbortFetch
-  name: AbortFetch()
-  href: api/Mapsui.Layers.AnimatedPointLayer.html#Mapsui_Layers_AnimatedPointLayer_AbortFetch
-  commentId: M:Mapsui.Layers.AnimatedPointLayer.AbortFetch
-  fullName: Mapsui.Layers.AnimatedPointLayer.AbortFetch()
-  nameWithType: AnimatedPointLayer.AbortFetch()
-- uid: Mapsui.Layers.AnimatedPointLayer.AbortFetch*
-  name: AbortFetch
-  href: api/Mapsui.Layers.AnimatedPointLayer.html#Mapsui_Layers_AnimatedPointLayer_AbortFetch_
-  commentId: Overload:Mapsui.Layers.AnimatedPointLayer.AbortFetch
-  isSpec: "True"
-  fullName: Mapsui.Layers.AnimatedPointLayer.AbortFetch
-  nameWithType: AnimatedPointLayer.AbortFetch
-- uid: Mapsui.Layers.AnimatedPointLayer.ClearCache
-  name: ClearCache()
-  href: api/Mapsui.Layers.AnimatedPointLayer.html#Mapsui_Layers_AnimatedPointLayer_ClearCache
-  commentId: M:Mapsui.Layers.AnimatedPointLayer.ClearCache
-  fullName: Mapsui.Layers.AnimatedPointLayer.ClearCache()
-  nameWithType: AnimatedPointLayer.ClearCache()
-- uid: Mapsui.Layers.AnimatedPointLayer.ClearCache*
-  name: ClearCache
-  href: api/Mapsui.Layers.AnimatedPointLayer.html#Mapsui_Layers_AnimatedPointLayer_ClearCache_
-  commentId: Overload:Mapsui.Layers.AnimatedPointLayer.ClearCache
-  isSpec: "True"
-  fullName: Mapsui.Layers.AnimatedPointLayer.ClearCache
-  nameWithType: AnimatedPointLayer.ClearCache
 - uid: Mapsui.Layers.AnimatedPointLayer.Envelope
   name: Envelope
   href: api/Mapsui.Layers.AnimatedPointLayer.html#Mapsui_Layers_AnimatedPointLayer_Envelope
@@ -4619,19 +4574,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.Layers.BaseLayer.BaseLayer
   nameWithType: BaseLayer.BaseLayer
-- uid: Mapsui.Layers.BaseLayer.AbortFetch
-  name: AbortFetch()
-  href: api/Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_AbortFetch
-  commentId: M:Mapsui.Layers.BaseLayer.AbortFetch
-  fullName: Mapsui.Layers.BaseLayer.AbortFetch()
-  nameWithType: BaseLayer.AbortFetch()
-- uid: Mapsui.Layers.BaseLayer.AbortFetch*
-  name: AbortFetch
-  href: api/Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_AbortFetch_
-  commentId: Overload:Mapsui.Layers.BaseLayer.AbortFetch
-  isSpec: "True"
-  fullName: Mapsui.Layers.BaseLayer.AbortFetch
-  nameWithType: BaseLayer.AbortFetch
 - uid: Mapsui.Layers.BaseLayer.Attribution
   name: Attribution
   href: api/Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Attribution
@@ -4658,19 +4600,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.Layers.BaseLayer.Busy
   nameWithType: BaseLayer.Busy
-- uid: Mapsui.Layers.BaseLayer.ClearCache
-  name: ClearCache()
-  href: api/Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_ClearCache
-  commentId: M:Mapsui.Layers.BaseLayer.ClearCache
-  fullName: Mapsui.Layers.BaseLayer.ClearCache()
-  nameWithType: BaseLayer.ClearCache()
-- uid: Mapsui.Layers.BaseLayer.ClearCache*
-  name: ClearCache
-  href: api/Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_ClearCache_
-  commentId: Overload:Mapsui.Layers.BaseLayer.ClearCache
-  isSpec: "True"
-  fullName: Mapsui.Layers.BaseLayer.ClearCache
-  nameWithType: BaseLayer.ClearCache
 - uid: Mapsui.Layers.BaseLayer.CRS
   name: CRS
   href: api/Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_CRS
@@ -5054,6 +4983,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.Layers.ILayer.CRS
   nameWithType: ILayer.CRS
+- uid: Mapsui.Layers.ILayer.DataChanged
+  name: DataChanged
+  href: api/Mapsui.Layers.ILayer.html#Mapsui_Layers_ILayer_DataChanged
+  commentId: E:Mapsui.Layers.ILayer.DataChanged
+  fullName: Mapsui.Layers.ILayer.DataChanged
+  nameWithType: ILayer.DataChanged
 - uid: Mapsui.Layers.ILayer.Enabled
   name: Enabled
   href: api/Mapsui.Layers.ILayer.html#Mapsui_Layers_ILayer_Enabled
@@ -5197,6 +5132,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.Layers.ILayer.Opacity
   nameWithType: ILayer.Opacity
+- uid: Mapsui.Layers.ILayer.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,System.Boolean)
+  name: RefreshData(BoundingBox, Double, Boolean)
+  href: api/Mapsui.Layers.ILayer.html#Mapsui_Layers_ILayer_RefreshData_Mapsui_Geometries_BoundingBox_System_Double_System_Boolean_
+  commentId: M:Mapsui.Layers.ILayer.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,System.Boolean)
+  fullName: Mapsui.Layers.ILayer.RefreshData(Mapsui.Geometries.BoundingBox, System.Double, System.Boolean)
+  nameWithType: ILayer.RefreshData(BoundingBox, Double, Boolean)
+- uid: Mapsui.Layers.ILayer.RefreshData*
+  name: RefreshData
+  href: api/Mapsui.Layers.ILayer.html#Mapsui_Layers_ILayer_RefreshData_
+  commentId: Overload:Mapsui.Layers.ILayer.RefreshData
+  isSpec: "True"
+  fullName: Mapsui.Layers.ILayer.RefreshData
+  nameWithType: ILayer.RefreshData
 - uid: Mapsui.Layers.ILayer.Resolutions
   name: Resolutions
   href: api/Mapsui.Layers.ILayer.html#Mapsui_Layers_ILayer_Resolutions
@@ -5372,12 +5320,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.Layers.ImageLayer.RefreshData
   nameWithType: ImageLayer.RefreshData
-- uid: Mapsui.Layers.LabelLayer
-  name: LabelLayer
-  href: api/Mapsui.Layers.LabelLayer.html
-  commentId: T:Mapsui.Layers.LabelLayer
-  fullName: Mapsui.Layers.LabelLayer
-  nameWithType: LabelLayer
 - uid: Mapsui.Layers.Layer
   name: Layer
   href: api/Mapsui.Layers.Layer.html
@@ -5717,32 +5659,6 @@ references:
   commentId: T:Mapsui.Layers.MemoryLayer
   fullName: Mapsui.Layers.MemoryLayer
   nameWithType: MemoryLayer
-- uid: Mapsui.Layers.MemoryLayer.AbortFetch
-  name: AbortFetch()
-  href: api/Mapsui.Layers.MemoryLayer.html#Mapsui_Layers_MemoryLayer_AbortFetch
-  commentId: M:Mapsui.Layers.MemoryLayer.AbortFetch
-  fullName: Mapsui.Layers.MemoryLayer.AbortFetch()
-  nameWithType: MemoryLayer.AbortFetch()
-- uid: Mapsui.Layers.MemoryLayer.AbortFetch*
-  name: AbortFetch
-  href: api/Mapsui.Layers.MemoryLayer.html#Mapsui_Layers_MemoryLayer_AbortFetch_
-  commentId: Overload:Mapsui.Layers.MemoryLayer.AbortFetch
-  isSpec: "True"
-  fullName: Mapsui.Layers.MemoryLayer.AbortFetch
-  nameWithType: MemoryLayer.AbortFetch
-- uid: Mapsui.Layers.MemoryLayer.ClearCache
-  name: ClearCache()
-  href: api/Mapsui.Layers.MemoryLayer.html#Mapsui_Layers_MemoryLayer_ClearCache
-  commentId: M:Mapsui.Layers.MemoryLayer.ClearCache
-  fullName: Mapsui.Layers.MemoryLayer.ClearCache()
-  nameWithType: MemoryLayer.ClearCache()
-- uid: Mapsui.Layers.MemoryLayer.ClearCache*
-  name: ClearCache
-  href: api/Mapsui.Layers.MemoryLayer.html#Mapsui_Layers_MemoryLayer_ClearCache_
-  commentId: Overload:Mapsui.Layers.MemoryLayer.ClearCache
-  isSpec: "True"
-  fullName: Mapsui.Layers.MemoryLayer.ClearCache
-  nameWithType: MemoryLayer.ClearCache
 - uid: Mapsui.Layers.MemoryLayer.DataSource
   name: DataSource
   href: api/Mapsui.Layers.MemoryLayer.html#Mapsui_Layers_MemoryLayer_DataSource
@@ -6062,19 +5978,6 @@ references:
   commentId: T:Mapsui.Layers.WritableLayer
   fullName: Mapsui.Layers.WritableLayer
   nameWithType: WritableLayer
-- uid: Mapsui.Layers.WritableLayer.AbortFetch
-  name: AbortFetch()
-  href: api/Mapsui.Layers.WritableLayer.html#Mapsui_Layers_WritableLayer_AbortFetch
-  commentId: M:Mapsui.Layers.WritableLayer.AbortFetch
-  fullName: Mapsui.Layers.WritableLayer.AbortFetch()
-  nameWithType: WritableLayer.AbortFetch()
-- uid: Mapsui.Layers.WritableLayer.AbortFetch*
-  name: AbortFetch
-  href: api/Mapsui.Layers.WritableLayer.html#Mapsui_Layers_WritableLayer_AbortFetch_
-  commentId: Overload:Mapsui.Layers.WritableLayer.AbortFetch
-  isSpec: "True"
-  fullName: Mapsui.Layers.WritableLayer.AbortFetch
-  nameWithType: WritableLayer.AbortFetch
 - uid: Mapsui.Layers.WritableLayer.Add(Mapsui.Providers.IFeature)
   name: Add(IFeature)
   href: api/Mapsui.Layers.WritableLayer.html#Mapsui_Layers_WritableLayer_Add_Mapsui_Providers_IFeature_
@@ -6117,19 +6020,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.Layers.WritableLayer.Clear
   nameWithType: WritableLayer.Clear
-- uid: Mapsui.Layers.WritableLayer.ClearCache
-  name: ClearCache()
-  href: api/Mapsui.Layers.WritableLayer.html#Mapsui_Layers_WritableLayer_ClearCache
-  commentId: M:Mapsui.Layers.WritableLayer.ClearCache
-  fullName: Mapsui.Layers.WritableLayer.ClearCache()
-  nameWithType: WritableLayer.ClearCache()
-- uid: Mapsui.Layers.WritableLayer.ClearCache*
-  name: ClearCache
-  href: api/Mapsui.Layers.WritableLayer.html#Mapsui_Layers_WritableLayer_ClearCache_
-  commentId: Overload:Mapsui.Layers.WritableLayer.ClearCache
-  isSpec: "True"
-  fullName: Mapsui.Layers.WritableLayer.ClearCache
-  nameWithType: WritableLayer.ClearCache
 - uid: Mapsui.Layers.WritableLayer.Envelope
   name: Envelope
   href: api/Mapsui.Layers.WritableLayer.html#Mapsui_Layers_WritableLayer_Envelope
@@ -17637,25 +17527,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.Rendering.Xaml.RectExtensions.ToMapsui
   nameWithType: RectExtensions.ToMapsui
-- uid: Mapsui.Rendering.Xaml.StackedLabelLayerRenderer
-  name: StackedLabelLayerRenderer
-  href: api/Mapsui.Rendering.Xaml.StackedLabelLayerRenderer.html
-  commentId: T:Mapsui.Rendering.Xaml.StackedLabelLayerRenderer
-  fullName: Mapsui.Rendering.Xaml.StackedLabelLayerRenderer
-  nameWithType: StackedLabelLayerRenderer
-- uid: Mapsui.Rendering.Xaml.StackedLabelLayerRenderer.Render(Mapsui.IViewport,Mapsui.Layers.LabelLayer)
-  name: Render(IViewport, LabelLayer)
-  href: api/Mapsui.Rendering.Xaml.StackedLabelLayerRenderer.html#Mapsui_Rendering_Xaml_StackedLabelLayerRenderer_Render_Mapsui_IViewport_Mapsui_Layers_LabelLayer_
-  commentId: M:Mapsui.Rendering.Xaml.StackedLabelLayerRenderer.Render(Mapsui.IViewport,Mapsui.Layers.LabelLayer)
-  fullName: Mapsui.Rendering.Xaml.StackedLabelLayerRenderer.Render(Mapsui.IViewport, Mapsui.Layers.LabelLayer)
-  nameWithType: StackedLabelLayerRenderer.Render(IViewport, LabelLayer)
-- uid: Mapsui.Rendering.Xaml.StackedLabelLayerRenderer.Render*
-  name: Render
-  href: api/Mapsui.Rendering.Xaml.StackedLabelLayerRenderer.html#Mapsui_Rendering_Xaml_StackedLabelLayerRenderer_Render_
-  commentId: Overload:Mapsui.Rendering.Xaml.StackedLabelLayerRenderer.Render
-  isSpec: "True"
-  fullName: Mapsui.Rendering.Xaml.StackedLabelLayerRenderer.Render
-  nameWithType: StackedLabelLayerRenderer.Render
 - uid: Mapsui.Rendering.Xaml.StreamExtensions
   name: StreamExtensions
   href: api/Mapsui.Rendering.Xaml.StreamExtensions.html
@@ -20642,6 +20513,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Android.MapControl.MapControl
   nameWithType: MapControl.MapControl
+- uid: Mapsui.UI.Android.MapControl.Clear
+  name: Clear()
+  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_Clear
+  commentId: M:Mapsui.UI.Android.MapControl.Clear
+  fullName: Mapsui.UI.Android.MapControl.Clear()
+  nameWithType: MapControl.Clear()
+- uid: Mapsui.UI.Android.MapControl.Clear*
+  name: Clear
+  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_Clear_
+  commentId: Overload:Mapsui.UI.Android.MapControl.Clear
+  isSpec: "True"
+  fullName: Mapsui.UI.Android.MapControl.Clear
+  nameWithType: MapControl.Clear
 - uid: Mapsui.UI.Android.MapControl.Dispose
   name: Dispose()
   href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_Dispose
@@ -20949,38 +20833,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Android.MapControl.Viewport
   nameWithType: MapControl.Viewport
-- uid: Mapsui.UI.Android.MapControl.ViewportHeight
-  name: ViewportHeight
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_ViewportHeight
-  commentId: P:Mapsui.UI.Android.MapControl.ViewportHeight
-  fullName: Mapsui.UI.Android.MapControl.ViewportHeight
-  nameWithType: MapControl.ViewportHeight
-- uid: Mapsui.UI.Android.MapControl.ViewportHeight*
-  name: ViewportHeight
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_ViewportHeight_
-  commentId: Overload:Mapsui.UI.Android.MapControl.ViewportHeight
-  isSpec: "True"
-  fullName: Mapsui.UI.Android.MapControl.ViewportHeight
-  nameWithType: MapControl.ViewportHeight
 - uid: Mapsui.UI.Android.MapControl.ViewportInitialized
   name: ViewportInitialized
   href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_ViewportInitialized
   commentId: E:Mapsui.UI.Android.MapControl.ViewportInitialized
   fullName: Mapsui.UI.Android.MapControl.ViewportInitialized
   nameWithType: MapControl.ViewportInitialized
-- uid: Mapsui.UI.Android.MapControl.ViewportWidth
-  name: ViewportWidth
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_ViewportWidth
-  commentId: P:Mapsui.UI.Android.MapControl.ViewportWidth
-  fullName: Mapsui.UI.Android.MapControl.ViewportWidth
-  nameWithType: MapControl.ViewportWidth
-- uid: Mapsui.UI.Android.MapControl.ViewportWidth*
-  name: ViewportWidth
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_ViewportWidth_
-  commentId: Overload:Mapsui.UI.Android.MapControl.ViewportWidth
-  isSpec: "True"
-  fullName: Mapsui.UI.Android.MapControl.ViewportWidth
-  nameWithType: MapControl.ViewportWidth
 - uid: Mapsui.UI.Android.MapControl.ZoomLock
   name: ZoomLock
   href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_ZoomLock
@@ -21328,38 +21186,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.IMapControl.Unsubscribe
   nameWithType: IMapControl.Unsubscribe
-- uid: Mapsui.UI.IMapControl.ViewportHeight
-  name: ViewportHeight
-  href: api/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_ViewportHeight
-  commentId: P:Mapsui.UI.IMapControl.ViewportHeight
-  fullName: Mapsui.UI.IMapControl.ViewportHeight
-  nameWithType: IMapControl.ViewportHeight
-- uid: Mapsui.UI.IMapControl.ViewportHeight*
-  name: ViewportHeight
-  href: api/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_ViewportHeight_
-  commentId: Overload:Mapsui.UI.IMapControl.ViewportHeight
-  isSpec: "True"
-  fullName: Mapsui.UI.IMapControl.ViewportHeight
-  nameWithType: IMapControl.ViewportHeight
 - uid: Mapsui.UI.IMapControl.ViewportInitialized
   name: ViewportInitialized
   href: api/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_ViewportInitialized
   commentId: E:Mapsui.UI.IMapControl.ViewportInitialized
   fullName: Mapsui.UI.IMapControl.ViewportInitialized
   nameWithType: IMapControl.ViewportInitialized
-- uid: Mapsui.UI.IMapControl.ViewportWidth
-  name: ViewportWidth
-  href: api/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_ViewportWidth
-  commentId: P:Mapsui.UI.IMapControl.ViewportWidth
-  fullName: Mapsui.UI.IMapControl.ViewportWidth
-  nameWithType: IMapControl.ViewportWidth
-- uid: Mapsui.UI.IMapControl.ViewportWidth*
-  name: ViewportWidth
-  href: api/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_ViewportWidth_
-  commentId: Overload:Mapsui.UI.IMapControl.ViewportWidth
-  isSpec: "True"
-  fullName: Mapsui.UI.IMapControl.ViewportWidth
-  nameWithType: IMapControl.ViewportWidth
 - uid: Mapsui.UI.iOS
   name: Mapsui.UI.iOS
   href: api/Mapsui.UI.iOS.html
@@ -21436,6 +21268,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.iOS.MapControl.MapControl
   nameWithType: MapControl.MapControl
+- uid: Mapsui.UI.iOS.MapControl.Clear
+  name: Clear()
+  href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_Clear
+  commentId: M:Mapsui.UI.iOS.MapControl.Clear
+  fullName: Mapsui.UI.iOS.MapControl.Clear()
+  nameWithType: MapControl.Clear()
+- uid: Mapsui.UI.iOS.MapControl.Clear*
+  name: Clear
+  href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_Clear_
+  commentId: Overload:Mapsui.UI.iOS.MapControl.Clear
+  isSpec: "True"
+  fullName: Mapsui.UI.iOS.MapControl.Clear
+  nameWithType: MapControl.Clear
 - uid: Mapsui.UI.iOS.MapControl.Dispose
   name: Dispose()
   href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_Dispose
@@ -21769,38 +21614,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.iOS.MapControl.Viewport
   nameWithType: MapControl.Viewport
-- uid: Mapsui.UI.iOS.MapControl.ViewportHeight
-  name: ViewportHeight
-  href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_ViewportHeight
-  commentId: P:Mapsui.UI.iOS.MapControl.ViewportHeight
-  fullName: Mapsui.UI.iOS.MapControl.ViewportHeight
-  nameWithType: MapControl.ViewportHeight
-- uid: Mapsui.UI.iOS.MapControl.ViewportHeight*
-  name: ViewportHeight
-  href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_ViewportHeight_
-  commentId: Overload:Mapsui.UI.iOS.MapControl.ViewportHeight
-  isSpec: "True"
-  fullName: Mapsui.UI.iOS.MapControl.ViewportHeight
-  nameWithType: MapControl.ViewportHeight
 - uid: Mapsui.UI.iOS.MapControl.ViewportInitialized
   name: ViewportInitialized
   href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_ViewportInitialized
   commentId: E:Mapsui.UI.iOS.MapControl.ViewportInitialized
   fullName: Mapsui.UI.iOS.MapControl.ViewportInitialized
   nameWithType: MapControl.ViewportInitialized
-- uid: Mapsui.UI.iOS.MapControl.ViewportWidth
-  name: ViewportWidth
-  href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_ViewportWidth
-  commentId: P:Mapsui.UI.iOS.MapControl.ViewportWidth
-  fullName: Mapsui.UI.iOS.MapControl.ViewportWidth
-  nameWithType: MapControl.ViewportWidth
-- uid: Mapsui.UI.iOS.MapControl.ViewportWidth*
-  name: ViewportWidth
-  href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_ViewportWidth_
-  commentId: Overload:Mapsui.UI.iOS.MapControl.ViewportWidth
-  isSpec: "True"
-  fullName: Mapsui.UI.iOS.MapControl.ViewportWidth
-  nameWithType: MapControl.ViewportWidth
 - uid: Mapsui.UI.iOS.MapControl.ZoomLock
   name: ZoomLock
   href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_ZoomLock
@@ -22904,38 +22723,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Wpf.MapControl.Viewport
   nameWithType: MapControl.Viewport
-- uid: Mapsui.UI.Wpf.MapControl.ViewportHeight
-  name: ViewportHeight
-  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_ViewportHeight
-  commentId: P:Mapsui.UI.Wpf.MapControl.ViewportHeight
-  fullName: Mapsui.UI.Wpf.MapControl.ViewportHeight
-  nameWithType: MapControl.ViewportHeight
-- uid: Mapsui.UI.Wpf.MapControl.ViewportHeight*
-  name: ViewportHeight
-  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_ViewportHeight_
-  commentId: Overload:Mapsui.UI.Wpf.MapControl.ViewportHeight
-  isSpec: "True"
-  fullName: Mapsui.UI.Wpf.MapControl.ViewportHeight
-  nameWithType: MapControl.ViewportHeight
 - uid: Mapsui.UI.Wpf.MapControl.ViewportInitialized
   name: ViewportInitialized
   href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_ViewportInitialized
   commentId: E:Mapsui.UI.Wpf.MapControl.ViewportInitialized
   fullName: Mapsui.UI.Wpf.MapControl.ViewportInitialized
   nameWithType: MapControl.ViewportInitialized
-- uid: Mapsui.UI.Wpf.MapControl.ViewportWidth
-  name: ViewportWidth
-  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_ViewportWidth
-  commentId: P:Mapsui.UI.Wpf.MapControl.ViewportWidth
-  fullName: Mapsui.UI.Wpf.MapControl.ViewportWidth
-  nameWithType: MapControl.ViewportWidth
-- uid: Mapsui.UI.Wpf.MapControl.ViewportWidth*
-  name: ViewportWidth
-  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_ViewportWidth_
-  commentId: Overload:Mapsui.UI.Wpf.MapControl.ViewportWidth
-  isSpec: "True"
-  fullName: Mapsui.UI.Wpf.MapControl.ViewportWidth
-  nameWithType: MapControl.ViewportWidth
 - uid: Mapsui.UI.Wpf.MapControl.WpfCanvas
   name: WpfCanvas
   href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_WpfCanvas
