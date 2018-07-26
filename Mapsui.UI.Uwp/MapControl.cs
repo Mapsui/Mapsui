@@ -243,7 +243,7 @@ namespace Mapsui.UI.Uwp
             Task.Run(() => Launcher.LaunchUriAsync(new Uri(url)));
         }
 
-        public float ViewportWidth => (float)ActualWidth;
-        public float ViewportHeight => (float)ActualHeight;
+        private float ViewportWidth => (float)ActualWidth;
+        private float ViewportHeight => (float)ActualHeight;
     }
 }

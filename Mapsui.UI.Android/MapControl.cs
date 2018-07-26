@@ -333,8 +333,8 @@ namespace Mapsui.UI.Android
             return (new Point(centerX, centerY), radius, angle);
         }
 
-        public float ViewportWidth => ToDeviceIndependentUnits(Width);
-        public float ViewportHeight => ToDeviceIndependentUnits(Height);
+        private float ViewportWidth => ToDeviceIndependentUnits(Width);
+        private float ViewportHeight => ToDeviceIndependentUnits(Height);
 
         /// <summary>
         /// In native Android touch positions are in pixels whereas the canvas needs

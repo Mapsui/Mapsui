@@ -33,16 +33,6 @@ namespace Mapsui.UI
 
         IRenderer Renderer { get; }
 
-        /// <summary>
-        /// The width of the map on screen in device independent units
-        /// </summary>
-        float ViewportWidth { get; }
-
-        /// <summary>
-        /// The height of the map on screen in device independent units
-        /// </summary>
-        float ViewportHeight { get; }
-
         void OpenBrowser(string url); //todo: Perhaps remove
 
         /// <summary>

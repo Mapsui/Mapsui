@@ -257,7 +257,7 @@ namespace Mapsui.UI.iOS
             return (new Point(centerX, centerY), radius, angle);
         }
 
-        public float ViewportWidth => (float)_canvas.Frame.Width; // todo: check if we need _canvas
-        public float ViewportHeight => (float)_canvas.Frame.Height; // todo: check if we need _canvas
+        private float ViewportWidth => (float)_canvas.Frame.Width; // todo: check if we need _canvas
+        private float ViewportHeight => (float)_canvas.Frame.Height; // todo: check if we need _canvas
     }
 }
