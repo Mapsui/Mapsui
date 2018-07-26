@@ -49,6 +49,6 @@ using System.Windows;
  
 
 
-[assembly: AssemblyVersion("1.4.6")]
-[assembly: AssemblyFileVersion("1.4.6")]
-[assembly: AssemblyInformationalVersion("1.4.6")]
+[assembly: AssemblyVersion("1.4.7")]
+[assembly: AssemblyFileVersion("1.4.7")]
+[assembly: AssemblyInformationalVersion("1.4.7")]
