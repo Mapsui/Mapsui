@@ -1,46 +1,43 @@
 ﻿using System;
-using System.ComponentModel;
 using System.IO;
 using Android.App;
-using Android.Content.PM;
 using Android.Graphics;
-using Android.Views;
 using Android.Widget;
+using Android.Support.Design.Widget;
+using Android.Support.V7.App;
+using Android.Views;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Samples.Common.Helpers;
 using Mapsui.Samples.Common.Maps;
 using Mapsui.UI;
 using Mapsui.UI.Android;
-using Path = System.IO.Path;
 
-namespace Mapsui.Samples.Android
+namespace Mapsui.Samples.Droid
 {
-    [Activity(
-        Label = "Mapsui.Samples.Android", 
-        MainLauncher = true, 
-        Icon = "@drawable/icon", 
-        ScreenOrientation = ScreenOrientation.Sensor, 
-        ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
-
-    public class Activity1 : Activity
+    [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar", MainLauncher = true)]
+    public class MainActivity : AppCompatActivity
     {
         private LinearLayout _popup;
         private MapControl _mapControl;
         private readonly WritableLayer _writableLayer = new WritableLayer();
 
-        protected override void OnCreate(global::Android.OS.Bundle bundle)
+        protected override void OnCreate(Android.OS.Bundle savedInstanceState)
         {
-            base.OnCreate(bundle);
-            SetContentView(Resource.Layout.Main);
+            base.OnCreate(savedInstanceState);
+
+            SetContentView(Resource.Layout.activity_main);
+
+            Android.Support.V7.Widget.Toolbar toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
+            SetSupportActionBar(toolbar);
 
             // Hack to tell the platform independent samples where the files can be found on Android.
             MbTilesSample.MbTilesLocation = MbTilesLocationOnAndroid;
-            MbTilesHelper.DeployMbTilesFile(s => File.Create(Path.Combine(MbTilesLocationOnAndroid, s)));
-            
+            MbTilesHelper.DeployMbTilesFile(s => File.Create(System.IO.Path.Combine(MbTilesLocationOnAndroid, s)));
+
             _mapControl = FindViewById<MapControl>(Resource.Id.mapcontrol);
             _mapControl.Map = InfoLayersSample.CreateMap();
-            _mapControl.Info+= MapOnInfo;
+            _mapControl.Info += MapOnInfo;
             _mapControl.RotationLock = false;
             _mapControl.UnSnapRotationDegrees = 30;
             _mapControl.ReSnapRotationDegrees = 5;
@@ -48,11 +45,28 @@ namespace Mapsui.Samples.Android
             FindViewById<RelativeLayout>(Resource.Id.mainLayout).AddView(_popup = CreatePopup());
         }
 
+        public override bool OnCreateOptionsMenu(IMenu menu)
+        {
+            MenuInflater.Inflate(Resource.Menu.menu_main, menu);
+            return true;
+        }
+
+        public override bool OnOptionsItemSelected(IMenuItem item)
+        {
+            int id = item.ItemId;
+            if (id == Resource.Id.action_settings)
+            {
+                return true;
+            }
+
+            return base.OnOptionsItemSelected(item);
+        }
+
         private LinearLayout CreatePopup()
         {
             var linearLayout = new LinearLayout(this);
             linearLayout.AddView(CreateTextView());
-            linearLayout.SetPadding(5,5,5,5);
+            linearLayout.SetPadding(5, 5, 5, 5);
             linearLayout.SetBackgroundColor(Color.DarkGray);
             linearLayout.Visibility = ViewStates.Gone;
             return linearLayout;
@@ -93,7 +107,7 @@ namespace Mapsui.Samples.Android
             // For the sample we add this WritableLayer. Usually you would have your own handle to the WritableLayer
             if (!_mapControl.Map.Layers.Contains(_writableLayer)) _mapControl.Map.Layers.Add(_writableLayer);
 
-            _writableLayer.Add(new Feature {Geometry = args.MapInfo.WorldPosition});
+            _writableLayer.Add(new Feature { Geometry = args.MapInfo.WorldPosition });
         }
 
         private void ShowPopup(MapInfoEventArgs args)
@@ -104,13 +118,15 @@ namespace Mapsui.Samples.Android
             // Or position on feature position: 
             var screenPosition = _mapControl.Viewport.WorldToScreen(args.MapInfo.Feature.Geometry.BoundingBox.Centroid);
             var screenPositionInPixels = _mapControl.ToPixels(screenPosition);
-            
+
             _popup.SetX((float)screenPositionInPixels.X);
             _popup.SetY((float)screenPositionInPixels.Y);
 
             _popup.Visibility = ViewStates.Visible;
         }
-        
+
         private static string MbTilesLocationOnAndroid => Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+
     }
 }
+
