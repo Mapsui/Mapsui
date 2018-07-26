@@ -107,7 +107,6 @@
       <DependentUpon>LayerListItem.xaml</DependentUpon>
     </Compile>
     <Compile Include="Layers\VertexOnlyLayer.cs" />
-    <Compile Include="Layers\WritableLayer.cs" />
     <Compile Include="Samples\EditingSample.cs" />
     <Compile Include="Utilities\Animation.cs" />
     <Compile Include="Utilities\LimitedQueue.cs" />

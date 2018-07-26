@@ -10,7 +10,7 @@ using System.Threading;
 
 namespace Mapsui.Layers
 {
-    public class RasterizingLayer : BaseLayer
+    public class RasterizingLayer : BaseLayer, IAsyncDataFetcher
     {
         private readonly MemoryProvider _cache;
         private readonly int _delayBeforeRasterize;
@@ -149,9 +149,9 @@ namespace Mapsui.Layers
             return _cache.GetFeaturesInView(extent, resolution);
         }
 
-        public override void AbortFetch()
+        public void AbortFetch()
         {
-            _layer.AbortFetch();
+            if (_layer is IAsyncDataFetcher asyncLayer) asyncLayer.AbortFetch();
         }
 
         public override void RefreshData(BoundingBox extent, double resolution, bool majorChange)
@@ -171,9 +171,9 @@ namespace Mapsui.Layers
             }
         }
 
-        public override void ClearCache()
+        public void ClearCache()
         {
-            _layer.ClearCache();
+            if (_layer is IAsyncDataFetcher asyncLayer) asyncLayer.ClearCache();
         }
 
         private static Viewport CreateViewport(BoundingBox extent, double resolution, double renderResolutionMultiplier,

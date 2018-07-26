@@ -169,12 +169,6 @@ namespace Mapsui.UI.Wpf
 
         }
 
-        public void Clear()
-        {
-            _map?.ClearCache();
-            RefreshGraphics();
-        }
-
         public void ZoomIn()
         {
             if (ZoomLock) return;

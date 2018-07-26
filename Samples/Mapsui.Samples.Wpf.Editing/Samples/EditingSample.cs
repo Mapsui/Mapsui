@@ -1,5 +1,6 @@
 ﻿using Mapsui.Samples.Wpf.Editing.Layers;
 using Mapsui.Geometries.WellKnownText;
+using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;

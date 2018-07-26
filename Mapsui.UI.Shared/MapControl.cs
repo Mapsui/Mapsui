@@ -156,6 +156,10 @@ namespace Mapsui.UI.Wpf
             {
                 RefreshGraphics();
             }
+            else if (e.PropertyName == nameof(Layers.Layer.DataSource))
+            {
+                RefreshData(); // There is a new datasource so let's fetch the new data.
+            }
         }
 
         public Map Map
@@ -306,6 +310,13 @@ namespace Mapsui.UI.Wpf
             }
 
             Refresh();
+        }
+
+        public void Clear()
+        {
+            // not sure if we need this method
+            _map?.ClearCache();
+            RefreshGraphics();
         }
     }
 }

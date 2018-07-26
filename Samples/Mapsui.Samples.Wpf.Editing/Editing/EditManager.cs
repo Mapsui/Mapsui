@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Mapsui.Samples.Wpf.Editing.Layers;
 using Mapsui.Geometries;
+using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.UI;
 using Point = Mapsui.Geometries.Point;

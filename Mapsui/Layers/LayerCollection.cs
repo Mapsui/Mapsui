@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Mapsui.Fetcher;
 
 namespace Mapsui.Layers
 {
@@ -35,7 +36,11 @@ namespace Mapsui.Layers
         {
             foreach (var layer in _layers)
             {
-                layer.AbortFetch();
+                if (layer is IAsyncDataFetcher asyncLayer)
+                {
+                    asyncLayer.AbortFetch();
+                    asyncLayer.ClearCache();
+                }
                 OnLayerRemoved(layer);
             }
             _layers.Clear();
@@ -79,7 +84,11 @@ namespace Mapsui.Layers
         public bool Remove(ILayer layer)
         {
             var success = _layers.Remove(layer);
-            layer.AbortFetch();
+            if (layer is IAsyncDataFetcher asyncLayer)
+            {
+                asyncLayer.AbortFetch();
+                asyncLayer.ClearCache();
+            }
             OnLayerRemoved(layer);
             return success;
         }

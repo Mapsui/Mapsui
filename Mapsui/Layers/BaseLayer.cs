@@ -24,8 +24,9 @@ namespace Mapsui.Layers
         private IStyle _style;
         private object _tag;
         private ITransformation _transformation;
-        private readonly Transformer _transformer = new Transformer();
         private BoundingBox _envelope;
+
+        public Transformer Transformer { get; } = new Transformer();
 
         /// <summary>
         /// Get a layer's styles
@@ -139,7 +140,7 @@ namespace Mapsui.Layers
             set
             {
                 _crs = value;
-                _transformer.ToCrs = CRS;
+                Transformer.ToCrs = CRS;
                 OnPropertyChanged(nameof(CRS));
             }
         }
@@ -196,16 +197,12 @@ namespace Mapsui.Layers
             set
             {
                 _transformation = value;
-                _transformer.Transformation = _transformation;
+                Transformer.Transformation = _transformation;
                 OnPropertyChanged(nameof(Transformation));
             }
         }
 
-        public Transformer Transformer
-        {
-            get => _transformer;
-        }
-
+       
         /// <summary>
         /// Returns the envelope of all avaiable data in the layer
         /// </summary>
@@ -231,22 +228,8 @@ namespace Mapsui.Layers
         /// <inheritdoc />
         public abstract IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution);
 
-        /// <summary>
-        /// Abort fetching of layer
-        /// </summary>
-        public abstract void AbortFetch();
+        /// <inheritdoc />
 
-        /// <summary>
-        /// Clear cache of layer
-        /// </summary>
-        public abstract void ClearCache();
-
-        /// <summary>
-        /// Something changed on Viewport
-        /// </summary>
-        /// <param name="extent">Extent of viewport</param>
-        /// <param name="resolution">Resolution of viewport</param>
-        /// <param name="majorChange">True, when the change is a major change</param>
         public abstract void RefreshData(BoundingBox extent, double resolution, bool majorChange);
 
         /// <inheritdoc />

@@ -158,12 +158,6 @@ namespace Mapsui.UI.Uwp
             RunOnUIThread(() => _canvas?.Invalidate());
         }
 
-        public void Clear()
-        {
-            _map?.ClearCache();
-            RefreshGraphics();
-        }
-
         private void MapControlLoaded(object sender, RoutedEventArgs e)
         {
             SetViewportSize();

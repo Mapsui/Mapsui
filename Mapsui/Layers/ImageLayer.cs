@@ -29,7 +29,7 @@ using Mapsui.Utilities;
 
 namespace Mapsui.Layers
 {
-    public class ImageLayer : BaseLayer
+    public class ImageLayer : BaseLayer, IAsyncDataFetcher
     {
         private class FeatureSets
         {
@@ -116,8 +116,9 @@ namespace Mapsui.Layers
             }
         }
 
-        public override void AbortFetch()
+        public void AbortFetch()
         {
+            // not implemented for ImageLayer
         }
 
         public override void RefreshData(BoundingBox extent, double resolution, bool majorChange)
@@ -196,7 +197,7 @@ namespace Mapsui.Layers
             }
         }
 
-        public override void ClearCache()
+        public void ClearCache()
         {
             foreach (var cache in _sets)
             {

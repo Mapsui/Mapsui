@@ -182,7 +182,7 @@ namespace Mapsui
         {
             foreach (var layer in _layers.ToList())
             {
-                layer.AbortFetch();
+                if (layer is IAsyncDataFetcher asyncLayer) asyncLayer.AbortFetch();
             }
         }
 
@@ -193,7 +193,7 @@ namespace Mapsui
         {
             foreach (var layer in _layers)
             {
-                layer.ClearCache();
+                if (layer is IAsyncDataFetcher asyncLayer) asyncLayer.ClearCache();
             }
         }
 
@@ -218,7 +218,10 @@ namespace Mapsui
 
         private void LayersLayerRemoved(ILayer layer)
         {
-            layer.AbortFetch();
+            if (layer is IAsyncDataFetcher asyncLayer)
+            {
+                asyncLayer.AbortFetch();
+            }
 
             layer.DataChanged -= LayerDataChanged;
             layer.PropertyChanged -= LayerPropertyChanged;
