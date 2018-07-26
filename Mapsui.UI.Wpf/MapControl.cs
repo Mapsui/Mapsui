@@ -169,34 +169,11 @@ namespace Mapsui.UI.Wpf
 
         }
 
-        public void ZoomIn()
-        {
-            if (ZoomLock) return;
+        [Obsolete("Use Navigator.ZoomIn instead", true)]
+        public void ZoomIn() {}
 
-            if (double.IsNaN(_toResolution))
-                _toResolution = Viewport.Resolution;
-
-            var resolution = ZoomHelper.ZoomIn(_map.Resolutions, _toResolution);
-
-            _toResolution = ViewportLimiter.LimitResolution(resolution, ActualWidth, ActualHeight,
-                _map.ZoomMode, _map.ZoomLimits, _map.Resolutions, _map.Envelope);
-
-            _currentMousePosition = new Geometries.Point(ActualWidth / 2, ActualHeight / 2);
-            StartZoomAnimation(Viewport.Resolution, _toResolution); // todo: Perhaps 
-        }
-
-        public void ZoomOut()
-        {
-            if (double.IsNaN(_toResolution)) _toResolution = Viewport.Resolution;
-
-            var resolution = ZoomHelper.ZoomOut(_map.Resolutions, _toResolution);
-
-            _toResolution = ViewportLimiter.LimitResolution(resolution, ActualWidth, ActualHeight,
-                _map.ZoomMode, _map.ZoomLimits, _map.Resolutions, _map.Envelope);
-
-            _currentMousePosition = new Geometries.Point(ActualWidth / 2, ActualHeight / 2);
-            StartZoomAnimation(Viewport.Resolution, _toResolution);
-        }
+        [Obsolete("Use Navigator.ZoomOut instead", true)]
+        public void ZoomOut() {}
 
         private static void OnResolutionChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
         {
