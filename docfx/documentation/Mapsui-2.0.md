@@ -7,7 +7,6 @@ At the moment of writing (11 may 2018) a first beta of Mapsui v2 has been releas
 - Prevent direct access of Viewport
 - Remove ZoomIn/ZoomOut from WPF MapControl and turn into Navigate method.
 - Replace ILayer.Style with an ILayer.Styles of type ICollection<IFeature> which is empty by default
-- Invert label alignment bottom/top.
 - Perhaps add animation in an AnimatedViewport which wraps the actual Viewport.
 
 ### Done
@@ -24,7 +23,7 @@ At the moment of writing (11 may 2018) a first beta of Mapsui v2 has been releas
 - Move Info event from Map to MapControl
 - Remove the InfoLayer list and add an InfoLayer boolean on ILayer
 - Remove the HoverLayer method. It is not crossplatform and can affect performance. 
-
+- Invert label alignment bottom/top.
 
 ### Later
 - Use NTS for Geometries
