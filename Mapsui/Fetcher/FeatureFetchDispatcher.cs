@@ -15,13 +15,13 @@ namespace Mapsui.Fetcher
         private double _resolution;
         private readonly object _lockRoot = new object();
         private bool _busy;
-        private readonly MemoryProvider _cache;
+        private readonly MemoryProvider2 _cache;
         private readonly Transformer _transformer;
         private bool _modified;
 
         // todo: Check whether busy and modified state are set correctly in all stages
 
-        public FeatureFetchDispatcher(MemoryProvider cache, Transformer transformer)
+        public FeatureFetchDispatcher(MemoryProvider2 cache, Transformer transformer)
         {
             _cache = cache;
             _transformer = transformer;

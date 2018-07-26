@@ -31,7 +31,7 @@ namespace Mapsui.Layers
     {
         private IProvider _dataSource;
         private readonly object _syncRoot = new object();
-        private readonly MemoryProvider _cache = new MemoryProvider();
+        private readonly MemoryProvider2 _cache = new MemoryProvider2();
         private readonly FeatureFetchDispatcher _fetchDispatcher;
         private readonly FetchMachine _fetchMachine;
         private readonly Delayer _delayer = new Delayer();
