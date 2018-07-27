@@ -1,6 +1,6 @@
 # Mapsui 2.0
 
-At the moment work is going on Mapsui v2. The core libraries are .NET Standard instead of PCLs. Here are some of the changes going into v2.
+At the moment work is going on Mapsui v2. The core libraries are .NET Standard instead of PCLs. Here are some of the changes that may go into v2.
 
 ### Todo
 - Wrap Viewport in LimitingViewport which limits it to user settings, or access through Navigator.
