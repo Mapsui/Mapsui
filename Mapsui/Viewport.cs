@@ -40,7 +40,7 @@ namespace Mapsui
         private double _resolution = Constants.DefaultResolution;
         private double _width;
         private double _rotation;
-        private readonly NotifyingPoint _center = new NotifyingPoint();
+        private ReadOnlyPoint _center = new ReadOnlyPoint(0, 0);
         private bool _modified = true;
         /// <summary>
         /// Create a new viewport
@@ -49,9 +49,6 @@ namespace Mapsui
         {
             _extent = new BoundingBox(0, 0, 0, 0);
             _windowExtent = new Quad();
-            // ReSharper disable once ExplicitCallerInfoArgument
-            // In this case we don't want to caller to be passed (the Viewport constructor) but just the Center
-			_center.PropertyChanged += (sender, args) => OnViewportChanged(nameof(Center));
         }
         
         /// <summary>
@@ -64,8 +61,7 @@ namespace Mapsui
             _width = viewport._width;
             _height = viewport._height;
             _rotation = viewport._rotation;
-            _center.X = viewport._center.X;
-            _center.Y = viewport._center.Y;
+            _center = new ReadOnlyPoint(viewport._center);
             if (viewport.Extent!= null) _extent = new BoundingBox(viewport.Extent);
             if (viewport.WindowExtent != null) _windowExtent = new Quad(viewport.WindowExtent);
         
@@ -78,13 +74,13 @@ namespace Mapsui
         }
 
         /// <inheritdoc />
-        public Point Center
+        public ReadOnlyPoint Center
         {
             get => _center;
             set
             {
-                _center.X = value.X;
-                _center.Y = value.Y;
+                // todo: Consider making setters private or removeing Set methods
+                _center = value;
                 OnViewportChanged();
             }
         }
@@ -243,8 +239,7 @@ namespace Mapsui
                 newX -= scaleCorrectionX;
                 newY -= scaleCorrectionY;
             }           
-            _center.X = newX;
-            _center.Y = newY;
+            SetCenter(newX, newY);
 
             if (deltaRotation != 0)
             {
@@ -252,8 +247,7 @@ namespace Mapsui
                 Rotation += deltaRotation;
                 var postRotation = ScreenToWorld(screenX, screenY); // calculate current position again with adjusted resolution
 
-                _center.X -= postRotation.X - current.X;
-                _center.Y -= postRotation.Y - current.Y;
+                SetCenter(_center.X - postRotation.X - current.X, _center.Y - postRotation.Y - current.Y);
             }
         }
 
@@ -262,10 +256,6 @@ namespace Mapsui
         /// </summary>
         private void UpdateExtent()
         {
-            if (double.IsNaN(_center.X)) return;
-            if (double.IsNaN(_center.Y)) return;
-            if (double.IsNaN(_resolution)) return;
-
             // calculate the window extent which is not rotate
             var halfSpanX = _width * _resolution * 0.5;
             var halfSpanY = _height * _resolution * 0.5;
@@ -300,10 +290,35 @@ namespace Mapsui
             _modified = false;
         }
 
-        public void SetSize(double screenWidth, double screenHeight)
+        public void SetSize(double width, double height)
         {
-            Width = screenWidth;
-            Height = screenHeight;
+            _width = width;
+            _height = height;
+            OnViewportChanged();
+        }
+
+        public virtual void SetCenter(double x, double y)
+        {
+            Center = new Point(x, y);
+            OnViewportChanged();
+        }
+
+        public void SetCenter(ReadOnlyPoint center)
+        {
+            Center = center;
+            OnViewportChanged();
+        }
+
+        public void SetResolution(double resolution)
+        {
+            Resolution = resolution;
+            OnViewportChanged();
+        }
+
+        public void SetRotation(double rotation)
+        {
+            Rotation = rotation;
+            OnViewportChanged();
         }
 
         /// <summary>
@@ -315,5 +330,8 @@ namespace Mapsui
             _modified = true;
             ViewportChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+ 
+
     }
 }

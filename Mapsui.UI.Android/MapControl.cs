@@ -159,7 +159,7 @@ namespace Mapsui.UI.Android
                                 {
                                     _viewport.Transform(touchPosition.X, touchPosition.Y, _previousCenter.X, _previousCenter.Y);
 
-                                    ViewportLimiter.LimitExtent(_viewport, _map.PanMode, _map.PanLimits, _map.Envelope);
+                                    ViewportLimiter.LimitExtent(_viewport, _map.Limits.PanMode, _map.Limits.PanLimits, _map.Envelope);
 
                                     RefreshGraphics();
                                 }
@@ -202,8 +202,8 @@ namespace Mapsui.UI.Android
                                 (_previousCenter, _previousRadius, _previousAngle) = (center, radius, angle);
 
                                 ViewportLimiter.Limit(_viewport,
-                                    _map.ZoomMode, _map.ZoomLimits, _map.Resolutions,
-                                    _map.PanMode, _map.PanLimits, _map.Envelope);
+                                    _map.Limits.ZoomMode, _map.Limits.ZoomLimits, _map.Resolutions,
+                                    _map.Limits.PanMode, _map.Limits.PanLimits, _map.Envelope);
 
                                 RefreshGraphics();
                             }

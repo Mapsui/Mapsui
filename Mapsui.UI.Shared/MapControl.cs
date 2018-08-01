@@ -27,19 +27,13 @@ namespace Mapsui.UI.Wpf
     {
         private Map _map;
 
-        /// <summary>
-        /// Allow map panning through touch or mouse
-        /// </summary>
+        /// <inheritdoc />
         public bool PanLock { get; set; }
 
-        /// <summary>
-        /// Allow a rotation with a pinch gesture
-        /// </summary>
+        /// <inheritdoc />
         public bool RotationLock { get; set; } = true;
 
-        /// <summary>
-        /// Allow zooming though touch or mouse
-        /// </summary>
+        /// <inheritdoc />
         public bool ZoomLock { get; set; }
 
         /// <summary>
@@ -53,14 +47,14 @@ namespace Mapsui.UI.Wpf
         public double ReSnapRotationDegrees { get; set; }
         
         public IRenderer Renderer { get; set; } = new MapRenderer();
-
-
+        
         /// <summary>
         /// Viewport holding informations about visible part of the map. Viewport can never be null.
         /// </summary>
-        private readonly Viewport _viewport = new Viewport { Center = { X = double.NaN, Y = double.NaN }, Resolution = double.NaN };
+        private readonly IViewport _viewport = new Viewport();
 
         public IReadOnlyViewport Viewport => _viewport;
+
         public INavigator Navigator { get; private set; }
 
         public event EventHandler ViewportInitialized; //todo: Consider to use the Viewport PropertyChanged

@@ -115,7 +115,7 @@ namespace Mapsui.UI.iOS
 
                     _viewport.Transform(currentPos.X, currentPos.Y, previousPos.X, previousPos.Y);
 
-                    ViewportLimiter.LimitExtent(_viewport, _map.PanMode, _map.PanLimits, _map.Envelope);
+                    ViewportLimiter.LimitExtent(_viewport, _map.Limits.PanMode, _map.Limits.PanLimits, _map.Envelope);
 
                     RefreshGraphics();
 
@@ -159,8 +159,8 @@ namespace Mapsui.UI.iOS
                 _viewport.Transform(center.X, center.Y, prevCenter.X, prevCenter.Y, radius / prevRadius, rotationDelta);
 
                 ViewportLimiter.Limit(_viewport,
-                    _map.ZoomMode, _map.ZoomLimits, _map.Resolutions,
-                    _map.PanMode, _map.PanLimits, _map.Envelope);
+                    _map.Limits.ZoomMode, _map.Limits.ZoomLimits, _map.Resolutions,
+                    _map.Limits.PanMode, _map.Limits.PanLimits, _map.Envelope);
 
                 RefreshGraphics();
             }

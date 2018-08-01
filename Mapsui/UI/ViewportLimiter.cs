@@ -75,7 +75,7 @@ namespace Mapsui.UI
             ZoomMode zoomMode, MinMax zoomLimits, IReadOnlyList<double> mapResolutions, 
             PanMode panMode, BoundingBox panLimits, BoundingBox mapEnvelope)
         {
-            viewport.Resolution = LimitResolution(viewport.Resolution, viewport.Width, viewport.Height, zoomMode, zoomLimits, mapResolutions, mapEnvelope);
+            viewport.SetResolution(LimitResolution(viewport.Resolution, viewport.Width, viewport.Height, zoomMode, zoomLimits, mapResolutions, mapEnvelope));
             LimitExtent(viewport, panMode, panLimits, mapEnvelope);
         }
 
@@ -123,31 +123,41 @@ namespace Mapsui.UI
 
             if (panMode == PanMode.KeepCenterWithinExtents)
             {
-                if (viewport.Center.X < maxExtent.Left) viewport.Center.X = maxExtent.Left;
-                if (viewport.Center.X > maxExtent.Right) viewport.Center.X = maxExtent.Right;
-                if (viewport.Center.Y > maxExtent.Top) viewport.Center.Y = maxExtent.Top;
-                if (viewport.Center.Y < maxExtent.Bottom) viewport.Center.Y = maxExtent.Bottom;
+                var x = viewport.Center.X;
+                if (viewport.Center.X < maxExtent.Left)  x = maxExtent.Left;
+                if (viewport.Center.X > maxExtent.Right) x = maxExtent.Right;
+
+                var y = viewport.Center.Y;
+                if (viewport.Center.Y > maxExtent.Top) y = maxExtent.Top;
+                if (viewport.Center.Y < maxExtent.Bottom) y = maxExtent.Bottom;
+
+                viewport.SetCenter(x, y);
             }
             else if (panMode == PanMode.KeepViewportWithinExtents)
             {
+                var x = viewport.Center.X;
+
                 if (MapWidthSpansViewport(maxExtent.Width, viewport.Width, viewport.Resolution)) // if it does't fit don't restrict
                 {
                     //if ((viewport.Extent.Left < maxExtent.Left) && (viewport.Extent.Right > maxExtent.Right))
                     //    throw new Exception();
                     if (viewport.Extent.Left < maxExtent.Left)
-                        viewport.Center.X += maxExtent.Left - viewport.Extent.Left;
+                        x  += maxExtent.Left - viewport.Extent.Left;
                     if (viewport.Extent.Right > maxExtent.Right)
-                        viewport.Center.X += maxExtent.Right - viewport.Extent.Right;
+                        x += maxExtent.Right - viewport.Extent.Right;
                 }
+
+                var y = viewport.Center.Y;
                 if (MapHeightSpansViewport(maxExtent.Height, viewport.Height, viewport.Resolution)) // if it does't fit don't restrict
                 {
                     //if ((viewport.Extent.Top> maxExtent.Top) && (viewport.Extent.Bottom < maxExtent.Bottom))
                     //    throw new Exception();
                     if (viewport.Extent.Top > maxExtent.Top)
-                        viewport.Center.Y += maxExtent.Top - viewport.Extent.Top;
+                        y += maxExtent.Top - viewport.Extent.Top;
                     if (viewport.Extent.Bottom < maxExtent.Bottom)
-                        viewport.Center.Y += maxExtent.Bottom - viewport.Extent.Bottom;
+                        y += maxExtent.Bottom - viewport.Extent.Bottom;
                 }
+                viewport.SetCenter(x, y);
             }
         }
 

@@ -141,14 +141,14 @@ namespace Mapsui.UI.Uwp
                 var resolution = ZoomHelper.ZoomIn(_map.Resolutions, currentResolution);
 
                 return ViewportLimiter.LimitResolution(resolution, Viewport.Width, Viewport.Height,
-                    _map.ZoomMode, _map.ZoomLimits, _map.Resolutions, _map.Envelope);
+                    _map.Limits.ZoomMode, _map.Limits.ZoomLimits, _map.Resolutions, _map.Envelope);
             }
             if (mouseWheelDelta < 0)
             {
                 var resolution = ZoomHelper.ZoomOut(_map.Resolutions, currentResolution);
 
                 return ViewportLimiter.LimitResolution(resolution, Viewport.Width, Viewport.Height,
-                    _map.ZoomMode, _map.ZoomLimits, _map.Resolutions, _map.Envelope);
+                    _map.Limits.ZoomMode, _map.Limits.ZoomLimits, _map.Resolutions, _map.Envelope);
             }
             return currentResolution;
         }
@@ -223,8 +223,8 @@ namespace Mapsui.UI.Uwp
 
             _viewport.Transform(center.X, center.Y, prevCenter.X, prevCenter.Y, radius / prevRadius, rotationDelta);
 
-            ViewportLimiter.Limit(_viewport, _map.ZoomMode, _map.ZoomLimits, _map.Resolutions,
-                _map.PanMode, _map.PanLimits, _map.Envelope);
+            ViewportLimiter.Limit(_viewport, _map.Limits.ZoomMode, _map.Limits.ZoomLimits, _map.Resolutions,
+                _map.Limits.PanMode, _map.Limits.PanLimits, _map.Envelope);
             RefreshGraphics();
             RefreshData(false);
             e.Handled = true;

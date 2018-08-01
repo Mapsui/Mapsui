@@ -22,9 +22,9 @@ namespace Mapsui
         public void NavigateTo(BoundingBox extent, ScaleMethod scaleMethod = ScaleMethod.Fit)
         {
             if (extent == null) return;
-            _viewport.Resolution = ZoomHelper.DetermineResolution(
-                extent.Width, extent.Height, _viewport.Width, _viewport.Height, scaleMethod);
-            _viewport.Center = extent.Centroid;
+            _viewport.SetResolution(ZoomHelper.DetermineResolution(
+                extent.Width, extent.Height, _viewport.Width, _viewport.Height, scaleMethod));
+            _viewport.SetCenter(extent.Centroid);
             _map.RefreshData(_viewport.Extent, _viewport.Resolution, true);
         }
 
@@ -34,7 +34,7 @@ namespace Mapsui
         /// <param name="resolution">New resolution to use</param>
         public void NavigateTo(double resolution)
         {
-            _viewport.Resolution = resolution;
+            _viewport.SetResolution(resolution);
             _map.RefreshData(_viewport.Extent, _viewport.Resolution, true);
         }
 
@@ -44,15 +44,15 @@ namespace Mapsui
         /// <param name="center">New center point of viewport</param>
         public void NavigateTo(Point center)
         {
-            _viewport.Center = center;
+            _viewport.SetCenter(center);
             _map.RefreshData(_viewport.Extent, _viewport.Resolution, true);
         }
 
         /// <inheritdoc />
         public void NavigateTo(Point center, double resolution)
         {
-            _viewport.Center = center;
-            _viewport.Resolution = resolution;
+            _viewport.SetCenter(center);
+            _viewport.SetResolution(resolution);
             _map.RefreshData(_viewport.Extent, _viewport.Resolution, true);
         }
 
@@ -63,7 +63,7 @@ namespace Mapsui
         /// <param name="y">Y value of the new center</param>
         public void NavigateTo(double x, double y)
         {
-            _viewport.Center = new Point(x, y);
+            _viewport.SetCenter(x, y);
             _map.RefreshData(_viewport.Extent, _viewport.Resolution, true);
         }
 
@@ -73,20 +73,19 @@ namespace Mapsui
         /// <param name="rotation">New rotation in degrees of viewport></param>
         public void RotateTo(double rotation)
         {
-            _viewport.Rotation = rotation;
+            _viewport.SetRotation(rotation);
             _map.RefreshData(_viewport.Extent, _viewport.Resolution, true);
         }
 
         public void ZoomIn()
         {
-            _viewport.Resolution = ZoomHelper.ZoomIn(_map.Resolutions, _viewport.Resolution);
-            
+            _viewport.SetResolution(ZoomHelper.ZoomIn(_map.Resolutions, _viewport.Resolution));
             _map.RefreshData(_viewport.Extent, _viewport.Resolution, true);
         }
 
         public void ZoomOut()
         {
-            _viewport.Resolution = ZoomHelper.ZoomOut(_map.Resolutions, _viewport.Resolution);
+            _viewport.SetResolution(ZoomHelper.ZoomOut(_map.Resolutions, _viewport.Resolution));
             _map.RefreshData(_viewport.Extent, _viewport.Resolution, true);
         }
 

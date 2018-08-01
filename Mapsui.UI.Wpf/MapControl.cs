@@ -187,8 +187,8 @@ namespace Mapsui.UI.Wpf
 
             _viewport.Transform(current.X, current.Y, current.X, current.Y, Viewport.Resolution / resolution);
 
-            ViewportLimiter.Limit(_viewport, _map.ZoomMode, _map.ZoomLimits, _map.Resolutions,
-                _map.PanMode, _map.PanLimits, _map.Envelope);
+            ViewportLimiter.Limit(_viewport, _map.Limits.ZoomMode, _map.Limits.ZoomLimits, _map.Resolutions,
+                _map.Limits.PanMode, _map.Limits.PanLimits, _map.Envelope);
 
             RefreshData(true); 
             RefreshGraphics();
@@ -246,7 +246,7 @@ namespace Mapsui.UI.Wpf
                 var resolution = ZoomHelper.ZoomIn(_map.Resolutions, _toResolution);
 
                 _toResolution = ViewportLimiter.LimitResolution(resolution, ActualWidth, ActualHeight,
-                    _map.ZoomMode, _map.ZoomLimits, _map.Resolutions, _map.Envelope);
+                    _map.Limits.ZoomMode, _map.Limits.ZoomLimits, _map.Resolutions, _map.Envelope);
 
             }
             else if (e.Delta < Constants.Epsilon)
@@ -254,12 +254,13 @@ namespace Mapsui.UI.Wpf
                 var resolution = ZoomHelper.ZoomOut(_map.Resolutions, _toResolution);
 
                 _toResolution = ViewportLimiter.LimitResolution(resolution, ActualWidth, ActualHeight,
-                    _map.ZoomMode, _map.ZoomLimits, _map.Resolutions, _map.Envelope);
+                    _map.Limits.ZoomMode, _map.Limits.ZoomLimits, _map.Resolutions, _map.Envelope);
             }
 
-            // Some cheating for personal gain. This workaround could be ommitted if the zoom animations was on CenterX, CenterY and Resolution, not Resolution alone.
-            Viewport.Center.X += 0.000000001;
-            Viewport.Center.Y += 0.000000001;
+            // Some cheating to trigger a zoom animation if resolution does not change.
+            // This workaround could be ommitted if the zoom animations was on CenterX, CenterY and Resolution, not Resolution alone.
+            // todo: Remove this workaround once animations are centralized.
+            _viewport.SetCenter(_viewport.Center.X + 0.000000001, Viewport.Center.Y + 0.000000001);
 
             StartZoomAnimation(Viewport.Resolution, _toResolution);
         }
@@ -410,8 +411,8 @@ namespace Mapsui.UI.Wpf
                     _currentMousePosition.X, _currentMousePosition.Y,
                     _previousMousePosition.X, _previousMousePosition.Y);
 
-                ViewportLimiter.Limit(_viewport, _map.ZoomMode, _map.ZoomLimits, _map.Resolutions,
-                    _map.PanMode, _map.PanLimits, _map.Envelope);
+                ViewportLimiter.Limit(_viewport, _map.Limits.ZoomMode, _map.Limits.ZoomLimits, _map.Resolutions,
+                    _map.Limits.PanMode, _map.Limits.PanLimits, _map.Envelope);
 
                 _previousMousePosition = _currentMousePosition;
                 RefreshData(false);
@@ -431,10 +432,10 @@ namespace Mapsui.UI.Wpf
                 ActualWidth, ActualHeight, out var x, out var y, out var resolution);
 
             resolution = ViewportLimiter.LimitResolution(resolution, Viewport.Width, Viewport.Height,
-                _map.ZoomMode, _map.ZoomLimits, _map.Resolutions, _map.Envelope);
+                _map.Limits.ZoomMode, _map.Limits.ZoomLimits, _map.Resolutions, _map.Envelope);
 
-            _viewport.Resolution = resolution;
-            _viewport.Center = new Geometries.Point(x, y);
+            _viewport.SetResolution(resolution);
+            _viewport.SetCenter(x, y);
 
             _toResolution = resolution; // for animation
 
@@ -527,8 +528,8 @@ namespace Mapsui.UI.Wpf
 
             _viewport.Transform(center.X, center.Y, prevCenter.X, prevCenter.Y, radius / prevRadius, rotationDelta);
 
-            ViewportLimiter.Limit(_viewport, _map.ZoomMode, _map.ZoomLimits, _map.Resolutions,
-                _map.PanMode, _map.PanLimits, _map.Envelope);
+            ViewportLimiter.Limit(_viewport, _map.Limits.ZoomMode, _map.Limits.ZoomLimits, _map.Resolutions,
+                _map.Limits.PanMode, _map.Limits.PanLimits, _map.Envelope);
 
             e.Handled = true;
         }
