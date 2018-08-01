@@ -4,6 +4,9 @@ namespace Mapsui.Geometries
 {
     class NotifyingPoint : Point, INotifyPropertyChanged
     {
+        public NotifyingPoint() : base(0, 0) // Initialize with 0, 0 because otherwise is EMPTY and will throw when accessed.
+        {}
+
         public new double X 
         {
             get { return base.X; }
