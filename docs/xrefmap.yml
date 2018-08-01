@@ -3359,6 +3359,85 @@ references:
   isSpec: "True"
   fullName: Mapsui.Geometries.Raster.TickFetched
   nameWithType: Raster.TickFetched
+- uid: Mapsui.Geometries.ReadOnlyPoint
+  name: ReadOnlyPoint
+  href: api/Mapsui.Geometries.ReadOnlyPoint.html
+  commentId: T:Mapsui.Geometries.ReadOnlyPoint
+  fullName: Mapsui.Geometries.ReadOnlyPoint
+  nameWithType: ReadOnlyPoint
+- uid: Mapsui.Geometries.ReadOnlyPoint.#ctor(Mapsui.Geometries.ReadOnlyPoint)
+  name: ReadOnlyPoint(ReadOnlyPoint)
+  href: api/Mapsui.Geometries.ReadOnlyPoint.html#Mapsui_Geometries_ReadOnlyPoint__ctor_Mapsui_Geometries_ReadOnlyPoint_
+  commentId: M:Mapsui.Geometries.ReadOnlyPoint.#ctor(Mapsui.Geometries.ReadOnlyPoint)
+  fullName: Mapsui.Geometries.ReadOnlyPoint.ReadOnlyPoint(Mapsui.Geometries.ReadOnlyPoint)
+  nameWithType: ReadOnlyPoint.ReadOnlyPoint(ReadOnlyPoint)
+- uid: Mapsui.Geometries.ReadOnlyPoint.#ctor(System.Double,System.Double)
+  name: ReadOnlyPoint(Double, Double)
+  href: api/Mapsui.Geometries.ReadOnlyPoint.html#Mapsui_Geometries_ReadOnlyPoint__ctor_System_Double_System_Double_
+  commentId: M:Mapsui.Geometries.ReadOnlyPoint.#ctor(System.Double,System.Double)
+  fullName: Mapsui.Geometries.ReadOnlyPoint.ReadOnlyPoint(System.Double, System.Double)
+  nameWithType: ReadOnlyPoint.ReadOnlyPoint(Double, Double)
+- uid: Mapsui.Geometries.ReadOnlyPoint.#ctor*
+  name: ReadOnlyPoint
+  href: api/Mapsui.Geometries.ReadOnlyPoint.html#Mapsui_Geometries_ReadOnlyPoint__ctor_
+  commentId: Overload:Mapsui.Geometries.ReadOnlyPoint.#ctor
+  isSpec: "True"
+  fullName: Mapsui.Geometries.ReadOnlyPoint.ReadOnlyPoint
+  nameWithType: ReadOnlyPoint.ReadOnlyPoint
+- uid: Mapsui.Geometries.ReadOnlyPoint.op_Implicit(Mapsui.Geometries.Point)~Mapsui.Geometries.ReadOnlyPoint
+  name: Implicit(Point to ReadOnlyPoint)
+  href: api/Mapsui.Geometries.ReadOnlyPoint.html#Mapsui_Geometries_ReadOnlyPoint_op_Implicit_Mapsui_Geometries_Point__Mapsui_Geometries_ReadOnlyPoint
+  commentId: M:Mapsui.Geometries.ReadOnlyPoint.op_Implicit(Mapsui.Geometries.Point)~Mapsui.Geometries.ReadOnlyPoint
+  name.vb: Widening(Point to ReadOnlyPoint)
+  fullName: Mapsui.Geometries.ReadOnlyPoint.Implicit(Mapsui.Geometries.Point to Mapsui.Geometries.ReadOnlyPoint)
+  fullName.vb: Mapsui.Geometries.ReadOnlyPoint.Widening(Mapsui.Geometries.Point to Mapsui.Geometries.ReadOnlyPoint)
+  nameWithType: ReadOnlyPoint.Implicit(Point to ReadOnlyPoint)
+  nameWithType.vb: ReadOnlyPoint.Widening(Point to ReadOnlyPoint)
+- uid: Mapsui.Geometries.ReadOnlyPoint.op_Implicit(Mapsui.Geometries.ReadOnlyPoint)~Mapsui.Geometries.Point
+  name: Implicit(ReadOnlyPoint to Point)
+  href: api/Mapsui.Geometries.ReadOnlyPoint.html#Mapsui_Geometries_ReadOnlyPoint_op_Implicit_Mapsui_Geometries_ReadOnlyPoint__Mapsui_Geometries_Point
+  commentId: M:Mapsui.Geometries.ReadOnlyPoint.op_Implicit(Mapsui.Geometries.ReadOnlyPoint)~Mapsui.Geometries.Point
+  name.vb: Widening(ReadOnlyPoint to Point)
+  fullName: Mapsui.Geometries.ReadOnlyPoint.Implicit(Mapsui.Geometries.ReadOnlyPoint to Mapsui.Geometries.Point)
+  fullName.vb: Mapsui.Geometries.ReadOnlyPoint.Widening(Mapsui.Geometries.ReadOnlyPoint to Mapsui.Geometries.Point)
+  nameWithType: ReadOnlyPoint.Implicit(ReadOnlyPoint to Point)
+  nameWithType.vb: ReadOnlyPoint.Widening(ReadOnlyPoint to Point)
+- uid: Mapsui.Geometries.ReadOnlyPoint.op_Implicit*
+  name: Implicit
+  href: api/Mapsui.Geometries.ReadOnlyPoint.html#Mapsui_Geometries_ReadOnlyPoint_op_Implicit_
+  commentId: Overload:Mapsui.Geometries.ReadOnlyPoint.op_Implicit
+  isSpec: "True"
+  name.vb: Widening
+  fullName: Mapsui.Geometries.ReadOnlyPoint.Implicit
+  fullName.vb: Mapsui.Geometries.ReadOnlyPoint.Widening
+  nameWithType: ReadOnlyPoint.Implicit
+  nameWithType.vb: ReadOnlyPoint.Widening
+- uid: Mapsui.Geometries.ReadOnlyPoint.X
+  name: X
+  href: api/Mapsui.Geometries.ReadOnlyPoint.html#Mapsui_Geometries_ReadOnlyPoint_X
+  commentId: P:Mapsui.Geometries.ReadOnlyPoint.X
+  fullName: Mapsui.Geometries.ReadOnlyPoint.X
+  nameWithType: ReadOnlyPoint.X
+- uid: Mapsui.Geometries.ReadOnlyPoint.X*
+  name: X
+  href: api/Mapsui.Geometries.ReadOnlyPoint.html#Mapsui_Geometries_ReadOnlyPoint_X_
+  commentId: Overload:Mapsui.Geometries.ReadOnlyPoint.X
+  isSpec: "True"
+  fullName: Mapsui.Geometries.ReadOnlyPoint.X
+  nameWithType: ReadOnlyPoint.X
+- uid: Mapsui.Geometries.ReadOnlyPoint.Y
+  name: Y
+  href: api/Mapsui.Geometries.ReadOnlyPoint.html#Mapsui_Geometries_ReadOnlyPoint_Y
+  commentId: P:Mapsui.Geometries.ReadOnlyPoint.Y
+  fullName: Mapsui.Geometries.ReadOnlyPoint.Y
+  nameWithType: ReadOnlyPoint.Y
+- uid: Mapsui.Geometries.ReadOnlyPoint.Y*
+  name: Y
+  href: api/Mapsui.Geometries.ReadOnlyPoint.html#Mapsui_Geometries_ReadOnlyPoint_Y_
+  commentId: Overload:Mapsui.Geometries.ReadOnlyPoint.Y
+  isSpec: "True"
+  fullName: Mapsui.Geometries.ReadOnlyPoint.Y
+  nameWithType: ReadOnlyPoint.Y
 - uid: Mapsui.Geometries.Utilities
   name: Mapsui.Geometries.Utilities
   href: api/Mapsui.Geometries.Utilities.html
@@ -4154,6 +4233,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.IReadOnlyViewport.Width
   nameWithType: IReadOnlyViewport.Width
+- uid: Mapsui.IReadOnlyViewport.WindowExtent
+  name: WindowExtent
+  href: api/Mapsui.IReadOnlyViewport.html#Mapsui_IReadOnlyViewport_WindowExtent
+  commentId: P:Mapsui.IReadOnlyViewport.WindowExtent
+  fullName: Mapsui.IReadOnlyViewport.WindowExtent
+  nameWithType: IReadOnlyViewport.WindowExtent
+- uid: Mapsui.IReadOnlyViewport.WindowExtent*
+  name: WindowExtent
+  href: api/Mapsui.IReadOnlyViewport.html#Mapsui_IReadOnlyViewport_WindowExtent_
+  commentId: Overload:Mapsui.IReadOnlyViewport.WindowExtent
+  isSpec: "True"
+  fullName: Mapsui.IReadOnlyViewport.WindowExtent
+  nameWithType: IReadOnlyViewport.WindowExtent
 - uid: Mapsui.IReadOnlyViewport.WorldToScreen(Mapsui.Geometries.Point)
   name: WorldToScreen(Point)
   href: api/Mapsui.IReadOnlyViewport.html#Mapsui_IReadOnlyViewport_WorldToScreen_Mapsui_Geometries_Point_
@@ -4198,103 +4290,64 @@ references:
   commentId: T:Mapsui.IViewport
   fullName: Mapsui.IViewport
   nameWithType: IViewport
-- uid: Mapsui.IViewport.Center
-  name: Center
-  href: api/Mapsui.IViewport.html#Mapsui_IViewport_Center
-  commentId: P:Mapsui.IViewport.Center
-  fullName: Mapsui.IViewport.Center
-  nameWithType: IViewport.Center
-- uid: Mapsui.IViewport.Center*
-  name: Center
-  href: api/Mapsui.IViewport.html#Mapsui_IViewport_Center_
-  commentId: Overload:Mapsui.IViewport.Center
+- uid: Mapsui.IViewport.SetCenter(Mapsui.Geometries.ReadOnlyPoint)
+  name: SetCenter(ReadOnlyPoint)
+  href: api/Mapsui.IViewport.html#Mapsui_IViewport_SetCenter_Mapsui_Geometries_ReadOnlyPoint_
+  commentId: M:Mapsui.IViewport.SetCenter(Mapsui.Geometries.ReadOnlyPoint)
+  fullName: Mapsui.IViewport.SetCenter(Mapsui.Geometries.ReadOnlyPoint)
+  nameWithType: IViewport.SetCenter(ReadOnlyPoint)
+- uid: Mapsui.IViewport.SetCenter(System.Double,System.Double)
+  name: SetCenter(Double, Double)
+  href: api/Mapsui.IViewport.html#Mapsui_IViewport_SetCenter_System_Double_System_Double_
+  commentId: M:Mapsui.IViewport.SetCenter(System.Double,System.Double)
+  fullName: Mapsui.IViewport.SetCenter(System.Double, System.Double)
+  nameWithType: IViewport.SetCenter(Double, Double)
+- uid: Mapsui.IViewport.SetCenter*
+  name: SetCenter
+  href: api/Mapsui.IViewport.html#Mapsui_IViewport_SetCenter_
+  commentId: Overload:Mapsui.IViewport.SetCenter
   isSpec: "True"
-  fullName: Mapsui.IViewport.Center
-  nameWithType: IViewport.Center
-- uid: Mapsui.IViewport.Extent
-  name: Extent
-  href: api/Mapsui.IViewport.html#Mapsui_IViewport_Extent
-  commentId: P:Mapsui.IViewport.Extent
-  fullName: Mapsui.IViewport.Extent
-  nameWithType: IViewport.Extent
-- uid: Mapsui.IViewport.Extent*
-  name: Extent
-  href: api/Mapsui.IViewport.html#Mapsui_IViewport_Extent_
-  commentId: Overload:Mapsui.IViewport.Extent
+  fullName: Mapsui.IViewport.SetCenter
+  nameWithType: IViewport.SetCenter
+- uid: Mapsui.IViewport.SetResolution(System.Double)
+  name: SetResolution(Double)
+  href: api/Mapsui.IViewport.html#Mapsui_IViewport_SetResolution_System_Double_
+  commentId: M:Mapsui.IViewport.SetResolution(System.Double)
+  fullName: Mapsui.IViewport.SetResolution(System.Double)
+  nameWithType: IViewport.SetResolution(Double)
+- uid: Mapsui.IViewport.SetResolution*
+  name: SetResolution
+  href: api/Mapsui.IViewport.html#Mapsui_IViewport_SetResolution_
+  commentId: Overload:Mapsui.IViewport.SetResolution
   isSpec: "True"
-  fullName: Mapsui.IViewport.Extent
-  nameWithType: IViewport.Extent
-- uid: Mapsui.IViewport.Height
-  name: Height
-  href: api/Mapsui.IViewport.html#Mapsui_IViewport_Height
-  commentId: P:Mapsui.IViewport.Height
-  fullName: Mapsui.IViewport.Height
-  nameWithType: IViewport.Height
-- uid: Mapsui.IViewport.Height*
-  name: Height
-  href: api/Mapsui.IViewport.html#Mapsui_IViewport_Height_
-  commentId: Overload:Mapsui.IViewport.Height
+  fullName: Mapsui.IViewport.SetResolution
+  nameWithType: IViewport.SetResolution
+- uid: Mapsui.IViewport.SetRotation(System.Double)
+  name: SetRotation(Double)
+  href: api/Mapsui.IViewport.html#Mapsui_IViewport_SetRotation_System_Double_
+  commentId: M:Mapsui.IViewport.SetRotation(System.Double)
+  fullName: Mapsui.IViewport.SetRotation(System.Double)
+  nameWithType: IViewport.SetRotation(Double)
+- uid: Mapsui.IViewport.SetRotation*
+  name: SetRotation
+  href: api/Mapsui.IViewport.html#Mapsui_IViewport_SetRotation_
+  commentId: Overload:Mapsui.IViewport.SetRotation
   isSpec: "True"
-  fullName: Mapsui.IViewport.Height
-  nameWithType: IViewport.Height
-- uid: Mapsui.IViewport.IsRotated
-  name: IsRotated
-  href: api/Mapsui.IViewport.html#Mapsui_IViewport_IsRotated
-  commentId: P:Mapsui.IViewport.IsRotated
-  fullName: Mapsui.IViewport.IsRotated
-  nameWithType: IViewport.IsRotated
-- uid: Mapsui.IViewport.IsRotated*
-  name: IsRotated
-  href: api/Mapsui.IViewport.html#Mapsui_IViewport_IsRotated_
-  commentId: Overload:Mapsui.IViewport.IsRotated
+  fullName: Mapsui.IViewport.SetRotation
+  nameWithType: IViewport.SetRotation
+- uid: Mapsui.IViewport.SetSize(System.Double,System.Double)
+  name: SetSize(Double, Double)
+  href: api/Mapsui.IViewport.html#Mapsui_IViewport_SetSize_System_Double_System_Double_
+  commentId: M:Mapsui.IViewport.SetSize(System.Double,System.Double)
+  fullName: Mapsui.IViewport.SetSize(System.Double, System.Double)
+  nameWithType: IViewport.SetSize(Double, Double)
+- uid: Mapsui.IViewport.SetSize*
+  name: SetSize
+  href: api/Mapsui.IViewport.html#Mapsui_IViewport_SetSize_
+  commentId: Overload:Mapsui.IViewport.SetSize
   isSpec: "True"
-  fullName: Mapsui.IViewport.IsRotated
-  nameWithType: IViewport.IsRotated
-- uid: Mapsui.IViewport.Resolution
-  name: Resolution
-  href: api/Mapsui.IViewport.html#Mapsui_IViewport_Resolution
-  commentId: P:Mapsui.IViewport.Resolution
-  fullName: Mapsui.IViewport.Resolution
-  nameWithType: IViewport.Resolution
-- uid: Mapsui.IViewport.Resolution*
-  name: Resolution
-  href: api/Mapsui.IViewport.html#Mapsui_IViewport_Resolution_
-  commentId: Overload:Mapsui.IViewport.Resolution
-  isSpec: "True"
-  fullName: Mapsui.IViewport.Resolution
-  nameWithType: IViewport.Resolution
-- uid: Mapsui.IViewport.Rotation
-  name: Rotation
-  href: api/Mapsui.IViewport.html#Mapsui_IViewport_Rotation
-  commentId: P:Mapsui.IViewport.Rotation
-  fullName: Mapsui.IViewport.Rotation
-  nameWithType: IViewport.Rotation
-- uid: Mapsui.IViewport.Rotation*
-  name: Rotation
-  href: api/Mapsui.IViewport.html#Mapsui_IViewport_Rotation_
-  commentId: Overload:Mapsui.IViewport.Rotation
-  isSpec: "True"
-  fullName: Mapsui.IViewport.Rotation
-  nameWithType: IViewport.Rotation
-- uid: Mapsui.IViewport.ScreenToWorld(Mapsui.Geometries.Point)
-  name: ScreenToWorld(Point)
-  href: api/Mapsui.IViewport.html#Mapsui_IViewport_ScreenToWorld_Mapsui_Geometries_Point_
-  commentId: M:Mapsui.IViewport.ScreenToWorld(Mapsui.Geometries.Point)
-  fullName: Mapsui.IViewport.ScreenToWorld(Mapsui.Geometries.Point)
-  nameWithType: IViewport.ScreenToWorld(Point)
-- uid: Mapsui.IViewport.ScreenToWorld(System.Double,System.Double)
-  name: ScreenToWorld(Double, Double)
-  href: api/Mapsui.IViewport.html#Mapsui_IViewport_ScreenToWorld_System_Double_System_Double_
-  commentId: M:Mapsui.IViewport.ScreenToWorld(System.Double,System.Double)
-  fullName: Mapsui.IViewport.ScreenToWorld(System.Double, System.Double)
-  nameWithType: IViewport.ScreenToWorld(Double, Double)
-- uid: Mapsui.IViewport.ScreenToWorld*
-  name: ScreenToWorld
-  href: api/Mapsui.IViewport.html#Mapsui_IViewport_ScreenToWorld_
-  commentId: Overload:Mapsui.IViewport.ScreenToWorld
-  isSpec: "True"
-  fullName: Mapsui.IViewport.ScreenToWorld
-  nameWithType: IViewport.ScreenToWorld
+  fullName: Mapsui.IViewport.SetSize
+  nameWithType: IViewport.SetSize
 - uid: Mapsui.IViewport.Transform(System.Double,System.Double,System.Double,System.Double,System.Double,System.Double)
   name: Transform(Double, Double, Double, Double, Double, Double)
   href: api/Mapsui.IViewport.html#Mapsui_IViewport_Transform_System_Double_System_Double_System_Double_System_Double_System_Double_System_Double_
@@ -4308,51 +4361,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.IViewport.Transform
   nameWithType: IViewport.Transform
-- uid: Mapsui.IViewport.Width
-  name: Width
-  href: api/Mapsui.IViewport.html#Mapsui_IViewport_Width
-  commentId: P:Mapsui.IViewport.Width
-  fullName: Mapsui.IViewport.Width
-  nameWithType: IViewport.Width
-- uid: Mapsui.IViewport.Width*
-  name: Width
-  href: api/Mapsui.IViewport.html#Mapsui_IViewport_Width_
-  commentId: Overload:Mapsui.IViewport.Width
-  isSpec: "True"
-  fullName: Mapsui.IViewport.Width
-  nameWithType: IViewport.Width
-- uid: Mapsui.IViewport.WindowExtent
-  name: WindowExtent
-  href: api/Mapsui.IViewport.html#Mapsui_IViewport_WindowExtent
-  commentId: P:Mapsui.IViewport.WindowExtent
-  fullName: Mapsui.IViewport.WindowExtent
-  nameWithType: IViewport.WindowExtent
-- uid: Mapsui.IViewport.WindowExtent*
-  name: WindowExtent
-  href: api/Mapsui.IViewport.html#Mapsui_IViewport_WindowExtent_
-  commentId: Overload:Mapsui.IViewport.WindowExtent
-  isSpec: "True"
-  fullName: Mapsui.IViewport.WindowExtent
-  nameWithType: IViewport.WindowExtent
-- uid: Mapsui.IViewport.WorldToScreen(Mapsui.Geometries.Point)
-  name: WorldToScreen(Point)
-  href: api/Mapsui.IViewport.html#Mapsui_IViewport_WorldToScreen_Mapsui_Geometries_Point_
-  commentId: M:Mapsui.IViewport.WorldToScreen(Mapsui.Geometries.Point)
-  fullName: Mapsui.IViewport.WorldToScreen(Mapsui.Geometries.Point)
-  nameWithType: IViewport.WorldToScreen(Point)
-- uid: Mapsui.IViewport.WorldToScreen(System.Double,System.Double)
-  name: WorldToScreen(Double, Double)
-  href: api/Mapsui.IViewport.html#Mapsui_IViewport_WorldToScreen_System_Double_System_Double_
-  commentId: M:Mapsui.IViewport.WorldToScreen(System.Double,System.Double)
-  fullName: Mapsui.IViewport.WorldToScreen(System.Double, System.Double)
-  nameWithType: IViewport.WorldToScreen(Double, Double)
-- uid: Mapsui.IViewport.WorldToScreen*
-  name: WorldToScreen
-  href: api/Mapsui.IViewport.html#Mapsui_IViewport_WorldToScreen_
-  commentId: Overload:Mapsui.IViewport.WorldToScreen
-  isSpec: "True"
-  fullName: Mapsui.IViewport.WorldToScreen
-  nameWithType: IViewport.WorldToScreen
 - uid: Mapsui.Layers
   name: Mapsui.Layers
   href: api/Mapsui.Layers.html
@@ -6114,6 +6122,109 @@ references:
   isSpec: "True"
   fullName: Mapsui.Layers.WritableLayer.TryRemove
   nameWithType: WritableLayer.TryRemove
+- uid: Mapsui.LimitedViewport
+  name: LimitedViewport
+  href: api/Mapsui.LimitedViewport.html
+  commentId: T:Mapsui.LimitedViewport
+  fullName: Mapsui.LimitedViewport
+  nameWithType: LimitedViewport
+- uid: Mapsui.LimitedViewport.Limits
+  name: Limits
+  href: api/Mapsui.LimitedViewport.html#Mapsui_LimitedViewport_Limits
+  commentId: P:Mapsui.LimitedViewport.Limits
+  fullName: Mapsui.LimitedViewport.Limits
+  nameWithType: LimitedViewport.Limits
+- uid: Mapsui.LimitedViewport.Limits*
+  name: Limits
+  href: api/Mapsui.LimitedViewport.html#Mapsui_LimitedViewport_Limits_
+  commentId: Overload:Mapsui.LimitedViewport.Limits
+  isSpec: "True"
+  fullName: Mapsui.LimitedViewport.Limits
+  nameWithType: LimitedViewport.Limits
+- uid: Mapsui.LimitedViewport.Map
+  name: Map
+  href: api/Mapsui.LimitedViewport.html#Mapsui_LimitedViewport_Map
+  commentId: P:Mapsui.LimitedViewport.Map
+  fullName: Mapsui.LimitedViewport.Map
+  nameWithType: LimitedViewport.Map
+- uid: Mapsui.LimitedViewport.Map*
+  name: Map
+  href: api/Mapsui.LimitedViewport.html#Mapsui_LimitedViewport_Map_
+  commentId: Overload:Mapsui.LimitedViewport.Map
+  isSpec: "True"
+  fullName: Mapsui.LimitedViewport.Map
+  nameWithType: LimitedViewport.Map
+- uid: Mapsui.LimitedViewport.SetCenter(Mapsui.Geometries.Point)
+  name: SetCenter(Point)
+  href: api/Mapsui.LimitedViewport.html#Mapsui_LimitedViewport_SetCenter_Mapsui_Geometries_Point_
+  commentId: M:Mapsui.LimitedViewport.SetCenter(Mapsui.Geometries.Point)
+  fullName: Mapsui.LimitedViewport.SetCenter(Mapsui.Geometries.Point)
+  nameWithType: LimitedViewport.SetCenter(Point)
+- uid: Mapsui.LimitedViewport.SetCenter(System.Double,System.Double)
+  name: SetCenter(Double, Double)
+  href: api/Mapsui.LimitedViewport.html#Mapsui_LimitedViewport_SetCenter_System_Double_System_Double_
+  commentId: M:Mapsui.LimitedViewport.SetCenter(System.Double,System.Double)
+  fullName: Mapsui.LimitedViewport.SetCenter(System.Double, System.Double)
+  nameWithType: LimitedViewport.SetCenter(Double, Double)
+- uid: Mapsui.LimitedViewport.SetCenter*
+  name: SetCenter
+  href: api/Mapsui.LimitedViewport.html#Mapsui_LimitedViewport_SetCenter_
+  commentId: Overload:Mapsui.LimitedViewport.SetCenter
+  isSpec: "True"
+  fullName: Mapsui.LimitedViewport.SetCenter
+  nameWithType: LimitedViewport.SetCenter
+- uid: Mapsui.LimitedViewport.SetResolution(System.Double)
+  name: SetResolution(Double)
+  href: api/Mapsui.LimitedViewport.html#Mapsui_LimitedViewport_SetResolution_System_Double_
+  commentId: M:Mapsui.LimitedViewport.SetResolution(System.Double)
+  fullName: Mapsui.LimitedViewport.SetResolution(System.Double)
+  nameWithType: LimitedViewport.SetResolution(Double)
+- uid: Mapsui.LimitedViewport.SetResolution*
+  name: SetResolution
+  href: api/Mapsui.LimitedViewport.html#Mapsui_LimitedViewport_SetResolution_
+  commentId: Overload:Mapsui.LimitedViewport.SetResolution
+  isSpec: "True"
+  fullName: Mapsui.LimitedViewport.SetResolution
+  nameWithType: LimitedViewport.SetResolution
+- uid: Mapsui.LimitedViewport.SetRotation(System.Double)
+  name: SetRotation(Double)
+  href: api/Mapsui.LimitedViewport.html#Mapsui_LimitedViewport_SetRotation_System_Double_
+  commentId: M:Mapsui.LimitedViewport.SetRotation(System.Double)
+  fullName: Mapsui.LimitedViewport.SetRotation(System.Double)
+  nameWithType: LimitedViewport.SetRotation(Double)
+- uid: Mapsui.LimitedViewport.SetRotation*
+  name: SetRotation
+  href: api/Mapsui.LimitedViewport.html#Mapsui_LimitedViewport_SetRotation_
+  commentId: Overload:Mapsui.LimitedViewport.SetRotation
+  isSpec: "True"
+  fullName: Mapsui.LimitedViewport.SetRotation
+  nameWithType: LimitedViewport.SetRotation
+- uid: Mapsui.LimitedViewport.SetSize(System.Double,System.Double)
+  name: SetSize(Double, Double)
+  href: api/Mapsui.LimitedViewport.html#Mapsui_LimitedViewport_SetSize_System_Double_System_Double_
+  commentId: M:Mapsui.LimitedViewport.SetSize(System.Double,System.Double)
+  fullName: Mapsui.LimitedViewport.SetSize(System.Double, System.Double)
+  nameWithType: LimitedViewport.SetSize(Double, Double)
+- uid: Mapsui.LimitedViewport.SetSize*
+  name: SetSize
+  href: api/Mapsui.LimitedViewport.html#Mapsui_LimitedViewport_SetSize_
+  commentId: Overload:Mapsui.LimitedViewport.SetSize
+  isSpec: "True"
+  fullName: Mapsui.LimitedViewport.SetSize
+  nameWithType: LimitedViewport.SetSize
+- uid: Mapsui.LimitedViewport.Transform(System.Double,System.Double,System.Double,System.Double,System.Double,System.Double)
+  name: Transform(Double, Double, Double, Double, Double, Double)
+  href: api/Mapsui.LimitedViewport.html#Mapsui_LimitedViewport_Transform_System_Double_System_Double_System_Double_System_Double_System_Double_System_Double_
+  commentId: M:Mapsui.LimitedViewport.Transform(System.Double,System.Double,System.Double,System.Double,System.Double,System.Double)
+  fullName: Mapsui.LimitedViewport.Transform(System.Double, System.Double, System.Double, System.Double, System.Double, System.Double)
+  nameWithType: LimitedViewport.Transform(Double, Double, Double, Double, Double, Double)
+- uid: Mapsui.LimitedViewport.Transform*
+  name: Transform
+  href: api/Mapsui.LimitedViewport.html#Mapsui_LimitedViewport_Transform_
+  commentId: Overload:Mapsui.LimitedViewport.Transform
+  isSpec: "True"
+  fullName: Mapsui.LimitedViewport.Transform
+  nameWithType: LimitedViewport.Transform
 - uid: Mapsui.Logging
   name: Mapsui.Logging
   href: api/Mapsui.Logging.html
@@ -6342,32 +6453,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.Map.Layers
   nameWithType: Map.Layers
-- uid: Mapsui.Map.PanLimits
-  name: PanLimits
-  href: api/Mapsui.Map.html#Mapsui_Map_PanLimits
-  commentId: P:Mapsui.Map.PanLimits
-  fullName: Mapsui.Map.PanLimits
-  nameWithType: Map.PanLimits
-- uid: Mapsui.Map.PanLimits*
-  name: PanLimits
-  href: api/Mapsui.Map.html#Mapsui_Map_PanLimits_
-  commentId: Overload:Mapsui.Map.PanLimits
+- uid: Mapsui.Map.Limits
+  name: Limits
+  href: api/Mapsui.Map.html#Mapsui_Map_Limits
+  commentId: P:Mapsui.Map.Limits
+  fullName: Mapsui.Map.Limits
+  nameWithType: Map.Limits
+- uid: Mapsui.Map.Limits*
+  name: Limits
+  href: api/Mapsui.Map.html#Mapsui_Map_Limits_
+  commentId: Overload:Mapsui.Map.Limits
   isSpec: "True"
-  fullName: Mapsui.Map.PanLimits
-  nameWithType: Map.PanLimits
-- uid: Mapsui.Map.PanMode
-  name: PanMode
-  href: api/Mapsui.Map.html#Mapsui_Map_PanMode
-  commentId: P:Mapsui.Map.PanMode
-  fullName: Mapsui.Map.PanMode
-  nameWithType: Map.PanMode
-- uid: Mapsui.Map.PanMode*
-  name: PanMode
-  href: api/Mapsui.Map.html#Mapsui_Map_PanMode_
-  commentId: Overload:Mapsui.Map.PanMode
-  isSpec: "True"
-  fullName: Mapsui.Map.PanMode
-  nameWithType: Map.PanMode
+  fullName: Mapsui.Map.Limits
+  nameWithType: Map.Limits
 - uid: Mapsui.Map.PropertyChanged
   name: PropertyChanged
   href: api/Mapsui.Map.html#Mapsui_Map_PropertyChanged
@@ -6432,32 +6530,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.Map.Widgets
   nameWithType: Map.Widgets
-- uid: Mapsui.Map.ZoomLimits
-  name: ZoomLimits
-  href: api/Mapsui.Map.html#Mapsui_Map_ZoomLimits
-  commentId: P:Mapsui.Map.ZoomLimits
-  fullName: Mapsui.Map.ZoomLimits
-  nameWithType: Map.ZoomLimits
-- uid: Mapsui.Map.ZoomLimits*
-  name: ZoomLimits
-  href: api/Mapsui.Map.html#Mapsui_Map_ZoomLimits_
-  commentId: Overload:Mapsui.Map.ZoomLimits
-  isSpec: "True"
-  fullName: Mapsui.Map.ZoomLimits
-  nameWithType: Map.ZoomLimits
-- uid: Mapsui.Map.ZoomMode
-  name: ZoomMode
-  href: api/Mapsui.Map.html#Mapsui_Map_ZoomMode
-  commentId: P:Mapsui.Map.ZoomMode
-  fullName: Mapsui.Map.ZoomMode
-  nameWithType: Map.ZoomMode
-- uid: Mapsui.Map.ZoomMode*
-  name: ZoomMode
-  href: api/Mapsui.Map.html#Mapsui_Map_ZoomMode_
-  commentId: Overload:Mapsui.Map.ZoomMode
-  isSpec: "True"
-  fullName: Mapsui.Map.ZoomMode
-  nameWithType: Map.ZoomMode
 - uid: Mapsui.Navigator
   name: Navigator
   href: api/Mapsui.Navigator.html
@@ -20989,6 +21061,64 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.HoveredEventArgs.ScreenPosition
   nameWithType: HoveredEventArgs.ScreenPosition
+- uid: Mapsui.UI.ILimits
+  name: ILimits
+  href: api/Mapsui.UI.ILimits.html
+  commentId: T:Mapsui.UI.ILimits
+  fullName: Mapsui.UI.ILimits
+  nameWithType: ILimits
+- uid: Mapsui.UI.ILimits.PanLimits
+  name: PanLimits
+  href: api/Mapsui.UI.ILimits.html#Mapsui_UI_ILimits_PanLimits
+  commentId: P:Mapsui.UI.ILimits.PanLimits
+  fullName: Mapsui.UI.ILimits.PanLimits
+  nameWithType: ILimits.PanLimits
+- uid: Mapsui.UI.ILimits.PanLimits*
+  name: PanLimits
+  href: api/Mapsui.UI.ILimits.html#Mapsui_UI_ILimits_PanLimits_
+  commentId: Overload:Mapsui.UI.ILimits.PanLimits
+  isSpec: "True"
+  fullName: Mapsui.UI.ILimits.PanLimits
+  nameWithType: ILimits.PanLimits
+- uid: Mapsui.UI.ILimits.PanMode
+  name: PanMode
+  href: api/Mapsui.UI.ILimits.html#Mapsui_UI_ILimits_PanMode
+  commentId: P:Mapsui.UI.ILimits.PanMode
+  fullName: Mapsui.UI.ILimits.PanMode
+  nameWithType: ILimits.PanMode
+- uid: Mapsui.UI.ILimits.PanMode*
+  name: PanMode
+  href: api/Mapsui.UI.ILimits.html#Mapsui_UI_ILimits_PanMode_
+  commentId: Overload:Mapsui.UI.ILimits.PanMode
+  isSpec: "True"
+  fullName: Mapsui.UI.ILimits.PanMode
+  nameWithType: ILimits.PanMode
+- uid: Mapsui.UI.ILimits.ZoomLimits
+  name: ZoomLimits
+  href: api/Mapsui.UI.ILimits.html#Mapsui_UI_ILimits_ZoomLimits
+  commentId: P:Mapsui.UI.ILimits.ZoomLimits
+  fullName: Mapsui.UI.ILimits.ZoomLimits
+  nameWithType: ILimits.ZoomLimits
+- uid: Mapsui.UI.ILimits.ZoomLimits*
+  name: ZoomLimits
+  href: api/Mapsui.UI.ILimits.html#Mapsui_UI_ILimits_ZoomLimits_
+  commentId: Overload:Mapsui.UI.ILimits.ZoomLimits
+  isSpec: "True"
+  fullName: Mapsui.UI.ILimits.ZoomLimits
+  nameWithType: ILimits.ZoomLimits
+- uid: Mapsui.UI.ILimits.ZoomMode
+  name: ZoomMode
+  href: api/Mapsui.UI.ILimits.html#Mapsui_UI_ILimits_ZoomMode
+  commentId: P:Mapsui.UI.ILimits.ZoomMode
+  fullName: Mapsui.UI.ILimits.ZoomMode
+  nameWithType: ILimits.ZoomMode
+- uid: Mapsui.UI.ILimits.ZoomMode*
+  name: ZoomMode
+  href: api/Mapsui.UI.ILimits.html#Mapsui_UI_ILimits_ZoomMode_
+  commentId: Overload:Mapsui.UI.ILimits.ZoomMode
+  isSpec: "True"
+  fullName: Mapsui.UI.ILimits.ZoomMode
+  nameWithType: ILimits.ZoomMode
 - uid: Mapsui.UI.IMapControl
   name: IMapControl
   href: api/Mapsui.UI.IMapControl.html
@@ -21853,6 +21983,64 @@ references:
   commentId: E:Mapsui.UI.iOS.MapHelper.TouchUp
   fullName: Mapsui.UI.iOS.MapHelper.TouchUp
   nameWithType: MapHelper.TouchUp
+- uid: Mapsui.UI.Limits
+  name: Limits
+  href: api/Mapsui.UI.Limits.html
+  commentId: T:Mapsui.UI.Limits
+  fullName: Mapsui.UI.Limits
+  nameWithType: Limits
+- uid: Mapsui.UI.Limits.PanLimits
+  name: PanLimits
+  href: api/Mapsui.UI.Limits.html#Mapsui_UI_Limits_PanLimits
+  commentId: P:Mapsui.UI.Limits.PanLimits
+  fullName: Mapsui.UI.Limits.PanLimits
+  nameWithType: Limits.PanLimits
+- uid: Mapsui.UI.Limits.PanLimits*
+  name: PanLimits
+  href: api/Mapsui.UI.Limits.html#Mapsui_UI_Limits_PanLimits_
+  commentId: Overload:Mapsui.UI.Limits.PanLimits
+  isSpec: "True"
+  fullName: Mapsui.UI.Limits.PanLimits
+  nameWithType: Limits.PanLimits
+- uid: Mapsui.UI.Limits.PanMode
+  name: PanMode
+  href: api/Mapsui.UI.Limits.html#Mapsui_UI_Limits_PanMode
+  commentId: P:Mapsui.UI.Limits.PanMode
+  fullName: Mapsui.UI.Limits.PanMode
+  nameWithType: Limits.PanMode
+- uid: Mapsui.UI.Limits.PanMode*
+  name: PanMode
+  href: api/Mapsui.UI.Limits.html#Mapsui_UI_Limits_PanMode_
+  commentId: Overload:Mapsui.UI.Limits.PanMode
+  isSpec: "True"
+  fullName: Mapsui.UI.Limits.PanMode
+  nameWithType: Limits.PanMode
+- uid: Mapsui.UI.Limits.ZoomLimits
+  name: ZoomLimits
+  href: api/Mapsui.UI.Limits.html#Mapsui_UI_Limits_ZoomLimits
+  commentId: P:Mapsui.UI.Limits.ZoomLimits
+  fullName: Mapsui.UI.Limits.ZoomLimits
+  nameWithType: Limits.ZoomLimits
+- uid: Mapsui.UI.Limits.ZoomLimits*
+  name: ZoomLimits
+  href: api/Mapsui.UI.Limits.html#Mapsui_UI_Limits_ZoomLimits_
+  commentId: Overload:Mapsui.UI.Limits.ZoomLimits
+  isSpec: "True"
+  fullName: Mapsui.UI.Limits.ZoomLimits
+  nameWithType: Limits.ZoomLimits
+- uid: Mapsui.UI.Limits.ZoomMode
+  name: ZoomMode
+  href: api/Mapsui.UI.Limits.html#Mapsui_UI_Limits_ZoomMode
+  commentId: P:Mapsui.UI.Limits.ZoomMode
+  fullName: Mapsui.UI.Limits.ZoomMode
+  nameWithType: Limits.ZoomMode
+- uid: Mapsui.UI.Limits.ZoomMode*
+  name: ZoomMode
+  href: api/Mapsui.UI.Limits.html#Mapsui_UI_Limits_ZoomMode_
+  commentId: Overload:Mapsui.UI.Limits.ZoomMode
+  isSpec: "True"
+  fullName: Mapsui.UI.Limits.ZoomMode
+  nameWithType: Limits.ZoomMode
 - uid: Mapsui.UI.MapInfo
   name: MapInfo
   href: api/Mapsui.UI.MapInfo.html
@@ -23470,6 +23658,51 @@ references:
   isSpec: "True"
   fullName: Mapsui.Viewport.ScreenToWorld
   nameWithType: Viewport.ScreenToWorld
+- uid: Mapsui.Viewport.SetCenter(Mapsui.Geometries.ReadOnlyPoint)
+  name: SetCenter(ReadOnlyPoint)
+  href: api/Mapsui.Viewport.html#Mapsui_Viewport_SetCenter_Mapsui_Geometries_ReadOnlyPoint_
+  commentId: M:Mapsui.Viewport.SetCenter(Mapsui.Geometries.ReadOnlyPoint)
+  fullName: Mapsui.Viewport.SetCenter(Mapsui.Geometries.ReadOnlyPoint)
+  nameWithType: Viewport.SetCenter(ReadOnlyPoint)
+- uid: Mapsui.Viewport.SetCenter(System.Double,System.Double)
+  name: SetCenter(Double, Double)
+  href: api/Mapsui.Viewport.html#Mapsui_Viewport_SetCenter_System_Double_System_Double_
+  commentId: M:Mapsui.Viewport.SetCenter(System.Double,System.Double)
+  fullName: Mapsui.Viewport.SetCenter(System.Double, System.Double)
+  nameWithType: Viewport.SetCenter(Double, Double)
+- uid: Mapsui.Viewport.SetCenter*
+  name: SetCenter
+  href: api/Mapsui.Viewport.html#Mapsui_Viewport_SetCenter_
+  commentId: Overload:Mapsui.Viewport.SetCenter
+  isSpec: "True"
+  fullName: Mapsui.Viewport.SetCenter
+  nameWithType: Viewport.SetCenter
+- uid: Mapsui.Viewport.SetResolution(System.Double)
+  name: SetResolution(Double)
+  href: api/Mapsui.Viewport.html#Mapsui_Viewport_SetResolution_System_Double_
+  commentId: M:Mapsui.Viewport.SetResolution(System.Double)
+  fullName: Mapsui.Viewport.SetResolution(System.Double)
+  nameWithType: Viewport.SetResolution(Double)
+- uid: Mapsui.Viewport.SetResolution*
+  name: SetResolution
+  href: api/Mapsui.Viewport.html#Mapsui_Viewport_SetResolution_
+  commentId: Overload:Mapsui.Viewport.SetResolution
+  isSpec: "True"
+  fullName: Mapsui.Viewport.SetResolution
+  nameWithType: Viewport.SetResolution
+- uid: Mapsui.Viewport.SetRotation(System.Double)
+  name: SetRotation(Double)
+  href: api/Mapsui.Viewport.html#Mapsui_Viewport_SetRotation_System_Double_
+  commentId: M:Mapsui.Viewport.SetRotation(System.Double)
+  fullName: Mapsui.Viewport.SetRotation(System.Double)
+  nameWithType: Viewport.SetRotation(Double)
+- uid: Mapsui.Viewport.SetRotation*
+  name: SetRotation
+  href: api/Mapsui.Viewport.html#Mapsui_Viewport_SetRotation_
+  commentId: Overload:Mapsui.Viewport.SetRotation
+  isSpec: "True"
+  fullName: Mapsui.Viewport.SetRotation
+  nameWithType: Viewport.SetRotation
 - uid: Mapsui.Viewport.SetSize(System.Double,System.Double)
   name: SetSize(Double, Double)
   href: api/Mapsui.Viewport.html#Mapsui_Viewport_SetSize_System_Double_System_Double_

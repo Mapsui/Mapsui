@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Interface IReadOnlyViewport
    ">
-    <meta name="generator" content="docfx 2.37.1.0">
+    <meta name="generator" content="docfx 2.37.2.0">
     
     <link rel="shortcut icon" href="../images/favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -88,15 +88,16 @@
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_IReadOnlyViewport_Center.md&amp;value=---%0Auid%3A%20Mapsui.IReadOnlyViewport.Center%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/IReadOnlyViewport.cs/#L7">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/IReadOnlyViewport.cs/#L10">View Source</a>
   </span>
   <a id="Mapsui_IReadOnlyViewport_Center_" data-uid="Mapsui.IReadOnlyViewport.Center*"></a>
   <h4 id="Mapsui_IReadOnlyViewport_Center" data-uid="Mapsui.IReadOnlyViewport.Center">Center</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Coordinate of center of viewport in map coordinates</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">Point Center { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">ReadOnlyPoint Center { get; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -108,7 +109,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Mapsui.Geometries.Point.html">Point</a></td>
+        <td><a class="xref" href="Mapsui.Geometries.ReadOnlyPoint.html">ReadOnlyPoint</a></td>
         <td></td>
       </tr>
     </tbody>
@@ -118,11 +119,12 @@
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_IReadOnlyViewport_Extent.md&amp;value=---%0Auid%3A%20Mapsui.IReadOnlyViewport.Extent%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/IReadOnlyViewport.cs/#L9">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/IReadOnlyViewport.cs/#L31">View Source</a>
   </span>
   <a id="Mapsui_IReadOnlyViewport_Extent_" data-uid="Mapsui.IReadOnlyViewport.Extent*"></a>
   <h4 id="Mapsui_IReadOnlyViewport_Extent" data-uid="Mapsui.IReadOnlyViewport.Extent">Extent</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>BoundingBox of viewport in map coordinates respection Rotation</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -143,16 +145,21 @@
       </tr>
     </tbody>
   </table>
+  <h5 id="Mapsui_IReadOnlyViewport_Extent_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>This BoundingBox is horizontally and vertically aligned, even if the viewport
+is rotated. So this BoundingBox perhaps contain parts, that are not visible.</p>
+</div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_IReadOnlyViewport_Height.md&amp;value=---%0Auid%3A%20Mapsui.IReadOnlyViewport.Height%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/IReadOnlyViewport.cs/#L11">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/IReadOnlyViewport.cs/#L41">View Source</a>
   </span>
   <a id="Mapsui_IReadOnlyViewport_Height_" data-uid="Mapsui.IReadOnlyViewport.Height*"></a>
   <h4 id="Mapsui_IReadOnlyViewport_Height" data-uid="Mapsui.IReadOnlyViewport.Height">Height</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Height of viewport in screen pixels</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -178,11 +185,12 @@
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_IReadOnlyViewport_IsRotated.md&amp;value=---%0Auid%3A%20Mapsui.IReadOnlyViewport.IsRotated%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/IReadOnlyViewport.cs/#L14">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/IReadOnlyViewport.cs/#L52">View Source</a>
   </span>
   <a id="Mapsui_IReadOnlyViewport_IsRotated_" data-uid="Mapsui.IReadOnlyViewport.IsRotated*"></a>
   <h4 id="Mapsui_IReadOnlyViewport_IsRotated" data-uid="Mapsui.IReadOnlyViewport.IsRotated">IsRotated</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>IsRotated is true, when viewport displays map rotated</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -208,15 +216,16 @@
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_IReadOnlyViewport_Resolution.md&amp;value=---%0Auid%3A%20Mapsui.IReadOnlyViewport.Resolution%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/IReadOnlyViewport.cs/#L8">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/IReadOnlyViewport.cs/#L22">View Source</a>
   </span>
   <a id="Mapsui_IReadOnlyViewport_Resolution_" data-uid="Mapsui.IReadOnlyViewport.Resolution*"></a>
   <h4 id="Mapsui_IReadOnlyViewport_Resolution" data-uid="Mapsui.IReadOnlyViewport.Resolution">Resolution</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Resolution of the viewport in units per pixel</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">double Resolution { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">double Resolution { get; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -233,16 +242,23 @@
       </tr>
     </tbody>
   </table>
+  <h5 id="Mapsui_IReadOnlyViewport_Resolution_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Resolution is Mapsuis form of zoom level. Because Mapsui is projection independent, there 
+aren&apos;t any zoom levels as other map libraries have. If your map has EPSG:3857 as projection
+and you want to calculate the zoom, you should use the following equation</p>
+<p>var zoom = (float)Math.Log(78271.51696401953125 / resolution, 2);</p>
+</div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_IReadOnlyViewport_Rotation.md&amp;value=---%0Auid%3A%20Mapsui.IReadOnlyViewport.Rotation%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/IReadOnlyViewport.cs/#L12">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/IReadOnlyViewport.cs/#L46">View Source</a>
   </span>
   <a id="Mapsui_IReadOnlyViewport_Rotation_" data-uid="Mapsui.IReadOnlyViewport.Rotation*"></a>
   <h4 id="Mapsui_IReadOnlyViewport_Rotation" data-uid="Mapsui.IReadOnlyViewport.Rotation">Rotation</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Viewport rotation from True North (clockwise degrees)</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -268,11 +284,12 @@
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_IReadOnlyViewport_Width.md&amp;value=---%0Auid%3A%20Mapsui.IReadOnlyViewport.Width%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/IReadOnlyViewport.cs/#L10">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/IReadOnlyViewport.cs/#L36">View Source</a>
   </span>
   <a id="Mapsui_IReadOnlyViewport_Width_" data-uid="Mapsui.IReadOnlyViewport.Width*"></a>
   <h4 id="Mapsui_IReadOnlyViewport_Width" data-uid="Mapsui.IReadOnlyViewport.Width">Width</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Width of viewport in screen pixels</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -293,6 +310,41 @@
       </tr>
     </tbody>
   </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_IReadOnlyViewport_WindowExtent.md&amp;value=---%0Auid%3A%20Mapsui.IReadOnlyViewport.WindowExtent%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/IReadOnlyViewport.cs/#L110">View Source</a>
+  </span>
+  <a id="Mapsui_IReadOnlyViewport_WindowExtent_" data-uid="Mapsui.IReadOnlyViewport.WindowExtent*"></a>
+  <h4 id="Mapsui_IReadOnlyViewport_WindowExtent" data-uid="Mapsui.IReadOnlyViewport.WindowExtent">WindowExtent</h4>
+  <div class="markdown level1 summary"><p>WindowExtend gives the four corner points of viewport in map coordinates</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Quad WindowExtent { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Geometries.Quad.html">Quad</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Mapsui_IReadOnlyViewport_WindowExtent_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>If viewport is rotated, this corner points are not horizontally or vertically
+aligned.</p>
+</div>
   <h3 id="methods">Methods
   </h3>
   <span class="small pull-right mobile-hide">
@@ -300,7 +352,7 @@
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_IReadOnlyViewport_IsSizeInitialized.md&amp;value=---%0Auid%3A%20Mapsui.IReadOnlyViewport.IsSizeInitialized%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/IReadOnlyViewport.cs/#L13">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/IReadOnlyViewport.cs/#L47">View Source</a>
   </span>
   <a id="Mapsui_IReadOnlyViewport_IsSizeInitialized_" data-uid="Mapsui.IReadOnlyViewport.IsSizeInitialized*"></a>
   <h4 id="Mapsui_IReadOnlyViewport_IsSizeInitialized" data-uid="Mapsui.IReadOnlyViewport.IsSizeInitialized">IsSizeInitialized()</h4>
@@ -330,11 +382,12 @@
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_IReadOnlyViewport_ScreenToWorld_Mapsui_Geometries_Point_.md&amp;value=---%0Auid%3A%20Mapsui.IReadOnlyViewport.ScreenToWorld(Mapsui.Geometries.Point)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/IReadOnlyViewport.cs/#L15">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/IReadOnlyViewport.cs/#L59">View Source</a>
   </span>
   <a id="Mapsui_IReadOnlyViewport_ScreenToWorld_" data-uid="Mapsui.IReadOnlyViewport.ScreenToWorld*"></a>
   <h4 id="Mapsui_IReadOnlyViewport_ScreenToWorld_Mapsui_Geometries_Point_" data-uid="Mapsui.IReadOnlyViewport.ScreenToWorld(Mapsui.Geometries.Point)">ScreenToWorld(Point)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Converts a point in screen pixels to one in map units, respecting rotation</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -353,7 +406,8 @@
       <tr>
         <td><a class="xref" href="Mapsui.Geometries.Point.html">Point</a></td>
         <td><span class="parametername">screenPosition</span></td>
-        <td></td>
+        <td><p>Coordinate in map units</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -368,7 +422,8 @@
     <tbody>
       <tr>
         <td><a class="xref" href="Mapsui.Geometries.Point.html">Point</a></td>
-        <td></td>
+        <td><p>Point in map units</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -377,11 +432,12 @@
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_IReadOnlyViewport_ScreenToWorld_System_Double_System_Double_.md&amp;value=---%0Auid%3A%20Mapsui.IReadOnlyViewport.ScreenToWorld(System.Double%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/IReadOnlyViewport.cs/#L16">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/IReadOnlyViewport.cs/#L67">View Source</a>
   </span>
   <a id="Mapsui_IReadOnlyViewport_ScreenToWorld_" data-uid="Mapsui.IReadOnlyViewport.ScreenToWorld*"></a>
   <h4 id="Mapsui_IReadOnlyViewport_ScreenToWorld_System_Double_System_Double_" data-uid="Mapsui.IReadOnlyViewport.ScreenToWorld(System.Double,System.Double)">ScreenToWorld(Double, Double)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Converts X/Y in screen pixels to a point in map units, respecting rotation</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -400,12 +456,14 @@
       <tr>
         <td><span class="xref">System.Double</span></td>
         <td><span class="parametername">x</span></td>
-        <td></td>
+        <td><p>Screen position x coordinate</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.Double</span></td>
         <td><span class="parametername">y</span></td>
-        <td></td>
+        <td><p>Screen position y coordinate</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -420,7 +478,8 @@
     <tbody>
       <tr>
         <td><a class="xref" href="Mapsui.Geometries.Point.html">Point</a></td>
-        <td></td>
+        <td><p>Point in map units</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -429,11 +488,13 @@
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_IReadOnlyViewport_WorldToScreen_Mapsui_Geometries_Point_.md&amp;value=---%0Auid%3A%20Mapsui.IReadOnlyViewport.WorldToScreen(Mapsui.Geometries.Point)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/IReadOnlyViewport.cs/#L17">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/IReadOnlyViewport.cs/#L75">View Source</a>
   </span>
   <a id="Mapsui_IReadOnlyViewport_WorldToScreen_" data-uid="Mapsui.IReadOnlyViewport.WorldToScreen*"></a>
   <h4 id="Mapsui_IReadOnlyViewport_WorldToScreen_Mapsui_Geometries_Point_" data-uid="Mapsui.IReadOnlyViewport.WorldToScreen(Mapsui.Geometries.Point)">WorldToScreen(Point)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Converts X/Y in map units to a point in device independent unit (or DIP or DP),
+respecting rotation</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -452,7 +513,8 @@
       <tr>
         <td><a class="xref" href="Mapsui.Geometries.Point.html">Point</a></td>
         <td><span class="parametername">worldPosition</span></td>
-        <td></td>
+        <td><p>Coordinate in map units</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -467,7 +529,8 @@
     <tbody>
       <tr>
         <td><a class="xref" href="Mapsui.Geometries.Point.html">Point</a></td>
-        <td></td>
+        <td><p>Point in screen pixels</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -476,11 +539,13 @@
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_IReadOnlyViewport_WorldToScreen_System_Double_System_Double_.md&amp;value=---%0Auid%3A%20Mapsui.IReadOnlyViewport.WorldToScreen(System.Double%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/IReadOnlyViewport.cs/#L18">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/IReadOnlyViewport.cs/#L84">View Source</a>
   </span>
   <a id="Mapsui_IReadOnlyViewport_WorldToScreen_" data-uid="Mapsui.IReadOnlyViewport.WorldToScreen*"></a>
   <h4 id="Mapsui_IReadOnlyViewport_WorldToScreen_System_Double_System_Double_" data-uid="Mapsui.IReadOnlyViewport.WorldToScreen(System.Double,System.Double)">WorldToScreen(Double, Double)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Converts X/Y in map units to a point in device independent units (or DIP or DP),
+respecting rotation</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -519,7 +584,8 @@
     <tbody>
       <tr>
         <td><a class="xref" href="Mapsui.Geometries.Point.html">Point</a></td>
-        <td></td>
+        <td><p>Point in screen pixels</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -528,7 +594,7 @@
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_IReadOnlyViewport_WorldToScreenUnrotated_Mapsui_Geometries_Point_.md&amp;value=---%0Auid%3A%20Mapsui.IReadOnlyViewport.WorldToScreenUnrotated(Mapsui.Geometries.Point)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/IReadOnlyViewport.cs/#L35">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/IReadOnlyViewport.cs/#L101">View Source</a>
   </span>
   <a id="Mapsui_IReadOnlyViewport_WorldToScreenUnrotated_" data-uid="Mapsui.IReadOnlyViewport.WorldToScreenUnrotated*"></a>
   <h4 id="Mapsui_IReadOnlyViewport_WorldToScreenUnrotated_Mapsui_Geometries_Point_" data-uid="Mapsui.IReadOnlyViewport.WorldToScreenUnrotated(Mapsui.Geometries.Point)">WorldToScreenUnrotated(Point)</h4>
@@ -579,7 +645,7 @@ respecting rotation</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_IReadOnlyViewport_WorldToScreenUnrotated_System_Double_System_Double_.md&amp;value=---%0Auid%3A%20Mapsui.IReadOnlyViewport.WorldToScreenUnrotated(System.Double%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/IReadOnlyViewport.cs/#L27">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/IReadOnlyViewport.cs/#L93">View Source</a>
   </span>
   <a id="Mapsui_IReadOnlyViewport_WorldToScreenUnrotated_" data-uid="Mapsui.IReadOnlyViewport.WorldToScreenUnrotated*"></a>
   <h4 id="Mapsui_IReadOnlyViewport_WorldToScreenUnrotated_System_Double_System_Double_" data-uid="Mapsui.IReadOnlyViewport.WorldToScreenUnrotated(System.Double,System.Double)">WorldToScreenUnrotated(Double, Double)</h4>
