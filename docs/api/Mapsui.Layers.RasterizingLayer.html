@@ -84,11 +84,14 @@
   <div classs="implements">
     <h5>Implements</h5>
     <div><a class="xref" href="Mapsui.Layers.ILayer.html">ILayer</a></div>
-    <div><a class="xref" href="Mapsui.Fetcher.IAsyncDataFetcher.html">IAsyncDataFetcher</a></div>
     <div><span class="xref">INotifyPropertyChanged</span></div>
+    <div><a class="xref" href="Mapsui.Fetcher.IAsyncDataFetcher.html">IAsyncDataFetcher</a></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Transformer">BaseLayer.Transformer</a>
+    </div>
     <div>
       <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_GetLayerStyles_Mapsui_Layers_ILayer_">BaseLayer.GetLayerStyles(ILayer)</a>
     </div>
@@ -135,9 +138,6 @@
       <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Transformation">BaseLayer.Transformation</a>
     </div>
     <div>
-      <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Transformer">BaseLayer.Transformer</a>
-    </div>
-    <div>
       <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Attribution">BaseLayer.Attribution</a>
     </div>
     <div>
@@ -163,7 +163,7 @@
   <h6><strong>Assembly</strong>: Mapsui.dll</h6>
   <h5 id="Mapsui_Layers_RasterizingLayer_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class RasterizingLayer : BaseLayer, ILayer, IAsyncDataFetcher, INotifyPropertyChanged</code></pre>
+    <pre><code class="lang-csharp hljs">public class RasterizingLayer : BaseLayer, ILayer, INotifyPropertyChanged, IAsyncDataFetcher</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
@@ -281,10 +281,8 @@ rasterisation.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override void AbortFetch()</code></pre>
+    <pre><code class="lang-csharp hljs">public void AbortFetch()</code></pre>
   </div>
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_AbortFetch">BaseLayer.AbortFetch()</a></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Layers_RasterizingLayer_ClearCache.md&amp;value=---%0Auid%3A%20Mapsui.Layers.RasterizingLayer.ClearCache%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -298,10 +296,8 @@ rasterisation.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override void ClearCache()</code></pre>
+    <pre><code class="lang-csharp hljs">public void ClearCache()</code></pre>
   </div>
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_ClearCache">BaseLayer.ClearCache()</a></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Layers_RasterizingLayer_GetFeaturesInView_Mapsui_Geometries_BoundingBox_System_Double_.md&amp;value=---%0Auid%3A%20Mapsui.Layers.RasterizingLayer.GetFeaturesInView(Mapsui.Geometries.BoundingBox%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -405,10 +401,10 @@ rasterisation.</p>
       <a class="xref" href="Mapsui.Layers.ILayer.html">ILayer</a>
   </div>
   <div>
-      <a class="xref" href="Mapsui.Fetcher.IAsyncDataFetcher.html">IAsyncDataFetcher</a>
+      <span class="xref">INotifyPropertyChanged</span>
   </div>
   <div>
-      <span class="xref">INotifyPropertyChanged</span>
+      <a class="xref" href="Mapsui.Fetcher.IAsyncDataFetcher.html">IAsyncDataFetcher</a>
   </div>
 </article>
           </div>

@@ -85,11 +85,14 @@
   <div classs="implements">
     <h5>Implements</h5>
     <div><a class="xref" href="Mapsui.Layers.ILayer.html">ILayer</a></div>
-    <div><a class="xref" href="Mapsui.Fetcher.IAsyncDataFetcher.html">IAsyncDataFetcher</a></div>
     <div><span class="xref">INotifyPropertyChanged</span></div>
+    <div><a class="xref" href="Mapsui.Fetcher.IAsyncDataFetcher.html">IAsyncDataFetcher</a></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Transformer">BaseLayer.Transformer</a>
+    </div>
     <div>
       <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_GetLayerStyles_Mapsui_Layers_ILayer_">BaseLayer.GetLayerStyles(ILayer)</a>
     </div>
@@ -136,9 +139,6 @@
       <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Transformation">BaseLayer.Transformation</a>
     </div>
     <div>
-      <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Transformer">BaseLayer.Transformer</a>
-    </div>
-    <div>
       <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Attribution">BaseLayer.Attribution</a>
     </div>
     <div>
@@ -158,7 +158,7 @@
   <h6><strong>Assembly</strong>: Mapsui.dll</h6>
   <h5 id="Mapsui_Layers_TileLayer_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class TileLayer : BaseLayer, ILayer, IAsyncDataFetcher, INotifyPropertyChanged</code></pre>
+    <pre><code class="lang-csharp hljs">public class TileLayer : BaseLayer, ILayer, INotifyPropertyChanged, IAsyncDataFetcher</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
@@ -408,7 +408,7 @@
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Layers_TileLayer_AbortFetch.md&amp;value=---%0Auid%3A%20Mapsui.Layers.TileLayer.AbortFetch%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/TileLayer.cs/#L133">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/TileLayer.cs/#L130">View Source</a>
   </span>
   <a id="Mapsui_Layers_TileLayer_AbortFetch_" data-uid="Mapsui.Layers.TileLayer.AbortFetch*"></a>
   <h4 id="Mapsui_Layers_TileLayer_AbortFetch" data-uid="Mapsui.Layers.TileLayer.AbortFetch">AbortFetch()</h4>
@@ -418,16 +418,14 @@ the threads will terminate naturally. It will just take a little longer.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override void AbortFetch()</code></pre>
+    <pre><code class="lang-csharp hljs">public void AbortFetch()</code></pre>
   </div>
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_AbortFetch">BaseLayer.AbortFetch()</a></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Layers_TileLayer_ClearCache.md&amp;value=---%0Auid%3A%20Mapsui.Layers.TileLayer.ClearCache%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/TileLayer.cs/#L139">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/TileLayer.cs/#L136">View Source</a>
   </span>
   <a id="Mapsui_Layers_TileLayer_ClearCache_" data-uid="Mapsui.Layers.TileLayer.ClearCache*"></a>
   <h4 id="Mapsui_Layers_TileLayer_ClearCache" data-uid="Mapsui.Layers.TileLayer.ClearCache">ClearCache()</h4>
@@ -436,10 +434,8 @@ the threads will terminate naturally. It will just take a little longer.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override void ClearCache()</code></pre>
+    <pre><code class="lang-csharp hljs">public void ClearCache()</code></pre>
   </div>
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_ClearCache">BaseLayer.ClearCache()</a></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Layers_TileLayer_GetFeaturesInView_Mapsui_Geometries_BoundingBox_System_Double_.md&amp;value=---%0Auid%3A%20Mapsui.Layers.TileLayer.GetFeaturesInView(Mapsui.Geometries.BoundingBox%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -501,7 +497,7 @@ the threads will terminate naturally. It will just take a little longer.</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Layers_TileLayer_IsCrsSupported_System_String_.md&amp;value=---%0Auid%3A%20Mapsui.Layers.TileLayer.IsCrsSupported(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/TileLayer.cs/#L155">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/TileLayer.cs/#L152">View Source</a>
   </span>
   <a id="Mapsui_Layers_TileLayer_IsCrsSupported_" data-uid="Mapsui.Layers.TileLayer.IsCrsSupported*"></a>
   <h4 id="Mapsui_Layers_TileLayer_IsCrsSupported_System_String_" data-uid="Mapsui.Layers.TileLayer.IsCrsSupported(System.String)">IsCrsSupported(String)</h4>
@@ -553,11 +549,11 @@ the threads will terminate naturally. It will just take a little longer.</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Layers_TileLayer_RefreshData_Mapsui_Geometries_BoundingBox_System_Double_System_Boolean_.md&amp;value=---%0Auid%3A%20Mapsui.Layers.TileLayer.RefreshData(Mapsui.Geometries.BoundingBox%2CSystem.Double%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/TileLayer.cs/#L145">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/TileLayer.cs/#L142">View Source</a>
   </span>
   <a id="Mapsui_Layers_TileLayer_RefreshData_" data-uid="Mapsui.Layers.TileLayer.RefreshData*"></a>
   <h4 id="Mapsui_Layers_TileLayer_RefreshData_Mapsui_Geometries_BoundingBox_System_Double_System_Boolean_" data-uid="Mapsui.Layers.TileLayer.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,System.Boolean)">RefreshData(BoundingBox, Double, Boolean)</h4>
-  <div class="markdown level1 summary"><p>Something changed on Viewport</p>
+  <div class="markdown level1 summary"><p>Indicates that there has been a change in the view of the map</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -577,19 +573,21 @@ the threads will terminate naturally. It will just take a little longer.</p>
       <tr>
         <td><a class="xref" href="Mapsui.Geometries.BoundingBox.html">BoundingBox</a></td>
         <td><span class="parametername">extent</span></td>
-        <td><p>Extent of viewport</p>
+        <td><p>The new extent of the visisble map</p>
 </td>
       </tr>
       <tr>
         <td><span class="xref">System.Double</span></td>
         <td><span class="parametername">resolution</span></td>
-        <td><p>Resolution of viewport</p>
+        <td><p>The new resolution of the visible map</p>
 </td>
       </tr>
       <tr>
         <td><span class="xref">System.Boolean</span></td>
         <td><span class="parametername">majorChange</span></td>
-        <td><p>True, when the change is a major change</p>
+        <td><p>If true an implementation should always refresh it&apos;s data. If false (minorChange) the
+implemenatation could ignore it. Example: During dragging a map a WMS layer would not want
+to fetch data, only on the drag end.</p>
 </td>
       </tr>
     </tbody>
@@ -601,10 +599,10 @@ the threads will terminate naturally. It will just take a little longer.</p>
       <a class="xref" href="Mapsui.Layers.ILayer.html">ILayer</a>
   </div>
   <div>
-      <a class="xref" href="Mapsui.Fetcher.IAsyncDataFetcher.html">IAsyncDataFetcher</a>
+      <span class="xref">INotifyPropertyChanged</span>
   </div>
   <div>
-      <span class="xref">INotifyPropertyChanged</span>
+      <a class="xref" href="Mapsui.Fetcher.IAsyncDataFetcher.html">IAsyncDataFetcher</a>
   </div>
 </article>
           </div>
