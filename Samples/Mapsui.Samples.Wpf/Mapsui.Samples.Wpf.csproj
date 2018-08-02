@@ -376,6 +376,10 @@
       <Project>{d74c052a-c07e-4b37-a898-134218aca5c9}</Project>
       <Name>Mapsui</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Sample\Mapsui.Samples.CustomWidget\Mapsui.Samples.CustomWidget.csproj">
+      <Project>{ba6ecdb7-674e-42cb-9e56-56c55fed269b}</Project>
+      <Name>Mapsui.Samples.CustomWidget</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Tests\Mapsui.Tests.Common\Mapsui.Tests.Common.csproj">
       <Project>{81BB36D2-4D01-44E3-9024-E7CBD10DA316}</Project>
       <Name>Mapsui.Tests.Common</Name>

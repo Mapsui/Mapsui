@@ -127,6 +127,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "api", "api", "{5BB9C8BA-0FF
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Samples.Droid", "Samples\Mapsui.Samples.Droid\Mapsui.Samples.Droid.csproj", "{3BC0AC7E-3B3B-4D3F-9CC0-B2BDECC460A6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Samples.CustomWidget", "Sample\Mapsui.Samples.CustomWidget\Mapsui.Samples.CustomWidget.csproj", "{BA6ECDB7-674E-42CB-9E56-56C55FED269B}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Mapsui.UI.Shared\Mapsui.UI.Shared.projitems*{239f2b0d-13cb-4bcf-83bf-f52d696a47b7}*SharedItemsImports = 13
@@ -430,6 +432,18 @@ Global
 		{3BC0AC7E-3B3B-4D3F-9CC0-B2BDECC460A6}.Release|x86.ActiveCfg = Release|Any CPU
 		{3BC0AC7E-3B3B-4D3F-9CC0-B2BDECC460A6}.Release|x86.Build.0 = Release|Any CPU
 		{3BC0AC7E-3B3B-4D3F-9CC0-B2BDECC460A6}.Release|x86.Deploy.0 = Release|Any CPU
+		{BA6ECDB7-674E-42CB-9E56-56C55FED269B}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
+		{BA6ECDB7-674E-42CB-9E56-56C55FED269B}.Debug|AnyCPU.Build.0 = Debug|Any CPU
+		{BA6ECDB7-674E-42CB-9E56-56C55FED269B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{BA6ECDB7-674E-42CB-9E56-56C55FED269B}.Debug|x64.Build.0 = Debug|Any CPU
+		{BA6ECDB7-674E-42CB-9E56-56C55FED269B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BA6ECDB7-674E-42CB-9E56-56C55FED269B}.Debug|x86.Build.0 = Debug|Any CPU
+		{BA6ECDB7-674E-42CB-9E56-56C55FED269B}.Release|AnyCPU.ActiveCfg = Release|Any CPU
+		{BA6ECDB7-674E-42CB-9E56-56C55FED269B}.Release|AnyCPU.Build.0 = Release|Any CPU
+		{BA6ECDB7-674E-42CB-9E56-56C55FED269B}.Release|x64.ActiveCfg = Release|Any CPU
+		{BA6ECDB7-674E-42CB-9E56-56C55FED269B}.Release|x64.Build.0 = Release|Any CPU
+		{BA6ECDB7-674E-42CB-9E56-56C55FED269B}.Release|x86.ActiveCfg = Release|Any CPU
+		{BA6ECDB7-674E-42CB-9E56-56C55FED269B}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -452,6 +466,7 @@ Global
 		{52C84C7C-1D60-454E-804A-1F9691BD61A3} = {7D976D37-0542-4A0D-99E6-6BAA180E7011}
 		{5BB9C8BA-0FF4-40E7-BC36-8D671A951C82} = {97458DE1-C297-4DED-AECB-5FEFED2B5610}
 		{3BC0AC7E-3B3B-4D3F-9CC0-B2BDECC460A6} = {969DB691-49FB-4785-98F4-2112CC1BA7C4}
+		{BA6ECDB7-674E-42CB-9E56-56C55FED269B} = {969DB691-49FB-4785-98F4-2112CC1BA7C4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {22D684C3-0BD3-4D8A-AB23-748FB5527F6F}

@@ -39,7 +39,8 @@ namespace Mapsui.Samples.Common
                 ["OpacityStyle"] = OpacityStyleSample.CreateMap,
                 ["Svg"] = SvgSample.CreateMap,
                 ["Atlas"] = AtlasSample.CreateMap,
-                ["Itinero routing"] = ItineroRoutingSample.CreateMap
+                ["Itinero routing"] = ItineroRoutingSample.CreateMap,
+                ["Custom Widget"] = CustomWidgetSample.CreateMap
             };
         }
     }

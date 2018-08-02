@@ -8,10 +8,10 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using Mapsui.Logging;
 using Mapsui.Samples.Common.Desktop;
+using Mapsui.Samples.CustomWidget;
 using Mapsui.Samples.Wpf.Utilities;
 using Mapsui.Tests.Common;
 using Mapsui.UI;
-using Mapsui.UI.Wpf;
 
 namespace Mapsui.Samples.Wpf
 {
@@ -25,6 +25,7 @@ namespace Mapsui.Samples.Wpf
             MapControl.RotationLock = false;
             MapControl.UnSnapRotationDegrees = 30;
             MapControl.ReSnapRotationDegrees = 5;
+            MapControl.Renderer.WidgetRenders[typeof(CustomWidget.CustomWidget)] = new CustomWidgetSkiaRenderer();
 
             Logger.LogDelegate += LogMethod;
 
@@ -36,12 +37,7 @@ namespace Mapsui.Samples.Wpf
             firstRadioButton.IsChecked = true;
             firstRadioButton.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
         }
-
-        private void MapControlOnHover(object sender, MapInfoEventArgs args)
-        {
-            FeatureInfo.Text = args.MapInfo.Feature == null ? "" : $"Hover Info:{Environment.NewLine}{args.MapInfo.Feature.ToDisplayText()}";
-        }
-
+        
         private void RenderModeOnSelectionChanged(object sender, SelectionChangedEventArgs selectionChangedEventArgs)
         {
             var selectedValue = ((ComboBoxItem)((ComboBox)sender).SelectedItem).Content.ToString();
