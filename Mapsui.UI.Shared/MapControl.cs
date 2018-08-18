@@ -156,8 +156,7 @@ namespace Mapsui.UI.Wpf
             }
             else if (e.PropertyName == nameof(Map.Layers))
             {
-                RefreshGraphics();
-                RefreshData();
+                Refresh();
             }
         }
 
