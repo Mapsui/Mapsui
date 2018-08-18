@@ -154,6 +154,11 @@ namespace Mapsui.UI.Wpf
             {
                 RefreshData(); // There is a new datasource so let's fetch the new data.
             }
+            else if (e.PropertyName == nameof(Map.Layers))
+            {
+                RefreshGraphics();
+                RefreshData();
+            }
         }
 
         public Map Map
