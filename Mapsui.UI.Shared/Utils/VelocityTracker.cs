@@ -117,8 +117,8 @@ namespace Mapsui.UI.Utils
                 (rsquard, yintercept, velocityY) = LinearRegression(ticks, vy, 0, pos);
 
                 // Convert ticks to seconds
-                velocityX = velocityX.IsNanOrZero() ? 0 : velocityX * 10000000;
-                velocityY = velocityY.IsNanOrZero() ? 0 : velocityY * 10000000;
+                velocityX = velocityX.IsNanOrInfOrZero() ? 0 : velocityX * 10000000;
+                velocityY = velocityY.IsNanOrInfOrZero() ? 0 : velocityY * 10000000;
             }
 
             return (velocityX, velocityY);

@@ -121,34 +121,27 @@ namespace Mapsui.UI.Uwp
         private void MapControl_PointerWheelChanged(object sender, PointerRoutedEventArgs e)
         {
             if (ZoomLock) return;
-            if (!_viewport.IsSizeInitialized()) return;
+            if (!Viewport.HasSize) return;
 
             var currentPoint = e.GetCurrentPoint(this);
             var mousePosition = currentPoint.RawPosition.ToMapsui();
             var newResolution = DetermineNewResolution(currentPoint.Properties.MouseWheelDelta, Viewport.Resolution);
+
             _viewport.Transform(mousePosition.X, mousePosition.Y, mousePosition.X, mousePosition.Y, Viewport.Resolution / newResolution);
+            RefreshGraphics();
 
             e.Handled = true;
-
-            RefreshGraphics();
-            RefreshData();
         }
 
         private double DetermineNewResolution(int mouseWheelDelta, double currentResolution)
         {
             if (mouseWheelDelta > 0)
             {
-                var resolution = ZoomHelper.ZoomIn(_map.Resolutions, currentResolution);
-
-                return ViewportLimiter.LimitResolution(resolution, Viewport.Width, Viewport.Height,
-                    _map.Limits.ZoomMode, _map.Limits.ZoomLimits, _map.Resolutions, _map.Envelope);
+                return ZoomHelper.ZoomIn(_map.Resolutions, currentResolution);
             }
             if (mouseWheelDelta < 0)
             {
-                var resolution = ZoomHelper.ZoomOut(_map.Resolutions, currentResolution);
-
-                return ViewportLimiter.LimitResolution(resolution, Viewport.Width, Viewport.Height,
-                    _map.Limits.ZoomMode, _map.Limits.ZoomLimits, _map.Resolutions, _map.Envelope);
+                return ZoomHelper.ZoomOut(_map.Resolutions, currentResolution);
             }
             return currentResolution;
         }
@@ -180,7 +173,7 @@ namespace Mapsui.UI.Uwp
         {
             if (Renderer == null) return;
             if (_map == null) return;
-            if (!_viewport.IsSizeInitialized()) return;
+            if (!Viewport.HasSize) return;
 
             Renderer.Render(e.Surface.Canvas, Viewport, _map.Layers, _map.Widgets, _map.BackColor);
         }
@@ -196,7 +189,7 @@ namespace Mapsui.UI.Uwp
         private void OnManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
             var (center, radius, angle) = (e.Position.ToMapsui(), e.Delta.Scale, e.Delta.Rotation);
-            var (prevCenter, prevRadius, prevAngle) = (e.Position.ToMapsui().Offset(-e.Delta.Translation.X, -e.Delta.Translation.Y), 1f, 0f);
+            var (previousCenter, prevRadius, prevAngle) = (e.Position.ToMapsui().Offset(-e.Delta.Translation.X, -e.Delta.Translation.Y), 1f, 0f);
 
             double rotationDelta = 0;
 
@@ -221,12 +214,9 @@ namespace Mapsui.UI.Uwp
                 }
             }
 
-            _viewport.Transform(center.X, center.Y, prevCenter.X, prevCenter.Y, radius / prevRadius, rotationDelta);
-
-            ViewportLimiter.Limit(_viewport, _map.Limits.ZoomMode, _map.Limits.ZoomLimits, _map.Resolutions,
-                _map.Limits.PanMode, _map.Limits.PanLimits, _map.Envelope);
+            _viewport.Transform(center.X, center.Y, previousCenter.X, previousCenter.Y, radius / prevRadius, rotationDelta);
             RefreshGraphics();
-            RefreshData(false);
+
             e.Handled = true;
         }
 

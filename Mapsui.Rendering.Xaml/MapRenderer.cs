@@ -50,7 +50,7 @@ namespace Mapsui.Rendering.Xaml
         private void RenderTypeSave(Canvas canvas, IReadOnlyViewport viewport, IEnumerable<ILayer> layers, 
             IEnumerable<IWidget> widgets, Color background = null)
         {
-            if (!viewport.IsSizeInitialized()) return;
+            if (!viewport.HasSize) return;
 
             Clear(canvas, background);
             Render(canvas, viewport, layers);

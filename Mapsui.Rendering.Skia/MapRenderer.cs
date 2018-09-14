@@ -52,7 +52,7 @@ namespace Mapsui.Rendering.Skia
         private void RenderTypeSave(SKCanvas canvas, IReadOnlyViewport viewport, IEnumerable<ILayer> layers,
             IEnumerable<IWidget> widgets, Color background = null)
         {
-            if (!viewport.IsSizeInitialized()) return;
+            if (!viewport.HasSize) return;
 
             if (background != null) canvas.Clear(background.ToSkia(1));
             Render(canvas, viewport, layers);

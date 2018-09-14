@@ -47,13 +47,14 @@ namespace Mapsui.UI.Wpf
         public double ReSnapRotationDegrees { get; set; }
         
         public IRenderer Renderer { get; set; } = new MapRenderer();
-        
+
         /// <summary>
         /// Viewport holding informations about visible part of the map. Viewport can never be null.
         /// </summary>
-        private readonly IViewport _viewport = new Viewport();
+        private readonly LimitedViewport _viewport = new LimitedViewport();
 
         public IReadOnlyViewport Viewport => _viewport;
+
 
         public INavigator Navigator { get; private set; }
 
@@ -177,11 +178,11 @@ namespace Mapsui.UI.Wpf
                 {
                     SubscribeToMapEvents(_map);
                     Navigator = new Navigator(_map, _viewport);
-                    if (_viewport.IsSizeInitialized()) _map.Home(Navigator); // If size is not initialized it will be called at set size. This is okay.
-                    RefreshData();
+                    _viewport.Map = Map;
+                    if (Viewport.HasSize) _map.Home(Navigator); // If size is not set yet Home will be called at set size. This is okay.
                 }
 
-                RefreshGraphics();
+                Refresh();
             }
         }
 
@@ -298,10 +299,10 @@ namespace Mapsui.UI.Wpf
 
         private void SetViewportSize()
         {
-            var wasSizeInitialized = _viewport.IsSizeInitialized();
+            var hadSize = Viewport.HasSize;
             _viewport.SetSize(ViewportWidth, ViewportHeight);
 
-            if (!wasSizeInitialized && _viewport.IsSizeInitialized())
+            if (!hadSize && Viewport.HasSize) // Is Size Initialized?
             {
                 Map?.Home(Navigator); // When Map is null here Home will be called on Map set. So this is okay.
                 OnViewportInitialized();

@@ -68,10 +68,7 @@ namespace Mapsui
             UpdateExtent();
         }
         
-        public bool IsSizeInitialized()
-        {
-            return !_width.IsNanOrZero() && !_height.IsNanOrZero();
-        }
+        public bool HasSize => !_width.IsNanOrInfOrZero() && !_height.IsNanOrInfOrZero();
 
         /// <inheritdoc />
         public ReadOnlyPoint Center

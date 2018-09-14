@@ -22,9 +22,13 @@ namespace Mapsui
         public void NavigateTo(BoundingBox extent, ScaleMethod scaleMethod = ScaleMethod.Fit)
         {
             if (extent == null) return;
-            _viewport.SetResolution(ZoomHelper.DetermineResolution(
-                extent.Width, extent.Height, _viewport.Width, _viewport.Height, scaleMethod));
+
+            var resolution = ZoomHelper.DetermineResolution(
+                extent.Width, extent.Height, _viewport.Width, _viewport.Height, scaleMethod);
+            _viewport.SetResolution(resolution);
+
             _viewport.SetCenter(extent.Centroid);
+            
             _map.RefreshData(_viewport.Extent, _viewport.Resolution, true);
         }
 
@@ -35,6 +39,7 @@ namespace Mapsui
         public void NavigateTo(double resolution)
         {
             _viewport.SetResolution(resolution);
+
             _map.RefreshData(_viewport.Extent, _viewport.Resolution, true);
         }
 
@@ -45,6 +50,7 @@ namespace Mapsui
         public void NavigateTo(Point center)
         {
             _viewport.SetCenter(center);
+            
             _map.RefreshData(_viewport.Extent, _viewport.Resolution, true);
         }
 
@@ -53,6 +59,7 @@ namespace Mapsui
         {
             _viewport.SetCenter(center);
             _viewport.SetResolution(resolution);
+
             _map.RefreshData(_viewport.Extent, _viewport.Resolution, true);
         }
 
@@ -64,6 +71,7 @@ namespace Mapsui
         public void NavigateTo(double x, double y)
         {
             _viewport.SetCenter(x, y);
+ 
             _map.RefreshData(_viewport.Extent, _viewport.Resolution, true);
         }
 
@@ -74,24 +82,30 @@ namespace Mapsui
         public void RotateTo(double rotation)
         {
             _viewport.SetRotation(rotation);
+
             _map.RefreshData(_viewport.Extent, _viewport.Resolution, true);
         }
 
         public void ZoomIn()
         {
-            _viewport.SetResolution(ZoomHelper.ZoomIn(_map.Resolutions, _viewport.Resolution));
+            var resolution = ZoomHelper.ZoomIn(_map.Resolutions, _viewport.Resolution);
+            _viewport.SetResolution(resolution);
+            
             _map.RefreshData(_viewport.Extent, _viewport.Resolution, true);
         }
 
         public void ZoomOut()
         {
-            _viewport.SetResolution(ZoomHelper.ZoomOut(_map.Resolutions, _viewport.Resolution));
+            var resolution = ZoomHelper.ZoomOut(_map.Resolutions, _viewport.Resolution);
+            _viewport.SetResolution(resolution);
+
             _map.RefreshData(_viewport.Extent, _viewport.Resolution, true);
         }
 
         public void NavigateToFullEnvelope(ScaleMethod scaleMethod = ScaleMethod.Fill)
         {
             NavigateTo(_map.Envelope, scaleMethod);
+
             _map.RefreshData(_viewport.Extent, _viewport.Resolution, true);
         }
     }

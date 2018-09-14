@@ -36,7 +36,7 @@ namespace Mapsui.Samples.Droid
             MbTilesHelper.DeployMbTilesFile(s => File.Create(System.IO.Path.Combine(MbTilesLocationOnAndroid, s)));
 
             _mapControl = FindViewById<MapControl>(Resource.Id.mapcontrol);
-            _mapControl.Map = InfoLayersSample.CreateMap();
+            _mapControl.Map = KeepWithinExtentsSample.CreateMap();
             _mapControl.Info += MapOnInfo;
             _mapControl.RotationLock = false;
             _mapControl.UnSnapRotationDegrees = 30;

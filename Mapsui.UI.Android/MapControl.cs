@@ -27,7 +27,7 @@ namespace Mapsui.UI.Android
         /// <summary>
         /// Saver for center before last pinch movement
         /// </summary>
-        private Point _previousCenter = new Point();
+        private Point _previousTouch = new Point();
 
         public MapControl(Context context, IAttributeSet attrs) :
             base(context, attrs)
@@ -92,8 +92,6 @@ namespace Mapsui.UI.Android
 
         private void CanvasOnPaintSurface(object sender, SKPaintSurfaceEventArgs args)
         {
-            if (!_viewport.IsSizeInitialized()) return;
-
             Renderer.Render(args.Surface.Canvas, Viewport, _map.Layers, _map.Widgets, _map.BackColor);
         }
 
@@ -107,9 +105,8 @@ namespace Mapsui.UI.Android
             switch (args.Event.Action)
             {
                 case MotionEventActions.Up:
-                    RefreshGraphics();
+                    Refresh();
                     _mode = TouchMode.None;
-                    RefreshData();
                     break;
                 case MotionEventActions.Down:
                 case MotionEventActions.Pointer1Down:
@@ -117,14 +114,14 @@ namespace Mapsui.UI.Android
                 case MotionEventActions.Pointer3Down:
                     if (touchPoints.Count >= 2)
                     {
-                        (_previousCenter, _previousRadius, _previousAngle) = GetPinchValues(touchPoints);
+                        (_previousTouch, _previousRadius, _previousAngle) = GetPinchValues(touchPoints);
                         _mode = TouchMode.Zooming;
                         _innerRotation = Viewport.Rotation;
                     }
                     else
                     {
                         _mode = TouchMode.Dragging;
-                        _previousCenter = touchPoints.First();
+                        _previousTouch = touchPoints.First();
                     }
                     break;
                 case MotionEventActions.Pointer1Up:
@@ -136,14 +133,14 @@ namespace Mapsui.UI.Android
 
                     if (touchPoints.Count >= 2)
                     {
-                        (_previousCenter, _previousRadius, _previousAngle) = GetPinchValues(touchPoints);
+                        (_previousTouch, _previousRadius, _previousAngle) = GetPinchValues(touchPoints);
                         _mode = TouchMode.Zooming;
                         _innerRotation = Viewport.Rotation;
                     }
                     else
                     {
                         _mode = TouchMode.Dragging;
-                        _previousCenter = touchPoints.First();
+                        _previousTouch = touchPoints.First();
                     }
                     break;
                 case MotionEventActions.Move:
@@ -154,16 +151,13 @@ namespace Mapsui.UI.Android
                                 if (touchPoints.Count != 1)
                                     return;
 
-                                var touchPosition = touchPoints.First();
-                                if (_previousCenter != null && !_previousCenter.IsEmpty())
+                                var touch = touchPoints.First();
+                                if (_previousTouch != null && !_previousTouch.IsEmpty())
                                 {
-                                    _viewport.Transform(touchPosition.X, touchPosition.Y, _previousCenter.X, _previousCenter.Y);
-
-                                    ViewportLimiter.LimitExtent(_viewport, _map.Limits.PanMode, _map.Limits.PanLimits, _map.Envelope);
-
+                                    _viewport.Transform(touch.X, touch.Y, _previousTouch.X, _previousTouch.Y);
                                     RefreshGraphics();
                                 }
-                                _previousCenter = touchPosition;
+                                _previousTouch = touch;
                             }
                             break;
                         case TouchMode.Zooming:
@@ -171,14 +165,14 @@ namespace Mapsui.UI.Android
                                 if (touchPoints.Count < 2)
                                     return;
 
-                                var (prevCenter, prevRadius, prevAngle) = (_previousCenter, _previousRadius, _previousAngle);
-                                var (center, radius, angle) = GetPinchValues(touchPoints);
+                                var (previousTouch, previousRadius, previousAngle) = (_previousTouch, _previousRadius, _previousAngle);
+                                var (touch, radius, angle) = GetPinchValues(touchPoints);
 
                                 double rotationDelta = 0;
 
                                 if (!RotationLock)
                                 {
-                                    _innerRotation += angle - prevAngle;
+                                    _innerRotation += angle - previousAngle;
                                     _innerRotation %= 360;
 
                                     if (_innerRotation > 180)
@@ -197,15 +191,12 @@ namespace Mapsui.UI.Android
                                     }
                                 }
 
-                                _viewport.Transform(center.X, center.Y, prevCenter.X, prevCenter.Y, radius / prevRadius, rotationDelta);
-
-                                (_previousCenter, _previousRadius, _previousAngle) = (center, radius, angle);
-
-                                ViewportLimiter.Limit(_viewport,
-                                    _map.Limits.ZoomMode, _map.Limits.ZoomLimits, _map.Resolutions,
-                                    _map.Limits.PanMode, _map.Limits.PanLimits, _map.Envelope);
-
+                                _viewport.Transform(touch.X, touch.Y, previousTouch.X, previousTouch.Y, radius / previousRadius, rotationDelta);
                                 RefreshGraphics();
+
+                                (_previousTouch, _previousRadius, _previousAngle) = (touch, radius, angle);
+
+                                
                             }
                             break;
                     }

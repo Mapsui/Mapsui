@@ -44,8 +44,9 @@ namespace Mapsui
         /// Viewport rotation from True North (clockwise degrees)
         /// </summary>
         double Rotation { get; }
-        bool IsSizeInitialized();
 
+        bool HasSize { get; }
+        
         /// <summary>
         /// IsRotated is true, when viewport displays map rotated
         /// </summary>
