@@ -35,6 +35,14 @@ namespace Mapsui.UI.Wpf
                 "Resolution", typeof(double), typeof(MapControl),
                 new PropertyMetadata(OnResolutionChanged));
 
+        private static readonly DependencyProperty MapProperty =
+            DependencyProperty.Register(
+                "Map", typeof(Map), typeof(MapControl));
+
+        private static readonly DependencyProperty NavigatorProperty =
+            DependencyProperty.Register(
+                "Navigator", typeof(INavigator), typeof(MapControl));
+
         private readonly Rectangle _selectRectangle = CreateSelectRectangle();
         private readonly DoubleAnimation _zoomAnimation = new DoubleAnimation();
         private readonly Storyboard _zoomStoryBoard = new Storyboard();
@@ -77,7 +85,7 @@ namespace Mapsui.UI.Wpf
 
             IsManipulationEnabled = true;
 
-            RenderMode = RenderMode.Skia;
+            RenderMode = RenderMode.Wpf;
         }
 
         protected override void OnRender(DrawingContext dc)
@@ -200,6 +208,8 @@ namespace Mapsui.UI.Wpf
 
             InitAnimation();
             Focusable = true;
+            SetValue(MapProperty,Map);
+            SetValue(NavigatorProperty,Navigator);
         }
         
         public float PixelDensity => DeterminePixelDensity();

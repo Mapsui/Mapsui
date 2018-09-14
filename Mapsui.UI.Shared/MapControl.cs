@@ -55,7 +55,7 @@ namespace Mapsui.UI.Wpf
 
         public IReadOnlyViewport Viewport => _viewport;
 
-        public INavigator Navigator { get; private set; }
+        public INavigator Navigator { get; set; }
 
         public event EventHandler ViewportInitialized; //todo: Consider to use the Viewport PropertyChanged
 
