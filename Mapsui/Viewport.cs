@@ -294,7 +294,7 @@ namespace Mapsui
             OnViewportChanged();
         }
 
-        public virtual void SetCenter(double x, double y)
+        public void SetCenter(double x, double y)
         {
             Center = new Point(x, y);
             OnViewportChanged();
