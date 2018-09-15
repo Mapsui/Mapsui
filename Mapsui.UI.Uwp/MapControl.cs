@@ -29,7 +29,6 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Shapes;
-using Mapsui.Utilities;
 using SkiaSharp.Views.UWP;
 using HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment;
 using VerticalAlignment = Windows.UI.Xaml.VerticalAlignment;
@@ -124,26 +123,20 @@ namespace Mapsui.UI.Uwp
             if (!Viewport.HasSize) return;
 
             var currentPoint = e.GetCurrentPoint(this);
-            var mousePosition = currentPoint.RawPosition.ToMapsui();
-            var newResolution = DetermineNewResolution(currentPoint.Properties.MouseWheelDelta, Viewport.Resolution);
 
-            _viewport.Transform(mousePosition.X, mousePosition.Y, mousePosition.X, mousePosition.Y, Viewport.Resolution / newResolution);
-            RefreshGraphics();
+            //Needed for both MouseMove and MouseWheel event for mousewheel event
 
+            var mousePosition = new Geometries.Point(currentPoint.RawPosition.X, currentPoint.RawPosition.Y);
+
+            if (currentPoint.Properties.MouseWheelDelta > 0)
+                Navigator.ZoomIn(mousePosition);
+            else if (currentPoint.Properties.MouseWheelDelta < 0)
+                Navigator.ZoomOut(mousePosition);
+            
             e.Handled = true;
-        }
 
-        private double DetermineNewResolution(int mouseWheelDelta, double currentResolution)
-        {
-            if (mouseWheelDelta > 0)
-            {
-                return ZoomHelper.ZoomIn(_map.Resolutions, currentResolution);
-            }
-            if (mouseWheelDelta < 0)
-            {
-                return ZoomHelper.ZoomOut(_map.Resolutions, currentResolution);
-            }
-            return currentResolution;
+            RefreshGraphics();
+            RefreshData();
         }
         
         public void RefreshGraphics()

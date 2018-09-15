@@ -61,8 +61,6 @@ namespace Mapsui
             _viewport.SetRotation(rotation);
             // todo: Check if rotation is sufficiently limited with LimitExtents.
             ViewportLimiter.LimitExtent(_viewport, Map.Limits.PanMode, Map.Limits.PanLimits, Map.Envelope);
-
-
         }
 
         public Point ScreenToWorld(Point screenPosition)

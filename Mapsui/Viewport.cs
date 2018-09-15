@@ -50,7 +50,7 @@ namespace Mapsui
             _extent = new BoundingBox(0, 0, 0, 0);
             _windowExtent = new Quad();
         }
-        
+
         /// <summary>
         /// Create a new viewport from another viewport
         /// </summary>
@@ -62,12 +62,12 @@ namespace Mapsui
             _height = viewport._height;
             _rotation = viewport._rotation;
             _center = new ReadOnlyPoint(viewport._center);
-            if (viewport.Extent!= null) _extent = new BoundingBox(viewport.Extent);
+            if (viewport.Extent != null) _extent = new BoundingBox(viewport.Extent);
             if (viewport.WindowExtent != null) _windowExtent = new Quad(viewport.WindowExtent);
-        
+
             UpdateExtent();
         }
-        
+
         public bool HasSize => !_width.IsNanOrInfOrZero() && !_height.IsNanOrInfOrZero();
 
         /// <inheritdoc />
@@ -130,7 +130,7 @@ namespace Mapsui
         }
 
         /// <inheritdoc />
-        public bool IsRotated => 
+        public bool IsRotated =>
             !double.IsNaN(_rotation) && _rotation > Constants.Epsilon && _rotation < 360 - Constants.Epsilon;
 
         /// <inheritdoc />
@@ -138,7 +138,7 @@ namespace Mapsui
         {
             get
             {
-                if (_modified) UpdateExtent(); 
+                if (_modified) UpdateExtent();
                 return _extent;
             }
         }
@@ -151,7 +151,7 @@ namespace Mapsui
                 if (_modified) UpdateExtent();
                 return _windowExtent;
             }
-        } 
+        }
 
         /// <inheritdoc />
         public Point WorldToScreen(Point worldPosition)
@@ -175,7 +175,7 @@ namespace Mapsui
         public Point WorldToScreen(double worldX, double worldY)
         {
             var p = WorldToScreenUnrotated(worldX, worldY);
-            
+
             if (IsRotated)
             {
                 var screenCenterX = Width / 2.0;
@@ -216,7 +216,8 @@ namespace Mapsui
         }
 
         /// <inheritdoc />
-        public void Transform(double screenX, double screenY, double previousScreenX, double previousScreenY, double deltaScale = 1, double deltaRotation = 0)
+        public void Transform(double screenX, double screenY, double previousScreenX, double previousScreenY,
+            double deltaScale = 1, double deltaRotation = 0)
         {
             var previous = ScreenToWorld(previousScreenX, previousScreenY);
             var current = ScreenToWorld(screenX, screenY);
@@ -228,14 +229,16 @@ namespace Mapsui
             {
                 Resolution = Resolution / deltaScale;
 
-                current = ScreenToWorld(screenX, screenY); // calculate current position again with adjusted resolution
-                                                           // Zooming should be centered on the place where the map is touched. This is done with the scale correction.
+                // Calculate current position again with adjusted resolution
+                // Zooming should be centered on the place where the map is touched.
+                // This is done with the scale correction.
                 var scaleCorrectionX = (1 - deltaScale) * (current.X - Center.X);
                 var scaleCorrectionY = (1 - deltaScale) * (current.Y - Center.Y);
 
                 newX -= scaleCorrectionX;
                 newY -= scaleCorrectionY;
-            }           
+            }
+
             SetCenter(newX, newY);
 
             if (deltaRotation != 0)
@@ -247,7 +250,7 @@ namespace Mapsui
                 SetCenter(_center.X - postRotation.X - current.X, _center.Y - postRotation.Y - current.Y);
             }
         }
-
+        
         /// <summary>
         /// Recalculates extents for viewport
         /// </summary>
@@ -328,7 +331,7 @@ namespace Mapsui
             ViewportChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
- 
+
 
     }
 }

@@ -48,6 +48,12 @@ namespace Mapsui
 
         void ZoomIn();
 
+        void ZoomIn(Point centerOfZoom);
+        
+        void ZoomOut(Point centerOfZoom);
+
         void NavigateToFullEnvelope(ScaleMethod scaleMethod = ScaleMethod.Fill);
+
+        void SetResolution(double resolution, Point centerOfZoom);
     }
 }

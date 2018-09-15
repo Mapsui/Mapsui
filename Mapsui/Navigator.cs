@@ -94,10 +94,28 @@ namespace Mapsui
             _map.RefreshData(_viewport.Extent, _viewport.Resolution, true);
         }
 
+
+
         public void ZoomOut()
         {
             var resolution = ZoomHelper.ZoomOut(_map.Resolutions, _viewport.Resolution);
             _viewport.SetResolution(resolution);
+
+            _map.RefreshData(_viewport.Extent, _viewport.Resolution, true);
+        }
+
+        public void ZoomIn(Point centerOfZoom)
+        {
+            var resolution = ZoomHelper.ZoomIn(_map.Resolutions, _viewport.Resolution);
+            SetResolution(resolution, centerOfZoom);
+
+            _map.RefreshData(_viewport.Extent, _viewport.Resolution, true);
+        }
+
+        public void ZoomOut(Point centerOfZoom)
+        {
+            var resolution = ZoomHelper.ZoomOut(_map.Resolutions, _viewport.Resolution);
+            SetResolution(resolution, centerOfZoom);
 
             _map.RefreshData(_viewport.Extent, _viewport.Resolution, true);
         }
@@ -107,6 +125,20 @@ namespace Mapsui
             NavigateTo(_map.Envelope, scaleMethod);
 
             _map.RefreshData(_viewport.Extent, _viewport.Resolution, true);
+        }
+
+        public void SetResolution(double resolution, Point centerOfZoom)
+        {
+            // 1) Temporarily center on the center of zoom
+            _viewport.SetCenter(_viewport.ScreenToWorld(centerOfZoom));
+
+            // 2) Then zoom 
+            _viewport.SetResolution(resolution);
+
+            // 3) Then move the temporary center of the map back to the mouse position
+            _viewport.SetCenter(_viewport.ScreenToWorld(
+                _viewport.Width - centerOfZoom.X,
+                _viewport.Height - centerOfZoom.Y));
         }
     }
 }
