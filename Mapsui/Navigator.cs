@@ -94,8 +94,6 @@ namespace Mapsui
             _map.RefreshData(_viewport.Extent, _viewport.Resolution, true);
         }
 
-
-
         public void ZoomOut()
         {
             var resolution = ZoomHelper.ZoomOut(_map.Resolutions, _viewport.Resolution);
