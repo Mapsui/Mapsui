@@ -389,14 +389,12 @@ namespace Mapsui.UI.Wpf
                     // Usually MapControlMouseLeftButton down initializes _previousMousePosition but in some
                     // situations it can be null. So far I could only reproduce this in debug mode when putting
                     // a breakpoint and continuing.
-                    return; 
+                    return;
                 }
 
                 _currentMousePosition = e.GetPosition(this).ToMapsui(); //Needed for both MouseMove and MouseWheel event
 
-                _viewport.Transform(
-                    _currentMousePosition.X, _currentMousePosition.Y,
-                    _previousMousePosition.X, _previousMousePosition.Y);
+                _viewport.Transform(_currentMousePosition, _previousMousePosition);
                 RefreshGraphics();
 
                 _previousMousePosition = _currentMousePosition;
@@ -504,7 +502,7 @@ namespace Mapsui.UI.Wpf
                 }
             }
 
-            _viewport.Transform(center.X, center.Y, previousCenter.X, previousCenter.Y, radius / previousRadius, rotationDelta);
+            _viewport.Transform(center, previousCenter, radius / previousRadius, rotationDelta);
             RefreshGraphics();
 
             e.Handled = true;

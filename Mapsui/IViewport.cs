@@ -38,5 +38,8 @@ namespace Mapsui
         /// <param name="deltaRotation">Change of rotation</param>
         void Transform(double screenX, double screenY, double previousScreenX, double previousScreenY, 
             double deltaScale = 1, double deltaRotation = 0);
+
+        void Transform(Point position, Point previousPosition, 
+            double deltaScale = 1, double deltaRotation = 0);
     }
 }

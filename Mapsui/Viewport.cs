@@ -250,7 +250,12 @@ namespace Mapsui
                 SetCenter(_center.X - postRotation.X - current.X, _center.Y - postRotation.Y - current.Y);
             }
         }
-        
+
+        public void Transform(Point position, Point previousPosition, double deltaScale = 1, double deltaRotation = 0)
+        {
+            Transform(position.X, position.Y, previousPosition.X, previousPosition.Y, deltaScale, deltaRotation);
+        }
+
         /// <summary>
         /// Recalculates extents for viewport
         /// </summary>
