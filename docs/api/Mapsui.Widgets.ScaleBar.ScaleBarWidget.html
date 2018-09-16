@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class ScaleBarWidget
    ">
-    <meta name="generator" content="docfx 2.37.2.0">
+    <meta name="generator" content="docfx 2.39.2.0">
     
     <link rel="shortcut icon" href="../images/favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -622,7 +622,7 @@ want only integers as text.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public GetScaleBarLengthAndText(IReadOnlyViewport viewport)</code></pre>
+    <pre><code class="lang-csharp hljs">public (float scaleBarLength1, string scaleBarText1, float scaleBarLength2, string scaleBarText2)GetScaleBarLengthAndText(IReadOnlyViewport viewport)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -651,7 +651,7 @@ want only integers as text.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.</span></td>
+        <td><span class="xref">System.ValueTuple</span>&lt;<span class="xref">System.Single</span>, <span class="xref">System.String</span>, <span class="xref">System.Single</span>, <span class="xref">System.String</span>&gt;</td>
         <td><p>Length of upper scalebar
 Text of upper scalebar
 Length of lower scalebar
@@ -741,7 +741,7 @@ Text of lower scalebar</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public GetScaleBarTextPositions(IReadOnlyViewport viewport, BoundingBox textSize, BoundingBox textSize1, BoundingBox textSize2, float stroke)</code></pre>
+    <pre><code class="lang-csharp hljs">public (float posX1, float posY1, float posX2, float posY2)GetScaleBarTextPositions(IReadOnlyViewport viewport, BoundingBox textSize, BoundingBox textSize1, BoundingBox textSize2, float stroke)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -794,7 +794,7 @@ Text of lower scalebar</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.</span></td>
+        <td><span class="xref">System.ValueTuple</span>&lt;<span class="xref">System.Single</span>, <span class="xref">System.Single</span>, <span class="xref">System.Single</span>, <span class="xref">System.Single</span>&gt;</td>
         <td><p>posX1 as left position of upper scalebar text
 posY1 as top position of upper scalebar text
 posX2 as left position of lower scalebar text
