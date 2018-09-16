@@ -93,28 +93,26 @@ namespace Mapsui.UI
             return new MinMax(mostZoomedOut, mostZoomedIn);
         }
 
-        public void Limit(IViewport viewport, 
-            ZoomMode zoomMode,IReadOnlyList<double> mapResolutions, 
-            PanMode panMode, BoundingBox mapEnvelope)
+        public void Limit(IViewport viewport, IReadOnlyList<double> mapResolutions, BoundingBox mapEnvelope)
         {
-            viewport.SetResolution(LimitResolution(viewport.Resolution, viewport.Width, viewport.Height, zoomMode, mapResolutions, mapEnvelope));
-            LimitExtent(viewport, panMode, mapEnvelope);
+            viewport.SetResolution(LimitResolution(viewport.Resolution, viewport.Width, viewport.Height, mapResolutions, mapEnvelope));
+            LimitExtent(viewport,  mapEnvelope);
         }
 
-        public double LimitResolution(double resolution, double screenWidth, double screenHeight, ZoomMode zoomMode,  
+        public double LimitResolution(double resolution, double screenWidth, double screenHeight,  
             IReadOnlyList<double> mapResolutions, BoundingBox mapEnvelope)
         {
-            if (zoomMode == ZoomMode.Unlimited) return resolution;
+            if (ZoomMode == ZoomMode.Unlimited) return resolution;
 
             var resolutionExtremes = ZoomLimits ?? GetExtremes(mapResolutions);
             if (resolutionExtremes == null) return resolution;
 
-            if (zoomMode == ZoomMode.KeepWithinResolutions)
+            if (ZoomMode == ZoomMode.KeepWithinResolutions)
             {
                 if (resolutionExtremes.Min > resolution) return resolutionExtremes.Min;
                 if (resolutionExtremes.Max < resolution) return resolutionExtremes.Max;
             }
-            else if (zoomMode == ZoomMode.KeepWithinResolutionsAndAlwaysFillViewport)
+            else if (ZoomMode == ZoomMode.KeepWithinResolutionsAndAlwaysFillViewport)
             {
                 if (resolutionExtremes.Min > resolution) return resolutionExtremes.Min;
                 
@@ -133,7 +131,7 @@ namespace Mapsui.UI
             return Math.Min(mapEnvelope.Width / screenWidth, mapEnvelope.Height / screenHeight);
         }
 
-        public void LimitExtent(IViewport viewport, PanMode panMode, BoundingBox mapEnvelope)
+        public void LimitExtent(IViewport viewport, BoundingBox mapEnvelope)
         {
             var maxExtent = PanLimits ?? mapEnvelope;
             if (maxExtent == null)
@@ -143,7 +141,7 @@ namespace Mapsui.UI
                 return; 
             }
 
-            if (panMode == PanMode.KeepCenterWithinExtents)
+            if (PanMode == PanMode.KeepCenterWithinExtents)
             {
                 var x = viewport.Center.X;
                 if (viewport.Center.X < maxExtent.Left)  x = maxExtent.Left;
@@ -155,7 +153,7 @@ namespace Mapsui.UI
 
                 viewport.SetCenter(x, y);
             }
-            else if (panMode == PanMode.KeepViewportWithinExtents)
+            else if (PanMode == PanMode.KeepViewportWithinExtents)
             {
                 var x = viewport.Center.X;
 

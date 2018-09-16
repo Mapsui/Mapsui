@@ -13,12 +13,15 @@ namespace Mapsui.Tests.UI
             // arrange
             var viewport = new Viewport { Center = new Point(0, 0), Width = 100, Height = 100, Resolution = 1};
             // viewport.Center is (0, 0) at this point
-            var limiter = new ViewportLimiter();
+            var limiter = new ViewportLimiter
+            {
+                PanMode = PanMode.KeepCenterWithinExtents,
+                PanLimits = new BoundingBox(20, 40, 120, 140)  // Minimal X value is 20, Minimal Y value is 40
+            };
+           
 
-            limiter.PanLimits = new BoundingBox(20, 40, 120, 140); // Minimal X value is 20, Minimal Y value is 40
-            
             // act 
-            limiter.LimitExtent(viewport, PanMode.KeepCenterWithinExtents, viewport.Extent);
+            limiter.LimitExtent(viewport, viewport.Extent);
 
             // assert
             Assert.AreEqual(viewport.Center.X, 20);
