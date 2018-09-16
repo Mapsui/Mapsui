@@ -36,7 +36,7 @@ namespace Mapsui
         /// Change resolution of viewport
         /// </summary>
         /// <param name="resolution">New resolution to use</param>
-        public void NavigateTo(double resolution)
+        public void ZoomTo(double resolution)
         {
             _viewport.SetResolution(resolution);
 
@@ -47,7 +47,7 @@ namespace Mapsui
         /// Change center of viewport
         /// </summary>
         /// <param name="center">New center point of viewport</param>
-        public void NavigateTo(Point center)
+        public void CenterOn(Point center)
         {
             _viewport.SetCenter(center);
             
@@ -68,7 +68,7 @@ namespace Mapsui
         /// </summary>
         /// <param name="x">X value of the new center</param>
         /// <param name="y">Y value of the new center</param>
-        public void NavigateTo(double x, double y)
+        public void CenterOn(double x, double y)
         {
             _viewport.SetCenter(x, y);
  
@@ -105,7 +105,7 @@ namespace Mapsui
         public void ZoomIn(Point centerOfZoom)
         {
             var resolution = ZoomHelper.ZoomIn(_map.Resolutions, _viewport.Resolution);
-            SetResolution(resolution, centerOfZoom);
+            ZoomTo(resolution, centerOfZoom);
 
             _map.RefreshData(_viewport.Extent, _viewport.Resolution, true);
         }
@@ -113,7 +113,7 @@ namespace Mapsui
         public void ZoomOut(Point centerOfZoom)
         {
             var resolution = ZoomHelper.ZoomOut(_map.Resolutions, _viewport.Resolution);
-            SetResolution(resolution, centerOfZoom);
+            ZoomTo(resolution, centerOfZoom);
 
             _map.RefreshData(_viewport.Extent, _viewport.Resolution, true);
         }
@@ -125,7 +125,7 @@ namespace Mapsui
             _map.RefreshData(_viewport.Extent, _viewport.Resolution, true);
         }
 
-        public void SetResolution(double resolution, Point centerOfZoom)
+        public void ZoomTo(double resolution, Point centerOfZoom)
         {
             // 1) Temporarily center on the center of zoom
             _viewport.SetCenter(_viewport.ScreenToWorld(centerOfZoom));

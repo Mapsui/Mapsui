@@ -13,7 +13,7 @@ namespace Mapsui.Samples.CustomWidget
         public BoundingBox Envelope { get; set; }
         public void HandleWidgetTouched(INavigator navigator, Point position)
         {
-            navigator.NavigateTo(0, 0);
+            navigator.CenterOn(0, 0);
         }
 
         public Color Color { get; set; }

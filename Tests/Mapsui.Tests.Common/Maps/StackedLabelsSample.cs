@@ -17,7 +17,7 @@ namespace Mapsui.Tests.Common.Maps
             var map = new Map
             {
                 BackColor = Color.Transparent,
-                Home = n => n.NavigateTo(0.5)
+                Home = n => n.ZoomTo(0.5)
             };
 
             var provider = CreateRandomPointsProvider(GenerateRandomPoints(new BoundingBox(-100, -100, 100, 100), 20));

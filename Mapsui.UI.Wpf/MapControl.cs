@@ -184,7 +184,7 @@ namespace Mapsui.UI.Wpf
         private void ZoomToResolution(double resolution)
         {
             var current = _currentMousePosition;
-            Navigator.SetResolution(resolution, current);
+            Navigator.ZoomTo(resolution, current);
             RefreshGraphics();
         }
 
@@ -247,7 +247,7 @@ namespace Mapsui.UI.Wpf
             // Some cheating to trigger a zoom animation if resolution does not change.
             // This workaround could be ommitted if the zoom animations was on CenterX, CenterY and Resolution, not Resolution alone.
             // todo: Remove this workaround once animations are centralized.
-            Navigator.NavigateTo(new Geometries.Point(Viewport.Center.X + 0.000000001, Viewport.Center.Y + 0.000000001));
+            Navigator.CenterOn(new Geometries.Point(Viewport.Center.X + 0.000000001, Viewport.Center.Y + 0.000000001));
 
             StartZoomAnimation(Viewport.Resolution, _toResolution);
         }

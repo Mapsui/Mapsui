@@ -26,7 +26,7 @@ namespace Mapsui.Tests.Common.Maps
             var map = new Map
             {
                 BackColor = Color.Transparent,
-                Home = n => n.NavigateTo(0.5)
+                Home = n => n.ZoomTo(0.5)
             };
             
             map.Layers.Add(layer);

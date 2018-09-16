@@ -154,7 +154,7 @@ namespace Mapsui.Samples.Wpf.Editing
 
         private void ZoomSliderChanged(object sender, RoutedPropertyChangedEventArgs<double> args)
         {
-            MapControl.Navigator.NavigateTo(MapControl.Map.Resolutions[(int)args.NewValue]);
+            MapControl.Navigator.ZoomTo(MapControl.Map.Resolutions[(int)args.NewValue]);
         }
 
         private void InitializeEditSetup()
