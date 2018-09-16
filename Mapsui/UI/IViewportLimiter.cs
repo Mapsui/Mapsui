@@ -29,13 +29,12 @@ namespace Mapsui
         MinMax ZoomLimits { get; set; }
 
         void Limit(IViewport viewport,
-            ZoomMode zoomMode, MinMax zoomLimits, IReadOnlyList<double> mapResolutions,
-            PanMode panMode, BoundingBox panLimits, BoundingBox mapEnvelope);
+            ZoomMode zoomMode, IReadOnlyList<double> mapResolutions,
+            PanMode panMode, BoundingBox mapEnvelope);
 
         double LimitResolution(double resolution, double screenWidth, double screenHeight, ZoomMode zoomMode,
-            MinMax zoomLimits,
             IReadOnlyList<double> mapResolutions, BoundingBox mapEnvelope);
 
-        void LimitExtent(IViewport viewport, PanMode panMode, BoundingBox panLimits, BoundingBox mapEnvelope);
+        void LimitExtent(IViewport viewport, PanMode panMode, BoundingBox mapEnvelope);
     }
 }

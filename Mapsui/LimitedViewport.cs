@@ -23,8 +23,8 @@ namespace Mapsui
         {
             _viewport.Transform(positionX, positionY, previousPositionX, previousPositionY, deltaResolution, deltaRotation);
             Limiter.Limit(_viewport,
-                Map.Limiter.ZoomMode, Map.Limiter.ZoomLimits, Map.Resolutions,
-                Map.Limiter.PanMode, Map.Limiter.PanLimits, Map.Envelope);
+                Map.Limiter.ZoomMode, Map.Resolutions,
+                Map.Limiter.PanMode, Map.Envelope);
         }
 
         public void Transform(Point position, Point previousPosition, double deltaScale = 1, double deltaRotation = 0)
@@ -35,25 +35,25 @@ namespace Mapsui
         public void SetSize(double width, double height)
         {
             _viewport.SetSize(width, height);
-            if (_viewport.HasSize) Limiter.LimitExtent(_viewport, Map.Limiter.PanMode, Map.Limiter.PanLimits, Map.Envelope);
+            if (_viewport.HasSize) Limiter.LimitExtent(_viewport, Map.Limiter.PanMode, Map.Envelope);
         }
 
         public virtual void SetCenter(double x, double y)
         {
             _viewport.SetCenter(x, y);
-            Limiter.LimitExtent(_viewport, Map.Limiter.PanMode, Map.Limiter.PanLimits, Map.Envelope);
+            Limiter.LimitExtent(_viewport, Map.Limiter.PanMode, Map.Envelope);
         }
 
         public void SetCenter(ReadOnlyPoint center)
         {
             _viewport.SetCenter(center);
-            Limiter.LimitExtent(_viewport, Map.Limiter.PanMode, Map.Limiter.PanLimits, Map.Envelope);
+            Limiter.LimitExtent(_viewport, Map.Limiter.PanMode, Map.Envelope);
         }
 
         public void SetResolution(double resolution)
         {
             resolution = Limiter.LimitResolution(resolution, _viewport.Width, _viewport.Height, Map.Limiter.ZoomMode,
-                Map.Limiter.ZoomLimits, Map.Resolutions, Map.Envelope);
+                Map.Resolutions, Map.Envelope);
 
             _viewport.SetResolution(resolution);
         }
@@ -61,7 +61,7 @@ namespace Mapsui
         public void SetRotation(double rotation)
         {
             _viewport.SetRotation(rotation);
-            Limiter.LimitExtent(_viewport, Map.Limiter.PanMode, Map.Limiter.PanLimits, Map.Envelope);
+            Limiter.LimitExtent(_viewport, Map.Limiter.PanMode, Map.Envelope);
         }
 
         public Point ScreenToWorld(Point position)

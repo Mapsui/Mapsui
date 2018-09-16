@@ -94,19 +94,19 @@ namespace Mapsui.UI
         }
 
         public void Limit(IViewport viewport, 
-            ZoomMode zoomMode, MinMax zoomLimits, IReadOnlyList<double> mapResolutions, 
-            PanMode panMode, BoundingBox panLimits, BoundingBox mapEnvelope)
+            ZoomMode zoomMode,IReadOnlyList<double> mapResolutions, 
+            PanMode panMode, BoundingBox mapEnvelope)
         {
-            viewport.SetResolution(LimitResolution(viewport.Resolution, viewport.Width, viewport.Height, zoomMode, zoomLimits, mapResolutions, mapEnvelope));
-            LimitExtent(viewport, panMode, panLimits, mapEnvelope);
+            viewport.SetResolution(LimitResolution(viewport.Resolution, viewport.Width, viewport.Height, zoomMode, mapResolutions, mapEnvelope));
+            LimitExtent(viewport, panMode, mapEnvelope);
         }
 
-        public double LimitResolution(double resolution, double screenWidth, double screenHeight, ZoomMode zoomMode, MinMax zoomLimits, 
+        public double LimitResolution(double resolution, double screenWidth, double screenHeight, ZoomMode zoomMode,  
             IReadOnlyList<double> mapResolutions, BoundingBox mapEnvelope)
         {
             if (zoomMode == ZoomMode.Unlimited) return resolution;
 
-            var resolutionExtremes = zoomLimits ?? GetExtremes(mapResolutions);
+            var resolutionExtremes = ZoomLimits ?? GetExtremes(mapResolutions);
             if (resolutionExtremes == null) return resolution;
 
             if (zoomMode == ZoomMode.KeepWithinResolutions)
@@ -133,9 +133,9 @@ namespace Mapsui.UI
             return Math.Min(mapEnvelope.Width / screenWidth, mapEnvelope.Height / screenHeight);
         }
 
-        public void LimitExtent(IViewport viewport, PanMode panMode, BoundingBox panLimits, BoundingBox mapEnvelope)
+        public void LimitExtent(IViewport viewport, PanMode panMode, BoundingBox mapEnvelope)
         {
-            var maxExtent = panLimits ?? mapEnvelope;
+            var maxExtent = PanLimits ?? mapEnvelope;
             if (maxExtent == null)
             {
                 // Can be null because both panLimits and Map.Extent can be null. 
