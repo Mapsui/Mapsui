@@ -19,10 +19,10 @@ namespace Mapsui
         public bool IsRotated => _viewport.IsRotated;
         public Quad WindowExtent => _viewport.WindowExtent;
 
-        public void Transform(double screenX, double screenY, double previousScreenX, double previousScreenY,
-            double deltaScale = 1, double deltaRotation = 0)
+        public void Transform(double positionX, double positionY, double previousPositionX, double previousPositionY,
+            double deltaResolution = 1, double deltaRotation = 0)
         {
-            _viewport.Transform(screenX, screenY, previousScreenX, previousScreenY, deltaScale, deltaRotation);
+            _viewport.Transform(positionX, positionY, previousPositionX, previousPositionY, deltaResolution, deltaRotation);
             ViewportLimiter.Limit(_viewport,
                 Map.Limits.ZoomMode, Map.Limits.ZoomLimits, Map.Resolutions,
                 Map.Limits.PanMode, Map.Limits.PanLimits, Map.Envelope);
@@ -65,9 +65,9 @@ namespace Mapsui
             ViewportLimiter.LimitExtent(_viewport, Map.Limits.PanMode, Map.Limits.PanLimits, Map.Envelope);
         }
 
-        public Point ScreenToWorld(Point screenPosition)
+        public Point ScreenToWorld(Point position)
         {
-            return _viewport.ScreenToWorld(screenPosition);
+            return _viewport.ScreenToWorld(position);
         }
 
         public Point ScreenToWorld(double x, double y)
@@ -85,14 +85,14 @@ namespace Mapsui
             return _viewport.WorldToScreen(worldX, worldY);
         }
 
-        public Point WorldToScreenUnrotated(double x, double y)
+        public Point WorldToScreenUnrotated(double worldX, double worldY)
         {
-            return _viewport.WorldToScreenUnrotated(x, y);
+            return _viewport.WorldToScreenUnrotated(worldX, worldY);
         }
 
-        public Point WorldToScreenUnrotated(Point point)
+        public Point WorldToScreenUnrotated(Point worldPosition)
         {
-            return _viewport.WorldToScreenUnrotated(point);
+            return _viewport.WorldToScreenUnrotated(worldPosition);
         }
     }
 }

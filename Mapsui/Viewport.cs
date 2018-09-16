@@ -166,9 +166,9 @@ namespace Mapsui
         }
 
         /// <inheritdoc />
-        public Point ScreenToWorld(Point screenPosition)
+        public Point ScreenToWorld(Point position)
         {
-            return ScreenToWorld(screenPosition.X, screenPosition.Y);
+            return ScreenToWorld(position.X, position.Y);
         }
 
         /// <inheritdoc />
@@ -216,24 +216,24 @@ namespace Mapsui
         }
 
         /// <inheritdoc />
-        public void Transform(double screenX, double screenY, double previousScreenX, double previousScreenY,
-            double deltaScale = 1, double deltaRotation = 0)
+        public void Transform(double positionX, double positionY, double previousPositionX, double previousPositionY,
+            double deltaResolution = 1, double deltaRotation = 0)
         {
-            var previous = ScreenToWorld(previousScreenX, previousScreenY);
-            var current = ScreenToWorld(screenX, screenY);
+            var previous = ScreenToWorld(previousPositionX, previousPositionY);
+            var current = ScreenToWorld(positionX, positionY);
 
             var newX = _center.X + previous.X - current.X;
             var newY = _center.Y + previous.Y - current.Y;
 
-            if (deltaScale != 1)
+            if (deltaResolution != 1)
             {
-                Resolution = Resolution / deltaScale;
+                Resolution = Resolution / deltaResolution;
 
                 // Calculate current position again with adjusted resolution
                 // Zooming should be centered on the place where the map is touched.
                 // This is done with the scale correction.
-                var scaleCorrectionX = (1 - deltaScale) * (current.X - Center.X);
-                var scaleCorrectionY = (1 - deltaScale) * (current.Y - Center.Y);
+                var scaleCorrectionX = (1 - deltaResolution) * (current.X - Center.X);
+                var scaleCorrectionY = (1 - deltaResolution) * (current.Y - Center.Y);
 
                 newX -= scaleCorrectionX;
                 newY -= scaleCorrectionY;
@@ -243,9 +243,9 @@ namespace Mapsui
 
             if (deltaRotation != 0)
             {
-                current = ScreenToWorld(screenX, screenY); // calculate current position again with adjusted resolution
+                current = ScreenToWorld(positionX, positionY); // calculate current position again with adjusted resolution
                 Rotation += deltaRotation;
-                var postRotation = ScreenToWorld(screenX, screenY); // calculate current position again with adjusted resolution
+                var postRotation = ScreenToWorld(positionX, positionY); // calculate current position again with adjusted resolution
 
                 SetCenter(_center.X - postRotation.X - current.X, _center.Y - postRotation.Y - current.Y);
             }
