@@ -1,13 +1,11 @@
 ﻿using Mapsui.Geometries;
-using Mapsui.UI;
 
 namespace Mapsui
 {
     public class LimitedViewport : IViewport
     {
         private readonly IViewport _viewport = new Viewport();
-        private readonly IViewportLimiter _limiter = new ViewportLimiter();
-
+        public IViewportLimiter Limiter { get; set; }
         public Map Map { get; set; }
 
         public ReadOnlyPoint Center => _viewport.Center;
@@ -24,9 +22,9 @@ namespace Mapsui
             double deltaResolution = 1, double deltaRotation = 0)
         {
             _viewport.Transform(positionX, positionY, previousPositionX, previousPositionY, deltaResolution, deltaRotation);
-            _limiter.Limit(_viewport,
-                Map.Limits.ZoomMode, Map.Limits.ZoomLimits, Map.Resolutions,
-                Map.Limits.PanMode, Map.Limits.PanLimits, Map.Envelope);
+            Limiter.Limit(_viewport,
+                Map.Limiter.ZoomMode, Map.Limiter.ZoomLimits, Map.Resolutions,
+                Map.Limiter.PanMode, Map.Limiter.PanLimits, Map.Envelope);
         }
 
         public void Transform(Point position, Point previousPosition, double deltaScale = 1, double deltaRotation = 0)
@@ -37,25 +35,25 @@ namespace Mapsui
         public void SetSize(double width, double height)
         {
             _viewport.SetSize(width, height);
-            if (_viewport.HasSize) _limiter.LimitExtent(_viewport, Map.Limits.PanMode, Map.Limits.PanLimits, Map.Envelope);
+            if (_viewport.HasSize) Limiter.LimitExtent(_viewport, Map.Limiter.PanMode, Map.Limiter.PanLimits, Map.Envelope);
         }
 
         public virtual void SetCenter(double x, double y)
         {
             _viewport.SetCenter(x, y);
-            _limiter.LimitExtent(_viewport, Map.Limits.PanMode, Map.Limits.PanLimits, Map.Envelope);
+            Limiter.LimitExtent(_viewport, Map.Limiter.PanMode, Map.Limiter.PanLimits, Map.Envelope);
         }
 
         public void SetCenter(ReadOnlyPoint center)
         {
             _viewport.SetCenter(center);
-            _limiter.LimitExtent(_viewport, Map.Limits.PanMode, Map.Limits.PanLimits, Map.Envelope);
+            Limiter.LimitExtent(_viewport, Map.Limiter.PanMode, Map.Limiter.PanLimits, Map.Envelope);
         }
 
         public void SetResolution(double resolution)
         {
-            resolution = _limiter.LimitResolution(resolution, _viewport.Width, _viewport.Height, Map.Limits.ZoomMode,
-                Map.Limits.ZoomLimits, Map.Resolutions, Map.Envelope);
+            resolution = Limiter.LimitResolution(resolution, _viewport.Width, _viewport.Height, Map.Limiter.ZoomMode,
+                Map.Limiter.ZoomLimits, Map.Resolutions, Map.Envelope);
 
             _viewport.SetResolution(resolution);
         }
@@ -63,7 +61,7 @@ namespace Mapsui
         public void SetRotation(double rotation)
         {
             _viewport.SetRotation(rotation);
-            _limiter.LimitExtent(_viewport, Map.Limits.PanMode, Map.Limits.PanLimits, Map.Envelope);
+            Limiter.LimitExtent(_viewport, Map.Limiter.PanMode, Map.Limiter.PanLimits, Map.Envelope);
         }
 
         public Point ScreenToWorld(Point position)

@@ -9,7 +9,7 @@ namespace Mapsui.Samples.Common.Maps
         {
             var map = new Map
             {
-                Limits =
+                Limiter =
                 {
                     ZoomMode = ZoomMode.KeepWithinResolutionsAndAlwaysFillViewport,
                     PanMode = PanMode.KeepViewportWithinExtents
