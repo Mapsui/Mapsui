@@ -184,8 +184,7 @@ namespace Mapsui.UI.Wpf
         private void ZoomToResolution(double resolution)
         {
             var current = _currentMousePosition;
-            //todo: Check if we can use NavigateTo resolution
-            _viewport.Transform(current.X, current.Y, current.X, current.Y, Viewport.Resolution / resolution);
+            Navigator.SetResolution(resolution, current);
             RefreshGraphics();
         }
 
@@ -388,15 +387,16 @@ namespace Mapsui.UI.Wpf
                 if (_previousMousePosition == null || _previousMousePosition.IsEmpty())
                 {
                     // Usually MapControlMouseLeftButton down initializes _previousMousePosition but in some
-                    // situations this can happen. So far I could only reproduce this by putting a breakpoint
-                    // and continuing.
+                    // situations it can be null. So far I could only reproduce this in debug mode when putting
+                    // a breakpoint and continuing.
                     return; 
                 }
 
                 _currentMousePosition = e.GetPosition(this).ToMapsui(); //Needed for both MouseMove and MouseWheel event
 
-                _viewport.Transform(_currentMousePosition.X, _currentMousePosition.Y,
-                _previousMousePosition.X, _previousMousePosition.Y);
+                _viewport.Transform(
+                    _currentMousePosition.X, _currentMousePosition.Y,
+                    _previousMousePosition.X, _previousMousePosition.Y);
                 RefreshGraphics();
 
                 _previousMousePosition = _currentMousePosition;
