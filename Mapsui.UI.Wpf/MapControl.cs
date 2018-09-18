@@ -85,7 +85,7 @@ namespace Mapsui.UI.Wpf
 
             IsManipulationEnabled = true;
 
-            RenderMode = RenderMode.Wpf;
+            RenderMode = RenderMode.Skia;
         }
 
         protected override void OnRender(DrawingContext dc)
