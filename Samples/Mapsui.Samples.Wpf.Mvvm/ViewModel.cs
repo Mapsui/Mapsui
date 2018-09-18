@@ -23,8 +23,6 @@ namespace Mapsui.Samples.Wpf.Mvvm
             }
         }
         public INavigator Navigator { get; set; }
-        public IViewport Viewport { get; set; }
-
         public ICommand AddBingAerialLayerCommand { get; set; }
         public ICommand StartAnimationCommand { get; set; }
         private readonly Random _random = new Random();
