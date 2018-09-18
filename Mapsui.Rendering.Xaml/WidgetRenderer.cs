@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Controls;
 using Mapsui.Widgets;
+using Mapsui.Widgets.CenterCross;
 using Mapsui.Widgets.ScaleBar;
 using Mapsui.Widgets.Zoom;
 
@@ -24,6 +25,7 @@ namespace Mapsui.Rendering.Xaml
                 if (widget is Hyperlink) HyperlinkWidgetRenderer.Draw(widgetCanvas, widget as Hyperlink);
                 if (widget is ScaleBarWidget) ScaleBarWidgetRenderer.Draw(widgetCanvas, widget as ScaleBarWidget);
                 if (widget is ZoomInOutWidget) ZoomInOutWidgetRenderer.Draw(widgetCanvas, widget as ZoomInOutWidget);
+                if (widget is CenterCrossWidget) CenterCrossWidgetRenderer.Draw(widgetCanvas, widget as CenterCrossWidget);
             }
         }
     }
