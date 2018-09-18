@@ -1,26 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Mapsui.UI.Utils
 {
     public class VelocityTracker
     {
-        const int maxSize = 100;
-        const long maxTicks = 200 * 10000;  // Use only events from the last 200 ms
-        double[,] x;
-        double[,] y;
-        long[,] time;
-        int next = 0;
-        bool turn = false;
+        private const int MaxSize = 100;
+        private const long MaxTicks = 200 * 10000;  // Use only events from the last 200 ms
+        private readonly double[,] _x;
+        private readonly double[,] _y;
+        private readonly long[,] _time;
+        private int _next;
+        private bool _turn;
 
         public VelocityTracker()
         {
-            x = new double[10,maxSize];
-            y = new double[10, maxSize];
-            time = new long[10, maxSize];
+            _x = new double[10,MaxSize];
+            _y = new double[10, MaxSize];
+            _time = new long[10, MaxSize];
         }
 
         public void AddEvent(long id, Geometries.Point location, long ticks)
@@ -30,25 +26,25 @@ namespace Mapsui.UI.Utils
                 return;
 
             // Save event data
-            x[id, next] = location.X;
-            y[id, next] = location.Y;
-            time[id, next] = ticks;
+            _x[id, _next] = location.X;
+            _y[id, _next] = location.Y;
+            _time[id, _next] = ticks;
 
             // Check for next position
-            next++;
+            _next++;
 
             // Check, if we at the end of array
-            if (next >= maxSize)
+            if (_next >= MaxSize)
             {
-                next = 0;
-                turn = true;
+                _next = 0;
+                _turn = true;
             }
         }
 
         public void Clear()
         {
-            next = 0;
-            turn = false;
+            _next = 0;
+            _turn = false;
         }
 
         public (double vx, double vy) CalcVelocity(long id, long now)
@@ -60,58 +56,58 @@ namespace Mapsui.UI.Utils
 
             if (id >= 0 && id < 10)
             {
-                long[] ticks = new long[maxSize - 1];
-                double[] vx = new double[maxSize - 1];
-                double[] vy = new double[maxSize - 1];
+                long[] ticks = new long[MaxSize - 1];
+                double[] vx = new double[MaxSize - 1];
+                double[] vy = new double[MaxSize - 1];
 
-                if (turn)
-                    start = next;
+                if (_turn)
+                    start = _next;
 
-                double lastX = x[id, start];
-                double lastY = y[id, start];
-                long lastTime = time[id, start];
+                double lastX = _x[id, start];
+                double lastY = _y[id, start];
+                long lastTime = _time[id, start];
 
                 start++;
 
-                if (turn)
+                if (_turn)
                 {
-                    for (int i = start; i < maxSize; i++)
+                    for (int i = start; i < MaxSize; i++)
                     {
                         // Only calc velocities for last maxTicks ticks
-                        if (now - time[id, i] < maxTicks)
+                        if (now - _time[id, i] < MaxTicks)
                         {
                             // Calc velocity in pixel per sec
-                            ticks[pos] = pos > 0 ? ticks[pos - 1] + time[id, i] - lastTime : 0;
-                            vx[pos] = (x[id, i] - lastX) * 10000000 / (time[id, i] - lastTime);
-                            vy[pos] = (y[id, i] - lastY) * 10000000 / (time[id, i] - lastTime);
+                            ticks[pos] = pos > 0 ? ticks[pos - 1] + _time[id, i] - lastTime : 0;
+                            vx[pos] = (_x[id, i] - lastX) * 10000000 / (_time[id, i] - lastTime);
+                            vy[pos] = (_y[id, i] - lastY) * 10000000 / (_time[id, i] - lastTime);
 
                             pos++;
                         }
 
-                        lastX = x[id, i];
-                        lastY = y[id, i];
-                        lastTime = time[id, i];
+                        lastX = _x[id, i];
+                        lastY = _y[id, i];
+                        lastTime = _time[id, i];
                     }
 
                     start = 0;
                 }
 
-                for (int i = start; i < next; i++)
+                for (int i = start; i < _next; i++)
                 {
                     // Only calc velocities for last maxTicks ticks
-                    if (now - time[id, i] < maxTicks)
+                    if (now - _time[id, i] < MaxTicks)
                     {
                         // Calc velocity in pixel per sec
-                        ticks[pos] = pos > 0 ? ticks[pos - 1] + time[id, i] - lastTime : 0;
-                        vx[pos] = (x[id, i] - lastX) * 10000000 / (time[id, i] - lastTime);
-                        vy[pos] = (y[id, i] - lastY) * 10000000 / (time[id, i] - lastTime);
+                        ticks[pos] = pos > 0 ? ticks[pos - 1] + _time[id, i] - lastTime : 0;
+                        vx[pos] = (_x[id, i] - lastX) * 10000000 / (_time[id, i] - lastTime);
+                        vy[pos] = (_y[id, i] - lastY) * 10000000 / (_time[id, i] - lastTime);
 
                         pos++;
                     }
 
-                    lastX = x[id, i];
-                    lastY = y[id, i];
-                    lastTime = time[id, i];
+                    lastX = _x[id, i];
+                    lastY = _y[id, i];
+                    lastTime = _time[id, i];
                 }
 
                 double rsquard;
@@ -121,8 +117,8 @@ namespace Mapsui.UI.Utils
                 (rsquard, yintercept, velocityY) = LinearRegression(ticks, vy, 0, pos);
 
                 // Convert ticks to seconds
-                velocityX = velocityX.IsNanOrZero() ? 0 : velocityX * 10000000;
-                velocityY = velocityY.IsNanOrZero() ? 0 : velocityY * 10000000;
+                velocityX = velocityX.IsNanOrInfOrZero() ? 0 : velocityX * 10000000;
+                velocityY = velocityY.IsNanOrInfOrZero() ? 0 : velocityY * 10000000;
             }
 
             return (velocityX, velocityY);

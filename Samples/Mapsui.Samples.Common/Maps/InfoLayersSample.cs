@@ -21,6 +21,7 @@ namespace Mapsui.Samples.Common.Maps
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
             map.Layers.Add(CreateInfoLayer(map.Envelope));
             map.Layers.Add(CreatePolygonLayer());
+            map.Layers.Add(new WritableLayer());
             map.Layers.Add(CreateLineLayer());
             
             return map;

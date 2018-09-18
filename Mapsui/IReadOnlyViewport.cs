@@ -44,8 +44,9 @@ namespace Mapsui
         /// Viewport rotation from True North (clockwise degrees)
         /// </summary>
         double Rotation { get; }
-        bool IsSizeInitialized();
 
+        bool HasSize { get; }
+        
         /// <summary>
         /// IsRotated is true, when viewport displays map rotated
         /// </summary>
@@ -54,9 +55,9 @@ namespace Mapsui
         /// <summary>
         /// Converts a point in screen pixels to one in map units, respecting rotation
         /// </summary>
-        /// <param name="screenPosition">Coordinate in map units</param>
+        /// <param name="position">Coordinate in map units</param>
         /// <returns>Point in map units</returns>
-        Point ScreenToWorld(Point screenPosition);
+        Point ScreenToWorld(Point position);
 
         /// <summary>
         /// Converts X/Y in screen pixels to a point in map units, respecting rotation
@@ -78,8 +79,8 @@ namespace Mapsui
         /// Converts X/Y in map units to a point in device independent units (or DIP or DP),
         /// respecting rotation
         /// </summary>
-        /// <param name="x">X coordinate in map units</param>
-        /// <param name="y">Y coordinate in map units</param>
+        /// <param name="worldX">X coordinate in map units</param>
+        /// <param name="worldY">Y coordinate in map units</param>
         /// <returns>Point in screen pixels</returns>
         Point WorldToScreen(double worldX, double worldY);
 
@@ -87,18 +88,18 @@ namespace Mapsui
         /// Converts X/Y in map units to a point in device independent units (or DIP or DP),
         /// respecting rotation
         /// </summary>
-        /// <param name="x">X coordinate in map units</param>
-        /// <param name="y">Y coordinate in map units</param>
+        /// <param name="worldX">X coordinate in map units</param>
+        /// <param name="worldY">Y coordinate in map units</param>
         /// <returns>Point in screen pixels</returns>
-        Point WorldToScreenUnrotated(double x, double y); // todo: Get rid of this method
+        Point WorldToScreenUnrotated(double worldX, double worldY); // todo: Get rid of this method
 
         /// <summary>
         /// Converts X/Y in map units to a point in device independent units (or DIP or DP),
         /// respecting rotation
         /// </summary>
-        /// <param name="point">Coordinate in map units</param>
+        /// <param name="worldPosition">Coordinate in map units</param>
         /// <returns>Point in screen pixels</returns>
-        Point WorldToScreenUnrotated(Point point); // todo: Get rid of this method
+        Point WorldToScreenUnrotated(Point worldPosition); // todo: Get rid of this method
 
         /// <summary>
         /// WindowExtend gives the four corner points of viewport in map coordinates

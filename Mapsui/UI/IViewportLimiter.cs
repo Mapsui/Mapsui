@@ -1,8 +1,10 @@
-﻿using Mapsui.Geometries;
+﻿using System.Collections.Generic;
+using Mapsui.Geometries;
+using Mapsui.UI;
 
-namespace Mapsui.UI
+namespace Mapsui
 {
-    public interface ILimits
+    public interface IViewportLimiter
     {
         /// <summary>
         /// Pan mode to use, when map is paned
@@ -25,5 +27,12 @@ namespace Mapsui.UI
         /// to anything else than None, resolution is kept between these values.
         /// </summary>
         MinMax ZoomLimits { get; set; }
+
+        void Limit(IViewport viewport, IReadOnlyList<double> mapResolutions, BoundingBox mapEnvelope);
+
+        double LimitResolution(double resolution, double screenWidth, double screenHeight, 
+            IReadOnlyList<double> mapResolutions, BoundingBox mapEnvelope);
+
+        void LimitExtent(IViewport viewport, BoundingBox mapEnvelope);
     }
 }

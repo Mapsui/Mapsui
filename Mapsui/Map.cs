@@ -54,7 +54,7 @@ namespace Mapsui
         /// </summary>
         public List<IWidget> Widgets { get; } = new List<IWidget>();
 
-        public ILimits Limits { get; } = new Limits();
+        public IViewportLimiter Limiter { get; } = new ViewportLimiter();
 
         /// <summary>
         /// Projection type of Map. Normally in format like "EPSG:3857"

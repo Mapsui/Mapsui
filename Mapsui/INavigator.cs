@@ -23,20 +23,20 @@ namespace Mapsui
         /// Change resolution of viewport
         /// </summary>
         /// <param name="resolution">New resolution to use</param>
-        void NavigateTo(double resolution);
+        void ZoomTo(double resolution);
         
         /// <summary>
         /// Change center of viewport
         /// </summary>
         /// <param name="center">New center point of viewport</param>
-        void NavigateTo(Point center);
+        void CenterOn(Point center);
 
         /// <summary>
         /// Change center of viewport to X/Y coordinates
         /// </summary>
         /// <param name="x">X value of the new center</param>
         /// <param name="y">Y value of the new center</param>
-        void NavigateTo(double x, double y);
+        void CenterOn(double x, double y);
         
         /// <summary>
         /// Change rotation of viewport
@@ -48,6 +48,12 @@ namespace Mapsui
 
         void ZoomIn();
 
+        void ZoomIn(Point centerOfZoom);
+        
+        void ZoomOut(Point centerOfZoom);
+
         void NavigateToFullEnvelope(ScaleMethod scaleMethod = ScaleMethod.Fill);
+
+        void ZoomTo(double resolution, Point centerOfZoom);
     }
 }
