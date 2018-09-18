@@ -44,7 +44,6 @@ namespace Mapsui.Samples.Wpf.Mvvm
         private void OnAddBingAerialLayer(object obj)
         {
             _map.Layers.Add(new TileLayer(KnownTileSources.Create(KnownTileSource.BingAerial)));
-            Navigator.NavigateTo(_map.Resolutions[5]);
         }
 
         private void OnStartAnimations(object obj)
@@ -56,6 +55,7 @@ namespace Mapsui.Samples.Wpf.Mvvm
             }
             else
             {
+                Navigator.ZoomTo(_map.Resolutions[5]);
                 _dispatcherTimer.Start();
                 StartAnimationButtonText = "Stop animation";
             }
@@ -64,7 +64,7 @@ namespace Mapsui.Samples.Wpf.Mvvm
 
         private void TimerTick(object sender, EventArgs e)
         {
-            Navigator.NavigateTo(new Point(_random.Next((int)_map.Envelope.MinX, (int)_map.Envelope.MaxX), _random.Next((int)_map.Envelope.MinY, (int)_map.Envelope.MaxY)));
+            Navigator.CenterOn(new Point(_random.Next((int)_map.Envelope.MinX, (int)_map.Envelope.MaxX), _random.Next((int)_map.Envelope.MinY, (int)_map.Envelope.MaxY)));
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

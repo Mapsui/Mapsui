@@ -39,7 +39,6 @@ namespace Mapsui
         public void ZoomTo(double resolution)
         {
             _viewport.SetResolution(resolution);
-
             _map.RefreshData(_viewport.Extent, _viewport.Resolution, true);
         }
 
