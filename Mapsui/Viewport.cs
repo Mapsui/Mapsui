@@ -317,7 +317,6 @@ namespace Mapsui
         public void SetResolution(double resolution)
         {
             Resolution = resolution;
-            UpdateExtent();
             OnViewportChanged();
         }
 
