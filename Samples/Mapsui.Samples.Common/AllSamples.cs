@@ -35,6 +35,7 @@ namespace Mapsui.Samples.Common
                 ["Symbols in World Units"] = SymbolsInWorldUnitsSample.CreateMap,
                 ["Widgets"] = WidgetSample.CreateMap,
                 ["ScaleBar"] = ScaleBarSample.CreateMap,
+                ["Center Cross"] = CenterCrossSample.CreateMap,
                 ["OpacityStyle"] = OpacityStyleSample.CreateMap,
                 ["Svg"] = SvgSample.CreateMap,
                 ["Atlas"] = AtlasSample.CreateMap,

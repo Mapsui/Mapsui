@@ -72,6 +72,7 @@
     <Compile Include="Styles\PenStrokeCap.cs" />
     <Compile Include="UI\MapInfo.cs" />
     <Compile Include="Widgets\Alignment.cs" />
+    <Compile Include="Widgets\CenterCross\CenterCrossWidget.cs" />
     <Compile Include="Widgets\Hyperlink.cs" />
     <Compile Include="Widgets\IWidget.cs" />
     <Compile Include="Widgets\ScaleBar\ImperialUnitConverter.cs" />
