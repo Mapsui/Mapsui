@@ -20,40 +20,40 @@
         <dependency id="BruTile" version="[1.0.0,1.1.0)"/>
         <dependency id="ConcurrentHashSet" version="[1.0.2,2.0.0)"/>
         <dependency id="Newtonsoft.json" version="[9.0,)"/>
-        <dependency id="SkiaSharp" version="[1.59.3,2.0)"/>
-        <dependency id="SkiaSharp.Svg" version="[1.59.1,2.0)"/>
+        <dependency id="SkiaSharp" version="[1.59.3,60.0.0)"/>
+        <dependency id="SkiaSharp.Svg" version="[1.59.1,60.0.0)"/>
       </group>
       <group targetFramework="net45">
         <dependency id="BruTile" version="[1.0.0,1.1.0)"/>
         <dependency id="ConcurrentHashSet" version="[1.0.2,2.0.0)"/>
         <dependency id="Newtonsoft.json" version="[9.0,)"/>
-        <dependency id="SkiaSharp" version="[1.59.3,2.0)"/>
-        <dependency id="SkiaSharp.Svg" version="[1.59.1,2.0)"/>
-        <dependency id="SkiaSharp.Views" version="[1.59.3,2.0)"/>
+        <dependency id="SkiaSharp" version="[1.59.3,60.0.0)"/>
+        <dependency id="SkiaSharp.Svg" version="[1.59.1,60.0.0)"/>
+        <dependency id="SkiaSharp.Views" version="[1.59.3,60.0.0)"/>
       </group>
       <group targetFramework="uap">
         <dependency id="BruTile" version="[1.0.0,1.1.0)"/>
         <dependency id="ConcurrentHashSet" version="[1.0.2,2.0.0)"/>
         <dependency id="Newtonsoft.json" version="[9.0,)"/>
-        <dependency id="SkiaSharp" version="[1.59.3,2.0)"/>
-        <dependency id="SkiaSharp.Svg" version="[1.59.1,2.0)"/>
-        <dependency id="SkiaSharp.Views" version="[1.59.3,2.0)"/>
+        <dependency id="SkiaSharp" version="[1.59.3,60.0.0)"/>
+        <dependency id="SkiaSharp.Svg" version="[1.59.1,60.0.0)"/>
+        <dependency id="SkiaSharp.Views" version="[1.59.3,60.0.0)"/>
       </group>
       <group targetFramework="MonoAndroid">
         <dependency id="BruTile" version="[1.0.0,1.1.0)"/>
         <dependency id="ConcurrentHashSet" version="[1.0.2,2.0.0)"/>
         <dependency id="Newtonsoft.json" version="[9.0,)"/>
-        <dependency id="SkiaSharp" version="[1.59.3,2.0)"/>
-        <dependency id="SkiaSharp.Svg" version="[1.59.1,2.0)"/>
-        <dependency id="SkiaSharp.Views" version="[1.59.3,2.0)"/>
+        <dependency id="SkiaSharp" version="[1.59.3,60.0.0)"/>
+        <dependency id="SkiaSharp.Svg" version="[1.59.1,60.0.0)"/>
+        <dependency id="SkiaSharp.Views" version="[1.59.3,60.0.0)"/>
       </group>
       <group targetFramework="Xamarin.iOS">
         <dependency id="BruTile" version="[1.0.0,1.1.0)"/>
         <dependency id="ConcurrentHashSet" version="[1.0.2,2.0.0)"/>
         <dependency id="Newtonsoft.json" version="[9.0,)"/>
-        <dependency id="SkiaSharp" version="[1.59.3,2.0)"/>
-        <dependency id="SkiaSharp.Svg" version="[1.59.1,2.0)"/>
-        <dependency id="SkiaSharp.Views" version="[1.59.3,2.0)"/>
+        <dependency id="SkiaSharp" version="[1.59.3,60.0.0)"/>
+        <dependency id="SkiaSharp.Svg" version="[1.59.1,60.0.0)"/>
+        <dependency id="SkiaSharp.Views" version="[1.59.3,60.0.0)"/>
       </group>
     </dependencies>
   </metadata>
