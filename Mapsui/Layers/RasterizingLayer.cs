@@ -96,7 +96,8 @@ namespace Mapsui.Layers
             {
                 try
                 {
-                    if (double.IsNaN(_resolution) || (_resolution <= 0)) return;
+                    if (double.IsNaN(_resolution) || _resolution <= 0) return;
+                    if (_extent.Width <= 0 || _extent.Height <= 0) return;
                     var viewport = CreateViewport(_extent, _resolution, _renderResolutionMultiplier, _overscan);
 
                     _currentViewport = viewport;
@@ -105,11 +106,18 @@ namespace Mapsui.Layers
 
                     var bitmapStream = _rasterizer.RenderToBitmapStream(viewport, new[] {_layer});
                     RemoveExistingFeatures();
-                    _cache.ReplaceFeatures(new Features {new Feature {Geometry = new Raster(bitmapStream, viewport.Extent)}});
 
-                    Logger.Log(LogLevel.Debug, $"Memory after rasterizing layer {GC.GetTotalMemory(true):N0}");
+                    if (bitmapStream != null)
+                    {
+                        _cache.ReplaceFeatures(new Features
+                        {
+                            new Feature {Geometry = new Raster(bitmapStream, viewport.Extent)}
+                        });
 
-                    OnDataChanged(new DataChangedEventArgs());
+                        Logger.Log(LogLevel.Debug, $"Memory after rasterizing layer {GC.GetTotalMemory(true):N0}");
+
+                        OnDataChanged(new DataChangedEventArgs());
+                    }
 
                     if (_modified) RestartTimer();
                 }
