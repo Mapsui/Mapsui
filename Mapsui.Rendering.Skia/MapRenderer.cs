@@ -66,6 +66,7 @@ namespace Mapsui.Rendering.Skia
                 using (var surface = SKSurface.Create(
                     (int)viewport.Width, (int)viewport.Height, SKImageInfo.PlatformColorType, SKAlphaType.Unpremul))
                 {
+                    if (surface == null) return null;
                     // Not sure if this is needed here:
                     if (background != null) surface.Canvas.Clear(background.ToSkia(1));
                     Render(surface.Canvas, viewport, layers);
