@@ -127,7 +127,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "api", "api", "{5BB9C8BA-0FF
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Samples.Droid", "Samples\Mapsui.Samples.Droid\Mapsui.Samples.Droid.csproj", "{3BC0AC7E-3B3B-4D3F-9CC0-B2BDECC460A6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Samples.CustomWidget", "Sample\Mapsui.Samples.CustomWidget\Mapsui.Samples.CustomWidget.csproj", "{BA6ECDB7-674E-42CB-9E56-56C55FED269B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Samples.CustomWidget", "Sample\Mapsui.Samples.CustomWidget\Mapsui.Samples.CustomWidget.csproj", "{BA6ECDB7-674E-42CB-9E56-56C55FED269B}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
