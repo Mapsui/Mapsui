@@ -9,11 +9,7 @@ namespace Mapsui.Samples.Common.Maps
         {
             var map = new Map
             {
-                Limiter =
-                {
-                    ZoomMode = ZoomMode.KeepWithinResolutionsAndAlwaysFillViewport,
-                    PanMode = PanMode.KeepViewportWithinExtents
-                }
+                Limiter = new ViewportLimiterKeepWithin()
             };
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
             return map;

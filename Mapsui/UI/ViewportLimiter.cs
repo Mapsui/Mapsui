@@ -30,7 +30,7 @@ namespace Mapsui.UI
         /// <summary>
         /// Restricts viewport in no way
         /// </summary>
-        None,
+        Unlimited,
         /// <summary>
         /// Restricts center of the viewport within Map.Extents or within MaxExtents when set
         /// </summary>
