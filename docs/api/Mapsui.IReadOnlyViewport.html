@@ -391,7 +391,7 @@ aligned.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">Point ScreenToWorld(Point screenPosition)</code></pre>
+    <pre><code class="lang-csharp hljs">Point ScreenToWorld(Point position)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -405,7 +405,7 @@ aligned.</p>
     <tbody>
       <tr>
         <td><a class="xref" href="Mapsui.Geometries.Point.html">Point</a></td>
-        <td><span class="parametername">screenPosition</span></td>
+        <td><span class="parametername">position</span></td>
         <td><p>Coordinate in map units</p>
 </td>
       </tr>
@@ -564,12 +564,14 @@ respecting rotation</p>
       <tr>
         <td><span class="xref">System.Double</span></td>
         <td><span class="parametername">worldX</span></td>
-        <td></td>
+        <td><p>X coordinate in map units</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.Double</span></td>
         <td><span class="parametername">worldY</span></td>
-        <td></td>
+        <td><p>Y coordinate in map units</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -604,7 +606,7 @@ respecting rotation</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">Point WorldToScreenUnrotated(Point point)</code></pre>
+    <pre><code class="lang-csharp hljs">Point WorldToScreenUnrotated(Point worldPosition)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -618,7 +620,7 @@ respecting rotation</p>
     <tbody>
       <tr>
         <td><a class="xref" href="Mapsui.Geometries.Point.html">Point</a></td>
-        <td><span class="parametername">point</span></td>
+        <td><span class="parametername">worldPosition</span></td>
         <td><p>Coordinate in map units</p>
 </td>
       </tr>
@@ -655,7 +657,7 @@ respecting rotation</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">Point WorldToScreenUnrotated(double x, double y)</code></pre>
+    <pre><code class="lang-csharp hljs">Point WorldToScreenUnrotated(double worldX, double worldY)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -669,13 +671,13 @@ respecting rotation</p>
     <tbody>
       <tr>
         <td><span class="xref">System.Double</span></td>
-        <td><span class="parametername">x</span></td>
+        <td><span class="parametername">worldX</span></td>
         <td><p>X coordinate in map units</p>
 </td>
       </tr>
       <tr>
         <td><span class="xref">System.Double</span></td>
-        <td><span class="parametername">y</span></td>
+        <td><span class="parametername">worldY</span></td>
         <td><p>Y coordinate in map units</p>
 </td>
       </tr>

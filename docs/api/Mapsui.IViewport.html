@@ -362,7 +362,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">void Transform(double screenX, double screenY, double previousScreenX, double previousScreenY, double deltaScale = null, double deltaRotation = null)</code></pre>
+    <pre><code class="lang-csharp hljs">void Transform(double positionX, double positionY, double previousPositionX, double previousPositionY, double deltaResolution = null, double deltaRotation = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -376,31 +376,31 @@
     <tbody>
       <tr>
         <td><span class="xref">System.Double</span></td>
-        <td><span class="parametername">screenX</span></td>
+        <td><span class="parametername">positionX</span></td>
         <td><p>New X position of point</p>
 </td>
       </tr>
       <tr>
         <td><span class="xref">System.Double</span></td>
-        <td><span class="parametername">screenY</span></td>
+        <td><span class="parametername">positionY</span></td>
         <td><p>New Y position of point</p>
 </td>
       </tr>
       <tr>
         <td><span class="xref">System.Double</span></td>
-        <td><span class="parametername">previousScreenX</span></td>
+        <td><span class="parametername">previousPositionX</span></td>
         <td><p>Old X position of point</p>
 </td>
       </tr>
       <tr>
         <td><span class="xref">System.Double</span></td>
-        <td><span class="parametername">previousScreenY</span></td>
+        <td><span class="parametername">previousPositionY</span></td>
         <td><p>Old Y position of point</p>
 </td>
       </tr>
       <tr>
         <td><span class="xref">System.Double</span></td>
-        <td><span class="parametername">deltaScale</span></td>
+        <td><span class="parametername">deltaResolution</span></td>
         <td><p>Change of resolution for transformation (&lt;1: zoom out, &gt;1: zoom in)</p>
 </td>
       </tr>
