@@ -33,9 +33,7 @@ In you sln folder add a .nuget folder and in it a NuGet.Config file with content
   </packageSources>
 </configuration>
 ```
-This way you application knows where to find and other checking out your project will get it to build without further configuration. This is the best option.
-
-**Note**: Only the package of the latest build is available. The older packages are removed. So if you have created a project that refers to a package and someone else checks out after there has been an other build, the project will not build because the nuget package is missing. It is easy to update to the latest package, but it is good to be aware of this.
+This way you application knows where to find the package and when other developers clone your project it works for them too right away. This is the best option.
 
 ## Build your own nuget package
 It is also possible to build you own nuget package locally by running ```scripts\buildpack.bat 1.0.0-beta.1``` from the sln folder. You can set the file location as a Package Source in visual studio.
