@@ -76,4 +76,8 @@
     <ProjectReference Include="..\..\Sample\Mapsui.Samples.CustomWidget\Mapsui.Samples.CustomWidget.csproj" />
   </ItemGroup>
 
+  <PropertyGroup>
+    <DebugType>full</DebugType>
+  </PropertyGroup>
+
 </Project>

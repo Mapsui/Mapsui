@@ -11,4 +11,8 @@
     <Folder Include="Properties\" />
   </ItemGroup>
 
+  <PropertyGroup>
+    <DebugType>full</DebugType>
+  </PropertyGroup>
+
 </Project>
