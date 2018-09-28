@@ -153,7 +153,10 @@ namespace Mapsui.UI.Wpf
         }
 
         [Obsolete("Use Viewport.ViewportChanged", true)]
+        // ReSharper disable once UnusedMember.Global
+#pragma warning disable 67
         public event EventHandler<ViewChangedEventArgs> ViewChanged;
+#pragma warning restore 67
 
         public event EventHandler<FeatureInfoEventArgs> FeatureInfo; // todo: Remove and add sample for alternative
 
