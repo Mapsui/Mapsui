@@ -5,9 +5,11 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>NuGet of Latest Build </title>
+    <title>Namespace ConcurrentCollections
+   </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="NuGet of Latest Build ">
+    <meta name="title" content="Namespace ConcurrentCollections
+   ">
     <meta name="generator" content="docfx 2.39.2.0">
     
     <link rel="shortcut icon" href="../images/favicon.ico">
@@ -66,32 +68,18 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="">
-<h1 id="nuget-of-latest-build">NuGet of Latest Build</h1>
-
-<p>On every commit the build server is triggered which publishes a NuGet package of that build. It&#39;s version number is the current version of the master branch followed by a dot and the build number. The package is not published to nuget.org but to a AppVeyor feed. You need to add this feed to be able to install the package to your project. There are three ways to add this feed to your environment.</p>
-<h2 id="package-manager-console">Package Manager Console</h2>
-<pre><code>nuget install-package mapsui -source https://ci.appveyor.com/nuget/mapsui -pre
-</code></pre><h2 id="add-the-feed-in-visual-studio">Add the feed in Visual Studio</h2>
-<p>Add the feed in tools | options | nuget | package sources </p>
-<p><a href="https://ci.appveyor.com/nuget/mapsui">https://ci.appveyor.com/nuget/mapsui</a> </p>
-<p>And under &#39;manage nuget packages&#39; select this as source on the top right.</p>
-<h2 id="add-a-nugetnugetconfig-xml">Add a .nuget\NuGet.Config xml</h2>
-<p>In you sln folder add a .nuget folder and in it a NuGet.Config file with content:</p>
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-
-&lt;configuration&gt;
-  &lt;solution&gt;
-    &lt;add key=&quot;disableSourceControlIntegration&quot; value=&quot;true&quot; /&gt;
-  &lt;/solution&gt;
-  &lt;packageSources&gt;
-    &lt;add key=&quot;AppVeyor&quot; value=&quot;https://ci.appveyor.com/nuget/mapsui &quot; /&gt;
-    &lt;add key=&quot;nuget.org&quot; value=&quot;https://www.nuget.org/api/v2/&quot; /&gt;
-  &lt;/packageSources&gt;
-&lt;/configuration&gt;
-</code></pre><p>This way you application knows where to find the package and when other developers clone your project it works for them too right away. This is the best option.</p>
-<h2 id="build-your-own-nuget-package">Build your own nuget package</h2>
-<p>It is also possible to build you own nuget package locally by running <code>scripts\buildpack.bat 1.0.0-beta.1</code> from the sln folder. You can set the file location as a Package Source in visual studio.</p>
+            <article class="content wrap" id="_content" data-uid="ConcurrentCollections">
+  
+  <h1 id="ConcurrentCollections" data-uid="ConcurrentCollections" class="text-break">Namespace ConcurrentCollections
+  </h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="markdown level0 remarks"></div>
+    <h3 id="classes">Classes
+  </h3>
+      <h4><a class="xref" href="ConcurrentCollections.ConcurrentHashSet-1.html">ConcurrentHashSet&lt;T&gt;</a></h4>
+      <section><p>Represents a thread-safe hash-based unique collection.</p>
+</section>
 </article>
           </div>
           
@@ -99,9 +87,6 @@
             <div class="sideaffix">
               <div class="contribution">
                 <ul class="nav">
-                  <li>
-                    <a href="https://github.com/Mapsui/Mapsui/blob/master/docfx/documentation/NuGet-of-latest-build.md/#L1" class="contribution-link">Improve this Doc</a>
-                  </li>
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">

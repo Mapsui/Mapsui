@@ -26,6 +26,210 @@ references:
   isSpec: "True"
   fullName: BruTile.ExtentExtensions.ToBoundingBox
   nameWithType: ExtentExtensions.ToBoundingBox
+- uid: ConcurrentCollections
+  name: ConcurrentCollections
+  href: api/ConcurrentCollections.html
+  commentId: N:ConcurrentCollections
+  fullName: ConcurrentCollections
+  nameWithType: ConcurrentCollections
+- uid: ConcurrentCollections.ConcurrentHashSet`1
+  name: ConcurrentHashSet<T>
+  href: api/ConcurrentCollections.ConcurrentHashSet-1.html
+  commentId: T:ConcurrentCollections.ConcurrentHashSet`1
+  name.vb: ConcurrentHashSet(Of T)
+  fullName: ConcurrentCollections.ConcurrentHashSet<T>
+  fullName.vb: ConcurrentCollections.ConcurrentHashSet(Of T)
+  nameWithType: ConcurrentHashSet<T>
+  nameWithType.vb: ConcurrentHashSet(Of T)
+- uid: ConcurrentCollections.ConcurrentHashSet`1.#ctor
+  name: ConcurrentHashSet()
+  href: api/ConcurrentCollections.ConcurrentHashSet-1.html#ConcurrentCollections_ConcurrentHashSet_1__ctor
+  commentId: M:ConcurrentCollections.ConcurrentHashSet`1.#ctor
+  fullName: ConcurrentCollections.ConcurrentHashSet<T>.ConcurrentHashSet()
+  fullName.vb: ConcurrentCollections.ConcurrentHashSet(Of T).ConcurrentHashSet()
+  nameWithType: ConcurrentHashSet<T>.ConcurrentHashSet()
+  nameWithType.vb: ConcurrentHashSet(Of T).ConcurrentHashSet()
+- uid: ConcurrentCollections.ConcurrentHashSet`1.#ctor(IEnumerable{`0})
+  name: ConcurrentHashSet(IEnumerable<T>)
+  href: api/ConcurrentCollections.ConcurrentHashSet-1.html#ConcurrentCollections_ConcurrentHashSet_1__ctor_IEnumerable__0__
+  commentId: M:ConcurrentCollections.ConcurrentHashSet`1.#ctor(IEnumerable{`0})
+  name.vb: ConcurrentHashSet(IEnumerable(Of T))
+  fullName: ConcurrentCollections.ConcurrentHashSet<T>.ConcurrentHashSet(IEnumerable<T>)
+  fullName.vb: ConcurrentCollections.ConcurrentHashSet(Of T).ConcurrentHashSet(IEnumerable(Of T))
+  nameWithType: ConcurrentHashSet<T>.ConcurrentHashSet(IEnumerable<T>)
+  nameWithType.vb: ConcurrentHashSet(Of T).ConcurrentHashSet(IEnumerable(Of T))
+- uid: ConcurrentCollections.ConcurrentHashSet`1.#ctor(IEnumerable{`0},IEqualityComparer{`0})
+  name: ConcurrentHashSet(IEnumerable<T>, IEqualityComparer<T>)
+  href: api/ConcurrentCollections.ConcurrentHashSet-1.html#ConcurrentCollections_ConcurrentHashSet_1__ctor_IEnumerable__0__IEqualityComparer__0__
+  commentId: M:ConcurrentCollections.ConcurrentHashSet`1.#ctor(IEnumerable{`0},IEqualityComparer{`0})
+  name.vb: ConcurrentHashSet(IEnumerable(Of T), IEqualityComparer(Of T))
+  fullName: ConcurrentCollections.ConcurrentHashSet<T>.ConcurrentHashSet(IEnumerable<T>, IEqualityComparer<T>)
+  fullName.vb: ConcurrentCollections.ConcurrentHashSet(Of T).ConcurrentHashSet(IEnumerable(Of T), IEqualityComparer(Of T))
+  nameWithType: ConcurrentHashSet<T>.ConcurrentHashSet(IEnumerable<T>, IEqualityComparer<T>)
+  nameWithType.vb: ConcurrentHashSet(Of T).ConcurrentHashSet(IEnumerable(Of T), IEqualityComparer(Of T))
+- uid: ConcurrentCollections.ConcurrentHashSet`1.#ctor(IEqualityComparer{`0})
+  name: ConcurrentHashSet(IEqualityComparer<T>)
+  href: api/ConcurrentCollections.ConcurrentHashSet-1.html#ConcurrentCollections_ConcurrentHashSet_1__ctor_IEqualityComparer__0__
+  commentId: M:ConcurrentCollections.ConcurrentHashSet`1.#ctor(IEqualityComparer{`0})
+  name.vb: ConcurrentHashSet(IEqualityComparer(Of T))
+  fullName: ConcurrentCollections.ConcurrentHashSet<T>.ConcurrentHashSet(IEqualityComparer<T>)
+  fullName.vb: ConcurrentCollections.ConcurrentHashSet(Of T).ConcurrentHashSet(IEqualityComparer(Of T))
+  nameWithType: ConcurrentHashSet<T>.ConcurrentHashSet(IEqualityComparer<T>)
+  nameWithType.vb: ConcurrentHashSet(Of T).ConcurrentHashSet(IEqualityComparer(Of T))
+- uid: ConcurrentCollections.ConcurrentHashSet`1.#ctor(System.Int32,IEnumerable{`0},IEqualityComparer{`0})
+  name: ConcurrentHashSet(Int32, IEnumerable<T>, IEqualityComparer<T>)
+  href: api/ConcurrentCollections.ConcurrentHashSet-1.html#ConcurrentCollections_ConcurrentHashSet_1__ctor_System_Int32_IEnumerable__0__IEqualityComparer__0__
+  commentId: M:ConcurrentCollections.ConcurrentHashSet`1.#ctor(System.Int32,IEnumerable{`0},IEqualityComparer{`0})
+  name.vb: ConcurrentHashSet(Int32, IEnumerable(Of T), IEqualityComparer(Of T))
+  fullName: ConcurrentCollections.ConcurrentHashSet<T>.ConcurrentHashSet(System.Int32, IEnumerable<T>, IEqualityComparer<T>)
+  fullName.vb: ConcurrentCollections.ConcurrentHashSet(Of T).ConcurrentHashSet(System.Int32, IEnumerable(Of T), IEqualityComparer(Of T))
+  nameWithType: ConcurrentHashSet<T>.ConcurrentHashSet(Int32, IEnumerable<T>, IEqualityComparer<T>)
+  nameWithType.vb: ConcurrentHashSet(Of T).ConcurrentHashSet(Int32, IEnumerable(Of T), IEqualityComparer(Of T))
+- uid: ConcurrentCollections.ConcurrentHashSet`1.#ctor(System.Int32,System.Int32)
+  name: ConcurrentHashSet(Int32, Int32)
+  href: api/ConcurrentCollections.ConcurrentHashSet-1.html#ConcurrentCollections_ConcurrentHashSet_1__ctor_System_Int32_System_Int32_
+  commentId: M:ConcurrentCollections.ConcurrentHashSet`1.#ctor(System.Int32,System.Int32)
+  fullName: ConcurrentCollections.ConcurrentHashSet<T>.ConcurrentHashSet(System.Int32, System.Int32)
+  fullName.vb: ConcurrentCollections.ConcurrentHashSet(Of T).ConcurrentHashSet(System.Int32, System.Int32)
+  nameWithType: ConcurrentHashSet<T>.ConcurrentHashSet(Int32, Int32)
+  nameWithType.vb: ConcurrentHashSet(Of T).ConcurrentHashSet(Int32, Int32)
+- uid: ConcurrentCollections.ConcurrentHashSet`1.#ctor(System.Int32,System.Int32,IEqualityComparer{`0})
+  name: ConcurrentHashSet(Int32, Int32, IEqualityComparer<T>)
+  href: api/ConcurrentCollections.ConcurrentHashSet-1.html#ConcurrentCollections_ConcurrentHashSet_1__ctor_System_Int32_System_Int32_IEqualityComparer__0__
+  commentId: M:ConcurrentCollections.ConcurrentHashSet`1.#ctor(System.Int32,System.Int32,IEqualityComparer{`0})
+  name.vb: ConcurrentHashSet(Int32, Int32, IEqualityComparer(Of T))
+  fullName: ConcurrentCollections.ConcurrentHashSet<T>.ConcurrentHashSet(System.Int32, System.Int32, IEqualityComparer<T>)
+  fullName.vb: ConcurrentCollections.ConcurrentHashSet(Of T).ConcurrentHashSet(System.Int32, System.Int32, IEqualityComparer(Of T))
+  nameWithType: ConcurrentHashSet<T>.ConcurrentHashSet(Int32, Int32, IEqualityComparer<T>)
+  nameWithType.vb: ConcurrentHashSet(Of T).ConcurrentHashSet(Int32, Int32, IEqualityComparer(Of T))
+- uid: ConcurrentCollections.ConcurrentHashSet`1.#ctor*
+  name: ConcurrentHashSet
+  href: api/ConcurrentCollections.ConcurrentHashSet-1.html#ConcurrentCollections_ConcurrentHashSet_1__ctor_
+  commentId: Overload:ConcurrentCollections.ConcurrentHashSet`1.#ctor
+  isSpec: "True"
+  fullName: ConcurrentCollections.ConcurrentHashSet<T>.ConcurrentHashSet
+  fullName.vb: ConcurrentCollections.ConcurrentHashSet(Of T).ConcurrentHashSet
+  nameWithType: ConcurrentHashSet<T>.ConcurrentHashSet
+  nameWithType.vb: ConcurrentHashSet(Of T).ConcurrentHashSet
+- uid: ConcurrentCollections.ConcurrentHashSet`1.Add(`0)
+  name: Add(T)
+  href: api/ConcurrentCollections.ConcurrentHashSet-1.html#ConcurrentCollections_ConcurrentHashSet_1_Add__0_
+  commentId: M:ConcurrentCollections.ConcurrentHashSet`1.Add(`0)
+  fullName: ConcurrentCollections.ConcurrentHashSet<T>.Add(T)
+  fullName.vb: ConcurrentCollections.ConcurrentHashSet(Of T).Add(T)
+  nameWithType: ConcurrentHashSet<T>.Add(T)
+  nameWithType.vb: ConcurrentHashSet(Of T).Add(T)
+- uid: ConcurrentCollections.ConcurrentHashSet`1.Add*
+  name: Add
+  href: api/ConcurrentCollections.ConcurrentHashSet-1.html#ConcurrentCollections_ConcurrentHashSet_1_Add_
+  commentId: Overload:ConcurrentCollections.ConcurrentHashSet`1.Add
+  isSpec: "True"
+  fullName: ConcurrentCollections.ConcurrentHashSet<T>.Add
+  fullName.vb: ConcurrentCollections.ConcurrentHashSet(Of T).Add
+  nameWithType: ConcurrentHashSet<T>.Add
+  nameWithType.vb: ConcurrentHashSet(Of T).Add
+- uid: ConcurrentCollections.ConcurrentHashSet`1.Clear
+  name: Clear()
+  href: api/ConcurrentCollections.ConcurrentHashSet-1.html#ConcurrentCollections_ConcurrentHashSet_1_Clear
+  commentId: M:ConcurrentCollections.ConcurrentHashSet`1.Clear
+  fullName: ConcurrentCollections.ConcurrentHashSet<T>.Clear()
+  fullName.vb: ConcurrentCollections.ConcurrentHashSet(Of T).Clear()
+  nameWithType: ConcurrentHashSet<T>.Clear()
+  nameWithType.vb: ConcurrentHashSet(Of T).Clear()
+- uid: ConcurrentCollections.ConcurrentHashSet`1.Clear*
+  name: Clear
+  href: api/ConcurrentCollections.ConcurrentHashSet-1.html#ConcurrentCollections_ConcurrentHashSet_1_Clear_
+  commentId: Overload:ConcurrentCollections.ConcurrentHashSet`1.Clear
+  isSpec: "True"
+  fullName: ConcurrentCollections.ConcurrentHashSet<T>.Clear
+  fullName.vb: ConcurrentCollections.ConcurrentHashSet(Of T).Clear
+  nameWithType: ConcurrentHashSet<T>.Clear
+  nameWithType.vb: ConcurrentHashSet(Of T).Clear
+- uid: ConcurrentCollections.ConcurrentHashSet`1.Contains(`0)
+  name: Contains(T)
+  href: api/ConcurrentCollections.ConcurrentHashSet-1.html#ConcurrentCollections_ConcurrentHashSet_1_Contains__0_
+  commentId: M:ConcurrentCollections.ConcurrentHashSet`1.Contains(`0)
+  fullName: ConcurrentCollections.ConcurrentHashSet<T>.Contains(T)
+  fullName.vb: ConcurrentCollections.ConcurrentHashSet(Of T).Contains(T)
+  nameWithType: ConcurrentHashSet<T>.Contains(T)
+  nameWithType.vb: ConcurrentHashSet(Of T).Contains(T)
+- uid: ConcurrentCollections.ConcurrentHashSet`1.Contains*
+  name: Contains
+  href: api/ConcurrentCollections.ConcurrentHashSet-1.html#ConcurrentCollections_ConcurrentHashSet_1_Contains_
+  commentId: Overload:ConcurrentCollections.ConcurrentHashSet`1.Contains
+  isSpec: "True"
+  fullName: ConcurrentCollections.ConcurrentHashSet<T>.Contains
+  fullName.vb: ConcurrentCollections.ConcurrentHashSet(Of T).Contains
+  nameWithType: ConcurrentHashSet<T>.Contains
+  nameWithType.vb: ConcurrentHashSet(Of T).Contains
+- uid: ConcurrentCollections.ConcurrentHashSet`1.Count
+  name: Count
+  href: api/ConcurrentCollections.ConcurrentHashSet-1.html#ConcurrentCollections_ConcurrentHashSet_1_Count
+  commentId: P:ConcurrentCollections.ConcurrentHashSet`1.Count
+  fullName: ConcurrentCollections.ConcurrentHashSet<T>.Count
+  fullName.vb: ConcurrentCollections.ConcurrentHashSet(Of T).Count
+  nameWithType: ConcurrentHashSet<T>.Count
+  nameWithType.vb: ConcurrentHashSet(Of T).Count
+- uid: ConcurrentCollections.ConcurrentHashSet`1.Count*
+  name: Count
+  href: api/ConcurrentCollections.ConcurrentHashSet-1.html#ConcurrentCollections_ConcurrentHashSet_1_Count_
+  commentId: Overload:ConcurrentCollections.ConcurrentHashSet`1.Count
+  isSpec: "True"
+  fullName: ConcurrentCollections.ConcurrentHashSet<T>.Count
+  fullName.vb: ConcurrentCollections.ConcurrentHashSet(Of T).Count
+  nameWithType: ConcurrentHashSet<T>.Count
+  nameWithType.vb: ConcurrentHashSet(Of T).Count
+- uid: ConcurrentCollections.ConcurrentHashSet`1.GetEnumerator
+  name: GetEnumerator()
+  href: api/ConcurrentCollections.ConcurrentHashSet-1.html#ConcurrentCollections_ConcurrentHashSet_1_GetEnumerator
+  commentId: M:ConcurrentCollections.ConcurrentHashSet`1.GetEnumerator
+  fullName: ConcurrentCollections.ConcurrentHashSet<T>.GetEnumerator()
+  fullName.vb: ConcurrentCollections.ConcurrentHashSet(Of T).GetEnumerator()
+  nameWithType: ConcurrentHashSet<T>.GetEnumerator()
+  nameWithType.vb: ConcurrentHashSet(Of T).GetEnumerator()
+- uid: ConcurrentCollections.ConcurrentHashSet`1.GetEnumerator*
+  name: GetEnumerator
+  href: api/ConcurrentCollections.ConcurrentHashSet-1.html#ConcurrentCollections_ConcurrentHashSet_1_GetEnumerator_
+  commentId: Overload:ConcurrentCollections.ConcurrentHashSet`1.GetEnumerator
+  isSpec: "True"
+  fullName: ConcurrentCollections.ConcurrentHashSet<T>.GetEnumerator
+  fullName.vb: ConcurrentCollections.ConcurrentHashSet(Of T).GetEnumerator
+  nameWithType: ConcurrentHashSet<T>.GetEnumerator
+  nameWithType.vb: ConcurrentHashSet(Of T).GetEnumerator
+- uid: ConcurrentCollections.ConcurrentHashSet`1.IsEmpty
+  name: IsEmpty
+  href: api/ConcurrentCollections.ConcurrentHashSet-1.html#ConcurrentCollections_ConcurrentHashSet_1_IsEmpty
+  commentId: P:ConcurrentCollections.ConcurrentHashSet`1.IsEmpty
+  fullName: ConcurrentCollections.ConcurrentHashSet<T>.IsEmpty
+  fullName.vb: ConcurrentCollections.ConcurrentHashSet(Of T).IsEmpty
+  nameWithType: ConcurrentHashSet<T>.IsEmpty
+  nameWithType.vb: ConcurrentHashSet(Of T).IsEmpty
+- uid: ConcurrentCollections.ConcurrentHashSet`1.IsEmpty*
+  name: IsEmpty
+  href: api/ConcurrentCollections.ConcurrentHashSet-1.html#ConcurrentCollections_ConcurrentHashSet_1_IsEmpty_
+  commentId: Overload:ConcurrentCollections.ConcurrentHashSet`1.IsEmpty
+  isSpec: "True"
+  fullName: ConcurrentCollections.ConcurrentHashSet<T>.IsEmpty
+  fullName.vb: ConcurrentCollections.ConcurrentHashSet(Of T).IsEmpty
+  nameWithType: ConcurrentHashSet<T>.IsEmpty
+  nameWithType.vb: ConcurrentHashSet(Of T).IsEmpty
+- uid: ConcurrentCollections.ConcurrentHashSet`1.TryRemove(`0)
+  name: TryRemove(T)
+  href: api/ConcurrentCollections.ConcurrentHashSet-1.html#ConcurrentCollections_ConcurrentHashSet_1_TryRemove__0_
+  commentId: M:ConcurrentCollections.ConcurrentHashSet`1.TryRemove(`0)
+  fullName: ConcurrentCollections.ConcurrentHashSet<T>.TryRemove(T)
+  fullName.vb: ConcurrentCollections.ConcurrentHashSet(Of T).TryRemove(T)
+  nameWithType: ConcurrentHashSet<T>.TryRemove(T)
+  nameWithType.vb: ConcurrentHashSet(Of T).TryRemove(T)
+- uid: ConcurrentCollections.ConcurrentHashSet`1.TryRemove*
+  name: TryRemove
+  href: api/ConcurrentCollections.ConcurrentHashSet-1.html#ConcurrentCollections_ConcurrentHashSet_1_TryRemove_
+  commentId: Overload:ConcurrentCollections.ConcurrentHashSet`1.TryRemove
+  isSpec: "True"
+  fullName: ConcurrentCollections.ConcurrentHashSet<T>.TryRemove
+  fullName.vb: ConcurrentCollections.ConcurrentHashSet(Of T).TryRemove
+  nameWithType: ConcurrentHashSet<T>.TryRemove
+  nameWithType.vb: ConcurrentHashSet(Of T).TryRemove
 - uid: Mapsui
   name: Mapsui
   href: api/Mapsui.html
