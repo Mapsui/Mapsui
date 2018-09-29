@@ -137,8 +137,6 @@ namespace Mapsui.UI
 
                 if (MapWidthSpansViewport(maxExtent.Width, viewport.Width, viewport.Resolution)) // if it doesn't fit don't restrict
                 {
-                    //if ((viewport.Extent.Left < maxExtent.Left) && (viewport.Extent.Right > maxExtent.Right))
-                    //    throw new Exception();
                     if (viewport.Extent.Left < maxExtent.Left)
                         x  += maxExtent.Left - viewport.Extent.Left;
                     if (viewport.Extent.Right > maxExtent.Right)
@@ -148,8 +146,6 @@ namespace Mapsui.UI
                 var y = viewport.Center.Y;
                 if (MapHeightSpansViewport(maxExtent.Height, viewport.Height, viewport.Resolution)) // if it doesn't fit don't restrict
                 {
-                    //if ((viewport.Extent.Top> maxExtent.Top) && (viewport.Extent.Bottom < maxExtent.Bottom))
-                    //    throw new Exception();
                     if (viewport.Extent.Top > maxExtent.Top)
                         y += maxExtent.Top - viewport.Extent.Top;
                     if (viewport.Extent.Bottom < maxExtent.Bottom)
