@@ -1,21 +1,10 @@
 ﻿using System.Collections.Generic;
 using Mapsui.Geometries;
-using Mapsui.UI;
 
-namespace Mapsui
+namespace Mapsui.UI
 {
     public interface IViewportLimiter
     {
-        /// <summary>
-        /// Pan mode to use, when map is paned
-        /// </summary>
-        PanMode PanMode { get; set; }
-
-        /// <summary>
-        /// Zoom mode to use, when map is zoomed
-        /// </summary>
-        ZoomMode ZoomMode { get; set; }
-
         /// <summary>
         /// Set this property in combination KeepCenterWithinExtents or KeepViewportWithinExtents.
         /// If PanLimits is not set, Map.Extent will be used as restricted extent.

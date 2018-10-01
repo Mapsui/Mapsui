@@ -111,10 +111,6 @@ namespace Mapsui.UI.Wpf
             };
         }
         
-        private bool IsInBoxZoomMode { get; set; }
-
-        public bool ZoomToBoxMode { get; set; }
-
         public Canvas WpfCanvas { get; } = CreateWpfRenderCanvas();
 
         private SKElement SkiaCanvas { get; } = CreateSkiaRenderElement();
@@ -161,7 +157,10 @@ namespace Mapsui.UI.Wpf
         }
 
         [Obsolete("Use Viewport.ViewportChanged", true)]
+        // ReSharper disable once UnusedMember.Global
+#pragma warning disable 67
         public event EventHandler<ViewChangedEventArgs> ViewChanged;
+#pragma warning restore 67
 
         public event EventHandler<FeatureInfoEventArgs> FeatureInfo; // todo: Remove and add sample for alternative
 
@@ -307,27 +306,29 @@ namespace Mapsui.UI.Wpf
             _downMousePosition = touchPosition;
             _mouseDown = true;
             CaptureMouse();
-            IsInBoxZoomMode = Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl);
 
-            if (!IsInBoxZoomMode && !ZoomToBoxMode)
+            if (!IsInBoxZoomMode())
             {
                 if (IsClick(_currentMousePosition, _downMousePosition))
                 {
                     HandleFeatureInfo(e);
-                    OnInfo(InvokeInfo(Map.Layers.Where(l => l.IsMapInfoLayer), Map.Widgets, Viewport, 
+                    OnInfo(InvokeInfo(Map.Layers.Where(l => l.IsMapInfoLayer), Map.Widgets, Viewport,
                         touchPosition, _downMousePosition, Renderer.SymbolCache, WidgetTouched, e.ClickCount));
                 }
             }
+        }
+
+        private static bool IsInBoxZoomMode()
+        {
+            return Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl);
         }
 
         private void MapControlMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             var mousePosition = e.GetPosition(this).ToMapsui();
 
-            if (IsInBoxZoomMode || ZoomToBoxMode)
+            if (IsInBoxZoomMode())
             {
-                ZoomToBoxMode = false;
-                
                 var previous = Viewport.ScreenToWorld(_previousMousePosition.X, _previousMousePosition.Y);
                 var current = Viewport.ScreenToWorld(mousePosition.X, mousePosition.Y);
                 ZoomToBox(previous, current);
@@ -386,7 +387,7 @@ namespace Mapsui.UI.Wpf
 
         private void MapControlMouseMove(object sender, MouseEventArgs e)
         {
-            if (IsInBoxZoomMode || ZoomToBoxMode)
+            if (IsInBoxZoomMode())
             {
                 DrawBbox(e.GetPosition(this));
                 return;

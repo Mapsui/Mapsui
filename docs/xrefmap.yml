@@ -26,6 +26,210 @@ references:
   isSpec: "True"
   fullName: BruTile.ExtentExtensions.ToBoundingBox
   nameWithType: ExtentExtensions.ToBoundingBox
+- uid: ConcurrentCollections
+  name: ConcurrentCollections
+  href: api/ConcurrentCollections.html
+  commentId: N:ConcurrentCollections
+  fullName: ConcurrentCollections
+  nameWithType: ConcurrentCollections
+- uid: ConcurrentCollections.ConcurrentHashSet`1
+  name: ConcurrentHashSet<T>
+  href: api/ConcurrentCollections.ConcurrentHashSet-1.html
+  commentId: T:ConcurrentCollections.ConcurrentHashSet`1
+  name.vb: ConcurrentHashSet(Of T)
+  fullName: ConcurrentCollections.ConcurrentHashSet<T>
+  fullName.vb: ConcurrentCollections.ConcurrentHashSet(Of T)
+  nameWithType: ConcurrentHashSet<T>
+  nameWithType.vb: ConcurrentHashSet(Of T)
+- uid: ConcurrentCollections.ConcurrentHashSet`1.#ctor
+  name: ConcurrentHashSet()
+  href: api/ConcurrentCollections.ConcurrentHashSet-1.html#ConcurrentCollections_ConcurrentHashSet_1__ctor
+  commentId: M:ConcurrentCollections.ConcurrentHashSet`1.#ctor
+  fullName: ConcurrentCollections.ConcurrentHashSet<T>.ConcurrentHashSet()
+  fullName.vb: ConcurrentCollections.ConcurrentHashSet(Of T).ConcurrentHashSet()
+  nameWithType: ConcurrentHashSet<T>.ConcurrentHashSet()
+  nameWithType.vb: ConcurrentHashSet(Of T).ConcurrentHashSet()
+- uid: ConcurrentCollections.ConcurrentHashSet`1.#ctor(IEnumerable{`0})
+  name: ConcurrentHashSet(IEnumerable<T>)
+  href: api/ConcurrentCollections.ConcurrentHashSet-1.html#ConcurrentCollections_ConcurrentHashSet_1__ctor_IEnumerable__0__
+  commentId: M:ConcurrentCollections.ConcurrentHashSet`1.#ctor(IEnumerable{`0})
+  name.vb: ConcurrentHashSet(IEnumerable(Of T))
+  fullName: ConcurrentCollections.ConcurrentHashSet<T>.ConcurrentHashSet(IEnumerable<T>)
+  fullName.vb: ConcurrentCollections.ConcurrentHashSet(Of T).ConcurrentHashSet(IEnumerable(Of T))
+  nameWithType: ConcurrentHashSet<T>.ConcurrentHashSet(IEnumerable<T>)
+  nameWithType.vb: ConcurrentHashSet(Of T).ConcurrentHashSet(IEnumerable(Of T))
+- uid: ConcurrentCollections.ConcurrentHashSet`1.#ctor(IEnumerable{`0},IEqualityComparer{`0})
+  name: ConcurrentHashSet(IEnumerable<T>, IEqualityComparer<T>)
+  href: api/ConcurrentCollections.ConcurrentHashSet-1.html#ConcurrentCollections_ConcurrentHashSet_1__ctor_IEnumerable__0__IEqualityComparer__0__
+  commentId: M:ConcurrentCollections.ConcurrentHashSet`1.#ctor(IEnumerable{`0},IEqualityComparer{`0})
+  name.vb: ConcurrentHashSet(IEnumerable(Of T), IEqualityComparer(Of T))
+  fullName: ConcurrentCollections.ConcurrentHashSet<T>.ConcurrentHashSet(IEnumerable<T>, IEqualityComparer<T>)
+  fullName.vb: ConcurrentCollections.ConcurrentHashSet(Of T).ConcurrentHashSet(IEnumerable(Of T), IEqualityComparer(Of T))
+  nameWithType: ConcurrentHashSet<T>.ConcurrentHashSet(IEnumerable<T>, IEqualityComparer<T>)
+  nameWithType.vb: ConcurrentHashSet(Of T).ConcurrentHashSet(IEnumerable(Of T), IEqualityComparer(Of T))
+- uid: ConcurrentCollections.ConcurrentHashSet`1.#ctor(IEqualityComparer{`0})
+  name: ConcurrentHashSet(IEqualityComparer<T>)
+  href: api/ConcurrentCollections.ConcurrentHashSet-1.html#ConcurrentCollections_ConcurrentHashSet_1__ctor_IEqualityComparer__0__
+  commentId: M:ConcurrentCollections.ConcurrentHashSet`1.#ctor(IEqualityComparer{`0})
+  name.vb: ConcurrentHashSet(IEqualityComparer(Of T))
+  fullName: ConcurrentCollections.ConcurrentHashSet<T>.ConcurrentHashSet(IEqualityComparer<T>)
+  fullName.vb: ConcurrentCollections.ConcurrentHashSet(Of T).ConcurrentHashSet(IEqualityComparer(Of T))
+  nameWithType: ConcurrentHashSet<T>.ConcurrentHashSet(IEqualityComparer<T>)
+  nameWithType.vb: ConcurrentHashSet(Of T).ConcurrentHashSet(IEqualityComparer(Of T))
+- uid: ConcurrentCollections.ConcurrentHashSet`1.#ctor(System.Int32,IEnumerable{`0},IEqualityComparer{`0})
+  name: ConcurrentHashSet(Int32, IEnumerable<T>, IEqualityComparer<T>)
+  href: api/ConcurrentCollections.ConcurrentHashSet-1.html#ConcurrentCollections_ConcurrentHashSet_1__ctor_System_Int32_IEnumerable__0__IEqualityComparer__0__
+  commentId: M:ConcurrentCollections.ConcurrentHashSet`1.#ctor(System.Int32,IEnumerable{`0},IEqualityComparer{`0})
+  name.vb: ConcurrentHashSet(Int32, IEnumerable(Of T), IEqualityComparer(Of T))
+  fullName: ConcurrentCollections.ConcurrentHashSet<T>.ConcurrentHashSet(System.Int32, IEnumerable<T>, IEqualityComparer<T>)
+  fullName.vb: ConcurrentCollections.ConcurrentHashSet(Of T).ConcurrentHashSet(System.Int32, IEnumerable(Of T), IEqualityComparer(Of T))
+  nameWithType: ConcurrentHashSet<T>.ConcurrentHashSet(Int32, IEnumerable<T>, IEqualityComparer<T>)
+  nameWithType.vb: ConcurrentHashSet(Of T).ConcurrentHashSet(Int32, IEnumerable(Of T), IEqualityComparer(Of T))
+- uid: ConcurrentCollections.ConcurrentHashSet`1.#ctor(System.Int32,System.Int32)
+  name: ConcurrentHashSet(Int32, Int32)
+  href: api/ConcurrentCollections.ConcurrentHashSet-1.html#ConcurrentCollections_ConcurrentHashSet_1__ctor_System_Int32_System_Int32_
+  commentId: M:ConcurrentCollections.ConcurrentHashSet`1.#ctor(System.Int32,System.Int32)
+  fullName: ConcurrentCollections.ConcurrentHashSet<T>.ConcurrentHashSet(System.Int32, System.Int32)
+  fullName.vb: ConcurrentCollections.ConcurrentHashSet(Of T).ConcurrentHashSet(System.Int32, System.Int32)
+  nameWithType: ConcurrentHashSet<T>.ConcurrentHashSet(Int32, Int32)
+  nameWithType.vb: ConcurrentHashSet(Of T).ConcurrentHashSet(Int32, Int32)
+- uid: ConcurrentCollections.ConcurrentHashSet`1.#ctor(System.Int32,System.Int32,IEqualityComparer{`0})
+  name: ConcurrentHashSet(Int32, Int32, IEqualityComparer<T>)
+  href: api/ConcurrentCollections.ConcurrentHashSet-1.html#ConcurrentCollections_ConcurrentHashSet_1__ctor_System_Int32_System_Int32_IEqualityComparer__0__
+  commentId: M:ConcurrentCollections.ConcurrentHashSet`1.#ctor(System.Int32,System.Int32,IEqualityComparer{`0})
+  name.vb: ConcurrentHashSet(Int32, Int32, IEqualityComparer(Of T))
+  fullName: ConcurrentCollections.ConcurrentHashSet<T>.ConcurrentHashSet(System.Int32, System.Int32, IEqualityComparer<T>)
+  fullName.vb: ConcurrentCollections.ConcurrentHashSet(Of T).ConcurrentHashSet(System.Int32, System.Int32, IEqualityComparer(Of T))
+  nameWithType: ConcurrentHashSet<T>.ConcurrentHashSet(Int32, Int32, IEqualityComparer<T>)
+  nameWithType.vb: ConcurrentHashSet(Of T).ConcurrentHashSet(Int32, Int32, IEqualityComparer(Of T))
+- uid: ConcurrentCollections.ConcurrentHashSet`1.#ctor*
+  name: ConcurrentHashSet
+  href: api/ConcurrentCollections.ConcurrentHashSet-1.html#ConcurrentCollections_ConcurrentHashSet_1__ctor_
+  commentId: Overload:ConcurrentCollections.ConcurrentHashSet`1.#ctor
+  isSpec: "True"
+  fullName: ConcurrentCollections.ConcurrentHashSet<T>.ConcurrentHashSet
+  fullName.vb: ConcurrentCollections.ConcurrentHashSet(Of T).ConcurrentHashSet
+  nameWithType: ConcurrentHashSet<T>.ConcurrentHashSet
+  nameWithType.vb: ConcurrentHashSet(Of T).ConcurrentHashSet
+- uid: ConcurrentCollections.ConcurrentHashSet`1.Add(`0)
+  name: Add(T)
+  href: api/ConcurrentCollections.ConcurrentHashSet-1.html#ConcurrentCollections_ConcurrentHashSet_1_Add__0_
+  commentId: M:ConcurrentCollections.ConcurrentHashSet`1.Add(`0)
+  fullName: ConcurrentCollections.ConcurrentHashSet<T>.Add(T)
+  fullName.vb: ConcurrentCollections.ConcurrentHashSet(Of T).Add(T)
+  nameWithType: ConcurrentHashSet<T>.Add(T)
+  nameWithType.vb: ConcurrentHashSet(Of T).Add(T)
+- uid: ConcurrentCollections.ConcurrentHashSet`1.Add*
+  name: Add
+  href: api/ConcurrentCollections.ConcurrentHashSet-1.html#ConcurrentCollections_ConcurrentHashSet_1_Add_
+  commentId: Overload:ConcurrentCollections.ConcurrentHashSet`1.Add
+  isSpec: "True"
+  fullName: ConcurrentCollections.ConcurrentHashSet<T>.Add
+  fullName.vb: ConcurrentCollections.ConcurrentHashSet(Of T).Add
+  nameWithType: ConcurrentHashSet<T>.Add
+  nameWithType.vb: ConcurrentHashSet(Of T).Add
+- uid: ConcurrentCollections.ConcurrentHashSet`1.Clear
+  name: Clear()
+  href: api/ConcurrentCollections.ConcurrentHashSet-1.html#ConcurrentCollections_ConcurrentHashSet_1_Clear
+  commentId: M:ConcurrentCollections.ConcurrentHashSet`1.Clear
+  fullName: ConcurrentCollections.ConcurrentHashSet<T>.Clear()
+  fullName.vb: ConcurrentCollections.ConcurrentHashSet(Of T).Clear()
+  nameWithType: ConcurrentHashSet<T>.Clear()
+  nameWithType.vb: ConcurrentHashSet(Of T).Clear()
+- uid: ConcurrentCollections.ConcurrentHashSet`1.Clear*
+  name: Clear
+  href: api/ConcurrentCollections.ConcurrentHashSet-1.html#ConcurrentCollections_ConcurrentHashSet_1_Clear_
+  commentId: Overload:ConcurrentCollections.ConcurrentHashSet`1.Clear
+  isSpec: "True"
+  fullName: ConcurrentCollections.ConcurrentHashSet<T>.Clear
+  fullName.vb: ConcurrentCollections.ConcurrentHashSet(Of T).Clear
+  nameWithType: ConcurrentHashSet<T>.Clear
+  nameWithType.vb: ConcurrentHashSet(Of T).Clear
+- uid: ConcurrentCollections.ConcurrentHashSet`1.Contains(`0)
+  name: Contains(T)
+  href: api/ConcurrentCollections.ConcurrentHashSet-1.html#ConcurrentCollections_ConcurrentHashSet_1_Contains__0_
+  commentId: M:ConcurrentCollections.ConcurrentHashSet`1.Contains(`0)
+  fullName: ConcurrentCollections.ConcurrentHashSet<T>.Contains(T)
+  fullName.vb: ConcurrentCollections.ConcurrentHashSet(Of T).Contains(T)
+  nameWithType: ConcurrentHashSet<T>.Contains(T)
+  nameWithType.vb: ConcurrentHashSet(Of T).Contains(T)
+- uid: ConcurrentCollections.ConcurrentHashSet`1.Contains*
+  name: Contains
+  href: api/ConcurrentCollections.ConcurrentHashSet-1.html#ConcurrentCollections_ConcurrentHashSet_1_Contains_
+  commentId: Overload:ConcurrentCollections.ConcurrentHashSet`1.Contains
+  isSpec: "True"
+  fullName: ConcurrentCollections.ConcurrentHashSet<T>.Contains
+  fullName.vb: ConcurrentCollections.ConcurrentHashSet(Of T).Contains
+  nameWithType: ConcurrentHashSet<T>.Contains
+  nameWithType.vb: ConcurrentHashSet(Of T).Contains
+- uid: ConcurrentCollections.ConcurrentHashSet`1.Count
+  name: Count
+  href: api/ConcurrentCollections.ConcurrentHashSet-1.html#ConcurrentCollections_ConcurrentHashSet_1_Count
+  commentId: P:ConcurrentCollections.ConcurrentHashSet`1.Count
+  fullName: ConcurrentCollections.ConcurrentHashSet<T>.Count
+  fullName.vb: ConcurrentCollections.ConcurrentHashSet(Of T).Count
+  nameWithType: ConcurrentHashSet<T>.Count
+  nameWithType.vb: ConcurrentHashSet(Of T).Count
+- uid: ConcurrentCollections.ConcurrentHashSet`1.Count*
+  name: Count
+  href: api/ConcurrentCollections.ConcurrentHashSet-1.html#ConcurrentCollections_ConcurrentHashSet_1_Count_
+  commentId: Overload:ConcurrentCollections.ConcurrentHashSet`1.Count
+  isSpec: "True"
+  fullName: ConcurrentCollections.ConcurrentHashSet<T>.Count
+  fullName.vb: ConcurrentCollections.ConcurrentHashSet(Of T).Count
+  nameWithType: ConcurrentHashSet<T>.Count
+  nameWithType.vb: ConcurrentHashSet(Of T).Count
+- uid: ConcurrentCollections.ConcurrentHashSet`1.GetEnumerator
+  name: GetEnumerator()
+  href: api/ConcurrentCollections.ConcurrentHashSet-1.html#ConcurrentCollections_ConcurrentHashSet_1_GetEnumerator
+  commentId: M:ConcurrentCollections.ConcurrentHashSet`1.GetEnumerator
+  fullName: ConcurrentCollections.ConcurrentHashSet<T>.GetEnumerator()
+  fullName.vb: ConcurrentCollections.ConcurrentHashSet(Of T).GetEnumerator()
+  nameWithType: ConcurrentHashSet<T>.GetEnumerator()
+  nameWithType.vb: ConcurrentHashSet(Of T).GetEnumerator()
+- uid: ConcurrentCollections.ConcurrentHashSet`1.GetEnumerator*
+  name: GetEnumerator
+  href: api/ConcurrentCollections.ConcurrentHashSet-1.html#ConcurrentCollections_ConcurrentHashSet_1_GetEnumerator_
+  commentId: Overload:ConcurrentCollections.ConcurrentHashSet`1.GetEnumerator
+  isSpec: "True"
+  fullName: ConcurrentCollections.ConcurrentHashSet<T>.GetEnumerator
+  fullName.vb: ConcurrentCollections.ConcurrentHashSet(Of T).GetEnumerator
+  nameWithType: ConcurrentHashSet<T>.GetEnumerator
+  nameWithType.vb: ConcurrentHashSet(Of T).GetEnumerator
+- uid: ConcurrentCollections.ConcurrentHashSet`1.IsEmpty
+  name: IsEmpty
+  href: api/ConcurrentCollections.ConcurrentHashSet-1.html#ConcurrentCollections_ConcurrentHashSet_1_IsEmpty
+  commentId: P:ConcurrentCollections.ConcurrentHashSet`1.IsEmpty
+  fullName: ConcurrentCollections.ConcurrentHashSet<T>.IsEmpty
+  fullName.vb: ConcurrentCollections.ConcurrentHashSet(Of T).IsEmpty
+  nameWithType: ConcurrentHashSet<T>.IsEmpty
+  nameWithType.vb: ConcurrentHashSet(Of T).IsEmpty
+- uid: ConcurrentCollections.ConcurrentHashSet`1.IsEmpty*
+  name: IsEmpty
+  href: api/ConcurrentCollections.ConcurrentHashSet-1.html#ConcurrentCollections_ConcurrentHashSet_1_IsEmpty_
+  commentId: Overload:ConcurrentCollections.ConcurrentHashSet`1.IsEmpty
+  isSpec: "True"
+  fullName: ConcurrentCollections.ConcurrentHashSet<T>.IsEmpty
+  fullName.vb: ConcurrentCollections.ConcurrentHashSet(Of T).IsEmpty
+  nameWithType: ConcurrentHashSet<T>.IsEmpty
+  nameWithType.vb: ConcurrentHashSet(Of T).IsEmpty
+- uid: ConcurrentCollections.ConcurrentHashSet`1.TryRemove(`0)
+  name: TryRemove(T)
+  href: api/ConcurrentCollections.ConcurrentHashSet-1.html#ConcurrentCollections_ConcurrentHashSet_1_TryRemove__0_
+  commentId: M:ConcurrentCollections.ConcurrentHashSet`1.TryRemove(`0)
+  fullName: ConcurrentCollections.ConcurrentHashSet<T>.TryRemove(T)
+  fullName.vb: ConcurrentCollections.ConcurrentHashSet(Of T).TryRemove(T)
+  nameWithType: ConcurrentHashSet<T>.TryRemove(T)
+  nameWithType.vb: ConcurrentHashSet(Of T).TryRemove(T)
+- uid: ConcurrentCollections.ConcurrentHashSet`1.TryRemove*
+  name: TryRemove
+  href: api/ConcurrentCollections.ConcurrentHashSet-1.html#ConcurrentCollections_ConcurrentHashSet_1_TryRemove_
+  commentId: Overload:ConcurrentCollections.ConcurrentHashSet`1.TryRemove
+  isSpec: "True"
+  fullName: ConcurrentCollections.ConcurrentHashSet<T>.TryRemove
+  fullName.vb: ConcurrentCollections.ConcurrentHashSet(Of T).TryRemove
+  nameWithType: ConcurrentHashSet<T>.TryRemove
+  nameWithType.vb: ConcurrentHashSet(Of T).TryRemove
 - uid: Mapsui
   name: Mapsui
   href: api/Mapsui.html
@@ -6231,6 +6435,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.LimitedViewport.IsRotated
   nameWithType: LimitedViewport.IsRotated
+- uid: Mapsui.LimitedViewport.Limiter
+  name: Limiter
+  href: api/Mapsui.LimitedViewport.html#Mapsui_LimitedViewport_Limiter
+  commentId: P:Mapsui.LimitedViewport.Limiter
+  fullName: Mapsui.LimitedViewport.Limiter
+  nameWithType: LimitedViewport.Limiter
+- uid: Mapsui.LimitedViewport.Limiter*
+  name: Limiter
+  href: api/Mapsui.LimitedViewport.html#Mapsui_LimitedViewport_Limiter_
+  commentId: Overload:Mapsui.LimitedViewport.Limiter
+  isSpec: "True"
+  fullName: Mapsui.LimitedViewport.Limiter
+  nameWithType: LimitedViewport.Limiter
 - uid: Mapsui.LimitedViewport.Map
   name: Map
   href: api/Mapsui.LimitedViewport.html#Mapsui_LimitedViewport_Map
@@ -6658,19 +6875,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.Map.Layers
   nameWithType: Map.Layers
-- uid: Mapsui.Map.Limits
-  name: Limits
-  href: api/Mapsui.Map.html#Mapsui_Map_Limits
-  commentId: P:Mapsui.Map.Limits
-  fullName: Mapsui.Map.Limits
-  nameWithType: Map.Limits
-- uid: Mapsui.Map.Limits*
-  name: Limits
-  href: api/Mapsui.Map.html#Mapsui_Map_Limits_
-  commentId: Overload:Mapsui.Map.Limits
+- uid: Mapsui.Map.Limiter
+  name: Limiter
+  href: api/Mapsui.Map.html#Mapsui_Map_Limiter
+  commentId: P:Mapsui.Map.Limiter
+  fullName: Mapsui.Map.Limiter
+  nameWithType: Map.Limiter
+- uid: Mapsui.Map.Limiter*
+  name: Limiter
+  href: api/Mapsui.Map.html#Mapsui_Map_Limiter_
+  commentId: Overload:Mapsui.Map.Limiter
   isSpec: "True"
-  fullName: Mapsui.Map.Limits
-  nameWithType: Map.Limits
+  fullName: Mapsui.Map.Limiter
+  nameWithType: Map.Limiter
 - uid: Mapsui.Map.PropertyChanged
   name: PropertyChanged
   href: api/Mapsui.Map.html#Mapsui_Map_PropertyChanged
@@ -21336,64 +21553,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.HoveredEventArgs.ScreenPosition
   nameWithType: HoveredEventArgs.ScreenPosition
-- uid: Mapsui.UI.ILimits
-  name: ILimits
-  href: api/Mapsui.UI.ILimits.html
-  commentId: T:Mapsui.UI.ILimits
-  fullName: Mapsui.UI.ILimits
-  nameWithType: ILimits
-- uid: Mapsui.UI.ILimits.PanLimits
-  name: PanLimits
-  href: api/Mapsui.UI.ILimits.html#Mapsui_UI_ILimits_PanLimits
-  commentId: P:Mapsui.UI.ILimits.PanLimits
-  fullName: Mapsui.UI.ILimits.PanLimits
-  nameWithType: ILimits.PanLimits
-- uid: Mapsui.UI.ILimits.PanLimits*
-  name: PanLimits
-  href: api/Mapsui.UI.ILimits.html#Mapsui_UI_ILimits_PanLimits_
-  commentId: Overload:Mapsui.UI.ILimits.PanLimits
-  isSpec: "True"
-  fullName: Mapsui.UI.ILimits.PanLimits
-  nameWithType: ILimits.PanLimits
-- uid: Mapsui.UI.ILimits.PanMode
-  name: PanMode
-  href: api/Mapsui.UI.ILimits.html#Mapsui_UI_ILimits_PanMode
-  commentId: P:Mapsui.UI.ILimits.PanMode
-  fullName: Mapsui.UI.ILimits.PanMode
-  nameWithType: ILimits.PanMode
-- uid: Mapsui.UI.ILimits.PanMode*
-  name: PanMode
-  href: api/Mapsui.UI.ILimits.html#Mapsui_UI_ILimits_PanMode_
-  commentId: Overload:Mapsui.UI.ILimits.PanMode
-  isSpec: "True"
-  fullName: Mapsui.UI.ILimits.PanMode
-  nameWithType: ILimits.PanMode
-- uid: Mapsui.UI.ILimits.ZoomLimits
-  name: ZoomLimits
-  href: api/Mapsui.UI.ILimits.html#Mapsui_UI_ILimits_ZoomLimits
-  commentId: P:Mapsui.UI.ILimits.ZoomLimits
-  fullName: Mapsui.UI.ILimits.ZoomLimits
-  nameWithType: ILimits.ZoomLimits
-- uid: Mapsui.UI.ILimits.ZoomLimits*
-  name: ZoomLimits
-  href: api/Mapsui.UI.ILimits.html#Mapsui_UI_ILimits_ZoomLimits_
-  commentId: Overload:Mapsui.UI.ILimits.ZoomLimits
-  isSpec: "True"
-  fullName: Mapsui.UI.ILimits.ZoomLimits
-  nameWithType: ILimits.ZoomLimits
-- uid: Mapsui.UI.ILimits.ZoomMode
-  name: ZoomMode
-  href: api/Mapsui.UI.ILimits.html#Mapsui_UI_ILimits_ZoomMode
-  commentId: P:Mapsui.UI.ILimits.ZoomMode
-  fullName: Mapsui.UI.ILimits.ZoomMode
-  nameWithType: ILimits.ZoomMode
-- uid: Mapsui.UI.ILimits.ZoomMode*
-  name: ZoomMode
-  href: api/Mapsui.UI.ILimits.html#Mapsui_UI_ILimits_ZoomMode_
-  commentId: Overload:Mapsui.UI.ILimits.ZoomMode
-  isSpec: "True"
-  fullName: Mapsui.UI.ILimits.ZoomMode
-  nameWithType: ILimits.ZoomMode
 - uid: Mapsui.UI.IMapControl
   name: IMapControl
   href: api/Mapsui.UI.IMapControl.html
@@ -22258,64 +22417,83 @@ references:
   commentId: E:Mapsui.UI.iOS.MapHelper.TouchUp
   fullName: Mapsui.UI.iOS.MapHelper.TouchUp
   nameWithType: MapHelper.TouchUp
-- uid: Mapsui.UI.Limits
-  name: Limits
-  href: api/Mapsui.UI.Limits.html
-  commentId: T:Mapsui.UI.Limits
-  fullName: Mapsui.UI.Limits
-  nameWithType: Limits
-- uid: Mapsui.UI.Limits.PanLimits
+- uid: Mapsui.UI.IViewportLimiter
+  name: IViewportLimiter
+  href: api/Mapsui.UI.IViewportLimiter.html
+  commentId: T:Mapsui.UI.IViewportLimiter
+  fullName: Mapsui.UI.IViewportLimiter
+  nameWithType: IViewportLimiter
+- uid: Mapsui.UI.IViewportLimiter.Limit(Mapsui.IViewport,IReadOnlyList{System.Double},Mapsui.Geometries.BoundingBox)
+  name: Limit(IViewport, IReadOnlyList<Double>, BoundingBox)
+  href: api/Mapsui.UI.IViewportLimiter.html#Mapsui_UI_IViewportLimiter_Limit_Mapsui_IViewport_IReadOnlyList_System_Double__Mapsui_Geometries_BoundingBox_
+  commentId: M:Mapsui.UI.IViewportLimiter.Limit(Mapsui.IViewport,IReadOnlyList{System.Double},Mapsui.Geometries.BoundingBox)
+  name.vb: Limit(IViewport, IReadOnlyList(Of Double), BoundingBox)
+  fullName: Mapsui.UI.IViewportLimiter.Limit(Mapsui.IViewport, IReadOnlyList<System.Double>, Mapsui.Geometries.BoundingBox)
+  fullName.vb: Mapsui.UI.IViewportLimiter.Limit(Mapsui.IViewport, IReadOnlyList(Of System.Double), Mapsui.Geometries.BoundingBox)
+  nameWithType: IViewportLimiter.Limit(IViewport, IReadOnlyList<Double>, BoundingBox)
+  nameWithType.vb: IViewportLimiter.Limit(IViewport, IReadOnlyList(Of Double), BoundingBox)
+- uid: Mapsui.UI.IViewportLimiter.Limit*
+  name: Limit
+  href: api/Mapsui.UI.IViewportLimiter.html#Mapsui_UI_IViewportLimiter_Limit_
+  commentId: Overload:Mapsui.UI.IViewportLimiter.Limit
+  isSpec: "True"
+  fullName: Mapsui.UI.IViewportLimiter.Limit
+  nameWithType: IViewportLimiter.Limit
+- uid: Mapsui.UI.IViewportLimiter.LimitExtent(Mapsui.IViewport,Mapsui.Geometries.BoundingBox)
+  name: LimitExtent(IViewport, BoundingBox)
+  href: api/Mapsui.UI.IViewportLimiter.html#Mapsui_UI_IViewportLimiter_LimitExtent_Mapsui_IViewport_Mapsui_Geometries_BoundingBox_
+  commentId: M:Mapsui.UI.IViewportLimiter.LimitExtent(Mapsui.IViewport,Mapsui.Geometries.BoundingBox)
+  fullName: Mapsui.UI.IViewportLimiter.LimitExtent(Mapsui.IViewport, Mapsui.Geometries.BoundingBox)
+  nameWithType: IViewportLimiter.LimitExtent(IViewport, BoundingBox)
+- uid: Mapsui.UI.IViewportLimiter.LimitExtent*
+  name: LimitExtent
+  href: api/Mapsui.UI.IViewportLimiter.html#Mapsui_UI_IViewportLimiter_LimitExtent_
+  commentId: Overload:Mapsui.UI.IViewportLimiter.LimitExtent
+  isSpec: "True"
+  fullName: Mapsui.UI.IViewportLimiter.LimitExtent
+  nameWithType: IViewportLimiter.LimitExtent
+- uid: Mapsui.UI.IViewportLimiter.LimitResolution(System.Double,System.Double,System.Double,IReadOnlyList{System.Double},Mapsui.Geometries.BoundingBox)
+  name: LimitResolution(Double, Double, Double, IReadOnlyList<Double>, BoundingBox)
+  href: api/Mapsui.UI.IViewportLimiter.html#Mapsui_UI_IViewportLimiter_LimitResolution_System_Double_System_Double_System_Double_IReadOnlyList_System_Double__Mapsui_Geometries_BoundingBox_
+  commentId: M:Mapsui.UI.IViewportLimiter.LimitResolution(System.Double,System.Double,System.Double,IReadOnlyList{System.Double},Mapsui.Geometries.BoundingBox)
+  name.vb: LimitResolution(Double, Double, Double, IReadOnlyList(Of Double), BoundingBox)
+  fullName: Mapsui.UI.IViewportLimiter.LimitResolution(System.Double, System.Double, System.Double, IReadOnlyList<System.Double>, Mapsui.Geometries.BoundingBox)
+  fullName.vb: Mapsui.UI.IViewportLimiter.LimitResolution(System.Double, System.Double, System.Double, IReadOnlyList(Of System.Double), Mapsui.Geometries.BoundingBox)
+  nameWithType: IViewportLimiter.LimitResolution(Double, Double, Double, IReadOnlyList<Double>, BoundingBox)
+  nameWithType.vb: IViewportLimiter.LimitResolution(Double, Double, Double, IReadOnlyList(Of Double), BoundingBox)
+- uid: Mapsui.UI.IViewportLimiter.LimitResolution*
+  name: LimitResolution
+  href: api/Mapsui.UI.IViewportLimiter.html#Mapsui_UI_IViewportLimiter_LimitResolution_
+  commentId: Overload:Mapsui.UI.IViewportLimiter.LimitResolution
+  isSpec: "True"
+  fullName: Mapsui.UI.IViewportLimiter.LimitResolution
+  nameWithType: IViewportLimiter.LimitResolution
+- uid: Mapsui.UI.IViewportLimiter.PanLimits
   name: PanLimits
-  href: api/Mapsui.UI.Limits.html#Mapsui_UI_Limits_PanLimits
-  commentId: P:Mapsui.UI.Limits.PanLimits
-  fullName: Mapsui.UI.Limits.PanLimits
-  nameWithType: Limits.PanLimits
-- uid: Mapsui.UI.Limits.PanLimits*
+  href: api/Mapsui.UI.IViewportLimiter.html#Mapsui_UI_IViewportLimiter_PanLimits
+  commentId: P:Mapsui.UI.IViewportLimiter.PanLimits
+  fullName: Mapsui.UI.IViewportLimiter.PanLimits
+  nameWithType: IViewportLimiter.PanLimits
+- uid: Mapsui.UI.IViewportLimiter.PanLimits*
   name: PanLimits
-  href: api/Mapsui.UI.Limits.html#Mapsui_UI_Limits_PanLimits_
-  commentId: Overload:Mapsui.UI.Limits.PanLimits
+  href: api/Mapsui.UI.IViewportLimiter.html#Mapsui_UI_IViewportLimiter_PanLimits_
+  commentId: Overload:Mapsui.UI.IViewportLimiter.PanLimits
   isSpec: "True"
-  fullName: Mapsui.UI.Limits.PanLimits
-  nameWithType: Limits.PanLimits
-- uid: Mapsui.UI.Limits.PanMode
-  name: PanMode
-  href: api/Mapsui.UI.Limits.html#Mapsui_UI_Limits_PanMode
-  commentId: P:Mapsui.UI.Limits.PanMode
-  fullName: Mapsui.UI.Limits.PanMode
-  nameWithType: Limits.PanMode
-- uid: Mapsui.UI.Limits.PanMode*
-  name: PanMode
-  href: api/Mapsui.UI.Limits.html#Mapsui_UI_Limits_PanMode_
-  commentId: Overload:Mapsui.UI.Limits.PanMode
-  isSpec: "True"
-  fullName: Mapsui.UI.Limits.PanMode
-  nameWithType: Limits.PanMode
-- uid: Mapsui.UI.Limits.ZoomLimits
+  fullName: Mapsui.UI.IViewportLimiter.PanLimits
+  nameWithType: IViewportLimiter.PanLimits
+- uid: Mapsui.UI.IViewportLimiter.ZoomLimits
   name: ZoomLimits
-  href: api/Mapsui.UI.Limits.html#Mapsui_UI_Limits_ZoomLimits
-  commentId: P:Mapsui.UI.Limits.ZoomLimits
-  fullName: Mapsui.UI.Limits.ZoomLimits
-  nameWithType: Limits.ZoomLimits
-- uid: Mapsui.UI.Limits.ZoomLimits*
+  href: api/Mapsui.UI.IViewportLimiter.html#Mapsui_UI_IViewportLimiter_ZoomLimits
+  commentId: P:Mapsui.UI.IViewportLimiter.ZoomLimits
+  fullName: Mapsui.UI.IViewportLimiter.ZoomLimits
+  nameWithType: IViewportLimiter.ZoomLimits
+- uid: Mapsui.UI.IViewportLimiter.ZoomLimits*
   name: ZoomLimits
-  href: api/Mapsui.UI.Limits.html#Mapsui_UI_Limits_ZoomLimits_
-  commentId: Overload:Mapsui.UI.Limits.ZoomLimits
+  href: api/Mapsui.UI.IViewportLimiter.html#Mapsui_UI_IViewportLimiter_ZoomLimits_
+  commentId: Overload:Mapsui.UI.IViewportLimiter.ZoomLimits
   isSpec: "True"
-  fullName: Mapsui.UI.Limits.ZoomLimits
-  nameWithType: Limits.ZoomLimits
-- uid: Mapsui.UI.Limits.ZoomMode
-  name: ZoomMode
-  href: api/Mapsui.UI.Limits.html#Mapsui_UI_Limits_ZoomMode
-  commentId: P:Mapsui.UI.Limits.ZoomMode
-  fullName: Mapsui.UI.Limits.ZoomMode
-  nameWithType: Limits.ZoomMode
-- uid: Mapsui.UI.Limits.ZoomMode*
-  name: ZoomMode
-  href: api/Mapsui.UI.Limits.html#Mapsui_UI_Limits_ZoomMode_
-  commentId: Overload:Mapsui.UI.Limits.ZoomMode
-  isSpec: "True"
-  fullName: Mapsui.UI.Limits.ZoomMode
-  nameWithType: Limits.ZoomMode
+  fullName: Mapsui.UI.IViewportLimiter.ZoomLimits
+  nameWithType: IViewportLimiter.ZoomLimits
 - uid: Mapsui.UI.MapInfo
   name: MapInfo
   href: api/Mapsui.UI.MapInfo.html
@@ -22517,12 +22695,12 @@ references:
   commentId: F:Mapsui.UI.PanMode.KeepViewportWithinExtents
   fullName: Mapsui.UI.PanMode.KeepViewportWithinExtents
   nameWithType: PanMode.KeepViewportWithinExtents
-- uid: Mapsui.UI.PanMode.None
-  name: None
-  href: api/Mapsui.UI.PanMode.html#Mapsui_UI_PanMode_None
-  commentId: F:Mapsui.UI.PanMode.None
-  fullName: Mapsui.UI.PanMode.None
-  nameWithType: PanMode.None
+- uid: Mapsui.UI.PanMode.Unlimited
+  name: Unlimited
+  href: api/Mapsui.UI.PanMode.html#Mapsui_UI_PanMode_Unlimited
+  commentId: F:Mapsui.UI.PanMode.Unlimited
+  fullName: Mapsui.UI.PanMode.Unlimited
+  nameWithType: PanMode.Unlimited
 - uid: Mapsui.UI.SwipedEventArgs
   name: SwipedEventArgs
   href: api/Mapsui.UI.SwipedEventArgs.html
@@ -22813,31 +22991,15 @@ references:
   commentId: T:Mapsui.UI.ViewportLimiter
   fullName: Mapsui.UI.ViewportLimiter
   nameWithType: ViewportLimiter
-- uid: Mapsui.UI.ViewportLimiter.GetExtremes(IReadOnlyList{System.Double})
-  name: GetExtremes(IReadOnlyList<Double>)
-  href: api/Mapsui.UI.ViewportLimiter.html#Mapsui_UI_ViewportLimiter_GetExtremes_IReadOnlyList_System_Double__
-  commentId: M:Mapsui.UI.ViewportLimiter.GetExtremes(IReadOnlyList{System.Double})
-  name.vb: GetExtremes(IReadOnlyList(Of Double))
-  fullName: Mapsui.UI.ViewportLimiter.GetExtremes(IReadOnlyList<System.Double>)
-  fullName.vb: Mapsui.UI.ViewportLimiter.GetExtremes(IReadOnlyList(Of System.Double))
-  nameWithType: ViewportLimiter.GetExtremes(IReadOnlyList<Double>)
-  nameWithType.vb: ViewportLimiter.GetExtremes(IReadOnlyList(Of Double))
-- uid: Mapsui.UI.ViewportLimiter.GetExtremes*
-  name: GetExtremes
-  href: api/Mapsui.UI.ViewportLimiter.html#Mapsui_UI_ViewportLimiter_GetExtremes_
-  commentId: Overload:Mapsui.UI.ViewportLimiter.GetExtremes
-  isSpec: "True"
-  fullName: Mapsui.UI.ViewportLimiter.GetExtremes
-  nameWithType: ViewportLimiter.GetExtremes
-- uid: Mapsui.UI.ViewportLimiter.Limit(Mapsui.IViewport,Mapsui.UI.ZoomMode,Mapsui.UI.MinMax,IReadOnlyList{System.Double},Mapsui.UI.PanMode,Mapsui.Geometries.BoundingBox,Mapsui.Geometries.BoundingBox)
-  name: Limit(IViewport, ZoomMode, MinMax, IReadOnlyList<Double>, PanMode, BoundingBox, BoundingBox)
-  href: api/Mapsui.UI.ViewportLimiter.html#Mapsui_UI_ViewportLimiter_Limit_Mapsui_IViewport_Mapsui_UI_ZoomMode_Mapsui_UI_MinMax_IReadOnlyList_System_Double__Mapsui_UI_PanMode_Mapsui_Geometries_BoundingBox_Mapsui_Geometries_BoundingBox_
-  commentId: M:Mapsui.UI.ViewportLimiter.Limit(Mapsui.IViewport,Mapsui.UI.ZoomMode,Mapsui.UI.MinMax,IReadOnlyList{System.Double},Mapsui.UI.PanMode,Mapsui.Geometries.BoundingBox,Mapsui.Geometries.BoundingBox)
-  name.vb: Limit(IViewport, ZoomMode, MinMax, IReadOnlyList(Of Double), PanMode, BoundingBox, BoundingBox)
-  fullName: Mapsui.UI.ViewportLimiter.Limit(Mapsui.IViewport, Mapsui.UI.ZoomMode, Mapsui.UI.MinMax, IReadOnlyList<System.Double>, Mapsui.UI.PanMode, Mapsui.Geometries.BoundingBox, Mapsui.Geometries.BoundingBox)
-  fullName.vb: Mapsui.UI.ViewportLimiter.Limit(Mapsui.IViewport, Mapsui.UI.ZoomMode, Mapsui.UI.MinMax, IReadOnlyList(Of System.Double), Mapsui.UI.PanMode, Mapsui.Geometries.BoundingBox, Mapsui.Geometries.BoundingBox)
-  nameWithType: ViewportLimiter.Limit(IViewport, ZoomMode, MinMax, IReadOnlyList<Double>, PanMode, BoundingBox, BoundingBox)
-  nameWithType.vb: ViewportLimiter.Limit(IViewport, ZoomMode, MinMax, IReadOnlyList(Of Double), PanMode, BoundingBox, BoundingBox)
+- uid: Mapsui.UI.ViewportLimiter.Limit(Mapsui.IViewport,IReadOnlyList{System.Double},Mapsui.Geometries.BoundingBox)
+  name: Limit(IViewport, IReadOnlyList<Double>, BoundingBox)
+  href: api/Mapsui.UI.ViewportLimiter.html#Mapsui_UI_ViewportLimiter_Limit_Mapsui_IViewport_IReadOnlyList_System_Double__Mapsui_Geometries_BoundingBox_
+  commentId: M:Mapsui.UI.ViewportLimiter.Limit(Mapsui.IViewport,IReadOnlyList{System.Double},Mapsui.Geometries.BoundingBox)
+  name.vb: Limit(IViewport, IReadOnlyList(Of Double), BoundingBox)
+  fullName: Mapsui.UI.ViewportLimiter.Limit(Mapsui.IViewport, IReadOnlyList<System.Double>, Mapsui.Geometries.BoundingBox)
+  fullName.vb: Mapsui.UI.ViewportLimiter.Limit(Mapsui.IViewport, IReadOnlyList(Of System.Double), Mapsui.Geometries.BoundingBox)
+  nameWithType: ViewportLimiter.Limit(IViewport, IReadOnlyList<Double>, BoundingBox)
+  nameWithType.vb: ViewportLimiter.Limit(IViewport, IReadOnlyList(Of Double), BoundingBox)
 - uid: Mapsui.UI.ViewportLimiter.Limit*
   name: Limit
   href: api/Mapsui.UI.ViewportLimiter.html#Mapsui_UI_ViewportLimiter_Limit_
@@ -22845,12 +23007,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.ViewportLimiter.Limit
   nameWithType: ViewportLimiter.Limit
-- uid: Mapsui.UI.ViewportLimiter.LimitExtent(Mapsui.IViewport,Mapsui.UI.PanMode,Mapsui.Geometries.BoundingBox,Mapsui.Geometries.BoundingBox)
-  name: LimitExtent(IViewport, PanMode, BoundingBox, BoundingBox)
-  href: api/Mapsui.UI.ViewportLimiter.html#Mapsui_UI_ViewportLimiter_LimitExtent_Mapsui_IViewport_Mapsui_UI_PanMode_Mapsui_Geometries_BoundingBox_Mapsui_Geometries_BoundingBox_
-  commentId: M:Mapsui.UI.ViewportLimiter.LimitExtent(Mapsui.IViewport,Mapsui.UI.PanMode,Mapsui.Geometries.BoundingBox,Mapsui.Geometries.BoundingBox)
-  fullName: Mapsui.UI.ViewportLimiter.LimitExtent(Mapsui.IViewport, Mapsui.UI.PanMode, Mapsui.Geometries.BoundingBox, Mapsui.Geometries.BoundingBox)
-  nameWithType: ViewportLimiter.LimitExtent(IViewport, PanMode, BoundingBox, BoundingBox)
+- uid: Mapsui.UI.ViewportLimiter.LimitExtent(Mapsui.IViewport,Mapsui.Geometries.BoundingBox)
+  name: LimitExtent(IViewport, BoundingBox)
+  href: api/Mapsui.UI.ViewportLimiter.html#Mapsui_UI_ViewportLimiter_LimitExtent_Mapsui_IViewport_Mapsui_Geometries_BoundingBox_
+  commentId: M:Mapsui.UI.ViewportLimiter.LimitExtent(Mapsui.IViewport,Mapsui.Geometries.BoundingBox)
+  fullName: Mapsui.UI.ViewportLimiter.LimitExtent(Mapsui.IViewport, Mapsui.Geometries.BoundingBox)
+  nameWithType: ViewportLimiter.LimitExtent(IViewport, BoundingBox)
 - uid: Mapsui.UI.ViewportLimiter.LimitExtent*
   name: LimitExtent
   href: api/Mapsui.UI.ViewportLimiter.html#Mapsui_UI_ViewportLimiter_LimitExtent_
@@ -22858,15 +23020,15 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.ViewportLimiter.LimitExtent
   nameWithType: ViewportLimiter.LimitExtent
-- uid: Mapsui.UI.ViewportLimiter.LimitResolution(System.Double,System.Double,System.Double,Mapsui.UI.ZoomMode,Mapsui.UI.MinMax,IReadOnlyList{System.Double},Mapsui.Geometries.BoundingBox)
-  name: LimitResolution(Double, Double, Double, ZoomMode, MinMax, IReadOnlyList<Double>, BoundingBox)
-  href: api/Mapsui.UI.ViewportLimiter.html#Mapsui_UI_ViewportLimiter_LimitResolution_System_Double_System_Double_System_Double_Mapsui_UI_ZoomMode_Mapsui_UI_MinMax_IReadOnlyList_System_Double__Mapsui_Geometries_BoundingBox_
-  commentId: M:Mapsui.UI.ViewportLimiter.LimitResolution(System.Double,System.Double,System.Double,Mapsui.UI.ZoomMode,Mapsui.UI.MinMax,IReadOnlyList{System.Double},Mapsui.Geometries.BoundingBox)
-  name.vb: LimitResolution(Double, Double, Double, ZoomMode, MinMax, IReadOnlyList(Of Double), BoundingBox)
-  fullName: Mapsui.UI.ViewportLimiter.LimitResolution(System.Double, System.Double, System.Double, Mapsui.UI.ZoomMode, Mapsui.UI.MinMax, IReadOnlyList<System.Double>, Mapsui.Geometries.BoundingBox)
-  fullName.vb: Mapsui.UI.ViewportLimiter.LimitResolution(System.Double, System.Double, System.Double, Mapsui.UI.ZoomMode, Mapsui.UI.MinMax, IReadOnlyList(Of System.Double), Mapsui.Geometries.BoundingBox)
-  nameWithType: ViewportLimiter.LimitResolution(Double, Double, Double, ZoomMode, MinMax, IReadOnlyList<Double>, BoundingBox)
-  nameWithType.vb: ViewportLimiter.LimitResolution(Double, Double, Double, ZoomMode, MinMax, IReadOnlyList(Of Double), BoundingBox)
+- uid: Mapsui.UI.ViewportLimiter.LimitResolution(System.Double,System.Double,System.Double,IReadOnlyList{System.Double},Mapsui.Geometries.BoundingBox)
+  name: LimitResolution(Double, Double, Double, IReadOnlyList<Double>, BoundingBox)
+  href: api/Mapsui.UI.ViewportLimiter.html#Mapsui_UI_ViewportLimiter_LimitResolution_System_Double_System_Double_System_Double_IReadOnlyList_System_Double__Mapsui_Geometries_BoundingBox_
+  commentId: M:Mapsui.UI.ViewportLimiter.LimitResolution(System.Double,System.Double,System.Double,IReadOnlyList{System.Double},Mapsui.Geometries.BoundingBox)
+  name.vb: LimitResolution(Double, Double, Double, IReadOnlyList(Of Double), BoundingBox)
+  fullName: Mapsui.UI.ViewportLimiter.LimitResolution(System.Double, System.Double, System.Double, IReadOnlyList<System.Double>, Mapsui.Geometries.BoundingBox)
+  fullName.vb: Mapsui.UI.ViewportLimiter.LimitResolution(System.Double, System.Double, System.Double, IReadOnlyList(Of System.Double), Mapsui.Geometries.BoundingBox)
+  nameWithType: ViewportLimiter.LimitResolution(Double, Double, Double, IReadOnlyList<Double>, BoundingBox)
+  nameWithType.vb: ViewportLimiter.LimitResolution(Double, Double, Double, IReadOnlyList(Of Double), BoundingBox)
 - uid: Mapsui.UI.ViewportLimiter.LimitResolution*
   name: LimitResolution
   href: api/Mapsui.UI.ViewportLimiter.html#Mapsui_UI_ViewportLimiter_LimitResolution_
@@ -22874,6 +23036,135 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.ViewportLimiter.LimitResolution
   nameWithType: ViewportLimiter.LimitResolution
+- uid: Mapsui.UI.ViewportLimiter.PanLimits
+  name: PanLimits
+  href: api/Mapsui.UI.ViewportLimiter.html#Mapsui_UI_ViewportLimiter_PanLimits
+  commentId: P:Mapsui.UI.ViewportLimiter.PanLimits
+  fullName: Mapsui.UI.ViewportLimiter.PanLimits
+  nameWithType: ViewportLimiter.PanLimits
+- uid: Mapsui.UI.ViewportLimiter.PanLimits*
+  name: PanLimits
+  href: api/Mapsui.UI.ViewportLimiter.html#Mapsui_UI_ViewportLimiter_PanLimits_
+  commentId: Overload:Mapsui.UI.ViewportLimiter.PanLimits
+  isSpec: "True"
+  fullName: Mapsui.UI.ViewportLimiter.PanLimits
+  nameWithType: ViewportLimiter.PanLimits
+- uid: Mapsui.UI.ViewportLimiter.PanMode
+  name: PanMode
+  href: api/Mapsui.UI.ViewportLimiter.html#Mapsui_UI_ViewportLimiter_PanMode
+  commentId: P:Mapsui.UI.ViewportLimiter.PanMode
+  fullName: Mapsui.UI.ViewportLimiter.PanMode
+  nameWithType: ViewportLimiter.PanMode
+- uid: Mapsui.UI.ViewportLimiter.PanMode*
+  name: PanMode
+  href: api/Mapsui.UI.ViewportLimiter.html#Mapsui_UI_ViewportLimiter_PanMode_
+  commentId: Overload:Mapsui.UI.ViewportLimiter.PanMode
+  isSpec: "True"
+  fullName: Mapsui.UI.ViewportLimiter.PanMode
+  nameWithType: ViewportLimiter.PanMode
+- uid: Mapsui.UI.ViewportLimiter.ZoomLimits
+  name: ZoomLimits
+  href: api/Mapsui.UI.ViewportLimiter.html#Mapsui_UI_ViewportLimiter_ZoomLimits
+  commentId: P:Mapsui.UI.ViewportLimiter.ZoomLimits
+  fullName: Mapsui.UI.ViewportLimiter.ZoomLimits
+  nameWithType: ViewportLimiter.ZoomLimits
+- uid: Mapsui.UI.ViewportLimiter.ZoomLimits*
+  name: ZoomLimits
+  href: api/Mapsui.UI.ViewportLimiter.html#Mapsui_UI_ViewportLimiter_ZoomLimits_
+  commentId: Overload:Mapsui.UI.ViewportLimiter.ZoomLimits
+  isSpec: "True"
+  fullName: Mapsui.UI.ViewportLimiter.ZoomLimits
+  nameWithType: ViewportLimiter.ZoomLimits
+- uid: Mapsui.UI.ViewportLimiter.ZoomMode
+  name: ZoomMode
+  href: api/Mapsui.UI.ViewportLimiter.html#Mapsui_UI_ViewportLimiter_ZoomMode
+  commentId: P:Mapsui.UI.ViewportLimiter.ZoomMode
+  fullName: Mapsui.UI.ViewportLimiter.ZoomMode
+  nameWithType: ViewportLimiter.ZoomMode
+- uid: Mapsui.UI.ViewportLimiter.ZoomMode*
+  name: ZoomMode
+  href: api/Mapsui.UI.ViewportLimiter.html#Mapsui_UI_ViewportLimiter_ZoomMode_
+  commentId: Overload:Mapsui.UI.ViewportLimiter.ZoomMode
+  isSpec: "True"
+  fullName: Mapsui.UI.ViewportLimiter.ZoomMode
+  nameWithType: ViewportLimiter.ZoomMode
+- uid: Mapsui.UI.ViewportLimiterKeepWithin
+  name: ViewportLimiterKeepWithin
+  href: api/Mapsui.UI.ViewportLimiterKeepWithin.html
+  commentId: T:Mapsui.UI.ViewportLimiterKeepWithin
+  fullName: Mapsui.UI.ViewportLimiterKeepWithin
+  nameWithType: ViewportLimiterKeepWithin
+- uid: Mapsui.UI.ViewportLimiterKeepWithin.Limit(Mapsui.IViewport,IReadOnlyList{System.Double},Mapsui.Geometries.BoundingBox)
+  name: Limit(IViewport, IReadOnlyList<Double>, BoundingBox)
+  href: api/Mapsui.UI.ViewportLimiterKeepWithin.html#Mapsui_UI_ViewportLimiterKeepWithin_Limit_Mapsui_IViewport_IReadOnlyList_System_Double__Mapsui_Geometries_BoundingBox_
+  commentId: M:Mapsui.UI.ViewportLimiterKeepWithin.Limit(Mapsui.IViewport,IReadOnlyList{System.Double},Mapsui.Geometries.BoundingBox)
+  name.vb: Limit(IViewport, IReadOnlyList(Of Double), BoundingBox)
+  fullName: Mapsui.UI.ViewportLimiterKeepWithin.Limit(Mapsui.IViewport, IReadOnlyList<System.Double>, Mapsui.Geometries.BoundingBox)
+  fullName.vb: Mapsui.UI.ViewportLimiterKeepWithin.Limit(Mapsui.IViewport, IReadOnlyList(Of System.Double), Mapsui.Geometries.BoundingBox)
+  nameWithType: ViewportLimiterKeepWithin.Limit(IViewport, IReadOnlyList<Double>, BoundingBox)
+  nameWithType.vb: ViewportLimiterKeepWithin.Limit(IViewport, IReadOnlyList(Of Double), BoundingBox)
+- uid: Mapsui.UI.ViewportLimiterKeepWithin.Limit*
+  name: Limit
+  href: api/Mapsui.UI.ViewportLimiterKeepWithin.html#Mapsui_UI_ViewportLimiterKeepWithin_Limit_
+  commentId: Overload:Mapsui.UI.ViewportLimiterKeepWithin.Limit
+  isSpec: "True"
+  fullName: Mapsui.UI.ViewportLimiterKeepWithin.Limit
+  nameWithType: ViewportLimiterKeepWithin.Limit
+- uid: Mapsui.UI.ViewportLimiterKeepWithin.LimitExtent(Mapsui.IViewport,Mapsui.Geometries.BoundingBox)
+  name: LimitExtent(IViewport, BoundingBox)
+  href: api/Mapsui.UI.ViewportLimiterKeepWithin.html#Mapsui_UI_ViewportLimiterKeepWithin_LimitExtent_Mapsui_IViewport_Mapsui_Geometries_BoundingBox_
+  commentId: M:Mapsui.UI.ViewportLimiterKeepWithin.LimitExtent(Mapsui.IViewport,Mapsui.Geometries.BoundingBox)
+  fullName: Mapsui.UI.ViewportLimiterKeepWithin.LimitExtent(Mapsui.IViewport, Mapsui.Geometries.BoundingBox)
+  nameWithType: ViewportLimiterKeepWithin.LimitExtent(IViewport, BoundingBox)
+- uid: Mapsui.UI.ViewportLimiterKeepWithin.LimitExtent*
+  name: LimitExtent
+  href: api/Mapsui.UI.ViewportLimiterKeepWithin.html#Mapsui_UI_ViewportLimiterKeepWithin_LimitExtent_
+  commentId: Overload:Mapsui.UI.ViewportLimiterKeepWithin.LimitExtent
+  isSpec: "True"
+  fullName: Mapsui.UI.ViewportLimiterKeepWithin.LimitExtent
+  nameWithType: ViewportLimiterKeepWithin.LimitExtent
+- uid: Mapsui.UI.ViewportLimiterKeepWithin.LimitResolution(System.Double,System.Double,System.Double,IReadOnlyList{System.Double},Mapsui.Geometries.BoundingBox)
+  name: LimitResolution(Double, Double, Double, IReadOnlyList<Double>, BoundingBox)
+  href: api/Mapsui.UI.ViewportLimiterKeepWithin.html#Mapsui_UI_ViewportLimiterKeepWithin_LimitResolution_System_Double_System_Double_System_Double_IReadOnlyList_System_Double__Mapsui_Geometries_BoundingBox_
+  commentId: M:Mapsui.UI.ViewportLimiterKeepWithin.LimitResolution(System.Double,System.Double,System.Double,IReadOnlyList{System.Double},Mapsui.Geometries.BoundingBox)
+  name.vb: LimitResolution(Double, Double, Double, IReadOnlyList(Of Double), BoundingBox)
+  fullName: Mapsui.UI.ViewportLimiterKeepWithin.LimitResolution(System.Double, System.Double, System.Double, IReadOnlyList<System.Double>, Mapsui.Geometries.BoundingBox)
+  fullName.vb: Mapsui.UI.ViewportLimiterKeepWithin.LimitResolution(System.Double, System.Double, System.Double, IReadOnlyList(Of System.Double), Mapsui.Geometries.BoundingBox)
+  nameWithType: ViewportLimiterKeepWithin.LimitResolution(Double, Double, Double, IReadOnlyList<Double>, BoundingBox)
+  nameWithType.vb: ViewportLimiterKeepWithin.LimitResolution(Double, Double, Double, IReadOnlyList(Of Double), BoundingBox)
+- uid: Mapsui.UI.ViewportLimiterKeepWithin.LimitResolution*
+  name: LimitResolution
+  href: api/Mapsui.UI.ViewportLimiterKeepWithin.html#Mapsui_UI_ViewportLimiterKeepWithin_LimitResolution_
+  commentId: Overload:Mapsui.UI.ViewportLimiterKeepWithin.LimitResolution
+  isSpec: "True"
+  fullName: Mapsui.UI.ViewportLimiterKeepWithin.LimitResolution
+  nameWithType: ViewportLimiterKeepWithin.LimitResolution
+- uid: Mapsui.UI.ViewportLimiterKeepWithin.PanLimits
+  name: PanLimits
+  href: api/Mapsui.UI.ViewportLimiterKeepWithin.html#Mapsui_UI_ViewportLimiterKeepWithin_PanLimits
+  commentId: P:Mapsui.UI.ViewportLimiterKeepWithin.PanLimits
+  fullName: Mapsui.UI.ViewportLimiterKeepWithin.PanLimits
+  nameWithType: ViewportLimiterKeepWithin.PanLimits
+- uid: Mapsui.UI.ViewportLimiterKeepWithin.PanLimits*
+  name: PanLimits
+  href: api/Mapsui.UI.ViewportLimiterKeepWithin.html#Mapsui_UI_ViewportLimiterKeepWithin_PanLimits_
+  commentId: Overload:Mapsui.UI.ViewportLimiterKeepWithin.PanLimits
+  isSpec: "True"
+  fullName: Mapsui.UI.ViewportLimiterKeepWithin.PanLimits
+  nameWithType: ViewportLimiterKeepWithin.PanLimits
+- uid: Mapsui.UI.ViewportLimiterKeepWithin.ZoomLimits
+  name: ZoomLimits
+  href: api/Mapsui.UI.ViewportLimiterKeepWithin.html#Mapsui_UI_ViewportLimiterKeepWithin_ZoomLimits
+  commentId: P:Mapsui.UI.ViewportLimiterKeepWithin.ZoomLimits
+  fullName: Mapsui.UI.ViewportLimiterKeepWithin.ZoomLimits
+  nameWithType: ViewportLimiterKeepWithin.ZoomLimits
+- uid: Mapsui.UI.ViewportLimiterKeepWithin.ZoomLimits*
+  name: ZoomLimits
+  href: api/Mapsui.UI.ViewportLimiterKeepWithin.html#Mapsui_UI_ViewportLimiterKeepWithin_ZoomLimits_
+  commentId: Overload:Mapsui.UI.ViewportLimiterKeepWithin.ZoomLimits
+  isSpec: "True"
+  fullName: Mapsui.UI.ViewportLimiterKeepWithin.ZoomLimits
+  nameWithType: ViewportLimiterKeepWithin.ZoomLimits
 - uid: Mapsui.UI.Wpf
   name: Mapsui.UI.Wpf
   href: api/Mapsui.UI.Wpf.html

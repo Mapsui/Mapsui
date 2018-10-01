@@ -3,7 +3,9 @@
 At the moment we are working on Mapsui v2. The core libraries are .NET Standard instead of PCLs. Here are some of the changes that may go into v2.
 
 ### Todo
-- Replace ILayer.Style with an ILayer.Styles of type ICollection<IFeature> which is empty by default
+- PanLock and ZoomLock working on all platforms. 
+- Rework ViewportLimiter 
+- Add Xamarin.Forms MapControl
 
 ### Done
 - Do not derive ILayer from IAsyncDataFetcher.
@@ -26,3 +28,4 @@ At the moment we are working on Mapsui v2. The core libraries are .NET Standard 
 ### Not (Later)
 - Use NTS for Geometries
 - Perhaps add animation in an AnimatedViewport which wraps the actual Viewport.
+- Replace ILayer.Style with an ILayer.Styles of type ICollection<IFeature> which is empty by default

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Mapsui.Geometries;
 
@@ -30,7 +29,7 @@ namespace Mapsui.UI
         /// <summary>
         /// Restricts viewport in no way
         /// </summary>
-        None,
+        Unlimited,
         /// <summary>
         /// Restricts center of the viewport within Map.Extents or within MaxExtents when set
         /// </summary>
@@ -49,15 +48,9 @@ namespace Mapsui.UI
         Unlimited,
         /// <summary>
         /// Restricts zoom of the viewport to ZoomLimits and, if ZoomLimits isn't 
-        /// set, to minimum and maxiumum of Resolutions
+        /// set, to minimum and maximum of Resolutions
         /// </summary>
         KeepWithinResolutions,
-        /// <summary>
-        /// Restricts zoom of the viewport to ZoomLimits and, if ZoomLimits isn't 
-        /// set, to minimum and maxiumum of Resolutions, but fills always the
-        /// complete viewport with map
-        /// </summary>
-        KeepWithinResolutionsAndAlwaysFillViewport
     }
 
     public class ViewportLimiter : IViewportLimiter
@@ -112,25 +105,10 @@ namespace Mapsui.UI
                 if (resolutionExtremes.Min > resolution) return resolutionExtremes.Min;
                 if (resolutionExtremes.Max < resolution) return resolutionExtremes.Max;
             }
-            else if (ZoomMode == ZoomMode.KeepWithinResolutionsAndAlwaysFillViewport)
-            {
-                if (resolutionExtremes.Min > resolution) return resolutionExtremes.Min;
-                
-                // This is the ...AndAlwaysFillViewport part
-                var viewportFillingResolution = CalculateResolutionAtWhichMapFillsViewport(screenWidth, screenHeight, mapEnvelope);
-                if (viewportFillingResolution < resolutionExtremes.Min) return resolution; // Mission impossible. Can't adhere to both restrictions
-                var limit = Math.Min(resolutionExtremes.Max, viewportFillingResolution);
-                if (limit < resolution) return limit;
-            }
 
             return resolution;
         }
-
-        private static double CalculateResolutionAtWhichMapFillsViewport(double screenWidth, double screenHeight, BoundingBox mapEnvelope)
-        {
-            return Math.Min(mapEnvelope.Width / screenWidth, mapEnvelope.Height / screenHeight);
-        }
-
+        
         public void LimitExtent(IViewport viewport, BoundingBox mapEnvelope)
         {
             var maxExtent = PanLimits ?? mapEnvelope;
@@ -157,10 +135,8 @@ namespace Mapsui.UI
             {
                 var x = viewport.Center.X;
 
-                if (MapWidthSpansViewport(maxExtent.Width, viewport.Width, viewport.Resolution)) // if it does't fit don't restrict
+                if (MapWidthSpansViewport(maxExtent.Width, viewport.Width, viewport.Resolution)) // if it doesn't fit don't restrict
                 {
-                    //if ((viewport.Extent.Left < maxExtent.Left) && (viewport.Extent.Right > maxExtent.Right))
-                    //    throw new Exception();
                     if (viewport.Extent.Left < maxExtent.Left)
                         x  += maxExtent.Left - viewport.Extent.Left;
                     if (viewport.Extent.Right > maxExtent.Right)
@@ -168,10 +144,8 @@ namespace Mapsui.UI
                 }
 
                 var y = viewport.Center.Y;
-                if (MapHeightSpansViewport(maxExtent.Height, viewport.Height, viewport.Resolution)) // if it does't fit don't restrict
+                if (MapHeightSpansViewport(maxExtent.Height, viewport.Height, viewport.Resolution)) // if it doesn't fit don't restrict
                 {
-                    //if ((viewport.Extent.Top> maxExtent.Top) && (viewport.Extent.Bottom < maxExtent.Bottom))
-                    //    throw new Exception();
                     if (viewport.Extent.Top > maxExtent.Top)
                         y += maxExtent.Top - viewport.Extent.Top;
                     if (viewport.Extent.Bottom < maxExtent.Bottom)

@@ -1,4 +1,5 @@
 ﻿using Mapsui.Geometries;
+using Mapsui.UI;
 
 namespace Mapsui
 {
@@ -51,7 +52,6 @@ namespace Mapsui
         public void SetResolution(double resolution)
         {
             resolution = Limiter.LimitResolution(resolution, _viewport.Width, _viewport.Height, Map.Resolutions, Map.Envelope);
-
             _viewport.SetResolution(resolution);
         }
 
