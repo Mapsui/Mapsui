@@ -2,6 +2,8 @@
 using Mapsui.Layers;
 using Mapsui.Providers;
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using Mapsui.Geometries;
 using Mapsui.Utilities;
 
@@ -57,6 +59,25 @@ namespace Mapsui.Samples.Common.Maps
             result.Add(result[0]); // close polygon by adding start point.
 
             return result;
+        }
+
+        public class PeriodicTask
+        {
+            public static async Task Run(Action action, TimeSpan period, CancellationToken cancellationToken)
+            {
+                while (!cancellationToken.IsCancellationRequested)
+                {
+                    await Task.Delay(period, cancellationToken);
+
+                    if (!cancellationToken.IsCancellationRequested)
+                        action();
+                }
+            }
+
+            public static Task Run(Action action, TimeSpan period)
+            {
+                return Run(action, period, CancellationToken.None);
+            }
         }
     }
 }
