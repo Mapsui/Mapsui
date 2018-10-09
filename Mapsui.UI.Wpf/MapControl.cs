@@ -383,6 +383,8 @@ namespace Mapsui.UI.Wpf
                 return;
             }
 
+            _currentMousePosition = e.GetPosition(this).ToMapsui(); //Needed for both MouseMove and MouseWheel event
+
             if (_mouseDown && !PanLock)
             {
                 if (_previousMousePosition == null || _previousMousePosition.IsEmpty())
@@ -392,9 +394,7 @@ namespace Mapsui.UI.Wpf
                     // a breakpoint and continuing.
                     return;
                 }
-
-                _currentMousePosition = e.GetPosition(this).ToMapsui(); //Needed for both MouseMove and MouseWheel event
-
+                
                 _viewport.Transform(_currentMousePosition, _previousMousePosition);
                 RefreshGraphics();
 
