@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -7,11 +6,11 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using Mapsui.Logging;
-using Mapsui.Samples.Common.Desktop;
 using Mapsui.Samples.CustomWidget;
 using Mapsui.Samples.Wpf.Utilities;
-using Mapsui.Tests.Common;
 using Mapsui.UI;
+using Mapsui.Samples.Common;
+using Mapsui.Samples.Common.Desktop;
 
 namespace Mapsui.Samples.Wpf
 {
@@ -59,8 +58,11 @@ namespace Mapsui.Samples.Wpf
 
         private void FillComboBoxWithDemoSamples()
         {
+            // todo: find proper way to load assembly
+            WmsSample.MethodToLoadThisAssembly();
+
             SampleList.Children.Clear();
-            foreach (var sample in DemoSamples().ToList())
+            foreach (var sample in AllSamples.GetSamples())
             {
                 SampleList.Children.Add(CreateRadioButton(sample));
             }
@@ -69,7 +71,7 @@ namespace Mapsui.Samples.Wpf
         private void FillComboBoxWithTestSamples()
         {
             SampleList.Children.Clear();
-            foreach (var sample in TestSamples().ToList())
+            foreach (var sample in Mapsui.Tests.Common.AllSamples.GetSamples().ToList())
             {
                 SampleList.Children.Add(CreateRadioButton(sample));
             }
@@ -82,48 +84,26 @@ namespace Mapsui.Samples.Wpf
             if (selectedValue == "Demo samples")
                 FillComboBoxWithDemoSamples();
             else if (selectedValue == "Test samples")
-                FillComboBoxWithTestSamples();
+               FillComboBoxWithTestSamples();
             else
                 throw new Exception("Unknown ComboBox item");
         }
 
-        private Dictionary<string, Func<Map>> TestSamples()
-        {
-            var result = new Dictionary<string, Func<Map>>();
-            var i = 0;
-            foreach (var sample in AllSamples.CreateList())
-            {
-                result[i.ToString()] = sample;
-                i++;
-            }
-            return result;
-        }
-
-        private static Dictionary<string, Func<Map>> DemoSamples()
-        {
-            var allSamples = Common.AllSamples.CreateList();
-            // Append samples from Mapsui.Desktop
-            allSamples["Shapefile (Desktop)"] = ShapefileSample.CreateMap;
-            allSamples["ThemeStyle (Desktop)"] = ThemeStyleSample.CreateMap;
-            allSamples["Tiles on disk (Desktop)"] = MapTilerSample.CreateMap;
-            allSamples["WMS (Desktop)"] = WmsSample.CreateMap;
-            allSamples["Slow WMS (Desktop)"] = SlowWmsSample.CreateMap;
-            return allSamples;
-        }
-
-        private UIElement CreateRadioButton(KeyValuePair<string, Func<Map>> sample)
+        private UIElement CreateRadioButton(ISample sample)
         {
             var radioButton = new RadioButton
             {
                 FontSize = 16,
-                Content = sample.Key,
+                Content = sample.Name,
                 Margin = new Thickness(4)
             };
 
             radioButton.Click += (s, a) =>
             {
                 MapControl.Map.Layers.Clear();
-                MapControl.Map = sample.Value();
+
+                sample.Setup(MapControl);
+
                 MapControl.Info += MapControlOnInfo;
                 LayerList.Initialize(MapControl.Map.Layers);
             };

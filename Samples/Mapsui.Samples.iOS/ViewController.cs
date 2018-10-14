@@ -5,10 +5,11 @@ using System.Text;
 using Mapsui.UI.iOS;
 using UIKit;
 using CoreGraphics;
-using Mapsui.Samples.Common.Helpers;
-using Mapsui.Samples.Common.Maps;
+using Mapsui.Samples.Tests.Maps;
 using Mapsui.UI;
 using Mapsui.Providers;
+using Mapsui.Samples.Common.Helpers;
+using Mapsui.Samples.Common.Maps;
 
 namespace Mapsui.Samples.iOS
 {

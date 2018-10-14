@@ -1,11 +1,19 @@
 ﻿using Mapsui.Geometries;
 using Mapsui.Projection;
+using Mapsui.UI;
 using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public static class CenterOnLocationSample
+    public class CenterOnLocationSample : IDemoSample
     {
+        public string Name => "Center on location";
+
+        public void Setup(IMapControl mapControl)
+        {
+            mapControl.Map = CreateMap();
+        }
+
         public static Map CreateMap()
         {
             var map = new Map();

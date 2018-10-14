@@ -2,13 +2,21 @@
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Styles;
+using Mapsui.UI;
 using System.Reflection;
 
 namespace Mapsui.Tests.Common.Maps
 {
-    public static class PolygonSample
+    public class PolygonSample : ITestSample
     {
         static int _bitmapId;
+
+        public string Name => "Polygon";
+
+        public void Setup(IMapControl mapControl)
+        {
+            mapControl.Map = CreateMap();
+        }
 
         public static Map CreateMap()
         {

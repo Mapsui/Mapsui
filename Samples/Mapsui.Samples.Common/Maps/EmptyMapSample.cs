@@ -1,9 +1,17 @@
 ﻿using Mapsui.Geometries;
+using Mapsui.UI;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public static class EmptyMapSample
+    public class EmptyMapSample : IDemoSample
     {
+        public string Name => "Empty Map";
+
+        public void Setup(IMapControl mapControl)
+        {
+            mapControl.Map = CreateMap();
+        }
+
         public static Map CreateMap()
         {
             return new Map

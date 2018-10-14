@@ -8,13 +8,23 @@ using Mapsui.Layers;
 using Mapsui.Projection;
 using Mapsui.Providers;
 using Mapsui.Styles;
+using Mapsui.UI;
 using Mapsui.Utilities;
 using Mapsui.Widgets.ScaleBar;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    class ItineroRoutingSample
+    class ItineroRoutingSample 
+        // : IDemoSample
+        // Enable when implemented
     {
+        public string Name => "Itinero routing";
+
+        public void Setup(IMapControl mapControl)
+        {
+            mapControl.Map = CreateMap();
+        }
+
         public static Map CreateMap()
         {
             var map = new Map

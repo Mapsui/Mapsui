@@ -1,12 +1,20 @@
 ﻿using System;
 using Mapsui.Layers;
 using Mapsui.Providers;
+using Mapsui.UI;
 using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public static class RasterizingLayerSample
+    public class RasterizingLayerSample : IDemoSample
     {
+        public string Name => "Rasterizing Layer";
+
+        public void Setup(IMapControl mapControl)
+        {
+            mapControl.Map = CreateMap();
+        }
+
         public static Map CreateMap()
         {
             var map = new Map();

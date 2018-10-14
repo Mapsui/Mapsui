@@ -1,16 +1,24 @@
 ﻿using System;
-using Mapsui.Layers;
-using Mapsui.Providers;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Mapsui.Geometries;
+using Mapsui.Layers;
+using Mapsui.Providers;
+using Mapsui.UI;
 using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public static class MutatingTriangleSample
+    public class MutatingTriangleSample : IDemoSample
     {
+        public string Name => "Mutating triangle";
+
+        public void Setup(IMapControl mapControl)
+        {
+            mapControl.Map = CreateMap();
+        }
+
         private static readonly Random Random = new Random(0);
 
         public static Map CreateMap()

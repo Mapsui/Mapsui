@@ -1,22 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Samples.Common.Helpers;
 using Mapsui.Styles;
+using Mapsui.UI;
 using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public static class AtlasSample
+    public class AtlasSample : IDemoSample
     {
         private const string AtlasLayerName = "Atlas Layer";
         private static int _atlasBitmapId;
-        private static Random rnd = new Random();
+        private static Random random = new Random();
 
+        public string Name => "Atlas";
+
+        public void Setup(IMapControl mapControl)
+        {
+            mapControl.Map = CreateMap();
+        }
 
         public static Map CreateMap()
         {
@@ -54,8 +60,8 @@ namespace Mapsui.Samples.Common.Maps
             {
                 var feature = new Feature { Geometry = point, ["Label"] = counter.ToString() };
 
-                var x = 0 + rnd.Next(0, 12) * 21;
-                var y = 64 + rnd.Next(0, 6) * 21;
+                var x = 0 + random.Next(0, 12) * 21;
+                var y = 64 + random.Next(0, 6) * 21;
                 var bitmapId = BitmapRegistry.Instance.Register(new Sprite(_atlasBitmapId, x, y, 21, 21, 1));
                 feature.Styles.Add(new SymbolStyle { BitmapId = bitmapId });
 

@@ -1,15 +1,23 @@
-﻿using Mapsui.Layers;
+﻿using System.IO;
+using System.Reflection;
+using Mapsui.Layers;
 using Mapsui.Providers;
+using Mapsui.Providers.Shapefile;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
-using System.IO;
-using System.Reflection;
-using Mapsui.Providers.Shapefile;
+using Mapsui.UI;
 
 namespace Mapsui.Samples.Common.Desktop
 {
-    public static class ShapefileSample
+    public class ShapefileSample : IDemoSample
     {
+        public string Name => "Desktop: Shapefile";
+
+        public void Setup(IMapControl mapControl)
+        {
+            mapControl.Map = CreateMap();
+        }
+
         public static Map CreateMap()
         {
             var map = new Map();

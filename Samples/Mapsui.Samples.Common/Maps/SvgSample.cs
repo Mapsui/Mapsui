@@ -3,14 +3,24 @@ using System.Reflection;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
+using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Helpers;
+using Mapsui.Samples.Common.Maps;
 using Mapsui.Styles;
+using Mapsui.UI;
 using Mapsui.Utilities;
 
-namespace Mapsui.Samples.Common.Maps
+namespace Mapsui.Samples.Tests.Maps
 {
-    public static class SvgSample
+    public class SvgSample : IDemoSample
     {
+        public string Name => "Svg";
+
+        public void Setup(IMapControl mapControl)
+        {
+            mapControl.Map = CreateMap();
+        }
+
         public static Map CreateMap()
         {
             var map = new Map();

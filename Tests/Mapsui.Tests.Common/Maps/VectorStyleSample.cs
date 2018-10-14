@@ -2,11 +2,19 @@
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Styles;
+using Mapsui.UI;
 
 namespace Mapsui.Tests.Common.Maps
 {
-    public static class VectorStyleSample
+    public class VectorStyleSample : ITestSample
     {
+        public string Name => "Vector Style";
+
+        public void Setup(IMapControl mapControl)
+        {
+            mapControl.Map = CreateMap();
+        }
+
         public static Map CreateMap()
         {
             var map = new Map

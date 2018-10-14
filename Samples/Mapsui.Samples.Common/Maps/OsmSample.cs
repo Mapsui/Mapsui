@@ -1,11 +1,19 @@
 ﻿using Mapsui.Projection;
+using Mapsui.UI;
 using Mapsui.Utilities;
 using Mapsui.Widgets.ScaleBar;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public static class OsmSample
+    public class OsmSample : IDemoSample
     {
+        public string Name => "OpenStreetMap";
+
+        public void Setup(IMapControl mapControl)
+        {
+            mapControl.Map = CreateMap();
+        }
+
         public static Map CreateMap()
         {
             var map = new Map

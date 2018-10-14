@@ -2,6 +2,7 @@
 using System.IO;
 using System.Reflection;
 using Mapsui.Samples.Common.Maps;
+using Mapsui.Samples.Tests.Maps;
 
 namespace Mapsui.Samples.Common.Helpers
 {

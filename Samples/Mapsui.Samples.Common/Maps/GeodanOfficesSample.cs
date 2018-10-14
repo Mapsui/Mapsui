@@ -5,7 +5,7 @@ using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public class GeodanOfficesSample
+    public class GeodanOfficesSample 
     {
         public static MemoryLayer CreateLayer()
         {

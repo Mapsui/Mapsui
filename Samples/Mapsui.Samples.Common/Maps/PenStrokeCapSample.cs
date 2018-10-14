@@ -3,14 +3,22 @@ using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Styles;
+using Mapsui.UI;
 using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public static class PenStrokeCapSample
+    public class PenStrokeCapSample : IDemoSample
     {
         private const int PolygonSize = 5000000;
         private const int PenWidth = 12;
+
+        public string Name => "Pen Stroke Cap";
+
+        public void Setup(IMapControl mapControl)
+        {
+            mapControl.Map = CreateMap();
+        }
 
         public static Map CreateMap()
         {

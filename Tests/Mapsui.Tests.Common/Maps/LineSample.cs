@@ -2,11 +2,19 @@
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Styles;
+using Mapsui.UI;
 
 namespace Mapsui.Tests.Common.Maps
 {
-    public static class LineSample
+    public class LineSample : ITestSample
     {
+        public string Name => "Line";
+
+        public void Setup(IMapControl mapControl)
+        {
+            mapControl.Map = CreateMap();
+        }
+
         public static Map CreateMap()
         {
             var map = new Map
