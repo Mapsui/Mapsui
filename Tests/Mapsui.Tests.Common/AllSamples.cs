@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
-using Mapsui.Tests.Common.Maps;
 
 namespace Mapsui.Tests.Common
 {
@@ -17,24 +16,6 @@ namespace Mapsui.Tests.Common
                 .SelectMany(s => s.GetTypes())
                 .Where(p => type.IsAssignableFrom(p) && !p.IsInterface)
                 .Select(Activator.CreateInstance).Select(t => t as ITestSample).ToList();
-        }
-
-        private static List<Func<Map>> CreateList()
-        {
-            return new List<Func<Map>>
-            {
-                StackedLabelsSample.CreateMap,
-                VectorStyleSample.CreateMap,
-                SymbolTypesSample.CreateMap,
-                BitmapSymbolSample.CreateMap,
-                BitmapSymbolWithRotationAndOffsetSample.CreateMap,
-                PointInWorldUnits.CreateMap,
-                PolygonSample.CreateMap,
-                LineSample.CreateMap,
-                TilesSample.CreateMap,
-                LabelSample.CreateMap,
-                BitmapSample.CreateMap
-            };
         }
     }
 }
