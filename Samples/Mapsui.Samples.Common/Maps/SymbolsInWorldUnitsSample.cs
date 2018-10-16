@@ -12,7 +12,7 @@ namespace Mapsui.Samples.Tests.Maps
 {
     public class SymbolsInWorldUnitsSample : IDemoSample
     {
-        public string Name => "Symbols in World Units";
+        public string Name => "2.5 Symbols in World Units";
 
         public void Setup(IMapControl mapControl)
         {

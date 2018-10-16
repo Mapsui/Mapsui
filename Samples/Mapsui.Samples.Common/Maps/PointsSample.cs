@@ -16,7 +16,7 @@ namespace Mapsui.Samples.Common.Maps
 {
     public class PointsSample : IDemoSample
     {
-        public string Name => "Simple Points";
+        public string Name => "1.3 Simple Points";
 
         public void Setup(IMapControl mapControl)
         {

@@ -7,7 +7,7 @@ namespace Mapsui.Samples.Common.Maps
 {
     public class WidgetSample : IDemoSample
     {
-        public string Name => "Widgets";
+        public string Name => "5.2 Widgets";
 
         public void Setup(IMapControl mapControl)
         {

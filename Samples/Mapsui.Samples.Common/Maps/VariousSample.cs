@@ -12,7 +12,7 @@ namespace Mapsui.Samples.Common.Maps
 {
     public class VariousSample : IDemoSample
     {
-        public string Name => "Various";
+        public string Name => "1.7 Various geometries";
 
         public void Setup(IMapControl mapControl)
         {

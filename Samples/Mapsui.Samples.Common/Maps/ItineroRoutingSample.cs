@@ -18,7 +18,7 @@ namespace Mapsui.Samples.Common.Maps
         // : IDemoSample
         // Enable when implemented
     {
-        public string Name => "Itinero routing";
+        public string Name => "4.4 Itinero routing";
 
         public void Setup(IMapControl mapControl)
         {

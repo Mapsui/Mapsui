@@ -15,7 +15,7 @@ namespace Mapsui.Samples.Common.Desktop
 {
     public class ThemeStyleSample : IDemoSample
     {
-        public string Name => "Desktop: Theme Style";
+        public string Name => "6.4 Desktop: Theme Style";
 
         public void Setup(IMapControl mapControl)
         {

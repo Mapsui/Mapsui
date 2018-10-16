@@ -12,7 +12,7 @@ namespace Mapsui.Samples.Tests.Maps
     {
         private const string LabelColumn = "Label";
 
-        public string Name => "Stacked labels";
+        public string Name => "2.4 Stacked labels";
 
         public void Setup(IMapControl mapControl)
         {

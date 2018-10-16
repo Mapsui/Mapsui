@@ -14,7 +14,7 @@ namespace Mapsui.Samples.Tests.Maps
 {
     public class SvgSample : IDemoSample
     {
-        public string Name => "Svg";
+        public string Name => "2.6 Svg";
 
         public void Setup(IMapControl mapControl)
         {

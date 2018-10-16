@@ -7,7 +7,7 @@ namespace Mapsui.Samples.Common.Maps
 {
     public class OsmSample : IDemoSample
     {
-        public string Name => "OpenStreetMap";
+        public string Name => "1.1 OpenStreetMap";
 
         public void Setup(IMapControl mapControl)
         {

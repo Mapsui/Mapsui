@@ -9,7 +9,7 @@ namespace Mapsui.Samples.Tests.Maps
 {
     public class ScaleBarSample : IDemoSample
     {
-        public string Name => "ScaleBar";
+        public string Name => "5.1 ScaleBar";
 
         public void Setup(IMapControl mapControl)
         {

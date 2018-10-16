@@ -15,7 +15,7 @@ namespace Mapsui.Samples.Common.Maps
         private const string PolygonLayerName = "Polygon Layer";
         private const string LineLayerName = "Line Layer";
 
-        public string Name => "Map Info";
+        public string Name => "4.2 Map Info";
         public void Setup(IMapControl mapControl)
         {
             mapControl.Map = CreateMap();

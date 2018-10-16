@@ -11,7 +11,7 @@ namespace Mapsui.Samples.Common.Maps
         // This is a hack used for iOS/Android deployment
         public static string MbTilesLocation { get; set; } = @".\MbTiles\";
 
-        public string Name => "MbTiles";
+        public string Name => "3.1 MbTiles";
 
         public void Setup(IMapControl mapControl)
         {

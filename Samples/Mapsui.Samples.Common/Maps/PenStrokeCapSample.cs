@@ -13,7 +13,7 @@ namespace Mapsui.Samples.Common.Maps
         private const int PolygonSize = 5000000;
         private const int PenWidth = 12;
 
-        public string Name => "Pen Stroke Cap";
+        public string Name => "2.7 Pen Stroke Cap";
 
         public void Setup(IMapControl mapControl)
         {

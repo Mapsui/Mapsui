@@ -11,7 +11,7 @@ namespace Mapsui.Samples.Common.Maps
 {
     public class LineStringSample : IDemoSample
     {
-        public string Name => "Simple LineStrings";
+        public string Name => "1.4 Simple LineStrings";
 
         public void Setup(IMapControl mapControl)
         {

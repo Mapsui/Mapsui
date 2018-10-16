@@ -13,7 +13,7 @@ namespace Mapsui.Samples.Common.Maps
 {
     public class SymbolsSample : IDemoSample
     {
-        public string Name => "Symbols";
+        public string Name => "2.1 Symbols";
 
         public void Setup(IMapControl mapControl)
         {

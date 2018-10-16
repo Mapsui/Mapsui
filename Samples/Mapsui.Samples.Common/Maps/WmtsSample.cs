@@ -8,7 +8,7 @@ namespace Mapsui.Samples.Common.Maps
 {
     public class WmtsSample : IDemoSample
     {
-        public string Name => "WMTS";
+        public string Name => "3.3 WMTS";
 
         public void Setup(IMapControl mapControl)
         {

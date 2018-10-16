@@ -12,7 +12,7 @@ namespace Mapsui.Samples.Common.Maps
 {
     public class MutatingTriangleSample : IDemoSample
     {
-        public string Name => "Mutating triangle";
+        public string Name => "4.6 Mutating triangle";
 
         public void Setup(IMapControl mapControl)
         {

@@ -15,7 +15,7 @@ namespace Mapsui.Samples.Common.Maps
 {
     public class AnimatedPointsSample : IDemoSample
     {
-        public string Name => "Animated point movement";
+        public string Name => "4.5 Animated point movement";
 
 
         public void Setup(IMapControl mapControl)

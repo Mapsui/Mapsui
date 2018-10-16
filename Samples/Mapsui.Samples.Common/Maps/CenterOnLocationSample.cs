@@ -7,7 +7,7 @@ namespace Mapsui.Samples.Common.Maps
 {
     public class CenterOnLocationSample : IDemoSample
     {
-        public string Name => "Center on location";
+        public string Name => "4.1 Center on location";
 
         public void Setup(IMapControl mapControl)
         {

@@ -5,7 +5,7 @@ namespace Mapsui.Samples.Common.Maps
 {
     public class KeepWithinExtentsSample : IDemoSample
     {
-        public string Name => "Keep Within Extents";
+        public string Name => "4.4 Keep Within Extents";
 
         public void Setup(IMapControl mapControl)
         {

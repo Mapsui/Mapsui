@@ -11,7 +11,7 @@ namespace Mapsui.Samples.Common.Desktop
 {
     public class ShapefileSample : IDemoSample
     {
-        public string Name => "Desktop: Shapefile";
+        public string Name => "6.1 Desktop: Shapefile";
 
         public void Setup(IMapControl mapControl)
         {

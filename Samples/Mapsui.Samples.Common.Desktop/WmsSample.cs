@@ -9,7 +9,7 @@ namespace Mapsui.Samples.Common.Desktop
         // When there is no explicit call to the assembly it is not loaded
         public static void MethodToLoadThisAssembly() { }
 
-        public string Name => "Desktop: WMS";
+        public string Name => "6.2 Desktop: WMS";
 
         public void Setup(IMapControl mapControl)
         {

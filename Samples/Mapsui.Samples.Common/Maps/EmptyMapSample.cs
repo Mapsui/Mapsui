@@ -5,7 +5,7 @@ namespace Mapsui.Samples.Common.Maps
 {
     public class EmptyMapSample : IDemoSample
     {
-        public string Name => "Empty Map";
+        public string Name => "4.3 Empty Map";
 
         public void Setup(IMapControl mapControl)
         {

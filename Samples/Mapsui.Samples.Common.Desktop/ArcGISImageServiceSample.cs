@@ -9,7 +9,7 @@ namespace Mapsui.Samples.Common.Desktop
 {
     public class ArcGISImageServiceSample : IDemoSample
     {
-        public string Name => "Desktop: ArcGIS image";
+        public string Name => "6.7 Desktop: ArcGIS image";
 
         public void Setup(IMapControl mapControl)
         {

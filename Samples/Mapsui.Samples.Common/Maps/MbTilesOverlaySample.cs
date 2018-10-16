@@ -10,7 +10,7 @@ namespace Mapsui.Samples.Common.Maps
 {
     public class MbTilesOverlaySample : IDemoSample
     {
-        public string Name => "MbTiles Overlay";
+        public string Name => "3.2 MbTiles Overlay";
 
         public void Setup(IMapControl mapControl)
         {

@@ -8,7 +8,7 @@ namespace Mapsui.Samples.Common.Maps
 {
     public class BingSample : IDemoSample
     {
-        public string Name => "Virtual Earth";
+        public string Name => "1.2 Virtual Earth";
 
         public void Setup(IMapControl mapControl)
         {

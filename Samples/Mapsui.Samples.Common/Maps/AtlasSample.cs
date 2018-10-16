@@ -15,9 +15,9 @@ namespace Mapsui.Samples.Common.Maps
     {
         private const string AtlasLayerName = "Atlas Layer";
         private static int _atlasBitmapId;
-        private static Random random = new Random();
+        private static readonly Random Random = new Random();
 
-        public string Name => "Atlas";
+        public string Name => "2.7 Atlas";
 
         public void Setup(IMapControl mapControl)
         {
@@ -60,8 +60,8 @@ namespace Mapsui.Samples.Common.Maps
             {
                 var feature = new Feature { Geometry = point, ["Label"] = counter.ToString() };
 
-                var x = 0 + random.Next(0, 12) * 21;
-                var y = 64 + random.Next(0, 6) * 21;
+                var x = 0 + Random.Next(0, 12) * 21;
+                var y = 64 + Random.Next(0, 6) * 21;
                 var bitmapId = BitmapRegistry.Instance.Register(new Sprite(_atlasBitmapId, x, y, 21, 21, 1));
                 feature.Styles.Add(new SymbolStyle { BitmapId = bitmapId });
 

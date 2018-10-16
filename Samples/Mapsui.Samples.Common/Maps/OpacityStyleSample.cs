@@ -9,7 +9,7 @@ namespace Mapsui.Samples.Common.Maps
 {
     public class OpacityStyleSample : IDemoSample
     {
-        public string Name => "OpacityStyle";
+        public string Name => "2.8 OpacityStyle";
 
         public void Setup(IMapControl mapControl)
         {

@@ -10,7 +10,7 @@ namespace Mapsui.Samples.Common.Maps
 {
     public class ComplexPolygonSample : IDemoSample
     {
-        public string Name => "Complex Polygons";
+        public string Name => "1.6 Complex Polygons";
 
         public void Setup(IMapControl mapControl)
         {

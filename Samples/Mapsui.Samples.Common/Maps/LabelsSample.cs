@@ -9,7 +9,7 @@ namespace Mapsui.Samples.Common.Maps
 {
     public class LabelsSample : IDemoSample
     {
-        public string Name => "Labels";
+        public string Name => "2.2 Labels";
 
         public void Setup(IMapControl mapControl)
         {

@@ -15,7 +15,7 @@ namespace Mapsui.Samples.Common.Maps
     /// </summary>
     public class TiledWmsSample : IDemoSample
     {
-        public string Name => "WMS called tiled";
+        public string Name => "3.4 WMS called tiled";
 
         public void Setup(IMapControl mapControl)
         {

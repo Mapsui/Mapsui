@@ -8,7 +8,7 @@ namespace Mapsui.Samples.Common.Maps
 {
     public class RasterizingLayerSample : IDemoSample
     {
-        public string Name => "Rasterizing Layer";
+        public string Name => "3.5 Rasterizing Layer";
 
         public void Setup(IMapControl mapControl)
         {

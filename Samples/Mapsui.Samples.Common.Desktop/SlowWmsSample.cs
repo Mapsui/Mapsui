@@ -8,7 +8,7 @@ namespace Mapsui.Samples.Common.Desktop
 {
     public class SlowWmsSample : IDemoSample
     {
-        public string Name => "Desktop: Slow WMS";
+        public string Name => "6.3 Desktop: Slow WMS";
 
         public void Setup(IMapControl mapControl)
         {
