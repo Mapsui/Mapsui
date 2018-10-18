@@ -136,10 +136,12 @@ namespace Mapsui.UI.Wpf
                 }
             });
         }
+        // ReSharper disable RedundantNameQualifier - needed for iOS for disambiguation
 
         private void MapPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(Layers.Layer.Enabled))
+
             {
                 RefreshGraphics();
             }
@@ -160,6 +162,7 @@ namespace Mapsui.UI.Wpf
                 Refresh();
             }
         }
+        // ReSharper restore RedundantNameQualifier
 
         public Map Map
         {
@@ -209,16 +212,6 @@ namespace Mapsui.UI.Wpf
         public void RefreshData()
         {
             _map?.RefreshData(Viewport.Extent, Viewport.Resolution, true);
-        }
-
-        /// <summary>
-        /// Internally we want to call RefreshData with a minor change in some cases.
-        /// Users should just always call RefreshData without arguments
-        /// </summary>
-        /// <param name="majorChange"></param>
-        private void RefreshData(bool majorChange)
-        {
-            _map?.RefreshData(Viewport.Extent, Viewport.Resolution, majorChange);
         }
 
         private void OnInfo(MapInfoEventArgs mapInfoEventArgs)

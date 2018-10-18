@@ -217,7 +217,7 @@ namespace Mapsui.Styles
                     b = GetColorComponent(temp1, temp2, h - 1.0f / 3.0f);
                 }
             }
-            return Color.FromArgb(a,
+            return FromArgb(a,
                 (int)Math.Round(r * 255.0f),
                 (int)Math.Round(g * 255.0f),
                 (int)Math.Round(b * 255.0f));

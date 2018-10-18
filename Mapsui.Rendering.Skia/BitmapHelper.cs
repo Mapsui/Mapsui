@@ -89,11 +89,6 @@ namespace Mapsui.Rendering.Skia
             // 0/0 are assumed at center of image, but Svg has 0/0 at left top position
             canvas.Translate(-halfWidth + offsetX, -halfHeight - offsetY);
 
-            var rect = new SKRect(- halfWidth, - halfHeight, + halfWidth, + halfHeight);
-
-            //var color = new SKColor(255, 255, 255, (byte)(255 * opacity));
-            //var paint = new SKPaint { Color = color, FilterQuality = SKFilterQuality.High };
-
             canvas.DrawPicture(svg.Picture);
 
             canvas.Restore();

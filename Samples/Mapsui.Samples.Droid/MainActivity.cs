@@ -3,11 +3,8 @@ using System.IO;
 using Android.App;
 using Android.Graphics;
 using Android.Widget;
-using Android.Support.Design.Widget;
 using Android.Support.V7.App;
 using Android.Views;
-using Mapsui.Layers;
-using Mapsui.Providers;
 using Mapsui.Samples.Common.Helpers;
 using Mapsui.Samples.Common.Maps;
 using Mapsui.UI;
@@ -20,7 +17,6 @@ namespace Mapsui.Samples.Droid
     {
         private LinearLayout _popup;
         private MapControl _mapControl;
-        private readonly WritableLayer _writableLayer = new WritableLayer();
 
         protected override void OnCreate(Android.OS.Bundle savedInstanceState)
         {
@@ -96,18 +92,7 @@ namespace Mapsui.Samples.Droid
             {
                 if (_popup != null && _popup.Visibility != ViewStates.Gone)
                     _popup.Visibility = ViewStates.Gone;
-
-                // Enable if you want to add points:
-                // AddPoint(args);
             }
-        }
-
-        private void AddPoint(MapInfoEventArgs args)
-        {
-            // For the sample we add this WritableLayer. Usually you would have your own handle to the WritableLayer
-            if (!_mapControl.Map.Layers.Contains(_writableLayer)) _mapControl.Map.Layers.Add(_writableLayer);
-
-            _writableLayer.Add(new Feature { Geometry = args.MapInfo.WorldPosition });
         }
 
         private void ShowPopup(MapInfoEventArgs args)

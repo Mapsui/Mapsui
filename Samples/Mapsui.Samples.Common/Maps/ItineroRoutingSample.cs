@@ -11,6 +11,7 @@ using Mapsui.Styles;
 using Mapsui.UI;
 using Mapsui.Utilities;
 using Mapsui.Widgets.ScaleBar;
+// ReSharper disable All
 
 namespace Mapsui.Samples.Common.Maps
 {

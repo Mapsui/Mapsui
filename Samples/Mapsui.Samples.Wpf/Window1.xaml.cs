@@ -76,7 +76,7 @@ namespace Mapsui.Samples.Wpf
         
         private void FillComboBoxWithCategories()
         {
-            var categories = AllSamples.GetSamples().Select(s => s.Category).Distinct().OrderBy(c => c); ;
+            var categories = AllSamples.GetSamples().Select(s => s.Category).Distinct().OrderBy(c => c);
             foreach (var category in categories)
             {
                 CategoryComboBox.Items.Add(category);
