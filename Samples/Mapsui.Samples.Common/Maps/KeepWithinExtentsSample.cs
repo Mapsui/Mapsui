@@ -3,9 +3,10 @@ using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public class KeepWithinExtentsSample : IDemoSample
+    public class KeepWithinExtentsSample : ISample
     {
-        public string Name => "4.4 Keep Within Extents";
+        public string Name => "Keep Within Extents";
+        public string Category => "Special";
 
         public void Setup(IMapControl mapControl)
         {

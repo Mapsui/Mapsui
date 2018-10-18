@@ -9,9 +9,10 @@ using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public class LineStringSample : IDemoSample
+    public class LineStringSample : ISample
     {
-        public string Name => "1.4 Simple LineStrings";
+        public string Name => "2 LineStrings";
+        public string Category => "Geometries";
 
         public void Setup(IMapControl mapControl)
         {

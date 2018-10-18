@@ -35,6 +35,6 @@ namespace Mapsui.UI
                 TaskScheduler.Default);
         }
 
-        public new void Dispose() { base.Cancel(); }
+        public new void Dispose() { Cancel(); }
     }
 }

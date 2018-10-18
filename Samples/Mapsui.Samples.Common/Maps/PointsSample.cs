@@ -14,9 +14,10 @@ using Newtonsoft.Json;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public class PointsSample : IDemoSample
+    public class PointsSample : ISample
     {
-        public string Name => "1.3 Simple Points";
+        public string Name => "1 Points";
+        public string Category => "Geometries";
 
         public void Setup(IMapControl mapControl)
         {

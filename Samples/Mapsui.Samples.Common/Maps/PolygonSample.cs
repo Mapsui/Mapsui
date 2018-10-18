@@ -8,9 +8,10 @@ using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public class PolygonSample : IDemoSample
+    public class PolygonSample : ISample
     {
-        public string Name => "1.5 Simple Polygons";
+        public string Name => "3 Polygons";
+        public string Category => "Geometries";
 
         public void Setup(IMapControl mapControl)
         {

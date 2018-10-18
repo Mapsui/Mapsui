@@ -6,12 +6,13 @@ using SQLite;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public class MbTilesSample : IDemoSample
+    public class MbTilesSample : ISample
     {
         // This is a hack used for iOS/Android deployment
         public static string MbTilesLocation { get; set; } = @".\MbTiles\";
 
-        public string Name => "3.1 MbTiles";
+        public string Name => "1 MbTiles";
+        public string Category => "Data";
 
         public void Setup(IMapControl mapControl)
         {

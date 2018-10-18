@@ -11,13 +11,15 @@ using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public class AtlasSample : IDemoSample
+    public class AtlasSample : ISample
     {
         private const string AtlasLayerName = "Atlas Layer";
         private static int _atlasBitmapId;
         private static readonly Random Random = new Random();
 
-        public string Name => "2.7 Atlas";
+        public string Name => "Atlas";
+
+        public string Category => "Symbols";
 
         public void Setup(IMapControl mapControl)
         {

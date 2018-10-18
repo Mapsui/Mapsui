@@ -1,15 +1,16 @@
-﻿using Mapsui.Layers;
-using Mapsui.Providers.Wms;
+﻿using Mapsui.Desktop.Wms;
+using Mapsui.Layers;
 using Mapsui.UI;
 
 namespace Mapsui.Samples.Common.Desktop
 {
-    public class WmsSample : IDemoSample
+    public class WmsSample : ISample
     {
         // When there is no explicit call to the assembly it is not loaded
         public static void MethodToLoadThisAssembly() { }
 
-        public string Name => "6.2 Desktop: WMS";
+        public string Name => "2 WMS";
+        public string Category => "Desktop";
 
         public void Setup(IMapControl mapControl)
         {

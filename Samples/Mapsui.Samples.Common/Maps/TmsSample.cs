@@ -3,10 +3,8 @@ using Mapsui.UI;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public class TmsSample
-    // : IDemoSample
-    // Disable because the TMS service is not there (perhaps moved)
-    // todo: Replace with another.
+    public class TmsSample // disabled because service is down
+                           //  todo: Replace with another.
     {
         public string Name => "TMS";
 

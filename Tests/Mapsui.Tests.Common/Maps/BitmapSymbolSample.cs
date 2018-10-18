@@ -2,14 +2,16 @@
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
+using Mapsui.Samples.Common;
 using Mapsui.Styles;
 using Mapsui.UI;
 
 namespace Mapsui.Tests.Common.Maps
 {
-    public class BitmapSymbolSample : ITestSample
+    public class BitmapSymbolSample : ISample
     {
         public string Name => "Bitmap Symbol";
+        public string Category => "Tests";
 
         public void Setup(IMapControl mapControl)
         {

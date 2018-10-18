@@ -6,17 +6,19 @@ namespace Mapsui.Samples.Common
 {
     public static class AllSamples
     {
-        public static IEnumerable<IDemoSample> GetSamples()
+        public static IEnumerable<ISample> GetSamples()
         {
-            var type = typeof(IDemoSample);
+            var type = typeof(ISample);
             var assemblies = AppDomain.CurrentDomain.GetAssemblies()
                 .Where(a => a.FullName.StartsWith("Mapsui"));
 
             return assemblies
                 .SelectMany(s => s.GetTypes())
                 .Where(p => type.IsAssignableFrom(p) && !p.IsInterface)
-                .Select(Activator.CreateInstance).Select(t => t as IDemoSample)
+                .Select(Activator.CreateInstance).Select(t => t as ISample)
+                .Where(i => i?.Category != "Tests")
                 .OrderBy(s => s?.Name)
+                .ThenBy(s => s?.Category)
                 .ToList();
         }
     }

@@ -9,9 +9,10 @@ using Mapsui.UI;
 
 namespace Mapsui.Samples.Common.Desktop
 {
-    public class WfsSample // not working: IDemoSample
+    public class WfsSample // not working: ISample
     {
-        public string Name => "6.6 Desktop: WFS Sample";
+        public string Name => "6 WFS Sample";
+        public string Category => "Desktop";
 
         public void Setup(IMapControl mapControl)
         {

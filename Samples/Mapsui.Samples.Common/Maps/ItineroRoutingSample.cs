@@ -14,12 +14,10 @@ using Mapsui.Widgets.ScaleBar;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    class ItineroRoutingSample 
-        // : IDemoSample
-        // Enable when implemented
+    class ItineroRoutingSample // Not implemented yet: ISample
     {
-        public string Name => "4.4 Itinero routing";
-
+        public string Name => "Itinero routing";
+        public string Category => "Special";
         public void Setup(IMapControl mapControl)
         {
             mapControl.Map = CreateMap();

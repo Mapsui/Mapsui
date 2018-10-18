@@ -22,9 +22,7 @@
                             <ComboBoxItem IsSelected="True">Skia renderer</ComboBoxItem>
                             <ComboBoxItem >Wpf renderer</ComboBoxItem>
                         </ComboBox>
-                        <ComboBox Name="SampleSet" Margin="0,0, 0, 10">
-                            <ComboBoxItem IsSelected="True">Demo samples</ComboBoxItem>
-                            <ComboBoxItem>Test samples</ComboBoxItem>
+                        <ComboBox Name="CategoryComboBox" Margin="0,0, 0, 10">
                         </ComboBox>
                         </StackPanel>
                     <ScrollViewer VerticalScrollBarVisibility="Auto" DockPanel.Dock="Bottom">

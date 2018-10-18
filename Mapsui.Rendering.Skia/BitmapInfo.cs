@@ -12,7 +12,7 @@ namespace Mapsui.Rendering.Skia
 
     public class BitmapInfo
     {
-        private object data;
+        private object _data;
 
         public BitmapType Type { get; private set; }
 
@@ -21,13 +21,13 @@ namespace Mapsui.Rendering.Skia
             get
             {
                 if (Type == BitmapType.Bitmap)
-                    return (SKImage) data;
+                    return (SKImage) _data;
                 else
                     return null;
             }
             set
             {
-                data = value;
+                _data = value;
                 Type = BitmapType.Bitmap;
             }
         }
@@ -37,13 +37,13 @@ namespace Mapsui.Rendering.Skia
             get
             {
                 if (Type == BitmapType.Svg)
-                    return (SkiaSharp.Extended.Svg.SKSvg) data;
+                    return (SkiaSharp.Extended.Svg.SKSvg) _data;
                 else
                     return null;
             }
             set
             {
-                data = value;
+                _data = value;
                 Type = BitmapType.Svg;
             }
         }
@@ -53,13 +53,13 @@ namespace Mapsui.Rendering.Skia
             get
             {
                 if (Type == BitmapType.Sprite)
-                    return (Sprite)data;
+                    return (Sprite)_data;
                 else
                     return null;
             }
             set
             {
-                data = value;
+                _data = value;
                 Type = BitmapType.Sprite;
             }
         }
@@ -77,7 +77,7 @@ namespace Mapsui.Rendering.Skia
                     case BitmapType.Svg:
                         return Svg.CanvasSize.Width;
                     case BitmapType.Sprite:
-                        return ((Sprite) data).Width;
+                        return ((Sprite) _data).Width;
                     default:
                         return 0;
                 }
@@ -95,7 +95,7 @@ namespace Mapsui.Rendering.Skia
                     case BitmapType.Svg:
                         return Svg.CanvasSize.Height;
                     case BitmapType.Sprite:
-                        return ((Sprite) data).Height;
+                        return ((Sprite) _data).Height;
                     default:
                         return 0;
                 }

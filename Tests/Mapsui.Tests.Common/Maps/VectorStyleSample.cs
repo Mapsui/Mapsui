@@ -1,14 +1,16 @@
 ﻿using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
+using Mapsui.Samples.Common;
 using Mapsui.Styles;
 using Mapsui.UI;
 
 namespace Mapsui.Tests.Common.Maps
 {
-    public class VectorStyleSample : ITestSample
+    public class VectorStyleSample : ISample
     {
         public string Name => "Vector Style";
+        public string Category => "Tests";
 
         public void Setup(IMapControl mapControl)
         {
