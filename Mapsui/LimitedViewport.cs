@@ -28,7 +28,7 @@ namespace Mapsui
 
         public void Transform(Point position, Point previousPosition, double deltaScale = 1, double deltaRotation = 0)
         {
-            Transform(position.X, position.Y, previousPosition.X, previousPosition.Y, deltaScale, deltaRotation);
+            _viewport.Transform(position, previousPosition, deltaScale, deltaRotation);
         }
 
         public void SetSize(double width, double height)

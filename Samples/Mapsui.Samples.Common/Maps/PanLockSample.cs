@@ -10,7 +10,7 @@ namespace Mapsui.Samples.Common.Maps
         public void Setup(IMapControl mapControl)
         {
             mapControl.Map = CreateMap();
-            mapControl.PanLock = true;
+            mapControl.Lock.PanLock = true;
         }
 
         public static Map CreateMap()

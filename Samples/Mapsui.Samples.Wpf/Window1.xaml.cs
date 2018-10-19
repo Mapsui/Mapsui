@@ -21,7 +21,7 @@ namespace Mapsui.Samples.Wpf
             InitializeComponent();
             MapControl.FeatureInfo += MapControlFeatureInfo;
             MapControl.MouseMove += MapControlOnMouseMove;
-            MapControl.RotationLock = false;
+            MapControl.Lock.RotationLock = false;
             MapControl.UnSnapRotationDegrees = 30;
             MapControl.ReSnapRotationDegrees = 5;
             MapControl.Renderer.WidgetRenders[typeof(CustomWidget.CustomWidget)] = new CustomWidgetSkiaRenderer();

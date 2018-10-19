@@ -119,14 +119,14 @@ namespace Mapsui.UI.Uwp
 
         private void MapControl_PointerWheelChanged(object sender, PointerRoutedEventArgs e)
         {
-            if (ZoomLock) return;
+            if (Lock.ZoomLock) return;
             if (!Viewport.HasSize) return;
 
             var currentPoint = e.GetCurrentPoint(this);
 
             //Needed for both MouseMove and MouseWheel event for mousewheel event
 
-            var mousePosition = PanLock ?
+            var mousePosition = Lock.PanLock ?
                 new Geometries.Point(ActualWidth * 0.5, ActualHeight * 0.5) : 
                 new Geometries.Point(currentPoint.RawPosition.X, currentPoint.RawPosition.Y);
 
@@ -188,7 +188,7 @@ namespace Mapsui.UI.Uwp
 
             double rotationDelta = 0;
 
-            if (!RotationLock)
+            if (!Lock.RotationLock)
             {
                 _innerRotation += angle - prevAngle;
                 _innerRotation %= 360;
@@ -209,11 +209,10 @@ namespace Mapsui.UI.Uwp
                 }
             }
 
-            if (PanLock)
-                _viewport.Transform(_viewport.Center.X, _viewport.Center.Y, _viewport.Center.X, _viewport.Center.Y, 
-                    radius / prevRadius, rotationDelta);
+            if (Lock.PanLock)
+                _viewport.Transform(_viewport.Center, _viewport.Center, radius / prevRadius, rotationDelta);
             else
-                _viewport.Transform(center.X, center.Y, previousCenter.X, previousCenter.Y, radius / prevRadius, rotationDelta);
+                _viewport.Transform(center, previousCenter, radius / prevRadius, rotationDelta);
 
             RefreshGraphics();
 

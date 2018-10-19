@@ -27,14 +27,7 @@ namespace Mapsui.UI.Wpf
     {
         private Map _map;
 
-        /// <inheritdoc />
-        public bool PanLock { get; set; }
-
-        /// <inheritdoc />
-        public bool RotationLock { get; set; } = true;
-
-        /// <inheritdoc />
-        public bool ZoomLock { get; set; }
+        public MapLock Lock { get; set; } = new MapLock {RotationLock = true};
 
         /// <summary>
         /// After how many degrees start rotation to take place
