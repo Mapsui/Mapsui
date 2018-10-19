@@ -49,7 +49,7 @@ namespace Mapsui.UI.Wpf
         public IRenderer Renderer { get; set; } = new MapRenderer();
 
         /// <summary>
-        /// Viewport holding informations about visible part of the map. Viewport can never be null.
+        /// Viewport holding information about visible part of the map. Viewport can never be null.
         /// </summary>
         private readonly LimitedViewport _viewport = new LimitedViewport();
 

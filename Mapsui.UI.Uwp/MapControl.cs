@@ -126,7 +126,9 @@ namespace Mapsui.UI.Uwp
 
             //Needed for both MouseMove and MouseWheel event for mousewheel event
 
-            var mousePosition = new Geometries.Point(currentPoint.RawPosition.X, currentPoint.RawPosition.Y);
+            var mousePosition = PanLock ?
+                new Geometries.Point(ActualWidth * 0.5, ActualHeight * 0.5) : 
+                new Geometries.Point(currentPoint.RawPosition.X, currentPoint.RawPosition.Y);
 
             if (currentPoint.Properties.MouseWheelDelta > 0)
                 Navigator.ZoomIn(mousePosition);
@@ -207,7 +209,12 @@ namespace Mapsui.UI.Uwp
                 }
             }
 
-            _viewport.Transform(center.X, center.Y, previousCenter.X, previousCenter.Y, radius / prevRadius, rotationDelta);
+            if (PanLock)
+                _viewport.Transform(_viewport.Center.X, _viewport.Center.Y, _viewport.Center.X, _viewport.Center.Y, 
+                    radius / prevRadius, rotationDelta);
+            else
+                _viewport.Transform(center.X, center.Y, previousCenter.X, previousCenter.Y, radius / prevRadius, rotationDelta);
+
             RefreshGraphics();
 
             e.Handled = true;
