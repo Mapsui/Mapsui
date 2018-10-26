@@ -3,7 +3,6 @@ using System.IO;
 using System.Linq;
 using Android.App;
 using Android.Graphics;
-using Android.Runtime;
 using Android.Widget;
 using Android.Support.V7.App;
 using Android.Views;
@@ -46,7 +45,7 @@ namespace Mapsui.Samples.Droid
             FindViewById<RelativeLayout>(Resource.Id.mainLayout).AddView(_popup = CreatePopup());
 
             _mapControl.Map.Layers.Clear();
-            var sample=new Samples.Common.Maps.MbTilesOverlaySample();
+            var sample=new MbTilesOverlaySample();
             sample.Setup(_mapControl);
 
             //_mapControl.Info += MapControlOnInfo;
@@ -56,8 +55,8 @@ namespace Mapsui.Samples.Droid
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
             MenuInflater.Inflate(Resource.Menu.menu_main, menu);
-            int i = 0;
-            int j = 0;
+            var i = 0;
+            var j = 0;
 
             var categories = AllSamples.GetSamples().Select(s => s.Category).Distinct().OrderBy(c => c);
             foreach (var category in categories)
@@ -87,11 +86,11 @@ namespace Mapsui.Samples.Droid
                 return true;
             }
 
-            var sample = AllSamples.GetSamples().Where(s => s.Name == item.TitleFormatted.ToString()).FirstOrDefault();
+            var sample = AllSamples.GetSamples().FirstOrDefault(s => s.Name == item.TitleFormatted.ToString());
             if (sample != null)
             {
                 _mapControl.Map.Layers.Clear();
-                sample?.Setup(_mapControl);
+                sample.Setup(_mapControl);
                 return true;
             }
             
