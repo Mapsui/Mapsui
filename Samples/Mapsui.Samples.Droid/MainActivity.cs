@@ -39,7 +39,7 @@ namespace Mapsui.Samples.Droid
             _mapControl = FindViewById<MapControl>(Resource.Id.mapcontrol);
             _mapControl.Map = KeepWithinExtentsSample.CreateMap();
             _mapControl.Info += MapOnInfo;
-            _mapControl.RotationLock = true;
+            _mapControl.Lock.RotationLock = true;
             _mapControl.UnSnapRotationDegrees = 30;
             _mapControl.ReSnapRotationDegrees = 5;
 
