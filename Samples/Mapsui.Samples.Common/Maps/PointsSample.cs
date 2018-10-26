@@ -39,6 +39,7 @@ namespace Mapsui.Samples.Common.Maps
             return new MemoryLayer
             {
                 Name = "Points",
+                IsMapInfoLayer=true,
                 DataSource = new MemoryProvider(GetCitiesFromEmbeddedResource()),
                 Style = CreateBitmapStyle()
             };
