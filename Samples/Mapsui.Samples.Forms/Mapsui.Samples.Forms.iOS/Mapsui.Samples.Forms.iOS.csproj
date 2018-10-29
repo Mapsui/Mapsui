@@ -123,14 +123,17 @@
     <PackageReference Include="BruTile">
       <Version>2.0.1</Version>
     </PackageReference>
+    <PackageReference Include="NETStandard.Library">
+      <Version>2.0.3</Version>
+    </PackageReference>
     <PackageReference Include="SkiaSharp">
-      <Version>1.60.1</Version>
+      <Version>1.60.3</Version>
     </PackageReference>
     <PackageReference Include="SkiaSharp.Views">
-      <Version>1.60.1</Version>
+      <Version>1.60.3</Version>
     </PackageReference>
     <PackageReference Include="SkiaSharp.Views.Forms">
-      <Version>1.60.1</Version>
+      <Version>1.60.3</Version>
     </PackageReference>
     <PackageReference Include="Xam.Plugin.Geolocator">
       <Version>4.5.0.6</Version>
