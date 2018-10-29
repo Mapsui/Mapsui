@@ -10,7 +10,7 @@ namespace Mapsui.Rendering.Skia
 {
     public static class RasterRenderer
     {
-		public static void Draw (SKCanvas canvas, IViewport viewport, IStyle style, IFeature feature,
+		public static void Draw (SKCanvas canvas, IReadOnlyViewport viewport, IStyle style, IFeature feature,
             float opacity, IDictionary<object, BitmapInfo> tileCache, long currentIteration)
 		{
 		    try
@@ -60,7 +60,7 @@ namespace Mapsui.Rendering.Skia
 			}
 		}
 
-        private static SKMatrix CreateRotationMatrix(IViewport viewport, BoundingBox boundingBox, SKMatrix priorMatrix)
+        private static SKMatrix CreateRotationMatrix(IReadOnlyViewport viewport, BoundingBox boundingBox, SKMatrix priorMatrix)
         {
             SKMatrix matrix = SKMatrix.MakeIdentity();
 
@@ -87,7 +87,7 @@ namespace Mapsui.Rendering.Skia
             return matrix;
         }
 
-        private static BoundingBox WorldToScreen(IViewport viewport, BoundingBox boundingBox)
+        private static BoundingBox WorldToScreen(IReadOnlyViewport viewport, BoundingBox boundingBox)
         {
             var first = viewport.WorldToScreen(boundingBox.Min);
             var second = viewport.WorldToScreen(boundingBox.Max);

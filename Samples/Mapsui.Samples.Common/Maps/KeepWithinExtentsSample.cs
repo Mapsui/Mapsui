@@ -3,14 +3,20 @@ using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public static class KeepWithinExtentsSample
+    public class KeepWithinExtentsSample : IDemoSample
     {
+        public string Name => "Keep Within Extents";
+
+        public void Setup(IMapControl mapControl)
+        {
+            mapControl.Map = CreateMap();
+        }
+
         public static Map CreateMap()
         {
             var map = new Map
             {
-                ZoomMode = ZoomMode.KeepWithinResolutionsAndAlwaysFillViewport,
-                PanMode = PanMode.KeepViewportWithinExtents
+                Limiter = new ViewportLimiterKeepWithin()
             };
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
             return map;

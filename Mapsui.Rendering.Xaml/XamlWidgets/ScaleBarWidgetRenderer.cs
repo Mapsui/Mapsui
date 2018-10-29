@@ -18,7 +18,7 @@ namespace Mapsui.Rendering.Xaml.XamlWidgets
         private static Brush _brushScaleText;
         private static Brush _brushScaleTextStroke;
 
-        public void Draw(Canvas canvas, IWidget widget)
+        public void Draw(Canvas canvas, IReadOnlyViewport viewport, IWidget widget)
         {
             var scaleBar = (ScaleBarWidget) widget;
 
@@ -44,13 +44,10 @@ namespace Mapsui.Rendering.Xaml.XamlWidgets
             float scaleBarLength2;
             string scaleBarText2;
 
-            (scaleBarLength1, scaleBarText1, scaleBarLength2, scaleBarText2) = scaleBar.GetScaleBarLengthAndText();
-
-            // Calc height of scale bar
-            Size textSize;
+            (scaleBarLength1, scaleBarText1, scaleBarLength2, scaleBarText2) = scaleBar.GetScaleBarLengthAndText(viewport);
 
             // Do this, because height of text changes sometimes (e.g. from 2 m to 1 m)
-            textSize = textBlock.MeasureText();
+            var textSize = textBlock.MeasureText();
 
             var scaleBarHeight = textSize.Height + (scaleBar.TickLength + StrokeExternal * 0.5f + scaleBar.TextMargin) * scaleBar.Scale;
 
@@ -68,7 +65,7 @@ namespace Mapsui.Rendering.Xaml.XamlWidgets
             // Draw lines
 
             // Get lines for scale bar
-            var points = scaleBar.GetScaleBarLinePositions(scaleBarLength1, scaleBarLength2, StrokeExternal);
+            var points = scaleBar.GetScaleBarLinePositions(viewport, scaleBarLength1, scaleBarLength2, StrokeExternal);
 
             // BoundingBox for scale bar
             BoundingBox envelop = new BoundingBox();
@@ -134,7 +131,7 @@ namespace Mapsui.Rendering.Xaml.XamlWidgets
             var boundingBoxText1 = new BoundingBox(0, 0, textSize1.Width, textSize1.Height);
             var boundingBoxText2 = new BoundingBox(0, 0, textSize2.Width, textSize2.Height);
 
-            var (posX1, posY1, posX2, posY2) = scaleBar.GetScaleBarTextPositions(boundingBoxText, boundingBoxText1, boundingBoxText2, StrokeExternal);
+            var (posX1, posY1, posX2, posY2) = scaleBar.GetScaleBarTextPositions(viewport, boundingBoxText, boundingBoxText1, boundingBoxText2, StrokeExternal);
 
             // Now draw text
             textBlock.Text = scaleBarText1;

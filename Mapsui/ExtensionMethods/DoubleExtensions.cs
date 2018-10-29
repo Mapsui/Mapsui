@@ -3,7 +3,7 @@ namespace System
 {
     public static class DoubleExtensions
     {
-        public static bool IsNanOrZero(this double target)
+        public static bool IsNanOrInfOrZero(this double target)
         {
             if (double.IsNaN(target)) return true;
             if (double.IsInfinity(target)) return true;

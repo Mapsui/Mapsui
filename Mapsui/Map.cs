@@ -23,10 +23,8 @@ using Mapsui.Fetcher;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Projection;
-using Mapsui.Rendering;
 using Mapsui.Styles;
 using Mapsui.UI;
-using Mapsui.Utilities;
 using Mapsui.Widgets;
 
 namespace Mapsui
@@ -37,7 +35,7 @@ namespace Mapsui
     /// <remarks>
     /// Map holds all map related infos like transformation, layers, widgets and so on.
     /// </remarks>
-    public class Map : INotifyPropertyChanged
+    public class Map : INotifyPropertyChanged, IMap
     {
         private LayerCollection _layers = new LayerCollection();
         private Color _backColor = Color.White;
@@ -49,7 +47,6 @@ namespace Mapsui
         {
             BackColor = Color.White;
             Layers = new LayerCollection();
-            Viewport = new Viewport { Center = { X = double.NaN, Y = double.NaN }, Resolution = double.NaN };
         }
 
         /// <summary>
@@ -57,27 +54,7 @@ namespace Mapsui
         /// </summary>
         public List<IWidget> Widgets { get; } = new List<IWidget>();
 
-        /// <summary>
-        /// Pan mode to use, when map is paned
-        /// </summary>
-        public PanMode PanMode { get; set; } = PanMode.KeepCenterWithinExtents;
-
-        /// <summary>
-        /// Zoom mode to use, when map is zoomed
-        /// </summary>
-        public ZoomMode ZoomMode { get; set; } = ZoomMode.KeepWithinResolutions;
-
-        /// <summary>
-        /// Set this property in combination KeepCenterWithinExtents or KeepViewportWithinExtents.
-        /// If PanLimits is not set, Map.Extent will be used as restricted extent.
-        /// </summary>
-        public BoundingBox PanLimits { get; set; }
-
-        /// <summary>
-        /// Pair of the limits for the resolutions (smallest and biggest). If ZoomMode is set 
-        /// to anything else than None, resolution is kept between these values.
-        /// </summary>
-        public MinMax ZoomLimits { get; set; }
+        public IViewportLimiter Limiter { get; set; } = new ViewportLimiter();
 
         /// <summary>
         /// Projection type of Map. Normally in format like "EPSG:3857"
@@ -109,79 +86,11 @@ namespace Mapsui
             }
         }
 
-        /// <summary>
-        /// List of layers, that are respected when creating the info event
-        /// </summary>
+        [Obsolete("Use ILayer.IsMapInfoLayer instead", true)]
         public IList<ILayer> InfoLayers { get; } = new List<ILayer>();
 
-        /// <summary>
-        /// List of layers, that are respected when creating the hover event
-        /// </summary>
+        [Obsolete("Use your own hover event and call MapControl.GetMapInfo", true)]
         public IList<ILayer> HoverLayers { get; } = new List<ILayer>();
-
-        /// <summary>
-        /// Viewport holding informations about visible part of the map
-        /// </summary>
-        public Viewport Viewport { get; }
-
-        /// <summary>
-        /// Navigate center of viewport to center of extent and change resolution
-        /// </summary>
-        /// <param name="extent">New extent for viewport to show</param>
-        /// <param name="scaleMethod">Scale method to use to determin resolution</param>
-        public void NavigateTo(BoundingBox extent, ScaleMethod scaleMethod = ScaleMethod.Fit)
-        {
-            Viewport.Resolution = ZoomHelper.DetermineResolution(
-                extent.Width, extent.Height, Viewport.Width, Viewport.Height, scaleMethod);
-            Viewport.Center = extent.Centroid;
-            OnRefreshGraphics();
-            RefreshData(true);
-        }
-
-        /// <summary>
-        /// Change resolution of viewport
-        /// </summary>
-        /// <param name="resolution">New resolution to use</param>
-        public void NavigateTo(double resolution)
-        {
-            Viewport.Resolution = resolution;
-            OnRefreshGraphics();
-            RefreshData(true);
-        }
-
-        /// <summary>
-        /// Change center of viewport
-        /// </summary>
-        /// <param name="center">New center point of viewport</param>
-        public void NavigateTo(Point center)
-        {
-            Viewport.Center = center;
-            OnRefreshGraphics();
-            RefreshData(true);
-        }
-
-        /// <summary>
-        /// Change center of viewport to X/Y coordinates
-        /// </summary>
-        /// <param name="x">X value of the new center</param>
-        /// <param name="y">Y value of the new center</param>
-        public void NavigateTo(double x, double y)
-        {
-            Viewport.Center = new Point(x, y);
-            OnRefreshGraphics();
-            RefreshData(true);
-        }
-
-        /// <summary>
-        /// Change rotation of viewport
-        /// </summary>
-        /// <param name="rotation">New rotation in degrees of viewport></param>
-        public void RotateTo(double rotation)
-        {
-            Viewport.Rotation = rotation;
-            OnRefreshGraphics();
-            RefreshData(true);
-        }
 
         /// <summary>
         /// Map background color (defaults to transparent)
@@ -193,7 +102,7 @@ namespace Mapsui
             {
                 if (_backColor == value) return;
                 _backColor = value;
-                OnRefreshGraphics();
+                OnPropertyChanged(nameof(BackColor));
             }
         }
 
@@ -231,96 +140,21 @@ namespace Mapsui
         /// </summary>
         public event DataChangedEventHandler DataChanged;
 
-        /// <summary>
-        /// Called whenever visible map needs an update
-        /// </summary>
+#pragma warning disable 67
+        [Obsolete("Use PropertyChanged instead", true)]
         public event EventHandler RefreshGraphics;
+#pragma warning restore 67
 
-        /// <summary>
-        ///  Called whenever a feature in one of the layers in InfoLayers is hitten by a click 
-        /// </summary>
+        [Obsolete("Use MapControl.Info instead", true)]
+#pragma warning disable 67
         public event EventHandler<MapInfoEventArgs> Info;
+#pragma warning restore 67
 
-        /// <summary>
-        /// Called whenever mouse is over a feature in one of the layers in HoverLayers
-        /// </summary>
+        [Obsolete("Use your own hover event instead and call MapControl.GetMapInfo", true)]
+#pragma warning disable 67
         public event EventHandler<MapInfoEventArgs> Hover;
-
-        /// <summary>
-        /// Check, if a widget or feature at a given screen position is clicked/tapped
-        /// </summary>
-        /// <param name="screenPosition">Screen position to check for widgets and features</param>
-        /// <param name="startScreenPosition">Screen position of Viewport/MapControl</param>
-        /// <param name="symbolCache">Cache for symbols to determin size</param>
-        /// <param name="widgetCallback">Callback, which is called when Widget is hiten</param>
-        /// <param name="numTaps">Number of clickes/taps</param>
-        /// <returns>True, if something done </returns>
-        public bool InvokeInfo(Point screenPosition, Point startScreenPosition, ISymbolCache symbolCache,
-            Action<IWidget, Point> widgetCallback, int numTaps)
-        {
-            var layerWidgets = Layers.Select(l => l.Attribution).Where(a => a != null);
-            var allWidgets = layerWidgets.Concat(Widgets).ToList(); // Concat layer widgets and map widgets.
-
-            // First check if a Widget is clicked. In the current design they are always on top of the map.
-            var widget = WidgetTouch.GetWidget(screenPosition, startScreenPosition, allWidgets);
-            if (widget != null)
-            {
-                // todo:
-                // How should widgetCallback have a handled type thing?
-                // Widgets should be iterated through rather than getting a single widget, 
-                // based on Z index and then called until handled = true; Ordered By highest Z
-                widgetCallback(widget, screenPosition);
-                return true;
-            }
-
-            if (Info == null) return false;
-            var mapInfo = InfoHelper.GetMapInfo(Viewport, screenPosition, InfoLayers, symbolCache);
-
-            if (mapInfo != null)
-            {
-                // todo:
-                // Info items should be iterated through rather than getting a single item, 
-                // based on Z index and then called until handled = true; Ordered By highest Z
-                var mapInfoEventArgs = new MapInfoEventArgs
-                {
-                    MapInfo = mapInfo,
-                    NumTaps = numTaps,
-                    Handled = false
-                };
-                Info?.Invoke(this, mapInfoEventArgs);
-                return mapInfoEventArgs.Handled;
-            }
-
-            return false;
-        }
-
-        private MapInfoEventArgs _previousHoverEventArgs;
-
-        /// <summary>
-        ///  Check, if mouse is hovered over a feature at a given screen position
-        /// </summary>
-        /// <param name="screenPosition">Screen position to check for widgets and features</param>
-        /// <param name="symbolCache">Cache for symbols to determin size</param>
-        public void InvokeHover(Point screenPosition, ISymbolCache symbolCache)
-        {
-            if (Hover == null) return;
-            if (HoverLayers.Count == 0) return;
-            var mapInfo = InfoHelper.GetMapInfo(Viewport, screenPosition, HoverLayers, symbolCache);
-
-            if (mapInfo?.Feature != _previousHoverEventArgs?.MapInfo.Feature) // only notify when the feature changes
-            {
-                var mapInfoEventArgs = new MapInfoEventArgs
-                {
-                    MapInfo = mapInfo,
-                    NumTaps = 0,
-                    Handled = false
-                };
-
-                _previousHoverEventArgs = mapInfoEventArgs;
-                Hover?.Invoke(this, mapInfoEventArgs);
-            }
-        }
-
+#pragma warning restore 67
+        
         /// <summary>
         /// Abort fetching of all layers
         /// </summary>
@@ -328,7 +162,7 @@ namespace Mapsui
         {
             foreach (var layer in _layers.ToList())
             {
-                layer.AbortFetch();
+                if (layer is IAsyncDataFetcher asyncLayer) asyncLayer.AbortFetch();
             }
         }
 
@@ -339,15 +173,15 @@ namespace Mapsui
         {
             foreach (var layer in _layers)
             {
-                layer.ClearCache();
+                if (layer is IAsyncDataFetcher asyncLayer) asyncLayer.ClearCache();
             }
         }
 
-        public void RefreshData(bool majorChange)
+        public void RefreshData(BoundingBox extent, double resolution, bool majorChange)
         {
             foreach (var layer in _layers.ToList())
             {
-                layer.ViewChanged(majorChange, Viewport.Extent, Viewport.Resolution);
+                layer.RefreshData(extent, resolution, majorChange);
             }
         }
 
@@ -360,24 +194,21 @@ namespace Mapsui
             layer.CRS = CRS;
             Resolutions = DetermineResolutions(Layers);
             OnPropertyChanged(nameof(Layers));
-
-            OnRefreshGraphics();
         }
 
         private void LayersLayerRemoved(ILayer layer)
         {
-            layer.AbortFetch();
+            if (layer is IAsyncDataFetcher asyncLayer)
+            {
+                asyncLayer.AbortFetch();
+            }
 
             layer.DataChanged -= LayerDataChanged;
             layer.PropertyChanged -= LayerPropertyChanged;
 
-            InfoLayers.Remove(layer);
-
             Resolutions = DetermineResolutions(Layers);
 
             OnPropertyChanged(nameof(Layers));
-
-            OnRefreshGraphics();
         }
 
         private static IReadOnlyList<double> DetermineResolutions(IEnumerable<ILayer> layers)
@@ -418,12 +249,7 @@ namespace Mapsui
         {
             OnPropertyChanged(sender, e.PropertyName);
         }
-
-        internal void OnRefreshGraphics()
-        {
-            RefreshGraphics?.Invoke(this, EventArgs.Empty);
-        }
-
+        
         private void OnPropertyChanged(object sender, string propertyName)
         {
             PropertyChanged?.Invoke(sender, new PropertyChangedEventArgs(propertyName));
@@ -443,5 +269,7 @@ namespace Mapsui
         {
             DataChanged?.Invoke(sender, e);
         }
+
+        public Action<INavigator> Home { get; set; } = n => n.NavigateToFullEnvelope();
     }
 }

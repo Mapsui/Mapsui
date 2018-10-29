@@ -2,7 +2,7 @@
 
 namespace Mapsui.UI.Uwp
 {
-    static class PointExtensions
+    public static class PointExtensions
     {
         public static Geometries.Point ToMapsui(this Point point)
         {

@@ -1,16 +1,24 @@
 ﻿using System.IO;
 using BruTile.MbTiles;
 using Mapsui.Layers;
+using Mapsui.UI;
 using SQLite;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public static class MbTilesSample
+    public class MbTilesSample : IDemoSample
     {
         // This is a hack used for iOS/Android deployment
         // For Mac it should be @"." + Path.DirectorySeparatorChar + ".." + Path.DirectorySeparatorChar + ".." + Path.DirectorySeparatorChar + ".." + Path.DirectorySeparatorChar + "MbTiles";
         //public static string MbTilesLocation { get; set; } = @"." + Path.DirectorySeparatorChar + ".." + Path.DirectorySeparatorChar + ".." + Path.DirectorySeparatorChar + ".." + Path.DirectorySeparatorChar + "MbTiles";
         public static string MbTilesLocation { get; set; } = @"." + Path.DirectorySeparatorChar + "MbTiles";
+
+        public string Name => "MbTiles";
+
+        public void Setup(IMapControl mapControl)
+        {
+            mapControl.Map = CreateMap();
+        }
 
         public static Map CreateMap()
         {

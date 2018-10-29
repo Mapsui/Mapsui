@@ -1,9 +1,20 @@
 ﻿using Mapsui.Layers;
+using Mapsui.UI;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public static class TmsSample
+    public class TmsSample
+    // : IDemoSample
+    // Disable because the TMS service is not there (perhaps moved)
+    // todo: Replace with another.
     {
+        public string Name => "TMS";
+
+        public void Setup(IMapControl mapControl)
+        {
+            mapControl.Map = CreateMap();
+        }
+
         public static Map CreateMap()
         {
             var map = new Map();

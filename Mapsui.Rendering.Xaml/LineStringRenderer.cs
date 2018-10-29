@@ -7,7 +7,7 @@ namespace Mapsui.Rendering.Xaml
 {
     public static class LineStringRenderer
     {
-        public static System.Windows.Shapes.Shape RenderLineString(LineString lineString, IStyle style, IViewport viewport)
+        public static System.Windows.Shapes.Shape RenderLineString(LineString lineString, IStyle style, IReadOnlyViewport viewport)
         {
             if (!(style is VectorStyle)) throw new ArgumentException("Style is not of type VectorStyle");
             var vectorStyle = style as VectorStyle;

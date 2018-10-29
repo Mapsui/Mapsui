@@ -5,6 +5,6 @@ namespace Mapsui.Rendering.Xaml.XamlWidgets
 {
     interface IXamlWidgetRenderer : IWidgetRenderer
     {
-        void Draw(Canvas canvas, IWidget widget);
+        void Draw(Canvas canvas, IReadOnlyViewport viewport, IWidget widget);
     }
 }

@@ -4,7 +4,7 @@
 | ------------- |:-------------:|
 | Nuget   | [![NuGet Status](http://img.shields.io/nuget/v/Mapsui.svg?style=flat)](https://www.nuget.org/packages/Mapsui/) |
 | Build on Windows    | [![Build status](https://ci.appveyor.com/api/projects/status/p20w43qv4ixkkftp?svg=true)](https://ci.appveyor.com/project/pauldendulk/mapsui) |
-| Build on Mac | [![Build Status](https://www.bitrise.io/app/119dabd1302841a1/status.svg?token=KH9mbi7R6uLBz0iUZjbvJw&branch=master)](https://www.bitrise.io/app/119dabd1302841a1) |
+| Build on Mac | [![Build Status](https://app.bitrise.io/app/119dabd1302841a1.svg?token=KH9mbi7R6uLBz0iUZjbvJw)](https://www.bitrise.io/app/119dabd1302841a1) |
 | Build docs | [![Build status](https://ci.appveyor.com/api/projects/status/c8hcfeoafmf51gin/branch/master?svg=true)](https://ci.appveyor.com/project/pauldendulk/mapsui-373p1/branch/master) |
 
 ## Mapsui (pronounced map-su-wii)
@@ -13,18 +13,16 @@ Mapsui is a C# map component for apps
 
 - Supported platforms: WPF, UWP, Android, iOS
 - The Mapsui core assembly is PCL Profile 111 for v1 and .NET Standard 1.3 for v2
+- The Mapsui 2.0 beta is .NET Core 2.0
 - Designed to be fast and responsive
 - Started as a fork of SharpMap
-
-## News
-- 2018 April 21: Moved the repository from pauldendulk/Mapsui to Mapsui/Mapsui. 
 
 ## Quickstart
 Quickly get a sample running in [WPF](http://mapsui.github.io/Mapsui/documentation/getting-started-wpf.html) or 
 [Android](http://mapsui.github.io/Mapsui/documentation/getting-started-android.html).
 
 ## Documentation
-There documentation can be found [here](http://mapsui.github.io/Mapsui). Let us know what kind of information you are missing.
+The documentation can be found [here](http://mapsui.github.io/Mapsui). Let us know what kind of information you are missing.
 
 ## Samples
 The best way to get going with Mapsui is by using the Samples. If you clone the project there is a Samples folder with a Mapsui.Samples.Wpf project with the list of samples. The accompanying code can be found [here](https://github.com/Mapsui/Mapsui/tree/master/Samples/Mapsui.Samples.Common/Maps).

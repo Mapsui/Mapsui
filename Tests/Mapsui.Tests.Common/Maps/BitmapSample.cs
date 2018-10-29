@@ -3,23 +3,25 @@ using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Styles;
+using Mapsui.UI;
 
 namespace Mapsui.Tests.Common.Maps
 {
-    public static class BitmapSample
+    public class BitmapSample : ITestSample
     {
+        public string Name => "Bitmap Symbol";
+        
+        public void Setup(IMapControl mapControl)
+        {
+            mapControl.Map = CreateMap();
+        }
+
         public static Map CreateMap()
         {
             var map = new Map
             {
                 BackColor = Color.Transparent,
-                Viewport =
-                {
-                    Center = new Point(256, 200),
-                    Width = 512,
-                    Height = 400,
-                    Resolution = 1
-                }
+                Home = n => n.NavigateTo(new Point(256, 200), 1)
             };
             map.Layers.Add(new MemoryLayer
             {

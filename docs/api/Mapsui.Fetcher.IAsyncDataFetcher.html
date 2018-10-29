@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Interface IAsyncDataFetcher
    ">
-    <meta name="generator" content="docfx 2.36.2.0">
+    <meta name="generator" content="docfx 2.39.2.0">
     
     <link rel="shortcut icon" href="../images/favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -88,11 +88,13 @@
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Fetcher_IAsyncDataFetcher_AbortFetch.md&amp;value=---%0Auid%3A%20Mapsui.Fetcher.IAsyncDataFetcher.AbortFetch%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Fetcher/IAsyncDataFetcher.cs/#L26">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Fetcher/IAsyncDataFetcher.cs/#L29">View Source</a>
   </span>
   <a id="Mapsui_Fetcher_IAsyncDataFetcher_AbortFetch_" data-uid="Mapsui.Fetcher.IAsyncDataFetcher.AbortFetch*"></a>
   <h4 id="Mapsui_Fetcher_IAsyncDataFetcher_AbortFetch" data-uid="Mapsui.Fetcher.IAsyncDataFetcher.AbortFetch">AbortFetch()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Aborts the tile fetches that are in progress. If this method is not called
+the threads will terminate naturally. It will just take a little longer.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -103,94 +105,17 @@
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Fetcher_IAsyncDataFetcher_ClearCache.md&amp;value=---%0Auid%3A%20Mapsui.Fetcher.IAsyncDataFetcher.ClearCache%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Fetcher/IAsyncDataFetcher.cs/#L40">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Fetcher/IAsyncDataFetcher.cs/#L34">View Source</a>
   </span>
   <a id="Mapsui_Fetcher_IAsyncDataFetcher_ClearCache_" data-uid="Mapsui.Fetcher.IAsyncDataFetcher.ClearCache*"></a>
   <h4 id="Mapsui_Fetcher_IAsyncDataFetcher_ClearCache" data-uid="Mapsui.Fetcher.IAsyncDataFetcher.ClearCache">ClearCache()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Clear cache of layer</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">void ClearCache()</code></pre>
   </div>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Fetcher_IAsyncDataFetcher_ViewChanged_System_Boolean_Mapsui_Geometries_BoundingBox_System_Double_.md&amp;value=---%0Auid%3A%20Mapsui.Fetcher.IAsyncDataFetcher.ViewChanged(System.Boolean%2CMapsui.Geometries.BoundingBox%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Fetcher/IAsyncDataFetcher.cs/#L37">View Source</a>
-  </span>
-  <a id="Mapsui_Fetcher_IAsyncDataFetcher_ViewChanged_" data-uid="Mapsui.Fetcher.IAsyncDataFetcher.ViewChanged*"></a>
-  <h4 id="Mapsui_Fetcher_IAsyncDataFetcher_ViewChanged_System_Boolean_Mapsui_Geometries_BoundingBox_System_Double_" data-uid="Mapsui.Fetcher.IAsyncDataFetcher.ViewChanged(System.Boolean,Mapsui.Geometries.BoundingBox,System.Double)">ViewChanged(Boolean, BoundingBox, Double)</h4>
-  <div class="markdown level1 summary"><p>Indicates that there has been a change in the view of the map</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">void ViewChanged(bool majorChange, BoundingBox extent, double resolution)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td><span class="parametername">majorChange</span></td>
-        <td><p>If true an implementation should always refresh it&apos;s data. If false (minorChange) the
-implemenatation could ignore it.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="Mapsui.Geometries.BoundingBox.html">BoundingBox</a></td>
-        <td><span class="parametername">extent</span></td>
-        <td><p>The new extent of the visisble map</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Double</span></td>
-        <td><span class="parametername">resolution</span></td>
-        <td><p>The new resolution of the visible map</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h3 id="events">Events
-  </h3>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Fetcher_IAsyncDataFetcher_DataChanged.md&amp;value=---%0Auid%3A%20Mapsui.Fetcher.IAsyncDataFetcher.DataChanged%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Fetcher/IAsyncDataFetcher.cs/#L39">View Source</a>
-  </span>
-  <h4 id="Mapsui_Fetcher_IAsyncDataFetcher_DataChanged" data-uid="Mapsui.Fetcher.IAsyncDataFetcher.DataChanged">DataChanged</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">event DataChangedEventHandler DataChanged</code></pre>
-  </div>
-  <h5 class="eventType">Event Type</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Mapsui.Fetcher.DataChangedEventHandler.html">DataChangedEventHandler</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
 </article>
           </div>
           
@@ -202,7 +127,7 @@ implemenatation could ignore it.</p>
                     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Fetcher_IAsyncDataFetcher.md&amp;value=---%0Auid%3A%20Mapsui.Fetcher.IAsyncDataFetcher%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Fetcher/IAsyncDataFetcher.cs/#L24" class="contribution-link">View Source</a>
+                    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Fetcher/IAsyncDataFetcher.cs/#L23" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

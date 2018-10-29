@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class WidgetRenderer
    ">
-    <meta name="generator" content="docfx 2.36.2.0">
+    <meta name="generator" content="docfx 2.39.2.0">
     
     <link rel="shortcut icon" href="../images/favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -90,18 +90,18 @@
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Rendering_Skia_SkiaWidgets_WidgetRenderer_Render_System_Object_System_Double_System_Double_IEnumerable_Mapsui_Widgets_IWidget__IDictionary_Type_Mapsui_Widgets_IWidgetRenderer__System_Single_.md&amp;value=---%0Auid%3A%20Mapsui.Rendering.Skia.SkiaWidgets.WidgetRenderer.Render(System.Object%2CSystem.Double%2CSystem.Double%2CIEnumerable%7BMapsui.Widgets.IWidget%7D%2CIDictionary%7BType%2CMapsui.Widgets.IWidgetRenderer%7D%2CSystem.Single)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Rendering_Skia_SkiaWidgets_WidgetRenderer_Render_System_Object_Mapsui_IReadOnlyViewport_IEnumerable_Mapsui_Widgets_IWidget__IDictionary_Type_Mapsui_Widgets_IWidgetRenderer__System_Single_.md&amp;value=---%0Auid%3A%20Mapsui.Rendering.Skia.SkiaWidgets.WidgetRenderer.Render(System.Object%2CMapsui.IReadOnlyViewport%2CIEnumerable%7BMapsui.Widgets.IWidget%7D%2CIDictionary%7BType%2CMapsui.Widgets.IWidgetRenderer%7D%2CSystem.Single)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Rendering.Skia/SkiaWidgets/WidgetRenderer.cs/#L10">View Source</a>
   </span>
   <a id="Mapsui_Rendering_Skia_SkiaWidgets_WidgetRenderer_Render_" data-uid="Mapsui.Rendering.Skia.SkiaWidgets.WidgetRenderer.Render*"></a>
-  <h4 id="Mapsui_Rendering_Skia_SkiaWidgets_WidgetRenderer_Render_System_Object_System_Double_System_Double_IEnumerable_Mapsui_Widgets_IWidget__IDictionary_Type_Mapsui_Widgets_IWidgetRenderer__System_Single_" data-uid="Mapsui.Rendering.Skia.SkiaWidgets.WidgetRenderer.Render(System.Object,System.Double,System.Double,IEnumerable{Mapsui.Widgets.IWidget},IDictionary{Type,Mapsui.Widgets.IWidgetRenderer},System.Single)">Render(Object, Double, Double, IEnumerable&lt;IWidget&gt;, IDictionary&lt;Type, IWidgetRenderer&gt;, Single)</h4>
+  <h4 id="Mapsui_Rendering_Skia_SkiaWidgets_WidgetRenderer_Render_System_Object_Mapsui_IReadOnlyViewport_IEnumerable_Mapsui_Widgets_IWidget__IDictionary_Type_Mapsui_Widgets_IWidgetRenderer__System_Single_" data-uid="Mapsui.Rendering.Skia.SkiaWidgets.WidgetRenderer.Render(System.Object,Mapsui.IReadOnlyViewport,IEnumerable{Mapsui.Widgets.IWidget},IDictionary{Type,Mapsui.Widgets.IWidgetRenderer},System.Single)">Render(Object, IReadOnlyViewport, IEnumerable&lt;IWidget&gt;, IDictionary&lt;Type, IWidgetRenderer&gt;, Single)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static void Render(object target, double screenWidth, double screenHeight, IEnumerable&lt;IWidget&gt; widgets, IDictionary&lt;Type, IWidgetRenderer&gt; renders, float layerOpacity)</code></pre>
+    <pre><code class="lang-csharp hljs">public static void Render(object target, IReadOnlyViewport viewport, IEnumerable&lt;IWidget&gt; widgets, IDictionary&lt;Type, IWidgetRenderer&gt; renders, float layerOpacity)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -119,13 +119,8 @@
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">System.Double</span></td>
-        <td><span class="parametername">screenWidth</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Double</span></td>
-        <td><span class="parametername">screenHeight</span></td>
+        <td><a class="xref" href="Mapsui.IReadOnlyViewport.html">IReadOnlyViewport</a></td>
+        <td><span class="parametername">viewport</span></td>
         <td></td>
       </tr>
       <tr>

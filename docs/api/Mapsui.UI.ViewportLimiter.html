@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class ViewportLimiter
    ">
-    <meta name="generator" content="docfx 2.36.2.0">
+    <meta name="generator" content="docfx 2.39.2.0">
     
     <link rel="shortcut icon" href="../images/favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -80,47 +80,99 @@
     <div class="level0"><span class="xref">System.Object</span></div>
     <div class="level1"><span class="xref">ViewportLimiter</span></div>
   </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Mapsui.UI.IViewportLimiter.html">IViewportLimiter</a></div>
+  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Mapsui.UI.html">Mapsui.UI</a></h6>
   <h6><strong>Assembly</strong>: Mapsui.dll</h6>
   <h5 id="Mapsui_UI_ViewportLimiter_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static class ViewportLimiter : object</code></pre>
+    <pre><code class="lang-csharp hljs">public class ViewportLimiter : object, IViewportLimiter</code></pre>
   </div>
-  <h3 id="methods">Methods
+  <h3 id="properties">Properties
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_ViewportLimiter_GetExtremes_IReadOnlyList_System_Double__.md&amp;value=---%0Auid%3A%20Mapsui.UI.ViewportLimiter.GetExtremes(IReadOnlyList%7BSystem.Double%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_ViewportLimiter_PanLimits.md&amp;value=---%0Auid%3A%20Mapsui.UI.ViewportLimiter.PanLimits%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/UI/ViewportLimiter.cs/#L65">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/UI/ViewportLimiter.cs/#L79">View Source</a>
   </span>
-  <a id="Mapsui_UI_ViewportLimiter_GetExtremes_" data-uid="Mapsui.UI.ViewportLimiter.GetExtremes*"></a>
-  <h4 id="Mapsui_UI_ViewportLimiter_GetExtremes_IReadOnlyList_System_Double__" data-uid="Mapsui.UI.ViewportLimiter.GetExtremes(IReadOnlyList{System.Double})">GetExtremes(IReadOnlyList&lt;Double&gt;)</h4>
-  <div class="markdown level1 summary"></div>
+  <a id="Mapsui_UI_ViewportLimiter_PanLimits_" data-uid="Mapsui.UI.ViewportLimiter.PanLimits*"></a>
+  <h4 id="Mapsui_UI_ViewportLimiter_PanLimits" data-uid="Mapsui.UI.ViewportLimiter.PanLimits">PanLimits</h4>
+  <div class="markdown level1 summary"><p>Set this property in combination KeepCenterWithinExtents or KeepViewportWithinExtents.
+If PanLimits is not set, Map.Extent will be used as restricted extent.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static MinMax GetExtremes(IReadOnlyList&lt;double&gt; resolutions)</code></pre>
+    <pre><code class="lang-csharp hljs">public BoundingBox PanLimits { get; set; }</code></pre>
   </div>
-  <h5 class="parameters">Parameters</h5>
+  <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
     <thead>
       <tr>
         <th>Type</th>
-        <th>Name</th>
         <th>Description</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">IReadOnlyList</span>&lt;<span class="xref">System.Double</span>&gt;</td>
-        <td><span class="parametername">resolutions</span></td>
+        <td><a class="xref" href="Mapsui.Geometries.BoundingBox.html">BoundingBox</a></td>
         <td></td>
       </tr>
     </tbody>
   </table>
-  <h5 class="returns">Returns</h5>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_ViewportLimiter_PanMode.md&amp;value=---%0Auid%3A%20Mapsui.UI.ViewportLimiter.PanMode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/UI/ViewportLimiter.cs/#L68">View Source</a>
+  </span>
+  <a id="Mapsui_UI_ViewportLimiter_PanMode_" data-uid="Mapsui.UI.ViewportLimiter.PanMode*"></a>
+  <h4 id="Mapsui_UI_ViewportLimiter_PanMode" data-uid="Mapsui.UI.ViewportLimiter.PanMode">PanMode</h4>
+  <div class="markdown level1 summary"><p>Pan mode to use, when map is paned</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PanMode PanMode { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.UI.PanMode.html">PanMode</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_ViewportLimiter_ZoomLimits.md&amp;value=---%0Auid%3A%20Mapsui.UI.ViewportLimiter.ZoomLimits%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/UI/ViewportLimiter.cs/#L85">View Source</a>
+  </span>
+  <a id="Mapsui_UI_ViewportLimiter_ZoomLimits_" data-uid="Mapsui.UI.ViewportLimiter.ZoomLimits*"></a>
+  <h4 id="Mapsui_UI_ViewportLimiter_ZoomLimits" data-uid="Mapsui.UI.ViewportLimiter.ZoomLimits">ZoomLimits</h4>
+  <div class="markdown level1 summary"><p>Pair of the limits for the resolutions (smallest and biggest). If ZoomMode is set 
+to anything else than None, resolution is kept between these values.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MinMax ZoomLimits { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
     <thead>
       <tr>
@@ -137,18 +189,51 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_ViewportLimiter_Limit_Mapsui_IViewport_Mapsui_UI_ZoomMode_Mapsui_UI_MinMax_IReadOnlyList_System_Double__Mapsui_UI_PanMode_Mapsui_Geometries_BoundingBox_Mapsui_Geometries_BoundingBox_.md&amp;value=---%0Auid%3A%20Mapsui.UI.ViewportLimiter.Limit(Mapsui.IViewport%2CMapsui.UI.ZoomMode%2CMapsui.UI.MinMax%2CIReadOnlyList%7BSystem.Double%7D%2CMapsui.UI.PanMode%2CMapsui.Geometries.BoundingBox%2CMapsui.Geometries.BoundingBox)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_ViewportLimiter_ZoomMode.md&amp;value=---%0Auid%3A%20Mapsui.UI.ViewportLimiter.ZoomMode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/UI/ViewportLimiter.cs/#L74">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/UI/ViewportLimiter.cs/#L73">View Source</a>
+  </span>
+  <a id="Mapsui_UI_ViewportLimiter_ZoomMode_" data-uid="Mapsui.UI.ViewportLimiter.ZoomMode*"></a>
+  <h4 id="Mapsui_UI_ViewportLimiter_ZoomMode" data-uid="Mapsui.UI.ViewportLimiter.ZoomMode">ZoomMode</h4>
+  <div class="markdown level1 summary"><p>Zoom mode to use, when map is zoomed</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ZoomMode ZoomMode { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.UI.ZoomMode.html">ZoomMode</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_ViewportLimiter_Limit_Mapsui_IViewport_IReadOnlyList_System_Double__Mapsui_Geometries_BoundingBox_.md&amp;value=---%0Auid%3A%20Mapsui.UI.ViewportLimiter.Limit(Mapsui.IViewport%2CIReadOnlyList%7BSystem.Double%7D%2CMapsui.Geometries.BoundingBox)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/UI/ViewportLimiter.cs/#L96">View Source</a>
   </span>
   <a id="Mapsui_UI_ViewportLimiter_Limit_" data-uid="Mapsui.UI.ViewportLimiter.Limit*"></a>
-  <h4 id="Mapsui_UI_ViewportLimiter_Limit_Mapsui_IViewport_Mapsui_UI_ZoomMode_Mapsui_UI_MinMax_IReadOnlyList_System_Double__Mapsui_UI_PanMode_Mapsui_Geometries_BoundingBox_Mapsui_Geometries_BoundingBox_" data-uid="Mapsui.UI.ViewportLimiter.Limit(Mapsui.IViewport,Mapsui.UI.ZoomMode,Mapsui.UI.MinMax,IReadOnlyList{System.Double},Mapsui.UI.PanMode,Mapsui.Geometries.BoundingBox,Mapsui.Geometries.BoundingBox)">Limit(IViewport, ZoomMode, MinMax, IReadOnlyList&lt;Double&gt;, PanMode, BoundingBox, BoundingBox)</h4>
+  <h4 id="Mapsui_UI_ViewportLimiter_Limit_Mapsui_IViewport_IReadOnlyList_System_Double__Mapsui_Geometries_BoundingBox_" data-uid="Mapsui.UI.ViewportLimiter.Limit(Mapsui.IViewport,IReadOnlyList{System.Double},Mapsui.Geometries.BoundingBox)">Limit(IViewport, IReadOnlyList&lt;Double&gt;, BoundingBox)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static void Limit(IViewport viewport, ZoomMode zoomMode, MinMax zoomLimits, IReadOnlyList&lt;double&gt; mapResolutions, PanMode panMode, BoundingBox panLimits, BoundingBox mapEnvelope)</code></pre>
+    <pre><code class="lang-csharp hljs">public void Limit(IViewport viewport, IReadOnlyList&lt;double&gt; mapResolutions, BoundingBox mapEnvelope)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -163,16 +248,6 @@
       <tr>
         <td><a class="xref" href="Mapsui.IViewport.html">IViewport</a></td>
         <td><span class="parametername">viewport</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="Mapsui.UI.ZoomMode.html">ZoomMode</a></td>
-        <td><span class="parametername">zoomMode</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="Mapsui.UI.MinMax.html">MinMax</a></td>
-        <td><span class="parametername">zoomLimits</span></td>
         <td></td>
       </tr>
       <tr>
@@ -181,16 +256,6 @@
         <td></td>
       </tr>
       <tr>
-        <td><a class="xref" href="Mapsui.UI.PanMode.html">PanMode</a></td>
-        <td><span class="parametername">panMode</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="Mapsui.Geometries.BoundingBox.html">BoundingBox</a></td>
-        <td><span class="parametername">panLimits</span></td>
-        <td></td>
-      </tr>
-      <tr>
         <td><a class="xref" href="Mapsui.Geometries.BoundingBox.html">BoundingBox</a></td>
         <td><span class="parametername">mapEnvelope</span></td>
         <td></td>
@@ -199,18 +264,18 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_ViewportLimiter_LimitExtent_Mapsui_IViewport_Mapsui_UI_PanMode_Mapsui_Geometries_BoundingBox_Mapsui_Geometries_BoundingBox_.md&amp;value=---%0Auid%3A%20Mapsui.UI.ViewportLimiter.LimitExtent(Mapsui.IViewport%2CMapsui.UI.PanMode%2CMapsui.Geometries.BoundingBox%2CMapsui.Geometries.BoundingBox)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_ViewportLimiter_LimitExtent_Mapsui_IViewport_Mapsui_Geometries_BoundingBox_.md&amp;value=---%0Auid%3A%20Mapsui.UI.ViewportLimiter.LimitExtent(Mapsui.IViewport%2CMapsui.Geometries.BoundingBox)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/UI/ViewportLimiter.cs/#L114">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/UI/ViewportLimiter.cs/#L134">View Source</a>
   </span>
   <a id="Mapsui_UI_ViewportLimiter_LimitExtent_" data-uid="Mapsui.UI.ViewportLimiter.LimitExtent*"></a>
-  <h4 id="Mapsui_UI_ViewportLimiter_LimitExtent_Mapsui_IViewport_Mapsui_UI_PanMode_Mapsui_Geometries_BoundingBox_Mapsui_Geometries_BoundingBox_" data-uid="Mapsui.UI.ViewportLimiter.LimitExtent(Mapsui.IViewport,Mapsui.UI.PanMode,Mapsui.Geometries.BoundingBox,Mapsui.Geometries.BoundingBox)">LimitExtent(IViewport, PanMode, BoundingBox, BoundingBox)</h4>
+  <h4 id="Mapsui_UI_ViewportLimiter_LimitExtent_Mapsui_IViewport_Mapsui_Geometries_BoundingBox_" data-uid="Mapsui.UI.ViewportLimiter.LimitExtent(Mapsui.IViewport,Mapsui.Geometries.BoundingBox)">LimitExtent(IViewport, BoundingBox)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static void LimitExtent(IViewport viewport, PanMode panMode, BoundingBox panLimits, BoundingBox mapEnvelope)</code></pre>
+    <pre><code class="lang-csharp hljs">public void LimitExtent(IViewport viewport, BoundingBox mapEnvelope)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -228,16 +293,6 @@
         <td></td>
       </tr>
       <tr>
-        <td><a class="xref" href="Mapsui.UI.PanMode.html">PanMode</a></td>
-        <td><span class="parametername">panMode</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="Mapsui.Geometries.BoundingBox.html">BoundingBox</a></td>
-        <td><span class="parametername">panLimits</span></td>
-        <td></td>
-      </tr>
-      <tr>
         <td><a class="xref" href="Mapsui.Geometries.BoundingBox.html">BoundingBox</a></td>
         <td><span class="parametername">mapEnvelope</span></td>
         <td></td>
@@ -246,18 +301,18 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_ViewportLimiter_LimitResolution_System_Double_System_Double_System_Double_Mapsui_UI_ZoomMode_Mapsui_UI_MinMax_IReadOnlyList_System_Double__Mapsui_Geometries_BoundingBox_.md&amp;value=---%0Auid%3A%20Mapsui.UI.ViewportLimiter.LimitResolution(System.Double%2CSystem.Double%2CSystem.Double%2CMapsui.UI.ZoomMode%2CMapsui.UI.MinMax%2CIReadOnlyList%7BSystem.Double%7D%2CMapsui.Geometries.BoundingBox)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_ViewportLimiter_LimitResolution_System_Double_System_Double_System_Double_IReadOnlyList_System_Double__Mapsui_Geometries_BoundingBox_.md&amp;value=---%0Auid%3A%20Mapsui.UI.ViewportLimiter.LimitResolution(System.Double%2CSystem.Double%2CSystem.Double%2CIReadOnlyList%7BSystem.Double%7D%2CMapsui.Geometries.BoundingBox)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/UI/ViewportLimiter.cs/#L82">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/UI/ViewportLimiter.cs/#L102">View Source</a>
   </span>
   <a id="Mapsui_UI_ViewportLimiter_LimitResolution_" data-uid="Mapsui.UI.ViewportLimiter.LimitResolution*"></a>
-  <h4 id="Mapsui_UI_ViewportLimiter_LimitResolution_System_Double_System_Double_System_Double_Mapsui_UI_ZoomMode_Mapsui_UI_MinMax_IReadOnlyList_System_Double__Mapsui_Geometries_BoundingBox_" data-uid="Mapsui.UI.ViewportLimiter.LimitResolution(System.Double,System.Double,System.Double,Mapsui.UI.ZoomMode,Mapsui.UI.MinMax,IReadOnlyList{System.Double},Mapsui.Geometries.BoundingBox)">LimitResolution(Double, Double, Double, ZoomMode, MinMax, IReadOnlyList&lt;Double&gt;, BoundingBox)</h4>
+  <h4 id="Mapsui_UI_ViewportLimiter_LimitResolution_System_Double_System_Double_System_Double_IReadOnlyList_System_Double__Mapsui_Geometries_BoundingBox_" data-uid="Mapsui.UI.ViewportLimiter.LimitResolution(System.Double,System.Double,System.Double,IReadOnlyList{System.Double},Mapsui.Geometries.BoundingBox)">LimitResolution(Double, Double, Double, IReadOnlyList&lt;Double&gt;, BoundingBox)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static double LimitResolution(double resolution, double screenWidth, double screenHeight, ZoomMode zoomMode, MinMax zoomLimits, IReadOnlyList&lt;double&gt; mapResolutions, BoundingBox mapEnvelope)</code></pre>
+    <pre><code class="lang-csharp hljs">public double LimitResolution(double resolution, double screenWidth, double screenHeight, IReadOnlyList&lt;double&gt; mapResolutions, BoundingBox mapEnvelope)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -285,16 +340,6 @@
         <td></td>
       </tr>
       <tr>
-        <td><a class="xref" href="Mapsui.UI.ZoomMode.html">ZoomMode</a></td>
-        <td><span class="parametername">zoomMode</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="Mapsui.UI.MinMax.html">MinMax</a></td>
-        <td><span class="parametername">zoomLimits</span></td>
-        <td></td>
-      </tr>
-      <tr>
         <td><span class="xref">IReadOnlyList</span>&lt;<span class="xref">System.Double</span>&gt;</td>
         <td><span class="parametername">mapResolutions</span></td>
         <td></td>
@@ -321,6 +366,10 @@
       </tr>
     </tbody>
   </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="Mapsui.UI.IViewportLimiter.html">IViewportLimiter</a>
+  </div>
 </article>
           </div>
           

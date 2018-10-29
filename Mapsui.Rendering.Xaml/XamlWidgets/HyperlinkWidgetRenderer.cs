@@ -8,7 +8,7 @@ namespace Mapsui.Rendering.Xaml.XamlWidgets
 {
     public class HyperlinkWidgetRenderer : IXamlWidgetRenderer
     {
-        public void Draw(Canvas canvas, IWidget widget)
+        public void Draw(Canvas canvas, IReadOnlyViewport viewport, IWidget widget)
         {
             var hyperlink = (Hyperlink) widget;
             if (string.IsNullOrEmpty(hyperlink.Text)) return;

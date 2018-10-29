@@ -42,28 +42,31 @@ namespace Mapsui.Rendering.Skia
             WidgetRenders[typeof(ZoomInOutWidget)] = new ZoomInOutWidgetRenderer();
         }
 
-        public void Render(object target, IViewport viewport, IEnumerable<ILayer> layers,
+        public void Render(object target, IReadOnlyViewport viewport, IEnumerable<ILayer> layers,
             IEnumerable<IWidget> widgets, Color background = null)
         {
             var allWidgets = layers.Select(l => l.Attribution).Where(w => w != null).ToList().Concat(widgets);
-            Render((SKCanvas)target, viewport, layers, allWidgets, background);
+            RenderTypeSave((SKCanvas)target, viewport, layers, allWidgets, background);
         }
 
-        private void Render(SKCanvas canvas, IViewport viewport, IEnumerable<ILayer> layers,
+        private void RenderTypeSave(SKCanvas canvas, IReadOnlyViewport viewport, IEnumerable<ILayer> layers,
             IEnumerable<IWidget> widgets, Color background = null)
         {
+            if (!viewport.HasSize) return;
+
             if (background != null) canvas.Clear(background.ToSkia(1));
-            if (viewport.Initialized) Render(canvas, viewport, layers);
+            Render(canvas, viewport, layers);
             Render(canvas, viewport, widgets, 1);
         }
 
-        public MemoryStream RenderToBitmapStream(IViewport viewport, IEnumerable<ILayer> layers, Color background = null)
+        public MemoryStream RenderToBitmapStream(IReadOnlyViewport viewport, IEnumerable<ILayer> layers, Color background = null)
         {
             try
             {
                 using (var surface = SKSurface.Create(
                     (int)viewport.Width, (int)viewport.Height, SKImageInfo.PlatformColorType, SKAlphaType.Unpremul))
                 {
+                    if (surface == null) return null;
                     // Not sure if this is needed here:
                     if (background != null) surface.Canvas.Clear(background.ToSkia(1));
                     Render(surface.Canvas, viewport, layers);
@@ -85,7 +88,7 @@ namespace Mapsui.Rendering.Skia
             }
         }
 
-        private void Render(SKCanvas canvas, IViewport viewport, IEnumerable<ILayer> layers)
+        private void Render(SKCanvas canvas, IReadOnlyViewport viewport, IEnumerable<ILayer> layers)
         {
             try
             {
@@ -128,7 +131,7 @@ namespace Mapsui.Rendering.Skia
             }
         }
 
-        private void RenderFeature(SKCanvas canvas, IViewport viewport, IStyle style, IFeature feature, float layerOpacity)
+        private void RenderFeature(SKCanvas canvas, IReadOnlyViewport viewport, IStyle style, IFeature feature, float layerOpacity)
         {
             if (feature.Geometry is Point)
                 PointRenderer.Draw(canvas, viewport, style, feature, feature.Geometry, _symbolCache, layerOpacity * style.Opacity);
@@ -146,9 +149,9 @@ namespace Mapsui.Rendering.Skia
                 RasterRenderer.Draw(canvas, viewport, style, feature, layerOpacity * style.Opacity, _tileCache, _currentIteration);
         }
 
-        private void Render(object canvas, IViewport viewport, IEnumerable<IWidget> widgets, float layerOpacity)
+        private void Render(object canvas, IReadOnlyViewport viewport, IEnumerable<IWidget> widgets, float layerOpacity)
         {
-            WidgetRenderer.Render(canvas, viewport.Width, viewport.Height, widgets, WidgetRenders, layerOpacity);
+            WidgetRenderer.Render(canvas, viewport, widgets, WidgetRenders, layerOpacity);
         }
     }
 

@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class WritableLayer
    ">
-    <meta name="generator" content="docfx 2.36.2.0">
+    <meta name="generator" content="docfx 2.39.2.0">
     
     <link rel="shortcut icon" href="../images/favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -84,11 +84,13 @@
   <div classs="implements">
     <h5>Implements</h5>
     <div><a class="xref" href="Mapsui.Layers.ILayer.html">ILayer</a></div>
-    <div><a class="xref" href="Mapsui.Fetcher.IAsyncDataFetcher.html">IAsyncDataFetcher</a></div>
     <div><span class="xref">INotifyPropertyChanged</span></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Transformer">BaseLayer.Transformer</a>
+    </div>
     <div>
       <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_GetLayerStyles_Mapsui_Layers_ILayer_">BaseLayer.GetLayerStyles(ILayer)</a>
     </div>
@@ -135,13 +137,13 @@
       <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Transformation">BaseLayer.Transformation</a>
     </div>
     <div>
-      <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Transformer">BaseLayer.Transformer</a>
-    </div>
-    <div>
       <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Attribution">BaseLayer.Attribution</a>
     </div>
     <div>
       <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Resolutions">BaseLayer.Resolutions</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_IsMapInfoLayer">BaseLayer.IsMapInfoLayer</a>
     </div>
     <div>
       <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_IsCrsSupported_System_String_">BaseLayer.IsCrsSupported(String)</a>
@@ -160,7 +162,7 @@
   <h6><strong>Assembly</strong>: Mapsui.dll</h6>
   <h5 id="Mapsui_Layers_WritableLayer_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class WritableLayer : BaseLayer, ILayer, IAsyncDataFetcher, INotifyPropertyChanged</code></pre>
+    <pre><code class="lang-csharp hljs">public class WritableLayer : BaseLayer, ILayer, INotifyPropertyChanged</code></pre>
   </div>
   <h3 id="properties">Properties
   </h3>
@@ -169,7 +171,7 @@
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Layers_WritableLayer_Envelope.md&amp;value=---%0Auid%3A%20Mapsui.Layers.WritableLayer.Envelope%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/WritableLayer.cs/#L40">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/WritableLayer.cs/#L39">View Source</a>
   </span>
   <a id="Mapsui_Layers_WritableLayer_Envelope_" data-uid="Mapsui.Layers.WritableLayer.Envelope*"></a>
   <h4 id="Mapsui_Layers_WritableLayer_Envelope" data-uid="Mapsui.Layers.WritableLayer.Envelope">Envelope</h4>
@@ -200,27 +202,10 @@
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Layers_WritableLayer_AbortFetch.md&amp;value=---%0Auid%3A%20Mapsui.Layers.WritableLayer.AbortFetch%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/WritableLayer.cs/#L42">View Source</a>
-  </span>
-  <a id="Mapsui_Layers_WritableLayer_AbortFetch_" data-uid="Mapsui.Layers.WritableLayer.AbortFetch*"></a>
-  <h4 id="Mapsui_Layers_WritableLayer_AbortFetch" data-uid="Mapsui.Layers.WritableLayer.AbortFetch">AbortFetch()</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override void AbortFetch()</code></pre>
-  </div>
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_AbortFetch">BaseLayer.AbortFetch()</a></div>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Layers_WritableLayer_Add_Mapsui_Providers_IFeature_.md&amp;value=---%0Auid%3A%20Mapsui.Layers.WritableLayer.Add(Mapsui.Providers.IFeature)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/WritableLayer.cs/#L68">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/WritableLayer.cs/#L56">View Source</a>
   </span>
   <a id="Mapsui_Layers_WritableLayer_Add_" data-uid="Mapsui.Layers.WritableLayer.Add*"></a>
   <h4 id="Mapsui_Layers_WritableLayer_Add_Mapsui_Providers_IFeature_" data-uid="Mapsui.Layers.WritableLayer.Add(Mapsui.Providers.IFeature)">Add(IFeature)</h4>
@@ -252,7 +237,7 @@
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Layers_WritableLayer_AddRange_IEnumerable_Mapsui_Providers_IFeature__.md&amp;value=---%0Auid%3A%20Mapsui.Layers.WritableLayer.AddRange(IEnumerable%7BMapsui.Providers.IFeature%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/WritableLayer.cs/#L73">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/WritableLayer.cs/#L61">View Source</a>
   </span>
   <a id="Mapsui_Layers_WritableLayer_AddRange_" data-uid="Mapsui.Layers.WritableLayer.AddRange*"></a>
   <h4 id="Mapsui_Layers_WritableLayer_AddRange_IEnumerable_Mapsui_Providers_IFeature__" data-uid="Mapsui.Layers.WritableLayer.AddRange(IEnumerable{Mapsui.Providers.IFeature})">AddRange(IEnumerable&lt;IFeature&gt;)</h4>
@@ -284,7 +269,7 @@
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Layers_WritableLayer_Clear.md&amp;value=---%0Auid%3A%20Mapsui.Layers.WritableLayer.Clear%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/WritableLayer.cs/#L63">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/WritableLayer.cs/#L51">View Source</a>
   </span>
   <a id="Mapsui_Layers_WritableLayer_Clear_" data-uid="Mapsui.Layers.WritableLayer.Clear*"></a>
   <h4 id="Mapsui_Layers_WritableLayer_Clear" data-uid="Mapsui.Layers.WritableLayer.Clear">Clear()</h4>
@@ -296,27 +281,10 @@
   </div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Layers_WritableLayer_ClearCache.md&amp;value=---%0Auid%3A%20Mapsui.Layers.WritableLayer.ClearCache%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/WritableLayer.cs/#L53">View Source</a>
-  </span>
-  <a id="Mapsui_Layers_WritableLayer_ClearCache_" data-uid="Mapsui.Layers.WritableLayer.ClearCache*"></a>
-  <h4 id="Mapsui_Layers_WritableLayer_ClearCache" data-uid="Mapsui.Layers.WritableLayer.ClearCache">ClearCache()</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override void ClearCache()</code></pre>
-  </div>
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_ClearCache">BaseLayer.ClearCache()</a></div>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Layers_WritableLayer_Find_Mapsui_Providers_IFeature_.md&amp;value=---%0Auid%3A%20Mapsui.Layers.WritableLayer.Find(Mapsui.Providers.IFeature)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/WritableLayer.cs/#L81">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/WritableLayer.cs/#L69">View Source</a>
   </span>
   <a id="Mapsui_Layers_WritableLayer_Find_" data-uid="Mapsui.Layers.WritableLayer.Find*"></a>
   <h4 id="Mapsui_Layers_WritableLayer_Find_Mapsui_Providers_IFeature_" data-uid="Mapsui.Layers.WritableLayer.Find(Mapsui.Providers.IFeature)">Find(IFeature)</h4>
@@ -363,7 +331,7 @@
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Layers_WritableLayer_GetFeatures.md&amp;value=---%0Auid%3A%20Mapsui.Layers.WritableLayer.GetFeatures%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/WritableLayer.cs/#L58">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/WritableLayer.cs/#L46">View Source</a>
   </span>
   <a id="Mapsui_Layers_WritableLayer_GetFeatures_" data-uid="Mapsui.Layers.WritableLayer.GetFeatures*"></a>
   <h4 id="Mapsui_Layers_WritableLayer_GetFeatures" data-uid="Mapsui.Layers.WritableLayer.GetFeatures">GetFeatures()</h4>
@@ -393,7 +361,7 @@
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Layers_WritableLayer_GetFeaturesInView_Mapsui_Geometries_BoundingBox_System_Double_.md&amp;value=---%0Auid%3A%20Mapsui.Layers.WritableLayer.GetFeaturesInView(Mapsui.Geometries.BoundingBox%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/WritableLayer.cs/#L17">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/WritableLayer.cs/#L16">View Source</a>
   </span>
   <a id="Mapsui_Layers_WritableLayer_GetFeaturesInView_" data-uid="Mapsui.Layers.WritableLayer.GetFeaturesInView*"></a>
   <h4 id="Mapsui_Layers_WritableLayer_GetFeaturesInView_Mapsui_Geometries_BoundingBox_System_Double_" data-uid="Mapsui.Layers.WritableLayer.GetFeaturesInView(Mapsui.Geometries.BoundingBox,System.Double)">GetFeaturesInView(BoundingBox, Double)</h4>
@@ -444,10 +412,54 @@
   <div><a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_GetFeaturesInView_Mapsui_Geometries_BoundingBox_System_Double_">BaseLayer.GetFeaturesInView(BoundingBox, Double)</a></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Layers_WritableLayer_RefreshData_Mapsui_Geometries_BoundingBox_System_Double_System_Boolean_.md&amp;value=---%0Auid%3A%20Mapsui.Layers.WritableLayer.RefreshData(Mapsui.Geometries.BoundingBox%2CSystem.Double%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/WritableLayer.cs/#L41">View Source</a>
+  </span>
+  <a id="Mapsui_Layers_WritableLayer_RefreshData_" data-uid="Mapsui.Layers.WritableLayer.RefreshData*"></a>
+  <h4 id="Mapsui_Layers_WritableLayer_RefreshData_Mapsui_Geometries_BoundingBox_System_Double_System_Boolean_" data-uid="Mapsui.Layers.WritableLayer.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,System.Boolean)">RefreshData(BoundingBox, Double, Boolean)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void RefreshData(BoundingBox extent, double resolution, bool majorChange)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Geometries.BoundingBox.html">BoundingBox</a></td>
+        <td><span class="parametername">extent</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">resolution</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">majorChange</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_RefreshData_Mapsui_Geometries_BoundingBox_System_Double_System_Boolean_">BaseLayer.RefreshData(BoundingBox, Double, Boolean)</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Layers_WritableLayer_SignalDataChanged.md&amp;value=---%0Auid%3A%20Mapsui.Layers.WritableLayer.SignalDataChanged%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/WritableLayer.cs/#L90">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/WritableLayer.cs/#L78">View Source</a>
   </span>
   <a id="Mapsui_Layers_WritableLayer_SignalDataChanged_" data-uid="Mapsui.Layers.WritableLayer.SignalDataChanged*"></a>
   <h4 id="Mapsui_Layers_WritableLayer_SignalDataChanged" data-uid="Mapsui.Layers.WritableLayer.SignalDataChanged">SignalDataChanged()</h4>
@@ -464,7 +476,7 @@ an individual geometry is edited. The layer itself can not know about it&apos;s 
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Layers_WritableLayer_TryRemove_Mapsui_Providers_IFeature_Func_Mapsui_Providers_IFeature_Mapsui_Providers_IFeature_System_Boolean__.md&amp;value=---%0Auid%3A%20Mapsui.Layers.WritableLayer.TryRemove(Mapsui.Providers.IFeature%2CFunc%7BMapsui.Providers.IFeature%2CMapsui.Providers.IFeature%2CSystem.Boolean%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/WritableLayer.cs/#L102">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/WritableLayer.cs/#L90">View Source</a>
   </span>
   <a id="Mapsui_Layers_WritableLayer_TryRemove_" data-uid="Mapsui.Layers.WritableLayer.TryRemove*"></a>
   <h4 id="Mapsui_Layers_WritableLayer_TryRemove_Mapsui_Providers_IFeature_Func_Mapsui_Providers_IFeature_Mapsui_Providers_IFeature_System_Boolean__" data-uid="Mapsui.Layers.WritableLayer.TryRemove(Mapsui.Providers.IFeature,Func{Mapsui.Providers.IFeature,Mapsui.Providers.IFeature,System.Boolean})">TryRemove(IFeature, Func&lt;IFeature, IFeature, Boolean&gt;)</h4>
@@ -515,56 +527,9 @@ features in the list. If ommitted a reference compare is done.</p>
       </tr>
     </tbody>
   </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Layers_WritableLayer_ViewChanged_System_Boolean_Mapsui_Geometries_BoundingBox_System_Double_.md&amp;value=---%0Auid%3A%20Mapsui.Layers.WritableLayer.ViewChanged(System.Boolean%2CMapsui.Geometries.BoundingBox%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/WritableLayer.cs/#L47">View Source</a>
-  </span>
-  <a id="Mapsui_Layers_WritableLayer_ViewChanged_" data-uid="Mapsui.Layers.WritableLayer.ViewChanged*"></a>
-  <h4 id="Mapsui_Layers_WritableLayer_ViewChanged_System_Boolean_Mapsui_Geometries_BoundingBox_System_Double_" data-uid="Mapsui.Layers.WritableLayer.ViewChanged(System.Boolean,Mapsui.Geometries.BoundingBox,System.Double)">ViewChanged(Boolean, BoundingBox, Double)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override void ViewChanged(bool majorChange, BoundingBox extent, double resolution)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td><span class="parametername">majorChange</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="Mapsui.Geometries.BoundingBox.html">BoundingBox</a></td>
-        <td><span class="parametername">extent</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Double</span></td>
-        <td><span class="parametername">resolution</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_ViewChanged_System_Boolean_Mapsui_Geometries_BoundingBox_System_Double_">BaseLayer.ViewChanged(Boolean, BoundingBox, Double)</a></div>
   <h3 id="implements">Implements</h3>
   <div>
       <a class="xref" href="Mapsui.Layers.ILayer.html">ILayer</a>
-  </div>
-  <div>
-      <a class="xref" href="Mapsui.Fetcher.IAsyncDataFetcher.html">IAsyncDataFetcher</a>
   </div>
   <div>
       <span class="xref">INotifyPropertyChanged</span>
@@ -580,7 +545,7 @@ features in the list. If ommitted a reference compare is done.</p>
                     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Layers_WritableLayer.md&amp;value=---%0Auid%3A%20Mapsui.Layers.WritableLayer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/WritableLayer.cs/#L13" class="contribution-link">View Source</a>
+                    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/WritableLayer.cs/#L12" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

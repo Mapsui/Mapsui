@@ -3,13 +3,22 @@ using System.Reflection;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
+using Mapsui.Samples.Common;
 using Mapsui.Styles;
+using Mapsui.UI;
 using Mapsui.Utilities;
 
-namespace Mapsui.Samples.Common.Maps
+namespace Mapsui.Samples.Tests.Maps
 {
-    public static class SymbolsInWorldUnitsSample
+    public class SymbolsInWorldUnitsSample : IDemoSample
     {
+        public string Name => "Symbols in World Units";
+
+        public void Setup(IMapControl mapControl)
+        {
+            mapControl.Map = CreateMap();
+        }
+
         public static Map CreateMap()
         {
             var map = new Map();

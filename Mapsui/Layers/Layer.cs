@@ -29,7 +29,7 @@ using Mapsui.Utilities;
 
 namespace Mapsui.Layers
 {
-    public class Layer : BaseLayer
+    public class Layer : BaseLayer, IAsyncDataFetcher
     {
         private IProvider _dataSource;
         private readonly object _syncRoot = new object();
@@ -70,11 +70,15 @@ namespace Mapsui.Layers
             set
             {
                 if (_dataSource == value) return;
-                _dataSource = value;
-                
-                Transformer.FromCRS = _dataSource?.CRS;
 
-                _fetchDispatcher.DataSource = _dataSource;
+                _dataSource = value;
+                ClearCache();
+                
+                if (_dataSource != null)
+                {
+                    Transformer.FromCRS = _dataSource?.CRS;
+                    _fetchDispatcher.DataSource = _dataSource;
+                }
 
                 OnPropertyChanged(nameof(DataSource));
                 OnPropertyChanged(nameof(Envelope));
@@ -122,19 +126,19 @@ namespace Mapsui.Layers
         }
 
         /// <inheritdoc />
-        public override void AbortFetch()
+        public void AbortFetch()
         {
             _fetchMachine.Stop();
         }
 
         /// <inheritdoc />
-        public override void ClearCache()
+        public void ClearCache()
         {
             _cache.Clear();
         }
 
         /// <inheritdoc />
-        public override void ViewChanged(bool majorChange, BoundingBox extent, double resolution)
+        public override void RefreshData(BoundingBox extent, double resolution, bool majorChange)
         {
             if (!Enabled) return;
             if (DataSource == null) return;

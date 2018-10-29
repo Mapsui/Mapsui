@@ -1,20 +1,27 @@
-﻿using Mapsui.Layers;
-using Mapsui.Providers;
-using Mapsui.Styles;
-using Mapsui.Styles.Thematics;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
-using Mapsui.Providers.Shapefile;
-using Mapsui.Utilities;
 using Mapsui.Geometries;
-using System.Linq;
-using System.Collections.Generic;
+using Mapsui.Layers;
+using Mapsui.Providers;
+using Mapsui.Providers.Shapefile;
 using Mapsui.Samples.Common.Maps;
+using Mapsui.Styles;
+using Mapsui.Styles.Thematics;
+using Mapsui.UI;
+using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Common.Desktop
 {
-    public static class ThemeStyleSample
+    public class ThemeStyleSample : IDemoSample
     {
+        public string Name => "Desktop: Theme Style";
+
+        public void Setup(IMapControl mapControl)
+        {
+            mapControl.Map = CreateMap();
+        }
+
         public static Map CreateMap()
         {
             var map = new Map();
@@ -23,10 +30,7 @@ namespace Mapsui.Samples.Common.Desktop
 
             map.Layers.Add(CreateCountryLayer(countrySource));
             map.Layers.Add(CreateCityHoverPoints());
-
-            map.InfoLayers.Add(map.Layers.FindLayer("Countries").First());
-            map.HoverLayers.Add(map.Layers.First(l => l.Name == "Points"));
-
+            
             return map;
         }
 
@@ -36,7 +40,8 @@ namespace Mapsui.Samples.Common.Desktop
             {
                 Name = "Countries",
                 DataSource = countrySource,
-                Style = CreateThemeStyle()
+                Style = CreateThemeStyle(),
+                IsMapInfoLayer = true
             };
         }
 
@@ -93,7 +98,8 @@ namespace Mapsui.Samples.Common.Desktop
                     SymbolScale = 0.25
                 },
                 CRS = "EPSG:28992",
-                Name = "Points"
+                Name = "Points",
+                IsMapInfoLayer = true
             };
             return layer;
         }

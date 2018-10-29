@@ -1,14 +1,23 @@
 ﻿using Mapsui.Layers;
 using Mapsui.Providers;
+using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Helpers;
 using Mapsui.Styles;
+using Mapsui.UI;
 using Mapsui.Utilities;
 
-namespace Mapsui.Samples.Common.Maps
+namespace Mapsui.Samples.Tests.Maps
 {
-    public static class StackedLabelsSample
+    public class StackedLabelsSample : IDemoSample
     {
         private const string LabelColumn = "Label";
+
+        public string Name => "Stacked labels";
+
+        public void Setup(IMapControl mapControl)
+        {
+            mapControl.Map = CreateMap();
+        }
 
         public static Map CreateMap()
         {

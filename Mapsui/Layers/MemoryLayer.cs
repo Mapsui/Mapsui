@@ -20,22 +20,12 @@ namespace Mapsui.Layers
             return DataSource.GetFeaturesInView(biggerBox, resolution);
         }
 
-        public override BoundingBox Envelope => DataSource?.GetExtents();
-
-        public override void AbortFetch()
-        {
-            // do nothing. This is not an async layer
-        }
-
-        public override void ViewChanged(bool majorChange, BoundingBox extent, double resolution)
+        public override void RefreshData(BoundingBox extent, double resolution, bool majorChange)
         {
             //The MemoryLayer always has it's data ready so can fire a DataChanged event immediately so that listeners can act on it.
-            Task.Run(() => OnDataChanged(new DataChangedEventArgs()));
+            OnDataChanged(new DataChangedEventArgs());
         }
 
-        public override void ClearCache()
-        {
-            // do nothing. This is not an async layer
-        }
+        public override BoundingBox Envelope => DataSource?.GetExtents();
     }
 }

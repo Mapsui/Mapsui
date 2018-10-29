@@ -16,12 +16,9 @@ namespace Mapsui.Rendering.Xaml.XamlWidgets
     private static Brush _brushBackground;
     private static Brush _brushText;
 
-    public void Draw(Canvas canvas, IWidget widget)
+    public void Draw(Canvas canvas, IReadOnlyViewport viewport, IWidget widget)
     {
         var zoomInOut = (ZoomInOutWidget) widget;
-        // If this widget belongs to no viewport, than stop drawing
-        if (zoomInOut.Map == null)
-            return;
 
         _brushStroke = new SolidColorBrush(zoomInOut.StrokeColor.ToXaml());
         _brushStroke.Opacity = zoomInOut.Opacity;

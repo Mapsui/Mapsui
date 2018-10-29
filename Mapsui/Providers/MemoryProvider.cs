@@ -58,13 +58,11 @@ namespace Mapsui.Providers
     /// </remarks>
     public class MemoryProvider : IProvider
     {
-        private readonly object _syncRoot = new object();
-        private IFeatures _features;
 
         /// <summary>
         /// Gets or sets the geometries this datasource contains
         /// </summary>
-        public IEnumerable<IFeature> Features => _features;
+        public IReadOnlyList<IFeature> Features { get; private set; }
 
         public double SymbolSize { get; set; }
 
@@ -72,11 +70,14 @@ namespace Mapsui.Providers
         /// The spatial reference ID (CRS)
         /// </summary>
         public string CRS { get; set; }
-        
+
+        BoundingBox _boundingBox;
+
         public MemoryProvider()
         {
             CRS = "";
-            _features = new Features();
+            Features = new List<IFeature>();
+            _boundingBox = GetExtents(Features);
         }
 
         /// <summary>
@@ -86,14 +87,8 @@ namespace Mapsui.Providers
         public MemoryProvider(IEnumerable<IGeometry> geometries)
         {
             CRS = "";
-            var features = new Features();
-            foreach (IGeometry geometry in geometries)
-            {
-                IFeature feature = features.New();
-                feature.Geometry = geometry;
-                features.Add(feature);
-            }
-            _features = features;
+            Features = geometries.Select(g => new Feature { Geometry = g }).ToList();
+            _boundingBox = GetExtents(Features);
         }
 
         /// <summary>
@@ -103,13 +98,14 @@ namespace Mapsui.Providers
         public MemoryProvider(IFeature feature)
         {
             CRS = "";
-            _features = new Features {feature};
+            Features = new List<IFeature> { feature };
+            _boundingBox = GetExtents(Features);
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MemoryProvider"/>
         /// </summary>
-        /// <param name="wellKnownTextGeometry"><see cref="Mapsui.Geometries.Geometry"/> as Well-known Text to be included in this datasource</param>
+        /// <param name="wellKnownTextGeometry"><see cref="Geometry"/> as Well-known Text to be included in this datasource</param>
         public MemoryProvider(string wellKnownTextGeometry)
             : this(GeometryFromWKT.Parse(wellKnownTextGeometry))
         {
@@ -122,19 +118,8 @@ namespace Mapsui.Providers
         public MemoryProvider(IEnumerable<IFeature> features)
         {
             CRS = "";
-            var localFeatures = new Features();
-            foreach (var feature in features) localFeatures.Add(feature);
-            _features = localFeatures;
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MemoryProvider"/>
-        /// </summary>
-        /// <param name="features">Features to be included in this datasource</param>
-        public MemoryProvider(IFeatures features)
-        {
-            CRS = "";
-            _features = features;
+            Features = features.ToList();
+            _boundingBox = GetExtents(Features);
         }
 
         /// <summary>
@@ -144,11 +129,15 @@ namespace Mapsui.Providers
         public MemoryProvider(Geometry geometry)
         {
             CRS = "";
-            var features = new Features();
-            IFeature feature = features.New();
-            feature.Geometry = geometry;
-            features.Add(feature);
-            _features = features;
+
+            Features = new List<IFeature>
+            {
+                new Feature
+                {
+                    Geometry = geometry
+                }
+            };
+            _boundingBox = GetExtents(Features);
 
             SymbolSize = 64;
         }
@@ -156,7 +145,7 @@ namespace Mapsui.Providers
         /// <summary>
         /// Initializes a new instance of the <see cref="MemoryProvider"/>
         /// </summary>
-        /// <param name="wellKnownBinaryGeometry"><see cref="Mapsui.Geometries.Geometry"/> as Well-known Binary to be included in this datasource</param>
+        /// <param name="wellKnownBinaryGeometry"><see cref="Geometry"/> as Well-known Binary to be included in this datasource</param>
         public MemoryProvider(byte[] wellKnownBinaryGeometry) : this(GeometryFromWKB.Parse(wellKnownBinaryGeometry))
         {
         }
@@ -165,44 +154,18 @@ namespace Mapsui.Providers
         {
             if (box == null) throw new ArgumentNullException(nameof(box));
 
-            lock (_syncRoot)
-            {
-                var features = Features.ToList();
+            var features = Features.ToList();
 
-                // Use a larger extent so that symbols partially outside of the extent are included
-                var grownBox = box.Grow(resolution*SymbolSize*0.5);
+            // Use a larger extent so that symbols partially outside of the extent are included
+            var grownBox = box.Grow(resolution * SymbolSize * 0.5);
 
-                foreach (var feature in features)
-                {
-                    if (feature.Geometry == null)
-                        continue;
-
-                    var boundingBox = feature.Geometry.BoundingBox;
-                    if (boundingBox!= null && grownBox.Intersects(boundingBox))
-                    {
-                        yield return feature;
-                    }
-                }
-            }
-        }
-
-
-        public IFeature Find(object value)
-        {
-            lock (_syncRoot)
-            {
-                if (string.IsNullOrEmpty(_features.PrimaryKey)) throw new Exception("ID Field was not set");
-                return Find(value, _features.PrimaryKey);
-            }
+            return features.Where(f => f.Geometry != null && f.Geometry.BoundingBox.Intersects(grownBox)).ToList();
         }
 
         public IFeature Find(object value, string primaryKey)
         {
-            lock (_syncRoot)
-            {
-                return Features.FirstOrDefault(f => f[primaryKey] != null && value != null &&
-                    f[primaryKey].Equals(value));
-            }
+            return Features.FirstOrDefault(f => f[primaryKey] != null && value != null &&
+                f[primaryKey].Equals(value));
         }
 
         /// <summary>
@@ -211,42 +174,31 @@ namespace Mapsui.Providers
         /// <returns>boundingbox</returns>
         public BoundingBox GetExtents()
         {
-            lock (_syncRoot)
-            {
-                BoundingBox box = null;
-                foreach (IFeature feature in Features)
-                {
-                    if (feature.Geometry.IsEmpty()) continue;
-                    box = box == null
-                            ? feature.Geometry.BoundingBox
-                            : box.Join(feature.Geometry.BoundingBox);
-                }
-                return box;
-            }
-        }
-        
-        public void Clear()
-        {
-            lock (_syncRoot)
-            {
-                _features.Clear();
-            }
+            return _boundingBox;
         }
 
-        public void ReplaceFeatures(Features features)
+        private static BoundingBox GetExtents(IReadOnlyList<IFeature> features)
         {
-            lock (_syncRoot)
+            BoundingBox box = null;
+            foreach (var feature in features)
             {
-                _features = features;
+                if (feature.Geometry.IsEmpty()) continue;
+                box = box == null
+                    ? feature.Geometry.BoundingBox
+                    : box.Join(feature.Geometry.BoundingBox);
             }
+            return box;
+        }
+
+        public void Clear()
+        {
+            Features = new List<IFeature>();
         }
 
         public void ReplaceFeatures(IEnumerable<IFeature> features)
         {
-            lock (_syncRoot)
-            {
-                _features = new Features(features);
-            }
+            Features = features.ToList();
+            _boundingBox = GetExtents(Features);
         }
 
     }

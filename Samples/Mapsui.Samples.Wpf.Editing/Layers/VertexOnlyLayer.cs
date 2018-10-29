@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Mapsui.Fetcher;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
@@ -10,6 +11,8 @@ namespace Mapsui.Samples.Wpf.Editing.Layers
     public class VertexOnlyLayer : BaseLayer
     {
         private readonly ILayer _source;
+
+        public override BoundingBox Envelope => _source.Envelope;
 
         public VertexOnlyLayer(ILayer source)
         {
@@ -31,21 +34,9 @@ namespace Mapsui.Samples.Wpf.Editing.Layers
             }
         }
 
-        public override BoundingBox Envelope => _source.Envelope;
-
-        public override void AbortFetch()
+        public override void RefreshData(BoundingBox extent, double resolution, bool majorChange)
         {
-            
-        }
-
-        public override void ViewChanged(bool majorChange, BoundingBox extent, double resolution)
-        {
-            
-        }
-
-        public override void ClearCache()
-        {
-            
+            OnDataChanged(new DataChangedEventArgs());
         }
     }
 }

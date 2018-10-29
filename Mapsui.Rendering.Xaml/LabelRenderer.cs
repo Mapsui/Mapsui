@@ -8,7 +8,7 @@ namespace Mapsui.Rendering.Xaml
 {
     internal static class LabelRenderer
     {
-        public static UIElement RenderLabel(Geometries.Point position, LabelStyle labelStyle, IViewport viewport, 
+        public static UIElement RenderLabel(Geometries.Point position, LabelStyle labelStyle, IReadOnlyViewport viewport, 
             string labelText)
         {
             var screenPosition = viewport.WorldToScreen(position);

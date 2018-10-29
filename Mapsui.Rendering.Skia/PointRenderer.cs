@@ -8,7 +8,7 @@ namespace Mapsui.Rendering.Skia
 {
     static class PointRenderer
     {
-        public static void Draw(SKCanvas canvas, IViewport viewport, IStyle style, IFeature feature, 
+        public static void Draw(SKCanvas canvas, IReadOnlyViewport viewport, IStyle style, IFeature feature, 
             IGeometry geometry, SymbolCache symbolCache, float opacity)
         {
             var point = geometry as Point;

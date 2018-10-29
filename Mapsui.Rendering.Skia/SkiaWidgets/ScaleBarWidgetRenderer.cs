@@ -14,7 +14,7 @@ namespace Mapsui.Rendering.Skia.SkiaWidgets
         private static SKPaint _paintScaleText;
         private static SKPaint _paintScaleTextStroke;
 
-        public void Draw(SKCanvas canvas, double screenWidth, double screenHeight,  IWidget widget,
+        public void Draw(SKCanvas canvas, IReadOnlyViewport viewport,  IWidget widget,
             float layerOpacity)
         {
             var scaleBar = (ScaleBarWidget) widget;
@@ -51,7 +51,7 @@ namespace Mapsui.Rendering.Skia.SkiaWidgets
             float scaleBarLength2;
             string scaleBarText2;
 
-            (scaleBarLength1, scaleBarText1, scaleBarLength2, scaleBarText2) = scaleBar.GetScaleBarLengthAndText();
+            (scaleBarLength1, scaleBarText1, scaleBarLength2, scaleBarText2) = scaleBar.GetScaleBarLengthAndText(viewport);
 
             // Calc height of scale bar
             SKRect textSize = SKRect.Empty;
@@ -75,7 +75,7 @@ namespace Mapsui.Rendering.Skia.SkiaWidgets
             // Draw lines
 
             // Get lines for scale bar
-            var points = scaleBar.GetScaleBarLinePositions(scaleBarLength1, scaleBarLength2, StrokeExternal);
+            var points = scaleBar.GetScaleBarLinePositions(viewport, scaleBarLength1, scaleBarLength2, StrokeExternal);
 
             // BoundingBox for scale bar
             BoundingBox envelop = new BoundingBox();
@@ -116,7 +116,7 @@ namespace Mapsui.Rendering.Skia.SkiaWidgets
             _paintScaleTextStroke.MeasureText(scaleBarText1, ref textSize1);
             _paintScaleTextStroke.MeasureText(scaleBarText2, ref textSize2);
 
-            var (posX1, posY1, posX2, posY2) = scaleBar.GetScaleBarTextPositions(textSize.ToMapsui(), textSize1.ToMapsui(), textSize2.ToMapsui(), StrokeExternal);
+            var (posX1, posY1, posX2, posY2) = scaleBar.GetScaleBarTextPositions(viewport, textSize.ToMapsui(), textSize1.ToMapsui(), textSize2.ToMapsui(), StrokeExternal);
 
             // Now draw text
             canvas.DrawText(scaleBarText1, posX1, posY1 - textSize1.Top, _paintScaleTextStroke);

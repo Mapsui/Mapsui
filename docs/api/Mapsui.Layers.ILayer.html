@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Interface ILayer
    ">
-    <meta name="generator" content="docfx 2.36.2.0">
+    <meta name="generator" content="docfx 2.39.2.0">
     
     <link rel="shortcut icon" href="../images/favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -76,26 +76,11 @@
   <div class="markdown level0 summary"><p>Interface for map layers</p>
 </div>
   <div class="markdown level0 conceptual"></div>
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
-    <div>
-      <a class="xref" href="Mapsui.Fetcher.IAsyncDataFetcher.html#Mapsui_Fetcher_IAsyncDataFetcher_AbortFetch">IAsyncDataFetcher.AbortFetch()</a>
-    </div>
-    <div>
-      <a class="xref" href="Mapsui.Fetcher.IAsyncDataFetcher.html#Mapsui_Fetcher_IAsyncDataFetcher_ViewChanged_System_Boolean_Mapsui_Geometries_BoundingBox_System_Double_">IAsyncDataFetcher.ViewChanged(Boolean, BoundingBox, Double)</a>
-    </div>
-    <div>
-      <a class="xref" href="Mapsui.Fetcher.IAsyncDataFetcher.html#Mapsui_Fetcher_IAsyncDataFetcher_DataChanged">IAsyncDataFetcher.DataChanged</a>
-    </div>
-    <div>
-      <a class="xref" href="Mapsui.Fetcher.IAsyncDataFetcher.html#Mapsui_Fetcher_IAsyncDataFetcher_ClearCache">IAsyncDataFetcher.ClearCache()</a>
-    </div>
-  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Mapsui.Layers.html">Mapsui.Layers</a></h6>
   <h6><strong>Assembly</strong>: Mapsui.dll</h6>
   <h5 id="Mapsui_Layers_ILayer_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public interface ILayer : IAsyncDataFetcher, INotifyPropertyChanged</code></pre>
+    <pre><code class="lang-csharp hljs">public interface ILayer : INotifyPropertyChanged</code></pre>
   </div>
   <h3 id="properties">Properties
   </h3>
@@ -315,6 +300,37 @@ This can be used for radiobuttons.</p>
     <tbody>
       <tr>
         <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Layers_ILayer_IsMapInfoLayer.md&amp;value=---%0Auid%3A%20Mapsui.Layers.ILayer.IsMapInfoLayer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/ILayer.cs/#L130">View Source</a>
+  </span>
+  <a id="Mapsui_Layers_ILayer_IsMapInfoLayer_" data-uid="Mapsui.Layers.ILayer.IsMapInfoLayer*"></a>
+  <h4 id="Mapsui_Layers_ILayer_IsMapInfoLayer" data-uid="Mapsui.Layers.ILayer.IsMapInfoLayer">IsMapInfoLayer</h4>
+  <div class="markdown level1 summary"><p>Indicates if the layer should be taken into account for the GetMapInfo request</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool IsMapInfoLayer { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -671,6 +687,87 @@ This can be used for radiobuttons.</p>
         <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Boolean</span>&gt;</td>
         <td><p>True if is does, false if it does not, null if it is unknown</p>
 </td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Layers_ILayer_RefreshData_Mapsui_Geometries_BoundingBox_System_Double_System_Boolean_.md&amp;value=---%0Auid%3A%20Mapsui.Layers.ILayer.RefreshData(Mapsui.Geometries.BoundingBox%2CSystem.Double%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/ILayer.cs/#L148">View Source</a>
+  </span>
+  <a id="Mapsui_Layers_ILayer_RefreshData_" data-uid="Mapsui.Layers.ILayer.RefreshData*"></a>
+  <h4 id="Mapsui_Layers_ILayer_RefreshData_Mapsui_Geometries_BoundingBox_System_Double_System_Boolean_" data-uid="Mapsui.Layers.ILayer.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,System.Boolean)">RefreshData(BoundingBox, Double, Boolean)</h4>
+  <div class="markdown level1 summary"><p>Indicates that there has been a change in the view of the map</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void RefreshData(BoundingBox extent, double resolution, bool majorChange)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Geometries.BoundingBox.html">BoundingBox</a></td>
+        <td><span class="parametername">extent</span></td>
+        <td><p>The new extent of the visisble map</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">resolution</span></td>
+        <td><p>The new resolution of the visible map</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">majorChange</span></td>
+        <td><p>If true an implementation should always refresh it&apos;s data. If false (minorChange) the
+implemenatation could ignore it. Example: During dragging a map a WMS layer would not want
+to fetch data, only on the drag end.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="events">Events
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Layers_ILayer_DataChanged.md&amp;value=---%0Auid%3A%20Mapsui.Layers.ILayer.DataChanged%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/ILayer.cs/#L136">View Source</a>
+  </span>
+  <h4 id="Mapsui_Layers_ILayer_DataChanged" data-uid="Mapsui.Layers.ILayer.DataChanged">DataChanged</h4>
+  <div class="markdown level1 summary"><p>Event called when the data within the layer has changed allowing
+listeners to react to this.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">event DataChangedEventHandler DataChanged</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Fetcher.DataChangedEventHandler.html">DataChangedEventHandler</a></td>
+        <td></td>
       </tr>
     </tbody>
   </table>

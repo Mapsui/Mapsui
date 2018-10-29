@@ -5,19 +5,27 @@ using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Styles;
+using Mapsui.UI;
 
 namespace Mapsui.Tests.Common.Maps
 {
-    public static class StackedLabelsSample
+    public class StackedLabelsSample : ITestSample
     {
         private const string LabelColumn = "Label";
+
+        public string Name => "Stacked Labels";
+
+        public void Setup(IMapControl mapControl)
+        {
+            mapControl.Map = CreateMap();
+        }
 
         public static Map CreateMap()
         {
             var map = new Map
             {
                 BackColor = Color.Transparent,
-                Viewport = {Center = new Point(0, 0), Width = 250, Height = 250, Resolution = 0.5}
+                Home = n => n.ZoomTo(0.5)
             };
 
             var provider = CreateRandomPointsProvider(GenerateRandomPoints(new BoundingBox(-100, -100, 100, 100), 20));

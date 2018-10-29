@@ -17,7 +17,7 @@ namespace Mapsui.Rendering.Xaml
     // all .net framework classes related to Xaml, even if they are not.
     public static class GeometryRenderer
     {
-        public static XamlMedia.Matrix CreateTransformMatrix(IViewport viewport, Point point)
+        public static XamlMedia.Matrix CreateTransformMatrix(IReadOnlyViewport viewport, Point point)
         {
             var pointOffsetFromViewPortCenterX = point.X - viewport.Center.X;
             var pointOffsetFromViewPortCenterY = point.Y - viewport.Center.Y;
@@ -33,7 +33,7 @@ namespace Mapsui.Rendering.Xaml
             return matrix;
         }
         
-        public static XamlMedia.Matrix CreateTransformMatrix(IViewport viewport)
+        public static XamlMedia.Matrix CreateTransformMatrix(IReadOnlyViewport viewport)
         {
             return CreateTransformMatrix(viewport, new Point(0, 0));
         }
@@ -77,7 +77,7 @@ namespace Mapsui.Rendering.Xaml
             return path;
         }
 
-        private static XamlMedia.Geometry ConvertSymbol(Point point, SymbolStyle style, IViewport viewport)
+        private static XamlMedia.Geometry ConvertSymbol(Point point, SymbolStyle style, IReadOnlyViewport viewport)
         {
             Point p = viewport.WorldToScreen(point);
 
@@ -93,7 +93,7 @@ namespace Mapsui.Rendering.Xaml
             return rect;
         }
 
-        public static XamlShapes.Shape RenderMultiPoint(MultiPoint multiPoint, IStyle style, IViewport viewport,
+        public static XamlShapes.Shape RenderMultiPoint(MultiPoint multiPoint, IStyle style, IReadOnlyViewport viewport,
             SymbolCache symbolCache)
         {
             // This method needs a test
@@ -106,7 +106,7 @@ namespace Mapsui.Rendering.Xaml
             return path;
         }
 
-        private static XamlMedia.GeometryGroup ConvertMultiPoint(MultiPoint multiPoint, SymbolStyle style, IViewport viewport)
+        private static XamlMedia.GeometryGroup ConvertMultiPoint(MultiPoint multiPoint, SymbolStyle style, IReadOnlyViewport viewport)
         {
             var group = new XamlMedia.GeometryGroup();
             foreach (var geometry in multiPoint)
@@ -117,7 +117,7 @@ namespace Mapsui.Rendering.Xaml
             return group;
         }
 
-        public static XamlShapes.Path RenderRaster(IRaster raster, IStyle style, IViewport viewport)
+        public static XamlShapes.Path RenderRaster(IRaster raster, IStyle style, IReadOnlyViewport viewport)
         {
             var path = CreateRasterPath(style, raster.Data);
             path.Data = new XamlMedia.RectangleGeometry();
@@ -171,7 +171,7 @@ namespace Mapsui.Rendering.Xaml
             return dest;
         }
 
-        public static void PositionRaster(UIElement renderedGeometry, BoundingBox boundingBox, IViewport viewport)
+        public static void PositionRaster(UIElement renderedGeometry, BoundingBox boundingBox, IReadOnlyViewport viewport)
         {
             UpdateRenderTransform(renderedGeometry, viewport);
 
@@ -183,7 +183,7 @@ namespace Mapsui.Rendering.Xaml
                 RoundToPixel(new Rect(topLeft.X, topLeft.Y, rectWidthPixels, rectHeightPixels));
         }
 
-        private static void UpdateRenderTransform(UIElement renderedGeometry, IViewport viewport)
+        private static void UpdateRenderTransform(UIElement renderedGeometry, IReadOnlyViewport viewport)
         {
             var matrix = XamlMedia.Matrix.Identity;
 
@@ -196,7 +196,7 @@ namespace Mapsui.Rendering.Xaml
             renderedGeometry.RenderTransform = new XamlMedia.MatrixTransform { Matrix = matrix };
         }
 
-        public static void PositionGeometry(XamlShapes.Shape renderedGeometry, IViewport viewport)
+        public static void PositionGeometry(XamlShapes.Shape renderedGeometry, IReadOnlyViewport viewport)
         {
             CounterScaleLineWidth(renderedGeometry, viewport.Resolution);
             var matrixTransform = new XamlMedia.MatrixTransform { Matrix = CreateTransformMatrix(viewport) };

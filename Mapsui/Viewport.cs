@@ -37,13 +37,11 @@ namespace Mapsui
         private readonly BoundingBox _extent;
         private Quad _windowExtent;
         private double _height;
-        private double _resolution;
+        private double _resolution = Constants.DefaultResolution;
         private double _width;
         private double _rotation;
-        private readonly NotifyingPoint _center = new NotifyingPoint();
+        private ReadOnlyPoint _center = new ReadOnlyPoint(0, 0);
         private bool _modified = true;
-        private bool _initialized;
-
         /// <summary>
         /// Create a new viewport
         /// </summary>
@@ -51,11 +49,8 @@ namespace Mapsui
         {
             _extent = new BoundingBox(0, 0, 0, 0);
             _windowExtent = new Quad();
-            // ReSharper disable once ExplicitCallerInfoArgument
-            // In this case we don't want to caller to be passed (the Viewport constructor) but just the Center
-			_center.PropertyChanged += (sender, args) => OnViewportChanged(nameof(Center));
         }
-        
+
         /// <summary>
         /// Create a new viewport from another viewport
         /// </summary>
@@ -66,34 +61,23 @@ namespace Mapsui
             _width = viewport._width;
             _height = viewport._height;
             _rotation = viewport._rotation;
-            _center.X = viewport._center.X;
-            _center.Y = viewport._center.Y;
-            if (viewport.Extent!= null) _extent = new BoundingBox(viewport.Extent);
+            _center = new ReadOnlyPoint(viewport._center);
+            if (viewport.Extent != null) _extent = new BoundingBox(viewport.Extent);
             if (viewport.WindowExtent != null) _windowExtent = new Quad(viewport.WindowExtent);
-            Initialized = viewport.Initialized;
 
             UpdateExtent();
         }
 
-        /// <inheritdoc />
-        public bool Initialized
-        {
-            get => _initialized;
-            private set
-            {
-                _initialized = value;
-                OnViewportChanged();
-            }
-        }
+        public bool HasSize => !_width.IsNanOrInfOrZero() && !_height.IsNanOrInfOrZero();
 
         /// <inheritdoc />
-        public Point Center
+        public ReadOnlyPoint Center
         {
             get => _center;
             set
             {
-                _center.X = value.X;
-                _center.Y = value.Y;
+                // todo: Consider making setters private or removeing Set methods
+                _center = value;
                 OnViewportChanged();
             }
         }
@@ -146,7 +130,7 @@ namespace Mapsui
         }
 
         /// <inheritdoc />
-        public bool IsRotated => 
+        public bool IsRotated =>
             !double.IsNaN(_rotation) && _rotation > Constants.Epsilon && _rotation < 360 - Constants.Epsilon;
 
         /// <inheritdoc />
@@ -154,7 +138,7 @@ namespace Mapsui
         {
             get
             {
-                if (_modified) UpdateExtent(); 
+                if (_modified) UpdateExtent();
                 return _extent;
             }
         }
@@ -167,7 +151,7 @@ namespace Mapsui
                 if (_modified) UpdateExtent();
                 return _windowExtent;
             }
-        } 
+        }
 
         /// <inheritdoc />
         public Point WorldToScreen(Point worldPosition)
@@ -182,16 +166,16 @@ namespace Mapsui
         }
 
         /// <inheritdoc />
-        public Point ScreenToWorld(Point screenPosition)
+        public Point ScreenToWorld(Point position)
         {
-            return ScreenToWorld(screenPosition.X, screenPosition.Y);
+            return ScreenToWorld(position.X, position.Y);
         }
 
         /// <inheritdoc />
         public Point WorldToScreen(double worldX, double worldY)
         {
             var p = WorldToScreenUnrotated(worldX, worldY);
-            
+
             if (IsRotated)
             {
                 var screenCenterX = Width / 2.0;
@@ -232,38 +216,44 @@ namespace Mapsui
         }
 
         /// <inheritdoc />
-        public void Transform(double screenX, double screenY, double previousScreenX, double previousScreenY, double deltaScale = 1, double deltaRotation = 0)
+        public void Transform(double positionX, double positionY, double previousPositionX, double previousPositionY,
+            double deltaResolution = 1, double deltaRotation = 0)
         {
-            var previous = ScreenToWorld(previousScreenX, previousScreenY);
-            var current = ScreenToWorld(screenX, screenY);
+            var previous = ScreenToWorld(previousPositionX, previousPositionY);
+            var current = ScreenToWorld(positionX, positionY);
 
             var newX = _center.X + previous.X - current.X;
             var newY = _center.Y + previous.Y - current.Y;
 
-            if (deltaScale != 1)
+            if (deltaResolution != 1)
             {
-                Resolution = Resolution / deltaScale;
+                Resolution = Resolution / deltaResolution;
 
-                current = ScreenToWorld(screenX, screenY); // calculate current position again with adjusted resolution
-                                                           // Zooming should be centered on the place where the map is touched. This is done with the scale correction.
-                var scaleCorrectionX = (1 - deltaScale) * (current.X - Center.X);
-                var scaleCorrectionY = (1 - deltaScale) * (current.Y - Center.Y);
+                // Calculate current position again with adjusted resolution
+                // Zooming should be centered on the place where the map is touched.
+                // This is done with the scale correction.
+                var scaleCorrectionX = (1 - deltaResolution) * (current.X - Center.X);
+                var scaleCorrectionY = (1 - deltaResolution) * (current.Y - Center.Y);
 
                 newX -= scaleCorrectionX;
                 newY -= scaleCorrectionY;
-            }           
-            _center.X = newX;
-            _center.Y = newY;
+            }
+
+            SetCenter(newX, newY);
 
             if (deltaRotation != 0)
             {
-                current = ScreenToWorld(screenX, screenY); // calculate current position again with adjusted resolution
+                current = ScreenToWorld(positionX, positionY); // calculate current position again with adjusted resolution
                 Rotation += deltaRotation;
-                var postRotation = ScreenToWorld(screenX, screenY); // calculate current position again with adjusted resolution
+                var postRotation = ScreenToWorld(positionX, positionY); // calculate current position again with adjusted resolution
 
-                _center.X -= postRotation.X - current.X;
-                _center.Y -= postRotation.Y - current.Y;
+                SetCenter(_center.X - postRotation.X - current.X, _center.Y - postRotation.Y - current.Y);
             }
+        }
+
+        public void Transform(Point position, Point previousPosition, double deltaScale = 1, double deltaRotation = 0)
+        {
+            Transform(position.X, position.Y, previousPosition.X, previousPosition.Y, deltaScale, deltaRotation);
         }
 
         /// <summary>
@@ -271,10 +261,6 @@ namespace Mapsui
         /// </summary>
         private void UpdateExtent()
         {
-            if (double.IsNaN(_center.X)) return;
-            if (double.IsNaN(_center.Y)) return;
-            if (double.IsNaN(_resolution)) return;
-
             // calculate the window extent which is not rotate
             var halfSpanX = _width * _resolution * 0.5;
             var halfSpanY = _height * _resolution * 0.5;
@@ -309,37 +295,35 @@ namespace Mapsui
             _modified = false;
         }
 
-        public bool TryInitializeViewport(BoundingBox envelope, double screenWidth, double screenHeight)
+        public void SetSize(double width, double height)
         {
-            if (screenWidth.IsNanOrZero()) return false;
-            if (screenHeight.IsNanOrZero()) return false;
+            _width = width;
+            _height = height;
+            OnViewportChanged();
+        }
 
-            if (double.IsNaN(Resolution)) // only when not set yet
-            {
-                if (!envelope.IsInitialized()) return false;
-                if (envelope.Centroid == null) return false;
+        public void SetCenter(double x, double y)
+        {
+            Center = new Point(x, y);
+            OnViewportChanged();
+        }
 
-                if (Math.Abs(envelope.Width) > Constants.Epsilon)
-                    Resolution = envelope.Width / screenWidth;
-                else
-                    // An envelope width of zero can happen when there is no data in the Maps' layers (yet).
-                    // It should be possible to start with an empty map.
-                    Resolution = Constants.DefaultResolution;
-            }
+        public void SetCenter(ReadOnlyPoint center)
+        {
+            Center = center;
+            OnViewportChanged();
+        }
 
-            if (double.IsNaN(Center.X) || double.IsNaN(Center.Y)) // only when not set yet
-            {
-                if (!envelope.IsInitialized()) return false;
-                if (envelope.Centroid == null) return false;
+        public void SetResolution(double resolution)
+        {
+            Resolution = resolution;
+            OnViewportChanged();
+        }
 
-                Center = envelope.Centroid;
-            }
-
-            Width = screenWidth;
-            Height = screenHeight;
-            
-            Initialized = true;
-            return true;
+        public void SetRotation(double rotation)
+        {
+            Rotation = rotation;
+            OnViewportChanged();
         }
 
         /// <summary>
@@ -351,5 +335,8 @@ namespace Mapsui
             _modified = true;
             ViewportChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+
+
     }
 }

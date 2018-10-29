@@ -19,127 +19,27 @@ using Mapsui.Geometries;
 
 namespace Mapsui
 {
-    public interface IViewport
+    public interface IViewport : IReadOnlyViewport
     {
-        /// <summary>
-        /// Coordinate of center of viewport in map coordinates
-        /// </summary>
-        Point Center { get; set; }
-
-        /// <summary>
-        /// Resolution of the viewport in units per pixel
-        /// </summary>
-        /// <remarks>
-        /// Resolution is Mapsuis form of zoom level. Because Mapsui is projection independent, there 
-        /// aren't any zoom levels as other map libraries have. If your map has EPSG:3857 as projection
-        /// and you want to calculate the zoom, you should use the following equation
-        /// 
-        ///     var zoom = (float)Math.Log(78271.51696401953125 / resolution, 2);
-        /// </remarks>
-        double Resolution { get; set; }
-
-        /// <summary>
-        /// BoundingBox of viewport in map coordinates respection Rotation
-        /// </summary>
-        /// <remarks>
-        /// This BoundingBox is horizontally and vertically aligned, even if the viewport
-        /// is rotated. So this BoundingBox perhaps contain parts, that are not visible.
-        /// </remarks>
-        BoundingBox Extent { get; }
-
-        /// <summary>
-        /// WindowExtend gives the four corner points of viewport in map coordinates
-        /// </summary>
-        /// <remarks>
-        /// If viewport is rotated, this corner points are not horizontally or vertically
-        /// aligned.
-        /// </remarks>
-        Quad WindowExtent { get; }
-
-        /// <summary>
-        /// Width of viewport in screen pixels
-        /// </summary>
-        double Width { get; set; }
-
-        /// <summary>
-        /// Height of viewport in screen pixels
-        /// </summary>
-        double Height { get; set; }
-
-        /// <summary>
-        /// Viewport rotation from True North (clockwise degrees)
-        /// </summary>
-        double Rotation { get; set; }
-
-        /// <summary>
-        /// IsRotated is true, when viewport displays map rotated
-        /// </summary>
-        bool IsRotated { get; }
-
-        /// <summary>
-        /// Viewport is initialized and ready to use
-        /// </summary>
-        bool Initialized { get; }
-
-        /// <summary>
-        /// Converts X/Y in map units to a point in device independent unit (or DIP or DP),
-        /// respecting rotation
-        /// </summary>
-        /// <param name="worldPosition">Coordinate in map units</param>
-        /// <returns>Point in screen pixels</returns>
-        Point WorldToScreen(Point worldPosition);
-
-        /// <summary>
-        /// Converts X/Y in map units to a point in device independent units (or DIP or DP),
-        /// respecting rotation
-        /// </summary>
-        /// <param name="point">Coordinate in map units</param>
-        /// <returns>Point in screen pixels</returns>
-        Point WorldToScreenUnrotated(Point point);
-
-        /// <summary>
-        /// Converts X/Y in map units to a point in device independent units (or DIP or DP),
-        /// respecting rotation
-        /// </summary>
-        /// <param name="x">X coordinate in map units</param>
-        /// <param name="y">Y coordinate in map units</param>
-        /// <returns>Point in screen pixels</returns>
-        Point WorldToScreen(double x, double y);
-
-        /// <summary>
-        /// Converts X/Y in map units to a point in device independent units (or DIP or DP),
-        /// respecting rotation
-        /// </summary>
-        /// <param name="x">X coordinate in map units</param>
-        /// <param name="y">Y coordinate in map units</param>
-        /// <returns>Point in screen pixels</returns>
-        Point WorldToScreenUnrotated(double x, double y);
-
-        /// <summary>
-        /// Converts a point in screen pixels to one in map units, respecting rotation
-        /// </summary>
-        /// <param name="screenPosition">Coordinate in map units</param>
-        /// <returns>Point in map units</returns>
-        Point ScreenToWorld(Point screenPosition);
-
-        /// <summary>
-        /// Converts X/Y in screen pixels to a point in map units, respecting rotation
-        /// </summary>
-        /// <param name="x">Screen position x coordinate</param>
-        /// <param name="y">Screen position y coordinate</param>
-        /// <returns>Point in map units</returns>
-        Point ScreenToWorld(double x, double y);
+        void SetCenter(double x, double y);
+        void SetCenter(ReadOnlyPoint center);
+        void SetResolution(double resolution);
+        void SetRotation(double rotation);
+        void SetSize(double width, double height);
 
         /// <summary>
         /// Moving the position of viewport to a new one
         /// </summary>
-        /// <param name="screenX">New X position of point</param>
-        /// <param name="screenY">New Y position of point</param>
-        /// <param name="previousScreenX">Old X position of point</param>
-        /// <param name="previousScreenY">Old Y position of point</param>
-        /// <param name="deltaScale">Change of resolution for transformation (&lt;1: zoom out, >1: zoom in)</param>
+        /// <param name="positionX">New X position of point</param>
+        /// <param name="positionY">New Y position of point</param>
+        /// <param name="previousPositionX">Old X position of point</param>
+        /// <param name="previousPositionY">Old Y position of point</param>
+        /// <param name="deltaResolution">Change of resolution for transformation (&lt;1: zoom out, >1: zoom in)</param>
         /// <param name="deltaRotation">Change of rotation</param>
-        void Transform(double screenX, double screenY, double previousScreenX, double previousScreenY, 
+        void Transform(double positionX, double positionY, double previousPositionX, double previousPositionY, 
+            double deltaResolution = 1, double deltaRotation = 0);
+
+        void Transform(Point position, Point previousPosition, 
             double deltaScale = 1, double deltaRotation = 0);
     }
 }

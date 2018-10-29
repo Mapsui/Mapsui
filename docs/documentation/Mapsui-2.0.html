@@ -8,7 +8,7 @@
     <title>Mapsui 2.0 </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Mapsui 2.0 ">
-    <meta name="generator" content="docfx 2.36.2.0">
+    <meta name="generator" content="docfx 2.39.2.0">
     
     <link rel="shortcut icon" href="../images/favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -69,28 +69,37 @@
             <article class="content wrap" id="_content" data-uid="">
 <h1 id="mapsui-20">Mapsui 2.0</h1>
 
-<p>At the moment of writing (11 may 2018) a first beta of Mapsui v2 has been released. It has .NET Standard core libraries instead of PCLs. Other then that is is equivalent to 1.4.1 but some further changes are planned. Here  are some ideas of changes that could go into 2.0.</p>
+<p>At the moment we are working on Mapsui v2. The core libraries are .NET Standard instead of PCLs. Here are some of the changes that may go into v2.</p>
 <h3 id="todo">Todo</h3>
 <ul>
-<li>Replace ILayer.Style with an ILayer.Styles of type ICollection<ifeature> which is empty by default</ifeature></li>
-<li>Do not derive ILayer from IAsyncDataFetcher.</li>
-<li>The Info event should be moved from Map to MapControl</li>
-<li>Perhaps remove the InfoLayer list and add an InfoLayer boolean on ILayer</li>
-<li>Remove the HoverLayer method. It is not crossplatform and can affect performance. Add a sample to show how you could implement it with the regular MouseMove method.</li>
-<li>Invert label alignment bottom/top.</li>
+<li>PanLock and ZoomLock working on all platforms. </li>
+<li>Rework ViewportLimiter </li>
+<li>Add Xamarin.Forms MapControl</li>
 </ul>
 <h3 id="done">Done</h3>
 <ul>
+<li>Do not derive ILayer from IAsyncDataFetcher.</li>
+<li>Add an Action<viewport> field to the Map to zoom to &#39;home&#39; viewport. </viewport></li>
+<li>Remove Viewport from Map.</li>
+<li>Remove Navigate methods from Map.</li>
 <li>Go to .NET Standard</li>
 <li>Rename Map.ViewChanged to Map.RefreshData</li>
 <li>Remove WPFs MapControl.ErrorMessage</li>
-<li>Rename PanMode.None and ZoomMode.None. See question 1: <a href="https://github.com/pauldendulk/Mapsui/issues/278">https://github.com/pauldendulk/Mapsui/issues/278</a></li>
+<li>Rename PanMode.None and ZoomMode.None.</li>
 <li>Rename BoundingBox.GetCentroid to Centroid</li>
 <li>Rename IGeometry.GetBoundingBox to BoundingBox</li>
+<li>Move Info event from Map to MapControl</li>
+<li>Remove the InfoLayer list and add an InfoLayer boolean on ILayer</li>
+<li>Remove the HoverLayer method. It is not crossplatform and can affect performance. </li>
+<li>Invert label alignment bottom/top.</li>
+<li>Remove ZoomIn/ZoomOut from WPF MapControl and turn into Navigate method.</li>
+<li>Wrap Viewport in LimitingViewport which limits it to user settings, or access through Navigator.</li>
 </ul>
-<h3 id="later">Later</h3>
+<h3 id="not-later">Not (Later)</h3>
 <ul>
 <li>Use NTS for Geometries</li>
+<li>Perhaps add animation in an AnimatedViewport which wraps the actual Viewport.</li>
+<li>Replace ILayer.Style with an ILayer.Styles of type ICollection<ifeature> which is empty by default</ifeature></li>
 </ul>
 </article>
           </div>

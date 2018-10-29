@@ -5,12 +5,23 @@ using BruTile.Predefined;
 using BruTile.Web;
 using BruTile.Wmsc;
 using Mapsui.Layers;
+using Mapsui.UI;
 using Attribution = BruTile.Attribution;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public static class WmscSample
+    public class WmscSample 
     {
+    // : IDemoSample
+    // Disable because the WMSC service is not there (perhaps moved)
+    // todo: Replace with another.
+        public string Name => "";
+
+        public void Setup(IMapControl mapControl)
+        {
+            mapControl.Map = CreateMap();
+        }
+
         public static Map CreateMap()
         {
             var map = new Map();

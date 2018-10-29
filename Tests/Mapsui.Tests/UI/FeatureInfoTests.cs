@@ -14,26 +14,27 @@ namespace Mapsui.Tests.UI
         {
             // arrange
             var map = new Map();
-            map.Viewport.Resolution = 1;
-            map.Viewport.Width = 10;
-            map.Viewport.Height = 10;
-            map.Viewport.Center = new Point(5, 5);
-
-            var layer = new MemoryLayer
+            var viewport = new Viewport
             {
-                Name = "TestLayer",
-                DataSource = new MemoryProvider(CreatePolygon(1, 4))
+                Resolution = 1,
+                Width = 10,
+                Height = 10,
+                Center = new Point(5, 5)
             };
 
-            map.Layers.Add(layer);
-            map.InfoLayers.Add(layer);
-
-            var screenPositionHit = map.Viewport.WorldToScreen(2, 2);
-            var screenPositionMiss = map.Viewport.WorldToScreen(9, 9);
+            map.Layers.Add(new MemoryLayer
+            {
+                Name = "TestLayer",
+                DataSource = new MemoryProvider(CreatePolygon(1, 4)),
+                IsMapInfoLayer = true
+            });
+            
+            var screenPositionHit = viewport.WorldToScreen(2, 2);
+            var screenPositionMiss = viewport.WorldToScreen(9, 9);
 
             // act
-            var argsHit = InfoHelper.GetMapInfo(map.Viewport, screenPositionHit, map.InfoLayers, null);
-            var argsMis = InfoHelper.GetMapInfo(map.Viewport, screenPositionMiss, map.InfoLayers, null);
+            var argsHit = MapInfoHelper.GetMapInfo(map.Layers, viewport, screenPositionHit, null);
+            var argsMis = MapInfoHelper.GetMapInfo(map.Layers, viewport, screenPositionMiss,null);
 
             // assert;
             Assert.IsTrue(argsHit.Feature.Geometry != null);
@@ -45,44 +46,7 @@ namespace Mapsui.Tests.UI
             Assert.IsTrue(argsMis.Layer == null);
             Assert.IsTrue(argsMis.WorldPosition.Equals(new Point(9, 9)));
         }
-
-        [Test]
-        public void TestHover()
-        {
-            // arrange
-            var map = new Map();
-            map.Viewport.Resolution = 1;
-            map.Viewport.Width = 10;
-            map.Viewport.Height = 10;
-            map.Viewport.Center = new Point(0, 5);
-
-            var layer = new MemoryLayer
-            {
-                DataSource = new MemoryProvider(CreatePolygon(1, 4))
-            };
-
-            map.Layers.Add(layer);
-            map.HoverLayers.Add(layer);
-
-            var screenPositionHit = map.Viewport.WorldToScreen(2, 2);
-            var screenPositionHit2 = map.Viewport.WorldToScreen(3, 3);
-            var screenPositionMiss = map.Viewport.WorldToScreen(8, 8);
-            var screenPositionMiss2 = map.Viewport.WorldToScreen(9, 9);
-
-            var counter = 0;
-            map.Hover += (sender, args) => counter++;
-
-            // act
-            map.InvokeHover(screenPositionMiss, null); //  no notfication
-            map.InvokeHover(screenPositionHit, null); //   notification with feature, counter +1
-            map.InvokeHover(screenPositionHit2, null); //  no notification because same feature
-            map.InvokeHover(screenPositionMiss, null); //  notification without feature, counter + 1
-            map.InvokeHover(screenPositionMiss2, null); // no notification because also no feature
-
-            // assert;
-            Assert.AreEqual(2, counter);
-        }
-
+        
         private static Polygon CreatePolygon(double min, double max)
         {
             return new Polygon(new LinearRing(new[]
@@ -100,25 +64,26 @@ namespace Mapsui.Tests.UI
         {
             // arrange
             var map = new Map();
-            map.Viewport.Resolution = 1;
-            map.Viewport.Width = 10;
-            map.Viewport.Height = 10;
-            map.Viewport.Center = new Point(5, 5);
+            var viewport = new Viewport
+            {
+                Resolution = 1,
+                Width = 10,
+                Height = 10,
+                Center = new Point(5, 5)
+            };
 
-            var disabledLayer = new MemoryLayer
+            map.Layers.Add(new MemoryLayer
             {
                 Name = "TestLayer",
                 DataSource = new MemoryProvider(CreatePolygon(1, 3)),
-                Enabled = false
-            };
+                Enabled = false,
+                IsMapInfoLayer = true
+            });
 
-            map.Layers.Add(disabledLayer);
-            map.InfoLayers.Add(disabledLayer);
-
-            var screenPositionHit = map.Viewport.WorldToScreen(2, 2);
+            var screenPositionHit = viewport.WorldToScreen(2, 2);
 
             // act
-            var argsHit = InfoHelper.GetMapInfo(map.Viewport, screenPositionHit, map.InfoLayers, null);
+            var argsHit = MapInfoHelper.GetMapInfo(map.Layers, viewport, screenPositionHit, null);
            
             // assert;
             Assert.IsTrue(argsHit.Feature == null);
@@ -131,34 +96,37 @@ namespace Mapsui.Tests.UI
         {
             // arrange
             var map = new Map();
-            map.Viewport.Resolution = 1;
-            map.Viewport.Width = 10;
-            map.Viewport.Height = 10;
-            map.Viewport.Center = new Point(5, 5);
+            var viewport = new Viewport
+            {
+                Resolution = 1,
+                Width = 10,
+                Height = 10,
+                Center = new Point(5, 5)
+            };
 
             var layerBelowRange = new MemoryLayer
             {
                 Name = "MaxVisibleLayer",
                 DataSource = new MemoryProvider(CreatePolygon(1, 3)),
-                MaxVisible = 0.9
+                MaxVisible = 0.9,
+                IsMapInfoLayer = true
             };
 
             var layerAboveRange = new MemoryLayer
             {
                 Name = "MinVisibleLayer",
                 DataSource = new MemoryProvider(CreatePolygon(1, 3)),
-                MinVisible = 1.1
+                MinVisible = 1.1,
+                IsMapInfoLayer = true
             };
 
             map.Layers.Add(layerBelowRange);
             map.Layers.Add(layerAboveRange);
-            map.InfoLayers.Add(layerBelowRange);
-            map.InfoLayers.Add(layerAboveRange);
-
-            var screenPositionHit = map.Viewport.WorldToScreen(2, 2);
+            
+            var screenPositionHit = viewport.WorldToScreen(2, 2);
 
             // act
-            var argsHit = InfoHelper.GetMapInfo(map.Viewport, screenPositionHit, map.InfoLayers, null);
+            var argsHit = MapInfoHelper.GetMapInfo(map.Layers, viewport, screenPositionHit, null);
 
             // assert;
             Assert.IsTrue(argsHit.Feature == null);

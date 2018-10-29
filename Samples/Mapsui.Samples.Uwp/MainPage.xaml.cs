@@ -1,15 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Mapsui.Samples.Common.Helpers;
-using Mapsui.Samples.Common.Maps;
 using Mapsui.UI;
 using Mapsui.Utilities;
+using Mapsui.Samples.Common;
+using Mapsui.Samples.Common.Helpers;
+using Mapsui.Samples.Common.Maps;
 
 namespace Mapsui.Samples.Uwp
 {
@@ -43,34 +42,17 @@ namespace Mapsui.Samples.Uwp
         private void FillComboBoxWithDemoSamples()
         {
             SampleList.Children.Clear();
-            foreach (var sample in DemoSamples().ToList())
+            foreach (var sample in AllSamples.GetSamples())
                 SampleList.Children.Add(CreateRadioButton(sample));
         }
 
         private void FillComboBoxWithTestSamples()
         {
             SampleList.Children.Clear();
-            foreach (var sample in TestSamples().ToList())
+            foreach (var sample in Mapsui.Tests.Common.AllSamples.GetSamples().ToList())
                 SampleList.Children.Add(CreateRadioButton(sample));
         }
-  
-        private Dictionary<string, Func<Map>> TestSamples()
-        {
-            var result = new Dictionary<string, Func<Map>>();
-            var i = 0;
-            foreach (var sample in Tests.Common.AllSamples.CreateList())
-            {
-                result[i.ToString()] = sample;
-                i++;
-            }
-            return result;
-        }
-
-        private static Dictionary<string, Func<Map>> DemoSamples()
-        {
-            return Common.AllSamples.CreateList();
-        }
-
+        
         private void SampleSet_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var comboBoxItem = (ComboBoxItem)((ComboBox)sender).SelectedItem;
@@ -93,20 +75,22 @@ namespace Mapsui.Samples.Uwp
             }
         }
 
-        private UIElement CreateRadioButton(KeyValuePair<string, Func<Map>> sample)
+        private UIElement CreateRadioButton(ISample sample)
         {
             var radioButton = new RadioButton
             {
                 FontSize = 16,
-                Content = sample.Key,
+                Content = sample.Name,
                 Margin = new Thickness(4)
             };
 
             radioButton.Click += (s, a) =>
             {
+                sample.Setup(MapControl);
                 MapControl.Map.Layers.Clear();
-                MapControl.Map = sample.Value();
-                MapControl.Map.Info += MapOnInfo;
+                MapControl.Info -= MapOnInfo;
+                sample.Setup(MapControl);
+                MapControl.Info += MapOnInfo;
                 MapControl.Refresh();
             };
 

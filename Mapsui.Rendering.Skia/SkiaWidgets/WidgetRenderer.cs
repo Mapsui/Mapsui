@@ -7,14 +7,14 @@ namespace Mapsui.Rendering.Skia.SkiaWidgets
 {
     public static class WidgetRenderer
     {
-        public static void Render(object target, double screenWidth, double screenHeight, IEnumerable<IWidget> widgets,
+        public static void Render(object target, IReadOnlyViewport viewport, IEnumerable<IWidget> widgets,
             IDictionary<Type, IWidgetRenderer> renders, float layerOpacity)
         {
             var canvas = (SKCanvas) target;
 
             foreach (var widget in widgets)
             {
-                ((ISkiaWidgetRenderer)renders[widget.GetType()]).Draw(canvas, screenWidth, screenHeight, widget, layerOpacity);
+                ((ISkiaWidgetRenderer)renders[widget.GetType()]).Draw(canvas, viewport, widget, layerOpacity);
             }
         }
     }

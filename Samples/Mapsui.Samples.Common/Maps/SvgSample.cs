@@ -1,27 +1,33 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
+using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Helpers;
+using Mapsui.Samples.Common.Maps;
 using Mapsui.Styles;
+using Mapsui.UI;
 using Mapsui.Utilities;
 
-namespace Mapsui.Samples.Common.Maps
+namespace Mapsui.Samples.Tests.Maps
 {
-    public static class SvgSample
+    public class SvgSample : IDemoSample
     {
-        private const string SvgLayerName = "Svg Layer";
-        
+        public string Name => "Svg";
+
+        public void Setup(IMapControl mapControl)
+        {
+            mapControl.Map = CreateMap();
+        }
+
         public static Map CreateMap()
         {
             var map = new Map();
 
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
             map.Layers.Add(CreateSvgLayer(map.Envelope));
-            map.HoverLayers.Add(map.Layers.First(l => l.Name == SvgLayerName));
-
+            
             return map;
         }
 
@@ -29,9 +35,10 @@ namespace Mapsui.Samples.Common.Maps
         {
             return new MemoryLayer
             {
-                Name = SvgLayerName,
+                Name = "Svg Layer",
                 DataSource = CreateMemoryProviderWithDiverseSymbols(envelope, 2000),
-                Style = null
+                Style = null,
+                IsMapInfoLayer = true
             };
         }
 

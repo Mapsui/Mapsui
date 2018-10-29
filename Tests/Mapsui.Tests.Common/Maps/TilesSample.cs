@@ -5,17 +5,25 @@ using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Styles;
+using Mapsui.UI;
 
 namespace Mapsui.Tests.Common.Maps
 {
-    public static class TilesSample
+    public class TilesSample : ITestSample
     {
+        public string Name => "Tiles";
+
+        public void Setup(IMapControl mapControl)
+        {
+            mapControl.Map = CreateMap();
+        }
+
         public static Map CreateMap()
         {
             var map = new Map
             {
                 BackColor = Color.Transparent,
-                Viewport = {Center = new Point(-7641856, 4804912), Width = 600, Height = 400, Resolution = 51116}
+                Home = n => n.NavigateTo(new Point(-7641856, 4804912), 51116)
             };
 
             var tileIndexes = new[]

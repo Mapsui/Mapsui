@@ -4,7 +4,7 @@ using Mapsui.Geometries;
 
 namespace Mapsui.Widgets
 {
-    static class WidgetTouch
+    public static class WidgetTouch
     {
         /// <summary>
         /// Gets the widget selected by touch positions
@@ -16,7 +16,7 @@ namespace Mapsui.Widgets
         /// Returns the first Widget in the list that contains the screenPosition
         /// within it's Envelope. Returns null if there are none.
         /// </returns>
-        public static IWidget GetWidget(Point screenPosition, Point startScreenPosition,
+        public static IWidget GetTouchedWidget(Point screenPosition, Point startScreenPosition,
             IEnumerable<IWidget> widgets)
         {
             foreach (var widget in widgets.Reverse())

@@ -29,7 +29,7 @@ using Mapsui.Utilities;
 
 namespace Mapsui.Layers
 {
-    public class ImageLayer : BaseLayer
+    public class ImageLayer : BaseLayer, IAsyncDataFetcher
     {
         private class FeatureSets
         {
@@ -90,7 +90,6 @@ namespace Mapsui.Layers
             if (_newExtent == null) return;
             if (double.IsNaN(_newResolution)) return;
             StartNewFetch(_newExtent, _newResolution);
-            _startFetchTimer.Dispose();
         }
 
         public override IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
@@ -117,11 +116,12 @@ namespace Mapsui.Layers
             }
         }
 
-        public override void AbortFetch()
+        public void AbortFetch()
         {
+            // not implemented for ImageLayer
         }
 
-        public override void ViewChanged(bool majorChange, BoundingBox extent, double resolution)
+        public override void RefreshData(BoundingBox extent, double resolution, bool majorChange)
         {
             if (!Enabled) return;
             if (DataSource == null) return;
@@ -197,7 +197,7 @@ namespace Mapsui.Layers
             }
         }
 
-        public override void ClearCache()
+        public void ClearCache()
         {
             foreach (var cache in _sets)
             {

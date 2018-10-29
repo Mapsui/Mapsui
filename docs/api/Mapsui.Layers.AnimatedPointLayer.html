@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class AnimatedPointLayer
    ">
-    <meta name="generator" content="docfx 2.36.2.0">
+    <meta name="generator" content="docfx 2.39.2.0">
     
     <link rel="shortcut icon" href="../images/favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -84,11 +84,13 @@
   <div classs="implements">
     <h5>Implements</h5>
     <div><a class="xref" href="Mapsui.Layers.ILayer.html">ILayer</a></div>
-    <div><a class="xref" href="Mapsui.Fetcher.IAsyncDataFetcher.html">IAsyncDataFetcher</a></div>
     <div><span class="xref">INotifyPropertyChanged</span></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Transformer">BaseLayer.Transformer</a>
+    </div>
     <div>
       <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_GetLayerStyles_Mapsui_Layers_ILayer_">BaseLayer.GetLayerStyles(ILayer)</a>
     </div>
@@ -135,13 +137,13 @@
       <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Transformation">BaseLayer.Transformation</a>
     </div>
     <div>
-      <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Transformer">BaseLayer.Transformer</a>
-    </div>
-    <div>
       <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Attribution">BaseLayer.Attribution</a>
     </div>
     <div>
       <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Resolutions">BaseLayer.Resolutions</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_IsMapInfoLayer">BaseLayer.IsMapInfoLayer</a>
     </div>
     <div>
       <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_IsCrsSupported_System_String_">BaseLayer.IsCrsSupported(String)</a>
@@ -160,7 +162,7 @@
   <h6><strong>Assembly</strong>: Mapsui.dll</h6>
   <h5 id="Mapsui_Layers_AnimatedPointLayer_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class AnimatedPointLayer : BaseLayer, ILayer, IAsyncDataFetcher, INotifyPropertyChanged</code></pre>
+    <pre><code class="lang-csharp hljs">public class AnimatedPointLayer : BaseLayer, ILayer, INotifyPropertyChanged</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
@@ -234,40 +236,6 @@
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Layers_AnimatedPointLayer_AbortFetch.md&amp;value=---%0Auid%3A%20Mapsui.Layers.AnimatedPointLayer.AbortFetch%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/AnimatedPointLayer.cs/#L41">View Source</a>
-  </span>
-  <a id="Mapsui_Layers_AnimatedPointLayer_AbortFetch_" data-uid="Mapsui.Layers.AnimatedPointLayer.AbortFetch*"></a>
-  <h4 id="Mapsui_Layers_AnimatedPointLayer_AbortFetch" data-uid="Mapsui.Layers.AnimatedPointLayer.AbortFetch">AbortFetch()</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override void AbortFetch()</code></pre>
-  </div>
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_AbortFetch">BaseLayer.AbortFetch()</a></div>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Layers_AnimatedPointLayer_ClearCache.md&amp;value=---%0Auid%3A%20Mapsui.Layers.AnimatedPointLayer.ClearCache%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/AnimatedPointLayer.cs/#L51">View Source</a>
-  </span>
-  <a id="Mapsui_Layers_AnimatedPointLayer_ClearCache_" data-uid="Mapsui.Layers.AnimatedPointLayer.ClearCache*"></a>
-  <h4 id="Mapsui_Layers_AnimatedPointLayer_ClearCache" data-uid="Mapsui.Layers.AnimatedPointLayer.ClearCache">ClearCache()</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override void ClearCache()</code></pre>
-  </div>
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_ClearCache">BaseLayer.ClearCache()</a></div>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Layers_AnimatedPointLayer_GetFeaturesInView_Mapsui_Geometries_BoundingBox_System_Double_.md&amp;value=---%0Auid%3A%20Mapsui.Layers.AnimatedPointLayer.GetFeaturesInView(Mapsui.Geometries.BoundingBox%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
@@ -322,6 +290,50 @@
   <div><a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_GetFeaturesInView_Mapsui_Geometries_BoundingBox_System_Double_">BaseLayer.GetFeaturesInView(BoundingBox, Double)</a></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Layers_AnimatedPointLayer_RefreshData_Mapsui_Geometries_BoundingBox_System_Double_System_Boolean_.md&amp;value=---%0Auid%3A%20Mapsui.Layers.AnimatedPointLayer.RefreshData(Mapsui.Geometries.BoundingBox%2CSystem.Double%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/AnimatedPointLayer.cs/#L40">View Source</a>
+  </span>
+  <a id="Mapsui_Layers_AnimatedPointLayer_RefreshData_" data-uid="Mapsui.Layers.AnimatedPointLayer.RefreshData*"></a>
+  <h4 id="Mapsui_Layers_AnimatedPointLayer_RefreshData_Mapsui_Geometries_BoundingBox_System_Double_System_Boolean_" data-uid="Mapsui.Layers.AnimatedPointLayer.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,System.Boolean)">RefreshData(BoundingBox, Double, Boolean)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void RefreshData(BoundingBox extent, double resolution, bool majorChange)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Geometries.BoundingBox.html">BoundingBox</a></td>
+        <td><span class="parametername">extent</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">resolution</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">majorChange</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_RefreshData_Mapsui_Geometries_BoundingBox_System_Double_System_Boolean_">BaseLayer.RefreshData(BoundingBox, Double, Boolean)</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Layers_AnimatedPointLayer_UpdateData.md&amp;value=---%0Auid%3A%20Mapsui.Layers.AnimatedPointLayer.UpdateData%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
@@ -335,56 +347,9 @@
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public void UpdateData()</code></pre>
   </div>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Layers_AnimatedPointLayer_ViewChanged_System_Boolean_Mapsui_Geometries_BoundingBox_System_Double_.md&amp;value=---%0Auid%3A%20Mapsui.Layers.AnimatedPointLayer.ViewChanged(System.Boolean%2CMapsui.Geometries.BoundingBox%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/AnimatedPointLayer.cs/#L45">View Source</a>
-  </span>
-  <a id="Mapsui_Layers_AnimatedPointLayer_ViewChanged_" data-uid="Mapsui.Layers.AnimatedPointLayer.ViewChanged*"></a>
-  <h4 id="Mapsui_Layers_AnimatedPointLayer_ViewChanged_System_Boolean_Mapsui_Geometries_BoundingBox_System_Double_" data-uid="Mapsui.Layers.AnimatedPointLayer.ViewChanged(System.Boolean,Mapsui.Geometries.BoundingBox,System.Double)">ViewChanged(Boolean, BoundingBox, Double)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override void ViewChanged(bool majorChange, BoundingBox extent, double resolution)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td><span class="parametername">majorChange</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="Mapsui.Geometries.BoundingBox.html">BoundingBox</a></td>
-        <td><span class="parametername">extent</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Double</span></td>
-        <td><span class="parametername">resolution</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_ViewChanged_System_Boolean_Mapsui_Geometries_BoundingBox_System_Double_">BaseLayer.ViewChanged(Boolean, BoundingBox, Double)</a></div>
   <h3 id="implements">Implements</h3>
   <div>
       <a class="xref" href="Mapsui.Layers.ILayer.html">ILayer</a>
-  </div>
-  <div>
-      <a class="xref" href="Mapsui.Fetcher.IAsyncDataFetcher.html">IAsyncDataFetcher</a>
   </div>
   <div>
       <span class="xref">INotifyPropertyChanged</span>

@@ -106,8 +106,7 @@ namespace Mapsui.Utilities
             ZoomToBoudingbox(x1, y1, x2, y2, screenWidth, screenHeight,
                 out var centerX, out var centerY, out var resolution, scaleMethod);
 
-            viewport.Center.X = centerX;
-            viewport.Center.Y = centerY;
+            viewport.SetCenter(centerX, centerY);
 
             viewport.Resolution = resolution;
         }

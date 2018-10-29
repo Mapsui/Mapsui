@@ -11,7 +11,7 @@ If you install the NuGet package into your app these assemblies are added:
 
 ## Mapsui Parts
 
-There are tree important classes that you will deal with
+There are three important classes that you will deal with
 
 ### MapControl
 

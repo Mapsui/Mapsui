@@ -13,13 +13,10 @@ namespace Mapsui.Rendering.Skia.SkiaWidgets
         private static SKPaint _paintBackground;
         private static SKPaint _paintText;
 
-        public void Draw(SKCanvas canvas, double screenWidth, double screenHeight, IWidget widget,
+        public void Draw(SKCanvas canvas, IReadOnlyViewport viewport, IWidget widget,
             float layerOpacity)
         {
             var zoomInOut = (ZoomInOutWidget)widget;
-            // If this widget belongs to no viewport, than stop drawing
-            if (zoomInOut.Map == null)
-                return;
 
             // If this is the first time, we call this renderer, ...
             if (_paintStroke == null)
@@ -37,8 +34,8 @@ namespace Mapsui.Rendering.Skia.SkiaWidgets
                 _paintText.Color = zoomInOut.TextColor.ToSkia(zoomInOut.Opacity);
             }
 
-            var posX = zoomInOut.CalculatePositionX(0, (float)screenWidth, zoomInOut.Orientation == Orientation.Vertical ? zoomInOut.Size : zoomInOut.Size * 2 - Stroke);
-            var posY = zoomInOut.CalculatePositionY(0, (float)screenHeight, zoomInOut.Orientation == Orientation.Vertical ? zoomInOut.Size * 2 - Stroke : zoomInOut.Size);
+            var posX = zoomInOut.CalculatePositionX(0, (float)viewport.Width, zoomInOut.Orientation == Orientation.Vertical ? zoomInOut.Size : zoomInOut.Size * 2 - Stroke);
+            var posY = zoomInOut.CalculatePositionY(0, (float)viewport.Height, zoomInOut.Orientation == Orientation.Vertical ? zoomInOut.Size * 2 - Stroke : zoomInOut.Size);
 
             // Draw a rect for zoom in button
             SKRect rect;
