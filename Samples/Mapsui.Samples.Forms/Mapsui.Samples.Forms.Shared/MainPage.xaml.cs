@@ -1,5 +1,4 @@
-﻿using BruTile.Predefined;
-using Mapsui.Layers;
+﻿using Mapsui.Layers;
 using Mapsui.Samples.Common;
 using System;
 using System.Collections.Generic;

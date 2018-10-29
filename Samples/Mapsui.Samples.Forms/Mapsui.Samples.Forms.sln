@@ -15,9 +15,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Samples.Forms.Android", "Mapsui.Samples.Forms.Android\Mapsui.Samples.Forms.Android.csproj", "{71353A7E-BFA9-4680-A345-EA19BF69F60E}"
 EndProject
 
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Samples.Forms.UWP", "Mapsui.Samples.Forms.UWP\Mapsui.Samples.Forms.UWP.csproj", "{EAAB7EDF-7955-40CF-A8FB-A9B501CFF012}"
-EndProject
-
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Ad-Hoc|Any CPU = Ad-Hoc|Any CPU

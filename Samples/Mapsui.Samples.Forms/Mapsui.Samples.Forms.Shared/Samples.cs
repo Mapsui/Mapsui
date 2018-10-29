@@ -153,13 +153,13 @@ namespace Mapsui.Samples.Forms
             switch (Device.RuntimePlatform)
             {
                 case "Android":
-                    device = "Droid.Images";
+                    device = "Droid";
                     break;
                 case "iOS":
                     device = "iOS";
                     break;
                 default:
-                    device = $"{Device.RuntimePlatform}.Images";
+                    device = $"{Device.RuntimePlatform}";
                     break;
             }
 
@@ -186,6 +186,9 @@ namespace Mapsui.Samples.Forms
                     mapView.Pins.Add(pin);
                     break;
                 case 2:
+                    foreach (var r in assembly.GetManifestResourceNames())
+                        System.Diagnostics.Debug.WriteLine(r);
+
                     var stream = assembly.GetManifestResourceStream($"Mapsui.Samples.Forms.{device}.Images.Ghostscript_Tiger.svg");
                     StreamReader reader = new StreamReader(stream);
                     string svgString = reader.ReadToEnd();

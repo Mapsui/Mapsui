@@ -187,7 +187,10 @@ namespace Mapsui.UI.Forms
                             if (!e.Handled)
                                 e.Handled = OnSingleTapped((Geometries.Point)l);
                         _numOfTaps = 1;
-                        _doubleTapTestTimer.Dispose();
+                        if (_doubleTapTestTimer != null)
+                        {
+                            _doubleTapTestTimer.Dispose();
+                        }
                         _doubleTapTestTimer = null;
                     }, location, delayTap, -1);
                 }
