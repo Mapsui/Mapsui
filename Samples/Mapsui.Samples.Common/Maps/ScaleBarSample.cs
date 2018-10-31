@@ -1,15 +1,15 @@
 ﻿using Mapsui.Projection;
-using Mapsui.Samples.Common;
 using Mapsui.Styles;
 using Mapsui.UI;
 using Mapsui.Utilities;
 using Mapsui.Widgets.ScaleBar;
 
-namespace Mapsui.Samples.Tests.Maps
+namespace Mapsui.Samples.Common.Maps
 {
-    public class ScaleBarSample : IDemoSample
+    public class ScaleBarSample : ISample
     {
-        public string Name => "ScaleBar";
+        public string Name => "1 ScaleBar";
+        public string Category => "Widgets";
 
         public void Setup(IMapControl mapControl)
         {

@@ -13,10 +13,11 @@ using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public class AnimatedPointsSample : IDemoSample
+    public class AnimatedPointsSample : ISample
     {
         public string Name => "Animated point movement";
 
+        public string Category => "Special";
 
         public void Setup(IMapControl mapControl)
         {
@@ -35,6 +36,7 @@ namespace Mapsui.Samples.Common.Maps
     public class AnimatedPointsWithAutoUpdateLayer : AnimatedPointLayer
     {
         // ReSharper disable once PrivateFieldCanBeConvertedToLocalVariable
+        // ReSharper disable once NotAccessedField.Local
         private readonly Timer _timer;
 
         public AnimatedPointsWithAutoUpdateLayer()

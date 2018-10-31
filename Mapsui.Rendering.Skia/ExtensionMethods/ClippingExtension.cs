@@ -204,13 +204,10 @@ namespace Mapsui.Rendering.Skia
             var sin = Math.Sin(rotation);
             var cos = Math.Cos(rotation);
 
-            var screenX = 0.0;
-            var screenY = 0.0;
-
             foreach (var point in points)
             {
-                screenX = (point.X - centerX) * resolution;
-                screenY = (centerY - point.Y) * resolution;
+                var screenX = (point.X - centerX) * resolution;
+                var screenY = (centerY - point.Y) * resolution;
 
                 if (viewport.IsRotated)
                 {

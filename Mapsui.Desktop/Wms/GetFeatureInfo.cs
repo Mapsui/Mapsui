@@ -7,7 +7,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Mapsui.Providers.Wms
+namespace Mapsui.Desktop.Wms
 {
     public delegate void StatusEventHandler(object sender, FeatureInfo featureInfo);
 

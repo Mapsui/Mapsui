@@ -8,12 +8,13 @@ using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public class PenStrokeCapSample : IDemoSample
+    public class PenStrokeCapSample : ISample
     {
         private const int PolygonSize = 5000000;
         private const int PenWidth = 12;
 
         public string Name => "Pen Stroke Cap";
+        public string Category => "Symbols";
 
         public void Setup(IMapControl mapControl)
         {

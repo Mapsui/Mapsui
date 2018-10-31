@@ -6,9 +6,10 @@ using Mapsui.UI;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public class WmtsSample : IDemoSample
+    public class WmtsSample : ISample
     {
-        public string Name => "WMTS";
+        public string Name => "3 WMTS";
+        public string Category => "Data";
 
         public void Setup(IMapControl mapControl)
         {

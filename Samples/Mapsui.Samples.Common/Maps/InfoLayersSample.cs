@@ -9,13 +9,14 @@ using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public class InfoLayersSample : IDemoSample
+    public class InfoLayersSample : ISample
     {
         private const string InfoLayerName = "Info Layer";
         private const string PolygonLayerName = "Polygon Layer";
         private const string LineLayerName = "Line Layer";
 
-        public string Name => "Map Info";
+        public string Name => "2 Map Info";
+        public string Category => "Demo";
         public void Setup(IMapControl mapControl)
         {
             mapControl.Map = CreateMap();

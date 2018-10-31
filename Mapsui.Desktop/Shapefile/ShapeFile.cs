@@ -23,10 +23,11 @@ using System.IO;
 using System.Text;
 using System.Web;
 using System.Web.Caching;
+using Mapsui.Desktop.Shapefile.Indexing;
 using Mapsui.Geometries;
-using Mapsui.Providers.Shapefile.Indexing;
+using Mapsui.Providers;
 
-namespace Mapsui.Providers.Shapefile
+namespace Mapsui.Desktop.Shapefile
 {
     /// <summary>
     /// Shapefile geometry type.

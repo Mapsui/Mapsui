@@ -5,9 +5,10 @@ using Mapsui.Widgets.ScaleBar;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public class OsmSample : IDemoSample
+    public class OsmSample : ISample
     {
-        public string Name => "OpenStreetMap";
+        public string Name => "1 OpenStreetMap";
+        public string Category => "Demo";
 
         public void Setup(IMapControl mapControl)
         {

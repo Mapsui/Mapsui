@@ -18,7 +18,7 @@
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <PackageCertificateThumbprint>54BCB849A6F9A808953D659614E175F6DCCF80F6</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>EC66D54ED7D082B14347281C3800895F26FEC827</PackageCertificateThumbprint>
     <PackageCertificateKeyFile>Mapsui.Samples.Uwp_TemporaryKey.pfx</PackageCertificateKeyFile>
     <RuntimeIdentifiers>win10-arm;win10-arm-aot;win10-x86;win10-x86-aot;win10-x64;win10-x64-aot</RuntimeIdentifiers>
   </PropertyGroup>
@@ -92,10 +92,6 @@
     <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
   </PropertyGroup>
   <ItemGroup>
-    <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-    <None Include="Mapsui.Samples.Uwp_TemporaryKey.pfx" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
@@ -147,6 +143,10 @@
       <Project>{d74c052a-c07e-4b37-a898-134218aca5c9}</Project>
       <Name>Mapsui</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Sample\Mapsui.Samples.CustomWidget\Mapsui.Samples.CustomWidget.csproj">
+      <Project>{ba6ecdb7-674e-42cb-9e56-56c55fed269b}</Project>
+      <Name>Mapsui.Samples.CustomWidget</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Tests\Mapsui.Tests.Common\Mapsui.Tests.Common.csproj">
       <Project>{81bb36d2-4d01-44e3-9024-e7cbd10da316}</Project>
       <Name>Mapsui.Tests.Common</Name>
@@ -188,6 +188,9 @@
     <PackageReference Include="SQLitePCLRaw.bundle_green">
       <Version>1.1.11</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Mapsui.Samples.Uwp_TemporaryKey.pfx" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

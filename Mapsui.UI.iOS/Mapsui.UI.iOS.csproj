@@ -49,9 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExtensionMethods\CGPointExtensions.cs" />
-    <Compile Include="GestureDelegate.cs" />
     <Compile Include="MapControl.cs" />
-    <Compile Include="MapHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

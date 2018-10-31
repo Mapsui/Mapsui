@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
+using Mapsui.Desktop.GeoTiff;
 using Mapsui.Desktop.Tests.Utilities;
-using Mapsui.Providers.GeoTiff;
 using NUnit.Framework;
 
 namespace Mapsui.Desktop.Tests.GeoTiff

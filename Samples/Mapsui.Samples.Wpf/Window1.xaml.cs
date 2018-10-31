@@ -21,20 +21,18 @@ namespace Mapsui.Samples.Wpf
             InitializeComponent();
             MapControl.FeatureInfo += MapControlFeatureInfo;
             MapControl.MouseMove += MapControlOnMouseMove;
-            MapControl.RotationLock = false;
+            MapControl.Lock.RotationLock = false;
             MapControl.UnSnapRotationDegrees = 30;
             MapControl.ReSnapRotationDegrees = 5;
             MapControl.Renderer.WidgetRenders[typeof(CustomWidget.CustomWidget)] = new CustomWidgetSkiaRenderer();
 
             Logger.LogDelegate += LogMethod;
 
-            FillComboBoxWithDemoSamples();
-
-            SampleSet.SelectionChanged += SampleSetOnSelectionChanged;
+            CategoryComboBox.SelectionChanged += CategoryComboBoxSelectionChanged;
             RenderMode.SelectionChanged += RenderModeOnSelectionChanged;
-            var firstRadioButton = (RadioButton)SampleList.Children[0];
-            firstRadioButton.IsChecked = true;
-            firstRadioButton.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+
+            FillComboBoxWithCategories();
+            FillListWithSamples();
         }
         
         private void RenderModeOnSelectionChanged(object sender, SelectionChangedEventArgs selectionChangedEventArgs)
@@ -56,37 +54,35 @@ namespace Mapsui.Samples.Wpf
             MouseCoordinates.Text = $"{worldPosition.X:F0}, {worldPosition.Y:F0}";
         }
 
-        private void FillComboBoxWithDemoSamples()
+        private void FillListWithSamples()
         {
             // todo: find proper way to load assembly
             WmsSample.MethodToLoadThisAssembly();
 
+            var selectedCategory = CategoryComboBox.SelectedValue?.ToString() ?? "";
             SampleList.Children.Clear();
-            foreach (var sample in AllSamples.GetSamples())
-            {
+            foreach (var sample in AllSamples.GetSamples().Where(s => s.Category == selectedCategory))
                 SampleList.Children.Add(CreateRadioButton(sample));
-            }
+
+            var firstRadioButton = (RadioButton)SampleList.Children[0];
+            firstRadioButton.IsChecked = true;
+            firstRadioButton.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
         }
 
-        private void FillComboBoxWithTestSamples()
+        private void CategoryComboBoxSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            SampleList.Children.Clear();
-            foreach (var sample in Mapsui.Tests.Common.AllSamples.GetSamples().ToList())
-            {
-                SampleList.Children.Add(CreateRadioButton(sample));
-            }
+            FillListWithSamples();
         }
-
-        private void SampleSetOnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        
+        private void FillComboBoxWithCategories()
         {
-            var selectedValue = ((ComboBoxItem)((ComboBox)sender).SelectedItem).Content.ToString();
+            var categories = AllSamples.GetSamples().Select(s => s.Category).Distinct().OrderBy(c => c);
+            foreach (var category in categories)
+            {
+                CategoryComboBox.Items.Add(category);
+            }
 
-            if (selectedValue == "Demo samples")
-                FillComboBoxWithDemoSamples();
-            else if (selectedValue == "Test samples")
-               FillComboBoxWithTestSamples();
-            else
-                throw new Exception("Unknown ComboBox item");
+            CategoryComboBox.SelectedIndex = 1;
         }
 
         private UIElement CreateRadioButton(ISample sample)

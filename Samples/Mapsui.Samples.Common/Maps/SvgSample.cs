@@ -3,18 +3,17 @@ using System.Reflection;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
-using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Helpers;
-using Mapsui.Samples.Common.Maps;
 using Mapsui.Styles;
 using Mapsui.UI;
 using Mapsui.Utilities;
 
-namespace Mapsui.Samples.Tests.Maps
+namespace Mapsui.Samples.Common.Maps
 {
-    public class SvgSample : IDemoSample
+    public class SvgSample : ISample
     {
         public string Name => "Svg";
+        public string Category => "Symbols";
 
         public void Setup(IMapControl mapControl)
         {

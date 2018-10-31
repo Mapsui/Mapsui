@@ -5,15 +5,15 @@ using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
 
-namespace Mapsui.Providers.Wms
+namespace Mapsui.Desktop.Wms
 {
     public class GmlGetFeatureInfoParser : IGetFeatureInfoParser
     {
         private FeatureInfo _featureInfo;
 
-        public FeatureInfo ParseWMSResult(string layername, Stream result)
+        public FeatureInfo ParseWMSResult(string layerName, Stream result)
         {
-            _featureInfo = new FeatureInfo { LayerName = layername, FeatureInfos = new List<Dictionary<string, string>>() };
+            _featureInfo = new FeatureInfo { LayerName = layerName, FeatureInfos = new List<Dictionary<string, string>>() };
             XDocument xdoc;
             
             try

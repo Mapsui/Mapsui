@@ -6,10 +6,10 @@ using Mapsui.UI;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public class BingSample : IDemoSample
+    public class BingSample : ISample
     {
-        public string Name => "Virtual Earth";
-
+        public string Name => "3 Virtual Earth";
+        public string Category => "Demo";
         public void Setup(IMapControl mapControl)
         {
             mapControl.Map = CreateMap();

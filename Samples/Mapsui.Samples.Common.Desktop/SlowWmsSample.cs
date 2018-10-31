@@ -1,14 +1,15 @@
-﻿using Mapsui.Geometries;
+﻿using Mapsui.Desktop.Wms;
+using Mapsui.Geometries;
 using Mapsui.Layers;
-using Mapsui.Providers.Wms;
 using Mapsui.UI;
 using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Common.Desktop
 {
-    public class SlowWmsSample : IDemoSample
+    public class SlowWmsSample : ISample
     {
-        public string Name => "Desktop: Slow WMS";
+        public string Name => "3  Slow WMS";
+        public string Category => "Desktop";
 
         public void Setup(IMapControl mapControl)
         {

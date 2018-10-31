@@ -1,14 +1,21 @@
-﻿using Mapsui.Geometries;
+﻿using System.ComponentModel;
+using Mapsui.Geometries;
 using Mapsui.UI;
 
 namespace Mapsui
 {
     public class LimitedViewport : IViewport
     {
+        public LimitedViewport()
+        {
+            _viewport.ViewportChanged += (sender, args) => ViewportChanged?.Invoke(sender, args);
+        }
+
         private readonly IViewport _viewport = new Viewport();
         public IViewportLimiter Limiter { get; set; }
         public Map Map { get; set; }
 
+        public event PropertyChangedEventHandler ViewportChanged;
         public ReadOnlyPoint Center => _viewport.Center;
         public double Resolution => _viewport.Resolution;
         public BoundingBox Extent => _viewport.Extent;
@@ -28,7 +35,7 @@ namespace Mapsui
 
         public void Transform(Point position, Point previousPosition, double deltaScale = 1, double deltaRotation = 0)
         {
-            Transform(position.X, position.Y, previousPosition.X, previousPosition.Y, deltaScale, deltaRotation);
+            _viewport.Transform(position, previousPosition, deltaScale, deltaRotation);
         }
 
         public void SetSize(double width, double height)

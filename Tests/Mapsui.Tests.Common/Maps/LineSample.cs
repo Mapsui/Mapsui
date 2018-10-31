@@ -1,14 +1,16 @@
 ﻿using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
+using Mapsui.Samples.Common;
 using Mapsui.Styles;
 using Mapsui.UI;
 
 namespace Mapsui.Tests.Common.Maps
 {
-    public class LineSample : ITestSample
+    public class LineSample : ISample
     {
         public string Name => "Line";
+        public string Category => "Tests";
 
         public void Setup(IMapControl mapControl)
         {

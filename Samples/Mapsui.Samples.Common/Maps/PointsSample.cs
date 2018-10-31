@@ -14,9 +14,10 @@ using Newtonsoft.Json;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public class PointsSample : IDemoSample
+    public class PointsSample : ISample
     {
-        public string Name => "Simple Points";
+        public string Name => "1 Points";
+        public string Category => "Geometries";
 
         public void Setup(IMapControl mapControl)
         {
@@ -38,6 +39,7 @@ namespace Mapsui.Samples.Common.Maps
             return new MemoryLayer
             {
                 Name = "Points",
+                IsMapInfoLayer=true,
                 DataSource = new MemoryProvider(GetCitiesFromEmbeddedResource()),
                 Style = CreateBitmapStyle()
             };

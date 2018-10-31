@@ -2,15 +2,15 @@
 using BruTile.MbTiles;
 using BruTile.Predefined;
 using Mapsui.Layers;
-using Mapsui.Samples.Tests.Maps;
 using Mapsui.UI;
 using SQLite;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public class MbTilesOverlaySample : IDemoSample
+    public class MbTilesOverlaySample : ISample
     {
-        public string Name => "MbTiles Overlay";
+        public string Name => "2 MbTiles Overlay";
+        public string Category => "Data";
 
         public void Setup(IMapControl mapControl)
         {

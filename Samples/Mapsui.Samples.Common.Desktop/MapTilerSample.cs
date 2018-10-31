@@ -8,9 +8,10 @@ using Attribution = BruTile.Attribution;
 
 namespace Mapsui.Samples.Common.Desktop
 {
-    public class MapTilerSample : IDemoSample
+    public class MapTilerSample : ISample
     {
-        public string Name => "Desktop: Map Tiler";
+        public string Name => "5 Map Tiler";
+        public string Category => "Desktop";
 
         public void Setup(IMapControl mapControl)
         {

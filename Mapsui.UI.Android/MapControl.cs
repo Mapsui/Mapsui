@@ -154,7 +154,7 @@ namespace Mapsui.UI.Android
                                 var touch = touchPoints.First();
                                 if (_previousTouch != null && !_previousTouch.IsEmpty())
                                 {
-                                    _viewport.Transform(touch.X, touch.Y, _previousTouch.X, _previousTouch.Y);
+                                    _viewport.Transform(touch, _previousTouch);
                                     RefreshGraphics();
                                 }
                                 _previousTouch = touch;
@@ -170,7 +170,7 @@ namespace Mapsui.UI.Android
 
                                 double rotationDelta = 0;
 
-                                if (!RotationLock)
+                                if (!Lock .RotationLock)
                                 {
                                     _innerRotation += angle - previousAngle;
                                     _innerRotation %= 360;
@@ -191,7 +191,7 @@ namespace Mapsui.UI.Android
                                     }
                                 }
 
-                                _viewport.Transform(touch.X, touch.Y, previousTouch.X, previousTouch.Y, radius / previousRadius, rotationDelta);
+                                _viewport.Transform(touch, previousTouch, radius / previousRadius, rotationDelta);
                                 RefreshGraphics();
 
                                 (_previousTouch, _previousRadius, _previousAngle) = (touch, radius, angle);

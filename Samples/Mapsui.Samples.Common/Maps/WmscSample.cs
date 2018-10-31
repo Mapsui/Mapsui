@@ -10,11 +10,9 @@ using Attribution = BruTile.Attribution;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public class WmscSample 
+    public class WmscSample // Disable because the WMSC service is down (or moved) : ISample
+        // todo: Replace with another.
     {
-    // : IDemoSample
-    // Disable because the WMSC service is not there (perhaps moved)
-    // todo: Replace with another.
         public string Name => "";
 
         public void Setup(IMapControl mapControl)

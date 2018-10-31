@@ -62,19 +62,7 @@ namespace Mapsui.UI
         /// <param name="margin">An optional extra margin around the feature to enlarge the hit area.</param>
         MapInfo GetMapInfo(IEnumerable<ILayer> layers, Point screenPosition, int margin = 0);
 
-        /// <summary>
-        /// When true the user can not pan (move) the map.
-        /// </summary>
-        bool PanLock { get; set; }
+        MapLock Lock { get; set; }
 
-        /// <summary>
-        /// When true the user an not rotate the map
-        /// </summary>
-        bool RotationLock { get; set; }
-
-        /// <summary>
-        /// When true the user can not zoom into the map
-        /// </summary>
-        bool ZoomLock { get; set; }
     }
 }

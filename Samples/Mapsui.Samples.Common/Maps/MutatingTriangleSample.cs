@@ -10,9 +10,10 @@ using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public class MutatingTriangleSample : IDemoSample
+    public class MutatingTriangleSample : ISample
     {
         public string Name => "Mutating triangle";
+        public string Category => "Special";
 
         public void Setup(IMapControl mapControl)
         {

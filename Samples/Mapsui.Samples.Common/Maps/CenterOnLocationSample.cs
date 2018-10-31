@@ -5,9 +5,11 @@ using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public class CenterOnLocationSample : IDemoSample
+    public class CenterOnLocationSample : ISample
     {
         public string Name => "Center on location";
+
+        public string Category => "Special";
 
         public void Setup(IMapControl mapControl)
         {

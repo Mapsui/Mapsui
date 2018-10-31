@@ -11,9 +11,10 @@ using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public class SymbolsSample : IDemoSample
+    public class SymbolsSample : ISample
     {
         public string Name => "Symbols";
+        public string Category => "Symbols";
 
         public void Setup(IMapControl mapControl)
         {

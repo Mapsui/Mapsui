@@ -7,9 +7,10 @@ using Mapsui.UI;
 
 namespace Mapsui.Samples.Common.Desktop
 {
-    public class ArcGISImageServiceSample : IDemoSample
+    public class ArcGISImageServiceSample : ISample
     {
-        public string Name => "Desktop: ArcGIS image";
+        public string Name => "7 ArcGIS image";
+        public string Category => "Desktop";
 
         public void Setup(IMapControl mapControl)
         {

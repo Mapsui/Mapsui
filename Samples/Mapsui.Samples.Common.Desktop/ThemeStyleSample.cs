@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using Mapsui.Desktop.Shapefile;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
-using Mapsui.Providers.Shapefile;
 using Mapsui.Samples.Common.Maps;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
@@ -13,9 +13,10 @@ using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Common.Desktop
 {
-    public class ThemeStyleSample : IDemoSample
+    public class ThemeStyleSample : ISample
     {
-        public string Name => "Desktop: Theme Style";
+        public string Name => "4 Theme Style";
+        public string Category => "Desktop";
 
         public void Setup(IMapControl mapControl)
         {

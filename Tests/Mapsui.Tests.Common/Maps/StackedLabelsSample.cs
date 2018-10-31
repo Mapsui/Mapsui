@@ -4,14 +4,16 @@ using System.Globalization;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
+using Mapsui.Samples.Common;
 using Mapsui.Styles;
 using Mapsui.UI;
 
 namespace Mapsui.Tests.Common.Maps
 {
-    public class StackedLabelsSample : ITestSample
+    public class StackedLabelsSample : ISample
     {
         private const string LabelColumn = "Label";
+        public string Category => "Tests";
 
         public string Name => "Stacked Labels";
 

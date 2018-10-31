@@ -10,9 +10,10 @@ using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public class VariousSample : IDemoSample
+    public class VariousSample : ISample
     {
-        public string Name => "Various";
+        public string Name => "5 Various geometries";
+        public string Category => "Geometries";
 
         public void Setup(IMapControl mapControl)
         {

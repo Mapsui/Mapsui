@@ -13,9 +13,10 @@ namespace Mapsui.Samples.Common.Maps
     /// <summary>
     /// An ordinary WMS service called through a tiled schema (WMS-C) 
     /// </summary>
-    public class TiledWmsSample : IDemoSample
+    public class TiledWmsSample : ISample
     {
-        public string Name => "WMS called tiled";
+        public string Name => "4 WMS called tiled";
+        public string Category => "Data";
 
         public void Setup(IMapControl mapControl)
         {

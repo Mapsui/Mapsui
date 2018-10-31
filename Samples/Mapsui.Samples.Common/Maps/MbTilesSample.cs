@@ -6,14 +6,15 @@ using SQLite;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public class MbTilesSample : IDemoSample
+    public class MbTilesSample : ISample
     {
         // This is a hack used for iOS/Android deployment
         // For Mac it should be @"." + Path.DirectorySeparatorChar + ".." + Path.DirectorySeparatorChar + ".." + Path.DirectorySeparatorChar + ".." + Path.DirectorySeparatorChar + "MbTiles";
         //public static string MbTilesLocation { get; set; } = @"." + Path.DirectorySeparatorChar + ".." + Path.DirectorySeparatorChar + ".." + Path.DirectorySeparatorChar + ".." + Path.DirectorySeparatorChar + "MbTiles";
         public static string MbTilesLocation { get; set; } = @"." + Path.DirectorySeparatorChar + "MbTiles";
 
-        public string Name => "MbTiles";
+        public string Name => "1 MbTiles";
+        public string Category => "Data";
 
         public void Setup(IMapControl mapControl)
         {

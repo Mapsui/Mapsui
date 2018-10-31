@@ -5,9 +5,11 @@ using Mapsui.Widgets;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public class CustomWidgetSample : IDemoSample
+    public class CustomWidgetSample : ISample
     {
-        public string Name => "Custom Widget";
+        public string Name => "3 Custom Widget";
+
+        public string Category => "Widgets";
 
         public void Setup(IMapControl mapControl)
         {

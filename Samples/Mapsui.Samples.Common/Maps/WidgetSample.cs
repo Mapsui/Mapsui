@@ -5,9 +5,10 @@ using Mapsui.Widgets.Zoom;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public class WidgetSample : IDemoSample
+    public class WidgetSample : ISample
     {
-        public string Name => "Widgets";
+        public string Name => "2 Widgets";
+        public string Category => "Widgets";
 
         public void Setup(IMapControl mapControl)
         {

@@ -25,7 +25,6 @@ namespace Mapsui.Rendering.Xaml
 
                 var encoder = new PngBitmapEncoder();
                 var memoryStream = new MemoryStream();
-                var bImg = new BitmapImage();
 
                 encoder.Frames.Add(BitmapFrame.Create(bitmapSource));
                 encoder.Save(memoryStream);

@@ -9,6 +9,7 @@ using Mapsui.Utilities;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Helpers;
 using Mapsui.Samples.Common.Maps;
+using Mapsui.Samples.CustomWidget;
 
 namespace Mapsui.Samples.Uwp
 {
@@ -24,13 +25,26 @@ namespace Mapsui.Samples.Uwp
             MbTilesHelper.DeployMbTilesFile(s => File.Create(Path.Combine(MbTilesLocationOnUwp, s)));
 
             MapControl.Map.Layers.Add(OpenStreetMap.CreateTileLayer());
-            MapControl.RotationLock = false;
+            MapControl.Lock.RotationLock = false;
             MapControl.UnSnapRotationDegrees = 30;
             MapControl.ReSnapRotationDegrees = 5;
+            MapControl.Renderer.WidgetRenders[typeof(CustomWidget.CustomWidget)] = new CustomWidgetSkiaRenderer();
 
-            FillComboBoxWithDemoSamples();
+            CategoryComboBox.SelectionChanged += CategoryComboBoxSelectionChanged;
 
-            SampleSet.SelectionChanged += SampleSet_SelectionChanged;
+            FillComboBoxWithCategories();
+            FillListWithSamples();
+        }
+
+        private void FillComboBoxWithCategories()
+        {
+            var categories = AllSamples.GetSamples().Select(s => s.Category).Distinct().OrderBy(c => c);
+            foreach (var category in categories)
+            {
+                CategoryComboBox.Items?.Add(category);
+            }
+
+            CategoryComboBox.SelectedIndex = 1;
         }
 
         private void MapOnInfo(object sender, MapInfoEventArgs args)
@@ -39,40 +53,17 @@ namespace Mapsui.Samples.Uwp
                 FeatureInfo.Text = $"Click Info:{Environment.NewLine}{args.MapInfo.Feature.ToDisplayText()}";
         }
 
-        private void FillComboBoxWithDemoSamples()
+        private void FillListWithSamples()
         {
+            var selectedCategory = CategoryComboBox.SelectedValue?.ToString() ?? "";
             SampleList.Children.Clear();
-            foreach (var sample in AllSamples.GetSamples())
-                SampleList.Children.Add(CreateRadioButton(sample));
-        }
-
-        private void FillComboBoxWithTestSamples()
-        {
-            SampleList.Children.Clear();
-            foreach (var sample in Mapsui.Tests.Common.AllSamples.GetSamples().ToList())
+            foreach (var sample in AllSamples.GetSamples().Where(s => s.Category == selectedCategory))
                 SampleList.Children.Add(CreateRadioButton(sample));
         }
         
-        private void SampleSet_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void CategoryComboBoxSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var comboBoxItem = (ComboBoxItem)((ComboBox)sender).SelectedItem;
-            if (comboBoxItem?.Content != null)
-            {
-                var selectedValue = comboBoxItem.Content.ToString();
-
-                if (selectedValue == "Demo samples")
-                {
-                    FillComboBoxWithDemoSamples();
-                }
-                else if (selectedValue == "Test samples")
-                {
-                    FillComboBoxWithTestSamples();
-                }
-                else
-                {
-                    throw new Exception("Unknown ComboBox item");
-                }
-            }
+            FillListWithSamples();
         }
 
         private UIElement CreateRadioButton(ISample sample)
@@ -86,7 +77,6 @@ namespace Mapsui.Samples.Uwp
 
             radioButton.Click += (s, a) =>
             {
-                sample.Setup(MapControl);
                 MapControl.Map.Layers.Clear();
                 MapControl.Info -= MapOnInfo;
                 sample.Setup(MapControl);

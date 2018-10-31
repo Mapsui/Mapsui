@@ -4,14 +4,16 @@ using Mapsui.Providers;
 using Mapsui.Styles;
 using Mapsui.UI;
 using System.Reflection;
+using Mapsui.Samples.Common;
 
 namespace Mapsui.Tests.Common.Maps
 {
-    public class PolygonSample : ITestSample
+    public class PolygonSample : ISample
     {
         static int _bitmapId;
 
         public string Name => "Polygon";
+        public string Category => "Tests";
 
         public void Setup(IMapControl mapControl)
         {

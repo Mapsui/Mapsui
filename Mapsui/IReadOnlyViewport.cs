@@ -1,9 +1,12 @@
-﻿using Mapsui.Geometries;
+﻿using System.ComponentModel;
+using Mapsui.Geometries;
 
 namespace Mapsui
 {
     public interface IReadOnlyViewport 
     {
+        event PropertyChangedEventHandler ViewportChanged;
+
         /// <summary>
         /// Coordinate of center of viewport in map coordinates
         /// </summary>

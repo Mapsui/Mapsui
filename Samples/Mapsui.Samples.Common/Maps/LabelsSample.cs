@@ -7,9 +7,10 @@ using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public class LabelsSample : IDemoSample
+    public class LabelsSample : ISample
     {
         public string Name => "Labels";
+        public string Category => "Symbols";
 
         public void Setup(IMapControl mapControl)
         {

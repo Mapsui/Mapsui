@@ -7,9 +7,10 @@ using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public class OpacityStyleSample : IDemoSample
+    public class OpacityStyleSample : ISample
     {
         public string Name => "OpacityStyle";
+        public string Category => "Symbols";
 
         public void Setup(IMapControl mapControl)
         {
