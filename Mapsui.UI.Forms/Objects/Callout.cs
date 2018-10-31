@@ -348,7 +348,7 @@ namespace Mapsui.UI.Objects
         {
             // Add all event handlers
             _mapControl.SizeChanged += MapControlSizeChanged;
-            _mapControl.Map.Viewport.ViewportChanged += ViewportChanged;
+            _mapControl.Viewport.ViewportChanged += ViewportChanged;
 
             UpdateScreenPosition();
 
@@ -361,7 +361,7 @@ namespace Mapsui.UI.Objects
 
             // Remove all event handlers
             _mapControl.SizeChanged -= MapControlSizeChanged;
-            _mapControl.Map.Viewport.ViewportChanged -= ViewportChanged;
+            _mapControl.Viewport.ViewportChanged -= ViewportChanged;
         }
 
         protected override void OnPropertyChanged([CallerMemberName] string propertyName = "")
@@ -477,7 +477,7 @@ namespace Mapsui.UI.Objects
             if (_mapControl.Map.Layers.Count == 0)
                 return;
 
-            var point = _mapControl?.Map?.Viewport?.WorldToScreen(Anchor.ToMapsui());
+            var point = _mapControl?.Viewport?.WorldToScreen(Anchor.ToMapsui());
 
             if (point != null)
                 AbsoluteLayout.SetLayoutBounds(this, new Rectangle(point.X - _offset.X, point.Y - _offset.Y, Width, Height));

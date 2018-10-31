@@ -463,8 +463,8 @@ namespace Mapsui.UI.Forms
             if (callout == null)
                 return;
 
-            var screen = _mapView.Map.Viewport.WorldToScreen(Position.ToMapsui());
-            callout.Anchor = _mapView.Map.Viewport.ScreenToWorld(new Geometries.Point(screen.X - CalloutAnchor.X, screen.Y - CalloutAnchor.Y)).ToForms();
+            var screen = _mapView._mapControl.Viewport.WorldToScreen(Position.ToMapsui());
+            callout.Anchor = _mapView._mapControl.Viewport.ScreenToWorld(new Geometries.Point(screen.X - CalloutAnchor.X, screen.Y - CalloutAnchor.Y)).ToForms();
         }
     }
 }

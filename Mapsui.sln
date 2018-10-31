@@ -146,6 +146,7 @@ Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Mapsui.UI.Shared\Mapsui.UI.Shared.projitems*{239f2b0d-13cb-4bcf-83bf-f52d696a47b7}*SharedItemsImports = 13
 		Samples\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\Mapsui.Samples.Forms.Shared.projitems*{28848162-20b7-46f1-8364-8b41b0393cd4}*SharedItemsImports = 4
+		Mapsui.UI.Shared\Mapsui.UI.Shared.projitems*{29e628d1-8e8a-49c5-b0f9-555c0f68572a}*SharedItemsImports = 4
 		Samples\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\Mapsui.Samples.Forms.Shared.projitems*{71353a7e-bfa9-4680-a345-ea19bf69f60e}*SharedItemsImports = 4
 		Samples\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\Mapsui.Samples.Forms.Shared.projitems*{73fcb5f4-abaf-4279-acc2-4c9c8d9f5c40}*SharedItemsImports = 13
 		Samples\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\Mapsui.Samples.Forms.Shared.projitems*{975b6bbd-cd89-4a69-8f42-3c999d9f4d99}*SharedItemsImports = 4

@@ -52,8 +52,8 @@ namespace Mapsui.UI.Forms
 
             _mapControl = new MapControl();
             _mapMyLocationLayer = new MyLocationLayer(this) { Enabled = true };
-            _mapPinLayer = new Layer(PinLayerName);
-            _mapDrawableLayer = new Layer(DrawableLayerName);
+            _mapPinLayer = new Layer(PinLayerName) { IsMapInfoLayer = true };
+            _mapDrawableLayer = new Layer(DrawableLayerName) { IsMapInfoLayer = true };
 
             // Add some events to _mapControl
             _mapControl.SingleTap += HandlerTap;
@@ -76,7 +76,7 @@ namespace Mapsui.UI.Forms
                 BackgroundColor = Color.White, 
                 WidthRequest = 40, 
                 HeightRequest = 40,
-                Command = new Command((object obj) => _mapControl.Map.NavigateTo(_mapControl.Map.Viewport.Resolution /= 2)),
+                Command = new Command((object obj) => _mapControl.Navigator.ZoomIn()),
             };
 
             _mapZoomOutButton = new SvgButton(Mapsui.Utilities.EmbeddedResourceLoader.Load("Images.ZoomOut.svg", typeof(MapView)))
@@ -84,7 +84,7 @@ namespace Mapsui.UI.Forms
                 BackgroundColor = Color.White,
                 WidthRequest = 40,
                 HeightRequest = 40,
-                Command = new Command((object obj) => _mapControl.Map.NavigateTo(_mapControl.Map.Viewport.Resolution *= 2)),
+                Command = new Command((object obj) => _mapControl.Navigator.ZoomOut()),
             };
 
             _mapSpacingButton1 = new Image { BackgroundColor = Color.Transparent, WidthRequest = 40, HeightRequest = 8 };
@@ -104,7 +104,7 @@ namespace Mapsui.UI.Forms
                 BackgroundColor = Color.Cyan, 
                 WidthRequest = 40, 
                 HeightRequest = 40,
-                Command = new Command((object obj) => Device.BeginInvokeOnMainThread(() => _mapControl.Map.Viewport.Rotation = 0)),
+                Command = new Command((object obj) => Device.BeginInvokeOnMainThread(() => _mapControl.Navigator.RotateTo(0))),
             };
 
             _mapButtons = new StackLayout { BackgroundColor = Color.Transparent, Opacity = 0.8, Spacing = 0, IsVisible = true };
@@ -194,10 +194,8 @@ namespace Mapsui.UI.Forms
 
                 if (_mapControl.Map != null)
                 {
-                    _mapControl.Map.Viewport.ViewportChanged -= HandlerViewportChanged;
-                    _mapControl.Map.Info -= HandlerInfo;
-                    _mapControl.Map.InfoLayers.Remove(_mapPinLayer);
-                    _mapControl.Map.InfoLayers.Remove(_mapDrawableLayer);
+                    (_mapControl.Viewport as Viewport).ViewportChanged -= HandlerViewportChanged;
+                    _mapControl.Info -= HandlerInfo;
                     _mapControl.Map.Layers.Remove(_mapPinLayer);
                     _mapControl.Map.Layers.Remove(_mapDrawableLayer);
                     _mapControl.Map.Layers.Remove(_mapMyLocationLayer);
@@ -208,16 +206,14 @@ namespace Mapsui.UI.Forms
                 if (_mapControl.Map != null)
                 {
                     // Get updates of Viewport
-                    _mapControl.Map.Viewport.ViewportChanged += HandlerViewportChanged;
-                    _mapControl.Map.Info += HandlerInfo;
+                    _mapControl.Viewport.ViewportChanged += HandlerViewportChanged;
+                    _mapControl.Info += HandlerInfo;
                     // Add layer for MyLocation
                     _mapControl.Map.Layers.Add(_mapMyLocationLayer);
                     // Draw drawables first
                     _mapControl.Map.Layers.Add(_mapDrawableLayer);
-                    _mapControl.Map.InfoLayers.Add(_mapDrawableLayer);
                     // Draw pins on top of drawables
                     _mapControl.Map.Layers.Add(_mapPinLayer);
-                    _mapControl.Map.InfoLayers.Add(_mapPinLayer);
                 }
 
                 OnPropertyChanged();
@@ -431,7 +427,7 @@ namespace Mapsui.UI.Forms
                 if (MyLocationFollow)
                 {
                     _mapMyLocationButton.Picture = _pictMyLocationCenter;
-                    _mapControl.Map.NavigateTo(_mapMyLocationLayer.MyLocation.ToMapsui());    
+                    _mapControl.Navigator.CenterOn(_mapMyLocationLayer.MyLocation.ToMapsui());    
                 }
                 else
                 {
@@ -470,7 +466,7 @@ namespace Mapsui.UI.Forms
         {
             if (e.PropertyName.Equals(nameof(Viewport.Rotation)))
             {
-                _mapMyLocationLayer.UpdateMyDirection(_mapMyLocationLayer.Direction, Map.Viewport.Rotation);
+                _mapMyLocationLayer.UpdateMyDirection(_mapMyLocationLayer.Direction, _mapControl.Viewport.Rotation);
 
                 // Check all callout positions
                 var list = _callouts.ToList();
@@ -492,7 +488,7 @@ namespace Mapsui.UI.Forms
             }
             if (e.PropertyName.Equals(nameof(Viewport.Center)))
             {
-                if (MyLocationFollow && _mapControl.Map.Viewport.Center != _mapMyLocationLayer.MyLocation.ToMapsui())
+                if (MyLocationFollow && !_mapControl.Viewport.Center.Equals(_mapMyLocationLayer.MyLocation.ToMapsui()))
                 {
                     //_mapControl.Map.NavigateTo(_mapMyLocationLayer.MyLocation.ToMapsui());
                 }
@@ -577,7 +573,7 @@ namespace Mapsui.UI.Forms
 
                 SelectedPinChanged?.Invoke(this, new SelectedPinChangedEventArgs(SelectedPin));
 
-                var pinArgs = new PinClickedEventArgs(clickedPin, Map.Viewport.ScreenToWorld(e.MapInfo.ScreenPosition).ToForms(), e.NumTaps);
+                var pinArgs = new PinClickedEventArgs(clickedPin, _mapControl.Viewport.ScreenToWorld(e.MapInfo.ScreenPosition).ToForms(), e.NumTaps);
 
                 PinClicked?.Invoke(this, pinArgs);
 
@@ -589,9 +585,9 @@ namespace Mapsui.UI.Forms
             }
 
             // Check for clicked drawables
-            var drawables = GetDrawablesAt(Map.Viewport.ScreenToWorld(e.MapInfo.ScreenPosition), _mapDrawableLayer);
+            var drawables = GetDrawablesAt(_mapControl.Viewport.ScreenToWorld(e.MapInfo.ScreenPosition), _mapDrawableLayer);
 
-            var drawableArgs = new DrawableClickedEventArgs(Map.Viewport.ScreenToWorld(e.MapInfo.ScreenPosition).ToForms(), new Xamarin.Forms.Point(e.MapInfo.ScreenPosition.X, e.MapInfo.ScreenPosition.Y), e.NumTaps);
+            var drawableArgs = new DrawableClickedEventArgs(_mapControl.Viewport.ScreenToWorld(e.MapInfo.ScreenPosition).ToForms(), new Xamarin.Forms.Point(e.MapInfo.ScreenPosition.X, e.MapInfo.ScreenPosition.Y), e.NumTaps);
 
             // Now check each drawable until one handles the event
             foreach (var drawable in drawables)
@@ -608,7 +604,7 @@ namespace Mapsui.UI.Forms
 
         private void HandlerLongTap(object sender, TappedEventArgs e)
         {
-            var args = new MapLongClickedEventArgs(Map.Viewport.ScreenToWorld(e.ScreenPosition).ToForms());
+            var args = new MapLongClickedEventArgs(_mapControl.Viewport.ScreenToWorld(e.ScreenPosition).ToForms());
 
             MapLongClicked?.Invoke(this, args);
 
@@ -644,33 +640,38 @@ namespace Mapsui.UI.Forms
             // Is there a widget at this position
             // Is there a drawable at this position
             if (Map != null)
-                e.Handled = Map.InvokeInfo(e.ScreenPosition * _mapControl.SkiaScale, e.ScreenPosition * _mapControl.SkiaScale, _mapControl.SymbolCache, null, e.NumOfTaps);
-
-            if (e.Handled)
-                return;
-
-            var args = new MapClickedEventArgs(Map.Viewport.ScreenToWorld(e.ScreenPosition).ToForms(), e.NumOfTaps);
-
-            MapClicked?.Invoke(this, args);
-
-            if (args.Handled)
             {
-                e.Handled = true;
-                return;
-            }
+                var mapInfo = _mapControl.GetMapInfo(e.ScreenPosition * _mapControl.SkiaScale);
 
-            // Event isn't handled up to now.
-            // Than look, what we could do.
+                if (mapInfo == null)
+                {
+                    var args = new MapClickedEventArgs(_mapControl.Viewport.ScreenToWorld(e.ScreenPosition).ToForms(), e.NumOfTaps);
+
+                    MapClicked?.Invoke(this, args);
+
+                    if (args.Handled)
+                    {
+                        e.Handled = true;
+                        return;
+                    }
+
+                    // Event isn't handled up to now.
+                    // Than look, what we could do.
+                }
+
+                // A feature is clicked
+                // TODO
+            }
         }
 
         private void HandlerPinPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            Map.RefreshData(false);
+            Map.RefreshData(_mapControl.Viewport.Extent, _mapControl.Viewport.Resolution, false);
         }
 
         private void HandlerDrawablePropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            Map.RefreshData(false);
+            Map.RefreshData(_mapControl.Viewport.Extent, _mapControl.Viewport.Resolution, false);
         }
 
         /// <summary>
@@ -684,10 +685,10 @@ namespace Mapsui.UI.Forms
             List<Drawable> drawables = new List<Drawable>();
 
             if (layer.Enabled == false) return drawables;
-            if (layer.MinVisible > Map.Viewport.Resolution) return drawables;
-            if (layer.MaxVisible < Map.Viewport.Resolution) return drawables;
+            if (layer.MinVisible > _mapControl.Viewport.Resolution) return drawables;
+            if (layer.MaxVisible < _mapControl.Viewport.Resolution) return drawables;
 
-            var allFeatures = layer.GetFeaturesInView(layer.Envelope, Map.Viewport.Resolution);
+            var allFeatures = layer.GetFeaturesInView(layer.Envelope, _mapControl.Viewport.Resolution);
 
             // Now check all features, if they are clicked and clickable
             foreach (var feature in allFeatures)

@@ -66,9 +66,15 @@ namespace Mapsui.UI.Forms
 
         public float SkiaScale => _skiaScale;
 
+        public float PixelDensity => SkiaScale;
+
         public float ScreenWidth => (float)this.Width;
 
         public float ScreenHeight => (float)this.Height;
+
+        private float ViewportWidth => ScreenWidth;
+
+        private float ViewportHeight => ScreenHeight;
 
         public ISymbolCache SymbolCache => _renderer.SymbolCache;
 
@@ -90,23 +96,26 @@ namespace Mapsui.UI.Forms
 
         private void TryInitializeViewport()
         {
-            if (_map.Viewport.Initialized) return;
+//            if (_viewport.Initialized) return;
 
             _skiaScale = (float)(CanvasSize.Width / Width);
 
-            if (_map.Viewport.TryInitializeViewport(_map.Envelope, CanvasSize.Width / _skiaScale, CanvasSize.Height / _skiaScale))
-            {
-                Map.RefreshData(true);
-                OnViewportInitialized();
-            }
+            _viewport.SetSize(Width, Height);
+
+            OnViewportInitialized();
+
+//            if (_viewport.TryInitializeViewport(_map.Envelope, CanvasSize.Width / _skiaScale, CanvasSize.Height / _skiaScale))
+//            {
+//                Map.RefreshData(_viewport.Extent, _viewport.Resolution, true);
+//                OnViewportInitialized();
+//            }
         }
 
         private void OnSizeChanged(object sender, EventArgs e)
         {
             if (Map != null)
             {
-                Map.Viewport.Width = Width;
-                Map.Viewport.Height = Height;
+                _viewport.SetSize(Width, Height);
             }
         }
 
@@ -222,15 +231,14 @@ namespace Mapsui.UI.Forms
         void OnPaintSurface(object sender, SKPaintGLSurfaceEventArgs skPaintSurfaceEventArgs)
         {
             TryInitializeViewport();
-            if (!_map.Viewport.Initialized) return;
+//            if (!Viewport.Initialized) return;
 
-            _map.Viewport.Width = Width;
-            _map.Viewport.Height = Height;
+//            _viewport.SetSize(Width, Height);
 
             skPaintSurfaceEventArgs.Surface.Canvas.Scale(_skiaScale, _skiaScale);
 
             _renderer.Render(skPaintSurfaceEventArgs.Surface.Canvas,
-                _map.Viewport, _map.Layers, _map.Widgets, _map.BackColor);
+                Viewport, _map.Layers, _map.Widgets, _map.BackColor);
         }
 
         private Geometries.Point GetScreenPosition(SKPoint point)
@@ -246,11 +254,6 @@ namespace Mapsui.UI.Forms
         internal void InvalidateCanvas()
         {
             InvalidateSurface();
-        }
-
-        private static void WidgetTouched(IWidget widget, Geometries.Point screenPosition)
-        {
-            widget.HandleWidgetTouched(screenPosition);
         }
 
         /// <summary>
@@ -427,7 +430,7 @@ namespace Mapsui.UI.Forms
             {
                 (_previousCenter, _previousRadius, _previousAngle) = GetPinchValues(touchPoints);
                 _mode = TouchMode.Zooming;
-                _innerRotation = _map.Viewport.Rotation;
+                _innerRotation = Viewport.Rotation;
             }
             else
             {
@@ -454,7 +457,7 @@ namespace Mapsui.UI.Forms
             {
                 InvalidateCanvas();
                 _mode = TouchMode.None;
-                _map.RefreshData(true);
+                _map.RefreshData(_viewport.Extent, _viewport.Resolution, true);
             }
 
             return args.Handled;
@@ -484,9 +487,9 @@ namespace Mapsui.UI.Forms
 
                         if (!PanLock && _previousCenter != null && !_previousCenter.IsEmpty())
                         {
-                            _map.Viewport.Transform(touchPosition.X, touchPosition.Y, _previousCenter.X, _previousCenter.Y);
+                            _viewport.Transform(touchPosition.X, touchPosition.Y, _previousCenter.X, _previousCenter.Y);
 
-                            ViewportLimiter.LimitExtent(_map.Viewport, _map.PanMode, _map.PanLimits, _map.Envelope);
+                            _viewport.Limiter.LimitExtent(_viewport, _map.Envelope);
 
                             InvalidateCanvas();
                         }
@@ -514,24 +517,22 @@ namespace Mapsui.UI.Forms
                             else if (_innerRotation < -180)
                                 _innerRotation += 360;
 
-                            if (_map.Viewport.Rotation == 0 && Math.Abs(_innerRotation) >= Math.Abs(UnSnapRotationDegrees))
+                            if (Viewport.Rotation == 0 && Math.Abs(_innerRotation) >= Math.Abs(UnSnapRotationDegrees))
                                 rotationDelta = _innerRotation;
-                            else if (_map.Viewport.Rotation != 0)
+                            else if (Viewport.Rotation != 0)
                             {
                                 if (Math.Abs(_innerRotation) <= Math.Abs(ReSnapRotationDegrees))
-                                    rotationDelta = -_map.Viewport.Rotation;
+                                    rotationDelta = -Viewport.Rotation;
                                 else
-                                    rotationDelta = _innerRotation - _map.Viewport.Rotation;
+                                    rotationDelta = _innerRotation - Viewport.Rotation;
                             }
                         }
 
-                        _map.Viewport.Transform(center.X, center.Y, prevCenter.X, prevCenter.Y, ZoomLock ? 1 : radius / prevRadius, rotationDelta);
+                        _viewport.Transform(center.X, center.Y, prevCenter.X, prevCenter.Y, ZoomLock ? 1 : radius / prevRadius, rotationDelta);
 
                         (_previousCenter, _previousRadius, _previousAngle) = (center, radius, angle);
 
-                        ViewportLimiter.Limit(_map.Viewport,
-                            _map.ZoomMode, _map.ZoomLimits, _map.Resolutions,
-                            _map.PanMode, _map.PanLimits, _map.Envelope);
+                        _viewport.Limiter.Limit(_viewport, _map.Resolutions, _map.Envelope);
 
                         InvalidateCanvas();
                     }
@@ -555,9 +556,9 @@ namespace Mapsui.UI.Forms
             if (args.Handled)
                 return true;
 
-            var tapWasHandled = Map.InvokeInfo(screenPosition, screenPosition, _renderer.SymbolCache, WidgetTouched, numOfTaps);
+            var eventReturn = InvokeInfo(Map.Layers, Map.Widgets, Viewport, screenPosition, screenPosition, _renderer.SymbolCache, WidgetTouched, numOfTaps);
 
-            if (!tapWasHandled)
+            if (!eventReturn.Handled)
             {
                 // Double tap as zoom
                 return OnZoomIn(screenPosition);
@@ -579,7 +580,7 @@ namespace Mapsui.UI.Forms
             if (args.Handled)
                 return true;
 
-            return Map.InvokeInfo(screenPosition, screenPosition, _renderer.SymbolCache, WidgetTouched, 1);
+            return InvokeInfo(Map.Layers, Map.Widgets, Viewport, screenPosition, screenPosition, _renderer.SymbolCache, WidgetTouched, 1).Handled;
         }
 
         /// <summary>
@@ -626,6 +627,11 @@ namespace Mapsui.UI.Forms
         public float GetDeviceIndependentUnits()
         {
             return SkiaScale;
+        }
+
+        public void OpenBrowser(string url)
+        {
+            Device.OpenUri(new Uri(url));
         }
 
         private void RunOnUIThread(Action action)

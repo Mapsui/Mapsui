@@ -163,14 +163,14 @@ namespace Mapsui.UI.Objects
                     var modified = InternalUpdateMyLocation(new Position(animationMyLocationStart.Latitude + deltaLat, animationMyLocationStart.Longitude + deltaLon));
                     // Update viewport
                     if (modified && mapView.MyLocationFollow && mapView.MyLocationEnabled)
-                        mapView.Map.Viewport.Center = MyLocation.ToMapsui();
+                        mapView._mapControl.Navigator.CenterOn(MyLocation.ToMapsui());
                     // Refresh map
                     if (mapView.MyLocationEnabled && modified)
                         mapView.Refresh();
                 }, 0.0, 1.0);
 
                 // At the end, update viewport
-                animation.Commit(mapView, animationMyLocationName, 100, 3000, finished: (s, v) => mapView.Map.RefreshData(true));
+                animation.Commit(mapView, animationMyLocationName, 100, 3000, finished: (s, v) => mapView.Map.RefreshData(mapView._mapControl.Viewport.Extent, mapView._mapControl.Viewport.Resolution, true));
             }
         }
 
