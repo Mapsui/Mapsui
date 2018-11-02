@@ -27,14 +27,7 @@ namespace Mapsui.UI.Wpf
     {
         private Map _map;
 
-        /// <inheritdoc />
-        public bool PanLock { get; set; }
-
-        /// <inheritdoc />
-        public bool RotationLock { get; set; } = true;
-
-        /// <inheritdoc />
-        public bool ZoomLock { get; set; }
+        public MapLock Lock { get; set; } = new MapLock {RotationLock = true};
 
         /// <summary>
         /// After how many degrees start rotation to take place
@@ -49,7 +42,7 @@ namespace Mapsui.UI.Wpf
         public IRenderer Renderer { get; set; } = new MapRenderer();
 
         /// <summary>
-        /// Viewport holding informations about visible part of the map. Viewport can never be null.
+        /// Viewport holding information about visible part of the map. Viewport can never be null.
         /// </summary>
         private readonly LimitedViewport _viewport = new LimitedViewport();
 
@@ -135,10 +128,12 @@ namespace Mapsui.UI.Wpf
                 }
             });
         }
+        // ReSharper disable RedundantNameQualifier - needed for iOS for disambiguation
 
         private void MapPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(Layers.Layer.Enabled))
+
             {
                 RefreshGraphics();
             }
@@ -159,6 +154,7 @@ namespace Mapsui.UI.Wpf
                 Refresh();
             }
         }
+        // ReSharper restore RedundantNameQualifier
 
         public Map Map
         {
@@ -208,16 +204,6 @@ namespace Mapsui.UI.Wpf
         public void RefreshData()
         {
             _map?.RefreshData(Viewport.Extent, Viewport.Resolution, true);
-        }
-
-        /// <summary>
-        /// Internally we want to call RefreshData with a minor change in some cases.
-        /// Users should just always call RefreshData without arguments
-        /// </summary>
-        /// <param name="majorChange"></param>
-        private void RefreshData(bool majorChange)
-        {
-            _map?.RefreshData(Viewport.Extent, Viewport.Resolution, majorChange);
         }
 
         private void OnInfo(MapInfoEventArgs mapInfoEventArgs)

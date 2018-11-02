@@ -3,22 +3,19 @@ using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public class KeepWithinExtentsSample : ISample
+    class PanLockSample : ISample
     {
-        public string Name => "Keep Within Extents";
-        public string Category => "Special";
-
+        public string Name { get; } = "PanLock";
+        public string Category { get; } = "Special";
         public void Setup(IMapControl mapControl)
         {
             mapControl.Map = CreateMap();
+            mapControl.Lock.PanLock = true;
         }
 
         public static Map CreateMap()
         {
-            var map = new Map
-            {
-                Limiter = new ViewportLimiterKeepWithin()
-            };
+            var map = new Map();
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
             return map;
         }

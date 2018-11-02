@@ -1,14 +1,23 @@
 ﻿using System.IO;
 using BruTile.MbTiles;
 using Mapsui.Layers;
+using Mapsui.UI;
 using SQLite;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public static class MbTilesSample
+    public class MbTilesSample : ISample
     {
         // This is a hack used for iOS/Android deployment
         public static string MbTilesLocation { get; set; } = @".\MbTiles\";
+
+        public string Name => "1 MbTiles";
+        public string Category => "Data";
+
+        public void Setup(IMapControl mapControl)
+        {
+            mapControl.Map = CreateMap();
+        }
 
         public static Map CreateMap()
         {

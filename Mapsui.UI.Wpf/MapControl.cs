@@ -235,7 +235,7 @@ namespace Mapsui.UI.Wpf
 
         private void MapControlMouseWheel(object sender, MouseWheelEventArgs e)
         {
-            if (ZoomLock) return;
+            if (Lock.ZoomLock) return;
             if (!Viewport.HasSize) return;
 
             _currentMousePosition = e.GetPosition(this).ToMapsui();
@@ -393,7 +393,9 @@ namespace Mapsui.UI.Wpf
                 return;
             }
 
-            if (_mouseDown && !PanLock)
+            _currentMousePosition = e.GetPosition(this).ToMapsui(); //Needed for both MouseMove and MouseWheel event
+
+            if (_mouseDown && !Lock.PanLock)
             {
                 if (_previousMousePosition == null || _previousMousePosition.IsEmpty())
                 {
@@ -402,9 +404,7 @@ namespace Mapsui.UI.Wpf
                     // a breakpoint and continuing.
                     return;
                 }
-
-                _currentMousePosition = e.GetPosition(this).ToMapsui(); //Needed for both MouseMove and MouseWheel event
-
+                
                 _viewport.Transform(_currentMousePosition, _previousMousePosition);
                 RefreshGraphics();
 
@@ -492,7 +492,7 @@ namespace Mapsui.UI.Wpf
 
             double rotationDelta = 0;
 
-            if (!RotationLock)
+            if (!Lock.RotationLock)
             {
                 _innerRotation += angle - prevAngle;
                 _innerRotation %= 360;
@@ -521,7 +521,7 @@ namespace Mapsui.UI.Wpf
 
         private double GetDeltaScale(XamlVector scale)
         {
-            if (ZoomLock) return 1;
+            if (Lock.ZoomLock) return 1;
             var deltaScale = (scale.X + scale.Y) / 2;
             if (Math.Abs(deltaScale) < Constants.Epsilon)
                 return 1; // If there is no scaling the deltaScale will be 0.0 in Windows Phone (while it is 1.0 in wpf)

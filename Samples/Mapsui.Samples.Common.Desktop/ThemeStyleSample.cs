@@ -1,20 +1,28 @@
-﻿using Mapsui.Layers;
-using Mapsui.Providers;
-using Mapsui.Styles;
-using Mapsui.Styles.Thematics;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
-using Mapsui.Providers.Shapefile;
-using Mapsui.Utilities;
+using Mapsui.Desktop.Shapefile;
 using Mapsui.Geometries;
-using System.Linq;
-using System.Collections.Generic;
+using Mapsui.Layers;
+using Mapsui.Providers;
 using Mapsui.Samples.Common.Maps;
+using Mapsui.Styles;
+using Mapsui.Styles.Thematics;
+using Mapsui.UI;
+using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Common.Desktop
 {
-    public static class ThemeStyleSample
+    public class ThemeStyleSample : ISample
     {
+        public string Name => "4 Theme Style";
+        public string Category => "Desktop";
+
+        public void Setup(IMapControl mapControl)
+        {
+            mapControl.Map = CreateMap();
+        }
+
         public static Map CreateMap()
         {
             var map = new Map();

@@ -2,11 +2,20 @@
 using System.Net.Http;
 using BruTile.Wmts;
 using Mapsui.Layers;
+using Mapsui.UI;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public static class WmtsSample
+    public class WmtsSample : ISample
     {
+        public string Name => "3 WMTS";
+        public string Category => "Data";
+
+        public void Setup(IMapControl mapControl)
+        {
+            mapControl.Map = CreateMap();
+        }
+
         public static Map CreateMap()
         {
             var map = new Map();

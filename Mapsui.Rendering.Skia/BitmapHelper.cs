@@ -89,11 +89,6 @@ namespace Mapsui.Rendering.Skia
             // 0/0 are assumed at center of image, but Svg has 0/0 at left top position
             canvas.Translate(-halfWidth + offsetX, -halfHeight - offsetY);
 
-            var rect = new SKRect(- halfWidth, - halfHeight, + halfWidth, + halfHeight);
-
-            //var color = new SKColor(255, 255, 255, (byte)(255 * opacity));
-            //var paint = new SKPaint { Color = color, FilterQuality = SKFilterQuality.High };
-
             canvas.DrawPicture(svg.Picture);
 
             canvas.Restore();
@@ -107,28 +102,12 @@ namespace Mapsui.Rendering.Skia
             return 0; // center
         }
 
-        private static float DetermineHorizontalAlignmentCorrection(
-            LabelStyle.HorizontalAlignmentEnum horizontalAlignment, float width)
-        {
-            if (horizontalAlignment == LabelStyle.HorizontalAlignmentEnum.Left) return width / 2;
-            if (horizontalAlignment == LabelStyle.HorizontalAlignmentEnum.Right) return -width / 2;
-            return 0.0f; // center
-        }
-
         private static int DetermineVerticalAlignmentCorrection(
             LabelStyle.VerticalAlignmentEnum verticalAlignment, int height)
         {
             if (verticalAlignment == LabelStyle.VerticalAlignmentEnum.Top) return -(height >> 1);
             if (verticalAlignment == LabelStyle.VerticalAlignmentEnum.Bottom) return height >> 1;
             return 0; // center
-        }
-
-        private static float DetermineVerticalAlignmentCorrection(
-            LabelStyle.VerticalAlignmentEnum verticalAlignment, float height)
-        {
-            if (verticalAlignment == LabelStyle.VerticalAlignmentEnum.Top) return -height / 2;
-            if (verticalAlignment == LabelStyle.VerticalAlignmentEnum.Bottom) return height / 2;
-            return 0.0f; // center
         }
 
         public static void RenderRaster(SKCanvas canvas, SKImage bitmap, SKRect rect, float layerOpacity)

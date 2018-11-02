@@ -8,12 +8,22 @@ using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Samples.Common.Helpers;
 using Mapsui.Styles;
+using Mapsui.UI;
 using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public static class AnimatedPointsSample
+    public class AnimatedPointsSample : ISample
     {
+        public string Name => "Animated point movement";
+
+        public string Category => "Special";
+
+        public void Setup(IMapControl mapControl)
+        {
+            mapControl.Map = CreateMap();
+        }
+
         public static Map CreateMap()
         {
             var map = new Map();
@@ -26,6 +36,7 @@ namespace Mapsui.Samples.Common.Maps
     public class AnimatedPointsWithAutoUpdateLayer : AnimatedPointLayer
     {
         // ReSharper disable once PrivateFieldCanBeConvertedToLocalVariable
+        // ReSharper disable once NotAccessedField.Local
         private readonly Timer _timer;
 
         public AnimatedPointsWithAutoUpdateLayer()

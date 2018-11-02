@@ -196,7 +196,7 @@ namespace Mapsui.Geometries
 
         public LinearRing Rotate(double degrees)
         {
-            return this.Rotate(degrees, new Point(0, 0));
+            return Rotate(degrees, new Point(0, 0));
         }
     }
 }

@@ -8,13 +8,22 @@ using Mapsui.Layers;
 using Mapsui.Projection;
 using Mapsui.Providers;
 using Mapsui.Styles;
+using Mapsui.UI;
 using Mapsui.Utilities;
 using Mapsui.Widgets.ScaleBar;
+// ReSharper disable All
 
 namespace Mapsui.Samples.Common.Maps
 {
-    class ItineroRoutingSample
+    class ItineroRoutingSample // Not implemented yet: ISample
     {
+        public string Name => "Itinero routing";
+        public string Category => "Special";
+        public void Setup(IMapControl mapControl)
+        {
+            mapControl.Map = CreateMap();
+        }
+
         public static Map CreateMap()
         {
             var map = new Map

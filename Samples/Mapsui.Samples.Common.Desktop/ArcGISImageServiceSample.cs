@@ -3,11 +3,20 @@ using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.Providers.ArcGIS;
 using Mapsui.Providers.ArcGIS.Image;
+using Mapsui.UI;
 
 namespace Mapsui.Samples.Common.Desktop
 {
-    public static class ArcGISImageServiceSample
+    public class ArcGISImageServiceSample : ISample
     {
+        public string Name => "7 ArcGIS image";
+        public string Category => "Desktop";
+
+        public void Setup(IMapControl mapControl)
+        {
+            mapControl.Map = CreateMap();
+        }
+
         public static ILayer CreateLayer()
         {
             return new ImageLayer("ArcGISImageServiceLayer") { DataSource = CreateProvider() };

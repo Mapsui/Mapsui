@@ -5,11 +5,20 @@ using Mapsui.Logging;
 using Mapsui.Providers.Wfs;
 using Mapsui.Providers.Wfs.Utilities;
 using Mapsui.Styles;
+using Mapsui.UI;
 
 namespace Mapsui.Samples.Common.Desktop
 {
-    public static class WfsSample
+    public class WfsSample // not working: ISample
     {
+        public string Name => "6 WFS Sample";
+        public string Category => "Desktop";
+
+        public void Setup(IMapControl mapControl)
+        {
+            mapControl.Map = CreateMap();
+        }
+
         public static Map CreateMap()
         {
             try

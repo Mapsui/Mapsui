@@ -1,12 +1,21 @@
 ﻿using Mapsui.Projection;
 using Mapsui.Styles;
+using Mapsui.UI;
 using Mapsui.Utilities;
 using Mapsui.Widgets.ScaleBar;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public static class ScaleBarSample
+    public class ScaleBarSample : ISample
     {
+        public string Name => "1 ScaleBar";
+        public string Category => "Widgets";
+
+        public void Setup(IMapControl mapControl)
+        {
+            mapControl.Map = CreateMap();
+        }
+
         public static Map CreateMap()
         {
             var map = new Map

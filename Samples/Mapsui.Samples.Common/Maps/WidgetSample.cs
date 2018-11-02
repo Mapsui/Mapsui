@@ -1,11 +1,20 @@
 ﻿using Mapsui.Styles;
+using Mapsui.UI;
 using Mapsui.Widgets;
 using Mapsui.Widgets.Zoom;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public static class WidgetSample
+    public class WidgetSample : ISample
     {
+        public string Name => "2 Widgets";
+        public string Category => "Widgets";
+
+        public void Setup(IMapControl mapControl)
+        {
+            mapControl.Map = CreateMap();
+        }
+
         public static Map CreateMap()
         {
             var map = new Map();

@@ -5,10 +5,10 @@ using System.Text;
 using Mapsui.UI.iOS;
 using UIKit;
 using CoreGraphics;
-using Mapsui.Samples.Common.Helpers;
-using Mapsui.Samples.Common.Maps;
 using Mapsui.UI;
 using Mapsui.Providers;
+using Mapsui.Samples.Common.Helpers;
+using Mapsui.Samples.Common.Maps;
 
 namespace Mapsui.Samples.iOS
 {
@@ -55,7 +55,7 @@ namespace Mapsui.Samples.iOS
             return new MapControl(bounds)
             {
                 Map = InfoLayersSample.CreateMap(),
-                RotationLock = false,
+                Lock = { RotationLock = false},
                 UnSnapRotationDegrees = 30,
                 ReSnapRotationDegrees = 5
             };                        

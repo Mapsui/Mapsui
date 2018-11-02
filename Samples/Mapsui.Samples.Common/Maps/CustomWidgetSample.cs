@@ -1,11 +1,21 @@
 ﻿using Mapsui.Styles;
+using Mapsui.UI;
 using Mapsui.Utilities;
 using Mapsui.Widgets;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public static class CustomWidgetSample
+    public class CustomWidgetSample : ISample
     {
+        public string Name => "3 Custom Widget";
+
+        public string Category => "Widgets";
+
+        public void Setup(IMapControl mapControl)
+        {
+            mapControl.Map = CreateMap();
+        }
+
         public static Map CreateMap()
         {
             var map = new Map();

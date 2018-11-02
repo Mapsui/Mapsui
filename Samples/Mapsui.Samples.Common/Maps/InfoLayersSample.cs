@@ -4,15 +4,23 @@ using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Samples.Common.Helpers;
 using Mapsui.Styles;
+using Mapsui.UI;
 using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public static class InfoLayersSample
+    public class InfoLayersSample : ISample
     {
         private const string InfoLayerName = "Info Layer";
         private const string PolygonLayerName = "Polygon Layer";
         private const string LineLayerName = "Line Layer";
+
+        public string Name => "2 Map Info";
+        public string Category => "Demo";
+        public void Setup(IMapControl mapControl)
+        {
+            mapControl.Map = CreateMap();
+        }
 
         public static Map CreateMap()
         {

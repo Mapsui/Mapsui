@@ -14,7 +14,7 @@ namespace Mapsui.Providers
 
         public static IEnumerable<IFeature> Copy(this IEnumerable<IFeature> original)
         {
-            return original.Select(feature => feature.Copy());
+            return original.Select(feature => feature.Copy()).ToList();
         }
     }
 }

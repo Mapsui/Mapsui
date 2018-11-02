@@ -1,13 +1,13 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using Android.App;
 using Android.Graphics;
 using Android.Widget;
-using Android.Support.Design.Widget;
 using Android.Support.V7.App;
 using Android.Views;
-using Mapsui.Layers;
-using Mapsui.Providers;
+using Mapsui.Samples.Common;
+using Mapsui.Samples.Common.ExtensionMethods;
 using Mapsui.Samples.Common.Helpers;
 using Mapsui.Samples.Common.Maps;
 using Mapsui.UI;
@@ -20,7 +20,7 @@ namespace Mapsui.Samples.Droid
     {
         private LinearLayout _popup;
         private MapControl _mapControl;
-        private readonly WritableLayer _writableLayer = new WritableLayer();
+        private TextView _textView;
 
         protected override void OnCreate(Android.OS.Bundle savedInstanceState)
         {
@@ -38,27 +38,62 @@ namespace Mapsui.Samples.Droid
             _mapControl = FindViewById<MapControl>(Resource.Id.mapcontrol);
             _mapControl.Map = KeepWithinExtentsSample.CreateMap();
             _mapControl.Info += MapOnInfo;
-            _mapControl.RotationLock = false;
+            _mapControl.Lock.RotationLock = true;
             _mapControl.UnSnapRotationDegrees = 30;
             _mapControl.ReSnapRotationDegrees = 5;
 
             FindViewById<RelativeLayout>(Resource.Id.mainLayout).AddView(_popup = CreatePopup());
+
+            _mapControl.Map.Layers.Clear();
+            var sample=new MbTilesOverlaySample();
+            sample.Setup(_mapControl);
+
+            //_mapControl.Info += MapControlOnInfo;
+            //LayerList.Initialize(_mapControl.Map.Layers);
         }
 
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
             MenuInflater.Inflate(Resource.Menu.menu_main, menu);
+            var i = 0;
+            var j = 0;
+
+            var categories = AllSamples.GetSamples().Select(s => s.Category).Distinct().OrderBy(c => c);
+            foreach (var category in categories)
+            {
+                var submenu = menu.AddSubMenu(/*++i,++j,j,*/category);
+
+                foreach (var sample in AllSamples.GetSamples().Where(s => s.Category == category))
+                {
+                    submenu.Add(/*i, ++j, j, */sample.Name);
+                }
+
+            }
             return true;
         }
 
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
             int id = item.ItemId;
+
+            if (item.HasSubMenu)
+            {
+                return true;
+            }
+
             if (id == Resource.Id.action_settings)
             {
                 return true;
             }
 
+            var sample = AllSamples.GetSamples().FirstOrDefault(s => s.Name == item.TitleFormatted.ToString());
+            if (sample != null)
+            {
+                _mapControl.Map.Layers.Clear();
+                sample.Setup(_mapControl);
+                return true;
+            }
+            
             return base.OnOptionsItemSelected(item);
         }
 
@@ -74,7 +109,7 @@ namespace Mapsui.Samples.Droid
 
         private TextView CreateTextView()
         {
-            var textView = new TextView(this)
+            _textView = new TextView(this)
             {
                 TextSize = 16,
                 Text = "Native Android",
@@ -82,8 +117,8 @@ namespace Mapsui.Samples.Droid
                     ViewGroup.LayoutParams.WrapContent,
                     ViewGroup.LayoutParams.WrapContent)
             };
-            textView.SetPadding(3, 3, 3, 3);
-            return textView;
+            _textView.SetPadding(3, 3, 3, 3);
+            return _textView;
         }
 
         private void MapOnInfo(object sender, MapInfoEventArgs args)
@@ -96,18 +131,7 @@ namespace Mapsui.Samples.Droid
             {
                 if (_popup != null && _popup.Visibility != ViewStates.Gone)
                     _popup.Visibility = ViewStates.Gone;
-
-                // Enable if you want to add points:
-                // AddPoint(args);
             }
-        }
-
-        private void AddPoint(MapInfoEventArgs args)
-        {
-            // For the sample we add this WritableLayer. Usually you would have your own handle to the WritableLayer
-            if (!_mapControl.Map.Layers.Contains(_writableLayer)) _mapControl.Map.Layers.Add(_writableLayer);
-
-            _writableLayer.Add(new Feature { Geometry = args.MapInfo.WorldPosition });
         }
 
         private void ShowPopup(MapInfoEventArgs args)
@@ -123,6 +147,7 @@ namespace Mapsui.Samples.Droid
             _popup.SetY((float)screenPositionInPixels.Y);
 
             _popup.Visibility = ViewStates.Visible;
+            _textView.Text = args.MapInfo.Feature.ToDisplayText();
         }
 
         private static string MbTilesLocationOnAndroid => Environment.GetFolderPath(Environment.SpecialFolder.Personal);

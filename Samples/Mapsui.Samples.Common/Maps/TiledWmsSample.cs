@@ -5,6 +5,7 @@ using BruTile.Predefined;
 using BruTile.Web;
 using BruTile.Wmsc;
 using Mapsui.Layers;
+using Mapsui.UI;
 using Attribution = BruTile.Attribution;
 
 namespace Mapsui.Samples.Common.Maps
@@ -12,8 +13,16 @@ namespace Mapsui.Samples.Common.Maps
     /// <summary>
     /// An ordinary WMS service called through a tiled schema (WMS-C) 
     /// </summary>
-    public static class TiledWmsSample
+    public class TiledWmsSample : ISample
     {
+        public string Name => "4 WMS called tiled";
+        public string Category => "Data";
+
+        public void Setup(IMapControl mapControl)
+        {
+            mapControl.Map = CreateMap();
+        }
+
         public static Map CreateMap()
         {
             var map = new Map();
