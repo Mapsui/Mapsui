@@ -41,7 +41,7 @@ namespace Mapsui.Samples.Wpf.Mvvm
         {
             StartAnimationCommand = new RelayCommand(OnStartAnimations);
             _dispatcherTimer.Tick += TimerTick;
-            _dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 5);
+            _dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 2);
             StartAnimationButtonText = "Start animation";
             OnPropertyChanged(nameof(StartAnimationButtonText));
         }
