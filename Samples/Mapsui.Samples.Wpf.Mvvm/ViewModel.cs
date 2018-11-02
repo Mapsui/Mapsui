@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Input;
 using System.Windows.Threading;
 using BruTile.Predefined;
@@ -10,6 +11,7 @@ namespace Mapsui.Samples.Wpf.Mvvm
 {
     public class ViewModel : INotifyPropertyChanged
     {
+        private bool _firstTimeBoot = true;
         private Map _map;
         public Map Map
         {
@@ -18,12 +20,18 @@ namespace Mapsui.Samples.Wpf.Mvvm
             {
                 _map = value;
                 if (value == null) return;
+                if (_firstTimeBoot)
+                {
+                    _map.Layers.Add(new TileLayer(KnownTileSources.Create(KnownTileSource.OpenStreetMap)));
+                    _firstTimeBoot = false;
+                }
                 _map.CRS = "EPSG:3857";
                 _map?.ClearCache();
             }
         }
+
         public INavigator Navigator { get; set; }
-        public ICommand AddBingAerialLayerCommand { get; set; }
+
         public ICommand StartAnimationCommand { get; set; }
         private readonly Random _random = new Random();
         private readonly DispatcherTimer _dispatcherTimer = new DispatcherTimer();
@@ -31,17 +39,11 @@ namespace Mapsui.Samples.Wpf.Mvvm
 
         public ViewModel()
         {
-            AddBingAerialLayerCommand = new RelayCommand(OnAddBingAerialLayer);
             StartAnimationCommand = new RelayCommand(OnStartAnimations);
             _dispatcherTimer.Tick += TimerTick;
             _dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 5);
             StartAnimationButtonText = "Start animation";
             OnPropertyChanged(nameof(StartAnimationButtonText));
-        }
-
-        private void OnAddBingAerialLayer(object obj)
-        {
-            _map.Layers.Add(new TileLayer(KnownTileSources.Create(KnownTileSource.BingAerial)));
         }
 
         private void OnStartAnimations(object obj)
@@ -53,7 +55,6 @@ namespace Mapsui.Samples.Wpf.Mvvm
             }
             else
             {
-                Navigator.ZoomTo(_map.Resolutions[5]);
                 _dispatcherTimer.Start();
                 StartAnimationButtonText = "Stop animation";
             }

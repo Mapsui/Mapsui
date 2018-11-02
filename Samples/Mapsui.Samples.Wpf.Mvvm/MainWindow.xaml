@@ -13,18 +13,10 @@
 
     <Grid>
         <wpf:MapControl
-            Map="{Binding Map, Mode=OneWayToSource}"
             Navigator="{Binding Navigator, Mode=OneWayToSource}"
+            Map="{Binding Map, Mode=OneWayToSource}"
             VerticalAlignment="Stretch"
             HorizontalAlignment="Stretch"/>
-        <Button 
-            Content="Add Bing Aerial Layer" 
-            Command="{Binding AddBingAerialLayerCommand}"
-            Margin="5" 
-            Height="20"
-            Width="120"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"/>
         <Button 
             Content="{Binding StartAnimationButtonText}" 
             Command="{Binding StartAnimationCommand}" 
