@@ -24,7 +24,7 @@ namespace Mapsui.Samples.Forms
 
         public static Dictionary<string, Func<Map>> CreateList()
         {
-            var commonSamples = AllSamples.CreateList();
+            var commonSamples = AllSamples.GetSamples();
             var allSamples = new Dictionary<string, Func<Map>>();
 
             allSamples.Add(AddPin, OsmSample.CreateMap);
@@ -33,14 +33,14 @@ namespace Mapsui.Samples.Forms
             allSamples.Add(DrawCircle, OsmSample.CreateMap);
             allSamples.Add(MyLocation, OsmSample.CreateMap);
 
-            commonSamples.ToList().ForEach(x => allSamples.Add(x.Key, x.Value));
+            // TODO
+            commonSamples.ToList().ForEach(x => allSamples.Add(x.Name, x.Setup));
 
             return allSamples;
         }
 
         public static Func<MapView, MapClickedEventArgs, bool> GetClicker(string sample)
         {
-
             switch (sample)
             {
                 case Samples.AddPin:

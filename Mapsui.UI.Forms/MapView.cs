@@ -194,7 +194,7 @@ namespace Mapsui.UI.Forms
 
                 if (_mapControl.Map != null)
                 {
-                    (_mapControl.Viewport as Viewport).ViewportChanged -= HandlerViewportChanged;
+                    _mapControl.Viewport.ViewportChanged -= HandlerViewportChanged;
                     _mapControl.Info -= HandlerInfo;
                     _mapControl.Map.Layers.Remove(_mapPinLayer);
                     _mapControl.Map.Layers.Remove(_mapDrawableLayer);
@@ -317,6 +317,14 @@ namespace Mapsui.UI.Forms
         {
             get { return (bool)GetValue(PanLockProperty); }
             set { SetValue(PanLockProperty, value); }
+        }
+
+        /// <summary>
+        /// Viewport of MapControl
+        /// </summary>
+        public IReadOnlyViewport Viewport
+        {
+            get { return _mapControl.Viewport; }
         }
 
         /// <summary>
@@ -444,13 +452,13 @@ namespace Mapsui.UI.Forms
                 _mapControl.ReSnapRotationDegrees = ReSnapRotationDegrees;
             
             if (propertyName.Equals(nameof(RotationLock)))
-                _mapControl.RotationLock = RotationLock;
+                _mapControl.Lock.RotationLock = RotationLock;
 
             if (propertyName.Equals(nameof(ZoomLock)))
-                _mapControl.ZoomLock = ZoomLock;
+                _mapControl.Lock.ZoomLock = ZoomLock;
 
             if (propertyName.Equals(nameof(PanLock)))
-                _mapControl.PanLock = PanLock;
+                _mapControl.Lock.PanLock = PanLock;
         }
 
         /// <summary>
@@ -643,7 +651,7 @@ namespace Mapsui.UI.Forms
             {
                 var mapInfo = _mapControl.GetMapInfo(e.ScreenPosition * _mapControl.SkiaScale);
 
-                if (mapInfo == null)
+                if (mapInfo.Feature == null)
                 {
                     var args = new MapClickedEventArgs(_mapControl.Viewport.ScreenToWorld(e.ScreenPosition).ToForms(), e.NumOfTaps);
 

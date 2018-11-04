@@ -130,7 +130,7 @@ namespace Mapsui.Samples.Forms
             Device.BeginInvokeOnMainThread(() =>
             {
                 mapView.MyLocationLayer.UpdateMyLocation(new UI.Forms.Position(e.Position.Latitude, e.Position.Longitude));
-                mapView.MyLocationLayer.UpdateMyDirection(e.Position.Heading, mapView.Map.Viewport.Rotation);
+                mapView.MyLocationLayer.UpdateMyDirection(e.Position.Heading, mapView.Viewport.Rotation);
                 mapView.MyLocationLayer.UpdateMySpeed(e.Position.Speed);
             });
         }

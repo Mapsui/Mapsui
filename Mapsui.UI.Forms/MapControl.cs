@@ -324,7 +324,7 @@ namespace Mapsui.UI.Forms
         /// <param name="screenPosition">Center of zoom out event</param>
         private bool OnZoomOut(Geometries.Point screenPosition)
         {
-            if (ZoomLock)
+            if (Lock.ZoomLock)
             {
                 return true;
             }
@@ -348,7 +348,7 @@ namespace Mapsui.UI.Forms
         /// <param name="screenPosition">Center of zoom in event</param>
         private bool OnZoomIn(Geometries.Point screenPosition)
         {
-            if (ZoomLock)
+            if (Lock.ZoomLock)
             {
                 return true;
             }
@@ -485,7 +485,7 @@ namespace Mapsui.UI.Forms
 
                         var touchPosition = touchPoints.First();
 
-                        if (!PanLock && _previousCenter != null && !_previousCenter.IsEmpty())
+                        if (!Lock.PanLock && _previousCenter != null && !_previousCenter.IsEmpty())
                         {
                             _viewport.Transform(touchPosition.X, touchPosition.Y, _previousCenter.X, _previousCenter.Y);
 
@@ -507,7 +507,7 @@ namespace Mapsui.UI.Forms
 
                         double rotationDelta = 0;
 
-                        if (!RotationLock)
+                        if (!Lock.RotationLock)
                         {
                             _innerRotation += angle - prevAngle;
                             _innerRotation %= 360;
@@ -528,7 +528,7 @@ namespace Mapsui.UI.Forms
                             }
                         }
 
-                        _viewport.Transform(center.X, center.Y, prevCenter.X, prevCenter.Y, ZoomLock ? 1 : radius / prevRadius, rotationDelta);
+                        _viewport.Transform(center.X, center.Y, prevCenter.X, prevCenter.Y, Lock.ZoomLock ? 1 : radius / prevRadius, rotationDelta);
 
                         (_previousCenter, _previousRadius, _previousAngle) = (center, radius, angle);
 
