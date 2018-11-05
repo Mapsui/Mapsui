@@ -1,4 +1,6 @@
-﻿using Mapsui.Layers;
+﻿using Mapsui.Geometries;
+using Mapsui.Layers;
+using Mapsui.Rendering;
 using Mapsui.UI.Forms.Extensions;
 using Mapsui.UI.Objects;
 using SkiaSharp;
@@ -14,7 +16,7 @@ using Xamarin.Forms;
 
 namespace Mapsui.UI.Forms
 {
-    public class MapView : ContentView, INotifyPropertyChanged, IEnumerable<Pin>
+    public class MapView : ContentView, IMapControl, INotifyPropertyChanged, IEnumerable<Pin>
     {
         private const string MyLocationLayerName = "MyLocation";
         private const string PinLayerName = "Pins";
@@ -54,8 +56,14 @@ namespace Mapsui.UI.Forms
             _mapPinLayer = new Layer(PinLayerName) { IsMapInfoLayer = true };
             _mapDrawableLayer = new Layer(DrawableLayerName) { IsMapInfoLayer = true };
 
+            // Get defaults from MapControl
+            RotationLock = Lock.RotationLock;
+            ZoomLock = Lock.ZoomLock;
+            PanLock = Lock.PanLock;
+
             // Add some events to _mapControl
             _mapControl.Viewport.ViewportChanged += HandlerViewportChanged;
+            _mapControl.ViewportInitialized += HandlerViewportInitialized;
             _mapControl.Info += HandlerInfo;
             _mapControl.PropertyChanged += HandlerMapControlPropertyChanged;
             _mapControl.SingleTap += HandlerTap;
@@ -101,14 +109,14 @@ namespace Mapsui.UI.Forms
 
             _mapSpacingButton2 = new Image { BackgroundColor = Color.Transparent, WidthRequest = 40, HeightRequest = 8 };
 
-            _mapNorthingButton = new SvgButton(Mapsui.Utilities.EmbeddedResourceLoader.Load("Images.LocationNoCenter.svg", typeof(MapView))) 
+            _mapNorthingButton = new SvgButton(Mapsui.Utilities.EmbeddedResourceLoader.Load("Images.RotationZero.svg", typeof(MapView))) 
             { 
-                BackgroundColor = Color.Cyan, 
+                BackgroundColor = Color.White, 
                 WidthRequest = 40, 
                 HeightRequest = 40,
                 Command = new Command((object obj) => Device.BeginInvokeOnMainThread(() => _mapControl.Navigator.RotateTo(0))),
             };
-
+            
             _mapButtons = new StackLayout { BackgroundColor = Color.Transparent, Opacity = 0.8, Spacing = 0, IsVisible = true };
 
             _mapButtons.Children.Add(_mapZoomInButton);
@@ -162,6 +170,9 @@ namespace Mapsui.UI.Forms
         /// Occurs when map long clicked
         /// </summary>
         public event EventHandler<MapLongClickedEventArgs> MapLongClicked;
+
+        /// <inheritdoc />
+        public event EventHandler ViewportInitialized;
 
         /// <summary>
         /// Bindings
@@ -280,6 +291,15 @@ namespace Mapsui.UI.Forms
         }
 
         /// <summary>
+        /// MapLock property of MapView
+        /// </summary>
+        public MapLock Lock
+        {
+            get { return _mapControl.Lock; }
+            set { _mapControl.Lock = value; }
+        }
+
+        /// <summary>
         /// Enable rotation with pinch gesture
         /// </summary>
         public bool RotationLock
@@ -314,19 +334,89 @@ namespace Mapsui.UI.Forms
             get { return _mapControl.Viewport; }
         }
 
-        public IMapControl MapControl
+        /// <summary>
+        /// Navigator of MapControl
+        /// </summary>
+        public INavigator Navigator
+        {
+            get { return _mapControl.Navigator;  }
+        }
+
+        internal IMapControl MapControl
         {
             get { return _mapControl; }
         }
 
         /// <summary>
-        /// Refresh screen
+        /// IMapControl
         /// </summary>
+
+        /// <inheritdoc />
+        public float PixelDensity => _mapControl.PixelDensity;
+
+        /// <inheritdoc />
+        public IRenderer Renderer => _mapControl.Renderer;
+
+        /// <inheritdoc />
         public void Refresh()
         {
             _mapControl.Refresh();
         }
 
+        /// <inheritdoc />
+        public MapInfo GetMapInfo(Geometries.Point screenPosition, int margin = 0)
+        {
+            return MapInfoHelper.GetMapInfo(Map.Layers.Where(l => l.IsMapInfoLayer), Viewport,
+                screenPosition, _mapControl.Renderer.SymbolCache, margin);
+        }
+
+        /// <inheritdoc />
+        public MapInfo GetMapInfo(IEnumerable<ILayer> layers, Geometries.Point screenPosition, int margin = 0)
+        {
+            return MapInfoHelper.GetMapInfo(layers, Viewport,
+                screenPosition, _mapControl.Renderer.SymbolCache, margin);
+        }
+
+        /// <inheritdoc />
+        public void RefreshGraphics()
+        {
+            _mapControl.RefreshGraphics();
+        }
+
+        /// <inheritdoc />
+        public void RefreshData()
+        {
+            _mapControl.RefreshData();
+        }
+
+        /// <inheritdoc />
+        public void Unsubscribe()
+        {
+            _mapControl.Unsubscribe();
+        }
+
+        /// <inheritdoc />
+        public void OpenBrowser(string url)
+        {
+            _mapControl.OpenBrowser(url);
+        }
+
+        /// <inheritdoc />
+        public Geometries.Point ToDeviceIndependentUnits(Geometries.Point coordinateInPixels)
+        {
+            return _mapControl.ToDeviceIndependentUnits(coordinateInPixels);
+        }
+
+        /// <inheritdoc />
+        public Geometries.Point ToPixels(Geometries.Point coordinateInDeviceIndependentUnits)
+        {
+            return _mapControl.ToPixels(coordinateInDeviceIndependentUnits);
+        }
+
+        /// <summary>
+        /// Callouts
+        /// </summary>
+        
         private Callout callout;
 
         /// <summary>
@@ -517,6 +607,12 @@ namespace Mapsui.UI.Forms
                     //_mapControl.Map.NavigateTo(_mapMyLocationLayer.MyLocation.ToMapsui());
                 }
             }
+        }
+
+        ///  <inheritdoc />
+        private void HandlerViewportInitialized(object sender, EventArgs e)
+        {
+            ViewportInitialized?.Invoke(sender, e);
         }
 
         private void HandlerHover(object sender, HoveredEventArgs e)

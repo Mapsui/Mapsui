@@ -76,7 +76,7 @@ namespace Mapsui.Samples.Forms
 
             if (sample != null)
             {
-                sample.Setup(mapView.MapControl);
+                sample.Setup(mapView);
             }
 
             clicker = null;

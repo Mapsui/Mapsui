@@ -43,6 +43,7 @@
     <None Remove="Images\MyLocationMoving.svg" />
     <None Remove="Images\Location.svg" />
     <None Remove="Images\LocationCenter.svg" />
+    <None Remove="Images\RotationZero.svg" />
     <None Remove="Images\ZoomIn.svg" />
     <None Remove="Images\ZoomOut.svg" />
   </ItemGroup>
@@ -53,6 +54,7 @@
     <EmbeddedResource Include="Images\MyLocationMoving.svg" />
     <EmbeddedResource Include="Images\LocationNoCenter.svg" />
     <EmbeddedResource Include="Images\LocationCenter.svg" />
+    <EmbeddedResource Include="Images\RotationZero.svg" />
     <EmbeddedResource Include="Images\ZoomIn.svg" />
     <EmbeddedResource Include="Images\ZoomOut.svg" />
   </ItemGroup>

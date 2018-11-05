@@ -35,7 +35,7 @@ namespace Mapsui.Samples.Forms
 
             StartGPS();
 
-            setup(mapView.MapControl);
+            setup(mapView);
 
             clicker = c;
         }
