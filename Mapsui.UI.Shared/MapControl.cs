@@ -10,6 +10,7 @@ using Mapsui.Logging;
 using Mapsui.Rendering;
 using Mapsui.Rendering.Skia;
 using Mapsui.Widgets;
+using System.Runtime.CompilerServices;
 
 #if __ANDROID__
 namespace Mapsui.UI.Android
@@ -23,7 +24,7 @@ namespace Mapsui.UI.Forms
 namespace Mapsui.UI.Wpf
 #endif
 {
-    public partial class MapControl
+    public partial class MapControl : INotifyPropertyChanged
     {
         private Map _map;
 
@@ -179,6 +180,7 @@ namespace Mapsui.UI.Wpf
                     if (Viewport.HasSize) _map.Home(Navigator); // If size is not set yet Home will be called at set size. This is okay.
                 }
 
+                OnPropertyChanged();
                 Refresh();
             }
         }
@@ -201,6 +203,22 @@ namespace Mapsui.UI.Wpf
         {
             ViewportInitialized?.Invoke(this, EventArgs.Empty);
         }
+
+#if __FORMS__
+        public new event PropertyChangedEventHandler PropertyChanged;
+
+        protected override void OnPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+#else
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+#endif
 
         public void RefreshData()
         {

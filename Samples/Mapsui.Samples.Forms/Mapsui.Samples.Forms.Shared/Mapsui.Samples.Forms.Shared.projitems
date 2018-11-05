@@ -13,6 +13,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)CircleSample.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IFormsSample.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -24,7 +26,10 @@
       <DependentUpon>MapPage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Samples.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MyLocationSample.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PinSample.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PolygonSample.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PolylineSample.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)MainPage.xaml">

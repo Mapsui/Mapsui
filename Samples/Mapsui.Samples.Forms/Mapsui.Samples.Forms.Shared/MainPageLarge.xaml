@@ -5,12 +5,15 @@
              x:Class="Mapsui.Samples.Forms.MainPageLarge">
     <ContentPage.Content>
         <StackLayout Orientation="Horizontal">
-            <ListView x:Name="listView"
-               VerticalOptions="FillAndExpand" 
-               HorizontalOptions="Start"
-               WidthRequest="200"
-               Margin="10"
-               ItemSelected="OnSelection"/>
+            <StackLayout Orientation="Vertical">
+                <Picker x:Name="picker" />
+                <ListView x:Name="listView"
+                    VerticalOptions="FillAndExpand" 
+                    HorizontalOptions="Start"
+                    WidthRequest="200"
+                    Margin="10"
+                    ItemSelected="OnSelection"/>
+            </StackLayout>
             <mapsui:MapView x:Name="mapView"
     		    VerticalOptions="FillAndExpand"
                 HorizontalOptions="FillAndExpand"

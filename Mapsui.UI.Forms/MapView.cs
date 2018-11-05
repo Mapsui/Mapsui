@@ -2,7 +2,6 @@
 using Mapsui.UI.Forms.Extensions;
 using Mapsui.UI.Objects;
 using SkiaSharp;
-using SkiaSharp.Views.Forms;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -56,6 +55,9 @@ namespace Mapsui.UI.Forms
             _mapDrawableLayer = new Layer(DrawableLayerName) { IsMapInfoLayer = true };
 
             // Add some events to _mapControl
+            _mapControl.Viewport.ViewportChanged += HandlerViewportChanged;
+            _mapControl.Info += HandlerInfo;
+            _mapControl.PropertyChanged += HandlerMapControlPropertyChanged;
             _mapControl.SingleTap += HandlerTap;
             _mapControl.DoubleTap += HandlerTap;
             _mapControl.LongTap += HandlerLongTap;
@@ -76,7 +78,7 @@ namespace Mapsui.UI.Forms
                 BackgroundColor = Color.White, 
                 WidthRequest = 40, 
                 HeightRequest = 40,
-                Command = new Command((object obj) => _mapControl.Navigator.ZoomIn()),
+                Command = new Command((object obj) => { _mapControl.Navigator.ZoomIn(); Refresh(); }),
             };
 
             _mapZoomOutButton = new SvgButton(Mapsui.Utilities.EmbeddedResourceLoader.Load("Images.ZoomOut.svg", typeof(MapView)))
@@ -84,7 +86,7 @@ namespace Mapsui.UI.Forms
                 BackgroundColor = Color.White,
                 WidthRequest = 40,
                 HeightRequest = 40,
-                Command = new Command((object obj) => _mapControl.Navigator.ZoomOut()),
+                Command = new Command((object obj) => { _mapControl.Navigator.ZoomOut(); Refresh(); }),
             };
 
             _mapSpacingButton1 = new Image { BackgroundColor = Color.Transparent, WidthRequest = 40, HeightRequest = 8 };
@@ -202,21 +204,6 @@ namespace Mapsui.UI.Forms
                 }
 
                 _mapControl.Map = value;
-
-                if (_mapControl.Map != null)
-                {
-                    // Get updates of Viewport
-                    _mapControl.Viewport.ViewportChanged += HandlerViewportChanged;
-                    _mapControl.Info += HandlerInfo;
-                    // Add layer for MyLocation
-                    _mapControl.Map.Layers.Add(_mapMyLocationLayer);
-                    // Draw drawables first
-                    _mapControl.Map.Layers.Add(_mapDrawableLayer);
-                    // Draw pins on top of drawables
-                    _mapControl.Map.Layers.Add(_mapPinLayer);
-                }
-
-                OnPropertyChanged();
             }
         }
 
@@ -327,12 +314,17 @@ namespace Mapsui.UI.Forms
             get { return _mapControl.Viewport; }
         }
 
+        public IMapControl MapControl
+        {
+            get { return _mapControl; }
+        }
+
         /// <summary>
         /// Refresh screen
         /// </summary>
         public void Refresh()
         {
-            _mapControl.InvalidateSurface();
+            _mapControl.Refresh();
         }
 
         private Callout callout;
@@ -466,6 +458,30 @@ namespace Mapsui.UI.Forms
         /// </summary>
 
         /// <summary>
+        /// MapControl has changed
+        /// </summary>
+        /// <param name="sender">MapControl of this event</param>
+        /// <param name="e">Event arguments containing what changed</param>
+        private void HandlerMapControlPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName.Equals(nameof(MapControl.Map)))
+            {
+                if (_mapControl.Map != null)
+                {
+                    // Add layer for MyLocation
+                    if (!_mapControl.Map.Layers.Contains(_mapMyLocationLayer))
+                        _mapControl.Map.Layers.Add(_mapMyLocationLayer);
+                    // Draw drawables first
+                    if (!_mapControl.Map.Layers.Contains(_mapDrawableLayer))
+                        _mapControl.Map.Layers.Add(_mapDrawableLayer);
+                    // Draw pins on top of drawables
+                    if (!_mapControl.Map.Layers.Contains(_mapPinLayer))
+                        _mapControl.Map.Layers.Add(_mapPinLayer);
+                }
+            }
+        }
+
+        /// <summary>
         /// Viewport of map has changed
         /// </summary>
         /// <param name="sender">Viewport of this event</param>
@@ -536,6 +552,8 @@ namespace Mapsui.UI.Forms
 
                 pin.PropertyChanged += HandlerPinPropertyChanged;
             }
+
+            Refresh();
         }
 
         private void HandlerDrawablesOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -559,6 +577,8 @@ namespace Mapsui.UI.Forms
 
                 drawable.PropertyChanged += HandlerDrawablePropertyChanged;
             }
+
+            Refresh();
         }
 
         private void HandlerInfo(object sender, MapInfoEventArgs e)
@@ -644,6 +664,8 @@ namespace Mapsui.UI.Forms
                 if (callout.IsClosableByClick)
                     HideCallout(callout);
 
+            e.Handled = false;
+
             // Check, if we hit a widget or drawable
             // Is there a widget at this position
             // Is there a drawable at this position
@@ -665,10 +687,12 @@ namespace Mapsui.UI.Forms
 
                     // Event isn't handled up to now.
                     // Than look, what we could do.
+
+                    return;
                 }
 
                 // A feature is clicked
-                // TODO
+                HandlerInfo(sender, new MapInfoEventArgs { MapInfo = mapInfo, Handled = e.Handled, NumTaps = e.NumOfTaps });
             }
         }
 

@@ -6,6 +6,7 @@
              x:Class="Mapsui.Samples.Forms.MainPage">
 
     <StackLayout Orientation="Vertical" BackgroundColor="LightGray" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <Picker x:Name="picker" />
         <ListView x:Name="listView"
            VerticalOptions="FillAndExpand" 
            HorizontalOptions="FillAndExpand"

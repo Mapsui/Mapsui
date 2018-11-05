@@ -4,6 +4,7 @@ using Xamarin.Forms.Xaml;
 using Mapsui.UI.Forms;
 using Plugin.Geolocator;
 using Plugin.Geolocator.Abstractions;
+using Mapsui.UI;
 
 namespace Mapsui.Samples.Forms
 {
@@ -19,7 +20,7 @@ namespace Mapsui.Samples.Forms
             InitializeComponent();
         }
 
-        public MapPage(Func<Map> call, Func<MapView, MapClickedEventArgs, bool> c = null)
+        public MapPage(Action<IMapControl> setup, Func<MapView, MapClickedEventArgs, bool> c = null)
         {
             InitializeComponent();
 
@@ -34,7 +35,7 @@ namespace Mapsui.Samples.Forms
 
             StartGPS();
 
-            mapView.Map = call();
+            setup(mapView.MapControl);
 
             clicker = c;
         }

@@ -1,13 +1,13 @@
+using Mapsui.Rendering;
 using Mapsui.Rendering.Skia;
+using Mapsui.UI.Utils;
+using SkiaSharp;
+using SkiaSharp.Views.Forms;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
-using Mapsui.Widgets;
-using SkiaSharp.Views.Forms;
 using Xamarin.Forms;
-using SkiaSharp;
-using Mapsui.Rendering;
-using Mapsui.UI.Utils;
 
 namespace Mapsui.UI.Forms
 {

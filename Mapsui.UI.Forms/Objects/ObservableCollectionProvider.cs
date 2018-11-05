@@ -43,10 +43,13 @@ namespace Mapsui.UI.Objects
             {
                 if (item.Feature != null)
                 {
-                    if (extents == null)
-                        extents = new BoundingBox(item.Feature.Geometry.BoundingBox);
-                    else
-                        extents = extents.Join(item.Feature.Geometry.BoundingBox);
+                    if (item.Feature.Geometry.BoundingBox != null)
+                    {
+                        if (extents == null)
+                            extents = new BoundingBox(item.Feature.Geometry.BoundingBox);
+                        else
+                            extents = extents.Join(item.Feature.Geometry.BoundingBox);
+                    }
                 }
             }
 
