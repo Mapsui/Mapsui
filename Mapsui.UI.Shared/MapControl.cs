@@ -10,6 +10,7 @@ using Mapsui.Logging;
 using Mapsui.Rendering;
 using Mapsui.Rendering.Skia;
 using Mapsui.Widgets;
+using System.Runtime.CompilerServices;
 
 #if __ANDROID__
 namespace Mapsui.UI.Android
@@ -23,34 +24,97 @@ namespace Mapsui.UI
 namespace Mapsui.UI.Wpf
 #endif
 {
-    public partial class MapControl
+    public partial class MapControl : INotifyPropertyChanged
     {
         private Map _map;
 
-        public MapLock Lock { get; set; } = new MapLock {RotationLock = true};
+        private MapLock _lock = new MapLock { RotationLock = true };
+
+        /// <summary>
+        /// Handles, which interaction with the map is locked 
+        /// </summary>
+        public MapLock Lock
+        {
+            get { return _lock; }
+            set
+            {
+                if (_lock != value)
+                {
+                    _lock = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private double _unSnapRotationDegrees = 0;
 
         /// <summary>
         /// After how many degrees start rotation to take place
         /// </summary>
-        public double UnSnapRotationDegrees { get; set; }
+        public double UnSnapRotationDegrees
+        {
+            get { return _unSnapRotationDegrees; }
+            set
+            {
+                if (_unSnapRotationDegrees != value)
+                {
+                    _unSnapRotationDegrees = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private double _reSnapRotationDegrees = 0;
 
         /// <summary>
         /// With how many degrees from 0 should map snap to 0 degrees
         /// </summary>
-        public double ReSnapRotationDegrees { get; set; }
-        
-        public IRenderer Renderer { get; set; } = new MapRenderer();
+        public double ReSnapRotationDegrees
+        {
+            get { return _reSnapRotationDegrees; }
+            set
+            {
+                if (_reSnapRotationDegrees != value)
+                {
+                    _reSnapRotationDegrees = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private IRenderer _renderer = new MapRenderer();
+
+        /// <summary>
+        /// Renderer that is used from this MapControl
+        /// </summary>
+        public IRenderer Renderer
+        {
+            get { return _renderer; }
+            set
+            {
+                if (_renderer != value)
+                {
+                    _renderer = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private readonly LimitedViewport _viewport = new LimitedViewport();
 
         /// <summary>
         /// Viewport holding information about visible part of the map. Viewport can never be null.
         /// </summary>
-        private readonly LimitedViewport _viewport = new LimitedViewport();
-
         public IReadOnlyViewport Viewport => _viewport;
 
-
+        /// <summary>
+        /// Handles all manipulations of the map viewport
+        /// </summary>
         public INavigator Navigator { get; private set; }
 
+        /// <summary>
+        /// Called when the viewport is initialized
+        /// </summary>
         public event EventHandler ViewportInitialized; //todo: Consider to use the Viewport PropertyChanged
 
         /// <summary>
@@ -59,7 +123,27 @@ namespace Mapsui.UI.Wpf
         public event EventHandler<MapInfoEventArgs> Info;
 
         /// <summary>
-        /// Unsubscribe from map events </summary>
+        /// Called whenever a property is changed
+        /// </summary>
+#if __FORMS__
+        public new event PropertyChangedEventHandler PropertyChanged;
+
+        protected override void OnPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+#else
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+#endif
+
+        /// <summary>
+        /// Unsubscribe from map events 
+        /// </summary>
         public void Unsubscribe()
         {
             UnsubscribeFromMapEvents(_map);
@@ -90,6 +174,9 @@ namespace Mapsui.UI.Wpf
             }
         }
 
+        /// <summary>
+        /// Refresh data of the map and than repaint it
+        /// </summary>
         public void Refresh()
         {
             RefreshData();
@@ -134,7 +221,6 @@ namespace Mapsui.UI.Wpf
         private void MapPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(Layers.Layer.Enabled))
-
             {
                 RefreshGraphics();
             }
@@ -157,6 +243,9 @@ namespace Mapsui.UI.Wpf
         }
         // ReSharper restore RedundantNameQualifier
 
+        /// <summary>
+        /// Map holding data for which is shown in this MapControl
+        /// </summary>
         public Map Map
         {
             get => _map;
@@ -180,6 +269,7 @@ namespace Mapsui.UI.Wpf
                 }
 
                 Refresh();
+                OnPropertyChanged();
             }
         }
 
@@ -202,6 +292,9 @@ namespace Mapsui.UI.Wpf
             ViewportInitialized?.Invoke(this, EventArgs.Empty);
         }
 
+        /// <summary>
+        /// Refresh data of Map, but don't paint it
+        /// </summary>
         public void RefreshData()
         {
             _map?.RefreshData(Viewport.Extent, Viewport.Resolution, true);
@@ -298,6 +391,9 @@ namespace Mapsui.UI.Wpf
             Refresh();
         }
 
+        /// <summary>
+        /// Clear cache and repaint map
+        /// </summary>
         public void Clear()
         {
             // not sure if we need this method

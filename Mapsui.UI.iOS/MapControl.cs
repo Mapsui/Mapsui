@@ -196,6 +196,7 @@ namespace Mapsui.UI.iOS
                 base.Frame = value;
                 SetViewportSize();
                 Refresh();
+                OnPropertyChanged();
             }
         }
 
