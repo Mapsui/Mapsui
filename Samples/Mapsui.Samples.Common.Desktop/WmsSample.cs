@@ -7,7 +7,7 @@ namespace Mapsui.Samples.Common.Desktop
     public class WmsSample : ISample
     {
         // When there is no explicit call to the assembly it is not loaded
-        public static void MethodToLoadThisAssembly() { }
+        public static void LoadAssembly() { }
 
         public string Name => "2 WMS";
         public string Category => "Desktop";

@@ -2,5 +2,6 @@
 {
     public static class Utilities
     {
+        public static void LoadAssembly() { }
     }
 }

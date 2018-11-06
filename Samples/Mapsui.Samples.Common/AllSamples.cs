@@ -16,7 +16,6 @@ namespace Mapsui.Samples.Common
                 .SelectMany(s => s.GetTypes())
                 .Where(p => type.IsAssignableFrom(p) && !p.IsInterface)
                 .Select(Activator.CreateInstance).Select(t => t as ISample)
-                .Where(i => i?.Category != "Tests")
                 .OrderBy(s => s?.Name)
                 .ThenBy(s => s?.Category)
                 .ToList();
