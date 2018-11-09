@@ -19,7 +19,7 @@ namespace Mapsui.Layers
             if (box == null) { return new List<IFeature>(); }
             var cache = _cache;
             var biggerBox = box.Grow(SymbolStyle.DefaultWidth * 2 * resolution, SymbolStyle.DefaultHeight * 2 * resolution);
-            var result = cache.Where(f => biggerBox.Intersects(f.Geometry.BoundingBox));
+            var result = cache.Where(f => biggerBox.Intersects(f.Geometry?.BoundingBox));
             return result;
         }
 
