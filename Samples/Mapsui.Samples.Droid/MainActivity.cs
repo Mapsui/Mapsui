@@ -55,19 +55,16 @@ namespace Mapsui.Samples.Droid
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
             MenuInflater.Inflate(Resource.Menu.menu_main, menu);
-            var i = 0;
-            var j = 0;
 
             var categories = AllSamples.GetSamples().Select(s => s.Category).Distinct().OrderBy(c => c);
             foreach (var category in categories)
             {
-                var submenu = menu.AddSubMenu(/*++i,++j,j,*/category);
+                var submenu = menu.AddSubMenu(category);
 
                 foreach (var sample in AllSamples.GetSamples().Where(s => s.Category == category))
                 {
-                    submenu.Add(/*i, ++j, j, */sample.Name);
+                    submenu.Add(sample.Name);
                 }
-
             }
             return true;
         }
