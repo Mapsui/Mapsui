@@ -9,7 +9,7 @@ namespace Mapsui.Tests.Layers
     public class WritableLayerTests
     {
         [Test]
-        public void TestGetExtends()
+        public void DoNotCrashOnNullOrEmptyGeometries()
         {
             // arrange
             var writableLayer = new WritableLayer();
