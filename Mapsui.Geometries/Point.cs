@@ -297,7 +297,7 @@ namespace Mapsui.Geometries
         ///     The minimum bounding box for this Geometry.
         /// </summary>
         /// <returns></returns>
-        public override BoundingBox BoundingBox => new BoundingBox(X, Y, X, Y);
+        public override BoundingBox BoundingBox =>  _isEmpty ? null : new BoundingBox(X, Y, X, Y);
 
         /// <summary>
         ///     Calculates a new point by rotating this point clockwise about the specified center point
