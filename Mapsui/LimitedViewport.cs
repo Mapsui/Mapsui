@@ -41,7 +41,7 @@ namespace Mapsui
         public void SetSize(double width, double height)
         {
             _viewport.SetSize(width, height);
-            if (_viewport.HasSize) Limiter.LimitExtent(_viewport, Map.Envelope);
+            if (_viewport.HasSize) Limiter?.LimitExtent(_viewport, Map.Envelope);
         }
 
         public virtual void SetCenter(double x, double y)
