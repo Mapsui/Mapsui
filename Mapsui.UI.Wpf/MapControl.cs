@@ -127,6 +127,7 @@ namespace Mapsui.UI.Wpf
                     Renderer = new Rendering.Xaml.MapRenderer();
                     RefreshGraphics();
                 }
+                OnPropertyChanged();
             }
         }
 
