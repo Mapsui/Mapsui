@@ -55,7 +55,7 @@ namespace Mapsui.UI.Wpf
         public event EventHandler ViewportInitialized; //todo: Consider to use the Viewport PropertyChanged
 
         /// <summary>
-        ///  Called whenever a feature in one of the layers in InfoLayers is hitten by a click 
+        /// Called whenever a feature in one of the layers in InfoLayers is hitten by a click 
         /// </summary>
         public event EventHandler<MapInfoEventArgs> Info;
 

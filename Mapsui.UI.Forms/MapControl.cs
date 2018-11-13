@@ -11,6 +11,9 @@ using Xamarin.Forms;
 
 namespace Mapsui.UI.Forms
 {
+    /// <summary>
+    /// Class, that uses the API of all other Mapsui MapControls
+    /// </summary>
     public partial class MapControl : SKGLView, IMapControl, IDisposable
     {
         class TouchEvent

@@ -16,6 +16,9 @@ using Xamarin.Forms;
 
 namespace Mapsui.UI.Forms
 {
+    /// <summary>
+    /// Class, that uses the API of the original Xamarin.Forms MapView
+    /// </summary>
     public class MapView : ContentView, IMapControl, INotifyPropertyChanged, IEnumerable<Pin>
     {
         private const string MyLocationLayerName = "MyLocation";
@@ -147,9 +150,7 @@ namespace Mapsui.UI.Forms
             _mapDrawableLayer.Style = null;  // We don't want a global style for this layer
         }
 
-        /// <summary>
-        /// Events
-        /// </summary>
+        #region Events
 
         ///<summary>
         /// Occurs when a pin clicked
@@ -174,9 +175,12 @@ namespace Mapsui.UI.Forms
         /// <inheritdoc />
         public event EventHandler ViewportInitialized;
 
-        /// <summary>
-        /// Bindings
-        /// </summary>
+        /// <inheritdoc />
+        public event EventHandler<MapInfoEventArgs> Info;
+
+        #endregion
+
+        #region Bindings
 
         public static readonly BindableProperty SelectedPinProperty = BindableProperty.Create(nameof(SelectedPin), typeof(Pin), typeof(MapView), default(Pin), defaultBindingMode: BindingMode.TwoWay);
         public static readonly BindableProperty MyLocationEnabledProperty = BindableProperty.Create(nameof(MyLocationEnabled), typeof(bool), typeof(MapView), false, defaultBindingMode: BindingMode.TwoWay);
@@ -186,10 +190,13 @@ namespace Mapsui.UI.Forms
         public static readonly BindableProperty RotationLockProperty = BindableProperty.Create(nameof(RotationLockProperty), typeof(bool), typeof(MapView), default(bool));
         public static readonly BindableProperty ZoomLockProperty = BindableProperty.Create(nameof(ZoomLockProperty), typeof(bool), typeof(MapView), default(bool));
         public static readonly BindableProperty PanLockProperty = BindableProperty.Create(nameof(PanLockProperty), typeof(bool), typeof(MapView), default(bool));
+        public static readonly BindableProperty IsZoomButtonVisibleProperty = BindableProperty.Create(nameof(IsZoomButtonVisibleProperty), typeof(bool), typeof(MapView), true);
+        public static readonly BindableProperty IsMyLocationButtonVisibleProperty = BindableProperty.Create(nameof(IsMyLocationButtonVisibleProperty), typeof(bool), typeof(MapView), true);
+        public static readonly BindableProperty IsNorthingButtonVisibleProperty = BindableProperty.Create(nameof(IsNorthingButtonVisibleProperty), typeof(bool), typeof(MapView), true);
 
-        ///<summary>
-        /// Properties
-        ///</summary>
+        #endregion
+
+        #region Properties
 
         ///<summary>
         /// Native Mapsui Map object
@@ -221,10 +228,7 @@ namespace Mapsui.UI.Forms
         /// <summary>
         /// MyLocation layer
         /// </summary>
-        public MyLocationLayer MyLocationLayer
-        {
-            get { return _mapMyLocationLayer; }
-        }
+        public MyLocationLayer MyLocationLayer => _mapMyLocationLayer;
 
         /// <summary>
         /// Should my location be visible on map
@@ -250,10 +254,7 @@ namespace Mapsui.UI.Forms
         /// <summary>
         /// Pins on map
         /// </summary>
-        public IList<Pin> Pins
-        {
-            get { return _pins; }
-        }
+        public IList<Pin> Pins => _pins;
 
         /// <summary>
         /// Selected pin
@@ -267,10 +268,7 @@ namespace Mapsui.UI.Forms
         /// <summary>
         /// List of drawables like polyline and polygon
         /// </summary>
-        public IList<Drawable> Drawables
-        {
-            get { return _drawable; }
-        }
+        public IList<Drawable> Drawables => _drawable;
 
         /// <summary>
         /// Number of degrees, before the rotation starts
@@ -327,25 +325,46 @@ namespace Mapsui.UI.Forms
         }
 
         /// <summary>
+        /// Enable zoom buttons
+        /// </summary>
+        public bool IsZoomButtonVisible
+        {
+            get { return (bool)GetValue(IsZoomButtonVisibleProperty); }
+            set { SetValue(IsZoomButtonVisibleProperty, value); }
+        }
+
+        /// <summary>
+        /// Enable My Location button
+        /// </summary>
+        public bool IsMyLocationButtonVisible
+        {
+            get { return (bool)GetValue(IsMyLocationButtonVisibleProperty); }
+            set { SetValue(IsMyLocationButtonVisibleProperty, value); }
+        }
+
+        /// <summary>
+        /// Enable Northing button
+        /// </summary>
+        public bool IsNorthingButtonVisible
+        {
+            get { return (bool)GetValue(IsNorthingButtonVisibleProperty); }
+            set { SetValue(IsNorthingButtonVisibleProperty, value); }
+        }
+
+        /// <summary>
         /// Viewport of MapControl
         /// </summary>
-        public IReadOnlyViewport Viewport
-        {
-            get { return _mapControl.Viewport; }
-        }
+        public IReadOnlyViewport Viewport => _mapControl.Viewport;
 
         /// <summary>
         /// Navigator of MapControl
         /// </summary>
-        public INavigator Navigator
-        {
-            get { return _mapControl.Navigator;  }
-        }
+        public INavigator Navigator => _mapControl.Navigator;
 
-        internal IMapControl MapControl
-        {
-            get { return _mapControl; }
-        }
+        /// <summary>
+        /// Underlaying MapControl
+        /// </summary>
+        internal IMapControl MapControl => _mapControl;
 
         /// <summary>
         /// IMapControl
@@ -356,6 +375,10 @@ namespace Mapsui.UI.Forms
 
         /// <inheritdoc />
         public IRenderer Renderer => _mapControl.Renderer;
+
+        #endregion
+
+        #region IMapControl implementation
 
         /// <inheritdoc />
         public void Refresh()
@@ -413,10 +436,10 @@ namespace Mapsui.UI.Forms
             return _mapControl.ToPixels(coordinateInDeviceIndependentUnits);
         }
 
-        /// <summary>
-        /// Callouts
-        /// </summary>
-        
+        #endregion
+
+        #region Callouts
+
         private Callout callout;
 
         /// <summary>
@@ -490,6 +513,8 @@ namespace Mapsui.UI.Forms
                 Device.BeginInvokeOnMainThread(() => ((AbsoluteLayout)Content).Children.Remove(callout));
         }
 
+        #endregion
+
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
@@ -504,13 +529,13 @@ namespace Mapsui.UI.Forms
         {
             base.OnPropertyChanged(propertyName);
 
-            if (propertyName.Equals(nameof(MyLocationEnabled)))
+            if (propertyName.Equals(nameof(MyLocationEnabledProperty)))
             {
                 _mapMyLocationLayer.Enabled = MyLocationEnabled;
                 Refresh();
             }
 
-            if (propertyName.Equals(nameof(MyLocationFollow)))
+            if (propertyName.Equals(nameof(MyLocationFollowProperty)))
             {
                 _mapMyLocationButton.IsEnabled = !MyLocationFollow;
 
@@ -527,25 +552,42 @@ namespace Mapsui.UI.Forms
                 Refresh();
             }
 
-            if (propertyName.Equals(nameof(UnSnapRotationDegrees)))
+            if (propertyName.Equals(nameof(UnSnapRotationDegreesProperty)))
                 _mapControl.UnSnapRotationDegrees = UnSnapRotationDegrees;
 
-            if (propertyName.Equals(nameof(ReSnapRotationDegrees)))
+            if (propertyName.Equals(nameof(ReSnapRotationDegreesProperty)))
                 _mapControl.ReSnapRotationDegrees = ReSnapRotationDegrees;
             
-            if (propertyName.Equals(nameof(RotationLock)))
+            if (propertyName.Equals(nameof(RotationLockProperty)))
                 _mapControl.Lock.RotationLock = RotationLock;
 
-            if (propertyName.Equals(nameof(ZoomLock)))
+            if (propertyName.Equals(nameof(ZoomLockProperty)))
                 _mapControl.Lock.ZoomLock = ZoomLock;
 
-            if (propertyName.Equals(nameof(PanLock)))
+            if (propertyName.Equals(nameof(PanLockProperty)))
                 _mapControl.Lock.PanLock = PanLock;
+
+            if (propertyName.Equals(nameof(IsZoomButtonVisibleProperty)))
+            {
+                _mapZoomInButton.IsVisible = IsZoomButtonVisible;
+                _mapZoomOutButton.IsVisible = IsZoomButtonVisible;
+                _mapSpacingButton1.IsVisible = IsZoomButtonVisible && IsMyLocationButtonVisible;
+            }
+
+            if (propertyName.Equals(nameof(IsMyLocationButtonVisibleProperty)))
+            {
+                _mapMyLocationButton.IsVisible = IsMyLocationButtonVisible;
+                _mapSpacingButton1.IsVisible = IsZoomButtonVisible && IsMyLocationButtonVisible;
+            }
+
+            if (propertyName.Equals(nameof(IsNorthingButtonVisibleProperty)))
+            {
+                _mapNorthingButton.IsVisible = IsNorthingButtonVisible;
+                _mapSpacingButton2.IsVisible = (IsMyLocationButtonVisible || IsZoomButtonVisible) && IsNorthingButtonVisible;
+            }
         }
 
-        /// <summary>
-        /// Handlers
-        /// </summary>
+        #region Handlers
 
         /// <summary>
         /// MapControl has changed
@@ -724,6 +766,9 @@ namespace Mapsui.UI.Forms
                     return;
                 }
             }
+
+            // Call Info event, if there is one
+            Info?.Invoke(sender, e);
         }
 
         private void HandlerLongTap(object sender, TappedEventArgs e)
@@ -801,6 +846,8 @@ namespace Mapsui.UI.Forms
         {
             Map.RefreshData(_mapControl.Viewport.Extent, _mapControl.Viewport.Resolution, false);
         }
+
+        #endregion
 
         /// <summary>
         /// Get all drawables of layer that contain given point

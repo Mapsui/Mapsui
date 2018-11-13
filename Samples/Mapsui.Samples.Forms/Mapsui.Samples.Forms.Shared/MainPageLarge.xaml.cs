@@ -43,6 +43,10 @@ namespace Mapsui.Samples.Forms
 
             mapView.MyLocationLayer.UpdateMyLocation(new UI.Forms.Position());
 
+            mapView.IsZoomButtonVisible = true;
+            mapView.IsMyLocationButtonVisible = true;
+            mapView.IsNorthingButtonVisible = true;
+
             StartGPS();
         }
 
@@ -60,8 +64,6 @@ namespace Mapsui.Samples.Forms
         private void OnMapClicked(object sender, MapClickedEventArgs e)
         {
             e.Handled = clicker == null ? false : (bool)clicker?.Invoke(sender as MapView, e);
-            //Samples.SetPins(mapView, e);
-            //Samples.DrawPolylines(mapView, e);
         }
 
         void OnSelection(object sender, SelectedItemChangedEventArgs e)
