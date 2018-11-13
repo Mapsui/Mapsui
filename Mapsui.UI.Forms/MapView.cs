@@ -54,7 +54,7 @@ namespace Mapsui.UI.Forms
 
             IsClippedToBounds = true;
 
-            _mapControl = new MapControl();
+            _mapControl = new MapControl() { UseDoubleTap = false };
             _mapMyLocationLayer = new MyLocationLayer(this) { Enabled = true };
             _mapPinLayer = new Layer(PinLayerName) { IsMapInfoLayer = true };
             _mapDrawableLayer = new Layer(DrawableLayerName) { IsMapInfoLayer = true };
@@ -193,6 +193,7 @@ namespace Mapsui.UI.Forms
         public static readonly BindableProperty IsZoomButtonVisibleProperty = BindableProperty.Create(nameof(IsZoomButtonVisibleProperty), typeof(bool), typeof(MapView), true);
         public static readonly BindableProperty IsMyLocationButtonVisibleProperty = BindableProperty.Create(nameof(IsMyLocationButtonVisibleProperty), typeof(bool), typeof(MapView), true);
         public static readonly BindableProperty IsNorthingButtonVisibleProperty = BindableProperty.Create(nameof(IsNorthingButtonVisibleProperty), typeof(bool), typeof(MapView), true);
+        public static readonly BindableProperty UseDoubleTapProperty = BindableProperty.Create(nameof(UseDoubleTapProperty), typeof(bool), typeof(MapView), default(bool));
 
         #endregion
 
@@ -349,6 +350,17 @@ namespace Mapsui.UI.Forms
         {
             get { return (bool)GetValue(IsNorthingButtonVisibleProperty); }
             set { SetValue(IsNorthingButtonVisibleProperty, value); }
+        }
+
+        /// <summary>
+        /// Enable checks for double tapping. 
+        /// But be carefull, this will add some extra time, before a single
+        /// tap is returned.
+        /// </summary>
+        public bool UseDoubleTap
+        {
+            get { return (bool)GetValue(UseDoubleTapProperty); }
+            set { SetValue(UseDoubleTapProperty, value); }
         }
 
         /// <summary>
@@ -585,6 +597,9 @@ namespace Mapsui.UI.Forms
                 _mapNorthingButton.IsVisible = IsNorthingButtonVisible;
                 _mapSpacingButton2.IsVisible = (IsMyLocationButtonVisible || IsZoomButtonVisible) && IsNorthingButtonVisible;
             }
+
+            if (propertyName.Equals(nameof(UseDoubleTapProperty)))
+                _mapControl.UseDoubleTap = UseDoubleTap;
         }
 
         #region Handlers

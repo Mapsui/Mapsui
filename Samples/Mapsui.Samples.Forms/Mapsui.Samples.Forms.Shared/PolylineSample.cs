@@ -47,6 +47,8 @@ namespace Mapsui.Samples.Forms
         public void Setup(IMapControl mapControl)
         {
             mapControl.Map = OsmSample.CreateMap();
+
+            ((MapView)mapControl).UseDoubleTap = false;
         }
     }
 }

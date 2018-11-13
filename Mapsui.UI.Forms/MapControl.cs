@@ -36,10 +36,9 @@ namespace Mapsui.UI.Forms
         // See http://grepcode.com/file/repository.grepcode.com/java/ext/com.google.android/android/4.0.4_r2.1/android/view/ViewConfiguration.java#ViewConfiguration.0PRESSED_STATE_DURATION for values
         private const int shortTap = 125;
         private const int shortClick = 250;
-        private const int delayTap = 300;
+        private const int delayTap = 200;
         private const int longTap = 500;
 
-        private readonly MapRenderer _renderer = new MapRenderer();
         private float _skiaScale;
         private double _innerRotation;
         private Dictionary<long, TouchEvent> _touches = new Dictionary<long, TouchEvent>();
@@ -82,6 +81,8 @@ namespace Mapsui.UI.Forms
         public ISymbolCache SymbolCache => _renderer.SymbolCache;
 
         public float PixelsPerDeviceIndependentUnit => SkiaScale;
+
+        public bool UseDoubleTap = true;
 
         public void Initialize()
         {
@@ -197,14 +198,14 @@ namespace Mapsui.UI.Forms
                         }
                         else
                             if (!e.Handled)
-                                e.Handled = OnSingleTapped((Geometries.Point)l);
+                            e.Handled = OnSingleTapped((Geometries.Point)l);
                         _numOfTaps = 1;
                         if (_doubleTapTestTimer != null)
                         {
                             _doubleTapTestTimer.Dispose();
                         }
                         _doubleTapTestTimer = null;
-                    }, location, delayTap, -1);
+                    }, location, UseDoubleTap ? delayTap : 0, -1);
                 }
                 else if (_touches[id].Location.Equals(_firstTouch) && ticks - _touches[id].Tick >= longTap * 10000)
                 {
