@@ -4,6 +4,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using BruTile;
+using BruTile.Extensions;
 using Mapsui.Logging;
 using Mapsui.Providers.ArcGIS.Dynamic;
 using Mapsui.Providers.ArcGIS.Image;
