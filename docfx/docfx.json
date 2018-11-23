@@ -13,6 +13,7 @@
             "Mapsui.UI.Wpf/*.csproj",
             "Mapsui.UI.iOS/*.csproj",
             "Mapsui.UI.Android/*.csproj",
+            "Mapsui.UI.Forms/*.csproj",
             "Mapsui.Desktop/*.csproj"
           ],
           "exclude": [

@@ -19,7 +19,7 @@ namespace Mapsui.UI.iOS
 #elif __UWP__
 namespace Mapsui.UI.Uwp
 #elif __FORMS__
-namespace Mapsui.UI
+namespace Mapsui.UI.Forms
 #else
 namespace Mapsui.UI.Wpf
 #endif
@@ -118,7 +118,7 @@ namespace Mapsui.UI.Wpf
         public event EventHandler ViewportInitialized; //todo: Consider to use the Viewport PropertyChanged
 
         /// <summary>
-        ///  Called whenever a feature in one of the layers in InfoLayers is hitten by a click 
+        /// Called whenever a feature in one of the layers in InfoLayers is hitten by a click 
         /// </summary>
         public event EventHandler<MapInfoEventArgs> Info;
 
