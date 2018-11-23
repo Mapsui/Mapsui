@@ -27,9 +27,6 @@ namespace Mapsui.Samples.Forms
         {
             InitializeComponent();
 
-            MbTilesSample.MbTilesLocation = MbTilesLocationOnAndroid;
-            MbTilesHelper.DeployMbTilesFile(s => File.Create(Path.Combine(MbTilesLocationOnAndroid, s)));
-
             mapView.RotationLock = false;
             mapView.UnSnapRotationDegrees = 30;
             mapView.ReSnapRotationDegrees = 5;
@@ -129,7 +126,5 @@ namespace Mapsui.Samples.Forms
                 mapView.MyLocationLayer.UpdateMySpeed(e.Position.Speed);
             });
         }
-
-	    private static string MbTilesLocationOnAndroid => Environment.GetFolderPath(Environment.SpecialFolder.Personal);
     }
 }
