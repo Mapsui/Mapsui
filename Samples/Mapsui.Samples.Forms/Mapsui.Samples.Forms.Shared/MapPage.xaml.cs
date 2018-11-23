@@ -1,4 +1,7 @@
 ﻿using System;
+using System.IO;
+using Mapsui.Samples.Common.Helpers;
+using Mapsui.Samples.Common.Maps;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Mapsui.UI.Forms;
@@ -23,6 +26,9 @@ namespace Mapsui.Samples.Forms
         public MapPage(Action<IMapControl> setup, Func<MapView, MapClickedEventArgs, bool> c = null)
         {
             InitializeComponent();
+
+            MbTilesSample.MbTilesLocation = MbTilesLocationOnAndroid;
+            MbTilesHelper.DeployMbTilesFile(s => File.Create(Path.Combine(MbTilesLocationOnAndroid, s)));
 
             mapView.RotationLock = false;
             mapView.UnSnapRotationDegrees = 30;
@@ -117,11 +123,13 @@ namespace Mapsui.Samples.Forms
             {
                 var coords = new UI.Forms.Position(e.Position.Latitude, e.Position.Longitude);
                 info.Text = $"{coords.ToString()} - D:{(int)e.Position.Heading} S:{Math.Round(e.Position.Speed, 2)}";
-
+                
                 mapView.MyLocationLayer.UpdateMyLocation(new UI.Forms.Position(e.Position.Latitude, e.Position.Longitude));
                 mapView.MyLocationLayer.UpdateMyDirection(e.Position.Heading, mapView.Viewport.Rotation);
                 mapView.MyLocationLayer.UpdateMySpeed(e.Position.Speed);
             });
         }
+
+	    private static string MbTilesLocationOnAndroid => Environment.GetFolderPath(Environment.SpecialFolder.Personal);
     }
 }
