@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class MapControl
    ">
-    <meta name="generator" content="docfx 2.39.2.0">
+    <meta name="generator" content="docfx 2.40.3.0">
     
     <link rel="shortcut icon" href="../images/favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -83,12 +83,13 @@
   <div classs="implements">
     <h5>Implements</h5>
     <div><a class="xref" href="Mapsui.UI.IMapControl.html">IMapControl</a></div>
+    <div><span class="xref">Grid</span></div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Mapsui.UI.Wpf.html">Mapsui.UI.Wpf</a></h6>
   <h6><strong>Assembly</strong>: Mapsui.UI.Wpf.dll</h6>
   <h5 id="Mapsui_UI_Wpf_MapControl_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class MapControl : Grid, IMapControl</code></pre>
+    <pre><code class="lang-csharp hljs">public class MapControl : INotifyPropertyChanged, IMapControl, Grid</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
@@ -111,14 +112,46 @@
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Wpf_MapControl_Lock.md&amp;value=---%0Auid%3A%20Mapsui.UI.Wpf.MapControl.Lock%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L36">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Wpf_MapControl_Lock_" data-uid="Mapsui.UI.Wpf.MapControl.Lock*"></a>
+  <h4 id="Mapsui_UI_Wpf_MapControl_Lock" data-uid="Mapsui.UI.Wpf.MapControl.Lock">Lock</h4>
+  <div class="markdown level1 summary"><p>Handles, which interaction with the map is locked </p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MapLock Lock { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.UI.MapLock.html">MapLock</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Wpf_MapControl_Map.md&amp;value=---%0Auid%3A%20Mapsui.UI.Wpf.MapControl.Map%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L164">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L249">View Source</a>
   </span>
   <a id="Mapsui_UI_Wpf_MapControl_Map_" data-uid="Mapsui.UI.Wpf.MapControl.Map*"></a>
   <h4 id="Mapsui_UI_Wpf_MapControl_Map" data-uid="Mapsui.UI.Wpf.MapControl.Map">Map</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Map holding data for which is shown in this MapControl</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -144,11 +177,12 @@
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Wpf_MapControl_Navigator.md&amp;value=---%0Auid%3A%20Mapsui.UI.Wpf.MapControl.Navigator%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L59">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L113">View Source</a>
   </span>
   <a id="Mapsui_UI_Wpf_MapControl_Navigator_" data-uid="Mapsui.UI.Wpf.MapControl.Navigator*"></a>
   <h4 id="Mapsui_UI_Wpf_MapControl_Navigator" data-uid="Mapsui.UI.Wpf.MapControl.Navigator">Navigator</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Handles all manipulations of the map viewport</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -171,40 +205,10 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Wpf_MapControl_PanLock.md&amp;value=---%0Auid%3A%20Mapsui.UI.Wpf.MapControl.PanLock%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L31">View Source</a>
-  </span>
-  <a id="Mapsui_UI_Wpf_MapControl_PanLock_" data-uid="Mapsui.UI.Wpf.MapControl.PanLock*"></a>
-  <h4 id="Mapsui_UI_Wpf_MapControl_PanLock" data-uid="Mapsui.UI.Wpf.MapControl.PanLock">PanLock</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool PanLock { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Wpf_MapControl_PixelDensity.md&amp;value=---%0Auid%3A%20Mapsui.UI.Wpf.MapControl.PixelDensity%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Wpf/MapControl.cs/#L202">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Wpf/MapControl.cs/#L199">View Source</a>
   </span>
   <a id="Mapsui_UI_Wpf_MapControl_PixelDensity_" data-uid="Mapsui.UI.Wpf.MapControl.PixelDensity*"></a>
   <h4 id="Mapsui_UI_Wpf_MapControl_PixelDensity" data-uid="Mapsui.UI.Wpf.MapControl.PixelDensity">PixelDensity</h4>
@@ -234,11 +238,12 @@
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Wpf_MapControl_Renderer.md&amp;value=---%0Auid%3A%20Mapsui.UI.Wpf.MapControl.Renderer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L49">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L90">View Source</a>
   </span>
   <a id="Mapsui_UI_Wpf_MapControl_Renderer_" data-uid="Mapsui.UI.Wpf.MapControl.Renderer*"></a>
   <h4 id="Mapsui_UI_Wpf_MapControl_Renderer" data-uid="Mapsui.UI.Wpf.MapControl.Renderer">Renderer</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Renderer that is used from this MapControl</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -264,7 +269,7 @@
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Wpf_MapControl_RenderMode.md&amp;value=---%0Auid%3A%20Mapsui.UI.Wpf.MapControl.RenderMode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Wpf/MapControl.cs/#L114">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Wpf/MapControl.cs/#L110">View Source</a>
   </span>
   <a id="Mapsui_UI_Wpf_MapControl_RenderMode_" data-uid="Mapsui.UI.Wpf.MapControl.RenderMode*"></a>
   <h4 id="Mapsui_UI_Wpf_MapControl_RenderMode" data-uid="Mapsui.UI.Wpf.MapControl.RenderMode">RenderMode</h4>
@@ -294,7 +299,7 @@
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Wpf_MapControl_ReSnapRotationDegrees.md&amp;value=---%0Auid%3A%20Mapsui.UI.Wpf.MapControl.ReSnapRotationDegrees%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L47">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L72">View Source</a>
   </span>
   <a id="Mapsui_UI_Wpf_MapControl_ReSnapRotationDegrees_" data-uid="Mapsui.UI.Wpf.MapControl.ReSnapRotationDegrees*"></a>
   <h4 id="Mapsui_UI_Wpf_MapControl_ReSnapRotationDegrees" data-uid="Mapsui.UI.Wpf.MapControl.ReSnapRotationDegrees">ReSnapRotationDegrees</h4>
@@ -322,40 +327,10 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Wpf_MapControl_RotationLock.md&amp;value=---%0Auid%3A%20Mapsui.UI.Wpf.MapControl.RotationLock%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L34">View Source</a>
-  </span>
-  <a id="Mapsui_UI_Wpf_MapControl_RotationLock_" data-uid="Mapsui.UI.Wpf.MapControl.RotationLock*"></a>
-  <h4 id="Mapsui_UI_Wpf_MapControl_RotationLock" data-uid="Mapsui.UI.Wpf.MapControl.RotationLock">RotationLock</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool RotationLock { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Wpf_MapControl_UnSnapRotationDegrees.md&amp;value=---%0Auid%3A%20Mapsui.UI.Wpf.MapControl.UnSnapRotationDegrees%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L42">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L54">View Source</a>
   </span>
   <a id="Mapsui_UI_Wpf_MapControl_UnSnapRotationDegrees_" data-uid="Mapsui.UI.Wpf.MapControl.UnSnapRotationDegrees*"></a>
   <h4 id="Mapsui_UI_Wpf_MapControl_UnSnapRotationDegrees" data-uid="Mapsui.UI.Wpf.MapControl.UnSnapRotationDegrees">UnSnapRotationDegrees</h4>
@@ -386,11 +361,12 @@
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Wpf_MapControl_Viewport.md&amp;value=---%0Auid%3A%20Mapsui.UI.Wpf.MapControl.Viewport%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L56">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L108">View Source</a>
   </span>
   <a id="Mapsui_UI_Wpf_MapControl_Viewport_" data-uid="Mapsui.UI.Wpf.MapControl.Viewport*"></a>
   <h4 id="Mapsui_UI_Wpf_MapControl_Viewport" data-uid="Mapsui.UI.Wpf.MapControl.Viewport">Viewport</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Viewport holding information about visible part of the map. Viewport can never be null.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -416,7 +392,7 @@
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Wpf_MapControl_WpfCanvas.md&amp;value=---%0Auid%3A%20Mapsui.UI.Wpf.MapControl.WpfCanvas%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Wpf/MapControl.cs/#L110">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Wpf/MapControl.cs/#L106">View Source</a>
   </span>
   <a id="Mapsui_UI_Wpf_MapControl_WpfCanvas_" data-uid="Mapsui.UI.Wpf.MapControl.WpfCanvas*"></a>
   <h4 id="Mapsui_UI_Wpf_MapControl_WpfCanvas" data-uid="Mapsui.UI.Wpf.MapControl.WpfCanvas">WpfCanvas</h4>
@@ -441,66 +417,6 @@
       </tr>
     </tbody>
   </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Wpf_MapControl_ZoomLock.md&amp;value=---%0Auid%3A%20Mapsui.UI.Wpf.MapControl.ZoomLock%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L37">View Source</a>
-  </span>
-  <a id="Mapsui_UI_Wpf_MapControl_ZoomLock_" data-uid="Mapsui.UI.Wpf.MapControl.ZoomLock*"></a>
-  <h4 id="Mapsui_UI_Wpf_MapControl_ZoomLock" data-uid="Mapsui.UI.Wpf.MapControl.ZoomLock">ZoomLock</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool ZoomLock { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Wpf_MapControl_ZoomToBoxMode.md&amp;value=---%0Auid%3A%20Mapsui.UI.Wpf.MapControl.ZoomToBoxMode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Wpf/MapControl.cs/#L108">View Source</a>
-  </span>
-  <a id="Mapsui_UI_Wpf_MapControl_ZoomToBoxMode_" data-uid="Mapsui.UI.Wpf.MapControl.ZoomToBoxMode*"></a>
-  <h4 id="Mapsui_UI_Wpf_MapControl_ZoomToBoxMode" data-uid="Mapsui.UI.Wpf.MapControl.ZoomToBoxMode">ZoomToBoxMode</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool ZoomToBoxMode { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
   <h3 id="methods">Methods
   </h3>
   <span class="small pull-right mobile-hide">
@@ -508,11 +424,12 @@
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Wpf_MapControl_Clear.md&amp;value=---%0Auid%3A%20Mapsui.UI.Wpf.MapControl.Clear%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L315">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L397">View Source</a>
   </span>
   <a id="Mapsui_UI_Wpf_MapControl_Clear_" data-uid="Mapsui.UI.Wpf.MapControl.Clear*"></a>
   <h4 id="Mapsui_UI_Wpf_MapControl_Clear" data-uid="Mapsui.UI.Wpf.MapControl.Clear">Clear()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Clear cache and repaint map</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -523,7 +440,7 @@
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Wpf_MapControl_GetMapInfo_IEnumerable_Mapsui_Layers_ILayer__Mapsui_Geometries_Point_System_Int32_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Wpf.MapControl.GetMapInfo(IEnumerable%7BMapsui.Layers.ILayer%7D%2CMapsui.Geometries.Point%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L249">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L328">View Source</a>
   </span>
   <a id="Mapsui_UI_Wpf_MapControl_GetMapInfo_" data-uid="Mapsui.UI.Wpf.MapControl.GetMapInfo*"></a>
   <h4 id="Mapsui_UI_Wpf_MapControl_GetMapInfo_IEnumerable_Mapsui_Layers_ILayer__Mapsui_Geometries_Point_System_Int32_" data-uid="Mapsui.UI.Wpf.MapControl.GetMapInfo(IEnumerable{Mapsui.Layers.ILayer},Mapsui.Geometries.Point,System.Int32)">GetMapInfo(IEnumerable&lt;ILayer&gt;, Point, Int32)</h4>
@@ -580,7 +497,7 @@
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Wpf_MapControl_GetMapInfo_Mapsui_Geometries_Point_System_Int32_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Wpf.MapControl.GetMapInfo(Mapsui.Geometries.Point%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L242">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L321">View Source</a>
   </span>
   <a id="Mapsui_UI_Wpf_MapControl_GetMapInfo_" data-uid="Mapsui.UI.Wpf.MapControl.GetMapInfo*"></a>
   <h4 id="Mapsui_UI_Wpf_MapControl_GetMapInfo_Mapsui_Geometries_Point_System_Int32_" data-uid="Mapsui.UI.Wpf.MapControl.GetMapInfo(Mapsui.Geometries.Point,System.Int32)">GetMapInfo(Point, Int32)</h4>
@@ -632,6 +549,38 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Wpf_MapControl_OnPropertyChanged_System_String_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Wpf.MapControl.OnPropertyChanged(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L138">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Wpf_MapControl_OnPropertyChanged_" data-uid="Mapsui.UI.Wpf.MapControl.OnPropertyChanged*"></a>
+  <h4 id="Mapsui_UI_Wpf_MapControl_OnPropertyChanged_System_String_" data-uid="Mapsui.UI.Wpf.MapControl.OnPropertyChanged(System.String)">OnPropertyChanged(String)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected void OnPropertyChanged(string propertyName = &quot;&quot;)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">propertyName</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Wpf_MapControl_OnRender_DrawingContext_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Wpf.MapControl.OnRender(DrawingContext)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
@@ -667,7 +616,7 @@
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Wpf_MapControl_OpenBrowser_System_String_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Wpf.MapControl.OpenBrowser(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Wpf/MapControl.cs/#L357">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Wpf/MapControl.cs/#L356">View Source</a>
   </span>
   <a id="Mapsui_UI_Wpf_MapControl_OpenBrowser_" data-uid="Mapsui.UI.Wpf.MapControl.OpenBrowser*"></a>
   <h4 id="Mapsui_UI_Wpf_MapControl_OpenBrowser_System_String_" data-uid="Mapsui.UI.Wpf.MapControl.OpenBrowser(System.String)">OpenBrowser(String)</h4>
@@ -699,11 +648,12 @@
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Wpf_MapControl_Refresh.md&amp;value=---%0Auid%3A%20Mapsui.UI.Wpf.MapControl.Refresh%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L100">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L180">View Source</a>
   </span>
   <a id="Mapsui_UI_Wpf_MapControl_Refresh_" data-uid="Mapsui.UI.Wpf.MapControl.Refresh*"></a>
   <h4 id="Mapsui_UI_Wpf_MapControl_Refresh" data-uid="Mapsui.UI.Wpf.MapControl.Refresh">Refresh()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Refresh data of the map and than repaint it</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -714,11 +664,12 @@
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Wpf_MapControl_RefreshData.md&amp;value=---%0Auid%3A%20Mapsui.UI.Wpf.MapControl.RefreshData%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L209">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L298">View Source</a>
   </span>
   <a id="Mapsui_UI_Wpf_MapControl_RefreshData_" data-uid="Mapsui.UI.Wpf.MapControl.RefreshData*"></a>
   <h4 id="Mapsui_UI_Wpf_MapControl_RefreshData" data-uid="Mapsui.UI.Wpf.MapControl.RefreshData">RefreshData()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Refresh data of Map, but don&apos;t paint it</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -729,7 +680,7 @@
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Wpf_MapControl_RefreshGraphics.md&amp;value=---%0Auid%3A%20Mapsui.UI.Wpf.MapControl.RefreshGraphics%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Wpf/MapControl.cs/#L163">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Wpf/MapControl.cs/#L160">View Source</a>
   </span>
   <a id="Mapsui_UI_Wpf_MapControl_RefreshGraphics_" data-uid="Mapsui.UI.Wpf.MapControl.RefreshGraphics*"></a>
   <h4 id="Mapsui_UI_Wpf_MapControl_RefreshGraphics" data-uid="Mapsui.UI.Wpf.MapControl.RefreshGraphics">RefreshGraphics()</h4>
@@ -744,7 +695,7 @@
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Wpf_MapControl_ToDeviceIndependentUnits_Mapsui_Geometries_Point_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Wpf.MapControl.ToDeviceIndependentUnits(Mapsui.Geometries.Point)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L199">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L285">View Source</a>
   </span>
   <a id="Mapsui_UI_Wpf_MapControl_ToDeviceIndependentUnits_" data-uid="Mapsui.UI.Wpf.MapControl.ToDeviceIndependentUnits*"></a>
   <h4 id="Mapsui_UI_Wpf_MapControl_ToDeviceIndependentUnits_Mapsui_Geometries_Point_" data-uid="Mapsui.UI.Wpf.MapControl.ToDeviceIndependentUnits(Mapsui.Geometries.Point)">ToDeviceIndependentUnits(Point)</h4>
@@ -794,7 +745,7 @@
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Wpf_MapControl_ToPixels_Mapsui_Geometries_Point_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Wpf.MapControl.ToPixels(Mapsui.Geometries.Point)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L191">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L277">View Source</a>
   </span>
   <a id="Mapsui_UI_Wpf_MapControl_ToPixels_" data-uid="Mapsui.UI.Wpf.MapControl.ToPixels*"></a>
   <h4 id="Mapsui_UI_Wpf_MapControl_ToPixels_Mapsui_Geometries_Point_" data-uid="Mapsui.UI.Wpf.MapControl.ToPixels(Mapsui.Geometries.Point)">ToPixels(Point)</h4>
@@ -844,7 +795,7 @@
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Wpf_MapControl_Unsubscribe.md&amp;value=---%0Auid%3A%20Mapsui.UI.Wpf.MapControl.Unsubscribe%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L70">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L147">View Source</a>
   </span>
   <a id="Mapsui_UI_Wpf_MapControl_Unsubscribe_" data-uid="Mapsui.UI.Wpf.MapControl.Unsubscribe*"></a>
   <h4 id="Mapsui_UI_Wpf_MapControl_Unsubscribe" data-uid="Mapsui.UI.Wpf.MapControl.Unsubscribe">Unsubscribe()</h4>
@@ -860,7 +811,7 @@
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Wpf_MapControl_ZoomIn.md&amp;value=---%0Auid%3A%20Mapsui.UI.Wpf.MapControl.ZoomIn%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Wpf/MapControl.cs/#L175">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Wpf/MapControl.cs/#L172">View Source</a>
   </span>
   <a id="Mapsui_UI_Wpf_MapControl_ZoomIn_" data-uid="Mapsui.UI.Wpf.MapControl.ZoomIn*"></a>
   <h4 id="Mapsui_UI_Wpf_MapControl_ZoomIn" data-uid="Mapsui.UI.Wpf.MapControl.ZoomIn">ZoomIn()</h4>
@@ -875,7 +826,7 @@
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Wpf_MapControl_ZoomOut.md&amp;value=---%0Auid%3A%20Mapsui.UI.Wpf.MapControl.ZoomOut%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Wpf/MapControl.cs/#L178">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Wpf/MapControl.cs/#L175">View Source</a>
   </span>
   <a id="Mapsui_UI_Wpf_MapControl_ZoomOut_" data-uid="Mapsui.UI.Wpf.MapControl.ZoomOut*"></a>
   <h4 id="Mapsui_UI_Wpf_MapControl_ZoomOut" data-uid="Mapsui.UI.Wpf.MapControl.ZoomOut">ZoomOut()</h4>
@@ -890,7 +841,7 @@
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Wpf_MapControl_ZoomToBox_Mapsui_Geometries_Point_Mapsui_Geometries_Point_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Wpf.MapControl.ZoomToBox(Mapsui.Geometries.Point%2CMapsui.Geometries.Point)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Wpf/MapControl.cs/#L407">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Wpf/MapControl.cs/#L406">View Source</a>
   </span>
   <a id="Mapsui_UI_Wpf_MapControl_ZoomToBox_" data-uid="Mapsui.UI.Wpf.MapControl.ZoomToBox*"></a>
   <h4 id="Mapsui_UI_Wpf_MapControl_ZoomToBox_Mapsui_Geometries_Point_Mapsui_Geometries_Point_" data-uid="Mapsui.UI.Wpf.MapControl.ZoomToBox(Mapsui.Geometries.Point,Mapsui.Geometries.Point)">ZoomToBox(Point, Point)</h4>
@@ -929,7 +880,7 @@
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Wpf_MapControl_FeatureInfo.md&amp;value=---%0Auid%3A%20Mapsui.UI.Wpf.MapControl.FeatureInfo%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Wpf/MapControl.cs/#L161">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Wpf/MapControl.cs/#L158">View Source</a>
   </span>
   <h4 id="Mapsui_UI_Wpf_MapControl_FeatureInfo" data-uid="Mapsui.UI.Wpf.MapControl.FeatureInfo">FeatureInfo</h4>
   <div class="markdown level1 summary"></div>
@@ -958,7 +909,7 @@
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Wpf_MapControl_Info.md&amp;value=---%0Auid%3A%20Mapsui.UI.Wpf.MapControl.Info%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L66">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L123">View Source</a>
   </span>
   <h4 id="Mapsui_UI_Wpf_MapControl_Info" data-uid="Mapsui.UI.Wpf.MapControl.Info">Info</h4>
   <div class="markdown level1 summary"><p>Called whenever a feature in one of the layers in InfoLayers is hitten by a click </p>
@@ -985,10 +936,40 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Wpf_MapControl_PropertyChanged.md&amp;value=---%0Auid%3A%20Mapsui.UI.Wpf.MapControl.PropertyChanged%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L136">View Source</a>
+  </span>
+  <h4 id="Mapsui_UI_Wpf_MapControl_PropertyChanged" data-uid="Mapsui.UI.Wpf.MapControl.PropertyChanged">PropertyChanged</h4>
+  <div class="markdown level1 summary"><p>Called whenever a property is changed</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event PropertyChangedEventHandler PropertyChanged</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">PropertyChangedEventHandler</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Wpf_MapControl_ViewChanged.md&amp;value=---%0Auid%3A%20Mapsui.UI.Wpf.MapControl.ViewChanged%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Wpf/MapControl.cs/#L158">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Wpf/MapControl.cs/#L155">View Source</a>
   </span>
   <h4 id="Mapsui_UI_Wpf_MapControl_ViewChanged" data-uid="Mapsui.UI.Wpf.MapControl.ViewChanged">ViewChanged</h4>
   <div class="markdown level1 summary"></div>
@@ -1017,10 +998,11 @@
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Wpf_MapControl_ViewportInitialized.md&amp;value=---%0Auid%3A%20Mapsui.UI.Wpf.MapControl.ViewportInitialized%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L61">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L118">View Source</a>
   </span>
   <h4 id="Mapsui_UI_Wpf_MapControl_ViewportInitialized" data-uid="Mapsui.UI.Wpf.MapControl.ViewportInitialized">ViewportInitialized</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Called when the viewport is initialized</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -1045,6 +1027,9 @@
   <div>
       <a class="xref" href="Mapsui.UI.IMapControl.html">IMapControl</a>
   </div>
+  <div>
+      <span class="xref">Grid</span>
+  </div>
 </article>
           </div>
           
@@ -1056,7 +1041,7 @@
                     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Wpf_MapControl.md&amp;value=---%0Auid%3A%20Mapsui.UI.Wpf.MapControl%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L26" class="contribution-link">View Source</a>
+                    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L27" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>
