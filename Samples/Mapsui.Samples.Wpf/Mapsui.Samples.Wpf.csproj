@@ -250,10 +250,6 @@
       <Project>{d74c052a-c07e-4b37-a898-134218aca5c9}</Project>
       <Name>Mapsui</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Sample\Mapsui.Samples.CustomWidget\Mapsui.Samples.CustomWidget.csproj">
-      <Project>{ba6ecdb7-674e-42cb-9e56-56c55fed269b}</Project>
-      <Name>Mapsui.Samples.CustomWidget</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Tests\Mapsui.Tests.Common\Mapsui.Tests.Common.csproj">
       <Project>{81BB36D2-4D01-44E3-9024-E7CBD10DA316}</Project>
       <Name>Mapsui.Tests.Common</Name>
@@ -265,6 +261,10 @@
     <ProjectReference Include="..\Mapsui.Samples.Common\Mapsui.Samples.Common.csproj">
       <Project>{508ae811-a03a-4138-8ccc-abde03c67010}</Project>
       <Name>Mapsui.Samples.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mapsui.Samples.CustomWidget\Mapsui.Samples.CustomWidget.csproj">
+      <Project>{3eb5d6aa-8b52-4e93-9000-61eee6d6b044}</Project>
+      <Name>Mapsui.Samples.CustomWidget</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
