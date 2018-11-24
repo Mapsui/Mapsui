@@ -17,9 +17,9 @@
         /// </summary>
         /// <param name="color">Color in Xamarin.Forms.Color format </param>
         /// <returns>Color in Mapsui.Styles.Color format</returns>
-        public static Mapsui.Styles.Color ToMapsui(this Xamarin.Forms.Color color)
+        public static Styles.Color ToMapsui(this Xamarin.Forms.Color color)
         {
-            return new Mapsui.Styles.Color((int)(color.R * 255), (int)(color.G * 255), (int)(color.B * 255), (int)(color.A * 255));
+            return new Styles.Color((int)(color.R * 255), (int)(color.G * 255), (int)(color.B * 255), (int)(color.A * 255));
         }
     }
 }
