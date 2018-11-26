@@ -45,7 +45,7 @@ namespace Mapsui.Samples.Forms
 
         private void OnMapClicked(object sender, MapClickedEventArgs e)
         {
-            e.Handled = (bool)clicker?.Invoke(sender as MapView, e);
+            e.Handled = clicker != null ? (bool)clicker?.Invoke(sender as MapView, e) : false;
             //Samples.SetPins(mapView, e);
             //Samples.DrawPolylines(mapView, e);
         }
