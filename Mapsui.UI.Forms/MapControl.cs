@@ -89,8 +89,6 @@ namespace Mapsui.UI.Forms
             Map = new Map();
             BackgroundColor = Color.White;
 
-            TryInitializeViewport();
-
             EnableTouchEvents = true;
 
             PaintSurface += OnPaintSurface;
@@ -98,29 +96,9 @@ namespace Mapsui.UI.Forms
             SizeChanged += OnSizeChanged; 
         }
 
-        private void TryInitializeViewport()
-        {
-//            if (_viewport.Initialized) return;
-
-            _skiaScale = (float)(CanvasSize.Width / Width);
-
-            _viewport.SetSize(Width, Height);
-
-            OnViewportInitialized();
-
-//            if (_viewport.TryInitializeViewport(_map.Envelope, CanvasSize.Width / _skiaScale, CanvasSize.Height / _skiaScale))
-//            {
-//                Map.RefreshData(_viewport.Extent, _viewport.Resolution, true);
-//                OnViewportInitialized();
-//            }
-        }
-
         private void OnSizeChanged(object sender, EventArgs e)
         {
-            if (Map != null)
-            {
-                _viewport.SetSize(Width, Height);
-            }
+            SetViewportSize();
         }
 
         private void OnTouch(object sender, SKTouchEventArgs e)
@@ -234,11 +212,8 @@ namespace Mapsui.UI.Forms
 
         void OnPaintSurface(object sender, SKPaintGLSurfaceEventArgs skPaintSurfaceEventArgs)
         {
-            TryInitializeViewport();
-//            if (!Viewport.Initialized) return;
 
-//            _viewport.SetSize(Width, Height);
-
+            _skiaScale = (float)(CanvasSize.Width / Width);
             skPaintSurfaceEventArgs.Surface.Canvas.Scale(_skiaScale, _skiaScale);
 
             _renderer.Render(skPaintSurfaceEventArgs.Surface.Canvas,
