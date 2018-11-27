@@ -7,6 +7,8 @@ namespace Mapsui.UI.Objects
 {
     public class ObservableCollectionProvider<T> : IProvider where T : IFeatureProvider
     {
+        private object _syncRoot = new object();
+
         public ObservableCollection<T> Collection { get; }
 
         public string CRS { get; set; } = "";
@@ -23,10 +25,13 @@ namespace Mapsui.UI.Objects
             if (Collection == null || Collection.Count == 0)
                 return list;
 
-            foreach (T item in Collection)
+            lock (_syncRoot)
             {
-                if (box.Intersects(item.Feature.Geometry.BoundingBox))
-                    list.Add(item.Feature);
+                foreach (T item in Collection)
+                {
+                    if (box.Intersects(item.Feature.Geometry.BoundingBox))
+                        list.Add(item.Feature);
+                }
             }
 
             return list;
@@ -39,16 +44,19 @@ namespace Mapsui.UI.Objects
 
             BoundingBox extents = null;
 
-            foreach(T item in Collection)
+            lock (_syncRoot)
             {
-                if (item.Feature != null)
+                foreach (T item in Collection)
                 {
-                    if (item.Feature.Geometry.BoundingBox != null)
+                    if (item.Feature != null)
                     {
-                        if (extents == null)
-                            extents = new BoundingBox(item.Feature.Geometry.BoundingBox);
-                        else
-                            extents = extents.Join(item.Feature.Geometry.BoundingBox);
+                        if (item.Feature.Geometry.BoundingBox != null)
+                        {
+                            if (extents == null)
+                                extents = new BoundingBox(item.Feature.Geometry.BoundingBox);
+                            else
+                                extents = extents.Join(item.Feature.Geometry.BoundingBox);
+                        }
                     }
                 }
             }
