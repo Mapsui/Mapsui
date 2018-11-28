@@ -227,12 +227,7 @@ namespace Mapsui.UI.Forms
 
         public void RefreshGraphics()
         {
-            InvalidateCanvas();
-        }
-
-        internal void InvalidateCanvas()
-        {
-            InvalidateSurface();
+            RunOnUIThread(() => InvalidateSurface());
         }
 
         /// <summary>
@@ -434,7 +429,7 @@ namespace Mapsui.UI.Forms
             // Last touch released
             if (touchPoints.Count == 0)
             {
-                InvalidateCanvas();
+                RefreshGraphics();
                 _mode = TouchMode.None;
                 _map.RefreshData(_viewport.Extent, _viewport.Resolution, true);
             }
@@ -470,7 +465,7 @@ namespace Mapsui.UI.Forms
 
                             _viewport.Limiter.LimitExtent(_viewport, _map.Envelope);
 
-                            InvalidateCanvas();
+                            RefreshGraphics();
                         }
 
                         _previousCenter = touchPosition;
@@ -513,7 +508,7 @@ namespace Mapsui.UI.Forms
 
                         _viewport.Limiter.Limit(_viewport, _map.Resolutions, _map.Envelope);
 
-                        InvalidateCanvas();
+                        RefreshGraphics();
                     }
                     break;
             }
