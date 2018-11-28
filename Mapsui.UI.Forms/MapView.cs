@@ -827,7 +827,7 @@ namespace Mapsui.UI.Forms
             // Is there a drawable at this position
             if (Map != null)
             {
-                var mapInfo = _mapControl.GetMapInfo(e.ScreenPosition * _mapControl.SkiaScale);
+                var mapInfo = _mapControl.GetMapInfo(e.ScreenPosition);
 
                 if (mapInfo.Feature == null)
                 {
