@@ -227,12 +227,7 @@ namespace Mapsui.UI.Forms
 
         public void RefreshGraphics()
         {
-            InvalidateCanvas();
-        }
-
-        internal void InvalidateCanvas()
-        {
-            InvalidateSurface();
+            RunOnUIThread(() => InvalidateSurface());
         }
 
         /// <summary>
@@ -434,7 +429,7 @@ namespace Mapsui.UI.Forms
             // Last touch released
             if (touchPoints.Count == 0)
             {
-                InvalidateCanvas();
+                RefreshGraphics();
                 _mode = TouchMode.None;
                 _map.RefreshData(_viewport.Extent, _viewport.Resolution, true);
             }
@@ -470,7 +465,7 @@ namespace Mapsui.UI.Forms
 
                             _viewport.Limiter.LimitExtent(_viewport, _map.Envelope);
 
-                            InvalidateCanvas();
+                            RefreshGraphics();
                         }
 
                         _previousCenter = touchPosition;
@@ -513,7 +508,7 @@ namespace Mapsui.UI.Forms
 
                         _viewport.Limiter.Limit(_viewport, _map.Resolutions, _map.Envelope);
 
-                        InvalidateCanvas();
+                        RefreshGraphics();
                     }
                     break;
             }
@@ -526,6 +521,7 @@ namespace Mapsui.UI.Forms
         /// </summary>
         /// <param name="screenPosition">First clicked/touched position on screen</param>
         /// <param name="numOfTaps">Number of taps on map (2 is a double click/tap)</param>
+        /// <returns>True, if the event is handled</returns>
         private bool OnDoubleTapped(Geometries.Point screenPosition, int numOfTaps)
         {
             var args = new TappedEventArgs(screenPosition, numOfTaps);
@@ -537,10 +533,13 @@ namespace Mapsui.UI.Forms
 
             var eventReturn = InvokeInfo(Map.Layers, Map.Widgets, Viewport, screenPosition, screenPosition, _renderer.SymbolCache, WidgetTouched, numOfTaps);
 
-            if (!eventReturn.Handled)
+            if (eventReturn != null)
             {
-                // Double tap as zoom
-                return OnZoomIn(screenPosition);
+                if (!eventReturn.Handled)
+                {
+                    // Double tap as zoom
+                    return OnZoomIn(screenPosition);
+                }
             }
 
             return false;
@@ -550,6 +549,7 @@ namespace Mapsui.UI.Forms
         /// Called, when mouse/finger/pen tapped on map one time
         /// </summary>
         /// <param name="screenPosition">Clicked/touched position on screen</param>
+        /// <returns>True, if the event is handled</returns>
         private bool OnSingleTapped(Geometries.Point screenPosition)
         {
             var args = new TappedEventArgs(screenPosition, 1);
@@ -559,13 +559,19 @@ namespace Mapsui.UI.Forms
             if (args.Handled)
                 return true;
 
-            return InvokeInfo(Map.Layers, Map.Widgets, Viewport, screenPosition, screenPosition, _renderer.SymbolCache, WidgetTouched, 1).Handled;
+            var eventReturn = InvokeInfo(Map.Layers, Map.Widgets, Viewport, screenPosition, screenPosition, _renderer.SymbolCache, WidgetTouched, 1);
+
+            if (eventReturn != null)
+                return eventReturn.Handled;
+
+            return false;
         }
 
         /// <summary>
         /// Called, when mouse/finger/pen tapped long on map
         /// </summary>
         /// <param name="screenPosition">Clicked/touched position on screen</param>
+        /// <returns>True, if the event is handled</returns>
         private bool OnLongTapped(Geometries.Point screenPosition)
         {
             var args = new TappedEventArgs(screenPosition, 1);

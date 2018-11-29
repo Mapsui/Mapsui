@@ -107,6 +107,8 @@ namespace Mapsui.Samples.Forms
 
         public async void StartGPS()
         {
+            if (Device.RuntimePlatform == Device.WPF)
+                return;
             // Start GPS
             await CrossGeolocator.Current.StartListeningAsync(TimeSpan.FromSeconds(1),
                     1,
@@ -128,6 +130,9 @@ namespace Mapsui.Samples.Forms
 
         public async void StopGPS()
         {
+            if (Device.RuntimePlatform == Device.WPF)
+                return;
+
             // Stop GPS
             if (CrossGeolocator.Current.IsListening)
             {

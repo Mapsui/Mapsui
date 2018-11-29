@@ -37,6 +37,9 @@ namespace Mapsui.Samples.Forms
                 case "iOS":
                     device = "iOS";
                     break;
+                case "macOS":
+                    device = "Mac";
+                    break;
                 default:
                     device = $"{Device.RuntimePlatform}";
                     break;
