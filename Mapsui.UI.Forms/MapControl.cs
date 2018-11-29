@@ -1,11 +1,9 @@
 using Mapsui.Rendering;
-using Mapsui.Rendering.Skia;
 using Mapsui.UI.Utils;
 using SkiaSharp;
 using SkiaSharp.Views.Forms;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using Xamarin.Forms;
 
@@ -461,9 +459,7 @@ namespace Mapsui.UI.Forms
 
                         if (!Lock.PanLock && _previousCenter != null && !_previousCenter.IsEmpty())
                         {
-                            _viewport.Transform(touchPosition.X, touchPosition.Y, _previousCenter.X, _previousCenter.Y);
-
-                            _viewport.Limiter.LimitExtent(_viewport, _map.Envelope);
+                            _viewport.Transform(touchPosition, _previousCenter);
 
                             RefreshGraphics();
                         }
@@ -502,11 +498,9 @@ namespace Mapsui.UI.Forms
                             }
                         }
 
-                        _viewport.Transform(center.X, center.Y, prevCenter.X, prevCenter.Y, Lock.ZoomLock ? 1 : radius / prevRadius, rotationDelta);
+                        _viewport.Transform(center, prevCenter, Lock.ZoomLock ? 1 : radius / prevRadius, rotationDelta);
 
                         (_previousCenter, _previousRadius, _previousAngle) = (center, radius, angle);
-
-                        _viewport.Limiter.Limit(_viewport, _map.Resolutions, _map.Envelope);
 
                         RefreshGraphics();
                     }

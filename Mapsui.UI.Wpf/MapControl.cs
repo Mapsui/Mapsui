@@ -397,11 +397,7 @@ namespace Mapsui.UI.Wpf
                 }
                 
                 _viewport.Transform(_currentMousePosition, _previousMousePosition);
-                // Viewport has no internal limiter so we need to explicitly limit it here. This could be improved.
-                Map.Limiter.LimitExtent(_viewport, Map.Envelope);
-                
                 RefreshGraphics();
-
                 _previousMousePosition = _currentMousePosition;
             }
         }
@@ -509,7 +505,6 @@ namespace Mapsui.UI.Wpf
 
             _viewport.Transform(center, previousCenter, radius / previousRadius, rotationDelta);
             RefreshGraphics();
-
             e.Handled = true;
         }
 

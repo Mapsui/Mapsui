@@ -26,16 +26,10 @@ namespace Mapsui
         public bool IsRotated => _viewport.IsRotated;
         public Quad WindowExtent => _viewport.WindowExtent;
 
-        public void Transform(double positionX, double positionY, double previousPositionX, double previousPositionY,
-            double deltaResolution = 1, double deltaRotation = 0)
+        public void Transform(Point position, Point previousPosition, double deltaResolution = 1, double deltaRotation = 0)
         {
-            _viewport.Transform(positionX, positionY, previousPositionX, previousPositionY, deltaResolution, deltaRotation);
+            _viewport.Transform(position, previousPosition, deltaResolution, deltaRotation);
             Limiter.Limit(_viewport, Map.Resolutions, Map.Envelope);
-        }
-
-        public void Transform(Point position, Point previousPosition, double deltaScale = 1, double deltaRotation = 0)
-        {
-            _viewport.Transform(position, previousPosition, deltaScale, deltaRotation);
         }
 
         public void SetSize(double width, double height)

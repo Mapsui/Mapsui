@@ -15,10 +15,8 @@ namespace Mapsui.Tests.UI
             // viewport.Center is (0, 0) at this point
             var limiter = new ViewportLimiter
             {
-                PanMode = PanMode.KeepCenterWithinExtents,
                 PanLimits = new BoundingBox(20, 40, 120, 140)  // Minimal X value is 20, Minimal Y value is 40
             };
-           
 
             // act 
             limiter.LimitExtent(viewport, viewport.Extent);
