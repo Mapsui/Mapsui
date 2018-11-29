@@ -24,22 +24,6 @@ namespace Mapsui.UI
         public double Max { get; }
     }
 
-    public enum PanMode
-    {
-        /// <summary>
-        /// Restricts viewport in no way
-        /// </summary>
-        Unlimited,
-        /// <summary>
-        /// Restricts center of the viewport within Map.Extents or within MaxExtents when set
-        /// </summary>
-        KeepCenterWithinExtents,
-        /// <summary>
-        /// Restricts the whole viewport within Map.Extents or within MaxExtents when set
-        /// </summary>
-        KeepViewportWithinExtents,
-    }
-
     public enum ZoomMode
     {
         /// <summary>
@@ -55,11 +39,6 @@ namespace Mapsui.UI
 
     public class ViewportLimiter : IViewportLimiter
     {
-        /// <summary>
-        /// Pan mode to use, when map is paned
-        /// </summary>
-        public PanMode PanMode { get; set; } = PanMode.KeepCenterWithinExtents;
-
         /// <summary>
         /// Zoom mode to use, when map is zoomed
         /// </summary>
@@ -119,52 +98,15 @@ namespace Mapsui.UI
                 return; 
             }
 
-            if (PanMode == PanMode.KeepCenterWithinExtents)
-            {
-                var x = viewport.Center.X;
-                if (viewport.Center.X < maxExtent.Left)  x = maxExtent.Left;
-                if (viewport.Center.X > maxExtent.Right) x = maxExtent.Right;
+            var x = viewport.Center.X;
+            if (viewport.Center.X < maxExtent.Left)  x = maxExtent.Left;
+            if (viewport.Center.X > maxExtent.Right) x = maxExtent.Right;
 
-                var y = viewport.Center.Y;
-                if (viewport.Center.Y > maxExtent.Top) y = maxExtent.Top;
-                if (viewport.Center.Y < maxExtent.Bottom) y = maxExtent.Bottom;
+            var y = viewport.Center.Y;
+            if (viewport.Center.Y > maxExtent.Top) y = maxExtent.Top;
+            if (viewport.Center.Y < maxExtent.Bottom) y = maxExtent.Bottom;
 
-                viewport.SetCenter(x, y);
-            }
-            else if (PanMode == PanMode.KeepViewportWithinExtents)
-            {
-                var x = viewport.Center.X;
-
-                if (MapWidthSpansViewport(maxExtent.Width, viewport.Width, viewport.Resolution)) // if it doesn't fit don't restrict
-                {
-                    if (viewport.Extent.Left < maxExtent.Left)
-                        x  += maxExtent.Left - viewport.Extent.Left;
-                    if (viewport.Extent.Right > maxExtent.Right)
-                        x += maxExtent.Right - viewport.Extent.Right;
-                }
-
-                var y = viewport.Center.Y;
-                if (MapHeightSpansViewport(maxExtent.Height, viewport.Height, viewport.Resolution)) // if it doesn't fit don't restrict
-                {
-                    if (viewport.Extent.Top > maxExtent.Top)
-                        y += maxExtent.Top - viewport.Extent.Top;
-                    if (viewport.Extent.Bottom < maxExtent.Bottom)
-                        y += maxExtent.Bottom - viewport.Extent.Bottom;
-                }
-                viewport.SetCenter(x, y);
-            }
-        }
-
-        private static bool MapWidthSpansViewport(double extentWidth, double viewportWidth, double resolution)
-        {
-            var mapWidth = extentWidth / resolution; // in screen units
-            return viewportWidth <= mapWidth;
-        }
-
-        private static bool MapHeightSpansViewport(double extentHeight, double viewportHeight, double resolution)
-        {
-            var mapHeight = extentHeight / resolution; // in screen units
-            return viewportHeight <= mapHeight;
+            viewport.SetCenter(x, y);
         }
     }
 }
