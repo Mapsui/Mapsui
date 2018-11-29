@@ -46,7 +46,7 @@ namespace Mapsui.UI.Wpf
             }
         }
 
-        private double _unSnapRotationDegrees = 0;
+        private double _unSnapRotationDegrees;
 
         /// <summary>
         /// After how many degrees start rotation to take place
@@ -64,7 +64,7 @@ namespace Mapsui.UI.Wpf
             }
         }
 
-        private double _reSnapRotationDegrees = 0;
+        private double _reSnapRotationDegrees;
 
         /// <summary>
         /// With how many degrees from 0 should map snap to 0 degrees
