@@ -86,7 +86,7 @@ namespace Mapsui.UI
             {
                 if (viewport.Extent.Left < maxExtent.Left)
                     x  += maxExtent.Left - viewport.Extent.Left;
-                if (viewport.Extent.Right > maxExtent.Right)
+                else if (viewport.Extent.Right > maxExtent.Right)
                     x += maxExtent.Right - viewport.Extent.Right;
             }
 
@@ -95,7 +95,7 @@ namespace Mapsui.UI
             {
                 if (viewport.Extent.Top > maxExtent.Top)
                     y += maxExtent.Top - viewport.Extent.Top;
-                if (viewport.Extent.Bottom < maxExtent.Bottom)
+                else if (viewport.Extent.Bottom < maxExtent.Bottom)
                     y += maxExtent.Bottom - viewport.Extent.Bottom;
             }
             viewport.SetCenter(x, y);
