@@ -11,9 +11,10 @@ namespace Mapsui.Samples.CustomWidget
         public float MarginX { get; set; } = 20;
         public float MarginY { get; set; } = 20;
         public BoundingBox Envelope { get; set; }
-        public void HandleWidgetTouched(INavigator navigator, Point position)
+        public bool HandleWidgetTouched(INavigator navigator, Point position)
         {
             navigator.CenterOn(0, 0);
+            return true;
         }
 
         public Color Color { get; set; }

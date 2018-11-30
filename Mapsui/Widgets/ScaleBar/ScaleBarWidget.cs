@@ -458,8 +458,9 @@ namespace Mapsui.Widgets.ScaleBar
             }
         }
 
-        public override void HandleWidgetTouched(INavigator navigator, Point position)
+        public override bool HandleWidgetTouched(INavigator navigator, Point position)
         {
+            return false;
         }
 
         public bool CanTransform()

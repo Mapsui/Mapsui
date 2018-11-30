@@ -152,14 +152,15 @@ namespace Mapsui.Widgets.Zoom
             }
         }
 
-        public override void HandleWidgetTouched(INavigator navigator, Point position)
+        public override bool HandleWidgetTouched(INavigator navigator, Point position)
         {
             var handler = WidgetTouched;
 
             if (handler != null)
             {
-                handler.Invoke(this, new WidgetTouchedEventArgs(position));
-                return;
+                var args = new WidgetTouchedEventArgs(position);
+                handler.Invoke(this, args);
+                return args.Handled;
             }
 
             if (Orientation == Orientation.Vertical && position.Y < Envelope.MinY + Envelope.Height * 0.5 ||
@@ -171,6 +172,8 @@ namespace Mapsui.Widgets.Zoom
             {
                 navigator.ZoomOut();
             }
+
+            return true;
         }
 
         internal void OnPropertyChanged([CallerMemberName] string name = "")
