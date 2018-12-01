@@ -307,14 +307,14 @@ namespace Mapsui.UI.Wpf
             Info?.Invoke(this, mapInfoEventArgs);
         }
 
-        private void WidgetTouched(IWidget widget, Point screenPosition)
+        private bool WidgetTouched(IWidget widget, Point screenPosition)
         {
             if (widget is Hyperlink hyperlink)
             {
                 OpenBrowser(hyperlink.Url);
             }
 
-            widget.HandleWidgetTouched(Navigator, screenPosition);
+            return widget.HandleWidgetTouched(Navigator, screenPosition);
         }
 
         /// <inheritdoc />
@@ -345,7 +345,7 @@ namespace Mapsui.UI.Wpf
         /// <returns>True, if something done </returns>
         private static MapInfoEventArgs InvokeInfo(IEnumerable<ILayer> layers, IEnumerable<IWidget> widgets, 
             IReadOnlyViewport viewport, Point screenPosition, Point startScreenPosition, ISymbolCache symbolCache,
-            Action<IWidget, Point> widgetCallback, int numTaps)
+            Func<IWidget, Point, bool> widgetCallback, int numTaps)
         {
             var layerWidgets = layers.Select(l => l.Attribution).Where(a => a != null);
             var allWidgets = layerWidgets.Concat(widgets).ToList(); // Concat layer widgets and map widgets.
@@ -358,8 +358,15 @@ namespace Mapsui.UI.Wpf
                 // How should widgetCallback have a handled type thing?
                 // Widgets should be iterated through rather than getting a single widget, 
                 // based on Z index and then called until handled = true; Ordered By highest Z
-                widgetCallback(widget, screenPosition);
-                return null;
+                var result = widgetCallback(widget, screenPosition);
+
+                if (result)
+                {
+                    return new MapInfoEventArgs
+                    {
+                        Handled = true
+                    };
+                }
             }
 
             var mapInfo = MapInfoHelper.GetMapInfo(layers, viewport, screenPosition, symbolCache);

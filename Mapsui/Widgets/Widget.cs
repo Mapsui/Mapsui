@@ -45,6 +45,6 @@ namespace Mapsui.Widgets
             throw new ArgumentException("Unknown vertical alignment: " + VerticalAlignment);
         }
 
-        public abstract void HandleWidgetTouched(INavigator navigator, Point position);
+        public abstract bool HandleWidgetTouched(INavigator navigator, Point position);
     }
 }
