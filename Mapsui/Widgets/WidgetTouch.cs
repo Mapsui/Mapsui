@@ -16,9 +16,11 @@ namespace Mapsui.Widgets
         /// Returns the first Widget in the list that contains the screenPosition
         /// within it's Envelope. Returns null if there are none.
         /// </returns>
-        public static IWidget GetTouchedWidget(Point screenPosition, Point startScreenPosition,
+        public static IEnumerable<IWidget> GetTouchedWidget(Point screenPosition, Point startScreenPosition,
             IEnumerable<IWidget> widgets)
         {
+            var touchedWidgets = new List<IWidget>();
+
             foreach (var widget in widgets.Reverse())
             {
                 // Also check for start position because it shoudl be click on the widget,
@@ -26,9 +28,10 @@ namespace Mapsui.Widgets
                 if (widget.Envelope != null &&
                     widget.Envelope.Contains(screenPosition) && 
                     widget.Envelope.Contains(startScreenPosition))
-                    return widget;
+                    touchedWidgets.Add(widget);
             }
-            return null;
+
+            return touchedWidgets;
         }
     }
 }

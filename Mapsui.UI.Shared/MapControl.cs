@@ -309,12 +309,16 @@ namespace Mapsui.UI.Wpf
 
         private bool WidgetTouched(IWidget widget, Point screenPosition)
         {
-            if (widget is Hyperlink hyperlink)
+            var result = widget.HandleWidgetTouched(Navigator, screenPosition);
+
+            if (!result && widget is Hyperlink hyperlink && !string.IsNullOrWhiteSpace(hyperlink.Url))
             {
                 OpenBrowser(hyperlink.Url);
+
+                return true;
             }
 
-            return widget.HandleWidgetTouched(Navigator, screenPosition);
+            return false;
         }
 
         /// <inheritdoc />
@@ -351,21 +355,20 @@ namespace Mapsui.UI.Wpf
             var allWidgets = layerWidgets.Concat(widgets).ToList(); // Concat layer widgets and map widgets.
 
             // First check if a Widget is clicked. In the current design they are always on top of the map.
-            var widget = WidgetTouch.GetTouchedWidget(screenPosition, startScreenPosition, allWidgets);
-            if (widget != null)
+            var touchedWidgets = WidgetTouch.GetTouchedWidget(screenPosition, startScreenPosition, allWidgets);
+            if (touchedWidgets.Count() > 0)
             {
-                // todo:
-                // How should widgetCallback have a handled type thing?
-                // Widgets should be iterated through rather than getting a single widget, 
-                // based on Z index and then called until handled = true; Ordered By highest Z
-                var result = widgetCallback(widget, screenPosition);
-
-                if (result)
+                foreach (var widget in touchedWidgets)
                 {
-                    return new MapInfoEventArgs
+                    var result = widgetCallback(widget, screenPosition);
+
+                    if (result)
                     {
-                        Handled = true
-                    };
+                        return new MapInfoEventArgs
+                        {
+                            Handled = true
+                        };
+                    }
                 }
             }
 

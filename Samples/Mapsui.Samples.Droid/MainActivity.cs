@@ -120,7 +120,7 @@ namespace Mapsui.Samples.Droid
 
         private void MapOnInfo(object sender, MapInfoEventArgs args)
         {
-            if (args.MapInfo.Feature != null)
+            if (args.MapInfo?.Feature != null)
             {
                 ShowPopup(args);
             }
