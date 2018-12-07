@@ -7,7 +7,7 @@ namespace Mapsui.Utilities
     public static class OpenStreetMap
     {
         private static readonly BruTile.Attribution OpenStreetMapAttribution = new BruTile.Attribution(
-            "© OpenStreetMap contributors", "http://www.openstreetmap.org/copyright");
+            "© OpenStreetMap contributors", "https://www.openstreetmap.org/copyright");
 
         public static TileLayer CreateTileLayer()
         {
@@ -17,7 +17,7 @@ namespace Mapsui.Utilities
         private static HttpTileSource CreateTileSource()
         {
             return new HttpTileSource(new GlobalSphericalMercator(),
-                "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
                 new[] { "a", "b", "c" }, name: "OpenStreetMap",
                 attribution: OpenStreetMapAttribution);
         }
