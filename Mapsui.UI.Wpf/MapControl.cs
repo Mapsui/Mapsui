@@ -303,7 +303,8 @@ namespace Mapsui.UI.Wpf
                 if (IsClick(_currentMousePosition, _downMousePosition))
                 {
                     HandleFeatureInfo(e);
-                    OnInfo(InvokeInfo(Map.Layers.Where(l => l.IsMapInfoLayer), Map.Widgets, Viewport,
+                    var widgets = Map.Layers.Select(l => l.Attribution).Where(a => a != null).Concat(Map.Widgets).ToList();
+                    OnInfo(InvokeInfo(Map.Layers.Where(l => l.IsMapInfoLayer), widgets, Viewport,
                         touchPosition, _downMousePosition, Renderer.SymbolCache, WidgetTouched, e.ClickCount));
                 }
             }
@@ -347,7 +348,8 @@ namespace Mapsui.UI.Wpf
                 // todo: Pass the touchDown position. It needs to be set at touch down.
 
                 // todo: Figure out how to do a number of taps for WPF
-                OnInfo(InvokeInfo(Map.Layers.Where(l => l.IsMapInfoLayer), Map.Widgets, Viewport, 
+                var widgets = Map.Layers.Select(l => l.Attribution).Where(a => a != null).Concat(Map.Widgets).ToList();
+                OnInfo(InvokeInfo(Map.Layers.Where(l => l.IsMapInfoLayer), widgets, Viewport, 
                     touchPosition, touchPosition, Renderer.SymbolCache, 
                     WidgetTouched, 1));
             }

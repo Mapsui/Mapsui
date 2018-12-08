@@ -1,5 +1,6 @@
 ﻿
 using Mapsui.Geometries;
+using System;
 
 namespace Mapsui.Widgets
 {
@@ -7,11 +8,20 @@ namespace Mapsui.Widgets
     {
         public string Url { get; set; }
 
+        public event EventHandler<HyperlinkWidgetArguments> Touched;
+
         public override bool HandleWidgetTouched(INavigator navigator, Point position)
         {
-            // Because OpenURL is called from MapControl by default
-            // TODO: Shouldn't OpenURL() called from here instead of from MapControl?
-            return true;
+            var args = new HyperlinkWidgetArguments();
+
+            Touched?.Invoke(this, args);
+            
+            return args.Handled;
         }
+    }
+
+    public class HyperlinkWidgetArguments
+    {
+        public bool Handled = false;
     }
 }
