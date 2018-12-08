@@ -170,7 +170,7 @@ namespace Mapsui.UI.Android
 
                                 double rotationDelta = 0;
 
-                                if (!Lock .RotationLock)
+                                if (!Map.RotationLock)
                                 {
                                     _innerRotation += angle - previousAngle;
                                     _innerRotation %= 360;

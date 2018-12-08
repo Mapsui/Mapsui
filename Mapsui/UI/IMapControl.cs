@@ -63,8 +63,5 @@ namespace Mapsui.UI
         /// <param name="screenPosition">Screen position to check for widgets and features</param>
         /// <param name="margin">An optional extra margin around the feature to enlarge the hit area.</param>
         MapInfo GetMapInfo(IEnumerable<ILayer> layers, Point screenPosition, int margin = 0);
-
-        MapLock Lock { get; set; }
-
     }
 }

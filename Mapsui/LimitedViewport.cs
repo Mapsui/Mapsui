@@ -28,6 +28,8 @@ namespace Mapsui
 
         public void Transform(Point position, Point previousPosition, double deltaResolution = 1, double deltaRotation = 0)
         {
+            if (Map.ZoomLock) deltaResolution = 1;
+            if (Map.PanLock) position = previousPosition;
             _viewport.Transform(position, previousPosition, deltaResolution, deltaRotation);
             Limiter.Limit(_viewport, Map.Resolutions, Map.Envelope);
         }
@@ -40,24 +42,28 @@ namespace Mapsui
 
         public virtual void SetCenter(double x, double y)
         {
+            if (Map.PanLock) return;
             _viewport.SetCenter(x, y);
             Limiter.LimitExtent(_viewport, Map.Envelope);
         }
 
         public void SetCenter(ReadOnlyPoint center)
         {
+            if (Map.PanLock) return;
             _viewport.SetCenter(center);
             Limiter.LimitExtent(_viewport, Map.Envelope);
         }
 
         public void SetResolution(double resolution)
         {
+            if (Map.ZoomLock) return;
             resolution = Limiter.LimitResolution(resolution, _viewport.Width, _viewport.Height, Map.Resolutions, Map.Envelope);
             _viewport.SetResolution(resolution);
         }
 
         public void SetRotation(double rotation)
         {
+            if (Map.RotationLock) return;
             _viewport.SetRotation(rotation);
             Limiter.LimitExtent(_viewport, Map.Envelope);
         }

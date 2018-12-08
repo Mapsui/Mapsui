@@ -28,24 +28,6 @@ namespace Mapsui.UI.Wpf
     {
         private Map _map;
 
-        private MapLock _lock = new MapLock { RotationLock = true };
-
-        /// <summary>
-        /// Handles, which interaction with the map is locked 
-        /// </summary>
-        public MapLock Lock
-        {
-            get { return _lock; }
-            set
-            {
-                if (_lock != value)
-                {
-                    _lock = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
         private double _unSnapRotationDegrees;
 
         /// <summary>

@@ -50,6 +50,21 @@ namespace Mapsui
         }
 
         /// <summary>
+        /// When true the user can not pan (move) the map.
+        /// </summary>
+        public bool PanLock { get; set; }
+
+        /// <summary>
+        /// When true the user an not rotate the map
+        /// </summary>
+        public bool ZoomLock { get; set; }
+
+        /// <summary>
+        /// When true the user can not zoom into the map
+        /// </summary>
+        public bool RotationLock { get; set; }
+
+        /// <summary>
         /// List of Widgets belonging to map
         /// </summary>
         public List<IWidget> Widgets { get; } = new List<IWidget>();

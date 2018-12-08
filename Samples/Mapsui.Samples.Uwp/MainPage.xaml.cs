@@ -25,7 +25,7 @@ namespace Mapsui.Samples.Uwp
             MbTilesHelper.DeployMbTilesFile(s => File.Create(Path.Combine(MbTilesLocationOnUwp, s)));
 
             MapControl.Map.Layers.Add(OpenStreetMap.CreateTileLayer());
-            MapControl.Lock.RotationLock = false;
+            MapControl.Map.RotationLock = false;
             MapControl.UnSnapRotationDegrees = 30;
             MapControl.ReSnapRotationDegrees = 5;
             MapControl.Renderer.WidgetRenders[typeof(CustomWidget.CustomWidget)] = new CustomWidgetSkiaRenderer();

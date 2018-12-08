@@ -60,9 +60,9 @@ namespace Mapsui.UI.Forms
             _mapDrawableLayer = new Layer(DrawableLayerName) { IsMapInfoLayer = true };
 
             // Get defaults from MapControl
-            RotationLock = Lock.RotationLock;
-            ZoomLock = Lock.ZoomLock;
-            PanLock = Lock.PanLock;
+            RotationLock = Map.RotationLock;
+            ZoomLock = Map.ZoomLock;
+            PanLock = Map.PanLock;
 
             // Add some events to _mapControl
             _mapControl.Viewport.ViewportChanged += HandlerViewportChanged;
@@ -287,15 +287,6 @@ namespace Mapsui.UI.Forms
         {
             get { return (double)GetValue(ReSnapRotationDegreesProperty); }
             set { SetValue(ReSnapRotationDegreesProperty, value); }
-        }
-
-        /// <summary>
-        /// MapLock property of MapView
-        /// </summary>
-        public MapLock Lock
-        {
-            get { return _mapControl.Lock; }
-            set { _mapControl.Lock = value; }
         }
 
         /// <summary>
@@ -571,13 +562,13 @@ namespace Mapsui.UI.Forms
                 _mapControl.ReSnapRotationDegrees = ReSnapRotationDegrees;
             
             if (propertyName.Equals(nameof(RotationLockProperty)) || propertyName.Equals(nameof(RotationLock)))
-                _mapControl.Lock.RotationLock = RotationLock;
+                _mapControl.Map.RotationLock = RotationLock;
 
             if (propertyName.Equals(nameof(ZoomLockProperty)) || propertyName.Equals(nameof(ZoomLock)))
-                _mapControl.Lock.ZoomLock = ZoomLock;
+                _mapControl.Map.ZoomLock = ZoomLock;
 
             if (propertyName.Equals(nameof(PanLockProperty)) || propertyName.Equals(nameof(PanLock)))
-                _mapControl.Lock.PanLock = PanLock;
+                _mapControl.Map.PanLock = PanLock;
 
             if (propertyName.Equals(nameof(IsZoomButtonVisibleProperty)) || propertyName.Equals(nameof(IsZoomButtonVisible)))
             {
