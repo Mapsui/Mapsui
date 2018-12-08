@@ -541,13 +541,13 @@ namespace Mapsui.UI.Forms
         {
             base.OnPropertyChanged(propertyName);
 
-            if (propertyName.Equals(nameof(MyLocationEnabledProperty)))
+            if (propertyName.Equals(nameof(MyLocationEnabledProperty)) || propertyName.Equals(nameof(MyLocationEnabled)))
             {
                 _mapMyLocationLayer.Enabled = MyLocationEnabled;
                 Refresh();
             }
 
-            if (propertyName.Equals(nameof(MyLocationFollowProperty)))
+            if (propertyName.Equals(nameof(MyLocationFollowProperty)) || propertyName.Equals(nameof(MyLocationFollow)))
             {
                 _mapMyLocationButton.IsEnabled = !MyLocationFollow;
 
@@ -564,41 +564,41 @@ namespace Mapsui.UI.Forms
                 Refresh();
             }
 
-            if (propertyName.Equals(nameof(UnSnapRotationDegreesProperty)))
+            if (propertyName.Equals(nameof(UnSnapRotationDegreesProperty)) || propertyName.Equals(nameof(UnSnapRotationDegrees)))
                 _mapControl.UnSnapRotationDegrees = UnSnapRotationDegrees;
 
-            if (propertyName.Equals(nameof(ReSnapRotationDegreesProperty)))
+            if (propertyName.Equals(nameof(ReSnapRotationDegreesProperty)) || propertyName.Equals(nameof(ReSnapRotationDegrees)))
                 _mapControl.ReSnapRotationDegrees = ReSnapRotationDegrees;
             
-            if (propertyName.Equals(nameof(RotationLockProperty)))
+            if (propertyName.Equals(nameof(RotationLockProperty)) || propertyName.Equals(nameof(RotationLock)))
                 _mapControl.Lock.RotationLock = RotationLock;
 
-            if (propertyName.Equals(nameof(ZoomLockProperty)))
+            if (propertyName.Equals(nameof(ZoomLockProperty)) || propertyName.Equals(nameof(ZoomLock)))
                 _mapControl.Lock.ZoomLock = ZoomLock;
 
-            if (propertyName.Equals(nameof(PanLockProperty)))
+            if (propertyName.Equals(nameof(PanLockProperty)) || propertyName.Equals(nameof(PanLock)))
                 _mapControl.Lock.PanLock = PanLock;
 
-            if (propertyName.Equals(nameof(IsZoomButtonVisibleProperty)))
+            if (propertyName.Equals(nameof(IsZoomButtonVisibleProperty)) || propertyName.Equals(nameof(IsZoomButtonVisible)))
             {
                 _mapZoomInButton.IsVisible = IsZoomButtonVisible;
                 _mapZoomOutButton.IsVisible = IsZoomButtonVisible;
                 _mapSpacingButton1.IsVisible = IsZoomButtonVisible && IsMyLocationButtonVisible;
             }
 
-            if (propertyName.Equals(nameof(IsMyLocationButtonVisibleProperty)))
+            if (propertyName.Equals(nameof(IsMyLocationButtonVisibleProperty)) || propertyName.Equals(nameof(IsMyLocationButtonVisible)))
             {
                 _mapMyLocationButton.IsVisible = IsMyLocationButtonVisible;
                 _mapSpacingButton1.IsVisible = IsZoomButtonVisible && IsMyLocationButtonVisible;
             }
 
-            if (propertyName.Equals(nameof(IsNorthingButtonVisibleProperty)))
+            if (propertyName.Equals(nameof(IsNorthingButtonVisibleProperty)) || propertyName.Equals(nameof(IsNorthingButtonVisible)))
             {
                 _mapNorthingButton.IsVisible = IsNorthingButtonVisible;
                 _mapSpacingButton2.IsVisible = (IsMyLocationButtonVisible || IsZoomButtonVisible) && IsNorthingButtonVisible;
             }
 
-            if (propertyName.Equals(nameof(UseDoubleTapProperty)))
+            if (propertyName.Equals(nameof(UseDoubleTapProperty)) || propertyName.Equals(nameof(UseDoubleTap)))
                 _mapControl.UseDoubleTap = UseDoubleTap;
         }
 
