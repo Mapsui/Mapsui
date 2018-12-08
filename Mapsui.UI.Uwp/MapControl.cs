@@ -74,16 +74,14 @@ namespace Mapsui.UI.Uwp
         private void OnDoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
             var tabPosition = e.GetPosition(this).ToMapsui();
-            var widgets = Map.Layers.Select(l => l.Attribution).Where(a => a != null).Concat(Map.Widgets).ToList();
-            OnInfo(InvokeInfo(Map.Layers.Where(l => l.IsMapInfoLayer), widgets, Viewport, 
+            OnInfo(InvokeInfo(Map.Layers.Where(l => l.IsMapInfoLayer), Map.GetWidgetsOfMapAndLayers(), Viewport, 
                 tabPosition, tabPosition, Renderer.SymbolCache, WidgetTouched, 2));
         }
 
         private void OnSingleTapped(object sender, TappedRoutedEventArgs e)
         {
             var tabPosition = e.GetPosition(this).ToMapsui();
-            var widgets = Map.Layers.Select(l => l.Attribution).Where(a => a != null).Concat(Map.Widgets).ToList();
-            OnInfo(InvokeInfo(Map.Layers.Where(l => l.IsMapInfoLayer), widgets, Viewport, 
+            OnInfo(InvokeInfo(Map.Layers.Where(l => l.IsMapInfoLayer), Map.GetWidgetsOfMapAndLayers(), Viewport, 
                 tabPosition, tabPosition, Renderer.SymbolCache, WidgetTouched, 1));
         }
 

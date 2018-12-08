@@ -271,5 +271,10 @@ namespace Mapsui
         }
 
         public Action<INavigator> Home { get; set; } = n => n.NavigateToFullEnvelope();
+
+        public IEnumerable<IWidget> GetWidgetsOfMapAndLayers()
+        {
+            return Widgets.Concat(Layers.Select(l => l.Attribution)).Where(w => w != null).ToList();
+        }
     }
 }

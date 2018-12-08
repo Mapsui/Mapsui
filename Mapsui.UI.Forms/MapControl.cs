@@ -525,8 +525,8 @@ namespace Mapsui.UI.Forms
             if (args.Handled)
                 return true;
 
-            var widgets = Map.Layers.Select(l => l.Attribution).Where(a => a != null).Concat(Map.Widgets).ToList();
-            var eventReturn = InvokeInfo(Map.Layers, widgets, Viewport, screenPosition, screenPosition, _renderer.SymbolCache, WidgetTouched, numOfTaps);
+            var eventReturn = InvokeInfo(Map.Layers, Map.GetWidgetsOfMapAndLayers(), Viewport, screenPosition, 
+                screenPosition, _renderer.SymbolCache, WidgetTouched, numOfTaps);
 
             if (eventReturn != null)
             {
@@ -554,8 +554,8 @@ namespace Mapsui.UI.Forms
             if (args.Handled)
                 return true;
 
-            var widgets = Map.Layers.Select(l => l.Attribution).Where(a => a != null).Concat(Map.Widgets).ToList();
-            var eventReturn = InvokeInfo(Map.Layers, widgets, Viewport, screenPosition, screenPosition, _renderer.SymbolCache, WidgetTouched, 1);
+            var eventReturn = InvokeInfo(Map.Layers, Map.GetWidgetsOfMapAndLayers(), Viewport, screenPosition, 
+                screenPosition, _renderer.SymbolCache, WidgetTouched, 1);
 
             if (eventReturn != null)
                 return eventReturn.Handled;
