@@ -338,22 +338,20 @@ namespace Mapsui.UI.Wpf
 
             // First check if a Widget is clicked. In the current design they are always on top of the map.
             var touchedWidgets = WidgetTouch.GetTouchedWidget(screenPosition, startScreenPosition, allWidgets);
-            if (touchedWidgets.Count() > 0)
-            {
-                foreach (var widget in touchedWidgets)
-                {
-                    var result = widgetCallback(widget, screenPosition);
 
-                    if (result)
+            foreach (var widget in touchedWidgets)
+            {
+                var result = widgetCallback(widget, screenPosition);
+
+                if (result)
+                {
+                    return new MapInfoEventArgs
                     {
-                        return new MapInfoEventArgs
-                        {
-                            Handled = true
-                        };
-                    }
+                        Handled = true
+                    };
                 }
             }
-
+        
             var mapInfo = MapInfoHelper.GetMapInfo(layers, viewport, screenPosition, symbolCache);
 
             if (mapInfo != null)
