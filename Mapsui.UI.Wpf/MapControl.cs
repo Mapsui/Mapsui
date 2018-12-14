@@ -217,6 +217,7 @@ namespace Mapsui.UI.Wpf
 
         private void InitAnimation()
         {
+            _zoomAnimation.Completed += ZoomAnimationCompleted;
             _zoomAnimation.Duration = new Duration(new TimeSpan(0, 0, 0, 0, 1000));
             _zoomAnimation.EasingFunction = new QuarticEase();
             Storyboard.SetTarget(_zoomAnimation, this);
@@ -257,7 +258,6 @@ namespace Mapsui.UI.Wpf
             _zoomStoryBoard.Pause(); //using Stop() here causes unexpected results while zooming very fast.
             _zoomAnimation.From = begin;
             _zoomAnimation.To = end;
-            _zoomAnimation.Completed += ZoomAnimationCompleted;
             _zoomStoryBoard.Begin();
         }
 

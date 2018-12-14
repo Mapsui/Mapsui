@@ -137,6 +137,8 @@ namespace Mapsui
             _viewport.SetCenter(_viewport.ScreenToWorld(
                 _viewport.Width - centerOfZoom.X,
                 _viewport.Height - centerOfZoom.Y));
+
+            _map.RefreshData(_viewport.Extent, _viewport.Resolution, false);
         }
     }
 }
