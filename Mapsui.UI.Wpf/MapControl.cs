@@ -465,6 +465,7 @@ namespace Mapsui.UI.Wpf
         private void OnManipulationStarted(object sender, ManipulationStartedEventArgs e)
         {
             _hasBeenManipulated = false;
+            _innerRotation = _viewport.Rotation;
         }
 
         private void OnManipulationDelta(object sender, ManipulationDeltaEventArgs e)
