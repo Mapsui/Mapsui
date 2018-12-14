@@ -4,6 +4,7 @@ using System.Linq;
 using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
 using Mapsui.UI;
 using Mapsui.Utilities;
 using Mapsui.Samples.Common;
@@ -88,5 +89,12 @@ namespace Mapsui.Samples.Uwp
         }
 
         private static string MbTilesLocationOnUwp => ApplicationData.Current.LocalFolder.Path;
+
+        private void RotationSlider_OnValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        {
+            var percent = RotationSlider.Value / (RotationSlider.Maximum - RotationSlider.Minimum);
+            MapControl.Navigator.RotateTo(percent * 360);
+            MapControl.Refresh();
+        }
     }
 }

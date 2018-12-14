@@ -181,14 +181,17 @@ namespace Mapsui.UI.Uwp
         
         private void OnManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
-            var (center, radius, angle) = (e.Position.ToMapsui(), e.Delta.Scale, e.Delta.Rotation);
-            var (previousCenter, prevRadius, prevAngle) = (e.Position.ToMapsui().Offset(-e.Delta.Translation.X, -e.Delta.Translation.Y), 1f, 0f);
+            var (center, radius, rotation) = (e.Position.ToMapsui(), e.Delta.Scale, e.Delta.Rotation);
+
+            var previousCenter=  e.Position.ToMapsui().Offset(-e.Delta.Translation.X, -e.Delta.Translation.Y);
+            var previousRadius = 1f;
+            var previousRotation = 0f;//_viewport.Rotation;
 
             double rotationDelta = 0;
 
             if (!Map.RotationLock)
             {
-                _innerRotation += angle - prevAngle;
+                _innerRotation += rotation - previousRotation;
                 _innerRotation %= 360;
 
                 if (_innerRotation > 180)
@@ -207,7 +210,7 @@ namespace Mapsui.UI.Uwp
                 }
             }
 
-            _viewport.Transform(center, previousCenter, radius / prevRadius, rotationDelta);
+            _viewport.Transform(center, previousCenter, radius / previousRadius, rotationDelta);
 
             RefreshGraphics();
 
