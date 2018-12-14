@@ -60,7 +60,9 @@ namespace Mapsui.UI.Uwp
             PointerWheelChanged += MapControl_PointerWheelChanged;
 
             ManipulationMode = ManipulationModes.Scale | ManipulationModes.TranslateX | ManipulationModes.TranslateY | ManipulationModes.Rotate;
+            ManipulationStarted += OnManipulationStarted;
             ManipulationDelta += OnManipulationDelta;
+
             ManipulationInertiaStarting += OnManipulationInertiaStarting;
 
             Tapped += OnSingleTapped;
@@ -69,6 +71,12 @@ namespace Mapsui.UI.Uwp
             var orientationSensor = SimpleOrientationSensor.GetDefault();
             if (orientationSensor != null)
                 orientationSensor.OrientationChanged += (sender, args) => RunOnUIThread(Refresh);
+        }
+
+
+        private void OnManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e)
+        {
+            _innerRotation = _viewport.Rotation;
         }
 
         private void OnDoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
@@ -181,11 +189,14 @@ namespace Mapsui.UI.Uwp
         
         private void OnManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
-            var (center, radius, rotation) = (e.Position.ToMapsui(), e.Delta.Scale, e.Delta.Rotation);
+
+            var center = e.Position.ToMapsui();
+            var radius = e.Delta.Scale;
+            var rotation = e.Delta.Rotation;
 
             var previousCenter=  e.Position.ToMapsui().Offset(-e.Delta.Translation.X, -e.Delta.Translation.Y);
             var previousRadius = 1f;
-            var previousRotation = 0f;//_viewport.Rotation;
+            var previousRotation = 0f;
 
             double rotationDelta = 0;
 
@@ -211,9 +222,7 @@ namespace Mapsui.UI.Uwp
             }
 
             _viewport.Transform(center, previousCenter, radius / previousRadius, rotationDelta);
-
             RefreshGraphics();
-
             e.Handled = true;
         }
 
