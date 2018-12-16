@@ -246,7 +246,7 @@ namespace Mapsui
                 Rotation += deltaRotation;
                 var postRotation = ScreenToWorld(positionScreen.X, positionScreen.Y); // calculate current position again with adjusted resolution
 
-                SetCenter(_center.X - postRotation.X - current.X, _center.Y - postRotation.Y - current.Y);
+                SetCenter(_center.X - (postRotation.X - current.X), _center.Y - (postRotation.Y - current.Y));
             }
         }
 
