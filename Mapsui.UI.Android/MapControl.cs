@@ -142,6 +142,7 @@ namespace Mapsui.UI.Android
                         _mode = TouchMode.Dragging;
                         _previousTouch = touchPoints.First();
                     }
+                    Refresh();
                     break;
                 case MotionEventActions.Move:
                     switch (_mode)
