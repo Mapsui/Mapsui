@@ -689,12 +689,15 @@ namespace Mapsui.UI.Forms
                 }
             }
 
-            foreach (var item in e.NewItems)
+            if (e.NewItems != null)
             {
+              foreach (var item in e.NewItems)
+              {
                 // Add new pins to layer
                 var pin = item as Pin;
 
                 pin.PropertyChanged += HandlerPinPropertyChanged;
+              }
             }
 
             Refresh();
