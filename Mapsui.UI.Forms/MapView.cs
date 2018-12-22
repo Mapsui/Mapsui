@@ -84,10 +84,10 @@ namespace Mapsui.UI.Forms
             _pictMyLocationNoCenter = (new SkiaSharp.Extended.Svg.SKSvg()).Load(Mapsui.Utilities.EmbeddedResourceLoader.Load("Images.LocationNoCenter.svg", typeof(MapView)));
             _pictMyLocationCenter = (new SkiaSharp.Extended.Svg.SKSvg()).Load(Mapsui.Utilities.EmbeddedResourceLoader.Load("Images.LocationCenter.svg", typeof(MapView)));
 
-            _mapZoomInButton = new SvgButton(Mapsui.Utilities.EmbeddedResourceLoader.Load("Images.ZoomIn.svg", typeof(MapView))) 
-            { 
-                BackgroundColor = Color.White, 
-                WidthRequest = 40, 
+            _mapZoomInButton = new SvgButton(Mapsui.Utilities.EmbeddedResourceLoader.Load("Images.ZoomIn.svg", typeof(MapView)))
+            {
+                BackgroundColor = Color.White,
+                WidthRequest = 40,
                 HeightRequest = 40,
                 Command = new Command((object obj) => { _mapControl.Navigator.ZoomIn(); Refresh(); }),
             };
@@ -112,14 +112,14 @@ namespace Mapsui.UI.Forms
 
             _mapSpacingButton2 = new Image { BackgroundColor = Color.Transparent, WidthRequest = 40, HeightRequest = 8 };
 
-            _mapNorthingButton = new SvgButton(Mapsui.Utilities.EmbeddedResourceLoader.Load("Images.RotationZero.svg", typeof(MapView))) 
-            { 
-                BackgroundColor = Color.White, 
-                WidthRequest = 40, 
+            _mapNorthingButton = new SvgButton(Mapsui.Utilities.EmbeddedResourceLoader.Load("Images.RotationZero.svg", typeof(MapView)))
+            {
+                BackgroundColor = Color.White,
+                WidthRequest = 40,
                 HeightRequest = 40,
                 Command = new Command((object obj) => Device.BeginInvokeOnMainThread(() => _mapControl.Navigator.RotateTo(0))),
             };
-            
+
             _mapButtons = new StackLayout { BackgroundColor = Color.Transparent, Opacity = 0.8, Spacing = 0, IsVisible = true };
 
             _mapButtons.Children.Add(_mapZoomInButton);
@@ -455,7 +455,8 @@ namespace Mapsui.UI.Forms
             if (position == null)
                 return null;
 
-            Device.BeginInvokeOnMainThread(() => {
+            Device.BeginInvokeOnMainThread(() =>
+            {
                 callout = new Callout(_mapControl)
                 {
                     Anchor = position,
@@ -545,7 +546,7 @@ namespace Mapsui.UI.Forms
                 if (MyLocationFollow)
                 {
                     _mapMyLocationButton.Picture = _pictMyLocationCenter;
-                    _mapControl.Navigator.CenterOn(_mapMyLocationLayer.MyLocation.ToMapsui());    
+                    _mapControl.Navigator.CenterOn(_mapMyLocationLayer.MyLocation.ToMapsui());
                 }
                 else
                 {
@@ -560,7 +561,7 @@ namespace Mapsui.UI.Forms
 
             if (propertyName.Equals(nameof(ReSnapRotationDegreesProperty)) || propertyName.Equals(nameof(ReSnapRotationDegrees)))
                 _mapControl.ReSnapRotationDegrees = ReSnapRotationDegrees;
-            
+
             if (propertyName.Equals(nameof(RotationLockProperty)) || propertyName.Equals(nameof(RotationLock)))
                 _mapControl.Map.RotationLock = RotationLock;
 
@@ -691,13 +692,13 @@ namespace Mapsui.UI.Forms
 
             if (e.NewItems != null)
             {
-              foreach (var item in e.NewItems)
-              {
-                // Add new pins to layer
-                var pin = item as Pin;
+                foreach (var item in e.NewItems)
+                {
+                    // Add new pins to layer
+                    var pin = item as Pin;
 
-                pin.PropertyChanged += HandlerPinPropertyChanged;
-              }
+                    pin.PropertyChanged += HandlerPinPropertyChanged;
+                }
             }
 
             Refresh();
@@ -732,8 +733,8 @@ namespace Mapsui.UI.Forms
         {
             // Click on pin?
             Pin clickedPin = null;
-            
-            foreach(var pin in _pins)
+
+            foreach (var pin in _pins)
             {
                 if (pin.IsVisible && pin.Feature.Equals(e.MapInfo.Feature))
                 {
