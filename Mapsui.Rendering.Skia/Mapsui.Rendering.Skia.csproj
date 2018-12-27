@@ -12,10 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="NuGet.Build.Packaging" Version="0.2.2">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-    </PackageReference>
     <PackageReference Include="SkiaSharp" Version="1.60.3" />
     <PackageReference Include="SkiaSharp.Svg" Version="1.60.0" />
   </ItemGroup>
@@ -27,8 +23,7 @@
 
   <PropertyGroup>
     <DebugType>full</DebugType>
-    <PackageId>Mapsui.Rendering.Skia</PackageId>
-    <PackageVersion>1.0.0</PackageVersion>
+    <PackageId>Mapsui</PackageId>
     <Description>Mapsui</Description>
   </PropertyGroup>
 
