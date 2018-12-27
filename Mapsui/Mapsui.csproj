@@ -9,6 +9,10 @@
   <ItemGroup>
     <PackageReference Include="BruTile" Version="2.0.1" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="NuGet.Build.Packaging" Version="0.2.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Mapsui.Geometries\Mapsui.Geometries.csproj" />
@@ -16,6 +20,9 @@
 
   <PropertyGroup>
     <DebugType>full</DebugType>
+    <PackageId>Mapsui</PackageId>
+    <PackageVersion>1.0.0</PackageVersion>
+    <Description>Mapsui</Description>
   </PropertyGroup>
 
 </Project>

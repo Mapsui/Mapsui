@@ -8,7 +8,8 @@
     <PackageProjectUrl>https://github.com/Mapsui/Mapsui</PackageProjectUrl>
     <Summary>Xamarin.Forms implementation of Mapsui</Summary>
     <PackageTags>Mapsui Xamarin.Forms map maps mapping</PackageTags>
-    <Description>Mapsui.UI.Forms is a native Xamarin.Forms MapControl for Mapsui without any platform dependent renderers.</Description>
+    <Description>Xamarin.Forms implementation of Mapsui</Description>
+    <PackageId>Mapsui.UI.Forms</PackageId>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DefineConstants>TRACE;__FORMS__;DEBUG;NETSTANDARD1_3</DefineConstants>
@@ -24,6 +25,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="NuGet.Build.Packaging" Version="0.2.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="SkiaSharp" Version="1.60.3" />
     <PackageReference Include="SkiaSharp.Views.Forms" Version="1.60.3" />
     <PackageReference Include="Xamarin.Forms" Version="3.4.0.1008975" />
