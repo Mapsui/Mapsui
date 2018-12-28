@@ -1,8 +1,9 @@
 <p align="left"><img src="logo/png/icon.png" alt="Mapsui" height="180px"></p>
 
-| What  | Status  | 
+|   | Status  | 
 | ------------- |:-------------:|
-| Nuget   | [![NuGet Status](http://img.shields.io/nuget/v/Mapsui.svg?style=flat)](https://www.nuget.org/packages/Mapsui/) |
+| Mapsui NuGet   | [![NuGet Status](http://img.shields.io/nuget/v/Mapsui.svg?style=flat)](https://www.nuget.org/packages/Mapsui/) |
+| Mapsui.Forms Nuget   | [![NuGet Status](http://img.shields.io/nuget/v/Mapsui.Forms.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Forms/) |
 | Build on Windows    | [![Build status](https://ci.appveyor.com/api/projects/status/p20w43qv4ixkkftp?svg=true)](https://ci.appveyor.com/project/pauldendulk/mapsui) |
 | Build on Mac | [![Build Status](https://app.bitrise.io/app/119dabd1302841a1.svg?token=KH9mbi7R6uLBz0iUZjbvJw)](https://www.bitrise.io/app/119dabd1302841a1) |
 | Build docs | [![Build status](https://ci.appveyor.com/api/projects/status/c8hcfeoafmf51gin/branch/master?svg=true)](https://ci.appveyor.com/project/pauldendulk/mapsui-373p1/branch/master) |
