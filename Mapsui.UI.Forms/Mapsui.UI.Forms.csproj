@@ -8,7 +8,8 @@
     <PackageProjectUrl>https://github.com/Mapsui/Mapsui</PackageProjectUrl>
     <Summary>Xamarin.Forms implementation of Mapsui</Summary>
     <PackageTags>Mapsui Xamarin.Forms map maps mapping</PackageTags>
-    <Description>Mapsui.UI.Forms is a native Xamarin.Forms MapControl for Mapsui without any platform dependent renderers.</Description>
+    <Description>Xamarin.Forms implementation of Mapsui</Description>
+    <PackageId>Mapsui.Forms</PackageId>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DefineConstants>TRACE;__FORMS__;DEBUG;NETSTANDARD1_3</DefineConstants>

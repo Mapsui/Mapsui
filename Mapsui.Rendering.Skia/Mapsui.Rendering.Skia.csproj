@@ -21,4 +21,10 @@
     <ProjectReference Include="..\Mapsui\Mapsui.csproj" />
   </ItemGroup>
 
+  <PropertyGroup>
+    <DebugType>full</DebugType>
+    <PackageId>Mapsui</PackageId>
+    <Description>Mapsui</Description>
+  </PropertyGroup>
+
 </Project>

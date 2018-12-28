@@ -67,6 +67,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Geometries.Tests", "
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuSpec", "NuSpec", "{D90027DD-A6D6-4C32-91DC-237B55141EB8}"
 	ProjectSection(SolutionItems) = preProject
+		NuSpec\Mapsui.Forms.nuspec = NuSpec\Mapsui.Forms.nuspec
 		NuSpec\Mapsui.nuspec = NuSpec\Mapsui.nuspec
 	EndProjectSection
 EndProject
@@ -1546,8 +1547,6 @@ Global
 		{28848162-20B7-46F1-8364-8B41B0393CD4}.AppStore|x64.Deploy.0 = Release|x64
 		{28848162-20B7-46F1-8364-8B41B0393CD4}.AppStore|x86.ActiveCfg = Release|x86
 		{28848162-20B7-46F1-8364-8B41B0393CD4}.Debug|AnyCPU.ActiveCfg = Debug|x86
-		{28848162-20B7-46F1-8364-8B41B0393CD4}.Debug|AnyCPU.Build.0 = Debug|x86
-		{28848162-20B7-46F1-8364-8B41B0393CD4}.Debug|AnyCPU.Deploy.0 = Debug|x86
 		{28848162-20B7-46F1-8364-8B41B0393CD4}.Debug|ARM.ActiveCfg = Debug|ARM
 		{28848162-20B7-46F1-8364-8B41B0393CD4}.Debug|ARM.Build.0 = Debug|ARM
 		{28848162-20B7-46F1-8364-8B41B0393CD4}.Debug|ARM.Deploy.0 = Debug|ARM

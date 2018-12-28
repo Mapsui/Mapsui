@@ -16,6 +16,9 @@
 
   <PropertyGroup>
     <DebugType>full</DebugType>
+    <PackageId>NotMapsui</PackageId>
+    <PackageVersion>1.0.0</PackageVersion>
+    <Description>Mapsui</Description>
   </PropertyGroup>
 
 </Project>
