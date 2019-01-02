@@ -26,7 +26,7 @@ namespace Mapsui.Samples.Common.Maps
 
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
             map.Layers.Add(PolygonSample.CreateLayer());
-            map.Layers.Add(LineStringSample.CreateLineStringLayer(LineStringSample.CreateLineStringStyle()));
+            map.Layers.Add(LineStringSample.CreateLineStringLayer());
             map.Layers.Add(CreateLayerWithStyleOnLayer(map.Envelope, 10));
             map.Layers.Add(CreateLayerWithStyleOnFeature(map.Envelope, 10));
 
