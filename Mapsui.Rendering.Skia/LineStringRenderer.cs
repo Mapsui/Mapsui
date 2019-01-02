@@ -18,8 +18,7 @@ namespace Mapsui.Rendering.Skia
             }
             else
             {
-
-                var lineString = ((LineString) geometry).Vertices;
+                var lineString = (LineString)geometry;
 
                 float lineWidth = 1;
                 var lineColor = new Color();
@@ -42,7 +41,7 @@ namespace Mapsui.Rendering.Skia
                     dashArray = vectorStyle.Line.DashArray;
                 }
 
-                var path = lineString.ToSkiaPath(viewport, canvas.LocalClipBounds);
+                var path = lineString.Vertices.ToSkiaPath(viewport, canvas.LocalClipBounds);
 
                 using (var paint = new SKPaint { IsAntialias = true })
                 {
@@ -58,7 +57,57 @@ namespace Mapsui.Rendering.Skia
                         paint.PathEffect = null;
                     canvas.DrawPath(path, paint);
                 }
+
+                if (style is ArrowVectorStyle arrowStyle)
+                {
+                    var arrowHeadPosition = arrowStyle.GetArrowHeadPosition(lineString.StartPoint, lineString.EndPoint);
+                    var arrowHeadScreenPosition = viewport.WorldToScreen(arrowHeadPosition);
+                    var arrowBranchesEndPoints = arrowStyle.GetArrowEndPoints(lineString);
+                    var deltaFirstEndpoint = new Point(arrowBranchesEndPoints[0].X - arrowHeadPosition.X, arrowBranchesEndPoints[0].Y - arrowHeadPosition.Y);
+                    var deltaSecondEndpoint = new Point(arrowBranchesEndPoints[1].X - arrowHeadPosition.X, arrowBranchesEndPoints[1].Y - arrowHeadPosition.Y);
+
+                    DrawArrow(canvas, style, arrowHeadScreenPosition, deltaFirstEndpoint, deltaSecondEndpoint, opacity);
+                }
             }
+        }
+
+        private static void DrawArrow(SKCanvas canvas, IStyle style, Point destination, Point firstEndpoint, Point secondEndpoint, float opacity)
+        {
+            var vectorStyle = style is VectorStyle ? (VectorStyle)style : new VectorStyle();
+            canvas.Save();
+            canvas.Translate((float)destination.X, (float)destination.Y);
+
+            var path = new SKPath();
+            path.MoveTo(0, 0);
+            path.LineTo((float)firstEndpoint.X, -1 * (float)firstEndpoint.Y);
+            path.MoveTo(0, 0);
+            path.LineTo((float)secondEndpoint.X, -1 * (float)secondEndpoint.Y);
+
+            var linePaint = CreateLinePaint(vectorStyle.Line, opacity);
+            if ((linePaint != null) && linePaint.Color.Alpha != 0)
+            {
+                canvas.DrawPath(path, linePaint);
+            }
+
+            canvas.Restore();
+        }
+
+        private static SKPaint CreateLinePaint(Pen line, float opacity)
+        {
+            if (line == null)
+            {
+                return null;
+            }
+
+            return new SKPaint
+            {
+                Color = line.Color.ToSkia(opacity),
+                StrokeWidth = (float)line.Width,
+                StrokeCap = line.PenStrokeCap.ToSkia(),
+                PathEffect = line.PenStyle.ToSkia((float)line.Width),
+                Style = SKPaintStyle.Stroke,
+                IsAntialias = true
+            };
         }
     }
 }
