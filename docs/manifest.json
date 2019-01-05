@@ -4833,7 +4833,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/Mapsui-Components.html",
-          "hash": "Ttkdn3sA0SAmKRxUqjOWTg=="
+          "hash": "hdQLFbMn288W0Y2Fk13vMA=="
         }
       },
       "is_incremental": false,
@@ -5045,7 +5045,7 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "7s8JwVgUB8pCCWly0YpFyg=="
+          "hash": "r8JNkFXpERR5AcoGKtYLnQ=="
         }
       },
       "is_incremental": false,
@@ -5072,6 +5072,11 @@
         "incrementalPhase": "build"
       },
       "processors": {
+        "ResourceDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build"
+        },
         "TocDocumentProcessor": {
           "can_incremental": false,
           "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
@@ -5083,11 +5088,6 @@
         },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
-          "incrementalPhase": "build"
-        },
-        "ResourceDocumentProcessor": {
-          "can_incremental": false,
-          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build"
         }
       }
