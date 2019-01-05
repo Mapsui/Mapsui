@@ -72,10 +72,30 @@
 <p>This is the far from complete upgrade guide from v1.4 to v2.0. 
 The most apparent changes will be mentioned here. If you notice 
 important things missing then please post an issue.</p>
-<h2 id="viewport-moved-from-map-to-mapcontrol-and-is-readonly">Viewport moved from Map to MapControl and is readonly</h2>
+<h3 id="net-standard-20">.NET Standard 2.0</h3>
+<p>Look up compatible frameworks in <a href="https://docs.microsoft.com/en-us/dotnet/standard/net-standard#net-implementation-support">this table</a>.</p>
+<h3 id="viewport-moved-from-map-to-mapcontrol-and-is-readonly">Viewport moved from Map to MapControl and is readonly</h3>
 <p>Use MapControl.Navigator instead.</p>
-<h2 id="the-navigateto-methods-moved-to-mapcontrolnavigator">The NavigateTo methods moved to MapControl.Navigator</h2>
-<p>All user map manipulation should go the the Navigator. All user  the MapControl.Navigator to change the viewport. </p>
+<h3 id="the-navigateto-methods-moved-to-mapcontrolnavigator">The NavigateTo methods moved to MapControl.Navigator</h3>
+<p>All user map manipulation should go the the Navigator. </p>
+<h3 id="mappanlock-mapzoomlock-and-maprotationlock">Map.PanLock, Map.ZoomLock and map.RotationLock</h3>
+<p>The lock fields can be used on all platforms to lock the user from 
+a certain kind of map manipulation.</p>
+<h3 id="added-maplimiter-to-limit-the-extent-to-which-the-user-can-navigate">Added Map.Limiter to limit the extent to which the user can navigate</h3>
+<h3 id="refreshgraphics-refreshdata-and-refresh">RefreshGraphics, RefreshData and Refresh</h3>
+<ul>
+<li>Use RefreshGraphics if you know the data has changed and the graphics needs refreshing.</li>
+<li>Use RefreshData if you know there is new data available in the source.</li>
+<li>Use Refresh if you need to do both.</li>
+</ul>
+<h3 id="rename-boundingboxgetcentroid-to-centroid">Rename BoundingBox.GetCentroid to Centroid</h3>
+<h3 id="rename-igeometrygetboundingbox-to-boundingbox">Rename IGeometry.GetBoundingBox to BoundingBox</h3>
+<h3 id="the-info-event-was-moved-from-map-to-mapcontrol">The Info event was moved from Map to MapControl</h3>
+<h3 id="remove-the-infolayer-list-and-add-an-infolayer-boolean-on-ilayer">Remove the InfoLayer list and add an InfoLayer boolean on ILayer</h3>
+<h3 id="remove-the-hoverlayer-method-it-is-not-crossplatform-and-can-affect-performance">Remove the HoverLayer method. It is not crossplatform and can affect performance.</h3>
+<h3 id="invert-label-alignment-bottomtop">Invert label alignment bottom/top.</h3>
+<h3 id="removed-zoominzoomout-from-wpf-mapcontrol">Removed ZoomIn/ZoomOut from WPF MapControl</h3>
+<p>Use the ZoomIn/ZoomOut methode on the navigator</p>
 </article>
           </div>
           
