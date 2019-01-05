@@ -3,9 +3,8 @@
 At the moment we are working on Mapsui v2. The core libraries are .NET Standard instead of PCLs. Here are some of the changes that may go into v2.
 
 ### Todo
-- PanLock and ZoomLock working on all platforms. 
-- Rework ViewportLimiter 
-- Add Xamarin.Forms MapControl
+- Testing.
+- Some possible rework following from user feedback.
 
 ### Done
 - Do not derive ILayer from IAsyncDataFetcher.
@@ -24,7 +23,10 @@ At the moment we are working on Mapsui v2. The core libraries are .NET Standard 
 - Invert label alignment bottom/top.
 - Remove ZoomIn/ZoomOut from WPF MapControl and turn into Navigate method.
 - Wrap Viewport in LimitingViewport which limits it to user settings, or access through Navigator.
-  
+- PanLock and ZoomLock working on all platforms. 
+- Rework ViewportLimiter 
+- Add Xamarin.Forms MapControl
+
 ### Not (Later)
 - Use NTS for Geometries
 - Perhaps add animation in an AnimatedViewport which wraps the actual Viewport.
