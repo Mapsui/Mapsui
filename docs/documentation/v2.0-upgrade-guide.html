@@ -69,33 +69,49 @@
             <article class="content wrap" id="_content" data-uid="">
 <h1 id="v20-upgrade-guide">v2.0 upgrade guide</h1>
 
-<p>This is the far from complete upgrade guide from v1.4 to v2.0. 
+<p>This is the incomplete upgrade guide from v1.4 to v2.0. 
 The most apparent changes will be mentioned here. If you notice 
 important things missing then please post an issue.</p>
-<h3 id="net-standard-20">.NET Standard 2.0</h3>
+<h3 id="moved-from-pcl-to-net-standard-20">Moved from PCL to .NET Standard 2.0</h3>
 <p>Look up compatible frameworks in <a href="https://docs.microsoft.com/en-us/dotnet/standard/net-standard#net-implementation-support">this table</a>.</p>
 <h3 id="viewport-moved-from-map-to-mapcontrol-and-is-readonly">Viewport moved from Map to MapControl and is readonly</h3>
 <p>Use MapControl.Navigator instead.</p>
-<h3 id="the-navigateto-methods-moved-to-mapcontrolnavigator">The NavigateTo methods moved to MapControl.Navigator</h3>
+<h3 id="moved-mapcontrolnavigateto-methods-to-mapcontrolnavigator">Moved MapControl.NavigateTo methods to MapControl.Navigator</h3>
 <p>All user map manipulation should go the the Navigator. </p>
-<h3 id="mappanlock-mapzoomlock-and-maprotationlock">Map.PanLock, Map.ZoomLock and map.RotationLock</h3>
+<h3 id="added-mappanlock-mapzoomlock-and-maprotationlock">Added Map.PanLock, Map.ZoomLock and Map.RotationLock</h3>
 <p>The lock fields can be used on all platforms to lock the user from 
 a certain kind of map manipulation.</p>
 <h3 id="added-maplimiter-to-limit-the-extent-to-which-the-user-can-navigate">Added Map.Limiter to limit the extent to which the user can navigate</h3>
-<h3 id="refreshgraphics-refreshdata-and-refresh">RefreshGraphics, RefreshData and Refresh</h3>
+<p>The Limter is an implementation of IViewportLimiter. There are currently
+three limiters part of Mapsui: </p>
 <ul>
-<li>Use RefreshGraphics if you know the data has changed and the graphics needs refreshing.</li>
-<li>Use RefreshData if you know there is new data available in the source.</li>
-<li>Use Refresh if you need to do both.</li>
+<li>ViewportLimiter (default)</li>
+<li>ViewportLimiterKeepWithin</li>
+<li>ViewportLimiterWithoutLimits
+It is also possible to implement your own IViewportLimiter.</li>
 </ul>
-<h3 id="rename-boundingboxgetcentroid-to-centroid">Rename BoundingBox.GetCentroid to Centroid</h3>
-<h3 id="rename-igeometrygetboundingbox-to-boundingbox">Rename IGeometry.GetBoundingBox to BoundingBox</h3>
+<h3 id="added-refreshgraphics-refreshdata-and-refresh">Added RefreshGraphics, RefreshData and Refresh</h3>
+<ul>
+<li>Use RefreshGraphics if you know the data in the layer has changed and the graphics needs refreshing.</li>
+<li>Use RefreshData if you know there is new data available in the source.</li>
+<li>Use Refresh if you need to do both.
+These methods should only be needed if you manipulate data somehow in your own code.</li>
+</ul>
+<h3 id="renamed-boundingbox-getcentroid-to-centroid-and-getboundingbox-to-boundingbox">Renamed BoundingBox GetCentroid to Centroid and GetBoundingBox to BoundingBox</h3>
+<p>Turned these methods into proper properties making user code a bit more compact.</p>
 <h3 id="the-info-event-was-moved-from-map-to-mapcontrol">The Info event was moved from Map to MapControl</h3>
-<h3 id="remove-the-infolayer-list-and-add-an-infolayer-boolean-on-ilayer">Remove the InfoLayer list and add an InfoLayer boolean on ILayer</h3>
-<h3 id="remove-the-hoverlayer-method-it-is-not-crossplatform-and-can-affect-performance">Remove the HoverLayer method. It is not crossplatform and can affect performance.</h3>
+<p>The MapControl contains most other events as well</p>
+<h3 id="removed-the-infolayer-list-and-add-an-infolayer-boolean-on-ilayer">Removed the InfoLayer list and add an InfoLayer boolean on ILayer</h3>
+<p>To indicate that a layer is a info layer you now need to set it&#39;s 
+InfoLayer property. In v1.4 it had to be added to the list of InfoLayers.</p>
+<h3 id="removed-the-hoverlayer-method">Removed the HoverLayer method.</h3>
+<p>This is because hover could not be implemented crossplatform and could harm performance.
+It it is still possible to implement hover yourself using a direct call to MapControl.GetMapInfo.</p>
 <h3 id="invert-label-alignment-bottomtop">Invert label alignment bottom/top.</h3>
+<p>This was incorrect in v1.4. This will not cause a compile error so don&#39;t forget
+to do a search-replace to fix it.</p>
 <h3 id="removed-zoominzoomout-from-wpf-mapcontrol">Removed ZoomIn/ZoomOut from WPF MapControl</h3>
-<p>Use the ZoomIn/ZoomOut methode on the navigator</p>
+<p>Use the ZoomIn/ZoomOut methode on the navigator.</p>
 </article>
           </div>
           
