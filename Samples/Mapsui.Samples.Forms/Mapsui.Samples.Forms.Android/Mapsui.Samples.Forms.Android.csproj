@@ -43,11 +43,11 @@
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BruTile, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\BruTile.2.0.1\lib\netstandard1.1\BruTile.dll</HintPath>
+    <Reference Include="BruTile, Version=2.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\BruTile.2.0.2\lib\netstandard1.1\BruTile.dll</HintPath>
     </Reference>
-    <Reference Include="BruTile.MbTiles, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\BruTile.MbTiles.2.0.1\lib\netstandard1.1\BruTile.MbTiles.dll</HintPath>
+    <Reference Include="BruTile.MbTiles, Version=2.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\BruTile.MbTiles.2.0.2\lib\netstandard1.1\BruTile.MbTiles.dll</HintPath>
     </Reference>
     <Reference Include="ConcurrentCollections, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\ConcurrentHashSet.1.0.2\lib\netstandard1.0\ConcurrentCollections.dll</HintPath>
