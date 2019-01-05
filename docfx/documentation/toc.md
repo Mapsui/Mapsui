@@ -4,6 +4,7 @@
 ## [Samples](samples.md)
 ## [Roadmap](Roadmap.md)
 ## [Mapsui 2.0](Mapsui-2.0.md)
+## [v2.0 Upgrade Guide](v2.0-upgrade-guide.md)
 # How Things Work
 ## [Mapsui Components](Mapsui-Components.md)
 ## [Renderers](Renderers.md)

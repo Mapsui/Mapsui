@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class WidgetTouch
    ">
-    <meta name="generator" content="docfx 2.40.3.0">
+    <meta name="generator" content="docfx 2.40.7.0">
     
     <link rel="shortcut icon" href="../images/favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -102,7 +102,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static IWidget GetTouchedWidget(Point screenPosition, Point startScreenPosition, IEnumerable&lt;IWidget&gt; widgets)</code></pre>
+    <pre><code class="lang-csharp hljs">public static IEnumerable&lt;IWidget&gt; GetTouchedWidget(Point screenPosition, Point startScreenPosition, IEnumerable&lt;IWidget&gt; widgets)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -144,7 +144,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Mapsui.Widgets.IWidget.html">IWidget</a></td>
+        <td><span class="xref">IEnumerable</span>&lt;<a class="xref" href="Mapsui.Widgets.IWidget.html">IWidget</a>&gt;</td>
         <td><p>Returns the first Widget in the list that contains the screenPosition
 within it&apos;s Envelope. Returns null if there are none.</p>
 </td>

@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class Hyperlink
    ">
-    <meta name="generator" content="docfx 2.40.3.0">
+    <meta name="generator" content="docfx 2.40.7.0">
     
     <link rel="shortcut icon" href="../images/favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -141,7 +141,7 @@
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Widgets_Hyperlink_Url.md&amp;value=---%0Auid%3A%20Mapsui.Widgets.Hyperlink.Url%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Widgets/Hyperlink.cs/#L8">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Widgets/Hyperlink.cs/#L9">View Source</a>
   </span>
   <a id="Mapsui_Widgets_Hyperlink_Url_" data-uid="Mapsui.Widgets.Hyperlink.Url*"></a>
   <h4 id="Mapsui_Widgets_Hyperlink_Url" data-uid="Mapsui.Widgets.Hyperlink.Url">Url</h4>
@@ -173,7 +173,7 @@
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Widgets_Hyperlink_HandleWidgetTouched_Mapsui_INavigator_Mapsui_Geometries_Point_.md&amp;value=---%0Auid%3A%20Mapsui.Widgets.Hyperlink.HandleWidgetTouched(Mapsui.INavigator%2CMapsui.Geometries.Point)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Widgets/Hyperlink.cs/#L10">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Widgets/Hyperlink.cs/#L13">View Source</a>
   </span>
   <a id="Mapsui_Widgets_Hyperlink_HandleWidgetTouched_" data-uid="Mapsui.Widgets.Hyperlink.HandleWidgetTouched*"></a>
   <h4 id="Mapsui_Widgets_Hyperlink_HandleWidgetTouched_Mapsui_INavigator_Mapsui_Geometries_Point_" data-uid="Mapsui.Widgets.Hyperlink.HandleWidgetTouched(Mapsui.INavigator,Mapsui.Geometries.Point)">HandleWidgetTouched(INavigator, Point)</h4>
@@ -181,7 +181,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override void HandleWidgetTouched(INavigator navigator, Point position)</code></pre>
+    <pre><code class="lang-csharp hljs">public override bool HandleWidgetTouched(INavigator navigator, Point position)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -205,8 +205,54 @@
       </tr>
     </tbody>
   </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <h5 class="overrides">Overrides</h5>
   <div><a class="xref" href="Mapsui.Widgets.Widget.html#Mapsui_Widgets_Widget_HandleWidgetTouched_Mapsui_INavigator_Mapsui_Geometries_Point_">Widget.HandleWidgetTouched(INavigator, Point)</a></div>
+  <h3 id="events">Events
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Widgets_Hyperlink_Touched.md&amp;value=---%0Auid%3A%20Mapsui.Widgets.Hyperlink.Touched%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Widgets/Hyperlink.cs/#L11">View Source</a>
+  </span>
+  <h4 id="Mapsui_Widgets_Hyperlink_Touched" data-uid="Mapsui.Widgets.Hyperlink.Touched">Touched</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;HyperlinkWidgetArguments&gt; Touched</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">EventHandler</span>&lt;<a class="xref" href="Mapsui.Widgets.HyperlinkWidgetArguments.html">HyperlinkWidgetArguments</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <h3 id="implements">Implements</h3>
   <div>
       <a class="xref" href="Mapsui.Widgets.IWidget.html">IWidget</a>
@@ -222,7 +268,7 @@
                     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Widgets_Hyperlink.md&amp;value=---%0Auid%3A%20Mapsui.Widgets.Hyperlink%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Widgets/Hyperlink.cs/#L6" class="contribution-link">View Source</a>
+                    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Widgets/Hyperlink.cs/#L7" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

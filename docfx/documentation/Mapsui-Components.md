@@ -3,9 +3,9 @@
 If you install the NuGet package into your app these assemblies are added:
 
 - Mapsui.UI.{platform} - Platform specific UI. Contains the MapControl
-- Mapsui.Rendering.Skia (.NET Standard 1.3)
-- Mapsui (.NET Standard 1.3)
-- Mapsui.Geometries (.NET Standard 1.3)
+- Mapsui.Rendering.Skia
+- Mapsui
+- Mapsui.Geometries
 - On Windows desktop Mapsui.Rendering.Xaml is added.
 - A number of nuget dependencies
 
