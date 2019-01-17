@@ -225,8 +225,8 @@ namespace Mapsui.UI.Forms
 
         public void RefreshGraphics()
         {
-            if (GRContext != null)
-                RunOnUIThread(() => InvalidateSurface());
+            // Could this be null before Home is called? If so we should change the logic.
+            if (GRContext != null) RunOnUIThread(InvalidateSurface); 
         }
 
         /// <summary>
