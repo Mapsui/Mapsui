@@ -27,7 +27,6 @@ namespace Mapsui.UI.Wpf
     public partial class MapControl : INotifyPropertyChanged
     {
         private Map _map;
-
         private double _unSnapRotationDegrees;
 
         /// <summary>
@@ -216,14 +215,29 @@ namespace Mapsui.UI.Wpf
             }
             else if (e.PropertyName == nameof(Layers.Layer.DataSource))
             {
-                RefreshData(); // There is a new datasource so let's fetch the new data.
+                Refresh(); // There is a new DataSource so let's fetch the new data.
+            }
+            else if (e.PropertyName == nameof(Map.Envelope))
+            {
+                CallHomeIfNeeded();
+                Refresh(); 
             }
             else if (e.PropertyName == nameof(Map.Layers))
             {
+                CallHomeIfNeeded();
                 Refresh();
             }
         }
         // ReSharper restore RedundantNameQualifier
+
+        public void CallHomeIfNeeded()
+        {
+            if (_map != null && !_map.Initialized && _viewport.HasSize && _map?.Envelope != null)
+            {
+                _map.Home(Navigator);
+                _map.Initialized = true;
+            }
+        }
 
         /// <summary>
         /// Map holding data for which is shown in this MapControl
@@ -247,7 +261,7 @@ namespace Mapsui.UI.Wpf
                     Navigator = new Navigator(_map, _viewport);
                     _viewport.Map = Map;
                     _viewport.Limiter = Map.Limiter;
-                    if (Viewport.HasSize) _map.Home(Navigator); // If size is not set yet Home will be called at set size. This is okay.
+                    CallHomeIfNeeded();
                 }
 
                 Refresh();
@@ -269,7 +283,7 @@ namespace Mapsui.UI.Wpf
             return new Point(coordinateInPixels.X / PixelDensity, coordinateInPixels.Y / PixelDensity);
         }
 
-        private void OnViewportInitialized()
+        private void OnViewportSizeInitialized()
         {
             ViewportInitialized?.Invoke(this, EventArgs.Empty);
         }
@@ -371,13 +385,8 @@ namespace Mapsui.UI.Wpf
         {
             var hadSize = Viewport.HasSize;
             _viewport.SetSize(ViewportWidth, ViewportHeight);
-
-            if (!hadSize && Viewport.HasSize) // Is Size Initialized?
-            {
-                Map?.Home(Navigator); // When Map is null here Home will be called on Map set. So this is okay.
-                OnViewportInitialized();
-            }
-
+            if (hadSize && Viewport.HasSize) OnViewportSizeInitialized();
+            CallHomeIfNeeded();
             Refresh();
         }
 

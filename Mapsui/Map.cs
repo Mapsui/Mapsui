@@ -50,6 +50,11 @@ namespace Mapsui
         }
 
         /// <summary>
+        /// To register if the initial Home call has been done.
+        /// </summary>
+        public bool Initialized { get; set; }
+
+        /// <summary>
         /// When true the user can not pan (move) the map.
         /// </summary>
         public bool PanLock { get; set; }

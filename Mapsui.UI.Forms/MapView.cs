@@ -336,8 +336,8 @@ namespace Mapsui.UI.Forms
         /// </summary>
         public bool IsNorthingButtonVisible
         {
-            get { return (bool)GetValue(IsNorthingButtonVisibleProperty); }
-            set { SetValue(IsNorthingButtonVisibleProperty, value); }
+            get => (bool)GetValue(IsNorthingButtonVisibleProperty);
+            set => SetValue(IsNorthingButtonVisibleProperty, value);
         }
 
         /// <summary>
@@ -347,8 +347,8 @@ namespace Mapsui.UI.Forms
         /// </summary>
         public bool UseDoubleTap
         {
-            get { return (bool)GetValue(UseDoubleTapProperty); }
-            set { SetValue(UseDoubleTapProperty, value); }
+            get => (bool)GetValue(UseDoubleTapProperty);
+            set => SetValue(UseDoubleTapProperty, value);
         }
 
         /// <summary>
@@ -362,7 +362,7 @@ namespace Mapsui.UI.Forms
         public INavigator Navigator => _mapControl.Navigator;
 
         /// <summary>
-        /// Underlaying MapControl
+        /// Underlying MapControl
         /// </summary>
         internal IMapControl MapControl => _mapControl;
 
