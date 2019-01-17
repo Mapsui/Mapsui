@@ -225,7 +225,8 @@ namespace Mapsui.UI.Forms
 
         public void RefreshGraphics()
         {
-            RunOnUIThread(() => InvalidateSurface());
+            if (GRContext != null)
+                RunOnUIThread(() => InvalidateSurface());
         }
 
         /// <summary>
