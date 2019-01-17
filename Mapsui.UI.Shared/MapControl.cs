@@ -332,7 +332,20 @@ namespace Mapsui.UI.Wpf
         }
 
         /// <summary>
-        /// Check, if a widget or feature at a given screen position is clicked/tapped
+        /// Check if a widget or feature at a given screen position is clicked/tapped
+        /// </summary>
+        /// <param name="screenPosition">Screen position to check for widgets and features</param>
+        /// <param name="startScreenPosition">Screen position of Viewport/MapControl</param>
+        /// <param name="numTaps">Number of clickes/taps</param>
+        /// <returns>True, if something done </returns>
+        private MapInfoEventArgs InvokeInfo(Point screenPosition, Point startScreenPosition, int numTaps)
+        {
+            return InvokeInfo(Map.Layers.Where(l => l.IsMapInfoLayer), Map.GetWidgetsOfMapAndLayers(), Viewport,
+                screenPosition, startScreenPosition, _renderer.SymbolCache, WidgetTouched, numTaps);
+        }
+
+        /// <summary>
+        /// Check if a widget or feature at a given screen position is clicked/tapped
         /// </summary>
         /// <param name="layers">The layers to query for MapInfo</param>
         /// <param name="widgets">The Map widgets</param>

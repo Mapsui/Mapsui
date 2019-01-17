@@ -65,15 +65,13 @@ namespace Mapsui.UI.Android
         private void OnDoubleTapped(object sender, GestureDetector.DoubleTapEventArgs e)
         {
             var position = GetScreenPosition(e.Event, this);
-            OnInfo(InvokeInfo(Map.Layers.Where(l => l.IsMapInfoLayer), Map.GetWidgetsOfMapAndLayers(), Viewport, 
-                position, position, Renderer.SymbolCache, WidgetTouched, 2));
+            OnInfo(InvokeInfo(position, position, 2));
         }
 
         private void OnSingleTapped(object sender, GestureDetector.SingleTapConfirmedEventArgs e)
         {
             var position = GetScreenPosition(e.Event, this);
-            OnInfo(InvokeInfo(Map.Layers.Where(l => l.IsMapInfoLayer), Map.GetWidgetsOfMapAndLayers(), Viewport, 
-                position, position, Renderer.SymbolCache, WidgetTouched, 1));
+            OnInfo(InvokeInfo(position, position, 1));
         }
 
         protected override void OnSizeChanged(int width, int height, int oldWidth, int oldHeight)
