@@ -234,7 +234,7 @@ namespace Mapsui.UI.Wpf
         {
             if (_map != null && !_map.Initialized && _viewport.HasSize && _map?.Envelope != null)
             {
-                _map.Home(Navigator);
+                _map.Home?.Invoke(Navigator);
                 _map.Initialized = true;
             }
         }
