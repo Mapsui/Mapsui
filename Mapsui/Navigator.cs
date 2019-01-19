@@ -28,7 +28,8 @@ namespace Mapsui
             _viewport.SetResolution(resolution);
 
             _viewport.SetCenter(extent.Centroid);
-            
+
+            _map.Initialized = true;
             _map.RefreshData(_viewport.Extent, _viewport.Resolution, true);
         }
 
@@ -40,6 +41,7 @@ namespace Mapsui
         {
             _viewport.SetResolution(resolution);
 
+            _map.Initialized = true;
             _map.RefreshData(_viewport.Extent, _viewport.Resolution, true);
         }
 
@@ -50,7 +52,8 @@ namespace Mapsui
         public void CenterOn(Point center)
         {
             _viewport.SetCenter(center);
-            
+
+            _map.Initialized = true;
             _map.RefreshData(_viewport.Extent, _viewport.Resolution, true);
         }
 
@@ -60,6 +63,7 @@ namespace Mapsui
             _viewport.SetCenter(center);
             _viewport.SetResolution(resolution);
 
+            _map.Initialized = true;
             _map.RefreshData(_viewport.Extent, _viewport.Resolution, true);
         }
 
@@ -71,7 +75,8 @@ namespace Mapsui
         public void CenterOn(double x, double y)
         {
             _viewport.SetCenter(x, y);
- 
+
+            _map.Initialized = true;
             _map.RefreshData(_viewport.Extent, _viewport.Resolution, true);
         }
 
@@ -83,6 +88,7 @@ namespace Mapsui
         {
             _viewport.SetRotation(rotation);
 
+            _map.Initialized = true;
             _map.RefreshData(_viewport.Extent, _viewport.Resolution, true);
         }
 
@@ -90,7 +96,8 @@ namespace Mapsui
         {
             var resolution = ZoomHelper.ZoomIn(_map.Resolutions, _viewport.Resolution);
             _viewport.SetResolution(resolution);
-            
+
+            _map.Initialized = true;
             _map.RefreshData(_viewport.Extent, _viewport.Resolution, true);
         }
 
@@ -99,6 +106,7 @@ namespace Mapsui
             var resolution = ZoomHelper.ZoomOut(_map.Resolutions, _viewport.Resolution);
             _viewport.SetResolution(resolution);
 
+            _map.Initialized = true;
             _map.RefreshData(_viewport.Extent, _viewport.Resolution, true);
         }
 
@@ -107,6 +115,7 @@ namespace Mapsui
             var resolution = ZoomHelper.ZoomIn(_map.Resolutions, _viewport.Resolution);
             ZoomTo(resolution, centerOfZoom);
 
+            _map.Initialized = true;
             _map.RefreshData(_viewport.Extent, _viewport.Resolution, true);
         }
 
@@ -115,6 +124,7 @@ namespace Mapsui
             var resolution = ZoomHelper.ZoomOut(_map.Resolutions, _viewport.Resolution);
             ZoomTo(resolution, centerOfZoom);
 
+            _map.Initialized = true;
             _map.RefreshData(_viewport.Extent, _viewport.Resolution, true);
         }
 
@@ -122,6 +132,7 @@ namespace Mapsui
         {
             NavigateTo(_map.Envelope, scaleMethod);
 
+            _map.Initialized = true;
             _map.RefreshData(_viewport.Extent, _viewport.Resolution, true);
         }
 
@@ -138,6 +149,7 @@ namespace Mapsui
                 _viewport.Width - centerOfZoom.X,
                 _viewport.Height - centerOfZoom.Y));
 
+            _map.Initialized = true;
             _map.RefreshData(_viewport.Extent, _viewport.Resolution, false);
         }
     }
