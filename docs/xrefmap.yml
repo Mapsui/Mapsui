@@ -8773,6 +8773,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.Map.InfoLayers
   nameWithType: Map.InfoLayers
+- uid: Mapsui.Map.Initialized
+  name: Initialized
+  href: api/Mapsui.Map.html#Mapsui_Map_Initialized
+  commentId: P:Mapsui.Map.Initialized
+  fullName: Mapsui.Map.Initialized
+  nameWithType: Map.Initialized
+- uid: Mapsui.Map.Initialized*
+  name: Initialized
+  href: api/Mapsui.Map.html#Mapsui_Map_Initialized_
+  commentId: Overload:Mapsui.Map.Initialized
+  isSpec: "True"
+  fullName: Mapsui.Map.Initialized
+  nameWithType: Map.Initialized
 - uid: Mapsui.Map.Layers
   name: Layers
   href: api/Mapsui.Map.html#Mapsui_Map_Layers
@@ -21142,6 +21155,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Android.MapControl.MapControl
   nameWithType: MapControl.MapControl
+- uid: Mapsui.UI.Android.MapControl.CallHomeIfNeeded
+  name: CallHomeIfNeeded()
+  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_CallHomeIfNeeded
+  commentId: M:Mapsui.UI.Android.MapControl.CallHomeIfNeeded
+  fullName: Mapsui.UI.Android.MapControl.CallHomeIfNeeded()
+  nameWithType: MapControl.CallHomeIfNeeded()
+- uid: Mapsui.UI.Android.MapControl.CallHomeIfNeeded*
+  name: CallHomeIfNeeded
+  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_CallHomeIfNeeded_
+  commentId: Overload:Mapsui.UI.Android.MapControl.CallHomeIfNeeded
+  isSpec: "True"
+  fullName: Mapsui.UI.Android.MapControl.CallHomeIfNeeded
+  nameWithType: MapControl.CallHomeIfNeeded
 - uid: Mapsui.UI.Android.MapControl.Clear
   name: Clear()
   href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_Clear
@@ -22027,6 +22053,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Forms.MapControl.MapControl
   nameWithType: MapControl.MapControl
+- uid: Mapsui.UI.Forms.MapControl.CallHomeIfNeeded
+  name: CallHomeIfNeeded()
+  href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_CallHomeIfNeeded
+  commentId: M:Mapsui.UI.Forms.MapControl.CallHomeIfNeeded
+  fullName: Mapsui.UI.Forms.MapControl.CallHomeIfNeeded()
+  nameWithType: MapControl.CallHomeIfNeeded()
+- uid: Mapsui.UI.Forms.MapControl.CallHomeIfNeeded*
+  name: CallHomeIfNeeded
+  href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_CallHomeIfNeeded_
+  commentId: Overload:Mapsui.UI.Forms.MapControl.CallHomeIfNeeded
+  isSpec: "True"
+  fullName: Mapsui.UI.Forms.MapControl.CallHomeIfNeeded
+  nameWithType: MapControl.CallHomeIfNeeded
 - uid: Mapsui.UI.Forms.MapControl.Clear
   name: Clear()
   href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_Clear
@@ -24285,6 +24324,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.iOS.MapControl.MapControl
   nameWithType: MapControl.MapControl
+- uid: Mapsui.UI.iOS.MapControl.CallHomeIfNeeded
+  name: CallHomeIfNeeded()
+  href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_CallHomeIfNeeded
+  commentId: M:Mapsui.UI.iOS.MapControl.CallHomeIfNeeded
+  fullName: Mapsui.UI.iOS.MapControl.CallHomeIfNeeded()
+  nameWithType: MapControl.CallHomeIfNeeded()
+- uid: Mapsui.UI.iOS.MapControl.CallHomeIfNeeded*
+  name: CallHomeIfNeeded
+  href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_CallHomeIfNeeded_
+  commentId: Overload:Mapsui.UI.iOS.MapControl.CallHomeIfNeeded
+  isSpec: "True"
+  fullName: Mapsui.UI.iOS.MapControl.CallHomeIfNeeded
+  nameWithType: MapControl.CallHomeIfNeeded
 - uid: Mapsui.UI.iOS.MapControl.Clear
   name: Clear()
   href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_Clear
@@ -26279,6 +26331,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Wpf.MapControl.MapControl
   nameWithType: MapControl.MapControl
+- uid: Mapsui.UI.Wpf.MapControl.CallHomeIfNeeded
+  name: CallHomeIfNeeded()
+  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_CallHomeIfNeeded
+  commentId: M:Mapsui.UI.Wpf.MapControl.CallHomeIfNeeded
+  fullName: Mapsui.UI.Wpf.MapControl.CallHomeIfNeeded()
+  nameWithType: MapControl.CallHomeIfNeeded()
+- uid: Mapsui.UI.Wpf.MapControl.CallHomeIfNeeded*
+  name: CallHomeIfNeeded
+  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_CallHomeIfNeeded_
+  commentId: Overload:Mapsui.UI.Wpf.MapControl.CallHomeIfNeeded
+  isSpec: "True"
+  fullName: Mapsui.UI.Wpf.MapControl.CallHomeIfNeeded
+  nameWithType: MapControl.CallHomeIfNeeded
 - uid: Mapsui.UI.Wpf.MapControl.Clear
   name: Clear()
   href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_Clear

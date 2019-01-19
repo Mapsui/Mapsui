@@ -78,6 +78,13 @@ important things missing then please post an issue.</p>
 <p>Use MapControl.Navigator instead.</p>
 <h4 id="moved-mapcontrolnavigateto-methods-to-mapcontrolnavigator">Moved MapControl.NavigateTo methods to MapControl.Navigator</h4>
 <p>All user map manipulation should go the the Navigator. </p>
+<h4 id="introduced-maphome-to-initialze-the-map-viewport">Introduced Map.Home to initialze the map viewport</h4>
+<p>There is now a Home delegate on the Map object that should be used to set
+the initial state of the map. </p>
+<pre><code class="lang-c#">MapControl.Map.Home = n =&gt; n.NavigateTo(myCenter, myResolution);
+</code></pre><p><strong>Reason:</strong> This is because in some cases the Navigate
+methods depend on the envelope and resolutions of the layers and in some
+cases it takes time for these layers to load their data.</p>
 <h4 id="added-mappanlock-mapzoomlock-and-maprotationlock">Added Map.PanLock, Map.ZoomLock and Map.RotationLock</h4>
 <p>The lock fields can be used on all platforms to lock the user from 
 a certain kind of map manipulation.</p>

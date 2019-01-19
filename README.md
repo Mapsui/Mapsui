@@ -9,7 +9,7 @@
 | Build docs | [![Build status](https://ci.appveyor.com/api/projects/status/c8hcfeoafmf51gin/branch/master?svg=true)](https://ci.appveyor.com/project/pauldendulk/mapsui-373p1/branch/master) |
 
 ## News
-- 2019 januari 5: v2.0-beta.13 now contains a Xamanin.Forms MapControl which is published as a [separate nuget package](https://www.nuget.org/packages/Mapsui.Forms/). It also contains a MapView component which contains additional functionality out of the box. 
+- 2019 januari 5: As of v2.0 beta.13 there is a [separate nuget package](https://www.nuget.org/packages/Mapsui.Forms/) for Xamanin.Forms. It contains a MapControl and also a MapView component which has additional functionality out of the box. 
 - 2019 januari 5: Added a [v2.0 upgrade guide](https://mapsui.github.io/Mapsui/documentation/v2.0-upgrade-guide.html)
 
 ## Mapsui (pronounced map-su-wii)

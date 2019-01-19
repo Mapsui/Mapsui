@@ -1209,7 +1209,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Map.html",
-          "hash": "Pw7gk4t0KrG1lkG414BpAA=="
+          "hash": "YBZ4/vzec5CEFElHssr8YQ=="
         }
       },
       "is_incremental": false,
@@ -1221,7 +1221,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Navigator.html",
-          "hash": "vV2pK6W4fNvl6H2NYWEIzw=="
+          "hash": "mijrFAFDgFgyxBmtgy5jSw=="
         }
       },
       "is_incremental": false,
@@ -3501,7 +3501,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Android.MapControl.html",
-          "hash": "H6g8+2DV/oZmVixfEd4xow=="
+          "hash": "gEIl8AYHnqS1eK8bM9XePQ=="
         }
       },
       "is_incremental": false,
@@ -3681,7 +3681,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Forms.MapControl.html",
-          "hash": "1QDp+sS0mRIl6DN7Bxa7Jg=="
+          "hash": "ZB/rz5fPnzFOs8ZRNl0ueg=="
         }
       },
       "is_incremental": false,
@@ -4125,7 +4125,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Wpf.MapControl.html",
-          "hash": "T48a0IWp4QInhzjgTHtHLQ=="
+          "hash": "uCIbIjGU+7z5+3nOJWOk8w=="
         }
       },
       "is_incremental": false,
@@ -4233,7 +4233,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.iOS.MapControl.html",
-          "hash": "9Pg0n/vetgTWKljCDrnRlQ=="
+          "hash": "NyQQ7mp3EJlbQ4O+WGi31A=="
         }
       },
       "is_incremental": false,
@@ -5000,7 +5000,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/v2.0-upgrade-guide.html",
-          "hash": "htZJc+XNITZ50dwt0fChSA=="
+          "hash": "vR1Hz97hWCFqUvKABt7a2w=="
         }
       },
       "is_incremental": false,
@@ -5077,11 +5077,11 @@
           "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build"
         },
-        "ConceptualDocumentProcessor": {
+        "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build"
         },
-        "ManagedReferenceDocumentProcessor": {
+        "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build"
         },
