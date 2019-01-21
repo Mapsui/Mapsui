@@ -3,7 +3,7 @@ using SkiaSharp;
 
 namespace Mapsui.Rendering.Skia
 {
-    static class SkiaExtensions
+    public static class SkiaExtensions
     {
         public static SKColor ToSkia(this Color color, float layerOpacity)
         {

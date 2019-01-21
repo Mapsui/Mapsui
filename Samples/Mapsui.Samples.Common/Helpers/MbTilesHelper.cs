@@ -16,7 +16,7 @@ namespace Mapsui.Samples.Common.Helpers
         {
             // So what is this all about?
             // I don't know how to access the file as part of the apk (let me know if there is a simple way)
-            // So I store them as embbeded resources and copy them to disk on startup.
+            // So I store them as embedded resources and copy them to disk on startup.
             // (Is there a way to access sqlite files directly as memory stream?).
 
             var embeddedResourcesPath = "Mapsui.Samples.Common.EmbeddedResources.";
@@ -24,11 +24,11 @@ namespace Mapsui.Samples.Common.Helpers
 
             foreach (var mbTileFile in mbTileFiles)
             {
-                CopyToAndroidStorage(embeddedResourcesPath, mbTileFile, createFile);
+                CopyEmbeddedResourceToStorage(embeddedResourcesPath, mbTileFile, createFile);
             }
         }
 
-        private static void CopyToAndroidStorage(string embeddedResourcesPath, string mbTilesFile,
+        private static void CopyEmbeddedResourceToStorage(string embeddedResourcesPath, string mbTilesFile,
             Func<string, Stream> createFile)
         {
             var assembly = typeof(PointsSample).GetTypeInfo().Assembly;

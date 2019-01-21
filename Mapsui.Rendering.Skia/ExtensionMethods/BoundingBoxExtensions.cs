@@ -3,7 +3,7 @@ using SkiaSharp;
 
 namespace Mapsui.Rendering.Skia
 {
-    static class BoundingBoxExtensions
+    public static class BoundingBoxExtensions
     {
         public static SKRect ToSkia(this BoundingBox boundingBox)
         {

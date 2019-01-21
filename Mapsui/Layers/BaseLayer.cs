@@ -24,9 +24,25 @@ namespace Mapsui.Layers
         private IStyle _style;
         private object _tag;
         private ITransformation _transformation;
-        private readonly Transformer _transformer = new Transformer();
         private BoundingBox _envelope;
 
+        public Transformer Transformer { get; } = new Transformer();
+
+        /// <summary>
+        /// Get a layer's styles
+        /// </summary>
+        /// <param name="layer">Layer, for which styles should be returned</param>
+        /// <returns>Enumerable with styles belonging to layer</returns>
+        public static IEnumerable<IStyle> GetLayerStyles(ILayer layer)
+        {
+            if (layer == null) return new IStyle[0];
+            var style = layer.Style as StyleCollection;
+            return style?.ToArray() ?? new[] { layer.Style };
+        }
+
+        /// <summary>
+        /// Creates a BaseLayer without a name
+        /// </summary>
         protected BaseLayer()
         {
             Name = "Layer";
@@ -38,19 +54,30 @@ namespace Mapsui.Layers
             Id = _instanceCounter++;
         }
 
+        /// <summary>
+        /// Creates a BaseLayer with a name
+        /// </summary>
+        /// <param name="name">Name for this layer</param>
         protected BaseLayer(string name)
             : this()
         {
             Name = name;
         }
 
+        /// <summary>
+        /// Called whenever a property changed
+        /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
+        /// <summary>
+        /// DataChanged should be triggered by any data changes
+        /// </summary>
+        public event DataChangedEventHandler DataChanged;
+
+        /// <inheritdoc />
         public int Id { get; }
 
-        /// <summary>
-        /// Gets or sets an arbitrary object value that can be used to store custom information about this element
-        /// </summary>
+        /// <inheritdoc />
         public object Tag 
         { 
             get => _tag;
@@ -61,9 +88,7 @@ namespace Mapsui.Layers
             }
         }
 
-        /// <summary>
-        /// Minimum visibility zoom, including this value
-        /// </summary>
+        /// <inheritdoc />
         public double MinVisible
         {
             get => _minVisible;
@@ -74,9 +99,7 @@ namespace Mapsui.Layers
             }
         }
 
-        /// <summary>
-        /// Maximum visibility zoom, excluding this value
-        /// </summary>
+        /// <inheritdoc />
         public double MaxVisible
         {
             get => _maxVisible;
@@ -87,9 +110,7 @@ namespace Mapsui.Layers
             }
         }
 
-        /// <summary>
-        /// Specified whether the layer is rendered or not
-        /// </summary>
+        /// <inheritdoc />
         public bool Enabled
         {
             get => _enabled;
@@ -101,9 +122,7 @@ namespace Mapsui.Layers
             }
         }
 
-        /// <summary>
-        /// Gets or sets the name of the layer
-        /// </summary>
+        /// <inheritdoc />
         public string Name
         {
             get => _name;
@@ -114,20 +133,19 @@ namespace Mapsui.Layers
             }
         }
 
-        /// <summary>
-        /// Gets or sets the CRS 
-        /// </summary>
+        /// <inheritdoc />
         public string CRS
         {
             get => _crs;
             set
             {
                 _crs = value;
-                _transformer.ToCrs = CRS;
+                Transformer.ToCrs = CRS;
                 OnPropertyChanged(nameof(CRS));
             }
         }
 
+        /// <inheritdoc />
         public bool Exclusive
         {
             get => _exclusive;
@@ -138,6 +156,7 @@ namespace Mapsui.Layers
             }
         }
 
+        /// <inheritdoc />
         public double Opacity
         {
             get => _opacity;
@@ -148,6 +167,7 @@ namespace Mapsui.Layers
             }
         }
 
+        /// <inheritdoc />
         public bool Busy
         {
             get => _busy;
@@ -159,9 +179,7 @@ namespace Mapsui.Layers
             }
         }
 
-        /// <summary>
-        /// Gets or sets the rendering style of the vector layer.
-        /// </summary>
+        /// <inheritdoc />
         public IStyle Style
         {
             get => _style;
@@ -172,25 +190,19 @@ namespace Mapsui.Layers
             }
         }
 
-        /// <summary>
-        /// The coordinate transformation
-        /// </summary>
+        /// <inheritdoc />
         public ITransformation Transformation
         {
             get => _transformation;
             set
             {
                 _transformation = value;
-                _transformer.Transformation = _transformation;
+                Transformer.Transformation = _transformation;
                 OnPropertyChanged(nameof(Transformation));
             }
         }
 
-        public Transformer Transformer
-        {
-            get => _transformer;
-        }
-
+       
         /// <summary>
         /// Returns the envelope of all avaiable data in the layer
         /// </summary>
@@ -204,16 +216,23 @@ namespace Mapsui.Layers
             }
         }
 
+        /// <inheritdoc />
+        public Hyperlink Attribution { get; set; }
+
+        /// <inheritdoc />
+        public virtual IReadOnlyList<double> Resolutions { get; } = new List<double>();
+
+        /// <inheritdoc />
+        public bool IsMapInfoLayer { get; set; }
+
+        /// <inheritdoc />
         public abstract IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution);
 
-        public abstract void AbortFetch();
+        /// <inheritdoc />
 
-        public abstract void ViewChanged(bool majorChange, BoundingBox extent, double resolution);
+        public abstract void RefreshData(BoundingBox extent, double resolution, bool majorChange);
 
-        public event DataChangedEventHandler DataChanged;
-
-        public abstract void ClearCache();
-
+        /// <inheritdoc />
         public virtual bool? IsCrsSupported(string crs)
         {
             return null;
@@ -233,16 +252,5 @@ namespace Mapsui.Layers
         {
             DataChanged?.Invoke(this, args);
         }
-
-        public static IEnumerable<IStyle> GetLayerStyles(ILayer layer)
-        {
-            if (layer == null) return new IStyle[0];
-            var style = layer.Style as StyleCollection;
-            return style?.ToArray() ?? new[] { layer.Style };
-        }
-
-        public Hyperlink Attribution { get; set; }
-
-        public virtual IReadOnlyList<double> Resolutions { get; } = new List<double>();
     }
 }

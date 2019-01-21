@@ -2,12 +2,22 @@
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
+using Mapsui.Samples.Common;
 using Mapsui.Styles;
+using Mapsui.UI;
 
 namespace Mapsui.Tests.Common.Maps
 {
-    public static class PointInWorldUnits
+    public class PointInWorldUnits : ISample
     {
+        public string Name => "Point in World Units";
+        public string Category => "Tests";
+
+        public void Setup(IMapControl mapControl)
+        {
+            mapControl.Map = CreateMap();
+        }
+
         public static Map CreateMap()
         {
             var features = new Features
@@ -26,8 +36,9 @@ namespace Mapsui.Tests.Common.Maps
             var map = new Map
             {
                 BackColor = Color.Transparent,
-                Viewport = {Center = new Point(0, 0), Width = 200, Height = 100, Resolution = 0.5}
+                Home = n => n.ZoomTo(0.5)
             };
+            
             map.Layers.Add(layer);
             return map;
         }

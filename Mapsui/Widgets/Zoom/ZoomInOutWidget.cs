@@ -3,7 +3,6 @@ using Mapsui.Styles;
 using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using Mapsui.Utilities;
 
 namespace Mapsui.Widgets.Zoom
 {
@@ -27,11 +26,6 @@ namespace Mapsui.Widgets.Zoom
     /// </summary>
     public class ZoomInOutWidget : Widget, INotifyPropertyChanged
     {
-        public ZoomInOutWidget(Map map)
-        {
-            Map = map;
-        }
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
@@ -40,11 +34,6 @@ namespace Mapsui.Widgets.Zoom
         /// of Viewport.
         /// </summary>
         public event EventHandler<WidgetTouchedEventArgs> WidgetTouched;
-
-        /// <summary>
-        /// Viewport to use for all calculations
-        /// </summary>
-        public Map Map { get; }
 
         private float _size = 40;
 
@@ -163,33 +152,28 @@ namespace Mapsui.Widgets.Zoom
             }
         }
 
-        public override void HandleWidgetTouched(Point position)
+        public override bool HandleWidgetTouched(INavigator navigator, Point position)
         {
             var handler = WidgetTouched;
 
             if (handler != null)
             {
-                handler.Invoke(this, new WidgetTouchedEventArgs(position));
-                return;
+                var args = new WidgetTouchedEventArgs(position);
+                handler.Invoke(this, args);
+                return args.Handled;
             }
 
-            if ((Orientation == Orientation.Vertical && position.Y < Envelope.MinY + Envelope.Height * 0.5) ||
-                (Orientation == Orientation.Horizontal && position.X < Envelope.MinX + Envelope.Width * 0.5))
+            if (Orientation == Orientation.Vertical && position.Y < Envelope.MinY + Envelope.Height * 0.5 ||
+                Orientation == Orientation.Horizontal && position.X < Envelope.MinX + Envelope.Width * 0.5)
             {
-                // Zoom in
-                var resolution = ZoomHelper.ZoomIn(Map.Resolutions, Map.Viewport.Resolution);
-                if (Map.ZoomLimits != null && resolution < Map.ZoomLimits.Min)
-                    resolution = Map.ZoomLimits.Min; // todo: put this in a more central place, like ZoomHelper, or put ZoomIn in Viewport
-                Map.NavigateTo(resolution);
+                navigator.ZoomIn();
             }
             else
             {
-                // Zoom out
-                var resolution = ZoomHelper.ZoomOut(Map.Resolutions, Map.Viewport.Resolution);
-                if (Map.ZoomLimits != null && resolution > Map.ZoomLimits.Max)
-                    resolution = Map.ZoomLimits.Max; // todo: see remark about ZoomLimits.min
-                Map.NavigateTo(resolution);
+                navigator.ZoomOut();
             }
+
+            return true;
         }
 
         internal void OnPropertyChanged([CallerMemberName] string name = "")

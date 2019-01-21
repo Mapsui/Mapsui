@@ -4,12 +4,21 @@ using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Styles;
+using Mapsui.UI;
 using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public static class SymbolsInWorldUnitsSample
+    public class SymbolsInWorldUnitsSample : ISample
     {
+        public string Name => "Symbols in World Units";
+        public string Category => "Symbols";
+
+        public void Setup(IMapControl mapControl)
+        {
+            mapControl.Map = CreateMap();
+        }
+
         public static Map CreateMap()
         {
             var map = new Map();

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <Import Project="$(SolutionDir)Mapsui.Common.props" />
+  <Import Project="../Mapsui.Common.props" />
   <PropertyGroup>
-    <TargetFramework>netstandard1.3</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <LangVersion>latest</LangVersion>
@@ -20,5 +20,11 @@
     <ProjectReference Include="..\Mapsui.Geometries\Mapsui.Geometries.csproj" />
     <ProjectReference Include="..\Mapsui\Mapsui.csproj" />
   </ItemGroup>
+
+  <PropertyGroup>
+    <DebugType>full</DebugType>
+    <PackageId>Mapsui</PackageId>
+    <Description>Mapsui</Description>
+  </PropertyGroup>
 
 </Project>

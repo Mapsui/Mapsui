@@ -1,12 +1,22 @@
-﻿using Mapsui.Layers;
+﻿using Mapsui.Geometries;
+using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.Providers.ArcGIS;
 using Mapsui.Providers.ArcGIS.Image;
+using Mapsui.UI;
 
 namespace Mapsui.Samples.Common.Desktop
 {
-    public static class ArcGISImageServiceSample
+    public class ArcGISImageServiceSample : ISample
     {
+        public string Name => "7 ArcGIS image";
+        public string Category => "Desktop";
+
+        public void Setup(IMapControl mapControl)
+        {
+            mapControl.Map = CreateMap();
+        }
+
         public static ILayer CreateLayer()
         {
             return new ImageLayer("ArcGISImageServiceLayer") { DataSource = CreateProvider() };
@@ -14,11 +24,8 @@ namespace Mapsui.Samples.Common.Desktop
 
         public static Map CreateMap()
         {
-            var map = new Map();
+            var map = new Map {Home = n => n.NavigateTo(new Point(0, 0), 1)};
             map.Layers.Add(CreateLayer());
-            map.Viewport.Resolution = 1;
-            map.Viewport.Center.X = 0;
-            map.Viewport.Center.Y = 0;
             return map;
         }
 

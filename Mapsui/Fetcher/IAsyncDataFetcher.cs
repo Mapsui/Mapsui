@@ -17,26 +17,20 @@
 
 using System;
 using BruTile;
-using Mapsui.Geometries;
 
 namespace Mapsui.Fetcher
 {
     public interface IAsyncDataFetcher
     {
-        void AbortFetch();
-
         /// <summary>
-        ///     Indicates that there has been a change in the view of the map
+        /// Aborts the tile fetches that are in progress. If this method is not called
+        /// the threads will terminate naturally. It will just take a little longer.
         /// </summary>
-        /// <param name="majorChange">
-        ///     If true an implementation should always refresh it's data. If false (minorChange) the
-        ///     implemenatation could ignore it.
-        /// </param>
-        /// <param name="extent">The new extent of the visisble map</param>
-        /// <param name="resolution">The new resolution of the visible map</param>
-        void ViewChanged(bool majorChange, BoundingBox extent, double resolution);
-
-        event DataChangedEventHandler DataChanged;
+        void AbortFetch();
+        
+        /// <summary>
+        /// Clear cache of layer
+        /// </summary>
         void ClearCache();
     }
 

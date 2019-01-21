@@ -1,8 +1,16 @@
 ﻿using Mapsui.Geometries;
-using Mapsui.Geometries.Utilities;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Net;
+using Mapsui.Fetcher;
+using Mapsui.Layers;
+using Mapsui.Logging;
+using Mapsui.Rendering;
+using Mapsui.Rendering.Skia;
+using Mapsui.Widgets;
+using System.Runtime.CompilerServices;
 
 #if __ANDROID__
 namespace Mapsui.UI.Android
@@ -11,510 +19,116 @@ namespace Mapsui.UI.iOS
 #elif __UWP__
 namespace Mapsui.UI.Uwp
 #elif __FORMS__
-namespace Mapsui.UI
+namespace Mapsui.UI.Forms
 #else
 namespace Mapsui.UI.Wpf
 #endif
 {
-    public partial class MapControl
+    public partial class MapControl : INotifyPropertyChanged
     {
-        /// <summary>
-        /// Private global variables
-        /// </summary>
-        
-        /// <summary>
-        /// Display scale for converting screen position to real position
-        /// </summary>
-        private float _scale;
+        private Map _map;
+        private double _unSnapRotationDegrees;
 
-        /// <summary>
-        /// Mode of a touched move event
-        /// </summary>
-        private TouchMode _mode = TouchMode.None;
-
-        /// <summary>
-        /// Saver for center before last pinch movement
-        /// </summary>
-        private Geometries.Point _previousCenter = new Geometries.Point();
-
-        /// <summary>
-        /// Saver for angle before last pinch movement
-        /// </summary>
-        private double _previousAngle;
-
-        /// <summary>
-        /// Saver for radius before last pinch movement
-        /// </summary>
-        private double _previousRadius = 1f;
-
-        /// <summary>
-        /// Events
-        /// </summary>
-
-        /// <summary>
-        /// TouchStart is called, when user press a mouse button or touch the display
-        /// </summary>
-        public event EventHandler<TouchedEventArgs> TouchStarted;
-
-        /// <summary>
-        /// TouchEnd is called, when user release a mouse button or doesn't touch display anymore
-        /// </summary>
-        public event EventHandler<TouchedEventArgs> TouchEnded;
-
-        /// <summary>
-        /// TouchMove is called, when user move mouse over map (independent from mouse button state) or move finger on display
-        /// </summary>
-#if __WPF__
-        public new event EventHandler<TouchedEventArgs> TouchMove;
-#else
-        public event EventHandler<TouchedEventArgs> TouchMove;
-#endif
-
-        /// <summary>
-        /// Hover is called, when user move mouse over map without pressing mouse button
-        /// </summary>
-#if __ANDROID__
-        public new event EventHandler<HoveredEventArgs> Hovered;
-#else
-        public event EventHandler<HoveredEventArgs> Hovered;
-#endif
-
-        /// <summary>
-        /// Swipe is called, when user release mouse button or lift finger while moving with a certain speed 
-        /// </summary>
-        public event EventHandler<SwipedEventArgs> Swipe;
-
-        /// <summary>
-        /// Fling is called, when user release mouse button or lift finger while moving with a certain speed, higher than speed of swipe 
-        /// </summary>
-        public event EventHandler<SwipedEventArgs> Fling;
-
-        /// <summary>
-        /// SingleTap is called, when user clicks with a mouse button or tap with a finger on map 
-        /// </summary>
-        public event EventHandler<TappedEventArgs> SingleTap;
-
-        /// <summary>
-        /// LongTap is called, when user clicks with a mouse button or tap with a finger on map for 500 ms
-        /// </summary>
-        public event EventHandler<TappedEventArgs> LongTap;
-
-        /// <summary>
-        /// DoubleTap is called, when user clicks with a mouse button or tap with a finger two or more times on map
-        /// </summary>
-        public event EventHandler<TappedEventArgs> DoubleTap;
-
-        /// <summary>
-        /// Zoom is called, when map should be zoomed
-        /// </summary>
-        public event EventHandler<ZoomedEventArgs> Zoomed;
-
-        /// <summary>
-        /// Properties
-        /// </summary>
-
-        /// <summary>
-        /// Allow map panning through touch or mouse
-        /// </summary>
-        public bool PanLock { get; set; }
-
-        /// <summary>
-        /// Allow a rotation with a pinch gesture
-        /// </summary>
-        public bool RotationLock { get; set; }
-
-        /// <summary>
-        /// Allow zooming though touch or mouse
-        /// </summary>
-        public bool ZoomLock { get; set; }
-        
         /// <summary>
         /// After how many degrees start rotation to take place
         /// </summary>
-        public double UnSnapRotationDegrees { get; set; }
+        public double UnSnapRotationDegrees
+        {
+            get { return _unSnapRotationDegrees; }
+            set
+            {
+                if (_unSnapRotationDegrees != value)
+                {
+                    _unSnapRotationDegrees = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private double _reSnapRotationDegrees;
 
         /// <summary>
         /// With how many degrees from 0 should map snap to 0 degrees
         /// </summary>
-        public double ReSnapRotationDegrees { get; set; }
-
-        /// <summary>
-        /// Event handlers
-        /// </summary>
-
-        /// <summary>
-        /// Called, when map should zoom out
-        /// </summary>
-        /// <param name="screenPosition">Center of zoom out event</param>
-        private bool OnZoomOut(Geometries.Point screenPosition)
+        public double ReSnapRotationDegrees
         {
-            var args = new ZoomedEventArgs(screenPosition, ZoomDirection.ZoomOut);
-
-            Zoomed?.Invoke(this, args);
-
-            if (args.Handled)
-                return true;
-
-            // TODO
-            // Perform standard behavior
-
-            return true;
-        }
-
-        /// <summary>
-        /// Called, when map should zoom in
-        /// </summary>
-        /// <param name="screenPosition">Center of zoom in event</param>
-        private bool OnZoomIn(Geometries.Point screenPosition)
-        {
-            var args = new ZoomedEventArgs(screenPosition, ZoomDirection.ZoomIn);
-
-            Zoomed?.Invoke(this, args);
-
-            if (args.Handled)
-                return true;
-
-            // TODO
-            // Perform standard behavior
-
-            return true;
-        }
-
-        /// <summary>
-        /// Called, when mouse/finger/pen hovers around
-        /// </summary>
-        /// <param name="screenPosition">Actual position of mouse/finger/pen</param>
-        private bool OnHovered(Geometries.Point screenPosition)
-        {
-            var args = new HoveredEventArgs(screenPosition);
-
-            Hovered?.Invoke(this, args);
-
-            return args.Handled;
-        }
-
-        /// <summary>
-        /// Called, when mouse/finger/pen swiped over map
-        /// </summary>
-        /// <param name="velocityX">Velocity in x direction in pixel/second</param>
-        /// <param name="velocityY">Velocity in y direction in pixel/second</param>
-        private bool OnSwiped(double velocityX, double velocityY)
-        {
-            var args = new SwipedEventArgs(velocityX, velocityY);
-
-            Swipe?.Invoke(this, args);
-
-            // TODO
-            // Perform standard behavior
-
-            return args.Handled;
-        }
-
-        /// <summary>
-        /// Called, when mouse/finger/pen flinged over map
-        /// </summary>
-        /// <param name="velocityX">Velocity in x direction in pixel/second</param>
-        /// <param name="velocityY">Velocity in y direction in pixel/second</param>
-        private bool OnFlinged(double velocityX, double velocityY)
-        {
-            var args = new SwipedEventArgs(velocityX, velocityY);
-
-            Fling?.Invoke(this, args);
-
-            // TODO
-            // Perform standard behavior
-
-            return args.Handled;
-        }
-
-        /// <summary>
-        /// Called, when mouse/finger/pen click/touch map
-        /// </summary>
-        /// <param name="touchPoints">List of all touched points</param>
-        private bool OnTouchStart(List<Geometries.Point> touchPoints)
-        {
-            var args = new TouchedEventArgs(touchPoints);
-
-            TouchStarted?.Invoke(this, args);
-
-            if (args.Handled)
-                return true;
-
-            if (touchPoints.Count >= 2)
+            get { return _reSnapRotationDegrees; }
+            set
             {
-                (_previousCenter, _previousRadius, _previousAngle) = GetPinchValues(touchPoints);
-                _mode = TouchMode.Zooming;
-                _innerRotation = _map.Viewport.Rotation;
+                if (_reSnapRotationDegrees != value)
+                {
+                    _reSnapRotationDegrees = value;
+                    OnPropertyChanged();
+                }
             }
-            else
+        }
+
+        private IRenderer _renderer = new MapRenderer();
+
+        /// <summary>
+        /// Renderer that is used from this MapControl
+        /// </summary>
+        public IRenderer Renderer
+        {
+            get { return _renderer; }
+            set
             {
-                _mode = TouchMode.Dragging;
-                _previousCenter = touchPoints.First();
+                if (_renderer != value)
+                {
+                    _renderer = value;
+                    OnPropertyChanged();
+                }
             }
-
-            return true;
         }
 
+        private readonly LimitedViewport _viewport = new LimitedViewport();
+
         /// <summary>
-        /// Called, when mouse/finger/pen anymore click/touch map
+        /// Viewport holding information about visible part of the map. Viewport can never be null.
         /// </summary>
-        /// <param name="touchPoints">List of all touched points</param>
-        /// <param name="releasedPoint">Released point, which was touched before</param>
-        private bool OnTouchEnd(List<Geometries.Point> touchPoints, Geometries.Point releasedPoint)
+        public IReadOnlyViewport Viewport => _viewport;
+
+        /// <summary>
+        /// Handles all manipulations of the map viewport
+        /// </summary>
+        public INavigator Navigator { get; private set; }
+
+        /// <summary>
+        /// Called when the viewport is initialized
+        /// </summary>
+        public event EventHandler ViewportInitialized; //todo: Consider to use the Viewport PropertyChanged
+
+        /// <summary>
+        /// Called whenever a feature in one of the layers in InfoLayers is hitten by a click 
+        /// </summary>
+        public event EventHandler<MapInfoEventArgs> Info;
+
+        /// <summary>
+        /// Called whenever a property is changed
+        /// </summary>
+#if __FORMS__
+        public new event PropertyChangedEventHandler PropertyChanged;
+
+        protected override void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
-            var args = new TouchedEventArgs(touchPoints);
-
-            TouchEnded?.Invoke(this, args);
-
-            // Last touch released
-            if (touchPoints.Count == 0)
-            {
-                InvalidateCanvas();
-                _mode = TouchMode.None;
-                _map.ViewChanged(true);
-            }
-
-            return args.Handled;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+#else
+        public event PropertyChangedEventHandler PropertyChanged;
 
-        /// <summary>
-        /// Called, when mouse/finger/pen moves over map
-        /// </summary>
-        /// <param name="touchPoints">List of all touched points</param>
-        private bool OnTouchMove(List<Geometries.Point> touchPoints)
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
-            var args = new TouchedEventArgs(touchPoints);
-
-            TouchMove?.Invoke(this, args);
-
-            if (args.Handled)
-                return true;
-
-            switch (_mode)
-            {
-                case TouchMode.Dragging:
-                    {
-                        if (touchPoints.Count != 1)
-                            return false;
-
-                        var touchPosition = touchPoints.First();
-
-                        if (_previousCenter != null && !_previousCenter.IsEmpty())
-                        {
-                            _map.Viewport.Transform(touchPosition.X, touchPosition.Y, _previousCenter.X, _previousCenter.Y);
-
-                            ViewportLimiter.LimitExtent(_map.Viewport, _map.PanMode, _map.PanLimits, _map.Envelope);
-
-                            InvalidateCanvas();
-                        }
-
-                        _previousCenter = touchPosition;
-                    }
-                    break;
-                case TouchMode.Zooming:
-                    {
-                        if (touchPoints.Count < 2)
-                            return false;
-
-                        var (prevCenter, prevRadius, prevAngle) = (_previousCenter, _previousRadius, _previousAngle);
-                        var (center, radius, angle) = GetPinchValues(touchPoints);
-
-                        double rotationDelta = 0;
-
-                        if (RotationLock)
-                        {
-                            _innerRotation += angle - prevAngle;
-                            _innerRotation %= 360;
-
-                            if (_innerRotation > 180)
-                                _innerRotation -= 360;
-                            else if (_innerRotation < -180)
-                                _innerRotation += 360;
-
-                            if (_map.Viewport.Rotation == 0 && Math.Abs(_innerRotation) >= Math.Abs(UnSnapRotationDegrees))
-                                rotationDelta = _innerRotation;
-                            else if (_map.Viewport.Rotation != 0)
-                            {
-                                if (Math.Abs(_innerRotation) <= Math.Abs(ReSnapRotationDegrees))
-                                    rotationDelta = -_map.Viewport.Rotation;
-                                else
-                                    rotationDelta = _innerRotation - _map.Viewport.Rotation;
-                            }
-                        }
-
-                        _map.Viewport.Transform(center.X, center.Y, prevCenter.X, prevCenter.Y, radius / prevRadius, rotationDelta);
-
-                        (_previousCenter, _previousRadius, _previousAngle) = (center, radius, angle);
-
-                        ViewportLimiter.Limit(_map.Viewport,
-                            _map.ZoomMode, _map.ZoomLimits, _map.Resolutions,
-                            _map.PanMode, _map.PanLimits, _map.Envelope);
-
-                        InvalidateCanvas();
-                    }
-                    break;
-            }
-
-            return true;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
-        /// <summary>
-        /// Called, when mouse/finger/pen tapped on map 2 or more times
-        /// </summary>
-        /// <param name="screenPosition">First clicked/touched position on screen</param>
-        /// <param name="numOfTaps">Number of taps on map (2 is a double click/tap)</param>
-        private bool OnDoubleTapped(Geometries.Point screenPosition, int numOfTaps)
-        {
-            var args = new TappedEventArgs(screenPosition, numOfTaps);
-
-            DoubleTap?.Invoke(this, args);
-
-            if (args.Handled)
-                return true;
-
-            var tapWasHandled = Map.InvokeInfo(screenPosition, screenPosition, _scale, _renderer.SymbolCache, WidgetTouched, numOfTaps);
-
-            if (!tapWasHandled)
-            {
-                // Double tap as zoom
-                return OnZoomIn(screenPosition);
-            }
-
-            return false;
-        }
-
-        /// <summary>
-        /// Called, when mouse/finger/pen tapped on map one time
-        /// </summary>
-        /// <param name="screenPosition">Clicked/touched position on screen</param>
-        private bool OnSingleTapped(Geometries.Point screenPosition)
-        {
-            var args = new TappedEventArgs(screenPosition, 1);
-
-            SingleTap?.Invoke(this, args);
-
-            if (args.Handled)
-                return true;
-
-            return Map.InvokeInfo(screenPosition, screenPosition, _scale, _renderer.SymbolCache, WidgetTouched, 1);
-        }
-
-        /// <summary>
-        /// Called, when mouse/finger/pen tapped long on map
-        /// </summary>
-        /// <param name="screenPosition">Clicked/touched position on screen</param>
-        private bool OnLongTapped(Geometries.Point screenPosition)
-        {
-            var args = new TappedEventArgs(screenPosition, 1);
-
-            LongTap?.Invoke(this, args);
-
-            return args.Handled;
-        }
-
-        /// <summary>
-        /// Public functions
-        /// </summary>
-
-#if !__WPF__ && !__UWP__
-        // PDD: Disabled to get a compile
-        //public new void Dispose()
-        //{
-        //    Unsubscribe();
-        //    base.Dispose();
-        //}
-
-        //protected override void Dispose(bool disposing)
-        //{
-        //    Unsubscribe();
-        //    base.Dispose(disposing);
-        //}
 #endif
 
         /// <summary>
-        /// Unsubscribe from map events </summary>
+        /// Unsubscribe from map events 
+        /// </summary>
         public void Unsubscribe()
         {
             UnsubscribeFromMapEvents(_map);
         }
-
-        /// <summary>
-        /// Converting function for world to screen
-        /// </summary>
-        /// <param name="worldPosition">Position in world coordinates</param>
-        /// <returns>Position in screen coordinates</returns>
-        public Geometries.Point WorldToScreen(Geometries.Point worldPosition)
-        {
-            return WorldToScreen(Map.Viewport, _scale, worldPosition);
-        }
-
-        /// <summary>
-        /// Converting function for screen to world
-        /// </summary>
-        /// <param name="screenPosition">Position in screen coordinates</param>
-        /// <returns>Position in world coordinates</returns>
-        public Geometries.Point ScreenToWorld(Geometries.Point screenPosition)
-        {
-            return ScreenToWorld(Map.Viewport, _scale, screenPosition);
-        }
-
-        /// <summary>
-        /// Converting function for world to screen respecting scale
-        /// </summary>
-        /// <param name="viewport">Viewport</param>
-        /// <param name="scale">Scale</param>
-        /// <param name="worldPosition">Position in world coordinates</param>
-        /// <returns>Position in screen coordinates</returns>
-        public Point WorldToScreen(IViewport viewport, float scale, Point worldPosition)
-        {
-            var screenPosition = viewport.WorldToScreen(worldPosition);
-            return new Point(screenPosition.X * scale, screenPosition.Y * scale);
-        }
-
-        /// <summary>
-        /// Converting function for screen to world respecting scale
-        /// </summary>
-        /// <param name="viewport">Viewport</param>
-        /// <param name="scale">Scale</param>
-        /// <param name="screenPosition">Position in screen coordinates</param>
-        /// <returns>Position in world coordinates</returns>
-        public Point ScreenToWorld(IViewport viewport, float scale, Point screenPosition)
-        {
-            var worldPosition = viewport.ScreenToWorld(screenPosition.X * scale, screenPosition.Y * scale);
-            return new Point(worldPosition.X, worldPosition.Y);
-        }
-
-        /// <summary>
-        /// Private static functions
-        /// </summary>
-        
-        private static (Geometries.Point centre, double radius, double angle) GetPinchValues(List<Geometries.Point> locations)
-        {
-            if (locations.Count < 2)
-                throw new ArgumentException();
-
-            double centerX = 0;
-            double centerY = 0;
-
-            foreach (var location in locations)
-            {
-                centerX += location.X;
-                centerY += location.Y;
-            }
-
-            centerX = centerX / locations.Count;
-            centerY = centerY / locations.Count;
-
-            var radius = Algorithms.Distance(centerX, centerY, locations[0].X, locations[0].Y);
-
-            var angle = Math.Atan2(locations[1].Y - locations[0].Y, locations[1].X - locations[0].X) * 180.0 / Math.PI;
-
-            return (new Geometries.Point(centerX, centerY), radius, angle);
-        }
-
-        /// <summary>
-        /// Private functions
-        /// </summary>
 
         /// <summary>
         /// Subscribe to map events
@@ -524,7 +138,6 @@ namespace Mapsui.UI.Wpf
         {
             map.DataChanged += MapDataChanged;
             map.PropertyChanged += MapPropertyChanged;
-            map.RefreshGraphics += MapRefreshGraphics;
         }
 
         /// <summary>
@@ -538,9 +151,267 @@ namespace Mapsui.UI.Wpf
             {
                 temp.DataChanged -= MapDataChanged;
                 temp.PropertyChanged -= MapPropertyChanged;
-                temp.RefreshGraphics -= MapRefreshGraphics;
                 temp.AbortFetch();
             }
         }
+
+        /// <summary>
+        /// Refresh data of the map and than repaint it
+        /// </summary>
+        public void Refresh()
+        {
+            RefreshData();
+            RefreshGraphics();
+        }
+
+        private void MapDataChanged(object sender, DataChangedEventArgs e)
+        {
+            RunOnUIThread(() =>
+            {
+                try
+                {
+                    if (e == null)
+                    {
+                        Logger.Log(LogLevel.Warning, "Unexpected error: DataChangedEventArgs can not be null");
+                    }
+                    else if (e.Cancelled)
+                    {
+                        Logger.Log(LogLevel.Warning, "Fetching data was cancelled", e.Error);
+                    }
+                    else if (e.Error is WebException)
+                    {
+                        Logger.Log(LogLevel.Warning, "A WebException occurred. Do you have internet?", e.Error);
+                    }
+                    else if (e.Error != null)
+                    {
+                        Logger.Log(LogLevel.Warning, "An error occurred while fetching data", e.Error);
+                    }
+                    else // no problems
+                    {
+                        RefreshGraphics();
+                    }
+                }
+                catch (Exception exception)
+                {
+                    Logger.Log(LogLevel.Warning, $"Unexpected exception in {nameof(MapDataChanged)}", exception);
+                }
+            });
+        }
+        // ReSharper disable RedundantNameQualifier - needed for iOS for disambiguation
+
+        private void MapPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(Layers.Layer.Enabled))
+            {
+                RefreshGraphics();
+            }
+            else if (e.PropertyName == nameof(Layers.Layer.Opacity))
+            {
+                RefreshGraphics();
+            }
+            else if (e.PropertyName == nameof(Map.BackColor))
+            {
+                RefreshGraphics();
+            }
+            else if (e.PropertyName == nameof(Layers.Layer.DataSource))
+            {
+                Refresh(); // There is a new DataSource so let's fetch the new data.
+            }
+            else if (e.PropertyName == nameof(Map.Envelope))
+            {
+                CallHomeIfNeeded();
+                Refresh(); 
+            }
+            else if (e.PropertyName == nameof(Map.Layers))
+            {
+                CallHomeIfNeeded();
+                Refresh();
+            }
+        }
+        // ReSharper restore RedundantNameQualifier
+
+        public void CallHomeIfNeeded()
+        {
+            if (!_map.Initialized && _map != null && _viewport.HasSize && _map?.Envelope != null)
+            {
+                _map.Home?.Invoke(Navigator);
+                _map.Initialized = true;
+            }
+        }
+
+        /// <summary>
+        /// Map holding data for which is shown in this MapControl
+        /// </summary>
+        public Map Map
+        {
+            get => _map;
+            set
+            {
+                if (_map != null)
+                {
+                    UnsubscribeFromMapEvents(_map);
+                    _map = null;
+                }
+
+                _map = value;
+
+                if (_map != null)
+                {
+                    SubscribeToMapEvents(_map);
+                    Navigator = new Navigator(_map, _viewport);
+                    _viewport.Map = Map;
+                    _viewport.Limiter = Map.Limiter;
+                    CallHomeIfNeeded();
+                }
+
+                Refresh();
+                OnPropertyChanged();
+            }
+        }
+
+        /// <inheritdoc />
+        public Point ToPixels(Point coordinateInDeviceIndependentUnits)
+        {
+            return new Point(
+                coordinateInDeviceIndependentUnits.X * PixelDensity,
+                coordinateInDeviceIndependentUnits.Y * PixelDensity);
+        }
+
+        /// <inheritdoc />
+        public Point ToDeviceIndependentUnits(Point coordinateInPixels)
+        {
+            return new Point(coordinateInPixels.X / PixelDensity, coordinateInPixels.Y / PixelDensity);
+        }
+
+        private void OnViewportSizeInitialized()
+        {
+            ViewportInitialized?.Invoke(this, EventArgs.Empty);
+        }
+
+        /// <summary>
+        /// Refresh data of Map, but don't paint it
+        /// </summary>
+        public void RefreshData()
+        {
+            _map?.RefreshData(Viewport.Extent, Viewport.Resolution, true);
+        }
+
+        private void OnInfo(MapInfoEventArgs mapInfoEventArgs)
+        {
+            if (mapInfoEventArgs == null) return;
+
+            Info?.Invoke(this, mapInfoEventArgs);
+        }
+
+        private bool WidgetTouched(IWidget widget, Point screenPosition)
+        {
+            var result = widget.HandleWidgetTouched(Navigator, screenPosition);
+
+            if (!result && widget is Hyperlink hyperlink && !string.IsNullOrWhiteSpace(hyperlink.Url))
+            {
+                OpenBrowser(hyperlink.Url);
+
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <inheritdoc />
+        public MapInfo GetMapInfo(Point screenPosition, int margin = 0)
+        {
+            return MapInfoHelper.GetMapInfo(Map.Layers.Where(l => l.IsMapInfoLayer), Viewport,
+                screenPosition, Renderer.SymbolCache, margin);
+        }
+
+        /// <inheritdoc />
+        public MapInfo GetMapInfo(IEnumerable<ILayer> layers, Point screenPosition, int margin = 0)
+        {
+            return MapInfoHelper.GetMapInfo(layers, Viewport,
+                screenPosition, Renderer.SymbolCache, margin);
+        }
+
+        /// <summary>
+        /// Check if a widget or feature at a given screen position is clicked/tapped
+        /// </summary>
+        /// <param name="screenPosition">Screen position to check for widgets and features</param>
+        /// <param name="startScreenPosition">Screen position of Viewport/MapControl</param>
+        /// <param name="numTaps">Number of clickes/taps</param>
+        /// <returns>True, if something done </returns>
+        private MapInfoEventArgs InvokeInfo(Point screenPosition, Point startScreenPosition, int numTaps)
+        {
+            return InvokeInfo(Map.Layers.Where(l => l.IsMapInfoLayer), Map.GetWidgetsOfMapAndLayers(), Viewport,
+                screenPosition, startScreenPosition, _renderer.SymbolCache, WidgetTouched, numTaps);
+        }
+
+        /// <summary>
+        /// Check if a widget or feature at a given screen position is clicked/tapped
+        /// </summary>
+        /// <param name="layers">The layers to query for MapInfo</param>
+        /// <param name="widgets">The Map widgets</param>
+        /// <param name="viewport">The current Viewport</param>
+        /// <param name="screenPosition">Screen position to check for widgets and features</param>
+        /// <param name="startScreenPosition">Screen position of Viewport/MapControl</param>
+        /// <param name="symbolCache">Cache for symbols to determin size</param>
+        /// <param name="widgetCallback">Callback, which is called when Widget is hiten</param>
+        /// <param name="numTaps">Number of clickes/taps</param>
+        /// <returns>True, if something done </returns>
+        private static MapInfoEventArgs InvokeInfo(IEnumerable<ILayer> layers, IEnumerable<IWidget> widgets, 
+            IReadOnlyViewport viewport, Point screenPosition, Point startScreenPosition, ISymbolCache symbolCache,
+            Func<IWidget, Point, bool> widgetCallback, int numTaps)
+        {
+            var layerWidgets = layers.Select(l => l.Attribution).Where(a => a != null);
+            var allWidgets = layerWidgets.Concat(widgets).ToList(); // Concat layer widgets and map widgets.
+
+            // First check if a Widget is clicked. In the current design they are always on top of the map.
+            var touchedWidgets = WidgetTouch.GetTouchedWidget(screenPosition, startScreenPosition, allWidgets);
+
+            foreach (var widget in touchedWidgets)
+            {
+                var result = widgetCallback(widget, screenPosition);
+
+                if (result)
+                {
+                    return new MapInfoEventArgs
+                    {
+                        Handled = true
+                    };
+                }
+            }
+        
+            var mapInfo = MapInfoHelper.GetMapInfo(layers, viewport, screenPosition, symbolCache);
+
+            if (mapInfo != null)
+            {
+                return new MapInfoEventArgs
+                {
+                    MapInfo = mapInfo,
+                    NumTaps = numTaps,
+                    Handled = false
+                };
+            }
+
+            return null;
+        }
+
+        private void SetViewportSize()
+        {
+            var hadSize = Viewport.HasSize;
+            _viewport.SetSize(ViewportWidth, ViewportHeight);
+            if (hadSize && Viewport.HasSize) OnViewportSizeInitialized();
+            CallHomeIfNeeded();
+            Refresh();
+        }
+
+        /// <summary>
+        /// Clear cache and repaint map
+        /// </summary>
+        public void Clear()
+        {
+            // not sure if we need this method
+            _map?.ClearCache();
+            RefreshGraphics();
+        }
     }
 }
+

@@ -1,11 +1,20 @@
 ﻿using Mapsui.Styles;
+using Mapsui.UI;
 using Mapsui.Widgets;
 using Mapsui.Widgets.Zoom;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public static class WidgetSample
+    public class WidgetSample : ISample
     {
+        public string Name => "2 Widgets";
+        public string Category => "Widgets";
+
+        public void Setup(IMapControl mapControl)
+        {
+            mapControl.Map = CreateMap();
+        }
+
         public static Map CreateMap()
         {
             var map = new Map();
@@ -20,8 +29,8 @@ namespace Mapsui.Samples.Common.Maps
             map.Widgets.Add(CreateHyperlink("Top Left", VerticalAlignment.Top, HorizontalAlignment.Left));
             map.Widgets.Add(CreateHyperlink("Top Center", VerticalAlignment.Top, HorizontalAlignment.Center));
 
-            map.Widgets.Add(new ZoomInOutWidget(map) { MarginX = 20, MarginY = 20 });
-            map.Widgets.Add(new ZoomInOutWidget(map) { Orientation = Orientation.Horizontal, VerticalAlignment = VerticalAlignment.Center, HorizontalAlignment = HorizontalAlignment.Center });
+            map.Widgets.Add(new ZoomInOutWidget { MarginX = 20, MarginY = 20 });
+            map.Widgets.Add(new ZoomInOutWidget { Orientation = Orientation.Horizontal, VerticalAlignment = VerticalAlignment.Center, HorizontalAlignment = HorizontalAlignment.Center });
 
             return map;
         }

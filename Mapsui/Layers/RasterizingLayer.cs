@@ -6,11 +6,11 @@ using Mapsui.Geometries;
 using Mapsui.Logging;
 using Mapsui.Providers;
 using Mapsui.Rendering;
-using Mapsui.Utilities;
+using System.Threading;
 
 namespace Mapsui.Layers
 {
-    public class RasterizingLayer : BaseLayer
+    public class RasterizingLayer : BaseLayer, IAsyncDataFetcher
     {
         private readonly MemoryProvider _cache;
         private readonly int _delayBeforeRasterize;
@@ -61,15 +61,14 @@ namespace Mapsui.Layers
             _overscan = overscanRatio;
             _onlyRerasterizeIfOutsideOverscan = onlyRerasterizeIfOutsideOverscan;
             _layer.DataChanged += LayerOnDataChanged;
-            _timer = new Timer(TimerElapsed, _delayBeforeRasterize);
-            _timer.Start();
+            _timer = new Timer(TimerElapsed, null, _delayBeforeRasterize, Timeout.Infinite);
         }
 
         public override BoundingBox Envelope => _layer.Envelope;
 
         private void TimerElapsed(object state)
         {
-            _timer.Cancel();
+            _timer.Change(Timeout.Infinite, Timeout.Infinite);
             Rasterize();
         }
 
@@ -82,9 +81,9 @@ namespace Mapsui.Layers
 
         private void RestartTimer()
         {
-            _timer.Restart(_delayBeforeRasterize);
+            _timer.Change(_delayBeforeRasterize, Timeout.Infinite);
         }
-
+        
         private void Rasterize()
         {
             if (!Enabled) return;
@@ -96,20 +95,28 @@ namespace Mapsui.Layers
             {
                 try
                 {
-                    if (double.IsNaN(_resolution) || (_resolution <= 0)) return;
+                    if (double.IsNaN(_resolution) || _resolution <= 0) return;
+                    if (_extent.Width <= 0 || _extent.Height <= 0) return;
                     var viewport = CreateViewport(_extent, _resolution, _renderResolutionMultiplier, _overscan);
 
                     _currentViewport = viewport;
 
                     _rasterizer = _rasterizer ?? DefaultRendererFactory.Create();
 
-                    var bitmapStream = _rasterizer.RenderToBitmapStream(viewport, new[] {_layer});
+                    var bitmapStream = _rasterizer.RenderToBitmapStream(viewport, new[] { _layer });
                     RemoveExistingFeatures();
-                    _cache.ReplaceFeatures(new Features {new Feature {Geometry = new Raster(bitmapStream, viewport.Extent)}});
 
-                    Logger.Log(LogLevel.Debug, $"Memory after rasterizing layer {GC.GetTotalMemory(true):N0}");
+                    if (bitmapStream != null)
+                    {
+                        _cache.ReplaceFeatures(new Features
+                        {
+                            new Feature {Geometry = new Raster(bitmapStream, viewport.Extent)}
+                        });
 
-                    OnDataChanged(new DataChangedEventArgs());
+                        Logger.Log(LogLevel.Debug, $"Memory after rasterizing layer {GC.GetTotalMemory(true):N0}");
+
+                        OnDataChanged(new DataChangedEventArgs());
+                    }
 
                     if (_modified) RestartTimer();
                 }
@@ -150,12 +157,12 @@ namespace Mapsui.Layers
             return _cache.GetFeaturesInView(extent, resolution);
         }
 
-        public override void AbortFetch()
+        public void AbortFetch()
         {
-            _layer.AbortFetch();
+            if (_layer is IAsyncDataFetcher asyncLayer) asyncLayer.AbortFetch();
         }
 
-        public override void ViewChanged(bool majorChange, BoundingBox extent, double resolution)
+        public override void RefreshData(BoundingBox extent, double resolution, bool majorChange)
         {
             var newViewport = CreateViewport(extent, resolution, _renderResolutionMultiplier, 1);
 
@@ -167,14 +174,14 @@ namespace Mapsui.Layers
             {
                 _extent = extent;
                 _resolution = resolution;
-                _layer.ViewChanged(majorChange, extent, resolution);
+                _layer.RefreshData(extent, resolution, majorChange);
                 RestartTimer();
             }
         }
 
-        public override void ClearCache()
+        public void ClearCache()
         {
-            _layer.ClearCache();
+            if (_layer is IAsyncDataFetcher asyncLayer) asyncLayer.ClearCache();
         }
 
         private static Viewport CreateViewport(BoundingBox extent, double resolution, double renderResolutionMultiplier,
@@ -184,7 +191,7 @@ namespace Mapsui.Layers
             return new Viewport
             {
                 Resolution = renderResolution,
-                Center = extent.GetCentroid(),
+                Center = extent.Centroid,
                 Width = extent.Width*overscan/renderResolution,
                 Height = extent.Height*overscan/renderResolution
             };

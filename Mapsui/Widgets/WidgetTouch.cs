@@ -4,29 +4,34 @@ using Mapsui.Geometries;
 
 namespace Mapsui.Widgets
 {
-    static class WidgetTouch
+    public static class WidgetTouch
     {
+        /// <summary>
+        /// Gets the widget selected by touch positions
+        /// </summary>
+        /// <param name="screenPosition">The screen position in device independent units (or DIP or DP)</param>
+        /// <param name="startScreenPosition">The start screen position in device independent units (or DIP or DP)</param>
+        /// <param name="widgets">The widgets to select from.</param>
         /// <returns>
         /// Returns the first Widget in the list that contains the screenPosition
         /// within it's Envelope. Returns null if there are none.
         /// </returns>
-        public static IWidget GetWidget(Point screenPosition, Point startScreenPosition, double scale,
+        public static IEnumerable<IWidget> GetTouchedWidget(Point screenPosition, Point startScreenPosition,
             IEnumerable<IWidget> widgets)
         {
-            var scaledScreenPosition = new Point(screenPosition.X / scale, screenPosition.Y / scale);
-            var scaledStartScreenPosition = new Point(
-                startScreenPosition.X / scale, 
-                startScreenPosition.Y / scale);
+            var touchedWidgets = new List<IWidget>();
 
             foreach (var widget in widgets.Reverse())
             {
-                // Also check for start position because it shoudl be click on the widget, not a drag that ends above the widget.
+                // Also check for start position because it shoudl be click on the widget,
+                // not a drag that ends above the widget.
                 if (widget.Envelope != null &&
-                    widget.Envelope.Contains(scaledScreenPosition) && 
-                    widget.Envelope.Contains(scaledStartScreenPosition))
-                    return widget;
+                    widget.Envelope.Contains(screenPosition) && 
+                    widget.Envelope.Contains(startScreenPosition))
+                    touchedWidgets.Add(widget);
             }
-            return null;
+
+            return touchedWidgets;
         }
     }
 }

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Mapsui.Samples.Wpf.Editing.Layers;
 using Mapsui.Geometries;
+using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.UI;
 using Point = Mapsui.Geometries.Point;
@@ -245,7 +245,7 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
 
             _rotateInfo.Feature = mapInfo.Feature;
             _rotateInfo.PreviousPosition = mapInfo.WorldPosition;
-            _rotateInfo.Center = mapInfo.Feature.Geometry.GetBoundingBox().GetCentroid();
+            _rotateInfo.Center = mapInfo.Feature.Geometry.BoundingBox.Centroid;
 
             return true; // to signal pan lock
         }
@@ -291,7 +291,7 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
 
             _scaleInfo.Feature = mapInfo.Feature;
             _scaleInfo.PreviousPosition = mapInfo.WorldPosition;
-            _scaleInfo.Center = mapInfo.Feature.Geometry.GetBoundingBox().GetCentroid();
+            _scaleInfo.Center = mapInfo.Feature.Geometry.BoundingBox.Centroid;
 
             return true; // to signal pan lock
         }

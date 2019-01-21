@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netstandard1.3</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Resources\Images\avion_silhouette.png" />
@@ -31,12 +31,14 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Mapsui.Geometries\Mapsui.Geometries.csproj" />
     <ProjectReference Include="..\..\Mapsui\Mapsui.csproj" />
+    <ProjectReference Include="..\..\Samples\Mapsui.Samples.Common\Mapsui.Samples.Common.csproj" />
+    <ProjectReference Include="..\..\Samples\Mapsui.Samples.CustomWidget\Mapsui.Samples.CustomWidget.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="BruTile" Version="2.0.0" />
+    <PackageReference Include="BruTile" Version="2.0.2" />
   </ItemGroup>
 
 </Project>

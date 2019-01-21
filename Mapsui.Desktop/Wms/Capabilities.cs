@@ -15,7 +15,7 @@
 // along with SharpMap; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
-namespace Mapsui.Providers.Wms
+namespace Mapsui.Desktop.Wms
 {
     /// <summary>
     /// Class for generating the WmsCapabilities Xml

@@ -135,19 +135,23 @@ namespace Mapsui.Geometries
         ///     The minimum bounding box for this Geometry.
         /// </summary>
         /// <returns>BoundingBox for this geometry</returns>
-        public override BoundingBox GetBoundingBox()
+        public override BoundingBox BoundingBox
         {
-            if ((Vertices == null) || (Vertices.Count == 0))
-                return null;
-            var bbox = new BoundingBox(Vertices[0], Vertices[0]);
-            for (var i = 1; i < Vertices.Count; i++)
+            get
             {
-                bbox.Min.X = Vertices[i].X < bbox.Min.X ? Vertices[i].X : bbox.Min.X;
-                bbox.Min.Y = Vertices[i].Y < bbox.Min.Y ? Vertices[i].Y : bbox.Min.Y;
-                bbox.Max.X = Vertices[i].X > bbox.Max.X ? Vertices[i].X : bbox.Max.X;
-                bbox.Max.Y = Vertices[i].Y > bbox.Max.Y ? Vertices[i].Y : bbox.Max.Y;
+                if ((Vertices == null) || (Vertices.Count == 0))
+                    return null;
+                var bbox = new BoundingBox(Vertices[0], Vertices[0]);
+                for (var i = 1; i < Vertices.Count; i++)
+                {
+                    bbox.Min.X = Vertices[i].X < bbox.Min.X ? Vertices[i].X : bbox.Min.X;
+                    bbox.Min.Y = Vertices[i].Y < bbox.Min.Y ? Vertices[i].Y : bbox.Min.Y;
+                    bbox.Max.X = Vertices[i].X > bbox.Max.X ? Vertices[i].X : bbox.Max.X;
+                    bbox.Max.Y = Vertices[i].Y > bbox.Max.Y ? Vertices[i].Y : bbox.Max.Y;
+                }
+
+                return bbox;
             }
-            return bbox;
         }
 
         /// <summary>

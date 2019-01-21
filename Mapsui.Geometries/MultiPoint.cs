@@ -52,10 +52,7 @@ namespace Mapsui.Geometries
         /// </summary>
         /// <param name="n">Index in collection</param>
         /// <returns>Point</returns>
-        public new Point this[int n]
-        {
-            get { return Points[n]; }
-        }
+        public new Point this[int n] => Points[n];
 
         /// <summary>
         ///     Gets or sets the MultiPoint collection
@@ -65,10 +62,7 @@ namespace Mapsui.Geometries
         /// <summary>
         ///     Returns the number of geometries in the collection.
         /// </summary>
-        public override int NumGeometries
-        {
-            get { return Points.Count; }
-        }
+        public override int NumGeometries => Points.Count;
 
         /// <summary>
         ///     Returns an indexed geometry in the collection
@@ -109,19 +103,22 @@ namespace Mapsui.Geometries
         ///     The minimum bounding box for this Geometry.
         /// </summary>
         /// <returns></returns>
-        public override BoundingBox GetBoundingBox()
+        public override BoundingBox BoundingBox
         {
-            if ((Points == null) || (Points.Count == 0))
-                return null;
-            var bbox = new BoundingBox(Points[0], Points[0]);
-            for (var i = 1; i < Points.Count; i++)
+            get
             {
-                bbox.Min.X = Points[i].X < bbox.Min.X ? Points[i].X : bbox.Min.X;
-                bbox.Min.Y = Points[i].Y < bbox.Min.Y ? Points[i].Y : bbox.Min.Y;
-                bbox.Max.X = Points[i].X > bbox.Max.X ? Points[i].X : bbox.Max.X;
-                bbox.Max.Y = Points[i].Y > bbox.Max.Y ? Points[i].Y : bbox.Max.Y;
+                if (Points == null || Points.Count == 0) return null;
+
+                var bbox = new BoundingBox(Points[0], Points[0]);
+                for (var i = 1; i < Points.Count; i++)
+                {
+                    bbox.Min.X = Points[i].X < bbox.Min.X ? Points[i].X : bbox.Min.X;
+                    bbox.Min.Y = Points[i].Y < bbox.Min.Y ? Points[i].Y : bbox.Min.Y;
+                    bbox.Max.X = Points[i].X > bbox.Max.X ? Points[i].X : bbox.Max.X;
+                    bbox.Max.Y = Points[i].Y > bbox.Max.Y ? Points[i].Y : bbox.Max.Y;
+                }
+                return bbox;
             }
-            return bbox;
         }
 
         /// <summary>

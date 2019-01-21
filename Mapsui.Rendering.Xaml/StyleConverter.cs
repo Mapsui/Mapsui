@@ -148,7 +148,7 @@ namespace Mapsui.Rendering.Xaml
             return CreatePatternVisual(elements, viewport, viewbox);
         }
 
-        private static BitmapImage GetOrCreateBitmapImage(Styles.Brush brush, SymbolCache symbolCache = null, bool isSvg = false)
+        private static BitmapImage GetOrCreateBitmapImage(Styles.Brush brush, SymbolCache symbolCache = null)
         {
             return symbolCache != null ? 
                 (BitmapImage)symbolCache.GetOrCreate(brush.BitmapId): 

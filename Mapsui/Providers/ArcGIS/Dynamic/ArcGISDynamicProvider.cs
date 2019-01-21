@@ -97,7 +97,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
 
             IFeatures features = new Features();
             IRaster raster = null;
-            IViewport viewport = new Viewport { Resolution = resolution, Center = box.GetCentroid(), Width = (box.Width / resolution), Height = (box.Height / resolution) };
+            IViewport viewport = new Viewport { Resolution = resolution, Center = box.Centroid, Width = (box.Width / resolution), Height = (box.Height / resolution) };
             if (TryGetMap(viewport, ref raster))
             {
                 var feature = features.New();

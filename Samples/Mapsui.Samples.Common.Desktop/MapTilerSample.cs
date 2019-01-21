@@ -3,12 +3,21 @@ using BruTile.Cache;
 using BruTile.FileSystem;
 using BruTile.Predefined;
 using Mapsui.Layers;
+using Mapsui.UI;
 using Attribution = BruTile.Attribution;
 
 namespace Mapsui.Samples.Common.Desktop
 {
-    public static class MapTilerSample
+    public class MapTilerSample : ISample
     {
+        public string Name => "5 Map Tiler";
+        public string Category => "Desktop";
+
+        public void Setup(IMapControl mapControl)
+        {
+            mapControl.Map = CreateMap();
+        }
+
         public static Map CreateMap()
         {
             var map = new Map();

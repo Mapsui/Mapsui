@@ -1,16 +1,26 @@
 ﻿using Mapsui.Geometries;
+using Mapsui.Samples.Common;
 using Mapsui.Styles;
+using Mapsui.UI;
 
 namespace Mapsui.Tests.Common.Maps
 {
-    internal class EmptySample
+    public class EmptySample : ISample
     {
+        public string Name => "Empty";
+        public string Category => "Tests";
+
+        public void Setup(IMapControl mapControl)
+        {
+            mapControl.Map = CreateMap();
+        }
+
         public static Map CreateMap()
         {
             var map = new Map
             {
                 BackColor = Color.Transparent,
-                Viewport = {Center = new Point(0, 0), Width = 200, Height = 200, Resolution = 1}
+                Home = n => n.NavigateTo(new Point(0, 0), 1)
             };
             return map;
         }

@@ -5,12 +5,21 @@ using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Samples.Common.Helpers;
 using Mapsui.Styles;
+using Mapsui.UI;
 using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public static class VariousSample
+    public class VariousSample : ISample
     {
+        public string Name => "5 Various geometries";
+        public string Category => "Geometries";
+
+        public void Setup(IMapControl mapControl)
+        {
+            mapControl.Map = CreateMap();
+        }
+
         public static Map CreateMap()
         {
             var map = new Map();

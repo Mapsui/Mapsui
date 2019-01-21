@@ -6,22 +6,28 @@ using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Samples.Common.Helpers;
 using Mapsui.Styles;
+using Mapsui.UI;
 using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public static class SymbolsSample
+    public class SymbolsSample : ISample
     {
-        private const string StylesLayerName = "Styles Layer";
-        
+        public string Name => "Symbols";
+        public string Category => "Symbols";
+
+        public void Setup(IMapControl mapControl)
+        {
+            mapControl.Map = CreateMap();
+        }
+
         public static Map CreateMap()
         {
             var map = new Map();
 
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
             map.Layers.Add(CreateStylesLayer(map.Envelope));
-            map.HoverLayers.Add(map.Layers.First(l => l.Name == StylesLayerName));
-
+            
             return map;
         }
 
@@ -29,9 +35,10 @@ namespace Mapsui.Samples.Common.Maps
         {
             return new MemoryLayer
             {
-                Name = StylesLayerName,
+                Name = "Styles Layer",
                 DataSource = CreateMemoryProviderWithDiverseSymbols(envelope, 25),
-                Style = null
+                Style = null,
+                IsMapInfoLayer = true
             };
         }
 

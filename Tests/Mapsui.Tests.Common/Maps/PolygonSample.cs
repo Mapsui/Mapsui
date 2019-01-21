@@ -2,13 +2,23 @@
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Styles;
+using Mapsui.UI;
 using System.Reflection;
+using Mapsui.Samples.Common;
 
 namespace Mapsui.Tests.Common.Maps
 {
-    public static class PolygonSample
+    public class PolygonSample : ISample
     {
         static int _bitmapId;
+
+        public string Name => "Polygon";
+        public string Category => "Tests";
+
+        public void Setup(IMapControl mapControl)
+        {
+            mapControl.Map = CreateMap();
+        }
 
         public static Map CreateMap()
         {
@@ -19,13 +29,7 @@ namespace Mapsui.Tests.Common.Maps
             var map = new Map
             {
                 BackColor = Color.Transparent,
-                Viewport =
-                {
-                    Center = new Point(0, 0),
-                    Width = 600,
-                    Height = 400,
-                    Resolution = 63000
-                }
+                Home = n => n.NavigateTo(new Point(0, 0), 63000)
             };
 
             var layer = new MemoryLayer

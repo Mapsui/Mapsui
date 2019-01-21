@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using ConcurrentCollections;
 using Mapsui.Fetcher;
 using Mapsui.Geometries;
@@ -20,41 +19,36 @@ namespace Mapsui.Layers
             if (box == null) { return new List<IFeature>(); }
             var cache = _cache;
             var biggerBox = box.Grow(SymbolStyle.DefaultWidth * 2 * resolution, SymbolStyle.DefaultHeight * 2 * resolution);
-            var result = cache.Where(f => biggerBox.Intersects(f.Geometry.GetBoundingBox()));
+            var result = cache.Where(f => biggerBox.Intersects(f.Geometry?.BoundingBox));
             return result;
         }
 
         private BoundingBox GetExtents()
         {
             // todo: Calculate extents only once. Use a _modified field to determine when this is needed.
-            var cache = _cache.ToList();
-            if (!cache.Any()) return null;
-          
-            var minX = cache.Min(b => b.Geometry.GetBoundingBox().MinX);
-            var minY = cache.Min(b => b.Geometry.GetBoundingBox().MinY);
-            var maxX = cache.Max(b => b.Geometry.GetBoundingBox().MaxX);
-            var maxY = cache.Max(b => b.Geometry.GetBoundingBox().MaxY);
+
+            var geometries = _cache
+                .Select(f => f.Geometry)
+                .Where(g => g != null && !g.IsEmpty() && g.BoundingBox != null)
+                .ToList();
+
+            if (geometries.Count == 0) return null;
+
+            var minX = geometries.Min(g => g.BoundingBox.MinX);
+            var minY = geometries.Min(g => g.BoundingBox.MinY);
+            var maxX = geometries.Max(g => g.BoundingBox.MaxX);
+            var maxY = geometries.Max(g => g.BoundingBox.MaxY);
+
             return new BoundingBox(minX, minY, maxX, maxY);
         }
 
         public override BoundingBox Envelope => GetExtents();
 
-        public override void AbortFetch()
-        {
-            // do nothing. This is not an async layer
-        }
-
-        public override void ViewChanged(bool majorChange, BoundingBox extent, double resolution)
+        public override void RefreshData(BoundingBox extent, double resolution, bool majorChange)
         {
             //The MemoryLayer always has it's data ready so can fire a DataChanged event immediately so that listeners can act on it.
-            Task.Run(() => OnDataChanged(new DataChangedEventArgs()));
+            OnDataChanged(new DataChangedEventArgs());
         }
-
-        public override void ClearCache()
-        {
-            // do nothing. This is not an async layer
-        }
-
         public IEnumerable<IFeature> GetFeatures()
         {
             return _cache;
@@ -83,6 +77,10 @@ namespace Mapsui.Layers
             return _cache.FirstOrDefault(f => f == feature);
         }
 
+        /// <summary>
+        /// Signals to listeners that data has changed. This is necessary for situations where
+        /// an individual geometry is edited. The layer itself can not know about it's change.
+        /// </summary>
         public void SignalDataChanged()
         {
             OnDataChanged(new DataChangedEventArgs());

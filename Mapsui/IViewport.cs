@@ -19,28 +19,21 @@ using Mapsui.Geometries;
 
 namespace Mapsui
 {
-    public interface IViewport
+    public interface IViewport : IReadOnlyViewport
     {
-        Point WorldToScreen(Point point);
-        Point WorldToScreenUnrotated(Point point);
-        Point ScreenToWorld(Point point);
-        Point WorldToScreen(double x, double y);
-        Point WorldToScreenUnrotated(double x, double y);
-        Point ScreenToWorld(double x, double y);
-        void Transform(double screenX, double screenY, double previousScreenX, double previousScreenY, 
-            double deltaScale = 1, double deltaRotation = 0);
-        Point Center { get; set; }
-        double Resolution { get; set; }
-        BoundingBox Extent { get; }
-        Quad WindowExtent { get; }
-        double Width { get; set; }
-        double Height { get; set; }
+        void SetCenter(double x, double y);
+        void SetCenter(ReadOnlyPoint center);
+        void SetResolution(double resolution);
+        void SetRotation(double rotation);
+        void SetSize(double width, double height);
 
         /// <summary>
-        /// Viewport rotation from True North (clockwise degrees)
+        /// Moving the position of viewport to a new one
         /// </summary>
-        double Rotation { get; set; }
-        bool IsRotated { get; }
-        bool Initialized { get; }
+        /// <param name="position">Current center of touch</param>
+        /// <param name="previousPosition">Previous center of touch</param>
+        /// <param name="deltaResolution">Change of resolution for transformation (&lt;1: zoom out, >1: zoom in)</param>
+        /// <param name="deltaRotation">Change of rotation</param>
+        void Transform(Point position, Point previousPosition, double deltaResolution = 1, double deltaRotation = 0);
     }
 }

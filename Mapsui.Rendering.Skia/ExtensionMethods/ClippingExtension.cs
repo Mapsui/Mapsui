@@ -15,7 +15,7 @@ namespace Mapsui.Rendering.Skia
         /// <param name="viewport">Viewport implementation</param>
         /// <param name="clipRect">Rectangle to clip to. All lines outside aren't drawn.</param>
         /// <returns></returns>
-        public static SKPath ToSkiaPath(this IEnumerable<Point> lineString, IViewport viewport, SKRect clipRect)
+        public static SKPath ToSkiaPath(this IEnumerable<Point> lineString, IReadOnlyViewport viewport, SKRect clipRect)
         {
             // First convert List<Points> to screen coordinates
             var vertices = WorldToScreen(viewport, lineString);
@@ -54,7 +54,7 @@ namespace Mapsui.Rendering.Skia
         /// <param name="clipRect">Rectangle to clip to. All lines outside aren't drawn.</param>
         /// <param name="strokeWidth">StrokeWidth for inflating cliptRect</param>
         /// <returns></returns>
-        public static SKPath ToSkiaPath(this Polygon polygon, IViewport viewport, SKRect clipRect, float strokeWidth)
+        public static SKPath ToSkiaPath(this Polygon polygon, IReadOnlyViewport viewport, SKRect clipRect, float strokeWidth)
         {
             // Reduce exterior ring to parts, that are visible in clipping rectangle
             // Inflate clipRect, so that we could be sure, nothing of stroke is visible on screen
@@ -139,7 +139,7 @@ namespace Mapsui.Rendering.Skia
         /// <param name="viewport">Viewport implementation</param>
         /// <param name="clipRect">Rectangle to clip to. All points outside aren't drawn.</param>
         /// <returns></returns>
-        private static List<SKPoint> ReducePointsToClipRect(IEnumerable<Point> points, IViewport viewport, SKRect clipRect)
+        private static List<SKPoint> ReducePointsToClipRect(IEnumerable<Point> points, IReadOnlyViewport viewport, SKRect clipRect)
         {
             var output = WorldToScreen(viewport, points);
 
@@ -192,7 +192,7 @@ namespace Mapsui.Rendering.Skia
         /// <param name="viewport">Viewport implementation</param>
         /// <param name="points">List of points in Mapsui world coordinates</param>
         /// <returns>List of screen coordinates in SKPoint</returns>
-        private static List<SKPoint> WorldToScreen(IViewport viewport, IEnumerable<Point> points)
+        private static List<SKPoint> WorldToScreen(IReadOnlyViewport viewport, IEnumerable<Point> points)
         {
             var result = new List<SKPoint>();
             var screenCenterX = viewport.Width * 0.5;
@@ -204,13 +204,10 @@ namespace Mapsui.Rendering.Skia
             var sin = Math.Sin(rotation);
             var cos = Math.Cos(rotation);
 
-            var screenX = 0.0;
-            var screenY = 0.0;
-
             foreach (var point in points)
             {
-                screenX = (point.X - centerX) * resolution;
-                screenY = (centerY - point.Y) * resolution;
+                var screenX = (point.X - centerX) * resolution;
+                var screenY = (centerY - point.Y) * resolution;
 
                 if (viewport.IsRotated)
                 {

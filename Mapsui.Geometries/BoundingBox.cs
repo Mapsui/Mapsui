@@ -68,7 +68,7 @@ namespace Mapsui.Geometries
         ///     Initializes a new Bounding Box based on the bounds from a set of geometries
         /// </summary>
         /// <param name="objects">list of objects</param>
-        public BoundingBox(IEnumerable<Geometry> objects) : this(objects.Select(o => o.GetBoundingBox())) {}
+        public BoundingBox(IEnumerable<Geometry> objects) : this(objects.Select(o => o.BoundingBox)) {}
 
         /// <summary>
         ///     Initializes a new Bounding Box based on the bounds from a set of bounding boxes
@@ -238,6 +238,7 @@ namespace Mapsui.Geometries
         /// <returns></returns>
         public bool Intersects(BoundingBox box)
         {
+            if (box == null) return false;
             return !((box.Min.X > Max.X) ||
                      (box.Max.X < Min.X) ||
                      (box.Min.Y > Max.Y) ||
@@ -417,7 +418,7 @@ namespace Mapsui.Geometries
             var topRight = new Point(MaxX, MaxY);
             var bottomRight = new Point(MaxX, MinY);
             var quad = new Quad(bottomLeft, topLeft, topRight, bottomRight);
-            var center = GetCentroid();
+            var center = Centroid;
 
             return quad.Rotate(degrees, center.X, center.Y);
         }
@@ -482,9 +483,12 @@ namespace Mapsui.Geometries
         /// <summary>
         ///     Returns the center of the bounding box
         /// </summary>
+        public Point Centroid => (Min + Max) * .5;
+
+        [Obsolete("Use the Centroid field instead")]
         public Point GetCentroid()
         {
-            return (Min + Max)*.5;
+            return Centroid;
         }
 
         /// <summary>

@@ -19,19 +19,16 @@ namespace Mapsui.Geometries
         public MemoryStream Data { get; }
         public long TickFetched { get; }
 
-        public override BoundingBox GetBoundingBox()
-        {
-            return _boundingBox;
-        }
+        public override BoundingBox BoundingBox => _boundingBox;
 
         public new string AsText()
         {
-            return GeometryToWKT.Write(Envelope());
+            return GeometryToWKT.Write(Envelope);
         }
 
         public new byte[] AsBinary()
         {
-            return GeometryToWKB.Write(Envelope());
+            return GeometryToWKB.Write(Envelope);
         }
 
         public override bool IsEmpty()
@@ -49,19 +46,19 @@ namespace Mapsui.Geometries
         
         public override double Distance(Point point)
         {
-            var geometry = Envelope();
+            var geometry = Envelope;
             return geometry.Distance(point);
         }
 
         public override bool Contains(Point point)
         {
-            return Envelope().Contains(point);
+            return Envelope.Contains(point);
         }
 
         public override int GetHashCode()
         {
             // todo: check performance of MemoryStream.GetHashCode
-            return Envelope().GetHashCode()*Data.GetHashCode(); 
+            return Envelope.GetHashCode()*Data.GetHashCode(); 
         }
         
         public override bool Equals(Geometry geom)

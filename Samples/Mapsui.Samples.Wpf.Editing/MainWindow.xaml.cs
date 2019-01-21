@@ -6,8 +6,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
+using Mapsui.Layers;
 using Mapsui.Samples.Wpf.Editing.Editing;
-using Mapsui.Samples.Wpf.Editing.Layers;
 using Mapsui.Samples.Wpf.Editing.Utilities;
 using Mapsui.Logging;
 using Mapsui.Providers;
@@ -23,7 +23,7 @@ namespace Mapsui.Samples.Wpf.Editing
         private readonly EditManipulation _editManipulation = new EditManipulation();
         private bool _selectMode;
         private readonly LimitedQueue<LogModel> _logMessage = new LimitedQueue<LogModel>(6);
-
+        
         public MainWindow()
         {
             InitializeComponent();
@@ -31,8 +31,8 @@ namespace Mapsui.Samples.Wpf.Editing
             MapControl.MouseMove += MapControlOnMouseMove;
             MapControl.MouseLeftButtonDown += MapControlOnMouseLeftButtonDown;
             MapControl.MouseLeftButtonUp += MapControlOnMouseLeftButtonUp;
-            
-            MapControl.RotationLock = true;
+
+            MapControl.Map.RotationLock = false;
             MapControl.UnSnapRotationDegrees = 30;
             MapControl.ReSnapRotationDegrees = 5;
 
@@ -148,13 +148,13 @@ namespace Mapsui.Samples.Wpf.Editing
         private void RotationSliderChanged(object sender, RoutedPropertyChangedEventArgs<double> args)
         {
             var percent = RotationSlider.Value / (RotationSlider.Maximum - RotationSlider.Minimum);
-            MapControl.Map.Viewport.Rotation = percent * 360;
+            MapControl.Navigator.RotateTo(percent * 360);
             MapControl.Refresh();
         }
 
         private void ZoomSliderChanged(object sender, RoutedPropertyChangedEventArgs<double> args)
         {
-            MapControl.Map.NavigateTo(MapControl.Map.Resolutions[(int)args.NewValue]);
+            MapControl.Navigator.ZoomTo(MapControl.Map.Resolutions[(int)args.NewValue]);
         }
 
         private void InitializeEditSetup()
@@ -167,7 +167,10 @@ namespace Mapsui.Samples.Wpf.Editing
             _targetLayer.Clear();
 
             _editManager.EditMode = EditMode.Modify;
-            Loaded += (sender, args) => MapControl.Map.NavigateTo(_editManager.Layer.Envelope.Grow(_editManager.Layer.Envelope.Width * 0.2));
+            Loaded += (sender, args) =>
+            {
+                MapControl.Navigator.NavigateTo(_editManager.Layer.Envelope.Grow(_editManager.Layer.Envelope.Width * 0.2));
+            };
         }
 
         private void AddPoint_OnClick(object sender, RoutedEventArgs args)
@@ -295,7 +298,7 @@ namespace Mapsui.Samples.Wpf.Editing
         private void MapControlOnMouseMove(object sender, MouseEventArgs args)
         {
             var screenPosition = args.GetPosition(MapControl).ToMapsui();
-            var worldPosition = MapControl.Map.Viewport.ScreenToWorld(screenPosition);
+            var worldPosition = MapControl.Viewport.ScreenToWorld(screenPosition);
             MouseCoordinates.Text = $"{worldPosition.X:F0}, {worldPosition.Y:F0}";
 
             if (args.LeftButton == MouseButtonState.Pressed)
@@ -312,7 +315,7 @@ namespace Mapsui.Samples.Wpf.Editing
 
         private void MapControlOnMouseLeftButtonUp(object sender, MouseButtonEventArgs args)
         {
-            MapControl.PanLock = _editManipulation.Manipulate(MouseState.Up,
+            MapControl.Map.PanLock = _editManipulation.Manipulate(MouseState.Up,
                 args.GetPosition(MapControl).ToMapsui(), _editManager, MapControl);
 
             if (_selectMode)
@@ -330,13 +333,13 @@ namespace Mapsui.Samples.Wpf.Editing
         {
             if (args.ClickCount > 1)
             {
-                MapControl.PanLock = _editManipulation.Manipulate(MouseState.DoubleClick,
+                MapControl.Map.PanLock = _editManipulation.Manipulate(MouseState.DoubleClick,
                     args.GetPosition(MapControl).ToMapsui(), _editManager, MapControl);
                 args.Handled = true;
             }
             else
             {
-                MapControl.PanLock = _editManipulation.Manipulate(MouseState.Down,
+                MapControl.Map.PanLock = _editManipulation.Manipulate(MouseState.Down,
                     args.GetPosition(MapControl).ToMapsui(), _editManager, MapControl);
             }
         }

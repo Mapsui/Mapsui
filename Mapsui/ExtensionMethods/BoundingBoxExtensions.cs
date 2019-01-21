@@ -15,6 +15,7 @@ namespace Mapsui.Geometries
             if (box == null) return false;
             if (double.IsNaN(box.Width)) return false;
             if (double.IsNaN(box.Height)) return false;
+            if (box.Centroid == null) return false;
 
             return true;
         }

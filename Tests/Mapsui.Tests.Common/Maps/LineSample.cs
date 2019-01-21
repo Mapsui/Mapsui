@@ -1,24 +1,28 @@
 ﻿using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
+using Mapsui.Samples.Common;
 using Mapsui.Styles;
+using Mapsui.UI;
 
 namespace Mapsui.Tests.Common.Maps
 {
-    public static class LineSample
+    public class LineSample : ISample
     {
+        public string Name => "Line";
+        public string Category => "Tests";
+
+        public void Setup(IMapControl mapControl)
+        {
+            mapControl.Map = CreateMap();
+        }
+
         public static Map CreateMap()
         {
             var map = new Map
             {
                 BackColor = Color.Transparent,
-                Viewport =
-                {
-                    Center = new Point(0, 0),
-                    Width = 600,
-                    Height = 400,
-                    Resolution = 63000
-                }
+                Home = n => n.NavigateTo(new Point(0, 0), 63000)
             };
 
             var layer = new MemoryLayer

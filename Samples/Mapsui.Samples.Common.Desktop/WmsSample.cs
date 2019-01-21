@@ -1,10 +1,22 @@
-﻿using Mapsui.Layers;
-using Mapsui.Providers.Wms;
+﻿using Mapsui.Desktop.Wms;
+using Mapsui.Layers;
+using Mapsui.UI;
 
 namespace Mapsui.Samples.Common.Desktop
 {
-    public static class WmsSample
+    public class WmsSample : ISample
     {
+        // When there is no explicit call to the assembly it is not loaded
+        public static void LoadAssembly() { }
+
+        public string Name => "2 WMS";
+        public string Category => "Desktop";
+
+        public void Setup(IMapControl mapControl)
+        {
+            mapControl.Map = CreateMap();
+        }
+
         public static Map CreateMap()
         {
             var map = new Map {CRS = "EPSG:28992"};

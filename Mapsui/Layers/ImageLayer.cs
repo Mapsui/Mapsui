@@ -22,13 +22,14 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Mapsui.Logging;
 using Mapsui.Utilities;
 
 namespace Mapsui.Layers
 {
-    public class ImageLayer : BaseLayer
+    public class ImageLayer : BaseLayer, IAsyncDataFetcher
     {
         private class FeatureSets
         {
@@ -64,7 +65,7 @@ namespace Mapsui.Layers
         public ImageLayer(string layername)
         {
             Name = layername;
-            _startFetchTimer = new Timer(StartFetchTimerElapsed, int.MaxValue);
+            _startFetchTimer = new Timer(StartFetchTimerElapsed, null, Timeout.Infinite, Timeout.Infinite);
             _numberOfFeaturesReturned = 1;
             PropertyChanged += OnPropertyChanged;
         }
@@ -89,7 +90,6 @@ namespace Mapsui.Layers
             if (_newExtent == null) return;
             if (double.IsNaN(_newResolution)) return;
             StartNewFetch(_newExtent, _newResolution);
-            _startFetchTimer.Dispose();
         }
 
         public override IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
@@ -109,18 +109,19 @@ namespace Mapsui.Layers
                 if (feature.Geometry == null)
                     continue;
 
-                if (box.Intersects(feature.Geometry.GetBoundingBox()))
+                if (box.Intersects(feature.Geometry.BoundingBox))
                 {
                     yield return feature;
                 }
             }
         }
 
-        public override void AbortFetch()
+        public void AbortFetch()
         {
+            // not implemented for ImageLayer
         }
 
-        public override void ViewChanged(bool majorChange, BoundingBox extent, double resolution)
+        public override void RefreshData(BoundingBox extent, double resolution, bool majorChange)
         {
             if (!Enabled) return;
             if (DataSource == null) return;
@@ -135,7 +136,7 @@ namespace Mapsui.Layers
                 return;
             }
 
-            _startFetchTimer.Restart(FetchDelay);
+            _startFetchTimer.Change(FetchDelay, Timeout.Infinite);
         }
 
         private void StartNewFetch(BoundingBox extent, double resolution)
@@ -196,7 +197,7 @@ namespace Mapsui.Layers
             }
         }
 
-        public override void ClearCache()
+        public void ClearCache()
         {
             foreach (var cache in _sets)
             {

@@ -1,14 +1,22 @@
 ﻿using System.IO;
-using BruTile;
 using BruTile.MbTiles;
 using BruTile.Predefined;
 using Mapsui.Layers;
+using Mapsui.UI;
 using SQLite;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public static class MbTilesOverlaySample
+    public class MbTilesOverlaySample : ISample
     {
+        public string Name => "2 MbTiles Overlay";
+        public string Category => "Data";
+
+        public void Setup(IMapControl mapControl)
+        {
+            mapControl.Map = CreateMap();
+        }
+
         public static Map CreateMap()
         {
             var map = new Map();

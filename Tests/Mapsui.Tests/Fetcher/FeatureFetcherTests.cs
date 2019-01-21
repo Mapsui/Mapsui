@@ -23,7 +23,7 @@ namespace Mapsui.Tests.Fetcher
             };
 
             // act
-            layer.ViewChanged(true, extent, 1);
+            layer.RefreshData(extent, 1, true);
             var notifications = new List<bool>();
 
             layer.PropertyChanged += (sender, args) =>

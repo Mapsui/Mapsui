@@ -1,20 +1,26 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Samples.Common.Helpers;
 using Mapsui.Styles;
+using Mapsui.UI;
 using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public static class InfoLayersSample
+    public class InfoLayersSample : ISample
     {
         private const string InfoLayerName = "Info Layer";
-        private const string HoverLayerName = "Hover Layer";
         private const string PolygonLayerName = "Polygon Layer";
         private const string LineLayerName = "Line Layer";
+
+        public string Name => "2 Map Info";
+        public string Category => "Demo";
+        public void Setup(IMapControl mapControl)
+        {
+            mapControl.Map = CreateMap();
+        }
 
         public static Map CreateMap()
         {
@@ -22,15 +28,10 @@ namespace Mapsui.Samples.Common.Maps
 
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
             map.Layers.Add(CreateInfoLayer(map.Envelope));
-            map.Layers.Add(CreateHoverLayer(map.Envelope));
             map.Layers.Add(CreatePolygonLayer());
+            map.Layers.Add(new WritableLayer());
             map.Layers.Add(CreateLineLayer());
-
-            map.InfoLayers.Add(map.Layers.First(l => l.Name == InfoLayerName));
-            map.InfoLayers.Add(map.Layers.First(l => l.Name == PolygonLayerName));
-            map.InfoLayers.Add(map.Layers.First(l => l.Name == LineLayerName));
-            map.HoverLayers.Add(map.Layers.First(l => l.Name == HoverLayerName));
-
+            
             return map;
         }
 
@@ -43,7 +44,8 @@ namespace Mapsui.Samples.Common.Maps
             {
                 Name = PolygonLayerName,
                 DataSource = provider,
-                Style = null
+                Style = null,
+                IsMapInfoLayer = true
             };
 
             return layer;
@@ -55,7 +57,8 @@ namespace Mapsui.Samples.Common.Maps
             {
                 Name = LineLayerName,
                 DataSource = new MemoryProvider(CreateLineFeature()),
-                Style = null
+                Style = null,
+                IsMapInfoLayer = true
             };
         }
 
@@ -151,26 +154,8 @@ namespace Mapsui.Samples.Common.Maps
             return new Layer(InfoLayerName)
             {
                 DataSource = RandomPointHelper.CreateProviderWithRandomPoints(envelope, 25, 7),
-                Style = CreateSymbolStyle()
-            };
-        }
-
-        private static ILayer CreateHoverLayer(BoundingBox envelope)
-        {
-            return new Layer(HoverLayerName)
-            {
-                DataSource = RandomPointHelper.CreateProviderWithRandomPoints(envelope, 25, 8),
-                Style = CreateHoverSymbolStyle()
-            };
-        }
-
-        private static SymbolStyle CreateHoverSymbolStyle()
-        {
-            return new SymbolStyle
-            {
-                SymbolScale = 0.8,
-                Fill = new Brush(new Color(251, 236, 215)),
-                Outline = { Color = Color.Gray, Width = 1 }
+                Style = CreateSymbolStyle(),
+                IsMapInfoLayer = true
             };
         }
 

@@ -10,7 +10,7 @@ namespace Mapsui.Rendering.Skia
 {
     public static class RasterRenderer
     {
-		public static void Draw (SKCanvas canvas, IViewport viewport, IStyle style, IFeature feature,
+		public static void Draw (SKCanvas canvas, IReadOnlyViewport viewport, IStyle style, IFeature feature,
             float opacity, IDictionary<object, BitmapInfo> tileCache, long currentIteration)
 		{
 		    try
@@ -32,7 +32,7 @@ namespace Mapsui.Rendering.Skia
 		        bitmapInfo.IterationUsed = currentIteration;
 		        tileCache[raster] = bitmapInfo;
 
-		        var boundingBox = feature.Geometry.GetBoundingBox();
+		        var boundingBox = feature.Geometry.BoundingBox;
 
 		        if (viewport.IsRotated)
 		        {
@@ -50,7 +50,7 @@ namespace Mapsui.Rendering.Skia
 		        }
 		        else
 		        {
-		            var destination = WorldToScreen(viewport, feature.Geometry.GetBoundingBox());
+		            var destination = WorldToScreen(viewport, feature.Geometry.BoundingBox);
 		            BitmapHelper.RenderRaster(canvas, bitmapInfo.Bitmap, RoundToPixel(destination).ToSkia(), opacity);
                 }
 		    }
@@ -60,7 +60,7 @@ namespace Mapsui.Rendering.Skia
 			}
 		}
 
-        private static SKMatrix CreateRotationMatrix(IViewport viewport, BoundingBox boundingBox, SKMatrix priorMatrix)
+        private static SKMatrix CreateRotationMatrix(IReadOnlyViewport viewport, BoundingBox boundingBox, SKMatrix priorMatrix)
         {
             SKMatrix matrix = SKMatrix.MakeIdentity();
 
@@ -87,7 +87,7 @@ namespace Mapsui.Rendering.Skia
             return matrix;
         }
 
-        private static BoundingBox WorldToScreen(IViewport viewport, BoundingBox boundingBox)
+        private static BoundingBox WorldToScreen(IReadOnlyViewport viewport, BoundingBox boundingBox)
         {
             var first = viewport.WorldToScreen(boundingBox.Min);
             var second = viewport.WorldToScreen(boundingBox.Max);

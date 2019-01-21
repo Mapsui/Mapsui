@@ -1,22 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Samples.Common.Helpers;
 using Mapsui.Styles;
+using Mapsui.UI;
 using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public static class AtlasSample
+    public class AtlasSample : ISample
     {
         private const string AtlasLayerName = "Atlas Layer";
         private static int _atlasBitmapId;
-        private static Random rnd = new Random();
+        private static readonly Random Random = new Random();
 
+        public string Name => "Atlas";
+
+        public string Category => "Symbols";
+
+        public void Setup(IMapControl mapControl)
+        {
+            mapControl.Map = CreateMap();
+        }
 
         public static Map CreateMap()
         {
@@ -26,8 +34,7 @@ namespace Mapsui.Samples.Common.Maps
 
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
             map.Layers.Add(CreateAtlasLayer(map.Envelope));
-            map.HoverLayers.Add(map.Layers.First(l => l.Name == AtlasLayerName));
-
+           
             return map;
         }
 
@@ -37,7 +44,8 @@ namespace Mapsui.Samples.Common.Maps
             {
                 Name = AtlasLayerName,
                 DataSource = CreateMemoryProviderWithDiverseSymbols(envelope, 1000),
-                Style = null
+                Style = null,
+                IsMapInfoLayer = true
             };
         }
 
@@ -54,8 +62,8 @@ namespace Mapsui.Samples.Common.Maps
             {
                 var feature = new Feature { Geometry = point, ["Label"] = counter.ToString() };
 
-                var x = 0 + rnd.Next(0, 12) * 21;
-                var y = 64 + rnd.Next(0, 6) * 21;
+                var x = 0 + Random.Next(0, 12) * 21;
+                var y = 64 + Random.Next(0, 6) * 21;
                 var bitmapId = BitmapRegistry.Instance.Register(new Sprite(_atlasBitmapId, x, y, 21, 21, 1));
                 feature.Styles.Add(new SymbolStyle { BitmapId = bitmapId });
 

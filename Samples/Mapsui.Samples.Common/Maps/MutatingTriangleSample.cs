@@ -1,14 +1,25 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
-using System.Collections.Generic;
-using Mapsui.Geometries;
+using Mapsui.UI;
 using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public static class MutatingTriangleSample
+    public class MutatingTriangleSample : ISample
     {
+        public string Name => "Mutating triangle";
+        public string Category => "Special";
+
+        public void Setup(IMapControl mapControl)
+        {
+            mapControl.Map = CreateMap();
+        }
+
         private static readonly Random Random = new Random(0);
 
         public static Map CreateMap()
@@ -36,7 +47,7 @@ namespace Mapsui.Samples.Common.Maps
                 // Clear cache for change to show
                 feature.RenderedGeometry.Clear();
                 // Trigger DataChanged notification
-                layer.ViewChanged(true, layer.Envelope, 1);
+                layer.RefreshData(layer.Envelope, 1, true);
             },
             TimeSpan.FromMilliseconds(1000));
 
@@ -57,6 +68,25 @@ namespace Mapsui.Samples.Common.Maps
             result.Add(result[0]); // close polygon by adding start point.
 
             return result;
+        }
+
+        public class PeriodicTask
+        {
+            public static async Task Run(Action action, TimeSpan period, CancellationToken cancellationToken)
+            {
+                while (!cancellationToken.IsCancellationRequested)
+                {
+                    await Task.Delay(period, cancellationToken);
+
+                    if (!cancellationToken.IsCancellationRequested)
+                        action();
+                }
+            }
+
+            public static Task Run(Action action, TimeSpan period)
+            {
+                return Run(action, period, CancellationToken.None);
+            }
         }
     }
 }

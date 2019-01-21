@@ -1,16 +1,27 @@
-﻿using Mapsui.Layers;
-using Mapsui.Providers.Wms;
+﻿using Mapsui.Desktop.Wms;
+using Mapsui.Geometries;
+using Mapsui.Layers;
+using Mapsui.UI;
 using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Common.Desktop
 {
-    public static class SlowWmsSample
+    public class SlowWmsSample : ISample
     {
+        public string Name => "3  Slow WMS";
+        public string Category => "Desktop";
+
+        public void Setup(IMapControl mapControl)
+        {
+            mapControl.Map = CreateMap();
+        }
+
         public static Map CreateMap()
         {
             var map = new Map();
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
             map.Layers.Add(CreateLayer());
+            map.Home = n => n.NavigateTo(new Point(1031709.38634765, 7507541.80851409), 10);
             return map;
         }
 

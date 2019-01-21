@@ -13,16 +13,18 @@
         <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="Gray">
             <uwp:MapControl x:Name="MapControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
             <Border BorderBrush="White" Opacity="0.65" Background="White" BorderThickness="6" MinWidth="140"
-                    MinHeight="30"
-                    VerticalAlignment="Top" HorizontalAlignment="Left">
-                <StackPanel>
-                    <ComboBox Name="SampleSet" Margin="0,0, 0, 10">
-                        <ComboBoxItem IsSelected="True">Demo samples</ComboBoxItem>
-                        <ComboBoxItem>Test samples</ComboBoxItem>
+                    MinHeight="30" HorizontalAlignment="Left">
+                <RelativePanel VerticalAlignment="Stretch" >
+                    <ComboBox Name="CategoryComboBox" Margin="0,0, 0, 10">
                     </ComboBox>
-                    <StackPanel Name="SampleList" Width="Auto" />
-                </StackPanel>
+
+                    <ScrollViewer RelativePanel.Below="CategoryComboBox">
+                        <StackPanel Width="Auto" Name="SampleList"/>
+                    </ScrollViewer>
+                    <Slider RelativePanel.AlignBottomWithPanel="True" x:Name="RotationSlider" MinWidth="140" ValueChanged="RotationSlider_OnValueChanged" />
+                </RelativePanel>
             </Border>
+
             <Border BorderBrush="White" Opacity="0.65" Background="White"
                     BorderThickness="6" HorizontalAlignment="Center" VerticalAlignment="Top">
             </Border>

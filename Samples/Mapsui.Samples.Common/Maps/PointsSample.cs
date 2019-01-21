@@ -6,6 +6,7 @@ using Mapsui.Layers;
 using Mapsui.Projection;
 using Mapsui.Providers;
 using Mapsui.Styles;
+using Mapsui.UI;
 using Mapsui.Utilities;
 using Newtonsoft.Json;
 
@@ -13,18 +14,23 @@ using Newtonsoft.Json;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public static class PointsSample
+    public class PointsSample : ISample
     {
+        public string Name => "1 Points";
+        public string Category => "Geometries";
+
+        public void Setup(IMapControl mapControl)
+        {
+            mapControl.Map = CreateMap();
+        }
+
         public static Map CreateMap()
         {
             var map = new Map();
 
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
             map.Layers.Add(CreatePointLayer());
-
-            map.Viewport.Center = map.Layers[1].Envelope.GetCentroid();
-            map.Viewport.Resolution = map.Resolutions[5];
-
+            map.Home = n => n.NavigateTo(map.Layers[1].Envelope.Centroid, map.Resolutions[5]);
             return map;
         }
 
@@ -33,6 +39,7 @@ namespace Mapsui.Samples.Common.Maps
             return new MemoryLayer
             {
                 Name = "Points",
+                IsMapInfoLayer=true,
                 DataSource = new MemoryProvider(GetCitiesFromEmbeddedResource()),
                 Style = CreateBitmapStyle()
             };

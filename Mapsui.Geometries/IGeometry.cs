@@ -15,6 +15,8 @@
 // along with SharpMap; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
+using System;
+
 namespace Mapsui.Geometries
 {
     /// <summary>
@@ -27,12 +29,15 @@ namespace Mapsui.Geometries
         ///     polygon is defined by the corner points of the bounding box ((MINX, MINY), (MAXX, MINY), (MAXX,
         ///     MAXY), (MINX, MAXY), (MINX, MINY)).
         /// </summary>
-        Geometry Envelope();
+        Geometry Envelope { get; }
 
         /// <summary>
-        ///     The minimum <see cref="BoundingBox" /> for this <see cref="Geometry" />.
+        ///     The minimum <see cref="Geometries.BoundingBox" /> for this <see cref="Geometry" />.
         /// </summary>
-        /// <returns><see cref="BoundingBox" /> for this <see cref="Geometry" /></returns>
+        /// <returns><see cref="Geometries.BoundingBox" /> for this <see cref="Geometry" /></returns>
+        BoundingBox BoundingBox { get; }
+
+        [Obsolete("Use the BoundingBox field instead")]
         BoundingBox GetBoundingBox();
 
         /// <summary>
