@@ -232,7 +232,7 @@ namespace Mapsui.UI.Wpf
 
         public void CallHomeIfNeeded()
         {
-            if (!_map.Initialized && _map != null && _viewport.HasSize && _map?.Envelope != null)
+            if (_map != null && !_map.Initialized && _viewport.HasSize && _map?.Envelope != null)
             {
                 _map.Home?.Invoke(Navigator);
                 _map.Initialized = true;
