@@ -1,10 +1,16 @@
-﻿using Mapsui.Geometries;
+﻿using System;
+using Mapsui.Geometries;
 using Mapsui.Utilities;
 
 namespace Mapsui
 {
     public interface INavigator
     {
+        /// <summary>
+        /// Called each time one of the navigation methods is called
+        /// </summary>
+        EventHandler Navigated { get; set; }
+        
         /// <summary>
         /// Navigate center of viewport to center of extent and change resolution
         /// </summary>
