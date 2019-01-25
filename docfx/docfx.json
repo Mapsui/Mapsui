@@ -31,56 +31,56 @@
     }
   ],
   "build": {
-        "content": [
-          {
-            "files": [
-              "api/**.yml",
-              "api/index.md",
-              "documentation/**.md",
-              "documentation/**/toc.md",
-              "documentation/**.png",
-              "toc.yml",
-              "*.md"
-            ],
-            "exclude": [
-              "obj/**",
-              "_site/**"
-            ]
-          }
+    "content": [
+      {
+        "files": [
+          "api/**.yml",
+          "api/index.md",
+          "documentation/**.md",
+          "documentation/**/toc.md",
+          "documentation/**.png",
+          "toc.yml",
+          "*.md"
         ],
-        "resource": [
-          {
-            "files": [
-              "images/**",
-              "documentation/images/**"
-            ],
-            "exclude": [
-              "obj/**",
-              "_site/**"
-            ]
-          }
-        ],
-        "overwrite": [
-          {
-            "files": [
-              "apidoc/**.md"
-            ],
-            "exclude": [
-              "obj/**",
-              "_site/**"
-            ]
-          }
-        ],
-        "dest": "_site",
-        "globalMetadataFiles": [ "metadata.json" ],
-        "fileMetadataFiles": [],
-        "template": [
-          "default"
-        ],
-        "postProcessors": [],
-        "noLangKeyword": false,
-        "keepFileLink": false,
-        "cleanupCacheHistory": false,
-        "disableGitFeatures": false
+        "exclude": [
+          "obj/**",
+          "_site/**"
+        ]
       }
-    }
+    ],
+    "resource": [
+      {
+        "files": [
+          "images/**",
+          "documentation/images/**"
+        ],
+        "exclude": [
+          "obj/**",
+          "_site/**"
+        ]
+      }
+    ],
+    "overwrite": [
+      {
+        "files": [
+          "apidoc/**.md"
+        ],
+        "exclude": [
+          "obj/**",
+          "_site/**"
+        ]
+      }
+    ],
+    "dest": "_site",
+    "globalMetadataFiles": [ "metadata.json" ],
+    "fileMetadataFiles": [],
+    "template": [
+      "default"
+    ],
+    "postProcessors": [],
+    "noLangKeyword": false,
+    "keepFileLink": false,
+    "cleanupCacheHistory": false,
+    "disableGitFeatures": false
+  }
+}
