@@ -138,16 +138,20 @@ namespace Mapsui.Layers
         /// <summary>
         /// Indicates that there has been a change in the view of the map
         /// </summary>
-        /// <param name="extent">The new extent of the visible map</param>
+        /// <param name="extent">The new extent of the visisble map</param>
         /// <param name="resolution">The new resolution of the visible map</param>
         /// <param name="majorChange">
         /// If true an implementation should always refresh it's data. If false (minorChange) the
-        /// implementation could ignore it. Example: During dragging a map a WMS layer would not want
+        /// implemenatation could ignore it. Example: During dragging a map a WMS layer would not want
         /// to fetch data, only on the drag end.
         /// <param name="anywayUpdate">if true - update the data anyway</param>
         /// </param>
         void RefreshData(BoundingBox extent, double resolution, bool majorChange, bool anywayUpdate = false);
 
+        /// <summary>
+        /// Points that this layer is active and can be show on the canvas
+        /// </summary>
+        bool IsActive { get; set; }
         /// <summary>
         /// To indicate the data withing the layer has changed. This triggers a DataChanged event.
         /// This is necessary for situations where the layer can not know about changes to it's data
