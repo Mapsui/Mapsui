@@ -6123,6 +6123,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.INavigator.CenterOn
   nameWithType: INavigator.CenterOn
+- uid: Mapsui.INavigator.Navigated
+  name: Navigated
+  href: api/Mapsui.INavigator.html#Mapsui_INavigator_Navigated
+  commentId: P:Mapsui.INavigator.Navigated
+  fullName: Mapsui.INavigator.Navigated
+  nameWithType: INavigator.Navigated
+- uid: Mapsui.INavigator.Navigated*
+  name: Navigated
+  href: api/Mapsui.INavigator.html#Mapsui_INavigator_Navigated_
+  commentId: Overload:Mapsui.INavigator.Navigated
+  isSpec: "True"
+  fullName: Mapsui.INavigator.Navigated
+  nameWithType: INavigator.Navigated
 - uid: Mapsui.INavigator.NavigateTo(Mapsui.Geometries.BoundingBox,Mapsui.Utilities.ScaleMethod)
   name: NavigateTo(BoundingBox, ScaleMethod)
   href: api/Mapsui.INavigator.html#Mapsui_INavigator_NavigateTo_Mapsui_Geometries_BoundingBox_Mapsui_Utilities_ScaleMethod_
@@ -8953,6 +8966,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.Navigator.CenterOn
   nameWithType: Navigator.CenterOn
+- uid: Mapsui.Navigator.Navigated
+  name: Navigated
+  href: api/Mapsui.Navigator.html#Mapsui_Navigator_Navigated
+  commentId: P:Mapsui.Navigator.Navigated
+  fullName: Mapsui.Navigator.Navigated
+  nameWithType: Navigator.Navigated
+- uid: Mapsui.Navigator.Navigated*
+  name: Navigated
+  href: api/Mapsui.Navigator.html#Mapsui_Navigator_Navigated_
+  commentId: Overload:Mapsui.Navigator.Navigated
+  isSpec: "True"
+  fullName: Mapsui.Navigator.Navigated
+  nameWithType: Navigator.Navigated
 - uid: Mapsui.Navigator.NavigateTo(Mapsui.Geometries.BoundingBox,Mapsui.Utilities.ScaleMethod)
   name: NavigateTo(BoundingBox, ScaleMethod)
   href: api/Mapsui.Navigator.html#Mapsui_Navigator_NavigateTo_Mapsui_Geometries_BoundingBox_Mapsui_Utilities_ScaleMethod_
