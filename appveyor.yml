@@ -3,7 +3,7 @@ version: '{build}'
 skip_commits:
   files:
     - docs/**/*
-    - docsfx/**/*
+    - docfx/**/*
     - logo/**/*
     - '**/*.md'
 image: Visual Studio 2017
