@@ -4806,7 +4806,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/Home.html",
-          "hash": "60iVCyYgjaSgr3lASijNxA=="
+          "hash": "d4pRipUvQG3yBj2+fCrE/Q=="
         }
       },
       "is_incremental": false,
@@ -5083,11 +5083,10 @@
         "skipped_file_count": 0
       },
       "processors": {
-        "ResourceDocumentProcessor": {
+        "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
-          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build",
-          "total_file_count": 0,
+          "total_file_count": 394,
           "skipped_file_count": 0
         },
         "ConceptualDocumentProcessor": {
@@ -5096,10 +5095,11 @@
           "total_file_count": 21,
           "skipped_file_count": 0
         },
-        "ManagedReferenceDocumentProcessor": {
+        "ResourceDocumentProcessor": {
           "can_incremental": false,
+          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build",
-          "total_file_count": 394,
+          "total_file_count": 0,
           "skipped_file_count": 0
         },
         "TocDocumentProcessor": {
