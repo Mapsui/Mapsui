@@ -19,10 +19,8 @@ Mapsui uses the BruTile library to display tile layers such as:
 - Allows custom data providers
 - MBTiles. A format to store tile data offline
 
-## Syling
+## Styling
 Mapsui support styling for 
 - Polygons
 - Lines
 - Points
-
-
