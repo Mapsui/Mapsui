@@ -10,14 +10,13 @@ Mapsui is a .NET component to show a map in your app.
 
 ## Supported data
 Mapsui uses the BruTile library to display tile layers such as:
-- OpenStreetMap
-- Supports open standards like:
+- OpenStreetMap tiles
+- Open standards for tiles
   - WMTS
   - TMS
   - WMS called tilewise
-  - WMS-C
-- Allows custom data providers
-- MBTiles. A format to store tile data offline
+- Custom data providers
+- MBTiles. An offline format to store tile data in sqlite file.
 
 ## Styling
 Mapsui support styling for 
