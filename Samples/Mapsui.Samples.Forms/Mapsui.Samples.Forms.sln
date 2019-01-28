@@ -4,7 +4,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 15.0.26730.10
 MinimumVisualStudioVersion = 10.0.40219.1
 
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Mapsui.Samples.Forms", "Mapsui.Samples.Forms\Mapsui.Samples.Forms.shproj", "{73FCB5F4-ABAF-4279-ACC2-4C9C8D9F5C40}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Mapsui.Samples.Forms", "Mapsui.Samples.Forms.Shared\Mapsui.Samples.Forms.Shared.shproj", "{73FCB5F4-ABAF-4279-ACC2-4C9C8D9F5C40}"
 EndProject
 
 
