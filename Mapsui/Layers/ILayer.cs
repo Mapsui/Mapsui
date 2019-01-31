@@ -147,5 +147,9 @@ namespace Mapsui.Layers
         /// </param>
         void RefreshData(BoundingBox extent, double resolution, bool majorChange);
 
+        /// <summary>
+        /// Points that this layer is active and can be show on the canvas
+        /// </summary>
+        bool IsActive { get; set; }
     }
 }
