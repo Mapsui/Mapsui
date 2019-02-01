@@ -17,9 +17,4 @@ Mapsui uses the BruTile library to display tile layers such as:
   - WMS called tilewise
 - Custom data providers
 - MBTiles. An offline format to store tile data in sqlite file.
-
-## Styling
-Mapsui support styling for 
-- Polygons
-- Lines
-- Points
+- Mapsui renders and can style vector data (polygons, lines, points)
