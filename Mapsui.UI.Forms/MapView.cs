@@ -25,8 +25,8 @@ namespace Mapsui.UI.Forms
         private readonly MyLocationLayer _mapMyLocationLayer;
         private const string PinLayerName = "Pins";
         private const string DrawableLayerName = "Drawables";
-        private readonly Layer _mapPinLayer;
-        private readonly Layer _mapDrawableLayer;
+        private readonly MemoryLayer _mapPinLayer;
+        private readonly MemoryLayer _mapDrawableLayer;
         private readonly StackLayout _mapButtons;
         private readonly SvgButton _mapZoomInButton;
         private readonly SvgButton _mapZoomOutButton;
@@ -53,8 +53,8 @@ namespace Mapsui.UI.Forms
 
             _mapControl = new MapControl { UseDoubleTap = false };
             _mapMyLocationLayer = new MyLocationLayer(this) { Enabled = true };
-            _mapPinLayer = new Layer(PinLayerName) { IsMapInfoLayer = true };
-            _mapDrawableLayer = new Layer(DrawableLayerName) { IsMapInfoLayer = true };
+            _mapPinLayer = new MemoryLayer() { Name = PinLayerName, IsMapInfoLayer = true };
+            _mapDrawableLayer = new MemoryLayer() { Name = DrawableLayerName, IsMapInfoLayer = true };
 
             // Get defaults from MapControl
             RotationLock = Map.RotationLock;
@@ -860,7 +860,7 @@ namespace Mapsui.UI.Forms
         /// <param name="point">Point to search for in world coordinates</param>
         /// <param name="layer">Layer to search for drawables</param>
         /// <returns>List with all drawables at point, which are clickable</returns>
-        private IList<Drawable> GetDrawablesAt(Geometries.Point point, Layer layer)
+        private IList<Drawable> GetDrawablesAt(Geometries.Point point, ILayer layer)
         {
             List<Drawable> drawables = new List<Drawable>();
 

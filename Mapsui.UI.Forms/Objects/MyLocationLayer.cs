@@ -17,7 +17,7 @@ namespace Mapsui.UI.Objects
     /// There are two different symbols for own loaction: one is used when there isn't a change in position (still),
     /// and one is used, if the position changes (moving).
     /// </remarks>
-    public class MyLocationLayer : Layer
+    public class MyLocationLayer : MemoryLayer
     {
         MapView mapView;
         Feature feature;
