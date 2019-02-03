@@ -38,25 +38,27 @@ namespace Mapsui.Fetcher
 
     public class DataChangedEventArgs : EventArgs
     {
-        public DataChangedEventArgs() : this(null, false, null)
+        public DataChangedEventArgs(bool needsRefresh = true) : this(null, false, null, needsRefresh)
         {
         }
 
-        public DataChangedEventArgs(Exception error, bool cancelled, TileInfo tileInfo)
-            : this(error, cancelled, tileInfo, string.Empty)
+        public DataChangedEventArgs(Exception error, bool cancelled, TileInfo tileInfo, bool needsRefresh = true)
+            : this(error, cancelled, tileInfo, string.Empty, needsRefresh)
         {
         }
 
-        public DataChangedEventArgs(Exception error, bool cancelled, TileInfo tileInfo, string layerName)
+        public DataChangedEventArgs(Exception error, bool cancelled, TileInfo tileInfo, string layerName, bool needsRefresh = true)
         {
             Error = error;
             Cancelled = cancelled;
+            NeedsRefresh = needsRefresh;
             TileInfo = tileInfo;
             LayerName = layerName;
         }
 
         public Exception Error { get; }
         public bool Cancelled { get; }
+        public bool NeedsRefresh { get; } = true;
         public TileInfo TileInfo { get; } // todo: remove
         public string LayerName { get; }
     }

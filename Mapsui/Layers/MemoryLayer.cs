@@ -36,7 +36,7 @@ namespace Mapsui.Layers
         public override void RefreshData(BoundingBox extent, double resolution, bool majorChange)
         {
             //The MemoryLayer always has it's data ready so can fire a DataChanged event immediately so that listeners can act on it.
-            OnDataChanged(new DataChangedEventArgs());
+            OnDataChanged(new DataChangedEventArgs(false));
         }
 
         public override BoundingBox Envelope => DataSource?.GetExtents();

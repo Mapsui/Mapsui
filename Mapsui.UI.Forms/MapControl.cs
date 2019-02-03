@@ -150,8 +150,6 @@ namespace Mapsui.UI.Forms
                 // Is this a fling or swipe?
                 if (velocityX > 10000 || velocityY > 10000)
                 {
-                    System.Diagnostics.Debug.WriteLine($"Velocity X = {velocityX}, Velocity Y = {velocityY}");
-
                     e.Handled = OnFlinged(velocityX, velocityY);
                 }
 
@@ -428,7 +426,6 @@ namespace Mapsui.UI.Forms
             // Last touch released
             if (touchPoints.Count == 0)
             {
-                RefreshGraphics();
                 _mode = TouchMode.None;
                 _map.RefreshData(_viewport.Extent, _viewport.Resolution, true);
             }

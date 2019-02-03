@@ -201,7 +201,7 @@ namespace Mapsui.UI.Wpf
                     {
                         Logger.Log(LogLevel.Warning, "An error occurred while fetching data", e.Error);
                     }
-                    else // no problems
+                    else if (e.NeedsRefresh) // no problems
                     {
                         RefreshGraphics();
                     }
