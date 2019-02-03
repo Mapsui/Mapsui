@@ -22,7 +22,23 @@ namespace Mapsui.Layers
         /// <param name="layername">Name to use for layer</param>
         public MemoryLayer(string layername) : base(layername) { }
 
-        public IProvider DataSource { get; set; }
+        private IProvider _dataSource;
+
+        public IProvider DataSource
+        {
+            get
+            {
+                return _dataSource;
+            }
+            set
+            {
+                if (_dataSource != value)
+                {
+                    _dataSource = value;
+                    OnDataChanged(new DataChangedEventArgs());
+                }
+            }
+        }
 
         public override IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
         {
@@ -30,7 +46,7 @@ namespace Mapsui.Layers
             if (box == null) { return new List<IFeature>(); }
 
             var biggerBox = box.Grow(SymbolStyle.DefaultWidth * 2 * resolution, SymbolStyle.DefaultHeight * 2 * resolution);
-            return DataSource.GetFeaturesInView(biggerBox, resolution);
+            return _dataSource.GetFeaturesInView(biggerBox, resolution);
         }
 
         public override void RefreshData(BoundingBox extent, double resolution, bool majorChange)
@@ -39,6 +55,6 @@ namespace Mapsui.Layers
             OnDataChanged(new DataChangedEventArgs(false));
         }
 
-        public override BoundingBox Envelope => DataSource?.GetExtents();
+        public override BoundingBox Envelope => _dataSource?.GetExtents();
     }
 }
