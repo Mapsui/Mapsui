@@ -82,6 +82,7 @@ namespace Mapsui.UI.Wpf
         }
 
         private readonly LimitedViewport _viewport = new LimitedViewport();
+        private INavigator _navigator;
 
         /// <summary>
         /// Viewport holding information about visible part of the map. Viewport can never be null.
@@ -91,7 +92,21 @@ namespace Mapsui.UI.Wpf
         /// <summary>
         /// Handles all manipulations of the map viewport
         /// </summary>
-        public INavigator Navigator { get; private set; }
+        public INavigator Navigator
+        {
+            get => _navigator;
+            private set
+            {
+                _navigator = value ?? throw new ArgumentException($"{nameof(Navigator)} can not be null");
+                _navigator.Navigated += Navigated;
+            }
+        }
+
+        private void Navigated(object sender, EventArgs e)
+        {
+            _map.Initialized = true;
+            Refresh();
+        }
 
         /// <summary>
         /// Called when the viewport is initialized
