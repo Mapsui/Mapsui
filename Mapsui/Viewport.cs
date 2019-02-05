@@ -216,11 +216,10 @@ namespace Mapsui
         }
 
         /// <inheritdoc />
-        public void Transform(double positionX, double positionY, double previousPositionX, double previousPositionY,
-            double deltaResolution = 1, double deltaRotation = 0)
+        public void Transform(Point positionScreen, Point previousPositionScreen, double deltaResolution = 1, double deltaRotation = 0)
         {
-            var previous = ScreenToWorld(previousPositionX, previousPositionY);
-            var current = ScreenToWorld(positionX, positionY);
+            var previous = ScreenToWorld(previousPositionScreen.X, previousPositionScreen.Y);
+            var current = ScreenToWorld(positionScreen.X, positionScreen.Y);
 
             var newX = _center.X + previous.X - current.X;
             var newY = _center.Y + previous.Y - current.Y;
@@ -243,18 +242,14 @@ namespace Mapsui
 
             if (deltaRotation != 0)
             {
-                current = ScreenToWorld(positionX, positionY); // calculate current position again with adjusted resolution
+                current = ScreenToWorld(positionScreen.X, positionScreen.Y); // calculate current position again with adjusted resolution
                 Rotation += deltaRotation;
-                var postRotation = ScreenToWorld(positionX, positionY); // calculate current position again with adjusted resolution
+                var postRotation = ScreenToWorld(positionScreen.X, positionScreen.Y); // calculate current position again with adjusted resolution
 
-                SetCenter(_center.X - postRotation.X - current.X, _center.Y - postRotation.Y - current.Y);
+                SetCenter(_center.X - (postRotation.X - current.X), _center.Y - (postRotation.Y - current.Y));
             }
         }
 
-        public void Transform(Point position, Point previousPosition, double deltaScale = 1, double deltaRotation = 0)
-        {
-            Transform(position.X, position.Y, previousPosition.X, previousPosition.Y, deltaScale, deltaRotation);
-        }
 
         /// <summary>
         /// Recalculates extents for viewport

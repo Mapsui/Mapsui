@@ -52,3 +52,4 @@ project.lock.json
 /Mapsui.UI.Forms/Images/Pin.svg.bak
 /Samples/Mapsui.Samples.Uwp/AppPackages/Mapsui.Samples.Uwp_1.0.0.0_x86_Test
 /Artifacts
+*.appx

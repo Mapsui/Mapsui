@@ -6123,6 +6123,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.INavigator.CenterOn
   nameWithType: INavigator.CenterOn
+- uid: Mapsui.INavigator.Navigated
+  name: Navigated
+  href: api/Mapsui.INavigator.html#Mapsui_INavigator_Navigated
+  commentId: P:Mapsui.INavigator.Navigated
+  fullName: Mapsui.INavigator.Navigated
+  nameWithType: INavigator.Navigated
+- uid: Mapsui.INavigator.Navigated*
+  name: Navigated
+  href: api/Mapsui.INavigator.html#Mapsui_INavigator_Navigated_
+  commentId: Overload:Mapsui.INavigator.Navigated
+  isSpec: "True"
+  fullName: Mapsui.INavigator.Navigated
+  nameWithType: INavigator.Navigated
 - uid: Mapsui.INavigator.NavigateTo(Mapsui.Geometries.BoundingBox,Mapsui.Utilities.ScaleMethod)
   name: NavigateTo(BoundingBox, ScaleMethod)
   href: api/Mapsui.INavigator.html#Mapsui_INavigator_NavigateTo_Mapsui_Geometries_BoundingBox_Mapsui_Utilities_ScaleMethod_
@@ -6481,12 +6494,6 @@ references:
   commentId: M:Mapsui.IViewport.Transform(Mapsui.Geometries.Point,Mapsui.Geometries.Point,System.Double,System.Double)
   fullName: Mapsui.IViewport.Transform(Mapsui.Geometries.Point, Mapsui.Geometries.Point, System.Double, System.Double)
   nameWithType: IViewport.Transform(Point, Point, Double, Double)
-- uid: Mapsui.IViewport.Transform(System.Double,System.Double,System.Double,System.Double,System.Double,System.Double)
-  name: Transform(Double, Double, Double, Double, Double, Double)
-  href: api/Mapsui.IViewport.html#Mapsui_IViewport_Transform_System_Double_System_Double_System_Double_System_Double_System_Double_System_Double_
-  commentId: M:Mapsui.IViewport.Transform(System.Double,System.Double,System.Double,System.Double,System.Double,System.Double)
-  fullName: Mapsui.IViewport.Transform(System.Double, System.Double, System.Double, System.Double, System.Double, System.Double)
-  nameWithType: IViewport.Transform(Double, Double, Double, Double, Double, Double)
 - uid: Mapsui.IViewport.Transform*
   name: Transform
   href: api/Mapsui.IViewport.html#Mapsui_IViewport_Transform_
@@ -8474,12 +8481,6 @@ references:
   commentId: M:Mapsui.LimitedViewport.Transform(Mapsui.Geometries.Point,Mapsui.Geometries.Point,System.Double,System.Double)
   fullName: Mapsui.LimitedViewport.Transform(Mapsui.Geometries.Point, Mapsui.Geometries.Point, System.Double, System.Double)
   nameWithType: LimitedViewport.Transform(Point, Point, Double, Double)
-- uid: Mapsui.LimitedViewport.Transform(System.Double,System.Double,System.Double,System.Double,System.Double,System.Double)
-  name: Transform(Double, Double, Double, Double, Double, Double)
-  href: api/Mapsui.LimitedViewport.html#Mapsui_LimitedViewport_Transform_System_Double_System_Double_System_Double_System_Double_System_Double_System_Double_
-  commentId: M:Mapsui.LimitedViewport.Transform(System.Double,System.Double,System.Double,System.Double,System.Double,System.Double)
-  fullName: Mapsui.LimitedViewport.Transform(System.Double, System.Double, System.Double, System.Double, System.Double, System.Double)
-  nameWithType: LimitedViewport.Transform(Double, Double, Double, Double, Double, Double)
 - uid: Mapsui.LimitedViewport.Transform*
   name: Transform
   href: api/Mapsui.LimitedViewport.html#Mapsui_LimitedViewport_Transform_
@@ -8721,6 +8722,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.Map.Envelope
   nameWithType: Map.Envelope
+- uid: Mapsui.Map.GetWidgetsOfMapAndLayers
+  name: GetWidgetsOfMapAndLayers()
+  href: api/Mapsui.Map.html#Mapsui_Map_GetWidgetsOfMapAndLayers
+  commentId: M:Mapsui.Map.GetWidgetsOfMapAndLayers
+  fullName: Mapsui.Map.GetWidgetsOfMapAndLayers()
+  nameWithType: Map.GetWidgetsOfMapAndLayers()
+- uid: Mapsui.Map.GetWidgetsOfMapAndLayers*
+  name: GetWidgetsOfMapAndLayers
+  href: api/Mapsui.Map.html#Mapsui_Map_GetWidgetsOfMapAndLayers_
+  commentId: Overload:Mapsui.Map.GetWidgetsOfMapAndLayers
+  isSpec: "True"
+  fullName: Mapsui.Map.GetWidgetsOfMapAndLayers
+  nameWithType: Map.GetWidgetsOfMapAndLayers
 - uid: Mapsui.Map.Home
   name: Home
   href: api/Mapsui.Map.html#Mapsui_Map_Home
@@ -8772,6 +8786,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.Map.InfoLayers
   nameWithType: Map.InfoLayers
+- uid: Mapsui.Map.Initialized
+  name: Initialized
+  href: api/Mapsui.Map.html#Mapsui_Map_Initialized
+  commentId: P:Mapsui.Map.Initialized
+  fullName: Mapsui.Map.Initialized
+  nameWithType: Map.Initialized
+- uid: Mapsui.Map.Initialized*
+  name: Initialized
+  href: api/Mapsui.Map.html#Mapsui_Map_Initialized_
+  commentId: Overload:Mapsui.Map.Initialized
+  isSpec: "True"
+  fullName: Mapsui.Map.Initialized
+  nameWithType: Map.Initialized
 - uid: Mapsui.Map.Layers
   name: Layers
   href: api/Mapsui.Map.html#Mapsui_Map_Layers
@@ -8798,6 +8825,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.Map.Limiter
   nameWithType: Map.Limiter
+- uid: Mapsui.Map.PanLock
+  name: PanLock
+  href: api/Mapsui.Map.html#Mapsui_Map_PanLock
+  commentId: P:Mapsui.Map.PanLock
+  fullName: Mapsui.Map.PanLock
+  nameWithType: Map.PanLock
+- uid: Mapsui.Map.PanLock*
+  name: PanLock
+  href: api/Mapsui.Map.html#Mapsui_Map_PanLock_
+  commentId: Overload:Mapsui.Map.PanLock
+  isSpec: "True"
+  fullName: Mapsui.Map.PanLock
+  nameWithType: Map.PanLock
 - uid: Mapsui.Map.PropertyChanged
   name: PropertyChanged
   href: api/Mapsui.Map.html#Mapsui_Map_PropertyChanged
@@ -8836,6 +8876,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.Map.Resolutions
   nameWithType: Map.Resolutions
+- uid: Mapsui.Map.RotationLock
+  name: RotationLock
+  href: api/Mapsui.Map.html#Mapsui_Map_RotationLock
+  commentId: P:Mapsui.Map.RotationLock
+  fullName: Mapsui.Map.RotationLock
+  nameWithType: Map.RotationLock
+- uid: Mapsui.Map.RotationLock*
+  name: RotationLock
+  href: api/Mapsui.Map.html#Mapsui_Map_RotationLock_
+  commentId: Overload:Mapsui.Map.RotationLock
+  isSpec: "True"
+  fullName: Mapsui.Map.RotationLock
+  nameWithType: Map.RotationLock
 - uid: Mapsui.Map.Transformation
   name: Transformation
   href: api/Mapsui.Map.html#Mapsui_Map_Transformation
@@ -8862,6 +8915,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.Map.Widgets
   nameWithType: Map.Widgets
+- uid: Mapsui.Map.ZoomLock
+  name: ZoomLock
+  href: api/Mapsui.Map.html#Mapsui_Map_ZoomLock
+  commentId: P:Mapsui.Map.ZoomLock
+  fullName: Mapsui.Map.ZoomLock
+  nameWithType: Map.ZoomLock
+- uid: Mapsui.Map.ZoomLock*
+  name: ZoomLock
+  href: api/Mapsui.Map.html#Mapsui_Map_ZoomLock_
+  commentId: Overload:Mapsui.Map.ZoomLock
+  isSpec: "True"
+  fullName: Mapsui.Map.ZoomLock
+  nameWithType: Map.ZoomLock
 - uid: Mapsui.Navigator
   name: Navigator
   href: api/Mapsui.Navigator.html
@@ -8900,6 +8966,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.Navigator.CenterOn
   nameWithType: Navigator.CenterOn
+- uid: Mapsui.Navigator.Navigated
+  name: Navigated
+  href: api/Mapsui.Navigator.html#Mapsui_Navigator_Navigated
+  commentId: P:Mapsui.Navigator.Navigated
+  fullName: Mapsui.Navigator.Navigated
+  nameWithType: Navigator.Navigated
+- uid: Mapsui.Navigator.Navigated*
+  name: Navigated
+  href: api/Mapsui.Navigator.html#Mapsui_Navigator_Navigated_
+  commentId: Overload:Mapsui.Navigator.Navigated
+  isSpec: "True"
+  fullName: Mapsui.Navigator.Navigated
+  nameWithType: Navigator.Navigated
 - uid: Mapsui.Navigator.NavigateTo(Mapsui.Geometries.BoundingBox,Mapsui.Utilities.ScaleMethod)
   name: NavigateTo(BoundingBox, ScaleMethod)
   href: api/Mapsui.Navigator.html#Mapsui_Navigator_NavigateTo_Mapsui_Geometries_BoundingBox_Mapsui_Utilities_ScaleMethod_
@@ -21102,6 +21181,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Android.MapControl.MapControl
   nameWithType: MapControl.MapControl
+- uid: Mapsui.UI.Android.MapControl.CallHomeIfNeeded
+  name: CallHomeIfNeeded()
+  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_CallHomeIfNeeded
+  commentId: M:Mapsui.UI.Android.MapControl.CallHomeIfNeeded
+  fullName: Mapsui.UI.Android.MapControl.CallHomeIfNeeded()
+  nameWithType: MapControl.CallHomeIfNeeded()
+- uid: Mapsui.UI.Android.MapControl.CallHomeIfNeeded*
+  name: CallHomeIfNeeded
+  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_CallHomeIfNeeded_
+  commentId: Overload:Mapsui.UI.Android.MapControl.CallHomeIfNeeded
+  isSpec: "True"
+  fullName: Mapsui.UI.Android.MapControl.CallHomeIfNeeded
+  nameWithType: MapControl.CallHomeIfNeeded
 - uid: Mapsui.UI.Android.MapControl.Clear
   name: Clear()
   href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_Clear
@@ -21175,19 +21267,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Android.MapControl.Initialize
   nameWithType: MapControl.Initialize
-- uid: Mapsui.UI.Android.MapControl.Lock
-  name: Lock
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_Lock
-  commentId: P:Mapsui.UI.Android.MapControl.Lock
-  fullName: Mapsui.UI.Android.MapControl.Lock
-  nameWithType: MapControl.Lock
-- uid: Mapsui.UI.Android.MapControl.Lock*
-  name: Lock
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_Lock_
-  commentId: Overload:Mapsui.UI.Android.MapControl.Lock
-  isSpec: "True"
-  fullName: Mapsui.UI.Android.MapControl.Lock
-  nameWithType: MapControl.Lock
 - uid: Mapsui.UI.Android.MapControl.Map
   name: Map
   href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_Map
@@ -22000,6 +22079,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Forms.MapControl.MapControl
   nameWithType: MapControl.MapControl
+- uid: Mapsui.UI.Forms.MapControl.CallHomeIfNeeded
+  name: CallHomeIfNeeded()
+  href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_CallHomeIfNeeded
+  commentId: M:Mapsui.UI.Forms.MapControl.CallHomeIfNeeded
+  fullName: Mapsui.UI.Forms.MapControl.CallHomeIfNeeded()
+  nameWithType: MapControl.CallHomeIfNeeded()
+- uid: Mapsui.UI.Forms.MapControl.CallHomeIfNeeded*
+  name: CallHomeIfNeeded
+  href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_CallHomeIfNeeded_
+  commentId: Overload:Mapsui.UI.Forms.MapControl.CallHomeIfNeeded
+  isSpec: "True"
+  fullName: Mapsui.UI.Forms.MapControl.CallHomeIfNeeded
+  nameWithType: MapControl.CallHomeIfNeeded
 - uid: Mapsui.UI.Forms.MapControl.Clear
   name: Clear()
   href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_Clear
@@ -22104,19 +22196,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Forms.MapControl.Initialize
   nameWithType: MapControl.Initialize
-- uid: Mapsui.UI.Forms.MapControl.Lock
-  name: Lock
-  href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_Lock
-  commentId: P:Mapsui.UI.Forms.MapControl.Lock
-  fullName: Mapsui.UI.Forms.MapControl.Lock
-  nameWithType: MapControl.Lock
-- uid: Mapsui.UI.Forms.MapControl.Lock*
-  name: Lock
-  href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_Lock_
-  commentId: Overload:Mapsui.UI.Forms.MapControl.Lock
-  isSpec: "True"
-  fullName: Mapsui.UI.Forms.MapControl.Lock
-  nameWithType: MapControl.Lock
 - uid: Mapsui.UI.Forms.MapControl.LongTap
   name: LongTap
   href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_LongTap
@@ -22787,19 +22866,6 @@ references:
   commentId: F:Mapsui.UI.Forms.MapView.IsZoomButtonVisibleProperty
   fullName: Mapsui.UI.Forms.MapView.IsZoomButtonVisibleProperty
   nameWithType: MapView.IsZoomButtonVisibleProperty
-- uid: Mapsui.UI.Forms.MapView.Lock
-  name: Lock
-  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_Lock
-  commentId: P:Mapsui.UI.Forms.MapView.Lock
-  fullName: Mapsui.UI.Forms.MapView.Lock
-  nameWithType: MapView.Lock
-- uid: Mapsui.UI.Forms.MapView.Lock*
-  name: Lock
-  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_Lock_
-  commentId: Overload:Mapsui.UI.Forms.MapView.Lock
-  isSpec: "True"
-  fullName: Mapsui.UI.Forms.MapView.Lock
-  nameWithType: MapView.Lock
 - uid: Mapsui.UI.Forms.MapView.Map
   name: Map
   href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_Map
@@ -24091,19 +24157,6 @@ references:
   commentId: E:Mapsui.UI.IMapControl.Info
   fullName: Mapsui.UI.IMapControl.Info
   nameWithType: IMapControl.Info
-- uid: Mapsui.UI.IMapControl.Lock
-  name: Lock
-  href: api/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_Lock
-  commentId: P:Mapsui.UI.IMapControl.Lock
-  fullName: Mapsui.UI.IMapControl.Lock
-  nameWithType: IMapControl.Lock
-- uid: Mapsui.UI.IMapControl.Lock*
-  name: Lock
-  href: api/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_Lock_
-  commentId: Overload:Mapsui.UI.IMapControl.Lock
-  isSpec: "True"
-  fullName: Mapsui.UI.IMapControl.Lock
-  nameWithType: IMapControl.Lock
 - uid: Mapsui.UI.IMapControl.Map
   name: Map
   href: api/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_Map
@@ -24297,6 +24350,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.iOS.MapControl.MapControl
   nameWithType: MapControl.MapControl
+- uid: Mapsui.UI.iOS.MapControl.CallHomeIfNeeded
+  name: CallHomeIfNeeded()
+  href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_CallHomeIfNeeded
+  commentId: M:Mapsui.UI.iOS.MapControl.CallHomeIfNeeded
+  fullName: Mapsui.UI.iOS.MapControl.CallHomeIfNeeded()
+  nameWithType: MapControl.CallHomeIfNeeded()
+- uid: Mapsui.UI.iOS.MapControl.CallHomeIfNeeded*
+  name: CallHomeIfNeeded
+  href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_CallHomeIfNeeded_
+  commentId: Overload:Mapsui.UI.iOS.MapControl.CallHomeIfNeeded
+  isSpec: "True"
+  fullName: Mapsui.UI.iOS.MapControl.CallHomeIfNeeded
+  nameWithType: MapControl.CallHomeIfNeeded
 - uid: Mapsui.UI.iOS.MapControl.Clear
   name: Clear()
   href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_Clear
@@ -24396,19 +24462,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.iOS.MapControl.LayoutMarginsDidChange
   nameWithType: MapControl.LayoutMarginsDidChange
-- uid: Mapsui.UI.iOS.MapControl.Lock
-  name: Lock
-  href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_Lock
-  commentId: P:Mapsui.UI.iOS.MapControl.Lock
-  fullName: Mapsui.UI.iOS.MapControl.Lock
-  nameWithType: MapControl.Lock
-- uid: Mapsui.UI.iOS.MapControl.Lock*
-  name: Lock
-  href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_Lock_
-  commentId: Overload:Mapsui.UI.iOS.MapControl.Lock
-  isSpec: "True"
-  fullName: Mapsui.UI.iOS.MapControl.Lock
-  nameWithType: MapControl.Lock
 - uid: Mapsui.UI.iOS.MapControl.Map
   name: Map
   href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_Map
@@ -24870,77 +24923,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.MapInfoHelper.GetMapInfo
   nameWithType: MapInfoHelper.GetMapInfo
-- uid: Mapsui.UI.MapLock
-  name: MapLock
-  href: api/Mapsui.UI.MapLock.html
-  commentId: T:Mapsui.UI.MapLock
-  fullName: Mapsui.UI.MapLock
-  nameWithType: MapLock
-- uid: Mapsui.UI.MapLock.LockAll
-  name: LockAll()
-  href: api/Mapsui.UI.MapLock.html#Mapsui_UI_MapLock_LockAll
-  commentId: M:Mapsui.UI.MapLock.LockAll
-  fullName: Mapsui.UI.MapLock.LockAll()
-  nameWithType: MapLock.LockAll()
-- uid: Mapsui.UI.MapLock.LockAll*
-  name: LockAll
-  href: api/Mapsui.UI.MapLock.html#Mapsui_UI_MapLock_LockAll_
-  commentId: Overload:Mapsui.UI.MapLock.LockAll
-  isSpec: "True"
-  fullName: Mapsui.UI.MapLock.LockAll
-  nameWithType: MapLock.LockAll
-- uid: Mapsui.UI.MapLock.PanLock
-  name: PanLock
-  href: api/Mapsui.UI.MapLock.html#Mapsui_UI_MapLock_PanLock
-  commentId: P:Mapsui.UI.MapLock.PanLock
-  fullName: Mapsui.UI.MapLock.PanLock
-  nameWithType: MapLock.PanLock
-- uid: Mapsui.UI.MapLock.PanLock*
-  name: PanLock
-  href: api/Mapsui.UI.MapLock.html#Mapsui_UI_MapLock_PanLock_
-  commentId: Overload:Mapsui.UI.MapLock.PanLock
-  isSpec: "True"
-  fullName: Mapsui.UI.MapLock.PanLock
-  nameWithType: MapLock.PanLock
-- uid: Mapsui.UI.MapLock.ReleaseAll
-  name: ReleaseAll()
-  href: api/Mapsui.UI.MapLock.html#Mapsui_UI_MapLock_ReleaseAll
-  commentId: M:Mapsui.UI.MapLock.ReleaseAll
-  fullName: Mapsui.UI.MapLock.ReleaseAll()
-  nameWithType: MapLock.ReleaseAll()
-- uid: Mapsui.UI.MapLock.ReleaseAll*
-  name: ReleaseAll
-  href: api/Mapsui.UI.MapLock.html#Mapsui_UI_MapLock_ReleaseAll_
-  commentId: Overload:Mapsui.UI.MapLock.ReleaseAll
-  isSpec: "True"
-  fullName: Mapsui.UI.MapLock.ReleaseAll
-  nameWithType: MapLock.ReleaseAll
-- uid: Mapsui.UI.MapLock.RotationLock
-  name: RotationLock
-  href: api/Mapsui.UI.MapLock.html#Mapsui_UI_MapLock_RotationLock
-  commentId: P:Mapsui.UI.MapLock.RotationLock
-  fullName: Mapsui.UI.MapLock.RotationLock
-  nameWithType: MapLock.RotationLock
-- uid: Mapsui.UI.MapLock.RotationLock*
-  name: RotationLock
-  href: api/Mapsui.UI.MapLock.html#Mapsui_UI_MapLock_RotationLock_
-  commentId: Overload:Mapsui.UI.MapLock.RotationLock
-  isSpec: "True"
-  fullName: Mapsui.UI.MapLock.RotationLock
-  nameWithType: MapLock.RotationLock
-- uid: Mapsui.UI.MapLock.ZoomLock
-  name: ZoomLock
-  href: api/Mapsui.UI.MapLock.html#Mapsui_UI_MapLock_ZoomLock
-  commentId: P:Mapsui.UI.MapLock.ZoomLock
-  fullName: Mapsui.UI.MapLock.ZoomLock
-  nameWithType: MapLock.ZoomLock
-- uid: Mapsui.UI.MapLock.ZoomLock*
-  name: ZoomLock
-  href: api/Mapsui.UI.MapLock.html#Mapsui_UI_MapLock_ZoomLock_
-  commentId: Overload:Mapsui.UI.MapLock.ZoomLock
-  isSpec: "True"
-  fullName: Mapsui.UI.MapLock.ZoomLock
-  nameWithType: MapLock.ZoomLock
 - uid: Mapsui.UI.MinMax
   name: MinMax
   href: api/Mapsui.UI.MinMax.html
@@ -25822,30 +25804,6 @@ references:
   fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T).GetFeaturesInView
   nameWithType: ObservableCollectionProvider<T>.GetFeaturesInView
   nameWithType.vb: ObservableCollectionProvider(Of T).GetFeaturesInView
-- uid: Mapsui.UI.PanMode
-  name: PanMode
-  href: api/Mapsui.UI.PanMode.html
-  commentId: T:Mapsui.UI.PanMode
-  fullName: Mapsui.UI.PanMode
-  nameWithType: PanMode
-- uid: Mapsui.UI.PanMode.KeepCenterWithinExtents
-  name: KeepCenterWithinExtents
-  href: api/Mapsui.UI.PanMode.html#Mapsui_UI_PanMode_KeepCenterWithinExtents
-  commentId: F:Mapsui.UI.PanMode.KeepCenterWithinExtents
-  fullName: Mapsui.UI.PanMode.KeepCenterWithinExtents
-  nameWithType: PanMode.KeepCenterWithinExtents
-- uid: Mapsui.UI.PanMode.KeepViewportWithinExtents
-  name: KeepViewportWithinExtents
-  href: api/Mapsui.UI.PanMode.html#Mapsui_UI_PanMode_KeepViewportWithinExtents
-  commentId: F:Mapsui.UI.PanMode.KeepViewportWithinExtents
-  fullName: Mapsui.UI.PanMode.KeepViewportWithinExtents
-  nameWithType: PanMode.KeepViewportWithinExtents
-- uid: Mapsui.UI.PanMode.Unlimited
-  name: Unlimited
-  href: api/Mapsui.UI.PanMode.html#Mapsui_UI_PanMode_Unlimited
-  commentId: F:Mapsui.UI.PanMode.Unlimited
-  fullName: Mapsui.UI.PanMode.Unlimited
-  nameWithType: PanMode.Unlimited
 - uid: Mapsui.UI.SwipedEventArgs
   name: SwipedEventArgs
   href: api/Mapsui.UI.SwipedEventArgs.html
@@ -26194,19 +26152,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.ViewportLimiter.PanLimits
   nameWithType: ViewportLimiter.PanLimits
-- uid: Mapsui.UI.ViewportLimiter.PanMode
-  name: PanMode
-  href: api/Mapsui.UI.ViewportLimiter.html#Mapsui_UI_ViewportLimiter_PanMode
-  commentId: P:Mapsui.UI.ViewportLimiter.PanMode
-  fullName: Mapsui.UI.ViewportLimiter.PanMode
-  nameWithType: ViewportLimiter.PanMode
-- uid: Mapsui.UI.ViewportLimiter.PanMode*
-  name: PanMode
-  href: api/Mapsui.UI.ViewportLimiter.html#Mapsui_UI_ViewportLimiter_PanMode_
-  commentId: Overload:Mapsui.UI.ViewportLimiter.PanMode
-  isSpec: "True"
-  fullName: Mapsui.UI.ViewportLimiter.PanMode
-  nameWithType: ViewportLimiter.PanMode
 - uid: Mapsui.UI.ViewportLimiter.ZoomLimits
   name: ZoomLimits
   href: api/Mapsui.UI.ViewportLimiter.html#Mapsui_UI_ViewportLimiter_ZoomLimits
@@ -26310,6 +26255,83 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.ViewportLimiterKeepWithin.ZoomLimits
   nameWithType: ViewportLimiterKeepWithin.ZoomLimits
+- uid: Mapsui.UI.ViewportLimiterWithoutLimits
+  name: ViewportLimiterWithoutLimits
+  href: api/Mapsui.UI.ViewportLimiterWithoutLimits.html
+  commentId: T:Mapsui.UI.ViewportLimiterWithoutLimits
+  fullName: Mapsui.UI.ViewportLimiterWithoutLimits
+  nameWithType: ViewportLimiterWithoutLimits
+- uid: Mapsui.UI.ViewportLimiterWithoutLimits.Limit(Mapsui.IViewport,IReadOnlyList{System.Double},Mapsui.Geometries.BoundingBox)
+  name: Limit(IViewport, IReadOnlyList<Double>, BoundingBox)
+  href: api/Mapsui.UI.ViewportLimiterWithoutLimits.html#Mapsui_UI_ViewportLimiterWithoutLimits_Limit_Mapsui_IViewport_IReadOnlyList_System_Double__Mapsui_Geometries_BoundingBox_
+  commentId: M:Mapsui.UI.ViewportLimiterWithoutLimits.Limit(Mapsui.IViewport,IReadOnlyList{System.Double},Mapsui.Geometries.BoundingBox)
+  name.vb: Limit(IViewport, IReadOnlyList(Of Double), BoundingBox)
+  fullName: Mapsui.UI.ViewportLimiterWithoutLimits.Limit(Mapsui.IViewport, IReadOnlyList<System.Double>, Mapsui.Geometries.BoundingBox)
+  fullName.vb: Mapsui.UI.ViewportLimiterWithoutLimits.Limit(Mapsui.IViewport, IReadOnlyList(Of System.Double), Mapsui.Geometries.BoundingBox)
+  nameWithType: ViewportLimiterWithoutLimits.Limit(IViewport, IReadOnlyList<Double>, BoundingBox)
+  nameWithType.vb: ViewportLimiterWithoutLimits.Limit(IViewport, IReadOnlyList(Of Double), BoundingBox)
+- uid: Mapsui.UI.ViewportLimiterWithoutLimits.Limit*
+  name: Limit
+  href: api/Mapsui.UI.ViewportLimiterWithoutLimits.html#Mapsui_UI_ViewportLimiterWithoutLimits_Limit_
+  commentId: Overload:Mapsui.UI.ViewportLimiterWithoutLimits.Limit
+  isSpec: "True"
+  fullName: Mapsui.UI.ViewportLimiterWithoutLimits.Limit
+  nameWithType: ViewportLimiterWithoutLimits.Limit
+- uid: Mapsui.UI.ViewportLimiterWithoutLimits.LimitExtent(Mapsui.IViewport,Mapsui.Geometries.BoundingBox)
+  name: LimitExtent(IViewport, BoundingBox)
+  href: api/Mapsui.UI.ViewportLimiterWithoutLimits.html#Mapsui_UI_ViewportLimiterWithoutLimits_LimitExtent_Mapsui_IViewport_Mapsui_Geometries_BoundingBox_
+  commentId: M:Mapsui.UI.ViewportLimiterWithoutLimits.LimitExtent(Mapsui.IViewport,Mapsui.Geometries.BoundingBox)
+  fullName: Mapsui.UI.ViewportLimiterWithoutLimits.LimitExtent(Mapsui.IViewport, Mapsui.Geometries.BoundingBox)
+  nameWithType: ViewportLimiterWithoutLimits.LimitExtent(IViewport, BoundingBox)
+- uid: Mapsui.UI.ViewportLimiterWithoutLimits.LimitExtent*
+  name: LimitExtent
+  href: api/Mapsui.UI.ViewportLimiterWithoutLimits.html#Mapsui_UI_ViewportLimiterWithoutLimits_LimitExtent_
+  commentId: Overload:Mapsui.UI.ViewportLimiterWithoutLimits.LimitExtent
+  isSpec: "True"
+  fullName: Mapsui.UI.ViewportLimiterWithoutLimits.LimitExtent
+  nameWithType: ViewportLimiterWithoutLimits.LimitExtent
+- uid: Mapsui.UI.ViewportLimiterWithoutLimits.LimitResolution(System.Double,System.Double,System.Double,IReadOnlyList{System.Double},Mapsui.Geometries.BoundingBox)
+  name: LimitResolution(Double, Double, Double, IReadOnlyList<Double>, BoundingBox)
+  href: api/Mapsui.UI.ViewportLimiterWithoutLimits.html#Mapsui_UI_ViewportLimiterWithoutLimits_LimitResolution_System_Double_System_Double_System_Double_IReadOnlyList_System_Double__Mapsui_Geometries_BoundingBox_
+  commentId: M:Mapsui.UI.ViewportLimiterWithoutLimits.LimitResolution(System.Double,System.Double,System.Double,IReadOnlyList{System.Double},Mapsui.Geometries.BoundingBox)
+  name.vb: LimitResolution(Double, Double, Double, IReadOnlyList(Of Double), BoundingBox)
+  fullName: Mapsui.UI.ViewportLimiterWithoutLimits.LimitResolution(System.Double, System.Double, System.Double, IReadOnlyList<System.Double>, Mapsui.Geometries.BoundingBox)
+  fullName.vb: Mapsui.UI.ViewportLimiterWithoutLimits.LimitResolution(System.Double, System.Double, System.Double, IReadOnlyList(Of System.Double), Mapsui.Geometries.BoundingBox)
+  nameWithType: ViewportLimiterWithoutLimits.LimitResolution(Double, Double, Double, IReadOnlyList<Double>, BoundingBox)
+  nameWithType.vb: ViewportLimiterWithoutLimits.LimitResolution(Double, Double, Double, IReadOnlyList(Of Double), BoundingBox)
+- uid: Mapsui.UI.ViewportLimiterWithoutLimits.LimitResolution*
+  name: LimitResolution
+  href: api/Mapsui.UI.ViewportLimiterWithoutLimits.html#Mapsui_UI_ViewportLimiterWithoutLimits_LimitResolution_
+  commentId: Overload:Mapsui.UI.ViewportLimiterWithoutLimits.LimitResolution
+  isSpec: "True"
+  fullName: Mapsui.UI.ViewportLimiterWithoutLimits.LimitResolution
+  nameWithType: ViewportLimiterWithoutLimits.LimitResolution
+- uid: Mapsui.UI.ViewportLimiterWithoutLimits.PanLimits
+  name: PanLimits
+  href: api/Mapsui.UI.ViewportLimiterWithoutLimits.html#Mapsui_UI_ViewportLimiterWithoutLimits_PanLimits
+  commentId: P:Mapsui.UI.ViewportLimiterWithoutLimits.PanLimits
+  fullName: Mapsui.UI.ViewportLimiterWithoutLimits.PanLimits
+  nameWithType: ViewportLimiterWithoutLimits.PanLimits
+- uid: Mapsui.UI.ViewportLimiterWithoutLimits.PanLimits*
+  name: PanLimits
+  href: api/Mapsui.UI.ViewportLimiterWithoutLimits.html#Mapsui_UI_ViewportLimiterWithoutLimits_PanLimits_
+  commentId: Overload:Mapsui.UI.ViewportLimiterWithoutLimits.PanLimits
+  isSpec: "True"
+  fullName: Mapsui.UI.ViewportLimiterWithoutLimits.PanLimits
+  nameWithType: ViewportLimiterWithoutLimits.PanLimits
+- uid: Mapsui.UI.ViewportLimiterWithoutLimits.ZoomLimits
+  name: ZoomLimits
+  href: api/Mapsui.UI.ViewportLimiterWithoutLimits.html#Mapsui_UI_ViewportLimiterWithoutLimits_ZoomLimits
+  commentId: P:Mapsui.UI.ViewportLimiterWithoutLimits.ZoomLimits
+  fullName: Mapsui.UI.ViewportLimiterWithoutLimits.ZoomLimits
+  nameWithType: ViewportLimiterWithoutLimits.ZoomLimits
+- uid: Mapsui.UI.ViewportLimiterWithoutLimits.ZoomLimits*
+  name: ZoomLimits
+  href: api/Mapsui.UI.ViewportLimiterWithoutLimits.html#Mapsui_UI_ViewportLimiterWithoutLimits_ZoomLimits_
+  commentId: Overload:Mapsui.UI.ViewportLimiterWithoutLimits.ZoomLimits
+  isSpec: "True"
+  fullName: Mapsui.UI.ViewportLimiterWithoutLimits.ZoomLimits
+  nameWithType: ViewportLimiterWithoutLimits.ZoomLimits
 - uid: Mapsui.UI.Wpf
   name: Mapsui.UI.Wpf
   href: api/Mapsui.UI.Wpf.html
@@ -26335,6 +26357,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Wpf.MapControl.MapControl
   nameWithType: MapControl.MapControl
+- uid: Mapsui.UI.Wpf.MapControl.CallHomeIfNeeded
+  name: CallHomeIfNeeded()
+  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_CallHomeIfNeeded
+  commentId: M:Mapsui.UI.Wpf.MapControl.CallHomeIfNeeded
+  fullName: Mapsui.UI.Wpf.MapControl.CallHomeIfNeeded()
+  nameWithType: MapControl.CallHomeIfNeeded()
+- uid: Mapsui.UI.Wpf.MapControl.CallHomeIfNeeded*
+  name: CallHomeIfNeeded
+  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_CallHomeIfNeeded_
+  commentId: Overload:Mapsui.UI.Wpf.MapControl.CallHomeIfNeeded
+  isSpec: "True"
+  fullName: Mapsui.UI.Wpf.MapControl.CallHomeIfNeeded
+  nameWithType: MapControl.CallHomeIfNeeded
 - uid: Mapsui.UI.Wpf.MapControl.Clear
   name: Clear()
   href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_Clear
@@ -26382,19 +26417,6 @@ references:
   commentId: E:Mapsui.UI.Wpf.MapControl.Info
   fullName: Mapsui.UI.Wpf.MapControl.Info
   nameWithType: MapControl.Info
-- uid: Mapsui.UI.Wpf.MapControl.Lock
-  name: Lock
-  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_Lock
-  commentId: P:Mapsui.UI.Wpf.MapControl.Lock
-  fullName: Mapsui.UI.Wpf.MapControl.Lock
-  nameWithType: MapControl.Lock
-- uid: Mapsui.UI.Wpf.MapControl.Lock*
-  name: Lock
-  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_Lock_
-  commentId: Overload:Mapsui.UI.Wpf.MapControl.Lock
-  isSpec: "True"
-  fullName: Mapsui.UI.Wpf.MapControl.Lock
-  nameWithType: MapControl.Lock
 - uid: Mapsui.UI.Wpf.MapControl.Map
   name: Map
   href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_Map
@@ -27407,12 +27429,6 @@ references:
   commentId: M:Mapsui.Viewport.Transform(Mapsui.Geometries.Point,Mapsui.Geometries.Point,System.Double,System.Double)
   fullName: Mapsui.Viewport.Transform(Mapsui.Geometries.Point, Mapsui.Geometries.Point, System.Double, System.Double)
   nameWithType: Viewport.Transform(Point, Point, Double, Double)
-- uid: Mapsui.Viewport.Transform(System.Double,System.Double,System.Double,System.Double,System.Double,System.Double)
-  name: Transform(Double, Double, Double, Double, Double, Double)
-  href: api/Mapsui.Viewport.html#Mapsui_Viewport_Transform_System_Double_System_Double_System_Double_System_Double_System_Double_System_Double_
-  commentId: M:Mapsui.Viewport.Transform(System.Double,System.Double,System.Double,System.Double,System.Double,System.Double)
-  fullName: Mapsui.Viewport.Transform(System.Double, System.Double, System.Double, System.Double, System.Double, System.Double)
-  nameWithType: Viewport.Transform(Double, Double, Double, Double, Double, Double)
 - uid: Mapsui.Viewport.Transform*
   name: Transform
   href: api/Mapsui.Viewport.html#Mapsui_Viewport_Transform_
@@ -27563,6 +27579,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.Widgets.Hyperlink.HandleWidgetTouched
   nameWithType: Hyperlink.HandleWidgetTouched
+- uid: Mapsui.Widgets.Hyperlink.Touched
+  name: Touched
+  href: api/Mapsui.Widgets.Hyperlink.html#Mapsui_Widgets_Hyperlink_Touched
+  commentId: E:Mapsui.Widgets.Hyperlink.Touched
+  fullName: Mapsui.Widgets.Hyperlink.Touched
+  nameWithType: Hyperlink.Touched
 - uid: Mapsui.Widgets.Hyperlink.Url
   name: Url
   href: api/Mapsui.Widgets.Hyperlink.html#Mapsui_Widgets_Hyperlink_Url
@@ -27576,6 +27598,18 @@ references:
   isSpec: "True"
   fullName: Mapsui.Widgets.Hyperlink.Url
   nameWithType: Hyperlink.Url
+- uid: Mapsui.Widgets.HyperlinkWidgetArguments
+  name: HyperlinkWidgetArguments
+  href: api/Mapsui.Widgets.HyperlinkWidgetArguments.html
+  commentId: T:Mapsui.Widgets.HyperlinkWidgetArguments
+  fullName: Mapsui.Widgets.HyperlinkWidgetArguments
+  nameWithType: HyperlinkWidgetArguments
+- uid: Mapsui.Widgets.HyperlinkWidgetArguments.Handled
+  name: Handled
+  href: api/Mapsui.Widgets.HyperlinkWidgetArguments.html#Mapsui_Widgets_HyperlinkWidgetArguments_Handled
+  commentId: F:Mapsui.Widgets.HyperlinkWidgetArguments.Handled
+  fullName: Mapsui.Widgets.HyperlinkWidgetArguments.Handled
+  nameWithType: HyperlinkWidgetArguments.Handled
 - uid: Mapsui.Widgets.IWidget
   name: IWidget
   href: api/Mapsui.Widgets.IWidget.html
@@ -28406,6 +28440,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.Widgets.WidgetTouchedEventArgs.WidgetTouchedEventArgs
   nameWithType: WidgetTouchedEventArgs.WidgetTouchedEventArgs
+- uid: Mapsui.Widgets.WidgetTouchedEventArgs.Handled
+  name: Handled
+  href: api/Mapsui.Widgets.WidgetTouchedEventArgs.html#Mapsui_Widgets_WidgetTouchedEventArgs_Handled
+  commentId: P:Mapsui.Widgets.WidgetTouchedEventArgs.Handled
+  fullName: Mapsui.Widgets.WidgetTouchedEventArgs.Handled
+  nameWithType: WidgetTouchedEventArgs.Handled
+- uid: Mapsui.Widgets.WidgetTouchedEventArgs.Handled*
+  name: Handled
+  href: api/Mapsui.Widgets.WidgetTouchedEventArgs.html#Mapsui_Widgets_WidgetTouchedEventArgs_Handled_
+  commentId: Overload:Mapsui.Widgets.WidgetTouchedEventArgs.Handled
+  isSpec: "True"
+  fullName: Mapsui.Widgets.WidgetTouchedEventArgs.Handled
+  nameWithType: WidgetTouchedEventArgs.Handled
 - uid: Mapsui.Widgets.WidgetTouchedEventArgs.Position
   name: Position
   href: api/Mapsui.Widgets.WidgetTouchedEventArgs.html#Mapsui_Widgets_WidgetTouchedEventArgs_Position

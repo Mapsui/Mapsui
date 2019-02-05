@@ -32,7 +32,7 @@ namespace Mapsui.Samples.Wpf.Editing
             MapControl.MouseLeftButtonDown += MapControlOnMouseLeftButtonDown;
             MapControl.MouseLeftButtonUp += MapControlOnMouseLeftButtonUp;
 
-            MapControl.Lock.RotationLock = false;
+            MapControl.Map.RotationLock = false;
             MapControl.UnSnapRotationDegrees = 30;
             MapControl.ReSnapRotationDegrees = 5;
 
@@ -315,7 +315,7 @@ namespace Mapsui.Samples.Wpf.Editing
 
         private void MapControlOnMouseLeftButtonUp(object sender, MouseButtonEventArgs args)
         {
-            MapControl.Lock.PanLock = _editManipulation.Manipulate(MouseState.Up,
+            MapControl.Map.PanLock = _editManipulation.Manipulate(MouseState.Up,
                 args.GetPosition(MapControl).ToMapsui(), _editManager, MapControl);
 
             if (_selectMode)
@@ -333,13 +333,13 @@ namespace Mapsui.Samples.Wpf.Editing
         {
             if (args.ClickCount > 1)
             {
-                MapControl.Lock.PanLock = _editManipulation.Manipulate(MouseState.DoubleClick,
+                MapControl.Map.PanLock = _editManipulation.Manipulate(MouseState.DoubleClick,
                     args.GetPosition(MapControl).ToMapsui(), _editManager, MapControl);
                 args.Handled = true;
             }
             else
             {
-                MapControl.Lock.PanLock = _editManipulation.Manipulate(MouseState.Down,
+                MapControl.Map.PanLock = _editManipulation.Manipulate(MouseState.Down,
                     args.GetPosition(MapControl).ToMapsui(), _editManager, MapControl);
             }
         }

@@ -11,5 +11,10 @@ namespace Mapsui.Widgets
         }
 
         public Point Position { get; }
+
+        /// <summary>
+        /// True, if this Widget had handled this event
+        /// </summary>
+        public bool Handled { get; set; }
     }
 }

@@ -7,8 +7,9 @@ namespace Mapsui.Rendering.Skia
 {
     public static class BitmapHelper
     {
-        private static readonly SKPaint Paint = new SKPaint(); // Reuse for performance. Only for opacity
-        private static readonly SKPaint QualityPaint = new SKPaint() { FilterQuality = SKFilterQuality.Low }; // Only for high/med/low quality resizing of tiles
+        // The field below is static for performance. Effect has not been measured.
+        // Note that the default FilterQuality is None. Setting it explicitly to Low increases the quality.
+        private static readonly SKPaint DefaultPaint = new SKPaint { FilterQuality = SKFilterQuality.Low }; 
 
         public static BitmapInfo LoadBitmap(object bitmapStream)
         {
@@ -34,7 +35,7 @@ namespace Mapsui.Rendering.Skia
 
             if (bitmapStream is Sprite sprite)
             {
-                return new BitmapInfo() {Sprite = sprite};
+                return new BitmapInfo {Sprite = sprite};
             }
 
             return null;
@@ -112,31 +113,29 @@ namespace Mapsui.Rendering.Skia
 
         public static void RenderRaster(SKCanvas canvas, SKImage bitmap, SKRect rect, float layerOpacity)
         {
-            // todo: Add some way to select one method or the other.
-            // Method 1) Better for quality. Helps to compare to WPF
-            //var color = new SKColor(255, 255, 255, (byte)(255 * layerOpacity));
-            //var paint = new SKPaint { Color = color, FilterQuality = SKFilterQuality.High };
-            //canvas.DrawImage(bitmap, rect, paint);
-
-            //// Method 2) Better for performance:
-            if (Math.Abs(layerOpacity - 1) > Utilities.Constants.Epsilon)
-            {
-                Paint.Color = new SKColor(255, 255, 255, (byte)(255 * layerOpacity));
-                canvas.DrawImage(bitmap, rect, Paint);
-            }
-            else
-            {
-                canvas.DrawImage(bitmap, rect, QualityPaint);
-            }
-
+            canvas.DrawImage(bitmap, rect, GetPaint(layerOpacity));
         }
 
-        private static readonly SKPaint PaintBitmap = new SKPaint {FilterQuality = SKFilterQuality.Low};
+        private static SKPaint GetPaint(float layerOpacity)
+        {
+            if (Math.Abs(layerOpacity - 1) > Utilities.Constants.Epsilon)
+            {
+                // Unfortunately for opacity we need to set the Color and the Color
+                // is part of the Paint object. So we need to recreate the paint on
+                // every draw. 
+                return new SKPaint
+                {
+                    FilterQuality = SKFilterQuality.Low,
+                    Color = new SKColor(255, 255, 255, (byte) (255 * layerOpacity))
+                };
+            }
+            return DefaultPaint;
+        }
+
 
         public static void RenderBitmap(SKCanvas canvas, SKImage bitmap, SKRect rect, float opacity = 1f)
         {
-            PaintBitmap.Color = opacity == 1 ? SKColors.White : new SKColor(255, 255, 255, (byte)(255 * opacity));
-            canvas.DrawImage(bitmap, rect, PaintBitmap);
+            canvas.DrawImage(bitmap, rect, GetPaint(opacity));
         }
     }
 }

@@ -38,7 +38,7 @@ namespace Mapsui.Samples.Droid
             _mapControl = FindViewById<MapControl>(Resource.Id.mapcontrol);
             _mapControl.Map = MbTilesSample.CreateMap();
             _mapControl.Info += MapOnInfo;
-            _mapControl.Lock.RotationLock = true;
+            _mapControl.Map.RotationLock = true;
             _mapControl.UnSnapRotationDegrees = 30;
             _mapControl.ReSnapRotationDegrees = 5;
 
@@ -120,7 +120,7 @@ namespace Mapsui.Samples.Droid
 
         private void MapOnInfo(object sender, MapInfoEventArgs args)
         {
-            if (args.MapInfo.Feature != null)
+            if (args.MapInfo?.Feature != null)
             {
                 ShowPopup(args);
             }

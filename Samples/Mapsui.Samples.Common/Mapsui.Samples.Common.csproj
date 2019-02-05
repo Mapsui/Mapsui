@@ -64,8 +64,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="BruTile" Version="2.0.1" />
-    <PackageReference Include="BruTile.MbTiles" Version="2.0.1" />
+    <PackageReference Include="BruTile" Version="2.0.2" />
+    <PackageReference Include="BruTile.MbTiles" Version="2.0.2" />
     <PackageReference Include="itinero" Version="1.3.2" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
   </ItemGroup>

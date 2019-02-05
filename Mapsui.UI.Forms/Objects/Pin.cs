@@ -1,6 +1,5 @@
 ﻿using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 using Mapsui.Providers;
@@ -15,9 +14,9 @@ namespace Mapsui.UI.Forms
 {
     public sealed class Pin : BindableObject, IFeatureProvider
     {
-        private int bitmapId = -1;
-        private byte[] bitmapData;
-        private MapView _mapView;
+        private int _bitmapId = -1;
+        private byte[] _bitmapData;
+        private readonly MapView _mapView;
 
         public static readonly BindableProperty TypeProperty = BindableProperty.Create(nameof(Type), typeof(PinType), typeof(Pin), default(PinType));
         public static readonly BindableProperty ColorProperty = BindableProperty.Create(nameof(Color), typeof(Xamarin.Forms.Color), typeof(Pin), SKColors.Red.ToFormsColor());
@@ -196,7 +195,7 @@ namespace Mapsui.UI.Forms
         /// </summary>
         public object Tag { get; set; }
 
-        private Feature feature;
+        private Feature _feature;
 
         /// <summary>
         /// Mapsui feature for this pin
@@ -206,11 +205,11 @@ namespace Mapsui.UI.Forms
         {
             get
             {
-                return feature;
+                return _feature;
             }
         }
 
-        private Callout callout;
+        private Callout _callout;
 
         /// <summary>
         /// Gets the callout
@@ -221,30 +220,30 @@ namespace Mapsui.UI.Forms
             get
             {
                 // Show a new Callout
-                if (callout == null)
+                if (_callout == null)
                 {
                     // Create a default pin
-                    callout = _mapView.CreateCallout(Position);
+                    _callout = _mapView.CreateCallout(Position);
                     if (string.IsNullOrWhiteSpace(Address))
                     {
-                        callout.Type = CalloutType.Single;
-                        callout.Title = Label;
+                        _callout.Type = CalloutType.Single;
+                        _callout.Title = Label;
                     }
                     else
                     {
-                        callout.Type = CalloutType.Detail;
-                        callout.Title = Label;
-                        callout.Subtitle = Address;
+                        _callout.Type = CalloutType.Detail;
+                        _callout.Title = Label;
+                        _callout.Subtitle = Address;
                     }
                 }
                 UpdateCalloutPosition();
 
-                return callout;
+                return _callout;
             }
             internal set
             {
-                if (callout != value)
-                    callout = value;
+                if (value != null && _callout != value)
+                    _callout = value;
             }
         }
 
@@ -299,37 +298,37 @@ namespace Mapsui.UI.Forms
             switch (propertyName)
             {
                 case nameof(Position):
-                    feature.Geometry = Position.ToMapsui();
-                    if (callout != null)
+                    _feature.Geometry = Position.ToMapsui();
+                    if (_callout != null)
                         UpdateCalloutPosition();
                     break;
                 case nameof(Label):
-                    feature["Label"] = Label;
-                    if (callout != null)
-                        callout.Title = Label;
+                    _feature["Label"] = Label;
+                    if (_callout != null)
+                        _callout.Title = Label;
                     break;
                 case nameof(Address):
-                    if (callout != null)
-                        callout.Subtitle = Address;
+                    if (_callout != null)
+                        _callout.Subtitle = Address;
                     break;
                 case nameof(Transparency):
-                    ((SymbolStyle)feature.Styles.First()).Opacity = 1 - Transparency;
+                    ((SymbolStyle)_feature.Styles.First()).Opacity = 1 - Transparency;
                     break;
                 case nameof(Anchor):
-                    ((SymbolStyle)feature.Styles.First()).SymbolOffset = new Offset(Anchor.X, Anchor.Y);
+                    ((SymbolStyle)_feature.Styles.First()).SymbolOffset = new Offset(Anchor.X, Anchor.Y);
                     break;
                 case nameof(CalloutAnchor):
-                    if (callout != null)
+                    if (_callout != null)
                         UpdateCalloutPosition();
                     break;
                 case nameof(Rotation):
-                    ((SymbolStyle)feature.Styles.First()).SymbolRotation = Rotation;
+                    ((SymbolStyle)_feature.Styles.First()).SymbolRotation = Rotation;
                     break;
                 case nameof(IsVisible):
-                    ((SymbolStyle)feature.Styles.First()).Enabled = IsVisible;
+                    ((SymbolStyle)_feature.Styles.First()).Enabled = IsVisible;
                     break;
                 case nameof(Scale):
-                    ((SymbolStyle)feature.Styles.First()).SymbolScale = Scale;
+                    ((SymbolStyle)_feature.Styles.First()).SymbolScale = Scale;
                     break;
                 case nameof(Type):
                 case nameof(Color):
@@ -358,28 +357,28 @@ namespace Mapsui.UI.Forms
             }
         }
 
-        private object sync = new object();
+        private readonly object _sync = new object();
 
         private void CreateFeature()
         {
-            lock (sync)
+            lock (_sync)
             {
-                if (feature == null)
+                if (_feature == null)
                 {
                     // Create a new one
-                    feature = new Feature
+                    _feature = new Feature
                     {
                         Geometry = Position.ToMapsui(),
                         ["Label"] = Label,
                     };
                 }
                 // Check for bitmapId
-                if (bitmapId != -1)
+                if (_bitmapId != -1)
                 {
                     // There is already a registered bitmap, so delete it
-                    BitmapRegistry.Instance.Unregister(bitmapId);
+                    BitmapRegistry.Instance.Unregister(_bitmapId);
                     // We don't have any bitmap up to now
-                    bitmapId = -1;
+                    _bitmapId = -1;
                 }
 
                 Stream stream = null;
@@ -392,14 +391,14 @@ namespace Mapsui.UI.Forms
                             stream = new MemoryStream(Encoding.UTF8.GetBytes(Svg));
                         if (stream == null)
                             return;
-                        bitmapId = BitmapRegistry.Instance.Register(stream);
+                        _bitmapId = BitmapRegistry.Instance.Register(stream);
                         break;
                     case PinType.Pin:
                         // First we have to create a bitmap from Svg code
                         // Create a new SVG object
                         var svg = new SkiaSharp.Extended.Svg.SKSvg();
                         // Load the SVG document
-                        stream = Mapsui.Utilities.EmbeddedResourceLoader.Load($"Images.Pin.svg", typeof(Pin));
+                        stream = Utilities.EmbeddedResourceLoader.Load("Images.Pin.svg", typeof(Pin));
                         if (stream == null)
                             return;
                         svg.Load(stream);
@@ -421,9 +420,9 @@ namespace Mapsui.UI.Forms
                         using (var image = SKImage.FromBitmap(bitmap))
                         using (var data = image.Encode(SKEncodedImageFormat.Png, 100))
                         {
-                            bitmapData = data.ToArray();
+                            _bitmapData = data.ToArray();
                         }
-                        bitmapId = BitmapRegistry.Instance.Register(new MemoryStream(bitmapData));
+                        _bitmapId = BitmapRegistry.Instance.Register(new MemoryStream(_bitmapData));
                         break;
                     case PinType.Icon:
                         if (Icon != null)
@@ -432,20 +431,20 @@ namespace Mapsui.UI.Forms
                             {
                                 Width = image.Width * Scale;
                                 Height = image.Height * Scale;
-                                bitmapId = BitmapRegistry.Instance.Register(new MemoryStream(Icon));
+                                _bitmapId = BitmapRegistry.Instance.Register(new MemoryStream(Icon));
                             }
                         }
                         break;
                 }
 
                 // If we have a bitmapId (and we should have one), than draw bitmap, otherwise nothing
-                if (bitmapId != -1)
+                if (_bitmapId != -1)
                 {
                     // We only want to have one style
-                    feature.Styles.Clear();
-                    feature.Styles.Add(new SymbolStyle
+                    _feature.Styles.Clear();
+                    _feature.Styles.Add(new SymbolStyle
                     {
-                        BitmapId = bitmapId,
+                        BitmapId = _bitmapId,
                         SymbolScale = Scale,
                         SymbolRotation = Rotation,
                         SymbolOffset = new Offset(Anchor.X, Anchor.Y),
@@ -460,11 +459,11 @@ namespace Mapsui.UI.Forms
         /// </summary>
         internal void UpdateCalloutPosition()
         {
-            if (callout == null)
+            if (_callout == null)
                 return;
 
             var screen = _mapView._mapControl.Viewport.WorldToScreen(Position.ToMapsui());
-            callout.Anchor = _mapView._mapControl.Viewport.ScreenToWorld(new Geometries.Point(screen.X - CalloutAnchor.X, screen.Y - CalloutAnchor.Y)).ToForms();
+            _callout.Anchor = _mapView._mapControl.Viewport.ScreenToWorld(new Geometries.Point(screen.X - CalloutAnchor.X, screen.Y - CalloutAnchor.Y)).ToForms();
         }
     }
 }

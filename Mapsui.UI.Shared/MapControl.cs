@@ -27,26 +27,7 @@ namespace Mapsui.UI.Wpf
     public partial class MapControl : INotifyPropertyChanged
     {
         private Map _map;
-
-        private MapLock _lock = new MapLock { RotationLock = true };
-
-        /// <summary>
-        /// Handles, which interaction with the map is locked 
-        /// </summary>
-        public MapLock Lock
-        {
-            get { return _lock; }
-            set
-            {
-                if (_lock != value)
-                {
-                    _lock = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        private double _unSnapRotationDegrees = 0;
+        private double _unSnapRotationDegrees;
 
         /// <summary>
         /// After how many degrees start rotation to take place
@@ -64,7 +45,7 @@ namespace Mapsui.UI.Wpf
             }
         }
 
-        private double _reSnapRotationDegrees = 0;
+        private double _reSnapRotationDegrees;
 
         /// <summary>
         /// With how many degrees from 0 should map snap to 0 degrees
@@ -101,6 +82,7 @@ namespace Mapsui.UI.Wpf
         }
 
         private readonly LimitedViewport _viewport = new LimitedViewport();
+        private INavigator _navigator;
 
         /// <summary>
         /// Viewport holding information about visible part of the map. Viewport can never be null.
@@ -110,7 +92,21 @@ namespace Mapsui.UI.Wpf
         /// <summary>
         /// Handles all manipulations of the map viewport
         /// </summary>
-        public INavigator Navigator { get; private set; }
+        public INavigator Navigator
+        {
+            get => _navigator;
+            private set
+            {
+                _navigator = value ?? throw new ArgumentException($"{nameof(Navigator)} can not be null");
+                _navigator.Navigated += Navigated;
+            }
+        }
+
+        private void Navigated(object sender, EventArgs e)
+        {
+            _map.Initialized = true;
+            Refresh();
+        }
 
         /// <summary>
         /// Called when the viewport is initialized
@@ -234,14 +230,29 @@ namespace Mapsui.UI.Wpf
             }
             else if (e.PropertyName == nameof(Layers.Layer.DataSource))
             {
-                RefreshData(); // There is a new datasource so let's fetch the new data.
+                Refresh(); // There is a new DataSource so let's fetch the new data.
+            }
+            else if (e.PropertyName == nameof(Map.Envelope))
+            {
+                CallHomeIfNeeded();
+                Refresh(); 
             }
             else if (e.PropertyName == nameof(Map.Layers))
             {
+                CallHomeIfNeeded();
                 Refresh();
             }
         }
         // ReSharper restore RedundantNameQualifier
+
+        public void CallHomeIfNeeded()
+        {
+            if (_map != null && !_map.Initialized && _viewport.HasSize && _map?.Envelope != null)
+            {
+                _map.Home?.Invoke(Navigator);
+                _map.Initialized = true;
+            }
+        }
 
         /// <summary>
         /// Map holding data for which is shown in this MapControl
@@ -265,7 +276,7 @@ namespace Mapsui.UI.Wpf
                     Navigator = new Navigator(_map, _viewport);
                     _viewport.Map = Map;
                     _viewport.Limiter = Map.Limiter;
-                    if (Viewport.HasSize) _map.Home(Navigator); // If size is not set yet Home will be called at set size. This is okay.
+                    CallHomeIfNeeded();
                 }
 
                 Refresh();
@@ -287,7 +298,7 @@ namespace Mapsui.UI.Wpf
             return new Point(coordinateInPixels.X / PixelDensity, coordinateInPixels.Y / PixelDensity);
         }
 
-        private void OnViewportInitialized()
+        private void OnViewportSizeInitialized()
         {
             ViewportInitialized?.Invoke(this, EventArgs.Empty);
         }
@@ -307,14 +318,18 @@ namespace Mapsui.UI.Wpf
             Info?.Invoke(this, mapInfoEventArgs);
         }
 
-        private void WidgetTouched(IWidget widget, Point screenPosition)
+        private bool WidgetTouched(IWidget widget, Point screenPosition)
         {
-            if (widget is Hyperlink hyperlink)
+            var result = widget.HandleWidgetTouched(Navigator, screenPosition);
+
+            if (!result && widget is Hyperlink hyperlink && !string.IsNullOrWhiteSpace(hyperlink.Url))
             {
                 OpenBrowser(hyperlink.Url);
+
+                return true;
             }
 
-            widget.HandleWidgetTouched(Navigator, screenPosition);
+            return false;
         }
 
         /// <inheritdoc />
@@ -332,7 +347,20 @@ namespace Mapsui.UI.Wpf
         }
 
         /// <summary>
-        /// Check, if a widget or feature at a given screen position is clicked/tapped
+        /// Check if a widget or feature at a given screen position is clicked/tapped
+        /// </summary>
+        /// <param name="screenPosition">Screen position to check for widgets and features</param>
+        /// <param name="startScreenPosition">Screen position of Viewport/MapControl</param>
+        /// <param name="numTaps">Number of clickes/taps</param>
+        /// <returns>True, if something done </returns>
+        private MapInfoEventArgs InvokeInfo(Point screenPosition, Point startScreenPosition, int numTaps)
+        {
+            return InvokeInfo(Map.Layers.Where(l => l.IsMapInfoLayer), Map.GetWidgetsOfMapAndLayers(), Viewport,
+                screenPosition, startScreenPosition, _renderer.SymbolCache, WidgetTouched, numTaps);
+        }
+
+        /// <summary>
+        /// Check if a widget or feature at a given screen position is clicked/tapped
         /// </summary>
         /// <param name="layers">The layers to query for MapInfo</param>
         /// <param name="widgets">The Map widgets</param>
@@ -345,23 +373,27 @@ namespace Mapsui.UI.Wpf
         /// <returns>True, if something done </returns>
         private static MapInfoEventArgs InvokeInfo(IEnumerable<ILayer> layers, IEnumerable<IWidget> widgets, 
             IReadOnlyViewport viewport, Point screenPosition, Point startScreenPosition, ISymbolCache symbolCache,
-            Action<IWidget, Point> widgetCallback, int numTaps)
+            Func<IWidget, Point, bool> widgetCallback, int numTaps)
         {
             var layerWidgets = layers.Select(l => l.Attribution).Where(a => a != null);
             var allWidgets = layerWidgets.Concat(widgets).ToList(); // Concat layer widgets and map widgets.
 
             // First check if a Widget is clicked. In the current design they are always on top of the map.
-            var widget = WidgetTouch.GetTouchedWidget(screenPosition, startScreenPosition, allWidgets);
-            if (widget != null)
-            {
-                // todo:
-                // How should widgetCallback have a handled type thing?
-                // Widgets should be iterated through rather than getting a single widget, 
-                // based on Z index and then called until handled = true; Ordered By highest Z
-                widgetCallback(widget, screenPosition);
-                return null;
-            }
+            var touchedWidgets = WidgetTouch.GetTouchedWidget(screenPosition, startScreenPosition, allWidgets);
 
+            foreach (var widget in touchedWidgets)
+            {
+                var result = widgetCallback(widget, screenPosition);
+
+                if (result)
+                {
+                    return new MapInfoEventArgs
+                    {
+                        Handled = true
+                    };
+                }
+            }
+        
             var mapInfo = MapInfoHelper.GetMapInfo(layers, viewport, screenPosition, symbolCache);
 
             if (mapInfo != null)
@@ -381,13 +413,8 @@ namespace Mapsui.UI.Wpf
         {
             var hadSize = Viewport.HasSize;
             _viewport.SetSize(ViewportWidth, ViewportHeight);
-
-            if (!hadSize && Viewport.HasSize) // Is Size Initialized?
-            {
-                Map?.Home(Navigator); // When Map is null here Home will be called on Map set. So this is okay.
-                OnViewportInitialized();
-            }
-
+            if (hadSize && Viewport.HasSize) OnViewportSizeInitialized();
+            CallHomeIfNeeded();
             Refresh();
         }
 

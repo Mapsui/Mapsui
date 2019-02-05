@@ -1,4 +1,5 @@
-﻿using Mapsui.Geometries;
+﻿using System;
+using Mapsui.Geometries;
 using Mapsui.Utilities;
 
 namespace Mapsui
@@ -7,6 +8,8 @@ namespace Mapsui
     {
         private readonly Map _map;
         private readonly IViewport _viewport;
+
+        public EventHandler Navigated { get; set; } 
 
         public Navigator(Map map, IViewport viewport)
         {
@@ -18,7 +21,7 @@ namespace Mapsui
         /// Navigate center of viewport to center of extent and change resolution
         /// </summary>
         /// <param name="extent">New extent for viewport to show</param>
-        /// <param name="scaleMethod">Scale method to use to determin resolution</param>
+        /// <param name="scaleMethod">Scale method to use to determine resolution</param>
         public void NavigateTo(BoundingBox extent, ScaleMethod scaleMethod = ScaleMethod.Fit)
         {
             if (extent == null) return;
@@ -28,8 +31,8 @@ namespace Mapsui
             _viewport.SetResolution(resolution);
 
             _viewport.SetCenter(extent.Centroid);
-            
-            _map.RefreshData(_viewport.Extent, _viewport.Resolution, true);
+
+            Navigated?.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>
@@ -40,7 +43,7 @@ namespace Mapsui
         {
             _viewport.SetResolution(resolution);
 
-            _map.RefreshData(_viewport.Extent, _viewport.Resolution, true);
+            Navigated?.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>
@@ -50,8 +53,8 @@ namespace Mapsui
         public void CenterOn(Point center)
         {
             _viewport.SetCenter(center);
-            
-            _map.RefreshData(_viewport.Extent, _viewport.Resolution, true);
+
+            Navigated?.Invoke(this, EventArgs.Empty);
         }
 
         /// <inheritdoc />
@@ -60,7 +63,7 @@ namespace Mapsui
             _viewport.SetCenter(center);
             _viewport.SetResolution(resolution);
 
-            _map.RefreshData(_viewport.Extent, _viewport.Resolution, true);
+            Navigated?.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>
@@ -71,8 +74,8 @@ namespace Mapsui
         public void CenterOn(double x, double y)
         {
             _viewport.SetCenter(x, y);
- 
-            _map.RefreshData(_viewport.Extent, _viewport.Resolution, true);
+
+            Navigated?.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>
@@ -83,15 +86,15 @@ namespace Mapsui
         {
             _viewport.SetRotation(rotation);
 
-            _map.RefreshData(_viewport.Extent, _viewport.Resolution, true);
+            Navigated?.Invoke(this, EventArgs.Empty);
         }
 
         public void ZoomIn()
         {
             var resolution = ZoomHelper.ZoomIn(_map.Resolutions, _viewport.Resolution);
             _viewport.SetResolution(resolution);
-            
-            _map.RefreshData(_viewport.Extent, _viewport.Resolution, true);
+
+            Navigated?.Invoke(this, EventArgs.Empty);
         }
 
         public void ZoomOut()
@@ -99,7 +102,7 @@ namespace Mapsui
             var resolution = ZoomHelper.ZoomOut(_map.Resolutions, _viewport.Resolution);
             _viewport.SetResolution(resolution);
 
-            _map.RefreshData(_viewport.Extent, _viewport.Resolution, true);
+            Navigated?.Invoke(this, EventArgs.Empty);
         }
 
         public void ZoomIn(Point centerOfZoom)
@@ -107,7 +110,7 @@ namespace Mapsui
             var resolution = ZoomHelper.ZoomIn(_map.Resolutions, _viewport.Resolution);
             ZoomTo(resolution, centerOfZoom);
 
-            _map.RefreshData(_viewport.Extent, _viewport.Resolution, true);
+            Navigated?.Invoke(this, EventArgs.Empty);
         }
 
         public void ZoomOut(Point centerOfZoom)
@@ -115,14 +118,14 @@ namespace Mapsui
             var resolution = ZoomHelper.ZoomOut(_map.Resolutions, _viewport.Resolution);
             ZoomTo(resolution, centerOfZoom);
 
-            _map.RefreshData(_viewport.Extent, _viewport.Resolution, true);
+            Navigated?.Invoke(this, EventArgs.Empty);
         }
 
         public void NavigateToFullEnvelope(ScaleMethod scaleMethod = ScaleMethod.Fill)
         {
             NavigateTo(_map.Envelope, scaleMethod);
 
-            _map.RefreshData(_viewport.Extent, _viewport.Resolution, true);
+            Navigated?.Invoke(this, EventArgs.Empty);
         }
 
         public void ZoomTo(double resolution, Point centerOfZoom)
@@ -137,6 +140,8 @@ namespace Mapsui
             _viewport.SetCenter(_viewport.ScreenToWorld(
                 _viewport.Width - centerOfZoom.X,
                 _viewport.Height - centerOfZoom.Y));
+
+            Navigated?.Invoke(this, EventArgs.Empty);
         }
     }
 }

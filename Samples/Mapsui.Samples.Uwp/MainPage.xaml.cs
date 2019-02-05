@@ -4,6 +4,7 @@ using System.Linq;
 using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
 using Mapsui.UI;
 using Mapsui.Utilities;
 using Mapsui.Samples.Common;
@@ -25,7 +26,7 @@ namespace Mapsui.Samples.Uwp
             MbTilesHelper.DeployMbTilesFile(s => File.Create(Path.Combine(MbTilesLocationOnUwp, s)));
 
             MapControl.Map.Layers.Add(OpenStreetMap.CreateTileLayer());
-            MapControl.Lock.RotationLock = false;
+            MapControl.Map.RotationLock = false;
             MapControl.UnSnapRotationDegrees = 30;
             MapControl.ReSnapRotationDegrees = 5;
             MapControl.Renderer.WidgetRenders[typeof(CustomWidget.CustomWidget)] = new CustomWidgetSkiaRenderer();
@@ -49,7 +50,7 @@ namespace Mapsui.Samples.Uwp
 
         private void MapOnInfo(object sender, MapInfoEventArgs args)
         {
-            if (args.MapInfo.Feature != null)
+            if (args.MapInfo?.Feature != null)
                 FeatureInfo.Text = $"Click Info:{Environment.NewLine}{args.MapInfo.Feature.ToDisplayText()}";
         }
 
@@ -88,5 +89,12 @@ namespace Mapsui.Samples.Uwp
         }
 
         private static string MbTilesLocationOnUwp => ApplicationData.Current.LocalFolder.Path;
+
+        private void RotationSlider_OnValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        {
+            var percent = RotationSlider.Value / (RotationSlider.Maximum - RotationSlider.Minimum);
+            MapControl.Navigator.RotateTo(percent * 360);
+            MapControl.Refresh();
+        }
     }
 }

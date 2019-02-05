@@ -26,8 +26,8 @@ namespace Mapsui.UI.Forms
         /// </summary>
         public Position Center
         {
-            get { return (Position)GetValue(CenterProperty); }
-            set { SetValue(CenterProperty, value); }
+            get => (Position)GetValue(CenterProperty);
+            set => SetValue(CenterProperty, value);
         }
 
         /// <summary>
@@ -35,8 +35,8 @@ namespace Mapsui.UI.Forms
         /// </summary>
         public Distance Radius
         {
-            get { return (Distance)GetValue(RadiusProperty); }
-            set { SetValue(RadiusProperty, value); }
+            get => (Distance)GetValue(RadiusProperty);
+            set => SetValue(RadiusProperty, value);
         }
 
         /// <summary>
@@ -44,17 +44,17 @@ namespace Mapsui.UI.Forms
         /// </summary>
         public Xamarin.Forms.Color FillColor
         {
-            get { return (Xamarin.Forms.Color)GetValue(FillColorProperty); }
-            set { SetValue(FillColorProperty, value); }
+            get => (Xamarin.Forms.Color)GetValue(FillColorProperty);
+            set => SetValue(FillColorProperty, value);
         }
 
         /// <summary>
-        /// Quality for circle. Determins, how many points used to draw circle. 3 is poorest, 360 best quality.
+        /// Quality for circle. Determines, how many points used to draw circle. 3 is poorest, 360 best quality.
         /// </summary>
         public double Quality
         {
-            get { return (double)GetValue(QualityProperty); }
-            set { SetValue(QualityProperty, value); }
+            get => (double)GetValue(QualityProperty);
+            set => SetValue(QualityProperty, value);
         }
 
         protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -78,18 +78,18 @@ namespace Mapsui.UI.Forms
             }
         }
 
-        private object sync = new object();
+        private readonly object _sync = new object();
 
         private void CreateFeature()
         {
-            lock (sync)
+            lock (_sync)
             {
                 if (Feature == null)
                 {
                     // Create a new one
                     Feature = new Feature
                     {
-                        Geometry = new Mapsui.Geometries.Polygon(),
+                        Geometry = new Geometries.Polygon(),
                         ["Label"] = Label,
                     };
                     Feature.Styles.Clear();
@@ -115,15 +115,15 @@ namespace Mapsui.UI.Forms
             var centerY = Center.ToMapsui().Y;
             var radius = Radius.Meters / Math.Cos(Center.Latitude / 180.0 * Math.PI);
             var increment = 360.0 / (Quality < 3.0 ? 3.0 : (Quality > 360.0 ? 360.0 : Quality));
-            var exteriorRing = new Mapsui.Geometries.LinearRing();
+            var exteriorRing = new Geometries.LinearRing();
 
             for (double angle = 0; angle < 360; angle += increment)
             {
                 var angleRad = angle / 180.0 * Math.PI;
-                exteriorRing.Vertices.Add(new Mapsui.Geometries.Point(radius * Math.Sin(angleRad) + centerX, radius * Math.Cos(angleRad) + centerY));
+                exteriorRing.Vertices.Add(new Geometries.Point(radius * Math.Sin(angleRad) + centerX, radius * Math.Cos(angleRad) + centerY));
             }
 
-            Feature.Geometry = new Mapsui.Geometries.Polygon(exteriorRing);
+            Feature.Geometry = new Geometries.Polygon(exteriorRing);
         }
     }
 }

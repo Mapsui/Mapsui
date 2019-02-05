@@ -17,9 +17,11 @@
                 <RelativePanel VerticalAlignment="Stretch" >
                     <ComboBox Name="CategoryComboBox" Margin="0,0, 0, 10">
                     </ComboBox>
+
                     <ScrollViewer RelativePanel.Below="CategoryComboBox">
                         <StackPanel Width="Auto" Name="SampleList"/>
                     </ScrollViewer>
+                    <Slider RelativePanel.AlignBottomWithPanel="True" x:Name="RotationSlider" MinWidth="140" ValueChanged="RotationSlider_OnValueChanged" />
                 </RelativePanel>
             </Border>
 
