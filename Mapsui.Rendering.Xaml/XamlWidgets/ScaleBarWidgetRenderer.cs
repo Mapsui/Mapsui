@@ -10,9 +10,6 @@ namespace Mapsui.Rendering.Xaml.XamlWidgets
 {
     public class ScaleBarWidgetRenderer : IXamlWidgetRenderer
     {
-        private const float StrokeExternal = 4;
-        private const float StrokeInternal = 2;
-
         private static Brush _brushScaleBar;
         private static Brush _brushScaleBarStroke;
         private static Brush _brushScaleText;
@@ -34,7 +31,7 @@ namespace Mapsui.Rendering.Xaml.XamlWidgets
             textBlock.Text = "9999 m";
             textBlock.Fill = _brushScaleText;
             textBlock.Stroke = _brushScaleTextStroke;
-            textBlock.StrokeThickness = StrokeExternal - StrokeInternal + 1;
+            textBlock.StrokeThickness = scaleBar.StrokeWidthHalo - scaleBar.StrokeWidth + 1;
             textBlock.FontFamily = new FontFamily(scaleBar.Font.FontFamily);
             textBlock.FontSize = scaleBar.Font.Size;
             textBlock.FontWeight = FontWeights.Bold;
@@ -49,7 +46,7 @@ namespace Mapsui.Rendering.Xaml.XamlWidgets
             // Do this, because height of text changes sometimes (e.g. from 2 m to 1 m)
             var textSize = textBlock.MeasureText();
 
-            var scaleBarHeight = textSize.Height + (scaleBar.TickLength + StrokeExternal * 0.5f + scaleBar.TextMargin) * scaleBar.Scale;
+            var scaleBarHeight = textSize.Height + (scaleBar.TickLength + scaleBar.StrokeWidthHalo * 0.5f + scaleBar.TextMargin) * scaleBar.Scale;
 
             if (scaleBar.ScaleBarMode == ScaleBarMode.Both && scaleBar.SecondaryUnitConverter != null)
             {
@@ -57,7 +54,7 @@ namespace Mapsui.Rendering.Xaml.XamlWidgets
             }
             else
             {
-                scaleBarHeight += StrokeExternal * 0.5f * scaleBar.Scale;
+                scaleBarHeight += scaleBar.StrokeWidthHalo * 0.5f * scaleBar.Scale;
             }
 
             scaleBar.Height = (float)scaleBarHeight;
@@ -65,7 +62,7 @@ namespace Mapsui.Rendering.Xaml.XamlWidgets
             // Draw lines
 
             // Get lines for scale bar
-            var points = scaleBar.GetScaleBarLinePositions(viewport, scaleBarLength1, scaleBarLength2, StrokeExternal);
+            var points = scaleBar.GetScaleBarLinePositions(viewport, scaleBarLength1, scaleBarLength2, scaleBar.StrokeWidthHalo);
 
             // BoundingBox for scale bar
             BoundingBox envelop = new BoundingBox();
@@ -81,7 +78,7 @@ namespace Mapsui.Rendering.Xaml.XamlWidgets
                     line.X2 = points[i + 1].X;
                     line.Y2 = points[i + 1].Y;
                     line.Stroke = _brushScaleBarStroke;
-                    line.StrokeThickness = StrokeExternal;
+                    line.StrokeThickness = scaleBar.StrokeWidthHalo;
                     line.StrokeStartLineCap = PenLineCap.Square;
                     line.StrokeEndLineCap = PenLineCap.Square;
                     canvas.Children.Add(line);
@@ -96,7 +93,7 @@ namespace Mapsui.Rendering.Xaml.XamlWidgets
                     line.X2 = points[i + 1].X;
                     line.Y2 = points[i + 1].Y;
                     line.Stroke = _brushScaleBar;
-                    line.StrokeThickness = StrokeInternal;
+                    line.StrokeThickness = scaleBar.StrokeWidth;
                     line.StrokeStartLineCap = PenLineCap.Square;
                     line.StrokeEndLineCap = PenLineCap.Square;
                     canvas.Children.Add(line);
@@ -109,7 +106,7 @@ namespace Mapsui.Rendering.Xaml.XamlWidgets
                     envelop = envelop.Join(points[i].BoundingBox);
                 }
 
-                envelop = envelop.Grow(StrokeExternal * 0.5f * scaleBar.Scale);
+                envelop = envelop.Grow(scaleBar.StrokeWidthHalo * 0.5f * scaleBar.Scale);
             }
 
             // Draw text
@@ -131,7 +128,7 @@ namespace Mapsui.Rendering.Xaml.XamlWidgets
             var boundingBoxText1 = new BoundingBox(0, 0, textSize1.Width, textSize1.Height);
             var boundingBoxText2 = new BoundingBox(0, 0, textSize2.Width, textSize2.Height);
 
-            var (posX1, posY1, posX2, posY2) = scaleBar.GetScaleBarTextPositions(viewport, boundingBoxText, boundingBoxText1, boundingBoxText2, StrokeExternal);
+            var (posX1, posY1, posX2, posY2) = scaleBar.GetScaleBarTextPositions(viewport, boundingBoxText, boundingBoxText1, boundingBoxText2, scaleBar.StrokeWidthHalo);
 
             // Now draw text
             textBlock.Text = scaleBarText1;
@@ -151,7 +148,7 @@ namespace Mapsui.Rendering.Xaml.XamlWidgets
 
                 textBlock.Fill = _brushScaleText;
                 textBlock.Stroke = _brushScaleTextStroke;
-                textBlock.StrokeThickness = StrokeExternal - StrokeInternal + 1;
+                textBlock.StrokeThickness = scaleBar.StrokeWidthHalo - scaleBar.StrokeWidth + 1;
                 textBlock.FontFamily = new FontFamily(scaleBar.Font.FontFamily);
                 textBlock.FontSize = scaleBar.Font.Size;
                 textBlock.FontWeight = FontWeights.Bold;
