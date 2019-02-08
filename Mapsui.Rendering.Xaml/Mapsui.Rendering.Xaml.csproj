@@ -75,7 +75,6 @@
     <Compile Include="PointRenderer.cs" />
     <Compile Include="PolygonRenderer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RasterizingProvider.cs" />
     <Compile Include="LabelRenderer.cs" />
     <Compile Include="ExtensionMethods\StreamExtensions.cs" />
     <Compile Include="StyleConverter.cs" />
