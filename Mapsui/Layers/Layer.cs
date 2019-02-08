@@ -57,7 +57,7 @@ namespace Mapsui.Layers
         }
 
         /// <summary>
-        /// Time to wait before fetiching data
+        /// Time to wait before fetching data
         /// </summary>
         public int FetchingPostponedInMilliseconds { get; set; } = 500;
 
