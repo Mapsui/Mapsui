@@ -1038,7 +1038,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Layers.Layer.html",
-          "hash": "JnzStehCeLdcH//cQQMAHw=="
+          "hash": "mGsWfdoMBIaGMUdi09bmMA=="
         }
       },
       "is_incremental": false,
@@ -1098,7 +1098,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Layers.MemoryLayer.html",
-          "hash": "OZNSRJ+ppA5vIJhUw+pZnA=="
+          "hash": "l+8Mup25YmfhWBOPyYRLPA=="
         }
       },
       "is_incremental": false,
@@ -1122,7 +1122,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Layers.TileLayer.html",
-          "hash": "v/NwniXrxVwrEzd1HBIXqg=="
+          "hash": "F0gsCpDAqvQ1NPHvCOYHnQ=="
         }
       },
       "is_incremental": false,
@@ -1158,7 +1158,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Layers.html",
-          "hash": "Sla9MYN7EIZt0cOoNs6XJQ=="
+          "hash": "SN/7WNaevdavffRMOvULtQ=="
         }
       },
       "is_incremental": false,
@@ -2706,7 +2706,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Rendering.Skia.SkiaWidgets.ScaleBarWidgetRenderer.html",
-          "hash": "fxTGdBxycAvjIqVIJf6lFw=="
+          "hash": "/mPF9i9CeApMwJzdS77qiA=="
         }
       },
       "is_incremental": false,
@@ -3042,7 +3042,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Rendering.Xaml.XamlWidgets.ScaleBarWidgetRenderer.html",
-          "hash": "1wS5arvb49VPFIeqGA052w=="
+          "hash": "LvQ7b9Dxrf7Vz1rhk+RbHw=="
         }
       },
       "is_incremental": false,
@@ -3690,7 +3690,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Forms.MapControl.html",
-          "hash": "/F6whKZnF8cHmSdmG7r/Lw=="
+          "hash": "9IeCN4KAtz479SJP1eV3oQ=="
         }
       },
       "is_incremental": false,
@@ -3978,7 +3978,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Objects.MyLocationLayer.html",
-          "hash": "83H372MEf7eiJ/ODTJ22Eg=="
+          "hash": "LLFK1b0nwJja14YTSAykxA=="
         }
       },
       "is_incremental": false,
@@ -4110,7 +4110,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.ViewportLimiterKeepWithin.html",
-          "hash": "BQYGpwLUQEWl8ZihRzddYA=="
+          "hash": "zyLG1h0Bm7F1d+H3weQYWA=="
         }
       },
       "is_incremental": false,
@@ -4542,7 +4542,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Widgets.ScaleBar.ScaleBarWidget.html",
-          "hash": "NySWhvnpsOEk7c83hK8tqA=="
+          "hash": "M+0hEMmYk6cwnoM7HmfnMw=="
         }
       },
       "is_incremental": false,
@@ -5083,16 +5083,17 @@
         "skipped_file_count": 0
       },
       "processors": {
+        "ResourceDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        },
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
           "total_file_count": 21,
-          "skipped_file_count": 0
-        },
-        "ManagedReferenceDocumentProcessor": {
-          "can_incremental": false,
-          "incrementalPhase": "build",
-          "total_file_count": 394,
           "skipped_file_count": 0
         },
         "TocDocumentProcessor": {
@@ -5102,11 +5103,10 @@
           "total_file_count": 0,
           "skipped_file_count": 0
         },
-        "ResourceDocumentProcessor": {
+        "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
-          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build",
-          "total_file_count": 0,
+          "total_file_count": 394,
           "skipped_file_count": 0
         }
       }

@@ -7807,6 +7807,25 @@ references:
   commentId: T:Mapsui.Layers.MemoryLayer
   fullName: Mapsui.Layers.MemoryLayer
   nameWithType: MemoryLayer
+- uid: Mapsui.Layers.MemoryLayer.#ctor
+  name: MemoryLayer()
+  href: api/Mapsui.Layers.MemoryLayer.html#Mapsui_Layers_MemoryLayer__ctor
+  commentId: M:Mapsui.Layers.MemoryLayer.#ctor
+  fullName: Mapsui.Layers.MemoryLayer.MemoryLayer()
+  nameWithType: MemoryLayer.MemoryLayer()
+- uid: Mapsui.Layers.MemoryLayer.#ctor(System.String)
+  name: MemoryLayer(String)
+  href: api/Mapsui.Layers.MemoryLayer.html#Mapsui_Layers_MemoryLayer__ctor_System_String_
+  commentId: M:Mapsui.Layers.MemoryLayer.#ctor(System.String)
+  fullName: Mapsui.Layers.MemoryLayer.MemoryLayer(System.String)
+  nameWithType: MemoryLayer.MemoryLayer(String)
+- uid: Mapsui.Layers.MemoryLayer.#ctor*
+  name: MemoryLayer
+  href: api/Mapsui.Layers.MemoryLayer.html#Mapsui_Layers_MemoryLayer__ctor_
+  commentId: Overload:Mapsui.Layers.MemoryLayer.#ctor
+  isSpec: "True"
+  fullName: Mapsui.Layers.MemoryLayer.MemoryLayer
+  nameWithType: MemoryLayer.MemoryLayer
 - uid: Mapsui.Layers.MemoryLayer.DataSource
   name: DataSource
   href: api/Mapsui.Layers.MemoryLayer.html#Mapsui_Layers_MemoryLayer_DataSource
@@ -8036,19 +8055,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.Layers.TileLayer.IsCrsSupported
   nameWithType: TileLayer.IsCrsSupported
-- uid: Mapsui.Layers.TileLayer.MemoryCache
-  name: MemoryCache
-  href: api/Mapsui.Layers.TileLayer.html#Mapsui_Layers_TileLayer_MemoryCache
-  commentId: P:Mapsui.Layers.TileLayer.MemoryCache
-  fullName: Mapsui.Layers.TileLayer.MemoryCache
-  nameWithType: TileLayer.MemoryCache
-- uid: Mapsui.Layers.TileLayer.MemoryCache*
-  name: MemoryCache
-  href: api/Mapsui.Layers.TileLayer.html#Mapsui_Layers_TileLayer_MemoryCache_
-  commentId: Overload:Mapsui.Layers.TileLayer.MemoryCache
-  isSpec: "True"
-  fullName: Mapsui.Layers.TileLayer.MemoryCache
-  nameWithType: TileLayer.MemoryCache
 - uid: Mapsui.Layers.TileLayer.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,System.Boolean)
   name: RefreshData(BoundingBox, Double, Boolean)
   href: api/Mapsui.Layers.TileLayer.html#Mapsui_Layers_TileLayer_RefreshData_Mapsui_Geometries_BoundingBox_System_Double_System_Boolean_
@@ -28116,6 +28122,32 @@ references:
   isSpec: "True"
   fullName: Mapsui.Widgets.ScaleBar.ScaleBarWidget.ShowEnvelop
   nameWithType: ScaleBarWidget.ShowEnvelop
+- uid: Mapsui.Widgets.ScaleBar.ScaleBarWidget.StrokeWidth
+  name: StrokeWidth
+  href: api/Mapsui.Widgets.ScaleBar.ScaleBarWidget.html#Mapsui_Widgets_ScaleBar_ScaleBarWidget_StrokeWidth
+  commentId: P:Mapsui.Widgets.ScaleBar.ScaleBarWidget.StrokeWidth
+  fullName: Mapsui.Widgets.ScaleBar.ScaleBarWidget.StrokeWidth
+  nameWithType: ScaleBarWidget.StrokeWidth
+- uid: Mapsui.Widgets.ScaleBar.ScaleBarWidget.StrokeWidth*
+  name: StrokeWidth
+  href: api/Mapsui.Widgets.ScaleBar.ScaleBarWidget.html#Mapsui_Widgets_ScaleBar_ScaleBarWidget_StrokeWidth_
+  commentId: Overload:Mapsui.Widgets.ScaleBar.ScaleBarWidget.StrokeWidth
+  isSpec: "True"
+  fullName: Mapsui.Widgets.ScaleBar.ScaleBarWidget.StrokeWidth
+  nameWithType: ScaleBarWidget.StrokeWidth
+- uid: Mapsui.Widgets.ScaleBar.ScaleBarWidget.StrokeWidthHalo
+  name: StrokeWidthHalo
+  href: api/Mapsui.Widgets.ScaleBar.ScaleBarWidget.html#Mapsui_Widgets_ScaleBar_ScaleBarWidget_StrokeWidthHalo
+  commentId: P:Mapsui.Widgets.ScaleBar.ScaleBarWidget.StrokeWidthHalo
+  fullName: Mapsui.Widgets.ScaleBar.ScaleBarWidget.StrokeWidthHalo
+  nameWithType: ScaleBarWidget.StrokeWidthHalo
+- uid: Mapsui.Widgets.ScaleBar.ScaleBarWidget.StrokeWidthHalo*
+  name: StrokeWidthHalo
+  href: api/Mapsui.Widgets.ScaleBar.ScaleBarWidget.html#Mapsui_Widgets_ScaleBar_ScaleBarWidget_StrokeWidthHalo_
+  commentId: Overload:Mapsui.Widgets.ScaleBar.ScaleBarWidget.StrokeWidthHalo
+  isSpec: "True"
+  fullName: Mapsui.Widgets.ScaleBar.ScaleBarWidget.StrokeWidthHalo
+  nameWithType: ScaleBarWidget.StrokeWidthHalo
 - uid: Mapsui.Widgets.ScaleBar.ScaleBarWidget.TextAlignment
   name: TextAlignment
   href: api/Mapsui.Widgets.ScaleBar.ScaleBarWidget.html#Mapsui_Widgets_ScaleBar_ScaleBarWidget_TextAlignment

@@ -90,40 +90,27 @@
     <h5>Inheritance</h5>
     <div class="level0"><span class="xref">System.Object</span></div>
     <div class="level1"><a class="xref" href="Mapsui.Layers.BaseLayer.html">BaseLayer</a></div>
-    <div class="level2"><a class="xref" href="Mapsui.Layers.Layer.html">Layer</a></div>
+    <div class="level2"><a class="xref" href="Mapsui.Layers.MemoryLayer.html">MemoryLayer</a></div>
     <div class="level3"><span class="xref">MyLocationLayer</span></div>
   </div>
   <div classs="implements">
     <h5>Implements</h5>
     <div><a class="xref" href="Mapsui.Layers.ILayer.html">ILayer</a></div>
     <div><span class="xref">INotifyPropertyChanged</span></div>
-    <div><a class="xref" href="Mapsui.Fetcher.IAsyncDataFetcher.html">IAsyncDataFetcher</a></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
-      <a class="xref" href="Mapsui.Layers.Layer.html#Mapsui_Layers_Layer_FetchingPostponedInMilliseconds">Layer.FetchingPostponedInMilliseconds</a>
+      <a class="xref" href="Mapsui.Layers.MemoryLayer.html#Mapsui_Layers_MemoryLayer_DataSource">MemoryLayer.DataSource</a>
     </div>
     <div>
-      <a class="xref" href="Mapsui.Layers.Layer.html#Mapsui_Layers_Layer_DataSource">Layer.DataSource</a>
+      <a class="xref" href="Mapsui.Layers.MemoryLayer.html#Mapsui_Layers_MemoryLayer_GetFeaturesInView_Mapsui_Geometries_BoundingBox_System_Double_">MemoryLayer.GetFeaturesInView(BoundingBox, Double)</a>
     </div>
     <div>
-      <a class="xref" href="Mapsui.Layers.Layer.html#Mapsui_Layers_Layer_Envelope">Layer.Envelope</a>
+      <a class="xref" href="Mapsui.Layers.MemoryLayer.html#Mapsui_Layers_MemoryLayer_RefreshData_Mapsui_Geometries_BoundingBox_System_Double_System_Boolean_">MemoryLayer.RefreshData(BoundingBox, Double, Boolean)</a>
     </div>
     <div>
-      <a class="xref" href="Mapsui.Layers.Layer.html#Mapsui_Layers_Layer_GetFeaturesInView_Mapsui_Geometries_BoundingBox_System_Double_">Layer.GetFeaturesInView(BoundingBox, Double)</a>
-    </div>
-    <div>
-      <a class="xref" href="Mapsui.Layers.Layer.html#Mapsui_Layers_Layer_AbortFetch">Layer.AbortFetch()</a>
-    </div>
-    <div>
-      <a class="xref" href="Mapsui.Layers.Layer.html#Mapsui_Layers_Layer_ClearCache">Layer.ClearCache()</a>
-    </div>
-    <div>
-      <a class="xref" href="Mapsui.Layers.Layer.html#Mapsui_Layers_Layer_RefreshData_Mapsui_Geometries_BoundingBox_System_Double_System_Boolean_">Layer.RefreshData(BoundingBox, Double, Boolean)</a>
-    </div>
-    <div>
-      <a class="xref" href="Mapsui.Layers.Layer.html#Mapsui_Layers_Layer_IsCrsSupported_System_String_">Layer.IsCrsSupported(String)</a>
+      <a class="xref" href="Mapsui.Layers.MemoryLayer.html#Mapsui_Layers_MemoryLayer_Envelope">MemoryLayer.Envelope</a>
     </div>
     <div>
       <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Transformer">BaseLayer.Transformer</a>
@@ -183,6 +170,9 @@
       <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_IsMapInfoLayer">BaseLayer.IsMapInfoLayer</a>
     </div>
     <div>
+      <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_IsCrsSupported_System_String_">BaseLayer.IsCrsSupported(String)</a>
+    </div>
+    <div>
       <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_ToString">BaseLayer.ToString()</a>
     </div>
     <div>
@@ -196,7 +186,7 @@
   <h6><strong>Assembly</strong>: Mapsui.UI.Forms.dll</h6>
   <h5 id="Mapsui_UI_Objects_MyLocationLayer_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class MyLocationLayer : Layer, ILayer, INotifyPropertyChanged, IAsyncDataFetcher</code></pre>
+    <pre><code class="lang-csharp hljs">public class MyLocationLayer : MemoryLayer, ILayer, INotifyPropertyChanged</code></pre>
   </div>
   <h5 id="Mapsui_UI_Objects_MyLocationLayer_remarks"><strong>Remarks</strong></h5>
   <div class="markdown level0 remarks"><p>There are two different symbols for own loaction: one is used when there isn&apos;t a change in position (still),
@@ -515,9 +505,6 @@ and one is used, if the position changes (moving).</p>
   </div>
   <div>
       <span class="xref">INotifyPropertyChanged</span>
-  </div>
-  <div>
-      <a class="xref" href="Mapsui.Fetcher.IAsyncDataFetcher.html">IAsyncDataFetcher</a>
   </div>
 </article>
           </div>
