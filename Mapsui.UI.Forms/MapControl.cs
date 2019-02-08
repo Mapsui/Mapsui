@@ -435,7 +435,6 @@ namespace Mapsui.UI.Forms
             // Last touch released
             if (touchPoints.Count == 0)
             {
-                RefreshGraphics();
                 _mode = TouchMode.None;
                 _map.RefreshData(_viewport.Extent, _viewport.Resolution, true);
             }
