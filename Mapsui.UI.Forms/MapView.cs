@@ -394,13 +394,6 @@ namespace Mapsui.UI.Forms
         }
 
         /// <inheritdoc />
-        public MapInfo GetMapInfo(IEnumerable<ILayer> layers, Geometries.Point screenPosition, int margin = 0)
-        {
-            return MapInfoHelper.GetMapInfo(layers, Viewport,
-                screenPosition, _mapControl.Renderer.SymbolCache, margin);
-        }
-
-        /// <inheritdoc />
         public void RefreshGraphics()
         {
             _mapControl.RefreshGraphics();
