@@ -1,4 +1,3 @@
-using Mapsui.Fetcher;
 using Mapsui.Geometries;
 using Mapsui.Providers;
 using System.Collections.Generic;
@@ -35,8 +34,7 @@ namespace Mapsui.Layers
 
         public override void RefreshData(BoundingBox extent, double resolution, bool majorChange)
         {
-            //The MemoryLayer always has it's data ready so can fire a DataChanged event immediately so that listeners can act on it.
-            OnDataChanged(new DataChangedEventArgs());
+            // RefreshData needs no implementation for the MemoryLayer
         }
 
         public override BoundingBox Envelope => DataSource?.GetExtents();
