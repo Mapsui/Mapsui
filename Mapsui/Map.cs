@@ -39,6 +39,7 @@ namespace Mapsui
     {
         private LayerCollection _layers = new LayerCollection();
         private Color _backColor = Color.White;
+        private IViewportLimiter _limiter = new ViewportLimiter();
 
         /// <summary>
         /// Initializes a new map
@@ -74,7 +75,21 @@ namespace Mapsui
         /// </summary>
         public List<IWidget> Widgets { get; } = new List<IWidget>();
 
-        public IViewportLimiter Limiter { get; set; } = new ViewportLimiter();
+        /// <summary>
+        /// Limit the extent to which the user can navigate
+        /// </summary>
+        public IViewportLimiter Limiter
+        {
+            get => _limiter;
+            set
+            {
+                if (!_limiter.Equals(value))
+                {
+                    _limiter = value;
+                    OnPropertyChanged(nameof(Limiter));
+                }
+            }
+        }
 
         /// <summary>
         /// Projection type of Map. Normally in format like "EPSG:3857"
