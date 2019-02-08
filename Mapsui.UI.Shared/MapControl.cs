@@ -335,14 +335,7 @@ namespace Mapsui.UI.Wpf
         /// <inheritdoc />
         public MapInfo GetMapInfo(Point screenPosition, int margin = 0)
         {
-            return MapInfoHelper.GetMapInfo(Map.Layers.Where(l => l.IsMapInfoLayer), Viewport,
-                screenPosition, Renderer.SymbolCache, margin);
-        }
-
-        /// <inheritdoc />
-        public MapInfo GetMapInfo(IEnumerable<ILayer> layers, Point screenPosition, int margin = 0)
-        {
-            return MapInfoHelper.GetMapInfo(layers, Viewport,
+            return MapInfoHelper.GetMapInfo(Map.Layers.Where(l => l.IsMapInfoLayer).ToList(), Viewport,
                 screenPosition, Renderer.SymbolCache, margin);
         }
 
@@ -355,8 +348,15 @@ namespace Mapsui.UI.Wpf
         /// <returns>True, if something done </returns>
         private MapInfoEventArgs InvokeInfo(Point screenPosition, Point startScreenPosition, int numTaps)
         {
-            return InvokeInfo(Map.Layers.Where(l => l.IsMapInfoLayer), Map.GetWidgetsOfMapAndLayers(), Viewport,
-                screenPosition, startScreenPosition, _renderer.SymbolCache, WidgetTouched, numTaps);
+            return InvokeInfo(
+                Map.Layers.Where(l => l.IsMapInfoLayer).ToList(), 
+                Map.GetWidgetsOfMapAndLayers(), 
+                Viewport,
+                screenPosition, 
+                startScreenPosition, 
+                _renderer.SymbolCache, 
+                WidgetTouched, 
+                numTaps);
         }
 
         /// <summary>
