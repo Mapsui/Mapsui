@@ -91,11 +91,18 @@ namespace Mapsui.UI.Forms
 
             PaintSurface += OnPaintSurface;
             Touch += OnTouch;
-            SizeChanged += OnSizeChanged; 
+            SizeChanged += OnSizeChanged;
+            Unfocused += OnUnfocused;
+        }
+
+        private void OnUnfocused(object sender, FocusEventArgs e)
+        {
+            _fingers.Clear();
         }
 
         private void OnSizeChanged(object sender, EventArgs e)
         {
+            _fingers.Clear();
             SetViewportSize();
         }
 
