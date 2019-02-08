@@ -232,6 +232,11 @@ namespace Mapsui.Layers
 
         public abstract void RefreshData(BoundingBox extent, double resolution, bool majorChange);
 
+        public void DataHasChanged()
+        {
+            DataChanged?.Invoke(this, new DataChangedEventArgs());
+        }
+
         /// <inheritdoc />
         public virtual bool? IsCrsSupported(string crs)
         {

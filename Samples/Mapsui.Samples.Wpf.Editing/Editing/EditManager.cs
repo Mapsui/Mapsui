@@ -56,7 +56,7 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
                 _addInfo.Feature = null;
                 _addInfo.Vertex = null;
                 EditMode = EditMode.AddPolygon;
-                Layer.SignalDataChanged();
+                Layer.DataHasChanged();
             }
 
             return false;
@@ -68,7 +68,7 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
             {
                 SetPointXY(_addInfo.Vertex, mapInfo.WorldPosition);
                 _addInfo.Feature.RenderedGeometry?.Clear();
-                Layer.SignalDataChanged();
+                Layer.DataHasChanged();
             }
         }
    
@@ -87,7 +87,7 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
                 _addInfo.Feature = new Feature { Geometry = new LineString(new[] { firstPoint, secondPoint }) };
                 _addInfo.Vertices = _addInfo.Feature.Geometry.MainVertices();
                 Layer.Add(_addInfo.Feature);
-                Layer.SignalDataChanged();
+                Layer.DataHasChanged();
                 EditMode = EditMode.DrawingLine;
             }
             else if (EditMode == EditMode.DrawingLine)
@@ -98,7 +98,7 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
                 _addInfo.Vertex = worldPosition.Clone(); // and create a new hover vertex
                 lineString.Vertices.Add(_addInfo.Vertex); // and add it to the geometry
                 _addInfo.Feature.RenderedGeometry?.Clear();
-                Layer.SignalDataChanged();
+                Layer.DataHasChanged();
             }
             else if (EditMode == EditMode.AddPolygon)
             {
@@ -115,7 +115,7 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
                 };
                 _addInfo.Vertices = _addInfo.Feature.Geometry.MainVertices();
                 Layer.Add(_addInfo.Feature);
-                Layer.SignalDataChanged();
+                Layer.DataHasChanged();
                 EditMode = EditMode.DrawingPolygon;
             }
             else if (EditMode == EditMode.DrawingPolygon)
@@ -126,7 +126,7 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
                 _addInfo.Vertex = worldPosition.Clone(); // and create a new hover vertex
                 polygon.ExteriorRing.Vertices.Add(_addInfo.Vertex); // and add it to the geometry
                 _addInfo.Feature.RenderedGeometry?.Clear();
-                Layer.SignalDataChanged();
+                Layer.DataHasChanged();
             }
             return false;
         }
@@ -182,7 +182,7 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
             }
 
             _dragInfo.Feature.RenderedGeometry.Clear();
-            Layer.SignalDataChanged();
+            Layer.DataHasChanged();
             return true;
         }
 
@@ -216,7 +216,7 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
                     else if (index == vertices.Count) SetPointXY(vertices[0], vertices[count - 1]);
 
                     feature.RenderedGeometry.Clear();
-                    Layer.SignalDataChanged();
+                    Layer.DataHasChanged();
                 }
                 
             }
@@ -232,7 +232,7 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
             if (EditHelper.TryInsertVertex(mapInfo, vertices, VertexRadius))
             {
                 mapInfo.Feature.RenderedGeometry.Clear();
-                Layer.SignalDataChanged();
+                Layer.DataHasChanged();
             }
 
             return false;
@@ -263,7 +263,7 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
             _rotateInfo.PreviousPosition = worldPosition;
 
             _rotateInfo.Feature.RenderedGeometry.Clear();
-            Layer.SignalDataChanged();
+            Layer.DataHasChanged();
             
             return true; // to signal pan lock
         }
@@ -310,7 +310,7 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
             _scaleInfo.PreviousPosition = worldPosition;
 
             _scaleInfo.Feature.RenderedGeometry.Clear();
-            Layer.SignalDataChanged();
+            Layer.DataHasChanged();
 
             return true; // to signal pan lock
         }
