@@ -25,7 +25,7 @@ namespace Mapsui.Tests.Common.Maps
         {
             _writableLayer.Add(new Feature{ Geometry =
                 new Point(e.MapInfo.WorldPosition.X, e.MapInfo.WorldPosition.Y)});
-            _writableLayer.SignalDataChanged();
+            _writableLayer.DataHasChanged();
         }
 
         private Map CreateMap()

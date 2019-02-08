@@ -77,21 +77,15 @@ namespace Mapsui.Layers
             return _cache.FirstOrDefault(f => f == feature);
         }
 
-        /// <summary>
-        /// Signals to listeners that data has changed. This is necessary for situations where
-        /// an individual geometry is edited. The layer itself can not know about it's change.
-        /// </summary>
-        public void SignalDataChanged()
-        {
-            OnDataChanged(new DataChangedEventArgs());
-        }
+        [Obsolete("Use DataHasChanged instead", true)]
+        public void SignalDataChanged() {}
 
         /// <summary>
         /// Tries to remove a feature.
         /// </summary>
         /// <param name="feature">Feature to remove</param>
         /// <param name="compare">Optional method to compare the feature with any of the other 
-        /// features in the list. If ommitted a reference compare is done.</param>
+        /// features in the list. If omitted a reference compare is done.</param>
         /// <returns></returns>
         public bool TryRemove(IFeature feature, Func<IFeature, IFeature, bool> compare = null)
         {
