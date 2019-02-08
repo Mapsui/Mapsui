@@ -110,7 +110,7 @@ namespace Mapsui.Layers
         /// <summary>
         /// Memory cache for this layer
         /// </summary>
-        public MemoryCache<Feature> MemoryCache { get; }
+        private MemoryCache<Feature> MemoryCache { get; }
 
         /// <inheritdoc />
         public override IReadOnlyList<double> Resolutions => _tileSource?.Schema?.Resolutions.Select(r => r.Value.UnitsPerPixel).ToList();
