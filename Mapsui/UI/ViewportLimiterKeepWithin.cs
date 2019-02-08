@@ -41,15 +41,16 @@ namespace Mapsui.UI
         public double LimitResolution(double resolution, double screenWidth, double screenHeight,  
             IReadOnlyList<double> mapResolutions, BoundingBox mapEnvelope)
         {
-            var resolutionExtremes = ZoomLimits ?? GetExtremes(mapResolutions);
-            if (resolutionExtremes == null) return resolution;
+            var zoomLimits = ZoomLimits ?? GetExtremes(mapResolutions);
+            var panLimit = PanLimits ?? mapEnvelope;
+            if (zoomLimits == null) return resolution;
 
-            if (resolutionExtremes.Min > resolution) return resolutionExtremes.Min;
+            if (zoomLimits.Min > resolution) return zoomLimits.Min;
             
             // This is the ...AndAlwaysFillViewport part
-            var viewportFillingResolution = CalculateResolutionAtWhichMapFillsViewport(screenWidth, screenHeight, mapEnvelope);
-            if (viewportFillingResolution < resolutionExtremes.Min) return resolution; // Mission impossible. Can't adhere to both restrictions
-            var limit = Math.Min(resolutionExtremes.Max, viewportFillingResolution);
+            var viewportFillingResolution = CalculateResolutionAtWhichMapFillsViewport(screenWidth, screenHeight, panLimit);
+            if (viewportFillingResolution < zoomLimits.Min) return resolution; // Mission impossible. Can't adhere to both restrictions
+            var limit = Math.Min(zoomLimits.Max, viewportFillingResolution);
             if (limit < resolution) return limit;
         
             return resolution;
