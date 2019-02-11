@@ -43,7 +43,6 @@ namespace Mapsui.UI.Forms
         private Geometries.Point _firstTouch;
         private System.Threading.Timer _doubleTapTestTimer;
         private int _numOfTaps = 0;
-        private Dictionary<long, int> _fingers = new Dictionary<long, int>(20);
         private VelocityTracker _velocityTracker = new VelocityTracker();
         private Geometries.Point _previousCenter;
 
@@ -92,17 +91,11 @@ namespace Mapsui.UI.Forms
             PaintSurface += OnPaintSurface;
             Touch += OnTouch;
             SizeChanged += OnSizeChanged;
-            Unfocused += OnUnfocused;
-        }
-
-        private void OnUnfocused(object sender, FocusEventArgs e)
-        {
-            _fingers.Clear();
         }
 
         private void OnSizeChanged(object sender, EventArgs e)
         {
-            _fingers.Clear();
+            _touches.Clear();
             SetViewportSize();
         }
 
@@ -113,20 +106,11 @@ namespace Mapsui.UI.Forms
 
             var location = GetScreenPosition(e.Location);
 
-            // Get finger/handler for this event
-            if (!_fingers.Keys.Contains(e.Id))
-                if (_fingers.Count < 10)
-                {
-                    _fingers.Add(e.Id, _fingers.Count);
-                }
-
-            var id = _fingers[e.Id];
-
             if (e.ActionType == SKTouchAction.Pressed)
             {
                 _firstTouch = location;
 
-                _touches[id] = new TouchEvent(id, location, ticks);
+                _touches[e.Id] = new TouchEvent(e.Id, location, ticks);
 
                 _velocityTracker.Clear();
 
@@ -145,79 +129,93 @@ namespace Mapsui.UI.Forms
             }
             if (e.ActionType == SKTouchAction.Released)
             {
-                // Delete e.Id from _fingers, because finger is released
-                
-                _fingers.Remove(e.Id);
+                // Delete e.Id from _touches, because finger is released
+                var releasedTouch = _touches[e.Id];
+                _touches.Remove(e.Id);
 
                 double velocityX;
                 double velocityY;
 
-                (velocityX, velocityY) = _velocityTracker.CalcVelocity(id, ticks);
+                (velocityX, velocityY) = _velocityTracker.CalcVelocity(e.Id, ticks);
 
                 // Is this a fling or swipe?
-                if (velocityX > 10000 || velocityY > 10000)
+                if (_touches.Count == 0)
                 {
-                    System.Diagnostics.Debug.WriteLine($"Velocity X = {velocityX}, Velocity Y = {velocityY}");
-
-                    e.Handled = OnFlinged(velocityX, velocityY);
-                }
-
-                // Do we have a tap event
-                if (_touches.Count == 0 || _touches[id] == null)
-                {
-                    e.Handled = false;
-                    return;
-                }
-                
-                if (_touches[id].Location.Equals(_firstTouch) && ticks - _touches[id].Tick < (e.DeviceType == SKTouchDeviceType.Mouse ? shortClick : longTap) * 10000)
-                {
-                    // Start a timer with timeout delayTap ms. If than isn't arrived another tap, than it is a single
-                    _doubleTapTestTimer = new System.Threading.Timer((l) =>
+                    if (velocityX > 10000 || velocityY > 10000)
                     {
-                        if (_numOfTaps > 1)
+                        // This was the last finger on screen, so this is a fling
+                        e.Handled = OnFlinged(velocityX, velocityY);
+                    }
+
+                    // Do we have a tap event
+                    if (_touches.Count == 0 || releasedTouch == null)
+                    {
+                        e.Handled = false;
+                        return;
+                    }
+
+                    if (releasedTouch.Location.Equals(_firstTouch) && ticks - releasedTouch.Tick < (e.DeviceType == SKTouchDeviceType.Mouse ? shortClick : longTap) * 10000)
+                    {
+                        // Start a timer with timeout delayTap ms. If than isn't arrived another tap, than it is a single
+                        _doubleTapTestTimer = new System.Threading.Timer((l) =>
                         {
-                            if (!e.Handled)
-                                e.Handled = OnDoubleTapped(location, _numOfTaps);
-                        }
-                        else
-                            if (!e.Handled)
-                            e.Handled = OnSingleTapped((Geometries.Point)l);
-                        _numOfTaps = 1;
-                        if (_doubleTapTestTimer != null)
-                        {
-                            _doubleTapTestTimer.Dispose();
-                        }
-                        _doubleTapTestTimer = null;
-                    }, location, UseDoubleTap ? delayTap : 0, -1);
+                            if (_numOfTaps > 1)
+                            {
+                                if (!e.Handled)
+                                    e.Handled = OnDoubleTapped(location, _numOfTaps);
+                            }
+                            else
+                                if (!e.Handled)
+                                e.Handled = OnSingleTapped((Geometries.Point)l);
+                            _numOfTaps = 1;
+                            if (_doubleTapTestTimer != null)
+                            {
+                                _doubleTapTestTimer.Dispose();
+                            }
+                            _doubleTapTestTimer = null;
+                        }, location, UseDoubleTap ? delayTap : 0, -1);
+                    }
+                    else if (releasedTouch.Location.Equals(_firstTouch) && ticks - releasedTouch.Tick >= longTap * 10000)
+                    {
+                        if (!e.Handled)
+                            e.Handled = OnLongTapped(location);
+                    }
                 }
-                else if (_touches[id].Location.Equals(_firstTouch) && ticks - _touches[id].Tick >= longTap * 10000)
+
+                if (_touches.Count == 1)
                 {
-                    if (!e.Handled)
-                        e.Handled = OnLongTapped(location);
+                    e.Handled = OnTouchStart(_touches.Select(t => t.Value.Location).ToList());
                 }
-                var releasedTouch = _touches[id];
-                _touches.Remove(id);
 
                 if (!e.Handled)
                     e.Handled = OnTouchEnd(_touches.Select(t => t.Value.Location).ToList(), releasedTouch.Location);
             }
             if (e.ActionType == SKTouchAction.Moved)
             {
-                _touches[id] = new TouchEvent(id, location, ticks);
+                _touches[e.Id] = new TouchEvent(e.Id, location, ticks);
 
                 if (e.InContact)
-                    _velocityTracker.AddEvent(id, location, ticks);
+                    _velocityTracker.AddEvent(e.Id, location, ticks);
 
                 if (e.InContact && !e.Handled)
                     e.Handled = OnTouchMove(_touches.Select(t => t.Value.Location).ToList());
                 else
                     e.Handled = OnHovered(_touches.Select(t => t.Value.Location).FirstOrDefault());
             }
+            if (e.ActionType == SKTouchAction.Cancelled)
+            {
+                _touches.Remove(e.Id);
+            }
+            if (e.ActionType == SKTouchAction.Exited)
+            {
+            }
+            if (e.ActionType == SKTouchAction.Entered)
+            {
+            }
         }
 
         void OnPaintSurface(object sender, SKPaintGLSurfaceEventArgs skPaintSurfaceEventArgs)
         {
-
             _skiaScale = (float)(CanvasSize.Width / Width);
             skPaintSurfaceEventArgs.Surface.Canvas.Scale(_skiaScale, _skiaScale);
 
@@ -399,6 +397,10 @@ namespace Mapsui.UI.Forms
         /// <param name="touchPoints">List of all touched points</param>
         private bool OnTouchStart(List<Geometries.Point> touchPoints)
         {
+            // Sanity check
+            if (touchPoints.Count == 0)
+                return false;
+
             var args = new TouchedEventArgs(touchPoints);
 
             TouchStarted?.Invoke(this, args);
@@ -406,7 +408,7 @@ namespace Mapsui.UI.Forms
             if (args.Handled)
                 return true;
 
-            if (touchPoints.Count >= 2)
+            if (touchPoints.Count == 2)
             {
                 (_previousCenter, _previousRadius, _previousAngle) = GetPinchValues(touchPoints);
                 _mode = TouchMode.Zooming;
@@ -476,7 +478,7 @@ namespace Mapsui.UI.Forms
                     break;
                 case TouchMode.Zooming:
                     {
-                        if (touchPoints.Count < 2)
+                        if (touchPoints.Count != 2)
                             return false;
 
                         var (prevCenter, prevRadius, prevAngle) = (_previousCenter, _previousRadius, _previousAngle);
