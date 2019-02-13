@@ -148,7 +148,7 @@ namespace Mapsui.UI.Forms
                     }
 
                     // Do we have a tap event
-                    if (_touches.Count == 0 || releasedTouch == null)
+                    if (releasedTouch == null)
                     {
                         e.Handled = false;
                         return;
