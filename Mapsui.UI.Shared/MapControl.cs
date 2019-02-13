@@ -417,7 +417,7 @@ namespace Mapsui.UI.Wpf
         {
             var hadSize = Viewport.HasSize;
             _viewport.SetSize(ViewportWidth, ViewportHeight);
-            if (hadSize && Viewport.HasSize) OnViewportSizeInitialized();
+            if (!hadSize && Viewport.HasSize) OnViewportSizeInitialized();
             CallHomeIfNeeded();
             Refresh();
         }
