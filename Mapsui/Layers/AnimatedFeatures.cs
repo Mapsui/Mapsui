@@ -16,13 +16,13 @@ namespace Mapsui.Layers
 
     public class AnimatedFeatures
     {
-        private Timer _animationTimer;
+        private readonly Timer _animationTimer;
         private List<AnimatedItem> _cache = new List<AnimatedItem>();
         private long _startTimeAnimation;
-        private int _millisecondsBetweenUpdates;
+        private readonly int _millisecondsBetweenUpdates;
 
         /// <summary>
-        /// When the distane between the current and the previous position is larger
+        /// When the distance between the current and the previous position is larger
         /// than the DistanceThreshold it will not be animated. 
         /// The default is Double.MaxValue
         /// </summary>
