@@ -64,7 +64,7 @@ namespace Mapsui.Providers
         /// </summary>
         public IReadOnlyList<IFeature> Features { get; private set; }
 
-        public double SymbolSize { get; set; }
+        public double SymbolSize { get; set; } = 64;
 
         /// <summary>
         /// The spatial reference ID (CRS)
@@ -138,8 +138,6 @@ namespace Mapsui.Providers
                 }
             };
             _boundingBox = GetExtents(Features);
-
-            SymbolSize = 64;
         }
 
         /// <summary>
