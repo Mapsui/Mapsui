@@ -83,7 +83,6 @@ namespace Mapsui.Rendering.Xaml
 
                 RenderLayer(canvas, viewport, layer, symbolCache, rasterizing);
             }
-            canvas.Arrange(new Rect(0, 0, viewport.Width, viewport.Height));
 
             canvas.Visibility = Visibility.Visible;
             canvas.EndInit();
