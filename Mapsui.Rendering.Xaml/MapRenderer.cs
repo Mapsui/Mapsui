@@ -71,7 +71,7 @@ namespace Mapsui.Rendering.Xaml
             SymbolCache symbolCache, bool rasterizing)
         {
             canvas.BeginInit();
-            canvas.Visibility = Visibility.Collapsed;
+            canvas.Visibility = Visibility.Hidden;
 
             layers = layers.ToList();
 
