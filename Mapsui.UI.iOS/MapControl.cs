@@ -193,7 +193,6 @@ namespace Mapsui.UI.iOS
                 _canvas.Frame = value;
                 base.Frame = value;
                 SetViewportSize();
-                Refresh();
                 OnPropertyChanged();
             }
         }
@@ -204,7 +203,6 @@ namespace Mapsui.UI.iOS
 
             base.LayoutMarginsDidChange();
             SetViewportSize();
-            Refresh();
         }
 
         public void OpenBrowser(string url)

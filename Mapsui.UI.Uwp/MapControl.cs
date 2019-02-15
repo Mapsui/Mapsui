@@ -159,7 +159,6 @@ namespace Mapsui.UI.Uwp
         {
             Clip = new RectangleGeometry { Rect = new Rect(0, 0, ActualWidth, ActualHeight) };
             SetViewportSize();
-            Refresh();
         }
 
         private void RunOnUIThread(Action action)
