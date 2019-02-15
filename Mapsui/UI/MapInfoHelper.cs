@@ -39,7 +39,10 @@ namespace Mapsui.UI
                 if (layer.MinVisible > resolution) continue;
                 if (layer.MaxVisible < resolution) continue;
 
-                var features = layer.GetFeaturesInView(layer.Envelope, resolution);
+                var maxSymbolSize = 128; // This sucks. There should be a better way to determine max symbol size.
+                var box = new BoundingBox(worldPosition, worldPosition);
+                var grownBox = box.Grow(resolution * maxSymbolSize * 0.5);
+                var features = layer.GetFeaturesInView(grownBox, resolution);
 
                 var feature = features.LastOrDefault(f => 
                     IsTouchingTakingIntoAccountSymbolStyles(worldPosition, f, layer.Style, resolution, symbolCache, margin));
