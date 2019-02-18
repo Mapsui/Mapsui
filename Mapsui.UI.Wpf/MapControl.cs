@@ -277,6 +277,7 @@ namespace Mapsui.UI.Wpf
             Navigator.CenterOn(new Geometries.Point(Viewport.Center.X + 0.000000001, Viewport.Center.Y + 0.000000001));
 
             StartZoomAnimation(Viewport.Resolution, _toResolution);
+            
         }
 
         private void StartZoomAnimation(double begin, double end)

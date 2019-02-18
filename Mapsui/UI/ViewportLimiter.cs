@@ -42,7 +42,7 @@ namespace Mapsui.UI
         /// <summary>
         /// Zoom mode to use, when map is zoomed
         /// </summary>
-        public ZoomMode ZoomMode { get; set; } = ZoomMode.KeepWithinResolutions;
+        public ZoomMode ZoomMode { get; set; } = ZoomMode.Unlimited;
 
         /// <summary>
         /// Set this property in combination KeepCenterWithinExtents or KeepViewportWithinExtents.
