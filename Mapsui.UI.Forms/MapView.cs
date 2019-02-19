@@ -675,7 +675,7 @@ namespace Mapsui.UI.Forms
 
                         pin.PropertyChanged -= HandlerPinPropertyChanged;
 
-                        if (SelectedPin.Equals(pin))
+                        if (SelectedPin != null && SelectedPin.Equals(pin))
                             SelectedPin = null;
                     }
                 }
