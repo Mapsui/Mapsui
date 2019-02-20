@@ -154,7 +154,14 @@ namespace Mapsui.UI.Forms
                         return;
                     }
 
-                    if (releasedTouch.Location.Equals(_firstTouch) && ticks - releasedTouch.Tick < (e.DeviceType == SKTouchDeviceType.Mouse ? shortClick : longTap) * 10000)
+                    // While tapping on screen, there could be a small movement of the finger
+                    // (especially on Samsungs). So check, if touch start location isn't more 
+                    // than 2 pixels away from touch end location.
+                    var isAround = Math.Abs(releasedTouch.Location.X - _firstTouch.X) < 2 && Math.Abs(releasedTouch.Location.Y - _firstTouch.Y) < 2;
+
+                    // If touch start and end is in the same area and the touch time is shorter
+                    // than longTap, than we have a tap.
+                    if (isAround && ticks - releasedTouch.Tick < (e.DeviceType == SKTouchDeviceType.Mouse ? shortClick : longTap) * 10000)
                     {
                         // Start a timer with timeout delayTap ms. If than isn't arrived another tap, than it is a single
                         _doubleTapTestTimer = new System.Threading.Timer((l) =>
