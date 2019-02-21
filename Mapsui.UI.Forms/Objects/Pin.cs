@@ -449,6 +449,7 @@ namespace Mapsui.UI.Forms
                         SymbolRotation = Rotation,
                         SymbolOffset = new Offset(Anchor.X, Anchor.Y),
                         Opacity = 1 - Transparency,
+                        Enabled = IsVisible,
                     });
                 }
             }
