@@ -11,7 +11,7 @@ namespace Mapsui.Utilities
 
         public static TileLayer CreateTileLayer()
         {
-            return new TileLayer(CreateTileSource()) { Name = "OpenStreetMap", IsMapInfoLayer = true};
+            return new TileLayer(CreateTileSource()) { Name = "OpenStreetMap" };
         }
 
         private static HttpTileSource CreateTileSource()

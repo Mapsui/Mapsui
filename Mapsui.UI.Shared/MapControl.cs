@@ -371,8 +371,8 @@ namespace Mapsui.UI.Wpf
         /// <param name="viewport">The current Viewport</param>
         /// <param name="screenPosition">Screen position to check for widgets and features</param>
         /// <param name="startScreenPosition">Screen position of Viewport/MapControl</param>
-        /// <param name="symbolCache">Cache for symbols to determin size</param>
-        /// <param name="widgetCallback">Callback, which is called when Widget is hiten</param>
+        /// <param name="symbolCache">Cache for symbols to determine size</param>
+        /// <param name="widgetCallback">Callback, which is called when Widget is hit</param>
         /// <param name="numTaps">Number of clickes/taps</param>
         /// <returns>True, if something done </returns>
         private static MapInfoEventArgs InvokeInfo(IEnumerable<ILayer> layers, IEnumerable<IWidget> widgets, 
