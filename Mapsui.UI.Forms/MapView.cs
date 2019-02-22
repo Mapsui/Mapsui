@@ -145,9 +145,6 @@ namespace Mapsui.UI.Forms
 
             _mapDrawableLayer.DataSource = new ObservableCollectionProvider<Drawable>(_drawable);
             _mapDrawableLayer.Style = null;  // We don't want a global style for this layer
-
-            // Now add all layers to our MapControl
-            UpdateLayers();
         }
 
         #region Events
@@ -457,8 +454,7 @@ namespace Mapsui.UI.Forms
             // above has created a callout.
             // An alternative might be to avoid CreateCallout from a non-ui thread by throwing
             // early.
-            while (_callout == null)
-                System.Threading.Tasks.Task.Delay(1000).Wait();
+            while (_callout == null) ;
 
             var result = _callout;
             _callout = null;
@@ -600,7 +596,18 @@ namespace Mapsui.UI.Forms
         {
             if (e.PropertyName.Equals(nameof(MapControl.Map)))
             {
-                UpdateLayers();
+                if (_mapControl.Map != null)
+                {
+                    // Add layer for MyLocation
+                    if (!_mapControl.Map.Layers.Contains(_mapMyLocationLayer))
+                        _mapControl.Map.Layers.Add(_mapMyLocationLayer);
+                    // Draw drawables first
+                    if (!_mapControl.Map.Layers.Contains(_mapDrawableLayer))
+                        _mapControl.Map.Layers.Add(_mapDrawableLayer);
+                    // Draw pins on top of drawables
+                    if (!_mapControl.Map.Layers.Contains(_mapPinLayer))
+                        _mapControl.Map.Layers.Add(_mapPinLayer);
+                }
             }
         }
 
@@ -746,7 +753,7 @@ namespace Mapsui.UI.Forms
             var drawables = GetDrawablesAt(_mapControl.Viewport.ScreenToWorld(e.MapInfo.ScreenPosition), _mapDrawableLayer);
 
             var drawableArgs = new DrawableClickedEventArgs(
-                _mapControl.Viewport.ScreenToWorld(e.MapInfo.ScreenPosition).ToForms(),
+                _mapControl.Viewport.ScreenToWorld(e.MapInfo.ScreenPosition).ToForms(), 
                 new Point(e.MapInfo.ScreenPosition.X, e.MapInfo.ScreenPosition.Y), e.NumTaps);
 
             // Now check each drawable until one handles the event
@@ -839,25 +846,6 @@ namespace Mapsui.UI.Forms
         }
 
         #endregion
-
-        /// <summary>
-        /// Add layers for pins, drawables and my location to Map
-        /// </summary>
-        private void UpdateLayers()
-        {
-            if (_mapControl.Map != null)
-            {
-                // Add layer for MyLocation
-                if (!_mapControl.Map.Layers.Contains(_mapMyLocationLayer))
-                    _mapControl.Map.Layers.Add(_mapMyLocationLayer);
-                // Draw drawables first
-                if (!_mapControl.Map.Layers.Contains(_mapDrawableLayer))
-                    _mapControl.Map.Layers.Add(_mapDrawableLayer);
-                // Draw pins on top of drawables
-                if (!_mapControl.Map.Layers.Contains(_mapPinLayer))
-                    _mapControl.Map.Layers.Add(_mapPinLayer);
-            }
-        }
 
         /// <summary>
         /// Get all drawables of layer that contain given point
