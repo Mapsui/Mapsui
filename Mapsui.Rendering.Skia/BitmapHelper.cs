@@ -41,7 +41,7 @@ namespace Mapsui.Rendering.Skia
             return null;
         }
 
-        public static void RenderBitmap(SKCanvas canvas, SKImage bitmap, float x, float y, float orientation = 0,
+        public static void RenderBitmap(SKCanvas canvas, SKImage bitmap, float x, float y, float rotation = 0,
             float offsetX = 0, float offsetY = 0,
             LabelStyle.HorizontalAlignmentEnum horizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center,
             LabelStyle.VerticalAlignmentEnum verticalAlignment = LabelStyle.VerticalAlignmentEnum.Center,
@@ -51,8 +51,8 @@ namespace Mapsui.Rendering.Skia
             canvas.Save();
 
             canvas.Translate(x, y);
-            if (orientation != 0)
-                canvas.RotateDegrees(orientation, 0, 0); // todo: degrees or radians?
+            if (rotation != 0)
+                canvas.RotateDegrees(rotation, 0, 0); // todo: degrees or radians?
             canvas.Scale(scale, scale);
 
             var width = bitmap.Width;
