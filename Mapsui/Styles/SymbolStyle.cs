@@ -60,6 +60,14 @@ namespace Mapsui.Styles
         /// </summary>
         public double SymbolRotation { get; set; }
 
+        /// <summary>
+        /// When true a symbol will rotate along with the rotation of the map.
+        /// The is useful if you need to symbolize the direction in which a vehicle
+        /// is moving. When the symbol is false it will retain it's position to the
+        /// screen. This is useful for pins like symbols. The default is false.
+        /// </summary>
+        public bool RotateWithMap { get; set; }
+
         public UnitType UnitType { get; set; }
 
         public SymbolType SymbolType { get; set; }
