@@ -25,11 +25,11 @@ namespace Mapsui.Rendering.Skia
 
                 if ( symbolStyle.BitmapId >= 0)   // case 2) Bitmap Style
                 {
-                    DrawPointWithBitmapStyle(canvas, symbolStyle, destination, symbolCache, opacity);
+                    DrawPointWithBitmapStyle(canvas, symbolStyle, destination, symbolCache, opacity, (float)viewport.Rotation);
                 }
                 else                              // case 3) SymbolStyle without bitmap
                 {
-                    DrawPointWithSymbolStyle(canvas, symbolStyle, destination, opacity, symbolStyle.SymbolType);
+                    DrawPointWithSymbolStyle(canvas, symbolStyle, destination, opacity, symbolStyle.SymbolType, (float)viewport.Rotation);
                 }
             }
             else if (style is VectorStyle)        // case 4) VectorStyle
@@ -43,7 +43,7 @@ namespace Mapsui.Rendering.Skia
         }
 
         private static void DrawPointWithSymbolStyle(SKCanvas canvas, SymbolStyle style,
-            Point destination, float opacity, SymbolType symbolType = SymbolType.Ellipse)
+            Point destination, float opacity, SymbolType symbolType, float mapRotation)
         {
             canvas.Save();
             canvas.Translate((float)destination.X, (float)destination.Y);
@@ -53,7 +53,12 @@ namespace Mapsui.Rendering.Skia
             else
                 canvas.Translate((float) style.SymbolOffset.X, (float) -style.SymbolOffset.Y);
             if (style.SymbolRotation != 0)
-                canvas.RotateDegrees((float)style.SymbolRotation);
+            {
+                var rotation = (float)style.SymbolRotation;
+                if (style.RotateWithMap) rotation += mapRotation;
+                canvas.RotateDegrees(rotation);
+            }
+
             DrawPointWithVectorStyle(canvas, style, opacity, symbolType);
             canvas.Restore();
         }
@@ -159,7 +164,7 @@ namespace Mapsui.Rendering.Skia
         }
 
         private static void DrawPointWithBitmapStyle(SKCanvas canvas, SymbolStyle symbolStyle, Point destination,
-            SymbolCache symbolCache, float opacity)
+            SymbolCache symbolCache, float opacity, float mapRotation)
         {
             var bitmap = symbolCache.GetOrCreate(symbolStyle.BitmapId);
 
@@ -167,19 +172,22 @@ namespace Mapsui.Rendering.Skia
             var offsetX = symbolStyle.SymbolOffset.IsRelative ? bitmap.Width * symbolStyle.SymbolOffset.X : symbolStyle.SymbolOffset.X;
             var offsetY = symbolStyle.SymbolOffset.IsRelative ? bitmap.Height * symbolStyle.SymbolOffset.Y : symbolStyle.SymbolOffset.Y;
 
+            var rotation = (float) symbolStyle.SymbolRotation;
+            if (symbolStyle.RotateWithMap) rotation += mapRotation;
+
             switch (bitmap.Type)
             {
                 case BitmapType.Bitmap:
                     BitmapHelper.RenderBitmap(canvas, bitmap.Bitmap,
                         (float) destination.X, (float) destination.Y,
-                        (float) symbolStyle.SymbolRotation,
+                        rotation,
                         (float) offsetX, (float) offsetY,
                         opacity: opacity, scale: (float) symbolStyle.SymbolScale);
                     break;
                 case BitmapType.Svg:
                     BitmapHelper.RenderSvg(canvas, bitmap.Svg,
                         (float)destination.X, (float)destination.Y,
-                        (float)symbolStyle.SymbolRotation,
+                        rotation,
                         (float)offsetX, (float)offsetY,
                         opacity: opacity, scale: (float)symbolStyle.SymbolScale);
                     break;
@@ -193,7 +201,7 @@ namespace Mapsui.Rendering.Skia
                     }
                     BitmapHelper.RenderBitmap(canvas, (SKImage)sprite.Data,
                         (float)destination.X, (float)destination.Y,
-                        (float)symbolStyle.SymbolRotation,
+                        rotation,
                         (float)offsetX, (float)offsetY,
                         opacity: opacity, scale: (float)symbolStyle.SymbolScale);
                     break;
