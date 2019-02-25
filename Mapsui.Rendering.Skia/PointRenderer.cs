@@ -52,6 +52,8 @@ namespace Mapsui.Rendering.Skia
                 canvas.Translate((float)(SymbolStyle.DefaultWidth * style.SymbolOffset.X), (float)(-SymbolStyle.DefaultWidth * style.SymbolOffset.Y));
             else
                 canvas.Translate((float) style.SymbolOffset.X, (float) -style.SymbolOffset.Y);
+            if (style.SymbolRotation != 0)
+                canvas.RotateDegrees((float)style.SymbolRotation);
             DrawPointWithVectorStyle(canvas, style, opacity, symbolType);
             canvas.Restore();
         }
