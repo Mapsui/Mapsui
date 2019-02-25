@@ -161,7 +161,7 @@ namespace Mapsui.Rendering.Skia
         {
             var bitmap = symbolCache.GetOrCreate(symbolStyle.BitmapId);
 
-            // Calc offset (relative or absolut)
+            // Calc offset (relative or absolute)
             var offsetX = symbolStyle.SymbolOffset.IsRelative ? bitmap.Width * symbolStyle.SymbolOffset.X : symbolStyle.SymbolOffset.X;
             var offsetY = symbolStyle.SymbolOffset.IsRelative ? bitmap.Height * symbolStyle.SymbolOffset.Y : symbolStyle.SymbolOffset.Y;
 
