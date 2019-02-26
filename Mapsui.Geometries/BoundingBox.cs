@@ -256,8 +256,8 @@ namespace Mapsui.Geometries
         {
             for (uint cIndex = 0; cIndex < 2; cIndex++)
             {
-                if (((Min[cIndex] > r.Min[cIndex]) && (Min[cIndex] < r.Min[cIndex])) ||
-                    ((Max[cIndex] > r.Max[cIndex]) && (Max[cIndex] < r.Max[cIndex])))
+                if (Min[cIndex] > r.Min[cIndex] && Min[cIndex] < r.Min[cIndex] ||
+                    Max[cIndex] > r.Max[cIndex] && Max[cIndex] < r.Max[cIndex])
                     return true;
             }
             return false;
