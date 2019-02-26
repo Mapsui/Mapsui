@@ -4,7 +4,7 @@ using NUnit.Framework;
 namespace Mapsui.Geometries.Tests
 {
     [TestFixture]
-    public class TestGeometries
+    public class GeometryTests
     {
         [Test]
         public void TestPointEquals()
