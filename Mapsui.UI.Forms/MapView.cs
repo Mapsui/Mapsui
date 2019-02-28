@@ -75,6 +75,14 @@ namespace Mapsui.UI.Forms
                 Device.BeginInvokeOnMainThread(() => MyLocationFollow = false);
             };
 
+            // Add MapView layers to Map
+            AddLayers();
+
+            // Add some events to _mapControl.Map.Layers
+            _mapControl.Map.Layers.LayerAdded += HandlerLayerChanged;
+            _mapControl.Map.Layers.LayerMoved += HandlerLayerChanged;
+            _mapControl.Map.Layers.LayerRemoved += HandlerLayerChanged;
+
             AbsoluteLayout.SetLayoutBounds(_mapControl, new Rectangle(0, 0, 1, 1));
             AbsoluteLayout.SetLayoutFlags(_mapControl, AbsoluteLayoutFlags.All);
 
@@ -214,9 +222,7 @@ namespace Mapsui.UI.Forms
                 {
                     _mapControl.Viewport.ViewportChanged -= HandlerViewportChanged;
                     _mapControl.Info -= HandlerInfo;
-                    _mapControl.Map.Layers.Remove(_mapPinLayer);
-                    _mapControl.Map.Layers.Remove(_mapDrawableLayer);
-                    _mapControl.Map.Layers.Remove(_mapMyLocationLayer);
+                    RemoveLayers();
                 }
 
                 _mapControl.Map = value;
@@ -598,15 +604,11 @@ namespace Mapsui.UI.Forms
             {
                 if (_mapControl.Map != null)
                 {
-                    // Add layer for MyLocation
-                    if (!_mapControl.Map.Layers.Contains(_mapMyLocationLayer))
-                        _mapControl.Map.Layers.Add(_mapMyLocationLayer);
-                    // Draw drawables first
-                    if (!_mapControl.Map.Layers.Contains(_mapDrawableLayer))
-                        _mapControl.Map.Layers.Add(_mapDrawableLayer);
-                    // Draw pins on top of drawables
-                    if (!_mapControl.Map.Layers.Contains(_mapPinLayer))
-                        _mapControl.Map.Layers.Add(_mapPinLayer);
+                    // Remove MapView layers
+                    RemoveLayers();
+
+                    // Readd them, so that they always on top
+                    AddLayers();
                 }
             }
         }
@@ -654,8 +656,16 @@ namespace Mapsui.UI.Forms
             ViewportInitialized?.Invoke(sender, e);
         }
 
-        private void HandlerHover(object sender, HoveredEventArgs e)
+        private void HandlerLayerChanged(ILayer layer)
         {
+            if (layer == _mapMyLocationLayer || layer == _mapDrawableLayer || layer == _mapPinLayer)
+                return;
+
+            // Remove MapView layers
+            RemoveLayers();
+
+            // Readd them, so that they always on top
+            AddLayers();
         }
 
         private void HandlerPinsOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -716,6 +726,10 @@ namespace Mapsui.UI.Forms
             }
 
             Refresh();
+        }
+
+        private void HandlerHover(object sender, HoveredEventArgs e)
+        {
         }
 
         private void HandlerInfo(object sender, MapInfoEventArgs e)
@@ -846,6 +860,28 @@ namespace Mapsui.UI.Forms
         }
 
         #endregion
+
+        /// <summary>
+        /// Add all layers that MapView uses
+        /// </summary>
+        private void AddLayers()
+        {
+            // Add MapView layers
+            _mapControl.Map.Layers.Add(_mapDrawableLayer);
+            _mapControl.Map.Layers.Add(_mapPinLayer);
+            _mapControl.Map.Layers.Add(_mapMyLocationLayer);
+        }
+
+        /// <summary>
+        /// Remove all layers that MapView uses
+        /// </summary>
+        private void RemoveLayers()
+        {
+            // Remove MapView layers
+            _mapControl.Map.Layers.Remove(_mapMyLocationLayer);
+            _mapControl.Map.Layers.Remove(_mapPinLayer);
+            _mapControl.Map.Layers.Remove(_mapDrawableLayer);
+        }
 
         /// <summary>
         /// Get all drawables of layer that contain given point
