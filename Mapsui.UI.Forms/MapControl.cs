@@ -5,6 +5,7 @@ using SkiaSharp.Views.Forms;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Mapsui.Geometries.Utilities;
 using Xamarin.Forms;
 
 namespace Mapsui.UI.Forms
@@ -36,6 +37,14 @@ namespace Mapsui.UI.Forms
         private const int shortClick = 250;
         private const int delayTap = 200;
         private const int longTap = 500;
+
+        /// <summary>
+        /// If a finger touches down and up it counts as a tap if the distance between the down and up location is smaller
+        /// then the touch slob.
+        /// The slob is initialized at 8. How did we get to 8? Well you could read the discussion here: https://github.com/Mapsui/Mapsui/issues/602
+        /// We basically copied it from the Java source code: https://android.googlesource.com/platform/frameworks/base/+/master/core/java/android/view/ViewConfiguration.java#162
+        /// </summary>
+        private const int touchSlob = 8;
 
         private float _skiaScale;
         private double _innerRotation;
@@ -155,9 +164,11 @@ namespace Mapsui.UI.Forms
                     }
 
                     // While tapping on screen, there could be a small movement of the finger
-                    // (especially on Samsungs). So check, if touch start location isn't more 
-                    // than 2 pixels away from touch end location.
-                    var isAround = Math.Abs(releasedTouch.Location.X - _firstTouch.X) < 2 && Math.Abs(releasedTouch.Location.Y - _firstTouch.Y) < 2;
+                    // (especially on Samsung). So check, if touch start location isn't more 
+                    // than a number of pixels away from touch end location.
+
+                    var isAround = Algorithms.Distance(releasedTouch.Location, _firstTouch) < touchSlob;
+
 
                     // If touch start and end is in the same area and the touch time is shorter
                     // than longTap, than we have a tap.
@@ -238,7 +249,7 @@ namespace Mapsui.UI.Forms
         public void RefreshGraphics()
         {
             // Could this be null before Home is called? If so we should change the logic.
-            if (GRContext != null) RunOnUIThread(InvalidateSurface); 
+            if (GRContext != null) RunOnUIThread(InvalidateSurface);
         }
 
         /// <summary>
@@ -296,7 +307,7 @@ namespace Mapsui.UI.Forms
         /// <summary>
         /// DoubleTap is called, when user clicks with a mouse button or tap with a finger two or more times on map
         /// </summary>
-        public event EventHandler<TappedEventArgs> DoubleTap;        
+        public event EventHandler<TappedEventArgs> DoubleTap;
 
         /// <summary>
         /// Zoom is called, when map should be zoomed
