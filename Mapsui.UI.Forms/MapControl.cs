@@ -44,7 +44,7 @@ namespace Mapsui.UI.Forms
         /// The slob is initialized at 8. How did we get to 8? Well you could read the discussion here: https://github.com/Mapsui/Mapsui/issues/602
         /// We basically copied it from the Java source code: https://android.googlesource.com/platform/frameworks/base/+/master/core/java/android/view/ViewConfiguration.java#162
         /// </summary>
-        private const int touchSlob = 8;
+        private const int touchSlop = 8;
 
         private float _skiaScale;
         private double _innerRotation;
@@ -167,7 +167,7 @@ namespace Mapsui.UI.Forms
                     // (especially on Samsung). So check, if touch start location isn't more 
                     // than a number of pixels away from touch end location.
 
-                    var isAround = Algorithms.Distance(releasedTouch.Location, _firstTouch) < touchSlob;
+                    var isAround = Algorithms.Distance(releasedTouch.Location, _firstTouch) < touchSlop;
 
 
                     // If touch start and end is in the same area and the touch time is shorter
