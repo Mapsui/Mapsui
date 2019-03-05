@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using Itinero;
+using Itinero.IO.Osm;
 using Itinero.LocalGeo;
 using Itinero.Osm.Vehicles;
 using Mapsui.Geometries;
@@ -15,7 +16,7 @@ using Mapsui.Widgets.ScaleBar;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    class ItineroRoutingSample // Not implemented yet: ISample
+    class ItineroRoutingSample : ISample
     {
         public string Name => "Itinero routing";
         public string Category => "Special";
@@ -34,15 +35,18 @@ namespace Mapsui.Samples.Common.Maps
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
             map.Widgets.Add(new ScaleBarWidget(map) { TextAlignment = Widgets.Alignment.Center, HorizontalAlignment = Widgets.HorizontalAlignment.Center, VerticalAlignment = Widgets.VerticalAlignment.Top });
             map.Widgets.Add(new Widgets.Zoom.ZoomInOutWidget { MarginX = 20, MarginY = 40 });
+
+            DoStuff();
+
             return map;
         }
 
-        private void DoStuff()
+        private static void DoStuff()
         {
             var routerDb = new RouterDb();
             using (var stream = new FileInfo(@"/Resources/luxembourg-latest.osm.pbf").OpenRead())
             {
-                //!!!routerDb.LoadOsmData(stream, Vehicle.Car); // create the network for cars only.
+                routerDb.LoadOsmData(stream, Vehicle.Car); // create the network for cars only.
             }
 
             // create a router.
