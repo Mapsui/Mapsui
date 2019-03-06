@@ -51,7 +51,7 @@ namespace Mapsui.Layers
         /// Create tile layer from tile source initializer function
         /// </summary>
         /// <param name="tileSourceInitializer">Initializer to create a tile layer source</param>
-        public TileLayer(Func<ITileSource> tileSourceInitializer) : this()
+        public TileLayer(Func<ITileSource> tileSourceInitializer, int level = 0) : this(level: level)
         {
             Task.Run(() =>
             {
@@ -79,7 +79,8 @@ namespace Mapsui.Layers
         /// <param name="maxExtraTiles">Number of maximum extra tiles for memory cache</param>
         // ReSharper disable once UnusedParameter.Local // Is public and won't break this now
         public TileLayer(ITileSource source = null, int minTiles = 200, int maxTiles = 300, int maxRetries = 2, IFetchStrategy fetchStrategy = null,
-            IRenderGetStrategy renderGetStrategy = null, int minExtraTiles = -1, int maxExtraTiles = -1)
+            IRenderGetStrategy renderGetStrategy = null, int minExtraTiles = -1, int maxExtraTiles = -1,
+            int level = 0) : base(level)
         {
             MemoryCache = new MemoryCache<Feature>(minTiles, maxTiles);
             Style = new VectorStyle { Outline = { Color = Color.FromArgb(0, 0, 0, 0) } }; // initialize with transparent outline

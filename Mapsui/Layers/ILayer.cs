@@ -62,6 +62,11 @@ namespace Mapsui.Layers
         string Name { get; set; }
 
         /// <summary>
+        /// Level in a collection, which layer has
+        /// </summary>
+        int Level { get; }
+
+        /// <summary>
         /// Gets the boundingbox of the entire layer
         /// </summary>
         BoundingBox Envelope { get; }

@@ -13,13 +13,13 @@ namespace Mapsui.Layers
         /// <summary>
         /// Create a new layer
         /// </summary>
-        public MemoryLayer() : this("MemoryLayer") { }
+        public MemoryLayer(int level = 0) : this("MemoryLayer", level) { }
 
         /// <summary>
         /// Create layer with name
         /// </summary>
         /// <param name="layername">Name to use for layer</param>
-        public MemoryLayer(string layername) : base(layername) { }
+        public MemoryLayer(string layername, int level = 0) : base(layername, level) { }
 
         public IProvider DataSource { get; set; }
 

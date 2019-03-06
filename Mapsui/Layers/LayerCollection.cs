@@ -64,7 +64,7 @@ namespace Mapsui.Layers
         public void Add(ILayer layer)
         {
             if (layer == null) throw new ArgumentException("Layer cannot be null");
-            _layers.Add(layer);
+            InsertAfter(layer, _layers.Where(l => l.Level <= layer.Level).LastOrDefault());
             OnLayerAdded(layer);
         }
 
@@ -73,6 +73,36 @@ namespace Mapsui.Layers
             _layers.Remove(layer);
             _layers.Insert(index, layer);
             OnLayerMoved(layer);
+        }
+
+        public void InsertBefore(ILayer layer, ILayer before)
+        {
+            if (before == null)
+            {
+                _layers.Insert(0, layer);
+            }
+            else
+            {
+                var index = _layers.IndexOf(before) - 1;
+                _layers.Insert(index < 0 ? 0 : index, layer);
+            }
+
+            return;
+        }
+
+        public void InsertAfter(ILayer layer, ILayer after)
+        {
+            if (after == null)
+            {
+                _layers.Add(layer);
+            }
+            else
+            {
+                var index = _layers.IndexOf(after) + 1;
+                _layers.Insert(index, layer);
+            }
+
+            return;
         }
 
         public void Insert(int index, ILayer layer)

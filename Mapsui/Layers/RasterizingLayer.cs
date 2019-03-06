@@ -47,7 +47,8 @@ namespace Mapsui.Layers
             double renderResolutionMultiplier = 1,
             IRenderer rasterizer = null, 
             double overscanRatio = 1, 
-            bool onlyRerasterizeIfOutsideOverscan = false)
+            bool onlyRerasterizeIfOutsideOverscan = false,
+            int level = 0) : base(level)
         {
             if (overscanRatio < 1)
                 throw new ArgumentException($"{nameof(overscanRatio)} must be >= 1", nameof(overscanRatio));

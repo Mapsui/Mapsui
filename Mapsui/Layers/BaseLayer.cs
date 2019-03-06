@@ -43,9 +43,10 @@ namespace Mapsui.Layers
         /// <summary>
         /// Creates a BaseLayer without a name
         /// </summary>
-        protected BaseLayer()
+        protected BaseLayer(int level = 0)
         {
             Name = "Layer";
+            Level = level;
             Style = new VectorStyle();
             Enabled = true;
             MinVisible = 0;
@@ -58,8 +59,8 @@ namespace Mapsui.Layers
         /// Creates a BaseLayer with a name
         /// </summary>
         /// <param name="name">Name for this layer</param>
-        protected BaseLayer(string name)
-            : this()
+        protected BaseLayer(string name, int level = 0)
+            : this(level)
         {
             Name = name;
         }
@@ -132,6 +133,9 @@ namespace Mapsui.Layers
                 OnPropertyChanged(nameof(Name));
             }
         }
+
+        /// <inheritdoc />
+        public int Level { get; }
 
         /// <inheritdoc />
         public string CRS

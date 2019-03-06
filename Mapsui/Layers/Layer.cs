@@ -41,13 +41,13 @@ namespace Mapsui.Layers
         /// <summary>
         /// Create a new layer
         /// </summary>
-        public Layer() : this("Layer") {}
+        public Layer(int level = 0) : this("Layer", level) {}
 
         /// <summary>
         /// Create layer with name
         /// </summary>
         /// <param name="layername">Name to use for layer</param>
-        public Layer(string layername) : base(layername)
+        public Layer(string layername, int level = 0) : base(layername, level)
         {
             _fetchDispatcher = new FeatureFetchDispatcher(_cache, Transformer);
             _fetchDispatcher.DataChanged += FetchDispatcherOnDataChanged;

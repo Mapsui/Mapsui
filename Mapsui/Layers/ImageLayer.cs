@@ -62,7 +62,7 @@ namespace Mapsui.Layers
             }
         }
 
-        public ImageLayer(string layername)
+        public ImageLayer(string layername, int level = 0) : base(level)
         {
             Name = layername;
             _startFetchTimer = new Timer(StartFetchTimerElapsed, null, Timeout.Infinite, Timeout.Infinite);

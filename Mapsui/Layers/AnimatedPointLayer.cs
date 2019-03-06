@@ -13,7 +13,7 @@ namespace Mapsui.Layers
         private double _resolution;
         private readonly AnimatedFeatures _animatedFeatures = new AnimatedFeatures();
 
-        public AnimatedPointLayer(IProvider dataSource)
+        public AnimatedPointLayer(IProvider dataSource, int level = 0) : base(level)
         {
             _dataSource = dataSource;
             _animatedFeatures.AnimatedPositionChanged += (sender, args) => OnDataChanged(new DataChangedEventArgs());
