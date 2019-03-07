@@ -52,83 +52,98 @@ namespace Mapsui
 
             var resolution = ZoomHelper.DetermineResolution(
                 extent.Width, extent.Height, _viewport.Width, _viewport.Height, scaleMethod);
-            _viewport.SetResolution(resolution);
 
-            _viewport.SetCenter(extent.Centroid);
+            NavigateTo(extent.Centroid, resolution);
+        }
 
-            Navigated?.Invoke(this, EventArgs.Empty);
+        /// <summary>
+        /// Navigate to a resolution, so such the map uses the fill method
+        /// </summary>
+        /// <param name="scaleMethod"></param>
+        public void NavigateToFullEnvelope(ScaleMethod scaleMethod = ScaleMethod.Fill)
+        {
+            NavigateTo(_map.Envelope, scaleMethod);
+        }
+
+        /// <inheritdoc />
+        public void NavigateTo(Point center, double resolution)
+        {
+            NavigateTo(center, resolution, 0, null, null);
+        }
+
+        /// <summary>
+        /// Navigate to  center and change resolution with animation
+        /// </summary>
+        /// <param name="center">New center to move to</param>
+        /// <param name="resolution">New resolution to use</param>
+        /// <param name="duration">Duration of animation in milliseconds</param>
+        /// <param name="easingCenter">Function for easing of center change</param>
+        /// <param name="easingResolution">Function for easing of resolution change</param>
+        public void NavigateTo(Point center, double resolution, long duration = 0, Easing easingCenter = null, Easing easingResolution = null)
+        {
+            if (duration == 0)
+            {
+                _viewport.SetCenter(center);
+                _viewport.SetResolution(resolution);
+
+                Navigated?.Invoke(this, EventArgs.Empty);
+            }
+            else
+            {
+                StartAnimation(duration, center, resolution, easingCenter, easingResolution, callback: () => Navigated?.Invoke(this, EventArgs.Empty));
+            }
+        }
+
+        /// <inheritdoc />
+        public void ZoomTo(double resolution)
+        {
+            ZoomTo(resolution, 0, null);
         }
 
         /// <summary>
         /// Change resolution of viewport
         /// </summary>
         /// <param name="resolution">New resolution to use</param>
-        public void ZoomTo(double resolution)
+        /// <param name="duration">Duration of animation in milliseconds</param>
+        /// <param name="easing">Function for easing</param>
+        public void ZoomTo(double resolution, long duration = 0, Easing easing = null)
         {
-            _viewport.SetResolution(resolution);
+            if (duration == 0)
+            {
+                _viewport.SetResolution(resolution);
 
-            Navigated?.Invoke(this, EventArgs.Empty);
+                Navigated?.Invoke(this, EventArgs.Empty);
+            }
+            else
+            {
+                StartAnimation(duration, toResolution: resolution, easingResolution: easing, callback: () => Navigated?.Invoke(this, EventArgs.Empty));
+            }
         }
 
         /// <summary>
-        /// Change center of viewport
+        /// Zoom in to the next resolution
         /// </summary>
-        /// <param name="center">New center point of viewport</param>
-        public void CenterOn(Point center)
-        {
-            _viewport.SetCenter(center);
-
-            Navigated?.Invoke(this, EventArgs.Empty);
-        }
-
-        /// <inheritdoc />
-        public void NavigateTo(Point center, double resolution)
-        {
-            _viewport.SetCenter(center);
-            _viewport.SetResolution(resolution);
-
-            Navigated?.Invoke(this, EventArgs.Empty);
-        }
-
-        /// <summary>
-        /// Change center of viewport to X/Y coordinates
-        /// </summary>
-        /// <param name="x">X value of the new center</param>
-        /// <param name="y">Y value of the new center</param>
-        public void CenterOn(double x, double y)
-        {
-            _viewport.SetCenter(x, y);
-
-            Navigated?.Invoke(this, EventArgs.Empty);
-        }
-
-        /// <summary>
-        /// Change rotation of viewport
-        /// </summary>
-        /// <param name="rotation">New rotation in degrees of viewport></param>
-        public void RotateTo(double rotation)
-        {
-            _viewport.SetRotation(rotation);
-
-            Navigated?.Invoke(this, EventArgs.Empty);
-        }
-
         public void ZoomIn()
         {
             var resolution = ZoomHelper.ZoomIn(_map.Resolutions, _viewport.Resolution);
-            _viewport.SetResolution(resolution);
 
-            Navigated?.Invoke(this, EventArgs.Empty);
+            ZoomTo(resolution);
         }
 
+        /// <summary>
+        /// Zoom out to the next resolution
+        /// </summary>
         public void ZoomOut()
         {
             var resolution = ZoomHelper.ZoomOut(_map.Resolutions, _viewport.Resolution);
-            _viewport.SetResolution(resolution);
 
-            Navigated?.Invoke(this, EventArgs.Empty);
+            ZoomTo(resolution);
         }
 
+        /// <summary>
+        /// Zoom in to a given point
+        /// </summary>
+        /// <param name="centerOfZoom">Center to use for zoom in</param>
         public void ZoomIn(Point centerOfZoom)
         {
             var resolution = ZoomHelper.ZoomIn(_map.Resolutions, _viewport.Resolution);
@@ -137,6 +152,10 @@ namespace Mapsui
             Navigated?.Invoke(this, EventArgs.Empty);
         }
 
+        /// <summary>
+        /// Zoom out to a given point
+        /// </summary>
+        /// <param name="centerOfZoom">Center to use for zoom out</param>
         public void ZoomOut(Point centerOfZoom)
         {
             var resolution = ZoomHelper.ZoomOut(_map.Resolutions, _viewport.Resolution);
@@ -145,13 +164,11 @@ namespace Mapsui
             Navigated?.Invoke(this, EventArgs.Empty);
         }
 
-        public void NavigateToFullEnvelope(ScaleMethod scaleMethod = ScaleMethod.Fill)
-        {
-            NavigateTo(_map.Envelope, scaleMethod);
-
-            Navigated?.Invoke(this, EventArgs.Empty);
-        }
-
+        /// <summary>
+        /// Zoom to a given resolution with a given point as center
+        /// </summary>
+        /// <param name="resolution">Resolution to zoom</param>
+        /// <param name="centerOfZoom">Center to use for zoom</param>
         public void ZoomTo(double resolution, Point centerOfZoom)
         {
             // 1) Temporarily center on the center of zoom
@@ -164,6 +181,74 @@ namespace Mapsui
             _viewport.SetCenter(_viewport.ScreenToWorld(
                 _viewport.Width - centerOfZoom.X,
                 _viewport.Height - centerOfZoom.Y));
+
+            Navigated?.Invoke(this, EventArgs.Empty);
+        }
+
+        /// <inheritdoc />
+        public void CenterOn(double x, double y)
+        {
+            CenterOn(x, y, 0, null);
+        }
+
+        /// <inheritdoc />
+        public void CenterOn(Point center)
+        {
+            CenterOn(center.X, center.Y, 0, null);
+        }
+
+        /// <summary>
+        /// Change center of viewport
+        /// </summary>
+        /// <param name="center">New center point of viewport</param>
+        /// <param name="duration">Duration of animation in milliseconds</param>
+        /// <param name="easing">Function for easing</param>
+        public void CenterOn(Point center, long duration = 0, Easing easing = null)
+        {
+            CenterOn(center.X, center.Y, duration, easing);
+        }
+
+        /// <summary>
+        /// Change center of viewport to X/Y coordinates
+        /// </summary>
+        /// <param name="x">X value of the new center</param>
+        /// <param name="y">Y value of the new center</param>
+        /// <param name="duration">Duration of animation in milliseconds</param>
+        /// <param name="easing">Function for easing</param>
+        public void CenterOn(double x, double y, long duration = 0, Easing easing = null)
+        {
+            if (duration == 0)
+            {
+                _viewport.SetCenter(x, y);
+
+                Navigated?.Invoke(this, EventArgs.Empty);
+            }
+            else
+            {
+                StartAnimation(duration, new Point(x, y), easingCenter: easing, callback: () => Navigated?.Invoke(this, EventArgs.Empty));
+            }
+        }
+
+        /// <summary>
+        /// Fly to the given center with zooming out to given resolution and in again
+        /// </summary>
+        /// <param name="center">Point to fly to</param>
+        /// <param name="maxResolution">Maximum resolution to zoom out</param>
+        /// <param name="duration">Duration for animation in milliseconds</param>
+        public void FlyTo(Point center, double maxResolution, long duration = 2000)
+        {
+            var halfCenter = new Point(_viewport.Center.X + (center.X - _viewport.Center.X) / 2.0, _viewport.Center.Y + (center.Y - _viewport.Center.Y) / 2.0);
+            var resolution = _viewport.Resolution;
+            StartAnimation(duration / 2, halfCenter, maxResolution, Easing.Linear, Easing.SinOut, () => StartAnimation(duration / 2, center, resolution, Easing.Linear, Easing.SinIn));
+        }
+
+        /// <summary>
+        /// Change rotation of viewport
+        /// </summary>
+        /// <param name="rotation">New rotation in degrees of viewport></param>
+        public void RotateTo(double rotation)
+        {
+            _viewport.SetRotation(rotation);
 
             Navigated?.Invoke(this, EventArgs.Empty);
         }
@@ -253,29 +338,6 @@ namespace Mapsui
             _viewport.SetResolution(r);
             _viewport.SetCenter(x, y);
             Navigated?.Invoke(this, EventArgs.Empty);
-        }
-
-        /// <summary>
-        /// Center on center with animation
-        /// </summary>
-        /// <param name="center">Point to center on</param>
-        /// <param name="duration">Duration for animation in milliseconds</param>
-        public void CenterOnWithAnimation(Point center, long duration)
-        {
-            StartAnimation(duration, center);
-        }
-
-        /// <summary>
-        /// Fly to the given center with zooming out to given resolution and in again
-        /// </summary>
-        /// <param name="center">Point to fly to</param>
-        /// <param name="maxResolution">Maximum resolution to zoom out</param>
-        /// <param name="duration">Duration for animation in milliseconds</param>
-        public void FlyTo(Point center, double maxResolution, long duration = 2000)
-        {
-            var halfCenter = new Point(_viewport.Center.X + (center.X - _viewport.Center.X) / 2.0, _viewport.Center.Y + (center.Y - _viewport.Center.Y) / 2.0);
-            var resolution = _viewport.Resolution;
-            StartAnimation(duration / 2, halfCenter, maxResolution, Easing.Linear, Easing.SinOut, () => StartAnimation(duration / 2, center, resolution, Easing.Linear, Easing.SinIn));
         }
     }
 }
