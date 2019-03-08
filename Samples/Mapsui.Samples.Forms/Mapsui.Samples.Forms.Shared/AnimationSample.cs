@@ -19,7 +19,7 @@ namespace Mapsui.Samples.Forms
             var mapView = sender as MapView;
             var e = args as MapClickedEventArgs;
 
-            var navigator = (Navigator)mapView.Navigator;
+            var navigator = (AnimatedNavigator)mapView.Navigator;
             navigator.FlyTo(e.Point.ToMapsui(), mapView.Viewport.Resolution * 2);
 
             return true;
