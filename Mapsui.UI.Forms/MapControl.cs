@@ -150,7 +150,7 @@ namespace Mapsui.UI.Forms
                 // Is this a fling or swipe?
                 if (_touches.Count == 0)
                 {
-                    if (velocityX > 10000 || velocityY > 10000)
+                    if (Math.Abs(velocityX) > 10000 || Math.Abs(velocityY) > 10000)
                     {
                         // This was the last finger on screen, so this is a fling
                         e.Handled = OnFlinged(velocityX, velocityY);
