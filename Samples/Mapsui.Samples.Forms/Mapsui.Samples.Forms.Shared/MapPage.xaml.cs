@@ -8,6 +8,7 @@ using Mapsui.UI.Forms;
 using Plugin.Geolocator;
 using Plugin.Geolocator.Abstractions;
 using Mapsui.UI;
+using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Forms
 {
@@ -65,7 +66,7 @@ namespace Mapsui.Samples.Forms
             e.Handled = true;
         }
 
-        public async void StartGPS()
+        public async Task StartGPS()
         {
             if (CrossGeolocator.Current.IsListening)
                 return;
@@ -89,7 +90,7 @@ namespace Mapsui.Samples.Forms
             CrossGeolocator.Current.PositionError += MyLocationPositionError;
         }
 
-        public async void StopGPS()
+        public async Task StopGPS()
         {
             // Stop GPS
             if (CrossGeolocator.Current.IsListening)
