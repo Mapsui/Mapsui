@@ -8,8 +8,7 @@ namespace Mapsui.Samples.Forms
 {
     public class CircleSample : IFormsSample
     {
-        static int markerNum = 1;
-        static Random rnd = new Random();
+        private static Random rnd = new Random();
 
         public string Name => "Add Circle Sample";
 
