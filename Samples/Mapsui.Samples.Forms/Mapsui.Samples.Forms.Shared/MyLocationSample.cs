@@ -18,8 +18,9 @@ namespace Mapsui.Samples.Forms
 
             mapView.MyLocationLayer.IsMoving = mapView.MyLocationEnabled;
             mapView.MyLocationEnabled = true;
+            mapView.UseDoubleTap = true;
 
-            return true;
+            return false;
         }
 
         public void Setup(IMapControl mapControl)

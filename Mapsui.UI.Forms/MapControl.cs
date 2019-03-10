@@ -332,8 +332,8 @@ namespace Mapsui.UI.Forms
             if (args.Handled)
                 return true;
 
-            // TODO
             // Perform standard behavior
+            Navigator.ZoomOut(screenPosition);
 
             return true;
         }
@@ -356,8 +356,8 @@ namespace Mapsui.UI.Forms
             if (args.Handled)
                 return true;
 
-            // TODO
             // Perform standard behavior
+            Navigator.ZoomIn(screenPosition);
 
             return true;
         }
