@@ -7,10 +7,10 @@ namespace Mapsui.Rendering.Skia.SkiaWidgets
 {
     public class ScaleBarWidgetRenderer : ISkiaWidgetRenderer
     {
-        private static SKPaint _paintScaleBar;
-        private static SKPaint _paintScaleBarStroke;
-        private static SKPaint _paintScaleText;
-        private static SKPaint _paintScaleTextStroke;
+        private SKPaint _paintScaleBar;
+        private SKPaint _paintScaleBarStroke;
+        private SKPaint _paintScaleText;
+        private SKPaint _paintScaleTextStroke;
 
         public void Draw(SKCanvas canvas, IReadOnlyViewport viewport,  IWidget widget,
             float layerOpacity)
@@ -22,10 +22,10 @@ namespace Mapsui.Rendering.Skia.SkiaWidgets
             if (_paintScaleBar == null)
             {
                 // ... than create the paints
-                _paintScaleBar = CreateScaleBarPaint(SKPaintStyle.Fill, scaleBar.Scale);
-                _paintScaleBarStroke = CreateScaleBarPaint(SKPaintStyle.Stroke, scaleBar.Scale);
-                _paintScaleText = CreateTextPaint(SKPaintStyle.Fill, scaleBar.Scale, scaleBar.Font);
-                _paintScaleTextStroke = CreateTextPaint(SKPaintStyle.Stroke, scaleBar.Scale, scaleBar.Font);
+                _paintScaleBar = CreateScaleBarPaint(SKPaintStyle.Fill);
+                _paintScaleBarStroke = CreateScaleBarPaint(SKPaintStyle.Stroke);
+                _paintScaleText = CreateTextPaint(SKPaintStyle.Fill);
+                _paintScaleTextStroke = CreateTextPaint(SKPaintStyle.Stroke);
             }
 
             // Update paints with new values
@@ -35,11 +35,13 @@ namespace Mapsui.Rendering.Skia.SkiaWidgets
             _paintScaleBarStroke.StrokeWidth = scaleBar.StrokeWidthHalo * scaleBar.Scale;
             _paintScaleText.Color = scaleBar.TextColor.ToSkia(layerOpacity);
             _paintScaleText.StrokeWidth = scaleBar.StrokeWidth * scaleBar.Scale;
-            _paintScaleText.Typeface = SKTypeface.FromFamilyName(scaleBar.Font.FontFamily, SKTypefaceStyle.Bold);
+            _paintScaleText.Typeface = SKTypeface.FromFamilyName(scaleBar.Font.FontFamily, 
+                SKFontStyleWeight.Bold, SKFontStyleWidth.Normal, SKFontStyleSlant.Upright);
             _paintScaleText.TextSize = (float)scaleBar.Font.Size * scaleBar.Scale;
             _paintScaleTextStroke.Color = scaleBar.Halo.ToSkia(layerOpacity);
             _paintScaleTextStroke.StrokeWidth = scaleBar.StrokeWidthHalo / 2 * scaleBar.Scale;
-            _paintScaleTextStroke.Typeface = SKTypeface.FromFamilyName(scaleBar.Font.FontFamily, SKTypefaceStyle.Bold);
+            _paintScaleTextStroke.Typeface = SKTypeface.FromFamilyName(scaleBar.Font.FontFamily, 
+                SKFontStyleWeight.Bold, SKFontStyleWidth.Normal, SKFontStyleSlant.Upright);
             _paintScaleTextStroke.TextSize = (float)scaleBar.Font.Size * scaleBar.Scale;
 
             float scaleBarLength1;
@@ -107,11 +109,8 @@ namespace Mapsui.Rendering.Skia.SkiaWidgets
             SKRect textSize2 = SKRect.Empty;
 
             scaleBarText1 = scaleBarText1 ?? string.Empty;
-            scaleBarText2 = scaleBarText2 ?? string.Empty;
-
             _paintScaleTextStroke.MeasureText(scaleBarText1, ref textSize1);
-            _paintScaleTextStroke.MeasureText(scaleBarText2, ref textSize2);
-
+            
             var (posX1, posY1, posX2, posY2) = scaleBar.GetScaleBarTextPositions(viewport, textSize.ToMapsui(), textSize1.ToMapsui(), textSize2.ToMapsui(), scaleBar.StrokeWidthHalo);
 
             // Now draw text
@@ -123,6 +122,9 @@ namespace Mapsui.Rendering.Skia.SkiaWidgets
             if (scaleBar.ScaleBarMode == ScaleBarMode.Both && scaleBar.SecondaryUnitConverter != null)
             {
                 // Now draw second text
+                scaleBarText2 = scaleBarText2 ?? string.Empty;
+                _paintScaleTextStroke.MeasureText(scaleBarText2, ref textSize2);
+
                 canvas.DrawText(scaleBarText2, posX2, posY2 - textSize2.Top, _paintScaleTextStroke);
                 canvas.DrawText(scaleBarText2, posX2, posY2 - textSize2.Top, _paintScaleText);
 
@@ -139,26 +141,22 @@ namespace Mapsui.Rendering.Skia.SkiaWidgets
             }
         }
 
-        private static SKPaint CreateScaleBarPaint(SKPaintStyle style, float scale)
+        private static SKPaint CreateScaleBarPaint(SKPaintStyle style)
         {
-            SKPaint paint = new SKPaint();
-
-            paint.LcdRenderText = true;
-            paint.Style = style;
-            paint.StrokeCap = SKStrokeCap.Square;
-
-            return paint;
+            return new SKPaint
+            {
+                LcdRenderText = true, Style = style, StrokeCap = SKStrokeCap.Square
+            };
         }
 
-        private static SKPaint CreateTextPaint(SKPaintStyle style, float scale, Styles.Font font)
+        private static SKPaint CreateTextPaint(SKPaintStyle style)
         {
-            SKPaint paint = new SKPaint();
-
-            paint.LcdRenderText = true;
-            paint.Style = style;
-            paint.IsAntialias = true;
-
-            return paint;
+            return new SKPaint
+            {
+                LcdRenderText = true,
+                Style = style,
+                IsAntialias = true
+            };
         }
     }
 }

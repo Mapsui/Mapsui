@@ -7,9 +7,6 @@ namespace Mapsui.Samples.Forms
 {
     public class MyLocationSample : IFormsSample
     {
-        static int markerNum = 1;
-        static Random rnd = new Random();
-
         public string Name => "MyLocation Sample";
 
         public string Category => "Forms";
@@ -21,8 +18,9 @@ namespace Mapsui.Samples.Forms
 
             mapView.MyLocationLayer.IsMoving = mapView.MyLocationEnabled;
             mapView.MyLocationEnabled = true;
+            mapView.UseDoubleTap = true;
 
-            return true;
+            return false;
         }
 
         public void Setup(IMapControl mapControl)

@@ -9,9 +9,6 @@ namespace Mapsui.Samples.Forms
 {
     public class PolylineSample : IFormsSample
     {
-        static int markerNum = 1;
-        static Random rnd = new Random();
-
         public string Name => "Add Polyline Sample";
 
         public string Category => "Forms";
@@ -34,10 +31,10 @@ namespace Mapsui.Samples.Forms
                 {
                     f = mapView.Drawables.First();
                 }
-
-                if (f is Polyline)
+                
+                if (f is Polyline polyline)
                 {
-                    ((Polyline)f).Positions.Add(e.Point);
+                    polyline.Positions.Add(e.Point);
                 }
             }
 
