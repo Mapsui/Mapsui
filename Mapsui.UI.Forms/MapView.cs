@@ -36,8 +36,9 @@ namespace Mapsui.UI.Forms
         private readonly SvgButton _mapNorthingButton;
         private readonly SKPicture _pictMyLocationNoCenter;
         private readonly SKPicture _pictMyLocationCenter;
+		private object _calloutSyncLock = new object();
 
-        readonly ObservableCollection<Pin> _pins = new ObservableCollection<Pin>();
+		readonly ObservableCollection<Pin> _pins = new ObservableCollection<Pin>();
         readonly ObservableCollection<Drawable> _drawable = new ObservableCollection<Drawable>();
         readonly ObservableCollection<Callout> _callouts = new ObservableCollection<Callout>();
 
@@ -448,25 +449,25 @@ namespace Mapsui.UI.Forms
         /// <param name="position">Position of callout</param>
         public Callout CreateCallout(Position position)
         {
-            Device.BeginInvokeOnMainThread(() =>
-            {
-                _callout = new Callout(_mapControl)
-                {
-                    Anchor = position
-                };
-            });
+			if (_callout == null)
+			{
+				lock (_calloutSyncLock)
+				{
+					if (_callout == null)
+					{
+						_callout = new Callout(_mapControl)
+						{
+							Anchor = position
+						};
+					}
+				}
+			}
 
-            // My interpretation (PDD): This while keeps looping until the asynchronous call
-            // above has created a callout.
-            // An alternative might be to avoid CreateCallout from a non-ui thread by throwing
-            // early.
-            while (_callout == null) ;
+			var result = _callout;
+			_callout = null;
 
-            var result = _callout;
-            _callout = null;
-
-            return result;
-        }
+			return result;
+		}
 
         /// <summary>
         /// Shows given callout
