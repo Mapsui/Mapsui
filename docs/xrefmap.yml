@@ -6767,6 +6767,19 @@ references:
   commentId: E:Mapsui.Layers.BaseLayer.DataChanged
   fullName: Mapsui.Layers.BaseLayer.DataChanged
   nameWithType: BaseLayer.DataChanged
+- uid: Mapsui.Layers.BaseLayer.DataHasChanged
+  name: DataHasChanged()
+  href: api/Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_DataHasChanged
+  commentId: M:Mapsui.Layers.BaseLayer.DataHasChanged
+  fullName: Mapsui.Layers.BaseLayer.DataHasChanged()
+  nameWithType: BaseLayer.DataHasChanged()
+- uid: Mapsui.Layers.BaseLayer.DataHasChanged*
+  name: DataHasChanged
+  href: api/Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_DataHasChanged_
+  commentId: Overload:Mapsui.Layers.BaseLayer.DataHasChanged
+  isSpec: "True"
+  fullName: Mapsui.Layers.BaseLayer.DataHasChanged
+  nameWithType: BaseLayer.DataHasChanged
 - uid: Mapsui.Layers.BaseLayer.Enabled
   name: Enabled
   href: api/Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Enabled
@@ -7137,6 +7150,19 @@ references:
   commentId: E:Mapsui.Layers.ILayer.DataChanged
   fullName: Mapsui.Layers.ILayer.DataChanged
   nameWithType: ILayer.DataChanged
+- uid: Mapsui.Layers.ILayer.DataHasChanged
+  name: DataHasChanged()
+  href: api/Mapsui.Layers.ILayer.html#Mapsui_Layers_ILayer_DataHasChanged
+  commentId: M:Mapsui.Layers.ILayer.DataHasChanged
+  fullName: Mapsui.Layers.ILayer.DataHasChanged()
+  nameWithType: ILayer.DataHasChanged()
+- uid: Mapsui.Layers.ILayer.DataHasChanged*
+  name: DataHasChanged
+  href: api/Mapsui.Layers.ILayer.html#Mapsui_Layers_ILayer_DataHasChanged_
+  commentId: Overload:Mapsui.Layers.ILayer.DataHasChanged
+  isSpec: "True"
+  fullName: Mapsui.Layers.ILayer.DataHasChanged
+  nameWithType: ILayer.DataHasChanged
 - uid: Mapsui.Layers.ILayer.Enabled
   name: Enabled
   href: api/Mapsui.Layers.ILayer.html#Mapsui_Layers_ILayer_Enabled
@@ -18137,51 +18163,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.Rendering.Xaml.PolygonRenderer.RenderPolygon
   nameWithType: PolygonRenderer.RenderPolygon
-- uid: Mapsui.Rendering.Xaml.RasterizingProvider
-  name: RasterizingProvider
-  href: api/Mapsui.Rendering.Xaml.RasterizingProvider.html
-  commentId: T:Mapsui.Rendering.Xaml.RasterizingProvider
-  fullName: Mapsui.Rendering.Xaml.RasterizingProvider
-  nameWithType: RasterizingProvider
-- uid: Mapsui.Rendering.Xaml.RasterizingProvider.CRS
-  name: CRS
-  href: api/Mapsui.Rendering.Xaml.RasterizingProvider.html#Mapsui_Rendering_Xaml_RasterizingProvider_CRS
-  commentId: P:Mapsui.Rendering.Xaml.RasterizingProvider.CRS
-  fullName: Mapsui.Rendering.Xaml.RasterizingProvider.CRS
-  nameWithType: RasterizingProvider.CRS
-- uid: Mapsui.Rendering.Xaml.RasterizingProvider.CRS*
-  name: CRS
-  href: api/Mapsui.Rendering.Xaml.RasterizingProvider.html#Mapsui_Rendering_Xaml_RasterizingProvider_CRS_
-  commentId: Overload:Mapsui.Rendering.Xaml.RasterizingProvider.CRS
-  isSpec: "True"
-  fullName: Mapsui.Rendering.Xaml.RasterizingProvider.CRS
-  nameWithType: RasterizingProvider.CRS
-- uid: Mapsui.Rendering.Xaml.RasterizingProvider.GetExtents
-  name: GetExtents()
-  href: api/Mapsui.Rendering.Xaml.RasterizingProvider.html#Mapsui_Rendering_Xaml_RasterizingProvider_GetExtents
-  commentId: M:Mapsui.Rendering.Xaml.RasterizingProvider.GetExtents
-  fullName: Mapsui.Rendering.Xaml.RasterizingProvider.GetExtents()
-  nameWithType: RasterizingProvider.GetExtents()
-- uid: Mapsui.Rendering.Xaml.RasterizingProvider.GetExtents*
-  name: GetExtents
-  href: api/Mapsui.Rendering.Xaml.RasterizingProvider.html#Mapsui_Rendering_Xaml_RasterizingProvider_GetExtents_
-  commentId: Overload:Mapsui.Rendering.Xaml.RasterizingProvider.GetExtents
-  isSpec: "True"
-  fullName: Mapsui.Rendering.Xaml.RasterizingProvider.GetExtents
-  nameWithType: RasterizingProvider.GetExtents
-- uid: Mapsui.Rendering.Xaml.RasterizingProvider.GetFeaturesInView(Mapsui.Geometries.BoundingBox,System.Double)
-  name: GetFeaturesInView(BoundingBox, Double)
-  href: api/Mapsui.Rendering.Xaml.RasterizingProvider.html#Mapsui_Rendering_Xaml_RasterizingProvider_GetFeaturesInView_Mapsui_Geometries_BoundingBox_System_Double_
-  commentId: M:Mapsui.Rendering.Xaml.RasterizingProvider.GetFeaturesInView(Mapsui.Geometries.BoundingBox,System.Double)
-  fullName: Mapsui.Rendering.Xaml.RasterizingProvider.GetFeaturesInView(Mapsui.Geometries.BoundingBox, System.Double)
-  nameWithType: RasterizingProvider.GetFeaturesInView(BoundingBox, Double)
-- uid: Mapsui.Rendering.Xaml.RasterizingProvider.GetFeaturesInView*
-  name: GetFeaturesInView
-  href: api/Mapsui.Rendering.Xaml.RasterizingProvider.html#Mapsui_Rendering_Xaml_RasterizingProvider_GetFeaturesInView_
-  commentId: Overload:Mapsui.Rendering.Xaml.RasterizingProvider.GetFeaturesInView
-  isSpec: "True"
-  fullName: Mapsui.Rendering.Xaml.RasterizingProvider.GetFeaturesInView
-  nameWithType: RasterizingProvider.GetFeaturesInView
 - uid: Mapsui.Rendering.Xaml.RectExtensions
   name: RectExtensions
   href: api/Mapsui.Rendering.Xaml.RectExtensions.html
@@ -20438,6 +20419,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.Styles.SymbolStyle.Inequality
   nameWithType: SymbolStyle.Inequality
+- uid: Mapsui.Styles.SymbolStyle.RotateWithMap
+  name: RotateWithMap
+  href: api/Mapsui.Styles.SymbolStyle.html#Mapsui_Styles_SymbolStyle_RotateWithMap
+  commentId: P:Mapsui.Styles.SymbolStyle.RotateWithMap
+  fullName: Mapsui.Styles.SymbolStyle.RotateWithMap
+  nameWithType: SymbolStyle.RotateWithMap
+- uid: Mapsui.Styles.SymbolStyle.RotateWithMap*
+  name: RotateWithMap
+  href: api/Mapsui.Styles.SymbolStyle.html#Mapsui_Styles_SymbolStyle_RotateWithMap_
+  commentId: Overload:Mapsui.Styles.SymbolStyle.RotateWithMap
+  isSpec: "True"
+  fullName: Mapsui.Styles.SymbolStyle.RotateWithMap
+  nameWithType: SymbolStyle.RotateWithMap
 - uid: Mapsui.Styles.SymbolStyle.SymbolOffset
   name: SymbolOffset
   href: api/Mapsui.Styles.SymbolStyle.html#Mapsui_Styles_SymbolStyle_SymbolOffset
@@ -21232,15 +21226,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Android.MapControl.Dispose
   nameWithType: MapControl.Dispose
-- uid: Mapsui.UI.Android.MapControl.GetMapInfo(IEnumerable{Mapsui.Layers.ILayer},Mapsui.Geometries.Point,System.Int32)
-  name: GetMapInfo(IEnumerable<ILayer>, Point, Int32)
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_GetMapInfo_IEnumerable_Mapsui_Layers_ILayer__Mapsui_Geometries_Point_System_Int32_
-  commentId: M:Mapsui.UI.Android.MapControl.GetMapInfo(IEnumerable{Mapsui.Layers.ILayer},Mapsui.Geometries.Point,System.Int32)
-  name.vb: GetMapInfo(IEnumerable(Of ILayer), Point, Int32)
-  fullName: Mapsui.UI.Android.MapControl.GetMapInfo(IEnumerable<Mapsui.Layers.ILayer>, Mapsui.Geometries.Point, System.Int32)
-  fullName.vb: Mapsui.UI.Android.MapControl.GetMapInfo(IEnumerable(Of Mapsui.Layers.ILayer), Mapsui.Geometries.Point, System.Int32)
-  nameWithType: MapControl.GetMapInfo(IEnumerable<ILayer>, Point, Int32)
-  nameWithType.vb: MapControl.GetMapInfo(IEnumerable(Of ILayer), Point, Int32)
 - uid: Mapsui.UI.Android.MapControl.GetMapInfo(Mapsui.Geometries.Point,System.Int32)
   name: GetMapInfo(Point, Int32)
   href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_GetMapInfo_Mapsui_Geometries_Point_System_Int32_
@@ -22155,15 +22140,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Forms.MapControl.GetDeviceIndependentUnits
   nameWithType: MapControl.GetDeviceIndependentUnits
-- uid: Mapsui.UI.Forms.MapControl.GetMapInfo(IEnumerable{Mapsui.Layers.ILayer},Mapsui.Geometries.Point,System.Int32)
-  name: GetMapInfo(IEnumerable<ILayer>, Point, Int32)
-  href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_GetMapInfo_IEnumerable_Mapsui_Layers_ILayer__Mapsui_Geometries_Point_System_Int32_
-  commentId: M:Mapsui.UI.Forms.MapControl.GetMapInfo(IEnumerable{Mapsui.Layers.ILayer},Mapsui.Geometries.Point,System.Int32)
-  name.vb: GetMapInfo(IEnumerable(Of ILayer), Point, Int32)
-  fullName: Mapsui.UI.Forms.MapControl.GetMapInfo(IEnumerable<Mapsui.Layers.ILayer>, Mapsui.Geometries.Point, System.Int32)
-  fullName.vb: Mapsui.UI.Forms.MapControl.GetMapInfo(IEnumerable(Of Mapsui.Layers.ILayer), Mapsui.Geometries.Point, System.Int32)
-  nameWithType: MapControl.GetMapInfo(IEnumerable<ILayer>, Point, Int32)
-  nameWithType.vb: MapControl.GetMapInfo(IEnumerable(Of ILayer), Point, Int32)
 - uid: Mapsui.UI.Forms.MapControl.GetMapInfo(Mapsui.Geometries.Point,System.Int32)
   name: GetMapInfo(Point, Int32)
   href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_GetMapInfo_Mapsui_Geometries_Point_System_Int32_
@@ -22774,15 +22750,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Forms.MapView.GetEnumerator
   nameWithType: MapView.GetEnumerator
-- uid: Mapsui.UI.Forms.MapView.GetMapInfo(IEnumerable{Mapsui.Layers.ILayer},Mapsui.Geometries.Point,System.Int32)
-  name: GetMapInfo(IEnumerable<ILayer>, Point, Int32)
-  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_GetMapInfo_IEnumerable_Mapsui_Layers_ILayer__Mapsui_Geometries_Point_System_Int32_
-  commentId: M:Mapsui.UI.Forms.MapView.GetMapInfo(IEnumerable{Mapsui.Layers.ILayer},Mapsui.Geometries.Point,System.Int32)
-  name.vb: GetMapInfo(IEnumerable(Of ILayer), Point, Int32)
-  fullName: Mapsui.UI.Forms.MapView.GetMapInfo(IEnumerable<Mapsui.Layers.ILayer>, Mapsui.Geometries.Point, System.Int32)
-  fullName.vb: Mapsui.UI.Forms.MapView.GetMapInfo(IEnumerable(Of Mapsui.Layers.ILayer), Mapsui.Geometries.Point, System.Int32)
-  nameWithType: MapView.GetMapInfo(IEnumerable<ILayer>, Point, Int32)
-  nameWithType.vb: MapView.GetMapInfo(IEnumerable(Of ILayer), Point, Int32)
 - uid: Mapsui.UI.Forms.MapView.GetMapInfo(Mapsui.Geometries.Point,System.Int32)
   name: GetMapInfo(Point, Int32)
   href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_GetMapInfo_Mapsui_Geometries_Point_System_Int32_
@@ -24135,15 +24102,6 @@ references:
   commentId: T:Mapsui.UI.IMapControl
   fullName: Mapsui.UI.IMapControl
   nameWithType: IMapControl
-- uid: Mapsui.UI.IMapControl.GetMapInfo(IEnumerable{Mapsui.Layers.ILayer},Mapsui.Geometries.Point,System.Int32)
-  name: GetMapInfo(IEnumerable<ILayer>, Point, Int32)
-  href: api/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_GetMapInfo_IEnumerable_Mapsui_Layers_ILayer__Mapsui_Geometries_Point_System_Int32_
-  commentId: M:Mapsui.UI.IMapControl.GetMapInfo(IEnumerable{Mapsui.Layers.ILayer},Mapsui.Geometries.Point,System.Int32)
-  name.vb: GetMapInfo(IEnumerable(Of ILayer), Point, Int32)
-  fullName: Mapsui.UI.IMapControl.GetMapInfo(IEnumerable<Mapsui.Layers.ILayer>, Mapsui.Geometries.Point, System.Int32)
-  fullName.vb: Mapsui.UI.IMapControl.GetMapInfo(IEnumerable(Of Mapsui.Layers.ILayer), Mapsui.Geometries.Point, System.Int32)
-  nameWithType: IMapControl.GetMapInfo(IEnumerable<ILayer>, Point, Int32)
-  nameWithType.vb: IMapControl.GetMapInfo(IEnumerable(Of ILayer), Point, Int32)
 - uid: Mapsui.UI.IMapControl.GetMapInfo(Mapsui.Geometries.Point,System.Int32)
   name: GetMapInfo(Point, Int32)
   href: api/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_GetMapInfo_Mapsui_Geometries_Point_System_Int32_
@@ -24414,15 +24372,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.iOS.MapControl.Frame
   nameWithType: MapControl.Frame
-- uid: Mapsui.UI.iOS.MapControl.GetMapInfo(IEnumerable{Mapsui.Layers.ILayer},Mapsui.Geometries.Point,System.Int32)
-  name: GetMapInfo(IEnumerable<ILayer>, Point, Int32)
-  href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_GetMapInfo_IEnumerable_Mapsui_Layers_ILayer__Mapsui_Geometries_Point_System_Int32_
-  commentId: M:Mapsui.UI.iOS.MapControl.GetMapInfo(IEnumerable{Mapsui.Layers.ILayer},Mapsui.Geometries.Point,System.Int32)
-  name.vb: GetMapInfo(IEnumerable(Of ILayer), Point, Int32)
-  fullName: Mapsui.UI.iOS.MapControl.GetMapInfo(IEnumerable<Mapsui.Layers.ILayer>, Mapsui.Geometries.Point, System.Int32)
-  fullName.vb: Mapsui.UI.iOS.MapControl.GetMapInfo(IEnumerable(Of Mapsui.Layers.ILayer), Mapsui.Geometries.Point, System.Int32)
-  nameWithType: MapControl.GetMapInfo(IEnumerable<ILayer>, Point, Int32)
-  nameWithType.vb: MapControl.GetMapInfo(IEnumerable(Of ILayer), Point, Int32)
 - uid: Mapsui.UI.iOS.MapControl.GetMapInfo(Mapsui.Geometries.Point,System.Int32)
   name: GetMapInfo(Point, Int32)
   href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_GetMapInfo_Mapsui_Geometries_Point_System_Int32_
@@ -26395,15 +26344,6 @@ references:
   commentId: E:Mapsui.UI.Wpf.MapControl.FeatureInfo
   fullName: Mapsui.UI.Wpf.MapControl.FeatureInfo
   nameWithType: MapControl.FeatureInfo
-- uid: Mapsui.UI.Wpf.MapControl.GetMapInfo(IEnumerable{Mapsui.Layers.ILayer},Mapsui.Geometries.Point,System.Int32)
-  name: GetMapInfo(IEnumerable<ILayer>, Point, Int32)
-  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_GetMapInfo_IEnumerable_Mapsui_Layers_ILayer__Mapsui_Geometries_Point_System_Int32_
-  commentId: M:Mapsui.UI.Wpf.MapControl.GetMapInfo(IEnumerable{Mapsui.Layers.ILayer},Mapsui.Geometries.Point,System.Int32)
-  name.vb: GetMapInfo(IEnumerable(Of ILayer), Point, Int32)
-  fullName: Mapsui.UI.Wpf.MapControl.GetMapInfo(IEnumerable<Mapsui.Layers.ILayer>, Mapsui.Geometries.Point, System.Int32)
-  fullName.vb: Mapsui.UI.Wpf.MapControl.GetMapInfo(IEnumerable(Of Mapsui.Layers.ILayer), Mapsui.Geometries.Point, System.Int32)
-  nameWithType: MapControl.GetMapInfo(IEnumerable<ILayer>, Point, Int32)
-  nameWithType.vb: MapControl.GetMapInfo(IEnumerable(Of ILayer), Point, Int32)
 - uid: Mapsui.UI.Wpf.MapControl.GetMapInfo(Mapsui.Geometries.Point,System.Int32)
   name: GetMapInfo(Point, Int32)
   href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_GetMapInfo_Mapsui_Geometries_Point_System_Int32_

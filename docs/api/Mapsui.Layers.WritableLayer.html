@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class WritableLayer
    ">
-    <meta name="generator" content="docfx 2.40.10.0">
+    <meta name="generator" content="docfx 2.40.12.0">
     
     <link rel="shortcut icon" href="../images/favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -154,6 +154,9 @@
     </div>
     <div>
       <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_IsMapInfoLayer">BaseLayer.IsMapInfoLayer</a>
+    </div>
+    <div>
+      <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_DataHasChanged">BaseLayer.DataHasChanged()</a>
     </div>
     <div>
       <a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_IsCrsSupported_System_String_">BaseLayer.IsCrsSupported(String)</a>
@@ -469,13 +472,11 @@
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Layers_WritableLayer_SignalDataChanged.md&amp;value=---%0Auid%3A%20Mapsui.Layers.WritableLayer.SignalDataChanged%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/WritableLayer.cs/#L84">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/WritableLayer.cs/#L80">View Source</a>
   </span>
   <a id="Mapsui_Layers_WritableLayer_SignalDataChanged_" data-uid="Mapsui.Layers.WritableLayer.SignalDataChanged*"></a>
   <h4 id="Mapsui_Layers_WritableLayer_SignalDataChanged" data-uid="Mapsui.Layers.WritableLayer.SignalDataChanged">SignalDataChanged()</h4>
-  <div class="markdown level1 summary"><p>Signals to listeners that data has changed. This is necessary for situations where
-an individual geometry is edited. The layer itself can not know about it&apos;s change.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -486,7 +487,7 @@ an individual geometry is edited. The layer itself can not know about it&apos;s 
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Layers_WritableLayer_TryRemove_Mapsui_Providers_IFeature_Func_Mapsui_Providers_IFeature_Mapsui_Providers_IFeature_System_Boolean__.md&amp;value=---%0Auid%3A%20Mapsui.Layers.WritableLayer.TryRemove(Mapsui.Providers.IFeature%2CFunc%7BMapsui.Providers.IFeature%2CMapsui.Providers.IFeature%2CSystem.Boolean%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/WritableLayer.cs/#L96">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/WritableLayer.cs/#L90">View Source</a>
   </span>
   <a id="Mapsui_Layers_WritableLayer_TryRemove_" data-uid="Mapsui.Layers.WritableLayer.TryRemove*"></a>
   <h4 id="Mapsui_Layers_WritableLayer_TryRemove_Mapsui_Providers_IFeature_Func_Mapsui_Providers_IFeature_Mapsui_Providers_IFeature_System_Boolean__" data-uid="Mapsui.Layers.WritableLayer.TryRemove(Mapsui.Providers.IFeature,Func{Mapsui.Providers.IFeature,Mapsui.Providers.IFeature,System.Boolean})">TryRemove(IFeature, Func&lt;IFeature, IFeature, Boolean&gt;)</h4>
@@ -517,7 +518,7 @@ an individual geometry is edited. The layer itself can not know about it&apos;s 
         <td><span class="xref">Func</span>&lt;<a class="xref" href="Mapsui.Providers.IFeature.html">IFeature</a>, <a class="xref" href="Mapsui.Providers.IFeature.html">IFeature</a>, <span class="xref">System.Boolean</span>&gt;</td>
         <td><span class="parametername">compare</span></td>
         <td><p>Optional method to compare the feature with any of the other 
-features in the list. If ommitted a reference compare is done.</p>
+features in the list. If omitted a reference compare is done.</p>
 </td>
       </tr>
     </tbody>
