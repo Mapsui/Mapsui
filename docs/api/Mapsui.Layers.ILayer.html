@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Interface ILayer
    ">
-    <meta name="generator" content="docfx 2.40.10.0">
+    <meta name="generator" content="docfx 2.40.12.0">
     
     <link rel="shortcut icon" href="../images/favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -597,6 +597,24 @@ This can be used for radiobuttons.</p>
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Layers_ILayer_DataHasChanged.md&amp;value=---%0Auid%3A%20Mapsui.Layers.ILayer.DataHasChanged%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/ILayer.cs/#L155">View Source</a>
+  </span>
+  <a id="Mapsui_Layers_ILayer_DataHasChanged_" data-uid="Mapsui.Layers.ILayer.DataHasChanged*"></a>
+  <h4 id="Mapsui_Layers_ILayer_DataHasChanged" data-uid="Mapsui.Layers.ILayer.DataHasChanged">DataHasChanged()</h4>
+  <div class="markdown level1 summary"><p>To indicate the data withing the layer has changed. This triggers a DataChanged event.
+This is necessary for situations where the layer can not know about changes to it&apos;s data
+as in the case of editing of a geometry.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void DataHasChanged()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Layers_ILayer_GetFeaturesInView_Mapsui_Geometries_BoundingBox_System_Double_.md&amp;value=---%0Auid%3A%20Mapsui.Layers.ILayer.GetFeaturesInView(Mapsui.Geometries.BoundingBox%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
@@ -729,7 +747,7 @@ This can be used for radiobuttons.</p>
       <tr>
         <td><a class="xref" href="Mapsui.Geometries.BoundingBox.html">BoundingBox</a></td>
         <td><span class="parametername">extent</span></td>
-        <td><p>The new extent of the visisble map</p>
+        <td><p>The new extent of the visible map</p>
 </td>
       </tr>
       <tr>
@@ -742,7 +760,7 @@ This can be used for radiobuttons.</p>
         <td><span class="xref">System.Boolean</span></td>
         <td><span class="parametername">majorChange</span></td>
         <td><p>If true an implementation should always refresh it&apos;s data. If false (minorChange) the
-implemenatation could ignore it. Example: During dragging a map a WMS layer would not want
+implementation could ignore it. Example: During dragging a map a WMS layer would not want
 to fetch data, only on the drag end.</p>
 </td>
       </tr>
