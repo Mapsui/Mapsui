@@ -1,6 +1,7 @@
 ﻿using System;
 using Mapsui.Layers;
 using Mapsui.Providers;
+using Mapsui.Styles;
 using Mapsui.UI;
 using Mapsui.Utilities;
 
@@ -38,8 +39,15 @@ namespace Mapsui.Samples.Common.Maps
             }
             var provider = new MemoryProvider(features);
 
-            var layer = new MemoryLayer {DataSource = provider};
-            return layer;
+            return new MemoryLayer
+            {
+                DataSource = provider,
+                Style = new SymbolStyle
+                {
+                    SymbolType = SymbolType.Triangle,
+                    Fill = new Brush(Color.Red)
+                }
+            };
         }
     }
 }
