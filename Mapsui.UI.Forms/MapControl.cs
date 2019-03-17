@@ -169,10 +169,9 @@ namespace Mapsui.UI.Forms
 
                     var isAround = Algorithms.Distance(releasedTouch.Location, _firstTouch) < touchSlop;
 
-
                     // If touch start and end is in the same area and the touch time is shorter
                     // than longTap, than we have a tap.
-                    if (isAround && ticks - releasedTouch.Tick < (e.DeviceType == SKTouchDeviceType.Mouse ? shortClick : longTap) * 10000)
+                    if (isAround && (ticks - releasedTouch.Tick) < (e.DeviceType == SKTouchDeviceType.Mouse ? shortClick : longTap) * 10000)
                     {
                         // Start a timer with timeout delayTap ms. If than isn't arrived another tap, than it is a single
                         _doubleTapTestTimer = new System.Threading.Timer((l) =>
@@ -193,7 +192,7 @@ namespace Mapsui.UI.Forms
                             _doubleTapTestTimer = null;
                         }, location, UseDoubleTap ? delayTap : 0, -1);
                     }
-                    else if (releasedTouch.Location.Equals(_firstTouch) && ticks - releasedTouch.Tick >= longTap * 10000)
+                    else if (isAround && (ticks - releasedTouch.Tick) >= longTap * 10000)
                     {
                         if (!e.Handled)
                             e.Handled = OnLongTapped(location);
