@@ -24134,6 +24134,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.IMapControl.Map
   nameWithType: IMapControl.Map
+- uid: Mapsui.UI.IMapControl.Navigator
+  name: Navigator
+  href: api/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_Navigator
+  commentId: P:Mapsui.UI.IMapControl.Navigator
+  fullName: Mapsui.UI.IMapControl.Navigator
+  nameWithType: IMapControl.Navigator
+- uid: Mapsui.UI.IMapControl.Navigator*
+  name: Navigator
+  href: api/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_Navigator_
+  commentId: Overload:Mapsui.UI.IMapControl.Navigator
+  isSpec: "True"
+  fullName: Mapsui.UI.IMapControl.Navigator
+  nameWithType: IMapControl.Navigator
 - uid: Mapsui.UI.IMapControl.OpenBrowser(System.String)
   name: OpenBrowser(String)
   href: api/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_OpenBrowser_System_String_
