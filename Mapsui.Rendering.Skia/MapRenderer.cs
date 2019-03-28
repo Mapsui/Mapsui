@@ -63,10 +63,8 @@ namespace Mapsui.Rendering.Skia
         {
             try
             {
-                var imageInfo = new SKImageInfo((int)viewport.Width, (int)viewport.Height,
-                    SKColorType.Rgba8888, SKAlphaType.Unpremul);
-                // todo: Test if this works correct on Android and iOS
-                using (var surface = SKSurface.Create(imageInfo))
+                using (var surface = SKSurface.Create(
+                    (int)viewport.Width, (int)viewport.Height, SKImageInfo.PlatformColorType, SKAlphaType.Unpremul))
                 {
                     if (surface == null) return null;
                     // Not sure if this is needed here:
