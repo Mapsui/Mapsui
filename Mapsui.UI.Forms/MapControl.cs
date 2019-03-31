@@ -579,10 +579,13 @@ namespace Mapsui.UI.Forms
             if (args.Handled)
                 return true;
 
-            var eventReturn = InvokeInfo(screenPosition, screenPosition, 1);
+            var infoToInvoke = InvokeInfo(screenPosition, screenPosition, 1);
 
-            if (eventReturn != null)
-                return eventReturn.Handled;
+            if (infoToInvoke != null && !infoToInvoke.Handled)
+            {
+                OnInfo(infoToInvoke);
+                return infoToInvoke.Handled;
+            }
 
             return false;
         }
