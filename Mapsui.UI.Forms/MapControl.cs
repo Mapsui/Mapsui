@@ -580,14 +580,9 @@ namespace Mapsui.UI.Forms
                 return true;
 
             var infoToInvoke = InvokeInfo(screenPosition, screenPosition, 1);
-
-            if (infoToInvoke != null && !infoToInvoke.Handled)
-            {
-                OnInfo(infoToInvoke);
-                return infoToInvoke.Handled;
-            }
-
-            return false;
+                        
+            OnInfo(infoToInvoke);
+            return infoToInvoke?.Handled ?? false;
         }
 
         /// <summary>
