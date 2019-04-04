@@ -142,14 +142,14 @@ namespace Mapsui.UI.Forms
                 var releasedTouch = _touches[e.Id];
                 _touches.Remove(e.Id);
 
-                double velocityX;
-                double velocityY;
-
-                (velocityX, velocityY) = _velocityTracker.CalcVelocity(e.Id, ticks);
-
                 // Is this a fling or swipe?
                 if (_touches.Count == 0)
                 {
+                    double velocityX;
+                    double velocityY;
+
+                    (velocityX, velocityY) = _velocityTracker.CalcVelocity(e.Id, ticks);
+
                     if (Math.Abs(velocityX) > 200 || Math.Abs(velocityY) > 200)
                     {
                         // This was the last finger on screen, so this is a fling
