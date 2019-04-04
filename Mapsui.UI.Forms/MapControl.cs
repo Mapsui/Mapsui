@@ -52,7 +52,7 @@ namespace Mapsui.UI.Forms
         private Geometries.Point _firstTouch;
         private System.Threading.Timer _doubleTapTestTimer;
         private int _numOfTaps = 0;
-        private VelocityTracker _velocityTracker = new VelocityTracker();
+        private FlingTracker _velocityTracker = new FlingTracker();
         private Geometries.Point _previousCenter;
 
         /// <summary>
@@ -150,7 +150,7 @@ namespace Mapsui.UI.Forms
                 // Is this a fling or swipe?
                 if (_touches.Count == 0)
                 {
-                    if (Math.Abs(velocityX) > 10000 || Math.Abs(velocityY) > 10000)
+                    if (Math.Abs(velocityX) > 200 || Math.Abs(velocityY) > 200)
                     {
                         // This was the last finger on screen, so this is a fling
                         e.Handled = OnFlinged(velocityX, velocityY);
@@ -198,6 +198,8 @@ namespace Mapsui.UI.Forms
                             e.Handled = OnLongTapped(location);
                     }
                 }
+
+                _velocityTracker.RemoveId(e.Id);
 
                 if (_touches.Count == 1)
                 {
@@ -616,7 +618,7 @@ namespace Mapsui.UI.Forms
             centerX = centerX / locations.Count;
             centerY = centerY / locations.Count;
 
-            var radius = Geometries.Utilities.Algorithms.Distance(centerX, centerY, locations[0].X, locations[0].Y);
+            var radius = Algorithms.Distance(centerX, centerY, locations[0].X, locations[0].Y);
 
             var angle = Math.Atan2(locations[1].Y - locations[0].Y, locations[1].X - locations[0].X) * 180.0 / Math.PI;
 
