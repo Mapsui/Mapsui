@@ -62,7 +62,7 @@ namespace Mapsui.UI.Utils
 
             long finalTime = 0;
 
-            for (var i = 1; id < eventsArray.Length; i ++)
+            for (var i = 1; i < eventsArray.Length; i ++)
             {
                 (var lastX, var lastY, var lastTime) = eventsArray[i - 1];
                 (var nowX, var nowY, var nowTime) = eventsArray[i];
@@ -71,8 +71,8 @@ namespace Mapsui.UI.Utils
                 if (now - lastTime < maxTicks)
                 {
                     // Calc velocity in pixel per sec
-                    distanceX = (nowX - lastX) * 10000000;// / (nowTime - lastTime);
-                    distanceY = (nowY - lastY) * 10000000;// / (nowTime - lastTime);
+                    distanceX += (nowX - lastX) * 10000000;// / (nowTime - lastTime);
+                    distanceY += (nowY - lastY) * 10000000;// / (nowTime - lastTime);
                 }
 
                 finalTime = nowTime;
