@@ -95,8 +95,12 @@ namespace Mapsui.UI.Wpf
         public INavigator Navigator
         {
             get => _navigator;
-            private set
+            set
             {
+                if (_navigator != null)
+                {
+                    _navigator.Navigated -= Navigated;
+                }
                 _navigator = value ?? throw new ArgumentException($"{nameof(Navigator)} can not be null");
                 _navigator.Navigated += Navigated;
             }
