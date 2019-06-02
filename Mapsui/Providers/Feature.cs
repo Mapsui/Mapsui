@@ -9,7 +9,7 @@ namespace Mapsui.Providers
 {
     public class Feature : IFeature, IDisposable
     {
-        private readonly Dictionary<string, object> _dictionary = new Dictionary<string, object>();
+        private readonly Dictionary<string, object> _dictionary = new Dictionary<string, object>(StringComparer.InvariantCultureIgnoreCase);
         private bool _disposed;
 
         public Feature()
