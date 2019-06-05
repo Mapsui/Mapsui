@@ -1,9 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using Mapsui.Geometries;
-using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("Mapsui.Tests")]
 namespace Mapsui.Fetcher
 {
     interface IFetchDispatcher
