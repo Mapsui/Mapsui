@@ -162,6 +162,9 @@ namespace Mapsui.UI.Forms
         /// </summary>
         public event EventHandler<PinClickedEventArgs> PinClicked;
 
+
+        public event EventHandler<PinClickedEventArgs> PinLongTap;
+
         /// <summary>
         /// Occurs when selected pin changed
         /// </summary>
@@ -715,11 +718,14 @@ namespace Mapsui.UI.Forms
                 }
             }
 
-            foreach (var item in e.NewItems)
+            if (e.NewItems != null)
             {
-                // Add new drawables to layer
-                if (item is INotifyPropertyChanged drawable)
-                    drawable.PropertyChanged += HandlerDrawablePropertyChanged;
+                foreach (var item in e.NewItems)
+                {
+                    // Add new drawables to layer
+                    if (item is INotifyPropertyChanged drawable)
+                        drawable.PropertyChanged += HandlerDrawablePropertyChanged;
+                }
             }
 
             Refresh();
@@ -730,6 +736,31 @@ namespace Mapsui.UI.Forms
         }
 
         private void HandlerInfo(object sender, MapInfoEventArgs e)
+        {
+            if (HandlerInfoCheckPin(e, PinClicked)) return;
+
+            // Check for clicked drawables
+            var drawables = GetDrawablesAt(_mapControl.Viewport.ScreenToWorld(e.MapInfo.ScreenPosition), _mapDrawableLayer);
+
+            var drawableArgs = new DrawableClickedEventArgs(
+                _mapControl.Viewport.ScreenToWorld(e.MapInfo.ScreenPosition).ToForms(),
+                new Point(e.MapInfo.ScreenPosition.X, e.MapInfo.ScreenPosition.Y), e.NumTaps);
+
+            // Now check each drawable until one handles the event
+            foreach (var drawable in drawables)
+            {
+                drawable.HandleClicked(drawableArgs);
+
+                if (!drawableArgs.Handled) continue;
+                e.Handled = true;
+                return;
+            }
+
+            // Call Info event, if there is one
+            Info?.Invoke(sender, e);
+        }
+
+        private bool HandlerInfoCheckPin(MapInfoEventArgs e, EventHandler<PinClickedEventArgs> clickHandler)
         {
             // Click on pin?
             Pin clickedPin = null;
@@ -751,45 +782,38 @@ namespace Mapsui.UI.Forms
 
                 var pinArgs = new PinClickedEventArgs(clickedPin, _mapControl.Viewport.ScreenToWorld(e.MapInfo.ScreenPosition).ToForms(), e.NumTaps);
 
-                PinClicked?.Invoke(this, pinArgs);
+                clickHandler?.Invoke(this, pinArgs);
 
                 if (pinArgs.Handled)
                 {
                     e.Handled = true;
-                    return;
                 }
             }
+            return e.Handled;
+        }
 
-            // Check for clicked drawables
-            var drawables = GetDrawablesAt(_mapControl.Viewport.ScreenToWorld(e.MapInfo.ScreenPosition), _mapDrawableLayer);
-
-            var drawableArgs = new DrawableClickedEventArgs(
-                _mapControl.Viewport.ScreenToWorld(e.MapInfo.ScreenPosition).ToForms(), 
-                new Point(e.MapInfo.ScreenPosition.X, e.MapInfo.ScreenPosition.Y), e.NumTaps);
-
-            // Now check each drawable until one handles the event
-            foreach (var drawable in drawables)
-            {
-                drawable.HandleClicked(drawableArgs);
-
-                if (!drawableArgs.Handled) continue;
-                e.Handled = true;
-                return;
-            }
-
-            // Call Info event, if there is one
-            Info?.Invoke(sender, e);
+        private void HandlerInfoLongTap(object sender, MapInfoEventArgs e)
+        {
+            HandlerInfoCheckPin(e, PinLongTap);
         }
 
         private void HandlerLongTap(object sender, TappedEventArgs e)
         {
             var args = new MapLongClickedEventArgs(_mapControl.Viewport.ScreenToWorld(e.ScreenPosition).ToForms());
-
-            MapLongClicked?.Invoke(this, args);
-
-            if (args.Handled)
+            if (Map != null)
             {
-                e.Handled = true;
+                var mapInfo = _mapControl.GetMapInfo(e.ScreenPosition);
+                if (mapInfo.Feature == null)
+                {
+                    MapLongClicked?.Invoke(this, args);
+                    if (args.Handled)
+                    {
+                        e.Handled = true;
+                        return;
+                    }
+                    return;
+                }
+                HandlerInfoLongTap(sender, new MapInfoEventArgs { MapInfo = mapInfo, Handled = e.Handled, NumTaps = e.NumOfTaps });
             }
         }
 

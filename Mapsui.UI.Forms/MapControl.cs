@@ -1,4 +1,4 @@
-using Mapsui.Rendering;
+﻿using Mapsui.Rendering;
 using Mapsui.UI.Utils;
 using SkiaSharp;
 using SkiaSharp.Views.Forms;
@@ -49,6 +49,7 @@ namespace Mapsui.UI.Forms
         private float _skiaScale;
         private double _innerRotation;
         private Dictionary<long, TouchEvent> _touches = new Dictionary<long, TouchEvent>();
+        private Dictionary<long, TouchEvent> _longTouches = new Dictionary<long, TouchEvent>();
         private Geometries.Point _firstTouch;
         private System.Threading.Timer _doubleTapTestTimer;
         private int _numOfTaps = 0;
@@ -119,7 +120,8 @@ namespace Mapsui.UI.Forms
             {
                 _firstTouch = location;
 
-                _touches[e.Id] = new TouchEvent(e.Id, location, ticks);
+                //SKTouchAction.Moved refurbish ticks
+                _touches[e.Id] = _longTouches[e.Id] = new TouchEvent(e.Id, location, ticks);
 
                 _velocityTracker.Clear();
 
@@ -136,7 +138,7 @@ namespace Mapsui.UI.Forms
 
                 e.Handled = OnTouchStart(_touches.Select(t => t.Value.Location).ToList());
             }
-            if (e.ActionType == SKTouchAction.Released)
+            else if (e.ActionType == SKTouchAction.Released)
             {
                 // Delete e.Id from _touches, because finger is released
                 var releasedTouch = _touches[e.Id];
@@ -169,9 +171,10 @@ namespace Mapsui.UI.Forms
 
                     var isAround = Algorithms.Distance(releasedTouch.Location, _firstTouch) < touchSlop;
 
+                    var ticksInterval = (ticks - _longTouches[e.Id].Tick);                    
                     // If touch start and end is in the same area and the touch time is shorter
                     // than longTap, than we have a tap.
-                    if (isAround && (ticks - releasedTouch.Tick) < (e.DeviceType == SKTouchDeviceType.Mouse ? shortClick : longTap) * 10000)
+                    if (isAround && ticksInterval < (e.DeviceType == SKTouchDeviceType.Mouse ? shortClick : longTap) * 10000)
                     {
                         // Start a timer with timeout delayTap ms. If than isn't arrived another tap, than it is a single
                         _doubleTapTestTimer = new System.Threading.Timer((l) =>
@@ -192,7 +195,7 @@ namespace Mapsui.UI.Forms
                             _doubleTapTestTimer = null;
                         }, location, UseDoubleTap ? delayTap : 0, -1);
                     }
-                    else if (isAround && (ticks - releasedTouch.Tick) >= longTap * 10000)
+                    else if (isAround && ticksInterval >= longTap * 10000)
                     {
                         if (!e.Handled)
                             e.Handled = OnLongTapped(location);
@@ -209,7 +212,7 @@ namespace Mapsui.UI.Forms
                 if (!e.Handled)
                     e.Handled = OnTouchEnd(_touches.Select(t => t.Value.Location).ToList(), releasedTouch.Location);
             }
-            if (e.ActionType == SKTouchAction.Moved)
+            else if (e.ActionType == SKTouchAction.Moved)
             {
                 _touches[e.Id] = new TouchEvent(e.Id, location, ticks);
 
@@ -221,14 +224,14 @@ namespace Mapsui.UI.Forms
                 else
                     e.Handled = OnHovered(_touches.Select(t => t.Value.Location).FirstOrDefault());
             }
-            if (e.ActionType == SKTouchAction.Cancelled)
+            else if (e.ActionType == SKTouchAction.Cancelled)
             {
                 _touches.Remove(e.Id);
             }
-            if (e.ActionType == SKTouchAction.Exited)
+            else if (e.ActionType == SKTouchAction.Exited)
             {
             }
-            if (e.ActionType == SKTouchAction.Entered)
+            else if (e.ActionType == SKTouchAction.Entered)
             {
             }
         }
@@ -582,7 +585,7 @@ namespace Mapsui.UI.Forms
                 return true;
 
             var infoToInvoke = InvokeInfo(screenPosition, screenPosition, 1);
-                        
+
             OnInfo(infoToInvoke);
             return infoToInvoke?.Handled ?? false;
         }
