@@ -223,14 +223,14 @@ namespace Mapsui.UI.Forms
                 if (_callout == null)
                 {
                     // Create a default pin
-                    _callout = _mapView.CreateCalloutAsync(Position)
-                                        .GetAwaiter() // block the calling thread, since we're in a property, we can't use async
-                                        .GetResult(); // returns the result after the async task completes and un-blocks caller 
-                    //**TODO: since this is a member that we only want created on-demand, we should use a Lazy-init pattern...
+                    //_callout = _mapView.CreateCalloutAsync(Position)
+                    //                    .GetAwaiter() // block the calling thread, since we're in a property, we can't use async
+                    //                    .GetResult(); // returns the result after the async task completes and un-blocks caller 
+                    ////**TODO: since this is a member that we only want created on-demand, we should use a Lazy-init pattern...
                     //this impl is a step in the right direction, however.
 
                     //old impl
-                    ////_callout = _mapView.CreateCallout(Position);
+                    _callout = _mapView.CreateCallout(Position);
 
                     if (string.IsNullOrWhiteSpace(Address))
                     {

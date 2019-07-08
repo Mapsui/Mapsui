@@ -1,11 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-			 xmlns:mapsui="clr-namespace:Mapsui.UI.Forms;assembly=Mapsui.UI.Forms"
+             xmlns:mapsui="clr-namespace:Mapsui.UI.Forms;assembly=Mapsui.UI.Forms"
              x:Class="Mapsui.Samples.Forms.MainPageLarge">
     <ContentPage.Content>
         <StackLayout Orientation="Horizontal">
             <StackLayout Orientation="Vertical">
+                <Button x:Name="ctreatePinBtn"
+                    Text="UI Created Pin"
+                    HorizontalOptions="FillAndExpand"
+                    WidthRequest="200"
+                    Clicked="OnCreatePinBtnClicked"/>
+                
                 <Picker x:Name="picker" />
                 <ListView x:Name="listView"
                     VerticalOptions="FillAndExpand" 
@@ -13,12 +19,13 @@
                     WidthRequest="200"
                     Margin="10"
                     ItemSelected="OnSelection"/>
+
             </StackLayout>
             <mapsui:MapView x:Name="mapView"
-    		    VerticalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand"
                 HorizontalOptions="FillAndExpand"
-		        BackgroundColor="Gray" 
-		        Margin="0" />
+                BackgroundColor="Gray" 
+                Margin="0" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

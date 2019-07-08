@@ -164,5 +164,37 @@ namespace Mapsui.Samples.Forms
             });
         }
 
+        private async void OnCreatePinBtnClicked(object sender, EventArgs e)
+        {
+            //test deadlock on UI thread...
+
+            // hard code a location for now
+            var p = new Mapsui.UI.Forms.Position(34.68511962890625, -86.747329711914062);
+
+            var pin = new Pin(mapView)
+            {
+                Label = $"{nameof(PinType.Pin)} UI thread pin",
+                Address = p.ToString(),
+                Position = p,
+                Type = PinType.Pin,
+                Color = Color.Azure,
+                Transparency = .75f,
+                Scale = 1f,
+            };
+
+            pin.CalloutAnchor = new Point(0, pin.Height * pin.Scale);
+            //await System.Threading.Tasks.Task.Run(() =>
+            //{
+                pin.Callout.RectRadius = 20;
+                pin.Callout.ArrowHeight = 20;
+                pin.Callout.ArrowWidth = 20;
+                pin.Callout.ArrowAlignment = ArrowAlignment.Bottom;
+                pin.Callout.ArrowPosition = 0.5f;
+                pin.Callout.SubtitleLabel.LineBreakMode = LineBreakMode.NoWrap;
+            //});
+
+            mapView.Pins.Add(pin);
+
+        }
     }
 }
