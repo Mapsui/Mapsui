@@ -495,7 +495,7 @@ namespace Mapsui.UI.Forms
             // since this seems to only be an issue on UWP (?), let's make our fix narrow. (Probably also an issue on WPF, though)
             if (Device.RuntimePlatform.Equals(Device.UWP) || Device.RuntimePlatform.Equals(Device.WPF))
             {
-                // The root of this issue is that if the root of the cakk-stack reaching this method is a 
+                // The root of this issue is that if the bottom of the call-stack reaching this method is a 
                 // Touch event sourced from the MapControl, the internal SKGLView.Touch event is generated 
                 // on a Timer that is thread-based, and thus, not the UI thread (and Windows no like UI objects 
                 // created on worker threads).   
