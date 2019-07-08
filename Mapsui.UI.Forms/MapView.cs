@@ -458,7 +458,7 @@ namespace Mapsui.UI.Forms
                     Device.BeginInvokeOnMainThread(() =>
                     {
                         // the Callout ctor is doing all kinds of UI init, so this is the root of the cross-thread exception on UWP.
-                        _callout = new Callout(_mapControl) { Anchor = position };
+                        _callout = CalloutFactory(position);
 
                         // signal the worker thread that we're done
                         manualReset.Set();
@@ -472,7 +472,7 @@ namespace Mapsui.UI.Forms
             }
             else // just create the callout object on the calling thread.
             {
-                _callout = new Callout(_mapControl) { Anchor = position };
+                _callout = CalloutFactory(position);
             }
             //// My interpretation (PDD): This while keeps looping until the asynchronous call
             //// above has created a callout.
@@ -486,6 +486,50 @@ namespace Mapsui.UI.Forms
             return _callout;
         }
 
+        public System.Threading.Tasks.Task<Callout> CreateCalloutAsync(Position position)
+        {
+            // a construct to properly bubble out either the result or an exception from this async task.
+            // The result *may* be new-ed on a different thread (the UI thread).
+            var completion = new System.Threading.Tasks.TaskCompletionSource<Callout>();
+
+            // since this seems to only be an issue on UWP (?), let's make our fix narrow. (Probably also an issue on WPF, though)
+            if (Device.RuntimePlatform.Equals(Device.UWP) || Device.RuntimePlatform.Equals(Device.WPF))
+            {
+                // The root of this issue is that if the root of the cakk-stack reaching this method is a 
+                // Touch event sourced from the MapControl, the internal SKGLView.Touch event is generated 
+                // on a Timer that is thread-based, and thus, not the UI thread (and Windows no like UI objects 
+                // created on worker threads).   
+
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    try
+                    {
+                        //signal the calling thread that UI thread is done
+                        completion.SetResult(CalloutFactory(position));
+                    }
+                    catch (Exception e)
+                    {
+                        //signal the calling thread that UI thread had an error
+                        completion.SetException(e);
+                    }
+                });
+            }
+            else
+            {
+                // complete immediately, we're not on Windows
+                completion.SetResult(CalloutFactory(position));
+            }
+
+            return completion.Task;
+        }
+
+        /// <summary>
+        /// a method of convience to create a callout object completely and reduce copy-paste
+        /// </summary>
+        /// <param name="position"></param>
+        /// <returns></returns>
+        private Callout CalloutFactory(Position position) { return new Callout(_mapControl) { Anchor = position}; }
+       
         /// <summary>
         /// Shows given callout
         /// </summary>
