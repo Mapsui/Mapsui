@@ -101,7 +101,8 @@ namespace Mapsui.Samples.Forms
 
         public void Setup(IMapControl mapControl)
         {
-            mapControl.Map = OsmSample.CreateMap();
+            //mapControl.Map = OsmSample.CreateMap();
+            mapControl.Map = Samples.Common.Maps.BingSample.CreateMap();
 
             ((MapView)mapControl).UseDoubleTap = true;
         }

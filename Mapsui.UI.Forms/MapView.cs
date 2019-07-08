@@ -439,8 +439,6 @@ namespace Mapsui.UI.Forms
 
         #region Callouts
 
-        private Callout _callout;
-
         /// <summary>
         /// Creates a callout at the given position
         /// </summary>
@@ -448,21 +446,44 @@ namespace Mapsui.UI.Forms
         /// <param name="position">Position of callout</param>
         public Callout CreateCallout(Position position)
         {
-            _callout = new Callout(_mapControl)
+            // this ref is only needed internally to this method, so let's scope it that way.
+            Callout _callout = null;
+
+            // since this seems to only be an issue on UWP (?), let's make our fix narrow. (Probably also an issue on WPF, though)
+            if (Device.RuntimePlatform.Equals(Device.UWP) || Device.RuntimePlatform.Equals(Device.WPF))
             {
-                Anchor = position
-            };
+                // wrap our mutex in a using block to clean it up asap.
+                using (var manualReset = new System.Threading.ManualResetEventSlim(false))
+                {
+                    Device.BeginInvokeOnMainThread(() =>
+                    {
+                        // the Callout ctor is doing all kinds of UI init, so this is the root of the cross-thread exception on UWP.
+                        _callout = new Callout(_mapControl) { Anchor = position };
 
-            // My interpretation (PDD): This while keeps looping until the asynchronous call
-            // above has created a callout.
-            // An alternative might be to avoid CreateCallout from a non-ui thread by throwing
-            // early.
-            while (_callout == null) ;
+                        // signal the worker thread that we're done
+                        manualReset.Set();
+                    });
 
-            var result = _callout;
-            _callout = null;
+                    // since original impl had no timeout, we'll leave it that way here too...
+                    // probably should fix this to have a timeout though?
+                    manualReset.Wait(); // block the worker thread (better than spinning!)
+                }
+                // This whole call stack would be better with await/async paradigm, but that requires larger refactor, as the caller is a property get method.
+            }
+            else // just create the callout object on the calling thread.
+            {
+                _callout = new Callout(_mapControl) { Anchor = position };
+            }
+            //// My interpretation (PDD): This while keeps looping until the asynchronous call
+            //// above has created a callout.
+            //// An alternative might be to avoid CreateCallout from a non-ui thread by throwing
+            //// early.
+            //while (_callout == null) ;
 
-            return result;
+            //var result = _callout;
+            //_callout = null;
+
+            return _callout;
         }
 
         /// <summary>
