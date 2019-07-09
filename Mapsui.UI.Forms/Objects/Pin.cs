@@ -248,8 +248,6 @@ namespace Mapsui.UI.Forms
         private Callout BuildCallout()
         {
             var callout = _mapView.CreateCallout(Position);
-            //**TODO: since this is a member that we only want created on-demand, we should use a Lazy-init pattern...
-            //this impl is a step in the right direction, however.
 
             if (string.IsNullOrWhiteSpace(Address))
             {
