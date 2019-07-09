@@ -72,9 +72,9 @@ namespace Mapsui.UI.Forms
             // can remove or make more explicit the platform check later...
             EventHandler<TappedEventArgs> handler = (s, e) =>
             {
-                if (Device.RuntimePlatform.Equals(Device.UWP) || Device.RuntimePlatform.Equals(Device.WPF))
+                if (PlatformRequiresUIcontext())
                 {
-                    Device.BeginInvokeOnMainThread(() => HandlerTap(s,e));
+                    Device.BeginInvokeOnMainThread(() => HandlerTap(s, e));
                 }
                 else
                 {
@@ -89,7 +89,7 @@ namespace Mapsui.UI.Forms
 
             _mapControl.LongTap += (s, e) =>
             {
-                if (Device.RuntimePlatform.Equals(Device.UWP) || Device.RuntimePlatform.Equals(Device.WPF))
+                if (PlatformRequiresUIcontext())
                 {
                     Device.BeginInvokeOnMainThread(() => HandlerLongTap(s, e));
                 }
@@ -101,7 +101,7 @@ namespace Mapsui.UI.Forms
 
             _mapControl.Hovered += (s, e) =>
             {
-                if (Device.RuntimePlatform.Equals(Device.UWP) || Device.RuntimePlatform.Equals(Device.WPF))
+                if (PlatformRequiresUIcontext())
                 {
                     Device.BeginInvokeOnMainThread(() => HandlerHover(s, e));
                 }
@@ -194,6 +194,16 @@ namespace Mapsui.UI.Forms
 
             _mapDrawableLayer.DataSource = new ObservableCollectionProvider<Drawable>(_drawable);
             _mapDrawableLayer.Style = null;  // We don't want a global style for this layer
+        }
+
+        /// <summary>
+        /// helper method to centralize checking the platform for need to switch context to UI thread.
+        /// </summary>
+        /// <returns></returns>
+        private static bool PlatformRequiresUIcontext()
+        {
+            return Device.RuntimePlatform.Equals(Device.UWP) 
+                || Device.RuntimePlatform.Equals(Device.WPF);
         }
 
         #region Events
