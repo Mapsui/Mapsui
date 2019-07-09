@@ -178,7 +178,7 @@ namespace Mapsui.Samples.Forms
                 Position = p,
                 Type = PinType.Pin,
                 Color = Color.Azure,
-                Transparency = .75f,
+                Transparency = .05f,
                 Scale = 1f,
             };
 

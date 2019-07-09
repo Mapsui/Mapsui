@@ -66,10 +66,51 @@ namespace Mapsui.UI.Forms
             _mapControl.ViewportInitialized += HandlerViewportInitialized;
             _mapControl.Info += HandlerInfo;
             _mapControl.PropertyChanged += HandlerMapControlPropertyChanged;
-            _mapControl.SingleTap += HandlerTap;
-            _mapControl.DoubleTap += HandlerTap;
-            _mapControl.LongTap += HandlerLongTap;
-            _mapControl.Hovered += HandlerHover;
+
+            // Taps are being generated on worker thread in UWP (probably WPF too)
+            // since we don't know this is an issue on other platforms, apply a narrow fix
+            // can remove or make more explicit the platform check later...
+            EventHandler<TappedEventArgs> handler = (s, e) =>
+            {
+                if (Device.RuntimePlatform.Equals(Device.UWP) || Device.RuntimePlatform.Equals(Device.WPF))
+                {
+                    Device.BeginInvokeOnMainThread(() => HandlerTap(s,e));
+                }
+                else
+                {
+                    HandlerTap(s, e);
+                }
+            };
+
+            _mapControl.SingleTap += handler;
+            _mapControl.DoubleTap += handler;
+
+            // do same check on these events...
+
+            _mapControl.LongTap += (s, e) =>
+            {
+                if (Device.RuntimePlatform.Equals(Device.UWP) || Device.RuntimePlatform.Equals(Device.WPF))
+                {
+                    Device.BeginInvokeOnMainThread(() => HandlerLongTap(s, e));
+                }
+                else
+                {
+                    HandlerLongTap(s, e);
+                }
+            };
+
+            _mapControl.Hovered += (s, e) =>
+            {
+                if (Device.RuntimePlatform.Equals(Device.UWP) || Device.RuntimePlatform.Equals(Device.WPF))
+                {
+                    Device.BeginInvokeOnMainThread(() => HandlerHover(s, e));
+                }
+                else
+                {
+                    HandlerHover(s, e);
+                }
+            };
+
             _mapControl.TouchMove += (s, e) =>
             {
                 Device.BeginInvokeOnMainThread(() => MyLocationFollow = false);
@@ -452,22 +493,22 @@ namespace Mapsui.UI.Forms
             // since this seems to only be an issue on UWP (?), let's make our fix narrow. (Probably also an issue on WPF, though)
             if (Device.RuntimePlatform.Equals(Device.UWP) || Device.RuntimePlatform.Equals(Device.WPF))
             {
-                // wrap our mutex in a using block to clean it up asap.
-                using (var manualReset = new System.Threading.ManualResetEventSlim(false))
-                {
-                    Device.BeginInvokeOnMainThread(() =>
-                    {
+                //// wrap our mutex in a using block to clean it up asap.
+                //using (var manualReset = new System.Threading.ManualResetEventSlim(false))
+                //{
+                //    Device.BeginInvokeOnMainThread(() =>
+                //    {
                         // the Callout ctor is doing all kinds of UI init, so this is the root of the cross-thread exception on UWP.
                         _callout = CalloutFactory(position);
 
-                        // signal the worker thread that we're done
-                        manualReset.Set();
-                    });
+                //        // signal the worker thread that we're done
+                //        manualReset.Set();
+                //    });
 
-                    // since original impl had no timeout, we'll leave it that way here too...
-                    // probably should fix this to have a timeout though?
-                    manualReset.Wait(); // block the worker thread (better than spinning!)
-                }
+                //    // since original impl had no timeout, we'll leave it that way here too...
+                //    // probably should fix this to have a timeout though?
+                //    manualReset.Wait(); // block the worker thread (better than spinning!)
+                //}
                 // This whole call stack would be better with await/async paradigm, but that requires larger refactor, as the caller is a property get method.
             }
             else // just create the callout object on the calling thread.
@@ -485,44 +526,7 @@ namespace Mapsui.UI.Forms
 
             return _callout;
         }
-
-        public System.Threading.Tasks.Task<Callout> CreateCalloutAsync(Position position)
-        {
-            // a construct to properly bubble out either the result or an exception from this async task.
-            // The result *may* be new-ed on a different thread (the UI thread).
-            var completion = new System.Threading.Tasks.TaskCompletionSource<Callout>();
-
-            // since this seems to only be an issue on UWP (?), let's make our fix narrow. (Probably also an issue on WPF, though)
-            if (Device.RuntimePlatform.Equals(Device.UWP) || Device.RuntimePlatform.Equals(Device.WPF))
-            {
-                // The root of this issue is that if the bottom of the call-stack reaching this method is a 
-                // Touch event sourced from the MapControl, the internal SKGLView.Touch event is generated 
-                // on a Timer that is thread-based, and thus, not the UI thread (and Windows no like UI objects 
-                // created on worker threads).   
-
-                Device.BeginInvokeOnMainThread(() =>
-                {
-                    try
-                    {
-                        //signal the calling thread that UI thread is done
-                        completion.SetResult(CalloutFactory(position));
-                    }
-                    catch (Exception e)
-                    {
-                        //signal the calling thread that UI thread had an error
-                        completion.SetException(e);
-                    }
-                });
-            }
-            else
-            {
-                // complete immediately, we're not on Windows
-                completion.SetResult(CalloutFactory(position));
-            }
-
-            return completion.Task;
-        }
-
+      
         /// <summary>
         /// a method of convience to create a callout object completely and reduce copy-paste
         /// </summary>
@@ -892,14 +896,14 @@ namespace Mapsui.UI.Forms
                 {
                     var args = new MapClickedEventArgs(_mapControl.Viewport.ScreenToWorld(e.ScreenPosition).ToForms(), e.NumOfTaps);
 
-                    MapClicked?.Invoke(this, args);
 
-                    if (args.Handled)
-                    {
-                        e.Handled = true;
-                        return;
-                    }
+                        MapClicked?.Invoke(this, args);
 
+                        if (args.Handled)
+                        {
+                            e.Handled = true;
+                            return;
+                        }
                     // Event isn't handled up to now.
                     // Than look, what we could do.
 
