@@ -217,15 +217,12 @@ namespace Mapsui.Samples.Forms
             };
 
             pin.CalloutAnchor = new Point(0, pin.Height * pin.Scale + 0);
-            //await System.Threading.Tasks.Task.Run(() =>
-            //{
-                pin.Callout.RectRadius = 20;
-                pin.Callout.ArrowHeight = 20;
-                pin.Callout.ArrowWidth = 20;
-                pin.Callout.ArrowAlignment = ArrowAlignment.Bottom;
-                pin.Callout.ArrowPosition = 0.5f;
-                pin.Callout.SubtitleLabel.LineBreakMode = LineBreakMode.NoWrap;
-            //});
+            pin.Callout.RectRadius = 20;
+            pin.Callout.ArrowHeight = 20;
+            pin.Callout.ArrowWidth = 20;
+            pin.Callout.ArrowAlignment = ArrowAlignment.Bottom;
+            pin.Callout.ArrowPosition = 0.5f;
+            pin.Callout.SubtitleLabel.LineBreakMode = LineBreakMode.NoWrap;
 
             mapView.Pins.Add(pin);
 
