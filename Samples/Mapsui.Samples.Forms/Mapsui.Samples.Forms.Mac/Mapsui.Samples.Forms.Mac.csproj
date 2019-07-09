@@ -153,6 +153,10 @@
     <Compile Include="AppDelegate.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Mapsui.Geometries\Mapsui.Geometries.csproj">
+      <Project>{ee55b62d-ffa2-4c24-a4ad-7a47ace55ce5}</Project>
+      <Name>Mapsui.Geometries</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Mapsui.UI.Forms\Mapsui.UI.Forms.csproj">
       <Project>{CD1DC52E-F73F-411A-9682-66827FC8010C}</Project>
       <Name>Mapsui.UI.Forms</Name>
