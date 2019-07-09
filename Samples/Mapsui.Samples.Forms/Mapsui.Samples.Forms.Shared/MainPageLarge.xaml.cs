@@ -66,7 +66,7 @@ namespace Mapsui.Samples.Forms
             e.Handled = clicker == null ? false : (bool)clicker?.Invoke(sender as MapView, e);
         }
 
-        void OnSelection(object sender, SelectedItemChangedEventArgs e)
+        async void OnSelection(object sender, SelectedItemChangedEventArgs e)
         {
             if (e.SelectedItem == null)
             {
@@ -85,6 +85,9 @@ namespace Mapsui.Samples.Forms
             if (sample is IFormsSample)
                 clicker = ((IFormsSample)sample).OnClick;
 
+            await CenterOnLocationAsync();
+
+            // deselect the item so that re-clicking re-loads
             listView.SelectedItem = null;
         }
 
@@ -156,6 +159,8 @@ namespace Mapsui.Samples.Forms
         /// <param name="e">Event arguments for new position</param>
         private void MyLocationPositionChanged(object sender, PositionEventArgs e)
         {
+            System.Diagnostics.Debug.WriteLine($"{nameof(MyLocationPositionChanged)}()---  args: [{e.Position.Latitude}, {e.Position.Longitude}]");
+                
             Device.BeginInvokeOnMainThread(() =>
             {
                 mapView.MyLocationLayer.UpdateMyLocation(new UI.Forms.Position(e.Position.Latitude, e.Position.Longitude));
@@ -164,25 +169,54 @@ namespace Mapsui.Samples.Forms
             });
         }
 
+
+        private async System.Threading.Tasks.Task CenterOnLocationAsync()
+        {
+            Plugin.Geolocator.Abstractions.Position p = await GetCurrentLocationAsnyc();
+
+            if (p != null)
+            {
+                System.Diagnostics.Debug.WriteLine($"{nameof(OnSelection)}()---  location: [{p.Latitude}, {p.Longitude}]");
+
+                CenterOnLocation(p);
+            }
+        }
+
+        private static async System.Threading.Tasks.Task<Plugin.Geolocator.Abstractions.Position> GetCurrentLocationAsnyc()
+        {
+            var p = await CrossGeolocator.Current.GetLastKnownLocationAsync();
+
+            return p ?? await CrossGeolocator.Current.GetPositionAsync();
+        }
+
+        private void CenterOnLocation(Plugin.Geolocator.Abstractions.Position geoLoc)
+        {
+            if (geoLoc.Latitude != 0 || geoLoc.Latitude != 0) // uninitialized
+            {
+                mapView.Navigator.CenterOn(Mapsui.Projection.SphericalMercator.FromLonLat(geoLoc.Longitude, geoLoc.Latitude));
+            }
+        }
+
         private async void OnCreatePinBtnClicked(object sender, EventArgs e)
         {
             //test deadlock on UI thread...
 
-            // hard code a location for now
-            var p = new Mapsui.UI.Forms.Position(34.68511962890625, -86.747329711914062);
+            var geo = await GetCurrentLocationAsnyc();
+
+            var p = new Mapsui.UI.Forms.Position(geo.Latitude, geo.Longitude);
 
             var pin = new Pin(mapView)
             {
-                Label = $"{nameof(PinType.Pin)} UI thread pin",
+                Label = $"UI thread created @ your location",
                 Address = p.ToString(),
                 Position = p,
                 Type = PinType.Pin,
-                Color = Color.Azure,
+                Color = Color.DarkRed,
                 Transparency = .05f,
-                Scale = 1f,
+                Scale = .91f,
             };
 
-            pin.CalloutAnchor = new Point(0, pin.Height * pin.Scale);
+            pin.CalloutAnchor = new Point(0, pin.Height * pin.Scale + 0);
             //await System.Threading.Tasks.Task.Run(() =>
             //{
                 pin.Callout.RectRadius = 20;
