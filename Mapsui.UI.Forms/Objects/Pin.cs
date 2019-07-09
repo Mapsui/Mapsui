@@ -43,6 +43,9 @@ namespace Mapsui.UI.Forms
         {
             _mapView = mapView;
 
+            // define the Lazy callout loader
+             calloutBuilder = new System.Lazy<Callout>(() => BuildCallout(), System.Threading.LazyThreadSafetyMode.PublicationOnly);
+
             CreateFeature();
         }
 
@@ -220,10 +223,8 @@ namespace Mapsui.UI.Forms
             get
             {
                 // Show a new Callout
-                if (_callout == null)
-                {
-                    BuildCallout();
-                }
+                _callout = _callout ?? calloutBuilder.Value;
+
                 UpdateCalloutPosition();
 
                 return _callout;
@@ -236,27 +237,33 @@ namespace Mapsui.UI.Forms
         }
 
         /// <summary>
+        /// a lazy loader to create a callout *only* if/when needed
+        /// </summary>
+        private readonly System.Lazy<Callout> calloutBuilder;
+
+
+        /// <summary>
         /// move the building of the callout to a different method so we can use async
         /// </summary>
-        private void BuildCallout()
+        private Callout BuildCallout()
         {
-            _callout = _mapView.CreateCallout(Position);
+            var callout = _mapView.CreateCallout(Position);
             //**TODO: since this is a member that we only want created on-demand, we should use a Lazy-init pattern...
             //this impl is a step in the right direction, however.
 
             if (string.IsNullOrWhiteSpace(Address))
             {
-                _callout.Type = CalloutType.Single;
-                _callout.Title = Label;
+                callout.Type = CalloutType.Single;
+                callout.Title = Label;
             }
             else
             {
-                _callout.Type = CalloutType.Detail;
-                _callout.Title = Label;
-                _callout.Subtitle = Address;
+                callout.Type = CalloutType.Detail;
+                callout.Title = Label;
+                callout.Subtitle = Address;
             }
 
-            //return callOut;
+            return callout;
         }
 
         /// <summary>
