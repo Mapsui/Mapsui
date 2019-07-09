@@ -243,7 +243,7 @@ namespace Mapsui.UI.Forms
 
 
         /// <summary>
-        /// move the building of the callout to a different method so we can use async
+        /// move the building of the callout to a different method so we can re-user easily
         /// </summary>
         private Callout BuildCallout()
         {
