@@ -680,9 +680,10 @@ namespace Mapsui.UI.Forms
 
                 // Check all callout positions
                 var list = _callouts.ToList();
+                var pins = _pins.ToList();
 
                 // First check all Callouts, that belong to a pin
-                foreach (var pin in _pins)
+                foreach (var pin in pins)
                 {
                     if (pin.Callout != null)
                     {
@@ -791,8 +792,9 @@ namespace Mapsui.UI.Forms
         {
             // Click on pin?
             Pin clickedPin = null;
+            var pins = _pins.ToList();
 
-            foreach (var pin in _pins)
+            foreach (var pin in pins)
             {
                 if (pin.IsVisible && pin.Feature.Equals(e.MapInfo.Feature))
                 {
@@ -855,9 +857,10 @@ namespace Mapsui.UI.Forms
         {
             // Close all closable Callouts
             var list = _callouts.ToList();
+            var pins = _pins.ToList();
 
             // First check all Callouts, that belong to a pin
-            foreach (var pin in _pins)
+            foreach (var pin in pins)
             {
                 if (pin.Callout != null)
                 {
