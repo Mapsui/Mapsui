@@ -29,9 +29,6 @@ namespace Mapsui.UI.Forms
             }
         }
 
-        private const int None = 0;
-        private const int Dragging = 1;
-        private const int Zooming = 2;
         // See http://grepcode.com/file/repository.grepcode.com/java/ext/com.google.android/android/4.0.4_r2.1/android/view/ViewConfiguration.java#ViewConfiguration.0PRESSED_STATE_DURATION for values
         private const int shortTap = 125;
         private const int shortClick = 250;
