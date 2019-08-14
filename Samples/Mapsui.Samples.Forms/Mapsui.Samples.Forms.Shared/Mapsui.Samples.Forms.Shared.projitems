@@ -26,6 +26,7 @@
       <DependentUpon>MapPage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)AnimationSample.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MyLocationSample.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PinSample.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PolygonSample.cs" />
