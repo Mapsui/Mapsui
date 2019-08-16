@@ -103,11 +103,79 @@ namespace Mapsui.UI.Forms
             {
                 if (PlatformRequiresUIcontext())
                 {
-                    Device.BeginInvokeOnMainThread(() => HandlerHover(s, e));
+                    Device.BeginInvokeOnMainThread(() => HandlerHovered(s, e));
                 }
                 else
                 {
-                    HandlerHover(s, e);
+                    HandlerHovered(s, e);
+                }
+            };
+
+            //new events added 
+            _mapControl.TouchStarted += (s, e) =>
+            {
+                if (PlatformRequiresUIcontext())
+                {
+                    Device.BeginInvokeOnMainThread(() => HandlerTouchStarted(s, e));
+                }
+                else
+                {
+                    HandlerTouchStarted(s, e);
+                }
+            };
+            _mapControl.TouchEnded += (s, e) =>
+            {
+                if (PlatformRequiresUIcontext())
+                {
+                    Device.BeginInvokeOnMainThread(() => HandlerTouchEnded(s, e));
+                }
+                else
+                {
+                    HandlerTouchEnded(s, e);
+                }
+            };
+            _mapControl.TouchMove += (s, e) =>
+            {
+                if (PlatformRequiresUIcontext())
+                {
+                    Device.BeginInvokeOnMainThread(() => HandlerTouchMove(s, e));
+                }
+                else
+                {
+                    HandlerTouchMove(s, e);
+                }
+            };
+            _mapControl.Swipe += (s, e) =>
+            {
+                if (PlatformRequiresUIcontext())
+                {
+                    Device.BeginInvokeOnMainThread(() => HandlerSwipe(s, e));
+                }
+                else
+                {
+                    HandlerSwipe(s, e);
+                }
+            };
+            _mapControl.Fling += (s, e) =>
+            {
+                if (PlatformRequiresUIcontext())
+                {
+                    Device.BeginInvokeOnMainThread(() => HandlerFling(s, e));
+                }
+                else
+                {
+                    HandlerFling(s, e);
+                }
+            };
+            _mapControl.Zoomed += (s, e) =>
+            {
+                if (PlatformRequiresUIcontext())
+                {
+                    Device.BeginInvokeOnMainThread(() => HandlerZoomed(s, e));
+                }
+                else
+                {
+                    HandlerZoomed(s, e);
                 }
             };
 
