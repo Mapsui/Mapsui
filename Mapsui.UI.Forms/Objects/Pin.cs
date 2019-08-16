@@ -18,6 +18,11 @@ namespace Mapsui.UI.Forms
         private byte[] _bitmapData;
         private readonly MapView _mapView;
 
+        /// <summary>
+        /// a lazy loader to create a callout *only* if/when needed
+        /// </summary>
+        private readonly System.Lazy<Callout> calloutBuilder;
+
         public static readonly BindableProperty TypeProperty = BindableProperty.Create(nameof(Type), typeof(PinType), typeof(Pin), default(PinType));
         public static readonly BindableProperty ColorProperty = BindableProperty.Create(nameof(Color), typeof(Xamarin.Forms.Color), typeof(Pin), SKColors.Red.ToFormsColor());
         public static readonly BindableProperty PositionProperty = BindableProperty.Create(nameof(Position), typeof(Position), typeof(Pin), default(Position));
@@ -236,14 +241,10 @@ namespace Mapsui.UI.Forms
             }
         }
 
-        /// <summary>
-        /// a lazy loader to create a callout *only* if/when needed
-        /// </summary>
-        private readonly System.Lazy<Callout> calloutBuilder;
 
 
         /// <summary>
-        /// move the building of the callout to a different method so we can re-user easily
+        /// move the building of the callout to a different method so we can re-use easily
         /// </summary>
         private Callout BuildCallout()
         {
