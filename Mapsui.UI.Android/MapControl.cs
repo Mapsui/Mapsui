@@ -30,41 +30,6 @@ namespace Mapsui.UI.Android
         /// </summary>
         private Point _previousTouch = new Point();
 
-        #region Events
-        /// <summary>
-        /// Called whenever map control is hitten by a click 
-        /// </summary>
-        public new event EventHandler<TappedEventArgs> Click;
-        /// <summary>
-        /// Called whenever map control is hitten by a double click 
-        /// </summary>
-        public event EventHandler<TappedEventArgs> DoubleClick;
-        /// <summary>
-        /// Called whenever map control is hitten by a long click 
-        /// </summary>
-        public new event EventHandler<TappedEventArgs> LongClick;
-
-        /// <summary>
-        /// Called whenever map control is dragged
-        /// </summary>
-        public new event EventHandler<DraggedEventArgs> Drag;
-
-        /// <summary>
-        /// Called whenever map control is dragged
-        /// </summary>
-        public event EventHandler<ZoomedEventArgs> Zoom;
-
-        /// <summary>
-        /// Called whenever map control is dragged
-        /// </summary>
-        public event EventHandler<TappedEventArgs> PointerUp;
-
-        /// <summary>
-        /// Called whenever map control is dragged
-        /// </summary>
-        public event EventHandler<TappedEventArgs> PointerDown;
-
-        #endregion
 
         public MapControl(Context context, IAttributeSet attrs) :
             base(context, attrs)
