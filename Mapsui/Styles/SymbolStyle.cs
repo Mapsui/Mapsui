@@ -18,12 +18,12 @@ namespace Mapsui.Styles
         Pixel,
         WorldUnit
     }
-
+    1
     public class SymbolStyle : VectorStyle
     {
-        public static double DefaultWidth { get; set; } = 32;
+        public static double DefaultWidth { get; set; } = 16;
 
-        public static double DefaultHeight { get; set; } = 32;
+        public static double DefaultHeight { get; set; } = 16;
 
         public SymbolStyle()
         {
