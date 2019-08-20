@@ -118,6 +118,7 @@ namespace Mapsui.UI.Wpf
         /// </summary>
         public event EventHandler<MapInfoEventArgs> Info;
 
+
         /// <summary>
         /// Called whenever a property is changed
         /// </summary>
