@@ -21,6 +21,7 @@ namespace Mapsui.UI.Android
         private SKCanvasView _canvas;
         private double _innerRotation;
         private GestureDetector _gestureDetector;
+        private OnLongClickGestureListener _onLongClickListener;
         private double _previousAngle;
         private double _previousRadius = 1f;
         private TouchMode _mode = TouchMode.None;
@@ -93,9 +94,11 @@ namespace Mapsui.UI.Android
             Map = new Map();
             Touch += MapView_Touch;
 
-            _gestureDetector = new GestureDetector(Context, new OnLongClickGestureListener { LongClick = OnLongTapped });
+            _onLongClickListener = new OnLongClickGestureListener();
+            _gestureDetector = new GestureDetector(Context, _onLongClickListener);
             _gestureDetector.SingleTapConfirmed += OnSingleTapped;
             _gestureDetector.DoubleTap += OnDoubleTapped;
+            _onLongClickListener.LongClick += OnLongTapped;
             _gestureDetector.IsLongpressEnabled = true;
         }
 
@@ -104,21 +107,24 @@ namespace Mapsui.UI.Android
         private void OnDoubleTapped(object sender, GestureDetector.DoubleTapEventArgs e)
         {
             var position = GetScreenPosition(e.Event, this);
+            var positionInPixels = GetScreenPositionInPixels(e.Event, this);
             OnInfo(InvokeInfo(position, position, 2));
-            DoubleClick?.Invoke(sender, new TappedEventArgs(position, 2));
+            DoubleClick?.Invoke(sender, new TappedEventArgs(position, positionInPixels, 2));
         }
 
         private void OnSingleTapped(object sender, GestureDetector.SingleTapConfirmedEventArgs e)
         {
             var position = GetScreenPosition(e.Event, this);
+            var positionInPixels = GetScreenPositionInPixels(e.Event, this);
             OnInfo(InvokeInfo(position, position, 1));
-            Click?.Invoke(sender, new TappedEventArgs(position, 1));
+            Click?.Invoke(sender, new TappedEventArgs(position, positionInPixels, 1));
         }
 
         private void OnLongTapped(object sender, GestureDetector.LongPressEventArgs e)
         {
             var position = GetScreenPosition(e.Event, this);
-            LongClick?.Invoke(sender, new TappedEventArgs(position, 1));
+            var positionInPixels = GetScreenPositionInPixels(e.Event, this);
+            LongClick?.Invoke(sender, new TappedEventArgs(position, positionInPixels, 1));
         }
 
         protected override void OnSizeChanged(int width, int height, int oldWidth, int oldHeight)
@@ -152,13 +158,13 @@ namespace Mapsui.UI.Android
                 case MotionEventActions.Up:
                     Refresh();
                     _mode = TouchMode.None;
-                    PointerUp?.Invoke(this, new TappedEventArgs(GetScreenPosition(args.Event, this), 1));
+                    PointerUp?.Invoke(this, new TappedEventArgs(GetScreenPosition(args.Event, this), GetScreenPositionInPixels(args.Event, this), 1));
                     break;
                 case MotionEventActions.Down:
                 case MotionEventActions.Pointer1Down:
                 case MotionEventActions.Pointer2Down:
                 case MotionEventActions.Pointer3Down:
-                    PointerDown?.Invoke(this, new TappedEventArgs(GetScreenPosition(args.Event, this), 1));
+                    PointerDown?.Invoke(this, new TappedEventArgs(GetScreenPosition(args.Event, this), GetScreenPositionInPixels(args.Event, this), 1));
                     if (touchPoints.Count >= 2)
                     {
                         (_previousTouch, _previousRadius, _previousAngle) = GetPinchValues(touchPoints);
@@ -176,7 +182,7 @@ namespace Mapsui.UI.Android
                 case MotionEventActions.Pointer3Up:
                     // Remove the touchPoint that was released from the locations to reset the
                     // starting points of the move and rotation
-                    PointerUp?.Invoke(this, new TappedEventArgs(GetScreenPosition(args.Event, this), 1));
+                    PointerUp?.Invoke(this, new TappedEventArgs(GetScreenPosition(args.Event, this), GetScreenPositionInPixels(args.Event, this),1));
                     touchPoints.RemoveAt(args.Event.ActionIndex);
 
                     if (touchPoints.Count >= 2)
