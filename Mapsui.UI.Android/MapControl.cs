@@ -50,17 +50,17 @@ namespace Mapsui.UI.Android
         public new event EventHandler<DraggedEventArgs> Drag;
 
         /// <summary>
-        /// Called whenever map control is dragged
+        /// Called whenever map control is zoomed
         /// </summary>
         public event EventHandler<ZoomedEventArgs> Zoom;
 
         /// <summary>
-        /// Called whenever map control is dragged
+        /// Called whenever the pointer hitting map control is up
         /// </summary>
         public event EventHandler<TappedEventArgs> PointerUp;
 
         /// <summary>
-        /// Called whenever map control is dragged
+        /// Called whenever the pointer hitting map control is down 
         /// </summary>
         public event EventHandler<TappedEventArgs> PointerDown;
 
