@@ -33,15 +33,15 @@ namespace Mapsui.UI.Android
 
         #region Events
         /// <summary>
-        /// Called whenever map control is hitten by a click 
+        /// Called whenever map control is hit by a click 
         /// </summary>
         public new event EventHandler<TappedEventArgs> Click;
         /// <summary>
-        /// Called whenever map control is hitten by a double click 
+        /// Called whenever map control is hit by a double click 
         /// </summary>
         public event EventHandler<TappedEventArgs> DoubleClick;
         /// <summary>
-        /// Called whenever map control is hitten by a long click 
+        /// Called whenever map control is hit by a long click 
         /// </summary>
         public new event EventHandler<TappedEventArgs> LongClick;
 
