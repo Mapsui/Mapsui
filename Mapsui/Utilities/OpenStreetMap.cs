@@ -14,12 +14,12 @@ namespace Mapsui.Utilities
             return new TileLayer(CreateTileSource()) { Name = "OpenStreetMap" };
         }
 
-        private static CustomHttpTileSource CreateTileSource()
+        private static HttpTileSource CreateTileSource()
         {
-            return new CustomHttpTileSource(new GlobalSphericalMercator(),
+            return new HttpTileSource(new GlobalSphericalMercator(),
                 "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
                 new[] { "a", "b", "c" }, name: "OpenStreetMap",
-                attribution: OpenStreetMapAttribution);
+                attribution: OpenStreetMapAttribution, userAgent:"OpenStreetMap in Mapsui");
         }
     }
 }
