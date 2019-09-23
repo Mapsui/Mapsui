@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using Mapsui.Fetcher;
@@ -8,7 +9,7 @@ namespace Mapsui.Layers
 {
     public class LayerCollection : ICollection<ILayer>
     {
-        private readonly IList<ILayer> _layers = new List<ILayer>();
+        private ConcurrentQueue<ILayer> _layers = new ConcurrentQueue<ILayer>();
         
         public delegate void LayerRemovedEventHandler(ILayer layer);
         public delegate void LayerAddedEventHandler(ILayer layer);
@@ -20,7 +21,7 @@ namespace Mapsui.Layers
 
         public int Count => _layers.Count;
 
-        public bool IsReadOnly => _layers.IsReadOnly;
+        public bool IsReadOnly => false;
 
         public IEnumerator<ILayer> GetEnumerator()
         {
@@ -56,34 +57,39 @@ namespace Mapsui.Layers
             _layers.CopyTo(array, arrayIndex);
         }
 
-        public ILayer this[int index]
-        {
-            get { return _layers[index]; }
-        }
+        public ILayer this[int index] => _layers.ToArray()[index];
 
         public void Add(ILayer layer)
         {
             if (layer == null) throw new ArgumentException("Layer cannot be null");
-            _layers.Add(layer);
+            
+            _layers.Enqueue(layer);
             OnLayerAdded(layer);
         }
 
         public void Move(int index, ILayer layer)
         {
-            _layers.Remove(layer);
-            _layers.Insert(index, layer);
+            var copy = _layers.ToArray().ToList();
+            copy.Remove(layer);
+            copy.Insert(index, layer);
+            _layers = new ConcurrentQueue<ILayer>(copy);
             OnLayerMoved(layer);
         }
 
         public void Insert(int index, ILayer layer)
         {
-            _layers.Insert(index, layer);
+            var copy = _layers.ToArray().ToList();
+            copy.Insert(index, layer);
+            _layers = new ConcurrentQueue<ILayer>(copy);
             OnLayerAdded(layer);
         }
 
         public bool Remove(ILayer layer)
         {
-            var success = _layers.Remove(layer);
+            var copy = _layers.ToArray().ToList();
+            var success = copy.Remove(layer);
+            _layers = new ConcurrentQueue<ILayer>(copy);
+
             if (layer is IAsyncDataFetcher asyncLayer)
             {
                 asyncLayer.AbortFetch();

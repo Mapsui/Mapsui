@@ -16,6 +16,7 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -73,7 +74,7 @@ namespace Mapsui
         /// <summary>
         /// List of Widgets belonging to map
         /// </summary>
-        public List<IWidget> Widgets { get; } = new List<IWidget>();
+        public ConcurrentQueue<IWidget> Widgets { get; } = new ConcurrentQueue<IWidget>();
 
         /// <summary>
         /// Limit the extent to which the user can navigate

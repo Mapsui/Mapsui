@@ -1,6 +1,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29409.12
+VisualStudioVersion = 16.0.29215.179
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui", "Mapsui\Mapsui.csproj", "{D74C052A-C07E-4B37-A898-134218ACA5C9}"
 EndProject
@@ -1855,6 +1856,8 @@ Global
 		{28848162-20B7-46F1-8364-8B41B0393CD4}.Debug|x64.Build.0 = Debug|x64
 		{28848162-20B7-46F1-8364-8B41B0393CD4}.Debug|x64.Deploy.0 = Debug|x64
 		{28848162-20B7-46F1-8364-8B41B0393CD4}.Debug|x86.ActiveCfg = Debug|x86
+		{28848162-20B7-46F1-8364-8B41B0393CD4}.Debug|x86.Build.0 = Debug|x86
+		{28848162-20B7-46F1-8364-8B41B0393CD4}.Debug|x86.Deploy.0 = Debug|x86
 		{28848162-20B7-46F1-8364-8B41B0393CD4}.Release|AnyCPU.ActiveCfg = Release|x86
 		{28848162-20B7-46F1-8364-8B41B0393CD4}.Release|ARM.ActiveCfg = Release|ARM
 		{28848162-20B7-46F1-8364-8B41B0393CD4}.Release|ARM.Build.0 = Release|ARM
