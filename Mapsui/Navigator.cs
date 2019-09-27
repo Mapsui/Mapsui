@@ -9,7 +9,7 @@ namespace Mapsui
         private readonly Map _map;
         private readonly IViewport _viewport;
 
-        public EventHandler Navigated { get; set; } 
+        public EventHandler Navigated { get; set; }
 
         public Navigator(Map map, IViewport viewport)
         {

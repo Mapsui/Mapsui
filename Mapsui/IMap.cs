@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using Mapsui.Fetcher;
@@ -15,7 +16,7 @@ namespace Mapsui
         /// <summary>
         /// List of Widgets belonging to map
         /// </summary>
-        List<IWidget> Widgets { get; }
+        ConcurrentQueue<IWidget> Widgets { get; }
 
         /// <summary>
         /// Projection type of Map. Normally in format like "EPSG:3857"

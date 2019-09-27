@@ -69,7 +69,14 @@ namespace Mapsui.UI.Forms
             _mapControl.SingleTap += HandlerTap;
             _mapControl.DoubleTap += HandlerTap;
             _mapControl.LongTap += HandlerLongTap;
-            _mapControl.Hovered += HandlerHover;
+            _mapControl.Hovered += HandlerHovered;
+            _mapControl.TouchStarted += HandlerTouchStarted;
+            _mapControl.TouchEnded += HandlerTouchEnded;
+            _mapControl.TouchMove += HandlerTouchMove;
+            _mapControl.Swipe += HandlerSwipe;
+            _mapControl.Fling += HandlerFling;
+            _mapControl.Zoomed += HandlerZoomed;
+
             _mapControl.TouchMove += (s, e) =>
             {
                 Device.BeginInvokeOnMainThread(() => MyLocationFollow = false);
@@ -176,6 +183,56 @@ namespace Mapsui.UI.Forms
         /// Occurs when map long clicked
         /// </summary>
         public event EventHandler<MapLongClickedEventArgs> MapLongClicked;
+
+        /// <summary>
+        /// TouchStart is called, when user press a mouse button or touch the display
+        /// </summary>
+        public event EventHandler<TouchedEventArgs> TouchStarted;
+
+        /// <summary>
+        /// TouchEnd is called, when user release a mouse button or doesn't touch display anymore
+        /// </summary>
+        public event EventHandler<TouchedEventArgs> TouchEnded;
+
+        /// <summary>
+        /// TouchMove is called, when user move mouse over map (independent from mouse button state) or move finger on display
+        /// </summary>
+        public event EventHandler<TouchedEventArgs> TouchMove;
+
+        /// <summary>
+        /// Hovered is called, when user move mouse over map without pressing mouse button
+        /// </summary>
+        public event EventHandler<HoveredEventArgs> Hovered;
+
+        /// <summary>
+        /// Swipe is called, when user release mouse button or lift finger while moving with a certain speed 
+        /// </summary>
+        public event EventHandler<SwipedEventArgs> Swipe;
+
+        /// <summary>
+        /// Fling is called, when user release mouse button or lift finger while moving with a certain speed, higher than speed of swipe 
+        /// </summary>
+        public event EventHandler<SwipedEventArgs> Fling;
+
+        /// <summary>
+        /// SingleTap is called, when user clicks with a mouse button or tap with a finger on map 
+        /// </summary>
+        public event EventHandler<TappedEventArgs> SingleTap;
+
+        /// <summary>
+        /// LongTap is called, when user clicks with a mouse button or tap with a finger on map for 500 ms
+        /// </summary>
+        public event EventHandler<TappedEventArgs> LongTap;
+
+        /// <summary>
+        /// DoubleTap is called, when user clicks with a mouse button or tap with a finger two or more times on map
+        /// </summary>
+        public event EventHandler<TappedEventArgs> DoubleTap;
+
+        /// <summary>
+        /// Zoom is called, when map should be zoomed
+        /// </summary>
+        public event EventHandler<ZoomedEventArgs> Zoomed;
 
         /// <inheritdoc />
         public event EventHandler ViewportInitialized;
@@ -623,9 +680,10 @@ namespace Mapsui.UI.Forms
 
                 // Check all callout positions
                 var list = _callouts.ToList();
+                var pins = _pins.ToList();
 
                 // First check all Callouts, that belong to a pin
-                foreach (var pin in _pins)
+                foreach (var pin in pins)
                 {
                     if (pin.Callout != null)
                     {
@@ -725,16 +783,18 @@ namespace Mapsui.UI.Forms
             Refresh();
         }
 
-        private void HandlerHover(object sender, HoveredEventArgs e)
+        private void HandlerHovered(object sender, HoveredEventArgs e)
         {
+            Hovered?.Invoke(sender, e);
         }
 
         private void HandlerInfo(object sender, MapInfoEventArgs e)
         {
             // Click on pin?
             Pin clickedPin = null;
+            var pins = _pins.ToList();
 
-            foreach (var pin in _pins)
+            foreach (var pin in pins)
             {
                 if (pin.IsVisible && pin.Feature.Equals(e.MapInfo.Feature))
                 {
@@ -797,9 +857,10 @@ namespace Mapsui.UI.Forms
         {
             // Close all closable Callouts
             var list = _callouts.ToList();
+            var pins = _pins.ToList();
 
             // First check all Callouts, that belong to a pin
-            foreach (var pin in _pins)
+            foreach (var pin in pins)
             {
                 if (pin.Callout != null)
                 {
@@ -844,6 +905,36 @@ namespace Mapsui.UI.Forms
                 // A feature is clicked
                 HandlerInfo(sender, new MapInfoEventArgs { MapInfo = mapInfo, Handled = e.Handled, NumTaps = e.NumOfTaps });
             }
+        }
+
+        private void HandlerZoomed(object sender, ZoomedEventArgs e)
+        {
+            Zoomed?.Invoke(sender, e);
+        }
+
+        private void HandlerFling(object sender, SwipedEventArgs e)
+        {
+            Fling?.Invoke(sender, e);
+        }
+
+        private void HandlerSwipe(object sender, SwipedEventArgs e)
+        {
+            Swipe?.Invoke(sender, e);
+        }
+
+        private void HandlerTouchEnded(object sender, TouchedEventArgs e)
+        {
+            TouchEnded?.Invoke(sender, e);
+        }
+
+        private void HandlerTouchMove(object sender, TouchedEventArgs e)
+        {
+            TouchMove?.Invoke(sender, e);
+        }
+
+        private void HandlerTouchStarted(object sender, TouchedEventArgs e)
+        {
+            TouchStarted?.Invoke(sender, e);
         }
 
         private void HandlerPinPropertyChanged(object sender, PropertyChangedEventArgs e)
