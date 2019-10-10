@@ -112,8 +112,7 @@ namespace Mapsui.UI.Forms
         /// Create a new MapSpan from multiple positions
         /// </summary>
         /// <returns>New MapSpan</returns>
-        /// <param name="center">Center for new MapSpan</param>
-        /// <param name="radius">Radius for new MapSpan</param>
+        /// <param name="positions">List of positions to get the new MapSpan</param>
         public static MapSpan FromPositions(IEnumerable<Position> positions)
         {
             double minLat = double.MaxValue;
