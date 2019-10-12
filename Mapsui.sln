@@ -44,8 +44,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Rendering.Skia.Tests
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{45FC7141-9D40-43F2-8EE2-2BF3B37F7557}"
 	ProjectSection(SolutionItems) = preProject
-		.bumpyconfig = .bumpyconfig
-		.clabot = .clabot
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
 		appveyor-docs.yml = appveyor-docs.yml
@@ -1097,7 +1095,6 @@ Global
 		{CA0C7AF3-03ED-42D0-A001-001E8EE095E6}.Debug|x64.Deploy.0 = Debug|x64
 		{CA0C7AF3-03ED-42D0-A001-001E8EE095E6}.Debug|x86.ActiveCfg = Debug|x86
 		{CA0C7AF3-03ED-42D0-A001-001E8EE095E6}.Release|AnyCPU.ActiveCfg = Release|x86
-		{CA0C7AF3-03ED-42D0-A001-001E8EE095E6}.Release|AnyCPU.Build.0 = Release|x86
 		{CA0C7AF3-03ED-42D0-A001-001E8EE095E6}.Release|ARM.ActiveCfg = Release|ARM
 		{CA0C7AF3-03ED-42D0-A001-001E8EE095E6}.Release|ARM.Build.0 = Release|ARM
 		{CA0C7AF3-03ED-42D0-A001-001E8EE095E6}.Release|ARM.Deploy.0 = Release|ARM
