@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Mapsui.UI.Forms
 {
@@ -108,6 +109,28 @@ namespace Mapsui.UI.Forms
             return new MapSpan(center, 2 * DistanceToLatitudeDegrees(radius), 2 * DistanceToLongitudeDegrees(center, radius));
         }
 
+        /// <summary>
+        /// Create a new MapSpan from multiple positions
+        /// </summary>
+        /// <returns>New MapSpan</returns>
+        /// <param name="positions">List of positions to get the new MapSpan</param>
+        public static MapSpan FromPositions(IEnumerable<Position> positions)
+        {
+            double minLat = double.MaxValue;
+            double minLon = double.MaxValue;
+            double maxLat = double.MinValue;
+            double maxLon = double.MinValue;
+
+            foreach (var p in positions)
+            {
+                minLat = Math.Min(minLat, p.Latitude);
+                minLon = Math.Min(minLon, p.Longitude);
+                maxLat = Math.Max(maxLat, p.Latitude);
+                maxLon = Math.Max(maxLon, p.Longitude);
+            }
+            return new MapSpan(new Position((minLat + maxLat) / 2d, (minLon + maxLon) / 2d), maxLat - minLat, maxLon - minLon);
+        }
+        
         public override int GetHashCode()
         {
             unchecked
