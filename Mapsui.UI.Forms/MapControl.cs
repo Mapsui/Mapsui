@@ -224,9 +224,13 @@ namespace Mapsui.UI.Forms
             }
             if (e.ActionType == SKTouchAction.Exited)
             {
+                var exitedTouch = _touches[e.Id];
+                _touches.Remove(e.Id);
+                e.Handled = OnTouchExited(_touches.Select(t => t.Value.Location).ToList(), exitedTouch.Location);
             }
             if (e.ActionType == SKTouchAction.Entered)
             {
+                e.Handled = OnTouchEntered(_touches.Select(t => t.Value.Location).ToList());
             }
         }
 
@@ -263,6 +267,16 @@ namespace Mapsui.UI.Forms
         /// TouchEnd is called, when user release a mouse button or doesn't touch display anymore
         /// </summary>
         public event EventHandler<TouchedEventArgs> TouchEnded;
+
+        /// <summary>
+        /// TouchEntered is called, when user moves an active touch onto the view
+        /// </summary>
+        public event EventHandler<TouchedEventArgs> TouchEntered;
+
+        /// <summary>
+        /// TouchExited is called, when user moves an active touch off the view
+        /// </summary>
+        public event EventHandler<TouchedEventArgs> TouchExited;
 
         /// <summary>
         /// TouchMove is called, when user move mouse over map (independent from mouse button state) or move finger on display
@@ -461,11 +475,49 @@ namespace Mapsui.UI.Forms
         }
 
         /// <summary>
+        /// Called when touch enters map
+        /// </summary>
+        /// <param name="touchPoints">List of all touched points</param>
+        private bool OnTouchEntered(List<Geometries.Point> touchPoints)
+        {
+            // Sanity check
+            if (touchPoints.Count == 0)
+                return false;
+
+            var args = new TouchedEventArgs(touchPoints);
+
+            TouchEntered?.Invoke(this, args);
+
+            return args.Handled;
+        }
+
+        /// <summary>
+        /// Called when touch exits map
+        /// </summary>
+        /// <param name="touchPoints">List of all touched points</param>
+        /// <param name="releasedPoint">Released point, which was touched before</param>
+        private bool OnTouchExited(List<Geometries.Point> touchPoints, Geometries.Point releasedPoint)
+        {
+            var args = new TouchedEventArgs(touchPoints);
+
+            TouchExited?.Invoke(this, args);
+
+            // Last touch released
+            if (touchPoints.Count == 0)
+            {
+                _mode = TouchMode.None;
+                _map.RefreshData(_viewport.Extent, _viewport.Resolution, true);
+            }
+
+            return args.Handled;
+        }
+
+        /// <summary>
         /// Called, when mouse/finger/pen moves over map
         /// </summary>
         /// <param name="touchPoints">List of all touched points</param>
         private bool OnTouchMove(List<Geometries.Point> touchPoints)
-        {
+        { 
             var args = new TouchedEventArgs(touchPoints);
 
             TouchMove?.Invoke(this, args);
