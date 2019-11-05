@@ -517,7 +517,7 @@ namespace Mapsui.UI.Forms
         /// </summary>
         /// <param name="touchPoints">List of all touched points</param>
         private bool OnTouchMove(List<Geometries.Point> touchPoints)
-        { 
+        {
             var args = new TouchedEventArgs(touchPoints);
 
             TouchMove?.Invoke(this, args);
