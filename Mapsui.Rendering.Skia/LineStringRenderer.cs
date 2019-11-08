@@ -42,8 +42,7 @@ namespace Mapsui.Rendering.Skia
                     dashArray = vectorStyle.Line.DashArray;
                 }
 
-                var path = lineString.ToSkiaPath(viewport, canvas.LocalClipBounds);
-
+                using (var path = lineString.ToSkiaPath(viewport, canvas.LocalClipBounds))
                 using (var paint = new SKPaint { IsAntialias = true })
                 {
                     paint.IsStroke = true;
