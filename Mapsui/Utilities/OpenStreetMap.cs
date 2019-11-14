@@ -19,7 +19,7 @@ namespace Mapsui.Utilities
             return new HttpTileSource(new GlobalSphericalMercator(),
                 "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
                 new[] { "a", "b", "c" }, name: "OpenStreetMap",
-                attribution: OpenStreetMapAttribution);
+                attribution: OpenStreetMapAttribution, userAgent:"OpenStreetMap in Mapsui");
         }
     }
 }
