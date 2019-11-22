@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="78e8df7c-2c49-41ca-b2bf-6d5034b6dcaa" Publisher="CN=pauldendulk" Version="1.0.0.0" />
+  <Identity Name="8a5cfa3da2a8ac37d0b90867fe9e7206105aa52d" Publisher="CN=pauldendulk" Version="1.0.0.0" />
   <mp:PhoneIdentity PhoneProductId="78e8df7c-2c49-41ca-b2bf-6d5034b6dcaa" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>Mapsui.Samples.Uwp</DisplayName>
-    <PublisherDisplayName>paul</PublisherDisplayName>
+    <PublisherDisplayName>pauldendulk</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
   <Dependencies>
