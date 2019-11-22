@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\..\..\packages\Xamarin.Forms.3.6.0.344457\build\Xamarin.Forms.props" Condition="Exists('..\..\..\packages\Xamarin.Forms.3.6.0.344457\build\Xamarin.Forms.props')" />
+  <Import Project="..\..\..\packages\Xamarin.Forms.4.3.0.991211\build\Xamarin.Forms.props" Condition="Exists('..\..\..\packages\Xamarin.Forms.4.3.0.991211\build\Xamarin.Forms.props')" />
   <Import Project="..\Mapsui.Samples.Forms.Shared\Mapsui.Samples.Forms.Shared.projitems" Label="Shared" Condition="Exists('..\Mapsui.Samples.Forms.Shared\Mapsui.Samples.Forms.Shared.projitems')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -65,14 +65,14 @@
     <Reference Include="Reminiscence, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Reminiscence.1.2.0\lib\netstandard2.0\Reminiscence.dll</HintPath>
     </Reference>
-    <Reference Include="SkiaSharp, Version=1.60.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\SkiaSharp.1.60.3\lib\Xamarin.Mac20\SkiaSharp.dll</HintPath>
+    <Reference Include="SkiaSharp, Version=1.68.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\SkiaSharp.1.68.1\lib\Xamarin.Mac20\SkiaSharp.dll</HintPath>
     </Reference>
-    <Reference Include="SkiaSharp.Views.Forms, Version=1.60.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\SkiaSharp.Views.Forms.1.60.3\lib\Xamarin.Mac20\SkiaSharp.Views.Forms.dll</HintPath>
+    <Reference Include="SkiaSharp.Views.Forms, Version=1.68.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\SkiaSharp.Views.Forms.1.68.1\lib\Xamarin.Mac20\SkiaSharp.Views.Forms.dll</HintPath>
     </Reference>
-    <Reference Include="SkiaSharp.Views.Mac, Version=1.60.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\SkiaSharp.Views.1.60.3\lib\Xamarin.Mac20\SkiaSharp.Views.Mac.dll</HintPath>
+    <Reference Include="SkiaSharp.Views.Mac, Version=1.68.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\SkiaSharp.Views.1.68.1\lib\Xamarin.Mac20\SkiaSharp.Views.Mac.dll</HintPath>
     </Reference>
     <Reference Include="SQLite-net, Version=1.6.292.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\sqlite-net-pcl.1.6.292\lib\netstandard1.1\SQLite-net.dll</HintPath>
@@ -92,16 +92,16 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="Xamarin.Forms.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Xamarin.Forms.3.6.0.344457\lib\Xamarin.Mac\Xamarin.Forms.Core.dll</HintPath>
+      <HintPath>..\..\..\packages\Xamarin.Forms.4.3.0.991211\lib\Xamarin.Mac\Xamarin.Forms.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Xamarin.Forms.Platform, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Xamarin.Forms.3.6.0.344457\lib\Xamarin.Mac\Xamarin.Forms.Platform.dll</HintPath>
+    <Reference Include="Xamarin.Forms.Platform, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Xamarin.Forms.4.3.0.991211\lib\Xamarin.Mac\Xamarin.Forms.Platform.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Forms.Platform.macOS, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Xamarin.Forms.3.6.0.344457\lib\Xamarin.Mac\Xamarin.Forms.Platform.macOS.dll</HintPath>
+      <HintPath>..\..\..\packages\Xamarin.Forms.4.3.0.991211\lib\Xamarin.Mac\Xamarin.Forms.Platform.macOS.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Forms.Xaml, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Xamarin.Forms.3.6.0.344457\lib\Xamarin.Mac\Xamarin.Forms.Xaml.dll</HintPath>
+      <HintPath>..\..\..\packages\Xamarin.Forms.4.3.0.991211\lib\Xamarin.Mac\Xamarin.Forms.Xaml.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Mac" />
     <Reference Include="System.IO.Compression" />
@@ -179,11 +179,11 @@
       <ErrorText>Dieses Projekt verweist auf mindestens ein NuGet-Paket, das auf diesem Computer fehlt. Verwenden Sie die Wiederherstellung von NuGet-Paketen, um die fehlenden Dateien herunterzuladen. Weitere Informationen finden Sie unter "http://go.microsoft.com/fwlink/?LinkID=322105". Die fehlende Datei ist "{0}".</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\..\..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets'))" />
-    <Error Condition="!Exists('..\..\..\packages\Xamarin.Forms.3.6.0.344457\build\Xamarin.Forms.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\Xamarin.Forms.3.6.0.344457\build\Xamarin.Forms.props'))" />
-    <Error Condition="!Exists('..\..\..\packages\Xamarin.Forms.3.6.0.344457\build\Xamarin.Forms.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\Xamarin.Forms.3.6.0.344457\build\Xamarin.Forms.targets'))" />
     <Error Condition="!Exists('..\..\..\packages\SQLitePCLRaw.lib.e_sqlite3.osx.1.1.13\build\Xamarin.Mac20\SQLitePCLRaw.lib.e_sqlite3.osx.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\SQLitePCLRaw.lib.e_sqlite3.osx.1.1.13\build\Xamarin.Mac20\SQLitePCLRaw.lib.e_sqlite3.osx.targets'))" />
+    <Error Condition="!Exists('..\..\..\packages\Xamarin.Forms.4.3.0.991211\build\Xamarin.Forms.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\Xamarin.Forms.4.3.0.991211\build\Xamarin.Forms.props'))" />
+    <Error Condition="!Exists('..\..\..\packages\Xamarin.Forms.4.3.0.991211\build\Xamarin.Forms.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\Xamarin.Forms.4.3.0.991211\build\Xamarin.Forms.targets'))" />
   </Target>
   <Import Project="..\..\..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets" Condition="Exists('..\..\..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets')" />
-  <Import Project="..\..\..\packages\Xamarin.Forms.3.6.0.344457\build\Xamarin.Forms.targets" Condition="Exists('..\..\..\packages\Xamarin.Forms.3.6.0.344457\build\Xamarin.Forms.targets')" />
   <Import Project="..\..\..\packages\SQLitePCLRaw.lib.e_sqlite3.osx.1.1.13\build\Xamarin.Mac20\SQLitePCLRaw.lib.e_sqlite3.osx.targets" Condition="Exists('..\..\..\packages\SQLitePCLRaw.lib.e_sqlite3.osx.1.1.13\build\Xamarin.Mac20\SQLitePCLRaw.lib.e_sqlite3.osx.targets')" />
+  <Import Project="..\..\..\packages\Xamarin.Forms.4.3.0.991211\build\Xamarin.Forms.targets" Condition="Exists('..\..\..\packages\Xamarin.Forms.4.3.0.991211\build\Xamarin.Forms.targets')" />
 </Project>
