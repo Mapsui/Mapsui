@@ -113,7 +113,9 @@ namespace Mapsui.Layers
                             new Feature {Geometry = new Raster(bitmapStream, viewport.Extent)}
                         });
 
+#if DEBUG
                         Logger.Log(LogLevel.Debug, $"Memory after rasterizing layer {GC.GetTotalMemory(true):N0}");
+#endif
 
                         OnDataChanged(new DataChangedEventArgs());
                     }
