@@ -8,8 +8,7 @@ namespace Mapsui.Samples.Forms
 {
     public class PolygonSample : IFormsSample
     {
-        static int markerNum = 1;
-        static Random rnd = new Random();
+        static readonly Random random = new Random();
 
         public string Name => "Add Polygon Sample";
 
@@ -21,13 +20,13 @@ namespace Mapsui.Samples.Forms
             var e = args as MapClickedEventArgs;
 
             var center = new Position(e.Point);
-            var diffX = rnd.Next(0, 1000) / 100.0;
-            var diffY = rnd.Next(0, 1000) / 100.0;
+            var diffX = random.Next(0, 1000) / 100.0;
+            var diffY = random.Next(0, 1000) / 100.0;
 
             var polygon = new Polygon
             {
-                StrokeColor = new Color(rnd.Next(0, 255) / 255.0, rnd.Next(0, 255) / 255.0, rnd.Next(0, 255) / 255.0),
-                FillColor = new Color(rnd.Next(0, 255) / 255.0, rnd.Next(0, 255) / 255.0, rnd.Next(0, 255) / 255.0)
+                StrokeColor = new Color(random.Next(0, 255) / 255.0, random.Next(0, 255) / 255.0, random.Next(0, 255) / 255.0),
+                FillColor = new Color(random.Next(0, 255) / 255.0, random.Next(0, 255) / 255.0, random.Next(0, 255) / 255.0)
             };
 
             polygon.Positions.Add(new Position(center.Latitude - diffY, center.Longitude - diffX));
@@ -46,7 +45,7 @@ namespace Mapsui.Samples.Forms
             polygon.IsClickable = true;
             polygon.Clicked += (s, a) =>
             {
-                ((Polygon)s).FillColor = new Color(rnd.Next(0, 255) / 255.0, rnd.Next(0, 255) / 255.0, rnd.Next(0, 255) / 255.0);
+                ((Polygon)s).FillColor = new Color(random.Next(0, 255) / 255.0, random.Next(0, 255) / 255.0, random.Next(0, 255) / 255.0);
                 a.Handled = true;
             };
 

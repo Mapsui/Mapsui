@@ -7,9 +7,6 @@ namespace Mapsui.Samples.Forms
 {
     public class AnimationSample : IFormsSample
     {
-        static int markerNum = 1;
-        static Random rnd = new Random();
-
         public string Name => "Animation Sample";
 
         public string Category => "Forms";
