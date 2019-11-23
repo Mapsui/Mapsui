@@ -21,8 +21,8 @@
     <dependencies>
       <group targetFramework="netstandard2.0">
         <dependency id="Mapsui" version="$version$"/>
-        <dependency id="Xamarin.Forms" version="3.6.0" />
-        <dependency id="SkiaSharp.Views.Forms" version="[1.60.0,1.68)" />
+        <dependency id="Xamarin.Forms" version="[4.3.0,4.4)" />
+        <dependency id="SkiaSharp.Views.Forms" version="[1.68.1,1.69)" />
       </group>
     </dependencies>
 
