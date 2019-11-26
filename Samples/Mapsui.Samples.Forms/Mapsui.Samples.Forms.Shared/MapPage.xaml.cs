@@ -35,7 +35,7 @@ namespace Mapsui.Samples.Forms
 
             mapView.MyLocationLayer.UpdateMyLocation(new UI.Forms.Position());
 
-            StartGPS();
+            Task.Run(() => StartGPS());
 
             setup(mapView);
 
