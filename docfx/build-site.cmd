@@ -1,5 +1,5 @@
 choco install docfx -y
-choco update docfx -y
+choco upgrade docfx -y
 docfx docfx\docfx.json
 del docs /s /q 
 REM the CNAME file is generated in the doc folder when added through the github 
