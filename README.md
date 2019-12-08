@@ -52,7 +52,7 @@ See the [guidelines](CONTRIBUTING.md)
 
 ## Sponsors
 
-We are delightly with our first gold sponsor Sebastian Kruze, who is also contributing exprt feedback and solid test suites.
+We are delightly with our first gold sponsor Sebastian Kruze, who is also contributing expert feedback and solid testing.
 
 [Sebastian Kruze](https://github.com/Sebastian1989101)
 
