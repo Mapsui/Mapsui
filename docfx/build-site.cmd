@@ -3,7 +3,7 @@ choco install docfx -y || exit /b
 ECHO CHOCO UPGRADE
 choco upgrade docfx -y || exit /b 
 ECHO NUGET RESTORE
-nuget restore
+nuget restore mapsui.sln
 ECHO DOCFX
 docfx docfx\docfx.json || exit /b 
 ECHO DELETE docs 
