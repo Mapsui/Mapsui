@@ -50,6 +50,12 @@ See the [guidelines](CONTRIBUTING.md)
 - **Android** - Xamarin.Android on API Level 19 (v4.4 - Kit Kat)
 - **iOS** - Xamarin.iOS
 
+## Sponsors
+
+We are delightly with our first gold sponsor Sebastian Kruze, who is also contributing expert feedback and solid testing.
+
+[Sebastian Kruze](https://github.com/Sebastian1989101)
+
 ## License 
 
 [LGPL](https://raw.githubusercontent.com/mapsui/Mapsui/master/LICENSE.md)
