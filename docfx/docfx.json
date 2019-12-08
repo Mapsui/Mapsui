@@ -9,6 +9,7 @@
             "Mapsui.Geometries/*.csproj",
             "Mapsui.Rendering.Skia/*.csproj",
             "Mapsui.Rendering.Xaml/*.csproj",
+            "Mapsui.UI.Uwp/*.csproj",
             "Mapsui.UI.Wpf/*.csproj",
             "Mapsui.UI.iOS/*.csproj",
             "Mapsui.UI.Android/*.csproj",
