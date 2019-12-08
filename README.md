@@ -52,7 +52,7 @@ See the [guidelines](CONTRIBUTING.md)
 
 ## Sponsors
 
-We are delightly with our first gold sponsor Sebastian Kruze, who is also contributing expert feedback and solid testing.
+We are delightly with our first gold sponsor Sebastian Kruze, who has also contributed to Mapsui with informed test reports and expert advice.
 
 [Sebastian Kruze](https://github.com/Sebastian1989101)
 
