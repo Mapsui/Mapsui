@@ -1,7 +1,5 @@
 ECHO CHOCO INSTALL
-choco install docfx -y || exit /b 
-ECHO CHOCO UPGRADE
-choco upgrade docfx -y || exit /b 
+choco install docfx --version 2.40.11 --allow-downgrade  -y || exit /b 
 ECHO NUGET RESTORE
 nuget restore mapsui.sln
 ECHO DOCFX
