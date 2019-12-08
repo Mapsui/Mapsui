@@ -2,6 +2,8 @@ ECHO CHOCO INSTALL
 choco install docfx -y || exit /b 
 ECHO CHOCO UPGRADE
 choco upgrade docfx -y || exit /b 
+ECHO NUGET RESTORE
+nuget restore
 ECHO DOCFX
 docfx docfx\docfx.json || exit /b 
 ECHO DELETE docs 
