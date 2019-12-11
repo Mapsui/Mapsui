@@ -52,7 +52,7 @@ as rasters. No attempt will be made to transform and the CRS fields will be
 ignored.
 
 ## Advanced scenario
-if your projection does not fit in classical cases
+If your projection does not fit in classical cases
 or if you need to load projection descriptor other than WKT,  
 you can try to use some alternative projection package like this one :   
 - [DotSpatial.Projections.NetStandard](https://www.nuget.org/packages/DotSpatial.Projections.NetStandard).  
