@@ -58,7 +58,7 @@ you can try to use some alternative projection package like this one :
 - [DotSpatial.Projections.NetStandard](https://www.nuget.org/packages/DotSpatial.Projections.NetStandard).  
 - [DotSpatial.Projections.NetStandard repository](https://github.com/ststeiger/DotSpatial).   
   
-You can find a sample of custom projection implementation which use this method [Here](https://gist.github.com/antoineloos/41b4ef5453f4ce52078519f47fbbb4d1)
+You can find a sample of custom projection implementation which use this method [Here](https://gist.github.com/antoineloos/41b4ef5453f4ce52078519f47fbbb4d1)  
 
 
 
