@@ -422,7 +422,14 @@ namespace Mapsui.UI.Forms
         /// <summary>
         /// Navigator of MapControl
         /// </summary>
-        public INavigator Navigator => _mapControl.Navigator;
+        public INavigator Navigator
+        {
+            get => _mapControl.Navigator;
+            set
+            {
+                _mapControl.Navigator = value;
+            }
+        }
 
         /// <summary>
         /// Underlying MapControl
