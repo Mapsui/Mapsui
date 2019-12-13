@@ -25,6 +25,10 @@ namespace Mapsui.Samples.Forms
         public void Setup(IMapControl mapControl)
         {
             mapControl.Map = OsmSample.CreateMap();
+            if (mapControl is MapView)
+                ((MapView)mapControl).Navigator = new AnimatedNavigator(mapControl.Map, (IViewport)((MapView)mapControl).Viewport);
+            else
+                ((MapControl)mapControl).Navigator = new AnimatedNavigator(mapControl.Map, (IViewport)((MapControl)mapControl).Viewport);
         }
     }
 }
