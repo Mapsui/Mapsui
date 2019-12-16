@@ -457,6 +457,12 @@ namespace Mapsui.UI.Forms
         }
 
         /// <inheritdoc />
+        public byte[] GetSnapshot(IEnumerable<ILayer> layers = null)
+        {
+            return _mapControl.GetSnapshot(layers);
+        }
+        
+        /// <inheritdoc />
         public void RefreshGraphics()
         {
             _mapControl.RefreshGraphics();
