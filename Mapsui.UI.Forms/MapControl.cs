@@ -552,16 +552,11 @@ namespace Mapsui.UI.Forms
 
             var eventReturn = InvokeInfo(screenPosition, screenPosition, numOfTaps);
 
-            if (eventReturn != null)
-            {
-                if (!eventReturn.Handled)
-                {
-                    // Double tap as zoom
-                    return OnZoomIn(screenPosition);
-                }
-            }
+            if (eventReturn?.Handled == true)
+                return true;
 
-            return false;
+            // Double tap as zoom
+            return OnZoomIn(screenPosition);
         }
 
         /// <summary>
@@ -579,7 +574,10 @@ namespace Mapsui.UI.Forms
                 return true;
 
             var infoToInvoke = InvokeInfo(screenPosition, screenPosition, 1);
-                        
+
+            if (infoToInvoke?.Handled == true)
+                return true;
+
             OnInfo(infoToInvoke);
             return infoToInvoke?.Handled ?? false;
         }
