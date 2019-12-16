@@ -12,6 +12,7 @@ namespace Mapsui
         private readonly Map _map;
         private readonly IViewport _viewport;
         private Animation _animation;
+        private double _rotationDelta;
 
         public EventHandler Navigated { get; set; } 
 
@@ -424,6 +425,14 @@ namespace Mapsui
                     );
                 animations.Add(entry);
 
+                _rotationDelta = (double)entry.End - (double)entry.Start;
+
+                if (_rotationDelta < -180.0)
+                    _rotationDelta += 360.0;
+
+                if (_rotationDelta > 180.0)
+                    _rotationDelta -= 360.0;
+
                 _animation = new Animation(duration);
                 _animation.Entries.AddRange(animations);
                 _animation.Start();
@@ -467,9 +476,9 @@ namespace Mapsui
 
         private void RotationTick(AnimationEntry entry, double value)
         {
-            var r = (double)entry.Start + ((double)entry.End - (double)entry.Start) * entry.Easing.Ease(value);
+            var r = (double)entry.Start + _rotationDelta * entry.Easing.Ease(value);
 
-            // Set new values
+            // Set new value
             _viewport.SetRotation(r);
 
             Navigated?.Invoke(this, EventArgs.Empty);
