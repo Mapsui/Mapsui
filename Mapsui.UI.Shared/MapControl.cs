@@ -347,6 +347,20 @@ namespace Mapsui.UI.Wpf
                 screenPosition, Renderer.SymbolCache, margin);
         }
 
+        /// <inheritdoc />
+        public byte[] GetSnapshot(IEnumerable<ILayer> layers = null)
+        {
+            byte[] result = null;
+            
+            using (var stream = Renderer.RenderToBitmapStream(Viewport, layers ?? Map.Layers)) 
+            { 
+                if (stream != null)
+                    result = stream.ToArray(); 
+            }
+
+            return result;
+        }
+
         /// <summary>
         /// Check if a widget or feature at a given screen position is clicked/tapped
         /// </summary>
