@@ -12,7 +12,7 @@ using Xamarin.Forms;
 
 namespace Mapsui.UI.Forms
 {
-    public sealed class Pin : BindableObject, IFeatureProvider
+    public class Pin : BindableObject, IFeatureProvider
     {
         private int _bitmapId = -1;
         private byte[] _bitmapData;
