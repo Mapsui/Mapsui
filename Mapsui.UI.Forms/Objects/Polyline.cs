@@ -11,7 +11,7 @@ using System.Runtime.CompilerServices;
 
 namespace Mapsui.UI.Forms
 {
-    public class Polyline : Drawable
+    public sealed class Polyline : Drawable
     {
         private readonly ObservableCollection<Position> _positions = new ObservableCollection<Position>();
 
