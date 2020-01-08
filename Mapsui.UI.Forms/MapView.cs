@@ -786,11 +786,14 @@ namespace Mapsui.UI.Forms
                 }
             }
 
-            foreach (var item in e.NewItems)
+            if (e.NewItems != null)
             {
-                // Add new drawables to layer
-                if (item is INotifyPropertyChanged drawable)
-                    drawable.PropertyChanged += HandlerDrawablePropertyChanged;
+                foreach (var item in e.NewItems)
+                {
+                    // Add new drawables to layer
+                    if (item is INotifyPropertyChanged drawable)
+                        drawable.PropertyChanged += HandlerDrawablePropertyChanged;
+                }
             }
 
             Refresh();
