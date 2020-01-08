@@ -133,7 +133,7 @@ namespace Mapsui.UI.Forms
 
                 e.Handled = OnTouchStart(_touches.Select(t => t.Value.Location).ToList());
             }
-            if (e.ActionType == SKTouchAction.Released)
+            else if (e.ActionType == SKTouchAction.Released)
             {
                 // Delete e.Id from _touches, because finger is released
                 var releasedTouch = _touches[e.Id];
@@ -206,7 +206,7 @@ namespace Mapsui.UI.Forms
                 if (!e.Handled)
                     e.Handled = OnTouchEnd(_touches.Select(t => t.Value.Location).ToList(), releasedTouch.Location);
             }
-            if (e.ActionType == SKTouchAction.Moved)
+            else if (e.ActionType == SKTouchAction.Moved)
             {
                 _touches[e.Id] = new TouchEvent(e.Id, location, ticks);
 
@@ -218,15 +218,26 @@ namespace Mapsui.UI.Forms
                 else
                     e.Handled = OnHovered(_touches.Select(t => t.Value.Location).FirstOrDefault());
             }
-            if (e.ActionType == SKTouchAction.Cancelled)
+            else if (e.ActionType == SKTouchAction.Cancelled)
             {
                 _touches.Remove(e.Id);
             }
-            if (e.ActionType == SKTouchAction.Exited)
+            else if (e.ActionType == SKTouchAction.Exited)
             {
             }
-            if (e.ActionType == SKTouchAction.Entered)
+            else if (e.ActionType == SKTouchAction.Entered)
             {
+            }
+            else if (e.ActionType == SKTouchAction.WheelChanged)
+            {
+                if (e.WheelDelta > 0)
+                {
+                    OnZoomIn(location);
+                }
+                else
+                {
+                    OnZoomOut(location);
+                }
             }
         }
 
