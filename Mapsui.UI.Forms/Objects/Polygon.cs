@@ -12,7 +12,7 @@ using Xamarin.Forms;
 
 namespace Mapsui.UI.Forms
 {
-    public sealed class Polygon : Drawable
+    public class Polygon : Drawable
     {
         public static readonly BindableProperty FillColorProperty = BindableProperty.Create(nameof(FillColor), typeof(Xamarin.Forms.Color), typeof(Polygon), Xamarin.Forms.Color.DarkGray);
 

@@ -422,7 +422,14 @@ namespace Mapsui.UI.Forms
         /// <summary>
         /// Navigator of MapControl
         /// </summary>
-        public INavigator Navigator => _mapControl.Navigator;
+        public INavigator Navigator
+        {
+            get => _mapControl.Navigator;
+            set
+            {
+                _mapControl.Navigator = value;
+            }
+        }
 
         /// <summary>
         /// Underlying MapControl
@@ -456,6 +463,12 @@ namespace Mapsui.UI.Forms
                 screenPosition, _mapControl.Renderer.SymbolCache, margin);
         }
 
+        /// <inheritdoc />
+        public byte[] GetSnapshot(IEnumerable<ILayer> layers = null)
+        {
+            return _mapControl.GetSnapshot(layers);
+        }
+        
         /// <inheritdoc />
         public void RefreshGraphics()
         {

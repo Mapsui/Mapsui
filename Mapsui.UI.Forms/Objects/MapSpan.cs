@@ -6,7 +6,7 @@ namespace Mapsui.UI.Forms
     /// <summary>
     /// MapSpan represents an area of the earth
     /// </summary>
-    public sealed class MapSpan
+    public class MapSpan
     {
         /// <summary>
         /// Radius of earth in EPSG:4327 in kilometers
