@@ -518,6 +518,7 @@ namespace Mapsui.UI.Forms
         /// <param name="position">Position of callout</param>
         public Callout CreateCallout(Position position)
         {
+            // In Forms.UWP, the Callout needs to be created on the UI Thread
             Device.BeginInvokeOnMainThread(() =>
             {
                 _callout = new Callout(_mapControl)
