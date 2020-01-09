@@ -1,0 +1,1262 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class WmsProvider
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class WmsProvider
+   ">
+    <meta name="generator" content="docfx 2.48.0.0">
+    
+    <link rel="shortcut icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Mapsui.Desktop.Wms.WmsProvider">
+  
+  
+  <h1 id="Mapsui_Desktop_Wms_WmsProvider" data-uid="Mapsui.Desktop.Wms.WmsProvider" class="text-break">Class WmsProvider
+  </h1>
+  <div class="markdown level0 summary"><p>Web Map Service layer</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">WmsProvider</span></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Mapsui.Providers.IProjectingProvider.html">IProjectingProvider</a></div>
+    <div><a class="xref" href="Mapsui.Providers.IProvider.html">IProvider</a></div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Mapsui.Desktop.Wms.html">Mapsui.Desktop.Wms</a></h6>
+  <h6><strong>Assembly</strong>: Mapsui.Desktop.dll</h6>
+  <h5 id="Mapsui_Desktop_Wms_WmsProvider_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class WmsProvider : object, IProjectingProvider, IProvider</code></pre>
+  </div>
+  <h5 id="Mapsui_Desktop_Wms_WmsProvider_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>The WmsLayer is currently very basic and doesn&apos;t support automatic fetching of the WMS Service Description.
+Instead you would have to add the nessesary parameters to the URL,
+and the WmsLayer will set the remaining BoundingBox property and proper requests that changes between the requests.
+See the example below.</p>
+</div>
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Desktop_Wms_WmsProvider__ctor_System_String_System_String_Func_System_String_Task_Stream___.md&amp;value=---%0Auid%3A%20Mapsui.Desktop.Wms.WmsProvider.%23ctor(System.String%2CSystem.String%2CFunc%7BSystem.String%2CTask%7BStream%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Desktop/Wms/WmsProvider.cs/#L63">View Source</a>
+  </span>
+  <a id="Mapsui_Desktop_Wms_WmsProvider__ctor_" data-uid="Mapsui.Desktop.Wms.WmsProvider.#ctor*"></a>
+  <h4 id="Mapsui_Desktop_Wms_WmsProvider__ctor_System_String_System_String_Func_System_String_Task_Stream___" data-uid="Mapsui.Desktop.Wms.WmsProvider.#ctor(System.String,System.String,Func{System.String,Task{Stream}})">WmsProvider(String, String, Func&lt;String, Task&lt;Stream&gt;&gt;)</h4>
+  <div class="markdown level1 summary"><p>Initializes a new layer, and downloads and parses the service description</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public WmsProvider(string url, string wmsVersion = null, Func&lt;string, Task&lt;Stream&gt;&gt; getStreamAsync = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">url</span></td>
+        <td><p>Url of WMS server</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">wmsVersion</span></td>
+        <td><p>Version number of wms leave null to get the default service version</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Func</span>&lt;<span class="xref">System.String</span>, <span class="xref">Task</span>&lt;<span class="xref">Stream</span>&gt;&gt;</td>
+        <td><span class="parametername">getStreamAsync</span></td>
+        <td><p>Download method, leave null for default</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Desktop_Wms_WmsProvider__ctor_XmlDocument_Func_System_String_Task_Stream___.md&amp;value=---%0Auid%3A%20Mapsui.Desktop.Wms.WmsProvider.%23ctor(XmlDocument%2CFunc%7BSystem.String%2CTask%7BStream%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Desktop/Wms/WmsProvider.cs/#L51">View Source</a>
+  </span>
+  <a id="Mapsui_Desktop_Wms_WmsProvider__ctor_" data-uid="Mapsui.Desktop.Wms.WmsProvider.#ctor*"></a>
+  <h4 id="Mapsui_Desktop_Wms_WmsProvider__ctor_XmlDocument_Func_System_String_Task_Stream___" data-uid="Mapsui.Desktop.Wms.WmsProvider.#ctor(XmlDocument,Func{System.String,Task{Stream}})">WmsProvider(XmlDocument, Func&lt;String, Task&lt;Stream&gt;&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public WmsProvider(XmlDocument capabilities, Func&lt;string, Task&lt;Stream&gt;&gt; getStreamAsync = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">XmlDocument</span></td>
+        <td><span class="parametername">capabilities</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Func</span>&lt;<span class="xref">System.String</span>, <span class="xref">Task</span>&lt;<span class="xref">Stream</span>&gt;&gt;</td>
+        <td><span class="parametername">getStreamAsync</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Desktop_Wms_WmsProvider_ContinueOnError.md&amp;value=---%0Auid%3A%20Mapsui.Desktop.Wms.WmsProvider.ContinueOnError%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Desktop/Wms/WmsProvider.cs/#L146">View Source</a>
+  </span>
+  <a id="Mapsui_Desktop_Wms_WmsProvider_ContinueOnError_" data-uid="Mapsui.Desktop.Wms.WmsProvider.ContinueOnError*"></a>
+  <h4 id="Mapsui_Desktop_Wms_WmsProvider_ContinueOnError" data-uid="Mapsui.Desktop.Wms.WmsProvider.ContinueOnError">ContinueOnError</h4>
+  <div class="markdown level1 summary"><p>Specifies whether to throw an exception if the Wms request failed, or to just skip rendering the layer</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool ContinueOnError { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Desktop_Wms_WmsProvider_Credentials.md&amp;value=---%0Auid%3A%20Mapsui.Desktop.Wms.WmsProvider.Credentials%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Desktop/Wms/WmsProvider.cs/#L151">View Source</a>
+  </span>
+  <a id="Mapsui_Desktop_Wms_WmsProvider_Credentials_" data-uid="Mapsui.Desktop.Wms.WmsProvider.Credentials*"></a>
+  <h4 id="Mapsui_Desktop_Wms_WmsProvider_Credentials" data-uid="Mapsui.Desktop.Wms.WmsProvider.Credentials">Credentials</h4>
+  <div class="markdown level1 summary"><p>Provides the base authentication interface for retrieving credentials for Web client authentication.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ICredentials Credentials { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ICredentials</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Desktop_Wms_WmsProvider_CRS.md&amp;value=---%0Auid%3A%20Mapsui.Desktop.Wms.WmsProvider.CRS%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Desktop/Wms/WmsProvider.cs/#L462">View Source</a>
+  </span>
+  <a id="Mapsui_Desktop_Wms_WmsProvider_CRS_" data-uid="Mapsui.Desktop.Wms.WmsProvider.CRS*"></a>
+  <h4 id="Mapsui_Desktop_Wms_WmsProvider_CRS" data-uid="Mapsui.Desktop.Wms.WmsProvider.CRS">CRS</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string CRS { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Desktop_Wms_WmsProvider_ExtraParams.md&amp;value=---%0Auid%3A%20Mapsui.Desktop.Wms.WmsProvider.ExtraParams%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Desktop/Wms/WmsProvider.cs/#L464">View Source</a>
+  </span>
+  <a id="Mapsui_Desktop_Wms_WmsProvider_ExtraParams_" data-uid="Mapsui.Desktop.Wms.WmsProvider.ExtraParams*"></a>
+  <h4 id="Mapsui_Desktop_Wms_WmsProvider_ExtraParams" data-uid="Mapsui.Desktop.Wms.WmsProvider.ExtraParams">ExtraParams</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Dictionary&lt;string, string&gt; ExtraParams { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Desktop_Wms_WmsProvider_GetFeatureInfoFormats.md&amp;value=---%0Auid%3A%20Mapsui.Desktop.Wms.WmsProvider.GetFeatureInfoFormats%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Desktop/Wms/WmsProvider.cs/#L122">View Source</a>
+  </span>
+  <a id="Mapsui_Desktop_Wms_WmsProvider_GetFeatureInfoFormats_" data-uid="Mapsui.Desktop.Wms.WmsProvider.GetFeatureInfoFormats*"></a>
+  <h4 id="Mapsui_Desktop_Wms_WmsProvider_GetFeatureInfoFormats" data-uid="Mapsui.Desktop.Wms.WmsProvider.GetFeatureInfoFormats">GetFeatureInfoFormats</h4>
+  <div class="markdown level1 summary"><p>Gets the list of available FeatureInfo Output Format</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Collection&lt;string&gt; GetFeatureInfoFormats { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Collection</span>&lt;<span class="xref">System.String</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Desktop_Wms_WmsProvider_LayerList.md&amp;value=---%0Auid%3A%20Mapsui.Desktop.Wms.WmsProvider.LayerList%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Desktop/Wms/WmsProvider.cs/#L96">View Source</a>
+  </span>
+  <a id="Mapsui_Desktop_Wms_WmsProvider_LayerList_" data-uid="Mapsui.Desktop.Wms.WmsProvider.LayerList*"></a>
+  <h4 id="Mapsui_Desktop_Wms_WmsProvider_LayerList" data-uid="Mapsui.Desktop.Wms.WmsProvider.LayerList">LayerList</h4>
+  <div class="markdown level1 summary"><p>Gets the list of enabled layers</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Collection&lt;string&gt; LayerList { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Collection</span>&lt;<span class="xref">System.String</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Desktop_Wms_WmsProvider_OutputFormats.md&amp;value=---%0Auid%3A%20Mapsui.Desktop.Wms.WmsProvider.OutputFormats%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Desktop/Wms/WmsProvider.cs/#L114">View Source</a>
+  </span>
+  <a id="Mapsui_Desktop_Wms_WmsProvider_OutputFormats_" data-uid="Mapsui.Desktop.Wms.WmsProvider.OutputFormats*"></a>
+  <h4 id="Mapsui_Desktop_Wms_WmsProvider_OutputFormats" data-uid="Mapsui.Desktop.Wms.WmsProvider.OutputFormats">OutputFormats</h4>
+  <div class="markdown level1 summary"><p>Gets the list of available formats</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Collection&lt;string&gt; OutputFormats { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Collection</span>&lt;<span class="xref">System.String</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Desktop_Wms_WmsProvider_RootLayer.md&amp;value=---%0Auid%3A%20Mapsui.Desktop.Wms.WmsProvider.RootLayer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Desktop/Wms/WmsProvider.cs/#L106">View Source</a>
+  </span>
+  <a id="Mapsui_Desktop_Wms_WmsProvider_RootLayer_" data-uid="Mapsui.Desktop.Wms.WmsProvider.RootLayer*"></a>
+  <h4 id="Mapsui_Desktop_Wms_WmsProvider_RootLayer" data-uid="Mapsui.Desktop.Wms.WmsProvider.RootLayer">RootLayer</h4>
+  <div class="markdown level1 summary"><p>Gets the hiarchial list of available WMS layers from this service</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Client.WmsServerLayer RootLayer { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Desktop.Wms.Client.WmsServerLayer.html">Client.WmsServerLayer</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Desktop_Wms_WmsProvider_ServiceDescription.md&amp;value=---%0Auid%3A%20Mapsui.Desktop.Wms.WmsProvider.ServiceDescription%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Desktop/Wms/WmsProvider.cs/#L130">View Source</a>
+  </span>
+  <a id="Mapsui_Desktop_Wms_WmsProvider_ServiceDescription_" data-uid="Mapsui.Desktop.Wms.WmsProvider.ServiceDescription*"></a>
+  <h4 id="Mapsui_Desktop_Wms_WmsProvider_ServiceDescription" data-uid="Mapsui.Desktop.Wms.WmsProvider.ServiceDescription">ServiceDescription</h4>
+  <div class="markdown level1 summary"><p>Gets the service description from this server</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Capabilities.WmsServiceDescription ServiceDescription { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Desktop.Wms.Capabilities.WmsServiceDescription.html">Capabilities.WmsServiceDescription</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Desktop_Wms_WmsProvider_StylesList.md&amp;value=---%0Auid%3A%20Mapsui.Desktop.Wms.WmsProvider.StylesList%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Desktop/Wms/WmsProvider.cs/#L101">View Source</a>
+  </span>
+  <a id="Mapsui_Desktop_Wms_WmsProvider_StylesList_" data-uid="Mapsui.Desktop.Wms.WmsProvider.StylesList*"></a>
+  <h4 id="Mapsui_Desktop_Wms_WmsProvider_StylesList" data-uid="Mapsui.Desktop.Wms.WmsProvider.StylesList">StylesList</h4>
+  <div class="markdown level1 summary"><p>Gets the list of enabled styles</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Collection&lt;string&gt; StylesList { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Collection</span>&lt;<span class="xref">System.String</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Desktop_Wms_WmsProvider_TimeOut.md&amp;value=---%0Auid%3A%20Mapsui.Desktop.Wms.WmsProvider.TimeOut%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Desktop/Wms/WmsProvider.cs/#L156">View Source</a>
+  </span>
+  <a id="Mapsui_Desktop_Wms_WmsProvider_TimeOut_" data-uid="Mapsui.Desktop.Wms.WmsProvider.TimeOut*"></a>
+  <h4 id="Mapsui_Desktop_Wms_WmsProvider_TimeOut" data-uid="Mapsui.Desktop.Wms.WmsProvider.TimeOut">TimeOut</h4>
+  <div class="markdown level1 summary"><p>Timeout of webrequest in milliseconds. Defaults to 10 seconds</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int TimeOut { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Desktop_Wms_WmsProvider_Version.md&amp;value=---%0Auid%3A%20Mapsui.Desktop.Wms.WmsProvider.Version%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Desktop/Wms/WmsProvider.cs/#L138">View Source</a>
+  </span>
+  <a id="Mapsui_Desktop_Wms_WmsProvider_Version_" data-uid="Mapsui.Desktop.Wms.WmsProvider.Version*"></a>
+  <h4 id="Mapsui_Desktop_Wms_WmsProvider_Version" data-uid="Mapsui.Desktop.Wms.WmsProvider.Version">Version</h4>
+  <div class="markdown level1 summary"><p>Gets the WMS Server version of this service</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Version { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Desktop_Wms_WmsProvider_AddLayer_System_String_.md&amp;value=---%0Auid%3A%20Mapsui.Desktop.Wms.WmsProvider.AddLayer(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Desktop/Wms/WmsProvider.cs/#L164">View Source</a>
+  </span>
+  <a id="Mapsui_Desktop_Wms_WmsProvider_AddLayer_" data-uid="Mapsui.Desktop.Wms.WmsProvider.AddLayer*"></a>
+  <h4 id="Mapsui_Desktop_Wms_WmsProvider_AddLayer_System_String_" data-uid="Mapsui.Desktop.Wms.WmsProvider.AddLayer(System.String)">AddLayer(String)</h4>
+  <div class="markdown level1 summary"><p>Adds a layer to WMS request</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void AddLayer(string name)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Name of layer</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Mapsui_Desktop_Wms_WmsProvider_AddLayer_System_String__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Layer names are case sensitive.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Desktop_Wms_WmsProvider_AddStyle_System_String_.md&amp;value=---%0Auid%3A%20Mapsui.Desktop.Wms.WmsProvider.AddStyle(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Desktop/Wms/WmsProvider.cs/#L246">View Source</a>
+  </span>
+  <a id="Mapsui_Desktop_Wms_WmsProvider_AddStyle_" data-uid="Mapsui.Desktop.Wms.WmsProvider.AddStyle*"></a>
+  <h4 id="Mapsui_Desktop_Wms_WmsProvider_AddStyle_System_String_" data-uid="Mapsui.Desktop.Wms.WmsProvider.AddStyle(System.String)">AddStyle(String)</h4>
+  <div class="markdown level1 summary"><p>Adds a style to the style collection</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void AddStyle(string name)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Name of style</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Desktop_Wms_WmsProvider_Dispose.md&amp;value=---%0Auid%3A%20Mapsui.Desktop.Wms.WmsProvider.Dispose%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Desktop/Wms/WmsProvider.cs/#L478">View Source</a>
+  </span>
+  <a id="Mapsui_Desktop_Wms_WmsProvider_Dispose_" data-uid="Mapsui.Desktop.Wms.WmsProvider.Dispose*"></a>
+  <h4 id="Mapsui_Desktop_Wms_WmsProvider_Dispose" data-uid="Mapsui.Desktop.Wms.WmsProvider.Dispose">Dispose()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Dispose()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Desktop_Wms_WmsProvider_GetExtents.md&amp;value=---%0Auid%3A%20Mapsui.Desktop.Wms.WmsProvider.GetExtents%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Desktop/Wms/WmsProvider.cs/#L466">View Source</a>
+  </span>
+  <a id="Mapsui_Desktop_Wms_WmsProvider_GetExtents_" data-uid="Mapsui.Desktop.Wms.WmsProvider.GetExtents*"></a>
+  <h4 id="Mapsui_Desktop_Wms_WmsProvider_GetExtents" data-uid="Mapsui.Desktop.Wms.WmsProvider.GetExtents">GetExtents()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public BoundingBox GetExtents()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Geometries.BoundingBox.html">BoundingBox</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Desktop_Wms_WmsProvider_GetFeaturesInView_Mapsui_Geometries_BoundingBox_System_Double_.md&amp;value=---%0Auid%3A%20Mapsui.Desktop.Wms.WmsProvider.GetFeaturesInView(Mapsui.Geometries.BoundingBox%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Desktop/Wms/WmsProvider.cs/#L483">View Source</a>
+  </span>
+  <a id="Mapsui_Desktop_Wms_WmsProvider_GetFeaturesInView_" data-uid="Mapsui.Desktop.Wms.WmsProvider.GetFeaturesInView*"></a>
+  <h4 id="Mapsui_Desktop_Wms_WmsProvider_GetFeaturesInView_Mapsui_Geometries_BoundingBox_System_Double_" data-uid="Mapsui.Desktop.Wms.WmsProvider.GetFeaturesInView(Mapsui.Geometries.BoundingBox,System.Double)">GetFeaturesInView(BoundingBox, Double)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IEnumerable&lt;IFeature&gt; GetFeaturesInView(BoundingBox box, double resolution)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Geometries.BoundingBox.html">BoundingBox</a></td>
+        <td><span class="parametername">box</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">resolution</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IEnumerable</span>&lt;<a class="xref" href="Mapsui.Providers.IFeature.html">IFeature</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Desktop_Wms_WmsProvider_GetLayer_System_String_.md&amp;value=---%0Auid%3A%20Mapsui.Desktop.Wms.WmsProvider.GetLayer(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Desktop/Wms/WmsProvider.cs/#L178">View Source</a>
+  </span>
+  <a id="Mapsui_Desktop_Wms_WmsProvider_GetLayer_" data-uid="Mapsui.Desktop.Wms.WmsProvider.GetLayer*"></a>
+  <h4 id="Mapsui_Desktop_Wms_WmsProvider_GetLayer_System_String_" data-uid="Mapsui.Desktop.Wms.WmsProvider.GetLayer(System.String)">GetLayer(String)</h4>
+  <div class="markdown level1 summary"><p>Get a layer from the WMS</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Client.WmsServerLayer GetLayer(string name)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Name of layer</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Desktop.Wms.Client.WmsServerLayer.html">Client.WmsServerLayer</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Mapsui_Desktop_Wms_WmsProvider_GetLayer_System_String__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Layer names are case sensitive.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Desktop_Wms_WmsProvider_GetLegendRequestUrls.md&amp;value=---%0Auid%3A%20Mapsui.Desktop.Wms.WmsProvider.GetLegendRequestUrls%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Desktop/Wms/WmsProvider.cs/#L404">View Source</a>
+  </span>
+  <a id="Mapsui_Desktop_Wms_WmsProvider_GetLegendRequestUrls_" data-uid="Mapsui.Desktop.Wms.WmsProvider.GetLegendRequestUrls*"></a>
+  <h4 id="Mapsui_Desktop_Wms_WmsProvider_GetLegendRequestUrls" data-uid="Mapsui.Desktop.Wms.WmsProvider.GetLegendRequestUrls">GetLegendRequestUrls()</h4>
+  <div class="markdown level1 summary"><p>Gets the URL for a map request base on current settings, the image size and boundingbox</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IEnumerable&lt;string&gt; GetLegendRequestUrls()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IEnumerable</span>&lt;<span class="xref">System.String</span>&gt;</td>
+        <td><p>URL for WMS request</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Desktop_Wms_WmsProvider_GetLegends.md&amp;value=---%0Auid%3A%20Mapsui.Desktop.Wms.WmsProvider.GetLegends%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Desktop/Wms/WmsProvider.cs/#L425">View Source</a>
+  </span>
+  <a id="Mapsui_Desktop_Wms_WmsProvider_GetLegends_" data-uid="Mapsui.Desktop.Wms.WmsProvider.GetLegends*"></a>
+  <h4 id="Mapsui_Desktop_Wms_WmsProvider_GetLegends" data-uid="Mapsui.Desktop.Wms.WmsProvider.GetLegends">GetLegends()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IEnumerable&lt;MemoryStream&gt; GetLegends()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IEnumerable</span>&lt;<span class="xref">MemoryStream</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Desktop_Wms_WmsProvider_GetRequestUrl_Mapsui_Geometries_BoundingBox_System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20Mapsui.Desktop.Wms.WmsProvider.GetRequestUrl(Mapsui.Geometries.BoundingBox%2CSystem.Int32%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Desktop/Wms/WmsProvider.cs/#L358">View Source</a>
+  </span>
+  <a id="Mapsui_Desktop_Wms_WmsProvider_GetRequestUrl_" data-uid="Mapsui.Desktop.Wms.WmsProvider.GetRequestUrl*"></a>
+  <h4 id="Mapsui_Desktop_Wms_WmsProvider_GetRequestUrl_Mapsui_Geometries_BoundingBox_System_Int32_System_Int32_" data-uid="Mapsui.Desktop.Wms.WmsProvider.GetRequestUrl(Mapsui.Geometries.BoundingBox,System.Int32,System.Int32)">GetRequestUrl(BoundingBox, Int32, Int32)</h4>
+  <div class="markdown level1 summary"><p>Gets the URL for a map request base on current settings, the image size and boundingbox</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string GetRequestUrl(BoundingBox box, int width, int height)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Geometries.BoundingBox.html">BoundingBox</a></td>
+        <td><span class="parametername">box</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">width</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">height</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>URL for WMS request</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Desktop_Wms_WmsProvider_IsCrsSupported_System_String_.md&amp;value=---%0Auid%3A%20Mapsui.Desktop.Wms.WmsProvider.IsCrsSupported(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Desktop/Wms/WmsProvider.cs/#L471">View Source</a>
+  </span>
+  <a id="Mapsui_Desktop_Wms_WmsProvider_IsCrsSupported_" data-uid="Mapsui.Desktop.Wms.WmsProvider.IsCrsSupported*"></a>
+  <h4 id="Mapsui_Desktop_Wms_WmsProvider_IsCrsSupported_System_String_" data-uid="Mapsui.Desktop.Wms.WmsProvider.IsCrsSupported(System.String)">IsCrsSupported(String)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? IsCrsSupported(string crs)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">crs</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Boolean</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Desktop_Wms_WmsProvider_RemoveAllLayers.md&amp;value=---%0Auid%3A%20Mapsui.Desktop.Wms.WmsProvider.RemoveAllLayers%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Desktop/Wms/WmsProvider.cs/#L236">View Source</a>
+  </span>
+  <a id="Mapsui_Desktop_Wms_WmsProvider_RemoveAllLayers_" data-uid="Mapsui.Desktop.Wms.WmsProvider.RemoveAllLayers*"></a>
+  <h4 id="Mapsui_Desktop_Wms_WmsProvider_RemoveAllLayers" data-uid="Mapsui.Desktop.Wms.WmsProvider.RemoveAllLayers">RemoveAllLayers()</h4>
+  <div class="markdown level1 summary"><p>Removes all layers</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RemoveAllLayers()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Desktop_Wms_WmsProvider_RemoveAllStyles.md&amp;value=---%0Auid%3A%20Mapsui.Desktop.Wms.WmsProvider.RemoveAllStyles%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Desktop/Wms/WmsProvider.cs/#L286">View Source</a>
+  </span>
+  <a id="Mapsui_Desktop_Wms_WmsProvider_RemoveAllStyles_" data-uid="Mapsui.Desktop.Wms.WmsProvider.RemoveAllStyles*"></a>
+  <h4 id="Mapsui_Desktop_Wms_WmsProvider_RemoveAllStyles" data-uid="Mapsui.Desktop.Wms.WmsProvider.RemoveAllStyles">RemoveAllStyles()</h4>
+  <div class="markdown level1 summary"><p>Removes all styles from the list</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RemoveAllStyles()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Desktop_Wms_WmsProvider_RemoveLayer_System_String_.md&amp;value=---%0Auid%3A%20Mapsui.Desktop.Wms.WmsProvider.RemoveLayer(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Desktop/Wms/WmsProvider.cs/#L219">View Source</a>
+  </span>
+  <a id="Mapsui_Desktop_Wms_WmsProvider_RemoveLayer_" data-uid="Mapsui.Desktop.Wms.WmsProvider.RemoveLayer*"></a>
+  <h4 id="Mapsui_Desktop_Wms_WmsProvider_RemoveLayer_System_String_" data-uid="Mapsui.Desktop.Wms.WmsProvider.RemoveLayer(System.String)">RemoveLayer(String)</h4>
+  <div class="markdown level1 summary"><p>Removes a layer from the layer list</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RemoveLayer(string name)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Name of layer to remove</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Desktop_Wms_WmsProvider_RemoveLayerAt_System_Int32_.md&amp;value=---%0Auid%3A%20Mapsui.Desktop.Wms.WmsProvider.RemoveLayerAt(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Desktop/Wms/WmsProvider.cs/#L228">View Source</a>
+  </span>
+  <a id="Mapsui_Desktop_Wms_WmsProvider_RemoveLayerAt_" data-uid="Mapsui.Desktop.Wms.WmsProvider.RemoveLayerAt*"></a>
+  <h4 id="Mapsui_Desktop_Wms_WmsProvider_RemoveLayerAt_System_Int32_" data-uid="Mapsui.Desktop.Wms.WmsProvider.RemoveLayerAt(System.Int32)">RemoveLayerAt(Int32)</h4>
+  <div class="markdown level1 summary"><p>Removes the layer at the specified index</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RemoveLayerAt(int index)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">index</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Desktop_Wms_WmsProvider_RemoveStyle_System_String_.md&amp;value=---%0Auid%3A%20Mapsui.Desktop.Wms.WmsProvider.RemoveStyle(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Desktop/Wms/WmsProvider.cs/#L269">View Source</a>
+  </span>
+  <a id="Mapsui_Desktop_Wms_WmsProvider_RemoveStyle_" data-uid="Mapsui.Desktop.Wms.WmsProvider.RemoveStyle*"></a>
+  <h4 id="Mapsui_Desktop_Wms_WmsProvider_RemoveStyle_System_String_" data-uid="Mapsui.Desktop.Wms.WmsProvider.RemoveStyle(System.String)">RemoveStyle(String)</h4>
+  <div class="markdown level1 summary"><p>Removes a style from the collection</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RemoveStyle(string name)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Name of style</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Desktop_Wms_WmsProvider_RemoveStyleAt_System_Int32_.md&amp;value=---%0Auid%3A%20Mapsui.Desktop.Wms.WmsProvider.RemoveStyleAt(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Desktop/Wms/WmsProvider.cs/#L278">View Source</a>
+  </span>
+  <a id="Mapsui_Desktop_Wms_WmsProvider_RemoveStyleAt_" data-uid="Mapsui.Desktop.Wms.WmsProvider.RemoveStyleAt*"></a>
+  <h4 id="Mapsui_Desktop_Wms_WmsProvider_RemoveStyleAt_System_Int32_" data-uid="Mapsui.Desktop.Wms.WmsProvider.RemoveStyleAt(System.Int32)">RemoveStyleAt(Int32)</h4>
+  <div class="markdown level1 summary"><p>Removes a style at specified index</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RemoveStyleAt(int index)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">index</span></td>
+        <td><p>Index</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Desktop_Wms_WmsProvider_SetImageFormat_System_String_.md&amp;value=---%0Auid%3A%20Mapsui.Desktop.Wms.WmsProvider.SetImageFormat(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Desktop/Wms/WmsProvider.cs/#L300">View Source</a>
+  </span>
+  <a id="Mapsui_Desktop_Wms_WmsProvider_SetImageFormat_" data-uid="Mapsui.Desktop.Wms.WmsProvider.SetImageFormat*"></a>
+  <h4 id="Mapsui_Desktop_Wms_WmsProvider_SetImageFormat_System_String_" data-uid="Mapsui.Desktop.Wms.WmsProvider.SetImageFormat(System.String)">SetImageFormat(String)</h4>
+  <div class="markdown level1 summary"><p>Sets the image type to use when requesting images from the WMS server</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetImageFormat(string mimeType)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">mimeType</span></td>
+        <td><p>Mime type of image format</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Mapsui_Desktop_Wms_WmsProvider_SetImageFormat_System_String__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>See the <a class="xref" href="Mapsui.Desktop.Wms.WmsProvider.html#Mapsui_Desktop_Wms_WmsProvider_OutputFormats">OutputFormats</a> property for a list of available mime types supported by the WMS server</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Desktop_Wms_WmsProvider_TryGetMap_Mapsui_IViewport_Mapsui_Geometries_IRaster__.md&amp;value=---%0Auid%3A%20Mapsui.Desktop.Wms.WmsProvider.TryGetMap(Mapsui.IViewport%2CMapsui.Geometries.IRaster%40)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Desktop/Wms/WmsProvider.cs/#L307">View Source</a>
+  </span>
+  <a id="Mapsui_Desktop_Wms_WmsProvider_TryGetMap_" data-uid="Mapsui.Desktop.Wms.WmsProvider.TryGetMap*"></a>
+  <h4 id="Mapsui_Desktop_Wms_WmsProvider_TryGetMap_Mapsui_IViewport_Mapsui_Geometries_IRaster__" data-uid="Mapsui.Desktop.Wms.WmsProvider.TryGetMap(Mapsui.IViewport,Mapsui.Geometries.IRaster@)">TryGetMap(IViewport, ref IRaster)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool TryGetMap(IViewport viewport, ref IRaster raster)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.IViewport.html">IViewport</a></td>
+        <td><span class="parametername">viewport</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Mapsui.Geometries.IRaster.html">IRaster</a></td>
+        <td><span class="parametername">raster</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="Mapsui.Providers.IProjectingProvider.html">IProjectingProvider</a>
+  </div>
+  <div>
+      <a class="xref" href="Mapsui.Providers.IProvider.html">IProvider</a>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Desktop_Wms_WmsProvider.md&amp;value=---%0Auid%3A%20Mapsui.Desktop.Wms.WmsProvider%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Desktop/Wms/WmsProvider.cs/#L45" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
