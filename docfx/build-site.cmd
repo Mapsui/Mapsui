@@ -1,7 +1,6 @@
 ECHO CHOCO INSTALL
 choco install docfx --version 2.48.0 --allow-downgrade  -y || exit /b 
 ECHO NUGET RESTORE
-SET VisualStudioVersion=16.0
 nuget restore mapsui.sln 
 ECHO DOCFX
 docfx docfx\docfx.json || exit /b 
