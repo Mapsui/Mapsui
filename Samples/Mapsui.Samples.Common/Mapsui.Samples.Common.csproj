@@ -75,6 +75,12 @@
     <ProjectReference Include="..\Mapsui.Samples.CustomWidget\Mapsui.Samples.CustomWidget.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="MbTiles\chinese-world.mbtiles">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
   <PropertyGroup>
     <DebugType>full</DebugType>
   </PropertyGroup>
