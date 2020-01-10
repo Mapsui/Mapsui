@@ -22,14 +22,15 @@ namespace Mapsui.Samples.Common.Maps
         public static Map CreateMap()
         {
             var map = new Map();
-            map.Layers.Add(CreateMbTilesLayer(Path.Combine(MbTilesLocation, "world.mbtiles")));
+            map.Layers.Add(CreateMbTilesLayer(Path.Combine(MbTilesLocation, "world.mbtiles"), "regular"));
+            map.Layers.Add(CreateMbTilesLayer(Path.Combine(MbTilesLocation, "chinese-world.mbtiles"), "chinese"));
             return map;
         }
 
-        public static TileLayer CreateMbTilesLayer(string path)
+        public static TileLayer CreateMbTilesLayer(string path, string name)
         {
             var mbTilesTileSource = new MbTilesTileSource(new SQLiteConnectionString(path, true));
-            var mbTilesLayer = new TileLayer(mbTilesTileSource);
+            var mbTilesLayer = new TileLayer(mbTilesTileSource) { Name = name};
             return mbTilesLayer;
         }
     }
