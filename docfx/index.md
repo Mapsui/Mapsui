@@ -8,5 +8,5 @@ The Mapsui documentation consists of two parts.
 
 We are delightly with our first gold sponsor Sebastian Kruze, who has also contributed to Mapsui with informed test reports and expert advice.
 
-[Sebastian Kruze](https://github.com/Sebastian1989101)
+[Sebastian Kruse](https://github.com/Sebastian1989101)
 
