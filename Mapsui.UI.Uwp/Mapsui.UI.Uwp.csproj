@@ -129,7 +129,7 @@
       <Version>6.2.9</Version>
     </PackageReference>
     <PackageReference Include="SkiaSharp.Views">
-      <Version>1.68.1</Version>
+      <Version>1.68.2-preview.17</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="..\Mapsui.UI.Shared\Mapsui.UI.Shared.projitems" Label="Shared" />

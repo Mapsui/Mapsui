@@ -34,10 +34,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="SkiaSharp, Version=1.68.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
-      <HintPath>..\packages\SkiaSharp.1.68.1\lib\Xamarin.iOS\SkiaSharp.dll</HintPath>
+      <HintPath>..\packages\SkiaSharp.1.68.2-preview.17\lib\xamarinios1.0\SkiaSharp.dll</HintPath>
     </Reference>
     <Reference Include="SkiaSharp.Views.iOS, Version=1.68.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
-      <HintPath>..\packages\SkiaSharp.Views.1.68.1\lib\Xamarin.iOS\SkiaSharp.Views.iOS.dll</HintPath>
+      <HintPath>..\packages\SkiaSharp.Views.1.68.2-preview.17\lib\xamarinios1.0\SkiaSharp.Views.iOS.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
