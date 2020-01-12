@@ -163,10 +163,10 @@
       <Version>6.2.9</Version>
     </PackageReference>
     <PackageReference Include="SkiaSharp">
-      <Version>1.68.1</Version>
+      <Version>1.68.2-preview.17</Version>
     </PackageReference>
     <PackageReference Include="SkiaSharp.Views">
-      <Version>1.68.1</Version>
+      <Version>1.68.2-preview.17</Version>
     </PackageReference>
     <PackageReference Include="SQLitePCLRaw.bundle_green">
       <Version>1.1.13</Version>
