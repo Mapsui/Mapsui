@@ -1,0 +1,782 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class ShapeFile
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class ShapeFile
+   ">
+    <meta name="generator" content="docfx 2.48.0.0">
+    
+    <link rel="shortcut icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Mapsui.Desktop.Shapefile.ShapeFile">
+  
+  
+  <h1 id="Mapsui_Desktop_Shapefile_ShapeFile" data-uid="Mapsui.Desktop.Shapefile.ShapeFile" class="text-break">Class ShapeFile
+  </h1>
+  <div class="markdown level0 summary"><p>Shapefile dataprovider</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">ShapeFile</span></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Mapsui.Providers.IProvider.html">IProvider</a></div>
+    <div><span class="xref">IDisposable</span></div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Mapsui.Desktop.Shapefile.html">Mapsui.Desktop.Shapefile</a></h6>
+  <h6><strong>Assembly</strong>: Mapsui.Desktop.dll</h6>
+  <h5 id="Mapsui_Desktop_Shapefile_ShapeFile_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class ShapeFile : object, IProvider, IDisposable</code></pre>
+  </div>
+  <h5 id="Mapsui_Desktop_Shapefile_ShapeFile_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>The ShapeFile provider is used for accessing ESRI ShapeFiles. The ShapeFile should at least contain the
+[filename].shp, [filename].idx, and if feature-data is to be used, also [filename].dbf file.</p>
+<p>The first time the ShapeFile is accessed, Mapsui will automatically create a spatial index
+of the shp-file, and save it as [filename].shp.sidx. If you change or update the contents of the .shp file,
+delete the .sidx file to force Mapsui to rebuilt it. In web applications, the index will automatically
+be cached to memory for faster access, so to reload the index, you will need to restart the web application
+as well.</p>
+<p>
+M and Z values in a shapefile is ignored by Mapsui.
+</p>
+</div>
+  <h5 id="Mapsui_Desktop_Shapefile_ShapeFile_examples"><strong>Examples</strong></h5>
+  <p>Adding a datasource to a layer:</p>
+<pre><code>Mapsui.Layers.VectorLayer myLayer = new Mapsui.Layers.VectorLayer(&quot;My layer&quot;);
+myLayer.DataSource = new Mapsui.Data.Providers.ShapeFile(@&quot;C:\data\MyShapeData.shp&quot;);</code></pre>
+
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Desktop_Shapefile_ShapeFile__ctor_System_String_System_Boolean_.md&amp;value=---%0Auid%3A%20Mapsui.Desktop.Shapefile.ShapeFile.%23ctor(System.String%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Desktop/Shapefile/ShapeFile.cs/#L190">View Source</a>
+  </span>
+  <a id="Mapsui_Desktop_Shapefile_ShapeFile__ctor_" data-uid="Mapsui.Desktop.Shapefile.ShapeFile.#ctor*"></a>
+  <h4 id="Mapsui_Desktop_Shapefile_ShapeFile__ctor_System_String_System_Boolean_" data-uid="Mapsui.Desktop.Shapefile.ShapeFile.#ctor(System.String,System.Boolean)">ShapeFile(String, Boolean)</h4>
+  <div class="markdown level1 summary"><p>Initializes a ShapeFile DataProvider.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ShapeFile(string filename, bool fileBasedIndex = false)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">filename</span></td>
+        <td><p>Path to shape file</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">fileBasedIndex</span></td>
+        <td><p>Use file-based spatial index</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Mapsui_Desktop_Shapefile_ShapeFile__ctor_System_String_System_Boolean__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>If FileBasedIndex is true, the spatial index will be read from a local copy. If it doesn&apos;t exist,
+it will be generated and saved to [filename] + &apos;.sidx&apos;.</p>
+<p>Using a file-based index is especially recommended for ASP.NET applications which will speed up
+start-up time when the cache has been emptied.
+</p>
+</div>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Desktop_Shapefile_ShapeFile_CRS.md&amp;value=---%0Auid%3A%20Mapsui.Desktop.Shapefile.ShapeFile.CRS%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Desktop/Shapefile/ShapeFile.cs/#L458">View Source</a>
+  </span>
+  <a id="Mapsui_Desktop_Shapefile_ShapeFile_CRS_" data-uid="Mapsui.Desktop.Shapefile.ShapeFile.CRS*"></a>
+  <h4 id="Mapsui_Desktop_Shapefile_ShapeFile_CRS" data-uid="Mapsui.Desktop.Shapefile.ShapeFile.CRS">CRS</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the spatial reference ID (CRS)</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string CRS { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Desktop_Shapefile_ShapeFile_Encoding.md&amp;value=---%0Auid%3A%20Mapsui.Desktop.Shapefile.ShapeFile.Encoding%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Desktop/Shapefile/ShapeFile.cs/#L251">View Source</a>
+  </span>
+  <a id="Mapsui_Desktop_Shapefile_ShapeFile_Encoding_" data-uid="Mapsui.Desktop.Shapefile.ShapeFile.Encoding*"></a>
+  <h4 id="Mapsui_Desktop_Shapefile_ShapeFile_Encoding" data-uid="Mapsui.Desktop.Shapefile.ShapeFile.Encoding">Encoding</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the encoding used for parsing strings from the DBase DBF file.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Encoding Encoding { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Encoding</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Mapsui_Desktop_Shapefile_ShapeFile_Encoding_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The DBase default encoding is <see cref="!:System.Text.Encoding.UTF7"></see>.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Desktop_Shapefile_ShapeFile_Filename.md&amp;value=---%0Auid%3A%20Mapsui.Desktop.Shapefile.ShapeFile.Filename%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Desktop/Shapefile/ShapeFile.cs/#L225">View Source</a>
+  </span>
+  <a id="Mapsui_Desktop_Shapefile_ShapeFile_Filename_" data-uid="Mapsui.Desktop.Shapefile.ShapeFile.Filename*"></a>
+  <h4 id="Mapsui_Desktop_Shapefile_ShapeFile_Filename" data-uid="Mapsui.Desktop.Shapefile.ShapeFile.Filename">Filename</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the filename of the shapefile</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Filename { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Mapsui_Desktop_Shapefile_ShapeFile_Filename_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>If the filename changes, indexes will be rebuilt</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Desktop_Shapefile_ShapeFile_FilterDelegate.md&amp;value=---%0Auid%3A%20Mapsui.Desktop.Shapefile.ShapeFile.FilterDelegate%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Desktop/Shapefile/ShapeFile.cs/#L284">View Source</a>
+  </span>
+  <a id="Mapsui_Desktop_Shapefile_ShapeFile_FilterDelegate_" data-uid="Mapsui.Desktop.Shapefile.ShapeFile.FilterDelegate*"></a>
+  <h4 id="Mapsui_Desktop_Shapefile_ShapeFile_FilterDelegate" data-uid="Mapsui.Desktop.Shapefile.ShapeFile.FilterDelegate">FilterDelegate</h4>
+  <div class="markdown level1 summary"><p>Filter Delegate Method for limiting the datasource</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ShapeFile.FilterMethod FilterDelegate { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Desktop.Shapefile.ShapeFile.FilterMethod.html">ShapeFile.FilterMethod</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Mapsui_Desktop_Shapefile_ShapeFile_FilterDelegate_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><example>
+Using an anonymous method for filtering all features where the NAME column starts with S:
+<pre><code>myShapeDataSource.FilterDelegate = new Mapsui.Data.Providers.ShapeFile.FilterMethod(delegate(Mapsui.Data.FeatureDataRow row) { return (!row[&quot;NAME&quot;].ToString().StartsWith(&quot;S&quot;)); });</code></pre>
+</example>
+<example>
+Declaring a delegate method for filtering (multi)polygon-features whose area is larger than 5.
+<pre><code>myShapeDataSource.FilterDelegate = CountryFilter;
+[...]
+public static bool CountryFilter(Mapsui.Data.FeatureDataRow row)
+{
+    if(row.Geometry.GetType()==typeof(Mapsui.Geometries.Polygon))
+        return ((row.Geometry as Mapsui.Geometries.Polygon).Area>5);
+    if (row.Geometry.GetType() == typeof(Mapsui.Geometries.MultiPolygon))
+        return ((row.Geometry as Mapsui.Geometries.MultiPolygon).Area > 5);
+    else return true;
+}</code></pre>
+</example>
+</div>
+  <h5 id="Mapsui_Desktop_Shapefile_ShapeFile_FilterDelegate_seealso">See Also</h5>
+  <div class="seealso">
+      <div><a class="xref" href="Mapsui.Desktop.Shapefile.ShapeFile.FilterMethod.html">ShapeFile.FilterMethod</a></div>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Desktop_Shapefile_ShapeFile_ShapeType.md&amp;value=---%0Auid%3A%20Mapsui.Desktop.Shapefile.ShapeFile.ShapeType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Desktop/Shapefile/ShapeFile.cs/#L215">View Source</a>
+  </span>
+  <a id="Mapsui_Desktop_Shapefile_ShapeFile_ShapeType_" data-uid="Mapsui.Desktop.Shapefile.ShapeFile.ShapeType*"></a>
+  <h4 id="Mapsui_Desktop_Shapefile_ShapeFile_ShapeType" data-uid="Mapsui.Desktop.Shapefile.ShapeFile.ShapeType">ShapeType</h4>
+  <div class="markdown level1 summary"><p>Gets the <a class="xref" href="Mapsui.Desktop.Shapefile.ShapeType.html">ShapeType</a> in this shapefile.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ShapeType ShapeType { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Desktop.Shapefile.ShapeType.html">ShapeType</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Mapsui_Desktop_Shapefile_ShapeFile_ShapeType_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The property isn&apos;t set until the first time the datasource has been opened,
+and will throw an exception if this property has been called since initialization. 
+<p>All the non-Null shapes in a shapefile are required to be of the same shape
+type.</p></p>
+</div>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Desktop_Shapefile_ShapeFile_Dispose.md&amp;value=---%0Auid%3A%20Mapsui.Desktop.Shapefile.ShapeFile.Dispose%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Desktop/Shapefile/ShapeFile.cs/#L292">View Source</a>
+  </span>
+  <a id="Mapsui_Desktop_Shapefile_ShapeFile_Dispose_" data-uid="Mapsui.Desktop.Shapefile.ShapeFile.Dispose*"></a>
+  <h4 id="Mapsui_Desktop_Shapefile_ShapeFile_Dispose" data-uid="Mapsui.Desktop.Shapefile.ShapeFile.Dispose">Dispose()</h4>
+  <div class="markdown level1 summary"><p>Disposes the object</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Dispose()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Desktop_Shapefile_ShapeFile_Finalize.md&amp;value=---%0Auid%3A%20Mapsui.Desktop.Shapefile.ShapeFile.Finalize%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Desktop/Shapefile/ShapeFile.cs/#L315">View Source</a>
+  </span>
+  <a id="Mapsui_Desktop_Shapefile_ShapeFile_Finalize_" data-uid="Mapsui.Desktop.Shapefile.ShapeFile.Finalize*"></a>
+  <h4 id="Mapsui_Desktop_Shapefile_ShapeFile_Finalize" data-uid="Mapsui.Desktop.Shapefile.ShapeFile.Finalize">Finalize()</h4>
+  <div class="markdown level1 summary"><p>Finalizes the object</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected void Finalize()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Desktop_Shapefile_ShapeFile_GetExtents.md&amp;value=---%0Auid%3A%20Mapsui.Desktop.Shapefile.ShapeFile.GetExtents%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Desktop/Shapefile/ShapeFile.cs/#L436">View Source</a>
+  </span>
+  <a id="Mapsui_Desktop_Shapefile_ShapeFile_GetExtents_" data-uid="Mapsui.Desktop.Shapefile.ShapeFile.GetExtents*"></a>
+  <h4 id="Mapsui_Desktop_Shapefile_ShapeFile_GetExtents" data-uid="Mapsui.Desktop.Shapefile.ShapeFile.GetExtents">GetExtents()</h4>
+  <div class="markdown level1 summary"><p>Returns the extents of the datasource</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public BoundingBox GetExtents()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Geometries.BoundingBox.html">BoundingBox</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Desktop_Shapefile_ShapeFile_GetFeature_System_UInt32_Mapsui_Providers_IFeatures_.md&amp;value=---%0Auid%3A%20Mapsui.Desktop.Shapefile.ShapeFile.GetFeature(System.UInt32%2CMapsui.Providers.IFeatures)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Desktop/Shapefile/ShapeFile.cs/#L833">View Source</a>
+  </span>
+  <a id="Mapsui_Desktop_Shapefile_ShapeFile_GetFeature_" data-uid="Mapsui.Desktop.Shapefile.ShapeFile.GetFeature*"></a>
+  <h4 id="Mapsui_Desktop_Shapefile_ShapeFile_GetFeature_System_UInt32_Mapsui_Providers_IFeatures_" data-uid="Mapsui.Desktop.Shapefile.ShapeFile.GetFeature(System.UInt32,Mapsui.Providers.IFeatures)">GetFeature(UInt32, IFeatures)</h4>
+  <div class="markdown level1 summary"><p>Gets a datarow from the datasource at the specified index belonging to the specified datatable</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IFeature GetFeature(uint rowId, IFeatures feature = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.UInt32</span></td>
+        <td><span class="parametername">rowId</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Mapsui.Providers.IFeatures.html">IFeatures</a></td>
+        <td><span class="parametername">feature</span></td>
+        <td><p>Datatable to feature should belong to.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Providers.IFeature.html">IFeature</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Desktop_Shapefile_ShapeFile_GetFeatureCount.md&amp;value=---%0Auid%3A%20Mapsui.Desktop.Shapefile.ShapeFile.GetFeatureCount%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Desktop/Shapefile/ShapeFile.cs/#L427">View Source</a>
+  </span>
+  <a id="Mapsui_Desktop_Shapefile_ShapeFile_GetFeatureCount_" data-uid="Mapsui.Desktop.Shapefile.ShapeFile.GetFeatureCount*"></a>
+  <h4 id="Mapsui_Desktop_Shapefile_ShapeFile_GetFeatureCount" data-uid="Mapsui.Desktop.Shapefile.ShapeFile.GetFeatureCount">GetFeatureCount()</h4>
+  <div class="markdown level1 summary"><p>Returns the total number of features in the datasource (without any filter applied)</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int GetFeatureCount()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Desktop_Shapefile_ShapeFile_GetFeaturesInView_Mapsui_Geometries_BoundingBox_System_Double_.md&amp;value=---%0Auid%3A%20Mapsui.Desktop.Shapefile.ShapeFile.GetFeaturesInView(Mapsui.Geometries.BoundingBox%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Desktop/Shapefile/ShapeFile.cs/#L865">View Source</a>
+  </span>
+  <a id="Mapsui_Desktop_Shapefile_ShapeFile_GetFeaturesInView_" data-uid="Mapsui.Desktop.Shapefile.ShapeFile.GetFeaturesInView*"></a>
+  <h4 id="Mapsui_Desktop_Shapefile_ShapeFile_GetFeaturesInView_Mapsui_Geometries_BoundingBox_System_Double_" data-uid="Mapsui.Desktop.Shapefile.ShapeFile.GetFeaturesInView(Mapsui.Geometries.BoundingBox,System.Double)">GetFeaturesInView(BoundingBox, Double)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IEnumerable&lt;IFeature&gt; GetFeaturesInView(BoundingBox box, double resolution)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Geometries.BoundingBox.html">BoundingBox</a></td>
+        <td><span class="parametername">box</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">resolution</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IEnumerable</span>&lt;<a class="xref" href="Mapsui.Providers.IFeature.html">IFeature</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Desktop_Shapefile_ShapeFile_GetGeometriesInView_Mapsui_Geometries_BoundingBox_.md&amp;value=---%0Auid%3A%20Mapsui.Desktop.Shapefile.ShapeFile.GetGeometriesInView(Mapsui.Geometries.BoundingBox)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Desktop/Shapefile/ShapeFile.cs/#L374">View Source</a>
+  </span>
+  <a id="Mapsui_Desktop_Shapefile_ShapeFile_GetGeometriesInView_" data-uid="Mapsui.Desktop.Shapefile.ShapeFile.GetGeometriesInView*"></a>
+  <h4 id="Mapsui_Desktop_Shapefile_ShapeFile_GetGeometriesInView_Mapsui_Geometries_BoundingBox_" data-uid="Mapsui.Desktop.Shapefile.ShapeFile.GetGeometriesInView(Mapsui.Geometries.BoundingBox)">GetGeometriesInView(BoundingBox)</h4>
+  <div class="markdown level1 summary"><p>Returns geometries whose bounding box intersects &apos;bbox&apos;</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Collection&lt;IGeometry&gt; GetGeometriesInView(BoundingBox bbox)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Geometries.BoundingBox.html">BoundingBox</a></td>
+        <td><span class="parametername">bbox</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Collection</span>&lt;<a class="xref" href="Mapsui.Geometries.IGeometry.html">IGeometry</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Mapsui_Desktop_Shapefile_ShapeFile_GetGeometriesInView_Mapsui_Geometries_BoundingBox__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Please note that this method doesn&apos;t guarantee that the geometries returned actually intersect &apos;bbox&apos;, but only
+that their boundingbox intersects &apos;bbox&apos;.</p>
+<p>This method is much faster than the QueryFeatures method, because intersection tests
+are performed on objects simplifed by their boundingbox, and using the Spatial Index.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Desktop_Shapefile_ShapeFile_GetGeometry_System_UInt32_.md&amp;value=---%0Auid%3A%20Mapsui.Desktop.Shapefile.ShapeFile.GetGeometry(System.UInt32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Desktop/Shapefile/ShapeFile.cs/#L410">View Source</a>
+  </span>
+  <a id="Mapsui_Desktop_Shapefile_ShapeFile_GetGeometry_" data-uid="Mapsui.Desktop.Shapefile.ShapeFile.GetGeometry*"></a>
+  <h4 id="Mapsui_Desktop_Shapefile_ShapeFile_GetGeometry_System_UInt32_" data-uid="Mapsui.Desktop.Shapefile.ShapeFile.GetGeometry(System.UInt32)">GetGeometry(UInt32)</h4>
+  <div class="markdown level1 summary"><p>Returns the geometry corresponding to the Object ID</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IGeometry GetGeometry(uint oid)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.UInt32</span></td>
+        <td><span class="parametername">oid</span></td>
+        <td><p>Object ID</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Geometries.IGeometry.html">IGeometry</a></td>
+        <td><p>geometry</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Desktop_Shapefile_ShapeFile_GetObjectIDsInView_Mapsui_Geometries_BoundingBox_.md&amp;value=---%0Auid%3A%20Mapsui.Desktop.Shapefile.ShapeFile.GetObjectIDsInView(Mapsui.Geometries.BoundingBox)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Desktop/Shapefile/ShapeFile.cs/#L397">View Source</a>
+  </span>
+  <a id="Mapsui_Desktop_Shapefile_ShapeFile_GetObjectIDsInView_" data-uid="Mapsui.Desktop.Shapefile.ShapeFile.GetObjectIDsInView*"></a>
+  <h4 id="Mapsui_Desktop_Shapefile_ShapeFile_GetObjectIDsInView_Mapsui_Geometries_BoundingBox_" data-uid="Mapsui.Desktop.Shapefile.ShapeFile.GetObjectIDsInView(Mapsui.Geometries.BoundingBox)">GetObjectIDsInView(BoundingBox)</h4>
+  <div class="markdown level1 summary"><p>Returns geometry Object IDs whose bounding box intersects &apos;bbox&apos;</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Collection&lt;uint&gt; GetObjectIDsInView(BoundingBox bbox)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Geometries.BoundingBox.html">BoundingBox</a></td>
+        <td><span class="parametername">bbox</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Collection</span>&lt;<span class="xref">System.UInt32</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Desktop_Shapefile_ShapeFile_RebuildSpatialIndex.md&amp;value=---%0Auid%3A%20Mapsui.Desktop.Shapefile.ShapeFile.RebuildSpatialIndex%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Desktop/Shapefile/ShapeFile.cs/#L661">View Source</a>
+  </span>
+  <a id="Mapsui_Desktop_Shapefile_ShapeFile_RebuildSpatialIndex_" data-uid="Mapsui.Desktop.Shapefile.ShapeFile.RebuildSpatialIndex*"></a>
+  <h4 id="Mapsui_Desktop_Shapefile_ShapeFile_RebuildSpatialIndex" data-uid="Mapsui.Desktop.Shapefile.ShapeFile.RebuildSpatialIndex">RebuildSpatialIndex()</h4>
+  <div class="markdown level1 summary"><p>Forces a rebuild of the spatial index. If the instance of the ShapeFile provider
+uses a file-based index the file is rewritten to disk.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RebuildSpatialIndex()</code></pre>
+  </div>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="Mapsui.Providers.IProvider.html">IProvider</a>
+  </div>
+  <div>
+      <span class="xref">IDisposable</span>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Desktop_Shapefile_ShapeFile.md&amp;value=---%0Auid%3A%20Mapsui.Desktop.Shapefile.ShapeFile%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Desktop/Shapefile/ShapeFile.cs/#L147" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

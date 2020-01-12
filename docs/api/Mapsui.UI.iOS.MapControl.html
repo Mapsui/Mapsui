@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class MapControl
    ">
-    <meta name="generator" content="docfx 2.40.12.0">
+    <meta name="generator" content="docfx 2.48.0.0">
     
     <link rel="shortcut icon" href="../images/favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -88,30 +88,1427 @@
   <div class="inheritance">
     <h5>Inheritance</h5>
     <div class="level0"><span class="xref">System.Object</span></div>
-    <div class="level1"><span class="xref">MapControl</span></div>
+    <div class="level1"><span class="xref">Foundation.NSObject</span></div>
+    <div class="level2"><span class="xref">UIKit.UIResponder</span></div>
+    <div class="level3"><span class="xref">UIKit.UIView</span></div>
+    <div class="level4"><span class="xref">MapControl</span></div>
   </div>
   <div classs="implements">
     <h5>Implements</h5>
-    <div><span class="xref">IMapControl</span></div>
-    <div><span class="xref">UIView</span></div>
+    <div><span class="xref">System.IEquatable</span>&lt;<span class="xref">Foundation.NSObject</span>&gt;</div>
+    <div><span class="xref">Foundation.INSObjectProtocol</span></div>
+    <div><span class="xref">UIKit.IUIPasteConfigurationSupporting</span></div>
+    <div><span class="xref">UIKit.IUIUserActivityRestoring</span></div>
+    <div><span class="xref">System.Collections.IEnumerable</span></div>
+    <div><span class="xref">Foundation.INSCoding</span></div>
+    <div><span class="xref">UIKit.IUIAccessibilityIdentification</span></div>
+    <div><span class="xref">UIKit.IUIAppearance</span></div>
+    <div><span class="xref">UIKit.IUIAppearanceContainer</span></div>
+    <div><span class="xref">UIKit.IUICoordinateSpace</span></div>
+    <div><span class="xref">UIKit.IUIDynamicItem</span></div>
+    <div><span class="xref">UIKit.IUIFocusItem</span></div>
+    <div><span class="xref">UIKit.IUIFocusEnvironment</span></div>
+    <div><span class="xref">UIKit.IUIFocusItemContainer</span></div>
+    <div><span class="xref">UIKit.IUILargeContentViewerItem</span></div>
+    <div><span class="xref">UIKit.IUITraitEnvironment</span></div>
+    <div><span class="xref">CoreAnimation.ICALayerDelegate</span></div>
+    <div><span class="xref">ObjCRuntime.INativeObject</span></div>
+    <div><span class="xref">System.IDisposable</span></div>
+    <div><a class="xref" href="Mapsui.UI.IMapControl.html">IMapControl</a></div>
+    <div><span class="xref">System.ComponentModel.INotifyPropertyChanged</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">UIKit.UIView.Add(UIKit.UIView)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.AddSubviews(UIKit.UIView[])</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.GetEnumerator()</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.BeginAnimations(System.String)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.Animate(System.Double, System.Action, System.Action)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.Animate(System.Double, System.Double, UIKit.UIViewAnimationOptions, System.Action, System.Action)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.Transition(UIKit.UIView, UIKit.UIView, System.Double, UIKit.UIViewAnimationOptions, System.Action)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.Transition(UIKit.UIView, System.Double, UIKit.UIViewAnimationOptions, System.Action, System.Action)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.AnimateAsync(System.Double, System.Action)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.Capture(System.Boolean)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.AccessibilityActivate()</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.ActionForLayer(CoreAnimation.CALayer, System.String)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.AddConstraint(UIKit.NSLayoutConstraint)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.AddConstraints(UIKit.NSLayoutConstraint[])</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.AddGestureRecognizer(UIKit.UIGestureRecognizer)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.AddInteraction(UIKit.IUIInteraction)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.AddKeyframeWithRelativeStartTime(System.Double, System.Double, System.Action)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.AddLayoutGuide(UIKit.UILayoutGuide)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.AddMotionEffect(UIKit.UIMotionEffect)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.AddSubview(UIKit.UIView)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.AlignmentRectForFrame(CoreGraphics.CGRect)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.Animate(System.Double, System.Action)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.AnimateKeyframes(System.Double, System.Double, UIKit.UIViewKeyframeAnimationOptions, System.Action, UIKit.UICompletionHandler)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.AnimateKeyframesAsync(System.Double, System.Double, UIKit.UIViewKeyframeAnimationOptions, System.Action)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.AnimateNotify(System.Double, System.Action, UIKit.UICompletionHandler)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.AnimateNotifyAsync(System.Double, System.Action)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.AnimateNotify(System.Double, System.Double, UIKit.UIViewAnimationOptions, System.Action, UIKit.UICompletionHandler)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.AnimateNotifyAsync(System.Double, System.Double, UIKit.UIViewAnimationOptions, System.Action)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.AnimateNotify(System.Double, System.Double, System.nfloat, System.nfloat, UIKit.UIViewAnimationOptions, System.Action, UIKit.UICompletionHandler)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.AnimateNotifyAsync(System.Double, System.Double, System.nfloat, System.nfloat, UIKit.UIViewAnimationOptions, System.Action)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.BeginAnimations(System.String, System.IntPtr)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.BringSubviewToFront(UIKit.UIView)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.CommitAnimations()</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.ContentCompressionResistancePriority(UIKit.UILayoutConstraintAxis)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.ContentHuggingPriority(UIKit.UILayoutConstraintAxis)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.ConvertPointFromCoordinateSpace(CoreGraphics.CGPoint, UIKit.IUICoordinateSpace)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.ConvertPointFromView(CoreGraphics.CGPoint, UIKit.UIView)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.ConvertPointToCoordinateSpace(CoreGraphics.CGPoint, UIKit.IUICoordinateSpace)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.ConvertPointToView(CoreGraphics.CGPoint, UIKit.UIView)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.ConvertRectFromCoordinateSpace(CoreGraphics.CGRect, UIKit.IUICoordinateSpace)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.ConvertRectFromView(CoreGraphics.CGRect, UIKit.UIView)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.ConvertRectToCoordinateSpace(CoreGraphics.CGRect, UIKit.IUICoordinateSpace)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.ConvertRectToView(CoreGraphics.CGRect, UIKit.UIView)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.DecodeRestorableState(Foundation.NSCoder)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.DidHintFocusMovement(UIKit.UIFocusMovementHint)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.DidUpdateFocus(UIKit.UIFocusUpdateContext, UIKit.UIFocusAnimationCoordinator)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.DisplayLayer(CoreAnimation.CALayer)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.Draw(CoreGraphics.CGRect)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.DrawLayer(CoreAnimation.CALayer, CoreGraphics.CGContext)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.DrawRect(CoreGraphics.CGRect, UIKit.UIViewPrintFormatter)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.DrawViewHierarchy(CoreGraphics.CGRect, System.Boolean)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.EncodeRestorableState(Foundation.NSCoder)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.EncodeTo(Foundation.NSCoder)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.ExchangeSubview(System.nint, System.nint)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.ExerciseAmbiguityInLayout()</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.FrameForAlignmentRect(CoreGraphics.CGRect)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.GestureRecognizerShouldBegin(UIKit.UIGestureRecognizer)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.GetConstraintsAffectingLayout(UIKit.UILayoutConstraintAxis)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.GetFocusItems(CoreGraphics.CGRect)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.GetUserInterfaceLayoutDirection(UIKit.UISemanticContentAttribute)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.GetUserInterfaceLayoutDirection(UIKit.UISemanticContentAttribute, UIKit.UIUserInterfaceLayoutDirection)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.HitTest(CoreGraphics.CGPoint, UIKit.UIEvent)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.InsertSubview(UIKit.UIView, System.nint)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.InsertSubviewAbove(UIKit.UIView, UIKit.UIView)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.InsertSubviewBelow(UIKit.UIView, UIKit.UIView)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.InvalidateIntrinsicContentSize()</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.IsDescendantOfView(UIKit.UIView)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.LayoutIfNeeded()</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.LayoutSublayersOfLayer(CoreAnimation.CALayer)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.LayoutSubviews()</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.ModifyAnimations(System.nfloat, System.Boolean, System.Action)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.MovedToSuperview()</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.MovedToWindow()</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.NeedsUpdateConstraints()</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.PerformSystemAnimation(UIKit.UISystemAnimation, UIKit.UIView[], UIKit.UIViewAnimationOptions, System.Action, UIKit.UICompletionHandler)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.PerformSystemAnimationAsync(UIKit.UISystemAnimation, UIKit.UIView[], UIKit.UIViewAnimationOptions, System.Action)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.PerformWithoutAnimation(System.Action)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.PointInside(CoreGraphics.CGPoint, UIKit.UIEvent)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.RemoveConstraint(UIKit.NSLayoutConstraint)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.RemoveConstraints(UIKit.NSLayoutConstraint[])</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.RemoveFromSuperview()</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.RemoveGestureRecognizer(UIKit.UIGestureRecognizer)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.RemoveInteraction(UIKit.IUIInteraction)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.RemoveLayoutGuide(UIKit.UILayoutGuide)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.RemoveMotionEffect(UIKit.UIMotionEffect)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.RequiresConstraintBasedLayout()</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.ResizableSnapshotView(CoreGraphics.CGRect, System.Boolean, UIKit.UIEdgeInsets)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.SafeAreaInsetsDidChange()</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.SendSubviewToBack(UIKit.UIView)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.SetAnimationBeginsFromCurrentState(System.Boolean)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.SetAnimationCurve(UIKit.UIViewAnimationCurve)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.SetAnimationDelay(System.Double)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.SetAnimationDelegate(Foundation.NSObject)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.SetAnimationDidStopSelector(ObjCRuntime.Selector)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.SetAnimationDuration(System.Double)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.SetAnimationRepeatAutoreverses(System.Boolean)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.SetAnimationRepeatCount(System.Single)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.SetAnimationStartDate(Foundation.NSDate)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.SetAnimationTransition(UIKit.UIViewAnimationTransition, UIKit.UIView, System.Boolean)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.SetAnimationWillStartSelector(ObjCRuntime.Selector)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.SetContentCompressionResistancePriority(System.Single, UIKit.UILayoutConstraintAxis)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.SetContentHuggingPriority(System.Single, UIKit.UILayoutConstraintAxis)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.SetNeedsDisplay()</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.SetNeedsDisplayInRect(CoreGraphics.CGRect)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.SetNeedsFocusUpdate()</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.SetNeedsLayout()</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.SetNeedsUpdateConstraints()</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.ShouldUpdateFocus(UIKit.UIFocusUpdateContext)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.SizeThatFits(CoreGraphics.CGSize)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.SizeToFit()</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.SnapshotView(System.Boolean)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.SubviewAdded(UIKit.UIView)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.SystemLayoutSizeFittingSize(CoreGraphics.CGSize)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.SystemLayoutSizeFittingSize(CoreGraphics.CGSize, System.Single, System.Single)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.TintColorDidChange()</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.TraitCollectionDidChange(UIKit.UITraitCollection)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.TransitionNotify(UIKit.UIView, UIKit.UIView, System.Double, UIKit.UIViewAnimationOptions, UIKit.UICompletionHandler)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.TransitionNotifyAsync(UIKit.UIView, UIKit.UIView, System.Double, UIKit.UIViewAnimationOptions)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.TransitionNotify(UIKit.UIView, System.Double, UIKit.UIViewAnimationOptions, System.Action, UIKit.UICompletionHandler)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.TransitionNotifyAsync(UIKit.UIView, System.Double, UIKit.UIViewAnimationOptions, System.Action)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.UpdateConstraints()</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.UpdateConstraintsIfNeeded()</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.UpdateFocusIfNeeded()</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.ViewWithTag(System.nint)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.WillDrawLayer(CoreAnimation.CALayer)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.WillMoveToSuperview(UIKit.UIView)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.WillMoveToWindow(UIKit.UIWindow)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.WillRemoveSubview(UIKit.UIView)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.GetAppearance&lt;T&gt;()</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.AppearanceWhenContainedIn(System.Type[])</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.GetAppearance(UIKit.UITraitCollection)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.GetAppearance(UIKit.UITraitCollection, System.Type[])</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.GetAppearance&lt;T&gt;(UIKit.UITraitCollection)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.GetAppearance&lt;T&gt;(UIKit.UITraitCollection, System.Type[])</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.ClassHandle</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.AccessibilityActivationPoint</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.AccessibilityAttributedHint</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.AccessibilityAttributedLabel</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.AccessibilityAttributedUserInputLabels</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.AccessibilityAttributedValue</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.AccessibilityElementsHidden</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.AccessibilityFrame</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.AccessibilityHint</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.AccessibilityIdentifier</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.AccessibilityIgnoresInvertColors</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.AccessibilityLabel</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.AccessibilityLanguage</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.AccessibilityNavigationStyle</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.AccessibilityPath</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.AccessibilityRespondsToUserInteraction</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.AccessibilityTextualContext</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.AccessibilityTraits</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.AccessibilityUserInputLabels</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.AccessibilityValue</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.AccessibilityViewIsModal</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.AlignmentRectInsets</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.Alpha</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.AnimationsEnabled</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.AutoresizingMask</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.AutosizesSubviews</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.BackgroundColor</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.BottomAnchor</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.Bounds</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.CanBecomeFocused</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.Center</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.CenterXAnchor</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.CenterYAnchor</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.ClearsContextBeforeDrawing</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.ClipsToBounds</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.CollisionBoundingPath</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.CollisionBoundsType</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.Constraints</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.ContentMode</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.ContentScaleFactor</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.ContentStretch</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.CoordinateSpace</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.DirectionalLayoutMargins</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.EffectiveUserInterfaceLayoutDirection</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.ExclusiveTouch</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.FirstBaselineAnchor</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.FocusItemContainer</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.Focused</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.GestureRecognizers</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.HasAmbiguousLayout</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.HeightAnchor</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.Hidden</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.InheritedAnimationDuration</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.InsetsLayoutMarginsFromSafeArea</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.Interactions</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.IntrinsicContentSize</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.IsAccessibilityElement</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.LargeContentImage</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.LargeContentImageInsets</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.LargeContentTitle</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.LastBaselineAnchor</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.Layer</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.LayoutGuides</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.LayoutMargins</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.LayoutMarginsGuide</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.LeadingAnchor</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.LeftAnchor</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.MaskView</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.MotionEffects</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.MultipleTouchEnabled</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.Opaque</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.OverrideUserInterfaceStyle</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.ParentFocusEnvironment</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.PreferredFocusEnvironments</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.PreferredFocusedView</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.PreservesSuperviewLayoutMargins</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.ReadableContentGuide</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.RestorationIdentifier</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.RightAnchor</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.SafeAreaInsets</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.SafeAreaLayoutGuide</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.ScalesLargeContentImage</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.SemanticContentAttribute</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.ShouldGroupAccessibilityChildren</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.ShowsLargeContentViewer</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.Subviews</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.Superview</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.Tag</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.TintAdjustmentMode</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.TintColor</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.TopAnchor</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.TrailingAnchor</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.TraitCollection</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.Transform</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.Transform3D</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.TranslatesAutoresizingMaskIntoConstraints</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.UserInteractionEnabled</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.ViewForBaselineLayout</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.ViewForFirstBaselineLayout</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.ViewForLastBaselineLayout</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.ViewPrintFormatter</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.WidthAnchor</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.Window</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.AnnouncementDidFinishNotification</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.AnnouncementNotification</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.AssistiveTechnologyKey</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.AssistiveTouchStatusDidChangeNotification</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.BoldTextStatusDidChangeNotification</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.ClosedCaptioningStatusDidChangeNotification</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.DarkerSystemColorsStatusDidChangeNotification</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.ElementFocusedNotification</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.FocusedElementKey</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.GrayscaleStatusDidChangeNotification</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.GuidedAccessStatusDidChangeNotification</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.HearingDevicePairedEarDidChangeNotification</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.InvertColorsStatusDidChangeNotification</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.LayoutChangedNotification</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.MonoAudioStatusDidChangeNotification</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.NoIntrinsicMetric</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.NotificationSwitchControlIdentifier</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.NotificationVoiceOverIdentifier</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.OnOffSwitchLabelsDidChangeNotification</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.PageScrolledNotification</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.PauseAssistiveTechnologyNotification</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.ReduceMotionStatusDidChangeNotification</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.ReduceTransparencyStatusDidChangeNotification</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.ResumeAssistiveTechnologyNotification</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.ScreenChangedNotification</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.ShakeToUndoDidChangeNotification</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.ShouldDifferentiateWithoutColorDidChangeNotification</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.SpeakScreenStatusDidChangeNotification</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.SpeakSelectionStatusDidChangeNotification</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.SpeechAttributeIpaNotation</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.SpeechAttributeLanguage</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.SpeechAttributePitch</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.SpeechAttributePunctuation</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.SpeechAttributeQueueAnnouncement</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.SpeechAttributeSpellOut</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.SwitchControlStatusDidChangeNotification</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.TextAttributeContext</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.TextAttributeCustom</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.TextAttributeHeadingLevel</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.TraitAdjustable</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.TraitAllowsDirectInteraction</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.TraitButton</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.TraitCausesPageTurn</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.TraitHeader</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.TraitImage</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.TraitKeyboardKey</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.TraitLink</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.TraitNone</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.TraitNotEnabled</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.TraitPlaysSound</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.TraitSearchField</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.TraitSelected</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.TraitStartsMediaSession</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.TraitStaticText</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.TraitSummaryElement</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.TraitTabBar</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.TraitUpdatesFrequently</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.UILayoutFittingCompressedSize</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.UILayoutFittingExpandedSize</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.UnfocusedElementKey</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.VideoAutoplayStatusDidChangeNotification</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.VoiceOverStatusChanged</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.VoiceOverStatusDidChangeNotification</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.Appearance</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.AnimationWillStart</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.AnimationWillEnd</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIResponder.AccessibilityDecrement()</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIResponder.AccessibilityElementDidBecomeFocused()</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIResponder.AccessibilityElementDidLoseFocus()</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIResponder.AccessibilityElementIsFocused()</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIResponder.AccessibilityIncrement()</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIResponder.AccessibilityPerformEscape()</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIResponder.AccessibilityPerformMagicTap()</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIResponder.AccessibilityScroll(UIKit.UIAccessibilityScrollDirection)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIResponder.BecomeFirstResponder()</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIResponder.BuildMenu(UIKit.IUIMenuBuilder)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIResponder.CanPaste(Foundation.NSItemProvider[])</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIResponder.CanPerform(ObjCRuntime.Selector, Foundation.NSObject)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIResponder.ClearTextInputContextIdentifier(Foundation.NSString)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIResponder.Copy(Foundation.NSObject)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIResponder.Cut(Foundation.NSObject)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIResponder.Delete(Foundation.NSObject)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIResponder.GetTargetForAction(ObjCRuntime.Selector, Foundation.NSObject)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIResponder.MakeTextWritingDirectionLeftToRight(Foundation.NSObject)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIResponder.MakeTextWritingDirectionRightToLeft(Foundation.NSObject)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIResponder.MotionBegan(UIKit.UIEventSubtype, UIKit.UIEvent)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIResponder.MotionCancelled(UIKit.UIEventSubtype, UIKit.UIEvent)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIResponder.MotionEnded(UIKit.UIEventSubtype, UIKit.UIEvent)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIResponder.Paste(Foundation.NSObject)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIResponder.Paste(Foundation.NSItemProvider[])</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIResponder.PressesBegan(Foundation.NSSet&lt;UIKit.UIPress&gt;, UIKit.UIPressesEvent)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIResponder.PressesCancelled(Foundation.NSSet&lt;UIKit.UIPress&gt;, UIKit.UIPressesEvent)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIResponder.PressesChanged(Foundation.NSSet&lt;UIKit.UIPress&gt;, UIKit.UIPressesEvent)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIResponder.PressesEnded(Foundation.NSSet&lt;UIKit.UIPress&gt;, UIKit.UIPressesEvent)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIResponder.ReloadInputViews()</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIResponder.RemoteControlReceived(UIKit.UIEvent)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIResponder.ResignFirstResponder()</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIResponder.RestoreUserActivityState(Foundation.NSUserActivity)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIResponder.Select(Foundation.NSObject)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIResponder.SelectAll(Foundation.NSObject)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIResponder.ToggleBoldface(Foundation.NSObject)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIResponder.ToggleItalics(Foundation.NSObject)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIResponder.ToggleUnderline(Foundation.NSObject)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIResponder.TouchesCancelled(Foundation.NSSet, UIKit.UIEvent)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIResponder.TouchesEstimatedPropertiesUpdated(Foundation.NSSet)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIResponder.UpdateTextAttributes(UIKit.UITextAttributesConversionHandler)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIResponder.UpdateUserActivityState(Foundation.NSUserActivity)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIResponder.ValidateCommand(UIKit.UICommand)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIResponder.AccessibilityAssistiveTechnologyFocusedIdentifiers</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIResponder.AccessibilityCustomActions</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIResponder.AccessibilityDragSourceDescriptors</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIResponder.AccessibilityDropPointDescriptors</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIResponder.ActivityItemsConfiguration</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIResponder.CanBecomeFirstResponder</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIResponder.CanResignFirstResponder</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIResponder.EditingInteractionConfiguration</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIResponder.InputAccessoryView</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIResponder.InputAccessoryViewController</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIResponder.InputAssistantItem</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIResponder.InputView</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIResponder.InputViewController</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIResponder.IsFirstResponder</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIResponder.KeyCommands</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIResponder.NextResponder</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIResponder.PasteConfiguration</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIResponder.TextInputContextIdentifier</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIResponder.TextInputMode</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIResponder.UndoManager</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIResponder.UserActivity</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.PlatformAssembly</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.MonoTouchAssembly</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.IsNewRefcountEnabled()</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.MarkDirty()</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.ConformsToProtocol(System.IntPtr)</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.DangerousRelease()</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.DangerousRetain()</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.DangerousAutorelease()</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.GetNativeField(System.String)</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.SetNativeField(System.String, Foundation.NSObject)</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.BeginInvokeOnMainThread(ObjCRuntime.Selector, Foundation.NSObject)</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.InvokeOnMainThread(ObjCRuntime.Selector, Foundation.NSObject)</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.BeginInvokeOnMainThread(System.Action)</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.InvokeOnMainThread(System.Action)</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.FromObject(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.SetValueForKeyPath(System.IntPtr, Foundation.NSString)</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.Equals(Foundation.NSObject)</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.ToString()</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.Invoke(System.Action, System.Double)</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.Invoke(System.Action, System.TimeSpan)</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.AddObserver(System.String, Foundation.NSKeyValueObservingOptions, System.Action&lt;Foundation.NSObservedChange&gt;)</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.AddObserver(Foundation.NSString, Foundation.NSKeyValueObservingOptions, System.Action&lt;Foundation.NSObservedChange&gt;)</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.Alloc(ObjCRuntime.Class)</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.Init()</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.InvokeInBackground(System.Action)</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.AddObserver(Foundation.NSObject, Foundation.NSString, Foundation.NSKeyValueObservingOptions, System.IntPtr)</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.AddObserver(Foundation.NSObject, System.String, Foundation.NSKeyValueObservingOptions, System.IntPtr)</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.AutomaticallyNotifiesObserversForKey(System.String)</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.AwakeFromNib()</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.CancelPreviousPerformRequest(Foundation.NSObject)</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.CancelPreviousPerformRequest(Foundation.NSObject, ObjCRuntime.Selector, Foundation.NSObject)</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.Copy()</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.DidChange(Foundation.NSKeyValueChange, Foundation.NSIndexSet, Foundation.NSString)</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.DidChange(Foundation.NSString, Foundation.NSKeyValueSetMutationKind, Foundation.NSSet)</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.DidChangeValue(System.String)</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.DoesNotRecognizeSelector(ObjCRuntime.Selector)</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.GetDictionaryOfValuesFromKeys(Foundation.NSString[])</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.GetKeyPathsForValuesAffecting(Foundation.NSString)</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.GetMethodForSelector(ObjCRuntime.Selector)</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.GetNativeHash()</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.IsEqual(Foundation.NSObject)</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.IsKindOfClass(ObjCRuntime.Class)</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.IsMemberOfClass(ObjCRuntime.Class)</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.MutableCopy()</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.ObserveValue(Foundation.NSString, Foundation.NSObject, Foundation.NSDictionary, System.IntPtr)</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.PerformSelector(ObjCRuntime.Selector, Foundation.NSObject, System.Double, Foundation.NSString[])</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.PerformSelector(ObjCRuntime.Selector, Foundation.NSObject, System.Double)</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.PerformSelector(ObjCRuntime.Selector, Foundation.NSThread, Foundation.NSObject, System.Boolean)</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.PerformSelector(ObjCRuntime.Selector, Foundation.NSThread, Foundation.NSObject, System.Boolean, Foundation.NSString[])</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.PerformSelector(ObjCRuntime.Selector)</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.PerformSelector(ObjCRuntime.Selector, Foundation.NSObject)</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.PerformSelector(ObjCRuntime.Selector, Foundation.NSObject, Foundation.NSObject)</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.PrepareForInterfaceBuilder()</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.RemoveObserver(Foundation.NSObject, Foundation.NSString, System.IntPtr)</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.RemoveObserver(Foundation.NSObject, System.String, System.IntPtr)</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.RemoveObserver(Foundation.NSObject, Foundation.NSString)</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.RemoveObserver(Foundation.NSObject, System.String)</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.RespondsToSelector(ObjCRuntime.Selector)</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.SetNilValueForKey(Foundation.NSString)</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.SetValueForKey(Foundation.NSObject, Foundation.NSString)</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.SetValueForKeyPath(Foundation.NSObject, Foundation.NSString)</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.SetValueForUndefinedKey(Foundation.NSObject, Foundation.NSString)</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.SetValuesForKeysWithDictionary(Foundation.NSDictionary)</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.ValueForKey(Foundation.NSString)</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.ValueForKeyPath(Foundation.NSString)</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.ValueForUndefinedKey(Foundation.NSString)</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.WillChange(Foundation.NSKeyValueChange, Foundation.NSIndexSet, Foundation.NSString)</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.WillChange(Foundation.NSString, Foundation.NSKeyValueSetMutationKind, Foundation.NSSet)</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.WillChangeValue(System.String)</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.IsDirectBinding</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.SuperHandle</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.Handle</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.Class</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.DebugDescription</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.Description</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.IsProxy</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.RetainCount</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.Self</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.Superclass</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.Zone</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.ChangeIndexesKey</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.ChangeKindKey</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.ChangeNewKey</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.ChangeNotificationIsPriorKey</span>
+    </div>
+    <div>
+      <span class="xref">Foundation.NSObject.ChangeOldKey</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Mapsui.UI.iOS.html">Mapsui.UI.iOS</a></h6>
   <h6><strong>Assembly</strong>: Mapsui.UI.iOS.dll</h6>
   <h5 id="Mapsui_UI_iOS_MapControl_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class MapControl : INotifyPropertyChanged, IMapControl, UIView</code></pre>
+    <pre><code class="lang-csharp hljs">[Register(&quot;MapControl&quot;)]
+public class MapControl : UIView, IEquatable&lt;NSObject&gt;, INSObjectProtocol, IUIPasteConfigurationSupporting, IUIUserActivityRestoring, IEnumerable, INSCoding, IUIAccessibilityIdentification, IUIAppearance, IUIAppearanceContainer, IUICoordinateSpace, IUIDynamicItem, IUIFocusItem, IUIFocusEnvironment, IUIFocusItemContainer, IUILargeContentViewerItem, IUITraitEnvironment, ICALayerDelegate, INativeObject, IDisposable, IMapControl, INotifyPropertyChanged</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_iOS_MapControl__ctor_CGRect_.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.%23ctor(CGRect)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_iOS_MapControl__ctor_CoreGraphics_CGRect_.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.%23ctor(CoreGraphics.CGRect)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.iOS/MapControl.cs/#L21">View Source</a>
   </span>
   <a id="Mapsui_UI_iOS_MapControl__ctor_" data-uid="Mapsui.UI.iOS.MapControl.#ctor*"></a>
-  <h4 id="Mapsui_UI_iOS_MapControl__ctor_CGRect_" data-uid="Mapsui.UI.iOS.MapControl.#ctor(CGRect)">MapControl(CGRect)</h4>
+  <h4 id="Mapsui_UI_iOS_MapControl__ctor_CoreGraphics_CGRect_" data-uid="Mapsui.UI.iOS.MapControl.#ctor(CoreGraphics.CGRect)">MapControl(CGRect)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -129,7 +1526,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">CGRect</span></td>
+        <td><span class="xref">CoreGraphics.CGRect</span></td>
         <td><span class="parametername">frame</span></td>
         <td></td>
       </tr>
@@ -137,18 +1534,19 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_iOS_MapControl__ctor_IntPtr_.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.%23ctor(IntPtr)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_iOS_MapControl__ctor_System_IntPtr_.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.%23ctor(System.IntPtr)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.iOS/MapControl.cs/#L27">View Source</a>
   </span>
   <a id="Mapsui_UI_iOS_MapControl__ctor_" data-uid="Mapsui.UI.iOS.MapControl.#ctor*"></a>
-  <h4 id="Mapsui_UI_iOS_MapControl__ctor_IntPtr_" data-uid="Mapsui.UI.iOS.MapControl.#ctor(IntPtr)">MapControl(IntPtr)</h4>
+  <h4 id="Mapsui_UI_iOS_MapControl__ctor_System_IntPtr_" data-uid="Mapsui.UI.iOS.MapControl.#ctor(System.IntPtr)">MapControl(IntPtr)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public MapControl(IntPtr handle)</code></pre>
+    <pre><code class="lang-csharp hljs">[Preserve]
+public MapControl(IntPtr handle)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -161,7 +1559,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">IntPtr</span></td>
+        <td><span class="xref">System.IntPtr</span></td>
         <td><span class="parametername">handle</span></td>
         <td></td>
       </tr>
@@ -194,11 +1592,13 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">CGRect</span></td>
+        <td><span class="xref">CoreGraphics.CGRect</span></td>
         <td></td>
       </tr>
     </tbody>
   </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">UIKit.UIView.Frame</span></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_Map.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.Map%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -225,7 +1625,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Map</span></td>
+        <td><a class="xref" href="Mapsui.Map.html">Map</a></td>
         <td></td>
       </tr>
     </tbody>
@@ -256,7 +1656,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">INavigator</span></td>
+        <td><a class="xref" href="Mapsui.INavigator.html">INavigator</a></td>
         <td></td>
       </tr>
     </tbody>
@@ -317,7 +1717,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">IRenderer</span></td>
+        <td><a class="xref" href="Mapsui.Rendering.IRenderer.html">IRenderer</a></td>
         <td></td>
       </tr>
     </tbody>
@@ -410,7 +1810,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">IReadOnlyViewport</span></td>
+        <td><a class="xref" href="Mapsui.IReadOnlyViewport.html">IReadOnlyViewport</a></td>
         <td></td>
       </tr>
     </tbody>
@@ -495,16 +1895,19 @@
       </tr>
     </tbody>
   </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">UIKit.UIView.Dispose(System.Boolean)</span></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_GetMapInfo_Point_System_Int32_.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.GetMapInfo(Point%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_GetMapInfo_Mapsui_Geometries_Point_System_Int32_.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.GetMapInfo(Mapsui.Geometries.Point%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L344">View Source</a>
   </span>
   <a id="Mapsui_UI_iOS_MapControl_GetMapInfo_" data-uid="Mapsui.UI.iOS.MapControl.GetMapInfo*"></a>
-  <h4 id="Mapsui_UI_iOS_MapControl_GetMapInfo_Point_System_Int32_" data-uid="Mapsui.UI.iOS.MapControl.GetMapInfo(Point,System.Int32)">GetMapInfo(Point, Int32)</h4>
-  <div class="markdown level1 summary"></div>
+  <h4 id="Mapsui_UI_iOS_MapControl_GetMapInfo_Mapsui_Geometries_Point_System_Int32_" data-uid="Mapsui.UI.iOS.MapControl.GetMapInfo(Mapsui.Geometries.Point,System.Int32)">GetMapInfo(Point, Int32)</h4>
+  <div class="markdown level1 summary"><p>Check, if a feature at a given screen position is hit</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -521,14 +1924,16 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Point</span></td>
+        <td><a class="xref" href="Mapsui.Geometries.Point.html">Point</a></td>
         <td><span class="parametername">screenPosition</span></td>
-        <td></td>
+        <td><p>Screen position to check for widgets and features</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.Int32</span></td>
         <td><span class="parametername">margin</span></td>
-        <td></td>
+        <td><p>An optional extra margin around the feature to enlarge the hit area.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -542,20 +1947,20 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">MapInfo</span></td>
+        <td><a class="xref" href="Mapsui.UI.MapInfo.html">MapInfo</a></td>
         <td></td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_GetSnapshot_IEnumerable_ILayer__.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.GetSnapshot(IEnumerable%7BILayer%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_GetSnapshot_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.GetSnapshot(System.Collections.Generic.IEnumerable%7BMapsui.Layers.ILayer%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L351">View Source</a>
   </span>
   <a id="Mapsui_UI_iOS_MapControl_GetSnapshot_" data-uid="Mapsui.UI.iOS.MapControl.GetSnapshot*"></a>
-  <h4 id="Mapsui_UI_iOS_MapControl_GetSnapshot_IEnumerable_ILayer__" data-uid="Mapsui.UI.iOS.MapControl.GetSnapshot(IEnumerable{ILayer})">GetSnapshot(IEnumerable&lt;ILayer&gt;)</h4>
+  <h4 id="Mapsui_UI_iOS_MapControl_GetSnapshot_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__" data-uid="Mapsui.UI.iOS.MapControl.GetSnapshot(System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})">GetSnapshot(IEnumerable&lt;ILayer&gt;)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -573,7 +1978,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">IEnumerable</span>&lt;<span class="xref">ILayer</span>&gt;</td>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Mapsui.Layers.ILayer.html">ILayer</a>&gt;</td>
         <td><span class="parametername">layers</span></td>
         <td></td>
       </tr>
@@ -624,6 +2029,8 @@
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public override void LayoutMarginsDidChange()</code></pre>
   </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">UIKit.UIView.LayoutMarginsDidChange()</span></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_OnPropertyChanged_System_String_.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.OnPropertyChanged(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -737,14 +2144,15 @@
   </div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_ToDeviceIndependentUnits_Point_.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.ToDeviceIndependentUnits(Point)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_ToDeviceIndependentUnits_Mapsui_Geometries_Point_.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.ToDeviceIndependentUnits(Mapsui.Geometries.Point)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L304">View Source</a>
   </span>
   <a id="Mapsui_UI_iOS_MapControl_ToDeviceIndependentUnits_" data-uid="Mapsui.UI.iOS.MapControl.ToDeviceIndependentUnits*"></a>
-  <h4 id="Mapsui_UI_iOS_MapControl_ToDeviceIndependentUnits_Point_" data-uid="Mapsui.UI.iOS.MapControl.ToDeviceIndependentUnits(Point)">ToDeviceIndependentUnits(Point)</h4>
-  <div class="markdown level1 summary"></div>
+  <h4 id="Mapsui_UI_iOS_MapControl_ToDeviceIndependentUnits_Mapsui_Geometries_Point_" data-uid="Mapsui.UI.iOS.MapControl.ToDeviceIndependentUnits(Mapsui.Geometries.Point)">ToDeviceIndependentUnits(Point)</h4>
+  <div class="markdown level1 summary"><p>Converts coordinates in pixels to device independent units (or DIP or DP).</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -761,9 +2169,10 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Point</span></td>
+        <td><a class="xref" href="Mapsui.Geometries.Point.html">Point</a></td>
         <td><span class="parametername">coordinateInPixels</span></td>
-        <td></td>
+        <td><p>Coordinate in pixels</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -777,21 +2186,23 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Point</span></td>
-        <td></td>
+        <td><a class="xref" href="Mapsui.Geometries.Point.html">Point</a></td>
+        <td><p>Coordinate in device independent units (or DIP or DP)</p>
+</td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_ToPixels_Point_.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.ToPixels(Point)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_ToPixels_Mapsui_Geometries_Point_.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.ToPixels(Mapsui.Geometries.Point)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L296">View Source</a>
   </span>
   <a id="Mapsui_UI_iOS_MapControl_ToPixels_" data-uid="Mapsui.UI.iOS.MapControl.ToPixels*"></a>
-  <h4 id="Mapsui_UI_iOS_MapControl_ToPixels_Point_" data-uid="Mapsui.UI.iOS.MapControl.ToPixels(Point)">ToPixels(Point)</h4>
-  <div class="markdown level1 summary"></div>
+  <h4 id="Mapsui_UI_iOS_MapControl_ToPixels_Mapsui_Geometries_Point_" data-uid="Mapsui.UI.iOS.MapControl.ToPixels(Mapsui.Geometries.Point)">ToPixels(Point)</h4>
+  <div class="markdown level1 summary"><p>Converts coordinates in device independent units (or DIP or DP) to pixels.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -808,9 +2219,10 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Point</span></td>
+        <td><a class="xref" href="Mapsui.Geometries.Point.html">Point</a></td>
         <td><span class="parametername">coordinateInDeviceIndependentUnits</span></td>
-        <td></td>
+        <td><p>Coordinate in device independent units (or DIP or DP)</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -824,20 +2236,21 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Point</span></td>
-        <td></td>
+        <td><a class="xref" href="Mapsui.Geometries.Point.html">Point</a></td>
+        <td><p>Coordinate in pixels</p>
+</td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_TouchesBegan_NSSet_UIEvent_.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.TouchesBegan(NSSet%2CUIEvent)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_TouchesBegan_Foundation_NSSet_UIKit_UIEvent_.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.TouchesBegan(Foundation.NSSet%2CUIKit.UIEvent)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.iOS/MapControl.cs/#L96">View Source</a>
   </span>
   <a id="Mapsui_UI_iOS_MapControl_TouchesBegan_" data-uid="Mapsui.UI.iOS.MapControl.TouchesBegan*"></a>
-  <h4 id="Mapsui_UI_iOS_MapControl_TouchesBegan_NSSet_UIEvent_" data-uid="Mapsui.UI.iOS.MapControl.TouchesBegan(NSSet,UIEvent)">TouchesBegan(NSSet, UIEvent)</h4>
+  <h4 id="Mapsui_UI_iOS_MapControl_TouchesBegan_Foundation_NSSet_UIKit_UIEvent_" data-uid="Mapsui.UI.iOS.MapControl.TouchesBegan(Foundation.NSSet,UIKit.UIEvent)">TouchesBegan(NSSet, UIEvent)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -855,26 +2268,28 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">NSSet</span></td>
+        <td><span class="xref">Foundation.NSSet</span></td>
         <td><span class="parametername">touches</span></td>
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">UIEvent</span></td>
+        <td><span class="xref">UIKit.UIEvent</span></td>
         <td><span class="parametername">evt</span></td>
         <td></td>
       </tr>
     </tbody>
   </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">UIKit.UIResponder.TouchesBegan(Foundation.NSSet, UIKit.UIEvent)</span></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_TouchesEnded_NSSet_UIEvent_.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.TouchesEnded(NSSet%2CUIEvent)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_TouchesEnded_Foundation_NSSet_UIKit_UIEvent_.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.TouchesEnded(Foundation.NSSet%2CUIKit.UIEvent)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.iOS/MapControl.cs/#L159">View Source</a>
   </span>
   <a id="Mapsui_UI_iOS_MapControl_TouchesEnded_" data-uid="Mapsui.UI.iOS.MapControl.TouchesEnded*"></a>
-  <h4 id="Mapsui_UI_iOS_MapControl_TouchesEnded_NSSet_UIEvent_" data-uid="Mapsui.UI.iOS.MapControl.TouchesEnded(NSSet,UIEvent)">TouchesEnded(NSSet, UIEvent)</h4>
+  <h4 id="Mapsui_UI_iOS_MapControl_TouchesEnded_Foundation_NSSet_UIKit_UIEvent_" data-uid="Mapsui.UI.iOS.MapControl.TouchesEnded(Foundation.NSSet,UIKit.UIEvent)">TouchesEnded(NSSet, UIEvent)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -892,26 +2307,28 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">NSSet</span></td>
+        <td><span class="xref">Foundation.NSSet</span></td>
         <td><span class="parametername">touches</span></td>
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">UIEvent</span></td>
+        <td><span class="xref">UIKit.UIEvent</span></td>
         <td><span class="parametername">e</span></td>
         <td></td>
       </tr>
     </tbody>
   </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">UIKit.UIResponder.TouchesEnded(Foundation.NSSet, UIKit.UIEvent)</span></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_TouchesMoved_NSSet_UIEvent_.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.TouchesMoved(NSSet%2CUIEvent)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_TouchesMoved_Foundation_NSSet_UIKit_UIEvent_.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.TouchesMoved(Foundation.NSSet%2CUIKit.UIEvent)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.iOS/MapControl.cs/#L103">View Source</a>
   </span>
   <a id="Mapsui_UI_iOS_MapControl_TouchesMoved_" data-uid="Mapsui.UI.iOS.MapControl.TouchesMoved*"></a>
-  <h4 id="Mapsui_UI_iOS_MapControl_TouchesMoved_NSSet_UIEvent_" data-uid="Mapsui.UI.iOS.MapControl.TouchesMoved(NSSet,UIEvent)">TouchesMoved(NSSet, UIEvent)</h4>
+  <h4 id="Mapsui_UI_iOS_MapControl_TouchesMoved_Foundation_NSSet_UIKit_UIEvent_" data-uid="Mapsui.UI.iOS.MapControl.TouchesMoved(Foundation.NSSet,UIKit.UIEvent)">TouchesMoved(NSSet, UIEvent)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -929,17 +2346,19 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">NSSet</span></td>
+        <td><span class="xref">Foundation.NSSet</span></td>
         <td><span class="parametername">touches</span></td>
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">UIEvent</span></td>
+        <td><span class="xref">UIKit.UIEvent</span></td>
         <td><span class="parametername">evt</span></td>
         <td></td>
       </tr>
     </tbody>
   </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">UIKit.UIResponder.TouchesMoved(Foundation.NSSet, UIKit.UIEvent)</span></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_Unsubscribe.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.Unsubscribe%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -983,7 +2402,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">EventHandler</span>&lt;<span class="xref">MapInfoEventArgs</span>&gt;</td>
+        <td><span class="xref">System.EventHandler</span>&lt;<a class="xref" href="Mapsui.UI.MapInfoEventArgs.html">MapInfoEventArgs</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -1013,7 +2432,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">PropertyChangedEventHandler</span></td>
+        <td><span class="xref">System.ComponentModel.PropertyChangedEventHandler</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -1043,17 +2462,74 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">EventHandler</span></td>
+        <td><span class="xref">System.EventHandler</span></td>
         <td></td>
       </tr>
     </tbody>
   </table>
   <h3 id="implements">Implements</h3>
   <div>
-      <span class="xref">IMapControl</span>
+      <span class="xref">System.IEquatable&lt;T&gt;</span>
   </div>
   <div>
-      <span class="xref">UIView</span>
+      <span class="xref">Foundation.INSObjectProtocol</span>
+  </div>
+  <div>
+      <span class="xref">UIKit.IUIPasteConfigurationSupporting</span>
+  </div>
+  <div>
+      <span class="xref">UIKit.IUIUserActivityRestoring</span>
+  </div>
+  <div>
+      <span class="xref">System.Collections.IEnumerable</span>
+  </div>
+  <div>
+      <span class="xref">Foundation.INSCoding</span>
+  </div>
+  <div>
+      <span class="xref">UIKit.IUIAccessibilityIdentification</span>
+  </div>
+  <div>
+      <span class="xref">UIKit.IUIAppearance</span>
+  </div>
+  <div>
+      <span class="xref">UIKit.IUIAppearanceContainer</span>
+  </div>
+  <div>
+      <span class="xref">UIKit.IUICoordinateSpace</span>
+  </div>
+  <div>
+      <span class="xref">UIKit.IUIDynamicItem</span>
+  </div>
+  <div>
+      <span class="xref">UIKit.IUIFocusItem</span>
+  </div>
+  <div>
+      <span class="xref">UIKit.IUIFocusEnvironment</span>
+  </div>
+  <div>
+      <span class="xref">UIKit.IUIFocusItemContainer</span>
+  </div>
+  <div>
+      <span class="xref">UIKit.IUILargeContentViewerItem</span>
+  </div>
+  <div>
+      <span class="xref">UIKit.IUITraitEnvironment</span>
+  </div>
+  <div>
+      <span class="xref">CoreAnimation.ICALayerDelegate</span>
+  </div>
+  <div>
+      <span class="xref">ObjCRuntime.INativeObject</span>
+  </div>
+  <div>
+      <span class="xref">System.IDisposable</span>
+  </div>
+  <div>
+      <a class="xref" href="Mapsui.UI.IMapControl.html">IMapControl</a>
+  </div>
+  <div>
+      <span class="xref">System.ComponentModel.INotifyPropertyChanged</span>
   </div>
 </article>
           </div>
