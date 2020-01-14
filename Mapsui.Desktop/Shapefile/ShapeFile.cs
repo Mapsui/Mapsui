@@ -862,7 +862,7 @@ namespace Mapsui.Desktop.Shapefile
         }
 
         
-        public IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
+        public IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution, bool anywayUpdate = false)
         {
             lock (_syncRoot)
             {

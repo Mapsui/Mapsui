@@ -30,7 +30,7 @@ namespace Mapsui.Providers
         /// </summary>
         string CRS { get; set; } // todo: Remove the set
 
-        IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution);
+        IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution, bool anywayUpdate = false);
 
         /// <summary>
         /// <see cref="Mapsui.Geometries.BoundingBox"/> of dataset

@@ -232,7 +232,7 @@ namespace Mapsui.Layers
 
         /// <inheritdoc />
 
-        public abstract void RefreshData(BoundingBox extent, double resolution, bool majorChange);
+        public abstract void RefreshData(BoundingBox extent, double resolution, bool majorChange, bool anywayUpdate = false);
 
         /// <inheritdoc />
         public virtual bool? IsCrsSupported(string crs)

@@ -50,7 +50,7 @@ namespace Mapsui.Samples.Common.Maps
         {
             private readonly Random _random = new Random(0);
 
-            public override IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
+            public override IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution, bool anywayUpdate = false)
             {
                 var features = new List<IFeature>();
                 var geometries = RandomPointHelper.GenerateRandomPoints(box, 10, _random.Next()).ToList();

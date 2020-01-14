@@ -18,7 +18,7 @@ namespace Mapsui.UI.Objects
             Collection = collection;
         }
 
-        public IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
+        public IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution, bool anywayUpdate = false)
         {
             var list = new List<IFeature>();
 

@@ -121,7 +121,7 @@ namespace Mapsui.Layers
             // not implemented for ImageLayer
         }
 
-        public override void RefreshData(BoundingBox extent, double resolution, bool majorChange)
+        public override void RefreshData(BoundingBox extent, double resolution, bool majorChange, bool anywayUpdate = false)
         {
             if (!Enabled) return;
             if (DataSource == null) return;

@@ -89,7 +89,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
             set { _crs = value; }
         }
 
-        public IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
+        public IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution, bool anywayUpdate = false)
         {
             //If there are no layers (probably not initialised) return nothing
             if (ArcGisDynamicCapabilities.layers == null)

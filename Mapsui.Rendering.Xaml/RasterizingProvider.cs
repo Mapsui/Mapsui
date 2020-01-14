@@ -14,7 +14,7 @@ namespace Mapsui.Rendering.Xaml
     {
         public string CRS { get; set; }
 
-        public IEnumerable<IFeature> GetFeaturesInView(BoundingBox extent, double resolution)
+        public IEnumerable<IFeature> GetFeaturesInView(BoundingBox extent, double resolution, bool anywayUpdate = false)
         {
             throw new NotImplementedException();
         }

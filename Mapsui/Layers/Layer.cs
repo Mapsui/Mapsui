@@ -98,9 +98,10 @@ namespace Mapsui.Layers
             OnDataChanged(args);
         }
 
-        private void DelayedFetch(BoundingBox extent, double resolution)
+        private void DelayedFetch(BoundingBox extent, double resolution, bool anywayUpdate = false)
         {
             _fetchDispatcher.SetViewport(extent, resolution);
+            _fetchDispatcher.SetAnywareUpdate(anywayUpdate);
             _fetchMachine.Start();
         }
         
@@ -138,13 +139,13 @@ namespace Mapsui.Layers
         }
 
         /// <inheritdoc />
-        public override void RefreshData(BoundingBox extent, double resolution, bool majorChange)
+        public override void RefreshData(BoundingBox extent, double resolution, bool majorChange, bool anywayUpdate = false)
         {
             if (!Enabled) return;
             if (DataSource == null) return;
             if (!majorChange) return;
 
-            _delayer.ExecuteDelayed(() => DelayedFetch(extent.Copy(), resolution), FetchingPostponedInMilliseconds);
+            _delayer.ExecuteDelayed(() => DelayedFetch(extent.Copy(), resolution, anywayUpdate), FetchingPostponedInMilliseconds);
         }
 
         /// <inheritdoc />

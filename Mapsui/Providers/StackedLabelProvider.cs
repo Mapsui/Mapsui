@@ -29,9 +29,9 @@ namespace Mapsui.Providers
 
         private readonly Pen _rectangleLine;
 
-        public IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
+        public IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution, bool anywayUpdate = false)
         {
-            var features = _provider.GetFeaturesInView(box, resolution);
+            var features = _provider.GetFeaturesInView(box, resolution, anywayUpdate);
             return GetFeaturesInView(resolution, _labelStyle, features, _rectangleLine, _rectangleFill);
         }
 

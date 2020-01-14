@@ -18,6 +18,7 @@ namespace Mapsui.Fetcher
         private readonly MemoryProvider _cache;
         private readonly Transformer _transformer;
         private bool _modified;
+        private bool _anywareUpdate;
 
         // todo: Check whether busy and modified state are set correctly in all stages
 
@@ -32,16 +33,16 @@ namespace Mapsui.Fetcher
             if (!_modified) return false;
             if (DataSource == null) return false; 
 
-            method = () => FetchOnThread(_extent.Copy(), _resolution);
+            method = () => FetchOnThread(_extent.Copy(), _resolution, _anywareUpdate);
             _modified = false;
             return true;
         }
 
-        public void FetchOnThread(BoundingBox extent, double resolution)
+        public void FetchOnThread(BoundingBox extent, double resolution, bool anywayUpdate = false)
         {
             try
             {
-                var features = DataSource.GetFeaturesInView(extent, resolution).ToList();
+                var features = DataSource.GetFeaturesInView(extent, resolution, anywayUpdate).ToList();
                 FetchCompleted(features, null);
             }
             catch (Exception exception)
@@ -80,6 +81,11 @@ namespace Mapsui.Fetcher
                 _modified = true;
                 Busy = true;
             }
+        }
+
+        public void SetAnywareUpdate(bool value)
+        {
+            _anywareUpdate = value;
         }
 
         public IProvider DataSource { get; set; }
