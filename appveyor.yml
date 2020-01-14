@@ -6,7 +6,7 @@ skip_commits:
     - docfx/**/*
     - logo/**/*
     - '**/*.md'
-image: Visual Studio 2017
+image: Visual Studio 2019
 assembly_info:
   patch: true
   file: '**\AssemblyInfo.*'
