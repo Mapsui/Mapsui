@@ -2,6 +2,7 @@
 ## [Quickstart WPF](getting-started-wpf.md)
 ## [Quickstart Android](getting-started-android.md)
 ## [Samples](samples.md)
+## [How to work with Mapsui](How-to-work-with-Mapsui.md)
 ## [Roadmap](Roadmap.md)
 ## [Frequently Asked Questions](faq.md)
 ## [Mapsui 2.0](Mapsui-2.0.md)
