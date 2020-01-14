@@ -19,15 +19,6 @@ If you encounter breaking changes please take a look at the [release notes](http
 ## Logging
 In Mapsui errors and warnings are logged to one static class. By listening to this with an event handler you can get some debugging information. 
 
+```csharp
+Mapsui.Logging.Logger.LogDelegate += (level, message, ex) => // todo: Write to your own logger;
 ```
-..
-// Logger is a static class that can be accessed when you add the Mapsui core dll.
-Logger.LogDelegate += LogMethod;
-..
-
-
-        private void LogMethod(LogLevel logLevel, string message, Exception exception)
-        {
-            // todo: write to your own logger
-        }
-``` 
