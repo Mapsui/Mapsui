@@ -257,8 +257,14 @@ namespace Mapsui.UI.Forms
 
         public void RefreshGraphics()
         {
-            // Could this be null before Home is called? If so we should change the logic.
-            if (GRContext != null) RunOnUIThread(InvalidateSurface);
+            if (GRContext == null)
+            {
+                // Could this be null before Home is called? If so we should change the logic.
+                Logging.Logger.Log(Logging.LogLevel.Warning, "Refresh can not be called because GRContext is null");
+                return;
+            }
+
+            RunOnUIThread(InvalidateSurface);
         }
 
         /// <summary>
