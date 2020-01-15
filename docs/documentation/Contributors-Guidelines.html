@@ -88,6 +88,13 @@
 <p>Mapsui has some older code in it. Don&#39;t despair. We continuously improve or replace older code. It is a gradual process. We do it step by step. We have made major changes in the past; From WinForms to WPF, From GDI+ to SL rendering. From .NET Framework to PCL. From WPF rendering to SkiaSharp. We are working toward the next steps: From PCL to .NET Standard, support for full Xamarin.Forms. Taking these steps will cause breaking changes. We should be aware of this and clearly communicate it with the user. We should use <a href="http://semver.org">semver</a> (although we still violate it now and then).</p>
 <h2 id="issue-first">Issue first</h2>
 <p>Submit an issue before a pull request co we can discuss the possible solutions to the problem.</p>
+<h2 id="all-checks-should-be-green-all-the-time">All checks should be green all the time</h2>
+<p>At all times:</p>
+<ul>
+<li>All projects should compile</li>
+<li>The unit tests should succeed</li>
+<li>All samples should run properly</li>
+</ul>
 <h2 id="use-resharper">Use ReSharper</h2>
 <p>Mapsui uses the resharper team settings by committing the DotSettings to git, so that all developers can use the same settings. We should have zero warnings. Suggestions should be treated as actual suggestions, use them only when you think it improves the code.</p>
 </article>
