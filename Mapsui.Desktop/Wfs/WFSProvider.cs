@@ -805,10 +805,10 @@ namespace Mapsui.Providers.Wfs
             }
         }
         
-        public IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
+        public IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution, bool anywayUpdate = false)
         {
             return ExecuteIntersectionQuery(box);
         }
                 
-            }
+    }
 }

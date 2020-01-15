@@ -104,7 +104,7 @@ namespace Mapsui.Providers
             }
         }
 
-        public IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
+        public IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution, bool anywayUpdate = false)
         {
             return FetchTiles(box, resolution);
         }

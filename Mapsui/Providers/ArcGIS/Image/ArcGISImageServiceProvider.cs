@@ -94,7 +94,7 @@ namespace Mapsui.Providers.ArcGIS.Image
             set { _timeOut = value; }
         }
 
-        public System.Collections.Generic.IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
+        public System.Collections.Generic.IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution, bool anywayUpdate = false)
         {
             var features = new Features();
             IRaster raster = null;

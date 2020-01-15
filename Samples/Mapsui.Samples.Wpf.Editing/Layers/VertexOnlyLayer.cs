@@ -34,7 +34,7 @@ namespace Mapsui.Samples.Wpf.Editing.Layers
             }
         }
 
-        public override void RefreshData(BoundingBox extent, double resolution, bool majorChange)
+        public override void RefreshData(BoundingBox extent, double resolution, bool majorChange, bool anywayUpdate = false)
         {
             OnDataChanged(new DataChangedEventArgs());
         }

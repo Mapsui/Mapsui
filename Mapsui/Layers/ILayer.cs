@@ -144,8 +144,9 @@ namespace Mapsui.Layers
         /// If true an implementation should always refresh it's data. If false (minorChange) the
         /// implemenatation could ignore it. Example: During dragging a map a WMS layer would not want
         /// to fetch data, only on the drag end.
+        /// <param name="anywayUpdate">if true - update the data anyway</param>
         /// </param>
-        void RefreshData(BoundingBox extent, double resolution, bool majorChange);
+        void RefreshData(BoundingBox extent, double resolution, bool majorChange, bool anywayUpdate = false);
 
         /// <summary>
         /// Points that this layer is active and can be show on the canvas

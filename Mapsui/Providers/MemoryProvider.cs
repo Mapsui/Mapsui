@@ -150,7 +150,7 @@ namespace Mapsui.Providers
         {
         }
 
-        public virtual IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
+        public virtual IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution, bool anywayUpdate = false)
         {
             if (box == null) throw new ArgumentNullException(nameof(box));
 

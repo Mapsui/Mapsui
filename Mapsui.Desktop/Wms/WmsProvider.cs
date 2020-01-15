@@ -480,7 +480,7 @@ namespace Mapsui.Desktop.Wms
             //nothing to dispose
         }
 
-        public IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
+        public IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution, bool anywayUpdate = false)
         {
             var features = new Features();
             IRaster raster = null;
