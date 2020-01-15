@@ -13,7 +13,7 @@ Mapsui has some older code in it. Don't despair. We continuously improve or repl
 ## Issue first
 Submit an issue before a pull request co we can discuss the possible solutions to the problem.
 
-## All checks shoudl be green all the time
+## All checks should be green all the time
 At all times:
 - All projects should compile
 - The unit tests should succeed
