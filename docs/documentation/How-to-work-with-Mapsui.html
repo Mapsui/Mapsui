@@ -79,31 +79,13 @@
             <article class="content wrap" id="_content" data-uid="">
 <h1 id="how-to-work-with-mapsui">How to Work with Mapsui</h1>
 
-<p>Mapsui is growing towards a stable component. At all times:</p>
-<ul>
-<li>All projects should compile</li>
-<li>The unit tests should succeed</li>
-<li>All samples should run properly</li>
-</ul>
-<p>If this is not the case please report it. It will be fixed.</p>
-<p>Please use the nuget packages to build applications with Mapsui:</p>
-<p><code>Install-Package Mapsui</code></p>
-<h2 id="extension-of-mapsui">Extension of Mapsui</h2>
+<h2 id="logging">Logging</h2>
+<p>Sooner or later there comes a time where you are struggling with a bug. You can save yourself some time by writing the Mapsui log events to your own log from the start of your project. In Mapsui errors and warnings are logged to a static class which has an event handler you can listen to. </p>
+<pre><code class="lang-csharp">Mapsui.Logging.Logger.LogDelegate += (level, message, ex) =&gt; // todo: Write to your own logger;
+</code></pre><h2 id="extension-of-mapsui">Extension of Mapsui</h2>
 <p>If you need more functionality from the MapControl you could create your own version of the MapControl by making a copy. You can customize these for your own needs. While it is also possible to extend functionality by adding your own ILayer or IProvider implementation.</p>
 <p>If you encounter breaking changes please take a look at the <a href="https://github.com/pauldendulk/Mapsui/releases">release notes</a>. You can check the related commits by clicking the &#39;x commits to masters since this release&#39; of the <strong>previous</strong> release (a bit odd but that is how github works).</p>
-<h2 id="logging">Logging</h2>
-<p>In Mapsui errors and warnings are logged to one static class. By listening to this with an event handler you can get some debugging information. </p>
-<pre><code>..
-// Logger is a static class that can be accessed when you add the Mapsui core dll.
-Logger.LogDelegate += LogMethod;
-..
-
-
-        private void LogMethod(LogLevel logLevel, string message, Exception exception)
-        {
-            // todo: write to your own logger
-        }
-</code></pre></article>
+</article>
           </div>
           
           <div class="hidden-sm col-md-2" role="complementary">

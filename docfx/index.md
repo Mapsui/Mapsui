@@ -10,3 +10,7 @@ We are delightly with our first gold sponsor Sebastian Kruze, who has also contr
 
 [Sebastian Kruse](https://github.com/Sebastian1989101)
 
+## Support
+
+If you are interested in more support for Mapsui please mail [pauldendulk@gmail.com](mailto:pauldendulk@gmail.com).
+

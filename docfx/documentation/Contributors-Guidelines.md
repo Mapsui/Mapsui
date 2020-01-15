@@ -13,5 +13,11 @@ Mapsui has some older code in it. Don't despair. We continuously improve or repl
 ## Issue first
 Submit an issue before a pull request co we can discuss the possible solutions to the problem.
 
+## All checks should be green all the time
+At all times:
+- All projects should compile
+- The unit tests should succeed
+- All samples should run properly
+
 ## Use ReSharper
 Mapsui uses the resharper team settings by committing the DotSettings to git, so that all developers can use the same settings. We should have zero warnings. Suggestions should be treated as actual suggestions, use them only when you think it improves the code.
