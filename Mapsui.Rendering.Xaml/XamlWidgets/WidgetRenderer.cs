@@ -18,6 +18,8 @@ namespace Mapsui.Rendering.Xaml.XamlWidgets
                 Background = null
             };
 
+            widgetCanvas.Arrange(new System.Windows.Rect(canvas.RenderSize));
+
             canvas.Children.Add(widgetCanvas);
             foreach (var widget in widgets)
             {
