@@ -48,7 +48,7 @@ namespace Mapsui.UI.Forms
         private double _innerRotation;
         private Dictionary<long, TouchEvent> _touches = new Dictionary<long, TouchEvent>();
         private Geometries.Point _firstTouch;
-        private System.Threading.Timer _doubleTapTestTimer;
+        private bool _waitingForDoubleTap;
         private int _numOfTaps = 0;
         private FlingTracker _velocityTracker = new FlingTracker();
         private Geometries.Point _previousCenter;
@@ -123,10 +123,9 @@ namespace Mapsui.UI.Forms
 
                 // Do we have a doubleTapTestTimer running?
                 // If yes, stop it and increment _numOfTaps
-                if (_doubleTapTestTimer != null)
+                if (_waitingForDoubleTap)
                 {
-                    _doubleTapTestTimer.Dispose();
-                    _doubleTapTestTimer = null;
+                    _waitingForDoubleTap = false;
                     _numOfTaps++;
                 }
                 else
@@ -171,8 +170,8 @@ namespace Mapsui.UI.Forms
                     // than longTap, than we have a tap.
                     if (isAround && (ticks - releasedTouch.Tick) < (e.DeviceType == SKTouchDeviceType.Mouse ? shortClick : longTap) * 10000)
                     {
-                        var timeToDelay = UseDoubleTap ? delayTap : 0;
-                        await Task.Delay(timeToDelay);
+                        _waitingForDoubleTap = true;
+                        if (UseDoubleTap) { await Task.Delay(delayTap); }
 
                         if (_numOfTaps > 1)
                         {
@@ -187,11 +186,10 @@ namespace Mapsui.UI.Forms
                             }
                         }
                         _numOfTaps = 1;
-                        if (_doubleTapTestTimer != null)
+                        if (_waitingForDoubleTap)
                         {
-                            _doubleTapTestTimer.Dispose();
+                            _waitingForDoubleTap = false; ;
                         }
-                        _doubleTapTestTimer = null;
                     }
                     else if (isAround && (ticks - releasedTouch.Tick) >= longTap * 10000)
                     {
