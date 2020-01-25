@@ -1,14 +1,11 @@
 ﻿using Mapsui.Samples.Common;
-using Mapsui.Samples.Common.Maps;
+using Mapsui.Samples.Common.ExtensionMethods;
 using Mapsui.UI.Forms;
-using Mapsui.UI.Objects;
 using Plugin.Geolocator;
 using Plugin.Geolocator.Abstractions;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Reflection;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -47,7 +44,15 @@ namespace Mapsui.Samples.Forms
             mapView.IsMyLocationButtonVisible = true;
             mapView.IsNorthingButtonVisible = true;
 
+            mapView.Info += MapView_Info;
+
             StartGPS();
+        }
+
+        private void MapView_Info(object sender, UI.MapInfoEventArgs e)
+        {
+            if (e?.MapInfo?.Feature != null)
+                featureInfo.Text = $"Click Info:{Environment.NewLine}{e.MapInfo.Feature.ToDisplayText()}";
         }
 
         private void FillListWithSamples()
