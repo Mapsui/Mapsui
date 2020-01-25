@@ -13,6 +13,7 @@
                     WidthRequest="200"
                     Margin="10"
                     ItemSelected="OnSelection"/>
+                <Label x:Name="featureInfo"></Label>
             </StackLayout>
             <mapsui:MapView x:Name="mapView"
     		    VerticalOptions="FillAndExpand"

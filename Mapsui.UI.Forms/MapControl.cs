@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Mapsui.Geometries.Utilities;
 using Xamarin.Forms;
+using System.Threading.Tasks;
 
 namespace Mapsui.UI.Forms
 {
@@ -105,7 +106,7 @@ namespace Mapsui.UI.Forms
             SetViewportSize();
         }
 
-        private void OnTouch(object sender, SKTouchEventArgs e)
+        private async void OnTouch(object sender, SKTouchEventArgs e)
         {
             // Save time, when the event occures
             long ticks = DateTime.Now.Ticks;
@@ -170,24 +171,27 @@ namespace Mapsui.UI.Forms
                     // than longTap, than we have a tap.
                     if (isAround && (ticks - releasedTouch.Tick) < (e.DeviceType == SKTouchDeviceType.Mouse ? shortClick : longTap) * 10000)
                     {
-                        // Start a timer with timeout delayTap ms. If than isn't arrived another tap, than it is a single
-                        _doubleTapTestTimer = new System.Threading.Timer((l) =>
+                        var timeToDelay = UseDoubleTap ? delayTap : 0;
+                        await Task.Delay(timeToDelay);
+
+                        if (_numOfTaps > 1)
                         {
-                            if (_numOfTaps > 1)
+                            if (!e.Handled)
+                                e.Handled = OnDoubleTapped(location, _numOfTaps);
+                        }
+                        else
+                        {
+                            if (!e.Handled)
                             {
-                                if (!e.Handled)
-                                    e.Handled = OnDoubleTapped(location, _numOfTaps);
+                                e.Handled = OnSingleTapped(location);
                             }
-                            else
-                                if (!e.Handled)
-                                e.Handled = OnSingleTapped((Geometries.Point)l);
-                            _numOfTaps = 1;
-                            if (_doubleTapTestTimer != null)
-                            {
-                                _doubleTapTestTimer.Dispose();
-                            }
-                            _doubleTapTestTimer = null;
-                        }, location, UseDoubleTap ? delayTap : 0, -1);
+                        }
+                        _numOfTaps = 1;
+                        if (_doubleTapTestTimer != null)
+                        {
+                            _doubleTapTestTimer.Dispose();
+                        }
+                        _doubleTapTestTimer = null;
                     }
                     else if (isAround && (ticks - releasedTouch.Tick) >= longTap * 10000)
                     {
