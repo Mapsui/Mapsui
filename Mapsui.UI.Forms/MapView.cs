@@ -112,7 +112,7 @@ namespace Mapsui.UI.Forms
                 Command = new Command(obj => { _mapControl.Navigator.ZoomOut(); Refresh(); }),
             };
 
-            _mapSpacingButton1 = new Image { BackgroundColor = Color.Transparent, WidthRequest = 40, HeightRequest = 8 };
+            _mapSpacingButton1 = new Image { BackgroundColor = Color.Transparent, WidthRequest = 40, HeightRequest = 8, InputTransparent = true };
 
             _mapMyLocationButton = new SvgButton(_pictMyLocationNoCenter)
             {
@@ -122,7 +122,7 @@ namespace Mapsui.UI.Forms
                 Command = new Command(obj => MyLocationFollow = !MyLocationFollow),
             };
 
-            _mapSpacingButton2 = new Image { BackgroundColor = Color.Transparent, WidthRequest = 40, HeightRequest = 8 };
+            _mapSpacingButton2 = new Image { BackgroundColor = Color.Transparent, WidthRequest = 40, HeightRequest = 8, InputTransparent = true };
 
             _mapNorthingButton = new SvgButton(Utilities.EmbeddedResourceLoader.Load("Images.RotationZero.svg", typeof(MapView)))
             {
@@ -132,7 +132,7 @@ namespace Mapsui.UI.Forms
                 Command = new Command(obj => Device.BeginInvokeOnMainThread(() => _mapControl.Navigator.RotateTo(0))),
             };
 
-            _mapButtons = new StackLayout { BackgroundColor = Color.Transparent, Opacity = 0.8, Spacing = 0, IsVisible = true };
+            _mapButtons = new StackLayout { BackgroundColor = Color.Transparent, Spacing = 0, IsVisible = true, InputTransparent = true, CascadeInputTransparent = false };
 
             _mapButtons.Children.Add(_mapZoomInButton);
             _mapButtons.Children.Add(_mapZoomOutButton);
