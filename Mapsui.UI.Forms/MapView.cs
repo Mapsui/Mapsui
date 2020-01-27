@@ -119,7 +119,7 @@ namespace Mapsui.UI.Forms
                 BackgroundColor = Color.Transparent,
                 WidthRequest = 40,
                 HeightRequest = 40,
-                Command = new Command(obj => MyLocationFollow = !MyLocationFollow),
+                Command = new Command(obj => MyLocationFollow = true),
             };
 
             _mapSpacingButton2 = new Image { BackgroundColor = Color.Transparent, WidthRequest = 40, HeightRequest = 8, InputTransparent = true };
@@ -609,8 +609,6 @@ namespace Mapsui.UI.Forms
 
             if (propertyName.Equals(nameof(MyLocationFollowProperty)) || propertyName.Equals(nameof(MyLocationFollow)))
             {
-                _mapMyLocationButton.IsEnabled = !MyLocationFollow;
-
                 if (MyLocationFollow)
                 {
                     _mapMyLocationButton.Picture = _pictMyLocationCenter;
