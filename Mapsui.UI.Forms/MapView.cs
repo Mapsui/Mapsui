@@ -644,18 +644,21 @@ namespace Mapsui.UI.Forms
                 _mapZoomInButton.IsVisible = IsZoomButtonVisible;
                 _mapZoomOutButton.IsVisible = IsZoomButtonVisible;
                 _mapSpacingButton1.IsVisible = IsZoomButtonVisible && IsMyLocationButtonVisible;
+                _mapButtons.IsVisible = IsZoomButtonVisible || IsMyLocationButtonVisible || IsNorthingButtonVisible;
             }
 
             if (propertyName.Equals(nameof(IsMyLocationButtonVisibleProperty)) || propertyName.Equals(nameof(IsMyLocationButtonVisible)))
             {
                 _mapMyLocationButton.IsVisible = IsMyLocationButtonVisible;
                 _mapSpacingButton1.IsVisible = IsZoomButtonVisible && IsMyLocationButtonVisible;
+                _mapButtons.IsVisible = IsZoomButtonVisible || IsMyLocationButtonVisible || IsNorthingButtonVisible;
             }
 
             if (propertyName.Equals(nameof(IsNorthingButtonVisibleProperty)) || propertyName.Equals(nameof(IsNorthingButtonVisible)))
             {
                 _mapNorthingButton.IsVisible = IsNorthingButtonVisible;
                 _mapSpacingButton2.IsVisible = (IsMyLocationButtonVisible || IsZoomButtonVisible) && IsNorthingButtonVisible;
+                _mapButtons.IsVisible = IsZoomButtonVisible || IsMyLocationButtonVisible || IsNorthingButtonVisible;
             }
 
             if (propertyName.Equals(nameof(UseDoubleTapProperty)) || propertyName.Equals(nameof(UseDoubleTap)))
