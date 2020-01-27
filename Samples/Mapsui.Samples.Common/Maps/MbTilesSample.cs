@@ -23,7 +23,6 @@ namespace Mapsui.Samples.Common.Maps
         {
             var map = new Map();
             map.Layers.Add(CreateMbTilesLayer(Path.Combine(MbTilesLocation, "world.mbtiles"), "regular"));
-            map.Layers.Add(CreateMbTilesLayer(Path.Combine(MbTilesLocation, "chinese-world.mbtiles"), "chinese"));
             return map;
         }
 
