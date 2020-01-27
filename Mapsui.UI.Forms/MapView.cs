@@ -814,49 +814,61 @@ namespace Mapsui.UI.Forms
         private void HandlerInfo(object sender, MapInfoEventArgs e)
         {
             // Click on pin?
-            Pin clickedPin = null;
-            var pins = _pins.ToList();
-
-            foreach (var pin in pins)
+            if (e.MapInfo.Layer == _mapPinLayer)
             {
-                if (pin.IsVisible && pin.Feature.Equals(e.MapInfo.Feature))
+                Pin clickedPin = null;
+                var pins = _pins.ToList();
+
+                foreach (var pin in pins)
                 {
-                    clickedPin = pin;
-                    break;
+                    if (pin.IsVisible && pin.Feature.Equals(e.MapInfo.Feature))
+                    {
+                        clickedPin = pin;
+                        break;
+                    }
                 }
-            }
 
-            if (clickedPin != null)
-            {
-                SelectedPin = clickedPin;
-
-                SelectedPinChanged?.Invoke(this, new SelectedPinChangedEventArgs(SelectedPin));
-
-                var pinArgs = new PinClickedEventArgs(clickedPin, _mapControl.Viewport.ScreenToWorld(e.MapInfo.ScreenPosition).ToForms(), e.NumTaps);
-
-                PinClicked?.Invoke(this, pinArgs);
-
-                if (pinArgs.Handled)
+                if (clickedPin != null)
                 {
-                    e.Handled = true;
-                    return;
+                    SelectedPin = clickedPin;
+
+                    SelectedPinChanged?.Invoke(this, new SelectedPinChangedEventArgs(SelectedPin));
+
+                    var pinArgs = new PinClickedEventArgs(clickedPin, _mapControl.Viewport.ScreenToWorld(e.MapInfo.ScreenPosition).ToForms(), e.NumTaps);
+
+                    PinClicked?.Invoke(this, pinArgs);
+
+                    if (pinArgs.Handled)
+                    {
+                        e.Handled = true;
+                        return;
+                    }
                 }
             }
 
             // Check for clicked drawables
-            var drawables = GetDrawablesAt(_mapControl.Viewport.ScreenToWorld(e.MapInfo.ScreenPosition), _mapDrawableLayer);
-
-            var drawableArgs = new DrawableClickedEventArgs(
-                _mapControl.Viewport.ScreenToWorld(e.MapInfo.ScreenPosition).ToForms(),
-                new Point(e.MapInfo.ScreenPosition.X, e.MapInfo.ScreenPosition.Y), e.NumTaps);
-
-            // Now check each drawable until one handles the event
-            foreach (var drawable in drawables)
+            if (e.MapInfo.Layer == _mapDrawableLayer)
             {
-                drawable.HandleClicked(drawableArgs);
+                Drawable clickedDrawable = null;
+                var drawables = _drawable.ToList();
 
-                if (!drawableArgs.Handled) continue;
-                e.Handled = true;
+                foreach (var drawable in drawables)
+                {
+                    if (drawable.IsClickable && drawable.Feature.Equals(e.MapInfo.Feature))
+                    {
+                        clickedDrawable = drawable;
+                        break;
+                    }
+                }
+
+                var drawableArgs = new DrawableClickedEventArgs(
+                    _mapControl.Viewport.ScreenToWorld(e.MapInfo.ScreenPosition).ToForms(),
+                    new Point(e.MapInfo.ScreenPosition.X, e.MapInfo.ScreenPosition.Y), e.NumTaps);
+
+                clickedDrawable?.HandleClicked(drawableArgs);
+
+                e.Handled = drawableArgs.Handled;
+                
                 return;
             }
 
@@ -1009,6 +1021,7 @@ namespace Mapsui.UI.Forms
             if (layer.MaxVisible < _mapControl.Viewport.Resolution) return drawables;
 
             var allFeatures = layer.GetFeaturesInView(layer.Envelope, _mapControl.Viewport.Resolution);
+            var mapInfo = _mapControl.GetMapInfo(point);
 
             // Now check all features, if they are clicked and clickable
             foreach (var feature in allFeatures)
