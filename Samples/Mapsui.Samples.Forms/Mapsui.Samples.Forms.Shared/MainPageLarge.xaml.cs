@@ -49,6 +49,11 @@ namespace Mapsui.Samples.Forms
             StartGPS();
         }
 
+        protected override void OnAppearing()
+        {
+            mapView.Refresh();
+        }
+
         private void MapView_Info(object sender, UI.MapInfoEventArgs e)
         {
             if (e?.MapInfo?.Feature != null)

@@ -42,6 +42,11 @@ namespace Mapsui.Samples.Forms
             Clicker = c;
         }
 
+        protected override void OnAppearing()
+        {
+            mapView.Refresh();
+        }
+
         private void OnMapClicked(object sender, MapClickedEventArgs e)
         {
             e.Handled = Clicker != null ? (bool)Clicker?.Invoke(sender as MapView, e) : false;
