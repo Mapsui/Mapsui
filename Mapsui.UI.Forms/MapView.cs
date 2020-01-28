@@ -132,7 +132,7 @@ namespace Mapsui.UI.Forms
                 Command = new Command(obj => Device.BeginInvokeOnMainThread(() => _mapControl.Navigator.RotateTo(0))),
             };
 
-            _mapButtons = new StackLayout { BackgroundColor = Color.Transparent, Spacing = 0, IsVisible = true };
+            _mapButtons = new StackLayout { BackgroundColor = Color.Transparent, Opacity = 0.8, Spacing = 0, IsVisible = true };
 
             _mapButtons.Children.Add(_mapZoomInButton);
             _mapButtons.Children.Add(_mapZoomOutButton);
@@ -680,10 +680,6 @@ namespace Mapsui.UI.Forms
 
                     // Readd them, so that they always on top
                     AddLayers();
-
-                    // Add event handlers
-                    _mapControl.Viewport.ViewportChanged += HandlerViewportChanged;
-                    _mapControl.Info += HandlerInfo;
                 }
             }
         }
@@ -850,21 +846,18 @@ namespace Mapsui.UI.Forms
             // Check for clicked drawables
             var drawables = GetDrawablesAt(_mapControl.Viewport.ScreenToWorld(e.MapInfo.ScreenPosition), _mapDrawableLayer);
 
-            if (drawables.Count > 0)
+            var drawableArgs = new DrawableClickedEventArgs(
+                _mapControl.Viewport.ScreenToWorld(e.MapInfo.ScreenPosition).ToForms(),
+                new Point(e.MapInfo.ScreenPosition.X, e.MapInfo.ScreenPosition.Y), e.NumTaps);
+
+            // Now check each drawable until one handles the event
+            foreach (var drawable in drawables)
             {
-                var drawableArgs = new DrawableClickedEventArgs(
-                    _mapControl.Viewport.ScreenToWorld(e.MapInfo.ScreenPosition).ToForms(),
-                    new Point(e.MapInfo.ScreenPosition.X, e.MapInfo.ScreenPosition.Y), e.NumTaps);
+                drawable.HandleClicked(drawableArgs);
 
-                // Now check each drawable until one handles the event
-                foreach (var drawable in drawables)
-                {
-                    drawable.HandleClicked(drawableArgs);
-
-                    if (!drawableArgs.Handled) continue;
-                    e.Handled = true;
-                    return;
-                }
+                if (!drawableArgs.Handled) continue;
+                e.Handled = true;
+                return;
             }
 
             // Call Info event, if there is one
