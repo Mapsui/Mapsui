@@ -98,7 +98,7 @@ namespace Mapsui.UI.Forms
 
             _mapZoomInButton = new SvgButton(Utilities.EmbeddedResourceLoader.Load("Images.ZoomIn.svg", typeof(MapView)))
             {
-                BackgroundColor = Color.White,
+                BackgroundColor = Color.Transparent,
                 WidthRequest = 40,
                 HeightRequest = 40,
                 Command = new Command(obj => { _mapControl.Navigator.ZoomIn(); Refresh(); })
@@ -106,7 +106,7 @@ namespace Mapsui.UI.Forms
 
             _mapZoomOutButton = new SvgButton(Utilities.EmbeddedResourceLoader.Load("Images.ZoomOut.svg", typeof(MapView)))
             {
-                BackgroundColor = Color.White,
+                BackgroundColor = Color.Transparent,
                 WidthRequest = 40,
                 HeightRequest = 40,
                 Command = new Command(obj => { _mapControl.Navigator.ZoomOut(); Refresh(); }),
@@ -116,7 +116,7 @@ namespace Mapsui.UI.Forms
 
             _mapMyLocationButton = new SvgButton(_pictMyLocationNoCenter)
             {
-                BackgroundColor = Color.White,
+                BackgroundColor = Color.Transparent,
                 WidthRequest = 40,
                 HeightRequest = 40,
                 Command = new Command(obj => MyLocationFollow = !MyLocationFollow),
@@ -126,13 +126,13 @@ namespace Mapsui.UI.Forms
 
             _mapNorthingButton = new SvgButton(Utilities.EmbeddedResourceLoader.Load("Images.RotationZero.svg", typeof(MapView)))
             {
-                BackgroundColor = Color.White,
+                BackgroundColor = Color.Transparent,
                 WidthRequest = 40,
                 HeightRequest = 40,
                 Command = new Command(obj => Device.BeginInvokeOnMainThread(() => _mapControl.Navigator.RotateTo(0))),
             };
 
-            _mapButtons = new StackLayout { BackgroundColor = Color.Transparent, Opacity = 0.8, Spacing = 0, IsVisible = true };
+            _mapButtons = new StackLayout { BackgroundColor = Color.Transparent, Spacing = 0, IsVisible = true };
 
             _mapButtons.Children.Add(_mapZoomInButton);
             _mapButtons.Children.Add(_mapZoomOutButton);
@@ -680,6 +680,10 @@ namespace Mapsui.UI.Forms
 
                     // Readd them, so that they always on top
                     AddLayers();
+
+                    // Add event handlers
+                    _mapControl.Viewport.ViewportChanged += HandlerViewportChanged;
+                    _mapControl.Info += HandlerInfo;
                 }
             }
         }
@@ -694,6 +698,9 @@ namespace Mapsui.UI.Forms
             if (e.PropertyName.Equals(nameof(Viewport.Rotation)))
             {
                 _mapMyLocationLayer.UpdateMyDirection(_mapMyLocationLayer.Direction, _mapControl.Viewport.Rotation);
+
+                // Update rotationButton
+                _mapNorthingButton.Rotation = _mapControl.Viewport.Rotation;
 
                 // Check all callout positions
                 var list = _callouts.ToList();
@@ -843,18 +850,21 @@ namespace Mapsui.UI.Forms
             // Check for clicked drawables
             var drawables = GetDrawablesAt(_mapControl.Viewport.ScreenToWorld(e.MapInfo.ScreenPosition), _mapDrawableLayer);
 
-            var drawableArgs = new DrawableClickedEventArgs(
-                _mapControl.Viewport.ScreenToWorld(e.MapInfo.ScreenPosition).ToForms(), 
-                new Point(e.MapInfo.ScreenPosition.X, e.MapInfo.ScreenPosition.Y), e.NumTaps);
-
-            // Now check each drawable until one handles the event
-            foreach (var drawable in drawables)
+            if (drawables.Count > 0)
             {
-                drawable.HandleClicked(drawableArgs);
+                var drawableArgs = new DrawableClickedEventArgs(
+                    _mapControl.Viewport.ScreenToWorld(e.MapInfo.ScreenPosition).ToForms(),
+                    new Point(e.MapInfo.ScreenPosition.X, e.MapInfo.ScreenPosition.Y), e.NumTaps);
 
-                if (!drawableArgs.Handled) continue;
-                e.Handled = true;
-                return;
+                // Now check each drawable until one handles the event
+                foreach (var drawable in drawables)
+                {
+                    drawable.HandleClicked(drawableArgs);
+
+                    if (!drawableArgs.Handled) continue;
+                    e.Handled = true;
+                    return;
+                }
             }
 
             // Call Info event, if there is one
