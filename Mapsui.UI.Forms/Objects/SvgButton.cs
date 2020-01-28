@@ -10,6 +10,7 @@ namespace Mapsui.UI.Forms
     {
         private Command _command;
         private SKPicture _picture;
+        private double _rotation = 0;
 
         public Command Command
         {
@@ -31,6 +32,19 @@ namespace Mapsui.UI.Forms
                 if (_picture != value)
                 {
                     _picture = value;
+                    InvalidateSurface();
+                }
+            }
+        }
+
+        public double Rotation
+        {
+            get => _rotation;
+            set
+            {
+                if (_rotation != value)
+                {
+                    _rotation = value;
                     InvalidateSurface();
                 }
             }
@@ -61,8 +75,11 @@ namespace Mapsui.UI.Forms
             // get the scale to fill the screen
             float scale = (float)(canvasMin / svgMax);
 
+            // Rotate picture
+            var matrix = SKMatrix.MakeRotationDegrees((float)_rotation, _picture.CullRect.Width / 2f, _picture.CullRect.Height / 2f);
+
             // create a scale matrix
-            var matrix = SKMatrix.MakeScale(scale, scale);
+            SKMatrix.PostConcat(ref matrix, SKMatrix.MakeScale(scale, scale));
 
             e.Surface.Canvas.DrawPicture(_picture, ref matrix);
         }
