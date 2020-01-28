@@ -1,43 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
 <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   id="svg5213"
+   width="40"
+   height="40"
+   viewBox="0 0 10.583332 10.583333"
    version="1.1"
-   viewBox="0 0 32 32"
-   height="32"
-   width="32"
-   sodipodi:docname="ZoomOut.svg"
-   inkscape:version="0.92.2 5c3e80d, 2017-08-06">
+   id="svg3735"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
+   sodipodi:docname="ZoomOut.svg">
+  <defs
+     id="defs3729" />
   <sodipodi:namedview
+     id="base"
      pagecolor="#ffffff"
      bordercolor="#666666"
-     borderopacity="1"
-     objecttolerance="10"
-     gridtolerance="10"
-     guidetolerance="10"
+     borderopacity="1.0"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="1124"
-     inkscape:window-height="680"
-     id="namedview5973"
+     inkscape:zoom="24.2"
+     inkscape:cx="14.36504"
+     inkscape:cy="20"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:zoom="7.375"
-     inkscape:cx="31.040417"
-     inkscape:cy="16"
-     inkscape:window-x="562"
-     inkscape:window-y="200"
-     inkscape:window-maximized="0"
-     inkscape:current-layer="svg5213" />
-  <defs
-     id="defs5207" />
+     units="px"
+     inkscape:window-width="1920"
+     inkscape:window-height="1137"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:pagecheckerboard="true" />
   <metadata
-     id="metadata5210">
+     id="metadata3732">
     <rdf:RDF>
       <cc:Work
          rdf:about="">
@@ -48,22 +50,22 @@
       </cc:Work>
     </rdf:RDF>
   </metadata>
-  <image
-     y="-1"
-     x="0"
-     id="image5992"
-     xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAhCAYAAAC803lsAAAABHNCSVQICAgIfAhkiAAAAGpJREFU
-WIXtzqERwCAQRcFLBhEFM5jQCC1RFA5PYZjzcYl/DRDxt4I95pyvu9suMUartd7B3a21ti0yxrC1
-1nVuG4AipAgpQoqQIqQIKUKKkCKkCClCipAipAj9JhJyztZ73xZIKVkp5fkAtvAS/XkHlHgAAAAA
-SUVORK5CYII=
-"
-     style="image-rendering:optimizeSpeed"
-     preserveAspectRatio="none"
-     height="33"
-     width="33" />
-  <path
-     style="fill:none;fill-rule:evenodd;stroke:#808080;stroke-width:3.997;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-     d="M 8.0254372,15.998497 H 23.974563"
-     id="path7217"
-     inkscape:connector-curvature="0" />
+  <g
+     inkscape:label="Ebene 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-286.41668)">
+    <ellipse
+       style="fill:#ffffff;fill-opacity:1;stroke:#808080;stroke-width:0.39983839;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path3737"
+       cx="5.291666"
+       cy="291.70834"
+       rx="4.5625801"
+       ry="4.5625806" />
+    <path
+       style="fill:none;stroke:#808080;stroke-width:1.58749987;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 2.6459442,291.70835 c 5.2914441,-9e-4 5.2914441,-9e-4 5.2914441,-9e-4"
+       id="path4544"
+       inkscape:connector-curvature="0" />
+  </g>
 </svg>
