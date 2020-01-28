@@ -960,11 +960,17 @@ namespace Mapsui.UI.Forms
         private void HandlerPinPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             Map.RefreshData(_mapControl.Viewport.Extent, _mapControl.Viewport.Resolution, false);
+
+            // Repaint map, because something could have changed
+            _mapControl.RefreshGraphics();
         }
 
         private void HandlerDrawablePropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             Map.RefreshData(_mapControl.Viewport.Extent, _mapControl.Viewport.Resolution, false);
+
+            // Repaint map, because something could have changed
+            _mapControl.RefreshGraphics();
         }
 
         #endregion
