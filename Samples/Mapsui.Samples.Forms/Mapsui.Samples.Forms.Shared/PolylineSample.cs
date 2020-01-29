@@ -24,7 +24,7 @@ namespace Mapsui.Samples.Forms
             {
                 if (mapView.Drawables.Count == 0)
                 {
-                    f = new Polyline { StrokeWidth = 4, StrokeColor = Color.Red };
+                    f = new Polyline { StrokeWidth = 4, StrokeColor = Color.Red, IsClickable = true };
                     mapView.Drawables.Add(f);
                 }
                 else
