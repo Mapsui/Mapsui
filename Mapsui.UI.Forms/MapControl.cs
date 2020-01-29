@@ -44,6 +44,7 @@ namespace Mapsui.UI.Forms
         /// </summary>
         private const int touchSlop = 8;
 
+        private bool _initialized = false;
         private float _skiaScale;
         private double _innerRotation;
         private Dictionary<long, TouchEvent> _touches = new Dictionary<long, TouchEvent>();
@@ -98,6 +99,8 @@ namespace Mapsui.UI.Forms
             PaintSurface += OnPaintSurface;
             Touch += OnTouch;
             SizeChanged += OnSizeChanged;
+
+            _initialized = true;
         }
 
         private void OnSizeChanged(object sender, EventArgs e)
@@ -259,7 +262,7 @@ namespace Mapsui.UI.Forms
 
         public void RefreshGraphics()
         {
-            if (GRContext == null)
+            if (!_initialized && GRContext == null)
             {
                 // Could this be null before Home is called? If so we should change the logic.
                 Logging.Logger.Log(Logging.LogLevel.Warning, "Refresh can not be called because GRContext is null");
