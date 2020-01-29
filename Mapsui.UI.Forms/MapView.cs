@@ -98,7 +98,7 @@ namespace Mapsui.UI.Forms
 
             _mapZoomInButton = new SvgButton(Utilities.EmbeddedResourceLoader.Load("Images.ZoomIn.svg", typeof(MapView)))
             {
-                BackgroundColor = Color.White,
+                BackgroundColor = Color.Transparent,
                 WidthRequest = 40,
                 HeightRequest = 40,
                 Command = new Command(obj => { _mapControl.Navigator.ZoomIn(); Refresh(); })
@@ -106,7 +106,7 @@ namespace Mapsui.UI.Forms
 
             _mapZoomOutButton = new SvgButton(Utilities.EmbeddedResourceLoader.Load("Images.ZoomOut.svg", typeof(MapView)))
             {
-                BackgroundColor = Color.White,
+                BackgroundColor = Color.Transparent,
                 WidthRequest = 40,
                 HeightRequest = 40,
                 Command = new Command(obj => { _mapControl.Navigator.ZoomOut(); Refresh(); }),
@@ -116,7 +116,7 @@ namespace Mapsui.UI.Forms
 
             _mapMyLocationButton = new SvgButton(_pictMyLocationNoCenter)
             {
-                BackgroundColor = Color.White,
+                BackgroundColor = Color.Transparent,
                 WidthRequest = 40,
                 HeightRequest = 40,
                 Command = new Command(obj => MyLocationFollow = true),
@@ -126,7 +126,7 @@ namespace Mapsui.UI.Forms
 
             _mapNorthingButton = new SvgButton(Utilities.EmbeddedResourceLoader.Load("Images.RotationZero.svg", typeof(MapView)))
             {
-                BackgroundColor = Color.White,
+                BackgroundColor = Color.Transparent,
                 WidthRequest = 40,
                 HeightRequest = 40,
                 Command = new Command(obj => Device.BeginInvokeOnMainThread(() => _mapControl.Navigator.RotateTo(0))),
@@ -695,6 +695,9 @@ namespace Mapsui.UI.Forms
             if (e.PropertyName.Equals(nameof(Viewport.Rotation)))
             {
                 _mapMyLocationLayer.UpdateMyDirection(_mapMyLocationLayer.Direction, _mapControl.Viewport.Rotation);
+
+                // Update rotationButton
+                _mapNorthingButton.Rotation = _mapControl.Viewport.Rotation;
 
                 // Check all callout positions
                 var list = _callouts.ToList();
