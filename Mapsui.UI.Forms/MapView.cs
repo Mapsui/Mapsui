@@ -681,6 +681,10 @@ namespace Mapsui.UI.Forms
 
                     // Readd them, so that they always on top
                     AddLayers();
+
+                    // Add event handlers
+                    _mapControl.Viewport.ViewportChanged += HandlerViewportChanged;
+                    _mapControl.Info += HandlerInfo;
                 }
             }
         }
