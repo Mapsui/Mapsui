@@ -112,17 +112,17 @@ namespace Mapsui.UI.Forms
                 Command = new Command(obj => { _mapControl.Navigator.ZoomOut(); Refresh(); }),
             };
 
-            _mapSpacingButton1 = new Image { BackgroundColor = Color.Transparent, WidthRequest = 40, HeightRequest = 8 };
+            _mapSpacingButton1 = new Image { BackgroundColor = Color.Transparent, WidthRequest = 40, HeightRequest = 8, InputTransparent = true };
 
             _mapMyLocationButton = new SvgButton(_pictMyLocationNoCenter)
             {
                 BackgroundColor = Color.Transparent,
                 WidthRequest = 40,
                 HeightRequest = 40,
-                Command = new Command(obj => MyLocationFollow = !MyLocationFollow),
+                Command = new Command(obj => MyLocationFollow = true),
             };
 
-            _mapSpacingButton2 = new Image { BackgroundColor = Color.Transparent, WidthRequest = 40, HeightRequest = 8 };
+            _mapSpacingButton2 = new Image { BackgroundColor = Color.Transparent, WidthRequest = 40, HeightRequest = 8, InputTransparent = true };
 
             _mapNorthingButton = new SvgButton(Utilities.EmbeddedResourceLoader.Load("Images.RotationZero.svg", typeof(MapView)))
             {
@@ -132,7 +132,7 @@ namespace Mapsui.UI.Forms
                 Command = new Command(obj => Device.BeginInvokeOnMainThread(() => _mapControl.Navigator.RotateTo(0))),
             };
 
-            _mapButtons = new StackLayout { BackgroundColor = Color.Transparent, Opacity = 0.8, Spacing = 0, IsVisible = true };
+            _mapButtons = new StackLayout { BackgroundColor = Color.Transparent, Spacing = 0, IsVisible = true, InputTransparent = true, CascadeInputTransparent = false };
 
             _mapButtons.Children.Add(_mapZoomInButton);
             _mapButtons.Children.Add(_mapZoomOutButton);
@@ -609,8 +609,6 @@ namespace Mapsui.UI.Forms
 
             if (propertyName.Equals(nameof(MyLocationFollowProperty)) || propertyName.Equals(nameof(MyLocationFollow)))
             {
-                _mapMyLocationButton.IsEnabled = !MyLocationFollow;
-
                 if (MyLocationFollow)
                 {
                     _mapMyLocationButton.Picture = _pictMyLocationCenter;
@@ -644,18 +642,21 @@ namespace Mapsui.UI.Forms
                 _mapZoomInButton.IsVisible = IsZoomButtonVisible;
                 _mapZoomOutButton.IsVisible = IsZoomButtonVisible;
                 _mapSpacingButton1.IsVisible = IsZoomButtonVisible && IsMyLocationButtonVisible;
+                _mapButtons.IsVisible = IsZoomButtonVisible || IsMyLocationButtonVisible || IsNorthingButtonVisible;
             }
 
             if (propertyName.Equals(nameof(IsMyLocationButtonVisibleProperty)) || propertyName.Equals(nameof(IsMyLocationButtonVisible)))
             {
                 _mapMyLocationButton.IsVisible = IsMyLocationButtonVisible;
                 _mapSpacingButton1.IsVisible = IsZoomButtonVisible && IsMyLocationButtonVisible;
+                _mapButtons.IsVisible = IsZoomButtonVisible || IsMyLocationButtonVisible || IsNorthingButtonVisible;
             }
 
             if (propertyName.Equals(nameof(IsNorthingButtonVisibleProperty)) || propertyName.Equals(nameof(IsNorthingButtonVisible)))
             {
                 _mapNorthingButton.IsVisible = IsNorthingButtonVisible;
                 _mapSpacingButton2.IsVisible = (IsMyLocationButtonVisible || IsZoomButtonVisible) && IsNorthingButtonVisible;
+                _mapButtons.IsVisible = IsZoomButtonVisible || IsMyLocationButtonVisible || IsNorthingButtonVisible;
             }
 
             if (propertyName.Equals(nameof(UseDoubleTapProperty)) || propertyName.Equals(nameof(UseDoubleTap)))
@@ -814,49 +815,61 @@ namespace Mapsui.UI.Forms
         private void HandlerInfo(object sender, MapInfoEventArgs e)
         {
             // Click on pin?
-            Pin clickedPin = null;
-            var pins = _pins.ToList();
-
-            foreach (var pin in pins)
+            if (e.MapInfo.Layer == _mapPinLayer)
             {
-                if (pin.IsVisible && pin.Feature.Equals(e.MapInfo.Feature))
+                Pin clickedPin = null;
+                var pins = _pins.ToList();
+
+                foreach (var pin in pins)
                 {
-                    clickedPin = pin;
-                    break;
+                    if (pin.IsVisible && pin.Feature.Equals(e.MapInfo.Feature))
+                    {
+                        clickedPin = pin;
+                        break;
+                    }
                 }
-            }
 
-            if (clickedPin != null)
-            {
-                SelectedPin = clickedPin;
-
-                SelectedPinChanged?.Invoke(this, new SelectedPinChangedEventArgs(SelectedPin));
-
-                var pinArgs = new PinClickedEventArgs(clickedPin, _mapControl.Viewport.ScreenToWorld(e.MapInfo.ScreenPosition).ToForms(), e.NumTaps);
-
-                PinClicked?.Invoke(this, pinArgs);
-
-                if (pinArgs.Handled)
+                if (clickedPin != null)
                 {
-                    e.Handled = true;
-                    return;
+                    SelectedPin = clickedPin;
+
+                    SelectedPinChanged?.Invoke(this, new SelectedPinChangedEventArgs(SelectedPin));
+
+                    var pinArgs = new PinClickedEventArgs(clickedPin, _mapControl.Viewport.ScreenToWorld(e.MapInfo.ScreenPosition).ToForms(), e.NumTaps);
+
+                    PinClicked?.Invoke(this, pinArgs);
+
+                    if (pinArgs.Handled)
+                    {
+                        e.Handled = true;
+                        return;
+                    }
                 }
             }
 
             // Check for clicked drawables
-            var drawables = GetDrawablesAt(_mapControl.Viewport.ScreenToWorld(e.MapInfo.ScreenPosition), _mapDrawableLayer);
-
-            var drawableArgs = new DrawableClickedEventArgs(
-                _mapControl.Viewport.ScreenToWorld(e.MapInfo.ScreenPosition).ToForms(),
-                new Point(e.MapInfo.ScreenPosition.X, e.MapInfo.ScreenPosition.Y), e.NumTaps);
-
-            // Now check each drawable until one handles the event
-            foreach (var drawable in drawables)
+            if (e.MapInfo.Layer == _mapDrawableLayer)
             {
-                drawable.HandleClicked(drawableArgs);
+                Drawable clickedDrawable = null;
+                var drawables = _drawable.ToList();
 
-                if (!drawableArgs.Handled) continue;
-                e.Handled = true;
+                foreach (var drawable in drawables)
+                {
+                    if (drawable.IsClickable && drawable.Feature.Equals(e.MapInfo.Feature))
+                    {
+                        clickedDrawable = drawable;
+                        break;
+                    }
+                }
+
+                var drawableArgs = new DrawableClickedEventArgs(
+                    _mapControl.Viewport.ScreenToWorld(e.MapInfo.ScreenPosition).ToForms(),
+                    new Point(e.MapInfo.ScreenPosition.X, e.MapInfo.ScreenPosition.Y), e.NumTaps);
+
+                clickedDrawable?.HandleClicked(drawableArgs);
+
+                e.Handled = drawableArgs.Handled;
+                
                 return;
             }
 
@@ -1009,6 +1022,7 @@ namespace Mapsui.UI.Forms
             if (layer.MaxVisible < _mapControl.Viewport.Resolution) return drawables;
 
             var allFeatures = layer.GetFeaturesInView(layer.Envelope, _mapControl.Viewport.Resolution);
+            var mapInfo = _mapControl.GetMapInfo(point);
 
             // Now check all features, if they are clicked and clickable
             foreach (var feature in allFeatures)
