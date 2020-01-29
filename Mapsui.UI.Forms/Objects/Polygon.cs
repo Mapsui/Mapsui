@@ -70,6 +70,12 @@ namespace Mapsui.UI.Forms
                 case nameof(FillColor):
                     ((VectorStyle)Feature.Styles.First()).Fill = new Brush(FillColor.ToMapsui());
                     break;
+                case nameof(StrokeColor):
+                    ((VectorStyle)Feature.Styles.First()).Outline.Color = StrokeColor.ToMapsui();
+                    break;
+                case nameof(StrokeWidth):
+                    ((VectorStyle)Feature.Styles.First()).Outline.Width = StrokeWidth;
+                    break;
             }
         }
 
