@@ -32,10 +32,17 @@ namespace Mapsui.Rendering.Skia
                 var image = SKImage.FromEncodedData(SKData.CreateCopy(stream.ToBytes()));
                 return new BitmapInfo {Bitmap = image};
             }
-
-            if (bitmapStream is Sprite sprite)
+            else if (bitmapStream is Sprite sprite)
             {
                 return new BitmapInfo {Sprite = sprite};
+            }
+            else if (bitmapStream is SKPicture picture)
+            {
+                return new BitmapInfo { Picture = picture };
+            }
+            if (bitmapStream is SKDrawable drawable)
+            {
+                return new BitmapInfo { Drawable = drawable };
             }
 
             return null;
@@ -91,6 +98,55 @@ namespace Mapsui.Rendering.Skia
             canvas.Translate(-halfWidth + offsetX, -halfHeight - offsetY);
 
             canvas.DrawPicture(svg.Picture);
+
+            canvas.Restore();
+        }
+
+
+        public static void RenderPicture(SKCanvas canvas, SKPicture picture, float x, float y, float orientation = 0,
+            float offsetX = 0, float offsetY = 0,
+            LabelStyle.HorizontalAlignmentEnum horizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Left,
+            LabelStyle.VerticalAlignmentEnum verticalAlignment = LabelStyle.VerticalAlignmentEnum.Top,
+            float opacity = 1f,
+            float scale = 1f)
+        {
+            canvas.Save();
+
+            canvas.Translate(x, y);
+            canvas.RotateDegrees(orientation, 0, 0); // todo: degrees or radians?
+            canvas.Scale(scale, scale);
+
+            var halfWidth = picture.CullRect.Width / 2;
+            var halfHeight = picture.CullRect.Height / 2;
+
+            // 0/0 are assumed at center of image, but SKPicture has 0/0 at left top position
+            canvas.Translate(-halfWidth + offsetX, -halfHeight - offsetY);
+
+            canvas.DrawPicture(picture);
+
+            canvas.Restore();
+        }
+
+        public static void RenderDrawable(SKCanvas canvas, SKDrawable drawable, float x, float y, float orientation = 0,
+            float offsetX = 0, float offsetY = 0,
+            LabelStyle.HorizontalAlignmentEnum horizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Left,
+            LabelStyle.VerticalAlignmentEnum verticalAlignment = LabelStyle.VerticalAlignmentEnum.Top,
+            float opacity = 1f,
+            float scale = 1f)
+        {
+            canvas.Save();
+
+            canvas.Translate(x, y);
+            canvas.RotateDegrees(orientation, 0, 0); // todo: degrees or radians?
+            canvas.Scale(scale, scale);
+
+            var halfWidth = drawable.Bounds.Width / 2;
+            var halfHeight = drawable.Bounds.Height / 2;
+
+            // 0/0 are assumed at center of image, but SKDrawable has 0/0 at left top position
+            canvas.Translate(-halfWidth + offsetX, -halfHeight - offsetY);
+
+            canvas.DrawDrawable(drawable, 0, 0);
 
             canvas.Restore();
         }

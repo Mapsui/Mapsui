@@ -7,7 +7,9 @@ namespace Mapsui.Rendering.Skia
     {
         Bitmap,
         Svg,
-        Sprite
+        Sprite,
+        Picture,
+        Drawable
     }
 
     public class BitmapInfo
@@ -64,6 +66,38 @@ namespace Mapsui.Rendering.Skia
             }
         }
 
+        public SKPicture Picture
+        {
+            get
+            {
+                if (Type == BitmapType.Picture)
+                    return (SKPicture)_data;
+                else
+                    return null;
+            }
+            set
+            {
+                _data = value;
+                Type = BitmapType.Picture;
+            }
+        }
+
+        public SKDrawable Drawable
+        {
+            get
+            {
+                if (Type == BitmapType.Drawable)
+                    return (SKDrawable)_data;
+                else
+                    return null;
+            }
+            set
+            {
+                _data = value;
+                Type = BitmapType.Drawable;
+            }
+        }
+
         public long IterationUsed { get; set; }
 
         public float Width
@@ -78,6 +112,10 @@ namespace Mapsui.Rendering.Skia
                         return Svg.CanvasSize.Width;
                     case BitmapType.Sprite:
                         return ((Sprite) _data).Width;
+                    case BitmapType.Picture:
+                        return ((SKPicture)_data).CullRect.Width;
+                    case BitmapType.Drawable:
+                        return ((SKDrawable)_data).Bounds.Width;
                     default:
                         return 0;
                 }
@@ -96,6 +134,10 @@ namespace Mapsui.Rendering.Skia
                         return Svg.CanvasSize.Height;
                     case BitmapType.Sprite:
                         return ((Sprite) _data).Height;
+                    case BitmapType.Picture:
+                        return ((SKPicture)_data).CullRect.Height;
+                    case BitmapType.Drawable:
+                        return ((SKDrawable)_data).Bounds.Height;
                     default:
                         return 0;
                 }
