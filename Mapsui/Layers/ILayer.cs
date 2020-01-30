@@ -159,9 +159,6 @@ namespace Mapsui.Layers
         /// </summary>
         void DataHasChanged();
         
-         /// <summary>
-        /// Points that this layer is active and can be show on the canvas
-        /// </summary>
-        bool IsActive { get; set; }
+        
     }
 }
