@@ -35,6 +35,8 @@ namespace Mapsui.Layers
         public override void RefreshData(BoundingBox extent, double resolution, bool majorChange)
         {
             // RefreshData needs no implementation for the MemoryLayer
+            // If a user changed the data in the provider and needs to update the graphics
+            // DataHasChanged should be called.
         }
 
         public override BoundingBox Envelope => DataSource?.GetExtents();
