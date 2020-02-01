@@ -354,7 +354,7 @@ namespace Mapsui.Desktop.Wms
             _serviceDescription.ContactInformation.Address.Country = (node != null ? node.InnerText : null);
             node = xnlServiceDescription.SelectSingleNode("sm:ContactInformation/sm:ContactAddress/sm:PostCode", _nsmgr);
             _serviceDescription.ContactInformation.Address.PostCode = (node != null ? node.InnerText : null);
-            node = xnlServiceDescription.SelectSingleNode("sm:ContactInformation/sm:ContactElectronicMailAddress", _nsmgr);
+            node = xnlServiceDescription.SelectSingleNode("sm:ContactInformation/sm:StateOrProvince", _nsmgr);
             _serviceDescription.ContactInformation.Address.StateOrProvince = (node != null ? node.InnerText : null);
             node = xnlServiceDescription.SelectSingleNode("sm:ContactInformation/sm:ContactElectronicMailAddress", _nsmgr);
             _serviceDescription.ContactInformation.ElectronicMailAddress = (node != null ? node.InnerText : null);
@@ -362,7 +362,7 @@ namespace Mapsui.Desktop.Wms
             _serviceDescription.ContactInformation.FacsimileTelephone = (node != null ? node.InnerText : null);
             node =
                 xnlServiceDescription.SelectSingleNode(
-                    "sm:ContactInformation/sm:ContactPersonPrimary/sm:ContactOrganisation", _nsmgr);
+                    "sm:ContactInformation/sm:ContactPersonPrimary/sm:ContactOrganization", _nsmgr);
             _serviceDescription.ContactInformation.PersonPrimary.Organisation = (node != null ? node.InnerText : null);
             node =
                 xnlServiceDescription.SelectSingleNode(
