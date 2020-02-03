@@ -52,7 +52,7 @@ namespace Mapsui.UI.Forms
             IsClippedToBounds = true;
 
             _mapControl = new MapControl { UseDoubleTap = false };
-            _mapMyLocationLayer = new MyLocationLayer(this) { Enabled = true };
+            _mapMyLocationLayer = new MyLocationLayer(this) { Enabled = MyLocationEnabled };
             _mapPinLayer = new MemoryLayer() { Name = PinLayerName, IsMapInfoLayer = true };
             _mapDrawableLayer = new MemoryLayer() { Name = DrawableLayerName, IsMapInfoLayer = true };
 
