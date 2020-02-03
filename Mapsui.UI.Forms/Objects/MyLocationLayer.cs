@@ -84,6 +84,17 @@ namespace Mapsui.UI.Objects
         public double Scale { get; set; } = 1.0;
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="T:Mapsui.UI.Objects.MyLocationLayer"/> class
+        /// with a starting location.
+        /// </summary>
+        /// <param name="view">MapView, to which this layer belongs</param>
+        /// <param name="position">Position, where to start</param>
+        public MyLocationLayer(MapView view, Position position) : this(view)
+        {
+            myLocation = position;
+        }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="T:Mapsui.UI.Objects.MyLocationLayer"/> class.
         /// </summary>
         /// <param name="view">MapView, to which this layer belongs</param>
