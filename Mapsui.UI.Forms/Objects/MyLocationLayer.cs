@@ -84,6 +84,17 @@ namespace Mapsui.UI.Objects
         public double Scale { get; set; } = 1.0;
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="T:Mapsui.UI.Objects.MyLocationLayer"/> class
+        /// with a starting location.
+        /// </summary>
+        /// <param name="view">MapView, to which this layer belongs</param>
+        /// <param name="position">Position, where to start</param>
+        public MyLocationLayer(MapView view, Position position) : this(view)
+        {
+            myLocation = position;
+        }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="T:Mapsui.UI.Objects.MyLocationLayer"/> class.
         /// </summary>
         /// <param name="view">MapView, to which this layer belongs</param>
@@ -139,12 +150,11 @@ namespace Mapsui.UI.Objects
             Style = null;
         }
 
-
         /// <summary>
         /// Updates my location
         /// </summary>
         /// <param name="newLocation">New location</param>
-        public void UpdateMyLocation(Position newLocation)
+        public void UpdateMyLocation(Position newLocation, bool animated = true)
         {
             if (!MyLocation.Equals(newLocation))
             {
@@ -152,25 +162,38 @@ namespace Mapsui.UI.Objects
                 if (mapView.AnimationIsRunning(animationMyLocationName))
                     mapView.AbortAnimation(animationMyLocationName);
 
-                // Save values for new animation
-                animationMyLocationStart = MyLocation;
-                animationMyLocationEnd = newLocation;
-
-                var animation = new Animation((v) =>
+                if (animated)
                 {
-                    var deltaLat = (animationMyLocationEnd.Latitude - animationMyLocationStart.Latitude) * v;
-                    var deltaLon = (animationMyLocationEnd.Longitude - animationMyLocationStart.Longitude) * v;
-                    var modified = InternalUpdateMyLocation(new Position(animationMyLocationStart.Latitude + deltaLat, animationMyLocationStart.Longitude + deltaLon));
+                    // Save values for new animation
+                    animationMyLocationStart = MyLocation;
+                    animationMyLocationEnd = newLocation;
+
+                    var animation = new Animation((v) =>
+                    {
+                        var deltaLat = (animationMyLocationEnd.Latitude - animationMyLocationStart.Latitude) * v;
+                        var deltaLon = (animationMyLocationEnd.Longitude - animationMyLocationStart.Longitude) * v;
+                        var modified = InternalUpdateMyLocation(new Position(animationMyLocationStart.Latitude + deltaLat, animationMyLocationStart.Longitude + deltaLon));
+                    // Update viewport
+                    if (modified && mapView.MyLocationFollow && mapView.MyLocationEnabled)
+                            mapView._mapControl.Navigator.CenterOn(MyLocation.ToMapsui());
+                    // Refresh map
+                    if (mapView.MyLocationEnabled && modified)
+                            mapView.Refresh();
+                    }, 0.0, 1.0);
+
+                    // At the end, update viewport
+                    animation.Commit(mapView, animationMyLocationName, 100, 3000, finished: (s, v) => mapView.Map.RefreshData(mapView._mapControl.Viewport.Extent, mapView._mapControl.Viewport.Resolution, true));
+                }
+                else
+                {
+                    var modified = InternalUpdateMyLocation(newLocation);
                     // Update viewport
                     if (modified && mapView.MyLocationFollow && mapView.MyLocationEnabled)
                         mapView._mapControl.Navigator.CenterOn(MyLocation.ToMapsui());
                     // Refresh map
                     if (mapView.MyLocationEnabled && modified)
                         mapView.Refresh();
-                }, 0.0, 1.0);
-
-                // At the end, update viewport
-                animation.Commit(mapView, animationMyLocationName, 100, 3000, finished: (s, v) => mapView.Map.RefreshData(mapView._mapControl.Viewport.Extent, mapView._mapControl.Viewport.Resolution, true));
+                }
             }
         }
 
@@ -179,7 +202,7 @@ namespace Mapsui.UI.Objects
         /// </summary>
         /// <param name="newDirection">New direction</param>
         /// <param name="newViewportRotation">New viewport rotation</param>
-        public void UpdateMyDirection(double newDirection, double newViewportRotation)
+        public void UpdateMyDirection(double newDirection, double newViewportRotation, bool animated = true)
         {
             var newRotation = (int)(newDirection - newViewportRotation);
             var oldRotation = (int)((SymbolStyle)feature.Styles.First()).SymbolRotation;
@@ -201,16 +224,24 @@ namespace Mapsui.UI.Objects
                     oldRotation += 360;
                 }
 
-                var animation = new Animation((v) =>
+                if (animated)
                 {
-                    if ((int)v != (int)((SymbolStyle)feature.Styles.First()).SymbolRotation)
+                    var animation = new Animation((v) =>
                     {
-                        ((SymbolStyle)feature.Styles.First()).SymbolRotation = (int)v % 360;
-                        mapView.Refresh();
-                    }
-                }, oldRotation, newRotation);
+                        if ((int)v != (int)((SymbolStyle)feature.Styles.First()).SymbolRotation)
+                        {
+                            ((SymbolStyle)feature.Styles.First()).SymbolRotation = (int)v % 360;
+                            mapView.Refresh();
+                        }
+                    }, oldRotation, newRotation);
 
-                animation.Commit(mapView, animationMyDirectionName, 50, 500);
+                    animation.Commit(mapView, animationMyDirectionName, 50, 500);
+                }
+                else
+                {
+                    ((SymbolStyle)feature.Styles.First()).SymbolRotation = newRotation % 360;
+                    mapView.Refresh();
+                }
             }
         }
 
