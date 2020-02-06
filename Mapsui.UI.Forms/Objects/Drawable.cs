@@ -17,6 +17,8 @@ namespace Mapsui.UI.Objects
         public static readonly BindableProperty LabelProperty = BindableProperty.Create(nameof(Label), typeof(string), typeof(Pin), default(string));
         public static readonly BindableProperty StrokeWidthProperty = BindableProperty.Create(nameof(StrokeWidth), typeof(float), typeof(Circle), 1f);
         public static readonly BindableProperty StrokeColorProperty = BindableProperty.Create(nameof(StrokeColor), typeof(Xamarin.Forms.Color), typeof(Circle), Xamarin.Forms.Color.Black);
+        public static readonly BindableProperty MinVisibleProperty = BindableProperty.Create(nameof(MinVisible), typeof(double), typeof(Circle), 0.0);
+        public static readonly BindableProperty MaxVisibleProperty = BindableProperty.Create(nameof(MaxVisible), typeof(double), typeof(Circle), double.MaxValue);
         public static readonly BindableProperty ZIndexProperty = BindableProperty.Create(nameof(ZIndex), typeof(int), typeof(Circle), 0);
         public static readonly BindableProperty IsClickableProperty = BindableProperty.Create(nameof(IsClickable), typeof(bool), typeof(Drawable), false);
 
@@ -45,6 +47,24 @@ namespace Mapsui.UI.Objects
         {
             get { return (Xamarin.Forms.Color)GetValue(StrokeColorProperty); }
             set { SetValue(StrokeColorProperty, value); }
+        }
+
+        /// <summary>
+        /// MinVisible for drawable in resolution of Mapsui (smaller values are higher zoom levels)
+        /// </summary>
+        public double MinVisible
+        {
+            get { return (double)GetValue(MinVisibleProperty); }
+            set { SetValue(MinVisibleProperty, value); }
+        }
+
+        /// <summary>
+        /// MaxVisible for drawable in resolution of Mapsui (smaller values are higher zoom levels)
+        /// </summary>
+        public double MaxVisible
+        {
+            get { return (double)GetValue(MaxVisibleProperty); }
+            set { SetValue(MaxVisibleProperty, value); }
         }
 
         /// <summary>
@@ -113,6 +133,12 @@ namespace Mapsui.UI.Objects
                     break;
                 case nameof(StrokeColor):
                     ((VectorStyle)Feature.Styles.First()).Line.Color = StrokeColor.ToMapsui();
+                    break;
+                case nameof(MinVisible):
+                    ((VectorStyle)Feature.Styles.First()).MinVisible = MinVisible;
+                    break;
+                case nameof(MaxVisible):
+                    ((VectorStyle)Feature.Styles.First()).MaxVisible = MaxVisible;
                     break;
             }
         }

@@ -28,6 +28,8 @@ namespace Mapsui.UI.Forms
         public static readonly BindableProperty ScaleProperty = BindableProperty.Create(nameof(Scale), typeof(float), typeof(Pin), 1.0f);
         public static readonly BindableProperty RotationProperty = BindableProperty.Create(nameof(Rotation), typeof(float), typeof(Pin), 0f);
         public static readonly BindableProperty IsVisibleProperty = BindableProperty.Create(nameof(IsVisible), typeof(bool), typeof(Pin), true);
+        public static readonly BindableProperty MinVisibleProperty = BindableProperty.Create(nameof(MinVisible), typeof(double), typeof(Pin), 0.0);
+        public static readonly BindableProperty MaxVisibleProperty = BindableProperty.Create(nameof(MaxVisible), typeof(double), typeof(Pin), double.MaxValue);
         public static readonly BindableProperty WidthProperty = BindableProperty.Create(nameof(Width), typeof(double), typeof(Pin), -1.0, BindingMode.OneWayToSource);
         public static readonly BindableProperty HeightProperty = BindableProperty.Create(nameof(Height), typeof(double), typeof(Pin), -1.0);
         public static readonly BindableProperty AnchorProperty = BindableProperty.Create(nameof(Anchor), typeof(Point), typeof(Pin), new Point(0, 28));
@@ -134,6 +136,24 @@ namespace Mapsui.UI.Forms
         {
             get { return (bool)GetValue(IsVisibleProperty); }
             set { SetValue(IsVisibleProperty, value); }
+        }
+
+        /// <summary>
+        /// MinVisible for pin in resolution of Mapsui (smaller values are higher zoom levels)
+        /// </summary>
+        public double MinVisible
+        {
+            get { return (double)GetValue(MinVisibleProperty); }
+            set { SetValue(MinVisibleProperty, value); }
+        }
+
+        /// <summary>
+        /// MaxVisible for pin in resolution of Mapsui (smaller values are higher zoom levels)
+        /// </summary>
+        public double MaxVisible
+        {
+            get { return (double)GetValue(MaxVisibleProperty); }
+            set { SetValue(MaxVisibleProperty, value); }
         }
 
         /// <summary>
@@ -326,6 +346,14 @@ namespace Mapsui.UI.Forms
                     break;
                 case nameof(IsVisible):
                     ((SymbolStyle)_feature.Styles.First()).Enabled = IsVisible;
+                    break;
+                case nameof(MinVisible):
+                    // TODO: Update callout MinVisble too
+                    ((SymbolStyle)_feature.Styles.First()).MinVisible = MinVisible;
+                    break;
+                case nameof(MaxVisible):
+                    // TODO: Update callout MaxVisble too
+                    ((SymbolStyle)_feature.Styles.First()).MaxVisible = MaxVisible;
                     break;
                 case nameof(Scale):
                     ((SymbolStyle)_feature.Styles.First()).SymbolScale = Scale;
