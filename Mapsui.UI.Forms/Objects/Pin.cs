@@ -243,7 +243,11 @@ namespace Mapsui.UI.Forms
                 if (_callout == null)
                 {
                     // Create a default pin
-                    _callout = _mapView.CreateCallout(Position);
+                    //_callout = _mapView.CreateCallout(Position);
+                    _callout = new Callout(this._mapView.MapControl as MapControl)
+                    {
+                        Anchor = Position
+                    };
                     if (string.IsNullOrWhiteSpace(Address))
                     {
                         _callout.Type = CalloutType.Single;
