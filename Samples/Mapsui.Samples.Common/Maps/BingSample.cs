@@ -15,11 +15,11 @@ namespace Mapsui.Samples.Common.Maps
             mapControl.Map = CreateMap();
         }
 
-        public static Map CreateMap()
+        public static Map CreateMap(KnownTileSource source = KnownTileSource.BingAerial)
         {
             var map = new Map();
             var apiKey = "Enter your api key here"; // Contact Microsoft about how to use this
-            map.Layers.Add(new TileLayer(KnownTileSources.Create(KnownTileSource.BingAerial, apiKey), 
+            map.Layers.Add(new TileLayer(KnownTileSources.Create(source, apiKey), 
                 fetchStrategy: new FetchStrategy()) // FetchStrategy get tiles from higher levels in advance
             {
                 Name = "Bing Aerial",
