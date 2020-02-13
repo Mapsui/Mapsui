@@ -16,4 +16,4 @@ Note: There can be many other forms of mixing up coordinate systems, but this is
 In Mapsui v1 and v2 a layer is created with a default style (```Layer.Style```). You need to set the Style 
 field to null if you do not want to use it (```Layer.Style = null```). The default style shows as a white dot
 on Point geometries and a black line on LineStrings and Polygons. Since most users work with styles on the feature
-they are not aware of the style on the layer, this makes this confusing. The default style should be removed in v3.
+they are not aware of the style on the layer, this make the default style confusing and it should be removed in v3.
