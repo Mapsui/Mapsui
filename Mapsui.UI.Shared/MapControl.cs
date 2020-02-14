@@ -343,8 +343,19 @@ namespace Mapsui.UI.Wpf
         /// <inheritdoc />
         public MapInfo GetMapInfo(Point screenPosition, int margin = 0)
         {
-            return MapInfoHelper.GetMapInfo(Map.Layers.Where(l => l.IsMapInfoLayer).ToList(), Viewport,
-                screenPosition, Renderer.SymbolCache, margin);
+            var layers = Map.Layers.Where(l => l.IsMapInfoLayer).ToList();
+            var list = ((MapRenderer)Renderer).GetMapInfo(screenPosition.X, screenPosition.Y, _viewport, layers);
+            var result = list.FirstOrDefault();
+
+            if (result == null)
+                result = new MapInfo() {
+                    ScreenPosition = screenPosition,
+                    WorldPosition = Viewport.ScreenToWorld(screenPosition),
+                };
+
+            return result;
+            //return MapInfoHelper.GetMapInfo(Map.Layers.Where(l => l.IsMapInfoLayer).ToList(), Viewport,
+            //    screenPosition, Renderer.SymbolCache, margin);
         }
 
         /// <inheritdoc />
