@@ -180,7 +180,7 @@ namespace Mapsui.Rendering.Skia
                     var pixmap = surface.PeekPixels();
                     var color = pixmap.GetPixelColor(intX, intY);
 
-                    VisibleFeatureIterator.IterateLayers(viewport, layers, (v, l, s, o) => {
+                    VisibleFeatureIterator.IterateLayers(viewport, layers, (v, style, feature, opacity) => {
                         // 1) Clear the entire bitmap
                         surface.Canvas.Clear(SKColors.Transparent);
                         // 2) Render the feature to the clean canvas
@@ -188,7 +188,7 @@ namespace Mapsui.Rendering.Skia
                         // 3) Check if the pixel has changed.
                         if (color != pixmap.GetPixelColor(intX, intY))
                             // 4) Add feature and style to result
-                            list.Add(new FeatureStylePair(s, l));
+                            list.Add(new FeatureStylePair(feature, style));
                     });
                 }
 
