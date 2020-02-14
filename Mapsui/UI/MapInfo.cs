@@ -11,9 +11,13 @@ namespace Mapsui.UI
         /// </summary>
         public ILayer Layer { get; set; }
         /// <summary>
-        ///  The feature touched but the user
+        ///  The feature touched by the user
         /// </summary>
         public IFeature Feature { get; set; }
+        /// <summary>
+        ///  The style of feature touched by the user
+        /// </summary>
+        public Styles.IStyle Style { get; set; }
         /// <summary>
         /// World position of the place the user touched
         /// </summary>
