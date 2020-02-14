@@ -343,19 +343,12 @@ namespace Mapsui.UI.Wpf
         /// <inheritdoc />
         public MapInfo GetMapInfo(Point screenPosition, int margin = 0)
         {
-            var layers = Map.Layers.Where(l => l.IsMapInfoLayer).ToList();
-            var list = ((MapRenderer)Renderer).GetMapInfo(screenPosition.X, screenPosition.Y, _viewport, layers);
-            var result = list.FirstOrDefault();
+            var mapInfo = MapInfoHelper.GetMapInfo(Map.Layers.Where(l => l.IsMapInfoLayer).ToList(), Viewport,
+                screenPosition, Renderer.SymbolCache, margin);
 
-            if (result == null)
-                result = new MapInfo() {
-                    ScreenPosition = screenPosition,
-                    WorldPosition = Viewport.ScreenToWorld(screenPosition),
-                };
+            mapInfo.FeatureStylePairs = Renderer.GetMapInfo(screenPosition.X, screenPosition.Y, Viewport, Map.Layers);
 
-            return result;
-            //return MapInfoHelper.GetMapInfo(Map.Layers.Where(l => l.IsMapInfoLayer).ToList(), Viewport,
-            //    screenPosition, Renderer.SymbolCache, margin);
+            return mapInfo;
         }
 
         /// <inheritdoc />
@@ -404,7 +397,7 @@ namespace Mapsui.UI.Wpf
         /// <param name="widgetCallback">Callback, which is called when Widget is hit</param>
         /// <param name="numTaps">Number of clickes/taps</param>
         /// <returns>True, if something done </returns>
-        private static MapInfoEventArgs InvokeInfo(IEnumerable<ILayer> layers, IEnumerable<IWidget> widgets, 
+        private MapInfoEventArgs InvokeInfo(IEnumerable<ILayer> layers, IEnumerable<IWidget> widgets, 
             IReadOnlyViewport viewport, Point screenPosition, Point startScreenPosition, ISymbolCache symbolCache,
             Func<IWidget, Point, bool> widgetCallback, int numTaps)
         {
@@ -428,6 +421,7 @@ namespace Mapsui.UI.Wpf
             }
         
             var mapInfo = MapInfoHelper.GetMapInfo(layers, viewport, screenPosition, symbolCache);
+            mapInfo.FeatureStylePairs = Renderer.GetMapInfo(screenPosition.X, screenPosition.Y, Viewport, Map.Layers);
 
             if (mapInfo != null)
             {

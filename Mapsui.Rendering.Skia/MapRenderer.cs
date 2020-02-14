@@ -15,7 +15,7 @@ using SkiaSharp;
 
 namespace Mapsui.Rendering.Skia
 {
-    public class MapRenderer : IRenderer, IRenderInfo
+    public class MapRenderer : IRenderer
     {
         private const int TilesToKeepMultiplier = 3;
         private const int MinimumTilesToKeep = 32;
@@ -169,7 +169,6 @@ namespace Mapsui.Rendering.Skia
                 using (var surface = SKSurface.Create(imageInfo))
                 {
                     if (surface == null) return null;
-                    //Render(surface.Canvas, viewport, layers);
 
                     var pixmap = surface.PeekPixels();
 
@@ -177,7 +176,7 @@ namespace Mapsui.Rendering.Skia
                         // 1) Clear the entire bitmap
                         surface.Canvas.Clear(SKColors.Transparent);
                         // 2) Render the feature to the clean canvas
-                        RenderFeature(surface.Canvas, v, l, s, o);
+                        RenderFeature(surface.Canvas, v, style, feature, opacity);
                         // 3) Check if the pixel has changed.
                         var color = pixmap.GetPixelColor((int)x, (int)y);
                         // 4) Add feature and style to result
@@ -224,18 +223,32 @@ namespace Mapsui.Rendering.Skia
 
             return result;
         }
-    }
 
-    public class IdentityComparer<T> : IEqualityComparer<T> where T : class
-    {
-        public bool Equals(T obj, T otherObj)
+        private bool CheckPixelChanged(int x, int y, SKSurface surface)
         {
-            return obj == otherObj;
+            var pixels = new SKPixmap();
+            if (surface.PeekPixels(pixels))
+            {
+                var pixel = pixels.GetPixelColor(x, y);
+                if (pixel.Alpha == 0) return false;
+                if (pixel.Red > 0) return true;
+                if (pixel.Green > 0) return true;
+                return pixel.Blue > 0;
+            }
+            return false;
         }
 
-        public int GetHashCode(T obj)
+        public class IdentityComparer<T> : IEqualityComparer<T> where T : class
         {
-            return obj.GetHashCode();
+            public bool Equals(T obj, T otherObj)
+            {
+                return obj == otherObj;
+            }
+
+            public int GetHashCode(T obj)
+            {
+                return obj.GetHashCode();
+            }
         }
     }
 }
