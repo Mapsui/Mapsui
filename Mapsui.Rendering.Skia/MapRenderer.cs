@@ -15,7 +15,7 @@ using SkiaSharp;
 
 namespace Mapsui.Rendering.Skia
 {
-    public class MapRenderer : IRenderer, IRenderInfo
+    public class MapRenderer : IRenderer
     {
         private const int TilesToKeepMultiplier = 3;
         private const int MinimumTilesToKeep = 32;
@@ -184,7 +184,7 @@ namespace Mapsui.Rendering.Skia
                         // 1) Clear the entire bitmap
                         surface.Canvas.Clear(SKColors.Transparent);
                         // 2) Render the feature to the clean canvas
-                        RenderFeature(surface.Canvas, v, l, s, o);
+                        RenderFeature(surface.Canvas, v, style, feature, opacity);
                         // 3) Check if the pixel has changed.
                         if (color != pixmap.GetPixelColor(intX, intY))
                             // 4) Add feature and style to result
@@ -232,16 +232,17 @@ namespace Mapsui.Rendering.Skia
         }
     }
 
-    public class IdentityComparer<T> : IEqualityComparer<T> where T : class
-    {
-        public bool Equals(T obj, T otherObj)
+        public class IdentityComparer<T> : IEqualityComparer<T> where T : class
         {
-            return obj == otherObj;
-        }
+            public bool Equals(T obj, T otherObj)
+            {
+                return obj == otherObj;
+            }
 
-        public int GetHashCode(T obj)
-        {
-            return obj.GetHashCode();
+            public int GetHashCode(T obj)
+            {
+                return obj.GetHashCode();
+            }
         }
     }
 }
