@@ -343,6 +343,9 @@ namespace Mapsui.UI.Wpf
         /// <inheritdoc />
         public MapInfo GetMapInfo(Point screenPosition, int margin = 0)
         {
+            var stop = new System.Diagnostics.Stopwatch();
+            stop.Start();
+
             var layers = Map.Layers.Where(l => l.IsMapInfoLayer).ToList();
             var list = ((MapRenderer)Renderer).GetMapInfo(screenPosition.X, screenPosition.Y, _viewport, layers);
             var result = list.FirstOrDefault();
@@ -352,6 +355,8 @@ namespace Mapsui.UI.Wpf
                     ScreenPosition = screenPosition,
                     WorldPosition = Viewport.ScreenToWorld(screenPosition),
                 };
+
+            System.Diagnostics.Debug.WriteLine("Time ellapse [ms]: " + stop.ElapsedMilliseconds + " to find " + list.Count + " features.");
 
             return result;
             //return MapInfoHelper.GetMapInfo(Map.Layers.Where(l => l.IsMapInfoLayer).ToList(), Viewport,
