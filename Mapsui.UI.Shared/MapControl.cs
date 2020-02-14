@@ -409,7 +409,7 @@ namespace Mapsui.UI.Wpf
         /// <param name="widgetCallback">Callback, which is called when Widget is hit</param>
         /// <param name="numTaps">Number of clickes/taps</param>
         /// <returns>True, if something done </returns>
-        private static MapInfoEventArgs InvokeInfo(IEnumerable<ILayer> layers, IEnumerable<IWidget> widgets, 
+        private MapInfoEventArgs InvokeInfo(IEnumerable<ILayer> layers, IEnumerable<IWidget> widgets, 
             IReadOnlyViewport viewport, Point screenPosition, Point startScreenPosition, ISymbolCache symbolCache,
             Func<IWidget, Point, bool> widgetCallback, int numTaps)
         {
