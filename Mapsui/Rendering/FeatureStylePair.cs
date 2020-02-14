@@ -11,7 +11,7 @@ namespace Mapsui.Rendering
             Style = style;
         }
 
-        IFeature Feature { get; set; }
-        IStyle Style { get; set; }
+        public IFeature Feature { get; set; }
+        public IStyle Style { get; set; }
     }
 }
