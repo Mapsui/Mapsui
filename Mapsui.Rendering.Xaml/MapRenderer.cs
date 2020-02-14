@@ -268,5 +268,10 @@ namespace Mapsui.Rendering.Xaml
             else if (feature.Geometry is IRaster)
                 GeometryRenderer.PositionRaster(renderedGeometry, feature.Geometry.BoundingBox, viewport);
         }
+
+        public List<FeatureStylePair> GetMapInfo(double x, double y, IReadOnlyViewport viewport, IEnumerable<ILayer> layers)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

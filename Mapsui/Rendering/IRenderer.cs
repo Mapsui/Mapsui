@@ -7,7 +7,7 @@ using Mapsui.Widgets;
 
 namespace Mapsui.Rendering
 {
-    public interface IRenderer
+    public interface IRenderer : IRenderInfo
     {
         void Render(object target, IReadOnlyViewport viewport, IEnumerable<ILayer> layers, IEnumerable<IWidget> widgets, Color background = null);
         MemoryStream RenderToBitmapStream(IReadOnlyViewport viewport, IEnumerable<ILayer> layers, Color background = null);

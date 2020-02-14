@@ -1,6 +1,8 @@
 ﻿using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
+using Mapsui.Rendering;
+using System.Collections.Generic;
 
 namespace Mapsui.UI
 {
@@ -29,5 +31,7 @@ namespace Mapsui.UI
         /// for editing functionality.
         /// </summary>
         public double Resolution { get; set; }
+
+        public List<FeatureStylePair> FeatureStylePairs { get; set; } = new List<FeatureStylePair>();
     }
 }
