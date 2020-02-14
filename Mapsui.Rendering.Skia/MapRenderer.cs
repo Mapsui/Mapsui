@@ -15,15 +15,13 @@ using SkiaSharp;
 
 namespace Mapsui.Rendering.Skia
 {
-    public class MapRenderer : IRenderer
+    public class MapRenderer : IRenderer, IRenderInfo
     {
         private const int TilesToKeepMultiplier = 3;
         private const int MinimumTilesToKeep = 32;
         private readonly SymbolCache _symbolCache = new SymbolCache();
-
         private readonly IDictionary<object, BitmapInfo> _tileCache =
             new Dictionary<object, BitmapInfo>(new IdentityComparer<object>());
-
         private long _currentIteration;
 
         public ISymbolCache SymbolCache => _symbolCache;
@@ -155,6 +153,41 @@ namespace Mapsui.Rendering.Skia
         private void Render(object canvas, IReadOnlyViewport viewport, IEnumerable<IWidget> widgets, float layerOpacity)
         {
             WidgetRenderer.Render(canvas, viewport, widgets, WidgetRenders, layerOpacity);
+        }
+
+        public List<FeatureStylePair> GetMapInfo(double x, double y, IReadOnlyViewport viewport, IEnumerable<ILayer> layers)
+        {
+            var result = new List<FeatureStylePair>();
+
+            try
+            {
+                var width = (int)viewport.Width;
+                var height = (int)viewport.Height;
+                var imageInfo = new SKImageInfo(width, height, SKImageInfo.PlatformColorType, SKAlphaType.Unpremul);
+
+                using (var surface = SKSurface.Create(imageInfo))
+                {
+                    if (surface == null) return null;
+                    Render(surface.Canvas, viewport, layers);
+                    
+                    VisibleFeatureIterator.IterateLayers(viewport, layers, (v, l, s, o) => {
+                        // 1) Clear the entire bitmap
+                        surface.Canvas.Clear(SKColors.Transparent);
+                        // 2) Render the feature to the clean canvas
+                        RenderFeature(surface.Canvas, v, l, s, o);
+                        // 3) Check if the pixel has changed.
+                        //todo: surface.ReadPixels()
+                        // 4) Add feature and style to result
+                        //todo: result.Add(new FeatureStyle(s, l));
+                    });
+                }
+            }
+            catch (Exception exception)
+            {
+                Logger.Log(LogLevel.Error, "Unexpected error in skia renderer", exception);
+            }
+
+            return result;
         }
     }
 
