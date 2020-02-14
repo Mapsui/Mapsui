@@ -511,33 +511,6 @@ namespace Mapsui.UI.Forms
 
         private Callout _callout;
 
-        /// <summary>
-        /// Creates a callout at the given position
-        /// </summary>
-        /// <returns>The callout</returns>
-        /// <param name="position">Position of callout</param>
-        public Callout CreateCallout(Position position)
-        {
-            // In Forms.UWP, the Callout needs to be created on the UI Thread
-            Device.BeginInvokeOnMainThread(() =>
-            {
-                _callout = new Callout(_mapControl)
-                {
-                    Anchor = position
-                };
-            });
-
-            // My interpretation (PDD): This while keeps looping until the asynchronous call
-            // above has created a callout.
-            // An alternative might be to avoid CreateCallout from a non-ui thread by throwing
-            // early.
-            while (_callout == null) ;
-
-            var result = _callout;
-            _callout = null;
-
-            return result;
-        }
 
         /// <summary>
         /// Shows given callout
