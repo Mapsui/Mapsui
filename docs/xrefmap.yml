@@ -23228,19 +23228,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Forms.MapView.MapView
   nameWithType: MapView.MapView
-- uid: Mapsui.UI.Forms.MapView.CreateCallout(Mapsui.UI.Forms.Position)
-  name: CreateCallout(Position)
-  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_CreateCallout_Mapsui_UI_Forms_Position_
-  commentId: M:Mapsui.UI.Forms.MapView.CreateCallout(Mapsui.UI.Forms.Position)
-  fullName: Mapsui.UI.Forms.MapView.CreateCallout(Mapsui.UI.Forms.Position)
-  nameWithType: MapView.CreateCallout(Position)
-- uid: Mapsui.UI.Forms.MapView.CreateCallout*
-  name: CreateCallout
-  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_CreateCallout_
-  commentId: Overload:Mapsui.UI.Forms.MapView.CreateCallout
-  isSpec: "True"
-  fullName: Mapsui.UI.Forms.MapView.CreateCallout
-  nameWithType: MapView.CreateCallout
 - uid: Mapsui.UI.Forms.MapView.DoubleTap
   name: DoubleTap
   href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_DoubleTap
