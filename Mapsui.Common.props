@@ -3,7 +3,7 @@
   
   <!--- Package information, Version -->
   <PropertyGroup>
-    <Version>2.0.0-beta.32</Version>
+    <Version>2.0.0-beta.33</Version>
     <NeutralLanguage>en</NeutralLanguage>
     <Copyright>Copyright © Mapsui Developers 2018</Copyright>
     <PackageLicenseUrl>https://raw.githubusercontent.com/Mapsui/Mapsui/master/LICENSE.md</PackageLicenseUrl>
