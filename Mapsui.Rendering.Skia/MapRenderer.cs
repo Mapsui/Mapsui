@@ -155,9 +155,10 @@ namespace Mapsui.Rendering.Skia
             WidgetRenderer.Render(canvas, viewport, widgets, WidgetRenders, layerOpacity);
         }
 
-        public List<FeatureStylePair> GetMapInfo(double x, double y, IReadOnlyViewport viewport, IEnumerable<ILayer> layers)
+        public List<UI.MapInfo> GetMapInfo(double x, double y, IReadOnlyViewport viewport, IEnumerable<ILayer> layers)
         {
-            var result = new List<FeatureStylePair>();
+            var list = new List<FeatureStylePair>();
+            var result = new List<UI.MapInfo>();
 
             try
             {
@@ -168,20 +169,50 @@ namespace Mapsui.Rendering.Skia
                 using (var surface = SKSurface.Create(imageInfo))
                 {
                     if (surface == null) return null;
-                    Render(surface.Canvas, viewport, layers);
 
-                    VisibleFeatureIterator.IterateLayers(viewport, layers, (v, style, feature, opacity) =>
-                    {
+                    var pixmap = surface.PeekPixels();
+
+                    VisibleFeatureIterator.IterateLayers(viewport, layers, (v, l, s, o) => {
                         // 1) Clear the entire bitmap
                         surface.Canvas.Clear(SKColors.Transparent);
                         // 2) Render the feature to the clean canvas
                         RenderFeature(surface.Canvas, v, style, feature, opacity);
                         // 3) Check if the pixel has changed.
-                        if (CheckPixelChanged((int)x, (int)y, surface))
+                        var color = pixmap.GetPixelColor((int)x, (int)y);
+                        // 4) Add feature and style to result
+                        if (color != 0)
+                            list.Add(new FeatureStylePair(s, l));
+                    });
+                }
+
+
+                // Now we have a list of all features with style that are hit
+                if (list.Count == 0)
+                    return result;
+
+                foreach (var featureStylePair in list)
+                {
+                    ILayer layerOfFeature = null;
+
+                    // Find layer to which this feature belongs
+                    foreach (var layer in layers)
+                    {
+                        foreach (var feature in layer.GetFeaturesInView(viewport.Extent, viewport.Resolution))
                         {
-                            // 4) Add feature and style to result
-                            result.Add(new FeatureStylePair(feature, style));
+                            if (feature.Equals(featureStylePair.Feature))
+                            {
+                                layerOfFeature = layer;
+                                break;
+                            }
                         }
+                    }
+
+                    result.Add(new UI.MapInfo() {
+                        ScreenPosition = new Point(x, y),
+                        WorldPosition = viewport.ScreenToWorld(x, y),
+                        Feature = featureStylePair.Feature,
+                        Style = featureStylePair.Style,
+                        Layer = layerOfFeature
                     });
                 }
             }

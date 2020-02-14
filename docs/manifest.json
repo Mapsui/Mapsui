@@ -1122,7 +1122,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Layers.MemoryLayer.html",
-          "hash": "Zyo1ik8/vbteZS4TFG3H6Q=="
+          "hash": "Pho5KwDYBR4lBPB0PnQ1oA=="
         }
       },
       "is_incremental": false,
@@ -3618,7 +3618,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Forms.Circle.html",
-          "hash": "9v/u/Xs4ThEbVuIMSJS1xA=="
+          "hash": "wMbUbSmLngy5qgN/dvxI5A=="
         }
       },
       "is_incremental": false,
@@ -3674,11 +3674,23 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.UI.Forms.Extensions.ZoomLevelExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.UI.Forms.Extensions.ZoomLevelExtensions.html",
+          "hash": "QuWlnbIQC5GLrpwhX6SLAQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Mapsui.UI.Forms.Extensions.yml",
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Forms.Extensions.html",
-          "hash": "zhmonQePpPWVc0Hq5jIvyw=="
+          "hash": "hhvmzq7Oyp0ZPgujOEZkPw=="
         }
       },
       "is_incremental": false,
@@ -3702,7 +3714,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Forms.MapControl.html",
-          "hash": "lTjH8+eZBclHKOfucEXeJw=="
+          "hash": "W0aBRR70/t0O+ZhUhBN/Zg=="
         }
       },
       "is_incremental": false,
@@ -3750,7 +3762,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Forms.Pin.html",
-          "hash": "g6tDn0YQW41S4rHODjuYLA=="
+          "hash": "aptHJnWJBzdzLpx4u+va7w=="
         }
       },
       "is_incremental": false,
@@ -3786,7 +3798,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Forms.Polygon.html",
-          "hash": "RrRYwVvkLNoVXQihpalsQw=="
+          "hash": "OX0BC27NokzsTU/0tDkrkQ=="
         }
       },
       "is_incremental": false,
@@ -3798,7 +3810,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Forms.Polyline.html",
-          "hash": "s/NUNRmChIaChJDtNQnxbg=="
+          "hash": "FVQqfjRuqnBHFTXjXfQK+Q=="
         }
       },
       "is_incremental": false,
@@ -3966,7 +3978,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Objects.Drawable.html",
-          "hash": "E4oR0XKoTh6FFH9sSXuIew=="
+          "hash": "GoXz8Z2jmCgV2p/NBvvzRA=="
         }
       },
       "is_incremental": false,
@@ -3990,7 +4002,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Objects.MyLocationLayer.html",
-          "hash": "/q6fyb225xkmmoadeiOBeg=="
+          "hash": "AAEnXYazzUFGuOLeTP2ojQ=="
         }
       },
       "is_incremental": false,
@@ -4754,6 +4766,30 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/System.Collections.ObjectModel.ObservableRangeCollection-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/System.Collections.ObjectModel.ObservableRangeCollection-1.html",
+          "hash": "Rs5qiRnJgspdOShN08wLIA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/System.Collections.ObjectModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/System.Collections.ObjectModel.html",
+          "hash": "LRHffg1NoZWAPfkrYzeWwg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/System.DoubleExtensions.yml",
       "output": {
         ".html": {
@@ -4830,7 +4866,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "3oflZRAzuvCTJTk+Zh8Uvg=="
+          "hash": "z26KASYXeR5DdIy22DiCWg=="
         }
       },
       "is_incremental": false,
@@ -4998,7 +5034,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/faq.html",
-          "hash": "cxjX9vzD4i3ialB6Cum4+Q=="
+          "hash": "UVI4nNj1AeZVNDqlCR878w=="
         }
       },
       "is_incremental": false,
@@ -5081,7 +5117,19 @@
       "output": {
         ".html": {
           "relative_path": "documentation/toc.html",
-          "hash": "d6e9Gv3WYgC4796hg71wxA=="
+          "hash": "H8yCTvQlgEKhsBG1nOPcuw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "documentation/tutorials.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/tutorials.html",
+          "hash": "CiCT2kF8NVmXkbGW0on77A=="
         }
       },
       "is_incremental": false,
@@ -5178,13 +5226,13 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 22,
+          "total_file_count": 23,
           "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 400,
+          "total_file_count": 403,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {

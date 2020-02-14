@@ -89,6 +89,12 @@ Note: There can be many other forms of mixing up coordinate systems, but this is
 background data is in SphericalMercator. Use SphericalMercator.FromLonLat to transform 
 the NavigateTo arguments to SphericalMercator.
 Note: There can be many other forms of mixing up coordinate systems, but this is the most common.</p>
+<h3 id="how-can-i-get-rid-of-there-white-dots-or-black-lines">How can I get rid of there white dots or black lines?</h3>
+<p>In Mapsui v1 and v2 a layer is created with a default style (<code>Layer.Style</code>). This style applies to all features
+in the layer. You need to set the Style field to null if you do not want to use it (<code>Layer.Style = null</code>). 
+The default style shows as a white dot on Point geometries and a black line on LineStrings and Polygons.
+Since most users work with styles on the <em>feature</em> they are not aware of the style on the <em>layer</em>, this make 
+the default style confusing and it should be removed in v3.</p>
 </article>
           </div>
           

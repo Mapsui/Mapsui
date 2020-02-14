@@ -22447,6 +22447,50 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Forms.Extensions.PositionExtensions.ToForms
   nameWithType: PositionExtensions.ToForms
+- uid: Mapsui.UI.Forms.Extensions.ZoomLevelExtensions
+  name: ZoomLevelExtensions
+  href: api/Mapsui.UI.Forms.Extensions.ZoomLevelExtensions.html
+  commentId: T:Mapsui.UI.Forms.Extensions.ZoomLevelExtensions
+  fullName: Mapsui.UI.Forms.Extensions.ZoomLevelExtensions
+  nameWithType: ZoomLevelExtensions
+- uid: Mapsui.UI.Forms.Extensions.ZoomLevelExtensions.ToMapsuiResolution(System.Double)
+  name: ToMapsuiResolution(Double)
+  href: api/Mapsui.UI.Forms.Extensions.ZoomLevelExtensions.html#Mapsui_UI_Forms_Extensions_ZoomLevelExtensions_ToMapsuiResolution_System_Double_
+  commentId: M:Mapsui.UI.Forms.Extensions.ZoomLevelExtensions.ToMapsuiResolution(System.Double)
+  fullName: Mapsui.UI.Forms.Extensions.ZoomLevelExtensions.ToMapsuiResolution(System.Double)
+  nameWithType: ZoomLevelExtensions.ToMapsuiResolution(Double)
+- uid: Mapsui.UI.Forms.Extensions.ZoomLevelExtensions.ToMapsuiResolution(System.Int32)
+  name: ToMapsuiResolution(Int32)
+  href: api/Mapsui.UI.Forms.Extensions.ZoomLevelExtensions.html#Mapsui_UI_Forms_Extensions_ZoomLevelExtensions_ToMapsuiResolution_System_Int32_
+  commentId: M:Mapsui.UI.Forms.Extensions.ZoomLevelExtensions.ToMapsuiResolution(System.Int32)
+  fullName: Mapsui.UI.Forms.Extensions.ZoomLevelExtensions.ToMapsuiResolution(System.Int32)
+  nameWithType: ZoomLevelExtensions.ToMapsuiResolution(Int32)
+- uid: Mapsui.UI.Forms.Extensions.ZoomLevelExtensions.ToMapsuiResolution(System.Single)
+  name: ToMapsuiResolution(Single)
+  href: api/Mapsui.UI.Forms.Extensions.ZoomLevelExtensions.html#Mapsui_UI_Forms_Extensions_ZoomLevelExtensions_ToMapsuiResolution_System_Single_
+  commentId: M:Mapsui.UI.Forms.Extensions.ZoomLevelExtensions.ToMapsuiResolution(System.Single)
+  fullName: Mapsui.UI.Forms.Extensions.ZoomLevelExtensions.ToMapsuiResolution(System.Single)
+  nameWithType: ZoomLevelExtensions.ToMapsuiResolution(Single)
+- uid: Mapsui.UI.Forms.Extensions.ZoomLevelExtensions.ToMapsuiResolution*
+  name: ToMapsuiResolution
+  href: api/Mapsui.UI.Forms.Extensions.ZoomLevelExtensions.html#Mapsui_UI_Forms_Extensions_ZoomLevelExtensions_ToMapsuiResolution_
+  commentId: Overload:Mapsui.UI.Forms.Extensions.ZoomLevelExtensions.ToMapsuiResolution
+  isSpec: "True"
+  fullName: Mapsui.UI.Forms.Extensions.ZoomLevelExtensions.ToMapsuiResolution
+  nameWithType: ZoomLevelExtensions.ToMapsuiResolution
+- uid: Mapsui.UI.Forms.Extensions.ZoomLevelExtensions.ToZoomLevel(System.Double)
+  name: ToZoomLevel(Double)
+  href: api/Mapsui.UI.Forms.Extensions.ZoomLevelExtensions.html#Mapsui_UI_Forms_Extensions_ZoomLevelExtensions_ToZoomLevel_System_Double_
+  commentId: M:Mapsui.UI.Forms.Extensions.ZoomLevelExtensions.ToZoomLevel(System.Double)
+  fullName: Mapsui.UI.Forms.Extensions.ZoomLevelExtensions.ToZoomLevel(System.Double)
+  nameWithType: ZoomLevelExtensions.ToZoomLevel(Double)
+- uid: Mapsui.UI.Forms.Extensions.ZoomLevelExtensions.ToZoomLevel*
+  name: ToZoomLevel
+  href: api/Mapsui.UI.Forms.Extensions.ZoomLevelExtensions.html#Mapsui_UI_Forms_Extensions_ZoomLevelExtensions_ToZoomLevel_
+  commentId: Overload:Mapsui.UI.Forms.Extensions.ZoomLevelExtensions.ToZoomLevel
+  isSpec: "True"
+  fullName: Mapsui.UI.Forms.Extensions.ZoomLevelExtensions.ToZoomLevel
+  nameWithType: ZoomLevelExtensions.ToZoomLevel
 - uid: Mapsui.UI.Forms.MapClickedEventArgs
   name: MapClickedEventArgs
   href: api/Mapsui.UI.Forms.MapClickedEventArgs.html
@@ -24056,6 +24100,44 @@ references:
   commentId: F:Mapsui.UI.Forms.Pin.LabelProperty
   fullName: Mapsui.UI.Forms.Pin.LabelProperty
   nameWithType: Pin.LabelProperty
+- uid: Mapsui.UI.Forms.Pin.MaxVisible
+  name: MaxVisible
+  href: api/Mapsui.UI.Forms.Pin.html#Mapsui_UI_Forms_Pin_MaxVisible
+  commentId: P:Mapsui.UI.Forms.Pin.MaxVisible
+  fullName: Mapsui.UI.Forms.Pin.MaxVisible
+  nameWithType: Pin.MaxVisible
+- uid: Mapsui.UI.Forms.Pin.MaxVisible*
+  name: MaxVisible
+  href: api/Mapsui.UI.Forms.Pin.html#Mapsui_UI_Forms_Pin_MaxVisible_
+  commentId: Overload:Mapsui.UI.Forms.Pin.MaxVisible
+  isSpec: "True"
+  fullName: Mapsui.UI.Forms.Pin.MaxVisible
+  nameWithType: Pin.MaxVisible
+- uid: Mapsui.UI.Forms.Pin.MaxVisibleProperty
+  name: MaxVisibleProperty
+  href: api/Mapsui.UI.Forms.Pin.html#Mapsui_UI_Forms_Pin_MaxVisibleProperty
+  commentId: F:Mapsui.UI.Forms.Pin.MaxVisibleProperty
+  fullName: Mapsui.UI.Forms.Pin.MaxVisibleProperty
+  nameWithType: Pin.MaxVisibleProperty
+- uid: Mapsui.UI.Forms.Pin.MinVisible
+  name: MinVisible
+  href: api/Mapsui.UI.Forms.Pin.html#Mapsui_UI_Forms_Pin_MinVisible
+  commentId: P:Mapsui.UI.Forms.Pin.MinVisible
+  fullName: Mapsui.UI.Forms.Pin.MinVisible
+  nameWithType: Pin.MinVisible
+- uid: Mapsui.UI.Forms.Pin.MinVisible*
+  name: MinVisible
+  href: api/Mapsui.UI.Forms.Pin.html#Mapsui_UI_Forms_Pin_MinVisible_
+  commentId: Overload:Mapsui.UI.Forms.Pin.MinVisible
+  isSpec: "True"
+  fullName: Mapsui.UI.Forms.Pin.MinVisible
+  nameWithType: Pin.MinVisible
+- uid: Mapsui.UI.Forms.Pin.MinVisibleProperty
+  name: MinVisibleProperty
+  href: api/Mapsui.UI.Forms.Pin.html#Mapsui_UI_Forms_Pin_MinVisibleProperty
+  commentId: F:Mapsui.UI.Forms.Pin.MinVisibleProperty
+  fullName: Mapsui.UI.Forms.Pin.MinVisibleProperty
+  nameWithType: Pin.MinVisibleProperty
 - uid: Mapsui.UI.Forms.Pin.OnPropertyChanged(System.String)
   name: OnPropertyChanged(String)
   href: api/Mapsui.UI.Forms.Pin.html#Mapsui_UI_Forms_Pin_OnPropertyChanged_System_String_
@@ -26050,6 +26132,44 @@ references:
   commentId: F:Mapsui.UI.Objects.Drawable.LabelProperty
   fullName: Mapsui.UI.Objects.Drawable.LabelProperty
   nameWithType: Drawable.LabelProperty
+- uid: Mapsui.UI.Objects.Drawable.MaxVisible
+  name: MaxVisible
+  href: api/Mapsui.UI.Objects.Drawable.html#Mapsui_UI_Objects_Drawable_MaxVisible
+  commentId: P:Mapsui.UI.Objects.Drawable.MaxVisible
+  fullName: Mapsui.UI.Objects.Drawable.MaxVisible
+  nameWithType: Drawable.MaxVisible
+- uid: Mapsui.UI.Objects.Drawable.MaxVisible*
+  name: MaxVisible
+  href: api/Mapsui.UI.Objects.Drawable.html#Mapsui_UI_Objects_Drawable_MaxVisible_
+  commentId: Overload:Mapsui.UI.Objects.Drawable.MaxVisible
+  isSpec: "True"
+  fullName: Mapsui.UI.Objects.Drawable.MaxVisible
+  nameWithType: Drawable.MaxVisible
+- uid: Mapsui.UI.Objects.Drawable.MaxVisibleProperty
+  name: MaxVisibleProperty
+  href: api/Mapsui.UI.Objects.Drawable.html#Mapsui_UI_Objects_Drawable_MaxVisibleProperty
+  commentId: F:Mapsui.UI.Objects.Drawable.MaxVisibleProperty
+  fullName: Mapsui.UI.Objects.Drawable.MaxVisibleProperty
+  nameWithType: Drawable.MaxVisibleProperty
+- uid: Mapsui.UI.Objects.Drawable.MinVisible
+  name: MinVisible
+  href: api/Mapsui.UI.Objects.Drawable.html#Mapsui_UI_Objects_Drawable_MinVisible
+  commentId: P:Mapsui.UI.Objects.Drawable.MinVisible
+  fullName: Mapsui.UI.Objects.Drawable.MinVisible
+  nameWithType: Drawable.MinVisible
+- uid: Mapsui.UI.Objects.Drawable.MinVisible*
+  name: MinVisible
+  href: api/Mapsui.UI.Objects.Drawable.html#Mapsui_UI_Objects_Drawable_MinVisible_
+  commentId: Overload:Mapsui.UI.Objects.Drawable.MinVisible
+  isSpec: "True"
+  fullName: Mapsui.UI.Objects.Drawable.MinVisible
+  nameWithType: Drawable.MinVisible
+- uid: Mapsui.UI.Objects.Drawable.MinVisibleProperty
+  name: MinVisibleProperty
+  href: api/Mapsui.UI.Objects.Drawable.html#Mapsui_UI_Objects_Drawable_MinVisibleProperty
+  commentId: F:Mapsui.UI.Objects.Drawable.MinVisibleProperty
+  fullName: Mapsui.UI.Objects.Drawable.MinVisibleProperty
+  nameWithType: Drawable.MinVisibleProperty
 - uid: Mapsui.UI.Objects.Drawable.OnPropertyChanged(System.String)
   name: OnPropertyChanged(String)
   href: api/Mapsui.UI.Objects.Drawable.html#Mapsui_UI_Objects_Drawable_OnPropertyChanged_System_String_
@@ -26164,6 +26284,12 @@ references:
   commentId: M:Mapsui.UI.Objects.MyLocationLayer.#ctor(Mapsui.UI.Forms.MapView)
   fullName: Mapsui.UI.Objects.MyLocationLayer.MyLocationLayer(Mapsui.UI.Forms.MapView)
   nameWithType: MyLocationLayer.MyLocationLayer(MapView)
+- uid: Mapsui.UI.Objects.MyLocationLayer.#ctor(Mapsui.UI.Forms.MapView,Mapsui.UI.Forms.Position)
+  name: MyLocationLayer(MapView, Position)
+  href: api/Mapsui.UI.Objects.MyLocationLayer.html#Mapsui_UI_Objects_MyLocationLayer__ctor_Mapsui_UI_Forms_MapView_Mapsui_UI_Forms_Position_
+  commentId: M:Mapsui.UI.Objects.MyLocationLayer.#ctor(Mapsui.UI.Forms.MapView,Mapsui.UI.Forms.Position)
+  fullName: Mapsui.UI.Objects.MyLocationLayer.MyLocationLayer(Mapsui.UI.Forms.MapView, Mapsui.UI.Forms.Position)
+  nameWithType: MyLocationLayer.MyLocationLayer(MapView, Position)
 - uid: Mapsui.UI.Objects.MyLocationLayer.#ctor*
   name: MyLocationLayer
   href: api/Mapsui.UI.Objects.MyLocationLayer.html#Mapsui_UI_Objects_MyLocationLayer__ctor_
@@ -26236,12 +26362,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Objects.MyLocationLayer.Speed
   nameWithType: MyLocationLayer.Speed
-- uid: Mapsui.UI.Objects.MyLocationLayer.UpdateMyDirection(System.Double,System.Double)
-  name: UpdateMyDirection(Double, Double)
-  href: api/Mapsui.UI.Objects.MyLocationLayer.html#Mapsui_UI_Objects_MyLocationLayer_UpdateMyDirection_System_Double_System_Double_
-  commentId: M:Mapsui.UI.Objects.MyLocationLayer.UpdateMyDirection(System.Double,System.Double)
-  fullName: Mapsui.UI.Objects.MyLocationLayer.UpdateMyDirection(System.Double, System.Double)
-  nameWithType: MyLocationLayer.UpdateMyDirection(Double, Double)
+- uid: Mapsui.UI.Objects.MyLocationLayer.UpdateMyDirection(System.Double,System.Double,System.Boolean)
+  name: UpdateMyDirection(Double, Double, Boolean)
+  href: api/Mapsui.UI.Objects.MyLocationLayer.html#Mapsui_UI_Objects_MyLocationLayer_UpdateMyDirection_System_Double_System_Double_System_Boolean_
+  commentId: M:Mapsui.UI.Objects.MyLocationLayer.UpdateMyDirection(System.Double,System.Double,System.Boolean)
+  fullName: Mapsui.UI.Objects.MyLocationLayer.UpdateMyDirection(System.Double, System.Double, System.Boolean)
+  nameWithType: MyLocationLayer.UpdateMyDirection(Double, Double, Boolean)
 - uid: Mapsui.UI.Objects.MyLocationLayer.UpdateMyDirection*
   name: UpdateMyDirection
   href: api/Mapsui.UI.Objects.MyLocationLayer.html#Mapsui_UI_Objects_MyLocationLayer_UpdateMyDirection_
@@ -26249,12 +26375,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Objects.MyLocationLayer.UpdateMyDirection
   nameWithType: MyLocationLayer.UpdateMyDirection
-- uid: Mapsui.UI.Objects.MyLocationLayer.UpdateMyLocation(Mapsui.UI.Forms.Position)
-  name: UpdateMyLocation(Position)
-  href: api/Mapsui.UI.Objects.MyLocationLayer.html#Mapsui_UI_Objects_MyLocationLayer_UpdateMyLocation_Mapsui_UI_Forms_Position_
-  commentId: M:Mapsui.UI.Objects.MyLocationLayer.UpdateMyLocation(Mapsui.UI.Forms.Position)
-  fullName: Mapsui.UI.Objects.MyLocationLayer.UpdateMyLocation(Mapsui.UI.Forms.Position)
-  nameWithType: MyLocationLayer.UpdateMyLocation(Position)
+- uid: Mapsui.UI.Objects.MyLocationLayer.UpdateMyLocation(Mapsui.UI.Forms.Position,System.Boolean)
+  name: UpdateMyLocation(Position, Boolean)
+  href: api/Mapsui.UI.Objects.MyLocationLayer.html#Mapsui_UI_Objects_MyLocationLayer_UpdateMyLocation_Mapsui_UI_Forms_Position_System_Boolean_
+  commentId: M:Mapsui.UI.Objects.MyLocationLayer.UpdateMyLocation(Mapsui.UI.Forms.Position,System.Boolean)
+  fullName: Mapsui.UI.Objects.MyLocationLayer.UpdateMyLocation(Mapsui.UI.Forms.Position, System.Boolean)
+  nameWithType: MyLocationLayer.UpdateMyLocation(Position, Boolean)
 - uid: Mapsui.UI.Objects.MyLocationLayer.UpdateMyLocation*
   name: UpdateMyLocation
   href: api/Mapsui.UI.Objects.MyLocationLayer.html#Mapsui_UI_Objects_MyLocationLayer_UpdateMyLocation_
@@ -29663,6 +29789,258 @@ references:
   commentId: N:System
   fullName: System
   nameWithType: System
+- uid: System.Collections.ObjectModel
+  name: System.Collections.ObjectModel
+  href: api/System.Collections.ObjectModel.html
+  commentId: N:System.Collections.ObjectModel
+  fullName: System.Collections.ObjectModel
+  nameWithType: System.Collections.ObjectModel
+- uid: System.Collections.ObjectModel.ObservableRangeCollection`1
+  name: ObservableRangeCollection<T>
+  href: api/System.Collections.ObjectModel.ObservableRangeCollection-1.html
+  commentId: T:System.Collections.ObjectModel.ObservableRangeCollection`1
+  name.vb: ObservableRangeCollection(Of T)
+  fullName: System.Collections.ObjectModel.ObservableRangeCollection<T>
+  fullName.vb: System.Collections.ObjectModel.ObservableRangeCollection(Of T)
+  nameWithType: ObservableRangeCollection<T>
+  nameWithType.vb: ObservableRangeCollection(Of T)
+- uid: System.Collections.ObjectModel.ObservableRangeCollection`1.#ctor
+  name: ObservableRangeCollection()
+  href: api/System.Collections.ObjectModel.ObservableRangeCollection-1.html#System_Collections_ObjectModel_ObservableRangeCollection_1__ctor
+  commentId: M:System.Collections.ObjectModel.ObservableRangeCollection`1.#ctor
+  fullName: System.Collections.ObjectModel.ObservableRangeCollection<T>.ObservableRangeCollection()
+  fullName.vb: System.Collections.ObjectModel.ObservableRangeCollection(Of T).ObservableRangeCollection()
+  nameWithType: ObservableRangeCollection<T>.ObservableRangeCollection()
+  nameWithType.vb: ObservableRangeCollection(Of T).ObservableRangeCollection()
+- uid: System.Collections.ObjectModel.ObservableRangeCollection`1.#ctor(System.Collections.Generic.IEnumerable{`0})
+  name: ObservableRangeCollection(IEnumerable<T>)
+  href: api/System.Collections.ObjectModel.ObservableRangeCollection-1.html#System_Collections_ObjectModel_ObservableRangeCollection_1__ctor_System_Collections_Generic_IEnumerable__0__
+  commentId: M:System.Collections.ObjectModel.ObservableRangeCollection`1.#ctor(System.Collections.Generic.IEnumerable{`0})
+  name.vb: ObservableRangeCollection(IEnumerable(Of T))
+  fullName: System.Collections.ObjectModel.ObservableRangeCollection<T>.ObservableRangeCollection(System.Collections.Generic.IEnumerable<T>)
+  fullName.vb: System.Collections.ObjectModel.ObservableRangeCollection(Of T).ObservableRangeCollection(System.Collections.Generic.IEnumerable(Of T))
+  nameWithType: ObservableRangeCollection<T>.ObservableRangeCollection(IEnumerable<T>)
+  nameWithType.vb: ObservableRangeCollection(Of T).ObservableRangeCollection(IEnumerable(Of T))
+- uid: System.Collections.ObjectModel.ObservableRangeCollection`1.#ctor(System.Collections.Generic.List{`0})
+  name: ObservableRangeCollection(List<T>)
+  href: api/System.Collections.ObjectModel.ObservableRangeCollection-1.html#System_Collections_ObjectModel_ObservableRangeCollection_1__ctor_System_Collections_Generic_List__0__
+  commentId: M:System.Collections.ObjectModel.ObservableRangeCollection`1.#ctor(System.Collections.Generic.List{`0})
+  name.vb: ObservableRangeCollection(List(Of T))
+  fullName: System.Collections.ObjectModel.ObservableRangeCollection<T>.ObservableRangeCollection(System.Collections.Generic.List<T>)
+  fullName.vb: System.Collections.ObjectModel.ObservableRangeCollection(Of T).ObservableRangeCollection(System.Collections.Generic.List(Of T))
+  nameWithType: ObservableRangeCollection<T>.ObservableRangeCollection(List<T>)
+  nameWithType.vb: ObservableRangeCollection(Of T).ObservableRangeCollection(List(Of T))
+- uid: System.Collections.ObjectModel.ObservableRangeCollection`1.#ctor*
+  name: ObservableRangeCollection
+  href: api/System.Collections.ObjectModel.ObservableRangeCollection-1.html#System_Collections_ObjectModel_ObservableRangeCollection_1__ctor_
+  commentId: Overload:System.Collections.ObjectModel.ObservableRangeCollection`1.#ctor
+  isSpec: "True"
+  fullName: System.Collections.ObjectModel.ObservableRangeCollection<T>.ObservableRangeCollection
+  fullName.vb: System.Collections.ObjectModel.ObservableRangeCollection(Of T).ObservableRangeCollection
+  nameWithType: ObservableRangeCollection<T>.ObservableRangeCollection
+  nameWithType.vb: ObservableRangeCollection(Of T).ObservableRangeCollection
+- uid: System.Collections.ObjectModel.ObservableRangeCollection`1.AddRange(System.Collections.Generic.IEnumerable{`0})
+  name: AddRange(IEnumerable<T>)
+  href: api/System.Collections.ObjectModel.ObservableRangeCollection-1.html#System_Collections_ObjectModel_ObservableRangeCollection_1_AddRange_System_Collections_Generic_IEnumerable__0__
+  commentId: M:System.Collections.ObjectModel.ObservableRangeCollection`1.AddRange(System.Collections.Generic.IEnumerable{`0})
+  name.vb: AddRange(IEnumerable(Of T))
+  fullName: System.Collections.ObjectModel.ObservableRangeCollection<T>.AddRange(System.Collections.Generic.IEnumerable<T>)
+  fullName.vb: System.Collections.ObjectModel.ObservableRangeCollection(Of T).AddRange(System.Collections.Generic.IEnumerable(Of T))
+  nameWithType: ObservableRangeCollection<T>.AddRange(IEnumerable<T>)
+  nameWithType.vb: ObservableRangeCollection(Of T).AddRange(IEnumerable(Of T))
+- uid: System.Collections.ObjectModel.ObservableRangeCollection`1.AddRange*
+  name: AddRange
+  href: api/System.Collections.ObjectModel.ObservableRangeCollection-1.html#System_Collections_ObjectModel_ObservableRangeCollection_1_AddRange_
+  commentId: Overload:System.Collections.ObjectModel.ObservableRangeCollection`1.AddRange
+  isSpec: "True"
+  fullName: System.Collections.ObjectModel.ObservableRangeCollection<T>.AddRange
+  fullName.vb: System.Collections.ObjectModel.ObservableRangeCollection(Of T).AddRange
+  nameWithType: ObservableRangeCollection<T>.AddRange
+  nameWithType.vb: ObservableRangeCollection(Of T).AddRange
+- uid: System.Collections.ObjectModel.ObservableRangeCollection`1.ClearItems
+  name: ClearItems()
+  href: api/System.Collections.ObjectModel.ObservableRangeCollection-1.html#System_Collections_ObjectModel_ObservableRangeCollection_1_ClearItems
+  commentId: M:System.Collections.ObjectModel.ObservableRangeCollection`1.ClearItems
+  fullName: System.Collections.ObjectModel.ObservableRangeCollection<T>.ClearItems()
+  fullName.vb: System.Collections.ObjectModel.ObservableRangeCollection(Of T).ClearItems()
+  nameWithType: ObservableRangeCollection<T>.ClearItems()
+  nameWithType.vb: ObservableRangeCollection(Of T).ClearItems()
+- uid: System.Collections.ObjectModel.ObservableRangeCollection`1.ClearItems*
+  name: ClearItems
+  href: api/System.Collections.ObjectModel.ObservableRangeCollection-1.html#System_Collections_ObjectModel_ObservableRangeCollection_1_ClearItems_
+  commentId: Overload:System.Collections.ObjectModel.ObservableRangeCollection`1.ClearItems
+  isSpec: "True"
+  fullName: System.Collections.ObjectModel.ObservableRangeCollection<T>.ClearItems
+  fullName.vb: System.Collections.ObjectModel.ObservableRangeCollection(Of T).ClearItems
+  nameWithType: ObservableRangeCollection<T>.ClearItems
+  nameWithType.vb: ObservableRangeCollection(Of T).ClearItems
+- uid: System.Collections.ObjectModel.ObservableRangeCollection`1.DeferEvents
+  name: DeferEvents()
+  href: api/System.Collections.ObjectModel.ObservableRangeCollection-1.html#System_Collections_ObjectModel_ObservableRangeCollection_1_DeferEvents
+  commentId: M:System.Collections.ObjectModel.ObservableRangeCollection`1.DeferEvents
+  fullName: System.Collections.ObjectModel.ObservableRangeCollection<T>.DeferEvents()
+  fullName.vb: System.Collections.ObjectModel.ObservableRangeCollection(Of T).DeferEvents()
+  nameWithType: ObservableRangeCollection<T>.DeferEvents()
+  nameWithType.vb: ObservableRangeCollection(Of T).DeferEvents()
+- uid: System.Collections.ObjectModel.ObservableRangeCollection`1.DeferEvents*
+  name: DeferEvents
+  href: api/System.Collections.ObjectModel.ObservableRangeCollection-1.html#System_Collections_ObjectModel_ObservableRangeCollection_1_DeferEvents_
+  commentId: Overload:System.Collections.ObjectModel.ObservableRangeCollection`1.DeferEvents
+  isSpec: "True"
+  fullName: System.Collections.ObjectModel.ObservableRangeCollection<T>.DeferEvents
+  fullName.vb: System.Collections.ObjectModel.ObservableRangeCollection(Of T).DeferEvents
+  nameWithType: ObservableRangeCollection<T>.DeferEvents
+  nameWithType.vb: ObservableRangeCollection(Of T).DeferEvents
+- uid: System.Collections.ObjectModel.ObservableRangeCollection`1.InsertRange(System.Int32,System.Collections.Generic.IEnumerable{`0})
+  name: InsertRange(Int32, IEnumerable<T>)
+  href: api/System.Collections.ObjectModel.ObservableRangeCollection-1.html#System_Collections_ObjectModel_ObservableRangeCollection_1_InsertRange_System_Int32_System_Collections_Generic_IEnumerable__0__
+  commentId: M:System.Collections.ObjectModel.ObservableRangeCollection`1.InsertRange(System.Int32,System.Collections.Generic.IEnumerable{`0})
+  name.vb: InsertRange(Int32, IEnumerable(Of T))
+  fullName: System.Collections.ObjectModel.ObservableRangeCollection<T>.InsertRange(System.Int32, System.Collections.Generic.IEnumerable<T>)
+  fullName.vb: System.Collections.ObjectModel.ObservableRangeCollection(Of T).InsertRange(System.Int32, System.Collections.Generic.IEnumerable(Of T))
+  nameWithType: ObservableRangeCollection<T>.InsertRange(Int32, IEnumerable<T>)
+  nameWithType.vb: ObservableRangeCollection(Of T).InsertRange(Int32, IEnumerable(Of T))
+- uid: System.Collections.ObjectModel.ObservableRangeCollection`1.InsertRange*
+  name: InsertRange
+  href: api/System.Collections.ObjectModel.ObservableRangeCollection-1.html#System_Collections_ObjectModel_ObservableRangeCollection_1_InsertRange_
+  commentId: Overload:System.Collections.ObjectModel.ObservableRangeCollection`1.InsertRange
+  isSpec: "True"
+  fullName: System.Collections.ObjectModel.ObservableRangeCollection<T>.InsertRange
+  fullName.vb: System.Collections.ObjectModel.ObservableRangeCollection(Of T).InsertRange
+  nameWithType: ObservableRangeCollection<T>.InsertRange
+  nameWithType.vb: ObservableRangeCollection(Of T).InsertRange
+- uid: System.Collections.ObjectModel.ObservableRangeCollection`1.OnCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)
+  name: OnCollectionChanged(NotifyCollectionChangedEventArgs)
+  href: api/System.Collections.ObjectModel.ObservableRangeCollection-1.html#System_Collections_ObjectModel_ObservableRangeCollection_1_OnCollectionChanged_System_Collections_Specialized_NotifyCollectionChangedEventArgs_
+  commentId: M:System.Collections.ObjectModel.ObservableRangeCollection`1.OnCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)
+  fullName: System.Collections.ObjectModel.ObservableRangeCollection<T>.OnCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)
+  fullName.vb: System.Collections.ObjectModel.ObservableRangeCollection(Of T).OnCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)
+  nameWithType: ObservableRangeCollection<T>.OnCollectionChanged(NotifyCollectionChangedEventArgs)
+  nameWithType.vb: ObservableRangeCollection(Of T).OnCollectionChanged(NotifyCollectionChangedEventArgs)
+- uid: System.Collections.ObjectModel.ObservableRangeCollection`1.OnCollectionChanged*
+  name: OnCollectionChanged
+  href: api/System.Collections.ObjectModel.ObservableRangeCollection-1.html#System_Collections_ObjectModel_ObservableRangeCollection_1_OnCollectionChanged_
+  commentId: Overload:System.Collections.ObjectModel.ObservableRangeCollection`1.OnCollectionChanged
+  isSpec: "True"
+  fullName: System.Collections.ObjectModel.ObservableRangeCollection<T>.OnCollectionChanged
+  fullName.vb: System.Collections.ObjectModel.ObservableRangeCollection(Of T).OnCollectionChanged
+  nameWithType: ObservableRangeCollection<T>.OnCollectionChanged
+  nameWithType.vb: ObservableRangeCollection(Of T).OnCollectionChanged
+- uid: System.Collections.ObjectModel.ObservableRangeCollection`1.RemoveAll(System.Int32,System.Int32,System.Predicate{`0})
+  name: RemoveAll(Int32, Int32, Predicate<T>)
+  href: api/System.Collections.ObjectModel.ObservableRangeCollection-1.html#System_Collections_ObjectModel_ObservableRangeCollection_1_RemoveAll_System_Int32_System_Int32_System_Predicate__0__
+  commentId: M:System.Collections.ObjectModel.ObservableRangeCollection`1.RemoveAll(System.Int32,System.Int32,System.Predicate{`0})
+  name.vb: RemoveAll(Int32, Int32, Predicate(Of T))
+  fullName: System.Collections.ObjectModel.ObservableRangeCollection<T>.RemoveAll(System.Int32, System.Int32, System.Predicate<T>)
+  fullName.vb: System.Collections.ObjectModel.ObservableRangeCollection(Of T).RemoveAll(System.Int32, System.Int32, System.Predicate(Of T))
+  nameWithType: ObservableRangeCollection<T>.RemoveAll(Int32, Int32, Predicate<T>)
+  nameWithType.vb: ObservableRangeCollection(Of T).RemoveAll(Int32, Int32, Predicate(Of T))
+- uid: System.Collections.ObjectModel.ObservableRangeCollection`1.RemoveAll(System.Predicate{`0})
+  name: RemoveAll(Predicate<T>)
+  href: api/System.Collections.ObjectModel.ObservableRangeCollection-1.html#System_Collections_ObjectModel_ObservableRangeCollection_1_RemoveAll_System_Predicate__0__
+  commentId: M:System.Collections.ObjectModel.ObservableRangeCollection`1.RemoveAll(System.Predicate{`0})
+  name.vb: RemoveAll(Predicate(Of T))
+  fullName: System.Collections.ObjectModel.ObservableRangeCollection<T>.RemoveAll(System.Predicate<T>)
+  fullName.vb: System.Collections.ObjectModel.ObservableRangeCollection(Of T).RemoveAll(System.Predicate(Of T))
+  nameWithType: ObservableRangeCollection<T>.RemoveAll(Predicate<T>)
+  nameWithType.vb: ObservableRangeCollection(Of T).RemoveAll(Predicate(Of T))
+- uid: System.Collections.ObjectModel.ObservableRangeCollection`1.RemoveAll*
+  name: RemoveAll
+  href: api/System.Collections.ObjectModel.ObservableRangeCollection-1.html#System_Collections_ObjectModel_ObservableRangeCollection_1_RemoveAll_
+  commentId: Overload:System.Collections.ObjectModel.ObservableRangeCollection`1.RemoveAll
+  isSpec: "True"
+  fullName: System.Collections.ObjectModel.ObservableRangeCollection<T>.RemoveAll
+  fullName.vb: System.Collections.ObjectModel.ObservableRangeCollection(Of T).RemoveAll
+  nameWithType: ObservableRangeCollection<T>.RemoveAll
+  nameWithType.vb: ObservableRangeCollection(Of T).RemoveAll
+- uid: System.Collections.ObjectModel.ObservableRangeCollection`1.RemoveRange(System.Collections.Generic.IEnumerable{`0})
+  name: RemoveRange(IEnumerable<T>)
+  href: api/System.Collections.ObjectModel.ObservableRangeCollection-1.html#System_Collections_ObjectModel_ObservableRangeCollection_1_RemoveRange_System_Collections_Generic_IEnumerable__0__
+  commentId: M:System.Collections.ObjectModel.ObservableRangeCollection`1.RemoveRange(System.Collections.Generic.IEnumerable{`0})
+  name.vb: RemoveRange(IEnumerable(Of T))
+  fullName: System.Collections.ObjectModel.ObservableRangeCollection<T>.RemoveRange(System.Collections.Generic.IEnumerable<T>)
+  fullName.vb: System.Collections.ObjectModel.ObservableRangeCollection(Of T).RemoveRange(System.Collections.Generic.IEnumerable(Of T))
+  nameWithType: ObservableRangeCollection<T>.RemoveRange(IEnumerable<T>)
+  nameWithType.vb: ObservableRangeCollection(Of T).RemoveRange(IEnumerable(Of T))
+- uid: System.Collections.ObjectModel.ObservableRangeCollection`1.RemoveRange(System.Int32,System.Int32)
+  name: RemoveRange(Int32, Int32)
+  href: api/System.Collections.ObjectModel.ObservableRangeCollection-1.html#System_Collections_ObjectModel_ObservableRangeCollection_1_RemoveRange_System_Int32_System_Int32_
+  commentId: M:System.Collections.ObjectModel.ObservableRangeCollection`1.RemoveRange(System.Int32,System.Int32)
+  fullName: System.Collections.ObjectModel.ObservableRangeCollection<T>.RemoveRange(System.Int32, System.Int32)
+  fullName.vb: System.Collections.ObjectModel.ObservableRangeCollection(Of T).RemoveRange(System.Int32, System.Int32)
+  nameWithType: ObservableRangeCollection<T>.RemoveRange(Int32, Int32)
+  nameWithType.vb: ObservableRangeCollection(Of T).RemoveRange(Int32, Int32)
+- uid: System.Collections.ObjectModel.ObservableRangeCollection`1.RemoveRange*
+  name: RemoveRange
+  href: api/System.Collections.ObjectModel.ObservableRangeCollection-1.html#System_Collections_ObjectModel_ObservableRangeCollection_1_RemoveRange_
+  commentId: Overload:System.Collections.ObjectModel.ObservableRangeCollection`1.RemoveRange
+  isSpec: "True"
+  fullName: System.Collections.ObjectModel.ObservableRangeCollection<T>.RemoveRange
+  fullName.vb: System.Collections.ObjectModel.ObservableRangeCollection(Of T).RemoveRange
+  nameWithType: ObservableRangeCollection<T>.RemoveRange
+  nameWithType.vb: ObservableRangeCollection(Of T).RemoveRange
+- uid: System.Collections.ObjectModel.ObservableRangeCollection`1.ReplaceRange(System.Collections.Generic.IEnumerable{`0})
+  name: ReplaceRange(IEnumerable<T>)
+  href: api/System.Collections.ObjectModel.ObservableRangeCollection-1.html#System_Collections_ObjectModel_ObservableRangeCollection_1_ReplaceRange_System_Collections_Generic_IEnumerable__0__
+  commentId: M:System.Collections.ObjectModel.ObservableRangeCollection`1.ReplaceRange(System.Collections.Generic.IEnumerable{`0})
+  name.vb: ReplaceRange(IEnumerable(Of T))
+  fullName: System.Collections.ObjectModel.ObservableRangeCollection<T>.ReplaceRange(System.Collections.Generic.IEnumerable<T>)
+  fullName.vb: System.Collections.ObjectModel.ObservableRangeCollection(Of T).ReplaceRange(System.Collections.Generic.IEnumerable(Of T))
+  nameWithType: ObservableRangeCollection<T>.ReplaceRange(IEnumerable<T>)
+  nameWithType.vb: ObservableRangeCollection(Of T).ReplaceRange(IEnumerable(Of T))
+- uid: System.Collections.ObjectModel.ObservableRangeCollection`1.ReplaceRange(System.Collections.Generic.IEnumerable{`0},System.Collections.Generic.IEqualityComparer{`0})
+  name: ReplaceRange(IEnumerable<T>, IEqualityComparer<T>)
+  href: api/System.Collections.ObjectModel.ObservableRangeCollection-1.html#System_Collections_ObjectModel_ObservableRangeCollection_1_ReplaceRange_System_Collections_Generic_IEnumerable__0__System_Collections_Generic_IEqualityComparer__0__
+  commentId: M:System.Collections.ObjectModel.ObservableRangeCollection`1.ReplaceRange(System.Collections.Generic.IEnumerable{`0},System.Collections.Generic.IEqualityComparer{`0})
+  name.vb: ReplaceRange(IEnumerable(Of T), IEqualityComparer(Of T))
+  fullName: System.Collections.ObjectModel.ObservableRangeCollection<T>.ReplaceRange(System.Collections.Generic.IEnumerable<T>, System.Collections.Generic.IEqualityComparer<T>)
+  fullName.vb: System.Collections.ObjectModel.ObservableRangeCollection(Of T).ReplaceRange(System.Collections.Generic.IEnumerable(Of T), System.Collections.Generic.IEqualityComparer(Of T))
+  nameWithType: ObservableRangeCollection<T>.ReplaceRange(IEnumerable<T>, IEqualityComparer<T>)
+  nameWithType.vb: ObservableRangeCollection(Of T).ReplaceRange(IEnumerable(Of T), IEqualityComparer(Of T))
+- uid: System.Collections.ObjectModel.ObservableRangeCollection`1.ReplaceRange(System.Int32,System.Int32,System.Collections.Generic.IEnumerable{`0})
+  name: ReplaceRange(Int32, Int32, IEnumerable<T>)
+  href: api/System.Collections.ObjectModel.ObservableRangeCollection-1.html#System_Collections_ObjectModel_ObservableRangeCollection_1_ReplaceRange_System_Int32_System_Int32_System_Collections_Generic_IEnumerable__0__
+  commentId: M:System.Collections.ObjectModel.ObservableRangeCollection`1.ReplaceRange(System.Int32,System.Int32,System.Collections.Generic.IEnumerable{`0})
+  name.vb: ReplaceRange(Int32, Int32, IEnumerable(Of T))
+  fullName: System.Collections.ObjectModel.ObservableRangeCollection<T>.ReplaceRange(System.Int32, System.Int32, System.Collections.Generic.IEnumerable<T>)
+  fullName.vb: System.Collections.ObjectModel.ObservableRangeCollection(Of T).ReplaceRange(System.Int32, System.Int32, System.Collections.Generic.IEnumerable(Of T))
+  nameWithType: ObservableRangeCollection<T>.ReplaceRange(Int32, Int32, IEnumerable<T>)
+  nameWithType.vb: ObservableRangeCollection(Of T).ReplaceRange(Int32, Int32, IEnumerable(Of T))
+- uid: System.Collections.ObjectModel.ObservableRangeCollection`1.ReplaceRange(System.Int32,System.Int32,System.Collections.Generic.IEnumerable{`0},System.Collections.Generic.IEqualityComparer{`0})
+  name: ReplaceRange(Int32, Int32, IEnumerable<T>, IEqualityComparer<T>)
+  href: api/System.Collections.ObjectModel.ObservableRangeCollection-1.html#System_Collections_ObjectModel_ObservableRangeCollection_1_ReplaceRange_System_Int32_System_Int32_System_Collections_Generic_IEnumerable__0__System_Collections_Generic_IEqualityComparer__0__
+  commentId: M:System.Collections.ObjectModel.ObservableRangeCollection`1.ReplaceRange(System.Int32,System.Int32,System.Collections.Generic.IEnumerable{`0},System.Collections.Generic.IEqualityComparer{`0})
+  name.vb: ReplaceRange(Int32, Int32, IEnumerable(Of T), IEqualityComparer(Of T))
+  fullName: System.Collections.ObjectModel.ObservableRangeCollection<T>.ReplaceRange(System.Int32, System.Int32, System.Collections.Generic.IEnumerable<T>, System.Collections.Generic.IEqualityComparer<T>)
+  fullName.vb: System.Collections.ObjectModel.ObservableRangeCollection(Of T).ReplaceRange(System.Int32, System.Int32, System.Collections.Generic.IEnumerable(Of T), System.Collections.Generic.IEqualityComparer(Of T))
+  nameWithType: ObservableRangeCollection<T>.ReplaceRange(Int32, Int32, IEnumerable<T>, IEqualityComparer<T>)
+  nameWithType.vb: ObservableRangeCollection(Of T).ReplaceRange(Int32, Int32, IEnumerable(Of T), IEqualityComparer(Of T))
+- uid: System.Collections.ObjectModel.ObservableRangeCollection`1.ReplaceRange*
+  name: ReplaceRange
+  href: api/System.Collections.ObjectModel.ObservableRangeCollection-1.html#System_Collections_ObjectModel_ObservableRangeCollection_1_ReplaceRange_
+  commentId: Overload:System.Collections.ObjectModel.ObservableRangeCollection`1.ReplaceRange
+  isSpec: "True"
+  fullName: System.Collections.ObjectModel.ObservableRangeCollection<T>.ReplaceRange
+  fullName.vb: System.Collections.ObjectModel.ObservableRangeCollection(Of T).ReplaceRange
+  nameWithType: ObservableRangeCollection<T>.ReplaceRange
+  nameWithType.vb: ObservableRangeCollection(Of T).ReplaceRange
+- uid: System.Collections.ObjectModel.ObservableRangeCollection`1.SetItem(System.Int32,`0)
+  name: SetItem(Int32, T)
+  href: api/System.Collections.ObjectModel.ObservableRangeCollection-1.html#System_Collections_ObjectModel_ObservableRangeCollection_1_SetItem_System_Int32__0_
+  commentId: M:System.Collections.ObjectModel.ObservableRangeCollection`1.SetItem(System.Int32,`0)
+  fullName: System.Collections.ObjectModel.ObservableRangeCollection<T>.SetItem(System.Int32, T)
+  fullName.vb: System.Collections.ObjectModel.ObservableRangeCollection(Of T).SetItem(System.Int32, T)
+  nameWithType: ObservableRangeCollection<T>.SetItem(Int32, T)
+  nameWithType.vb: ObservableRangeCollection(Of T).SetItem(Int32, T)
+- uid: System.Collections.ObjectModel.ObservableRangeCollection`1.SetItem*
+  name: SetItem
+  href: api/System.Collections.ObjectModel.ObservableRangeCollection-1.html#System_Collections_ObjectModel_ObservableRangeCollection_1_SetItem_
+  commentId: Overload:System.Collections.ObjectModel.ObservableRangeCollection`1.SetItem
+  isSpec: "True"
+  fullName: System.Collections.ObjectModel.ObservableRangeCollection<T>.SetItem
+  fullName.vb: System.Collections.ObjectModel.ObservableRangeCollection(Of T).SetItem
+  nameWithType: ObservableRangeCollection<T>.SetItem
+  nameWithType.vb: ObservableRangeCollection(Of T).SetItem
 - uid: System.DoubleExtensions
   name: DoubleExtensions
   href: api/System.DoubleExtensions.html
