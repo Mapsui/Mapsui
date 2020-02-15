@@ -230,7 +230,6 @@ namespace Mapsui.Rendering.Skia
 
             return result;
         }
-    }
 
         public class IdentityComparer<T> : IEqualityComparer<T> where T : class
         {

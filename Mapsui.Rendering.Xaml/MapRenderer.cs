@@ -269,7 +269,7 @@ namespace Mapsui.Rendering.Xaml
                 GeometryRenderer.PositionRaster(renderedGeometry, feature.Geometry.BoundingBox, viewport);
         }
 
-        public List<FeatureStylePair> GetMapInfo(double x, double y, IReadOnlyViewport viewport, IEnumerable<ILayer> layers)
+        public List<UI.MapInfo> GetMapInfo(double x, double y, IReadOnlyViewport viewport, IEnumerable<ILayer> layers)
         {
             throw new NotImplementedException();
         }
