@@ -1,10 +1,11 @@
 ﻿using Mapsui.Layers;
+using Mapsui.UI;
 using System.Collections.Generic;
 
 namespace Mapsui.Rendering
 {
     public interface IRenderInfo
     {
-        List<UI.MapInfo> GetMapInfo(double x, double y, IReadOnlyViewport viewport, IEnumerable<ILayer> layers);
+        MapInfo GetMapInfo(double x, double y, IReadOnlyViewport viewport, IEnumerable<ILayer> layers, int margin = 0);
     }
 }

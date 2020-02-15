@@ -343,12 +343,7 @@ namespace Mapsui.UI.Wpf
         /// <inheritdoc />
         public MapInfo GetMapInfo(Point screenPosition, int margin = 0)
         {
-            var mapInfo = MapInfoHelper.GetMapInfo(Map.Layers.Where(l => l.IsMapInfoLayer).ToList(), Viewport,
-                screenPosition, Renderer.SymbolCache, margin);
-
-            mapInfo.FeatureStylePairs = Renderer.GetMapInfo(screenPosition.X, screenPosition.Y, Viewport, Map.Layers);
-
-            return mapInfo;
+            return Renderer.GetMapInfo(screenPosition.X, screenPosition.Y, Viewport, Map.Layers, margin);
         }
 
         /// <inheritdoc />
@@ -420,8 +415,8 @@ namespace Mapsui.UI.Wpf
                 }
             }
         
-            var mapInfo = MapInfoHelper.GetMapInfo(layers, viewport, screenPosition, symbolCache);
-            mapInfo.FeatureStylePairs = Renderer.GetMapInfo(screenPosition.X, screenPosition.Y, Viewport, Map.Layers);
+            //var mapInfo = MapInfoHelper.GetMapInfo(layers, viewport, screenPosition, symbolCache);
+            var mapInfo = Renderer.GetMapInfo(screenPosition.X, screenPosition.Y, Viewport, Map.Layers);
 
             if (mapInfo != null)
             {

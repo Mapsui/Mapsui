@@ -11,7 +11,7 @@ namespace Mapsui.Rendering
     public static class VisibleFeatureIterator
     {
         public static void IterateLayers(IReadOnlyViewport viewport, IEnumerable<ILayer> layers,
-            Action<IReadOnlyViewport, IStyle, IFeature, float> callback)
+            Action<IReadOnlyViewport, ILayer, IStyle, IFeature, float> callback)
         {
             foreach (var layer in layers)
             {
@@ -24,7 +24,7 @@ namespace Mapsui.Rendering
         }
 
         private static void IterateLayer(IReadOnlyViewport viewport, ILayer layer,
-            Action<IReadOnlyViewport, IStyle, IFeature, float> callback)
+            Action<IReadOnlyViewport, ILayer, IStyle, IFeature, float> callback)
         {
             var features = layer.GetFeaturesInView(viewport.Extent, viewport.Resolution).ToList();
 
@@ -43,12 +43,12 @@ namespace Mapsui.Rendering
                         foreach (var s in styles)
                         {
                             if (ShouldNotBeApplied(s, viewport)) continue;
-                            callback(viewport, s, feature, (float)layer.Opacity);
+                            callback(viewport, layer, s, feature, (float)layer.Opacity);
                         }
                     }
                     else
                     {
-                        callback(viewport, style, feature, (float)layer.Opacity);
+                        callback(viewport, layer, style, feature, (float)layer.Opacity);
                     }
                 }
             }
@@ -60,7 +60,7 @@ namespace Mapsui.Rendering
                 {
                     if (ShouldNotBeApplied(featureStyle, viewport)) continue;
 
-                    callback(viewport, featureStyle, feature, (float)layer.Opacity);
+                    callback(viewport, layer, featureStyle, feature, (float)layer.Opacity);
 
                 }
             }

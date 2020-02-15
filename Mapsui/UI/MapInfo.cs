@@ -36,6 +36,6 @@ namespace Mapsui.UI
         /// </summary>
         public double Resolution { get; set; }
 
-        public List<FeatureStylePair> FeatureStylePairs { get; set; } = new List<FeatureStylePair>();
+        public List<MapInfoRecord> MapInfoRecords { get; set; } = new List<MapInfoRecord>();
     }
 }

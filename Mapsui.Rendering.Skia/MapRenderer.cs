@@ -8,6 +8,7 @@ using Mapsui.Logging;
 using Mapsui.Providers;
 using Mapsui.Rendering.Skia.SkiaWidgets;
 using Mapsui.Styles;
+using Mapsui.UI;
 using Mapsui.Widgets;
 using Mapsui.Widgets.ScaleBar;
 using Mapsui.Widgets.Zoom;
@@ -95,7 +96,7 @@ namespace Mapsui.Rendering.Skia
             {
                 layers = layers.ToList();
 
-                VisibleFeatureIterator.IterateLayers(viewport, layers, (v, l, s, o) => { RenderFeature(canvas, v, l, s, o); });
+                VisibleFeatureIterator.IterateLayers(viewport, layers, (v, l, s, f, o) => { RenderFeature(canvas, v, l, s, f, o); });
 
                 RemovedUnusedBitmapsFromCache();
 
@@ -132,7 +133,7 @@ namespace Mapsui.Rendering.Skia
             }
         }
 
-        private void RenderFeature(SKCanvas canvas, IReadOnlyViewport viewport, IStyle style, IFeature feature, float layerOpacity)
+        private void RenderFeature(SKCanvas canvas, IReadOnlyViewport viewport, ILayer layer, IStyle style, IFeature feature, float layerOpacity)
         {
             if (feature.Geometry is Point)
                 PointRenderer.Draw(canvas, viewport, style, feature, feature.Geometry, _symbolCache, layerOpacity * style.Opacity);
@@ -155,10 +156,19 @@ namespace Mapsui.Rendering.Skia
             WidgetRenderer.Render(canvas, viewport, widgets, WidgetRenders, layerOpacity);
         }
 
-        public List<UI.MapInfo> GetMapInfo(double x, double y, IReadOnlyViewport viewport, IEnumerable<ILayer> layers)
+        public MapInfo GetMapInfo(double x, double y, IReadOnlyViewport viewport, IEnumerable<ILayer> layers, int margin = 0)
         {
-            var list = new List<FeatureStylePair>();
-            var result = new List<UI.MapInfo>();
+            // todo: use margin to increase the pixel area
+
+            // todo: We will need to select on style instead of layer
+            layers = layers.Where(l => l.IsMapInfoLayer);
+
+            var list = new List<MapInfoRecord>();
+            var result = new MapInfo()
+            {
+                ScreenPosition = new Point(x, y),
+                WorldPosition = viewport.ScreenToWorld(x, y),
+            };
 
             try
             {
@@ -172,49 +182,33 @@ namespace Mapsui.Rendering.Skia
 
                     var pixmap = surface.PeekPixels();
 
-                    VisibleFeatureIterator.IterateLayers(viewport, layers, (v, l, s, o) => {
+                    VisibleFeatureIterator.IterateLayers(viewport, layers, (v, layer, style, feature, opacity) =>
+                    {
+
                         // 1) Clear the entire bitmap
                         surface.Canvas.Clear(SKColors.Transparent);
                         // 2) Render the feature to the clean canvas
-                        RenderFeature(surface.Canvas, v, style, feature, opacity);
+                        RenderFeature(surface.Canvas, v, layer, style, feature, opacity);
                         // 3) Check if the pixel has changed.
                         var color = pixmap.GetPixelColor((int)x, (int)y);
                         // 4) Add feature and style to result
                         if (color != 0)
-                            list.Add(new FeatureStylePair(s, l));
+                            list.Add(new MapInfoRecord(layer, feature, style));
+
                     });
                 }
 
-
-                // Now we have a list of all features with style that are hit
                 if (list.Count == 0)
                     return result;
 
-                foreach (var featureStylePair in list)
-                {
-                    ILayer layerOfFeature = null;
+                list.Reverse();
+                var itemDrawnOnTop = list.First();
 
-                    // Find layer to which this feature belongs
-                    foreach (var layer in layers)
-                    {
-                        foreach (var feature in layer.GetFeaturesInView(viewport.Extent, viewport.Resolution))
-                        {
-                            if (feature.Equals(featureStylePair.Feature))
-                            {
-                                layerOfFeature = layer;
-                                break;
-                            }
-                        }
-                    }
+                result.Feature = itemDrawnOnTop.Feature;
+                result.Style = itemDrawnOnTop.Style;
+                result.Layer = itemDrawnOnTop.Layer;
+                result.MapInfoRecords = list;
 
-                    result.Add(new UI.MapInfo() {
-                        ScreenPosition = new Point(x, y),
-                        WorldPosition = viewport.ScreenToWorld(x, y),
-                        Feature = featureStylePair.Feature,
-                        Style = featureStylePair.Style,
-                        Layer = layerOfFeature
-                    });
-                }
             }
             catch (Exception exception)
             {
@@ -222,20 +216,6 @@ namespace Mapsui.Rendering.Skia
             }
 
             return result;
-        }
-
-        private bool CheckPixelChanged(int x, int y, SKSurface surface)
-        {
-            var pixels = new SKPixmap();
-            if (surface.PeekPixels(pixels))
-            {
-                var pixel = pixels.GetPixelColor(x, y);
-                if (pixel.Alpha == 0) return false;
-                if (pixel.Red > 0) return true;
-                if (pixel.Green > 0) return true;
-                return pixel.Blue > 0;
-            }
-            return false;
         }
 
         public class IdentityComparer<T> : IEqualityComparer<T> where T : class

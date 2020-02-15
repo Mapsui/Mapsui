@@ -143,8 +143,8 @@ namespace Mapsui.Samples.Wpf
 
         private void MapControlOnInfo(object sender, MapInfoEventArgs args)
         {
-            if (args.MapInfo.FeatureStylePairs.Any())
-                FeatureInfo.Text = $"Click Info:{Environment.NewLine}{args.MapInfo.FeatureStylePairs.First().Feature.ToDisplayText()}";
+            if (args.MapInfo.MapInfoRecords.Any())
+                FeatureInfo.Text = $"Click Info:{Environment.NewLine}{args.MapInfo.MapInfoRecords.First().Feature.ToDisplayText()}";
         }
     }
 }
