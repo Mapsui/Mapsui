@@ -348,7 +348,7 @@ namespace Mapsui.UI.Wpf
 
             var layers = Map.Layers.Where(l => l.IsMapInfoLayer).ToList();
             var list = ((MapRenderer)Renderer).GetMapInfo(screenPosition.X, screenPosition.Y, _viewport, layers);
-            var result = list.FirstOrDefault();
+            var result = list.LastOrDefault();
 
             if (result == null)
                 result = new MapInfo() {
