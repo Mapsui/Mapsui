@@ -272,14 +272,13 @@ namespace Mapsui.Rendering.Xaml
 
         public MapInfo GetMapInfo(Geometries.Point screenPosition, IReadOnlyViewport viewport, IEnumerable<ILayer> layers, int margin = 0)
         {
-            return GetMapInfo(screenPosition.X, screenPosition.Y, viewport, layers);
+            layers = layers.Where(l => l.IsMapInfoLayer);
+            return MapInfoHelper.GetMapInfo(layers, viewport, screenPosition, _symbolCache, margin);
         }
 
         public MapInfo GetMapInfo(double x, double y, IReadOnlyViewport viewport, IEnumerable<ILayer> layers, int margin = 0)
         {
-            layers = layers.Where(l => l.IsMapInfoLayer);
-
-            return MapInfoHelper.GetMapInfo(layers, viewport, new Geometries.Point(x, y), _symbolCache, margin);
+            return GetMapInfo(x, y, viewport, layers);
         }
     }
 }
