@@ -194,7 +194,7 @@ namespace Mapsui.Rendering.Skia
                         var color = pixmap.GetPixelColor((int)x, (int)y);
                         // 4) Add feature and style to result
                         if (color != 0)
-                            list.Add(new MapInfoRecord(layer, feature, style));
+                            list.Add(new MapInfoRecord(feature, style, layer));
 
                     });
                 }
@@ -217,6 +217,11 @@ namespace Mapsui.Rendering.Skia
             }
 
             return result;
+        }
+
+        public MapInfo GetMapInfo(Point screenPosition, IReadOnlyViewport viewport, IEnumerable<ILayer> layers, int margin = 0)
+        {
+            return GetMapInfo(screenPosition.X, screenPosition.Y, viewport, layers, margin);
         }
 
         public class IdentityComparer<T> : IEqualityComparer<T> where T : class

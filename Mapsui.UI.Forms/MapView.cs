@@ -459,8 +459,7 @@ namespace Mapsui.UI.Forms
         /// <inheritdoc />
         public MapInfo GetMapInfo(Geometries.Point screenPosition, int margin = 0)
         {
-            return MapInfoHelper.GetMapInfo(Map.Layers.Where(l => l.IsMapInfoLayer), Viewport,
-                screenPosition, _mapControl.Renderer.SymbolCache, margin);
+            return MapControl.Renderer.GetMapInfo(screenPosition, Viewport, Map.Layers, margin);
         }
 
         /// <inheritdoc />

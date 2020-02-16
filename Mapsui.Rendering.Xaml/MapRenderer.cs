@@ -270,6 +270,11 @@ namespace Mapsui.Rendering.Xaml
                 GeometryRenderer.PositionRaster(renderedGeometry, feature.Geometry.BoundingBox, viewport);
         }
 
+        public MapInfo GetMapInfo(Geometries.Point screenPosition, IReadOnlyViewport viewport, IEnumerable<ILayer> layers, int margin = 0)
+        {
+            return GetMapInfo(screenPosition.X, screenPosition.Y, viewport, layers);
+        }
+
         public MapInfo GetMapInfo(double x, double y, IReadOnlyViewport viewport, IEnumerable<ILayer> layers, int margin = 0)
         {
             layers = layers.Where(l => l.IsMapInfoLayer);

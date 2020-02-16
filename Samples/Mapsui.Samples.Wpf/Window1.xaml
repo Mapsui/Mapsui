@@ -39,7 +39,7 @@
                         <Slider x:Name="RotationSlider" MinWidth="140" ValueChanged="RotationSliderChanged" />
                     </StackPanel>
                 </Border>
-                <Border BorderBrush="White" Opacity="0.65" Background="White" BorderThickness="6"
+                <Border Name="FeatureInfoBorder" BorderBrush="White" Opacity="0.65" Background="White" BorderThickness="6"
                             VerticalAlignment="Bottom" HorizontalAlignment="left">
                     <TextBlock Name="FeatureInfo" TextWrapping="Wrap"/>
                 </Border>

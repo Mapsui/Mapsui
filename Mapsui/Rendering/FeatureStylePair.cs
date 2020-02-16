@@ -6,15 +6,15 @@ namespace Mapsui.Rendering
 {
     public class MapInfoRecord
     {
-        public MapInfoRecord(ILayer layer, IFeature feature, IStyle style)
+        public MapInfoRecord(IFeature feature, IStyle style, ILayer layer)
         {
             Layer = layer;
             Feature = feature;
             Style = style;
         }
 
-        public ILayer Layer { get; set; }
         public IFeature Feature { get; set; }
         public IStyle Style { get; set; }
+        public ILayer Layer { get; set; }
     }
 }
