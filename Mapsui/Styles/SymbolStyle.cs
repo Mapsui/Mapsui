@@ -62,9 +62,10 @@ namespace Mapsui.Styles
 
         /// <summary>
         /// When true a symbol will rotate along with the rotation of the map.
-        /// The is useful if you need to symbolize the direction in which a vehicle
+        /// This is useful if you need to symbolize the direction in which a vehicle
         /// is moving. When the symbol is false it will retain it's position to the
         /// screen. This is useful for pins like symbols. The default is false.
+        /// This mode is not supported in the WPF renderer.
         /// </summary>
         public bool RotateWithMap { get; set; }
 

@@ -278,7 +278,7 @@ namespace Mapsui.Rendering.Xaml
 
         public MapInfo GetMapInfo(double x, double y, IReadOnlyViewport viewport, IEnumerable<ILayer> layers, int margin = 0)
         {
-            return GetMapInfo(x, y, viewport, layers);
+            return GetMapInfo(new Geometries.Point(x, y), viewport, layers);
         }
     }
 }
