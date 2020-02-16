@@ -19,6 +19,7 @@ using Mapsui.Widgets;
 using Mapsui.Widgets.ScaleBar;
 using Mapsui.Widgets.Zoom;
 using XamlMedia = System.Windows.Media;
+using Mapsui.UI;
 
 namespace Mapsui.Rendering.Xaml
 {
@@ -267,6 +268,17 @@ namespace Mapsui.Rendering.Xaml
                 GeometryRenderer.PositionGeometry(renderedGeometry, viewport);
             else if (feature.Geometry is IRaster)
                 GeometryRenderer.PositionRaster(renderedGeometry, feature.Geometry.BoundingBox, viewport);
+        }
+
+        public MapInfo GetMapInfo(Geometries.Point screenPosition, IReadOnlyViewport viewport, IEnumerable<ILayer> layers, int margin = 0)
+        {
+            layers = layers.Where(l => l.IsMapInfoLayer);
+            return MapInfoHelper.GetMapInfo(layers, viewport, screenPosition, _symbolCache, margin);
+        }
+
+        public MapInfo GetMapInfo(double x, double y, IReadOnlyViewport viewport, IEnumerable<ILayer> layers, int margin = 0)
+        {
+            return GetMapInfo(x, y, viewport, layers);
         }
     }
 }

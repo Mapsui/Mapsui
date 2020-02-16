@@ -12,11 +12,11 @@
         Height="800"
         Title="Mapsui.Samples.Wpf"
         SizeToContent="Manual">
-        <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-            <DockPanel >
-                <Border BorderBrush="White" Opacity="0.65" Background="White" BorderThickness="6" MinWidth="140"
+    <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+        <DockPanel >
+            <Border BorderBrush="White" Opacity="0.65" Background="White" BorderThickness="6" MinWidth="140"
                                 MinHeight="30" VerticalAlignment="Top" HorizontalAlignment="Left">
-                    <DockPanel>
+                <DockPanel>
                     <StackPanel DockPanel.Dock="Top">
                         <ComboBox Name="RenderMode" Margin="0,0, 0, 10">
                             <ComboBoxItem IsSelected="True">Skia renderer</ComboBoxItem>
@@ -24,36 +24,34 @@
                         </ComboBox>
                         <ComboBox Name="CategoryComboBox" Margin="0,0, 0, 10">
                         </ComboBox>
-                        </StackPanel>
+                    </StackPanel>
                     <ScrollViewer VerticalScrollBarVisibility="Auto" DockPanel.Dock="Bottom">
                         <StackPanel Name="SampleList" Width="Auto" />
                     </ScrollViewer>
-                    </DockPanel>
-          
-                    
-                </Border>
-                <Grid>
-                    <wpf1:MapControl x:Name="MapControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+                </DockPanel>
+            </Border>
+            <Grid>
+                <wpf1:MapControl x:Name="MapControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
                 <Border BorderBrush="White" Opacity="0.65" Background="White" BorderThickness="6"
                         VerticalAlignment="Top" HorizontalAlignment="Right" MinWidth="140" MinHeight="30">
-                        <StackPanel>
-                            <wpf:LayerList x:Name="LayerList" />
-                            <Slider x:Name="RotationSlider" MinWidth="140" ValueChanged="RotationSliderChanged" />
-                        </StackPanel>
-                    </Border>
-                    <Border BorderBrush="White" Opacity="0.65" Background="White" BorderThickness="6"
-                            VerticalAlignment="Center" HorizontalAlignment="Right">
-                        <TextBlock Name="FeatureInfo" TextWrapping="Wrap"/>
-                    </Border>
-                    <Border BorderBrush="White" Opacity="0.65" Background="White" BorderThickness="6"
-                            VerticalAlignment="Bottom" HorizontalAlignment="Center" MinWidth="40" MinHeight="30">
-                        <TextBlock x:Name="MouseCoordinates" Text="0, 0" />
-                    </Border>
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Margin="32"
-                                HorizontalAlignment="Stretch" IsHitTestVisible="False">
-                        <TextBlock Name="LogTextBox" Foreground="#a0000000" />
+                    <StackPanel>
+                        <wpf:LayerList x:Name="LayerList" />
+                        <Slider x:Name="RotationSlider" MinWidth="140" ValueChanged="RotationSliderChanged" />
                     </StackPanel>
-                </Grid> 
-            </DockPanel>
-        </Grid>
+                </Border>
+                <Border Name="FeatureInfoBorder" BorderBrush="White" Opacity="0.65" Background="White" BorderThickness="6"
+                            VerticalAlignment="Bottom" HorizontalAlignment="left">
+                    <TextBlock Name="FeatureInfo" TextWrapping="Wrap"/>
+                </Border>
+                <Border BorderBrush="White" Opacity="0.65" Background="White" BorderThickness="6"
+                            VerticalAlignment="Bottom" HorizontalAlignment="Center" MinWidth="40" MinHeight="30">
+                    <TextBlock x:Name="MouseCoordinates" Text="0, 0" />
+                </Border>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Margin="32"
+                                HorizontalAlignment="Stretch" IsHitTestVisible="False">
+                    <TextBlock Name="LogTextBox" Foreground="#a0000000" />
+                </StackPanel>
+            </Grid>
+        </DockPanel>
+    </Grid>
 </Window>
