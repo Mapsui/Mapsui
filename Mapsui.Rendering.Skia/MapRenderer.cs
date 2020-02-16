@@ -168,6 +168,7 @@ namespace Mapsui.Rendering.Skia
             {
                 ScreenPosition = new Point(x, y),
                 WorldPosition = viewport.ScreenToWorld(x, y),
+                Resolution = viewport.Resolution
             };
 
             try
