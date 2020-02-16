@@ -175,27 +175,31 @@ namespace Mapsui.Rendering.Skia
             {
                 var width = (int)viewport.Width;
                 var height = (int)viewport.Height;
+
                 var imageInfo = new SKImageInfo(width, height, SKImageInfo.PlatformColorType, SKAlphaType.Unpremul);
+
+                var intX = (int)x;
+                var intY = (int)y;
 
                 using (var surface = SKSurface.Create(imageInfo))
                 {
                     if (surface == null) return null;
 
+                    surface.Canvas.ClipRect(new SKRect((float)(x - 1), (float)(y - 1), (float)(x + 1), (float)(y + 1)));
+                    surface.Canvas.Clear(SKColors.Transparent);
+
                     var pixmap = surface.PeekPixels();
+                    var color = pixmap.GetPixelColor(intX, intY);
 
-                    VisibleFeatureIterator.IterateLayers(viewport, layers, (v, layer, style, feature, opacity) =>
-                    {
-
+                    VisibleFeatureIterator.IterateLayers(viewport, layers, (v, layer, style, feature, opacity) => {
                         // 1) Clear the entire bitmap
                         surface.Canvas.Clear(SKColors.Transparent);
                         // 2) Render the feature to the clean canvas
                         RenderFeature(surface.Canvas, v, layer, style, feature, opacity);
                         // 3) Check if the pixel has changed.
-                        var color = pixmap.GetPixelColor((int)x, (int)y);
-                        // 4) Add feature and style to result
-                        if (color != 0)
+                        if (color != pixmap.GetPixelColor(intX, intY))
+                            // 4) Add feature and style to result
                             list.Add(new MapInfoRecord(feature, style, layer));
-
                     });
                 }
 

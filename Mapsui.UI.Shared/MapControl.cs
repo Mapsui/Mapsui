@@ -415,7 +415,6 @@ namespace Mapsui.UI.Wpf
                 }
             }
         
-            //var mapInfo = MapInfoHelper.GetMapInfo(layers, viewport, screenPosition, symbolCache);
             var mapInfo = Renderer.GetMapInfo(screenPosition.X, screenPosition.Y, Viewport, Map.Layers);
 
             if (mapInfo != null)
