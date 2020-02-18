@@ -10,6 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)ExtensionMethods\FeatureExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ManyPinsSample.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SnapshotSample.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>

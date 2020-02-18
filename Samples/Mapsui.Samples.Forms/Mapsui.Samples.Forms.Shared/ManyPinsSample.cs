@@ -3,25 +3,27 @@ using Mapsui.Samples.Common.Maps;
 using Mapsui.UI;
 using Mapsui.UI.Forms;
 using System;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using Xamarin.Forms;
 
 namespace Mapsui.Samples.Forms
 {
-    public class PinSample : IFormsSample
+    public class ManyPinsSample : IFormsSample
     {
         static int markerNum = 1;
         static Random rnd = new Random();
 
-        public string Name => "Add Pin Sample";
+        public string Name => "Add many Pins Sample";
 
         public string Category => "Forms";
 
         public bool OnClick(object sender, EventArgs args)
         {
             var mapView = sender as MapView;
-            var mapClickedArgs = args as MapClickedEventArgs;
+            var e = args as MapClickedEventArgs;
 
             var assembly = typeof(MainPageLarge).GetTypeInfo().Assembly;
             foreach (var str in assembly.GetManifestResourceNames())
@@ -45,64 +47,40 @@ namespace Mapsui.Samples.Forms
                     break;
             }
 
-            switch (mapClickedArgs.NumOfTaps)
+            switch (e.NumOfTaps)
             {
                 case 1:
                     var pin = new Pin(mapView)
                     {
                         Label = $"PinType.Pin {markerNum++}",
-                        Position = mapClickedArgs.Point,
-                        Address = mapClickedArgs.Point.ToString(),
+                        Address = e.Point.ToString(),
+                        Position = e.Point,
                         Type = PinType.Pin,
                         Color = new Xamarin.Forms.Color(rnd.Next(0, 256) / 256.0, rnd.Next(0, 256) / 256.0, rnd.Next(0, 256) / 256.0),
                         Transparency = 0.5f,
                         Scale = rnd.Next(50, 130) / 100f,
                     };
                     pin.Callout.Anchor = new Point(0, pin.Height * pin.Scale);
-                    pin.Callout.RectRadius = rnd.Next(0, 10);
-                    pin.Callout.ArrowHeight = rnd.Next(5, 20);
+                    pin.Callout.RectRadius = rnd.Next(0, 30);
+                    pin.Callout.ArrowHeight = rnd.Next(0, 20);
                     pin.Callout.ArrowWidth = rnd.Next(0, 20);
                     pin.Callout.ArrowAlignment = (ArrowAlignment)rnd.Next(0, 4);
-                    pin.Callout.ArrowPosition = rnd.Next(0, 100) / 100.0;
-                    pin.Callout.StrokeWidth = 1;
-                    pin.Callout.Padding = new Thickness(rnd.Next(0, 20), rnd.Next(0, 20));
+                    pin.Callout.ArrowPosition = rnd.Next(0, 100) / 100;
                     pin.Callout.BackgroundColor = Color.White;
                     pin.Callout.Color = pin.Color;
                     if (rnd.Next(0, 3) < 2)
                     {
                         pin.Callout.Type = CalloutType.Detail;
                         pin.Callout.TitleFontSize = rnd.Next(15, 30);
-                        pin.Callout.TitleTextAlignment = TextAlignment.Center;
                         pin.Callout.SubtitleFontSize = pin.Callout.TitleFontSize - 5;
                         pin.Callout.TitleFontColor = new Xamarin.Forms.Color(rnd.Next(0, 256) / 256.0, rnd.Next(0, 256) / 256.0, rnd.Next(0, 256) / 256.0);
                         pin.Callout.SubtitleFontColor = pin.Color;
-                        pin.Callout.SubtitleTextAlignment = TextAlignment.Center;
-                        pin.Callout.Spacing = rnd.Next(0, 10);
-                        pin.Callout.MaxWidth = rnd.Next(100, 200);
                     }
                     else
                     {
                         pin.Callout.Type = CalloutType.Detail;
                         pin.Callout.Content = 1;
                     }
-                    pin.Callout.CalloutClicked += (s, e) =>
-                    {
-                        if (e.NumOfTaps == 2)
-                        {
-                            // Double click on callout moves pin
-                            var p = e.Callout.Pin;
-                            p.Position = new Position(p.Position.Latitude + 0.01, p.Position.Longitude);
-                            e.Handled = true;
-                            return;
-                        }
-                        if (e.Callout.Title != "You clicked me!")
-                        {
-                            e.Callout.Type = CalloutType.Single;
-                            e.Callout.Title = "You clicked me!";
-                            e.Handled = true;
-                            return;
-                        }
-                    };
                     mapView.Pins.Add(pin);
                     pin.ShowCallout();
                     break;
@@ -116,7 +94,7 @@ namespace Mapsui.Samples.Forms
                     mapView.Pins.Add(new Pin(mapView)
                     {
                         Label = $"PinType.Svg {markerNum++}",
-                        Position = mapClickedArgs.Point,
+                        Position = e.Point,
                         Type = PinType.Svg,
                         Scale = 0.1f,
                         Svg = svgString
@@ -127,7 +105,7 @@ namespace Mapsui.Samples.Forms
                     mapView.Pins.Add(new Pin(mapView)
                     {
                         Label = $"PinType.Icon {markerNum++}",
-                        Position = mapClickedArgs.Point,
+                        Position = e.Point,
                         Type = PinType.Icon,
                         Scale = 0.5f,
                         Icon = icon
@@ -140,14 +118,67 @@ namespace Mapsui.Samples.Forms
 
         public void Setup(IMapControl mapControl)
         {
-            //OSM never displays....
-            //mapControl.Map = OsmSample.CreateMap();
-
-            //I like bing Hybrid
-            mapControl.Map = BingSample.CreateMap(BruTile.Predefined.KnownTileSource.BingHybrid);
+            mapControl.Map = OsmSample.CreateMap();
 
             ((MapView)mapControl).UseDoubleTap = true;
-            //((MapView)mapControl).UniqueCallout = true;
+            ((MapView)mapControl).UniqueCallout = true;
+
+            var sw = new Stopwatch();
+            sw.Start();
+
+            // Add 1000 pins
+            var list = new System.Collections.Generic.List<Pin>();
+            for (var i = 0; i < 1000; i++)
+            {
+                list.Add(CreatePin(i));
+            }
+
+            var timePart1 = sw.Elapsed;
+
+            ((ObservableRangeCollection<Pin>)((MapView)mapControl).Pins).AddRange(list);
+
+            var timePart2 = sw.Elapsed;
+
+            sw.Stop();
+        }
+
+        private Pin CreatePin(int num)
+        {
+            var position = new Position(0 + rnd.Next(-85000, +85000) / 1000.0, 0 + rnd.Next(-180000, +180000) / 1000.0);
+
+            var pin = new Pin()
+            {
+                Label = $"PinType.Pin {num++}",
+                Address = position.ToString(),
+                Position = position,
+                Type = PinType.Pin,
+                Color = new Xamarin.Forms.Color(rnd.Next(0, 256) / 256.0, rnd.Next(0, 256) / 256.0, rnd.Next(0, 256) / 256.0),
+                Transparency = 0.5f,
+                Scale = rnd.Next(50, 130) / 100f,
+            };
+            pin.Callout.Anchor = new Point(0, pin.Height * pin.Scale);
+            pin.Callout.RectRadius = rnd.Next(0, 30);
+            pin.Callout.ArrowHeight = rnd.Next(0, 20);
+            pin.Callout.ArrowWidth = rnd.Next(0, 20);
+            pin.Callout.ArrowAlignment = (ArrowAlignment)rnd.Next(0, 4);
+            pin.Callout.ArrowPosition = rnd.Next(0, 100) / 100;
+            pin.Callout.BackgroundColor = Color.White;
+            pin.Callout.Color = pin.Color;
+            if (rnd.Next(0, 3) < 2)
+            {
+                pin.Callout.Type = CalloutType.Detail;
+                pin.Callout.TitleFontSize = rnd.Next(15, 30);
+                pin.Callout.SubtitleFontSize = pin.Callout.TitleFontSize - 5;
+                pin.Callout.TitleFontColor = new Xamarin.Forms.Color(rnd.Next(0, 256) / 256.0, rnd.Next(0, 256) / 256.0, rnd.Next(0, 256) / 256.0);
+                pin.Callout.SubtitleFontColor = pin.Color;
+            }
+            else
+            {
+                pin.Callout.Type = CalloutType.Detail;
+                pin.Callout.Content = 1;
+            }
+            
+            return pin;
         }
     }
 }

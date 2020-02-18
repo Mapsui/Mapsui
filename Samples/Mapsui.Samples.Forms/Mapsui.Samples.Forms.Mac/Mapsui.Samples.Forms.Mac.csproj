@@ -62,6 +62,9 @@
     <Reference Include="BruTile.MbTiles, Version=2.1.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\BruTile.MbTiles.2.1.2\lib\netstandard1.1\BruTile.MbTiles.dll</HintPath>
     </Reference>
+    <Reference Include="HarfBuzzSharp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\HarfBuzzSharp.2.6.1\lib\Xamarin.Mac20\HarfBuzzSharp.dll</HintPath>
+    </Reference>
     <Reference Include="Reminiscence, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Reminiscence.1.2.0\lib\netstandard2.0\Reminiscence.dll</HintPath>
     </Reference>
@@ -91,6 +94,9 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="Topten.RichTextKit, Version=0.1.118.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Topten.RichTextKit.0.1.118\lib\netstandard2.0\Topten.RichTextKit.dll</HintPath>
+    </Reference>
     <Reference Include="Xamarin.Forms.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Xamarin.Forms.4.3.0.991211\lib\Xamarin.Mac\Xamarin.Forms.Core.dll</HintPath>
     </Reference>
@@ -156,6 +162,10 @@
     <ProjectReference Include="..\..\..\Mapsui.Geometries\Mapsui.Geometries.csproj">
       <Project>{ee55b62d-ffa2-4c24-a4ad-7a47ace55ce5}</Project>
       <Name>Mapsui.Geometries</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj">
+      <Project>{ae632270-38ca-4203-93a5-8612629cd944}</Project>
+      <Name>Mapsui.Rendering.Skia</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Mapsui.UI.Forms\Mapsui.UI.Forms.csproj">
       <Project>{CD1DC52E-F73F-411A-9682-66827FC8010C}</Project>

@@ -143,6 +143,9 @@
     <PackageReference Include="SkiaSharp.Views.Forms">
       <Version>1.68.2-preview.17</Version>
     </PackageReference>
+    <PackageReference Include="Topten.RichTextKit">
+      <Version>0.1.118</Version>
+    </PackageReference>
     <PackageReference Include="Xam.Plugin.Geolocator">
       <Version>4.5.0.6</Version>
     </PackageReference>

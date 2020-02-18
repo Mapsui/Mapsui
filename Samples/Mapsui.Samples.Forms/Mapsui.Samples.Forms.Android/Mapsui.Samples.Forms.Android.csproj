@@ -55,6 +55,9 @@
     <Reference Include="FormsViewGroup, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Xamarin.Forms.4.3.0.991211\lib\MonoAndroid90\FormsViewGroup.dll</HintPath>
     </Reference>
+    <Reference Include="HarfBuzzSharp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\HarfBuzzSharp.2.6.1\lib\MonoAndroid\HarfBuzzSharp.dll</HintPath>
+    </Reference>
     <Reference Include="Itinero, Version=1.3.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Itinero.1.3.2\lib\netstandard1.3\Itinero.dll</HintPath>
     </Reference>
@@ -123,6 +126,9 @@
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Serialization" />
+    <Reference Include="Topten.RichTextKit, Version=0.1.118.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Topten.RichTextKit.0.1.118\lib\netstandard2.0\Topten.RichTextKit.dll</HintPath>
+    </Reference>
     <Reference Include="Xamarin.Android.Arch.Core.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Xamarin.Android.Arch.Core.Common.1.1.1.3\lib\monoandroid90\Xamarin.Android.Arch.Core.Common.dll</HintPath>
     </Reference>

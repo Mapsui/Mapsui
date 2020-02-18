@@ -1,4 +1,5 @@
-﻿using Mapsui.Samples.Common;
+﻿using Mapsui.Rendering.Skia;
+using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.ExtensionMethods;
 using Mapsui.UI.Forms;
 using Plugin.Geolocator;
@@ -57,7 +58,20 @@ namespace Mapsui.Samples.Forms
         private void MapView_Info(object sender, UI.MapInfoEventArgs e)
         {
             if (e?.MapInfo?.Feature != null)
+            {
                 featureInfo.Text = $"Click Info:{Environment.NewLine}{e.MapInfo.Feature.ToDisplayText()}";
+
+                foreach (var style in e.MapInfo.Feature.Styles)
+                {
+                    if (style is CalloutStyle)
+                    {
+                        style.Enabled = !style.Enabled;
+                        e.Handled = true;
+                    }
+                }
+
+                mapView.Refresh();
+            }
         }
 
         private void FillListWithSamples()
@@ -109,7 +123,10 @@ namespace Mapsui.Samples.Forms
                     e.Pin.IsVisible = false;
                 }
                 if (e.NumOfTaps == 1)
-                    e.Pin.IsCalloutVisible = !e.Pin.IsCalloutVisible;
+                    if (e.Pin.Callout.IsVisible)
+                        e.Pin.HideCallout();
+                    else
+                        e.Pin.ShowCallout();
             }
 
             e.Handled = true;
