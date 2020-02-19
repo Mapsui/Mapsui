@@ -6,6 +6,7 @@ using System.Reflection;
 using Mapsui.Layers;
 using Mapsui.Projection;
 using Mapsui.Providers;
+using Mapsui.Rendering.Skia;
 using Mapsui.Styles;
 using Mapsui.UI;
 using Mapsui.Utilities;
@@ -55,7 +56,7 @@ namespace Mapsui.Samples.Common.Maps
             var assembly = typeof(PointsSample).GetTypeInfo().Assembly;
             var stream = assembly.GetManifestResourceStream(path);
             var cities = DeserializeFromStream<City>(stream);
-            
+
             return cities.Select(c =>
             {
                 var feature = new Feature();
@@ -75,23 +76,23 @@ namespace Mapsui.Samples.Common.Maps
 
         private static IStyle CreateCalloutStyle(int bitmapId)
         {
-            var calloutStyle = new Rendering.Skia.CalloutStyle() { Content = bitmapId, ArrowPosition = Random.Next(1, 9) * 0.1f, RotateWithMap = true };
+            var calloutStyle = new CalloutStyle() { Content = bitmapId, ArrowPosition = Random.Next(1, 9) * 0.1f, RotateWithMap = true };
             switch (Random.Next(0, 4))
             {
                 case 0:
-                    calloutStyle.ArrowAlignment = Rendering.Skia.ArrowAlignment.Bottom;
+                    calloutStyle.ArrowAlignment = ArrowAlignment.Bottom;
                     calloutStyle.Offset = new Geometries.Point(0, SymbolStyle.DefaultHeight * 0.5f);
                     break;
                 case 1:
-                    calloutStyle.ArrowAlignment = Rendering.Skia.ArrowAlignment.Left;
+                    calloutStyle.ArrowAlignment = ArrowAlignment.Left;
                     calloutStyle.Offset = new Geometries.Point(SymbolStyle.DefaultHeight * 0.5f, 0);
                     break;
                 case 2:
-                    calloutStyle.ArrowAlignment = Rendering.Skia.ArrowAlignment.Top;
+                    calloutStyle.ArrowAlignment = ArrowAlignment.Top;
                     calloutStyle.Offset = new Geometries.Point(0, -SymbolStyle.DefaultHeight * 0.5f);
                     break;
                 case 3:
-                    calloutStyle.ArrowAlignment = Rendering.Skia.ArrowAlignment.Right;
+                    calloutStyle.ArrowAlignment = ArrowAlignment.Right;
                     calloutStyle.Offset = new Geometries.Point(-SymbolStyle.DefaultHeight * 0.5f, 0);
                     break;
             }
@@ -115,14 +116,16 @@ namespace Mapsui.Samples.Common.Maps
                     // Set transform to center and enlarge clip path to window height
                     textPath.GetTightBounds(out bounds);
                 }
-                var bitmap = new SKBitmap((int)(bounds.Width + 1), (int)(bounds.Height + 1));
-                var canvas = new SKCanvas(bitmap);
-                canvas.Clear();
-                canvas.DrawText(city.Name, -bounds.Left, -bounds.Top, paint);
-                MemoryStream memStream = new MemoryStream();
-                SKManagedWStream wstream = new SKManagedWStream(memStream);
-                SKPixmap.Encode(wstream, bitmap, SKEncodedImageFormat.Png, 100);
-                return memStream;
+                using (var bitmap = new SKBitmap((int)(bounds.Width + 1), (int)(bounds.Height + 1)))
+                using (var canvas = new SKCanvas(bitmap))
+                {
+                    canvas.Clear();
+                    canvas.DrawText(city.Name, -bounds.Left, -bounds.Top, paint);
+                    var memStream = new MemoryStream();
+                    var wstream = new SKManagedWStream(memStream);
+                    SKPixmap.Encode(wstream, bitmap, SKEncodedImageFormat.Png, 100);
+                    return memStream;
+                }
             }
         }
 
