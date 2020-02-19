@@ -63,32 +63,12 @@ namespace Mapsui.Samples.Common.Maps
                 feature.Geometry = point;
                 feature["name"] = c.Name;
                 feature["country"] = c.Country;
-                // Create a bitmap of name with Skia
-                var bitmapId = -1;
-                // Get text size
-                SKRect bounds;
-                using (SKPaint paint = new SKPaint())
-                {
-                    paint.Color = new SKColor((byte)Random.Next(0, 256), (byte)Random.Next(0, 256), (byte)Random.Next(0, 256));
-                    paint.Typeface = SKTypeface.FromFamilyName(null, SKFontStyleWeight.Bold, SKFontStyleWidth.Normal, SKFontStyleSlant.Upright);
-                    paint.TextSize = 20;
+                
+                var callbackImage = CreateCallbackImage(c);
+                var bitmapId = BitmapRegistry.Instance.Register(callbackImage);
 
-                    using (SKPath textPath = paint.GetTextPath(c.Name, 0, 0))
-                    {
-                        // Set transform to center and enlarge clip path to window height
-                        textPath.GetTightBounds(out bounds);
-                    }
-                    var bitmap = new SKBitmap((int)(bounds.Width + 1), (int)(bounds.Height + 1));
-                    var canvas = new SKCanvas(bitmap);
-                    canvas.Clear();
-                    canvas.DrawText(c.Name, -bounds.Left, -bounds.Top, paint);
-                    MemoryStream memStream = new MemoryStream();
-                    SKManagedWStream wstream = new SKManagedWStream(memStream);
-                    SKPixmap.Encode(wstream, bitmap, SKEncodedImageFormat.Png, 100);
-                    bitmapId = BitmapRegistry.Instance.Register(memStream);
-                }
                 var calloutStyle = new Rendering.Skia.CalloutStyle() { Content = bitmapId, ArrowPosition = Random.Next(1, 9) * 0.1f, RotateWithMap = true };
-                switch ((int)Random.Next(0, 4))
+                switch (Random.Next(0, 4))
                 {
                     case 0:
                         calloutStyle.ArrowAlignment = Rendering.Skia.ArrowAlignment.Bottom;
@@ -113,6 +93,31 @@ namespace Mapsui.Samples.Common.Maps
                 feature.Styles.Add(calloutStyle);
                 return feature;
             });
+        }
+
+        private static MemoryStream CreateCallbackImage(City city)
+        {
+            SKRect bounds;
+            using (SKPaint paint = new SKPaint())
+            {
+                paint.Color = new SKColor((byte)Random.Next(0, 256), (byte)Random.Next(0, 256), (byte)Random.Next(0, 256));
+                paint.Typeface = SKTypeface.FromFamilyName(null, SKFontStyleWeight.Bold, SKFontStyleWidth.Normal, SKFontStyleSlant.Upright);
+                paint.TextSize = 20;
+
+                using (SKPath textPath = paint.GetTextPath(city.Name, 0, 0))
+                {
+                    // Set transform to center and enlarge clip path to window height
+                    textPath.GetTightBounds(out bounds);
+                }
+                var bitmap = new SKBitmap((int)(bounds.Width + 1), (int)(bounds.Height + 1));
+                var canvas = new SKCanvas(bitmap);
+                canvas.Clear();
+                canvas.DrawText(city.Name, -bounds.Left, -bounds.Top, paint);
+                MemoryStream memStream = new MemoryStream();
+                SKManagedWStream wstream = new SKManagedWStream(memStream);
+                SKPixmap.Encode(wstream, bitmap, SKEncodedImageFormat.Png, 100);
+                return memStream;
+            }
         }
 
         private class City
