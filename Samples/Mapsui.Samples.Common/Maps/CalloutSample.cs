@@ -122,8 +122,10 @@ namespace Mapsui.Samples.Common.Maps
                     canvas.Clear();
                     canvas.DrawText(city.Name, -bounds.Left, -bounds.Top, paint);
                     var memStream = new MemoryStream();
-                    var wstream = new SKManagedWStream(memStream);
-                    SKPixmap.Encode(wstream, bitmap, SKEncodedImageFormat.Png, 100);
+                    using (var wstream = new SKManagedWStream(memStream))
+                    {
+                        SKPixmap.Encode(wstream, bitmap, SKEncodedImageFormat.Png, 100);
+                    }
                     return memStream;
                 }
             }
