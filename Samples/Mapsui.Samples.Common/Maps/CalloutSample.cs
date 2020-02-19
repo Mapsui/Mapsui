@@ -63,36 +63,42 @@ namespace Mapsui.Samples.Common.Maps
                 feature.Geometry = point;
                 feature["name"] = c.Name;
                 feature["country"] = c.Country;
-                
+
                 var callbackImage = CreateCallbackImage(c);
                 var bitmapId = BitmapRegistry.Instance.Register(callbackImage);
-
-                var calloutStyle = new Rendering.Skia.CalloutStyle() { Content = bitmapId, ArrowPosition = Random.Next(1, 9) * 0.1f, RotateWithMap = true };
-                switch (Random.Next(0, 4))
-                {
-                    case 0:
-                        calloutStyle.ArrowAlignment = Rendering.Skia.ArrowAlignment.Bottom;
-                        calloutStyle.Offset = new Geometries.Point(0, SymbolStyle.DefaultHeight * 0.5f);
-                        break;
-                    case 1:
-                        calloutStyle.ArrowAlignment = Rendering.Skia.ArrowAlignment.Left;
-                        calloutStyle.Offset = new Geometries.Point(SymbolStyle.DefaultHeight * 0.5f, 0);
-                        break;
-                    case 2:
-                        calloutStyle.ArrowAlignment = Rendering.Skia.ArrowAlignment.Top;
-                        calloutStyle.Offset = new Geometries.Point(0, -SymbolStyle.DefaultHeight * 0.5f);
-                        break;
-                    case 3:
-                        calloutStyle.ArrowAlignment = Rendering.Skia.ArrowAlignment.Right;
-                        calloutStyle.Offset = new Geometries.Point(-SymbolStyle.DefaultHeight * 0.5f, 0);
-                        break;
-                }
-                calloutStyle.RectRadius = 10; // Random.Next(0, 9);
-                calloutStyle.ShadowWidth = 4; // Random.Next(0, 9);
-                calloutStyle.StrokeWidth = 0;
+                var calloutStyle = CreateCalloutStyle(bitmapId);
                 feature.Styles.Add(calloutStyle);
+
                 return feature;
             });
+        }
+
+        private static IStyle CreateCalloutStyle(int bitmapId)
+        {
+            var calloutStyle = new Rendering.Skia.CalloutStyle() { Content = bitmapId, ArrowPosition = Random.Next(1, 9) * 0.1f, RotateWithMap = true };
+            switch (Random.Next(0, 4))
+            {
+                case 0:
+                    calloutStyle.ArrowAlignment = Rendering.Skia.ArrowAlignment.Bottom;
+                    calloutStyle.Offset = new Geometries.Point(0, SymbolStyle.DefaultHeight * 0.5f);
+                    break;
+                case 1:
+                    calloutStyle.ArrowAlignment = Rendering.Skia.ArrowAlignment.Left;
+                    calloutStyle.Offset = new Geometries.Point(SymbolStyle.DefaultHeight * 0.5f, 0);
+                    break;
+                case 2:
+                    calloutStyle.ArrowAlignment = Rendering.Skia.ArrowAlignment.Top;
+                    calloutStyle.Offset = new Geometries.Point(0, -SymbolStyle.DefaultHeight * 0.5f);
+                    break;
+                case 3:
+                    calloutStyle.ArrowAlignment = Rendering.Skia.ArrowAlignment.Right;
+                    calloutStyle.Offset = new Geometries.Point(-SymbolStyle.DefaultHeight * 0.5f, 0);
+                    break;
+            }
+            calloutStyle.RectRadius = 10; // Random.Next(0, 9);
+            calloutStyle.ShadowWidth = 4; // Random.Next(0, 9);
+            calloutStyle.StrokeWidth = 0;
+            return calloutStyle;
         }
 
         private static MemoryStream CreateCallbackImage(City city)
