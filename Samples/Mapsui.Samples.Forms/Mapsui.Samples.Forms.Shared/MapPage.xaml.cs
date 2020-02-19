@@ -1,7 +1,4 @@
 ﻿using System;
-using System.IO;
-using Mapsui.Samples.Common.Helpers;
-using Mapsui.Samples.Common.Maps;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Mapsui.UI.Forms;
@@ -9,6 +6,7 @@ using Plugin.Geolocator;
 using Plugin.Geolocator.Abstractions;
 using Mapsui.UI;
 using System.Threading.Tasks;
+using Mapsui.Rendering.Skia;
 
 namespace Mapsui.Samples.Forms
 {
@@ -35,6 +33,8 @@ namespace Mapsui.Samples.Forms
 
             mapView.MyLocationLayer.UpdateMyLocation(new UI.Forms.Position());
 
+            mapView.Info += MapView_Info;
+
             Task.Run(() => StartGPS());
 
             setup(mapView);
@@ -45,6 +45,23 @@ namespace Mapsui.Samples.Forms
         protected override void OnAppearing()
         {
             mapView.Refresh();
+        }
+
+        private void MapView_Info(object sender, UI.MapInfoEventArgs e)
+        {
+            if (e?.MapInfo?.Feature != null)
+            {
+                foreach (var style in e.MapInfo.Feature.Styles)
+                {
+                    if (style is CalloutStyle)
+                    {
+                        style.Enabled = !style.Enabled;
+                        e.Handled = true;
+                    }
+                }
+
+                mapView.Refresh();
+            }
         }
 
         private void OnMapClicked(object sender, MapClickedEventArgs e)
@@ -65,7 +82,10 @@ namespace Mapsui.Samples.Forms
                     e.Pin.IsVisible = false;
                 }
                 if (e.NumOfTaps == 1)
-                    e.Pin.IsCalloutVisible = !e.Pin.IsCalloutVisible;
+                    if (e.Pin.Callout.IsVisible)
+                        e.Pin.HideCallout();
+                    else
+                        e.Pin.ShowCallout();
             }
 
             e.Handled = true;

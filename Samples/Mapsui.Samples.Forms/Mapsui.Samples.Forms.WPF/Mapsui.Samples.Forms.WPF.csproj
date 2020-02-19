@@ -42,6 +42,9 @@
     <Reference Include="BruTile, Version=2.1.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\BruTile.2.1.2\lib\net45\BruTile.dll</HintPath>
     </Reference>
+    <Reference Include="HarfBuzzSharp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\HarfBuzzSharp.2.6.1\lib\net45\HarfBuzzSharp.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -134,6 +137,9 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="Topten.RichTextKit, Version=0.1.118.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Topten.RichTextKit.0.1.118\lib\net45\Topten.RichTextKit.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
@@ -235,6 +241,7 @@
     <Error Condition="!Exists('..\..\..\packages\SkiaSharp.1.68.2-preview.17\build\net45\SkiaSharp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\SkiaSharp.1.68.2-preview.17\build\net45\SkiaSharp.targets'))" />
     <Error Condition="!Exists('..\..\..\packages\SkiaSharp.Views.Forms.1.68.2-preview.17\build\net45\SkiaSharp.Views.Forms.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\SkiaSharp.Views.Forms.1.68.2-preview.17\build\net45\SkiaSharp.Views.Forms.targets'))" />
     <Error Condition="!Exists('..\..\..\packages\SkiaSharp.Views.Forms.WPF.1.68.2-preview.17\build\net45\SkiaSharp.Views.Forms.WPF.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\SkiaSharp.Views.Forms.WPF.1.68.2-preview.17\build\net45\SkiaSharp.Views.Forms.WPF.props'))" />
+    <Error Condition="!Exists('..\..\..\packages\HarfBuzzSharp.2.6.1\build\net45\HarfBuzzSharp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\HarfBuzzSharp.2.6.1\build\net45\HarfBuzzSharp.targets'))" />
   </Target>
   <Import Project="..\..\..\packages\SQLitePCLRaw.lib.e_sqlite3.linux.1.1.13\build\net35\SQLitePCLRaw.lib.e_sqlite3.linux.targets" Condition="Exists('..\..\..\packages\SQLitePCLRaw.lib.e_sqlite3.linux.1.1.11\build\net35\SQLitePCLRaw.lib.e_sqlite3.linux.targets')" />
   <Import Project="..\..\..\packages\SQLitePCLRaw.lib.e_sqlite3.v110_xp.1.1.13\build\net35\SQLitePCLRaw.lib.e_sqlite3.v110_xp.targets" Condition="Exists('..\..\..\packages\SQLitePCLRaw.lib.e_sqlite3.v110_xp.1.1.11\build\net35\SQLitePCLRaw.lib.e_sqlite3.v110_xp.targets')" />
@@ -242,4 +249,5 @@
   <Import Project="..\..\..\packages\Xamarin.Forms.4.3.0.991211\build\Xamarin.Forms.targets" Condition="Exists('..\..\..\packages\Xamarin.Forms.4.3.0.991211\build\Xamarin.Forms.targets')" />
   <Import Project="..\..\..\packages\SkiaSharp.1.68.2-preview.17\build\net45\SkiaSharp.targets" Condition="Exists('..\..\..\packages\SkiaSharp.1.68.2-preview.17\build\net45\SkiaSharp.targets')" />
   <Import Project="..\..\..\packages\SkiaSharp.Views.Forms.1.68.2-preview.17\build\net45\SkiaSharp.Views.Forms.targets" Condition="Exists('..\..\..\packages\SkiaSharp.Views.Forms.1.68.2-preview.17\build\net45\SkiaSharp.Views.Forms.targets')" />
+  <Import Project="..\..\..\packages\HarfBuzzSharp.2.6.1\build\net45\HarfBuzzSharp.targets" Condition="Exists('..\..\..\packages\HarfBuzzSharp.2.6.1\build\net45\HarfBuzzSharp.targets')" />
 </Project>
