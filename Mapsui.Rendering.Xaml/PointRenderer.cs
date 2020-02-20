@@ -6,6 +6,7 @@ using XamlMedia = System.Windows.Media;
 using XamlShapes = System.Windows.Shapes;
 using XamlPoint = System.Windows.Point;
 using XamlColors = System.Windows.Media.Colors;
+using Mapsui.Utilities;
 
 namespace Mapsui.Rendering.Xaml
 {
@@ -14,7 +15,7 @@ namespace Mapsui.Rendering.Xaml
         public static XamlShapes.Shape RenderPoint(Point point, IStyle style, IReadOnlyViewport viewport,
             SymbolCache symbolCache)
         {
-            XamlShapes.Shape symbol;
+            XamlShapes.Shape symbol = null;
             var matrix = XamlMedia.Matrix.Identity;
 
             var symbolStyle = style as SymbolStyle;
@@ -28,10 +29,15 @@ namespace Mapsui.Rendering.Xaml
                 }
                 matrix = CreatePointSymbolMatrix(viewport.Resolution, viewport.Rotation, symbolStyle, symbol.Width, symbol.Height);
             }
-            else
+            else if (style is VectorStyle)
             {
                 symbol = CreateSymbolFromVectorStyle((style as VectorStyle) ?? new VectorStyle(), symbolCache: symbolCache, rotate: (float)viewport.Rotation);
                 MatrixHelper.ScaleAt(ref matrix, viewport.Resolution, viewport.Resolution);
+            }
+            else if (style is CustomStyle customStyle)
+            {
+                symbol = null;
+                customStyle.Render(new RenderStyleEventArgs(null, null, null, customStyle, (float)viewport.Rotation));
             }
 
             MatrixHelper.Append(ref matrix, GeometryRenderer.CreateTransformMatrix(viewport, point));

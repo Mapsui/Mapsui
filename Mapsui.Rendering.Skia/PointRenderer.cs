@@ -2,6 +2,7 @@
 using Mapsui.Geometries;
 using Mapsui.Providers;
 using Mapsui.Styles;
+using Mapsui.Utilities;
 using SkiaSharp;
 
 namespace Mapsui.Rendering.Skia
@@ -35,6 +36,10 @@ namespace Mapsui.Rendering.Skia
             else if (style is VectorStyle)        // case 4) VectorStyle
             {
                 DrawPointWithVectorStyle(canvas, (VectorStyle) style, destination, opacity);
+            }
+            else if (style is CustomStyle)
+            {
+                DrawPointWithCustomStyle(canvas, (CustomStyle)style, destination, feature, opacity, (float)viewport.Rotation);
             }
             else
             {
@@ -71,6 +76,21 @@ namespace Mapsui.Rendering.Skia
             DrawPointWithVectorStyle(canvas, vectorStyle, opacity, symbolType);
             canvas.Restore();
         }
+
+        private static void DrawPointWithCustomStyle(SKCanvas canvas, CustomStyle customStyle,
+            Point destination, IFeature feature, float opacity, float mapRotation)
+        {
+            var rotation = (float)customStyle.Rotation;
+
+            if (customStyle.RotateWithMap)
+                rotation += mapRotation;
+
+            canvas.Save();
+            canvas.Translate((float)destination.X, (float)destination.Y);
+            customStyle.Render(new RenderStyleEventArgs(canvas, null, feature, customStyle, rotation));
+            canvas.Restore();
+        }
+
 
         private static void DrawPointWithVectorStyle(SKCanvas canvas, VectorStyle vectorStyle,
             float opacity, SymbolType symbolType = SymbolType.Ellipse)

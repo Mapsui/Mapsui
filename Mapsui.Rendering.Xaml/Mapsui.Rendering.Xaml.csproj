@@ -82,6 +82,7 @@
     <Compile Include="ExtensionMethods\VerticalAlignment.cs" />
     <Compile Include="ExtensionMethods\HorizontalAlignment.cs" />
     <Compile Include="ExtensionMethods\BitmapImageExtensions.cs" />
+    <Compile Include="XamlStyles\IXamlStyleRenderer.cs" />
     <Compile Include="XamlWidgets\HyperlinkWidgetRenderer.cs" />
     <Compile Include="OutlinedTextBlock.cs" />
     <Compile Include="XamlWidgets\IXamlWidgetRenderer.cs" />
