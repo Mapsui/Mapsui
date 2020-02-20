@@ -1,4 +1,6 @@
-﻿using Mapsui.Utilities;
+﻿using Mapsui.Layers;
+using Mapsui.Providers;
+using Mapsui.Utilities;
 using System;
 
 namespace Mapsui.Styles
@@ -25,11 +27,8 @@ namespace Mapsui.Styles
 
         public float Opacity { get; set; }
 
-        public void Render(RenderStyleEventArgs args)
+        public virtual void Render(object canvas, IFeature feature, float mapRotation)
         {
-            OnRender?.Invoke(this, args);
         }
-
-        public event EventHandler<RenderStyleEventArgs> OnRender;
     }
 }

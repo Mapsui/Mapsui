@@ -80,14 +80,9 @@ namespace Mapsui.Rendering.Skia
         private static void DrawPointWithCustomStyle(SKCanvas canvas, CustomStyle customStyle,
             Point destination, IFeature feature, float opacity, float mapRotation)
         {
-            var rotation = (float)customStyle.Rotation;
-
-            if (customStyle.RotateWithMap)
-                rotation += mapRotation;
-
             canvas.Save();
             canvas.Translate((float)destination.X, (float)destination.Y);
-            customStyle.Render(new RenderStyleEventArgs(canvas, null, feature, customStyle, rotation));
+            customStyle.Render(canvas, feature, mapRotation);
             canvas.Restore();
         }
 

@@ -17,6 +17,54 @@ using SkiaSharp;
 
 namespace Mapsui.Samples.Common.Maps
 {
+    public class OwnerDrawnStyle : CustomStyle
+    {
+        private static Random Random = new Random();
+
+        public override void Render(object canvas, IFeature feature, float mapRotation)
+        {
+            if (canvas is SKCanvas skCanvas)
+            {
+                // Here goes code for Skia renderer
+
+                // Owner drawn content should always stay in the top middle of the underlaying vector style
+                skCanvas.Save();
+                skCanvas.Translate(new SKPoint(0, -16));
+                // Than rotate
+                var rotation = (float)Rotation + (RotateWithMap ? mapRotation : 0f);
+                skCanvas.RotateDegrees(rotation);
+                // Draw a random geometry
+                if (Random.Next(0, 2) == 0)
+                    skCanvas.DrawCircle(new SKPoint(0, 0), 5, new SKPaint() { Color = SKColors.Red, IsAntialias = true });
+                else
+                    skCanvas.DrawRect(new SKRect(-5, -5, 5, 5), new SKPaint() { Color = SKColors.Blue, IsAntialias = true });
+                skCanvas.Restore();
+                
+                skCanvas.Save();
+                SKRect bounds;
+                using (SKPaint paint = new SKPaint())
+                {
+                    paint.Color = new SKColor((byte)Random.Next(0, 256), (byte)Random.Next(0, 256), (byte)Random.Next(0, 256));
+                    paint.Typeface = SKTypeface.FromFamilyName(null, SKFontStyleWeight.Bold, SKFontStyleWidth.Normal, SKFontStyleSlant.Upright);
+                    paint.TextSize = 20;
+
+                    using (SKPath textPath = paint.GetTextPath((string)feature["name"], 0, 0))
+                    {
+                        // Set transform to center and enlarge clip path to window height
+                        textPath.GetTightBounds(out bounds);
+                    }
+                    skCanvas.Translate(-bounds.MidX, -bounds.MidY);
+                    skCanvas.DrawText((string)feature["name"], new SKPoint(0, 0), paint);
+                }
+                skCanvas.Restore();
+            }
+            else
+            {
+                // Here goes code for the WPF renderer
+            }
+        }
+    }
+
     public class CustomStyleSample : ISample
     {
         private static Random Random = new Random();
@@ -68,42 +116,18 @@ namespace Mapsui.Samples.Common.Maps
                 feature["name"] = c.Name;
                 feature["country"] = c.Country;
 
-                var customStyle = CreateCustomStyle();
-                feature.Styles.Add(customStyle);
+                var ownerDrawnStyle = CreateOwnerDrawnStyle();
+                feature.Styles.Add(ownerDrawnStyle);
 
                 return feature;
             });
         }
 
-        private static IStyle CreateCustomStyle()
+        private static IStyle CreateOwnerDrawnStyle()
         {
-            var customStyle = new CustomStyle() { RotateWithMap = true };
+            var ownerDrawnStyle = new OwnerDrawnStyle() { RotateWithMap = true };
 
-            customStyle.OnRender += Render;
-
-            return customStyle;
-        }
-
-        private static void Render(object sender, RenderStyleEventArgs e)
-        {
-            if (e.Canvas is SKCanvas canvas)//IsSkiaRenderer)
-            {
-                // Here goes code for Skia renderer
-
-                // Owner drawn content should always stay in the top middle of the underlaying vector style
-                canvas.Translate(new SKPoint(0, -16));
-                // Than rotate
-                canvas.RotateDegrees(e.Rotation);
-                // Draw a random geometry
-                if (Random.Next(0, 2) == 0)
-                    canvas.DrawCircle(new SKPoint(0, 0), 5, new SKPaint() { Color = SKColors.Red, IsAntialias = true });
-                else
-                    canvas.DrawRect(new SKRect(-5, -5, 5, 5), new SKPaint() { Color = SKColors.Blue, IsAntialias = true });
-            }
-            else
-            {
-                // Here goes code for the WPF renderer
-            }
+            return ownerDrawnStyle;
         }
 
         private class City

@@ -37,7 +37,7 @@ namespace Mapsui.Rendering.Xaml
             else if (style is CustomStyle customStyle)
             {
                 symbol = null;
-                customStyle.Render(new RenderStyleEventArgs(null, null, null, customStyle, (float)viewport.Rotation));
+                customStyle.Render(null, null, (float)viewport.Rotation);
             }
 
             MatrixHelper.Append(ref matrix, GeometryRenderer.CreateTransformMatrix(viewport, point));
