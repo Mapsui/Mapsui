@@ -1,7 +1,6 @@
 ﻿using Mapsui.Geometries;
 using Mapsui.Styles;
 using Mapsui.Widgets;
-using SkiaSharp;
 using System.Runtime.CompilerServices;
 
 namespace Mapsui.Rendering.Skia
@@ -51,8 +50,7 @@ namespace Mapsui.Rendering.Skia
     public class CalloutStyle : SymbolStyle
     {
         private CalloutType _type = CalloutType.Single;
-        private SKPath _path;
-        private SKPoint _center;
+        private bool _invalidated; // todo: set to false after rendering.
         private ArrowAlignment _arrowAlignment = ArrowAlignment.Bottom;
         private float _arrowWidth = 8f;
         private float _arrowHeight = 8f;
@@ -96,7 +94,7 @@ namespace Mapsui.Rendering.Skia
                 if (_type != value)
                 {
                     _type = value;
-                    _path = null;
+                    _invalidated = true;
                     OnPropertyChanged();
                 }
             }
@@ -140,22 +138,6 @@ namespace Mapsui.Rendering.Skia
         }
 
         /// <summary>
-        /// Storage for an own bubble path
-        /// </summary>
-        public SKPath Path
-        {
-            get => _path;
-            set
-            {
-                if (_path != value)
-                {
-                    _path = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        /// <summary>
         /// Anchor position of Callout
         /// </summary>
         public ArrowAlignment ArrowAlignment 
@@ -166,7 +148,7 @@ namespace Mapsui.Rendering.Skia
                 if (value != _arrowAlignment)
                 {
                     _arrowAlignment = value;
-                    _path = null;
+                    _invalidated = true;
                     OnPropertyChanged();
                 }
             }
@@ -183,7 +165,7 @@ namespace Mapsui.Rendering.Skia
                 if (value != _arrowWidth)
                 {
                     _arrowWidth = value;
-                    _path = null;
+                    _invalidated = true;
                     OnPropertyChanged();
                 }
             }
@@ -200,7 +182,7 @@ namespace Mapsui.Rendering.Skia
                 if (value != _arrowHeight)
                 {
                     _arrowHeight = value;
-                    _path = null;
+                    _invalidated = true;
                     OnPropertyChanged();
                 }
             }
@@ -217,7 +199,7 @@ namespace Mapsui.Rendering.Skia
                 if (value != _arrowPosition)
                 {
                     _arrowPosition = value;
-                    _path = null;
+                    _invalidated = true;
                     OnPropertyChanged();
                 }
             }
@@ -266,7 +248,7 @@ namespace Mapsui.Rendering.Skia
                 if (value != _strokeWidth)
                 {
                     _strokeWidth = value;
-                    _path = null;
+                    _invalidated = true;
                     OnPropertyChanged();
                 }
             }
@@ -283,7 +265,7 @@ namespace Mapsui.Rendering.Skia
                 if (value != _rectRadius)
                 {
                     _rectRadius = value;
-                    _path = null;
+                    _invalidated = true;
                     OnPropertyChanged();
                 }
             }
@@ -300,7 +282,7 @@ namespace Mapsui.Rendering.Skia
                 if (value != _padding)
                 {
                     _padding = value;
-                    _path = null;
+                    _invalidated = true;
                     OnPropertyChanged();
                 }
             }
@@ -317,7 +299,7 @@ namespace Mapsui.Rendering.Skia
                 if (value != _shadowWidth)
                 {
                     _shadowWidth = value;
-                    _path = null;
+                    _invalidated = true;
                     OnPropertyChanged();
                 }
             }
@@ -337,7 +319,7 @@ namespace Mapsui.Rendering.Skia
                 if (_content != value)
                 {
                     _content = value;
-                    _path = null;
+                    _invalidated = true;
                     OnPropertyChanged();
                 }
             }
@@ -354,7 +336,7 @@ namespace Mapsui.Rendering.Skia
                 if (_title != value)
                 {
                     _title = value;
-                    _path = null;
+                    _invalidated = true;
                     OnPropertyChanged();
                 }
             }
@@ -371,7 +353,7 @@ namespace Mapsui.Rendering.Skia
                 if (_styleTitle.FontFamily != value)
                 {
                     _styleTitle.FontFamily = value;
-                    _path = null;
+                    _invalidated = true;
                     OnPropertyChanged();
                 }
             }
@@ -388,7 +370,7 @@ namespace Mapsui.Rendering.Skia
                 if (_styleTitle.FontSize != value)
                 {
                     _styleTitle.FontSize = (float)value;
-                    _path = null;
+                    _invalidated = true;
                     OnPropertyChanged();
                 }
             }
@@ -405,7 +387,7 @@ namespace Mapsui.Rendering.Skia
                 if (_styleTitle.FontItalic != value)
                 {
                     _styleTitle.FontItalic = value;
-                    _path = null;
+                    _invalidated = true;
                     OnPropertyChanged();
                 }
             }
@@ -420,7 +402,7 @@ namespace Mapsui.Rendering.Skia
             set
             {
                 _styleTitle.FontWeight = (value ? 700 : 400);
-                _path = null;
+                _invalidated = true;
                 OnPropertyChanged();
             }
         }
@@ -436,7 +418,7 @@ namespace Mapsui.Rendering.Skia
                 if (_styleTitle.TextColor.ToMapsui() != value)
                 {
                     _styleTitle.TextColor = value.ToSkia(1f);
-                    _path = null;
+                    _invalidated = true;
                     OnPropertyChanged();
                 }
             }
@@ -453,7 +435,7 @@ namespace Mapsui.Rendering.Skia
                 if (_titleTextAlignment != value)
                 {
                     _titleTextAlignment = value;
-                    _path = null;
+                    _invalidated = true;
                     OnPropertyChanged();
                 }
             }
@@ -470,7 +452,7 @@ namespace Mapsui.Rendering.Skia
                 if (_subtitle != value)
                 {
                     _subtitle = value;
-                    _path = null;
+                    _invalidated = true;
                     OnPropertyChanged();
                 }
             }
@@ -487,7 +469,7 @@ namespace Mapsui.Rendering.Skia
                 if (_styleTitle.FontFamily != value)
                 {
                     _styleTitle.FontFamily = value;
-                    _path = null;
+                    _invalidated = true;
                     OnPropertyChanged();
                 }
             }
@@ -504,7 +486,7 @@ namespace Mapsui.Rendering.Skia
                 if (_styleSubtitle.FontSize != value)
                 {
                     _styleSubtitle.FontSize = (float)value;
-                    _path = null;
+                    _invalidated = true;
                     OnPropertyChanged();
                 }
             }
@@ -521,7 +503,7 @@ namespace Mapsui.Rendering.Skia
                 if (_styleSubtitle.FontItalic != value)
                 {
                     _styleSubtitle.FontItalic = value;
-                    _path = null;
+                    _invalidated = true;
                     OnPropertyChanged();
                 }
             }
@@ -536,7 +518,7 @@ namespace Mapsui.Rendering.Skia
             set
             {
                 _styleSubtitle.FontWeight = (value ? 700 : 400);
-                _path = null;
+                _invalidated = true;
                 OnPropertyChanged();
             }
         }
@@ -552,7 +534,7 @@ namespace Mapsui.Rendering.Skia
                 if (_styleSubtitle.TextColor.ToMapsui() != value)
                 {
                     _styleSubtitle.TextColor = value.ToSkia(1f);
-                    _path = null;
+                    _invalidated = true;
                     OnPropertyChanged();
                 }
             }
@@ -569,7 +551,7 @@ namespace Mapsui.Rendering.Skia
                 if (_subtitleTextAlignment != value)
                 {
                     _subtitleTextAlignment = value;
-                    _path = null;
+                    _invalidated = true;
                     OnPropertyChanged();
                 }
             }
@@ -586,7 +568,7 @@ namespace Mapsui.Rendering.Skia
                 if (_spacing != value)
                 {
                     _spacing = value;
-                    _path = null;
+                    _invalidated = true;
                     OnPropertyChanged();
                 }
             }
@@ -603,14 +585,13 @@ namespace Mapsui.Rendering.Skia
                 if (_maxWidth != value)
                 {
                     _maxWidth = value;
-                    _path = null;
+                    _invalidated = true;
                     OnPropertyChanged();
                 }
             }
         }
 
         public int InternalContent { get; set; } = -1;
-        public SKPoint Center { get => _center; set => _center = value; }
 
         /// <summary>
         /// Something changed, so create new image

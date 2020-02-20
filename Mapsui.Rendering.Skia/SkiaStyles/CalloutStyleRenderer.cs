@@ -27,17 +27,12 @@ namespace Mapsui.Rendering.Skia
             {
                 var canvas = surface.Canvas;
 
-                // Is there a prerendered path?
-                if (callout.Path == null)
-                {
-                    // No, than create a new path
-                    (callout.Path, callout.Center) = CreateCalloutPath(callout, contentWidth, contentHeight);
-                    // Now move SymbolOffset to the position of the arrow
-                    callout.SymbolOffset = new Offset(callout.Offset.X + (width * 0.5 - callout.Center.X), callout.Offset.Y - (height * 0.5 - callout.Center.Y));
-                }
+                (var path, var center) = CreateCalloutPath(callout, contentWidth, contentHeight);
+                // Now move SymbolOffset to the position of the arrow
+                callout.SymbolOffset = new Offset(callout.Offset.X + (width * 0.5 - center.X), callout.Offset.Y - (height * 0.5 - center.Y));
 
                 // Draw path for bubble
-                DrawCallout(callout, canvas);
+                DrawCallout(callout, canvas, path);
 
                 // Draw content
                 DrawContent(callout, canvas, bitmapInfo);
@@ -89,16 +84,16 @@ namespace Mapsui.Rendering.Skia
             return (width, height);
         }
 
-        private static void DrawCallout(CalloutStyle callout, SKCanvas canvas)
+        private static void DrawCallout(CalloutStyle callout, SKCanvas canvas, SKPath path)
         {
             var shadow = new SKPaint { IsAntialias = true, Style = SKPaintStyle.Stroke, StrokeWidth = 1.5f, Color = SKColors.Gray, MaskFilter = SKMaskFilter.CreateBlur(SKBlurStyle.Normal, callout.ShadowWidth) };
             var fill = new SKPaint { IsAntialias = true, Style = SKPaintStyle.Fill, Color = callout.BackgroundColor.ToSkia() };
             var stroke = new SKPaint { IsAntialias = true, Style = SKPaintStyle.Stroke, Color = callout.Color.ToSkia(), StrokeWidth = callout.StrokeWidth };
 
             canvas.Clear(SKColors.Transparent);
-            canvas.DrawPath(callout.Path, shadow);
-            canvas.DrawPath(callout.Path, fill);
-            canvas.DrawPath(callout.Path, stroke);
+            canvas.DrawPath(path, shadow);
+            canvas.DrawPath(path, fill);
+            canvas.DrawPath(path, stroke);
         }
 
         /// <summary>
