@@ -46,7 +46,7 @@ namespace Mapsui.Rendering.Skia
         {
             var text = style.GetLabelText(feature);
             if (string.IsNullOrEmpty(text)) return;
-            DrawLabel(canvas, destination.X, destination.Y, style, text, layerOpacity);
+            DrawLabel(canvas, (float)destination.X, (float)destination.Y, style, text, layerOpacity);
         }
 
         private static SKImage CreateLabelAsBitmap(LabelStyle style, string text, float layerOpacity)
