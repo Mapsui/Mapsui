@@ -1,4 +1,5 @@
-﻿using Mapsui.Styles;
+﻿using Mapsui.Geometries;
+using Mapsui.Styles;
 using SkiaSharp;
 using System;
 using System.IO;
@@ -8,6 +9,25 @@ namespace Mapsui.Rendering.Skia
 {
     public class CalloutStyleRenderer : SymbolStyle
     {
+        public static void Draw(SKCanvas canvas, IReadOnlyViewport viewport, SymbolCache symbolCache, 
+            float opacity, Point destination, CalloutStyle calloutStyle)
+        {
+            if (calloutStyle.BitmapId < 0)
+            {
+                if (calloutStyle.Content < 0 && calloutStyle.Type == CalloutType.Custom)
+                    return;
+
+                if (calloutStyle.Invalidated)
+                {
+                    UpdateContent(calloutStyle);
+                }
+
+                RenderCallout(calloutStyle);
+            }
+            // Reuse ImageStyleRenderer because the only thing we need to do is to draw an image
+            ImageStyleRenderer.Draw(canvas, calloutStyle, destination, symbolCache, opacity, (float)viewport.Rotation);
+        }
+
         public static void RenderCallout(CalloutStyle callout)
         {
             if (callout.Content < 0)
@@ -43,6 +63,8 @@ namespace Mapsui.Rendering.Skia
 
                 callout.BitmapId = BitmapRegistry.Instance.Register(data.AsStream(true));
             }
+
+            callout.Invalidated = false;
         }
 
         /// <summary>
@@ -104,20 +126,9 @@ namespace Mapsui.Rendering.Skia
             if (callout.Type == CalloutType.Custom)
                 return;
 
-            CreateContent(callout);
-        }
+            if (callout.Title == null) 
+                return; 
 
-        /// <summary>
-        /// Create content BitmapId from given TextBlock
-        /// </summary>
-        private static void CreateContent(CalloutStyle callout)
-        {
-            // todo: Remove RichTextKit from CalloutStyle
-            // We create local RichTextKit classes here, while there
-            // are still RichTextKit classes in the CalloutStyle.
-            // Below we copy the fields. What we really should do it 
-            // take platform independent definiation and translate them
-            // to RichTextKit
             var _styleSubtitle = new Topten.RichTextKit.Style();
             var _styleTitle = new Topten.RichTextKit.Style();
             var _textBlockTitle = new TextBlock();

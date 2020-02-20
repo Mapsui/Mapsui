@@ -1,7 +1,6 @@
 ﻿using Mapsui.Geometries;
 using Mapsui.Styles;
 using Mapsui.Widgets;
-using System.Runtime.CompilerServices;
 
 namespace Mapsui.Rendering.Skia
 {
@@ -50,7 +49,6 @@ namespace Mapsui.Rendering.Skia
     public class CalloutStyle : SymbolStyle
     {
         private CalloutType _type = CalloutType.Single;
-        private bool _invalidated; // todo: set to false after rendering.
         private ArrowAlignment _arrowAlignment = ArrowAlignment.Bottom;
         private float _arrowWidth = 8f;
         private float _arrowHeight = 8f;
@@ -92,8 +90,7 @@ namespace Mapsui.Rendering.Skia
                 if (_type != value)
                 {
                     _type = value;
-                    _invalidated = true;
-                    OnPropertyChanged();
+                    Invalidated = true;
                 }
             }
         }
@@ -146,8 +143,7 @@ namespace Mapsui.Rendering.Skia
                 if (value != _arrowAlignment)
                 {
                     _arrowAlignment = value;
-                    _invalidated = true;
-                    OnPropertyChanged();
+                    Invalidated = true;
                 }
             }
         }
@@ -163,8 +159,7 @@ namespace Mapsui.Rendering.Skia
                 if (value != _arrowWidth)
                 {
                     _arrowWidth = value;
-                    _invalidated = true;
-                    OnPropertyChanged();
+                    Invalidated = true;
                 }
             }
         }
@@ -180,8 +175,7 @@ namespace Mapsui.Rendering.Skia
                 if (value != _arrowHeight)
                 {
                     _arrowHeight = value;
-                    _invalidated = true;
-                    OnPropertyChanged();
+                    Invalidated = true;
                 }
             }
         }
@@ -197,8 +191,7 @@ namespace Mapsui.Rendering.Skia
                 if (value != _arrowPosition)
                 {
                     _arrowPosition = value;
-                    _invalidated = true;
-                    OnPropertyChanged();
+                    Invalidated = true;
                 }
             }
         }
@@ -214,7 +207,6 @@ namespace Mapsui.Rendering.Skia
                 if (value != _color)
                 {
                     _color = value;
-                    OnPropertyChanged();
                 }
             }
         }
@@ -230,7 +222,6 @@ namespace Mapsui.Rendering.Skia
                 if (value != _backgroundColor)
                 {
                     _backgroundColor = value;
-                    OnPropertyChanged();
                 }
             }
         }
@@ -246,8 +237,7 @@ namespace Mapsui.Rendering.Skia
                 if (value != _strokeWidth)
                 {
                     _strokeWidth = value;
-                    _invalidated = true;
-                    OnPropertyChanged();
+                    Invalidated = true;
                 }
             }
         }
@@ -263,8 +253,7 @@ namespace Mapsui.Rendering.Skia
                 if (value != _rectRadius)
                 {
                     _rectRadius = value;
-                    _invalidated = true;
-                    OnPropertyChanged();
+                    Invalidated = true;
                 }
             }
         }
@@ -280,8 +269,7 @@ namespace Mapsui.Rendering.Skia
                 if (value != _padding)
                 {
                     _padding = value;
-                    _invalidated = true;
-                    OnPropertyChanged();
+                    Invalidated = true;
                 }
             }
         }
@@ -297,8 +285,7 @@ namespace Mapsui.Rendering.Skia
                 if (value != _shadowWidth)
                 {
                     _shadowWidth = value;
-                    _invalidated = true;
-                    OnPropertyChanged();
+                    Invalidated = true;
                 }
             }
         }
@@ -317,8 +304,7 @@ namespace Mapsui.Rendering.Skia
                 if (_content != value)
                 {
                     _content = value;
-                    _invalidated = true;
-                    OnPropertyChanged();
+                    Invalidated = true;
                 }
             }
         }
@@ -334,8 +320,7 @@ namespace Mapsui.Rendering.Skia
                 if (_title != value)
                 {
                     _title = value;
-                    _invalidated = true;
-                    OnPropertyChanged();
+                    Invalidated = true;
                 }
             }
         }
@@ -356,8 +341,7 @@ namespace Mapsui.Rendering.Skia
                 if (_titleTextAlignment != value)
                 {
                     _titleTextAlignment = value;
-                    _invalidated = true;
-                    OnPropertyChanged();
+                    Invalidated = true;
                 }
             }
         }
@@ -373,8 +357,7 @@ namespace Mapsui.Rendering.Skia
                 if (_subtitle != value)
                 {
                     _subtitle = value;
-                    _invalidated = true;
-                    OnPropertyChanged();
+                    Invalidated = true;
                 }
             }
         }
@@ -395,8 +378,7 @@ namespace Mapsui.Rendering.Skia
                 if (_subtitleTextAlignment != value)
                 {
                     _subtitleTextAlignment = value;
-                    _invalidated = true;
-                    OnPropertyChanged();
+                    Invalidated = true;
                 }
             }
         }
@@ -412,8 +394,7 @@ namespace Mapsui.Rendering.Skia
                 if (_spacing != value)
                 {
                     _spacing = value;
-                    _invalidated = true;
-                    OnPropertyChanged();
+                    Invalidated = true;
                 }
             }
         }
@@ -429,8 +410,7 @@ namespace Mapsui.Rendering.Skia
                 if (_maxWidth != value)
                 {
                     _maxWidth = value;
-                    _invalidated = true;
-                    OnPropertyChanged();
+                    Invalidated = true;
                 }
             }
         }
@@ -438,32 +418,6 @@ namespace Mapsui.Rendering.Skia
         public int InternalContent { get; set; } = -1;
         public Font TitleFont { get; set; } = new Font(); // todo set invalidate
         public Font SubtitleFont { get; set; } = new Font();
-
-        /// <summary>
-        /// Something changed, so create new image
-        /// </summary>
-        /// <param name="propertyName"></param>
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            if (_content < 0 && _type == CalloutType.Custom)
-                return;
-
-            // Create content of this Callout
-            if (propertyName.Equals(nameof(Title))
-                || propertyName.Equals(nameof(TitleFont))
-                || propertyName.Equals(nameof(TitleFontColor))
-                || propertyName.Equals(nameof(TitleTextAlignment))
-                || propertyName.Equals(nameof(Subtitle))
-                || propertyName.Equals(nameof(SubtitleFont))
-                || propertyName.Equals(nameof(SubtitleFontColor))
-                || propertyName.Equals(nameof(SubtitleTextAlignment))
-                || propertyName.Equals(nameof(Spacing))
-                || propertyName.Equals(nameof(MaxWidth)))
-            {
-                CalloutStyleRenderer.UpdateContent(this);
-            }
-
-            CalloutStyleRenderer.RenderCallout(this);
-        }
+        public bool Invalidated { get; set; }
     }
 }
