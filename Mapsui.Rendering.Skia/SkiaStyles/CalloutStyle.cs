@@ -1,10 +1,8 @@
 ﻿using Mapsui.Geometries;
 using Mapsui.Styles;
+using Mapsui.Widgets;
 using SkiaSharp;
-using System;
-using System.IO;
 using System.Runtime.CompilerServices;
-using Topten.RichTextKit;
 
 namespace Mapsui.Rendering.Skia
 {
@@ -72,11 +70,11 @@ namespace Mapsui.Rendering.Skia
         private string _subtitle;
         private Topten.RichTextKit.Style _styleTitle = new Topten.RichTextKit.Style();
         private Topten.RichTextKit.Style _styleSubtitle = new Topten.RichTextKit.Style();
-        private TextBlock _textBlockTitle = new TextBlock();
-        private TextBlock _textBlockSubtitle = new TextBlock();
+        private Alignment _titleTextAlignment;
+        private Alignment _subtitleTextAlignment;
         private double _spacing;
         private double _maxWidth;
-
+        
         public new static double DefaultWidth { get; set; } = 100;
         public new static double DefaultHeight { get; set; } = 30;
 
@@ -447,14 +445,14 @@ namespace Mapsui.Rendering.Skia
         /// <summary>
         /// Text alignment of title
         /// </summary>
-        public TextAlignment TitleTextAlignment
+        public Alignment TitleTextAlignment
         {
-            get => _textBlockTitle.Alignment;
+            get => _titleTextAlignment;
             set
             {
-                if (_textBlockTitle.Alignment != value)
+                if (_titleTextAlignment != value)
                 {
-                    _textBlockTitle.Alignment = value;
+                    _titleTextAlignment = value;
                     _path = null;
                     OnPropertyChanged();
                 }
@@ -563,14 +561,14 @@ namespace Mapsui.Rendering.Skia
         /// <summary>
         /// Text alignment of subtitle
         /// </summary>
-        public TextAlignment SubtitleTextAlignment
+        public Alignment SubtitleTextAlignment
         {
-            get => _textBlockSubtitle.Alignment;
+            get => _subtitleTextAlignment;
             set
             {
-                if (_textBlockSubtitle.Alignment != value)
+                if (_subtitleTextAlignment != value)
                 {
-                    _textBlockSubtitle.Alignment = value;
+                    _subtitleTextAlignment = value;
                     _path = null;
                     OnPropertyChanged();
                 }

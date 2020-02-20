@@ -137,7 +137,7 @@ namespace Mapsui.Rendering.Skia
                 _styleSubtitle.TextColor = callout.TitleFontColor.ToSkia();
 
                 _textBlockSubtitle.AddText(callout.Subtitle, _styleSubtitle);
-                _textBlockSubtitle.Alignment = callout.SubtitleTextAlignment;
+                _textBlockSubtitle.Alignment = callout.SubtitleTextAlignment.ToRichTextKit();
             }
             _styleTitle.FontFamily = callout.TitleFontName;
             _styleTitle.FontSize = (float)callout.TitleFontSize;
@@ -145,7 +145,7 @@ namespace Mapsui.Rendering.Skia
             _styleTitle.FontWeight = callout.TitleFontBold ? 700 : 400;
             _styleTitle.TextColor = callout.TitleFontColor.ToSkia();
 
-            _textBlockTitle.Alignment = callout.TitleTextAlignment;
+            _textBlockTitle.Alignment = callout.TitleTextAlignment.ToRichTextKit();
             _textBlockTitle.AddText(callout.Title, _styleTitle);
 
             _textBlockTitle.MaxWidth = _textBlockSubtitle.MaxWidth = (float)callout.MaxWidth;
