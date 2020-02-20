@@ -7,7 +7,7 @@ namespace Mapsui.Rendering.Skia
     class ImageStyleRenderer
     {
         public static void Draw(SKCanvas canvas, ImageStyle symbolStyle, Point destination,
-                SymbolCache symbolCache, float opacity, float mapRotation)
+                SymbolCache symbolCache, float opacity, double mapRotation)
         {
             if (symbolStyle.BitmapId < 0)
                 return;
@@ -19,7 +19,7 @@ namespace Mapsui.Rendering.Skia
             var offsetY = symbolStyle.SymbolOffset.IsRelative ? bitmap.Height * symbolStyle.SymbolOffset.Y : symbolStyle.SymbolOffset.Y;
 
             var rotation = (float)symbolStyle.SymbolRotation;
-            if (symbolStyle.RotateWithMap) rotation += mapRotation;
+            if (symbolStyle.RotateWithMap) rotation += (float)mapRotation;
 
             switch (bitmap.Type)
             {

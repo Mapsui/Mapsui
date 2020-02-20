@@ -20,14 +20,14 @@ namespace Mapsui.Rendering.Skia
             }
             else if (style is LabelStyle labelStyle) 
             {
-                LabelRenderer.Draw(canvas, labelStyle, feature, (float)destination.X, (float)destination.Y, opacity);
+                LabelRenderer.Draw(canvas, labelStyle, feature, destination, opacity);
             }
             else if (style is SymbolStyle symbolStyle)
             {
                 if (symbolStyle.BitmapId >= 0)
                 {
                     // todo: Remove this call. ImageStyle should be used instead of SymbolStyle with BitmapId
-                    ImageStyleRenderer.Draw(canvas, symbolStyle, destination, symbolCache, opacity, (float)viewport.Rotation);
+                    ImageStyleRenderer.Draw(canvas, symbolStyle, destination, symbolCache, opacity, viewport.Rotation);
                 }
                 else
                 {
@@ -36,7 +36,7 @@ namespace Mapsui.Rendering.Skia
             }
             else if (style is ImageStyle imageStyle)
             {
-                ImageStyleRenderer.Draw(canvas, imageStyle, destination, symbolCache, opacity, (float)viewport.Rotation);
+                ImageStyleRenderer.Draw(canvas, imageStyle, destination, symbolCache, opacity, viewport.Rotation);
             }
             else if (style is VectorStyle vectorStyle) 
             {
