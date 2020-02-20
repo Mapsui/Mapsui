@@ -125,19 +125,19 @@ namespace Mapsui.Rendering.Skia
 
             if (callout.Type == CalloutType.Detail)
             {
-                _styleSubtitle.FontFamily = callout.TitleFontName;
-                _styleSubtitle.FontSize = (float)callout.TitleFontSize;
-                _styleSubtitle.FontItalic = callout.TitleFontItalic;
-                _styleSubtitle.FontWeight = callout.TitleFontBold ? 700 : 400;
+                _styleSubtitle.FontFamily = callout.TitleFont.FontFamily;
+                _styleSubtitle.FontSize = (float)callout.TitleFont.Size;
+                _styleSubtitle.FontItalic = callout.TitleFont.Italic;
+                _styleSubtitle.FontWeight = callout.TitleFont.Bold ? 700 : 400;
                 _styleSubtitle.TextColor = callout.TitleFontColor.ToSkia();
 
                 _textBlockSubtitle.AddText(callout.Subtitle, _styleSubtitle);
                 _textBlockSubtitle.Alignment = callout.SubtitleTextAlignment.ToRichTextKit();
             }
-            _styleTitle.FontFamily = callout.TitleFontName;
-            _styleTitle.FontSize = (float)callout.TitleFontSize;
-            _styleTitle.FontItalic = callout.TitleFontItalic;
-            _styleTitle.FontWeight = callout.TitleFontBold ? 700 : 400;
+            _styleTitle.FontFamily = callout.TitleFont.FontFamily;
+            _styleTitle.FontSize = (float)callout.TitleFont.Size;
+            _styleTitle.FontItalic = callout.TitleFont.Italic;
+            _styleTitle.FontWeight = callout.TitleFont.Bold ? 700 : 400;
             _styleTitle.TextColor = callout.TitleFontColor.ToSkia();
 
             _textBlockTitle.Alignment = callout.TitleTextAlignment.ToRichTextKit();

@@ -66,8 +66,6 @@ namespace Mapsui.Rendering.Skia
         private double _rotation = 0;
         private string _title;
         private string _subtitle;
-        private Topten.RichTextKit.Style _styleTitle = new Topten.RichTextKit.Style();
-        private Topten.RichTextKit.Style _styleSubtitle = new Topten.RichTextKit.Style();
         private Alignment _titleTextAlignment;
         private Alignment _subtitleTextAlignment;
         private double _spacing;
@@ -343,86 +341,9 @@ namespace Mapsui.Rendering.Skia
         }
 
         /// <summary>
-        /// Font name to use rendering title
-        /// </summary>
-        public string TitleFontName
-        {
-            get => _styleTitle.FontFamily;
-            set
-            {
-                if (_styleTitle.FontFamily != value)
-                {
-                    _styleTitle.FontFamily = value;
-                    _invalidated = true;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        /// <summary>
-        /// Font size to rendering title
-        /// </summary>
-        public double TitleFontSize
-        {
-            get => _styleTitle.FontSize;
-            set
-            {
-                if (_styleTitle.FontSize != value)
-                {
-                    _styleTitle.FontSize = (float)value;
-                    _invalidated = true;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        /// <summary>
-        /// Font attributes italic to render title
-        /// </summary>
-        public bool TitleFontItalic
-        {
-            get => _styleTitle.FontItalic;
-            set
-            {
-                if (_styleTitle.FontItalic != value)
-                {
-                    _styleTitle.FontItalic = value;
-                    _invalidated = true;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        /// <summary>
-        /// Font attributes bold to render title
-        /// </summary>
-        public bool TitleFontBold
-        {
-            get => _styleTitle.FontWeight > 400;
-            set
-            {
-                _styleTitle.FontWeight = (value ? 700 : 400);
-                _invalidated = true;
-                OnPropertyChanged();
-            }
-        }
-
-        /// <summary>
         /// Font color to render title
         /// </summary>
-        public Color TitleFontColor
-        {
-            get => _styleTitle.TextColor.ToMapsui();
-            set
-            {
-                if (_styleTitle.TextColor.ToMapsui() != value)
-                {
-                    _styleTitle.TextColor = value.ToSkia(1f);
-                    _invalidated = true;
-                    OnPropertyChanged();
-                }
-            }
-        }
+        public Color TitleFontColor { get; set; }
 
         /// <summary>
         /// Text alignment of title
@@ -459,86 +380,9 @@ namespace Mapsui.Rendering.Skia
         }
 
         /// <summary>
-        /// Font name to use rendering subtitle
-        /// </summary>
-        public string SubtitleFontName
-        {
-            get => _styleTitle.FontFamily;
-            set
-            {
-                if (_styleTitle.FontFamily != value)
-                {
-                    _styleTitle.FontFamily = value;
-                    _invalidated = true;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        /// <summary>
-        /// Font size to rendering subtitle
-        /// </summary>
-        public double SubtitleFontSize
-        {
-            get => _styleSubtitle.FontSize;
-            set
-            {
-                if (_styleSubtitle.FontSize != value)
-                {
-                    _styleSubtitle.FontSize = (float)value;
-                    _invalidated = true;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        /// <summary>
-        /// Font attributes italic to render subtitle
-        /// </summary>
-        public bool SubtitleFontItalic
-        {
-            get => _styleSubtitle.FontItalic;
-            set
-            {
-                if (_styleSubtitle.FontItalic != value)
-                {
-                    _styleSubtitle.FontItalic = value;
-                    _invalidated = true;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        /// <summary>
-        /// Font attributes bold to render subtitle
-        /// </summary>
-        public bool SubtitleFontBold
-        {
-            get => _styleSubtitle.FontWeight > 400;
-            set
-            {
-                _styleSubtitle.FontWeight = (value ? 700 : 400);
-                _invalidated = true;
-                OnPropertyChanged();
-            }
-        }
-
-        /// <summary>
         /// Font color to render subtitle
         /// </summary>
-        public Color SubtitleFontColor
-        {
-            get => _styleSubtitle.TextColor.ToMapsui();
-            set
-            {
-                if (_styleSubtitle.TextColor.ToMapsui() != value)
-                {
-                    _styleSubtitle.TextColor = value.ToSkia(1f);
-                    _invalidated = true;
-                    OnPropertyChanged();
-                }
-            }
-        }
+        public Color SubtitleFontColor { get; set; }
 
         /// <summary>
         /// Text alignment of subtitle
@@ -592,6 +436,8 @@ namespace Mapsui.Rendering.Skia
         }
 
         public int InternalContent { get; set; } = -1;
+        public Font TitleFont { get; set; } = new Font(); // todo set invalidate
+        public Font SubtitleFont { get; set; } = new Font();
 
         /// <summary>
         /// Something changed, so create new image
@@ -604,17 +450,11 @@ namespace Mapsui.Rendering.Skia
 
             // Create content of this Callout
             if (propertyName.Equals(nameof(Title))
-                || propertyName.Equals(nameof(TitleFontName))
-                || propertyName.Equals(nameof(TitleFontSize))
-                || propertyName.Equals(nameof(TitleFontItalic))
-                || propertyName.Equals(nameof(TitleFontBold))
+                || propertyName.Equals(nameof(TitleFont))
                 || propertyName.Equals(nameof(TitleFontColor))
                 || propertyName.Equals(nameof(TitleTextAlignment))
                 || propertyName.Equals(nameof(Subtitle))
-                || propertyName.Equals(nameof(SubtitleFontName))
-                || propertyName.Equals(nameof(SubtitleFontSize))
-                || propertyName.Equals(nameof(SubtitleFontItalic))
-                || propertyName.Equals(nameof(SubtitleFontBold))
+                || propertyName.Equals(nameof(SubtitleFont))
                 || propertyName.Equals(nameof(SubtitleFontColor))
                 || propertyName.Equals(nameof(SubtitleTextAlignment))
                 || propertyName.Equals(nameof(Spacing))
