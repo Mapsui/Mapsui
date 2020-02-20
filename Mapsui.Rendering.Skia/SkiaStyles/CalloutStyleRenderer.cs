@@ -117,7 +117,7 @@ namespace Mapsui.Rendering.Skia
         /// </summary>
         private static void CreateContent(CalloutStyle callout)
         {
-            // todo: RichTextKit from CalloutStyle
+            // todo: Remove RichTextKit from CalloutStyle
             // We create local RichTextKit classes here, while there
             // are still RichTextKit classes in the CalloutStyle.
             // Below we copy the fields. What we really should do it 
