@@ -12,7 +12,7 @@ namespace Mapsui.Rendering.Skia
         public static void Draw(SKCanvas canvas, IReadOnlyViewport viewport, SymbolCache symbolCache, 
             float opacity, Point destination, CalloutStyle calloutStyle)
         {
-            if (calloutStyle.BitmapId < 0)
+            if (calloutStyle.BitmapId < 0 || calloutStyle.Invalidated)
             {
                 if (calloutStyle.Content < 0 && calloutStyle.Type == CalloutType.Custom)
                     return;
@@ -136,11 +136,11 @@ namespace Mapsui.Rendering.Skia
 
             if (callout.Type == CalloutType.Detail)
             {
-                _styleSubtitle.FontFamily = callout.TitleFont.FontFamily;
-                _styleSubtitle.FontSize = (float)callout.TitleFont.Size;
-                _styleSubtitle.FontItalic = callout.TitleFont.Italic;
-                _styleSubtitle.FontWeight = callout.TitleFont.Bold ? 700 : 400;
-                _styleSubtitle.TextColor = callout.TitleFontColor.ToSkia();
+                _styleSubtitle.FontFamily = callout.SubtitleFont.FontFamily;
+                _styleSubtitle.FontSize = (float)callout.SubtitleFont.Size;
+                _styleSubtitle.FontItalic = callout.SubtitleFont.Italic;
+                _styleSubtitle.FontWeight = callout.SubtitleFont.Bold ? 700 : 400;
+                _styleSubtitle.TextColor = callout.SubtitleFontColor.ToSkia();
 
                 _textBlockSubtitle.AddText(callout.Subtitle, _styleSubtitle);
                 _textBlockSubtitle.Alignment = callout.SubtitleTextAlignment.ToRichTextKit();

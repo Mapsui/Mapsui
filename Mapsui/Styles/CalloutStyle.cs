@@ -68,7 +68,9 @@ namespace Mapsui.Rendering.Skia
         private Alignment _subtitleTextAlignment;
         private double _spacing;
         private double _maxWidth;
-        
+        private Color _titleFontColor;
+        private Color _subtitleFontColor;
+
         public new static double DefaultWidth { get; set; } = 100;
         public new static double DefaultHeight { get; set; } = 30;
 
@@ -120,7 +122,7 @@ namespace Mapsui.Rendering.Skia
         /// Gets or sets the rotation of the Callout in degrees (clockwise is positive)
         /// </summary>
         public double Rotation
-        { 
+        {
             get => _rotation;
             set
             {
@@ -135,9 +137,9 @@ namespace Mapsui.Rendering.Skia
         /// <summary>
         /// Anchor position of Callout
         /// </summary>
-        public ArrowAlignment ArrowAlignment 
-        { 
-            get => _arrowAlignment; 
+        public ArrowAlignment ArrowAlignment
+        {
+            get => _arrowAlignment;
             set
             {
                 if (value != _arrowAlignment)
@@ -207,6 +209,7 @@ namespace Mapsui.Rendering.Skia
                 if (value != _color)
                 {
                     _color = value;
+                    Invalidated = true;
                 }
             }
         }
@@ -222,6 +225,7 @@ namespace Mapsui.Rendering.Skia
                 if (value != _backgroundColor)
                 {
                     _backgroundColor = value;
+                    Invalidated = true;
                 }
             }
         }
@@ -328,7 +332,15 @@ namespace Mapsui.Rendering.Skia
         /// <summary>
         /// Font color to render title
         /// </summary>
-        public Color TitleFontColor { get; set; }
+        public Color TitleFontColor 
+        {
+            get { return _titleFontColor; }
+            set
+            {
+                _titleFontColor = value;
+                Invalidated = true;
+            }
+        }
 
         /// <summary>
         /// Text alignment of title
@@ -365,7 +377,15 @@ namespace Mapsui.Rendering.Skia
         /// <summary>
         /// Font color to render subtitle
         /// </summary>
-        public Color SubtitleFontColor { get; set; }
+        public Color SubtitleFontColor
+        {
+            get { return _subtitleFontColor; }
+            set
+            {
+                _subtitleFontColor = value;
+                Invalidated = true;
+            }
+        }
 
         /// <summary>
         /// Text alignment of subtitle
@@ -416,8 +436,36 @@ namespace Mapsui.Rendering.Skia
         }
 
         public int InternalContent { get; set; } = -1;
-        public Font TitleFont { get; set; } = new Font(); // todo set invalidate
-        public Font SubtitleFont { get; set; } = new Font();
+
+        private Font _titleFont = new Font();
+        private Font _subtitleFont = new Font();
+
+        public Font TitleFont
+        {
+            get
+            {
+                return _titleFont;
+            }
+            set 
+            {
+                _titleFont = value;
+                Invalidated = true;
+            }
+        }
+
+        public Font SubtitleFont
+        {
+            get
+            {
+                return _subtitleFont;
+            }
+            set
+            {
+                _subtitleFont = value;
+                Invalidated = true;
+            }
+        }
+
         public bool Invalidated { get; set; }
     }
 }
