@@ -135,7 +135,7 @@
       <Version>2.0.3</Version>
     </PackageReference>
     <PackageReference Include="SkiaSharp">
-      <Version>1.60.3</Version>
+      <Version>1.68.1.1</Version>
     </PackageReference>
     <PackageReference Include="SkiaSharp.Views">
       <Version>1.60.3</Version>
