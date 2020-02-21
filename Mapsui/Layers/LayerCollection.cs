@@ -7,7 +7,7 @@ using Mapsui.Fetcher;
 
 namespace Mapsui.Layers
 {
-    public class LayerCollection : ICollection<ILayer>
+    public class LayerCollection : IEnumerable<ILayer>
     {
         private ConcurrentQueue<ILayer> _layers = new ConcurrentQueue<ILayer>();
         
