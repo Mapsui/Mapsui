@@ -143,6 +143,7 @@ namespace Mapsui.UI.Android
 
         private void CanvasOnPaintSurface(object sender, SKPaintGLSurfaceEventArgs args)
         {
+   //   var scale = (float)(_canvas.CanvasSize.Width / Width);
       args.Surface.Canvas.Scale(PixelDensity, PixelDensity);
       Renderer.Render(args.Surface.Canvas, Viewport, _map.Layers, _map.Widgets, _map.BackColor);
         }
@@ -279,8 +280,7 @@ namespace Mapsui.UI.Android
             var result = new List<Point>();
             for (var i = 0; i < motionEvent.PointerCount; i++)
             {
-                result.Add(new Point(motionEvent.GetX(i) - view.Left, motionEvent.GetY(i) - view.Top)
-                    .ToDeviceIndependentUnits(PixelDensity));
+        result.Add(new Point((motionEvent.GetX(i) - view.Left), (motionEvent.GetY(i) - view.Top)).ToDeviceIndependentUnits(PixelDensity));
             }
             return result;
         }
@@ -293,8 +293,7 @@ namespace Mapsui.UI.Android
         /// <returns></returns>
         private Point GetScreenPosition(MotionEvent motionEvent, View view)
         {
-            return GetScreenPositionInPixels(motionEvent, view)
-                .ToDeviceIndependentUnits(PixelDensity);
+          return GetScreenPositionInPixels(motionEvent, view).ToDeviceIndependentUnits(PixelDensity);
         }
 
         /// <summary>
@@ -321,7 +320,7 @@ namespace Mapsui.UI.Android
             {
                 // Bothe Invalidate and _canvas.Invalidate are necessary in different scenarios.
                 Invalidate();
-                _canvas?.Invalidate();
+        _canvas?.Invalidate();
             }
             catch (ObjectDisposedException e)
             {
@@ -388,7 +387,7 @@ namespace Mapsui.UI.Android
             return (new Point(centerX, centerY), radius, angle);
         }
 
-        private float ViewportWidth => ToDeviceIndependentUnits(Width);
+    private float ViewportWidth => ToDeviceIndependentUnits(Width);
         private float ViewportHeight => ToDeviceIndependentUnits(Height);
 
         /// <summary>
@@ -399,7 +398,7 @@ namespace Mapsui.UI.Android
         /// <returns>The pixels given as input translated to device independent units.</returns>
         private float ToDeviceIndependentUnits(float pixelCoordinate)
         {
-      return pixelCoordinate;
+      return pixelCoordinate / PixelDensity;
         }
     }
 }
