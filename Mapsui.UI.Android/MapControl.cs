@@ -17,7 +17,7 @@ namespace Mapsui.UI.Android
 {
     public partial class MapControl : ViewGroup, IMapControl
     {
-        private SKCanvasView _canvas;
+        private SKGLSurfaceView _canvas;
         private double _innerRotation;
         private GestureDetector _gestureDetector;
         private double _previousAngle;
@@ -44,7 +44,7 @@ namespace Mapsui.UI.Android
         public void Initialize()
         {
             SetBackgroundColor(Color.Transparent);
-            _canvas = new SKCanvasView(Context) { IgnorePixelScaling = true };
+            _canvas = new SKGLSurfaceView(Context);
             _canvas.PaintSurface += CanvasOnPaintSurface;
             AddView(_canvas);
 
@@ -88,8 +88,9 @@ namespace Mapsui.UI.Android
                 action();
         }
 
-        private void CanvasOnPaintSurface(object sender, SKPaintSurfaceEventArgs args)
+        private void CanvasOnPaintSurface(object sender, SKPaintGLSurfaceEventArgs args)
         {
+            args.Surface.Canvas.Scale(PixelDensity, PixelDensity);
             Renderer.Render(args.Surface.Canvas, Viewport, _map.Layers, _map.Widgets, _map.BackColor);
         }
 
