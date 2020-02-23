@@ -24,8 +24,34 @@ namespace Mapsui.Rendering.Skia
 
                 RenderCallout(calloutStyle);
             }
-            // Reuse ImageStyleRenderer because the only thing we need to do is to draw an image
-            ImageStyleRenderer.Draw(canvas, calloutStyle, destination, symbolCache, opacity, (float)viewport.Rotation);
+
+            // Now we have the complete callout rendered, so we could draw it
+            if (calloutStyle.BitmapId < 0)
+                return;
+
+            var picture = (SKPicture)BitmapRegistry.Instance.Get(calloutStyle.BitmapId);
+
+            // Calc offset (relative or absolute)
+            var symbolOffsetX = calloutStyle.SymbolOffset.IsRelative ? picture.CullRect.Width * (float)calloutStyle.SymbolOffset.X : (float)calloutStyle.SymbolOffset.X;
+            var symbolOffsetY = calloutStyle.SymbolOffset.IsRelative ? picture.CullRect.Height * (float)calloutStyle.SymbolOffset.Y : (float)calloutStyle.SymbolOffset.Y;
+
+            var rotation = (float)calloutStyle.SymbolRotation;
+            if (calloutStyle.RotateWithMap) rotation += (float)viewport.Rotation;
+
+            // Save state of the canvas, so we could move and rotate the canvas
+            canvas.Save();
+
+            // Move 0/0 to the Anchor point of Callout
+            canvas.Translate((float)destination.X - symbolOffsetX, (float)destination.Y - symbolOffsetY);
+            canvas.Scale((float)calloutStyle.SymbolScale, (float)calloutStyle.SymbolScale);
+
+            // 0/0 are assumed at center of image, but Picture has 0/0 at left top position
+            canvas.RotateDegrees(rotation);
+            canvas.Translate((float)calloutStyle.Offset.X, (float)calloutStyle.Offset.Y);
+
+            canvas.DrawPicture(picture);
+
+            canvas.Restore();
         }
 
         public static void RenderCallout(CalloutStyle callout)
@@ -34,34 +60,47 @@ namespace Mapsui.Rendering.Skia
                 return;
 
             // Get size of content
-            var bitmapInfo = BitmapHelper.LoadBitmap(BitmapRegistry.Instance.Get(callout.Content));
+            double contentWidth = 0;
+            double contentHeight = 0;
 
-            double contentWidth = bitmapInfo.Width;
-            double contentHeight = bitmapInfo.Height;
+            if (callout.Type == CalloutType.Custom)
+            {
+                var bitmapInfo = BitmapHelper.LoadBitmap(BitmapRegistry.Instance.Get(callout.Content));
+
+                contentWidth = bitmapInfo.Width;
+                contentHeight = bitmapInfo.Height;
+            }
+            else if (callout.Type == CalloutType.Single || callout.Type == CalloutType.Detail)
+            {
+                var picture = (SKPicture)BitmapRegistry.Instance.Get(callout.Content);
+
+                contentWidth = picture.CullRect.Width;
+                contentHeight = picture.CullRect.Height;
+            }
 
             (var width, var height) = CalcSize(callout, contentWidth, contentHeight);
 
             // Create a canvas for drawing
-            var info = new SKImageInfo((int)width, (int)height);
-            using (var surface = SKSurface.Create(info))
-            {
-                var canvas = surface.Canvas;
-
+            using (var rec = new SKPictureRecorder())
+            using (var canvas = rec.BeginRecording(new SKRect(0, 0, (float)width, (float)height)))
+            { 
                 (var path, var center) = CreateCalloutPath(callout, contentWidth, contentHeight);
-                // Now move SymbolOffset to the position of the arrow
-                callout.SymbolOffset = new Offset(callout.Offset.X + (width * 0.5 - center.X), callout.Offset.Y - (height * 0.5 - center.Y));
+                // Now move Offset to the position of the arrow
+                callout.Offset = new Offset(-center.X, -center.Y);
 
                 // Draw path for bubble
                 DrawCallout(callout, canvas, path);
 
                 // Draw content
-                DrawContent(callout, canvas, bitmapInfo);
+                DrawContent(callout, canvas);
 
-                // Create image from canvas
-                var image = surface.Snapshot();
-                var data = image.Encode(SKEncodedImageFormat.Png, 100);
+                // Create SKPicture from canvas
+                var picture = rec.EndRecording();
 
-                callout.BitmapId = BitmapRegistry.Instance.Register(data.AsStream(true));
+                if (callout.BitmapId < 0)
+                    callout.BitmapId = BitmapRegistry.Instance.Register(picture);
+                else
+                    BitmapRegistry.Instance.Set(callout.BitmapId, picture);
             }
 
             callout.Invalidated = callout.TitleFont.Invalidated = callout.SubtitleFont.Invalidated = false;
@@ -112,7 +151,6 @@ namespace Mapsui.Rendering.Skia
             var fill = new SKPaint { IsAntialias = true, Style = SKPaintStyle.Fill, Color = callout.BackgroundColor.ToSkia() };
             var stroke = new SKPaint { IsAntialias = true, Style = SKPaintStyle.Stroke, Color = callout.Color.ToSkia(), StrokeWidth = callout.StrokeWidth };
 
-            canvas.Clear(SKColors.Transparent);
             canvas.DrawPath(path, shadow);
             canvas.DrawPath(path, fill);
             canvas.DrawPath(path, stroke);
@@ -160,38 +198,34 @@ namespace Mapsui.Rendering.Skia
             _textBlockSubtitle.Layout();
             // Get sizes
             var width = Math.Max(_textBlockTitle.MeasuredWidth, _textBlockSubtitle.MeasuredWidth);
-            var height = _textBlockTitle.MeasuredHeight + (callout.Type == CalloutType.Detail ? _textBlockSubtitle.MeasuredHeight + callout.Spacing : 0);
+            var height = _textBlockTitle.MeasuredHeight + (callout.Type == CalloutType.Detail ? _textBlockSubtitle.MeasuredHeight + (float)callout.Spacing : 0f);
             // Now we have the correct width, so make a new layout cycle for text alignment
             _textBlockTitle.MaxWidth = _textBlockSubtitle.MaxWidth = width;
             _textBlockTitle.Layout();
             _textBlockSubtitle.Layout();
             // Create bitmap from TextBlock
-            var info = new SKImageInfo((int)width, (int)height, SKImageInfo.PlatformColorType, SKAlphaType.Premul);
-            using (var surface = SKSurface.Create(info))
+            using (var rec = new SKPictureRecorder())
+            using (var canvas = rec.BeginRecording(new SKRect(0, 0, width, height)))
             {
-                var canvas = surface.Canvas;
-                var memStream = new MemoryStream();
-
-                canvas.Clear(SKColors.Transparent);
-                // surface.Canvas.Scale(DeviceDpi / 96.0f);
+                // Draw text to canvas
                 _textBlockTitle.Paint(canvas, new TextPaintOptions() { IsAntialias = true });
-                _textBlockSubtitle.Paint(canvas, new SKPoint(0, _textBlockTitle.MeasuredHeight + (float)callout.Spacing), new TextPaintOptions() { IsAntialias = true });
-                // Create image from canvas
-                var image = surface.Snapshot();
-                var data = image.Encode(SKEncodedImageFormat.Png, 100);
+                if (callout.Type == CalloutType.Detail)
+                    _textBlockSubtitle.Paint(canvas, new SKPoint(0, _textBlockTitle.MeasuredHeight + (float)callout.Spacing), new TextPaintOptions() { IsAntialias = true });
+                // Create a SKPicture from canvas
+                var picture = rec.EndRecording();
                 if (callout.InternalContent >= 0)
                 {
-                    BitmapRegistry.Instance.Set(callout.InternalContent, data.AsStream(true));
+                    BitmapRegistry.Instance.Set(callout.InternalContent, picture);
                 }
                 else
                 {
-                    callout.InternalContent = BitmapRegistry.Instance.Register(data.AsStream(true));
+                    callout.InternalContent = BitmapRegistry.Instance.Register(picture);
                 }
                 callout.Content = callout.InternalContent;
             }
         }
 
-        private static void DrawContent(CalloutStyle callout, SKCanvas canvas, BitmapInfo bitmapInfo)
+        private static void DrawContent(CalloutStyle callout, SKCanvas canvas)
         { 
             // Draw content
             if (callout.Content >= 0)
@@ -212,16 +246,27 @@ namespace Mapsui.Rendering.Skia
 
                 var offset = new SKPoint(offsetX, offsetY);
 
-                switch (bitmapInfo.Type)
+                if (callout.Type == CalloutType.Custom)
                 {
-                    case BitmapType.Bitmap:
-                        canvas.DrawImage(bitmapInfo.Bitmap, offset);
-                        break;
-                    case BitmapType.Sprite:
-                        throw new Exception();
-                    case BitmapType.Svg:
-                        canvas.DrawPicture(bitmapInfo.Svg.Picture, offset);
-                        break;
+                    // Get size of content
+                    var bitmapInfo = BitmapHelper.LoadBitmap(BitmapRegistry.Instance.Get(callout.Content));
+
+                    switch (bitmapInfo.Type)
+                    {
+                        case BitmapType.Bitmap:
+                            canvas.DrawImage(bitmapInfo.Bitmap, offset);
+                            break;
+                        case BitmapType.Sprite:
+                            throw new Exception();
+                        case BitmapType.Svg:
+                            canvas.DrawPicture(bitmapInfo.Svg.Picture, offset);
+                            break;
+                    }
+                }
+                else if (callout.Type == CalloutType.Single || callout.Type == CalloutType.Detail)
+                {
+                    var picture = (SKPicture)BitmapRegistry.Instance.Get(callout.Content);
+                    canvas.DrawPicture(picture, offset);
                 }
             }
         }

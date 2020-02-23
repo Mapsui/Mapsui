@@ -81,19 +81,19 @@ namespace Mapsui.Samples.Common.Maps
             {
                 case 0:
                     calloutStyle.ArrowAlignment = ArrowAlignment.Bottom;
-                    calloutStyle.Offset = new Geometries.Point(0, SymbolStyle.DefaultHeight * 0.5f);
+                    calloutStyle.Offset = new Offset(0, SymbolStyle.DefaultHeight * 0.5f);
                     break;
                 case 1:
                     calloutStyle.ArrowAlignment = ArrowAlignment.Left;
-                    calloutStyle.Offset = new Geometries.Point(SymbolStyle.DefaultHeight * 0.5f, 0);
+                    calloutStyle.Offset = new Offset(SymbolStyle.DefaultHeight * 0.5f, 0);
                     break;
                 case 2:
                     calloutStyle.ArrowAlignment = ArrowAlignment.Top;
-                    calloutStyle.Offset = new Geometries.Point(0, -SymbolStyle.DefaultHeight * 0.5f);
+                    calloutStyle.Offset = new Offset(0, -SymbolStyle.DefaultHeight * 0.5f);
                     break;
                 case 3:
                     calloutStyle.ArrowAlignment = ArrowAlignment.Right;
-                    calloutStyle.Offset = new Geometries.Point(-SymbolStyle.DefaultHeight * 0.5f, 0);
+                    calloutStyle.Offset = new Offset(-SymbolStyle.DefaultHeight * 0.5f, 0);
                     break;
             }
             calloutStyle.RectRadius = 10; // Random.Next(0, 9);
