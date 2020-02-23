@@ -82,6 +82,7 @@
     <Compile Include="ExtensionMethods\VerticalAlignment.cs" />
     <Compile Include="ExtensionMethods\HorizontalAlignment.cs" />
     <Compile Include="ExtensionMethods\BitmapImageExtensions.cs" />
+    <Compile Include="XamlStyles\IXamlStyleRenderer.cs" />
     <Compile Include="XamlWidgets\HyperlinkWidgetRenderer.cs" />
     <Compile Include="OutlinedTextBlock.cs" />
     <Compile Include="XamlWidgets\IXamlWidgetRenderer.cs" />
@@ -121,9 +122,7 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="XamlStyles\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
