@@ -17,7 +17,7 @@ namespace Mapsui.Rendering.Skia
                 if (calloutStyle.Content < 0 && calloutStyle.Type == CalloutType.Custom)
                     return;
 
-                if (calloutStyle.Invalidated)
+                if (calloutStyle.Invalidated || calloutStyle.TitleFont.Invalidated || calloutStyle.SubtitleFont.Invalidated)
                 {
                     UpdateContent(calloutStyle);
                 }
@@ -64,7 +64,7 @@ namespace Mapsui.Rendering.Skia
                 callout.BitmapId = BitmapRegistry.Instance.Register(data.AsStream(true));
             }
 
-            callout.Invalidated = false;
+            callout.Invalidated = callout.TitleFont.Invalidated = callout.SubtitleFont.Invalidated = false;
         }
 
         /// <summary>
