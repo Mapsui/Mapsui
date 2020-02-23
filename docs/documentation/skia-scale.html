@@ -83,32 +83,7 @@
 <h2 id="some-context-device-independent-units">Some context: Device Independent Units</h2>
 <p>Modern devices have a very high resolution. If something is drawn onto the canvas using raw pixels as coordinates the fonts would become tiny and unreadable and lines would become very thin. To correct for this a scale factor is used. Those scaled-up coordinates are called device independent units. Most of the time you deal with the device independent units.</p>
 <h3 id="coordinates-in-skiasharp">Coordinates in SkiaSharp</h3>
-<p>Most (all?) views in SkiaSharp use pixels as coordinates by default but for our purposes we need to use device independent units, so we need to correct for this. There are two ways this can be done:</p>
-<ul>
-<li>Set the skia view&#39;s IgnorePixelScaling.</li>
-<li>Call the skia view&#39;s Scale factor with the appropriate scale. For this you need to request the scale factor from the system.</li>
-</ul>
-<h2 id="what-do-we-do">What do we do?</h2>
-<p>We take skia scale into account on a number of places in our code:</p>
-<p>On WPF and UWP:</p>
-<ul>
-<li>We set IgnorePixelScaling.</li>
-</ul>
-<p>On iOS:</p>
-<ul>
-<li>The GL view we use has no IgnorePixelScaling unfortunately.</li>
-<li>We determine the skia scale while initializing (or when switching from wpf to skia rendering)ent&#39;s size changes.</li>
-<li>We set the skia scale on the skia surface. This needs to be done in the render loop because this is the only place where we have access to the surface.</li>
-</ul>
-<p>On Android:</p>
-<ul>
-<li>We determine the density (pixels per device independent units) while initializing.</li>
-<li>We initialze the viewport width and height to the skia width and height (on TryInitializeViewport).</li>
-<li>We set the viewport width and height to the skia width and height whenever the containing parent&#39;s size changes.</li>
-<li>We set the skia scale on the skia surface. This needs to be done in the render loop because this is the only place where we have access to the surface.</li>
-<li>We pass the skia scale along if we request map info. Why not directly correct the position for scale at the call? Because we want to return the original click position as part of the response. This position can be usefull and we don&#39;t want to user to correct for skia scale (in fact we don&#39;t want the user to have access to it).</li>
-<li>When requesting the touch positions when manipulating the map.</li>
-</ul>
+<p>Most (all?) views in SkiaSharp use pixels as coordinates by default but for our purposes we need to use device independent units, so we need to correct for this. We do this by setting the scale of the SKCanvas. This needs to be done in the render loop because it is the only place where we have access. Also the size of the map needs to be adjusted otherwise we would draw outsize the screen.</p>
 </article>
           </div>
           
