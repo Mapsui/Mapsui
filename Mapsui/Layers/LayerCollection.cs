@@ -7,7 +7,7 @@ using Mapsui.Fetcher;
 
 namespace Mapsui.Layers
 {
-    public class LayerCollection : ICollection<ILayer>
+    public class LayerCollection : IEnumerable<ILayer>
     {
         private ConcurrentQueue<ILayer> _layers = new ConcurrentQueue<ILayer>();
         
@@ -35,7 +35,9 @@ namespace Mapsui.Layers
 
         public void Clear()
         {
-            foreach (var layer in _layers)
+            var copy = _layers.ToArray().ToList();
+
+            foreach (var layer in copy)
             {
                 if (layer is IAsyncDataFetcher asyncLayer)
                 {
@@ -44,7 +46,8 @@ namespace Mapsui.Layers
                 }
                 OnLayerRemoved(layer);
             }
-            _layers.Clear();
+
+            _layers = new ConcurrentQueue<ILayer>(copy);
         }
 
         public bool Contains(ILayer item)
@@ -54,7 +57,13 @@ namespace Mapsui.Layers
 
         public void CopyTo(ILayer[] array, int arrayIndex)
         {
-            _layers.CopyTo(array, arrayIndex);
+            var copy = _layers.ToArray().ToList();
+
+            var maxCount = Math.Min(array.Length, copy.Count());
+            var count = maxCount - arrayIndex;
+            copy.CopyTo(0, array, arrayIndex, count);
+
+            _layers = new ConcurrentQueue<ILayer>(copy);
         }
 
         public ILayer this[int index] => _layers.ToArray()[index];
@@ -71,7 +80,14 @@ namespace Mapsui.Layers
         {
             var copy = _layers.ToArray().ToList();
             copy.Remove(layer);
-            copy.Insert(index, layer);
+            if (copy.Count() > index)
+            {
+                copy.Insert(index, layer);
+            }
+            else
+            {
+                copy.Add(layer);
+            }
             _layers = new ConcurrentQueue<ILayer>(copy);
             OnLayerMoved(layer);
         }
@@ -79,7 +95,14 @@ namespace Mapsui.Layers
         public void Insert(int index, ILayer layer)
         {
             var copy = _layers.ToArray().ToList();
-            copy.Insert(index, layer);
+            if (copy.Count() > index)
+            {
+                copy.Insert(index, layer);
+            }
+            else
+            {
+                copy.Add(layer);
+            }
             _layers = new ConcurrentQueue<ILayer>(copy);
             OnLayerAdded(layer);
         }
@@ -95,6 +118,7 @@ namespace Mapsui.Layers
                 asyncLayer.AbortFetch();
                 asyncLayer.ClearCache();
             }
+
             OnLayerRemoved(layer);
             return success;
         }

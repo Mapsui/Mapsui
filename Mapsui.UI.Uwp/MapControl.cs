@@ -48,7 +48,6 @@ namespace Mapsui.UI.Uwp
             Children.Add(_canvas);
             Children.Add(_selectRectangle);
 
-            _canvas.IgnorePixelScaling = true;
             _canvas.PaintSurface += Canvas_PaintSurface;
 
             Map = new Map();
@@ -172,6 +171,7 @@ namespace Mapsui.UI.Uwp
             if (_map == null) return;
             if (!Viewport.HasSize) return;
 
+            e.Surface.Canvas.Scale(PixelDensity, PixelDensity);
             Renderer.Render(e.Surface.Canvas, Viewport, _map.Layers, _map.Widgets, _map.BackColor);
         }
 

@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -53,7 +52,6 @@ namespace Mapsui.UI.Wpf
             Children.Add(SkiaCanvas);
             Children.Add(_selectRectangle);
 
-            SkiaCanvas.IgnorePixelScaling = true;
             SkiaCanvas.PaintSurface += SKElementOnPaintSurface;
 
             Map = new Map();
@@ -527,6 +525,7 @@ namespace Mapsui.UI.Wpf
             if (Renderer == null) return;
             if (_map == null) return;
 
+            args.Surface.Canvas.Scale(PixelDensity, PixelDensity);
             Renderer.Render(args.Surface.Canvas, Viewport, Map.Layers, Map.Widgets, Map.BackColor);
         }
         

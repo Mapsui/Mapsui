@@ -93,6 +93,7 @@
   <div classs="implements">
     <h5>Implements</h5>
     <div><a class="xref" href="Mapsui.Rendering.IRenderer.html">IRenderer</a></div>
+    <div><a class="xref" href="Mapsui.Rendering.IRenderInfo.html">IRenderInfo</a></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
@@ -122,7 +123,7 @@
   <h6><strong>Assembly</strong>: Mapsui.Rendering.Skia.dll</h6>
   <h5 id="Mapsui_Rendering_Skia_MapRenderer_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class MapRenderer : IRenderer</code></pre>
+    <pre><code class="lang-csharp hljs">public class MapRenderer : IRenderer, IRenderInfo</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
@@ -131,7 +132,7 @@
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Rendering_Skia_MapRenderer__ctor.md&amp;value=---%0Auid%3A%20Mapsui.Rendering.Skia.MapRenderer.%23ctor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Rendering.Skia/MapRenderer.cs/#L38">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Rendering.Skia/MapRenderer.cs/#L37">View Source</a>
   </span>
   <a id="Mapsui_Rendering_Skia_MapRenderer__ctor_" data-uid="Mapsui.Rendering.Skia.MapRenderer.#ctor*"></a>
   <h4 id="Mapsui_Rendering_Skia_MapRenderer__ctor" data-uid="Mapsui.Rendering.Skia.MapRenderer.#ctor">MapRenderer()</h4>
@@ -148,7 +149,7 @@
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Rendering_Skia_MapRenderer_SymbolCache.md&amp;value=---%0Auid%3A%20Mapsui.Rendering.Skia.MapRenderer.SymbolCache%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Rendering.Skia/MapRenderer.cs/#L29">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Rendering.Skia/MapRenderer.cs/#L28">View Source</a>
   </span>
   <a id="Mapsui_Rendering_Skia_MapRenderer_SymbolCache_" data-uid="Mapsui.Rendering.Skia.MapRenderer.SymbolCache*"></a>
   <h4 id="Mapsui_Rendering_Skia_MapRenderer_SymbolCache" data-uid="Mapsui.Rendering.Skia.MapRenderer.SymbolCache">SymbolCache</h4>
@@ -178,7 +179,7 @@
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Rendering_Skia_MapRenderer_WidgetRenders.md&amp;value=---%0Auid%3A%20Mapsui.Rendering.Skia.MapRenderer.WidgetRenders%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Rendering.Skia/MapRenderer.cs/#L31">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Rendering.Skia/MapRenderer.cs/#L30">View Source</a>
   </span>
   <a id="Mapsui_Rendering_Skia_MapRenderer_WidgetRenders_" data-uid="Mapsui.Rendering.Skia.MapRenderer.WidgetRenders*"></a>
   <h4 id="Mapsui_Rendering_Skia_MapRenderer_WidgetRenders" data-uid="Mapsui.Rendering.Skia.MapRenderer.WidgetRenders">WidgetRenders</h4>
@@ -207,10 +208,139 @@
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Rendering_Skia_MapRenderer_GetMapInfo_Mapsui_Geometries_Point_Mapsui_IReadOnlyViewport_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__System_Int32_.md&amp;value=---%0Auid%3A%20Mapsui.Rendering.Skia.MapRenderer.GetMapInfo(Mapsui.Geometries.Point%2CMapsui.IReadOnlyViewport%2CSystem.Collections.Generic.IEnumerable%7BMapsui.Layers.ILayer%7D%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Rendering.Skia/MapRenderer.cs/#L226">View Source</a>
+  </span>
+  <a id="Mapsui_Rendering_Skia_MapRenderer_GetMapInfo_" data-uid="Mapsui.Rendering.Skia.MapRenderer.GetMapInfo*"></a>
+  <h4 id="Mapsui_Rendering_Skia_MapRenderer_GetMapInfo_Mapsui_Geometries_Point_Mapsui_IReadOnlyViewport_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__System_Int32_" data-uid="Mapsui.Rendering.Skia.MapRenderer.GetMapInfo(Mapsui.Geometries.Point,Mapsui.IReadOnlyViewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},System.Int32)">GetMapInfo(Point, IReadOnlyViewport, IEnumerable&lt;ILayer&gt;, Int32)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MapInfo GetMapInfo(Point screenPosition, IReadOnlyViewport viewport, IEnumerable&lt;ILayer&gt; layers, int margin = 0)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Geometries.Point.html">Point</a></td>
+        <td><span class="parametername">screenPosition</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Mapsui.IReadOnlyViewport.html">IReadOnlyViewport</a></td>
+        <td><span class="parametername">viewport</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Mapsui.Layers.ILayer.html">ILayer</a>&gt;</td>
+        <td><span class="parametername">layers</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">margin</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.UI.MapInfo.html">MapInfo</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Rendering_Skia_MapRenderer_GetMapInfo_System_Double_System_Double_Mapsui_IReadOnlyViewport_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__System_Int32_.md&amp;value=---%0Auid%3A%20Mapsui.Rendering.Skia.MapRenderer.GetMapInfo(System.Double%2CSystem.Double%2CMapsui.IReadOnlyViewport%2CSystem.Collections.Generic.IEnumerable%7BMapsui.Layers.ILayer%7D%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Rendering.Skia/MapRenderer.cs/#L159">View Source</a>
+  </span>
+  <a id="Mapsui_Rendering_Skia_MapRenderer_GetMapInfo_" data-uid="Mapsui.Rendering.Skia.MapRenderer.GetMapInfo*"></a>
+  <h4 id="Mapsui_Rendering_Skia_MapRenderer_GetMapInfo_System_Double_System_Double_Mapsui_IReadOnlyViewport_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__System_Int32_" data-uid="Mapsui.Rendering.Skia.MapRenderer.GetMapInfo(System.Double,System.Double,Mapsui.IReadOnlyViewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},System.Int32)">GetMapInfo(Double, Double, IReadOnlyViewport, IEnumerable&lt;ILayer&gt;, Int32)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MapInfo GetMapInfo(double x, double y, IReadOnlyViewport viewport, IEnumerable&lt;ILayer&gt; layers, int margin = 0)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">x</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">y</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Mapsui.IReadOnlyViewport.html">IReadOnlyViewport</a></td>
+        <td><span class="parametername">viewport</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Mapsui.Layers.ILayer.html">ILayer</a>&gt;</td>
+        <td><span class="parametername">layers</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">margin</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.UI.MapInfo.html">MapInfo</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Rendering_Skia_MapRenderer_Render_System_Object_Mapsui_IReadOnlyViewport_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__System_Collections_Generic_IEnumerable_Mapsui_Widgets_IWidget__Mapsui_Styles_Color_.md&amp;value=---%0Auid%3A%20Mapsui.Rendering.Skia.MapRenderer.Render(System.Object%2CMapsui.IReadOnlyViewport%2CSystem.Collections.Generic.IEnumerable%7BMapsui.Layers.ILayer%7D%2CSystem.Collections.Generic.IEnumerable%7BMapsui.Widgets.IWidget%7D%2CMapsui.Styles.Color)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Rendering.Skia/MapRenderer.cs/#L45">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Rendering.Skia/MapRenderer.cs/#L44">View Source</a>
   </span>
   <a id="Mapsui_Rendering_Skia_MapRenderer_Render_" data-uid="Mapsui.Rendering.Skia.MapRenderer.Render*"></a>
   <h4 id="Mapsui_Rendering_Skia_MapRenderer_Render_System_Object_Mapsui_IReadOnlyViewport_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__System_Collections_Generic_IEnumerable_Mapsui_Widgets_IWidget__Mapsui_Styles_Color_" data-uid="Mapsui.Rendering.Skia.MapRenderer.Render(System.Object,Mapsui.IReadOnlyViewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},System.Collections.Generic.IEnumerable{Mapsui.Widgets.IWidget},Mapsui.Styles.Color)">Render(Object, IReadOnlyViewport, IEnumerable&lt;ILayer&gt;, IEnumerable&lt;IWidget&gt;, Color)</h4>
@@ -262,7 +392,7 @@
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Rendering_Skia_MapRenderer_RenderToBitmapStream_Mapsui_IReadOnlyViewport_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__Mapsui_Styles_Color_.md&amp;value=---%0Auid%3A%20Mapsui.Rendering.Skia.MapRenderer.RenderToBitmapStream(Mapsui.IReadOnlyViewport%2CSystem.Collections.Generic.IEnumerable%7BMapsui.Layers.ILayer%7D%2CMapsui.Styles.Color)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Rendering.Skia/MapRenderer.cs/#L62">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Rendering.Skia/MapRenderer.cs/#L61">View Source</a>
   </span>
   <a id="Mapsui_Rendering_Skia_MapRenderer_RenderToBitmapStream_" data-uid="Mapsui.Rendering.Skia.MapRenderer.RenderToBitmapStream*"></a>
   <h4 id="Mapsui_Rendering_Skia_MapRenderer_RenderToBitmapStream_Mapsui_IReadOnlyViewport_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__Mapsui_Styles_Color_" data-uid="Mapsui.Rendering.Skia.MapRenderer.RenderToBitmapStream(Mapsui.IReadOnlyViewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},Mapsui.Styles.Color)">RenderToBitmapStream(IReadOnlyViewport, IEnumerable&lt;ILayer&gt;, Color)</h4>
@@ -318,6 +448,9 @@
   <div>
       <a class="xref" href="Mapsui.Rendering.IRenderer.html">IRenderer</a>
   </div>
+  <div>
+      <a class="xref" href="Mapsui.Rendering.IRenderInfo.html">IRenderInfo</a>
+  </div>
 </article>
           </div>
           
@@ -329,7 +462,7 @@
                     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Rendering_Skia_MapRenderer.md&amp;value=---%0Auid%3A%20Mapsui.Rendering.Skia.MapRenderer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Rendering.Skia/MapRenderer.cs/#L18" class="contribution-link">View Source</a>
+                    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Rendering.Skia/MapRenderer.cs/#L19" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

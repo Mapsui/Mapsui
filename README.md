@@ -9,7 +9,7 @@
 | Build docs | [![Build status](https://ci.appveyor.com/api/projects/status/c8hcfeoafmf51gin/branch/master?svg=true)](https://ci.appveyor.com/project/pauldendulk/mapsui-373p1/branch/master) |
 
 ## News
-- 2020 februari 2: We have gitter channel https://gitter.im/Mapsui/Lobby
+- 2020 februari 2: We have a gitter channel https://gitter.im/Mapsui/Lobby
 
 ## Mapsui (pronounced map-su-wii)
 
