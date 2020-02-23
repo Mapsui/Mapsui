@@ -96,9 +96,10 @@ namespace Mapsui.UI.Android
 
             _onLongClickListener = new OnLongClickGestureListener();
             _gestureDetector = new GestureDetector(Context, _onLongClickListener);
-            _gestureDetector.SingleTapConfirmed += OnSingleTapped;
+           // _gestureDetector.SingleTapConfirmed += OnSingleTapped;
             _gestureDetector.DoubleTap += OnDoubleTapped;
             _onLongClickListener.LongClick += OnLongTapped;
+      _onLongClickListener.SingleClick += OnSingleTapped;
             _gestureDetector.IsLongpressEnabled = true;
         }
 
@@ -112,7 +113,7 @@ namespace Mapsui.UI.Android
             DoubleClick?.Invoke(sender, new TappedEventArgs(position, positionInPixels, 2));
         }
 
-        private void OnSingleTapped(object sender, GestureDetector.SingleTapConfirmedEventArgs e)
+        private void OnSingleTapped(object sender, GestureDetector.SingleTapUpEventArgs e)
         {
             var position = GetScreenPosition(e.Event, this);
             var positionInPixels = GetScreenPositionInPixels(e.Event, this);

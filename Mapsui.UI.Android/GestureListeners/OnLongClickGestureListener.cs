@@ -1,28 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
+﻿using Android.Views;
 
 namespace Mapsui.UI.Android.GestureListeners
 {
-    public class OnLongClickGestureListener : GestureDetector.SimpleOnGestureListener
+  public class OnLongClickGestureListener : GestureDetector.SimpleOnGestureListener
+  {
+    public delegate void LongPress(object sender, GestureDetector.LongPressEventArgs args);
+    public delegate void SinglePress(object sender, GestureDetector.SingleTapUpEventArgs args);
+
+    public LongPress LongClick { get; set; }
+    public SinglePress SingleClick { get; set; }
+
+
+    public override void OnLongPress(MotionEvent e)
     {
-        public delegate void LongPress(object sender, GestureDetector.LongPressEventArgs args);
-
-        public LongPress LongClick { get; set; }
-        
-
-        public override void OnLongPress(MotionEvent e)
-        {
-            base.OnLongPress(e);
-            LongClick(this, new GestureDetector.LongPressEventArgs(e));
-        }
+      base.OnLongPress(e);
+      LongClick(this, new GestureDetector.LongPressEventArgs(e));
     }
+
+    public override bool OnSingleTapUp(MotionEvent e)
+    {
+      SingleClick(this, new GestureDetector.SingleTapUpEventArgs(false, e));
+      return base.OnSingleTapUp(e);
+    }
+  }
 }
