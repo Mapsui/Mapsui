@@ -12,7 +12,7 @@ namespace Mapsui.Rendering.Skia
         public static void Draw(SKCanvas canvas, IReadOnlyViewport viewport, SymbolCache symbolCache, 
             float opacity, Point destination, CalloutStyle calloutStyle)
         {
-            if (calloutStyle.BitmapId < 0 || calloutStyle.Invalidated)
+            if (calloutStyle.BitmapId < 0 || calloutStyle.Invalidated || calloutStyle.TitleFont.Invalidated || calloutStyle.SubtitleFont.Invalidated)
             {
                 if (calloutStyle.Content < 0 && calloutStyle.Type == CalloutType.Custom)
                     return;
