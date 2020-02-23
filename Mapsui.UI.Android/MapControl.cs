@@ -96,10 +96,9 @@ namespace Mapsui.UI.Android
 
             _onLongClickListener = new OnLongClickGestureListener();
             _gestureDetector = new GestureDetector(Context, _onLongClickListener);
-           // _gestureDetector.SingleTapConfirmed += OnSingleTapped;
             _gestureDetector.DoubleTap += OnDoubleTapped;
             _onLongClickListener.LongClick += OnLongTapped;
-      _onLongClickListener.SingleClick += OnSingleTapped;
+            _onLongClickListener.SingleClick += OnSingleTapped;
             _gestureDetector.IsLongpressEnabled = true;
         }
 
