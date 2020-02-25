@@ -90,7 +90,7 @@ namespace Mapsui.Rendering.Skia
             // 0/0 are assumed at center of image, but Svg has 0/0 at left top position
             canvas.Translate(-halfWidth + offsetX, -halfHeight - offsetY);
 
-            canvas.DrawPicture(svg.Picture);
+            canvas.DrawPicture(svg.Picture, new SKPaint() { IsAntialias = true });
 
             canvas.Restore();
         }

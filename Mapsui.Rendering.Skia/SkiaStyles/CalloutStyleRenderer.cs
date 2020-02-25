@@ -220,7 +220,7 @@ namespace Mapsui.Rendering.Skia
                     case BitmapType.Sprite:
                         throw new Exception();
                     case BitmapType.Svg:
-                        canvas.DrawPicture(bitmapInfo.Svg.Picture, offset);
+                        canvas.DrawPicture(bitmapInfo.Svg.Picture, offset, new SKPaint() { IsAntialias = true });
                         break;
                 }
             }

@@ -81,7 +81,7 @@ namespace Mapsui.UI.Forms
             // create a scale matrix
             SKMatrix.PostConcat(ref matrix, SKMatrix.MakeScale(scale, scale));
 
-            e.Surface.Canvas.DrawPicture(_picture, ref matrix);
+            e.Surface.Canvas.DrawPicture(_picture, ref matrix, new SKPaint() { IsAntialias = true });
         }
     }
 }
