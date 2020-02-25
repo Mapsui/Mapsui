@@ -49,7 +49,7 @@ namespace Mapsui.Rendering.Skia
             canvas.RotateDegrees(rotation);
             canvas.Translate((float)calloutStyle.Offset.X, (float)calloutStyle.Offset.Y);
 
-            canvas.DrawPicture(picture);
+            canvas.DrawPicture(picture, new SKPaint() { IsAntialias = true });
 
             canvas.Restore();
         }
@@ -259,14 +259,14 @@ namespace Mapsui.Rendering.Skia
                         case BitmapType.Sprite:
                             throw new Exception();
                         case BitmapType.Svg:
-                            canvas.DrawPicture(bitmapInfo.Svg.Picture, offset);
+                            canvas.DrawPicture(bitmapInfo.Svg.Picture, offset, new SKPaint() { IsAntialias = true });
                             break;
                     }
                 }
                 else if (callout.Type == CalloutType.Single || callout.Type == CalloutType.Detail)
                 {
                     var picture = (SKPicture)BitmapRegistry.Instance.Get(callout.Content);
-                    canvas.DrawPicture(picture, offset);
+                    canvas.DrawPicture(picture, offset, new SKPaint() { IsAntialias = true });
                 }
             }
         }
