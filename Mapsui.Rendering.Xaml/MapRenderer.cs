@@ -20,6 +20,7 @@ using Mapsui.Widgets.ScaleBar;
 using Mapsui.Widgets.Zoom;
 using XamlMedia = System.Windows.Media;
 using Mapsui.UI;
+using Mapsui.Rendering.Xaml.XamlStyles;
 
 namespace Mapsui.Rendering.Xaml
 {
@@ -28,6 +29,11 @@ namespace Mapsui.Rendering.Xaml
         private readonly SymbolCache _symbolCache = new SymbolCache();
         public ISymbolCache SymbolCache => _symbolCache;
         public IDictionary<Type, IWidgetRenderer> WidgetRenders { get; } = new Dictionary<Type, IWidgetRenderer>();
+
+        /// <summary>
+        /// Dictionary holding all special renderers for styles
+        /// </summary>
+        public IDictionary<Type, IStyleRenderer> StyleRenderers { get; } = new Dictionary<Type, IStyleRenderer>();
 
         static MapRenderer()
         {
@@ -204,6 +210,17 @@ namespace Mapsui.Rendering.Xaml
 
         private static void RenderFeature(IReadOnlyViewport viewport, Canvas canvas, IFeature feature, IStyle style, SymbolCache symbolCache, bool rasterizing)
         {
+            //// Check, if we have a special renderer for this style
+            //if (StyleRenderers.ContainsKey(style.GetType()))
+            //{
+            //    // We have a special renderer, so try, if it could draw this
+            //    var result = ((IXamlStyleRenderer)StyleRenderers[style.GetType()]).Draw(canvas, viewport, layer, feature, style, symbolCache);
+            //    // Was it drawn?
+            //    if (result)
+            //        // Yes, special style renderer drawn correct
+            //        return;
+            //}
+            //// No special style renderer handled this up to now, than try standard renderers
             if (style is LabelStyle)
             {
                 var labelStyle = (LabelStyle) style;

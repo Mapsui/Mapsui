@@ -204,6 +204,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="XamlSpecialStyleRenderer.cs" />
     <Page Include="LayerList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -276,6 +277,10 @@
     <ProjectReference Include="..\..\Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj">
       <Project>{ae632270-38ca-4203-93a5-8612629cd944}</Project>
       <Name>Mapsui.Rendering.Skia</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Mapsui.Rendering.Xaml\Mapsui.Rendering.Xaml.csproj">
+      <Project>{5dc32b05-0b6e-478f-a9fb-57762aa2f814}</Project>
+      <Name>Mapsui.Rendering.Xaml</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Mapsui.UI.Wpf\Mapsui.UI.Wpf.csproj">
       <Project>{ae693902-feda-4034-a7c5-9aa9872f7878}</Project>

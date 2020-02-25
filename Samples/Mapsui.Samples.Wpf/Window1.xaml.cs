@@ -40,7 +40,11 @@ namespace Mapsui.Samples.Wpf
             var selectedValue = ((ComboBoxItem)((ComboBox)sender).SelectedItem).Content.ToString();
 
             if (selectedValue.ToLower().Contains("wpf"))
+            {
                 MapControl.RenderMode = UI.Wpf.RenderMode.Wpf;
+                if (!((Rendering.Xaml.MapRenderer)MapControl.Renderer).StyleRenderers.ContainsKey(typeof(Common.Maps.SpecialStyle)))
+                    ((Rendering.Xaml.MapRenderer)MapControl.Renderer).StyleRenderers.Add(typeof(Common.Maps.SpecialStyle), new XamlSpecialStyleRenderer());
+            }
             else if (selectedValue.ToLower().Contains("skia"))
                 MapControl.RenderMode = UI.Wpf.RenderMode.Skia;
             else

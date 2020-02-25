@@ -57,6 +57,8 @@ namespace Mapsui.Samples.Forms
 
         private void MapView_Info(object sender, UI.MapInfoEventArgs e)
         {
+            featureInfo.Text = $"Click Info:";
+
             if (e?.MapInfo?.Feature != null)
             {
                 featureInfo.Text = $"Click Info:{Environment.NewLine}{e.MapInfo.Feature.ToDisplayText()}";
