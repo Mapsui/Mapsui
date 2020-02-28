@@ -36,7 +36,7 @@ namespace Mapsui.Rendering.Skia
             var offsetX = style.Offset.IsRelative ? info.Width * style.Offset.X : style.Offset.X;
             var offsetY = style.Offset.IsRelative ? info.Height * style.Offset.Y : style.Offset.Y;
 
-            BitmapHelper.RenderBitmap(canvas, info.Bitmap, (int)Math.Round(x), (int)Math.Round(y),
+            BitmapRenderer.Draw(canvas, info.Bitmap, (int)Math.Round(x), (int)Math.Round(y),
                 offsetX: (float)offsetX, offsetY: (float)-offsetY,
                 horizontalAlignment: style.HorizontalAlignment, verticalAlignment: style.VerticalAlignment);
         }
