@@ -16,7 +16,7 @@ namespace Mapsui.Rendering.Skia
 
             if (style is CalloutStyle calloutStyle)
             {
-                CalloutStyleRenderer.Draw(canvas, viewport, symbolCache, opacity, destination, calloutStyle);
+                CalloutStyleRenderer.Draw(canvas, viewport, opacity, destination, calloutStyle);
             }
             else if (style is LabelStyle labelStyle) 
             {
