@@ -2,14 +2,13 @@
 using Mapsui.Styles;
 using SkiaSharp;
 using System;
-using System.IO;
 using Topten.RichTextKit;
 
 namespace Mapsui.Rendering.Skia
 {
     public class CalloutStyleRenderer : SymbolStyle
     {
-        public static void Draw(SKCanvas canvas, IReadOnlyViewport viewport, SymbolCache symbolCache, 
+        public static void Draw(SKCanvas canvas, IReadOnlyViewport viewport, 
             float opacity, Point destination, CalloutStyle calloutStyle)
         {
             if (calloutStyle.BitmapId < 0 || calloutStyle.Invalidated || calloutStyle.TitleFont.Invalidated || calloutStyle.SubtitleFont.Invalidated)
@@ -167,50 +166,50 @@ namespace Mapsui.Rendering.Skia
             if (callout.Title == null) 
                 return; 
 
-            var _styleSubtitle = new Topten.RichTextKit.Style();
-            var _styleTitle = new Topten.RichTextKit.Style();
-            var _textBlockTitle = new TextBlock();
-            var _textBlockSubtitle = new TextBlock();
+            var styleSubtitle = new Topten.RichTextKit.Style();
+            var styleTitle = new Topten.RichTextKit.Style();
+            var textBlockTitle = new TextBlock();
+            var textBlockSubtitle = new TextBlock();
 
             if (callout.Type == CalloutType.Detail)
             {
-                _styleSubtitle.FontFamily = callout.SubtitleFont.FontFamily;
-                _styleSubtitle.FontSize = (float)callout.SubtitleFont.Size;
-                _styleSubtitle.FontItalic = callout.SubtitleFont.Italic;
-                _styleSubtitle.FontWeight = callout.SubtitleFont.Bold ? 700 : 400;
-                _styleSubtitle.TextColor = callout.SubtitleFontColor.ToSkia();
+                styleSubtitle.FontFamily = callout.SubtitleFont.FontFamily;
+                styleSubtitle.FontSize = (float)callout.SubtitleFont.Size;
+                styleSubtitle.FontItalic = callout.SubtitleFont.Italic;
+                styleSubtitle.FontWeight = callout.SubtitleFont.Bold ? 700 : 400;
+                styleSubtitle.TextColor = callout.SubtitleFontColor.ToSkia();
 
-                _textBlockSubtitle.AddText(callout.Subtitle, _styleSubtitle);
-                _textBlockSubtitle.Alignment = callout.SubtitleTextAlignment.ToRichTextKit();
+                textBlockSubtitle.AddText(callout.Subtitle, styleSubtitle);
+                textBlockSubtitle.Alignment = callout.SubtitleTextAlignment.ToRichTextKit();
             }
-            _styleTitle.FontFamily = callout.TitleFont.FontFamily;
-            _styleTitle.FontSize = (float)callout.TitleFont.Size;
-            _styleTitle.FontItalic = callout.TitleFont.Italic;
-            _styleTitle.FontWeight = callout.TitleFont.Bold ? 700 : 400;
-            _styleTitle.TextColor = callout.TitleFontColor.ToSkia();
+            styleTitle.FontFamily = callout.TitleFont.FontFamily;
+            styleTitle.FontSize = (float)callout.TitleFont.Size;
+            styleTitle.FontItalic = callout.TitleFont.Italic;
+            styleTitle.FontWeight = callout.TitleFont.Bold ? 700 : 400;
+            styleTitle.TextColor = callout.TitleFontColor.ToSkia();
 
-            _textBlockTitle.Alignment = callout.TitleTextAlignment.ToRichTextKit();
-            _textBlockTitle.AddText(callout.Title, _styleTitle);
+            textBlockTitle.Alignment = callout.TitleTextAlignment.ToRichTextKit();
+            textBlockTitle.AddText(callout.Title, styleTitle);
 
-            _textBlockTitle.MaxWidth = _textBlockSubtitle.MaxWidth = (float)callout.MaxWidth;
+            textBlockTitle.MaxWidth = textBlockSubtitle.MaxWidth = (float)callout.MaxWidth;
             // Layout TextBlocks
-            _textBlockTitle.Layout();
-            _textBlockSubtitle.Layout();
+            textBlockTitle.Layout();
+            textBlockSubtitle.Layout();
             // Get sizes
-            var width = Math.Max(_textBlockTitle.MeasuredWidth, _textBlockSubtitle.MeasuredWidth);
-            var height = _textBlockTitle.MeasuredHeight + (callout.Type == CalloutType.Detail ? _textBlockSubtitle.MeasuredHeight + (float)callout.Spacing : 0f);
+            var width = Math.Max(textBlockTitle.MeasuredWidth, textBlockSubtitle.MeasuredWidth);
+            var height = textBlockTitle.MeasuredHeight + (callout.Type == CalloutType.Detail ? textBlockSubtitle.MeasuredHeight + (float)callout.Spacing : 0f);
             // Now we have the correct width, so make a new layout cycle for text alignment
-            _textBlockTitle.MaxWidth = _textBlockSubtitle.MaxWidth = width;
-            _textBlockTitle.Layout();
-            _textBlockSubtitle.Layout();
+            textBlockTitle.MaxWidth = textBlockSubtitle.MaxWidth = width;
+            textBlockTitle.Layout();
+            textBlockSubtitle.Layout();
             // Create bitmap from TextBlock
             using (var rec = new SKPictureRecorder())
             using (var canvas = rec.BeginRecording(new SKRect(0, 0, width, height)))
             {
                 // Draw text to canvas
-                _textBlockTitle.Paint(canvas, new TextPaintOptions() { IsAntialias = true });
+                textBlockTitle.Paint(canvas, new TextPaintOptions() { IsAntialias = true });
                 if (callout.Type == CalloutType.Detail)
-                    _textBlockSubtitle.Paint(canvas, new SKPoint(0, _textBlockTitle.MeasuredHeight + (float)callout.Spacing), new TextPaintOptions() { IsAntialias = true });
+                    textBlockSubtitle.Paint(canvas, new SKPoint(0, textBlockTitle.MeasuredHeight + (float)callout.Spacing), new TextPaintOptions() { IsAntialias = true });
                 // Create a SKPicture from canvas
                 var picture = rec.EndRecording();
                 if (callout.InternalContent >= 0)
