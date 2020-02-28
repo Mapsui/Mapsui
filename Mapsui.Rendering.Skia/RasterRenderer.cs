@@ -44,14 +44,14 @@ namespace Mapsui.Rendering.Skia
 
 		            var destination = new BoundingBox(0.0, 0.0, boundingBox.Width, boundingBox.Height);
 
-		            BitmapHelper.RenderRaster(canvas, bitmapInfo.Bitmap, destination.ToSkia(), opacity);
+                    BitmapRenderer.Draw(canvas, bitmapInfo.Bitmap, destination.ToSkia(), opacity);
 
 		            canvas.SetMatrix(priorMatrix);
 		        }
 		        else
 		        {
 		            var destination = WorldToScreen(viewport, feature.Geometry.BoundingBox);
-		            BitmapHelper.RenderRaster(canvas, bitmapInfo.Bitmap, RoundToPixel(destination).ToSkia(), opacity);
+		            BitmapRenderer.Draw(canvas, bitmapInfo.Bitmap, RoundToPixel(destination).ToSkia(), opacity);
                 }
 		    }
 			catch (Exception ex)
