@@ -75,6 +75,8 @@ namespace Mapsui.UI.Forms
             _mapControl.Hovered += HandlerHovered;
             _mapControl.TouchStarted += HandlerTouchStarted;
             _mapControl.TouchEnded += HandlerTouchEnded;
+            _mapControl.TouchEntered += HandlerTouchEntered;
+            _mapControl.TouchExited += HandlerTouchExited;
             _mapControl.TouchMove += HandlerTouchMove;
             _mapControl.Swipe += HandlerSwipe;
             _mapControl.Fling += HandlerFling;
@@ -199,6 +201,16 @@ namespace Mapsui.UI.Forms
         /// TouchEnd is called, when user release a mouse button or doesn't touch display anymore
         /// </summary>
         public event EventHandler<TouchedEventArgs> TouchEnded;
+
+        /// <summary>
+        /// TouchEntered is called, when user moves an active touch onto the view
+        /// </summary>
+        public event EventHandler<TouchedEventArgs> TouchEntered;
+
+        /// <summary>
+        /// TouchExited is called, when user moves an active touch off the view
+        /// </summary>
+        public event EventHandler<TouchedEventArgs> TouchExited;
 
         /// <summary>
         /// TouchMove is called, when user move mouse over map (independent from mouse button state) or move finger on display
@@ -940,6 +952,14 @@ namespace Mapsui.UI.Forms
         private void HandlerTouchStarted(object sender, TouchedEventArgs e)
         {
             TouchStarted?.Invoke(sender, e);
+        }
+        private void HandlerTouchEntered(object sender, TouchedEventArgs e)
+        {
+            TouchEntered?.Invoke(sender, e);
+        }
+        private void HandlerTouchExited(object sender, TouchedEventArgs e)
+        {
+            TouchExited?.Invoke(sender, e);
         }
 
         private void HandlerPinPropertyChanged(object sender, PropertyChangedEventArgs e)
