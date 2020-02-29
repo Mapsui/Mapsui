@@ -163,8 +163,11 @@ namespace Mapsui.Rendering.Skia
             if (callout.Type == CalloutType.Custom)
                 return;
 
-            if (callout.Title == null) 
-                return; 
+            if (callout.Title == null)
+            {
+                callout.Content = -1;
+                return;
+            }
 
             var styleSubtitle = new Topten.RichTextKit.Style();
             var styleTitle = new Topten.RichTextKit.Style();

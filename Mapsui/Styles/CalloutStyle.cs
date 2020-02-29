@@ -309,6 +309,7 @@ namespace Mapsui.Rendering.Skia
                 if (_content != value)
                 {
                     _content = value;
+                    _type = CalloutType.Custom;
                     Invalidated = true;
                 }
             }
