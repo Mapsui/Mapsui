@@ -11,12 +11,12 @@ namespace Mapsui.Rendering.Skia
         public static void Draw(SKCanvas canvas, IReadOnlyViewport viewport, 
             float opacity, Point destination, CalloutStyle calloutStyle)
         {
-            if (calloutStyle.BitmapId < 0 || calloutStyle.Invalidated || calloutStyle.TitleFont.Invalidated || calloutStyle.SubtitleFont.Invalidated)
+            if (calloutStyle.BitmapId < 0 || calloutStyle.Invalidated)
             {
                 if (calloutStyle.Content < 0 && calloutStyle.Type == CalloutType.Custom)
                     return;
 
-                if (calloutStyle.Invalidated || calloutStyle.TitleFont.Invalidated || calloutStyle.SubtitleFont.Invalidated)
+                if (calloutStyle.Invalidated)
                 {
                     UpdateContent(calloutStyle);
                 }
@@ -102,7 +102,7 @@ namespace Mapsui.Rendering.Skia
                     BitmapRegistry.Instance.Set(callout.BitmapId, picture);
             }
 
-            callout.Invalidated = callout.TitleFont.Invalidated = callout.SubtitleFont.Invalidated = false;
+            callout.Invalidated = false;
         }
 
         /// <summary>
