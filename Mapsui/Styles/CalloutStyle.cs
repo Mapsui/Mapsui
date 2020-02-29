@@ -70,6 +70,7 @@ namespace Mapsui.Rendering.Skia
         private double _maxWidth;
         private Color _titleFontColor;
         private Color _subtitleFontColor;
+        private bool _invalidated;
 
         public new static double DefaultWidth { get; set; } = 100;
         public new static double DefaultHeight { get; set; } = 30;
@@ -309,6 +310,7 @@ namespace Mapsui.Rendering.Skia
                 if (_content != value)
                 {
                     _content = value;
+                    _type = CalloutType.Custom;
                     Invalidated = true;
                 }
             }
@@ -467,6 +469,18 @@ namespace Mapsui.Rendering.Skia
             }
         }
 
-        public bool Invalidated { get; set; }
+        public bool Invalidated
+        {
+            get
+            {
+                return _invalidated | TitleFont.Invalidated | SubtitleFont.Invalidated;
+            }
+            set
+            {
+                _invalidated = value;
+                TitleFont.Invalidated = value;
+                SubtitleFont.Invalidated = value;
+            }
+        }
     }
 }
