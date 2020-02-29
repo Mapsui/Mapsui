@@ -64,9 +64,10 @@ namespace Mapsui.Samples.Forms
                     pin.Callout.ArrowWidth = rnd.Next(0, 20);
                     pin.Callout.ArrowAlignment = (ArrowAlignment)rnd.Next(0, 4);
                     pin.Callout.ArrowPosition = rnd.Next(0, 100) / 100.0;
-                    pin.Callout.StrokeWidth = 1;
+                    pin.Callout.StrokeWidth = rnd.Next(0, 10);
                     pin.Callout.Padding = new Thickness(rnd.Next(0, 20), rnd.Next(0, 20));
                     pin.Callout.BackgroundColor = Color.White;
+                    pin.Callout.RotateWithMap = true;
                     pin.Callout.Color = pin.Color;
                     if (rnd.Next(0, 3) < 2)
                     {

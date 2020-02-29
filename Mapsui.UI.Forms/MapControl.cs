@@ -166,8 +166,7 @@ namespace Mapsui.UI.Forms
                     // While tapping on screen, there could be a small movement of the finger
                     // (especially on Samsung). So check, if touch start location isn't more 
                     // than a number of pixels away from touch end location.
-
-                    var isAround = Algorithms.Distance(releasedTouch.Location, _firstTouch) < touchSlop;
+                    bool isAround = IsAround(releasedTouch);
 
                     // If touch start and end is in the same area and the touch time is shorter
                     // than longTap, than we have a tap.
@@ -244,6 +243,13 @@ namespace Mapsui.UI.Forms
                     OnZoomOut(location);
                 }
             }
+        }
+
+        private bool IsAround(TouchEvent releasedTouch)
+        {
+            if (_firstTouch == null) { return false; }
+            if (releasedTouch.Location == null) { return false; }
+            return _firstTouch == null ? false : Algorithms.Distance(releasedTouch.Location, _firstTouch) < touchSlop;
         }
 
         void OnPaintSurface(object sender, SKPaintGLSurfaceEventArgs skPaintSurfaceEventArgs)

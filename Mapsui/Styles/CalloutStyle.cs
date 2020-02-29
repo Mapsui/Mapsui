@@ -60,7 +60,7 @@ namespace Mapsui.Rendering.Skia
         private Color _backgroundColor = Color.White;
         private float _strokeWidth = 1f;
         private int _content = -1;
-        private Point _offset = new Point(0, 0);
+        private Offset _offset = new Offset(0, 0);
         private double _rotation = 0;
         private string _title;
         private string _subtitle;
@@ -100,7 +100,7 @@ namespace Mapsui.Rendering.Skia
         /// <summary>
         /// Offset position in pixels of Callout
         /// </summary>
-        public Point Offset
+        public Offset Offset
         {
             get => _offset;
             set
@@ -108,7 +108,8 @@ namespace Mapsui.Rendering.Skia
                 if (!_offset.Equals(value))
                 {
                     _offset = value;
-                    SymbolOffset = new Offset(_offset.X, _offset.Y);
+                    Invalidated = true;
+                    //SymbolOffset = new Offset(_offset.X, _offset.Y);
                 }
             }
         }
