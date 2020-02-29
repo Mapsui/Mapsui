@@ -24,14 +24,14 @@ namespace Mapsui.Rendering.Skia
             switch (bitmap.Type)
             {
                 case BitmapType.Bitmap:
-                    BitmapHelper.RenderBitmap(canvas, bitmap.Bitmap,
+                    BitmapRenderer.Draw(canvas, bitmap.Bitmap,
                         (float)destination.X, (float)destination.Y,
                         rotation,
                         (float)offsetX, (float)offsetY,
                         opacity: opacity, scale: (float)symbolStyle.SymbolScale);
                     break;
                 case BitmapType.Svg:
-                    BitmapHelper.RenderSvg(canvas, bitmap.Svg,
+                    SvgRenderer.Draw(canvas, bitmap.Svg,
                         (float)destination.X, (float)destination.Y,
                         rotation,
                         (float)offsetX, (float)offsetY,
@@ -45,7 +45,7 @@ namespace Mapsui.Rendering.Skia
                         sprite.Data = bitmapAtlas.Bitmap.Subset(new SKRectI(sprite.X, sprite.Y, sprite.X + sprite.Width,
                             sprite.Y + sprite.Height));
                     }
-                    BitmapHelper.RenderBitmap(canvas, (SKImage)sprite.Data,
+                    BitmapRenderer.Draw(canvas, (SKImage)sprite.Data,
                         (float)destination.X, (float)destination.Y,
                         rotation,
                         (float)offsetX, (float)offsetY,

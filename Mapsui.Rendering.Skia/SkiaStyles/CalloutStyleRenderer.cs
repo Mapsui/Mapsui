@@ -247,6 +247,7 @@ namespace Mapsui.Rendering.Skia
 
                 if (callout.Type == CalloutType.Custom)
                 {
+
                     // Get size of content
                     var bitmapInfo = BitmapHelper.LoadBitmap(BitmapRegistry.Instance.Get(callout.Content));
 

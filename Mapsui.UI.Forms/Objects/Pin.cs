@@ -467,7 +467,7 @@ namespace Mapsui.UI.Forms
                         var bitmap = new SKBitmap(info);
                         var canvas = new SKCanvas(bitmap);
                         // Now draw Svg image to bitmap
-                        using (var paint = new SKPaint())
+                        using (var paint = new SKPaint() { IsAntialias = true })
                         {
                             // Replace color while drawing
                             paint.ColorFilter = SKColorFilter.CreateBlendMode(Color.ToSKColor(), SKBlendMode.SrcIn); // use the source color
