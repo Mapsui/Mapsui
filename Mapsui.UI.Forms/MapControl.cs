@@ -3,6 +3,7 @@ using Mapsui.UI.Utils;
 using SkiaSharp;
 using SkiaSharp.Views.Forms;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using Mapsui.Geometries.Utilities;
@@ -47,7 +48,7 @@ namespace Mapsui.UI.Forms
         private bool _initialized = false;
         private float _skiaScale;
         private double _innerRotation;
-        private Dictionary<long, TouchEvent> _touches = new Dictionary<long, TouchEvent>();
+        private ConcurrentDictionary<long, TouchEvent> _touches = new ConcurrentDictionary<long, TouchEvent>();
         private Geometries.Point _firstTouch;
         private bool _waitingForDoubleTap;
         private int _numOfTaps = 0;
@@ -136,12 +137,9 @@ namespace Mapsui.UI.Forms
 
                 e.Handled = OnTouchStart(_touches.Select(t => t.Value.Location).ToList());
             }
-            else if (e.ActionType == SKTouchAction.Released)
+            // Delete e.Id from _touches, because finger is released
+            else if (e.ActionType == SKTouchAction.Released && _touches.TryRemove(e.Id, out var releasedTouch))
             {
-                // Delete e.Id from _touches, because finger is released
-                var releasedTouch = _touches[e.Id];
-                _touches.Remove(e.Id);
-
                 // Is this a fling or swipe?
                 if (_touches.Count == 0)
                 {
@@ -224,12 +222,10 @@ namespace Mapsui.UI.Forms
             }
             else if (e.ActionType == SKTouchAction.Cancelled)
             {
-                _touches.Remove(e.Id);
+                _touches.TryRemove(e.Id, out _);
             }
-            else if (e.ActionType == SKTouchAction.Exited)
+            else if (e.ActionType == SKTouchAction.Exited && _touches.TryRemove(e.Id, out var exitedTouch))
             {
-                var exitedTouch = _touches[e.Id];
-                _touches.Remove(e.Id);
                 e.Handled = OnTouchExited(_touches.Select(t => t.Value.Location).ToList(), exitedTouch.Location);
             }
             else if (e.ActionType == SKTouchAction.Entered)
