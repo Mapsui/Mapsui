@@ -91,6 +91,7 @@ namespace Mapsui.UI.Android
         private void CanvasOnPaintSurface(object sender, SKPaintGLSurfaceEventArgs args)
         {
             args.Surface.Canvas.Scale(PixelDensity, PixelDensity);
+            Rendering.Skia.BitmapHelper.GRContext = _canvas.GRContext;
             Renderer.Render(args.Surface.Canvas, Viewport, _map.Layers, _map.Widgets, _map.BackColor);
         }
 

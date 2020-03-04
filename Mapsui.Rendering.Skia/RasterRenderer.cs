@@ -22,8 +22,8 @@ namespace Mapsui.Rendering.Skia
 		        if (!tileCache.Keys.Contains(raster))
 		        {
 		            bitmapInfo = BitmapHelper.LoadBitmap(raster.Data);
-		            tileCache[raster] = bitmapInfo;
-		        }
+                    tileCache[raster] = bitmapInfo;
+                }
 		        else
 		        {
 		            bitmapInfo = tileCache[raster];

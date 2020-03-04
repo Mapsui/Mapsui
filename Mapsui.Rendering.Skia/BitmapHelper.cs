@@ -6,6 +6,8 @@ namespace Mapsui.Rendering.Skia
 {
     public static class BitmapHelper
     {
+        public static GRContext GRContext;
+
         public static BitmapInfo LoadBitmap(object bitmapStream)
         {
             // todo: Our BitmapRegistry stores not only bitmaps. Perhaps we should store a class in it
@@ -28,7 +30,18 @@ namespace Mapsui.Rendering.Skia
                 }
 
                 var image = SKImage.FromEncodedData(SKData.CreateCopy(stream.ToBytes()));
-                return new BitmapInfo {Bitmap = image};
+
+                SKImage textureBackedImage;
+
+                // Create a texture backend image from bitmap
+                var info = new SKImageInfo(image.Width, image.Height);
+                using (var surface = SKSurface.Create(GRContext, false, info))
+                {
+                    surface.Canvas.DrawImage(image, 0, 0);
+                    textureBackedImage = surface.Snapshot();
+                }
+
+                return new BitmapInfo {Bitmap = textureBackedImage };
             }
 
             if (bitmapStream is Sprite sprite)

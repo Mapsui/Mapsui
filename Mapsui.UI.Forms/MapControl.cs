@@ -257,6 +257,8 @@ namespace Mapsui.UI.Forms
             _skiaScale = (float)(CanvasSize.Width / Width);
             skPaintSurfaceEventArgs.Surface.Canvas.Scale(_skiaScale, _skiaScale);
 
+            Rendering.Skia.BitmapHelper.GRContext = GRContext;
+
             _renderer.Render(skPaintSurfaceEventArgs.Surface.Canvas,
                 Viewport, _map.Layers, _map.Widgets, _map.BackColor);
         }
