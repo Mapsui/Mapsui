@@ -6,6 +6,7 @@ using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.Providers;
+using Mapsui.Rendering.Skia.SkiaStyles;
 using Mapsui.Rendering.Skia.SkiaWidgets;
 using Mapsui.Styles;
 using Mapsui.UI;
@@ -29,6 +30,11 @@ namespace Mapsui.Rendering.Skia
 
         public IDictionary<Type, IWidgetRenderer> WidgetRenders { get; } = new Dictionary<Type, IWidgetRenderer>();
 
+        /// <summary>
+        /// Dictionary holding all special renderers for styles
+        /// </summary>
+        public IDictionary<Type, IStyleRenderer> StyleRenderers { get; } = new Dictionary<Type, IStyleRenderer>();
+
         static MapRenderer()
         {
             DefaultRendererFactory.Create = () => new MapRenderer();
@@ -39,6 +45,8 @@ namespace Mapsui.Rendering.Skia
             WidgetRenders[typeof(Hyperlink)] = new HyperlinkWidgetRenderer();
             WidgetRenders[typeof(ScaleBarWidget)] = new ScaleBarWidgetRenderer();
             WidgetRenders[typeof(ZoomInOutWidget)] = new ZoomInOutWidgetRenderer();
+
+            StyleRenderers.Add(typeof(VectorStyle), new VectorStyleRenderer(this));
         }
 
         public void Render(object target, IReadOnlyViewport viewport, IEnumerable<ILayer> layers,
@@ -135,6 +143,21 @@ namespace Mapsui.Rendering.Skia
 
         private void RenderFeature(SKCanvas canvas, IReadOnlyViewport viewport, ILayer layer, IStyle style, IFeature feature, float layerOpacity)
         {
+            // Check, if we have a special renderer for this style
+            if (StyleRenderers.ContainsKey(style.GetType()))
+            {
+                // Save canvas
+                canvas.Save();
+                // We have a special renderer, so try, if it could draw this
+                var result = ((ISkiaStyleRenderer)StyleRenderers[style.GetType()]).Draw(canvas, viewport, layer, feature, style, _symbolCache);
+                // Restore old canvas
+                canvas.Restore();
+                // Was it drawn?
+                if (result)
+                    // Yes, special style renderer drawn correct
+                    return;
+            }
+            // No special style renderer handled this up to now, than try standard renderers
             if (feature.Geometry is Point)
                 PointRenderer.Draw(canvas, viewport, style, feature, feature.Geometry, _symbolCache, layerOpacity * style.Opacity);
             else if (feature.Geometry is MultiPoint)
@@ -192,6 +215,7 @@ namespace Mapsui.Rendering.Skia
                     var color = pixmap.GetPixelColor(intX, intY);
 
                     VisibleFeatureIterator.IterateLayers(viewport, layers, (v, layer, style, feature, opacity) => {
+                        surface.Canvas.Save();
                         // 1) Clear the entire bitmap
                         surface.Canvas.Clear(SKColors.Transparent);
                         // 2) Render the feature to the clean canvas
@@ -200,6 +224,7 @@ namespace Mapsui.Rendering.Skia
                         if (color != pixmap.GetPixelColor(intX, intY))
                             // 4) Add feature and style to result
                             list.Add(new MapInfoRecord(feature, style, layer));
+                        surface.Canvas.Restore();
                     });
                 }
 
