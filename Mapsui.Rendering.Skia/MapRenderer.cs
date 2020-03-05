@@ -45,8 +45,6 @@ namespace Mapsui.Rendering.Skia
             WidgetRenders[typeof(Hyperlink)] = new HyperlinkWidgetRenderer();
             WidgetRenders[typeof(ScaleBarWidget)] = new ScaleBarWidgetRenderer();
             WidgetRenders[typeof(ZoomInOutWidget)] = new ZoomInOutWidgetRenderer();
-
-            StyleRenderers.Add(typeof(VectorStyle), new VectorStyleRenderer(this));
         }
 
         public void Render(object target, IReadOnlyViewport viewport, IEnumerable<ILayer> layers,
