@@ -257,8 +257,14 @@ namespace Mapsui.UI.Forms
             _skiaScale = (float)(CanvasSize.Width / Width);
             skPaintSurfaceEventArgs.Surface.Canvas.Scale(_skiaScale, _skiaScale);
 
+            var viewport = new Viewport();
+            viewport.SetCenter(Viewport.Center);
+            viewport.SetResolution(Viewport.Resolution);
+            viewport.SetRotation(Viewport.Rotation);
+            viewport.SetSize(Viewport.Width, Viewport.Height);
+
             _renderer.Render(skPaintSurfaceEventArgs.Surface.Canvas,
-                Viewport, _map.Layers, _map.Widgets, _map.BackColor);
+                viewport, _map.Layers, _map.Widgets, _map.BackColor);
         }
 
         private Geometries.Point GetScreenPosition(SKPoint point)
