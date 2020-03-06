@@ -22,10 +22,7 @@ namespace Mapsui.Tests.Fetcher
                 FetchingPostponedInMilliseconds = 0
             };
 
-            // act
-            layer.RefreshData(extent, 1, true);
             var notifications = new List<bool>();
-
             layer.PropertyChanged += (sender, args) =>
             {
                 if (args.PropertyName == nameof(Layer.Busy))
@@ -33,6 +30,11 @@ namespace Mapsui.Tests.Fetcher
                     notifications.Add(layer.Busy);
                 }
             };
+
+            // act
+            layer.RefreshData(extent, 1, true);
+
+
 
             // assert
             Task.Run(() => 
