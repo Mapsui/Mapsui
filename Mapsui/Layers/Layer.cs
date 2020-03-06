@@ -37,11 +37,12 @@ namespace Mapsui.Layers
         private readonly FeatureFetchDispatcher _fetchDispatcher;
         private readonly FetchMachine _fetchMachine;
         private readonly Delayer _delayer = new Delayer();
+        private int _fetchingPostponedInMilliseconds = 500;
 
         /// <summary>
         /// Create a new layer
         /// </summary>
-        public Layer() : this("Layer") {}
+        public Layer() : this("Layer") { }
 
         /// <summary>
         /// Create layer with name
@@ -59,7 +60,18 @@ namespace Mapsui.Layers
         /// <summary>
         /// Time to wait before fetching data
         /// </summary>
-        public int FetchingPostponedInMilliseconds { get; set; } = 500;
+        public int FetchingPostponedInMilliseconds
+        {
+            get 
+            { 
+                return _fetchingPostponedInMilliseconds; 
+            }
+            set 
+            {
+                _fetchingPostponedInMilliseconds = value;
+                _delayer.MillisecondsToDelay = value;
+            } 
+        }
 
         /// <summary>
         /// Data source for this layer
@@ -144,7 +156,7 @@ namespace Mapsui.Layers
             if (DataSource == null) return;
             if (!majorChange) return;
 
-            _delayer.ExecuteDelayed(() => DelayedFetch(extent.Copy(), resolution), FetchingPostponedInMilliseconds);
+            _delayer.ExecuteDelayed(() => DelayedFetch(extent.Copy(), resolution));
         }
 
         /// <inheritdoc />
