@@ -88,13 +88,7 @@ namespace Mapsui.UI.iOS
         {
             args.Surface.Canvas.Scale(PixelDensity, PixelDensity);
 
-            var viewport = new Viewport();
-            viewport.SetCenter(Viewport.Center);
-            viewport.SetResolution(Viewport.Resolution);
-            viewport.SetRotation(Viewport.Rotation);
-            viewport.SetSize(Viewport.Width, Viewport.Height);
-
-            Renderer.Render(args.Surface.Canvas, viewport, _map.Layers, _map.Widgets, _map.BackColor);
+            Renderer.Render(args.Surface.Canvas, new Viewport(Viewport), _map.Layers, _map.Widgets, _map.BackColor);
         }
 
         public override void TouchesBegan(NSSet touches, UIEvent evt)

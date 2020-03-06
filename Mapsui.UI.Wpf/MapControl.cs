@@ -527,13 +527,7 @@ namespace Mapsui.UI.Wpf
 
             args.Surface.Canvas.Scale(PixelDensity, PixelDensity);
 
-            var viewport = new Viewport();
-            viewport.SetCenter(Viewport.Center);
-            viewport.SetResolution(Viewport.Resolution);
-            viewport.SetRotation(Viewport.Rotation);
-            viewport.SetSize(Viewport.Width, Viewport.Height);
-
-            Renderer.Render(args.Surface.Canvas, viewport, Map.Layers, Map.Widgets, Map.BackColor);
+            Renderer.Render(args.Surface.Canvas, new Viewport(Viewport), Map.Layers, Map.Widgets, Map.BackColor);
         }
         
         private void PaintWpf()
