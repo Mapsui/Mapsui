@@ -46,7 +46,6 @@ namespace Mapsui.UI.Forms
         private const int touchSlop = 8;
 
         private bool _initialized = false;
-        private float _skiaScale;
         private double _innerRotation;
         private ConcurrentDictionary<long, TouchEvent> _touches = new ConcurrentDictionary<long, TouchEvent>();
         private Geometries.Point _firstTouch;
@@ -72,21 +71,17 @@ namespace Mapsui.UI.Forms
             Initialize();
         }
 
-        public float SkiaScale => _skiaScale;
+        public float PixelDensity { get; set; }
 
-        public float PixelDensity => SkiaScale;
+        public float ScreenWidth => (float)Width;
 
-        public float ScreenWidth => (float)this.Width;
-
-        public float ScreenHeight => (float)this.Height;
+        public float ScreenHeight => (float)Height;
 
         private float ViewportWidth => ScreenWidth;
 
         private float ViewportHeight => ScreenHeight;
 
         public ISymbolCache SymbolCache => _renderer.SymbolCache;
-
-        public float PixelsPerDeviceIndependentUnit => SkiaScale;
 
         public bool UseDoubleTap = true;
 
@@ -254,9 +249,9 @@ namespace Mapsui.UI.Forms
 
         void OnPaintSurface(object sender, SKPaintGLSurfaceEventArgs skPaintSurfaceEventArgs)
         {
-            _skiaScale = (float)(CanvasSize.Width / Width);
+            PixelDensity = (float)(skPaintSurfaceEventArgs.BackendRenderTarget.Width / Width);
 
-            skPaintSurfaceEventArgs.Surface.Canvas.Scale(_skiaScale, _skiaScale);
+            skPaintSurfaceEventArgs.Surface.Canvas.Scale(PixelDensity, PixelDensity);
 
             var canvas = skPaintSurfaceEventArgs.Surface.Canvas;
 
@@ -265,7 +260,7 @@ namespace Mapsui.UI.Forms
 
         private Geometries.Point GetScreenPosition(SKPoint point)
         {
-            return new Geometries.Point(point.X / _skiaScale, point.Y / _skiaScale);
+            return new Geometries.Point(point.X / PixelDensity, point.Y / PixelDensity);
         }
 
         public void RefreshGraphics()
@@ -701,11 +696,6 @@ namespace Mapsui.UI.Forms
         /// <summary>
         /// Public functions
         /// </summary>
-
-        public float GetDeviceIndependentUnits()
-        {
-            return SkiaScale;
-        }
 
         public void OpenBrowser(string url)
         {
