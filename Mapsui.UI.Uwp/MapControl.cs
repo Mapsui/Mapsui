@@ -172,7 +172,14 @@ namespace Mapsui.UI.Uwp
             if (!Viewport.HasSize) return;
 
             e.Surface.Canvas.Scale(PixelDensity, PixelDensity);
-            Renderer.Render(e.Surface.Canvas, Viewport, _map.Layers, _map.Widgets, _map.BackColor);
+
+            var viewport = new Viewport();
+            viewport.SetCenter(Viewport.Center);
+            viewport.SetResolution(Viewport.Resolution);
+            viewport.SetRotation(Viewport.Rotation);
+            viewport.SetSize(Viewport.Width, Viewport.Height);
+
+            Renderer.Render(e.Surface.Canvas, viewport, _map.Layers, _map.Widgets, _map.BackColor);
         }
 
         [Obsolete("Use MapControl.Navigate.NavigateTo instead", true)]
