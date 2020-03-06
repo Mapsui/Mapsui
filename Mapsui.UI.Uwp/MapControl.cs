@@ -173,13 +173,7 @@ namespace Mapsui.UI.Uwp
 
             e.Surface.Canvas.Scale(PixelDensity, PixelDensity);
 
-            var viewport = new Viewport();
-            viewport.SetCenter(Viewport.Center);
-            viewport.SetResolution(Viewport.Resolution);
-            viewport.SetRotation(Viewport.Rotation);
-            viewport.SetSize(Viewport.Width, Viewport.Height);
-
-            Renderer.Render(e.Surface.Canvas, viewport, _map.Layers, _map.Widgets, _map.BackColor);
+            Renderer.Render(e.Surface.Canvas, new Viewport(Viewport), _map.Layers, _map.Widgets, _map.BackColor);
         }
 
         [Obsolete("Use MapControl.Navigate.NavigateTo instead", true)]

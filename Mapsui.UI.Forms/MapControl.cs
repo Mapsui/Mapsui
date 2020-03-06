@@ -255,16 +255,12 @@ namespace Mapsui.UI.Forms
         void OnPaintSurface(object sender, SKPaintGLSurfaceEventArgs skPaintSurfaceEventArgs)
         {
             _skiaScale = (float)(CanvasSize.Width / Width);
+
             skPaintSurfaceEventArgs.Surface.Canvas.Scale(_skiaScale, _skiaScale);
 
-            var viewport = new Viewport();
-            viewport.SetCenter(Viewport.Center);
-            viewport.SetResolution(Viewport.Resolution);
-            viewport.SetRotation(Viewport.Rotation);
-            viewport.SetSize(Viewport.Width, Viewport.Height);
+            var canvas = skPaintSurfaceEventArgs.Surface.Canvas;
 
-            _renderer.Render(skPaintSurfaceEventArgs.Surface.Canvas,
-                viewport, _map.Layers, _map.Widgets, _map.BackColor);
+            _renderer.Render(canvas, new Viewport(Viewport), _map.Layers, _map.Widgets, _map.BackColor);
         }
 
         private Geometries.Point GetScreenPosition(SKPoint point)
