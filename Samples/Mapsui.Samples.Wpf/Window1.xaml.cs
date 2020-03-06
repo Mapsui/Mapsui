@@ -42,8 +42,8 @@ namespace Mapsui.Samples.Wpf
             if (selectedValue.ToLower().Contains("wpf"))
             {
                 MapControl.RenderMode = UI.Wpf.RenderMode.Wpf;
-                if (!((Rendering.Xaml.MapRenderer)MapControl.Renderer).StyleRenderers.ContainsKey(typeof(Common.Maps.SpecialStyle)))
-                    ((Rendering.Xaml.MapRenderer)MapControl.Renderer).StyleRenderers.Add(typeof(Common.Maps.SpecialStyle), new XamlSpecialStyleRenderer());
+                if (!((Rendering.Xaml.MapRenderer)MapControl.Renderer).StyleRenderers.ContainsKey(typeof(Common.Maps.CustomStyle)))
+                    ((Rendering.Xaml.MapRenderer)MapControl.Renderer).StyleRenderers.Add(typeof(Common.Maps.CustomStyle), new XamlCustomStyleRenderer());
             }
             else if (selectedValue.ToLower().Contains("skia"))
                 MapControl.RenderMode = UI.Wpf.RenderMode.Skia;

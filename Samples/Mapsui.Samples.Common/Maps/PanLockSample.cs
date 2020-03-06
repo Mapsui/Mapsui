@@ -5,8 +5,8 @@ namespace Mapsui.Samples.Common.Maps
 {
     class PanLockSample : ISample
     {
-        public string Name { get; } = "PanLock";
-        public string Category { get; } = "Special";
+        public string Name => "PanLock";
+        public string Category => "Special";
         public void Setup(IMapControl mapControl)
         {
             mapControl.Map = CreateMap();

@@ -13,7 +13,7 @@ using SkiaSharp;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public class SpecialStyle : IStyle
+    public class CustomStyle : IStyle
     {
         public double MinVisible { get; set; } = 0;
         public double MaxVisible { get; set; } = double.MaxValue;
@@ -21,7 +21,7 @@ namespace Mapsui.Samples.Common.Maps
         public float Opacity { get; set; } = 0.7f;
     }
 
-    public class SkiaSpecialStyleRenderer : ISkiaStyleRenderer
+    public class SkiaCustomStyleRenderer : ISkiaStyleRenderer
     {
         public static Random rnd = new Random();
         public bool Draw(SKCanvas canvas, IReadOnlyViewport viewport, ILayer layer, IFeature feature, IStyle style, ISymbolCache symbolCache)
@@ -50,17 +50,17 @@ namespace Mapsui.Samples.Common.Maps
         }
     }
 
-    public class SpecialStyleSample : ISample
+    public class CustomStyleSample : ISample
     {
-        public string Name => "Special Style";
+        public string Name => "Custom Style";
         public string Category => "Special";
 
         public void Setup(IMapControl mapControl)
         {
             mapControl.Map = CreateMap();
 
-            if (mapControl.Renderer is Rendering.Skia.MapRenderer && !mapControl.Renderer.StyleRenderers.ContainsKey(typeof(SpecialStyle)))
-                mapControl.Renderer.StyleRenderers.Add(typeof(SpecialStyle), new SkiaSpecialStyleRenderer());
+            if (mapControl.Renderer is Rendering.Skia.MapRenderer && !mapControl.Renderer.StyleRenderers.ContainsKey(typeof(CustomStyle)))
+                mapControl.Renderer.StyleRenderers.Add(typeof(CustomStyle), new SkiaCustomStyleRenderer());
         }
 
         public static Map CreateMap()
@@ -77,7 +77,7 @@ namespace Mapsui.Samples.Common.Maps
         {
             return new MemoryLayer
             {
-                Name = "Special Styles Layer",
+                Name = "Custome Style Layer",
                 DataSource = CreateMemoryProviderWithDiverseSymbols(envelope, 25),
                 Style = null,
                 IsMapInfoLayer = true
@@ -93,7 +93,7 @@ namespace Mapsui.Samples.Common.Maps
         private static Features CreateDiverseFeatures(IEnumerable<IGeometry> randomPoints)
         {
             var features = new Features();
-            var style = new SpecialStyle();
+            var style = new CustomStyle();
             var counter = 1;
             foreach (var point in randomPoints)
             {
