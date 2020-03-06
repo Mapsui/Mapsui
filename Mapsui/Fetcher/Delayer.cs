@@ -7,7 +7,9 @@ namespace Mapsui.Fetcher
     {
         private readonly Timer _timer;
         private Action _method;
-        private bool _first = true;
+        private bool _waiting = false;
+
+        public int MillisecondsToDelay { get; set; } = 500;
 
         public Delayer()
         {
@@ -21,26 +23,45 @@ namespace Mapsui.Fetcher
         /// cancelled.
         /// </summary>
         /// <param name="method">The method to be executed after the delay</param>
-        /// <param name="dueTime">The delay before the method is executed in milliseconds</param>
+        /// <param name="interval">The delay before the method is executed in milliseconds</param>
         /// <remarks>On the first call to ExecuteDelayed the dueTime parameter will be ignored and
         /// the delay will be zero.</remarks>
-        public void ExecuteDelayed(Action method, int dueTime)
-        {
-            _method = method;
-            
-            if (_first) // On initial load we want a fast response
+        public void ExecuteDelayed(Action method)
+        {                       
+            if (_waiting)
             {
-                dueTime = 0;
-                _first = false;
+                // If waiting, just assing the method and wait
+                _method = method;
             }
+            else
+            {
+                // If not waiting. Call the method 
+                method();
 
-            _timer.Change(dueTime, Timeout.Infinite);
+                // Start waiting
+                _waiting = true;
+                _timer.Change(MillisecondsToDelay, MillisecondsToDelay);
+            }
         }
         
         private void FetchDelayTimerElapsed(object state)
         {
-            _timer.Change(Timeout.Infinite, Timeout.Infinite);
-            _method?.Invoke();
+            if (_method == null)
+            {
+                // The _method is null, so during the previous interval no new request came in,
+                // so next time we don't have to wait.
+
+                // Stop waiting
+                _waiting = false;
+                _timer.Change(Timeout.Infinite, Timeout.Infinite);
+            }
+            else
+            {
+                // Timer elaspsed.
+                _method?.Invoke();
+                _method = null;
+                // Now we keep the timer running. It will stop if _method is still null.
+            }
         }
     }
 }
