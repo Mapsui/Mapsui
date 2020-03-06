@@ -12,7 +12,7 @@ using XamlShapes = System.Windows.Shapes;
 using XamlPoint = System.Windows.Point;
 using XamlColors = System.Windows.Media.Colors;
 
-public class XamlSpecialStyleRenderer : IXamlStyleRenderer
+public class XamlCustomStyleRenderer : IXamlStyleRenderer
 {
     public static Random rnd = new Random();
 
@@ -23,7 +23,7 @@ public class XamlSpecialStyleRenderer : IXamlStyleRenderer
 
         var screenPoint = viewport.WorldToScreen(worldPoint);
 
-        var color = new System.Windows.Media.Color() { R = (byte)rnd.Next(0, 256), G = (byte)rnd.Next(0, 256), B = (byte)rnd.Next(0, 256), A = (byte)(256.0 * layer.Opacity * style.Opacity) };
+        var color = new XamlMedia.Color() { R = (byte)rnd.Next(0, 256), G = (byte)rnd.Next(0, 256), B = (byte)rnd.Next(0, 256), A = (byte)(256.0 * layer.Opacity * style.Opacity) };
 
         var path = new XamlShapes.Path
         {
