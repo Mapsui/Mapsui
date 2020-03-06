@@ -143,9 +143,14 @@ namespace Mapsui.UI.Android
 
         private void CanvasOnPaintSurface(object sender, SKPaintGLSurfaceEventArgs args)
         {
-   //   var scale = (float)(_canvas.CanvasSize.Width / Width);
-      args.Surface.Canvas.Scale(PixelDensity, PixelDensity);
-      Renderer.Render(args.Surface.Canvas, Viewport, _map.Layers, _map.Widgets, _map.BackColor);
+          args.Surface.Canvas.Scale(PixelDensity, PixelDensity);
+          var viewport = new Viewport();
+          viewport.SetCenter(Viewport.Center);
+          viewport.SetResolution(Viewport.Resolution);
+          viewport.SetRotation(Viewport.Rotation);
+          viewport.SetSize(Viewport.Width, Viewport.Height);
+
+          Renderer.Render(args.Surface.Canvas, viewport, _map.Layers, _map.Widgets, _map.BackColor);
         }
 
         public void MapView_Touch(object sender, TouchEventArgs args)
