@@ -69,7 +69,7 @@ namespace Mapsui.Layers
             set 
             {
                 _fetchingPostponedInMilliseconds = value;
-                _delayer.MillisecondsToDelay = value;
+                _delayer.MillisecondsToWait = value;
             } 
         }
 

@@ -8,31 +8,31 @@ namespace Mapsui.Fetcher
     /// </summary>
     class Delayer
     {
-        private readonly Timer _timer;
+        private readonly Timer _waitTimer;
         private Action _action;
         private bool _waiting = false;
 
         /// <summary>
         /// The delay between two calls.
         /// </summary>
-        public int MillisecondsToDelay { get; set; } = 500;
+        public int MillisecondsToWait { get; set; } = 500;
 
         public Delayer()
         {
-            _timer = new Timer(FetchDelayTimerElapsed, null, Timeout.Infinite, Timeout.Infinite);
+            _waitTimer = new Timer(WaitTimerElapsed, null, Timeout.Infinite, Timeout.Infinite);
         }
 
         /// <summary>
         /// Executes the method passed as argument with a possible delay. After a previous
-        /// call the next call is delayed until 'MillisecondsToDelay' has passed.
-        /// When ExecuteDelayed is called before the previous delayed action was executed 
+        /// call the next call is delayed until 'MillisecondsToWait' has passed.
+        /// When ExecuteRequest is called before the previous delayed action was executed 
         /// the previous one will be cancelled.
         /// </summary>
         /// <param name="action">The action to be executed after the possible delay</param>
-        /// <remarks>When the previous call was more than 'MillisecondsToDelay' ago there will
+        /// <remarks>When the previous call was more than 'MillisecondsToWait' ago there will
         /// be no delay.</remarks>
         public void ExecuteDelayed(Action action)
-        {                       
+        {
             if (_waiting)
             {
                 // If waiting, just assign the action and wait for it to be called.
@@ -40,22 +40,16 @@ namespace Mapsui.Fetcher
             }
             else
             {
-                // If not waiting just call the action.
+                // If not waiting call the action immediately.
                 action();
-                // Then wait for another time to check if more actions come in.
+                // Then wait for another interval to check if more actions come in.
                 StartWaiting();
             }
         }
 
-        private void FetchDelayTimerElapsed(object state)
+        private void WaitTimerElapsed(object state)
         {
-            if (_action == null)
-            {
-                // The _action is null, so during the previous interval no new request came in,
-                // so next time we don't have to wait.
-                StopWaiting();
-            }
-            else
+            if (_action != null)
             {
                 // Waiting is done, we can call the action.
                 _action?.Invoke();
@@ -63,18 +57,24 @@ namespace Mapsui.Fetcher
                 _action = null;
                 // Now we keep the timer running. It will stop if _action is still null.
             }
+            else
+            {
+                // The _action is null, so during the previous interval no new request came in.
+                // Next time a new request comes in we don't have to wait.
+                StopWaiting();
+            }
         }
 
         private void StartWaiting()
         {
             _waiting = true;
-            _timer.Change(MillisecondsToDelay, MillisecondsToDelay);
+            _waitTimer.Change(MillisecondsToWait, MillisecondsToWait);
         }
 
         private void StopWaiting()
         {
             _waiting = false;
-            _timer.Change(Timeout.Infinite, Timeout.Infinite);
+            _waitTimer.Change(Timeout.Infinite, Timeout.Infinite);
         }
     }
 }
