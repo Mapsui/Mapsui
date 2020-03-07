@@ -19,7 +19,7 @@ This the ISkiaStyleRenderer interface:
     }
 ```
 
-![custom stye renderer](images/special.png)
+![custom stye renderer](images/special.gif)
 
 The IFeature has a Geometry field. The renderer is responsible to cast that geometry to the type it intends to render. The IStyle is the custom style the user defined. It could contain extra style information not present in the default style classes. 
 
