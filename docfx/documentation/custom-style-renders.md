@@ -26,9 +26,7 @@ Look in the Mapsui source code for CustomStyleSample.cs.
 
 ![custom stye renderer](images/special.gif)
 
-[This](https://github.com/Mapsui/Mapsui/blob/42b59e9dad1fd9512f0114f8c8a3fd3f5666d330/Samples/Mapsui.Samples.Common/Maps/CustomStyleSample.cs#L16-L51) is the most relevant code. In this sample the custom style contains no extra information, it is just an indication to use the associated custom renderer. 
-
-
+[This](https://github.com/Mapsui/Mapsui/blob/42b59e9dad1fd9512f0114f8c8a3fd3f5666d330/Samples/Mapsui.Samples.Common/Maps/CustomStyleSample.cs#L16-L51) is the most relevant code. In this sample the custom style contains no extra information, it is just an indication to use the associated custom renderer. It would be possible to add extra field like EarColor and NoseSize to the custom style which could be used in the renderer.
 
 ## Remarks
 Note, that the renderer depends on the technology we use for the rendering implementation, in this case SkiaSharp. Currently we still support XAML as renderer but this may be removed in the future. We expect to support SkiaSharp for a long time but it may be replaced at some point. There are no such plans just yet.
