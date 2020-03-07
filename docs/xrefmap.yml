@@ -24860,12 +24860,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Forms.MapView.MapView
   nameWithType: MapView.MapView
-- uid: Mapsui.UI.Forms.MapView.DoubleTap
-  name: DoubleTap
-  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_DoubleTap
-  commentId: E:Mapsui.UI.Forms.MapView.DoubleTap
-  fullName: Mapsui.UI.Forms.MapView.DoubleTap
-  nameWithType: MapView.DoubleTap
 - uid: Mapsui.UI.Forms.MapView.Drawables
   name: Drawables
   href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_Drawables
@@ -25009,12 +25003,6 @@ references:
   commentId: F:Mapsui.UI.Forms.MapView.IsZoomButtonVisibleProperty
   fullName: Mapsui.UI.Forms.MapView.IsZoomButtonVisibleProperty
   nameWithType: MapView.IsZoomButtonVisibleProperty
-- uid: Mapsui.UI.Forms.MapView.LongTap
-  name: LongTap
-  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_LongTap
-  commentId: E:Mapsui.UI.Forms.MapView.LongTap
-  fullName: Mapsui.UI.Forms.MapView.LongTap
-  nameWithType: MapView.LongTap
 - uid: Mapsui.UI.Forms.MapView.Map
   name: Map
   href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_Map
@@ -25296,12 +25284,6 @@ references:
   commentId: F:Mapsui.UI.Forms.MapView.SelectedPinProperty
   fullName: Mapsui.UI.Forms.MapView.SelectedPinProperty
   nameWithType: MapView.SelectedPinProperty
-- uid: Mapsui.UI.Forms.MapView.SingleTap
-  name: SingleTap
-  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_SingleTap
-  commentId: E:Mapsui.UI.Forms.MapView.SingleTap
-  fullName: Mapsui.UI.Forms.MapView.SingleTap
-  nameWithType: MapView.SingleTap
 - uid: Mapsui.UI.Forms.MapView.Swipe
   name: Swipe
   href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_Swipe
