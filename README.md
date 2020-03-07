@@ -9,7 +9,7 @@
 | Build docs | [![Build status](https://ci.appveyor.com/api/projects/status/c8hcfeoafmf51gin/branch/master?svg=true)](https://ci.appveyor.com/project/pauldendulk/mapsui-373p1/branch/master) |
 
 ## News
-- 2020 march 7: Thanks to @charlenni Mapsui now supports *Custom Style Renderers* which alow a user to draw a feature any way he/she would like using SkiaSharp. Documentation and samples [here](https://mapsui.com/documentation/custom-style-renders.html).
+- 2020 march 7: Thanks to @charlenni Mapsui now supports *Custom Style Renderers* which allows users to render a feature any way they like using SkiaSharp. Documentation and samples [here](https://mapsui.com/documentation/custom-style-renders.html).
   - ![custom stye renderer](https://raw.githubusercontent.com/Mapsui/Mapsui/master/docfx/documentation/images/special.gif)
 - 2020 march 7: Now using hardware acceleration for Android and iOS.
 - 2020 march 7: Rida Noor created a [Tutorial](https://mapsui.com/documentation/tutorials.html) and [sample](https://github.com/RidaNoor/Mapsui-MVVMCross) for MVVM support.
