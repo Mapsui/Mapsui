@@ -32,7 +32,7 @@ namespace Mapsui.Samples.Common.Maps
 
         private static ILayer CreatePointLayer()
         {
-            return new Layer
+            return new MemoryLayer
             {
                 Name = "Points",
                 IsMapInfoLayer = true,
