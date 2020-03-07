@@ -2,7 +2,7 @@
 
 ## Summary
 
-As of 2.0.0-beta.37 Mapsui supports Custom Style Renders. This means a user can create a *custom style* and associate this with a *custom style renderer* to allow full freedom in rendering a feature the way the user would like.
+As of 2.0.0-beta.37 Mapsui supports Custom Style Renderers. This means a user can create a *custom style* and associate this with a *custom style renderer* to allow full freedom in rendering a feature the way the user would like.
 
 ## How it works
 - Create a custom style by deriving a class from IStyle. 
@@ -11,7 +11,7 @@ As of 2.0.0-beta.37 Mapsui supports Custom Style Renders. This means a user can 
 - Register the association of the *custom style* to the *custom style renderer* at the MapRenderer like this:
   - ```mapControl.Renderer.StyleRenderers.Add(typeof(CustomStyle), new SkiaCustomStyleRenderer());```.
 
-This the ISkiaStyleRenderer interface:
+This is the ISkiaStyleRenderer interface:
 ```csharp
     public interface ISkiaStyleRenderer : IStyleRenderer
     {
