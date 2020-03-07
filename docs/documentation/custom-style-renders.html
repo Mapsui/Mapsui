@@ -80,7 +80,7 @@
 <h1 id="custom-style-renderers">Custom Style Renderers</h1>
 
 <h2 id="summary">Summary</h2>
-<p>As of 2.0.0-beta.37 Mapsui supports Custom Style Renders. This means a user can create a <em>custom style</em> and associate this with a <em>custom style renderer</em> to allow full freedom in rendering a feature the way the user would like.</p>
+<p>As of 2.0.0-beta.37 Mapsui supports Custom Style Renderers. This means a user can create a <em>custom style</em> and associate this with a <em>custom style renderer</em> to allow full freedom in rendering a feature the way the user would like.</p>
 <h2 id="how-it-works">How it works</h2>
 <ul>
 <li>Create a custom style by deriving a class from IStyle. </li>
@@ -91,7 +91,7 @@
 </ul>
 </li>
 </ul>
-<p>This the ISkiaStyleRenderer interface:</p>
+<p>This is the ISkiaStyleRenderer interface:</p>
 <pre><code class="lang-csharp">    public interface ISkiaStyleRenderer : IStyleRenderer
     {
         bool Draw(SKCanvas canvas, IReadOnlyViewport viewport, ILayer layer, IFeature feature, IStyle style, ISymbolCache symbolCache);
@@ -99,8 +99,10 @@
 </code></pre><p>The IFeature has a Geometry field. The renderer is responsible to cast that geometry to the type it intends to render. The IStyle is the custom style the user defined. It could contain extra style information not present in the default style classes. </p>
 <h2 id="code-sample">Code sample</h2>
 <p>Look in the Mapsui source code for CustomStyleSample.cs. </p>
+<p><img src="images/special.gif" alt="custom stye renderer"></p>
+<p><a href="https://github.com/Mapsui/Mapsui/blob/42b59e9dad1fd9512f0114f8c8a3fd3f5666d330/Samples/Mapsui.Samples.Common/Maps/CustomStyleSample.cs#L16-L51">This</a> is the most relevant code. In this sample the custom style contains no extra information, it is just an indication to use the associated custom renderer. It would be possible to add extra field like EarColor and NoseSize to the custom style which could be used in the renderer.</p>
 <h2 id="remarks">Remarks</h2>
-<p>Note, that the renderer depends on the rendering implementation. Currently we still support XAML as renderer but this may be removed in the future. We expect to support Skia for a long time but it may be replaced at some point. There are no such plans just yet.</p>
+<p>Note, that the renderer depends on the technology we use for the rendering implementation, in this case SkiaSharp. Currently we still support XAML as renderer but this may be removed in the future. We expect to support SkiaSharp for a long time but it may be replaced at some point. There are no such plans just yet.</p>
 </article>
           </div>
           
