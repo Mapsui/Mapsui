@@ -14,6 +14,7 @@
 ## [Asynchronous Data Fetching](Async-Fetching.md)
 ## [Skia Scale](skia-scale.md)
 ## [Projections](projections.md)
+## [Custom Style Renderers](custom-style-renders.md)
 # Developing Mapsui
 ## [Contributors Guidelines](Contributors-Guidelines.md)
 ## [Development Constraints](Development-constraints.md)
