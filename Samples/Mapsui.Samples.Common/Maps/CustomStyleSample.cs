@@ -99,7 +99,7 @@ namespace Mapsui.Samples.Common.Maps
             {
                 var feature = new Feature { Geometry = point };
                 feature["Label"] = $"I'm no. {counter++} and, \nautsch, you hit me!";
-                feature.Styles.Add(style);
+                feature.Styles.Add(style); // Here the custom style is set!
                 feature.Styles.Add(SmalleDot());
                 features.Add(feature);
             }
