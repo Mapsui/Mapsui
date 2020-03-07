@@ -1062,7 +1062,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Layers.Layer.html",
-          "hash": "aKbrFjPmRaJCCqGcUb+3fw=="
+          "hash": "Kn/EmE5JpUN+wUZjUvjnPA=="
         }
       },
       "is_incremental": false,
@@ -2442,7 +2442,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Rendering.IRenderer.html",
-          "hash": "L7A/rQcfkun8TheX7XOlYA=="
+          "hash": "p15xXiZ5EZ76l8nH2DIEsA=="
         }
       },
       "is_incremental": false,
@@ -2538,7 +2538,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Rendering.Skia.BitmapHelper.html",
-          "hash": "j2xVN9IPUbdH0Eg9fNTGvg=="
+          "hash": "7S3q5+1R9VsBnQI+iLZdHQ=="
         }
       },
       "is_incremental": false,
@@ -2586,7 +2586,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Rendering.Skia.CalloutStyle.html",
-          "hash": "PWnU7MQtncdrtzM3oE1UOA=="
+          "hash": "BruIAu09YOpq2tOoCM5Tsg=="
         }
       },
       "is_incremental": false,
@@ -2598,7 +2598,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Rendering.Skia.CalloutStyleRenderer.html",
-          "hash": "BIqM+L7kWOBaJ2nHVFEg6g=="
+          "hash": "r4x13THJith+OGiLZCES2Q=="
         }
       },
       "is_incremental": false,
@@ -2682,7 +2682,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Rendering.Skia.MapRenderer.IdentityComparer-1.html",
-          "hash": "Qpi7qdCjeglvkHkGBsd/iw=="
+          "hash": "zsYFstLqKj28QdwT17llyA=="
         }
       },
       "is_incremental": false,
@@ -2694,7 +2694,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Rendering.Skia.MapRenderer.html",
-          "hash": "JK7PuwtDltbtKp5N3fZuyw=="
+          "hash": "V5KAK0wxBiQCO+8KSOx/tg=="
         }
       },
       "is_incremental": false,
@@ -2810,6 +2810,30 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Rendering.Skia.SkiaStyles.ISkiaStyleRenderer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Rendering.Skia.SkiaStyles.ISkiaStyleRenderer.html",
+          "hash": "3PgHq0NXwn4Fbn1t/gFidQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Rendering.Skia.SkiaStyles.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Rendering.Skia.SkiaStyles.html",
+          "hash": "xd7baZkBdnKqW3dtNDHVgg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Mapsui.Rendering.Skia.SkiaWidgets.HyperlinkWidgetRenderer.yml",
       "output": {
         ".html": {
@@ -2882,6 +2906,18 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Rendering.Skia.SvgRenderer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Rendering.Skia.SvgRenderer.html",
+          "hash": "dAHNbe6BXfyywwk6oWKc7g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Mapsui.Rendering.Skia.SymbolCache.yml",
       "output": {
         ".html": {
@@ -2922,7 +2958,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Rendering.Skia.html",
-          "hash": "0t9s769uOuzz5A3ikkXWNA=="
+          "hash": "Nom2D2r+im6J+V4lW75snw=="
         }
       },
       "is_incremental": false,
@@ -3018,7 +3054,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Rendering.Xaml.MapRenderer.html",
-          "hash": "uftFGFKiDRClePHrZqD8Og=="
+          "hash": "jM2EtSeN5Ifedl6HlDr8Kg=="
         }
       },
       "is_incremental": false,
@@ -3151,6 +3187,30 @@
         ".html": {
           "relative_path": "api/Mapsui.Rendering.Xaml.VerticalAligmentExtensions.html",
           "hash": "+hKxfpQPVF/wPUdi8kc5yg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Rendering.Xaml.XamlStyles.IXamlStyleRenderer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Rendering.Xaml.XamlStyles.IXamlStyleRenderer.html",
+          "hash": "h6r+gjv7fD7KqoxOgNwwIg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Rendering.Xaml.XamlStyles.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Rendering.Xaml.XamlStyles.html",
+          "hash": "+N6TBb+kwO1WeYRWKhSjuQ=="
         }
       },
       "is_incremental": false,
@@ -3318,7 +3378,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Styles.Font.html",
-          "hash": "d6rvKSgGvUtUipBjAvl4tw=="
+          "hash": "YA1zuPqpAUBG8BpzuVpxcw=="
         }
       },
       "is_incremental": false,
@@ -3331,6 +3391,18 @@
         ".html": {
           "relative_path": "api/Mapsui.Styles.IStyle.html",
           "hash": "9ehdYX4bXaCBTR/IJtOygA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Styles.IStyleRenderer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Styles.IStyleRenderer.html",
+          "hash": "Mp1vKLAZeSl3aru72tHUuQ=="
         }
       },
       "is_incremental": false,
@@ -3642,7 +3714,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Styles.html",
-          "hash": "tCwwcxf6YjWD05SPbA50sw=="
+          "hash": "VKNHjKwlZQh16Jnkwta60Q=="
         }
       },
       "is_incremental": false,
@@ -3654,7 +3726,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Android.MapControl.html",
-          "hash": "Nm9pfA4sTjThggGpdxitew=="
+          "hash": "babyu5RE0Wccs5B/F/A2PQ=="
         }
       },
       "is_incremental": false,
@@ -3882,7 +3954,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Forms.MapControl.html",
-          "hash": "72edMEcRqc22sAEG2XRQHg=="
+          "hash": "Iv4VwyYxMtjgPIyo0pGhpg=="
         }
       },
       "is_incremental": false,
@@ -3918,7 +3990,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Forms.MapView.html",
-          "hash": "mHYdCl1DQ+DBFMadporBJQ=="
+          "hash": "NZC2zAKlZB4qaD+jHG1eaA=="
         }
       },
       "is_incremental": false,
@@ -3978,7 +4050,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Forms.Polyline.html",
-          "hash": "FVQqfjRuqnBHFTXjXfQK+Q=="
+          "hash": "gUKlDS7PENkRFXfgu4+bFw=="
         }
       },
       "is_incremental": false,
@@ -4003,6 +4075,30 @@
         ".html": {
           "relative_path": "api/Mapsui.UI.Forms.SelectedPinChangedEventArgs.html",
           "hash": "EJe7nFOYmaepIZEQcmCWTQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.UI.Forms.Utils.PolylineConverter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.UI.Forms.Utils.PolylineConverter.html",
+          "hash": "vXA0TCM+URtaZfWSfdtKZQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.UI.Forms.Utils.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.UI.Forms.Utils.html",
+          "hash": "3YVgM1p/RaoOvnFGPVMapA=="
         }
       },
       "is_incremental": false,
@@ -4410,7 +4506,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.iOS.MapControl.html",
-          "hash": "z14B8AiM4oFtQwkArNlSDw=="
+          "hash": "12a2EiHzpERsrhLZG9Tbvg=="
         }
       },
       "is_incremental": false,
@@ -4614,7 +4710,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Viewport.html",
-          "hash": "PZeXgy/WCp2yf6HaDUkBXw=="
+          "hash": "8K6efZbO7qZhp2ABF50bgQ=="
         }
       },
       "is_incremental": false,
@@ -4998,7 +5094,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "z5wM/SSacx1NxPTit68Uqg=="
+          "hash": "0r3nGQjvme8svJSNOFAr9w=="
         }
       },
       "is_incremental": false,
@@ -5022,7 +5118,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/Contributors-Guidelines.html",
-          "hash": "jo0LF9NmvW8lu+TM52zBiA=="
+          "hash": "UNUwBk9LH3o4wXd+He9rTg=="
         }
       },
       "is_incremental": false,
@@ -5348,9 +5444,9 @@
         "full_build_reason_code": "NoAvailableBuildCache"
       },
       "processors": {
-        "TocDocumentProcessor": {
+        "ResourceDocumentProcessor": {
           "can_incremental": false,
-          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build",
           "total_file_count": 0,
           "skipped_file_count": 0
@@ -5361,17 +5457,17 @@
           "total_file_count": 23,
           "skipped_file_count": 0
         },
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 414,
-          "skipped_file_count": 0
-        },
-        "ResourceDocumentProcessor": {
-          "can_incremental": false,
-          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
-          "incrementalPhase": "build",
-          "total_file_count": 0,
+          "total_file_count": 422,
           "skipped_file_count": 0
         }
       }

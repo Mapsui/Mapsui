@@ -16770,6 +16770,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.Rendering.IRenderer.RenderToBitmapStream
   nameWithType: IRenderer.RenderToBitmapStream
+- uid: Mapsui.Rendering.IRenderer.StyleRenderers
+  name: StyleRenderers
+  href: api/Mapsui.Rendering.IRenderer.html#Mapsui_Rendering_IRenderer_StyleRenderers
+  commentId: P:Mapsui.Rendering.IRenderer.StyleRenderers
+  fullName: Mapsui.Rendering.IRenderer.StyleRenderers
+  nameWithType: IRenderer.StyleRenderers
+- uid: Mapsui.Rendering.IRenderer.StyleRenderers*
+  name: StyleRenderers
+  href: api/Mapsui.Rendering.IRenderer.html#Mapsui_Rendering_IRenderer_StyleRenderers_
+  commentId: Overload:Mapsui.Rendering.IRenderer.StyleRenderers
+  isSpec: "True"
+  fullName: Mapsui.Rendering.IRenderer.StyleRenderers
+  nameWithType: IRenderer.StyleRenderers
 - uid: Mapsui.Rendering.IRenderer.SymbolCache
   name: SymbolCache
   href: api/Mapsui.Rendering.IRenderer.html#Mapsui_Rendering_IRenderer_SymbolCache
@@ -17091,51 +17104,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.Rendering.Skia.BitmapHelper.LoadBitmap
   nameWithType: BitmapHelper.LoadBitmap
-- uid: Mapsui.Rendering.Skia.BitmapHelper.RenderBitmap(SkiaSharp.SKCanvas,SkiaSharp.SKImage,SkiaSharp.SKRect,System.Single)
-  name: RenderBitmap(SKCanvas, SKImage, SKRect, Single)
-  href: api/Mapsui.Rendering.Skia.BitmapHelper.html#Mapsui_Rendering_Skia_BitmapHelper_RenderBitmap_SkiaSharp_SKCanvas_SkiaSharp_SKImage_SkiaSharp_SKRect_System_Single_
-  commentId: M:Mapsui.Rendering.Skia.BitmapHelper.RenderBitmap(SkiaSharp.SKCanvas,SkiaSharp.SKImage,SkiaSharp.SKRect,System.Single)
-  fullName: Mapsui.Rendering.Skia.BitmapHelper.RenderBitmap(SkiaSharp.SKCanvas, SkiaSharp.SKImage, SkiaSharp.SKRect, System.Single)
-  nameWithType: BitmapHelper.RenderBitmap(SKCanvas, SKImage, SKRect, Single)
-- uid: Mapsui.Rendering.Skia.BitmapHelper.RenderBitmap(SkiaSharp.SKCanvas,SkiaSharp.SKImage,System.Single,System.Single,System.Single,System.Single,System.Single,Mapsui.Styles.LabelStyle.HorizontalAlignmentEnum,Mapsui.Styles.LabelStyle.VerticalAlignmentEnum,System.Single,System.Single)
-  name: RenderBitmap(SKCanvas, SKImage, Single, Single, Single, Single, Single, LabelStyle.HorizontalAlignmentEnum, LabelStyle.VerticalAlignmentEnum, Single, Single)
-  href: api/Mapsui.Rendering.Skia.BitmapHelper.html#Mapsui_Rendering_Skia_BitmapHelper_RenderBitmap_SkiaSharp_SKCanvas_SkiaSharp_SKImage_System_Single_System_Single_System_Single_System_Single_System_Single_Mapsui_Styles_LabelStyle_HorizontalAlignmentEnum_Mapsui_Styles_LabelStyle_VerticalAlignmentEnum_System_Single_System_Single_
-  commentId: M:Mapsui.Rendering.Skia.BitmapHelper.RenderBitmap(SkiaSharp.SKCanvas,SkiaSharp.SKImage,System.Single,System.Single,System.Single,System.Single,System.Single,Mapsui.Styles.LabelStyle.HorizontalAlignmentEnum,Mapsui.Styles.LabelStyle.VerticalAlignmentEnum,System.Single,System.Single)
-  fullName: Mapsui.Rendering.Skia.BitmapHelper.RenderBitmap(SkiaSharp.SKCanvas, SkiaSharp.SKImage, System.Single, System.Single, System.Single, System.Single, System.Single, Mapsui.Styles.LabelStyle.HorizontalAlignmentEnum, Mapsui.Styles.LabelStyle.VerticalAlignmentEnum, System.Single, System.Single)
-  nameWithType: BitmapHelper.RenderBitmap(SKCanvas, SKImage, Single, Single, Single, Single, Single, LabelStyle.HorizontalAlignmentEnum, LabelStyle.VerticalAlignmentEnum, Single, Single)
-- uid: Mapsui.Rendering.Skia.BitmapHelper.RenderBitmap*
-  name: RenderBitmap
-  href: api/Mapsui.Rendering.Skia.BitmapHelper.html#Mapsui_Rendering_Skia_BitmapHelper_RenderBitmap_
-  commentId: Overload:Mapsui.Rendering.Skia.BitmapHelper.RenderBitmap
-  isSpec: "True"
-  fullName: Mapsui.Rendering.Skia.BitmapHelper.RenderBitmap
-  nameWithType: BitmapHelper.RenderBitmap
-- uid: Mapsui.Rendering.Skia.BitmapHelper.RenderRaster(SkiaSharp.SKCanvas,SkiaSharp.SKImage,SkiaSharp.SKRect,System.Single)
-  name: RenderRaster(SKCanvas, SKImage, SKRect, Single)
-  href: api/Mapsui.Rendering.Skia.BitmapHelper.html#Mapsui_Rendering_Skia_BitmapHelper_RenderRaster_SkiaSharp_SKCanvas_SkiaSharp_SKImage_SkiaSharp_SKRect_System_Single_
-  commentId: M:Mapsui.Rendering.Skia.BitmapHelper.RenderRaster(SkiaSharp.SKCanvas,SkiaSharp.SKImage,SkiaSharp.SKRect,System.Single)
-  fullName: Mapsui.Rendering.Skia.BitmapHelper.RenderRaster(SkiaSharp.SKCanvas, SkiaSharp.SKImage, SkiaSharp.SKRect, System.Single)
-  nameWithType: BitmapHelper.RenderRaster(SKCanvas, SKImage, SKRect, Single)
-- uid: Mapsui.Rendering.Skia.BitmapHelper.RenderRaster*
-  name: RenderRaster
-  href: api/Mapsui.Rendering.Skia.BitmapHelper.html#Mapsui_Rendering_Skia_BitmapHelper_RenderRaster_
-  commentId: Overload:Mapsui.Rendering.Skia.BitmapHelper.RenderRaster
-  isSpec: "True"
-  fullName: Mapsui.Rendering.Skia.BitmapHelper.RenderRaster
-  nameWithType: BitmapHelper.RenderRaster
-- uid: Mapsui.Rendering.Skia.BitmapHelper.RenderSvg(SkiaSharp.SKCanvas,SkiaSharp.Extended.Svg.SKSvg,System.Single,System.Single,System.Single,System.Single,System.Single,Mapsui.Styles.LabelStyle.HorizontalAlignmentEnum,Mapsui.Styles.LabelStyle.VerticalAlignmentEnum,System.Single,System.Single)
-  name: RenderSvg(SKCanvas, SKSvg, Single, Single, Single, Single, Single, LabelStyle.HorizontalAlignmentEnum, LabelStyle.VerticalAlignmentEnum, Single, Single)
-  href: api/Mapsui.Rendering.Skia.BitmapHelper.html#Mapsui_Rendering_Skia_BitmapHelper_RenderSvg_SkiaSharp_SKCanvas_SkiaSharp_Extended_Svg_SKSvg_System_Single_System_Single_System_Single_System_Single_System_Single_Mapsui_Styles_LabelStyle_HorizontalAlignmentEnum_Mapsui_Styles_LabelStyle_VerticalAlignmentEnum_System_Single_System_Single_
-  commentId: M:Mapsui.Rendering.Skia.BitmapHelper.RenderSvg(SkiaSharp.SKCanvas,SkiaSharp.Extended.Svg.SKSvg,System.Single,System.Single,System.Single,System.Single,System.Single,Mapsui.Styles.LabelStyle.HorizontalAlignmentEnum,Mapsui.Styles.LabelStyle.VerticalAlignmentEnum,System.Single,System.Single)
-  fullName: Mapsui.Rendering.Skia.BitmapHelper.RenderSvg(SkiaSharp.SKCanvas, SkiaSharp.Extended.Svg.SKSvg, System.Single, System.Single, System.Single, System.Single, System.Single, Mapsui.Styles.LabelStyle.HorizontalAlignmentEnum, Mapsui.Styles.LabelStyle.VerticalAlignmentEnum, System.Single, System.Single)
-  nameWithType: BitmapHelper.RenderSvg(SKCanvas, SKSvg, Single, Single, Single, Single, Single, LabelStyle.HorizontalAlignmentEnum, LabelStyle.VerticalAlignmentEnum, Single, Single)
-- uid: Mapsui.Rendering.Skia.BitmapHelper.RenderSvg*
-  name: RenderSvg
-  href: api/Mapsui.Rendering.Skia.BitmapHelper.html#Mapsui_Rendering_Skia_BitmapHelper_RenderSvg_
-  commentId: Overload:Mapsui.Rendering.Skia.BitmapHelper.RenderSvg
-  isSpec: "True"
-  fullName: Mapsui.Rendering.Skia.BitmapHelper.RenderSvg
-  nameWithType: BitmapHelper.RenderSvg
 - uid: Mapsui.Rendering.Skia.BitmapInfo
   name: BitmapInfo
   href: api/Mapsui.Rendering.Skia.BitmapInfo.html
@@ -17671,12 +17639,12 @@ references:
   commentId: T:Mapsui.Rendering.Skia.CalloutStyleRenderer
   fullName: Mapsui.Rendering.Skia.CalloutStyleRenderer
   nameWithType: CalloutStyleRenderer
-- uid: Mapsui.Rendering.Skia.CalloutStyleRenderer.Draw(SkiaSharp.SKCanvas,Mapsui.IReadOnlyViewport,Mapsui.Rendering.Skia.SymbolCache,System.Single,Mapsui.Geometries.Point,Mapsui.Rendering.Skia.CalloutStyle)
-  name: Draw(SKCanvas, IReadOnlyViewport, SymbolCache, Single, Point, CalloutStyle)
-  href: api/Mapsui.Rendering.Skia.CalloutStyleRenderer.html#Mapsui_Rendering_Skia_CalloutStyleRenderer_Draw_SkiaSharp_SKCanvas_Mapsui_IReadOnlyViewport_Mapsui_Rendering_Skia_SymbolCache_System_Single_Mapsui_Geometries_Point_Mapsui_Rendering_Skia_CalloutStyle_
-  commentId: M:Mapsui.Rendering.Skia.CalloutStyleRenderer.Draw(SkiaSharp.SKCanvas,Mapsui.IReadOnlyViewport,Mapsui.Rendering.Skia.SymbolCache,System.Single,Mapsui.Geometries.Point,Mapsui.Rendering.Skia.CalloutStyle)
-  fullName: Mapsui.Rendering.Skia.CalloutStyleRenderer.Draw(SkiaSharp.SKCanvas, Mapsui.IReadOnlyViewport, Mapsui.Rendering.Skia.SymbolCache, System.Single, Mapsui.Geometries.Point, Mapsui.Rendering.Skia.CalloutStyle)
-  nameWithType: CalloutStyleRenderer.Draw(SKCanvas, IReadOnlyViewport, SymbolCache, Single, Point, CalloutStyle)
+- uid: Mapsui.Rendering.Skia.CalloutStyleRenderer.Draw(SkiaSharp.SKCanvas,Mapsui.IReadOnlyViewport,System.Single,Mapsui.Geometries.Point,Mapsui.Rendering.Skia.CalloutStyle)
+  name: Draw(SKCanvas, IReadOnlyViewport, Single, Point, CalloutStyle)
+  href: api/Mapsui.Rendering.Skia.CalloutStyleRenderer.html#Mapsui_Rendering_Skia_CalloutStyleRenderer_Draw_SkiaSharp_SKCanvas_Mapsui_IReadOnlyViewport_System_Single_Mapsui_Geometries_Point_Mapsui_Rendering_Skia_CalloutStyle_
+  commentId: M:Mapsui.Rendering.Skia.CalloutStyleRenderer.Draw(SkiaSharp.SKCanvas,Mapsui.IReadOnlyViewport,System.Single,Mapsui.Geometries.Point,Mapsui.Rendering.Skia.CalloutStyle)
+  fullName: Mapsui.Rendering.Skia.CalloutStyleRenderer.Draw(SkiaSharp.SKCanvas, Mapsui.IReadOnlyViewport, System.Single, Mapsui.Geometries.Point, Mapsui.Rendering.Skia.CalloutStyle)
+  nameWithType: CalloutStyleRenderer.Draw(SKCanvas, IReadOnlyViewport, Single, Point, CalloutStyle)
 - uid: Mapsui.Rendering.Skia.CalloutStyleRenderer.Draw*
   name: Draw
   href: api/Mapsui.Rendering.Skia.CalloutStyleRenderer.html#Mapsui_Rendering_Skia_CalloutStyleRenderer_Draw_
@@ -18006,6 +17974,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.Rendering.Skia.MapRenderer.RenderToBitmapStream
   nameWithType: MapRenderer.RenderToBitmapStream
+- uid: Mapsui.Rendering.Skia.MapRenderer.StyleRenderers
+  name: StyleRenderers
+  href: api/Mapsui.Rendering.Skia.MapRenderer.html#Mapsui_Rendering_Skia_MapRenderer_StyleRenderers
+  commentId: P:Mapsui.Rendering.Skia.MapRenderer.StyleRenderers
+  fullName: Mapsui.Rendering.Skia.MapRenderer.StyleRenderers
+  nameWithType: MapRenderer.StyleRenderers
+- uid: Mapsui.Rendering.Skia.MapRenderer.StyleRenderers*
+  name: StyleRenderers
+  href: api/Mapsui.Rendering.Skia.MapRenderer.html#Mapsui_Rendering_Skia_MapRenderer_StyleRenderers_
+  commentId: Overload:Mapsui.Rendering.Skia.MapRenderer.StyleRenderers
+  isSpec: "True"
+  fullName: Mapsui.Rendering.Skia.MapRenderer.StyleRenderers
+  nameWithType: MapRenderer.StyleRenderers
 - uid: Mapsui.Rendering.Skia.MapRenderer.SymbolCache
   name: SymbolCache
   href: api/Mapsui.Rendering.Skia.MapRenderer.html#Mapsui_Rendering_Skia_MapRenderer_SymbolCache
@@ -18209,6 +18190,31 @@ references:
   isSpec: "True"
   fullName: Mapsui.Rendering.Skia.SKColorExtensions.ToMapsui
   nameWithType: SKColorExtensions.ToMapsui
+- uid: Mapsui.Rendering.Skia.SkiaStyles
+  name: Mapsui.Rendering.Skia.SkiaStyles
+  href: api/Mapsui.Rendering.Skia.SkiaStyles.html
+  commentId: N:Mapsui.Rendering.Skia.SkiaStyles
+  fullName: Mapsui.Rendering.Skia.SkiaStyles
+  nameWithType: Mapsui.Rendering.Skia.SkiaStyles
+- uid: Mapsui.Rendering.Skia.SkiaStyles.ISkiaStyleRenderer
+  name: ISkiaStyleRenderer
+  href: api/Mapsui.Rendering.Skia.SkiaStyles.ISkiaStyleRenderer.html
+  commentId: T:Mapsui.Rendering.Skia.SkiaStyles.ISkiaStyleRenderer
+  fullName: Mapsui.Rendering.Skia.SkiaStyles.ISkiaStyleRenderer
+  nameWithType: ISkiaStyleRenderer
+- uid: Mapsui.Rendering.Skia.SkiaStyles.ISkiaStyleRenderer.Draw(SkiaSharp.SKCanvas,Mapsui.IReadOnlyViewport,Mapsui.Layers.ILayer,Mapsui.Providers.IFeature,Mapsui.Styles.IStyle,Mapsui.Rendering.ISymbolCache)
+  name: Draw(SKCanvas, IReadOnlyViewport, ILayer, IFeature, IStyle, ISymbolCache)
+  href: api/Mapsui.Rendering.Skia.SkiaStyles.ISkiaStyleRenderer.html#Mapsui_Rendering_Skia_SkiaStyles_ISkiaStyleRenderer_Draw_SkiaSharp_SKCanvas_Mapsui_IReadOnlyViewport_Mapsui_Layers_ILayer_Mapsui_Providers_IFeature_Mapsui_Styles_IStyle_Mapsui_Rendering_ISymbolCache_
+  commentId: M:Mapsui.Rendering.Skia.SkiaStyles.ISkiaStyleRenderer.Draw(SkiaSharp.SKCanvas,Mapsui.IReadOnlyViewport,Mapsui.Layers.ILayer,Mapsui.Providers.IFeature,Mapsui.Styles.IStyle,Mapsui.Rendering.ISymbolCache)
+  fullName: Mapsui.Rendering.Skia.SkiaStyles.ISkiaStyleRenderer.Draw(SkiaSharp.SKCanvas, Mapsui.IReadOnlyViewport, Mapsui.Layers.ILayer, Mapsui.Providers.IFeature, Mapsui.Styles.IStyle, Mapsui.Rendering.ISymbolCache)
+  nameWithType: ISkiaStyleRenderer.Draw(SKCanvas, IReadOnlyViewport, ILayer, IFeature, IStyle, ISymbolCache)
+- uid: Mapsui.Rendering.Skia.SkiaStyles.ISkiaStyleRenderer.Draw*
+  name: Draw
+  href: api/Mapsui.Rendering.Skia.SkiaStyles.ISkiaStyleRenderer.html#Mapsui_Rendering_Skia_SkiaStyles_ISkiaStyleRenderer_Draw_
+  commentId: Overload:Mapsui.Rendering.Skia.SkiaStyles.ISkiaStyleRenderer.Draw
+  isSpec: "True"
+  fullName: Mapsui.Rendering.Skia.SkiaStyles.ISkiaStyleRenderer.Draw
+  nameWithType: ISkiaStyleRenderer.Draw
 - uid: Mapsui.Rendering.Skia.SkiaWidgets
   name: Mapsui.Rendering.Skia.SkiaWidgets
   href: api/Mapsui.Rendering.Skia.SkiaWidgets.html
@@ -18313,6 +18319,25 @@ references:
   isSpec: "True"
   fullName: Mapsui.Rendering.Skia.SkiaWidgets.ZoomInOutWidgetRenderer.Draw
   nameWithType: ZoomInOutWidgetRenderer.Draw
+- uid: Mapsui.Rendering.Skia.SvgRenderer
+  name: SvgRenderer
+  href: api/Mapsui.Rendering.Skia.SvgRenderer.html
+  commentId: T:Mapsui.Rendering.Skia.SvgRenderer
+  fullName: Mapsui.Rendering.Skia.SvgRenderer
+  nameWithType: SvgRenderer
+- uid: Mapsui.Rendering.Skia.SvgRenderer.Draw(SkiaSharp.SKCanvas,SkiaSharp.Extended.Svg.SKSvg,System.Single,System.Single,System.Single,System.Single,System.Single,Mapsui.Styles.LabelStyle.HorizontalAlignmentEnum,Mapsui.Styles.LabelStyle.VerticalAlignmentEnum,System.Single,System.Single)
+  name: Draw(SKCanvas, SKSvg, Single, Single, Single, Single, Single, LabelStyle.HorizontalAlignmentEnum, LabelStyle.VerticalAlignmentEnum, Single, Single)
+  href: api/Mapsui.Rendering.Skia.SvgRenderer.html#Mapsui_Rendering_Skia_SvgRenderer_Draw_SkiaSharp_SKCanvas_SkiaSharp_Extended_Svg_SKSvg_System_Single_System_Single_System_Single_System_Single_System_Single_Mapsui_Styles_LabelStyle_HorizontalAlignmentEnum_Mapsui_Styles_LabelStyle_VerticalAlignmentEnum_System_Single_System_Single_
+  commentId: M:Mapsui.Rendering.Skia.SvgRenderer.Draw(SkiaSharp.SKCanvas,SkiaSharp.Extended.Svg.SKSvg,System.Single,System.Single,System.Single,System.Single,System.Single,Mapsui.Styles.LabelStyle.HorizontalAlignmentEnum,Mapsui.Styles.LabelStyle.VerticalAlignmentEnum,System.Single,System.Single)
+  fullName: Mapsui.Rendering.Skia.SvgRenderer.Draw(SkiaSharp.SKCanvas, SkiaSharp.Extended.Svg.SKSvg, System.Single, System.Single, System.Single, System.Single, System.Single, Mapsui.Styles.LabelStyle.HorizontalAlignmentEnum, Mapsui.Styles.LabelStyle.VerticalAlignmentEnum, System.Single, System.Single)
+  nameWithType: SvgRenderer.Draw(SKCanvas, SKSvg, Single, Single, Single, Single, Single, LabelStyle.HorizontalAlignmentEnum, LabelStyle.VerticalAlignmentEnum, Single, Single)
+- uid: Mapsui.Rendering.Skia.SvgRenderer.Draw*
+  name: Draw
+  href: api/Mapsui.Rendering.Skia.SvgRenderer.html#Mapsui_Rendering_Skia_SvgRenderer_Draw_
+  commentId: Overload:Mapsui.Rendering.Skia.SvgRenderer.Draw
+  isSpec: "True"
+  fullName: Mapsui.Rendering.Skia.SvgRenderer.Draw
+  nameWithType: SvgRenderer.Draw
 - uid: Mapsui.Rendering.Skia.SymbolCache
   name: SymbolCache
   href: api/Mapsui.Rendering.Skia.SymbolCache.html
@@ -18723,6 +18748,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.Rendering.Xaml.MapRenderer.RenderToBitmapStream
   nameWithType: MapRenderer.RenderToBitmapStream
+- uid: Mapsui.Rendering.Xaml.MapRenderer.StyleRenderers
+  name: StyleRenderers
+  href: api/Mapsui.Rendering.Xaml.MapRenderer.html#Mapsui_Rendering_Xaml_MapRenderer_StyleRenderers
+  commentId: P:Mapsui.Rendering.Xaml.MapRenderer.StyleRenderers
+  fullName: Mapsui.Rendering.Xaml.MapRenderer.StyleRenderers
+  nameWithType: MapRenderer.StyleRenderers
+- uid: Mapsui.Rendering.Xaml.MapRenderer.StyleRenderers*
+  name: StyleRenderers
+  href: api/Mapsui.Rendering.Xaml.MapRenderer.html#Mapsui_Rendering_Xaml_MapRenderer_StyleRenderers_
+  commentId: Overload:Mapsui.Rendering.Xaml.MapRenderer.StyleRenderers
+  isSpec: "True"
+  fullName: Mapsui.Rendering.Xaml.MapRenderer.StyleRenderers
+  nameWithType: MapRenderer.StyleRenderers
 - uid: Mapsui.Rendering.Xaml.MapRenderer.SymbolCache
   name: SymbolCache
   href: api/Mapsui.Rendering.Xaml.MapRenderer.html#Mapsui_Rendering_Xaml_MapRenderer_SymbolCache
@@ -19466,6 +19504,31 @@ references:
   isSpec: "True"
   fullName: Mapsui.Rendering.Xaml.VerticalAligmentExtensions.ToXaml
   nameWithType: VerticalAligmentExtensions.ToXaml
+- uid: Mapsui.Rendering.Xaml.XamlStyles
+  name: Mapsui.Rendering.Xaml.XamlStyles
+  href: api/Mapsui.Rendering.Xaml.XamlStyles.html
+  commentId: N:Mapsui.Rendering.Xaml.XamlStyles
+  fullName: Mapsui.Rendering.Xaml.XamlStyles
+  nameWithType: Mapsui.Rendering.Xaml.XamlStyles
+- uid: Mapsui.Rendering.Xaml.XamlStyles.IXamlStyleRenderer
+  name: IXamlStyleRenderer
+  href: api/Mapsui.Rendering.Xaml.XamlStyles.IXamlStyleRenderer.html
+  commentId: T:Mapsui.Rendering.Xaml.XamlStyles.IXamlStyleRenderer
+  fullName: Mapsui.Rendering.Xaml.XamlStyles.IXamlStyleRenderer
+  nameWithType: IXamlStyleRenderer
+- uid: Mapsui.Rendering.Xaml.XamlStyles.IXamlStyleRenderer.Draw(Canvas,Mapsui.IReadOnlyViewport,Mapsui.Layers.ILayer,Mapsui.Providers.IFeature,Mapsui.Styles.IStyle,Mapsui.Rendering.ISymbolCache)
+  name: Draw(Canvas, IReadOnlyViewport, ILayer, IFeature, IStyle, ISymbolCache)
+  href: api/Mapsui.Rendering.Xaml.XamlStyles.IXamlStyleRenderer.html#Mapsui_Rendering_Xaml_XamlStyles_IXamlStyleRenderer_Draw_Canvas_Mapsui_IReadOnlyViewport_Mapsui_Layers_ILayer_Mapsui_Providers_IFeature_Mapsui_Styles_IStyle_Mapsui_Rendering_ISymbolCache_
+  commentId: M:Mapsui.Rendering.Xaml.XamlStyles.IXamlStyleRenderer.Draw(Canvas,Mapsui.IReadOnlyViewport,Mapsui.Layers.ILayer,Mapsui.Providers.IFeature,Mapsui.Styles.IStyle,Mapsui.Rendering.ISymbolCache)
+  fullName: Mapsui.Rendering.Xaml.XamlStyles.IXamlStyleRenderer.Draw(Canvas, Mapsui.IReadOnlyViewport, Mapsui.Layers.ILayer, Mapsui.Providers.IFeature, Mapsui.Styles.IStyle, Mapsui.Rendering.ISymbolCache)
+  nameWithType: IXamlStyleRenderer.Draw(Canvas, IReadOnlyViewport, ILayer, IFeature, IStyle, ISymbolCache)
+- uid: Mapsui.Rendering.Xaml.XamlStyles.IXamlStyleRenderer.Draw*
+  name: Draw
+  href: api/Mapsui.Rendering.Xaml.XamlStyles.IXamlStyleRenderer.html#Mapsui_Rendering_Xaml_XamlStyles_IXamlStyleRenderer_Draw_
+  commentId: Overload:Mapsui.Rendering.Xaml.XamlStyles.IXamlStyleRenderer.Draw
+  isSpec: "True"
+  fullName: Mapsui.Rendering.Xaml.XamlStyles.IXamlStyleRenderer.Draw
+  nameWithType: IXamlStyleRenderer.Draw
 - uid: Mapsui.Rendering.Xaml.XamlWidgets
   name: Mapsui.Rendering.Xaml.XamlWidgets
   href: api/Mapsui.Rendering.Xaml.XamlWidgets.html
@@ -20313,6 +20376,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.Styles.Font.FontFamily
   nameWithType: Font.FontFamily
+- uid: Mapsui.Styles.Font.Invalidated
+  name: Invalidated
+  href: api/Mapsui.Styles.Font.html#Mapsui_Styles_Font_Invalidated
+  commentId: P:Mapsui.Styles.Font.Invalidated
+  fullName: Mapsui.Styles.Font.Invalidated
+  nameWithType: Font.Invalidated
+- uid: Mapsui.Styles.Font.Invalidated*
+  name: Invalidated
+  href: api/Mapsui.Styles.Font.html#Mapsui_Styles_Font_Invalidated_
+  commentId: Overload:Mapsui.Styles.Font.Invalidated
+  isSpec: "True"
+  fullName: Mapsui.Styles.Font.Invalidated
+  nameWithType: Font.Invalidated
 - uid: Mapsui.Styles.Font.Italic
   name: Italic
   href: api/Mapsui.Styles.Font.html#Mapsui_Styles_Font_Italic
@@ -20494,6 +20570,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.Styles.IStyle.Opacity
   nameWithType: IStyle.Opacity
+- uid: Mapsui.Styles.IStyleRenderer
+  name: IStyleRenderer
+  href: api/Mapsui.Styles.IStyleRenderer.html
+  commentId: T:Mapsui.Styles.IStyleRenderer
+  fullName: Mapsui.Styles.IStyleRenderer
+  nameWithType: IStyleRenderer
 - uid: Mapsui.Styles.LabelStyle
   name: LabelStyle
   href: api/Mapsui.Styles.LabelStyle.html
@@ -24189,19 +24271,6 @@ references:
   commentId: E:Mapsui.UI.Forms.MapControl.Fling
   fullName: Mapsui.UI.Forms.MapControl.Fling
   nameWithType: MapControl.Fling
-- uid: Mapsui.UI.Forms.MapControl.GetDeviceIndependentUnits
-  name: GetDeviceIndependentUnits()
-  href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_GetDeviceIndependentUnits
-  commentId: M:Mapsui.UI.Forms.MapControl.GetDeviceIndependentUnits
-  fullName: Mapsui.UI.Forms.MapControl.GetDeviceIndependentUnits()
-  nameWithType: MapControl.GetDeviceIndependentUnits()
-- uid: Mapsui.UI.Forms.MapControl.GetDeviceIndependentUnits*
-  name: GetDeviceIndependentUnits
-  href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_GetDeviceIndependentUnits_
-  commentId: Overload:Mapsui.UI.Forms.MapControl.GetDeviceIndependentUnits
-  isSpec: "True"
-  fullName: Mapsui.UI.Forms.MapControl.GetDeviceIndependentUnits
-  nameWithType: MapControl.GetDeviceIndependentUnits
 - uid: Mapsui.UI.Forms.MapControl.GetMapInfo(Mapsui.Geometries.Point,System.Int32)
   name: GetMapInfo(Point, Int32)
   href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_GetMapInfo_Mapsui_Geometries_Point_System_Int32_
@@ -24327,19 +24396,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Forms.MapControl.PixelDensity
   nameWithType: MapControl.PixelDensity
-- uid: Mapsui.UI.Forms.MapControl.PixelsPerDeviceIndependentUnit
-  name: PixelsPerDeviceIndependentUnit
-  href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_PixelsPerDeviceIndependentUnit
-  commentId: P:Mapsui.UI.Forms.MapControl.PixelsPerDeviceIndependentUnit
-  fullName: Mapsui.UI.Forms.MapControl.PixelsPerDeviceIndependentUnit
-  nameWithType: MapControl.PixelsPerDeviceIndependentUnit
-- uid: Mapsui.UI.Forms.MapControl.PixelsPerDeviceIndependentUnit*
-  name: PixelsPerDeviceIndependentUnit
-  href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_PixelsPerDeviceIndependentUnit_
-  commentId: Overload:Mapsui.UI.Forms.MapControl.PixelsPerDeviceIndependentUnit
-  isSpec: "True"
-  fullName: Mapsui.UI.Forms.MapControl.PixelsPerDeviceIndependentUnit
-  nameWithType: MapControl.PixelsPerDeviceIndependentUnit
 - uid: Mapsui.UI.Forms.MapControl.PropertyChanged
   name: PropertyChanged
   href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_PropertyChanged
@@ -24443,19 +24499,6 @@ references:
   commentId: E:Mapsui.UI.Forms.MapControl.SingleTap
   fullName: Mapsui.UI.Forms.MapControl.SingleTap
   nameWithType: MapControl.SingleTap
-- uid: Mapsui.UI.Forms.MapControl.SkiaScale
-  name: SkiaScale
-  href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_SkiaScale
-  commentId: P:Mapsui.UI.Forms.MapControl.SkiaScale
-  fullName: Mapsui.UI.Forms.MapControl.SkiaScale
-  nameWithType: MapControl.SkiaScale
-- uid: Mapsui.UI.Forms.MapControl.SkiaScale*
-  name: SkiaScale
-  href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_SkiaScale_
-  commentId: Overload:Mapsui.UI.Forms.MapControl.SkiaScale
-  isSpec: "True"
-  fullName: Mapsui.UI.Forms.MapControl.SkiaScale
-  nameWithType: MapControl.SkiaScale
 - uid: Mapsui.UI.Forms.MapControl.Swipe
   name: Swipe
   href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_Swipe
@@ -24507,6 +24550,18 @@ references:
   commentId: E:Mapsui.UI.Forms.MapControl.TouchEnded
   fullName: Mapsui.UI.Forms.MapControl.TouchEnded
   nameWithType: MapControl.TouchEnded
+- uid: Mapsui.UI.Forms.MapControl.TouchEntered
+  name: TouchEntered
+  href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_TouchEntered
+  commentId: E:Mapsui.UI.Forms.MapControl.TouchEntered
+  fullName: Mapsui.UI.Forms.MapControl.TouchEntered
+  nameWithType: MapControl.TouchEntered
+- uid: Mapsui.UI.Forms.MapControl.TouchExited
+  name: TouchExited
+  href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_TouchExited
+  commentId: E:Mapsui.UI.Forms.MapControl.TouchExited
+  fullName: Mapsui.UI.Forms.MapControl.TouchExited
+  nameWithType: MapControl.TouchExited
 - uid: Mapsui.UI.Forms.MapControl.TouchMove
   name: TouchMove
   href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_TouchMove
@@ -25302,6 +25357,18 @@ references:
   commentId: E:Mapsui.UI.Forms.MapView.TouchEnded
   fullName: Mapsui.UI.Forms.MapView.TouchEnded
   nameWithType: MapView.TouchEnded
+- uid: Mapsui.UI.Forms.MapView.TouchEntered
+  name: TouchEntered
+  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_TouchEntered
+  commentId: E:Mapsui.UI.Forms.MapView.TouchEntered
+  fullName: Mapsui.UI.Forms.MapView.TouchEntered
+  nameWithType: MapView.TouchEntered
+- uid: Mapsui.UI.Forms.MapView.TouchExited
+  name: TouchExited
+  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_TouchExited
+  commentId: E:Mapsui.UI.Forms.MapView.TouchExited
+  fullName: Mapsui.UI.Forms.MapView.TouchExited
+  nameWithType: MapView.TouchExited
 - uid: Mapsui.UI.Forms.MapView.TouchMove
   name: TouchMove
   href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_TouchMove
@@ -26071,6 +26138,12 @@ references:
   commentId: M:Mapsui.UI.Forms.Polyline.#ctor
   fullName: Mapsui.UI.Forms.Polyline.Polyline()
   nameWithType: Polyline.Polyline()
+- uid: Mapsui.UI.Forms.Polyline.#ctor(System.String)
+  name: Polyline(String)
+  href: api/Mapsui.UI.Forms.Polyline.html#Mapsui_UI_Forms_Polyline__ctor_System_String_
+  commentId: M:Mapsui.UI.Forms.Polyline.#ctor(System.String)
+  fullName: Mapsui.UI.Forms.Polyline.Polyline(System.String)
+  nameWithType: Polyline.Polyline(String)
 - uid: Mapsui.UI.Forms.Polyline.#ctor*
   name: Polyline
   href: api/Mapsui.UI.Forms.Polyline.html#Mapsui_UI_Forms_Polyline__ctor_
@@ -26276,6 +26349,31 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Forms.SelectedPinChangedEventArgs.SelectedPin
   nameWithType: SelectedPinChangedEventArgs.SelectedPin
+- uid: Mapsui.UI.Forms.Utils
+  name: Mapsui.UI.Forms.Utils
+  href: api/Mapsui.UI.Forms.Utils.html
+  commentId: N:Mapsui.UI.Forms.Utils
+  fullName: Mapsui.UI.Forms.Utils
+  nameWithType: Mapsui.UI.Forms.Utils
+- uid: Mapsui.UI.Forms.Utils.PolylineConverter
+  name: PolylineConverter
+  href: api/Mapsui.UI.Forms.Utils.PolylineConverter.html
+  commentId: T:Mapsui.UI.Forms.Utils.PolylineConverter
+  fullName: Mapsui.UI.Forms.Utils.PolylineConverter
+  nameWithType: PolylineConverter
+- uid: Mapsui.UI.Forms.Utils.PolylineConverter.DecodePolyline(System.String)
+  name: DecodePolyline(String)
+  href: api/Mapsui.UI.Forms.Utils.PolylineConverter.html#Mapsui_UI_Forms_Utils_PolylineConverter_DecodePolyline_System_String_
+  commentId: M:Mapsui.UI.Forms.Utils.PolylineConverter.DecodePolyline(System.String)
+  fullName: Mapsui.UI.Forms.Utils.PolylineConverter.DecodePolyline(System.String)
+  nameWithType: PolylineConverter.DecodePolyline(String)
+- uid: Mapsui.UI.Forms.Utils.PolylineConverter.DecodePolyline*
+  name: DecodePolyline
+  href: api/Mapsui.UI.Forms.Utils.PolylineConverter.html#Mapsui_UI_Forms_Utils_PolylineConverter_DecodePolyline_
+  commentId: Overload:Mapsui.UI.Forms.Utils.PolylineConverter.DecodePolyline
+  isSpec: "True"
+  fullName: Mapsui.UI.Forms.Utils.PolylineConverter.DecodePolyline
+  nameWithType: PolylineConverter.DecodePolyline
 - uid: Mapsui.UI.HoveredEventArgs
   name: HoveredEventArgs
   href: api/Mapsui.UI.HoveredEventArgs.html
@@ -29556,12 +29654,12 @@ references:
   commentId: M:Mapsui.Viewport.#ctor
   fullName: Mapsui.Viewport.Viewport()
   nameWithType: Viewport.Viewport()
-- uid: Mapsui.Viewport.#ctor(Mapsui.Viewport)
-  name: Viewport(Viewport)
-  href: api/Mapsui.Viewport.html#Mapsui_Viewport__ctor_Mapsui_Viewport_
-  commentId: M:Mapsui.Viewport.#ctor(Mapsui.Viewport)
-  fullName: Mapsui.Viewport.Viewport(Mapsui.Viewport)
-  nameWithType: Viewport.Viewport(Viewport)
+- uid: Mapsui.Viewport.#ctor(Mapsui.IReadOnlyViewport)
+  name: Viewport(IReadOnlyViewport)
+  href: api/Mapsui.Viewport.html#Mapsui_Viewport__ctor_Mapsui_IReadOnlyViewport_
+  commentId: M:Mapsui.Viewport.#ctor(Mapsui.IReadOnlyViewport)
+  fullName: Mapsui.Viewport.Viewport(Mapsui.IReadOnlyViewport)
+  nameWithType: Viewport.Viewport(IReadOnlyViewport)
 - uid: Mapsui.Viewport.#ctor*
   name: Viewport
   href: api/Mapsui.Viewport.html#Mapsui_Viewport__ctor_
