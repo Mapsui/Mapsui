@@ -38,7 +38,7 @@ The best way to get going with Mapsui is by using the Samples. If you clone the 
 If you have a question please submit an issue [here](https://github.com/mapsui/Mapsui/issues)
 
 ## Contributing
-See the [guidelines](CONTRIBUTING.md)
+See the [guidelines](http://mapsui.com/documentation/Contributors-Guidelines.html)
 
 ## Thanks go to
 - ReSharper for providing free open source licenses for Mapsui
