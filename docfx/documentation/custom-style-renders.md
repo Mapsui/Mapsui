@@ -31,4 +31,4 @@ Look in the Mapsui source code for CustomStyleSample.cs.
 
 
 ## Remarks
-Note, that the renderer depends on the rendering implementation. Currently we still support XAML as renderer but this may be removed in the future. We expect to support Skia for a long time but it may be replaced at some point. There are no such plans just yet.
+Note, that the renderer depends on the technology we use for the rendering implementation, in this case SkiaSharp. Currently we still support XAML as renderer but this may be removed in the future. We expect to support SkiaSharp for a long time but it may be replaced at some point. There are no such plans just yet.
