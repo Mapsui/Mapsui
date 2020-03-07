@@ -21,8 +21,6 @@ namespace Mapsui.UI.Forms
     public class MapView : ContentView, IMapControl, INotifyPropertyChanged, IEnumerable<Pin>
     {
         internal MapControl _mapControl;
-
-        private readonly MyLocationLayer _mapMyLocationLayer;
         private const string CalloutLayerName = "Callouts";
         private const string PinLayerName = "Pins";
         private const string DrawableLayerName = "Drawables";
@@ -54,7 +52,7 @@ namespace Mapsui.UI.Forms
             IsClippedToBounds = true;
 
             _mapControl = new MapControl { UseDoubleTap = false };
-            _mapMyLocationLayer = new MyLocationLayer(this) { Enabled = true };
+            MyLocationLayer = new MyLocationLayer(this) { Enabled = true };
             _mapCalloutLayer = new MemoryLayer() { Name = CalloutLayerName, IsMapInfoLayer = true };
             _mapPinLayer = new MemoryLayer() { Name = PinLayerName, IsMapInfoLayer = true };
             _mapDrawableLayer = new MemoryLayer() { Name = DrawableLayerName, IsMapInfoLayer = true };
@@ -233,21 +231,6 @@ namespace Mapsui.UI.Forms
         public event EventHandler<SwipedEventArgs> Fling;
 
         /// <summary>
-        /// SingleTap is called, when user clicks with a mouse button or tap with a finger on map 
-        /// </summary>
-        public event EventHandler<TappedEventArgs> SingleTap;
-
-        /// <summary>
-        /// LongTap is called, when user clicks with a mouse button or tap with a finger on map for 500 ms
-        /// </summary>
-        public event EventHandler<TappedEventArgs> LongTap;
-
-        /// <summary>
-        /// DoubleTap is called, when user clicks with a mouse button or tap with a finger two or more times on map
-        /// </summary>
-        public event EventHandler<TappedEventArgs> DoubleTap;
-
-        /// <summary>
         /// Zoom is called, when map should be zoomed
         /// </summary>
         public event EventHandler<ZoomedEventArgs> Zoomed;
@@ -308,7 +291,7 @@ namespace Mapsui.UI.Forms
         /// <summary>
         /// MyLocation layer
         /// </summary>
-        public MyLocationLayer MyLocationLayer => _mapMyLocationLayer;
+        public MyLocationLayer MyLocationLayer { get; }
 
         /// <summary>
         /// Should my location be visible on map
@@ -586,7 +569,7 @@ namespace Mapsui.UI.Forms
 
             if (propertyName.Equals(nameof(MyLocationEnabledProperty)) || propertyName.Equals(nameof(MyLocationEnabled)))
             {
-                _mapMyLocationLayer.Enabled = MyLocationEnabled;
+                MyLocationLayer.Enabled = MyLocationEnabled;
                 Refresh();
             }
 
@@ -595,7 +578,7 @@ namespace Mapsui.UI.Forms
                 if (MyLocationFollow)
                 {
                     _mapMyLocationButton.Picture = _pictMyLocationCenter;
-                    _mapControl.Navigator.CenterOn(_mapMyLocationLayer.MyLocation.ToMapsui());
+                    _mapControl.Navigator.CenterOn(MyLocationLayer.MyLocation.ToMapsui());
                 }
                 else
                 {
@@ -681,7 +664,7 @@ namespace Mapsui.UI.Forms
         {
             if (e.PropertyName.Equals(nameof(Viewport.Rotation)))
             {
-                _mapMyLocationLayer.UpdateMyDirection(_mapMyLocationLayer.Direction, _mapControl.Viewport.Rotation);
+                MyLocationLayer.UpdateMyDirection(MyLocationLayer.Direction, _mapControl.Viewport.Rotation);
 
                 // Update rotationButton
                 _mapNorthingButton.Rotation = _mapControl.Viewport.Rotation;
@@ -689,7 +672,7 @@ namespace Mapsui.UI.Forms
 
             if (e.PropertyName.Equals(nameof(Viewport.Center)))
             {
-                if (MyLocationFollow && !_mapControl.Viewport.Center.Equals(_mapMyLocationLayer.MyLocation.ToMapsui()))
+                if (MyLocationFollow && !_mapControl.Viewport.Center.Equals(MyLocationLayer.MyLocation.ToMapsui()))
                 {
                     //_mapControl.Map.NavigateTo(_mapMyLocationLayer.MyLocation.ToMapsui());
                 }
@@ -703,7 +686,7 @@ namespace Mapsui.UI.Forms
 
         private void HandlerLayerChanged(ILayer layer)
         {
-            if (layer == _mapMyLocationLayer || layer == _mapDrawableLayer || layer == _mapPinLayer || layer == _mapCalloutLayer)
+            if (layer == MyLocationLayer || layer == _mapDrawableLayer || layer == _mapPinLayer || layer == _mapCalloutLayer)
                 return;
 
             // Remove MapView layers
@@ -989,7 +972,7 @@ namespace Mapsui.UI.Forms
             _mapControl.Map.Layers.Add(_mapDrawableLayer);
             _mapControl.Map.Layers.Add(_mapPinLayer);
             _mapControl.Map.Layers.Add(_mapCalloutLayer);
-            _mapControl.Map.Layers.Add(_mapMyLocationLayer);
+            _mapControl.Map.Layers.Add(MyLocationLayer);
         }
 
         /// <summary>
@@ -998,7 +981,7 @@ namespace Mapsui.UI.Forms
         private void RemoveLayers()
         {
             // Remove MapView layers
-            _mapControl.Map.Layers.Remove(_mapMyLocationLayer);
+            _mapControl.Map.Layers.Remove(MyLocationLayer);
             _mapControl.Map.Layers.Remove(_mapCalloutLayer);
             _mapControl.Map.Layers.Remove(_mapPinLayer);
             _mapControl.Map.Layers.Remove(_mapDrawableLayer);

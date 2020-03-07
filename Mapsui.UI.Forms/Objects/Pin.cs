@@ -5,7 +5,6 @@ using System.Text;
 using Mapsui.Providers;
 using Mapsui.Rendering.Skia;
 using Mapsui.Styles;
-using Mapsui.UI.Forms.Extensions;
 using Mapsui.UI.Objects;
 using SkiaSharp;
 using SkiaSharp.Views.Forms;
@@ -17,7 +16,6 @@ namespace Mapsui.UI.Forms
     {
         private int _bitmapId = -1;
         private byte[] _bitmapData;
-        private bool _wasCalloutVisible;
         private MapView _mapView;
 
         public static readonly BindableProperty TypeProperty = BindableProperty.Create(nameof(Type), typeof(PinType), typeof(Pin), default(PinType));
@@ -74,7 +72,7 @@ namespace Mapsui.UI.Forms
                         _mapView?.RemoveCallout(_callout);
                     }
                     
-                    _feature = null;
+                    Feature = null;
                     _mapView = value;
 
                     CreateFeature();
@@ -231,19 +229,11 @@ namespace Mapsui.UI.Forms
         /// </summary>
         public object Tag { get; set; }
 
-        private Feature _feature;
-
         /// <summary>
         /// Mapsui feature for this pin
         /// </summary>
         /// <value>Mapsui feature</value>
-        public Feature Feature
-        {
-            get
-            {
-                return _feature;
-            }
-        }
+        public Feature Feature { get; private set; }
 
         private Callout _callout;
 
@@ -359,44 +349,44 @@ namespace Mapsui.UI.Forms
             switch (propertyName)
             {
                 case nameof(Position):
-                    if (_feature != null)
+                    if (Feature != null)
                     {
-                        _feature.Geometry = Position.ToMapsui();
-                        _callout.Feature.Geometry = _feature.Geometry;
+                        Feature.Geometry = Position.ToMapsui();
+                        _callout.Feature.Geometry = Feature.Geometry;
                     }
                     break;
                 case nameof(Label):
-                    if (_feature != null)
-                        _feature["Label"] = Label;
+                    if (Feature != null)
+                        Feature["Label"] = Label;
                     Callout.Title = Label;
                     break;
                 case nameof(Address):
                     Callout.Subtitle = Address;
                     break;
                 case nameof(Transparency):
-                    ((SymbolStyle)_feature.Styles.First()).Opacity = 1 - Transparency;
+                    ((SymbolStyle)Feature.Styles.First()).Opacity = 1 - Transparency;
                     break;
                 case nameof(Anchor):
-                    ((SymbolStyle)_feature.Styles.First()).SymbolOffset = new Offset(Anchor.X, Anchor.Y);
+                    ((SymbolStyle)Feature.Styles.First()).SymbolOffset = new Offset(Anchor.X, Anchor.Y);
                     break;
                 case nameof(Rotation):
-                    ((SymbolStyle)_feature.Styles.First()).SymbolRotation = Rotation;
+                    ((SymbolStyle)Feature.Styles.First()).SymbolRotation = Rotation;
                     break;
                 case nameof(IsVisible):
                     if (!IsVisible)
                         HideCallout();
-                    ((SymbolStyle)_feature.Styles.First()).Enabled = IsVisible;
+                    ((SymbolStyle)Feature.Styles.First()).Enabled = IsVisible;
                     break;
                 case nameof(MinVisible):
                     // TODO: Update callout MinVisble too
-                    ((SymbolStyle)_feature.Styles.First()).MinVisible = MinVisible;
+                    ((SymbolStyle)Feature.Styles.First()).MinVisible = MinVisible;
                     break;
                 case nameof(MaxVisible):
                     // TODO: Update callout MaxVisble too
-                    ((SymbolStyle)_feature.Styles.First()).MaxVisible = MaxVisible;
+                    ((SymbolStyle)Feature.Styles.First()).MaxVisible = MaxVisible;
                     break;
                 case nameof(Scale):
-                    ((SymbolStyle)_feature.Styles.First()).SymbolScale = Scale;
+                    ((SymbolStyle)Feature.Styles.First()).SymbolScale = Scale;
                     break;
                 case nameof(Type):
                 case nameof(Color):
@@ -419,10 +409,10 @@ namespace Mapsui.UI.Forms
         {
             lock (_sync)
             {
-                if (_feature == null)
+                if (Feature == null)
                 {
                     // Create a new one
-                    _feature = new Feature
+                    Feature = new Feature
                     {
                         Geometry = Position.ToMapsui(),
                         ["Label"] = Label,
@@ -499,8 +489,8 @@ namespace Mapsui.UI.Forms
                 if (_bitmapId != -1)
                 {
                     // We only want to have one style
-                    _feature.Styles.Clear();
-                    _feature.Styles.Add(new SymbolStyle
+                    Feature.Styles.Clear();
+                    Feature.Styles.Add(new SymbolStyle
                     {
                         BitmapId = _bitmapId,
                         SymbolScale = Scale,
