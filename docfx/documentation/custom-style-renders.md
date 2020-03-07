@@ -19,12 +19,12 @@ This the ISkiaStyleRenderer interface:
     }
 ```
 
-![custom stye renderer](images/special.gif)
-
 The IFeature has a Geometry field. The renderer is responsible to cast that geometry to the type it intends to render. The IStyle is the custom style the user defined. It could contain extra style information not present in the default style classes. 
 
 ## Code sample
 Look in the Mapsui source code for CustomStyleSample.cs. 
+
+![custom stye renderer](images/special.gif)
 
 [Here](https://github.com/Mapsui/Mapsui/blob/42b59e9dad1fd9512f0114f8c8a3fd3f5666d330/Samples/Mapsui.Samples.Common/Maps/CustomStyleSample.cs#L16-L51) the most relevant code. In this sample the custom style contains no extra information, it is just an indication to use the associated custom renderer. 
 
