@@ -3,12 +3,18 @@ using System.Threading;
 
 namespace Mapsui.Fetcher
 {
+    /// <summary>
+    /// Makes sure a method is always called 'MillisecondsToDelay' after the previous call.
+    /// </summary>
     class Delayer
     {
         private readonly Timer _timer;
-        private Action _method;
+        private Action _action;
         private bool _waiting = false;
 
+        /// <summary>
+        /// The delay between two calls.
+        /// </summary>
         public int MillisecondsToDelay { get; set; } = 500;
 
         public Delayer()
@@ -17,51 +23,58 @@ namespace Mapsui.Fetcher
         }
 
         /// <summary>
-        /// Executes the method passed as argument with a delay specified
-        /// by the dueTime parameter. When the method is called before a
-        /// previous delayed method was executed the previous one will be
-        /// cancelled.
+        /// Executes the method passed as argument with a possible delay. After a previous
+        /// call the next call is delayed until 'MillisecondsToDelay' has passed.
+        /// When ExecuteDelayed is called before the previous delayed action was executed 
+        /// the previous one will be cancelled.
         /// </summary>
-        /// <param name="method">The method to be executed after the delay</param>
-        /// <param name="interval">The delay before the method is executed in milliseconds</param>
-        /// <remarks>On the first call to ExecuteDelayed the dueTime parameter will be ignored and
-        /// the delay will be zero.</remarks>
-        public void ExecuteDelayed(Action method)
+        /// <param name="action">The action to be executed after the possible delay</param>
+        /// <remarks>When the previous call was more than 'MillisecondsToDelay' ago there will
+        /// be no delay.</remarks>
+        public void ExecuteDelayed(Action action)
         {                       
             if (_waiting)
             {
-                // If waiting, just assing the method and wait
-                _method = method;
+                // If waiting, just assign the action and wait for it to be called.
+                _action = action;
             }
             else
             {
-                // If not waiting. Call the method 
-                method();
-
-                // Start waiting
-                _waiting = true;
-                _timer.Change(MillisecondsToDelay, MillisecondsToDelay);
+                // If not waiting just call the action.
+                action();
+                // Then wait for another time to check if more actions come in.
+                StartWaiting();
             }
         }
-        
+
         private void FetchDelayTimerElapsed(object state)
         {
-            if (_method == null)
+            if (_action == null)
             {
-                // The _method is null, so during the previous interval no new request came in,
+                // The _action is null, so during the previous interval no new request came in,
                 // so next time we don't have to wait.
-
-                // Stop waiting
-                _waiting = false;
-                _timer.Change(Timeout.Infinite, Timeout.Infinite);
+                StopWaiting();
             }
             else
             {
-                // Timer elaspsed.
-                _method?.Invoke();
-                _method = null;
-                // Now we keep the timer running. It will stop if _method is still null.
+                // Waiting is done, we can call the action.
+                _action?.Invoke();
+                // Set the action to null. This indicates there is no new request.
+                _action = null;
+                // Now we keep the timer running. It will stop if _action is still null.
             }
+        }
+
+        private void StartWaiting()
+        {
+            _waiting = true;
+            _timer.Change(MillisecondsToDelay, MillisecondsToDelay);
+        }
+
+        private void StopWaiting()
+        {
+            _waiting = false;
+            _timer.Change(Timeout.Infinite, Timeout.Infinite);
         }
     }
 }
