@@ -10,6 +10,9 @@
 
 ## News
 - 2020 februari 2: We have a gitter channel https://gitter.im/Mapsui/Lobby
+- 2020 march 7: Now using hardware acceleration for Android and iOS.
+- 2020 march 7: Rida Noor created a [Tutorial](https://mapsui.com/documentation/tutorials.html) and [sample](https://github.com/RidaNoor/Mapsui-MVVMCross) for MVVM support.
+- 2020 march 7: We are approaching a 2.0 release. Currently no new features planned and no known blocking bugs.
 
 ## Mapsui (pronounced map-su-wii)
 
