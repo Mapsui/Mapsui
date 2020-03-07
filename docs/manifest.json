@@ -5250,7 +5250,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/custom-style-renders.html",
-          "hash": "vIE8CQ8AArCxU7pwukGyjg=="
+          "hash": "/49fRgbribeEHxLg6KydnA=="
         }
       },
       "is_incremental": false,
@@ -5310,6 +5310,17 @@
       "output": {
         "resource": {
           "relative_path": "documentation/images/brutile_fetcher.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "documentation/images/special.gif",
+      "output": {
+        "resource": {
+          "relative_path": "documentation/images/special.gif"
         }
       },
       "is_incremental": false,
