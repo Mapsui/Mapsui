@@ -79,6 +79,20 @@
             <article class="content wrap" id="_content" data-uid="">
 <h1 id="custom-style-renderers">Custom Style Renderers</h1>
 
+<h2 id="summary">Summary</h2>
+<p>As of 2.0.0-beta.37 Mapsui supports Custom Style Renders. This means a user can create a <em>custom style</em> and associate this with a <em>custom style renderer</em> to allow full freedom in rendering a feature the way the user would like.</p>
+<h2 id="how-it-works">How it works</h2>
+<ul>
+<li>Create a custom style by deriving a class from IStyle.</li>
+<li>Assign that style to an ILayer.Style or IFeature.Styles.</li>
+<li>Create a custom renderer by deriving a class from ISkiaStyleRenderer.</li>
+<li>Register the custom style and custom style renderer at the MapRenderer like this:<ul>
+<li><code>mapControl.Renderer.StyleRenderers.Add(typeof(CustomStyle), new SkiaCustomStyleRenderer());</code>.</li>
+</ul>
+</li>
+</ul>
+<h2 id="remarks">Remarks</h2>
+<p>Note, that the renderer depends on the rendering implementation. Currently we still support XAML as renderer but this may be removed in the future. We expect to support Skia for a long time but it may be replaced at some point. There are no such plans just yet.</p>
 </article>
           </div>
           
