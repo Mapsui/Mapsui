@@ -66,6 +66,8 @@ namespace Mapsui.Layers
 
         public override BoundingBox Envelope => _layer.Envelope;
 
+        public ILayer ChildLayer => _layer;
+
         private void TimerElapsed(object state)
         {
             _timer.Change(Timeout.Infinite, Timeout.Infinite);
