@@ -216,8 +216,8 @@ namespace Mapsui.UI.Android
             var result = new List<Point>();
             for (var i = 0; i < motionEvent.PointerCount; i++)
             {
-                result.Add(new Point(motionEvent.GetX(i) - view.Left, motionEvent.GetY(i) - view.Top)
-                    .ToDeviceIndependentUnits(PixelDensity));
+                var pixelCoordinate = new Point(motionEvent.GetX(i) - view.Left, motionEvent.GetY(i) - view.Top);
+                result.Add(pixelCoordinate.ToDeviceIndependentUnits(PixelDensity));
             }
             return result;
         }
@@ -230,8 +230,7 @@ namespace Mapsui.UI.Android
         /// <returns></returns>
         private Point GetScreenPosition(MotionEvent motionEvent, View view)
         {
-            return GetScreenPositionInPixels(motionEvent, view)
-                .ToDeviceIndependentUnits(PixelDensity);
+            return GetScreenPositionInPixels(motionEvent, view).ToDeviceIndependentUnits(PixelDensity);
         }
 
         /// <summary>
@@ -242,9 +241,7 @@ namespace Mapsui.UI.Android
         /// <returns></returns>
         private static Point GetScreenPositionInPixels(MotionEvent motionEvent, View view)
         {
-            return new PointF(
-                motionEvent.GetX(0) - view.Left,
-                motionEvent.GetY(0) - view.Top).ToMapsui();
+            return new PointF(motionEvent.GetX(0) - view.Left, motionEvent.GetY(0) - view.Top).ToMapsui();
         }
 
         public void RefreshGraphics()
