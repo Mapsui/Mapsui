@@ -210,7 +210,7 @@
       <HintPath>..\..\packages\Reminiscence.1.2.0\lib\netstandard2.0\Reminiscence.dll</HintPath>
     </Reference>
     <Reference Include="SkiaSharp, Version=1.68.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\SkiaSharp.1.68.2-preview.17\lib\xamarinios1.0\SkiaSharp.dll</HintPath>
+      <HintPath>..\..\packages\SkiaSharp.1.68.2-preview.39\lib\xamarinios1.0\SkiaSharp.dll</HintPath>
     </Reference>
     <Reference Include="SkiaSharp.Extended.Svg, Version=1.60.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
       <HintPath>..\..\packages\SkiaSharp.Svg.1.60.0\lib\netstandard2.0\SkiaSharp.Extended.Svg.dll</HintPath>
