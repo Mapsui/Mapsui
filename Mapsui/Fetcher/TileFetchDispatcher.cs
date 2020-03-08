@@ -24,11 +24,15 @@ namespace Mapsui.Fetcher
         private ConcurrentQueue<TileInfo> _tilesMissing = new ConcurrentQueue<TileInfo>();
         private readonly ConcurrentHashSet<TileIndex> _tilesInProgress = new ConcurrentHashSet<TileIndex>();
         private ITileSource _tileSource;
+        private Func<TileInfo, object, Feature> _fetchToFeature;
+        private Func<TileInfo, object> _fetchGetTile;
 
-        public TileFetchDispatcher(ITileCache<Feature> tileCache, IFetchStrategy fetchStrategy = null)
+        public TileFetchDispatcher(ITileCache<Feature> tileCache, IFetchStrategy fetchStrategy = null, Func<TileInfo, object, Feature> fetchToFeature = null, Func<TileInfo, object> fetchGetTile = null)
         {
             _tileCache = tileCache;
             _fetchStrategy = fetchStrategy ?? new MinimalFetchStrategy();
+            _fetchToFeature = fetchToFeature ?? ToFeature;
+            _fetchGetTile = fetchGetTile;
         }
 
         public event DataChangedEventHandler DataChanged;
@@ -80,7 +84,7 @@ namespace Mapsui.Fetcher
         {
             try
             {
-                var tileData = TileSource.GetTile(tileInfo);
+                var tileData = _fetchGetTile != null ? _fetchGetTile(tileInfo) : TileSource.GetTile(tileInfo);
                 FetchCompleted(tileInfo, tileData, null);
             }
             catch (Exception exception)
@@ -98,13 +102,13 @@ namespace Mapsui.Fetcher
             }
         }
 
-        private void FetchCompleted(TileInfo tileInfo, byte[] tileData, Exception exception)
+        private void FetchCompleted(TileInfo tileInfo, object tileData, Exception exception)
         {
             lock (_lockRoot)
             {
                 if (exception == null)
                 {
-                    _tileCache.Add(tileInfo.Index, ToFeature(tileInfo, tileData));
+                    _tileCache.Add(tileInfo.Index, _fetchToFeature(tileInfo, tileData));
                 }
                 _tilesInProgress.TryRemove(tileInfo.Index);
 
@@ -148,9 +152,9 @@ namespace Mapsui.Fetcher
             if (_tilesMissing.Count > 0) Busy = true;
         }
 
-        private static Feature ToFeature(TileInfo tileInfo, byte[] tileData)
+        private static Feature ToFeature(TileInfo tileInfo, object tileData)
         {
-            return new Feature { Geometry = ToGeometry(tileInfo, tileData) };
+            return new Feature { Geometry = ToGeometry(tileInfo, (byte[]) tileData) };
         }
 
         private static Raster ToGeometry(TileInfo tileInfo, byte[] tileData)
