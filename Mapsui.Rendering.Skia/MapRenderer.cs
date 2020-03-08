@@ -180,9 +180,15 @@ namespace Mapsui.Rendering.Skia
         public MapInfo GetMapInfo(double x, double y, IReadOnlyViewport viewport, IEnumerable<ILayer> layers, int margin = 0)
         {
             // todo: use margin to increase the pixel area
-
             // todo: We will need to select on style instead of layer
-            layers = layers.Where(l => l.IsMapInfoLayer);
+            
+            layers = layers
+                .Select(l => 
+                    {
+                        var rl = l as RasterizingLayer;
+                        return rl == null ? l : rl.ChildLayer;
+                    })
+                .Where(l => l.IsMapInfoLayer);
 
             var list = new List<MapInfoRecord>();
             var result = new MapInfo()
