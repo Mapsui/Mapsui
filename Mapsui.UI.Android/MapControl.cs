@@ -15,9 +15,15 @@ using Point = Mapsui.Geometries.Point;
 
 namespace Mapsui.UI.Android
 {
+    public enum SkiaRenderMode
+    {
+        Accelerated,
+        Regular
+    }
+
     public partial class MapControl : ViewGroup, IMapControl
     {
-        private SKGLSurfaceView _canvas;
+        private View _canvas;
         private double _innerRotation;
         private GestureDetector _gestureDetector;
         private double _previousAngle;
@@ -28,6 +34,9 @@ namespace Mapsui.UI.Android
         /// Saver for center before last pinch movement
         /// </summary>
         private Point _previousTouch = new Point();
+        private SkiaRenderMode _renderMode = SkiaRenderMode.Regular;
+
+        public float PixelDensity => Resources.DisplayMetrics.Density;
 
         public MapControl(Context context, IAttributeSet attrs) :
             base(context, attrs)
@@ -44,10 +53,7 @@ namespace Mapsui.UI.Android
         public void Initialize()
         {
             SetBackgroundColor(Color.Transparent);
-            _canvas = new SKGLSurfaceView(Context);
-            _canvas.PaintSurface += CanvasOnPaintSurface;
-            AddView(_canvas);
-
+            _canvas = StartRegularRenderMode();
             _mainLooperHandler = new Handler(Looper.MainLooper);
 
             SetViewportSize(); // todo: check if size is available, perhaps we need a load event
@@ -60,7 +66,35 @@ namespace Mapsui.UI.Android
             _gestureDetector.DoubleTap += OnDoubleTapped;
         }
 
-        public float PixelDensity => Resources.DisplayMetrics.Density;
+        private void CanvasOnPaintSurface(object sender, SKPaintSurfaceEventArgs e)
+        {
+            e.Surface.Canvas.Scale(PixelDensity, PixelDensity);
+
+            Renderer.Render(e.Surface.Canvas, new Viewport(Viewport), _map.Layers, _map.Widgets, _map.BackColor);
+        }
+
+        public SkiaRenderMode RenderMode
+        {
+            get => _renderMode;
+            set
+            {
+                if (_renderMode == value) return;
+
+                _renderMode = value;
+                if (_renderMode == SkiaRenderMode.Accelerated)
+                {
+                    StopRegularRenderMode(_canvas);
+                    _canvas = StartAcceleratedRenderMode();
+                }
+                else
+                {
+                    StopAcceleratedRenderMode(_canvas);
+                    _canvas = StartRegularRenderMode();
+                }
+                RefreshGraphics();
+                OnPropertyChanged();
+            }
+        }
 
         private void OnDoubleTapped(object sender, GestureDetector.DoubleTapEventArgs e)
         {
@@ -88,7 +122,7 @@ namespace Mapsui.UI.Android
                 action();
         }
 
-        private void CanvasOnPaintSurface(object sender, SKPaintGLSurfaceEventArgs args)
+        private void CanvasOnPaintSurfaceGL(object sender, SKPaintGLSurfaceEventArgs args)
         {
             args.Surface.Canvas.Scale(PixelDensity, PixelDensity);
 
@@ -197,7 +231,7 @@ namespace Mapsui.UI.Android
 
                                 (_previousTouch, _previousRadius, _previousAngle) = (touch, radius, angle);
 
-                                
+
                             }
                             break;
                     }
@@ -253,7 +287,7 @@ namespace Mapsui.UI.Android
         {
             try
             {
-                // Bothe Invalidate and _canvas.Invalidate are necessary in different scenarios.
+                // Both Invalidate and _canvas.Invalidate are necessary in different scenarios.
                 Invalidate();
                 _canvas?.Invalidate();
             }
@@ -269,10 +303,15 @@ namespace Mapsui.UI.Android
 
         protected override void OnLayout(bool changed, int l, int t, int r, int b)
         {
-            _canvas.Top = t;
-            _canvas.Bottom = b;
-            _canvas.Left = l;
-            _canvas.Right = r;
+            SetBounds(_canvas, l, t, r, b);
+        }
+
+        private static void SetBounds(View view, int l, int t, int r, int b)
+        {
+            view.Top = t;
+            view.Bottom = b;
+            view.Left = l;
+            view.Right = r;
         }
 
         public void OpenBrowser(string url)
@@ -334,6 +373,44 @@ namespace Mapsui.UI.Android
         private float ToDeviceIndependentUnits(float pixelCoordinate)
         {
             return pixelCoordinate / PixelDensity;
+        }
+
+        private View StartRegularRenderMode()
+        {
+            var canvas = new SKCanvasView(Context);
+            canvas.PaintSurface += CanvasOnPaintSurface; ;
+            AddView(canvas);
+            return canvas;
+        }
+
+        private void StopRegularRenderMode(View canvas)
+        {
+            if (canvas is SKCanvasView canvasView)
+            {
+                canvasView.PaintSurface -= CanvasOnPaintSurface;
+                RemoveView(canvasView);
+                // Let's not dispose. The Paint callback might still be busy.
+                canvasView = null;
+            }
+        }
+
+        private View StartAcceleratedRenderMode()
+        {
+            var canvas = new SKGLSurfaceView(Context);
+            canvas.PaintSurface += CanvasOnPaintSurfaceGL;
+            AddView(canvas);
+            return canvas;
+        }
+
+        private void StopAcceleratedRenderMode(View canvas)
+        {
+            if (canvas is SKGLSurfaceView surfaceView)
+            {
+                surfaceView.PaintSurface -= CanvasOnPaintSurfaceGL;
+                RemoveView(surfaceView);
+                // Let's not dispose. The Paint callback might still be busy.
+                surfaceView = null;
+            }
         }
     }
 }
