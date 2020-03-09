@@ -56,6 +56,10 @@ namespace Mapsui.Samples.Droid
         {
             MenuInflater.Inflate(Resource.Menu.menu_main, menu);
 
+            var rendererMenu = menu.AddSubMenu(nameof(SkiaRenderMode));
+            rendererMenu.Add(SkiaRenderMode.Regular.ToString());
+            rendererMenu.Add(SkiaRenderMode.Accelerated.ToString());
+
             var categories = AllSamples.GetSamples().Select(s => s.Category).Distinct().OrderBy(c => c);
             foreach (var category in categories)
             {
@@ -83,12 +87,23 @@ namespace Mapsui.Samples.Droid
                 return true;
             }
 
-            var sample = AllSamples.GetSamples().FirstOrDefault(s => s.Name == item.TitleFormatted.ToString());
-            if (sample != null)
+            if (item.TitleFormatted.ToString() == SkiaRenderMode.Regular.ToString())
             {
-                _mapControl.Map.Layers.Clear();
-                sample.Setup(_mapControl);
-                return true;
+                _mapControl.RenderMode = SkiaRenderMode.Regular;
+            }
+            else if (item.TitleFormatted.ToString() == SkiaRenderMode.Accelerated.ToString())
+            {
+                _mapControl.RenderMode = SkiaRenderMode.Accelerated;
+            }
+            else
+            {
+                var sample = AllSamples.GetSamples().FirstOrDefault(s => s.Name == item.TitleFormatted.ToString());
+                if (sample != null)
+                {
+                    _mapControl.Map.Layers.Clear();
+                    sample.Setup(_mapControl);
+                    return true;
+                }
             }
             
             return base.OnOptionsItemSelected(item);
