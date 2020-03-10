@@ -8,7 +8,7 @@ As of 2.0.0-beta.37 Mapsui supports *custom style renderers*. This means a user 
 - Create a custom style by deriving a class from IStyle. 
 - Assign that style to an ILayer.Style or IFeature.Styles.
 - Create a custom renderer by deriving a class from ISkiaStyleRenderer and implement the Draw method.
-- Register the association of the *custom style* to the *custom style renderer* as in the line below. The consequence will be that if the Mapsui renderer detects this style it will call the Dram method on the style renderer. 
+- Register the association of the *custom style* to the *custom style renderer* as in the line below. The consequence will be that if the Mapsui renderer detects this style it will call the Draw method on the style renderer. 
 
 
 This is how you register the association of a custom style to a custom style renderer
