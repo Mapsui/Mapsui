@@ -8344,6 +8344,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.Layers.RasterizingLayer.AbortFetch
   nameWithType: RasterizingLayer.AbortFetch
+- uid: Mapsui.Layers.RasterizingLayer.ChildLayer
+  name: ChildLayer
+  href: api/Mapsui.Layers.RasterizingLayer.html#Mapsui_Layers_RasterizingLayer_ChildLayer
+  commentId: P:Mapsui.Layers.RasterizingLayer.ChildLayer
+  fullName: Mapsui.Layers.RasterizingLayer.ChildLayer
+  nameWithType: RasterizingLayer.ChildLayer
+- uid: Mapsui.Layers.RasterizingLayer.ChildLayer*
+  name: ChildLayer
+  href: api/Mapsui.Layers.RasterizingLayer.html#Mapsui_Layers_RasterizingLayer_ChildLayer_
+  commentId: Overload:Mapsui.Layers.RasterizingLayer.ChildLayer
+  isSpec: "True"
+  fullName: Mapsui.Layers.RasterizingLayer.ChildLayer
+  nameWithType: RasterizingLayer.ChildLayer
 - uid: Mapsui.Layers.RasterizingLayer.ClearCache
   name: ClearCache()
   href: api/Mapsui.Layers.RasterizingLayer.html#Mapsui_Layers_RasterizingLayer_ClearCache
@@ -22717,6 +22730,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Android.MapControl.Renderer
   nameWithType: MapControl.Renderer
+- uid: Mapsui.UI.Android.MapControl.RenderMode
+  name: RenderMode
+  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_RenderMode
+  commentId: P:Mapsui.UI.Android.MapControl.RenderMode
+  fullName: Mapsui.UI.Android.MapControl.RenderMode
+  nameWithType: MapControl.RenderMode
+- uid: Mapsui.UI.Android.MapControl.RenderMode*
+  name: RenderMode
+  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_RenderMode_
+  commentId: Overload:Mapsui.UI.Android.MapControl.RenderMode
+  isSpec: "True"
+  fullName: Mapsui.UI.Android.MapControl.RenderMode
+  nameWithType: MapControl.RenderMode
 - uid: Mapsui.UI.Android.MapControl.ReSnapRotationDegrees
   name: ReSnapRotationDegrees
   href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_ReSnapRotationDegrees
@@ -22874,6 +22900,24 @@ references:
   commentId: F:Mapsui.UI.Android.Resource.Styleable.start_with_openstreetmap_style_start_with_openstreetmap
   fullName: Mapsui.UI.Android.Resource.Styleable.start_with_openstreetmap_style_start_with_openstreetmap
   nameWithType: Resource.Styleable.start_with_openstreetmap_style_start_with_openstreetmap
+- uid: Mapsui.UI.Android.SkiaRenderMode
+  name: SkiaRenderMode
+  href: api/Mapsui.UI.Android.SkiaRenderMode.html
+  commentId: T:Mapsui.UI.Android.SkiaRenderMode
+  fullName: Mapsui.UI.Android.SkiaRenderMode
+  nameWithType: SkiaRenderMode
+- uid: Mapsui.UI.Android.SkiaRenderMode.Accelerated
+  name: Accelerated
+  href: api/Mapsui.UI.Android.SkiaRenderMode.html#Mapsui_UI_Android_SkiaRenderMode_Accelerated
+  commentId: F:Mapsui.UI.Android.SkiaRenderMode.Accelerated
+  fullName: Mapsui.UI.Android.SkiaRenderMode.Accelerated
+  nameWithType: SkiaRenderMode.Accelerated
+- uid: Mapsui.UI.Android.SkiaRenderMode.Regular
+  name: Regular
+  href: api/Mapsui.UI.Android.SkiaRenderMode.html#Mapsui_UI_Android_SkiaRenderMode_Regular
+  commentId: F:Mapsui.UI.Android.SkiaRenderMode.Regular
+  fullName: Mapsui.UI.Android.SkiaRenderMode.Regular
+  nameWithType: SkiaRenderMode.Regular
 - uid: Mapsui.UI.FeatureInfoEventArgs
   name: FeatureInfoEventArgs
   href: api/Mapsui.UI.FeatureInfoEventArgs.html

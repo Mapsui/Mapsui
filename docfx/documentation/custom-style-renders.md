@@ -2,24 +2,29 @@
 
 ## Summary
 
-As of 2.0.0-beta.37 Mapsui supports Custom Style Renderers. This means a user can create a *custom style* and associate this with a *custom style renderer* to allow full freedom in rendering a feature the way the user would like.
+As of 2.0.0-beta.37 Mapsui supports *custom style renderers*. This means a user can create a *custom style* and associate this with a *custom style renderer* to allow full freedom in rendering a feature the way the user would like.
 
 ## How it works
 - Create a custom style by deriving a class from IStyle. 
 - Assign that style to an ILayer.Style or IFeature.Styles.
 - Create a custom renderer by deriving a class from ISkiaStyleRenderer and implement the Draw method.
-- Register the association of the *custom style* to the *custom style renderer* at the MapRenderer like this:
-  - ```mapControl.Renderer.StyleRenderers.Add(typeof(CustomStyle), new SkiaCustomStyleRenderer());```.
+- Register the association of the *custom style* to the *custom style renderer* as in the line below. The consequence will be that if the Mapsui renderer detects this style it will call the Draw method on the style renderer. 
+
+
+This is how you register the association of a custom style to a custom style renderer
+```charp
+mapControl.Renderer.StyleRenderers.Add(typeof(CustomStyle), new SkiaCustomStyleRenderer());```.
+```
 
 This is the ISkiaStyleRenderer interface:
 ```csharp
-    public interface ISkiaStyleRenderer : IStyleRenderer
-    {
-        bool Draw(SKCanvas canvas, IReadOnlyViewport viewport, ILayer layer, IFeature feature, IStyle style, ISymbolCache symbolCache);
-    }
+public interface ISkiaStyleRenderer : IStyleRenderer
+{
+  bool Draw(SKCanvas canvas, IReadOnlyViewport viewport, ILayer layer, IFeature feature, IStyle style, ISymbolCache symbolCache);
+}
 ```
 
-The IFeature has a Geometry field. The renderer is responsible to cast that geometry to the type it intends to render. The IStyle is the custom style the user defined. It could contain extra style information not present in the default style classes. 
+The IFeature has a Geometry field. The renderer is responsible to cast the IFeature.Geometry to the type it intends to render. The IStyle is the custom style the user defined. It could contain extra style information not present in the default style classes. The user will need to cast that IStyle to the custom style to use this extra information.
 
 ## Code sample
 Look in the Mapsui source code for CustomStyleSample.cs. 

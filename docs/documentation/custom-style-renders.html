@@ -80,23 +80,22 @@
 <h1 id="custom-style-renderers">Custom Style Renderers</h1>
 
 <h2 id="summary">Summary</h2>
-<p>As of 2.0.0-beta.37 Mapsui supports Custom Style Renderers. This means a user can create a <em>custom style</em> and associate this with a <em>custom style renderer</em> to allow full freedom in rendering a feature the way the user would like.</p>
+<p>As of 2.0.0-beta.37 Mapsui supports <em>custom style renderers</em>. This means a user can create a <em>custom style</em> and associate this with a <em>custom style renderer</em> to allow full freedom in rendering a feature the way the user would like.</p>
 <h2 id="how-it-works">How it works</h2>
 <ul>
 <li>Create a custom style by deriving a class from IStyle. </li>
 <li>Assign that style to an ILayer.Style or IFeature.Styles.</li>
 <li>Create a custom renderer by deriving a class from ISkiaStyleRenderer and implement the Draw method.</li>
-<li>Register the association of the <em>custom style</em> to the <em>custom style renderer</em> at the MapRenderer like this:<ul>
-<li><code>mapControl.Renderer.StyleRenderers.Add(typeof(CustomStyle), new SkiaCustomStyleRenderer());</code>.</li>
+<li>Register the association of the <em>custom style</em> to the <em>custom style renderer</em> as in the line below. The consequence will be that if the Mapsui renderer detects this style it will call the Draw method on the style renderer. </li>
 </ul>
-</li>
-</ul>
-<p>This is the ISkiaStyleRenderer interface:</p>
-<pre><code class="lang-csharp">    public interface ISkiaStyleRenderer : IStyleRenderer
-    {
-        bool Draw(SKCanvas canvas, IReadOnlyViewport viewport, ILayer layer, IFeature feature, IStyle style, ISymbolCache symbolCache);
-    }
-</code></pre><p>The IFeature has a Geometry field. The renderer is responsible to cast that geometry to the type it intends to render. The IStyle is the custom style the user defined. It could contain extra style information not present in the default style classes. </p>
+<p>This is how you register the association of a custom style to a custom style renderer</p>
+<pre><code class="lang-charp">mapControl.Renderer.StyleRenderers.Add(typeof(CustomStyle), new SkiaCustomStyleRenderer());```.
+</code></pre><p>This is the ISkiaStyleRenderer interface:</p>
+<pre><code class="lang-csharp">public interface ISkiaStyleRenderer : IStyleRenderer
+{
+  bool Draw(SKCanvas canvas, IReadOnlyViewport viewport, ILayer layer, IFeature feature, IStyle style, ISymbolCache symbolCache);
+}
+</code></pre><p>The IFeature has a Geometry field. The renderer is responsible to cast the IFeature.Geometry to the type it intends to render. The IStyle is the custom style the user defined. It could contain extra style information not present in the default style classes. The user will need to cast that IStyle to the custom style to use this extra information.</p>
 <h2 id="code-sample">Code sample</h2>
 <p>Look in the Mapsui source code for CustomStyleSample.cs. </p>
 <p><img src="images/special.gif" alt="custom stye renderer"></p>
