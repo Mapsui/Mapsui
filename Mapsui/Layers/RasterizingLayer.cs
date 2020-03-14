@@ -27,6 +27,7 @@ namespace Mapsui.Layers
         private IEnumerable<IFeature> _previousFeatures;
         private IRenderer _rasterizer;
         private double _resolution;
+        private readonly float _pixelDensity;
 
         /// <summary>
         ///     Creates a RasterizingLayer which rasterizes a layer for performance
@@ -47,7 +48,8 @@ namespace Mapsui.Layers
             double renderResolutionMultiplier = 1,
             IRenderer rasterizer = null, 
             double overscanRatio = 1, 
-            bool onlyRerasterizeIfOutsideOverscan = false)
+            bool onlyRerasterizeIfOutsideOverscan = false,
+            float pixelDensity = 1)
         {
             if (overscanRatio < 1)
                 throw new ArgumentException($"{nameof(overscanRatio)} must be >= 1", nameof(overscanRatio));
@@ -60,6 +62,8 @@ namespace Mapsui.Layers
             _cache = new MemoryProvider();
             _overscan = overscanRatio;
             _onlyRerasterizeIfOutsideOverscan = onlyRerasterizeIfOutsideOverscan;
+            _pixelDensity = pixelDensity;
+            
             _layer.DataChanged += LayerOnDataChanged;
             _timer = new Timer(TimerElapsed, null, _delayBeforeRasterize, Timeout.Infinite);
         }
