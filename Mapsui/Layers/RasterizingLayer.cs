@@ -27,7 +27,6 @@ namespace Mapsui.Layers
         private IEnumerable<IFeature> _previousFeatures;
         private IRenderer _rasterizer;
         private double _resolution;
-        private readonly float _pixelDensity;
 
         /// <summary>
         ///     Creates a RasterizingLayer which rasterizes a layer for performance
@@ -43,13 +42,12 @@ namespace Mapsui.Layers
         ///     rasterisation.
         /// </param>
         public RasterizingLayer(
-            ILayer layer, 
-            int delayBeforeRasterize = 500, 
+            ILayer layer,
+            int delayBeforeRasterize = 500,
             double renderResolutionMultiplier = 1,
-            IRenderer rasterizer = null, 
-            double overscanRatio = 1, 
-            bool onlyRerasterizeIfOutsideOverscan = false,
-            float pixelDensity = 1)
+            IRenderer rasterizer = null,
+            double overscanRatio = 1,
+            bool onlyRerasterizeIfOutsideOverscan = false)
         {
             if (overscanRatio < 1)
                 throw new ArgumentException($"{nameof(overscanRatio)} must be >= 1", nameof(overscanRatio));
@@ -62,8 +60,6 @@ namespace Mapsui.Layers
             _cache = new MemoryProvider();
             _overscan = overscanRatio;
             _onlyRerasterizeIfOutsideOverscan = onlyRerasterizeIfOutsideOverscan;
-            _pixelDensity = pixelDensity;
-            
             _layer.DataChanged += LayerOnDataChanged;
             _timer = new Timer(TimerElapsed, null, _delayBeforeRasterize, Timeout.Infinite);
         }
@@ -89,7 +85,7 @@ namespace Mapsui.Layers
         {
             _timer.Change(_delayBeforeRasterize, Timeout.Infinite);
         }
-        
+
         private void Rasterize()
         {
             if (!Enabled) return;
@@ -195,13 +191,13 @@ namespace Mapsui.Layers
         private static Viewport CreateViewport(BoundingBox extent, double resolution, double renderResolutionMultiplier,
             double overscan)
         {
-            var renderResolution = resolution/renderResolutionMultiplier;
+            var renderResolution = resolution / renderResolutionMultiplier;
             return new Viewport
             {
                 Resolution = renderResolution,
                 Center = extent.Centroid,
-                Width = extent.Width*overscan/renderResolution,
-                Height = extent.Height*overscan/renderResolution
+                Width = extent.Width * overscan / renderResolution,
+                Height = extent.Height * overscan / renderResolution
             };
         }
     }
