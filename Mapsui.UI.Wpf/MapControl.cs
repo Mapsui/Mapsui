@@ -194,24 +194,7 @@ namespace Mapsui.UI.Wpf
             Focusable = true;
         }
         
-        public float PixelDensity => DeterminePixelDensity();
 
-        private float DeterminePixelDensity()
-        {
-            var presentationSource = PresentationSource.FromVisual(this);
-            if (presentationSource == null) throw new Exception("PresentationSource is null");
-            var compositionTarget = presentationSource.CompositionTarget;
-            if (compositionTarget == null) throw new Exception("CompositionTarget is null");
-
-            var matrix = compositionTarget.TransformToDevice;
-
-            var dpiX = matrix.M11;
-            var dpiY = matrix.M22;
-
-            if (dpiX != dpiY) throw new ArgumentException();
-
-            return (float)dpiX;
-        }
 
         private void InitAnimation()
         {
@@ -524,6 +507,7 @@ namespace Mapsui.UI.Wpf
         {
             if (Renderer == null) return;
             if (_map == null) return;
+            if (PixelDensity <= 0) return;
 
             args.Surface.Canvas.Scale(PixelDensity, PixelDensity);
 
@@ -536,6 +520,23 @@ namespace Mapsui.UI.Wpf
             if (_map == null) return;
 
             Renderer.Render(WpfCanvas, Viewport, _map.Layers, Map.Widgets, _map.BackColor);
+        }
+
+        private float GetPixelDensity()
+        {
+            var presentationSource = PresentationSource.FromVisual(this);
+            if (presentationSource == null) throw new Exception("PresentationSource is null");
+            var compositionTarget = presentationSource.CompositionTarget;
+            if (compositionTarget == null) throw new Exception("CompositionTarget is null");
+
+            var matrix = compositionTarget.TransformToDevice;
+
+            var dpiX = matrix.M11;
+            var dpiY = matrix.M22;
+
+            if (dpiX != dpiY) throw new ArgumentException();
+
+            return (float)dpiX;
         }
     }
 }

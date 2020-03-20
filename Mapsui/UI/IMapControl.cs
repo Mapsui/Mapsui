@@ -26,11 +26,6 @@ namespace Mapsui.UI
 
         void Unsubscribe();
 
-        /// <summary>
-        /// The number of pixel per device independent unit
-        /// </summary>
-        float PixelDensity { get; }
-
         IRenderer Renderer { get; }
 
         void OpenBrowser(string url); //todo: Perhaps remove

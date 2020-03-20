@@ -6,7 +6,7 @@
     <SharedGUID>239f2b0d-13cb-4bcf-83bf-f52d696a47b7</SharedGUID>
   </PropertyGroup>
   <PropertyGroup Label="Configuration">
-    <Import_RootNamespace>Mapsui.UI.Shared</Import_RootNamespace>
+    <Import_RootNamespace>Mapsui.UI</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Enums\TouchMode.cs" />

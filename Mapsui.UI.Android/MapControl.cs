@@ -36,9 +36,7 @@ namespace Mapsui.UI.Android
         private Point _previousTouch = new Point();
         private SkiaRenderMode _renderMode = SkiaRenderMode.Regular;
 
-        public float PixelDensity => Resources.DisplayMetrics.Density;
-
-        public MapControl(Context context, IAttributeSet attrs) :
+  public MapControl(Context context, IAttributeSet attrs) :
             base(context, attrs)
         {
             Initialize();
@@ -68,6 +66,8 @@ namespace Mapsui.UI.Android
 
         private void CanvasOnPaintSurface(object sender, SKPaintSurfaceEventArgs e)
         {
+            if (PixelDensity <= 0) return;
+
             e.Surface.Canvas.Scale(PixelDensity, PixelDensity);
 
             Renderer.Render(e.Surface.Canvas, new Viewport(Viewport), _map.Layers, _map.Widgets, _map.BackColor);
@@ -378,7 +378,7 @@ namespace Mapsui.UI.Android
         private View StartRegularRenderMode()
         {
             var canvas = new SKCanvasView(Context);
-            canvas.PaintSurface += CanvasOnPaintSurface; ;
+            canvas.PaintSurface += CanvasOnPaintSurface;
             AddView(canvas);
             return canvas;
         }
@@ -390,7 +390,6 @@ namespace Mapsui.UI.Android
                 canvasView.PaintSurface -= CanvasOnPaintSurface;
                 RemoveView(canvasView);
                 // Let's not dispose. The Paint callback might still be busy.
-                canvasView = null;
             }
         }
 
@@ -409,8 +408,12 @@ namespace Mapsui.UI.Android
                 surfaceView.PaintSurface -= CanvasOnPaintSurfaceGL;
                 RemoveView(surfaceView);
                 // Let's not dispose. The Paint callback might still be busy.
-                surfaceView = null;
             }
+        }
+
+        private float GetPixelDensity()
+        {
+            return Resources.DisplayMetrics.Density;
         }
     }
 }
