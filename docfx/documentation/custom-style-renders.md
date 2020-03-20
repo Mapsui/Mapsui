@@ -13,7 +13,7 @@ As of 2.0.0-beta.37 Mapsui supports *custom style renderers*. This means a user 
 
 This is how you register the association of a custom style to a custom style renderer
 ```charp
-mapControl.Renderer.StyleRenderers.Add(typeof(CustomStyle), new SkiaCustomStyleRenderer());```.
+mapControl.Renderer.StyleRenderers.Add(typeof(CustomStyle), new SkiaCustomStyleRenderer());
 ```
 
 This is the ISkiaStyleRenderer interface:
