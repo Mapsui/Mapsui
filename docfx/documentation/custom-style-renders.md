@@ -16,7 +16,7 @@ This is how you register the association of a custom style to a custom style ren
 mapControl.Renderer.StyleRenderers.Add(typeof(CustomStyle), new SkiaCustomStyleRenderer());
 ```
 
-This is the ISkiaStyleRenderer interface:
+This is the ISkiaStyleRenderer interface that you need to implement:
 ```csharp
 public interface ISkiaStyleRenderer : IStyleRenderer
 {
