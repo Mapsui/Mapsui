@@ -63,6 +63,18 @@ namespace Mapsui.UI.Wpf
             }
         }
 
+        private float? _pixelDensity;
+
+        public float PixelDensity
+        {
+            get
+            {
+                if (_pixelDensity == null || _pixelDensity <= 0)
+                    _pixelDensity = GetPixelDensity();
+                return _pixelDensity.Value;
+            }
+        }
+
         private IRenderer _renderer = new MapRenderer();
 
         /// <summary>
@@ -351,7 +363,7 @@ namespace Mapsui.UI.Wpf
         {
             byte[] result = null;
             
-            using (var stream = Renderer.RenderToBitmapStream(Viewport, layers ?? Map.Layers)) 
+            using (var stream = Renderer.RenderToBitmapStream(Viewport, layers ?? Map.Layers, pixelDensity: PixelDensity)) 
             { 
                 if (stream != null)
                     result = stream.ToArray(); 

@@ -64,19 +64,21 @@ namespace Mapsui.Rendering.Skia
             Render(canvas, viewport, widgets, 1);
         }
 
-        public MemoryStream RenderToBitmapStream(IReadOnlyViewport viewport, IEnumerable<ILayer> layers, Color background = null)
+        public MemoryStream RenderToBitmapStream(IReadOnlyViewport viewport, IEnumerable<ILayer> layers, Color background = null, float pixelDensity = 1)
         {
             try
             {
                 var width = (int)viewport.Width;
                 var height = (int)viewport.Height;
-                var imageInfo = new SKImageInfo(width, height, SKImageInfo.PlatformColorType, SKAlphaType.Unpremul);
+                var imageInfo = new SKImageInfo((int)Math.Round(width * pixelDensity), (int)Math.Round(height * pixelDensity), 
+                    SKImageInfo.PlatformColorType, SKAlphaType.Unpremul);
 
                 using (var surface = SKSurface.Create(imageInfo))
                 {
                     if (surface == null) return null;
                     // Not sure if this is needed here:
                     if (background != null) surface.Canvas.Clear(background.ToSkia(1));
+                    surface.Canvas.Scale(pixelDensity, pixelDensity);
                     Render(surface.Canvas, viewport, layers);
                     using (var image = surface.Snapshot())
                     {
@@ -183,11 +185,7 @@ namespace Mapsui.Rendering.Skia
             // todo: We will need to select on style instead of layer
             
             layers = layers
-                .Select(l => 
-                    {
-                        var rl = l as RasterizingLayer;
-                        return rl == null ? l : rl.ChildLayer;
-                    })
+                .Select(l => (l is RasterizingLayer rl) ? rl.ChildLayer : l)
                 .Where(l => l.IsMapInfoLayer);
 
             var list = new List<MapInfoRecord>();

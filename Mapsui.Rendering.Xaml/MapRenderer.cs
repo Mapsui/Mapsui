@@ -112,15 +112,16 @@ namespace Mapsui.Rendering.Xaml
             return background == null ? null : new XamlMedia.SolidColorBrush {Color = background.ToXaml()};
         }
 
-        public MemoryStream RenderToBitmapStream(IReadOnlyViewport viewport, IEnumerable<ILayer> layers, Color background = null)
+        public MemoryStream RenderToBitmapStream(IReadOnlyViewport viewport, IEnumerable<ILayer> layers, Color background = null, float pixelDensity = 1)
         {
             MemoryStream bitmapStream = null;
             RunMethodOnStaThread(() => bitmapStream = RenderToBitmapStreamStatic(viewport, layers, _symbolCache));
             return bitmapStream;
         }
         
-        private static MemoryStream RenderToBitmapStreamStatic(IReadOnlyViewport viewport, IEnumerable<ILayer> layers, SymbolCache symbolCache)
+        private static MemoryStream RenderToBitmapStreamStatic(IReadOnlyViewport viewport, IEnumerable<ILayer> layers, SymbolCache symbolCache, float pixelDensity = 1)
         {
+            // todo: Use pixelDensity. This has no priority because even on desktop skia could be use instead.
             var canvas = new Canvas();
             Render(canvas, viewport, layers, symbolCache, true);
             var bitmapStream = BitmapRendering.BitmapConverter.ToBitmapStream(canvas, (int)viewport.Width, (int)viewport.Height);

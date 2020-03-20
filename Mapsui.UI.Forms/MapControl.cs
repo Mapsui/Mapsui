@@ -71,8 +71,6 @@ namespace Mapsui.UI.Forms
             Initialize();
         }
 
-        public float PixelDensity { get; set; }
-
         public float ScreenWidth => (float)Width;
 
         public float ScreenHeight => (float)Height;
@@ -249,7 +247,7 @@ namespace Mapsui.UI.Forms
 
         void OnPaintSurface(object sender, SKPaintGLSurfaceEventArgs skPaintSurfaceEventArgs)
         {
-            PixelDensity = (float)(skPaintSurfaceEventArgs.BackendRenderTarget.Width / Width);
+            if (PixelDensity <= 0) return;
 
             skPaintSurfaceEventArgs.Surface.Canvas.Scale(PixelDensity, PixelDensity);
 
@@ -715,6 +713,12 @@ namespace Mapsui.UI.Forms
         protected void Dispose(bool disposing)
         {
             Unsubscribe();
+        }
+
+        private float GetPixelDensity()
+        {
+            if (Width <= 0) return 0;
+            return (float)(CanvasSize.Width / Width);
         }
     }
 }
