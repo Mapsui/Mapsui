@@ -31,6 +31,11 @@ namespace Mapsui.UI
         void OpenBrowser(string url); //todo: Perhaps remove
 
         /// <summary>
+        /// The number of pixel per device independent unit
+        /// </summary>
+        float PixelDensity { get; }
+
+        /// <summary>
         /// Converts coordinates in pixels to device independent units (or DIP or DP).
         /// </summary>
         /// <param name="coordinateInPixels">Coordinate in pixels</param>

@@ -14,14 +14,14 @@ namespace Mapsui.Samples.Common.Maps
 
         public void Setup(IMapControl mapControl)
         {
-            mapControl.Map = CreateMap();
+            mapControl.Map = CreateMap(mapControl.PixelDensity);
         }
 
-        public static Map CreateMap()
+        public static Map CreateMap(float pixelDensity)
         {
             var map = new Map();
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
-            map.Layers.Add(new RasterizingLayer(CreateRandomPointLayer()));
+            map.Layers.Add(CreateRandomPointLayer());
             map.Home = n => n.NavigateTo(map.Layers[1].Envelope.Grow(map.Layers[1].Envelope.Width * 0.1));
             return map;
         }

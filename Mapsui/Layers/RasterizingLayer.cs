@@ -18,6 +18,7 @@ namespace Mapsui.Layers
         private readonly bool _onlyRerasterizeIfOutsideOverscan;
         private readonly double _overscan;
         private readonly double _renderResolutionMultiplier;
+        private readonly float _pixelDensity;
         private readonly object _syncLock = new object();
         private readonly Timer _timer;
         private bool _busy;
@@ -37,9 +38,9 @@ namespace Mapsui.Layers
         /// <param name="rasterizer">Rasterizer to use. null will use the default</param>
         /// <param name="overscanRatio">The ratio of the size of the rasterized output to the current viewport</param>
         /// <param name="onlyRerasterizeIfOutsideOverscan">
-        ///     Set the rerasterization policy. false will trigger a Rerasterisation on
-        ///     every viewport change. true will trigger a Rerasterisation only if the viewport moves outside the existing
-        ///     rasterisation.
+        ///     Set the rasterization policy. false will trigger a Rasterization on
+        ///     every viewport change. true will trigger a Rerasterization only if the viewport moves outside the existing
+        ///     rasterization.
         /// </param>
         public RasterizingLayer(
             ILayer layer,
@@ -47,7 +48,8 @@ namespace Mapsui.Layers
             double renderResolutionMultiplier = 1,
             IRenderer rasterizer = null,
             double overscanRatio = 1,
-            bool onlyRerasterizeIfOutsideOverscan = false)
+            bool onlyRerasterizeIfOutsideOverscan = false,
+            float pixelDensity = 1)
         {
             if (overscanRatio < 1)
                 throw new ArgumentException($"{nameof(overscanRatio)} must be >= 1", nameof(overscanRatio));
@@ -60,6 +62,7 @@ namespace Mapsui.Layers
             _cache = new MemoryProvider();
             _overscan = overscanRatio;
             _onlyRerasterizeIfOutsideOverscan = onlyRerasterizeIfOutsideOverscan;
+            _pixelDensity = pixelDensity;
             _layer.DataChanged += LayerOnDataChanged;
             _timer = new Timer(TimerElapsed, null, _delayBeforeRasterize, Timeout.Infinite);
         }
@@ -105,7 +108,7 @@ namespace Mapsui.Layers
 
                     _rasterizer = _rasterizer ?? DefaultRendererFactory.Create();
 
-                    var bitmapStream = _rasterizer.RenderToBitmapStream(viewport, new[] { _layer });
+                    var bitmapStream = _rasterizer.RenderToBitmapStream(viewport, new[] { _layer }, pixelDensity: _pixelDensity);
                     RemoveExistingFeatures();
 
                     if (bitmapStream != null)
