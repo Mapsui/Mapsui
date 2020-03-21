@@ -21,7 +21,7 @@ namespace Mapsui.Samples.Common.Maps
         {
             var map = new Map();
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
-            map.Layers.Add(CreateRandomPointLayer());
+            map.Layers.Add(new RasterizingLayer(CreateRandomPointLayer(), pixelDensity: pixelDensity));
             map.Home = n => n.NavigateTo(map.Layers[1].Envelope.Grow(map.Layers[1].Envelope.Width * 0.1));
             return map;
         }
