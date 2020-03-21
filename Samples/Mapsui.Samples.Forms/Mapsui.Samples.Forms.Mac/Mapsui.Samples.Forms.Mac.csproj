@@ -36,6 +36,7 @@
     <XamMacArch>
     </XamMacArch>
     <AOTMode>None</AOTMode>
+    <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <Optimize>true</Optimize>
