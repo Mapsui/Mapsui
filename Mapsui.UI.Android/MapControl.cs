@@ -9,6 +9,7 @@ using Android.Util;
 using Android.Views;
 using Mapsui.Geometries.Utilities;
 using Mapsui.Logging;
+using Mapsui.UI.Android.GestureListeners;
 using SkiaSharp.Views.Android;
 using Math = System.Math;
 using Point = Mapsui.Geometries.Point;
@@ -26,6 +27,7 @@ namespace Mapsui.UI.Android
         private View _canvas;
         private double _innerRotation;
         private GestureDetector _gestureDetector;
+        private OnLongClickGestureListener _onLongClickListener;
         private double _previousAngle;
         private double _previousRadius = 1f;
         private TouchMode _mode = TouchMode.None;
@@ -36,7 +38,44 @@ namespace Mapsui.UI.Android
         private Point _previousTouch = new Point();
         private SkiaRenderMode _renderMode = SkiaRenderMode.Regular;
 
-  public MapControl(Context context, IAttributeSet attrs) :
+        #region Events
+        /// <summary>
+        /// Called whenever map control is hit by a click 
+        /// </summary>
+        public new event EventHandler<TappedEventArgs> Click;
+        /// <summary>
+        /// Called whenever map control is hit by a double click 
+        /// </summary>
+        public event EventHandler<TappedEventArgs> DoubleClick;
+        /// <summary>
+        /// Called whenever map control is hit by a long click 
+        /// </summary>
+        public new event EventHandler<TappedEventArgs> LongClick;
+
+        /// <summary>
+        /// Called whenever map control is dragged
+        /// </summary>
+        public new event EventHandler<DraggedEventArgs> Drag;
+
+        /// <summary>
+        /// Called whenever map control is zoomed
+        /// </summary>
+        public event EventHandler<ZoomedEventArgs> Zoom;
+
+        /// <summary>
+        /// Called whenever the pointer hitting map control is up
+        /// </summary>
+        public event EventHandler<TappedEventArgs> PointerUp;
+
+        /// <summary>
+        /// Called whenever the pointer hitting map control is down 
+        /// </summary>
+        public event EventHandler<TappedEventArgs> PointerDown;
+
+        #endregion
+
+
+        public MapControl(Context context, IAttributeSet attrs) :
             base(context, attrs)
         {
             Initialize();
@@ -59,9 +98,12 @@ namespace Mapsui.UI.Android
             Map = new Map();
             Touch += MapView_Touch;
 
-            _gestureDetector = new GestureDetector(Context, new GestureDetector.SimpleOnGestureListener());
-            _gestureDetector.SingleTapConfirmed += OnSingleTapped;
+            _onLongClickListener = new OnLongClickGestureListener();
+            _gestureDetector = new GestureDetector(Context, _onLongClickListener);
             _gestureDetector.DoubleTap += OnDoubleTapped;
+            _onLongClickListener.LongClick += OnLongTapped;
+            _onLongClickListener.SingleClick += OnSingleTapped;
+            _gestureDetector.IsLongpressEnabled = true;
         }
 
         private void CanvasOnPaintSurface(object sender, SKPaintSurfaceEventArgs e)
@@ -99,13 +141,24 @@ namespace Mapsui.UI.Android
         private void OnDoubleTapped(object sender, GestureDetector.DoubleTapEventArgs e)
         {
             var position = GetScreenPosition(e.Event, this);
+            var positionInPixels = GetScreenPositionInPixels(e.Event, this);
             OnInfo(InvokeInfo(position, position, 2));
+            DoubleClick?.Invoke(sender, new TappedEventArgs(position, positionInPixels, 2));
         }
 
-        private void OnSingleTapped(object sender, GestureDetector.SingleTapConfirmedEventArgs e)
+        private void OnSingleTapped(object sender, GestureDetector.SingleTapUpEventArgs e)
         {
             var position = GetScreenPosition(e.Event, this);
+            var positionInPixels = GetScreenPositionInPixels(e.Event, this);
             OnInfo(InvokeInfo(position, position, 1));
+            Click?.Invoke(sender, new TappedEventArgs(position, positionInPixels, 1));
+        }
+
+        private void OnLongTapped(object sender, GestureDetector.LongPressEventArgs e)
+        {
+            var position = GetScreenPosition(e.Event, this);
+            var positionInPixels = GetScreenPositionInPixels(e.Event, this);
+            LongClick?.Invoke(sender, new TappedEventArgs(position, positionInPixels, 1));
         }
 
         protected override void OnSizeChanged(int width, int height, int oldWidth, int oldHeight)
@@ -141,11 +194,13 @@ namespace Mapsui.UI.Android
                 case MotionEventActions.Up:
                     Refresh();
                     _mode = TouchMode.None;
+                    PointerUp?.Invoke(this, new TappedEventArgs(GetScreenPosition(args.Event, this), GetScreenPositionInPixels(args.Event, this), 1));
                     break;
                 case MotionEventActions.Down:
                 case MotionEventActions.Pointer1Down:
                 case MotionEventActions.Pointer2Down:
                 case MotionEventActions.Pointer3Down:
+                    PointerDown?.Invoke(this, new TappedEventArgs(GetScreenPosition(args.Event, this), GetScreenPositionInPixels(args.Event, this), 1));
                     if (touchPoints.Count >= 2)
                     {
                         (_previousTouch, _previousRadius, _previousAngle) = GetPinchValues(touchPoints);
@@ -163,6 +218,7 @@ namespace Mapsui.UI.Android
                 case MotionEventActions.Pointer3Up:
                     // Remove the touchPoint that was released from the locations to reset the
                     // starting points of the move and rotation
+                    PointerUp?.Invoke(this, new TappedEventArgs(GetScreenPosition(args.Event, this), GetScreenPositionInPixels(args.Event, this),1));
                     touchPoints.RemoveAt(args.Event.ActionIndex);
 
                     if (touchPoints.Count >= 2)
@@ -187,12 +243,17 @@ namespace Mapsui.UI.Android
                                     return;
 
                                 var touch = touchPoints.First();
+
+                                Drag?.Invoke(this, new DraggedEventArgs(_previousTouch, touch));
+
                                 if (_previousTouch != null && !_previousTouch.IsEmpty())
                                 {
                                     _viewport.Transform(touch, _previousTouch);
                                     RefreshGraphics();
                                 }
                                 _previousTouch = touch;
+
+
                             }
                             break;
                         case TouchMode.Zooming:
@@ -200,8 +261,11 @@ namespace Mapsui.UI.Android
                                 if (touchPoints.Count < 2)
                                     return;
 
+
+
                                 var (previousTouch, previousRadius, previousAngle) = (_previousTouch, _previousRadius, _previousAngle);
                                 var (touch, radius, angle) = GetPinchValues(touchPoints);
+                                Zoom?.Invoke(this, new ZoomedEventArgs(touch, ZoomDirection.ZoomIn));
 
                                 double rotationDelta = 0;
 
@@ -289,7 +353,7 @@ namespace Mapsui.UI.Android
             {
                 // Both Invalidate and _canvas.Invalidate are necessary in different scenarios.
                 Invalidate();
-                _canvas?.Invalidate();
+        _canvas?.Invalidate();
             }
             catch (ObjectDisposedException e)
             {
@@ -361,7 +425,7 @@ namespace Mapsui.UI.Android
             return (new Point(centerX, centerY), radius, angle);
         }
 
-        private float ViewportWidth => ToDeviceIndependentUnits(Width);
+    private float ViewportWidth => ToDeviceIndependentUnits(Width);
         private float ViewportHeight => ToDeviceIndependentUnits(Height);
 
         /// <summary>
@@ -372,7 +436,7 @@ namespace Mapsui.UI.Android
         /// <returns>The pixels given as input translated to device independent units.</returns>
         private float ToDeviceIndependentUnits(float pixelCoordinate)
         {
-            return pixelCoordinate / PixelDensity;
+      return pixelCoordinate / PixelDensity;
         }
 
         private View StartRegularRenderMode()
