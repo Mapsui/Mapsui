@@ -18,7 +18,7 @@
     <PackageReference Include="BruTile" Version="2.1.2" />
     <PackageReference Include="SkiaSharp" Version="1.68.2-preview.39" />
     <PackageReference Include="SkiaSharp.Views" Version="1.68.2-preview.39" />
-    <PackageReference Include="BruTile" Version="2.0.2" />
+    <PackageReference Include="BruTile" Version="2.1.2" />
     <PackageReference Include="SkiaSharp" Version="1.68.1.1" />
     <PackageReference Include="SkiaSharp.Views" Version="1.68.1.1" />
   </ItemGroup>
