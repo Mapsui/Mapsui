@@ -225,7 +225,7 @@ namespace Mapsui.UI.Forms
             {
                 e.Handled = OnTouchEntered(_touches.Select(t => t.Value.Location).ToList());
             }
-            else if (e.ActionType == SKTouchAction.WheelChanged)
+      /*      else if (e.ActionType == SKTouchAction.WheelChanged)
             {
                 if (e.WheelDelta > 0)
                 {
@@ -235,7 +235,7 @@ namespace Mapsui.UI.Forms
                 {
                     OnZoomOut(location);
                 }
-            }
+            }*/
         }
 
         private bool IsAround(TouchEvent releasedTouch)
