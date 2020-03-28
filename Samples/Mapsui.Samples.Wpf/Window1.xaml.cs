@@ -11,6 +11,7 @@ using Mapsui.Samples.Wpf.Utilities;
 using Mapsui.UI;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Desktop;
+using SQLitePCL;
 
 namespace Mapsui.Samples.Wpf
 {
@@ -33,6 +34,7 @@ namespace Mapsui.Samples.Wpf
 
             FillComboBoxWithCategories();
             FillListWithSamples();
+            Batteries.Init();
         }
         
         private void RenderModeOnSelectionChanged(object sender, SelectionChangedEventArgs selectionChangedEventArgs)
