@@ -160,7 +160,7 @@
       <Version>2.1.2</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
-      <Version>6.2.9</Version>
+      <Version>6.2.10</Version>
     </PackageReference>
     <PackageReference Include="SkiaSharp">
       <Version>1.68.2-preview.45</Version>
@@ -169,7 +169,7 @@
       <Version>1.68.2-preview.45</Version>
     </PackageReference>
     <PackageReference Include="SQLitePCLRaw.bundle_green">
-      <Version>1.1.13</Version>
+      <Version>2.0.2</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

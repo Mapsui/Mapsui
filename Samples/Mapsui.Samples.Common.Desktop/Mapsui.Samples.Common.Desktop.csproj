@@ -83,7 +83,7 @@
   <ItemGroup>
     <PackageReference Include="BruTile" Version="2.1.2" />
     <PackageReference Include="BruTile.Desktop" Version="2.1.2" />
-    <PackageReference Include="System.Net.Http" Version="4.3.3" />
+    <PackageReference Include="System.Net.Http" Version="4.3.4" />
   </ItemGroup>
 
   <ItemGroup>
