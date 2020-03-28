@@ -105,9 +105,6 @@
     <Reference Include="BruTile, Version=2.1.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\BruTile.2.1.2\lib\net45\BruTile.dll</HintPath>
     </Reference>
-    <Reference Include="BruTile.MbTiles, Version=2.1.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\BruTile.MbTiles.2.1.2\lib\net45\BruTile.MbTiles.dll</HintPath>
-    </Reference>
     <Reference Include="HarfBuzzSharp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
       <HintPath>..\..\packages\HarfBuzzSharp.2.6.1.1\lib\net45\HarfBuzzSharp.dll</HintPath>
     </Reference>
@@ -140,21 +137,6 @@
     </Reference>
     <Reference Include="SkiaSharp.Views.WPF, Version=1.68.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
       <HintPath>..\..\packages\SkiaSharp.Views.WPF.1.68.2-preview.45\lib\net45\SkiaSharp.Views.WPF.dll</HintPath>
-    </Reference>
-    <Reference Include="SQLite-net, Version=1.6.292.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\sqlite-net-pcl.1.6.292\lib\netstandard1.1\SQLite-net.dll</HintPath>
-    </Reference>
-    <Reference Include="SQLitePCLRaw.batteries_v2, Version=2.0.2.669, Culture=neutral, PublicKeyToken=8226ea5df37bcae9, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\SQLitePCLRaw.bundle_green.2.0.2\lib\net461\SQLitePCLRaw.batteries_v2.dll</HintPath>
-    </Reference>
-    <Reference Include="SQLitePCLRaw.core, Version=2.0.2.669, Culture=neutral, PublicKeyToken=1488e028ca7ab535, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\SQLitePCLRaw.core.2.0.2\lib\netstandard2.0\SQLitePCLRaw.core.dll</HintPath>
-    </Reference>
-    <Reference Include="SQLitePCLRaw.nativelibrary, Version=2.0.2.669, Culture=neutral, PublicKeyToken=502ed628492ab262, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\SQLitePCLRaw.bundle_green.2.0.2\lib\net461\SQLitePCLRaw.nativelibrary.dll</HintPath>
-    </Reference>
-    <Reference Include="SQLitePCLRaw.provider.dynamic_cdecl, Version=2.0.2.669, Culture=neutral, PublicKeyToken=b68184102cba0b3b, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\SQLitePCLRaw.provider.dynamic_cdecl.2.0.2\lib\netstandard2.0\SQLitePCLRaw.provider.dynamic_cdecl.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -275,6 +257,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="app.config" />
     <None Include="OpenTK.dll.config" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
@@ -331,12 +314,10 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets'))" />
     <Error Condition="!Exists('..\..\packages\SkiaSharp.1.68.2-preview.45\build\net462\SkiaSharp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\SkiaSharp.1.68.2-preview.45\build\net462\SkiaSharp.targets'))" />
-    <Error Condition="!Exists('..\..\packages\SQLitePCLRaw.lib.e_sqlite3.2.0.2\build\net461\SQLitePCLRaw.lib.e_sqlite3.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\SQLitePCLRaw.lib.e_sqlite3.2.0.2\build\net461\SQLitePCLRaw.lib.e_sqlite3.targets'))" />
     <Error Condition="!Exists('..\..\packages\HarfBuzzSharp.2.6.1.1\build\net45\HarfBuzzSharp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\HarfBuzzSharp.2.6.1.1\build\net45\HarfBuzzSharp.targets'))" />
   </Target>
   <Import Project="..\..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets" Condition="Exists('..\..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets')" />
   <Import Project="..\..\packages\SkiaSharp.1.68.2-preview.45\build\net462\SkiaSharp.targets" Condition="Exists('..\..\packages\SkiaSharp.1.68.2-preview.45\build\net462\SkiaSharp.targets')" />
-  <Import Project="..\..\packages\SQLitePCLRaw.lib.e_sqlite3.2.0.2\build\net461\SQLitePCLRaw.lib.e_sqlite3.targets" Condition="Exists('..\..\packages\SQLitePCLRaw.lib.e_sqlite3.2.0.2\build\net461\SQLitePCLRaw.lib.e_sqlite3.targets')" />
   <Import Project="..\..\packages\HarfBuzzSharp.2.6.1.1\build\net45\HarfBuzzSharp.targets" Condition="Exists('..\..\packages\HarfBuzzSharp.2.6.1.1\build\net45\HarfBuzzSharp.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

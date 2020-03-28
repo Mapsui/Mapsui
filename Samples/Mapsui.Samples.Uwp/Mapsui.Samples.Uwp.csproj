@@ -168,9 +168,6 @@
     <PackageReference Include="SkiaSharp.Views">
       <Version>1.68.2-preview.45</Version>
     </PackageReference>
-    <PackageReference Include="SQLitePCLRaw.bundle_green">
-      <Version>2.0.2</Version>
-    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Mapsui.Samples.Uwp_TemporaryKey.pfx" />
