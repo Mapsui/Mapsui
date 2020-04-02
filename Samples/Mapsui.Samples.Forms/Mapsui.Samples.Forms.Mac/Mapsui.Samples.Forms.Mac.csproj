@@ -60,6 +60,9 @@
     <Reference Include="BruTile, Version=2.1.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\BruTile.2.1.2\lib\netstandard1.1\BruTile.dll</HintPath>
     </Reference>
+    <Reference Include="BruTile.MbTiles, Version=2.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\BruTile.MbTiles.2.1.2\lib\netstandard1.1\BruTile.MbTiles.dll</HintPath>
+    </Reference>
     <Reference Include="ConcurrentCollections, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\ConcurrentHashSet.1.1.0\lib\netstandard2.0\ConcurrentCollections.dll</HintPath>
     </Reference>
@@ -83,6 +86,21 @@
     </Reference>
     <Reference Include="SkiaSharp.Views.Mac, Version=1.68.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\SkiaSharp.Views.1.68.2-preview.45\lib\xamarinmac2.0\SkiaSharp.Views.Mac.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLite-net, Version=1.6.292.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\sqlite-net-pcl.1.6.292\lib\netstandard1.1\SQLite-net.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.batteries_green, Version=1.1.14.520, Culture=neutral, PublicKeyToken=a84b7dcfb1391f7f, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\SQLitePCLRaw.bundle_green.1.1.14\lib\Xamarin.Mac20\SQLitePCLRaw.batteries_green.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.batteries_v2, Version=1.1.14.520, Culture=neutral, PublicKeyToken=8226ea5df37bcae9, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\SQLitePCLRaw.bundle_green.1.1.14\lib\Xamarin.Mac20\SQLitePCLRaw.batteries_v2.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.core, Version=1.1.14.520, Culture=neutral, PublicKeyToken=1488e028ca7ab535, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\SQLitePCLRaw.core.1.1.14\lib\Xamarin.Mac20\SQLitePCLRaw.core.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.provider.e_sqlite3, Version=1.1.14.520, Culture=neutral, PublicKeyToken=9c301db686d0bd12, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\SQLitePCLRaw.provider.e_sqlite3.macos.1.1.14\lib\Xamarin.Mac20\SQLitePCLRaw.provider.e_sqlite3.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -134,6 +152,7 @@
     <ImageAsset Include="Assets.xcassets\Contents.json" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="Info.plist" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
@@ -176,7 +195,9 @@
     <Error Condition="!Exists('..\..\..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets'))" />
     <Error Condition="!Exists('..\..\..\packages\Xamarin.Forms.4.5.0.495\build\Xamarin.Forms.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\Xamarin.Forms.4.5.0.495\build\Xamarin.Forms.props'))" />
     <Error Condition="!Exists('..\..\..\packages\Xamarin.Forms.4.5.0.495\build\Xamarin.Forms.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\Xamarin.Forms.4.5.0.495\build\Xamarin.Forms.targets'))" />
+    <Error Condition="!Exists('..\..\..\packages\SQLitePCLRaw.lib.e_sqlite3.osx.1.1.14\build\Xamarin.Mac20\SQLitePCLRaw.lib.e_sqlite3.osx.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\SQLitePCLRaw.lib.e_sqlite3.osx.1.1.14\build\Xamarin.Mac20\SQLitePCLRaw.lib.e_sqlite3.osx.targets'))" />
   </Target>
   <Import Project="..\..\..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets" Condition="Exists('..\..\..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets')" />
   <Import Project="..\..\..\packages\Xamarin.Forms.4.5.0.495\build\Xamarin.Forms.targets" Condition="Exists('..\..\..\packages\Xamarin.Forms.4.5.0.495\build\Xamarin.Forms.targets')" />
+  <Import Project="..\..\..\packages\SQLitePCLRaw.lib.e_sqlite3.osx.1.1.14\build\Xamarin.Mac20\SQLitePCLRaw.lib.e_sqlite3.osx.targets" Condition="Exists('..\..\..\packages\SQLitePCLRaw.lib.e_sqlite3.osx.1.1.14\build\Xamarin.Mac20\SQLitePCLRaw.lib.e_sqlite3.osx.targets')" />
 </Project>
