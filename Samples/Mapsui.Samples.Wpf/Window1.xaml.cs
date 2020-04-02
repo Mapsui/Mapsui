@@ -34,7 +34,6 @@ namespace Mapsui.Samples.Wpf
 
             FillComboBoxWithCategories();
             FillListWithSamples();
-            Batteries.Init();
         }
         
         private void RenderModeOnSelectionChanged(object sender, SelectionChangedEventArgs selectionChangedEventArgs)
