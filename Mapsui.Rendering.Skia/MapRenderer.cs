@@ -50,7 +50,8 @@ namespace Mapsui.Rendering.Skia
         public void Render(object target, IReadOnlyViewport viewport, IEnumerable<ILayer> layers,
             IEnumerable<IWidget> widgets, Color background = null)
         {
-            var allWidgets = layers.Select(l => l.Attribution).Where(w => w != null).ToList().Concat(widgets);
+            var attributions = layers.Where(l => l.Enabled).Select(l => l.Attribution).Where(w => w != null).ToList();
+            var allWidgets = widgets.Concat(attributions);
             RenderTypeSave((SKCanvas)target, viewport, layers, allWidgets, background);
         }
 
