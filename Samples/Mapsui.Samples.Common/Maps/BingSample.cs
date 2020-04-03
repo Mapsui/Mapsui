@@ -4,6 +4,7 @@ using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Styles;
 using Mapsui.UI;
+using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Common.Maps
 {
@@ -19,6 +20,9 @@ namespace Mapsui.Samples.Common.Maps
         public static Map CreateMap(KnownTileSource source = KnownTileSource.BingAerial)
         {
             var map = new Map();
+
+            map.Layers.Add(OpenStreetMap.CreateTileLayer());
+
             var apiKey = "Enter your api key here"; // Contact Microsoft about how to use this
             map.Layers.Add(new TileLayer(KnownTileSources.Create(source, apiKey), 
                 fetchStrategy: new FetchStrategy()) // FetchStrategy get tiles from higher levels in advance
