@@ -37,6 +37,8 @@ namespace Mapsui.Layers
         {
             var copy = _layers.ToArray().ToList();
 
+            _layers = new ConcurrentQueue<ILayer>();
+
             foreach (var layer in copy)
             {
                 if (layer is IAsyncDataFetcher asyncLayer)
@@ -46,8 +48,6 @@ namespace Mapsui.Layers
                 }
                 OnLayerRemoved(layer);
             }
-
-            _layers = new ConcurrentQueue<ILayer>(copy);
         }
 
         public bool Contains(ILayer item)
