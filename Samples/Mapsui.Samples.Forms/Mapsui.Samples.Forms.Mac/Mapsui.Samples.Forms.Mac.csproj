@@ -84,6 +84,9 @@
     <Reference Include="SkiaSharp.Views.Mac, Version=1.68.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\SkiaSharp.Views.1.68.2-preview.50\lib\xamarinmac2.0\SkiaSharp.Views.Mac.dll</HintPath>
     </Reference>
+    <Reference Include="SQLitePCLRaw.core, Version=1.1.14.520, Culture=neutral, PublicKeyToken=1488e028ca7ab535, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\SQLitePCLRaw.core.1.1.14\lib\Xamarin.Mac20\SQLitePCLRaw.core.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\System.Buffers.4.5.1\lib\netstandard2.0\System.Buffers.dll</HintPath>
@@ -118,9 +121,6 @@
     </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Serialization" />
-    <Reference Include="SQLitePCLRaw.core">
-      <HintPath>..\..\..\packages\SQLitePCLRaw.core.2.0.2\lib\netstandard2.0\SQLitePCLRaw.core.dll</HintPath>
-    </Reference>
     <Reference Include="SQLitePCLRaw.provider.e_sqlite3">
       <HintPath>..\..\..\packages\SQLitePCLRaw.provider.e_sqlite3.macos.1.1.14\lib\Xamarin.Mac20\SQLitePCLRaw.provider.e_sqlite3.dll</HintPath>
     </Reference>
