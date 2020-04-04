@@ -119,16 +119,16 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Serialization" />
     <Reference Include="SQLitePCLRaw.core">
-      <HintPath>..\..\..\packages\SQLitePCLRaw.core.1.1.13\lib\Xamarin.Mac20\SQLitePCLRaw.core.dll</HintPath>
+      <HintPath>..\..\..\packages\SQLitePCLRaw.core.2.0.2\lib\netstandard2.0\SQLitePCLRaw.core.dll</HintPath>
     </Reference>
     <Reference Include="SQLitePCLRaw.provider.e_sqlite3">
-      <HintPath>..\..\..\packages\SQLitePCLRaw.provider.e_sqlite3.macos.1.1.13\lib\Xamarin.Mac20\SQLitePCLRaw.provider.e_sqlite3.dll</HintPath>
+      <HintPath>..\..\..\packages\SQLitePCLRaw.provider.e_sqlite3.macos.1.1.14\lib\Xamarin.Mac20\SQLitePCLRaw.provider.e_sqlite3.dll</HintPath>
     </Reference>
     <Reference Include="SQLitePCLRaw.batteries_green">
-      <HintPath>..\..\..\packages\SQLitePCLRaw.bundle_green.1.1.13\lib\Xamarin.Mac20\SQLitePCLRaw.batteries_green.dll</HintPath>
+      <HintPath>..\..\..\packages\SQLitePCLRaw.bundle_green.1.1.14\lib\Xamarin.Mac20\SQLitePCLRaw.batteries_green.dll</HintPath>
     </Reference>
     <Reference Include="SQLitePCLRaw.batteries_v2">
-      <HintPath>..\..\..\packages\SQLitePCLRaw.bundle_green.1.1.13\lib\Xamarin.Mac20\SQLitePCLRaw.batteries_v2.dll</HintPath>
+      <HintPath>..\..\..\packages\SQLitePCLRaw.bundle_green.1.1.14\lib\Xamarin.Mac20\SQLitePCLRaw.batteries_v2.dll</HintPath>
     </Reference>
     <Reference Include="SQLite-net">
       <HintPath>..\..\..\packages\sqlite-net-pcl.1.6.292\lib\netstandard1.1\SQLite-net.dll</HintPath>
@@ -198,5 +198,5 @@
   </Target>
   <Import Project="..\..\..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets" Condition="Exists('..\..\..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets')" />
   <Import Project="..\..\..\packages\Xamarin.Forms.4.5.0.495\build\Xamarin.Forms.targets" Condition="Exists('..\..\..\packages\Xamarin.Forms.4.5.0.495\build\Xamarin.Forms.targets')" />
-  <Import Project="..\..\..\packages\SQLitePCLRaw.lib.e_sqlite3.osx.1.1.13\build\Xamarin.Mac20\SQLitePCLRaw.lib.e_sqlite3.osx.targets" Condition="Exists('..\..\..\packages\SQLitePCLRaw.lib.e_sqlite3.osx.1.1.13\build\Xamarin.Mac20\SQLitePCLRaw.lib.e_sqlite3.osx.targets')" />
+  <Import Project="..\..\..\packages\SQLitePCLRaw.lib.e_sqlite3.osx.1.1.14\build\Xamarin.Mac20\SQLitePCLRaw.lib.e_sqlite3.osx.targets" Condition="Exists('..\..\..\packages\SQLitePCLRaw.lib.e_sqlite3.osx.1.1.14\build\Xamarin.Mac20\SQLitePCLRaw.lib.e_sqlite3.osx.targets')" />
 </Project>
