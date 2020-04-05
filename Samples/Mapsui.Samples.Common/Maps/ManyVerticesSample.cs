@@ -18,15 +18,15 @@ namespace Mapsui.Samples.Common.Maps
 
         public void Setup(IMapControl mapControl)
         {
-            mapControl.Map = CreateMap();
+            mapControl.Map = CreateMap(mapControl.PixelDensity);
         }
 
-        public static Map CreateMap()
+        public static Map CreateMap(float pixelDensity)
         {
             var map = new Map();
 
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
-            map.Layers.Add(new RasterizingLayer(CreatePointLayer()));
+            map.Layers.Add(new RasterizingLayer(CreatePointLayer(), pixelDensity: pixelDensity));
             map.Home = n => n.NavigateTo(map.Layers[1].Envelope.Grow(map.Layers[1].Envelope.Width * 0.25));
             return map;
         }

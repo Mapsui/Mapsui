@@ -14,20 +14,21 @@ namespace Mapsui.Samples.Common.Maps
 
         public void Setup(IMapControl mapControl)
         {
-            mapControl.Map = CreateMap();
+            mapControl.Map = CreateMap(mapControl.PixelDensity);
         }
 
-        public static Map CreateMap()
+        public static Map CreateMap(float pixelDensity)
         {
             var map = new Map();
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
-            map.Layers.Add(new RasterizingLayer(CreateRandomPointLayer()));
+            map.Layers.Add(new RasterizingLayer(CreateRandomPointLayer(), pixelDensity: pixelDensity));
+            map.Home = n => n.NavigateTo(map.Layers[1].Envelope.Grow(map.Layers[1].Envelope.Width * 0.1));
             return map;
         }
 
         private static MemoryLayer CreateRandomPointLayer()
         {
-            var rnd = new Random();
+            var rnd = new Random(3462); // Fix the random seed so the features don't move after a refresh
             var features = new Features();
             for (var i = 0; i < 100; i++)
             {

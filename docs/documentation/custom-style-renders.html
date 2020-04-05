@@ -89,8 +89,8 @@
 <li>Register the association of the <em>custom style</em> to the <em>custom style renderer</em> as in the line below. The consequence will be that if the Mapsui renderer detects this style it will call the Draw method on the style renderer. </li>
 </ul>
 <p>This is how you register the association of a custom style to a custom style renderer</p>
-<pre><code class="lang-charp">mapControl.Renderer.StyleRenderers.Add(typeof(CustomStyle), new SkiaCustomStyleRenderer());```.
-</code></pre><p>This is the ISkiaStyleRenderer interface:</p>
+<pre><code class="lang-csharp">mapControl.Renderer.StyleRenderers.Add(typeof(CustomStyle), new SkiaCustomStyleRenderer());
+</code></pre><p>This is the ISkiaStyleRenderer interface that you need to implement:</p>
 <pre><code class="lang-csharp">public interface ISkiaStyleRenderer : IStyleRenderer
 {
   bool Draw(SKCanvas canvas, IReadOnlyViewport viewport, ILayer layer, IFeature feature, IStyle style, ISymbolCache symbolCache);

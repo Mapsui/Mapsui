@@ -170,6 +170,7 @@ namespace Mapsui.UI.Uwp
             if (Renderer == null) return;
             if (_map == null) return;
             if (!Viewport.HasSize) return;
+            if (PixelDensity <= 0) return;
 
             e.Surface.Canvas.Scale(PixelDensity, PixelDensity);
 
@@ -223,8 +224,6 @@ namespace Mapsui.UI.Uwp
             e.Handled = true;
         }
 
-        public float PixelDensity => (float)DisplayInformation.GetForCurrentView().RawPixelsPerViewPixel;
-
         public void OpenBrowser(string url)
         {
             Task.Run(() => Launcher.LaunchUriAsync(new Uri(url)));
@@ -232,5 +231,11 @@ namespace Mapsui.UI.Uwp
 
         private float ViewportWidth => (float)ActualWidth;
         private float ViewportHeight => (float)ActualHeight;
+
+        private float GetPixelDensity()
+        {
+            return (float)DisplayInformation.GetForCurrentView().RawPixelsPerViewPixel;
+        }
+
     }
 }

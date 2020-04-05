@@ -40,7 +40,7 @@ namespace Mapsui.Styles
         /// <summary>
         /// Defines how line parts are join together
         /// </summary>
-        public StrokeJoin StrokeJoin { get; set; } = StrokeJoin.Miter;
+        public StrokeJoin StrokeJoin { get; set; } = StrokeJoin.Round;
 
         /// <summary>
         /// Defines up to which width of line StrokeJoin is used

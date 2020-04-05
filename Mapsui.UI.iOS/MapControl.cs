@@ -17,7 +17,7 @@ namespace Mapsui.UI.iOS
     {
         private readonly SKGLView _canvas = new SKGLView();
         private double _innerRotation;
-        
+
         public MapControl(CGRect frame)
             : base(frame)
         {
@@ -40,17 +40,22 @@ namespace Mapsui.UI.iOS
             _canvas.PaintSurface += OnPaintSurface;
             AddSubview(_canvas);
 
-            AddConstraints(new[] {
-                NSLayoutConstraint.Create(this, NSLayoutAttribute.Leading, NSLayoutRelation.Equal, _canvas, NSLayoutAttribute.Leading, 1.0f, 0.0f),
-                NSLayoutConstraint.Create(this, NSLayoutAttribute.Trailing, NSLayoutRelation.Equal, _canvas, NSLayoutAttribute.Trailing, 1.0f, 0.0f),
-                NSLayoutConstraint.Create(this, NSLayoutAttribute.Top, NSLayoutRelation.Equal, _canvas, NSLayoutAttribute.Top, 1.0f, 0.0f),
-                NSLayoutConstraint.Create(this, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, _canvas, NSLayoutAttribute.Bottom, 1.0f, 0.0f)
+            AddConstraints(new[]
+            {
+                NSLayoutConstraint.Create(this, NSLayoutAttribute.Leading, NSLayoutRelation.Equal, _canvas,
+                    NSLayoutAttribute.Leading, 1.0f, 0.0f),
+                NSLayoutConstraint.Create(this, NSLayoutAttribute.Trailing, NSLayoutRelation.Equal, _canvas,
+                    NSLayoutAttribute.Trailing, 1.0f, 0.0f),
+                NSLayoutConstraint.Create(this, NSLayoutAttribute.Top, NSLayoutRelation.Equal, _canvas,
+                    NSLayoutAttribute.Top, 1.0f, 0.0f),
+                NSLayoutConstraint.Create(this, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, _canvas,
+                    NSLayoutAttribute.Bottom, 1.0f, 0.0f)
             });
 
             ClipsToBounds = true;
             MultipleTouchEnabled = true;
             UserInteractionEnabled = true;
-            
+
             var doubleTapGestureRecognizer = new UITapGestureRecognizer(OnDoubleTapped)
             {
                 NumberOfTapsRequired = 2,
@@ -67,25 +72,25 @@ namespace Mapsui.UI.iOS
             AddGestureRecognizer(tapGestureRecognizer);
 
             _viewport.SetSize(ViewportWidth, ViewportHeight);
-
         }
 
-        public float PixelDensity => (float) _canvas.ContentScaleFactor; // todo: Check if I need canvas
 
         private void OnDoubleTapped(UITapGestureRecognizer gesture)
         {
             var position = GetScreenPosition(gesture.LocationInView(this));
             OnInfo(InvokeInfo(position, position, 2));
         }
-        
+
         private void OnSingleTapped(UITapGestureRecognizer gesture)
         {
             var position = GetScreenPosition(gesture.LocationInView(this));
             OnInfo(InvokeInfo(position, position, 1));
         }
-       
+
         void OnPaintSurface(object sender, SKPaintGLSurfaceEventArgs args)
         {
+            if (PixelDensity <= 0) return;
+
             args.Surface.Canvas.Scale(PixelDensity, PixelDensity);
 
             Renderer.Render(args.Surface.Canvas, new Viewport(Viewport), _map.Layers, _map.Widgets, _map.BackColor);
@@ -117,11 +122,11 @@ namespace Mapsui.UI.iOS
             }
             else if (evt.AllTouches.Count >= 2)
             {
-                var previousLocation = evt.AllTouches.Select(t => ((UITouch)t).PreviousLocationInView(this))
-                                           .Select(p => new Point(p.X, p.Y)).ToList();
+                var previousLocation = evt.AllTouches.Select(t => ((UITouch) t).PreviousLocationInView(this))
+                    .Select(p => new Point(p.X, p.Y)).ToList();
 
-                var locations = evt.AllTouches.Select(t => ((UITouch)t).LocationInView(this))
-                                        .Select(p => new Point(p.X, p.Y)).ToList();
+                var locations = evt.AllTouches.Select(t => ((UITouch) t).LocationInView(this))
+                    .Select(p => new Point(p.X, p.Y)).ToList();
 
                 var (previousCenter, previousRadius, previousAngle) = GetPinchValues(previousLocation);
                 var (center, radius, angle) = GetPinchValues(locations);
@@ -168,12 +173,12 @@ namespace Mapsui.UI.iOS
         {
             return new Point(point.X, point.Y);
         }
-       
+
         private void RunOnUIThread(Action action)
         {
             DispatchQueue.MainQueue.DispatchAsync(action);
         }
-        
+
         public void RefreshGraphics()
         {
             RunOnUIThread(() =>
@@ -244,7 +249,12 @@ namespace Mapsui.UI.iOS
             return (new Point(centerX, centerY), radius, angle);
         }
 
-        private float ViewportWidth => (float)_canvas.Frame.Width; // todo: check if we need _canvas
-        private float ViewportHeight => (float)_canvas.Frame.Height; // todo: check if we need _canvas
+        private float ViewportWidth => (float) _canvas.Frame.Width; // todo: check if we need _canvas
+        private float ViewportHeight => (float) _canvas.Frame.Height; // todo: check if we need _canvas
+
+        private float GetPixelDensity()
+        {
+            return (float) _canvas.ContentScaleFactor; // todo: Check if I need canvas        
+        }
     }
 }

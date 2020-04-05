@@ -1134,7 +1134,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Layers.RasterizingLayer.html",
-          "hash": "y5cOIc+1ADV5Ymwx5pNN9g=="
+          "hash": "hfStopqCfarzZdr+NJtJLg=="
         }
       },
       "is_incremental": false,
@@ -2442,7 +2442,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Rendering.IRenderer.html",
-          "hash": "p15xXiZ5EZ76l8nH2DIEsA=="
+          "hash": "+uEtFNCBu4MvNiRjepbZ4Q=="
         }
       },
       "is_incremental": false,
@@ -2682,7 +2682,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Rendering.Skia.MapRenderer.IdentityComparer-1.html",
-          "hash": "BKRwpBOtItYtMNbjbBEOHQ=="
+          "hash": "E+kIUCCb9yUqBwmCrLOw7A=="
         }
       },
       "is_incremental": false,
@@ -2694,7 +2694,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Rendering.Skia.MapRenderer.html",
-          "hash": "J/cnGP8G+2lebgJd8uuz4g=="
+          "hash": "m3PC7yoJhrjJ9le5LGNqtg=="
         }
       },
       "is_incremental": false,
@@ -3054,7 +3054,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Rendering.Xaml.MapRenderer.html",
-          "hash": "jM2EtSeN5Ifedl6HlDr8Kg=="
+          "hash": "IuK9dpV5G/YnYYPZbgAn4A=="
         }
       },
       "is_incremental": false,
@@ -3726,7 +3726,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Android.MapControl.html",
-          "hash": "/OCsaszow898HoH/07upBg=="
+          "hash": "t4TsaO2NjoIi68oSei6VxA=="
         }
       },
       "is_incremental": false,
@@ -3966,7 +3966,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Forms.MapControl.html",
-          "hash": "Iv4VwyYxMtjgPIyo0pGhpg=="
+          "hash": "KGkWy5eWh64IJVgNpjIqrg=="
         }
       },
       "is_incremental": false,
@@ -4146,7 +4146,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.IMapControl.html",
-          "hash": "fqh63zk3ievA26g9A5K7Dg=="
+          "hash": "JVUjuhj2KPdLtFexFh3vOQ=="
         }
       },
       "is_incremental": false,
@@ -4410,7 +4410,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Wpf.MapControl.html",
-          "hash": "NOVS3NzVkuGRDLI4bTro5A=="
+          "hash": "sJ9seAaLJRRt5nrvK4BX+g=="
         }
       },
       "is_incremental": false,
@@ -4518,7 +4518,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.iOS.MapControl.html",
-          "hash": "12a2EiHzpERsrhLZG9Tbvg=="
+          "hash": "2vsMZwHTatN0RcDhjPXkfg=="
         }
       },
       "is_incremental": false,
@@ -5262,7 +5262,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/custom-style-renders.html",
-          "hash": "72Mput7SUC58I0VeKRjU2A=="
+          "hash": "h3OZYsVIdJiw8dbXENmn7A=="
         }
       },
       "is_incremental": false,
@@ -5449,7 +5449,7 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "qfhO9Z43B6Eo7BZINntBsg=="
+          "hash": "wM1LrOfdIdK9lND6ku/73w=="
         }
       },
       "is_incremental": false,

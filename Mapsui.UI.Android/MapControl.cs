@@ -17,8 +17,8 @@ namespace Mapsui.UI.Android
 {
     public enum SkiaRenderMode
     {
-        Accelerated,
-        Regular
+        Hardware,
+        Software
     }
 
     public partial class MapControl : ViewGroup, IMapControl
@@ -34,11 +34,9 @@ namespace Mapsui.UI.Android
         /// Saver for center before last pinch movement
         /// </summary>
         private Point _previousTouch = new Point();
-        private SkiaRenderMode _renderMode = SkiaRenderMode.Regular;
+        private SkiaRenderMode _renderMode = SkiaRenderMode.Hardware;
 
-        public float PixelDensity => Resources.DisplayMetrics.Density;
-
-        public MapControl(Context context, IAttributeSet attrs) :
+  public MapControl(Context context, IAttributeSet attrs) :
             base(context, attrs)
         {
             Initialize();
@@ -53,7 +51,7 @@ namespace Mapsui.UI.Android
         public void Initialize()
         {
             SetBackgroundColor(Color.Transparent);
-            _canvas = StartRegularRenderMode();
+            _canvas = RenderMode == SkiaRenderMode.Software ? StartSoftwareRenderMode() : StartHardwareRenderMode();
             _mainLooperHandler = new Handler(Looper.MainLooper);
 
             SetViewportSize(); // todo: check if size is available, perhaps we need a load event
@@ -68,6 +66,8 @@ namespace Mapsui.UI.Android
 
         private void CanvasOnPaintSurface(object sender, SKPaintSurfaceEventArgs e)
         {
+            if (PixelDensity <= 0) return;
+
             e.Surface.Canvas.Scale(PixelDensity, PixelDensity);
 
             Renderer.Render(e.Surface.Canvas, new Viewport(Viewport), _map.Layers, _map.Widgets, _map.BackColor);
@@ -81,15 +81,15 @@ namespace Mapsui.UI.Android
                 if (_renderMode == value) return;
 
                 _renderMode = value;
-                if (_renderMode == SkiaRenderMode.Accelerated)
+                if (_renderMode == SkiaRenderMode.Hardware)
                 {
-                    StopRegularRenderMode(_canvas);
-                    _canvas = StartAcceleratedRenderMode();
+                    StopSoftwareRenderMode(_canvas);
+                    _canvas = StartHardwareRenderMode();
                 }
                 else
                 {
-                    StopAcceleratedRenderMode(_canvas);
-                    _canvas = StartRegularRenderMode();
+                    StopHardwareRenderMode(_canvas);
+                    _canvas = StartSoftwareRenderMode();
                 }
                 RefreshGraphics();
                 OnPropertyChanged();
@@ -375,26 +375,25 @@ namespace Mapsui.UI.Android
             return pixelCoordinate / PixelDensity;
         }
 
-        private View StartRegularRenderMode()
+        private View StartSoftwareRenderMode()
         {
             var canvas = new SKCanvasView(Context);
-            canvas.PaintSurface += CanvasOnPaintSurface; ;
+            canvas.PaintSurface += CanvasOnPaintSurface;
             AddView(canvas);
             return canvas;
         }
 
-        private void StopRegularRenderMode(View canvas)
+        private void StopSoftwareRenderMode(View canvas)
         {
             if (canvas is SKCanvasView canvasView)
             {
                 canvasView.PaintSurface -= CanvasOnPaintSurface;
                 RemoveView(canvasView);
                 // Let's not dispose. The Paint callback might still be busy.
-                canvasView = null;
             }
         }
 
-        private View StartAcceleratedRenderMode()
+        private View StartHardwareRenderMode()
         {
             var canvas = new SKGLSurfaceView(Context);
             canvas.PaintSurface += CanvasOnPaintSurfaceGL;
@@ -402,15 +401,19 @@ namespace Mapsui.UI.Android
             return canvas;
         }
 
-        private void StopAcceleratedRenderMode(View canvas)
+        private void StopHardwareRenderMode(View canvas)
         {
             if (canvas is SKGLSurfaceView surfaceView)
             {
                 surfaceView.PaintSurface -= CanvasOnPaintSurfaceGL;
                 RemoveView(surfaceView);
                 // Let's not dispose. The Paint callback might still be busy.
-                surfaceView = null;
             }
+        }
+
+        private float GetPixelDensity()
+        {
+            return Resources.DisplayMetrics.Density;
         }
     }
 }
