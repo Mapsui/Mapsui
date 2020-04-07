@@ -52,25 +52,9 @@ namespace Mapsui.Rendering.Skia
         {
             var attributions = layers.Where(l => l.Enabled).Select(l => l.Attribution).Where(w => w != null).ToList();
 
-            PlaceAboveEachOther(layers);
-
             var allWidgets = widgets.Concat(attributions);
 
             RenderTypeSave((SKCanvas)target, viewport, layers, allWidgets, background);
-        }
-
-        public static void PlaceAboveEachOther(IEnumerable<ILayer> layers)
-        {
-            var attributions = layers.Where(l => l.Enabled).Select(l => l.Attribution).Where(w => w != null).ToList();
-            var counter = 0;
-            var attributionHeight = 16;
-            var startOffset = 3;
-
-            foreach (var attribution in attributions)
-            {
-                attribution.MarginY = startOffset + counter * attributionHeight;
-                counter++;
-            }
         }
 
         private void RenderTypeSave(SKCanvas canvas, IReadOnlyViewport viewport, IEnumerable<ILayer> layers,
