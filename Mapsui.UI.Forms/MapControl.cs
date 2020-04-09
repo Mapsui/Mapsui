@@ -55,6 +55,11 @@ namespace Mapsui.UI.Forms
         private Geometries.Point _previousCenter;
 
         /// <summary>
+        /// Flag for updating more than one thing, so that map isn't refreshed
+        /// </summary>
+        internal bool _updating = false;
+
+        /// <summary>
         /// Saver for angle before last pinch movement
         /// </summary>
         private double _previousAngle;
@@ -263,6 +268,9 @@ namespace Mapsui.UI.Forms
 
         public void RefreshGraphics()
         {
+            if (_updating)
+                return;
+
             if (!_initialized && GRContext == null)
             {
                 // Could this be null before Home is called? If so we should change the logic.

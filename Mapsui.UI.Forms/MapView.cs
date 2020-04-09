@@ -21,7 +21,6 @@ namespace Mapsui.UI.Forms
     public class MapView : ContentView, IMapControl, INotifyPropertyChanged, IEnumerable<Pin>
     {
         internal MapControl _mapControl;
-        private bool _updating = false;
         private const string CalloutLayerName = "Callouts";
         private const string PinLayerName = "Pins";
         private const string DrawableLayerName = "Drawables";
@@ -465,8 +464,7 @@ namespace Mapsui.UI.Forms
         /// <inheritdoc />
         public void Refresh()
         {
-            if (!_updating)
-                _mapControl.Refresh();
+            _mapControl.Refresh();
         }
 
         /// <inheritdoc />
@@ -484,8 +482,7 @@ namespace Mapsui.UI.Forms
         /// <inheritdoc />
         public void RefreshGraphics()
         {
-            if (!_updating)
-                _mapControl.RefreshGraphics();
+            _mapControl.RefreshGraphics();
         }
 
         /// <inheritdoc />
@@ -971,7 +968,7 @@ namespace Mapsui.UI.Forms
         /// </summary>
         private void AddLayers()
         {
-            _updating = true;
+            _mapControl._updating = true;
 
             // Add MapView layers
             _mapControl.Map.Layers.Add(_mapDrawableLayer);
@@ -979,7 +976,7 @@ namespace Mapsui.UI.Forms
             _mapControl.Map.Layers.Add(_mapCalloutLayer);
             _mapControl.Map.Layers.Add(MyLocationLayer);
 
-            _updating = false;
+            _mapControl._updating = false;
 
             Refresh();
         }
@@ -989,7 +986,7 @@ namespace Mapsui.UI.Forms
         /// </summary>
         private void RemoveLayers()
         {
-            _updating = true;
+            _mapControl._updating = true;
 
             // Remove MapView layers
             _mapControl.Map.Layers.Remove(MyLocationLayer);
@@ -997,7 +994,7 @@ namespace Mapsui.UI.Forms
             _mapControl.Map.Layers.Remove(_mapPinLayer);
             _mapControl.Map.Layers.Remove(_mapDrawableLayer);
 
-            _updating = false;
+            _mapControl._updating = false;
 
             Refresh();
         }
