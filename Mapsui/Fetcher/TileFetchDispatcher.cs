@@ -110,7 +110,7 @@ namespace Mapsui.Fetcher
 
                 Busy = _tilesInProgress.Count > 0 || _tilesMissing.Count > 0;
 
-                DataChanged?.Invoke(this, new DataChangedEventArgs(exception, false, null));
+                DataChanged?.Invoke(this, new DataChangedEventArgs(exception, false, tileInfo));
             }
         }
 
