@@ -109,23 +109,17 @@ namespace Mapsui
         {
             var resolution = ZoomHelper.ZoomIn(_map.Resolutions, _viewport.Resolution);
             ZoomTo(resolution, centerOfZoom);
-
-            Navigated?.Invoke(this, EventArgs.Empty);
         }
 
         public void ZoomOut(Point centerOfZoom)
         {
             var resolution = ZoomHelper.ZoomOut(_map.Resolutions, _viewport.Resolution);
             ZoomTo(resolution, centerOfZoom);
-
-            Navigated?.Invoke(this, EventArgs.Empty);
         }
 
         public void NavigateToFullEnvelope(ScaleMethod scaleMethod = ScaleMethod.Fill)
         {
             NavigateTo(_map.Envelope, scaleMethod);
-
-            Navigated?.Invoke(this, EventArgs.Empty);
         }
 
         public void ZoomTo(double resolution, Point centerOfZoom)
