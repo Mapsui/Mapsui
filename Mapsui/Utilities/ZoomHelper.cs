@@ -22,18 +22,25 @@ namespace Mapsui.Utilities
 {
     public static class ZoomHelper
     {
-        public static double ZoomIn(IReadOnlyList<double> resolutions, double resolution)
+        public static double ZoomIn(IReadOnlyList<double> resolutions, double resolution, bool overzoom = false)
         {
             if (resolutions == null || resolutions.Count == 0) return resolution / 2.0;
 
             foreach (var r in resolutions)
                 if (r < resolution) return r;
-            return resolutions[resolutions.Count - 1];
+
+            if (overzoom)
+                return resolution / 2.0;
+            else
+                return resolutions[resolutions.Count - 1];
         }
         
-        public static double ZoomOut(IReadOnlyList<double> resolutions, double resolution)
+        public static double ZoomOut(IReadOnlyList<double> resolutions, double resolution, bool overzoom = false)
         {
             if (resolutions == null || resolutions.Count == 0) return resolution * 2.0;
+
+            if (overzoom && resolutions[resolutions.Count - 1] > resolution)
+                return Math.Min(resolution * 2.0, resolutions[resolutions.Count - 1]);
 
             for (var i = resolutions.Count - 1; i >= 0; i--)
                 if (resolutions[i] > resolution) return resolutions[i];

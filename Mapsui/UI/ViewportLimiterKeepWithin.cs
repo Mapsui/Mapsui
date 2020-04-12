@@ -23,6 +23,8 @@ namespace Mapsui.UI
         /// </summary>
         public MinMax ZoomLimits { get; set; }
 
+        public ZoomMode ZoomMode => ZoomMode.KeepWithinResolutions;
+
         private MinMax GetExtremes(IReadOnlyList<double> resolutions)
         {
             if (resolutions == null || resolutions.Count == 0) return null;
