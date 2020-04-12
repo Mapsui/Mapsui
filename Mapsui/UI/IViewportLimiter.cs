@@ -17,11 +17,6 @@ namespace Mapsui.UI
         /// </summary>
         MinMax ZoomLimits { get; set; }
 
-        /// <summary>
-        /// Mode for zoom
-        /// </summary>
-        ZoomMode ZoomMode { get; }
-
         void Limit(IViewport viewport, IReadOnlyList<double> mapResolutions, BoundingBox mapEnvelope);
 
         double LimitResolution(double resolution, double screenWidth, double screenHeight, 

@@ -185,7 +185,7 @@ namespace Mapsui
         /// </summary>
         public void ZoomIn()
         {
-            var resolution = ZoomHelper.ZoomIn(_map.Resolutions, _viewport.Resolution, _map.Limiter.ZoomMode == UI.ZoomMode.Unlimited);
+            var resolution = ZoomHelper.ZoomIn(_map.Resolutions, _viewport.Resolution);
 
             ZoomTo(resolution);
         }
@@ -195,7 +195,7 @@ namespace Mapsui
         /// </summary>
         public void ZoomOut()
         {
-            var resolution = ZoomHelper.ZoomOut(_map.Resolutions, _viewport.Resolution, _map.Limiter.ZoomMode == UI.ZoomMode.Unlimited);
+            var resolution = ZoomHelper.ZoomOut(_map.Resolutions, _viewport.Resolution);
 
             ZoomTo(resolution);
         }
@@ -206,7 +206,7 @@ namespace Mapsui
         /// <param name="centerOfZoom">Center to use for zoom in</param>
         public void ZoomIn(Point centerOfZoom)
         {
-            var resolution = ZoomHelper.ZoomIn(_map.Resolutions, _viewport.Resolution, _map.Limiter.ZoomMode == UI.ZoomMode.Unlimited);
+            var resolution = ZoomHelper.ZoomIn(_map.Resolutions, _viewport.Resolution);
             ZoomTo(resolution, centerOfZoom);
         }
 
@@ -216,7 +216,7 @@ namespace Mapsui
         /// <param name="centerOfZoom">Center to use for zoom out</param>
         public void ZoomOut(Point centerOfZoom)
         {
-            var resolution = ZoomHelper.ZoomOut(_map.Resolutions, _viewport.Resolution, _map.Limiter.ZoomMode == UI.ZoomMode.Unlimited);
+            var resolution = ZoomHelper.ZoomOut(_map.Resolutions, _viewport.Resolution);
             ZoomTo(resolution, centerOfZoom);
         }
 
