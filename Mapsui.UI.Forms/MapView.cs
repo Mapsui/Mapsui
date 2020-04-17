@@ -104,7 +104,7 @@ namespace Mapsui.UI.Forms
                 BackgroundColor = Color.Transparent,
                 WidthRequest = 40,
                 HeightRequest = 40,
-                Command = new Command(obj => { _mapControl.Navigator.ZoomIn(); Refresh(); })
+                Command = new Command(obj => { _mapControl.Navigator.ZoomIn(); })
             };
 
             _mapZoomOutButton = new SvgButton(Utilities.EmbeddedResourceLoader.Load("Images.ZoomOut.svg", typeof(MapView)))
@@ -112,7 +112,7 @@ namespace Mapsui.UI.Forms
                 BackgroundColor = Color.Transparent,
                 WidthRequest = 40,
                 HeightRequest = 40,
-                Command = new Command(obj => { _mapControl.Navigator.ZoomOut(); Refresh(); }),
+                Command = new Command(obj => { _mapControl.Navigator.ZoomOut(); }),
             };
 
             _mapSpacingButton1 = new Image { BackgroundColor = Color.Transparent, WidthRequest = 40, HeightRequest = 8, InputTransparent = true };
