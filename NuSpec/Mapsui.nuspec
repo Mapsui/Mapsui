@@ -22,33 +22,33 @@
       <group targetFramework="net461">
         <dependency id="BruTile" version="[2.1.2,3.0.0)"/>
         <dependency id="Newtonsoft.json" version="[11.0.1,)"/>
-        <dependency id="SkiaSharp" version="[1.68.2-preview.50,1.69)"/>
+        <dependency id="SkiaSharp" version="[1.68.2-preview.60,1.69)"/>
         <dependency id="SkiaSharp.Svg" version="[1.60.0,1.69)"/>
-        <dependency id="SkiaSharp.Views" version="[1.68.2-preview.50,1.69)"/>
+        <dependency id="SkiaSharp.Views" version="[1.68.2-preview.60,1.69)"/>
         <dependency id="Topten.RichTextKit" version="[0.1.118,0.2)"/>
       </group>
       <group targetFramework="uap">
         <dependency id="BruTile" version="[2.1.2,3.0.0)"/>
         <dependency id="Newtonsoft.json" version="[11.0.1,)"/>
-        <dependency id="SkiaSharp" version="[1.68.2-preview.50,1.69)"/>
+        <dependency id="SkiaSharp" version="[1.68.2-preview.60,1.69)"/>
         <dependency id="SkiaSharp.Svg" version="[1.60.0,1.69)"/>
-        <dependency id="SkiaSharp.Views" version="[1.68.2-preview.50,1.69)"/>
+        <dependency id="SkiaSharp.Views" version="[1.68.2-preview.60,1.69)"/>
         <dependency id="Topten.RichTextKit" version="[0.1.118,0.2)"/>
       </group>
       <group targetFramework="MonoAndroid">
         <dependency id="BruTile" version="[2.1.2,3.0.0)"/>
         <dependency id="Newtonsoft.json" version="[11.0.1,)"/>
-        <dependency id="SkiaSharp" version="[1.68.2-preview.50,1.69)"/>
+        <dependency id="SkiaSharp" version="[1.68.2-preview.60,1.69)"/>
         <dependency id="SkiaSharp.Svg" version="[1.60.0,1.69)"/>
-        <dependency id="SkiaSharp.Views" version="[1.68.2-preview.50,1.69)"/>
+        <dependency id="SkiaSharp.Views" version="[1.68.2-preview.60,1.69)"/>
         <dependency id="Topten.RichTextKit" version="[0.1.118,0.2)"/>
       </group>
       <group targetFramework="Xamarin.iOS">
         <dependency id="BruTile" version="[2.1.2,3.0.0)"/>
         <dependency id="Newtonsoft.json" version="[11.0.1,)"/>
-        <dependency id="SkiaSharp" version="[1.68.2-preview.50,1.69)"/>
+        <dependency id="SkiaSharp" version="[1.68.2-preview.60,1.69)"/>
         <dependency id="SkiaSharp.Svg" version="[1.60.0,1.69)"/>
-        <dependency id="SkiaSharp.Views" version="[1.68.2-preview.50,1.69)"/>
+        <dependency id="SkiaSharp.Views" version="[1.68.2-preview.60,1.69)"/>
         <dependency id="Topten.RichTextKit" version="[0.1.118,0.2)"/>
       </group>
     </dependencies>
