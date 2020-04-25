@@ -17,7 +17,6 @@ namespace Mapsui.Fetcher
         private double _resolution;
         private readonly object _lockRoot = new object();
         private bool _busy;
-        private int _numberTilesNeeded;
         private bool _modified;
         private readonly ITileCache<Feature> _tileCache;
         private readonly IFetchStrategy _fetchStrategy;
@@ -33,7 +32,7 @@ namespace Mapsui.Fetcher
 
         public event DataChangedEventHandler DataChanged;
         public event PropertyChangedEventHandler PropertyChanged;
-        public int NumberTilesNeeded => _numberTilesNeeded;
+        public int NumberTilesNeeded { get; private set; }
 
         public ITileSource TileSource
         {
@@ -142,7 +141,7 @@ namespace Mapsui.Fetcher
             
             var levelId = BruTile.Utilities.GetNearestLevel(TileSource.Schema.Resolutions, _resolution);
             var tilesNeeded = _fetchStrategy.GetTilesWanted(TileSource.Schema, _extent.ToExtent(), levelId);
-            _numberTilesNeeded = tilesNeeded.Count;
+            NumberTilesNeeded = tilesNeeded.Count;
             var tileNeededNotInCacheOrInProgress = tilesNeeded.Where(t => _tileCache.Find(t.Index) == null && !_tilesInProgress.Contains(t.Index));
             _tilesMissing =  new ConcurrentQueue<TileInfo>(tileNeededNotInCacheOrInProgress.ToList());
             if (_tilesMissing.Count > 0) Busy = true;
