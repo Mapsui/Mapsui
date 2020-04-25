@@ -45,7 +45,6 @@ namespace Mapsui.Layers
         private readonly int _maxExtraTiles;
         private int _numberTilesNeeded;
         private readonly TileFetchDispatcher _tileFetchDispatcher;
-        private readonly FetchMachine _fetchMachine;
 
         /// <summary>
         /// Create tile layer from tile source initializer function
@@ -90,7 +89,6 @@ namespace Mapsui.Layers
             _tileFetchDispatcher = new TileFetchDispatcher(MemoryCache, fetchStrategy1);
             _tileFetchDispatcher.DataChanged += TileFetchDispatcherOnDataChanged;
             _tileFetchDispatcher.PropertyChanged += TileFetchDispatcherOnPropertyChanged;
-            _fetchMachine = new FetchMachine(_tileFetchDispatcher);
             SetTileSource(source);
         }
 
@@ -129,7 +127,7 @@ namespace Mapsui.Layers
         /// <inheritdoc />
         public void AbortFetch()
         {
-            _fetchMachine?.Stop();
+            _tileFetchDispatcher.StopFetching();
         }
 
         /// <inheritdoc />
@@ -144,7 +142,7 @@ namespace Mapsui.Layers
             if (Enabled && extent.GetArea() > 0 && _tileFetchDispatcher != null && MaxVisible >= resolution && MinVisible <= resolution)
             {
                 _tileFetchDispatcher.SetViewport(extent, resolution);
-                _fetchMachine.Start();
+                _tileFetchDispatcher.StartFetching();
             }
         }
 
@@ -156,8 +154,8 @@ namespace Mapsui.Layers
 
         private void SetTileSource(ITileSource tileSource)
 		{
-            _fetchMachine.Stop();
-			MemoryCache.Clear();
+            _tileFetchDispatcher.StopFetching();
+            MemoryCache.Clear();
 		    _tileFetchDispatcher.TileSource = tileSource;
             _tileSource = tileSource;
             

@@ -23,11 +23,13 @@ namespace Mapsui.Fetcher
         private ConcurrentQueue<TileInfo> _tilesMissing = new ConcurrentQueue<TileInfo>();
         private readonly ConcurrentHashSet<TileIndex> _tilesInProgress = new ConcurrentHashSet<TileIndex>();
         private ITileSource _tileSource;
+        private readonly FetchMachine _fetchMachine;
 
         public TileFetchDispatcher(ITileCache<Feature> tileCache, IFetchStrategy fetchStrategy = null)
         {
             _tileCache = tileCache;
             _fetchStrategy = fetchStrategy ?? new MinimalFetchStrategy();
+            _fetchMachine = new FetchMachine(this);
         }
 
         public event DataChangedEventHandler DataChanged;
@@ -122,6 +124,16 @@ namespace Mapsui.Fetcher
                 _busy = value;
                 OnPropertyChanged(nameof(Busy));
             }
+        }
+
+        public void StopFetching()
+        {
+            _fetchMachine?.Stop();
+        }
+
+        public void StartFetching()
+        {
+            _fetchMachine.Start();
         }
 
         private void OnPropertyChanged(string propertyName)
