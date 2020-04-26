@@ -10,6 +10,7 @@ namespace Mapsui.Widgets
         public float MarginX { get; set; } = 2;
         public float MarginY { get; set; } = 2;
         public BoundingBox Envelope { get; set; }
+        public bool Enabled { get; set; } = true;
 
         public float CalculatePositionX(float left, float right, float width)
         {

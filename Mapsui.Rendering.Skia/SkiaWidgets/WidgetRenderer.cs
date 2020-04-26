@@ -14,6 +14,8 @@ namespace Mapsui.Rendering.Skia.SkiaWidgets
 
             foreach (var widget in widgets)
             {
+                if (!widget.Enabled) continue;
+
                 ((ISkiaWidgetRenderer)renders[widget.GetType()]).Draw(canvas, viewport, widget, layerOpacity);
             }
         }
