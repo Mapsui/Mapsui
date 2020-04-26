@@ -6,6 +6,7 @@
     <ContentPage.Content>
         <StackLayout>
           <mapsui:MapView x:Name="mapView"
+            IsVisible="False"
 		    VerticalOptions="FillAndExpand"
             HorizontalOptions="Fill"
 		    BackgroundColor="Gray" 

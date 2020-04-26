@@ -63,16 +63,9 @@ namespace Mapsui.UI.Wpf
             }
         }
 
-        private float? _pixelDensity;
-
         public float PixelDensity
         {
-            get
-            {
-                if (_pixelDensity == null || _pixelDensity <= 0)
-                    _pixelDensity = GetPixelDensity();
-                return _pixelDensity.Value;
-            }
+            get => GetPixelDensity();
         }
 
         private IRenderer _renderer = new MapRenderer();
