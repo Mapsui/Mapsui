@@ -21,5 +21,7 @@ namespace Mapsui.Widgets
         /// <param name="position">Screen position</param>
         /// <returns>True, if the Widget had handled the touch event</returns>
         bool HandleWidgetTouched(INavigator navigator, Point position);
+
+        bool Enabled { get; set; }
     }
 }
