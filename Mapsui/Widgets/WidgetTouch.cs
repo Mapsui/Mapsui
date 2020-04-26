@@ -26,6 +26,7 @@ namespace Mapsui.Widgets
                 // Also check for start position because it shoudl be click on the widget,
                 // not a drag that ends above the widget.
                 if (widget.Envelope != null &&
+                    widget.Enabled &&
                     widget.Envelope.Contains(screenPosition) && 
                     widget.Envelope.Contains(startScreenPosition))
                     touchedWidgets.Add(widget);
