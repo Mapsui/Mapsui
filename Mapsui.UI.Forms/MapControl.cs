@@ -215,7 +215,8 @@ namespace Mapsui.UI.Forms
             }
             else if (e.ActionType == SKTouchAction.Cancelled)
             {
-                _touches.TryRemove(e.Id, out _);
+                // This gesture is cancelled, so clear all touches
+                _touches.Clear();
             }
             else if (e.ActionType == SKTouchAction.Exited && _touches.TryRemove(e.Id, out var exitedTouch))
             {
