@@ -17,7 +17,6 @@
 // along with SharpMap; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
-using System.Threading.Tasks;
 using BruTile;
 using BruTile.Cache;
 using Mapsui.Fetcher;
@@ -29,8 +28,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using Mapsui.Logging;
-using Mapsui.Widgets;
 
 namespace Mapsui.Layers
 {
@@ -44,26 +41,7 @@ namespace Mapsui.Layers
         private readonly int _minExtraTiles;
         private readonly int _maxExtraTiles;
         private int _numberTilesNeeded;
-        private readonly TileFetchDispatcher _tileFetchDispatcher;
-
-        /// <summary>
-        /// Create tile layer from tile source initializer function
-        /// </summary>
-        /// <param name="tileSourceInitializer">Initializer to create a tile layer source</param>
-        public TileLayer(Func<ITileSource> tileSourceInitializer) : this()
-        {
-            Task.Run(() =>
-            {
-                try
-                {
-                    SetTileSource(tileSourceInitializer());
-                }
-                catch (Exception e)
-                {
-                    Logger.Log(LogLevel.Debug, $"Initialization of layer {Name} failed: {e.Message}");
-                }
-            });
-        }
+        private TileFetchDispatcher _tileFetchDispatcher;
 
         /// <summary>
         /// Create tile layer for given tile source
@@ -82,27 +60,13 @@ namespace Mapsui.Layers
         {
             MemoryCache = new MemoryCache<Feature>(minTiles, maxTiles);
             Style = new VectorStyle { Outline = { Color = Color.FromArgb(0, 0, 0, 0) } }; // initialize with transparent outline
-            var fetchStrategy1 = fetchStrategy ?? new FetchStrategy(3);
+            fetchStrategy = fetchStrategy ?? new FetchStrategy(3);
             _renderGetStrategy = renderGetStrategy ?? new RenderGetStrategy();
             _minExtraTiles = minExtraTiles;
             _maxExtraTiles = maxExtraTiles;
-            _tileFetchDispatcher = new TileFetchDispatcher(MemoryCache, fetchStrategy1);
+            _tileFetchDispatcher = new TileFetchDispatcher(MemoryCache, source.Schema, source.GetTile, fetchStrategy);
             _tileFetchDispatcher.DataChanged += TileFetchDispatcherOnDataChanged;
             _tileFetchDispatcher.PropertyChanged += TileFetchDispatcherOnPropertyChanged;
-            SetTileSource(source);
-        }
-
-        /// <summary>
-        /// Tile source for this layer
-        /// </summary>
-        public ITileSource TileSource
-        {
-            get => _tileSource;
-            set
-            {
-                SetTileSource(value);
-                OnPropertyChanged(nameof(TileSource));
-            }
         }
 
         /// <summary>
@@ -151,25 +115,6 @@ namespace Mapsui.Layers
         {
             return (string.Equals(ToSimpleEpsgCode(), crs, StringComparison.CurrentCultureIgnoreCase));
         }
-
-        private void SetTileSource(ITileSource tileSource)
-		{
-            _tileFetchDispatcher.StopFetching();
-            MemoryCache.Clear();
-		    _tileFetchDispatcher.TileSource = tileSource;
-            _tileSource = tileSource;
-            
-            if (_tileSource != null)
-            {
-                if (Attribution == null) Attribution = new Hyperlink();
-                Attribution.Text = _tileSource.Attribution?.Text;
-                Attribution.Url = _tileSource.Attribution?.Url;
-            }
-
-		    OnPropertyChanged(nameof(Layer.DataSource)); // To trigger new RefreshData.
-            OnPropertyChanged(nameof(Envelope));
-        }
-
         private void TileFetchDispatcherOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
             if (propertyChangedEventArgs.PropertyName == nameof(Busy))

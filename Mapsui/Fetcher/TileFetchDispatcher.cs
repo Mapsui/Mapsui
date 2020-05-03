@@ -22,12 +22,16 @@ namespace Mapsui.Fetcher
         private readonly IFetchStrategy _fetchStrategy;
         private ConcurrentQueue<TileInfo> _tilesMissing = new ConcurrentQueue<TileInfo>();
         private readonly ConcurrentHashSet<TileIndex> _tilesInProgress = new ConcurrentHashSet<TileIndex>();
-        private ITileSource _tileSource;
+        private ITileSchema _tileSchema;
         private readonly FetchMachine _fetchMachine;
+        private Func<TileInfo, byte[]> _tileFetcher;
 
-        public TileFetchDispatcher(ITileCache<Feature> tileCache, IFetchStrategy fetchStrategy = null)
+        public TileFetchDispatcher(ITileCache<Feature> tileCache, ITileSchema tileSchema, 
+            Func<TileInfo, byte[]> tileFetcher, IFetchStrategy fetchStrategy = null)
         {
             _tileCache = tileCache;
+            _tileSchema = tileSchema;
+            _tileFetcher = tileFetcher;
             _fetchStrategy = fetchStrategy ?? new MinimalFetchStrategy();
             _fetchMachine = new FetchMachine(this);
         }
@@ -35,16 +39,6 @@ namespace Mapsui.Fetcher
         public event DataChangedEventHandler DataChanged;
         public event PropertyChangedEventHandler PropertyChanged;
         public int NumberTilesNeeded { get; private set; }
-
-        public ITileSource TileSource
-        {
-            get => _tileSource;
-            set
-            {
-                _modified = true;
-                _tileSource = value;
-            }
-        }
 
         public void SetViewport(BoundingBox extent, double resolution)
         {
@@ -81,7 +75,7 @@ namespace Mapsui.Fetcher
         {
             try
             {
-                var tileData = TileSource.GetTile(tileInfo);
+                var tileData = _tileFetcher(tileInfo);
                 FetchCompleted(tileInfo, tileData, null);
             }
             catch (Exception exception)
@@ -144,15 +138,8 @@ namespace Mapsui.Fetcher
 
         private void UpdateMissingTiles()
         {
-            if (TileSource == null)
-            {
-                _tilesMissing = new ConcurrentQueue<TileInfo>();
-                _tilesInProgress.Clear();
-                return;
-            }
-            
-            var levelId = BruTile.Utilities.GetNearestLevel(TileSource.Schema.Resolutions, _resolution);
-            var tilesNeeded = _fetchStrategy.GetTilesWanted(TileSource.Schema, _extent.ToExtent(), levelId);
+            var levelId = BruTile.Utilities.GetNearestLevel(_tileSchema.Resolutions, _resolution);
+            var tilesNeeded = _fetchStrategy.GetTilesWanted(_tileSchema, _extent.ToExtent(), levelId);
             NumberTilesNeeded = tilesNeeded.Count;
             var tileNeededNotInCacheOrInProgress = tilesNeeded.Where(t => _tileCache.Find(t.Index) == null && !_tilesInProgress.Contains(t.Index));
             _tilesMissing =  new ConcurrentQueue<TileInfo>(tileNeededNotInCacheOrInProgress.ToList());
