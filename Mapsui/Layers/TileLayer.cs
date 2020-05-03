@@ -57,8 +57,9 @@ namespace Mapsui.Layers
         /// <param name="minExtraTiles">Number of minimum extra tiles for memory cache</param>
         /// <param name="maxExtraTiles">Number of maximum extra tiles for memory cache</param>
         // ReSharper disable once UnusedParameter.Local // Is public and won't break this now
-        public TileLayer(ITileSource source = null, int minTiles = 200, int maxTiles = 300, IFetchStrategy fetchStrategy = null,
-            IRenderGetStrategy renderGetStrategy = null, int minExtraTiles = -1, int maxExtraTiles = -1)
+        public TileLayer(ITileSource source = null, int minTiles = 200, int maxTiles = 300,
+            IFetchStrategy fetchStrategy = null, IRenderGetStrategy renderGetStrategy = null,
+            int minExtraTiles = -1, int maxExtraTiles = -1, Func<TileInfo, Feature> fetchTileAsFeature = null)
         {
             MemoryCache = new MemoryCache<Feature>(minTiles, maxTiles);
             Style = new VectorStyle { Outline = { Color = Color.FromArgb(0, 0, 0, 0) } }; // initialize with transparent outline
@@ -68,7 +69,7 @@ namespace Mapsui.Layers
             _renderGetStrategy = renderGetStrategy ?? new RenderGetStrategy();
             _minExtraTiles = minExtraTiles;
             _maxExtraTiles = maxExtraTiles;
-            _tileFetchDispatcher = new TileFetchDispatcher(MemoryCache, source.Schema, ToFeature, fetchStrategy);
+            _tileFetchDispatcher = new TileFetchDispatcher(MemoryCache, source.Schema, fetchTileAsFeature ?? ToFeature, fetchStrategy);
             _tileFetchDispatcher.DataChanged += TileFetchDispatcherOnDataChanged;
             _tileFetchDispatcher.PropertyChanged += TileFetchDispatcherOnPropertyChanged;
         }
