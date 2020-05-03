@@ -16,21 +16,24 @@ namespace Mapsui.Fetcher
         private double _resolution;
         private readonly object _lockRoot = new object();
         private bool _busy;
-        private bool _modified;
+        private bool _viewportIsModified;
         private readonly ITileCache<Feature> _tileCache;
         private readonly IFetchStrategy _fetchStrategy;
-        private ConcurrentQueue<TileInfo> _tilesMissing = new ConcurrentQueue<TileInfo>();
+        private readonly ConcurrentQueue<TileInfo> _tilesToFetch = new ConcurrentQueue<TileInfo>();
         private readonly ConcurrentHashSet<TileIndex> _tilesInProgress = new ConcurrentHashSet<TileIndex>();
-        private ITileSchema _tileSchema;
+        private readonly ITileSchema _tileSchema;
         private readonly FetchMachine _fetchMachine;
-        private Func<TileInfo, Feature> _tileFetcher;
+        private Func<TileInfo, Feature> _fetchTileAsFeature;
 
-        public TileFetchDispatcher(ITileCache<Feature> tileCache, ITileSchema tileSchema, 
-            Func<TileInfo, Feature> tileFetcher, IFetchStrategy fetchStrategy = null)
+        public TileFetchDispatcher(
+            ITileCache<Feature> tileCache, 
+            ITileSchema tileSchema, 
+            Func<TileInfo, Feature> fetchTileAsFeature, 
+            IFetchStrategy fetchStrategy = null)
         {
             _tileCache = tileCache;
             _tileSchema = tileSchema;
-            _tileFetcher = tileFetcher;
+            _fetchTileAsFeature = fetchTileAsFeature;
             _fetchStrategy = fetchStrategy ?? new MinimalFetchStrategy();
             _fetchMachine = new FetchMachine(this);
         }
@@ -46,7 +49,7 @@ namespace Mapsui.Fetcher
                 _extent = extent;
                 _resolution = resolution;
                 Busy = true;
-                _modified = true;
+                _viewportIsModified = true;
             }
         }
 
@@ -54,8 +57,8 @@ namespace Mapsui.Fetcher
         {
             lock (_lockRoot)
             {
-                UpdateIfModified();
-                var success = _tilesMissing.TryDequeue(out TileInfo tileInfo);
+                UpdateIfViewportIsModified();
+                var success = _tilesToFetch.TryDequeue(out TileInfo tileInfo);
 
                 if (success)
                 {
@@ -64,7 +67,7 @@ namespace Mapsui.Fetcher
                     return true;
                 }
 
-                Busy = _tilesInProgress.Count > 0 || _tilesMissing.Count > 0;
+                Busy = _tilesInProgress.Count > 0 || _tilesToFetch.Count > 0;
                 // else the queue is empty, we are done.
                 return false;
             }
@@ -74,7 +77,7 @@ namespace Mapsui.Fetcher
         {
             try
             {
-                var feature = _tileFetcher(tileInfo);
+                var feature = _fetchTileAsFeature(tileInfo);
                 FetchCompleted(tileInfo, feature, null);
             }
             catch (Exception exception)
@@ -83,12 +86,12 @@ namespace Mapsui.Fetcher
             }
         }
 
-        private void UpdateIfModified()
+        private void UpdateIfViewportIsModified()
         {
-            if (_modified)
+            if (_viewportIsModified)
             {
-                UpdateMissingTiles();
-                _modified = false;
+                UpdateTilesToFetchForViewportChange();
+                _viewportIsModified = false;
             }
         }
 
@@ -102,7 +105,7 @@ namespace Mapsui.Fetcher
                 }
                 _tilesInProgress.TryRemove(tileInfo.Index);
 
-                Busy = _tilesInProgress.Count > 0 || _tilesMissing.Count > 0;
+                Busy = _tilesInProgress.Count > 0 || _tilesToFetch.Count > 0;
 
                 DataChanged?.Invoke(this, new DataChangedEventArgs(exception, false, tileInfo));
             }
@@ -134,14 +137,15 @@ namespace Mapsui.Fetcher
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private void UpdateMissingTiles()
+        private void UpdateTilesToFetchForViewportChange()
         {
             var levelId = BruTile.Utilities.GetNearestLevel(_tileSchema.Resolutions, _resolution);
-            var tilesNeeded = _fetchStrategy.GetTilesWanted(_tileSchema, _extent.ToExtent(), levelId);
-            NumberTilesNeeded = tilesNeeded.Count;
-            var tileNeededNotInCacheOrInProgress = tilesNeeded.Where(t => _tileCache.Find(t.Index) == null && !_tilesInProgress.Contains(t.Index));
-            _tilesMissing =  new ConcurrentQueue<TileInfo>(tileNeededNotInCacheOrInProgress.ToList());
-            if (_tilesMissing.Count > 0) Busy = true;
+            var tilesToCoverViewport = _fetchStrategy.GetTilesWanted(_tileSchema, _extent.ToExtent(), levelId);
+            NumberTilesNeeded = tilesToCoverViewport.Count;
+            var tilesToFetch = tilesToCoverViewport.Where(t => _tileCache.Find(t.Index) == null && !_tilesInProgress.Contains(t.Index));
+            _tilesToFetch.Clear();
+            _tilesToFetch.AddRange(tilesToFetch);
+            if (_tilesToFetch.Count > 0) Busy = true;
         }
     }
 }

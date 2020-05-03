@@ -43,6 +43,7 @@ namespace Mapsui.Layers
         private readonly int _maxExtraTiles;
         private int _numberTilesNeeded;
         private TileFetchDispatcher _tileFetchDispatcher;
+        private readonly BoundingBox _envelope;
 
         /// <summary>
         /// Create tile layer for given tile source
@@ -62,6 +63,7 @@ namespace Mapsui.Layers
             MemoryCache = new MemoryCache<Feature>(minTiles, maxTiles);
             Style = new VectorStyle { Outline = { Color = Color.FromArgb(0, 0, 0, 0) } }; // initialize with transparent outline
             _tileSource = source;
+            _envelope = _tileSource?.Schema?.Extent.ToBoundingBox();
             fetchStrategy = fetchStrategy ?? new FetchStrategy(3);
             _renderGetStrategy = renderGetStrategy ?? new RenderGetStrategy();
             _minExtraTiles = minExtraTiles;
@@ -80,7 +82,7 @@ namespace Mapsui.Layers
         public override IReadOnlyList<double> Resolutions => _tileSource?.Schema?.Resolutions.Select(r => r.Value.UnitsPerPixel).ToList();
 
         /// <inheritdoc />
-        public override BoundingBox Envelope => _tileSource?.Schema?.Extent.ToBoundingBox();
+        public override BoundingBox Envelope => _envelope;
 
         /// <inheritdoc />
         public override IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
@@ -127,8 +129,9 @@ namespace Mapsui.Layers
 
         private void UpdateMemoryCacheMinAndMax()
         {
-            if (_minExtraTiles < 0 || _maxExtraTiles < 0 
-                || _numberTilesNeeded == _tileFetchDispatcher.NumberTilesNeeded) return;
+            if (_minExtraTiles < 0 || _maxExtraTiles < 0) return;
+            if (_numberTilesNeeded == _tileFetchDispatcher.NumberTilesNeeded) return;
+
             _numberTilesNeeded = _tileFetchDispatcher.NumberTilesNeeded;
             MemoryCache.MinTiles = _numberTilesNeeded + _minExtraTiles;
             MemoryCache.MaxTiles = _numberTilesNeeded + _maxExtraTiles;
