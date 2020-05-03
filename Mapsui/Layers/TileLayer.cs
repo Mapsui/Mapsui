@@ -55,7 +55,7 @@ namespace Mapsui.Layers
         /// <param name="minExtraTiles">Number of minimum extra tiles for memory cache</param>
         /// <param name="maxExtraTiles">Number of maximum extra tiles for memory cache</param>
         // ReSharper disable once UnusedParameter.Local // Is public and won't break this now
-        public TileLayer(ITileSource source = null, int minTiles = 200, int maxTiles = 300, int maxRetries = 2, IFetchStrategy fetchStrategy = null,
+        public TileLayer(ITileSource source = null, int minTiles = 200, int maxTiles = 300, IFetchStrategy fetchStrategy = null,
             IRenderGetStrategy renderGetStrategy = null, int minExtraTiles = -1, int maxExtraTiles = -1)
         {
             MemoryCache = new MemoryCache<Feature>(minTiles, maxTiles);
