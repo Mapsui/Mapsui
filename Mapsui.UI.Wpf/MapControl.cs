@@ -226,6 +226,8 @@ namespace Mapsui.UI.Wpf
                 _toResolution = ZoomHelper.ZoomOut(_map.Resolutions, _toResolution);
             }
 
+            _toResolution = Map.Limiter.LimitResolution(_toResolution, Viewport.Width, Viewport.Height, Map.Resolutions, Map.Envelope);
+
             // Some cheating to trigger a zoom animation if resolution does not change.
             // This workaround could be ommitted if the zoom animations was on CenterX, CenterY and Resolution, not Resolution alone.
             // todo: Remove this workaround once animations are centralized.
