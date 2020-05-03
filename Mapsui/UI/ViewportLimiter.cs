@@ -61,7 +61,7 @@ namespace Mapsui.UI
             if (resolutions == null || resolutions.Count == 0) return null;
             resolutions = resolutions.OrderByDescending(r => r).ToList();
             var mostZoomedOut = resolutions[0];
-            var mostZoomedIn = resolutions[resolutions.Count - 1];
+            var mostZoomedIn = resolutions[resolutions.Count - 1] * 0.5; // divide by two to allow one extra level to zoom-in
             return new MinMax(mostZoomedOut, mostZoomedIn);
         }
 
