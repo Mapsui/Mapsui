@@ -27,6 +27,7 @@ using Mapsui.Styles;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 
 namespace Mapsui.Layers
@@ -60,11 +61,12 @@ namespace Mapsui.Layers
         {
             MemoryCache = new MemoryCache<Feature>(minTiles, maxTiles);
             Style = new VectorStyle { Outline = { Color = Color.FromArgb(0, 0, 0, 0) } }; // initialize with transparent outline
+            _tileSource = source;
             fetchStrategy = fetchStrategy ?? new FetchStrategy(3);
             _renderGetStrategy = renderGetStrategy ?? new RenderGetStrategy();
             _minExtraTiles = minExtraTiles;
             _maxExtraTiles = maxExtraTiles;
-            _tileFetchDispatcher = new TileFetchDispatcher(MemoryCache, source.Schema, source.GetTile, fetchStrategy);
+            _tileFetchDispatcher = new TileFetchDispatcher(MemoryCache, source.Schema, ToFeature, fetchStrategy);
             _tileFetchDispatcher.DataChanged += TileFetchDispatcherOnDataChanged;
             _tileFetchDispatcher.PropertyChanged += TileFetchDispatcherOnPropertyChanged;
         }
@@ -142,6 +144,27 @@ namespace Mapsui.Layers
             var startEpsgCode = _tileSource.Schema.Srs.IndexOf("EPSG:", StringComparison.Ordinal);
             if (startEpsgCode < 0) return _tileSource.Schema.Srs;
             return _tileSource.Schema.Srs.Substring(startEpsgCode).Replace("::", ":").Trim();
+        }
+
+        private Feature ToFeature(TileInfo tileInfo)
+        {
+            byte[] tileData = _tileSource.GetTile(tileInfo);
+            return new Feature { Geometry = ToGeometry(tileInfo, tileData) };
+        }
+
+        private static Raster ToGeometry(TileInfo tileInfo, byte[] tileData)
+        {
+            // A TileSource may return a byte array that is null. This is currently only implemented
+            // for MbTilesTileSource. It is to indicate that the tile is not present in the source,
+            // although it should be given the tile schema. It does not mean the tile could not
+            // be accessed because of some temporary reason. In that case it will throw an exception.
+            // For Mapsui this is important because it will not try again and again to fetch it. 
+            // Here we return the geometry as null so that it will be added to the tile cache. 
+            // TileLayer.GetFeatureInView will have to return only the non null geometries.
+
+            if (tileData == null) return null;
+
+            return new Raster(new MemoryStream(tileData), tileInfo.Extent.ToBoundingBox());
         }
     }
 }
