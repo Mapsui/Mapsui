@@ -5400,6 +5400,17 @@
     },
     {
       "type": "Resource",
+      "source_relative_path": "images/breath-companion.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/breath-companion.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
       "source_relative_path": "images/brutile_fetcher.png",
       "output": {
         "resource": {
@@ -5437,7 +5448,7 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "wzWnFeeI1+jQCPzABc0FAQ=="
+          "hash": "Jt4jhYYvABbpYIuCgm1D1g=="
         }
       },
       "is_incremental": false,
