@@ -2727,104 +2727,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.Fetcher.MinimalFetchStrategy.GetTilesWanted
   nameWithType: MinimalFetchStrategy.GetTilesWanted
-- uid: Mapsui.Fetcher.TileFetcher
-  name: TileFetcher
-  href: api/Mapsui.Fetcher.TileFetcher.html
-  commentId: T:Mapsui.Fetcher.TileFetcher
-  fullName: Mapsui.Fetcher.TileFetcher
-  nameWithType: TileFetcher
-- uid: Mapsui.Fetcher.TileFetcher.#ctor(BruTile.ITileSource,BruTile.Cache.MemoryCache{Mapsui.Providers.Feature},System.Int32,System.Int32,Mapsui.Fetcher.IFetchStrategy)
-  name: TileFetcher(ITileSource, MemoryCache<Feature>, Int32, Int32, IFetchStrategy)
-  href: api/Mapsui.Fetcher.TileFetcher.html#Mapsui_Fetcher_TileFetcher__ctor_BruTile_ITileSource_BruTile_Cache_MemoryCache_Mapsui_Providers_Feature__System_Int32_System_Int32_Mapsui_Fetcher_IFetchStrategy_
-  commentId: M:Mapsui.Fetcher.TileFetcher.#ctor(BruTile.ITileSource,BruTile.Cache.MemoryCache{Mapsui.Providers.Feature},System.Int32,System.Int32,Mapsui.Fetcher.IFetchStrategy)
-  name.vb: TileFetcher(ITileSource, MemoryCache(Of Feature), Int32, Int32, IFetchStrategy)
-  fullName: Mapsui.Fetcher.TileFetcher.TileFetcher(BruTile.ITileSource, BruTile.Cache.MemoryCache<Mapsui.Providers.Feature>, System.Int32, System.Int32, Mapsui.Fetcher.IFetchStrategy)
-  fullName.vb: Mapsui.Fetcher.TileFetcher.TileFetcher(BruTile.ITileSource, BruTile.Cache.MemoryCache(Of Mapsui.Providers.Feature), System.Int32, System.Int32, Mapsui.Fetcher.IFetchStrategy)
-  nameWithType: TileFetcher.TileFetcher(ITileSource, MemoryCache<Feature>, Int32, Int32, IFetchStrategy)
-  nameWithType.vb: TileFetcher.TileFetcher(ITileSource, MemoryCache(Of Feature), Int32, Int32, IFetchStrategy)
-- uid: Mapsui.Fetcher.TileFetcher.#ctor*
-  name: TileFetcher
-  href: api/Mapsui.Fetcher.TileFetcher.html#Mapsui_Fetcher_TileFetcher__ctor_
-  commentId: Overload:Mapsui.Fetcher.TileFetcher.#ctor
-  isSpec: "True"
-  fullName: Mapsui.Fetcher.TileFetcher.TileFetcher
-  nameWithType: TileFetcher.TileFetcher
-- uid: Mapsui.Fetcher.TileFetcher.AbortFetch
-  name: AbortFetch()
-  href: api/Mapsui.Fetcher.TileFetcher.html#Mapsui_Fetcher_TileFetcher_AbortFetch
-  commentId: M:Mapsui.Fetcher.TileFetcher.AbortFetch
-  fullName: Mapsui.Fetcher.TileFetcher.AbortFetch()
-  nameWithType: TileFetcher.AbortFetch()
-- uid: Mapsui.Fetcher.TileFetcher.AbortFetch*
-  name: AbortFetch
-  href: api/Mapsui.Fetcher.TileFetcher.html#Mapsui_Fetcher_TileFetcher_AbortFetch_
-  commentId: Overload:Mapsui.Fetcher.TileFetcher.AbortFetch
-  isSpec: "True"
-  fullName: Mapsui.Fetcher.TileFetcher.AbortFetch
-  nameWithType: TileFetcher.AbortFetch
-- uid: Mapsui.Fetcher.TileFetcher.Busy
-  name: Busy
-  href: api/Mapsui.Fetcher.TileFetcher.html#Mapsui_Fetcher_TileFetcher_Busy
-  commentId: P:Mapsui.Fetcher.TileFetcher.Busy
-  fullName: Mapsui.Fetcher.TileFetcher.Busy
-  nameWithType: TileFetcher.Busy
-- uid: Mapsui.Fetcher.TileFetcher.Busy*
-  name: Busy
-  href: api/Mapsui.Fetcher.TileFetcher.html#Mapsui_Fetcher_TileFetcher_Busy_
-  commentId: Overload:Mapsui.Fetcher.TileFetcher.Busy
-  isSpec: "True"
-  fullName: Mapsui.Fetcher.TileFetcher.Busy
-  nameWithType: TileFetcher.Busy
-- uid: Mapsui.Fetcher.TileFetcher.DataChanged
-  name: DataChanged
-  href: api/Mapsui.Fetcher.TileFetcher.html#Mapsui_Fetcher_TileFetcher_DataChanged
-  commentId: E:Mapsui.Fetcher.TileFetcher.DataChanged
-  fullName: Mapsui.Fetcher.TileFetcher.DataChanged
-  nameWithType: TileFetcher.DataChanged
-- uid: Mapsui.Fetcher.TileFetcher.DefaultMaxAttempts
-  name: DefaultMaxAttempts
-  href: api/Mapsui.Fetcher.TileFetcher.html#Mapsui_Fetcher_TileFetcher_DefaultMaxAttempts
-  commentId: F:Mapsui.Fetcher.TileFetcher.DefaultMaxAttempts
-  fullName: Mapsui.Fetcher.TileFetcher.DefaultMaxAttempts
-  nameWithType: TileFetcher.DefaultMaxAttempts
-- uid: Mapsui.Fetcher.TileFetcher.DefaultMaxThreads
-  name: DefaultMaxThreads
-  href: api/Mapsui.Fetcher.TileFetcher.html#Mapsui_Fetcher_TileFetcher_DefaultMaxThreads
-  commentId: F:Mapsui.Fetcher.TileFetcher.DefaultMaxThreads
-  fullName: Mapsui.Fetcher.TileFetcher.DefaultMaxThreads
-  nameWithType: TileFetcher.DefaultMaxThreads
-- uid: Mapsui.Fetcher.TileFetcher.NumberTilesNeeded
-  name: NumberTilesNeeded
-  href: api/Mapsui.Fetcher.TileFetcher.html#Mapsui_Fetcher_TileFetcher_NumberTilesNeeded
-  commentId: P:Mapsui.Fetcher.TileFetcher.NumberTilesNeeded
-  fullName: Mapsui.Fetcher.TileFetcher.NumberTilesNeeded
-  nameWithType: TileFetcher.NumberTilesNeeded
-- uid: Mapsui.Fetcher.TileFetcher.NumberTilesNeeded*
-  name: NumberTilesNeeded
-  href: api/Mapsui.Fetcher.TileFetcher.html#Mapsui_Fetcher_TileFetcher_NumberTilesNeeded_
-  commentId: Overload:Mapsui.Fetcher.TileFetcher.NumberTilesNeeded
-  isSpec: "True"
-  fullName: Mapsui.Fetcher.TileFetcher.NumberTilesNeeded
-  nameWithType: TileFetcher.NumberTilesNeeded
-- uid: Mapsui.Fetcher.TileFetcher.PropertyChanged
-  name: PropertyChanged
-  href: api/Mapsui.Fetcher.TileFetcher.html#Mapsui_Fetcher_TileFetcher_PropertyChanged
-  commentId: E:Mapsui.Fetcher.TileFetcher.PropertyChanged
-  fullName: Mapsui.Fetcher.TileFetcher.PropertyChanged
-  nameWithType: TileFetcher.PropertyChanged
-- uid: Mapsui.Fetcher.TileFetcher.ViewChanged(Mapsui.Geometries.BoundingBox,System.Double)
-  name: ViewChanged(BoundingBox, Double)
-  href: api/Mapsui.Fetcher.TileFetcher.html#Mapsui_Fetcher_TileFetcher_ViewChanged_Mapsui_Geometries_BoundingBox_System_Double_
-  commentId: M:Mapsui.Fetcher.TileFetcher.ViewChanged(Mapsui.Geometries.BoundingBox,System.Double)
-  fullName: Mapsui.Fetcher.TileFetcher.ViewChanged(Mapsui.Geometries.BoundingBox, System.Double)
-  nameWithType: TileFetcher.ViewChanged(BoundingBox, Double)
-- uid: Mapsui.Fetcher.TileFetcher.ViewChanged*
-  name: ViewChanged
-  href: api/Mapsui.Fetcher.TileFetcher.html#Mapsui_Fetcher_TileFetcher_ViewChanged_
-  commentId: Overload:Mapsui.Fetcher.TileFetcher.ViewChanged
-  isSpec: "True"
-  fullName: Mapsui.Fetcher.TileFetcher.ViewChanged
-  nameWithType: TileFetcher.ViewChanged
 - uid: Mapsui.Geometries
   name: Mapsui.Geometries
   href: api/Mapsui.Geometries.html
@@ -8415,12 +8317,15 @@ references:
   commentId: T:Mapsui.Layers.TileLayer
   fullName: Mapsui.Layers.TileLayer
   nameWithType: TileLayer
-- uid: Mapsui.Layers.TileLayer.#ctor(BruTile.ITileSource,System.Int32,System.Int32,System.Int32,Mapsui.Fetcher.IFetchStrategy,Mapsui.Rendering.IRenderGetStrategy,System.Int32,System.Int32)
-  name: TileLayer(ITileSource, Int32, Int32, Int32, IFetchStrategy, IRenderGetStrategy, Int32, Int32)
-  href: api/Mapsui.Layers.TileLayer.html#Mapsui_Layers_TileLayer__ctor_BruTile_ITileSource_System_Int32_System_Int32_System_Int32_Mapsui_Fetcher_IFetchStrategy_Mapsui_Rendering_IRenderGetStrategy_System_Int32_System_Int32_
-  commentId: M:Mapsui.Layers.TileLayer.#ctor(BruTile.ITileSource,System.Int32,System.Int32,System.Int32,Mapsui.Fetcher.IFetchStrategy,Mapsui.Rendering.IRenderGetStrategy,System.Int32,System.Int32)
-  fullName: Mapsui.Layers.TileLayer.TileLayer(BruTile.ITileSource, System.Int32, System.Int32, System.Int32, Mapsui.Fetcher.IFetchStrategy, Mapsui.Rendering.IRenderGetStrategy, System.Int32, System.Int32)
-  nameWithType: TileLayer.TileLayer(ITileSource, Int32, Int32, Int32, IFetchStrategy, IRenderGetStrategy, Int32, Int32)
+- uid: Mapsui.Layers.TileLayer.#ctor(BruTile.ITileSource,System.Int32,System.Int32,System.Int32,Mapsui.Fetcher.IFetchStrategy,Mapsui.Rendering.IRenderGetStrategy,System.Int32,System.Int32,System.Func{BruTile.TileInfo,System.Object,Mapsui.Providers.Feature},System.Func{BruTile.TileInfo,System.Object})
+  name: TileLayer(ITileSource, Int32, Int32, Int32, IFetchStrategy, IRenderGetStrategy, Int32, Int32, Func<TileInfo, Object, Feature>, Func<TileInfo, Object>)
+  href: api/Mapsui.Layers.TileLayer.html#Mapsui_Layers_TileLayer__ctor_BruTile_ITileSource_System_Int32_System_Int32_System_Int32_Mapsui_Fetcher_IFetchStrategy_Mapsui_Rendering_IRenderGetStrategy_System_Int32_System_Int32_System_Func_BruTile_TileInfo_System_Object_Mapsui_Providers_Feature__System_Func_BruTile_TileInfo_System_Object__
+  commentId: M:Mapsui.Layers.TileLayer.#ctor(BruTile.ITileSource,System.Int32,System.Int32,System.Int32,Mapsui.Fetcher.IFetchStrategy,Mapsui.Rendering.IRenderGetStrategy,System.Int32,System.Int32,System.Func{BruTile.TileInfo,System.Object,Mapsui.Providers.Feature},System.Func{BruTile.TileInfo,System.Object})
+  name.vb: TileLayer(ITileSource, Int32, Int32, Int32, IFetchStrategy, IRenderGetStrategy, Int32, Int32, Func(Of TileInfo, Object, Feature), Func(Of TileInfo, Object))
+  fullName: Mapsui.Layers.TileLayer.TileLayer(BruTile.ITileSource, System.Int32, System.Int32, System.Int32, Mapsui.Fetcher.IFetchStrategy, Mapsui.Rendering.IRenderGetStrategy, System.Int32, System.Int32, System.Func<BruTile.TileInfo, System.Object, Mapsui.Providers.Feature>, System.Func<BruTile.TileInfo, System.Object>)
+  fullName.vb: Mapsui.Layers.TileLayer.TileLayer(BruTile.ITileSource, System.Int32, System.Int32, System.Int32, Mapsui.Fetcher.IFetchStrategy, Mapsui.Rendering.IRenderGetStrategy, System.Int32, System.Int32, System.Func(Of BruTile.TileInfo, System.Object, Mapsui.Providers.Feature), System.Func(Of BruTile.TileInfo, System.Object))
+  nameWithType: TileLayer.TileLayer(ITileSource, Int32, Int32, Int32, IFetchStrategy, IRenderGetStrategy, Int32, Int32, Func<TileInfo, Object, Feature>, Func<TileInfo, Object>)
+  nameWithType.vb: TileLayer.TileLayer(ITileSource, Int32, Int32, Int32, IFetchStrategy, IRenderGetStrategy, Int32, Int32, Func(Of TileInfo, Object, Feature), Func(Of TileInfo, Object))
 - uid: Mapsui.Layers.TileLayer.#ctor(System.Func{BruTile.ITileSource})
   name: TileLayer(Func<ITileSource>)
   href: api/Mapsui.Layers.TileLayer.html#Mapsui_Layers_TileLayer__ctor_System_Func_BruTile_ITileSource__
@@ -22906,18 +22811,18 @@ references:
   commentId: T:Mapsui.UI.Android.SkiaRenderMode
   fullName: Mapsui.UI.Android.SkiaRenderMode
   nameWithType: SkiaRenderMode
-- uid: Mapsui.UI.Android.SkiaRenderMode.Accelerated
-  name: Accelerated
-  href: api/Mapsui.UI.Android.SkiaRenderMode.html#Mapsui_UI_Android_SkiaRenderMode_Accelerated
-  commentId: F:Mapsui.UI.Android.SkiaRenderMode.Accelerated
-  fullName: Mapsui.UI.Android.SkiaRenderMode.Accelerated
-  nameWithType: SkiaRenderMode.Accelerated
-- uid: Mapsui.UI.Android.SkiaRenderMode.Regular
-  name: Regular
-  href: api/Mapsui.UI.Android.SkiaRenderMode.html#Mapsui_UI_Android_SkiaRenderMode_Regular
-  commentId: F:Mapsui.UI.Android.SkiaRenderMode.Regular
-  fullName: Mapsui.UI.Android.SkiaRenderMode.Regular
-  nameWithType: SkiaRenderMode.Regular
+- uid: Mapsui.UI.Android.SkiaRenderMode.Hardware
+  name: Hardware
+  href: api/Mapsui.UI.Android.SkiaRenderMode.html#Mapsui_UI_Android_SkiaRenderMode_Hardware
+  commentId: F:Mapsui.UI.Android.SkiaRenderMode.Hardware
+  fullName: Mapsui.UI.Android.SkiaRenderMode.Hardware
+  nameWithType: SkiaRenderMode.Hardware
+- uid: Mapsui.UI.Android.SkiaRenderMode.Software
+  name: Software
+  href: api/Mapsui.UI.Android.SkiaRenderMode.html#Mapsui_UI_Android_SkiaRenderMode_Software
+  commentId: F:Mapsui.UI.Android.SkiaRenderMode.Software
+  fullName: Mapsui.UI.Android.SkiaRenderMode.Software
+  nameWithType: SkiaRenderMode.Software
 - uid: Mapsui.UI.FeatureInfoEventArgs
   name: FeatureInfoEventArgs
   href: api/Mapsui.UI.FeatureInfoEventArgs.html
@@ -30060,6 +29965,19 @@ references:
   commentId: T:Mapsui.Widgets.IWidget
   fullName: Mapsui.Widgets.IWidget
   nameWithType: IWidget
+- uid: Mapsui.Widgets.IWidget.Enabled
+  name: Enabled
+  href: api/Mapsui.Widgets.IWidget.html#Mapsui_Widgets_IWidget_Enabled
+  commentId: P:Mapsui.Widgets.IWidget.Enabled
+  fullName: Mapsui.Widgets.IWidget.Enabled
+  nameWithType: IWidget.Enabled
+- uid: Mapsui.Widgets.IWidget.Enabled*
+  name: Enabled
+  href: api/Mapsui.Widgets.IWidget.html#Mapsui_Widgets_IWidget_Enabled_
+  commentId: Overload:Mapsui.Widgets.IWidget.Enabled
+  isSpec: "True"
+  fullName: Mapsui.Widgets.IWidget.Enabled
+  nameWithType: IWidget.Enabled
 - uid: Mapsui.Widgets.IWidget.Envelope
   name: Envelope
   href: api/Mapsui.Widgets.IWidget.html#Mapsui_Widgets_IWidget_Envelope
@@ -30791,6 +30709,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.Widgets.Widget.CalculatePositionY
   nameWithType: Widget.CalculatePositionY
+- uid: Mapsui.Widgets.Widget.Enabled
+  name: Enabled
+  href: api/Mapsui.Widgets.Widget.html#Mapsui_Widgets_Widget_Enabled
+  commentId: P:Mapsui.Widgets.Widget.Enabled
+  fullName: Mapsui.Widgets.Widget.Enabled
+  nameWithType: Widget.Enabled
+- uid: Mapsui.Widgets.Widget.Enabled*
+  name: Enabled
+  href: api/Mapsui.Widgets.Widget.html#Mapsui_Widgets_Widget_Enabled_
+  commentId: Overload:Mapsui.Widgets.Widget.Enabled
+  isSpec: "True"
+  fullName: Mapsui.Widgets.Widget.Enabled
+  nameWithType: Widget.Enabled
 - uid: Mapsui.Widgets.Widget.Envelope
   name: Envelope
   href: api/Mapsui.Widgets.Widget.html#Mapsui_Widgets_Widget_Envelope
