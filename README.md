@@ -8,13 +8,10 @@
 | Build docs | [![Build status](https://ci.appveyor.com/api/projects/status/c8hcfeoafmf51gin/branch/master?svg=true)](https://ci.appveyor.com/project/pauldendulk/mapsui-373p1/branch/master) |
 
 ## News
-- 2020  march 10: Follow Mapsui on Twitter https://twitter.com/mapsui
-- 2020 march 7: Thanks to @charlenni Mapsui now supports *Custom Style Renderers* which allows users to render a feature any way they like using SkiaSharp. Documentation and samples [here](https://mapsui.com/documentation/custom-style-renders.html).
-  - ![custom stye renderer](https://raw.githubusercontent.com/Mapsui/Mapsui/master/docfx/documentation/images/special.gif)
-- 2020 march 7: Now using hardware acceleration for Android and iOS.
-- 2020 march 7: Rida Noor created a [Tutorial](https://mapsui.com/documentation/tutorials.html) and [sample](https://github.com/RidaNoor/Mapsui-MVVMCross) for MVVM support.
-- 2020 march 7: We are approaching a 2.0 release. Currently no new features planned and no known blocking bugs.
-- 2020 februari 2: We have a gitter channel https://gitter.im/Mapsui/Lobby
+
+- 2020 May 4: Released Mapsui 2.0.0!
+- 2020 March 10: Follow Mapsui on Twitter https://twitter.com/mapsui
+- 2020 Februari 2: We have a gitter channel https://gitter.im/Mapsui/Lobby
 
 ## Mapsui (pronounced map-su-wii)
 
