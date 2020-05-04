@@ -10,6 +10,12 @@ We are delightly with our first gold sponsor Sebastian Kruze, who has also contr
 
 [Sebastian Kruse](https://github.com/Sebastian1989101)
 
+## Projects that use Mapsui
+
+### Breath Companion
+
+[See the website here](https://software-notion.de/apps/breath-companion)
+
 ## Support
 
 If you are interested in more support for Mapsui please mail [pauldendulk@gmail.com](mailto:pauldendulk@gmail.com).
