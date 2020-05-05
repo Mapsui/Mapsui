@@ -124,17 +124,7 @@ namespace Mapsui
 
         public void ZoomTo(double resolution, Point centerOfZoom)
         {
-            // 1) Temporarily center on the center of zoom
-            _viewport.SetCenter(_viewport.ScreenToWorld(centerOfZoom));
-
-            // 2) Then zoom 
-            _viewport.SetResolution(resolution);
-
-            // 3) Then move the temporary center of the map back to the mouse position
-            _viewport.SetCenter(_viewport.ScreenToWorld(
-                _viewport.Width - centerOfZoom.X,
-                _viewport.Height - centerOfZoom.Y));
-
+            _viewport.SetResolution(resolution, centerOfZoom);
             Navigated?.Invoke(this, EventArgs.Empty);
         }
     }
