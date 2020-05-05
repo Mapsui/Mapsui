@@ -36,6 +36,13 @@ The best way to get going with Mapsui is by using the Samples. If you clone the 
 ## Questions
 If you have a question please submit an issue [here](https://github.com/mapsui/Mapsui/issues)
 
+## How can I help as a user
+- Write clear issues. Mention the Mapsui version and which platform you use. Use screenshots and capture gif animations for issues that are hard to explain.
+- Create minimal reproducible samples if possible. This speeds up fixing the issue a lot.
+- Let yourself be heard. We need to know which issues you are struggling with. You need to be respectful but don't be too modest.
+- You can vote on [feature-request issues](https://github.com/Mapsui/Mapsui/issues?q=is%3Aopen+label%3Afeature-request+sort%3Areactions-%2B1-desc) by adding a thumps up on the first post of the issue. 
+- Close an issue if your question is answered.
+
 ## Contributing
 See the [guidelines](http://mapsui.com/documentation/Contributors-Guidelines.html)
 
