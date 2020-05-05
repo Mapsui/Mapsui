@@ -10,6 +10,9 @@
 ## News
 
 - 2020 May 4: Released Mapsui 2.0.0!
+  - The main developers on v2 are Dirk Weltz (@charlenni) and Paul den Dulk (@pauldendulk).
+  - Thanks go to all contributors:  https://github.com/Mapsui/Mapsui/graphs/contributors
+  - Many users entered valuable bug reports as well, thanks.
 - 2020 March 10: Follow Mapsui on Twitter https://twitter.com/mapsui
 - 2020 Februari 2: We have a gitter channel https://gitter.im/Mapsui/Lobby
 
