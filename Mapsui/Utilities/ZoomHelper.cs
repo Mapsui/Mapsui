@@ -26,10 +26,10 @@ namespace Mapsui.Utilities
         {
             if (resolutions == null) return resolution / 2.0;
 
-            for (var i = 0; i <= resolutions.Count - 1; i++)
+            for (var i = 0; i < resolutions.Count; i++)
             {
                 // If there is a smaller resolution in the array return it
-                if (resolutions[i] < (resolution + double.Epsilon)) return resolutions[i];
+                if (resolutions[i] < (resolution - double.Epsilon)) return resolutions[i];
             }
 
             // Else return half of the current resolution
@@ -43,7 +43,7 @@ namespace Mapsui.Utilities
             for (var i = resolutions.Count - 1; i >= 0; i--)
             {
                 // If there is a bigger resolution in the array return it
-                if (resolutions[i] > (resolution - double.Epsilon)) return resolutions[i];
+                if (resolutions[i] > (resolution + double.Epsilon)) return resolutions[i];
             }
 
             // Else return double the current resolution
