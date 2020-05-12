@@ -1,5 +1,6 @@
 # Roadmap 
-- *Updated May 2020
+*Updated May 2020*
+
 
 - Replace Mapsui.Geometries with NTS
 - Add vector tiles
