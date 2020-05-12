@@ -6748,6 +6748,12 @@ references:
   commentId: M:Mapsui.IViewport.SetResolution(System.Double)
   fullName: Mapsui.IViewport.SetResolution(System.Double)
   nameWithType: IViewport.SetResolution(Double)
+- uid: Mapsui.IViewport.SetResolution(System.Double,Mapsui.Geometries.ReadOnlyPoint)
+  name: SetResolution(Double, ReadOnlyPoint)
+  href: api/Mapsui.IViewport.html#Mapsui_IViewport_SetResolution_System_Double_Mapsui_Geometries_ReadOnlyPoint_
+  commentId: M:Mapsui.IViewport.SetResolution(System.Double,Mapsui.Geometries.ReadOnlyPoint)
+  fullName: Mapsui.IViewport.SetResolution(System.Double, Mapsui.Geometries.ReadOnlyPoint)
+  nameWithType: IViewport.SetResolution(Double, ReadOnlyPoint)
 - uid: Mapsui.IViewport.SetResolution*
   name: SetResolution
   href: api/Mapsui.IViewport.html#Mapsui_IViewport_SetResolution_
@@ -8800,6 +8806,12 @@ references:
   commentId: M:Mapsui.LimitedViewport.SetResolution(System.Double)
   fullName: Mapsui.LimitedViewport.SetResolution(System.Double)
   nameWithType: LimitedViewport.SetResolution(Double)
+- uid: Mapsui.LimitedViewport.SetResolution(System.Double,Mapsui.Geometries.ReadOnlyPoint)
+  name: SetResolution(Double, ReadOnlyPoint)
+  href: api/Mapsui.LimitedViewport.html#Mapsui_LimitedViewport_SetResolution_System_Double_Mapsui_Geometries_ReadOnlyPoint_
+  commentId: M:Mapsui.LimitedViewport.SetResolution(System.Double,Mapsui.Geometries.ReadOnlyPoint)
+  fullName: Mapsui.LimitedViewport.SetResolution(System.Double, Mapsui.Geometries.ReadOnlyPoint)
+  nameWithType: LimitedViewport.SetResolution(Double, ReadOnlyPoint)
 - uid: Mapsui.LimitedViewport.SetResolution*
   name: SetResolution
   href: api/Mapsui.LimitedViewport.html#Mapsui_LimitedViewport_SetResolution_
@@ -29733,6 +29745,12 @@ references:
   commentId: M:Mapsui.Viewport.SetResolution(System.Double)
   fullName: Mapsui.Viewport.SetResolution(System.Double)
   nameWithType: Viewport.SetResolution(Double)
+- uid: Mapsui.Viewport.SetResolution(System.Double,Mapsui.Geometries.ReadOnlyPoint)
+  name: SetResolution(Double, ReadOnlyPoint)
+  href: api/Mapsui.Viewport.html#Mapsui_Viewport_SetResolution_System_Double_Mapsui_Geometries_ReadOnlyPoint_
+  commentId: M:Mapsui.Viewport.SetResolution(System.Double,Mapsui.Geometries.ReadOnlyPoint)
+  fullName: Mapsui.Viewport.SetResolution(System.Double, Mapsui.Geometries.ReadOnlyPoint)
+  nameWithType: Viewport.SetResolution(Double, ReadOnlyPoint)
 - uid: Mapsui.Viewport.SetResolution*
   name: SetResolution
   href: api/Mapsui.Viewport.html#Mapsui_Viewport_SetResolution_
