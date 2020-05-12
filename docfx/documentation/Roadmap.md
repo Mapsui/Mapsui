@@ -14,6 +14,8 @@
 # Later
 - Change license to MIT
 
+# Not
+3D support
 
 
 
