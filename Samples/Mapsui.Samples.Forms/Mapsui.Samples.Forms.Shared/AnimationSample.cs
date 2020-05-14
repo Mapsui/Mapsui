@@ -18,7 +18,7 @@ namespace Mapsui.Samples.Forms
             var mapView = sender as MapView;
             var e = args as MapClickedEventArgs;
 
-            var navigator = (AnimatedNavigator)mapView.Navigator;
+            var navigator = mapView.Navigator;
 
             var newRot = random.NextDouble() * 360.0;
 
@@ -33,7 +33,6 @@ namespace Mapsui.Samples.Forms
             var mapView = mapControl as MapView;
 
             mapControl.Map = OsmSample.CreateMap();
-            mapView.Navigator = new AnimatedNavigator(mapView.Map, (IViewport)mapView.Viewport);
         }
     }
 }
