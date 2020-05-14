@@ -26,7 +26,7 @@ namespace Mapsui
         /// <inheritdoc />
         public void NavigateTo(BoundingBox extent, ScaleMethod scaleMethod = ScaleMethod.Fit)
         {
-            NavigateTo(extent, scaleMethod, 300);
+            NavigateTo(extent, scaleMethod, 0);
         }
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace Mapsui
         /// <inheritdoc />
         public void NavigateToFullEnvelope(ScaleMethod scaleMethod = ScaleMethod.Fill)
         {
-            NavigateTo(_map.Envelope, scaleMethod, 300);
+            NavigateTo(_map.Envelope, scaleMethod, 0);
         }
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace Mapsui
         /// <inheritdoc />
         public void NavigateTo(Point center, double resolution)
         {
-            NavigateTo(center, resolution, 300);
+            NavigateTo(center, resolution, 0);
         }
 
         /// <summary>
@@ -133,7 +133,7 @@ namespace Mapsui
         /// <inheritdoc />
         public void ZoomTo(double resolution)
         {
-            ZoomTo(resolution, 300);
+            ZoomTo(resolution, 0);
         }
 
         /// <summary>
@@ -244,13 +244,13 @@ namespace Mapsui
         /// <inheritdoc />
         public void CenterOn(double x, double y)
         {
-            CenterOn(x, y, 300);
+            CenterOn(x, y, 0);
         }
 
         /// <inheritdoc />
         public void CenterOn(Point center)
         {
-            CenterOn(center.X, center.Y, 300);
+            CenterOn(center.X, center.Y, 0);
         }
 
         /// <summary>
@@ -384,14 +384,14 @@ namespace Mapsui
         /// <inheritdoc />
         public void RotateTo(double rotation)
         {
-            RotateTo(rotation, 300);
+            RotateTo(rotation, 0);
         }
 
         /// <summary>
         /// Change rotation of viewport
         /// </summary>
         /// <param name="rotation">New rotation in degrees of viewport></param>
-        public void RotateTo(double rotation, long duration)
+        public void RotateTo(double rotation, long duration = 300)
         {
             // Stop any old animation if there is one
             if (_animation != null)
