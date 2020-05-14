@@ -153,41 +153,7 @@ namespace Mapsui
         /// <param name="duration">Duration of animation in milliseconds</param>
         public void ZoomTo(double resolution, long duration = 300)
         {
-            // Stop any old animation if there is one
-            if (_animation != null)
-            {
-                _animation.Stop(false);
-                _animation = null;
-            }
-
-            if (duration == 0)
-            {
-                _viewport.SetResolution(resolution);
-
-                Navigated?.Invoke(this, EventArgs.Empty);
-            }
-            else
-            {
-                var animations = new List<AnimationEntry>();
-
-                if (_viewport.Resolution == resolution)
-                    return;
-
-                var entry = new AnimationEntry(
-                    start: _viewport.Resolution,
-                    end: resolution,
-                    animationStart: 0,
-                    animationEnd: 1,
-                    easing: Easing.Linear,
-                    tick: ResolutionTick,
-                    final: ResolutionFinal
-                    );
-                animations.Add(entry);
-
-                _animation = new Animation(duration);
-                _animation.Entries.AddRange(animations);
-                _animation.Start();
-            }
+            InternalZoomTo(resolution, duration, ResolutionTick, ResolutionFinal);
         }
 
         /// <summary>
@@ -237,18 +203,37 @@ namespace Mapsui
         /// <param name="centerOfZoom">Center to use for zoom</param>
         public void ZoomTo(double resolution, Point centerOfZoom)
         {
-            // 1) Temporarily center on the center of zoom
-            _viewport.SetCenter(_viewport.ScreenToWorld(centerOfZoom));
+            ZoomTo(resolution, centerOfZoom, _animationTime);
+        }
 
-            // 2) Then zoom 
-            _viewport.SetResolution(resolution);
+        /// <summary>
+        /// Zoom to a given resolution with a given point as center
+        /// </summary>
+        /// <param name="resolution">Resolution to zoom</param>
+        /// <param name="centerOfZoom">Center to use for zoom</param>
+        /// <param name="duration">Animation time in milliseconds</param>
+        public void ZoomTo(double resolution, Point centerOfZoom, long duration = 300)
+        {
+            Action<AnimationEntry, double> tick = (entry, value) =>
+            {
+                var r = (double)entry.Start + ((double)entry.End - (double)entry.Start) * entry.Easing.Ease(value);
 
-            // 3) Then move the temporary center of the map back to the mouse position
-            _viewport.SetCenter(_viewport.ScreenToWorld(
-                _viewport.Width - centerOfZoom.X,
-                _viewport.Height - centerOfZoom.Y));
+                // 1) Temporarily center on the center of zoom
+                _viewport.SetCenter(_viewport.ScreenToWorld(centerOfZoom));
 
-            Navigated?.Invoke(this, EventArgs.Empty);
+                // 2) Then zoom 
+                _viewport.SetResolution(r);
+
+                // 3) Then move the temporary center of the map back to the mouse position
+                _viewport.SetCenter(_viewport.ScreenToWorld(
+                    _viewport.Width - centerOfZoom.X,
+                    _viewport.Height - centerOfZoom.Y));
+
+                Navigated?.Invoke(this, EventArgs.Empty);
+
+            };
+
+            InternalZoomTo(resolution, duration, tick, ResolutionFinal);
         }
 
         /// <inheritdoc />
@@ -465,6 +450,45 @@ namespace Mapsui
             _viewport.SetCenter((ReadOnlyPoint)entry.End);
 
             Navigated?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void InternalZoomTo(double resolution, long duration, Action<AnimationEntry, double> tick, Action<AnimationEntry> final)
+        {
+            // Stop any old animation if there is one
+            if (_animation != null)
+            {
+                _animation.Stop(false);
+                _animation = null;
+            }
+
+            if (duration == 0)
+            {
+                _viewport.SetResolution(resolution);
+
+                Navigated?.Invoke(this, EventArgs.Empty);
+            }
+            else
+            {
+                var animations = new List<AnimationEntry>();
+
+                if (_viewport.Resolution == resolution)
+                    return;
+
+                var entry = new AnimationEntry(
+                    start: _viewport.Resolution,
+                    end: resolution,
+                    animationStart: 0,
+                    animationEnd: 1,
+                    easing: Easing.Linear,
+                    tick: tick,
+                    final: final
+                    );
+                animations.Add(entry);
+
+                _animation = new Animation(duration);
+                _animation.Entries.AddRange(animations);
+                _animation.Start();
+            }
         }
 
         private void ResolutionTick(AnimationEntry entry, double value)
