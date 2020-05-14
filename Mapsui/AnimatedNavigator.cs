@@ -13,20 +13,30 @@ namespace Mapsui
         private readonly IViewport _viewport;
         private Animation _animation;
         private double _rotationDelta;
+        private long _animationTime = 0;
 
         public EventHandler Navigated { get; set; } 
 
-        public AnimatedNavigator(Map map, IViewport viewport)
+        public AnimatedNavigator(Map map, IViewport viewport, long animationTime = 0)
         {
             _map = map;
             _viewport = viewport;
+            _animationTime = animationTime;
         }
 
+        /// <summary>
+        /// Time for animations in milliseconds 
+        /// </summary>
+        public long AnimationTime
+        {
+            get => _animationTime;
+            set { _animationTime = value; }
+        }
 
         /// <inheritdoc />
         public void NavigateTo(BoundingBox extent, ScaleMethod scaleMethod = ScaleMethod.Fit)
         {
-            NavigateTo(extent, scaleMethod, 0);
+            NavigateTo(extent, scaleMethod, _animationTime);
         }
 
         /// <summary>
@@ -48,7 +58,7 @@ namespace Mapsui
         /// <inheritdoc />
         public void NavigateToFullEnvelope(ScaleMethod scaleMethod = ScaleMethod.Fill)
         {
-            NavigateTo(_map.Envelope, scaleMethod, 0);
+            NavigateTo(_map.Envelope, scaleMethod, _animationTime);
         }
 
         /// <summary>
@@ -64,7 +74,7 @@ namespace Mapsui
         /// <inheritdoc />
         public void NavigateTo(Point center, double resolution)
         {
-            NavigateTo(center, resolution, 0);
+            NavigateTo(center, resolution, _animationTime);
         }
 
         /// <summary>
@@ -133,7 +143,7 @@ namespace Mapsui
         /// <inheritdoc />
         public void ZoomTo(double resolution)
         {
-            ZoomTo(resolution, 0);
+            ZoomTo(resolution, _animationTime);
         }
 
         /// <summary>
@@ -244,13 +254,13 @@ namespace Mapsui
         /// <inheritdoc />
         public void CenterOn(double x, double y)
         {
-            CenterOn(x, y, 0);
+            CenterOn(x, y, _animationTime);
         }
 
         /// <inheritdoc />
         public void CenterOn(Point center)
         {
-            CenterOn(center.X, center.Y, 0);
+            CenterOn(center.X, center.Y, _animationTime);
         }
 
         /// <summary>
@@ -384,7 +394,7 @@ namespace Mapsui
         /// <inheritdoc />
         public void RotateTo(double rotation)
         {
-            RotateTo(rotation, 0);
+            RotateTo(rotation, _animationTime);
         }
 
         /// <summary>
