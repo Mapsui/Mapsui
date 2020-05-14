@@ -602,7 +602,7 @@ namespace Mapsui
             // Nothing to do
         }
 
-        private void StopRunningAnimation()
+        public void StopRunningAnimation()
         {
             if (_animation != null)
             {

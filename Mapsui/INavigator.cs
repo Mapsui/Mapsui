@@ -102,5 +102,10 @@ namespace Mapsui
         /// <param name="velocityY">Screen VelocityX from SwipedEventArgs></param>
         /// <param name="maxDuration">Max duration of fling deceleration, changes based on total velocity></param>
         void AnimateFling(double velocityX, double velocityY, long maxDuration);
+
+        /// <summary>
+        /// Stop any current animation if it is running
+        /// </summary>
+        void StopRunningAnimation();
     }
 }
