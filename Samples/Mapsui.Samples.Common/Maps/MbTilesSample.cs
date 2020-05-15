@@ -22,7 +22,7 @@ namespace Mapsui.Samples.Common.Maps
         public static Map CreateMap()
         {
             var map = new Map();
-            map.Layers.Add(CreateMbTilesLayer(Path.Combine(MbTilesLocation, "world.mbtiles"), "regular"));
+            map.Layers.Add(CreateMbTilesLayer(Path.GetFullPath(Path.Combine(MbTilesLocation, "world.mbtiles")), "regular"));
             return map;
         }
 
