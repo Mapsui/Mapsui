@@ -13,6 +13,23 @@ namespace Mapsui
         private double _rotationDelta;
         private Point _animationZoomCenter;
 
+        private static long _defaultDuration = 0;
+
+        /// <summary>
+        /// Default value for duration, if nothing is given by the different functions
+        /// </summary>
+        public static long DefaultDuration
+        {
+            get => _defaultDuration;
+            set
+            {
+                if (value < 0)
+                    _defaultDuration = 0;
+                else
+                    _defaultDuration = value;
+            }
+        }
+
         public EventHandler Navigated { get; set; }
 
         public Navigator(Map map, IViewport viewport)
@@ -26,8 +43,8 @@ namespace Mapsui
         /// </summary>
         /// <param name="extent">New extent for viewport to show</param>
         /// <param name="scaleMethod">Scale method to use to determine resolution</param>
-        /// <param name="duration">Duration of animation in millisecondsScale method to use to determine resolution</param>
-        public void NavigateTo(BoundingBox extent, ScaleMethod scaleMethod = ScaleMethod.Fit, long duration = 0)
+        /// <param name="duration">Duration for animation in milliseconds. If less then 0, then <see cref="DefaultDuration"/> is used.</param>
+        public void NavigateTo(BoundingBox extent, ScaleMethod scaleMethod = ScaleMethod.Fit, long duration = -1)
         {
             if (extent == null) return;
 
@@ -40,9 +57,9 @@ namespace Mapsui
         /// <summary>
         /// Navigate to a resolution, so such the map uses the fill method
         /// </summary>
-        /// <param name="scaleMethod"></param>
-        /// <param name="duration">Duration of animation in millisecondsScale method to use to determine resolution</param>
-        public void NavigateToFullEnvelope(ScaleMethod scaleMethod = ScaleMethod.Fill, long duration = 0)
+        /// <param name="scaleMethod">Scale method to use to determine resolution</param>
+        /// <param name="duration">Duration for animation in milliseconds. If less then 0, then <see cref="DefaultDuration"/> is used.</param>
+        public void NavigateToFullEnvelope(ScaleMethod scaleMethod = ScaleMethod.Fill, long duration = -1)
         {
             NavigateTo(_map.Envelope, scaleMethod, duration);
         }
@@ -52,11 +69,13 @@ namespace Mapsui
         /// </summary>
         /// <param name="center">New center to move to</param>
         /// <param name="resolution">New resolution to use</param>
-        /// <param name="duration">Duration of animation in milliseconds</param>
-        public void NavigateTo(Point center, double resolution, long duration = 0)
+        /// <param name="duration">Duration for animation in milliseconds. If less then 0, then <see cref="DefaultDuration"/> is used.</param>
+        public void NavigateTo(Point center, double resolution, long duration = -1)
         {
             // Stop any old animation if there is one
             StopRunningAnimation();
+
+            duration = duration < 0 ? _defaultDuration : duration;
 
             if (duration == 0)
             {
@@ -111,11 +130,13 @@ namespace Mapsui
         /// </summary>
         /// <param name="center">screen center point to zoom at</param>
         /// <param name="resolution">New resolution to use</param>
-        /// <param name="duration">Duration of animation in milliseconds</param>
-        public void ZoomTo(Point center, double resolution, long duration = 0)
+        /// <param name="duration">Duration for animation in milliseconds. If less then 0, then <see cref="DefaultDuration"/> is used.</param>
+        public void ZoomTo(Point center, double resolution, long duration = -1)
         {
             // Stop any old animation if there is one
             StopRunningAnimation();
+
+            duration = duration < 0 ? _defaultDuration : duration;
 
             if (duration == 0)
             {
@@ -153,11 +174,13 @@ namespace Mapsui
         /// Change resolution of viewport
         /// </summary>
         /// <param name="resolution">New resolution to use</param>
-        /// <param name="duration">Duration of animation in milliseconds</param>
-        public void ZoomTo(double resolution, long duration = 0)
+        /// <param name="duration">Duration for animation in milliseconds. If less then 0, then <see cref="DefaultDuration"/> is used.</param>
+        public void ZoomTo(double resolution, long duration = -1)
         {
             // Stop any old animation if there is one
             StopRunningAnimation();
+
+            duration = duration < 0 ? _defaultDuration : duration;
 
             if (duration == 0)
             {
@@ -192,7 +215,8 @@ namespace Mapsui
         /// <summary>
         /// Zoom in to the next resolution
         /// </summary>
-        public void ZoomIn(long duration = 0)
+        /// <param name="duration">Duration for animation in milliseconds. If less then 0, then <see cref="DefaultDuration"/> is used.</param>
+        public void ZoomIn(long duration = -1)
         {
             var resolution = ZoomHelper.ZoomIn(_map.Resolutions, _viewport.Resolution);
 
@@ -202,7 +226,8 @@ namespace Mapsui
         /// <summary>
         /// Zoom out to the next resolution
         /// </summary>
-        public void ZoomOut(long duration = 0)
+        /// <param name="duration">Duration for animation in milliseconds. If less then 0, then <see cref="DefaultDuration"/> is used.</param>
+        public void ZoomOut(long duration = -1)
         {
             var resolution = ZoomHelper.ZoomOut(_map.Resolutions, _viewport.Resolution);
 
@@ -213,9 +238,11 @@ namespace Mapsui
         /// Zoom in to a given point
         /// </summary>
         /// <param name="centerOfZoom">Center to use for zoom in</param>
-        public void ZoomIn(Point centerOfZoom, long duration = 0)
+        /// <param name="duration">Duration for animation in milliseconds. If less then 0, then <see cref="DefaultDuration"/> is used.</param>
+        public void ZoomIn(Point centerOfZoom, long duration = -1)
         {
             var resolution = ZoomHelper.ZoomIn(_map.Resolutions, _viewport.Resolution);
+
             ZoomTo(resolution, centerOfZoom, duration);
         }
 
@@ -223,9 +250,11 @@ namespace Mapsui
         /// Zoom out to a given point
         /// </summary>
         /// <param name="centerOfZoom">Center to use for zoom out</param>
-        public void ZoomOut(Point centerOfZoom, long duration = 0)
+        /// <param name="duration">Duration for animation in milliseconds. If less then 0, then <see cref="DefaultDuration"/> is used.</param>
+        public void ZoomOut(Point centerOfZoom, long duration = -1)
         {
             var resolution = ZoomHelper.ZoomOut(_map.Resolutions, _viewport.Resolution);
+
             ZoomTo(resolution, centerOfZoom, duration);
         }
 
@@ -234,10 +263,13 @@ namespace Mapsui
         /// </summary>
         /// <param name="resolution">Resolution to zoom</param>
         /// <param name="centerOfZoom">Center to use for zoom</param>
-        public void ZoomTo(double resolution, Point centerOfZoom, long duration = 0)
+        /// <param name="duration">Duration for animation in milliseconds. If less then 0, then <see cref="DefaultDuration"/> is used.</param>
+        public void ZoomTo(double resolution, Point centerOfZoom, long duration = -1)
         {
             // Stop any old animation if there is one
             StopRunningAnimation();
+
+            duration = duration < 0 ? _defaultDuration : duration;
 
             if (duration == 0)
             {
@@ -276,9 +308,9 @@ namespace Mapsui
         /// </summary>
         /// <param name="x">X value of the new center</param>
         /// <param name="y">Y value of the new center</param>
-        /// <param name="duration">Duration of animation in milliseconds</param>
+        /// <param name="duration">Duration for animation in milliseconds. If less then 0, then <see cref="DefaultDuration"/> is used.</param>
         /// <param name="easing">Function for easing</param>
-        public void CenterOn(double x, double y, long duration = 0)
+        public void CenterOn(double x, double y, long duration = -1)
         {
             CenterOn(new Point(x, y), duration);
         }
@@ -287,12 +319,14 @@ namespace Mapsui
         /// Change center of viewport
         /// </summary>
         /// <param name="center">New center point of viewport</param>
-        /// <param name="duration">Duration of animation in milliseconds</param>
+        /// <param name="duration">Duration for animation in milliseconds. If less then 0, then <see cref="DefaultDuration"/> is used.</param>
         /// <param name="easing">Function for easing</param>
-        public void CenterOn(Point center, long duration = 0)
+        public void CenterOn(Point center, long duration = -1)
         {
             // Stop any old animation if there is one
             StopRunningAnimation();
+
+            duration = duration < 0 ? _defaultDuration : duration;
 
             if (duration == 0)
             {
@@ -329,11 +363,13 @@ namespace Mapsui
         /// </summary>
         /// <param name="center">Point to fly to</param>
         /// <param name="maxResolution">Maximum resolution to zoom out</param>
-        /// <param name="duration">Duration for animation in milliseconds</param>
+        /// <param name="duration">Duration for animation in milliseconds. If less then 0, then <see cref="DefaultDuration"/> is used.</param>
         public void FlyTo(Point center, double maxResolution, long duration = 2000)
         {
             // Stop any old animation if there is one
             StopRunningAnimation();
+
+            duration = duration < 0 ? _defaultDuration : duration;
 
             var halfCenter = new Point(_viewport.Center.X + (center.X - _viewport.Center.X) / 2.0, _viewport.Center.Y + (center.Y - _viewport.Center.Y) / 2.0);
             var resolution = _viewport.Resolution;
@@ -395,10 +431,13 @@ namespace Mapsui
         /// Change rotation of viewport
         /// </summary>
         /// <param name="rotation">New rotation in degrees of viewport></param>
-        public void RotateTo(double rotation, long duration = 0)
+        /// <param name="duration">Duration for animation in milliseconds. If less then 0, then <see cref="DefaultDuration"/> is used.</param>
+        public void RotateTo(double rotation, long duration = -1)
         {
             // Stop any old animation if there is one
             StopRunningAnimation();
+
+            duration = duration < 0 ? _defaultDuration : duration;
 
             if (duration == 0)
             {
@@ -444,7 +483,7 @@ namespace Mapsui
         /// </summary>
         /// <param name="velocityX">VelocityX from SwipedEventArgs></param>
         /// <param name="velocityY">VelocityX from SwipedEventArgs></param>
-        /// <param name="duration">Duration of fling deceleration></param>
+        /// <param name="maxDuration">Maximum duration of fling deceleration></param>
         public void AnimateFling(double velocityX, double velocityY, long maxDuration)
         {
             // Stop any old animation if there is one
@@ -483,6 +522,19 @@ namespace Mapsui
             _animation = new Animation((long)animateMillis);
             _animation.Entries.AddRange(animations);
             _animation.Start();
+        }
+
+        /// <summary>
+        /// Stop all running animations
+        /// </summary>
+        public void StopRunningAnimation()
+        {
+            if (_animation != null)
+            {
+                _animation.Stop(false);
+                _animation = null;
+                _animationZoomCenter = null;
+            }
         }
 
         private void CenterTick(AnimationEntry entry, double value)
@@ -600,16 +652,6 @@ namespace Mapsui
         private void FlingFinal(AnimationEntry entry)
         {
             // Nothing to do
-        }
-
-        public void StopRunningAnimation()
-        {
-            if (_animation != null)
-            {
-                _animation.Stop(false);
-                _animation = null;
-                _animationZoomCenter = null;
-            }
         }
     }
 }
