@@ -133,41 +133,7 @@ namespace Mapsui
         /// <param name="duration">Duration for animation in milliseconds. If less then 0, then <see cref="DefaultDuration"/> is used.</param>
         public void ZoomTo(Point center, double resolution, long duration = -1)
         {
-            // Stop any old animation if there is one
-            StopRunningAnimation();
-
-            duration = duration < 0 ? _defaultDuration : duration;
-
-            if (duration == 0)
-            {
-                _viewport.SetResolution(resolution);
-
-                Navigated?.Invoke(this, EventArgs.Empty);
-            }
-            else
-            {
-                _animationZoomCenter = center;
-
-                var animations = new List<AnimationEntry>();
-
-                if (_viewport.Resolution == resolution)
-                    return;
-
-                var entry = new AnimationEntry(
-                    start: _viewport.Resolution,
-                    end: resolution,
-                    animationStart: 0,
-                    animationEnd: 1,
-                    easing: Easing.Linear,
-                    tick: ResolutionTick,
-                    final: ResolutionFinal
-                );
-                animations.Add(entry);
-
-                _animation = new Animation(duration);
-                _animation.Entries.AddRange(animations);
-                _animation.Start();
-            }
+            ZoomTo(resolution, center, duration);
         }
 
         /// <summary>
