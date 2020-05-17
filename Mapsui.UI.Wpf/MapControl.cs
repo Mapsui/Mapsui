@@ -36,7 +36,6 @@ namespace Mapsui.UI.Wpf
 
         private readonly Rectangle _selectRectangle = CreateSelectRectangle();
         private readonly DoubleAnimation _zoomAnimation = new DoubleAnimation();
-        private readonly Storyboard _zoomStoryBoard = new Storyboard();
         private Geometries.Point _currentMousePosition;
         private Geometries.Point _downMousePosition;
         private bool _mouseDown;
@@ -190,20 +189,7 @@ namespace Mapsui.UI.Wpf
         {
             SetViewportSize();
 
-            InitAnimation();
             Focusable = true;
-        }
-        
-
-
-        private void InitAnimation()
-        {
-            _zoomAnimation.Completed += ZoomAnimationCompleted;
-            _zoomAnimation.Duration = new Duration(new TimeSpan(0, 0, 0, 0, 1000));
-            _zoomAnimation.EasingFunction = new QuarticEase();
-            Storyboard.SetTarget(_zoomAnimation, this);
-            Storyboard.SetTargetProperty(_zoomAnimation, new PropertyPath("Resolution"));
-            _zoomStoryBoard.Children.Add(_zoomAnimation);
         }
 
         private void MapControlMouseWheel(object sender, MouseWheelEventArgs e)
@@ -228,25 +214,7 @@ namespace Mapsui.UI.Wpf
 
             _toResolution = Map.Limiter.LimitResolution(_toResolution, Viewport.Width, Viewport.Height, Map.Resolutions, Map.Envelope);
 
-            // Some cheating to trigger a zoom animation if resolution does not change.
-            // This workaround could be ommitted if the zoom animations was on CenterX, CenterY and Resolution, not Resolution alone.
-            // todo: Remove this workaround once animations are centralized.
-            Navigator.CenterOn(new Geometries.Point(Viewport.Center.X + 0.000000001, Viewport.Center.Y + 0.000000001));
-
-            StartZoomAnimation(Viewport.Resolution, _toResolution);
-        }
-
-        private void StartZoomAnimation(double begin, double end)
-        {
-            _zoomStoryBoard.Pause(); //using Stop() here causes unexpected results while zooming very fast.
-            _zoomAnimation.From = begin;
-            _zoomAnimation.To = end;
-            _zoomStoryBoard.Begin();
-        }
-
-        private void ZoomAnimationCompleted(object sender, EventArgs e)
-        {
-            _toResolution = double.NaN;
+            Navigator.ZoomTo(_toResolution, _currentMousePosition, 1000);
         }
 
         private void MapControlSizeChanged(object sender, SizeChangedEventArgs e)

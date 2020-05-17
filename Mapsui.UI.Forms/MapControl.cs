@@ -438,7 +438,12 @@ namespace Mapsui.UI.Forms
             // TODO
             // Perform standard behavior
 
-            return args.Handled;
+            if (args.Handled)
+                return true;
+
+            Navigator.AnimateFling(velocityX, velocityY, 1000);
+
+            return true;
         }
 
         /// <summary>
