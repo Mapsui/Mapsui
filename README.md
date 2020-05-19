@@ -29,13 +29,13 @@ Quickly get a sample running in [WPF](https://mapsui.github.io/Mapsui/documentat
 [Android](https://mapsui.github.io/Mapsui/documentation/getting-started-android.html).
 
 ## Documentation
-The documentation can be found [here](https://mapsui.com). Let us know what kind of information you are missing.
+The documentation can be found at [mapsui.com](https://mapsui.com). Let us know what kind of information you are missing.
 
 ## Samples
 The best way to get going with Mapsui is by using the Samples. If you clone the project there is a Samples folder with a Mapsui.Samples.Wpf project with the list of samples. The accompanying code can be found [here](https://github.com/Mapsui/Mapsui/tree/master/Samples/Mapsui.Samples.Common/Maps).
 
 ## Questions
-If you have a question please submit an issue [here](https://github.com/mapsui/Mapsui/issues)
+If you have a question please submit this as an issue [here on github](https://github.com/mapsui/Mapsui/issues).
 
 ## How can I help as a user
 - Write clear issues. Mention the Mapsui version and which platform you use. 
