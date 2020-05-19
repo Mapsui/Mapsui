@@ -9,6 +9,7 @@
 
 ## News
 
+- 2020 May 17: Released Mapsui 2.0.1 with some bug fixes around zooming.
 - 2020 May 4: Released Mapsui 2.0.0!
   - The main developers on v2 are Dirk Weltz (@charlenni) and Paul den Dulk (@pauldendulk).
   - Thanks go to all contributors:  https://github.com/Mapsui/Mapsui/graphs/contributors
@@ -52,13 +53,6 @@ See the [guidelines](http://mapsui.com/documentation/Contributors-Guidelines.htm
 - ReSharper for providing free open source licenses for Mapsui
 - [realinfo](https://github.com/reallinfo) for providing the logo
 - Our fantastic [contributors](https://github.com/Mapsui/Mapsui/graphs/contributors)!
-
-## Supported Platforms
-
-- **WPF** - Windows Desktop on .NET 4.5.2
-- **UWP** - Windows Store on Windows 10 build 10586
-- **Android** - Xamarin.Android on API Level 19 (v4.4 - Kit Kat)
-- **iOS** - Xamarin.iOS
 
 ## Sponsors
 
