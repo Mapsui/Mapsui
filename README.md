@@ -9,6 +9,7 @@
 
 ## News
 
+- 2020 May 17: Released Mapsui 2.0.1 with some bug fixes around zooming.
 - 2020 May 4: Released Mapsui 2.0.0!
   - The main developers on v2 are Dirk Weltz (@charlenni) and Paul den Dulk (@pauldendulk).
   - Thanks go to all contributors:  https://github.com/Mapsui/Mapsui/graphs/contributors
@@ -20,24 +21,22 @@
 
 Mapsui is a C# map component for apps
 
-- Supported platforms: WPF, UWP, Android, iOS
-- The Mapsui core assembly is PCL Profile 111 for v1 and .NET Standard 2.0 for v2
-- The Mapsui 2.0 beta is .NET Core 2.0
+- Supported platforms: WPF, Xamarin.Forms, Xamarin.Android, Xamarin.iOS, UWP
+- The Mapsui core assemblies are .NET Standard 2.0
 - Designed to be fast and responsive
-- Started as a fork of SharpMap
 
 ## Quickstart
 Quickly get a sample running in [WPF](https://mapsui.github.io/Mapsui/documentation/getting-started-wpf.html) or 
 [Android](https://mapsui.github.io/Mapsui/documentation/getting-started-android.html).
 
 ## Documentation
-The documentation can be found [here](https://mapsui.com). Let us know what kind of information you are missing.
+The documentation can be found at [mapsui.com](https://mapsui.com). Let us know what kind of information you are missing.
 
 ## Samples
 The best way to get going with Mapsui is by using the Samples. If you clone the project there is a Samples folder with a Mapsui.Samples.Wpf project with the list of samples. The accompanying code can be found [here](https://github.com/Mapsui/Mapsui/tree/master/Samples/Mapsui.Samples.Common/Maps).
 
 ## Questions
-If you have a question please submit an issue [here](https://github.com/mapsui/Mapsui/issues)
+If you have a question please submit this as an issue [here on github](https://github.com/mapsui/Mapsui/issues).
 
 ## How can I help as a user
 - Write clear issues. Mention the Mapsui version and which platform you use. 
@@ -54,13 +53,8 @@ See the [guidelines](http://mapsui.com/documentation/Contributors-Guidelines.htm
 - ReSharper for providing free open source licenses for Mapsui
 - [realinfo](https://github.com/reallinfo) for providing the logo
 - Our fantastic [contributors](https://github.com/Mapsui/Mapsui/graphs/contributors)!
-
-## Supported Platforms
-
-- **WPF** - Windows Desktop on .NET 4.5.2
-- **UWP** - Windows Store on Windows 10 build 10586
-- **Android** - Xamarin.Android on API Level 19 (v4.4 - Kit Kat)
-- **iOS** - Xamarin.iOS
+- Our users. Do not underestimate the value of good bug reports and tests.
+- The developers of SharpMap from which this project was born.
 
 ## Sponsors
 
