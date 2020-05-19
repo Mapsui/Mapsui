@@ -53,6 +53,8 @@ See the [guidelines](http://mapsui.com/documentation/Contributors-Guidelines.htm
 - ReSharper for providing free open source licenses for Mapsui
 - [realinfo](https://github.com/reallinfo) for providing the logo
 - Our fantastic [contributors](https://github.com/Mapsui/Mapsui/graphs/contributors)!
+- Our users. Do not underestimate the value of good bug reports and tests.
+- The developers of SharpMap from which this project was born.
 
 ## Sponsors
 
