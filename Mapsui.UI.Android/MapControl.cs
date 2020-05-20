@@ -21,6 +21,22 @@ namespace Mapsui.UI.Android
         Software
     }
 
+    class MapControlGestureListener : GestureDetector.SimpleOnGestureListener
+    {
+        public EventHandler<GestureDetector.FlingEventArgs> Fling;
+
+        public override bool OnFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY)
+        {
+            if (Fling != null)
+            {
+                Fling?.Invoke(this, new GestureDetector.FlingEventArgs(false, e1, e2, velocityX, velocityY));
+                return true;
+            }
+
+            return base.OnFling(e1, e2, velocityX, velocityY);
+        }
+    }
+
     public partial class MapControl : ViewGroup, IMapControl
     {
         private View _canvas;
@@ -36,7 +52,7 @@ namespace Mapsui.UI.Android
         private Point _previousTouch = new Point();
         private SkiaRenderMode _renderMode = SkiaRenderMode.Hardware;
 
-  public MapControl(Context context, IAttributeSet attrs) :
+        public MapControl(Context context, IAttributeSet attrs) :
             base(context, attrs)
         {
             Initialize();
@@ -59,7 +75,11 @@ namespace Mapsui.UI.Android
             Map = new Map();
             Touch += MapView_Touch;
 
-            _gestureDetector = new GestureDetector(Context, new GestureDetector.SimpleOnGestureListener());
+            var listener = new MapControlGestureListener();
+
+            listener.Fling += OnFling;
+
+            _gestureDetector = new GestureDetector(Context, listener);
             _gestureDetector.SingleTapConfirmed += OnSingleTapped;
             _gestureDetector.DoubleTap += OnDoubleTapped;
         }
@@ -127,6 +147,11 @@ namespace Mapsui.UI.Android
             args.Surface.Canvas.Scale(PixelDensity, PixelDensity);
 
             Renderer.Render(args.Surface.Canvas, new Viewport(Viewport), _map.Layers, _map.Widgets, _map.BackColor);
+        }
+
+        public void OnFling(object sender, GestureDetector.FlingEventArgs args)
+        {
+            Navigator.FlingeWith(args.VelocityX / 10, args.VelocityY / 10, 1000);
         }
 
         public void MapView_Touch(object sender, TouchEventArgs args)
