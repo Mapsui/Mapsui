@@ -31,7 +31,7 @@ namespace Mapsui
             throw new NotImplementedException();
         }
 
-        public void NavigateTo(Point center, double resolution, long duration = 0)
+        public void NavigateTo(Point center, double resolution, long duration = 0, Easing easing = null)
         {
             throw new NotImplementedException();
         }
