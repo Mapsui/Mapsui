@@ -463,6 +463,9 @@ namespace Mapsui.UI.Forms
             if (args.Handled)
                 return true;
 
+            // We have an interaction with the screen, so stop all animations
+            Navigator.StopRunningAnimation();
+
             if (touchPoints.Count == 2)
             {
                 (_previousCenter, _previousRadius, _previousAngle) = GetPinchValues(touchPoints);
@@ -513,7 +516,13 @@ namespace Mapsui.UI.Forms
 
             TouchEntered?.Invoke(this, args);
 
-            return args.Handled;
+            if (args.Handled)
+                return true;
+
+            // We have an interaction with the screen, so stop all animations
+            Navigator.StopRunningAnimation();
+
+            return true;
         }
 
         /// <summary>
