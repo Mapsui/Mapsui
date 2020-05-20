@@ -25,7 +25,7 @@ namespace Mapsui
         /// <param name="center">The new center</param>
         /// <param name="resolution">The new resolution</param>
         /// <param name="duration">Duration of animation in milliseconds</param>
-        void NavigateTo(Point center, double resolution, long duration = 0);
+        void NavigateTo(Point center, double resolution, long duration = 0, Easing easing = default);
 
         /// <summary>
         /// Navigate to a resolution, so such the map uses the fill method
