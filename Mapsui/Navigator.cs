@@ -27,14 +27,14 @@ namespace Mapsui
         /// <param name="extent">New extent for viewport to show</param>
         /// <param name="scaleMethod">Scale method to use to determine resolution</param>
         /// <param name="duration">Duration of animation in millisecondsScale method to use to determine resolution</param>
-        public void NavigateTo(BoundingBox extent, ScaleMethod scaleMethod = ScaleMethod.Fit, long duration = 0)
+        public void NavigateTo(BoundingBox extent, ScaleMethod scaleMethod = ScaleMethod.Fit, long duration = 0, Easing easing = default)
         {
             if (extent == null) return;
 
             var resolution = ZoomHelper.DetermineResolution(
                 extent.Width, extent.Height, _viewport.Width, _viewport.Height, scaleMethod);
 
-            NavigateTo(extent.Centroid, resolution, duration);
+            NavigateTo(extent.Centroid, resolution, duration, easing);
         }
 
         /// <summary>
@@ -42,9 +42,9 @@ namespace Mapsui
         /// </summary>
         /// <param name="scaleMethod"></param>
         /// <param name="duration">Duration of animation in millisecondsScale method to use to determine resolution</param>
-        public void NavigateToFullEnvelope(ScaleMethod scaleMethod = ScaleMethod.Fill, long duration = 0)
+        public void NavigateToFullEnvelope(ScaleMethod scaleMethod = ScaleMethod.Fill, long duration = 0, Easing easing = default)
         {
-            NavigateTo(_map.Envelope, scaleMethod, duration);
+            NavigateTo(_map.Envelope, scaleMethod, duration, easing);
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace Mapsui
         /// <param name="center">New center to move to</param>
         /// <param name="resolution">New resolution to use</param>
         /// <param name="duration">Duration of animation in milliseconds</param>
-        public void NavigateTo(Point center, double resolution, long duration = 0)
+        public void NavigateTo(Point center, double resolution, long duration = 0, Easing easing = default)
         {
             // Stop any old animation if there is one
             StopRunningAnimation();
@@ -76,7 +76,7 @@ namespace Mapsui
                         end: (ReadOnlyPoint)center,
                         animationStart: 0,
                         animationEnd: 1,
-                        easing: Easing.Linear,
+                        easing: easing ?? Easing.SinInOut,
                         tick: CenterTick,
                         final: CenterFinal
                     );
@@ -90,7 +90,7 @@ namespace Mapsui
                         end: resolution,
                         animationStart: 0,
                         animationEnd: 1,
-                        easing: Easing.Linear,
+                        easing: easing ?? Easing.SinInOut,
                         tick: ResolutionTick,
                         final: ResolutionFinal
                     );
@@ -112,7 +112,7 @@ namespace Mapsui
         /// <param name="center">screen center point to zoom at</param>
         /// <param name="resolution">New resolution to use</param>
         /// <param name="duration">Duration of animation in milliseconds</param>
-        public void ZoomTo(Point center, double resolution, long duration = 0)
+        public void ZoomTo(Point center, double resolution, long duration = 0, Easing easing = default)
         {
             // Stop any old animation if there is one
             StopRunningAnimation();
@@ -137,7 +137,7 @@ namespace Mapsui
                     end: resolution,
                     animationStart: 0,
                     animationEnd: 1,
-                    easing: Easing.Linear,
+                    easing: easing ?? Easing.SinInOut,
                     tick: ResolutionTick,
                     final: ResolutionFinal
                 );
@@ -154,7 +154,7 @@ namespace Mapsui
         /// </summary>
         /// <param name="resolution">New resolution to use</param>
         /// <param name="duration">Duration of animation in milliseconds</param>
-        public void ZoomTo(double resolution, long duration = 0)
+        public void ZoomTo(double resolution, long duration = 0, Easing easing = default)
         {
             // Stop any old animation if there is one
             StopRunningAnimation();
@@ -177,7 +177,7 @@ namespace Mapsui
                     end: resolution,
                     animationStart: 0,
                     animationEnd: 1,
-                    easing: Easing.Linear,
+                    easing: easing ?? Easing.SinInOut,
                     tick: ResolutionTick,
                     final: ResolutionFinal
                 );
@@ -192,41 +192,41 @@ namespace Mapsui
         /// <summary>
         /// Zoom in to the next resolution
         /// </summary>
-        public void ZoomIn(long duration = 0)
+        public void ZoomIn(long duration = 0, Easing easing = default)
         {
             var resolution = ZoomHelper.ZoomIn(_map.Resolutions, _viewport.Resolution);
 
-            ZoomTo(resolution, duration);
+            ZoomTo(resolution, duration, easing);
         }
 
         /// <summary>
         /// Zoom out to the next resolution
         /// </summary>
-        public void ZoomOut(long duration = 0)
+        public void ZoomOut(long duration = 0, Easing easing = default)
         {
             var resolution = ZoomHelper.ZoomOut(_map.Resolutions, _viewport.Resolution);
 
-            ZoomTo(resolution, duration);
+            ZoomTo(resolution, duration, easing);
         }
 
         /// <summary>
         /// Zoom in to a given point
         /// </summary>
         /// <param name="centerOfZoom">Center to use for zoom in</param>
-        public void ZoomIn(Point centerOfZoom, long duration = 0)
+        public void ZoomIn(Point centerOfZoom, long duration = 0, Easing easing = default)
         {
             var resolution = ZoomHelper.ZoomIn(_map.Resolutions, _viewport.Resolution);
-            ZoomTo(resolution, centerOfZoom, duration);
+            ZoomTo(resolution, centerOfZoom, duration, easing);
         }
 
         /// <summary>
         /// Zoom out to a given point
         /// </summary>
         /// <param name="centerOfZoom">Center to use for zoom out</param>
-        public void ZoomOut(Point centerOfZoom, long duration = 0)
+        public void ZoomOut(Point centerOfZoom, long duration = 0, Easing easing = default)
         {
             var resolution = ZoomHelper.ZoomOut(_map.Resolutions, _viewport.Resolution);
-            ZoomTo(resolution, centerOfZoom, duration);
+            ZoomTo(resolution, centerOfZoom, duration, easing);
         }
 
         /// <summary>
@@ -234,7 +234,7 @@ namespace Mapsui
         /// </summary>
         /// <param name="resolution">Resolution to zoom</param>
         /// <param name="centerOfZoom">Center to use for zoom</param>
-        public void ZoomTo(double resolution, Point centerOfZoom, long duration = 0)
+        public void ZoomTo(double resolution, Point centerOfZoom, long duration = 0, Easing easing = default)
         {
             // Stop any old animation if there is one
             StopRunningAnimation();
@@ -259,7 +259,7 @@ namespace Mapsui
                     end: resolution,
                     animationStart: 0,
                     animationEnd: 1,
-                    easing: Easing.Linear,
+                    easing: easing ?? Easing.SinInOut,
                     tick: ResolutionTick,
                     final: ResolutionFinal
                 );
@@ -278,9 +278,9 @@ namespace Mapsui
         /// <param name="y">Y value of the new center</param>
         /// <param name="duration">Duration of animation in milliseconds</param>
         /// <param name="easing">Function for easing</param>
-        public void CenterOn(double x, double y, long duration = 0)
+        public void CenterOn(double x, double y, long duration = 0, Easing easing = default)
         {
-            CenterOn(new Point(x, y), duration);
+            CenterOn(new Point(x, y), duration, easing);
         }
 
         /// <summary>
@@ -289,7 +289,7 @@ namespace Mapsui
         /// <param name="center">New center point of viewport</param>
         /// <param name="duration">Duration of animation in milliseconds</param>
         /// <param name="easing">Function for easing</param>
-        public void CenterOn(Point center, long duration = 0)
+        public void CenterOn(Point center, long duration = 0, Easing easing = default)
         {
             // Stop any old animation if there is one
             StopRunningAnimation();
@@ -312,7 +312,7 @@ namespace Mapsui
                     end: (ReadOnlyPoint)center,
                     animationStart: 0,
                     animationEnd: 1,
-                    easing: Easing.SinOut,
+                    easing: easing ?? Easing.SinOut,
                     tick: CenterTick,
                     final: CenterFinal
                 );
@@ -356,7 +356,7 @@ namespace Mapsui
                         end: (ReadOnlyPoint)center,
                         animationStart: 0,
                         animationEnd: 1,
-                        easing: Easing.Linear,
+                        easing: Easing.SinInOut,
                         tick: CenterTick,
                         final: CenterFinal
                     );
@@ -368,7 +368,7 @@ namespace Mapsui
                     end: maxResolution,
                     animationStart: 0,
                     animationEnd: 0.5,
-                    easing: Easing.SinOut,
+                    easing: Easing.SinIn,
                     tick: ResolutionTick,
                     final: ResolutionFinal
                 );
@@ -395,7 +395,7 @@ namespace Mapsui
         /// Change rotation of viewport
         /// </summary>
         /// <param name="rotation">New rotation in degrees of viewport></param>
-        public void RotateTo(double rotation, long duration = 0)
+        public void RotateTo(double rotation, long duration = 0, Easing easing = null)
         {
             // Stop any old animation if there is one
             StopRunningAnimation();
@@ -419,7 +419,7 @@ namespace Mapsui
                     end: rotation,
                     animationStart: 0,
                     animationEnd: 1,
-                    easing: Easing.Linear,
+                    easing: easing ?? Easing.SinInOut,
                     tick: RotationTick,
                     final: RotationFinal
                 );
