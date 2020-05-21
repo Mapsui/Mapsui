@@ -441,7 +441,7 @@ namespace Mapsui.UI.Forms
             if (args.Handled)
                 return true;
 
-            Navigator.AnimateFling(velocityX, velocityY, 1000);
+            Navigator.FlingeWith(velocityX, velocityY, 1000);
 
             return true;
         }
@@ -462,6 +462,9 @@ namespace Mapsui.UI.Forms
 
             if (args.Handled)
                 return true;
+
+            // We have an interaction with the screen, so stop all animations
+            Navigator.StopRunningAnimation();
 
             if (touchPoints.Count == 2)
             {
@@ -513,7 +516,13 @@ namespace Mapsui.UI.Forms
 
             TouchEntered?.Invoke(this, args);
 
-            return args.Handled;
+            if (args.Handled)
+                return true;
+
+            // We have an interaction with the screen, so stop all animations
+            Navigator.StopRunningAnimation();
+
+            return true;
         }
 
         /// <summary>

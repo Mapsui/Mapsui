@@ -464,7 +464,7 @@ namespace Mapsui
         /// <param name="velocityX">VelocityX from SwipedEventArgs></param>
         /// <param name="velocityY">VelocityX from SwipedEventArgs></param>
         /// <param name="maxDuration">Maximum duration of fling deceleration></param>
-        public void AnimateFling(double velocityX, double velocityY, long maxDuration)
+        public void FlingeWith(double velocityX, double velocityY, long maxDuration)
         {
             // Stop any old animation if there is one
             StopRunningAnimation();
