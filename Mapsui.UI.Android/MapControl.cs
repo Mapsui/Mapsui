@@ -151,7 +151,7 @@ namespace Mapsui.UI.Android
 
         public void OnFling(object sender, GestureDetector.FlingEventArgs args)
         {
-            Navigator.FlingeWith(args.VelocityX / 10, args.VelocityY / 10, 1000);
+            Navigator.FlingWith(args.VelocityX / 10, args.VelocityY / 10, 1000);
         }
 
         public void MapView_Touch(object sender, TouchEventArgs args)

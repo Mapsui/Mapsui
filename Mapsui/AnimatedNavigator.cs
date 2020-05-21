@@ -11,7 +11,7 @@ namespace Mapsui
     {
         public EventHandler Navigated { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
-        public void AnimateFling(double velocityX, double velocityY, long maxDuration)
+        public void FlingWith(double velocityX, double velocityY, long maxDuration)
         {
             throw new NotImplementedException();
         }
