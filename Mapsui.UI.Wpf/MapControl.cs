@@ -10,6 +10,7 @@ using System.Windows.Shapes;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Rendering.Skia;
+using Mapsui.UI.Utils;
 using Mapsui.Utilities;
 using SkiaSharp.Views.Desktop;
 using SkiaSharp.Views.WPF;
@@ -44,6 +45,12 @@ namespace Mapsui.UI.Wpf
         private double _toResolution = double.NaN;
         private bool _hasBeenManipulated;
         private double _innerRotation;
+        private readonly FlingTracker _flingTracker = new FlingTracker();
+
+        /// <summary>
+        /// Fling is called, when user release mouse button or lift finger while moving with a certain speed, higher than speed of swipe 
+        /// </summary>
+        public event EventHandler<SwipedEventArgs> Fling;
 
         public MapControl()
         {
@@ -243,10 +250,14 @@ namespace Mapsui.UI.Wpf
 
         private void MapControlMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            // We have a new interaction with the screen, so stop all navigator animations
+            Navigator.StopRunningAnimation();
+
             var touchPosition = e.GetPosition(this).ToMapsui();
             _previousMousePosition = touchPosition;
             _downMousePosition = touchPosition;
             _mouseDown = true;
+            _flingTracker.Clear();
             CaptureMouse();
 
             if (!IsInBoxZoomMode())
@@ -279,8 +290,39 @@ namespace Mapsui.UI.Wpf
             RefreshData();
             _mouseDown = false;
 
+            double velocityX;
+            double velocityY;
+
+            (velocityX, velocityY) = _flingTracker.CalcVelocity(1, DateTime.Now.Ticks);
+
+            if (Math.Abs(velocityX) > 200 || Math.Abs(velocityY) > 200)
+            {
+                // This was the last finger on screen, so this is a fling
+                e.Handled = OnFlinged(velocityX, velocityY);
+            }
+            _flingTracker.RemoveId(1);
+
             _previousMousePosition = new Geometries.Point();
             ReleaseMouseCapture();
+        }
+
+        /// <summary>
+        /// Called, when mouse/finger/pen flinged over map
+        /// </summary>
+        /// <param name="velocityX">Velocity in x direction in pixel/second</param>
+        /// <param name="velocityY">Velocity in y direction in pixel/second</param>
+        private bool OnFlinged(double velocityX, double velocityY)
+        {
+            var args = new SwipedEventArgs(velocityX, velocityY);
+
+            Fling?.Invoke(this, args);
+
+            if (args.Handled)
+                return true;
+
+            Navigator.FlingWith(velocityX, velocityY, 1000);
+
+            return true;
         }
 
         private static bool IsClick(Geometries.Point currentPosition, Geometries.Point previousPosition)
@@ -344,7 +386,9 @@ namespace Mapsui.UI.Wpf
                     // a breakpoint and continuing.
                     return;
                 }
-                
+
+                _flingTracker.AddEvent(1, _currentMousePosition, DateTime.Now.Ticks);
+
                 _viewport.Transform(_currentMousePosition, _previousMousePosition);
                 RefreshGraphics();
                 _previousMousePosition = _currentMousePosition;

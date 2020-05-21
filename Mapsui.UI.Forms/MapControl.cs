@@ -51,7 +51,7 @@ namespace Mapsui.UI.Forms
         private Geometries.Point _firstTouch;
         private bool _waitingForDoubleTap;
         private int _numOfTaps = 0;
-        private FlingTracker _velocityTracker = new FlingTracker();
+        private readonly FlingTracker _flingTracker = new FlingTracker();
         private Geometries.Point _previousCenter;
 
         /// <summary>
@@ -116,7 +116,7 @@ namespace Mapsui.UI.Forms
 
                 _touches[e.Id] = new TouchEvent(e.Id, location, ticks);
 
-                _velocityTracker.Clear();
+                _flingTracker.Clear();
 
                 // Do we have a doubleTapTestTimer running?
                 // If yes, stop it and increment _numOfTaps
@@ -139,7 +139,7 @@ namespace Mapsui.UI.Forms
                     double velocityX;
                     double velocityY;
 
-                    (velocityX, velocityY) = _velocityTracker.CalcVelocity(e.Id, ticks);
+                    (velocityX, velocityY) = _flingTracker.CalcVelocity(e.Id, ticks);
 
                     if (Math.Abs(velocityX) > 200 || Math.Abs(velocityY) > 200)
                     {
@@ -191,7 +191,7 @@ namespace Mapsui.UI.Forms
                     }
                 }
 
-                _velocityTracker.RemoveId(e.Id);
+                _flingTracker.RemoveId(e.Id);
 
                 if (_touches.Count == 1)
                 {
@@ -206,7 +206,7 @@ namespace Mapsui.UI.Forms
                 _touches[e.Id] = new TouchEvent(e.Id, location, ticks);
 
                 if (e.InContact)
-                    _velocityTracker.AddEvent(e.Id, location, ticks);
+                    _flingTracker.AddEvent(e.Id, location, ticks);
 
                 if (e.InContact && !e.Handled)
                     e.Handled = OnTouchMove(_touches.Select(t => t.Value.Location).ToList());
@@ -456,15 +456,15 @@ namespace Mapsui.UI.Forms
             if (touchPoints.Count == 0)
                 return false;
 
+            // We have a new interaction with the screen, so stop all navigator animations
+            Navigator.StopRunningAnimation();
+
             var args = new TouchedEventArgs(touchPoints);
 
             TouchStarted?.Invoke(this, args);
 
             if (args.Handled)
                 return true;
-
-            // We have an interaction with the screen, so stop all animations
-            Navigator.StopRunningAnimation();
 
             if (touchPoints.Count == 2)
             {

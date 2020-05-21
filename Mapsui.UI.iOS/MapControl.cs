@@ -101,6 +101,9 @@ namespace Mapsui.UI.iOS
             base.TouchesBegan(touches, evt);
 
             _innerRotation = Viewport.Rotation;
+
+            // We have a new interaction with the screen, so stop all navigator animations
+            Navigator.StopRunningAnimation();
         }
 
         public override void TouchesMoved(NSSet touches, UIEvent evt)

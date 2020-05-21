@@ -156,6 +156,9 @@ namespace Mapsui.UI.Android
 
         public void MapView_Touch(object sender, TouchEventArgs args)
         {
+            // We have an interaction with the screen, so stop all animations
+            Navigator.StopRunningAnimation();
+
             if (_gestureDetector.OnTouchEvent(args.Event))
                 return;
 
