@@ -5,7 +5,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Mapsui.Layers;
 using Mapsui.Providers;
@@ -29,20 +28,15 @@ namespace Mapsui.UI.Wpf
 
     public partial class MapControl : Grid, IMapControl
     {
-        // ReSharper disable once UnusedMember.Local // This registration triggers the call to OnResolutionChanged
-        private static readonly DependencyProperty ResolutionProperty =
-            DependencyProperty.Register(
-                "Resolution", typeof(double), typeof(MapControl),
-                new PropertyMetadata(OnResolutionChanged));
-
         private readonly Rectangle _selectRectangle = CreateSelectRectangle();
-        private readonly DoubleAnimation _zoomAnimation = new DoubleAnimation();
         private Geometries.Point _currentMousePosition;
         private Geometries.Point _downMousePosition;
         private bool _mouseDown;
         private Geometries.Point _previousMousePosition;
         private RenderMode _renderMode;
         private double _toResolution = double.NaN;
+        private int _mouseWheelTickCount;
+        private const int _mouseWheelAnimationDuration = 1000;
         private bool _hasBeenManipulated;
         private double _innerRotation;
         private readonly FlingTracker _flingTracker = new FlingTracker();
@@ -106,7 +100,7 @@ namespace Mapsui.UI.Wpf
                 Visibility = Visibility.Collapsed
             };
         }
-        
+
         public Canvas WpfCanvas { get; } = CreateWpfRenderCanvas();
 
         private SKElement SkiaCanvas { get; } = CreateSkiaRenderElement();
@@ -153,12 +147,6 @@ namespace Mapsui.UI.Wpf
             };
         }
 
-        [Obsolete("Use Viewport.ViewportChanged", true)]
-        // ReSharper disable once UnusedMember.Global
-#pragma warning disable 67
-        public event EventHandler<ViewChangedEventArgs> ViewChanged;
-#pragma warning restore 67
-
         public event EventHandler<FeatureInfoEventArgs> FeatureInfo; // todo: Remove and add sample for alternative
 
         public void RefreshGraphics()
@@ -171,25 +159,6 @@ namespace Mapsui.UI.Wpf
             if (RenderMode == RenderMode.Wpf) InvalidateVisual(); // To trigger OnRender of this MapControl
             else SkiaCanvas.InvalidateVisual();
 
-        }
-
-        [Obsolete("Use Navigator.ZoomIn instead", true)]
-        public void ZoomIn() {}
-
-        [Obsolete("Use Navigator.ZoomOut instead", true)]
-        public void ZoomOut() {}
-
-        private static void OnResolutionChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
-        {
-            var newResolution = (double)e.NewValue;
-            ((MapControl)dependencyObject).ZoomToResolution(newResolution);
-        }
-
-        private void ZoomToResolution(double resolution)
-        {
-            var current = _currentMousePosition;
-            Navigator.ZoomTo(resolution, current);
-            RefreshGraphics();
         }
 
         private void MapControlLoaded(object sender, RoutedEventArgs e)
@@ -205,9 +174,11 @@ namespace Mapsui.UI.Wpf
             if (!Viewport.HasSize) return;
 
             _currentMousePosition = e.GetPosition(this).ToMapsui();
-            //Needed for both MouseMove and MouseWheel event for mousewheel event
 
-            if (double.IsNaN(_toResolution))
+            // If the animation has ended then start from the current resolution.
+            // The alternative is that use the previous resolution target and add an extra
+            // level to that.
+            if ((Environment.TickCount - _mouseWheelTickCount) > _mouseWheelAnimationDuration)
                 _toResolution = Viewport.Resolution;
 
             if (e.Delta > Constants.Epsilon)
@@ -221,7 +192,10 @@ namespace Mapsui.UI.Wpf
 
             _toResolution = Map.Limiter.LimitResolution(_toResolution, Viewport.Width, Viewport.Height, Map.Resolutions, Map.Envelope);
 
-            Navigator.ZoomTo(_toResolution, _currentMousePosition, 1000);
+            // TickCount is fast https://stackoverflow.com/a/4075602/85325
+            _mouseWheelTickCount = Environment.TickCount;
+
+            Navigator.ZoomTo(_toResolution, _currentMousePosition, _mouseWheelAnimationDuration, Easing.QuarticOut);
         }
 
         private void MapControlSizeChanged(object sender, SizeChangedEventArgs e)
@@ -405,9 +379,7 @@ namespace Mapsui.UI.Wpf
             ZoomHelper.ZoomToBoudingbox(beginPoint.X, beginPoint.Y, endPoint.X, endPoint.Y,
                 ActualWidth, ActualHeight, out var x, out var y, out var resolution);
 
-            Navigator.NavigateTo(new Geometries.Point(x, y), resolution);
-
-            _toResolution = resolution; // for animation
+            Navigator.NavigateTo(new Geometries.Point(x, y), resolution, 384);
 
             RefreshData();
             RefreshGraphics();
@@ -448,7 +420,7 @@ namespace Mapsui.UI.Wpf
         }
 
         private float ViewportWidth => (float)ActualWidth;
-        private float ViewportHeight => (float) ActualHeight;
+        private float ViewportHeight => (float)ActualHeight;
 
         private static void OnManipulationInertiaStarting(object sender, ManipulationInertiaStartingEventArgs e)
         {
@@ -527,7 +499,7 @@ namespace Mapsui.UI.Wpf
 
             Renderer.Render(args.Surface.Canvas, new Viewport(Viewport), Map.Layers, Map.Widgets, Map.BackColor);
         }
-        
+
         private void PaintWpf()
         {
             if (Renderer == null) return;
