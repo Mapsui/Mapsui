@@ -94,6 +94,11 @@ namespace Mapsui.Utilities
         /// <param name="e">Timer tick arguments</param>
         private void HandleTimerElapse(object sender, ElapsedEventArgs e)
         {
+            Ticked?.Invoke(sender, new AnimationEventArgs((_stopwatch.ElapsedTicks - _stopwatchStart) / _durationTicks));
+        }
+
+        internal void Tick()
+        { 
             double ticks = _stopwatch.ElapsedTicks - _stopwatchStart;
             var value = ticks / _durationTicks;
 

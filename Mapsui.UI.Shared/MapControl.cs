@@ -11,6 +11,7 @@ using Mapsui.Rendering;
 using Mapsui.Rendering.Skia;
 using Mapsui.Widgets;
 using System.Runtime.CompilerServices;
+using Mapsui.Utilities;
 
 #if __ANDROID__
 namespace Mapsui.UI.Android
@@ -105,9 +106,11 @@ namespace Mapsui.UI.Wpf
                 if (_navigator != null)
                 {
                     _navigator.Navigated -= Navigated;
+                    ((Navigator)_navigator).AnimationTick -= AnimationTick;
                 }
                 _navigator = value ?? throw new ArgumentException($"{nameof(Navigator)} can not be null");
                 _navigator.Navigated += Navigated;
+                ((Navigator)_navigator).AnimationTick += AnimationTick;
             }
         }
 
@@ -433,6 +436,11 @@ namespace Mapsui.UI.Wpf
             if (!hadSize && Viewport.HasSize) OnViewportSizeInitialized();
             CallHomeIfNeeded();
             Refresh();
+        }
+
+        private void AnimationTick(object sender, AnimationEventArgs e)
+        {
+            RefreshGraphics();
         }
 
         /// <summary>
