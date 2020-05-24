@@ -10,6 +10,7 @@ using System.Windows.Shapes;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Rendering.Skia;
+using Mapsui.UI.Utils;
 using Mapsui.Utilities;
 using SkiaSharp.Views.Desktop;
 using SkiaSharp.Views.WPF;
@@ -36,7 +37,6 @@ namespace Mapsui.UI.Wpf
 
         private readonly Rectangle _selectRectangle = CreateSelectRectangle();
         private readonly DoubleAnimation _zoomAnimation = new DoubleAnimation();
-        private readonly Storyboard _zoomStoryBoard = new Storyboard();
         private Geometries.Point _currentMousePosition;
         private Geometries.Point _downMousePosition;
         private bool _mouseDown;
@@ -45,6 +45,12 @@ namespace Mapsui.UI.Wpf
         private double _toResolution = double.NaN;
         private bool _hasBeenManipulated;
         private double _innerRotation;
+        private readonly FlingTracker _flingTracker = new FlingTracker();
+
+        /// <summary>
+        /// Fling is called, when user release mouse button or lift finger while moving with a certain speed, higher than speed of swipe 
+        /// </summary>
+        public event EventHandler<SwipedEventArgs> Fling;
 
         public MapControl()
         {
@@ -190,20 +196,7 @@ namespace Mapsui.UI.Wpf
         {
             SetViewportSize();
 
-            InitAnimation();
             Focusable = true;
-        }
-        
-
-
-        private void InitAnimation()
-        {
-            _zoomAnimation.Completed += ZoomAnimationCompleted;
-            _zoomAnimation.Duration = new Duration(new TimeSpan(0, 0, 0, 0, 1000));
-            _zoomAnimation.EasingFunction = new QuarticEase();
-            Storyboard.SetTarget(_zoomAnimation, this);
-            Storyboard.SetTargetProperty(_zoomAnimation, new PropertyPath("Resolution"));
-            _zoomStoryBoard.Children.Add(_zoomAnimation);
         }
 
         private void MapControlMouseWheel(object sender, MouseWheelEventArgs e)
@@ -228,25 +221,7 @@ namespace Mapsui.UI.Wpf
 
             _toResolution = Map.Limiter.LimitResolution(_toResolution, Viewport.Width, Viewport.Height, Map.Resolutions, Map.Envelope);
 
-            // Some cheating to trigger a zoom animation if resolution does not change.
-            // This workaround could be ommitted if the zoom animations was on CenterX, CenterY and Resolution, not Resolution alone.
-            // todo: Remove this workaround once animations are centralized.
-            Navigator.CenterOn(new Geometries.Point(Viewport.Center.X + 0.000000001, Viewport.Center.Y + 0.000000001));
-
-            StartZoomAnimation(Viewport.Resolution, _toResolution);
-        }
-
-        private void StartZoomAnimation(double begin, double end)
-        {
-            _zoomStoryBoard.Pause(); //using Stop() here causes unexpected results while zooming very fast.
-            _zoomAnimation.From = begin;
-            _zoomAnimation.To = end;
-            _zoomStoryBoard.Begin();
-        }
-
-        private void ZoomAnimationCompleted(object sender, EventArgs e)
-        {
-            _toResolution = double.NaN;
+            Navigator.ZoomTo(_toResolution, _currentMousePosition, 1000);
         }
 
         private void MapControlSizeChanged(object sender, SizeChangedEventArgs e)
@@ -275,10 +250,14 @@ namespace Mapsui.UI.Wpf
 
         private void MapControlMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            // We have a new interaction with the screen, so stop all navigator animations
+            Navigator.StopRunningAnimation();
+
             var touchPosition = e.GetPosition(this).ToMapsui();
             _previousMousePosition = touchPosition;
             _downMousePosition = touchPosition;
             _mouseDown = true;
+            _flingTracker.Clear();
             CaptureMouse();
 
             if (!IsInBoxZoomMode())
@@ -311,8 +290,39 @@ namespace Mapsui.UI.Wpf
             RefreshData();
             _mouseDown = false;
 
+            double velocityX;
+            double velocityY;
+
+            (velocityX, velocityY) = _flingTracker.CalcVelocity(1, DateTime.Now.Ticks);
+
+            if (Math.Abs(velocityX) > 200 || Math.Abs(velocityY) > 200)
+            {
+                // This was the last finger on screen, so this is a fling
+                e.Handled = OnFlinged(velocityX, velocityY);
+            }
+            _flingTracker.RemoveId(1);
+
             _previousMousePosition = new Geometries.Point();
             ReleaseMouseCapture();
+        }
+
+        /// <summary>
+        /// Called, when mouse/finger/pen flinged over map
+        /// </summary>
+        /// <param name="velocityX">Velocity in x direction in pixel/second</param>
+        /// <param name="velocityY">Velocity in y direction in pixel/second</param>
+        private bool OnFlinged(double velocityX, double velocityY)
+        {
+            var args = new SwipedEventArgs(velocityX, velocityY);
+
+            Fling?.Invoke(this, args);
+
+            if (args.Handled)
+                return true;
+
+            Navigator.FlingWith(velocityX, velocityY, 1000);
+
+            return true;
         }
 
         private static bool IsClick(Geometries.Point currentPosition, Geometries.Point previousPosition)
@@ -376,7 +386,9 @@ namespace Mapsui.UI.Wpf
                     // a breakpoint and continuing.
                     return;
                 }
-                
+
+                _flingTracker.AddEvent(1, _currentMousePosition, DateTime.Now.Ticks);
+
                 _viewport.Transform(_currentMousePosition, _previousMousePosition);
                 RefreshGraphics();
                 _previousMousePosition = _currentMousePosition;

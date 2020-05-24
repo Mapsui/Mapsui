@@ -18,12 +18,12 @@ namespace Mapsui.Samples.Forms
             var mapView = sender as MapView;
             var e = args as MapClickedEventArgs;
 
-            var navigator = (AnimatedNavigator)mapView.Navigator;
+            var navigator = (Navigator)mapView.Navigator;
 
             var newRot = random.NextDouble() * 360.0;
 
-            navigator.RotateTo(newRot, 500);
-            //navigator.FlyTo(e.Point.ToMapsui(), mapView.Viewport.Resolution * 2);
+            //navigator.RotateTo(newRot, 500);
+            navigator.FlyTo(e.Point.ToMapsui(), mapView.Viewport.Resolution * 8, 5000);
 
             return true;
         }
@@ -33,7 +33,6 @@ namespace Mapsui.Samples.Forms
             var mapView = mapControl as MapView;
 
             mapControl.Map = OsmSample.CreateMap();
-            mapView.Navigator = new AnimatedNavigator(mapView.Map, (IViewport)mapView.Viewport);
         }
     }
 }
