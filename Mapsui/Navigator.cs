@@ -31,7 +31,6 @@ namespace Mapsui
         }
 
         public EventHandler Navigated { get; set; }
-        public EventHandler<AnimationEventArgs> AnimationTick { get; set; }
 
         public Navigator(Map map, IViewport viewport)
         {
@@ -122,7 +121,6 @@ namespace Mapsui
 
                 _animation = new Animation(duration);
                 _animation.Entries.AddRange(animations);
-                _animation.Ticked += (s, e) => { AnimationTick?.Invoke(s, e); };
                 _animation.Start();
             }
         }
@@ -176,7 +174,6 @@ namespace Mapsui
 
                 _animation = new Animation(duration);
                 _animation.Entries.AddRange(animations);
-                _animation.Ticked += (s, e) => { AnimationTick?.Invoke(s, e); };
                 _animation.Start();
             }
         }
@@ -268,7 +265,6 @@ namespace Mapsui
 
                 _animation = new Animation(duration);
                 _animation.Entries.AddRange(animations);
-                _animation.Ticked += (s, e) => { AnimationTick?.Invoke(s, e); };
                 _animation.Start();
             }
         }
@@ -324,7 +320,6 @@ namespace Mapsui
 
                 _animation = new Animation(duration);
                 _animation.Entries.AddRange(animations);
-                _animation.Ticked += (s, e) => { AnimationTick?.Invoke(s, e); };
                 _animation.Start();
             }
         }
@@ -394,7 +389,6 @@ namespace Mapsui
 
                 _animation = new Animation(duration);
                 _animation.Entries.AddRange(animations);
-                _animation.Ticked += (s, e) => { AnimationTick?.Invoke(s, e); };
                 _animation.Start();
             }
         }
@@ -446,7 +440,6 @@ namespace Mapsui
 
                 _animation = new Animation(duration);
                 _animation.Entries.AddRange(animations);
-                _animation.Ticked += (s, e) => { AnimationTick?.Invoke(s, e); };
                 _animation.Start();
             }
         }
@@ -494,7 +487,6 @@ namespace Mapsui
 
             _animation = new Animation((long)animateMillis);
             _animation.Entries.AddRange(animations);
-            _animation.Ticked += (s, e) => { AnimationTick?.Invoke(s, e); };
             _animation.Start();
         }
 
