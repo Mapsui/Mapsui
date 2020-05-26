@@ -32,6 +32,7 @@ using Windows.UI.Xaml.Shapes;
 using SkiaSharp.Views.UWP;
 using HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment;
 using VerticalAlignment = Windows.UI.Xaml.VerticalAlignment;
+using Mapsui.Utilities;
 
 namespace Mapsui.UI.Uwp
 {
@@ -51,6 +52,8 @@ namespace Mapsui.UI.Uwp
             _canvas.PaintSurface += Canvas_PaintSurface;
 
             Map = new Map();
+
+            Animation.AnimationTimer = new AnimationTimer(this);
 
             Loaded += MapControlLoaded;
 

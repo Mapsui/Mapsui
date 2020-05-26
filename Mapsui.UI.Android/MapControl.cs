@@ -9,6 +9,7 @@ using Android.Util;
 using Android.Views;
 using Mapsui.Geometries.Utilities;
 using Mapsui.Logging;
+using Mapsui.Utilities;
 using SkiaSharp.Views.Android;
 using Math = System.Math;
 using Point = Mapsui.Geometries.Point;
@@ -74,6 +75,8 @@ namespace Mapsui.UI.Android
 
             Map = new Map();
             Touch += MapView_Touch;
+
+            Mapsui.Utilities.Animation.AnimationTimer = new AnimationTimer(this);
 
             var listener = new MapControlGestureListener();
 

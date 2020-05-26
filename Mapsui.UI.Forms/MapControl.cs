@@ -9,6 +9,7 @@ using System.Linq;
 using Mapsui.Geometries.Utilities;
 using Xamarin.Forms;
 using System.Threading.Tasks;
+using Mapsui.Utilities;
 
 namespace Mapsui.UI.Forms
 {
@@ -87,6 +88,8 @@ namespace Mapsui.UI.Forms
         {
             Map = new Map();
             BackgroundColor = Color.White;
+
+            Mapsui.Utilities.Animation.AnimationTimer = new AnimationTimer(this);
 
             EnableTouchEvents = true;
 
@@ -251,7 +254,8 @@ namespace Mapsui.UI.Forms
             if (PixelDensity <= 0) return;
 
             // Update any running animation
-            ((Navigator)_navigator).UpdateRunningAnimation();
+            if (Mapsui.Utilities.Animation.NeedsUpdate)
+                Mapsui.Utilities.Animation.UpdateAnimations();
 
             skPaintSurfaceEventArgs.Surface.Canvas.Scale(PixelDensity, PixelDensity);
 

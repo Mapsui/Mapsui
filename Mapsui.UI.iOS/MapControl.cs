@@ -9,6 +9,7 @@ using CoreGraphics;
 using Mapsui.Geometries;
 using Mapsui.Geometries.Utilities;
 using SkiaSharp.Views.iOS;
+using Mapsui.Utilities;
 
 namespace Mapsui.UI.iOS
 {
@@ -34,6 +35,8 @@ namespace Mapsui.UI.iOS
         {
             Map = new Map();
             BackgroundColor = UIColor.White;
+
+            Animation.AnimationTimer = new AnimationTimer(this);
 
             _canvas.TranslatesAutoresizingMaskIntoConstraints = false;
             _canvas.MultipleTouchEnabled = true;

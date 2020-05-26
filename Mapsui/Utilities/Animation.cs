@@ -1,13 +1,45 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Timers;
 
 namespace Mapsui.Utilities
 {
     public class Animation
     {
-        private Timer _timer;
+        private static object sync = new object();
+        private static List<Animation> animations = new List<Animation>();
+
+        /// <summary>
+        /// AnimationTimer to use for all animations
+        /// </summary>
+        public static IAnimationTimer AnimationTimer { get; set; }
+
+        /// <summary>
+        /// Flag to check, if there is an running animation, that needs an update
+        /// </summary>
+        public static bool NeedsUpdate { get => AnimationTimer.IsRunning; }
+
+        /// <summary>
+        /// Updates all animations that are running
+        /// </summary>
+        public static void UpdateAnimations()
+        {
+            Animation[] localAnimations;
+
+            lock (sync)
+            {
+                localAnimations = new Animation[animations.Count];
+                animations.CopyTo(localAnimations);
+            }
+
+            // Sanity check
+            if (localAnimations.Length == 0)
+                return;
+
+            foreach (var animation in localAnimations)
+                animation.Tick();
+        }
+
         private Stopwatch _stopwatch;
         private long _stopwatchStart;
         private long _durationTicks;
@@ -15,14 +47,6 @@ namespace Mapsui.Utilities
         public Animation(long duration)
         {
             Duration = duration;
-
-            // Create timer for animation
-            _timer = new Timer
-            {
-                Interval = 16,
-                AutoReset = true
-            };
-            _timer.Elapsed += HandleTimerElapse;
         }
 
         public EventHandler<AnimationEventArgs> Started { get; set; }
@@ -42,7 +66,7 @@ namespace Mapsui.Utilities
         /// <summary>
         /// True, if animation is running
         /// </summary>
-        public bool IsRunning { get => _timer != null && _timer.Enabled; }
+        public bool IsRunning { get; private set; }
 
         public void Start()
         {
@@ -56,7 +80,14 @@ namespace Mapsui.Utilities
 
             _stopwatch = Stopwatch.StartNew();
             _stopwatchStart = _stopwatch.ElapsedTicks;
-            _timer.Start();
+
+            lock (sync)
+            {
+                animations.Add(this);
+                AnimationTimer.Start();
+            }
+
+            IsRunning = true;
 
             Started?.Invoke(this, new AnimationEventArgs(0));
         }
@@ -67,10 +98,17 @@ namespace Mapsui.Utilities
         /// <param name="gotoEnd">Should final of each list entry be called</param>
         public void Stop(bool gotoEnd = true)
         {
-            if (!_timer.Enabled)
+            if (!IsRunning)
                 return;
 
-            _timer.Stop();
+            IsRunning = false;
+
+            lock (sync)
+            {
+                AnimationTimer.Stop();
+                animations.Remove(this);
+            }
+
             _stopwatch.Stop();
 
             double ticks = _stopwatch.ElapsedTicks - _stopwatchStart;
@@ -85,16 +123,6 @@ namespace Mapsui.Utilities
             }
 
             Stopped?.Invoke(this, new AnimationEventArgs(value));
-        }
-
-        /// <summary>
-        /// Timer tick for animation
-        /// </summary>
-        /// <param name="sender">Sender of this tick</param>
-        /// <param name="e">Timer tick arguments</param>
-        private void HandleTimerElapse(object sender, ElapsedEventArgs e)
-        {
-            Ticked?.Invoke(sender, new AnimationEventArgs((_stopwatch.ElapsedTicks - _stopwatchStart) / _durationTicks));
         }
 
         internal void Tick()
@@ -114,8 +142,6 @@ namespace Mapsui.Utilities
                 if (value >= entry.AnimationStart && value <= entry.AnimationEnd)
                     entry.Tick(value);
             }
-
-            Ticked?.Invoke(this, new AnimationEventArgs(value));
         }
     }
 }

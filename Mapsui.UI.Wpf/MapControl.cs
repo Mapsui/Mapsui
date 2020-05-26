@@ -55,6 +55,8 @@ namespace Mapsui.UI.Wpf
 
             Map = new Map();
 
+            Animation.AnimationTimer = new AnimationTimer(this);
+
             Loaded += MapControlLoaded;
             MouseLeftButtonDown += MapControlMouseLeftButtonDown;
             MouseLeftButtonUp += MapControlMouseLeftButtonUp;
