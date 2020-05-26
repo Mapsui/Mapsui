@@ -68,6 +68,11 @@ namespace Mapsui.Utilities
         /// </summary>
         public bool IsRunning { get; private set; }
 
+        /// <summary>
+        /// If true, then the animation starts again and again
+        /// </summary>
+        public bool Loop { get; set; } = false;
+
         public void Start()
         {
             if (IsRunning)
@@ -132,8 +137,16 @@ namespace Mapsui.Utilities
 
             if (value >= 1.0)
             {
-                Stop(true);
-                return;
+                if (Loop)
+                {
+                    _stopwatchStart = _stopwatch.ElapsedTicks;
+                    value = 0;
+                }
+                else
+                {
+                    Stop(true);
+                    return;
+                }
             }
 
             // Calc new values
