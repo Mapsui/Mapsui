@@ -96,6 +96,9 @@ namespace Mapsui.UI.iOS
 
             args.Surface.Canvas.Scale(PixelDensity, PixelDensity);
 
+            if (Animation.NeedsUpdate)
+                Animation.UpdateAnimations();
+
             Renderer.Render(args.Surface.Canvas, new Viewport(Viewport), _map.Layers, _map.Widgets, _map.BackColor);
         }
 

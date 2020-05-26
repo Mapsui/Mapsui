@@ -93,6 +93,9 @@ namespace Mapsui.UI.Android
 
             e.Surface.Canvas.Scale(PixelDensity, PixelDensity);
 
+            if (Mapsui.Utilities.Animation.NeedsUpdate)
+                Mapsui.Utilities.Animation.UpdateAnimations();
+
             Renderer.Render(e.Surface.Canvas, new Viewport(Viewport), _map.Layers, _map.Widgets, _map.BackColor);
         }
 
@@ -148,6 +151,9 @@ namespace Mapsui.UI.Android
         private void CanvasOnPaintSurfaceGL(object sender, SKPaintGLSurfaceEventArgs args)
         {
             args.Surface.Canvas.Scale(PixelDensity, PixelDensity);
+
+            if (Mapsui.Utilities.Animation.NeedsUpdate)
+                Mapsui.Utilities.Animation.UpdateAnimations();
 
             Renderer.Render(args.Surface.Canvas, new Viewport(Viewport), _map.Layers, _map.Widgets, _map.BackColor);
         }

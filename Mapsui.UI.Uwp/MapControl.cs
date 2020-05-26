@@ -177,6 +177,9 @@ namespace Mapsui.UI.Uwp
 
             e.Surface.Canvas.Scale(PixelDensity, PixelDensity);
 
+            if (Animation.NeedsUpdate)
+                Animation.UpdateAnimations();
+
             Renderer.Render(e.Surface.Canvas, new Viewport(Viewport), _map.Layers, _map.Widgets, _map.BackColor);
         }
 
