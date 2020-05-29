@@ -17,7 +17,6 @@
 // along with SharpMap; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
-using System.Threading.Tasks;
 using BruTile;
 using BruTile.Cache;
 using Mapsui.Fetcher;
@@ -28,9 +27,8 @@ using Mapsui.Styles;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
-using Mapsui.Logging;
-using Mapsui.Widgets;
 
 namespace Mapsui.Layers
 {
@@ -44,27 +42,8 @@ namespace Mapsui.Layers
         private readonly int _minExtraTiles;
         private readonly int _maxExtraTiles;
         private int _numberTilesNeeded;
-        private readonly TileFetchDispatcher _tileFetchDispatcher;
-        private readonly FetchMachine _fetchMachine;
-
-        /// <summary>
-        /// Create tile layer from tile source initializer function
-        /// </summary>
-        /// <param name="tileSourceInitializer">Initializer to create a tile layer source</param>
-        public TileLayer(Func<ITileSource> tileSourceInitializer) : this()
-        {
-            Task.Run(() =>
-            {
-                try
-                {
-                    SetTileSource(tileSourceInitializer());
-                }
-                catch (Exception e)
-                {
-                    Logger.Log(LogLevel.Debug, $"Initialization of layer {Name} failed: {e.Message}");
-                }
-            });
-        }
+        private TileFetchDispatcher _tileFetchDispatcher;
+        private readonly BoundingBox _envelope;
 
         /// <summary>
         /// Create tile layer for given tile source
@@ -78,33 +57,21 @@ namespace Mapsui.Layers
         /// <param name="minExtraTiles">Number of minimum extra tiles for memory cache</param>
         /// <param name="maxExtraTiles">Number of maximum extra tiles for memory cache</param>
         // ReSharper disable once UnusedParameter.Local // Is public and won't break this now
-        public TileLayer(ITileSource source = null, int minTiles = 200, int maxTiles = 300, int maxRetries = 2, IFetchStrategy fetchStrategy = null,
-            IRenderGetStrategy renderGetStrategy = null, int minExtraTiles = -1, int maxExtraTiles = -1, Func<TileInfo, object, Feature> fetchToFeature = null, Func<TileInfo, object> fetchGetTile = null)
+        public TileLayer(ITileSource source = null, int minTiles = 200, int maxTiles = 300,
+            IFetchStrategy fetchStrategy = null, IRenderGetStrategy renderGetStrategy = null,
+            int minExtraTiles = -1, int maxExtraTiles = -1, Func<TileInfo, Feature> fetchTileAsFeature = null)
         {
             MemoryCache = new MemoryCache<Feature>(minTiles, maxTiles);
             Style = new VectorStyle { Outline = { Color = Color.FromArgb(0, 0, 0, 0) } }; // initialize with transparent outline
-            var fetchStrategy1 = fetchStrategy ?? new FetchStrategy(3);
+            _tileSource = source;
+            _envelope = _tileSource?.Schema?.Extent.ToBoundingBox();
+            fetchStrategy = fetchStrategy ?? new FetchStrategy(3);
             _renderGetStrategy = renderGetStrategy ?? new RenderGetStrategy();
             _minExtraTiles = minExtraTiles;
             _maxExtraTiles = maxExtraTiles;
-            _tileFetchDispatcher = new TileFetchDispatcher(MemoryCache, fetchStrategy1, fetchToFeature, fetchGetTile);
+            _tileFetchDispatcher = new TileFetchDispatcher(MemoryCache, source.Schema, fetchTileAsFeature ?? ToFeature, fetchStrategy);
             _tileFetchDispatcher.DataChanged += TileFetchDispatcherOnDataChanged;
             _tileFetchDispatcher.PropertyChanged += TileFetchDispatcherOnPropertyChanged;
-            _fetchMachine = new FetchMachine(_tileFetchDispatcher);
-            SetTileSource(source);
-        }
-
-        /// <summary>
-        /// Tile source for this layer
-        /// </summary>
-        public ITileSource TileSource
-        {
-            get => _tileSource;
-            set
-            {
-                SetTileSource(value);
-                OnPropertyChanged(nameof(TileSource));
-            }
         }
 
         /// <summary>
@@ -116,7 +83,7 @@ namespace Mapsui.Layers
         public override IReadOnlyList<double> Resolutions => _tileSource?.Schema?.Resolutions.Select(r => r.Value.UnitsPerPixel).ToList();
 
         /// <inheritdoc />
-        public override BoundingBox Envelope => _tileSource?.Schema?.Extent.ToBoundingBox();
+        public override BoundingBox Envelope => _envelope;
 
         /// <inheritdoc />
         public override IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
@@ -129,7 +96,7 @@ namespace Mapsui.Layers
         /// <inheritdoc />
         public void AbortFetch()
         {
-            _fetchMachine?.Stop();
+            _tileFetchDispatcher.StopFetching();
         }
 
         /// <inheritdoc />
@@ -144,7 +111,7 @@ namespace Mapsui.Layers
             if (Enabled && extent.GetArea() > 0 && _tileFetchDispatcher != null && MaxVisible >= resolution && MinVisible <= resolution)
             {
                 _tileFetchDispatcher.SetViewport(extent, resolution);
-                _fetchMachine.Start();
+                _tileFetchDispatcher.StartFetching();
             }
         }
 
@@ -153,25 +120,6 @@ namespace Mapsui.Layers
         {
             return (string.Equals(ToSimpleEpsgCode(), crs, StringComparison.CurrentCultureIgnoreCase));
         }
-
-        private void SetTileSource(ITileSource tileSource)
-		{
-            _fetchMachine.Stop();
-			MemoryCache.Clear();
-		    _tileFetchDispatcher.TileSource = tileSource;
-            _tileSource = tileSource;
-            
-            if (_tileSource != null)
-            {
-                if (Attribution == null) Attribution = new Hyperlink();
-                Attribution.Text = _tileSource.Attribution?.Text;
-                Attribution.Url = _tileSource.Attribution?.Url;
-            }
-
-		    OnPropertyChanged(nameof(Layer.DataSource)); // To trigger new RefreshData.
-            OnPropertyChanged(nameof(Envelope));
-        }
-
         private void TileFetchDispatcherOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
             if (propertyChangedEventArgs.PropertyName == nameof(Busy))
@@ -182,8 +130,9 @@ namespace Mapsui.Layers
 
         private void UpdateMemoryCacheMinAndMax()
         {
-            if (_minExtraTiles < 0 || _maxExtraTiles < 0 
-                || _numberTilesNeeded == _tileFetchDispatcher.NumberTilesNeeded) return;
+            if (_minExtraTiles < 0 || _maxExtraTiles < 0) return;
+            if (_numberTilesNeeded == _tileFetchDispatcher.NumberTilesNeeded) return;
+
             _numberTilesNeeded = _tileFetchDispatcher.NumberTilesNeeded;
             MemoryCache.MinTiles = _numberTilesNeeded + _minExtraTiles;
             MemoryCache.MaxTiles = _numberTilesNeeded + _maxExtraTiles;
@@ -199,6 +148,27 @@ namespace Mapsui.Layers
             var startEpsgCode = _tileSource.Schema.Srs.IndexOf("EPSG:", StringComparison.Ordinal);
             if (startEpsgCode < 0) return _tileSource.Schema.Srs;
             return _tileSource.Schema.Srs.Substring(startEpsgCode).Replace("::", ":").Trim();
+        }
+
+        private Feature ToFeature(TileInfo tileInfo)
+        {
+            byte[] tileData = _tileSource.GetTile(tileInfo);
+            return new Feature { Geometry = ToGeometry(tileInfo, tileData) };
+        }
+
+        private static Raster ToGeometry(TileInfo tileInfo, byte[] tileData)
+        {
+            // A TileSource may return a byte array that is null. This is currently only implemented
+            // for MbTilesTileSource. It is to indicate that the tile is not present in the source,
+            // although it should be given the tile schema. It does not mean the tile could not
+            // be accessed because of some temporary reason. In that case it will throw an exception.
+            // For Mapsui this is important because it will not try again and again to fetch it. 
+            // Here we return the geometry as null so that it will be added to the tile cache. 
+            // TileLayer.GetFeatureInView will have to return only the non null geometries.
+
+            if (tileData == null) return null;
+
+            return new Raster(new MemoryStream(tileData), tileInfo.Extent.ToBoundingBox());
         }
     }
 }

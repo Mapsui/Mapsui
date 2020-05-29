@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading;
 using BruTile;
 using BruTile.Cache;
@@ -20,7 +21,7 @@ namespace Mapsui.Tests.Fetcher
             var tileSchema = new GlobalSphericalMercator();
             var tileSource = new TileSource(tileProvider, tileSchema);
             var cache = new MemoryCache<Feature>();
-            var fetchDispatcher = new TileFetchDispatcher(cache) {TileSource = tileSource};
+            var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, (tileInfo) => TileToFeature(tileSource, tileInfo));
             var tileMachine = new FetchMachine(fetchDispatcher);
             var level = "4";
             var expextedTiles = 256;
@@ -37,6 +38,12 @@ namespace Mapsui.Tests.Fetcher
             Assert.AreEqual(expextedTiles, tileProvider.TotalCount);
         }
 
+        private Feature TileToFeature(ITileSource tileProvider, TileInfo tileInfo)
+        {
+            var tile = tileProvider.GetTile(tileInfo); 
+            return new Feature();
+        }
+
         [Test]
         public void TileRequestThatReturnsNullShouldNotBeRequestedAgain()
         {
@@ -45,7 +52,7 @@ namespace Mapsui.Tests.Fetcher
             var tileSchema = new GlobalSphericalMercator();
             var tileSource = new TileSource(tileProvider, tileSchema);
             var cache = new MemoryCache<Feature>();
-            var fetchDispatcher = new TileFetchDispatcher(cache) {TileSource = tileSource};
+            var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, (tileInfo) => TileToFeature(tileSource, tileInfo));
             var tileMachine = new FetchMachine(fetchDispatcher);
             var level = "3";
             var tilesInLevel = 64;
@@ -71,7 +78,7 @@ namespace Mapsui.Tests.Fetcher
             var tileSchema = new GlobalSphericalMercator();
             var tileSource = new TileSource(tileProvider, tileSchema);
             var cache = new MemoryCache<Feature>();
-            var fetchDispatcher = new TileFetchDispatcher(cache) {TileSource = tileSource};
+            var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, (tileInfo) => TileToFeature(tileSource, tileInfo));
             var tileMachine = new FetchMachine(fetchDispatcher);
             var level = "3";
             var tilesInLevel = 64;
@@ -97,7 +104,7 @@ namespace Mapsui.Tests.Fetcher
             var tileSchema = new GlobalSphericalMercator();
             var tileSource = new TileSource(tileProvider, tileSchema);
             var cache = new MemoryCache<Feature>();
-            var fetchDispatcher = new TileFetchDispatcher(cache) { TileSource = tileSource };
+            var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, (tileInfo) => TileToFeature(tileSource, tileInfo));
             var tileMachine = new FetchMachine(fetchDispatcher);
             var numberOfWorkers = 8;
             var numberOfRestarts = 3;
