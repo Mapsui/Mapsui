@@ -32,6 +32,7 @@ using Windows.UI.Xaml.Shapes;
 using SkiaSharp.Views.UWP;
 using HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment;
 using VerticalAlignment = Windows.UI.Xaml.VerticalAlignment;
+using Mapsui.Utilities;
 
 namespace Mapsui.UI.Uwp
 {
@@ -51,6 +52,8 @@ namespace Mapsui.UI.Uwp
             _canvas.PaintSurface += Canvas_PaintSurface;
 
             Map = new Map();
+
+            Animation.AnimationTimer = new AnimationTimer(this);
 
             Loaded += MapControlLoaded;
 
@@ -182,6 +185,9 @@ namespace Mapsui.UI.Uwp
             if (PixelDensity <= 0) return;
 
             e.Surface.Canvas.Scale(PixelDensity, PixelDensity);
+
+            if (Animation.NeedsUpdate)
+                Animation.UpdateAnimations();
 
             Renderer.Render(e.Surface.Canvas, new Viewport(Viewport), _map.Layers, _map.Widgets, _map.BackColor);
         }

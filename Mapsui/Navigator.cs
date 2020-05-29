@@ -517,6 +517,17 @@ namespace Mapsui
             }
         }
 
+        /// <summary>
+        /// Update the running animation if there is one
+        /// </summary>
+        public void UpdateRunningAnimation()
+        {
+            if (_animation != null && _animation.IsRunning)
+            {
+                _animation.Tick();
+            }
+        }
+
         private void CenterTick(AnimationEntry entry, double value)
         {
             var x = ((ReadOnlyPoint)entry.Start).X + (((ReadOnlyPoint)entry.End).X - ((ReadOnlyPoint)entry.Start).X) * entry.Easing.Ease(value);

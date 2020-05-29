@@ -9,6 +9,7 @@ using Android.Util;
 using Android.Views;
 using Mapsui.Geometries.Utilities;
 using Mapsui.Logging;
+using Mapsui.Utilities;
 using SkiaSharp.Views.Android;
 using Math = System.Math;
 using Point = Mapsui.Geometries.Point;
@@ -75,6 +76,8 @@ namespace Mapsui.UI.Android
             Map = new Map();
             Touch += MapView_Touch;
 
+            Mapsui.Utilities.Animation.AnimationTimer = new AnimationTimer(this);
+
             var listener = new MapControlGestureListener();
 
             listener.Fling += OnFling;
@@ -89,6 +92,9 @@ namespace Mapsui.UI.Android
             if (PixelDensity <= 0) return;
 
             e.Surface.Canvas.Scale(PixelDensity, PixelDensity);
+
+            if (Mapsui.Utilities.Animation.NeedsUpdate)
+                Mapsui.Utilities.Animation.UpdateAnimations();
 
             Renderer.Render(e.Surface.Canvas, new Viewport(Viewport), _map.Layers, _map.Widgets, _map.BackColor);
         }
@@ -145,6 +151,9 @@ namespace Mapsui.UI.Android
         private void CanvasOnPaintSurfaceGL(object sender, SKPaintGLSurfaceEventArgs args)
         {
             args.Surface.Canvas.Scale(PixelDensity, PixelDensity);
+
+            if (Mapsui.Utilities.Animation.NeedsUpdate)
+                Mapsui.Utilities.Animation.UpdateAnimations();
 
             Renderer.Render(args.Surface.Canvas, new Viewport(Viewport), _map.Layers, _map.Widgets, _map.BackColor);
         }
